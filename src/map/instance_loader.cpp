@@ -51,9 +51,9 @@ CInstanceLoader::CInstanceLoader(uint16 instanceid, CCharEntity* PRequester)
         return;
     }
 
-    requester           = PRequester;
-    zone                = PZone;
-    instance = ((CZoneInstance*)PZone)->CreateInstance(instanceid);
+    requester = PRequester;
+    zone      = PZone;
+    instance  = ((CZoneInstance*)PZone)->CreateInstance(instanceid);
 }
 
 CInstanceLoader::~CInstanceLoader()
@@ -110,7 +110,10 @@ CInstance* CInstanceLoader::LoadInstance()
             PMob->m_minLevel = (uint8)sql->GetIntData(11);
             PMob->m_maxLevel = (uint8)sql->GetIntData(12);
 
-            memcpy(&PMob->look, sql->GetData(13), 23);
+            uint16 sqlModelID[10];
+            memcpy(&sqlModelID, sql->GetData(13), 20);
+            PMob->look = look_t(sqlModelID);
+
 
             PMob->SetMJob(sql->GetIntData(14));
             PMob->SetSJob(sql->GetIntData(15));
@@ -182,7 +185,7 @@ CInstance* CInstanceLoader::LoadInstance()
 
             // TODO: Remove me
             // Check if we should be looking up scripts for this mob
-            //PMob->m_HasSpellScript = (uint8)sql->GetIntData(64);
+            // PMob->m_HasSpellScript = (uint8)sql->GetIntData(64);
 
             PMob->m_SpellListContainer = mobSpellList::GetMobSpellList(sql->GetIntData(65));
 
@@ -221,11 +224,11 @@ CInstance* CInstanceLoader::LoadInstance()
         }
 
         Query = "SELECT npcid, name, pos_rot, pos_x, pos_y, pos_z,\
-			flag, speed, speedsub, animation, animationsub, namevis,\
-			status, entityFlags, look, name_prefix, widescan \
-			FROM instance_entities INNER JOIN npc_list ON \
-			(instance_entities.id = npc_list.npcid) \
-			WHERE instanceid = %u AND npcid >= %u and npcid < %u;";
+            flag, speed, speedsub, animation, animationsub, namevis,\
+            status, entityFlags, look, name_prefix, widescan \
+            FROM instance_entities INNER JOIN npc_list ON \
+            (instance_entities.id = npc_list.npcid) \
+            WHERE instanceid = %u AND npcid >= %u and npcid < %u;";
 
         uint32 zoneMin = (zone->GetID() << 12) + 0x1000000;
         uint32 zoneMax = zoneMin + 1024;
@@ -259,7 +262,10 @@ CInstance* CInstanceLoader::LoadInstance()
                 PNpc->status  = static_cast<STATUS_TYPE>(sql->GetIntData(12));
                 PNpc->m_flags = sql->GetUIntData(13);
 
-                memcpy(&PNpc->look, sql->GetData(14), 20);
+
+                uint16 sqlModelID[10];
+                memcpy(&sqlModelID, sql->GetData(14), 20);
+                PNpc->look = look_t(sqlModelID);
 
                 PNpc->name_prefix = (uint8)sql->GetIntData(15);
                 PNpc->widescan    = (uint8)sql->GetIntData(16);

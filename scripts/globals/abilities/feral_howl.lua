@@ -16,11 +16,9 @@ end
 
 ability_object.onUseAbility = function(player, target, ability)
     local modAcc = player:getMerit(xi.merit.FERAL_HOWL)
-    --printf("modAcc : %u", modAcc)
     local feralHowlMod = player:getMod(xi.mod.FERAL_HOWL_DURATION)
-    --printf("feralHowlMod : %u", feralHowlMod)
-        local duration = 10
-    --printf("Duration : %u", duration)
+    local duration = 10
+
     if target:hasStatusEffect(xi.effect.TERROR) == true or target:hasStatusEffect(xi.effect.STUN) == true then -- effect already on, or target stunned, do nothing
     -- reserved for miss based on target already having stun or terror effect active
     else
@@ -29,43 +27,34 @@ ability_object.onUseAbility = function(player, target, ability)
             -- http://wiki.ffxiclopedia.org/wiki/Monster_Jackcoat_(Augmented)_%2B2
             -- add 20% duration per merit level if wearing Augmented Monster Jackcoat +2
             duration = (duration + (duration * modAcc * 0.04)) -- modAcc returns intervals of 5. (0.2 / 5 = 0.04)
-            --printf("Duration post merit : %u", duration)
         end
     end
 
-    -- Leaving potency at 1 since I am not sure it applies with this ability... no known way to increase resistance
+    -- Leaving potency at 1 since I am not sure it applies with this ability. No known way to increase resistance
     local potency = 1
-    --printf("Potency : %u", potency)
 
     -- Grabbing variables for terror accuracy. Unknown if ability is stat based. Using Beastmaster's level versus Target's level
     local pLvl = player:getMainLvl()
-    --printf("player level : %u", pLvl)
     local mLvl = target:getMainLvl()
-    --printf("mob level : %u", mLvl)
 
     -- Checking level difference between the target and the BST
     local dLvl = (mLvl - pLvl)
-    --printf("level difference : %u", dLvl)
 
     -- Determining what level of resistance the target will have to the ability
     local resist = 0
     dLvl = (10 * dLvl) - modAcc -- merits increase accuracy by 5% per level
     if dLvl <= 0 then -- default level difference to 1 if mob is equal to the Beastmaster's level or less.
         resist = 1
-    --printf("resist : %u", resist)
     else
         resist = math.random(1, (dLvl + 100)) -- calculate chance of missing based on number of levels mob is higher than you. Target gets 10% resist per level over BST
-    --printf("resist : %u", resist)
     end
 
-    -- Adjusting duration based on resistance. Only fair way I could see to do it...
+    -- Adjusting duration based on resistance.
     if resist >= 20 then
         if (resist / 10) >= (duration) then
             duration = (duration - math.random(1, (duration - 2)))
-            --printf("Duration post resist : %u", duration)
         else
             duration = (duration - math.random(1, (resist / 10)))
-            --printf("Duration post resist : %u", duration)
         end
     end
 

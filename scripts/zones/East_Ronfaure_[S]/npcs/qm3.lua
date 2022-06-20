@@ -29,8 +29,6 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    -- print("CSID:", csid)
-    -- print("RESULT:", option)
     if (csid == 1) then
         player:addKeyItem(xi.ki.CHARRED_PROPELLER)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.CHARRED_PROPELLER)

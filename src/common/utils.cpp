@@ -20,8 +20,8 @@
 */
 
 #include "../common/utils.h"
-#include "../common/md52.h"
 #include "../common/logging.h"
+#include "../common/md52.h"
 
 #include <charconv>
 #include <cstdio>
@@ -236,7 +236,7 @@ position_t nearPosition(const position_t& A, float offset, float radian)
 
 /************************************************************************
  *                                                                       *
- *  Methods for working with bit arrays.                 								*
+ *  Methods for working with bit arrays.                                                *
  *                                                                       *
  ************************************************************************/
 
@@ -499,7 +499,7 @@ uint64 unpackBitsLE(const uint8* target, int32 byteOffset, int32 bitOffset, uint
 void EncodeStringLinkshell(int8* signature, int8* target)
 {
     uint8 encodedSignature[LinkshellStringLength];
-    memset(encodedSignature, 0, sizeof encodedSignature);
+    memset(&encodedSignature, 0, sizeof encodedSignature);
     uint8 chars    = 0;
     uint8 leftover = 0;
     auto  length   = std::min<size_t>(20u, strlen((const char*)signature));
@@ -533,7 +533,7 @@ void EncodeStringLinkshell(int8* signature, int8* target)
 void DecodeStringLinkshell(int8* signature, int8* target)
 {
     uint8 decodedSignature[21];
-    memset(decodedSignature, 0, sizeof decodedSignature);
+    memset(&decodedSignature, 0, sizeof decodedSignature);
     auto length = std::min<size_t>(20u, (strlen((const char*)signature) * 8) / 6);
 
     for (std::size_t currChar = 0; currChar < length; ++currChar)
@@ -575,7 +575,7 @@ void DecodeStringLinkshell(int8* signature, int8* target)
 int8* EncodeStringSignature(int8* signature, int8* target)
 {
     uint8 encodedSignature[SignatureStringLength];
-    memset(encodedSignature, 0, sizeof encodedSignature);
+    memset(&encodedSignature, 0, sizeof encodedSignature);
     uint8 chars = 0;
     // uint8 leftover = 0;
     auto length = std::min<size_t>(15u, strlen((const char*)signature));
@@ -690,17 +690,17 @@ void PackSoultrapperName(std::string name, uint8 output[])
 
 std::string UnpackSoultrapperName(uint8 input[])
 {
-    uint8 current = 0;
-    uint8 remainder = 0;
-    uint8 shift = 1;
-    uint8 maxSize = 13; // capped at 13 based on examples like GoblinBountyH
-    std::string output = "";
+    uint8       current   = 0;
+    uint8       remainder = 0;
+    uint8       shift     = 1;
+    uint8       maxSize   = 13; // capped at 13 based on examples like GoblinBountyH
+    std::string output    = "";
 
-     // Unpack and shift 7-bit to 8-bit
+    // Unpack and shift 7-bit to 8-bit
     for (uint8 i = 0; i <= maxSize; ++i)
     {
-        current = input[i];
-        uint8 tempLeft = current;
+        current         = input[i];
+        uint8 tempLeft  = current;
         uint8 tempRight = current;
 
         for (int j = 0; j < shift; ++j)
@@ -719,9 +719,9 @@ std::string UnpackSoultrapperName(uint8 input[])
 
         if (shift == 7)
         {
-            output = output + char(remainder);
+            output    = output + char(remainder);
             remainder = 0;
-            shift = 1;
+            shift     = 1;
         }
         else
         {
@@ -753,11 +753,12 @@ std::vector<std::string> split(std::string const& s, std::string const& delimite
     std::size_t pos_start = 0;
     std::size_t pos_end, delim_len = delimiter.length();
     std::string token;
+
     std::vector<std::string> res;
 
     while ((pos_end = s.find(delimiter, pos_start)) != std::string::npos)
     {
-        token = s.substr(pos_start, pos_end - pos_start);
+        token     = s.substr(pos_start, pos_end - pos_start);
         pos_start = pos_end + delim_len;
         res.push_back(token);
     }
@@ -775,7 +776,7 @@ std::string trim(const std::string& str, const std::string& whitespace)
         return ""; // no content
     }
 
-    const auto strEnd = str.find_last_not_of(whitespace);
+    const auto strEnd   = str.find_last_not_of(whitespace);
     const auto strRange = strEnd - strBegin + 1;
 
     return str.substr(strBegin, strRange);
@@ -792,12 +793,12 @@ look_t stringToLook(std::string str)
     // A 16-bit number is represented by *4* string characters
     // Iterate in groups of 4
     std::vector<uint16> hex(str.size() / 4, 0);
-    uint16 value;
+    uint16              value;
     for (std::size_t i = 0; i < str.size() / 4; i++)
     {
         auto begin = str.data() + (i * 4);
-        auto end = str.data() + (i * 4) + 4;
-        auto base = 16; // Hex
+        auto end   = str.data() + (i * 4) + 4;
+        auto base  = 16; // Hex
         std::from_chars(begin, end, value, base);
         hex[i] = value;
     }
@@ -808,8 +809,8 @@ look_t stringToLook(std::string str)
         entry = (entry >> 8) | (entry << 8);
     }
 
-    look_t out;
-    memcpy(&out, hex.data(), sizeof(out));
+    look_t out(hex);
+
     return out;
 }
 

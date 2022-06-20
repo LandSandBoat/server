@@ -31,8 +31,7 @@ spell_object.onSpellCast = function(caster, target, spell)
         if (potency < 5) then
             potency = 5
         end
-        --printf("Duration : %u", duration)
-        --printf("Potency : %u", potency)
+
         local params = {}
         params.diff = nil
         params.attribute = xi.mod.MND

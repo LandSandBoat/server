@@ -47,7 +47,7 @@ public:
     CAIContainer(CBaseEntity*, std::unique_ptr<CPathFind>&&, std::unique_ptr<CController>&&, std::unique_ptr<CTargetFind>&&);
 
     // no copy construct/assign (only move)
-    CAIContainer(const CAIContainer&) = delete;
+    CAIContainer(const CAIContainer&)            = delete;
     CAIContainer& operator=(const CAIContainer&) = delete;
 
     bool Cast(uint16 targid, SpellID spellid);

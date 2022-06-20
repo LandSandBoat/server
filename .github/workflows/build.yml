@@ -199,7 +199,12 @@ jobs:
         luarocks install luacheck --local
     - id: changed-files
       name: Get Changed Files
-      uses: jitterbit/get-changed-files@v1
+      uses: Ana06/get-changed-files@v2.1.0
+      with:
+        filter: |
+          src/**
+          scripts/**
+          sql/**
       continue-on-error: true
     - name: List Changed Files
       if: always()

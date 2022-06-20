@@ -35,10 +35,13 @@
 
 CNpcEntity::CNpcEntity()
 {
-    objtype    = TYPE_NPC;
-    look.face  = 0x32;
-    widescan   = 1;
-    allegiance = ALLEGIANCE_TYPE::MOB;
+    objtype     = TYPE_NPC;
+    look.face   = 0x32;
+    widescan    = 1;
+    allegiance  = ALLEGIANCE_TYPE::MOB;
+    m_flags     = 0;
+    name_prefix = 0;
+
     PAI        = std::make_unique<CAIContainer>(this);
 }
 

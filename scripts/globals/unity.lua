@@ -149,40 +149,42 @@ function xi.unity.onEventUpdate(player, csid, option)
     local category  = bit.band(option, 0xF)
     local selection = bit.band(bit.rshift(option, 5), 0xFF)
 
-    if option == 10 then
-        player:updateEvent(0, 0, 0, remainingLimit, 0, 0, 0, 0)
+    if csid == zoneEventIds[zoneId][4] then
+        if option == 10 then
+            player:updateEvent(0, 0, 0, remainingLimit, 0, 0, 0, 0)
 
-    -- Item Selected, enter amount/confirm
-    elseif category == 3 then
-        player:updateEvent(unityOptions[4][selection][2], unityOptions[4][selection][3], 0, 0, 0, 0, 0, player:getUnityLeader())
+        -- Item Selected, enter amount/confirm
+        elseif category == 3 then
+            player:updateEvent(unityOptions[4][selection][2], unityOptions[4][selection][3], 0, 0, 0, 0, 0, player:getUnityLeader())
 
-    -- Attempt to grant the Item selected
-    elseif category == 4 then
-        local qty = bit.rshift(option, 13)
-        local itemId = unityOptions[category][selection][1]
-        local cost = unityOptions[category][selection][4] * qty
+        -- Attempt to grant the Item selected
+        elseif category == 4 then
+            local qty = bit.rshift(option, 13)
+            local itemId = unityOptions[category][selection][1]
+            local cost = unityOptions[category][selection][4] * qty
 
-        if npcUtil.giveItem(player, { {itemId, qty} }) then
-            accolades = accolades - cost
-            player:delCurrency("unity_accolades", cost)
-            if xi.settings.ENABLE_EXCHANGE_LIMIT == 1 then
-                remainingLimit = remainingLimit - cost
-                player:setCharVar("weekly_accolades_spent", weeklyAccoladesSpent + cost)
+            if npcUtil.giveItem(player, { {itemId, qty} }) then
+                accolades = accolades - cost
+                player:delCurrency("unity_accolades", cost)
+                if xi.settings.ENABLE_EXCHANGE_LIMIT == 1 then
+                    remainingLimit = remainingLimit - cost
+                    player:setCharVar("weekly_accolades_spent", weeklyAccoladesSpent + cost)
+                end
+
+                player:updateEvent(itemId, qty, accolades, remainingLimit, 0, 0, 0, player:getUnityLeader())
+            else
+                player:updateEvent(utils.MAX_UINT32)
             end
 
-            player:updateEvent(itemId, qty, accolades, remainingLimit, 0, 0, 0, player:getUnityLeader())
-        else
-            player:updateEvent(utils.MAX_UINT32)
-        end
-
-    -- Change Unity
-    elseif category == 5 then
-        if player:getCharVar("unity_changed") == 1 then
-            player:updateEvent(utils.MAX_UINT32)
-            player:messageSpecial(ID.text.HAVE_ALREADY_CHANGED_UNITY, option)
-        else
-            local changeUnityCost = getChangeUnityCost(player, selection)
-            player:updateEvent(changeUnityCost, changeUnityCost)
+        -- Change Unity
+        elseif category == 5 then
+            if player:getCharVar("unity_changed") == 1 then
+                player:updateEvent(utils.MAX_UINT32)
+                player:messageSpecial(ID.text.HAVE_ALREADY_CHANGED_UNITY, option)
+            else
+                local changeUnityCost = getChangeUnityCost(player, selection)
+                player:updateEvent(changeUnityCost, changeUnityCost)
+            end
         end
     end
 end

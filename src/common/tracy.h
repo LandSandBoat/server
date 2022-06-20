@@ -1,6 +1,7 @@
 ﻿#ifndef _TRACY_H
 #define _TRACY_H
 
+// clang-format off
 #ifdef TRACY_ENABLE
 #include "Tracy.hpp"
 #include "cbasetypes.h"
@@ -71,5 +72,6 @@ inline std::string Hex16ToString(uint16 hex)
 #define TracyMessageStr(str)               std::ignore = str
 #define TracySetThreadName(str)            std::ignore = str
 #endif
+// clang-format on
 
 #endif // _TRACY_H

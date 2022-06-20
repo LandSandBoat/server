@@ -93,15 +93,11 @@ spell_object.onSpellCast = function(caster, target, spell)
         --for Cura II, i'll go with 15 less than the cap of Curaga III (390): 375
         --So with lack of available formula documentation, I'll go with that.
 
-        --printf("BEFORE AFFLATUS MISERY BONUS: %d", basecure)
-
         basecure = basecure + misery
 
         if (basecure > 375) then
             basecure = 375
         end
-
-        --printf("AFTER AFFLATUS MISERY BONUS: %d", basecure)
 
         --Afflatus Misery Mod Gets Used Up
         caster:setMod(xi.mod.AFFLATUS_MISERY, 0)
@@ -110,7 +106,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     final = getCureFinal(caster, spell, basecure, minCure, false)
     final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD)/100))
 
-    --Applying server mods....
+    --Applying server mods
     final = final * xi.settings.CURE_POWER
 
     target:addHP(final)
