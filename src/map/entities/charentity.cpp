@@ -643,6 +643,71 @@ void CCharEntity::ClearTrusts()
     ReloadPartyInc();
 }
 
+void CCharEntity::RequestPersist(CHAR_PERSIST toPersist)
+{
+    dataToPersist |= toPersist;
+}
+
+bool CCharEntity::PersistData()
+{
+    bool didPersist = false;
+
+    if (!varChanges.empty())
+    {
+        for (auto&& varName : varChanges)
+        {
+            charutils::PersistVar(this->id, varName.c_str(), varCache[varName]);
+        }
+
+        varChanges.clear();
+        didPersist = true;
+    }
+
+    if (!dataToPersist)
+    {
+        return didPersist;
+    }
+    else
+    {
+        didPersist = true;
+    }
+
+    if (dataToPersist & CHAR_PERSIST::EQUIP)
+    {
+        charutils::SaveCharEquip(this);
+        charutils::SaveCharLook(this);
+    }
+
+    if (dataToPersist & CHAR_PERSIST::POSITION)
+    {
+        charutils::SaveCharPosition(this);
+    }
+
+    if (dataToPersist & CHAR_PERSIST::EFFECTS)
+    {
+        StatusEffectContainer->SaveStatusEffects(true);
+    }
+
+    if (dataToPersist & CHAR_PERSIST::LINKSHELL)
+    {
+        charutils::SaveCharLinkshells(this);
+    }
+
+    dataToPersist = 0;
+    return didPersist;
+}
+
+bool CCharEntity::PersistData(time_point tick)
+{
+    if (tick < nextDataPersistTime || !PersistData())
+    {
+        return false;
+    }
+
+    nextDataPersistTime = tick + TIME_BETWEEN_PERSIST;
+    return true;
+}
+
 void CCharEntity::Tick(time_point tick)
 {
     TracyZoneScoped;
@@ -2487,4 +2552,54 @@ void CCharEntity::setLocked(bool locked)
         }
         battleutils::RelinquishClaim(this);
     }
+}
+
+int32 CCharEntity::getCharVar(std::string const& charVarName)
+{
+    if (auto charVar = charVarCache.find(charVarName); charVar != charVarCache.end())
+    {
+        return charVar->second;
+    }
+
+    auto value = charutils::FetchCharVar(this->id, charVarName);
+
+    charVarCache[charVarName] = value;
+    return value;
+}
+
+void CCharEntity::setCharVar(std::string const& charVarName, int32 value)
+{
+    charVarCache[charVarName] = value;
+    charutils::PersistCharVar(this->id, charVarName, value);
+}
+
+void CCharEntity::setVolatileCharVar(std::string const& charVarName, int32 value)
+{
+    charVarCache[charVarName] = value;
+    charVarChanges.insert(charVarName);
+}
+
+void CCharEntity::updateCharVarCache(std::string const& charVarName, int32 value)
+{
+    charVarCache[charVarName] = value;
+}
+
+void CCharEntity::clearCharVarsWithPrefix(std::string const& prefix)
+{
+    if (prefix.size() < 5)
+    {
+        ShowError("Prefix too short to clear with: '%s'", prefix);
+        return;
+    }
+
+    auto iter = charVarCache.begin();
+    while (iter != charVarCache.end())
+    {
+        if (iter->first.rfind(prefix, 0) == 0)
+        {
+            iter->second = 0;
+        }
+    }
+
+    sql->Query("DELETE FROM char_vars WHERE charid = %u AND varname LIKE '%s%%';", this->id, prefix.c_str());
 }

@@ -216,9 +216,15 @@ namespace charutils
     void  HomePoint(CCharEntity* PChar);
     bool  AddWeaponSkillPoints(CCharEntity*, SLOTTYPE, int);
 
-    int32 GetCharVar(CCharEntity* PChar, std::string const& var);
-    void  SetCharVar(CCharEntity* PChar, std::string const& var, int32 value);
-    void  ClearCharVarsWithPrefix(CCharEntity* PChar, std::string prefix);
+    int32 GetVar(CCharEntity* PChar, std::string const& var);
+    void  SetVar(uint32 charId, std::string const& var, int32 value);
+    void  SetVar(CCharEntity* PChar, std::string const& var, int32 value);
+    int32 ClearVarsWithPrefix(CCharEntity* PChar, std::string prefix);
+    int32 RemoveVarsWithTag(CCharEntity* PChar, std::string const& varsTag);
+    void  AddVar(CCharEntity* PChar, std::string const& var, int32 value);
+
+    int32 FetchVar(uint32 charId, std::string const& var);
+    void  PersistVar(uint32 charId, std::string const& var, int32 value);
 
     uint16 getWideScanRange(JOBTYPE job, uint8 level);
     uint16 getWideScanRange(CCharEntity* PChar);

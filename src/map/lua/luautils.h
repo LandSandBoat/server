@@ -178,6 +178,10 @@ namespace luautils
 
     int32 GetServerVariable(std::string const& varName);
     void  SetServerVariable(std::string const& name, int32 value);
+    int32 GetVolatileServerVariable(sol::string_view varName);
+    void  SetVolatileServerVariable(sol::string_view varName, int32 value);
+    int32 GetCharVar(uint32 charId, sol::string_view varName); // Get player var directly from SQL DB
+    int32 SetCharVar(lua_State* L);                            // Set player var in SQL DB using charId
     void  ClearVarFromAll(std::string const& varName); // Deletes a specific player variable from all players
     void  Terminate();                                 // Logs off all characters and terminates the server
 

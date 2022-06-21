@@ -42,6 +42,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "items/item_linkshell.h"
 #include "utils/charutils.h"
 #include "utils/jailutils.h"
+#include "utils/serverutils.h"
 #include "utils/zoneutils.h"
 
 namespace message
@@ -559,11 +560,43 @@ namespace message
                 }
             }
             break;
+            case MSG_CHARVAR_UPDATE:
+            {
+                uint8* data   = (uint8*)extra.data();
+                uint32 charId = ref<uint32>(data, 0);
+                int32  value   = ref<int32>(data, 4);
+
+                ShowDebug(fmt::format("Received message to update var for {}", charId));
+
+                uint8 varNameSize = ref<uint8>(data, 8);
+                auto varName      = std::string(data + 9, data + 9 + varNameSize);
+
+                if (auto player = zoneutils::GetChar(charId))
+                {
+                    LogDebug(fmt::format("Updating charvar for {} ({}): {} = {}", player->GetName(), charId, varName, value);
+                    player->updateVarCache(varName, value);
+                }
+                break;
+            }
             default:
             {
                 ShowWarning("Message: unhandled message type %d", type);
             }
         }
+    }
+
+    void send_charvar_update(uint32 charId, std::string const& varName, uint32 value)
+    {
+        uint32 size = sizeof(uint32) + sizeof(int32) + sizeof(uint8) + varName.size();
+        char* buf   = new char[size];
+        memset(&buf[0], 0, size);
+
+        ref<uint32>(buf, 0) = charId;
+        ref<int32>(buf, 4)  = value;
+        ref<uint8>(buf, 8)  = (uint8)varName.size();
+        memcpy(buf + 9, varName.c_str(), varName.size());
+
+        message::send(MSG_CHARVAR_UPDATE, buf, size, nullptr);
     }
 
     void handle_incoming()

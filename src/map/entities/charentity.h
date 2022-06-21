@@ -44,6 +44,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #define MAX_MISSIONID    851
 #define MAX_ABYSSEAZONES 9
 
+#define TIME_BETWEEN_PERSIST 2min
+
 class CItemWeapon;
 class CTrustEntity;
 
@@ -240,11 +242,13 @@ enum CHAR_SUBSTATE
     SUBSTATE_LAST,
 };
 
-/************************************************************************
- *                                                                       *
- *                                                                       *
- *                                                                       *
- ************************************************************************/
+enum CHAR_PERSIST : uint8
+{
+    EQUIP     = 0x01,
+    POSITION  = 0x02,
+    EFFECTS   = 0x04,
+    LINKSHELL = 0x08,
+};
 
 class CBasicPacket;
 class CLinkshell;
@@ -496,6 +500,10 @@ public:
     void ClearTrusts();
     void RemoveTrust(CTrustEntity*);
 
+    void RequestPersist(CHAR_PERSIST toPersist);
+    bool PersistData();
+    bool PersistData(time_point tick);
+
     virtual void Tick(time_point) override;
     void         PostTick() override;
 
@@ -548,7 +556,12 @@ public:
 
     virtual void OnItemFinish(CItemState&, action_t&);
 
-    bool m_Locked; // Is the player locked in a cutscene
+    int32 getCharVar(std::string const& varName);
+    void  setCharVar(std::string const& varName, int32 value);
+    void  setVolatileCharVar(std::string const& varName, int32 value);
+    void  updateCharVarCache(std::string const& varName, int32 value);
+
+    void clearCharVarsWithPrefix(std::string const& prefix);
 
     CCharEntity();
     ~CCharEntity();
@@ -580,6 +593,13 @@ private:
     bool m_isStyleLocked;
     bool m_isBlockingAid;
     bool m_reloadParty;
+    bool m_Locked; // Is the player locked in a cutscene
+
+    std::unordered_map<std::string, int32> charVarCache;
+    std::unordered_set<std::string>        charVarChanges;
+
+    uint8      dataToPersist;
+    time_point nextDataPersistTime;
 
     PacketList_t                                     PacketList;           // the list of packets to be sent to the character during the next network cycle
     std::unordered_map<uint32, CCharPacket*>         PendingCharPackets;   // Keep track of which char packets are queued up for this char, such that they can be updated

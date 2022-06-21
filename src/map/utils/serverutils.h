@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,27 +16,29 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
+  This file is part of DarkStar-server source code.
+
 ===========================================================================
 */
 
-#ifndef _CEVENTUPDATESTRINGPACKET_H
-#define _CEVENTUPDATESTRINGPACKET_H
+#ifndef _SERVERUTILS_H
+#define _SERVERUTILS_H
 
-#include "common/cbasetypes.h"
-#include "common/mmo.h"
+#include "../../common/cbasetypes.h"
+#include "../../common/mmo.h"
+#include "../../common/taskmgr.h"
 
-#include <string>
-
-#include "basic.h"
-
-class CCharEntity;
-
-class CEventUpdateStringPacket : public CBasicPacket
+namespace serverutils
 {
-public:
-    CEventUpdateStringPacket(std::string const& string0 = "", std::string const& string1 = "", std::string const& string2 = "", std::string const& string3 = "",
-                             uint32 param0 = 0, uint32 param1 = 0, uint32 param2 = 0, uint32 param3 = 0, uint32 param4 = 0, uint32 param5 = 0,
-                             uint32 param6 = 0, uint32 param7 = 0, uint32 param8 = 0);
-};
 
-#endif
+    int32 GetVar(std::string const& var);
+    void  SetVar(std::string const& var, int32 value);
+    void  PersistVar(std::string const& var, int32 value);
+
+    int32 GetVolatileVar(std::string const& var);
+    void  SetVolatileVar(std::string const& var, int32 value);
+
+    int32 PersistVolatile(time_point tick, CTaskMgr::CTask* PTask);
+} // namespace serverutils
+
+#endif // _SERVERUTILS_H

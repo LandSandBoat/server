@@ -144,6 +144,7 @@ enum MSGSERVTYPE : uint8
     MSG_LINKSHELL_RANK_CHANGE,
     MSG_LINKSHELL_REMOVE,
     MSG_LUA_FUNCTION,
+    MSG_CHARVAR_UPDATE,
 
     // gm commands
     MSG_SEND_TO_ZONE,
@@ -184,6 +185,8 @@ constexpr auto msgTypeToStr = [](uint8 msgtype)
             return "MSG_LINKSHELL_REMOVE";
         case MSG_LUA_FUNCTION:
             return "MSG_LUA_FUNCTION";
+        case MSG_CHARVAR_UPDATE:
+            return "MSG_CHARVAR_UPDATE";
         case MSG_SEND_TO_ZONE:
             return "MSG_SEND_TO_ZONE";
         case MSG_SEND_TO_ENTITY:

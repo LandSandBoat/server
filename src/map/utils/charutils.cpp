@@ -5992,79 +5992,89 @@ namespace charutils
         return false;
     }
 
-    int32 GetCharVar(CCharEntity* PChar, std::string const& var)
+    int32 GetVar(CCharEntity* PChar, std::string const& var)
     {
-        TracyZoneScoped;
-        TracyZoneString(PChar->name);
-        TracyZoneString(var);
-
         if (PChar == nullptr)
-        {
-            ShowError("GetCharVar was requested for a nullptr PChar");
             return 0;
-        }
 
-        const char* fmtQuery = "SELECT value FROM char_vars WHERE charid = %u AND varname = '%s' LIMIT 1;";
+        return PChar->getVar(var);
+    }
 
-        int32 ret = sql->Query(fmtQuery, PChar->id, var.c_str());
-
-        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+    void SetVar(uint32 charId, std::string const& var, int32 value)
+    {
+        auto player = zoneutils::GetChar(charId);
+        if (player)
         {
-            return sql->GetIntData(0);
+            player->setVar(var, value);
+            return;
         }
 
-        // auto stmt = sql->GetPreparedStatement("GET_CHAR_VAR");
-        // stmt->Execute(PChar->id, var);
+        PersistVar(charId, var, value);
+        message::send_charvar_update(charId, var, value);
+    }
 
+    void SetVar(CCharEntity* PChar, std::string const& var, int32 value)
+    {
+        if (PChar == nullptr)
+            return;
+
+        return PChar->setVar(var, value);
+    }
+
+    int32 ClearVarsWithPrefix(CCharEntity* PChar, std::string prefix)
+    {
+        if (PChar == nullptr)
+            return 0;
+
+        PChar->clearVarsWithPrefix(prefix);
         return 0;
     }
 
-    void SetCharVar(CCharEntity* PChar, std::string const& var, int32 value)
+    int32 RemoveVarsWithTag(CCharEntity* PChar, std::string const& varsTag)
     {
-        TracyZoneScoped;
-        TracyZoneString(PChar->name);
-        TracyZoneString(fmt::format("{} -> {}", var, value));
-
         if (PChar == nullptr)
-        {
-            ShowError("SetCharVar was requested for a nullptr PChar");
+            return 0;
+
+        PChar->clearVarsWithPrefix(fmt::sprintf("[%s]", varsTag));
+        return 0;
+    }
+
+    void AddVar(CCharEntity* PChar, std::string const& var, int32 value)
+    {
+        if (PChar == nullptr)
             return;
+
+        const char* Query = "INSERT INTO char_vars SET charid = %u, varname = '%s', value = %i ON DUPLICATE KEY UPDATE value = value + %i;";
+
+        Sql_Query(SqlHandle, Query, PChar->id, var, value, value);
+    }
+
+    int32 FetchVar(uint32 charId, std::string const& varName)
+    {
+        const char* fmtQuery = "SELECT value FROM char_vars WHERE charid = %u AND varname = '%s' LIMIT 1;";
+
+        int32 ret = Sql_Query(SqlHandle, fmtQuery, charId, varName);
+
+        int32 value = 0;
+        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        {
+            value = Sql_GetIntData(SqlHandle, 0);
         }
 
+        return value;
+    }
+
+    void PersistVar(uint32 charId, std::string const& var, int32 value)
+    {
         if (value == 0)
         {
-            sql->Query(fmt::format("DELETE FROM char_vars WHERE charid = {} AND varname = '{}' LIMIT 1;",
-                                   PChar->id, var)
-                           .c_str());
+            Sql_Query(SqlHandle, "DELETE FROM char_vars WHERE charid = %u AND varname = '%s' LIMIT 1;", charId, var);
         }
         else
         {
-            sql->Query(fmt::format("INSERT INTO char_vars SET charid = {}, varname = '{}', value = {} ON DUPLICATE KEY UPDATE value = {};",
-                                   PChar->id, var.c_str(), value, value)
-                           .c_str());
+            Sql_Query(SqlHandle, "INSERT INTO char_vars SET charid = %u, varname = '%s', value = %i ON DUPLICATE KEY UPDATE value = %i;", charId, var, value, value);
         }
     }
-
-    void ClearCharVarsWithPrefix(CCharEntity* PChar, std::string prefix)
-    {
-        TracyZoneScoped;
-
-        if (PChar == nullptr)
-        {
-            return;
-        }
-
-        // Validate that prefix is not too short, since we don't want it to
-        // accidentally clear a lot of variables it shouldn't.
-        if (prefix.size() < 5)
-        {
-            ShowError("Prefix too short to clear with: '%s'", prefix);
-            return;
-        }
-
-        sql->Query("DELETE FROM char_vars WHERE charid = %u AND varname LIKE '%s%%';", PChar->id, prefix.c_str());
-    }
-
     uint16 getWideScanRange(JOBTYPE job, uint8 level)
     {
         // Set Widescan range
