@@ -2312,17 +2312,23 @@ namespace charutils
 
     void EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 containerID)
     {
-        CItemEquipment* PItem = dynamic_cast<CItemEquipment*>(PChar->getStorage(containerID)->GetItem(slotID));
+        if (PChar == nullptr || PChar->getStorage(containerID) == nullptr)
+        {
+            return;
+        }
+
+        CItemArmor* PItem = dynamic_cast<CItemArmor*>(PChar->getStorage(containerID)->GetItem(slotID));
 
         if (PItem && PItem == PChar->getEquip((SLOTTYPE)equipSlotID))
         {
             return;
         }
 
-        if (equipSlotID == SLOT_SUB && PItem && !PItem->IsShield() && ((CItemWeapon*)PItem)->getSkillType() == SKILL_NONE)
+        if (equipSlotID == SLOT_SUB && PItem && !PItem->IsShield())
         {
-            CItemEquipment* PMainItem = PChar->getEquip(SLOT_MAIN);
-            if (!PMainItem || !((CItemWeapon*)PMainItem)->isTwoHanded())
+            auto PItemWeapon = dynamic_cast<CItemWeapon*>(PItem);
+            auto PMainItem   = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_MAIN));
+            if (PItemWeapon && PItemWeapon->getSkillType() == SKILL_NONE && (!PMainItem || !PMainItem->isTwoHanded()))
             {
                 PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 0x200));
                 return;
