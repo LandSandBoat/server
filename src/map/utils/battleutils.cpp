@@ -3634,6 +3634,12 @@ namespace battleutils
             KillerEffect += PDoubtEffect->GetPower();
         }
 
+        // Add intimidation rate from Intimidate status effect
+        if (CStatusEffect* PIntimidateEffect = PAttacker->StatusEffectContainer->GetStatusEffect(EFFECT_INTIMIDATE))
+        {
+            KillerEffect += PIntimidateEffect->GetPower();
+        }
+
         return (xirand::GetRandomNumber(100) < KillerEffect);
     }
 

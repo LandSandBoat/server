@@ -280,6 +280,13 @@ int32 main(int32 argc, char** argv)
     {
         ah_cleanup(server_clock::now(), nullptr);
     });
+    gConsoleService->RegisterCommand(
+    "expire_all", "Force-expire all items on the AH, returning to sender.",
+    [](std::vector<std::string> inputs)
+    {
+        CDataLoader data;
+        data.ExpireAHItems(0);
+    });
     // clang-format on
 
     while (true)
@@ -1013,7 +1020,7 @@ void TaskManagerThread()
 int32 ah_cleanup(time_point tick, CTaskMgr::CTask* PTask)
 {
     CDataLoader data;
-    data.ExpireAHItems();
+    data.ExpireAHItems(search_config.expire_days);
 
     return 0;
 }
