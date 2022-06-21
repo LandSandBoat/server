@@ -289,6 +289,8 @@ int32 main(int32 argc, char** argv)
     });
     // clang-format on
 
+    ShowMessage("========================================================");
+
     while (true)
     {
         // Accept a client socket
