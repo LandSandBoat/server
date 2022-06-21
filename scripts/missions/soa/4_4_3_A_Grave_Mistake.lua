@@ -52,6 +52,7 @@ mission.sections =
                     if mission:complete(player) then
                         player:delKeyItem(xi.ki.BROKEN_FUSE)
                         player:messageSpecial(easternAdoulinID.text.LOST_KEYITEM, xi.ki.BROKEN_FUSE)
+                        xi.mission.setMustZone(player, xi.mission.log_id.SOA, xi.mission.id.soa.AN_EMERGENCY_CONVOCATION)
                     end
                 end,
             },
