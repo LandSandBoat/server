@@ -577,15 +577,19 @@ std::string CDataLoader::GetSearchComment(uint32 playerId)
     return std::string((const char*)sql->GetData(0));
 }
 
+struct ListingToExpire
+{
+    uint32      saleID     = 0;
+    uint32      itemID     = 0;
+    uint8       itemStack  = 0;
+    uint8       ahStack    = 0;
+    uint32      sellerID   = 0;
+    std::string sellerName = "?";
+};
+
 void CDataLoader::ExpireAHItems(uint16 expireAgeInDays)
 {
-    if (expireAgeInDays > 0)
-    {
-        ShowInfo(fmt::format("Expiring auction house listings over {} days old", expireAgeInDays).c_str());
-    }
-    {
-         ShowInfo("Expiring all auction house listings");
-    }
+    ShowMessage(fmt::format("Expiring auction house listings over {} days old", expireAgeInDays).c_str());
 
     auto sql2 = std::make_unique<SqlConnection>(search_config.mysql_login.c_str(),
                                                 search_config.mysql_password.c_str(),
@@ -593,55 +597,51 @@ void CDataLoader::ExpireAHItems(uint16 expireAgeInDays)
                                                 search_config.mysql_port,
                                                 search_config.mysql_database.c_str());
 
+    std::vector<ListingToExpire> listingsToExpire;
+
     std::string qStr = "SELECT T0.id,T0.itemid,T1.stacksize, T0.stack, T0.seller FROM auction_house T0 INNER JOIN item_basic T1 ON \
                             T0.itemid = T1.itemid WHERE datediff(now(),from_unixtime(date)) >=%u AND buyer_name IS NULL;";
 
     int32 ret             = sql2->Query(qStr.c_str(), expireAgeInDays);
     int64 expiredAuctions = sql2->NumRows();
 
-    std::vector<uint32> listingsToDelete;
-
-    if (ret != SQL_ERROR)
+    if (ret != SQL_ERROR && expiredAuctions > 0)
     {
-        for (int64 idx = 0; idx < expiredAuctions; ++idx)
+        while (sql2->NextRow() == SQL_SUCCESS)
         {
-            sql2->NextRow(); // Populate next results object in the handle
-
-            // iterate through the expired auctions and return them to the seller
+            // Collect the items we're going to expire
             uint32 saleID    = sql2->GetUIntData(0);
             uint32 itemID    = sql2->GetUIntData(1);
             uint8  itemStack = (uint8)sql2->GetUIntData(2);
             uint8  ahStack   = (uint8)sql2->GetUIntData(3);
             uint32 sellerID  = sql2->GetUIntData(4);
+            // NOTE: seller name left out for now, we'll populate this later
 
-            std::string sellerName = "?";
+            listingsToExpire.emplace_back(ListingToExpire{ saleID, itemID, itemStack, ahStack, sellerID, "?" });
+        }
 
-            std::string queryStr = fmt::format("SELECT charname FROM chars WHERE charid={}", sellerID);
-
-            ret = sql2->Query(queryStr.c_str());
+        for (auto listing : listingsToExpire)
+        {
+            // Populate name now
+            qStr = fmt::format("SELECT charname FROM chars WHERE charid={}", listing.sellerID);
+            ret  = sql2->Query(qStr.c_str());
             if (ret != SQL_ERROR && sql2->NumRows() != 0 && sql2->NextRow() == SQL_SUCCESS)
             {
-                sellerName = sql2->GetStringData(0);
+                listing.sellerName = sql2->GetStringData(0);
             }
 
-            queryStr = fmt::format("INSERT INTO delivery_box (charid, charname, box, itemid, itemsubid, quantity, senderid, sender) VALUES "
+            qStr = fmt::format("INSERT INTO delivery_box (charid, charname, box, itemid, itemsubid, quantity, senderid, sender) VALUES "
                 "({}, '{}', 1, {}, 0, {}, 0, 'AH-Jeuno');",
-                sellerID, sellerName, itemID, ahStack == 1 ? itemStack : 1);
+                listing.sellerID, listing.sellerName, listing.itemID, listing.ahStack == 1 ? listing.itemStack : 1);
 
-            ret = sql2->Query(queryStr.c_str());
+            ret = sql2->Query(qStr.c_str());
 
-            if (ret != SQL_ERROR)
+            if (ret != SQL_ERROR && sql2->AffectedRows() > 0)
             {
                 // delete the item from the auction house
-                listingsToDelete.emplace_back(saleID);
+                sql2->Query("DELETE FROM auction_house WHERE id=%u", listing.saleID);
             }
         }
-
-        for (auto saleID : listingsToDelete)
-        {
-            sql2->Query("DELETE FROM auction_house WHERE id= %u", saleID);
-        }
-
-        ShowMessage("Sent %u expired auction house listings back to sellers", expiredAuctions);
     }
+    ShowMessage("Sent %u expired auction house listings back to sellers", expiredAuctions);
 }
