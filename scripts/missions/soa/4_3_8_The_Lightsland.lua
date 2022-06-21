@@ -71,6 +71,7 @@ mission.sections =
                 [1529] = function(player, csid, option, npc)
                     if npcUtil.giveItem(player, rewardItems[option]) then
                         mission:complete(player)
+                        xi.mission.setVar(player, xi.mission.log_id.SOA, xi.mission.id.soa.THE_LIGHT_OF_DAWN_COMES, 'Timer', VanadielUniqueDay() + 1)
                     else
                         mission:setVar(player, 'Option', 1)
                     end
@@ -82,6 +83,7 @@ mission.sections =
                 [1531] = function(player, csid, option, npc)
                     if npcUtil.giveItem(player, rewardItems[option]) then
                         mission:complete(player)
+                        xi.mission.setVar(player, xi.mission.log_id.SOA, xi.mission.id.soa.THE_LIGHT_OF_DAWN_COMES, 'Timer', VanadielUniqueDay() + 1)
                     end
                 end,
             },
