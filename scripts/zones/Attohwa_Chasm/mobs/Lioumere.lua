@@ -10,9 +10,13 @@ local entity = {}
 
 entity.onMobWeaponSkill = function(player, mob, skill)
     --Sets entire party enmity CE/VE to 0.
-    local alliance = player:getAlliance() -- Gets member pointers for alliance
+    local alliance  = player:getAlliance() -- Gets member pointers for alliance
     for _, member in pairs(alliance) do
+        local playerpet = member:getPet()
         mob:resetEnmity(member) -- Resets player enmity on the mob
+        if playerpet then
+            mob:resetEnmity(playerpet)
+        end
     end
     mob:pathTo(478.8, 20, 41.7) -- Start walking home
 end
