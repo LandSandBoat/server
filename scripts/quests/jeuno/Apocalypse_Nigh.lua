@@ -123,7 +123,7 @@ quest.sections =
                 end,
             },
         },
-        
+
         [xi.zone.EMPYREAL_PARADOX] =
         {
             ['Transcendental_Radiance'] =
@@ -207,7 +207,7 @@ quest.sections =
                 end,
             },
 
-            ['_700'] = 
+            ['_700'] =
             {
                 onTrigger = function(player, npc)
                     if quest:getVar(player, 'Prog') == 5 and quest:getVar(player, 'Wait') > os.time() then
@@ -264,16 +264,15 @@ quest.sections =
         {
             ['qm1'] =
             {
-                onTrigger = function(player, npc) 
+                onTrigger = function(player, npc)
                     if quest:getVar(player, 'Prog') == 7 then
                         for _, item in pairs(quest.possibleItems) do
-
                             if player:hasItem(item) then
                                 return quest:messageSpecial(zones[player:getZoneID()].text.QM_TEXT)
                             end
-
-                            return quest:progressEvent(5)
                         end
+                        
+                        return quest:progressEvent(5)
                     end
                 end,
             },
