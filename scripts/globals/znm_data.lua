@@ -17,6 +17,9 @@ xi.znm.FAUNA_MULT    = 2     -- Sanraku rare fauna multiplier
 -----------------------------------
 ---- Zeni Prices
 -----------------------------------
+-- Set to true if you want pop item prices to stay fixed
+local ZNM_STATIC_POP_PRICES = true
+
 local ZNM_POP_COSTS = {
     [1] = {minPrice = 1000, maxPrice = 2500, addedPrice = 100, decayPrice = 100},
     [2] = {minPrice = 2000, maxPrice = 5000, addedPrice = 200, decayPrice = 200},
@@ -25,24 +28,28 @@ local ZNM_POP_COSTS = {
     [5] = {minPrice = 5000, maxPrice = 12000, addedPrice = 500, decayPrice = 500}
 }
 
---xi.znm.updatePopPrice = function(znm_tier)
---    local price = math.min(GetServerVariable("[ZNM][T" .. znm_tier .. "]Cost") + ZNM_POP_COSTS[znm_tier].addedPrice,
---                              ZNM_POP_COSTS[znm_tier].maxPrice)
---    SetServerVariable("[ZNM][T" .. znm_tier .. "]Cost", price )
---end
---
---xi.znm.getPopPrice = function(znm_tier)
---    return GetServerVariable("[ZNM][T" .. znm_tier .. "]Cost")
---end
+xi.znm.updatePopPrice = function(znm_tier)
+    if not ZNM_STATIC_POP_PRICES then
+        local price = math.min(GetServerVariable("[ZNM][T" .. znm_tier .. "]PopCost") + ZNM_POP_COSTS[znm_tier].addedPrice,
+                ZNM_POP_COSTS[znm_tier].maxPrice)
+        SetServerVariable("[ZNM][T" .. znm_tier .. "]PopCost", price )
+    end
+end
 
---function PopPriceDecay() -- Prices drop every 2 hours
---    local price = 0
---    for tier = 1,5 do
---        price = math.min(GetServerVariable("[ZNM][T" .. tier .. "]Cost")- ZNM_POP_COSTS[znm_tier].decayPrice,
---                                  - ZNM_POP_COSTS[znm_tier].minPrice)
---        SetServerVariable("[ZNM][T" .. tier .. "]Cost", price)
---    end
---end
+xi.znm.getPopPrice = function(znm_tier)
+    return GetServerVariable("[ZNM][T" .. znm_tier .. "]PopCost")
+end
+
+xi.znm.PopPriceDecay = function() -- Prices drop every 2 hours
+    if not ZNM_STATIC_POP_PRICES then
+        local price = 0
+        for tier = 1,5 do
+            price = math.max(GetServerVariable("[ZNM][T" .. tier .. "]PopCost") - ZNM_POP_COSTS[tier].decayPrice,
+                    ZNM_POP_COSTS[tier].minPrice)
+            SetServerVariable("[ZNM][T" .. tier .. "]PopCost", price)
+        end
+    end
+end
 
 -----------------------------------
 ---- Sanraku's Interest and Recommended Fauna
@@ -140,7 +147,7 @@ xi.znm.pop_items = {
                                                                  xi.keyItem.SIENNA_COLORED_SEAL}},
     {item = xi.items.PANDEMONIUM_KEY,               tier = 5, seal = {xi.keyItem.LILAC_COLORED_SEAL, -- Pandemonium Warden
                                                                  xi.keyItem.LAVENDER_COLORED_SEAL,
-                                                                 xi.keyItem.CHESTNUT_COLORED_SEAL}}
+                                                                 xi.keyItem.BRIGHT_BLUE_SEAL}}
 }
 
 ------------------------------------------------------------

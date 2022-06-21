@@ -249,7 +249,6 @@ end
 
 xi.znm.sanraku.onEventUpdate = function(player, csid, option)
     if csid == 909 then
-        player:PrintToPlayer(string.format("CSID '%i' option: '%i'", csid, option))
         if option >= 300 and option <= 302 then -- Gaining access to islets
             local zeni_cost = 500 -- Base cost charged by Sanraku
             if player:hasKeyItem(xi.keyItem.RHAPSODY_IN_AZURE) then -- Reduced zeni cost
@@ -268,16 +267,14 @@ xi.znm.sanraku.onEventUpdate = function(player, csid, option)
             end
         elseif option >= 100 and option <= 130 then-- Are you sure you want info on <ZNM_mob>?
             -- Give the correct ZNM's zeni cost
-            -- local diff = option - 99
-            -- local zeni_cost = xi.znm.getPopPrice(xi.znm.pop_items[diff].tier)
-            local zeni_cost = 1000 -- TODO: GetServerVar the cost
+             local diff = option - 99
+             local zeni_cost = xi.znm.getPopPrice(xi.znm.pop_items[diff].tier)
             player:updateEvent(0,0,0,0,0,0,zeni_cost)
         elseif option >= 400 and option <= 440 then -- Yes, I want info on <ZNM_mob>
             -- (440 because Warden's option is offset by 10 for some reason)
             local diff = math.min(option - 399, 31) -- Determine the desired ZNM
             local pop_item = xi.znm.pop_items[diff].item
-            local zeni_cost = 1000 -- TODO: GetServerVar the cost
-            -- local zeni_cost = xi.znm.getPopPrice(xi.znm.pop_items[diff].tier)
+            local zeni_cost = xi.znm.getPopPrice(xi.znm.pop_items[diff].tier)
             if player:getCurrency("zeni_point") < zeni_cost then -- Not enough zeni
                 player:updateEvent(2)
             elseif player:getFreeSlotsCount() == 0 then -- No inventory space
@@ -285,10 +282,11 @@ xi.znm.sanraku.onEventUpdate = function(player, csid, option)
             elseif player:hasItem(pop_item) then -- Own pop already
                 player:updateEvent(4) -- TODO: find "it seems you are in possession of one"?
             else
+                -- Deduct zeni from player, increase future pop-item costs
                 player:delCurrency("zeni_point", zeni_cost)
+                xi.znm.updatePopPrice(xi.znm.pop_items[diff].tier)
+                -- Give the pop item and remove the corresponding seal(s), if applicable
                 player:addItem(pop_item)
-                -- xi.znm.updatePopPrice(xi.znm.pop_items[diff].tier) -- TODO: SetServerVar new cost
-                -- Remove the corresponding seal(s), if applicable
                 local seal = xi.znm.pop_items[diff].seal
                 if type(seal) == "table" then -- three-seal ZNMs (Tinnin, etc.)
                     player:delKeyItem(seal[1])
