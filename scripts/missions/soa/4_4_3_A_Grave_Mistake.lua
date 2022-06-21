@@ -3,8 +3,11 @@
 -- Seekers of Adoulin M4-4-3
 -----------------------------------
 -- !addmission 12 96
--- Levil          : !pos -87.204 3.350 12.655 256
--- Ploh Trishbahk : !pos 100.580 -40.150 -63.830 257
+-- Levil              : !pos -87.204 3.350 12.655 256
+-- Ploh Trishbahk     : !pos 100.580 -40.150 -63.830 257
+-- Sainene            : !pos 315 -5.768 -300 258
+-- Stout_Weir         : !pos -427.506 -1 -48.217 258
+-- Waterways Overlook : !pos -17.995 -6.507 37.43 258
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')

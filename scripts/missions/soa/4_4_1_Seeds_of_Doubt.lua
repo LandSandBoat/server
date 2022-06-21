@@ -3,7 +3,9 @@
 -- Seekers of Adoulin M4-4-1
 -----------------------------------
 -- !addmission 12 94
--- Levil : !pos -87.204 3.350 12.655 256
+-- Levil          : !pos -87.204 3.350 12.655 256
+-- Ploh Trishbahk : !pos 100.580 -40.150 -63.830 257
+-- Chalvava       : !pos -318.000 -1.000 -318.000 258
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
