@@ -30,7 +30,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 namespace instanceutils
 {
     std::unordered_map<uint16, InstanceData_t> InstanceData;
-    std::queue<std::pair<uint32, uint16>> LoadQueue; // player id, instance id
+    std::queue<std::pair<uint32, uint16>>      LoadQueue; // player id, instance id
 
     void LoadInstanceList()
     {

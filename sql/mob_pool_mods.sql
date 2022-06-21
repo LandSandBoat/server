@@ -109,6 +109,10 @@ INSERT INTO `mob_pool_mods` VALUES (2032,35,0,1);
 INSERT INTO `mob_pool_mods` VALUES (2047,163,-100,0);
 INSERT INTO `mob_pool_mods` VALUES (2083,29,25,0);
 INSERT INTO `mob_pool_mods` VALUES (2105,48,434,1);
+INSERT INTO `mob_pool_mods` VALUES (2114,34,60,1);
+INSERT INTO `mob_pool_mods` VALUES (2114,4,15,1);
+INSERT INTO `mob_pool_mods` VALUES (2114,5,15,1);
+INSERT INTO `mob_pool_mods` VALUES (2114,11,30,1);
 INSERT INTO `mob_pool_mods` VALUES (2156,370,25,0);
 INSERT INTO `mob_pool_mods` VALUES (2180,3,100,1);
 INSERT INTO `mob_pool_mods` VALUES (2254,407,100,0);
@@ -126,6 +130,8 @@ INSERT INTO `mob_pool_mods` VALUES (2420,302,10,0);
 INSERT INTO `mob_pool_mods` VALUES (2461,61,25,1);
 INSERT INTO `mob_pool_mods` VALUES (2462,61,25,1);
 INSERT INTO `mob_pool_mods` VALUES (2463,61,20,1);
+INSERT INTO `mob_pool_mods` VALUES (2499,240,90,0); -- Mammet Sleep Res
+INSERT INTO `mob_pool_mods` VALUES (2500,240,90,0); -- Mammet Sleep Res
 INSERT INTO `mob_pool_mods` VALUES (2614,368,100,0); -- Memory Receptacle regain 10%
 INSERT INTO `mob_pool_mods` VALUES (2643,160,-50,0);
 INSERT INTO `mob_pool_mods` VALUES (2647,160,-50,0);
@@ -145,6 +151,7 @@ INSERT INTO `mob_pool_mods` VALUES (2840,368,70,0);
 INSERT INTO `mob_pool_mods` VALUES (2840,370,50,0);
 INSERT INTO `mob_pool_mods` VALUES (2922,370,100,0);
 INSERT INTO `mob_pool_mods` VALUES (2973,370,1,0);
+INSERT INTO `mob_pool_mods` VALUES (2973,291,25,0);
 INSERT INTO `mob_pool_mods` VALUES (3051,4,4,1);
 INSERT INTO `mob_pool_mods` VALUES (3099,23,23,1); -- Parata immune to Sleep, Bind, Silence and Gravity.
 INSERT INTO `mob_pool_mods` VALUES (3124,48,434,1);
@@ -189,6 +196,7 @@ INSERT INTO `mob_pool_mods` VALUES (3941,163,-100,0);
 INSERT INTO `mob_pool_mods` VALUES (4046,23,6191,1);
 INSERT INTO `mob_pool_mods` VALUES (4082,4,4,1);
 INSERT INTO `mob_pool_mods` VALUES (4083,370,1,0);
+INSERT INTO `mob_pool_mods` VALUES (4083,368,30,0);
 INSERT INTO `mob_pool_mods` VALUES (4186,244,15,0);
 INSERT INTO `mob_pool_mods` VALUES (4186,34,20,1);
 INSERT INTO `mob_pool_mods` VALUES (4186,35,0,1);
@@ -228,6 +236,10 @@ INSERT INTO `mob_pool_mods` VALUES (5106,288,25,0);
 INSERT INTO `mob_pool_mods` VALUES (5106,1,250,0);
 INSERT INTO `mob_pool_mods` VALUES (5106,29,30,0);
 INSERT INTO `mob_pool_mods` VALUES (5106,366,10,0);
+INSERT INTO `mob_pool_mods` VALUES (7039,34,60,1);
+INSERT INTO `mob_pool_mods` VALUES (7039,4,15,1);
+INSERT INTO `mob_pool_mods` VALUES (7039,5,15,1);
+INSERT INTO `mob_pool_mods` VALUES (7039,11,30,1);
 
 /*!40000 ALTER TABLE `mob_pool_mods` ENABLE KEYS */;
 UNLOCK TABLES;

@@ -49,7 +49,7 @@ CREATE TABLE `mob_family_system` (
 -- Dumping data for table `mob_family_system`
 --
 
--- "family, superFamily, ecosystem" relationship: Korrigan, Madragora, Plantoid
+-- "family, superFamily, ecosystem" relationship: Korrigan, Mandragora, Plantoid
 -- Nothing is enforced so it is possible to use completely unrelated values
 LOCK TABLES `mob_family_system` WRITE;
 /*!40000 ALTER TABLE `mob_family_system` DISABLE KEYS */;

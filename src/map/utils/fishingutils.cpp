@@ -82,10 +82,10 @@ namespace fishingutils
     }
 
     /************************************************************************
-    *                                                                       *
-    *                            CATCH POOLS                                *
-    *                                                                       *
-    ************************************************************************/
+     *                                                                       *
+     *                            CATCH POOLS                                *
+     *                                                                       *
+     ************************************************************************/
     void ReduceFishPool(uint16 zoneId, uint8 areaId, uint16 fishId)
     {
         if (FishList[fishId] && FishList[fishId]->quest_only)
@@ -149,10 +149,10 @@ namespace fishingutils
     }
 
     /************************************************************************
-    *                                                                       *
-    *                             CALCULATIONS                              *
-    *                                                                       *
-    ************************************************************************/
+     *                                                                       *
+     *                             CALCULATIONS                              *
+     *                                                                       *
+     ************************************************************************/
     uint32 GetSundayMidnightTimestamp()
     {
         uint32 timestamp = (uint32)time(nullptr);
@@ -1039,10 +1039,10 @@ namespace fishingutils
     }
 
     /************************************************************************
-    *                                                                       *
-    *                              DATA ACCESS                              *
-    *                                                                       *
-    ************************************************************************/
+     *                                                                       *
+     *                              DATA ACCESS                              *
+     *                                                                       *
+     ************************************************************************/
     fishing_gear_t GetFishingGear(CCharEntity* PChar)
     {
         fishing_gear_t gear;
@@ -1060,6 +1060,11 @@ namespace fishingutils
         gear.waist           = (waist == FISHERS_ROPE) ? waist : 0;
         gear.legs            = (legs == FISHERMANS_HOSE || legs == ANGLERS_HOSE) ? legs : 0;
         gear.feet            = (feet == FISHERMANS_BOOTS || feet == ANGLERS_BOOTS) ? feet : 0;
+        gear.ring1           = 0;
+        gear.ring2           = 0;
+        gear.ranged          = 0;
+        gear.ammo            = 0;
+
         return gear;
     }
 
@@ -1170,12 +1175,12 @@ namespace fishingutils
         return nullptr;
     }
 
-    /************************************************************************
-    *                                                                       *
-    *                         FISHING AREAS                                 *
-    *                                                                       *
-    ************************************************************************/
-    #define MAX_POINTS 10000
+/************************************************************************
+ *                                                                       *
+ *                         FISHING AREAS                                 *
+ *                                                                       *
+ ************************************************************************/
+#define MAX_POINTS 10000
 
     // Given three colinear areavector_ts p, q, r, the function checks if
     // areavector_t q lies on line segment 'pr'
@@ -1246,7 +1251,7 @@ namespace fishingutils
             return false;
         }
 
-        areavector_t extreme = { MAX_POINTS, p.z };
+        areavector_t extreme = { MAX_POINTS, p.z, 0 }; // TODO: Verify this "extreme" variable, X = MAX_POINTS, Y = p.z and Z = 0.
         int          count = 0, i = 0;
         do
         {
@@ -1656,10 +1661,10 @@ namespace fishingutils
     }
 
     /************************************************************************
-    *                                                                       *
-    *                             MESSAGING                                 *
-    *                                                                       *
-    ************************************************************************/
+     *                                                                       *
+     *                             MESSAGING                                 *
+     *                                                                       *
+     ************************************************************************/
     void SendSenseMessage(CCharEntity* PChar, fishresponse_t* response)
     {
         uint16 MessageOffset = GetMessageOffset(PChar->getZone());
@@ -1734,10 +1739,10 @@ namespace fishingutils
     }
 
     /************************************************************************
-    *                                                                       *
-    *                               SKILL UP                                *
-    *                                                                       *
-    ************************************************************************/
+     *                                                                       *
+     *                               SKILL UP                                *
+     *                                                                       *
+     ************************************************************************/
 
     void FishingSkillup(CCharEntity* PChar, uint8 catchLevel, uint8 successType)
     {
@@ -1880,10 +1885,10 @@ namespace fishingutils
     }
 
     /************************************************************************
-    *                                                                       *
-    *                              FISHING                                  *
-    *                                                                       *
-    ************************************************************************/
+     *                                                                       *
+     *                              FISHING                                  *
+     *                                                                       *
+     ************************************************************************/
     void InterruptFishing(CCharEntity* PChar)
     {
         if (PChar->animation == ANIMATION_FISHING_FISH)
@@ -1906,6 +1911,14 @@ namespace fishingutils
 
     void StartFishing(CCharEntity* PChar)
     {
+        if (map_config.fishing_enable == 0)
+        {
+            ShowWarning("Fishing is currently disabled");
+            PChar->pushPacket(new CChatMessagePacket(PChar, CHAT_MESSAGE_TYPE::MESSAGE_SYSTEM_1, "Fishing is currently disabled"));
+            PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::FISHING));
+            return;
+        }
+
         PChar->StatusEffectContainer->DelStatusEffect(EFFECT_INVISIBLE);
         PChar->StatusEffectContainer->DelStatusEffect(EFFECT_HIDE);
         PChar->StatusEffectContainer->DelStatusEffect(EFFECT_CAMOUFLAGE);
@@ -2056,6 +2069,34 @@ namespace fishingutils
         fishresponse_t* response    = new fishresponse_t();
         response->angle             = 0;
         response->distance          = 2;
+        response->catchdifficulty   = 0;
+        response->catchsizeType     = 0;
+        response->legendary         = 0;
+        response->count             = 0;
+        response->stamina           = 0;
+        response->delay             = 0;
+        response->regen             = 0;
+        response->attackdmg         = 0;
+        response->heal              = 0;
+        response->timelimit         = 0;
+        response->sense             = 0;
+        response->hooksense         = 0;
+        response->special           = 0;
+        response->successtype       = 0;
+        response->length            = 0;
+        response->weight            = 0;
+        response->ranking           = 0;
+        response->epic              = 0;
+        response->lose.failReason   = 0;
+        response->lose.chance       = 0;
+        response->rbreak.failReason = 0;
+        response->rbreak.chance     = 0;
+        response->lsnap.failReason  = 0;
+        response->lsnap.chance      = 0;
+        response->nm                = 0;
+        response->nmFlags           = 0;
+        response->response          = 0;
+
         uint16 FishPoolWeight       = 0;
         uint16 ItemPoolWeight       = 0;
         uint16 MobPoolWeight        = 0;
@@ -2423,7 +2464,7 @@ namespace fishingutils
             response->heal      = CaculateHeal(FishSelection->legendary, FishSelection->difficulty, rod);
             response->timelimit = CalculateHookTime(PChar, FishSelection->legendary, FishSelection->legendary_flags, FishSelection->sizeType, rod, bait);
             response->sense     = CalculateFishSense(PChar, response, fishingSkill, (FISHINGCATCHTYPE)response->catchtype, FishSelection->sizeType, FishSelection->maxSkill,
-                                                 FishSelection->legendary, FishSelection->minLength, FishSelection->maxLength, FishSelection->ranking, rod);
+                                                     FishSelection->legendary, FishSelection->minLength, FishSelection->maxLength, FishSelection->ranking, rod);
             response->hooksense = FishSelection->sizeType == FISHINGSIZETYPE_SMALL ? FISHINGHOOKSENSETYPE_SMALL : FISHINGHOOKSENSETYPE_LARGE;
 
             if (response->catchsizeType == FISHINGSIZETYPE_LARGE)
@@ -2473,7 +2514,7 @@ namespace fishingutils
             response->heal            = CaculateHeal(ItemSelection->legendary, ItemSelection->difficulty, rod);
             response->timelimit       = CalculateHookTime(PChar, ItemSelection->legendary, ItemSelection->legendary_flags, ItemSelection->sizeType, rod, bait);
             response->sense           = CalculateFishSense(PChar, response, fishingSkill, (FISHINGCATCHTYPE)response->catchtype, ItemSelection->sizeType,
-                                                 ItemSelection->maxSkill, false, ItemSelection->minLength, ItemSelection->maxLength, ItemSelection->ranking, rod);
+                                                           ItemSelection->maxSkill, false, ItemSelection->minLength, ItemSelection->maxLength, ItemSelection->ranking, rod);
             response->hooksense       = ItemSelection->sizeType == FISHINGSIZETYPE_SMALL ? FISHINGHOOKSENSETYPE_SMALL : FISHINGHOOKSENSETYPE_LARGE;
             response->special         = CalculateLuckyTiming(PChar, fishingSkill, ItemSelection->maxSkill, ItemSelection->sizeType, rod, bait, false);
         }
@@ -2502,7 +2543,7 @@ namespace fishingutils
                 response->heal                = CaculateHeal(false, MobSelection->difficulty, rod);
                 response->timelimit           = CalculateHookTime(PChar, 0, 0, response->catchsizeType, rod, bait);
                 response->sense               = CalculateFishSense(PChar, response, fishingSkill, FISHINGCATCHTYPE_MOB, FISHINGSIZETYPE_LARGE, MobSelection->level, false,
-                                                     MobSelection->minLength, MobSelection->maxLength, MobSelection->ranking, rod);
+                                                                   MobSelection->minLength, MobSelection->maxLength, MobSelection->ranking, rod);
                 response->hooksense           = FISHINGHOOKSENSETYPE_LARGE;
                 response->special             = CalculateLuckyTiming(PChar, fishingSkill, MobSelection->level, FISHINGSIZETYPE_LARGE, rod, bait, false);
                 fishmob_modifiers_t modifiers = CalculateMobModifiers(MobSelection);
@@ -2586,6 +2627,14 @@ namespace fishingutils
 
     void FishingAction(CCharEntity* PChar, FISHACTION action, uint16 stamina, uint32 special)
     {
+        if (map_config.fishing_enable == 0)
+        {
+            ShowWarning("Fishing is currently disabled, but somehow we have someone commencing a fishing action");
+            // Unlikely anyone can get here legit, since we already disabled "startFishing"
+            PChar->animation = ANIMATION_FISHING_STOP;
+            return;
+        }
+
         uint16 MessageOffset = GetMessageOffset(PChar->getZone());
         uint32 vanaTime      = CVanaTime::getInstance()->getVanaTime();
 
@@ -2677,8 +2726,8 @@ namespace fishingutils
                     }
                     else
                     {
-                        rod_t*           FishingRod   = FishingRods[Rod->getID()];
-                        catchresponse_t* response     = ReelCheck(PChar, PChar->hookedFish, FishingRod);
+                        rod_t*           FishingRod = FishingRods[Rod->getID()];
+                        catchresponse_t* response   = ReelCheck(PChar, PChar->hookedFish, FishingRod);
 
                         if (response->fishingToken != PChar->fishingToken || PChar->hookedFish->special != special)
                         {
@@ -2819,15 +2868,18 @@ namespace fishingutils
     }
 
     /************************************************************************
-    *                                                                       *
-    *                            INITIALIZATION                             *
-    *                                                                       *
-    ************************************************************************/
+     *                                                                       *
+     *                            INITIALIZATION                             *
+     *                                                                       *
+     ************************************************************************/
     void LoadFishingMessages()
     {
-        zoneutils::ForEachZone([](CZone* PZone) {
+        // clang-format off
+        zoneutils::ForEachZone([](CZone* PZone)
+        {
             MessageOffset[PZone->GetID()] = luautils::GetTextIDVariable(PZone->GetID(), "FISHING_MESSAGE_OFFSET");
         });
+        // clang-format on
     }
 
     void LoadFishingAreas()

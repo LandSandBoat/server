@@ -72,7 +72,7 @@ end
 
 -- Given the raw ratio value (atk/def) and levels, returns the cRatio (min then max)
 local function BluecRatio(ratio, atk_lvl, def_lvl)
-    -- Level penalty...
+    -- Level penalty
     local levelcor = 0
     if atk_lvl < def_lvl then
         levelcor = 0.05 * (def_lvl - atk_lvl)
@@ -231,18 +231,12 @@ function BluePhysicalSpell(caster, target, spell, params)
         D = params.duppercap
     end
 
-    -- print("D val is ".. D)
-
     local fStr = BluefSTR(caster:getStat(xi.mod.STR) - target:getStat(xi.mod.VIT))
     if fStr > 22 then
         fStr = 22 -- TODO: Smite of Rage doesn't have this cap applied.
     end
 
-    -- print("fStr val is ".. fStr)
-
     local wsc = BlueGetWsc(caster, params)
-
-    -- print("wsc val is ".. wsc)
 
     local multiplier = params.multiplier
 
@@ -261,20 +255,15 @@ function BluePhysicalSpell(caster, target, spell, params)
     -- TODO: Modify multiplier to account for family bonus/penalty
     local finalD = math.floor(D + fStr + wsc) * multiplier
 
-    -- print("Final D is ".. finalD)
-
     -----------------------------------
     -- Get the possible pDIF range and hit rate
     -----------------------------------
     if params.offcratiomod == nil then -- default to attack. Pretty much every physical spell will use this, Cannonball being the exception.
         params.offcratiomod = caster:getStat(xi.mod.ATT)
     end
-    -- print(params.offcratiomod)
+
     local cratio = BluecRatio(params.offcratiomod / target:getStat(xi.mod.DEF), caster:getMainLvl(), target:getMainLvl())
     local hitrate = BlueGetHitRate(caster, target, true)
-
-    -- print("Hit rate "..hitrate)
-    -- print("pdifmin "..cratio[1].." pdifmax "..cratio[2])
 
     -----------------------------------
     -- Perform the attacks
@@ -309,8 +298,6 @@ function BluePhysicalSpell(caster, target, spell, params)
 
         hitsdone = hitsdone + 1
     end
-
-    -- print("Hits landed "..hitslanded.."/"..hitsdone.." for total damage: "..finaldmg)
 
     return finaldmg
 end
@@ -383,18 +370,35 @@ function BlueFinalAdjustments(caster, target, spell, dmg, params)
 
     dmg = dmg * xi.settings.BLUE_POWER
 
-    dmg = dmg - target:getMod(xi.mod.PHALANX)
-    if dmg < 0 then
-        dmg = 0
-    end
-
     local attackType = params.attackType or xi.attackType.NONE
     local damageType = params.damageType or xi.damageType.NONE
 
-    -- handle One For All
-    if damageType == xi.damageType.MAGICAL then
+    if attackType == xi.attackType.NONE then
+        printf("BlueFinalAdjustments: spell id %d has attackType set to xi.attackType.NONE", spell:getID())
+    end
+
+    if damageType == xi.damageType.NONE then
+        printf("BlueFinalAdjustments: spell id %d has damageType set to xi.damageType.NONE", spell:getID())
+    end
+
+    -- handle One For All, Liement
+    if attackType == xi.attackType.MAGICAL then
+
+        local targetMagicDamageAdjustment = xi.spells.damage.calculateTMDA(caster, target, damageType) -- Apply checks for Liement, MDT/MDTII/DT
+        dmg = math.floor(dmg * targetMagicDamageAdjustment)
+        if dmg < 0 then
+            target:takeSpellDamage(caster, spell, dmg, attackType, damageType)
+            -- TODO: verify Afflatus/enmity from absorb?
+            return dmg
+        end
         dmg = utils.oneforall(target, dmg)
     end
+
+    -- Handle Phalanx
+    if dmg > 0 then
+        dmg = utils.clamp(dmg - target:getMod(xi.mod.PHALANX), 0, 99999)
+    end
+
     -- handling stoneskin
     dmg = utils.stoneskin(target, dmg)
 
@@ -423,7 +427,6 @@ function getBlueEffectDuration(caster, resist, effect)
         duration = math.random(0, 5) + resist * 5
     elseif effect == xi.effect.STUN then
         duration = math.random(2, 3) + resist
-        -- printf("Duration of stun is %i", duration)
     elseif effect == xi.effect.WEIGHT then
         duration = math.random(20, 24) + resist * 9 -- 20-24
     elseif effect == xi.effect.PARALYSIS then

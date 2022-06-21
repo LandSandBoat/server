@@ -837,8 +837,9 @@ xi.effect =
     MEDITATE                 = 801, -- Dummy effect for SAM Meditate JA
     ELEMENTALRES_DOWN        = 802, -- Elemental resistance down
     FULL_SPEED_AHEAD         = 803, -- Helper for quest: Full Speed Ahead!
-    -- PLACEHOLDER           = 804, -- Description
-    -- 804-1022
+    HYSTERIA                 = 804, -- Used for Hysteroanima to stop after readying a weaponskill with no msg.
+    -- PLACEHOLDER           = 805, -- Description
+    -- 805-1022
     -- PLACEHOLDER             = 1023 -- The client dat file seems to have only this many "slots", results of exceeding that are untested.
 }
 
@@ -1654,6 +1655,7 @@ xi.mod =
     PENGUIN_RING_EFFECT   = 152, -- +2 on fishing arrow delay / fish movement for mini - game
     ALBATROSS_RING_EFFECT = 153, -- adds 30 seconds to mini - game time
     PELICAN_RING_EFFECT   = 154, -- adds extra skillup roll for fishing
+    FISHING_SKILL_GAIN    = 155, -- food increase for fishing skill ups
 
     MAIN_DMG_RANK                = 377, -- adds weapon rank to main weapon http://wiki.bluegartr.com/bg/Weapon_Rank
     SUB_DMG_RANK                 = 378, -- adds weapon rank to sub weapon
@@ -1751,8 +1753,9 @@ xi.latent =
     WEAPON_DRAWN_MP_OVER     = 56, -- while weapon is drawn and mp greater than # - PARAM: MP #
     ELEVEN_ROLL_ACTIVE       = 57, -- corsair roll of 11 active
     IN_ASSAULT               = 58, -- is in an Instance battle in a TOAU zone
-    VS_ECOSYSTEM             = 59, -- Vs. Specific Ecosystem ID (e.g. Vs. Birds: Accuracy+3)
-    VS_FAMILY                = 60, -- Vs. Specific Family ID (e.g. Vs. Apkallu: Accuracy+3)
+    VS_ECOSYSTEM             = 59, -- Vs. Specific Ecosystem ID (e.g. Vs. Plantoid: Accuracy+3)
+    VS_FAMILY                = 60, -- Vs. Specific Family ID (e.g. Vs. Korrigan: Accuracy+3)
+    VS_SUPERFAMILY           = 61, -- Vs. Specific Family ID (e.g. Vs. Mandragora: Accuracy+3)
 }
 
 -----------------------------------

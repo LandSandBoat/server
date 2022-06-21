@@ -20,6 +20,7 @@ zones[xi.zone.MARJAMI_RAVINE] =
         LOGIN_NUMBER               = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         BAYLD_OBTAINED             = 7007, -- You have obtained <number> bayld!
         YOU_HAVE_LEARNED           = 7015, -- You have learned <keyitem>!
+        WAYPOINT_ATTUNED           = 7694, -- Your <keyitem> has been attuned to a geomagnetic fount[/ at the frontier station/ at Frontier Bivouac #1/ at Frontier Bivouac #2/ at Frontier Bivouac #3/ at Frontier Bivouac #4]!
         EXPENDED_KINETIC_UNITS     = 7705, -- You have expended <number> kinetic unit[/s] and will be transported to another locale.
         INSUFFICIENT_UNITS         = 7706, -- Your stock of kinetic units is insufficient.
         REACHED_KINETIC_UNIT_LIMIT = 7707, -- You have reached your limit of kinetic units and cannot charge your artifact any further.

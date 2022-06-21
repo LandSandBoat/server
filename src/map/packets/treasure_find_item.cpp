@@ -19,9 +19,9 @@
 ===========================================================================
 */
 
-#include "common/timer.h"
 #include "../entities/baseentity.h"
 #include "../treasure_pool.h"
+#include "common/timer.h"
 
 #include "treasure_find_item.h"
 

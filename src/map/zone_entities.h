@@ -31,9 +31,10 @@ public:
 
     CCharEntity* GetCharByName(int8* name); // finds the player if exists in zone
     CCharEntity* GetCharByID(uint32 id);
+    CBaseEntity* GetEntity(uint16 targid, uint8 filter = -1); // получаем указатель на любую сущность в зоне
+
     void UpdateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask);
     void UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask, bool alwaysInclude = false);
-    CBaseEntity* GetEntity(uint16 targid, uint8 filter = -1); // получаем указатель на любую сущность в зоне
 
     void SpawnPCs(CCharEntity* PChar);  // отображаем персонажей в зоне
     void SpawnMOBs(CCharEntity* PChar); // отображаем MOBs в зоне
@@ -96,8 +97,8 @@ private:
     CBaseEntity* m_Transport; // указатель на транспорт в зоне
     time_point   m_EffectCheckTime{ server_clock::now() };
 
-    time_point computeTime { server_clock::now() };
-    uint16 lastCharComputeTargId;
+    time_point computeTime{ server_clock::now() };
+    uint16     lastCharComputeTargId;
 };
 
 #endif

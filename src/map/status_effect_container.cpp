@@ -104,15 +104,22 @@ namespace effects
 
         // Order in which the status effect should be displayed for the player
         uint16 SortKey;
+
+        EffectParams_t()
+        : NegativeId((EFFECT)0)
+        , Overwrite(EFFECTOVERWRITE::EQUAL_HIGHER)
+        , BlockId((EFFECT)0)
+        , RemoveId((EFFECT)0)
+        {
+            Flag        = 0;
+            Type        = 0;
+            Element     = 0;
+            MinDuration = 0;
+            SortKey     = 0;
+        }
     };
 
     std::array<EffectParams_t, MAX_EFFECTID> EffectsParams;
-
-    /************************************************************************
-     *                                                                       *
-     *                                                                       *
-     *                                                                       *
-     ************************************************************************/
 
     void LoadEffectsParameters()
     {
@@ -345,6 +352,12 @@ bool CStatusEffectContainer::CanGainStatusEffect(CStatusEffect* PStatusEffect)
             break;
         case EFFECT_REQUIEM:
             if (m_POwner->hasImmunity(IMMUNITY_REQUIEM))
+            {
+                return false;
+            }
+            break;
+        case EFFECT_TERROR:
+            if (m_POwner->hasImmunity(IMMUNITY_TERROR))
             {
                 return false;
             }
@@ -983,9 +996,12 @@ bool CStatusEffectContainer::ApplyBardEffect(CStatusEffect* PStatusEffect, uint8
 
 bool CStatusEffectContainer::ApplyCorsairEffect(CStatusEffect* PStatusEffect, uint8 maxRolls, uint8 bustDuration)
 {
-    // break if not a COR roll.
-    XI_DEBUG_BREAK_IF(!((PStatusEffect->GetStatusID() >= EFFECT_FIGHTERS_ROLL && PStatusEffect->GetStatusID() <= EFFECT_NATURALISTS_ROLL) ||
-                         (PStatusEffect->GetStatusID() == EFFECT_RUNEISTS_ROLL)));
+    // Don't process if not a COR roll.
+    if (!((PStatusEffect->GetStatusID() >= EFFECT_FIGHTERS_ROLL && PStatusEffect->GetStatusID() <= EFFECT_NATURALISTS_ROLL) ||
+                        (PStatusEffect->GetStatusID() == EFFECT_RUNEISTS_ROLL)))
+    {
+        return false;
+    }
 
     // if all match tier/id/effect then overwrite
 
@@ -1145,7 +1161,7 @@ uint8 CStatusEffectContainer::GetActiveRuneCount()
 
 EFFECT CStatusEffectContainer::GetHighestRuneEffect()
 {
-    std::unordered_map<EFFECT,uint8> runeEffects;
+    std::unordered_map<EFFECT, uint8> runeEffects;
 
     for (CStatusEffect* PStatusEffect : m_StatusEffectSet)
     {
@@ -1162,14 +1178,14 @@ EFFECT CStatusEffectContainer::GetHighestRuneEffect()
         }
     }
 
-    EFFECT highestRune = EFFECT_NONE;
-    int highestRuneValue = 0;
+    EFFECT highestRune      = EFFECT_NONE;
+    int    highestRuneValue = 0;
 
     for (auto iter = runeEffects.begin(); iter != runeEffects.end(); ++iter)
     {
         if (highestRune == EFFECT_NONE || iter->second > highestRuneValue)
         {
-            highestRune = iter->first;
+            highestRune      = iter->first;
             highestRuneValue = iter->second;
         }
     }
@@ -1411,7 +1427,6 @@ void CStatusEffectContainer::RemoveOldestStatusEffectInIDRange(EFFECT start, EFF
     {
         RemoveStatusEffect(oldest, true);
     }
-
 }
 
 void CStatusEffectContainer::RemoveNewestStatusEffectInIDRange(EFFECT start, EFFECT end)
@@ -1664,8 +1679,8 @@ void CStatusEffectContainer::SaveStatusEffects(bool logout)
                 }
             }
             sql->Query(Query, m_POwner->id, PStatusEffect->GetStatusID(), PStatusEffect->GetIcon(), PStatusEffect->GetPower(), tick, duration,
-                      PStatusEffect->GetSubID(), PStatusEffect->GetSubPower(), PStatusEffect->GetTier(), PStatusEffect->GetFlag(),
-                      std::chrono::duration_cast<std::chrono::seconds>(PStatusEffect->GetStartTime().time_since_epoch()).count());
+                       PStatusEffect->GetSubID(), PStatusEffect->GetSubPower(), PStatusEffect->GetTier(), PStatusEffect->GetFlag(),
+                       std::chrono::duration_cast<std::chrono::seconds>(PStatusEffect->GetStartTime().time_since_epoch()).count());
         }
     }
     DeleteStatusEffects();
@@ -1715,7 +1730,9 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
     {
         if (auraTarget == AURA_TARGET::ALLIES)
         {
-            PEntity->ForParty([&](CBattleEntity* PMember) {
+            // clang-format off
+            PEntity->ForParty([&](CBattleEntity* PMember)
+            {
                 if (PMember != nullptr && PEntity->loc.zone->GetID() == PMember->loc.zone->GetID() && distance(m_POwner->loc.p, PMember->loc.p) <= aura_range &&
                     !PMember->isDead())
                 {
@@ -1728,19 +1745,20 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
                     PMember->StatusEffectContainer->AddStatusEffect(PEffect, true);
                 }
             });
+            // clang-format on
         }
         else if (auraTarget == AURA_TARGET::ENEMIES)
         {
             for (CBattleEntity* PTarget : *PEntity->PNotorietyContainer)
-            {   // Check for trust here so negitive effects wont affect trust
+            { // Check for trust here so negitive effects wont affect trust
                 if (PTarget != nullptr && PTarget->objtype != TYPE_TRUST && PEntity->loc.zone->GetID() == PTarget->loc.zone->GetID() && distance(m_POwner->loc.p, PTarget->loc.p) <= aura_range &&
                     !PTarget->isDead())
                 {
-                    CStatusEffect* PEffect = new CStatusEffect((EFFECT)PStatusEffect->GetSubID(),    // Effect ID
-                                                               PStatusEffect->GetSubID(),            // Effect Icon (Associated with ID)
-                                                               PStatusEffect->GetSubPower(),         // Power
-                                                               3,                                    // Tick
-                                                               4);                                   // Duration
+                    CStatusEffect* PEffect = new CStatusEffect((EFFECT)PStatusEffect->GetSubID(), // Effect ID
+                                                               PStatusEffect->GetSubID(),         // Effect Icon (Associated with ID)
+                                                               PStatusEffect->GetSubPower(),      // Power
+                                                               3,                                 // Tick
+                                                               4);                                // Duration
                     PEffect->SetFlag(EFFECTFLAG_NO_LOSS_MESSAGE);
                     PTarget->StatusEffectContainer->AddStatusEffect(PEffect, true);
                 }
@@ -1751,7 +1769,9 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
     {
         if (auraTarget == AURA_TARGET::ALLIES)
         {
-            PEntity->ForParty([&](CBattleEntity* PMember) {
+            // clang-format off
+            PEntity->ForParty([&](CBattleEntity* PMember)
+            {
                 if (PMember != nullptr && PEntity->loc.zone->GetID() == PMember->loc.zone->GetID() && distance(m_POwner->loc.p, PMember->loc.p) <= aura_range &&
                     !PMember->isDead())
                 {
@@ -1764,10 +1784,11 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
                     PMember->StatusEffectContainer->AddStatusEffect(PEffect, true);
                 }
             });
+             // clang-format on
         }
         else if (auraTarget == AURA_TARGET::ENEMIES)
         {
-            auto* PMob = static_cast<CMobEntity*>(PEntity);
+            auto* PMob       = static_cast<CMobEntity*>(PEntity);
             auto* enmityList = PMob->PEnmityContainer->GetEnmityList();
             for (auto& enmityPair : *enmityList)
             {
@@ -1775,11 +1796,11 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
                 if (PTarget != nullptr && PEntity->loc.zone->GetID() == PTarget->loc.zone->GetID() && distance(m_POwner->loc.p, PTarget->loc.p) <= aura_range &&
                     !PTarget->isDead())
                 {
-                    CStatusEffect* PEffect = new CStatusEffect((EFFECT)PStatusEffect->GetSubID(),    // Effect ID
-                                                               PStatusEffect->GetSubID(),            // Effect Icon (Associated with ID)
-                                                               PStatusEffect->GetSubPower(),         // Power
-                                                               3,                                    // Tick
-                                                               4);                                   // Duration
+                    CStatusEffect* PEffect = new CStatusEffect((EFFECT)PStatusEffect->GetSubID(), // Effect ID
+                                                               PStatusEffect->GetSubID(),         // Effect Icon (Associated with ID)
+                                                               PStatusEffect->GetSubPower(),      // Power
+                                                               3,                                 // Tick
+                                                               4);                                // Duration
                     PEffect->SetFlag(EFFECTFLAG_NO_LOSS_MESSAGE);
                     PTarget->StatusEffectContainer->AddStatusEffect(PEffect, true);
                 }
@@ -1797,7 +1818,12 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
 void CStatusEffectContainer::TickEffects(time_point tick)
 {
     TracyZoneScoped;
-    XI_DEBUG_BREAK_IF(m_POwner == nullptr);
+
+    if (m_POwner == nullptr)
+    {
+        ShowWarning("CStatusEffectContainer::TickRegen() - m_POwner is null.");
+        return;
+    }
 
     if (!m_POwner->isDead())
     {
@@ -1829,7 +1855,12 @@ void CStatusEffectContainer::TickEffects(time_point tick)
 void CStatusEffectContainer::TickRegen(time_point tick)
 {
     TracyZoneScoped;
-    XI_DEBUG_BREAK_IF(m_POwner == nullptr);
+
+    if (m_POwner == nullptr)
+    {
+        ShowWarning("CStatusEffectContainer::TickRegen() - m_POwner is null.");
+        return;
+    }
 
     if (!m_POwner->isDead())
     {

@@ -25,21 +25,14 @@ end
 ability_object.onUseAbility = function(player, target, ability)
     -- Plus 5 percent mp recovers per extra devotion merit
     local meritBonus = player:getMerit(xi.merit.DEVOTION) - 5
-    -- printf("Devotion Merit Bonus: %d", meritBonus)
+    local mpPercent  = (25 + meritBonus) / 100
+    local damageHP   = math.floor(player:getHP() * 0.25)
 
-    local mpPercent = (25 + meritBonus) / 100
-    -- printf("Devotion MP Percent: %f", mpPercent)
-
-    local damageHP = math.floor(player:getHP() * 0.25)
-    -- printf("Devotion HP Damage: %d", damageHP)
-
-    -- If stoneskin is present, it should absorb damage...
+    -- If stoneskin is present, it should absorb damage
     damageHP = utils.stoneskin(player, damageHP)
-    -- printf("Devotion HP Damage (after Stoneskin): %d", damageHP)
 
     local healMP = player:getHP() * mpPercent
     healMP = utils.clamp(healMP, 0, target:getMaxMP() - target:getMP())
-    -- printf("Devotion MP Healed: %d", healMP)
 
     damageHP = utils.stoneskin(player, damageHP)
     player:delHP(damageHP)

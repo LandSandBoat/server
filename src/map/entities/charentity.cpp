@@ -98,6 +98,7 @@ CCharEntity::CCharEntity()
     gotMessage = false;
     m_Locked   = false;
 
+    accid = 0;
     m_GMlevel    = 0;
     m_isGMHidden = false;
 
@@ -127,15 +128,9 @@ CCharEntity::CCharEntity()
     m_Wardrobe8  = std::make_unique<CItemContainer>(LOC_WARDROBE8);
     m_RecycleBin = std::make_unique<CItemContainer>(LOC_RECYCLEBIN);
 
-    memset(&jobs, 0, sizeof(jobs));
     keys = {};
     memset(&equip, 0, sizeof(equip));
     memset(&equipLoc, 0, sizeof(equipLoc));
-    memset(&RealSkills, 0, sizeof(RealSkills));
-    memset(&expChain, 0, sizeof(expChain));
-    memset(&capacityChain, 0, sizeof(capacityChain));
-    memset(&nameflags, 0, sizeof(nameflags));
-    memset(&menuConfigFlags, 0, sizeof(menuConfigFlags));
 
     m_SpellList = {};
     memset(&m_LearnedAbilities, 0, sizeof(m_LearnedAbilities));
@@ -151,14 +146,7 @@ CCharEntity::CCharEntity()
 
     memset(&m_questLog, 0, sizeof(m_questLog));
     memset(&m_missionLog, 0, sizeof(m_missionLog));
-    memset(&m_assaultLog, 0, sizeof(m_assaultLog));
-    memset(&m_campaignLog, 0, sizeof(m_campaignLog));
-    memset(&m_eminenceLog, 0, sizeof(m_eminenceLog));
     m_eminenceCache.activemap.reset();
-
-    memset(&teleport, 0, sizeof(teleport));
-    memset(&teleport.homepoint.menu, -1, sizeof(teleport.homepoint.menu));
-    memset(&teleport.survival.menu, -1, sizeof(teleport.survival.menu));
 
     for (uint8 i = 0; i <= 3; ++i)
     {
@@ -197,10 +185,14 @@ CCharEntity::CCharEntity()
     m_StatsDebilitation = 0;
     m_EquipSwap         = false;
 
-    MeritMode = false;
+    MeritMode    = false;
+    PMeritPoints = nullptr;
+    PJobPoints   = nullptr;
 
-    m_isStyleLocked     = false;
-    m_isBlockingAid     = false;
+    PGuildShop   = nullptr;
+
+    m_isStyleLocked = false;
+    m_isBlockingAid = false;
 
     BazaarID.clean();
     TradePending.clean();
@@ -243,6 +235,18 @@ CCharEntity::CCharEntity()
     nextFishTime = 0;
     fishingToken = 0;
     hookDelay    = 13;
+
+    profile     = {};
+    search      = {};
+    std::memset(&styleItems, 0, sizeof(styleItems));
+
+    m_StartActionPos   = {};
+    m_ActionOffsetPos  = {};
+    m_previousLocation = {};
+
+    m_mentorUnlocked   = false;
+    m_jobMasterDisplay = false;
+    m_EffectsChanged   = false;
 }
 
 CCharEntity::~CCharEntity()
@@ -262,9 +266,10 @@ CCharEntity::~CCharEntity()
     delete CraftContainer;
     delete PMeritPoints;
     delete PJobPoints;
-
+    PGuildShop = nullptr;
     delete eventPreparation;
     delete currentEvent;
+
     while (!eventQueue.empty())
     {
         auto head = eventQueue.front();
@@ -364,17 +369,17 @@ CBasicPacket* CCharEntity::popPacket()
     // Clean up pending maps
     switch (PPacket->getType())
     {
-    case 0x0D: // Char update
-        PendingCharPackets.erase(PPacket->ref<uint32>(0x04));
-        break;
-    case 0x0E: // Entity update
-        PendingEntityPackets.erase(PPacket->ref<uint32>(0x04));
-        break;
-    case 0x5B: // Position update
-        PendingPositionPacket = nullptr;
-        break;
-    default:
-        break;
+        case 0x0D: // Char update
+            PendingCharPackets.erase(PPacket->ref<uint32>(0x04));
+            break;
+        case 0x0E: // Entity update
+            PendingEntityPackets.erase(PPacket->ref<uint32>(0x04));
+            break;
+        case 0x5B: // Position update
+            PendingPositionPacket = nullptr;
+            break;
+        default:
+            break;
     }
 
     PacketList.pop_front();
@@ -612,7 +617,8 @@ void CCharEntity::RemoveTrust(CTrustEntity* PTrust)
         return;
     }
 
-    auto trustIt = std::find_if(PTrusts.begin(), PTrusts.end(), [PTrust](auto trust) { return PTrust == trust; });
+    auto trustIt = std::find_if(PTrusts.begin(), PTrusts.end(), [PTrust](auto trust)
+                                { return PTrust == trust; });
     if (trustIt != PTrusts.end())
     {
         if (PTrust->animation == ANIMATION_DESPAWN)
@@ -763,6 +769,10 @@ bool CCharEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
 
     if (targetFlags & TARGET_PLAYER_PARTY_ENTRUST)
     {
+        if (PInitiator->objtype == TYPE_TRUST)
+        {
+            return true;
+        }
         // Can cast on self and others in party but potency gets no bonuses from equipment mods if entrust is active
         if (!PInitiator->StatusEffectContainer->HasStatusEffect(EFFECT_ENTRUST) && PInitiator == this)
         {
@@ -954,6 +964,8 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
     PLatentEffectContainer->CheckLatentsTP();
 
     SLOTTYPE damslot = SLOT_MAIN;
+    bool isRangedWS = (PWeaponSkill->getID() >= 192 && PWeaponSkill->getID() <= 218);
+
     if (distance(loc.p, PBattleTarget->loc.p) - PBattleTarget->m_ModelRadius <= PWeaponSkill->getRange())
     {
         if (PWeaponSkill->getID() >= 192 && PWeaponSkill->getID() <= 221)
@@ -1008,7 +1020,7 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
 
             if (primary)
             {
-                if (PWeaponSkill->getID() >= 192 && PWeaponSkill->getID() <= 218)
+                if (isRangedWS)
                 {
                     uint16 recycleChance = getMod(Mod::RECYCLE) + PMeritPoints->GetMeritValue(MERIT_RECYCLE, this) + this->PJobPoints->GetJobPointValue(JP_AMMO_CONSUMPTION);
 
@@ -1046,7 +1058,7 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
                                 actionTarget.addEffectMessage = 287 + effect;
                             }
                             actionTarget.additionalEffect = effect;
-                             // Despite appearances, ws_points_skillchain is not a multiplier it is just an amount "per element"
+                            // Despite appearances, ws_points_skillchain is not a multiplier it is just an amount "per element"
                             if (effect >= 7 && effect < 15)
                             {
                                 wspoints += (1 * map_config.ws_points_skillchain); // 1 element
@@ -1073,7 +1085,23 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
     }
     else
     {
-        loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(this, this, 0, 0, MSGBASIC_TOO_FAR_AWAY));
+        actionList_t& actionList     = action.getNewActionList();
+        actionList.ActionTargetID    = PBattleTarget->id;
+        action.actiontype            = ACTION_MAGIC_FINISH; // all "Too Far" messages use cat 4
+
+        actionTarget_t& actionTarget = actionList.getNewActionTarget();
+        actionTarget.animation       = 0x1FC; // Seems hardcoded, two bits away from 0x1FF
+        actionTarget.messageID       = MSGBASIC_TOO_FAR_AWAY;
+
+        // While it doesn't seem that speceffect is actually used at all in this "do nothing" animation, this is here for accuracy.
+        if (isRangedWS) // Ranged WS seem to stay 0 on Reaction
+        {
+            actionTarget.speceffect = SPECEFFECT::NONE;
+        }
+        else // Always 2 observed on various melee weapons
+        {
+            actionTarget.speceffect = SPECEFFECT::BLOOD;
+        }
     }
 }
 
@@ -1272,7 +1300,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             }
         }
         //#TODO: make this generic enough to not require an if
-        else if (PAbility->isAoE() && this->PParty != nullptr)
+        else if ( (PAbility->isAoE() || (PAbility->getID() == ABILITY_LIEMENT && getMod(Mod::LIEMENT_EXTENDS_TO_AREA) > 0)) && this->PParty != nullptr)
         {
             PAI->TargetFind->reset();
 
@@ -1570,7 +1598,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
         // shadows took damage
         actionTarget.messageID = MSGBASIC_SHADOW_ABSORB;
         actionTarget.reaction  = REACTION::EVADE;
-        actionTarget.param = shadowsTaken;
+        actionTarget.param     = shadowsTaken;
     }
 
     if (actionTarget.speceffect == SPECEFFECT::HIT && actionTarget.param > 0)
@@ -1604,7 +1632,12 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
 bool CCharEntity::IsMobOwner(CBattleEntity* PBattleTarget)
 {
     TracyZoneScoped;
-    XI_DEBUG_BREAK_IF(PBattleTarget == nullptr);
+
+    if (PBattleTarget == nullptr)
+    {
+        ShowWarning("CCharEntity::IsMobOwner() - PBattleTarget was null.")
+        return false;
+    }
 
     if (PBattleTarget->m_OwnerID.id == 0 || PBattleTarget->m_OwnerID.id == this->id || PBattleTarget->objtype == TYPE_PC)
     {
@@ -1613,12 +1646,15 @@ bool CCharEntity::IsMobOwner(CBattleEntity* PBattleTarget)
 
     bool found = false;
 
-    ForAlliance([&PBattleTarget, &found](CBattleEntity* PEntity) {
+    // clang-format off
+    ForAlliance([&PBattleTarget, &found](CBattleEntity* PEntity)
+    {
         if (PEntity->id == PBattleTarget->m_OwnerID.id)
         {
             found = true;
         }
     });
+    // clang-format on
 
     return found;
 }
@@ -1750,15 +1786,18 @@ void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
     auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
     auto* PItem   = state.GetItem();
 
-    //#TODO: I'm sure this is supposed to be in the action packet... (animation, message)
+    // TODO: I'm sure this is supposed to be in the action packet... (animation, message)
     if (PItem->getAoE())
     {
-        PTarget->ForParty([this, PItem, PTarget](CBattleEntity* PMember) {
+        // clang-format off
+        PTarget->ForParty([this, PItem, PTarget](CBattleEntity* PMember)
+        {
             if (!PMember->isDead() && distance(PTarget->loc.p, PMember->loc.p) <= 10)
             {
                 luautils::OnItemUse(this, PMember, PItem);
             }
         });
+        // clang-format on
     }
     else
     {
@@ -2347,7 +2386,6 @@ bool CCharEntity::isNpcLocked()
 {
     return isInEvent() || inSequence;
 }
-
 
 void CCharEntity::endCurrentEvent()
 {

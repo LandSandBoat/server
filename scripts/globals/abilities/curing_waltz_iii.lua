@@ -66,7 +66,7 @@ ability_object.onUseAbility = function(player, target, ability)
 
     --Reducing TP.
 
-    --Applying server mods....
+    --Applying server mods
     cure = cure * xi.settings.CURE_POWER
 
     --Cap the final amount to max HP.
