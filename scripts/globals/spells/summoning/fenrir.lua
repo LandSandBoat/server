@@ -7,6 +7,7 @@ require("scripts/globals/bcnm")
 require("scripts/globals/pets")
 require("scripts/globals/msg")
 require("scripts/globals/status")
+require("scripts/globals/avatars_favor")
 -----------------------------------
 local spell_object = {}
 
@@ -23,6 +24,13 @@ end
 
 spell_object.onSpellCast = function(caster, target, spell)
     caster:spawnPet(xi.pet.id.FENRIR)
+
+    if caster:hasStatusEffect(xi.effect.AVATAR_S_FAVOR) then
+        local effect = caster:getStatusEffect(xi.effect.AVATARS_FAVOR)
+        effect:setPower(1) -- resummon resets effect
+        xi.avatarsFavor.applyAvatarsFavorAuraToPet(caster, effect)
+        xi.avatarsFavor.applyAvatarsFavorDebuffsToPet(caster)
+    end
 
     return 0
 end

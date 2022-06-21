@@ -1,20 +1,20 @@
------------------------------------
--- xi.effect.FENRIRS_FAVOR
------------------------------------
+
+---------------------------------------------
+-- Cait Sith's Favor - Effect
+---------------------------------------------
 require("scripts/globals/status")
 ---------------------------------------------
-
 local effect_object = {}
 
 effect_object.onEffectGain = function(target, effect)
-    target:addMod(xi.mod.MEVA, effect:getPower())
+    target:addMod(xi.mod.MDEF, effect:getPower())
 end
 
 effect_object.onEffectTick = function(target, effect)
 end
 
 effect_object.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.MEVA, effect:getPower())
+    target:delMod(xi.mod.MDEF, effect:getPower())
 end
 
 return effect_object
