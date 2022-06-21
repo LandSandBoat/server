@@ -271,7 +271,6 @@ quest.sections =
                                 return quest:messageSpecial(zones[player:getZoneID()].text.QM_TEXT)
                             end
                         end
-                        
                         return quest:progressEvent(5)
                     end
                 end,
