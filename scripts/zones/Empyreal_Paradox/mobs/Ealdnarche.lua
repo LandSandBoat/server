@@ -29,7 +29,6 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    print(mob:getTP())
     if os.time() > mob:getLocalVar("[EALD]teleportTime") then
         mob:setLocalVar("[EALD]TP", mob:getTP())
         mob:useMobAbility(989) -- Warp Out
