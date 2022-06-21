@@ -4773,7 +4773,13 @@ namespace luautils
 
                     if (cleanedSelection.compare(name) == 0)
                     {
-                        func(CLuaBaseEntity(PChar));
+                        auto result = func(CLuaBaseEntity(PChar));
+                        if (!result.valid())
+                        {
+                            sol::error err = result;
+                            ShowError("Menu error: %s", err.what());
+                        }
+                        break;
                     }
                 }
             }
