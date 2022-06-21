@@ -488,8 +488,14 @@ namespace luautils
         TracyZoneScoped;
         TracyZoneString(filename);
 
+        auto path = std::filesystem::path(filename);
+
+        if (path.extension() != "" || path.empty())
+        {
+            return;
+        }
+
         // Handle filename -> path conversion
-        std::filesystem::path    path(filename);
         std::vector<std::string> parts;
         for (auto part : path)
         {
