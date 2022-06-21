@@ -1344,8 +1344,8 @@ INSERT INTO `mob_groups` VALUES (33,7039,35,'Ixzdei_RDM',0,128,0,6500,0,78,78,0)
 
 INSERT INTO `mob_groups` VALUES (1,3205,36,'Promathia',0,128,0,8000,0,80,80,0);
 INSERT INTO `mob_groups` VALUES (2,5106,36,'Promathia',0,128,0,12000,0,80,80,0);
-INSERT INTO `mob_groups` VALUES (3,6640,36,'Kamlanaut',0,128,0,10000,1500,78,78,0);
-INSERT INTO `mob_groups` VALUES (4,6641,36,'Ealdnarche',0,128,0,5000,2500,78,78,0);
+INSERT INTO `mob_groups` VALUES (3,6640,36,'Kamlanaut',0,128,0,10000,2500,78,78,0);
+INSERT INTO `mob_groups` VALUES (4,6641,36,'Ealdnarche',0,128,0,5000,3500,78,78,0);
 INSERT INTO `mob_groups` VALUES (5,0,36,'Disjoined_One',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (6,0,36,'Iroha',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (7,0,36,'Promathia_htbf',0,128,0,0,0,0,0,0);

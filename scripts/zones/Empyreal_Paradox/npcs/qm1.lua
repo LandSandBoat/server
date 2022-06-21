@@ -12,35 +12,13 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player,npc)
-    if
-        player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) and not
-        (
-            player:hasItem(15962) or
-            player:hasItem(15963) or
-            player:hasItem(15964) or
-            player:hasItem(15965)
-        )
-    then
-        player:startEvent(5)
-    else
-        player:messageSpecial(ID.text.QM_TEXT)
-    end
+    player:messageSpecial(ID.text.QM_TEXT)
 end
 
 entity.onEventUpdate = function(player,csid,option,extras)
 end
 
 entity.onEventFinish = function(player,csid,option)
-    if csid == 5 and option == 1 then
-        player:delMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_LAST_VERSE)
-        player:delMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_LAST_VERSE)
-        player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.DAWN)
-        player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.AWAKENING)
-        player:setMissionStatus(xi.mission.log_id.ZILART, 3)
-        player:setCharVar("PromathiaStatus", 7)
-        player:delQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED)
-        player:delQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH)
-    end
 end
 
 return entity

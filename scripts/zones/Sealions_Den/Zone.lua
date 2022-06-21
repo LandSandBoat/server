@@ -21,13 +21,6 @@ zone_object.onZoneIn = function(player, prevZone)
         player:setPos(600.101, 130.355, 797.612, 50)
     end
 
-    if
-        player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
-        player:getCharVar('ApocalypseNigh') == 1
-    then
-        cs = 29
-    end
-
     return cs
 end
 
