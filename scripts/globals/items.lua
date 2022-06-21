@@ -1940,6 +1940,7 @@ xi.items =
     COBRA_UNIT_ROBE                 = 14591,
     DARK_RING                       = 14644,
     DUCAL_GUARDS_RING               = 14657,
+    TAVNAZIAN_RING                  = 14672,
     CUNNING_EARRING                 = 14760,
     LOQUACIOUS_EARRING              = 14812,
     BRUTAL_EARRING                  = 14813,
