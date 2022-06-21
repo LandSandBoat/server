@@ -573,8 +573,8 @@ namespace message
 
                 if (auto player = zoneutils::GetChar(charId))
                 {
-                    LogDebug(fmt::format("Updating charvar for {} ({}): {} = {}", player->GetName(), charId, varName, value);
-                    player->updateVarCache(varName, value);
+                    ShowDebug(fmt::format("Updating charvar for {} ({}): {} = {}", player->GetName(), charId, varName, value));
+                    player->updateCharVarCache(varName, value);
                 }
                 break;
             }
@@ -587,7 +587,7 @@ namespace message
 
     void send_charvar_update(uint32 charId, std::string const& varName, uint32 value)
     {
-        uint32 size = sizeof(uint32) + sizeof(int32) + sizeof(uint8) + varName.size();
+        uint32 size = sizeof(uint32) + sizeof(int32) + sizeof(uint8) + static_cast<uint32>(varName.size());
         char* buf   = new char[size];
         memset(&buf[0], 0, size);
 

@@ -652,14 +652,14 @@ bool CCharEntity::PersistData()
 {
     bool didPersist = false;
 
-    if (!varChanges.empty())
+    if (!charVarChanges.empty())
     {
-        for (auto&& varName : varChanges)
+        for (auto&& charVarName : charVarChanges)
         {
-            charutils::PersistVar(this->id, varName.c_str(), varCache[varName]);
+            charutils::PersistCharVar(this->id, charVarName.c_str(), charVarCache[charVarName]);
         }
 
-        varChanges.clear();
+        charVarChanges.clear();
         didPersist = true;
     }
 
@@ -688,10 +688,12 @@ bool CCharEntity::PersistData()
         StatusEffectContainer->SaveStatusEffects(true);
     }
 
+    /* TODO
     if (dataToPersist & CHAR_PERSIST::LINKSHELL)
     {
         charutils::SaveCharLinkshells(this);
     }
+    */
 
     dataToPersist = 0;
     return didPersist;
@@ -2599,6 +2601,7 @@ void CCharEntity::clearCharVarsWithPrefix(std::string const& prefix)
         {
             iter->second = 0;
         }
+        ++iter;
     }
 
     sql->Query("DELETE FROM char_vars WHERE charid = %u AND varname LIKE '%s%%';", this->id, prefix.c_str());

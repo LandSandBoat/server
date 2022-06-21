@@ -530,7 +530,12 @@ void CLuaBaseEntity::customMenu(sol::object const& obj)
 
 int32 CLuaBaseEntity::getCharVar(std::string const& varName)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowError("Trying to getCharVar(%s) on invalid type", varName);
+        return 0;
+    }
+
     auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
     return charutils::GetCharVar(PChar, varName);
 }
@@ -544,9 +549,14 @@ int32 CLuaBaseEntity::getCharVar(std::string const& varName)
 
 void CLuaBaseEntity::setCharVar(std::string const& varName, int32 value)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowError("Trying to setCharVar(%s -> %i) on invalid type", varName, value);
+        return;
+    }
+
     auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
-    return charutils::SetCharVar(PChar, varName, value);
+    charutils::SetCharVar(PChar, varName, value);
 }
 
 /************************************************************************
@@ -558,10 +568,13 @@ void CLuaBaseEntity::setCharVar(std::string const& varName, int32 value)
 
 void CLuaBaseEntity::addCharVar(std::string const& varName, int32 value)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowError("Trying to addCharVar(%s -> %i) on invalid type", varName, value);
+        return;
+    }
 
     const char* Query = "INSERT INTO char_vars SET charid = %u, varname = '%s', value = %i ON DUPLICATE KEY UPDATE value = value + %i;";
-
     sql->Query(Query, m_PBaseEntity->id, varName, value, value);
 }
 
@@ -610,15 +623,14 @@ void CLuaBaseEntity::resetLocalVars()
 
 void CLuaBaseEntity::clearVarsWithPrefix(std::string const& prefix)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-    auto player = dynamic_cast<CCharEntity*>(m_PBaseEntity);
-
-    if (!player)
+    if (auto player = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
-        return;
+        charutils::ClearCharVarsWithPrefix(player, prefix);
     }
-
-    charutils::ClearCharVarsWithPrefix(player, prefix);
+    else
+    {
+        ShowError("Trying to clearVarsWithPrefix(%s) on invalid type", prefix);
+    }
 }
 
 /************************************************************************

@@ -33,73 +33,81 @@
 
 namespace serverutils
 {
-    std::unordered_map<std::string, int32> varCache;
-    std::unordered_set<std::string>        varChanges;
+    std::unordered_map<std::string, int32> serverVarCache;
+    std::unordered_set<std::string>        serverVarChanges;
 
-    int32 GetVar(td::string const& varName)
+    int32 GetServerVar(std::string const& name)
     {
         int32 value = 0;
 
-        int32 ret = sql->Query((SqlHandle, "SELECT value FROM server_variables WHERE name = '%s' LIMIT 1;", varName);
+        int32 ret = sql->Query("SELECT value FROM server_variables WHERE name = '%s' LIMIT 1;", name);
 
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
         {
-            value = (int32)Sql_GetIntData(SqlHandle, 0);
+            value = sql->GetIntData(0);
         }
 
-        varCache[varName] = value;
+        serverVarCache[name] = value;
         return value;
     }
 
-    void SetVar(td::string const& varName, int32 value)
+    void SetServerVar(std::string const& name, int32 value)
     {
-        PersistVar(varName, value);
+        PersistServerVar(name, value);
     }
 
-    void SetVolatileVar(td::string const& varName, int32 value)
+    void SetVolatileServerVar(std::string const& name, int32 value)
     {
-        varCache[varName] = value;
-        varChanges.insert(varName);
+        serverVarCache[name] = value;
+        serverVarChanges.insert(name);
     }
 
-    int32 GetVolatileVar(td::string const& varName)
+    int32 GetVolatileServerVar(std::string const& name)
     {
-        if (auto var = varCache.find(varName); var != varCache.end())
+        if (auto var = serverVarCache.find(name); var != serverVarCache.end())
         {
             return var->second;
         }
 
-        return GetVar(varName);
+        return GetServerVar(name);
     }
 
-    int32 PersistVolatile(time_point tick, CTaskMgr::CTask* PTask)
+    int32 PersistVolatileServerVars(time_point tick, CTaskMgr::CTask* PTask)
     {
-        if (varChanges.empty())
+        if (serverVarChanges.empty())
         {
             return 0;
         }
 
-        for (auto&& varName : varChanges)
+        for (auto&& name : serverVarChanges)
         {
-            auto value = varCache[varName];
+            auto value = serverVarCache[name];
             if (value == 0)
             {
-                async_work::doQuery("DELETE FROM server_variables WHERE name = '%s' LIMIT 1;", varName);
+                // TODO: Re-enable async
+                // async_work::doQuery("DELETE FROM server_variables WHERE name = '%s' LIMIT 1;", varName);
+                sql->Query("DELETE FROM server_variables WHERE name = '%s' LIMIT 1;", name);
             }
             else
             {
-                async_work::doQuery("INSERT INTO server_variables VALUES ('%s', %i) ON DUPLICATE KEY UPDATE value = %i;", varName, value, value);
+                // TODO: Re-enable async
+                // async_work::doQuery("INSERT INTO server_variables VALUES ('%s', %i) ON DUPLICATE KEY UPDATE value = %i;", varName, value, value);
+                sql->Query("INSERT INTO server_variables VALUES ('%s', %i) ON DUPLICATE KEY UPDATE value = %i;", name, value, value);
             }
         }
-        varChanges.clear();
+
+        serverVarChanges.clear();
 
         return 0;
     }
 
-    void PersistVar(td::string const& varName, int32 value)
+    void PersistServerVar(std::string const& name, int32 value)
     {
         int32 tries  = 0;
         int32 verify = INT_MIN;
+
+        // TODO: Move into new-style settings
+        auto SETVAR_RETRY_MAX = 3;
 
         do
         {
@@ -108,14 +116,14 @@ namespace serverutils
 
             if (value == 0)
             {
-                sql->Query((SqlHandle, "DELETE FROM server_variables WHERE name = '%s' LIMIT 1;", varName);
+                sql->Query("DELETE FROM server_variables WHERE name = '%s' LIMIT 1;", name);
             }
             else
             {
-                sql->Query((SqlHandle, "INSERT INTO server_variables VALUES ('%s', %i) ON DUPLICATE KEY UPDATE value = %i;", varName, value, value);
+                sql->Query("INSERT INTO server_variables VALUES ('%s', %i) ON DUPLICATE KEY UPDATE value = %i;", name, value, value);
             }
 
-            if (map_config.setVar_retry_max > 0)
+            if (SETVAR_RETRY_MAX > 0)
             {
                 // Cannot usleep(microseconds) or use std::this_thread::sleep_for(std::chrono::microseconds(usec))
                 // because, you guessed it, DSP design.  Close inspection of other DSP code shows sleeping is not
@@ -123,14 +131,14 @@ namespace serverutils
                 // value that was written.  The access back to the DB is just a few milliseconds.  Down side is
                 // that we have to give up at some point.
                 // Also, don't use GetServerVariable, as that manipulates the Lua variable stack.
-                if (sql->Query((SqlHandle, "SELECT value FROM server_variables WHERE name = '%s' LIMIT 1;", varName) != SQL_ERROR)
+                if (sql->Query("SELECT value FROM server_variables WHERE name = '%s' LIMIT 1;", name) != SQL_ERROR)
                 {
-                    if (Sql_NumRows(SqlHandle) > 0)
+                    if (sql->NumRows() > 0)
                     {
                         // Can get it, so let's make sure it matches.
-                        if (Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+                        if (sql->NextRow() == SQL_SUCCESS)
                         {
-                            verify = (int32)Sql_GetIntData(SqlHandle, 0);
+                            verify = sql->GetIntData(0);
                         }
                     }
                     else
@@ -147,6 +155,6 @@ namespace serverutils
             {
                 break;
             }
-        } while (verify != value && tries < map_config.setVar_retry_max);
+        } while (verify != value && tries < SETVAR_RETRY_MAX);
     }
 } // namespace serverutils

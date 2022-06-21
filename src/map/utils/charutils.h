@@ -153,20 +153,21 @@ namespace charutils
     int32 hasWeaponSkill(CCharEntity* PChar, uint16 WeaponSkillID); // declaration of function to check for weapon skill
     int32 delWeaponSkill(CCharEntity* PChar, uint16 WeaponSkillID); // declaration of function to delete weapon skill
 
-    void SaveCharJob(CCharEntity* PChar, JOBTYPE job);  // сохраняем уровень для выбранной профессий персонажа
-    void SaveCharExp(CCharEntity* PChar, JOBTYPE job);  // сохраняем опыт для выбранной профессии персонажа
-    void SaveCharEquip(CCharEntity* PChar);             // сохраняем экипировку и внешний вид персонажа
-    void SaveCharLook(CCharEntity* PChar);              // Saves a character's appearance based on style locking.
-    void SaveCharPosition(CCharEntity* PChar);          // сохраняем позицию персонажа
-    void SaveMissionsList(CCharEntity* PChar);          // Save the missions list
-    void SaveEminenceData(CCharEntity* PChar);          // Save Eminence Record (RoE) data
-    void SaveQuestsList(CCharEntity* PChar);            // сохраняем список ксевтов
-    void SaveFame(CCharEntity* PChar);                  // Save area fame / reputation
-    void SaveZonesVisited(CCharEntity* PChar);          // сохраняем посещенные зоны
-    void SaveKeyItems(CCharEntity* PChar);              // сохраняем ключевые предметы
-    void SaveCharInventoryCapacity(CCharEntity* PChar); // Save Character inventory capacity
-    void SaveSpell(CCharEntity* PChar, uint16 spellID); // сохраняем выученные заклинания
-    void DeleteSpell(CCharEntity* PChar, uint16 spellID);
+    void SaveCharJob(CCharEntity* PChar, JOBTYPE job);         // сохраняем уровень для выбранной профессий персонажа
+    void SaveCharExp(CCharEntity* PChar, JOBTYPE job);         // сохраняем опыт для выбранной профессии персонажа
+    void SaveCharEquip(CCharEntity* PChar);                    // сохраняем экипировку и внешний вид персонажа
+    void SaveCharLook(CCharEntity* PChar);                     // Saves a character's appearance based on style locking.
+    void SaveCharPosition(CCharEntity* PChar);                 // сохраняем позицию персонажа
+    // void SaveCharLinkshells(CCharEntity* PChar);            // TODO
+    void SaveMissionsList(CCharEntity* PChar);                 // Save the missions list
+    void SaveEminenceData(CCharEntity* PChar);                 // Save Eminence Record (RoE) data
+    void SaveQuestsList(CCharEntity* PChar);                   // сохраняем список ксевтов
+    void SaveFame(CCharEntity* PChar);                         // Save area fame / reputation
+    void SaveZonesVisited(CCharEntity* PChar);                 // сохраняем посещенные зоны
+    void SaveKeyItems(CCharEntity* PChar);                     // сохраняем ключевые предметы
+    void SaveCharInventoryCapacity(CCharEntity* PChar);        // Save Character inventory capacity
+    void SaveSpell(CCharEntity* PChar, uint16 spellID);        // сохраняем выученные заклинания
+    void DeleteSpell(CCharEntity* PChar, uint16 spellID);      //
     void SaveLearnedAbilities(CCharEntity* PChar);             // saved learned abilities (corsair rolls)
     void SaveTitles(CCharEntity* PChar);                       // сохраняем заслуженные звания
     void SaveCharStats(CCharEntity* PChar);                    // сохраняем флаги, текущие значения жихней, маны и профессий
@@ -216,15 +217,15 @@ namespace charutils
     void  HomePoint(CCharEntity* PChar);
     bool  AddWeaponSkillPoints(CCharEntity*, SLOTTYPE, int);
 
-    int32 GetVar(CCharEntity* PChar, std::string const& var);
-    void  SetVar(uint32 charId, std::string const& var, int32 value);
-    void  SetVar(CCharEntity* PChar, std::string const& var, int32 value);
-    int32 ClearVarsWithPrefix(CCharEntity* PChar, std::string prefix);
-    int32 RemoveVarsWithTag(CCharEntity* PChar, std::string const& varsTag);
-    void  AddVar(CCharEntity* PChar, std::string const& var, int32 value);
+    int32 GetCharVar(CCharEntity* PChar, std::string const& var);
+    void  SetCharVar(uint32 charId, std::string const& var, int32 value);
+    void  SetCharVar(CCharEntity* PChar, std::string const& var, int32 value);
+    int32 ClearCharVarsWithPrefix(CCharEntity* PChar, std::string const& prefix);
+    int32 RemoveCharVarsWithTag(CCharEntity* PChar, std::string const& varsTag);
+    void  AddCharVar(CCharEntity* PChar, std::string const& var, int32 value);
 
-    int32 FetchVar(uint32 charId, std::string const& var);
-    void  PersistVar(uint32 charId, std::string const& var, int32 value);
+    int32 FetchCharVar(uint32 charId, std::string const& var);
+    void  PersistCharVar(uint32 charId, std::string const& var, int32 value);
 
     uint16 getWideScanRange(JOBTYPE job, uint8 level);
     uint16 getWideScanRange(CCharEntity* PChar);

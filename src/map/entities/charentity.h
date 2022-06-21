@@ -563,6 +563,8 @@ public:
 
     void clearCharVarsWithPrefix(std::string const& prefix);
 
+    bool m_Locked; // Is the player locked in a cutscene
+
     CCharEntity();
     ~CCharEntity();
 
@@ -593,7 +595,6 @@ private:
     bool m_isStyleLocked;
     bool m_isBlockingAid;
     bool m_reloadParty;
-    bool m_Locked; // Is the player locked in a cutscene
 
     std::unordered_map<std::string, int32> charVarCache;
     std::unordered_set<std::string>        charVarChanges;

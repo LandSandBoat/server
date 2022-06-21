@@ -164,7 +164,7 @@ namespace luautils
         lua.set_function("SetVolatileServerVariable", &luautils::SetVolatileServerVariable);
         lua.set_function("GetCharVar", &luautils::GetCharVar);
         lua.set_function("SetCharVar", &luautils::SetCharVar);
-        lua.set_function("ClearVarFromAll", &luautils::ClearVarFromAll);
+        lua.set_function("ClearCharVarFromAll", &luautils::ClearCharVarFromAll);
         lua.set_function("SendEntityVisualPacket", &luautils::SendEntityVisualPacket);
         lua.set_function("GetMobRespawnTime", &luautils::GetMobRespawnTime);
         lua.set_function("DisallowRespawn", &luautils::DisallowRespawn);
@@ -489,8 +489,7 @@ namespace luautils
         TracyZoneString(filename);
 
         auto path = std::filesystem::path(filename);
-
-        if (path.extension() != "" || path.empty())
+        if (path.empty() || path.extension() == "")
         {
             return;
         }
@@ -4003,76 +4002,40 @@ namespace luautils
         CTransportHandler::getInstance()->startElevator(ElevatorID);
     }
 
-    /************************************************************************
-     *                                                                       *
-     *  Получаем значение глобальной переменной сервера.                     *
-     *  Переменная действительна лишь в пределах зоны, в которой установлена *
-     *                                                                       *
-     ************************************************************************/
-
-    int32 GetServerVariable(lua_State* L)
+    int32 GetServerVariable(std::string const& name)
     {
-        DSP_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isstring(L, -1));
-
-        int32 value = serverutils::GetVar(lua_tostring(L, -1));
-
-        lua_pushinteger(L, value);
-
-        return 1;
+        return serverutils::GetServerVar(name);
     }
 
-    int32 SetServerVariable(lua_State* L)
+    void SetServerVariable(std::string const& name, int32 value)
     {
-        DSP_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isnumber(L, -1));
-        DSP_DEBUG_BREAK_IF(lua_isnil(L, -2) || !lua_isstring(L, -2));
-
-        const char* name = lua_tostring(L, -2);
-        int32 value      = (int32)lua_tointeger(L, -1);
-
-        serverutils::SetVar(name, value);
-
-        return 0;
+        serverutils::SetServerVar(name, value);
     }
 
-    int32 GetVolatileServerVariable(sol::string_view varName)
+    int32 GetVolatileServerVariable(std::string const& varName)
     {
-        return serverutils::GetVolatileVar(varName.data());
+        return serverutils::GetVolatileServerVar(varName);
     }
 
-    void SetVolatileServerVariable(sol::string_view varName, int32 value)
+    void SetVolatileServerVariable(std::string const& varName, int32 value)
     {
-        serverutils::SetVolatileVar(varName.data(), value);
+        serverutils::SetVolatileServerVar(varName, value);
     }
 
-    int32 GetCharVar(uint32 charId, sol::string_view varName)
+    int32 GetCharVar(uint32 charId, std::string const& varName)
     {
-        return charutils::FetchVar(charId, varName.data());
+        return charutils::FetchCharVar(charId, varName);
     }
 
     // Using the charID set a char variable on the SQL DB
-    int32 SetCharVar(lua_State* L)
+    void SetCharVar(uint32 charId, std::string const& varName, int32 value)
     {
-        if (lua_isnil(L, 1) || !lua_isnumber(L, 1) || lua_isnil(L, 2) || !lua_isstring(L, 2)
-            || lua_isnil(L, 3) || !lua_isnumber(L, 3))
-            return 0;
-
-        int32 charId             = (int32)lua_tointeger(L, 1);
-        const char* variableName = (const char*)lua_tostring(L, 2);
-        int32 value              = (int32)lua_tointeger(L, 3);
-        charutils::SetVar(charId, variableName, value);
-        return 1;
+        charutils::SetCharVar(charId, varName, value);
     }
 
-
-    int32 clearVarFromAll(lua_State* L)
+    void ClearCharVarFromAll(std::string const& varName)
     {
-        DSP_DEBUG_BREAK_IF(lua_isnil(L, -1) || !lua_isstring(L, -1));
-
-        const char* varname = lua_tostring(L, -1);
-
-        Sql_Query(SqlHandle, "DELETE FROM char_vars WHERE varname = '%s';", varname);
-
-        return 0;
+        sql->Query("DELETE FROM char_vars WHERE varname = '%s';", varName);
     }
 
     int32 OnTransportEvent(CCharEntity* PChar, uint32 TransportID)

@@ -66,7 +66,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../packets/monipulator1.h"
 #include "../packets/monipulator2.h"
 #include "../packets/quest_mission_log.h"
-
 #include "../packets/roe_sparkupdate.h"
 #include "../packets/server_ip.h"
 #include "../packets/timer_bar_util.h"
@@ -79,6 +78,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../latent_effect_container.h"
 #include "../linkshell.h"
 #include "../map.h"
+#include "../message.h"
 #include "../mob_modifier.h"
 #include "../recast_container.h"
 #include "../roe.h"
@@ -2317,7 +2317,7 @@ namespace charutils
             return;
         }
 
-        CItemArmor* PItem = dynamic_cast<CItemArmor*>(PChar->getStorage(containerID)->GetItem(slotID));
+        CItemEquipment* PItem = dynamic_cast<CItemEquipment*>(PChar->getStorage(containerID)->GetItem(slotID));
 
         if (PItem && PItem == PChar->getEquip((SLOTTYPE)equipSlotID))
         {
@@ -4594,7 +4594,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Устанавливаем ограничение уровня персонажа                           *
+     *  Establish a restriction of character level                          *
      *                                                                       *
      ************************************************************************/
 
@@ -4617,6 +4617,24 @@ namespace charutils
 
         sql->Query(Query, PChar->loc.p.rotation, PChar->loc.p.x, PChar->loc.p.y, PChar->loc.p.z, PChar->loc.boundary, PChar->id);
     }
+
+    /* TODO: Move linkshell persistence here
+    void SaveCharLinkshells(CCharEntity* PChar)
+    {
+        for (uint8 lsSlot = 16; lsSlot < 18; ++lsSlot)
+        {
+            if (PChar->equip[lsSlot] == 0)
+            {
+                sql->Query("DELETE FROM char_linkshells WHERE charid = %u AND lsslot = %u LIMIT 1;", PChar->id, lsSlot);
+            }
+            else
+            {
+                const char* fmtQuery = "INSERT INTO char_linkshells SET charid = %u, lsslot = %u, location = %u, slot = %u ON DUPLICATE KEY UPDATE location = %u, slot = %u;";
+                sql->Query(fmtQuery, PChar->id, lsSlot, PChar->equipLoc[lsSlot], PChar->equip[lsSlot], PChar->equipLoc[lsSlot], PChar->equip[lsSlot]);
+            }
+        }
+    }
+    */
 
     void SaveQuestsList(CCharEntity* PChar)
     {
@@ -5998,87 +6016,96 @@ namespace charutils
         return false;
     }
 
-    int32 GetVar(CCharEntity* PChar, std::string const& var)
+    int32 GetCharVar(CCharEntity* PChar, std::string const& var)
     {
         if (PChar == nullptr)
+        {
             return 0;
+        }
 
-        return PChar->getVar(var);
+        return PChar->getCharVar(var);
     }
 
-    void SetVar(uint32 charId, std::string const& var, int32 value)
+    void SetCharVar(uint32 charId, std::string const& var, int32 value)
     {
-        auto player = zoneutils::GetChar(charId);
-        if (player)
+        if (auto player = zoneutils::GetChar(charId))
         {
-            player->setVar(var, value);
+            player->setCharVar(var, value);
             return;
         }
 
-        PersistVar(charId, var, value);
+        PersistCharVar(charId, var, value);
         message::send_charvar_update(charId, var, value);
     }
 
-    void SetVar(CCharEntity* PChar, std::string const& var, int32 value)
+    void SetCharVar(CCharEntity* PChar, std::string const& var, int32 value)
     {
         if (PChar == nullptr)
+        {
             return;
+        }
 
-        return PChar->setVar(var, value);
+        return PChar->setCharVar(var, value);
     }
 
-    int32 ClearVarsWithPrefix(CCharEntity* PChar, std::string prefix)
+    int32 ClearCharVarsWithPrefix(CCharEntity* PChar, std::string const& prefix)
     {
         if (PChar == nullptr)
+        {
             return 0;
+        }
 
-        PChar->clearVarsWithPrefix(prefix);
+        PChar->clearCharVarsWithPrefix(prefix);
         return 0;
     }
 
-    int32 RemoveVarsWithTag(CCharEntity* PChar, std::string const& varsTag)
+    int32 RemoveCharVarsWithTag(CCharEntity* PChar, std::string const& varsTag)
     {
         if (PChar == nullptr)
+        {
             return 0;
+        }
 
-        PChar->clearVarsWithPrefix(fmt::sprintf("[%s]", varsTag));
+        PChar->clearCharVarsWithPrefix(fmt::sprintf("[%s]", varsTag));
         return 0;
     }
 
-    void AddVar(CCharEntity* PChar, std::string const& var, int32 value)
+    void AddCharVar(CCharEntity* PChar, std::string const& var, int32 value)
     {
         if (PChar == nullptr)
+        {
             return;
+        }
 
         const char* Query = "INSERT INTO char_vars SET charid = %u, varname = '%s', value = %i ON DUPLICATE KEY UPDATE value = value + %i;";
 
-        Sql_Query(SqlHandle, Query, PChar->id, var, value, value);
+        sql->Query(Query, PChar->id, var, value, value);
     }
 
-    int32 FetchVar(uint32 charId, std::string const& varName)
+    int32 FetchCharVar(uint32 charId, std::string const& varName)
     {
         const char* fmtQuery = "SELECT value FROM char_vars WHERE charid = %u AND varname = '%s' LIMIT 1;";
 
-        int32 ret = Sql_Query(SqlHandle, fmtQuery, charId, varName);
+        int32 ret = sql->Query(fmtQuery, charId, varName);
 
         int32 value = 0;
-        if (ret != SQL_ERROR && Sql_NumRows(SqlHandle) != 0 && Sql_NextRow(SqlHandle) == SQL_SUCCESS)
+        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
         {
-            value = Sql_GetIntData(SqlHandle, 0);
+            value = sql->GetIntData(0);
         }
 
         return value;
     }
 
-    void PersistVar(uint32 charId, std::string const& var, int32 value)
+    void PersistCharVar(uint32 charId, std::string const& var, int32 value)
     {
         if (value == 0)
         {
-            Sql_Query(SqlHandle, "DELETE FROM char_vars WHERE charid = %u AND varname = '%s' LIMIT 1;", charId, var);
+            sql->Query("DELETE FROM char_vars WHERE charid = %u AND varname = '%s' LIMIT 1;", charId, var);
         }
         else
         {
-            Sql_Query(SqlHandle, "INSERT INTO char_vars SET charid = %u, varname = '%s', value = %i ON DUPLICATE KEY UPDATE value = %i;", charId, var, value, value);
+            sql->Query("INSERT INTO char_vars SET charid = %u, varname = '%s', value = %i ON DUPLICATE KEY UPDATE value = %i;", charId, var, value, value);
         }
     }
     uint16 getWideScanRange(JOBTYPE job, uint8 level)
