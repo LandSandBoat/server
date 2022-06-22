@@ -12,6 +12,7 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     mob:setMobMod(xi.mobMod.DRAW_IN, 2) -- Aliance draw in
 =======
     mob:setMobMod(xi.mobMod.DRAW_IN, 1)
@@ -22,6 +23,9 @@ entity.onMobInitialize = function(mob)
 =======
     mob:setMobMod(xi.mobMod.DRAW_IN, 2)
 >>>>>>> 4b31d00a4c (Update King_Vinegarroon.lua)
+=======
+    mob:setMobMod(xi.mobMod.DRAW_IN, 2) -- Aliance draw in
+>>>>>>> 4691c65c97 (Update King_Vinegarroon.lua)
 end
 
 entity.onMobDrawIn = function(mob, target)
