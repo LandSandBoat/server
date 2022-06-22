@@ -9245,8 +9245,17 @@ INSERT INTO `mob_spell_lists` VALUES ('Shens_Filtrate',488,172,1,255); -- Water 
 INSERT INTO `mob_spell_lists` VALUES ('Shens_Filtrate',488,201,1,255); -- Waterga III
 INSERT INTO `mob_spell_lists` VALUES ('Shens_Filtrate',488,214,1,255); -- Flood
 
+<<<<<<< HEAD
 -- Next Available: 487
 >>>>>>> f149541798 (Update mob_spell_lists.sql)
+=======
+INSERT INTO `mob_spell_lists` VALUES ('Sprinkler',489,166,1,255); -- Thunder III
+INSERT INTO `mob_spell_lists` VALUES ('Sprinkler',489,167,1,255); -- Thunder IV
+INSERT INTO `mob_spell_lists` VALUES ('Sprinkler',489,196,1,255); -- Thundaga III
+INSERT INTO `mob_spell_lists` VALUES ('Sprinkler',489,212,1,255); -- Burst
+
+-- Next Available: 490
+>>>>>>> 28fb56442b (Fixes)
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;

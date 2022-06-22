@@ -60,6 +60,7 @@ entity.onMobDespawn = function(mob)
 end
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 entity.onMobFight = function(mob, target)
     local mobRegen = function()
         local hour = VanadielHour()
@@ -67,12 +68,18 @@ entity.onMobFight = function(mob, target)
 entity.mobRegen = function(mob)
     local hour = VanadielHour()
 >>>>>>> de3620867a (King V bug fixes)
+=======
+entity.onMobFight = function(mob, target)
+    local mobRegen = function()
+        local hour = VanadielHour()
+>>>>>>> 28fb56442b (Fixes)
 
     if hour >= 6 and hour <= 20 then
         mob:setMod(xi.mod.REGEN, 125)
     else
         mob:setMod(xi.mod.REGEN, 250)
     end
+<<<<<<< HEAD
 <<<<<<< HEAD
     end
 
@@ -83,6 +90,11 @@ end
 entity.onMobFight = function(mob, target)
     entity.mobRegen(mob)
 >>>>>>> de3620867a (King V bug fixes)
+=======
+    end
+
+    mobRegen()
+>>>>>>> 28fb56442b (Fixes)
 end
 
 return entity
