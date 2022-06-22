@@ -189,8 +189,10 @@ local function getMultiAttacks(attacker, target, numHits)
             bonusHits = bonusHits + 3
         elseif math.random() < tripleRate then
             bonusHits = bonusHits + 2
+            attacker:setLocalVar("TripleAttackDMG", 2)
         elseif math.random() < doubleRate then
             bonusHits = bonusHits + 1
+            attacker:setLocalVar("DoubleAttackDMG", 1)
         elseif i == 1 and math.random() < oaThriceRate then -- Can only proc on first hit
             bonusHits = bonusHits + 2
         elseif i == 1 and math.random() < oaTwiceRate then -- Can only proc on first hit
@@ -572,6 +574,14 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
 
     while hitsDone < numHits and finaldmg < targetHp do -- numHits is hits in the base WS _and_ DA/TA/QA procs during those hits
         hitdmg, calcParams = getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
+
+        if (attacker:getLocalVar("DoubleAttackDMG") > 1) then
+            hitdmg = hitdmg * (100 + attacker:getMod(tpz.mod.DOUBLE_ATTACK_DMG)) / 100
+            attacker:setLocalVar("DoubleAttackDMG", attacker:getLocalVar("DoubleAttackDMG") - 1)
+        elseif (attacker:getLocalVar("TripleAttackDMG") > 1) then
+            hitdmg = hitdmg * (100 + attacker:getMod(tpz.mod.TRIPLE_ATTACK_DMG)) / 100
+            attacker:setLocalVar("TripleAttackDMG", attacker:getLocalVar("TripleAttackDMG") - 1)
+        end
 
         if calcParams.melee then
             hitdmg = modifyMeleeHitDamage(attacker, target, calcParams.attackInfo, wsParams, hitdmg)
