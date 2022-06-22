@@ -20,7 +20,7 @@ item_object.onItemUse = function(target)
     local mitigatews    = 1
 
     target:forMembersInRange(20, function(member)
-        item_utils.addItemShield(member, power, duration, effect, mitigatews)
+        xi.item_utils.addItemShield(member, power, duration, effect, mitigatews)
     end)
 end
 

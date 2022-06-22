@@ -83,12 +83,12 @@ xi.item_utils.addItemShield = function(target, power, duration, effect, special)
         if activeshieldpower > power then
             target:messageBasic(xi.msg.basic.NO_EFFECT)
         else
-            item_utils.removeShield(effect, target)
+            xi.item_utils.removeShield(effect, target)
             target:addStatusEffect(effect, power, 0, duration, 0, special)
             target:messageBasic(xi.msg.basic.GAINS_EFFECT_OF_STATUS, effect)
         end
     else
-        item_utils.removeShield(effect, target)  
+        xi.item_utils.removeShield(effect, target)
         target:addStatusEffect(effect, power, 0, duration, 0, special)
         target:messageBasic(xi.msg.basic.GAINS_EFFECT_OF_STATUS, effect)
     end

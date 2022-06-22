@@ -20,7 +20,7 @@ item_object.onItemUse = function(target)
     local nospellimmune = 0
 
     target:forMembersInRange(20, function(member)
-        item_utils.addItemShield(member, power, duration, effect, nospellimmune)
+        xi.item_utils.addItemShield(member, power, duration, effect, nospellimmune)
     end)
 end
 

@@ -19,7 +19,7 @@ item_object.onItemUse = function(target)
     local power     = 3
     local duration  = 180
 
-    item_utils.addItemEffect(target, effect, power, duration)
+    xi.item_utils.addItemEffect(target, effect, power, duration)
 end
 
 return item_object

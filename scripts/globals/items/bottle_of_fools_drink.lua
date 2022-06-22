@@ -19,7 +19,7 @@ item_object.onItemUse = function(target)
     local power         = 1
     local nospellimmune = 0
 
-    item_utils.addItemShield(target, power, duration, effect, nospellimmune)
+    xi.item_utils.addItemShield(target, power, duration, effect, nospellimmune)
 end
 
 return item_object

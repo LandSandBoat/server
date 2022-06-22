@@ -21,7 +21,7 @@ item_object.onItemUse = function(target)
     local power2    =  25 --MACC
     local duration  = 300
 
-    item_utils.addTwoItemEffects(target, effect1, effect2, power1, power2, duration)
+    xi.item_utils.addTwoItemEffects(target, effect1, effect2, power1, power2, duration)
 end
 
 return item_object
