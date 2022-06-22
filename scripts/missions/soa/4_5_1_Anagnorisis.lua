@@ -66,7 +66,7 @@ mission.sections =
                         return mission:progressEvent(1553, 257, 1, 1, 0, 66584575, 688478, 4905, 0)
                     end
                 end,
-            }
+            },
 
             onEventFinish =
             {
