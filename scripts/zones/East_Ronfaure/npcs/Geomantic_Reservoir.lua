@@ -2,6 +2,7 @@
 -- Area: East Ronfaure
 -- NPC: Geomantic Reservoir
 -- Unlocks Geo-Poison
+-- !pos 378.875 -39.304 58.313
 -----------------------------------
 local ID = require("scripts/zones/East_Ronfaure/IDs")
 local entity = {}
