@@ -1,16 +1,16 @@
 -----------------------------------
 -- ID: 4920
--- Scroll of Aerora
+-- Scroll of Aera
 -- Teaches the black magic Aerora
 -----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)
-    return target:canLearnSpell(832)
+    return target:canLearnSpell(xi.magic.spell.AERA)
 end
 
 item_object.onItemUse = function(target)
-    target:addSpell(832)
+    target:addSpell(xi.magic.spell.AERA)
 end
 
 return item_object
