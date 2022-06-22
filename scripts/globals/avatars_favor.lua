@@ -3,6 +3,7 @@
 -----------------------------------
 require("scripts/globals/pets")
 require("scripts/globals/status")
+require("scripts/settings/main")
 -----------------------------------
 
 xi = xi or {}
@@ -94,7 +95,10 @@ end
 
 local removeAvatarsFavorDebuffsFromPet = function(target)
     local petId = target:getPetID()
-    if shouldAvatarsFavorBeApplied(petId) then
+    if  -- Different pet states for in and out of retail / eras
+        shouldAvatarsFavorBeApplied(petId) and
+        xi.settings.ENABLE_SOA == 1
+    then
         local pet = target:getPet()
         pet:addMod(xi.mod.MATT, 20)
         pet:addMod(xi.mod.ATTP, 20)
@@ -129,7 +133,10 @@ end
 
 xi.avatarsFavor.applyAvatarsFavorDebuffsToPet = function(target)
     local petId = target:getPetID()
-    if shouldAvatarsFavorBeApplied(petId) then
+    if  -- Different pet states for in and out of retail / eras
+        shouldAvatarsFavorBeApplied(petId) and
+        xi.settings.ENABLE_SOA == 1
+    then
         local pet = target:getPet()
         pet:delMod(xi.mod.MATT, 20) -- Other than MATT most of these values are myth and guesses from multiple sources
         pet:delMod(xi.mod.ATTP, 20)
