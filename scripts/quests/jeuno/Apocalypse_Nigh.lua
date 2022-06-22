@@ -20,16 +20,23 @@ quest.reward =
     title    = xi.title.BREAKER_OF_THE_CHAINS,
 }
 
-quest.possibleItems =  {xi.items.STATIC_EARRING, xi.items.MAGNETIC_EARRING, xi.items.HOLLOW_EARRING, xi.items.ETHEREAL_EARRING}
+local possibleItems =
+{
+    xi.items.STATIC_EARRING,
+    xi.items.MAGNETIC_EARRING,
+    xi.items.HOLLOW_EARRING,
+    xi.items.ETHEREAL_EARRING,
+}
 
 local function finishProgress(player, option)
-    npcUtil.completeQuest(player, quest.areaId, quest.questId, {item = quest.possibleItems[option]})
+    if npcUtil.giveItem(player, possibleItems[option]) then
+        quest:complete(player)
+    end
     player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.DAWN)
     player:completeMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.AWAKENING)
     player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_LAST_VERSE)
     player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_LAST_VERSE)
     player:setMissionStatus(xi.mission.log_id.ZILART, 0)
-    player:setCharVar("PromathiaStatus", 0)
 end
 
 local function resetProgress(player, option)
@@ -47,7 +54,7 @@ end
 
 local function updateItemEvent(player, option)
     if option == 99 then
-        player:updateEvent(252, quest.possibleItems[1], quest.possibleItems[2], quest.possibleItems[3], quest.possibleItems[4])
+        player:updateEvent(252, possibleItems[1], possibleItems[2], possibleItems[3], possibleItems[4])
     end
 end
 
@@ -57,7 +64,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and -- Needs to be available
             player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED) and -- Requires Shadows of the Departed
-            quest:getVar(player, 'Wait') <= os.time() and -- Must wait 1 game day
+            quest:getVar(player, 'Wait') <= VanadielUniqueDay() and -- Must wait 1 game day
             not quest:getMustZone(player) -- Must have zoned since last quest
         end,
 
@@ -89,8 +96,7 @@ quest.sections =
             onZoneIn =
             {
                 function(player, prevZone)
-                    print(quest:getVar(player, 'Prog'))
-                    if quest:getVar(player, 'Prog') == 0 then
+                    if quest:getVar(player, 'Status') == 0 then
                         return 29
                     end
                 end,
@@ -99,7 +105,7 @@ quest.sections =
             onEventFinish =
             {
                 [29] = function(player, csid, option, npc)
-                    quest:setVar(player, 'Prog', 1)
+                    quest:setVar(player, 'Status', 1)
                 end,
             },
         },
@@ -109,7 +115,7 @@ quest.sections =
             ['_iya'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 1 then
+                    if quest:getVar(player, 'Status') == 1 then
                         return quest:progressEvent(4)
                     end
                 end,
@@ -118,8 +124,8 @@ quest.sections =
             onEventFinish =
             {
                 [4] = function(player, csid, option, npc)
-                    quest:setVar(player, 'Prog', 2)
-                    player:setPos(-419.995, 0, 248.483, 191, 35) -- Puts player in the Garden of Ru'Hmet
+                    quest:setVar(player, 'Status', 2)
+                    player:setPos(-419.995, 0, 248.483, 191, xi.zone.THE_GARDEN_OF_RUHMET) -- Puts player in the Garden of Ru'Hmet
                 end,
             },
         },
@@ -129,7 +135,7 @@ quest.sections =
             ['Transcendental_Radiance'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 2 then
+                    if quest:getVar(player, 'Status') == 2 then
                         return quest:progressEvent(4)
                     end
                 end,
@@ -138,12 +144,12 @@ quest.sections =
             onEventFinish =
             {
                 [4] = function(player, csid, option, npc)
-                    quest:setVar(player, 'Prog', 3)
+                    quest:setVar(player, 'Status', 3)
                 end,
 
                 [32001] = function(player, csid, option, npc)
-                    if quest:getVar(player, 'Prog') == 3 then
-                        quest:setVar(player, 'Prog', 4)
+                    if quest:getVar(player, 'Status') == 3 then
+                        quest:setVar(player, 'Status', 4)
                         player:startEvent(7)
                     end
                 end,
@@ -159,9 +165,9 @@ quest.sections =
             ['Aldo'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 4 and player:getRank(player:getNation()) > 5 then
+                    if quest:getVar(player, 'Status') == 4 and player:getRank(player:getNation()) > 5 then
                         return quest:progressEvent(10057)
-                    elseif quest:getVar(player, 'Prog') == 5 then
+                    elseif quest:getVar(player, 'Status') == 5 then
                         return quest:event(10058)
                     end
                 end,
@@ -170,7 +176,7 @@ quest.sections =
             ['Sattal-Mansal'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 5 then
+                    if quest:getVar(player, 'Status') == 5 then
                         return quest:progressEvent(10061)
                     end
                 end,
@@ -178,7 +184,7 @@ quest.sections =
             ['Yin_Pocanakhu'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 5 then
+                    if quest:getVar(player, 'Status') == 5 then
                         return quest:progressEvent(10060)
                     end
                 end,
@@ -187,7 +193,7 @@ quest.sections =
             onEventFinish =
             {
                 [10057] = function(player, csid, option, npc)
-                    quest:setVar(player, 'Prog', 5)
+                    quest:setVar(player, 'Status', 5)
                     quest:setVar(player, 'Wait', getVanaMidnight())
                 end
             },
@@ -198,10 +204,10 @@ quest.sections =
             ['Gilgamesh'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 5 and os.time() >= quest:getVar(player, 'Wait') then
+                    if quest:getVar(player, 'Status') == 5 and VanadielUniqueDay() >= quest:getVar(player, 'Wait') then
                         return quest:progressEvent(232, 252)
                     end
-                    if quest:getVar(player, 'Prog') == 6 and os.time() >= quest:getVar(player, 'Wait') then
+                    if quest:getVar(player, 'Status') == 6 and VanadielUniqueDay() >= quest:getVar(player, 'Wait') then
                         return quest:progressEvent(234, 252)
                     end
                 end,
@@ -210,7 +216,7 @@ quest.sections =
             ['_700'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 5 and quest:getVar(player, 'Wait') > os.time() then
+                    if quest:getVar(player, 'Status') == 5 and quest:getVar(player, 'Wait') > VanadielUniqueDay() then
                         return quest:event(235)
                     end
                 end,
@@ -229,15 +235,15 @@ quest.sections =
             onEventFinish =
             {
                 [232] = function(player, csid, option, npc)
-                    quest:setVar(player, 'Prog', 6)
+                    quest:setVar(player, 'Status', 6)
                     if option >= 1 and option <= 4 then
-                        quest:setVar(player, 'Prog', 7)
+                        quest:setVar(player, 'Status', 7)
                         finishProgress(player, option)
                     end
                 end,
                 [234] = function(player, csid, option, npc)
                     if option >= 1 and option <= 4 then
-                        quest:setVar(player, 'Prog', 7)
+                        quest:setVar(player, 'Status', 7)
                         finishProgress(player, option)
                     end
                 end,
@@ -255,7 +261,7 @@ quest.sections =
             ['Gilgamesh'] =
             {
                 onTrigger = function(player, npc)
-                    quest:event(233)
+                    return quest:event(233)
                 end,
             },
         },
@@ -265,7 +271,7 @@ quest.sections =
             ['qm1'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 7 then
+                    if quest:getVar(player, 'Status') == 7 then
                         for _, item in pairs(quest.possibleItems) do
                             if player:hasItem(item) then
                                 return quest:messageSpecial(zones[player:getZoneID()].text.QM_TEXT)
@@ -279,7 +285,7 @@ quest.sections =
             onEventFinish =
             {
                 [5] = function(player, csid, option, npc)
-                    quest:setVar(player, 'Prog', 0)
+                    quest:setVar(player, 'Status', 0)
                     resetProgress(player, option)
                 end,
             },
