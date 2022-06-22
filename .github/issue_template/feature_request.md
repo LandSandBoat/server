@@ -1,8 +1,8 @@
 ---
-name: 🐛 Bug Report
-about: Bug Report
-title: "\U0001F41B <Bug Summary>"
-labels: bug
+name: 🔨 Feature Request
+about: Feature Request
+title: "\U0001F528 <Replace this with Feature Summary>"
+labels: enhancement
 assignees:
 ---
 
@@ -12,14 +12,6 @@ assignees:
 - [ ] I have searched existing [issues](https://github.com/LandSandBoat/server/issues) to see if the issue has already been opened, and I have checked the commit log to see if the issue has been resolved since my server was last updated
 - [ ] I have read and understood the [Contributing Guide](https://github.com/LandSandBoat/server/blob/base/CONTRIBUTING.md)
 
-## Branch affected by issue <!-- Change to the branch the issue exists on (if relevant) -->
+## Describe the feature
 
-`base`
-
-## Steps to reproduce
-
-<!-- Add steps to reproduce here -->
-
-## Expected behavior
-
-<!-- Add expected behaviour here -->
+<!-- Add a description of the feature here, with additional links to videos, wikis, promotional announcements etc. if needed -->
