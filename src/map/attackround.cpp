@@ -304,6 +304,7 @@ void CAttackRound::CreateAttacks(CItemWeapon* PWeapon, PHYSICAL_ATTACK_DIRECTION
     else if (xirand::GetRandomNumber(100) < quadAttack)
     {
         AddAttackSwing(PHYSICAL_ATTACK_TYPE::QUAD, direction, 3);
+        multiHitOccurred = true;
     }
     else if (xirand::GetRandomNumber(100) < tripleAttack)
     {
