@@ -303,8 +303,7 @@ void CAttackRound::CreateAttacks(CItemWeapon* PWeapon, PHYSICAL_ATTACK_DIRECTION
     // Quad/Triple/Double Attack
     else if (xirand::GetRandomNumber(100) < quadAttack)
     {
-        AddAttackSwing(PHYSICAL_ATTACK_TYPE::QUAD, direction, 4);
-        multiHitOccurred = true;
+        AddAttackSwing(PHYSICAL_ATTACK_TYPE::QUAD, direction, 3);
     }
     else if (xirand::GetRandomNumber(100) < tripleAttack)
     {
@@ -319,13 +318,11 @@ void CAttackRound::CreateAttacks(CItemWeapon* PWeapon, PHYSICAL_ATTACK_DIRECTION
     // Mythic Weapons Aftermath, only main hand
     else if (direction == PHYSICAL_ATTACK_DIRECTION::RIGHTATTACK && xirand::GetRandomNumber(100) < occAttThriceRate)
     {
-        AddAttackSwing(PHYSICAL_ATTACK_TYPE::NORMAL, direction, 3);
-        multiHitOccurred = true;
+        AddAttackSwing(PHYSICAL_ATTACK_TYPE::NORMAL, direction, 2);
     }
     else if (direction == PHYSICAL_ATTACK_DIRECTION::RIGHTATTACK && xirand::GetRandomNumber(100) < occAttTwiceRate)
     {
-        AddAttackSwing(PHYSICAL_ATTACK_TYPE::NORMAL, direction, 2);
-        multiHitOccurred = true;
+        AddAttackSwing(PHYSICAL_ATTACK_TYPE::NORMAL, direction, 1);
     }
     // Iga Garb +2 Set augment: possibility to add another swing while using Dual Wield
     // TODO: Double check correct priority for Empyrian armor modifiers? Outsource? Lua function?

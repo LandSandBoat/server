@@ -309,7 +309,7 @@ enum class Mod
 
     // Warrior
     DOUBLE_ATTACK      = 288, // Percent chance to proc
-    DOUBLE_ATTACK_DMG  = 286, // Increases "Double Attack" damage/"Double Attack" damage + (in percents, e.g. +20 = +20% damage)
+    DOUBLE_ATTACK_DMG  = 1038, // Increases "Double Attack" damage/"Double Attack" damage + (in percents, e.g. +20 = +20% damage)
     WARCRY_DURATION    = 483, // Warcy duration bonus from gear
     BERSERK_EFFECT     = 948, // Conqueror Berserk Effect
     BERSERK_DURATION   = 954, // Berserk Duration
@@ -357,7 +357,7 @@ enum class Mod
     DESPOIL           = 896, // Increases THF Despoil chance
     PERFECT_DODGE     = 883, // Increases Perfect Dodge duration in seconds
     TRIPLE_ATTACK     = 302, // Percent chance
-    TRIPLE_ATTACK_DMG = 287, // Increases "Triple Attack" damage/"Triple Attack" damage + (in percents, e.g. +20 = +20% damage)
+    TRIPLE_ATTACK_DMG = 1039, // Increases "Triple Attack" damage/"Triple Attack" damage + (in percents, e.g. +20 = +20% damage)
     TREASURE_HUNTER   = 303, // Percent chance
     SNEAK_ATK_DEX     = 830, // % DEX boost to Sneak Attack (if gear mod, needs to be equipped on hit)
     TRICK_ATK_AGI     = 520, // % AGI boost to Trick Attack (if gear mod, needs to be equipped on hit)
@@ -899,7 +899,7 @@ enum class Mod
     // 888
     // 936
     //
-    // SPARE = 1038, and onward
+    // SPARE = 1040, and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it
