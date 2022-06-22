@@ -15,7 +15,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(15000, 277, 3, 380619, -39102, 53620, 163, 539943, 0)
     else
         player:PrintToPlayer("You are assaulted by an uncanny sensation.", 0xD)
-    end    
+    end
 end
 
 entity.onEventUpdate = function(player, csid, option)
