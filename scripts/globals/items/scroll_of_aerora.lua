@@ -1,6 +1,6 @@
 -----------------------------------
 -- ID: 4920
--- Scroll of Aera
+-- Scroll of Aerora
 -- Teaches the black magic Aerora
 -----------------------------------
 local item_object = {}
