@@ -6,31 +6,6 @@ local ID = require("scripts/zones/Bibiki_Bay/IDs")
 -----------------------------------
 local entity = {}
 
-
-entity.enterShell = function(mob)
-    mob:setAnimationSub(1)
-    mob:SetAutoAttackEnabled(false)
-    mob:SetMagicCastingEnabled(false)
-    mob:setMod(xi.mod.REGEN,        120)
-    mob:setMod(xi.mod.UDMGPHYS,   -9000)
-    mob:setMod(xi.mod.UDMGRANGE,  -9000)
-    mob:setMod(xi.mod.UDMGMAGIC,  -6000)
-    mob:setMod(xi.mod.UDMGBREATH, -6000)
-    mob:setMobMod(xi.mobMod.NO_MOVE,  1)
-end
-
-entity.exitShell = function(mob)
-    mob:setAnimationSub(0)
-    mob:SetAutoAttackEnabled(true)
-    mob:SetMagicCastingEnabled(true)
-    mob:setMod(xi.mod.REGEN,         0)
-    mob:setMod(xi.mod.UDMGPHYS,      0)
-    mob:setMod(xi.mod.UDMGRANGE,     0)
-    mob:setMod(xi.mod.UDMGMAGIC,     0)
-    mob:setMod(xi.mod.UDMGBREATH,    0)
-    mob:setMobMod(xi.mobMod.NO_MOVE, 0)
-end
-
 entity.onMobSpawn = function(mob)
     mob:setLocalVar("enterTimer", os.time() + math.random(45,120))
     mob:setLocalVar("shellControl", 0)
@@ -39,14 +14,38 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
+    local enterShell = function()
+        mob:setAnimationSub(1)
+        mob:SetAutoAttackEnabled(false)
+        mob:SetMagicCastingEnabled(false)
+        mob:setMod(xi.mod.REGEN,        120)
+        mob:setMod(xi.mod.UDMGPHYS,   -9000)
+        mob:setMod(xi.mod.UDMGRANGE,  -9000)
+        mob:setMod(xi.mod.UDMGMAGIC,  -6000)
+        mob:setMod(xi.mod.UDMGBREATH, -6000)
+        mob:setMobMod(xi.mobMod.NO_MOVE,  1)
+    end
+
+    local exitShell = function()
+        mob:setAnimationSub(0)
+        mob:SetAutoAttackEnabled(true)
+        mob:SetMagicCastingEnabled(true)
+        mob:setMod(xi.mod.REGEN,         0)
+        mob:setMod(xi.mod.UDMGPHYS,      0)
+        mob:setMod(xi.mod.UDMGRANGE,     0)
+        mob:setMod(xi.mod.UDMGMAGIC,     0)
+        mob:setMod(xi.mod.UDMGBREATH,    0)
+        mob:setMobMod(xi.mobMod.NO_MOVE, 0)
+    end
+
     if os.time() > mob:getLocalVar("enterTimer") and mob:getLocalVar("shellControl") == 0 then
-        entity.enterShell(mob)
+        enterShell()
         mob:setLocalVar("exitTimer", os.time() + math.random(45, 120))
         mob:setLocalVar("shellControl", 1)
     end
 
     if os.time() > mob:getLocalVar("exitTimer") and mob:getLocalVar("shellControl") == 1 then
-        entity.exitShell(mob)
+        exitShell()
         mob:setLocalVar("enterTimer", os.time() + math.random(45, 120))
         mob:setLocalVar("shellControl", 0)
     end

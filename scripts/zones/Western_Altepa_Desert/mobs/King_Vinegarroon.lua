@@ -48,18 +48,18 @@ entity.onMobDespawn = function(mob)
     mob:setRespawnTime(math.random(75600, 86400)) -- 21 to 24 hours
 end
 
-entity.mobRegen = function(mob)
-    local hour = VanadielHour()
+entity.onMobFight = function(mob, target)
+    local mobRegen = function()
+        local hour = VanadielHour()
 
     if hour >= 6 and hour <= 20 then
         mob:setMod(xi.mod.REGEN, 125)
     else
         mob:setMod(xi.mod.REGEN, 250)
     end
-end
+    end
 
-entity.onMobFight = function(mob, target)
-    entity.mobRegen(mob)
+    mobRegen()
 end
 
 return entity
