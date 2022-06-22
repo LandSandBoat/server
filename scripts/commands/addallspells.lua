@@ -70,7 +70,7 @@ function onTrigger(player, target)
     local silent = true
     local sendUpdate = false -- prevent packet spam
 
-    for _, spell in pairs(ValidSpells) do
+    for _, spell in pairs(validSpells) do
         silent = false
         sendUpdate = false
         save = true
