@@ -10,7 +10,7 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
-    mob:setMobMod(xi.mobMod.DRAW_IN, 2)
+    mob:setMobMod(xi.mobMod.DRAW_IN, 2) -- Aliance draw in
 end
 
 entity.onMobDrawIn = function(mob, target)
