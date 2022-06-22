@@ -26,9 +26,13 @@ ability_object.onUseAbility = function(player, target, ability)
     if (wyvern ~= nil and wyvern:getHP() > 0) then
 =======
     if (wyvern ~= nil and player:getPetID() == xi.pet.id.WYVERN and wyvern:getHP() > 0) then
+<<<<<<< HEAD
 >>>>>>> 329e836cae (Fix)
         wyvern:useJobAbility(652, wyvern)
 >>>>>>> b8d0d1329e (Mob fixes)
+=======
+        wyvern:useJobAbility(xi.jobAbility.SUPER_CLIMB, wyvern)
+>>>>>>> 21685b9611 (Update super_jump.lua)
     end
 end
 
