@@ -937,6 +937,37 @@ namespace luautils
         message::send(zoneId, str);
     }
 
+    /***************************************************************
+     * Function calls for Zeni Notorious Monster (ZNMs)
+     ***************************************************************/
+    // Update Sanraku's Interests and Recommended Fauna
+    void UpdateSanrakusMobs()
+    {
+        auto UpdateSanrakusMobs = lua["xi"]["znm"]["UpdateSanrakusMobs"];
+
+        if (!UpdateSanrakusMobs.valid())
+        {
+            ShowError("luautils::UpdateSanrakusMobs: UpdateSanrakusMobs call into Lua failed because it was invalid.");
+            return;
+        }
+
+        UpdateSanrakusMobs();
+    }
+
+    // Decreases the cost of ZNM pop items over time
+    void ZNMPopPriceDecay()
+    {
+        auto ZNMPopPriceDecay = lua["xi"]["znm"]["ZNMPopPriceDecay"];
+
+        if (!ZNMPopPriceDecay.valid())
+        {
+            ShowError("luautils::ZNMPopPriceDecay: ZNMPopPriceDecay call into Lua failed because it was invalid.");
+            return;
+        }
+
+        ZNMPopPriceDecay();
+    }
+
     /************************************************************************
      *                                                                       *
      *    Return Vanadiel Time                                               *

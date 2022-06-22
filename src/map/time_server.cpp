@@ -45,6 +45,7 @@ int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
     // Weekly update for conquest (sunday at midnight)
     static time_point lastConquestTally  = tick - 1h;
     static time_point lastConquestUpdate = tick - 1h;
+    static time_point lastZnmPriceDecay = tick - 1h;
     if (CVanaTime::getInstance()->getJstWeekDay() == 1 && CVanaTime::getInstance()->getJstHour() == 0 && CVanaTime::getInstance()->getJstMinute() == 0)
     {
         if (tick > (lastConquestTally + 1h))
@@ -63,6 +64,15 @@ int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
             conquest::UpdateConquestSystem();
             roeutils::UpdateUnityRankings();
             lastConquestUpdate = tick;
+        }
+        // ZNM Pop-Item Prices Decay every 2 hours
+        if (CVanaTime::getInstance()->getJstHour() % 2 == 0)
+        {
+            if (tick > (lastZnmPriceDecay + 1h))
+            {
+                luautils::ZNMPopPriceDecay();
+                lastZnmPriceDecay = tick;
+            }
         }
     }
 
@@ -97,6 +107,7 @@ int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
             daily::UpdateDailyTallyPoints();
             roeutils::CycleDailyRecords();
             guildutils::UpdateGuildPointsPattern();
+            luautils::UpdateSanrakusMobs();
             lastTickedJstMidnight = tick;
         }
     }
