@@ -144,6 +144,7 @@ namespace luautils
     uint8 GetConquestBalance();
     bool  IsConquestAlliance();
     int32 SetRegionalConquestOverseers(uint8 regionID); // Update NPC Conquest Guard
+    void  SendLuaFuncStringToZone(uint16 zoneId, std::string const& str);
 
     uint8 GetHealingTickDelay(); // Returns the configured healing tick delay
 
