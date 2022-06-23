@@ -101,7 +101,7 @@ mission.sections =
                     elseif mission:getVar(player, 'Status') == 0 then
                         return mission:progressEvent(164)
                     else
-                        return player:messageSpecial(npc, zones[player:getZoneID()].text.IMPERVIOUS_FIELD_BLOCKS)
+                        return player:messageSpecial(npc, zones[npc:getZoneID()].text.IMPERVIOUS_FIELD_BLOCKS)
                     end
                 end,
             },
@@ -166,7 +166,23 @@ mission.sections =
                 onTrigger = function(player, npc)
                     if mission:getVar(player, 'Status') == 2 then
                         return mission:progressEvent(1)
+                    else
+                        return player:messageSpecial(zones[npc:getZoneID()].text.PORTAL_DOES_NOT_RESPOND)
                     end
+                end,
+            },
+
+            ['_iyb'] =
+            {
+                onTrigger = function(player, npc)
+                    return player:messageSpecial(zones[npc:getZoneID()].text.GATE_DOES_NOT_RESPOND)
+                end,
+            },
+
+            ['_iyc'] =
+            {
+                onTrigger = function(player, npc)
+                    return player:messageSpecial(zones[npc:getZoneID()].text.GATE_DOES_NOT_RESPOND)
                 end,
             },
 
