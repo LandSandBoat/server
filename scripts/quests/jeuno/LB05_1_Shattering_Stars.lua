@@ -126,7 +126,7 @@ quest.sections =
             ['Maat'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:messageText(npc, 10448)
+                    return quest:messageText(10448)
                 end,
             },
         },
