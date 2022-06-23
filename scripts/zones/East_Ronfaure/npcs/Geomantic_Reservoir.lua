@@ -1,31 +1,27 @@
 -----------------------------------
 -- Area: East Ronfaure
 -- NPC: Geomantic Reservoir
--- Unlocks Geo-Poison
--- !pos 378.875 -39.304 58.313
+-- Unlocks: Geo-Poison
+-- !pos 379.572 -39.057 57.502
 -----------------------------------
+require("scripts/globals/geomantic_reservoir")
+require("scripts/globals/spell_data")
 local ID = require("scripts/zones/East_Ronfaure/IDs")
+-----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:hasSpell(769) then -- Player has Indi-Poison
-        player:startEvent(15000, 277, 3, 380619, -39102, 53620, 163, 539943, 0)
-    else
-        player:PrintToPlayer("You are assaulted by an uncanny sensation.", 0xD)
-    end
+    xi.geomanticReservoir.onTrigger(player, npc, xi.magic.spell.GEO_POISON)
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 15000 then
-        player:addSpell(799) -- TODO: This is not accurate, retail will display message "Player learns Geo-Poison!", with the spell name in green.
-        -- However, I could not locate the correct message type for this.
-    end
+    xi.geomanticReservoir.onEventFinish(player, csid, xi.magic.spell.GEO_POISON)
 end
 
 return entity
