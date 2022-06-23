@@ -47,13 +47,16 @@ local geoSpellTable =
 xi.geomanticReservoir.onTrigger = function(player, npc, geoSpell)
     if not player:hasSpell(geoSpell) and player:getMainJob() == xi.job.GEO then
         player:startEvent(15000, 277)
-    else
+    elseif player:hasSpell(geoSpell) and player:getMainJob() == xi.job.GEO then
         player:messageSpecial(zones[player:getZoneID()].text.UNCANNY_SENSATION)
+    else -- Default text when player is not on GEO
+        player:messageSpecial(zones[player:getZoneID()].text.NOTHING_OUT_OF_ORDINARY)
     end
 end
 
 xi.geomanticReservoir.onEventFinish = function(player, csid, geoSpell)
     if csid == 15000 then
+        player:addSpell(geoSpell) -- TODO: addSpell() has a message baked in, but it isn't the correct one.
         player:messageSpecial(zones[player:getZoneID()].text.LEARNS, geoSpellTable[geoSpell][1])
     end
 end
