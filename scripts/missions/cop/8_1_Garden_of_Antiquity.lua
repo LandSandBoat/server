@@ -2,7 +2,7 @@
 -- Garden of Antiquity
 -- Promathia 8-1
 -----------------------------------
--- !addmission 6 749
+-- !addmission 6 800
 -- Crystalline Field !pos .1 -10 -464 33
 -----------------------------------
 require('scripts/globals/interaction/mission')
@@ -91,15 +91,17 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if mission:getVar(player, 'Status') == 2 then
-                        mission:event(100)
+                        return mission:event(100)
                     elseif checkTowerCsVars(player) == 3 then
                         mission:setVar(player, antiquityVars[0][2], 0)
                         mission:setVar(player, antiquityVars[1][2], 0)
                         mission:setVar(player, antiquityVars[2][2], 0)
                         mission:setVar(player, 'Status', 2)
-                        mission:progressEvent(100)
+                        return mission:progressEvent(100)
                     elseif mission:getVar(player, 'Status') == 0 then
-                        mission:progressEvent(164)
+                        return mission:progressEvent(164)
+                    else
+                        return player:messageSpecial(npc, zones[player:getZoneID()].text.IMPERVIOUS_FIELD_BLOCKS)
                     end
                 end,
             },
@@ -107,21 +109,27 @@ mission.sections =
             ['_0x1'] =
             {
                 onTrigger = function(player, npc)
-                    rubiousCrystalOnTrigger(player, npc)
+                    if mission:getVar(player, 'Status') == 1 then
+                        rubiousCrystalOnTrigger(player, npc)
+                    end
                 end,
             },
 
             ['_0x2'] =
             {
                 onTrigger = function(player, npc)
-                    rubiousCrystalOnTrigger(player, npc)
+                    if mission:getVar(player, 'Status') == 1 then
+                        rubiousCrystalOnTrigger(player, npc)
+                    end
                 end,
             },
 
             ['_0x3'] =
             {
                 onTrigger = function(player, npc)
-                    rubiousCrystalOnTrigger(player, npc)
+                    if mission:getVar(player, 'Status') == 1 then
+                        rubiousCrystalOnTrigger(player, npc)
+                    end
                 end,
             },
 
@@ -157,7 +165,7 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if mission:getVar(player, 'Status') == 2 then
-                        mission:progressEvent(1)
+                        return mission:progressEvent(1)
                     end
                 end,
             },
@@ -185,7 +193,7 @@ mission.sections =
             ['_0x0'] =
             {
                 onTrigger = function(player, npc)
-                    mission:event(100)
+                    return mission:event(100)
                 end,
             },
 
