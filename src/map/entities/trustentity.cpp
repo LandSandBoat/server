@@ -40,6 +40,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../status_effect_container.h"
 #include "../utils/battleutils.h"
 #include "../utils/trustutils.h"
+#include "../enmity_container.h"
 
 CTrustEntity::CTrustEntity(CCharEntity* PChar)
 : CMobEntity()
@@ -89,9 +90,11 @@ void CTrustEntity::FadeOut()
 void CTrustEntity::Die()
 {
     luautils::OnMobDeath(this, nullptr);
+    PEnmityContainer->Clear();
     PAI->ClearStateStack();
     PAI->Internal_Die(0s);
     ((CCharEntity*)PMaster)->RemoveTrust(this);
+    m_OwnerID.clean();
 
     // NOTE: This is purposefully calling CBattleEntity's impl.
     // TODO: Calling a grand-parent's impl. of an overridden function is bad

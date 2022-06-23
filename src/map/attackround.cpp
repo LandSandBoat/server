@@ -255,6 +255,8 @@ void CAttackRound::CreateAttacks(CItemWeapon* PWeapon, PHYSICAL_ATTACK_DIRECTION
     int16 tripleAttack = m_attacker->getMod(Mod::TRIPLE_ATTACK);
     int16 doubleAttack = m_attacker->getMod(Mod::DOUBLE_ATTACK);
     int16 quadAttack   = m_attacker->getMod(Mod::QUAD_ATTACK);
+    bool multiHitOccurred = false;
+	
     // Checking for Mythic Weapon Aftermath
     int16 occAttThriceRate = std::clamp<int16>(m_attacker->getMod(Mod::MYTHIC_OCC_ATT_THRICE), 0, 100);
     int16 occAttTwiceRate  = std::clamp<int16>(m_attacker->getMod(Mod::MYTHIC_OCC_ATT_TWICE), 0, 100);
@@ -301,15 +303,18 @@ void CAttackRound::CreateAttacks(CItemWeapon* PWeapon, PHYSICAL_ATTACK_DIRECTION
     // Quad/Triple/Double Attack
     else if (xirand::GetRandomNumber(100) < quadAttack)
     {
-        AddAttackSwing(PHYSICAL_ATTACK_TYPE::QUAD, direction, 3);
+        AddAttackSwing(PHYSICAL_ATTACK_TYPE::QUAD, direction, 4);
+        multiHitOccurred = true;
     }
     else if (xirand::GetRandomNumber(100) < tripleAttack)
     {
-        AddAttackSwing(PHYSICAL_ATTACK_TYPE::TRIPLE, direction, 2);
+        AddAttackSwing(PHYSICAL_ATTACK_TYPE::TRIPLE, direction, 3);
+        multiHitOccurred = true;
     }
     else if (xirand::GetRandomNumber(100) < doubleAttack)
     {
-        AddAttackSwing(PHYSICAL_ATTACK_TYPE::DOUBLE, direction, 1);
+        AddAttackSwing(PHYSICAL_ATTACK_TYPE::DOUBLE, direction, 2);
+        multiHitOccurred = true;
     }
     // Mythic Weapons Aftermath, only main hand
     else if (direction == PHYSICAL_ATTACK_DIRECTION::RIGHTATTACK && xirand::GetRandomNumber(100) < occAttThriceRate)
@@ -389,8 +394,12 @@ void CAttackRound::CreateAttacks(CItemWeapon* PWeapon, PHYSICAL_ATTACK_DIRECTION
         }
     }
 
-    // Default hit
-    AddAttackSwing(PHYSICAL_ATTACK_TYPE::NORMAL, direction, 1);
+    // Default hit, necessary to check for multi hits as the hits are assigned as PHYSICAL_ATTACK_TYPE
+    // Double and Triple Attack Damage + mods are assigned to hits based on attack type
+    if (multiHitOccurred == false)
+    {
+        AddAttackSwing(PHYSICAL_ATTACK_TYPE::NORMAL, direction, 1);
+    }
 }
 
 /************************************************************************
