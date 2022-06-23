@@ -74,8 +74,8 @@ xi.garrison.names =
             npcName = "Patriarch"
         },
     },
-    --level 75 garrison names
-    [75] =
+    --level 99 garrison names
+    [99] =
     {
         [0] =
         {
@@ -99,8 +99,6 @@ xi.garrison.looks =
     {
         [0] =
         {
-            802,
-            803,
             804,
             805
             -- "0x01000C030010262000303A403A5008611B700000",
@@ -108,15 +106,11 @@ xi.garrison.looks =
         },
         [1] =
         {
-            802,
-            803,
             804,
             805
         },
         [2] =
         {
-            802,
-            803,
             804,
             805
         },
@@ -126,8 +120,6 @@ xi.garrison.looks =
     {
         [0] =
         {
-            802,
-            803,
             804,
             805
             -- "0x010006030010762076303A400650736000700000",
@@ -137,15 +129,11 @@ xi.garrison.looks =
         },
         [1] =
         {
-            802,
-            803,
             804,
             805
         },
         [2] =
         {
-            802,
-            803,
             804,
             805
         },
@@ -155,8 +143,6 @@ xi.garrison.looks =
     {
         [0] =
         {
-            802,
-            803,
             804,
             805
             -- "0x01000E04191019201930194019506B601C700000",
@@ -164,15 +150,11 @@ xi.garrison.looks =
         },
         [1] =
         {
-            802,
-            803,
             804,
             805
         },
         [2] =
         {
-            802,
-            803,
             804,
             805
         },
@@ -182,22 +164,16 @@ xi.garrison.looks =
     {
         [0] =
         {
-            802,
-            803,
             804,
             805
         },
         [1] =
         {
-            802,
-            803,
             804,
             805
         },
         [2] =
         {
-            802,
-            803,
             804,
             805
             -- "0x0100020600106320633063406350056122700000",
@@ -205,27 +181,22 @@ xi.garrison.looks =
             -- "0x0100080669106B206B306B406B50FE6000700000"
         },
     },
-    --level 75 garrison looks
-    [75] =
+    --level 99 garrison looks
+    [99] =
     {
         [0] =
         {
-            802,
-            803,
             804,
             805
         },
         [1] =
         {
-            802,
-            803,
             804,
             805
+            -- "0x010002071C1070201C301C401C50C46000700000"
         },
         [2] =
         {
-            802,
-            803,
             804,
             805
         },
@@ -283,8 +254,8 @@ xi.garrison.loot =
         {itemId = xi.items.REFRESH_EARRING, dropRate = 350},
         {itemId = xi.items.ACCURATE_EARRING, dropRate = 350},
     },
-    --level 75 garrison loot
-    [75] =
+    --level 99 garrison loot
+    [99] =
     {
         {itemId = xi.items.MIRATETES_MEMOIRS, dropRate = 1000},
         {itemId = xi.items.MIGHTY_BOW, dropRate = 350},
@@ -907,38 +878,37 @@ xi.garrison.data =
         waveOrder =
         {
         -- # Represents the negative offset from boss to spawn
-        -- TODO Capture Correct Wave Order
             [1] =
             {
-                8,
-                7
+                8, -- Goblin Enchanter
+                7  -- Goblin Enchanter
             },
             [2] =
             {
-                8,
-                7,
-                6,
-                5
+                8, -- Goblin Enchanter
+                7, -- Goblin Enchanter
+                6, -- Goblin Poacher
+                5  -- Goblin Poacher
             },
             [3] =
             {
-                8,
-                7,
-                6,
-                5,
-                4,
-                3
+                8, -- Goblin Enchanter
+                7, -- Goblin Enchanter
+                6, -- Goblin Poacher
+                5, -- Goblin Poacher
+                4, -- Goblin Bouncer
+                3  -- Goblin Bouncer
             },
             [4] =
             {
-                8,
-                7,
-                6,
-                5,
-                4,
-                3,
-                2,
-                1
+                8, -- Goblin Enchanter
+                7, -- Goblin Enchanter
+                6, -- Goblin Poacher
+                5, -- Goblin Poacher
+                4, -- Goblin Bouncer
+                3, -- Goblin Bouncer
+                2, -- Goblin Reaper
+                1  -- Goblin Reaper
             },
         },
     },
@@ -1177,7 +1147,7 @@ xi.garrison.data =
     {
         itemReq = xi.items.BUNNY_FANG_SACK,
         textRegion = 13,
-        levelCap = 75,
+        levelCap = 99, -- Level_Restriction 99
         npcs =
         {
         -- empty filled with dynamic entries
@@ -1196,38 +1166,37 @@ xi.garrison.data =
         waveOrder =
         {
         -- # Represents the negative offset from boss to spawn
-        -- TODO Capture Correct Wave Order
             [1] =
             {
-                8,
-                7
+                8, -- Goblin Pirate
+                7  -- Goblin Pirate
             },
             [2] =
             {
-                8,
-                7,
-                6,
-                5
+                8, -- Goblin Pirate
+                7, -- Goblin Pirate
+                6, -- Goblin Duelist
+                5  -- Goblin Duelist
             },
             [3] =
             {
-                8,
-                7,
-                6,
-                5,
-                4,
-                3
+                8, -- Goblin Pirate
+                7, -- Goblin Pirate
+                6, -- Goblin Duelist
+                5, -- Goblin Duelist
+                4, -- Goblin Doctor
+                3  -- Goblin Doctor
             },
             [4] =
             {
-                8,
-                7,
-                6,
-                5,
-                4,
-                3,
-                2,
-                1
+                8, -- Goblin Pirate
+                7, -- Goblin Pirate
+                6, -- Goblin Duelist
+                5, -- Goblin Duelist
+                4, -- Goblin Doctor
+                3, -- Goblin Doctor
+                2, -- Goblin Professor
+                1  -- Goblin Professor
             },
         },
     },
