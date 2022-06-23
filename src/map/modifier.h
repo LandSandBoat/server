@@ -682,8 +682,8 @@ enum class Mod
     WYVERN_BREATH = 402, //
 
     // Gear set modifiers
-    DA_DOUBLE_DAMAGE_RATE    = 408, // Double attack's double damage chance %.
-    TA_TRIPLE_DAMAGE_RATE    = 409, // Triple attack's triple damage chance %.
+    DA_DOUBLE_DMG_RATE       = 408, // Double attack's double damage chance %.
+    TA_TRIPLE_DMG_RATE       = 409, // Triple attack's triple damage chance %.
     ZANSHIN_DOUBLE_DAMAGE    = 410, // Zanshin's double damage chance %.
     RAPID_SHOT_DOUBLE_DAMAGE = 479, // Rapid shot's double damage chance %.
     ABSORB_DMG_CHANCE        = 480, // Chance to absorb damage %
