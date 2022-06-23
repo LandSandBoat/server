@@ -114,23 +114,6 @@ quest.sections =
             },
         },
     },
-
-    -- Section: Quest Completed.
-    {
-        check = function(player, status, vars)
-            return status == QUEST_COMPLETED
-        end,
-
-        [xi.zone.RULUDE_GARDENS] =
-        {
-            ['Maat'] =
-            {
-                onTrigger = function(player, npc)
-                    return quest:messageText(10448)
-                end,
-            },
-        },
-    },
 }
 
 return quest
