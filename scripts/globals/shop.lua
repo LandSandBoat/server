@@ -529,7 +529,7 @@ xi.shop =
         {
                 10293, 	 5000,	  0						   ,   -- Chocobo Shirt
 				11811, 	 5000,    0						   ,   -- Destrier Beret
-				15198,   5000,    0                        ,   -- Sprout Beret
+--				15198,   5000,    0                        ,   -- Sprout Beret
 				4378,      60,    0						   ,   -- Selbina Milk
                 4299,     100,    0						   ,   -- Orange au Lait
                 5703,     100,    0						   ,   -- Uleguerand Milk
