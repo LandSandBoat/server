@@ -1,7 +1,7 @@
 -----------------------------------
 -- Magic Barrier
 --
--- Description: Ranged shield
+-- Description: Magic shield
 -- Type: Enhancing
 -- Utsusemi/Blink absorb: N/A
 -- Range: Self

@@ -50,6 +50,7 @@ namespace gambits
         CASTING_MA         = 17,
         RANDOM             = 18,
         NO_SAMBA           = 19,
+        NO_STORM           = 20,
     };
 
     enum class G_REACTION : uint16
@@ -76,6 +77,8 @@ namespace gambits
         HIGHEST_WALTZ       = 8,
         ENTRUSTED           = 9,
         BEST_INDI           = 10,
+        STORM_DAY           = 11,
+        HELIX_DAY           = 12,
     };
 
     enum class G_TP_TRIGGER : uint16

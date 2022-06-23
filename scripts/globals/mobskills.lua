@@ -521,6 +521,12 @@ end
 
 xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType, damageType, shadowbehav)
 
+    -- If target has Hysteria, no message skip rest
+    if mob:hasStatusEffect(xi.effect.HYSTERIA) then
+        skill:setMsg(xi.msg.basic.NONE)
+        return 0
+    end
+
     -- physical attack missed, skip rest
     if skill:hasMissMsg() then
         return 0
@@ -692,6 +698,12 @@ xi.mobskills.mobDrainMove = function(mob, target, drainType, drain, attackType, 
 end
 
 xi.mobskills.mobPhysicalDrainMove = function(mob, target, skill, drainType, drain)
+
+    -- If target has Hysteria, no message skip rest
+    if mob:hasStatusEffect(xi.effect.HYSTERIA) then
+        return xi.msg.basic.NONE
+    end
+
     if (xi.mobskills.mobPhysicalHit(skill)) then
         return xi.mobskills.mobDrainMove(mob, target, drainType, drain)
     end
@@ -734,6 +746,12 @@ xi.mobskills.mobDrainAttribute = function(mob, target, typeEffect, power, tick, 
 end
 
 xi.mobskills.mobDrainStatusEffectMove = function(mob, target)
+
+    -- If target has Hysteria, no message skip rest
+    if mob:hasStatusEffect(xi.effect.HYSTERIA) then
+        return xi.msg.basic.NONE
+    end
+
     -- try to drain buff
     local effect = mob:stealStatusEffect(target)
 

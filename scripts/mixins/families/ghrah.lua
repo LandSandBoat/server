@@ -14,14 +14,14 @@ g_mixins.families.ghrah = function(ghrahMob)
         mob:setModelId(skin)
 
         if skin == 1161 then -- Fire
-            mob:setSpellList(479)
+            mob:setSpellList(484)
             mob:setMod(xi.mod.ICE_RES, 80)
             mob:setMod(xi.mod.PARALYZERES, 99)
             mob:setMod(xi.mod.BINDRES, 99)
             mob:setMod(xi.mod.FIRE_RES, 100)
             mob:setMod(xi.mod.WATER_RES, -27)
         elseif skin == 1162 then -- Ice
-            mob:setSpellList(465)
+            mob:setSpellList(479)
             mob:setMod(xi.mod.WIND_RES, 80)
             mob:setMod(xi.mod.GRAVITYRES, 99)
             mob:setMod(xi.mod.SILENCERES, 99)
