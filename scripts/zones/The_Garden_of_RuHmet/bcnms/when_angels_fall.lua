@@ -32,9 +32,6 @@ end
 
 battlefield_object.onEventFinish = function(player, csid, option)
     if csid== 32001 then
-        if player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.WHEN_ANGELS_FALL and player:getCharVar("PromathiaStatus") == 4 then
-            player:setCharVar("PromathiaStatus", 5)
-        end
         player:setPos(420, 0, 445, 192)
     end
 end

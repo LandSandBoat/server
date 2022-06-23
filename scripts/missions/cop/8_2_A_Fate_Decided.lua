@@ -31,14 +31,14 @@ mission.sections =
         [xi.zone.GRAND_PALACE_OF_HUXZOI] =
         {
 
-            ['_iya'] =
+            ['_iya'] = -- Gate of the Gods
             {
                 onTrigger = function(player, npc)
                     return player:messageSpecial(zones[npc:getZoneID()].text.PORTAL_DOES_NOT_RESPOND)
                 end,
             },
 
-            ['_iyb'] =
+            ['_iyb'] = -- East Particle Gate
             {
                 onTrigger = function(player, npc)
                     if mission:getVar(player, 'Status') == 0 then
@@ -49,14 +49,14 @@ mission.sections =
                 end,
             },
 
-            ['_iyc'] =
+            ['_iyc'] = -- West Partical Gate
             {
                 onTrigger = function(player, npc)
                     return player:messageSpecial(zones[npc:getZoneID()].text.GATE_DOES_NOT_RESPOND)
                 end,
             },
 
-            ['_iyq'] =
+            ['_iyq'] = -- Cermet Portal
             {
                 onTrigger = function(player,npc)
                     if mission:getVar(player, 'Status') == 1 and not GetMobByID(zones[npc:getZoneID()].mob.IXGHRAH):isSpawned() then
@@ -94,28 +94,28 @@ mission.sections =
 
         [xi.zone.GRAND_PALACE_OF_HUXZOI] =
         {
-            ['_iya'] =
+            ['_iya'] = -- Gate of the Gods
             {
                 onTrigger = function(player, npc)
                     return mission:event(52)
                 end,
             },
 
-            ['_iyb'] =
+            ['_iyb'] = -- East Particle Gate
             {
                 onTrigger = function(player, npc)
                     return mission:event(56)
                 end,
             },
 
-            ['_iyc'] =
+            ['_iyc'] = -- West Particle Gate
             {
                 onTrigger = function(player, npc)
                     return mission:event(172)
                 end,
             },
 
-            ['_iyq'] =
+            ['_iyq'] = -- Cermet Portal
             {
                 onTrigger = function(player,npc)
                     return player:messageSpecial(zones[npc:getZoneID()].text.PORTAL_DOES_NOT_RESPOND)

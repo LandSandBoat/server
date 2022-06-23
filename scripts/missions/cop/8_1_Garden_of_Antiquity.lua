@@ -87,7 +87,7 @@ mission.sections =
 
         [xi.zone.ALTAIEU] =
         {
-            ['_0x0'] =
+            ['_0x0'] = -- Crystalline Field
             {
                 onTrigger = function(player, npc)
                     if mission:getVar(player, 'Status') == 2 then
@@ -106,7 +106,7 @@ mission.sections =
                 end,
             },
 
-            ['_0x1'] =
+            ['_0x1'] = -- South Tower
             {
                 onTrigger = function(player, npc)
                     if mission:getVar(player, 'Status') == 1 then
@@ -115,7 +115,7 @@ mission.sections =
                 end,
             },
 
-            ['_0x2'] =
+            ['_0x2'] = -- West Tower
             {
                 onTrigger = function(player, npc)
                     if mission:getVar(player, 'Status') == 1 then
@@ -124,7 +124,7 @@ mission.sections =
                 end,
             },
 
-            ['_0x3'] =
+            ['_0x3'] = -- East Tower
             {
                 onTrigger = function(player, npc)
                     if mission:getVar(player, 'Status') == 1 then
@@ -161,7 +161,7 @@ mission.sections =
 
         [xi.zone.GRAND_PALACE_OF_HUXZOI] =
         {
-            ['_iya'] =
+            ['_iya'] = -- Gate of the Gods
             {
                 onTrigger = function(player, npc)
                     if mission:getVar(player, 'Status') == 2 then
@@ -172,14 +172,14 @@ mission.sections =
                 end,
             },
 
-            ['_iyb'] =
+            ['_iyb'] = -- East Particle Gate
             {
                 onTrigger = function(player, npc)
                     return player:messageSpecial(zones[npc:getZoneID()].text.GATE_DOES_NOT_RESPOND)
                 end,
             },
 
-            ['_iyc'] =
+            ['_iyc'] = -- West Particle Gate
             {
                 onTrigger = function(player, npc)
                     return player:messageSpecial(zones[npc:getZoneID()].text.GATE_DOES_NOT_RESPOND)
@@ -206,7 +206,7 @@ mission.sections =
 
         [xi.zone.ALTAIEU] =
         {
-            ['_0x0'] =
+            ['_0x0'] = -- Crystalline Field
             {
                 onTrigger = function(player, npc)
                     return mission:event(100)
