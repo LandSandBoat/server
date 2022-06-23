@@ -318,8 +318,8 @@ enum class Mod
 
     // Monk
     BOOST_EFFECT        = 97,   // Boost power in tenths
-    CHAKRA_MULT         = 1026,  // Chakra multiplier increase (from gear)
-    CHAKRA_REMOVAL      = 1027,  // Extra statuses removed by Chakra
+    CHAKRA_MULT         = 1026, // Chakra multiplier increase (from gear)
+    CHAKRA_REMOVAL      = 1027, // Extra statuses removed by Chakra
     SUBTLE_BLOW         = 289,  // How much TP to reduce.
     COUNTER             = 291,  // Percent chance to counter
     KICK_ATTACK_RATE    = 292,  // Percent chance to kick
@@ -682,8 +682,8 @@ enum class Mod
     WYVERN_BREATH = 402, //
 
     // Gear set modifiers
-    DA_DOUBLE_DAMAGE         = 408, // Double attack's double damage chance %.
-    TA_TRIPLE_DAMAGE         = 409, // Triple attack's triple damage chance %.
+    DA_DOUBLE_DAMAGE_RATE    = 408, // Double attack's double damage chance %.
+    TA_TRIPLE_DAMAGE_RATE    = 409, // Triple attack's triple damage chance %.
     ZANSHIN_DOUBLE_DAMAGE    = 410, // Zanshin's double damage chance %.
     RAPID_SHOT_DOUBLE_DAMAGE = 479, // Rapid shot's double damage chance %.
     ABSORB_DMG_CHANCE        = 480, // Chance to absorb damage %
