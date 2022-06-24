@@ -368,6 +368,22 @@ namespace gambits
                             controller->Cast(target->targid, spell_id.value());
                         }
                     }
+                    else if (action.select == G_SELECT::STORM_DAY)
+                    {
+                        auto spell_id = POwner->SpellContainer->GetStormDay();
+                        if (spell_id.has_value())
+                        {
+                            controller->Cast(target->targid, spell_id.value());
+                        }
+                    }
+                    else if (action.select == G_SELECT::HELIX_DAY)
+                    {
+                        auto spell_id = POwner->SpellContainer->GetHelixDay();
+                        if (spell_id.has_value())
+                        {
+                            controller->Cast(target->targid, spell_id.value());
+                        }
+                    }
                     else if (action.select == G_SELECT::RANDOM)
                     {
                         auto spell_id = POwner->SpellContainer->GetSpell();
@@ -610,6 +626,34 @@ namespace gambits
                     noSamba = false;
                 }
                 return noSamba;
+                break;
+            }
+            case G_CONDITION::NO_STORM:
+            {
+                bool noStorm = true;
+                if (trigger_target->StatusEffectContainer->HasStatusEffect(
+                {
+                    EFFECT_FIRESTORM,
+                    EFFECT_HAILSTORM,
+                    EFFECT_WINDSTORM,
+                    EFFECT_SANDSTORM,
+                    EFFECT_THUNDERSTORM,
+                    EFFECT_RAINSTORM,
+                    EFFECT_AURORASTORM,
+                    EFFECT_VOIDSTORM,
+                    EFFECT_FIRESTORM_II,
+                    EFFECT_HAILSTORM_II,
+                    EFFECT_WINDSTORM_II,
+                    EFFECT_SANDSTORM_II,
+                    EFFECT_THUNDERSTORM_II,
+                    EFFECT_RAINSTORM_II,
+                    EFFECT_AURORASTORM_II,
+                    EFFECT_VOIDSTORM_II,
+                }))
+                {
+                    noStorm = false;
+                }
+                return noStorm;
                 break;
             }
             case G_CONDITION::STATUS_FLAG:

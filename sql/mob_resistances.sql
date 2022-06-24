@@ -156,7 +156,7 @@ INSERT INTO `mob_resistances` VALUES (130,'Gigas',1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,
 INSERT INTO `mob_resistances` VALUES (131,'Gnat',1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 INSERT INTO `mob_resistances` VALUES (132,'Gnole',1,1,1,1,0,-1250,0,0,-1250,0,0,1250,0,0,0,0,0,0,0,0);
 INSERT INTO `mob_resistances` VALUES (133,'Goblin',1,1,1,1,0,0,0,0,0,0,-2500,0,0,0,0,0,0,0,0,0);
-INSERT INTO `mob_resistances` VALUES (134,'God',1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+INSERT INTO `mob_resistances` VALUES (134,'God',0.9,0.9,0.9,0.9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 INSERT INTO `mob_resistances` VALUES (135,'Golem',1,1,1,1,0,0,0,0,-1250,0,0,0,0,0,0,0,0,0,0,0);
 INSERT INTO `mob_resistances` VALUES (136,'Goobbue',1,1,1,1,-2500,0,0,0,-1250,0,0,-2500,0,0,0,0,0,0,0,0);
 INSERT INTO `mob_resistances` VALUES (137,'Gorger',1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);

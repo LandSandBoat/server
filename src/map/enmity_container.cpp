@@ -148,6 +148,12 @@ float CEnmityContainer::CalculateEnmityBonus(CBattleEntity* PEntity)
 void CEnmityContainer::UpdateEnmity(CBattleEntity* PEntity, int32 CE, int32 VE, bool withMaster, bool tameable)
 {
     TracyZoneScoped;
+
+    if (m_EnmityHolder->objtype != ENTITYTYPE::TYPE_MOB) // pets and trusts dont have enmity.
+    {
+        return;
+    }
+
     // you're too far away so i'm ignoring you
     if (!IsWithinEnmityRange(PEntity))
     {

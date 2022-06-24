@@ -837,8 +837,9 @@ xi.effect =
     MEDITATE                 = 801, -- Dummy effect for SAM Meditate JA
     ELEMENTALRES_DOWN        = 802, -- Elemental resistance down
     FULL_SPEED_AHEAD         = 803, -- Helper for quest: Full Speed Ahead!
-    -- PLACEHOLDER           = 804, -- Description
-    -- 804-1022
+    HYSTERIA                 = 804, -- Used for Hysteroanima to stop after readying a weaponskill with no msg.
+    -- PLACEHOLDER           = 805, -- Description
+    -- 805-1022
     -- PLACEHOLDER             = 1023 -- The client dat file seems to have only this many "slots", results of exceeding that are untested.
 }
 
@@ -1149,6 +1150,7 @@ xi.mod =
     MIJIN_RERAISE                   = 258,
     DUAL_WIELD                      = 259,
     DOUBLE_ATTACK                   = 288,
+    DOUBLE_ATTACK_DMG               = 1038, -- Increases "Double Attack" damage/"Double Attack" damage + (in percents, e.g. +20 = +20% damage)
     SUBTLE_BLOW                     = 289,
     SUBTLE_BLOW_II                  = 973, -- Subtle Blow II Effect (Cap 50%) Total Effect (SB + SB_II cap 75%)
     ENF_MAG_POTENCY                 = 290, -- Increases Enfeebling magic potency %
@@ -1166,6 +1168,7 @@ xi.mod =
     STONESKIN                       = 300,
     PHALANX                         = 301,
     TRIPLE_ATTACK                   = 302,
+    TRIPLE_ATTACK_DMG               = 1039, -- Increases "Triple Attack" damage/"Triple Attack" damage + (in percents, e.g. +20 = +20% damage)
     TREASURE_HUNTER                 = 303,
     TAME                            = 304,
     RECYCLE                         = 305,
