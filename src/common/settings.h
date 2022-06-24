@@ -125,6 +125,8 @@ namespace settings
                 [&](std::string const& arg)
                 {
                     bool isTruthy = !arg.empty() && arg != "false" && arg != "0";
+                    std::ignore = isTruthy;
+
                     if constexpr (std::is_same_v<T, bool>)
                     {
                         out = isTruthy;
