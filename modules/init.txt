@@ -36,7 +36,13 @@
 #
 # Live example:
 
-custom/commands/
 custom/lua/test_npcs_in_gm_home.lua
+custom/lua/conquest_npc_shops_always_open.lua
+custom/lua/conquest_regional_npcs_always_up.lua
+custom/lua/claim_shield.lua
+custom/lua/new_player_linkshell.lua
+custom/lua/custom_containers.lua
+custom/lua/guild_no_kits.lua
 era/lua/75_era_vendors.lua
+era/sql/75_era_spells.sql
 
