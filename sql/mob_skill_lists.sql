@@ -3837,8 +3837,9 @@ INSERT INTO `mob_skill_lists` VALUES ('Avatar_Leviathan_TSTBW',1182,858); -- Bar
 INSERT INTO `mob_skill_lists` VALUES ('Avatar_Leviathan_TSTBW',1182,859); -- Water II
 
 INSERT INTO `mob_skill_lists` VALUES ('EldritchEdge',1183,397);
+INSERT INTO `mob_skill_lists` VALUES ('DynastBeetle',1184,341);
 
--- Next available ID: 1183
+-- Next available ID: 1185
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section

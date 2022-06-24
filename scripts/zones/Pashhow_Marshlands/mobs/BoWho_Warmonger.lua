@@ -3,55 +3,58 @@
 --   NM: Bo'Who Warmonger
 -----------------------------------
 require("scripts/globals/regimes")
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 local ID = require("scripts/zones/Pashhow_Marshlands/IDs")
 -----------------------------------
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.LEADER, 2)
+end
+
 entity.onMobSpawn = function(mob)
     -- Takes half damage from all attacks
-    mob:addMod(tpz.mod.UDMGPHYS,-5000)
-    mob:addMod(tpz.mod.UDMGRANGE,-5000)
-    mob:addMod(tpz.mod.UDMGMAGIC,-5000)
-    mob:addMod(tpz.mod.UDMGBREATH,-5000)
+    mob:addMod(xi.mod.DMG,-5000)
 
-    -- May spawn in a party with two other Quadav
-    if math.random(1,2) == 1 then
-        GetMobByID(ID.mob.BOWHO_GUARD1):setSpawn(mob:getXPos()+2, mob:getYPos(), mob:getZPos())
-        GetMobByID(ID.mob.BOWHO_GUARD2):setSpawn(mob:getXPos()+4, mob:getYPos(), mob:getZPos())
-        SpawnMob(ID.mob.BOWHO_GUARD1)
-        SpawnMob(ID.mob.BOWHO_GUARD2)
-    end
-end
-
-entity.onMobEngage = function(mob, target)
-    for i = 1, 2 do
-        local guard = GetMobByID(mob:getID() + i)
-        if guard:isSpawned() then
-            guard:updateEnmity(target)
-        end
-    end
-end
-
-entity.onMobRoam = function(mob)
     local mobId = mob:getID()
+    local x = mob:getXPos()
+    local y = mob:getYPos()
+    local z = mob:getZPos()
+    local r = mob:getRotPos()
 
-    for i = 1, 2 do
-        local guard = GetMobByID(mobId + i)
-        if guard:isSpawned() and guard:getID() == mobId + 1 then
-            guard:pathTo(mob:getXPos() + 1, mob:getYPos() + 3, mob:getZPos() + 0.15)
-        elseif guard:isSpawned() and guard:getID() == mobId + 2 then
-            guard:pathTo(mob:getXPos() + 3, mob:getYPos() + 5, mob:getZPos() + 0.15)
+    if mob:getMobMod(xi.mobMod.LEADER) > 0 then
+        for i = 1, mob:getMobMod(xi.mobMod.LEADER) do
+            local followerId = mobId + i
+            local follower = GetMobByID(followerId)
+
+            if not follower:isSpawned() then
+                local newX = x + math.random(-2, 2)
+                local newY = y
+                local newZ = z + math.random(-2, 2)
+
+                follower:setSpawn(newX, newY, newZ, r)
+                follower:spawn()
+                follower:setMobFlags(1153)
+            end
+
+            xi.follow.follow(follower, mob)
         end
+    end
+end
+
+entity.onMobEngaged = function(mob, target)
+    local mobId = mob:getID()
+    for i = 1, 2 do
+        GetMobByID(mobId+i):updateEnmity(target)
     end
 end
 
 entity.onMagicCastingCheck = function(mob, target, spell)
     -- Frequently casts Cure 3 on itself below 50% HP
     if mob:getHPP() < 50 then
-        if math.random(1,2) == 1 then
-            return 3
-        end
+        mob:setMobMod(xi.mobMod.HEAL_CHANCE, 80)
+    else
+        mob:setMobMod(xi.mobMod.HEAL_CHANCE, 40)
     end
 end
 
