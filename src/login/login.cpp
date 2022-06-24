@@ -51,6 +51,9 @@ std::thread messageThread;
 
 std::unique_ptr<SqlConnection> sql;
 
+uint8 ver_lock   = 0;
+uint8 maint_mode = 0;
+
 #define ShowLogin(...) _ShowTrace("login", __VA_ARGS__)
 
 int32 do_init(int32 argc, char** argv)
@@ -98,32 +101,31 @@ int32 do_init(int32 argc, char** argv)
     [&](std::vector<std::string> inputs)
     {
         // handle wrap around from 2 -> 3 as 0
-        //auto temp             = (version_info.ver_lock + 1) % 3;
-        //version_info.ver_lock = temp;
+        auto temp = (ver_lock + 1) % 3;
+        ver_lock  = temp;
 
-        //const char* value = "";
-        //switch (version_info.ver_lock)
-        //{
-        //    case 0:
-        //        value = "disabled";
-        //        break;
-        //    case 1:
-        //        value = "enabled - strict";
-        //        break;
-        //    case 2:
-        //        value = "enabled - greater than or equal";
-        //        break;
-        //}
-        //fmt::printf("Version lock mode: %i - %s\n", version_info.ver_lock, value);
+        const char* value = "";
+        switch (ver_lock)
+        {
+            case 0:
+                value = "disabled";
+                break;
+            case 1:
+                value = "enabled - strict";
+                break;
+            case 2:
+                value = "enabled - greater than or equal";
+                break;
+        }
+        fmt::printf("Version lock mode: %i - %s\n", ver_lock, value);
     });
 
     gConsoleService->RegisterCommand(
     "maint_mode", "Cycle between maintenance modes.",
     [&](std::vector<std::string> inputs)
     {
-        //maint_config.maint_mode = (maint_config.maint_mode + 1) % 2;
-        //config_write(MAINT_CONF_FILENAME, "maint", maint_config_write);
-        //fmt::printf("Maintenance mode changed to %i\n", maint_config.maint_mode);
+        maint_mode = (maint_mode + 1) % 2;
+        fmt::printf("Maintenance mode changed to %i\n", maint_mode);
     });
     // clang-format on
 
