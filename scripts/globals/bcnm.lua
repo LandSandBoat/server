@@ -671,7 +671,7 @@ local function checkReqs(player, npc, bfid, registrant)
         [ 965] = function() return ( player:hasKeyItem(xi.ki.MONARCH_BEARD)                                                                                                ) end, -- ENM: Beloved of Atlantes
         [ 992] = function() return ( cop == mi.cop.ONE_TO_BE_FEARED and player:getCharVar('Mission[6][638]Status') == 3                                                    ) end, -- PM6-4: One to be Feared
         [ 993] = function() return ( cop == mi.cop.THE_WARRIORS_PATH and player:getCharVar('Mission[6][748]Status') == 1                                                   ) end, -- PM7-5: The Warrior's Path
-        [1024] = function() return ( cop == mi.cop.WHEN_ANGELS_FALL and copStat == 4                                                                                       ) end, -- PM8-3: When Angels Fall
+        [1024] = function() return ( player:getCharVar('Mission[6][828]Status') == 4                                                                                       ) end, -- PM8-3: When Angels Fall
         [1056] = function() return ( cop == mi.cop.DAWN and copStat == 2                                                                                                   ) end, -- PM8-4: Dawn
         [1057] = function() return ( player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
                                      player:getCharVar('ApocalypseNigh') == 4                                                                                              ) end, -- Apocalypse Nigh
@@ -730,6 +730,8 @@ local function checkReqs(player, npc, bfid, registrant)
         [ 965] = function() return ( player:hasKeyItem(xi.ki.MONARCH_BEARD)                                                                                ) end, -- ENM: Beloved of Atlantes
         [ 928] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.ANCIENT_VOWS) or
                                    ( cop == mi.cop.ANCIENT_VOWS and player:getCharVar('Mission[6][248]Status') >= 2)                                       ) end, -- Quest: Ouryu Cometh
+        [1024] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.WHEN_ANGELS_FALL) or
+                                    player:getCharVar('Mission[6][828]Status') >= 4                                                                        ) end, -- PM8-3: When Angels Fall
         [1057] = function() return ( player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) or
                                    ( player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
                                      player:getCharVar('ApocalypseNigh') == 4)                                                                             ) end, -- Quest: Apocalypse Nigh
@@ -854,7 +856,7 @@ local function checkSkip(player, bfid)
         [ 960] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.ANCIENT_VOWS)                                                                                       ) end, -- PM2-5: Ancient Vows
         [ 961] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.THE_SAVAGE) or (cop == mi.cop.THE_SAVAGE and player:getCharVar('Mission[6][418]Status') > 1)        ) end, -- PM4-2: The Savage
         [ 993] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.THE_WARRIORS_PATH)                                                                                  ) end, -- PM7-5: The Warrior's Path
-        [1024] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.WHEN_ANGELS_FALL) or (cop == mi.cop.WHEN_ANGELS_FALL and copStat > 4)                               ) end, -- PM8-3: When Angels Fall
+        [1024] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.WHEN_ANGELS_FALL) or player:getCharVar('Mission[6][828]Status') > 4                                 ) end, -- PM8-3: When Angels Fall
         [1056] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.DAWN) or (cop == mi.cop.DAWN and copStat > 2)                                                       ) end, -- PM8-4: Dawn
         [1057] = function() return ( player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH)                                                                           ) end, -- Apocalypse Nigh
         [2721] = function() return ( player:hasCompletedMission(xi.mission.log_id.WOTG, mi.wotg.PURPLE_THE_NEW_BLACK)                                                                             ) end, -- WOTG07: Purple, The New Black

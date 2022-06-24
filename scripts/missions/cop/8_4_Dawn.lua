@@ -31,11 +31,15 @@ mission.sections =
 
         [xi.zone.ALTAIEU] =
         {
-            onZoneIn = function(player, prevZone)
-                if mission:getVar(player, 'Status') == 0 then
-                    return mission:progressEvent(167)
-                end
-            end,
+            onZoneIn =
+            {
+                function(player, prevZone)
+                print(mission:getVar(player, 'Status'))
+                if mission:getVar(player, 'Status') < 1 then
+                        return 167
+                    end
+                end,
+            },
 
             onEventFinish =
             {
