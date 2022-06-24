@@ -3836,6 +3836,8 @@ INSERT INTO `mob_skill_lists` VALUES ('Avatar_Titan_TSTBE',1181,850); -- Stone I
 INSERT INTO `mob_skill_lists` VALUES ('Avatar_Leviathan_TSTBW',1182,858); -- Barracuda Dive
 INSERT INTO `mob_skill_lists` VALUES ('Avatar_Leviathan_TSTBW',1182,859); -- Water II
 
+INSERT INTO `mob_skill_lists` VALUES ('EldritchEdge',1183,397);
+
 -- Next available ID: 1183
 
 -- ------------------------------------------------------------

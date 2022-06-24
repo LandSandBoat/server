@@ -70,9 +70,11 @@ zones[xi.zone.ROLANBERRY_FIELDS] =
             [17228149] = 17228150, -- 395 -24 -147
         },
 
-        SILK_CATERPILLAR  = 17227782,
-        SIMURGH           = 17228242,
-        CHUGLIX_BERRYPAWS = 17228249,
+        SILK_CATERPILLAR     = 17227782,
+        SIMURGH              = 17228242,
+        CHUGLIX_BERRYPAWS    = 17228249,
+        BLACK_TRIPLE_STARS_1 = 17227972,
+        BLACK_TRIPLE_STARS_2 = 17227992,
 
         VOIDWALKER =
         {
