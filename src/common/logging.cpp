@@ -90,15 +90,4 @@ namespace logging
         spdlog::drop_all();
         spdlog::shutdown();
     }
-
-    void UpdateFilters()
-    {
-        // Broad categories
-        for (auto& name : logNames)
-        {
-            auto settingsKey = fmt::format("logging.ENABLE_{}", to_upper(name));
-            bool settingsVal = settings::get<bool>(settingsKey);
-            spdlog::get(name)->set_level(settingsVal ? spdlog::level::trace : spdlog::level::off);
-        }
-    }
 } // namespace logging
