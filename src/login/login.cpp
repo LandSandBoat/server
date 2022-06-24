@@ -54,12 +54,8 @@ std::unique_ptr<SqlConnection> sql;
 uint8 ver_lock   = 0;
 uint8 maint_mode = 0;
 
-#define ShowLogin(...) _ShowTrace("login", __VA_ARGS__)
-
 int32 do_init(int32 argc, char** argv)
 {
-    ShowLogin("Test");
-
     login_fd = makeListenBind_tcp(settings::get<std::string>("network.LOGIN_AUTH_IP").c_str(), settings::get<uint16>("network.LOGIN_AUTH_PORT"), connect_client_login);
     ShowInfo("The login-server-auth is ready (Server is listening on the port %u).", settings::get<uint16>("network.LOGIN_AUTH_PORT"));
 

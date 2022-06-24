@@ -41,20 +41,22 @@ namespace logging
 {
     void InitializeLog(std::string serverName, std::string logFile, bool appendDate);
     void ShutDown();
-    void UpdateFilters();
 } // namespace logging
-
-// TODO: Build helpers around this macro (so function and line info can be preserved)
-// #define SPDLOG_LOGGER_CALL(logger, level, ...) (logger)->log(spdlog::source_loc{__FILE__, __LINE__, SPDLOG_FUNCTION}, level, __VA_ARGS__)
 
 // clang-format off
 
+// Regular Loggers
 #define ShowTrace(...)    { auto _msgStr = fmt::sprintf(__VA_ARGS__); TracyMessageStr(_msgStr); SPDLOG_LOGGER_TRACE(spdlog::get("trace"), _msgStr); }
 #define ShowDebug(...)    { auto _msgStr = fmt::sprintf(__VA_ARGS__); TracyMessageStr(_msgStr); SPDLOG_LOGGER_DEBUG(spdlog::get("debug"), _msgStr); }
 #define ShowInfo(...)     { auto _msgStr = fmt::sprintf(__VA_ARGS__); TracyMessageStr(_msgStr); SPDLOG_LOGGER_INFO(spdlog::get("info"), _msgStr); }
 #define ShowWarning(...)  { auto _msgStr = fmt::sprintf(__VA_ARGS__); TracyMessageStr(_msgStr); SPDLOG_LOGGER_WARN(spdlog::get("warning"), _msgStr); }
 #define ShowError(...)    { auto _msgStr = fmt::sprintf(__VA_ARGS__); TracyMessageStr(_msgStr); SPDLOG_LOGGER_ERROR(spdlog::get("error"), _msgStr); }
 #define ShowCritical(...) { auto _msgStr = fmt::sprintf(__VA_ARGS__); TracyMessageStr(_msgStr); SPDLOG_LOGGER_CRITICAL(spdlog::get("critical"), _msgStr); }
+
+// Trace Loggers
+#define TraceNavmesh(...) { if (settings::get<bool>("logging.TRACE_NAVMESH")) { ShowTrace(...); } }
+#define TracePackets(...) { if (settings::get<bool>("logging.TRACE_PACKETS")) { ShowTrace(...); } }
+
 // clang-format on
 
 #endif // _LOGGING_H
