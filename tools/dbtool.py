@@ -173,20 +173,27 @@ def fetch_versions():
     except: # lgtm [py/catch-base-exception]
         print(colorama.Fore.RED + 'Unable to read current version hash.')
 
-    filename = '../settings/default/login.lua'
-    if os.path.exists('../settings/login.lua'):
-        filename = '../settings/login.lua'
-
     try:
-        with open(filename) as f:
+        with open('../settings/default/login.lua') as f:
             while True:
                 line = f.readline()
                 if not line: break
-                match = re.match(r'\S?CLIENT_VER =\s+(\S+)', line)
+                match = re.match(r'\s+?CLIENT_VER =\s+"(\S+)"', line)
                 if match:
                     release_client = match.group(1)
     except: # lgtm [py/catch-base-exception]
-        print(colorama.Fore.RED + 'Unable to read ' + filename)
+        print(colorama.Fore.RED + 'Unable to read ../settings/default/login.lua.')
+    if os.path.exists('../settings/login.lua'):
+        try:
+            with open('../settings/login.lua') as f:
+                while True:
+                    line = f.readline()
+                    if not line: break
+                    match = re.match(r'\s+?CLIENT_VER =\s+"(\S+)"', line)
+                    if match:
+                        current_client = match.group(1)
+        except: # lgtm [py/catch-base-exception]
+            print(colorama.Fore.RED + 'Unable to read ../settings/login.lua')
 
     if db_ver and release_version:
         fetch_files(True)
@@ -290,25 +297,22 @@ def write_version(silent=False):
     db_ver = release_version
     write_configs()
 
-    filename = '../settings/default/login.lua'
     if os.path.exists('../settings/login.lua'):
-        filename = '../settings/login.lua'
-
-    try:
-        if current_client != release_client:
-            for line in fileinput.input(filename, inplace=True):
-                match = re.match(r'\S?CLIENT_VER =\s+(\S+)', line)
-                if match:
-                    line = 'CLIENT_VER: ' + release_client + '\n'
-                print(line, end='')
-        else:
-            update_client = False
-        if update_client:
-            print(colorama.Fore.GREEN + 'Updated client version!')
-        fetch_versions()
-    except: # lgtm [py/catch-base-exception]
-        fileinput.close()
-        print(colorama.Fore.RED + 'Error writing version.')
+        try:
+            if current_client != release_client:
+                for line in fileinput.input('../settings/login.lua', inplace=True):
+                    match = re.match(r'\s+?CLIENT_VER =\s+(\S+)', line)
+                    if match:
+                        line = '    CLIENT_VER = "' + release_client + '",\n'
+                    print(line, end='')
+            else:
+                update_client = False
+            if update_client:
+                print(colorama.Fore.GREEN + 'Updated client version!')
+            fetch_versions()
+        except: # lgtm [py/catch-base-exception]
+            fileinput.close()
+            print(colorama.Fore.RED + 'Error writing version.')
 
 def import_file(file):
     print('Importing ' + file + '...')
@@ -355,6 +359,8 @@ def connect():
                 fetch_errors()
                 setup_db()
                 connect()
+            else:
+                quit()
         else:
             print(colorama.Fore.RED + err)
         return False
@@ -561,7 +567,7 @@ def menu():
         print(colorama.Fore.RED + '| ' + colorama.Style.RESET_ALL + str('#' + db_ver).center(37) + colorama.Fore.RED + ' |')
     print(colorama.Fore.GREEN + 'o' + colorama.Fore.RED + '---------------------------------------' + colorama.Fore.GREEN + 'o')
     if express_enabled:
-        print(colorama.Fore.RED + '|' + colorama.Fore.GREEN + 'e' + colorama.Style.RESET_ALL + '. Express Update ' + str('(#' + release_version + ')').ljust(21) + colorama.Fore.RED + ' |')
+        print(colorama.Fore.RED + '|' + colorama.Fore.GREEN + 'e' + colorama.Style.RESET_ALL + '. Express Update ' + str('(#' + release_version + ')').ljust(21) + colorama.Fore.RED + '|')
     print(colorama.Fore.RED + '|' + colorama.Fore.GREEN + '1' + colorama.Style.RESET_ALL + '. Update DB                           ' + colorama.Fore.RED + '|\n'
           '|' + colorama.Fore.GREEN + '2' + colorama.Style.RESET_ALL + '. Check migrations                    ' + colorama.Fore.RED + '|\n'
           '|' + colorama.Fore.GREEN + '3' + colorama.Style.RESET_ALL + '. Backup                              ' + colorama.Fore.RED + '|\n'
