@@ -34,7 +34,7 @@ mission.sections =
             ['_iya'] = -- Gate of the Gods
             {
                 onTrigger = function(player, npc)
-                    return player:messageSpecial(zones[npc:getZoneID()].text.PORTAL_DOES_NOT_RESPOND)
+                    return mission:messageSpecial(zones[npc:getZoneID()].text.PORTAL_DOES_NOT_RESPOND)
                 end,
             },
 
@@ -52,7 +52,7 @@ mission.sections =
             ['_iyc'] = -- West Partical Gate
             {
                 onTrigger = function(player, npc)
-                    return player:messageSpecial(zones[npc:getZoneID()].text.GATE_DOES_NOT_RESPOND)
+                    return mission:messageSpecial(zones[npc:getZoneID()].text.GATE_DOES_NOT_RESPOND)
                 end,
             },
 
@@ -118,7 +118,7 @@ mission.sections =
             ['_iyq'] = -- Cermet Portal
             {
                 onTrigger = function(player,npc)
-                    return player:messageSpecial(zones[npc:getZoneID()].text.PORTAL_DOES_NOT_RESPOND)
+                    return mission:messageSpecial(zones[npc:getZoneID()].text.PORTAL_DOES_NOT_RESPOND)
                 end,
             },
 

@@ -16,8 +16,6 @@ require('scripts/globals/zone')
 
 local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.GARDEN_OF_ANTIQUITY)
 
-local missionVar = Mission.getVarPrefix(xi.mission.log_id.COP, xi.mission.id.cop.GARDEN_OF_ANTIQUITY)
-
 local antiquityVars =
 {
     -- [crystalOffset] = {thisFightDone, thisCsAcquired, otherCrystal, otherCrystal2, firstCsParam, secondCsParam1, secondCsParam2}
@@ -31,42 +29,47 @@ local function rubiousCrystalOnTrigger(player, npc)
     local crystalOffset = npc:getID() - zones[zoneId].npc.RUBIOUS_CRYSTAL_BASE
     local ruaernOffset = zones[zoneId].mob.RUAERN_BASE + crystalOffset * 3
     local cVar = antiquityVars[crystalOffset]
-    local thisFightDone = player:getCharVar(missionVar .. cVar[1]) == 1
-    local thisCsAcquired = player:getCharVar(missionVar .. cVar[2]) == 1
+    local thisFightDone = mission:getVar(player, cVar[1]) == 1
+    local thisCsAcquired = mission:getVar(player, cVar[2]) == 1
     -- spawn ru'aerns
     if not thisFightDone and not thisCsAcquired then
         npcUtil.popFromQM(player, npc, {ruaernOffset, ruaernOffset + 1, ruaernOffset + 2}, {hide = 0})
-        player:messageSpecial(zones[zoneId].text.OMINOUS_SHADOW)
+        return mission:messageSpecial(zones[zoneId].text.OMINOUS_SHADOW)
     -- post-fight CS
     elseif not thisCsAcquired then
-        local otherTowerDone1 = player:getCharVar(missionVar .. antiquityVars[cVar[3]][2]) == 1
-        local otherTowerDone2 = player:getCharVar(missionVar .. antiquityVars[cVar[4]][2]) == 1
+        local otherTowerDone1 = mission:getVar(player, antiquityVars[cVar[3]][2]) == 1
+        local otherTowerDone2 = mission:getVar(player, antiquityVars[cVar[4]][2]) == 1
         if otherTowerDone1 and otherTowerDone2 then
-            player:startEvent(163) -- third CS
+            return mission:progressEvent(163) -- third CS
         elseif otherTowerDone1 then
-            player:startEvent(162, cVar[6]) -- second CS. param mentions remaining tower.
+            return mission:progressEvent(162, cVar[6]) -- second CS. param mentions remaining tower.
         elseif otherTowerDone2 then
-            player:startEvent(162, cVar[7]) -- second CS. param mentions remaining tower.
+            return mission:progressEvent(162, cVar[7]) -- second CS. param mentions remaining tower.
         else
-            player:startEvent(161, cVar[5]) -- first CS. param mentions current tower.
+            return mission:progressEvent(161, cVar[5]) -- first CS. param mentions current tower.
         end
     -- default dialog
     else
-        player:messageSpecial(zones[zoneId].text.NOTHING_OF_INTEREST)
+        return mission:messageSpecial(zones[zoneId].text.NOTHING_OF_INTEREST)
     end
 end
 
 local function rubiousCrystalOnEventFinish(player, csid, option)
     local crystalOffset = player:getEventTarget():getID() - zones[player:getZoneID()].npc.RUBIOUS_CRYSTAL_BASE
-    player:setCharVar(missionVar .. antiquityVars[crystalOffset][1], 0)
-    player:setCharVar(missionVar .. antiquityVars[crystalOffset][2], 1)
+    mission:setVar(player, antiquityVars[crystalOffset][2], 1)
 end
 
 local function checkTowerCsVars(player)
     local status = 0
     for _, cVar in pairs(antiquityVars) do
-        if player:getCharVar(missionVar .. cVar[2]) == 1 then
+        if mission:getVar(player, cVar[2]) == 1 then
             status = status + 1
+        end
+    end
+    if status == 3 then
+        for _, cVar in pairs(antiquityVars) do
+            mission:setVar(player, cVar[1], 0)
+            mission:setVar(player, cVar[2], 0)
         end
     end
     return status
@@ -93,15 +96,12 @@ mission.sections =
                     if mission:getVar(player, 'Status') == 2 then
                         return mission:event(100)
                     elseif checkTowerCsVars(player) == 3 then
-                        mission:setVar(player, antiquityVars[0][2], 0)
-                        mission:setVar(player, antiquityVars[1][2], 0)
-                        mission:setVar(player, antiquityVars[2][2], 0)
                         mission:setVar(player, 'Status', 2)
                         return mission:progressEvent(100)
                     elseif mission:getVar(player, 'Status') == 0 then
                         return mission:progressEvent(164)
                     else
-                        return player:messageSpecial(npc, zones[npc:getZoneID()].text.IMPERVIOUS_FIELD_BLOCKS)
+                        return mission:messageSpecial(npc, zones[npc:getZoneID()].text.IMPERVIOUS_FIELD_BLOCKS)
                     end
                 end,
             },
@@ -110,7 +110,7 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if mission:getVar(player, 'Status') == 1 then
-                        rubiousCrystalOnTrigger(player, npc)
+                        return rubiousCrystalOnTrigger(player, npc)
                     end
                 end,
             },
@@ -119,7 +119,7 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if mission:getVar(player, 'Status') == 1 then
-                        rubiousCrystalOnTrigger(player, npc)
+                        return rubiousCrystalOnTrigger(player, npc)
                     end
                 end,
             },
@@ -128,7 +128,7 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     if mission:getVar(player, 'Status') == 1 then
-                        rubiousCrystalOnTrigger(player, npc)
+                        return rubiousCrystalOnTrigger(player, npc)
                     end
                 end,
             },
@@ -167,7 +167,7 @@ mission.sections =
                     if mission:getVar(player, 'Status') == 2 then
                         return mission:progressEvent(1)
                     else
-                        return player:messageSpecial(zones[npc:getZoneID()].text.PORTAL_DOES_NOT_RESPOND)
+                        return mission:messageSpecial(zones[npc:getZoneID()].text.PORTAL_DOES_NOT_RESPOND)
                     end
                 end,
             },
@@ -175,14 +175,14 @@ mission.sections =
             ['_iyb'] = -- East Particle Gate
             {
                 onTrigger = function(player, npc)
-                    return player:messageSpecial(zones[npc:getZoneID()].text.GATE_DOES_NOT_RESPOND)
+                    return mission:messageSpecial(zones[npc:getZoneID()].text.GATE_DOES_NOT_RESPOND)
                 end,
             },
 
             ['_iyc'] = -- West Particle Gate
             {
                 onTrigger = function(player, npc)
-                    return player:messageSpecial(zones[npc:getZoneID()].text.GATE_DOES_NOT_RESPOND)
+                    return mission:messageSpecial(zones[npc:getZoneID()].text.GATE_DOES_NOT_RESPOND)
                 end,
             },
 
@@ -190,7 +190,7 @@ mission.sections =
             {
                 [1] = function(player, csid, option)
                     if player:getFreeSlotsCount() == 0 then
-                        player:messageSpecial(zones[player:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED, xi.items.TAVNAZIAN_RING)
+                        mission:messageSpecial(zones[player:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED, xi.items.TAVNAZIAN_RING)
                     else
                         mission:complete(player)
                     end
