@@ -260,7 +260,7 @@ def fetch_files(express=False):
                 if len(repo.commit(db_ver).diff(release_version,paths='tools/migrations')) > 0:
                     express_enabled = True
         except: # lgtm [py/catch-base-exception]
-            print(colorama.Fore.RED + 'Error checking diffs.\nCheck that hash is valid in ../settings/login.lua.')
+            print(colorama.Fore.RED + 'Error checking diffs.\nCheck that hash is valid in config.yaml.')
     else:
         for (_, _, filenames) in os.walk('../sql/'):
             import_files.extend(filenames)
@@ -517,7 +517,7 @@ def restore_backup():
                 backup_file = backups[choice - 1]
                 print(colorama.ansi.clear_screen())
                 print(colorama.Fore.RED + 'If this is a full backup created by this tool, it is recommended to manually change \n'
-                    'the DB_VER in ../settings/login.lua to the hash sequence in the filename, after \n'
+                    'the DB_VER in config.yaml to the hash sequence in the filename, after \n'
                     'the database name and the timestamp, so that express update functions properly.')
                 if input('Import ' + backup_file + '? [y/N] ').lower() == 'y':
                     import_file('backups/' + backup_file)
@@ -555,13 +555,13 @@ def bad_selection():
 
 def menu():
     print(colorama.Fore.GREEN + 'o' + colorama.Fore.RED + '---------------------------------------' + colorama.Fore.GREEN + 'o\n' + colorama.Fore.RED +
-          '| ' + colorama.Style.RESET_ALL + 'LandSandBoat Database Management Tool ' + colorama.Fore.RED + '|\n'
-          '| ' + colorama.Style.RESET_ALL + str('Connected to ' + database).center(30) + colorama.Fore.RED + '        |')
+          '| ' + colorama.Style.RESET_ALL + 'LandSandBoat Database Management Tool' + colorama.Fore.RED + ' |\n'
+          '| ' + colorama.Style.RESET_ALL + str('Connected to ' + database).center(37) + colorama.Fore.RED + ' |')
     if db_ver:
-        print(colorama.Fore.RED + '| ' + colorama.Style.RESET_ALL + str('#' + db_ver).center(30) + colorama.Fore.RED + '        |')
+        print(colorama.Fore.RED + '| ' + colorama.Style.RESET_ALL + str('#' + db_ver).center(37) + colorama.Fore.RED + ' |')
     print(colorama.Fore.GREEN + 'o' + colorama.Fore.RED + '---------------------------------------' + colorama.Fore.GREEN + 'o')
     if express_enabled:
-        print(colorama.Fore.RED + '|' + colorama.Fore.GREEN + 'e' + colorama.Style.RESET_ALL + '. Express Update ' + str('(#' + release_version + ')').ljust(14) + colorama.Fore.RED + '       |')
+        print(colorama.Fore.RED + '|' + colorama.Fore.GREEN + 'e' + colorama.Style.RESET_ALL + '. Express Update ' + str('(#' + release_version + ')').ljust(21) + colorama.Fore.RED + ' |')
     print(colorama.Fore.RED + '|' + colorama.Fore.GREEN + '1' + colorama.Style.RESET_ALL + '. Update DB                           ' + colorama.Fore.RED + '|\n'
           '|' + colorama.Fore.GREEN + '2' + colorama.Style.RESET_ALL + '. Check migrations                    ' + colorama.Fore.RED + '|\n'
           '|' + colorama.Fore.GREEN + '3' + colorama.Style.RESET_ALL + '. Backup                              ' + colorama.Fore.RED + '|\n'
