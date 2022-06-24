@@ -8,28 +8,25 @@ local ID = require("scripts/zones/Pashhow_Marshlands/IDs")
 -----------------------------------
 local entity = {}
 
+-- TODO: Implement better pathing systems for guards to follow master
+
 entity.onMobSpawn = function(mob)
     -- Takes half damage from all attacks
-    mob:addMod(tpz.mod.UDMGPHYS,-5000)
-    mob:addMod(tpz.mod.UDMGRANGE,-5000)
-    mob:addMod(tpz.mod.UDMGMAGIC,-5000)
-    mob:addMod(tpz.mod.UDMGBREATH,-5000)
+    mob:addMod(xi.mod.DMG,-5000)
 
     -- May spawn in a party with two other Quadav
     if math.random(1,2) == 1 then
-        GetMobByID(ID.mob.BOWHO_GUARD1):setSpawn(mob:getXPos()+2, mob:getYPos(), mob:getZPos())
-        GetMobByID(ID.mob.BOWHO_GUARD2):setSpawn(mob:getXPos()+4, mob:getYPos(), mob:getZPos())
-        SpawnMob(ID.mob.BOWHO_GUARD1)
-        SpawnMob(ID.mob.BOWHO_GUARD2)
+        GetMobByID(ID.mob.BOWHO_WARMONGER + 1):setSpawn(mob:getXPos()+2, mob:getYPos(), mob:getZPos())
+        GetMobByID(ID.mob.BOWHO_WARMONGER + 2):setSpawn(mob:getXPos()+4, mob:getYPos(), mob:getZPos())
+        SpawnMob(ID.mob.BOWHO_WARMONGER + 1)
+        SpawnMob(ID.mob.BOWHO_WARMONGER + 2)
     end
 end
 
-entity.onMobEngage = function(mob, target)
+entity.onMobEngaged = function(mob, target)
+    local mobId = mob:getID()
     for i = 1, 2 do
-        local guard = GetMobByID(mob:getID() + i)
-        if guard:isSpawned() then
-            guard:updateEnmity(target)
-        end
+        GetMobByID(mobId+i):updateEnmity(target)
     end
 end
 
@@ -62,8 +59,8 @@ end
 entity.onMobDespawn = function(mob)
     UpdateNMSpawnPoint(mob:getID())
     mob:setRespawnTime(75600 + math.random(600, 900)) -- 21 hours, plus 10 to 15 min
-    DespawnMob(ID.mob.BOWHO_GUARD1)
-    DespawnMob(ID.mob.BOWHO_GUARD2)
+    DespawnMob(ID.mob.BOWHO_WARMONGER + 1)
+    DespawnMob(ID.mob.BOWHO_WARMONGER + 2)
 end
 
 return entity

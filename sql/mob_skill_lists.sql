@@ -3817,7 +3817,8 @@ INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1169,1720);
 INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1169,1721);
 INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1169,1722);
 INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1169,1723);
-INSERT INTO `mob_skill_lists` VALUES ('EldritchEdge',1170,397);
+INSERT INTO `mob_skill_lists` VALUES ('EldritchEdge',1171,397);
+INSERT INTO `mob_skill_lists` VALUES ('DynastBeetle',1172,341);
 INSERT INTO `mob_skill_lists` VALUES ('Supplespine_Mujwuj',1176,1064);
 INSERT INTO `mob_skill_lists` VALUES ('Supplespine_Mujwuj',1176,609);
 -- Next available ID: 1177
