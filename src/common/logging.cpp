@@ -34,7 +34,10 @@
 
 namespace logging
 {
-    const std::vector<std::string> logNames = { "critical", "error", "warn", "info", "debug", "trace" };
+    const std::vector<std::string> logNames =
+    {
+        "critical", "error", "warn", "info", "debug", "trace",
+    };
 
     void InitializeLog(std::string serverName, std::string logFile, bool appendDate)
     {
@@ -49,12 +52,6 @@ namespace logging
         std::vector<spdlog::sink_ptr> sinks;
         sinks.push_back(std::make_shared<spdlog::sinks::stdout_color_sink_mt>());
 
-        for (auto& name : logNames)
-        {
-            auto logger = std::make_shared<spdlog::async_logger>(name, sinks.begin(), sinks.end(), spdlog::thread_pool());
-            spdlog::register_logger(logger);
-        }
-
         // Daily Sink, creating new files at midnight
         if (appendDate)
         {
@@ -66,13 +63,24 @@ namespace logging
             sinks.push_back(std::make_shared<spdlog::sinks::basic_file_sink_mt>(logFile));
         }
 
+        for (auto& name : logNames)
+        {
+            auto logger = std::make_shared<spdlog::async_logger>(name, sinks.begin(), sinks.end(), spdlog::thread_pool());
+            spdlog::register_logger(logger);
+        }
+
         // https://github.com/gabime/spdlog/wiki/3.-Custom-formatting
         // [date time:ms][server name][log level] message (func_name:func_line)
         //                            ^level col^
         spdlog::set_pattern(fmt::format("[%D %T:%e][{}]%^[%l]%$ %v (%!:%#)", serverName));
 
-        // Set default log level (everything)
-        spdlog::set_level(spdlog::level::trace);
+#ifdef _DEBUG
+        spdlog::set_level(spdlog::level::debug);
+#else
+        spdlog::set_level(spdlog::level::info);
+#endif
+
+        spdlog::enable_backtrace(10);
     }
 
     void ShutDown()

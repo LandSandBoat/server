@@ -49,18 +49,7 @@ namespace logging
 
 // clang-format off
 
-// The intention is that local files create their own wrapper around this, to populate the category automatically, and then use that.
-// e.g.: #define ShowAuctionTrace(...) ShowTrace("auction", ...)
-
-// TODO: Check filters to see if this message
-// should continue
-#define _ShowTrace(category, ...)                      \
-{                                                      \
-    auto _msgStr = fmt::sprintf(__VA_ARGS__);          \
-    TracyMessageStr(_msgStr);                          \
-    SPDLOG_LOGGER_TRACE(spdlog::get("trace"), _msgStr); \
-}
-
+#define ShowTrace(...)    { auto _msgStr = fmt::sprintf(__VA_ARGS__); TracyMessageStr(_msgStr); SPDLOG_LOGGER_TRACE(spdlog::get("trace"), _msgStr); }
 #define ShowDebug(...)    { auto _msgStr = fmt::sprintf(__VA_ARGS__); TracyMessageStr(_msgStr); SPDLOG_LOGGER_DEBUG(spdlog::get("debug"), _msgStr); }
 #define ShowInfo(...)     { auto _msgStr = fmt::sprintf(__VA_ARGS__); TracyMessageStr(_msgStr); SPDLOG_LOGGER_INFO(spdlog::get("info"), _msgStr); }
 #define ShowWarning(...)  { auto _msgStr = fmt::sprintf(__VA_ARGS__); TracyMessageStr(_msgStr); SPDLOG_LOGGER_WARN(spdlog::get("warning"), _msgStr); }
