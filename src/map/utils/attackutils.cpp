@@ -339,13 +339,13 @@ namespace attackutils
                 }
                 break;
             case PHYSICAL_ATTACK_TYPE::TRIPLE:
-                if (xirand::GetRandomNumber(100) < PChar->getMod(Mod::TA_TRIPLE_DAMAGE))
+                if (xirand::GetRandomNumber(100) < PChar->getMod(Mod::TA_TRIPLE_DMG_RATE))
                 {
                     return originalDamage * 3;
                 }
                 break;
             case PHYSICAL_ATTACK_TYPE::DOUBLE:
-                if (xirand::GetRandomNumber(100) < PChar->getMod(Mod::DA_DOUBLE_DAMAGE))
+                if (xirand::GetRandomNumber(100) < PChar->getMod(Mod::DA_DOUBLE_DMG_RATE))
                 {
                     return originalDamage * 2;
                 }
