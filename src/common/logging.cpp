@@ -67,9 +67,9 @@ namespace logging
         }
 
         // https://github.com/gabime/spdlog/wiki/3.-Custom-formatting
-        // [date time:ms][server name][log level][logger name] message (func_name:func_line)
-        //                            ^---  level colour  ---^
-        spdlog::set_pattern(fmt::format("[%D %T:%e][{}]%^[%l][%n]%$ %v (%!:%#)", serverName));
+        // [date time:ms][server name][log level] message (func_name:func_line)
+        //                            ^level col^
+        spdlog::set_pattern(fmt::format("[%D %T:%e][{}]%^[%l]%$ %v (%!:%#)", serverName));
 
         // Set default log level (everything)
         spdlog::set_level(spdlog::level::trace);

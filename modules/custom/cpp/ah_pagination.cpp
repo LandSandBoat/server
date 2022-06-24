@@ -15,7 +15,6 @@
 
 extern uint8 PacketSize[512];
 extern std::function<void(map_session_data_t* const, CCharEntity* const, CBasicPacket)> PacketParser[512];
-extern map_config_t map_config;
 
 class AHPaginationModule : public CPPModule
 {
@@ -28,7 +27,7 @@ class AHPaginationModule : public CPPModule
         auto TOTAL_PAGES = 6;
 
         ShowInfo("[AH PAGES] Setting AH_LIST_LIMIT to %i.", ITEMS_PER_PAGE * TOTAL_PAGES)
-        map_config.ah_list_limit = ITEMS_PER_PAGE * TOTAL_PAGES;
+        lua["xi"]["settings"]["search"]["AH_LIST_LIMIT"] = ITEMS_PER_PAGE * TOTAL_PAGES;
 
         auto originalHandler = PacketParser[0x04E];
 

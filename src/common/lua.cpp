@@ -40,7 +40,6 @@ void lua_init()
 
     ShowInfo("lua initialising");
 
-    TracyLuaRegister(lua.lua_state());
     lua.open_libraries();
 
     // Globally require bit library

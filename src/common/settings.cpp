@@ -35,6 +35,18 @@ namespace settings
 {
     std::unordered_map<std::string, SettingsVariant_t> settingsMap;
 
+    void network_settings_from_env()
+    {
+        lua["xi"]["settings"]["network"]["SQL_HOST"]     = std::getenv("XI_DB_HOST") ? std::getenv("XI_DB_HOST") : get<std::string>("network.SQL_HOST");
+        lua["xi"]["settings"]["network"]["SQL_PORT"]     = std::getenv("XI_DB_PORT") ? std::stoi(std::getenv("XI_DB_PORT")) : get<uint16>("network.SQL_PORT");
+        lua["xi"]["settings"]["network"]["SQL_LOGIN"]    = std::getenv("XI_DB_USER") ? std::getenv("XI_DB_USER") : get<std::string>("network.SQL_LOGIN");
+        lua["xi"]["settings"]["network"]["SQL_PASSWORD"] = std::getenv("XI_DB_USER_PASSWD") ? std::getenv("XI_DB_USER_PASSWD") : get<std::string>("network.SQL_PASSWORD");
+        lua["xi"]["settings"]["network"]["SQL_DATABASE"] = std::getenv("XI_DB_NAME") ? std::getenv("XI_DB_NAME") : get<std::string>("network.SQL_DATABASE");
+
+        lua["xi"]["settings"]["network"]["ZMQ_IP"]   = std::getenv("XI_MSG_IP") ? std::getenv("XI_MSG_IP") : get<std::string>("network.ZMQ_IP");
+        lua["xi"]["settings"]["network"]["ZMQ_PORT"] = std::getenv("XI_MSG_PORT") ? std::stoi(std::getenv("XI_MSG_PORT")) : get<uint16>("network.ZMQ_PORT");
+    }
+
     /**
      * @brief
      * Load the settings Lua files found in <root>/settings/. Default settings are loaded first from <root>/settings/default/,
@@ -185,5 +197,7 @@ namespace settings
         // to the defaults:
         //
         // lua.safe_script("require('settings/main'); require('settings/default/main'); print(xi.settings)");
+
+        network_settings_from_env();
     }
 } // namespace settings

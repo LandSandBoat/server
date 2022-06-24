@@ -195,7 +195,7 @@ namespace moduleutils
                         std::string name = override["name"];
                         sol::object func = override["func"];
 
-                        ShowInfo(fmt::format("Preparing override: {}", name));
+                        ShowDebug(fmt::format("Preparing override: {}", name));
 
                         auto parts = split(name, ".");
                         overrides.emplace_back(Override{ filename, name, parts, func, false });
@@ -226,7 +226,7 @@ namespace moduleutils
 
                     if (part == lastTable)
                     {
-                        ShowInfo(fmt::format("Applying override: {}", override.overrideName));
+                        ShowDebug(fmt::format("Applying override: {}", override.overrideName));
 
                         lua["applyOverride"](table, lastElem, override.func, override.overrideName, override.filename);
 
