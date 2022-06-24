@@ -31,7 +31,11 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     skill:setMsg(xi.msg.basic.SELF_HEAL)
 
-    return xi.mobskills.mobHealMove(mob, mob:getMaxHP() * potency / 100)
+    if mob:getPool() == 979 then -- Demonic Tiphia pollen recovers 3k+ HP
+        return xi.mobskills.mobHealMove(mob, mob:getMaxHP() * potency / 30)
+    else
+        return xi.mobskills.mobHealMove(mob, mob:getMaxHP() * potency / 100)
+    end
 end
 
 return mobskill_object

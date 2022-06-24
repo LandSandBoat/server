@@ -8,15 +8,17 @@ local ID = require("scripts/zones/Pashhow_Marshlands/IDs")
 -----------------------------------
 local entity = {}
 
+-- TODO: Implement better pathing systems for guards to follow master
+
 entity.onMobSpawn = function(mob)
     -- Takes half damage from all attacks
-    mob:addMod(tpz.mod.UDMGPHYS,-5000)
-    mob:addMod(tpz.mod.UDMGRANGE,-5000)
-    mob:addMod(tpz.mod.UDMGMAGIC,-5000)
-    mob:addMod(tpz.mod.UDMGBREATH,-5000)
+    mob:addMod(xi.mod.UDMGPHYS,-5000)
+    mob:addMod(xi.mod.UDMGRANGE,-5000)
+    mob:addMod(xi.mod.UDMGMAGIC,-5000)
+    mob:addMod(xi.mod.UDMGBREATH,-5000)
 
     -- May spawn in a party with two other Quadav
-    if math.random(1,2) == 1 then
+    if math.random(3) == 2 then
         GetMobByID(ID.mob.BOWHO_GUARD1):setSpawn(mob:getXPos()+2, mob:getYPos(), mob:getZPos())
         GetMobByID(ID.mob.BOWHO_GUARD2):setSpawn(mob:getXPos()+4, mob:getYPos(), mob:getZPos())
         SpawnMob(ID.mob.BOWHO_GUARD1)
@@ -24,12 +26,10 @@ entity.onMobSpawn = function(mob)
     end
 end
 
-entity.onMobEngage = function(mob, target)
+entity.onMobEngaged = function(mob, target)
+    local mobId = mob:getID()
     for i = 1, 2 do
-        local guard = GetMobByID(mob:getID() + i)
-        if guard:isSpawned() then
-            guard:updateEnmity(target)
-        end
+        GetMobByID(mobId+i):updateEnmity(target)
     end
 end
 
@@ -49,9 +49,9 @@ end
 entity.onMagicCastingCheck = function(mob, target, spell)
     -- Frequently casts Cure 3 on itself below 50% HP
     if mob:getHPP() < 50 then
-        if math.random(1,2) == 1 then
-            return 3
-        end
+        mob:setMobMod(xi.mobMod.HEAL_CHANCE, 80)
+    else
+        mob:setMobMod(xi.mobMod.HEAL_CHANCE, 40)
     end
 end
 

@@ -3,7 +3,7 @@
 -- Deals multiple hits to a single target.
 -- Only used by Eldritch Edge, Malefic Fencer, and Nightmare Weapon.
 -----------------------------------
-require("scripts/settings/main")
+require("settings/main")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
