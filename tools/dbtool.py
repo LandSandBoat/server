@@ -140,54 +140,54 @@ def fetch_credentials():
     credentials = {}
 
     # Grab mysql credentials
-    filename = '../conf/map.conf'
+    filename = '../settings/default/network.lua'
+    if os.path.exists('../settings/network.lua'):
+        filename = '../settings/network.lua'
     try:
         with open(filename) as f:
             while True:
                 line = f.readline()
                 if not line: break
-                if "mysql_" in line:
-                    parts = line.split(":")
+                if "SQL_" in line:
+                    line = line.replace(',', '').replace('\"', '').replace('\n', '')
+                    parts = line.split("=")
                     type = parts[0].strip()
                     val = parts[1].strip()
                     credentials[type] = val
 
-        database = os.getenv('XI_DB_NAME') or credentials['mysql_database']
-        host = os.getenv('XI_DB_HOST') or credentials['mysql_host']
-        port = os.getenv('XI_DB_PORT') or int(credentials['mysql_port'])
-        login = os.getenv('XI_DB_USER') or credentials['mysql_login']
-        password = os.getenv('XI_DB_USER_PASSWD') or credentials['mysql_password']
+        database = os.getenv('XI_DB_NAME') or credentials['SQL_DATABASE']
+        host = os.getenv('XI_DB_HOST') or credentials['SQL_HOST']
+        port = os.getenv('XI_DB_PORT') or int(credentials['SQL_PORT'])
+        login = os.getenv('XI_DB_USER') or credentials['SQL_LOGIN']
+        password = os.getenv('XI_DB_USER_PASSWD') or credentials['SQL_PASSWORD']
     except: # lgtm [py/catch-base-exception]
-        print(colorama.Fore.RED + 'Error fetching credentials.\nCheck ../conf/map.conf.')
+        print(colorama.Fore.RED + 'Error fetching credentials.\nCheck ../settings/network.lua.')
         return False
 
 def fetch_versions():
     global current_client, release_version, release_client
     current_client = release_version = release_client = None
+
     try:
         release_version = repo.git.rev_parse(repo.head.object.hexsha, short=4)
     except: # lgtm [py/catch-base-exception]
         print(colorama.Fore.RED + 'Unable to read current version hash.')
+
+    filename = '../settings/default/login.lua'
+    if os.path.exists('../settings/login.lua'):
+        filename = '../settings/login.lua'
+
     try:
-        with open('../conf/default/version.conf') as f:
+        with open(filename) as f:
             while True:
                 line = f.readline()
                 if not line: break
-                match = re.match(r'\S?CLIENT_VER:\s+(\S+)', line)
+                match = re.match(r'\S?CLIENT_VER =\s+(\S+)', line)
                 if match:
                     release_client = match.group(1)
     except: # lgtm [py/catch-base-exception]
-        print(colorama.Fore.RED + 'Unable to read ../conf/default/version.conf.')
-    try:
-        with open('../conf/version.conf') as f:
-            while True:
-                line = f.readline()
-                if not line: break
-                match = re.match(r'\S?CLIENT_VER:\s+(\S+)', line)
-                if match:
-                    current_client = match.group(1)
-    except: # lgtm [py/catch-base-exception]
-        print(colorama.Fore.RED + 'Unable to read ../conf/version.conf.')
+        print(colorama.Fore.RED + 'Unable to read ' + filename)
+
     if db_ver and release_version:
         fetch_files(True)
     else:
@@ -260,7 +260,7 @@ def fetch_files(express=False):
                 if len(repo.commit(db_ver).diff(release_version,paths='tools/migrations')) > 0:
                     express_enabled = True
         except: # lgtm [py/catch-base-exception]
-            print(colorama.Fore.RED + 'Error checking diffs.\nCheck that hash is valid in ../conf/version.conf.')
+            print(colorama.Fore.RED + 'Error checking diffs.\nCheck that hash is valid in ../settings/login.lua.')
     else:
         for (_, _, filenames) in os.walk('../sql/'):
             import_files.extend(filenames)
@@ -289,10 +289,15 @@ def write_version(silent=False):
     update_client = update_client and release_client
     db_ver = release_version
     write_configs()
+
+    filename = '../settings/default/login.lua'
+    if os.path.exists('../settings/login.lua'):
+        filename = '../settings/login.lua'
+
     try:
         if current_client != release_client:
-            for line in fileinput.input('../conf/version.conf', inplace=True):
-                match = re.match(r'\S?CLIENT_VER:\s+(\S+)', line)
+            for line in fileinput.input(filename, inplace=True):
+                match = re.match(r'\S?CLIENT_VER =\s+(\S+)', line)
                 if match:
                     line = 'CLIENT_VER: ' + release_client + '\n'
                 print(line, end='')
@@ -339,7 +344,7 @@ def connect():
         cur = db.cursor()
     except mysql.connector.Error as err:
         if err.errno == mysql.connector.errorcode.ER_ACCESS_DENIED_ERROR:
-            print(colorama.Fore.RED + 'Incorrect mysql_login or mysql_password, update ../conf/map.conf.')
+            print(colorama.Fore.RED + 'Incorrect mysql_login or mysql_password, update ../settings/network.lua.')
             close()
             return False
         elif err.errno == mysql.connector.errorcode.ER_BAD_DB_ERROR:
@@ -512,7 +517,7 @@ def restore_backup():
                 backup_file = backups[choice - 1]
                 print(colorama.ansi.clear_screen())
                 print(colorama.Fore.RED + 'If this is a full backup created by this tool, it is recommended to manually change \n'
-                    'the DB_VER in ../conf/version.conf to the hash sequence in the filename, after \n'
+                    'the DB_VER in ../settings/login.lua to the hash sequence in the filename, after \n'
                     'the database name and the timestamp, so that express update functions properly.')
                 if input('Import ' + backup_file + '? [y/N] ').lower() == 'y':
                     import_file('backups/' + backup_file)
