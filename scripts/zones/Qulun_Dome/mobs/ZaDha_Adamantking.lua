@@ -12,6 +12,7 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+    mob:setMobMod(tpz.mobMod.SOUND_RANGE, 40)
 end
 
 entity.onMobEngaged = function(mob, target)
