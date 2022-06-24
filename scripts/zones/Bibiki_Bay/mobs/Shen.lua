@@ -4,6 +4,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Bibiki_Bay/IDs")
 <<<<<<< HEAD
+<<<<<<< HEAD
 require("scripts/globals/mixins/families/uragnite")
 -----------------------------------
 local entity = {}
@@ -13,17 +14,17 @@ end
 
 entity.onMobFight = function(mob, target)
 =======
+=======
+require("scripts/globals/mixins/families/uragnite")
+>>>>>>> 1584f53c9b (Including Uragnite mixin)
 -----------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("enterTimer", os.time() + math.random(45,120))
-    mob:setLocalVar("shellControl", 0)
-    entity.exitShell(mob) -- encountered bug where if he was killed previously in shell
-                               -- he would spawn in his shell. This corrected it.
 end
 
 entity.onMobFight = function(mob, target)
+<<<<<<< HEAD
     local enterShell = function()
         mob:setAnimationSub(1)
         mob:SetAutoAttackEnabled(false)
@@ -61,10 +62,13 @@ entity.onMobFight = function(mob, target)
     end
 
 >>>>>>> 31cae545dc (Shen Overhaul)
+=======
+>>>>>>> 1584f53c9b (Including Uragnite mixin)
     entity.spawnFiltrate(mob, target)
 end
 
 entity.spawnFiltrate = function(mob, target)
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     if mob:getAnimationSub() == 1 and mob:getHP() > 0 then
@@ -78,6 +82,11 @@ entity.spawnFiltrate = function(mob, target)
         for i = 1, 2 do
             if (not GetMobByID(mob:getID()+i):isSpawned()) then
 >>>>>>> 31cae545dc (Shen Overhaul)
+=======
+    if mob:getAnimationSub() == 1 and mob:getHP() > 0 then
+        for i = 1, 2 do
+            if not GetMobByID(mob:getID()+i):isSpawned() then
+>>>>>>> 1584f53c9b (Including Uragnite mixin)
                 SpawnMob(mob:getID()+i):updateEnmity(target)
             end
         end
