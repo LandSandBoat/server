@@ -390,9 +390,6 @@ local prizes =
 			
 			-- Cycle #2 -- Nexus/ToAU rings/Odin Prime/Alexander Prime/CoP items
 			-- 11538, -- Nexus Cape
-			-- 15807, -- Balrahn's Ring
-			-- 15808, -- Ulthalam's Ring
-			-- 15809, -- Jalzahn's Ring
 			-- 11589, -- Aesir Torque
 			-- 11546, -- Aesir Mantle
 			-- 16057, -- Aesir Ear Pendant
@@ -407,30 +404,11 @@ local prizes =
 			-- 18101, -- Z's Trident
 			-- 15457, -- Swift Belt
 			-- 14889, -- Barbarian Mittens
-			-- 15349, -- Rutter Sabatons
-			
-			-- Cycle #3 -- WotG items/Elemental obis/WS gorgets
-			-- 11343, -- Thrakon Breastplate
 			-- 16036, -- Wilhelm's Earring
 			-- 16035, -- Altdorf's Earring
-			-- 15435, -- Karin Obi
-			-- 15436, -- Hyorin Obi
-			-- 15437, -- Furin Obi
-			-- 15438, -- Dorin Obi
-			-- 15439, -- Rairin Obi
-			-- 15440, -- Suirin Obi
-			-- 15441, -- Korin Obi
-			-- 15442, -- Anrin Obi
-			-- 15495, -- Flame Gorget
-			-- 15496, -- Snow Gorget
-			-- 15497, -- Breeze Gorget
-			-- 15498, -- Soil Gorget
-			-- 15499, -- Thunder Gorget
-			-- 15500, -- Aqua Gorgot
-			-- 15501, -- Light Gorget
-			-- 15502, -- Shadow Gorget
+			-- 11343, -- Thrakon Breastplate
 			
-			-- Cycle #4 -- WOTG Nations
+			-- Cycle #3 -- WOTG Nations
 			-- 16149, -- Cobra Cloche
 			-- 14591, -- Cobra Robe
 			-- 15012, -- Cobra Gloves
@@ -447,7 +425,7 @@ local prizes =
 			-- 16316, -- Fourth Schoss
 			-- 15756, -- Fourth Schuhs
 			
-			-- Cycle #5 -- TOAU NM drops/Assault gear
+			-- Cycle #4 -- TOAU NM drops/Assault gear
 			-- 11496, -- Fenrir's Crown
 			-- 19235, -- Veuglaire
 			-- 16375, -- Surge Subligar
@@ -468,7 +446,7 @@ local prizes =
 			-- 15606, -- Yigit Seraweels
 			-- 15690, -- Yigit Crackows
 			
-			-- Cycle #6 -- Apollyon AF+1 items
+			-- Cycle #5 -- Apollyon AF+1 items
 			-- 1931, -- Argyro Rivet (WAR)
 			-- 1933, -- Ancient Brass (MNK)
 			-- 1935, -- Benedict Yarn (WHM)
@@ -517,21 +495,10 @@ local prizes =
 			-- 15963, -- Magnetic Earring
 			-- 15964, -- Hollow Earring
 			-- 15965, -- Ethereal Earring
-			-- 14739, -- Suppanomimi
 			-- 14740, -- Knight's Earring
 			-- 14741, -- Abyssal Earring
 			-- 14742, -- Beastly Earring
-			-- 14743, -- Bushinomimi
-			-- 15471, -- Merciful Cape
-			-- 15472, -- Altruistic Cape
-			-- 15473, -- Astute Cape
-			-- 15508, -- Justice Torque
-			-- 15509, -- Hope Torque
-			-- 15510, -- Prudence Torque
-			-- 15511, -- Fortitude Torque
-			-- 15512, -- Faith Torque
-			-- 15513, -- Temperance Torque
-			-- 15514, -- Love Torque			
+			-- 14743, -- Bushinomimi	
 			
 			-- Cycle #3 -- Useful NM drops/MMM
 			-- 15351, -- Bounding Boots
@@ -542,16 +509,12 @@ local prizes =
 			-- 15515, -- Peacock Amulet
 			-- 18752, -- Retaliators
 			-- 18714, -- Vali's Bow
-			-- 15899, -- Velocious Belt
 			-- 18852, -- Octave Club
 			-- 14469, -- Reverend Mail
 			-- 13915, -- Optical Hat
-			-- 14062, -- Carbuncle Mitts
 			-- 15221, -- Patroclus's Helm
 			-- 13567, -- Bomb Queen Ring
-			-- 15350, -- Rostrum Pumps
 			-- 13303, -- Jelly Ring
-			-- 15223, -- Ace's Helm
 			-- 17759, -- Koggelmander
 			
 			-- Cycle #4 -- HQ Kings pop items/Carbuncle Prime/WOTG Nations/Naji's/TH+1 hat
@@ -615,64 +578,6 @@ local prizes =
 			-- 2714, -- Filet Lace (DNC)
 			-- 2716, -- Brilliantine (SCH)
 			
-			-- Cycle #? -- MMM gear
-			
-			-- Cycle #? -- KSNM Latent Weapons
-			
-			---------------------------------------------------------------------------
-			-- Cycle #? -- Limbus gear
-			-- 15240, -- Homam Zucchetto
-			-- 14488, -- Homam Corazza
-			-- 14905, -- Homam Manopolas
-			-- 15576, -- Homam Cosciales
-			-- 15661, -- Homam Gambieras
-			-- 15241, -- Nashira Turban
-			-- 14489, -- Nashira Manteel
-			-- 14906, -- Nashira Gages
-			-- 15577, -- Nashira Seraweels
-			-- 15662, -- Nashira Crackows
-
-			-- Cycle #? -- ZNM sets
-			-- 16155, -- Aurum Armet
-			-- 11282, -- Aurum Cuirass
-			-- 15021, -- Aurum Gauntlets
-			-- 16341, -- Aurum Cuisses
-			-- 11376, -- Aurum Sabatons
-			-- 16156, -- Oracle's Cap
-			-- 11283, -- Oracle's Robe
-			-- 15022, -- Oracle's Gloves
-			-- 16342, -- Oracle's Braconi
-			-- 11377, -- Oracle's Pigaches
-			-- 16157, -- Enkidu's Cap
-			-- 11284, -- Enkidu's Harness
-			-- 15023, -- Enkidu's Mittens
-			-- 16343, -- Enkidu's Subligar
-			-- 11378, -- Enkidu's Leggings
-			
-			-- Cycle #? -- JoL/Absolute Virtue/Hachiryu/Pandemonium Warden
-			-- 14808, -- Novio Earring
-			-- 14809, -- Novia Earring
-			-- 15548, -- Mars's Ring
-			-- 15549, -- Bellona's Ring
-			-- 15550, -- Minerva's Ring
-			-- 15458, -- Ninurta's Sash
-			-- 17810, -- Futsuno Mitama
-			-- 18398, -- Raphael's Rod
-			-- 18245, -- Aureole
-			-- 11281, -- Hachiryu Haramaki
-			-- 15015, -- Hachiryu Kote
-			-- 16337, -- Hachiryu Haidate
-			-- 11364, -- Hachiryu Sune-Ate
-			-- 18447, -- Nanatsusaya
-			-- 18594, -- Dorje
-			-- 18759, -- Shenlong's Baghnakhs
-			
-			-- Cycle #idk -- WotG Fomors
-			-- 11411, -- Shrewd Pumps
-			-- 15057, -- Bricta's Cuffs
-			-- 16376, -- Bahram Cuisses
-			-- 11410, -- Setanta's Ledelsens
-			-- 16302, -- Bloodbead Gorget
 			
         },
     },
