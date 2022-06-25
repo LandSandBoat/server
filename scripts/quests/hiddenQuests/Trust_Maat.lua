@@ -18,13 +18,21 @@ quest.sections =
     {
         check = function(player, questVars, vars)
             return xi.trust.hasPermit(player) and
-                utils.mask.countBits(player:getCharVar("maatsCap"), 16) >= 6 and
                 not player:hasSpell(xi.magic.spell.MAAT)
         end,
 
         [xi.zone.RULUDE_GARDENS] =
         {
-            ['Maat'] = quest:progressEvent(10241),
+            ['Maat'] =
+            {
+                onTrigger = function(player, npc)
+                    if utils.mask.countBits(player:getCharVar("maatsCap"), 16) >= 6 then
+                        return quest:event(10241)
+                    else
+                        return quest:event(10242)
+                    end
+                end,
+            },
 
             onEventFinish =
             {
