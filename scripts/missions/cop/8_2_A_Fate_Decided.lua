@@ -129,7 +129,7 @@ mission.sections =
                 end,
             },
 
-            onEventFinish = 
+            onEventFinish =
             {
                 [52] = function(player, csid, option)
                     if option == 1 then

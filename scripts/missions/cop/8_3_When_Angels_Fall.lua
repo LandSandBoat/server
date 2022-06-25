@@ -278,7 +278,7 @@ mission.sections =
                         return mission:messageSpecial(zones[player:getZoneID()].text.KEYITEM_OBTAINED, xi.ki.BRAND_OF_DAWN)
                     end
                 end,
-   
+
                 [112] = function(player, csid, option)
                     if option == 1 then
                         player:setPos(-20, 0, -355, 192, xi.zone.GRAND_PALACE_OF_HUXZOI)

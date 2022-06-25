@@ -20,7 +20,6 @@ end
 
 entity.onTrigger = function(player, npc)
     local cidsSecret = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.CID_S_SECRET)
-    local copMission = player:getCurrentMission(xi.mission.log_id.COP)
     local hasLetter = player:hasKeyItem(xi.ki.UNFINISHED_LETTER)
 
     -- DARK PUPPET
