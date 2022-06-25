@@ -236,10 +236,10 @@ INSERT INTO `mob_pool_mods` VALUES (5106,288,25,0);
 INSERT INTO `mob_pool_mods` VALUES (5106,1,250,0);
 INSERT INTO `mob_pool_mods` VALUES (5106,29,30,0);
 INSERT INTO `mob_pool_mods` VALUES (5106,366,10,0);
-INSERT INTO `mob_pool_mods` VALUES (7039,34,60,1);
-INSERT INTO `mob_pool_mods` VALUES (7039,4,15,1);
-INSERT INTO `mob_pool_mods` VALUES (7039,5,15,1);
-INSERT INTO `mob_pool_mods` VALUES (7039,11,30,1);
+INSERT INTO `mob_pool_mods` VALUES (7039,34,60,1); -- Ixzdei_RDM
+INSERT INTO `mob_pool_mods` VALUES (7039,4,15,1);  -- Ixzdei_RDM
+INSERT INTO `mob_pool_mods` VALUES (7039,5,15,1);  -- Ixzdei_RDM
+INSERT INTO `mob_pool_mods` VALUES (7039,11,30,1); -- Ixzdei_RDM
 
 /*!40000 ALTER TABLE `mob_pool_mods` ENABLE KEYS */;
 UNLOCK TABLES;
