@@ -99,15 +99,15 @@ end
 entity.onMobMagicPrepare = function(mob, target, spell)
     local rnd = math.random()
     if rnd < 0.5 and mob:hasStatusEffect(xi.effect.MANAFONT) == true then -- quake II replaces existing earth damage spells during manafont
-        return 211 -- quake II casted exclusively while Manafont is active.
+        return xi.magic.spell.QUAKE_II -- quake II casted exclusively while Manafont is active.
     elseif rnd < 0.25 then
-        return 162 -- stone iv
+        return xi.magic.spell.STONE_IV
     elseif rnd < 0.5 then
-        return 191 -- stonega iii
+        return xi.magic.spell.STONEGA_III
     elseif rnd < 0.75 then
-        return 365 -- breakga'
+        return xi.magic.spell.BREAKGA
     else
-        return 357 -- slowga
+        return xi.magic.spell.SLOWGA
     end
 end
 

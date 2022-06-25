@@ -21,7 +21,7 @@ local bracerMode = function(mob, qnAern1, qnAern2)
         if pet:isSpawned() then
             pet:AnimationSub(2)
             pet:addMod(xi.mod.ATT, 200)
-            pet:setMod(xi.mod.DELAY, 2100)
+            pet:setDelay(2100)
         end
     end
     -- slightly delay adding local var to avoid adding bracers to Ix'Mnk while Hundred Fists is still active.
@@ -66,9 +66,9 @@ entity.onMobFight = function(mob, target)
     -- Ix'Mnk will not visually add Bracers while under the effect of Hundred Fists
     if not mob:hasStatusEffect(xi.effect.HUNDRED_FISTS) and mob:getLocalVar("enableBracers") == 1 then
         mob:AnimationSub(2) -- Bracers
-        mob:setMod(xi.mod.DELAY, 1700)
+        mob:setDelay(1700)
     else
-        mob:setMod(xi.mod.DELAY, 0)
+        mob:setDelay(0)
     end
 end
 

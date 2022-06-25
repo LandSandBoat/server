@@ -69,9 +69,9 @@ end
 
 entity.onMobMagicPrepare = function(mob, target, spell)
     if math.random() > 0.75 then
-        return 219
+        return xi.magic.spell.COMET
     else
-        return 218
+        return xi.magic.spell.METEOR
     end
 end
 
