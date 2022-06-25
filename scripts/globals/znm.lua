@@ -301,7 +301,7 @@ end
 
 xi.znm.sanraku.onEventFinish = function(player, csid, option)
     if csid == 910 then
-        player:confirmTrade()
+        player:tradeComplete()
         player:setCharVar("[ZNM][Sanraku]TradingDay", VanadielUniqueDay())
         player:addCharVar("[ZNM][Sanraku]TradedPlates", 1)
 
@@ -312,7 +312,7 @@ xi.znm.sanraku.onEventFinish = function(player, csid, option)
     elseif csid == 908 then
         player:setCharVar("ZeniStatus",1)
     elseif csid == 912 then
-        player:confirmTrade()
+        player:tradeComplete()
         player:addKeyItem(player:getCharVar("[ZNM]TrophyTrade"))
         player:setCharVar("[ZNM]TrophyTrade",0)
     end
