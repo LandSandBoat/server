@@ -1150,6 +1150,7 @@ xi.mod =
     MIJIN_RERAISE                   = 258,
     DUAL_WIELD                      = 259,
     DOUBLE_ATTACK                   = 288,
+    DOUBLE_ATTACK_DMG               = 1038, -- Increases "Double Attack" damage/"Double Attack" damage + (in percents, e.g. +20 = +20% damage)
     SUBTLE_BLOW                     = 289,
     SUBTLE_BLOW_II                  = 973, -- Subtle Blow II Effect (Cap 50%) Total Effect (SB + SB_II cap 75%)
     ENF_MAG_POTENCY                 = 290, -- Increases Enfeebling magic potency %
@@ -1167,6 +1168,7 @@ xi.mod =
     STONESKIN                       = 300,
     PHALANX                         = 301,
     TRIPLE_ATTACK                   = 302,
+    TRIPLE_ATTACK_DMG               = 1039, -- Increases "Triple Attack" damage/"Triple Attack" damage + (in percents, e.g. +20 = +20% damage)
     TREASURE_HUNTER                 = 303,
     TAME                            = 304,
     RECYCLE                         = 305,
@@ -1337,8 +1339,8 @@ xi.mod =
     MAGIC_DAMAGE                    = 311, --  Magic damage added directly to the spell's base damage
 
     -- Gear set modifiers
-    DA_DOUBLE_DAMAGE                = 408,  -- Double attack's double damage chance %.
-    TA_TRIPLE_DAMAGE                = 409,  -- Triple attack's triple damage chance %.
+    DA_DOUBLE_DMG_RATE              = 408,  -- Double attack's double damage chance %.
+    TA_TRIPLE_DMG_RATE              = 409,  -- Triple attack's triple damage chance %.
     ZANSHIN_DOUBLE_DAMAGE           = 410,  -- Zanshin's double damage chance %.
     RAPID_SHOT_DOUBLE_DAMAGE        = 479,  -- Rapid shot's double damage chance %.
     ABSORB_DMG_CHANCE               = 480,  -- Chance to absorb damage %

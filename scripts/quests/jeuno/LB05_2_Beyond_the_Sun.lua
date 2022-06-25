@@ -11,6 +11,8 @@ require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
 -----------------------------------
+local ruludeID = require('scripts/zones/RuLude_Gardens/IDs')
+-----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_THE_SUN)
 
@@ -22,15 +24,10 @@ quest.reward =
 
 quest.sections =
 {
-    -- Note: The logic in this and the previous quest will make it so maat's dialog will cycle as in retail.
-    --       The cycle goes between his trust dialog (logic in previous quest) and this quest progress.
-    --       This also allows to always be able to obtain Maat's trust, even if you completed this quest.
-
     -- Section: Quest available.
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:getMainJob() <= 15 and
                 player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHATTERING_STARS) == QUEST_COMPLETED
         end,
 
@@ -39,10 +36,14 @@ quest.sections =
             ['Maat'] =
             {
                 onTrigger = function(player, npc)
-                    if utils.mask.isFull(player:getCharVar("maatsCap"), 15) then -- Defeated maat on 15 jobs
-                        return quest:progressEvent(74)
+                    if player:getMainJob() <= 15 then
+                        if utils.mask.isFull(player:getCharVar("maatsCap"), 15) then -- Defeated maat on 15 jobs
+                            return quest:progressEvent(74)
+                        else
+                            return quest:event(78, player:getMainJob()) -- Rematch dialog. Job dependant.
+                        end
                     else
-                        return quest:event(78, player:getMainJob()) -- Rematch dialog. Job dependant.
+                        return quest:messageText(ruludeID.text.MAAT_CAP_PLACEHOLDER)
                     end
                 end,
             },

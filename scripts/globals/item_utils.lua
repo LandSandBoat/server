@@ -66,3 +66,70 @@ xi.item_utils.pickItemRandom = function(target, itemgroup) -- selects an item fr
 
     return item
 end
+
+xi.item_utils.removeShield = function(effect, target)
+    if effect == xi.effect.PHYSICAL_SHIELD then
+        target:delStatusEffect(xi.effect.MAGIC_SHIELD)
+    else
+        target:delStatusEffect(xi.effect.PHYSICAL_SHIELD)
+    end
+end
+
+xi.item_utils.addItemShield = function(target, power, duration, effect, special)
+    if target:hasStatusEffect(effect) then
+        local shield = target:getStatusEffect(effect)
+        local activeshieldpower = shield:getPower()
+
+        if activeshieldpower > power then
+            target:messageBasic(xi.msg.basic.NO_EFFECT)
+        else
+            xi.item_utils.removeShield(effect, target)
+            target:addStatusEffect(effect, power, 0, duration, 0, special)
+            target:messageBasic(xi.msg.basic.GAINS_EFFECT_OF_STATUS, effect)
+        end
+    else
+        xi.item_utils.removeShield(effect, target)
+        target:addStatusEffect(effect, power, 0, duration, 0, special)
+        target:messageBasic(xi.msg.basic.GAINS_EFFECT_OF_STATUS, effect)
+    end
+end
+
+xi.item_utils.addItemEffect = function(target, effect, power, duration, subpower)
+    if target:hasStatusEffect(effect) then
+        local buff = target:getStatusEffect(effect)
+        local effectpower = buff:getPower()
+        if effectpower > power then
+            target:messageBasic(xi.msg.basic.NO_EFFECT)
+        else
+            target:addStatusEffect(effect, power, 0, duration, 0, subpower)
+        end
+    else
+        target:addStatusEffect(effect, power, 0, duration, 0, subpower)
+    end
+end
+
+xi.item_utils.addTwoItemEffects = function(target, effect1, effect2, power1, power2, duration)
+    if target:hasStatusEffect(effect1) then
+        local buff = target:getStatusEffect(effect1)
+        local effectpower = buff:getPower()
+        if effectpower > power1 then
+            target:messageBasic(xi.msg.basic.NO_EFFECT)
+        else
+            target:addStatusEffect(effect1, power1, 0, duration, 0, power1)
+        end
+    else
+        target:addStatusEffect(effect1, power1, 0, duration, 0, power1)
+    end
+
+    if target:hasStatusEffect(effect2) then
+        local buff = target:getStatusEffect(effect2)
+        local effectpower = buff:getPower()
+        if effectpower > power2 then
+            target:messageBasic(xi.msg.basic.NO_EFFECT)
+        else
+            target:addStatusEffect(effect2, power2, 0, duration, 0, power2)
+        end
+    else
+        target:addStatusEffect(effect2, power2, 0, duration, 0, power2)
+    end
+end
