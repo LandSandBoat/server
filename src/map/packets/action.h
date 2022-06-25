@@ -22,8 +22,8 @@
 #ifndef _CACTIONPACKET_H
 #define _CACTIONPACKET_H
 
-#include "common/cbasetypes.h"
 #include "basic.h"
+#include "common/cbasetypes.h"
 
 #include "../entities/battleentity.h"
 #include "../spell.h"
@@ -91,11 +91,11 @@ struct actionTarget_t
     , spikesMessage(0)
     {
     }
-    actionTarget_t(const actionTarget_t&) = delete;
+    actionTarget_t(const actionTarget_t&)            = delete;
     actionTarget_t& operator=(const actionTarget_t&) = delete;
 
     /* Not automatically generated */
-    actionTarget_t(actionTarget_t&&) = default;
+    actionTarget_t(actionTarget_t&&)            = default;
     actionTarget_t& operator=(actionTarget_t&&) = default;
 };
 
@@ -108,11 +108,11 @@ struct actionList_t
     : ActionTargetID(0)
     {
     }
-    actionList_t(const actionList_t&) = delete;
+    actionList_t(const actionList_t&)            = delete;
     actionList_t& operator=(const actionList_t&) = delete;
 
     /* Not automatically generated */
-    actionList_t(actionList_t&&) = default;
+    actionList_t(actionList_t&&)            = default;
     actionList_t& operator=(actionList_t&&) = default;
 
     actionTarget_t& getNewActionTarget()

@@ -136,7 +136,6 @@ bool CItemWeapon::isUnlockable() const
     return (m_wsunlockpoints > 0);
 }
 
-
 /************************************************************************
  *                                                                       *
  * returns true if weapon is unlocked                                    *
@@ -147,7 +146,6 @@ bool CItemWeapon::isUnlocked()
 {
     return isUnlockable() && getCurrentUnlockPoints() == m_wsunlockpoints;
 }
-
 
 /************************************************************************
  *                                                                       *
@@ -253,7 +251,6 @@ void CItemWeapon::setILvlMacc(uint16 macc)
 {
     m_iLvlMacc = macc;
 }
-
 
 /************************************************************************
  *                                                                      *

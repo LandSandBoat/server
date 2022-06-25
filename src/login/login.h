@@ -55,10 +55,12 @@ struct login_config_t
 
     uint32 search_server_port; // search_server_port -> 54002
 
-    uint16      msg_server_port;  // chat server port
-    std::string msg_server_ip;    // chat server IP
-    bool        log_user_ip;      // log user ip -> default false
-    bool        account_creation; // allow new accounts to be created -> default true
+    uint16      msg_server_port;    // chat server port
+    std::string msg_server_ip;      // chat server IP
+    uint16      login_limit;        // maximum allowed sessions -> default 0 (off)
+    bool        log_user_ip;        // log user ip -> default false
+    bool        account_creation;   // allow new accounts to be created -> default true
+    bool        character_deletion; // allows characters to be deleted -> default true
 };
 
 struct version_info_t

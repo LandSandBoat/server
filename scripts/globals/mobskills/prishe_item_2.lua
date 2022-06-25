@@ -31,11 +31,11 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     elseif (math.random() < 0.5) then
         -- Carnal Incense!
         mob:messageText(mob, ID.text.PRISHE_TEXT + 10, false)
-        mob:addStatusEffect(xi.effect.PHYSICAL_SHIELD, 0, 0, 30)
+        mob:addStatusEffect(xi.effect.PHYSICAL_SHIELD, 1, 0, 30)
     else
         -- Spiritual Incense!
         mob:messageText(mob, ID.text.PRISHE_TEXT + 11, false)
-        mob:addStatusEffect(xi.effect.MAGIC_SHIELD, 0, 0, 30)
+        mob:addStatusEffect(xi.effect.MAGIC_SHIELD, 1, 0, 30)
     end
     return 0
 end

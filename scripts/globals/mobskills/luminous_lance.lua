@@ -38,7 +38,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     target:setAnimationSub(3)
 
     -- Cannot be resisted
-    target:addStatusEffect(xi.effect.STUN, 0, 0, 20)
+    target:addStatusEffect(xi.effect.TERROR, 0, 0, 20)
 
     target:takeDamage(dmg, mob, xi.attackType.RANGED, xi.damageType.PIERCING)
     return dmg

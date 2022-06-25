@@ -24,6 +24,21 @@
 
 CAbility::CAbility(uint16 id)
 {
+    m_Job = JOB_NON;
+    m_level = 0;
+    m_animationID = 0;
+    m_range = 0;
+    m_validTarget = 0;
+    m_addType = 0;
+    m_message = 0;
+    m_recastTime = 0;
+    m_recastId = 0;
+    m_recastId = 0;
+    m_CE = 0;
+    m_VE = 0;
+    m_aoe = 0;
+    m_meritModID = 0;
+    m_mobskillId = 0;
     m_ID = id;
 }
 

@@ -2,6 +2,8 @@
 #ifndef _WHEATYEXCEPTIONREPORT_
 #define _WHEATYEXCEPTIONREPORT_
 
+// clang-format off
+
 #define _NO_CVCONST_H
 
 #include <windows.h>
@@ -198,5 +200,7 @@ class WheatyExceptionReport
         static void PopSymbolDetail();
         static void PrintSymbolDetail();
 };
+
+// clang-format on
 
 #endif // _WHEATYEXCEPTIONREPORT_

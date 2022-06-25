@@ -42,7 +42,8 @@ CTrustController::CTrustController(CCharEntity* PChar, CTrustEntity* PTrust)
 , m_GambitsContainer(std::make_unique<gambits::CGambitsContainer>(PTrust))
 , m_InTransit(false)
 {
-
+    m_LastTopEnmity            = nullptr;
+    m_failedRepositionAttempts = 0;
 }
 
 CTrustController::~CTrustController()

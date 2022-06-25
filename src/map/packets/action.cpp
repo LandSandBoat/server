@@ -349,8 +349,8 @@ CActionPacket::CActionPacket(action_t& action)
 
         for (auto&& target : list.actionTargets)
         {
-            bitOffset = packBitsBE(data, static_cast<uint64>(target.reaction), bitOffset, 5); // Physical reaction to damage
-            bitOffset = packBitsBE(data, target.animation, bitOffset, 12); // анимация специальных эффектов (monster TP animations are 1800+)
+            bitOffset = packBitsBE(data, static_cast<uint64>(target.reaction), bitOffset, 5);   // Physical reaction to damage
+            bitOffset = packBitsBE(data, target.animation, bitOffset, 12);                      // анимация специальных эффектов (monster TP animations are 1800+)
             bitOffset = packBitsBE(data, static_cast<uint64>(target.speceffect), bitOffset, 7); // specialEffect
             bitOffset = packBitsBE(data, target.knockback, bitOffset, 3);                       // knockback amount (mobskill only)
             bitOffset = packBitsBE(data, target.param, bitOffset, 17);                          // параметр сообщения (урон)
@@ -408,7 +408,7 @@ CActionPacket::CActionPacket(action_t& action)
 // 0xE0 0x1C 0xDC 0xDC 0x1B - Song Interrupt
 
 //                                   -11.00011010.000110- ActionStart
-//									 -11.00111000.001110- ActionInterrupt
+//                                   -11.00111000.001110- ActionInterrupt
 //                                   -11.00111000.010110- ActionFinish
 
 // 0xE0 0x58 0xD8 0x1D 0x1A - 00-0001-11.00011010.000110-11.10111000.01-011000 - White Magic Start

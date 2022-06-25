@@ -1,5 +1,6 @@
 -----------------------------------
--- Wheel of Impregnability
+-- Bastion of Twilight
+-- Magic Shield Effect
 -----------------------------------
 local ID = require("scripts/zones/Empyreal_Paradox/IDs")
 require("scripts/globals/mobskills")
@@ -18,7 +19,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    mob:addStatusEffect(xi.effect.MAGIC_SHIELD, 0, 0, 0)
+    mob:addStatusEffect(xi.effect.MAGIC_SHIELD, 1, 0, 0)
     mob:setAnimationSub(2)
 
     skill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT)

@@ -47,6 +47,7 @@ ai.condition =
     CASTING_MA         = 17,
     RANDOM             = 18,
     NO_SAMBA           = 19,
+    NO_STORM           = 20,
 }
 ai.c = ai.condition
 
@@ -75,6 +76,10 @@ ai.select =
     BEST_AGAINST_TARGET = 6,
     BEST_SAMBA          = 7,
     HIGHEST_WALTZ       = 8,
+    ENTRUSTED           = 9,
+    BEST_INDI           = 10,
+    STORM_DAY           = 11,
+    HELIX_DAY           = 12,
 }
 ai.s = ai.select
 

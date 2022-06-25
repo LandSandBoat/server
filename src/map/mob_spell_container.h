@@ -64,7 +64,11 @@ public:
 
     std::optional<SpellID> GetAvailable(SpellID spellId);
     std::optional<SpellID> GetBestAvailable(SPELLFAMILY family);
+    std::optional<SpellID> GetBestIndiSpell(CBattleEntity* PMaster);
+    std::optional<SpellID> GetBestEntrustedSpell(CBattleEntity* PMaster);
     std::optional<SpellID> GetBestAgainstTargetWeakness(CBattleEntity* PTarget);
+    std::optional<SpellID> GetStormDay();
+    std::optional<SpellID> GetHelixDay();
 
     std::vector<SpellID> m_gaList;
     std::vector<SpellID> m_damageList;
