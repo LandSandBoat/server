@@ -9,6 +9,16 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
+local slaveGlobes =
+{
+    ID.mob.MOTHER_GLOBE + 1,
+    ID.mob.MOTHER_GLOBE + 2,
+    ID.mob.MOTHER_GLOBE + 3,
+    ID.mob.MOTHER_GLOBE + 4,
+    ID.mob.MOTHER_GLOBE + 5,
+    ID.mob.MOTHER_GLOBE + 6,
+}
+
 local startingSpacingDistance = -1 -- how far apart to initially attempt to space the slaves
 local spacingDistanceMinimum = -.1 -- the distance at which if you're trying to build valid points this close together it will just bail out and stack on top of MG
 local spacingDivisor = 2  -- affects how quickly the list will converge to just stacking on MG (larger the faster)
@@ -18,7 +28,7 @@ local getSlaves = function()
     local spawnedSlaves = {}
     local notSpawnedSlaves = {}
 
-    for _, slaveGlobeID in ipairs(ID.mob.SLAVE_GLOBES) do
+    for _, slaveGlobeID in ipairs(slaveGlobes) do
         local slaveGlobe = GetMobByID(slaveGlobeID)
 
         if slaveGlobe:isSpawned() then
@@ -44,7 +54,7 @@ local function calculateValidSlaveGlobePositions(zone, mgPos, spacingDistance)
         return {mgPos, mgPos, mgPos, mgPos, mgPos, mgPos}
     end
 
-    for slavePositionSlot, _ in ipairs(ID.mob.SLAVE_GLOBES) do
+    for slavePositionSlot, _ in ipairs(slaveGlobes) do
         local xOffset = spacingDistance * slavePositionSlot
         local slavePosition =  utils.lateralTranslateWithOriginRotation(mgPos, {x = xOffset, y = 0, z = 0})
 
@@ -74,7 +84,7 @@ end
 local setNextSpawnSlaveGlobe = function(mg, spawnCount, nowTime)
     local nextSpawnTime = 35 -- 30 + 5 seconds for "cast time"
 
-    if spawnCount < #ID.mob.SLAVE_GLOBES then
+    if spawnCount < #slaveGlobes then
         mg:setLocalVar("nextSlaveSpawnTime", nowTime + nextSpawnTime)
     else
         -- setting to zero prevents "insta" spawn on the 6th slaves death because slaveGlobePos
@@ -122,7 +132,7 @@ end
 
 entity.onMobFight = function(mob, target)
     -- Keep pets linked
-    for _, slaveGlobeID in ipairs(ID.mob.SLAVE_GLOBES) do
+    for _, slaveGlobeID in ipairs(slaveGlobes) do
         local pet = GetMobByID(slaveGlobeID)
         if pet:getCurrentAction() == xi.act.ROAMING then
             pet:updateEnmity(target)
@@ -150,7 +160,7 @@ end
 entity.onMobDeath = function(mob, player, isKiller)
     mob:setRespawnTime(math.random(10800, 21600)) -- respawn 3-6 hrs
 
-    for _, slaveGlobeID in ipairs(ID.mob.SLAVE_GLOBES) do
+    for _, slaveGlobeID in ipairs(slaveGlobes) do
         local pet = GetMobByID(slaveGlobeID)
         if pet:isSpawned() then
             DespawnMob(slaveGlobeID)

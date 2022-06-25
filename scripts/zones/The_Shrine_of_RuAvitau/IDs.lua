@@ -36,10 +36,6 @@ zones[xi.zone.THE_SHRINE_OF_RUAVITAU] =
         OLLAS_OFFSET     = 17506667,
         KIRIN            = 17506670,
         MOTHER_GLOBE     = 17506396,
-        SLAVE_GLOBES     =
-        {
-            17506397, 17506398, 17506399, 17506400, 17506401, 17506402
-        },
     },
     npc =
     {
