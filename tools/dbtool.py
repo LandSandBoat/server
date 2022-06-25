@@ -40,7 +40,7 @@ try:
     import yaml
     import colorama
 except Exception as e:
-    print("ERROR: Exception occured while importing external dependencies:")
+    print("ERROR: Exception occurred while importing external dependencies:")
     print(e)
     preflight_exit()
 
@@ -88,6 +88,7 @@ player_data = [
     'linkshells.sql',
     'server_variables.sql',
     'unity_system.sql',
+    'zone_settings.sql',
 ]
 
 import_files = []

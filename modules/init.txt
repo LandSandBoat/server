@@ -51,3 +51,8 @@ custom/sql/ka_speedbelt_drop.sql
 era/lua/75_era_vendors.lua
 era/sql/75_era_spells.sql
 era/lua/exp_rings.lua
+custom/sql/starter_zone_fast_repops.sql
+era/sql/2010_exp_tables.sql
+era/sql/mob_groups_era.sql
+era/sql/gardening_results_era.sql
+era/sql/2hr_ability_cooldowns.sql
