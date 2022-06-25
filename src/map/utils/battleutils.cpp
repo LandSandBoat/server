@@ -675,7 +675,7 @@ namespace battleutils
 
         ELEMENT spikeElement = (ELEMENT)((uint8)GetSpikesDamageType(Action->spikesEffect) - (uint8)DAMAGE_TYPE::ELEMENTAL);
 
-        int32 damage = 0;
+        int32 damage = Action->spikesParam;
 
         // int16 intStat = PDefender->INT();
         // int16 mattStat = PDefender->getMod(Mod::MATT);
@@ -3632,6 +3632,12 @@ namespace battleutils
         if (CStatusEffect* PDoubtEffect = PAttacker->StatusEffectContainer->GetStatusEffect(EFFECT_DOUBT))
         {
             KillerEffect += PDoubtEffect->GetPower();
+        }
+
+        // Add intimidation rate from Intimidate status effect
+        if (CStatusEffect* PIntimidateEffect = PAttacker->StatusEffectContainer->GetStatusEffect(EFFECT_INTIMIDATE))
+        {
+            KillerEffect += PIntimidateEffect->GetPower();
         }
 
         return (xirand::GetRandomNumber(100) < KillerEffect);

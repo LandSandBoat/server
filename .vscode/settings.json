@@ -443,6 +443,7 @@
         "GetCachedInstanceScript",
         "ForceCrash",
         "BuildString",
+        "SendLuaFuncStringToZone",
     ],
     "Lua.diagnostics.disable": [
         "lowercase-global"

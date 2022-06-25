@@ -512,9 +512,13 @@ function applyResistanceAddEffect(player, target, element, bonus)
 end
 
 function getMagicHitRate(caster, target, skillType, element, percentBonus, bonusAcc)
-    -- resist everything if magic shield is active
-    if target:hasStatusEffect(xi.effect.MAGIC_SHIELD, 0) then
-        return 0
+    -- resist everything if real magic shield is active (see effects/magic_shield)
+    if target:hasStatusEffect(xi.effect.MAGIC_SHIELD) then
+        local magicshieldsub = target:getStatusEffect(xi.effect.MAGIC_SHIELD)
+
+        if magicshieldsub:getSubPower() == 0 then
+            return 0
+        end
     end
 
     if bonusAcc == nil then

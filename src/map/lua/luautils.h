@@ -144,6 +144,7 @@ namespace luautils
     uint8 GetConquestBalance();
     bool  IsConquestAlliance();
     int32 SetRegionalConquestOverseers(uint8 regionID); // Update NPC Conquest Guard
+    void  SendLuaFuncStringToZone(uint16 zoneId, std::string const& str);
 
     uint8 GetHealingTickDelay(); // Returns the configured healing tick delay
 
@@ -325,6 +326,8 @@ namespace luautils
     auto SetCustomMenuContext(CCharEntity* PChar, sol::table table) -> std::string;
     bool HasCustomMenuContext(CCharEntity* PChar);
     void HandleCustomMenu(CCharEntity* PChar, std::string selection);
+
+    uint16 GetItemIDByName(std::string const& name); // Retrive the first itemId that matches a name
 }; // namespace luautils
 
 #endif // _LUAUTILS_H -
