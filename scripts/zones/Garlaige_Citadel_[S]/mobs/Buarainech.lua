@@ -37,8 +37,8 @@ mob:setMod(xi.mod.UDMGBREATH, -10000) -- immune to breath damage
     mob:addMod(xi.mod.DEX, 40)
     mob:setMod(xi.mod.DEFP, 0)
     mob:setMod(xi.mod.RATTP, 0)
-    mob:addMod(xi.mod.DEFP, 475)
-    mob:addMod(xi.mod.RATTP, 475)
+    mob:addMod(xi.mod.DEFP, 250)
+    mob:addMod(xi.mod.RATTP, 250)
     mob:addMod(xi.mod.ACC, 150)
     -- Resistances Based On https://ffxiclopedia.fandom.com/wiki/Buarainech
     mob:setMod(xi.mod.EARTH_RES, 128)
