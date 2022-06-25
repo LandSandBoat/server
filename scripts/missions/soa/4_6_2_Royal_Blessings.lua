@@ -10,11 +10,11 @@ require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
 
-local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.THE_CHARLATAN)
+local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.ROYAL_BLESSINGS)
 
 mission.reward =
 {
-    nextMission = { xi.mission.log_id.SOA, xi.mission.id.soa.ROYAL_BLESSINGS },
+    nextMission = { xi.mission.log_id.SOA, xi.mission.id.soa.ARBOREAL_RUMORS },
 }
 
 mission.sections =
