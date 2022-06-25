@@ -400,7 +400,7 @@ xi.garrison.onTrade = function(player, npc, trade, guardNation)
     -- TODO: Check to see if party has a fellow
     -- Offset 42 A party member has an NPC called up. You cannot take part in this event.
     local zoneId = npc:getZoneID()
-	local zone = player:getZone()
+    local zone = player:getZone()
     local garrisonZoneData = xi.garrison.data[zoneId]
     local text = zones[zoneId].text
     local lockout = xi.settings.GARRISON_LOCKOUT
@@ -446,12 +446,12 @@ xi.garrison.onTrade = function(player, npc, trade, guardNation)
             ( xi.settings.GARRISON_ONCE_PER_WEEK == 1 or player:getCharVar("GARRISON_CONQUEST_WAIT") < os.time() ) and
             ( player:getNation() == guardNation or xi.settings.GARRISON_NATION_BYPASS == 1 )
         then
-			if xi.garrison.npcTableEmpty(zone) == true then
-				xi.garrison.buildNpcTable(zone)
-			end
+            if xi.garrison.npcTableEmpty(zone) == true then
+                xi.garrison.buildNpcTable(zone)
+            end
             npc:timer(1000, function(npcArg)
-				xi.garrison.start(player, npc, party)
-			end)
+                xi.garrison.start(player, npc, party)
+            end)
             player:confirmTrade()
             player:setCharVar("GARRISON_CONQUEST_WAIT", getConquestTally())
             npc:getZone():setLocalVar(string.format("[GARRISON]EndTime_%s", zoneId), os.time() + timeLimit)
@@ -544,8 +544,8 @@ xi.garrison.buildNpcTable = function(zone)
                 y = yPos,
                 z = zPos,
                 rotation = rot,
-                groupId = 100,
-                groupZoneId = 63,
+                groupId = 74,
+                groupZoneId = 103,
                 onMobRoam = function(mob) xi.garrison.returnHome(mob) end,
                 onMobDeath = function(mob, playerArg, isKiller) end,
                 releaseIdOnDeath = false,
@@ -553,6 +553,7 @@ xi.garrison.buildNpcTable = function(zone)
             mob:setSpawn(xPos, yPos, zPos, rot)
             mob:setRoamFlags(xi.roamFlag.NONE)
             mob:spawn()
+            mob:setMobLevel(garrisonZoneData.levelCap - math.floor(garrisonZoneData.levelCap / 5))
             DisallowRespawn(mob:getID(), true)
             -- BATTLEFIELD this is to prevent outside help, is not retail
             mob:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0)
