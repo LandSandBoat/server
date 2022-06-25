@@ -36,13 +36,18 @@
 #
 # Live example:
 
-custom/lua/test_npcs_in_gm_home.lua
+custom/cpp/ah_pagination.cpp
+custom/cpp/ah_announcement.cpp
+custom/lua/custom_conquest.lua
+custom/lua/disable_zones.lua
 custom/lua/conquest_npc_shops_always_open.lua
 custom/lua/conquest_regional_npcs_always_up.lua
 custom/lua/claim_shield.lua
 custom/lua/new_player_linkshell.lua
 custom/lua/custom_containers.lua
 custom/lua/guild_no_kits.lua
+custom/lua/conquest_crystal_trade_fix.lua
+custom/sql/ka_speedbelt_drop.sql
 era/lua/75_era_vendors.lua
 era/sql/75_era_spells.sql
-
+era/lua/exp_rings.lua
