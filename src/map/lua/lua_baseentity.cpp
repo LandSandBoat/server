@@ -1859,7 +1859,7 @@ void CLuaBaseEntity::setElevator(uint8 id, uint32 lowerDoor, uint32 upperDoor, u
     // If giving the elevator ANIMATION_ELEVATOR_UP makes it go down, set this bool to true
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_NPC);
 
-    Elevator_t elevator;
+    Elevator_t elevator         = {};
 
     elevator.id                 = id;
     elevator.LowerDoor          = static_cast<CNpcEntity*>(zoneutils::GetEntity(lowerDoor, TYPE_NPC));
@@ -4244,10 +4244,10 @@ void CLuaBaseEntity::addGearSetMod(uint8 modNameId, Mod modId, uint16 modValue)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    GearSetMod_t gearSetMod;
-    gearSetMod.modNameId = modNameId;
-    gearSetMod.modId     = modId;
-    gearSetMod.modValue  = modValue;
+    GearSetMod_t gearSetMod = {};
+    gearSetMod.modNameId    = modNameId;
+    gearSetMod.modId        = modId;
+    gearSetMod.modValue     = modValue;
 
     CCharEntity* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
 
@@ -12801,9 +12801,17 @@ void CLuaBaseEntity::spawn(sol::object const& despawnSec, sol::object const& res
 
 bool CLuaBaseEntity::isSpawned()
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
+    CMobEntity* PMobEntity = dynamic_cast<CMobEntity*>(m_PBaseEntity);
 
-    return static_cast<CMobEntity*>(m_PBaseEntity)->PAI->IsSpawned();
+    if (PMobEntity)
+    {
+        return static_cast<CMobEntity*>(m_PBaseEntity)->PAI->IsSpawned();
+    }
+    else
+    {
+        ShowError("CLuaBaseEntity::isSpawned() called on entity that is not a PMobEntity.");
+    }
+    return false;
 }
 
 /************************************************************************
