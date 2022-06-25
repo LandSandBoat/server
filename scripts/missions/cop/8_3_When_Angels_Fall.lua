@@ -19,7 +19,7 @@ local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.WHEN_ANGELS
 
 local ebonData =
 {
-    -- [race] = {xPos1, xPos2, EventID},
+    -- [race] = {xPos1, xPos2, EventID, KI},
     [xi.race.HUME_F] = {421, 423, 120, xi.ki.LIGHT_OF_VAHZL},
     [xi.race.HUME_M] = {421, 423, 120, xi.ki.LIGHT_OF_VAHZL},
     [xi.race.ELVAAN_F] = {739, 741, 121, xi.ki.LIGHT_OF_MEA},
