@@ -60,7 +60,7 @@ UPDATE mob_groups SET minLevel='52',maxLevel='56' WHERE name='Aqueduct_Spider' A
 -- ------------------------------------------------------------
 
 UPDATE mob_groups SET minLevel='72',maxLevel='75' WHERE name='Mourning_Crawler' AND groupid='25' AND zoneid='153';
-UPDATE mob_groups SET minLevel='40',maxLevel='43' WHERE name='Snaggletooth_Peapuk' AND groupid='26' AND zoneid='153';
+UPDATE mob_groups SET minLevel='72',maxLevel='75' WHERE name='Snaggletooth_Peapuk' AND groupid='26' AND zoneid='153';
 UPDATE mob_groups SET minLevel='72',maxLevel='74' WHERE name='Viseclaw' AND groupid='27' AND zoneid='153';
 
 -- ------------------------------------------------------------
@@ -211,6 +211,7 @@ UPDATE mob_groups SET minLevel='26',maxLevel='29' WHERE name='Warren_Bat' AND gr
 -- Garlaige_Citadel (Zone 200)
 -- ------------------------------------------------------------
 
+UPDATE mob_groups SET minLevel='53',maxLevel='55' WHERE name='Fortalice_Bats' AND groupid='15' AND zoneid='200';
 UPDATE mob_groups SET minLevel='52',maxLevel='53' WHERE name='Kaboom' AND groupid='29' AND zoneid='200';
 UPDATE mob_groups SET minLevel='56',maxLevel='58' WHERE name='Warden_Beetle' AND groupid='35' AND zoneid='200';
 UPDATE mob_groups SET minLevel='53',maxLevel='55' WHERE name='Donjon_Bat' AND groupid='40' AND zoneid='200';
