@@ -32,13 +32,13 @@ entity.onTrigger = function(player, npc)
     local playerLvl = player:getMainLvl()
     local playerJob = player:getMainJob()
 
-    --Quest: The Wayward Automation
+    --Quest: The Wayward Automaton
     if playerJob == xi.job.PUP and playerLvl >= xi.settings.AF1_QUEST_LEVEL and noStringsAttached == QUEST_COMPLETED and theWaywardAutomaton == QUEST_AVAILABLE then
         player:startEvent(774) -- he tells you to help find his auto
     elseif theWaywardAutomaton == QUEST_ACCEPTED and theWaywardAutomatonProgress == 1 then
         player:startEvent(775) -- reminder about to head to Nashmau
     elseif theWaywardAutomaton == QUEST_ACCEPTED and theWaywardAutomatonProgress == 3 then
-        player:startEvent(776) -- tell him you found automation
+        player:startEvent(776) -- tell him you found Automaton
     elseif playerJob == xi.job.PUP and playerLvl < xi.settings.AF2_QUEST_LEVEL and theWaywardAutomaton == QUEST_COMPLETED then
         player:startEvent(777)
     elseif playerJob ~= xi.job.PUP and theWaywardAutomaton == QUEST_COMPLETED then

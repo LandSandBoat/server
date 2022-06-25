@@ -1,8 +1,8 @@
 -----------------------------------
 --  Transmogrification
 --
---  Description: Activates a shield to absorb all incoming magical damage.
---  Type: Magical
+--  Description: Activates a shield to absorb all incoming physical damage.
+--  Type: Physical
 -----------------------------------
 require("scripts/globals/mobskills")
 require("scripts/settings/main")
@@ -20,7 +20,7 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
-    xi.mobskills.mobBuffMove(mob, xi.effect.PHYSICAL_SHIELD, 2, 0, 30)
+    xi.mobskills.mobBuffMove(mob, xi.effect.PHYSICAL_SHIELD, 3, 0, 30)
     skill:setMsg(xi.msg.basic.NONE)
 
     return 0

@@ -68,6 +68,7 @@
 #include "../instance.h"
 #include "../items/item_puppet.h"
 #include "../map.h"
+#include "../message.h"
 #include "../mobskill.h"
 #include "../packets/action.h"
 #include "../packets/char_emotion.h"
@@ -193,6 +194,8 @@ namespace luautils
         lua.set_function("SelectDailyItem", &luautils::SelectDailyItem);
         lua.set_function("GetQuestAndMissionFilenamesList", &luautils::GetQuestAndMissionFilenamesList);
         lua.set_function("GetCachedInstanceScript", &luautils::GetCachedInstanceScript);
+        lua.set_function("GetItemIDByName", &luautils::GetItemIDByName);
+        lua.set_function("SendLuaFuncStringToZone", &luautils::SendLuaFuncStringToZone);
 
         // This binding specifically exists to forcefully crash the server.
         // clang-format off
@@ -1008,6 +1011,11 @@ namespace luautils
         }
 
         return 0;
+    }
+
+    void SendLuaFuncStringToZone(uint16 zoneId, std::string const& str)
+    {
+        message::send(zoneId, str);
     }
 
     /************************************************************************
@@ -4883,5 +4891,28 @@ namespace luautils
         }
 
         customMenuContext.erase(PChar->id);
+    }
+
+    uint16 GetItemIDByName(std::string const& name)
+    {
+        uint16      id    = 0;
+        const char* Query = "SELECT itemid FROM item_basic WHERE name LIKE '%s';";
+        int32       ret   = sql->Query(Query, name);
+
+        if (ret != SQL_ERROR && sql->NumRows() == 1)  // Found a single result
+        {
+            while (sql->NextRow() == SQL_SUCCESS)
+            {
+                id = sql->GetIntData(0);
+            }
+        }
+        else if (ret != SQL_ERROR && sql->NumRows() > 1)
+        {
+            // 0xFFFF is gil, so we will always return a value less than that as a warning
+            id = 0xFFFF - sql->NumRows() + 1;
+        }
+        
+
+        return id;
     }
 }; // namespace luautils
