@@ -24,10 +24,6 @@ zone_object.onInitialize = function(zone)
     xi.voidwalker.zoneOnInit(zone)
 end
 
-zone_object.onZoneTick = function(zone)
-    xi.garrison.buildNpcTable(zone)
-end
-
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
@@ -49,6 +45,7 @@ end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
+    xi.garrison.buildNpcTable(zone)
 end
 
 zone_object.onRegionEnter = function(player, region)

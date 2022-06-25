@@ -42,16 +42,13 @@ zone_object.onInitialize = function(zone)
     xi.bmt.updatePeddlestox(xi.zone.YUHTUNGA_JUNGLE, ID.npc.PEDDLESTOX)
 end
 
-zone_object.onZoneTick = function(zone)
-    xi.garrison.buildNpcTable(zone)
-end
-
 zone_object.onGameDay = function()
     xi.bmt.updatePeddlestox(xi.zone.YHOATOR_JUNGLE, ID.npc.PEDDLESTOX)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
+    xi.garrison.buildNpcTable(zone)
 end
 
 zone_object.onZoneIn = function( player, prevZone)

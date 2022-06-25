@@ -400,6 +400,7 @@ xi.garrison.onTrade = function(player, npc, trade, guardNation)
     -- TODO: Check to see if party has a fellow
     -- Offset 42 A party member has an NPC called up. You cannot take part in this event.
     local zoneId = npc:getZoneID()
+    local zone = player:getZone()
     local garrisonZoneData = xi.garrison.data[zoneId]
     local text = zones[zoneId].text
     local lockout = xi.settings.GARRISON_LOCKOUT
@@ -445,7 +446,12 @@ xi.garrison.onTrade = function(player, npc, trade, guardNation)
             ( xi.settings.GARRISON_ONCE_PER_WEEK == 1 or player:getCharVar("GARRISON_CONQUEST_WAIT") < os.time() ) and
             ( player:getNation() == guardNation or xi.settings.GARRISON_NATION_BYPASS == 1 )
         then
-            xi.garrison.start(player, npc, party)
+            if xi.garrison.npcTableEmpty(zone) == true then
+                xi.garrison.buildNpcTable(zone)
+            end
+            npc:timer(1000, function(npcArg)
+                xi.garrison.start(player, npc, party)
+            end)
             player:confirmTrade()
             player:setCharVar("GARRISON_CONQUEST_WAIT", getConquestTally())
             npc:getZone():setLocalVar(string.format("[GARRISON]EndTime_%s", zoneId), os.time() + timeLimit)
@@ -519,10 +525,7 @@ xi.garrison.buildNpcTable = function(zone)
     local zoneId = zone:getID()
     local garrisonZoneData = xi.garrison.data[zoneId]
     local garrisonRunning = zone:getLocalVar(string.format("[GARRISON]EndTime_%s", zoneId))
-    if
-        xi.garrison.npcTableEmpty(zone) == true and
-        owner < 3
-    then
+    if owner < 3 then
         local npcs = garrisonZoneData.npcs
         local xPos = garrisonZoneData.xPos
         local yPos = garrisonZoneData.yPos
@@ -541,8 +544,8 @@ xi.garrison.buildNpcTable = function(zone)
                 y = yPos,
                 z = zPos,
                 rotation = rot,
-                groupId = 74,
-                groupZoneId = 103,
+                groupId = 100,
+                groupZoneId = 63,
                 onMobRoam = function(mob) xi.garrison.returnHome(mob) end,
                 onMobDeath = function(mob, playerArg, isKiller) end,
                 releaseIdOnDeath = false,
