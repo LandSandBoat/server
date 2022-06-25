@@ -38,8 +38,8 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.DEFP, 0)
     mob:setMod(xi.mod.RATTP, 0)
     -- Raising Defense As Melee Was Doing Too Much Damage
-    mob:addMod(xi.mod.DEFP, 525)
-    mob:addMod(xi.mod.RATTP, 525)
+    mob:addMod(xi.mod.DEFP, 250)
+    mob:addMod(xi.mod.RATTP, 250)
     mob:addMod(xi.mod.ACC, 100)
     -- Resistances Based On https://ffxiclopedia.fandom.com/wiki/Elatha
     mob:setMod(xi.mod.EARTH_RES, 200)
