@@ -319,7 +319,12 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
     }
     else if (table["look"].get_type() == sol::type::string)
     {
-        auto look = stringToLook(table.get<std::string>("look"));
+        auto lookStr = table.get<std::string>("look");
+        if (lookStr.size() >= 4 && ((lookStr[1] == 'x' && lookStr[3] == '1') || lookStr[1] == '1'))
+        {
+            PEntity->look.size = MODEL_EQUIPPED;
+        }
+        auto look = stringToLook(lookStr);
         std::memcpy(&PEntity->look, &look, sizeof(PEntity->look));
     }
 
