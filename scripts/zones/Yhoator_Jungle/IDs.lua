@@ -36,6 +36,7 @@ zones[xi.zone.YHOATOR_JUNGLE] =
         FAINT_CRY                   = 7690,  -- You hear the cry of a famished Opo-opo!
         PAMAMAS                     = 7693,  -- You might be able to draw an Opo-opo here if you had more pamamas.
         SOMETHING_IS_BURIED_HERE    = 7741,  -- It looks like something is buried here. If you had <item> you could dig it up.
+        GARRISON_BASE               = 7751,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
         PLAYER_OBTAINS_ITEM         = 7830,  -- <name> obtains <item>!
         UNABLE_TO_OBTAIN_ITEM       = 7831,  -- You were unable to obtain the item.
         PLAYER_OBTAINS_TEMP_ITEM    = 7832,  -- <name> obtains the temporary item: <item>!

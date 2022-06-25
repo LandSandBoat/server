@@ -29,6 +29,7 @@ zones[xi.zone.BEAUCEDINE_GLACIER] =
         YOU_CANNOT_ENTER_DYNAMIS       = 7882,  -- You cannot enter Dynamis - [Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia] for <number> [day/days] (Vana'diel time).
         PLAYERS_HAVE_NOT_REACHED_LEVEL = 7884,  -- Players who have not reached level <number> are prohibited from entering Dynamis.
         DYNA_NPC_DEFAULT_MESSAGE       = 7894,  -- There is an unusual arrangement of branches here.
+        GARRISON_BASE                  = 8244,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
         PLAYER_OBTAINS_ITEM            = 8577,  -- <name> obtains <item>!
         UNABLE_TO_OBTAIN_ITEM          = 8578,  -- You were unable to obtain the item.
         PLAYER_OBTAINS_TEMP_ITEM       = 8579,  -- <name> obtains the temporary item: <item>!

@@ -9,6 +9,7 @@ require("scripts/quests/i_can_hear_a_rainbow")
 require("scripts/globals/conquest")
 require("scripts/globals/world")
 require("scripts/globals/zone")
+require("scripts/globals/garrison")
 -----------------------------------
 local zone_object = {}
 
@@ -24,6 +25,7 @@ end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
+    xi.garrison.buildNpcTable(zone)
 end
 
 zone_object.onZoneIn = function( player, prevZone)

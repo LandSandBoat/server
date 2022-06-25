@@ -8,6 +8,7 @@ require("scripts/globals/conquest")
 require("scripts/globals/missions")
 require("scripts/globals/zone")
 require("scripts/missions/amk/helpers")
+require("scripts/globals/garrison")
 -----------------------------------
 local zone_object = {}
 
@@ -44,6 +45,7 @@ end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
+    xi.garrison.buildNpcTable(zone)
 end
 
 zone_object.onRegionEnter = function(player, region)

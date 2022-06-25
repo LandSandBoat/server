@@ -17435,9 +17435,11 @@ INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,15140,@VRARE);
 INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,15142,@VRARE);
 INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,16360,@VRARE);
 INSERT INTO `mob_droplist` VALUES (3223,0,0,1000,16017,@COMMON);
-INSERT INTO `mob_droplist` VALUES (3224,0,0,1000,2811,@VCOMMON);
-INSERT INTO `mob_droplist` VALUES (3224,0,0,1000,2815,@COMMON);
-INSERT INTO `mob_droplist` VALUES (3224,0,0,1000,2819,@VCOMMON);
+INSERT INTO `mob_droplist` VALUES (3224,0,0,1000,1604,@UNCOMMON); -- (Garrison) Mannequin Legs
+INSERT INTO `mob_droplist` VALUES (3224,0,0,1000,1605,@UNCOMMON); -- (Garrison) Mannequin Feet
+INSERT INTO `mob_droplist` VALUES (3225,0,0,1000,2811,@VCOMMON); -- (sword_sorcerer_solisoq) aptant_of_primus
+INSERT INTO `mob_droplist` VALUES (3225,0,0,1000,2815,@COMMON);  -- (sword_sorcerer_solisoq) aptant_of_arkhe
+INSERT INTO `mob_droplist` VALUES (3225,0,0,1000,2819,@VCOMMON); -- (sword_sorcerer_solisoq) aptant_of_fyrst
 INSERT INTO `mob_droplist` VALUES (3225,0,0,1000,11343,@COMMON); -- (Picolaton) Thrakon Breastplate
 
 
