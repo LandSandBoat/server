@@ -187,6 +187,19 @@ void CLuaZone::reloadNavmesh()
     m_pLuaZone->m_navMesh->reload();
 }
 
+bool CLuaZone::isNavigablePoint(const sol::table& point)
+{
+    position_t position {
+        point["x"].get_or<float>(0),
+        point["y"].get_or<float>(0),
+        point["z"].get_or<float>(0),
+        point["moving"].get_or<uint16>(0),
+        point["rot"].get_or<uint8>(0)
+    };
+
+    return m_pLuaZone->m_navMesh->validPosition(position);
+}
+
 std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
 {
     auto& lua = luautils::lua;
@@ -450,6 +463,7 @@ void CLuaZone::Register()
     SOL_REGISTER("battlefieldsFull", CLuaZone::battlefieldsFull);
     SOL_REGISTER("getWeather", CLuaZone::getWeather);
     SOL_REGISTER("reloadNavmesh", CLuaZone::reloadNavmesh);
+    SOL_REGISTER("isNavigablePoint", CLuaZone::isNavigablePoint);
     SOL_REGISTER("insertDynamicEntity", CLuaZone::insertDynamicEntity);
 
     SOL_REGISTER("getSoloBattleMusic", CLuaZone::getSoloBattleMusic);
