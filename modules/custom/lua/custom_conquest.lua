@@ -943,7 +943,7 @@ local function customCanPurchaseItem(player, stock, pRank, guardNation, mOffset)
     end
 
     -- validate rank
-    if stock.rank then
+    if stock.rank and pRank < stock.rank then
         player:messageSpecial(mOffset + 61, stock.item) -- "Your rank is too low to purchase the <item>."
         return -1
     end
