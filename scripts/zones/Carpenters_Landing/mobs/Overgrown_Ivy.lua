@@ -17,7 +17,7 @@ end
 
 entity.onMobWeaponSkillPrepare = function(mob, target)
     if mob:getHPP() <= 15 then
-        return 319
+        return 319 -- bad_breathe
     end
 end
 
