@@ -54,6 +54,7 @@ xi.geomanticReservoir.onTrigger = function(player, npc, geoSpell)
         end
     else -- Default text when player is not on GEO
         player:messageSpecial(zones[player:getZoneID()].text.NOTHING_OUT_OF_ORDINARY)
+    end
 end
 
 xi.geomanticReservoir.onEventFinish = function(player, csid, geoSpell)
