@@ -567,7 +567,7 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
     end
 end
 
-xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, target, oMob)
+xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, target, oMob, mainDynaLord)
     local zone = GetZone(zoneID)
     local xPos = 0
     local yPos = 0
@@ -575,6 +575,9 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
     local rPos = 0
     if mobIndex == nil then
         return
+    end
+    if oMob ~= nil then
+        local oMobID = oMob:getID()
     end
     local mobName = xi.dynamis.mobList[zoneID][mobIndex].info[2]
     if xi.dynamis.mobList[zoneID][mobIndex].pos then
@@ -846,7 +849,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Diabolos Heart"] = {"44696148", 2, 42, 0, nil, nil, "Diabolos Heart"}, -- DiaH
         ["Diabolos Spade"] = {"44696153", 1, 42, 0, nil, nil, "Diabolos Spade"}, -- DiaS
     }
-    local nmFunctions =
+    xi.dynamis.nmFunctions =
     {
         ["Beastmen"] =
         {
@@ -1027,7 +1030,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             ["onMobWeaponSkillPrepare"] = {function(mob, target) xi.dynamis.onWeaponskillPrepDynaLord(mob, target) end},
             ["onMobWeaponSkill"] = {function(mob, skill) xi.dynamis.onWeaponskillDynaLord(mob, skill) end},
             ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.onDeathDynaLord(mob, player, isKiller) end},
-            ["mixins"] = { require("scripts/mixins/job_special"), },
+            ["mixins"] = { },
         },
         ["Ying"] =
         {
@@ -1123,19 +1126,32 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         rotation = rPos,
         groupId = xi.dynamis.nmInfoLookup[mobName][2],
         groupZoneId = xi.dynamis.nmInfoLookup[mobName][3],
-        onMobSpawn = nmFunctions[xi.dynamis.nmInfoLookup[mobName][7]]["onMobSpawn"][1],
-        onMobEngaged= nmFunctions[xi.dynamis.nmInfoLookup[mobName][7]]["onMobEngaged"][1],
-        onMobFight= nmFunctions[xi.dynamis.nmInfoLookup[mobName][7]]["onMobFight"][1],
-        onMobRoam= nmFunctions[xi.dynamis.nmInfoLookup[mobName][7]]["onMobRoam"][1],
-        onMobMagicPrepare= nmFunctions[xi.dynamis.nmInfoLookup[mobName][7]]["onMobMagicPrepare"][1],
-        onMobWeaponSkillPrepare= nmFunctions[xi.dynamis.nmInfoLookup[mobName][7]]["onMobWeaponSkillPrepare"][1],
-        onMobWeaponSkill= nmFunctions[xi.dynamis.nmInfoLookup[mobName][7]]["onMobWeaponSkill"][1],
-        onMobDeath= nmFunctions[xi.dynamis.nmInfoLookup[mobName][7]]["onMobDeath"][1],
+        onMobSpawn = xi.dynamis.nmFunctions[xi.dynamis.nmInfoLookup[mobName][7]]["onMobSpawn"][1],
+        onMobEngaged= xi.dynamis.nmFunctions[xi.dynamis.nmInfoLookup[mobName][7]]["onMobEngaged"][1],
+        onMobFight= xi.dynamis.nmFunctions[xi.dynamis.nmInfoLookup[mobName][7]]["onMobFight"][1],
+        onMobRoam= xi.dynamis.nmFunctions[xi.dynamis.nmInfoLookup[mobName][7]]["onMobRoam"][1],
+        onMobMagicPrepare= xi.dynamis.nmFunctions[xi.dynamis.nmInfoLookup[mobName][7]]["onMobMagicPrepare"][1],
+        onMobWeaponSkillPrepare= xi.dynamis.nmFunctions[xi.dynamis.nmInfoLookup[mobName][7]]["onMobWeaponSkillPrepare"][1],
+        onMobWeaponSkill= xi.dynamis.nmFunctions[xi.dynamis.nmInfoLookup[mobName][7]]["onMobWeaponSkill"][1],
+        onMobDeath= xi.dynamis.nmFunctions[xi.dynamis.nmInfoLookup[mobName][7]]["onMobDeath"][1],
         releaseIdOnDeath = true,
-        mixins = nmFunctions[xi.dynamis.nmInfoLookup[mobName][7]]["mixins"],
+        mixins = xi.dynamis.nmFunctions[xi.dynamis.nmInfoLookup[mobName][7]]["mixins"],
     })
-    mob:setSpawn(xPos, yPos, zPos, rPos)
-    mob:spawn()
+    if oMob ~= nil then
+        if mainDynaLord == oMob:getID() and mobName == "Dynamis Lord" then
+            mob:setSpawn(target:getXPos(), target:getYPos(), target:getZPos(), target:getRotPos())
+            mob:spawn()
+            mob:setSpawn(xPos, yPos, zPos, rPos)
+            mob:setLocalVar("Clone", 1)
+        elseif mainDynaLord == oMob:getID() and mobName == "Ying" or mobName == "Yang" then
+            mob:setSpawn(oMob:getXPos(), oMob:getYPos(), oMob:getZPos(), oMob:getRotPos())
+            mob:spawn()
+            mob:setSpawn(xPos, yPos, zPos, rPos)
+        end
+    else
+        mob:setSpawn(xPos, yPos, zPos, rPos)
+        mob:spawn()
+    end
     zone:setLocalVar(string.format("MobIndex_%s", mob:getID()), mobIndex)
     mob:setLocalVar(string.format("MobIndex_%s", mob:getID()), mobIndex)
     mob:setLocalVar("MobIndex", mobIndex)
@@ -1149,7 +1165,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
     end
     if oMobIndex ~= nil then
         mob:setLocalVar("Parent", oMobIndex)
-        mob:setLocalVar("ParentID", oMob:getID())
+        mob:setLocalVar("ParentID", mob:getID())
         oMob:setLocalVar(string.format("ChildID_%s", mobIndex), mob:getID())
     end
     if xi.dynamis.mobList[zoneID][mobIndex].info[5] ~= nil then
@@ -1695,28 +1711,23 @@ end
 --------------------------------------------
 
 xi.dynamis.mobOnDeath = function(mob, player, isKiller)
+    local zoneID = mob:getZoneID()
     local zone = mob:getZone()
     local mobIndex = zone:getLocalVar(string.format("MobIndex_%s", mob:getID()))
     if mob:getLocalVar("dynamisMobOnDeathTriggered") == 1 then return -- Don't trigger more than once.
     else -- Stops execution of code below if the above is true.
         if mob:getLocalVar("hasMobVar") == 1 then
-            if mob:getName() == "DE_444c" and zone:getLocalVar("MainDynaLord") ~= mob:getID() then
-                zone:setLocalVar(string.format("%s", xi.dynamis.mobList[mob:getZoneID()][mobIndex].info[5]), 0)
-            else
-                zone:setLocalVar(string.format("%s", xi.dynamis.mobList[mob:getZoneID()][mobIndex].info[5]), 1) -- Set Death Requirements Variable
-            end
+            zone:setLocalVar(xi.dynamis.mobList[zoneID][mobIndex].info[5], 1) -- Set Death Requirements Variable
         end
         if mobIndex ~= 0 and mobIndex ~= nil then
             xi.dynamis.addTimeToDynamis(zone, mobIndex) -- Add Time
         end
         mob:setLocalVar("dynamisMobOnDeathTriggered", 1) -- onDeath lua happens once per party member that killed the mob, but we want this to only run once per mob
         if mob:getZoneID() == (xi.zone.DYNAMIS_BEAUCEDINE or xi.zone.DYNAMIS_XARCABARD) then
-            if player then
-                if mob:getFamily() == (4 or 92 or 93 or 94 or 95) then
-                    player:addTreasure(4248, mob, 100) -- Adds Ginurva's Battle Theory to Statues and Eyes in Dynamis Beaucedine and Xarcabard
-                elseif mob:getFamily() == (358 or 359) and mob:getMobMod(xi.mobMod.CHECK_AS_NM) == 2 then
-                    player:addTreasure(4249, mob, 500) -- Adds Shultz's Strategems to Kindred and Hydra NMs in Dynamis Beaucedine and Xarcabard
-                end
+            if mob:getFamily() == (4 or 92 or 93 or 94 or 95) then
+                player:addTreasure(4248, mob, 100) -- Adds Ginurva's Battle Theory to Statues and Eyes in Dynamis Beaucedine and Xarcabard
+            elseif mob:getFamily() == (358 or 359) and mob:getMobMod(xi.mobMod.CHECK_AS_NM) == 2 then
+                player:addTreasure(4249, mob, 500) -- Adds Shultz's Strategems to Kindred and Hydra NMs in Dynamis Beaucedine and Xarcabard
             end
         end
     end

@@ -1,9 +1,10 @@
 -----------------------------------
 --      Xarcabard Era Module     --
 -----------------------------------
-require("scripts/globals/dynamis")
 require("scripts/globals/zone")
 require("scripts/globals/spell_data")
+require("scripts/globals/status")
+require("scripts/globals/utils")
 require("scripts/globals/status")
 -----------------------------------
 
@@ -13,234 +14,231 @@ xi.dynamis = xi.dynamis or {}
 -----------------------------------
 --    Dynamis Lord, Ying, Yang   --
 -----------------------------------
+local lordText = 7281
+local yingText = 7289
+local yangText = 7290
+local busy = {xi.act.MOBABILITY_FINISH, xi.act.MOBABILITY_START, xi.act.MOBABILITY_USING, xi.act.MAGIC_CASTING, xi.act.MAGIC_START, xi.act.MAGIC_FINISH}
+local specials =
+{
+    {xi.jsa.HUNDRED_FISTS, 95, "DL_Hundred_Fists"},
+    {xi.jsa.MIGHTY_STRIKES, 95, "DL_Mighty_Strikes"},
+    {xi.jsa.BLOOD_WEAPON, 95, "DL_Blood_Weapon"},
+    {xi.jsa.CHAINSPELL, 50, "DL_Chainspell"},
+}
+local function spawnDwagons(oMob, target)
+    local zoneID = oMob:getZoneID()
+    local zone = oMob:getZone()
+    local dwagonVars =
+    {
+        ["ying_killed"] = {zone:getLocalVar("178"),178, 179, "Ying"},
+        ["yang_killed"] = {zone:getLocalVar("177"), 177, 179, "Yang"},
+    }
+    for key, var in pairs(dwagonVars) do
+        xi.dynamis.nmDynamicSpawn(var[2], var[3], true, zoneID, target, oMob, oMob:getID())
+    end
+end
+
+local function spawnClones(oMob, target)
+    local zoneID = oMob:getZoneID()
+    local victimList = oMob:getEnmityList()
+    local victim1 = utils.randomEntry(victimList)["entity"]
+    local victim2 = utils.randomEntry(victimList)["entity"]
+    local victim3 = utils.randomEntry(victimList)["entity"]
+    local victim4 = utils.randomEntry(victimList)["entity"]
+    xi.dynamis.nmDynamicSpawn(179, 179, true, zoneID, victim1, oMob, oMob:getID())
+    xi.dynamis.nmDynamicSpawn(179, 179, true, zoneID, victim2, oMob, oMob:getID())
+    xi.dynamis.nmDynamicSpawn(179, 179, true, zoneID, victim3, oMob, oMob:getID())
+    xi.dynamis.nmDynamicSpawn(179, 179, true, zoneID, victim4, oMob, oMob:getID())
+end
 
 xi.dynamis.onSpawnDynaLord = function(mob)
-    mob:setRoamFlags(xi.roamFlag.EVENT)
-    local dialogDL = 7272
     local zone = mob:getZone()
-    xi.dynamis.setMegaBossStats(mob) 
+    mob:setRoamFlags(xi.roamFlag.EVENT)
+    xi.dynamis.setMegaBossStats(mob)
     mob:setMod(xi.mod.SLEEPRES, 100)
     mob:setMod(xi.mod.BINDRES, 100)
     mob:setMod(xi.mod.GRAVITYRES, 100)
     mob:setMod(xi.mod.BINDRES, 100)
     mob:setMod(xi.mod.UFASTCAST, 100)
-    mob:setLocalVar("tpTime", 0)
-    mob:SetAutoAttackEnabled(false)
-    mob:SetMagicCastingEnabled(false)
-
-    if zone:getLocalVar("MainDynaLord") == 0 then
-        zone:setLocalVar("MainDynaLord", mob:getID())
-    end
-
-    xi.mix.jobSpecial.config(mob, {
-        between = 60,
-        specials =
-        {
-            {id = xi.jsa.HUNDRED_FISTS, hpp = 95, begCode = function(mob) mob:messageText(mob, dialogDL + 11) end},
-            {id = xi.jsa.MIGHTY_STRIKES, hpp = 95, begCode = function(mob) mob:messageText(mob, dialogDL + 14) end},
-            {id = xi.jsa.BLOOD_WEAPON, hpp = 95, begCode = function(mob) mob:messageText(mob, dialogDL + 12) end},
-            {id = xi.jsa.CHAINSPELL, hpp = 50, begCode = function(mob) mob:messageText(mob, dialogDL + 13) end},
-        },
-    })
+    mob:addListener("WEAPONSKILL_STATE_ENTER", "DL_WEAPONSKILL_STATE_ENTER", function(mob, skillid)
+        if skillid == xi.jsa.HUNDRED_FISTS then
+            mob:messageText(mob, lordText + 11)
+        elseif skillid == xi.jsa.MIGHTY_STRIKES then
+            mob:messageText(mob, lordText + 14)
+        elseif skillid == xi.jsa.BLOOD_WEAPON then
+            mob:messageText(mob, lordText + 12)
+        elseif skillid == xi.jsa.CHAINSPELL then
+            mob:messageText(mob, lordText + 13)
+        end
+    end)
+    mob:addListener("WEAPONSKILL_STATE_EXIT", "DL_WEAPONSKILL_STATE_EXIT", function(mobEntity, skillid)
+        local zone = mobEntity:getZone()
+        if mobEntity:getID() ~= zone:getLocalVar("179") then
+            if skillid == zone:getLocalVar("CloneMove") then
+                DespawnMob(mobEntity:getID())
+            end
+        end
+    end)
 end
 
 xi.dynamis.onSpawnYing = function(mob)
     local zone = mob:getZone()
-    local dynaLord = 0
-    if zone:getLocalVar("MainDynaLord") ~= 0 then
-        dynaLord = GetMobByID(zone:getLocalVar("MainDynaLord"))
-    end
-    zone:setLocalVar("ying_killed", 0)
+    local mainLord = zone:getLocalVar("179")
     mob:setRoamFlags(xi.roamFlag.EVENT)
     xi.dynamis.setNMStats(mob)
-    if dynaLord ~= 0 then
+    if mainLord ~= 0 then
+        local dynaLord = GetMobByID(mainLord)
         if dynaLord:getLocalVar("magImmune") < 2 then -- both dragons have not been killed initially
             dynaLord:setMod(xi.mod.UDMGMAGIC, -100)
             dynaLord:setMod(xi.mod.UDMGBREATH, -100)
             dynaLord:setLocalVar("magImmune", 0)
-            mob:setSpawn(-364, -35.661, 17.254) -- Reset Ying's spawn point to initial spot.
-        else
-            mob:setSpawn(-414.282, -44, 20.427) -- Spawned by DL, reset to DL's spawn point.
         end
     end
 end
 
 xi.dynamis.onSpawnYang = function(mob)
     local zone = mob:getZone()
-    local dynaLord = 0
-    if zone:getLocalVar("MainDynaLord") ~= 0 then
-        dynaLord = GetMobByID(zone:getLocalVar("MainDynaLord"))
-    end
-    zone:setLocalVar("yang_killed", 0)
+    local mainLord = zone:getLocalVar("179")
     mob:setRoamFlags(xi.roamFlag.EVENT)
     xi.dynamis.setNMStats(mob)
-    if dynaLord ~= 0 then
+    if mainLord ~= 0 then
+        local dynaLord = GetMobByID(mainLord)
         if dynaLord:getLocalVar("magImmune") < 2 then -- both dragons have not been killed initially
             dynaLord:setMod(xi.mod.UDMGMAGIC, -100)
             dynaLord:setMod(xi.mod.UDMGBREATH, -100)
             dynaLord:setLocalVar("magImmune", 0)
-            mob:setSpawn(-364, -35.661, 17.254) -- Reset Yang's spawn point to initial spot.
-        else
-            mob:setSpawn(-414.282, -44, 20.427) -- Spawned by DL, reset to DL's spawn point.
         end
     end
 end
 
 xi.dynamis.onEngagedDynaLord = function(mob, target)
-    local dialogDL = 7272
     local zone = mob:getZone()
-    mob:setLocalVar("teraTime", os.time() + math.random(90,120))
-    mob:setLocalVar("lastPetPop", os.time() + 60)
-    local mainLord = zone:getLocalVar("MainDynaLord")
-    if mob:getID() == mainLord then
-        mob:showText(mob, dialogDL + 8) -- Immortal Drakes, deafeated
-    end  
+    local mainLord = zone:getLocalVar("179")
+    if mob:getLocalVar("Clone") == 1 then
+        mob:SetAutoAttackEnabled(false)
+        mob:SetMagicCastingEnabled(false)
+        mob:setHP(zone:getLocalVar("DL_HP"))
+        mob:setLocalVar("ws", 1)
+    else
+        mob:showText(mob, lordText + 8) -- Immortal Drakes, deafeated
+        zone:setLocalVar("teraTime", os.time() + math.random(90,120))
+    end
 end
 
 xi.dynamis.onFightDynaLord = function(mob, target)
-    local dialogDL = 7272
     local zone = mob:getZone()
-    local tpTime = mob:getLocalVar("tpTime")
-    local mainLord = zone:getLocalVar("MainDynaLord")
+    local mainLord = zone:getLocalVar("179")
+    local cloneMove = zone:getLocalVar("CloneMove")
+    local teraTime = zone:getLocalVar("teraTime")
+    local ws = mob:getLocalVar("ws")
+    local dwagonVars =
+    {
+        ["ying_killed"] = {zone:getLocalVar("178"),178, 179, "Ying"},
+        ["yang_killed"] = {zone:getLocalVar("177"), 177, 179, "Yang"},
+    }
 
-    if zone:getLocalVar("MainDynaLord") ~= mob:getID() then
-        mob:setMobMod(xi.mobMod.NO_DROPS, 1)
-    elseif zone:getLocalVar("MainDynaLord") == mob:getID() then
-        mob:setMobMod(xi.mobMod.NO_DROPS, 0)
+    if mob:getID() ~= mainLord then
+        mob:SetMagicCastingEnabled(false)
+        mob:SetAutoAttackEnabled(false)
+        mob:SetMobAbilityEnabled(false)
     end
 
-    if os.time() > tpTime and tpTime ~= 0 then
-        local cloneMove = zone:getLocalVar("CloneMove")
-        mob:useMobAbility(cloneMove)
-        mob:setLocalVar("tpTime", 0)
-        GetMobByID(mainLord):setLocalVar("teraTime", os.time() + math.random(90,120))
-    elseif tpTime == 0 or os.time() > tpTime then
-        mob:SetAutoAttackEnabled(true)
+    if zone:getLocalVar("dwagonSpawn") == 0 then
+        zone:setLocalVar("dwagonSpawn", os.time() + 30)
+    end
+
+    if ws == 1 then
+        mob:queue(10, function(mob) mob:useMobAbility(cloneMove) mob:setLocalVar("ws", 0) end)
+    end
+
+    if mob:getLocalVar("ws") == 0 and mob:getID() == mainLord then
+        zone:setLocalVar("DL_HP", mob:getHP())
         mob:SetMagicCastingEnabled(true)
-    end
+        mob:SetMobAbilityEnabled(true)
+        mob:SetAutoAttackEnabled(true)
 
-    if mob:getLocalVar("WeaponskillPerformed") == 1 and mob:getID() ~= mainLord then
-        DespawnMob(mob:getID())
-    else
-        mob:setLocalVar("WeaponskillPerformed", 0)
-    end
-
-    if zone:getLocalVar("ying_killed") == 0 then
-        local ying =  GetMobByID(zone:getLocalVar("178"))
-        if ying:getCurrentAction() == xi.act.ROAMING then
-            ying:updateEnmity(target)
+        if mob:getID() == mainLord and zone:getLocalVar("2hrCool") <= os.time() then
+            for _, table in pairs(specials) do
+                if zone:getLocalVar(table[3]) ~= 1 and mob:getHPP() <= table[2] then
+                    mob:useMobAbility(table[1])
+                    zone:setLocalVar(table[3], 1)
+                    zone:setLocalVar("2hrCool", os.time() + 30)
+                    break
+                end
+            end
         end
-    end
-    if zone:getLocalVar("yang_killed") == 0 then
-        local yang = GetMobByID(zone:getLocalVar("177"))
-        if yang:getCurrentAction() == xi.act.ROAMING then
-            yang:updateEnmity(target)
-        end
-    end
 
-    if zone:getLocalVar("ying_killed") == 1 and zone:getLocalVar("yang_killed") == 1 and mob:getLocalVar("Spawning") <= os.time() then
-        mob:setLocalVar("Spawning", os.time() + 5)
-        if mob:getLocalVar("lastPetPop") <= os.time() then -- Spawn Ying and Yang
+        for key, var in pairs(dwagonVars) do -- Update Ying and Yang to Attack Current Target
+            if zone:getLocalVar(key) == 0 then
+                local dwagon = GetMobByID(var[1])
+                if not dwagon:isEngaged() then
+                    dwagon:updateEnmity(target)
+                end
+            end
+        end
+
+        if os.time() > teraTime and mob:getID() == mainLord and mob:getLocalVar("cloneSpawn") <= os.time() then
+            mob:setLocalVar("cloneSpawn", os.time() + 5)
+            mob:entityAnimationPacket("casm")
             mob:SetAutoAttackEnabled(false)
             mob:SetMagicCastingEnabled(false)
             mob:SetMobAbilityEnabled(false)
-            mob:entityAnimationPacket("casm")
-            mob:setLocalVar("lastPetPop", os.time() + 33)
-            mob:timer(3000, function (mob, target)
-                local pets = { 177, 178 }
-                xi.dynamis.nmDynamicSpawn(pets[1], mob:getLocalVar("MobIndex"), true, mob:getZoneID(), target, mob)
-                xi.dynamis.nmDynamicSpawn(pets[2], mob:getLocalVar("MobIndex"), true, mob:getZoneID(), target, mob)
+            mob:timer(3000, function(mob, target)
+                spawnClones(mob, target)
+                zone:setLocalVar("CloneMove", math.random(1131,1135))
+                mob:setLocalVar("ws", 1)
+                zone:setLocalVar("teraTime", os.time() + math.random(90,120))
                 mob:entityAnimationPacket("shsm")
-                mob:SetAutoAttackEnabled(true)
-                mob:SetMagicCastingEnabled(true)
                 mob:SetMobAbilityEnabled(true)
-                if mob:getLocalVar("initialSpawnDialog") ~= 1 and mob:getID() == mainLord then
-                    mob:showText(mob, dialogDL + 7)
-                    mob:setLocalVar("initialSpawnDialog", 1)
-                end
             end)
         end
-    end
 
-    -- Dynamis Lord spawns clones of himself 1 1/2 - 2min after pull that use a TP move in unison and despawn after
-    local teraTime = mob:getLocalVar("teraTime")
-    if os.time() > teraTime and mob:getID() == mainLord then
-        mob:setLocalVar("terraTime", os.time() + 5)
-        local targetList = mob:getEnmityList()
-        local i = 1
-        local spawned = 0
-        mob:entityAnimationPacket("casm")
-        mob:SetAutoAttackEnabled(false)
-        mob:SetMagicCastingEnabled(false)
-        mob:SetMobAbilityEnabled(false)
-        mob:timer(3000, function(mob) 
-            while i <= 5 do
-                local victim = math.random(#targetList)
-                local victimPos = targetList[victim].entity:getPos()
-                local clone = zone:insertDynamicEntity({
-                objtype = xi.objType.MOB,
-                name = xi.dynamis.nmInfoLookup["Dynamis Lord"][1],
-                x = victimPos.x,
-                y = victimPos.y,
-                z = victimPos.z,
-                rotation = mob:getRotPos(),
-                groupId = xi.dynamis.nmInfoLookup["Dynamis Lord"][2],
-                groupZoneId = xi.dynamis.nmInfoLookup["Dynamis Lord"][3],
-                onMobSpawn = function(mob) xi.dynamis.onSpawnDynaLord(mob) end,
-                onMobEngaged = function (mob, target) xi.dynamis.onEngagedDynaLord(mob, target) end,
-                onMobRoam = function(mob) xi.dynamis.onMobRoamXarc(mob) end,
-                onMobFight = function(mob, target) xi.dynamis.onFightDynaLord(mob, target) end,
-                onMobDeath = function(mob, player, isKiller) xi.dynamis.onDeathDynaLord(mob, player, isKiller) end,
-                })
-                clone:setSpawn(victimPos.x, victimPos.y, victimPos.z, mob:getRotPos())
-                mob:setDropID(xi.dynamis.nmInfoLookup["Dynamis Lord"][4])
-                if xi.dynamis.nmInfoLookup["Dynamis Lord"][5] ~= nil then -- If SpellList ~= nil set SpellList
-                    clone:setSpellList(xi.dynamis.nmInfoLookup["Dynamis Lord"][5])
-                end
-                if xi.dynamis.nmInfoLookup["Dynamis Lord"][6] ~= nil then -- If SkillList ~= nil set SkillList
-                    clone:setMobMod(xi.mobMod.SKILL_LIST, xi.dynamis.nmInfoLookup["Dynamis Lord"][6])
-                end
-                clone:setMobMod(xi.mobMod.SUPERLINK, 1)
-                zone:setLocalVar(string.format("Dynamis_Lord_%i", i), clone:getID())
-                clone:spawn()
-                clone:setHP(mob:getHP())
-                clone:updateEnmity(targetList[victim].entity)
-                clone:setLocalVar("tpTime", os.time() + 2)
+        if zone:getLocalVar("ying_killed") == 1 and zone:getLocalVar("yang_killed") == 1 and zone:getLocalVar("dwagonSpawn") <= os.time() then
+            zone:setLocalVar("dwagonSpawn", os.time() + 5)
+            if zone:getLocalVar("dwagonLastPop") <= os.time() then -- Spawn Ying and Yang
+                mob:SetAutoAttackEnabled(false)
+                mob:SetMagicCastingEnabled(false)
+                mob:SetMobAbilityEnabled(false)
+                mob:entityAnimationPacket("casm")
+                mob:timer(3000, function (mob, target)
+                    spawnDwagons(mob, target)
+                    mob:entityAnimationPacket("shsm")
+                    mob:SetAutoAttackEnabled(true)
+                    mob:SetMagicCastingEnabled(true)
+                    mob:SetMobAbilityEnabled(true)
+                    if mob:getLocalVar("initialSpawnDialog") ~= 1 and mob:getID() == mainLord then
+                        mob:showText(mob, lordText + 7)
+                        mob:setLocalVar("initialSpawnDialog", 1)
+                    end
+                    zone:setLocalVar("dwagonLastPop", os.time() + 30)
+                end)
             end
-            i = i + 1
-            spawned = spawned + 1
-        end)
-        if spawned ~= 0 then
-            mob:entityAnimationPacket("shsm")
-            mob:SetAutoAttackEnabled(true)
-            mob:SetMagicCastingEnabled(true)
-            mob:SetMobAbilityEnabled(true)
-            local newDynaLord = zone:getLocalVar(string.format("Dynamis_Lord_%i", math.random(1, 5)))
-            zone:setLocalVar("MainDynaLord", newDynaLord)
         end
     end
 end
 
 xi.dynamis.onFightYing = function(mob, target)
     local zone = mob:getZone()
-    local yangToD = mob:getLocalVar("yangToD")
+    local dwagonVars = {zone:getLocalVar("ying_killed"), zone:getLocalVar("yang_killed"), zone:getLocalVar("178"), zone:getLocalVar("177"), 178, 177, 179, "Ying", "Yang"}
+    local yangToD = zone:getLocalVar("yangToD")
     -- Repop Yang every 30 seconds if Ying is up and Yang is not.
     if mob:getLocalVar("Spawning") <= os.time() then
         mob:setLocalVar("Spawning", os.time() + 5)
-        if zone:getLocalVar("yang_killed") == 1 and os.time() > yangToD + 30 then
-            xi.dynamis.nmDynamicSpawn( 177, mob:getLocalVar("MobIndex"), true, mob:getZoneID(), target, mob)
+        if dwagonVars[2] == 1 and os.time() > yangToD + 30 then
+            spawnDwagons(mob, target)
         end
     end
 end
 
 xi.dynamis.onFightYang = function(mob, target)
     local zone = mob:getZone()
-    local yingToD = mob:getLocalVar("YangToD")
+    local dwagonVars = {zone:getLocalVar("ying_killed"), zone:getLocalVar("yang_killed"), zone:getLocalVar("178"), zone:getLocalVar("177"), 178, 177, 179, "Ying", "Yang"}
+    local yingToD = zone:getLocalVar("YangToD")
     -- Repop Yang every 30 seconds if Yang is up and Yang is not.
     if mob:getLocalVar("Spawning") <= os.time() then
         mob:setLocalVar("Spawning", os.time() + 5)
-        if zone:getLocalVar("ying_killed") == 1 and os.time() > yingToD + 30 then
-            xi.dynamis.nmDynamicSpawn( 178, mob:getLocalVar("MobIndex"), true, mob:getZoneID(), target, mob)
+        if dwagonVars[2] == 1 and os.time() > yingToD + 30 then
+            spawnDwagons(mob, target)
         end
     end
 end
@@ -248,7 +246,7 @@ end
 xi.dynamis.onMagicPrepDynaLord = function(mob, target)
     local rnd = math.random(1, 100)
     -- Dynamis Lord has a small chance to choose death
-    if rnd <= 5 then
+    if rnd <= 3 then
         return 367 -- Death
     end
 end
@@ -256,16 +254,15 @@ end
 xi.dynamis.onWeaponskillPrepDynaLord = function(mob, target)
     -- at or below 25% hp, tera slash & oblivion smash have a chance to insta death on hit.
     -- each has two animations per skill, one jumping (insta death) the other standing on the ground.
-    local weaponSkills = 
-    {
-        [1135] = {25},
-        [1133] = {50},
-        [1134] = {75},
-        [1132] = {100},
-    }
-    local randomchance = math.random(1, 100)
-
     if mob:getHPP() <= 25 then
+        local weaponSkills =
+        {
+            [1135] = {25},
+            [1133] = {50},
+            [1134] = {75},
+            [1132] = {100},
+        }
+        local randomchance = math.random(1, 100)
         for skill, chance in pairs(weaponSkills) do -- Checks all skills and their chances.
             if chance[1] >= randomchance then -- If chance is less than or equal to skill, use it.
                 return skill -- Execute Skill
@@ -275,50 +272,42 @@ xi.dynamis.onWeaponskillPrepDynaLord = function(mob, target)
 end
 
 xi.dynamis.onWeaponskillDynaLord = function(mob, skill)
+    local zone = mob:getZone()
+    local mainLord = zone:getLocalVar("179")
     -- at or below 25% hp, tera slash & oblivion smash have a chance to insta death on hit.
     -- each has two animations per skill, one jumping (insta death) the other standing on the ground.
-    local dialogDL = 7272
-    local zone = mob:getZone()
-    local mainLord = zone:getLocalVar("MainDynaLord")
     if skill:getID() == 1135 and mob:getID() == mainLord then
-        mob:showText(mob, dialogDL + 1)
+        mob:showText(mob, lordText + 1)
     end
-    mob:setLocalVar("WeaponskillPerformed", 1)
 end
 
 xi.dynamis.onDeathDynaLord = function(mob, player, isKiller)
     local zone = mob:getZone()
-    local dialogDL = 7272
-    xi.dynamis.megaBossOnDeath(mob, player, mobVar)
+    xi.dynamis.megaBossOnDeath(mob, player, isKiller)
     if isKiller then
-        mob:showText(mob, dialogDL + 2)
-        local dwagons = {{zone:getLocalVar("Ying"), zone:getLocalVar("ying_killed")}, {zone:getLocalVar("Yang"), zone:getLocalVar("yang_killed")}}
+        mob:showText(mob, lordText + 2)
+        local dwagons = {zone:getLocalVar("177"), zone:getLocalVar("178")}
         for _, dwagon in pairs(dwagons) do
-            if dwagon[2] == 0 then
-                DespawnMob(dwagon[1])
-            end
+            DespawnMob(dwagon)
         end
     end
-    zone:setLocalVar("MainDynaLord", mob:getID())
 end
 
 xi.dynamis.onDeathYing = function(mob, player, isKiller)
     local zone = mob:getZone()
-    local dynaLord = 0
-    if zone:getLocalVar("MainDynaLord") ~= 0 then
-        dynaLord = GetMobByID(zone:getLocalVar("MainDynaLord"))
-    end
-    local dialogYing = 7289
+    local mainLord = zone:getLocalVar("179")
+    xi.dynamis.mobOnDeath(mob, player, isKiller)
     if isKiller then
         if zone:getLocalVar("yang_killed") == 0 then
-            mob:showText(mob, dialogYing + 2)
+            mob:showText(mob, yingText + 2)
         else
-            mob:showText(mob, dialogYing)
+            mob:showText(mob, yingText)
         end
     end
 
-    mob:setLocalVar("yingToD", os.time())
-    if dynaLord ~= 0 then
+    zone:setLocalVar("yingToD", os.time())
+    if mainLord ~= 0 then
+        local dynaLord = GetMobByID(mainLord)
         if dynaLord:getLocalVar("magImmune") == 0 then
             dynaLord:setMod(xi.mod.UDMGMAGIC, 0)
             dynaLord:setMod(xi.mod.UDMGBREATH, 0)
@@ -330,27 +319,23 @@ xi.dynamis.onDeathYing = function(mob, player, isKiller)
             end
         end
     end
-
-    xi.dynamis.mobOnDeath(mob)
 end
 
 xi.dynamis.onDeathYang = function(mob, player, isKiller)
     local zone = mob:getZone()
-    local dynaLord = 0
-    if zone:getLocalVar("MainDynaLord") ~= 0 then
-        dynaLord = GetMobByID(zone:getLocalVar("MainDynaLord"))
-    end
-    local dialogYang = 7290
+    local mainLord = zone:getLocalVar("179")
+    xi.dynamis.mobOnDeath(mob, player, isKiller)
     if isKiller then
         if zone:getLocalVar("ying_killed") == 0 then
-            mob:showText(mob, dialogYang + 2)
+            mob:showText(mob, yangText + 2)
         else
-            mob:showText(mob, dialogYang)
+            mob:showText(mob, yangText)
         end
     end
 
-    mob:setLocalVar("yangToD", os.time())
-    if dynaLord ~= 0 then
+    zone:setLocalVar("yangToD", os.time())
+    if mainLord ~= 0 then
+        local dynaLord = GetMobByID(mainLord)
         if dynaLord:getLocalVar("physImmune") == 0 then
             dynaLord:setMod(xi.mod.UDMGMAGIC, 0)
             dynaLord:setMod(xi.mod.UDMGBREATH, 0)
@@ -362,8 +347,6 @@ xi.dynamis.onDeathYang = function(mob, player, isKiller)
             end
         end
     end
-
-    xi.dynamis.mobOnDeath(mob)
 end
 
 xi.dynamis.onMobRoamXarc = function(mob)
@@ -378,9 +361,9 @@ end
 --        Animated Weapons       --
 -----------------------------------
 
-xi.dynamis.animatedInfo = 
+xi.dynamis.animatedInfo =
 {
-    -- [mobName] = 
+    -- [mobName] =
     -- {
     --     ["Children"] = {},
     --     ["Spells"] =
@@ -613,9 +596,7 @@ xi.dynamis.onSpawnSatellite = function(mob)
 end
 
 xi.dynamis.onFightSatellite = function(mob, target)
-    print(xi.dynamis.satelliteInfo[mob:getName()][1])
-    print(mob:getZone():getLocalVar(string.format("%s", xi.dynamis.satelliteInfo[mob:getName()][1])))
-    if mob:getZone():getLocalVar(string.format("%s", xi.dynamis.satelliteInfo[mob:getName()][1])) == 1 then -- Despawn if Animated Parent Dies
-        mob:setHP(0)
+    if not GetMobByID(mob:getLocalVar("ParentID")) then -- Despawn if Animated Parent Dies
+        DespawnMob(mob:getID())
     end
 end

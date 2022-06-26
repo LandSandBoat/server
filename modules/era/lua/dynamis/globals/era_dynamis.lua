@@ -889,7 +889,7 @@ xi.dynamis.cleanupDynamis = function(zone)
     for _, mobEntity in pairs(mobsInZone) do
         DisallowRespawn(mobEntity:getID(), true) -- Stop respawns, used since we are not editing DB.
         mobEntity:setUnkillable(false)
-        mobEntity:setHP(0) -- Force Kill to Release ID
+        DespawnMob(mobEntity:getID()) -- Despawn
     end
     for _, npcEntity in pairs(npcsInZone) do
         npcEntity:setStatus(xi.status.DISAPPEAR)
@@ -961,7 +961,7 @@ xi.dynamis.ejectPlayer = function(player)
     if player:getCurrentRegion() == xi.region.DYNAMIS then
         if player:getLocalVar("Received_Eject_Warning") ~= 1 then
             player:delStatusEffectSilent(xi.effect.BATTLEFIELD)
-            player:timer(1000, function(player) player:messageSpecial(xi.dynamis.dynaIDLookup[zoneID].text.NO_LONGER_HAVE_CLEARANCE, 0, 30) end) -- Wait 1 second, send no clearance message.
+            player:timer(1000, function(player) player:messageSpecial(xi.dynamis.dynaIDLookup[zoneID].text.NO_LONGER_HAVE_CLEARANCE, os.time(), 30) end) -- Wait 1 second, send no clearance message.
             player:setLocalVar("Received_Eject_Warning", 1)
             player:setCharVar(string.format("[DYNA]EjectPlayer_%s", xi.dynamis.dynaInfoEra[zoneID].dynaZone), -1) -- Reset player's eject timer.
             player:disengage() -- Force disengage.

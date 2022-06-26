@@ -38,7 +38,6 @@ g_mixins.families.animated_weapons = function(animatedMob)
         mob:setLocalVar("Text", dialogChoice[mob:getName()])
         mob:setLocalVar("Text_Index_1", 4)
         mob:setLocalVar("Text_Index_2", 3)
-        mob:setAnimationSub(1)
     end)
 
     animatedMob:addListener("ENGAGE", "AWEAPON_ENGAGE", function(mob, target)
@@ -82,7 +81,7 @@ g_mixins.families.animated_weapons = function(animatedMob)
                 mob:setMobMod(xi.mobMod.NO_MOVE, 1)
                 mob:setMobMod(xi.mobMod.NO_DROPS, 1)
                 mob:setLocalVar("warpDeath", 1)
-                mob:setHP(0)
+                DespawnMob(mob:getID())
             end
         end
     end)
