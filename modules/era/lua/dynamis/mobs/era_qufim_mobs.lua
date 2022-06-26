@@ -12,23 +12,32 @@ xi.dynamis.onSpawnAntaeus = function(mob)
     mob:setRoamFlags(xi.roamFlag.EVENT)
     xi.dynamis.setMegaBossStats(mob)
     -- Set Removable Mods
-    xi.dynamis.buffsAntaeus = 
+    xi.dynamis.buffsAntaeus =
     {
-        ["Scolopendra"] = {{xi.mod.REGEN}, 1000, 0},
-        ["Stringes"] = {{xi.mod.CRITHITRATE}, 100, 10},
-        ["Suttung"] = {{xi.mod.UDMGPHYS, xi.mod.UDMGRANGE, xi.mod.UDMGMAGIC, xi.mod.UDMGBREATH}, -99, 0},
-        ["Fire_Elemental"] = {{xi.mod.FIRERES}, 1000, 0},
-        ["Ice_Elemental"] = {{xi.mod.ICERES}, 1000, 0},
-        ["Air_Elemental"] = {{xi.mod.WINDRES}, 1000, 0},
-        ["Earth_Elemental"] = {{xi.mod.EARTHRES}, 1000, 0},
-        ["Thunder_Elemental"] = {{xi.mod.THUNDERRES}, 1000, 0},
-        ["Water_Elemental"] = {{xi.mod.WATERRES}, 1000, 0},
-        ["Light_Elemental"] = {{xi.mod.LIGHTRES}, 1000, 0},
-        ["Dark_Elemental"] = {{xi.mod.DARKRES}, 1000, 0},
+        {{xi.mod.REGEN}, 1000, 0, "scolopendra_killed"},
+        {{xi.mod.CRITHITRATE}, 100, 10, "stringes_killed"},
+        {{xi.mod.UDMGPHYS, xi.mod.UDMGRANGE, xi.mod.UDMGMAGIC, xi.mod.UDMGBREATH}, -99, 0, "stringes_killed"},
+        {{xi.mod.FIRERES}, 1000, 0, "fire_killed"},
+        {{xi.mod.ICERES}, 1000, 0, "ice_killed"},
+        {{xi.mod.WINDRES}, 1000, 0, "air_killed"},
+        {{xi.mod.EARTHRES}, 1000, 0, "earth_killed"},
+        {{xi.mod.THUNDERRES}, 1000, 0, "thunder_killed"},
+        {{xi.mod.WATERRES}, 1000, 0, "water_killed"},
+        {{xi.mod.LIGHTRES}, 1000, 0, "light_killed"},
+        {{xi.mod.DARKRES}, 1000, 0, "dark_killed"},
     }
-    for var, buffTable in pairs(xi.dynamis.buffsAntaeus) do
-        for _, buff in pairs(buffTable[1]) do
-            mob:setMod(buff, buffTable[2])
+    for _, buffTable in pairs(xi.dynamis.buffsAntaeus) do
+        if buffTable[1][1] ~= nil then
+            mob:setMod(buffTable[1][1], buffTable[2])
+        end
+        if buffTable[1][2] ~= nil then
+            mob:setMod(buffTable[1][2], buffTable[2])
+        end
+        if buffTable[1][3] ~= nil then
+            mob:setMod(buffTable[1][3], buffTable[2])
+        end
+        if buffTable[1][4] ~= nil then
+            mob:setMod(buffTable[1][4], buffTable[2])
         end
     end
     -- Set Non-Removable Mods
@@ -49,11 +58,19 @@ end
 
 xi.dynamis.onFightAntaeus = function(mob, target)
     local zone = mob:getZone()
-
-    for var, buffTable in pairs(xi.dynamis.buffsAntaeus) do
-        if not GetMobByID(zone:getLocalVar(var)):isAlive() then
-            for _, buff in pairs(buffTable[1]) do
-                mob:setMod(buff, buffTable[3])
+    for _, buffTable in pairs(xi.dynamis.buffsAntaeus) do
+        if zone:getLocalVar(buffTable[4]) == 1 then
+            if buffTable[1][1] ~= nil then
+                mob:setMod(buffTable[1][1], buffTable[3])
+            end
+            if buffTable[1][2] ~= nil then
+                mob:setMod(buffTable[1][2], buffTable[3])
+            end
+            if buffTable[1][3] ~= nil then
+                mob:setMod(buffTable[1][3], buffTable[3])
+            end
+            if buffTable[1][4] ~= nil then
+                mob:setMod(buffTable[1][4], buffTable[3])
             end
             table.remove(xi.dynamis.buffsAntaeus, var)
         end

@@ -518,6 +518,14 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
             ["onMobRoam"] = {function(mob) end},
             ["mixins"] = { require("scripts/mixins/job_special"), }
         },
+        ["Elemental"] =
+        {
+            ["onMobSpawn"] = {function(mob) xi.dynamis.setMobStats(mob) end},
+            ["onMobEngaged"] = {function(mob, target) xi.dynamis.mobOnEngaged(mob, target) end},
+            ["onMobFight"] = {function(mob) end},
+            ["onMobRoam"] = {function(mob) end},
+            ["mixins"] = { }
+        },
         ["Other"] =
         {
             ["onMobSpawn"] = {function(mob) xi.dynamis.setMobStats(mob) end},
@@ -1760,30 +1768,31 @@ end)
 
 xi.dynamis.statueOnFight = function(mob, target)
     if mob:getHP() == 1 then -- If my HP = 1
-        if mob:getAnimationSub() == 2 then -- I am an HP statue
+        if mob:getAnimationSub() > 1 then -- I am an HP statue
             if mob:hasStatusEffect(xi.effect.REGEN) then
                 mob:delStatusEffect(xi.effect.REGEN)
                 mob:setHP(1)
             end
-            mob:addStatusEffect(xi.effect.STUN, 1, 0, 5)
             mob:setUntargetable(true)
+            mob:SetMagicCastingEnabled(false)
             mob:SetAutoAttackEnabled(false)
+            mob:SetMobAbilityEnabled(false)
+            if mob:getCurrentAction() == xi.action.MAGIC_CASTING then
+                target:tryInterruptSpell(mob, 1000)
+            end
+            mob:addStatusEffect(xi.effect.STUN, 1, 0, 5)
             if mob:hasStatusEffect(xi.effect.STUN) then
                 mob:delStatusEffectSilent(xi.effect.STUN)
             end
-            mob:useMobAbility(1124) -- Use Recover HP
-        elseif mob:getAnimationSub() == 3 then -- I am an MP statue
-            if mob:hasStatusEffect(xi.effect.REGEN) then
-                mob:delStatusEffect(xi.effect.REGEN)
-                mob:setHP(1)
+            if mob:getAnimationSub() == 2 then
+                mob:setTP(0)
+                mob:SetMobAbilityEnabled(true)
+                mob:useMobAbility(1124) -- Use Recover HP
+            elseif mob:getAnimationSub() == 3 then
+                mob:setTP(0)
+                mob:SetMobAbilityEnabled(true)
+                mob:useMobAbility(1125) -- Use Recover MP
             end
-            mob:addStatusEffect(xi.effect.STUN, 1, 0, 5)
-            mob:setUntargetable(true)
-            mob:SetAutoAttackEnabled(false)
-            if mob:hasStatusEffect(xi.effect.STUN) then
-                mob:delStatusEffectSilent(xi.effect.STUN)
-            end
-            mob:useMobAbility(1125) -- Use Recover MP
         end
     end
 end

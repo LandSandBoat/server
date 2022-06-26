@@ -139,23 +139,23 @@ xi.dynamis.mobList[zoneID][37 ].info = {"Statue", "Goblin Replica", "Goblin", ni
 xi.dynamis.mobList[zoneID][38 ].info = {"Statue", "Goblin Replica", "Goblin", nil, nil}         -- (038-G)
 xi.dynamis.mobList[zoneID][39 ].info = {"Statue", "Goblin Replica", "Goblin", nil, nil}         -- (039-G)
 -- Sea Monk NM Area
-xi.dynamis.mobList[zoneID][43 ].info = {"Elemental", "Water Elemental", nil, nil, nil}          -- (043) (Reduces Antaeus' resistance to water)
-xi.dynamis.mobList[zoneID][40 ].info = {"NM", "Scolopendra", nil, nil, nil}                     -- (040) (Reduces Antaeus' HP regeneration rate)
+xi.dynamis.mobList[zoneID][43 ].info = {"Elemental", "Water Elemental", nil, nil, "water_killed"}          -- (043) (Reduces Antaeus' resistance to water)
+xi.dynamis.mobList[zoneID][40 ].info = {"NM", "Scolopendra", nil, nil, "scolopendra_killed"}                     -- (040) (Reduces Antaeus' HP regeneration rate)
 -- Southwest Area
-xi.dynamis.mobList[zoneID][44 ].info = {"Elemental", "Fire Elemental", nil, nil, nil}           -- (044) (Reduces Antaeus' resistance to fire)
+xi.dynamis.mobList[zoneID][44 ].info = {"Elemental", "Fire Elemental", nil, nil, "fire_killed"}           -- (044) (Reduces Antaeus' resistance to fire)
 -- Giant Bat Area
-xi.dynamis.mobList[zoneID][45 ].info = {"Elemental", "Thunder Elemental", nil, nil, nil}        -- (045) (Reduces Antaeus' resistance to thunder)
-xi.dynamis.mobList[zoneID][41 ].info = {"NM", "Stringes", nil, nil, nil}                        -- (041) (Reduces Antaeus' physical attack damage)
+xi.dynamis.mobList[zoneID][45 ].info = {"Elemental", "Thunder Elemental", nil, nil, "thunder_killed"}        -- (045) (Reduces Antaeus' resistance to thunder)
+xi.dynamis.mobList[zoneID][41 ].info = {"NM", "Stringes", nil, nil, "stringes_killed"}                        -- (041) (Reduces Antaeus' physical attack damage)
 -- Northeast Area
-xi.dynamis.mobList[zoneID][46 ].info = {"Elemental", "Air Elemental", nil, nil, nil}            -- (046) (Reduces Antaeus' resistance to wind)
-xi.dynamis.mobList[zoneID][47 ].info = {"Elemental", "Light Elemental", nil, nil, nil}          -- (047) (Reduces Antaeus' resistance to light)
+xi.dynamis.mobList[zoneID][46 ].info = {"Elemental", "Air Elemental", nil, nil, "air_killed"}            -- (046) (Reduces Antaeus' resistance to wind)
+xi.dynamis.mobList[zoneID][47 ].info = {"Elemental", "Light Elemental", nil, nil, "light_killed"}          -- (047) (Reduces Antaeus' resistance to light)
 -- Boss Area
-xi.dynamis.mobList[zoneID][48 ].info = {"Elemental", "Ice Elemental", nil, nil, nil}            -- (048) (Reduces Antaeus' resistance to ice)
+xi.dynamis.mobList[zoneID][48 ].info = {"Elemental", "Ice Elemental", nil, nil, "ice_killed"}            -- (048) (Reduces Antaeus' resistance to ice)
 xi.dynamis.mobList[zoneID][64 ].info = {"NM", "Antaeus", nil, nil, "MegaBoss_Killed"}           -- (064) (Spawns 065-138)
 -- Golem NM Area
-xi.dynamis.mobList[zoneID][49 ].info = {"Elemental", "Earth Elemental", nil, nil, nil}          -- (049) (Reduces Antaeus' resistance to earth)
-xi.dynamis.mobList[zoneID][50 ].info = {"Elemental", "Dark Elemental", nil, nil, nil}           -- (050) (Reduces Antaeus' resistance to dark)
-xi.dynamis.mobList[zoneID][42 ].info = {"NM", "Suttung", nil, nil, nil}                         -- (042) (Reduces Antaeus' magic damage resistance)
+xi.dynamis.mobList[zoneID][49 ].info = {"Elemental", "Earth Elemental", nil, nil, "earth_killed"}          -- (049) (Reduces Antaeus' resistance to earth)
+xi.dynamis.mobList[zoneID][50 ].info = {"Elemental", "Dark Elemental", nil, nil, "dark_killed"}           -- (050) (Reduces Antaeus' resistance to dark)
+xi.dynamis.mobList[zoneID][42 ].info = {"NM", "Suttung", nil, nil, "suttung_killed"}                         -- (042) (Reduces Antaeus' magic damage resistance)
 -- Nightmare Stirge
 xi.dynamis.mobList[zoneID][51 ].info = {"Nightmare", "Nightmare Stirge", nil, nil, nil}  -- 051-Nightmare Stirge (×4)
 xi.dynamis.mobList[zoneID][244].info = {"Nightmare", "Nightmare Stirge", nil, nil, nil}  --
