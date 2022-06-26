@@ -242,6 +242,7 @@ local lookupTable =
     -- Lower Jeuno
     {"tenshodo", "Lower_Jeuno", "Amalasanda", xi.customShop.Amalasanda, xi.quest.fame_area.NORG, "AMALASANDA_SHOP_DIALOG"},
     {"standard", "Lower_Jeuno", "Creepstix", xi.customShop.Creepstix, xi.quest.fame_area.JEUNO, "JUNK_SHOP_DIALOG"},
+    {"standard", "Lower_Jeuno", "Hasim", xi.customShop.Hasim, xi.quest.fame_area.JEUNO, "WAAG_DEEG_SHOP_DIALOG"},
     {"standard", "Lower_Jeuno", "Stinknix", xi.customShop.Stinknix, xi.quest.fame_area.JEUNO, "JUNK_SHOP_DIALOG"},
     {"standard", "Lower_Jeuno", "Taza", xi.customShop.Taza, xi.quest.fame_area.JEUNO, "WAAG_DEEG_SHOP_DIALOG"},
     -- Mhaura
