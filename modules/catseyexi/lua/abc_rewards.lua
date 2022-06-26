@@ -56,11 +56,11 @@ m:addOverride("xi.zones.Port_Jeuno.npcs.Cumetouflaix.onTrade", function(player, 
 	 elseif (hasCompletedZM and hasCompletedTOAU and npcUtil.tradeHasExactly(trade, {{ancientBeastcoin, 108}})) then
 	    player:tradeComplete()
 		player:addItem(15807) -- Balrahn's Ring 
-		player:PrintToPlayer("Cumetouflaix: Great work adventurer, I reward thee with \"Balrahn's Ring \"!", 0xD)
+		player:PrintToPlayer("Cumetouflaix: Great work adventurer, I reward thee with \"Balrahn's Ring\"!", 0xD)
 	 elseif (hasCompletedZM and hasCompletedTOAU and npcUtil.tradeHasExactly(trade, {{ancientBeastcoin, 109}})) then
 	    player:tradeComplete()
 		player:addItem(15809) -- Jalzahn's Ring  
-		player:PrintToPlayer("Cumetouflaix: Great work adventurer, I reward thee with \"Jalzahn's Ring  \"!", 0xD)
+		player:PrintToPlayer("Cumetouflaix: Great work adventurer, I reward thee with \"Jalzahn's Ring\"!", 0xD)
 		
     -- Add Trust: Ark EV as reward
 	elseif (hasCompletedZM and hasCompletedCoP and hasCompletedTOAU and npcUtil.tradeHasExactly(trade, {{ancientBeastcoin, 200}})) then
