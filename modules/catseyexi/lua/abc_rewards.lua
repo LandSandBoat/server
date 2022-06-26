@@ -20,7 +20,7 @@ m:addOverride("xi.zones.Port_Jeuno.npcs.Cumetouflaix.onTrade", function(player, 
         player:addItem(2127) -- Metal Chip
 		player:PrintToPlayer("Cumetouflaix: Great work adventurer, I reward thee with \"Metal Chip\"!", 0xD)
 
-    -- Start tier 1 rewards 100 - 106 coins --	
+    -- Start tier 1 rewards 100 - 109 coins --	
     elseif (hasCompletedCoP and npcUtil.tradeHasExactly(trade, {{ancientBeastcoin, 100}})) then
         player:tradeComplete()
         player:addItem(15545) -- Tamas Ring
@@ -49,7 +49,19 @@ m:addOverride("xi.zones.Port_Jeuno.npcs.Cumetouflaix.onTrade", function(player, 
 	    player:tradeComplete()
 		player:addItem(15965) -- Ethereal Earring
 		player:PrintToPlayer("Cumetouflaix: Great work adventurer, I reward thee with \"Ethereal Earring\"!", 0xD)
-
+    elseif (hasCompletedZM and hasCompletedTOAU and npcUtil.tradeHasExactly(trade, {{ancientBeastcoin, 107}})) then
+	    player:tradeComplete()
+		player:addItem(15808) -- Ulthalam's Ring
+		player:PrintToPlayer("Cumetouflaix: Great work adventurer, I reward thee with \"Ulthalam's Ring\"!", 0xD)
+	 elseif (hasCompletedZM and hasCompletedTOAU and npcUtil.tradeHasExactly(trade, {{ancientBeastcoin, 108}})) then
+	    player:tradeComplete()
+		player:addItem(15807) -- Balrahn's Ring 
+		player:PrintToPlayer("Cumetouflaix: Great work adventurer, I reward thee with \"Balrahn's Ring \"!", 0xD)
+	 elseif (hasCompletedZM and hasCompletedTOAU and npcUtil.tradeHasExactly(trade, {{ancientBeastcoin, 109}})) then
+	    player:tradeComplete()
+		player:addItem(15809) -- Jalzahn's Ring  
+		player:PrintToPlayer("Cumetouflaix: Great work adventurer, I reward thee with \"Jalzahn's Ring  \"!", 0xD)
+		
     -- Add Trust: Ark EV as reward
 	elseif (hasCompletedZM and hasCompletedCoP and hasCompletedTOAU and npcUtil.tradeHasExactly(trade, {{ancientBeastcoin, 200}})) then
 	    player:tradeComplete()
