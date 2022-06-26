@@ -1,10 +1,17 @@
 -----------------------------------
--- Conquest: Regional npcs always up, regardless of conquest results
+-- Conquest: OP warps and CP items
 -----------------------------------
 require("modules/module_utils")
 require("scripts/globals/conquest")
+require("scripts/globals/teleports")
+require("scripts/globals/keyitems")
+require("scripts/globals/missions")
+require("scripts/globals/npc_util")
+require("scripts/settings/main")
+require("scripts/globals/status")
+require("scripts/globals/zone")
 -----------------------------------
-local m = Module:new("conquest_regional_npcs_always_up")
+local m = Module:new("Custom_Conquest")
 
 
 -----------------------------------
@@ -1089,8 +1096,8 @@ m:addOverride("xi.conquest.overseerOnEventFinish", function(player, csid, option
         player:setCharVar("supplyQuest_region", 0)
         player:setCharVar("supplyQuest_fresh", 0)
 
-        if not player:hasTeleport(guardNation, sRegion + 5) then
-            player:addTeleport(guardNation, sRegion + 5)
+        if not player:hasTeleport(pNation, sRegion + 5) then
+            player:addTeleport(pNation, sRegion + 5)
         end
 
     -- SET HOMEPOINT
