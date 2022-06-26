@@ -7,6 +7,7 @@
 -- Soul Plate          : !additem 2477
 -- Sanraku & Ryo       : !pos -127.0 0.9 22.6 50
 -----------------------------------
+local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 require("scripts/globals/items")
 require("scripts/globals/keyitems")
 require("scripts/globals/settings")
@@ -21,6 +22,73 @@ require("scripts/globals/znm_data")
 
 xi = xi or {}
 xi.znm = xi.znm or {}
+
+--------------------------------------------------
+-- Sanraku's Interest and Recommended Fauna
+-- Applies bonuses to soul plate zeni-value
+--------------------------------------------------
+-- Called during JstMidnight tick
+xi.znm.UpdateSanrakusMobs = function()
+    SetServerVariable('[ZNM][Sanraku]Interest', math.random(61))
+    SetServerVariable('[ZNM][Sanraku]Fauna', math.random(54))
+end
+
+-- Get Sanraku's "Subject of Interest"
+xi.znm.getSanrakusInterest = function()
+    local interest = GetServerVariable('[ZNM][Sanraku]Interest')
+
+    -- Initialize the server var if it hasn't been already
+    if interest == nil or interest == 0 then
+        interest = math.random(61)
+        SetServerVariable('[ZNM][Sanraku]Interest', interest)
+    end
+    return interest
+end
+
+-- Get Sanraku's "Recommended Fauna"
+xi.znm.getSanrakusFauna = function()
+    local fauna = GetServerVariable('[ZNM][Sanraku]Fauna')
+
+    -- Initialize the server var if it hasn't been already
+    if fauna == nil or fauna == 0 then
+        fauna = math.random(54)
+        SetServerVariable('[ZNM][Sanraku]Fauna', fauna)
+    end
+    return fauna
+end
+
+--- Does this mob fall under Sanraku's current "Subject of Interest"?
+-- Some families had multiple famIDs (see Sea Monks), and some superfamIDs were too general (see elementals)
+-- In order to only need to use/store a single ID per mob, a bool was added to check what type of ID is stored
+xi.znm.isCurrentInterest = function(superfamID, famID)
+    local family_row = xi.znm.SANRAKUS_INTEREST[xi.znm.getSanrakusInterest()]
+
+    -- Is the ID stored a family ID or a superfamily ID?
+    if family_row.isSuperFamID == 0 then  -- Check mob's family
+        return family_row.familyID == famID
+    else                                 -- Check mob's superfamily
+        return family_row.familyID == superfamID
+    end
+end
+
+--- Is this mob Sanraku's current "Recommended Fauna"?
+xi.znm.isCurrentFauna = function(mobName, zoneID)
+    local fauna_row = xi.znm.SANRAKUS_FAUNA[xi.znm.getSanrakusFauna()]
+    if fauna_row.zone ~= zoneID then
+        return false
+    else
+        if type(fauna_row.name) == "table" then
+            for iter = 1, #fauna_row.name do
+                if fauna_row.name[iter] == mobName then
+                    return true
+                end
+            end
+        else
+            return fauna_row.name == mobName
+        end
+    end
+    return false
+end
 
 -----------------------------------
 -- Soultrapper
@@ -37,7 +105,7 @@ xi.znm.soultrapper.onItemCheck = function(target, user)
         id ~= xi.items.BLANK_SOUL_PLATE and
         id ~= xi.items.BLANK_HIGH_SPEED_SOUL_PLATE
     then
-        return xi.msg.basic.ITEM_UNABLE_TO_USE
+        return xi.msg.basic.ITEM_NO_ITEMS_EQUIPPED
     end
 
     if user:getFreeSlotsCount() == 0 then
@@ -57,23 +125,10 @@ xi.znm.soultrapper.getZeniValue = function(target, user, item)
     local zeni = 5
 
     -- HP% Component
-    zeni = zeni * xi.znm.SOULPLATE_HPP_MULT * math.exp(1-hpp)
-
-    -- Check for Sanraku's "Subject of Interest"
-    if xi.znm.isCurrentInterest(target:getSuperFamily(), target:getFamily()) then
-        zeni = zeni * xi.znm.INTEREST_MULT
-    end
-
-    -- Check for Sanraku's "Recommended Fauna"
-    if xi.znm.isCurrentFauna(target:getName(), user:getZoneID()) then
-        zeni = zeni * xi.znm.FAUNA_MULT
-    -- Generic NM/Rarity Component
-    elseif isNM then
-        zeni = zeni * xi.znm.SOULPLATE_NM_MULT
-    end
+    zeni = zeni * xi.znm.SOULPLATE_HPP_MULT * math.exp(100-hpp)
 
     -- Distance Component
-    zeni = zeni * utils.clamp((1 / distance) * 2, 1, 2)
+    zeni = zeni * utils.clamp((1 / distance) * 8, 1, 2)
 
     -- Angle/Facing Component
     if isFacing then
@@ -83,6 +138,19 @@ xi.znm.soultrapper.getZeniValue = function(target, user, item)
     -- Bonus for HS Soul Plate
     if user:getEquipID(xi.slot.AMMO) == xi.items.BLANK_HIGH_SPEED_SOUL_PLATE then
         zeni = zeni * xi.znm.SOULPLATE_HS_MULT
+    end
+
+    -- Check for Sanraku's "Subject of Interest"
+    if xi.znm.isCurrentInterest(target:getSuperFamily(), target:getFamily()) then
+        zeni = zeni * xi.znm.SOULPLATE_INTEREST_MULT
+    end
+
+    -- Check for Sanraku's "Recommended Fauna"
+    if xi.znm.isCurrentFauna(target:getName(), target:getZoneID()) then
+        zeni = zeni * xi.znm.SOULPLATE_FAUNA_MULT
+    -- Generic NM/Rarity Component
+    elseif isNM then
+        zeni = zeni * xi.znm.SOULPLATE_NM_MULT
     end
 
     -- Add a little randomness
@@ -138,18 +206,18 @@ xi.znm.ryo.onTrigger = function(player, npc)
 end
 
 xi.znm.ryo.onEventUpdate = function(player, csid, option)
-    if csid == 914 then
+    if csid == 914 then  -- Get approximate value of traded soulplate
         local zeniValue = player:getLocalVar("[ZNM][Ryo]SoulPlateValue")
         player:setLocalVar("[ZNM][Ryo]SoulPlateValue", 0)
         player:updateEvent(zeniValue)
     elseif csid == 913 then
-        if option == 200 then -- Sanraku's subject of interest
-            local param = xi.znm.getInterest()
-            player:updateEvent(param,Sanrakus 0)
-        elseif option == 201 then -- Sanraku's recommended fauna
+        if option == 200 then -- "Sanraku's subject of interest"
+            local param = xi.znm.getSanrakusInterest()
+            player:updateEvent(param,0)
+        elseif option == 201 then -- "Sanraku's recommended fauna"
             local param = xi.znm.getSanrakusFauna()
             player:updateEvent(param, 0)
-        elseif option == 300 then
+        elseif option == 300 then -- "My zeni balance"
             player:updateEvent(player:getCurrency("zeni_point"), 0)
         else
             player:updateEvent(0, 0)
@@ -211,9 +279,11 @@ xi.znm.sanraku.onTrade = function(player, npc, trade)
     end
 end
 
------ Update Sanraku's ZNM menu based on owned seals
+----- Helper Function for onTrigger
+-- Update Sanraku's ZNM menu (csid 909) based on owned seals
 xi.znm.SanrakuMenu = function(player)
     -- Default: Tier 1 ZNMs + "Don't Ask"
+    -- (if bit = 0: add ZNM to Sanraku's Menu)
     local param = xi.znm.DefaultMenu
 
     for bitmask, seal in pairs(xi.znm.MENU_BITMASKS) do
@@ -243,7 +313,7 @@ end
 
 xi.znm.sanraku.onEventUpdate = function(player, csid, option)
     if csid == 909 then
-        if option >= 300 and option <= 302 then -- Gaining access to islets
+        if option >= 300 and option <= 302 then -- "Gaining access to islets"
             local zeni_cost = 500 -- Base cost charged by Sanraku
             if player:hasKeyItem(xi.keyItem.RHAPSODY_IN_AZURE) then -- Reduced zeni cost
                 zeni_cost = 50
@@ -253,7 +323,8 @@ xi.znm.sanraku.onEventUpdate = function(player, csid, option)
             if player:getCurrency("zeni_point") < zeni_cost then -- Not enough zeni
                 player:updateEvent(2)
             elseif player:hasKeyItem(key_item) then -- Already have the salt
-                player:showText(GetNPCByID(xi.znm.SANRAKUID),13124) -- TODO: csid instead?
+                local SANRAKU_ID = ID.npc.SANRAKU
+                player:showText(GetNPCByID(SANRAKU_ID),13124) -- TODO: csid instead?
             else
                 player:addKeyItem(key_item)
                 player:delCurrency("zeni_point", zeni_cost)
@@ -275,7 +346,8 @@ xi.znm.sanraku.onEventUpdate = function(player, csid, option)
             elseif player:getFreeSlotsCount() == 0 then -- No inventory space
                 player:updateEvent(4)
             elseif player:hasItem(pop_item) then -- Own pop already
-                player:showText(GetNPCByID(xi.znm.SANRAKUID),13124) -- TODO: csid instead?
+                local SANRAKU_ID = ID.npc.SANRAKU
+                player:showText(GetNPCByID(SANRAKU_ID),13124) -- TODO: csid instead?
             else
                 -- Deduct zeni from player, increase future pop-item costs
                 player:delCurrency("zeni_point", zeni_cost)
@@ -315,5 +387,40 @@ xi.znm.sanraku.onEventFinish = function(player, csid, option)
         player:tradeComplete()
         player:addKeyItem(player:getCharVar("[ZNM]TrophyTrade"))
         player:setCharVar("[ZNM]TrophyTrade",0)
+    end
+end
+
+-----------------------------------
+---- ZNM Pop-Item Prices
+-----------------------------------
+xi.znm.getPopPrice = function(znm_tier)
+    local pop_cost = GetServerVariable("[ZNM][T" .. znm_tier .. "]PopCost")
+
+    -- Check to make sure the pop prices have a set value
+    if pop_cost == nil or pop_cost == 0 then
+        pop_cost = xi.znm.ZNM_POP_COSTS[znm_tier].minPrice
+        SetServerVariable("[ZNM][T" .. znm_tier .. "]PopCost", pop_cost)
+    end
+    return pop_cost
+end
+
+xi.znm.updatePopPrice = function(znm_tier)
+    if not xi.znm.ZNM_STATIC_POP_PRICES then
+        local pop_cost = math.min(xi.znm.getPopPrice(znm_tier) + xi.znm.ZNM_POP_COSTS[znm_tier].addedPrice,
+                xi.znm.ZNM_POP_COSTS[znm_tier].maxPrice)
+        SetServerVariable("[ZNM][T" .. znm_tier .. "]PopCost", pop_cost )
+    end
+end
+
+
+-- Prices decay over time (called every 2 hours)
+xi.znm.ZNMPopPriceDecay = function()
+    if not xi.znm.ZNM_STATIC_POP_PRICES then
+        local pop_cost = 0
+        for znm_tier = 1,5 do
+            pop_cost = math.max(xi.znm.getPopPrice(znm_tier) - xi.znm.ZNM_POP_COSTS[znm_tier].decayPrice,
+                    xi.znm.ZNM_POP_COSTS[znm_tier].minPrice)
+            SetServerVariable("[ZNM][T" .. znm_tier .. "]PopCost", pop_cost)
+        end
     end
 end
