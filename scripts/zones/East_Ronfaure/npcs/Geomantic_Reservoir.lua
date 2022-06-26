@@ -6,7 +6,6 @@
 -----------------------------------
 require("scripts/globals/geomantic_reservoir")
 require("scripts/globals/spell_data")
-local ID = require("scripts/zones/East_Ronfaure/IDs")
 -----------------------------------
 local entity = {}
 
