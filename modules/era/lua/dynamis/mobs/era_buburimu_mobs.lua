@@ -33,21 +33,21 @@ xi.dynamis.onSpawnApoc = function(mob)
     mob:setLocalVar("Apoc_Beast", 1)
     xi.dynamis.apoc2hrlist = -- Setup fresh 2hr list each time
     {
-        xi.jsa.MIGHTY_STRIKES,
-        xi.jsa.HUNDRED_FISTS,
-        xi.jsa.BENEDICTION,
-        xi.jsa.MANAFONT,
-        xi.jsa.CHAINSPELL,
-        xi.jsa.PERFECT_DODGE,
-        xi.jsa.INVINCIBLE,
-        xi.jsa.BLOOD_WEAPON,
-        xi.ja.CHARM,
-        xi.jsa.SOUL_VOICE,
-        xi.jsa.EES_DRAGON,
-        xi.jsa.MEIKYO_SHISUI,
-        xi.jsa.MIJIN_GAKURE,
-        xi.jsa.CALL_WYVERN,
-        xi.jsa.ASTRAL_FLOW,
+        {xi.jsa.MIGHTY_STRIKES, "MIGHTY_STRIKES"},
+        {xi.jsa.HUNDRED_FISTS, "HUNDRED_FISTS"},
+        {xi.jsa.BENEDICTION, "BENEDICTION"},
+        {xi.jsa.MANAFONT, "MANAFONT"},
+        {xi.jsa.CHAINSPELL, "CHAINSPELL"},
+        {xi.jsa.PERFECT_DODGE, "PERFECT_DODGE"},
+        {xi.jsa.INVINCIBLE, "INVINCIBLE"},
+        {xi.jsa.BLOOD_WEAPON, "BLOOD_WEAPON"},
+        {xi.ja.CHARM, "CHARM"},
+        {xi.jsa.SOUL_VOICE, "SOUL_VOICE"},
+        {xi.jsa.EES_DRAGON, "EAGLE_EYE_SHOT"},
+        {xi.jsa.MEIKYO_SHISUI, "MEIKYO_SHISUI"},
+        {xi.jsa.MIJIN_GAKURE, "MIJIN_GAKURE"},
+        {xi.jsa.CALL_WYVERN, "CALL_WYVERN"},
+        {xi.jsa.ASTRAL_FLOW, "ASTRAL_FLOW "},
     }
 
     xi.dynamis.apocLockouts2hr = -- Setup 2hr Lockouts
@@ -82,6 +82,12 @@ xi.dynamis.onSpawnApoc = function(mob)
         [9] = {"koschei_killed", 650}, -- Thornsong
         [10] = {"stollenwurm_killed", 651}, -- Lodesong
     }
+
+    mob:addListener("WEAPONSKILL_STATE_EXIT", "APOC_WEAPONSKILL_STATE_EXIT", function(mob, target, skill)
+        if mob:hasStatusEffect(xi.effect.HYSTERIA) then
+            mob:delStatusEffectSilent(xi.effect.HYSTERIA)
+        end
+    end)
 
     for _, val in pairs(xi.dynamis.apocLockouts2hr) do
         mob:setLocalVar(val[4], val[2])
@@ -120,7 +126,10 @@ xi.dynamis.onFightApoc = function(mob, target)
         if #xi.dynamis.apoc2hrlist > 0 then
             local abilityChoice = math.random(1, #xi.dynamis.apoc2hrlist)
             local next2hr = os.time() + math.random(45, 75)
-            mob:useMobAbility(xi.dynamis.apoc2hrlist[abilityChoice])
+            if mob:getLocalVar(xi.dynamis.apoc2hrlist[abilityChoice][2]) == 0 then
+                mob:addStatusEffect(xi.effect.HYSTERIA)
+            end
+            mob:useMobAbility(xi.dynamis.apoc2hrlist[abilityChoice][1])
             table.remove(xi.dynamis.apoc2hrlist, abilityChoice)
             mob:setLocalVar("next2hrTime", next2hr)
         end
@@ -132,7 +141,7 @@ xi.dynamis.onFightApoc = function(mob, target)
         mob:SetMobAbilityEnabled(false)
         if mob:getStatus() ~= xi.action.MAGIC_CASTING then
             local manafontspells = {xi.magic.spell.FIRAGA_III, xi.magic.spell.BLIZZAGA_III, xi.magic.spell.AEROGA_III, xi.magic.spell.STONEGA_III, xi.magic.spell.THUNDAGA_III, xi.magic.spell.WATERA_III}
-            local spell = manafontspells[math.random(1, #manafontspells)[1]]
+            local spell = manafontspells[math.random(1, #manafontspells)]
             if spell then
                 mob:castSpell(spell, target)
             end
@@ -170,8 +179,9 @@ xi.dynamis.onFightApoc = function(mob, target)
         if #xi.dynamis.apocLockouts > 0 then
             local abilityChoice = math.random(1, #xi.dynamis.apocLockouts)
             if mob:getZone():getLocalVar(xi.dynamis.apocLockouts[abilityChoice][1]) == 0 then
+                local ability = xi.dynamis.apocLockouts[abilityChoice][2]
                 mob:setLocalVar("ResetTP", 1)
-                mob:useMobAbility(xi.dynamis.apocLockouts[abilityChoice][2])
+                mob:useMobAbility(ability)
             else
                 table.remove(xi.dynamis.apocLockouts, abilityChoice)
             end

@@ -956,7 +956,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             ["onMobRoam"] = {function(mob) end},
             ["onMobMagicPrepare"] = {function(mob, target, spellId) end},
             ["onMobWeaponSkillPrepare"] = {function(mob, target) end},
-            ["onMobWeaponSkill"] = {function(mob) end},
+            ["onMobWeaponSkill"] = {function(mob, target, skill) end},
             ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.megaBossOnDeath(mob, player, isKiller) end},
             ["mixins"] = { },
         },
@@ -1344,7 +1344,10 @@ xi.dynamis.spawnDynamicPet =function(target, oMob, mobJob)
             },
             [87] = -- Dwagon Family
             {
-                ["Apocalyptic Beast"] = {"44617661" , 36, 134, 0, 0, 34}, -- Dragon's Avatar (Dava)
+                [true] = -- Dwagon NM
+                {
+                    ["Apocalyptic Beast"] = {"44617661", 36, 134, 0, 0, 34}, -- Dragon's Avatar (Dava)
+                },
             },
         },
     }
@@ -1409,6 +1412,9 @@ xi.dynamis.spawnDynamicPet =function(target, oMob, mobJob)
         end
     else
         if isNM == true then
+            print(mobJob)
+            print(mobFamily)
+            print(mobName)
             nameObj = petList[mobJob][mobFamily][true][mobName]
         else
             nameObj = petList[mobJob][mobFamily][false]

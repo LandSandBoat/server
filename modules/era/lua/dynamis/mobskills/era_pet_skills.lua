@@ -14,7 +14,7 @@ local m = Module:new("era_pet_skills")
 m:addOverride("xi.globals.mobskills.call_wyvern.onMobWeaponSkill", function(target, mob, skill)
     local mobName = xi.dynamis.mobList[mob:getZoneID()][mob:getZone():getLocalVar((string.format("MobIndex_%s", mob:getID())))].info[2]
     if mob:getLocalVar("CALL_WYVERN") == 1 then
-        skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
+        skill:setMsg(xi.msg.basic.NONE)
         return 0
     end
 
@@ -43,8 +43,8 @@ m:addOverride("xi.globals.mobskills.astral_flow.onMobWeaponSkill", function(targ
     local mobName = xi.dynamis.mobList[mob:getZoneID()][mob:getZone():getLocalVar((string.format("MobIndex_%s", mob:getID())))].info[2]
 
     if mob:getLocalVar("ASTRAL_FLOW") == 1 then
-        skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
-        return 0
+        skill:setMsg(xi.msg.basic.NONE)
+        return xi.effect.NONE
     end
 
     if mob:isInDynamis() then

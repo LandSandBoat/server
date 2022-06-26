@@ -697,6 +697,15 @@ xi.dynamis.dynaInfoEra =
 
 }
 
+local function cleanupNeeded(zone, zoneMobs)
+    local i = 0
+    for _, mob in pairs(zoneMobs) do
+        if mob:isAlive() then
+            return xi.dynamis.cleanupDynamis(zone)
+        end
+    end
+end
+
 --------------------------------------------
 --      onZoneTick Dynamis Functions      --
 --------------------------------------------
@@ -919,9 +928,8 @@ end
 xi.dynamis.registerDynamis = function(player)
     local zoneID = player:getZoneID()
     local zone = GetZone(xi.dynamis.dynaInfoEra[zoneID].dynaZone)
-    if zone:getMobs() > 0 then
-        xi.dynamis.cleanupDynamis(zone)
-    end
+    local zoneMobs = zone:getMobs()
+    cleanupNeeded(zone, zoneMobs)
     local expirationTime = os.time() + (60 * (60 + dynamis_staging_time)) -- Amount of time to extend timepoint by. 60 minutes by default for fresh zones.
     SetServerVariable(string.format("[DYNA]Token_%s", xi.dynamis.dynaInfoEra[zoneID].dynaZone), (xi.dynamis.dynaInfoEra[zoneID].dynaZone + expirationTime)) -- Sets Dynamis Token Based on original expiration time and zone ID
     SetServerVariable(string.format("[DYNA]Timepoint_%s", xi.dynamis.dynaInfoEra[zoneID].dynaZone), expirationTime) -- Sets original timepoint which dynamis will expire.

@@ -5,7 +5,10 @@
 --       Module Required Scripts          --
 --------------------------------------------
 require("scripts/globals/dynamis")
+require("modules/era/lua/dynamis/globals/era_dynamis")
+require("modules/era/lua/dynamis/globals/era_dynamis_spawning")
 require("modules/module_utils")
+--------------------------------------------
 
 local m = Module:new("era_regain_skills")
 

@@ -5,7 +5,10 @@
 --       Module Required Scripts          --
 --------------------------------------------
 require("scripts/globals/dynamis")
+require("modules/era/lua/dynamis/globals/era_dynamis")
+require("modules/era/lua/dynamis/globals/era_dynamis_spawning")
 require("modules/module_utils")
+--------------------------------------------
 
 local m = Module:new("era_regain_skills")
 
@@ -33,7 +36,7 @@ m:addOverride("xi.globals.mobskills.oblivion_smash.onMobWeaponSkill", function(t
     return dmg
 end)
 
-m:addOverride("xi.globals.mobskills.regain_mp.onMobWeaponSkill", function(target, mob, skill)
+m:addOverride("xi.globals.mobskills.tera_slash.onMobWeaponSkill", function(target, mob, skill)
 
     if mob:getHPP() <= 25 then
         dmg = target:getHP()

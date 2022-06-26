@@ -47,7 +47,6 @@ era/lua/dynamis/globals/era_dynamis_spawning.lua
 era/lua/dynamis/mobskills/era_pet_skills.lua
 era/lua/dynamis/mobskills/era_regain_skills.lua
 era/lua/dynamis/mobskills/era_valkurm_tp_moves.lua
-era/lua/dynamis/mobskills/era_buburimu_tp_moves.lua
 era/lua/dynamis/mobskills/era_qufim_tp_moves.lua
 era/lua/dynamis/mobskills/era_xarcabard_tp_moves.lua
 era/lua/dynamis/globals/era_dynamis_zones.lua
