@@ -193,13 +193,13 @@ m:addOverride("xi.shop.generalGuild", function(player, stock, guildSkillId)
             }
         }
     local stock = generalGuildStockNoKit[guildSkillId]
-    player:createShop(#stock / 3, log)
-
-    for i = 1, #stock, 3 do
-        player:addShopItem(stock[i], stock[i+1], guildSkillId, stock[i+2])
-    end
-
-    player:sendMenu(2)
+--    player:createShop(#stock / 3, log)
+--
+--    for i = 1, #stock, 3 do
+--        player:addShopItem(stock[i], stock[i+1], guildSkillId, stock[i+2])
+--    end
+--
+--    player:sendMenu(2)
 end)
 
 return m
