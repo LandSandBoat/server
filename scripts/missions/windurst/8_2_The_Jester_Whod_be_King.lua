@@ -15,8 +15,6 @@
 -- Shantotto        : !pos 122 -2 112 239
 -- _5e5 (Cr. Wall)  : !pos -424.255 -1.909 619.995 194
 -- _5cb (Gate. Drk) : !pos -228 0 99 192
------------------------------------
-require('scripts/settings/main')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/items')
 require('scripts/globals/keyitems')

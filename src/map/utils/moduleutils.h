@@ -40,7 +40,7 @@ class CPPModule
 {
 public:
     CPPModule()
-    : lua(luautils::lua)
+    : lua(::lua)
     , sql(::sql)
     {
         moduleutils::RegisterCPPModule(this);

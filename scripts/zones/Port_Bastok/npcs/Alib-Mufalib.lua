@@ -8,7 +8,7 @@ local ID = require("scripts/zones/Port_Bastok/IDs")
 require("scripts/globals/teleports")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------
@@ -55,7 +55,7 @@ end
 entity.onTrigger = function(player, npc)
     local lureBastok = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LURE_OF_THE_WILDCAT)
     local wildcatBastok = player:getCharVar("WildcatBastok")
-    if (lureBastok ~= 2 and xi.settings.ENABLE_TOAU == 1) then
+    if (lureBastok ~= 2 and xi.settings.main.ENABLE_TOAU == 1) then
         if (lureBastok == 0) then
             player:startEvent(357)
         else

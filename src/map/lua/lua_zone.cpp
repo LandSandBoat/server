@@ -109,7 +109,7 @@ sol::object CLuaZone::levelRestriction()
 
 sol::table CLuaZone::getPlayers()
 {
-    auto table = luautils::lua.create_table();
+    auto table = lua.create_table();
     // clang-format off
     m_pLuaZone->ForEachChar([&table](CCharEntity* PChar)
     {
@@ -121,7 +121,7 @@ sol::table CLuaZone::getPlayers()
 
 sol::table CLuaZone::getNPCs()
 {
-    auto table = luautils::lua.create_table();
+    auto table = lua.create_table();
     // clang-format off
     m_pLuaZone->ForEachNpc([&table](CNpcEntity* PNpc)
     {
@@ -133,7 +133,7 @@ sol::table CLuaZone::getNPCs()
 
 sol::table CLuaZone::getMobs()
 {
-    auto table = luautils::lua.create_table();
+    auto table = lua.create_table();
     // clang-format off
     m_pLuaZone->ForEachMob([&table](CMobEntity* PMob)
     {
@@ -202,8 +202,6 @@ bool CLuaZone::isNavigablePoint(const sol::table& point)
 
 std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
 {
-    auto& lua = luautils::lua;
-
     CBaseEntity* PEntity = nullptr;
     if (table.get_or<uint8>("objtype", TYPE_NPC) == TYPE_NPC)
     {
@@ -410,7 +408,7 @@ sol::table CLuaZone::queryEntitiesByName(std::string const& name)
 {
     TracyZoneScoped;
 
-    auto table = luautils::lua.create_table();
+    auto table = lua.create_table();
 
     // TODO: Make work for instances
     // TODO: Replace with a constant-time lookup

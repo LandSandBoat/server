@@ -2,7 +2,7 @@
 -- Cannibal Blade
 -----------------------------------
 require("scripts/globals/automatonweaponskills")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
@@ -40,7 +40,7 @@ ability_object.onAutomatonAbility = function(target, automaton, skill, master, a
         chr_wsc = 0.0
     }
 
-    if xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+    if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.weaponDamage = nil
         params.mnd_wsc = 1.0
         params.ftp100 = 16.0

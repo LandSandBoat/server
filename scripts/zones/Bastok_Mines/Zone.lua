@@ -5,7 +5,7 @@ local ID = require("scripts/zones/Bastok_Mines/IDs")
 require("scripts/globals/events/harvest_festivals")
 require("scripts/globals/conquest")
 require("scripts/globals/missions")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/chocobo")
 require("scripts/globals/zone")
 -----------------------------------
@@ -23,7 +23,7 @@ zone_object.onZoneIn = function(player, prevZone)
 
     -- FIRST LOGIN (START CS)
     if player:getPlaytime(false) == 0 then
-        if xi.settings.NEW_CHARACTER_CUTSCENE == 1 then
+        if xi.settings.main.NEW_CHARACTER_CUTSCENE == 1 then
             cs = 1
         end
         player:setPos(-45, -0, 26, 213)

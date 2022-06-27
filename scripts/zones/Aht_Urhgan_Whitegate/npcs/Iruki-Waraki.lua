@@ -6,7 +6,7 @@
 -- !pos 101.329 -6.999 -29.042 50
 -----------------------------------
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/items")
 require("scripts/globals/quests")
 require("scripts/globals/npc_util")
@@ -33,13 +33,13 @@ entity.onTrigger = function(player, npc)
     local playerJob = player:getMainJob()
 
     --Quest: The Wayward Automaton
-    if playerJob == xi.job.PUP and playerLvl >= xi.settings.AF1_QUEST_LEVEL and noStringsAttached == QUEST_COMPLETED and theWaywardAutomaton == QUEST_AVAILABLE then
+    if playerJob == xi.job.PUP and playerLvl >= xi.settings.main.AF1_QUEST_LEVEL and noStringsAttached == QUEST_COMPLETED and theWaywardAutomaton == QUEST_AVAILABLE then
         player:startEvent(774) -- he tells you to help find his auto
     elseif theWaywardAutomaton == QUEST_ACCEPTED and theWaywardAutomatonProgress == 1 then
         player:startEvent(775) -- reminder about to head to Nashmau
     elseif theWaywardAutomaton == QUEST_ACCEPTED and theWaywardAutomatonProgress == 3 then
         player:startEvent(776) -- tell him you found Automaton
-    elseif playerJob == xi.job.PUP and playerLvl < xi.settings.AF2_QUEST_LEVEL and theWaywardAutomaton == QUEST_COMPLETED then
+    elseif playerJob == xi.job.PUP and playerLvl < xi.settings.main.AF2_QUEST_LEVEL and theWaywardAutomaton == QUEST_COMPLETED then
         player:startEvent(777)
     elseif playerJob ~= xi.job.PUP and theWaywardAutomaton == QUEST_COMPLETED then
         player:startEvent(777)
@@ -47,7 +47,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(267) -- asking you how are you doing with your automaton
 
     --Quest: Operation teatime
-    elseif playerJob == xi.job.PUP and playerLvl >= xi.settings.AF2_QUEST_LEVEL and noStringsAttached == QUEST_COMPLETED and theWaywardAutomaton == QUEST_COMPLETED and operationTeaTime == QUEST_AVAILABLE then
+    elseif playerJob == xi.job.PUP and playerLvl >= xi.settings.main.AF2_QUEST_LEVEL and noStringsAttached == QUEST_COMPLETED and theWaywardAutomaton == QUEST_COMPLETED and operationTeaTime == QUEST_AVAILABLE then
         player:startEvent(778)
     elseif operationTeaTime == QUEST_ACCEPTED and operationTeaTimeProgress == 1 then
         player:startEvent(779) -- Reminds you to get items

@@ -5,7 +5,7 @@
 -- !addmission 9 0
 -----------------------------------
 require('scripts/globals/missions')
-require('scripts/settings/main')
+require('scripts/globals/settings')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
@@ -22,7 +22,7 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and
-                xi.settings.ENABLE_ACP == 1 and
+                xi.settings.main.ENABLE_ACP == 1 and
                 player:getMainLvl() >= 10
         end,
 

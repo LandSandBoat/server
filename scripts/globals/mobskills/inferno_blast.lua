@@ -7,7 +7,7 @@
 --  Range: 18' radial.
 --  Notes: Used only by Tiamat, Smok and Ildebrann while flying.
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
