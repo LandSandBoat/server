@@ -56,3 +56,4 @@ era/sql/2010_exp_tables.sql
 era/sql/mob_groups_era.sql
 era/sql/gardening_results_era.sql
 era/sql/2hr_ability_cooldowns.sql
+era/lua/75_era_argus.lua
