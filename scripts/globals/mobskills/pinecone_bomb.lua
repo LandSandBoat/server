@@ -17,10 +17,11 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 1
     local accmod = 1
+    local dmgmod
     if mob:getPool() == 671 or mob:getPool() == 1346 then -- Cemetery Cherry and leafless Jidra
-        local dmgmod = 3.5
+        dmgmod = 3
     else
-        local dmgmod = 2.3
+        dmgmod = 2.3
     end
 
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)

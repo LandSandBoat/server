@@ -35,9 +35,6 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
         local typeEffectOne = xi.effect.BIND
         local typeEffectTwo = xi.effect.POISON
 
-        skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 1, 0, 30))
-        xi.mobskills.mobStatusEffectMove(mob, target, typeEffectTwo, 50, 0, 60)
-
         local numhits = 3
         local accmod = 1
         local dmgmod = 2.0
@@ -46,6 +43,8 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
         mob:resetEnmity(target)
         target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
+        skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffectOne, 1, 0, 30))
+        xi.mobskills.mobStatusEffectMove(mob, target, typeEffectTwo, 50, 0, 60)
 
         return typeEffectOne
     else

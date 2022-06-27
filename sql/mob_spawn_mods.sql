@@ -610,6 +610,11 @@ INSERT INTO `mob_spawn_mods` VALUES (17588703,55,180,1);
 INSERT INTO `mob_spawn_mods` VALUES (17428677,1,18000,1); -- min gil 18000
 INSERT INTO `mob_spawn_mods` VALUES (17428677,2,30000,1); -- max gil 30000
 
+-- Sewer Syrup
+INSERT INTO `mob_spawn_mods` VALUES (17461307,1,4000,1);
+INSERT INTO `mob_spawn_mods` VALUES (17461307,2,19000,1);
+INSERT INTO `mob_spawn_mods` VALUES (17461307,15,3500,1);
+
 /*!40000 ALTER TABLE `mob_spawn_mods` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

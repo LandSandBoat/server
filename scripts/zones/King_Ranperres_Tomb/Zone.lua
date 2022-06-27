@@ -19,24 +19,6 @@ zone_object.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.BARBASTELLE)
     GetMobByID(ID.mob.BARBASTELLE):setRespawnTime(math.random(1800, 5400))
 
-    -- Cemetery Cherry respawn persistance
-    local re = GetServerVariable("CherryRespawn")
-	if os.time() < re then
-        for i = ID.mob.CHERRY_SAPLING_OFFSET, ID.mob.CHERRY_SAPLING_OFFSET + 12 do
-            local mob = GetMobByID(i)
-            if mob ~= nil and mob:getName() == 'Cherry_Sapling' and not mob:isSpawned() then
-                mob:setRespawnTime(re - os.time())
-            end
-        end
-	else
-        for i = ID.mob.CHERRY_SAPLING_OFFSET, ID.mob.CHERRY_SAPLING_OFFSET + 12 do
-            local mob = GetMobByID(i)
-            if mob ~= nil and mob:getName() == 'Cherry_Sapling' and not mob:isSpawned() then
-                SpawnMob(mob:getID())
-            end
-        end
-	end
-
     xi.treasure.initZone(zone)
 end
 
@@ -71,9 +53,7 @@ zone_object.onGameHour = function(zone)
     -- Don't allow Ankou to spawn outside of night
     if VanadielHour() >= 4 and VanadielHour() < 20 then
         DisallowRespawn(ID.mob.ANKOU, true)
-        DisallowRespawn(ID.mob.ANKOU, true)
     else
-        DisallowRespawn(ID.mob.ANKOU, false)
         DisallowRespawn(ID.mob.ANKOU, false)
     end
 end
