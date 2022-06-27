@@ -5,6 +5,8 @@
 --   NM: Leech King
 -----------------------------------
 local ID = require("scripts/zones/Maze_of_Shakhrami/IDs")
+require("scripts/globals/treasure")
+require("scripts/globals/helm")
 -----------------------------------
 local entity = {}
 local m = Module:new("75_era_argus")
