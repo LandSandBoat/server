@@ -352,7 +352,7 @@ void CLinkshell::PushPacket(uint32 senderID, CBasicPacket* packet)
 {
     for (auto& member : members)
     {
-        if (member->id != senderID && member->status != STATUS_TYPE::DISAPPEAR && !jailutils::InPrison(member))
+    if (member != nullptr && member->id != senderID && member->status != STATUS_TYPE::DISAPPEAR && !jailutils::InPrison(member))
         {
             CBasicPacket* newPacket = new CBasicPacket(*packet);
             if (member->PLinkshell2 == this)
