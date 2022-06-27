@@ -7578,8 +7578,8 @@ INSERT INTO `mob_droplist` VALUES (916,0,0,1000,3184,90);   -- Callers Seal Legs
 
 -- ZoneID: 100 - Fungus Beetle
 INSERT INTO `mob_droplist` VALUES (917,0,0,1000,12371,@ALWAYS); -- Clipeus (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (917,0,0,1000,894,@UNCOMMON); -- Beetle Jaw (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (917,0,0,1000,846,60);        -- Insect Wing (6.0%)
+INSERT INTO `mob_droplist` VALUES (917,0,0,1000,894,@COMMON);   -- Beetle Jaw (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (917,0,0,1000,846,@VCOMMON);  -- Insect Wing (Very Common, 24%)
 
 -- ZoneID: 167 - Funnel Bats
 INSERT INTO `mob_droplist` VALUES (918,0,0,1000,922,360);   -- Bat Wing (36.0%)
@@ -11489,9 +11489,8 @@ INSERT INTO `mob_droplist` VALUES (1389,0,0,1000,15613,@COMMON); -- Jet Seraweel
 INSERT INTO `mob_droplist` VALUES (1389,0,0,1000,2307,130);      -- Vial Of Jodys Acid (13.0%)
 
 -- ZoneID: 100 - Jaggedy-Eared Jack
-INSERT INTO `mob_droplist` VALUES (1390,0,0,1000,856,130);      -- Rabbit Hide (13.0%)
-INSERT INTO `mob_droplist` VALUES (1390,0,0,1000,4358,110);     -- Slice Of Hare Meat (11.0%)
-INSERT INTO `mob_droplist` VALUES (1390,0,0,1000,4389,30);      -- San Dorian Carrot (3.0%)
+INSERT INTO `mob_droplist` VALUES (1390,0,0,1000,856,@VCOMMON); -- Rabbit Hide (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (1390,0,0,1000,4358,@COMMON); -- Slice Of Hare Meat (Common, 10%)
 INSERT INTO `mob_droplist` VALUES (1390,0,0,1000,13112,@VRARE); -- Rabbit Charm (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (1390,2,0,1000,4389,0);       -- San Dorian Carrot (Steal)
 
@@ -24429,7 +24428,7 @@ INSERT INTO `mob_droplist` VALUES (2939,0,0,1000,16296,@VCOMMON); -- Armigers La
 INSERT INTO `mob_droplist` VALUES (2940,0,0,1000,15052,257); -- Guerilla Gloves (25.7%)
 
 -- ZoneID: 100 - Amanita
-INSERT INTO `mob_droplist` VALUES (2941,0,0,1000,19043,269); -- Tenax Strap (26.9%)
+INSERT INTO `mob_droplist` VALUES (2941,0,0,1000,19043,@VCOMMON); -- Tenax Strap (Very Common, 24%)
 
 -- ZoneID: 102 - Slumbering Samwell
 INSERT INTO `mob_droplist` VALUES (2942,0,0,1000,2832,218); -- Samwells Shank (21.8%)
