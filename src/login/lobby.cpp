@@ -95,6 +95,9 @@ int32 lobbydata_parse(int32 fd)
         }
         ShowDebug("lobbydata_parse:Incoming Packet: <%x> from ip:<%s>", ref<uint8>(buff, 0), ip2str(sd->client_addr));
 
+        auto maintMode  = settings::get<uint8>("login.MAINT_MODE");
+        auto searchPort = settings::get<uint16>("network.SEARCH_PORT");
+
         int32 code = ref<uint8>(buff, 0);
         switch (code)
         {
@@ -156,7 +159,8 @@ int32 lobbydata_parse(int32 fd)
                 LOBBY_A1_RESERVEPACKET(ReservePacket);
 
                 // server's name that shows in lobby menu
-                std::memcpy(ReservePacket + 60, login_config.servername.c_str(), std::clamp<size_t>(login_config.servername.length(), 0, 15));
+                auto serverName = settings::get<std::string>("main.SERVER_NAME");
+                std::memcpy(ReservePacket + 60, serverName.c_str(), std::clamp<size_t>(serverName.length(), 0, 15));
 
                 // Prepare the character list data..
                 for (int j = 0; j < 16; ++j)
@@ -177,7 +181,7 @@ int32 lobbydata_parse(int32 fd)
                     sql->GetData(1, &strCharName, nullptr);
 
                     auto gmlevel = sql->GetIntData(36);
-                    if (maint_config.maint_mode == 0 || gmlevel > 0)
+                    if (maintMode == 0 || gmlevel > 0)
                     {
                         uint8 worldId = 0; // Use when multiple worlds are supported.
 
@@ -232,7 +236,7 @@ int32 lobbydata_parse(int32 fd)
                 // the filtering above removes any non-GM characters so
                 // at this point we need to make sure stop players with empty lists
                 // from logging in or creating new characters
-                if (maint_config.maint_mode > 0 && i == 0)
+                if (maintMode > 0 && i == 0)
                 {
                     LOBBBY_ERROR_MESSAGE(ReservePacketEmptyList);
                     ref<uint16>(ReservePacketEmptyList, 32) = 321;
@@ -360,23 +364,24 @@ int32 lobbydata_parse(int32 fd)
                                 FROM ip_exceptions \
                                 WHERE accid = %u;";
 
-                    int64 exceptionTime = 0;
+                    uint64 exceptionTime = 0;
 
                     if (sql->Query(fmtQuery, sd->accid) != SQL_ERROR && sql->NumRows() != 0)
                     {
                         sql->NextRow();
-                        exceptionTime = sql->GetIntData(0);
+                        exceptionTime = sql->GetUInt64Data(0);
                     }
 
-                    int64_t timeStamp = std::chrono::duration_cast<std::chrono::seconds>(server_clock::now().time_since_epoch()).count();
-                    bool isNotMaint   = maint_config.maint_mode == 0;
-                    bool excepted     = exceptionTime > timeStamp;
-                    bool loginLimitOK = (login_config.login_limit == 0 || sessionCount < login_config.login_limit || excepted);
-                    bool isGM         = gmlevel > 0;
+                    uint64 timeStamp    = std::chrono::duration_cast<std::chrono::seconds>(server_clock::now().time_since_epoch()).count();
+                    bool   isNotMaint   = !settings::get<bool>("login.MAINT_MODE");
+                    auto   loginLimit   = settings::get<uint8>("login.LOGIN_LIMIT");
+                    bool   excepted     = exceptionTime > timeStamp;
+                    bool   loginLimitOK = loginLimit == 0 || sessionCount < loginLimit || excepted;
+                    bool   isGM         = gmlevel > 0;
 
                     if (!loginLimitOK)
                     {
-                        ShowWarning("Already %u active session(s) for %s (Limit is %u)", sessionCount, sd->login, login_config.login_limit);
+                        ShowWarning("%s already has %u active session(s), limit is %u", sd->login, sessionCount, loginLimit);
                     }
 
                     if ((isNotMaint && loginLimitOK) || isGM)
@@ -386,8 +391,8 @@ int32 lobbydata_parse(int32 fd)
                             sql->Query("UPDATE chars SET pos_prevzone = %d WHERE charid = %u;", ZoneID, charid);
                         }
 
-                        ref<uint32>(ReservePacket, (0x40)) = sd->servip;                      // search-server ip
-                        ref<uint16>(ReservePacket, (0x44)) = login_config.search_server_port; // search-server port
+                        ref<uint32>(ReservePacket, (0x40)) = sd->servip; // search-server ip
+                        ref<uint16>(ReservePacket, (0x44)) = searchPort; // search-server port
 
                         std::memcpy(MainReservePacket, ReservePacket, ref<uint8>(ReservePacket, 0));
 
@@ -449,7 +454,7 @@ int32 lobbydata_parse(int32 fd)
                     return -1;
                 }
 
-                if (login_config.log_user_ip)
+                if (settings::get<bool>("login.LOG_USER_IP"))
                 {
                     // Log clients IP info when player spawns into map server
 
@@ -472,7 +477,7 @@ int32 lobbydata_parse(int32 fd)
 
                 do_close_tcp(sd->login_lobbyview_fd);
 
-                ShowStatus("lobbydata_parse: client %s finished work with lobbyview", ip2str(sd->client_addr));
+                ShowInfo("lobbydata_parse: client %s finished work with lobbyview", ip2str(sd->client_addr));
                 break;
             }
             default:
@@ -540,6 +545,8 @@ int32 lobbyview_parse(int32 fd)
 
     if (RFIFOREST(fd) >= 9)
     {
+        auto maintMode  = settings::get<uint8>("login.MAINT_MODE");
+
         char* buff = &sessions[fd]->rdata[0];
         ShowDebug("lobbyview_parse:Incoming Packet: <%x> from ip:<%s>", ref<uint8>(buff, 8), ip2str(sd->client_addr));
         uint8 code = ref<uint8>(buff, 8);
@@ -553,7 +560,7 @@ int32 lobbyview_parse(int32 fd)
                 string_t client_ver_data((buff + 0x74), 6); // Full length is 10 but we drop last 4
                 client_ver_data = client_ver_data + "xx_x"; // And then we replace those last 4..
 
-                string_t expected_version(version_info.client_ver, 0, 6); // Same deal here!
+                string_t expected_version(settings::get<std::string>("login.CLIENT_VER"), 0, 6); // Same deal here!
                 expected_version   = expected_version + "xx_x";
                 bool ver_mismatch  = expected_version != client_ver_data;
                 bool fatalMismatch = false;
@@ -562,7 +569,7 @@ int32 lobbyview_parse(int32 fd)
                 {
                     ShowError("lobbyview_parse: Incorrect client version: got %s, expected %s", client_ver_data.c_str(), expected_version.c_str());
 
-                    switch (version_info.ver_lock)
+                    switch (settings::get<uint8>("login.VER_LOCK"))
                     {
                         // enabled
                         case 1:
@@ -629,7 +636,7 @@ int32 lobbyview_parse(int32 fd)
             break;
             case 0x14:
             {
-                if (!login_config.character_deletion)
+                if (!settings::get<bool>("map.CHARACTER_DELETION"))
                 {
                     int32         sendsize = 0x28;
                     unsigned char MainReservePacket[0x28];
@@ -692,7 +699,9 @@ int32 lobbyview_parse(int32 fd)
             case 0x24:
             {
                 LOBBY_024_RESERVEPACKET(ReservePacket);
-                std::memcpy(ReservePacket + 36, login_config.servername.c_str(), std::clamp<size_t>(login_config.servername.length(), 0, 15));
+
+                auto serverName = settings::get<std::string>("main.SERVER_NAME");
+                std::memcpy(ReservePacket + 36, serverName.c_str(), std::clamp<size_t>(serverName.length(), 0, 15));
 
                 unsigned char Hash[16];
 
@@ -736,7 +745,7 @@ int32 lobbyview_parse(int32 fd)
                 //              sessions[sd->login_lobbydata_fd]->wdata[0]  = 0x15;
                 //              sessions[sd->login_lobbydata_fd]->wdata[1]  = 0x07;
                 //              WFIFOSET(sd->login_lobbydata_fd,2);
-                ShowStatus("lobbyview_parse: char <%s> was successfully created", sd->charname);
+                ShowInfo("lobbyview_parse: char <%s> was successfully created", sd->charname);
                 /////////////////////////
                 LOBBY_ACTION_DONE(ReservePacket);
                 unsigned char hash[16];
@@ -757,7 +766,7 @@ int32 lobbyview_parse(int32 fd)
                 unsigned char MainReservePacket[0x24];
 
                 // block creation of character if in maintenance mode
-                if (maint_config.maint_mode > 0)
+                if (maintMode > 0)
                 {
                     LOBBBY_ERROR_MESSAGE(ReservePacket);
                     ref<uint16>(ReservePacket, 32) = 314;

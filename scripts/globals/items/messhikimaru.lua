@@ -4,7 +4,7 @@
 -- Enchantment: Arcana Killer
 -- Durration: 10 Mins
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 local item_object = {}

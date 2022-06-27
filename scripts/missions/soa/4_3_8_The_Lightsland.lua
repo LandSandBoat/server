@@ -10,7 +10,7 @@ require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
-require('scripts/settings/main')
+require('scripts/globals/settings')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.THE_LIGHTSLAND)

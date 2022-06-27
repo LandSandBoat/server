@@ -1,7 +1,7 @@
 require("scripts/globals/gear_sets")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/teleports")
 require("scripts/globals/titles")
@@ -85,19 +85,19 @@ xi.player.charCreate = function(player)
     end
 
     -- unlock advanced jobs
-    if xi.settings.ADVANCED_JOB_LEVEL == 0 then
+    if xi.settings.main.ADVANCED_JOB_LEVEL == 0 then
         for i = xi.job.PLD, xi.job.SCH do
             player:unlockJob(i)
         end
     end
 
     -- unlock subjob
-    if xi.settings.SUBJOB_QUEST_LEVEL == 0 then
+    if xi.settings.main.SUBJOB_QUEST_LEVEL == 0 then
         player:unlockJob(0)
     end
 
     -- give all maps
-    if xi.settings.ALL_MAPS == 1 then
+    if xi.settings.main.ALL_MAPS == 1 then
         for i = xi.ki.MAP_OF_THE_SAN_DORIA_AREA, xi.ki.MAP_OF_DIO_ABDHALJS_GHELSBA do
             player:addKeyItem(i)
         end
@@ -113,14 +113,14 @@ xi.player.charCreate = function(player)
     end
 
     -- set initial level cap
-    if xi.settings.INITIAL_LEVEL_CAP ~= 50 then
-        player:setLevelCap(xi.settings.INITIAL_LEVEL_CAP)
+    if xi.settings.main.INITIAL_LEVEL_CAP ~= 50 then
+        player:setLevelCap(xi.settings.main.INITIAL_LEVEL_CAP)
     end
 
     -- increase starting inventory
-    if xi.settings.START_INVENTORY > 30 then
-        player:changeContainerSize(xi.inv.INVENTORY, xi.settings.START_INVENTORY - 30)
-        player:changeContainerSize(xi.inv.MOGSATCHEL, xi.settings.START_INVENTORY - 30)
+    if xi.settings.main.START_INVENTORY > 30 then
+        player:changeContainerSize(xi.inv.INVENTORY, xi.settings.main.START_INVENTORY - 30)
+        player:changeContainerSize(xi.inv.MOGSATCHEL, xi.settings.main.START_INVENTORY - 30)
     end
 
     --[[
@@ -131,8 +131,8 @@ xi.player.charCreate = function(player)
         on servers with very high values of START_GIL, I guess.
     --]]
 
-    if player:getGil() < xi.settings.START_GIL then
-       player:setGil(xi.settings.START_GIL)
+    if player:getGil() < xi.settings.main.START_GIL then
+       player:setGil(xi.settings.main.START_GIL)
     end
 
     player:addItem(536) -- adventurer coupon
@@ -163,7 +163,7 @@ xi.player.onGameIn = function(player, firstLogin, zoning)
 
     -- Abyssea starting quest should be flagged when expansion is active
     if
-        xi.settings.ENABLE_ABYSSEA == 1 and
+        xi.settings.main.ENABLE_ABYSSEA == 1 and
         player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_JOURNEY_BEGINS) == QUEST_AVAILABLE
     then
         player:addQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_JOURNEY_BEGINS)

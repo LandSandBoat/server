@@ -20,7 +20,7 @@
 -- 1.00      1.25      1.50
 -----------------------------------
 require("scripts/globals/aftermath")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/weaponskills")
@@ -61,14 +61,14 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     local damage = 0
 
     if target:getObjType() ~= xi.objType.MOB then -- this isn't correct but might as well use what was originally here if someone uses this on a non-mob
-        if xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+        if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
             params.ftp100 = 1 params.ftp200 = 1.5 params.ftp300 = 2.0
         end
 
         damage, calcParams.criticalHit, calcParams.tpHitsLanded, calcParams.extraHitsLanded = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
     else
         local dmg
-        if xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+        if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
             dmg = (target:getCE(player) + target:getVE(player)) / 6
             -- tp affects enmity multiplier, 1.0 at 1k, 1.5 at 2k, 2.0 at 3k. Gorget/Belt adds 100 tp each.
             params.enmityMult = params.enmityMult + (tp + handleWSGorgetBelt(player) * 1000 - 1000) / 2000
@@ -86,7 +86,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
         if player:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID) > 0 then
             damage = damage * (100 + player:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID)) / 100
         end
-        damage = damage * xi.settings.WEAPON_SKILL_POWER
+        damage = damage * xi.settings.main.WEAPON_SKILL_POWER
         calcParams.finalDmg = damage
 
         if damage > 0 then

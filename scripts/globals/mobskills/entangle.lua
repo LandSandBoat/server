@@ -9,7 +9,7 @@
 --        When used by Cernunnos: deals damage, also drains HP equal to the damage inflicted.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}

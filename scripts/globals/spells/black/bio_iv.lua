@@ -2,7 +2,7 @@
 -- Spell: Bio IV
 -- Deals dark damage that weakens an enemy's attacks and gradually reduces its HP.
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/utils")
@@ -54,7 +54,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     spell:setMsg(xi.msg.basic.MAGIC_DMG)
 
     -- Try to kill same tier Dia (default behavior)
-    if xi.settings.DIA_OVERWRITE == 1 and dia ~= nil then
+    if xi.settings.main.DIA_OVERWRITE == 1 and dia ~= nil then
         if dia:getPower() <= 4 then
             target:delStatusEffect(xi.effect.DIA)
         end

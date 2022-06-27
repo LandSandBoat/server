@@ -3,7 +3,7 @@
 -----------------------------------
 require("scripts/globals/events/harvest_festivals")
 require("scripts/globals/missions")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/zone")
 local ID = require("scripts/zones/Bastok_Markets/IDs")
 -----------------------------------
@@ -18,7 +18,7 @@ zone_object.onZoneIn = function(player, prevZone)
 
     -- FIRST LOGIN (START CS)
     if player:getPlaytime(false) == 0 then
-        if xi.settings.NEW_CHARACTER_CUTSCENE == 1 then
+        if xi.settings.main.NEW_CHARACTER_CUTSCENE == 1 then
             cs = 0
         end
         player:setPos(-280, -12, -91, 15)

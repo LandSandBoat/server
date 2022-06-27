@@ -6,7 +6,7 @@
 -- Duration: Instant
 -----------------------------------
 require("scripts/globals/jobpoints")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/items")
 require("scripts/globals/msg")
 require("scripts/globals/quests")

@@ -140,19 +140,19 @@ quest.sections =
                         return quest:progressEvent(127, xi.items.CLUMP_OF_BATAGREENS)
                     end
                 end,
+            },
 
-                onEventFinish =
-                {
-                    [124] = function(player, csid, option, npc)
-                        if npcUtil.giveItem(player, xi.items.CLUMP_OF_BATAGREENS) then
-                            player:confirmTrade()
+            onEventFinish =
+            {
+                [124] = function(player, csid, option, npc)
+                    if npcUtil.giveItem(player, xi.items.CLUMP_OF_BATAGREENS) then
+                        player:confirmTrade()
 
-                            if player:getQuestStatus(quest.areaId, quest.questId) == QUEST_ACCEPTED then
-                                quest:setVar(player, 'Prog', 2)
-                            end
+                        if player:getQuestStatus(quest.areaId, quest.questId) == QUEST_ACCEPTED then
+                            quest:setVar(player, 'Prog', 2)
                         end
-                    end,
-                },
+                    end
+                end,
             },
         },
     },

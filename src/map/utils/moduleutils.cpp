@@ -123,8 +123,6 @@ namespace moduleutils
 
     void LoadLuaModules()
     {
-        sol::state& lua = luautils::lua;
-
         // Load the helper file
         lua.safe_script_file("./modules/module_utils.lua", &sol::script_pass_on_error);
 
@@ -181,7 +179,7 @@ namespace moduleutils
                 if (lua["cmdprops"].valid() && lua["onTrigger"].valid())
                 {
                     auto commandName = path.filename().replace_extension("").generic_string();
-                    ShowScript(fmt::format("Registering module command: !{}", commandName));
+                    ShowDebug(fmt::format("Registering module command: !{}", commandName));
                     CCommandHandler::registerCommand(commandName, relPath);
                     continue;
                 }
@@ -191,13 +189,13 @@ namespace moduleutils
                 if (table["overrides"].valid())
                 {
                     auto moduleName = table.get_or("name", std::string());
-                    ShowScript(fmt::format("=== Module: {} ===", moduleName));
+                    ShowInfo(fmt::format("=== Module: {} ===", moduleName));
                     for (auto& override : table.get_or("overrides", std::vector<sol::table>()))
                     {
                         std::string name = override["name"];
                         sol::object func = override["func"];
 
-                        ShowScript(fmt::format("Preparing override: {}", name));
+                        ShowDebug(fmt::format("Preparing override: {}", name));
 
                         auto parts = split(name, ".");
                         overrides.emplace_back(Override{ filename, name, parts, func, false });
@@ -209,7 +207,6 @@ namespace moduleutils
 
     void TryApplyLuaModules()
     {
-        sol::state& lua = luautils::lua;
         for (auto& override : overrides)
         {
             if (!override.applied)
@@ -229,7 +226,7 @@ namespace moduleutils
 
                     if (part == lastTable)
                     {
-                        ShowScript(fmt::format("Applying override: {}", override.overrideName));
+                        ShowDebug(fmt::format("Applying override: {}", override.overrideName));
 
                         lua["applyOverride"](table, lastElem, override.func, override.overrideName, override.filename);
 

@@ -53,7 +53,7 @@ void call_onRecordTrigger(CCharEntity* PChar, uint16 recordID, const RoeDatagram
 {
     TracyZoneScoped;
     // TODO: Move this Lua interaction into luautils
-    auto onRecordTrigger = luautils::lua["xi"]["roe"]["onRecordTrigger"];
+    auto onRecordTrigger = lua["xi"]["roe"]["onRecordTrigger"];
     if (!onRecordTrigger.valid())
     {
         sol::error err = onRecordTrigger;
@@ -62,7 +62,7 @@ void call_onRecordTrigger(CCharEntity* PChar, uint16 recordID, const RoeDatagram
     }
 
     // Create param table
-    auto params        = luautils::lua.create_table();
+    auto params        = lua.create_table();
     params["progress"] = roeutils::GetEminenceRecordProgress(PChar, recordID);
 
     for (auto& datagram : payload) // Append datagrams to param table
@@ -99,9 +99,9 @@ namespace roeutils
     void init()
     {
         TracyZoneScoped;
-        roeutils::RoeSystem.RoeEnabled   = luautils::lua["xi"]["settings"]["ENABLE_ROE"].get_or(0);
-        luautils::lua["RoeParseRecords"] = &roeutils::ParseRecords;
-        luautils::lua["RoeParseTimed"]   = &roeutils::ParseTimedSchedule;
+        roeutils::RoeSystem.RoeEnabled   = lua["xi"]["settings"]["ENABLE_ROE"].get_or(0);
+        lua["RoeParseRecords"] = &roeutils::ParseRecords;
+        lua["RoeParseTimed"]   = &roeutils::ParseTimedSchedule;
         RoeHandlers.fill(RoeCheckHandler());
     }
 
