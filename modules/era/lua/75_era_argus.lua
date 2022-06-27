@@ -1,5 +1,5 @@
 -----------------------------------
--- Module to revert Argus to 75 eEa repop times and add persistence through crashes.
+-- Module to revert Argus to 75 Era repop times and add persistence through crashes.
 -- Area: Maze of Shakhrami
 --   NM: Argus
 --   NM: Leech King
