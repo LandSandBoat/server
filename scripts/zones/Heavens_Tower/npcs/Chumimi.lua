@@ -6,7 +6,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Heavens_Tower/IDs")
 require("scripts/globals/keyitems")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/titles")
@@ -44,20 +44,20 @@ entity.onTrigger = function(player, npc)
     local mLvl = player:getMainLvl()
     local mJob = player:getMainJob()
 
-    if theThreeMagi == QUEST_AVAILABLE and mJob == xi.job.BLM and mLvl >= xi.settings.AF1_QUEST_LEVEL then
+    if theThreeMagi == QUEST_AVAILABLE and mJob == xi.job.BLM and mLvl >= xi.settings.main.AF1_QUEST_LEVEL then
         player:startEvent(260, 0, 613, 0, 0, 0, 1104) -- Start Quest "The Three Magi" --- NOTE: 5th parameter is "Meteorites" but he doesn't exist ---
     elseif theThreeMagi == QUEST_ACCEPTED then
         player:startEvent(261, 0, 0, 0, 0, 0, 1104) -- During Quest "The Three Magi"
     elseif
         theThreeMagi == QUEST_COMPLETED and
         recollections == QUEST_AVAILABLE and
-        (mJob == xi.job.BLM and mLvl < xi.settings.AF2_QUEST_LEVEL or mJob ~= xi.job.BLM)
+        (mJob == xi.job.BLM and mLvl < xi.settings.main.AF2_QUEST_LEVEL or mJob ~= xi.job.BLM)
     then
         player:startEvent(268) -- New standard dialog after "The Three Magi"
     elseif
         theThreeMagi == QUEST_COMPLETED and
         mJob == xi.job.BLM and
-        mLvl >= xi.settings.AF2_QUEST_LEVEL and
+        mLvl >= xi.settings.main.AF2_QUEST_LEVEL and
         not player:needToZone() and
         recollections == QUEST_AVAILABLE
     then

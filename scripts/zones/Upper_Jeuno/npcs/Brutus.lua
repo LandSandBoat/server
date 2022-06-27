@@ -7,7 +7,7 @@
 local ID = require("scripts/zones/Upper_Jeuno/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/titles")
@@ -32,7 +32,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(70)
 
     -- WINGS OF GOLD
-    elseif pathOfTheBeastmaster == QUEST_COMPLETED and wingsOfGold == QUEST_AVAILABLE and mJob == xi.job.BST and mLvl >= xi.settings.AF1_QUEST_LEVEL then
+    elseif pathOfTheBeastmaster == QUEST_COMPLETED and wingsOfGold == QUEST_AVAILABLE and mJob == xi.job.BST and mLvl >= xi.settings.main.AF1_QUEST_LEVEL then
         if player:getCharVar("wingsOfGold_shortCS") == 1 then
             player:startEvent(137) -- Start Quest "Wings of gold" (Short dialog)
         else
@@ -47,7 +47,7 @@ entity.onTrigger = function(player, npc)
         end
 
     -- SCATTERED INTO SHADOW
-    elseif wingsOfGold == QUEST_COMPLETED and scatteredIntoShadow == QUEST_AVAILABLE and mJob == xi.job.BST and mLvl >= xi.settings.AF2_QUEST_LEVEL then
+    elseif wingsOfGold == QUEST_COMPLETED and scatteredIntoShadow == QUEST_AVAILABLE and mJob == xi.job.BST and mLvl >= xi.settings.main.AF2_QUEST_LEVEL then
         if player:getCharVar("scatIntoShadow_shortCS") == 1 then
             player:startEvent(143)
         else

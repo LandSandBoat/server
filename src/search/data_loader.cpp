@@ -22,6 +22,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "common/logging.h"
 #include "common/mmo.h"
+#include "common/settings.h"
 #include "common/sql.h"
 
 #include <algorithm>
@@ -30,11 +31,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "search.h"
 
 CDataLoader::CDataLoader()
-: sql(std::make_unique<SqlConnection>(search_config.mysql_login.c_str(),
-                                      search_config.mysql_password.c_str(),
-                                      search_config.mysql_host.c_str(),
-                                      search_config.mysql_port,
-                                      search_config.mysql_database.c_str()))
+: sql(std::make_unique<SqlConnection>())
 {
 }
 
@@ -385,7 +382,7 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
         {
             *count = totalResults;
         }
-        ShowMessage("Found %i results, displaying %i. ", totalResults, visibleResults);
+        ShowInfo("Found %i results, displaying %i. ", totalResults, visibleResults);
     }
 
     return PlayersList;
@@ -589,18 +586,14 @@ struct ListingToExpire
 
 void CDataLoader::ExpireAHItems(uint16 expireAgeInDays)
 {
-    ShowMessage(fmt::format("Expiring auction house listings over {} days old", expireAgeInDays).c_str());
+    ShowInfo(fmt::format("Expiring auction house listings over {} days old", expireAgeInDays).c_str());
 
-    auto sql2 = std::make_unique<SqlConnection>(search_config.mysql_login.c_str(),
-                                                search_config.mysql_password.c_str(),
-                                                search_config.mysql_host.c_str(),
-                                                search_config.mysql_port,
-                                                search_config.mysql_database.c_str());
+    auto sql2 = std::make_unique<SqlConnection>();
 
     std::vector<ListingToExpire> listingsToExpire;
 
     std::string qStr = "SELECT T0.id,T0.itemid,T1.stacksize, T0.stack, T0.seller FROM auction_house T0 INNER JOIN item_basic T1 ON \
-                            T0.itemid = T1.itemid WHERE datediff(now(),from_unixtime(date)) >=%u AND buyer_name IS NULL;";
+                            T0.itemid = T1.itemid WHERE datediff(now(),from_unixtime(date)) >= %u AND buyer_name IS NULL;";
 
     int32 ret             = sql2->Query(qStr.c_str(), expireAgeInDays);
     int64 expiredAuctions = sql2->NumRows();
@@ -643,5 +636,5 @@ void CDataLoader::ExpireAHItems(uint16 expireAgeInDays)
             }
         }
     }
-    ShowMessage("Sent %u expired auction house listings back to sellers", expiredAuctions);
+    ShowInfo("Sent %u expired auction house listings back to sellers", expiredAuctions);
 }

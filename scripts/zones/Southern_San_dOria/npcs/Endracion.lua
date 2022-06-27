@@ -3,7 +3,7 @@
 --  NPC: Endracion
 -- !pos -110 1 -34 230
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------

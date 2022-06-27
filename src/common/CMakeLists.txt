@@ -13,9 +13,13 @@ set(COMMON_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/kernel.h
     ${CMAKE_CURRENT_SOURCE_DIR}/logging.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/logging.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/lua.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/lua.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/md52.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/md52.h
     ${CMAKE_CURRENT_SOURCE_DIR}/mmo.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/settings.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/settings.h
     ${CMAKE_CURRENT_SOURCE_DIR}/socket.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/socket.h
     ${CMAKE_CURRENT_SOURCE_DIR}/sql_prepared_stmt.cpp

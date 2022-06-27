@@ -2,7 +2,7 @@
 -- Geocrush
 -- Titan deals Earth elemental damage and stuns target.
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------

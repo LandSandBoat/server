@@ -5,7 +5,7 @@
 -- Recast Time: 1:00 (or next attack)
 -- Duration: 1:00
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 local ability_object = {}

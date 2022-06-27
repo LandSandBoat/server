@@ -9,7 +9,7 @@
 --         ALL 1.0
 -----------------------------------
 require("scripts/globals/status")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/weaponskills")
 -----------------------------------
 local weaponskill_object = {}
@@ -46,7 +46,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
 
     params.formless = true
 
-    if xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES == true then
+    if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES == true then
         params.mnd_wsc = 0.7 + (player:getMerit(xi.merit.REQUIESCAT) * 0.03)
     end
 

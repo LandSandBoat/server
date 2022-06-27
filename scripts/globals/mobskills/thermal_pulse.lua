@@ -7,7 +7,7 @@
 --  Range: 12.5
 --  Notes: Open form only.
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
