@@ -4,6 +4,7 @@
 -- !pos 33.000 0.500 -287.000 190
 -----------------------------------
 local ID = require("scripts/zones/King_Ranperres_Tomb/IDs")
+mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
@@ -38,8 +39,10 @@ entity.onMobDespawn = function(mob)
     local saplingsRespawn = 0
     if mob:getLocalVar("wasKilled") == 1 then
         saplingsRespawn = math.random(216000, 259200) -- 60 to 72 hours
+        SetServerVariable("CherryRespawn",(os.time() + saplingsRespawn))
     else
         saplingsRespawn = math.random(1800, 3600) -- 30 to 60 minutes
+        SetServerVariable("CherryRespawn",(os.time() + saplingsRespawn))
     end
     mob:timer(saplingsRespawn * 1000, function(mobArg) spawnSaplings() end)
 end
