@@ -3838,8 +3838,9 @@ INSERT INTO `mob_skill_lists` VALUES ('Avatar_Leviathan_TSTBW',1182,859); -- Wat
 
 INSERT INTO `mob_skill_lists` VALUES ('Swamfisk',1185,452); -- Screwdriver
 INSERT INTO `mob_skill_lists` VALUES ('Swamfisk',1185,453); -- Water Wall
+INSERT INTO `mob_skill_lists` VALUES ('Barbastelle',1186,392); -- Ultrasonics
 
--- Next available ID: 1186
+-- Next available ID: 1187
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section

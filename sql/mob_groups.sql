@@ -12476,7 +12476,7 @@ INSERT INTO `mob_groups` VALUES (18,3942,190,'Tomb_Bat',660,0,2423,0,0,17,19,0);
 INSERT INTO `mob_groups` VALUES (19,857,190,'Crypt_Ghost',0,128,544,0,0,20,21,0);
 INSERT INTO `mob_groups` VALUES (20,3152,190,'Plague_Bats',660,2,80,0,0,15,17,0);
 INSERT INTO `mob_groups` VALUES (21,5726,190,'Ankou',3600,0,2989,650,650,21,21,0);
-INSERT INTO `mob_groups` VALUES (22,4569,190,'Barbastelle',0,128,2971,0,0,16,19,0);
+INSERT INTO `mob_groups` VALUES (22,4569,190,'Barbastelle',0,128,2971,550,0,16,19,0);
 INSERT INTO `mob_groups` VALUES (23,1690,190,'Goblin_Mugger',660,0,1118,0,0,21,23,0);
 INSERT INTO `mob_groups` VALUES (24,1683,190,'Goblin_Leecher',660,0,1106,0,0,21,23,0);
 INSERT INTO `mob_groups` VALUES (25,1666,190,'Goblin_Gambler',660,0,1080,0,0,21,23,0);
@@ -12489,7 +12489,7 @@ INSERT INTO `mob_groups` VALUES (31,3720,190,'Spartoi_Warrior',960,0,2125,0,0,78
 INSERT INTO `mob_groups` VALUES (32,3719,190,'Spartoi_Sorcerer',960,0,2301,0,0,80,82,0);
 INSERT INTO `mob_groups` VALUES (33,2388,190,'Lemures',960,0,1506,0,0,80,82,0);
 INSERT INTO `mob_groups` VALUES (34,709,190,'Cherry_Sapling',0,128,462,0,0,62,64,0);
-INSERT INTO `mob_groups` VALUES (35,671,190,'Cemetery_Cherry',0,128,442,40000,0,72,73,0);
+INSERT INTO `mob_groups` VALUES (35,671,190,'Cemetery_Cherry',0,128,442,40000,10000,72,73,0);
 INSERT INTO `mob_groups` VALUES (36,244,190,'Bonnet_Beetle',330,0,169,0,0,79,83,0);
 INSERT INTO `mob_groups` VALUES (37,4261,190,'Vrtra',0,128,2592,100000,0,90,90,0);
 INSERT INTO `mob_groups` VALUES (38,3124,190,'Pey',0,128,0,0,0,76,76,0);
@@ -14065,7 +14065,7 @@ INSERT INTO `mob_groups` VALUES (1,6913,262,'Gurgling_Crab',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (2,6914,262,'Famished_Jagil',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (3,6915,262,'Delectable_Orobon',0,128,0,0,0,0,0,0);
 
-INSERT INTO `mob_groups` VALUES (4,5093,262,'Riverwashed_Toad',330,0,2971,0,0,102,110,0);
+INSERT INTO `mob_groups` VALUES (4,5093,262,'Riverwashed_Toad',330,0,0,0,0,102,110,0);
 INSERT INTO `mob_groups` VALUES (5,5094,262,'Zoldeff_Jagil',330,0,2972,0,0,102,110,0);
 INSERT INTO `mob_groups` VALUES (6,5095,262,'Hoary_Craklaw',330,0,2973,0,0,101,104,0);
 INSERT INTO `mob_groups` VALUES (7,4972,262,'Treefrost_Gefyrst',300,0,0,0,500,104,104,0);

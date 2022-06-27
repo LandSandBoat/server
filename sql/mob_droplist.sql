@@ -4047,13 +4047,14 @@ INSERT INTO `mob_droplist` VALUES (441,0,0,1000,15505,@UNCOMMON); -- Dhalmel Whi
 INSERT INTO `mob_droplist` VALUES (441,0,0,1000,4359,90);         -- Slice Of Dhalmel Meat (9.0%)
 
 -- ZoneID: 190 - Cemetery Cherry
-INSERT INTO `mob_droplist` VALUES (442,0,0,1000,700,@ALWAYS);  -- Mahogany Log (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (442,0,0,1000,701,@ALWAYS);  -- Rosewood Log (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (442,0,0,1000,702,@ALWAYS);  -- Ebony Log (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (442,0,0,1000,700,500);      -- Mahogany Log (50.0%)
-INSERT INTO `mob_droplist` VALUES (442,0,0,1000,703,@VCOMMON); -- Petrified Log (Very Common, 24%)
-INSERT INTO `mob_droplist` VALUES (442,0,0,1000,17070,80);     -- Living Rod (8.0%)
-INSERT INTO `mob_droplist` VALUES (442,0,0,1000,722,@RARE);    -- Divine Log (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (442,0,0,1000,700,@VCOMMON);  -- Mahogany Log (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (442,0,0,1000,700,@VCOMMON);  -- Mahogany Log (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (442,0,0,1000,701,@ALWAYS);   -- Rosewood Log (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (442,0,0,1000,701,@VCOMMON);  -- Rosewood Log (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (442,0,0,1000,702,@VCOMMON);  -- Ebony Log (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (442,0,0,1000,703,@VCOMMON);  -- Petrified Log (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (442,0,0,1000,17070,@RARE);   -- Living Rod (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (442,0,0,1000,722,@VRARE);    -- Divine Log (Rare, 1%)
 
 -- ZoneID: 208 - Centurio X-I
 INSERT INTO `mob_droplist` VALUES (443,0,0,1000,1121,760);       -- Antican Robe (76.0%)
@@ -24545,8 +24546,7 @@ INSERT INTO `mob_droplist` VALUES (2970,0,0,1000,846,503); -- Insect Wing (50.3%
 INSERT INTO `mob_droplist` VALUES (2970,0,0,1000,6014,89); -- Celadon Yggrete Shard Iv (8.9%)
 
 -- ZoneID: 190 - Barbastelle
--- ZoneID: 262 - Riverwashed Toad
-INSERT INTO `mob_droplist` VALUES (2971,0,0,1000,17967,330); -- Felling Axe (33.0%)
+INSERT INTO `mob_droplist` VALUES (2971,0,0,1000,17967,@VCOMMON); -- Felling Axe (Very Common, 24%)
 
 -- ZoneID: 262 - Zoldeff Jagil
 INSERT INTO `mob_droplist` VALUES (2972,0,0,1000,868,212); -- Handful Of Pugil Scales (21.2%)
@@ -24612,7 +24612,7 @@ INSERT INTO `mob_droplist` VALUES (2987,0,0,1000,15942,128); -- Summoning Belt (
 INSERT INTO `mob_droplist` VALUES (2988,0,0,1000,16185,@VCOMMON); -- Pelte (Very Common, 24%)
 
 -- ZoneID: 190 - Ankou
-INSERT INTO `mob_droplist` VALUES (2989,0,0,1000,18604,426); -- Astaroth Cane (42.6%)
+INSERT INTO `mob_droplist` VALUES (2989,0,0,1000,18604,@VCOMMON); -- Astaroth Cane (Very Common, 24%)
 
 -- ZoneID:  98 - Hyakinthos
 INSERT INTO `mob_droplist` VALUES (2990,0,0,1000,15850,@RARE); -- Lavas Ring (Rare, 5%)
@@ -24842,7 +24842,7 @@ INSERT INTO `mob_droplist` VALUES (3051,0,0,1000,11404,63); -- Promptitude Solea
 INSERT INTO `mob_droplist` VALUES (3052,0,0,1000,2847,@VCOMMON); -- Blue Jasper (Very Common, 24%)
 
 -- ZoneID: 190 - Gwyllgi
-INSERT INTO `mob_droplist` VALUES (3053,0,0,1000,15940,118); -- Gosha Sarashi (11.8%)
+INSERT INTO `mob_droplist` VALUES (3053,0,0,1000,15940,@COMMON); -- Gosha Sarashi (Common, 15%)
 
 -- ZoneID: 198 - Trembler Tabitha
 INSERT INTO `mob_droplist` VALUES (3054,0,0,1000,2848,@COMMON); -- Grimy Bronze Sheet (Common, 15%)
