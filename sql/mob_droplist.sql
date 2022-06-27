@@ -2788,21 +2788,21 @@ INSERT INTO `mob_droplist` VALUES (275,0,0,1000,1055,@VRARE);    -- Grotto Chest
 INSERT INTO `mob_droplist` VALUES (275,0,0,1000,1055,@VRARE);    -- Grotto Chest Key (Very Rare, 1%)
 
 -- ZoneID: 101 - Bigmouth Billy
-INSERT INTO `mob_droplist` VALUES (276,0,0,1000,643,800);    -- Chunk Of Iron Ore (80.0%)
-INSERT INTO `mob_droplist` VALUES (276,0,0,1000,769,120);    -- Red Rock (12.0%)
-INSERT INTO `mob_droplist` VALUES (276,0,0,1000,770,120);    -- Blue Rock (12.0%)
-INSERT INTO `mob_droplist` VALUES (276,0,0,1000,771,120);    -- Yellow Rock (12.0%)
-INSERT INTO `mob_droplist` VALUES (276,0,0,1000,772,120);    -- Green Rock (12.0%)
-INSERT INTO `mob_droplist` VALUES (276,0,0,1000,773,120);    -- Translucent Rock (12.0%)
-INSERT INTO `mob_droplist` VALUES (276,0,0,1000,774,120);    -- Purple Rock (12.0%)
-INSERT INTO `mob_droplist` VALUES (276,0,0,1000,775,120);    -- Black Rock (12.0%)
-INSERT INTO `mob_droplist` VALUES (276,0,0,1000,776,120);    -- White Rock (12.0%)
-INSERT INTO `mob_droplist` VALUES (276,0,0,1000,768,30);     -- Flint Stone (3.0%)
-INSERT INTO `mob_droplist` VALUES (276,0,0,1000,640,@VRARE); -- Chunk Of Copper Ore (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (276,0,0,1000,642,@VRARE); -- Chunk Of Zinc Ore (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (276,0,0,1000,644,@VRARE); -- Chunk Of Mythril Ore (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (276,0,0,1000,736,@VRARE); -- Chunk Of Silver Ore (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (276,2,0,1000,737,0);      -- Chunk Of Gold Ore (Steal)
+INSERT INTO `mob_droplist` VALUES (276,0,0,1000,643,@VCOMMON);    -- Chunk Of Iron Ore (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (276,0,0,1000,769,@UNCOMMON);  -- Red Rock (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (276,0,0,1000,770,@UNCOMMON);  -- Blue Rock (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (276,0,0,1000,771,@UNCOMMON);  -- Yellow Rock (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (276,0,0,1000,772,@UNCOMMON);  -- Green Rock (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (276,0,0,1000,773,@UNCOMMON);  -- Translucent Rock (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (276,0,0,1000,774,@UNCOMMON);  -- Purple Rock (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (276,0,0,1000,775,@UNCOMMON);  -- Black Rock (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (276,0,0,1000,776,@UNCOMMON);  -- White Rock (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (276,0,0,1000,768,@VRARE);     -- Flint Stone (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (276,0,0,1000,640,@VRARE);     -- Chunk Of Copper Ore (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (276,0,0,1000,642,@VRARE);     -- Chunk Of Zinc Ore (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (276,0,0,1000,644,@VCOMMON);   -- Chunk Of Mythril Ore (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (276,0,0,1000,736,@VRARE);     -- Chunk Of Silver Ore (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (276,2,0,1000,737,0);          -- Chunk Of Gold Ore (Steal)
 
 -- ZoneID:  62 - Big Bomb
 INSERT INTO `mob_droplist` VALUES (277,0,0,1000,17471,420); -- Horrent Mace (42.0%)
@@ -18876,8 +18876,8 @@ INSERT INTO `mob_droplist` VALUES (2363,0,0,1000,3254,@UNCOMMON); -- Ice Wyvern 
 
 -- ZoneID: 101 - Swamfisk
 INSERT INTO `mob_droplist` VALUES (2364,0,0,1000,17594,@ALWAYS); -- Gelong Staff (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (2364,0,0,1000,868,60);        -- Handful Of Pugil Scales (6.0%)
-INSERT INTO `mob_droplist` VALUES (2364,0,0,1000,4484,20);       -- Shall Shell (2.0%)
+INSERT INTO `mob_droplist` VALUES (2364,0,0,1000,868,@VCOMMON);  -- Handful Of Pugil Scales (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2364,0,0,1000,4484,@COMMON);  -- Shall Shell (Common, 15%)
 
 -- ZoneID: 176 - Swamp Sahagin
 INSERT INTO `mob_droplist` VALUES (2365,0,0,1000,888,310); -- Seashell (31.0%)
@@ -24638,7 +24638,7 @@ INSERT INTO `mob_droplist` VALUES (2996,0,0,1000,15614,@UNCOMMON); -- Exorcist H
 INSERT INTO `mob_droplist` VALUES (2996,0,0,1000,18841,@UNCOMMON); -- Templar Mace (Uncommon, 10%)
 
 -- ZoneID: 101 - Rambukk
-INSERT INTO `mob_droplist` VALUES (2997,0,0,1000,2851,273); -- Bukktooth (27.3%)
+INSERT INTO `mob_droplist` VALUES (2997,0,0,1000,2851,@VCOMMON); -- Bukktooth (Very Common, 24%)
 
 -- ZoneID: 103 - Hippomaritimus
 INSERT INTO `mob_droplist` VALUES (2998,0,0,1000,11339,340); -- Channeling Robe (34.0%)

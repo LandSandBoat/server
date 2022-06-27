@@ -7147,7 +7147,7 @@ INSERT INTO `mob_groups` VALUES (22,1744,101,'Goblin_Weaver',330,0,1183,0,0,4,8,
 INSERT INTO `mob_groups` VALUES (23,1214,101,'Enchanted_Bones_blm',330,1,769,0,0,4,8,0);
 INSERT INTO `mob_groups` VALUES (24,490,101,'Bomb',330,8,216,0,0,8,10,0);
 INSERT INTO `mob_groups` VALUES (25,3818,101,'Swamfisk',0,32,2364,0,0,11,15,0);
-INSERT INTO `mob_groups` VALUES (26,414,101,'Bigmouth_Billy',0,32,276,0,0,9,10,0);
+INSERT INTO `mob_groups` VALUES (26,414,101,'Bigmouth_Billy',0,32,276,400,0,9,10,0);
 INSERT INTO `mob_groups` VALUES (27,1648,101,'Goblin_Digger',330,0,1039,0,0,5,8,0);
 INSERT INTO `mob_groups` VALUES (28,3148,101,'Pixie',0,128,2001,0,0,53,55,0);
 INSERT INTO `mob_groups` VALUES (29,1479,101,'Gawky_Gawain',0,128,0,0,0,1,1,0);
