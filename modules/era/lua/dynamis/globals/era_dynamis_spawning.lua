@@ -506,7 +506,7 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
         {
             ["onMobSpawn"] = {function(mob) xi.dynamis.setMobStats(mob) mob:setRoamFlags(xi.roamFlag.NONE) end},
             ["onMobEngaged"] = {function(mob, target) xi.dynamis.parentOnEngaged(mob, target) end},
-            ["onMobFight"] = {function(mob) xi.dynamis.statueOnFight(mob) end},
+            ["onMobFight"] = {function(mob) end},
             ["onMobRoam"] = {function(mob) end},
             ["mixins"] = { }
         },
@@ -571,7 +571,7 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
     end
     if oMob ~= nil and oMob ~= 0 then
         mob:setLocalVar("Parent", oMob:getID())
-        if forceLink == 1 then mob:updateEnmity(oMob:getTarget()) end
+        if forceLink == true then mob:updateEnmity(oMob:getTarget()) end
     end
 end
 
