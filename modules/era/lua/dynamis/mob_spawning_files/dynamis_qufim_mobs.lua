@@ -139,23 +139,23 @@ xi.dynamis.mobList[zoneID][37 ].info = {"Statue", "Goblin Replica", "Goblin", ni
 xi.dynamis.mobList[zoneID][38 ].info = {"Statue", "Goblin Replica", "Goblin", nil, nil}         -- (038-G)
 xi.dynamis.mobList[zoneID][39 ].info = {"Statue", "Goblin Replica", "Goblin", nil, nil}         -- (039-G)
 -- Sea Monk NM Area
-xi.dynamis.mobList[zoneID][43 ].info = {"Elemental", "Water Elemental", nil, nil, "water_killed"}          -- (043) (Reduces Antaeus' resistance to water)
-xi.dynamis.mobList[zoneID][40 ].info = {"NM", "Scolopendra", nil, nil, "scolopendra_killed"}                     -- (040) (Reduces Antaeus' HP regeneration rate)
+xi.dynamis.mobList[zoneID][43 ].info = {"Elemental", "Water Elemental", nil, nil, "water_killed"}       -- (043) (Reduces Antaeus' resistance to water)
+xi.dynamis.mobList[zoneID][40 ].info = {"NM", "Scolopendra", nil, nil, "scolopendra_killed"}            -- (040) (Reduces Antaeus' HP regeneration rate)
 -- Southwest Area
-xi.dynamis.mobList[zoneID][44 ].info = {"Elemental", "Fire Elemental", nil, nil, "fire_killed"}           -- (044) (Reduces Antaeus' resistance to fire)
+xi.dynamis.mobList[zoneID][44 ].info = {"Elemental", "Fire Elemental", nil, nil, "fire_killed"}         -- (044) (Reduces Antaeus' resistance to fire)
 -- Giant Bat Area
-xi.dynamis.mobList[zoneID][45 ].info = {"Elemental", "Thunder Elemental", nil, nil, "thunder_killed"}        -- (045) (Reduces Antaeus' resistance to thunder)
-xi.dynamis.mobList[zoneID][41 ].info = {"NM", "Stringes", nil, nil, "stringes_killed"}                        -- (041) (Reduces Antaeus' physical attack damage)
+xi.dynamis.mobList[zoneID][45 ].info = {"Elemental", "Thunder Elemental", nil, nil, "thunder_killed"}   -- (045) (Reduces Antaeus' resistance to thunder)
+xi.dynamis.mobList[zoneID][41 ].info = {"NM", "Stringes", nil, nil, "stringes_killed"}                  -- (041) (Reduces Antaeus' physical attack damage)
 -- Northeast Area
-xi.dynamis.mobList[zoneID][46 ].info = {"Elemental", "Air Elemental", nil, nil, "air_killed"}            -- (046) (Reduces Antaeus' resistance to wind)
-xi.dynamis.mobList[zoneID][47 ].info = {"Elemental", "Light Elemental", nil, nil, "light_killed"}          -- (047) (Reduces Antaeus' resistance to light)
+xi.dynamis.mobList[zoneID][46 ].info = {"Elemental", "Air Elemental", nil, nil, "air_killed"}           -- (046) (Reduces Antaeus' resistance to wind)
+xi.dynamis.mobList[zoneID][47 ].info = {"Elemental", "Light Elemental", nil, nil, "light_killed"}       -- (047) (Reduces Antaeus' resistance to light)
 -- Boss Area
-xi.dynamis.mobList[zoneID][48 ].info = {"Elemental", "Ice Elemental", nil, nil, "ice_killed"}            -- (048) (Reduces Antaeus' resistance to ice)
-xi.dynamis.mobList[zoneID][64 ].info = {"NM", "Antaeus", nil, nil, "MegaBoss_Killed"}           -- (064) (Spawns 065-138)
+xi.dynamis.mobList[zoneID][48 ].info = {"Elemental", "Ice Elemental", nil, nil, "ice_killed"}           -- (048) (Reduces Antaeus' resistance to ice)
+xi.dynamis.mobList[zoneID][64 ].info = {"NM", "Antaeus", nil, nil, "MegaBoss_Killed"}                   -- (064) (Spawns 065-138)
 -- Golem NM Area
-xi.dynamis.mobList[zoneID][49 ].info = {"Elemental", "Earth Elemental", nil, nil, "earth_killed"}          -- (049) (Reduces Antaeus' resistance to earth)
-xi.dynamis.mobList[zoneID][50 ].info = {"Elemental", "Dark Elemental", nil, nil, "dark_killed"}           -- (050) (Reduces Antaeus' resistance to dark)
-xi.dynamis.mobList[zoneID][42 ].info = {"NM", "Suttung", nil, nil, "suttung_killed"}                         -- (042) (Reduces Antaeus' magic damage resistance)
+xi.dynamis.mobList[zoneID][49 ].info = {"Elemental", "Earth Elemental", nil, nil, "earth_killed"}       -- (049) (Reduces Antaeus' resistance to earth)
+xi.dynamis.mobList[zoneID][50 ].info = {"Elemental", "Dark Elemental", nil, nil, "dark_killed"}         -- (050) (Reduces Antaeus' resistance to dark)
+xi.dynamis.mobList[zoneID][42 ].info = {"NM", "Suttung", nil, nil, "suttung_killed"}                    -- (042) (Reduces Antaeus' magic damage resistance)
 -- Nightmare Stirge
 xi.dynamis.mobList[zoneID][51 ].info = {"Nightmare", "Nightmare Stirge", nil, nil, nil}  -- 051-Nightmare Stirge (×4)
 xi.dynamis.mobList[zoneID][244].info = {"Nightmare", "Nightmare Stirge", nil, nil, nil}  --
@@ -625,8 +625,8 @@ xi.dynamis.mobList[zoneID][70 ].mobchildren = {   1, nil, nil,   1,   1, nil, ni
 -- xi.dynamis.mobList[zoneID][MobIndex].nmchildren = {MobIndex(NM1), MobIndex(NM2), MobIndex(NM3)}
 -- boolean value = forceLink true/false
 
--- Nightmares
 -- Wave 1
+xi.dynamis.mobList[zoneID][64 ].nmchildren = { true, 28, 29, 30, 31        } -- ( 064 ) Gigas NM (Antaeus) (Spawns 065-138)
 xi.dynamis.mobList[zoneID][51 ].nmchildren = { true, 244, 245, 246         } -- ( 051 ) Nightmare Stirge (×4)
 xi.dynamis.mobList[zoneID][52 ].nmchildren = { true, 247, 248, 249         } -- ( 052 ) Nightmare Stirge (×4)
 xi.dynamis.mobList[zoneID][53 ].nmchildren = { true, 250, 251, 252         } -- ( 053 ) Nightmare Stirge (×4)
@@ -719,7 +719,7 @@ xi.dynamis.mobList[zoneID][2  ].pos = { -249.283, -19.988, 45.831, 6    } -- (00
 xi.dynamis.mobList[zoneID][3  ].pos = { -207.631, -19.944, 106.263, 28  } -- (003-Q) Adamantking Effigy
 xi.dynamis.mobList[zoneID][4  ].pos = { -193.663, -19.635, 131.329, 68  } -- (004-Q) Adamantking Effigy
 xi.dynamis.mobList[zoneID][5  ].pos = { -205.758, -20.089, 162.879, 203 } -- (005-Q) Adamantking Effigy
-xi.dynamis.mobList[zoneID][6  ].pos = { -118.681, 20.019, 195.651, 27   } -- (006-Q) Adamantking Effigy
+xi.dynamis.mobList[zoneID][6  ].pos = { -118.681, -20.019, 195.651, 27   } -- (006-Q) Adamantking Effigy
 xi.dynamis.mobList[zoneID][7  ].pos = { -116.667, -19.829, 207.454, 48  } -- (007-Q) Adamantking Effigy
 xi.dynamis.mobList[zoneID][8  ].pos = { -1.307, -19.138, -17.269, 129   } -- (008-Y) Manifest Icon
 xi.dynamis.mobList[zoneID][9  ].pos = { 13.437, -20.824, -21.301, 128   } -- (009-Y) Manifest Icon
@@ -770,8 +770,9 @@ xi.dynamis.mobList[zoneID][52 ].pos = { 21.479, -19.832, 153.201, 79    } -- ( 0
 xi.dynamis.mobList[zoneID][53 ].pos = { -60.969, -19.775, 153.545, 54   } -- ( 053 ) Nightmare Stirge (×4)
 xi.dynamis.mobList[zoneID][62 ].pos = { 143.273, 21.394, -348.023, 144  } -- ( 062 ) Nightmare Stirge (×3)
 xi.dynamis.mobList[zoneID][63 ].pos = { 153.181, 20.601, -370.837, 193  } -- ( 063 ) Nightmare Stirge (×4)
+xi.dynamis.mobList[zoneID][63 ].pos = { 153.181, 20.601, -370.837, 193  } -- ( 063 ) Nightmare Stirge (×4)
 xi.dynamis.mobList[zoneID][61 ].pos = { 153.580, -19.718, -20.217, 128  } -- ( 061 ) Nightmare Roc (×3)
-xi.dynamis.mobList[zoneID][48 ].pos = { -221.369, -19.805, 437.399, 56  } -- ( 048 ) Ice Elemental
+xi.dynamis.mobList[zoneID][58 ].pos = { -221.369, -19.805, 437.399, 56  } -- ( 058 ) Nightmare Roc (×3)
 xi.dynamis.mobList[zoneID][54 ].pos = { -136.073, -20.377, 344.4214, 102} -- ( 054 ) Nightmare Snoll (×4)
 xi.dynamis.mobList[zoneID][55 ].pos = { -132.776, -19.527, 320.005, 118 } -- ( 055 ) Nightmare Snoll (×4)
 xi.dynamis.mobList[zoneID][56 ].pos = { -156.819, -20.000, 362.471, 98  } -- ( 056 ) Nightmare Snoll (×4)
