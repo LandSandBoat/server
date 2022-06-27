@@ -4,7 +4,7 @@
 local ID = require("scripts/zones/Port_Bastok/IDs")
 require("scripts/globals/conquest")
 require("scripts/globals/missions")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/zone")
 -----------------------------------
 local zone_object = {}
@@ -24,7 +24,7 @@ zone_object.onZoneIn = function(player, prevZone)
 
     -- FIRST LOGIN (START CS)
     if player:getPlaytime(false) == 0 then
-        if xi.settings.NEW_CHARACTER_CUTSCENE == 1 then
+        if xi.settings.main.NEW_CHARACTER_CUTSCENE == 1 then
             cs = 1
         end
         player:setPos(132, -8.5, -13, 179)

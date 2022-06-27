@@ -1,7 +1,7 @@
 require("scripts/globals/spell_data")
 require("scripts/globals/jobpoints")
 require("scripts/globals/magicburst")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
@@ -512,9 +512,13 @@ function applyResistanceAddEffect(player, target, element, bonus)
 end
 
 function getMagicHitRate(caster, target, skillType, element, percentBonus, bonusAcc)
-    -- resist everything if magic shield is active
-    if target:hasStatusEffect(xi.effect.MAGIC_SHIELD, 0) then
-        return 0
+    -- resist everything if real magic shield is active (see effects/magic_shield)
+    if target:hasStatusEffect(xi.effect.MAGIC_SHIELD) then
+        local magicshieldsub = target:getStatusEffect(xi.effect.MAGIC_SHIELD)
+
+        if magicshieldsub:getSubPower() == 0 then
+            return 0
+        end
     end
 
     if bonusAcc == nil then
@@ -685,13 +689,13 @@ end
 
     local skill = spell:getSkillType()
     if skill == xi.skill.ELEMENTAL_MAGIC then
-        dmg = dmg * xi.settings.ELEMENTAL_POWER
+        dmg = dmg * xi.settings.main.ELEMENTAL_POWER
     elseif skill == xi.skill.DARK_MAGIC then
-        dmg = dmg * xi.settings.DARK_POWER
+        dmg = dmg * xi.settings.main.DARK_POWER
     elseif skill == xi.skill.NINJUTSU then
-        dmg = dmg * xi.settings.NINJUTSU_POWER
+        dmg = dmg * xi.settings.main.NINJUTSU_POWER
     elseif skill == xi.skill.DIVINE_MAGIC then
-        dmg = dmg * xi.settings.DIVINE_POWER
+        dmg = dmg * xi.settings.main.DIVINE_POWER
     end
 
     dmg = target:magicDmgTaken(dmg)
@@ -1102,7 +1106,7 @@ function doElementalNuke(caster, spell, target, spellParams)
     local baseValue = 0
     local tierMultiplier = 0
 
-    if xi.settings.USE_OLD_MAGIC_DAMAGE and spellParams.V ~= nil and spellParams.M ~= nil then
+    if xi.settings.main.USE_OLD_MAGIC_DAMAGE and spellParams.V ~= nil and spellParams.M ~= nil then
         baseValue = spellParams.V -- Base value
         tierMultiplier = spellParams.M -- Tier multiplier
         local inflectionPoint = spellParams.I -- Inflection point

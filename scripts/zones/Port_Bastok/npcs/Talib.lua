@@ -4,7 +4,7 @@
 -- Starts Quest: Beauty and the Galka
 -- Starts & Finishes Quest: Shady Business
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/shop")
 require("scripts/globals/quests")
@@ -65,8 +65,8 @@ entity.onEventFinish = function(player, csid, option)
         end
 
         player:tradeComplete()
-        player:addGil(xi.settings.GIL_RATE * 350)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 350)
+        player:addGil(xi.settings.main.GIL_RATE * 350)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 350)
     end
 end
 

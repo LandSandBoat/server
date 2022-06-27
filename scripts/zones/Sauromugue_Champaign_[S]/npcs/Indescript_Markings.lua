@@ -7,7 +7,7 @@
 require("scripts/globals/campaign")
 require("scripts/globals/titles")
 require("scripts/globals/quests")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 

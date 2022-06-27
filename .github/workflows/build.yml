@@ -351,12 +351,9 @@ jobs:
           mysql xidb -h 127.0.0.1 -uroot -proot < $f
         done
         mysql xidb -h 127.0.0.1 -uroot -proot -e "SHOW tables"
-    - name: Copy confs
-      run: |
-        cp conf/default/* conf/
     - name: Copy settings
       run: |
-        cp scripts/settings/default/* scripts/settings/
+        cp settings/default/* settings/
     - name: Enable Modules
       shell: bash
       run: |
@@ -500,12 +497,9 @@ jobs:
     - name: Assign odd zones a different port
       run: |
         mysql xidb -h 127.0.0.1 -uroot -proot -e "UPDATE xidb.zone_settings SET zoneport = 54231 WHERE zoneid % 2 = 0;"
-    - name: Copy confs
-      run: |
-        cp conf/default/* conf/
     - name: Copy settings
       run: |
-        cp scripts/settings/default/* scripts/settings/
+        cp settings/default/* settings/
     - name: Startup checks
       env:
         MYSQL_HOST: mysql
@@ -576,12 +570,9 @@ jobs:
     - uses: zach2good/setup-mariadb@v1
       with:
           database: xidb
-    - name: Copy confs
-      run: |
-        cp conf/default/* conf/
     - name: Copy settings
       run: |
-        cp scripts/settings/default/* scripts/settings/
+        cp settings/default/* settings/
     - name: Install Python Dependencies
       run: |
         pip install -r tools/requirements.txt

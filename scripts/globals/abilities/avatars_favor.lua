@@ -2,7 +2,7 @@
 ---------------------------------------------
 -- Avatars Favor - Ability
 ---------------------------------------------
-require("scripts/settings/main")
+require("settings/main")
 require("scripts/globals/status")
 ---------------------------------------------
 local ability_object = {}

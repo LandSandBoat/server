@@ -125,11 +125,12 @@ namespace zoneutils
 
     CBaseEntity* GetEntity(uint32 ID, uint8 filter)
     {
-        uint16 zoneID = (ID >> 12) & 0x0FFF;
-        CZone* PZone  = GetZone(zoneID);
+        const uint16 DynamicEntityStart  = 0x700;
+        uint16 zoneID                    = (ID >> 12) & 0x0FFF;
+        CZone* PZone                     = GetZone(zoneID);
         if (PZone)
         {
-            return PZone->GetEntity((uint16)(ID & 0x0FFF), filter);
+            return PZone->GetEntity((uint16)(ID & 0x00000800 ? (ID & 0x7FF) + DynamicEntityStart : ID & 0xFFF), filter);
         }
         else
         {
@@ -621,7 +622,7 @@ namespace zoneutils
         }
         else
         {
-            ShowFatalError("zoneutils::CreateZone: Cannot load zone settings (%u)", ZoneID);
+            ShowCritical("zoneutils::CreateZone: Cannot load zone settings (%u)", ZoneID);
             return nullptr;
         }
     }
@@ -653,7 +654,7 @@ namespace zoneutils
         }
         else
         {
-            ShowFatalError("Unable to load any zones! Check IP and port params");
+            ShowCritical("Unable to load any zones! Check IP and port params");
             do_final(EXIT_FAILURE);
         }
 
@@ -1069,7 +1070,7 @@ namespace zoneutils
         }
         else
         {
-            ShowFatalError("zoneutils::GetZoneIPP: Cannot find zone %u", zoneID);
+            ShowCritical("zoneutils::GetZoneIPP: Cannot find zone %u", zoneID);
         }
         return ipp;
     }

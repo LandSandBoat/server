@@ -198,7 +198,7 @@ int32 makeConnection(uint32 ip, uint16 port, int32 type)
     remote_address.sin_addr.s_addr = htonl(ip);
     remote_address.sin_port        = htons(port);
 
-    ShowStatus("Connecting to %d.%d.%d.%d:%i", CONVIP(ip), port);
+    ShowInfo("Connecting to %d.%d.%d.%d:%i", CONVIP(ip), port);
 
     result = sConnect(fd, (struct sockaddr*)(&remote_address), sizeof(struct sockaddr_in));
     if (result == SOCKET_ERROR)
@@ -982,7 +982,7 @@ void socket_init_tcp()
         return;
     }
 
-    const char* SOCKET_CONF_FILENAME = "./conf/packet_tcp.conf";
+    const char* SOCKET_CONF_FILENAME = "./src/common/packet_tcp.conf";
     socket_config_read(SOCKET_CONF_FILENAME);
     // sessions[0] is now currently used for disconnected sessions of the map server, and as such,
     // should hold enough buffer (it is a vacuum so to speak) as it is never flushed. [Skotlex]
@@ -1185,7 +1185,7 @@ void socket_init_udp()
     {
         return;
     }
-    const char* SOCKET_CONF_FILENAME = "./conf/packet_udp.conf";
+    const char* SOCKET_CONF_FILENAME = "./src/common/packet_udp.conf";
     socket_config_read(SOCKET_CONF_FILENAME);
 }
 

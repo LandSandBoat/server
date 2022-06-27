@@ -309,6 +309,7 @@ enum class Mod
 
     // Warrior
     DOUBLE_ATTACK      = 288, // Percent chance to proc
+    DOUBLE_ATTACK_DMG  = 1038, // Increases "Double Attack" damage/"Double Attack" damage + (in percents, e.g. +20 = +20% damage)
     WARCRY_DURATION    = 483, // Warcy duration bonus from gear
     BERSERK_EFFECT     = 948, // Conqueror Berserk Effect
     BERSERK_DURATION   = 954, // Berserk Duration
@@ -317,8 +318,8 @@ enum class Mod
 
     // Monk
     BOOST_EFFECT        = 97,   // Boost power in tenths
-    CHAKRA_MULT         = 1026,  // Chakra multiplier increase (from gear)
-    CHAKRA_REMOVAL      = 1027,  // Extra statuses removed by Chakra
+    CHAKRA_MULT         = 1026, // Chakra multiplier increase (from gear)
+    CHAKRA_REMOVAL      = 1027, // Extra statuses removed by Chakra
     SUBTLE_BLOW         = 289,  // How much TP to reduce.
     COUNTER             = 291,  // Percent chance to counter
     KICK_ATTACK_RATE    = 292,  // Percent chance to kick
@@ -356,6 +357,7 @@ enum class Mod
     DESPOIL           = 896, // Increases THF Despoil chance
     PERFECT_DODGE     = 883, // Increases Perfect Dodge duration in seconds
     TRIPLE_ATTACK     = 302, // Percent chance
+    TRIPLE_ATTACK_DMG = 1039, // Increases "Triple Attack" damage/"Triple Attack" damage + (in percents, e.g. +20 = +20% damage)
     TREASURE_HUNTER   = 303, // Percent chance
     SNEAK_ATK_DEX     = 830, // % DEX boost to Sneak Attack (if gear mod, needs to be equipped on hit)
     TRICK_ATK_AGI     = 520, // % AGI boost to Trick Attack (if gear mod, needs to be equipped on hit)
@@ -680,8 +682,8 @@ enum class Mod
     WYVERN_BREATH = 402, //
 
     // Gear set modifiers
-    DA_DOUBLE_DAMAGE         = 408, // Double attack's double damage chance %.
-    TA_TRIPLE_DAMAGE         = 409, // Triple attack's triple damage chance %.
+    DA_DOUBLE_DMG_RATE       = 408, // Double attack's double damage chance %.
+    TA_TRIPLE_DMG_RATE       = 409, // Triple attack's triple damage chance %.
     ZANSHIN_DOUBLE_DAMAGE    = 410, // Zanshin's double damage chance %.
     RAPID_SHOT_DOUBLE_DAMAGE = 479, // Rapid shot's double damage chance %.
     ABSORB_DMG_CHANCE        = 480, // Chance to absorb damage %
@@ -897,7 +899,7 @@ enum class Mod
     // 888
     // 936
     //
-    // SPARE = 1038, and onward
+    // SPARE = 1040, and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

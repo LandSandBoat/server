@@ -6,7 +6,7 @@
 -- Notes: Damage is based on remaining HP
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}
