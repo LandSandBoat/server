@@ -2828,8 +2828,7 @@ sol::table CLuaBaseEntity::getTeleportTable(uint8 type)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    sol::state_view lua       = lua;
-    sol::table      teleTable = lua.create_table();
+    sol::table teleTable = lua.create_table();
 
     TELEPORT_TYPE tele_type = static_cast<TELEPORT_TYPE>(type);
     CCharEntity*  PChar     = (CCharEntity*)m_PBaseEntity;

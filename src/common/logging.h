@@ -37,6 +37,13 @@
 #include "spdlog/fmt/bundled/printf.h"
 #include "spdlog/fmt/fmt.h"
 
+// Forward declaration
+namespace settings
+{
+    template <typename T>
+    T get(std::string);
+} // settings
+
 namespace logging
 {
     void InitializeLog(std::string serverName, std::string logFile, bool appendDate);
@@ -49,13 +56,13 @@ namespace logging
 #define ShowTrace(...)    { auto _msgStr = fmt::sprintf(__VA_ARGS__); TracyMessageStr(_msgStr); SPDLOG_LOGGER_TRACE(spdlog::get("trace"), _msgStr); }
 #define ShowDebug(...)    { auto _msgStr = fmt::sprintf(__VA_ARGS__); TracyMessageStr(_msgStr); SPDLOG_LOGGER_DEBUG(spdlog::get("debug"), _msgStr); }
 #define ShowInfo(...)     { auto _msgStr = fmt::sprintf(__VA_ARGS__); TracyMessageStr(_msgStr); SPDLOG_LOGGER_INFO(spdlog::get("info"), _msgStr); }
-#define ShowWarning(...)  { auto _msgStr = fmt::sprintf(__VA_ARGS__); TracyMessageStr(_msgStr); SPDLOG_LOGGER_WARN(spdlog::get("warning"), _msgStr); }
+#define ShowWarning(...)  { auto _msgStr = fmt::sprintf(__VA_ARGS__); TracyMessageStr(_msgStr); SPDLOG_LOGGER_WARN(spdlog::get("warn"), _msgStr); }
 #define ShowError(...)    { auto _msgStr = fmt::sprintf(__VA_ARGS__); TracyMessageStr(_msgStr); SPDLOG_LOGGER_ERROR(spdlog::get("error"), _msgStr); }
 #define ShowCritical(...) { auto _msgStr = fmt::sprintf(__VA_ARGS__); TracyMessageStr(_msgStr); SPDLOG_LOGGER_CRITICAL(spdlog::get("critical"), _msgStr); }
 
 // Trace Loggers
-#define TraceNavmesh(...) { if (settings::get<bool>("logging.TRACE_NAVMESH")) { ShowTrace(...); } }
-#define TracePackets(...) { if (settings::get<bool>("logging.TRACE_PACKETS")) { ShowTrace(...); } }
+#define TraceNavmesh(...) { if (settings::get<bool>("logging.TRACE_NAVMESH")) { ShowTrace(__VA_ARGS__); } }
+#define TracePackets(...) { if (settings::get<bool>("logging.TRACE_PACKETS")) { ShowTrace(__VA_ARGS__); } }
 
 // clang-format on
 
