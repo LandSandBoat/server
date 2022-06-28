@@ -11,6 +11,102 @@ local m = Module:new("catseyexi_custom_npcs")
 --           RU'LUDE GARDENS               --
 ---------------------------------------------
 m:addOverride("xi.zones.RuLude_Gardens.Zone.onInitialize", function(zone)
+    require("scripts/globals/status")
+    local ID = require("scripts/zones/RuLude_Gardens/IDs")
+    -- Call the zone's original function for onInitialize
+    super(zone)
+    
+    local sylvie = zone:insertDynamicEntity({
+    objtype  = xi.objType.NPC,
+    name     = "Sylvie",
+    look     = "0x01000F0234113421343134413451006000707180",
+    x        = 4.20,
+    y        = 3.100,
+    z        = 111.905,
+    rotation = 128,
+    widescan = 1,
+
+    onTrade = function(player, npc, trade)
+	    local geoUnlocked = player:getCharVar("GEO_Unlocked")
+
+        if npcUtil.tradeHasExactly(trade, { 15194 }) then
+            npc:timer(1500, function(npcArg)
+                player:PrintToPlayer("Sylvie: With the powers channeled through Altana, I now pronounce you a Geomancer!", 0xD)
+            end)
+			
+            npc:timer(1500, function(npcArg)
+                player:setAnimation(101)
+                player:PrintToPlayer("Congratulations! You have unlocked \"Geomancer\"!")
+            end)
+
+            player:changeJob(xi.job.GEO)
+            player:setLevel(1)
+
+            npc:timer(2500, function(npcArg)
+			    player:setCharVar("GEO_Unlocked", 1)
+                player:setAnimation(0)
+                player:addKeyItem(2290)
+				player:messageSpecial( ID.text.KEYITEM_OBTAINED, 2290 )
+                player:addKeyItem(2963)
+				player:messageSpecial( ID.text.KEYITEM_OBTAINED, 2963 )
+				player:addItem(21460)
+                player:messageSpecial( ID.text.ITEM_OBTAINED, 21460 ) -- Give Matre Bell
+            end)
+        end
+    end,
+
+    onTrigger = function(player, npc)
+	    local geoUnlocked = player:getCharVar("GEO_Unlocked")
+		
+		if geoUnlocked == 1 then 
+            local stock =
+            {
+                6074,    1000,  -- Indi-Poison
+                6088,    3720,  -- Indi-Voidance
+                6087,   11400,  -- Indi-Precision
+                6073,   23350,  -- Indi-Regen
+                6090,   24250,  -- Indi-Attunement
+                6089,   66920,  -- Indi-Focus
+                6084,  109260,  -- Indi-Barrier
+                6075,  210000,  -- Indi-Refresh
+                6082,  210000,  -- Indi-CHR
+                6081,  239400,  -- Indi-MND
+                6083,  252700,  -- Indi-Fury
+                6080,  309120,  -- Indi-INT
+                6079,  326400,  -- Indi-AGI
+                6086,  340000,  -- Indi-Fend
+                6078,  337400,  -- Indi-VIT
+                6077,  364400,  -- Indi-DEX
+                6085,  320800,  -- Indi-Acumen
+                6076,  434600,  -- Indi-STR
+                6099,  434600,  -- Indi-Slow
+                6096,  418750,  -- Indi-Torpor
+                6095,  531600,  -- Indi-Slip
+                6098,  541850,  -- Indi-Languor
+                6100,  503040,  -- Indi-Paralysis
+                6097,  540000,  -- Indi-Vex
+				4916,   34000,  -- Fira
+				4924,   54600,  -- Thundara
+				4918,   46440,  -- Blizzara
+				4920,   26600,  -- Aerora
+				4922,   22490,  -- Stonera
+				4923,  256000,  -- Stonera_II
+				4926,   21000,  -- Watera
+				4927,  255000,  -- Water_II
+            }
+		    
+            player:PrintToPlayer("Welcome to the Geomancer magic shop!", 0, npc:getPacketName())
+            xi.shop.general(player, stock)
+		else
+            player:PrintToPlayer("sylvie: Think you got what it takes to become a Geomancer? I need to see some evidence of your mastery over the original 15 Zilart jobs first!", 0xD)
+		end	
+    end,
+    })
+
+    utils.unused(sylvie)
+end)
+
+m:addOverride("xi.zones.RuLude_Gardens.Zone.onInitialize", function(zone)
     local ID = require("scripts/zones/RuLude_Gardens/IDs")
     -- Call the zone's original function for onInitialize
     super(zone)
