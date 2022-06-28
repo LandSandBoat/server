@@ -234,6 +234,17 @@ namespace luautils
         CacheLuaObjectFromFile("./scripts/globals/pets/luopan.lua");
         CacheLuaObjectFromFile("./scripts/globals/pets/wyvern.lua");
 
+        if (gLoadAllLua) // Load and cache _all_ lua files (for sanity testing, no need for during regular use)
+        {
+            for (auto entry : std::filesystem::recursive_directory_iterator("./scripts"))
+            {
+                if (entry.path().extension() == ".lua")
+                {
+                    CacheLuaObjectFromFile(entry.path().relative_path().generic_string());
+                }
+            }
+        }
+
         // Handle settings
         contentRestrictionEnabled = GetSettingsVariable("RESTRICT_CONTENT") != 0;
 
