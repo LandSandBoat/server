@@ -38,24 +38,4 @@
 
 catseyexi/lua
 catseyexi/sql
-#custom/lua/test_npcs_in_gm_home.lua
-#catseyexi/lua/abc_rewards.lua
-#catseyexi/lua/catseyexi_custom_npcs.lua
-#catseyexi/lua/crafting_relics.lua
-#catseyexi/lua/curio_vendor_moogle_assault_badges.lua
-#catseyexi/lua/disable_title_changers.lua
-#catseyexi/lua/discount_assault_gear.lua
-#catseyexi/lua/domain_invasion.lua
-#catseyexi/lua/dynamis_singles_for_hundos.lua
-#catseyexi/lua/enable_blu_transformations.lua
-#catseyexi/lua/kupo_shield.lua
-#catseyexi/lua/mythic_weapon.lua
-#catseyexi/lua/mythic_weaponskills.lua
-#catseyexi/lua/persist_nm_time_of_deaths.lua
-#catseyexi/lua/relic_exchange.lua
-#catseyexi/lua/remove_limbus_lockout.lua
-#catseyexi/lua/salvage_gear.lua
-#catseyexi/lua/trusts.lua
-#catseyexi/lua/login_notifications.lua
-#catseyexi/lua/cop_and_toau_trusts.lua
-#catseyexi/lua/guild_shops_always_open.lua
+custom/cpp
