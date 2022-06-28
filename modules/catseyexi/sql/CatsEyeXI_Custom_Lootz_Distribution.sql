@@ -236,23 +236,29 @@ INSERT INTO `mob_droplist` VALUES (2326,0,0,1000,734,100);   -- Steam Cleaner
 INSERT INTO `mob_droplist` VALUES (2326,0,0,1000,741,100);   -- Steam Cleaner
 INSERT INTO `mob_droplist` VALUES (2326,0,0,1000,730,100);   -- Steam Cleaner
 INSERT INTO `mob_droplist` VALUES (2820,0,0,1000,734,100);   -- Mother Globe
+INSERT INTO `mob_droplist` VALUES (2820,0,0,1000,740,100);   -- Mother Globe
 INSERT INTO `mob_droplist` VALUES (2820,0,0,1000,741,100);   -- Mother Globe
 INSERT INTO `mob_droplist` VALUES (2820,0,0,1000,730,100);   -- Mother Globe
 INSERT INTO `mob_droplist` VALUES (357,0,0,1000,734,100);   -- Brigandish Blade
+INSERT INTO `mob_droplist` VALUES (357,0,0,1000,740,100);   -- Brigandish Blade
 INSERT INTO `mob_droplist` VALUES (357,0,0,1000,741,100);   -- Brigandish Blade
 INSERT INTO `mob_droplist` VALUES (357,0,0,1000,730,100);   -- Brigandish Blade
 INSERT INTO `mob_droplist` VALUES (2821,0,0,1000,734,100);   -- Faust
+INSERT INTO `mob_droplist` VALUES (2821,0,0,1000,740,100);   -- Faust
 INSERT INTO `mob_droplist` VALUES (2821,0,0,1000,741,100);   -- Faust
 INSERT INTO `mob_droplist` VALUES (2821,0,0,1000,730,100);   -- Faust
 INSERT INTO `mob_droplist` VALUES (638,0,0,1000,734,100);   -- Despot
+INSERT INTO `mob_droplist` VALUES (638,0,0,1000,740,100);   -- Despot
 INSERT INTO `mob_droplist` VALUES (638,0,0,1000,741,100);   -- Despot
 INSERT INTO `mob_droplist` VALUES (638,0,0,1000,730,100);   -- Despot
 INSERT INTO `mob_droplist` VALUES (2822,0,0,1000,734,100);   -- Ullikummi
 INSERT INTO `mob_droplist` VALUES (2822,0,0,1000,741,100);   -- Ullikummi
 INSERT INTO `mob_droplist` VALUES (2822,0,0,1000,730,100);   -- Ullikummi
 INSERT INTO `mob_droplist` VALUES (2800,0,0,1000,734,100);   -- Zipacna
+INSERT INTO `mob_droplist` VALUES (2800,0,0,1000,740,100);   -- Zipacna
 INSERT INTO `mob_droplist` VALUES (2800,0,0,1000,741,100);   -- Zipacna
 INSERT INTO `mob_droplist` VALUES (2800,0,0,1000,730,100);   -- Zipacna
 INSERT INTO `mob_droplist` VALUES (2823,0,0,1000,734,100);   -- Olla Grande
+INSERT INTO `mob_droplist` VALUES (2823,0,0,1000,740,100);   -- Olla Grande
 INSERT INTO `mob_droplist` VALUES (2823,0,0,1000,741,100);   -- Olla Grande
 INSERT INTO `mob_droplist` VALUES (2823,0,0,1000,730,100);   -- Olla Grande
