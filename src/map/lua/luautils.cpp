@@ -530,6 +530,21 @@ namespace luautils
             return;
         }
 
+        // Handle Commands then return
+        if (parts.size() == 2 && parts[0] == "commands")
+        {
+            auto file_result = lua.safe_script_file(filename, &sol::script_pass_on_error);
+            if (!result.valid())
+            {
+                sol::error err = result;
+                ShowError("luautils::CacheLuaObjectFromFile: Load command error: %s: %s", filename, err.what());
+                return;
+            }
+
+            ShowInfo("[FileWatcher] COMMAND %s -> \"%s\"", filename, requireName);
+            return;
+        }
+
         // Handle Quests and Missions then return
         if (parts.size() == 3 &&
             (parts[0] == "quests" || parts[0] == "missions"))
