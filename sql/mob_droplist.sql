@@ -184,7 +184,7 @@ INSERT INTO `mob_droplist` VALUES (14,0,0,1000,17753,@COMMON); -- Organics (Comm
 -- ZoneID: 212 - Macroplasm
 -- ZoneID: 212 - Microplasm
 -- ZoneID: 212 - Nanoplasm
-INSERT INTO `mob_droplist` VALUES (15,0,0,1000,637,140); -- Vial Of Slime Oil (14.0%)
+INSERT INTO `mob_droplist` VALUES (15,0,0,1000,637,@VCOMMON); -- Vial Of Slime Oil (Very Common, 24%)
 
 -- ZoneID: 200 - Acid Grease
 INSERT INTO `mob_droplist` VALUES (16,0,0,1000,637,1050); -- Vial Of Slime Oil (105.0%)
@@ -5727,7 +5727,7 @@ INSERT INTO `mob_droplist` VALUES (665,0,0,1000,2749,@UNCOMMON); -- Gargouille E
 -- ZoneID:  85 - Dirtyhanded Gochakzuk
 -- ZoneID: 149 - Dirtyhanded Gochakzuk
 INSERT INTO `mob_droplist` VALUES (666,0,0,1000,17437,@ALWAYS); -- Curse Wand (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (666,0,0,1000,17437,500);     -- Curse Wand (50.0%)
+INSERT INTO `mob_droplist` VALUES (666,0,0,1000,17437,@ALWAYS); -- Curse Wand (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (666,2,0,1000,656,0);         -- Beastcoin (Steal)
 
 -- ZoneID: 145 - Dirt Eater
@@ -19259,12 +19259,12 @@ INSERT INTO `mob_droplist` VALUES (2416,0,0,1000,658,30);    -- Damascus Ingot (
 INSERT INTO `mob_droplist` VALUES (2416,0,0,1000,836,30);    -- Square Of Damascene Cloth (3.0%)
 
 -- ZoneID: 149 - Tigerbane Bakdak
-INSERT INTO `mob_droplist` VALUES (2417,0,0,1000,16673,710);   -- Warriors Axe (71.0%)
-INSERT INTO `mob_droplist` VALUES (2417,0,0,1000,16672,140);   -- Tigerhunter (14.0%)
-INSERT INTO `mob_droplist` VALUES (2417,0,0,1000,4876,@RARE);  -- Scroll Of Absorb-Vit (Rare, 5%)
-INSERT INTO `mob_droplist` VALUES (2417,0,0,1000,4877,40);     -- Scroll Of Absorb-Agi (4.0%)
-INSERT INTO `mob_droplist` VALUES (2417,0,0,1000,4878,@VRARE); -- Scroll Of Absorb-Int (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2417,2,0,1000,656,0);       -- Beastcoin (Steal)
+INSERT INTO `mob_droplist` VALUES (2417,1,1,1000,16673,760);      -- Warriors Axe (Group 1, 76%)
+INSERT INTO `mob_droplist` VALUES (2417,1,1,1000,16672,@VCOMMON); -- Tigerhunter (Group 1, Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2417,0,0,1000,4876,@RARE);     -- Scroll Of Absorb-Vit (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (2417,0,0,1000,4877,@RARE);     -- Scroll Of Absorb-Agi (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (2417,0,0,1000,4878,@VRARE);    -- Scroll Of Absorb-Int (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (2417,2,0,1000,656,0);          -- Beastcoin (Steal)
 
 -- ZoneID:  51 - Tinnin
 INSERT INTO `mob_droplist` VALUES (2418,0,0,1000,2158,@ALWAYS);    -- Hydra Fang (Always, 100%)
