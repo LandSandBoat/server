@@ -10761,7 +10761,7 @@ INSERT INTO `mob_droplist` VALUES (1302,0,0,1000,2157,@UNCOMMON); -- Imp Horn (U
 -- ZoneID:   2 - Hercules Beetle
 INSERT INTO `mob_droplist` VALUES (1303,0,0,1000,894,@UNCOMMON);   -- Beetle Jaw (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (1303,0,0,1000,15422,@UNCOMMON); -- Black Hose (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (1303,0,0,1000,846,60);          -- Insect Wing (6.0%)
+INSERT INTO `mob_droplist` VALUES (1303,0,0,1000,846,@RARE);       -- Insect Wing (Rare, 5%)
 
 -- ZoneID:  15 - Hexenpilz
 INSERT INTO `mob_droplist` VALUES (1304,0,0,1000,830,@UNCOMMON);   -- Square Of Rainbow Cloth (Uncommon, 10%)
@@ -14048,8 +14048,8 @@ INSERT INTO `mob_droplist` VALUES (1760,0,0,1000,4373,180); -- Woozyshroom (18.0
 INSERT INTO `mob_droplist` VALUES (1760,0,0,1000,1031,90);  -- Gusgen Chest Key (9.0%)
 
 -- ZoneID:   2 - Mycophile
-INSERT INTO `mob_droplist` VALUES (1761,0,0,1000,14884,360); -- Mycophile Cuffs (36.0%)
-INSERT INTO `mob_droplist` VALUES (1761,2,0,1000,4374,0);    -- Sleepshroom (Steal)
+INSERT INTO `mob_droplist` VALUES (1761,0,0,1000,14884,@VCOMMON); -- Mycophile Cuffs (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (1761,2,0,1000,4374,0);         -- Sleepshroom (Steal)
 
 -- ZoneID:  77 - Taisaijin
 -- ZoneID:  77 - Nightmare Vase
@@ -23690,9 +23690,9 @@ INSERT INTO `mob_droplist` VALUES (2846,0,0,1000,584,70);        -- Torn Epistle
 INSERT INTO `mob_droplist` VALUES (2846,2,0,1000,4358,0);        -- Slice Of Hare Meat (Steal)
 
 -- ZoneID:   2 - Orctrap
-INSERT INTO `mob_droplist` VALUES (2847,0,0,1000,1617,260);      -- Flytrap Leaf (26.0%)
-INSERT INTO `mob_droplist` VALUES (2847,0,0,1000,17792,@COMMON); -- Nikkariaoe (Common, 15%)
-INSERT INTO `mob_droplist` VALUES (2847,0,0,1000,15291,60);      -- Hojutsu Belt (6.0%)
+INSERT INTO `mob_droplist` VALUES (2847,0,0,1000,1617,@COMMON);    -- Flytrap Leaf (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (2847,0,0,1000,17792,@UNCOMMON); -- Nikkariaoe (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (2847,0,0,1000,15291,@RARE);     -- Hojutsu Belt (Rare, 5%)
 
 -- ZoneID: 107 - Bubbly Bernie
 INSERT INTO `mob_droplist` VALUES (2848,0,0,1000,550,@ALWAYS); -- Steam Clock (Always, 100%)
@@ -24109,7 +24109,7 @@ INSERT INTO `mob_droplist` VALUES (2893,0,0,1000,19235,@UNCOMMON); -- Veuglaire 
 INSERT INTO `mob_droplist` VALUES (2894,0,0,1000,15946,@UNCOMMON); -- Tempest Belt (Uncommon, 10%)
 
 -- ZoneID:   2 - Tempest Tigon
-INSERT INTO `mob_droplist` VALUES (2895,0,0,1000,16026,200); -- Elan Earring (20.0%)
+INSERT INTO `mob_droplist` VALUES (2895,0,0,1000,16026,@COMMON); -- Elan Earring (Common, 15%)
 
 -- ZoneID: 147 - Big Jaw
 INSERT INTO `mob_droplist` VALUES (2896,0,0,1000,868,200); -- Handful Of Pugil Scales (20.0%)
