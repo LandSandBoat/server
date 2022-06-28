@@ -4,7 +4,7 @@
 -----------------------------------
 local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs")
 mixins = {require("scripts/mixins/job_special")}
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/limbus")
 require("scripts/globals/status")
 require("scripts/globals/magic")
@@ -26,10 +26,10 @@ end
 
 entity.onMobFight = function(mob, target)
     local delay = mob:getLocalVar("delay")
-    local LastCast = mob:getLocalVar("LAST_CAST")
+    local lastCast = mob:getLocalVar("LAST_CAST")
     local spell = mob:getLocalVar("COPY_SPELL")
 
-    if (mob:getBattleTime() - LastCast > 30) then
+    if (mob:getBattleTime() - lastCast > 30) then
         mob:setLocalVar("COPY_SPELL", 0)
         mob:setLocalVar("delay", 0)
     end

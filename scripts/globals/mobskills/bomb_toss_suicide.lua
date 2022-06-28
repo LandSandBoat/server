@@ -3,7 +3,7 @@
 -- Throws a bomb at an enemy. Sometimes backfires.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}
@@ -19,9 +19,9 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = 1
-    local BOMB_TOSS_HPP = skill:getMobHPP() / 100
+    local bombTossHPP = skill:getMobHPP() / 100
     local power = math.random(12, 18)
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg()*power*BOMB_TOSS_HPP, xi.magic.ele.FIRE, dmgmod, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg()*power*bombTossHPP, xi.magic.ele.FIRE, dmgmod, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 
     mob:setHP(0)

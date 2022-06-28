@@ -6,7 +6,7 @@ require("scripts/globals/status")
 require("scripts/globals/msg")
 require("scripts/globals/weaponskills")
 require("scripts/globals/jobpoints")
-require("scripts/globals/spells/spell_damage")
+require("scripts/globals/spells/damage_spell")
 require("scripts/globals/utils")
 -----------------------------------
 xi = xi or {}
@@ -23,18 +23,18 @@ local function getRUNLevel(player)
 end
 
 local function applyRuneEnhancement(effectType, player)
-    local RUNLevel = getRUNLevel(player)
+    local runLevel = getRUNLevel(player)
     local meritBonus =  player:getMerit(xi.merit.MERIT_RUNE_ENHANCE) -- 2 more elemental resistance per merit for a maximum total of (2*5) = 10 (power of merit is 2 per level)
     local jobPointBonus = player:getJobPointLevel(xi.jp.RUNE_ENCHANTMENT_EFFECT) -- 1 more elemental resistance per level for a maximum total of 20
 
     -- see https://www.bg-wiki.com/ffxi/Category:Rune
-    local power = math.floor((49 * RUNLevel / 99) + 5.5) + meritBonus  + jobPointBonus
+    local power = math.floor((49 * runLevel / 99) + 5.5) + meritBonus  + jobPointBonus
     player:addStatusEffect(effectType, power, 0, 300)
 end
 
 local function enforceRuneCounts(target)
-    local RUNLevel = getRUNLevel(target)
-    local maxRunes = RUNLevel >= 65 and 3 or RUNLevel >= 35 and 2 or 1
+    local runLevel = getRUNLevel(target)
+    local maxRunes = runLevel >= 65 and 3 or runLevel >= 35 and 2 or 1
 
     local activeRunes = target:getActiveRuneCount()
     if activeRunes >= maxRunes then -- delete the rune with the least duration
@@ -71,7 +71,7 @@ end
 local function calculateVivaciousPulseHealing(target)
 
     local divineMagicSkillLevel = target:getSkillLevel(xi.skill.DIVINE_MAGIC)
-    local HPHealAmount = 10 + math.floor(divineMagicSkillLevel / 2 * (100 + target:getJobPointLevel(xi.jp.VIVACIOUS_PULSE_EFFECT)) / 100) -- Bonus of 1-20%  from Vivacious pulse job points.
+    local hpHealAmount = 10 + math.floor(divineMagicSkillLevel / 2 * (100 + target:getJobPointLevel(xi.jp.VIVACIOUS_PULSE_EFFECT)) / 100) -- Bonus of 1-20%  from Vivacious pulse job points.
     local tenebraeRuneCount = 0
     local bonusPct = (100 + target:getMod(xi.mod.VIVACIOUS_PULSE_POTENCY)) / 100
 
@@ -97,7 +97,7 @@ local function calculateVivaciousPulseHealing(target)
     for _, effect in ipairs(effects) do
         local type = effect:getType()
 
-        HPHealAmount = HPHealAmount + getRuneHealAmount(type, target) -- type checked internally
+        hpHealAmount = hpHealAmount + getRuneHealAmount(type, target) -- type checked internally
 
         if removableDebuffMap[type] ~= nil then -- effect in debuff table, count it as a debuff.
             debuffs[debuffCount+1] = type
@@ -110,26 +110,25 @@ local function calculateVivaciousPulseHealing(target)
     end
 
     if tenebraeRuneCount > 0 then -- only restore MP if there's one or more tenebrae rune active
-        local MPHealAmount = math.floor(divineMagicSkillLevel / 10 * (100 + target:getJobPointLevel(xi.jp.VIVACIOUS_PULSE_EFFECT)) / 100) * (tenebraeRuneCount + 1)
-        target:addMP(MPHealAmount) -- augment bonusPct does not apply here according to testing.
+        local mpHealAmount = math.floor(divineMagicSkillLevel / 10 * (100 + target:getJobPointLevel(xi.jp.VIVACIOUS_PULSE_EFFECT)) / 100) * (tenebraeRuneCount + 1)
+        target:addMP(mpHealAmount) -- augment bonusPct does not apply here according to testing.
     end
 
     if debuffCount > 0 and target:getMod(xi.mod.AUGMENTS_VIVACIOUS_PULSE) > 0 then -- add random removal of Poison, Paralyze, Blind, Silence, Mute, Curse, Bane, Doom, Virus, Plague, Petrification via AF3 head (source: https://www.bg-wiki.com/ffxi/Erilaz_Galea)
         target:delStatusEffect(debuffs[math.random(debuffCount)])
     end
 
-    HPHealAmount = HPHealAmount * bonusPct
-    if target:getHP() + HPHealAmount > target:getMaxHP() then
-        HPHealAmount = target:getMaxHP() - target:getHP() -- don't go over cap
+    hpHealAmount = hpHealAmount * bonusPct
+    if target:getHP() + hpHealAmount > target:getMaxHP() then
+        hpHealAmount = target:getMaxHP() - target:getHP() -- don't go over cap
     end
 
-    target:restoreHP(HPHealAmount)
+    target:restoreHP(hpHealAmount)
 
-    return HPHealAmount
+    return hpHealAmount
 end
 
 local function getVallationValianceSDTType(type)
-
     local runeSDTMap =
     {
         [xi.effect.IGNIS]    = xi.mod.ICE_SDT,
@@ -144,8 +143,23 @@ local function getVallationValianceSDTType(type)
     return runeSDTMap[type]
 end
 
-local function getGambitSDTType(type)
+local function getLiementAbsorbType(type)
 
+    local runeAbsorbMap =
+    {
+        [xi.effect.IGNIS]    = xi.damageType.ICE,
+        [xi.effect.GELUS]    = xi.damageType.WIND,
+        [xi.effect.FLABRA]   = xi.damageType.EARTH,
+        [xi.effect.TELLUS]   = xi.damageType.THUNDER,
+        [xi.effect.SULPOR]   = xi.damageType.WATER,
+        [xi.effect.UNDA]     = xi.damageType.FIRE,
+        [xi.effect.LUX]      = xi.damageType.DARK,
+        [xi.effect.TENEBRAE] = xi.damageType.LIGHT
+    }
+    return runeAbsorbMap[type]
+end
+
+local function getGambitSDTType(type)
     local runeSDTMap =
     {
         [xi.effect.IGNIS]    = xi.mod.FIRE_SDT,
@@ -161,7 +175,6 @@ local function getGambitSDTType(type)
 end
 
 local function getBattutaSpikesType(type)
-
     local runeSpikesMap =
     {
         [xi.effect.IGNIS]    = xi.subEffect.BLAZE_SPIKES,
@@ -177,7 +190,6 @@ local function getBattutaSpikesType(type)
 end
 
 local function getSpecEffectElementWard(type) -- verified via !injectaction 15 1 1-8, retail action packet dumps
-
     local runeSpecEffectMap =
     {
         [xi.effect.IGNIS]    = 1,
@@ -193,7 +205,6 @@ local function getSpecEffectElementWard(type) -- verified via !injectaction 15 1
 end
 
 local function getSpecEffectElementEffusion(type)
-
     local runeSpecEffectMap =
     {
         [xi.effect.IGNIS]    = 2,
@@ -209,7 +220,6 @@ local function getSpecEffectElementEffusion(type)
 end
 
 local function getSwipeLungeElement(type)
-
     local runeElementEffectMap =
     {
         [xi.effect.IGNIS]    = xi.magic.ele.FIRE,
@@ -225,7 +235,6 @@ local function getSwipeLungeElement(type)
 end
 
 local function getAnimationEffusion(weaponSkillType, offset) -- verified via retail action packets exclusively
-
     local weaponAnimationMap =
     {
         [xi.skill.NONE]         = 6,
@@ -370,27 +379,27 @@ xi.job_utils.rune_fencer.useVallationValiance = function(player, target, ability
 
     if player:getID() ~= target:getID() then -- Only the caster can apply effects, including to the party if valiance.
 
-        if abilityID == xi.jobAbility.VALIANCE and target:hasStatusEffect(xi.effect.VALLATION) then -- Valiance is being used on them, and they have Vallation already up
+        if abilityID == xi.jobAbility.VALIANCE and target:hasStatusEffect(xi.effect.VALLATION) or target:hasStatusEffect(xi.effect.LIEMENT) then -- Valiance is being used on them, and they have Vallation already up or they have liement
             action:messageID(target:getID(), xi.msg.basic.NO_EFFECT) -- "No effect on <Target>"
         end
         return
     end
 
     local runeEffects = target:getAllRuneEffects()
-    local SDTPower = 15
+    local sdtPower = 15
     local meritBonus =  player:getMerit(xi.merit.MERIT_VALLATION_EFFECT)
     local inspirationMerits = player:getMerit(xi.merit.MERIT_INSPIRATION)
     local inspirationFCBonus = inspirationMerits + inspirationMerits / 10 * player:getMod(xi.mod.ENHANCES_INSPIRATION)  -- 10 FC per merit level, plus 2% per level from AF2 leg aug
     local jobPointBonusDuration = player:getJobPointLevel(xi.jp.VALLATION_DURATION)
 
-    SDTPower = (SDTPower + meritBonus) * 100
+    sdtPower = (sdtPower + meritBonus) * 100
 
-    local SDTTypes = {} -- one SDT type per rune which can be additive
+    local sdtTypes = {} -- one SDT type per rune which can be additive
     local i = 0
 
     for _, rune in ipairs(runeEffects) do
-        local SDTType = getVallationValianceSDTType(rune)
-        SDTTypes[i+1] = SDTType
+        local sdtType = getVallationValianceSDTType(rune)
+        sdtTypes[i + 1] = sdtType
         i = i + 1
     end
 
@@ -399,10 +408,10 @@ xi.job_utils.rune_fencer.useVallationValiance = function(player, target, ability
         local duration = 180 + jobPointBonusDuration
 
         for _, member in pairs(party) do
-            if not member:hasStatusEffect(xi.effect.VALLATION) then -- Valiance has no effect if Vallation is up
+            if not member:hasStatusEffect(xi.effect.VALLATION) and not target:hasStatusEffect(xi.effect.LIEMENT) then -- Valiance has no effect if Vallation is up, or no effect if Liement is up
 
                 member:delStatusEffectSilent(xi.effect.VALIANCE) -- Remove Valiance if it's already up. The new one will overwrite.
-                applyVallationValianceSDTMods(member, SDTTypes, SDTPower, xi.effect.VALIANCE, duration)
+                applyVallationValianceSDTMods(member, sdtTypes, sdtPower, xi.effect.VALIANCE, duration)
 
                 if inspirationFCBonus > 0 then -- Inspiration FC is not applied unless Valiance is applied, tested on retail with 2 RUN in a party
                     member:addStatusEffect(xi.effect.FAST_CAST, inspirationFCBonus, 0, duration)
@@ -413,13 +422,18 @@ xi.job_utils.rune_fencer.useVallationValiance = function(player, target, ability
 
         end
     else -- apply effects to target (Vallation)
-        local duration = 120 + jobPointBonusDuration
 
-        target:delStatusEffectSilent(xi.effect.VALIANCE) -- Vallation overwrites Valiance
-        applyVallationValianceSDTMods(target, SDTTypes, SDTPower, xi.effect.VALLATION, duration)
+        if target:hasStatusEffect(xi.effect.LIEMENT) then -- no effect if Liement is up
+            action:messageID(player:getID(), xi.msg.basic.JA_NO_EFFECT_2)
+        else
+            local duration = 120 + jobPointBonusDuration
 
-        if inspirationFCBonus > 0 then
-           target:addStatusEffect(xi.effect.FAST_CAST, inspirationFCBonus, 0, duration)
+            target:delStatusEffectSilent(xi.effect.VALIANCE) -- Vallation overwrites Valiance
+            applyVallationValianceSDTMods(target, sdtTypes, sdtPower, xi.effect.VALLATION, duration)
+
+            if inspirationFCBonus > 0 then
+               target:addStatusEffect(xi.effect.FAST_CAST, inspirationFCBonus, 0, duration)
+            end
         end
     end
 end
@@ -470,22 +484,21 @@ end
 local function getSwipeLungeDamageMultipliers(player, target, element, bonusMacc) -- get these multipliers once and store them
     local multipliers = {}
 
-    multipliers.eleStaffBonus        = xi.spells.spell_damage.calculateEleStaffBonus(player, nil, element)
-    multipliers.magianAffinity       = xi.spells.spell_damage.calculateMagianAffinity(player, nil)         -- presumed but untested
-    multipliers.SDT                  = xi.spells.spell_damage.calculateSDT(player, target, nil, element)
-    multipliers.resist               = xi.spells.spell_damage.calculateResist(player, target,  nil, 0, element, 0, bonusMacc)
-    multipliers.magicBurst           = xi.spells.spell_damage.calculateIfMagicBurst(player, target,  0, element)
-    multipliers.magicBurstBonus      = xi.spells.spell_damage.calculateIfMagicBurstBonus(player, target, nil, 0, element)
-    multipliers.dayAndWeather        = xi.spells.spell_damage.calculateDayAndWeather(player, target, nil, 0, element)
-    multipliers.magicBonusDiff       = xi.spells.spell_damage.calculateMagicBonusDiff(player, target, nil, 0, 0, element)
-    multipliers.TMDA                 = xi.spells.spell_damage.calculateTMDA(player, target, nil)
-    multipliers.nukeAbsorbOrNullify  = xi.spells.spell_damage.calculateNukeAbsorbOrNullify(player, target, nil, element)
+    multipliers.eleStaffBonus        = xi.spells.damage.calculateEleStaffBonus(player, nil, element)
+    multipliers.magianAffinity       = xi.spells.damage.calculateMagianAffinity(player, nil)         -- presumed but untested
+    multipliers.SDT                  = xi.spells.damage.calculateSDT(player, target, nil, element)
+    multipliers.resist               = xi.spells.damage.calculateResist(player, target,  nil, 0, element, 0, bonusMacc)
+    multipliers.magicBurst           = xi.spells.damage.calculateIfMagicBurst(player, target,  0, element)
+    multipliers.magicBurstBonus      = xi.spells.damage.calculateIfMagicBurstBonus(player, target, nil, 0, element)
+    multipliers.dayAndWeather        = xi.spells.damage.calculateDayAndWeather(player, target, nil, 0, element)
+    multipliers.magicBonusDiff       = xi.spells.damage.calculateMagicBonusDiff(player, target, nil, 0, 0, element)
+    multipliers.TMDA                 = xi.spells.damage.calculateTMDA(player, target, xi.damageType.ELEMENTAL + element)
+    multipliers.nukeAbsorbOrNullify  = xi.spells.damage.calculateNukeAbsorbOrNullify(player, target, nil, element)
 
     return multipliers
 end
 
 local function calculateSwipeLungeDamage(player, target, skillModifier, gearBonus, numHits, multipliers)
-
     local damage = math.floor(skillModifier *  (0.50 + 0.25 * numHits  + (gearBonus / 100)))
 
     damage = damage + player:getMod(xi.mod.MAGIC_DAMAGE) -- add mdamage to base damage
@@ -500,8 +513,6 @@ local function calculateSwipeLungeDamage(player, target, skillModifier, gearBonu
     damage = math.floor(damage * multipliers.magicBonusDiff)
     damage = math.floor(damage * multipliers.TMDA)
     damage = math.floor(damage * multipliers.nukeAbsorbOrNullify)
-
-    damage = target:magicDmgTaken(damage)
 
     -- Handle Phalanx
     if damage > 0 then
@@ -684,27 +695,27 @@ xi.job_utils.rune_fencer.useGambit = function(player, target, ability, action)
     local highestRune = player:getHighestRuneEffect()
     local weaponSkillType = player:getWeaponSkillType(xi.slot.MAIN)
     local runeEffects = player:getAllRuneEffects()
-    local SDTPower = -10
+    local sdtPower = -10
     local jobPointBonusDuration = player:getJobPointLevel(xi.jp.GAMBIT_DURATION)
     local gearBonusDuration = player:getMod(xi.mod.GAMBIT_DURATION)
 
     action:speceffect(target:getID(), getSpecEffectElementEffusion(highestRune)) -- set element color for animation.
     action:setAnimation(target:getID(), getAnimationEffusion(weaponSkillType, 10)) -- set animation for currently equipped weapon
 
-    SDTPower = SDTPower * 100 -- adjust to SDT modifier
+    sdtPower = sdtPower * 100 -- adjust to SDT modifier
 
-    local SDTTypes = {} -- one SDT type per rune which can be additive
+    local sdtTypes = {} -- one SDT type per rune which can be additive
     local i = 0
 
     for _, rune in ipairs(runeEffects) do
-        local SDTType = getGambitSDTType(rune)
-        SDTTypes[i+1] = SDTType
+        local sdtType = getGambitSDTType(rune)
+        sdtTypes[i + 1] = sdtType
         i = i + 1
     end
 
     local duration = 60 + jobPointBonusDuration + gearBonusDuration
 
-    applyGambitSDTMods(target, SDTTypes, SDTPower, xi.effect.GAMBIT, duration)
+    applyGambitSDTMods(target, sdtTypes, sdtPower, xi.effect.GAMBIT, duration)
 
     player:removeAllRunes()
 end
@@ -733,7 +744,63 @@ xi.job_utils.rune_fencer.useOneForAll = function(player, target, ability, action
 
     local party = player:getParty()
     for _, member in pairs(party) do
-        member:delStatusEffect(xi.effect.ONE_FOR_ALL) -- remove old, apparently the newest OFA always wins.
+        member:delStatusEffectSilent(xi.effect.ONE_FOR_ALL) -- remove old, apparently the newest OFA always wins.
         member:addStatusEffect(xi.effect.ONE_FOR_ALL, power, 0, duration)
+    end
+end
+
+local function applyLiementEffect(target, absorbTypes, absorbPower, duration)
+    local absorbBits = 0
+    local i = 0
+
+    for _, damageType in ipairs(absorbTypes) do
+        absorbBits = absorbBits + bit.lshift(damageType, 4 * i) -- pack 4 bit damage type into 16 bit int
+        i = i + 1
+    end
+
+    if i * 4 > 16 then -- This will trip if a custom module overrides current retail behavior and give RUN 5 runes or more.
+        print("ERROR: applyLiementEffect trying to pack more than 16 bits into 16 bit datatype! Does Rune Fencer have 5 or more runes enabled?")
+    end
+
+    target:delStatusEffectSilent(xi.effect.VALLATION) -- Liement overwrites Vallation
+    target:delStatusEffectSilent(xi.effect.VALIANCE)  -- Liement overwrites Valiance
+    target:delStatusEffectSilent(xi.effect.LIEMENT)   -- Remove Liement if it's already up. The new one will overwrite regardless of strength.
+
+    target:addStatusEffect(xi.effect.LIEMENT, absorbPower, 0, duration, 0, absorbBits)
+end
+
+-- see https://www.bg-wiki.com/ffxi/Liement
+xi.job_utils.rune_fencer.useLiement = function(player, target, ability, action)
+
+    local highestRune = player:getHighestRuneEffect()
+
+    action:speceffect(target:getID(), getSpecEffectElementWard(highestRune)) -- set element color for animation. This is set even on "sub targets" for aoe liement on retail even if the animation doesn't seem to change.
+
+    if player:getID() ~= target:getID() then -- Only the caster can apply effects
+        return
+    end
+
+
+    local runeEffects = target:getAllRuneEffects()
+    local absorbPower = 25
+    local duration = 10 + player:getMod(xi.mod.LIEMENT_DURATION)
+
+    local absorbTypes = {} -- one absorb type per rune which can be additive
+    local i = 0
+
+    for _, rune in ipairs(runeEffects) do
+        local absorbType = getLiementAbsorbType(rune)
+        absorbTypes[i+1] = absorbType
+        i = i + 1
+    end
+
+    if player:getMod(xi.mod.LIEMENT_EXTENDS_TO_AREA) > 0 then -- apply effects to entire party (including target)
+        local party = player:getParty()
+
+        for _, member in pairs(party) do
+            applyLiementEffect(member, absorbTypes, absorbPower, duration)
+        end
+    else -- apply effects to self only
+        applyLiementEffect(target, absorbTypes, absorbPower, duration)
     end
 end

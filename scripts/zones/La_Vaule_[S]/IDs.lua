@@ -20,8 +20,8 @@ zones[xi.zone.LA_VAULE_S] =
         FISHING_MESSAGE_OFFSET    = 7057, -- You can't fish here.
         GATE_IS_LOCKED            = 7203, -- The gate is locked.
         DOOR_IS_LOCKED            = 7724, -- The door is locked.
-        PARTY_MEMBERS_HAVE_FALLEN = 8025, -- All party members have fallen in battle. Now leaving the battlefield.
-        THE_PARTY_WILL_BE_REMOVED = 8032, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
+        PARTY_MEMBERS_HAVE_FALLEN = 8029, -- All party members have fallen in battle. Now leaving the battlefield.
+        THE_PARTY_WILL_BE_REMOVED = 8036, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
     },
     mob =
     {

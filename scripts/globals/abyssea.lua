@@ -685,13 +685,13 @@ xi.abyssea.qmOnTrigger = function(player, npc, mobId, kis, tradeReqs)
     local kisExpected = {}
 
     for index = 1, 8 do
-        local KI = kis[index] or 0
+        local keyItem = kis[index] or 0
 
-        if KI ~= 0 and not player:hasKeyItem(KI) then
+        if keyItem ~= 0 and not player:hasKeyItem(keyItem) then
             validKis = false
         end
-        player:setLocalVar("KI" .. index, KI)
-        kisExpected[index] = KI
+        player:setLocalVar("KI" .. index, keyItem)
+        kisExpected[index] = keyItem
     end
 
     local pop = checkMobID(zoneId, mobId)
@@ -718,14 +718,14 @@ xi.abyssea.qmOnEventFinish = function(player, csid, option)
     if csid == events[2] and option == 1 then
 
         for i = 1, 8 do
-            local KI = player:getLocalVar("KI" .. i)
-            if KI == 0 then
+            local keyItem = player:getLocalVar("KI" .. i)
+            if keyItem == 0 then
                 break
             end
 
-            if player:hasKeyItem(KI) then
-                player:delKeyItem(KI)
-                player:messageSpecial(ID.text.LOST_KEYITEM, KI)
+            if player:hasKeyItem(keyItem) then
+                player:delKeyItem(keyItem)
+                player:messageSpecial(ID.text.LOST_KEYITEM, keyItem)
             end
         end
 
@@ -809,7 +809,7 @@ xi.abyssea.setBonusLights = function(player)
     local lightTable = {}
 
     for _, v in ipairs(xi.abyssea.lightType) do
-        lightTable[v] = xi.settings.ABYSSEA_BONUSLIGHT_AMOUNT
+        lightTable[v] = xi.settings.main.ABYSSEA_BONUSLIGHT_AMOUNT
     end
 
     setLightsFromTable(player, lightTable)

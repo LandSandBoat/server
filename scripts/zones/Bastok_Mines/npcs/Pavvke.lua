@@ -5,21 +5,21 @@
 -----------------------------------
 local ID = require("scripts/zones/Bastok_Mines/IDs")
 require("scripts/globals/quests")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local Fallen = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FALLEN_COMRADES)
+    local fallen = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FALLEN_COMRADES)
 
     if
         trade:hasItemQty(13116, 1) == true and
         trade:getItemCount() == 1
     then
-        if Fallen == 1 then
+        if fallen == 1 then
             player:tradeComplete()
             player:startEvent(91)
-        elseif Fallen == 2 then
+        elseif fallen == 2 then
             player:tradeComplete()
             player:startEvent(92)
         end
@@ -50,12 +50,12 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 91 then
         player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FALLEN_COMRADES)
         player:addFame(xi.quest.fame_area.BASTOK, 120)
-        player:addGil(xi.settings.GIL_RATE * 550)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 550)
+        player:addGil(xi.settings.main.GIL_RATE * 550)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 550)
     elseif csid == 92 then
         player:addFame(xi.quest.fame_area.BASTOK, 8)
-        player:addGil(xi.settings.GIL_RATE * 550)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 550)
+        player:addGil(xi.settings.main.GIL_RATE * 550)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 550)
     end
 end
 

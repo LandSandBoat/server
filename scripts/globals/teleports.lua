@@ -1,7 +1,7 @@
 -----------------------------------
 -- A collection of frequently needed teleport shortcuts.
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/utils")
 require("scripts/globals/zone")
 
@@ -293,15 +293,16 @@ end
 -----------------------------------
 
 xi.teleport.toAlliedNation = function(player)
-    local Allegiance = player:getCampaignAllegiance()
+    local allegiance = player:getCampaignAllegiance()
     local sandoriaPos = destinations[ids.SOUTHERN_SAN_DORIA_S]
     local bastokPos = destinations[ids.BASTOK_MARKETS_S]
     local windurstPos = destinations[ids.WINDURST_WATERS_S]
-    if Allegiance == xi.alliedNation.SANDORIA then
+
+    if allegiance == xi.alliedNation.SANDORIA then
         player:setPos(unpack(sandoriaPos))
-    elseif Allegiance == xi.alliedNation.BASTOK then
+    elseif allegiance == xi.alliedNation.BASTOK then
         player:setPos(unpack(bastokPos))
-    elseif Allegiance == xi.alliedNation.WINDURST then
+    elseif allegiance == xi.alliedNation.WINDURST then
         player:setPos(unpack(windurstPos))
     end
 end
@@ -476,7 +477,7 @@ xi.teleport.explorerMoogleOnTrigger = function(player, event)
         accept = 1
     end
 
-    if player:getMainLvl() < xi.settings.EXPLORER_MOOGLE_LV then
+    if player:getMainLvl() < xi.settings.main.EXPLORER_MOOGLE_LV then
         event = event + 1
     end
 

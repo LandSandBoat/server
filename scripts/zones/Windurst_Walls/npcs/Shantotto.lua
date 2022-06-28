@@ -6,14 +6,14 @@
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Walls/IDs")
 require("scripts/globals/keyitems")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 
-local TrustMemory = function(player)
+local trustMemory = function(player)
     local memories = 0
     --[[ TODO
     -- 2 - The Three Kingdoms
@@ -80,13 +80,13 @@ end
 
 entity.onTrigger = function(player, npc)
     local foiledAgain = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_AGAIN_1)
-    local CFA2 = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_AGAIN_2)
-    local CFAtimer = player:getCharVar("CursesFoiledAgain")
-    local FoiledAGolem = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_A_GOLEM)
+    local cfa2 = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_AGAIN_2)
+    local cfaTimer = player:getCharVar("CursesFoiledAgain")
+    local foiledAGolem = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_A_GOLEM)
     local golemdelivery = player:getCharVar("foiledagolemdeliverycomplete")
-    local WildcatWindurst = player:getCharVar("WildcatWindurst")
+    local wildcatWindurst = player:getCharVar("WildcatWindurst")
 
-    if (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatWindurst, 6)) then
+    if (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(wildcatWindurst, 6)) then
         player:startEvent(498)
     elseif (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION) == QUEST_ACCEPTED and
         player:getCharVar("ClassReunionProgress") == 3) then
@@ -98,7 +98,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(171, 0, 0, 0, 0, 0, 0, 928, 880)
     elseif (foiledAgain == QUEST_ACCEPTED) then
         player:startEvent(172, 0, 0, 0, 0, 0, 0, 928, 880)
-    elseif (foiledAgain == QUEST_COMPLETED and CFA2 == QUEST_AVAILABLE and CFAtimer == 0) then
+    elseif (foiledAgain == QUEST_COMPLETED and cfa2 == QUEST_AVAILABLE and cfaTimer == 0) then
         local cDay = VanadielDayOfTheYear()
         local cYear = VanadielYear()
         local dFinished = player:getCharVar("CursesFoiledAgainDay")
@@ -113,19 +113,19 @@ entity.onTrigger = function(player, npc)
         end
 
         -- Curses, Foiled...Again!?
-    elseif (foiledAgain == QUEST_COMPLETED and CFA2 == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2 and
-        player:getMainLvl() >= 5 and CFAtimer == 1) then
+    elseif (foiledAgain == QUEST_COMPLETED and cfa2 == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2 and
+        player:getMainLvl() >= 5 and cfaTimer == 1) then
         player:startEvent(180, 0, 0, 0, 0, 928, 880, 17316, 940) -- Quest Start
-    elseif (CFA2 == QUEST_ACCEPTED) then
+    elseif (cfa2 == QUEST_ACCEPTED) then
         player:startEvent(181, 0, 0, 0, 0, 0, 0, 17316, 940) -- Reminder dialog
 
         -- Curses, Foiled A-Golem!?
-    elseif (CFA2 == QUEST_COMPLETED and FoiledAGolem == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 4 and
+    elseif (cfa2 == QUEST_COMPLETED and foiledAGolem == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 4 and
         player:getMainLvl() >= 10) then
         player:startEvent(340) -- quest start
     elseif (golemdelivery == 1) then
         player:startEvent(342) -- finish
-    elseif (FoiledAGolem == QUEST_ACCEPTED) then
+    elseif (foiledAGolem == QUEST_ACCEPTED) then
         player:startEvent(341) -- reminder dialog
 
         -- Trust
@@ -138,13 +138,13 @@ entity.onTrigger = function(player, npc)
         player:hasSpell(905) and -- Trion
         not player:hasSpell(896) -- NOT Shantotto
     then
-        player:startEvent(529, 0, 0, 0, TrustMemory(player), 0, 0, 0, FoiledAGolem == QUEST_COMPLETED and 1 or 0)
+        player:startEvent(529, 0, 0, 0, trustMemory(player), 0, 0, 0, foiledAGolem == QUEST_COMPLETED and 1 or 0)
 
         -- Standard dialog
-    elseif (FoiledAGolem == QUEST_COMPLETED) then
+    elseif (foiledAGolem == QUEST_COMPLETED) then
         player:startEvent(343) -- new standard dialog after Curses, Foiled A-Golem!?
 
-    elseif (CFA2 == QUEST_COMPLETED) then
+    elseif (cfa2 == QUEST_COMPLETED) then
         player:startEvent(184) -- New standard dialog after CFA2
     else
         player:startEvent(164)

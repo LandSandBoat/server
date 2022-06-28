@@ -50,16 +50,16 @@ public:
     uint8  getType() const;
     uint8  getCraftType() const;
     uint8  getItemsCount() const;
-    uint8  getSlotCount();                      // Number of occupied cells
-    uint32 getTotalQuantity();                  // Total number of items (gil counts as 1)
+    uint8  getSlotCount();     // Number of occupied cells
+    uint32 getTotalQuantity(); // Total number of items (gil counts as 1)
     uint8  getGuildID(uint8 slotID);
     uint16 getGuildRank(uint8 slotID);
     CItem* getItem(uint8 slotID);
     uint16 getItemID(uint8 slotID);
     uint8  getInvSlotID(uint8 slotID);
-    uint32 getQuantity(uint8 slotID);           // Number of items in the slot
+    uint32 getQuantity(uint8 slotID); // Number of items in the slot
     uint8  getConfirmedStatus(uint8 slotID);
-    uint32 getItemQuantity(uint16 itemID);      // Number of items of one type
+    uint32 getItemQuantity(uint16 itemID); // Number of items of one type
     uint8  getSize();
     uint8  getExSize() const;
 

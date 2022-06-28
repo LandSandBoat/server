@@ -88,7 +88,8 @@ function getRoeRecords(triggers)
             end,
             flags = set{"retro"},
             reqs = { mJobLvl = 99 },
-            reward =  {
+            reward =
+            {
                 sparks = 200,
                 xp = 300,
                 item = { { 8733, 5 } },
@@ -101,7 +102,8 @@ function getRoeRecords(triggers)
             end,
             trigger = triggers.talkToRoeNpc,
             reqs = { collectSparks = 2000 },
-            reward =  {
+            reward =
+            {
                 sparks = 200,
                 xp = 200,
                 item = { 9188 }
@@ -114,7 +116,8 @@ function getRoeRecords(triggers)
             end,
             trigger = triggers.talkToRoeNpc,
             reqs = { collectSparks = 4000 },
-            reward =  {
+            reward =
+            {
                 sparks = 200,
                 xp = 200,
                 item = { 9226 }
@@ -127,7 +130,8 @@ function getRoeRecords(triggers)
             end,
             trigger = triggers.talkToRoeNpc,
             reqs = { collectSparks = 6000 },
-            reward =  {
+            reward =
+            {
                 sparks = 200,
                 xp = 200,
                 item = { 9226 }
@@ -140,7 +144,8 @@ function getRoeRecords(triggers)
             end,
             trigger = triggers.talkToRoeNpc,
             reqs = { hasItemLevel = 117 },
-            reward =  {
+            reward =
+            {
                 sparks = 200,
                 xp = 300,
                 item = { 10140 }
@@ -788,7 +793,7 @@ function getRoeRecords(triggers)
 
         [ 680] = { -- PUP Artifact Quest I
             trigger = triggers.questComplete,
-            reqs = { questComplete = {xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATION} },
+            reqs = { questComplete = {xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATON} },
             flags = set{"retro"},
             reward = { sparks = 100, xp = 300 },
         },
@@ -3435,7 +3440,7 @@ function getRoeRecords(triggers)
         [ 339] = { -- Conflict: Moh Gates III
             trigger = triggers.mobKill,
             goal = 5,
-            reqs = { mobName = set{"Writhing_Obdella"}, zone = set{269} },
+            reqs = { mobName = set{"Ferocious_Funguar"}, zone = set{269} },
             flags = set{"repeat"},
             reward = { sparks = 160, xp = 500, capacity = 100, accolades = 16 },
         },

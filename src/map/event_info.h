@@ -34,7 +34,7 @@ class CBaseEntity;
 
 struct EventPrep
 {
-    CBaseEntity* targetEntity;
+    CBaseEntity* targetEntity = {};
     string_t     scriptFile;
 
     void reset()

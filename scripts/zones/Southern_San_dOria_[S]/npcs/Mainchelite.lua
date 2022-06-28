@@ -16,7 +16,7 @@
 -- 15 = No Red Recommendation Letter and has no nation affiliation
 -- Todo: medal loss from nation switching. Since there is no rank-up yet, this isn't so important for now.
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/titles")
 require("scripts/globals/quests")
@@ -29,28 +29,28 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local Allegiance = player:getCampaignAllegiance()
+    local allegiance = player:getCampaignAllegiance()
     -- 0 = none, 1 = San d'Oria Iron Rams, 2 = Bastok Fighting Fourth, 3 = Windurst Cobras
 
-    local TheFightingFourth = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_FIGHTING_FOURTH)
-    local SnakeOnThePlains = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SNAKE_ON_THE_PLAINS)
-    local SteamedRams = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.STEAMED_RAMS)
-    local RedLetter = player:hasKeyItem(xi.ki.RED_RECOMMENDATION_LETTER)
-    local CharredPropeller = player:hasKeyItem(xi.ki.CHARRED_PROPELLER)
-    local OxidizedPlate = player:hasKeyItem(xi.ki.OXIDIZED_PLATE)
-    local ShatteredLumber = player:hasKeyItem(xi.ki.PIECE_OF_SHATTERED_LUMBER)
+    local theFightingFourth = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_FIGHTING_FOURTH)
+    local snakeOnThePlains = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SNAKE_ON_THE_PLAINS)
+    local steamedRams = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.STEAMED_RAMS)
+    local redLetter = player:hasKeyItem(xi.ki.RED_RECOMMENDATION_LETTER)
+    local charredPropeller = player:hasKeyItem(xi.ki.CHARRED_PROPELLER)
+    local oxidizedPlate = player:hasKeyItem(xi.ki.OXIDIZED_PLATE)
+    local shatteredLumber = player:hasKeyItem(xi.ki.PIECE_OF_SHATTERED_LUMBER)
 
-    if (TheFightingFourth == QUEST_ACCEPTED or SnakeOnThePlains == QUEST_ACCEPTED) then
+    if (theFightingFourth == QUEST_ACCEPTED or snakeOnThePlains == QUEST_ACCEPTED) then
         player:startEvent(9)
-    elseif (SteamedRams == QUEST_AVAILABLE and RedLetter == true) then
+    elseif (steamedRams == QUEST_AVAILABLE and redLetter == true) then
         player:startEvent(7)
-    elseif (SteamedRams == QUEST_AVAILABLE and player:getCharVar("RED_R_LETTER_USED") == 1) then
+    elseif (steamedRams == QUEST_AVAILABLE and player:getCharVar("RED_R_LETTER_USED") == 1) then
         player:startEvent(8)
-    elseif (SteamedRams == QUEST_ACCEPTED and CharredPropeller == true and OxidizedPlate == true and ShatteredLumber == true) then
+    elseif (steamedRams == QUEST_ACCEPTED and charredPropeller == true and oxidizedPlate == true and shatteredLumber == true) then
         player:startEvent(12)
-    elseif (SteamedRams == QUEST_ACCEPTED) then
+    elseif (steamedRams == QUEST_ACCEPTED) then
         player:startEvent(13)
-    elseif (SteamedRams == QUEST_COMPLETED and Allegiance == 1) then
+    elseif (steamedRams == QUEST_COMPLETED and allegiance == 1) then
         player:startEvent(5)
     end
 end

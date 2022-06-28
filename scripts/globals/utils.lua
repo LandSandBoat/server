@@ -98,12 +98,14 @@ end
 -- returns reduced magic damage from RUN buff, "One for All"
 function utils.oneforall(target, dmg)
     if dmg > 0 then
-        local OFA = target:getStatusEffect(xi.effect.ONE_FOR_ALL)
-        if OFA ~= nil then
-            local power = OFA:getPower()
+        local oneForAllEffect = target:getStatusEffect(xi.effect.ONE_FOR_ALL)
+
+        if oneForAllEffect ~= nil then
+            local power = oneForAllEffect:getPower()
             dmg = math.max(0, dmg - power)
         end
     end
+
     return dmg
 end
 
@@ -193,7 +195,6 @@ function utils.conalDamageAdjustment(attacker, target, skill, max_damage, minimu
 
     if conal_angle_power < 0 then
         -- #TODO The below print will be a valid print upon fixing to-do above relating to beam center orgin
-        -- print("Error: conalDamageAdjustment - Mob TP move hit target beyond conal angle: ".. cone_angle)
         conal_angle_power = 0
     end
 
@@ -491,6 +492,81 @@ end
 function utils.splitStr(s, sep)
     local fields = {}
     local pattern = string.format("([^%s]+)", sep)
-    string.gsub(s, pattern, function(c) fields[#fields + 1] = c end)
+    local _ = string.gsub(s, pattern, function(c) fields[#fields + 1] = c end)
     return fields
+end
+
+function utils.mobTeleport(mob, hideDuration, pos, disAnim, reapAnim)
+
+    --TODO Table of animations that are used for teleports for reference
+
+    if hideDuration == nil then
+        hideDuration = 5000
+    end
+
+    if disAnim == nil then
+        disAnim = "kesu"
+    end
+
+    if reapAnim == nil then
+        reapAnim = "deru"
+    end
+
+    if pos == nil then
+        pos = mob:getPos()
+    end
+
+    local mobSpeed = mob:getSpeed()
+
+    if hideDuration < 1000 then
+        hideDuration = 1000
+    end
+
+    if mob:isDead() then
+        return
+    end
+
+    mob:entityAnimationPacket(disAnim)
+    mob:hideName(true)
+    mob:setUntargetable(true)
+    mob:SetAutoAttackEnabled(false)
+    mob:SetMagicCastingEnabled(false)
+    mob:SetMobAbilityEnabled(false)
+    mob:setPos(pos, 0)
+    mob:setSpeed(0)
+
+    mob:timer(hideDuration, function(mobArg)
+        mobArg:setPos(pos, 0)
+        mobArg:hideName(false)
+        mobArg:setUntargetable(false)
+        mobArg:SetAutoAttackEnabled(true)
+        mobArg:SetMagicCastingEnabled(true)
+        mobArg:SetMobAbilityEnabled(true)
+        mobArg:setSpeed(mobSpeed)
+        mobArg:entityAnimationPacket(reapAnim)
+
+        if mobArg:isDead() then
+            return
+        end
+    end)
+end
+
+local ffxiRotConversionFactor = 360.0 / 255.0
+
+function utils.ffxiRotToDegrees(ffxiRot)
+    return ffxiRotConversionFactor * ffxiRot
+end
+
+
+function utils.lateralTranslateWithOriginRotation(origin, translation)
+    local degrees = utils.ffxiRotToDegrees(origin.rot)
+    local rads = math.rad(degrees)
+    local new_coords = {}
+
+    new_coords.x = origin.x + ((math.cos(rads) * translation.x) + (math.sin(rads) * translation.z))
+    new_coords.z = origin.z + ((math.cos(rads) * translation.z) - (math.sin(rads) * translation.x))
+    new_coords.y = origin.y
+    new_coords.rot = origin.rot
+
+    return new_coords
 end

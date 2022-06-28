@@ -20,13 +20,15 @@
 */
 
 #include "common/kernel.h"
+
+#include "common/debug.h"
+#include "common/logging.h"
+#include "common/lua.h"
+#include "common/settings.h"
 #include "common/socket.h"
 #include "common/taskmgr.h"
 #include "common/timer.h"
 #include "common/version.h"
-
-#include "debug.h"
-#include "logging.h"
 
 #include <csignal>
 #include <cstdio>
@@ -46,7 +48,8 @@
 #endif
 #endif
 
-int    runflag = 1;
+std::atomic<bool> gRunFlag = true;
+
 int    arg_c   = 0;
 char** arg_v   = nullptr;
 
@@ -100,7 +103,7 @@ static void dump_backtrace()
 {
     // gdb
 #if defined(__linux__)
-    int fd[2];
+    int fd[2] = {};
     int status = pipe(fd);
     if (status == -1)
     {
@@ -143,31 +146,25 @@ static void dump_backtrace()
             ShowError("read failed for gdb backtrace: %s", strerror(errno));
             _exit(EXIT_FAILURE);
         }
-        ShowFatalError("--- gdb backtrace ---");
-        ShowFatalError("%s", buf);
+        ShowCritical("--- gdb backtrace ---");
+        ShowCritical("%s", buf);
     }
 #endif
 }
 
 /************************************************************************
- *																		*
- *  CORE : Signal Sub Function											*
- *																		*
+ *                                                                      *
+ *  CORE : Signal Sub Function                                          *
+ *                                                                      *
  ************************************************************************/
 
 static void sig_proc(int sn)
 {
-    static int is_called = 0;
-
     switch (sn)
     {
         case SIGINT:
         case SIGTERM:
-            if (++is_called > 3)
-            {
-                do_final(EXIT_SUCCESS);
-            }
-            runflag = 0;
+            gRunFlag = false;
             break;
         case SIGABRT:
         case SIGSEGV:
@@ -187,20 +184,14 @@ static void sig_proc(int sn)
         case SIGXFSZ:
             // ignore and allow it to set errno to EFBIG
             ShowWarning("Max file size reached!");
-            // run_flag = 0;	// should we quit?
+            // run_flag = 0; // should we quit?
             break;
         case SIGPIPE:
-            // ShowInfo ("Broken pipe found... closing socket");	// set to eof in socket.c
+            // ShowInfo ("Broken pipe found... closing socket"); // set to eof in socket.c
             break; // does nothing here
 #endif
     }
 }
-
-/************************************************************************
- *																		*
- *																		*
- *																		*
- ************************************************************************/
 
 void signals_init()
 {
@@ -221,9 +212,9 @@ void signals_init()
 }
 
 /************************************************************************
- *																		*
- *  Warning if logged in as superuser (root)								*
- *																		*
+ *                                                                      *
+ *  Warning if logged in as superuser (root)                            *
+ *                                                                      *
  ************************************************************************/
 
 void usercheck()
@@ -239,14 +230,24 @@ void usercheck()
 }
 
 /************************************************************************
- *																		*
- *  CORE : MAINROUTINE													*
- *																		*
+ *                                                                      *
+ *  CORE : MAINROUTINE                                                  *
+ *                                                                      *
  ************************************************************************/
 #ifndef DEFINE_OWN_MAIN
 int main(int argc, char** argv)
 {
     debug::init();
+
+#ifdef _WIN32
+    // Disable Quick Edit Mode (Mark) in Windows Console to prevent users from accidentially
+    // causing the server to freeze.
+    HANDLE hInput;
+    DWORD  prev_mode;
+    hInput = GetStdHandle(STD_INPUT_HANDLE);
+    GetConsoleMode(hInput, &prev_mode);
+    SetConsoleMode(hInput, ENABLE_EXTENDED_FLAGS | (prev_mode & ~ENABLE_QUICK_EDIT_MODE));
+#endif // _WIN32
 
     { // initialize program arguments
         char* p1 = SERVER_NAME = argv[0];
@@ -265,28 +266,32 @@ int main(int argc, char** argv)
     usercheck();
     signals_init();
     timer_init();
+
+    lua_init();
+    settings::init();
+
     socket_init();
 
     do_init(argc, argv);
 
-    fd_set rfd;
+    fd_set rfd = {};
     { // Main runtime cycle
-        duration next;
+        duration next = std::chrono::milliseconds(200);
 
-        while (runflag)
+        while (gRunFlag)
         {
             next = CTaskMgr::getInstance()->DoTimer(server_clock::now());
             do_sockets(&rfd, next);
         }
     }
 
+#ifdef _WIN32
+    // Re-enable Quick Edit Mode upon Exiting if it is still disabled
+    SetConsoleMode(hInput, prev_mode);
+#endif // _WIN32
+
     gConsoleService = nullptr;
 
     do_final(EXIT_SUCCESS);
-#ifdef _WIN32
-#ifdef _DEBUG
-    return 0;
-#endif // _WIN32
-#endif // _DEBUG
 }
 #endif // DEFINE_OWN_MAIN

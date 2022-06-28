@@ -714,22 +714,22 @@ INSERT INTO `mob_spell_lists` VALUES ('Undead',28,258,7,255);
 INSERT INTO `mob_spell_lists` VALUES ('Undead',28,259,41,255);
 INSERT INTO `mob_spell_lists` VALUES ('Undead',28,273,31,55);
 INSERT INTO `mob_spell_lists` VALUES ('Undead',28,274,56,255);
-INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,174,40,40);
+INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,174,43,44);
 INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,175,60,60);
 INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,176,75,75);
-INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,179,40,40);
+INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,179,43,44);
 INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,180,60,60);
 INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,181,75,75);
-INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,184,40,40);
+INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,184,43,44);
 INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,185,60,60);
 INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,186,75,75);
-INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,189,40,40);
+INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,189,43,44);
 INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,190,60,60);
 INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,191,75,75);
-INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,194,40,40);
+INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,194,43,44);
 INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,195,60,60);
 INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,196,75,75);
-INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,199,40,40);
+INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,199,43,44);
 INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,200,60,60);
 INSERT INTO `mob_spell_lists` VALUES ('Mammet',29,201,75,75);
 INSERT INTO `mob_spell_lists` VALUES ('Yagudo_SMN',30,288,1,255);
@@ -3436,13 +3436,13 @@ INSERT INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,18,78,255);         
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,19,68,255);          -- Viruna
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,20,58,255);          -- Cursna
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,57,80,255);          -- Haste
--- INSERT INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,779,34,255);           -- Indi-Fury        (not implimented yet)
--- INSERT INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,783,10,255);           -- Indi-Precision   (not implimented yet)
--- INSERT INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,788,76,255);           -- Indi-Frailty     (not implimented yet)
--- INSERT INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,771,93,255);           -- Indi-Haste       (not implimented yet)
--- INSERT INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,768,15,255);           -- Indi-Regen       (not implimented yet)
--- INSERT INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,770,30,255);           -- Indi-Refresh     (not implimented yet)
--- INSERT INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,781,46,255);           -- Indi-Acumen      (not implimented yet)
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,779,34,255);         -- Indi-Fury
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,783,10,255);         -- Indi-Precision
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,788,76,255);         -- Indi-Frailty
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,771,93,255);         -- Indi-Haste
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,768,15,255);         -- Indi-Regen
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,770,30,255);         -- Indi-Refresh
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Sylvie_UC',394,781,46,255);         -- Indi-Acumen
 
 -- INSERT INTO `mob_spell_lists` VALUES ('TRUST_Abquhbah',395,0,1,255);          -- none (reserved)
 
@@ -4151,7 +4151,155 @@ INSERT INTO `mob_spell_lists` VALUES ('Nepionic_Soulflayer',460,274,1,60); -- sl
 
 INSERT INTO `mob_spell_lists` VALUES ('Bombast',461,235,1,255); -- sleepga_II
 
--- Next Available: 462
+INSERT INTO `mob_spell_lists` VALUES('Goblin_Wolfman', 462, 245, 10, 255);
+INSERT INTO `mob_spell_lists` VALUES('Goblin_Wolfman', 462, 247, 20, 255);
+INSERT INTO `mob_spell_lists` VALUES('Goblin_Wolfman', 462, 252, 20, 255);
+INSERT INTO `mob_spell_lists` VALUES('Goblin_Wolfman', 462, 266, 43, 255);
+INSERT INTO `mob_spell_lists` VALUES('Goblin_Wolfman', 462, 267, 41, 255);
+INSERT INTO `mob_spell_lists` VALUES('Goblin_Wolfman', 462, 268, 35, 255);
+INSERT INTO `mob_spell_lists` VALUES('Goblin_Wolfman', 462, 269, 37, 255);
+INSERT INTO `mob_spell_lists` VALUES('Goblin_Wolfman', 462, 270, 39, 255);
+INSERT INTO `mob_spell_lists` VALUES('Goblin_Wolfman', 462, 271, 31, 255);
+INSERT INTO `mob_spell_lists` VALUES('Goblin_Wolfman', 462, 272, 33, 255);
+INSERT INTO `mob_spell_lists` VALUES('Goblin_Wolfman', 462, 275, 45, 255);
+INSERT INTO `mob_spell_lists` VALUES('Goblin_Collector', 463, 35, 45, 255);
+INSERT INTO `mob_spell_lists` VALUES('Goblin_Collector', 463, 21, 45, 255);
+INSERT INTO `mob_spell_lists` VALUES('Goblin_Collector', 463, 40, 45, 255);
+
+-- CoP 5-3L Head Wind (Boneyard Gulley) -- Shikaree X (Used Capture from FFXI Captures Discord)
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_X',464,344,1,255); -- Hojo: Ichi
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_X',464,347,1,255); -- Kurayami: Ichi
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_X',464,338,1,255); -- Utsusemi: Ichi
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_X',464,320,1,255); -- Katon: Ichi
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_X',464,323,1,255); -- Hyoton: Ichi
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_X',464,326,1,255); -- Huton: Ichi
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_X',464,329,1,255); -- Doton: Ichi
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_X',464,332,1,255); -- Raiton: Ichi
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_X',464,335,1,255); -- Suiton: Ichi
+
+-- CoP 5-3L Head Wind (Boneyard Gulley) -- Shikaree Y (Used Capture from FFXI Captures Discord)
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Y',465,159,1,255); -- Stone
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Y',465,169,1,255); -- Water
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Y',465,154,1,255); -- Aero
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Y',465,144,1,255); -- Fire
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Y',465,149,1,255); -- Blizzard
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Y',465,164,1,255); -- Thunder
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Y',465,220,1,255); -- Poison
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Y',465,225,1,255); -- Poisonga
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Y',465,247,1,255); -- Aspir
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Y',465,245,1,255); -- Drain
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Y',465,266,1,255); -- Absorb-STR
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Y',465,267,1,255); -- Absorb-DEX
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Y',465,275,1,255); -- Absorb-TP
+
+-- CoP 5-3L Head Wind (Boneyard Gulley) -- Shikaree Z (Used Capture from FFXI Captures Discord)
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Z',466,28,1,255); -- Banish
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Z',466,38,1,255); -- Banisga
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Z',466,53,1,255); -- Blink
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Z',466,23,1,255); -- Dia
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Z',466,33,1,255); -- Diaga
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Z',466,14,1,255); -- Poisona
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Z',466,15,1,255); -- Paralyna
+INSERT INTO `mob_spell_lists` VALUES ('Shikaree_Z',466,55,1,255); -- Aquaveil
+
+INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 147, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 152, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 157, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 162, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 167, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 172, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 176, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 181, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 186, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 191, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ixzdei_RDM', 468, 191, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ixzdei_RDM', 468, 260, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ixzdei_RDM', 468, 254, 1, 255);
+
+INSERT INTO `mob_spell_lists` VALUES ('ixghrah_Manafont_spells', 469, 274, 1, 255); -- sleepga_ii
+INSERT INTO `mob_spell_lists` VALUES ('ixghrah_Manafont_spells', 470, 40, 1, 255); -- banishga_iii
+INSERT INTO `mob_spell_lists` VALUES ('ixghrah_Manafont_spells', 471, 181, 1, 255); -- blizzaga_iii
+INSERT INTO `mob_spell_lists` VALUES ('ixghrah_Manafont_spells', 472, 186, 1, 255); -- aeroga_iii
+INSERT INTO `mob_spell_lists` VALUES ('ixghrah_Manafont_spells', 473, 191 , 1, 255); -- stonega_iii
+INSERT INTO `mob_spell_lists` VALUES ('ixghrah_Manafont_spells', 474, 196, 1, 255); -- thundaga_iii
+INSERT INTO `mob_spell_lists` VALUES ('ixghrah_Manafont_spells', 475, 201, 1, 255); -- waterga_iii
+INSERT INTO `mob_spell_lists` VALUES ('ixghrah_Manafont_spells', 476, 176, 1, 255); -- firaga_iii
+
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Dark', 477, 232, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Dark', 477, 245, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Dark', 477, 247, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Dark', 477, 252, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Dark', 477, 260, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Dark', 477, 269, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Dark', 477, 270, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Dark', 477, 271, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Dark', 477, 272, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Dark', 477, 273, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Dark', 477, 274, 1, 255);
+
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Light', 478, 21, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Light', 478, 24, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Light', 478, 30, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Light', 478, 34, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Light', 478, 51, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Light', 478, 53, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Light', 478, 108, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Light', 478, 112, 1, 255);
+
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Ice', 479, 58, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Ice', 479, 101, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Ice', 479, 181, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Ice', 479, 206, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Ice', 479, 236, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Ice', 479, 250, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Ice', 479, 258, 1, 255);
+
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Wind', 480, 53, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Wind', 480, 59, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Wind', 480, 102, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Wind', 480, 157, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Wind', 480, 186, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Wind', 480, 208, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Wind', 480, 216, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Wind', 480, 237, 1, 255);
+
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Earth', 481, 54, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Earth', 481, 103, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Earth', 481, 163, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Earth', 481, 191, 1, 255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Earth', 481, 238, 1, 255);
+
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Lightning',482,104,1,255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Lightning',482,167,1,255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Lightning',482,196,1,255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Lightning',482,212,1,255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Lightning',482,239,1,255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Lightning',482,251,1,255);
+
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Water',483,55,1,255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Water',483,173,1,255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Water',483,201,1,255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Water',483,214,1,255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Water',483,226,1,255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Water',483,240,1,255);
+
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Fire',484,147,1,255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Fire',484,176,1,255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Fire',484,204,1,255);
+INSERT INTO `mob_spell_lists` VALUES('Ghrah_Fire',484,235,1,255);
+
+INSERT INTO `mob_spell_lists` VALUES('Sword_Sorcerer_Solisoq', 485, 21, 45, 255);
+INSERT INTO `mob_spell_lists` VALUES('Sword_Sorcerer_Solisoq', 485, 34, 45, 255);
+
+INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',486,249,1,255); -- Blaze Spikes
+INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',486,235,1,255); -- Burn
+INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',486,100,1,255); -- Enfire
+INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',486,147,1,255); -- Fire IV
+INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',486,148,1,255); -- Fire V
+INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',486,176,1,255); -- Firaga III
+INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',486,204,1,255); -- Flare
+
+-- Next Available: 487
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;

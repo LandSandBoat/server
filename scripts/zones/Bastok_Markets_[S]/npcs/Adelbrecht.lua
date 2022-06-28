@@ -15,7 +15,7 @@
 -- Todo: medal loss from nation switching. Since there is no rank-up yet, this isn't so important for now.
 -----------------------------------
 local ID = require("scripts/zones/Bastok_Markets_[S]/IDs")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/titles")
 require("scripts/globals/quests")
@@ -27,26 +27,26 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local Allegiance = player:getCampaignAllegiance()
+    local allegiance = player:getCampaignAllegiance()
     -- 0 = none, 1 = San d'Oria Iron Rams, 2 = Bastok Fighting Fourth, 3 = Windurst Cobras
 
-    local TheFightingFourth = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_FIGHTING_FOURTH)
-    local BlueLetter = player:hasKeyItem(xi.ki.BLUE_RECOMMENDATION_LETTER)
-    local BattleRations = player:hasKeyItem(xi.ki.BATTLE_RATIONS)
+    local theFightingFourth = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_FIGHTING_FOURTH)
+    local blueLetter = player:hasKeyItem(xi.ki.BLUE_RECOMMENDATION_LETTER)
+    local battleRations = player:hasKeyItem(xi.ki.BATTLE_RATIONS)
 
-    if (TheFightingFourth == QUEST_AVAILABLE and BlueLetter == true) then
+    if (theFightingFourth == QUEST_AVAILABLE and blueLetter == true) then
         player:startEvent(139)
-    elseif (TheFightingFourth == QUEST_AVAILABLE and player:getCharVar("BLUE_R_LETTER_USED") == 1) then
+    elseif (theFightingFourth == QUEST_AVAILABLE and player:getCharVar("BLUE_R_LETTER_USED") == 1) then
         player:startEvent(139)
-    elseif (TheFightingFourth == QUEST_ACCEPTED and BattleRations == true) then
+    elseif (theFightingFourth == QUEST_ACCEPTED and battleRations == true) then
         player:startEvent(140)
-    elseif (TheFightingFourth == QUEST_ACCEPTED and player:getCharVar("THE_FIGHTING_FOURTH") == 1) then
+    elseif (theFightingFourth == QUEST_ACCEPTED and player:getCharVar("THE_FIGHTING_FOURTH") == 1) then
         player:startEvent(141)
-    elseif (TheFightingFourth == QUEST_ACCEPTED and player:getCharVar("THE_FIGHTING_FOURTH") == 2) then
+    elseif (theFightingFourth == QUEST_ACCEPTED and player:getCharVar("THE_FIGHTING_FOURTH") == 2) then
         player:startEvent(142)
-    elseif (TheFightingFourth == QUEST_ACCEPTED and player:getCharVar("THE_FIGHTING_FOURTH") == 3) then
+    elseif (theFightingFourth == QUEST_ACCEPTED and player:getCharVar("THE_FIGHTING_FOURTH") == 3) then
         player:startEvent(143)
-    elseif (TheFightingFourth == QUEST_COMPLETED and Allegiance == 1) then
+    elseif (theFightingFourth == QUEST_COMPLETED and allegiance == 1) then
         player:startEvent(162)
     end
 end

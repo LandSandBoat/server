@@ -35,6 +35,7 @@ enum MSGBASIC_ID : uint16
 {
     MSGBASIC_NONE                     = 0,   /* Display nothing */
     MSGBASIC_DEFEATS_TARG             = 6,   /* The <player> defeats <target>. */
+    MSGBASIC_MAGIC_RECOVERS_HP        = 7,   /* <caster> casts <spell>. <target> recovers <amount> HP. */
     MSGBASIC_ALREADY_CLAIMED          = 12,  /* Cannot attack. Your target is already claimed. */
     MSGBASIC_IS_INTERRUPTED           = 16,  /* The <player>'s casting is interrupted. */
     MSGBASIC_UNABLE_TO_CAST           = 18,  /* Unable to cast spells at this time. */
@@ -55,6 +56,8 @@ enum MSGBASIC_ID : uint16
     MSGBASIC_USES_JA                  = 100, /* The <player> uses .. */
     MSGBASIC_USES_JA2                 = 101, /* The <player> uses .. */
     MSGBASIC_USES_RECOVERS_HP         = 102, /* The <player> uses .. <target> recovers .. HP. */
+    MSGBASIC_SKILL_RECOVERS_HP        = 103, /* The <player> uses .. <target> recovers .. HP. */
+
     MSGBASIC_USES_JA_TAKE_DAMAGE      = 317, /* The <player> uses .. <target> takes .. points of damage. */
     MSGBASIC_IS_INTIMIDATED           = 106, /* The <player> is intimidated by <target>'s presence. */
     MSGBASIC_CANNOT_PERFORM_ACTION    = 71,  /* You cannot perform that action on the specified target. */
@@ -65,6 +68,10 @@ enum MSGBASIC_ID : uint16
     MSGBASIC_USES_BUT_MISSES          = 324, /* The <player> uses .. but misses <target>. */
     MSGBASIC_CANT_BE_USED_IN_AREA     = 316, /* That action cannot be used in this area. */
     MSGBASIC_REQUIRES_SHIELD          = 199, /* That action requires a shield. */
+    /* Spikes */
+    MSGBASIC_SPIKES_EFFECT_DMG        = 44,  /* <target>'s spikes deal <number> damage to <attacker> */
+    MSGBASIC_SPIKES_EFFECT_HEAL       = 383, /* <target>'s spikes restore <number> HP to <attacker> */
+    MSGBASIC_SPIKES_EFFECT_HP_DRAIN   = 132, /* <target>'s spikes drain <number> HP from the <attacker>. */
     /* Distance */
     MSGBASIC_TARG_OUT_OF_RANGE  = 4,  /* <target> is out of range. */
     MSGBASIC_UNABLE_TO_SEE_TARG = 5,  /* Unable to see <target>. */

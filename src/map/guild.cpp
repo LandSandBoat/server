@@ -58,7 +58,7 @@ void CGuild::updateGuildPointsPattern(uint8 pattern)
 
         std::string query = "SELECT itemid, points, max_points FROM guild_item_points WHERE "
                             "guildid = %u AND pattern = %u AND rank = %u";
-        int ret = sql->Query(query.c_str(), m_id, pattern, m_GPItemsRank[i]);
+        int         ret   = sql->Query(query.c_str(), m_id, pattern, m_GPItemsRank[i]);
 
         if (ret != SQL_ERROR && sql->NumRows() > 0)
         {
@@ -80,7 +80,7 @@ std::pair<uint8, int16> CGuild::addGuildPoints(CCharEntity* PChar, CItem* PItem)
     if (PItem)
     {
         int32 curPoints = charutils::GetCharVar(PChar, "[GUILD]daily_points");
-        if (curPoints >= 0)
+        if (curPoints != 1)
         {
             for (auto& GPItem : m_GPItems[rank - 3])
             {
@@ -119,7 +119,8 @@ std::pair<uint16, uint16> CGuild::getDailyGPItem(CCharEntity* PChar)
 
     auto GPItem    = m_GPItems[rank - 3];
     auto curPoints = (uint16)charutils::GetCharVar(PChar, "[GUILD]daily_points");
-    if (curPoints <= 0) // char_var set to -1 in crafting.lua file. Deleted in guildutils.cpp
+
+    if (curPoints == 1) // char_var set to 1 in crafting.lua file when done getting points forthe day. Deleted in guildutils.cpp
     {
         return std::make_pair(GPItem[0].item->getID(), 0);
     }

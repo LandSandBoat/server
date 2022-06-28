@@ -5,7 +5,8 @@ interactionUtil = interactionUtil or {}
 function interactionUtil.makeTableCache(getterFunc)
     local obj = {}
     obj.cache = {}
-    local mt = {
+    local mt =
+    {
         __index = function(table, key)
             if obj.cache[key] == nil then
                 obj.cache[key] = getterFunc(key)

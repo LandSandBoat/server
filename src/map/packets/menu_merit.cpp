@@ -22,6 +22,7 @@
 #include "common/socket.h"
 
 #include "menu_merit.h"
+#include "job_points.h"
 
 #include "../entities/charentity.h"
 #include "../utils/charutils.h"
@@ -31,56 +32,40 @@ CMenuMeritPacket::CMenuMeritPacket(CCharEntity* PChar)
     this->setType(0x63);
     this->setSize(0x10);
 
-    ref<uint8>(0x04) = 0x02;
-    ref<uint8>(0x06) = 0x0C;
+    ref<uint8>(0x04) = 0x02; // Update Type
+    ref<uint8>(0x06) = 0x0C; // Variable Data Size
 
     ref<uint16>(0x08) = PChar->PMeritPoints->GetLimitPoints();
+    ref<uint16>(0x0A) = PChar->PMeritPoints->GetMeritPoints();
 
-    uint16 bits = 0;
-    bits += PChar->PMeritPoints->GetMeritPoints() & 0b0000000001111111; // first seven bits are merit points
-    if (PChar->GetMJob() == JOB_BLU && PChar->GetMLevel() > 74)
+    // 0x0A
+    if (PChar->GetMJob() == JOB_BLU)
     {
-        bits += (PChar->PMeritPoints->GetMeritValue(MERIT_ASSIMILATION, PChar) << 7) &
-                0b0001111110000000; // next six bits are assimilation points. the last three bits are the three flags below:
+        uint8 bluePointBonus = 0;
+
+        if (PChar->GetMLevel() >= 75)
+        {
+            bluePointBonus += PChar->PMeritPoints->GetMeritValue(MERIT_ASSIMILATION, PChar);
+        }
+
+        if (PChar->GetMLevel() >= 99)
+        {
+            bluePointBonus += PChar->PJobPoints->GetJobPointValue(JP_BLUE_MAGIC_POINT_BONUS);
+        }
+
+        ref<uint16>(0x0A) |= bluePointBonus << 7;
     }
-    bits += (PChar->jobs.job[PChar->GetMJob()] >= 75 && charutils::hasKeyItem(PChar, 606)) << 13; // is 75 and has limit breaker KI
-    bits += ((PChar->jobs.job[PChar->GetMJob()] >= PChar->jobs.genkai &&
-              PChar->jobs.exp[PChar->GetMJob()] == charutils::GetExpNEXTLevel(PChar->jobs.job[PChar->GetMJob()]) - 1) ||
-             PChar->MeritMode)
-            << 14;                                        // my exp is capped
-    bits += (bits & (1 << 13) && PChar->MeritMode) << 15; // flag 13 is set and merit mode is on
 
-    ref<uint16>(0x0A) = bits;
+    bool canUseMeritMode = PChar->jobs.job[PChar->GetMJob()] >= 75 && charutils::hasKeyItem(PChar, 606);
 
-    ref<uint8>(0x0C) = map_config.max_merit_points + PChar->PMeritPoints->GetMeritValue(MERIT_MAX_MERIT, PChar);
+    ref<uint16>(0x0A) |= canUseMeritMode << 13; // Level >= 75 and has Limit Break KI
 
-    PChar->pushPacket(new CBasicPacket(*this));
+    bool atMaxLevelLimit = PChar->jobs.job[PChar->GetMJob()] >= PChar->jobs.genkai;
+    bool hasCappedXp     = PChar->jobs.exp[PChar->GetMJob()] == (charutils::GetExpNEXTLevel(PChar->jobs.job[PChar->GetMJob()]) - 1);
 
-    // Update Type 3 : Monstrosity 1 (Possible to move these packets out of here?)
-    // --------------------------------------------
+    ref<uint16>(0x0A) |= ((atMaxLevelLimit && hasCappedXp) || PChar->MeritMode) << 14; // XP is capped, or player is in Merit Mode
+    ref<uint16>(0x0A) |= (canUseMeritMode && PChar->MeritMode) << 15;                  // Merit Mode Enabled, and Current Job is eligible
 
-    this->setSize(0xDC);
-
-    memset(data + 4, 0, sizeof(PACKET_SIZE - 4));
-
-    uint8 packet[] = { 0x03, 0x00, 0xD8 };
-
-    memcpy(data + (0x04), &packet, sizeof(packet));
-
-    // This is a hack.  We really should clear all non-relevant bytes in memset
-    ref<uint8>(0x0C) = 0x00; // Temporary fix for Monstrosity Gladiator Rank.  This applies to next packet as well.
-
-    PChar->pushPacket(new CBasicPacket(*this));
-
-    // Update Type 4 : Monstrosity 2
-    // --------------------------------------------
-
-    this->setSize(0xB4);
-
-    memset(data + 4, 0, sizeof(PACKET_SIZE - 4));
-
-    uint8 packet2[] = { 0x04, 0x00, 0xB0 };
-    memcpy(data + (0x04), &packet2, sizeof(packet2));
+    ref<uint8>(0x0C) = settings::get<uint8>("map.MAX_MERIT_POINTS") + PChar->PMeritPoints->GetMeritValue(MERIT_MAX_MERIT, PChar);
 }
 
-// 0x63, 0x06, 0x88, 0x41, 0x02, 0x00, 0x08, 0x00, 0xD3, 0x03, 0x03, 0x60

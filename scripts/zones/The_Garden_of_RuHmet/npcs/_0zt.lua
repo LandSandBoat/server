@@ -2,7 +2,7 @@
 -- Area: The_Garden_of_RuHmet
 --  NPC: Luminus convergence
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 
@@ -17,13 +17,9 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    -- printf("onUpdate CSID: %u", csid)
-    -- printf("onUpdate RESULT: %u", option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    -- printf("onFinish CSID: %u", csid)
-    -- printf("onFinish RESULT: %u", option)
     if (csid==204) then
         player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.WHEN_ANGELS_FALL)
         player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.DAWN)

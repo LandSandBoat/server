@@ -5,7 +5,7 @@
 -- !pos -120.342 -19.471 306.661 126
 -----------------------------------
 local ID = require("scripts/zones/Qufim_Island/IDs")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
@@ -19,16 +19,16 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local missionACP = player:getCurrentMission(xi.mission.log_id.ACP)
-    local SR = player:hasKeyItem(xi.ki.SEEDSPALL_ROSEUM)
-    local SC = player:hasKeyItem(xi.ki.SEEDSPALL_CAERULUM)
-    local SV = player:hasKeyItem(xi.ki.SEEDSPALL_VIRIDIS)
+    local missionACP        = player:getCurrentMission(xi.mission.log_id.ACP)
+    local seedspallRosem    = player:hasKeyItem(xi.ki.SEEDSPALL_ROSEUM)
+    local seedspallCaerulum = player:hasKeyItem(xi.ki.SEEDSPALL_CAERULUM)
+    local seedspallViridis  = player:hasKeyItem(xi.ki.SEEDSPALL_VIRIDIS)
     -- local amberKey = player:hasKeyItem(xi.ki.AMBER_KEY)
     -- local lastAmber = player:getCharVar("LastAmberKey") -- When last Amber key was obtained
     local lastViridian = player:getCharVar("LastViridianKey") -- When last Viridian key was obtained
 
-    if xi.settings.ENABLE_ACP == 1 and not player:hasKeyItem(xi.ki.AMBER_KEY) then
-        if missionACP == xi.mission.id.acp.GATHERER_OF_LIGHT_I and SR and SC and SV and os.time() > lastViridian then
+    if xi.settings.main.ENABLE_ACP == 1 and not player:hasKeyItem(xi.ki.AMBER_KEY) then
+        if missionACP == xi.mission.id.acp.GATHERER_OF_LIGHT_I and seedspallRosem and seedspallCaerulum and seedspallViridis and os.time() > lastViridian then
             player:startEvent(32)
         elseif missionACP == xi.mission.id.acp.GATHERER_OF_LIGHT_II and player:getCharVar("SEED_MANDY") == 0 then
             -- Spawn Seed mandragora's

@@ -4,7 +4,7 @@
 --  Invloved in quests: A Greeting Cardian
 -----------------------------------
 local ID = require("scripts/zones/Buburimu_Peninsula/IDs")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 
@@ -12,10 +12,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local AGreetingCardian = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_GREETING_CARDIAN)
-    local AGCcs = player:getCharVar("AGreetingCardian_Event")
+    local aGreetingCardian = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_GREETING_CARDIAN)
+    local aGCcs = player:getCharVar("AGreetingCardian_Event")
 
-    if (AGreetingCardian == QUEST_ACCEPTED and AGCcs == 4) then
+    if (aGreetingCardian == QUEST_ACCEPTED and aGCcs == 4) then
         player:startEvent(1) -- A Greeting Cardian step three
     else
         player:showText(npc, ID.text.FIVEOFSPADES_DIALOG) -- Standard Dialog

@@ -4,7 +4,7 @@
 -- !pos -4 -6 -28 245
 -----------------------------------
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/titles")
 require("scripts/globals/quests")
 -----------------------------------
@@ -31,22 +31,22 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local YourCrystalBall           = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.YOUR_CRYSTAL_BALL)
-    local SearchingForTheRightWords = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS)
-    local RubbishDay                = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RUBBISH_DAY)
-    local NeverToReturn             = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NEVER_TO_RETURN)
-    local JFame                     = player:getFameLevel(xi.quest.fame_area.JEUNO)
-    local SearchingForWords_prereq  = player:getCharVar("QuestSearchRightWords_prereq")
+    local yourCrystalBall           = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.YOUR_CRYSTAL_BALL)
+    local searchingForTheRightWords = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SEARCHING_FOR_THE_RIGHT_WORDS)
+    local rubbishDay                = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RUBBISH_DAY)
+    local neverToReturn             = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NEVER_TO_RETURN)
+    local jeunoFame                 = player:getFameLevel(xi.quest.fame_area.JEUNO)
+    local searchingForWords_prereq  = player:getCharVar("QuestSearchRightWords_prereq")
 
     if
-        JFame >= 2 and
-        YourCrystalBall == QUEST_AVAILABLE
+        jeunoFame >= 2 and
+        yourCrystalBall == QUEST_AVAILABLE
     then
         player:startEvent(194) -- Start "Your Crystal Ball" quest
 
     elseif
-        JFame >= 5 and
-        YourCrystalBall == QUEST_COMPLETED and
+        jeunoFame >= 5 and
+        yourCrystalBall == QUEST_COMPLETED and
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NEVER_TO_RETURN) == QUEST_AVAILABLE and
         player:getCharVar("QuestNeverToReturn_day") ~= VanadielDayOfTheYear()
     then
@@ -59,27 +59,27 @@ entity.onTrigger = function(player, npc)
         end
 
     --if searching for right words *prereq* CS has been activated
-    elseif SearchingForWords_prereq == 1 then
+    elseif searchingForWords_prereq == 1 then
         player:startEvent(38)
 
     elseif player:getCharVar("QuestSearchRightWords_denied") == 1 then
         player:startEvent(36)
 
-    elseif SearchingForTheRightWords == QUEST_ACCEPTED then
+    elseif searchingForTheRightWords == QUEST_ACCEPTED then
         player:startEvent(39)
 
     elseif player:getCharVar("SearchingForRightWords_postcs") == -2 then
         player:startEvent(154)
 
-    elseif SearchingForTheRightWords == QUEST_COMPLETED then --final state, after all quests complete
+    elseif searchingForTheRightWords == QUEST_COMPLETED then --final state, after all quests complete
         player:startEvent(37)
 
     --conditions for searching for the right words
     elseif
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_CANDLELIGHT_VIGIL) == QUEST_COMPLETED and
-        RubbishDay == QUEST_COMPLETED and
-        NeverToReturn == QUEST_COMPLETED and
-        SearchingForTheRightWords == QUEST_AVAILABLE
+        rubbishDay == QUEST_COMPLETED and
+        neverToReturn == QUEST_COMPLETED and
+        searchingForTheRightWords == QUEST_AVAILABLE
     then
         player:startEvent(17)
 
@@ -114,8 +114,8 @@ entity.onEventFinish = function(player, csid, option)
         if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13477)
         else
-            player:addGil(xi.settings.GIL_RATE * 1200)
-            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 1200)
+            player:addGil(xi.settings.main.GIL_RATE * 1200)
+            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 1200)
             player:addItem(13477)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13477)
             player:addFame(xi.quest.fame_area.JEUNO, 30)

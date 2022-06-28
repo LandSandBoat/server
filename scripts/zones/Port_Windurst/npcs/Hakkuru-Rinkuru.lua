@@ -6,7 +6,7 @@
 -- !pos -111 -4 101 240
 -----------------------------------
 local ID = require("scripts/zones/Port_Windurst/IDs")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/titles")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
@@ -32,25 +32,25 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local MakingAmends = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENDS)
-    local MakingAmens = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENS) --Second quest in series
-    local WonderWands = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDER_WANDS) --Third and final quest in series
+    local makingAmends = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENDS)
+    local makingAmens = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENS) --Second quest in series
+    local wonderWands = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDER_WANDS) --Third and final quest in series
     local needToZone = player:needToZone()
     local pFame = player:getFameLevel(xi.quest.fame_area.WINDURST)
 
 -- Begin Making Amends Section
-    if (MakingAmends == QUEST_AVAILABLE and pFame >= 2) then
+    if (makingAmends == QUEST_AVAILABLE and pFame >= 2) then
             player:startEvent(274, 0, 937) -- MAKING AMENDS + ANIMAL GLUE: Quest Start
-    elseif (MakingAmends == QUEST_ACCEPTED) then
+    elseif (makingAmends == QUEST_ACCEPTED) then
             player:startEvent(275, 0, 937) -- MAKING AMENDS + ANIMAL GLUE: Quest Objective Reminder
-    elseif (MakingAmends == QUEST_COMPLETED and needToZone == true) then
+    elseif (makingAmends == QUEST_COMPLETED and needToZone == true) then
             player:startEvent(278) -- MAKING AMENDS: After Quest
 --End Making Amends Section; Begin Wonder Wands Section
-    elseif (MakingAmends == QUEST_COMPLETED and MakingAmens == QUEST_COMPLETED and WonderWands == QUEST_AVAILABLE and pFame >= 5 and needToZone == false) then
+    elseif (makingAmends == QUEST_COMPLETED and makingAmens == QUEST_COMPLETED and wonderWands == QUEST_AVAILABLE and pFame >= 5 and needToZone == false) then
             player:startEvent(259) --Starts Wonder Wands
-    elseif (WonderWands == QUEST_ACCEPTED) then
+    elseif (wonderWands == QUEST_ACCEPTED) then
             player:startEvent(260) --Reminder for Wonder Wands
-    elseif (WonderWands == QUEST_COMPLETED) then
+    elseif (wonderWands == QUEST_COMPLETED) then
         if (player:getCharVar("SecondRewardVar") == 1) then
             player:startEvent(267) --Initiates second reward ifWonder Wands has been completed.
         end
@@ -65,7 +65,7 @@ entity.onEventFinish = function(player, csid, option)
     if (csid == 274 and option == 1) then
             player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENDS)
     elseif (csid == 277) then
-            player:addGil(xi.settings.GIL_RATE*1500)
+            player:addGil(xi.settings.main.GIL_RATE*1500)
             player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENDS)
             player:addFame(xi.quest.fame_area.WINDURST, 75)
             player:addTitle(xi.title.QUICK_FIXER)
@@ -120,7 +120,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 12750) -- New Moon Armlets
         else
             player:tradeComplete()
-            player:addGil(xi.settings.GIL_RATE*4800)
+            player:addGil(xi.settings.main.GIL_RATE*4800)
             player:messageSpecial(ID.text.GIL_OBTAINED, 4800)
             player:addItem(12750) -- New Moon Armlets
             player:messageSpecial(ID.text.ITEM_OBTAINED, 12750) -- New Moon Armlets

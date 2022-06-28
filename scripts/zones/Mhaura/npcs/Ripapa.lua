@@ -5,7 +5,7 @@
 -- !pos 29 -15 55 249
 -----------------------------------
 require("scripts/globals/titles")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/shop")
 require("scripts/globals/quests")
@@ -17,27 +17,26 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
-    local TrialByLightning = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
-    local WhisperOfStorms = player:hasKeyItem(xi.ki.WHISPER_OF_STORMS)
-    local CarbuncleDebacle = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE)
-    local CarbuncleDebacleProgress = player:getCharVar("CarbuncleDebacleProgress")
+    local trialByLightning = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
+    local whisperOfStorms = player:hasKeyItem(xi.ki.WHISPER_OF_STORMS)
+    local carbuncleDebacle = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE)
+    local carbuncleDebacleProgress = player:getCharVar("CarbuncleDebacleProgress")
 
     -----------------------------------
     -- Carbunlce Debacle
-    if (CarbuncleDebacle == QUEST_ACCEPTED and CarbuncleDebacleProgress == 2) then
+    if (carbuncleDebacle == QUEST_ACCEPTED and carbuncleDebacleProgress == 2) then
         player:startEvent(10022) -- get the lighning pendulum lets go to Cloister of Storms
-    elseif (CarbuncleDebacle == QUEST_ACCEPTED and CarbuncleDebacleProgress == 3 and player:hasItem(1172) == false) then
+    elseif (carbuncleDebacle == QUEST_ACCEPTED and carbuncleDebacleProgress == 3 and player:hasItem(1172) == false) then
         player:startEvent(10023, 0, 1172, 0, 0, 0, 0, 0, 0) -- "lost the pendulum?"
     -----------------------------------
     -- Trial by Lightning
-    elseif ((TrialByLightning == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 6) or (TrialByLightning == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByLightning_date"))) then
+    elseif ((trialByLightning == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 6) or (trialByLightning == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByLightning_date"))) then
         player:startEvent(10016, 0, xi.ki.TUNING_FORK_OF_LIGHTNING) -- Start and restart quest "Trial by Lightning"
-    elseif (TrialByLightning == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.TUNING_FORK_OF_LIGHTNING) == false and WhisperOfStorms == false) then
+    elseif (trialByLightning == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.TUNING_FORK_OF_LIGHTNING) == false and whisperOfStorms == false) then
         player:startEvent(10024, 0, xi.ki.TUNING_FORK_OF_LIGHTNING) -- Defeat against Ramuh : Need new Fork
-    elseif (TrialByLightning == QUEST_ACCEPTED and WhisperOfStorms == false) then
+    elseif (trialByLightning == QUEST_ACCEPTED and whisperOfStorms == false) then
         player:startEvent(10017, 0, xi.ki.TUNING_FORK_OF_LIGHTNING, 5)
-    elseif (TrialByLightning == QUEST_ACCEPTED and WhisperOfStorms) then
+    elseif (trialByLightning == QUEST_ACCEPTED and whisperOfStorms) then
         local numitem = 0
 
         if (player:hasItem(17531)) then numitem = numitem + 1; end  -- Ramuh's Staff
@@ -50,14 +49,12 @@ entity.onTrigger = function(player, npc)
     else
         player:startEvent(10020) -- Standard dialog
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if (csid == 10016 and option == 1) then
         if (player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING) == QUEST_COMPLETED) then
             player:delQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TRIAL_BY_LIGHTNING)
@@ -81,8 +78,8 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, item)
         else
             if (option == 5) then
-                player:addGil(xi.settings.GIL_RATE * 10000)
-                player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 10000) -- Gil
+                player:addGil(xi.settings.main.GIL_RATE * 10000)
+                player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 10000) -- Gil
             elseif (option == 6) then
                 player:addSpell(303) -- Ramuh Spell
                 player:messageSpecial(ID.text.RAMUH_UNLOCKED, 0, 0, 5)
@@ -105,7 +102,6 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 1172)
         end
     end
-
 end
 
 return entity

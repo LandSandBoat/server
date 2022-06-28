@@ -74,32 +74,33 @@ enum class LATENT : uint16
     // 44 free to use
     MP_UNDER_VISIBLE_GEAR = 45, // mp less than or equal to %, calculated using MP bonuses from visible gear only
     HP_OVER_VISIBLE_GEAR  = 46, // hp more than or equal to %, calculated using HP bonuses from visible gear only
-    WEAPON_BROKEN         = 47,
-    IN_DYNAMIS            = 48,
+    WEAPON_BROKEN         = 47, //
+    IN_DYNAMIS            = 48, //
     FOOD_ACTIVE           = 49, // food effect (foodId) active - PARAM: FOOD ITEMID
     JOB_LEVEL_BELOW       = 50, // PARAM: level
     JOB_LEVEL_ABOVE       = 51, // PARAM: level
     WEATHER_ELEMENT       = 52, // PARAM: 0: NONE, 1: FIRE, 2: ICE, 3: WIND 4: EARTH, 5: THUNDER, 6: WATER, 7: LIGHT, 8: DARK
-    NATION_CONTROL   = 53, // checks if player region is under nation's control - PARAM: 0: Under own nation's control, 1: Outside own nation's control
-    ZONE_HOME_NATION = 54, // in zone and citizen of nation (aketons)
-    MP_OVER          = 55, // mp greater than # - PARAM: MP #
-    WEAPON_DRAWN_MP_OVER = 56, // while weapon is drawn and mp greater than # - PARAM: MP #
-    ELEVEN_ROLL_ACTIVE   = 57, // corsair roll of 11 active
-    IN_ASSAULT           = 58, // is in an Instance battle in a TOAU zone
-    VS_ECOSYSTEM         = 59, // Vs. Specific Ecosystem ID (e.g. Vs. Birds: Accuracy+3)
-    VS_FAMILY            = 60, // Vs. Specific Family ID (e.g. Vs. Apkallu: Accuracy+3)
+    NATION_CONTROL        = 53, // checks if player region is under nation's control - PARAM: 0: Under own nation's control, 1: Outside own nation's control
+    ZONE_HOME_NATION      = 54, // in zone and citizen of nation (aketons)
+    MP_OVER               = 55, // mp greater than # - PARAM: MP #
+    WEAPON_DRAWN_MP_OVER  = 56, // while weapon is drawn and mp greater than # - PARAM: MP #
+    ELEVEN_ROLL_ACTIVE    = 57, // corsair roll of 11 active
+    IN_ASSAULT            = 58, // is in an Instance battle in a TOAU zone
+    VS_ECOSYSTEM          = 59, // Vs. Specific Ecosystem ID (e.g. Vs. Plantoid: Accuracy+3)
+    VS_FAMILY             = 60, // Vs. Specific Family ID (e.g. Vs. Korrigan: Accuracy+3)
+    VS_SUPERFAMILY        = 61, // Vs. Specific SuperFamily ID (e.g. Vs. Mandragora: Accuracy+3)
 };
 
 #define MAX_LATENTEFFECTID 61
 
 /************************************************************************
- *																		*
- *  Нерешенные задачи:													*
- *																		*
- *  - сохранение ID сущности, добавившей эффект							*
- *  - обновление эффекта (например перезапись protect 1 на protect 2)    *
- *																		*
- ************************************************************************/
+*                                                                       *
+* Unsolved problems:                                                    *
+*                                                                       *
+* - saving the ID of the entity that added the effect                   *
+* - updating effect (for example, overwriting protect 1 with protect 2) *
+*                                                                       *
+************************************************************************/
 
 class CBattleEntity;
 
@@ -124,7 +125,7 @@ public:
     bool Deactivate();
 
     CLatentEffect(CBattleEntity* owner, LATENT conditionsId, uint16 conditionsValue, uint8 slot, Mod modValue, int16 modPower);
-    CLatentEffect(const CLatentEffect&) = delete;
+    CLatentEffect(const CLatentEffect&)            = delete;
     CLatentEffect& operator=(const CLatentEffect&) = delete;
     CLatentEffect(CLatentEffect&& o) noexcept
     {

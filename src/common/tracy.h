@@ -1,6 +1,7 @@
 ﻿#ifndef _TRACY_H
 #define _TRACY_H
 
+// clang-format off
 #ifdef TRACY_ENABLE
 #include "Tracy.hpp"
 #include "cbasetypes.h"
@@ -14,7 +15,6 @@
 #define TracyZoneString(str)    ZoneText(str.c_str(), str.size())
 #define TracyZoneCString(cstr)  ZoneText(cstr, std::strlen(cstr))
 #define TracyZoneIString(istr)  TracyZoneCString(reinterpret_cast<const char*>(istr))
-#define TracyLuaRegister(lua)   tracy::LuaRegister(lua)
 #define TracyMessageStr(str)    TracyMessage(str.c_str(), str.size())
 #define TracySetThreadName(str) tracy::SetThreadName(str);
 
@@ -67,9 +67,9 @@ inline std::string Hex16ToString(uint16 hex)
 #define TracyReportGraphNumber(name, num)  std::ignore = name; std::ignore = num
 #define TracyReportGraphBytes(name, num)   std::ignore = name; std::ignore = num
 #define TracyReportGraphPercent(name, num) std::ignore = name; std::ignore = num
-#define TracyLuaRegister(lua)              std::ignore = lua
 #define TracyMessageStr(str)               std::ignore = str
 #define TracySetThreadName(str)            std::ignore = str
 #endif
+// clang-format on
 
 #endif // _TRACY_H

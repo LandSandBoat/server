@@ -2,7 +2,7 @@
 -- Trust
 -----------------------------------
 require("scripts/globals/keyitems")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
@@ -26,7 +26,7 @@ xi.trust.message_offset =
     SPECIAL_MOVE_2 = 19,
 }
 
-local MAX_MESSAGE_PAGE = 121
+local maxMessagePage = 121
 
 local rovKIBattlefieldIDs = set{
     5,    -- Shattering Stars (WAR LB5)
@@ -55,7 +55,8 @@ local rovKIBattlefieldIDs = set{
 
 -- NOTE: Unfortunately, these are not linear, so we have to use
 --       a big lookup of offsets instead of a single offset
-local poolIDToMessagePageOffset = {
+local poolIDToMessagePageOffset =
+{
     [5896] = 0,   -- Shantotto
     [5897] = 1,   -- Naji
     [5898] = 2,   -- Kupipi
@@ -233,7 +234,7 @@ end
 
 xi.trust.canCast = function(caster, spell, not_allowed_trust_ids)
     -- Trusts must be enabled in settings
-    if xi.settings.ENABLE_TRUST_CASTING == 0 then
+    if xi.settings.main.ENABLE_TRUST_CASTING == 0 then
         return xi.msg.basic.TRUST_NO_CAST_TRUST
     end
 
@@ -356,8 +357,8 @@ xi.trust.message = function(mob, message_offset)
         return
     end
 
-    if page_offset > MAX_MESSAGE_PAGE then
-        print("trust.lua: MAX_MESSAGE_PAGE exceeded!")
+    if page_offset > maxMessagePage then
+        print("trust.lua: maxMessagePage exceeded!")
         return
     end
 

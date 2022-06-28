@@ -48,14 +48,12 @@ class CPetEntity : public CMobEntity
 {
 public:
     CPetEntity(PET_TYPE petType); // конструктор
-    ~CPetEntity();               // деструктор
+    ~CPetEntity();                // деструктор
 
     PET_TYPE    getPetType();
     bool        isBstPet();
-    uint8       m_Element;
     uint32      m_PetID;
     std::string GetScriptName();
-
     WYVERN_TYPE  getWyvernType();
     virtual void PostTick() override;
     virtual void FadeOut() override;

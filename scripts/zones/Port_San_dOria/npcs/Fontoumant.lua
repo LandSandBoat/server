@@ -7,7 +7,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Port_San_dOria/IDs")
 require("scripts/globals/keyitems")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
@@ -33,11 +33,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local TheBrugaireConsortium = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
+    local theBrugaireConsortium = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM)
 
-    if TheBrugaireConsortium == QUEST_AVAILABLE then
+    if theBrugaireConsortium == QUEST_AVAILABLE then
         player:startEvent(509)
-    elseif TheBrugaireConsortium == QUEST_ACCEPTED then
+    elseif theBrugaireConsortium == QUEST_ACCEPTED then
         local prog = player:getCharVar("TheBrugaireConsortium-Parcels")
 
         if prog == 11 then

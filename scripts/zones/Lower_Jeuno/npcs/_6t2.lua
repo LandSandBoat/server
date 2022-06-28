@@ -5,7 +5,7 @@
 -- Optional Involvement in Quest: Chocobo's Wounds, Path of the Beastmaster
 -----------------------------------
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/titles")
@@ -16,39 +16,39 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local ANewDawn      = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_NEW_DAWN)
-    local ANewDawnEvent = player:getCharVar("ANewDawn_Event")
-    local SaveMySon     = player:getCharVar("SaveMySon_Event")
+    local aNewDawn      = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_NEW_DAWN)
+    local aNewDawnEvent = player:getCharVar("ANewDawn_Event")
+    local saveMySon     = player:getCharVar("SaveMySon_Event")
     local mLvl          = player:getMainLvl()
 
     -- A New Dawn (BST AF3)
     if
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SCATTERED_INTO_SHADOW) == QUEST_COMPLETED and
-        ANewDawn == QUEST_AVAILABLE
+        aNewDawn == QUEST_AVAILABLE
     then
         if
             player:getMainJob() == xi.job.BST and
             mLvl >= 50
         then
-            if ANewDawnEvent == 0 then
+            if aNewDawnEvent == 0 then
                 player:startEvent(5)
-            elseif ANewDawnEvent == 1 then
+            elseif aNewDawnEvent == 1 then
                 player:startEvent(4)
             end
         else
             player:startEvent(1)
         end
 
-    elseif ANewDawn == QUEST_ACCEPTED then
-        if ANewDawnEvent == 2 then
+    elseif aNewDawn == QUEST_ACCEPTED then
+        if aNewDawnEvent == 2 then
             player:startEvent(2)
-        elseif ANewDawnEvent >= 4 then
+        elseif aNewDawnEvent >= 4 then
             player:startEvent(3)
         end
 
     elseif
-        ANewDawn == QUEST_COMPLETED and
-        ANewDawnEvent == 6
+        aNewDawn == QUEST_COMPLETED and
+        aNewDawnEvent == 6
     then
         player:startEvent(0)
 
@@ -60,16 +60,16 @@ entity.onTrigger = function(player, npc)
         player:startEvent(164)
 
     elseif player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_MY_SON) == QUEST_ACCEPTED then
-        if SaveMySon == 0 then
+        if saveMySon == 0 then
             player:startEvent(229)
-        elseif SaveMySon == 1 then
+        elseif saveMySon == 1 then
             player:startEvent(163)
         end
 
     elseif
         player:needToZone() == false and
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SAVE_MY_SON) == QUEST_COMPLETED and
-        SaveMySon == 2
+        saveMySon == 2
     then
         player:startEvent(132)
 
@@ -90,8 +90,8 @@ entity.onEventFinish = function(player, csid, option)
             player:addTitle(xi.title.LIFE_SAVER)
             player:addItem(13110)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13110)
-            player:addGil(xi.settings.GIL_RATE * 2100)
-            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 2100)
+            player:addGil(xi.settings.main.GIL_RATE * 2100)
+            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 2100)
             player:setCharVar("SaveMySon_Event", 2)
             player:needToZone(true)
             player:addFame(xi.quest.fame_area.JEUNO, 30)

@@ -42,8 +42,8 @@ enum ZONEID : uint16
 {
     // Note: "residential zones" aren't really zones of their own.
     // It's more of a sub zone - the dats for messages and entities will all be from the zone you entered from.
-    ZONE_RESIDENTIAL_AREA               = 0, // Old Tech Demonstration zone from pre-release (aka "the monorail place")
-    // The Above should NOT be labeled "RESIDENTIAL_AREA"
+    ZONE_RESIDENTIAL_AREA = 0, // Old Tech Demonstration zone from pre-release (aka "the monorail place")
+                               // The Above should NOT be labeled "RESIDENTIAL_AREA"
     ZONE_PHANAUET_CHANNEL               = 1,
     ZONE_CARPENTERS_LANDING             = 2,
     ZONE_MANACLIPPER                    = 3,
@@ -459,12 +459,6 @@ enum ZONEMISC
     MISC_CAMPAIGN = 0x1000, // Campaign zones
 };
 
-/************************************************************************
- *                                                                       *
- *                                                                       *
- *                                                                       *
- ************************************************************************/
-
 struct zoneMusic_t
 {
     uint8 m_songDay;   // music (daytime)
@@ -472,12 +466,6 @@ struct zoneMusic_t
     uint8 m_bSongS;    // battle music (solo)
     uint8 m_bSongM;    // battle music (party)
 };
-
-/************************************************************************
- *                                                                       *
- *                                                                       *
- *                                                                       *
- ************************************************************************/
 
 struct zoneWeather_t
 {
@@ -506,12 +494,6 @@ struct zoneLine_t
     uint16     m_toZone;
     position_t m_toPos;
 };
-
-/************************************************************************
- *                                                                       *
- *                                                                       *
- *                                                                       *
- ************************************************************************/
 
 class CBasicPacket;
 class CBaseEntity;
@@ -557,7 +539,8 @@ public:
     void SetBackgroundMusicNight(uint8 music);
 
     uint32 GetLocalVar(const char* var);
-    void SetLocalVar(const char* var, uint32 val);
+    void   SetLocalVar(const char* var, uint32 val);
+    void   ResetLocalVars();
 
     virtual CCharEntity* GetCharByName(int8* name); // finds the player if exists in zone
     virtual CCharEntity* GetCharByID(uint32 id);
@@ -597,13 +580,13 @@ public:
 
     void InsertRegion(CRegion* Region); // добавляем в зону активную область
 
-    virtual void TOTDChange(TIMETYPE TOTD); // обработка реакции мира на смену времени суток
-    virtual void PushPacket(CBaseEntity*, GLOBAL_MESSAGE_TYPE, CBasicPacket*); // отправляем глобальный пакет в пределах зоны
+    virtual void TOTDChange(TIMETYPE TOTD);
+    virtual void PushPacket(CBaseEntity*, GLOBAL_MESSAGE_TYPE, CBasicPacket*);
 
     virtual void UpdateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask);
     virtual void UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask, bool alwaysInclude = false);
 
-    bool IsZoneActive() const;
+    bool           IsZoneActive() const;
     CZoneEntities* GetZoneEntities();
 
     time_point      m_RegionCheckTime; // время последней проверки регионов
@@ -640,13 +623,13 @@ private:
     uint32         m_zoneIP;      // IP зоны
     bool           m_useNavMesh;  // Use navmesh for roaming, chasing
 
-    WEATHER        m_Weather;           // текущая погода
-    uint32         m_WeatherChangeTime; // время начала текущей погоды
+    WEATHER m_Weather;
+    uint32  m_WeatherChangeTime;
 
     CZoneEntities* m_zoneEntities;
 
-    uint16 m_tax; // налог в bazaar
-    uint16 m_miscMask; // битовое поле, описывающее возможности использования в зоне определенных умений
+    uint16 m_tax;
+    uint16 m_miscMask;
 
     zoneMusic_t m_zoneMusic; // информация о мелодиях, используемых в зоне
 
@@ -666,6 +649,7 @@ private:
 
 protected:
     CTaskMgr::CTask* ZoneTimer; // указатель на созданный таймер - ZoneServer. необходим для возможности его остановки
+
     void createZoneTimer();
     void CharZoneIn(CCharEntity* PChar);
     void CharZoneOut(CCharEntity* PChar);

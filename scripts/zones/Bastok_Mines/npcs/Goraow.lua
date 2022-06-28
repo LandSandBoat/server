@@ -5,7 +5,7 @@
 -- !pos 38 .1 14 234
 -----------------------------------
 local ID = require("scripts/zones/Bastok_Mines/IDs")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 require("scripts/globals/utils")
@@ -24,11 +24,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local WildcatBastok = player:getCharVar("WildcatBastok")
+    local wildcatBastok = player:getCharVar("WildcatBastok")
 
     if
         player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
-        not utils.mask.getBit(WildcatBastok, 16)
+        not utils.mask.getBit(wildcatBastok, 16)
     then
         player:startEvent(506)
 
@@ -59,8 +59,8 @@ entity.onEventFinish = function(player, csid, option)
         end
 
         player:tradeComplete()
-        player:addGil(xi.settings.GIL_RATE * 900)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 900)
+        player:addGil(xi.settings.main.GIL_RATE * 900)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 900)
         player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.VENGEFUL_WRATH) -- for save fame
 
     elseif csid == 506 then

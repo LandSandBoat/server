@@ -7,7 +7,7 @@
 --  Range: Radial
 --  Notes: Only used by some notorious monsters like Xolotl.
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------

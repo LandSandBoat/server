@@ -6,8 +6,8 @@
 #include <string>
 #include <vector>
 
-#if (defined(__BYTE_ORDER__) && __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__) || (defined(__BYTE_ORDER) && __BYTE_ORDER == __BIG_ENDIAN) ||                          \
-    defined(__BIG_ENDIAN__) || defined(__ARMEB__) || defined(__THUMBEB__) || defined(__AARCH64EB__) || defined(_MIBSEB) || defined(__MIBSEB) ||                \
+#if (defined(__BYTE_ORDER__) && __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__) || (defined(__BYTE_ORDER) && __BYTE_ORDER == __BIG_ENDIAN) ||           \
+    defined(__BIG_ENDIAN__) || defined(__ARMEB__) || defined(__THUMBEB__) || defined(__AARCH64EB__) || defined(_MIBSEB) || defined(__MIBSEB) || \
     defined(__MIBSEB__)
 #define XI_BIG_ENDIAN 1
 #else
@@ -67,7 +67,7 @@ static bool read_to_vector(const std::string& file, std::vector<uint32>& vec)
     std::unique_ptr<FILE, decltype(&fclose)> fp(fopen(file.c_str(), "rb"), &fclose);
     if (!fp)
     {
-        ShowFatalError("zlib: can't open file <%s>", file.c_str());
+        ShowCritical("zlib: can't open file <%s>", file.c_str());
         return false;
     }
 
@@ -78,7 +78,7 @@ static bool read_to_vector(const std::string& file, std::vector<uint32>& vec)
     vec.resize(size / sizeof(uint32));
     if (fread(vec.data(), sizeof(uint32), vec.size(), fp.get()) != vec.size())
     {
-        ShowFatalError("zlib: can't read file <%s>: %s", file.c_str(), strerror(errno));
+        ShowCritical("zlib: can't read file <%s>: %s", file.c_str(), strerror(errno));
         return false;
     }
 

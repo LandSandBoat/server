@@ -122,7 +122,7 @@ local entryInfo =
         reqs = function(player)
             return (
                 player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or
-                xi.settings.FREE_COP_DYNAMIS == 1
+                xi.settings.main.FREE_COP_DYNAMIS == 1
             )
         end,
     },
@@ -139,7 +139,7 @@ local entryInfo =
         reqs = function(player)
             return (
                 player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or
-                xi.settings.FREE_COP_DYNAMIS == 1
+                xi.settings.main.FREE_COP_DYNAMIS == 1
             )
         end,
     },
@@ -156,7 +156,7 @@ local entryInfo =
         reqs = function(player)
             return (
                 player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or
-                xi.settings.FREE_COP_DYNAMIS == 1
+                xi.settings.main.FREE_COP_DYNAMIS == 1
             )
         end,
     },
@@ -300,13 +300,13 @@ end
 
 local function handleEntryTime(player)
     local realDay = os.time()
-    if xi.settings.DYNA_MIDNIGHT_RESET then
+    if xi.settings.main.DYNA_MIDNIGHT_RESET then
         realDay = getMidnight() - 86400
     end
     local dynaWaitxDay = player:getCharVar("dynaWaitxDay")
 
     if
-        (dynaWaitxDay + xi.settings.BETWEEN_2DYNA_WAIT_TIME * 60 * 60) < realDay and
+        (dynaWaitxDay + xi.settings.main.BETWEEN_2DYNA_WAIT_TIME * 60 * 60) < realDay and
         not player:hasKeyItem(xi.ki.RHAPSODY_IN_AZURE)
     then
         player:setCharVar("dynaWaitxDay", realDay)
@@ -340,7 +340,7 @@ xi.dynamis.entryNpcOnTrigger = function(player, npc)
         -- set to skip menu after getting this CS
         tavnaziaFirst = not tavnaziaFirst
     -- player has access but is on a job below required level
-    elseif player:hasKeyItem(xi.ki.PRISMATIC_HOURGLASS) and player:getMainLvl() < xi.settings.DYNA_LEVEL_MIN then
+    elseif player:hasKeyItem(xi.ki.PRISMATIC_HOURGLASS) and player:getMainLvl() < xi.settings.main.DYNA_LEVEL_MIN then
         player:messageSpecial(ID.text.PLAYERS_HAVE_NOT_REACHED_LEVEL)
     -- default message always prints except in cases above and not for shrouded sand or winning cs
     elseif not unlockingDyna and player:getCharVar(info.beatVar) ~= 1 then
@@ -348,7 +348,7 @@ xi.dynamis.entryNpcOnTrigger = function(player, npc)
     end
 
     -- all cutscenes and menus are blocked behind base requirements; 'unlockingDyna' needs to be checked to access shroud cs after zoning into xarcabard
-    if not tavnaziaFirst and player:getMainLvl() >= xi.settings.DYNA_LEVEL_MIN and (player:hasKeyItem(xi.ki.PRISMATIC_HOURGLASS) or unlockingDyna) then
+    if not tavnaziaFirst and player:getMainLvl() >= xi.settings.main.DYNA_LEVEL_MIN and (player:hasKeyItem(xi.ki.PRISMATIC_HOURGLASS) or unlockingDyna) then
 
         -- shrouded sand cutscene
         if unlockingDyna and info.csVial and not player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) then
@@ -364,11 +364,11 @@ xi.dynamis.entryNpcOnTrigger = function(player, npc)
             local dynaWaitxDay = player:getCharVar("dynaWaitxDay")
             local sjobOption = info.csBit > 6 and 1 or 0
 
-            if (dynaWaitxDay + xi.settings.BETWEEN_2DYNA_WAIT_TIME * 60 * 60) < realDay then
+            if (dynaWaitxDay + xi.settings.main.BETWEEN_2DYNA_WAIT_TIME * 60 * 60) < realDay then
                 -- params: bit, cutscene option, Prismatic Hourglass KI, sJob option, junk, Shrouded Sand KI, Timeless Hourglass item ID, Perpetual Hourglass item ID
                 player:startEvent(info.csMenu, info.csBit, arg3(player, info.csBit), xi.ki.PRISMATIC_HOURGLASS, sjobOption, 0, xi.ki.VIAL_OF_SHROUDED_SAND, 4236, 4237)
             else
-                local dayRemaining = math.floor(((dynaWaitxDay + xi.settings.BETWEEN_2DYNA_WAIT_TIME * 60 * 60) - realDay) / 3456)
+                local dayRemaining = math.floor(((dynaWaitxDay + xi.settings.main.BETWEEN_2DYNA_WAIT_TIME * 60 * 60) - realDay) / 3456)
                 player:messageSpecial(ID.text.YOU_CANNOT_ENTER_DYNAMIS, dayRemaining, info.csBit)
             end
         end
@@ -408,12 +408,12 @@ end
 xi.dynamis.zoneOnInitialize = function(zone)
     local zoneId = zone:getID()
     local ID = zones[zoneId]
-    local TE = ID.mob.TIME_EXTENSION
-    local RF = ID.mob.REFILL_STATUE
+    local timeExtensionMobs = ID.mob.TIME_EXTENSION
+    local refillMobs = ID.mob.REFILL_STATUE
 
     -- spawn one of each grouped TEs
-    if TE then
-        for _, v in pairs(TE) do
+    if timeExtensionMobs then
+        for _, v in pairs(timeExtensionMobs) do
             local group = {}
             if type(v.mob) == "number" then
                 group = {v.mob}
@@ -427,8 +427,8 @@ xi.dynamis.zoneOnInitialize = function(zone)
     end
 
     -- spawn one of each grouped refill statue
-    if RF then
-        for _, g in pairs(RF) do
+    if refillMobs then
+        for _, g in pairs(refillMobs) do
             local group = {}
             for _, m in pairs(g) do
                 table.insert(group, m.mob)
@@ -521,15 +521,15 @@ xi.dynamis.timeExtensionOnDeath = function(mob, player, isKiller)
     local mobId = mob:getID()
     local zoneId = mob:getZoneID()
     local ID = zones[zoneId]
-    local TE = ID.mob.TIME_EXTENSION
+    local timeExtensionMobs = ID.mob.TIME_EXTENSION
 
-    if TE then
+    if timeExtensionMobs then
         local found = false
         local te = nil
         local group = {}
 
         -- find this TE's group
-        for _, t in pairs(TE) do
+        for _, t in pairs(timeExtensionMobs) do
             if type(t.mob) == "number" then
                 group = {t.mob}
             elseif type(t.mob) == "table" then
@@ -579,13 +579,13 @@ xi.dynamis.refillStatueOnSpawn = function(mob)
     local mobId = mob:getID()
     local zoneId = mob:getZoneID()
     local ID = zones[zoneId]
-    local RF = ID.mob.REFILL_STATUE
+    local refillMobs = ID.mob.REFILL_STATUE
 
-    if RF then
+    if refillMobs then
         local found = false
 
         -- set this statue's eye color
-        for _, g in pairs(RF) do
+        for _, g in pairs(refillMobs) do
             for _, m in pairs(g) do
                 if m.mob == mobId then
                     found = true
@@ -610,15 +610,15 @@ xi.dynamis.refillStatueOnDeath = function(mob, player, isKiller)
     local mobId = mob:getID()
     local zoneId = mob:getZoneID()
     local ID = zones[zoneId]
-    local RF = ID.mob.REFILL_STATUE
+    local refillMobs = ID.mob.REFILL_STATUE
 
-    if RF then
+    if refillMobs then
         local found = false
         local group = {}
         local eye = nil
 
         -- find this statue's group and eye color
-        for _, g in pairs(RF) do
+        for _, g in pairs(refillMobs) do
             group = {}
             for _, m in pairs(g) do
                 table.insert(group, m.mob)
@@ -674,10 +674,10 @@ xi.dynamis.qmOnTrade = function(player, npc, trade)
     local npcId = npc:getID()
     local zoneId = npc:getZoneID()
     local ID = zones[zoneId]
-    local QM = ID.npc.QM
+    local qmNpcs = ID.npc.QM
 
-    if QM then
-        local info = QM[npcId]
+    if qmNpcs then
+        local info = qmNpcs[npcId]
 
         if info then
             for _, v in pairs(info.trade) do
@@ -706,10 +706,10 @@ xi.dynamis.qmOnTrigger = function(player, npc)
     local npcId = npc:getID()
     local zoneId = npc:getZoneID()
     local ID = zones[zoneId]
-    local QM = ID.npc.QM
+    local qmNpcs = ID.npc.QM
 
-    if QM then
-        local info = QM[npcId]
+    if qmNpcs then
+        local info = qmNpcs[npcId]
 
         if info then
             if info.param then

@@ -8,16 +8,16 @@ local ID = require("scripts/zones/The_Eldieme_Necropolis_[S]/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local ALittleKnowledge = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.A_LITTLE_KNOWLEDGE)
-    local ALittleKnowledgeProgress = player:getCharVar("ALittleKnowledge")
+    local aLittleKnowledge = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.A_LITTLE_KNOWLEDGE)
+    local aLittleKnowledgeProgress = player:getCharVar("ALittleKnowledge")
 
-    if (ALittleKnowledge == QUEST_ACCEPTED and ALittleKnowledgeProgress == 1) then
+    if (aLittleKnowledge == QUEST_ACCEPTED and aLittleKnowledgeProgress == 1) then
         if (trade:hasItemQty(2550, 12) and trade:getGil() == 0 and trade:getItemCount() == 12) then
             if( player:getMainJob() == xi.job.BLM or
                 player:getMainJob() == xi.job.RDM or
@@ -32,24 +32,23 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
-    local ALittleKnowledge = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.A_LITTLE_KNOWLEDGE)
-    local ALittleKnowledgeProgress = player:getCharVar("ALittleKnowledge")
+    local aLittleKnowledge = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.A_LITTLE_KNOWLEDGE)
+    local aLittleKnowledgeProgress = player:getCharVar("ALittleKnowledge")
     local mLvl = player:getMainLvl()
     local mJob = player:getMainJob()
     local onSabbatical = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.ON_SABBATICAL)
     local onSabbaticalProgress = player:getCharVar("OnSabbatical")
     local downwardHelix = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.DOWNWARD_HELIX)
 
-    if (ALittleKnowledge == QUEST_AVAILABLE) then
-        if (mLvl >= xi.settings.ADVANCED_JOB_LEVEL) then
+    if (aLittleKnowledge == QUEST_AVAILABLE) then
+        if (mLvl >= xi.settings.main.ADVANCED_JOB_LEVEL) then
             player:startEvent(10, 1)
         else
             player:startEvent(10)
         end
-    elseif (ALittleKnowledgeProgress == 1 and ALittleKnowledge == QUEST_ACCEPTED) then
+    elseif (aLittleKnowledgeProgress == 1 and aLittleKnowledge == QUEST_ACCEPTED) then
         player:startEvent(11)
-    elseif (ALittleKnowledgeProgress == 2 and ALittleKnowledge == QUEST_ACCEPTED) then
+    elseif (aLittleKnowledgeProgress == 2 and aLittleKnowledge == QUEST_ACCEPTED) then
         if (player:hasStatusEffect(xi.effect.MANAFONT) or
             player:hasStatusEffect(xi.effect.CHAINSPELL) or
             player:hasStatusEffect(xi.effect.ASTRAL_FLOW) or
@@ -58,9 +57,9 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(13)
         end
-    elseif (ALittleKnowledge == QUEST_COMPLETED and mJob == xi.job.SCH and mLvl >= 5 and not (player:hasSpell(478) and player:hasSpell(502))) then
+    elseif (aLittleKnowledge == QUEST_COMPLETED and mJob == xi.job.SCH and mLvl >= 5 and not (player:hasSpell(478) and player:hasSpell(502))) then
             player:startEvent(47)
-    elseif (onSabbatical == QUEST_AVAILABLE and mJob == xi.job.SCH and mLvl >= xi.settings.AF1_QUEST_LEVEL) then
+    elseif (onSabbatical == QUEST_AVAILABLE and mJob == xi.job.SCH and mLvl >= xi.settings.main.AF1_QUEST_LEVEL) then
             player:startEvent(18)
     elseif (onSabbatical == QUEST_ACCEPTED) then
         if (onSabbaticalProgress < 3) then
@@ -68,7 +67,7 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(20)
         end
-    elseif (onSabbatical == QUEST_COMPLETED and player:getCharVar("Erlene_Sabbatical_Timer")~=VanadielDayOfTheYear() and mJob == xi.job.SCH and mLvl >= xi.settings.AF2_QUEST_LEVEL and downwardHelix == QUEST_AVAILABLE) then
+    elseif (onSabbatical == QUEST_COMPLETED and player:getCharVar("Erlene_Sabbatical_Timer")~=VanadielDayOfTheYear() and mJob == xi.job.SCH and mLvl >= xi.settings.main.AF2_QUEST_LEVEL and downwardHelix == QUEST_AVAILABLE) then
         player:startEvent(23)
     elseif (downwardHelix == QUEST_ACCEPTED) then
         if (player:getCharVar("DownwardHelix") == 0) then
@@ -83,14 +82,12 @@ entity.onTrigger = function(player, npc)
     else
         player:startEvent(15)
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if (csid == 10 and option == 0) then
         player:addQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.A_LITTLE_KNOWLEDGE)
         player:setCharVar("ALittleKnowledge", 1)

@@ -9,7 +9,7 @@ local ID = require("scripts/zones/Metalworks/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/magic")
 require("scripts/globals/missions")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/titles")
@@ -27,9 +27,9 @@ end
 
 entity.onTrigger = function(player, npc)
     local trueStrength = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRUE_STRENGTH)
-    local WildcatBastok = player:getCharVar("WildcatBastok")
+    local wildcatBastok = player:getCharVar("WildcatBastok")
 
-    if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 9)) then
+    if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(wildcatBastok, 9)) then
         player:startEvent(935)
     elseif (trueStrength == QUEST_AVAILABLE and player:getMainJob() == xi.job.MNK and player:getMainLvl() >= 50) then
         player:startEvent(748) -- Start Quest "True Strength"

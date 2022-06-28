@@ -341,9 +341,44 @@ namespace gambits
                         //    controller->Cast(target->targid, static_cast<SpellID>(spell_id.value()));
                         //}
                     }
+                    else if (action.select == G_SELECT::BEST_INDI)
+                    {
+                        auto* PMaster = static_cast<CCharEntity*>(POwner->PMaster);
+                        auto spell_id = POwner->SpellContainer->GetBestIndiSpell(PMaster);
+                        if (spell_id.has_value())
+                        {
+                            controller->Cast(target->targid, spell_id.value());
+                        }
+                    }
+                    else if (action.select == G_SELECT::ENTRUSTED)
+                    {
+                        auto* PMaster = static_cast<CCharEntity*>(POwner->PMaster);
+                        auto spell_id = POwner->SpellContainer->GetBestEntrustedSpell(PMaster);
+                        target = PMaster;
+                        if (spell_id.has_value())
+                        {
+                            controller->Cast(target->targid, spell_id.value());
+                        }
+                    }
                     else if (action.select == G_SELECT::BEST_AGAINST_TARGET)
                     {
                         auto spell_id = POwner->SpellContainer->GetBestAgainstTargetWeakness(target);
+                        if (spell_id.has_value())
+                        {
+                            controller->Cast(target->targid, spell_id.value());
+                        }
+                    }
+                    else if (action.select == G_SELECT::STORM_DAY)
+                    {
+                        auto spell_id = POwner->SpellContainer->GetStormDay();
+                        if (spell_id.has_value())
+                        {
+                            controller->Cast(target->targid, spell_id.value());
+                        }
+                    }
+                    else if (action.select == G_SELECT::HELIX_DAY)
+                    {
+                        auto spell_id = POwner->SpellContainer->GetHelixDay();
                         if (spell_id.has_value())
                         {
                             controller->Cast(target->targid, spell_id.value());
@@ -593,6 +628,34 @@ namespace gambits
                 return noSamba;
                 break;
             }
+            case G_CONDITION::NO_STORM:
+            {
+                bool noStorm = true;
+                if (trigger_target->StatusEffectContainer->HasStatusEffect(
+                {
+                    EFFECT_FIRESTORM,
+                    EFFECT_HAILSTORM,
+                    EFFECT_WINDSTORM,
+                    EFFECT_SANDSTORM,
+                    EFFECT_THUNDERSTORM,
+                    EFFECT_RAINSTORM,
+                    EFFECT_AURORASTORM,
+                    EFFECT_VOIDSTORM,
+                    EFFECT_FIRESTORM_II,
+                    EFFECT_HAILSTORM_II,
+                    EFFECT_WINDSTORM_II,
+                    EFFECT_SANDSTORM_II,
+                    EFFECT_THUNDERSTORM_II,
+                    EFFECT_RAINSTORM_II,
+                    EFFECT_AURORASTORM_II,
+                    EFFECT_VOIDSTORM_II,
+                }))
+                {
+                    noStorm = false;
+                }
+                return noStorm;
+                break;
+            }
             case G_CONDITION::STATUS_FLAG:
             {
                 return trigger_target->StatusEffectContainer->HasStatusEffectByFlag(static_cast<EFFECTFLAG>(predicate.condition_arg));
@@ -807,7 +870,7 @@ namespace gambits
             if (chosen_skill->skill_type == G_REACTION::WS)
             {
                 CWeaponSkill* PWeaponSkill = battleutils::GetWeaponSkill(chosen_skill->skill_id);
-                if (chosen_skill->valid_targets == TARGET_SELF)
+                if (chosen_skill->valid_targets & TARGET_SELF)
                 {
                     target = POwner;
                 }
@@ -820,7 +883,7 @@ namespace gambits
             else // Mobskill
             {
                 // CMobSkill* PMobSkill = battleutils::GetMobSkill(chosen_skill->skill_id);
-                if (chosen_skill->valid_targets == TARGET_SELF || chosen_skill->valid_targets == TARGET_PLAYER_PARTY)
+                if (chosen_skill->valid_targets & TARGET_SELF || chosen_skill->valid_targets & TARGET_PLAYER_PARTY)
                 {
                     target = POwner;
                 }

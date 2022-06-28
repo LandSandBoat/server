@@ -25,11 +25,25 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../../entities/mobentity.h"
 #include "../../zone.h"
 
+namespace
+{
+    bool arePositionsClose(const position_t& a, const position_t& b)
+    {
+        return distance(a, b) < 1.0f;
+    }
+} // namespace
+
 CPathFind::CPathFind(CBaseEntity* PTarget)
 : m_POwner(PTarget)
 , m_pathFlags(0)
 , m_carefulPathing(false)
 {
+    m_originalPoint.x        = 0.f;
+    m_originalPoint.y        = 0.f;
+    m_originalPoint.z        = 0.f;
+    m_originalPoint.moving   = 0;
+    m_originalPoint.rotation = 0;
+
     Clear();
 }
 
@@ -212,7 +226,9 @@ void CPathFind::PrunePathWithin(float within)
     TracyZoneScoped;
 
     if (!IsFollowingPath())
+    {
         return;
+    }
 
     position_t* targetPoint     = &m_points.back();
     position_t* secondLastPoint = nullptr;
@@ -343,6 +359,11 @@ bool CPathFind::FindPath(const position_t& start, const position_t& end)
 {
     TracyZoneScoped;
 
+    if (arePositionsClose(start, end))
+    {
+        return false;
+    }
+
     if (!isNavMeshEnabled())
     {
         return false;
@@ -353,7 +374,7 @@ bool CPathFind::FindPath(const position_t& start, const position_t& end)
 
     if (m_points.empty())
     {
-        ShowNavError("CPathFind::FindPath Entity (%s - %d) could not find path", m_POwner->GetName(), m_POwner->id);
+        ShowError("CPathFind::FindPath Entity (%s - %d) could not find path", m_POwner->GetName(), m_POwner->id);
         return false;
     }
 
@@ -397,6 +418,11 @@ bool CPathFind::FindRandomPath(const position_t& start, float maxRadius, uint8 m
 bool CPathFind::FindClosestPath(const position_t& start, const position_t& end)
 {
     TracyZoneScoped;
+
+    if (arePositionsClose(start, end))
+    {
+        return false;
+    }
 
     if (!isNavMeshEnabled())
     {
@@ -452,7 +478,7 @@ float CPathFind::GetRealSpeed()
         }
         else if (m_POwner->animation == ANIMATION_ATTACK)
         {
-            realSpeed = realSpeed + map_config.mob_speed_mod;
+            realSpeed = realSpeed + settings::get<int8>("map.MOB_SPEED_MOD");
         }
     }
 

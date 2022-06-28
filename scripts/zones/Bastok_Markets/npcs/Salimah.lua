@@ -7,15 +7,14 @@
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 local ID = require("scripts/zones/Bastok_Markets/IDs")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
+    local gourmet = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GOURMET)
 
-    local Gourmet = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GOURMET)
-
-    if (Gourmet ~= QUEST_AVAILABLE and player:needToZone() == false) then
+    if (gourmet ~= QUEST_AVAILABLE and player:needToZone() == false) then
         local count = trade:getItemCount()
         local hasSleepshroom = trade:hasItemQty(4374, 1)
         local hasTreantBulb = trade:hasItemQty(953, 1)
@@ -51,7 +50,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
     if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GOURMET) ~= QUEST_AVAILABLE and player:needToZone()) then
         player:startEvent(121)
     else
@@ -63,16 +61,15 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
-    local Gourmet = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GOURMET)
+    local gourmet = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GOURMET)
 
     if (csid == 200) then
-        if (Gourmet == QUEST_AVAILABLE) then
+        if (gourmet == QUEST_AVAILABLE) then
             player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GOURMET)
         end
     elseif (csid ~= 121) then
         player:tradeComplete()
-        if (Gourmet == QUEST_ACCEPTED) then
+        if (gourmet == QUEST_ACCEPTED) then
             player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GOURMET)
         end
 
@@ -85,8 +82,8 @@ entity.onEventFinish = function(player, csid, option)
             fame=60
         end
 
-        player:addGil(gil * xi.settings.GIL_RATE)
-        player:messageSpecial(ID.text.GIL_OBTAINED, gil * xi.settings.GIL_RATE)
+        player:addGil(gil * xi.settings.main.GIL_RATE)
+        player:messageSpecial(ID.text.GIL_OBTAINED, gil * xi.settings.main.GIL_RATE)
         player:addFame(xi.quest.fame_area.BASTOK, fame)
         player:addTitle(xi.title.MOMMYS_HELPER)
         player:needToZone(true)

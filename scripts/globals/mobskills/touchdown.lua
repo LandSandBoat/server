@@ -4,7 +4,7 @@
 --  Description: Deals magical damage to enemies in an area of effect upon landing.
 --  Further Notes:
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------

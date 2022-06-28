@@ -1,11 +1,11 @@
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/teleports")
 -----------------------------------
 
 xi = xi or {}
 xi.homepoint = xi.homepoint or {}
 
-local HPs =
+local homepointData =
 {
     -- [Index]= [1]group(if to/from both same group, then no cost) [2]fee multiplier [3]dest{x, y, z, rot, zone}
     [  0] = {group = 1, fee = 1, dest = {  -85.554,       1, -64.554,  45, 230}}, -- Southern San d'Oria #1
@@ -148,10 +148,10 @@ local travelType = xi.teleport.type.HOMEPOINT
 
 local function getCost (from, to, key)
 
-    if HPs[from].group == HPs[to].group and HPs[to].group ~= 0 then
+    if homepointData[from].group == homepointData[to].group and homepointData[to].group ~= 0 then
         return 0
     else
-        return (500 * HPs[to].fee) / (key and 5 or 1)
+        return (500 * homepointData[to].fee) / (key and 5 or 1)
     end
 
 end
@@ -167,13 +167,13 @@ local function goToHP(player, choice, index)
         player:delGil(getCost(origin, origin, hasKI))
     elseif choice == selection.TELEPORT then
         player:delGil(getCost(origin, index, hasKI))
-        player:setPos(unpack(HPs[index].dest))
+        player:setPos(unpack(homepointData[index].dest))
     end
 
 end
 
 xi.homepoint.onTrigger = function(player, csid, index)
-    if xi.settings.HOMEPOINT_TELEPORT ~= 1 then -- Settings.lua Homepoints disabled
+    if xi.settings.main.HOMEPOINT_TELEPORT ~= 1 then -- Settings.lua Homepoints disabled
         player:startEvent(csid, 0, 0, 0, 0, 0, player:getGil(), 4095, index)
         return
     end
@@ -194,8 +194,8 @@ xi.homepoint.onTrigger = function(player, csid, index)
     end
 
     player:setLocalVar("originIndex", index)
-    local G1, G2, G3, G4 = unpack(player:getTeleportTable(travelType))
-    player:startEvent(csid, 1, G1, G2, G3, G4, player:getGil(), 4095, params)
+    local g1, g2, g3, g4 = unpack(player:getTeleportTable(travelType))
+    player:startEvent(csid, 1, g1, g2, g3, g4, player:getGil(), 4095, params)
 
 end
 
@@ -204,7 +204,7 @@ xi.homepoint.onEventUpdate = function(player, csid, option)
     local choice = bit.band(option, 0xFF)
     local favs = player:getTeleportMenu(travelType)
 
-    if xi.settings.HOMEPOINT_TELEPORT == 1 then
+    if xi.settings.main.HOMEPOINT_TELEPORT == 1 then
         if choice >= selection.SET_LAYOUT and choice <= selection.REP_FAVORITE then
 
             local index = bit.rshift(bit.lshift(option, 8), 24) -- Ret HP #
@@ -260,7 +260,7 @@ xi.homepoint.onEventFinish = function(player, csid, option, event)
             else
                 print(string.format("ERROR: missing ID.text.HOMEPOINT_SET in zone %s.", player:getZoneName()))
             end
-        elseif (choice == selection.TELEPORT or choice == selection.SAME_ZONE) and xi.settings.HOMEPOINT_TELEPORT == 1 then
+        elseif (choice == selection.TELEPORT or choice == selection.SAME_ZONE) and xi.settings.main.HOMEPOINT_TELEPORT == 1 then
             goToHP(player, choice, bit.rshift(option, 16))
         end
     end

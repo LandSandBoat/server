@@ -4,7 +4,7 @@
 -- Starts and Finishes Quest: Trouble at the Sluice
 -- !pos -98 0 69 231
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/shop")
 require("scripts/globals/quests")
@@ -16,27 +16,24 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
     local troubleAtTheSluice = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TROUBLE_AT_THE_SLUICE)
-    local NeutralizerKI = player:hasKeyItem(xi.ki.NEUTRALIZER)
+    local neutralizerKI = player:hasKeyItem(xi.ki.NEUTRALIZER)
 
     if troubleAtTheSluice == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 3 then
         player:startEvent(57)
-    elseif troubleAtTheSluice == QUEST_ACCEPTED and NeutralizerKI == false then
+    elseif troubleAtTheSluice == QUEST_ACCEPTED and neutralizerKI == false then
         player:startEvent(55)
-    elseif NeutralizerKI then
+    elseif neutralizerKI then
         player:startEvent(56)
     else
         player:startEvent(585)
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if (csid == 57 and option == 0) then
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TROUBLE_AT_THE_SLUICE)
         player:setCharVar("troubleAtTheSluiceVar", 1)
@@ -52,7 +49,6 @@ entity.onEventFinish = function(player, csid, option)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TROUBLE_AT_THE_SLUICE)
         end
     end
-
 end
 
 return entity

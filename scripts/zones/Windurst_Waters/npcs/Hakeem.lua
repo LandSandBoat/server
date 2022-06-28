@@ -15,14 +15,14 @@ end
 
 entity.onTrigger = function(player, npc)
     local guildMember = xi.crafting.isGuildMember(player, 4)
-    local SkillCap = xi.crafting.getCraftSkillCap(player, xi.skill.COOKING)
-    local SkillLevel = player:getSkillLevel(xi.skill.COOKING)
+    local skillCap = xi.crafting.getCraftSkillCap(player, xi.skill.COOKING)
+    local skillLevel = player:getSkillLevel(xi.skill.COOKING)
 
     if (guildMember == 1) then
         if (player:hasStatusEffect(xi.effect.COOKING_IMAGERY) == false) then
-            player:startEvent(10017, SkillCap, SkillLevel, 2, 495, player:getGil(), 0, 4095, 0) -- p1 = skill level
+            player:startEvent(10017, skillCap, skillLevel, 2, 495, player:getGil(), 0, 4095, 0) -- p1 = skill level
         else
-            player:startEvent(10017, SkillCap, SkillLevel, 2, 495, player:getGil(), 7094, 4095, 0)
+            player:startEvent(10017, skillCap, skillLevel, 2, 495, player:getGil(), 7094, 4095, 0)
         end
     else
         player:startEvent(10017) -- Standard Dialogue

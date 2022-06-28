@@ -3,7 +3,7 @@
 --  NPC: Powhatan
 -- Starts & Ends Quest: Welcome to Bastok, Guest of Hauteur
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/titles")
 require("scripts/globals/quests")
@@ -15,14 +15,13 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
+    local welcometoBastok = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.WELCOME_TO_BASTOK)
+    local guestofHauteur = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GUEST_OF_HAUTEUR)
 
-    local WelcometoBastok = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.WELCOME_TO_BASTOK)
-    local GuestofHauteur = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GUEST_OF_HAUTEUR)
-
-    if (WelcometoBastok ~= QUEST_COMPLETED) then
+    if (welcometoBastok ~= QUEST_COMPLETED) then
         local wtbStatus = player:getCharVar("WelcometoBastok_Event")
 
-        if (WelcometoBastok == QUEST_AVAILABLE) then
+        if (welcometoBastok == QUEST_AVAILABLE) then
             player:startEvent(50)
         else
             if (wtbStatus == 0) then
@@ -31,10 +30,10 @@ entity.onTrigger = function(player, npc)
                 player:startEvent(53)
             end
         end
-    elseif (GuestofHauteur ~= QUEST_COMPLETED and WelcometoBastok == QUEST_COMPLETED and player:getFameLevel(xi.quest.fame_area.BASTOK) >= 3 and player:getMainLvl() >= 31) then
+    elseif (guestofHauteur ~= QUEST_COMPLETED and welcometoBastok == QUEST_COMPLETED and player:getFameLevel(xi.quest.fame_area.BASTOK) >= 3 and player:getMainLvl() >= 31) then
         local gohStatus = player:getCharVar("GuestofHauteur_Event")
 
-        if (GuestofHauteur == QUEST_AVAILABLE) then
+        if (guestofHauteur == QUEST_AVAILABLE) then
             player:startEvent(55)
         else
             if (gohStatus == 0) then
@@ -46,14 +45,12 @@ entity.onTrigger = function(player, npc)
     else
         player:messageSpecial(ID.text.POWHATAN_DIALOG_1)
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if (csid == 50 and option == 0) then
         player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.WELCOME_TO_BASTOK)
     elseif (csid == 53) then
@@ -82,7 +79,6 @@ entity.onEventFinish = function(player, csid, option)
             player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GUEST_OF_HAUTEUR)
         end
     end
-
 end
 
 return entity

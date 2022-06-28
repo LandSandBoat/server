@@ -7,7 +7,7 @@ local ID = require("scripts/zones/Bastok_Markets_[S]/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
@@ -16,7 +16,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
     local mLvl          = player:getMainLvl()
     local mJob          = player:getMainJob()
     local downwardHelix = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.DOWNWARD_HELIX)
@@ -25,13 +24,13 @@ entity.onTrigger = function(player, npc)
     local loafersQuestProgress = player:getCharVar("AF_SCH_BOOTS")
     local pantsQuestProgress   = player:getCharVar("AF_SCH_PANTS")
     local gownQuestProgress    = player:getCharVar("AF_SCH_BODY")
-    local AFProgress           = player:getCharVar("AF_Loussaire")
+    local afProgress           = player:getCharVar("AF_Loussaire")
 
     if (player:getCharVar("AF_SCH_COMPLETE") == 0) then
 
         -- They have a piece in progress.
         if
-            AFProgress > 0 and
+            afProgress > 0 and
             (
                 loafersQuestProgress == 1 or
                 pantsQuestProgress == 1 or
@@ -43,24 +42,24 @@ entity.onTrigger = function(player, npc)
         then
 
             local itemid   = 14580 -- Scholar's Gown
-            local FristKI  = xi.ki.PEISTE_DUNG
-            local SecondKI = xi.ki.SAMPLE_OF_GRAUBERG_CHERT
+            local firstKI  = xi.ki.PEISTE_DUNG
+            local secondKI = xi.ki.SAMPLE_OF_GRAUBERG_CHERT
 
             if (loafersQuestProgress == 1 or loafersQuestProgress == 2) then
                 itemid   = 15748 -- Scholar's Loafers
-                FristKI  = xi.ki.RAFFLESIA_DREAMSPIT
-                SecondKI = xi.ki.DROGAROGAN_BONEMEAL
+                firstKI  = xi.ki.RAFFLESIA_DREAMSPIT
+                secondKI = xi.ki.DROGAROGAN_BONEMEAL
 
             elseif (pantsQuestProgress == 1 or pantsQuestProgress == 2) then
                 itemid   = 16311 -- Scholar's Pants
-                FristKI  = xi.ki.SLUG_MUCUS
-                SecondKI = xi.ki.DJINN_EMBER
+                firstKI  = xi.ki.SLUG_MUCUS
+                secondKI = xi.ki.DJINN_EMBER
             end
 
-            player:startEvent(50, itemid, FristKI, SecondKI)
+            player:startEvent(50, itemid, firstKI, secondKI)
 
         -- Nothing in progress and meet the starting requirements.
-        elseif (downwardHelix == QUEST_COMPLETED and mJob == xi.job.SCH and mLvl >= xi.settings.AF2_QUEST_LEVEL) then
+        elseif (downwardHelix == QUEST_COMPLETED and mJob == xi.job.SCH and mLvl >= xi.settings.main.AF2_QUEST_LEVEL) then
 
             -- If a player has completed any of the paths, it will be a different cutscene.
             local counter = 0
@@ -122,7 +121,7 @@ entity.onTrigger = function(player, npc)
                 end
 
                 if (params < 8) then
-                    if (AFProgress > 0) then
+                    if (afProgress > 0) then
                         player:startEvent(53, params) -- Shorter CS than 49
                     else
                         player:startEvent(49, params)
@@ -137,7 +136,6 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)
-
     if (csid == 49 or csid == 53) then
         -- Display Loafers
         if (option == 2) then
@@ -170,12 +168,10 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if (csid == 49 and option == 0) then
         player:setCharVar("AF_Loussaire", 1)
 
     elseif (csid == 51 or csid == 52 or csid == 54) then
-
         local itemid   = player:getLocalVar("item")
         local firstKI  = player:getLocalVar("firstKI")
         local secondKI = player:getLocalVar("secondKI")
@@ -198,8 +194,8 @@ entity.onEventFinish = function(player, csid, option)
                 player:setCharVar("AF_SCH_BODY", 4)
             end
 
-            local AFProgress = player:getCharVar("AF_Loussaire")
-            if (AFProgress == 3) then
+            local afProgress = player:getCharVar("AF_Loussaire")
+            if (afProgress == 3) then
 
                 -- They are done. Clean-up
                 player:setCharVar("AF_SCH_BOOTS",    0)
@@ -209,7 +205,7 @@ entity.onEventFinish = function(player, csid, option)
                 player:setCharVar("AF_SCH_COMPLETE", 1)
 
             else
-                player:setCharVar("AF_Loussaire", AFProgress + 1) -- They got an item. Add it!
+                player:setCharVar("AF_Loussaire", afProgress + 1) -- They got an item. Add it!
             end
 
             player:delKeyItem(firstKI)

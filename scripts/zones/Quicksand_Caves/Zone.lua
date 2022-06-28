@@ -7,7 +7,7 @@ local ID = require("scripts/zones/Quicksand_Caves/IDs")
 require("scripts/globals/conquest")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/treasure")
 require("scripts/globals/status")
 -----------------------------------
@@ -47,14 +47,17 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
+
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(-980.193, 14.913, -282.863, 60)
     end
+
     return cs
 end
 
 local function getWeight(player)
     local race = player:getRace()
+
     if race == xi.race.GALKA then
         return 3
     elseif race == xi.race.TARU_M or race == xi.race.TARU_F then
@@ -65,11 +68,11 @@ local function getWeight(player)
 end
 
 zone_object.onRegionEnter = function(player, region)
-    local RegionID = region:GetRegionID()
+    local regionID = region:GetRegionID()
 
     -- holes in the sand
-    if (RegionID >= 30) then
-        switch (RegionID): caseof
+    if (regionID >= 30) then
+        switch (regionID): caseof
         {
             [30] = function (x)
                 player:setPos(496, -6, -816)
@@ -90,8 +93,8 @@ zone_object.onRegionEnter = function(player, region)
 
     -- ornate door pressure plates
     else
-        local door = GetNPCByID(ID.npc.ORNATE_DOOR_OFFSET + RegionID - 1)
-        local plate = GetNPCByID(ID.npc.ORNATE_DOOR_OFFSET + RegionID)
+        local door = GetNPCByID(ID.npc.ORNATE_DOOR_OFFSET + regionID - 1)
+        local plate = GetNPCByID(ID.npc.ORNATE_DOOR_OFFSET + regionID)
 
         local totalWeight = plate:getLocalVar("weight")
         totalWeight = totalWeight + getWeight(player)
@@ -105,11 +108,11 @@ zone_object.onRegionEnter = function(player, region)
 end
 
 zone_object.onRegionLeave = function(player, region)
-    local RegionID = region:GetRegionID()
+    local regionID = region:GetRegionID()
 
-    if (RegionID < 30) then
-        -- local door = GetNPCByID(ID.npc.ORNATE_DOOR_OFFSET + RegionID - 1)
-        local plate = GetNPCByID(ID.npc.ORNATE_DOOR_OFFSET + RegionID)
+    if (regionID < 30) then
+        -- local door = GetNPCByID(ID.npc.ORNATE_DOOR_OFFSET + regionID - 1)
+        local plate = GetNPCByID(ID.npc.ORNATE_DOOR_OFFSET + regionID)
 
         local totalWeight = plate:getLocalVar("weight")
         totalWeight = totalWeight - getWeight(player)

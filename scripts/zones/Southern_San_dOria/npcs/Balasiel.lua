@@ -6,7 +6,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
 require("scripts/globals/keyitems")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/titles")
@@ -44,13 +44,13 @@ entity.onTrigger = function(player, npc)
     elseif (lvl >= 7 and lvl < 15) then
         player:startEvent(671)
     elseif (lvl >= 15 and aSquiresTestII ~= QUEST_COMPLETED) then
-        local StalactiteDew = player:hasKeyItem(xi.ki.STALACTITE_DEW)
+        local stalactiteDew = player:hasKeyItem(xi.ki.STALACTITE_DEW)
 
         if (aSquiresTestII == QUEST_AVAILABLE) then
             player:startEvent(625)
-        elseif (aSquiresTestII == QUEST_ACCEPTED and StalactiteDew == false) then
+        elseif (aSquiresTestII == QUEST_ACCEPTED and stalactiteDew == false) then
             player:startEvent(630)
-        elseif (StalactiteDew) then
+        elseif (stalactiteDew) then
             player:startEvent(626)
         else
             player:startEvent(667)

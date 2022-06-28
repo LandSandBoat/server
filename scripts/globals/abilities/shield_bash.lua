@@ -6,7 +6,7 @@
 -- Duration: Instant
 -----------------------------------
 require("scripts/globals/jobpoints")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
@@ -67,8 +67,6 @@ ability_object.onUseAbility = function(player, target, ability)
     end
 
     local pdif = math.random(ratio * 0.8 * 1000, ratio * 1.2 * 1000)
-
-    -- printf("damge %d, ratio: %f, pdif: %d\n", damage, ratio, pdif)
 
     damage = damage * (pdif / 1000)
     damage = utils.stoneskin(target, damage)

@@ -11,12 +11,12 @@ end
 
 entity.onMobDespawn = function(mob)
     local instance = mob:getInstance()
-    local SLIME = GetMobByID(ID.mob.UNDEAD_SLIME, instance)
-    local RAND = math.random(1, 5)
+    local slimeMob = GetMobByID(ID.mob.UNDEAD_SLIME, instance)
+    local randVal  = math.random(1, 5)
 
-    if RAND == 1 and SLIME:getLocalVar("SlimeSpawned") == 0 then
+    if randVal == 1 and slimeMob:getLocalVar("SlimeSpawned") == 0 then
         SpawnMob(ID.mob.UNDEAD_SLIME, instance)
-        SLIME:setLocalVar("SlimeSpawned", 1)
+        slimeMob:setLocalVar("SlimeSpawned", 1)
     else
         instance:setProgress(instance:getProgress() + 1)
     end

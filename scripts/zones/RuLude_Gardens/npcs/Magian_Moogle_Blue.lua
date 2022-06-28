@@ -4,12 +4,14 @@
 -- Type: Magian Trials NPC (Relic Armor)
 -- !pos -6.843 2.459 121.9 64
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/magiantrials")
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
-local EVENT_IDS = {
+
+local eventIds =
+{
     [2] = 10141,
     [3] = 10142,
     [4] = 10143,
@@ -18,27 +20,27 @@ local EVENT_IDS = {
 }
 
 entity.onTrade = function(player, npc, trade)
-    if xi.settings.ENABLE_MAGIAN_TRIALS ~= 1 then
+    if xi.settings.main.ENABLE_MAGIAN_TRIALS ~= 1 then
         return
     end
 
-    xi.magian.magianOnTrade(player, npc, trade, xi.itemType.ARMOR, EVENT_IDS)
+    xi.magian.magianOnTrade(player, npc, trade, xi.itemType.ARMOR, eventIds)
 end
 
 entity.onTrigger = function(player, npc)
-    if xi.settings.ENABLE_MAGIAN_TRIALS ~= 1 then
+    if xi.settings.main.ENABLE_MAGIAN_TRIALS ~= 1 then
         return
     end
 
-    xi.magian.magianOnTrigger(player, npc, EVENT_IDS)
+    xi.magian.magianOnTrigger(player, npc, eventIds)
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    xi.magian.magianEventUpdate(player, csid, option, EVENT_IDS)
+    xi.magian.magianEventUpdate(player, csid, option, eventIds)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    xi.magian.magianOnEventFinish(player, csid, option, EVENT_IDS)
+    xi.magian.magianOnEventFinish(player, csid, option, eventIds)
 end
 
 return entity

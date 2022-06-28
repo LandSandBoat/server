@@ -13,7 +13,7 @@ require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 
-local TrustMemory = function(player)
+local trustMemory = function(player)
     local memories = 0
     if player:hasKeyItem(xi.ki.BALLISTA_LICENSE) then
         memories = memories + 2
@@ -33,24 +33,24 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local TrustSandoria = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRUST_SANDORIA)
-    local TrustBastok = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRUST_BASTOK)
-    local TrustWindurst = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUST_WINDURST)
-    local SandoriaFirstTrust = player:getCharVar("SandoriaFirstTrust")
-    local ExcenmilleTrustChatFlag = player:getLocalVar("ExcenmilleTrustChatFlag")
-    local Rank3 = player:getRank(player:getNation()) >= 3 and 1 or 0
+    local trustSandoria = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRUST_SANDORIA)
+    local trustBastok = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRUST_BASTOK)
+    local trustWindurst = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUST_WINDURST)
+    local sandoriaFirstTrust = player:getCharVar("SandoriaFirstTrust")
+    local excenmilleTrustChatFlag = player:getLocalVar("ExcenmilleTrustChatFlag")
+    local rank3 = player:getRank(player:getNation()) >= 3 and 1 or 0
 
-    if TrustSandoria == QUEST_ACCEPTED and (TrustWindurst == QUEST_COMPLETED or TrustBastok == QUEST_COMPLETED) then
-        player:startEvent(897, 0, 0, 0, TrustMemory(player), 0, 0, 0, Rank3)
-    elseif TrustSandoria == QUEST_ACCEPTED and SandoriaFirstTrust == 0 then
-        player:startEvent(893, 0, 0, 0, TrustMemory(player), 0, 0, 0, Rank3)
-    elseif TrustSandoria == QUEST_ACCEPTED and SandoriaFirstTrust == 1 and ExcenmilleTrustChatFlag == 0 then
+    if trustSandoria == QUEST_ACCEPTED and (trustWindurst == QUEST_COMPLETED or trustBastok == QUEST_COMPLETED) then
+        player:startEvent(897, 0, 0, 0, trustMemory(player), 0, 0, 0, rank3)
+    elseif trustSandoria == QUEST_ACCEPTED and sandoriaFirstTrust == 0 then
+        player:startEvent(893, 0, 0, 0, trustMemory(player), 0, 0, 0, rank3)
+    elseif trustSandoria == QUEST_ACCEPTED and sandoriaFirstTrust == 1 and excenmilleTrustChatFlag == 0 then
         player:startEvent(894)
         player:setLocalVar("ExcenmilleTrustChatFlag", 1)
-    elseif TrustSandoria == QUEST_ACCEPTED and SandoriaFirstTrust == 2 then
+    elseif trustSandoria == QUEST_ACCEPTED and sandoriaFirstTrust == 2 then
         player:startEvent(895)
-    elseif TrustSandoria == QUEST_COMPLETED and not player:hasSpell(902) and ExcenmilleTrustChatFlag == 0 then
-        player:startEvent(896, 0, 0, 0, 0, 0, 0, 0, Rank3)
+    elseif trustSandoria == QUEST_COMPLETED and not player:hasSpell(902) and excenmilleTrustChatFlag == 0 then
+        player:startEvent(896, 0, 0, 0, 0, 0, 0, 0, rank3)
         player:setLocalVar("ExcenmilleTrustChatFlag", 1)
     else
         player:startEvent(29)

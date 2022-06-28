@@ -1,7 +1,7 @@
 -----------------------------------
 -- Corsair Job Utilities
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/ability")
 require("scripts/globals/jobpoints")
 require("scripts/globals/status")
@@ -12,8 +12,12 @@ xi.job_utils = xi.job_utils or {}
 xi.job_utils.corsair = xi.job_utils.corsair or {}
 -----------------------------------
 
+
 -- rollModifiers format: Effect Powers table, phantomBase, roll bonus increase, Effect, Mod, Optimal Job
 -- NOTE: nil items below are nil values on purpose.  This might break if parameters are added to various bindings
+-- TODO: replace "nil" pet values with tables, handle multiple effects in case of pet roll. Will need core changes.
+-- TODO: quantify Courser's Roll, no wiki seems to know what it is.
+-- TODO: verify Corsair's Roll for subjob: see http://wiki.ffo.jp/html/6052.html
 local corsairRollMods =
 {
     [xi.jobAbility.CORSAIRS_ROLL    ] = { {10, 11, 11, 12, 20, 13, 15, 16, 8, 17, 24, 6},          2,     0, xi.effect.CORSAIRS_ROLL,    xi.mod.EXP_BONUS,          xi.job.COR  },
@@ -138,17 +142,17 @@ local function corsairSetup(caster, ability, action, effect, job)
     action:speceffect(caster:getID(), roll)
 
     if checkForElevenRoll(caster) then
-        action:setRecast(action:getRecast() / 2) -- halves phantom roll recast timer for all rolls while under the effects of an 11 (upon first hitting 11, phantom roll cooldown is reset in double-up.lua)
-    end
-    if caster:getMainJob() == xi.job.COR then
-        action:setRecast(action:getRecast() - caster:getMerit(xi.merit.PHANTOM_ROLL_RECAST)) -- Recast merits have value of 2 from DB
+        ability:setRecast(ability:getRecast() / 2) -- halves phantom roll recast timer for all rolls while under the effects of an 11 (upon first hitting 11, phantom roll cooldown is reset in double-up.lua)
+    else
+        ability:setRecast(ability:getRecast() - caster:getMerit(xi.merit.PHANTOM_ROLL_RECAST)) -- Recast merits have value of 2 from DB
     end
 
     checkForJobBonus(caster, job)
 end
 
-local function applyRoll(caster, target, ability, action, total)
-    local abilityId = ability:getID()
+-- in_ability == current_ability if not using doubleup. current_ability is used to set the message whether you're using a doubleup or not.
+local function applyRoll(caster, target, inAbility, action, total, isDoubleup, currentAbility)
+    local abilityId = inAbility:getID()
     local duration = 300 + caster:getMerit(xi.merit.WINNING_STREAK) + caster:getMod(xi.mod.PHANTOM_DURATION) + (caster:getJobPointLevel(xi.jp.PHANTOM_ROLL_DURATION) * 2)
     local effectpowers = corsairRollMods[abilityId][1]
     local effectpower = effectpowers[total]
@@ -175,9 +179,30 @@ local function applyRoll(caster, target, ability, action, total)
     end
 
     if target:addCorsairRoll(caster:getMainJob(), caster:getMerit(xi.merit.BUST_DURATION), corsairRollMods[abilityId][4], effectpower, 0, duration, caster:getID(), total, corsairRollMods[abilityId][5]) == false then
-        ability:setMsg(xi.msg.basic.ROLL_MAIN_FAIL)
+        -- no effect or otherwise prevented
+        if caster:getID() == target:getID() then                  -- dead code? you can't roll if the same roll is already active. There is no known buff that would prevent a corsair roll.
+            currentAbility:setMsg(xi.msg.basic.ROLL_MAIN_FAIL)    -- no effect for the COR rolling if they had the buff already
+        else
+            currentAbility:setMsg(xi.msg.basic.NO_EFFECT)         -- no effect for the target if they had the buff already. Testing in retail shows it's _not_ xi.msg.basic.ROLL_SUB_FAIL if the roll is already active. There is no known buff that would prevent a corsair roll, so maybe this would be used there if there were one?
+        end
     elseif total > 11 then
-        ability:setMsg(xi.msg.basic.DOUBLEUP_BUST)
+        -- bust
+        if caster:getID() == target:getID() then
+            currentAbility:setMsg(xi.msg.basic.DOUBLEUP_BUST)     -- bust message for the COR rolling
+        else
+            currentAbility:setMsg(xi.msg.basic.DOUBLEUP_BUST_SUB) -- bust message for the target getting the roll
+        end
+    else
+        -- success
+        if caster:getID() == target:getID() then
+            if isDoubleup then
+                currentAbility:setMsg(xi.msg.basic.DOUBLEUP)      -- success on doubleup for COR has different message than from just using Phantom Roll
+            else
+                currentAbility:setMsg(xi.msg.basic.ROLL_MAIN)     -- success message for the COR rolling the first time
+            end
+        else
+            currentAbility:setMsg(xi.msg.basic.ROLL_SUB)          -- message for the target getting the roll. Always the same, even if it's the COR's first roll.
+        end
     end
 
     return total
@@ -201,7 +226,7 @@ xi.job_utils.corsair.useCuttingCards = function(caster, target, ability, action)
 end
 
 xi.job_utils.corsair.useDoubleUp = function(caster, target, ability, action)
-    if caster:getID() == target:getID() then
+    if caster:getID() == target:getID() then -- the COR handles all the calculations
         local du_effect = caster:getStatusEffect(xi.effect.DOUBLE_UP_CHANCE)
         local prev_roll = caster:getStatusEffect(du_effect:getSubPower())
         local roll = prev_roll:getSubPower()
@@ -218,11 +243,11 @@ xi.job_utils.corsair.useDoubleUp = function(caster, target, ability, action)
             caster:delStatusEffect(xi.effect.SNAKE_EYE)
         else
             roll = roll + math.random(1, 6)
+        end
 
-            if roll > 12 then
-                roll = 12
-                caster:delStatusEffectSilent(xi.effect.DOUBLE_UP_CHANCE)
-            end
+        if roll > 12 then -- bust
+            roll = 12
+            caster:delStatusEffectSilent(xi.effect.DOUBLE_UP_CHANCE)
         end
 
         if roll == 11 then
@@ -238,16 +263,17 @@ xi.job_utils.corsair.useDoubleUp = function(caster, target, ability, action)
     local activeRoll = caster:getLocalVar("corsairActiveRoll")
     local prev_ability = GetAbility(activeRoll)
 
-    if prev_ability then
-        action:setAnimation(target:getID(), prev_ability:getAnimation())
+    if prev_ability then -- Apply rolls to target(s), including the COR
         action:actionID(prev_ability:getID())
-        total = applyRoll(caster, target, prev_ability, action, total)
-        local msg = ability:getMsg()
-        if msg == 420 then
-            ability:setMsg(xi.msg.basic.DOUBLEUP)
-        elseif msg == 422 then
-            ability:setMsg(xi.msg.basic.DOUBLEUP_FAIL)
+
+        total = applyRoll(caster, target, prev_ability, action, total, true, ability)
+
+        if total > 11 then
+            action:setAnimation(target:getID(), 98) -- 98 is bust anim for all rolls
+        else
+            action:setAnimation(target:getID(), prev_ability:getAnimation())
         end
+
         return total
     end
 end
@@ -292,7 +318,7 @@ xi.job_utils.corsair.onRollUseAbility = function(caster, target, ability, action
     end
 
     local total = caster:getLocalVar("corsairRollTotal")
-    return applyRoll(caster, target, ability, action, total)
+    return applyRoll(caster, target, ability, action, total, false, ability)
 end
 
 -- Called by Double Up ability onAbilityCheck

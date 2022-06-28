@@ -18,8 +18,8 @@ zones[xi.zone.WAUGHROON_SHRINE] =
         LOGIN_CAMPAIGN_UNDERWAY      = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER                 = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         CONQUEST_BASE                = 7057, -- Tallying conquest results...
-        PARTY_MEMBERS_HAVE_FALLEN    = 7562, -- All party members have fallen in battle. Now leaving the battlefield.
-        THE_PARTY_WILL_BE_REMOVED    = 7569, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
+        PARTY_MEMBERS_HAVE_FALLEN    = 7566, -- All party members have fallen in battle. Now leaving the battlefield.
+        THE_PARTY_WILL_BE_REMOVED    = 7573, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
         YOU_DECIDED_TO_SHOW_UP       = 7685, -- So, you decided to show up. Now it's time to see what you're really made of, heh heh heh.
         LOOKS_LIKE_YOU_WERENT_READY  = 7686, -- Looks like you weren't ready for me, were you? Now go home, wash your face, and come back when you think you've got what it takes.
         YOUVE_COME_A_LONG_WAY        = 7687, -- Hm. That was a mighty fine display of skill there, <name>. You've come a long way...
@@ -39,6 +39,7 @@ zones[xi.zone.WAUGHROON_SHRINE] =
         YIKEY_WIKEYS                 = 7733, -- Yikey-wikeys! Get that thing away from meee!
         WHATS_THE_MATTARU            = 7734, -- <Pant, wheeze>... What's the mattaru, <name>? Too much of a pansy-wansy to fight fair?
     },
+
     mob =
     {
         ATORI_TUTORI_QM =
@@ -48,11 +49,15 @@ zones[xi.zone.WAUGHROON_SHRINE] =
             17367334,
         },
     },
+
     npc =
     {
     },
-    operationDesertSwarm = {
-        [1] = {
+
+    operationDesertSwarm =
+    {
+        [1] =
+        {
             17367266,
             17367267,
             17367268,
@@ -60,7 +65,9 @@ zones[xi.zone.WAUGHROON_SHRINE] =
             17367270,
             17367271,
         },
-        [2] = {
+
+        [2] =
+        {
             17367273,
             17367274,
             17367275,
@@ -68,7 +75,9 @@ zones[xi.zone.WAUGHROON_SHRINE] =
             17367277,
             17367278,
         },
-        [3] = {
+
+        [3] =
+        {
             17367280,
             17367281,
             17367282,

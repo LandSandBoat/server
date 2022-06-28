@@ -4,28 +4,28 @@
 -- Starts and Ends Quest: Don't Forget the Antidote
 -----------------------------------
 require("scripts/globals/titles")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Rabao/IDs")
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local ForgetTheAntidote = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
+    local forgetTheAntidote = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
 
-    if ((ForgetTheAntidote == QUEST_ACCEPTED or ForgetTheAntidote == QUEST_COMPLETED) and trade:hasItemQty(1209, 1) and trade:getItemCount() == 1) then
+    if ((forgetTheAntidote == QUEST_ACCEPTED or forgetTheAntidote == QUEST_COMPLETED) and trade:hasItemQty(1209, 1) and trade:getItemCount() == 1) then
         player:startEvent(4, 0, 1209)
     end
 end
 
 entity.onTrigger = function(player, npc)
-    local ForgetTheAntidote = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
+    local forgetTheAntidote = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DONT_FORGET_THE_ANTIDOTE)
 
-    if (ForgetTheAntidote == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.SELBINA_RABAO) >= 4) then
+    if (forgetTheAntidote == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.SELBINA_RABAO) >= 4) then
         player:startEvent(2, 0, 1209)
-    elseif (ForgetTheAntidote == QUEST_ACCEPTED) then
+    elseif (forgetTheAntidote == QUEST_ACCEPTED) then
         player:startEvent(3, 0, 1209)
-    elseif (ForgetTheAntidote == QUEST_COMPLETED) then
+    elseif (forgetTheAntidote == QUEST_COMPLETED) then
         player:startEvent(5, 0, 1209)
     else
         player:startEvent(50)
@@ -49,11 +49,10 @@ entity.onEventFinish = function(player, csid, option)
         player:addFame(xi.quest.fame_area.SELBINA_RABAO, 60)
     elseif (csid == 4) then --Subsequent completions
         player:tradeComplete()
-        player:addGil(xi.settings.GIL_RATE*1800)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*1800)
+        player:addGil(xi.settings.main.GIL_RATE*1800)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*1800)
         player:addFame(xi.quest.fame_area.SELBINA_RABAO, 30)
     end
-
 end
 
 return entity

@@ -31,12 +31,12 @@
 
 enum class EFFECTOVERWRITE : uint8
 {
-    EQUAL_HIGHER      = 0, // only overwrite if equal or higher (tier, power)
-    HIGHER            = 1, // only overwrite if higher (tier, power)
-    NEVER             = 2, // never overwrite
-    ALWAYS            = 3, // always overwrite no matter
-    IGNORE_DUPLICATE  = 4, // ignore dupes
-    TIER_HIGHER       = 5  // only overwrite if tier is higher (regardless of power)
+    EQUAL_HIGHER     = 0, // only overwrite if equal or higher (tier, power)
+    HIGHER           = 1, // only overwrite if higher (tier, power)
+    NEVER            = 2, // never overwrite
+    ALWAYS           = 3, // always overwrite no matter
+    IGNORE_DUPLICATE = 4, // ignore dupes
+    TIER_HIGHER      = 5  // only overwrite if tier is higher (regardless of power)
 };
 
 enum EFFECTFLAG
@@ -547,19 +547,19 @@ enum EFFECT
     EFFECT_SCARLET_DELIRIUM      = 479, // DRK 95
     EFFECT_SCARLET_DELIRIUM_1    = 480, // DRK 95
     EFFECT_ABDHALJS_SEAL         = 481,
-    EFFECT_DECOY_SHOT         = 482, // RNG 95
-    EFFECT_HAGAKURE           = 483, // SAM 95
-    EFFECT_ISSEKIGAN          = 484, // NIN 95
-    EFFECT_UNBRIDLED_LEARNING = 485, // BLU 95
-    EFFECT_COUNTER_BOOST      = 486, //
-    EFFECT_ENDRAIN            = 487, // FENRIR 96
-    EFFECT_ENASPIR            = 488, // FENRIR 96
-    EFFECT_AFTERGLOW          = 489, // WS AFTEREFFECT
-    EFFECT_BRAZEN_RUSH        = 490, //
-    EFFECT_INNER_STRENGTH     = 491,
-    EFFECT_ASYLUM             = 492,
-    EFFECT_SUBTLE_SORCERY     = 493,
-    EFFECT_STYMIE             = 494,
+    EFFECT_DECOY_SHOT            = 482, // RNG 95
+    EFFECT_HAGAKURE              = 483, // SAM 95
+    EFFECT_ISSEKIGAN             = 484, // NIN 95
+    EFFECT_UNBRIDLED_LEARNING    = 485, // BLU 95
+    EFFECT_COUNTER_BOOST         = 486, //
+    EFFECT_ENDRAIN               = 487, // FENRIR 96
+    EFFECT_ENASPIR               = 488, // FENRIR 96
+    EFFECT_AFTERGLOW             = 489, // WS AFTEREFFECT
+    EFFECT_BRAZEN_RUSH           = 490, //
+    EFFECT_INNER_STRENGTH        = 491,
+    EFFECT_ASYLUM                = 492,
+    EFFECT_SUBTLE_SORCERY        = 493,
+    EFFECT_STYMIE                = 494,
     // EFFECT_NONE                     = 495,
     EFFECT_INTERVENE        = 496,
     EFFECT_SOUL_ENSLAVEMENT = 497,
@@ -739,12 +739,13 @@ enum EFFECT
     EFFECT_MEDITATE            = 801, // Dummy effect for SAM Meditate JA
     EFFECT_ELEMENTALRES_DOWN   = 802, // Elemental resistance down
     EFFECT_FULL_SPEED_AHEAD    = 803, // Used to track Full Speed Ahead quest minigame
-    // EFFECT_PLACEHOLDER           = 804  // Description
-    // 804-1022
+    EFFECT_HYSTERIA            = 804, // Used for Hysteroanima to stop after readying a weaponskill with no msg.
+    // EFFECT_PLACEHOLDER           = 805  // Description
+    // 805-1022
     // EFFECT_PLACEHOLDER           = 1023 // The client dat file seems to have only this many "slots", results of exceeding that are untested.
 };
 
-#define MAX_EFFECTID 804 // 768 real + 32 custom
+#define MAX_EFFECTID 805 // 768 real + 32 custom
 
 /************************************************************************
  *                                                                       *

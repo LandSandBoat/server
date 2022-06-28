@@ -22,7 +22,7 @@
 -- 602 = Expansion increased
 -- 4th arg = new size of locker
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/missions")
@@ -57,7 +57,6 @@ entity.onTrade = function(player, npc, trade)
                 player:tradeComplete()
                 -- send event
                 player:startEvent(601, xi.moghouse.getMogLockerExpiryTimestamp(player))
-                -- print("Expanded lease with "..numBronze.." bronze.")
             end
         elseif numGold > 0 or numMythril > 0 then
             -- see if we can expand the size
@@ -98,7 +97,6 @@ entity.onTrigger = function(player, npc)
 
         if mogLockerExpiryTimestamp == nil then
             -- a nil timestamp means they haven't unlocked it yet. We're going to unlock it by merely talking to this NPC.
-            --print("Unlocking mog locker for "..player:getName())
             mogLockerExpiryTimestamp = xi.moghouse.unlockMogLocker(player)
             accessType = xi.moghouse.setMogLockerAccessType(player, xi.moghouse.lockerAccessType.ALLAREAS)
         end

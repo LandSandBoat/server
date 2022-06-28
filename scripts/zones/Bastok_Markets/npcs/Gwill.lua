@@ -6,7 +6,7 @@
 -- !pos ? ? ? 235
 -----------------------------------
 local ID = require("scripts/zones/Bastok_Markets/IDs")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
@@ -22,10 +22,10 @@ end
 
 entity.onTrigger = function(player, npc)
     local pFame = player:getFameLevel(xi.quest.fame_area.BASTOK)
-    local FatherFigure = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FATHER_FIGURE)
-    local TheReturn = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_RETURN_OF_THE_ADVENTURER)
+    local fatherFigure = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FATHER_FIGURE)
+    local theReturn = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_RETURN_OF_THE_ADVENTURER)
 
-    if FatherFigure == QUEST_COMPLETED and TheReturn == QUEST_AVAILABLE and pFame >= 3 then
+    if fatherFigure == QUEST_COMPLETED and theReturn == QUEST_AVAILABLE and pFame >= 3 then
         player:startEvent(242)
     elseif player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_COLD_LIGHT_OF_DAY) == QUEST_ACCEPTED then
         player:startEvent(103)

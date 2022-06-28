@@ -14,28 +14,28 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local X = player:getXPos()
-    local Z = player:getZPos()
+    local xPos = player:getXPos()
+    local zPos = player:getZPos()
 
-    if X < -60 then
-        if Z < -6 then -- SW frame
+    if xPos < -60 then
+        if zPos < -6 then -- SW frame
             if player:hasKeyItem(xi.ki.FINAL_FANTASY) then
                 player:startEvent(50, xi.ki.FINAL_FANTASY)
             else
                 player:messageSpecial(ID.text.PAINTBRUSH_OFFSET + 31) -- This is a frame for a painting.
             end
-        elseif Z < 5 then
+        elseif zPos < 5 then
             player:messageSpecial(ID.text.PAINTBRUSH_OFFSET + 14) -- It is a picture of an old mage carrying a staff.
         else
             player:messageSpecial(ID.text.PAINTBRUSH_OFFSET + 13) -- It is a picture of a small group of three men and women.
         end
     else
-        if Z <-5 then -- SE picture
+        if zPos <-5 then -- SE picture
             player:messageSpecial(ID.text.PAINTBRUSH_OFFSET + 12) -- It is a painting of a beautiful landscape.
-        elseif Z > -5 and Z < 5 then
+        elseif zPos > -5 and zPos < 5 then
             if GetNPCByID(ID.npc.DOOR_TO_RANCOR):getAnimation() == xi.anim.OPEN_DOOR then
                 player:messageSpecial(ID.text.PAINTBRUSH_OFFSET + 23, xi.ki.PAINTBRUSH_OF_SOULS) -- The <KEY_ITEM> begins to twitch. The canvas is graced with the image from your soul.
-            elseif player:hasKeyItem(xi.ki.PAINTBRUSH_OF_SOULS) and X >= -53.2 and Z <= 0.1 and Z >= -0.1 then -- has paintbrush of souls + close enough
+            elseif player:hasKeyItem(xi.ki.PAINTBRUSH_OF_SOULS) and xPos >= -53.2 and zPos <= 0.1 and zPos >= -0.1 then -- has paintbrush of souls + close enough
                 player:messageSpecial(ID.text.PAINTBRUSH_OFFSET + 17, xi.ki.PAINTBRUSH_OF_SOULS)
                 player:setCharVar("started_painting", os.time())
                 player:startEvent(60, xi.ki.PAINTBRUSH_OF_SOULS)

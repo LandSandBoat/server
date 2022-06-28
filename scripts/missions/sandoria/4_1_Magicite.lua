@@ -18,7 +18,7 @@ require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/titles')
-require('scripts/settings/main')
+require('scripts/globals/settings')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
@@ -333,7 +333,7 @@ mission.sections =
             onZoneIn =
             {
                 function(player, prevZone)
-                    if mission:getVar(player, 'Option') == 2 then -- Fickbix CS...
+                    if mission:getVar(player, 'Option') == 2 then -- Fickbix CS
                         return 10000
                     end
                 end,

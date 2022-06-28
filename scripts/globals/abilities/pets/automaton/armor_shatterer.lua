@@ -2,7 +2,7 @@
 -- Armor Shatterer
 -----------------------------------
 require("scripts/globals/status")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/automatonweaponskills")
 
 -----------------------------------
@@ -14,7 +14,8 @@ ability_object.onAutomatonAbilityCheck = function(target, automaton, skill)
 end
 
 ability_object.onAutomatonAbility = function(target, automaton, skill, master, action)
-    local params = {
+    local params =
+    {
         numHits = 2,
         atkmulti = 2.25,
         accBonus = 50,

@@ -4,7 +4,7 @@
 -- !pos 4 -2 44 80
 -----------------------------------
 require("scripts/globals/quests")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 

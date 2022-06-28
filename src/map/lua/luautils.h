@@ -27,7 +27,8 @@
 #include "common/cbasetypes.h"
 #include "common/taskmgr.h"
 
-#include "lua.hpp"
+#include "common/lua.h"
+extern sol::state lua;
 
 #ifdef TRACY_ENABLE
 #include "TracyLua.hpp"
@@ -45,8 +46,8 @@
 
 #define SOL_USERTYPE(TypeName, BindingTypeName) \
     std::string className = TypeName;           \
-    luautils::lua.new_usertype<BindingTypeName>(className)
-#define SOL_REGISTER(FuncName, Func) luautils::lua[className][FuncName] = &Func
+    lua.new_usertype<BindingTypeName>(className)
+#define SOL_REGISTER(FuncName, Func) lua[className][FuncName] = &Func
 
 #include "../items/item_equipment.h"
 #include "../spell.h"
@@ -65,10 +66,10 @@
 #include "lua_zone.h"
 
 /************************************************************************
-*                                                                       *
-*                                                                       *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
 class CAbility;
 class CSpell;
@@ -112,8 +113,6 @@ enum class Emote : uint8;
 
 namespace luautils
 {
-    extern sol::state lua;
-
     void SafeApplyFunc_ReloadList(std::function<void(std::map<std::string, uint64>&)> func);
 
     int32 init();
@@ -144,19 +143,18 @@ namespace luautils
     uint8 GetConquestBalance();
     bool  IsConquestAlliance();
     int32 SetRegionalConquestOverseers(uint8 regionID); // Update NPC Conquest Guard
-
-    uint8 GetHealingTickDelay(); // Returns the configured healing tick delay
+    void  SendLuaFuncStringToZone(uint16 zoneId, std::string const& str);
 
     auto GetReadOnlyItem(uint32 id) -> std::optional<CLuaItem>; // Returns a read only lookup item object of the specified ID
     auto GetAbility(uint16 id) -> std::optional<CLuaAbility>;
     auto GetSpell(uint16 id) -> std::optional<CLuaSpell>;
 
-    auto   SpawnMob(uint32 mobid, sol::object const& arg2, sol::object const& arg3) -> std::optional<CLuaBaseEntity>; // Spawn Mob By Mob Id - NMs, BCNM...
-    void   DespawnMob(uint32 mobid, sol::object const& arg2);                                                           // Despawn (Fade Out) Mob By Id
-    auto   GetPlayerByName(std::string const& name) -> std::optional<CLuaBaseEntity>;
-    auto   GetPlayerByID(uint32 pid) -> std::optional<CLuaBaseEntity>;
-    auto   GetMagianTrial(sol::variadic_args va) -> sol::table;
-    auto   GetMagianTrialsWithParent(int32 parentTrial) -> sol::table;
+    auto SpawnMob(uint32 mobid, sol::object const& arg2, sol::object const& arg3) -> std::optional<CLuaBaseEntity>; // Spawn Mob By Mob Id - NMs, BCNM...
+    void DespawnMob(uint32 mobid, sol::object const& arg2);                                                         // Despawn (Fade Out) Mob By Id
+    auto GetPlayerByName(std::string const& name) -> std::optional<CLuaBaseEntity>;
+    auto GetPlayerByID(uint32 pid) -> std::optional<CLuaBaseEntity>;
+    auto GetMagianTrial(sol::variadic_args va) -> sol::table;
+    auto GetMagianTrialsWithParent(int32 parentTrial) -> sol::table;
 
     uint32 JstMidnight();
     uint32 JstWeekday();
@@ -183,7 +181,7 @@ namespace luautils
     int32 GetServerVariable(std::string const& varName);
     void  SetServerVariable(std::string const& name, int32 value);
     void  ClearVarFromAll(std::string const& varName); // Deletes a specific player variable from all players
-    void  Terminate();                          // Logs off all characters and terminates the server
+    void  Terminate();                                 // Logs off all characters and terminates the server
 
     int32 GetTextIDVariable(uint16 ZoneID, const char* variable); // загружаем значение переменной TextID указанной зоны
     uint8 GetSettingsVariable(const char* variable);              // Gets a Variable Value from Settings.lua
@@ -231,12 +229,12 @@ namespace luautils
     auto  OnItemCheck(CBaseEntity* PTarget, CItem* PItem, ITEMCHECK param = ITEMCHECK::NONE, CBaseEntity* PCaster = nullptr) -> std::tuple<int32, int32, int32>; // check to see if item can be used
     int32 CheckForGearSet(CBaseEntity* PTarget);                                                                                                                 // check for gear sets
 
-    int32  OnMagicCastingCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CSpell* PSpell);                   // triggers when a player attempts to cast a spell
-    uint32 OnSpellCast(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell);                     // triggered when casting a spell
-    int32  OnSpellPrecast(CBattleEntity* PCaster, CSpell* PSpell);                                          // triggered just before casting a spell
+    int32  OnMagicCastingCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CSpell* PSpell);                                                       // triggers when a player attempts to cast a spell
+    int32  OnSpellCast(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell);                                                         // triggered when casting a spell
+    int32  OnSpellPrecast(CBattleEntity* PCaster, CSpell* PSpell);                                                                              // triggered just before casting a spell
     auto   OnMobMagicPrepare(CBattleEntity* PCaster, CBattleEntity* PTarget, std::optional<SpellID> startingSpellId) -> std::optional<SpellID>; // triggered when monster wants to use a spell on target
-    int32  OnMagicHit(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell);                      // triggered when spell cast on monster
-    int32  OnWeaponskillHit(CBattleEntity* PMob, CBaseEntity* PAttacker, uint16 PWeaponskill);              // Triggered when Weaponskill strikes monster
+    int32  OnMagicHit(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell);                                                          // triggered when spell cast on monster
+    int32  OnWeaponskillHit(CBattleEntity* PMob, CBaseEntity* PAttacker, uint16 PWeaponskill);                                                  // Triggered when Weaponskill strikes monster
 
     int32 OnMobInitialize(CBaseEntity* PMob); // Used for passive trait
     int32 ApplyMixins(CBaseEntity* PMob);
@@ -310,7 +308,7 @@ namespace luautils
     void OnPlayerEmote(CCharEntity* PChar, Emote EmoteID);
     void OnPlayerVolunteer(CCharEntity* PChar, std::string text);
 
-    bool OnChocoboDig(CCharEntity* PChar, bool pre);                    // chocobo digging, pre = check
+    bool OnChocoboDig(CCharEntity* PChar, bool pre); // chocobo digging, pre = check
 
     // Utility method: checks for and loads a lua function for events
     auto LoadEventScript(CCharEntity* PChar, const char* functionName) -> sol::function;
@@ -325,6 +323,8 @@ namespace luautils
     auto SetCustomMenuContext(CCharEntity* PChar, sol::table table) -> std::string;
     bool HasCustomMenuContext(CCharEntity* PChar);
     void HandleCustomMenu(CCharEntity* PChar, std::string selection);
+
+    uint16 GetItemIDByName(std::string const& name); // Retrive the first itemId that matches a name
 }; // namespace luautils
 
 #endif // _LUAUTILS_H -

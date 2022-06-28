@@ -3,7 +3,7 @@
 --  NPC: Door: Departures Exit
 -- !pos 218 -5 114 240
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
@@ -17,8 +17,6 @@ entity.onTrigger = function(player, npc)
     else
         player:startEvent(183, 0, 8)
     end
-
-    return 1
 end
 
 entity.onEventUpdate = function(player, csid, option)
@@ -26,9 +24,9 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 181 then
-        local X = player:getXPos()
+        local xPos = player:getXPos()
 
-        if X >= 221 and X <= 225 then
+        if xPos >= 221 and xPos <= 225 then
             player:delGil(200)
         end
     end
