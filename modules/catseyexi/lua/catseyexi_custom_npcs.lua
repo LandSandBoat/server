@@ -19,11 +19,11 @@ m:addOverride("xi.zones.RuLude_Gardens.Zone.onInitialize", function(zone)
     local sylvie = zone:insertDynamicEntity({
     objtype  = xi.objType.NPC,
     name     = "Sylvie",
-    look     = "0x01000F0234113421343134413451006000707180",
-    x        = 4.20,
-    y        = 3.100,
-    z        = 111.905,
-    rotation = 128,
+    look     = "0x0000180C00000000000000000000000000000000",
+    x        = -3.956,
+    y        = 2.000,
+    z        = 126.656,
+    rotation = 25,
     widescan = 1,
 
     onTrade = function(player, npc, trade)
