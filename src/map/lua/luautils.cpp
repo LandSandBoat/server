@@ -533,7 +533,7 @@ namespace luautils
         // Handle Commands then return
         if (parts.size() == 2 && parts[0] == "commands")
         {
-            auto file_result = lua.safe_script_file(filename, &sol::script_pass_on_error);
+            auto result = lua.safe_script_file(filename, &sol::script_pass_on_error);
             if (!result.valid())
             {
                 sol::error err = result;
@@ -541,7 +541,7 @@ namespace luautils
                 return;
             }
 
-            ShowInfo("[FileWatcher] COMMAND %s -> \"%s\"", filename, requireName);
+            ShowInfo("[FileWatcher] COMMAND %s", filename);
             return;
         }
 
