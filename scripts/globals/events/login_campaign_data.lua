@@ -330,7 +330,7 @@ local prizes =
 			1409, -- Siren's Macrame
 			831, -- Shining Cloth
 			862, -- Behemoth Leather
-			2170, -- Cerberus Leather
+			2169, -- Cerberus Hide
 			1312, -- Angel Skin
 			723, -- Divine Lumber
 			720, -- Ancient Lumber
