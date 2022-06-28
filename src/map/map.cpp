@@ -102,6 +102,8 @@ std::unique_ptr<SqlConnection> sql;
 
 extern std::map<uint16, CZone*> g_PZoneList; // Global array of pointers for zones
 
+bool gLoadAllLua = false;
+
 namespace
 {
     uint32 MAX_BUFFER_SIZE             = 2500U;
@@ -192,6 +194,10 @@ int32 do_init(int32 argc, char** argv)
         else if (strcmp(argv[i], "--port") == 0)
         {
             map_port = std::stoi(argv[i + 1]);
+        }
+        else if (strcmp(argv[i], "--load_all") == 0)
+        {
+            gLoadAllLua = true;
         }
     }
 
