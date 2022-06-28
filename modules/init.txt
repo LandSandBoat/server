@@ -47,6 +47,7 @@ custom/lua/new_player_linkshell.lua
 custom/lua/custom_containers.lua
 custom/lua/guild_no_kits.lua
 custom/lua/conquest_crystal_trade_fix.lua
+custom/lua/disable_guild_shops.lua
 custom/sql/ka_speedbelt_drop.sql
 era/lua/75_era_vendors.lua
 era/sql/75_era_spells.sql
