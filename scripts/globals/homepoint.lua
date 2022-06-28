@@ -1,4 +1,4 @@
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/teleports")
 -----------------------------------
 
@@ -183,7 +183,6 @@ local function goToHP(player, choice, index)
 end
 
 xi.homepoint.onTrigger = function(player, csid, index)
-    if xi.settings.main.HOMEPOINT_TELEPORT ~= 1 then -- Settings.lua Homepoints disabled
     -- apparently people ar exploiting the healing homepoints so we implement a check to see
 	-- if they are in a "no heal zone" as defined in the table at the top of the file.
     local currentZone = player:getZoneID()
@@ -196,7 +195,10 @@ xi.homepoint.onTrigger = function(player, csid, index)
             player:addMP(player:getMaxMP())		
         end
 	end
-    -- end custom code        player:startEvent(csid, 0, 0, 0, 0, 0, player:getGil(), 4095, index)
+    -- end custom code
+	
+    if xi.settings.main.HOMEPOINT_TELEPORT ~= 1 then -- Settings.lua Homepoints disabled
+        player:startEvent(csid, 0, 0, 0, 0, 0, player:getGil(), 4095, index)
         return
     end
 
@@ -218,7 +220,6 @@ xi.homepoint.onTrigger = function(player, csid, index)
     player:setLocalVar("originIndex", index)
     local g1, g2, g3, g4 = unpack(player:getTeleportTable(travelType))
     player:startEvent(csid, 1, g1, g2, g3, g4, player:getGil(), 4095, params)
-
 end
 
 xi.homepoint.onEventUpdate = function(player, csid, option)

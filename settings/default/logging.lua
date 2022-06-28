@@ -11,6 +11,6 @@ xi.settings = xi.settings or {}
 
 xi.settings.logging =
 {
-    TRACE_NAVMESH = true,
-    TRACE_PACKETS = true,
+    TRACE_NAVMESH = false,
+    TRACE_PACKETS = false,
 }

@@ -12,7 +12,9 @@ local zone_object = {}
 
 zone_object.onInitialize = function(zone)
     zone:registerRegion(1, -61.164, -1.725, -33.673, -55.521, -1.332, -18.122)
-    if (xi.settings.main.LandKingSystem_NQ ~= 1) then        UpdateNMSpawnPoint(ID.mob.FAFNIR)
+
+    if (xi.settings.main.LandKingSystem_NQ ~= 1) then
+        UpdateNMSpawnPoint(ID.mob.FAFNIR)
         GetMobByID(ID.mob.FAFNIR):setRespawnTime(900 + math.random(0, 6) * 1800)
     end
 end

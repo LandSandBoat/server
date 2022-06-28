@@ -38,10 +38,10 @@ xi.settings.map =
     -- Max open listings per player, 0 = no limit. (Default 7)
     -- Note = Settings over 7 may need client-side plugin to work under all circumstances.
     -- If this is the case, consider using the ah_pagination module
-    AH_LIST_LIMIT = 7,
+    AH_LIST_LIMIT = 0,
 
     -- Misc EXP related settings
-    EXP_RATE                = 1.0,
+    EXP_RATE                = 1.5,
     EXP_LOSS_RATE           = 1.0,
     EXP_PARTY_GAP_PENALTIES = 1,
 
@@ -90,12 +90,12 @@ xi.settings.map =
     MOB_SPEED_MOD = 0,
 
     -- Allows you to manipulate the constant multiplier in the skill-up rate formulas, having a potent effect on skill-up rates.
-    SKILLUP_CHANCE_MULTIPLIER = 1.0,
-    CRAFT_CHANCE_MULTIPLIER   = 1.0,
+    SKILLUP_CHANCE_MULTIPLIER = 2.0,
+    CRAFT_CHANCE_MULTIPLIER   = 1.5,
 
     -- Multiplier for skillup amounts. Using anything above 1 will break the 0.5 cap, the cap will become 0.9 (For maximum, set to 5)
-    SKILLUP_AMOUNT_MULTIPLIER = 1,
-    CRAFT_AMOUNT_MULTIPLIER   = 1,
+    SKILLUP_AMOUNT_MULTIPLIER = 2,
+    CRAFT_AMOUNT_MULTIPLIER   = 1.5,
 
     -- Gardening Factors        = DO NOT change defaults without verifiable proof that your change IS how retail does it. Myths need to be optional.
     GARDEN_DAY_MATTERS       = 0,
@@ -113,10 +113,10 @@ xi.settings.map =
     CRAFT_SPECIALIZATION_POINTS = 400,
 
     -- Enables fishing. 0 = Disbaled. 1 = Enable. ENABLE AT YOUR OWN RISK.
-    FISHING_ENABLE     = 0,
+    FISHING_ENABLE = 1,
 
     -- Multipler for fishing skill-up chance. Default = 1.0, very hard.
-    FISHING_SKILL_MULTIPLIER = 1.0,
+    FISHING_SKILL_MULTIPLIER = 3.0,
 
     -- Enable/disable skill-ups from bloodpacts
     SKILLUP_BLOODPACT = 1,
@@ -178,7 +178,7 @@ xi.settings.map =
     MAX_GIL_BONUS = 9999,
 
     --  Allow mobs to walk back home instead of despawning
-    MOB_NO_DESPAWN = 0,
+    MOB_NO_DESPAWN = 1,
 
     -- Allows parry, block, and guard to skill up regardless of the action occuring.
     -- This did not happen in previous eras
@@ -195,26 +195,26 @@ xi.settings.map =
     -- Max allowed merits points players can hold
     --  10 classic
     --  30 abyssea
-    MAX_MERIT_POINTS = 30,
+    MAX_MERIT_POINTS = 50,
 
     -- Minimum time between uses of yell command (in seconds).
     YELL_COOLDOWN = 30,
 
     -- Command Audit [logging] commands with lower permission than this will not be logged.
     -- Zero for no logging at all. Commands given to non GMs are not logged.
-    AUDIT_GM_CMD = 0,
+    AUDIT_GM_CMD = 1,
 
     -- Todo = other logging including anti-cheat messages
 
     -- Chat Audit[logging] settings
-    AUDIT_CHAT      = 0,
-    AUDIT_SAY       = 0,
-    AUDIT_SHOUT     = 0,
-    AUDIT_TELL      = 0,
-    AUDIT_YELL      = 0,
-    AUDIT_LINKSHELL = 0,
-    AUDIT_UNITY     = 0,
-    AUDIT_PARTY     = 0,
+    AUDIT_CHAT      = 1,
+    AUDIT_SAY       = 1,
+    AUDIT_SHOUT     = 1,
+    AUDIT_TELL      = 1,
+    AUDIT_YELL      = 1,
+    AUDIT_LINKSHELL = 1,
+    AUDIT_UNITY     = 1,
+    AUDIT_PARTY     = 1,
 
     -- Seconds between healing ticks. Default is 10
     HEALING_TICK_DELAY = 10,
