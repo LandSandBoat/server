@@ -374,7 +374,7 @@ xi.dynamis.animatedInfo =
     -- },
     -- xi.effect.KO is used for if the spell is not enhancing.
     -- Use chance == 100 if there is really only 2 options. See hammer.
-    ["DE_AHam"] = -- Animated Hammer
+    [151] = -- Animated Hammer
     {
         ["Children"] = {180, 181, 182, 183},
         ["Spells"] =
@@ -383,7 +383,7 @@ xi.dynamis.animatedInfo =
             {xi.magic.spell.HOLY, 100, xi.effect.KO},
         },
     },
-    ["DE_ADag"] = -- Animated Dagger
+    [152] = -- Animated Dagger
     {
         ["Children"] = {184, 185, 186, 187},
         ["Spells"] =
@@ -393,7 +393,7 @@ xi.dynamis.animatedInfo =
             {xi.magic.spell.POISONGA_II, 100, xi.effect.KO},
         },
     },
-    ["DE_AShi"] = -- Animated Shield
+    [153] = -- Animated Shield
     {
         ["Children"] = {188, 189, 190, 191},
         ["Spells"] =
@@ -404,7 +404,7 @@ xi.dynamis.animatedInfo =
             {xi.magic.spell.SLEEPGA, 100, xi.effect.KO},
         },
     },
-    ["DE_ACla"] = -- Animated Claymore
+    [154] = -- Animated Claymore
     {
         ["Children"] = {192, 193, 194, 195},
         ["Spells"] =
@@ -414,7 +414,7 @@ xi.dynamis.animatedInfo =
             {xi.magic.spell.SLEEPGA, 100, xi.effect.KO},
         },
     },
-    ["DE_AGun"] = -- Animated Gun
+    [155] = -- Animated Gun
     {
         ["Children"] = {196, 197, 198, 199},
         ["Spells"] =
@@ -424,7 +424,7 @@ xi.dynamis.animatedInfo =
             {xi.magic.spell.GRAVIGA, 100, xi.effect.KO},
         },
     },
-    ["DE_Alon"] = -- Animated Longbow
+    [156] = -- Animated Longbow
     {
         ["Children"] = {200, 201, 202, 203},
         ["Spells"] =
@@ -435,7 +435,7 @@ xi.dynamis.animatedInfo =
             {xi.magic.spell.BINDGA, 100, xi.effect.KO},
         },
     },
-    ["DE_ATac"] = -- Animated Tachi
+    [157] = -- Animated Tachi
     {
         ["Children"] = {204, 205, 206, 207},
         ["Spells"] =
@@ -445,7 +445,7 @@ xi.dynamis.animatedInfo =
             {xi.magic.spell.BINDGA, 100, xi.effect.KO},
         },
     },
-    ["DE_ATab"] = -- Animated Tabar
+    [158] = -- Animated Tabar
     {
         ["Children"] = {208, 209, 210, 211},
         ["Spells"] =
@@ -455,7 +455,7 @@ xi.dynamis.animatedInfo =
             {xi.magic.spell.PARALYGA, 100, xi.effect.KO},
         },
     },
-    ["DE_ASta"] = -- Animated Staff
+    [159] = -- Animated Staff
     {
         ["Children"] = {212, 213, 214, 215},
         ["Spells"] =
@@ -464,7 +464,7 @@ xi.dynamis.animatedInfo =
             {xi.magic.spell.BREAKGA, 100, xi.effect.KO},
         },
     },
-    ["DE_ASpe"] = -- Animated Spear
+    [160] = -- Animated Spear
     {
         ["Children"] = {216, 217, 218, 219},
         ["Spells"] =
@@ -473,7 +473,7 @@ xi.dynamis.animatedInfo =
             {xi.magic.spell.THUNDAGA_III, 100, xi.effect.KO},
         },
     },
-    ["DE_AKun"] = -- Animated Kunai
+    [161] = -- Animated Kunai
     {
         ["Children"] = {220, 221, 222, 223},
         ["Spells"] =
@@ -482,7 +482,7 @@ xi.dynamis.animatedInfo =
             {xi.magic.spell.KURAYAMI_NI, 100, xi.effect.KO},
         },
     },
-    ["DE_AKnu"] = -- Animated Knuckles
+    [162] = -- Animated Knuckles
     {
         ["Children"] = {224, 225, 226, 227},
         ["Spells"] =
@@ -492,7 +492,7 @@ xi.dynamis.animatedInfo =
             {xi.magic.spell.HASTEGA, 100, xi.effect.WEAKNESS},
         },
     },
-    ["DE_AGre"] = -- Animated Great Axe
+    [163] = -- Animated Great Axe
     {
         ["Children"] = {228, 229, 230, 231},
         ["Spells"] =
@@ -502,7 +502,7 @@ xi.dynamis.animatedInfo =
             {xi.magic.spell.SLOWGA, 100, xi.effect.KO},
         },
     },
-    ["DE_AHor"] = -- Animated Horn
+    [164] = -- Animated Horn
     {
         ["Children"] = {232, 233, 234, 235},
         ["Spells"] =
@@ -510,7 +510,7 @@ xi.dynamis.animatedInfo =
             {xi.magic.spell.HORDE_LULLABY, 100, xi.effect.KO},
         },
     },
-    ["DE_ALon"] = -- Animated Longsword
+    [165] = -- Animated Longsword
     {
         ["Children"] = {236, 237, 238, 239},
         ["Spells"] =
@@ -521,7 +521,7 @@ xi.dynamis.animatedInfo =
             {xi.magic.spell.DISPELGA, 100, xi.effect.KO},
         },
     },
-    ["DE_AScy"] = -- Animated Scythe
+    [166] = -- Animated Scythe
     {
         ["Children"] = {240, 241, 242, 243},
         ["Spells"] =
@@ -531,25 +531,6 @@ xi.dynamis.animatedInfo =
             {xi.magic.spell.BINDGA, 100, xi.effect.KO},
         },
     },
-}
-xi.dynamis.satelliteInfo =
-{
-    ["DE_5348616d"] = {"hammer_killed"},
-    ["DE_5344616"] = {"dagger_killed"},
-    ["DE_53536869"] = {"shield_killed"},
-    ["DE_53436c61"] = {"claymore_killed"},
-    ["DE_5347756e"] = {"gun_killed"},
-    ["DE_536c6f6e"] = {"longbow_killed"},
-    ["DE_53546163"] = {"tachi_killed"},
-    ["DE_53546162"] = {"tabar_killed"},
-    ["DE_53537461"] = {"staff_killed"},
-    ["DE_53537065"] = {"spear_killed"},
-    ["DE_534b756e"] = {"kunai_killed"},
-    ["DE_534b6e75"] = {"knuckles_killed"},
-    ["DE_53477265"] = {"gaxe_killed"},
-    ["DE_53486f72"] = {"horn_killed"},
-    ["DE_534c6f6e"] = {"longsword_killed"},
-    ["DE_53536379"] = {"scythe_killed"},
 }
 
 xi.dynamis.onSpawnAnimated = function(mob)
@@ -574,7 +555,7 @@ xi.dynamis.onFightAnimated = function(mob, target)
     if mob:getLocalVar("castTime") <= os.time() then
         local pick = math.random(1, 100)
 
-        for _, data in pairs(xi.dynamis.animatedInfo[mob:getName()]["Spells"]) do
+        for _, data in pairs(xi.dynamis.animatedInfo[mob:getLocalVar("MobIndex")]["Spells"]) do
             if data[2] <= pick then
                 if not mob:hasStatusEffect(data[3]) then
                     if data[3] == xi.effect.KO then
