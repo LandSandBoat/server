@@ -300,7 +300,6 @@ local attackTypeShields =
 }
 
 function AvatarFinalAdjustments(dmg, mob, skill, target, skilltype, damagetype, shadowbehav)
-
     -- physical attack missed, skip rest
     if skilltype == xi.attackType.PHYSICAL and dmg == 0 then
         return 0
@@ -311,49 +310,7 @@ function AvatarFinalAdjustments(dmg, mob, skill, target, skilltype, damagetype, 
     skill:setMsg(xi.msg.basic.DAMAGE)
 
     -- Handle shadows depending on shadow behaviour / skilltype
-    if shadowbehav < 5 and shadowbehav ~= xi.mobskills.shadowBehavior.IGNORE_SHADOWS then -- remove 'shadowbehav' shadows.
-        local targShadows = target:getMod(xi.mod.UTSUSEMI)
-        local shadowType = xi.mod.UTSUSEMI
-        if targShadows == 0 then -- try blink, as utsusemi always overwrites blink this is okay
-            targShadows = target:getMod(xi.mod.BLINK)
-            shadowType = xi.mod.BLINK
-        end
-
-        if targShadows > 0 then
-            -- Blink has a VERY high chance of blocking tp moves, so im assuming its 100% because its easier!
-            if targShadows >= shadowbehav then -- no damage, just suck the shadows
-                skill:setMsg(xi.msg.basic.SHADOW_ABSORB)
-                target:setMod(shadowType, targShadows - shadowbehav)
-                if shadowType == xi.mod.UTSUSEMI then -- update icon
-                    local effect = target:getStatusEffect(xi.effect.COPY_IMAGE)
-                    if effect ~= nil then
-                        if targShadows - shadowbehav == 0 then
-                            target:delStatusEffect(xi.effect.COPY_IMAGE)
-                            target:delStatusEffect(xi.effect.BLINK)
-                        elseif targShadows - shadowbehav == 1 then
-                            effect:setIcon(xi.effect.COPY_IMAGE)
-                        elseif targShadows - shadowbehav == 2 then
-                            effect:setIcon(xi.effect.COPY_IMAGE_2)
-                        elseif targShadows - shadowbehav == 3 then
-                            effect:setIcon(xi.effect.COPY_IMAGE_3)
-                        end
-                    end
-                end
-                return shadowbehav
-            else -- less shadows than this move will take, remove all and factor damage down
-                dmg = dmg * (shadowbehav - targShadows) / shadowbehav
-                target:setMod(xi.mod.UTSUSEMI, 0)
-                target:setMod(xi.mod.BLINK, 0)
-                target:delStatusEffect(xi.effect.COPY_IMAGE)
-                target:delStatusEffect(xi.effect.BLINK)
-            end
-        end
-    elseif shadowbehav == xi.mobskills.shadowBehavior.WIPE_SHADOWS then -- take em all!
-        target:setMod(xi.mod.UTSUSEMI, 0)
-        target:setMod(xi.mod.BLINK, 0)
-        target:delStatusEffect(xi.effect.COPY_IMAGE)
-        target:delStatusEffect(xi.effect.BLINK)
-    end
+    dmg = utils.utils.takeShadows(target, dmg, shadowbehav)
 
     -- handle Third Eye using shadowbehav as a guide
     local teye = target:getStatusEffect(xi.effect.THIRD_EYE)
