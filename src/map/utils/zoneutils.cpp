@@ -622,7 +622,7 @@ namespace zoneutils
         }
         else
         {
-            ShowFatalError("zoneutils::CreateZone: Cannot load zone settings (%u)", ZoneID);
+            ShowCritical("zoneutils::CreateZone: Cannot load zone settings (%u)", ZoneID);
             return nullptr;
         }
     }
@@ -654,7 +654,7 @@ namespace zoneutils
         }
         else
         {
-            ShowFatalError("Unable to load any zones! Check IP and port params");
+            ShowCritical("Unable to load any zones! Check IP and port params");
             do_final(EXIT_FAILURE);
         }
 
@@ -1070,7 +1070,7 @@ namespace zoneutils
         }
         else
         {
-            ShowFatalError("zoneutils::GetZoneIPP: Cannot find zone %u", zoneID);
+            ShowCritical("zoneutils::GetZoneIPP: Cannot find zone %u", zoneID);
         }
         return ipp;
     }

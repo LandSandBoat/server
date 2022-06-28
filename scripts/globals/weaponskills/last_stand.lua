@@ -16,7 +16,7 @@
 
 -----------------------------------
 require("scripts/globals/status")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/weaponskills")
 -----------------------------------
 local weaponskill_object = {}
@@ -46,7 +46,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     params.atk100 = 1; params.atk200 = 1; params.atk300 = 1
     params.multiHitfTP = true
 
-    -- check to see if player has the unlock charvar for this, if not, do no damage.
+    if (xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
     local hasMeritWsUnlock = player:getCharVar("hasMeritWsUnlock")
 
     if (xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then

@@ -4,7 +4,7 @@
 -- Starts and Finishes Quest: Sleepless Nights
 -- !pos 158 -6 17 230
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/titles")
 require("scripts/globals/shop")
 require("scripts/globals/quests")
@@ -43,8 +43,8 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 84) then
         player:tradeComplete()
         player:addTitle(xi.title.SHEEPS_MILK_DELIVERER)
-        player:addGil(xi.settings.GIL_RATE*5000)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*5000)
+        player:addGil(xi.settings.main.GIL_RATE*5000)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*5000)
         player:addFame(xi.quest.fame_area.SANDORIA, 30)
         player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SLEEPLESS_NIGHTS)
     end

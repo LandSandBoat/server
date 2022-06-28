@@ -7,7 +7,7 @@
 local ID = require("scripts/zones/Selbina/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
@@ -48,7 +48,7 @@ entity.onTrigger = function(player, npc)
             player:startEvent(114, 539)
         end
     else
-        if player:getMainLvl() >= xi.settings.SUBJOB_QUEST_LEVEL then
+        if player:getMainLvl() >= xi.settings.main.SUBJOB_QUEST_LEVEL then
             player:startEvent(111, 538)
         else
             player:startEvent(119)

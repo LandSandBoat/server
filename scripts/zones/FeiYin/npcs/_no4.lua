@@ -7,7 +7,7 @@
 --    Involved in Missions: Windurst 5-1/7-2/8-2
 -----------------------------------
 require("scripts/globals/quests")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 local ID = require("scripts/zones/FeiYin/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------

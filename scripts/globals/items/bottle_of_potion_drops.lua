@@ -3,7 +3,7 @@
 -- Item: Potion Drop
 -- Item Effect: Restores 60 HP
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
@@ -17,7 +17,7 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    target:addHP(60*xi.settings.ITEM_POWER)
+    target:addHP(60*xi.settings.main.ITEM_POWER)
     target:addStatusEffect(xi.effect.MEDICINE, 0, 0, 300)
 end
 
