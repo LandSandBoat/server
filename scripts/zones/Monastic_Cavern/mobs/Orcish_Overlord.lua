@@ -15,6 +15,10 @@ entity.onMobInitialize = function(mob)
     if mob:getID() >= ID.mob.UNDERSTANDING_OVERLORD_OFFSET then
         mob:setMobMod(xi.mobMod.GIL_MAX, -1)
     end
+
+    if mob:getID() == ID.mob.ORCISH_OVERLORD then
+        mob:addMod(tpz.mod.DOUBLE_ATTACK, 20)
+    end
 end
 
 entity.onMobEngaged = function(mob, target)
