@@ -15,7 +15,7 @@ xi.settings.network =
     SQL_PORT     = 3306,
     SQL_LOGIN    = "topazadmin",
     SQL_PASSWORD = "topazisawesome",
-    SQL_DATABASE = "tpazdb",
+    SQL_DATABASE = "tpzdb",
 
     LOGIN_DATA_IP   = "127.0.0.1",
     LOGIN_DATA_PORT = 54230,
