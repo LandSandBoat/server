@@ -53587,11 +53587,18 @@ INSERT INTO `item_mods` VALUES (25668,384,300); -- HASTE_GEAR: 300
 -- Crab Cap +1
 INSERT INTO `item_mods` VALUES (25669,1,2); -- DEF: 2
 
+-- White Rarab Cap
+INSERT INTO `item_mods` VALUES (25675,1,1); -- DEF: 1
+
 -- Arthros Cap
 INSERT INTO `item_mods` VALUES (25677,1,1); -- DEF: 1
 
 -- Arthros Cap +1
 INSERT INTO `item_mods` VALUES (25678,1,2); -- DEF: 2
+
+-- White Rarab Cap +1
+INSERT INTO `item_mods` VALUES (25679,1,2); -- DEF: 2
+INSERT INTO `item_mods` VALUES (25679,303,1); -- TREASURE_HUNTER: 1
 
 -- Emicho Haubert (Checked)
 INSERT INTO `item_mods` VALUES (25682,1,147);   -- DEF: 147
