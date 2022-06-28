@@ -1732,6 +1732,12 @@ xi.dynamis.mobOnDeath = function(mob, player, isKiller)
     else -- Stops execution of code below if the above is true.
         if mob:getLocalVar("hasMobVar") == 1 then
             zone:setLocalVar(xi.dynamis.mobList[zoneID][mobIndex].info[5], 1) -- Set Death Requirements Variable
+            if zoneID == xi.zone.DYNAMIS_VALKURM then
+                local flies = {21, 22, 23}
+                if mobIndex == flies[1] or mobIndex == flies[2] or mobIndex == flies[3] then
+                    xi.dynamis.valkQMSpawnCheck(mob, zone, zoneID)
+                end
+            end
         end
         if mobIndex ~= 0 and mobIndex ~= nil then
             xi.dynamis.addTimeToDynamis(zone, mobIndex) -- Add Time

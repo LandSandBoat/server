@@ -709,7 +709,6 @@ end
 --------------------------------------------
 --      onZoneTick Dynamis Functions      --
 --------------------------------------------
--- 
 xi.dynamis.handleDynamis = function(zone)
     local zoneID = zone:getID()
     local zoneDynamistoken = zone:getLocalVar(string.format("[DYNA]Token_%s", zoneID))

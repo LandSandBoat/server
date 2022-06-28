@@ -78,7 +78,7 @@ end)
 m:addOverride("xi.globals.mobskills.soporific.onMobWeaponSkill", function(target, mob, skill)
     if mob:getZoneID() == xi.zone.DYNAMIS_VALKURM then
         local effect = xi.effect.SLEEP_I
-        local resist = applyPlayerResistance(mob, nil, target, mob:getStat(xi.mod.INT)-target:getStat(xi.mod.INT), 1, xi.magic.ele.DARK)
+        local resist = xi.mobskills.applyPlayerResistance(mob, nil, target, mob:getStat(xi.mod.INT)-target:getStat(xi.mod.INT), 1, xi.magic.ele.DARK)
 
         local duration = math.ceil(60 + math.floor(31*math.random()) * resist) -- wiki: duration variable from 30 to 90. can be thought of random 60-90 with possible half resist making it range 30-90
         if resist >= 0.5 then

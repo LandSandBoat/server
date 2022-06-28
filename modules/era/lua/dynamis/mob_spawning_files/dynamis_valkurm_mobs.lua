@@ -33,7 +33,7 @@ require("scripts/globals/zone")
 --    Mob type indicates spawning pattern used. Mob Name will replace the name dynamically.
 --    Mob Family is only required for beastmen NMs. Main Job is only required for beastmen NMs.
 --    NOTE: These should only be made for non-standard/zone specific mobs.
---    Statue Ex. xi.dynamis.mobList[zoneID][MobIndex].info = {"Statue", "Sergeant Tombstone", nil, nil, nil}
+--    Statue Ex. xi.dynamis.mobList[zoneID][MobIndex].info = {"Statue", "Serjeant Tombstone", nil, nil, nil}
 --    Nightmare Ex. xi.dynamis.mobList[zoneID][MobIndex].info = {"Nightmare", "Nightmare Scorpion", nil, nil, nil}
 --    Non-beastman NM Ex. xi.dynamis.mobList[zoneID][MobIndex].info = {"NM", "Apocalyptic Beast", nil, nil, "Apocalyptic_Beast_killed"}
 --    Beastmen NM Ex. xi.dynamis.mobList[zoneID][MobIndex].info = {"NM", "ElvaanSticker Bxafraff", "Orc", "DRG", "ElvaanSticker_Bxafraff_killed"}
@@ -97,38 +97,32 @@ end
 -- Nightmare Mobs + NMs Based on https://enedin.be/dyna/html/zone/frame_val1.htm
 -- Nightmare Mobs
 -- Hippogryph Sands
-xi.dynamis.mobList[zoneID][21 ].info = {"Nightmare", "Nightmare Fly", nil, nil, nil} -- ( 021 ) Nightmare Fly x3 Recovers Subjobs
-xi.dynamis.mobList[zoneID][130].info = {"Nightmare", "Nightmare Fly", nil, nil, nil} -- ( 021 )
-xi.dynamis.mobList[zoneID][131].info = {"Nightmare", "Nightmare Fly", nil, nil, nil} -- ( 021 )
+xi.dynamis.mobList[zoneID][21 ].info = {"Nightmare", "Nightmare Fly", nil, nil, "fly1_killed"} -- ( 021 ) Nightmare Fly Recovers Subjobs
 -- Sheep Sands
-xi.dynamis.mobList[zoneID][22 ].info = {"Nightmare", "Nightmare Fly", nil, nil, nil} -- ( 022 )  Nightmare Fly x3 Recover Subjobs
-xi.dynamis.mobList[zoneID][132].info = {"Nightmare", "Nightmare Fly", nil, nil, nil} -- ( 022 )
-xi.dynamis.mobList[zoneID][133].info = {"Nightmare", "Nightmare Fly", nil, nil, nil} -- ( 022 )
+xi.dynamis.mobList[zoneID][22 ].info = {"Nightmare", "Nightmare Fly", nil, nil, "fly2_killed"} -- ( 022 )  Nightmare Fly Recover Subjobs
 -- Manticore Sands
-xi.dynamis.mobList[zoneID][23 ].info = {"Nightmare", "Nightmare Fly", nil, nil, nil} -- ( 023 ) Nightmare Fly x3 Recover Subjobs
-xi.dynamis.mobList[zoneID][134].info = {"Nightmare", "Nightmare Fly", nil, nil, nil} -- ( 023 )
-xi.dynamis.mobList[zoneID][135].info = {"Nightmare", "Nightmare Fly", nil, nil, nil} -- ( 023 )
+xi.dynamis.mobList[zoneID][23 ].info = {"Nightmare", "Nightmare Fly", nil, nil, "fly3_killed"} -- ( 023 ) Nightmare Fly Recover Subjobs
 
 -- NM based on https://enedin.be/dyna/html/zone/frame_val1.htm
 -- Funguar NM Area
-xi.dynamis.mobList[zoneID][5  ].info = {"NM", "Fairy Ring", nil, nil, nil} -- ( 005 ) Fairy Ring - Inhibits Cirrate Christelle's 'Miasmic Breath' effect; Removes Cirrate Christelle's enhanced movement speed
+xi.dynamis.mobList[zoneID][5  ].info = {"NM", "Fairy Ring", nil, nil, "fairy_ring_killed"} -- ( 005 ) Fairy Ring - Inhibits Cirrate Christelle's 'Miasmic Breath' effect; Removes Cirrate Christelle's enhanced movement speed
 -- Flytrap NM Area
-xi.dynamis.mobList[zoneID][10 ].info = {"Nightmare", "Dragontrap", nil, nil, nil} -- ( 010 ) Flytrap NMs (Dragontrap ×3)
-xi.dynamis.mobList[zoneID][287].info = {"Nightmare", "Dragontrap", nil, nil, nil} -- Inhibits Cirrate Christelle's 'Putrid Breath' effect
-xi.dynamis.mobList[zoneID][288].info = {"Nightmare", "Dragontrap", nil, nil, nil} -- Makes Cirrate Christelle unable to summon Nightmare Morbols
+xi.dynamis.mobList[zoneID][10 ].info = {"NM", "Dragontrap", nil, nil, "dragontrap1_killed"} -- ( 010 ) Flytrap NMs (Dragontrap ×3)
+xi.dynamis.mobList[zoneID][287].info = {"NM", "Dragontrap", nil, nil, "dragontrap2_killed"} -- Inhibits Cirrate Christelle's 'Putrid Breath' effect
+xi.dynamis.mobList[zoneID][288].info = {"NM", "Dragontrap", nil, nil, "dragontrap3_killed"} -- Makes Cirrate Christelle unable to summon Nightmare Morbols
 -- Treant NM Area
-xi.dynamis.mobList[zoneID][15 ].info = {"NM", "Stcemqestcint", nil, nil, nil} -- ( 015 ) Stcemqestcint - Inhibits Cirrate Christelle's 'Vampiric Lash' effect
+xi.dynamis.mobList[zoneID][15 ].info = {"NM", "Stcemqestcint", nil, nil, "stcemqestcint_killed"} -- ( 015 ) Stcemqestcint - Inhibits Cirrate Christelle's 'Vampiric Lash' effect
 -- Gobbue NM Area
-xi.dynamis.mobList[zoneID][20 ].info = {"NM", "Nant'ina", nil, nil, nil} -- ( 020 ) Nant'ina - Inhibits Cirrate Christelle's 'Fragrant Breath' effect
+xi.dynamis.mobList[zoneID][20 ].info = {"NM", "Nant'ina", nil, nil, "nantina_killed"} -- ( 020 ) Nant'ina - Inhibits Cirrate Christelle's 'Fragrant Breath' effect
 -- Boss Area
 xi.dynamis.mobList[zoneID][24 ].info = {"NM", "Cirrate Christelle", nil, nil, "MegaBoss_Killed"} -- ( 024 ) Cirrate Christelle - Spawns 025-052
-xi.dynamis.mobList[zoneID][289].info = {"NM", "Nightmare Morbol", nil, nil, nil} -- Spawned by Cirrate Christelle
-xi.dynamis.mobList[zoneID][290].info = {"NM", "Nightmare Morbol", nil, nil, nil} -- Spawned by Cirrate Christelle
+xi.dynamis.mobList[zoneID][289].info = {"NM", "Nightmare Morbol", nil, nil, "morbol1_killed"} -- Spawned by Cirrate Christelle
+xi.dynamis.mobList[zoneID][290].info = {"NM", "Nightmare Morbol", nil, nil, "morbol2_killed"} -- Spawned by Cirrate Christelle
 -- Spawns
 xi.dynamis.mobList[zoneID][25 ].info = {"Statue",    "Goblin Replica",       "Goblin", nil, nil} -- (025-G)
 xi.dynamis.mobList[zoneID][26 ].info = {"Statue",    "Manifest Icon",        "Yagudo", nil, nil} -- (026-Y)
-xi.dynamis.mobList[zoneID][27 ].info = {"Statue",    "Adamanking Effigy",    "Quadav", nil, nil} -- (027-Q)
-xi.dynamis.mobList[zoneID][28 ].info = {"Statue",    "Sergeant Tombstone",   "Orc",    nil, nil} -- (028-O)
+xi.dynamis.mobList[zoneID][27 ].info = {"Statue",    "Adamantking Effigy",    "Quadav", nil, nil} -- (027-Q)
+xi.dynamis.mobList[zoneID][28 ].info = {"Statue",    "Serjeant Tombstone",   "Orc",    nil, nil} -- (028-O)
 xi.dynamis.mobList[zoneID][29 ].info = {"Nightmare", "Nightmare Manticore",  nil,      nil, nil} -- ( 029 ) Nightmare Manticore (×3)
 xi.dynamis.mobList[zoneID][136].info = {"Nightmare", "Nightmare Manticore",  nil,      nil, nil} -- ( 029 )
 xi.dynamis.mobList[zoneID][137].info = {"Nightmare", "Nightmare Manticore",  nil,      nil, nil} -- ( 029 )
@@ -154,15 +148,15 @@ xi.dynamis.mobList[zoneID][7  ].info = {"Statue", "Goblin Replica",     "Goblin"
 xi.dynamis.mobList[zoneID][8  ].info = {"Statue", "Goblin Replica",     "Goblin", nil, nil} -- (008-G)
 xi.dynamis.mobList[zoneID][9  ].info = {"Statue", "Goblin Replica",     "Goblin", nil, nil} -- (009-G)
 -- Treant NM Area
-xi.dynamis.mobList[zoneID][11 ].info = {"Statue", "Sergeant Tombstone", "Orc",    nil, nil} -- (011-O)
-xi.dynamis.mobList[zoneID][12 ].info = {"Statue", "Sergeant Tombstone", "Orc",    nil, nil} -- (012-O)
-xi.dynamis.mobList[zoneID][13 ].info = {"Statue", "Sergeant Tombstone", "Orc",    nil, nil} -- (013-O)
-xi.dynamis.mobList[zoneID][14 ].info = {"Statue", "Sergeant Tombstone", "Orc",    nil, nil} -- (014-O)
+xi.dynamis.mobList[zoneID][11 ].info = {"Statue", "Serjeant Tombstone", "Orc",    nil, nil} -- (011-O)
+xi.dynamis.mobList[zoneID][12 ].info = {"Statue", "Serjeant Tombstone", "Orc",    nil, nil} -- (012-O)
+xi.dynamis.mobList[zoneID][13 ].info = {"Statue", "Serjeant Tombstone", "Orc",    nil, nil} -- (013-O)
+xi.dynamis.mobList[zoneID][14 ].info = {"Statue", "Serjeant Tombstone", "Orc",    nil, nil} -- (014-O)
 -- Goobbue NM Area
-xi.dynamis.mobList[zoneID][16 ].info = {"Statue", "Adamanking Effigy",  "Quadav", nil, nil} -- (016-Q)
-xi.dynamis.mobList[zoneID][17 ].info = {"Statue", "Adamanking Effigy",  "Quadav", nil, nil} -- (017-Q)
-xi.dynamis.mobList[zoneID][18 ].info = {"Statue", "Adamanking Effigy",  "Quadav", nil, nil} -- (018-Q)
-xi.dynamis.mobList[zoneID][19 ].info = {"Statue", "Adamanking Effigy",  "Quadav", nil, nil} -- (019-Q)
+xi.dynamis.mobList[zoneID][16 ].info = {"Statue", "Adamantking Effigy",  "Quadav", nil, nil} -- (016-Q)
+xi.dynamis.mobList[zoneID][17 ].info = {"Statue", "Adamantking Effigy",  "Quadav", nil, nil} -- (017-Q)
+xi.dynamis.mobList[zoneID][18 ].info = {"Statue", "Adamantking Effigy",  "Quadav", nil, nil} -- (018-Q)
+xi.dynamis.mobList[zoneID][19 ].info = {"Statue", "Adamantking Effigy",  "Quadav", nil, nil} -- (019-Q)
 
 -- Wave 2 Manticore Sands and Goobubue NM Area
 -- Nightmare Mobs + NMs Based on https://enedin.be/dyna/html/zone/frame_val2.htm
@@ -393,16 +387,16 @@ xi.dynamis.mobList[zoneID][39 ].info = {"Statue", "Goblin Replica",      "Goblin
 xi.dynamis.mobList[zoneID][40 ].info = {"Statue", "Goblin Replica",      "Goblin", nil, nil}   -- (040-G)
 xi.dynamis.mobList[zoneID][41 ].info = {"Statue", "Goblin Replica",      "Goblin", nil, nil}   -- (041-G)
 xi.dynamis.mobList[zoneID][42 ].info = {"Statue", "Goblin Replica",      "Goblin", nil, nil}   -- (042-G)
-xi.dynamis.mobList[zoneID][43 ].info = {"Statue", "Sergeant Tombstone",  "Orc",    nil, nil}   -- (043-O)
-xi.dynamis.mobList[zoneID][44 ].info = {"Statue", "Sergeant Tombstone",  "Orc",    nil, nil}   -- (044-O)
-xi.dynamis.mobList[zoneID][45 ].info = {"Statue", "Sergeant Tombstone",  "Orc",    nil, nil}   -- (045-O)
-xi.dynamis.mobList[zoneID][46 ].info = {"Statue", "Sergeant Tombstone",  "Orc",    nil, nil}   -- (046-O)
-xi.dynamis.mobList[zoneID][47 ].info = {"Statue", "Sergeant Tombstone",  "Orc",    nil, nil}   -- (047-O)
-xi.dynamis.mobList[zoneID][48 ].info = {"Statue", "Adamanking Effigy",   "Quadav", nil, nil}   -- (048-Q)
-xi.dynamis.mobList[zoneID][49 ].info = {"Statue", "Adamanking Effigy",   "Quadav", nil, nil}   -- (049-Q)
-xi.dynamis.mobList[zoneID][50 ].info = {"Statue", "Adamanking Effigy",   "Quadav", nil, nil}   -- (050-Q)
-xi.dynamis.mobList[zoneID][51 ].info = {"Statue", "Adamanking Effigy",   "Quadav", nil, nil}   -- (051-Q)
-xi.dynamis.mobList[zoneID][52 ].info = {"Statue", "Adamanking Effigy",   "Quadav", nil, nil}   -- (052-Q)
+xi.dynamis.mobList[zoneID][43 ].info = {"Statue", "Serjeant Tombstone",  "Orc",    nil, nil}   -- (043-O)
+xi.dynamis.mobList[zoneID][44 ].info = {"Statue", "Serjeant Tombstone",  "Orc",    nil, nil}   -- (044-O)
+xi.dynamis.mobList[zoneID][45 ].info = {"Statue", "Serjeant Tombstone",  "Orc",    nil, nil}   -- (045-O)
+xi.dynamis.mobList[zoneID][46 ].info = {"Statue", "Serjeant Tombstone",  "Orc",    nil, nil}   -- (046-O)
+xi.dynamis.mobList[zoneID][47 ].info = {"Statue", "Serjeant Tombstone",  "Orc",    nil, nil}   -- (047-O)
+xi.dynamis.mobList[zoneID][48 ].info = {"Statue", "Adamantking Effigy",   "Quadav", nil, nil}   -- (048-Q)
+xi.dynamis.mobList[zoneID][49 ].info = {"Statue", "Adamantking Effigy",   "Quadav", nil, nil}   -- (049-Q)
+xi.dynamis.mobList[zoneID][50 ].info = {"Statue", "Adamantking Effigy",   "Quadav", nil, nil}   -- (050-Q)
+xi.dynamis.mobList[zoneID][51 ].info = {"Statue", "Adamantking Effigy",   "Quadav", nil, nil}   -- (051-Q)
+xi.dynamis.mobList[zoneID][52 ].info = {"Statue", "Adamantking Effigy",   "Quadav", nil, nil}   -- (052-Q)
 
 -- Wave 5 Outpost Area
 -- Nightmare Mobs based on https://enedin.be/dyna/html/zone/frame_val2.htm
@@ -923,6 +917,7 @@ xi.dynamis.mobList[zoneID][129].pos = { 968.520, -0.415, -278.791, 99   } -- ( 1
 --             Patrol Paths             --
 ------------------------------------------
 -- xi.dynamis.mobList[zoneID][MobIndex].patrolPath = {xpos1,ypos1,zpos1, xpos2,ypos2,zpos2,  xpos3,ypos3,zpos3}
+xi.dynamis.mobList[zoneID].patrolPaths = { }
 
 ------------------------------------------
 --          Statue Eye Colors           --

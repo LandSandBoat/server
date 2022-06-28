@@ -1079,7 +1079,10 @@ INSERT INTO `mob_droplist` VALUES (1799,2,0,1000,1449,0); -- Whiteshell
 --          Fairy Ring            --
 -- Use Skill List 116
 --           Nant`ina             --
--- Use Skill List 0
+-- Use Skill List 1214
+INSERT INTO `mob_skill_lists` VALUES ('Nantina',1214,1617);
+INSERT INTO `mob_skill_lists` VALUES ('Nantina',1214,1618);
+INSERT INTO `mob_skill_lists` VALUES ('Nantina',1214,1619);
 --         Stcemqestcint          --
 -- Use Skill List 245
 ----------------------------------------------------------------------

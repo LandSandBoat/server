@@ -3,22 +3,86 @@
 -----------------------------------
 require("scripts/globals/dynamis")
 require("scripts/globals/zone")
+require("modules/era/lua/dynamis/mob_spawning_files/dynamis_valkurm_mobs")
 -----------------------------------
 
 xi = xi or {}
 xi.dynamis = xi.dynamis or {}
 
+local dragontraps = {"dragontrap1_killed", "dragontrap2_killed", "dragontrap3_killed"}
+local morbols = {"morbol1_killed", "morbol2_killed"}
+local flies = {"fly1_killed", "fly2_killed", "fly3_killed"}
+
+local function checkFlytrapKills(mob)
+    local zone = mob:getZone()
+    local status = 0
+    for _, flytrap in pairs(dragontraps) do
+        if zone:getLocalVar(flytrap) == 1 then
+            status = status + 1
+        end
+    end
+
+    return status
+end
+
+local function checkMorbolKills(mob)
+    local zone = mob:getZone()
+    local killed = 0
+    for _, morbol in pairs(morbols) do
+        if zone:getLocalVar(morbol) == 1 then
+            killed = killed + 1
+        end
+    end
+end
+
+xi.dynamis.valkQMSpawnCheck = function(mob, zone, zoneID)
+    local sjNPC = GetNPCByID(xi.dynamis.dynaInfoEra[zoneID].sjRestrictionNPC)
+    local req = 0
+    for _, fly in pairs(flies) do
+        if zone:getLocalVar(fly) == 1 then
+            req = req + 1
+        end
+    end
+
+    if req == 3 and sjNPC:getStatus() ~= xi.status.NORMAL then
+        local pos = mob:getPos()
+        sjNPC:setPos(pos.x,pos.y,pos.z,pos.rot) -- Set to death pos
+        sjNPC:setStatus(xi.status.NORMAL) -- Make visible
+    end
+end
+
 xi.dynamis.onSpawnCirrate = function(mob)
+    xi.dynamis.cirrateBuffs =
+    {
+        {{"dragontrap1_killed", "dragontrap2_killed", "dragontrap3_killed"}, "putridbreathcap", 3, "dragon_killed", nil, 1609},
+        {{"fairy_ring_killed"}, "miasmicbreathpower", 30, "fairy_killed", 40, 1605},
+        {{"nanatina_killed"}, "fragrantbreathduration", 30, "nana_killed", nil, 1607},
+        {{"stcemqestcint_killed"}, "vampiriclashpower", 1, "stcem_killed", nil, 1611},
+    }
+    xi.dynamis.cirrateSkills = -- All chance values are the max value they will go until.
+    {
+        --  [skillID] = {chance, "Mob's Name"},
+        [1607] = 20, -- Fragrant Breath
+        [1605] = 20, -- Miasmic Breath
+        [1609] = 20, -- Putrid Breath
+        [1611] = 20, -- Vampiric Lash
+        [1610] = 20, -- Extremely Bad Breath
+    }
+
+    mob:addListener("WEAPONSKILL_STATE_EXIT", "CIRRATE_WEAPONSKILL_STATE_EXIT", function(mob)
+        mob:getZone():setLocalVar("cirrate_tp", 0)
+        mob:setTP(0)
+    end)
     mob:setRoamFlags(xi.roamFlag.EVENT)
     xi.dynamis.setMegaBossStats(mob)
     -- Set Mods
-    mob:speed(140)
+    mob:setSpeed(140)
     mob:addMod(xi.mod.REGAIN, 1250)
     mob:SetAutoAttackEnabled(false)
 end
 
 xi.dynamis.onSpawnFairy = function(mob)
-    mob:speed(140)
+    mob:setSpeed(140)
     xi.dynamis.onSpawnNoAuto(mob)
 end
 
@@ -29,72 +93,57 @@ end
 
 xi.dynamis.onEngagedCirrate = function(mob, target)
     local petIndex = {289, 290}
-    local oMobIndex = mob:getLocalVar("MobIndex_%s", mob:getID())
-    if not GetMobByID(zone:getLocalVar("Dragontrap")):isAlive() then
+    local flytrapKills = checkFlytrapKills(mob)
+    local morbolKills = checkMorbolKills(mob)
+    if flytrapKills < 3 and morbolKills == 0 then
         for _, index in pairs(petIndex) do
-            xi.dynamis.nmDynamicSpawn(index, oMobIndex, true, mob:getZoneID(), target, mob)
+            xi.dynamis.nmDynamicSpawn(index, mob:getLocalVar("MobIndex_%s", mob:getID()), true, mob:getZoneID(), target, mob)
         end
     end
 end
 
 xi.dynamis.onFightCirrate = function(mob, target)
     local zone = mob:getZone()
-    if not GetMobByID(zone:getLocalVar("Dragontrap")) then
-        mob:setLocalVar("putridbreathcap", 500)
-    end
+    local buffs = xi.dynamis.cirrateBuffs
+    local skills = xi.dynamis.cirrateSkills
+    local itTotal = 0
+    local total = skills[1607] + skills[1605] + skills[1609] + skills[1611] + skills[1610]
+    local rand = math.random(1, total)
 
-    if not GetMobByID(zone:getLocalVar("Fairy Ring")):isAlive() then
-        if mob:getSpeed() > 40 then
-            mob:speed(40)
+    if #buffs > 0 then
+        local selection = math.random(1, #buffs)
+        local count = 0
+        for _, var in pairs(buffs[selection][1]) do
+            if zone:getLocalVar(var) == 1 then
+                count = count + 1
+            end
         end
-        mob:setLocalVar("miasmicbreathpower", 30)
+        if count > 0 then
+            print(buffs[selection][2])
+            print(buffs[selection][3])
+            mob:setLocalVar(buffs[selection][2], buffs[selection][3])
+            zone:setLocalVar(buffs[selection][4], 1)
+            if buffs[selection][5] ~= nil then
+                mob:setSpeed(buffs[selection][5])
+            end
+            xi.dynamis.cirrateSkills[buffs[selection][6]] = 12  -- Updates first entry to 12 if the mob is dead.
+            table.remove(buffs, selection)
+        end
     end
 
-    if not GetMobByID(zone:getLocalVar("Nanatina")):isAlive() then
-        mob:setLocalVar("fragrantbreathduration", 30)
-    end
-
-    if not GetMobByID(zone:getLocalVar("Stcemqestcint")):isAlive() then
-        mob:setLocalVar("vampiriclashpower", 1)
+    if mob:getTP() >= 2000 and zone:getLocalVar("cirrate_tp") == 0 then
+        zone:getLocalVar("cirrate_tp", 1)
+        for skill, chance in pairs(skills) do
+            if rand <= itTotal + chance then
+                return mob:useMobAbility(skill)
+            else
+                itTotal = itTotal + chance
+            end
+        end
     end
 end
 
 xi.dynamis.onWeaponskillPrepCirrate = function(mob)
-    -- Set Locals
-    local skillList = -- All chance values are the max value they will go until.
-    {
-    --  [skillID] = {chance, "Mob's Name"},
-        [1607] = {20, "Nantina"}, -- Fragrant Breath
-        [1605] = {20, "Fairy Ring"}, -- Miasmic Breath
-        [1609] = {20, "Dragontrap"}, -- Putrid Breath
-        [1611] = {20, "Stcemqestcint"}, -- Vampiric Lash
-        [1610] = {20, "Cirrate Christelle"}, -- Extremely Bad Breath
-    }
-
-    for skill, skillchoice in pairs(skillList) do
-        local mobVar = skillchoice[2]
-        if not GetMobByID(zone:getLocalVar(string.format("%s", mobVar))):isAlive() then
-            if skill == 1607 then
-                skillList[skill] = {12, string.format("%s", mobVar)} -- Updates first entry to 12 if the mob is dead.
-            else
-                skillList[skill] = {(12 + skillList[skill-1][1]), string.format("%s", mobVar)} -- Updates the entry to 12 + last entry.
-            end
-        else
-            if skill == 1607 then
-                skillList[skill] = {20, string.format("%s", mobVar)} -- Leaves first entry at 20 if the mob is alive.
-            else
-                skillList[skill] = {(20 + skillList[skill-1][1]), string.format("%s", mobVar)} -- Updates entry at 20 + last entry if mob is alive.
-            end
-        end
-    end
-
-    local randomchance = math.random(1, skillList[1610][1]) -- Will random 1 to the chance of Extremely Bad Breath
-
-    for skill, chance in pairs(skillList) do -- Checks all skills and their chances.
-        if chance[1] >= randomchance then -- If chance is less than or equal to skill, use it.
-            return skill -- USE THE SKILL LELELLELEL HOPE ITS EXTREMELY BAD BREATH
-        end
-    end
 end
 
 xi.dynamis.onWeaponskillPrepNantina = function(mob)
