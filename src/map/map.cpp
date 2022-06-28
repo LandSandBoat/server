@@ -580,6 +580,9 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
         if (map_session_data->PChar == nullptr)
         {
             uint32 CharID = ref<uint32>(buff, FFXI_HEADER_SIZE + 0x0C);
+            uint16 LangID = ref<uint16>(buff, FFXI_HEADER_SIZE + 0x58);
+
+            std::ignore = LangID;
 
             const char* fmtQuery = "SELECT charid FROM chars WHERE charid = %u LIMIT 1;";
 
