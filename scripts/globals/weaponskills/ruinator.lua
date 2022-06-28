@@ -19,13 +19,6 @@ require("scripts/globals/weaponskills")
 local weaponskill_object = {}
 
 weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
-    -- check to see if player has the unlock charvar for this, if not, do no damage.
-    local hasMeritWsUnlock = 1
-	
-    if player:isPC() then
-	    hasMeritWsUnlock = player:getCharVar("hasRuinatorUnlock")
-	end
-
     if hasMeritWsUnlock ~= 1 then
         player:PrintToPlayer("You don't have this WS unlocked.")
         return
