@@ -46,6 +46,7 @@ local geoSpellTable =
 
 xi.geomanticReservoir.onTrigger = function(player, npc, geoSpell)
     -- TODO: According to BG-Wiki there is a sequence here that a player can proc '!!' and achieve a Geomancy skill-up.
+    -- https://www.bg-wiki.com/ffxi/Geomantic_Reservoir
     if player:getMainJob() == xi.job.GEO then
         if not player:hasSpell(geoSpell) then
             player:startEvent(15000, 277)
@@ -59,7 +60,7 @@ end
 
 xi.geomanticReservoir.onEventFinish = function(player, csid, geoSpell)
     if csid == 15000 then
-        player:addSpell(geoSpell) -- TODO: addSpell() has a message baked in, but it isn't the correct one.
-        player:messageSpecial(zones[player:getZoneID()].text.LEARNS, geoSpellTable[geoSpell][1])
+        player:addSpell(geoSpell, true, true) -- Quiesce the baked in message from addSpell(), we prefer the one below.
+        player:messageSpecial(zones[player:getZoneID()].text.LEARNS_SPELL, geoSpellTable[geoSpell][1])
     end
 end
