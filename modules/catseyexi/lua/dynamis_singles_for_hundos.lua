@@ -2,7 +2,7 @@
 -- CatsEyeXI Custom NPCs
 -----------------------------------
 require("scripts/globals/keyitems")
-require("scripts/settings/main")
+require("settings/main")
 require("scripts/globals/dynamis")
 
 local m = Module:new("dynamis_singles_for_hundos")

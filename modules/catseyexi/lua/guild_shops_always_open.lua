@@ -1,7 +1,7 @@
 -----------------------------------
 -- CatsEyeXI Custom NPCs
 -----------------------------------
-require("scripts/settings/main")
+require("settings/main")
 require("scripts/globals/shop")
 
 local m = Module:new("guild_shops_always_open")
