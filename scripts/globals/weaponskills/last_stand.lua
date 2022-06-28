@@ -16,7 +16,7 @@
 
 -----------------------------------
 require("scripts/globals/status")
-require("scripts/settings/main")
+require("settings/main")
 require("scripts/globals/weaponskills")
 -----------------------------------
 local weaponskill_object = {}

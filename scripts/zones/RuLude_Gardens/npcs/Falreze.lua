@@ -3,7 +3,7 @@
 --  NPC: Falreze
 -- Standard Info NPC
 -----------------------------------
-require("scripts/settings/main")
+require("settings/main")
 -----------------------------------
 local entity = {}
 

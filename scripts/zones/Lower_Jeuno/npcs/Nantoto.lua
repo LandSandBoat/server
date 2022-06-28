@@ -3,7 +3,7 @@
 --  NPC: Hunter (Nantoto)
 -----------------------------------
 require("scripts/globals/missions")
-require("scripts/settings/main")
+require("settings/main")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/zone")

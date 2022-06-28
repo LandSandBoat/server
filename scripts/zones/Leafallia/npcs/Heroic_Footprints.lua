@@ -3,7 +3,7 @@
 --  NPC: Heroic Footprints
 -- !pos -44.972,-0.974,23.990
 -----------------------------------
-require("scripts/settings/main")
+require("settings/main")
 require("scripts/globals/titles")
 require("scripts/globals/keyitems")
 require("scripts/globals/shop")
