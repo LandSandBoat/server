@@ -29,7 +29,6 @@ SearchCommentPacket::SearchCommentPacket(uint32 playerId, std::string const& com
     data[0x9A] = 0;
 }
 
-
 uint8* SearchCommentPacket::GetData()
 {
     return data;

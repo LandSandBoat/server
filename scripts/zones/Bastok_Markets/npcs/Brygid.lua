@@ -6,7 +6,7 @@
 -- !pos -90 -4 -108 235
 -----------------------------------
 local ID = require("scripts/zones/Bastok_Markets/IDs")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/equipment")
 require("scripts/globals/status")
@@ -81,7 +81,7 @@ entity.onTrigger = function(player, npc)
 
         player:setCharVar("BrygidGetBody", getBody)
         player:setCharVar("BrygidGetLegs", getLegs)
-        -- printf("Body %u Legs %u\n", getBody, getLegs)
+
         player:startEvent(380, brygidSet, getBody, getLegs, player:getMainJob())
 
     elseif brygidReturns == QUEST_ACCEPTED and body == getBody and legs == getLegs and wantsSubligar == 0 then

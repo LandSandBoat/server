@@ -5,7 +5,7 @@
 -- !pos -37 -3 31 233
 -----------------------------------
 require("scripts/globals/status")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
@@ -20,7 +20,7 @@ entity.onTrigger = function(player, npc)
     local whmAf3 = player:getQuestStatus(xi.quest.log_id.SANDORIA, sandyQuests.PIEUJE_S_DECISION)
 
     -- WHM AF quests
-    if player:getMainJob() == xi.job.WHM and player:getMainLvl() >= xi.settings.AF2_QUEST_LEVEL then
+    if player:getMainJob() == xi.job.WHM and player:getMainLvl() >= xi.settings.main.AF2_QUEST_LEVEL then
         if whmAf1 == QUEST_COMPLETED and whmAf2 == QUEST_AVAILABLE then
             player:startEvent(551) -- Start Quest "Prelude of Black and White"
         elseif whmAf2 == QUEST_COMPLETED and whmAf3 == QUEST_AVAILABLE then

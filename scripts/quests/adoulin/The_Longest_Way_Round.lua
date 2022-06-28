@@ -17,7 +17,7 @@ require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local easternAdoulinID = require("scripts/zones/Eastern_Adoulin/IDs")
+local easternAdoulinID = require('scripts/zones/Eastern_Adoulin/IDs')
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.THE_LONGEST_WAY_ROUND)

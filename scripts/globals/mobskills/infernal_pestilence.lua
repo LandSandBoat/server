@@ -7,7 +7,7 @@
 --  Range: Front arc
 --  Notes: Only used by Chahnameed's Stomach.
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------

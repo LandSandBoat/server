@@ -6,6 +6,7 @@ require("scripts/quests/i_can_hear_a_rainbow")
 require("scripts/globals/chocobo_digging")
 require("scripts/globals/conquest")
 require("scripts/globals/missions")
+require("scripts/globals/mog_tablets")
 require("scripts/globals/status")
 require("scripts/missions/amk/helpers")
 -----------------------------------
@@ -17,6 +18,11 @@ end
 
 zone_object.onInitialize = function(zone)
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
+    xi.mogTablet.onZoneInitialize(zone)
+end
+
+zone_object.onZoneTick = function(zone)
+    xi.mogTablet.onZoneTick(zone)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -31,7 +37,7 @@ zone_object.onZoneIn = function(player, prevZone)
     end
 
     -- AMK06/AMK07
-    if xi.settings.ENABLE_AMK == 1 then
+    if xi.settings.main.ENABLE_AMK == 1 then
         xi.amk.helpers.tryRandomlyPlaceDiggingLocation(player)
     end
 

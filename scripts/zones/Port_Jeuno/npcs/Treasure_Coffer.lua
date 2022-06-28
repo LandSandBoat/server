@@ -6,12 +6,12 @@
 local ID = require("scripts/zones/Port_Jeuno/IDs")
 require("scripts/globals/items")
 require("scripts/globals/npc_util")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    if xi.settings.ENABLE_ABYSSEA == 1 and not player:hasItem(xi.items.PRISHE_STATUE) then
+    if xi.settings.main.ENABLE_ABYSSEA == 1 and not player:hasItem(xi.items.PRISHE_STATUE) then
         player:startEvent(350, 0xFFFFFFFC)
     else
         player:messageSpecial(ID.text.CHEST_IS_EMPTY)

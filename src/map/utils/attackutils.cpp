@@ -20,17 +20,17 @@
 */
 
 #include "attackutils.h"
-#include "common/utils.h"
 #include "../attack.h"
 #include "../items/item_weapon.h"
 #include "../status_effect_container.h"
 #include "battleutils.h"
+#include "common/utils.h"
 
 namespace attackutils
 {
     /************************************************************************
      *                                                                       *
-     *  Multihit calculator.											        *
+     *  Multihit calculator.                                                    *
      *                                                                       *
      ************************************************************************/
     uint8 getHitCount(uint8 hits)
@@ -232,7 +232,7 @@ namespace attackutils
 
     /************************************************************************
      *                                                                       *
-     *  Is parried.													        *
+     *  Is parried.                                                         *
      *                                                                       *
      ************************************************************************/
     bool IsParried(CBattleEntity* PAttacker, CBattleEntity* PDefender)
@@ -246,7 +246,7 @@ namespace attackutils
 
     /************************************************************************
      *                                                                       *
-     *  Is guarded.													        *
+     *  Is guarded.                                                         *
      *                                                                       *
      ************************************************************************/
     bool IsGuarded(CBattleEntity* PAttacker, CBattleEntity* PDefender)
@@ -260,7 +260,7 @@ namespace attackutils
 
     /************************************************************************
      *                                                                       *
-     *  Is blocked.													        *
+     *  Is blocked.                                                         *
      *                                                                       *
      ************************************************************************/
     bool IsBlocked(CBattleEntity* PAttacker, CBattleEntity* PDefender)
@@ -339,13 +339,13 @@ namespace attackutils
                 }
                 break;
             case PHYSICAL_ATTACK_TYPE::TRIPLE:
-                if (xirand::GetRandomNumber(100) < PChar->getMod(Mod::TA_TRIPLE_DAMAGE))
+                if (xirand::GetRandomNumber(100) < PChar->getMod(Mod::TA_TRIPLE_DMG_RATE))
                 {
                     return originalDamage * 3;
                 }
                 break;
             case PHYSICAL_ATTACK_TYPE::DOUBLE:
-                if (xirand::GetRandomNumber(100) < PChar->getMod(Mod::DA_DOUBLE_DAMAGE))
+                if (xirand::GetRandomNumber(100) < PChar->getMod(Mod::DA_DOUBLE_DMG_RATE))
                 {
                     return originalDamage * 2;
                 }

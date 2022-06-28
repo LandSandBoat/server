@@ -19,7 +19,7 @@ require("scripts/globals/msg")
 -- Obtains alpha, used for working out WSC on legacy servers
 local function getAlpha(level)
     -- Retail has no alpha anymore as of 2014. Weaponskill functions
-    -- should be checking for xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES and
+    -- should be checking for xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES and
     -- overwriting the results of this function if the server has it set
     local alpha = 1.00
 
@@ -260,7 +260,7 @@ local function cRangedRatio(attacker, defender, params, ignoredDef, tp)
     local pdif = {}
     pdif[1] = pdifmin
     pdif[2] = pdifmax
-    -- printf("ratio: %f min: %f max %f\n", cratio, pdifmin, pdifmax)
+
     local pdifcrit = {}
 
     pdifmin = pdifmin * 1.25
@@ -358,19 +358,21 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
                 local magicdmg = addBonusesAbility(attacker, wsParams.ele, target, finaldmg, wsParams)
 
                 magicdmg = magicdmg * applyResistanceAbility(attacker, target, wsParams.ele, wsParams.skill, calcParams.bonusAcc)
-                magicdmg = target:magicDmgTaken(magicdmg)
-                magicdmg = adjustForTarget(target, magicdmg, wsParams.ele)
-
+                magicdmg = target:magicDmgTaken(magicdmg, wsParams.ele)
 
                 if magicdmg > 0 then
-                    magicdmg = magicdmg - target:getMod(xi.mod.PHALANX)
-                    magicdmg = utils.clamp(magicdmg, 0, 99999)
+                    magicdmg = adjustForTarget(target, magicdmg, wsParams.ele) -- this may absorb or nullify
                 end
 
-                magicdmg = utils.oneforall(target, magicdmg)
-                magicdmg = utils.stoneskin(target, magicdmg)
+                if magicdmg > 0 then                                           -- handle nonzero damage if previous function does not absorb or nullify
+                    magicdmg = magicdmg - target:getMod(xi.mod.PHALANX)
+                    magicdmg = utils.clamp(magicdmg, 0, 99999)
+                    magicdmg = utils.oneforall(target, magicdmg)
+                    magicdmg = utils.stoneskin(target, magicdmg)
+                end
 
                 finaldmg = finaldmg + magicdmg
+
             end
 
             calcParams.hitsLanded = calcParams.hitsLanded + 1
@@ -441,7 +443,7 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
 
     -- Calculate alpha, WSC, and our modifiers for our base per-hit damage
     if not calcParams.alpha then
-        if xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+        if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
             calcParams.alpha = 1
         else
             calcParams.alpha = getAlpha(attacker:getMainLvl())
@@ -663,7 +665,7 @@ function doPhysicalWeaponskill(attacker, target, wsID, wsParams, tp, action, pri
     attacker:delStatusEffect(xi.effect.SNEAK_ATTACK)
     attacker:delStatusEffectSilent(xi.effect.BUILDING_FLOURISH)
 
-    finaldmg = finaldmg * xi.settings.WEAPON_SKILL_POWER -- Add server bonus
+    finaldmg = finaldmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
     calcParams.finalDmg = finaldmg
     finaldmg = takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action)
 
@@ -728,7 +730,7 @@ end
     finaldmg = target:rangedDmgTaken(finaldmg)
     finaldmg = finaldmg * target:getMod(xi.mod.PIERCE_SDT) / 1000
 
-    finaldmg = finaldmg * xi.settings.WEAPON_SKILL_POWER -- Add server bonus
+    finaldmg = finaldmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
     calcParams.finalDmg = finaldmg
 
     finaldmg = takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action)
@@ -753,9 +755,10 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
     local calcParams =
     {
         ['shadowsAbsorbed'] = 0,
-        ['tpHitsLanded'] = 1,
+        ['tpHitsLanded']    = 1,
         ['extraHitsLanded'] = 0,
-        ['bonusTP'] = wsParams.bonusTP or 0
+        ['bonusTP']         = wsParams.bonusTP or 0,
+        ['wsID']            = wsID
     }
 
     local bonusfTP, bonusacc = handleWSGorgetBelt(attacker)
@@ -800,9 +803,16 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
         -- Calculate magical bonuses and reductions
         dmg = addBonusesAbility(attacker, wsParams.ele, target, dmg, wsParams)
         dmg = dmg * applyResistanceAbility(attacker, target, wsParams.ele, wsParams.skill, bonusacc)
-        dmg = target:magicDmgTaken(dmg)
-        dmg = adjustForTarget(target, dmg, wsParams.ele)
+        dmg = target:magicDmgTaken(dmg, wsParams.ele)
 
+        if dmg < 0 then
+            calcParams.finalDmg = dmg
+
+            dmg = takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action)
+            return dmg
+        end
+
+        dmg = adjustForTarget(target, dmg, wsParams.ele)
 
         if dmg > 0 then
             dmg = dmg - target:getMod(xi.mod.PHALANX)
@@ -812,13 +822,12 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
         dmg = utils.oneforall(target, dmg)
         dmg = utils.stoneskin(target, dmg)
 
-        dmg = dmg * xi.settings.WEAPON_SKILL_POWER -- Add server bonus
+        dmg = dmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
     else
         calcParams.shadowsAbsorbed = 1
     end
 
     calcParams.finalDmg = dmg
-    calcParams.wsID = wsID
 
     if dmg > 0 then
         attacker:trySkillUp(attack.weaponType, target:getMainLvl())
@@ -854,7 +863,7 @@ function takeWeaponskillDamage(defender, attacker, wsParams, primaryMsg, attack,
             end
         end
 
-        action:param(defender:getID(), finaldmg)
+        action:param(defender:getID(), math.abs(finaldmg))
     elseif wsResults.shadowsAbsorbed > 0 then
         action:messageID(defender:getID(), xi.msg.basic.SHADOW_ABSORB)
         action:param(defender:getID(), wsResults.shadowsAbsorbed)
@@ -1064,8 +1073,6 @@ function cMeleeRatio(attacker, defender, params, ignoredDef, tp)
     local pdifcrit = {}
     cratio = cratio + 1
     cratio = utils.clamp(cratio, 0, 3)
-
-    -- printf("ratio: %f min: %f max %f\n", cratio, pdifmin, pdifmax)
 
     if cratio < 0.5 then
         pdifmax = cratio + 0.5

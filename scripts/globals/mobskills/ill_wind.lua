@@ -6,7 +6,7 @@
 --  Range: Unknown radial
 --  Notes: Only used by Puks in Mamook, Besieged, and the following Notorious Monsters: Vulpangue, Nis Puk, Nguruvilu, Seps , Phantom Puk and Waugyl. Dispels one xi.effect.
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 
@@ -28,8 +28,6 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     target:dispelStatusEffect()
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.WIND)
-
-    --printf("[TP MOVE] Zone: %u Monster: %u Mob lvl: %u TP: %u TP Move: %u Damage: %u on Player: %u Level: %u HP: %u", mob:getZoneID(), mob:getID(), mob:getMainLvl(), skill:getTP(), skill:getID(), dmg, target:getID(), target:getMainLvl(), target:getMaxHP())
 
     return dmg
 end

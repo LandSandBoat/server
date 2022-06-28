@@ -4,7 +4,7 @@
 -- Type: Addon Mission Merchant
 -- !pos -100.071 -1 11.869 246
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/missions")
@@ -22,16 +22,16 @@ entity.onTrade = function(player, npc, trade)
     local lastCrimson = player:getCharVar("LastCrimsonKey") -- When last Crimson key was obtained
 
     if
-        xi.settings.ENABLE_ACP == 0 and
-        xi.settings.ENABLE_AMK == 0 and
-        xi.settings.ENABLE_ASA == 0
+        xi.settings.main.ENABLE_ACP == 0 and
+        xi.settings.main.ENABLE_AMK == 0 and
+        xi.settings.main.ENABLE_ASA == 0
     then
         player:showText(npc, ID.text.GET_LOST)
 
     -- Crimson Key: Trade Seedspall's Lux, Luna, Astrum
     else
         if
-            xi.settings.ENABLE_ACP == 1 and
+            xi.settings.main.ENABLE_ACP == 1 and
             sLux and
             sLuna and
             sAstrum and
@@ -55,7 +55,7 @@ entity.onTrade = function(player, npc, trade)
         then
             player:messageSpecial(ID.text.DRYEYES_3, xi.ki.CRIMSON_KEY)
         -- White Coral Key:
-        -- elseif (xi.settings.ENABLE_AMK == 1 and
+        -- elseif (xi.settings.main.ENABLE_AMK == 1 and
             -- haven't even started AMK related trades yet.
         end
     end
@@ -63,9 +63,9 @@ end
 
 entity.onTrigger = function(player, npc)
     if
-        xi.settings.ENABLE_ACP == 0 and
-        xi.settings.ENABLE_AMK == 0 and
-        xi.settings.ENABLE_ASA == 0
+        xi.settings.main.ENABLE_ACP == 0 and
+        xi.settings.main.ENABLE_AMK == 0 and
+        xi.settings.main.ENABLE_ASA == 0
     then
         player:showText(npc, ID.text.GET_LOST)
     else

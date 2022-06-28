@@ -51,7 +51,7 @@ public:
     // Messaging System
     void showText(CLuaBaseEntity* mob, uint16 messageID, sol::object const& p0, sol::object const& p1, sol::object const& p2, sol::object const& p3); // Displays Dialog for npc
     void messageText(CLuaBaseEntity* PLuaBaseEntity, uint16 messageID, sol::object const& arg2, sol::object const& arg3);
-    void PrintToPlayer(std::string const& message, sol::object const& messageTypeObj, sol::object const& nameObj);                               // for sending debugging messages/command confirmations to the player's client
+    void PrintToPlayer(std::string const& message, sol::object const& messageTypeObj, sol::object const& nameObj);           // for sending debugging messages/command confirmations to the player's client
     void PrintToArea(std::string const& message, sol::object const& arg1, sol::object const& arg2, sol::object const& arg3); // for sending area messages to multiple players at once
     void messageBasic(uint16 messageID, sol::object const& p0, sol::object const& p1, sol::object const& target);            // Sends Basic Message
     void messageName(uint16 messageID, sol::object const& entity, sol::object const& p0, sol::object const& p1,
@@ -84,12 +84,12 @@ public:
     void       StartEventHelper(int32 EventID, sol::variadic_args va, EVENT_TYPE eventType);
     EventInfo* ParseEvent(int32 EventID, sol::variadic_args va, EventPrep* eventPreparation, EVENT_TYPE eventType);
     void       startEvent(int32 EventID, sol::variadic_args va);
-    void       startEventString(int32 EventID, sol::variadic_args va); // Begins Event with string param (0x33 packet)
-    void       startCutscene(int32 EventID, sol::variadic_args va); // Begins cutscene which locks the character
+    void       startEventString(int32 EventID, sol::variadic_args va);      // Begins Event with string param (0x33 packet)
+    void       startCutscene(int32 EventID, sol::variadic_args va);         // Begins cutscene which locks the character
     void       startOptionalCutscene(int32 EventID, sol::variadic_args va); // Begins an event that can turn into a cutscene
 
-    void updateEvent(sol::variadic_args va);                      // Updates event
-    void updateEventString(sol::variadic_args va);                // (string, string, string, string, uint32, ...)
+    void updateEvent(sol::variadic_args va);       // Updates event
+    void updateEventString(sol::variadic_args va); // (string, string, string, string, uint32, ...)
     auto getEventTarget() -> std::optional<CLuaBaseEntity>;
     bool isInEvent();       // Returns true if the player is in an event
     void release();         // Stops event
@@ -561,6 +561,8 @@ public:
 
     bool isDualWielding(); // Checks if the battle entity is dual wielding
 
+    float checkLiementAbsorb(uint16 damageType); // return 1.0 if did not absorb, return >= -1.0 if did absorb
+
     // Enmity
     int32 getCE(CLuaBaseEntity const* target);                    // gets current CE the mob has towards the player
     int32 getVE(CLuaBaseEntity const* target);                    // gets current VE the mob has towards the player
@@ -715,17 +717,18 @@ public:
     void  updateAttachments();
     void  reduceBurden(float percentReduction, sol::object const& intReductionObj);
 
-    auto  getAllRuneEffects() -> sol::table;
-    uint8 getActiveRuneCount();
+    auto   getAllRuneEffects() -> sol::table;
+    uint8  getActiveRuneCount();
     uint16 getHighestRuneEffect();
     uint16 getNewestRuneEffect();
-    void  removeOldestRune();
-    void  removeNewestRune();
-    void  removeAllRunes();
+    void   removeOldestRune();
+    void   removeNewestRune();
+    void   removeAllRunes();
 
     // Mob Entity-Specific
     void   setMobLevel(uint8 level);
-    uint8  getSystem();
+    uint8  getSystem(); // TODO: rename this to getEcosystem()
+    uint16 getSuperFamily();
     uint16 getFamily();
     bool   isMobType(uint8 mobType); // True if mob is of type passed to function
     bool   isUndead();               // True if mob is undead
@@ -735,7 +738,7 @@ public:
     void   setMobFlags(uint32 flags, uint32 mobid); // Used to manipulate the mob's flags for testing.
     uint32 getMobFlags();
 
-    void   setNpcFlags(uint32 flags);
+    void setNpcFlags(uint32 flags);
 
     void   spawn(sol::object const& despawnSec, sol::object const& respawnSec);
     bool   isSpawned();
@@ -762,7 +765,7 @@ public:
     void SetAutoAttackEnabled(bool state);   // halts/resumes auto attack of entity
     void SetMagicCastingEnabled(bool state); // halt/resumes casting magic
     void SetMobAbilityEnabled(bool state);   // halt/resumes mob skills
-    void SetMobSkillAttack(int16 listId);     // enable/disable using mobskills as regular attacks
+    void SetMobSkillAttack(int16 listId);    // enable/disable using mobskills as regular attacks
 
     int16 getMobMod(uint16 mobModID);
     void  setMobMod(uint16 mobModID, int16 value);

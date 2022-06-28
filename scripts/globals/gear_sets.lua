@@ -65,7 +65,7 @@ local gearSets =
              {id = 25, items = {16062, 14525, 14933, 15604, 15688} , matches = 5, matchType = matchtype.any, mods = {{xi.mod.UDMGBREATH, -800, 0, 0}, {xi.mod.UDMGMAGIC, -800, 0, 0}} },       --  Amir Korazin Set - Double mod here! It is why it has 2 IDs.
 
              {id = 27, items = {11281, 15015, 16337, 11364}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.STORETP, 5, 5, 5}} },             --  Hachiryu Haramaki Set - Store tp
-             {id = 28, items = {11064, 11084, 11104, 11124, 11144}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.DA_DOUBLE_DAMAGE, extraDamageBaseRate, extraDamagePieceBonus, 0}} }, --  Ravager's Armor +2 Set - Double attack double damage chance
+             {id = 28, items = {11064, 11084, 11104, 11124, 11144}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.DA_DOUBLE_DMG_RATE, extraDamageBaseRate, extraDamagePieceBonus, 0}} }, --  Ravager's Armor +2 Set - Double attack double damage chance
 
              {id = 29, items = {11808, 11824, 11850, 11857, 11858}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.DOUBLE_ATTACK, 5, 0, 0}} },   --  Fazheluo Mail Set. Set Bonus: "Double Attack"+5%. Active with any 2 pieces.
 
@@ -84,7 +84,7 @@ local gearSets =
              {id = 39, items = {11070, 11090, 11110, 11130, 11150}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.ABSORB_DMG_CHANCE, absorbDamageBaseRate, absorbDamagePieceBonus, 0}} },                          --  Creed Armor +2 Set. Set Bonus: Occasionally absorbs damage taken. Set proc believed to be somewhere around 5%, more testing needed. Verification Needed Absorb rate likely varies with # of set pieces.
              {id = 40, items = {11075, 11095, 11115, 11135, 11155}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.ZANSHIN_DOUBLE_DAMAGE, extraDamageBaseRate, extraDamagePieceBonus, 0}} },          --  Unkai Domaru +2 Set. Set Bonus: Augments "Zanshin". Zanshin attacks will occasionally deal double damage.
              {id = 41, items = {11065, 11085, 11105, 11125, 11145}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.EXTRA_KICK_ATTACK, extraKickAttackBaseRate, extraKickAttackPieceBonus, 0}} },             --  Tantra Attire +2 Set. Set Bonus: Augments "Kick Attacks". Occasionally allows a second Kick Attack during an attack round without the use of Footwork.
-             {id = 42, items = {11069, 11089, 11109, 11129, 11149}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.TA_TRIPLE_DAMAGE, extraDamageBaseRate, extraDamagePieceBonus, 0}} },              --  Raider's Attire +2 Set. Set Bonus: Augments "Triple Attack". Occasionally causes the second and third hits of a Triple Attack to deal triple damage.Verification Needed Requires a minimum of two pieces.
+             {id = 42, items = {11069, 11089, 11109, 11129, 11149}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.TA_TRIPLE_DMG_RATE, extraDamageBaseRate, extraDamagePieceBonus, 0}} },              --  Raider's Attire +2 Set. Set Bonus: Augments "Triple Attack". Occasionally causes the second and third hits of a Triple Attack to deal triple damage.Verification Needed Requires a minimum of two pieces.
              {id = 43, items = {11066, 11086, 11106, 11126, 11146}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.BAR_ELEMENT_NULL_CHANCE, nullDamageBaseRate, nullDamagePieceBonus, 0}} },        --  Orison Attire +2 Set. Set Bonus: Augments elemental resistance spells. Bar Elemental spells will occasionally nullify damage of the same element.
              {id = 44, items = {11083, 11103, 11123, 11143, 11163}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.GRIMOIRE_INSTANT_CAST, instantCastBaseRate, instantCastPieceBonus, 0}} },          --  Savant's Attire +2 Set. Set Bonus: Augments Grimoire. Spells that match your current Arts will occasionally cast instantly, without recast.
              {id = 45, items = {16005, 17756, 17962, 18596, 18760, 19112, 19215, 19271, 19156}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.HP, 30, 0, 0}, {xi.mod.VIT, 6, 0, 0}, {xi.mod.ACC, 6, 0, 0}, {xi.mod.RACC, 6, 0, 0}} }, --  Paramount Earring Sets. Set Bonus: HP+30, VIT+6, Accuracy+6, Ranged Accuracy+6. Set Bonus is active with any 2 items(Earring+Weapon or Weapon+Weapon)
@@ -104,8 +104,8 @@ local gearSets =
              {id = 73, items = {28524, 28525}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.MACC, 12, 0, 0}} }, -- Psystorm/Lifestorm Earrings
              {id = 74, items = {26920, 26921, 27434, 27259, 27260, 26762, 26763, 27074, 27075, 27433}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.ZANSHIN_DOUBLE_DAMAGE, extraDamageBaseRate, extraDamagePieceBonus, 0}} }, -- Samurai 109/119 af3
              {id = 75, items = {27414, 27413, 27240, 27239, 27055, 27054, 26901, 26900, 26743, 26742}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.EXTRA_KICK_ATTACK, extraKickAttackBaseRate, extraKickAttackPieceBonus, 0}} }, -- MNK 109/119 af3
-             {id = 76, items = {26740, 26741, 27411, 27412, 27238, 27237, 27053, 27054, 26899, 26900}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.DA_DOUBLE_DAMAGE, extraDamageBaseRate, extraDamagePieceBonus, 0}} }, -- 109/119 WAR AF3
-             {id = 77, items = {26750, 26751, 27421, 27422, 27247, 27248, 27063, 27062, 26908, 26909}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.TA_TRIPLE_DAMAGE, extraDamageBaseRate, extraDamagePieceBonus, 0}} }, -- 109/119 THF AF3
+             {id = 76, items = {26740, 26741, 27411, 27412, 27238, 27237, 27053, 27054, 26899, 26900}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.DA_DOUBLE_DMG_RATE, extraDamageBaseRate, extraDamagePieceBonus, 0}} }, -- 109/119 WAR AF3
+             {id = 77, items = {26750, 26751, 27421, 27422, 27247, 27248, 27063, 27062, 26908, 26909}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.TA_TRIPLE_DMG_RATE, extraDamageBaseRate, extraDamagePieceBonus, 0}} }, -- 109/119 THF AF3
              {id = 78, items = {26918, 26919, 26761, 26762, 27431, 27432, 27257, 27258, 27072, 27073}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.RAPID_SHOT_DOUBLE_DAMAGE, extraDamageBaseRate, extraDamagePieceBonus, 0}} }, -- 109/119 RNG AF3
              {id = 79, items = {26910, 26911, 26752, 26753, 27424, 27423, 27064, 27065, 27249, 27250}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.ABSORB_DMG_CHANCE, absorbDamageBaseRate, absorbDamagePieceBonus, 0}} }, -- 109/119 PLD AF3
              {id = 80, items = {26922, 26923, 26764, 26765, 27076, 27077, 27261, 27262, 27435, 27436}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.EXTRA_DUAL_WIELD_ATTACK, extraDWAttackBaseRate, extraDWAttackPieceBonus, 0}} }, -- 109/119 NIN AF3
@@ -244,7 +244,7 @@ local function handleCappedTierSet(player, gearset, matches)
         elseif (matches > 3) then
             modValue = 10 -- 4 or 5 pieces
         end
-        -- printf("we have a special snowflake | gearset: %u | mod %u %u", gearset.id, xi.mod.FASTCAST, modValue)
+
         player:addGearSetMod(gearset.id, xi.mod.FASTCAST, modValue)
         return
     -- AF1 119+2/+3 ACC/RACC/MACC Sets EXCEPT SMN
@@ -324,18 +324,16 @@ local function ApplyMod(player, gearset, matches)
         if (addMatches ~= 0 and addMatchValue ~= 0) then
             modValue = modValue + (addMatchValue * addMatches)
         end
-        -- printf("gearset: %u, mod: %u, value %u", gearset.id, modId, modValue + addSetBonus)
+
         player:addGearSetMod(gearset.id + i, modId, modValue + addSetBonus)
         i = i + 1
     end
-    -- print("Gear set! Mod applied: ModNameId:" .. modNameId .. " ModId:" .. modId .. " Value:" .. modValue .. "\n")
 end
 
 -----------------------------------
 -- Checks for gear sets present on a player
 -----------------------------------
 xi.gear_sets.checkForGearSet = function(player)
-    -- print("---Removed existing gear set mods!---\n")
     player:clearGearSetMods()
 
     -- cause we dont want hundreds of function calls

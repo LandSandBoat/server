@@ -2,7 +2,7 @@
 -- Brain Spike
 -- Deals damage to single target. Additional effect: Paralyze
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------

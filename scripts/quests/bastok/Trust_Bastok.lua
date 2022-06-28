@@ -8,7 +8,7 @@
 require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/settings/main')
+require('scripts/globals/settings')
 require('scripts/globals/spell_data')
 require('scripts/globals/status')
 require('scripts/globals/titles')
@@ -159,7 +159,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
                 player:getMainLvl() >= 5 and
-                xi.settings.ENABLE_TRUST_QUESTS == 1
+                xi.settings.main.ENABLE_TRUST_QUESTS == 1
         end,
 
         [xi.zone.PORT_BASTOK] =

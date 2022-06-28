@@ -32,8 +32,24 @@ zones[xi.zone.VELUGANNON_PALACE] =
     },
     mob =
     {
-        MIMIC            = 17502567,
-        BRIGANDISH_BLADE = 17502568,
+        MIMIC                   = 17502567,
+        BRIGANDISH_BLADE        = 17502568,
+        STEAM_CLEANER           = 17502569,
+        STEAM_CLEANER_DETECTORS =
+        {
+            -- E Lower Chamber
+            17502543,
+            17502545,
+            -- W Lower Chamber
+            17502547,
+            17502549,
+            -- NE Lower Chamber
+            17502551,
+            17502553,
+            -- NW Lower Chamber
+            17502555,
+            17502557,
+        },
     },
     npc =
     {

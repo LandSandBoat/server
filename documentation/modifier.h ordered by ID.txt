@@ -747,6 +747,21 @@ enum class Mod
     PARRY_SPIKES                 = 1022, // Battuta parry spikes rate
     PARRY_SPIKES_DMG             = 1023, // Battuta parry spikes damage
     SPECIAL_ATTACK_EVASION       = 1024, // Foil "Special Attack" evasion
+    FULL_CIRCLE                  = 1025, // Increases the initial multiplier on MP returned via Full Circle
+    CHAKRA_MULT                  = 1026, // Chakra multiplier increase (from gear)
+    CHAKRA_REMOVAL               = 1027, // Extra statuses removed by Chakra
+    BOLSTER_EFFECT               = 1028, // Adds bonus duration as +N seconds
+    LIFE_CYCLE_EFFECT            = 1029, // Adds bonus HP% returned to the luopan when using Life Cycle
+    AURA_SIZE                    = 1030, // Used to extend aura size, the formula is 6.25 + (PEntity->getMod(Mod::AURA_SIZE) / 100) so adding 100 will make this 7.25
+    AUGMENT_CONSERVE_MP          = 1031, // Percent chance to deal extra damage based on Conserve MP Amount (BLM AF3 Sets)
+    AUGMENT_COMPOSURE            = 1032, // Percent Enhancing Duration Extension for Others (RDM AF3 Sets)
+    AUGMENT_DAMAGE_HP            = 1033, // Percent chance to increase damage based on player HP% (DRK AF3 Sets)
+    AUGMENT_DAMAGE_PET_HP        = 1034, // Percent chance to increase damage based on pet HP% (BST/DRG AF3 Sets)
+    AUGMENT_BLOOD_BOON           = 1035, // Percent chance to deal extra damage based on Blood Boon Amount (SMN AF3 Sets)
+    AUGMENT_BLU_MAGIC            = 1036, // Percent chance for BLU magic to receive 3x WSC value for spell (BLU AF3 Sets)
+    GEOMANCY_MP_NO_DEPLETE       = 1037, // Percent chance for Geomancy to cost 0 MP (GEO AF3 Sets)
+    DOUBLE_ATTACK_DMG            = 1038, // Increases "Double Attack" damage/"Double Attack" damage + (in percents, e.g. +20 = +20% damage)
+    TRIPLE_ATTACK_DMG            = 1039, // Increases "Triple Attack" damage/"Triple Attack" damage + (in percents, e.g. +20 = +20% damage)
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     // 570 through 825 used by WS DMG mods these are not spares.
@@ -754,7 +769,7 @@ enum class Mod
     // The following modifier should not ever be set, but %damage modifiers to weaponskills use the next 255 IDs (this modifier + the WSID)
     // For example, +10% damage to Chant du Cygne would be ID 570 + 225 (795)
 
-    // SPARE = 1025,
+    // SPARE = 1040,
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

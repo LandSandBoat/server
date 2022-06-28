@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: Castle_Zvahl_Keep (162)
---
 -----------------------------------
 local ID = require("scripts/zones/Castle_Zvahl_Keep/IDs")
 require("scripts/globals/conquest")
@@ -71,7 +69,6 @@ zone_object.onRegionEnter = function(player, region)
         end,
 
         default = function (x)
-            -- print("default")
         end,
     }
 

@@ -1,7 +1,7 @@
 -----------------------------------
 -- A collection of frequently needed teleport shortcuts.
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/utils")
 require("scripts/globals/zone")
 
@@ -477,7 +477,7 @@ xi.teleport.explorerMoogleOnTrigger = function(player, event)
         accept = 1
     end
 
-    if player:getMainLvl() < xi.settings.EXPLORER_MOOGLE_LV then
+    if player:getMainLvl() < xi.settings.main.EXPLORER_MOOGLE_LV then
         event = event + 1
     end
 

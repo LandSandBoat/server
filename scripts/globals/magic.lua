@@ -1,7 +1,7 @@
 require("scripts/globals/spell_data")
 require("scripts/globals/jobpoints")
 require("scripts/globals/magicburst")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
@@ -301,8 +301,6 @@ function calculateMagicDamage(caster, target, spell, params)
         dmg = dmg * 1.5
     end
 
-    -- printf("dmg: %d dINT: %d\n", dmg, dINT)
-
     return dmg
 end
 
@@ -514,9 +512,13 @@ function applyResistanceAddEffect(player, target, element, bonus)
 end
 
 function getMagicHitRate(caster, target, skillType, element, percentBonus, bonusAcc)
-    -- resist everything if magic shield is active
-    if target:hasStatusEffect(xi.effect.MAGIC_SHIELD, 0) then
-        return 0
+    -- resist everything if real magic shield is active (see effects/magic_shield)
+    if target:hasStatusEffect(xi.effect.MAGIC_SHIELD) then
+        local magicshieldsub = target:getStatusEffect(xi.effect.MAGIC_SHIELD)
+
+        if magicshieldsub:getSubPower() == 0 then
+            return 0
+        end
     end
 
     if bonusAcc == nil then
@@ -540,7 +542,7 @@ function getMagicHitRate(caster, target, skillType, element, percentBonus, bonus
         -- Add acc for elemental affinity accuracy and element specific accuracy
         local affinityBonus = AffinityBonusAcc(caster, element)
         local elementBonus = caster:getMod(spellAcc[element])
-        -- print(elementBonus)
+
         bonusAcc = bonusAcc + affinityBonus + elementBonus
     end
 
@@ -567,33 +569,23 @@ function getMagicResist(magicHitRate)
     local resist = 1
 
     -- Resistance thresholds based on p.  A higher p leads to lower resist rates, and a lower p leads to higher resist rates.
-    local half = (1 - p)
-    local quart = ((1 - p)^2)
-    local eighth = ((1 - p)^3)
+    local half      = (1 - p)
+    local quart     = ((1 - p)^2)
+    local eighth    = ((1 - p)^3)
     local sixteenth = ((1 - p)^4)
-    -- print("HALF: "..half)
-    -- print("QUART: "..quart)
-    -- print("EIGHTH: "..eighth)
-    -- print("SIXTEENTH: "..sixteenth)
-
-    local resvar = math.random()
+    local resvar    = math.random()
 
     -- Determine final resist based on which thresholds have been crossed.
     if resvar <= sixteenth then
         resist = 0.0625
-        --printf("Spell resisted to 1/16!!!  Threshold = %u", sixteenth)
     elseif resvar <= eighth then
         resist = 0.125
-        --printf("Spell resisted to 1/8!  Threshold = %u", eighth)
     elseif resvar <= quart then
         resist = 0.25
-        --printf("Spell resisted to 1/4.  Threshold = %u", quart)
     elseif resvar <= half then
         resist = 0.5
-        --printf("Spell resisted to 1/2.  Threshold = %u", half)
     else
         resist = 1.0
-        --printf("1.0")
     end
 
     return resist
@@ -661,9 +653,7 @@ function handleAfflatusMisery(caster, spell, dmg)
 
         dmg = math.floor(dmg * boost)
 
-        -- printf("AFFLATUS MISERY: Damage boosted by %f to %d", boost, dmg)
-
-        --Afflatus Mod is Used Up...
+        --Afflatus Mod is Used Up
         caster:setMod(xi.mod.AFFLATUS_MISERY, 0)
     end
     return dmg
@@ -699,13 +689,13 @@ end
 
     local skill = spell:getSkillType()
     if skill == xi.skill.ELEMENTAL_MAGIC then
-        dmg = dmg * xi.settings.ELEMENTAL_POWER
+        dmg = dmg * xi.settings.main.ELEMENTAL_POWER
     elseif skill == xi.skill.DARK_MAGIC then
-        dmg = dmg * xi.settings.DARK_POWER
+        dmg = dmg * xi.settings.main.DARK_POWER
     elseif skill == xi.skill.NINJUTSU then
-        dmg = dmg * xi.settings.NINJUTSU_POWER
+        dmg = dmg * xi.settings.main.NINJUTSU_POWER
     elseif skill == xi.skill.DIVINE_MAGIC then
-        dmg = dmg * xi.settings.DIVINE_POWER
+        dmg = dmg * xi.settings.main.DIVINE_POWER
     end
 
     dmg = target:magicDmgTaken(dmg)
@@ -983,13 +973,6 @@ function addBonusesAbility(caster, ele, target, dmg, params)
 
     dmg = math.floor(dmg * mab)
 
-    -- print(affinityBonus)
-    -- print(speciesReduction)
-    -- print(dayWeatherBonus)
-    -- print(burst)
-    -- print(mab)
-    -- print(magicDmgMod)
-
     return dmg
 end
 
@@ -1054,18 +1037,16 @@ end
 
 function handleThrenody(caster, target, spell, basePower, baseDuration, modifier)
     -- Process resitances
-    local staff = AffinityBonusAcc(caster, spell:getElement())
-    -- print("staff=" .. staff)
+    local staff  = AffinityBonusAcc(caster, spell:getElement())
     local params = {}
+
     params.attribute = xi.mod.CHR
     params.skillType = xi.skill.SINGING
     params.bonus = staff
 
     local resm = applyResistance(caster, target, spell, params)
-    -- print("rsem=" .. resm)
 
     if resm < 0.5 then
-        -- print("resm resist")
         spell:setMsg(xi.msg.basic.MAGIC_RESIST)
         return xi.effect.THRENODY
     end
@@ -1125,7 +1106,7 @@ function doElementalNuke(caster, spell, target, spellParams)
     local baseValue = 0
     local tierMultiplier = 0
 
-    if xi.settings.USE_OLD_MAGIC_DAMAGE and spellParams.V ~= nil and spellParams.M ~= nil then
+    if xi.settings.main.USE_OLD_MAGIC_DAMAGE and spellParams.V ~= nil and spellParams.M ~= nil then
         baseValue = spellParams.V -- Base value
         tierMultiplier = spellParams.M -- Tier multiplier
         local inflectionPoint = spellParams.I -- Inflection point

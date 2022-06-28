@@ -20,9 +20,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "common/blowfish.h"
+#include "common/logging.h"
 #include "common/md52.h"
 #include "common/mmo.h"
-#include "common/logging.h"
 #include "common/socket.h"
 #include "common/taskmgr.h"
 #include "common/timer.h"
@@ -35,9 +35,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "ai/ai_container.h"
 #include "ai/states/death_state.h"
 #include "alliance.h"
-#include "utils/blueutils.h"
-#include "party.h"
-#include "packet_system.h"
 #include "campaign_system.h"
 #include "conquest_system.h"
 #include "enmity_container.h"
@@ -45,7 +42,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "entities/mobentity.h"
 #include "entities/npcentity.h"
 #include "entities/trustentity.h"
-#include "enmity_container.h"
 #include "item_container.h"
 #include "latent_effect_container.h"
 #include "linkshell.h"
@@ -61,6 +57,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "status_effect_container.h"
 #include "trade_container.h"
 #include "treasure_pool.h"
+#include "unitychat.h"
 #include "universal_container.h"
 #include "utils/battleutils.h"
 #include "utils/blacklistutils.h"
@@ -74,7 +71,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "utils/puppetutils.h"
 #include "utils/synthutils.h"
 #include "utils/zoneutils.h"
-#include "unitychat.h"
 #include "zone.h"
 
 #include "items/item_flowerpot.h"
@@ -146,6 +142,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "packets/message_combat.h"
 #include "packets/message_standard.h"
 #include "packets/message_system.h"
+#include "packets/monipulator1.h"
+#include "packets/monipulator2.h"
 #include "packets/party_define.h"
 #include "packets/party_invite.h"
 #include "packets/party_map.h"
@@ -173,6 +171,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "packets/zone_visited.h"
 
 uint8 PacketSize[512];
+
 std::function<void(map_session_data_t* const, CCharEntity* const, CBasicPacket)> PacketParser[512];
 
 /************************************************************************
@@ -319,12 +318,12 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
     {
         // TODO: this should only happen ONCE, instead of spamming the log dozens of times..
         ShowWarning("Client cannot receive packet or key is invalid: %s, Zone: %s (%i)",
-            PChar->GetName(), PChar->loc.zone->GetName(), PChar->loc.zone->GetID());
+                    PChar->GetName(), PChar->loc.zone->GetName(), PChar->loc.zone->GetID());
 
         // Write a sane location for them
         // TODO: work out how to drop player in moghouse that exits them to the zone they were in before this happened, like we used to.
         ShowWarning("packet_system::SmallPacket0x00A dumping player `%s` to a valid zone!", PChar->GetName());
-        auto prevZone = PChar->loc.prevzone ? PChar->loc.prevzone : (uint16)ZONE_VALKURM_DUNES;
+        auto prevZone          = PChar->loc.prevzone ? PChar->loc.prevzone : (uint16)ZONE_VALKURM_DUNES;
         PChar->loc.destination = prevZone;
         sql->Query("UPDATE chars SET pos_zone = %u WHERE charid = %u", prevZone, PChar->id);
     }
@@ -374,7 +373,7 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
                     auto* PFurnishing = static_cast<CItemFurnishing*>(PContainerItem);
                     if (PFurnishing->isInstalled() && PFurnishing->isMannequin())
                     {
-                        auto* PMannequin = PFurnishing;
+                        auto*  PMannequin = PFurnishing;
                         uint16 mainId     = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 0]);
                         uint16 subId      = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 1]);
                         uint16 rangeId    = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 2]);
@@ -416,7 +415,6 @@ void SmallPacket0x00C(map_session_data_t* const PSession, CCharEntity* const PCh
         // Only send Job Points Packet if the player has unlocked them
         PChar->pushPacket(new CJobPointDetailsPacket(PChar));
     }
-
 
     // TODO: While in mog house; treasure pool is not created.
     if (PChar->PTreasurePool != nullptr)
@@ -533,7 +531,7 @@ void SmallPacket0x00D(map_session_data_t* const PSession, CCharEntity* const PCh
             // The broken rod can never be lost in a normal failed synth. It will only be lost if the synth is
             // interrupted in some way, such as by being attacked or moving to another area (e.g. ship docking).
 
-            ShowExploit("SmallPacket0x00D: %s attempting to zone in the middle of a synth, failing their synth!", PChar->GetName());
+            ShowWarning("SmallPacket0x00D: %s attempting to zone in the middle of a synth, failing their synth!", PChar->GetName());
             synthutils::doSynthFail(PChar);
         }
     }
@@ -738,13 +736,14 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
     TracyZoneScoped;
 
     // uint32 ID = data.ref<uint32>(0x04);
-    uint16 TargID = data.ref<uint16>(0x08);
-    uint8  action = data.ref<uint8>(0x0A);
-    position_t actionOffset =
-    {
+    uint16     TargID       = data.ref<uint16>(0x08);
+    uint8      action       = data.ref<uint8>(0x0A);
+    position_t actionOffset = {
         data.ref<float>(0x10),
         data.ref<float>(0x14),
-        data.ref<float>(0x18)
+        data.ref<float>(0x18),
+        0, // packet only contains x/y/z
+        0, //
     };
 
     constexpr auto actionToStr = [](uint8 actionIn)
@@ -859,18 +858,19 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
             if (spellID >= SpellID::Geo_Regen && spellID <= SpellID::Geo_Gravity)
             {
                 // reset the action offset position to prevent other spells from using previous position data
-                PChar->m_ActionOffsetPos = {0, 0, 0};
+                PChar->m_ActionOffsetPos = {};
 
                 // Need to set the target position plus offset for positioning correctly
                 auto* PTarget = dynamic_cast<CBattleEntity*>(PChar->GetEntity(TargID));
 
                 if (PTarget != nullptr)
                 {
-                    PChar->m_ActionOffsetPos =
-                    {
+                    PChar->m_ActionOffsetPos = {
                         PTarget->loc.p.x + actionOffset.x,
                         PTarget->loc.p.y + actionOffset.y,
-                        PTarget->loc.p.z + actionOffset.z
+                        PTarget->loc.p.z + actionOffset.z,
+                        0, // packet only contains x/y/z
+                        0, //
                     };
                 }
             }
@@ -909,12 +909,12 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
         break;
         case 0x09: // jobability
         {
-            uint16 JobAbilityID = data.ref<uint16>(0x0C);
-            uint8 currentAnimation = PChar->animation;
+            uint16 JobAbilityID     = data.ref<uint16>(0x0C);
+            uint8  currentAnimation = PChar->animation;
 
             if (currentAnimation != ANIMATION_NONE && currentAnimation != ANIMATION_ATTACK)
             {
-                ShowExploit("SmallPacket0x01A: Player %s trying to use a Job Ability from invalid state", PChar->GetName());
+                ShowWarning("SmallPacket0x01A: Player %s trying to use a Job Ability from invalid state", PChar->GetName());
                 return;
             }
 
@@ -982,7 +982,7 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
             uint8 currentAnimation = PChar->animation;
             if (currentAnimation != ANIMATION_NONE && currentAnimation != ANIMATION_ATTACK)
             {
-                ShowExploit("SmallPacket0x01A: Player %s trying to Ranged Attack from invalid state", PChar->GetName());
+                ShowWarning("SmallPacket0x01A: Player %s trying to Ranged Attack from invalid state", PChar->GetName());
                 return;
             }
 
@@ -1136,13 +1136,14 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
                 }
 
                 PChar->StatusEffectContainer->AddStatusEffect(new CStatusEffect(
-                    EFFECT_MOUNTED,
-                    EFFECT_MOUNTED,
-                    MountID ? ++MountID : 0,
-                    0,
-                    1800,
-                    0,
-                    FLAG_CHOCOBO), true);
+                                                                  EFFECT_MOUNTED,
+                                                                  EFFECT_MOUNTED,
+                                                                  MountID ? ++MountID : 0,
+                                                                  0,
+                                                                  1800,
+                                                                  0,
+                                                                  FLAG_CHOCOBO),
+                                                              true);
 
                 PChar->PRecastContainer->Add(RECAST_ABILITY, 256, 60);
                 PChar->pushPacket(new CCharRecastPacket(PChar));
@@ -1158,7 +1159,7 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
         }
         break;
     }
-    ShowAction(fmt::format("CLIENT {} PERFORMING ACTION {} (0x{:02X})", PChar->GetName(), actionStr, action));
+    ShowInfo(fmt::format("CLIENT {} PERFORMING ACTION {} (0x{:02X})", PChar->GetName(), actionStr, action));
 }
 
 /************************************************************************
@@ -1215,12 +1216,11 @@ void SmallPacket0x01E(map_session_data_t* const PSession, CCharEntity* const PCh
 
     std::vector<char> chars;
     std::for_each(data[HEADER_LENGTH], data[HEADER_LENGTH] + (data.getSize() - HEADER_LENGTH), [&](char ch)
-    {
+                  {
         if (isascii(ch) && ch != '\0')
         {
             chars.emplace_back(ch);
-        }
-    });
+        } });
     auto str = std::string(chars.begin(), chars.end());
     luautils::OnPlayerVolunteer(PChar, str);
 }
@@ -1248,25 +1248,25 @@ void SmallPacket0x028(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if (container >= CONTAINER_ID::MAX_CONTAINER_ID)
     {
-        ShowExploit("SmallPacket0x028: Invalid container ID passed to packet %u by %s", container, PChar->GetName());
+        ShowWarning("SmallPacket0x028: Invalid container ID passed to packet %u by %s", container, PChar->GetName());
         return;
     }
 
     if (PItem->isSubType(ITEM_LOCKED))
     {
-        ShowExploit("SmallPacket0x028: Attempt of removal of LOCKED item from slot %u", slotID);
+        ShowWarning("SmallPacket0x028: Attempt of removal of LOCKED item from slot %u", slotID);
         return;
     }
 
     if (PItem->isStorageSlip())
     {
-        int data = 0;
+        int slipData = 0;
         for (int i = 0; i < CItem::extra_size; i++)
         {
-            data += PItem->m_extra[i];
+            slipData += PItem->m_extra[i];
         }
 
-        if (data != 0)
+        if (slipData != 0)
         {
             PChar->pushPacket(new CMessageStandardPacket(MsgStd::CannotBeProcessed));
             return;
@@ -1432,6 +1432,13 @@ void SmallPacket0x032(map_session_data_t* const PSession, CCharEntity* const PCh
     if ((PTarget != nullptr) && (PTarget->id == charid))
     {
         ShowDebug("%s initiated trade request with %s", PChar->GetName(), PTarget->GetName());
+
+        // If the player is the same as the target, don't allow the trade
+        if (PChar->id == PTarget->id)
+        {
+            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 155));
+            return;
+        }
 
         // If PChar is invisible don't allow the trade, but you are able to initiate a trade TO an invisible player
         if (PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_INVISIBLE))
@@ -1653,7 +1660,7 @@ void SmallPacket0x034(map_session_data_t* const PSession, CCharEntity* const PCh
                     }
                     else
                     {
-                        ShowNotice("%s->%s trade updating trade slot id %d with item %s, quantity %d", PChar->GetName(), PTarget->GetName(),
+                        ShowInfo("%s->%s trade updating trade slot id %d with item %s, quantity %d", PChar->GetName(), PTarget->GetName(),
                                    tradeSlotID, PItem->getName(), quantity);
                         PItem->setReserve(quantity + PItem->getReserve());
                         PChar->UContainer->SetItem(tradeSlotID, PItem);
@@ -1661,7 +1668,7 @@ void SmallPacket0x034(map_session_data_t* const PSession, CCharEntity* const PCh
                 }
                 else
                 {
-                    ShowNotice("%s->%s trade updating trade slot id %d with item %s, quantity %d", PChar->GetName(), PTarget->GetName(),
+                    ShowInfo("%s->%s trade updating trade slot id %d with item %s, quantity %d", PChar->GetName(), PTarget->GetName(),
                                tradeSlotID, PItem->getName(), quantity);
                     PItem->setReserve(quantity + PItem->getReserve());
                     PChar->UContainer->SetItem(tradeSlotID, PItem);
@@ -1669,7 +1676,7 @@ void SmallPacket0x034(map_session_data_t* const PSession, CCharEntity* const PCh
             }
             else
             {
-                ShowNotice("%s->%s trade updating trade slot id %d with item %s, quantity 0", PChar->GetName(), PTarget->GetName(),
+                ShowInfo("%s->%s trade updating trade slot id %d with item %s, quantity 0", PChar->GetName(), PTarget->GetName(),
                            tradeSlotID, PItem->getName());
                 PItem->setReserve(0);
                 PChar->UContainer->SetItem(tradeSlotID, nullptr);
@@ -1696,7 +1703,7 @@ void SmallPacket0x036(map_session_data_t* const PSession, CCharEntity* const PCh
 {
     TracyZoneScoped;
 
-     // If PChar is invisible don't allow the trade, but you are able to initiate a trade TO an invisible player
+    // If PChar is invisible don't allow the trade, but you are able to initiate a trade TO an invisible player
     if (PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_INVISIBLE))
     {
         // 155 = "You cannot perform that action on the specified target."
@@ -1760,7 +1767,7 @@ void SmallPacket0x037(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if (StorageID >= CONTAINER_ID::MAX_CONTAINER_ID)
     {
-        ShowExploit("SmallPacket0x037: Invalid storage ID passed to packet %u by %s", StorageID, PChar->GetName());
+        ShowWarning("SmallPacket0x037: Invalid storage ID passed to packet %u by %s", StorageID, PChar->GetName());
         return;
     }
 
@@ -1789,7 +1796,7 @@ void SmallPacket0x03A(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if (container >= CONTAINER_ID::MAX_CONTAINER_ID)
     {
-        ShowExploit("SmallPacket0x03A: Invalid container ID passed to packet %u by %s", container, PChar->GetName());
+        ShowWarning("SmallPacket0x03A: Invalid container ID passed to packet %u by %s", container, PChar->GetName());
         return;
     }
 
@@ -1799,7 +1806,7 @@ void SmallPacket0x03A(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if (gettick() - PItemContainer->LastSortingTime < 1000)
     {
-        if (map_config.lightluggage_block == (int32)(++PItemContainer->SortingPacket))
+        if (settings::get<uint8>("map.LIGHTLUGGAGE_BLOCK") == (int32)(++PItemContainer->SortingPacket))
         {
             ShowWarning("lightluggage detected: <%s> will be removed from server", PChar->GetName());
 
@@ -1861,41 +1868,41 @@ void SmallPacket0x03B(map_session_data_t* const PSession, CCharEntity* const PCh
     TracyZoneCString("Mannequin Equip");
 
     // What are you doing?
-    uint8 action                  = data.ref<uint8>(0x04);
+    uint8 action = data.ref<uint8>(0x04);
 
     // Where is the mannequin?
     uint8 mannequinStorageLoc     = data.ref<uint8>(0x08);
     uint8 mannequinStorageLocSlot = data.ref<uint8>(0x0C);
 
     // Which slot on the mannequin?
-    uint8 mannequinInternalSlot   = data.ref<uint8>(0x0D);
+    uint8 mannequinInternalSlot = data.ref<uint8>(0x0D);
 
     // Where is the item that is being equipped/unequipped?
-    uint8 itemStorageLoc          = data.ref<uint8>(0x10);
-    uint8 itemStorageLocSlot      = data.ref<uint8>(0x14);
+    uint8 itemStorageLoc     = data.ref<uint8>(0x10);
+    uint8 itemStorageLocSlot = data.ref<uint8>(0x14);
 
     // Validation
     if (action != 1 && action != 2 && action != 5)
     {
-        ShowExploit("SmallPacket0x03B: Invalid action passed to Mannequin Equip packet %u by %s", action, PChar->GetName());
+        ShowWarning("SmallPacket0x03B: Invalid action passed to Mannequin Equip packet %u by %s", action, PChar->GetName());
         return;
     }
 
     if (mannequinStorageLoc != LOC_MOGSAFE && mannequinStorageLoc != LOC_MOGSAFE2)
     {
-        ShowExploit("SmallPacket0x03B: Invalid mannequin location passed to Mannequin Equip packet %u by %s", mannequinStorageLoc, PChar->GetName());
+        ShowWarning("SmallPacket0x03B: Invalid mannequin location passed to Mannequin Equip packet %u by %s", mannequinStorageLoc, PChar->GetName());
         return;
     }
 
     if (itemStorageLoc != LOC_STORAGE && action == 1) // Only valid for direct equip/unequip
     {
-        ShowExploit("SmallPacket0x03B: Invalid item location passed to Mannequin Equip packet %u by %s", itemStorageLoc, PChar->GetName());
+        ShowWarning("SmallPacket0x03B: Invalid item location passed to Mannequin Equip packet %u by %s", itemStorageLoc, PChar->GetName());
         return;
     }
 
     if (mannequinInternalSlot >= 8)
     {
-        ShowExploit("SmallPacket0x03B: Invalid mannequin equipment index passed to Mannequin Equip packet %u (range: 0-7) by %s", mannequinInternalSlot, PChar->GetName());
+        ShowWarning("SmallPacket0x03B: Invalid mannequin equipment index passed to Mannequin Equip packet %u (range: 0-7) by %s", mannequinInternalSlot, PChar->GetName());
         return;
     }
 
@@ -2003,7 +2010,7 @@ void SmallPacket0x03B(map_session_data_t* const PSession, CCharEntity* const PCh
                         "extra = '%s' "
                         "WHERE location = %u AND slot = %u AND charid = %u";
 
-    auto ret = sql->Query(Query, extra, mannequinStorageLoc, mannequinStorageLocSlot, PChar->id);
+    auto ret  = sql->Query(Query, extra, mannequinStorageLoc, mannequinStorageLocSlot, PChar->id);
     auto rows = sql->AffectedRows();
     if (ret != SQL_ERROR && rows != 0)
     {
@@ -2044,7 +2051,7 @@ void SmallPacket0x03D(map_session_data_t* const PSession, CCharEntity* const PCh
 
     // Attempt to locate the character by their name
     const char* query = "SELECT charid, accid FROM chars WHERE charname = '%s' LIMIT 1";
-    int32       ret = sql->Query(query, name);
+    int32       ret   = sql->Query(query, name);
     if (ret == SQL_ERROR || sql->NumRows() != 1 || sql->NextRow() != SQL_SUCCESS)
     {
         // Send failed
@@ -2119,7 +2126,7 @@ void SmallPacket0x041(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if (SlotID >= TREASUREPOOL_SIZE)
     {
-        ShowExploit("SmallPacket0x041: Invalid slot ID passed to packet %u by %s", SlotID, PChar->GetName());
+        ShowWarning("SmallPacket0x041: Invalid slot ID passed to packet %u by %s", SlotID, PChar->GetName());
         return;
     }
 
@@ -2147,7 +2154,7 @@ void SmallPacket0x042(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if (SlotID >= TREASUREPOOL_SIZE)
     {
-        ShowExploit("SmallPacket0x042: Invalid slot ID passed to packet %u by %s", SlotID, PChar->GetName());
+        ShowWarning("SmallPacket0x042: Invalid slot ID passed to packet %u by %s", SlotID, PChar->GetName());
         return;
     }
 
@@ -2180,7 +2187,7 @@ void SmallPacket0x04B(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if (msg_language == 0x02)
     {
-        PChar->pushPacket(new CServerMessagePacket(map_config.server_message, msg_language, msg_timestamp, msg_offset));
+        PChar->pushPacket(new CServerMessagePacket(settings::get<std::string>("main.SERVER_MESSAGE"), msg_language, msg_timestamp, msg_offset));
     }
 
     PChar->pushPacket(new CCharSyncPacket(PChar));
@@ -2210,7 +2217,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
     uint8 boxtype = data.ref<uint8>(0x05);
     uint8 slotID  = data.ref<uint8>(0x06);
 
-    ShowAction("DeliveryBox Action (%02hx)", data.ref<uint8>(0x04));
+    ShowInfo("DeliveryBox Action (%02hx)", data.ref<uint8>(0x04));
     PrintPacket(data);
 
     if (jailutils::InPrison(PChar)) // If jailed, no mailbox menu for you.
@@ -2226,14 +2233,14 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if (PChar->animation == ANIMATION_SYNTH)
     {
-        ShowExploit("SmallPacket0x04D: %s attempting to access delivery box in the middle of a synth!", PChar->GetName());
+        ShowWarning("SmallPacket0x04D: %s attempting to access delivery box in the middle of a synth!", PChar->GetName());
         return;
     }
 
     if ((PChar->animation >= ANIMATION_FISHING_FISH && PChar->animation <= ANIMATION_FISHING_STOP) ||
         PChar->animation == ANIMATION_FISHING_START_OLD || PChar->animation == ANIMATION_FISHING_START)
     {
-        ShowExploit("SmallPacket0x04D: %s attempting to access delivery box while fishing!", PChar->GetName());
+        ShowWarning("SmallPacket0x04D: %s attempting to access delivery box while fishing!", PChar->GetName());
         return;
     }
 
@@ -2259,7 +2266,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             if (PChar->UContainer->GetType() != UCONTAINER_DELIVERYBOX)
             {
-                ShowExploit("Delivery Box packet handler received action %u while UContainer is in a state other than UCONTAINER_DELIVERYBOX (%s)", action, PChar->GetName());
+                ShowWarning("Delivery Box packet handler received action %u while UContainer is in a state other than UCONTAINER_DELIVERYBOX (%s)", action, PChar->GetName());
                 return;
             }
 
@@ -2320,7 +2327,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             if (PChar->UContainer->GetType() != UCONTAINER_DELIVERYBOX)
             {
-                ShowExploit("Delivery Box packet handler received action %u while UContainer is in a state other than UCONTAINER_DELIVERYBOX (%s)", action, PChar->GetName());
+                ShowWarning("Delivery Box packet handler received action %u while UContainer is in a state other than UCONTAINER_DELIVERYBOX (%s)", action, PChar->GetName());
                 return;
             }
 
@@ -2384,7 +2391,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             if (PChar->UContainer->GetType() != UCONTAINER_DELIVERYBOX)
             {
-                ShowExploit("Delivery Box packet handler received action %u while UContainer is in a state other than UCONTAINER_DELIVERYBOX (%s)", action, PChar->GetName());
+                ShowWarning("Delivery Box packet handler received action %u while UContainer is in a state other than UCONTAINER_DELIVERYBOX (%s)", action, PChar->GetName());
                 return;
             }
 
@@ -2414,7 +2421,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                             uint32 charid = sql->GetUIntData(0);
 
                             ret = sql->Query("UPDATE delivery_box SET sent = 1 WHERE charid = %u AND senderid = %u AND slot = %u AND box = 2;",
-                                            PChar->id, charid, slotID);
+                                             PChar->id, charid, slotID);
 
                             if (ret != SQL_ERROR && sql->AffectedRows() == 1)
                             {
@@ -2452,7 +2459,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             if (PChar->UContainer->GetType() != UCONTAINER_DELIVERYBOX)
             {
-                ShowExploit("Delivery Box packet handler received action %u while UContainer is in a state other than UCONTAINER_DELIVERYBOX (%s)", action, PChar->GetName());
+                ShowWarning("Delivery Box packet handler received action %u while UContainer is in a state other than UCONTAINER_DELIVERYBOX (%s)", action, PChar->GetName());
                 return;
             }
 
@@ -2472,8 +2479,8 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                     {
                         uint32 charid = sql->GetUIntData(0);
                         ret           = sql->Query(
-                            "UPDATE delivery_box SET sent = 0 WHERE charid = %u AND box = 2 AND slot = %u AND sent = 1 AND received = 0 LIMIT 1;",
-                            PChar->id, slotID);
+                                      "UPDATE delivery_box SET sent = 0 WHERE charid = %u AND box = 2 AND slot = %u AND sent = 1 AND received = 0 LIMIT 1;",
+                                      PChar->id, slotID);
 
                         if (ret != SQL_ERROR && sql->AffectedRows() == 1)
                         {
@@ -2532,7 +2539,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
             // Send the player the new items count not seen
             if (PChar->UContainer->GetType() != UCONTAINER_DELIVERYBOX)
             {
-                ShowExploit("Delivery Box packet handler received action %u while UContainer is in a state other than UCONTAINER_DELIVERYBOX (%s)", action, PChar->GetName());
+                ShowWarning("Delivery Box packet handler received action %u while UContainer is in a state other than UCONTAINER_DELIVERYBOX (%s)", action, PChar->GetName());
                 return;
             }
 
@@ -2571,7 +2578,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             if (PChar->UContainer->GetType() != UCONTAINER_DELIVERYBOX)
             {
-                ShowExploit("Delivery Box packet handler received action %u while UContainer is in a state other than UCONTAINER_DELIVERYBOX (%s)", action, PChar->GetName());
+                ShowWarning("Delivery Box packet handler received action %u while UContainer is in a state other than UCONTAINER_DELIVERYBOX (%s)", action, PChar->GetName());
                 return;
             }
 
@@ -2654,7 +2661,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             if (PChar->UContainer->GetType() != UCONTAINER_DELIVERYBOX)
             {
-                ShowExploit("Delivery Box packet handler received action %u while UContainer is in a state other than UCONTAINER_DELIVERYBOX (%s)", action, PChar->GetName());
+                ShowWarning("Delivery Box packet handler received action %u while UContainer is in a state other than UCONTAINER_DELIVERYBOX (%s)", action, PChar->GetName());
                 return;
             }
 
@@ -2692,7 +2699,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             if (PChar->UContainer->GetType() != UCONTAINER_DELIVERYBOX)
             {
-                ShowExploit("Delivery Box packet handler received action %u while UContainer is in a state other than UCONTAINER_DELIVERYBOX (%s)", action, PChar->GetName());
+                ShowWarning("Delivery Box packet handler received action %u while UContainer is in a state other than UCONTAINER_DELIVERYBOX (%s)", action, PChar->GetName());
                 return;
             }
 
@@ -2707,7 +2714,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             if (PChar->UContainer->GetType() != UCONTAINER_DELIVERYBOX)
             {
-                ShowExploit("Delivery Box packet handler received action %u while UContainer is in a state other than UCONTAINER_DELIVERYBOX (%s)", action, PChar->GetName());
+                ShowWarning("Delivery Box packet handler received action %u while UContainer is in a state other than UCONTAINER_DELIVERYBOX (%s)", action, PChar->GetName());
                 return;
             }
             if (!PChar->UContainer->IsSlotEmpty(slotID))
@@ -2725,7 +2732,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                 {
                     // Get sender of delivery record
                     int32 ret = sql->Query("SELECT senderid, sender FROM delivery_box WHERE charid = %u AND slot = %u AND box = 1 LIMIT 1;",
-                                          PChar->id, slotID);
+                                           PChar->id, slotID);
 
                     if (ret != SQL_ERROR && sql->NumRows() > 0 && sql->NextRow() == SQL_SUCCESS)
                     {
@@ -2739,9 +2746,9 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
 
                             // Insert a return record into delivery_box
                             ret = sql->Query("INSERT INTO delivery_box(charid, charname, box, itemid, itemsubid, quantity, extra, senderid, sender) VALUES(%u, "
-                                            "'%s', 1, %u, %u, %u, '%s', %u, '%s'); ",
-                                            senderID, senderName.c_str(), PItem->getID(), PItem->getSubID(), PItem->getQuantity(), extra, PChar->id,
-                                            PChar->GetName());
+                                             "'%s', 1, %u, %u, %u, '%s', %u, '%s'); ",
+                                             senderID, senderName.c_str(), PItem->getID(), PItem->getSubID(), PItem->getQuantity(), extra, PChar->id,
+                                             PChar->GetName());
 
                             if (ret != SQL_ERROR && sql->AffectedRows() > 0)
                             {
@@ -2776,7 +2783,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             if (PChar->UContainer->GetType() != UCONTAINER_DELIVERYBOX)
             {
-                ShowExploit("Delivery Box packet handler received action %u while UContainer is in a state other than UCONTAINER_DELIVERYBOX (%s)", action, PChar->GetName());
+                ShowWarning("Delivery Box packet handler received action %u while UContainer is in a state other than UCONTAINER_DELIVERYBOX (%s)", action, PChar->GetName());
                 return;
             }
 
@@ -2788,8 +2795,8 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
 
                 CItem* PItem = PChar->UContainer->GetItem(slotID);
 
-                // ShowMessage("FreeSlots %u", PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount());
-                // ShowMessage("ItemId %u", PItem->getID());
+                // ShowInfo("FreeSlots %u", PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount());
+                // ShowInfo("ItemId %u", PItem->getID());
 
                 if (!PItem->isType(ITEM_CURRENCY) && PChar->getStorage(LOC_INVENTORY)->GetFreeSlotsCount() == 0)
                 {
@@ -2807,7 +2814,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                     else if (boxtype == 0x02)
                     {
                         ret = sql->Query("DELETE FROM delivery_box WHERE charid = %u AND sent = 0 AND slot = %u AND box = %u LIMIT 1", PChar->id,
-                                        slotID, boxtype);
+                                         slotID, boxtype);
                     }
 
                     if (ret != SQL_ERROR && sql->AffectedRows() != 0)
@@ -2848,7 +2855,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             if (PChar->UContainer->GetType() != UCONTAINER_DELIVERYBOX)
             {
-                ShowExploit("Delivery Box packet handler received action %u while UContainer is in a state other than UCONTAINER_DELIVERYBOX (%s)", action, PChar->GetName());
+                ShowWarning("Delivery Box packet handler received action %u while UContainer is in a state other than UCONTAINER_DELIVERYBOX (%s)", action, PChar->GetName());
                 return;
             }
 
@@ -2871,7 +2878,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             if (PChar->UContainer->GetType() != UCONTAINER_DELIVERYBOX)
             {
-                ShowExploit("Delivery Box packet handler received action %u while UContainer is in a state other than UCONTAINER_DELIVERYBOX (%s)", action, PChar->GetName());
+                ShowWarning("Delivery Box packet handler received action %u while UContainer is in a state other than UCONTAINER_DELIVERYBOX (%s)", action, PChar->GetName());
                 return;
             }
 
@@ -3011,7 +3018,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
                 break;
             }
         }
-        [[fallthrough]];
+            [[fallthrough]];
         case 0x0A:
         {
             auto totalItemsOnAh = PChar->m_ah_history.size();
@@ -3042,14 +3049,14 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
                         PChar->pushPacket(new CAuctionHousePacket(action, 197, 0, 0)); // Failed to place up
                         return;
                     }
-                    auctionFee = (uint32)(map_config.ah_base_fee_stacks + (price * map_config.ah_tax_rate_stacks / 100));
+                    auctionFee = (uint32)(settings::get<uint32>("map.AH_BASE_FEE_STACKS") + (price * settings::get<float>("map.AH_TAX_RATE_STACKS") / 100));
                 }
                 else
                 {
-                    auctionFee = (uint32)(map_config.ah_base_fee_single + (price * map_config.ah_tax_rate_single / 100));
+                    auctionFee = (uint32)(settings::get<uint32>("map.AH_BASE_FEE_SINGLE") + (price * settings::get<float>("map.AH_TAX_RATE_SINGLE") / 100));
                 }
 
-                auctionFee = std::clamp<uint32>(auctionFee, 0, map_config.ah_max_fee);
+                auctionFee = std::clamp<uint32>(auctionFee, 0, settings::get<uint32>("map.AH_MAX_FEE"));
 
                 if (PChar->getStorage(LOC_INVENTORY)->GetItem(0)->getQuantity() < auctionFee)
                 {
@@ -3071,7 +3078,7 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
                     // ShowDebug(CL_CYAN"%s has %d outstanding listings before placing this one.", PChar->GetName(), ah_listings);
                 }
 
-                if (map_config.ah_list_limit && ah_listings >= map_config.ah_list_limit)
+                if (settings::get<uint8>("map.AH_LIST_LIMIT") && ah_listings >= settings::get<uint8>("map.AH_LIST_LIMIT"))
                 {
                     // ShowDebug(CL_CYAN"%s already has %d items on the AH",PChar->GetName(), ah_listings);
                     PChar->pushPacket(new CAuctionHousePacket(action, 197, 0, 0)); // Failed to place up
@@ -3215,7 +3222,7 @@ void SmallPacket0x050(map_session_data_t* const PSession, CCharEntity* const PCh
     uint8 containerID = data.ref<uint8>(0x06); // container id
 
     if (containerID != LOC_INVENTORY && containerID != LOC_WARDROBE && containerID != LOC_WARDROBE2 && containerID != LOC_WARDROBE3 &&
-        containerID != LOC_WARDROBE4 && containerID != LOC_WARDROBE5 && containerID != LOC_WARDROBE6 &&  containerID != LOC_WARDROBE7 &&
+        containerID != LOC_WARDROBE4 && containerID != LOC_WARDROBE5 && containerID != LOC_WARDROBE6 && containerID != LOC_WARDROBE7 &&
         containerID != LOC_WARDROBE8)
     {
         if (equipSlotID != 16 && equipSlotID != 17)
@@ -3403,10 +3410,10 @@ void SmallPacket0x059(map_session_data_t* const PSession, CCharEntity* const PCh
 }
 
 /************************************************************************
-*                                                                       *
-*  Map Update (Conquest, Besieged, Campaign)                            *
-*                                                                       *
-************************************************************************/
+ *                                                                       *
+ *  Map Update (Conquest, Besieged, Campaign)                            *
+ *                                                                       *
+ ************************************************************************/
 
 void SmallPacket0x05A(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
@@ -3497,7 +3504,7 @@ void SmallPacket0x05C(map_session_data_t* const PSession, CCharEntity* const PCh
         else
         {
             PChar->m_Substate = CHAR_SUBSTATE::SUBSTATE_NONE;
-            updatePosition = luautils::OnEventFinish(PChar, EventID, Result) == 1;
+            updatePosition    = luautils::OnEventFinish(PChar, EventID, Result) == 1;
             if (PChar->currentEvent->eventId == EventID)
             {
                 PChar->endCurrentEvent();
@@ -3572,7 +3579,8 @@ void SmallPacket0x05D(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             // Nothing equipped in the style, look at what's actually equipped.
             mainWeapon = PChar->getEquip(SLOT_MAIN) != nullptr
-                ? PChar->getEquip(SLOT_MAIN)->getID() : 0;
+                             ? PChar->getEquip(SLOT_MAIN)->getID()
+                             : 0;
         }
 
         if (!IsBell(mainWeapon))
@@ -3670,11 +3678,12 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
 
             auto startingRegion            = zoneutils::GetCurrentRegion(startingZone);
             auto destinationRegion         = zoneutils::GetCurrentRegion(destinationZone);
-            auto moghouseExitRegions = { REGION_TYPE::SANDORIA, REGION_TYPE::BASTOK, REGION_TYPE::WINDURST, REGION_TYPE::JEUNO, REGION_TYPE::WEST_AHT_URHGAN };
+            auto moghouseExitRegions       = { REGION_TYPE::SANDORIA, REGION_TYPE::BASTOK, REGION_TYPE::WINDURST, REGION_TYPE::JEUNO, REGION_TYPE::WEST_AHT_URHGAN };
             auto moghouseQuestComplete     = PChar->profile.mhflag & (town ? 0x01 << (town - 1) : 0);
             bool moghouseExitQuestZoneline = moghouseQuestComplete && startingRegion == destinationRegion && PChar->m_moghouseID > 0 &&
                                              std::any_of(moghouseExitRegions.begin(), moghouseExitRegions.end(),
-                                                         [&destinationRegion](REGION_TYPE acceptedReg) { return destinationRegion == acceptedReg; });
+                                                         [&destinationRegion](REGION_TYPE acceptedReg)
+                                                         { return destinationRegion == acceptedReg; });
 
             bool moghouseExitMogGardenZoneline = destinationZone == ZONE_MOG_GARDEN && PChar->m_moghouseID > 0;
 
@@ -3683,7 +3692,7 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
             {
                 PChar->m_moghouseID    = 0;
                 PChar->loc.destination = destinationZone;
-                memset(&PChar->loc.p, 0, sizeof(PChar->loc.p));
+                PChar->loc.p = {};
             }
             else
             {
@@ -3790,6 +3799,8 @@ void SmallPacket0x061(map_session_data_t* const PSession, CCharEntity* const PCh
     PChar->pushPacket(new CCharSkillsPacket(PChar));
     PChar->pushPacket(new CCharRecastPacket(PChar));
     PChar->pushPacket(new CMenuMeritPacket(PChar));
+    PChar->pushPacket(new CMonipulatorPacket1(PChar));
+    PChar->pushPacket(new CMonipulatorPacket2(PChar));
 
     if (charutils::hasKeyItem(PChar, 2544))
     {
@@ -3835,7 +3846,7 @@ void SmallPacket0x064(map_session_data_t* const PSession, CCharEntity* const PCh
     for (int i = 0; i < 0x40; i++)
     {
         // copy each bit of byte into std::bit location
-        PChar->keys.tables[KeyTable].seenList.set(i * 8,     *data[0x08 + i] & 0x01);
+        PChar->keys.tables[KeyTable].seenList.set(i * 8 + 0, *data[0x08 + i] & 0x01);
         PChar->keys.tables[KeyTable].seenList.set(i * 8 + 1, *data[0x08 + i] & 0x02);
         PChar->keys.tables[KeyTable].seenList.set(i * 8 + 2, *data[0x08 + i] & 0x04);
         PChar->keys.tables[KeyTable].seenList.set(i * 8 + 3, *data[0x08 + i] & 0x08);
@@ -3857,7 +3868,7 @@ void SmallPacket0x064(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x066(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    if (map_config.fishing_enable == 1)
+    if (settings::get<bool>("map.FISHING_ENABLE"))
     {
         fishingutils::HandleFishingAction(PChar, data);
     }
@@ -4279,12 +4290,12 @@ void SmallPacket0x071(map_session_data_t* const PSession, CCharEntity* const PCh
                     {
                         uint32 id = sql->GetUIntData(0);
                         ret       = sql->Query(
-                                        "SELECT partyid FROM accounts_parties WHERE charid = %u AND allianceid = %u AND partyflag & %d AND partyflag & %d", id,
-                                        PChar->PParty->m_PAlliance->m_AllianceID, PARTY_LEADER, PARTY_SECOND | PARTY_THIRD);
+                                  "SELECT partyid FROM accounts_parties WHERE charid = %u AND allianceid = %u AND partyflag & %d AND partyflag & %d", id,
+                                  PChar->PParty->m_PAlliance->m_AllianceID, PARTY_LEADER, PARTY_SECOND | PARTY_THIRD);
                         if (ret != SQL_ERROR && sql->NumRows() == 1 && sql->NextRow() == SQL_SUCCESS)
                         {
                             if (sql->Query("UPDATE accounts_parties SET allianceid = 0, partyflag = partyflag & ~%d WHERE partyid = %u;",
-                                          PARTY_SECOND | PARTY_THIRD, id) == SQL_SUCCESS &&
+                                           PARTY_SECOND | PARTY_THIRD, id) == SQL_SUCCESS &&
                                 sql->AffectedRows())
                             {
                                 ShowDebug("%s has removed %s party from alliance", PChar->GetName(), data[0x0C]);
@@ -4565,7 +4576,7 @@ void SmallPacket0x083(map_session_data_t* const PSession, CCharEntity* const PCh
             if (SlotID != ERROR_SLOTID)
             {
                 charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -(int32)(price * quantity));
-                ShowNotice("User '%s' purchased %u of item of ID %u [from VENDOR] ", PChar->GetName(), quantity, itemID);
+                ShowInfo("User '%s' purchased %u of item of ID %u [from VENDOR] ", PChar->GetName(), quantity, itemID);
                 PChar->pushPacket(new CShopBuyPacket(shopSlotID, quantity));
                 PChar->pushPacket(new CInventoryFinishPacket());
             }
@@ -4622,14 +4633,14 @@ void SmallPacket0x085(map_session_data_t* const PSession, CCharEntity* const PCh
     {
         if (quantity < 1 || quantity > PItem->getStackSize()) // Possible exploit
         {
-            ShowExploit("SmallPacket0x085: Player %s trying to sell invalid quantity %u of itemID %u [to VENDOR] ", PChar->GetName(),
+            ShowWarning("SmallPacket0x085: Player %s trying to sell invalid quantity %u of itemID %u [to VENDOR] ", PChar->GetName(),
                         quantity);
             return;
         }
 
         if (PItem->isSubType(ITEM_LOCKED)) // Possible exploit
         {
-            ShowExploit("SmallPacket0x085: Player %s trying to sell %u of a LOCKED item! ID %i [to VENDOR] ", PChar->GetName(), quantity,
+            ShowWarning("SmallPacket0x085: Player %s trying to sell %u of a LOCKED item! ID %i [to VENDOR] ", PChar->GetName(), quantity,
                         PItem->getID());
             return;
         }
@@ -4643,7 +4654,7 @@ void SmallPacket0x085(map_session_data_t* const PSession, CCharEntity* const PCh
 
         charutils::UpdateItem(PChar, LOC_INVENTORY, 0, quantity * PItem->getBasePrice());
         charutils::UpdateItem(PChar, LOC_INVENTORY, slotID, -(int32)quantity);
-        ShowNotice("SmallPacket0x085: Player '%s' sold %u of itemID %u [to VENDOR] ", PChar->GetName(), quantity, itemID);
+        ShowInfo("SmallPacket0x085: Player '%s' sold %u of itemID %u [to VENDOR] ", PChar->GetName(), quantity, itemID);
         PChar->pushPacket(new CMessageStandardPacket(nullptr, itemID, quantity, MsgStd::Sell));
         PChar->pushPacket(new CInventoryFinishPacket());
         PChar->Container->setItem(PChar->Container->getSize() - 1, 0, -1, 0);
@@ -4684,7 +4695,7 @@ void SmallPacket0x096(map_session_data_t* const PSession, CCharEntity* const PCh
         if (PTarget)
         {
             ShowDebug("%s trade request with %s was canceled because %s tried to craft.",
-                  PChar->GetName(), PTarget->GetName(), PChar->GetName());
+                      PChar->GetName(), PTarget->GetName(), PChar->GetName());
 
             PTarget->TradePending.clean();
             PTarget->UContainer->Clean();
@@ -4751,9 +4762,11 @@ void SmallPacket0x0AA(map_session_data_t* const PSession, CCharEntity* const PCh
     TracyZoneScoped;
     uint16     itemID     = data.ref<uint16>(0x04);
     uint8      quantity   = data.ref<uint8>(0x07);
-    uint8      shopSlotID = PChar->PGuildShop->SearchItem(itemID);
-    CItemShop* item       = (CItemShop*)PChar->PGuildShop->GetItem(shopSlotID);
-    CItem*     gil        = PChar->getStorage(LOC_INVENTORY)->GetItem(0);
+
+    if (!PChar->PGuildShop)
+    {
+        return;
+    }
 
     CItem* PItem = itemutils::GetItemPointer(itemID);
     if (PItem == nullptr)
@@ -4761,6 +4774,10 @@ void SmallPacket0x0AA(map_session_data_t* const PSession, CCharEntity* const PCh
         ShowWarning("User '%s' attempting to buy an invalid item from guild vendor!", PChar->GetName());
         return;
     }
+
+    uint8      shopSlotID = PChar->PGuildShop->SearchItem(itemID);
+    CItemShop* item       = (CItemShop*)PChar->PGuildShop->GetItem(shopSlotID);
+    CItem*     gil        = PChar->getStorage(LOC_INVENTORY)->GetItem(0);
 
     // Prevent purchasing larger stacks than the actual stack size in database.
     if (quantity > PItem->getStackSize())
@@ -4777,7 +4794,7 @@ void SmallPacket0x0AA(map_session_data_t* const PSession, CCharEntity* const PCh
             if (SlotID != ERROR_SLOTID)
             {
                 charutils::UpdateItem(PChar, LOC_INVENTORY, 0, -(int32)(item->getBasePrice() * quantity));
-                ShowNotice("SmallPacket0x0AA: Player '%s' purchased %u of itemID %u [from GUILD] ", PChar->GetName(), quantity, itemID);
+                ShowInfo("SmallPacket0x0AA: Player '%s' purchased %u of itemID %u [from GUILD] ", PChar->GetName(), quantity, itemID);
                 PChar->PGuildShop->GetItem(shopSlotID)->setQuantity(PChar->PGuildShop->GetItem(shopSlotID)->getQuantity() - quantity);
                 PChar->pushPacket(
                     new CGuildMenuBuyUpdatePacket(PChar, PChar->PGuildShop->GetItem(PChar->PGuildShop->SearchItem(itemID))->getQuantity(), itemID, quantity));
@@ -4848,7 +4865,7 @@ void SmallPacket0x0AC(map_session_data_t* const PSession, CCharEntity* const PCh
                 if (charutils::UpdateItem(PChar, LOC_INVENTORY, slot, -quantity) == itemID)
                 {
                     charutils::UpdateItem(PChar, LOC_INVENTORY, 0, shopItem->getSellPrice() * quantity);
-                    ShowNotice("SmallPacket0x0AC: Player '%s' sold %u of itemID %u [to GUILD] ", PChar->GetName(), quantity, itemID);
+                    ShowInfo("SmallPacket0x0AC: Player '%s' sold %u of itemID %u [to GUILD] ", PChar->GetName(), quantity, itemID);
                     PChar->PGuildShop->GetItem(shopSlotID)->setQuantity(PChar->PGuildShop->GetItem(shopSlotID)->getQuantity() + quantity);
                     PChar->pushPacket(new CGuildMenuSellUpdatePacket(PChar, PChar->PGuildShop->GetItem(PChar->PGuildShop->SearchItem(itemID))->getQuantity(),
                                                                      itemID, quantity));
@@ -4885,7 +4902,7 @@ void SmallPacket0x0AD(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    if (data.ref<uint8>(0x06) == '!' && !jailutils::InPrison(PChar) && CCommandHandler::call(luautils::lua, PChar, (const int8*)data[7]) == 0)
+    if (data.ref<uint8>(0x06) == '!' && !jailutils::InPrison(PChar) && CCommandHandler::call(lua, PChar, (const int8*)data[7]) == 0)
     {
         // this makes sure a command isn't sent to chat
     }
@@ -4899,7 +4916,7 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             if (data.ref<uint8>(0x04) == MESSAGE_SAY)
             {
-                if (map_config.audit_chat == 1 && map_config.audit_say == 1)
+                if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>("map.AUDIT_SAY"))
                 {
                     char escaped_speaker[16 * 2 + 1];
                     sql->EscapeString(escaped_speaker, (const char*)PChar->GetName());
@@ -4927,7 +4944,7 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
             {
                 case MESSAGE_SAY:
                 {
-                    if (map_config.audit_chat == 1 && map_config.audit_say == 1)
+                    if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>("map.AUDIT_SAY"))
                     {
                         char escaped_speaker[16 * 2 + 1];
                         sql->EscapeString(escaped_speaker, (const char*)PChar->GetName());
@@ -4950,7 +4967,7 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
                     break;
                 case MESSAGE_SHOUT:
                 {
-                    if (map_config.audit_chat == 1 && map_config.audit_shout == 1)
+                    if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>("map.AUDIT_SHOUT"))
                     {
                         char escaped_speaker[16 * 2 + 1];
                         sql->EscapeString(escaped_speaker, (const char*)PChar->GetName());
@@ -4978,7 +4995,7 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
                         message::send(MSG_CHAT_LINKSHELL, packetData, sizeof packetData,
                                       new CChatMessagePacket(PChar, MESSAGE_LINKSHELL, (const char*)data[6]));
 
-                        if (map_config.audit_chat == 1 && map_config.audit_linkshell == 1)
+                        if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>("map.AUDIT_LINKSHELL"))
                         {
                             char escaped_speaker[16 * 2 + 1];
                             sql->EscapeString(escaped_speaker, (const char*)PChar->GetName());
@@ -5012,7 +5029,7 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
                         message::send(MSG_CHAT_LINKSHELL, packetData, sizeof packetData,
                                       new CChatMessagePacket(PChar, MESSAGE_LINKSHELL, (const char*)data[6]));
 
-                        if (map_config.audit_chat == 1 && map_config.audit_linkshell == 1)
+                        if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>("map.AUDIT_LINKSHELL"))
                         {
                             char escaped_speaker[16 * 2 + 1];
                             sql->EscapeString(escaped_speaker, (const char*)PChar->GetName());
@@ -5045,7 +5062,7 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
                         ref<uint32>(packetData, 4) = PChar->id;
                         message::send(MSG_CHAT_PARTY, packetData, sizeof packetData, new CChatMessagePacket(PChar, MESSAGE_PARTY, (const char*)data[6]));
 
-                        if (map_config.audit_chat == 1 && map_config.audit_party == 1)
+                        if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>("map.AUDIT_PARTY"))
                         {
                             char escaped_speaker[16 * 2 + 1];
                             sql->EscapeString(escaped_speaker, (const char*)PChar->GetName());
@@ -5069,8 +5086,7 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
                     {
                         if (gettick() >= PChar->m_LastYell)
                         {
-                            PChar->m_LastYell = gettick() + (map_config.yell_cooldown * 1000);
-                            // ShowDebug(CL_CYAN" LastYell: %u ", PChar->m_LastYell);
+                            PChar->m_LastYell = gettick() + settings::get<uint16>("map.YELL_COOLDOWN") * 1000;
                             int8 packetData[4]{};
                             ref<uint32>(packetData, 0) = PChar->id;
 
@@ -5081,7 +5097,7 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
                             PChar->pushPacket(new CMessageStandardPacket(PChar, 0, MsgStd::WaitLonger));
                         }
 
-                        if (map_config.audit_chat == 1 && map_config.audit_yell == 1)
+                        if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>("map.AUDIT_YELL"))
                         {
                             char escaped_speaker[16 * 2 + 1];
                             sql->EscapeString(escaped_speaker, (const char*)PChar->GetName());
@@ -5115,7 +5131,7 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
 
                         roeutils::event(ROE_EVENT::ROE_UNITY_CHAT, PChar, RoeDatagram("unityMessage", (const char*)data[6]));
 
-                        if (map_config.audit_chat == 1 && map_config.audit_unity == 1)
+                        if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<uint8>("map.AUDIT_UNITY"))
                         {
                             char escaped_speaker[16 * 2 + 1];
                             sql->EscapeString(escaped_speaker, (const char*)PChar->GetName());
@@ -5123,7 +5139,6 @@ void SmallPacket0x0B5(map_session_data_t* const PSession, CCharEntity* const PCh
                             std::string escaped_full_string;
                             escaped_full_string.reserve(strlen((const char*)data[6]) * 2 + 1);
                             sql->EscapeString(escaped_full_string.data(), (const char*)data[6]);
-
 
                             const char* fmtQuery = "INSERT into audit_chat (speaker,type,message,datetime) VALUES('%s','SAY','%s',current_timestamp())";
                             if (sql->Query(fmtQuery, escaped_speaker, escaped_full_string.data()) == SQL_ERROR)
@@ -5172,7 +5187,7 @@ void SmallPacket0x0B6(map_session_data_t* const PSession, CCharEntity* const PCh
 
     message::send(MSG_CHAT_TELL, packetData, RecipientName.length() + 5, new CChatMessagePacket(PChar, MESSAGE_TELL, (const char*)data[21]));
 
-    if (map_config.audit_chat == 1 && map_config.audit_tell == 1)
+    if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<bool>("map.AUDIT_TELL"))
     {
         char escaped_speaker[16 * 2 + 1];
         sql->EscapeString(escaped_speaker, (const char*)PChar->GetName());
@@ -5212,6 +5227,8 @@ void SmallPacket0x0BE(map_session_data_t* const PSession, CCharEntity* const PCh
             {
                 PChar->MeritMode = operation;
                 PChar->pushPacket(new CMenuMeritPacket(PChar));
+                PChar->pushPacket(new CMonipulatorPacket1(PChar));
+                PChar->pushPacket(new CMonipulatorPacket2(PChar));
             }
         }
         break;
@@ -5233,6 +5250,8 @@ void SmallPacket0x0BE(map_session_data_t* const PSession, CCharEntity* const PCh
                             break;
                     }
                     PChar->pushPacket(new CMenuMeritPacket(PChar));
+                    PChar->pushPacket(new CMonipulatorPacket1(PChar));
+                    PChar->pushPacket(new CMonipulatorPacket2(PChar));
                     PChar->pushPacket(new CMeritPointsCategoriesPacket(PChar, merit));
 
                     charutils::SaveCharExp(PChar, PChar->GetMJob());
@@ -5263,10 +5282,10 @@ void SmallPacket0x0BE(map_session_data_t* const PSession, CCharEntity* const PCh
 }
 
 /************************************************************************
-*                                                                        *
-*  Increase Job Point                                                    *
-*                                                                        *
-************************************************************************/
+ *                                                                        *
+ *  Increase Job Point                                                    *
+ *                                                                        *
+ ************************************************************************/
 
 void SmallPacket0x0BF(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
@@ -5354,11 +5373,11 @@ void SmallPacket0x0C4(map_session_data_t* const PSession, CCharEntity* const PCh
             uint32 LinkshellID    = 0;
             uint16 LinkshellColor = data.ref<uint16>(0x04);
 
-            int8   DecodedName[DecodeStringLength];
-            int8   EncodedName[LinkshellStringLength];
+            int8 DecodedName[DecodeStringLength];
+            int8 EncodedName[LinkshellStringLength];
 
-            memset(DecodedName, 0, sizeof(DecodedName));
-            memset(EncodedName, 0, sizeof(EncodedName));
+            memset(&DecodedName, 0, sizeof(DecodedName));
+            memset(&EncodedName, 0, sizeof(EncodedName));
 
             DecodeStringLinkshell(data[12], DecodedName);
             EncodeStringLinkshell(DecodedName, EncodedName);
@@ -5555,7 +5574,7 @@ void SmallPacket0x0DB(map_session_data_t* const PSession, CCharEntity* const PCh
 
     auto oldMenuConfigFlags = PChar->menuConfigFlags.flags;
     auto oldChatFilterFlags = PChar->chatFilterFlags;
-    auto oldLanguages = PChar->search.language;
+    auto oldLanguages       = PChar->search.language;
 
     // Extract the system filter bits and update MenuConfig
     const uint8 systemFilterMask = (NFLAG_SYSTEM_FILTER_H | NFLAG_SYSTEM_FILTER_L) >> 8;
@@ -6035,7 +6054,7 @@ void SmallPacket0x0E7(map_session_data_t* const PSession, CCharEntity* const PCh
 
         if (PChar->PPet == nullptr || (PChar->PPet->m_EcoSystem != ECOSYSTEM::AVATAR && PChar->PPet->m_EcoSystem != ECOSYSTEM::ELEMENTAL))
         {
-            PChar->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_HEALING, 0, 0, map_config.healing_tick_delay, 0));
+            PChar->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_HEALING, 0, 0, settings::get<uint8>("map.HEALING_TICK_DELAY"), 0));
         }
         PChar->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_LEAVEGAME, 0, ExitType, 5, 0));
     }
@@ -6090,7 +6109,7 @@ void SmallPacket0x0E8(map_session_data_t* const PSession, CCharEntity* const PCh
                 {
                     PChar->PPet->PAI->Disengage();
                 }
-                PChar->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_HEALING, 0, 0, map_config.healing_tick_delay, 0));
+                PChar->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_HEALING, 0, 0, settings::get<uint8>("map.HEALING_TICK_DELAY"), 0));
                 return;
             }
             PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 345));
@@ -6277,7 +6296,7 @@ void SmallPacket0x0FA(map_session_data_t* const PSession, CCharEntity* const PCh
 
         // Update installed furniture placement orders
         // First we place the furniture into placed items using the order number as the index
-        std::array<CItemFurnishing*, MAX_CONTAINER_SIZE * 2> placedItems = { nullptr };
+        std::array<CItemFurnishing*, MAX_CONTAINER_SIZE* 2> placedItems = { nullptr };
         for (auto safeContainerId : { LOC_MOGSAFE, LOC_MOGSAFE2 })
         {
             CItemContainer* PContainer = PChar->getStorage(safeContainerId);
@@ -6362,8 +6381,8 @@ void SmallPacket0x0FB(map_session_data_t* const PSession, CCharEntity* const PCh
         return;
     }
 
-    CItemContainer* PItemContainer = PChar->getStorage(containerID);
-    CItemFurnishing* PItem = (CItemFurnishing*)PItemContainer->GetItem(slotID);
+    CItemContainer*  PItemContainer = PChar->getStorage(containerID);
+    CItemFurnishing* PItem          = (CItemFurnishing*)PItemContainer->GetItem(slotID);
 
     if (PItem != nullptr && PItem->getID() == ItemID && PItem->isType(ITEM_FURNISHING))
     {
@@ -6781,7 +6800,8 @@ void SmallPacket0x100(map_session_data_t* const PSession, CCharEntity* const PCh
 
         PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DISPELABLE | EFFECTFLAG_ON_JOBCHANGE);
 
-        PChar->ForParty([](CBattleEntity* PMember) { ((CCharEntity*)PMember)->PLatentEffectContainer->CheckLatentsPartyJobs(); });
+        PChar->ForParty([](CBattleEntity* PMember)
+                        { ((CCharEntity*)PMember)->PLatentEffectContainer->CheckLatentsPartyJobs(); });
 
         PChar->UpdateHealth();
 
@@ -6800,6 +6820,8 @@ void SmallPacket0x100(map_session_data_t* const PSession, CCharEntity* const PCh
         PChar->pushPacket(new CCharJobExtraPacket(PChar, true));
         PChar->pushPacket(new CCharJobExtraPacket(PChar, false));
         PChar->pushPacket(new CMenuMeritPacket(PChar));
+        PChar->pushPacket(new CMonipulatorPacket1(PChar));
+        PChar->pushPacket(new CMonipulatorPacket2(PChar));
         PChar->pushPacket(new CCharSyncPacket(PChar));
     }
 }
@@ -6837,7 +6859,7 @@ void SmallPacket0x102(map_session_data_t* const PSession, CCharEntity* const PCh
                     {
                         if (PChar->m_SetBlueSpells[spellIndex] == 0x00)
                         {
-                            ShowExploit("SmallPacket0x102: Player %s trying to unset BLU spell they don't have set!", PChar->GetName());
+                            ShowWarning("SmallPacket0x102: Player %s trying to unset BLU spell they don't have set!", PChar->GetName());
                             return;
                         }
                         else
@@ -6884,7 +6906,7 @@ void SmallPacket0x102(map_session_data_t* const PSession, CCharEntity* const PCh
 
                     if (mLevel < spell->getJob(PChar->GetMJob()) && sLevel < spell->getJob(PChar->GetSJob()))
                     {
-                        ShowExploit("SmallPacket0x102: Player %s trying to set BLU spell at invalid level!", PChar->GetName());
+                        ShowWarning("SmallPacket0x102: Player %s trying to set BLU spell at invalid level!", PChar->GetName());
                         return;
                     }
 
@@ -7040,7 +7062,7 @@ void SmallPacket0x106(map_session_data_t* const PSession, CCharEntity* const PCh
     if (Quantity < 1)
     {
         // Exploit attempt
-        ShowExploit("Player %s purchasing invalid quantity %u from Player %s bazaar! ", PChar->GetName(), Quantity, PTarget->GetName());
+        ShowWarning("Player %s purchasing invalid quantity %u from Player %s bazaar! ", PChar->GetName(), Quantity, PTarget->GetName());
         return;
     }
 
@@ -7077,7 +7099,7 @@ void SmallPacket0x106(map_session_data_t* const PSession, CCharEntity* const PCh
         if (PCharGil->getQuantity() < PriceWithTax)
         {
             // Exploit attempt
-            ShowExploit("Bazaar purchase exploit attempt by: %s", PChar->GetName());
+            ShowWarning("Bazaar purchase exploit attempt by: %s", PChar->GetName());
             PChar->pushPacket(new CBazaarPurchasePacket(PTarget, false));
             return;
         }
@@ -7261,10 +7283,10 @@ void SmallPacket0x10D(map_session_data_t* const PSession, CCharEntity* const PCh
 }
 
 /************************************************************************
-*                                                                        *
-*  Claim completed eminence record                                       *
-*                                                                        *
-************************************************************************/
+ *                                                                        *
+ *  Claim completed eminence record                                       *
+ *                                                                        *
+ ************************************************************************/
 
 void SmallPacket0x10E(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
@@ -7277,10 +7299,10 @@ void SmallPacket0x10E(map_session_data_t* const PSession, CCharEntity* const PCh
 }
 
 /************************************************************************
-*                                                                        *
-*  Request Currency1 tab                                                  *
-*                                                                        *
-************************************************************************/
+ *                                                                        *
+ *  Request Currency1 tab                                                 *
+ *                                                                        *
+ ************************************************************************/
 
 void SmallPacket0x10F(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
@@ -7290,14 +7312,14 @@ void SmallPacket0x10F(map_session_data_t* const PSession, CCharEntity* const PCh
 
 /************************************************************************
  *                                                                       *
- *  Fishing (New)                                                   *
+ *  Fishing (New)                                                        *
  *                                                                       *
  ************************************************************************/
 
 void SmallPacket0x110(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    if (map_config.fishing_enable == 1)
+    if (settings::get<bool>("map.FISHING_ENABLE"))
     {
         fishingutils::HandleFishingAction(PChar, data);
     }
@@ -7309,7 +7331,7 @@ void SmallPacket0x110(map_session_data_t* const PSession, CCharEntity* const PCh
 
 /************************************************************************
  *                                                                        *
- *  Lock Style Request                                                   *
+ *  Lock Style Request                                                    *
  *                                                                        *
  ************************************************************************/
 
@@ -7467,10 +7489,10 @@ void SmallPacket0x118(map_session_data_t* const PSession, CCharEntity* const PCh
 }
 
 /************************************************************************
-*                                                                        *
-*  Set Job Master Display                                                *
-*                                                                        *
-************************************************************************/
+ *                                                                        *
+ *  Set Job Master Display                                                *
+ *                                                                        *
+ ************************************************************************/
 void SmallPacket0x11B(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     PChar->m_jobMasterDisplay = data.ref<uint8>(0x04) > 0;
@@ -7499,7 +7521,6 @@ void SmallPacket0x11D(map_session_data_t* const PSession, CCharEntity* const PCh
     auto const& extra       = data.ref<uint16>(0x0A);
 
     PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CCharEmotionJumpPacket(PChar, targetIndex, extra));
-
 }
 
 /************************************************************************

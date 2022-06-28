@@ -195,7 +195,6 @@ function utils.conalDamageAdjustment(attacker, target, skill, max_damage, minimu
 
     if conal_angle_power < 0 then
         -- #TODO The below print will be a valid print upon fixing to-do above relating to beam center orgin
-        -- print("Error: conalDamageAdjustment - Mob TP move hit target beyond conal angle: ".. cone_angle)
         conal_angle_power = 0
     end
 
@@ -550,4 +549,24 @@ function utils.mobTeleport(mob, hideDuration, pos, disAnim, reapAnim)
             return
         end
     end)
+end
+
+local ffxiRotConversionFactor = 360.0 / 255.0
+
+function utils.ffxiRotToDegrees(ffxiRot)
+    return ffxiRotConversionFactor * ffxiRot
+end
+
+
+function utils.lateralTranslateWithOriginRotation(origin, translation)
+    local degrees = utils.ffxiRotToDegrees(origin.rot)
+    local rads = math.rad(degrees)
+    local new_coords = {}
+
+    new_coords.x = origin.x + ((math.cos(rads) * translation.x) + (math.sin(rads) * translation.z))
+    new_coords.z = origin.z + ((math.cos(rads) * translation.z) - (math.sin(rads) * translation.x))
+    new_coords.y = origin.y
+    new_coords.rot = origin.rot
+
+    return new_coords
 end

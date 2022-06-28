@@ -8,7 +8,7 @@ local ID = require("scripts/zones/Windurst_Woods/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/titles")
@@ -35,7 +35,7 @@ entity.onTrigger = function(player, npc)
     local job = player:getMainJob()
 
     -- THE FANGED ONE
-    if theFangedOne == QUEST_AVAILABLE and lvl >= xi.settings.ADVANCED_JOB_LEVEL then
+    if theFangedOne == QUEST_AVAILABLE and lvl >= xi.settings.main.ADVANCED_JOB_LEVEL then
         player:startEvent(351)
     elseif theFangedOne == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.OLD_TIGERS_FANG) then
         player:startEvent(352)
@@ -45,7 +45,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(358)
 
     -- SIN HUNTING
-    elseif sinHunting == QUEST_AVAILABLE and job == xi.job.RNG and lvl >= xi.settings.AF1_QUEST_LEVEL then
+    elseif sinHunting == QUEST_AVAILABLE and job == xi.job.RNG and lvl >= xi.settings.main.AF1_QUEST_LEVEL then
         player:startEvent(523) -- start RNG AF1
     elseif sinHuntingCS > 0 and sinHuntingCS < 5 then
         player:startEvent(524) -- during quest RNG AF1
@@ -53,7 +53,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(527) -- complete quest RNG AF1
 
     -- FIRE AND BRIMSTONE
-    elseif sinHunting == QUEST_COMPLETED and job == xi.job.RNG and lvl >= xi.settings.AF2_QUEST_LEVEL and fireAndBrimstone == QUEST_AVAILABLE then
+    elseif sinHunting == QUEST_COMPLETED and job == xi.job.RNG and lvl >= xi.settings.main.AF2_QUEST_LEVEL and fireAndBrimstone == QUEST_AVAILABLE then
         player:startEvent(531) -- start RNG AF2
     elseif fireAndBrimstoneCS > 0 and fireAndBrimstoneCS < 4 then
         player:startEvent(532) -- during RNG AF2
@@ -63,7 +63,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(536, 0, 13360, 1113) -- during second part RNG AF2
 
     -- UNBRIDLED PASSION
-    elseif fireAndBrimstone == QUEST_COMPLETED and job == xi.job.RNG and lvl >= xi.settings.AF3_QUEST_LEVEL and unbridledPassion == QUEST_AVAILABLE then
+    elseif fireAndBrimstone == QUEST_COMPLETED and job == xi.job.RNG and lvl >= xi.settings.main.AF3_QUEST_LEVEL and unbridledPassion == QUEST_AVAILABLE then
         player:startEvent(541, 0, 13360) -- start RNG AF3
     elseif unbridledPassionCS > 0 and unbridledPassionCS < 3 then
         player:startEvent(542)-- during RNG AF3

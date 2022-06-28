@@ -3,7 +3,7 @@
 -----------------------------------
 require("scripts/globals/magic")
 require("scripts/globals/msg")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 local spell_object = {}
@@ -13,7 +13,7 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    local duration = calculateDuration(xi.settings.SPIKE_EFFECT_DURATION, spell:getSkillType(), spell:getSpellGroup(), caster, target)
+    local duration = calculateDuration(xi.settings.main.SPIKE_EFFECT_DURATION, spell:getSkillType(), spell:getSpellGroup(), caster, target)
     local typeEffect = xi.effect.DREAD_SPIKES
     local drainAmount = target:getMaxHP() / 2
 

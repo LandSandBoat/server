@@ -2,7 +2,7 @@
 -- Area: Mhaura
 --  NPC: Zhon Kihshimo
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 

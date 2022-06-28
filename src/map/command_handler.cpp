@@ -21,21 +21,27 @@
 
 #include "command_handler.h"
 
+#include "autotranslate.h"
 #include "common/utils.h"
 #include "entities/charentity.h"
 #include "lua/lua_baseentity.h"
 #include "lua/luautils.h"
-#include "autotranslate.h"
 
 #include <cmath>
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <unordered_map>
 #include <variant>
 #include <vector>
 
 // NOTE: Auto-translate blocks are dealt with as a string of bytes
 using CommandArg = std::variant<bool, int, double, std::string>;
+
+namespace
+{
+    std::unordered_map<std::string, std::string> registeredCommands;
+}
 
 // The below section is a proposed rewrite of commandhandler.
 // It can automatically deduce the types of strings that are passed to it.
@@ -149,11 +155,13 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* com
     TracyZoneScoped;
 
     // On the way out of this function, clear the globals it leaves behind
+    // clang-format off
     ScopeGuard guard([&]()
     {
         lua.set("onTrigger", sol::lua_nil);
         lua.set("cmdprops", sol::lua_nil);
     });
+    // clang-format on
 
     // Before we begin, make sure these globals are cleared (just in case!)
     lua.set("onTrigger", sol::lua_nil);
@@ -180,8 +188,14 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* com
     TracyZoneString(PChar->name);
     TracyZoneIString(commandline);
 
-    auto filename   = fmt::format("./scripts/commands/{}.lua", cmdname.c_str());
-    auto loadResult = lua.safe_script_file(filename);
+    auto filename = fmt::format("./scripts/commands/{}.lua", cmdname.c_str());
+    if (auto maybeRegisteredCommand = registeredCommands.find(cmdname);
+        maybeRegisteredCommand != registeredCommands.end())
+    {
+        filename = (*maybeRegisteredCommand).second;
+    }
+
+    auto loadResult = lua.safe_script_file(filename, &sol::script_pass_on_error);
     if (!loadResult.valid())
     {
         sol::error err = loadResult;
@@ -218,7 +232,7 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* com
     }
     else
     {
-        if (map_config.audit_gm_cmd <= permission && map_config.audit_gm_cmd > 0)
+        if (settings::get<uint8>("map.AUDIT_GM_CMD") <= permission && settings::get<uint8>("map.AUDIT_GM_CMD") > 0)
         {
             std::string name       = PChar->name;
             std::string cmdlinestr = autotranslate::replaceBytes((const char*)commandline);
@@ -309,4 +323,11 @@ int32 CCommandHandler::call(sol::state& lua, CCharEntity* PChar, const int8* com
     }
 
     return 0;
+}
+
+void CCommandHandler::registerCommand(std::string const& commandName, std::string const& path)
+{
+    registeredCommands[commandName] = path;
+    lua["cmdprops"]  = sol::lua_nil;
+    lua["onTrigger"] = sol::lua_nil;
 }

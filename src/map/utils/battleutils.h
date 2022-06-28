@@ -22,10 +22,10 @@
 #ifndef _BATTLEUTILS_H
 #define _BATTLEUTILS_H
 
-#include "common/cbasetypes.h"
 #include "../blue_spell.h"
 #include "../merit.h"
 #include "../status_effect.h"
+#include "common/cbasetypes.h"
 
 #include <list>
 
@@ -161,7 +161,7 @@ namespace battleutils
     bool   TryInterruptSpell(CBattleEntity* PAttacker, CBattleEntity* PDefender, CSpell* PSpell);
     float  GetRangedDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isCritical);
     void   HandleRangedAdditionalEffect(CCharEntity* PAttacker, CBattleEntity* PDefender, apAction_t* Action);
-    uint16 CalculateSpikeDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action, uint16 damageTaken);
+    int32  CalculateSpikeDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action, uint16 damageTaken);
     bool   HandleSpikesDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action, int32 damage);
     bool   HandleParrySpikesDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action, int32 damage);
     bool   HandleSpikesEquip(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action, uint8 damage, SUBEFFECT spikesType, uint8 chance);
@@ -254,7 +254,7 @@ namespace battleutils
     bool   RemoveAmmo(CCharEntity*, int quantity = 1);
     int32  GetMeritValue(CBattleEntity*, MERIT_TYPE);
 
-    int32      GetScaledItemModifier(CBattleEntity*, CItemEquipment*, Mod);
+    int32       GetScaledItemModifier(CBattleEntity*, CItemEquipment*, Mod);
     DAMAGE_TYPE GetSpikesDamageType(SUBEFFECT spikesType);
     DAMAGE_TYPE GetEnspellDamageType(ENSPELL enspellType);
     DAMAGE_TYPE GetRuneEnhancementDamageType(EFFECT runeEffect);
@@ -263,6 +263,7 @@ namespace battleutils
     CBattleEntity* GetCoverAbilityUser(CBattleEntity* PCoverAbilityTarget, CBattleEntity* PMob);
     bool           IsMagicCovered(CCharEntity* PCoverAbilityUser);
     void           ConvertDmgToMP(CBattleEntity* PDefender, int32 damage, bool IsCovered);
+    float          CheckLiementAbsorb(CBattleEntity* PBattleEntity, DAMAGE_TYPE DamageType);
 }; // namespace battleutils
 
 #endif

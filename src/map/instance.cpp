@@ -125,7 +125,7 @@ void CInstance::LoadInstance()
     }
     else
     {
-        ShowFatalError("CZone::LoadInstance: Cannot load instance %u", m_instanceid);
+        ShowCritical("CZone::LoadInstance: Cannot load instance %u", m_instanceid);
         Fail();
     }
 }
@@ -254,7 +254,8 @@ bool CInstance::CharRegistered(CCharEntity* PChar)
 
 void CInstance::ClearEntities()
 {
-    auto clearStates = [](auto& entity) {
+    auto clearStates = [](auto& entity)
+    {
         if (static_cast<CBattleEntity*>(entity.second)->isAlive())
         {
             entity.second->PAI->ClearStateStack();

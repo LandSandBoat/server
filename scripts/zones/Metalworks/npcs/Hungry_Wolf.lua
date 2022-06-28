@@ -6,7 +6,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Metalworks/IDs")
 require("scripts/globals/quests")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
@@ -39,8 +39,8 @@ entity.onEventFinish = function(player, csid, option)
         player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SMOKE_ON_THE_MOUNTAIN)
     elseif (csid == 429) then
         player:tradeComplete()
-        player:addGil(xi.settings.GIL_RATE * 300)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 300)
+        player:addGil(xi.settings.main.GIL_RATE * 300)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 300)
         player:addTitle(xi.title.HOT_DOG)
         if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SMOKE_ON_THE_MOUNTAIN) == QUEST_ACCEPTED) then
             player:addFame(xi.quest.fame_area.BASTOK, 30)

@@ -5,15 +5,13 @@
 local ID = require("scripts/zones/The_Eldieme_Necropolis/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 
 local eldiemeGlobal =
 {
-    --[[..............................................................................................
-        click on any of the intersection gates
-        ..............................................................................................]]
+    -- Click on any of the intersection gates
     gateOnTrigger = function(player, npc)
         if npc:getAnimation() == xi.anim.CLOSE_DOOR then
             if player:hasKeyItem(xi.ki.MAGICKED_ASTROLABE) then
@@ -24,9 +22,7 @@ local eldiemeGlobal =
         end
     end,
 
-    --[[..............................................................................................
-        click on any of the switch plates
-        ..............................................................................................]]
+    -- Click on any of the switch plates
     plateOnTrigger = function(npc)
         -- toggle gates between open and close animations
         -- gates are grouped in groups of five. even numbered groups share one animation, while odd numbered groups share the other.

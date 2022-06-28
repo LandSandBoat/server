@@ -22,6 +22,7 @@ zones[xi.zone.NEWTON_MOVALPOLOS] =
         COME_CLOSER             = 7238, -- H0000! C0mE cL0SEr! C0mE cL0SEr! CAn'T TrAdE fr0m S0 fAr AwAy!
         MINING_IS_POSSIBLE_HERE = 7246, -- Mining is possible here if you have <item>.
         CHEST_UNLOCKED          = 7261, -- You unlock the chest!
+        COLLECTOR_SPAWN         = 7270, -- You gently place the <item> on the ground. Suddenly, you hear the clanging sound of armor approaching. It looks like someone is interested in the <item>...
         SHOWMAN_DECLINE         = 7272, -- ... Me no want that. Thing me want not here! It not being here!!!
         SHOWMAN_TRIGGER         = 7273, -- Hey, you there! Muscles nice. You want fight strong one? It cost you. Give me nice item.
         SHOWMAN_ACCEPT          = 7274, -- Fhungaaa!!! The freshyness, the flavoryness! This very nice item! Good luck, then. Try not die. One...two...four...FIIIIIIGHT!!!
@@ -29,8 +30,14 @@ zones[xi.zone.NEWTON_MOVALPOLOS] =
     },
     mob =
     {
-        MIMIC                = 16826564,
-        BUGBEAR_MATMAN       = 16826570,
+        SWASHSTOX_BEADBLINKER_PH =
+        {
+            [16826507] = 16826517, -- 92.145, 15.500, 66.595
+            [16826514] = 16826510, -- 88.412, 15.421, -19.950
+        },
+        MIMIC                    = 16826564,
+        BUGBEAR_MATMAN           = 16826570,
+        GOBLIN_COLLECTOR         = 16826569,
     },
     npc =
     {

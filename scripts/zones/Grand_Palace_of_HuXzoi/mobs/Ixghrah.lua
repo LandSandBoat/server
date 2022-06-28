@@ -7,24 +7,131 @@ require("scripts/globals/missions")
 -----------------------------------
 local entity = {}
 
+local spellTable =
+{
+    [1161] = { 476, 484 },
+    [1162] = { 473, 481 },
+    [1163] = { 475, 483 },
+    [1164] = { 472, 480 },
+    [1165] = { 471, 479 },
+    [1166] = { 474, 482 },
+    [1167] = { 470, 478 },
+    [1168] = { 469, 477 },
+}
+
 entity.onMobSpawn = function(mob)
-    if (mob:getMod(xi.mod.SLASH_SDT)) then mob:setMod(xi.mod.SLASH_SDT, 1000); end
-    if (mob:getMod(xi.mod.PIERCE_SDT)) then mob:setMod(xi.mod.PIERCE_SDT, 1000); end
-    if (mob:getMod(xi.mod.IMPACT_SDT)) then mob:setMod(xi.mod.IMPACT_SDT, 1000); end
-    if (mob:getMod(xi.mod.HTH_SDT)) then mob:setMod(xi.mod.HTH_SDT, 1000); end
+    mob:setLocalVar("twoHourPer", 50)
+    mob:setLocalVar("canTwoHour", 0)
+    mob:setMobMod(xi.mobMod.MAGIC_COOL, 30)
+    mob:setAnimationSub(0)
+    mob:setAggressive(false)
+    mob:setLocalVar("roamTime", os.time())
+    mob:setLocalVar("form2", math.random(1, 3))
+    local skin = math.random(1161, 1168)
+    mob:setLocalVar("skin", skin)
+    if skin == 1161 then -- Fire
+        mob:setSpellList(spellTable[skin][2])
+        mob:setMod(xi.mod.ICE_RES, 80)
+        mob:setMod(xi.mod.PARALYZERES, 99)
+        mob:setMod(xi.mod.BINDRES, 99)
+        mob:setMod(xi.mod.FIRE_RES, 100)
+        mob:setMod(xi.mod.WATER_RES, -27)
+    elseif skin == 1162 then -- Ice
+        mob:setSpellList(spellTable[skin][2])
+        mob:setMod(xi.mod.WIND_RES, 80)
+        mob:setMod(xi.mod.GRAVITYRES, 99)
+        mob:setMod(xi.mod.SILENCERES, 99)
+        mob:setMod(xi.mod.ICE_RES, 100)
+        mob:setMod(xi.mod.PARALYZERES, 100)
+        mob:setMod(xi.mod.BINDRES, 100)
+        mob:setMod(xi.mod.FIRE_RES, -27)
+    elseif skin == 1163 then -- Wind
+        mob:setSpellList(spellTable[skin][2])
+        mob:setMod(xi.mod.EARTH_RES, 80)
+        mob:setMod(xi.mod.SLOWRES, 99)
+        mob:setMod(xi.mod.WIND_RES, 100)
+        mob:setMod(xi.mod.GRAVITYRES, 100)
+        mob:setMod(xi.mod.SILENCERES, 100)
+        mob:setMod(xi.mod.ICE_RES, -27)
+    elseif skin == 1164 then -- Earth
+        mob:setSpellList(spellTable[skin][2])
+        mob:setMod(xi.mod.THUNDER_RES, 80)
+        mob:setMod(xi.mod.STUNRES, 99)
+        mob:setMod(xi.mod.EARTH_RES, 100)
+        mob:setMod(xi.mod.SLOWRES, 100)
+        mob:setMod(xi.mod.WIND_RES, -27)
+    elseif skin == 1165 then -- Lightning
+        mob:setSpellList(spellTable[skin][2])
+        mob:setMod(xi.mod.WATER_RES, 80)
+        mob:setMod(xi.mod.POISONRES, 99)
+        mob:setMod(xi.mod.THUNDER_RES, 100)
+        mob:setMod(xi.mod.STUNRES, 100)
+        mob:setMod(xi.mod.EARTH_RES, -27)
+    elseif skin == 1166 then -- Water
+        mob:setSpellList(spellTable[skin][2])
+        mob:setMod(xi.mod.FIRE_RES, 80)
+        mob:setMod(xi.mod.WATER_RES, 100)
+        mob:setMod(xi.mod.POISONRES, 100)
+        mob:setMod(xi.mod.THUNDER_RES, -27)
+    elseif skin == 1167 then -- Light
+        mob:setSpellList(spellTable[skin][2])
+        mob:setMod(xi.mod.LIGHT_RES, 100)
+        mob:setMod(xi.mod.LULLABYRES, 100)
+        mob:setMod(xi.mod.DARK_RES, -27)
+    elseif skin == 1168 then -- Dark
+        mob:setSpellList(spellTable[skin][2])
+        mob:setMod(xi.mod.DARK_RES, 100)
+        mob:setMod(xi.mod.SLEEPRES, 100)
+        mob:setMod(xi.mod.LIGHT_RES, -27)
+    end
+    mob:setModelId(1167)
 end
 
 entity.onMobFight = function(mob, target)
     local changeTime = mob:getLocalVar("changeTime")
-
-    if (mob:getBattleTime() - changeTime > 60) then
-        mob:setAnimationSub(math.random(0, 3))
+    local state = mob:getLocalVar("state")
+    local twoHourPer = mob:getLocalVar("twoHourPer")
+    if mob:getBattleTime() - changeTime > 30 then
+        mob:setLocalVar("state", math.random(0, 3))
+        mob:setAnimationSub(state)
         mob:setLocalVar("changeTime", mob:getBattleTime())
+    end
+
+    if
+        mob:getLocalVar("canTwoHour") == 0 and
+        mob:getHPP() < twoHourPer
+    then
+        if mob:getLocalVar("state") == 1 then
+            mob:useMobAbility(694) --invincible
+        elseif mob:getLocalVar("state") == 2 then
+            mob:useMobAbility(688) -- mighty strikes
+        elseif mob:getLocalVar("state") == 0 then
+            mob:useMobAbility(691) -- manafont
+            local skin = mob:getLocalVar("skin")
+            mob:setSpellList(spellTable[skin][1])
+            mob:setLocalVar("delay", mob:getBattleTime())
+            mob:setMobMod(xi.mobMod.MAGIC_COOL, 0)
+        elseif mob:getLocalVar("state") == 3 then
+            mob:useMobAbility(693) -- perfect dodge
+        end
+        mob:setLocalVar("canTwoHour", 1)
+    end
+
+    if
+        not mob:hasStatusEffect(xi.effect.MANAFONT) and --Changing spell list back after manafont is over
+        mob:getLocalVar("canTwoHour") == 1 and
+        mob:getBattleTime() - mob:getLocalVar("delay") > 15 and
+        mob:getLocalVar("state2") == 0
+    then
+        local skin = mob:getLocalVar("skin")
+        mob:setSpellList(spellTable[skin][2])
+        mob:setLocalVar("state2", 1)
+        mob:setMobMod(xi.mobMod.MAGIC_COOL, 30)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
-    if (player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.A_FATE_DECIDED  and player:getCharVar("PromathiaStatus")==1) then
+entity.onMobDeath  = function(mob, player, isKiller)
+    if (player:getCurrentMission(xi.mission.log_id.cop) == xi.mission.id.cop.A_FATE_DECIDED  and player:getCharVar("PromathiaStatus")==1) then
         player:setCharVar("PromathiaStatus", 2)
     end
 end

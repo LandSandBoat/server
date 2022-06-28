@@ -1,7 +1,7 @@
 -----------------------------------
 -- Geomancer Job Utilities
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/ability")
 require("scripts/globals/status")
 require("scripts/globals/spell_data")
@@ -190,7 +190,14 @@ local function getEffectPotency(player, effect)
     -- Potency from a skill level perspective caps out once your combined hand bell skill and geomancy skill reaches 900.
     local geoSkill      = player:getSkillLevel(xi.skill.GEOMANCY)
     local handbellSkill = player:getSkillLevel(xi.skill.HANDBELL)
-    local geomancyMod   = player:getMaxGearMod(xi.mod.GEOMANCY_BONUS)
+    local geomancyMod   = 0
+
+    if player:getObjType() ~= xi.objType.PC then
+        geoSkill      = player:getMod(xi.mod.GEOMANCY_SKILL)
+        geomancyMod   = player:getMod(xi.mod.GEOMANCY_BONUS)
+    else
+        geomancyMod = player:getMaxGearMod(xi.mod.GEOMANCY_BONUS)
+    end
 
     if
         player:getEquipID(xi.slot.RANGED) == 0 or
@@ -375,6 +382,7 @@ xi.job_utils.geomancer.doIndiSpell = function(caster, target, spell)
     if caster:hasStatusEffect(xi.effect.ENTRUST) then
         caster:delStatusEffectSilent(xi.effect.ENTRUST)
     end
+
     return effect
 end
 

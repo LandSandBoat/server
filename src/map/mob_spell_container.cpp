@@ -99,7 +99,8 @@ void CMobSpellContainer::AddSpell(SpellID spellId)
 
 void CMobSpellContainer::RemoveSpell(SpellID spellId)
 {
-    auto findAndRemove = [](std::vector<SpellID>& list, SpellID id) { list.erase(std::remove(list.begin(), list.end(), id), list.end()); };
+    auto findAndRemove = [](std::vector<SpellID>& list, SpellID id)
+    { list.erase(std::remove(list.begin(), list.end(), id), list.end()); };
 
     findAndRemove(m_gaList, spellId);
     findAndRemove(m_damageList, spellId);
@@ -119,7 +120,7 @@ std::optional<SpellID> CMobSpellContainer::GetAvailable(SpellID spellId)
                     spell->getSkillType() == SKILL_NINJUTSU ||
                     spell->getSkillType() == SKILL_SINGING ||
                     spell->getSkillType() == SKILL_WIND_INSTRUMENT ||
-                    spell->getSkillType() == SKILL_STRING_INSTRUMENT||
+                    spell->getSkillType() == SKILL_STRING_INSTRUMENT ||
                     spell->getSkillType() == SKILL_GEOMANCY;
     bool isNotInRecast = !m_PMob->PRecastContainer->Has(RECAST_MAGIC, static_cast<uint16>(spellId));
 
@@ -170,20 +171,171 @@ std::optional<SpellID> CMobSpellContainer::GetBestAvailable(SPELLFAMILY family)
     return (!matches.empty()) ? std::optional<SpellID>{ matches.back() } : std::nullopt;
 }
 
+std::optional<SpellID> CMobSpellContainer::GetBestIndiSpell(CBattleEntity* PTarget)
+{
+    auto mJob          = PTarget->GetMJob();
+    auto mTarget       = PTarget->GetBattleTarget();
+    auto hitrate       = battleutils::GetHitRate(PTarget, mTarget);
+    bool accBuffNeeded = hitrate < 65 ? true : false;
+    auto mInt          = PTarget->getMod(Mod::INT);
+    auto tInt          = mTarget->getMod(Mod::INT);
+    auto intDiff       = mInt - tInt + 10;
+    auto macc          = PTarget->getMod(Mod::MACC);
+    auto tMaeva        = mTarget->getMod(Mod::MEVA);
+    auto mSkill        = PTarget->GetSkill(SKILL_ELEMENTAL_MAGIC);
+    auto maccFromInt   = mInt;
+
+    if (mInt > tInt + 10)
+    {
+        maccFromInt = tInt + ((mInt - intDiff) * 0.5);
+    }
+
+    auto totalMacc      = mSkill + maccFromInt + macc;
+    auto magicHitRate   = float(totalMacc - tMaeva) / 10;
+    bool mAccBuffNeeded = magicHitRate < 10 ? true : false;
+
+    std::optional<SpellID> choice    = std::nullopt;
+    std::optional<SpellID> subChoice = SpellID::Indi_Regen;
+
+    switch (mJob)
+    {
+        case JOB_WAR:
+        case JOB_MNK:
+        case JOB_THF:
+        case JOB_DRK:
+        case JOB_BST:
+        case JOB_RNG:
+        case JOB_SAM:
+        case JOB_DRG:
+        case JOB_BLU:
+        case JOB_COR:
+        case JOB_PUP:
+        case JOB_DNC:
+        {
+            if (accBuffNeeded)
+            {
+                choice = SpellID::Indi_Precision;
+            }
+            else
+            {
+                choice = SpellID::Indi_Fury;
+            }
+            subChoice = SpellID::Indi_Regen;
+            break;
+        }
+        case JOB_WHM:
+        case JOB_BRD:
+        case JOB_SMN:
+        case JOB_GEO:
+        {
+            choice    = SpellID::Indi_Refresh;
+            subChoice = SpellID::Indi_Refresh;
+            break;
+        }
+        case JOB_BLM:
+        case JOB_RDM:
+        case JOB_SCH:
+        {
+            if (mAccBuffNeeded)
+            {
+                choice = SpellID::Indi_Focus;
+            }
+            else
+            {
+                choice = SpellID::Indi_Acumen;
+            }
+            subChoice = SpellID::Indi_Refresh;
+            break;
+        }
+        case JOB_PLD:
+        case JOB_RUN:
+        case JOB_NIN:
+        {
+            choice    = SpellID::Indi_Haste;
+            subChoice = SpellID::Indi_Regen;
+            break;
+        }
+        default:
+            break;
+    }
+
+    if (PTarget->GetMLevel() < 20)
+    {
+        choice = std::nullopt;
+    }
+    else if (PTarget->GetMLevel() < 93)
+    {
+        choice = subChoice;
+        if (subChoice == SpellID::Indi_Refresh && PTarget->GetMLevel() < 30)
+        {
+            choice = SpellID::Indi_Regen;
+        }
+    }
+
+    return choice;
+}
+
+std::optional<SpellID> CMobSpellContainer::GetBestEntrustedSpell(CBattleEntity* PTarget)
+{
+    auto                   mastersJob = PTarget->GetMJob();
+    std::optional<SpellID> choice     = std::nullopt;
+
+    switch (mastersJob)
+    {
+        case JOB_WAR:
+        case JOB_MNK:
+        case JOB_THF:
+        case JOB_DRK:
+        case JOB_BST:
+        case JOB_RNG:
+        case JOB_SAM:
+        case JOB_DRG:
+        case JOB_BLU:
+        case JOB_COR:
+        case JOB_PUP:
+        case JOB_DNC:
+            choice = SpellID::Indi_Frailty;
+            break;
+        case JOB_WHM:
+        case JOB_BRD:
+        case JOB_SMN:
+            choice = SpellID::Indi_Acumen;
+            break;
+        case JOB_BLM:
+        case JOB_RDM:
+        case JOB_SCH:
+        case JOB_PLD:
+        case JOB_RUN:
+           choice = SpellID::Indi_Refresh;
+            break;
+        case JOB_NIN:
+            choice = SpellID::Indi_Regen;
+            break;
+        case JOB_GEO:
+            break;
+        default:
+            break;
+    }
+
+    return choice;
+}
+
 std::optional<SpellID> CMobSpellContainer::GetBestAgainstTargetWeakness(CBattleEntity* PTarget)
 {
     // Look up what the target has the _least resistance to_:
+    // clang-format off
     std::vector<int16> resistances
     {
-         PTarget->getMod(Mod::FIRE_RES),
-         PTarget->getMod(Mod::ICE_RES),
-         PTarget->getMod(Mod::WIND_RES),
-         PTarget->getMod(Mod::EARTH_RES),
-         PTarget->getMod(Mod::THUNDER_RES),
-         PTarget->getMod(Mod::WATER_RES),
-         PTarget->getMod(Mod::LIGHT_RES),
-         PTarget->getMod(Mod::DARK_RES),
+        PTarget->getMod(Mod::FIRE_RES),
+        PTarget->getMod(Mod::ICE_RES),
+        PTarget->getMod(Mod::WIND_RES),
+        PTarget->getMod(Mod::EARTH_RES),
+        PTarget->getMod(Mod::THUNDER_RES),
+        PTarget->getMod(Mod::WATER_RES),
+        PTarget->getMod(Mod::LIGHT_RES),
+        PTarget->getMod(Mod::DARK_RES),
     };
+    // clang-format on
 
     std::size_t weakestIndex = std::distance(resistances.begin(), std::min_element(resistances.begin(), resistances.end()));
 
@@ -235,6 +387,106 @@ std::optional<SpellID> CMobSpellContainer::GetBestAgainstTargetWeakness(CBattleE
 
     // If all else fails, just cast the best you have!
     return !choice ? GetBestAvailable(SPELLFAMILY_NONE) : choice;
+}
+
+std::optional<SpellID> CMobSpellContainer::GetStormDay()
+{
+    std::optional<SpellID> choice = std::nullopt;
+    std::size_t dotwIndex = battleutils::GetDayElement();
+    switch (dotwIndex)
+    {
+        case ELEMENT_FIRE:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_FIRESTORM);
+            break;
+        }
+        case ELEMENT_ICE:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_HAILSTORM);
+            break;
+        }
+        case ELEMENT_WIND:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_WINDSTORM);
+            break;
+        }
+        case ELEMENT_EARTH:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_SANDSTORM);
+            break;
+        }
+        case ELEMENT_THUNDER:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_THUNDERSTORM);
+            break;
+        }
+        case ELEMENT_WATER:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_RAINSTORM);
+            break;
+        }
+        case ELEMENT_LIGHT:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_AURORASTORM);
+            break;
+        }
+        case ELEMENT_DARK:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_VOIDSTORM);
+            break;
+        }
+    }
+    return choice;
+}
+
+std::optional<SpellID> CMobSpellContainer::GetHelixDay()
+{
+    std::optional<SpellID> choice = std::nullopt;
+    std::size_t dotwIndex = battleutils::GetDayElement();
+    switch (dotwIndex)
+    {
+        case ELEMENT_FIRE:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_PYROHELIX);
+            break;
+        }
+        case ELEMENT_ICE:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_CRYOHELIX);
+            break;
+        }
+        case ELEMENT_WIND:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_ANEMOHELIX);
+            break;
+        }
+        case ELEMENT_EARTH:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_GEOHELIX);
+            break;
+        }
+        case ELEMENT_THUNDER:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_IONOHELIX);
+            break;
+        }
+        case ELEMENT_WATER:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_HYDROHELIX);
+            break;
+        }
+        case ELEMENT_LIGHT:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_LUMINOHELIX);
+            break;
+        }
+        case ELEMENT_DARK:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_NOCTOHELIX);
+            break;
+        }
+    }
+    return choice;
 }
 
 bool CMobSpellContainer::HasSpells() const
