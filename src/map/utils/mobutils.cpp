@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -135,54 +135,25 @@ namespace mobutils
      *                                                                       *
      ************************************************************************/
 
-    uint16 GetBaseToRank(CMobEntity * PMob, uint8 rank, uint16 lvl)
+    uint16 GetBaseToRank(uint8 rank, uint16 lvl)
     {
-        bool isNM = PMob->m_Type & MOBTYPE_NOTORIOUS && !PMob->isInDynamis();
-        bool isEventMob = PMob->m_Type & MOBTYPE_EVENT && !PMob->isInDynamis();
-        bool isBattlefieldMob = PMob->m_Type & MOBTYPE_BATTLEFIELD && !PMob->isInDynamis();
-        bool isDynamisNM = PMob->isInDynamis() && PMob->getMobMod(MOBMOD_CHECK_AS_NM) > 1;
-        
-        if (isNM || isEventMob || isBattlefieldMob || isDynamisNM) // NMs, Event, and Battlefield Mobs
+        switch (rank)
         {
-            switch (rank)
-            {
-                case 1:
-                    return (5 + ((lvl - 1) * 64) / 100); // A
-                case 2:
-                    return (4 + ((lvl - 1) * 59) / 100); // B
-                case 3:
-                    return (4 + ((lvl - 1) * 54) / 100); // C
-                case 4:
-                    return (3 + ((lvl - 1) * 47) / 100); // D
-                case 5:
-                    return (3 + ((lvl - 1) * 43) / 100); // E
-                case 6:
-                    return (2 + ((lvl - 1) * 42) / 100); // F
-                case 7:
-                    return (2 + ((lvl - 1) * 39) / 100); // G
-            }
+            case 1:
+                return (5 + ((lvl - 1) * 50) / 100); // A
+            case 2:
+                return (4 + ((lvl - 1) * 45) / 100); // B
+            case 3:
+                return (4 + ((lvl - 1) * 40) / 100); // C
+            case 4:
+                return (3 + ((lvl - 1) * 35) / 100); // D
+            case 5:
+                return (3 + ((lvl - 1) * 30) / 100); // E
+            case 6:
+                return (2 + ((lvl - 1) * 25) / 100); // F
+            case 7:
+                return (2 + ((lvl - 1) * 20) / 100); // G
         }
-        else // Normal Mobs
-        {
-            switch (rank)
-            {
-                case 1:
-                    return (5 + ((lvl - 1) * 50) / 100); // A
-                case 2:
-                    return (4 + ((lvl - 1) * 45) / 100); // B
-                case 3:
-                    return (4 + ((lvl - 1) * 40) / 100); // C
-                case 4:
-                    return (3 + ((lvl - 1) * 35) / 100); // D
-                case 5:
-                    return (3 + ((lvl - 1) * 30) / 100); // E
-                case 6:
-                    return (2 + ((lvl - 1) * 25) / 100); // F
-                case 7:
-                    return (2 + ((lvl - 1) * 20) / 100); // G
-            }
-        }
-
         return 0;
     }
 
@@ -422,29 +393,29 @@ namespace mobutils
             PMob->m_dualWield = true;
         }
 
-        uint16 fSTR = GetBaseToRank(PMob, PMob->strRank, mLvl);
-        uint16 fDEX = GetBaseToRank(PMob, PMob->dexRank, mLvl);
-        uint16 fVIT = GetBaseToRank(PMob, PMob->vitRank, mLvl);
-        uint16 fAGI = GetBaseToRank(PMob, PMob->agiRank, mLvl);
-        uint16 fINT = GetBaseToRank(PMob, PMob->intRank, mLvl);
-        uint16 fMND = GetBaseToRank(PMob, PMob->mndRank, mLvl);
-        uint16 fCHR = GetBaseToRank(PMob, PMob->chrRank, mLvl);
+        uint16 fSTR = GetBaseToRank(PMob->strRank, mLvl);
+        uint16 fDEX = GetBaseToRank(PMob->dexRank, mLvl);
+        uint16 fVIT = GetBaseToRank(PMob->vitRank, mLvl);
+        uint16 fAGI = GetBaseToRank(PMob->agiRank, mLvl);
+        uint16 fINT = GetBaseToRank(PMob->intRank, mLvl);
+        uint16 fMND = GetBaseToRank(PMob->mndRank, mLvl);
+        uint16 fCHR = GetBaseToRank(PMob->chrRank, mLvl);
 
-        uint16 mSTR = GetBaseToRank(PMob, grade::GetJobGrade(PMob->GetMJob(), 2), mLvl);
-        uint16 mDEX = GetBaseToRank(PMob, grade::GetJobGrade(PMob->GetMJob(), 3), mLvl);
-        uint16 mVIT = GetBaseToRank(PMob, grade::GetJobGrade(PMob->GetMJob(), 4), mLvl);
-        uint16 mAGI = GetBaseToRank(PMob, grade::GetJobGrade(PMob->GetMJob(), 5), mLvl);
-        uint16 mINT = GetBaseToRank(PMob, grade::GetJobGrade(PMob->GetMJob(), 6), mLvl);
-        uint16 mMND = GetBaseToRank(PMob, grade::GetJobGrade(PMob->GetMJob(), 7), mLvl);
-        uint16 mCHR = GetBaseToRank(PMob, grade::GetJobGrade(PMob->GetMJob(), 8), mLvl);
+        uint16 mSTR = GetBaseToRank(grade::GetJobGrade(PMob->GetMJob(), 2), mLvl);
+        uint16 mDEX = GetBaseToRank(grade::GetJobGrade(PMob->GetMJob(), 3), mLvl);
+        uint16 mVIT = GetBaseToRank(grade::GetJobGrade(PMob->GetMJob(), 4), mLvl);
+        uint16 mAGI = GetBaseToRank(grade::GetJobGrade(PMob->GetMJob(), 5), mLvl);
+        uint16 mINT = GetBaseToRank(grade::GetJobGrade(PMob->GetMJob(), 6), mLvl);
+        uint16 mMND = GetBaseToRank(grade::GetJobGrade(PMob->GetMJob(), 7), mLvl);
+        uint16 mCHR = GetBaseToRank(grade::GetJobGrade(PMob->GetMJob(), 8), mLvl);
 
-        uint16 sSTR = GetBaseToRank(PMob, grade::GetJobGrade(PMob->GetSJob(), 2), PMob->GetSLevel());
-        uint16 sDEX = GetBaseToRank(PMob, grade::GetJobGrade(PMob->GetSJob(), 3), PMob->GetSLevel());
-        uint16 sVIT = GetBaseToRank(PMob, grade::GetJobGrade(PMob->GetSJob(), 4), PMob->GetSLevel());
-        uint16 sAGI = GetBaseToRank(PMob, grade::GetJobGrade(PMob->GetSJob(), 5), PMob->GetSLevel());
-        uint16 sINT = GetBaseToRank(PMob, grade::GetJobGrade(PMob->GetSJob(), 6), PMob->GetSLevel());
-        uint16 sMND = GetBaseToRank(PMob, grade::GetJobGrade(PMob->GetSJob(), 7), PMob->GetSLevel());
-        uint16 sCHR = GetBaseToRank(PMob, grade::GetJobGrade(PMob->GetSJob(), 8), PMob->GetSLevel());
+        uint16 sSTR = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 2), PMob->GetSLevel());
+        uint16 sDEX = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 3), PMob->GetSLevel());
+        uint16 sVIT = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 4), PMob->GetSLevel());
+        uint16 sAGI = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 5), PMob->GetSLevel());
+        uint16 sINT = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 6), PMob->GetSLevel());
+        uint16 sMND = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 7), PMob->GetSLevel());
+        uint16 sCHR = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 8), PMob->GetSLevel());
 
         // As per conversation with Jimmayus, all mobs at any level get bonus stats from subjobs.
         // From lvl 45 onwards, 1/2. Before lvl 30, 1/4. In between, the value gets progresively higher, from 1/4 at 30 to 1/2 at 44.
