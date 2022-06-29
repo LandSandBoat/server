@@ -8,8 +8,10 @@ local entity = {}
 -- TODO INITIAL COMMIT Just put here so players cannot run through the NM's 
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
-    mob:addMod(xi.mod.SLEEPRES, 100)
-    mob:addMod(xi.mod.BINDRES, 100)
+    mob:addMod(xi.mod.SLEEPRES, 10000)
+    mob:addMod(xi.mod.BINDRES, 10000)
+	mob:setMod(xi.mod.GRAVITYRES, 10000)
+	mob:setMod(xi.mod.SILENCERES, 10000)
     mob:addMod(xi.mod.ATT, 25)
     mob:addMod(xi.mod.MDEF, 50)
     mob:setMod(xi.mod.EARTH_RES, 25)
@@ -35,7 +37,7 @@ entity.onMobSpawn = function(mob)
     mob:addStatusEffect(xi.effect.REGEN, 5, 3, 0)
     mob:addMod(xi.mod.MOVE, 12)
     mob:setAnimationSub(0)
-    mob:setMod(xi.mod.LULLABYRES, 100)
+    mob:setMod(xi.mod.LULLABYRES, 10000)
     mob:setMod(xi.mod.FASTCAST, 10)
 end
 

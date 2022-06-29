@@ -8,9 +8,11 @@ mixins = {require("scripts/mixins/rage")}
 local entity = {}
 -- TODO INITIAL COMMIT Just put here so players cannot run through the NM's 
 entity.onMobSpawn = function(mob)
-    mob:addMod(xi.mod.SLEEPRES, 100)
-    mob:setMod(xi.mod.LULLABYRES, 100)
-    mob:addMod(xi.mod.BINDRES, 100)
+    mob:setMod(xi.mod.SLEEPRES, 10000)
+    mob:setMod(xi.mod.LULLABYRES, 10000)
+    mob:addMod(xi.mod.BINDRES, 10000)
+	mob:setMod(xi.mod.GRAVITYRES, 10000)
+	mob:setMod(xi.mod.SILENCERES, 10000)
     mob:addMod(xi.mod.ATT, 25)
     mob:setMod(xi.mod.EARTH_RES, 25)
     mob:setMod(xi.mod.DARK_RES, 25)
