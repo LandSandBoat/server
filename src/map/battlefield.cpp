@@ -253,10 +253,10 @@ void CBattlefield::ApplyLevelRestrictions(CCharEntity* PChar) const
 
     if (cap > 0)
     {
-        cap += map_config.Battle_cap_tweak; // We wait till here to do this because we don't want to modify uncapped battles.
+        cap += settings::get<int8>("map.BATTLE_CAP_TWEAK"); // We wait till here to do this because we don't want to modify uncapped battles.
 
         // Check if it's a mission and if config setting applies.
-        if (map_config.lv_cap_mission_bcnm == 0 && m_isMission == 1)
+        if (!settings::get<bool>("map.LV_CAP_MISSION_BCNM") && m_isMission == 1)
         {
             cap = luautils::GetSettingsVariable("MAX_LEVEL"); // Cap to server max level to strip buffs - this is the retail diff between uncapped and capped to max lv.
         }

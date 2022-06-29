@@ -550,8 +550,8 @@ namespace message
             }
             case MSG_LUA_FUNCTION:
             {
-                auto str    = std::string((const char*)extra.data() + 4);
-                auto result = luautils::lua.safe_script(str);
+                auto str = std::string((const char*)extra.data() + 4);
+                auto result = lua.safe_script(str);
                 if (!result.valid())
                 {
                     sol::error err = result;
@@ -625,6 +625,11 @@ namespace message
         }
     }
 
+    void init()
+    {
+        init(settings::get<std::string>("network.ZMQ_IP").c_str(), settings::get<uint16>("network.ZMQ_PORT"));
+    }
+
     void init(const char* chatIp, uint16 chatPort)
     {
         TracyZoneScoped;
@@ -662,7 +667,7 @@ namespace message
         }
         catch (zmq::error_t& err)
         {
-            ShowFatalError("Message: Unable to connect chat socket: %s", err.what());
+            ShowCritical("Message: Unable to connect chat socket: %s", err.what());
         }
     }
 

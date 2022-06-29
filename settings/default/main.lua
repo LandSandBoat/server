@@ -1,18 +1,29 @@
 -----------------------------------
--- GLOBAL SETTINGS
+-- MAIN SETTINGS
 -----------------------------------
--- This is to allow server operators to further customize their servers.  As more features are added to the server, the list will surely expand.
--- Anything scripted can be customized with proper script editing.
-
--- PLEASE REQUIRE THIS SCRIPT IN ANY SCRIPTS USING SETTINGS: ADD THIS LINE TO THE TOP!!!!
--- require("scripts/settings/main")
--- With this script added to yours, you can pull variables from it!!
+-- All settings are attached to the `xi.settings` object. This is published globally, and be accessed from C++ and any script.
+--
+-- This file is concerned mainly with content, balance, and gameplay tweaking.
 -----------------------------------
 
 xi = xi or {}
+xi.settings = xi.settings or {}
 
-xi.settings =
+xi.settings.main =
 {
+    -- Server name (not longer than 15 characters)
+    SERVER_NAME = "Nameless",
+
+    SERVER_MESSAGE =
+        "Please visit https://github.com/LandSandBoat/server for the latest information on the project.\n" ..
+        "Thank you, and we hope you enjoy sailing the sands!",
+
+    -- Setting to lock content more accurately to the expansions defined below.
+    -- This generally results in a more accurate presentation of your selected expansions,
+    -- as well as a less confusing player experience for things that are disabled (things that are disabled are not loaded).
+    -- This feature correlates to the content_tag column in the SQL files.
+    RESTRICT_CONTENT = 0,
+
     -- Enable Expansion (1 = Enabled, 0 = Disabled)
     ENABLE_COP       = 1,
     ENABLE_TOAU      = 1,
@@ -34,7 +45,7 @@ xi.settings =
     GOV_REWARD_ALLIANCE   = 1, -- Allow Grounds of Valor rewards while being a member of an alliance. (default retail behavior: 1)
 
     -- Records of Eminence
-    ENABLE_ROE            = 1,
+    ENABLE_ROE            = 1, -- Enable Records of Eminence
     ENABLE_ROE_TIMED      = 1, -- Enable 4-hour timed records
     ENABLE_EXCHANGE_LIMIT = 1, -- Enable Maximum limit of sparks spent per Week (default retail behavior: 1)
 
@@ -69,12 +80,6 @@ xi.settings =
     -- This bonus will be added to players lights apon entering abyssea, it is mainly used during events
     -- recomended amount 0 - 100, some lights will cap at 255 while others are less, these are capped automatically
     ABYSSEA_BONUSLIGHT_AMOUNT = 0,
-
-    -- Setting to lock content more accurately to the content you have defined above
-    -- This generally results in a more accurate presentation of your selected expansions
-    -- as well as a less confusing player experience for things that are disabled (things that are disabled are not loaded)
-    -- This feature correlates to the content_tag column in the SQL files
-    RESTRICT_CONTENT = 0,
 
     -- CHARACTER CONFIG
     INITIAL_LEVEL_CAP              = 50, -- The initial level cap for new players.  There seems to be a hardcap of 255.
@@ -125,7 +130,7 @@ xi.settings =
     HEALING_TP_CHANGE       = -100, -- Change in TP for each healing tick. Default is -100
 
     -- SE implemented coffer/chest illusion time in order to prevent coffer farming. No-one in the same area can open a chest or coffer for loot (gil, gems & items)
-    -- till a random time between MIN_ILLSION_TIME and MAX_ILLUSION_TIME. During this time players can loot keyitem and item related to quests (AF, maps, etc.)
+    -- till a random time between MIN_ILLSION_TIME and MAX_ILLUSION_TIME. During this time players can loot keyitem and item related to quests (AF, maps... etc.)
     COFFER_MAX_ILLUSION_TIME = 3600,  -- 1 hour
     COFFER_MIN_ILLUSION_TIME = 1800,  -- 30 minutes
     CHEST_MAX_ILLUSION_TIME  = 3600,  -- 1 hour

@@ -4,7 +4,7 @@
 --  Involved in quest: Toraimarai Turmoil
 -----------------------------------
 require("scripts/globals/quests")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}

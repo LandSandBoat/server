@@ -7,7 +7,7 @@ local ID = require("scripts/zones/The_Shrine_of_RuAvitau/IDs")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
 require("scripts/globals/keyitems")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 
@@ -44,7 +44,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(56, 917, 1408, 1550)
     elseif (dmStatus == QUEST_ACCEPTED and divineStatus >= 2) then -- CS when player has completed Divine might, award earring
         player:startEvent(55, 14739, 14740, 14741, 14742, 14743)
-    elseif (dmStatus == QUEST_COMPLETED and dmEarrings < xi.settings.NUMBER_OF_DM_EARRINGS and dmRepeat ~= QUEST_ACCEPTED) then -- You threw away old Earring, start the repeat quest
+    elseif (dmStatus == QUEST_COMPLETED and dmEarrings < xi.settings.main.NUMBER_OF_DM_EARRINGS and dmRepeat ~= QUEST_ACCEPTED) then -- You threw away old Earring, start the repeat quest
         player:startEvent(57, player:getCharVar("DM_Earring"))
     elseif (dmRepeat == QUEST_ACCEPTED and divineStatus < 2) then
         if (moonOre == false) then

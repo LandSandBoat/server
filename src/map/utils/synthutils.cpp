@@ -444,7 +444,7 @@ namespace synthutils
             int16 baseDiff = PChar->CraftContainer->getQuantity(skillID - 40) - charSkill / 10; // the 5 lvl difference rule for breaks does NOT consider the effects of image support/gear
 
             // We don't Skill Up if over 10 levels above synth skill. (Or at AND above synth skill in era)
-            if ((map_config.craft_modern_system == 1 && (baseDiff <= -11)) || (map_config.craft_modern_system == 0 && (baseDiff <= 0)))
+            if ((settings::get<bool>("map.CRAFT_MODERN_SYSTEM") && (baseDiff <= -11)) || (!settings::get<bool>("map.CRAFT_MODERN_SYSTEM") && (baseDiff <= 0)))
             {
                 continue; // Break current loop iteration.
             }
@@ -458,20 +458,22 @@ namespace synthutils
             // Section 2: Skill up equations and penalties
             double skillUpChance = 0;
 
-            if (map_config.craft_modern_system == 1)
+            double craftChanceMultipler = settings::get<double>("map.CRAFT_AMOUNT_MULTIPLER");
+
+            if (settings::get<bool>("map.CRAFT_MODERN_SYSTEM"))
             {
                 if (baseDiff > 0)
                 {
-                    skillUpChance = (double)baseDiff * map_config.craft_chance_multiplier * (3 - (log(1.2 + charSkill / 100))) / 5; // Original skill up equation with "x2 chance" applied.
+                    skillUpChance = (double)baseDiff * craftChanceMultipler * (3 - (log(1.2 + charSkill / 100))) / 5; // Original skill up equation with "x2 chance" applied.
                 }
                 else
                 {
-                    skillUpChance = map_config.craft_chance_multiplier * (3 - (log(1.2 + charSkill / 100))) / (6 - baseDiff); // Equation used when over cap.
+                    skillUpChance = craftChanceMultipler * (3 - (log(1.2 + charSkill / 100))) / (6 - baseDiff); // Equation used when over cap.
                 }
             }
             else
             {
-                skillUpChance = (double)baseDiff * map_config.craft_chance_multiplier * (3 - (log(1.2 + charSkill / 100))) / 10; // Original skill up equation
+                skillUpChance = (double)baseDiff * craftChanceMultipler * (3 - (log(1.2 + charSkill / 100))) / 10; // Original skill up equation
             }
 
             // Apply synthesis skill gain rate modifier before synthesis fail modifier
@@ -564,9 +566,9 @@ namespace synthutils
                 }
 
                 // Do skill amount multiplier
-                if (map_config.craft_amount_multiplier > 1)
+                if (settings::get<uint8>("map.CRAFT_AMOUNT_MULTIPLER") > 1)
                 {
-                    skillUpAmount += skillUpAmount * map_config.craft_amount_multiplier;
+                    skillUpAmount += skillUpAmount * settings::get<uint8>("map.CRAFT_AMOUNT_MULTIPLER");
                     if (skillUpAmount > 9)
                     {
                         skillUpAmount = 9;
@@ -580,17 +582,18 @@ namespace synthutils
                 }
 
                 // Section 4: Spezialization System (Craft delevel system over certain point)
+                uint16 craftCommonCap    = settings::get<uint16>("map.CRAFT_COMMON_CAP");
                 uint16 skillCumulation   = skillUpAmount;
                 uint8  skillHighest      = skillID; // Default to lowering current skill in use, since we have to lower something if it's going past the limit... (AKA, badly configurated server)
-                uint16 skillHighestValue = map_config.craft_common_cap;
+                uint16 skillHighestValue = settings::get<uint16>("map.CRAFT_COMMON_CAP");
 
-                if ((charSkill + skillUpAmount) > map_config.craft_common_cap) // If server is using the specialization system
+                if ((charSkill + skillUpAmount) > craftCommonCap) // If server is using the specialization system
                 {
                     for (uint8 i = SKILL_WOODWORKING; i <= SKILL_COOKING; i++) // Cycle through all skills
                     {
-                        if (PChar->RealSkills.skill[i] > map_config.craft_common_cap) // If the skill being checked is above the cap from wich spezialitation points start counting.
+                        if (PChar->RealSkills.skill[i] > craftCommonCap) // If the skill being checked is above the cap from wich spezialitation points start counting.
                         {
-                            skillCumulation += (PChar->RealSkills.skill[i] - map_config.craft_common_cap); // Add to the ammount of specialization points in use.
+                            skillCumulation += (PChar->RealSkills.skill[i] - craftCommonCap); // Add to the ammount of specialization points in use.
 
                             if (skillID != i && PChar->RealSkills.skill[i] > skillHighestValue) // Set the ID of the highest craft UNLESS it's the craft currently in use and if it's the highest skill.
                             {
@@ -617,7 +620,7 @@ namespace synthutils
                 charutils::SaveCharSkills(PChar, skillID);
 
                 // Skill Up removal if using spezialization system
-                if (skillCumulation > map_config.craft_specialization_points)
+                if (skillCumulation > settings::get<uint16>("map.CRAFT_SPECIALIZATION_POINTS"))
                 {
                     PChar->RealSkills.skill[skillHighest] -= skillUpAmount;
                     PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, skillHighest, skillUpAmount, 310));
@@ -857,7 +860,7 @@ namespace synthutils
     int32 doSynthResult(CCharEntity* PChar)
     {
         uint8 m_synthResult = PChar->CraftContainer->getQuantity(0);
-        if (map_config.anticheat_enabled)
+        if (settings::get<bool>("map.ANTICHEAT_ENABLED"))
         {
             std::chrono::duration animationDuration = server_clock::now() - PChar->m_LastSynthTime;
             if (animationDuration < 5s)

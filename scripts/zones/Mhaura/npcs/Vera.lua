@@ -5,7 +5,7 @@
 -- !pos -49 -5 20 249
 -----------------------------------
 require("scripts/globals/keyitems")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Mhaura/IDs")
 -----------------------------------
@@ -47,7 +47,7 @@ entity.onTrigger = function(player, npc)
             player:startEvent(132, 540)
         end
     else
-        if (player:getMainLvl() >= xi.settings.SUBJOB_QUEST_LEVEL) then
+        if (player:getMainLvl() >= xi.settings.main.SUBJOB_QUEST_LEVEL) then
             player:startEvent(131, 542)
         else
             player:startEvent(133)

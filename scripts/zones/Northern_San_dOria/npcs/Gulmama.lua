@@ -5,7 +5,7 @@
 -- Involved in Quest: Class Reunion
 -- !pos -186 0 107 231
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/titles")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
@@ -77,8 +77,8 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, item)
         else
             if (option == 5) then
-                player:addGil(xi.settings.GIL_RATE * 10000)
-                player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 10000) -- Gil
+                player:addGil(xi.settings.main.GIL_RATE * 10000)
+                player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 10000) -- Gil
             elseif (option == 6) then
                 player:addSpell(302) -- Avatar
                 player:messageSpecial(ID.text.SHIVA_UNLOCKED, 0, 0, 4)

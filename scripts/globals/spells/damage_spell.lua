@@ -8,7 +8,7 @@ require("scripts/globals/magicburst")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 -----------------------------------
 xi = xi or {}
 xi.spells = xi.spells or {}
@@ -209,7 +209,7 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spell, spellId, 
     -----------------------------------
     -- STEP 1: baseSpellDamage (V)
     -----------------------------------
-    if caster:isPC() and xi.settings.USE_OLD_MAGIC_DAMAGE == false then
+    if caster:isPC() and xi.settings.main.USE_OLD_MAGIC_DAMAGE == false then
         baseSpellDamage = pTable[spellId][vPC] -- vPC
     else
         baseSpellDamage = pTable[spellId][vNPC] -- vNPC
@@ -447,10 +447,12 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
     if caster:hasStatusEffect(xi.effect.ALTRUISM) and spellGroup == xi.magic.spellGroup.WHITE then
         magicAcc = magicAcc + caster:getStatusEffect(xi.effect.ALTRUISM):getPower()
     end
+
     -- Focalization
     if caster:hasStatusEffect(xi.effect.FOCALIZATION) and spellGroup == xi.magic.spellGroup.BLACK then
         magicAcc = magicAcc + caster:getStatusEffect(xi.effect.FOCALIZATION):getPower()
     end
+
     --Add acc for klimaform
     if
         spellElement > 0 and
@@ -459,6 +461,7 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
     then
         magicAcc = magicAcc + 15
     end
+
     -- Dark Seal
     if casterJob == xi.job.DRK and skillType == xi.skill.DARK_MAGIC and caster:hasStatusEffect(xi.effect.DARK_SEAL) then
         magicAcc = magicAcc + 256 -- Need citation. 256 seems OP
@@ -472,57 +475,75 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
     -----------------------------------
     -- magicAcc from Job Points.
     -----------------------------------
-    -- WHM Job Points
-    if casterJob == xi.job.WHM then
-        magicAcc = magicAcc + caster:getJobPointLevel(xi.jp.WHM_MAGIC_ACC_BONUS)
-    -- BLM Job Points
-    elseif casterJob == xi.job.BLM then
-        magicAcc = magicAcc + caster:getJobPointLevel(xi.jp.BLM_MAGIC_ACC_BONUS)
-    -- RDM Job Points
-    elseif casterJob == xi.job.RDM then
-        -- RDM Job Point: During saboteur, Enfeebling MACC +2
-        if skillType == xi.skill.ENFEEBLING_MAGIC and caster:hasStatusEffect(xi.effect.SABOTEUR) then
-            magicAcc = magicAcc + (caster:getJobPointLevel(xi.jp.SABOTEUR_EFFECT)) * 2
-        end
-        -- RDM Job Point: Magic Accuracy Bonus, All MACC + 1
-        magicAcc = magicAcc + caster:getJobPointLevel(xi.jp.RDM_MAGIC_ACC_BONUS)
-    -- NIN Job Points
-    elseif casterJob == xi.job.NIN then
-        -- NIN Job Points: Ninjutsu Accuracy Bonus
-        if skillType == xi.skill.NINJUTSU then
-            magicAcc = magicAcc + caster:getJobPointLevel(xi.jp.NINJITSU_ACC_BONUS)
-        end
-    -- SCH Job Points
-    elseif casterJob == xi.job.SCH then
-        if
-            (spellGroup == xi.magic.spellGroup.WHITE and caster:hasStatusEffect(xi.effect.PARSIMONY)) or
-            (spellGroup == xi.magic.spellGroup.BLACK and caster:hasStatusEffect(xi.effect.PENURY))
-        then
-            magicAcc = magicAcc + caster:getJobPointLevel(xi.jp.STRATEGEM_EFFECT_I)
-        end
-    end
+    switch (casterJob) : caseof
+    {
+        [xi.job.WHM] = function()
+            magicAcc = magicAcc + caster:getJobPointLevel(xi.jp.WHM_MAGIC_ACC_BONUS)
+        end,
+
+        [xi.job.BLM] = function()
+            magicAcc = magicAcc + caster:getJobPointLevel(xi.jp.BLM_MAGIC_ACC_BONUS)
+        end,
+
+        [xi.job.RDM] = function()
+            -- RDM Job Point: During saboteur, Enfeebling MACC +2
+            if skillType == xi.skill.ENFEEBLING_MAGIC and caster:hasStatusEffect(xi.effect.SABOTEUR) then
+                magicAcc = magicAcc + (caster:getJobPointLevel(xi.jp.SABOTEUR_EFFECT)) * 2
+            end
+
+            -- RDM Job Point: Magic Accuracy Bonus, All MACC + 1
+            magicAcc = magicAcc + caster:getJobPointLevel(xi.jp.RDM_MAGIC_ACC_BONUS)
+        end,
+
+        [xi.job.NIN] = function()
+            if skillType == xi.skill.NINJUTSU then
+                magicAcc = magicAcc + caster:getJobPointLevel(xi.jp.NINJITSU_ACC_BONUS)
+            end
+        end,
+
+        [xi.job.SCH] = function()
+            if
+                (spellGroup == xi.magic.spellGroup.WHITE and caster:hasStatusEffect(xi.effect.PARSIMONY)) or
+                (spellGroup == xi.magic.spellGroup.BLACK and caster:hasStatusEffect(xi.effect.PENURY))
+            then
+                magicAcc = magicAcc + caster:getJobPointLevel(xi.jp.STRATEGEM_EFFECT_I)
+            end
+        end,
+    }
 
     -----------------------------------
     -- magicAcc from Merits.
     -----------------------------------
-    -- BLM Merits
-    if casterJob == xi.job.BLM and skillType == xi.skill.ELEMENTAL_MAGIC then
-        magicAcc = magicAcc + caster:getMerit(xi.merit.ELEMENTAL_MAGIC_ACCURACY)
-    -- RDM Merits
-    elseif casterJob == xi.job.RDM then
-        -- Category 1
-        if spellElement >= xi.magic.element.FIRE and spellElement <= xi.magic.element.WATER then
-            magicAcc = magicAcc + caster:getMerit(rdmMerit[spellElement])
-        end
-        -- Category 2
-        magicAcc = magicAcc + caster:getMerit(xi.merit.MAGIC_ACCURACY)
-    -- NIN Merits
-    elseif casterJob == xi.job.NIN and skillType == xi.skill.NINJUTSU then
-        magicAcc = magicAcc + caster:getMerit(xi.merit.NIN_MAGIC_ACCURACY)
-    -- BLU Merits
-    elseif casterJob == xi.job.BLU and skillType == xi.skill.BLUE_MAGIC then
-        magicAcc = magicAcc + caster:getMerit(xi.merit.MAGICAL_ACCURACY)
-    end
+    switch (casterJob) : caseof
+    {
+        [xi.job.BLM] = function()
+            if skillType == xi.skill.ELEMENTAL_MAGIC then
+                magicAcc = magicAcc + caster:getMerit(xi.merit.ELEMENTAL_MAGIC_ACCURACY)
+            end
+        end,
+
+        [xi.job.RDM] = function()
+            -- Category 1
+            if spellElement >= xi.magic.element.FIRE and spellElement <= xi.magic.element.WATER then
+                magicAcc = magicAcc + caster:getMerit(rdmMerit[spellElement])
+            end
+
+            -- Category 2
+            magicAcc = magicAcc + caster:getMerit(xi.merit.MAGIC_ACCURACY)
+        end,
+
+        [xi.job.NIN] = function()
+            if skillType == xi.skill.NINJUTSU then
+                magicAcc = magicAcc + caster:getMerit(xi.merit.NIN_MAGIC_ACCURACY)
+            end
+        end,
+
+        [xi.job.BLU] = function()
+            if skillType == xi.skill.BLUE_MAGIC then
+                magicAcc = magicAcc + caster:getMerit(xi.merit.MAGICAL_ACCURACY)
+            end
+        end,
+    }
 
     -----------------------------------
     -- magicAcc from Food.
@@ -533,8 +554,8 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
     -----------------------------------
     -- Apply level correction.
     -----------------------------------
-    local levelDiff =  utils.clamp(caster:getMainLvl() - target:getMainLvl(), -5, 5)
-    magicAcc = magicAcc + levelDiff * 3
+    local levelDiff = utils.clamp(caster:getMainLvl() - target:getMainLvl(), -5, 5)
+    magicAcc        = magicAcc + levelDiff * 3
 
     -----------------------------------
     -- STEP 2: Get target magic evasion
@@ -560,14 +581,11 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
     local resistTier = 0
     local randomVar  = math.random()
 
-    if randomVar <= (1 - magicHitRate / 100) ^ 3 then
-        resistTier = 3
-    elseif randomVar <= (1 - magicHitRate / 100) ^ 2 then
-        resistTier = 2
-    elseif randomVar <= 1 - magicHitRate / 100 then
-        resistTier = 1
-    else
-        resistTier = 0
+    for tierVar = 3, 1, -1 do
+        if randomVar <= (1 - magicHitRate / 100) ^ tierVar then
+            resistTier = tierVar
+            break
+        end
     end
 
     -- Apply extra roll for elemental resistance boons. Testimonial. This needs retail testing.
@@ -580,16 +598,7 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
     end
 
     resistTier = utils.clamp(resistTier, 0, 3)
-
-    if resistTier == 0 then     -- Unresisted
-        resist = 1
-    elseif resistTier == 1 then -- (1/2)
-        resist = 0.5
-    elseif resistTier == 2 then -- (1/4)
-        resist = 0.25
-    elseif resistTier == 3 then -- (1/8)
-        resist = 0.125
-    end
+    resist     = 1 / (2 ^ resistTier)
 
     return resist
 end
@@ -799,18 +808,18 @@ xi.spells.damage.calculateEbullienceMultiplier = function(caster, target, spell)
     return ebullienceMultiplier
 end
 
--- CUSTOM function supported in settings/main.lua
+-- CUSTOM function supported in scripts/globals/settings.lua
 xi.spells.damage.calculateSkillTypeMultiplier = function(caster, target, spell, skillType)
     local skillTypeMultiplier = 1
 
     if skillType == xi.skill.ELEMENTAL_MAGIC then
-        skillTypeMultiplier = xi.settings.ELEMENTAL_POWER
+        skillTypeMultiplier = xi.settings.main.ELEMENTAL_POWER
     elseif skillType == xi.skill.DARK_MAGIC then
-        skillTypeMultiplier = xi.settings.DARK_POWER
+        skillTypeMultiplier = xi.settings.main.DARK_POWER
     elseif skillType == xi.skill.NINJUTSU then
-        skillTypeMultiplier = xi.settings.NINJUTSU_POWER
+        skillTypeMultiplier = xi.settings.main.NINJUTSU_POWER
     elseif skillType == xi.skill.DIVINE_MAGIC then
-        skillTypeMultiplier = xi.settings.DIVINE_POWER
+        skillTypeMultiplier = xi.settings.main.DIVINE_POWER
     end
 
     return skillTypeMultiplier

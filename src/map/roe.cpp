@@ -53,7 +53,7 @@ void call_onRecordTrigger(CCharEntity* PChar, uint16 recordID, const RoeDatagram
 {
     TracyZoneScoped;
     // TODO: Move this Lua interaction into luautils
-    auto onRecordTrigger = luautils::lua["xi"]["roe"]["onRecordTrigger"];
+    auto onRecordTrigger = lua["xi"]["roe"]["onRecordTrigger"];
     if (!onRecordTrigger.valid())
     {
         sol::error err = onRecordTrigger;
@@ -62,7 +62,7 @@ void call_onRecordTrigger(CCharEntity* PChar, uint16 recordID, const RoeDatagram
     }
 
     // Create param table
-    auto params        = luautils::lua.create_table();
+    auto params        = lua.create_table();
     params["progress"] = roeutils::GetEminenceRecordProgress(PChar, recordID);
 
     for (auto& datagram : payload) // Append datagrams to param table
@@ -99,9 +99,8 @@ namespace roeutils
     void init()
     {
         TracyZoneScoped;
-        roeutils::RoeSystem.RoeEnabled   = luautils::lua["xi"]["settings"]["ENABLE_ROE"].get_or(0);
-        luautils::lua["RoeParseRecords"] = &roeutils::ParseRecords;
-        luautils::lua["RoeParseTimed"]   = &roeutils::ParseTimedSchedule;
+        lua["RoeParseRecords"] = &roeutils::ParseRecords;
+        lua["RoeParseTimed"]   = &roeutils::ParseTimedSchedule;
         RoeHandlers.fill(RoeCheckHandler());
     }
 
@@ -219,7 +218,7 @@ namespace roeutils
     bool event(ROE_EVENT eventID, CCharEntity* PChar, const RoeDatagramList& payload)
     {
         TracyZoneScoped;
-        if (!RoeSystem.RoeEnabled || !PChar || PChar->objtype != TYPE_PC)
+        if (!settings::get<bool>("main.ENABLE_ROE") || !PChar || PChar->objtype != TYPE_PC)
         {
             return false;
         }
@@ -443,7 +442,7 @@ namespace roeutils
     void onCharLoad(CCharEntity* PChar)
     {
         TracyZoneScoped;
-        if (!RoeSystem.RoeEnabled)
+        if (!settings::get<bool>("main.ENABLE_ROE"))
         {
             return;
         }
@@ -589,7 +588,7 @@ namespace roeutils
     void CycleTimedRecords()
     {
         TracyZoneScoped;
-        if (!RoeSystem.RoeEnabled)
+        if (!settings::get<bool>("main.ENABLE_ROE"))
         {
             return;
         }
@@ -611,7 +610,7 @@ namespace roeutils
     void CycleDailyRecords()
     {
         TracyZoneScoped;
-        if (!RoeSystem.RoeEnabled)
+        if (!settings::get<bool>("main.ENABLE_ROE"))
         {
             return;
         }
@@ -668,7 +667,7 @@ namespace roeutils
     void CycleWeeklyRecords()
     {
         TracyZoneScoped;
-        if (!RoeSystem.RoeEnabled)
+        if (!settings::get<bool>("main.ENABLE_ROE"))
         {
             return;
         }

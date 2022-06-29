@@ -19,7 +19,7 @@ require("scripts/globals/msg")
 -- Obtains alpha, used for working out WSC on legacy servers
 local function getAlpha(level)
     -- Retail has no alpha anymore as of 2014. Weaponskill functions
-    -- should be checking for xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES and
+    -- should be checking for xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES and
     -- overwriting the results of this function if the server has it set
     local alpha = 1.00
 
@@ -443,7 +443,7 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
 
     -- Calculate alpha, WSC, and our modifiers for our base per-hit damage
     if not calcParams.alpha then
-        if xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+        if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
             calcParams.alpha = 1
         else
             calcParams.alpha = getAlpha(attacker:getMainLvl())
@@ -665,7 +665,7 @@ function doPhysicalWeaponskill(attacker, target, wsID, wsParams, tp, action, pri
     attacker:delStatusEffect(xi.effect.SNEAK_ATTACK)
     attacker:delStatusEffectSilent(xi.effect.BUILDING_FLOURISH)
 
-    finaldmg = finaldmg * xi.settings.WEAPON_SKILL_POWER -- Add server bonus
+    finaldmg = finaldmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
     calcParams.finalDmg = finaldmg
     finaldmg = takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action)
 
@@ -730,7 +730,7 @@ end
     finaldmg = target:rangedDmgTaken(finaldmg)
     finaldmg = finaldmg * target:getMod(xi.mod.PIERCE_SDT) / 1000
 
-    finaldmg = finaldmg * xi.settings.WEAPON_SKILL_POWER -- Add server bonus
+    finaldmg = finaldmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
     calcParams.finalDmg = finaldmg
 
     finaldmg = takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action)
@@ -822,7 +822,7 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
         dmg = utils.oneforall(target, dmg)
         dmg = utils.stoneskin(target, dmg)
 
-        dmg = dmg * xi.settings.WEAPON_SKILL_POWER -- Add server bonus
+        dmg = dmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
     else
         calcParams.shadowsAbsorbed = 1
     end

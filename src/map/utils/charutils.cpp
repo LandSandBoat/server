@@ -222,7 +222,7 @@ namespace charutils
         }
 
         uint16 MeritBonus   = PChar->PMeritPoints->GetMeritValue(MERIT_MAX_HP, PChar);
-        PChar->health.maxhp = (int16)(map_config.player_hp_multiplier * (raceStat + jobStat + bonusStat + sJobStat) + MeritBonus);
+        PChar->health.maxhp = (int16)(settings::get<float>("map.PLAYER_HP_MULTIPLIER") * (raceStat + jobStat + bonusStat + sJobStat) + MeritBonus);
 
         // The beginning of the MP
 
@@ -239,7 +239,7 @@ namespace charutils
             if (grade::GetJobGrade(sjob, 1) != 0 && slvl > 0) // TODO: In this expression, an error
             {
                 raceStat =
-                    (grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * (slvl - 1)) / map_config.sj_mp_divisor; // TODO: Here is a mistake
+                    (grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * (slvl - 1)) / settings::get<float>("map.SJ_MP_DIVISOR"); // TODO: Here is a mistake
             }
         }
         else
@@ -261,11 +261,11 @@ namespace charutils
         if (slvl > 0)
         {
             grade    = grade::GetJobGrade(sjob, 1);
-            sJobStat = (grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * (slvl - 1)) / map_config.sj_mp_divisor;
+            sJobStat = (grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * (slvl - 1)) / settings::get<float>("map.SJ_MP_DIVISOR");
         }
 
         MeritBonus          = PChar->PMeritPoints->GetMeritValue(MERIT_MAX_MP, PChar);
-        PChar->health.maxmp = (int16)(map_config.player_mp_multiplier * (raceStat + jobStat + sJobStat) + MeritBonus); // MP calculation result
+        PChar->health.maxmp = (int16)(settings::get<float>("map.PLAYER_MP_MULTIPLIER") * (raceStat + jobStat + sJobStat) + MeritBonus); // MP calculation result
 
         // Start calculating Stats
 
@@ -316,7 +316,7 @@ namespace charutils
             MeritBonus = PChar->PMeritPoints->GetMeritValue(statMerit[StatIndex - 2], PChar);
 
             // Value output
-            ref<uint16>(&PChar->stats, counter) = (uint16)(map_config.player_stat_multiplier * (raceStat + jobStat + sJobStat) + MeritBonus);
+            ref<uint16>(&PChar->stats, counter) = (uint16)(settings::get<float>("map.PLAYER_STAT_MULTIPLIER") * (raceStat + jobStat + sJobStat) + MeritBonus);
             counter += 2;
         }
     }
@@ -1540,7 +1540,7 @@ namespace charutils
     {
         if (charutils::UpdateItem(PChar, container, slotID, -quantity) != 0)
         {
-            ShowNotice("Player %s DROPPING itemID: %s (%u) quantity: %u", PChar->GetName(), itemutils::GetItem(ItemID)->getName(), ItemID, quantity);
+            ShowInfo("Player %s DROPPING itemID: %s (%u) quantity: %u", PChar->GetName(), itemutils::GetItem(ItemID)->getName(), ItemID, quantity);
             PChar->pushPacket(new CMessageStandardPacket(nullptr, ItemID, quantity, MsgStd::ThrowAway));
             PChar->pushPacket(new CInventoryFinishPacket());
         }
@@ -1827,7 +1827,7 @@ namespace charutils
 
         if ((PChar->m_EquipBlock & (1 << equipSlotID)) || !(PItem->getJobs() & (1 << (PChar->GetMJob() - 1))) ||
             (PItem->getSuperiorLevel() > PChar->getMod(Mod::SUPERIOR_LEVEL)) ||
-            (PItem->getReqLvl() > (map_config.disable_gear_scaling ? PChar->GetMLevel() : PChar->jobs.job[PChar->GetMJob()])))
+            (PItem->getReqLvl() > (settings::get<bool>("map.DISABLE_GEAR_SCALING") ? PChar->GetMLevel() : PChar->jobs.job[PChar->GetMJob()])))
         {
             return false;
         }
@@ -2426,7 +2426,7 @@ namespace charutils
                 continue;
             }
 
-            if (PItem->getReqLvl() > (map_config.disable_gear_scaling ? PChar->GetMLevel() : PChar->jobs.job[PChar->GetMJob()]))
+            if (PItem->getReqLvl() > (settings::get<bool>("map.DISABLE_GEAR_SCALING") ? PChar->GetMLevel() : PChar->jobs.job[PChar->GetMJob()]))
             {
                 UnequipItem(PChar, slotID);
                 continue;
@@ -2978,7 +2978,7 @@ namespace charutils
             // Note this is no longer retail accurate, since now 'decent challenge' mobs allow to cap any skill.
 
             int16  Diff          = MaxSkill - CurSkill / 10;
-            double SkillUpChance = Diff / 5.0 + map_config.skillup_chance_multiplier * (2.0 - log10(1.0 + CurSkill / 100));
+            double SkillUpChance = Diff / 5.0 + settings::get<double>("map.SKILLUP_CHANCE_MULTIPLIER") * (2.0 - log10(1.0 + CurSkill / 100));
 
             double random = xirand::GetRandomNumber(1.);
 
@@ -3061,9 +3061,9 @@ namespace charutils
                 }
 
                 // Do skill amount multiplier (Will only be applied if default setting is changed)
-                if (map_config.skillup_amount_multiplier > 1)
+                if (settings::get<uint8>("map.SKILLUP_AMOUNT_MULTIPLIER") > 1)
                 {
-                    SkillAmount += (uint8)(SkillAmount * map_config.skillup_amount_multiplier);
+                    SkillAmount += (uint8)(SkillAmount * settings::get<uint8>("map.SKILLUP_AMOUNT_MULTIPLIER"));
                     if (SkillAmount > 9)
                     {
                         SkillAmount = 9;
@@ -3534,15 +3534,15 @@ namespace charutils
         uint32 gil    = PMob->GetRandomGil();
         uint32 gBonus = 0;
 
-        if (gil && map_config.mob_gil_multiplier >= 0)
+        if (gil && settings::get<float>("map.MOB_GIL_MULTIPLIER") >= 0.0f)
         {
-            gil = static_cast<uint32>(gil * map_config.mob_gil_multiplier);
+            gil = static_cast<uint32>(gil * settings::get<float>("map.MOB_GIL_MULTIPLIER"));
         }
 
-        if (map_config.all_mobs_gil_bonus > 0)
+        if (settings::get<uint8>("map.ALL_MOBS_GIL_BONUS"))
         {
-            gBonus = map_config.all_mobs_gil_bonus * PMob->GetMLevel();
-            gil += std::clamp<uint32>(gBonus, 1, map_config.max_gil_bonus);
+            gBonus = settings::get<uint8>("map.ALL_MOBS_GIL_BONUS") * PMob->GetMLevel();
+            gil += std::clamp<uint32>(gBonus, 1, settings::get<uint32>("map.MAX_GIL_BONUS"));
         }
 
         // Distribute gil to player/party/alliance
@@ -3600,7 +3600,7 @@ namespace charutils
         }
         while (tries < maxTries)
         {
-            if (droprate > 0 && xirand::GetRandomNumber(1000) < droprate * map_config.drop_rate_multiplier + bonus)
+            if (droprate > 0 && xirand::GetRandomNumber(1000) < droprate * settings::get<float>("map.DROP_RATE_MULTIPLIER") + bonus)
             {
                 PChar->PTreasurePool->AddItem(itemid, PEntity);
                 break;
@@ -3696,7 +3696,7 @@ namespace charutils
             {
                 if (PMember->getZone() == PMob->getZone())
                 {
-                    if (map_config.exp_party_gap_penalties == 1)
+                    if (settings::get<bool>("map.EXP_PARTY_GAP_PENALTIES"))
                     {
                         if (maxlevel > 50 || maxlevel > (memberlevel + 7))
                         {
@@ -4212,7 +4212,7 @@ namespace charutils
             return;
         }
 
-        capacityPoints = (uint32)(capacityPoints * map_config.exp_rate);
+        capacityPoints = (uint32)(capacityPoints * settings::get<float>("map.EXP_RATE"));
 
         // uint16 currentCapacity = PChar->PJobPoints->GetCapacityPoints();
 
@@ -4262,9 +4262,9 @@ namespace charutils
         TracyZoneScoped;
 
         XI_DEBUG_BREAK_IF(retainPercent > 1.0f || retainPercent < 0.0f);
-        XI_DEBUG_BREAK_IF(map_config.exp_loss_level > 99 || map_config.exp_loss_level < 1);
+        XI_DEBUG_BREAK_IF(settings::get<uint8>("map.EXP_LOSS_LEVEL") > 99 || settings::get<uint8>("map.EXP_LOSS_LEVEL") < 1);
 
-        if (PChar->GetMLevel() < map_config.exp_loss_level && forcedXpLoss == 0)
+        if (PChar->GetMLevel() < settings::get<uint8>("map.EXP_LOSS_LEVEL") && forcedXpLoss == 0)
         {
             return;
         }
@@ -4281,7 +4281,7 @@ namespace charutils
         {
             // Apply retention percent
             exploss = (uint16)(exploss * (1 - retainPercent));
-            exploss = (uint16)(exploss * map_config.exp_loss_rate);
+            exploss = (uint16)(exploss * settings::get<float>("map.EXP_LOSS_RATE"));
         }
 
         if (PChar->jobs.exp[PChar->GetMJob()] < exploss)
@@ -4370,7 +4370,7 @@ namespace charutils
 
         if (!expFromRaise)
         {
-            exp = (uint32)(exp * map_config.exp_rate);
+            exp = (uint32)(exp * settings::get<float>("map.EXP_RATE"));
         }
         uint16 currentExp  = PChar->jobs.exp[PChar->GetMJob()];
         bool   onLimitMode = false;
@@ -4696,7 +4696,7 @@ namespace charutils
     {
         TracyZoneScoped;
 
-        if (!roeutils::RoeSystem.RoeEnabled)
+        if (!settings::get<bool>("main.ENABLE_ROE"))
         {
             return;
         }
@@ -6107,7 +6107,7 @@ namespace charutils
             {
                 return 200;
             }
-            else if (level >= 20 || map_config.all_jobs_widescan == 1)
+            else if (level >= 20 || settings::get<bool>("map.ALL_JOBS_WIDESCAN"))
             {
                 return 150;
             }
@@ -6118,7 +6118,7 @@ namespace charutils
         }
 
         // Default to base widescan if not RNG or BST
-        if (map_config.all_jobs_widescan == 1)
+        if (settings::get<bool>("map.ALL_JOBS_WIDESCAN"))
         {
             return 150;
         }

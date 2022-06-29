@@ -51,6 +51,7 @@ CTrustEntity::CTrustEntity(CCharEntity* PChar)
     m_MobSkillList = 0;
     PMaster        = PChar;
     m_MovementType = MELEE_RANGE;
+    m_IsClaimable  = false;
 
     PAI            = std::make_unique<CAIContainer>(this, std::make_unique<CPathFind>(this), std::make_unique<CTrustController>(PChar, this),
                                          std::make_unique<CTargetFind>(this));

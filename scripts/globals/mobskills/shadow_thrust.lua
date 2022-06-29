@@ -9,12 +9,8 @@
 -----------------------------------
 local mobskill_object = {}
 
-require("scripts/settings/main")
 require("scripts/globals/status")
-require("scripts/globals/mobskills")
-
------------------------------------
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+require("scripts/globals/mobskills")mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 

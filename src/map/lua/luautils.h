@@ -27,7 +27,8 @@
 #include "common/cbasetypes.h"
 #include "common/taskmgr.h"
 
-#include "lua.hpp"
+#include "common/lua.h"
+extern sol::state lua;
 
 #ifdef TRACY_ENABLE
 #include "TracyLua.hpp"
@@ -45,8 +46,8 @@
 
 #define SOL_USERTYPE(TypeName, BindingTypeName) \
     std::string className = TypeName;           \
-    luautils::lua.new_usertype<BindingTypeName>(className)
-#define SOL_REGISTER(FuncName, Func) luautils::lua[className][FuncName] = &Func
+    lua.new_usertype<BindingTypeName>(className)
+#define SOL_REGISTER(FuncName, Func) lua[className][FuncName] = &Func
 
 #include "../items/item_equipment.h"
 #include "../spell.h"
@@ -112,8 +113,6 @@ enum class Emote : uint8;
 
 namespace luautils
 {
-    extern sol::state lua;
-
     void SafeApplyFunc_ReloadList(std::function<void(std::map<std::string, uint64>&)> func);
 
     int32 init();
@@ -145,8 +144,6 @@ namespace luautils
     bool  IsConquestAlliance();
     int32 SetRegionalConquestOverseers(uint8 regionID); // Update NPC Conquest Guard
     void  SendLuaFuncStringToZone(uint16 zoneId, std::string const& str);
-
-    uint8 GetHealingTickDelay(); // Returns the configured healing tick delay
 
     auto GetReadOnlyItem(uint32 id) -> std::optional<CLuaItem>; // Returns a read only lookup item object of the specified ID
     auto GetAbility(uint16 id) -> std::optional<CLuaAbility>;

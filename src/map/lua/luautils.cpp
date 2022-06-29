@@ -93,8 +93,6 @@
 
 namespace luautils
 {
-    sol::state lua;
-
     bool                                  contentRestrictionEnabled;
     std::unordered_map<std::string, bool> contentEnabledMap;
 
@@ -102,31 +100,14 @@ namespace luautils
 
     std::unordered_map<uint32, sol::table> customMenuContext;
 
-    /************************************************************************
-     *                                                                       *
-     *  Initialization of Lua user classes and global functions             *
-     *                                                                       *
-     ************************************************************************/
-
+    /**
+     * @brief Initialization of Lua user classes and global functions.
+     */
     int32 init()
     {
         TracyZoneScoped;
-        ShowStatus("luautils::init:lua initializing");
 
-        lua = sol::state();
-        TracyLuaRegister(lua.lua_state());
-        lua.open_libraries();
-
-        // Globally require bit library
-        lua.do_string("if not bit then bit = require('bit') end");
-
-        lua.do_string(
-            "function __FILE__() return debug.getinfo(2, 'S').source end\n"
-            "function __LINE__() return debug.getinfo(2, 'l').currentline end\n"
-            "function __FUNC__() return debug.getinfo(2, 'n').name end\n");
-
-        // Bind print(...) globally
-        lua.set_function("print", &luautils::print);
+        ShowInfo("luautils: Lua initializing");
 
         // Bind math.randon(...) globally
         // clang-format off
@@ -180,14 +161,12 @@ namespace luautils
         lua.set_function("SetServerVariable", &luautils::SetServerVariable);
         lua.set_function("ClearVarFromAll", &luautils::ClearVarFromAll);
         lua.set_function("SendEntityVisualPacket", &luautils::SendEntityVisualPacket);
-        lua.set_function("UpdateServerMessage", &luautils::UpdateServerMessage);
         lua.set_function("GetMobRespawnTime", &luautils::GetMobRespawnTime);
         lua.set_function("DisallowRespawn", &luautils::DisallowRespawn);
         lua.set_function("UpdateNMSpawnPoint", &luautils::UpdateNMSpawnPoint);
         lua.set_function("SetDropRate", &luautils::SetDropRate);
         lua.set_function("NearLocation", &luautils::NearLocation);
         lua.set_function("Terminate", &luautils::Terminate);
-        lua.set_function("GetHealingTickDelay", &luautils::GetHealingTickDelay);
         lua.set_function("GetReadOnlyItem", &luautils::GetReadOnlyItem);
         lua.set_function("GetAbility", &luautils::GetAbility);
         lua.set_function("GetSpell", &luautils::GetSpell);
@@ -229,7 +208,6 @@ namespace luautils
 
         // Load globals
         // Truly global files first
-        lua.safe_script_file("./scripts/settings/main.lua", &sol::script_pass_on_error);
         lua.safe_script_file("./scripts/globals/common.lua", &sol::script_pass_on_error);
         roeutils::init(); // TODO: Get rid of the need to do this
 
@@ -255,6 +233,22 @@ namespace luautils
         CacheLuaObjectFromFile("./scripts/globals/pets/automaton.lua");
         CacheLuaObjectFromFile("./scripts/globals/pets/luopan.lua");
         CacheLuaObjectFromFile("./scripts/globals/pets/wyvern.lua");
+
+        if (gLoadAllLua) // Load all lua files (for sanity testing, no need for during regular use)
+        {
+            for (auto entry : std::filesystem::recursive_directory_iterator("./scripts"))
+            {
+                if (entry.path().extension() == ".lua")
+                {
+                    auto result = lua.safe_script_file(entry.path().relative_path().generic_string(), &sol::script_pass_on_error);
+                    if (!result.valid())
+                    {
+                        sol::error err = result;
+                        ShowError(err.what());
+                    }
+                }
+            }
+        }
 
         // Handle settings
         contentRestrictionEnabled = GetSettingsVariable("RESTRICT_CONTENT") != 0;
@@ -284,8 +278,8 @@ namespace luautils
         // NOTE: This is just requesting that an incremental step starts. There won't be a before/after change from
         //       this request!
 
-        ShowScript("Garbage Collected (Step)");
-        ShowScript("Current State Top: %d, Total Memory Used: %dkb", lua_gettop(lua.lua_state()), lua.memory_used() / 1024);
+        ShowInfo("Garbage Collected (Step)");
+        ShowInfo("Current State Top: %d, Total Memory Used: %dkb", lua_gettop(lua.lua_state()), lua.memory_used() / 1024);
 
         TracyReportLuaMemory(lua.lua_state());
 
@@ -303,8 +297,8 @@ namespace luautils
 
         auto after_mem_kb = lua.memory_used() / 1024;
 
-        ShowScript("Garbage Collected (Full)");
-        ShowScript("Current State Top: %d, Total Memory Used: %dkb -> %dkb", lua_gettop(lua.lua_state()), before_mem_kb, after_mem_kb);
+        ShowInfo("Garbage Collected (Full)");
+        ShowInfo("Current State Top: %d, Total Memory Used: %dkb -> %dkb", lua_gettop(lua.lua_state()), before_mem_kb, after_mem_kb);
 
         TracyReportLuaMemory(lua.lua_state());
 
@@ -363,96 +357,6 @@ namespace luautils
         scrapeSubdir("scripts/quests");
 
         return outVec;
-    }
-
-    /************************************************************************
-     *                                                                       *
-     * Overriding the official lua print function                            *
-     *                                                                       *
-     ************************************************************************/
-    std::string luaToString(sol::object const& obj, std::size_t depth = 0)
-    {
-        switch (obj.get_type())
-        {
-            case sol::type::none:
-                [[fallthrough]];
-            case sol::type::lua_nil:
-            {
-                return "nil";
-            }
-            case sol::type::string:
-            {
-                if (depth > 0)
-                {
-                    return "\"" + obj.as<std::string>() + "\"";
-                }
-                else
-                {
-                    return obj.as<std::string>();
-                }
-            }
-            case sol::type::number:
-            {
-                return fmt::format("{0:g}", obj.as<double>());
-            }
-            case sol::type::thread:
-            {
-                return "thread";
-            }
-            case sol::type::boolean:
-            {
-                return obj.as<bool>() ? "true" : "false";
-            }
-            case sol::type::function:
-            {
-                return "function";
-            }
-            case sol::type::userdata:
-            {
-                return lua["tostring"](obj);
-            }
-            case sol::type::lightuserdata:
-            {
-                return "lightuserdata";
-            }
-            case sol::type::table:
-            {
-                auto table = obj.as<sol::table>();
-
-                // Stringify everything first
-                std::vector<std::string> stringVec;
-                for (auto& pair : table)
-                {
-                    stringVec.emplace_back(luaToString(pair.second, depth + 1));
-                }
-
-                // Accumulate into a pretty string
-                std::string outStr = "table{ ";
-                outStr += std::accumulate(std::begin(stringVec), std::end(stringVec), std::string(),
-                                          [](std::string& ss, std::string& s)
-                                          {
-                                              return ss.empty() ? s : ss + ", " + s;
-                                          });
-                return outStr + " }";
-            }
-            default:
-            {
-                return "UNKNOWN";
-            }
-        }
-    }
-
-    void print(sol::variadic_args va)
-    {
-        TracyZoneScoped;
-
-        std::vector<std::string> vec;
-        for (std::size_t i = 0; i < va.size(); ++i)
-        {
-            vec.emplace_back(luaToString(va[i]));
-        }
-
-        ShowScript(fmt::format("{}", fmt::join(vec.begin(), vec.end(), " ")).c_str());
     }
 
     sol::function getEntityCachedFunction(CBaseEntity* PEntity, std::string funcName)
@@ -628,6 +532,21 @@ namespace luautils
             }
 
             ShowInfo("[FileWatcher] GLOBAL %s -> \"%s\"", filename, requireName);
+            return;
+        }
+
+        // Handle Commands then return
+        if (parts.size() == 2 && parts[0] == "commands")
+        {
+            auto result = lua.safe_script_file(filename, &sol::script_pass_on_error);
+            if (!result.valid())
+            {
+                sol::error err = result;
+                ShowError("luautils::CacheLuaObjectFromFile: Load command error: %s: %s", filename, err.what());
+                return;
+            }
+
+            ShowInfo("[FileWatcher] COMMAND %s", filename);
             return;
         }
 
@@ -3750,7 +3669,7 @@ namespace luautils
 
         // Bloodpact Skillups
         // TODO: This probably shouldn't be in here
-        if (PMob->objtype == TYPE_PET && map_config.skillup_bloodpact)
+        if (PMob->objtype == TYPE_PET && settings::get<bool>("map.SKILLUP_BLOODPACT"))
         {
             CPetEntity* PPet = (CPetEntity*)PMob;
             if (PPet->getPetType() == PET_TYPE::AVATAR && PPet->PMaster->objtype == TYPE_PC)
@@ -4455,12 +4374,6 @@ namespace luautils
         }
     }
 
-    uint8 GetHealingTickDelay()
-    {
-        TracyZoneScoped;
-        return map_config.healing_tick_delay;
-    }
-
     /***************************************************************************
      *                                                                          *
      *  Creates an item object of the type specified by the itemID.             *
@@ -4497,41 +4410,6 @@ namespace luautils
         TracyZoneScoped;
         CSpell* PSpell = spell::GetSpell(static_cast<SpellID>(id));
         return PSpell ? std::optional<CLuaSpell>(PSpell) : std::nullopt;
-    }
-
-    int32 UpdateServerMessage()
-    {
-        TracyZoneScoped;
-
-        int8  line[1024];
-        FILE* fp;
-
-        // Clear old messages..
-        map_config.server_message.clear();
-
-        // Load the English server message..
-        fp = fopen("./conf/server_message.conf", "rb");
-        if (fp == nullptr)
-        {
-            ShowError("Could not read English server message from: ./conf/server_message.conf");
-            return 1;
-        }
-
-        while (fgets((char*)line, sizeof(line), fp))
-        {
-            string_t sline((const char*)line);
-            map_config.server_message += sline;
-        }
-
-        fclose(fp);
-
-        // Ensure both messages have NULL terminates..
-        if (map_config.server_message.at(map_config.server_message.length() - 1) != 0x00)
-        {
-            map_config.server_message += (char)0x00;
-        }
-
-        return 0;
     }
 
     sol::table NearLocation(sol::table const& table, float radius, float theta)

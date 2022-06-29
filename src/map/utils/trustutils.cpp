@@ -529,7 +529,7 @@ namespace trustutils
                        (grade::GetHPScale(grade, scaleOver30Column) * subLevelOver30) + subLevelOver30 + subLevelOver10;
         }
 
-        PTrust->health.maxhp = (int16)(map_config.alter_ego_hp_multiplier * (raceStat + jobStat + bonusStat + sJobStat));
+        PTrust->health.maxhp = (int16)(settings::get<float>("map.ALTER_EGO_HP_MULTIPLIER") * (raceStat + jobStat + bonusStat + sJobStat));
 
         // MP
         raceStat = 0;
@@ -542,7 +542,7 @@ namespace trustutils
         {
             if (grade::GetJobGrade(sJob, 1) != 0 && sLvl > 0)
             {
-                raceStat = (grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * (sLvl - 1)) / map_config.sj_mp_divisor;
+                raceStat = (grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * (sLvl - 1)) /  settings::get<uint8>("map.SJ_MP_DIVISOR");
             }
         }
         else
@@ -565,7 +565,7 @@ namespace trustutils
             sJobStat = grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column);
         }
 
-        PTrust->health.maxmp = (int16)(map_config.alter_ego_mp_multiplier * (raceStat + jobStat + sJobStat));
+        PTrust->health.maxmp = (int16)( settings::get<float>("map.ALTER_EGO_MP_MULTIPLIER") * (raceStat + jobStat + sJobStat));
 
         PTrust->health.tp = 0;
         PTrust->UpdateHealth();
@@ -573,29 +573,29 @@ namespace trustutils
         PTrust->health.mp = PTrust->GetMaxMP();
 
         // Stats ========================
-        uint16 fSTR = mobutils::GetBaseToRank(PTrust->strRank, mLvl);
-        uint16 fDEX = mobutils::GetBaseToRank(PTrust->dexRank, mLvl);
-        uint16 fVIT = mobutils::GetBaseToRank(PTrust->vitRank, mLvl);
-        uint16 fAGI = mobutils::GetBaseToRank(PTrust->agiRank, mLvl);
-        uint16 fINT = mobutils::GetBaseToRank(PTrust->intRank, mLvl);
-        uint16 fMND = mobutils::GetBaseToRank(PTrust->mndRank, mLvl);
-        uint16 fCHR = mobutils::GetBaseToRank(PTrust->chrRank, mLvl);
+        uint16 fSTR = mobutils::GetBaseToRank(PTrust, PTrust->strRank, mLvl);
+        uint16 fDEX = mobutils::GetBaseToRank(PTrust, PTrust->dexRank, mLvl);
+        uint16 fVIT = mobutils::GetBaseToRank(PTrust, PTrust->vitRank, mLvl);
+        uint16 fAGI = mobutils::GetBaseToRank(PTrust, PTrust->agiRank, mLvl);
+        uint16 fINT = mobutils::GetBaseToRank(PTrust, PTrust->intRank, mLvl);
+        uint16 fMND = mobutils::GetBaseToRank(PTrust, PTrust->mndRank, mLvl);
+        uint16 fCHR = mobutils::GetBaseToRank(PTrust, PTrust->chrRank, mLvl);
 
-        uint16 mSTR = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 2), mLvl);
-        uint16 mDEX = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 3), mLvl);
-        uint16 mVIT = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 4), mLvl);
-        uint16 mAGI = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 5), mLvl);
-        uint16 mINT = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 6), mLvl);
-        uint16 mMND = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 7), mLvl);
-        uint16 mCHR = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 8), mLvl);
+        uint16 mSTR = mobutils::GetBaseToRank(PTrust, grade::GetJobGrade(PTrust->GetMJob(), 2), mLvl);
+        uint16 mDEX = mobutils::GetBaseToRank(PTrust, grade::GetJobGrade(PTrust->GetMJob(), 3), mLvl);
+        uint16 mVIT = mobutils::GetBaseToRank(PTrust, grade::GetJobGrade(PTrust->GetMJob(), 4), mLvl);
+        uint16 mAGI = mobutils::GetBaseToRank(PTrust, grade::GetJobGrade(PTrust->GetMJob(), 5), mLvl);
+        uint16 mINT = mobutils::GetBaseToRank(PTrust, grade::GetJobGrade(PTrust->GetMJob(), 6), mLvl);
+        uint16 mMND = mobutils::GetBaseToRank(PTrust, grade::GetJobGrade(PTrust->GetMJob(), 7), mLvl);
+        uint16 mCHR = mobutils::GetBaseToRank(PTrust, grade::GetJobGrade(PTrust->GetMJob(), 8), mLvl);
 
-        uint16 sSTR = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetSJob(), 2), sLvl);
-        uint16 sDEX = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetSJob(), 3), sLvl);
-        uint16 sVIT = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetSJob(), 4), sLvl);
-        uint16 sAGI = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetSJob(), 5), sLvl);
-        uint16 sINT = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetSJob(), 6), sLvl);
-        uint16 sMND = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetSJob(), 7), sLvl);
-        uint16 sCHR = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetSJob(), 8), sLvl);
+        uint16 sSTR = mobutils::GetBaseToRank(PTrust, grade::GetJobGrade(PTrust->GetSJob(), 2), sLvl);
+        uint16 sDEX = mobutils::GetBaseToRank(PTrust, grade::GetJobGrade(PTrust->GetSJob(), 3), sLvl);
+        uint16 sVIT = mobutils::GetBaseToRank(PTrust, grade::GetJobGrade(PTrust->GetSJob(), 4), sLvl);
+        uint16 sAGI = mobutils::GetBaseToRank(PTrust, grade::GetJobGrade(PTrust->GetSJob(), 5), sLvl);
+        uint16 sINT = mobutils::GetBaseToRank(PTrust, grade::GetJobGrade(PTrust->GetSJob(), 6), sLvl);
+        uint16 sMND = mobutils::GetBaseToRank(PTrust, grade::GetJobGrade(PTrust->GetSJob(), 7), sLvl);
+        uint16 sCHR = mobutils::GetBaseToRank(PTrust, grade::GetJobGrade(PTrust->GetSJob(), 8), sLvl);
 
         if (sLvl > 15)
         {
@@ -618,13 +618,14 @@ namespace trustutils
             sVIT = 0;
         }
 
-        PTrust->stats.STR = static_cast<uint16>((fSTR + mSTR + sSTR) * map_config.alter_ego_stat_multiplier);
-        PTrust->stats.DEX = static_cast<uint16>((fDEX + mDEX + sDEX) * map_config.alter_ego_stat_multiplier);
-        PTrust->stats.VIT = static_cast<uint16>((fVIT + mVIT + sVIT) * map_config.alter_ego_stat_multiplier);
-        PTrust->stats.AGI = static_cast<uint16>((fAGI + mAGI + sAGI) * map_config.alter_ego_stat_multiplier);
-        PTrust->stats.INT = static_cast<uint16>((fINT + mINT + sINT) * map_config.alter_ego_stat_multiplier);
-        PTrust->stats.MND = static_cast<uint16>((fMND + mMND + sMND) * map_config.alter_ego_stat_multiplier);
-        PTrust->stats.CHR = static_cast<uint16>((fCHR + mCHR + sCHR) * map_config.alter_ego_stat_multiplier);
+        auto statMultiplier = settings::get<float>("map.ALTER_EGO_STAT_MULTIPLIER");
+        PTrust->stats.STR = static_cast<uint16>((fSTR + mSTR + sSTR) * statMultiplier);
+        PTrust->stats.DEX = static_cast<uint16>((fDEX + mDEX + sDEX) * statMultiplier);
+        PTrust->stats.VIT = static_cast<uint16>((fVIT + mVIT + sVIT) * statMultiplier);
+        PTrust->stats.AGI = static_cast<uint16>((fAGI + mAGI + sAGI) * statMultiplier);
+        PTrust->stats.INT = static_cast<uint16>((fINT + mINT + sINT) * statMultiplier);
+        PTrust->stats.MND = static_cast<uint16>((fMND + mMND + sMND) * statMultiplier);
+        PTrust->stats.CHR = static_cast<uint16>((fCHR + mCHR + sCHR) * statMultiplier);
 
         // Skills =======================
         for (int i = SKILL_DIVINE_MAGIC; i <= SKILL_BLUE_MAGIC; i++)
@@ -632,7 +633,7 @@ namespace trustutils
             uint16 maxSkill = battleutils::GetMaxSkill((SKILLTYPE)i, mJob, mLvl > 99 ? 99 : mLvl);
             if (maxSkill != 0)
             {
-                PTrust->WorkingSkills.skill[i] = static_cast<uint16>(maxSkill * map_config.alter_ego_skill_multiplier);
+                PTrust->WorkingSkills.skill[i] = static_cast<uint16>(maxSkill * settings::get<float>("map.ALTER_EGO_SKILL_MULTIPLIER"));
             }
             else // if the mob is WAR/BLM and can cast spell
             {
@@ -641,7 +642,7 @@ namespace trustutils
 
                 if (maxSubSkill != 0)
                 {
-                    PTrust->WorkingSkills.skill[i] = static_cast<uint16>(maxSubSkill * map_config.alter_ego_skill_multiplier);
+                    PTrust->WorkingSkills.skill[i] = static_cast<uint16>(maxSubSkill * settings::get<float>("map.ALTER_EGO_SKILL_MULTIPLIER"));
                 }
             }
         }
@@ -651,7 +652,7 @@ namespace trustutils
             uint16 maxSkill = battleutils::GetMaxSkill((SKILLTYPE)i, mLvl > 99 ? 99 : mLvl);
             if (maxSkill != 0)
             {
-                PTrust->WorkingSkills.skill[i] = static_cast<uint16>(maxSkill * map_config.alter_ego_skill_multiplier);
+                PTrust->WorkingSkills.skill[i] = static_cast<uint16>(maxSkill * settings::get<float>("map.ALTER_EGO_SKILL_MULTIPLIER"));
             }
         }
 
