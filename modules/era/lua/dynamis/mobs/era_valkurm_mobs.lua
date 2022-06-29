@@ -15,14 +15,14 @@ local flies = {"fly1_killed", "fly2_killed", "fly3_killed"}
 
 local function checkFlytrapKills(mob)
     local zone = mob:getZone()
-    local status = 0
+    local killed = 0
     for _, flytrap in pairs(dragontraps) do
         if zone:getLocalVar(flytrap) == 1 then
-            status = status + 1
+            killed = killed + 1
         end
     end
 
-    return status
+    return killed
 end
 
 local function checkMorbolKills(mob)
@@ -33,6 +33,8 @@ local function checkMorbolKills(mob)
             killed = killed + 1
         end
     end
+
+    return killed
 end
 
 xi.dynamis.valkQMSpawnCheck = function(mob, zone, zoneID)
@@ -92,13 +94,12 @@ xi.dynamis.onFightMorbol = function(mob, target)
 end
 
 xi.dynamis.onEngagedCirrate = function(mob, target)
-    local petIndex = {289, 290}
+    local zoneID = mob:getZoneID()
     local flytrapKills = checkFlytrapKills(mob)
     local morbolKills = checkMorbolKills(mob)
     if flytrapKills < 3 and morbolKills == 0 then
-        for _, index in pairs(petIndex) do
-            xi.dynamis.nmDynamicSpawn(index, mob:getLocalVar("MobIndex_%s", mob:getID()), true, mob:getZoneID(), target, mob)
-        end
+        xi.dynamis.nmDynamicSpawn(289, 24, true, zoneID, target, mob)
+        xi.dynamis.nmDynamicSpawn(290, 24, true, zoneID, target, mob)
     end
 end
 
