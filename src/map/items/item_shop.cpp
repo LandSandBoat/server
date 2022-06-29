@@ -84,12 +84,17 @@ uint16 CItemShop::getInitialQuantity() const
 
 uint16 CItemShop::getSellPrice()
 {
-    if (getID() >= 0x2800 && getID() <= 0x6FFF)
-    {
-        return (uint16)((getMinPrice() + (getQuantity() / getStackSize()) * (getMinPrice() * 0.10f)) / 12);
-    }
-    else
-    {
-        return getBasePrice() / 3;
-    }
+    //All items will resell to guild vendors for 1 gil currently.
+    //This is intentional for the time being while a proper formula is created to
+    //buyback items from players for a reasonable price.
+
+    //if (getID() >= 0x2800 && getID() <= 0x6FFF)
+    //{
+    //    return (uint16)((getMinPrice() + (getQuantity() / getStackSize()) * (getMinPrice() * 0.10f)) / 12);
+    //}
+    //else
+    //{
+    //    return getBasePrice() / 3;
+    //}
+    return 1;
 }
