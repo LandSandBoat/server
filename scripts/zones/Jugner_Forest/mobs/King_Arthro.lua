@@ -13,6 +13,7 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+    mob:setMod(xi.mod.UFASTCAST, 100)
 end
 
 entity.onMobSpawn = function(mob)
@@ -30,10 +31,6 @@ entity.onAdditionalEffect = function(mob, target, damage)
     else
         return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.PARALYZE)
     end
-end
-
-entity.onCastStarting(mob, spell)
-    spell:castTime(0)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)

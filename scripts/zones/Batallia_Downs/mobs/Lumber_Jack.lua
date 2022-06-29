@@ -8,6 +8,7 @@ require("scripts/globals/mobs")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
+    mob:setMod(xi.mod.UFASTCAST, 100)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 600)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 20)
@@ -19,10 +20,6 @@ entity.onAdditionalEffect = function(mob, target, damage)
     else
         return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.STUN)
     end
-end
-
-entity.onCastStarting(mob, spell)
-    spell:castTime(0)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)

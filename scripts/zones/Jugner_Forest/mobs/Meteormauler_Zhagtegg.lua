@@ -35,9 +35,11 @@ end
 
 entity.onMobRoam = function(mob)
     local mobId = mob:getID()
+    -- print("roam")
 
     for i = 1, 2 do
         local guard = GetMobByID(mobId + i)
+        print(guard:getName())
         if guard:isSpawned() and guard:getID() == mobId + 1 then
             guard:pathTo(mob:getXPos() + 1, mob:getYPos() + 3, mob:getZPos() + 0.15)
         elseif guard:isSpawned() and guard:getID() == mobId + 2 then

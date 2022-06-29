@@ -7,14 +7,14 @@ require("scripts/globals/hunts")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
     if math.random() > .5 then
-        return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.ENAERO, {chance = 30})
+        return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENAERO, {chance = 50})
     else
-        return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.ENWATER, {chance = 30})
+        return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENWATER, {chance = 50})
     end
 end
 

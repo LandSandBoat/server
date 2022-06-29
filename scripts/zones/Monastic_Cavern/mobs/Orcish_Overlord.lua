@@ -17,7 +17,7 @@ entity.onMobInitialize = function(mob)
     end
 
     if mob:getID() == ID.mob.ORCISH_OVERLORD then
-        mob:addMod(tpz.mod.DOUBLE_ATTACK, 20)
+        mob:addMod(xi.mod.DOUBLE_ATTACK, 20)
     end
 end
 

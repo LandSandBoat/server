@@ -8,12 +8,12 @@ require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 
-entity.updateRegen = function(mob)
+local updateRegen = function(mob)
     local hour = VanadielHour()
     if hour >= 4 and hour < 20 then
-        mob:setMod(tpz.mod.REGEN, 25)
+        mob:setMod(xi.mod.REGEN, 25)
     else
-        mob:setMod(tpz.mod.REGEN, 0)
+        mob:setMod(xi.mod.REGEN, 0)
     end
 end
 

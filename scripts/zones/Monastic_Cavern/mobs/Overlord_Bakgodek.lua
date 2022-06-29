@@ -9,16 +9,19 @@ require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+    mob:setMod(xi.mod.SLEEPRES, 90)
+    mob:setMod(xi.mod.PARALYZERES, 75)
+    mob:setMod(xi.mod.SILENCERES, 75)
+end
+
 entity.onMobEngaged = function(mob, target)
     mob:showText(mob, ID.text.ORC_KING_ENGAGE)
-    mob:setMobMod(tpz.mobMod.ADD_EFFECT, 1)
-    mob:setMod(tpz.mod.SLEEPRES, 90)
-    mob:setMod(tpz.mod.PARALYZERES, 75)
-    mob:setMod(tpz.mod.SILENCERES, 75)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return tpz.mob.onAddEffect(mob, target, damage, tpz.mob.ae.TP_DRAIN, {chance = 35, power = math.random(95, 135)})
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.TP_DRAIN, {chance = 35, power = math.random(95, 135)})
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
