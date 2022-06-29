@@ -68,7 +68,7 @@ m:addOverride("xi.zones.Lower_Jeuno.npcs.Momiji.onTrigger", function(player, npc
 	end	
 	
     if ((player:hasKeyItem(xi.keyItem.RHAPSODY_IN_WHITE) == false) and ((woodworkingLevel >= 0600) or (smithingLevel >= 0600) or
-       (goldsmithingLevel >= 0600) or (clothcraftLevel >= 0600) or (leathercraftLevel >= 0600) or (bonecraftLevel >= 0600) or (alchemyLevel >= 0600) or (cookingLevel >= 0600))) then
+       (goldsmithingLevel >= 0600) or (clothcraftLevel >= 0600) or (leathercraftLevel >= 0600) or (bonecraftLevel >= 0600) or (alchemyLevel >= 0600) or (cookingLevel >= 0600) or (fishingLevel >= 0600))) then
         player:PrintToPlayer(string.format( "Momiji: You have earned this, congratulations!\n"))
         player:addKeyItem(xi.keyItem.RHAPSODY_IN_WHITE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.keyItem.RHAPSODY_IN_WHITE)
@@ -76,7 +76,7 @@ m:addOverride("xi.zones.Lower_Jeuno.npcs.Momiji.onTrigger", function(player, npc
     end
     
 	if ((player:hasKeyItem(xi.keyItem.RHAPSODY_IN_CRIMSON) == false) and ((woodworkingLevel >= 0800) or (smithingLevel >= 0800) or (goldsmithingLevel >= 0800) or (clothcraftLevel >= 0800) or
-        (leathercraftLevel >= 0800) or (bonecraftLevel >= 0800) or (alchemyLevel >= 0800) or (cookingLevel >= 0800))) then
+        (leathercraftLevel >= 0800) or (bonecraftLevel >= 0800) or (alchemyLevel >= 0800) or (cookingLevel >= 0800) or (fishingLevel >= 0800))) then
         player:PrintToPlayer(string.format( "Momiji: You have earned this, congratulations!\n"))
         player:addKeyItem(xi.keyItem.RHAPSODY_IN_CRIMSON)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.keyItem.RHAPSODY_IN_CRIMSON)
