@@ -97,6 +97,7 @@ xi.dynamis.onEngagedCirrate = function(mob, target)
     local zoneID = mob:getZoneID()
     local flytrapKills = checkFlytrapKills(mob)
     local morbolKills = checkMorbolKills(mob)
+    xi.dynamis.parentOnEngaged(mob, target)
     if flytrapKills < 3 and morbolKills == 0 then
         xi.dynamis.nmDynamicSpawn(289, 24, true, zoneID, target, mob)
         xi.dynamis.nmDynamicSpawn(290, 24, true, zoneID, target, mob)
