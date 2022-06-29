@@ -31,6 +31,7 @@ CBaseEntity::CBaseEntity()
 : objtype(ENTITYTYPE::TYPE_NONE)
 , status(STATUS_TYPE::DISAPPEAR)
 , allegiance(ALLEGIANCE_TYPE::MOB)
+, spawnAnimation(SPAWN_ANIMATION::NORMAL)
 , PAI(nullptr)
 , m_nextUpdateTimer(std::chrono::steady_clock::now())
 {
