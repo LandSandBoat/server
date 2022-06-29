@@ -7471,7 +7471,7 @@ INSERT INTO `mob_groups` VALUES (21,1710,105,'Goblin_Shaman',330,0,1147,0,0,28,3
 INSERT INTO `mob_groups` VALUES (22,4337,105,'Wight_war',330,1,2651,0,0,26,36,0);
 INSERT INTO `mob_groups` VALUES (23,2054,105,'Ignis_Fatuus',330,8,569,0,0,34,36,0);
 INSERT INTO `mob_groups` VALUES (24,1160,105,'Earth_Elemental',330,4,733,0,0,38,40,0);
-INSERT INTO `mob_groups` VALUES (25,5740,105,'Skirling_Liger',3600,0,3003,3250,0,42,42,0);
+INSERT INTO `mob_groups` VALUES (25,5740,105,'Skirling_Liger',3600,0,3003,3250,0,40,42,0);
 INSERT INTO `mob_groups` VALUES (26,3009,105,'Orcish_Fighter',330,0,283,0,0,26,30,0);
 INSERT INTO `mob_groups` VALUES (27,3020,105,'Orcish_Impaler',330,0,0,0,0,30,36,0);
 INSERT INTO `mob_groups` VALUES (28,2996,105,'Orcish_Beastrider',330,0,1873,0,0,30,36,0);
@@ -7480,7 +7480,7 @@ INSERT INTO `mob_groups` VALUES (30,3004,105,'Orcish_Cursemaker',330,0,283,0,0,2
 INSERT INTO `mob_groups` VALUES (31,3032,105,'Orcish_Serjeant',330,0,283,0,0,26,30,0);
 INSERT INTO `mob_groups` VALUES (32,2998,105,'Orcish_Brawler',330,0,1879,0,0,30,36,0);
 INSERT INTO `mob_groups` VALUES (33,2043,105,'Ice_Elemental',330,4,1347,0,0,38,40,0);
-INSERT INTO `mob_groups` VALUES (34,3979,105,'Tottering_Toby',0,32,2456,0,0,27,28,0);
+INSERT INTO `mob_groups` VALUES (34,3979,105,'Tottering_Toby',0,32,2456,1300,0,27,28,0);
 INSERT INTO `mob_groups` VALUES (35,3990,105,'Treant',330,0,2462,0,0,35,37,0);
 INSERT INTO `mob_groups` VALUES (36,316,105,'Ba',330,0,208,0,0,25,28,0);
 INSERT INTO `mob_groups` VALUES (37,743,105,'Clipper',330,0,481,0,0,23,25,0);

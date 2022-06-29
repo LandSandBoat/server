@@ -335,9 +335,9 @@ INSERT INTO `mob_droplist` VALUES (32,0,0,1000,935,90);         -- Ahriman Wing 
 INSERT INTO `mob_droplist` VALUES (32,2,0,1000,921,0);          -- Bottle Of Ahriman Tears (Steal)
 
 -- ZoneID: 105 - Ahtu
-INSERT INTO `mob_droplist` VALUES (33,0,0,1000,535,@ALWAYS); -- Engraved Key (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (33,0,0,1000,918,330);     -- Sprig Of Mistletoe (33.0%)
-INSERT INTO `mob_droplist` VALUES (33,0,0,1000,923,200);     -- Dryad Root (20.0%)
+INSERT INTO `mob_droplist` VALUES (33,0,0,1000,535,@ALWAYS);  -- Engraved Key (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (33,0,0,1000,918,@VCOMMON); -- Sprig Of Mistletoe (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (33,0,0,1000,923,@VCOMMON); -- Dryad Root (Very Common, 24%)
 
 -- ZoneID:  51 - Aht Urhgan Attercop
 -- ZoneID:  52 - Aht Urhgan Attercop
@@ -12719,11 +12719,11 @@ INSERT INTO `mob_droplist` VALUES (1548,0,0,1000,859,40);      -- Ram Skin (4.0%
 INSERT INTO `mob_droplist` VALUES (1548,2,0,1000,832,0);       -- Clump Of Sheep Wool (Steal)
 
 -- ZoneID: 105 - Lumber Jack
-INSERT INTO `mob_droplist` VALUES (1549,0,0,1000,4172,@ALWAYS);  -- Reraiser (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (1549,0,0,1000,4174,@ALWAYS);  -- Vile Elixir (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (1549,0,0,1000,13617,@ALWAYS); -- Lightning Mantle (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (1549,0,0,1000,16580,160);     -- Bloodsword (16.0%)
-INSERT INTO `mob_droplist` VALUES (1549,0,0,1000,1110,140);      -- Vial Of Black Beetle Blood (14.0%)
+INSERT INTO `mob_droplist` VALUES (1549,0,0,1000,4172,@ALWAYS);    -- Reraiser (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (1549,0,0,1000,4174,@ALWAYS);    -- Vile Elixir (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (1549,0,0,1000,13617,@ALWAYS);   -- Lightning Mantle (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (1549,0,0,1000,16580,@RARE);     -- Bloodsword (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (1549,0,0,1000,1110,@UNCOMMON);  -- Vial Of Black Beetle Blood (Uncommon, 10%)
 
 -- ZoneID:  29 - Lunantishee
 INSERT INTO `mob_droplist` VALUES (1550,0,0,1000,920,400); -- Malboro Vine (40.0%)
@@ -13098,7 +13098,7 @@ INSERT INTO `mob_droplist` VALUES (1609,0,0,1000,925,30);   -- Giant Stinger (3.
 INSERT INTO `mob_droplist` VALUES (1609,2,0,1000,4370,0);   -- Pot Of Honey (Steal)
 
 -- ZoneID: 105 - Prankster Maverix
-INSERT INTO `mob_droplist` VALUES (1610,0,0,1000,15945,233); -- Volant Belt (23.3%)
+INSERT INTO `mob_droplist` VALUES (1610,0,0,1000,15945,@COMMON); -- Volant Belt (Common, 15%)
 
 -- ZoneID: 132 - Mangy-Tailed Marvin
 INSERT INTO `mob_droplist` VALUES (1611,0,0,1000,2935,730);    -- Marvins Pelage (73.0%)
@@ -19593,10 +19593,10 @@ INSERT INTO `mob_droplist` VALUES (2455,2,0,1000,927,0);    -- Coeurl Whisker (S
 INSERT INTO `mob_droplist` VALUES (2455,4,0,1000,4377,0);   -- Slice Of Coeurl Meat (Despoil)
 
 -- ZoneID: 105 - Tottering Toby
-INSERT INTO `mob_droplist` VALUES (2456,0,0,1000,953,670);   -- Treant Bulb (67.0%)
-INSERT INTO `mob_droplist` VALUES (2456,0,0,1000,13013,250); -- Stumbling Sandals (25.0%)
-INSERT INTO `mob_droplist` VALUES (2456,0,0,1000,574,140);   -- Bag Of Fruit Seeds (14.0%)
-INSERT INTO `mob_droplist` VALUES (2456,2,0,1000,574,0);     -- Bag Of Fruit Seeds (Steal)
+INSERT INTO `mob_droplist` VALUES (2456,0,0,1000,953,@ALWAYS);   -- Treant Bulb (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (2456,0,0,1000,13013,@COMMON); -- Stumbling Sandals (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (2456,0,0,1000,574,@COMMON);   -- Bag Of Fruit Seeds (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (2456,2,0,1000,574,0);         -- Bag Of Fruit Seeds (Steal)
 
 -- ZoneID:   7 - Tracer Antlion
 INSERT INTO `mob_droplist` VALUES (2457,0,0,1000,846,20);  -- Insect Wing (2.0%)
@@ -24671,7 +24671,7 @@ INSERT INTO `mob_droplist` VALUES (3001,0,0,1000,2854,307); -- Stately Crab Shel
 INSERT INTO `mob_droplist` VALUES (3002,0,0,1000,16027,@COMMON); -- Seeker Earring (Common, 15%)
 
 -- ZoneID: 105 - Skirling Liger
-INSERT INTO `mob_droplist` VALUES (3003,0,0,1000,16014,173); -- Stormer Earring (17.3%)
+INSERT INTO `mob_droplist` VALUES (3003,0,0,1000,16014,@COMMON); -- Stormer Earring (Common, 15%)
 
 -- ZoneID: 118 - Wake Warder Wanda
 INSERT INTO `mob_droplist` VALUES (3004,0,0,1000,18605,304); -- Melampus Staff (30.4%)
@@ -24889,7 +24889,7 @@ INSERT INTO `mob_droplist` VALUES (3061,0,0,1000,2838,321); -- Square Of Ephemer
 INSERT INTO `mob_droplist` VALUES (3062,0,0,1000,19238,154); -- Jasper Tathlum (15.4%)
 
 -- ZoneID: 105 - Eyegouger
-INSERT INTO `mob_droplist` VALUES (3063,0,0,1000,16021,250); -- Brawn Earring (25.0%)
+INSERT INTO `mob_droplist` VALUES (3063,0,0,1000,16021,@VCOMMON); -- Brawn Earring (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (3063,2,0,1000,847,0);     -- Bird Feather (Steal)
 
 -- ZoneID: 111 - Humbaba
