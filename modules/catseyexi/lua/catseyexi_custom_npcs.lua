@@ -27,7 +27,7 @@ m:addOverride("xi.zones.RuLude_Gardens.Zone.onInitialize", function(zone)
     widescan = 1,
 
     onTrade = function(player, npc, trade)
-	    local geoUnlocked = player:getCharVar("GEO_Unlocked")
+--[[	    local geoUnlocked = player:getCharVar("GEO_Unlocked")
 
         if npcUtil.tradeHasExactly(trade, { 15194 }) then
             npc:timer(1500, function(npcArg)
@@ -52,7 +52,7 @@ m:addOverride("xi.zones.RuLude_Gardens.Zone.onInitialize", function(zone)
 				player:addItem(21460)
                 player:messageSpecial( ID.text.ITEM_OBTAINED, 21460 ) -- Give Matre Bell
             end)
-        end
+        end ]]--
     end,
 
     onTrigger = function(player, npc)

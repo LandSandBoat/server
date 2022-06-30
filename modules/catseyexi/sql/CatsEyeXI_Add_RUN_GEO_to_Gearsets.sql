@@ -18,3 +18,6 @@ UPDATE item_equipment SET jobs = "1081368" WHERE name = "morrigans_cuffs";
 UPDATE item_equipment SET jobs = "1081368" WHERE name = "morrigans_slops";
 UPDATE item_equipment SET jobs = "1081368" WHERE name = "morrigans_pgch.";
 UPDATE item_equipment SET jobs = "1081368" WHERE name = "morrigans_coron.";
+
+# Allow RUN to equip Ragnarok
+UPDATE item_equipment SET jobs = "2097345" WHERE name = "ragnarok" and itemId = "18282";
