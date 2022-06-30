@@ -22448,8 +22448,6 @@ INSERT INTO `mob_droplist` VALUES (2697,0,0,1000,2558,130); -- Block Of Yagudo G
 INSERT INTO `mob_droplist` VALUES (2697,0,0,1000,5072,120); -- Scroll Of Goddesss Hymnus (12.0%)
 INSERT INTO `mob_droplist` VALUES (2697,0,0,1000,2525,20);  -- Bottled Pixie (2.0%)
 INSERT INTO `mob_droplist` VALUES (2697,2,0,1000,751,0);    -- Platinum Beastcoin (Steal)
-<<<<<<< HEAD
-=======
 INSERT INTO `mob_droplist` VALUES (2697,0,0,1000,2525,20);  -- Bottled Pixie
 INSERT INTO `mob_droplist` VALUES (2697,0,0,1000,2558,130); -- Yagudo Glue
 INSERT INTO `mob_droplist` VALUES (2697,0,0,1000,5022,170); -- Warding Round
@@ -23848,19 +23846,7 @@ INSERT INTO `mob_droplist` VALUES (2996,0,0,1000,15614,@UNCOMMON);
 INSERT INTO `mob_droplist` VALUES (2997,0,0,1000,2851,273);
 INSERT INTO `mob_droplist` VALUES (2998,0,0,1000,11339,340);
 INSERT INTO `mob_droplist` VALUES (2999,0,0,1000,11338,111);
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-INSERT INTO `mob_droplist` VALUES (3000,0,0,1000,19305,111); -- Pike
-=======
 INSERT INTO `mob_droplist` VALUES (3000,0,0,1000,19305,360);
->>>>>>> b8d0d1329e (Mob fixes)
-=======
-INSERT INTO `mob_droplist` VALUES (3000,0,0,1000,19305,111); -- Pike
->>>>>>> ed046e34b0 (Drop rate fix)
-=======
-INSERT INTO `mob_droplist` VALUES (3000,0,0,1000,19305,111); -- Pike
->>>>>>> d89bd8e0c7f96ba5ea55d287d53186d48382f052
 INSERT INTO `mob_droplist` VALUES (3001,0,0,1000,2854,307);
 INSERT INTO `mob_droplist` VALUES (3002,0,0,1000,16027,242);
 INSERT INTO `mob_droplist` VALUES (3003,0,0,1000,16014,173);
@@ -24639,7 +24625,6 @@ INSERT INTO `mob_droplist` VALUES (3150,0,0,1000,12432,@RARE); -- (Goblin Blades
 INSERT INTO `mob_droplist` VALUES (3150,0,0,1000,12688,@RARE); -- (Goblin Bladesmith) scale_finger_gauntlets
 INSERT INTO `mob_droplist` VALUES (3150,0,0,1000,12816,@URARE); -- (Goblin Bladesmith) scale_cuisses
 INSERT INTO `mob_droplist` VALUES (3150,0,0,1000,12944,@VRARE); -- (Goblin Bladesmith) scale_greaves
->>>>>>> c68f97a7ba (Mob fixes)
 
 -- ZoneID: 138 - Yagudo Chanter
 -- ZoneID: 151 - Yagudo Chanter
@@ -25173,7 +25158,6 @@ INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,15142,@VRARE);
 INSERT INTO `mob_droplist` VALUES (3222,0,0,1000,16360,@VRARE);
 INSERT INTO `mob_droplist` VALUES (3223,0,0,1000,16017,@COMMON);
 <<<<<<< HEAD
-<<<<<<< HEAD
 INSERT INTO `mob_droplist` VALUES (3224,0,0,1000,11343,@COMMON); --(Picolaton) Thrakon Breastplate
 <<<<<<< HEAD
 >>>>>>> bca195221f (Picolaton)
@@ -25185,13 +25169,7 @@ INSERT INTO `mob_droplist` VALUES (3224,0,0,1000,2811,@VCOMMON);
 INSERT INTO `mob_droplist` VALUES (3224,0,0,1000,2815,@COMMON);
 INSERT INTO `mob_droplist` VALUES (3224,0,0,1000,2819,@VCOMMON);
 INSERT INTO `mob_droplist` VALUES (3225,0,0,1000,11343,@COMMON); -- (Picolaton) Thrakon Breastplate
-<<<<<<< HEAD
 >>>>>>> 15344a7b4e (General Mob Fixes)
-=======
-INSERT INTO `mob_droplist` VALUES (3224,0,0,1000,11343,@COMMON); --(Picolaton) Thrakon Breastplate
->>>>>>> bca195221f (Picolaton)
-=======
->>>>>>> 41563a96eb (General Mob Fixes)
 
 -- ZoneID:  99 - Yagudo Flagellant
 -- ZoneID: 138 - Yagudo Eradicator

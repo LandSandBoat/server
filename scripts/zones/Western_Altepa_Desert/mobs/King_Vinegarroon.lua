@@ -10,26 +10,7 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
     mob:setMobMod(xi.mobMod.DRAW_IN, 2) -- Aliance draw in
-=======
-    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
-    mob:setMobMod(xi.mobMod.DRAW_IN_INCLUDE_PARTY, 1)
-    mob:setMobMod(xi.mobMod.DRAW_IN_CUSTOM_RANGE, 10)
-
->>>>>>> de3620867a (King V bug fixes)
-=======
-    mob:setMobMod(xi.mobMod.DRAW_IN, 2)
->>>>>>> 4b31d00a4c (Update King_Vinegarroon.lua)
-=======
-    mob:setMobMod(xi.mobMod.DRAW_IN, 2) -- Aliance draw in
->>>>>>> 4691c65c97 (Update King_Vinegarroon.lua)
-=======
-    mob:setMobMod(xi.mobMod.DRAW_IN, 2) -- Aliance draw in
->>>>>>> d89bd8e0c7f96ba5ea55d287d53186d48382f052
 end
 
 entity.onMobDrawIn = function(mob, target)
@@ -67,54 +48,18 @@ entity.onMobDespawn = function(mob)
     mob:setRespawnTime(math.random(75600, 86400)) -- 21 to 24 hours
 end
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-entity.onMobFight = function(mob, target)
-    local mobRegen = function()
-        local hour = VanadielHour()
-=======
 entity.mobRegen = function(mob)
     local hour = VanadielHour()
->>>>>>> de3620867a (King V bug fixes)
-=======
-entity.onMobFight = function(mob, target)
-    local mobRegen = function()
-        local hour = VanadielHour()
->>>>>>> 28fb56442b (Fixes)
-=======
-entity.onMobFight = function(mob, target)
-    local mobRegen = function()
-        local hour = VanadielHour()
->>>>>>> d89bd8e0c7f96ba5ea55d287d53186d48382f052
 
     if hour >= 6 and hour <= 20 then
         mob:setMod(xi.mod.REGEN, 125)
     else
         mob:setMod(xi.mod.REGEN, 250)
     end
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    end
-
-    mobRegen()
-=======
 end
 
 entity.onMobFight = function(mob, target)
     entity.mobRegen(mob)
->>>>>>> de3620867a (King V bug fixes)
-=======
-    end
-
-    mobRegen()
->>>>>>> 28fb56442b (Fixes)
-=======
-    end
-
-    mobRegen()
->>>>>>> d89bd8e0c7f96ba5ea55d287d53186d48382f052
 end
 
 return entity
