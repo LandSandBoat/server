@@ -10215,7 +10215,7 @@ INSERT INTO `mob_groups` VALUES (3,3220,145,'Puffer_Pugil',0,128,975,0,0,13,15,0
 INSERT INTO `mob_groups` VALUES (4,6764,145,'Land_Pugil_fished',0,128,975,0,0,18,20,0);
 
 INSERT INTO `mob_groups` VALUES (5,1277,145,'Eyy_Mon_the_Ironbreaker',900,0,803,0,0,16,16,0);
-INSERT INTO `mob_groups` VALUES (6,4502,145,'Zhuu_Buxu_the_Silent',300,0,2855,0,0,16,16,0);
+INSERT INTO `mob_groups` VALUES (6,4502,145,'Zhuu_Buxu_the_Silent',300,0,2855,300,0,16,16,0);
 INSERT INTO `mob_groups` VALUES (7,4426,145,'Yagudo_Initiate',330,0,2718,0,0,3,10,0);
 INSERT INTO `mob_groups` VALUES (8,4405,145,'Yagudo_Acolyte',330,0,2694,0,0,3,10,0);
 INSERT INTO `mob_groups` VALUES (9,4448,145,'Yagudo_Scribe',330,0,2763,0,0,3,10,0);
