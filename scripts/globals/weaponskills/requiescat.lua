@@ -25,6 +25,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     params.canCrit = false
     params.acc100 = 0.0 params.acc200 = 0.0 params.acc300 = 0.0
     params.atk100 = 0.8 params.atk200 = 0.9 params.atk300 = 1.0
+    -- TODO: Verify the params.formless check
     params.formless = true
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then

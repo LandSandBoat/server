@@ -29,8 +29,10 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     params.atk100 = 1.0 params.atk200 = 1.0 params.atk300 = 1.0
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+        params.ftp100 = 1.6328 params.ftp200 = 1.6328 params.ftp300 = 1.6328
         params.dex_wsc = 0.8
-        params.multiHitfTP = true
+        params.crit100 = 0.15 params.crit200 = 0.25 params.crit300 = 0.4
+        params.multiHitfTP = true -- https://www.bg-wiki.com/ffxi/Chant_du_Cygne
     end
 
     -- Apply aftermath

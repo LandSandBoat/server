@@ -31,7 +31,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.ftp100 = 1.375 params.ftp200 = 1.375 params.ftp300 = 1.375
-        params.multiHitfTP = true
+        params.multiHitfTP = true -- https://www.bg-wiki.com/ffxi/Blade:_Jin
     end
 
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, wsID, params, tp, action, primary, taChar)
