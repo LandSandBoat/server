@@ -19343,11 +19343,11 @@ INSERT INTO `mob_droplist` VALUES (2426,0,0,1000,19102,20); -- Main Gauche (2.0%
 INSERT INTO `mob_droplist` VALUES (2426,2,0,1000,4369,0);   -- Four-Leaf Mandragora Bud (Steal)
 
 -- ZoneID: 115 - Tom Tit Tat
-INSERT INTO `mob_droplist` VALUES (2427,0,0,1000,4368,710);       -- Two-Leaf Mandragora Bud (71.0%)
-INSERT INTO `mob_droplist` VALUES (2427,0,0,1000,834,260);        -- Ball Of Saruta Cotton (26.0%)
-INSERT INTO `mob_droplist` VALUES (2427,0,0,1000,16443,@VCOMMON); -- Fruit Punches (Very Common, 24%)
-INSERT INTO `mob_droplist` VALUES (2427,0,0,1000,4369,60);        -- Four-Leaf Mandragora Bud (6.0%)
-INSERT INTO `mob_droplist` VALUES (2427,2,0,1000,4369,0);         -- Four-Leaf Mandragora Bud (Steal)
+INSERT INTO `mob_droplist` VALUES (2427,0,0,1000,4368,@ALWAYS);  -- Two-Leaf Mandragora Bud (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (2427,0,0,1000,834,@VCOMMON);  -- Ball Of Saruta Cotton (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2427,0,0,1000,16443,@COMMON); -- Fruit Punches (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (2427,0,0,1000,4369,@RARE);    -- Four-Leaf Mandragora Bud (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (2427,2,0,1000,4369,0);        -- Four-Leaf Mandragora Bud (Steal)
 
 -- ZoneID:  15 - Tonberry Bedeviler
 INSERT INTO `mob_droplist` VALUES (2428,0,0,1000,1119,360);       -- Tonberry Coat (36.0%)
@@ -24662,7 +24662,7 @@ INSERT INTO `mob_droplist` VALUES (2998,0,0,1000,11339,340); -- Channeling Robe 
 INSERT INTO `mob_droplist` VALUES (2999,0,0,1000,11338,111); -- Aegas Doublet (11.1%)
 
 -- ZoneID: 115 - Numbing Norman
-INSERT INTO `mob_droplist` VALUES (3000,0,0,1000,19305,111); -- Pike (11.1%)
+INSERT INTO `mob_droplist` VALUES (3000,0,0,1000,19305,@VCOMMON); -- Pike (Very Common, 24%)
 
 -- ZoneID: 103 - Metal Shears
 INSERT INTO `mob_droplist` VALUES (3001,0,0,1000,2854,307); -- Stately Crab Shell (30.7%)

@@ -8201,9 +8201,9 @@ INSERT INTO `mob_groups` VALUES (21,2475,115,'Magicked_Bones_war',330,1,769,0,0,
 INSERT INTO `mob_groups` VALUES (22,831,115,'Crawler',330,0,530,0,0,3,8,0);
 INSERT INTO `mob_groups` VALUES (23,1524,115,'Giant_Bee',330,0,965,0,0,5,8,0);
 INSERT INTO `mob_groups` VALUES (24,6562,115,'Magicked_Bones_blm',330,1,769,0,0,4,8,0);
-INSERT INTO `mob_groups` VALUES (25,3947,115,'Tom_Tit_Tat',0,32,2427,0,0,10,10,0);
-INSERT INTO `mob_groups` VALUES (26,2921,115,'Nunyenunc',0,32,1829,0,0,12,12,0);
-INSERT INTO `mob_groups` VALUES (27,5737,115,'Numbing_Norman',3600,0,3000,440,0,12,13,0);
+INSERT INTO `mob_groups` VALUES (25,3947,115,'Tom_Tit_Tat',0,32,2427,513,0,9,10,0);
+INSERT INTO `mob_groups` VALUES (26,2921,115,'Nunyenunc',0,32,1829,400,0,12,12,0);
+INSERT INTO `mob_groups` VALUES (27,5737,115,'Numbing_Norman',1200,0,3000,440,0,12,13,0);
 INSERT INTO `mob_groups` VALUES (28,1648,115,'Goblin_Digger',330,0,1039,0,0,5,8,0);
 
 -- garrison
