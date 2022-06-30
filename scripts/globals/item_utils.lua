@@ -3,6 +3,7 @@
 -----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
+require("scripts/globals/utils")
 -----------------------------------
 xi = xi or {}
 xi.item_utils = {}
@@ -131,5 +132,31 @@ xi.item_utils.addTwoItemEffects = function(target, effect1, effect2, power1, pow
         end
     else
         target:addStatusEffect(effect2, power2, 0, duration, 0, power2)
+    end
+end
+
+xi.item_utils.removeMultipleEffects = function(target, effects, count, random)
+    if random == 1 then -- randomize which effects get removed
+        local effects = utils.shuffle(effects)
+    end
+
+    if count > 0 then
+        local function removeStatus()
+            for _, effect in ipairs(effects) do
+                if target:delStatusEffect(effect) then return true end
+            end
+            if target:eraseStatusEffect() ~= 255 then return true end
+            return false
+        end
+
+        local removed = 0
+
+        for i = 0, count do
+            if not removeStatus() then break end
+            removed = removed + 1
+            if removed >= count then break end
+        end
+
+        return removed
     end
 end
