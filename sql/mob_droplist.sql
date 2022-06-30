@@ -18497,13 +18497,13 @@ INSERT INTO `mob_droplist` VALUES (2307,0,0,1000,868,130); -- Handful Of Pugil S
 INSERT INTO `mob_droplist` VALUES (2307,2,0,1000,864,0);   -- Handful Of Fish Scales (Steal)
 
 -- ZoneID: 116 - Spiny Spipi
-INSERT INTO `mob_droplist` VALUES (2308,0,0,1000,816,600);   -- Spool Of Silk Thread (60.0%)
-INSERT INTO `mob_droplist` VALUES (2308,0,0,1000,13607,330); -- Mist Silk Cape (33.0%)
-INSERT INTO `mob_droplist` VALUES (2308,0,0,1000,816,300);   -- Spool Of Silk Thread (30.0%)
-INSERT INTO `mob_droplist` VALUES (2308,0,0,1000,816,200);   -- Spool Of Silk Thread (20.0%)
-INSERT INTO `mob_droplist` VALUES (2308,0,0,1000,1156,130);  -- Crawler Calculus (13.0%)
-INSERT INTO `mob_droplist` VALUES (2308,0,0,1000,583,90);    -- Smooth Stone (9.0%)
-INSERT INTO `mob_droplist` VALUES (2308,2,0,1000,816,0);     -- Spool Of Silk Thread (Steal)
+INSERT INTO `mob_droplist` VALUES (2308,0,0,1000,13607,@VCOMMON); -- Mist Silk Cape (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2308,0,0,1000,1156,@UNCOMMON); -- Crawler Calculus (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (2308,0,0,1000,583,@RARE);      -- Smooth Stone (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (2308,0,0,1000,816,@VCOMMON);   -- Spool Of Silk Thread (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2308,0,0,1000,816,@VCOMMON);   -- Spool Of Silk Thread (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2308,0,0,1000,816,@VCOMMON);   -- Spool Of Silk Thread (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2308,2,0,1000,816,0);          -- Spool Of Silk Thread (Steal)
 
 -- ZoneID: 217 - Spitting Spider
 INSERT INTO `mob_droplist` VALUES (2309,0,0,1000,838,170);  -- Spider Web (17.0%)
@@ -24625,7 +24625,7 @@ INSERT INTO `mob_droplist` VALUES (2986,0,0,1000,18767,97); -- Birdbanes (9.7%)
 INSERT INTO `mob_droplist` VALUES (2987,0,0,1000,15942,128); -- Summoning Belt (12.8%)
 
 -- ZoneID: 116 - Duke Decapod
-INSERT INTO `mob_droplist` VALUES (2988,0,0,1000,16185,220); -- Pelte (22.0%)
+INSERT INTO `mob_droplist` VALUES (2988,0,0,1000,16185,@VCOMMON); -- Pelte (Very Common, 24%)
 
 -- ZoneID: 190 - Ankou
 INSERT INTO `mob_droplist` VALUES (2989,0,0,1000,18604,426); -- Astaroth Cane (42.6%)
