@@ -80,6 +80,10 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
             {
                 ref<uint8>(0x2A) = 4;
             }
+            if (PEntity->spawnAnimation == SPAWN_ANIMATION::SPECIAL)
+            {
+                ref<uint8>(0x28) |= 0x45;
+            }
             ref<uint8>(0x0A) = updatemask;
         }
         break;
@@ -195,15 +199,11 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
         }
     }
 
-    // TODO: Read from the trust model itself
     if (PEntity->objtype == TYPE_TRUST)
     {
-        // ref<uint32>(0x21) = 0x21b;
-        // ref<uint8>(0x2B) = 0x06;
-        // ref<uint8>(0x2A) = 0x08;
-        // ref<uint8>(0x25) = 0x0f;
-        // ref<uint8>(0x27) = 0x28;
-        ref<uint8>(0x28) = 0x45; // This allows trusts to be despawned
+        // Special spawn animation
+        // This also allows trusts to be despawned
+        ref<uint8>(0x28) |= 0x45;
     }
 
     // Send look data

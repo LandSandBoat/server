@@ -4696,7 +4696,7 @@ namespace charutils
     {
         TracyZoneScoped;
 
-        if (!roeutils::RoeSystem.RoeEnabled)
+        if (!settings::get<bool>("main.ENABLE_ROE"))
         {
             return;
         }

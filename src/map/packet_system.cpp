@@ -7258,7 +7258,7 @@ void SmallPacket0x10B(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x10C(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    if (roeutils::RoeSystem.RoeEnabled)
+    if (settings::get<bool>("main.ENABLE_ROE"))
     {
         uint16 recordID = data.ref<uint32>(0x04);
         roeutils::AddEminenceRecord(PChar, recordID);
@@ -7276,7 +7276,7 @@ void SmallPacket0x10C(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x10D(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    if (roeutils::RoeSystem.RoeEnabled)
+    if (settings::get<bool>("main.ENABLE_ROE"))
     {
         roeutils::DelEminenceRecord(PChar, data.ref<uint32>(0x04));
         PChar->pushPacket(new CRoeSparkUpdatePacket(PChar));
@@ -7292,7 +7292,7 @@ void SmallPacket0x10D(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x10E(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    if (roeutils::RoeSystem.RoeEnabled)
+    if (settings::get<bool>("main.ENABLE_ROE"))
     {
         uint16 recordID = data.ref<uint16>(0x04);
         roeutils::onRecordClaim(PChar, recordID);
@@ -7355,7 +7355,7 @@ void SmallPacket0x112(map_session_data_t* const PSession, CCharEntity* const PCh
     // Send spark updates
     PChar->pushPacket(new CRoeSparkUpdatePacket(PChar));
 
-    if (roeutils::RoeSystem.RoeEnabled)
+    if (settings::get<bool>("main.ENABLE_ROE"))
     {
         // Current RoE quests
         PChar->pushPacket(new CRoeUpdatePacket(PChar));
