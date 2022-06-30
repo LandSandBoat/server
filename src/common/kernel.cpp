@@ -20,15 +20,13 @@
 */
 
 #include "common/kernel.h"
-
-#include "common/debug.h"
-#include "common/logging.h"
-#include "common/lua.h"
-#include "common/settings.h"
 #include "common/socket.h"
 #include "common/taskmgr.h"
 #include "common/timer.h"
 #include "common/version.h"
+
+#include "debug.h"
+#include "logging.h"
 
 #include <csignal>
 #include <cstdio>
@@ -146,8 +144,8 @@ static void dump_backtrace()
             ShowError("read failed for gdb backtrace: %s", strerror(errno));
             _exit(EXIT_FAILURE);
         }
-        ShowCritical("--- gdb backtrace ---");
-        ShowCritical("%s", buf);
+        ShowFatalError("--- gdb backtrace ---");
+        ShowFatalError("%s", buf);
     }
 #endif
 }
@@ -266,10 +264,6 @@ int main(int argc, char** argv)
     usercheck();
     signals_init();
     timer_init();
-
-    lua_init();
-    settings::init();
-
     socket_init();
 
     do_init(argc, argv);

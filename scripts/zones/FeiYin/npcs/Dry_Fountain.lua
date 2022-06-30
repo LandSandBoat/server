@@ -4,7 +4,7 @@
 -- Involved In Quest: Peace for the Spirit
 -- !pos -17 -16 71 204
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/FeiYin/IDs")
 -----------------------------------

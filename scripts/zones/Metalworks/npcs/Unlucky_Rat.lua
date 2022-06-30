@@ -4,7 +4,7 @@
 -- Starts & Finishes Quest: Mean Machine
 -----------------------------------
 require("scripts/globals/quests")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 local ID = require("scripts/zones/Metalworks/IDs")
 -----------------------------------
 local entity = {}

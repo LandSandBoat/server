@@ -5,7 +5,7 @@
 -- Involved in Mission: Bastok 6-2
 -- !pos 64 -14 -4 237
 -----------------------------------
-require("scripts/globals/settings");
+require("scripts/settings/main");
 require("scripts/globals/keyitems");
 require("scripts/globals/titles");
 require("scripts/globals/quests");

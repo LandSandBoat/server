@@ -348,7 +348,7 @@ void CZone::LoadZoneWeather()
     }
     else
     {
-        ShowCritical("CZone::LoadZoneWeather: Cannot load zone weather (%u). Ensure zone_weather.sql has been imported!", m_zoneID);
+        ShowFatalError("CZone::LoadZoneWeather: Cannot load zone weather (%u). Ensure zone_weather.sql has been imported!", m_zoneID);
     }
 }
 
@@ -409,7 +409,7 @@ void CZone::LoadZoneSettings()
     }
     else
     {
-        ShowCritical("CZone::LoadZoneSettings: Cannot load zone settings (%u)", m_zoneID);
+        ShowFatalError("CZone::LoadZoneSettings: Cannot load zone settings (%u)", m_zoneID);
     }
 }
 

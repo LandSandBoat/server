@@ -4,7 +4,7 @@
 --  Guild Merchant NPC: Goldsmithing Guild
 -- !pos 46.011 0.000 -42.713 48
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/shop")
 local ID = require("scripts/zones/Al_Zahbi/IDs")
 -----------------------------------

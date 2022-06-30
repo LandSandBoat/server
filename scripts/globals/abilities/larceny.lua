@@ -4,7 +4,7 @@
 -- Obtained: THF Level 96
 -- Recast Time: 01:00:00
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local ability_object = {}

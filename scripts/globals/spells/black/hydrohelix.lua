@@ -3,7 +3,7 @@
 -- Deals water damage that gradually reduces
 -- a target's HP. Damage dealt is greatly affected by the weather.
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------

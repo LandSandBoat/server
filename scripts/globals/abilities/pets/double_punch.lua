@@ -1,7 +1,7 @@
 -----------------------------------
 -- Double Punch M=6, 2 (still guessing here)
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 require("scripts/globals/summon")

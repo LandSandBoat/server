@@ -244,7 +244,7 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
         this->setSize(0x48);
 
         auto name       = PEntity->packetName;
-        auto nameOffset = 0x34;
+        auto nameOffset = (PEntity->look.size == MODEL_EQUIPPED) ? 0x44 : 0x34;
         auto maxLength  = std::min<size_t>(name.size(), PacketNameLength);
 
         // Mobs and NPC's targid's live in the range 0-1023
@@ -260,6 +260,6 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
         std::memset(start, 0U, size);
 
         // Copy in name
-        std::memcpy(start, name.c_str(), maxLength);
+        std::memcpy(data + nameOffset, name.c_str(), maxLength);
     }
 }

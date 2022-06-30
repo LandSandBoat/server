@@ -1,7 +1,7 @@
 -----------------------------------
 -- Corsair Job Utilities
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/ability")
 require("scripts/globals/jobpoints")
 require("scripts/globals/status")

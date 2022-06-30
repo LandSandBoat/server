@@ -1,17 +1,16 @@
 -----------------------------------
 -- func: godmode
 -- desc: Toggles god mode on the player, granting them several special abilities.
--- Pass variable of 1 to command to enable a "soft" god mode.
 -----------------------------------
 
 cmdprops =
 {
     permission = 1,
-    parameters = "i"
+    parameters = ""
 }
 
-function onTrigger(player, arg1)
-    if (not arg1 or arg1 == 0) and player:getCharVar("GodMode") == 0 then
+function onTrigger(player)
+    if (player:getCharVar("GodMode") == 0) then
         -- Toggle GodMode on..
         player:setCharVar("GodMode", 1)
 
@@ -43,8 +42,7 @@ function onTrigger(player, arg1)
         -- Heal the player from the new buffs..
         player:addHP( 50000 )
         player:setMP( 50000 )
-        player:PrintToPlayer("God Mode enabled.")
-    elseif (not arg1 or arg1 == 0) and player:getCharVar("GodMode") == 1 then
+    else
         -- Toggle GodMode off..
         player:setCharVar("GodMode", 0)
 
@@ -72,40 +70,5 @@ function onTrigger(player, arg1)
         player:delMod(xi.mod.RDEF, 2500)
         player:delMod(xi.mod.DEF, 2500)
         player:delMod(xi.mod.MDEF, 2500)
-
-        player:PrintToPlayer("God Mode disabled.")
-    end
-
-    -- Enables a toned down version of god mode
-    if arg1 == 1 and player:getCharVar("GodMode") == 0 then
-        -- Toggle Soft GodMode on..
-        player:setCharVar("GodMode", 2)
-
-        -- Add bonus effects to the player..
-        player:addStatusEffect(xi.effect.MAX_HP_BOOST,200,0,0)
-        player:addStatusEffect(xi.effect.REGAIN,50,0,0)
-        player:addStatusEffect(xi.effect.REFRESH,999,0,0)
-        player:addStatusEffect(xi.effect.REGEN,999,0,0)
-        player:addStatusEffect(xi.effect.CHAINSPELL, 1, 0, 0)
-        player:addStatusEffect(xi.effect.MANAFONT, 1, 0, 0)
-
-        -- Heal the player from the new buffs..
-        player:addHP( 50000 )
-        player:setMP( 50000 )
-
-        player:PrintToPlayer("Soft God Mode enabled.")
-    elseif (not arg1 or arg1 == 1) and player:getCharVar("GodMode") == 2 then
-        -- Toggle Soft GodMode off..
-        player:setCharVar("GodMode", 0)
-
-        -- Remove bonus effects..
-        player:delStatusEffect(xi.effect.MAX_HP_BOOST)
-        player:delStatusEffect(xi.effect.REGAIN)
-        player:delStatusEffect(xi.effect.REFRESH)
-        player:delStatusEffect(xi.effect.REGEN)
-        player:delStatusEffect(xi.effect.CHAINSPELL)
-        player:delStatusEffect(xi.effect.MANAFONT)
-
-        player:PrintToPlayer("Soft God Mode disabled.")
     end
 end

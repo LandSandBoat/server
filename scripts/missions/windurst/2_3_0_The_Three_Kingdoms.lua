@@ -11,6 +11,8 @@
 -- Heruze-Moruze    : !pos -56 -3 36 231
 -- Kasaroro         : !pos -72 -3 34 231
 -- Patt-Pott        : !pos 23 -17 42 237
+-----------------------------------
+require('scripts/settings/main')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/items')
 require('scripts/globals/keyitems')

@@ -5,7 +5,7 @@
 -- !pos 126 -6 162 238
 -----------------------------------
 require("scripts/globals/quests")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/titles")
 require("scripts/globals/keyitems")
 -----------------------------------

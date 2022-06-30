@@ -61,7 +61,7 @@ public:
                 if (!result.valid())
                 {
                     sol::error err = result;
-                    ShowError("Error in listener event %s: %s", eventname, err.what());
+                    ShowScript("Error in listener event %s: %s", eventname, err.what());
                 }
             }
         }

@@ -4,7 +4,7 @@
 --
 -----------------------------------
 local ID = require("scripts/zones/Southern_San_dOria_[S]/IDs")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/chocobo")
 require("scripts/globals/quests")
 require("scripts/globals/zone")

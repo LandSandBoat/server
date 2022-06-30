@@ -7,7 +7,7 @@
 local ID = require("scripts/zones/Bastok_Markets/IDs")
 require("scripts/globals/status")
 require("scripts/globals/keyitems")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/npc_util")
 require("scripts/quests/tutorial")
 -----------------------------------

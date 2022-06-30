@@ -22,6 +22,7 @@
 #include "common/logging.h"
 #include "common/socket.h"
 
+#include "account.h"
 #include "login.h"
 #include "login_auth.h"
 #include "message_server.h"
@@ -34,19 +35,6 @@
 #include <algorithm>
 
 int32 login_fd; // main fd(socket) of server
-
-enum ACCOUNT_STATUS_CODE : uint8
-{
-    NORMAL = 0x01,
-    BANNED = 0x02,
-};
-
-enum ACCOUNT_PRIVILIGE_CODE : uint8
-{
-   USER  = 0x01,
-   ADMIN = 0x02,
-   ROOT  = 0x04,
-};
 
 /*
  *
@@ -130,7 +118,7 @@ int32 login_parse(int32 fd)
                     sd->accid    = sql->GetUIntData(0);
                     uint8 status = (uint8)sql->GetUIntData(1);
 
-                    if (status & ACCOUNT_STATUS_CODE::NORMAL)
+                    if (status & ACCST_NORMAL)
                     {
                         // fmtQuery = "SELECT * FROM accounts_sessions WHERE accid = %d AND client_port <> 0";
 
@@ -174,7 +162,7 @@ int32 login_parse(int32 fd)
                         flush_fifo(fd);
                         do_close_tcp(fd);
                     }
-                    else if (status & ACCOUNT_STATUS_CODE::BANNED)
+                    else if (status & ACCST_BANNED)
                     {
                         memset(&sessions[fd]->wdata[0], 0, 33);
                         sessions[fd]->wdata.resize(33);
@@ -227,9 +215,9 @@ int32 login_parse(int32 fd)
             case LOGIN_CREATE:
 
                 // check if account creation is disabled
-                if (!settings::get<bool>("login.ACCOUNT_CREATION"))
+                if (!login_config.account_creation)
                 {
-                    ShowWarning("login_parse: New account attempt <%s> but is disabled in settings.",
+                    ShowWarning("login_parse: New account attempt <%s> but is disabled in config.",
                                 escaped_name);
                     sessions[fd]->wdata.resize(1);
                     ref<uint8>(sessions[fd]->wdata.data(), 0) = LOGIN_ERROR_CREATE_DISABLED;
@@ -281,7 +269,7 @@ int32 login_parse(int32 fd)
                     fmtQuery = "INSERT INTO accounts(id,login,password,timecreate,timelastmodify,status,priv)\
                                        VALUES(%d,'%s',PASSWORD('%s'),'%s',NULL,%d,%d);";
 
-                    if (sql->Query(fmtQuery, accid, escaped_name, escaped_pass, strtimecreate, ACCOUNT_STATUS_CODE::NORMAL, ACCOUNT_PRIVILIGE_CODE::USER) == SQL_ERROR)
+                    if (sql->Query(fmtQuery, accid, escaped_name, escaped_pass, strtimecreate, ACCST_NORMAL, ACCPRIV_USER) == SQL_ERROR)
                     {
                         sessions[fd]->wdata.resize(1);
                         ref<uint8>(sessions[fd]->wdata.data(), 0) = LOGIN_ERROR_CREATE;
@@ -289,7 +277,7 @@ int32 login_parse(int32 fd)
                         return -1;
                     }
 
-                    ShowInfo("login_parse: account<%s> was created", escaped_name);
+                    ShowStatus("login_parse: account<%s> was created", escaped_name);
                     sessions[fd]->wdata.resize(1);
                     ref<uint8>(sessions[fd]->wdata.data(), 0) = LOGIN_SUCCESS_CREATE;
                     do_close_login(sd, fd);
@@ -322,7 +310,7 @@ int32 login_parse(int32 fd)
                 sd->accid    = sql->GetUIntData(0);
                 uint8 status = (uint8)sql->GetUIntData(1);
 
-                if (status & ACCOUNT_STATUS_CODE::BANNED)
+                if (status & ACCST_BANNED)
                 {
                     sessions[fd]->wdata.resize(1);
                     ref<uint8>(sessions[fd]->wdata.data(), 0) = LOGIN_ERROR_CHANGE_PASSWORD;
@@ -331,7 +319,7 @@ int32 login_parse(int32 fd)
                     return 0;
                 }
 
-                if (status & ACCOUNT_STATUS_CODE::NORMAL)
+                if (status & ACCST_NORMAL)
                 {
                     // Account info verified. Now request the new password.
                     sessions[fd]->wdata.resize(1);

@@ -1,7 +1,7 @@
 -----------------------------------
 -- Warrior Job Utilities
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 xi = xi or {}

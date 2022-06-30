@@ -7,7 +7,7 @@
 -- Duration: First Step lasts 1 minute, each following Step extends its current duration by 30 seconds.
 -----------------------------------
 require("scripts/globals/weaponskills")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
