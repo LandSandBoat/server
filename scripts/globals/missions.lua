@@ -556,7 +556,7 @@ xi.mission.id =
         RECKONING                       = 121, -- ±
         ABOMINATION                     = 123, -- ±
         UNDYING_LIGHT                   = 125, -- ±
-        THE_LIGHT_WITHIN                = 129,
+        THE_LIGHT_WITHIN                = 129, -- ±
         -- FIN                          = 130,
     },
 
