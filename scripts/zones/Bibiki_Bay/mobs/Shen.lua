@@ -11,7 +11,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    local spawnFiltrate = function(mob, target)
+    local spawnFiltrate = function()
         if mob:getAnimationSub() == 1 and mob:getHP() > 0 then
             for i = 1, 2 do
                 if not GetMobByID(mob:getID()+i):isSpawned() then
@@ -21,7 +21,7 @@ entity.onMobFight = function(mob, target)
         end
     end
 
-    spawnFiltrate(mob, target)
+    spawnFiltrate()
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
