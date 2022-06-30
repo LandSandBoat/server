@@ -18,7 +18,7 @@
 # init.txt:
 # ---------------------
 # | 
-# renamer
+# | renamer
 # | 
 # ---------------------
 #
@@ -52,4 +52,9 @@ era/lua/dynamis/mobskills/era_qufim_tp_moves.lua
 era/lua/dynamis/mobskills/era_xarcabard_tp_moves.lua
 era/lua/dynamis/globals/era_dynamis_zones.lua
 era/sql/era_dyna_sql.sql
+#-----------------------
+#        Renamer
+#-----------------------
+renamer/cpp/renamer.cpp
+renamer/list/list.lua
 #-----------------------

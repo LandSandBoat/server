@@ -971,7 +971,7 @@ xi.dynamis.ejectPlayer = function(player)
     if player:getCurrentRegion() == xi.region.DYNAMIS then
         if player:getLocalVar("Received_Eject_Warning") ~= 1 then
             player:delStatusEffectSilent(xi.effect.BATTLEFIELD)
-            player:timer(1000, function(player) player:messageSpecial(xi.dynamis.dynaIDLookup[zoneID].text.NO_LONGER_HAVE_CLEARANCE, os.time(), 30) end) -- Wait 1 second, send no clearance message.
+            player:timer(1000, function(player) player:messageSpecial(xi.dynamis.dynaIDLookup[zoneID].text.NO_LONGER_HAVE_CLEARANCE, 0, 30) end) -- Wait 1 second, send no clearance message.
             player:setLocalVar("Received_Eject_Warning", 1)
             player:setCharVar(string.format("[DYNA]EjectPlayer_%s", xi.dynamis.dynaInfoEra[zoneID].dynaZone), -1) -- Reset player's eject timer.
             player:disengage() -- Force disengage.
@@ -1159,7 +1159,8 @@ m:addOverride("xi.dynamis.zoneOnZoneIn", function(player, prevZone)
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then player:setPos(info.entryPos[1], info.entryPos[2], info.entryPos[3], info.entryPos[4]) end -- If player is in void, move player to entry.
 
     player:timer(5000, function(player)
-        player:messageSpecial(ID.text.DYNAMIS_TIME_UPDATE_2, math.floor(xi.dynamis.getDynaTimeRemaining(zoneTimepoint) / 60), 1) -- Send message letting player know how long they have.
+        local timepoint = xi.dynamis.getDynaTimeRemaining(zoneTimepoint)
+        player:messageSpecial(ID.text.DYNAMIS_TIME_UPDATE_2, math.floor(utils.clamp(timepoint, 0, timepoint) / 60), 1) -- Send message letting player know how long they have.
     end)
 
     return -1

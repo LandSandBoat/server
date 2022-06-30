@@ -371,7 +371,7 @@ xi.dynamis.normalDynamicSpawn = function(oMob, oMobIndex, target)
                     xi.dynamis.mobOnDeath(mob)
                 end,
                 releaseIdOnDeath = true,
-                specialSpawnAnimation = true,
+                specialSpawnAnimation = oMob ~= nil,
                 mixins =
                 {
                     require("scripts/mixins/job_special"),
@@ -553,7 +553,7 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
             xi.dynamis.mobOnDeath(mob)
         end,
         releaseIdOnDeath = true,
-        specialSpawnAnimation = true,
+        specialSpawnAnimation = oMob ~= nil,
         mixins = mobFunctions[mobMobType]["mixins"],
     })
     mob:setSpawn(xPos, yPos, zPos, rPos)
@@ -1147,7 +1147,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         onMobWeaponSkill= xi.dynamis.nmFunctions[xi.dynamis.nmInfoLookup[mobName][7]]["onMobWeaponSkill"][1],
         onMobDeath= xi.dynamis.nmFunctions[xi.dynamis.nmInfoLookup[mobName][7]]["onMobDeath"][1],
         releaseIdOnDeath = true,
-        specialSpawnAnimation = true,
+        specialSpawnAnimation = oMob ~= nil,
         mixins = xi.dynamis.nmFunctions[xi.dynamis.nmInfoLookup[mobName][7]]["mixins"],
     })
     if oMob ~= nil then
@@ -1449,7 +1449,7 @@ xi.dynamis.spawnDynamicPet =function(target, oMob, mobJob)
         onMobFight = petFunctions[mobJob][functionLookup]["onMobFight"],
         onMobDeath = function(mob, playerArg, isKiller) xi.dynamis.onPetDeath(mob) end,
         releaseIdOnDeath = true,
-        specialSpawnAnimation = true,
+        specialSpawnAnimation = oMob ~= nil,
         mixins = petFunctions[mobJob][functionLookup]["mixins"],
     })
     mob:setSpawn(oMob:getXPos()+math.random()*6-3, oMob:getYPos()-0.3, oMob:getZPos()+math.random()*6-3, oMob:getRotPos())
