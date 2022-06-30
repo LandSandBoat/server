@@ -13,6 +13,7 @@ entity.onMobInitialize = function(mob)
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     mob:setMobMod(xi.mobMod.DRAW_IN, 2) -- Aliance draw in
 =======
     mob:setMobMod(xi.mobMod.DRAW_IN, 1)
@@ -26,6 +27,9 @@ entity.onMobInitialize = function(mob)
 =======
     mob:setMobMod(xi.mobMod.DRAW_IN, 2) -- Aliance draw in
 >>>>>>> 4691c65c97 (Update King_Vinegarroon.lua)
+=======
+    mob:setMobMod(xi.mobMod.DRAW_IN, 2) -- Aliance draw in
+>>>>>>> d89bd8e0c7f96ba5ea55d287d53186d48382f052
 end
 
 entity.onMobDrawIn = function(mob, target)
@@ -65,6 +69,7 @@ end
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 entity.onMobFight = function(mob, target)
     local mobRegen = function()
         local hour = VanadielHour()
@@ -77,12 +82,18 @@ entity.onMobFight = function(mob, target)
     local mobRegen = function()
         local hour = VanadielHour()
 >>>>>>> 28fb56442b (Fixes)
+=======
+entity.onMobFight = function(mob, target)
+    local mobRegen = function()
+        local hour = VanadielHour()
+>>>>>>> d89bd8e0c7f96ba5ea55d287d53186d48382f052
 
     if hour >= 6 and hour <= 20 then
         mob:setMod(xi.mod.REGEN, 125)
     else
         mob:setMod(xi.mod.REGEN, 250)
     end
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     end
@@ -99,6 +110,11 @@ entity.onMobFight = function(mob, target)
 
     mobRegen()
 >>>>>>> 28fb56442b (Fixes)
+=======
+    end
+
+    mobRegen()
+>>>>>>> d89bd8e0c7f96ba5ea55d287d53186d48382f052
 end
 
 return entity

@@ -9109,6 +9109,7 @@ INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 186, 1, 255);
 INSERT INTO `mob_spell_lists` VALUES('Ixzdei_BLM', 467, 191, 1, 255);
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',467,249,1,255); -- Blaze Spikes
 INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',467,235,1,255); -- Burn
@@ -9130,6 +9131,9 @@ INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',467,204,1,255); -- Flare
 =======
 
 >>>>>>> 0a81959cbd (Styling fixes)
+=======
+
+>>>>>>> d89bd8e0c7f96ba5ea55d287d53186d48382f052
 INSERT INTO `mob_spell_lists` VALUES('Ixzdei_RDM', 468, 191, 1, 255);
 INSERT INTO `mob_spell_lists` VALUES('Ixzdei_RDM', 468, 260, 1, 255);
 INSERT INTO `mob_spell_lists` VALUES('Ixzdei_RDM', 468, 254, 1, 255);
@@ -9234,6 +9238,7 @@ INSERT INTO `mob_spell_lists` VALUES ('Sprinkler',489,196,1,255); -- Thundaga II
 INSERT INTO `mob_spell_lists` VALUES ('Sprinkler',489,212,1,255); -- Burst
 
 -- Next Available: 490
+<<<<<<< HEAD
 =======
 
 INSERT INTO `mob_spell_lists` VALUES ('Shen',487,172,1,255); -- Water IV
@@ -9256,6 +9261,8 @@ INSERT INTO `mob_spell_lists` VALUES ('Sprinkler',489,212,1,255); -- Burst
 
 -- Next Available: 490
 >>>>>>> 28fb56442b (Fixes)
+=======
+>>>>>>> d89bd8e0c7f96ba5ea55d287d53186d48382f052
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;

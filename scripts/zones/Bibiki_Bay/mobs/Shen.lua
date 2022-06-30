@@ -5,6 +5,9 @@
 local ID = require("scripts/zones/Bibiki_Bay/IDs")
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> d89bd8e0c7f96ba5ea55d287d53186d48382f052
 require("scripts/globals/mixins/families/uragnite")
 -----------------------------------
 local entity = {}
@@ -13,6 +16,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
+<<<<<<< HEAD
 =======
 =======
 require("scripts/globals/mixins/families/uragnite")
@@ -64,10 +68,13 @@ entity.onMobFight = function(mob, target)
 >>>>>>> 31cae545dc (Shen Overhaul)
 =======
 >>>>>>> 1584f53c9b (Including Uragnite mixin)
+=======
+>>>>>>> d89bd8e0c7f96ba5ea55d287d53186d48382f052
     entity.spawnFiltrate(mob, target)
 end
 
 entity.spawnFiltrate = function(mob, target)
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -87,6 +94,11 @@ entity.spawnFiltrate = function(mob, target)
         for i = 1, 2 do
             if not GetMobByID(mob:getID()+i):isSpawned() then
 >>>>>>> 1584f53c9b (Including Uragnite mixin)
+=======
+    if mob:getAnimationSub() == 1 and mob:getHP() > 0 then
+        for i = 1, 2 do
+            if not GetMobByID(mob:getID()+i):isSpawned() then
+>>>>>>> d89bd8e0c7f96ba5ea55d287d53186d48382f052
                 SpawnMob(mob:getID()+i):updateEnmity(target)
             end
         end
