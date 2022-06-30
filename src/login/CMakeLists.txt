@@ -1,5 +1,7 @@
 set(SOURCES
     ${COMMON_SOURCES}
+    account.cpp
+    account.h
     lobby.cpp
     lobby.h
     login_auth.cpp

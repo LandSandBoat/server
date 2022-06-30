@@ -1,7 +1,7 @@
 -----------------------------------
 -- Gambits decision making system
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 -----------------------------------

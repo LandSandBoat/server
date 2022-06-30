@@ -1,7 +1,7 @@
 -----------------------------------
 -- Flaming Crush M=10, 2, 2? (STILL don't know)
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/summon")
 require("scripts/globals/magic")

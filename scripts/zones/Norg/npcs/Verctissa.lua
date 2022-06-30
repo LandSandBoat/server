@@ -4,7 +4,7 @@
 -- Starts Quest: Trial Size Trial By Water
 -- !pos -13 1 -20 252
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/quests")
 require("scripts/globals/teleports")

@@ -2,7 +2,7 @@
 -- Area: The_Garden_of_RuHmet
 --  NPC: _0zs
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 -----------------------------------
 local entity = {}
 

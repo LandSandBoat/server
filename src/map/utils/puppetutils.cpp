@@ -596,7 +596,7 @@ namespace puppetutils
             uint16 MaxSkill = getSkillCap(PChar, SkillID, std::min(PAutomaton->GetMLevel(), lvl));
 
             int16  Diff          = MaxSkill - CurSkill / 10;
-            double SkillUpChance = Diff / 5.0 + settings::get<double>("map.SKILLUP_CHANCE_MULTIPLIER") * (2.0 - log10(1.0 + CurSkill / 100));
+            double SkillUpChance = Diff / 5.0 + map_config.skillup_chance_multiplier * (2.0 - log10(1.0 + CurSkill / 100));
 
             double random = xirand::GetRandomNumber(1.);
 
@@ -650,9 +650,9 @@ namespace puppetutils
                 MaxSkill = MaxSkill * 10;
 
                 // Do skill amount multiplier (Will only be applied if default setting is changed)
-                if (settings::get<uint8>("map.SKILLUP_AMOUNT_MULTIPLIER") > 1)
+                if (map_config.skillup_amount_multiplier > 1)
                 {
-                    SkillAmount += (uint8)(SkillAmount * settings::get<uint8>("map.SKILLUP_AMOUNT_MULTIPLIER"));
+                    SkillAmount += (uint8)(SkillAmount * map_config.skillup_amount_multiplier);
                     if (SkillAmount > 9)
                     {
                         SkillAmount = 9;

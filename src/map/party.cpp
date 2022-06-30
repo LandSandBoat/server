@@ -1024,7 +1024,7 @@ void CParty::SetSyncTarget(int8* MemberName, uint16 message)
         PEntity = GetMemberByName(MemberName);
     }
 
-    if (settings::get<bool>("map.LEVEL_SYNC_ENABLE"))
+    if (map_config.level_sync_enable)
     {
         if (PEntity && PEntity->objtype == TYPE_PC)
         {

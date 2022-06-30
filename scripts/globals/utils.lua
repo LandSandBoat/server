@@ -552,23 +552,3 @@ function utils.mobTeleport(mob, hideDuration, pos, disAnim, reapAnim)
         end
     end)
 end
-
-local ffxiRotConversionFactor = 360.0 / 255.0
-
-function utils.ffxiRotToDegrees(ffxiRot)
-    return ffxiRotConversionFactor * ffxiRot
-end
-
-
-function utils.lateralTranslateWithOriginRotation(origin, translation)
-    local degrees = utils.ffxiRotToDegrees(origin.rot)
-    local rads = math.rad(degrees)
-    local new_coords = {}
-
-    new_coords.x = origin.x + ((math.cos(rads) * translation.x) + (math.sin(rads) * translation.z))
-    new_coords.z = origin.z + ((math.cos(rads) * translation.z) - (math.sin(rads) * translation.x))
-    new_coords.y = origin.y
-    new_coords.rot = origin.rot
-
-    return new_coords
-end

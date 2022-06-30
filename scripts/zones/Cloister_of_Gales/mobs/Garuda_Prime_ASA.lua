@@ -4,7 +4,7 @@
 -- Involved in Mission: ASA-4 Sugar Coated Directive
 -----------------------------------
 require("scripts/globals/keyitems")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}

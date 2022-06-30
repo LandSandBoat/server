@@ -4,6 +4,8 @@
 -- related to area specific things
 --
 -----------------------------------
+require('scripts/settings/main')
+-----------------------------------
 
 xi = xi or {}
 
@@ -435,7 +437,7 @@ xi.expansionRegion.ABYSSEA = set{
 -----------------------------------
 
 function SetExplorerMoogles(moogle)
-    if xi.settings.main.EXPLORER_MOOGLE_LV ~= 0 then
+    if xi.settings.EXPLORER_MOOGLE_LV ~= 0 then
         local npc = GetNPCByID(moogle)
         if npc == nil then
             printf("'SetExplorerMoogles' Error trying to load undefined npc (%d)", moogle)

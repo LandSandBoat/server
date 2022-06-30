@@ -4,7 +4,7 @@
 -- Involved in Quest: Dark Legacy
 -- !pos -52 -6 110 238
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}

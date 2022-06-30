@@ -4,7 +4,7 @@
 -- Starts and Finishes Quest: A Lady's Heart
 -- !pos 59 8 -221 236
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Port_Bastok/IDs")
 -----------------------------------

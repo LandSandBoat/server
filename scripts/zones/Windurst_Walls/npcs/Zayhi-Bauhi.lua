@@ -5,7 +5,7 @@
 --    Working 100%
 --  Starts and Finishes Quest: To Bee or Not to Bee?
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

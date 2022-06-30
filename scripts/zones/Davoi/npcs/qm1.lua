@@ -4,7 +4,7 @@
 -- Involved in Quest: To Cure a Cough
 -- !pos -115.830 -0.427 -184.289 149
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/titles")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")

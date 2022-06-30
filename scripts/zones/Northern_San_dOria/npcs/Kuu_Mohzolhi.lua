@@ -4,7 +4,7 @@
 -- Starts and Finishes Quest: Growing Flowers
 -- !pos -123 0 80 231
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
 -----------------------------------

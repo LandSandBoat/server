@@ -109,7 +109,7 @@ sol::object CLuaZone::levelRestriction()
 
 sol::table CLuaZone::getPlayers()
 {
-    auto table = lua.create_table();
+    auto table = luautils::lua.create_table();
     // clang-format off
     m_pLuaZone->ForEachChar([&table](CCharEntity* PChar)
     {
@@ -121,7 +121,7 @@ sol::table CLuaZone::getPlayers()
 
 sol::table CLuaZone::getNPCs()
 {
-    auto table = lua.create_table();
+    auto table = luautils::lua.create_table();
     // clang-format off
     m_pLuaZone->ForEachNpc([&table](CNpcEntity* PNpc)
     {
@@ -133,7 +133,7 @@ sol::table CLuaZone::getNPCs()
 
 sol::table CLuaZone::getMobs()
 {
-    auto table = lua.create_table();
+    auto table = luautils::lua.create_table();
     // clang-format off
     m_pLuaZone->ForEachMob([&table](CMobEntity* PMob)
     {
@@ -187,21 +187,10 @@ void CLuaZone::reloadNavmesh()
     m_pLuaZone->m_navMesh->reload();
 }
 
-bool CLuaZone::isNavigablePoint(const sol::table& point)
-{
-    position_t position {
-        point["x"].get_or<float>(0),
-        point["y"].get_or<float>(0),
-        point["z"].get_or<float>(0),
-        point["moving"].get_or<uint16>(0),
-        point["rot"].get_or<uint8>(0)
-    };
-
-    return m_pLuaZone->m_navMesh->validPosition(position);
-}
-
 std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
 {
+    auto& lua = luautils::lua;
+
     CBaseEntity* PEntity = nullptr;
     if (table.get_or<uint8>("objtype", TYPE_NPC) == TYPE_NPC)
     {
@@ -332,12 +321,7 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
     }
     else if (table["look"].get_type() == sol::type::string)
     {
-        auto lookStr = table.get<std::string>("look");
-        if (lookStr.size() >= 4 && ((lookStr[1] == 'x' && lookStr[3] == '1') || lookStr[1] == '1'))
-        {
-            PEntity->look.size = MODEL_EQUIPPED;
-        }
-        auto look = stringToLook(lookStr);
+        auto look = stringToLook(table.get<std::string>("look"));
         std::memcpy(&PEntity->look, &look, sizeof(PEntity->look));
     }
 
@@ -410,7 +394,7 @@ sol::table CLuaZone::queryEntitiesByName(std::string const& name)
 {
     TracyZoneScoped;
 
-    auto table = lua.create_table();
+    auto table = luautils::lua.create_table();
 
     // TODO: Make work for instances
     // TODO: Replace with a constant-time lookup
@@ -463,7 +447,6 @@ void CLuaZone::Register()
     SOL_REGISTER("battlefieldsFull", CLuaZone::battlefieldsFull);
     SOL_REGISTER("getWeather", CLuaZone::getWeather);
     SOL_REGISTER("reloadNavmesh", CLuaZone::reloadNavmesh);
-    SOL_REGISTER("isNavigablePoint", CLuaZone::isNavigablePoint);
     SOL_REGISTER("insertDynamicEntity", CLuaZone::insertDynamicEntity);
 
     SOL_REGISTER("getSoloBattleMusic", CLuaZone::getSoloBattleMusic);

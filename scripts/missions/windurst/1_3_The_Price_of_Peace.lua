@@ -11,6 +11,8 @@
 -- Ohbiru-Dohbiru   : !pos 23 -5 -193 238
 -- Laa Mozi         : !pos -22 0 148 145
 -- Ghoo Pakya       : !pos -139 0 147 145
+-----------------------------------
+require('scripts/settings/main')
 require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')

@@ -42,22 +42,6 @@ ConsoleService::ConsoleService()
         fmt::print("> tasks registered to the application task manager: {}\n", CTaskMgr::getInstance()->getTaskList().size());
     });
 
-    RegisterCommand("log_level", "Set the maximum log level to be displayed (available: 0: trace, 1: debug, 2: info, 3: warn)",
-    [](std::vector<std::string> inputs)
-    {
-        if (inputs.size() >= 2)
-        {
-            std::vector<std::string> names = { "trace", "debug", "info", "warn" };
-            auto level = std::clamp<uint8>(stoi(inputs[1]), 0, 3);
-            spdlog::set_level(static_cast<spdlog::level::level_enum>(level));
-            fmt::print("> Log level set to: {} ({})\n", level, names[level]);
-        }
-        else
-        {
-            fmt::print("> Invalid inputs.\n");
-        }
-    });
-
     RegisterCommand("exit", "Terminate the program.",
     [](std::vector<std::string> inputs)
     {
@@ -68,8 +52,8 @@ ConsoleService::ConsoleService()
     bool attached = isatty(0);
     if (attached)
     {
-        ShowInfo("Console input thread is ready...");
-        ShowInfo("Type 'help' for a list of available commands.");
+        ShowStatus("Console input thread is ready...");
+        ShowStatus("Type 'help' for a list of available commands.");
         m_consoleInputThread = std::thread([&]()
         {
             auto lastInputTime = server_clock::now();
@@ -113,7 +97,7 @@ ConsoleService::ConsoleService()
                 }
                 std::this_thread::sleep_for(250ms); // TODO: Do this better
             };
-            ShowInfo("Console input thread exiting...");
+            ShowStatus("Console input thread exiting...");
         });
     }
     // clang-format on

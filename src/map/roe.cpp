@@ -53,7 +53,7 @@ void call_onRecordTrigger(CCharEntity* PChar, uint16 recordID, const RoeDatagram
 {
     TracyZoneScoped;
     // TODO: Move this Lua interaction into luautils
-    auto onRecordTrigger = lua["xi"]["roe"]["onRecordTrigger"];
+    auto onRecordTrigger = luautils::lua["xi"]["roe"]["onRecordTrigger"];
     if (!onRecordTrigger.valid())
     {
         sol::error err = onRecordTrigger;
@@ -62,7 +62,7 @@ void call_onRecordTrigger(CCharEntity* PChar, uint16 recordID, const RoeDatagram
     }
 
     // Create param table
-    auto params        = lua.create_table();
+    auto params        = luautils::lua.create_table();
     params["progress"] = roeutils::GetEminenceRecordProgress(PChar, recordID);
 
     for (auto& datagram : payload) // Append datagrams to param table
