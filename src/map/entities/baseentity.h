@@ -307,6 +307,10 @@ public:
     ALLEGIANCE_TYPE allegiance; // what types of targets the entity can fight
     uint8           updatemask; // what to update next server tick to players nearby
 
+    uint32 animBegin;                   // Animation start time
+    uint8 animPath;                     // Which animation Path
+    bool animStart;                     // Is this starting an animation?
+
     bool isRenamed; // tracks if the entity's name has been overidden. Defaults to false.
 
     SPAWN_ANIMATION spawnAnimation;

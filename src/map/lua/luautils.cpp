@@ -4789,7 +4789,7 @@ namespace luautils
             // 0xFFFF is gil, so we will always return a value less than that as a warning
             id = 0xFFFF - sql->NumRows() + 1;
         }
-        
+
 
         return id;
     }

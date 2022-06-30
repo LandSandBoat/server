@@ -48,6 +48,10 @@ CBaseEntity::CBaseEntity()
     updatemask   = 0;
     PBattlefield = nullptr;
     PInstance    = nullptr;
+    animStart = false;
+    animPath = 0;
+    animBegin = 0;
+
 }
 
 CBaseEntity::~CBaseEntity()

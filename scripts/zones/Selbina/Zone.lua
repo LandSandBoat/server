@@ -51,7 +51,7 @@ end
 
 zone_object.onEventFinish = function(player, csid, option)
     if csid == 200 then
-        if GetServerVariable("Selbina_Deastination") > 89 then
+        if GetServerVariable("Selbina_Deastination") >= 0 then
             player:setPos(0, 0, 0, 0, xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES)
         else
             player:setPos(0, 0, 0, 0, xi.zone.SHIP_BOUND_FOR_MHAURA)
