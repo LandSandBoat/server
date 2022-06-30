@@ -78,8 +78,6 @@ extern inline map_session_data_t* mapsession_createsession(uint32 ip, uint16 por
 
 extern std::unique_ptr<SqlConnection> sql;
 
-extern bool gLoadAllLua;
-
 //=======================================================================
 
 int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*); // main function to parse recv packets
