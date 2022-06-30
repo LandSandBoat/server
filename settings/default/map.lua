@@ -23,7 +23,7 @@ xi.settings.map =
 
     --  PacketGuard will block and report any packets that aren't in the allow-list for a
     --  player's current state.
-    PACKETGUARD_ENABLED = 1,
+    PACKETGUARD_ENABLED = true,
 
     -- Minimal number of 0x3A packets which uses for detect lightluggage (set 0 for disable)
     LIGHTLUGGAGE_BLOCK = 4,
@@ -43,7 +43,7 @@ xi.settings.map =
     -- Misc EXP related settings
     EXP_RATE                = 1.5,
     EXP_LOSS_RATE           = 1.0,
-    EXP_PARTY_GAP_PENALTIES = 1,
+    EXP_PARTY_GAP_PENALTIES = true,
 
     --  Capacity Point Settings
     CAPACITY_RATE = 1.0,
@@ -64,10 +64,10 @@ xi.settings.map =
     EXP_LOSS_LEVEL = 31,
 
     -- Enable/disable Level Sync
-    LEVEL_SYNC_ENABLE = 1,
+    LEVEL_SYNC_ENABLE = true,
 
     -- Disables ability to equip higher level gear when level cap/sync effect is on player.
-    DISABLE_GEAR_SCALING = 0,
+    DISABLE_GEAR_SCALING = false,
 
     -- Weaponskill point base (before skillchain) for breaking latent - whole numbers only. retail is 1.
     WS_POINTS_BASE = 1,
@@ -77,7 +77,7 @@ xi.settings.map =
     WS_POINTS_SKILLCHAIN = 1,
 
     -- Enable/disable jobs other than BST and RNG having widescan
-    ALL_JOBS_WIDESCAN = 1,
+    ALL_JOBS_WIDESCAN = true,
 
     -- Modifier to apply to player speed. 0 is the retail accurate default. Negative numbers will reduce it.
     SPEED_MOD = 0,
@@ -97,14 +97,14 @@ xi.settings.map =
     SKILLUP_AMOUNT_MULTIPLIER = 2,
     CRAFT_AMOUNT_MULTIPLIER   = 1.5,
 
-    -- Gardening Factors        = DO NOT change defaults without verifiable proof that your change IS how retail does it. Myths need to be optional.
-    GARDEN_DAY_MATTERS       = 0,
-    GARDEN_MOONPHASE_MATTERS = 0,
-    GARDEN_POT_MATTERS       = 0,
-    GARDEN_MH_AURA_MATTERS   = 0,
+    -- Gardening Factors. DO NOT change defaults without verifiable proof that your change IS how retail does it. Myths need to be optional.
+    GARDEN_DAY_MATTERS       = false,
+    GARDEN_MOONPHASE_MATTERS = false,
+    GARDEN_POT_MATTERS       = false,
+    GARDEN_MH_AURA_MATTERS   = false,
 
     -- Use current retail skill up rates and margins (Retail = High Skill-Up rate; Skill-Up when at or under 10 levels above synth recipe level.)
-    CRAFT_MODERN_SYSTEM = 1,
+    CRAFT_MODERN_SYSTEM = true,
 
     -- Craft level limit from witch specialization points beging to count. (Retail = 700; Level 75 era:600)
     CRAFT_COMMON_CAP = 700,
@@ -119,7 +119,7 @@ xi.settings.map =
     FISHING_SKILL_MULTIPLIER = 3.0,
 
     -- Enable/disable skill-ups from bloodpacts
-    SKILLUP_BLOODPACT = 1,
+    SKILLUP_BLOODPACT = true,
 
     -- Adjust rate of TP gain for mobs, and players. Acts as a multiplier, so default is 1.
     MOB_TP_MULTIPLIER    = 1.0,
@@ -163,7 +163,7 @@ xi.settings.map =
     ABILITY_RECAST_MULTIPLIER = 1.0,
 
     -- Enable/disable shared blood pact timer
-    BLOOD_PACT_SHARED_TIMER = 0,
+    BLOOD_PACT_SHARED_TIMER = false,
 
     -- Adjust mob drop rate. Acts as a multiplier, so default is 1.
     DROP_RATE_MULTIPLIER = 1.0,
@@ -220,10 +220,10 @@ xi.settings.map =
     HEALING_TICK_DELAY = 10,
 
     -- Set to 1 to enable server side anti-cheating measurements
-    ANTICHEAT_ENABLED = 1,
+    ANTICHEAT_ENABLED = true,
 
     -- Set to 1 to completely disable auto-jailing offenders
-    ANTICHEAT_JAIL_DISABLE = 0,
+    ANTICHEAT_JAIL_DISABLE = false,
 
 
     --  Gobbie Mystery Box settings
