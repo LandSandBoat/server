@@ -6,8 +6,6 @@
 -- qm1 (Monastic Caverns) : !pos 168 -1 -22 150
 -- qm2 (Castle Oztroja)   : !pos -100 -63 58 151
 -- qm1 (Qulun Dome)       : !pos 261 39 79 148
------------------------------------
-require('scripts/settings/main')
 require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
@@ -33,7 +31,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
                 player:getLevelCap() == 60 and
-                xi.settings.MAX_LEVEL >= 65
+                xi.settings.main.MAX_LEVEL >= 65
         end,
 
         [xi.zone.RULUDE_GARDENS] =

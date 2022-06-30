@@ -27,5 +27,4 @@ if(CACHE_BINARY)
         ${CACHE_BINARY}
         CACHE FILEPATH "C compiler cache used")
     else()
-    message(WARNING "${CACHE_OPTION} is enabled but was not found. Not using it")
 endif()

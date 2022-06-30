@@ -4,7 +4,7 @@
 -- Starts Quest: The Wisdom Of Elders
 -----------------------------------
 require("scripts/globals/quests")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 local ID = require("scripts/zones/Port_Bastok/IDs")
 -----------------------------------
 local entity = {}

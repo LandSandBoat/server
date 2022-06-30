@@ -67,7 +67,7 @@ static bool read_to_vector(const std::string& file, std::vector<uint32>& vec)
     std::unique_ptr<FILE, decltype(&fclose)> fp(fopen(file.c_str(), "rb"), &fclose);
     if (!fp)
     {
-        ShowFatalError("zlib: can't open file <%s>", file.c_str());
+        ShowCritical("zlib: can't open file <%s>", file.c_str());
         return false;
     }
 
@@ -78,7 +78,7 @@ static bool read_to_vector(const std::string& file, std::vector<uint32>& vec)
     vec.resize(size / sizeof(uint32));
     if (fread(vec.data(), sizeof(uint32), vec.size(), fp.get()) != vec.size())
     {
-        ShowFatalError("zlib: can't read file <%s>: %s", file.c_str(), strerror(errno));
+        ShowCritical("zlib: can't read file <%s>: %s", file.c_str(), strerror(errno));
         return false;
     }
 

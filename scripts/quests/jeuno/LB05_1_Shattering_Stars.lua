@@ -3,8 +3,6 @@
 -----------------------------------
 -- Log ID: 3, Quest ID: 132
 -- Maat : !pos 8 3 118 243
------------------------------------
-require('scripts/settings/main')
 require('scripts/globals/items')
 require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
@@ -33,7 +31,7 @@ quest.sections =
                 player:getMainJob() <= 15 and -- Only the "old" jobs may start this quest.
                 player:getMainLvl() >= 66 and
                 player:getLevelCap() == 70 and
-                xi.settings.MAX_LEVEL >= 75
+                xi.settings.main.MAX_LEVEL >= 75
         end,
 
         [xi.zone.RULUDE_GARDENS] =

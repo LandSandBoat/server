@@ -4,7 +4,7 @@
 --  Invloved in quests: A Greeting Cardian
 -----------------------------------
 local ID = require("scripts/zones/Buburimu_Peninsula/IDs")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 

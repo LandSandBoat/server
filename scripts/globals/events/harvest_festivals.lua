@@ -1,7 +1,7 @@
 -----------------------------------
 -- Harvest Festivals
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 -----------------------------------
@@ -11,8 +11,8 @@ function isHalloweenEnabled()
     local month = tonumber(os.date("%m"))
     local day = tonumber(os.date("%d"))
 
-    if (month == 10 and day >= 20 or month == 11 and day == 1 or xi.settings.HALLOWEEN_YEAR_ROUND ~= 0) then -- According to wiki Harvest Fest is Oct 20 - Nov 1.
-        if (xi.settings.HALLOWEEN_2005 == 1) then
+    if (month == 10 and day >= 20 or month == 11 and day == 1 or xi.settings.main.HALLOWEEN_YEAR_ROUND ~= 0) then -- According to wiki Harvest Fest is Oct 20 - Nov 1.
+        if (xi.settings.main.HALLOWEEN_2005 == 1) then
             option = 1
         elseif (HALLOWEEN_2008 == 1) then
             option = 2
