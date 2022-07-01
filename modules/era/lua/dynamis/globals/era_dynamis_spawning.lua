@@ -15,6 +15,7 @@ require("scripts/globals/zone")
 require("scripts/globals/msg")
 require("scripts/globals/pathfind")
 require("scripts/globals/dynamis")
+require("modules/module_utils")
 --------------------------------------------
 --       Module Extended Scripts          --
 --------------------------------------------
