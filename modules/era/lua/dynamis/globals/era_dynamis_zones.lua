@@ -155,7 +155,7 @@ for _, zoneID in pairs(startingZones) do
         xi.dynamis.entryNpcOnEventFinish(player, npc, trade)
     end)
     m:addOverride(string.format("xi.zones.%s.Zone.onZoneTick", zoneID[2]),
-    function(player, prevZone, zone)
+    function(zone)
         local dynamisZone = GetZone(zoneID[4])
         if dynamisZone:getLocalVar(string.format("[DYNA]NoPlayersInZone_%s", dynamisZone:getID())) ~= 0 then
             if dynamisZone:getLocalVar(string.format("[DYNA]NoPlayersInZone_%s", dynamisZone:getID())) <= os.time() then

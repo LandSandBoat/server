@@ -586,9 +586,6 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
     if mobIndex == nil then
         return
     end
-    if oMob ~= nil then
-        local oMobID = oMob:getID()
-    end
     local mobName = xi.dynamis.mobList[zoneID][mobIndex].info[2]
     if xi.dynamis.mobList[zoneID][mobIndex].pos then
         xPos = xi.dynamis.mobList[zoneID][mobIndex].pos[1]
@@ -601,7 +598,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         zPos = oMob:getZPos()+math.random()*6-3
         rPos = oMob:getRotPos()
     end
-    xi.dynamis.nmInfoLookup = 
+    xi.dynamis.nmInfoLookup =
     {
         -- Below use used to lookup Beastmen NMs
         -- Goblin
@@ -865,7 +862,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
     {
         ["Beastmen"] =
         {
-            ["onMobSpawn"] = {function(mob) xi.dynamis.setMobStats(mob) end},
+            ["onMobSpawn"] = {function(mob) xi.dynamis.setNMStats(mob) end},
             ["onMobEngaged"] = {function(mob, target) xi.dynamis.parentOnEngaged(mob, target) xi.dynamis.mobOnEngaged(mob, target) end},
             ["onMobFight"] = {function(mob) end},
             ["onMobRoam"] = {function(mob) end},
@@ -1160,6 +1157,9 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
             mob:setSpawn(oMob:getXPos(), oMob:getYPos(), oMob:getZPos(), oMob:getRotPos())
             mob:spawn()
             mob:setSpawn(xPos, yPos, zPos, rPos)
+        else
+            mob:setSpawn(xPos, yPos, zPos, rPos)
+            mob:spawn()
         end
     else
         mob:setSpawn(xPos, yPos, zPos, rPos)
@@ -1226,7 +1226,7 @@ xi.dynamis.spawnDynamicPet =function(target, oMob, mobJob)
             --   },
         -- },
         -- [Mob's Name (Used for Non-Beastmen NMs)] = {Name, groupId, groupZoneId, Droplist, SpellList, SkillList}, -- NM Pet
-        [xi.job.BST] = 
+        [xi.job.BST] =
         {
             [327] = -- Goblin Family
             {
@@ -1463,9 +1463,9 @@ xi.dynamis.spawnDynamicPet =function(target, oMob, mobJob)
     }
     local nameFunction = {"Apocalyptic Beast", "Dagourmarche"}
     if isNM == true then
-        nameObj = petList[mobJob][mobFamily][true][mobName]
+        nameObj = petList[mobJob][mobFamily][isNM][mobName]
     else
-        nameObj = petList[mobJob][mobFamily][false]
+        nameObj = petList[mobJob][mobFamily][isNM]
     end
     for _, name in pairs(nameFunction) do
         if name == mobName then
@@ -1490,6 +1490,7 @@ xi.dynamis.spawnDynamicPet =function(target, oMob, mobJob)
         mixins = petFunctions[mobJob][functionLookup]["mixins"],
     })
     mob:setSpawn(oMob:getXPos()+math.random()*6-3, oMob:getYPos()-0.3, oMob:getZPos()+math.random()*6-3, oMob:getRotPos())
+    mob:spawn()
     mob:setDropID(nameObj[4])
     if nameObj[5] ~= nil then -- If SpellList ~= nil set SpellList
         mob:setSpellList(nameObj[5])
@@ -1498,7 +1499,6 @@ xi.dynamis.spawnDynamicPet =function(target, oMob, mobJob)
         mob:setMobMod(xi.mobMod.SKILL_LIST, nameObj[6])
     end
     oMob:setPet(mob)
-    mob:spawn()
     mob:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0, true)
     mob:updateEnmity(target)
 end
@@ -1703,6 +1703,9 @@ xi.dynamis.setMegaBossStats = function(mob)
 end
 
 xi.dynamis.setPetStats = function(mob)
+    if mob:getFamily() == 34 then
+        mob:setModelId(math.random(791, 798))
+    end
     mob:setMobType(xi.mobskills.mobType.BATTLEFIELD)
     mob:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0, true)
     mob:setMobMod(xi.mobMod.CHECK_AS_NM, 1)
@@ -1823,9 +1826,6 @@ xi.dynamis.statueOnFight = function(mob, target)
             mob:SetMagicCastingEnabled(false)
             mob:SetAutoAttackEnabled(false)
             mob:SetMobAbilityEnabled(false)
-            if mob:getCurrentAction() == xi.action.MAGIC_CASTING then
-                target:tryInterruptSpell(mob, 1000)
-            end
             mob:addStatusEffect(xi.effect.STUN, 1, 0, 5)
             if mob:hasStatusEffect(xi.effect.STUN) then
                 mob:delStatusEffectSilent(xi.effect.STUN)
