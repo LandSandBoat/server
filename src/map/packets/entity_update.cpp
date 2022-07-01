@@ -242,9 +242,7 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
                 }
                 else
                 {
-                    SYSTEMTIME oSystemTime;
-                    GetSystemTime(&oSystemTime);
-                    uint32 msFrames   = (uint32)std::round((oSystemTime.wMilliseconds * 60) / 1000);
+                    uint32 msFrames   = (uint32)std::round((getCurrentTimeMs() * 60) / 1000);
                     uint32 diff       = CVanaTime::getInstance()->getVanaTime() - PEntity->animBegin;
                     uint32 frameCount = 0x8006 + (diff * 60) + msFrames;
                     ref<uint32>(0x18) = frameCount;
