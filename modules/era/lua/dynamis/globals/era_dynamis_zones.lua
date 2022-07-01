@@ -159,7 +159,7 @@ for _, zoneID in pairs(startingZones) do
         local dynamisZone = GetZone(zoneID[4])
         if dynamisZone:getLocalVar(string.format("[DYNA]NoPlayersInZone_%s", dynamisZone:getID())) ~= 0 then
             if dynamisZone:getLocalVar(string.format("[DYNA]NoPlayersInZone_%s", dynamisZone:getID())) <= os.time() then
-                xi.dynamis.cleanupDynamis(zone)
+                xi.dynamis.cleanupDynamis(dynamisZone)
             end
         end
     end)
