@@ -70,11 +70,6 @@ public:
     void setBackgroundMusicDay(uint8 musicId);
     void setBackgroundMusicNight(uint8 musicId);
 
-    void setZoneDirection(uint8 direction);
-    void setZoneAnimation(uint8 animation);
-    void setZoneAnimStartTime(uint32 startTime);
-    void setZoneAnimLength(uint16 length);
-
     sol::table queryEntitiesByName(std::string const& name);
 
     static void Register();
