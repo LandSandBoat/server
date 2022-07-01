@@ -14,7 +14,7 @@ function onTrigger(player, wave)
         error(player, "You must enter a valid spawn wave.")
         return
     end
-    
+
     if not player:isInDynamis() then
         return
     end
