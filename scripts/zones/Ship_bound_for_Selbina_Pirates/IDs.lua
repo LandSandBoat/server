@@ -51,13 +51,15 @@ zones[xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES] =
         {
             [17707041] =
             {
-                start_pos = {
+                start_pos =
+                {
                     x = -33.601,
                     y = -7.163,
                     z = 13.377,
                     rot = 128
                 },
-                enter_path = {
+                enter_path =
+                {
                     -33.601, -7.163, 13.377,
                     -33.57, -7.163, 13.14,
                     -29.79, -7.163, 10.63,
@@ -65,12 +67,14 @@ zones[xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES] =
                     -22.00, -7.163, 10.46,
                     -21.90, -7.163, 10.46
                 },
-                look_at = {
+                look_at =
+                {
                     x = -20,
                     y = -7.163,
                     z = 10.46
                 },
-                exit_path = {
+                exit_path =
+                {
                     -21.90, -7.163, 10.46,
                     -22.00, -7.163, 10.46,
                     -28.75, -7.163, 10.60,
@@ -81,13 +85,15 @@ zones[xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES] =
             },
             [17707042] =
             {
-                start_pos = {
+                start_pos =
+                {
                     x = -29.728,
                     y = -7.163,
                     z = 1.303,
                     rot = 128
                 },
-                enter_path = {
+                enter_path =
+                {
                     -29.728, -7.163, 1.303,
                     -29.71, -7.163, 1.54,
                     -25.91, -7.163, 2.77,
@@ -95,12 +101,14 @@ zones[xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES] =
                     -22.00, -7.163, 6.59,
                     -21.90, -7.163, 6.59
                 },
-                look_at = {
+                look_at =
+                {
                     x = -20,
                     y = -7.163,
                     z = 6.59
                 },
-                exit_path = {
+                exit_path =
+                {
                     -21.90, -7.163, 6.59,
                     -22.00, -7.163, 6.59,
                     -24.87, -7.163, 2.77,
@@ -111,13 +119,15 @@ zones[xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES] =
             },
             [17707043] =
             {
-                start_pos = {
+                start_pos =
+                {
                     x = -29.602,
                     y = -7.163,
                     z = -2.475,
                     rot = 128
                 },
-                enter_path = {
+                enter_path =
+                {
                     -29.602, -7.163, -2.475,
                     -29.61, -7.163, -2.71,
                     -25.97, -7.163, -4.02,
@@ -125,12 +135,14 @@ zones[xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES] =
                     -22.00, -7.163, 2.10,
                     -21.90, -7.163, 2.10
                 },
-                look_at = {
+                look_at =
+                {
                     x = -20,
                     y = -7.163,
                     z = 2.10
                 },
-                exit_path = {
+                exit_path =
+                {
                     -21.90, -7.163, 2.10,
                     -22.00, -7.163, 2.10,
                     -24.93, -7.163, -4.02,

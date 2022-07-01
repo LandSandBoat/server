@@ -339,8 +339,19 @@ void CTransportHandler::TransportTimer()
 
         if (zoneIterator->state == STATE_TRANSPORTZONE_VOYAGE)
         {
+
+            int zoneOffset = 3;
+            ZONEID zoneId = zoneIterator->voyageZone->GetID();
+
+            if (zoneId == ZONE_BASTOK_JEUNO_AIRSHIP ||
+                zoneId == ZONE_WINDURST_JEUNO_AIRSHIP ||
+                zoneId == ZONE_SAN_DORIA_JEUNO_AIRSHIP ||
+                zoneId == ZONE_KAZHAM_JEUNO_AIRSHIP)
+                {
+                    zoneOffset = -5;
+                }
             // Zone them out 10 Van minutes before the boat reaches the dock
-            if (shipTimerOffset < zoneIterator->timeVoyageStart && shipTimerOffset > zoneIterator->timeArriveDock - 10)
+            if (shipTimerOffset < zoneIterator->timeVoyageStart && shipTimerOffset > zoneIterator->timeArriveDock - zoneOffset)
             {
                 zoneIterator->state = STATE_TRANSPORTZONE_EVICT;
             }
@@ -377,7 +388,7 @@ void CTransportHandler::TransportTimer()
                          zoneId == ZONE_KAZHAM_JEUNO_AIRSHIP)
                 {
                     uint32 hour = CVanaTime::getInstance()->getHour();
-                    zoneIterator->voyageZone->SetZoneAnimLength(285);
+                    zoneIterator->voyageZone->SetZoneAnimLength(288);
 
                     if (zoneId == ZONE_BASTOK_JEUNO_AIRSHIP && (hour == 1 || hour == 7 || hour == 13 || hour == 19))
                     {

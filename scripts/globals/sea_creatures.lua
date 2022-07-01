@@ -5,21 +5,25 @@ xi = xi or {}
 xi.sea_creatures = xi.sea_creatures or {}
 
 xi.sea_creatures.checkSpawns = function(ID, percentChance, total)
+    for i = 1, #ID.mob.SEA_CREATURES do
+        local mobId = ID.mob.SEA_CREATURES[i]
+        local mob = GetMobByID(mobId)
+        if
+            mob:isSpawned() and
+            os.time() > mob:getLocalVar("despawnTime")
+        then
+            if not mob:isEngaged() then
+                DespawnMob(mobId)
+            end
+        end
+    end
+
     if xi.sea_creatures.shouldSpawn(ID, percentChance, total) then
         local mobIdPos = math.random(1, #ID.mob.SEA_CREATURES)
         local mob = GetMobByID(ID.mob.SEA_CREATURES[mobIdPos])
         if not mob:isSpawned() then
             mob:spawn()
             mob:setLocalVar("despawnTime", os.time() + math.random(180, 240)) -- 3-4 mins despawn if roaming
-        end
-    end
-    for i = 1, #ID.mob.SEA_CREATURES do
-        local mobId = ID.mob.SEA_CREATURES[i]
-        local mob = GetMobByID(mobId)
-        if mob:isSpawned() and os.time() > mob:getLocalVar("despawnTime") then
-            if not mob:isEngaged() then
-                DespawnMob(mobId)
-            end
         end
     end
 end

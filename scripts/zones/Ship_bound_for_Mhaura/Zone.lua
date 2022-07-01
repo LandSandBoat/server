@@ -8,11 +8,6 @@ require("scripts/globals/sea_creatures")
 -----------------------------------
 local zone_object = {}
 
-local function spawnBoatMob(mob)
-    mob:spawn()
-    mob:setLocalVar("maxVerticalAggro", 4)
-end
-
 zone_object.onInitialize = function(zone)
 end
 
@@ -20,10 +15,17 @@ zone_object.onZoneIn = function(player, prevZone, zone)
     local cs = -1
     local zoneID = 221
 
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
+    if
+        player:getXPos() == 0 and
+        player:getYPos() == 0 and
+        player:getZPos() == 0
+    then
         local position = math.random(-2, 2) + 0.150
         player:setPos(position, -2.100, 3.250, 64)
-        if player:getGMLevel() == 0 and GetZone(zoneID):getLocalVar('stateSet') == 0 then
+        if
+            player:getGMLevel() == 0 and
+            GetZone(zoneID):getLocalVar('stateSet') == 0
+        then
             GetZone(zoneID):setLocalVar('stateSet', 1)
             GetZone(zoneID):setLocalVar('state', 2)
             GetZone(zoneID):setLocalVar('transportTime', os.time())
@@ -41,9 +43,15 @@ end
 
 zone_object.onGameHour = function()
     local hour = VanadielHour()
-    if hour >= 20 or hour < 4 then
-        if math.random() < 0.20 and not GetMobByID(ID.mob.PHANTOM):isSpawned() then
-            spawnBoatMob(GetMobByID(ID.mob.PHANTOM))
+    if
+        hour >= 20 or
+        hour < 4
+    then
+        if
+            math.random() < 0.20 and
+            not GetMobByID(ID.mob.PHANTOM):isSpawned()
+        then
+            GetMobByID(ID.mob.PHANTOM):spawn()
         end
     elseif GetMobByID(ID.mob.PHANTOM):isSpawned() then
         DespawnMob(ID.mob.PHANTOM)
@@ -51,8 +59,12 @@ zone_object.onGameHour = function()
 
     local mob = GetMobByID(ID.mob.SEA_HORROR)
     -- 3% chance per game hour (if not spawned, and min repop time)
-    if math.random(0, 100) < 3 and not mob:isSpawned() and os.time() > mob:getLocalVar("respawnTime") then
-        spawnBoatMob(mob)
+    if
+        math.random(0, 100) < 3 and
+        not mob:isSpawned() and
+        os.time() > mob:getLocalVar("respawnTime")
+    then
+        mob:spawn()
     end
 end
 
@@ -74,7 +86,7 @@ zone_object.onZoneTick = function(zone)
         zone:setLocalVar('state', 0)
     end
 
-    if (os.time() - zone:getLocalVar('transportTime')) % 60 then
+    if os.time() - zone:getLocalVar('transportTime') % 60 then
         xi.sea_creatures.checkSpawns(ID, 1, 2) -- 1 percent per vana minute, 2 total mobs
     end
 
