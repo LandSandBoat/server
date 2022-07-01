@@ -10,7 +10,7 @@
 -- 3.00      3           3
 -----------------------------------
 require("scripts/globals/aftermath")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/weaponskills")
 -----------------------------------
@@ -30,7 +30,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     params.ignored200 = 0.35
     params.ignored300 = 0.5
 
-    if xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+    if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.str_wsc = 0.6
     end
 

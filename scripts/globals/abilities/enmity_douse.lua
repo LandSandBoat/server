@@ -4,7 +4,7 @@
 -- Obtained: BLM Level 87
 -- Recast Time: 0:10:00
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 local ability_object = {}

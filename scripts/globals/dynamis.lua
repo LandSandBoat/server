@@ -122,7 +122,7 @@ local entryInfo =
         reqs = function(player)
             return (
                 player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or
-                xi.settings.FREE_COP_DYNAMIS == 1
+                xi.settings.main.FREE_COP_DYNAMIS == 1
             )
         end,
     },
@@ -139,7 +139,7 @@ local entryInfo =
         reqs = function(player)
             return (
                 player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or
-                xi.settings.FREE_COP_DYNAMIS == 1
+                xi.settings.main.FREE_COP_DYNAMIS == 1
             )
         end,
     },
@@ -156,7 +156,7 @@ local entryInfo =
         reqs = function(player)
             return (
                 player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or
-                xi.settings.FREE_COP_DYNAMIS == 1
+                xi.settings.main.FREE_COP_DYNAMIS == 1
             )
         end,
     },
@@ -300,13 +300,13 @@ end
 
 local function handleEntryTime(player)
     local realDay = os.time()
-    if xi.settings.DYNA_MIDNIGHT_RESET then
+    if xi.settings.main.DYNA_MIDNIGHT_RESET then
         realDay = getMidnight() - 86400
     end
     local dynaWaitxDay = player:getCharVar("dynaWaitxDay")
 
     if
-        (dynaWaitxDay + xi.settings.BETWEEN_2DYNA_WAIT_TIME * 60 * 60) < realDay and
+        (dynaWaitxDay + xi.settings.main.BETWEEN_2DYNA_WAIT_TIME * 60 * 60) < realDay and
         not player:hasKeyItem(xi.ki.RHAPSODY_IN_AZURE)
     then
         player:setCharVar("dynaWaitxDay", realDay)
@@ -340,7 +340,7 @@ xi.dynamis.entryNpcOnTrigger = function(player, npc)
         -- set to skip menu after getting this CS
         tavnaziaFirst = not tavnaziaFirst
     -- player has access but is on a job below required level
-    elseif player:hasKeyItem(xi.ki.PRISMATIC_HOURGLASS) and player:getMainLvl() < xi.settings.DYNA_LEVEL_MIN then
+    elseif player:hasKeyItem(xi.ki.PRISMATIC_HOURGLASS) and player:getMainLvl() < xi.settings.main.DYNA_LEVEL_MIN then
         player:messageSpecial(ID.text.PLAYERS_HAVE_NOT_REACHED_LEVEL)
     -- default message always prints except in cases above and not for shrouded sand or winning cs
     elseif not unlockingDyna and player:getCharVar(info.beatVar) ~= 1 then
@@ -348,7 +348,7 @@ xi.dynamis.entryNpcOnTrigger = function(player, npc)
     end
 
     -- all cutscenes and menus are blocked behind base requirements; 'unlockingDyna' needs to be checked to access shroud cs after zoning into xarcabard
-    if not tavnaziaFirst and player:getMainLvl() >= xi.settings.DYNA_LEVEL_MIN and (player:hasKeyItem(xi.ki.PRISMATIC_HOURGLASS) or unlockingDyna) then
+    if not tavnaziaFirst and player:getMainLvl() >= xi.settings.main.DYNA_LEVEL_MIN and (player:hasKeyItem(xi.ki.PRISMATIC_HOURGLASS) or unlockingDyna) then
 
         -- shrouded sand cutscene
         if unlockingDyna and info.csVial and not player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) then
@@ -364,11 +364,11 @@ xi.dynamis.entryNpcOnTrigger = function(player, npc)
             local dynaWaitxDay = player:getCharVar("dynaWaitxDay")
             local sjobOption = info.csBit > 6 and 1 or 0
 
-            if (dynaWaitxDay + xi.settings.BETWEEN_2DYNA_WAIT_TIME * 60 * 60) < realDay then
+            if (dynaWaitxDay + xi.settings.main.BETWEEN_2DYNA_WAIT_TIME * 60 * 60) < realDay then
                 -- params: bit, cutscene option, Prismatic Hourglass KI, sJob option, junk, Shrouded Sand KI, Timeless Hourglass item ID, Perpetual Hourglass item ID
                 player:startEvent(info.csMenu, info.csBit, arg3(player, info.csBit), xi.ki.PRISMATIC_HOURGLASS, sjobOption, 0, xi.ki.VIAL_OF_SHROUDED_SAND, 4236, 4237)
             else
-                local dayRemaining = math.floor(((dynaWaitxDay + xi.settings.BETWEEN_2DYNA_WAIT_TIME * 60 * 60) - realDay) / 3456)
+                local dayRemaining = math.floor(((dynaWaitxDay + xi.settings.main.BETWEEN_2DYNA_WAIT_TIME * 60 * 60) - realDay) / 3456)
                 player:messageSpecial(ID.text.YOU_CANNOT_ENTER_DYNAMIS, dayRemaining, info.csBit)
             end
         end

@@ -7,7 +7,7 @@
 -- Darcia : !pos -36 -1 -15 245
 -----------------------------------
 require('scripts/globals/missions')
-require('scripts/settings/main')
+require('scripts/globals/settings')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/utils')
 require('scripts/globals/zone')
@@ -24,7 +24,7 @@ mission.sections =
 {
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and xi.settings.ENABLE_SOA == 1
+            return currentMission == mission.missionId and xi.settings.main.ENABLE_SOA == 1
         end,
 
         [xi.zone.LOWER_JEUNO] =

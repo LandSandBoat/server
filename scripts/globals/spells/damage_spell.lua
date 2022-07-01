@@ -8,7 +8,7 @@ require("scripts/globals/magicburst")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 -----------------------------------
 xi = xi or {}
 xi.spells = xi.spells or {}
@@ -209,7 +209,7 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spell, spellId, 
     -----------------------------------
     -- STEP 1: baseSpellDamage (V)
     -----------------------------------
-    if caster:isPC() and xi.settings.USE_OLD_MAGIC_DAMAGE == false then
+    if caster:isPC() and xi.settings.main.USE_OLD_MAGIC_DAMAGE == false then
         baseSpellDamage = pTable[spellId][vPC] -- vPC
     else
         baseSpellDamage = pTable[spellId][vNPC] -- vNPC
@@ -808,18 +808,18 @@ xi.spells.damage.calculateEbullienceMultiplier = function(caster, target, spell)
     return ebullienceMultiplier
 end
 
--- CUSTOM function supported in settings/main.lua
+-- CUSTOM function supported in scripts/globals/settings.lua
 xi.spells.damage.calculateSkillTypeMultiplier = function(caster, target, spell, skillType)
     local skillTypeMultiplier = 1
 
     if skillType == xi.skill.ELEMENTAL_MAGIC then
-        skillTypeMultiplier = xi.settings.ELEMENTAL_POWER
+        skillTypeMultiplier = xi.settings.main.ELEMENTAL_POWER
     elseif skillType == xi.skill.DARK_MAGIC then
-        skillTypeMultiplier = xi.settings.DARK_POWER
+        skillTypeMultiplier = xi.settings.main.DARK_POWER
     elseif skillType == xi.skill.NINJUTSU then
-        skillTypeMultiplier = xi.settings.NINJUTSU_POWER
+        skillTypeMultiplier = xi.settings.main.NINJUTSU_POWER
     elseif skillType == xi.skill.DIVINE_MAGIC then
-        skillTypeMultiplier = xi.settings.DIVINE_POWER
+        skillTypeMultiplier = xi.settings.main.DIVINE_POWER
     end
 
     return skillTypeMultiplier

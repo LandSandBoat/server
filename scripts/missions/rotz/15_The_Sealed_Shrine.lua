@@ -11,7 +11,7 @@
 require('scripts/globals/interaction/mission')
 require('scripts/globals/keyitems')
 require('scripts/globals/missions')
-require('scripts/settings/main')
+require('scripts/globals/settings')
 require('scripts/globals/titles')
 require('scripts/globals/zone')
 -----------------------------------
@@ -38,7 +38,7 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and missionStatus == 0 and
-                getNumDMEarrings(player) <= xi.settings.NUMBER_OF_DM_EARRINGS
+                getNumDMEarrings(player) <= xi.settings.main.NUMBER_OF_DM_EARRINGS
         end,
 
         [xi.zone.NORG] =
@@ -93,7 +93,7 @@ mission.sections =
                     if
                         xPos >= -45 and yPos >= -4 and zPos >= -240 and
                         xPos <= -33 and yPos <= 0 and zPos <= -226 and
-                        getNumDMEarrings(player) <= xi.settings.NUMBER_OF_DM_EARRINGS
+                        getNumDMEarrings(player) <= xi.settings.main.NUMBER_OF_DM_EARRINGS
                     then
                         return 51
                     end

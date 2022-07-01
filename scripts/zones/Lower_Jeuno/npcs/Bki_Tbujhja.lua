@@ -6,7 +6,7 @@
 -- !pos -22 0 -60 245
 -----------------------------------
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
@@ -44,7 +44,7 @@ entity.onTrigger = function(player, npc)
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PAINFUL_MEMORY) == QUEST_COMPLETED and
         theRequiem == QUEST_AVAILABLE and
         player:getMainJob() == xi.job.BRD and
-        player:getMainLvl() >= xi.settings.AF2_QUEST_LEVEL
+        player:getMainLvl() >= xi.settings.main.AF2_QUEST_LEVEL
     then
         if player:getCharVar("TheRequiemCS") == 0 then
             player:startEvent(145) -- Long dialog & Start Quest "The Requiem"

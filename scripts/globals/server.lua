@@ -1,5 +1,5 @@
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 -----------------------------------
 
 xi = xi or {}

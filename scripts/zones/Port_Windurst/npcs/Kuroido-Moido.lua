@@ -8,7 +8,7 @@
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/titles")
 local ID = require("scripts/zones/Port_Windurst/IDs")
 -----------------------------------
@@ -38,7 +38,7 @@ entity.onTrigger = function(player, npc)
     elseif (makingAmens == QUEST_ACCEPTED and not brokenWand) then -- Reminder for Making Amens!
         player:startEvent(283)
     elseif (makingAmens == QUEST_ACCEPTED and brokenWand) then -- Complete Making Amens!
-        player:startEvent(284, xi.settings.GIL_RATE*6000)
+        player:startEvent(284, xi.settings.main.GIL_RATE*6000)
     elseif (makingAmens == QUEST_COMPLETED) then
         if (wonderWands == QUEST_ACCEPTED) then -- During Wonder Wands dialogue
             player:startEvent(261)
@@ -77,8 +77,8 @@ entity.onEventFinish = function(player, csid, option)
         player:needToZone(true)
         player:delKeyItem(xi.ki.BROKEN_WAND)
         player:addTitle(xi.title.HAKKURU_RINKURUS_BENEFACTOR)
-        player:addGil(xi.settings.GIL_RATE*6000)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*6000)
+        player:addGil(xi.settings.main.GIL_RATE*6000)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*6000)
         player:addFame(xi.quest.fame_area.WINDURST, 150)
         player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_AMENS)
     end

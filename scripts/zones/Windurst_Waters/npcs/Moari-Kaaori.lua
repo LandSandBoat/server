@@ -3,7 +3,7 @@
 --  NPC: Moari-Kaaori
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Waters/IDs")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
@@ -17,7 +17,7 @@ entity.onTrade = function(player, npc, trade)
     if flowerProgress == 3 then
         if trade:hasItemQty(950, 1) and trade:getItemCount() == 1 then
             if sayFlowers == QUEST_COMPLETED then
-                player:startEvent(525, xi.settings.GIL_RATE*400)
+                player:startEvent(525, xi.settings.main.GIL_RATE*400)
             else
                 player:startEvent(520)
             end
@@ -68,7 +68,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 522 then -- Wrong flowers so complete quest, but smaller reward/fame and no title.
         player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.SAY_IT_WITH_FLOWERS)
         player:tradeComplete()
-        player:addGil(xi.settings.GIL_RATE * 100)
+        player:addGil(xi.settings.main.GIL_RATE * 100)
         player:messageSpecial(ID.text.GIL_OBTAINED, 100)
         player:addFame(xi.quest.fame_area.WINDURST, 10)
         player:needToZone(true)
@@ -78,7 +78,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 525 then -- Repeatable quest rewards.
         player:tradeComplete()
         player:addFame(xi.quest.fame_area.WINDURST, 30)
-        player:addGil(xi.settings.GIL_RATE * 400)
+        player:addGil(xi.settings.main.GIL_RATE * 400)
         player:setCharVar("FLOWER_PROGRESS", 0)
         player:needToZone(true)
         player:setTitle(xi.title.CUPIDS_FLORIST)

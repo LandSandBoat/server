@@ -225,7 +225,7 @@ int32 CBattleEntity::GetMaxMP() const
 uint8 CBattleEntity::GetSpeed()
 {
     // Note: retail treats mounted speed as double what it actually is! 40 is in fact retail accurate!
-    int16 startingSpeed = isMounted() ? 40 + map_config.mount_speed_mod : speed;
+    int16 startingSpeed = isMounted() ? 40 + settings::get<int8>("map.MOUNT_SPEED_MOD") : speed;
     // Mod::MOVE (169)
     // Mod::MOUNT_MOVE (972)
     Mod mod = isMounted() ? Mod::MOUNT_MOVE : Mod::MOVE;
@@ -476,21 +476,21 @@ int16 CBattleEntity::addTP(int16 tp)
 
         if (objtype == TYPE_PC)
         {
-            TPMulti = map_config.player_tp_multiplier;
+            TPMulti = settings::get<float>("map.PLAYER_TP_MULTIPLIER");
         }
         else if (objtype == TYPE_MOB)
         {
-            TPMulti = map_config.mob_tp_multiplier;
+            TPMulti = settings::get<float>("map.MOB_TP_MULTIPLIER");
         }
         else if (objtype == TYPE_PET)
         {
             if (static_cast<CPetEntity*>(this)->getPetType() != PET_TYPE::AUTOMATON || !this->PMaster)
             {
-                TPMulti = map_config.mob_tp_multiplier * 3;
+                TPMulti = settings::get<float>("map.MOB_TP_MULTIPLIER") * 3;
             }
             else
             {
-                TPMulti = map_config.player_tp_multiplier;
+                TPMulti = settings::get<float>("map.PLAYER_TP_MULTIPLIER");
             }
         }
 
@@ -863,7 +863,7 @@ void CBattleEntity::SetMLevel(uint8 mlvl)
 void CBattleEntity::SetSLevel(uint8 slvl)
 {
     TracyZoneScoped;
-    if (!map_config.include_mob_sj && (this->objtype == TYPE_MOB && this->objtype != TYPE_PET))
+    if (!settings::get<bool>("map.INCLUDE_MOB_SJ") && this->objtype == TYPE_MOB && this->objtype != TYPE_PET)
     {
         // Technically, we shouldn't be assuming mobs even have a ratio they must adhere to.
         // But there is no place in the DB to set subLV right now.
@@ -871,9 +871,10 @@ void CBattleEntity::SetSLevel(uint8 slvl)
     }
     else
     {
-        switch (map_config.subjob_ratio)
+        auto ratio = settings::get<uint8>("map.SUBJOB_RATIO");
+        switch (ratio)
         {
-            case 0: // no SJ...Where is your Altana now?
+            case 0: // no SJ
                 m_slvl = 0;
                 break;
             case 1: // 1/2 (75/37, 99/49)
@@ -886,7 +887,7 @@ void CBattleEntity::SetSLevel(uint8 slvl)
                 m_slvl = (slvl > m_mlvl ? (m_mlvl == 1 ? 1 : m_mlvl) : slvl);
                 break;
             default: // Error
-                ShowError("Error setting subjob level: Invalid ratio '%s' check your map.conf file!", map_config.subjob_ratio);
+                ShowError("Error setting subjob level: Invalid ratio '%s' check your settings file!", ratio);
                 break;
         }
     }
@@ -1849,7 +1850,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
 
             if (PTarget->objtype == TYPE_PC)
             {
-                if (attack.IsGuarded() || ((map_config.newstyle_skillups & NEWSTYLE_GUARD) > 0))
+                if (attack.IsGuarded() || !settings::get<bool>("map.GUARD_OLD_SKILLUP_STYLE"))
                 {
                     if (battleutils::GetGuardRate(this, PTarget) > 0)
                     {
@@ -1857,7 +1858,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                     }
                 }
 
-                if (attack.IsBlocked() || ((map_config.newstyle_skillups & NEWSTYLE_BLOCK) > 0))
+                if (attack.IsBlocked() || !settings::get<bool>("map.BLOCK_OLD_SKILLUP_STYLE"))
                 {
                     if (battleutils::GetBlockRate(this, PTarget) > 0)
                     {
@@ -1865,7 +1866,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                     }
                 }
 
-                if (attack.IsParried() || ((map_config.newstyle_skillups & NEWSTYLE_PARRY) > 0))
+                if (attack.IsParried() || !settings::get<bool>("map.PARRY_OLD_SKILLUP_STYLE"))
                 {
                     if (battleutils::GetParryRate(this, PTarget) > 0)
                     {
