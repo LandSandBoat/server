@@ -555,8 +555,8 @@ xi.mission.id =
         BLOOD_FOR_BLOOD                 = 120, -- ±
         RECKONING                       = 121, -- ±
         ABOMINATION                     = 123, -- ±
-        UNDYING_LIGHT                   = 125,
-        THE_LIGHT_WITHIN                = 129,
+        UNDYING_LIGHT                   = 125, -- ±
+        THE_LIGHT_WITHIN                = 129, -- ±
         -- FIN                          = 130,
     },
 
