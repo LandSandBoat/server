@@ -51,7 +51,7 @@ CBaseEntity::CBaseEntity()
     animStart = false;
     animPath = 0;
     animBegin = 0;
-
+    manualConfig = false;
 }
 
 CBaseEntity::~CBaseEntity()

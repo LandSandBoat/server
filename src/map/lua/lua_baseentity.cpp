@@ -4797,6 +4797,7 @@ void CLuaBaseEntity::setAnimationSub(uint8 animationsub)
 
 void CLuaBaseEntity::setAnimPath(uint8 animPath)
 {
+    m_PBaseEntity->manualConfig = true;
     m_PBaseEntity->animPath = animPath;
 }
 
