@@ -141,7 +141,6 @@ namespace mobutils
         bool isEventMob = PMob->m_Type & MOBTYPE_EVENT && !PMob->isInDynamis();
         bool isBattlefieldMob = PMob->m_Type & MOBTYPE_BATTLEFIELD && !PMob->isInDynamis();
         bool isDynamisNM = PMob->isInDynamis() && PMob->getMobMod(MOBMOD_CHECK_AS_NM) > 1;
-        
         if (isNM || isEventMob || isBattlefieldMob || isDynamisNM) // NMs, Event, and Battlefield Mobs
         {
             switch (rank)
@@ -165,23 +164,23 @@ namespace mobutils
         else // Normal Mobs
         {
             switch (rank)
-            {
-                case 1:
-                    return (5 + ((lvl - 1) * 50) / 100); // A
-                case 2:
-                    return (4 + ((lvl - 1) * 45) / 100); // B
-                case 3:
-                    return (4 + ((lvl - 1) * 40) / 100); // C
-                case 4:
-                    return (3 + ((lvl - 1) * 35) / 100); // D
-                case 5:
-                    return (3 + ((lvl - 1) * 30) / 100); // E
-                case 6:
-                    return (2 + ((lvl - 1) * 25) / 100); // F
-                case 7:
-                    return (2 + ((lvl - 1) * 20) / 100); // G
+                {
+                    case 1:
+                        return (5 + ((lvl - 1) * 50) / 100); // A
+                    case 2:
+                        return (4 + ((lvl - 1) * 45) / 100); // B
+                    case 3:
+                        return (4 + ((lvl - 1) * 40) / 100); // C
+                    case 4:
+                        return (3 + ((lvl - 1) * 35) / 100); // D
+                    case 5:
+                        return (3 + ((lvl - 1) * 30) / 100); // E
+                    case 6:
+                        return (2 + ((lvl - 1) * 25) / 100); // F
+                    case 7:
+                        return (2 + ((lvl - 1) * 20) / 100); // G
+                }
             }
-        }
 
         return 0;
     }
