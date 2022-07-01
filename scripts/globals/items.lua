@@ -2343,6 +2343,7 @@ xi.items =
     COBRA_UNIT_PIGACHES             = 15751,
     DREAM_BOOTS                     = 15752,
     DREAM_BOOTS_P1                  = 15753,
+    SPRINTERS_SHOES                 = 15754,
     IRON_RAM_GREAVES                = 15755,
     FOURTH_DIVISION_SCHUHS          = 15756,
     COBRA_UNIT_LEGGINGS             = 15757,
