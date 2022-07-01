@@ -56,7 +56,7 @@ xi.pirates.reset = function(ID)
     ship:setAnimation(0)
     ship:setStatus(xi.status.DISAPPEAR)
     xi.pirates.setShipPosition(ship, ID.npc.PIRATE_SHIP.start_pos)
-    ship:sendUpdateToZoneCharsInRange()
+    ship:sendUpdateToZoneCharsInRange(2000)
     GetMobByID(ID.mob.NM):setLocalVar("killed", 0)
 end
 
@@ -92,15 +92,21 @@ end
 
 xi.pirates.despawnMobs = function(ID)
     for i = 1, #ID.mob.CROSSBONES do
-        if GetMobByID(ID.mob.CROSSBONES[i]):isSpawned() and GetMobByID(ID.mob.CROSSBONES[i]):getCurrentAction() == xi.act.ROAMING then
-            DespawnMob(ID.mob.CROSSBONES[i])
+        if GetMobByID(ID.mob.CROSSBONES[i]):isSpawned() then
+            if not GetMobByID(ID.mob.CROSSBONES[i]):isEngaged() then
+                DespawnMob(ID.mob.CROSSBONES[i])
+            end
         end
     end
-    if GetMobByID(ID.mob.SHIP_WIGHT):isSpawned() and GetMobByID(ID.mob.SHIP_WIGHT):getCurrentAction() == xi.act.ROAMING then
-        DespawnMob(ID.mob.SHIP_WIGHT)
+    if GetMobByID(ID.mob.SHIP_WIGHT):isSpawned() then
+        if not GetMobByID(ID.mob.SHIP_WIGHT):isEngaged() then
+            DespawnMob(ID.mob.SHIP_WIGHT)
+        end
     end
-    if GetMobByID(ID.mob.NM):isSpawned() and GetMobByID(ID.mob.NM):getCurrentAction() == xi.act.ROAMING then
-        DespawnMob(ID.mob.NM)
+    if GetMobByID(ID.mob.NM):isSpawned() then
+        if not GetMobByID(ID.mob.NM):isEngaged() then
+            DespawnMob(ID.mob.NM)
+        end
     end
 end
 
@@ -123,15 +129,15 @@ xi.pirates.summonAnimations = function(ID, firstcast)
             npc:setLocalVar("summoning", 1)
             local startTime = 0
             if not firstcast then
-                startTime = 2000 + math.random(0,2000)
+                startTime = 2000 + math.random(2000,3000)
             end
-            npc:timer(startTime, function(npc)
-                if npc:getLocalVar("castmode") == 1 then
-                    npc:entityAnimationPacket("casm")
+            npc:timer(startTime, function(npcArg)
+                if npcArg:getLocalVar("castmode") == 1 then
+                    npcArg:entityAnimationPacket("casm")
                     local randomSummonTime = 2000 + math.random(0,2000)
-                    npc:timer(randomSummonTime, function(npc)
-                        npc:entityAnimationPacket("shsm")
-                        npc:setLocalVar("summoning", 0)
+                    npcArg:timer(randomSummonTime, function(npcArg2)
+                        npcArg2:entityAnimationPacket("shsm")
+                        npcArg2:setLocalVar("summoning", 0)
                     end)
                 end
             end)
@@ -145,110 +151,106 @@ xi.pirates.update = function(ID, zone, tripTime)
 
     switch (pirateStatus): caseof
     {
-        [xi.pirates.status.IDLE] = function (x)
+        [0] = function (x)
             if tripTime >= 200 then
                 SetZoneMusic(zone, 0, 0)
                 SetZoneMusic(zone, 1, 0)
                 xi.pirates.setStatus(ship, xi.pirates.status.PREPARING)
             end
         end,
-        [xi.pirates.status.PREPARING] = function (x)
+        [1] = function (x)
             if tripTime >= 240 then
+                ship:setAnimPath(ID.npc.PIRATE_SHIP.anim_path)
                 ship:setAnimation(18)
                 ship:setAnimStart(true)
                 ship:setAnimBegin(VanadielTime())
                 ship:setStatus(xi.status.NORMAL)
                 xi.pirates.setShipPosition(ship, ID.npc.PIRATE_SHIP.start_pos)
-                ship:sendUpdateToZoneCharsInRange()
+                ship:sendUpdateToZoneCharsInRange(2000)
                 xi.pirates.setStatus(ship, xi.pirates.status.ARRIVING)
             end
         end,
-        [xi.pirates.status.ARRIVING] = function (x)
+        [2] = function (x)
             if tripTime >= 290 then
                 for k, pirate in pairs(ID.npc.PIRATES) do
                     local npc = GetNPCByID(k)
                     npc:setPos(xi.path.first(pirate.enter_path))
-                    xi.path.patrol(npc, pirate.enter_path)
-                    npc:lookAt(pirate.look_at)
+                    npc:pathTo(xi.path.last(pirate.enter_path)[1], xi.path.last(pirate.enter_path)[2], xi.path.last(pirate.enter_path)[3])
                     npc:setStatus(xi.status.NORMAL)
-                    npc:sendUpdateToZoneCharsInRange()
+                    npc:sendUpdateToZoneCharsInRange(2000)
                 end
                 SetZoneMusic(zone, 0, 170)
                 SetZoneMusic(zone, 1, 170)
                 xi.pirates.setShipPosition(ship, ID.npc.PIRATE_SHIP.event_pos)
-                ship:sendUpdateToZoneCharsInRange()
+                ship:sendUpdateToZoneCharsInRange(2000)
                 xi.pirates.setStatus(ship, xi.pirates.status.SPAWNING)
             end
         end,
-        [xi.pirates.status.SPAWNING] = function (x)
-            if tripTime >= 296 then
+        [3] = function (x)
+            if tripTime >= 302 then
                 xi.pirates.setShipPosition(ship, ID.npc.PIRATE_SHIP.event_pos)
                 ship:setAnimation(0)
-                ship:sendUpdateToZoneCharsInRange()
+                ship:sendUpdateToZoneCharsInRange(2000)
                 xi.pirates.setStatus(ship, xi.pirates.status.ATTACKING)
                 for k, pirate in pairs(ID.npc.PIRATES) do
                     local npc = GetNPCByID(k)
                     npc:setLocalVar("castmode",1)
                     npc:lookAt(pirate.look_at)
-                    npc:sendUpdateToZoneCharsInRange()
+                    npc:sendUpdateToZoneCharsInRange(2000)
                 end
                 xi.pirates.summonAnimations(ID, true)
-                xi.pirates.spawnMobs(ID)
+                ship:timer(1000, function()
+                    xi.pirates.spawnMobs(ID)
+                end)
             else
                 for k, pirate in pairs(ID.npc.PIRATES) do
                     local npc = GetNPCByID(k)
-                    xi.path.patrol(npc, pirate.enter_path)
                     npc:lookAt(pirate.look_at)
-                    npc:sendUpdateToZoneCharsInRange()
+                    npc:sendUpdateToZoneCharsInRange(2000)
                 end
             end
         end,
-        [xi.pirates.status.ATTACKING] = function (x)
+        [4] = function (x)
             if tripTime >= 695 then
                 for k, pirate in pairs(ID.npc.PIRATES) do
                     local npc = GetNPCByID(k)
                     npc:setLocalVar("castmode",0)
-                    npc:setPos(xi.path.first(pirate.exit_path))
-                    xi.path.patrol(npc, pirate.exit_path)
+                    npc:pathTo(xi.path.last(pirate.exit_path)[1], xi.path.last(pirate.exit_path)[2], xi.path.last(pirate.exit_path)[3])
                 end
                 xi.pirates.despawnMobs(ID)
                 xi.pirates.setStatus(ship, xi.pirates.status.DESPAWNING)
-            elseif tripTime <= 685 then
+            elseif tripTime <= 685 and tripTime >= 308 then
                 xi.pirates.summonAnimations(ID, false)
                 xi.pirates.spawnMobs(ID)
                 SetZoneMusic(zone, 0, 170)
                 SetZoneMusic(zone, 1, 170)
             end
         end,
-        [xi.pirates.status.DESPAWNING] = function (x)
+        [5] = function (x)
             xi.pirates.despawnMobs(ID)
-            if tripTime >= 706 then
+            if tripTime >= 700 then
                 xi.pirates.despawnNPCs(ID)
                 ship:setAnimPath(ID.npc.PIRATE_SHIP.anim_path)
                 ship:setAnimation(19)
                 ship:setAnimStart(true)
                 ship:setAnimBegin(VanadielTime())
                 xi.pirates.setShipPosition(ship, ID.npc.PIRATE_SHIP.start_pos)
-                ship:sendUpdateToZoneCharsInRange()
+                ship:sendUpdateToZoneCharsInRange(2000)
                 xi.pirates.setStatus(ship, xi.pirates.status.DEPARTING)
-            else
-                for k, pirate in pairs(ID.npc.PIRATES) do
-                    xi.path.patrol(GetNPCByID(k), pirate.exit_path)
-                end
             end
         end,
-        [xi.pirates.status.DEPARTING] = function (x)
+        [6] = function (x)
             xi.pirates.despawnMobs(ID)
             if tripTime >= 760 then
                 SetZoneMusic(zone, 0, 106)
                 SetZoneMusic(zone, 1, 106)
                 ship:setAnimation(0)
                 ship:setStatus(xi.status.DISAPPEAR)
-                ship:sendUpdateToZoneCharsInRange()
+                ship:sendUpdateToZoneCharsInRange(2000)
                 xi.pirates.setStatus(ship, xi.pirates.status.FINISHED)
             end
         end,
-        [xi.pirates.status.FINISHED] = function (x)
+        [7] = function (x)
             xi.pirates.despawnMobs(ID)
         end
     }

@@ -27,12 +27,11 @@ zones[xi.zone.SHIP_BOUND_FOR_SELBINA] =
     {
         SEA_CREATURES =
         {
-            17678341,   -- Sea Monk 1
             17678342,   -- Sea Crab 1
             17678343,   -- Sea Crab 2
             17678344,   -- Sea Pugil 1
             17678345,   -- Sea Pugil 2
-            17678346,   -- Sea Monk 2
+            17678346,   -- Sea Monk 1
         },
         SEA_HORROR = 17678350,
         PHANTOM = 17678347,

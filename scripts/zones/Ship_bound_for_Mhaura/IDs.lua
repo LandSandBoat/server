@@ -27,12 +27,11 @@ zones[xi.zone.SHIP_BOUND_FOR_MHAURA] =
     {
         SEA_CREATURES =
         {
-            17682437,   -- Sea Monk 1
             17682438,   -- Sea Crab 1
             17682439,   -- Sea Crab 2
             17682440,   -- Sea Pugil 1
             17682441,   -- Sea Pugil 2
-            17682442,   -- Sea Monk 2
+            17682442,   -- Sea Monk 1
         },
         SEA_HORROR = 17682446,
         PHANTOM = 17682443,

@@ -816,10 +816,10 @@ public:
 
     uint32 getHistory(uint8 index);
 
-    int32 setAnimPath(lua_State*);
-    int32 setAnimStart(lua_State*);
-    int32 setAnimBegin(lua_State*);
-    int32 sendUpdateToZoneCharsInRange(lua_State*);
+    void setAnimPath(uint8);
+    void setAnimStart(bool);
+    void setAnimBegin(uint32);
+    void sendUpdateToZoneCharsInRange(float);
 
     static void Register();
 };

@@ -16,8 +16,10 @@ xi.sea_creatures.checkSpawns = function(ID, percentChance, total)
     for i = 1, #ID.mob.SEA_CREATURES do
         local mobId = ID.mob.SEA_CREATURES[i]
         local mob = GetMobByID(mobId)
-        if mob:isSpawned() and os.time() > mob:getLocalVar("despawnTime") and mob:getCurrentAction() == xi.act.ROAMING then
-            DespawnMob(mobId)
+        if mob:isSpawned() and os.time() > mob:getLocalVar("despawnTime") then
+            if not mob:isEngaged() then
+                DespawnMob(mobId)
+            end
         end
     end
 end

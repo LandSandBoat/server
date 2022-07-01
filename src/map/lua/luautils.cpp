@@ -745,11 +745,11 @@ namespace luautils
         CBaseEntity* PNpc{ nullptr };
         if (PInstance)
         {
-            PNpc = PInstance->GetEntity(npcid & 0xFFF, TYPE_NPC);
+            PNpc = PInstance->GetEntity(npcid & 0xFFF, TYPE_NPC | TYPE_SHIP);
         }
         else
         {
-            PNpc = zoneutils::GetEntity(npcid, TYPE_NPC);
+            PNpc = zoneutils::GetEntity(npcid, TYPE_NPC | TYPE_SHIP);
         }
 
         if (!PNpc)

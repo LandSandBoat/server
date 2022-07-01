@@ -20,7 +20,7 @@ zone_object.onGameHour = function(zone)
     else
         GetNPCByID(ID.npc.LAUGHING_BISON):setAnimationSub(0)
     end
-    SetServerVariable("Mhaura_Deastination", math.random(1, 100))
+    SetServerVariable("Mhaura_Destination", math.random(1, 100))
 end
 
 zone_object.onInitialize = function(zone)
@@ -70,7 +70,7 @@ zone_object.onEventFinish = function(player, csid, option)
     if csid == 200 then
         local DepartureTime = VanadielHour()
         if DepartureTime % 8 == 0 then
-            if GetServerVariable("Mhaura_Deastination") > 89 then
+            if GetServerVariable("Mhaura_Destination") >= 0 then
                 player:setPos(0, 0, 0, 0, xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES)
             else
                 player:setPos(0, 0, 0, 0, xi.zone.SHIP_BOUND_FOR_SELBINA)

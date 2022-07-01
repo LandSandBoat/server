@@ -352,6 +352,22 @@ void CTransportHandler::TransportTimer()
             if (shipTimerOffset > zoneIterator->timeVoyageStart)
             {
                 zoneIterator->state = STATE_TRANSPORTZONE_VOYAGE;
+                // set zone animation parameters
+                zoneIterator->voyageZone->SetZoneAnimStartTime(CVanaTime::getInstance()->getVanaTime());
+                if (zoneIterator->voyageZone->GetID() == ZONE_SHIP_BOUND_FOR_MHAURA ||
+                    zoneIterator->voyageZone->GetID() == ZONE_SHIP_BOUND_FOR_MHAURA_PIRATES ||
+                    zoneIterator->voyageZone->GetID() == ZONE_SHIP_BOUND_FOR_SELBINA ||
+                    zoneIterator->voyageZone->GetID() == ZONE_SHIP_BOUND_FOR_SELBINA_PIRATES)
+                {
+                    zoneIterator->voyageZone->SetZoneAnimLength(908);
+                }
+                else if (zoneIterator->voyageZone->GetID() == ZONE_BASTOK_JEUNO_AIRSHIP ||
+                         zoneIterator->voyageZone->GetID() == ZONE_WINDURST_JEUNO_AIRSHIP ||
+                         zoneIterator->voyageZone->GetID() == ZONE_SAN_DORIA_JEUNO_AIRSHIP ||
+                         zoneIterator->voyageZone->GetID() == ZONE_KAZHAM_JEUNO_AIRSHIP)
+                {
+                    zoneIterator->voyageZone->SetZoneAnimLength(280);
+                }
             }
         }
         else if (zoneIterator->state == STATE_TRANSPORTZONE_INIT)

@@ -440,6 +440,23 @@ sol::table CLuaZone::queryEntitiesByName(std::string const& name)
     return table;
 }
 
+void CLuaZone::setZoneDirection(uint8 direction)
+{
+    m_pLuaZone->SetZoneDirection(direction);
+}
+void CLuaZone::setZoneAnimation(uint8 animation)
+{
+    m_pLuaZone->SetZoneAnimation(animation);
+}
+void CLuaZone::setZoneAnimStartTime(uint32 startTime)
+{
+    m_pLuaZone->SetZoneAnimStartTime(startTime);
+}
+void CLuaZone::setZoneAnimLength(uint16 length)
+{
+    m_pLuaZone->SetZoneAnimLength(length);
+}
+
 //======================================================//
 
 void CLuaZone::Register()
@@ -476,6 +493,11 @@ void CLuaZone::Register()
     SOL_REGISTER("setBackgroundMusicNight", CLuaZone::setBackgroundMusicNight);
 
     SOL_REGISTER("queryEntitiesByName", CLuaZone::queryEntitiesByName);
+
+    SOL_REGISTER("setZoneDirection", CLuaZone::setZoneDirection);
+    SOL_REGISTER("setZoneAnimation", CLuaZone::setZoneAnimation);
+    SOL_REGISTER("setZoneAnimStartTime", CLuaZone::setZoneAnimStartTime);
+    SOL_REGISTER("setZoneAnimLength", CLuaZone::setZoneAnimLength);
 }
 
 std::ostream& operator<<(std::ostream& os, const CLuaZone& zone)

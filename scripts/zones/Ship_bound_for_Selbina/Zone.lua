@@ -17,17 +17,18 @@ end
 zone_object.onInitialize = function(zone)
 end
 
-zone_object.onZoneIn = function(player, prevZone, zone)
+zone_object.onZoneIn = function(player, prevZone)
 
     local cs = -1
+    local zoneID = 220
 
     if ((player:getXPos() == 0) and (player:getYPos() == 0) and (player:getZPos() == 0)) then
         local position = math.random(-2, 2) + 0.150
         player:setPos(position, -2.100, 3.250, 64)
-        if player:getGMLevel() == 0 then
-            zone:setLocalVar('stateSet', 1)
-            zone:setLocalVar('state', 2)
-            zone:setLocalVar('transportStart', os.time())
+        if player:getGMLevel() == 0 and GetZone(zoneID):getLocalVar('stateSet') == 0 then
+            GetZone(zoneID):setLocalVar('stateSet', 1)
+            GetZone(zoneID):setLocalVar('state', 2)
+            GetZone(zoneID):setLocalVar('transportTime', os.time())
         end
     end
 
@@ -83,8 +84,13 @@ zone_object.onZoneTick = function(zone)
         zone:setLocalVar('state', 0)
     end
 
-    if (os.time() - zone:getLocalVar('transportTime')) % 60 then
+    if os.time() - zone:getLocalVar('transportTime') % 60 then
         xi.sea_creatures.checkSpawns(ID, 1, 2) -- 1 percent per vana minute, 2 total mobs
+    end
+
+    if os.time() - zone:getLocalVar('transportTime') > 900 then
+        zone:setLocalVar('stateSet', 0)
+        zone:setLocalVar('state', 1)
     end
 end
 
@@ -97,8 +103,6 @@ end
 
 zone_object.onEventFinish = function(player, csid, option)
     if (csid == 255) then
-        player:getZone():setLocalVar('stateSet', 0)
-        player:getZone():setLocalVar('state', 1)
         player:setPos(0, 0, 0, 0, 248)
     end
 end
