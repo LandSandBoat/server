@@ -5,6 +5,7 @@
 -----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/msg")
+require("scripts/globals/item_utils")
 -----------------------------------
 local item_object = {}
 
