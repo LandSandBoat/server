@@ -573,29 +573,29 @@ namespace trustutils
         PTrust->health.mp = PTrust->GetMaxMP();
 
         // Stats ========================
-        uint16 fSTR = mobutils::GetBaseToRank(PTrust->strRank, mLvl);
-        uint16 fDEX = mobutils::GetBaseToRank(PTrust->dexRank, mLvl);
-        uint16 fVIT = mobutils::GetBaseToRank(PTrust->vitRank, mLvl);
-        uint16 fAGI = mobutils::GetBaseToRank(PTrust->agiRank, mLvl);
-        uint16 fINT = mobutils::GetBaseToRank(PTrust->intRank, mLvl);
-        uint16 fMND = mobutils::GetBaseToRank(PTrust->mndRank, mLvl);
-        uint16 fCHR = mobutils::GetBaseToRank(PTrust->chrRank, mLvl);
+        uint16 fSTR = mobutils::GetBaseToRank(PTrust, PTrust->strRank, mLvl);
+        uint16 fDEX = mobutils::GetBaseToRank(PTrust, PTrust->dexRank, mLvl);
+        uint16 fVIT = mobutils::GetBaseToRank(PTrust, PTrust->vitRank, mLvl);
+        uint16 fAGI = mobutils::GetBaseToRank(PTrust, PTrust->agiRank, mLvl);
+        uint16 fINT = mobutils::GetBaseToRank(PTrust, PTrust->intRank, mLvl);
+        uint16 fMND = mobutils::GetBaseToRank(PTrust, PTrust->mndRank, mLvl);
+        uint16 fCHR = mobutils::GetBaseToRank(PTrust, PTrust->chrRank, mLvl);
 
-        uint16 mSTR = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 2), mLvl);
-        uint16 mDEX = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 3), mLvl);
-        uint16 mVIT = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 4), mLvl);
-        uint16 mAGI = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 5), mLvl);
-        uint16 mINT = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 6), mLvl);
-        uint16 mMND = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 7), mLvl);
-        uint16 mCHR = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 8), mLvl);
+        uint16 mSTR = mobutils::GetBaseToRank(PTrust, grade::GetJobGrade(PTrust->GetMJob(), 2), mLvl);
+        uint16 mDEX = mobutils::GetBaseToRank(PTrust, grade::GetJobGrade(PTrust->GetMJob(), 3), mLvl);
+        uint16 mVIT = mobutils::GetBaseToRank(PTrust, grade::GetJobGrade(PTrust->GetMJob(), 4), mLvl);
+        uint16 mAGI = mobutils::GetBaseToRank(PTrust, grade::GetJobGrade(PTrust->GetMJob(), 5), mLvl);
+        uint16 mINT = mobutils::GetBaseToRank(PTrust, grade::GetJobGrade(PTrust->GetMJob(), 6), mLvl);
+        uint16 mMND = mobutils::GetBaseToRank(PTrust, grade::GetJobGrade(PTrust->GetMJob(), 7), mLvl);
+        uint16 mCHR = mobutils::GetBaseToRank(PTrust, grade::GetJobGrade(PTrust->GetMJob(), 8), mLvl);
 
-        uint16 sSTR = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetSJob(), 2), sLvl);
-        uint16 sDEX = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetSJob(), 3), sLvl);
-        uint16 sVIT = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetSJob(), 4), sLvl);
-        uint16 sAGI = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetSJob(), 5), sLvl);
-        uint16 sINT = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetSJob(), 6), sLvl);
-        uint16 sMND = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetSJob(), 7), sLvl);
-        uint16 sCHR = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetSJob(), 8), sLvl);
+        uint16 sSTR = mobutils::GetBaseToRank(PTrust, grade::GetJobGrade(PTrust->GetSJob(), 2), sLvl);
+        uint16 sDEX = mobutils::GetBaseToRank(PTrust, grade::GetJobGrade(PTrust->GetSJob(), 3), sLvl);
+        uint16 sVIT = mobutils::GetBaseToRank(PTrust, grade::GetJobGrade(PTrust->GetSJob(), 4), sLvl);
+        uint16 sAGI = mobutils::GetBaseToRank(PTrust, grade::GetJobGrade(PTrust->GetSJob(), 5), sLvl);
+        uint16 sINT = mobutils::GetBaseToRank(PTrust, grade::GetJobGrade(PTrust->GetSJob(), 6), sLvl);
+        uint16 sMND = mobutils::GetBaseToRank(PTrust, grade::GetJobGrade(PTrust->GetSJob(), 7), sLvl);
+        uint16 sCHR = mobutils::GetBaseToRank(PTrust, grade::GetJobGrade(PTrust->GetSJob(), 8), sLvl);
 
         if (sLvl > 15)
         {

@@ -1700,38 +1700,38 @@ namespace battleutils
         float ratio = (float)rAttack / (float)PDefender->DEF();
 
         ratio = std::clamp<float>(ratio, 0, 3);
+        float cRatio = ratio;
 
         // level correct (0.025 not 0.05 like for melee)
         if (PDefender->GetMLevel() > PAttacker->GetMLevel())
         {
-            ratio -= 0.025f * (PDefender->GetMLevel() - PAttacker->GetMLevel());
+            cRatio = cRatio - (PDefender->GetMLevel() - PAttacker->GetMLevel()) * 0.025f;
         }
 
         // calculate min/max PDIF
-        float minPdif = 0;
-        float maxPdif = 0;
+        float minPdif = 0.0f;
+        float maxPdif = 3.0f;
 
-        if (ratio < 0.9)
+        if (ratio < 0.9f)
         {
-            minPdif = ratio;
-            maxPdif = (10.0f / 9.0f) * ratio;
+            minPdif = cRatio;
+            maxPdif = (10.0f / 9.0f) * cRatio;
         }
-        else if (ratio <= 1.1)
+        else if (ratio <= 1.1f)
         {
-            minPdif = 1;
-            maxPdif = 1;
+            minPdif = 1.0f;
+            maxPdif = 1.0f;
         }
         else
         {
-            minPdif = (-3.0f / 19.0f) + ((20.0f / 19.0f) * ratio);
-            maxPdif = ratio;
+            minPdif = (-3.0f / 19.0f) + ((20.0f / 19.0f) * cRatio);
+            maxPdif = cRatio;
         }
-
-        minPdif = std::clamp<float>(minPdif, 0, 3);
-        maxPdif = std::clamp<float>(maxPdif, 0, 3);
 
         // return random number between the two
         float pdif = xirand::GetRandomNumber(minPdif, maxPdif);
+
+        pdif = std::clamp<float>(pdif, 0, 3);
 
         if (isCritical)
         {
@@ -2911,9 +2911,17 @@ namespace battleutils
             defense = 1;
         }
 
-        // https://www.bg-wiki.com/bg/PDIF
-        // https://www.bluegartr.com/threads/127523-pDIF-Changes-(Feb.-10th-2016)
+        // Using 2013 model since it is the most up-to-date and tested version of the one used in 75 era
+        // https://www.bg-wiki.com/index.php?title=PDIF&oldid=268066
+        // Note that only player autoattacks use this function, weaponskill pDIF is calculated in scripts/global/weaponskills.lua
+        // Using 2013 model since it is the most up-to-date and tested version of the one used in 75 era
+        // https://www.bg-wiki.com/index.php?title=PDIF&oldid=268066
+        // Note that only player autoattacks use this function, weaponskill pDIF is calculated in scripts/global/weaponskills.lua
         float ratio  = (static_cast<float>(attack)) / (static_cast<float>(defense));
+        float ratioCap = 2.25f;
+
+        ratio = std::clamp<float>(ratio, 0, ratioCap);
+
         float cRatio = ratio;
 
         // Level correction does not happen in Adoulin zones, Legion, or zones in Escha/Reisenjima
@@ -2939,10 +2947,6 @@ namespace battleutils
         uint8 dLvl        = std::abs(attackerLvl - defenderLvl);
         float correction  = static_cast<float>(dLvl) * 0.05f;
 
-        // Assuming the cap for mobs is the same as Avatars
-        // Cap at 38 level diff so 38*0.05 = 1.9
-        float cappedCorrection = std::min(correction, 1.9f);
-
         if (shouldApplyLevelCorrection)
         {
             // Players only get penalties
@@ -2951,7 +2955,7 @@ namespace battleutils
                 if (attackerLvl < defenderLvl)
                 {
                     // Screw the players, no known cap
-                    cRatio -= correction;
+                    cRatio = cRatio - correction;
                 }
             }
             // Mobs, Avatars and pets only get bonuses, no penalties (or they are calculated differently)
@@ -2959,7 +2963,7 @@ namespace battleutils
             {
                 if (attackerLvl > defenderLvl)
                 {
-                    cRatio += cappedCorrection;
+                    cRatio += correction;
                 }
             }
         }
@@ -2971,28 +2975,27 @@ namespace battleutils
             wRatio += 1;
         }
 
-        float qRatio     = wRatio;
-        float upperLimit = 0.0f;
+        float upperLimit = 3.25f;
         float lowerLimit = 0.0f;
 
-        // https://www.bg-wiki.com/bg/PDIF
+        // https://www.bg-wiki.com/index.php?title=PDIF&oldid=181430
         // Pre-Randomized values excluding Damage Limit+ trait
         // Damage Limit+ trait adds 0.1/rank to these values
         // type : non-crit : crit
-        // 1H : 3.25 : 4.25
-        // H2H & GK : 3.5 : 4.5
-        // 2H : 3.75 : 4.75
-        // Scythe : 4 : 5
-        // Archery & Throwing : 3.25 : 3.25*1.25
-        // Marksmanship : 3.5 : 3.5*1.25
+        // 1H : 2 : 3
+        // H2H & GK : 2.25 : 3.25
+        // 2H : 2.25 : 3.25
+        // Scythe : 2.25 : 3.25
+        // Archery & Throwing : 2 : 3
+        // Marksmanship : 2 : 3
 
         // https://www.bluegartr.com/threads/114636-Monster-Avatar-Pet-damage
         // Monster pDIF = Avatar pDIF = Pet pDIF
 
         auto* targ_weapon = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_MAIN]);
 
-        // Default for 1H is 3.25
-        float maxRatio = 3.25f;
+        // Default for 1H is 2.0
+        float maxRatio = 2.0f;
 
         if (attackerType == TYPE_MOB || attackerType == TYPE_PET)
         {
@@ -3006,15 +3009,15 @@ namespace battleutils
             {
                 if (targ_weapon->isHandToHand() || targ_weapon->getSkillType() == SKILL_GREAT_KATANA)
                 {
-                    maxRatio = 3.5f;
+                    maxRatio = 2.25f;
                 }
                 else if (targ_weapon->getSkillType() == SKILL_SCYTHE)
                 {
-                    maxRatio = 4.0f;
+                    maxRatio = 2.25f;
                 }
                 else if (targ_weapon->isTwoHanded())
                 {
-                    maxRatio = 3.75f;
+                    maxRatio = 2.25f;
                 }
             }
             // Skipping Ranged since that is handled in a separate function
@@ -3030,15 +3033,15 @@ namespace battleutils
         // There is an additional step here but I am skipping it for now because we do not have the data in the database.
         // The Damage Limit+ trait adds 0.1 to the maxRatio per trait level so a level 80 DRK would get maxRatio += 0.5
 
-        if (wRatio < 0.5)
+        if (wRatio < 0.5f)
         {
-            upperLimit = std::max(wRatio + 0.5f, 0.5f);
+            upperLimit = wRatio + 0.5f;
         }
-        else if (wRatio < 0.7)
+        else if (wRatio < 0.7f)
         {
-            upperLimit = 1;
+            upperLimit = 1.0f;
         }
-        else if (wRatio < 1.2)
+        else if (wRatio < 1.2f)
         {
             upperLimit = wRatio + 0.3f;
         }
@@ -3046,43 +3049,54 @@ namespace battleutils
         {
             upperLimit = wRatio * 1.25f;
         }
+        else if (wRatio < 2.625f)
+        {
+            upperLimit = wRatio + 0.375f;
+        }
         else
         {
-            upperLimit = std::min(wRatio + 0.375f, maxRatio);
+            upperLimit = 3.0f;
         }
 
-        if (wRatio < 0.38)
+        if (wRatio < 0.38f)
         {
-            lowerLimit = std::max(wRatio, 0.5f);
+            lowerLimit = 0.0f;
         }
-        else if (wRatio < 1.25)
+        else if (wRatio < 1.25f)
         {
             lowerLimit = (wRatio * (1176.0f / 1024.0f)) - (448.0f / 1024.0f);
         }
-        else if (wRatio < 1.51)
+        else if (wRatio < 1.51f)
         {
             lowerLimit = 1.0f;
         }
-        else if (wRatio < 2.44)
+        else if (wRatio < 2.44f)
         {
             lowerLimit = (wRatio * (1176.0f / 1024.0f)) - (755.0f / 1024.0f);
         }
         else
         {
-            lowerLimit = std::min(wRatio - 0.375f, maxRatio);
+            lowerLimit = wRatio - 0.375f;
         }
 
-        // https://www.bg-wiki.com/bg/Damage_Limit+
-        // See: "Physical damage limit +n%" is a multiplier to the total pDIF cap.
-        // There is one more step here that I am skipping for Physical Damage +% from gear and augments.
-        // I don't believe support for this modifier exists yet in the project.
-        // Physical Damage +% (PDL) is a flat % increase to the final pDIF cap value
-        // Meaning if a player has PDL+10% and an uppwerLimit of 1 then this would become 1.1
-        // upperLimit = upperLimit * 1.1
+        float pDIF = 0.0f;
 
-        qRatio = xirand::GetRandomNumber(lowerLimit, upperLimit);
+        // Bernoulli distribution, applied for cRatio < 0.5 and 0.75 < cRatio < 1.25
+        // Other cRatio values are uniformly distributed
+        // https://www.bluegartr.com/threads/108161-pDif-and-damage?p=5308205&viewfull=1#post5308205
+        float U = std::max<float>(0.0, std::min<float>(0.333, 1.3 * (2.0 - std::abs(wRatio - 1)) - 1.96));
+        bool bernoulli = xirand::GetRandomNumber(0.0f, 1.0f) < U ? true : false;
 
-        float pDIF = qRatio * xirand::GetRandomNumber(1.f, 1.05f);
+        if (bernoulli)
+        {
+            pDIF = std::round(wRatio);
+        } else
+        {
+            pDIF = xirand::GetRandomNumber(lowerLimit, upperLimit);
+        }
+
+        pDIF = std::clamp<float>(pDIF, 0, 3.0);
+        pDIF = pDIF * xirand::GetRandomNumber(1.0f, 1.05f);
 
         if (isCritical)
         {
