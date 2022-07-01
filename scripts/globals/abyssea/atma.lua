@@ -168,31 +168,31 @@ xi.atma.atmaMods =
 -- in the future; however, we would need to check for the offset to modify parameter
 -- number in the array.  See: onTrigger function for handling in a single loop
 local function getAtmaMask(player)
-	local atmaMask = { 0, 0, 0, 0, 0, 0 }
+    local atmaMask = { 0, 0, 0, 0, 0, 0 }
 
     local atmaCount = xi.ki.ATMA_OF_THE_APOCALYPSE - xi.ki.ATMA_OF_THE_LION
-	local atmaBase = xi.ki.ATMA_OF_THE_LION - 1
-	for i = 1, atmaCount + 1 do
-		if player:hasKeyItem(atmaBase + i) then
-			local parameterNum = math.floor((i + 32) / 32)
+    local atmaBase = xi.ki.ATMA_OF_THE_LION - 1
+    for i = 1, atmaCount + 1 do
+        if player:hasKeyItem(atmaBase + i) then
+            local parameterNum = math.floor((i + 32) / 32)
             local atmaOffset = bit.lshift(1, (i - 1) % 32)
 
             atmaMask[parameterNum] = atmaMask[parameterNum] + atmaOffset
-		end
-	end
+        end
+    end
 
     atmaCount = xi.ki.ATMA_OF_THE_SAVIOR - xi.ki.ATMA_OF_THE_HEIR
-	atmaBase = xi.ki.ATMA_OF_THE_HEIR - 1
-	for i = 1, atmaCount + 1 do
-		if player:hasKeyItem(atmaBase + i) then
-			local parameterNum = math.floor((i + 32) / 32) + 4
+    atmaBase = xi.ki.ATMA_OF_THE_HEIR - 1
+    for i = 1, atmaCount + 1 do
+        if player:hasKeyItem(atmaBase + i) then
+            local parameterNum = math.floor((i + 32) / 32) + 4
             local atmaOffset = bit.lshift(1, (i - 1) % 32)
 
             atmaMask[parameterNum] = atmaMask[parameterNum] + atmaOffset
-		end
-	end
+        end
+    end
 
-	return atmaMask
+    return atmaMask
 end
 
 local function getFreeAtmaSlot(player)
@@ -220,59 +220,59 @@ local function hasDuplicateAtmaEffect(player, atmaValue)
 end
 
 local function delAtma(player, selectedAtma)
-	if player:hasStatusEffect(xi.effect.ATMA, selectedAtma) then
-		player:delStatusEffect(xi.effect.ATMA, selectedAtma)
+    if player:hasStatusEffect(xi.effect.ATMA, selectedAtma) then
+        player:delStatusEffect(xi.effect.ATMA, selectedAtma)
     end
 end
 
 local function addAtma(player, selectedAtma)
-	local atmaBase = xi.ki.ATMA_OF_THE_LION - 1
-	local atmaValue = atmaBase + selectedAtma
+    local atmaBase = xi.ki.ATMA_OF_THE_LION - 1
+    local atmaValue = atmaBase + selectedAtma
     local availableAtmaSlot = getFreeAtmaSlot(player)
 
-	if
+    if
         availableAtmaSlot > 0 and
         not hasDuplicateAtmaEffect(player, atmaValue)
     then
-		player:addStatusEffectEx(xi.effect.ATMA, xi.effect.ATMA, atmaValue, 0, 0, availableAtmaSlot)
+        player:addStatusEffectEx(xi.effect.ATMA, xi.effect.ATMA, atmaValue, 0, 0, availableAtmaSlot)
 
-		local atmaEffect = player:getStatusEffect(xi.effect.ATMA, availableAtmaSlot)
-		atmaEffect:setFlag(xi.effectFlag.ON_ZONE)
-		atmaEffect:setFlag(xi.effectFlag.INFLUENCE)
-	end
+        local atmaEffect = player:getStatusEffect(xi.effect.ATMA, availableAtmaSlot)
+        atmaEffect:setFlag(xi.effectFlag.ON_ZONE)
+        atmaEffect:setFlag(xi.effectFlag.INFLUENCE)
+    end
 end
 
 xi.atma.onEffectGain = function(target, effect)
-	local atma = effect:getPower()
-	local mods = xi.atma.atmaMods[atma]
-	if mods ~= nil then
-		for i = 1, #mods, 2 do
-			target:addMod(mods[i], mods[i + 1])
-		end
-	end
+    local atma = effect:getPower()
+    local mods = xi.atma.atmaMods[atma]
+    if mods ~= nil then
+        for i = 1, #mods, 2 do
+            target:addMod(mods[i], mods[i + 1])
+        end
+    end
 end
 
 xi.atma.onEffectTick = function(target, effect)
-	if not xi.abyssea.isInAbysseaZone(target) then
-		target:delStatusEffect(effect)
-	end
+    if not xi.abyssea.isInAbysseaZone(target) then
+        target:delStatusEffect(effect)
+    end
 end
 
 xi.atma.onEffectLose = function(target, effect)
-	local atma = effect:getPower()
-	local mods = xi.atma.atmaMods[atma]
+    local atma = effect:getPower()
+    local mods = xi.atma.atmaMods[atma]
 
-	if mods ~= nil then
-		for i = 1, #mods, 2 do
-			target:delMod(mods[i], mods[i + 1])
-		end
-	end
+    if mods ~= nil then
+        for i = 1, #mods, 2 do
+            target:delMod(mods[i], mods[i + 1])
+        end
+    end
 end
 
 xi.atma.onTrigger = function(player,npc)
     local atmaMask   = getAtmaMask(player)
     local activeAtma = { 0, 0, 0 }
-	local menuParams = 0x1000000
+    local menuParams = 0x1000000
 
     local shiftVal = 0
     for atmaSlot = 1, 3 do
@@ -280,7 +280,7 @@ xi.atma.onTrigger = function(player,npc)
             activeAtma[atmaSlot] = player:getStatusEffect(xi.effect.ATMA, atmaSlot):getPower()
 
             -- Remove active Atmas from their appropriate bitfield
-	        if activeAtma[atmaSlot] ~= 0 then
+            if activeAtma[atmaSlot] ~= 0 then
                 local groupOffset = activeAtma[atmaSlot] >= xi.ki.ATMA_OF_THE_HEIR and xi.ki.ATMA_OF_THE_HEIR or xi.ki.ATMA_OF_THE_LION
                 local parameterNum = math.floor((activeAtma[atmaSlot] - groupOffset + 1 + 32) / 32)
 
@@ -288,10 +288,10 @@ xi.atma.onTrigger = function(player,npc)
                     parameterNum = parameterNum + 4
                 end
 
-		        menuParams = menuParams + bit.lshift(activeAtma[atmaSlot] - groupOffset + 1, shiftVal * 8)
-		        atmaMask[parameterNum] = atmaMask[parameterNum] - bit.lshift(1, (activeAtma[atmaSlot] - groupOffset) % 32)
+                menuParams = menuParams + bit.lshift(activeAtma[atmaSlot] - groupOffset + 1, shiftVal * 8)
+                atmaMask[parameterNum] = atmaMask[parameterNum] - bit.lshift(1, (activeAtma[atmaSlot] - groupOffset) % 32)
                 shiftVal = shiftVal + 1
-	        end
+            end
 
             -- Set Bits for Active Atma Count (Two different bytes!)
             if atmaSlot == 1 then
@@ -302,25 +302,25 @@ xi.atma.onTrigger = function(player,npc)
         end
     end
 
-	if getFreeAtmaSlot(player) == 0 then
-		atmaMask[1] = 0
-	end
+    if getFreeAtmaSlot(player) == 0 then
+        atmaMask[1] = 0
+    end
 
-	player:startEvent(2003, 7548, menuParams, atmaMask[1], atmaMask[2], atmaMask[3], atmaMask[4], atmaMask[5], atmaMask[6])
+    player:startEvent(2003, 7548, menuParams, atmaMask[1], atmaMask[2], atmaMask[3], atmaMask[4], atmaMask[5], atmaMask[6])
 end
 
 xi.atma.onEventUpdate = function(player,csid,option)
-	player:updateEvent(0,0)
+    player:updateEvent(0,0)
 end
 
 xi.atma.onEventFinish = function(player,csid,option)
-	if option < 0x40000000 then
-		if option % 0x10000 == 1 then
-			local selection = (option - 1) / 0x10000
-			addAtma(player, selection)
-		else
-			local selection = (option - 2) / 0x10000
-			delAtma(player, selection)
-		end
-	end
+    if option < 0x40000000 then
+        if option % 0x10000 == 1 then
+            local selection = (option - 1) / 0x10000
+            addAtma(player, selection)
+        else
+            local selection = (option - 2) / 0x10000
+            delAtma(player, selection)
+        end
+    end
 end
