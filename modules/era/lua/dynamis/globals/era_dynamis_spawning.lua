@@ -481,12 +481,11 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
             ["Light Elemental"] = {"Light Ele.", 16, 38, 0, 19, 0}, -- LEle
             ["Dark Elemental"] = {"Dark Ele.", 12, 38, 0, 18, 0}, -- DEle
         },
-        ["Beastmen"] = 
+        ["Beastmen"] =
         {
             ["Vanguard Vindicator"] = {"V. Vindicator", 19, 134, 2558, 0, 337}, -- QWAR (Bastok)
             ["Vanguard Constable"] = {"V. Constable", 29, 134, 2558,1, 337}, -- QWHM (Bastok)
             ["Vanguard Militant"] = {"V. Militant", 25, 134, 2558, 0, 337}, -- QMNK (Bastok)
-            
         },
         ["Other"] =
         {
@@ -658,7 +657,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Prowlox Barrelbelly"] = {"P.Barrelbelly", 155, 134, 143, 0, 1213, "Beastmen"}, -- Prow (RNG)
         ["Scruffix Shaggychest"] = {"S.Shaggychest", 148, 134, 143, 4, 1213, "Beastmen"}, -- Scru (PLD)
         ["Slystix Megapeepers"] = {"S.Megapeepers", 145, 134, 143, 7, 1213, "Beastmen"}, -- Slys (NIN)
-        ["Tymexox Ninefingers"] = {"", 150, 134, 143, 5, 1213, "Beastmen"}, -- Tyme (DRK)
+        ["Tymexox Ninefingers"] = {"T.Ninefingers", 150, 134, 143, 5, 1213, "Beastmen"}, -- Tyme (DRK)
         -- Orc
         -- Dynamis - Beaucedine
         ["Cobraclaw Buchzvotch"] = {"C.Buchzvotch", 65, 134, 493, 0, 1200, "Beastmen"}, -- CBuc (MNK)
@@ -685,7 +684,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Wyrmgnasher Bjakdek"] = {"W.Bjakdek", 88, 134, 237, 0, 1200, "Beastmen"}, -- WyrB (DRG)
         ["Reapertongue Gadgquok"] = {"R.Gadgquok", 73, 134, 237, 0, 1200, "Beastmen"}, -- ReaG (SMN)
         ["Voidstreaker Butchnotch"] = {"V.Butchnotch", 63, 134, 237, 7, 1200, "Beastmen"}, -- VoiB (NIN)
-        ["Battlechoir Gitchfotch"] = {"B.Gitchfortch", 87, 134, 237, 6, 1200, "Beastmen"}, -- BatG (BRD)
+        ["Battlechoir Gitchfotch"] = {"B.Gitchfotch", 87, 134, 237, 6, 1200, "Beastmen"}, -- BatG (BRD)
         ["Soulsender Fugbrag"] = {"S.Fugbrag", 87, 134, 237, 6, 1200, "Beastmen"}, -- SouF (BRD)
         -- Quadav
         -- Dynamis - Beaucedine
@@ -1285,18 +1284,63 @@ xi.dynamis.spawnDynamicPet =function(target, oMob, mobJob)
         },
         [xi.job.DRG] =
         {
-            [false] = {"V. Wyvern", 27, 134, 0, 0, 714}, -- Normal Vanguard's Wyvern (Vwyv)
-            [true] = 
+            [327] = -- Goblin Family
             {
-                ["Maa Zaua the Wyrmkeeper"] = {"V. Wyvern", 27, 134, 0, 0, 714}, -- Normal Vanguard's Wyvern (Vwyv)
-                ["Draklix Scalecrust"] = {"V. Wyvern", 27, 134, 0, 0, 714}, -- Normal Vanguard's Wyvern (Vwyv)
-                ["Drakefeast Wubmfub"] = {"V. Wyvern", 27, 134, 0, 0, 714}, -- Normal Vanguard's Wyvern (Vwyv)
-                ["Go'Tyo Magenapper"] = {"V. Wyvern", 27, 134, 0, 0, 714}, -- Normal Vanguard's Wyvern (Vwyv)
-                ["Elvaansticker Bxafraff"] = {"V. Wyvern", 27, 134, 0, 0, 714}, -- Normal Vanguard's Wyvern (Vwyv)
-                ["Wyrmgnasher Bjakdek"] = {"V. Wyvern", 27, 134, 0, 0, 714}, -- Normal Vanguard's Wyvern (Vwyv)
-                ["King Zagan"] = {"Zagan's Wyvern", 61, 135, 0, 0, 714}, -- Zagan's Wyvern (Zwyv)
-                ["Dagourmarche"] = {"D. Wyvern", 27, 134, 0, 0, 714}, -- Dagourmache's Wyvern (DWyv)
-                ["Apocalyptic Beast"] = {"Dragon's Wyvern", 27, 134, 0, 0, 714}, -- Dragon's Wyvern (Dwyv)
+                [false] = {"V. Wyvern", 27, 134, 0, 0, 714},
+                [true] =
+                {
+                    ["Draklix Scalecrust"] = {"V. Wyvern", 27, 134, 0, 0, 714}, -- Normal Vanguard's Wyvern (Vwyv)
+                },
+            },
+            [334] = -- Orc Family
+            {
+                [false] = {"V. Wyvern", 27, 134, 0, 0, 714},
+                [true] =
+                {
+                    ["Elvaansticker Bxafraff"] = {"V. Wyvern", 27, 134, 0, 0, 714}, -- Normal Vanguard's Wyvern (Vwyv)
+["Wyrmgnasher Bjakdek"] = {"V. Wyvern", 27, 134, 0, 0, 714}, -- Normal Vanguard's Wyvern (Vwyv)
+["Drakefeast Wubmfub"] = {"V. Wyvern", 27, 134, 0, 0, 714}, -- Normal Vanguard's Wyvern (Vwyv)
+                },
+            },
+            [337] = -- Quadav Family
+            {
+                [false] = {"V. Wyvern", 27, 134, 0, 0, 714},
+                [true] =
+                {
+                    ["Go'Tyo Magenapper"] = {"V. Wyvern", 27, 134, 0, 0, 714}, -- Normal Vanguard's Wyvern (Vwyv)
+                },
+            },
+            [358] = -- Kindred Family
+            {
+                [false] = {"K. Wyvern", 27, 134, 0, 0, 714},
+                [true] =
+                {
+                    ["King Zagan"] = {"Zagan's Wyvern", 61, 135, 0, 0, 714}, -- Zagan's Wyvern (Zwyv)
+                },
+            },
+            [359] = -- Hydra Family
+            {
+                [false] = {"H. Wyvern", 27, 134, 0, 0, 714},
+                [true] =
+                {
+                    ["Dagourmarche"] = {"D. Wyvern", 27, 134, 0, 0, 714}, -- Dagourmache's Wyvern (DWyv)
+                },
+            },
+            [360] = -- Yagudo Family
+            {
+                [false] = {"V. Wyvern", 27, 134, 0, 0, 714},
+                [true] =
+                {
+                    ["Maa Zaua the Wyrmkeeper"] = {"V. Wyvern", 27, 134, 0, 0, 714}, -- Normal Vanguard's Wyvern (Vwyv)
+                },
+            },
+            [87] = -- Dwagon Family
+            {
+                [false] = {"V. Wyvern", 27, 134, 0, 0, 714},
+                [true] =
+                {
+                    ["Apocalyptic Beast"] = {"Dragon's Wyvern", 27, 134, 0, 0, 714}, -- Dragon's Wyvern (Dwyv)
+                },
             },
         },
         [xi.job.SMN] =
@@ -1331,7 +1375,7 @@ xi.dynamis.spawnDynamicPet =function(target, oMob, mobJob)
             },
             [358] = -- Kindred Family
             {
-                [false] = {"4b417661" , 25, 135, 0, 0, 34}, -- Kindred's Avatar (KAva)
+                [false] = {"K. Avatar" , 25, 135, 0, 0, 34}, -- Kindred's Avatar (KAva)
                 [true] = -- NM Kindred
                 {
                     ["Marquis Nebiros"] = {"Nebiros' Avatar", 68, 135, 0, 0, 34}, -- Nebrios's Avatar (NAva)
@@ -1417,18 +1461,10 @@ xi.dynamis.spawnDynamicPet =function(target, oMob, mobJob)
         },
     }
     local nameFunction = {"Apocalyptic Beast", "Dagourmarche"}
-    if mobJob == xi.job.DRG then
-        if isNM == true then
-            nameObj = petList[mobJob][true][mobName]
-        else
-            nameObj = petList[mobJob][false]
-        end
+    if isNM == true then
+        nameObj = petList[mobJob][mobFamily][true][mobName]
     else
-        if isNM == true then
-            nameObj = petList[mobJob][mobFamily][true][mobName]
-        else
-            nameObj = petList[mobJob][mobFamily][false]
-        end
+        nameObj = petList[mobJob][mobFamily][false]
     end
     for _, name in pairs(nameFunction) do
         if name == mobName then

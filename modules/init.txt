@@ -56,5 +56,4 @@ era/sql/era_dyna_sql.sql
 #        Renamer
 #-----------------------
 renamer/cpp/renamer.cpp
-renamer/list/list.lua
 #-----------------------

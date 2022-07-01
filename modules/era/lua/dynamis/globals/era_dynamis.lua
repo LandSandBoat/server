@@ -806,14 +806,16 @@ xi.dynamis.handleDynamis = function(zone)
         zone:setLocalVar(string.format("[DYNA]Given1MinuteWarning_%s", zoneID), 1) -- Sets to true to not give another warning.
     end
 
-    if #playersInZone == 0 then -- If player count in zone is 0 initiate cooldown for cleanup.
+    if #playersInZone == 0 and zone:getLocalVar(string.format("[DYNA]NoPlayersInZone_%s", zoneID)) == 0 then -- If player count in zone is 0 initiate cooldown for cleanup.
         zone:setLocalVar(string.format("[DYNA]NoPlayersInZone_%s", zoneID), (os.time() + (60 * 15))) -- Give 15 minutes for zone to repopulate.
     else
-        zone:setLocalVar(string.format("[DYNA]NoPlayersInZone_%s", zoneID), (os.time() + (60 * 60 * 5))) -- Ignore for 5 hours or until zone empties.
+        zone:setLocalVar(string.format("[DYNA]NoPlayersInZone_%s", zoneID), 0)
     end
 
-    if zone:getLocalVar(string.format("[DYNA]NoPlayersInZone_%s", zoneID)) <= os.time() then -- If cooldown period eclipses current OS time, cleanup.
-        xi.dynamis.cleanupDynamis(zone)
+    if zone:getLocalVar(string.format("[DYNA]NoPlayersInZone_%s", zoneID)) ~= 0 then
+        if zone:getLocalVar(string.format("[DYNA]NoPlayersInZone_%s", zoneID)) <= os.time() then -- If cooldown period eclipses current OS time, cleanup.
+            xi.dynamis.cleanupDynamis(zone)
+        end
     end
 end
 
