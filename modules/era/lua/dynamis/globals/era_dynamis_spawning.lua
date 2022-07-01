@@ -1298,8 +1298,8 @@ xi.dynamis.spawnDynamicPet =function(target, oMob, mobJob)
                 [true] =
                 {
                     ["Elvaansticker Bxafraff"] = {"V. Wyvern", 27, 134, 0, 0, 714}, -- Normal Vanguard's Wyvern (Vwyv)
-["Wyrmgnasher Bjakdek"] = {"V. Wyvern", 27, 134, 0, 0, 714}, -- Normal Vanguard's Wyvern (Vwyv)
-["Drakefeast Wubmfub"] = {"V. Wyvern", 27, 134, 0, 0, 714}, -- Normal Vanguard's Wyvern (Vwyv)
+                    ["Wyrmgnasher Bjakdek"] = {"V. Wyvern", 27, 134, 0, 0, 714}, -- Normal Vanguard's Wyvern (Vwyv)
+                    ["Drakefeast Wubmfub"] = {"V. Wyvern", 27, 134, 0, 0, 714}, -- Normal Vanguard's Wyvern (Vwyv)
                 },
             },
             [337] = -- Quadav Family
@@ -1539,7 +1539,7 @@ xi.dynamis.setSpecialSkill = function(mob)
         [358] = 1146-- Kindred
     }
     for family, skill in pairs(specialSkills) do
-        if mob:getMainJob() == xi.job.NIN or mob:getMainJob() == xi.job.RNG then
+        if mob:getFamily() == family and (mob:getMainJob() == xi.job.NIN or mob:getMainJob() == xi.job.RNG) then
             mob:setMobMod(xi.mobMod.SPECIAL_SKILL, skill)
         end
     end

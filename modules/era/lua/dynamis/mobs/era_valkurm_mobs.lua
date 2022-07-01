@@ -121,8 +121,6 @@ xi.dynamis.onFightCirrate = function(mob, target)
             end
         end
         if count > 0 then
-            print(buffs[selection][2])
-            print(buffs[selection][3])
             mob:setLocalVar(buffs[selection][2], buffs[selection][3])
             zone:setLocalVar(buffs[selection][4], 1)
             if buffs[selection][5] ~= nil then

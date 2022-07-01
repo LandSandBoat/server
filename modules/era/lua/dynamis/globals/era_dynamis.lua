@@ -774,7 +774,6 @@ xi.dynamis.handleDynamis = function(zone)
         end
         if check == balance then
             if  waveSpawned ~= 1 and waveNumber ~= 1 then
-                print(string.format("Wave Spawning: %s", waveNumber))
                 xi.dynamis.spawnWave(zone, zoneID, waveNumber) -- If not spawn
             end
         end

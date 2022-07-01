@@ -17,7 +17,17 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    return 0
+    local typeEffect = xi.effect.POISON
+    local power = mob:getLocalVar("miasmicbreathpower")
+
+    MobStatusEffectMove(mob, target, typeEffect, power, 3, 60)
+
+    local dmgmod = MobBreathMove(mob, target, 0.1, 1.25, xi.magic.ele.WATER, 200)
+    local dmg = MobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.WATER, MOBPARAM_IGNORE_SHADOWS)
+
+    target:takeDamage(dmg, mob, xi.attackType.BREATH, xi.damageType.WATER)
+
+    return dmg
 end
 
 return mobskill_object
