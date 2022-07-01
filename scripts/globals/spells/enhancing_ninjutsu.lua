@@ -81,7 +81,7 @@ xi.spells.enhancing.useEnhancingNinjutsu = function(caster, target, spell)
 
     -- Monomi / Tonko
     elseif spellEffect == xi.effect.SNEAK or spellEffect == xi.effect.INVISIBLE then
-	    duration = duration * xi.settings.SNEAK_INVIS_DURATION_MULTIPLIER
+	    duration = duration * xi.settings.main.SNEAK_INVIS_DURATION_MULTIPLIER
         paramThree = 10
 
     -- Yain
