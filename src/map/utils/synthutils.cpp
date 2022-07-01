@@ -458,22 +458,22 @@ namespace synthutils
             // Section 2: Skill up equations and penalties
             double skillUpChance = 0;
 
-            double craftChanceMultipler = settings::get<double>("map.CRAFT_AMOUNT_MULTIPLER");
+            double craftChanceMultiplier = settings::get<double>("map.CRAFT_CHANCE_MULTIPLIER");
 
             if (settings::get<bool>("map.CRAFT_MODERN_SYSTEM"))
             {
                 if (baseDiff > 0)
                 {
-                    skillUpChance = (double)baseDiff * craftChanceMultipler * (3 - (log(1.2 + charSkill / 100))) / 5; // Original skill up equation with "x2 chance" applied.
+                    skillUpChance = (double)baseDiff * craftChanceMultiplier * (3 - (log(1.2 + charSkill / 100))) / 5; // Original skill up equation with "x2 chance" applied.
                 }
                 else
                 {
-                    skillUpChance = craftChanceMultipler * (3 - (log(1.2 + charSkill / 100))) / (6 - baseDiff); // Equation used when over cap.
+                    skillUpChance = craftChanceMultiplier * (3 - (log(1.2 + charSkill / 100))) / (6 - baseDiff); // Equation used when over cap.
                 }
             }
             else
             {
-                skillUpChance = (double)baseDiff * craftChanceMultipler * (3 - (log(1.2 + charSkill / 100))) / 10; // Original skill up equation
+                skillUpChance = (double)baseDiff * craftChanceMultiplier * (3 - (log(1.2 + charSkill / 100))) / 10; // Original skill up equation
             }
 
             // Apply synthesis skill gain rate modifier before synthesis fail modifier
@@ -566,9 +566,9 @@ namespace synthutils
                 }
 
                 // Do skill amount multiplier
-                if (settings::get<uint8>("map.CRAFT_AMOUNT_MULTIPLER") > 1)
+                if (settings::get<uint8>("map.CRAFT_AMOUNT_MULTIPLIER") > 1)
                 {
-                    skillUpAmount += skillUpAmount * settings::get<uint8>("map.CRAFT_AMOUNT_MULTIPLER");
+                    skillUpAmount += skillUpAmount * settings::get<uint8>("map.CRAFT_AMOUNT_MULTIPLIER");
                     if (skillUpAmount > 9)
                     {
                         skillUpAmount = 9;
