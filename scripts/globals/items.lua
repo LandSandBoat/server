@@ -542,6 +542,7 @@ xi.items =
     HEAVY_QUADAV_BACKPLATE          = 2505,
     LADYBUG_WING                    = 2506,
     LYCOPODIUM_FLOWER               = 2507,
+    PLUME_DOR                       = 2528,
     SQUARE_OF_SMILODON_LEATHER      = 2529,
     SQUARE_OF_LYNX_LEATHER          = 2530,
     ELECTRUM_INGOT                  = 2536,
