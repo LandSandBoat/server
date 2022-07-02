@@ -3584,23 +3584,143 @@ namespace charutils
         }
     }
 
+    uint16 ApplyTH(int16 m_THLvl, uint16 rate)
+    {
+        TracyZoneScoped;
+
+        float multi = 1.00f;
+
+        if (rate == 1)
+        {
+        	switch(m_THLvl)
+        	{
+        		case 0: multi = 1.00f; break;
+        		case 1: multi = 2.00f; break;
+        		case 2: multi = 3.00f; break;
+        		case 3: multi = 3.50f; break;
+        		case 4: multi = 4.00f; break;
+        	}
+        }
+        else if (rate == 5)
+        {
+        	switch(m_THLvl)
+        	{
+        		case 0: multi = 1.00f; break;
+        		case 1: multi = 1.50f; break;
+        		case 2: multi = 2.00f; break;
+        		case 3: multi = 2.40f; break;
+        		case 4: multi = 2.80f; break;
+        	}
+        }
+        else if (rate == 10)
+        {
+        	switch(m_THLvl)
+        	{
+        		case 0: multi = 1.00f; break;
+        		case 1: multi = 1.50f; break;
+        		case 2: multi = 2.00f; break;
+        		case 3: multi = 2.25f; break;
+        		case 4: multi = 2.50f; break;
+        	}
+        }
+        else if (rate == 50)
+        {
+        	switch(m_THLvl)
+        	{
+        		case 0: multi = 1.00f; break;
+        		case 1: multi = 1.20f; break;
+        		case 2: multi = 1.40f; break;
+        		case 3: multi = 1.50f; break;
+        		case 4: multi = 1.60f; break;
+        	}
+        }
+        else if (rate == 100)
+        {
+        	switch(m_THLvl)
+        	{
+        		case 0: multi = 1.00f; break;
+        		case 1: multi = 1.20f; break;
+        		case 2: multi = 1.50f; break;
+        		case 3: multi = 1.65f; break;
+        		case 4: multi = 1.80f; break;
+        	}
+        }
+        else if (rate == 150)
+        {
+        	switch(m_THLvl)
+        	{
+        		case 0: multi = 1.00f; break;
+        		case 1: multi = 2.00f; break;
+        		case 2: multi = 2.67f; break;
+        		case 3: multi = 2.84f; break;
+        		case 4: multi = 3.00f; break;
+        	}
+        }
+        else if (rate == 240)
+        {
+        	switch(m_THLvl)
+        	{
+        		case 0: multi = 1.00f; break;
+        		case 1: multi = 2.00f; break;
+        		case 2: multi = 2.34f; break;
+        		case 3: multi = 2.50f; break;
+        		case 4: multi = 2.67f; break;
+        	}
+        }
+        else if (rate == 500)
+        {
+        	switch(m_THLvl)
+        	{
+        		case 0: multi = 1.00f; break;
+        		case 1: multi = 1.20f; break;
+        		case 2: multi = 1.40f; break;
+        		case 3: multi = 1.50f; break;
+        		case 4: multi = 1.60f; break;
+        	}
+        }
+        else if (rate == 750)
+        {
+        	switch(m_THLvl)
+        	{
+        		case 0: multi = 1.00f; break;
+        		case 1: multi = 1.07f; break;
+        		case 2: multi = 1.14f; break;
+        		case 3: multi = 1.17f; break;
+        		case 4: multi = 1.20f; break;
+        	}
+        }
+        else
+        {
+        	switch(m_THLvl)
+        	{
+        		case 0: multi = 1.00f; break;
+        		case 1: multi = 1.00f; break;
+        		case 2: multi = 1.00f; break;
+        		case 3: multi = 1.00f; break;
+        		case 4: multi = 1.00f; break;
+        	}
+        }
+
+        return multi;
+    }
+
     void DistributeItem(CCharEntity* PChar, CBaseEntity* PEntity, uint16 itemid, uint16 droprate)
     {
         TracyZoneScoped;
 
         uint8 tries    = 0;
         uint8 maxTries = 1;
-        uint8 bonus    = 0;
+        uint16 bonus    = 0;
         if (auto* PMob = dynamic_cast<CMobEntity*>(PEntity))
         {
             // THLvl is the number of 'extra chances' at an item. If the item is obtained, then break out.
             tries    = 0;
-            maxTries = 1 + (PMob->m_THLvl > 2 ? 2 : PMob->m_THLvl);
-            bonus    = (PMob->m_THLvl > 2 ? (PMob->m_THLvl - 2) * 10 : 0);
+            maxTries = 1;
+            bonus    = ApplyTH(PMob->m_THLvl, droprate);
         }
         while (tries < maxTries)
         {
-            if (droprate > 0 && xirand::GetRandomNumber(1000) < droprate * settings::get<float>("map.DROP_RATE_MULTIPLIER") + bonus)
+            if (droprate > 0 && xirand::GetRandomNumber(1000) < droprate * settings::get<float>("map.DROP_RATE_MULTIPLIER") * bonus)
             {
                 PChar->PTreasurePool->AddItem(itemid, PEntity);
                 break;

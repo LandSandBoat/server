@@ -885,6 +885,126 @@ void CMobEntity::DistributeRewards()
     }
 }
 
+int16 CMobEntity::ApplyTH(int16 m_THLvl, int16 rate)
+{
+    TracyZoneScoped;
+
+    float multi = 1.00f;
+
+    if (rate == 1)
+	{
+		switch(m_THLvl)
+		{
+			case 0: multi = 1.00f; break;
+			case 1: multi = 2.00f; break;
+			case 2: multi = 3.00f; break;
+			case 3: multi = 3.50f; break;
+			case 4: multi = 4.00f; break;
+		}
+	}
+	else if (rate == 5)
+	{
+		switch(m_THLvl)
+		{
+			case 0: multi = 1.00f; break;
+			case 1: multi = 1.50f; break;
+			case 2: multi = 2.00f; break;
+			case 3: multi = 2.40f; break;
+			case 4: multi = 2.80f; break;
+		}
+	}
+	else if (rate == 10)
+	{
+		switch(m_THLvl)
+		{
+			case 0: multi = 1.00f; break;
+			case 1: multi = 1.50f; break;
+			case 2: multi = 2.00f; break;
+			case 3: multi = 2.25f; break;
+			case 4: multi = 2.50f; break;
+		}
+	}
+	else if (rate == 50)
+	{
+		switch(m_THLvl)
+		{
+			case 0: multi = 1.00f; break;
+			case 1: multi = 1.20f; break;
+			case 2: multi = 1.40f; break;
+			case 3: multi = 1.50f; break;
+			case 4: multi = 1.60f; break;
+		}
+	}
+	else if (rate == 100)
+	{
+		switch(m_THLvl)
+		{
+			case 0: multi = 1.00f; break;
+			case 1: multi = 1.20f; break;
+			case 2: multi = 1.50f; break;
+			case 3: multi = 1.65f; break;
+			case 4: multi = 1.80f; break;
+		}
+	}
+	else if (rate == 150)
+	{
+		switch(m_THLvl)
+		{
+			case 0: multi = 1.00f; break;
+			case 1: multi = 2.00f; break;
+			case 2: multi = 2.67f; break;
+			case 3: multi = 2.84f; break;
+			case 4: multi = 3.00f; break;
+		}
+	}
+	else if (rate == 240)
+	{
+		switch(m_THLvl)
+		{
+			case 0: multi = 1.00f; break;
+			case 1: multi = 2.00f; break;
+			case 2: multi = 2.34f; break;
+			case 3: multi = 2.50f; break;
+			case 4: multi = 2.67f; break;
+		}
+	}
+	else if (rate == 500)
+	{
+		switch(m_THLvl)
+		{
+			case 0: multi = 1.00f; break;
+			case 1: multi = 1.20f; break;
+			case 2: multi = 1.40f; break;
+			case 3: multi = 1.50f; break;
+			case 4: multi = 1.60f; break;
+		}
+	}
+	else if (rate == 750)
+	{
+		switch(m_THLvl)
+		{
+			case 0: multi = 1.00f; break;
+			case 1: multi = 1.07f; break;
+			case 2: multi = 1.14f; break;
+			case 3: multi = 1.17f; break;
+			case 4: multi = 1.20f; break;
+		}
+	}
+	else
+	{
+		switch(m_THLvl)
+		{
+			case 0: multi = 1.00f; break;
+			case 1: multi = 1.00f; break;
+			case 2: multi = 1.00f; break;
+			case 3: multi = 1.00f; break;
+			case 4: multi = 1.00f; break;
+		}
+	}
+
+    return multi;
+}
+
 void CMobEntity::DropItems(CCharEntity* PChar)
 {
     TracyZoneScoped;
@@ -952,15 +1072,15 @@ void CMobEntity::DropItems(CCharEntity* PChar)
     if (!getMobMod(MOBMOD_NO_DROPS) && (!DropList.Items.empty() || !DropList.Groups.empty()))
     {
         // THLvl is the number of 'extra chances' at an item. If the item is obtained, then break out.
-        int16 maxRolls = 1 + (m_THLvl > 2 ? 2 : m_THLvl);
-        int16 bonus    = (m_THLvl > 2 ? (m_THLvl - 2) * 10 : 0);
+        int16 maxRolls = 1;
 
         for (const DropGroup_t& group : DropList.Groups)
         {
             for (int16 roll = 0; roll < maxRolls; ++roll)
             {
-                // Determine if this group should drop an item
-                if (group.GroupRate > 0 && xirand::GetRandomNumber(1000) < group.GroupRate * settings::get<float>("map.DROP_RATE_MULTIPLIER") + bonus)
+                // Determine if this group should drop an item and determine bonus
+                int16 bonus = ApplyTH(m_THLvl, group.GroupRate);
+                if (group.GroupRate > 0 && xirand::GetRandomNumber(1000) < group.GroupRate * settings::get<float>("map.DROP_RATE_MULTIPLIER") * bonus)
                 {
                     // Each item in the group is given its own weight range which is the previous value to the previous value + item.DropRate
                     // Such as 2 items with drop rates of 200 and 800 would be 0-199 and 200-999 respectively
@@ -987,7 +1107,8 @@ void CMobEntity::DropItems(CCharEntity* PChar)
         {
             for (int16 roll = 0; roll < maxRolls; ++roll)
             {
-                if (item.DropRate > 0 && xirand::GetRandomNumber(1000) < item.DropRate * settings::get<float>("map.DROP_RATE_MULTIPLIER") + bonus)
+                int16 bonus = ApplyTH(m_THLvl, item.DropRate);
+                if (item.DropRate > 0 && xirand::GetRandomNumber(1000) < item.DropRate * settings::get<float>("map.DROP_RATE_MULTIPLIER") * bonus)
                 {
                     if (AddItemToPool(item.ItemID, ++dropCount))
                     {
@@ -1102,7 +1223,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
             LV >= 80 = Avatrites can also drop, same rules. If one drops, the other does not.
             unfortunately, the order of the items/weathers/days don't match.
         */
-        if (GetMLevel() >= 50)
+        if (GetMLevel() >= 50 && luautils::IsContentEnabled("ABYSSEA"))
         {
             uint8 weather = PChar->loc.zone->GetWeather();
             uint8 element = 0;
