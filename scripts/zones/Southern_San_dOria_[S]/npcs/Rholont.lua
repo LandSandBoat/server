@@ -12,10 +12,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.CLAWS_OF_THE_GRIFFON) == QUEST_AVAILABLE and player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.GIFTS_OF_THE_GRIFFON) == QUEST_COMPLETED and player:getMainLvl() >= 15) then
-        player:startEvent(47) -- Claws of Griffon Start
-
-    elseif (player:getCharVar("BoyAndTheBeast") == 1) then
+    if (player:getCharVar("BoyAndTheBeast") == 1) then
         player:startEvent(56)
 
     elseif (player:getCharVar("BoyAndTheBeast") > 1 and player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BOY_AND_THE_BEAST) ~= QUEST_COMPLETED) then
@@ -36,9 +33,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 47) then
-        player:addQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.CLAWS_OF_THE_GRIFFON)
-    elseif (csid == 56) then
+    if (csid == 56) then
         player:setCharVar("BoyAndTheBeast", 2)
     elseif (csid == 59) then
         player:addQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.WRATH_OF_THE_GRIFFON)
