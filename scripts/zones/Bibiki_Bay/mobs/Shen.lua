@@ -3,7 +3,7 @@
 --  Mob: Shen
 -----------------------------------
 local ID = require("scripts/zones/Bibiki_Bay/IDs")
-require("scripts/globals/mixins/families/uragnite")
+require("scripts/mixins/families/uragnite")
 -----------------------------------
 local entity = {}
 
