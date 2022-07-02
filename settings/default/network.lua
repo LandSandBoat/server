@@ -17,11 +17,11 @@ xi.settings.network =
     SQL_PASSWORD = "root",
     SQL_DATABASE = "xidb",
 
-    LOGIN_DATA_IP   = "127.0.0.1",
+    LOGIN_DATA_IP   = "0.0.0.0",
     LOGIN_DATA_PORT = 54230,
-    LOGIN_VIEW_IP   = "127.0.0.1",
+    LOGIN_VIEW_IP   = "0.0.0.0",
     LOGIN_VIEW_PORT = 54001,
-    LOGIN_AUTH_IP   = "127.0.0.1",
+    LOGIN_AUTH_IP   = "0.0.0.0",
     LOGIN_AUTH_PORT = 54231,
 
     MAP_PORT = 54230,
