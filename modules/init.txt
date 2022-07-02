@@ -38,3 +38,4 @@
 
 custom/commands/
 custom/lua/test_npcs_in_gm_home.lua
+era/lua/beastmen_multigroup_spawn_fix.lua
