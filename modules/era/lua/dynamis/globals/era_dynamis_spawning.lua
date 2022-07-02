@@ -1841,18 +1841,20 @@ xi.dynamis.statueOnFight = function(mob, target)
             mob:SetAutoAttackEnabled(false)
             mob:SetMobAbilityEnabled(false)
             mob:addStatusEffect(xi.effect.STUN, 1, 0, 5)
-            if mob:hasStatusEffect(xi.effect.STUN) then
-                mob:delStatusEffectSilent(xi.effect.STUN)
-            end
-            if mob:getAnimationSub() == 2 then
-                mob:setTP(0)
-                mob:SetMobAbilityEnabled(true)
-                mob:useMobAbility(1124) -- Use Recover HP
-            elseif mob:getAnimationSub() == 3 then
-                mob:setTP(0)
-                mob:SetMobAbilityEnabled(true)
-                mob:useMobAbility(1125) -- Use Recover MP
-            end
+            mob:timer(1000, function(mob) -- Allows stun to tick
+                if mob:hasStatusEffect(xi.effect.STUN) then
+                    mob:delStatusEffectSilent(xi.effect.STUN) -- Remove stun so we can do skill.
+                end
+                if mob:getAnimationSub() == 2 then
+                    mob:setTP(0)
+                    mob:SetMobAbilityEnabled(true)
+                    mob:useMobAbility(1124) -- Use Recover HP
+                elseif mob:getAnimationSub() == 3 then
+                    mob:setTP(0)
+                    mob:SetMobAbilityEnabled(true)
+                    mob:useMobAbility(1125) -- Use Recover MP
+                end
+            end)
         end
     end
 end
