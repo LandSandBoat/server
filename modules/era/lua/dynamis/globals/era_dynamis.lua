@@ -48,7 +48,7 @@ local dynamis_min_lvl = 65
 local dynamis_reservation_cancel = 180
 local dynamis_reentry_days = 3
 local dynamis_rentry_hours = 71
-local dynamis_staging_time = 15 -- Extra time added at registration of dynamis in minutes. Wings gave 15 minutes by default.
+local dynamis_staging_time = 15 -- Extra time added at registration of dynamis in minutes.
 
 xi.dynamis.dynaIDLookup = -- Used to check for different IDs based on zoneID. Replaces the need to overwrite IDs.lua for each zone.
 {

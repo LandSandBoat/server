@@ -141,6 +141,7 @@ namespace mobutils
         bool isEventMob = PMob->m_Type & MOBTYPE_EVENT && !PMob->isInDynamis();
         bool isBattlefieldMob = PMob->m_Type & MOBTYPE_BATTLEFIELD && !PMob->isInDynamis();
         bool isDynamisNM = PMob->isInDynamis() && PMob->getMobMod(MOBMOD_CHECK_AS_NM) > 1;
+
         if (isNM || isEventMob || isBattlefieldMob || isDynamisNM) // NMs, Event, and Battlefield Mobs
         {
             switch (rank)

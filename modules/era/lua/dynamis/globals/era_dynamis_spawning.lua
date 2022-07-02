@@ -1513,17 +1513,31 @@ xi.dynamis.mobOnRoam = function(mob) -- Handle pathing.
         local mobIndex = mob:getLocalVar(string.format("MobIndex_%s", mob:getID()))
         for _, index in pairs(xi.dynamis.mobList[zoneID].patrolPaths) do
             local table = xi.dynamis.mobList[zoneID][index].patrolPath
+            local maxDest = #table
             if mobIndex == index then
-                local home = {table[1], table[2], table[3]}
-                local dest = {table[4], table[5], table[6]}
-                local spawn = mob:getSpawnPos()
-                local current = mob:getPos()
-                if current.x == home[1] and current.z == home[3] then
-                    mob:pathTo(dest[1], dest[2], dest[3])
-                elseif current.x == dest[1] and current.z == dest[3] then
-                    mob:pathTo(home[1], home[2], home[3])
-                elseif current.x == spawn.x and current.z == spawn.z then
-                    mob:pathTo(home[1], home[2], home[3])
+                for path, point in pairs(table) do
+                    local next = table[path + 1]
+                    local last = table[maxDest]
+                    local first = table[1]
+                    local prev = {x = point[1], y = point[2], z = point[3]}
+                    local dest = nil
+                    if next ~= nil then
+                        dest = {x = next[1], y = next[2], z = next[3]}
+                    end
+                    local last = {x = last[1], y = last[2], z = last[3]}
+                    local first = {x = first[1], y = first[2], z = first[3]}
+                    local spawn = mob:getSpawnPos()
+                    local current = mob:getPos()
+                    if last.x == current.x and last.y == current.y and last.z == current.z then
+                        mob:pathTo(first.x, first.y, first.z)
+                        return
+                    elseif prev.x == current.x and prev.y == current.y and prev.z == current.z then
+                        mob:pathTo(dest.x, dest.y, dest.z)
+                        return
+                    elseif spawn.x == current.x and spawn.y == current.y and spawn.z == current.z then
+                        mob:pathTo(first.x, first.y, first.z)
+                        return
+                    end
                 end
             end
         end
