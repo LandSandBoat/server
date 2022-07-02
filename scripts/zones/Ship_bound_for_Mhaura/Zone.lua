@@ -35,6 +35,8 @@ zone_object.onZoneIn = function(player, prevZone, zone)
 end
 
 zone_object.onTransportEvent = function(player, transport)
+    player:getZone():setLocalVar('stateSet', 0)
+    player:getZone():setLocalVar('state', 1)
     player:startEvent(512)
 end
 
@@ -76,8 +78,8 @@ zone_object.onZoneTick = function(zone)
         if GetMobByID(ID.mob.SEA_HORROR):isSpawned() then
             DespawnMob(ID.mob.SEA_HORROR)
         end
-        xi.sea_creatures.despawn(ID)
         zone:setLocalVar('state', 0)
+        xi.sea_creatures.despawn(ID)
     elseif zone:getLocalVar('state') == 2 then
         if GetMobByID(ID.mob.SEA_HORROR):isSpawned() then -- make sure we dont have horror from previous or docked zone
             DespawnMob(ID.mob.SEA_HORROR)
@@ -90,10 +92,9 @@ zone_object.onZoneTick = function(zone)
         xi.sea_creatures.checkSpawns(ID, 1, 2) -- 1 percent per vana minute, 2 total mobs
     end
 
-    if os.time() - zone:getLocalVar('transportTime') > 900 then
-        zone:setLocalVar('stateSet', 0)
-        zone:setLocalVar('state', 1)
-    end
+    print("State:")
+    print(zone:getLocalVar('state'))
+
 end
 
 zone_object.onEventFinish = function(player, csid, option)

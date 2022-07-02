@@ -321,7 +321,7 @@ void CTransportHandler::TransportTimer()
                 townZone->ship.npc->animBegin = vanaTime;
                 townZone->ship.npc->animStart = true;
                 townZone->ship.spawn();
-                townZone->ship.animateSetup(townZone->ship.animationArrive, (uint32)(CVanaTime::getInstance()->getVanaTime() - shipTimerOffset * 2.4));
+                townZone->ship.animateSetup(townZone->ship.animationArrive, (uint32)(CVanaTime::getInstance()->getVanaTime() - shipTimerOffset * 2.5));
             }
         }
         else
@@ -340,17 +340,17 @@ void CTransportHandler::TransportTimer()
         if (zoneIterator->state == STATE_TRANSPORTZONE_VOYAGE)
         {
 
-            int zoneOffset = 3;
+            int zoneOffset = 8;
             ZONEID zoneId = zoneIterator->voyageZone->GetID();
 
             if (zoneId == ZONE_BASTOK_JEUNO_AIRSHIP ||
                 zoneId == ZONE_WINDURST_JEUNO_AIRSHIP ||
                 zoneId == ZONE_SAN_DORIA_JEUNO_AIRSHIP ||
                 zoneId == ZONE_KAZHAM_JEUNO_AIRSHIP)
-                {
-                    zoneOffset = -5;
-                }
-            // Zone them out 10 Van minutes before the boat reaches the dock
+            {
+                zoneOffset = -5;
+            }
+
             if (shipTimerOffset < zoneIterator->timeVoyageStart && shipTimerOffset > zoneIterator->timeArriveDock - zoneOffset)
             {
                 zoneIterator->state = STATE_TRANSPORTZONE_EVICT;
@@ -380,7 +380,7 @@ void CTransportHandler::TransportTimer()
                     zoneId == ZONE_SHIP_BOUND_FOR_SELBINA ||
                     zoneId == ZONE_SHIP_BOUND_FOR_SELBINA_PIRATES)
                 {
-                    zoneIterator->voyageZone->SetZoneAnimLength(908);
+                    zoneIterator->voyageZone->SetZoneAnimLength(915);
                 }
                 else if (zoneId == ZONE_BASTOK_JEUNO_AIRSHIP ||
                          zoneId == ZONE_WINDURST_JEUNO_AIRSHIP ||

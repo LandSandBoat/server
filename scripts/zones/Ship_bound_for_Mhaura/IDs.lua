@@ -25,14 +25,7 @@ zones[xi.zone.SHIP_BOUND_FOR_MHAURA] =
     },
     mob =
     {
-        SEA_CREATURES =
-        {
-            17682438,   -- Sea Crab 1
-            17682439,   -- Sea Crab 2
-            17682440,   -- Sea Pugil 1
-            17682441,   -- Sea Pugil 2
-            17682442,   -- Sea Monk 1
-        },
+        SEA_CREATURES = 17682438,   -- Sea Creature Offset
         SEA_HORROR = 17682446,
         PHANTOM = 17682443,
     },

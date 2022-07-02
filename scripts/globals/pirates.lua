@@ -47,7 +47,7 @@ xi.pirates.reset = function(ID)
     ship:setAnimation(0)
     ship:setStatus(xi.status.DISAPPEAR)
     xi.pirates.setShipPosition(ship, ID.npc.PIRATE_SHIP.start_pos)
-    GetMobByID(ID.mob.NM):setLocalVar("killed", 0)
+    GetMobByID(ID.mob.CROSSBONES + 5):setLocalVar("killed", 0)
 end
 
 xi.pirates.spawnMob = function(mobId)
@@ -61,18 +61,18 @@ xi.pirates.spawnMob = function(mobId)
 end
 
 xi.pirates.spawnMobs = function(ID)
-    for i = 1, #ID.mob.CROSSBONES do
-        local xbone = GetMobByID(ID.mob.CROSSBONES[i])
+    for i = 0, 3 do
+        local xbone = GetMobByID(ID.mob.CROSSBONES + i)
         if
             not xbone:isSpawned() and
             os.time() > xbone:getLocalVar("respawnTime")
         then
-            xi.pirates.spawnMob(ID.mob.CROSSBONES[i])
+            xi.pirates.spawnMob(ID.mob.CROSSBONES + i)
         end
     end
 
-    local wight = GetMobByID(ID.mob.SHIP_WIGHT)
-    local nm = GetMobByID(ID.mob.NM)
+    local wight = GetMobByID(ID.mob.CROSSBONES + 4)
+    local nm = GetMobByID(ID.mob.CROSSBONES + 5)
 
     if
         not wight:isSpawned() and
@@ -83,30 +83,30 @@ xi.pirates.spawnMobs = function(ID)
                 nm:getLocalVar("killed") == 1 or
                 math.random(0,100) < 95
             then
-                xi.pirates.spawnMob(ID.mob.SHIP_WIGHT)
+                xi.pirates.spawnMob(ID.mob.CROSSBONES + 4)
             else
-                xi.pirates.spawnMob(ID.mob.NM)
+                xi.pirates.spawnMob(ID.mob.CROSSBONES + 5)
             end
         end
     end
 end
 
 xi.pirates.despawnMobs = function(ID)
-    for i = 1, #ID.mob.CROSSBONES do
-        if GetMobByID(ID.mob.CROSSBONES[i]):isSpawned() then
-            if not GetMobByID(ID.mob.CROSSBONES[i]):isEngaged() then
-                DespawnMob(ID.mob.CROSSBONES[i])
+    for i = 0, 3 do
+        if GetMobByID(ID.mob.CROSSBONES + i):isSpawned() then
+            if not GetMobByID(ID.mob.CROSSBONES + i):isEngaged() then
+                DespawnMob(ID.mob.CROSSBONES + i)
             end
         end
     end
-    if GetMobByID(ID.mob.SHIP_WIGHT):isSpawned() then
-        if not GetMobByID(ID.mob.SHIP_WIGHT):isEngaged() then
-            DespawnMob(ID.mob.SHIP_WIGHT)
+    if GetMobByID(ID.mob.CROSSBONES + 4):isSpawned() then
+        if not GetMobByID(ID.mob.CROSSBONES + 4):isEngaged() then
+            DespawnMob(ID.mob.CROSSBONES + 4)
         end
     end
-    if GetMobByID(ID.mob.NM):isSpawned() then
-        if not GetMobByID(ID.mob.NM):isEngaged() then
-            DespawnMob(ID.mob.NM)
+    if GetMobByID(ID.mob.CROSSBONES + 5):isSpawned() then
+        if not GetMobByID(ID.mob.CROSSBONES + 5):isEngaged() then
+            DespawnMob(ID.mob.CROSSBONES + 5)
         end
     end
 end
@@ -179,8 +179,7 @@ xi.pirates.update = function(ID, zone, tripTime)
                 for k, pirate in pairs(ID.npc.PIRATES) do
                     local npc = GetNPCByID(k)
                     npc:setPos(xi.path.first(pirate.enter_path))
-                    xi.path.patrol(npc, pirate.enter_path)
-                    --npc:pathTo(xi.path.last(pirate.enter_path)[1], xi.path.last(pirate.enter_path)[2], xi.path.last(pirate.enter_path)[3])
+                    npc:pathTo(xi.path.last(pirate.enter_path)[1], xi.path.last(pirate.enter_path)[2], xi.path.last(pirate.enter_path)[3])
                     npc:setStatus(xi.status.NORMAL)
                     npc:sendUpdateToZoneCharsInRange(2000)
                 end
@@ -217,8 +216,7 @@ xi.pirates.update = function(ID, zone, tripTime)
                 for k, pirate in pairs(ID.npc.PIRATES) do
                     local npc = GetNPCByID(k)
                     npc:setLocalVar("castmode",0)
-                    xi.path.patrol(npc, pirate.exit_path)
-                    --npc:pathTo(xi.path.last(pirate.exit_path)[1], xi.path.last(pirate.exit_path)[2], xi.path.last(pirate.exit_path)[3])
+                    npc:pathTo(xi.path.last(pirate.exit_path)[1], xi.path.last(pirate.exit_path)[2], xi.path.last(pirate.exit_path)[3])
                 end
                 xi.pirates.despawnMobs(ID)
                 ship:setLocalVar("pirateStatus", xi.pirates.status.DESPAWNING)

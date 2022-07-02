@@ -97,14 +97,11 @@ zone_object.onZoneTick = function(zone)
     if os.time() - zone:getLocalVar('transportTime') % 60 then
         xi.sea_creatures.checkSpawns(ID, 1, 2) -- 1 percent per vana minute, 2 total mobs
     end
-
-    if os.time() - zone:getLocalVar('transportTime') > 900 then
-        zone:setLocalVar('stateSet', 0)
-        zone:setLocalVar('state', 1)
-    end
 end
 
 zone_object.onTransportEvent = function(player, transport)
+    player:getZone():setLocalVar('stateSet', 0)
+    player:getZone():setLocalVar('state', 1)
     player:startEvent(255)
 end
 

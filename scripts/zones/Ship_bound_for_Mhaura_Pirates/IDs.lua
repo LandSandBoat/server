@@ -19,30 +19,15 @@ zones[xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES] =
         LOGIN_NUMBER            = 7002, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         FISHING_MESSAGE_OFFSET  = 7231, -- You can't fish here.
         ON_WAY_TO_MHAURA        = 7339, -- We're on our way to Mhaura. We should be there in [less than an hour/about 1 hour/about 2 hours/about 3 hours/about 4 hours/about 5 hours/about 6 hours/about 7 hours] (<number> [minute/minutes] in Earth time).
-        LOKHONG_SHOP_DIALOG     = 7337, -- There's nothing like fishing to pass the time!
-        CHHAYA_SHOP_DIALOG      = 7338, -- May I offer you items to help you on your journey?
+        LOKHONG_SHOP_DIALOG     = 7344, -- There's nothing like fishing to pass the time!
+        CHHAYA_SHOP_DIALOG      = 7345, -- May I offer you items to help you on your journey?
         ARRIVING_SOON_MHAURA    = 7346, -- We are on our way to Mhaura. We will be arriving soon.
     },
     mob =
     {
-        SEA_CREATURES =
-        {
-            17711110,   -- Sea Crab 1
-            17711111,   -- Sea Crab 2
-            17711112,   -- Sea Pugil 1
-            17711113,   -- Sea Pugil 2
-            17711114,   -- Sea Monk 1
-        },
+        SEA_CREATURES = 17711110, -- Starting Sea Creature offset
         PHANTOM = 17711115,
-        CROSSBONES =
-        {
-            17711116,
-            17711117,
-            17711118,
-            17711119
-        },
-        SHIP_WIGHT = 17711120,
-        NM = 17711121
+        CROSSBONES = 17711116, -- Starting pirate offset
     },
     npc =
     {
@@ -59,9 +44,6 @@ zones[xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES] =
                 },
                 enter_path =
                 {
-                    33.601, -7.163, 13.377,
-                    33.57, -7.163, 13.14,
-                    29.79, -7.163, 10.63,
                     28.75, -7.163, 10.60,
                     22.00, -7.163, 10.46,
                     21.90, -7.163, 10.46
@@ -74,9 +56,6 @@ zones[xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES] =
                 },
                 exit_path =
                 {
-                    21.90, -7.163, 10.46,
-                    22.00, -7.163, 10.46,
-                    28.75, -7.163, 10.60,
                     29.79, -7.163, 10.63,
                     33.57, -7.163, 13.14,
                     33.601, -7.163, 13.377
@@ -93,9 +72,6 @@ zones[xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES] =
                 },
                 enter_path =
                 {
-                    29.728, -7.163, 1.303,
-                    29.71, -7.163, 1.54,
-                    25.91, -7.163, 2.77,
                     24.87, -7.163, 2.77,
                     22.00, -7.163, 6.59,
                     21.90, -7.163, 6.59

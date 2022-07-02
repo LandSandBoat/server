@@ -25,14 +25,7 @@ zones[xi.zone.SHIP_BOUND_FOR_SELBINA] =
     },
     mob =
     {
-        SEA_CREATURES =
-        {
-            17678342,   -- Sea Crab 1
-            17678343,   -- Sea Crab 2
-            17678344,   -- Sea Pugil 1
-            17678345,   -- Sea Pugil 2
-            17678346,   -- Sea Monk 1
-        },
+        SEA_CREATURES = 17678342, -- Sea Creature Offset
         SEA_HORROR = 17678350,
         PHANTOM = 17678347,
         ENAGAKURE = 17678351,
