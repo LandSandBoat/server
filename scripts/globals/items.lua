@@ -2542,6 +2542,7 @@ xi.items =
     CHAKRAM                         = 17284,
     QUAKE_GRENADE                   = 17314,
     ICE_ARROW                       = 17323,
+    CARBON_FISHING_ROD              = 17384,
     WILLOW_FISHING_ROD              = 17391,
     SHRIMP_LURE                     = 17402,
     BLESSED_HAMMER                  = 17422,
