@@ -48,7 +48,6 @@ function onTrigger(player, mobGroupID, mobZoneID, numberOfMob, mobLook, mobName,
             end
 
             local zone = player:getZone()
-            local mobTypeVar = xi.objType.MOB
             local mob = zone:insertDynamicEntity({
                 objtype = xi.objType.MOB,
                 name = mobName,
@@ -80,7 +79,6 @@ function onTrigger(player, mobGroupID, mobZoneID, numberOfMob, mobLook, mobName,
     else
         while i <= numberOfMob do
             local zone = player:getZone()
-            local mobTypeVar = xi.objType.MOB
             local mob = zone:insertDynamicEntity({
                 objtype = xi.objType.MOB,
                 name = mobName,
