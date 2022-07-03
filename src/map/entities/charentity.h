@@ -502,6 +502,7 @@ public:
     virtual void addTrait(CTrait*) override;
     virtual void delTrait(CTrait*) override;
 
+    bool IsMobOwner(CBattleEntity* PTarget);
     virtual bool ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) override;
     virtual bool CanUseSpell(CSpell*) override;
 
@@ -554,7 +555,6 @@ public:
     ~CCharEntity();
 
 protected:
-    bool IsMobOwner(CBattleEntity* PTarget);
     void TrackArrowUsageForScavenge(CItemWeapon* PAmmo);
 
 private:
