@@ -43595,6 +43595,22 @@ INSERT INTO `item_mods` VALUES (21528,25,40); -- ACC: 40
 INSERT INTO `item_mods` VALUES (21529,8,30);  -- STR: 30
 INSERT INTO `item_mods` VALUES (21529,25,40); -- ACC: 40
 
+-- Arasy Knife
+INSERT INTO `item_mods` VALUES (21554,9,6);     -- DEX: 6
+INSERT INTO `item_mods` VALUES (21554,11,6);    -- AGI: 6
+INSERT INTO `item_mods` VALUES (21554,14,6);    -- CHR: 6
+INSERT INTO `item_mods` VALUES (21554,25,10);   -- ACC: 10
+INSERT INTO `item_mods` VALUES (21554,31,22);   -- EVA: 22
+INSERT INTO `item_mods` VALUES (21554,165,2);   -- CRITHITRATE: 2
+
+-- Arasy Knife +1
+INSERT INTO `item_mods` VALUES (21555,9,11);    -- DEX: 11
+INSERT INTO `item_mods` VALUES (21555,11,11);   -- AGI: 11
+INSERT INTO `item_mods` VALUES (21555,14,11);   -- CHR: 11
+INSERT INTO `item_mods` VALUES (21555,25,15);   -- ACC: 15
+INSERT INTO `item_mods` VALUES (21555,31,27);   -- EVA: 27
+INSERT INTO `item_mods` VALUES (21555,165,3);   -- CRITHITRATE: 3
+
 -- Ajja Knife
 INSERT INTO `item_mods` VALUES (21562,25,20); -- ACC: 20
 INSERT INTO `item_mods` VALUES (21562,30,20); -- MACC: 20
@@ -43725,6 +43741,20 @@ INSERT INTO `item_mods` VALUES (21584,26,50);   -- RACC: 50
 INSERT INTO `item_mods` VALUES (21584,30,50);   -- MACC: 50
 INSERT INTO `item_mods` VALUES (21584,311,217); -- MAGIC_DAMAGE: 217
 
+-- Arasy Sword
+INSERT INTO `item_mods` VALUES (21604,9,6);     -- DEX: 6
+INSERT INTO `item_mods` VALUES (21604,10,6);    -- VIT: 6
+INSERT INTO `item_mods` VALUES (21604,13,6);    -- MND: 6
+INSERT INTO `item_mods` VALUES (21604,25,10);   -- ACC: 10
+INSERT INTO `item_mods` VALUES (21604,291,3);   -- COUNTER: 3
+
+-- Arasy Sword +1
+INSERT INTO `item_mods` VALUES (21605,9,11);    -- DEX: 11
+INSERT INTO `item_mods` VALUES (21605,10,11);   -- VIT: 11
+INSERT INTO `item_mods` VALUES (21605,13,11);   -- MND: 11
+INSERT INTO `item_mods` VALUES (21605,25,15);   -- ACC: 15
+INSERT INTO `item_mods` VALUES (21605,291,5);   -- COUNTER: 5
+
 -- Enriching Sword
 INSERT INTO `item_mods` VALUES (21606,28,14);   -- MATT: 14
 INSERT INTO `item_mods` VALUES (21606,311,108); -- MAGIC_DAMAGE: 108
@@ -43850,6 +43880,20 @@ INSERT INTO `item_mods` VALUES (21633,25,50);   -- ACC: 50
 INSERT INTO `item_mods` VALUES (21633,30,50);   -- MACC: 50
 INSERT INTO `item_mods` VALUES (21633,122,20);  -- BLUE: 20
 INSERT INTO `item_mods` VALUES (21633,311,217); -- MAGIC_DAMAGE: 217
+
+-- Arasy Claymore
+INSERT INTO `item_mods` VALUES (21654,8,12);    -- STR: 12
+INSERT INTO `item_mods` VALUES (21654,9,12);    -- DEX: 12
+INSERT INTO `item_mods` VALUES (21654,23,15);   -- ATT: 15
+INSERT INTO `item_mods` VALUES (21654,73,3);    -- STORETP: 3
+INSERT INTO `item_mods` VALUES (21654,841,2);   -- ALL_WSDMG_FIRST_HIT: 2
+
+-- Arasy Claymore +1
+INSERT INTO `item_mods` VALUES (21655,8,17);    -- STR: 17
+INSERT INTO `item_mods` VALUES (21655,9,17);    -- DEX: 17
+INSERT INTO `item_mods` VALUES (21655,23,20);   -- ATT: 20
+INSERT INTO `item_mods` VALUES (21655,73,5);    -- STORETP: 5
+INSERT INTO `item_mods` VALUES (21655,841,3);   -- ALL_WSDMG_FIRST_HIT: 3
 
 -- Dyrnwyn
 INSERT INTO `item_mods` VALUES (21656,23,43); -- ATT: 43
@@ -43990,6 +44034,20 @@ INSERT INTO `item_mods` VALUES (21700,25,20); -- ACC: 20
 
 -- Blurred Claymore +1
 INSERT INTO `item_mods` VALUES (21701,25,25); -- ACC: 25
+
+-- Arasy Tabar
+INSERT INTO `item_mods` VALUES (21704,8,6);     -- STR: 6
+INSERT INTO `item_mods` VALUES (21704,9,6);     -- DEX: 6
+INSERT INTO `item_mods` VALUES (21704,11,6);    -- AGI: 6
+INSERT INTO `item_mods` VALUES (21704,25,10);   -- ACC: 10
+INSERT INTO `item_mods` VALUES (21704,345,100); -- TP_BONUS: 100
+
+-- Arasy Tabar +1
+INSERT INTO `item_mods` VALUES (21705,8,11);    -- STR: 11
+INSERT INTO `item_mods` VALUES (21705,9,11);    -- DEX: 11
+INSERT INTO `item_mods` VALUES (21705,11,11);   -- AGI: 11
+INSERT INTO `item_mods` VALUES (21705,25,15);   -- ACC: 15
+INSERT INTO `item_mods` VALUES (21705,345,150); -- TP_BONUS: 150
 
 -- Barbarity
 INSERT INTO `item_mods` VALUES (21706,2,68);  -- HP: 68

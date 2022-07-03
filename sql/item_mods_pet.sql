@@ -537,6 +537,11 @@ INSERT INTO `item_mods_pet` VALUES (21529,25,40,0); -- All Pets - ACC: 40
 INSERT INTO `item_mods_pet` VALUES (21529,26,40,0); -- All Pets - RACC: 40
 INSERT INTO `item_mods_pet` VALUES (21529,30,40,0); -- All Pets - MACC: 40
 
+-- Arasy Tabar
+INSERT INTO `item_mods_pet` VALUES (21704,25,10,0); -- All Pets - ACC: 10
+
+-- Arasy Tabar +1
+INSERT INTO `item_mods_pet` VALUES (21705,25,15,0); -- All Pets - ACC: 15
 -- Monster Axe
 INSERT INTO `item_mods_pet` VALUES (21715,25,30,0); -- All Pets - ACC: 30
 INSERT INTO `item_mods_pet` VALUES (21715,26,30,0); -- All Pets - RACC: 30
