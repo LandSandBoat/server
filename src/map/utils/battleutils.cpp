@@ -7053,7 +7053,6 @@ namespace battleutils
         uint8 RMainType = 0;
         uint8 RMainSub  = 0;
         uint8 AMainType = 0;
-        uint8 AMainSub  = 0;
 
         CItemEquipment* PRangedSlot = PChar->getEquip(SLOT_RANGED);
         CItemEquipment* PAmmoSlot  = PChar->getEquip(SLOT_AMMO);
@@ -7067,7 +7066,6 @@ namespace battleutils
         if (PAmmoSlot)
         {
             AMainType = ((CItemWeapon*)PAmmoSlot)->getSkillType();
-            AMainSub  = ((CItemWeapon*)PAmmoSlot)->getSubSkillType();
         }
 
         bool LongBowCurve  = (RMainType == 25 && RMainSub == 1); // Longbows Only
