@@ -888,121 +888,223 @@ void CMobEntity::DistributeRewards()
 int16 CMobEntity::ApplyTH(int16 m_THLvl, int16 rate)
 {
     TracyZoneScoped;
-
     float multi = 1.00f;
-
+    bool super_rare = (rate == 5);
+    bool very_rare = (rate == 10);
+    bool rare = (rate == 50);
+    bool uncommon = (rate == 100);
+    bool common = (rate == 150);
+    bool very_common = (rate == 240);
     if (rate == 1)
-	{
-		switch(m_THLvl)
-		{
-			case 0: multi = 1.00f; break;
-			case 1: multi = 2.00f; break;
-			case 2: multi = 3.00f; break;
-			case 3: multi = 3.50f; break;
-			case 4: multi = 4.00f; break;
-		}
-	}
-	else if (rate == 5)
-	{
-		switch(m_THLvl)
-		{
-			case 0: multi = 1.00f; break;
-			case 1: multi = 1.50f; break;
-			case 2: multi = 2.00f; break;
-			case 3: multi = 2.40f; break;
-			case 4: multi = 2.80f; break;
-		}
-	}
-	else if (rate == 10)
-	{
-		switch(m_THLvl)
-		{
-			case 0: multi = 1.00f; break;
-			case 1: multi = 1.50f; break;
-			case 2: multi = 2.00f; break;
-			case 3: multi = 2.25f; break;
-			case 4: multi = 2.50f; break;
-		}
-	}
-	else if (rate == 50)
-	{
-		switch(m_THLvl)
-		{
-			case 0: multi = 1.00f; break;
-			case 1: multi = 1.20f; break;
-			case 2: multi = 1.40f; break;
-			case 3: multi = 1.50f; break;
-			case 4: multi = 1.60f; break;
-		}
-	}
-	else if (rate == 100)
-	{
-		switch(m_THLvl)
-		{
-			case 0: multi = 1.00f; break;
-			case 1: multi = 1.20f; break;
-			case 2: multi = 1.50f; break;
-			case 3: multi = 1.65f; break;
-			case 4: multi = 1.80f; break;
-		}
-	}
-	else if (rate == 150)
-	{
-		switch(m_THLvl)
-		{
-			case 0: multi = 1.00f; break;
-			case 1: multi = 2.00f; break;
-			case 2: multi = 2.67f; break;
-			case 3: multi = 2.84f; break;
-			case 4: multi = 3.00f; break;
-		}
-	}
-	else if (rate == 240)
-	{
-		switch(m_THLvl)
-		{
-			case 0: multi = 1.00f; break;
-			case 1: multi = 2.00f; break;
-			case 2: multi = 2.34f; break;
-			case 3: multi = 2.50f; break;
-			case 4: multi = 2.67f; break;
-		}
-	}
-	else if (rate == 500)
-	{
-		switch(m_THLvl)
-		{
-			case 0: multi = 1.00f; break;
-			case 1: multi = 1.20f; break;
-			case 2: multi = 1.40f; break;
-			case 3: multi = 1.50f; break;
-			case 4: multi = 1.60f; break;
-		}
-	}
-	else if (rate == 750)
-	{
-		switch(m_THLvl)
-		{
-			case 0: multi = 1.00f; break;
-			case 1: multi = 1.07f; break;
-			case 2: multi = 1.14f; break;
-			case 3: multi = 1.17f; break;
-			case 4: multi = 1.20f; break;
-		}
-	}
-	else
-	{
-		switch(m_THLvl)
-		{
-			case 0: multi = 1.00f; break;
-			case 1: multi = 1.00f; break;
-			case 2: multi = 1.00f; break;
-			case 3: multi = 1.00f; break;
-			case 4: multi = 1.00f; break;
-		}
-	}
-
-    return multi;
+    {
+        if (m_THLvl < 3)
+        {
+            multi = 1.00f + (1.00f * m_THLvl);
+            return multi;
+        }
+        else if (m_THLvl < 7)
+        {
+            multi = 2.00f + (0.50f * (m_THLvl - 2));
+            return multi;
+        }
+        else if (m_THLvl < 12)
+        {
+            multi = 7.00f + (1.00f * (m_THLvl - 6));
+            return multi;
+        }
+        else if (m_THLvl < 14)
+        {
+            multi = 10.00f + (1.00f * (m_THLvl - 11));
+            return multi;
+        }
+        else
+        {
+            multi = 13.00f + (2.00f * (m_THLvl - 14));
+            return multi;
+        }
+    }
+    else if (super_rare)
+    {
+        if (m_THLvl < 3)
+        {
+            multi = 1.00f + (0.50f * m_THLvl);
+            return multi;
+        }
+        else if (m_THLvl < 8)
+        {
+            multi = 2.40f + (0.40f * (m_THLvl - 2));
+            return multi;
+        }
+        else if (m_THLvl < 10)
+        {
+            multi = 5.20f + (0.60f * (m_THLvl - 7));
+            return multi;
+        }
+        else if (m_THLvl < 11)
+        {
+            multi = 7.00f + (0.80f * (m_THLvl - 9));
+            return multi;
+        }
+        else
+        {
+            multi = 9.00f + (1.00f * (m_THLvl - 10));
+            return multi;
+        }
+    }
+    else if (very_rare)
+    {
+        if (m_THLvl < 3)
+        {
+            multi = 1.00f + (0.20f * m_THLvl);
+            return multi;
+        }
+        else if (m_THLvl < 8)
+        {
+            multi = 1.50f + (0.10f * (m_THLvl - 2));
+            return multi;
+        }
+        else if (m_THLvl < 12)
+        {
+            multi = 2.10f + (0.20f * (m_THLvl - 7));
+            return multi;
+        }
+        else if (m_THLvl < 14)
+        {
+            multi = 3.10f + (0.40f * (m_THLvl - 11));
+            return multi;
+        }
+        else
+        {
+            multi = 4.00f + (0.50f * (m_THLvl - 13));
+            return multi;
+        }
+    }
+    else if (rare)
+    {
+        if (m_THLvl < 3)
+         {
+             multi = 1.00f + (0.50f * m_THLvl);
+             return multi;
+         }
+         else if (m_THLvl < 8)
+         {
+             multi = 2.40f + (0.40f * (m_THLvl - 2));
+             return multi;
+         }
+         else if (m_THLvl < 10)
+         {
+             multi = 5.20f + (0.60f * (m_THLvl - 7));
+             return multi;
+         }
+         else if (m_THLvl < 11)
+         {
+             multi = 7.00f + (0.80f * (m_THLvl - 9));
+             return multi;
+         }
+         else
+         {
+             multi = 9.00f + (1.00f * (m_THLvl - 10));
+             return multi;
+         }
+    }
+    else if (uncommon)
+    {
+        if (m_THLvl < 2)
+        {
+            multi = 1.00f + (0.20f * m_THLvl);
+            return multi;
+        }
+        else if (m_THLvl < 4)
+        {
+            multi = 1.20f + (0.15f * (m_THLvl - 1));
+            return multi;
+        }
+        else if (m_THLvl < 8)
+        {
+            multi = 1.80f + (0.10f * (m_THLvl - 3));
+            return multi;
+        }
+        else if (m_THLvl < 10)
+        {
+            multi = 2.40f + (0.15f * (m_THLvl - 7));
+            return multi;
+        }
+        else if (m_THLvl < 11)
+        {
+            multi = 2.40f + (0.25f * (m_THLvl - 9));
+            return multi;
+        }
+        else
+        {
+            multi = 2.65f + (0.15f * (m_THLvl - 10));
+            return multi;
+        }
+    }
+    else if (common)
+    {
+        if (m_THLvl < 2)
+        {
+            multi = 1.00f + (1.00f * m_THLvl);
+            return multi;
+        }
+        else
+        {
+            multi = 2.00f + (0.17f * (m_THLvl - 1));
+            return multi;
+        }
+    }
+    else if (very_common)
+    {
+        if (m_THLvl < 2)
+        {
+            multi = 1.00f + (1.00f * m_THLvl);
+            return multi;
+        }
+        else if (m_THLvl < 3)
+        {
+            multi = 2.00f + (0.33f * (m_THLvl - 1));
+            return multi;
+        }
+        else if (m_THLvl < 5)
+        {
+            multi = 2.33f + (0.17f * (m_THLvl - 2));
+            return multi;
+        }
+        else if (m_THLvl < 6)
+        {
+            multi = 2.67f + (0.11f * (m_THLvl - 4));
+            return multi;
+        }
+        else if (m_THLvl < 7)
+        {
+            multi = 2.78f + (0.05f * (m_THLvl - 5));
+            return multi;
+        }
+        else if (m_THLvl < 8)
+        {
+            multi = 2.83f + (0.04f * (m_THLvl - 6));
+            return multi;
+        }
+        else if (m_THLvl < 11)
+        {
+            multi = 2.87f + (0.62f * (m_THLvl - 7));
+            return multi;
+        }
+        else if (m_THLvl < 12)
+        {
+            multi = 3.06f + (0.02f * (m_THLvl - 10));
+            return multi;
+        }
+        else
+        {
+            multi = 3.08f + (0.08f * (m_THLvl - 11));
+            return multi;
+        }
+    }
+    else
+    {
+        return multi; // TH Didn't Apply
+    }
 }
 
 void CMobEntity::DropItems(CCharEntity* PChar)
