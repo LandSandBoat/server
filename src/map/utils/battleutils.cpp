@@ -7070,8 +7070,8 @@ namespace battleutils
             AMainSub  = ((CItemWeapon*)PAmmoSlot)->getSubSkillType();
         }
 
-        bool LongBowCurve  = (RMainType == 25 && RMainSub == 0); // Longbows Only
-        bool CrossBowCurve = ((RMainType == 25 && RMainSub == 1) || (RMainType == 26 && RMainSub == 0)); // Crossbows and Shortbows
+        bool LongBowCurve  = (RMainType == 25 && RMainSub == 1); // Longbows Only
+        bool CrossBowCurve = ((RMainType == 25 && RMainSub == 0) || (RMainType == 26 && RMainSub == 0)); // Crossbows and Shortbows
         bool GunCurve      = (RMainType == 26 && RMainSub == 1); // Guns Only
 
         if (LongBowCurve)
