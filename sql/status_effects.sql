@@ -314,7 +314,7 @@ INSERT INTO `status_effects` VALUES (281,'enthunder_ii',41,94,51,0,0,0,5,0,0);
 INSERT INTO `status_effects` VALUES (282,'enwater_ii',41,94,51,0,0,0,6,0,0);
 INSERT INTO `status_effects` VALUES (283,'perfect_defense',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (284,'egg',32,0,0,0,0,0,0,0,0);
-INSERT INTO `status_effects` VALUES (285,'visitant',32,0,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (285,'visitant',33554432,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (286,'baramnesia',41,106,0,0,0,0,0,0,500);
 INSERT INTO `status_effects` VALUES (287,'atma',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (288,'endark',41,94,51,0,0,0,8,0,0);
