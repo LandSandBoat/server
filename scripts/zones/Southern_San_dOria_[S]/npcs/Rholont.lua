@@ -12,13 +12,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (player:getCharVar("BoyAndTheBeast") == 1) then
-        player:startEvent(56)
-
-    elseif (player:getCharVar("BoyAndTheBeast") > 1 and player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BOY_AND_THE_BEAST) ~= QUEST_COMPLETED) then
-        player:startEvent(57)
-
-    elseif (player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BOY_AND_THE_BEAST) == QUEST_COMPLETED and player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.WRATH_OF_THE_GRIFFON) == QUEST_AVAILABLE) then
+    if (player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.BOY_AND_THE_BEAST) == QUEST_COMPLETED and player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.WRATH_OF_THE_GRIFFON) == QUEST_AVAILABLE) then
         player:startEvent(59)
     elseif (player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.WRATH_OF_THE_GRIFFON) == QUEST_ACCEPTED) then
         if (player:getCharVar("WrathOfTheGriffon") < 2) then
@@ -33,9 +27,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 56) then
-        player:setCharVar("BoyAndTheBeast", 2)
-    elseif (csid == 59) then
+    if (csid == 59) then
         player:addQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.WRATH_OF_THE_GRIFFON)
     elseif (csid == 60) then
         player:completeQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.WRATH_OF_THE_GRIFFON)
@@ -43,7 +35,6 @@ entity.onEventFinish = function(player, csid, option)
         player:addKeyItem(xi.ki.MILITARY_SCRIP)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MILITARY_SCRIP)
     end
-
 end
 
 return entity
