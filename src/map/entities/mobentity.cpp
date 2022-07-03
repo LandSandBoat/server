@@ -888,14 +888,17 @@ void CMobEntity::DistributeRewards()
 int16 CMobEntity::ApplyTH(int16 m_THLvl, int16 rate)
 {
     TracyZoneScoped;
+
     float multi = 1.00f;
+    bool ultra_rare = (rate == 1);
     bool super_rare = (rate == 5);
     bool very_rare = (rate == 10);
     bool rare = (rate == 50);
     bool uncommon = (rate == 100);
     bool common = (rate == 150);
     bool very_common = (rate == 240);
-    if (rate == 1)
+
+    if (ultra_rare)
     {
         if (m_THLvl < 3)
         {
