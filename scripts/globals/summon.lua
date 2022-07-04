@@ -209,6 +209,9 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
         -- Missed everything we can exit early
         finaldmg = 0
         skill:setMsg(xi.msg.basic.SKILL_MISS)
+        returninfo.dmg = finaldmg
+        returninfo.hitslanded = numHitsLanded
+        return returninfo
     else
         -- https://www.bg-wiki.com/bg/Critical_Hit_Rate
         -- Crit rate has a base of 5% and no cap, 0-100% are valid
@@ -225,40 +228,21 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
 
         local fSTR = getAvatarFSTR(weaponDmg, avatar:getStat(xi.mod.STR), target:getStat(xi.mod.VIT))
 
-        -- https://www.bg-wiki.com/bg/PDIF
-        -- https://www.bluegartr.com/threads/127523-pDIF-Changes-(Feb.-10th-2016)
-        local ratio = avatar:getStat(xi.mod.ATT) / target:getStat(xi.mod.DEF)
-        local cRatio = ratio
-
-        if shouldApplyLevelCorrection then
-            -- Mobs, Avatars and pets only get bonuses, no penalties (or they are calculated differently)
-            if levelDiff > 0 then
-                local correction = levelDiff * 0.05;
-                local cappedCorrection = math.min(correction, 1.9)
-                cRatio = cRatio + cappedCorrection
-            end
-        end
+        -- Calculating with the known era pdif ratio for weaponskills.
+        local params = {atk100 = mtp100, atk200 = mtp200, atk300 = mtp300,}
+        local pDifTable = xi.weaponskill.cMeleeRatio(avatar, target, params, 0, avatar:getTP())
+        local pDif = pDifTable[1]
+        local pDifCrit = pDifTable[2]
 
         --Everything past this point is randomly computed per hit
 
         numHitsProcessed = 0
 
-        local critAttackBonus = 1 + ((avatar:getMod(xi.mod.CRIT_DMG_INCREASE) - target:getMod(xi.mod.CRIT_DEF_BONUS)) / 100)
-
         if firstHitLanded then
-            local wRatio = cRatio
             local isCrit = math.random() < critRate
-            if isCrit then
-                wRatio = wRatio + 1
-            end
-            -- get a random ratio from min and max
-            local qRatio = getRandRatio(wRatio)
-
-            --Final pDif is qRatio randomized with a 1-1.05 multiplier
-            local pDif = qRatio * (1 + (math.random() * 0.05))
 
             if isCrit then
-                pDif = pDif * critAttackBonus
+                pDif = pDifCrit
             end
 
             finaldmg = avatarHitDmg(weaponDmg, fSTR, pDif) * dmgmod
@@ -266,28 +250,14 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
         end
 
         while numHitsProcessed < numHitsLanded do
-            local wRatio = cRatio
-            local isCrit = math.random() < critRate
-            if isCrit then
-                wRatio = wRatio + 1
-            end
-            -- get a random ratio from min and max
-            local qRatio = getRandRatio(wRatio)
-
-            --Final pDif is qRatio randomized with a 1-1.05 multiplier
-            local pDif = qRatio * (1 + (math.random() * 0.05))
+        local isCrit = math.random() < critRate
 
             if isCrit then
-                pDif = pDif * critAttackBonus
+                pDif = pDifCrit
             end
 
             finaldmg = finaldmg + (avatarHitDmg(weaponDmg, fSTR, pDif) * dmgmodsubsequent)
             numHitsProcessed = numHitsProcessed + 1
-        end
-
-        -- apply ftp bonus
-        if tpeffect == xi.mobskills.magicalTpBonus.DMG_BONUS then
-            finaldmg = finaldmg * avatarFTP(skill:getTP(), mtp100, mtp200, mtp300)
         end
     end
 
