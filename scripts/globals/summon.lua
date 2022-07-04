@@ -3,6 +3,7 @@
 -----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
+require("scripts/globals/weaponskills")
 -----------------------------------
 xi = xi or {}
 xi.summon = xi.summon or {}
@@ -220,8 +221,7 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
         local maxCritRate = 1 -- 100%
         local minCritRate = 0 -- 0%
 
-        local critRate = baseCritRate + getDexCritRate(avatar, target) + avatar:getMod(xi.mod.CRITHITRATE)
-        critRate = critRate / 100
+        local critRate = (baseCritRate + getDexCritRate(avatar, target) + avatar:getMod(xi.mod.CRITHITRATE)) / 100
         critRate = utils.clamp(critRate, minCritRate, maxCritRate)
 
         local weaponDmg = avatar:getWeaponDmg()
@@ -230,12 +230,12 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
 
         -- Calculating with the known era pdif ratio for weaponskills.
         if mtp100 == nil or mtp200 == nil or mtp300 == nil then -- Nil gate for cMeleeRatio, will default mtp for each level to 1.
-            mtp100 = 1
-            mtp200 = 1
-            mtp300 = 1
+            mtp100 = 1.0
+            mtp200 = 1.0
+            mtp300 = 1.0
         end
         local params = {atk100 = mtp100, atk200 = mtp200, atk300 = mtp300,}
-        local pDifTable = xi.weaponskill.cMeleeRatio(avatar, target, params, 0, avatar:getTP())
+        local pDifTable = cMeleeRatio(avatar, target, params, 0, avatar:getTP())
         local pDif = pDifTable[1]
         local pDifCrit = pDifTable[2]
 

@@ -9,6 +9,7 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
+require("scripts/globals/weaponskills")
 -----------------------------------
 xi = xi or {}
 xi.mobskills = xi.mobskills or {}
@@ -143,20 +144,6 @@ local function MobTakeAoEShadow(mob, target, max)
     return math.random(1, max)
 end
 
-local function fTP(tp, ftp1, ftp2, ftp3)
-    if (tp < 1000) then
-        tp = 1000
-    end
-    if (tp >= 1000 and tp < 1500) then
-        return ftp1 + ( ((ftp2-ftp1)/500) * (tp-1000))
-    elseif (tp >= 1500 and tp <= 3000) then
-        -- generate a straight line between ftp2 and ftp3 and find point @ tp
-        return ftp2 + ( ((ftp3-ftp2)/1500) * (tp-1500))
-    end
-    return 1 -- no ftp mod
-end
-
-
 xi.mobskills.mobRangedMove = function(mob, target, skill, numberofhits, accmod, dmgmod, tpeffect)
     -- this will eventually contian ranged attack code
     return xi.mobskills.mobPhysicalMove(mob, target, skill, numberofhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.RANGED)
@@ -212,13 +199,13 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
 
     -- Calculating with the known era pdif ratio for weaponskills.
     if mtp000 == nil or mtp150 == nil or mtp300 == nil then -- Nil gate for cMeleeRatio, will default mtp for each level to 1.
-        mtp000 = 1
-        mtp150 = 1
-        mtp300 = 1
+        mtp000 = 1.0
+        mtp150 = 1.0
+        mtp300 = 1.0
     end
 
-    local params = {atk100 = mtp000, atk200 = mtp150, atk300 = mtp300,}
-    local pdifTable = xi.weaponskill.cMeleeRatio(mob, target, params, 0, mob:getTP())
+    local params = {atk000 = mtp000, atk150 = mtp150, atk300 = mtp300,}
+    local pdifTable = cMeleeRatio(mob, target, params, 0, mob:getTP())
     local pdif = pdifTable[1]
     local pdifcrit = pdifTable[2]
 
