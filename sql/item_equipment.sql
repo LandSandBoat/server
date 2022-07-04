@@ -11809,7 +11809,7 @@ INSERT INTO `item_equipment` VALUES (25719,'merlinic_jubbah',99,119,1589272,415,
 INSERT INTO `item_equipment` VALUES (25720,'chironic_doublet',99,119,524820,416,0,0,32,0,0);
 INSERT INTO `item_equipment` VALUES (25721,'vedic_coat',99,119,1622044,261,0,0,32,0,0);
 INSERT INTO `item_equipment` VALUES (25722,'jubilee_shirt',1,0,4194303,583,0,0,32,0,0);
-INSERT INTO `item_equipment` VALUES (25726,'kupo_suit',1,0,4194303,307,0,0,32,0,0);
+INSERT INTO `item_equipment` VALUES (25726,'kupo_suit',1,0,4194303,307,0,0,32,128,0);
 INSERT INTO `item_equipment` VALUES (25727,'passion_jacket',99,119,2593826,134,0,0,32,0,0);
 INSERT INTO `item_equipment` VALUES (25728,'zendik_robe',99,119,1720860,213,0,0,32,0,0);
 INSERT INTO `item_equipment` VALUES (25729,'vatic_byrnie',99,119,14785,41,0,0,32,0,0);
@@ -12225,6 +12225,7 @@ INSERT INTO `item_equipment` VALUES (26402,'forfend_+1',99,119,2385,45,1,0,2,0,0
 INSERT INTO `item_equipment` VALUES (26403,'srivatsa',99,119,64,658,5,0,2,0,0);
 INSERT INTO `item_equipment` VALUES (26406,'kupo_shield',1,0,4194303,56,3,0,2,0,0);
 INSERT INTO `item_equipment` VALUES (26409,'dullahan_shield',1,0,4194303,669,3,0,2,0,0);
+INSERT INTO `item_equipment` VALUES (26410,'diamond_buckler',1,0,4194303,659,1,0,2,0,0);
 INSERT INTO `item_equipment` VALUES (26413,'voluspa_shield',99,119,193,30,3,0,2,0,0);
 INSERT INTO `item_equipment` VALUES (26414,'twinned_shield',1,0,4194303,36,2,0,2,0,0); -- TODO: capture model from retail (using Maple Shield model)
 INSERT INTO `item_equipment` VALUES (26419,'ammurapi_shield',99,119,1589788,42,1,0,2,0,0);
