@@ -258,7 +258,8 @@ xi.znm.POP_ITEMS =
 ------------------------------------------------------------
 -- Default: Tier 1 ZNMs + "Don't Ask"
 -- (if bit = 0: add ZNM to Sanraku's Menu)
-xi.znm.DefaultMenu = 0x7F8FE3F8
+-- xi.znm.DefaultMenu = 0x7F8FE3F8
+xi.znm.DefaultMenu = 0x7FFFFFFF -- No Tier 1 NMs available (need to audit their behaviours)
 
 -- Adjusts the bitmask based on owned seals
 xi.znm.MENU_BITMASKS =
