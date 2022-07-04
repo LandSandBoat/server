@@ -36,12 +36,12 @@ mission.sections =
 
         [xi.zone.SOUTHERN_SAN_DORIA_S] =
         {
-            ['Lion_Springs'] = mission:progressEvent(68),
+            ['Lion_Springs'] = mission:progressEvent(68, 80, 4224267, 1756, utils.MAX_UINT32 - 1540096, utils.MAX_UINT32 - 1239549952, 427798150, 3, 4095),
 
             onEventFinish =
             {
                 [68] = function(player, csid, option, npc)
-                    player:setMissionStatus(xi.mission.log_id.WOTG, 1)
+                    player:setMissionStatus(mission.areaId, 1)
                 end,
             },
         },
@@ -53,6 +53,11 @@ mission.sections =
             return currentMission == mission.missionId and missionStatus == 1
         end,
 
+        [xi.zone.SOUTHERN_SAN_DORIA_S] =
+        {
+            ['Lion_Springs'] = mission:event(69),
+        },
+
         [xi.zone.UPPER_JEUNO] =
         {
             ['Turlough'] = mission:progressEvent(10172),
@@ -61,7 +66,7 @@ mission.sections =
             {
                 [10172] = function(player, csid, option, npc)
                     npcUtil.giveKeyItem(player, xi.ki.MAYAKOV_SHOW_TICKET)
-                    player:setMissionStatus(xi.mission.log_id.WOTG, 2)
+                    player:setMissionStatus(mission.areaId, 2)
                 end,
             },
         },
@@ -75,16 +80,46 @@ mission.sections =
 
         [xi.zone.SOUTHERN_SAN_DORIA_S] =
         {
-            ['Lion_Springs'] = mission:progressEvent(70),
+            ['Lion_Springs'] = mission:progressEvent(70, 1, 0, 2964, 0, 66453367, 8366690, 4095, 131140),
+
+            onZoneIn =
+            {
+                function(player, prevZone)
+                    local missionStatus = player:getMissionStatus(mission.areaId)
+
+                    if missionStatus == 3 then
+                        return mission:progressEvent(152)
+                    elseif missionStatus == 4 then
+                        return mission:progressEvent(153)
+                    end
+                end,
+            },
+
+            onEventUpdate =
+            {
+                [152] = function(player, csid, option, npc)
+                    if option == 1 then
+                        player:updateEvent(1, 0, 1756, 0, 66453367, 8366690, 4095, 131140)
+                    end
+                end,
+
+                [153] = function(player, csid, option, npc)
+                    if option == 1 then
+                        player:updateEvent(1, 0, 1756, 0, 66451386, 11124900, 4095, 131140)
+                    end
+                end,
+            },
 
             onEventFinish =
             {
                 [70] = function(player, csid, option, npc)
-                    return mission:event(152)
+                    player:setMissionStatus(mission.areaId, 3)
+                    player:setPos(100.801, 1, 103.211, 31, xi.zone.SOUTHERN_SAN_DORIA_S)
                 end,
 
                 [152] = function(player, csid, option, npc)
-                    return mission:event(153)
+                    player:setMissionStatus(mission.areaId, 4)
+                    player:setPos(100.801, 1, 103.211, 31, xi.zone.SOUTHERN_SAN_DORIA_S)
                 end,
 
                 [153] = function(player, csid, option, npc)
