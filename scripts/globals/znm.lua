@@ -299,7 +299,7 @@ xi.znm.sanraku.handleTradeWithPlate = function(player, npc, item)
     -- Cache the soulplate value on the player
     local plateData = item:getSoulPlateData()
 
-    player:setLocalVar("[ZNM][Sanraku]SoulPlateValue", plateData.zeni)
+    xi.znm.sanraku.setTradedPlateValue(player, plateData.zeni)
     player:startEvent(910, plateData.zeni)
 end
 
@@ -322,7 +322,7 @@ xi.znm.sanraku.handleTradeWithTrophy = function(player, npc, item)
         if player:hasKeyItem(znm_seal) then
             player:showText(npc, 13155) -- TODO: csid instead?
         else
-            player:setCharVar("[ZNM]TrophyTrade", znm_seal)
+            xi.znm.sanraku.setTradedTrophySeal(player, znm_seal)
             player:startEvent(912, 0, 0, 1, znm_seal)
         end
     end
@@ -475,16 +475,35 @@ xi.znm.sanraku.handleCompletedTradeWithPlate = function(player)
     xi.znm.setPlayerTradingDay(player, VanadielUniqueDay())
     xi.znm.incrementTradedPlates(player)
 
-    local zeniValue = player:getLocalVar("[ZNM][Sanraku]SoulPlateValue")
-    player:setLocalVar("[ZNM][Sanraku]SoulPlateValue", 0)
+    local zeniValue = xi.znm.sanraku.tradedPlateValue(player)
+    xi.znm.sanraku.setTradedPlateValue(player, 0)
 
     player:addCurrency("zeni_point", zeniValue)
 end
 
 xi.znm.sanraku.handleCompletedTradeWithTrophy = function(player)
     player:tradeComplete()
-    player:addKeyItem(player:getCharVar("[ZNM]TrophyTrade"))
-    player:setCharVar("[ZNM]TrophyTrade",0)
+    player:addKeyItem(xi.znm.sanraku.tradedTrophySeal(player))
+    xi.znm.sanraku.setTradedTrophySeal(player, 0)
+end
+
+-----------------------------------
+-- Sanraku General Helpers
+-----------------------------------
+xi.znm.sanraku.tradedPlateValue = function(player)
+    return player:getLocalVar("[ZNM][Sanraku]SoulPlateValue")
+end
+
+xi.znm.sanraku.setTradedPlateValue = function(player, zeni)
+    player:setLocalVar("[ZNM][Sanraku]SoulPlateValue", zeni)
+end
+
+xi.znm.sanraku.tradedTrophySeal = function(player)
+    return player:getLocalVar("[ZNM]TrophyTrade")
+end
+
+xi.znm.sanraku.setTradedTrophySeal = function(player, trophy)
+    player:setLocalVar("[ZNM]TrophyTrade", trophy)
 end
 
 -----------------------------------
