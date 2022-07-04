@@ -19,14 +19,10 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = 2
-local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg()*21, xi.magic.ele.LIGHT, dmgmod, 3)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg()*21, xi.magic.ele.LIGHT, dmgmod, xi.mobskills.magicalTpBonus.DMG_BONUS, 1)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.LIGHT, 0)
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.LIGHT)
-
-    -- TODO: Cosmic Elucidation has a special message shown below
-    -- However it always displays 0 DMG even though its sopposed to show the amount of dmg a player takes
-    -- Need to figure out how to pass DMG through to this specific message.
-    --skill:setMsg(302) -- cosmic elucidation messageid
+    skill:setMsg(302)
 
     return dmg
 
