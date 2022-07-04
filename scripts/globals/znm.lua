@@ -335,62 +335,89 @@ xi.znm.sanraku.menu = function(player)
     return param
 end
 
+------------------------------------
+-- onEventUpdate
+------------------------------------
 xi.znm.sanraku.onEventUpdate = function(player, csid, option)
     if csid == 909 then
         if option >= 300 and option <= 302 then -- "Gaining access to islets"
-            local zeni_cost = 500 -- Base cost charged by Sanraku
-            if player:hasKeyItem(xi.keyItem.RHAPSODY_IN_AZURE) then -- Reduced zeni cost
-                zeni_cost = 50
-            end
-            -- Give the correct island's information + salt
-            local key_item = xi.keyItem.SICKLEMOON_SALT + option - 300
-            if player:getCurrency("zeni_point") < zeni_cost then -- Not enough zeni
-                player:updateEvent(2)
-            elseif player:hasKeyItem(key_item) then -- Already have the salt
-                local SANRAKU_ID = ID.npc.SANRAKU
-                player:showText(GetNPCByID(SANRAKU_ID),13124) -- TODO: csid instead?
-            else
-                player:addKeyItem(key_item)
-                player:delCurrency("zeni_point", zeni_cost)
-                player:updateEvent(1, zeni_cost, 0, key_item)
-            end
+            xi.znm.sanraku.handleGainingAccessToIslets(player, option)
         elseif option >= 100 and option <= 130 then -- Are you sure you want info on <ZNM_mob>?
-            -- Give the correct ZNM's zeni cost
-             local diff = option - 99
-             local zeni_cost = xi.znm.getPopPrice(xi.znm.POP_ITEMS[diff].tier)
-            player:updateEvent(0,0,0,0,0,0,zeni_cost)
+            xi.znm.sanraku.handleConfirmingDesiredZNMInfo(player, option)
         elseif option >= 400 and option <= 440 then -- Yes, I want info on <ZNM_mob>
-            -- (440 because Warden's option is offset by 10 for some reason)
-            local diff = math.min(option - 399, 31) -- Determine the desired ZNM
-            local pop_item = xi.znm.POP_ITEMS[diff].item
-            local znm_tier = xi.znm.POP_ITEMS[diff].tier
-            local zeni_cost = xi.znm.getPopPrice(znm_tier)
-            if player:getCurrency("zeni_point") < zeni_cost then -- Not enough zeni
-                player:updateEvent(2)
-            elseif player:getFreeSlotsCount() == 0 then -- No inventory space
-                player:updateEvent(4)
-            elseif player:hasItem(pop_item) then -- Own pop already
-                local SANRAKU_ID = ID.npc.SANRAKU
-                player:showText(GetNPCByID(SANRAKU_ID),13124) -- TODO: csid instead?
-            else
-                -- Deduct zeni from player, increase future pop-item costs
-                player:delCurrency("zeni_point", zeni_cost)
-                xi.znm.updatePopPrice(znm_tier)
-                -- Give the pop item and remove the corresponding seal(s), if applicable
-                player:addItem(pop_item)
-                local seal = xi.znm.POP_ITEMS[diff].seal
-                if type(seal) == "table" then -- Three-seal ZNMs (Tinnin, etc.)
-                    player:delKeyItem(seal[1])
-                    player:delKeyItem(seal[2])
-                    player:delKeyItem(seal[3])
-                    player:updateEvent(1, zeni_cost, pop_item,seal[1],seal[2],seal[3])
-                elseif seal == 0 then -- Tier 1s have no seal
-                    player:updateEvent(1, zeni_cost, pop_item)
-                else -- One-seal ZNMs
-                    player:delKeyItem(seal)
-                    player:updateEvent(1, zeni_cost, pop_item,seal)
-                end
-            end
+            xi.znm.sanraku.handleConfirmedZNMInfo(player, option)
+        end
+    end
+end
+
+------------------------------------
+-- onEventUpdate Helpers
+------------------------------------
+xi.znm.sanraku.handleGainingAccessToIslets = function(player, option)
+    local zeni_cost = 500 -- Base cost charged by Sanraku
+
+    if player:hasKeyItem(xi.keyItem.RHAPSODY_IN_AZURE) then -- Reduced zeni cost
+        zeni_cost = 50
+    end
+
+    -- Give the correct island's information + salt
+    local key_item = xi.keyItem.SICKLEMOON_SALT + option - 300
+
+    if player:getCurrency("zeni_point") < zeni_cost then -- Not enough zeni
+        player:updateEvent(2)
+    elseif player:hasKeyItem(key_item) then -- Already have the salt
+        local SANRAKU_ID = ID.npc.SANRAKU
+        player:showText(GetNPCByID(SANRAKU_ID), 13124) -- TODO: csid instead?
+    else
+        player:addKeyItem(key_item)
+        player:delCurrency("zeni_point", zeni_cost)
+        player:updateEvent(1, zeni_cost, 0, key_item)
+    end
+end
+
+xi.znm.sanraku.handleConfirmingDesiredZNMInfo = function(player, option)
+    -- Give the correct ZNM's zeni cost
+    local diff = option - 99
+    local zeni_cost = xi.znm.getPopPrice(xi.znm.POP_ITEMS[diff].tier)
+
+    player:updateEvent(0,0,0,0,0,0,zeni_cost)
+end
+
+xi.znm.sanraku.handleConfirmedZNMInfo = function(player, option)
+    -- (440 because Warden's option is offset by 10 for some reason)
+    local diff = math.min(option - 399, 31) -- Determine the desired ZNM
+    local pop_item = xi.znm.POP_ITEMS[diff].item
+    local znm_tier = xi.znm.POP_ITEMS[diff].tier
+    local zeni_cost = xi.znm.getPopPrice(znm_tier)
+
+    if player:getCurrency("zeni_point") < zeni_cost then -- Not enough zeni
+        player:updateEvent(2)
+    elseif player:getFreeSlotsCount() == 0 then -- No inventory space
+        player:updateEvent(4)
+    elseif player:hasItem(pop_item) then -- Own pop already
+        local SANRAKU_ID = ID.npc.SANRAKU
+
+        player:showText(GetNPCByID(SANRAKU_ID),13124) -- TODO: csid instead?
+    else
+        -- Deduct zeni from player, increase future pop-item costs
+        player:delCurrency("zeni_point", zeni_cost)
+        xi.znm.updatePopPrice(znm_tier)
+
+        -- Give the pop item and remove the corresponding seal(s), if applicable
+        player:addItem(pop_item)
+
+        local seal = xi.znm.POP_ITEMS[diff].seal
+
+        if type(seal) == "table" then -- Three-seal ZNMs (Tinnin, etc.)
+            player:delKeyItem(seal[1])
+            player:delKeyItem(seal[2])
+            player:delKeyItem(seal[3])
+            player:updateEvent(1, zeni_cost, pop_item,seal[1],seal[2],seal[3])
+        elseif seal == 0 then -- Tier 1s have no seal
+            player:updateEvent(1, zeni_cost, pop_item)
+        else -- One-seal ZNMs
+            player:delKeyItem(seal)
+            player:updateEvent(1, zeni_cost, pop_item,seal)
         end
     end
 end
