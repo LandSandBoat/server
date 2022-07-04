@@ -76,8 +76,6 @@ local lookupTable =
     {"Smithing", "Al_Zahbi", "Ndego", 60427, "NDEGO_SHOP_DIALOG", 8, 23, 2},
     -- Tenshodo Merchant
     {"Tenshodo", "Lower_Jeuno", "Akamafula", 60417, "AKAMAFULA_SHOP_DIALOG", 7},
-    {"Tenshodo", "Port_Bastok", "Jabbar", 60419, "TENSHODO_SHOP_OPEN_DIALOG", 1, 23, 4},
-    {"Tenshodo", "Port_Bastok", "Silver_Owl", 60420, "TENSHODO_SHOP_OPEN_DIALOG", 1, 23, 4},
     {"Tenshodo", "Norg", "Achika", 60421, "ACHIKA_SHOP_DIALOG", 9, 23, 7},
     {"Tenshodo", "Norg", "Chiyo", 60422, "CHIYO_SHOP_DIALOG", 9, 23, 7},
     {"Tenshodo", "Norg", "Jirokichi", 60423, "JIROKICHI_SHOP_DIALOG", 9, 23, 7},
