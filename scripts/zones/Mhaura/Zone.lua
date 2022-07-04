@@ -32,6 +32,9 @@ zone_object.onZoneIn = function(player, prevZone)
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         if prevZone == xi.zone.SHIP_BOUND_FOR_MHAURA or prevZone == xi.zone.OPEN_SEA_ROUTE_TO_MHAURA or prevZone == xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES then
+            local ship = GetNPCByID(ID.npc.SHIP)
+
+            ship:setAnimBegin(VanadielTime())
             cs = 202
             player:setPos(14.960, -3.430, 18.423, 192)
         else

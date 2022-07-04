@@ -321,7 +321,7 @@ void CTransportHandler::TransportTimer()
                 townZone->ship.npc->animBegin = vanaTime;
                 townZone->ship.npc->animStart = true;
                 townZone->ship.spawn();
-                townZone->ship.animateSetup(townZone->ship.animationArrive, (uint32)(CVanaTime::getInstance()->getVanaTime() - shipTimerOffset * 2.5));
+                townZone->ship.animateSetup(townZone->ship.animationArrive, (uint32)(CVanaTime::getInstance()->getVanaTime() - shipTimerOffset * 2.4));
             }
         }
         else
@@ -340,7 +340,7 @@ void CTransportHandler::TransportTimer()
         if (zoneIterator->state == STATE_TRANSPORTZONE_VOYAGE)
         {
 
-            int zoneOffset = 8;
+            int zoneOffset = 5;
             ZONEID zoneId = zoneIterator->voyageZone->GetID();
 
             if (zoneId == ZONE_BASTOK_JEUNO_AIRSHIP ||

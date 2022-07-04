@@ -91,10 +91,6 @@ zone_object.onZoneTick = function(zone)
     if os.time() - zone:getLocalVar('transportTime') % 60 then
         xi.sea_creatures.checkSpawns(ID, 1, 2) -- 1 percent per vana minute, 2 total mobs
     end
-
-    print("State:")
-    print(zone:getLocalVar('state'))
-
 end
 
 zone_object.onEventFinish = function(player, csid, option)
