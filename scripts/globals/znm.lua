@@ -192,7 +192,9 @@ xi.znm.ryo.onTrade = function(player, npc, trade)
         -- Cache the soulplate value on the player
         local item = trade:getItem(0)
         local plateData = item:getSoulPlateData()
-        player:setLocalVar("[ZNM][Ryo]SoulPlateValue", plateData.zeni)
+
+        xi.znm.setTradedPlateValue(player, plateData.zeni)
+
         player:startEvent(914)
     end
 end
@@ -207,8 +209,8 @@ end
 
 xi.znm.ryo.onEventUpdate = function(player, csid, option)
     if csid == 914 then  -- Get approximate value of traded soulplate
-        local zeniValue = player:getLocalVar("[ZNM][Ryo]SoulPlateValue")
-        player:setLocalVar("[ZNM][Ryo]SoulPlateValue", 0)
+        local zeniValue = xi.znm.tradedPlateValue(player)
+        xi.znm.setTradedPlateValue(player, 0)
         player:updateEvent(zeniValue)
     elseif csid == 913 then
         if option == 200 then -- "Sanraku's subject of interest"
@@ -436,4 +438,12 @@ end
 
 xi.znm.setPlayerHasSpokenToSanrakuBefore = function(player)
     player:setCharVar("ZeniStatus", 1)
+end
+
+xi.znm.tradedPlateValue = function(player)
+    return player:getLocalVar("[ZNM][Ryo]SoulPlateValue")
+end
+
+xi.znm.setTradedPlateValue = function(player, zeni)
+    player:setLocalVar("[ZNM][Ryo]SoulPlateValue", zeni)
 end
