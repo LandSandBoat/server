@@ -724,7 +724,7 @@ uint16 CBattleEntity::RACC(uint8 skill, float distance, uint16 bonusSkill)
     return acc + std::min<int16>(((100 + getMod(Mod::FOOD_RACCP) * acc) / 100), getMod(Mod::FOOD_RACC_CAP));
 }
 
-uint16 CBattleEntity::GetBaseRACC(uint8 skill, float distance, uint16 bonusSkill)
+uint16 CBattleEntity::GetBaseRACC(uint8 skill, uint16 bonusSkill)
 {
     TracyZoneScoped;
     auto* PWeakness = StatusEffectContainer->GetStatusEffect(EFFECT_WEAKNESS);
