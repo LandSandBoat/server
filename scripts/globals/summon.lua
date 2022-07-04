@@ -229,6 +229,11 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
         local fSTR = getAvatarFSTR(weaponDmg, avatar:getStat(xi.mod.STR), target:getStat(xi.mod.VIT))
 
         -- Calculating with the known era pdif ratio for weaponskills.
+        if mtp100 == nil or mtp200 == nil or mtp300 == nil then -- Nil gate for cMeleeRatio, will default mtp for each level to 1.
+            mtp100 = 1
+            mtp200 = 1
+            mtp300 = 1
+        end
         local params = {atk100 = mtp100, atk200 = mtp200, atk300 = mtp300,}
         local pDifTable = xi.weaponskill.cMeleeRatio(avatar, target, params, 0, avatar:getTP())
         local pDif = pDifTable[1]
