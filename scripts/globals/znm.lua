@@ -422,23 +422,37 @@ xi.znm.sanraku.handleConfirmedZNMInfo = function(player, option)
     end
 end
 
+------------------------------------
+-- onEventFinish
+------------------------------------
 xi.znm.sanraku.onEventFinish = function(player, csid, option)
     if csid == 910 then
-        player:tradeComplete()
-        xi.znm.setPlayerTradingDay(player, VanadielUniqueDay())
-        xi.znm.incrementTradedPlates(player)
-
-        local zeniValue = player:getLocalVar("[ZNM][Sanraku]SoulPlateValue")
-        player:setLocalVar("[ZNM][Sanraku]SoulPlateValue", 0)
-
-        player:addCurrency("zeni_point", zeniValue)
+        xi.znm.sanraku.handleCompletedTradeWithPlate(player)
     elseif csid == 908 then
         xi.znm.setPlayerHasSpokenToSanrakuBefore(player)
     elseif csid == 912 then
-        player:tradeComplete()
-        player:addKeyItem(player:getCharVar("[ZNM]TrophyTrade"))
-        player:setCharVar("[ZNM]TrophyTrade",0)
+        xi.znm.sanraku.handleCompletedTradeWithTrophy(player)
     end
+end
+
+------------------------------------
+-- onEventFinish Helpers
+------------------------------------
+xi.znm.sanraku.handleCompletedTradeWithPlate = function(player)
+    player:tradeComplete()
+    xi.znm.setPlayerTradingDay(player, VanadielUniqueDay())
+    xi.znm.incrementTradedPlates(player)
+
+    local zeniValue = player:getLocalVar("[ZNM][Sanraku]SoulPlateValue")
+    player:setLocalVar("[ZNM][Sanraku]SoulPlateValue", 0)
+
+    player:addCurrency("zeni_point", zeniValue)
+end
+
+xi.znm.sanraku.handleCompletedTradeWithTrophy = function(player)
+    player:tradeComplete()
+    player:addKeyItem(player:getCharVar("[ZNM]TrophyTrade"))
+    player:setCharVar("[ZNM]TrophyTrade",0)
 end
 
 -----------------------------------
