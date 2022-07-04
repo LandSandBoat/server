@@ -187,18 +187,24 @@ end
 -----------------------------------
 xi.znm.ryo = xi.znm.ryo or {}
 
+-----------------------------------
+-- onTrade
+-----------------------------------
 xi.znm.ryo.onTrade = function(player, npc, trade)
     if npcUtil.tradeHasExactly(trade, xi.items.SOUL_PLATE) then
         -- Cache the soulplate value on the player
         local item = trade:getItem(0)
         local plateData = item:getSoulPlateData()
 
-        xi.znm.setTradedPlateValue(player, plateData.zeni)
+        xi.znm.ryo.setTradedPlateValue(player, plateData.zeni)
 
         player:startEvent(914)
     end
 end
 
+-----------------------------------
+-- onTrigger
+-----------------------------------
 xi.znm.ryo.onTrigger = function(player, npc)
     if xi.znm.playerHasSpokenToSanrakuBefore(player) then
         player:startEvent(913)
@@ -207,17 +213,23 @@ xi.znm.ryo.onTrigger = function(player, npc)
     end
 end
 
+-----------------------------------
+-- onEventUpdate
+-----------------------------------
 xi.znm.ryo.onEventUpdate = function(player, csid, option)
     if csid == 914 then  -- Get approximate value of traded soulplate
-        local zeniValue = xi.znm.tradedPlateValue(player)
-        xi.znm.setTradedPlateValue(player, 0)
+        local zeniValue = xi.znm.ryo.tradedPlateValue(player)
+
+        xi.znm.ryo.setTradedPlateValue(player, 0)
         player:updateEvent(zeniValue)
     elseif csid == 913 then
         if option == 200 then -- "Sanraku's subject of interest"
             local param = xi.znm.getSanrakusInterest()
+
             player:updateEvent(param,0)
         elseif option == 201 then -- "Sanraku's recommended fauna"
             local param = xi.znm.getSanrakusFauna()
+
             player:updateEvent(param, 0)
         elseif option == 300 then -- "My zeni balance"
             player:updateEvent(player:getCurrency("zeni_point"), 0)
@@ -228,6 +240,17 @@ xi.znm.ryo.onEventUpdate = function(player, csid, option)
 end
 
 xi.znm.ryo.onEventFinish = function(player, csid, option)
+end
+
+-----------------------------------
+-- Ryo General Helpers
+-----------------------------------
+xi.znm.ryo.tradedPlateValue = function(player)
+    return player:getLocalVar("[ZNM][Ryo]SoulPlateValue")
+end
+
+xi.znm.ryo.setTradedPlateValue = function(player, zeni)
+    player:setLocalVar("[ZNM][Ryo]SoulPlateValue", zeni)
 end
 
 -----------------------------------
@@ -501,14 +524,6 @@ end
 
 xi.znm.setPlayerHasSpokenToSanrakuBefore = function(player)
     player:setCharVar("ZeniStatus", 1)
-end
-
-xi.znm.tradedPlateValue = function(player)
-    return player:getLocalVar("[ZNM][Ryo]SoulPlateValue")
-end
-
-xi.znm.setTradedPlateValue = function(player, zeni)
-    player:setLocalVar("[ZNM][Ryo]SoulPlateValue", zeni)
 end
 
 xi.znm.playerTradingDay = function(player)
