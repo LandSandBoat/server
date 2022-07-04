@@ -259,6 +259,23 @@ local function cRangedRatio(attacker, defender, params, ignoredDef, tp)
         pdifmin = (cratio * (20 / 19)) - (3 / 19)
     end
 
+    -- Bernoulli distribution, applied for cRatio < 0.5 and 0.75 < cRatio < 1.25
+    -- Other cRatio values are uniformly distributed
+    -- https://www.bluegartr.com/threads/108161-pDif-and-damage?p=5308205&viewfull=1#post5308205
+    local u = math.max(0.0, math.min(0.333, 1.3 * (2.0 - math.abs(cratio - 1)) - 1.96))
+
+    local bernoulli = false
+
+    if (math.random() < u) then
+        bernoulli = true
+    end
+
+    if (bernoulli) then
+        local roundedRatio = math.floor(cratio + 0.5) -- equivalent to rounding
+        pdifmin = roundedRatio
+        pdifmax = roundedRatio
+    end
+
     local pdif = {}
     pdif[1] = pdifmin
     pdif[2] = pdifmax
