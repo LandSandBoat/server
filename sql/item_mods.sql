@@ -53908,7 +53908,7 @@ INSERT INTO `item_mods` VALUES (25718,384,400); -- HASTE_GEAR: 400
 INSERT INTO `item_mods` VALUES (25722,1,1);     -- DEF: 1
 
 -- Kupo Suit
-INSERT INTO `item_mods` VALUES (25726,169,18);  -- Movement speed: +18%
+INSERT INTO `item_mods` VALUES (25726,169,18);  -- MOVE: +18%
 INSERT INTO `item_mods` VALUES (25726,1,1);     -- DEF: 1
 
 -- Meghanada Cuirie
