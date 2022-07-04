@@ -237,15 +237,14 @@ xi.znm.sanraku = xi.znm.sanraku or {}
 
 local platesTradedToday = function(player)
     local currentDay = VanadielUniqueDay()
-    local storedDay = player:getCharVar("[ZNM][Sanraku]TradingDay")
+    local storedDay = xi.znm.playerTradingDay(player)
 
     if currentDay ~= storedDay then
-        player:setCharVar("[ZNM][Sanraku]TradingDay", 0)
-        player:setCharVar("[ZNM][Sanraku]TradedPlates", 0)
+        xi.znm.resetDailyTrackingVars(player)
         return 0
     end
 
-    return player:getCharVar("[ZNM][Sanraku]TradedPlates")
+    return xi.znm.playerTradingDay(player)
 end
 
 xi.znm.sanraku.onTrade = function(player, npc, trade)
@@ -259,8 +258,7 @@ xi.znm.sanraku.onTrade = function(player, npc, trade)
                     return
                 end
             else -- If you have the KI, clear out the tracking vars!
-                player:setCharVar("[ZNM][Sanraku]TradingDay", 0)
-                player:setCharVar("[ZNM][Sanraku]TradedPlates", 0)
+                xi.znm.resetDailyTrackingVars(player)
             end
             -- Cache the soulplate value on the player
             local plateData = item:getSoulPlateData()
@@ -376,8 +374,8 @@ end
 xi.znm.sanraku.onEventFinish = function(player, csid, option)
     if csid == 910 then
         player:tradeComplete()
-        player:setCharVar("[ZNM][Sanraku]TradingDay", VanadielUniqueDay())
-        player:addCharVar("[ZNM][Sanraku]TradedPlates", 1)
+        xi.znm.setPlayerTradingDay(player, VanadielUniqueDay())
+        xi.znm.incrementTradedPlates(player)
 
         local zeniValue = player:getLocalVar("[ZNM][Sanraku]SoulPlateValue")
         player:setLocalVar("[ZNM][Sanraku]SoulPlateValue", 0)
@@ -446,4 +444,25 @@ end
 
 xi.znm.setTradedPlateValue = function(player, zeni)
     player:setLocalVar("[ZNM][Ryo]SoulPlateValue", zeni)
+end
+
+xi.znm.playerTradingDay = function(player)
+    return player:getCharVar("[ZNM][Sanraku]TradingDay")
+end
+
+xi.znm.setPlayerTradingDay = function(player, day)
+    player:setCharVar("[ZNM][Sanraku]TradingDay", day)
+end
+
+xi.znm.numberOfTradedPlates = function(player)
+    return player:getCharVar("[ZNM][Sanraku]TradedPlates")
+end
+
+xi.znm.incrementTradedPlates = function(player)
+    player:addCharVar("[ZNM][Sanraku]TradedPlates", 1)
+end
+
+xi.znm.resetDailyTrackingVars = function(player)
+    player:setCharVar("[ZNM][Sanraku]TradingDay", 0)
+    player:setCharVar("[ZNM][Sanraku]TradedPlates", 0)
 end
