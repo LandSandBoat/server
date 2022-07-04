@@ -235,7 +235,43 @@ end
 -----------------------------------
 xi.znm.sanraku = xi.znm.sanraku or {}
 
-xi.znm.platesTradedToday = function(player)
+------------------------------------
+-- onTrade
+------------------------------------
+xi.znm.sanraku.onTrade = function(player, npc, trade)
+    if trade:getItemCount() == 1 then -- One soul plate or trophy at a time
+        local item = trade:getItem(0)
+
+        if trade:getItemId() == xi.items.SOUL_PLATE then
+            xi.znm.sanraku.handleTradeWithPlate(player, npc, item)
+        else -- Check Trophy trading (for ZNM seals)
+            xi.znm.sanraku.handleTradeWithTrophy(player, npc, item)
+        end
+    end
+end
+
+------------------------------------
+-- onTrade Helpers
+------------------------------------
+xi.znm.sanraku.handleTradeWithPlate = function(player, npc, item)
+    if not player:hasKeyItem(xi.ki.RHAPSODY_IN_AZURE) then
+        local trade_limit = xi.znm.SOULPLATE_TRADE_LIMIT
+
+        if xi.znm.sanraku.platesTradedToday(player) >= trade_limit then
+            player:showText(npc, 13125, 1, xi.items.SOUL_PLATE,trade_limit)
+            return
+        end
+    else -- If you have the KI, clear out the tracking vars!
+        xi.znm.resetDailyTrackingVars(player)
+    end
+    -- Cache the soulplate value on the player
+    local plateData = item:getSoulPlateData()
+
+    player:setLocalVar("[ZNM][Sanraku]SoulPlateValue", plateData.zeni)
+    player:startEvent(910, plateData.zeni)
+end
+
+xi.znm.sanraku.platesTradedToday = function(player)
     local currentDay = VanadielUniqueDay()
     local storedDay = xi.znm.playerTradingDay(player)
 
@@ -244,37 +280,18 @@ xi.znm.platesTradedToday = function(player)
         return 0
     end
 
-    return xi.znm.playerTradingDay(player)
+    return xi.znm.numberOfTradedPlates(player)
 end
 
-xi.znm.sanraku.onTrade = function(player, npc, trade)
-    if (trade:getItemCount() == 1) then -- One soul plate or trophy at a time
-        local item = trade:getItem(0)
-        if trade:getItemId() == xi.items.SOUL_PLATE then
-            if not player:hasKeyItem(xi.ki.RHAPSODY_IN_AZURE) then
-                local trade_limit = xi.znm.SOULPLATE_TRADE_LIMIT
-                if xi.znm.platesTradedToday(player) >= trade_limit then
-                    player:showText(npc,13125,1,xi.items.SOUL_PLATE,trade_limit)
-                    return
-                end
-            else -- If you have the KI, clear out the tracking vars!
-                xi.znm.resetDailyTrackingVars(player)
-            end
-            -- Cache the soulplate value on the player
-            local plateData = item:getSoulPlateData()
-            player:setLocalVar("[ZNM][Sanraku]SoulPlateValue", plateData.zeni)
-            player:startEvent(910, plateData.zeni)
+xi.znm.sanraku.handleTradeWithTrophy = function(player, npc, item)
+    local znm_seal = xi.znm.TROPHIES[item:getID()]
 
-        else -- Check Trophy trading (for ZNM seals)
-            local znm_seal = xi.znm.TROPHIES[trade:getItemId()]
-            if (znm_seal ~= nil) then
-                if player:hasKeyItem(znm_seal) then
-                    player:showText(npc,13155) -- TODO: csid instead?
-                else
-                    player:setCharVar("[ZNM]TrophyTrade", znm_seal)
-                    player:startEvent(912, 0, 0, 1, znm_seal)
-                end
-            end
+    if znm_seal ~= nil then
+        if player:hasKeyItem(znm_seal) then
+            player:showText(npc, 13155) -- TODO: csid instead?
+        else
+            player:setCharVar("[ZNM]TrophyTrade", znm_seal)
+            player:startEvent(912, 0, 0, 1, znm_seal)
         end
     end
 end
