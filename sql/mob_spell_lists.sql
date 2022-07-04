@@ -4925,30 +4925,30 @@ INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',486,204,1,255); -- flare (1~255
 INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',486,235,1,255); -- burn (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',486,249,1,255); -- blaze_spikes (1~255)
 
--- Blackbeard (487)
-INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 487, 166, 1, 255); -- thunder iii
-INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 487, 195, 1, 255); -- thundaga ii
-INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 487, 201, 1, 255); -- waterga iii
-INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 487, 206, 1, 255); -- freeze
-INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 487, 212, 1, 255); -- burst
-INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 487, 214, 1, 255); -- flood
-INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 487, 250, 1, 255); -- ice spikes
-INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 487, 252, 1, 255); -- stun
-INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 487, 274, 1, 255); -- sleepga ii
+-- Blackbeard (491)
+INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 5021, 166, 1, 255); -- thunder iii
+INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 5021, 195, 1, 255); -- thundaga ii
+INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 5021, 201, 1, 255); -- waterga iii
+INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 5021, 206, 1, 255); -- freeze
+INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 5021, 212, 1, 255); -- burst
+INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 5021, 214, 1, 255); -- flood
+INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 5021, 250, 1, 255); -- ice spikes
+INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 5021, 252, 1, 255); -- stun
+INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 5021, 274, 1, 255); -- sleepga ii
 
--- Silverhook (488)
-INSERT INTO `mob_spell_lists` VALUES('Silverhook', 488, 151, 1, 255); -- blizzard iii
-INSERT INTO `mob_spell_lists` VALUES('Silverhook', 488, 180, 1, 255); -- blizzaga ii
-INSERT INTO `mob_spell_lists` VALUES('Silverhook', 488, 201, 1, 255); -- waterga iii
-INSERT INTO `mob_spell_lists` VALUES('Silverhook', 488, 206, 1, 255); -- freeze
-INSERT INTO `mob_spell_lists` VALUES('Silverhook', 488, 212, 1, 255); -- burst
-INSERT INTO `mob_spell_lists` VALUES('Silverhook', 488, 214, 1, 255); -- flood
-INSERT INTO `mob_spell_lists` VALUES('Silverhook', 488, 250, 1, 255); -- ice spikes
-INSERT INTO `mob_spell_lists` VALUES('Silverhook', 488, 252, 1, 255); -- stun
-INSERT INTO `mob_spell_lists` VALUES('Silverhook', 488, 253, 1, 255); -- sleep
-INSERT INTO `mob_spell_lists` VALUES('Silverhook', 488, 274, 1, 255); -- sleepga ii
+-- Silverhook (492)
+INSERT INTO `mob_spell_lists` VALUES('Silverhook', 5022, 151, 1, 255); -- blizzard iii
+INSERT INTO `mob_spell_lists` VALUES('Silverhook', 5022, 180, 1, 255); -- blizzaga ii
+INSERT INTO `mob_spell_lists` VALUES('Silverhook', 5022, 201, 1, 255); -- waterga iii
+INSERT INTO `mob_spell_lists` VALUES('Silverhook', 5022, 206, 1, 255); -- freeze
+INSERT INTO `mob_spell_lists` VALUES('Silverhook', 5022, 212, 1, 255); -- burst
+INSERT INTO `mob_spell_lists` VALUES('Silverhook', 5022, 214, 1, 255); -- flood
+INSERT INTO `mob_spell_lists` VALUES('Silverhook', 5022, 250, 1, 255); -- ice spikes
+INSERT INTO `mob_spell_lists` VALUES('Silverhook', 5022, 252, 1, 255); -- stun
+INSERT INTO `mob_spell_lists` VALUES('Silverhook', 5022, 253, 1, 255); -- sleep
+INSERT INTO `mob_spell_lists` VALUES('Silverhook', 5022, 274, 1, 255); -- sleepga ii
 
--- Next Available: 489
+-- Next Available: 493
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;

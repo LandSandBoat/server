@@ -31,15 +31,23 @@ xi.pirates.init = function(ID)
     for k, pirate in pairs(ID.npc.PIRATES) do
         local npc = GetNPCByID(k)
         npc:setPos(pirate.start_pos)
+        npc:setStatus(xi.status.DISAPPEAR)
         npc:initNpcAi()
     end
 end
 
 xi.pirates.start = function(ID)
     local ship = GetNPCByID(ID.npc.PIRATE_SHIP.id)
+    local hqChance = math.random(0, 100)
     ship:setLocalVar("pirateStatus", xi.pirates.status.IDLE)
     xi.pirates.despawnMobs(ID)
     xi.pirates.reset(ID)
+
+    if hqChance >= 80 then
+        ship:setLocalVar('HQ', 1)
+    else
+        ship:setLocalVar('HQ', 0) -- Resetting to 0 as a fallback
+    end
 end
 
 xi.pirates.reset = function(ID)
@@ -61,6 +69,8 @@ xi.pirates.spawnMob = function(mobId)
 end
 
 xi.pirates.spawnMobs = function(ID)
+    local ship = GetNPCByID(ID.npc.PIRATE_SHIP.id)
+
     for i = 0, 3 do
         local xbone = GetMobByID(ID.mob.CROSSBONES + i)
         if
@@ -80,12 +90,13 @@ xi.pirates.spawnMobs = function(ID)
     then
         if os.time() > wight:getLocalVar("respawnTime") then
             if
-                nm:getLocalVar("killed") == 1 or
-                math.random(0,100) < 95
+                nm:getLocalVar("killed") == 0 and
+                ship:getLocalVar('HQ') == 1 and
+                math.random(0,100) > 30
             then
-                xi.pirates.spawnMob(ID.mob.CROSSBONES + 4)
-            else
                 xi.pirates.spawnMob(ID.mob.CROSSBONES + 5)
+            else
+                xi.pirates.spawnMob(ID.mob.CROSSBONES + 4)
             end
         end
     end
@@ -178,11 +189,22 @@ xi.pirates.update = function(ID, zone, tripTime)
             if tripTime >= 290 then
                 for k, pirate in pairs(ID.npc.PIRATES) do
                     local npc = GetNPCByID(k)
-                    npc:setPos(xi.path.first(pirate.enter_path))
-                    npc:pathTo(xi.path.last(pirate.enter_path)[1], xi.path.last(pirate.enter_path)[2], xi.path.last(pirate.enter_path)[3])
-                    npc:setStatus(xi.status.NORMAL)
-                    npc:sendUpdateToZoneCharsInRange(2000)
+                    local piratePos = pirate.position
+
+                    if ship:getLocalVar('HQ') == 1 and piratePos ~= 2 then
+                        npc:hideName(true)
+                        npc:setPos(xi.path.first(pirate.enter_path))
+                        npc:setStatus(xi.status.NORMAL)
+                        npc:pathTo(xi.path.last(pirate.enter_path)[1], xi.path.last(pirate.enter_path)[2], xi.path.last(pirate.enter_path)[3])
+                        npc:sendUpdateToZoneCharsInRange(2000)
+                    elseif ship:getLocalVar('HQ') == 0 and piratePos ~=4 then
+                        npc:setPos(xi.path.first(pirate.enter_path))
+                        npc:setStatus(xi.status.NORMAL)
+                        npc:pathTo(xi.path.last(pirate.enter_path)[1], xi.path.last(pirate.enter_path)[2], xi.path.last(pirate.enter_path)[3])
+                        npc:sendUpdateToZoneCharsInRange(2000)
+                    end
                 end
+
                 SetZoneMusic(zone, 0, 170)
                 SetZoneMusic(zone, 1, 170)
                 xi.pirates.setShipPosition(ship, ID.npc.PIRATE_SHIP.event_pos)
@@ -215,8 +237,20 @@ xi.pirates.update = function(ID, zone, tripTime)
             if tripTime >= 695 then
                 for k, pirate in pairs(ID.npc.PIRATES) do
                     local npc = GetNPCByID(k)
+                    local piratePos = pirate.position
+
                     npc:setLocalVar("castmode",0)
-                    npc:pathTo(xi.path.last(pirate.exit_path)[1], xi.path.last(pirate.exit_path)[2], xi.path.last(pirate.exit_path)[3])
+                    if ship:getLocalVar('HQ') == 1 and piratePos ~= 2 then
+                        npc:setPos(xi.path.first(pirate.enter_path))
+                        npc:setStatus(xi.status.NORMAL)
+                        npc:pathTo(xi.path.last(pirate.exit_path)[1], xi.path.last(pirate.exit_path)[2], xi.path.last(pirate.exit_path)[3])
+                        npc:sendUpdateToZoneCharsInRange(2000)
+                    elseif ship:getLocalVar('HQ') == 0 and piratePos ~=4 then
+                        npc:setPos(xi.path.first(pirate.enter_path))
+                        npc:setStatus(xi.status.NORMAL)
+                        npc:pathTo(xi.path.last(pirate.exit_path)[1], xi.path.last(pirate.exit_path)[2], xi.path.last(pirate.exit_path)[3])
+                        npc:sendUpdateToZoneCharsInRange(2000)
+                    end
                 end
                 xi.pirates.despawnMobs(ID)
                 ship:setLocalVar("pirateStatus", xi.pirates.status.DESPAWNING)
