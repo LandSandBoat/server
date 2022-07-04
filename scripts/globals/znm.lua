@@ -29,8 +29,8 @@ xi.znm = xi.znm or {}
 --------------------------------------------------
 -- Called during JstMidnight tick
 xi.znm.UpdateSanrakusMobs = function()
-    SetServerVariable('[ZNM][Sanraku]Interest', math.random(61))
-    SetServerVariable('[ZNM][Sanraku]Fauna', math.random(54))
+    SetServerVariable('[ZNM][Sanraku]Interest', math.random(#xi.znm.SANRAKUS_INTEREST))
+    SetServerVariable('[ZNM][Sanraku]Fauna', math.random(#xi.znm.SANRAKUS_FAUNA))
 end
 
 -- Get Sanraku's "Subject of Interest"
@@ -39,7 +39,7 @@ xi.znm.getSanrakusInterest = function()
 
     -- Initialize the server var if it hasn't been already
     if interest == nil or interest == 0 then
-        interest = math.random(61)
+        interest = math.random(#xi.znm.SANRAKUS_INTEREST)
         SetServerVariable('[ZNM][Sanraku]Interest', interest)
     end
     return interest
@@ -51,7 +51,7 @@ xi.znm.getSanrakusFauna = function()
 
     -- Initialize the server var if it hasn't been already
     if fauna == nil or fauna == 0 then
-        fauna = math.random(54)
+        fauna = math.random(#xi.znm.SANRAKUS_FAUNA)
         SetServerVariable('[ZNM][Sanraku]Fauna', fauna)
     end
     return fauna
