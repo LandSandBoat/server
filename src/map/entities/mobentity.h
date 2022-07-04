@@ -269,6 +269,7 @@ public:
 
 protected:
     void DistributeRewards();
+    int16 ApplyTH(int16 m_THLvl, int16 rate);
     void DropItems(CCharEntity* PChar);
 
 private:
