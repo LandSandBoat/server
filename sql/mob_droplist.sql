@@ -11253,10 +11253,10 @@ INSERT INTO `mob_droplist` VALUES (1363,0,0,1000,3214,@RARE);      -- Stone Of A
 INSERT INTO `mob_droplist` VALUES (1363,0,0,1000,3215,@RARE);      -- Coin Of Ardor (Rare, 5%)
 
 -- ZoneID:   4 - Intulo
-INSERT INTO `mob_droplist` VALUES (1364,0,0,1000,14759,290); -- Curaga Earring (29.0%)
-INSERT INTO `mob_droplist` VALUES (1364,0,0,1000,1623,120);  -- Eft Skin (12.0%)
-INSERT INTO `mob_droplist` VALUES (1364,0,0,1000,15372,110); -- Magic Slacks (11.0%)
-INSERT INTO `mob_droplist` VALUES (1364,2,0,1000,4362,0);    -- Lizard Egg (Steal)
+INSERT INTO `mob_droplist` VALUES (1364,0,0,1000,14759,@COMMON);  -- Curaga Earring (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (1364,0,0,1000,1623,@UNCOMMON); -- Eft Skin (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (1364,0,0,1000,15372,@RARE);    -- Magic Slacks (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (1364,2,0,1000,4362,0);         -- Lizard Egg (Steal)
 
 -- ZoneID: 215 - Inugami
 INSERT INTO `mob_droplist` VALUES (1365,0,0,1000,858,120);    -- Wolf Hide (12.0%)
@@ -24124,13 +24124,13 @@ INSERT INTO `mob_droplist` VALUES (2897,2,0,1000,864,0);   -- Handful Of Fish Sc
 INSERT INTO `mob_droplist` VALUES (2897,4,0,1000,868,0);   -- Handful Of Pugil Scales (Despoil)
 
 -- ZoneID:   4 - Lancet Jagil
-INSERT INTO `mob_droplist` VALUES (2898,0,0,1000,1668,954); -- Cleanly Snapped Rod (95.4%)
+INSERT INTO `mob_droplist` VALUES (2898,0,0,1000,1668,@ALWAYS); -- Cleanly Snapped Rod (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (2898,2,0,1000,864,0);    -- Handful Of Fish Scales (Steal)
 
 -- ZoneID:   4 - Serra
-INSERT INTO `mob_droplist` VALUES (2899,0,0,1000,15347,127); -- Volans Greaves (12.7%)
-INSERT INTO `mob_droplist` VALUES (2899,0,0,1000,868,30);    -- Handful Of Pugil Scales (3.0%)
-INSERT INTO `mob_droplist` VALUES (2899,0,0,1000,4484,30);   -- Shall Shell (3.0%)
+INSERT INTO `mob_droplist` VALUES (2899,0,0,1000,15347,@UNCOMMON); -- Volans Greaves (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (2899,0,0,1000,868,@RARE);       -- Handful Of Pugil Scales (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (2899,0,0,1000,4484,@VRARE);     -- Shall Shell (Very Rare, 1%)
 
 -- ZoneID:  68 - Cave Pugil
 INSERT INTO `mob_droplist` VALUES (2900,0,0,1000,1888,410); -- Sack Of Silica (41.0%)
@@ -24952,7 +24952,7 @@ INSERT INTO `mob_droplist` VALUES (3079,0,0,1000,16028,136); -- Psyche Earring (
 INSERT INTO `mob_droplist` VALUES (3080,0,0,1000,2846,@VCOMMON); -- Piece Of Hefty Oak Lumber (Very Common, 24%)
 
 -- ZoneID:   4 - Shankha
-INSERT INTO `mob_droplist` VALUES (3081,0,0,1000,16187,122); -- Adoubeurs Pavise (12.2%)
+INSERT INTO `mob_droplist` VALUES (3081,0,0,1000,16187,@UNCOMMON); -- Adoubeurs Pavise (Uncommon, 10%)
 
 -- ZoneID:  81 - Melusine
 INSERT INTO `mob_droplist` VALUES (3082,0,0,1000,2808,125); -- Vial Of Ebon Pigment (12.5%)
