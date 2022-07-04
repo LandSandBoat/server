@@ -329,6 +329,10 @@ bool CMobController::MobSkill(int wsList)
 
         if (PMobSkill->getValidTargets() == TARGET_ENEMY) // enemy
         {
+            if (PMob->GetBattleTarget()->StatusEffectContainer->HasStatusEffect(EFFECT_ALL_MISS) && PMob->GetBattleTarget()->StatusEffectContainer->GetStatusEffect(EFFECT_ALL_MISS)->GetPower() == 2) // Handles Super Jump
+            {
+                return false;
+            }
             PActionTarget = PTarget;
         }
         else if (PMobSkill->getValidTargets() == TARGET_SELF) // self
@@ -414,6 +418,12 @@ bool CMobController::TrySpecialSkill()
 bool CMobController::TryCastSpell()
 {
     TracyZoneScoped;
+
+     if (PMob->GetBattleTarget()->StatusEffectContainer->HasStatusEffect(EFFECT_ALL_MISS) && PMob->GetBattleTarget()->StatusEffectContainer->GetStatusEffect(EFFECT_ALL_MISS)->GetPower() == 2) // Handles Super Jump
+    {
+        return false;
+    }
+
     if (!CanCastSpells())
     {
         return false;
@@ -456,6 +466,14 @@ bool CMobController::CanCastSpells()
     if (!PMob->SpellContainer->HasSpells())
     {
         return false;
+    }
+
+    if (PMob->GetBattleTarget() != nullptr)
+    {
+        if (PMob->GetBattleTarget()->StatusEffectContainer->HasStatusEffect(EFFECT_ALL_MISS) && PMob->GetBattleTarget()->StatusEffectContainer->GetStatusEffect(EFFECT_ALL_MISS)->GetPower() == 2) // Handles Super Jump
+        {
+            return false;
+        }
     }
 
     // check for spell blockers e.g. silence

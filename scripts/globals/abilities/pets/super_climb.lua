@@ -16,6 +16,9 @@ end
 
 ability_object.onUseAbility = function(pet, target, ability)
     pet:queue(0, function(petArg)
+        petArg:addStatusEffectEx(xi.effect.ALL_MISS, xi.effect.NONE, 2, 3, 5)
+        petArg:addStatusEffectEx(xi.effect.PHYSICAL_SHIELD, xi.effect.NONE, 1, 3, 5)
+        petArg:addStatusEffectEx(xi.effect.MAGIC_SHIELD, xi.effect.NONE, 1, 3, 5)
         petArg:stun(5000)
     end)
 end
