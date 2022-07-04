@@ -8408,7 +8408,7 @@ INSERT INTO `mob_groups` VALUES (22,5741,118,'Wake_Warder_Wanda',3600,0,3004,750
 INSERT INTO `mob_groups` VALUES (23,4309,118,'Water_Elemental',960,4,2629,0,0,28,30,0);
 INSERT INTO `mob_groups` VALUES (24,646,118,'Carnivorous_Crawler',330,0,422,0,0,20,23,0);
 INSERT INTO `mob_groups` VALUES (25,1919,118,'Helldiver',0,32,1292,0,0,29,30,0);
-INSERT INTO `mob_groups` VALUES (26,552,118,'Buburimboo',0,32,369,0,0,30,31,0);
+INSERT INTO `mob_groups` VALUES (26,552,118,'Buburimboo',0,32,369,800,0,30,31,0);
 INSERT INTO `mob_groups` VALUES (27,6658,118,'Goblin_Digger',330,0,1040,0,0,19,21,0);
 INSERT INTO `mob_groups` VALUES (28,1983,118,'Hobgoblin_Warrior',0,128,0,0,0,30,35,0);
 INSERT INTO `mob_groups` VALUES (29,1984,118,'Hobgoblin_White_Mage',0,128,0,0,0,30,35,0);
@@ -12876,7 +12876,7 @@ INSERT INTO `mob_groups` VALUES (40,4704,197,'Mellonia',0,128,0,0,0,94,95,0);
 -- Maze_of_Shakhrami (Zone 198)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,2046,198,'Ichorous_Ire',0,128,1348,0,0,35,36,0);
+INSERT INTO `mob_groups` VALUES (1,2046,198,'Ichorous_Ire',0,128,1348,1200,0,35,36,0);
 INSERT INTO `mob_groups` VALUES (2,1635,198,'Goblin_Ambusher',300,0,1018,0,0,16,18,0);
 INSERT INTO `mob_groups` VALUES (3,1738,198,'Goblin_Tinkerer',300,0,1032,0,0,16,18,0);
 INSERT INTO `mob_groups` VALUES (4,1643,198,'Goblin_Butcher',300,0,1032,0,0,16,18,0);
