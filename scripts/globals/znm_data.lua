@@ -28,7 +28,8 @@ xi.znm.SOULPLATE_MAX_VALUE      = 150 -- The maximum amount of zeni per plate
 -- Set to true if you want ZNM pop item prices to stay fixed
 xi.znm.ZNM_STATIC_POP_PRICES = false
 
-xi.znm.ZNM_POP_COSTS = {
+xi.znm.ZNM_POP_COSTS =
+{
     [1] = {minPrice = 1000, maxPrice = 2500, addedPrice = 100, decayPrice = 100},
     [2] = {minPrice = 2000, maxPrice = 5000, addedPrice = 200, decayPrice = 200},
     [3] = {minPrice = 3000, maxPrice = 7500, addedPrice = 300, decayPrice = 300},
@@ -41,7 +42,8 @@ xi.znm.ZNM_POP_COSTS = {
 --- Their order matches Ryo's csid (913) 'eventUpdate' value
 --- 61 "Subjects of Interest", 54 "Recommended Fauna"
 ------------------------------------------------------------
-xi.znm.SANRAKUS_INTEREST = {
+xi.znm.SANRAKUS_INTEREST =
+{
     -- Some families were easier to verify using superfamilies, so the first value is a bool to check
     -- {isSuperFamID?, (super)familyID}
     [1]  = {isSuperFamID = 0, familyID = 197}, -- Pugil
@@ -107,7 +109,8 @@ xi.znm.SANRAKUS_INTEREST = {
     [61] = {isSuperFamID = 0, familyID = 233}, -- Soulflayer
 }
 
-xi.znm.SANRAKUS_FAUNA = { -- Recommended Fauna refer to a specific enemy, identified by zone and type
+xi.znm.SANRAKUS_FAUNA =
+{ -- Recommended Fauna refer to a specific enemy, identified by zone and type
     [1]  = {zone = xi.zone.MOUNT_ZHAYOLM,               name = "Cerberus"}, -- Mount Zhayolm
     [2]  = {zone = xi.zone.WAJAOM_WOODLANDS,            name = "Hydra"}, -- Wajaom Woodlands
     [3]  = {zone = xi.zone.ILRUSI_ATOLL,                name = "Cursed_Chest"}, -- Golden Salvage (Assault)
@@ -170,7 +173,8 @@ xi.znm.SANRAKUS_FAUNA = { -- Recommended Fauna refer to a specific enemy, identi
 ------------------------------------------------------------
 ---- Sanraku's Trophy Trades and Pop Items
 ------------------------------------------------------------
-xi.znm.TROPHIES = { -- [mob_trophy] = seal_rewarded
+xi.znm.TROPHIES =
+{ -- [mob_trophy] = seal_rewarded
     [xi.items.VULPANGUES_WING]          = xi.keyItem.MAROON_SEAL,
     [xi.items.CHAMROSHS_BEAK]           = xi.keyItem.MAROON_SEAL,
     [xi.items.GIGIROONS_CAPE]           = xi.keyItem.MAROON_SEAL,
@@ -203,7 +207,8 @@ xi.znm.TROPHIES = { -- [mob_trophy] = seal_rewarded
     [xi.items.TYGERS_TAIL]              = xi.keyItem.LAVENDER_COLORED_SEAL
 }
 
-xi.znm.POP_ITEMS = {
+xi.znm.POP_ITEMS =
+{
     -- Ordered to match the csid options
     -- { popitemID, ZNMtier (for pop price updating), seals_to_remove}
     {item = xi.items.HELLCAGE_BUTTERFLY,            tier = 1, seal = 0},                             -- Vulpangue
@@ -256,7 +261,8 @@ xi.znm.POP_ITEMS = {
 xi.znm.DefaultMenu = 0x7F8FE3F8
 
 -- Adjusts the bitmask based on owned seals
-xi.znm.MENU_BITMASKS = {
+xi.znm.MENU_BITMASKS =
+{
     [0x38]          = xi.keyItem.MAROON_SEAL,               -- Tinnin T2 ZNMs
     [0x1C0]         = xi.keyItem.APPLE_GREEN_SEAL,          -- Tinnin T3 ZNMs
     [0xE000]        = xi.keyItem.CERISE_SEAL,               -- Sarameya T2 ZNMs
