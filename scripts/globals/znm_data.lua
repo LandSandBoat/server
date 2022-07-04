@@ -19,6 +19,8 @@ xi.znm.SOULPLATE_NM_MULT        = 2   -- Generic NM multiplier (won't stack with
 xi.znm.SOULPLATE_FACING_MULT    = 1.5 -- Soultrapper used while facing the target
 xi.znm.SOULPLATE_HS_MULT        = 1.5 -- Using a High Speed soul plate
 xi.znm.SOULPLATE_TRADE_LIMIT    = 10  -- The number of soul plates players can trade per day
+xi.znm.SOULPLATE_MIN_VALUE      = 1   -- The minimum amount of zeni per plate
+xi.znm.SOULPLATE_MAX_VALUE      = 150 -- The maximum amount of zeni per plate
 
 -----------------------------------
 ---- ZNM Pop-Item Prices

@@ -95,8 +95,11 @@ end
 -----------------------------------
 xi.znm.soultrapper = xi.znm.soultrapper or {}
 
+-----------------------------------
+-- onItemCheck
+-----------------------------------
 xi.znm.soultrapper.onItemCheck = function(target, user)
-    if (target:isMob() == false or xi.pankration.prohibitedFamilies[target:getFamily()] ~= nil) then
+    if target:isMob() == false or xi.pankration.prohibitedFamilies[target:getFamily()] ~= nil then
         return xi.msg.basic.ITEM_NO_USE_ON_TARGET
     end
 
@@ -115,6 +118,31 @@ xi.znm.soultrapper.onItemCheck = function(target, user)
     return 0
 end
 
+-----------------------------------
+-- onItemUse
+-----------------------------------
+xi.znm.soultrapper.onItemUse = function(target, user, item)
+    -- Soul plate not guaranteed
+    if math.random(100) > xi.znm.SOULTRAPPER_SUCCESS then
+        user:messageBasic(xi.msg.basic.SOULTRAPPER_FAILED)
+    else
+        -- Determine Zeni starting value
+        local zeni = xi.znm.soultrapper.getZeniValue(target, user, item)
+
+        -- Pick a skill totally at random...
+        local skillIndex, skillEntry = utils.randomEntryIdx(xi.pankration.feralSkills)
+
+        -- Add plate
+        local plate = user:addSoulPlate(target:getName(), target:getFamily(), zeni, skillIndex, skillEntry.fp)
+        local data = plate:getSoulPlateData()
+        utils.unused(data)
+        user:messageBasic(xi.msg.basic.SOULTRAPPER_SUCCESS, 0, xi.items.SOUL_PLATE)
+    end
+end
+
+-----------------------------------
+-- onItemUse Helpers
+-----------------------------------
 xi.znm.soultrapper.getZeniValue = function(target, user, item)
     local hpp = target:getHPP()
     local isNM = target:isNM()
@@ -158,28 +186,9 @@ xi.znm.soultrapper.getZeniValue = function(target, user, item)
 
     -- Sanitize Zeni
     zeni = math.floor(zeni) -- Remove any floating point information
-    zeni = utils.clamp(zeni, 1, 150)
+    zeni = utils.clamp(zeni, xi.znm.SOULPLATE_MIN_VALUE, xi.znm.SOULPLATE_MAX_VALUE)
 
     return zeni
-end
-
-xi.znm.soultrapper.onItemUse = function(target, user, item)
-    -- Soul plate not guaranteed
-    if math.random(100) > xi.znm.SOULTRAPPER_SUCCESS then
-        user:messageBasic(xi.msg.basic.SOULTRAPPER_FAILED)
-    else
-        -- Determine Zeni starting value
-        local zeni = xi.znm.soultrapper.getZeniValue(target, user, item)
-
-        -- Pick a skill totally at random...
-        local skillIndex, skillEntry = utils.randomEntryIdx(xi.pankration.feralSkills)
-
-        -- Add plate
-        local plate = user:addSoulPlate(target:getName(), target:getFamily(), zeni, skillIndex, skillEntry.fp)
-        local data = plate:getSoulPlateData()
-        utils.unused(data)
-        user:messageBasic(xi.msg.basic.SOULTRAPPER_SUCCESS, 0, xi.items.SOUL_PLATE)
-    end
 end
 
 -----------------------------------
