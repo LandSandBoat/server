@@ -62,17 +62,6 @@ xi.mobskills.magicalTpBonus =
     RANGED      = 4,
 }
 
-local function MobTPMod(tp)
-    -- increase damage based on tp
-    if tp >= 3000 then
-        return 2
-    elseif tp >= 2000 then
-        return 1.5
-    end
-
-    return 1
-end
-
 local function getDexCritRate(source, target)
     -- https://www.bg-wiki.com/bg/Critical_Hit_Rate
     local dDex = source:getStat(xi.mod.DEX) - target:getStat(xi.mod.AGI)

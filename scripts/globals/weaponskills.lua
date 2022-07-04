@@ -998,7 +998,7 @@ function fTP(tp, ftp1, ftp2, ftp3)
     return 1 -- no ftp mod
 end
 
-function fTPMob(tp, ftp1, ftp2, ftp3)
+local function fTPMob(tp, ftp1, ftp2, ftp3)
     if (tp < 1000) then
         tp = 1000
     end
