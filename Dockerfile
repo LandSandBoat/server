@@ -28,11 +28,14 @@ ADD . /server
 # Configure and build
 RUN mkdir docker_build && cd docker_build && cmake .. && make -j $(nproc)  && cd .. && rm -r /server/docker_build
 
-# Copy the docker config files to the conf folder instead of the default config
-COPY /conf/default/* conf/
-
-# Copy the docker settings files to the settings folder instead of the default settings
-COPY /scripts/settings/default/* scripts/settings/
+# Set SQL_HOST in lua settings 
+RUN echo '\
+xi = xi or {}\n\
+xi.settings = xi.settings or {}\n\
+xi.settings.network =\n\
+{\n\
+    SQL_HOST     = "db",\n\
+}' >> settings/network.lua
 
 # Ensure wait_for_db_then_launch.sh is executable
 RUN chmod +x ./tools/wait_for_db_then_launch.sh
