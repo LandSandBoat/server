@@ -2,7 +2,7 @@
 -- Zantetsuken
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
@@ -19,12 +19,12 @@ ability_object.onPetAbility = function(target, pet, skill, master)
 
     if (target:isNM()) then
         local dmg = 0.1 * target:getHP() + 0.1 * target:getHP() * power
-        if (dmg > 9999) then
+        if dmg > 9999 then
             dmg = 9999
         end
         dmg = xi.mobskills.mobMagicalMove(pet, target, skill, dmg, xi.magic.ele.DARK, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 0)
         dmg = xi.mobskills.mobAddBonuses(pet, target, dmg.dmg, xi.magic.ele.DARK)
-        dmg = AvatarFinalAdjustments(dmg, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, 1)
+        dmg = xi.summon.avatarFinalAdjustments(dmg, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, 1)
         target:takeDamage(dmg, pet, xi.attackType.MAGICAL, xi.damageType.DARK)
         target:updateEnmityFromDamage(pet, dmg)
         return dmg

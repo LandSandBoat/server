@@ -27,7 +27,7 @@ local battlefields =
      -- { 1,  641,    0},   -- Follow the White Rabbit (ENM)
      -- { 2,  642,    0},   -- When Hell Freezes Over (ENM)
      -- { 3,  643,    0},   -- Brothers (ENM) -- TODO: Chthonian Ray mobskill
-     -- { 4,  644,    0},   -- Holy Cow (ENM)
+        { 4,  644,    0},   -- Holy Cow (ENM)
      -- { 5,    ?, 3454},   -- Taurassic Park (HKC30)
     },
 
@@ -633,11 +633,11 @@ local function checkReqs(player, npc, bfid, registrant)
         [ 609] = function() return ( mjob == xi.job.SMN and mlvl >= 20                                                                                                     ) end, -- Quest: Trial-size Trial by Water
         [ 611] = function() return ( asa == mi.asa.SUGAR_COATED_DIRECTIVE and player:hasKeyItem(xi.ki.DOMINAS_CERULEAN_SEAL)                                               ) end, -- ASA4: Sugar-coated Directive
         [ 640] = function() return ( cop == mi.cop.THREE_PATHS and player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.ULMIA) == 8 and
-                                     npc:getXPos() > -721 and npc:getXPos() < 719                                                                                          ) end, -- PM5-3 U3: Flames for the Dead
-        [ 641] = function() return ( player:hasKeyItem(xi.ki.ZEPHYR_FAN)                                                                                                   ) end, -- ENM: Follow the White Rabbit
-        [ 642] = function() return ( player:hasKeyItem(xi.ki.ZEPHYR_FAN)                                                                                                   ) end, -- ENM: When Hell Freezes Over
-        [ 643] = function() return ( player:hasKeyItem(xi.ki.ZEPHYR_FAN)                                                                                                   ) end, -- ENM: Brothers
-        [ 644] = function() return ( player:hasKeyItem(xi.ki.ZEPHYR_FAN)                                                                                                   ) end, -- ENM: Holy Cow
+                                     npcid == getEntranceOffset(0)                                                                                                         ) end, -- PM5-3 U3: Flames for the Dead
+        [ 641] = function() return ( player:hasKeyItem(xi.ki.ZEPHYR_FAN) and npcid == getEntranceOffset(2)                                                                 ) end, -- ENM: Follow the White Rabbit
+        [ 642] = function() return ( player:hasKeyItem(xi.ki.ZEPHYR_FAN) and npcid == getEntranceOffset(4)                                                                 ) end, -- ENM: When Hell Freezes Over
+        [ 643] = function() return ( player:hasKeyItem(xi.ki.ZEPHYR_FAN) and npcid == getEntranceOffset(6)                                                                 ) end, -- ENM: Brothers
+        [ 644] = function() return ( player:hasKeyItem(xi.ki.ZEPHYR_FAN) and npcid == getEntranceOffset(8)                                                                 ) end, -- ENM: Holy Cow
         [ 672] = function() return ( cop == mi.cop.THREE_PATHS and player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.ULMIA) == 7                        ) end, -- PM5-3 U2: Head Wind
         [ 673] = function() return ( player:hasKeyItem(xi.ki.MIASMA_FILTER)                                                                                                ) end, -- ENM: Like the Wind
         [ 674] = function() return ( player:hasKeyItem(xi.ki.MIASMA_FILTER)                                                                                                ) end, -- ENM: Sheep in Antlion's Clothing

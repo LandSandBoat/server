@@ -7,7 +7,7 @@
 --  Range: Unknown
 --  Notes: Can be Fire, Earth, Wind, or Water element.  Functions even at a distance (outside of melee range).
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------

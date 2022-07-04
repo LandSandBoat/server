@@ -83,7 +83,7 @@ uint32 CLuaBattlefield::getFightTime()
 
 sol::table CLuaBattlefield::getPlayers()
 {
-    auto table = luautils::lua.create_table();
+    auto table = lua.create_table();
     // clang-format off
     m_PLuaBattlefield->ForEachPlayer([&](CCharEntity* PChar)
     {
@@ -98,7 +98,7 @@ sol::table CLuaBattlefield::getPlayers()
 
 sol::table CLuaBattlefield::getMobs(bool required, bool adds)
 {
-    auto table = luautils::lua.create_table();
+    auto table = lua.create_table();
 
     if (required && !m_PLuaBattlefield->m_RequiredEnemyList.empty())
     {
@@ -127,7 +127,7 @@ sol::table CLuaBattlefield::getMobs(bool required, bool adds)
 
 sol::table CLuaBattlefield::getNPCs()
 {
-    auto table = luautils::lua.create_table();
+    auto table = lua.create_table();
     // clang-format off
     m_PLuaBattlefield->ForEachNpc(
     [&](CNpcEntity* PNpc)
@@ -140,7 +140,7 @@ sol::table CLuaBattlefield::getNPCs()
 
 sol::table CLuaBattlefield::getAllies()
 {
-    auto table = luautils::lua.create_table();
+    auto table = lua.create_table();
     // clang-format off
     m_PLuaBattlefield->ForEachAlly(
     [&](CMobEntity* PAlly)

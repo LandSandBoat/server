@@ -6,7 +6,7 @@
 -- !pos -19 -17 104 126
 -----------------------------------
 local ID = require("scripts/zones/Qufim_Island/IDs")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
@@ -81,13 +81,13 @@ entity.onEventFinish = function(player, csid, option)
 
         -- Calculate Reward
         if completedSeals == 3 then
-            player:addGil(xi.settings.GIL_RATE * 3000)
+            player:addGil(xi.settings.main.GIL_RATE * 3000)
         elseif completedSeals == 4 then
-            player:addGil(xi.settings.GIL_RATE * 10000)
+            player:addGil(xi.settings.main.GIL_RATE * 10000)
         elseif completedSeals == 5 then
-            player:addGil(xi.settings.GIL_RATE * 30000)
+            player:addGil(xi.settings.main.GIL_RATE * 30000)
         elseif completedSeals == 6 then
-            player:addGil(xi.settings.GIL_RATE * 50000)
+            player:addGil(xi.settings.main.GIL_RATE * 50000)
         end
 
         -- Clean Up Remaining Key Items

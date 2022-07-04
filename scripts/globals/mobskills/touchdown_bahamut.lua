@@ -4,7 +4,7 @@
 --  Description: Deals magical damage to enemies in an area of effect.
 --  Further Notes: Bahamut can use this as a regular move at will.
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------

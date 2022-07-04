@@ -11,7 +11,7 @@ require('scripts/globals/keyitems')
 require('scripts/globals/maws')
 require('scripts/globals/missions')
 require('scripts/globals/quests')
-require('scripts/settings/main')
+require('scripts/globals/settings')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
@@ -34,12 +34,12 @@ mission.sections =
 
         [xi.zone.LA_VAULE_S] =
         {
-            ['_2d1'] = mission:progressEvent(2, 85),
+            ['_2d1'] = mission:progressEvent(2, 85, 3456, utils.MAX_UINT32 - 207616, 1525, 0, 19550816, 0, 0),
 
             onEventFinish =
             {
                 [2] = function(player, csid, option, npc)
-                    player:setMissionStatus(xi.mission.log_id.WOTG, 1)
+                    player:setMissionStatus(mission.areaId, 1)
                 end,
             },
         },
@@ -53,24 +53,27 @@ mission.sections =
 
         [xi.zone.LA_VAULE_S] =
         {
+            onZoneIn =
+            {
+                function(player, prevZone)
+                    if player:getMissionStatus(mission.areaId) == 2 then
+                        return 6
+                    end
+                end,
+            },
+
             onEventFinish =
             {
                 -- Completed BCNM
                 [32001] = function(player, csid, option, npc)
                     if player:getLocalVar('battlefieldWin') == 2721 then
-                        if option == 5 then -- Didn't skip CS
-                            return mission:event(6)
-                        else -- Skipped CS
-                            mission:complete(player)
-                            player:setPos(-260, 0, -156, 192, 85)
-                        end
+                        player:setMissionStatus(mission.areaId, 2)
+                        player:setPos(-260.44, 0.134, -156.652, 192, xi.zone.LA_VAULE_S)
                     end
                 end,
 
                 [6] = function(player, csid, option, npc)
-                    if mission:complete(player) then
-                        player:setPos(-260, 0, -156, 192, 85)
-                    end
+                    mission:complete(player)
                 end,
             },
         },

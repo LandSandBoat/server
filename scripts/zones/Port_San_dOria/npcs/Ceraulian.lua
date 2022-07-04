@@ -6,7 +6,7 @@
 -----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/quests")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Port_San_dOria/IDs")
 -----------------------------------
@@ -27,11 +27,11 @@ entity.onTrigger = function(player, npc)
     local stalkerStatus   = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.KNIGHT_STALKER)
     local stalkerProgress = player:getCharVar("KnightStalker_Progress")
 
-    if (player:getMainLvl() >= xi.settings.ADVANCED_JOB_LEVEL and player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST) == QUEST_AVAILABLE) then
+    if (player:getMainLvl() >= xi.settings.main.ADVANCED_JOB_LEVEL and player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_HOLY_CREST) == QUEST_AVAILABLE) then
         player:startEvent(24)
 
     -- Chasing Quotas (DRG AF2)
-    elseif (quotasStatus == QUEST_AVAILABLE and player:getMainJob() == xi.job.DRG and player:getMainLvl() >= xi.settings.AF1_QUEST_LEVEL and quotasNo == 0) then
+    elseif (quotasStatus == QUEST_AVAILABLE and player:getMainJob() == xi.job.DRG and player:getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL and quotasNo == 0) then
         player:startEvent(18) -- Long version of quest start
     elseif (quotasNo == 1) then
         player:startEvent(14) -- Short version for those that said no.

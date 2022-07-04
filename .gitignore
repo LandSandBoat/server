@@ -201,6 +201,7 @@ cmake_install.cmake
 
 # non-default settings script files containing server specific things
 /scripts/settings/main.lua
+/settings/*.lua
 
 # Tool/misc configs
 /tools/config.yaml

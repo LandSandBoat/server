@@ -5,7 +5,7 @@
 -- !pos 29 -15 55 249
 -----------------------------------
 require("scripts/globals/titles")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/shop")
 require("scripts/globals/quests")
@@ -78,8 +78,8 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, item)
         else
             if (option == 5) then
-                player:addGil(xi.settings.GIL_RATE * 10000)
-                player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 10000) -- Gil
+                player:addGil(xi.settings.main.GIL_RATE * 10000)
+                player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 10000) -- Gil
             elseif (option == 6) then
                 player:addSpell(303) -- Ramuh Spell
                 player:messageSpecial(ID.text.RAMUH_UNLOCKED, 0, 0, 5)

@@ -4,7 +4,7 @@
 -- Item Effect: Casts Curaga
 -----------------------------------
 require("scripts/globals/msg")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 -----------------------------------
 local item_object = {}
 
@@ -17,7 +17,7 @@ item_object.onItemUse = function(target)
         local healAmount = math.random(60, 90)
 
         healAmount = healAmount + (healAmount * (member:getMod(xi.mod.CURE_POTENCY_RCVD)/100))
-        healAmount = healAmount * xi.settings.CURE_POWER
+        healAmount = healAmount * xi.settings.main.CURE_POWER
 
         local diff = (member:getMaxHP() - member:getHP())
         if (healAmount > diff) then

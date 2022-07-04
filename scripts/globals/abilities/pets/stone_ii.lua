@@ -1,11 +1,10 @@
 -----------------------------------
 -- Stone 2
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 require("scripts/globals/magic")
-
 -----------------------------------
 local ability_object = {}
 
@@ -21,7 +20,7 @@ ability_object.onPetAbility = function(target, pet, skill)
     damage = damage + (dINT * 1.5)
     damage = xi.mobskills.mobMagicalMove(pet, target, skill, damage, xi.magic.ele.EARTH, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 0)
     damage = xi.mobskills.mobAddBonuses(pet, target, damage.dmg, xi.magic.ele.EARTH)
-    damage = AvatarFinalAdjustments(damage, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.EARTH, 1)
+    damage = xi.summon.avatarFinalAdjustments(damage, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.EARTH, 1)
 
     target:takeDamage(damage, pet, xi.attackType.MAGICAL, xi.damageType.EARTH)
     target:updateEnmityFromDamage(pet, damage)

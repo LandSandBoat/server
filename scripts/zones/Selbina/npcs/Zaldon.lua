@@ -8,7 +8,7 @@
 local ID = require("scripts/zones/Selbina/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
@@ -499,8 +499,8 @@ local function giveReward(player, csid)
 
         if traded then
             player:confirmTrade()
-            player:addGil(xi.settings.GIL_RATE * reward.gil)
-            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * reward.gil)
+            player:addGil(xi.settings.main.GIL_RATE * reward.gil)
+            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * reward.gil)
             player:setCharVar("insideBellyFishId", 0)
             player:setCharVar("insideBellyItemIdx", 0)
             if player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.INSIDE_THE_BELLY) == QUEST_ACCEPTED then

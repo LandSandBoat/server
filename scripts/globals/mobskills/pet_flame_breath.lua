@@ -4,7 +4,7 @@
 --  Description: Deals Flame breath damage to enemies within a fan-shaped area originating from the caster.
 --  Type: Magical (Flame)
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------

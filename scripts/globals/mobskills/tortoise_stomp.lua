@@ -7,7 +7,7 @@
 --  Range: Varying Area of Effect
 --  Notes:
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------

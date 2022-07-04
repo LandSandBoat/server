@@ -6,7 +6,7 @@
 --  Range:
 --  Notes: Ejects all combatants from the battlefield, resulting in a failure.
 ---------------------------------------------------
-require("scripts/settings/main")
+require("settings/main")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 require("scripts/globals/msg")

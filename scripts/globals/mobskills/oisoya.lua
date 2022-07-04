@@ -6,7 +6,7 @@
 --  Range: Ranged Attack
 --  Notes: Unique ranged weaponskill used by Tenzen during The Warrior's Path. Also used by Trust: Tenzen II.
 ---------------------------------------------------
-require("scripts/settings/main")
+require("settings/main")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 ---------------------------------------------------

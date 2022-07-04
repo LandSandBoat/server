@@ -6,7 +6,7 @@
 -- Duration: 1:00 or until next Weapon Skill
 -----------------------------------
 require("scripts/globals/weaponskills")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
