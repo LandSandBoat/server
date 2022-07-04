@@ -419,9 +419,12 @@ bool CMobController::TryCastSpell()
 {
     TracyZoneScoped;
 
-     if (PMob->GetBattleTarget()->StatusEffectContainer->HasStatusEffect(EFFECT_ALL_MISS) && PMob->GetBattleTarget()->StatusEffectContainer->GetStatusEffect(EFFECT_ALL_MISS)->GetPower() == 2) // Handles Super Jump
+    if (PMob->GetBattleTarget() != nullptr)
     {
-        return false;
+        if (PMob->GetBattleTarget()->StatusEffectContainer->HasStatusEffect(EFFECT_ALL_MISS) && PMob->GetBattleTarget()->StatusEffectContainer->GetStatusEffect(EFFECT_ALL_MISS)->GetPower() == 2) // Handles Super Jump
+        {
+            return false;
+        }
     }
 
     if (!CanCastSpells())
