@@ -235,7 +235,7 @@ end
 -----------------------------------
 xi.znm.sanraku = xi.znm.sanraku or {}
 
-local platesTradedToday = function(player)
+xi.znm.platesTradedToday = function(player)
     local currentDay = VanadielUniqueDay()
     local storedDay = xi.znm.playerTradingDay(player)
 
@@ -253,7 +253,7 @@ xi.znm.sanraku.onTrade = function(player, npc, trade)
         if trade:getItemId() == xi.items.SOUL_PLATE then
             if not player:hasKeyItem(xi.ki.RHAPSODY_IN_AZURE) then
                 local trade_limit = xi.znm.SOULPLATE_TRADE_LIMIT
-                if platesTradedToday(player) >= trade_limit then
+                if xi.znm.platesTradedToday(player) >= trade_limit then
                     player:showText(npc,13125,1,xi.items.SOUL_PLATE,trade_limit)
                     return
                 end
