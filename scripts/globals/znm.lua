@@ -296,9 +296,25 @@ xi.znm.sanraku.handleTradeWithTrophy = function(player, npc, item)
     end
 end
 
------ Helper Function for onTrigger
+
+------------------------------------
+-- onTrigger
+------------------------------------
+xi.znm.sanraku.onTrigger = function(player, npc)
+    -- ZNM and Zeni Ineractions
+    if xi.znm.playerHasSpokenToSanrakuBefore(player) then
+        local param = xi.znm.sanraku.menu(player)
+        player:startEvent(909,param)
+    else -- First time introduction
+        player:startEvent(908)
+    end
+end
+
+------------------------------------
+-- onTrigger Helpers
+------------------------------------
 -- Update Sanraku's ZNM menu (csid 909) based on owned seals
-xi.znm.SanrakuMenu = function(player)
+xi.znm.sanraku.menu = function(player)
     -- Default: Tier 1 ZNMs + "Don't Ask"
     -- (if bit = 0: add ZNM to Sanraku's Menu)
     local param = xi.znm.DefaultMenu
@@ -315,17 +331,8 @@ xi.znm.SanrakuMenu = function(player)
             end
         end
     end
-    return param
-end
 
-xi.znm.sanraku.onTrigger = function(player, npc)
-    -- ZNM and Zeni Ineractions
-    if xi.znm.playerHasSpokenToSanrakuBefore(player) then
-        local param = xi.znm.SanrakuMenu(player)
-        player:startEvent(909,param)
-    else -- First time introduction
-        player:startEvent(908)
-    end
+    return param
 end
 
 xi.znm.sanraku.onEventUpdate = function(player, csid, option)
