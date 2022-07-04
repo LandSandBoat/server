@@ -178,35 +178,33 @@ local function applyRoll(caster, target, inAbility, action, total, isDoubleup, c
         effectpower = effectpower * (caster:getSubLvl() / target:getMainLvl())
     end
 
-    if not target:getStatusEffect(xi.effect.ALL_MISS):getPower() == 2 then
-        if target:addCorsairRoll(caster:getMainJob(), caster:getMerit(xi.merit.BUST_DURATION), corsairRollMods[abilityId][4], effectpower, 0, duration, caster:getID(), total, corsairRollMods[abilityId][5]) == false then
-            -- no effect or otherwise prevented
-            if caster:getID() == target:getID() then                  -- dead code? you can't roll if the same roll is already active. There is no known buff that would prevent a corsair roll.
-                currentAbility:setMsg(xi.msg.basic.ROLL_MAIN_FAIL)    -- no effect for the COR rolling if they had the buff already
-            else
-                currentAbility:setMsg(xi.msg.basic.NO_EFFECT)         -- no effect for the target if they had the buff already. Testing in retail shows it's _not_ xi.msg.basic.ROLL_SUB_FAIL if the roll is already active. There is no known buff that would prevent a corsair roll, so maybe this would be used there if there were one?
-            end
-        elseif total > 11 then
-            -- bust
-            if caster:getID() == target:getID() then
-                currentAbility:setMsg(xi.msg.basic.DOUBLEUP_BUST)     -- bust message for the COR rolling
-            else
-                currentAbility:setMsg(xi.msg.basic.DOUBLEUP_BUST_SUB) -- bust message for the target getting the roll
-            end
+    if target:addCorsairRoll(caster:getMainJob(), caster:getMerit(xi.merit.BUST_DURATION), corsairRollMods[abilityId][4], effectpower, 0, duration, caster:getID(), total, corsairRollMods[abilityId][5]) == false then
+        -- no effect or otherwise prevented
+        if caster:getID() == target:getID() then                  -- dead code? you can't roll if the same roll is already active. There is no known buff that would prevent a corsair roll.
+            currentAbility:setMsg(xi.msg.basic.ROLL_MAIN_FAIL)    -- no effect for the COR rolling if they had the buff already
         else
-            -- success
-            if caster:getID() == target:getID() then
-                if isDoubleup then
-                    currentAbility:setMsg(xi.msg.basic.DOUBLEUP)      -- success on doubleup for COR has different message than from just using Phantom Roll
-                else
-                    currentAbility:setMsg(xi.msg.basic.ROLL_MAIN)     -- success message for the COR rolling the first time
-                end
-            else
-                currentAbility:setMsg(xi.msg.basic.ROLL_SUB)          -- message for the target getting the roll. Always the same, even if it's the COR's first roll.
-            end
+            currentAbility:setMsg(xi.msg.basic.NO_EFFECT)         -- no effect for the target if they had the buff already. Testing in retail shows it's _not_ xi.msg.basic.ROLL_SUB_FAIL if the roll is already active. There is no known buff that would prevent a corsair roll, so maybe this would be used there if there were one?
+        end
+    elseif total > 11 then
+        -- bust
+        if caster:getID() == target:getID() then
+            currentAbility:setMsg(xi.msg.basic.DOUBLEUP_BUST)     -- bust message for the COR rolling
+        elseif target:getStatusEffect(xi.effect.ALL_MISS):getPower() == 2 then -- Handle Super Jump
+            currentAbility:setMsg(xi.msg.basic.NO_EFFECT)
+        else
+            currentAbility:setMsg(xi.msg.basic.DOUBLEUP_BUST_SUB) -- bust message for the target getting the roll
         end
     else
-        currentAbility:setMsg(xi.msg.basic.NO_EFFECT)
+        -- success
+        if caster:getID() == target:getID() then
+            if isDoubleup then
+                currentAbility:setMsg(xi.msg.basic.DOUBLEUP)      -- success on doubleup for COR has different message than from just using Phantom Roll
+            else
+                currentAbility:setMsg(xi.msg.basic.ROLL_MAIN)     -- success message for the COR rolling the first time
+            end
+        else
+            currentAbility:setMsg(xi.msg.basic.ROLL_SUB)          -- message for the target getting the roll. Always the same, even if it's the COR's first roll.
+        end
     end
 
     return total
