@@ -10583,8 +10583,8 @@ INSERT INTO `mob_droplist` VALUES (1275,0,0,1000,3209,@UNCOMMON);  -- Savants Se
 INSERT INTO `mob_droplist` VALUES (1275,0,0,1000,17047,@UNCOMMON); -- Magnus Hammer (Uncommon, 10%)
 
 -- ZoneID:   3 - Harajnite
-INSERT INTO `mob_droplist` VALUES (1276,0,0,1000,1618,120); -- Uragnite Shell (12.0%)
-INSERT INTO `mob_droplist` VALUES (1276,0,0,1000,1719,80);  -- Harajnite Shell (8.0%)
+INSERT INTO `mob_droplist` VALUES (1276,0,0,1000,1618,@UNCOMMON); -- Uragnite Shell (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (1276,0,0,1000,1719,@RARE);     -- Harajnite Shell (Rare, 5%)
 
 -- ZoneID: 208 - Hastatus Xi-Xii
 INSERT INTO `mob_droplist` VALUES (1277,0,0,1000,1479,@ALWAYS); -- Xhifhut Head (Always, 100%)
@@ -23435,10 +23435,10 @@ INSERT INTO `mob_droplist` VALUES (2810,0,0,1000,17953,300); -- Zoraal Jas Axe (
 INSERT INTO `mob_droplist` VALUES (2810,2,0,1000,2150,0);    -- Colibri Feather (Steal)
 
 -- ZoneID:   3 - Zoredonite
-INSERT INTO `mob_droplist` VALUES (2811,0,0,1000,888,340);         -- Seashell (34.0%)
-INSERT INTO `mob_droplist` VALUES (2811,0,0,1000,14668,@UNCOMMON); -- Zoredonite Ring (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (2811,0,0,1000,888,@RARE);       -- Seashell (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (2811,0,0,1000,14668,@VCOMMON);  -- Zoredonite Ring (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (2811,0,0,1000,15173,@UNCOMMON); -- Kosshin (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (2811,0,0,1000,15300,@UNCOMMON); -- Nebimonite Belt (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (2811,0,0,1000,15300,@ALWAYS);   -- Nebimonite Belt (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (2811,0,0,1000,17450,@UNCOMMON); -- Healing Mace (Uncommon, 10%)
 
 -- ZoneID: 118 - Zu

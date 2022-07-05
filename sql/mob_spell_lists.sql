@@ -4997,6 +4997,11 @@ INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 252, 1, 255); -- stun (1
 INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 253, 1, 255); -- sleep (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 274, 1, 255); -- sleepga ii (1~255)
 
+-- Zoredonite (498)
+INSERT INTO `mob_spell_lists` VALUES ('Zoredonite',498,3,1,255);   -- cure_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Zoredonite',498,30,1,255);  -- banish_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Zoredonite',498,112,1,255); -- flash (1~255)
+
 -- Slendlix Spindlethumb (498)
 INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',499,3,1,255);  -- cure_iii (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',499,23,1,255); -- dia (1~255)

@@ -129,7 +129,7 @@ INSERT INTO `mob_groups` VALUES (52,6809,2,'Orcfeltrap',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (1,1516,3,'Ghost_Crab_fished',0,128,93,0,0,30,34,0);
 INSERT INTO `mob_groups` VALUES (2,5868,3,'Greater_Pugil_fished',0,128,147,0,0,35,39,0);
 INSERT INTO `mob_groups` VALUES (3,6029,3,'Kraken_fished',0,128,1464,0,0,40,42,0);
-INSERT INTO `mob_groups` VALUES (4,1891,3,'Harajnite',0,128,1276,0,0,44,46,0);
+INSERT INTO `mob_groups` VALUES (4,1891,3,'Harajnite',0,128,1276,10000,0,44,46,0);
 INSERT INTO `mob_groups` VALUES (5,881,3,'Cyclopean_Conch',0,128,556,0,0,44,46,0);
 INSERT INTO `mob_groups` VALUES (6,5864,3,'Cutter_fished',0,128,93,0,0,25,35,0);
 
@@ -137,7 +137,7 @@ INSERT INTO `mob_groups` VALUES (7,1304,3,'Fatty_Pugil',0,128,821,0,0,25,35,0);
 INSERT INTO `mob_groups` VALUES (8,4106,3,'Uragnite',0,128,2527,0,0,30,37,0);
 INSERT INTO `mob_groups` VALUES (9,746,3,'Clot',0,128,487,0,0,30,35,0);
 INSERT INTO `mob_groups` VALUES (10,769,3,'Colossal_Calamari',0,128,504,0,0,40,42,0);
-INSERT INTO `mob_groups` VALUES (11,4519,3,'Zoredonite',0,128,2811,0,0,62,62,0);
+INSERT INTO `mob_groups` VALUES (11,4519,3,'Zoredonite',0,128,2811,2000,0,62,62,0);
 
 -- ------------------------------------------------------------
 -- Bibiki_Bay (Zone 4)
