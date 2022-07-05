@@ -23,6 +23,12 @@ xi.wotg.helpers = xi.wotg.helpers or {}
 --
 --      They are laid out differently, so be careful!
 
+xi.wotg.helpers.hasCompletedFirstQuest = function(player)
+    return player:hasCompletedQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.STEAMED_RAMS) or
+        player:hasCompletedQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SNAKE_ON_THE_PLAINS) or
+        player:hasCompletedQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_FIGHTING_FOURTH)
+end
+
 -- WOTG3: Cait Sith
 xi.wotg.helpers.meetsMission3Reqs = function(player)
     -- TODO: Add one day wait

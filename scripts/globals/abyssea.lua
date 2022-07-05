@@ -12,6 +12,19 @@ require("scripts/globals/zone")
 xi = xi or {}
 xi.abyssea = xi.abyssea or {}
 
+xi.abyssea.exitPositions =
+{
+    [xi.zone.ABYSSEA_KONSCHTAT]  = {   88.4, -68.09, -579.97, 128, 108 },
+    [xi.zone.ABYSSEA_TAHRONGI]   = {  -28.6,  46.17,  -680.3, 192, 117 },
+    [xi.zone.ABYSSEA_LA_THEINE]  = {   -562,      0,     640, 158, 102 },
+    [xi.zone.ABYSSEA_ATTOHWA]    = {   -340, -23.36,   48.49,  31, 118 },
+    [xi.zone.ABYSSEA_MISAREAUX]  = { 363.47,      0, -119.72, 129, 103 },
+    [xi.zone.ABYSSEA_VUNKERL]    = { 242.98,   0.24,    8.72, 157, 104 },
+    [xi.zone.ABYSSEA_ALTEPA]     = {    340,  -0.52,    -668, 192, 107 },
+    [xi.zone.ABYSSEA_ULEGUERAND] = {    270,   -7.8,     -82,  64, 112 },
+    [xi.zone.ABYSSEA_GRAUBERG]   = {    -64,      0,     600,   0, 106 },
+}
+
 xi.abyssea.lightType =
 {
     PEARL   = 1,
@@ -650,7 +663,6 @@ local checkMobID = function(zoneId, mobId)
     end
     return false
 end
-
 
 xi.abyssea.qmOnTrigger = function(player, npc, mobId, kis, tradeReqs)
     -- validate QM pop data

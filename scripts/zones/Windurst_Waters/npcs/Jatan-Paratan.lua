@@ -23,7 +23,6 @@ entity.onTrigger = function(player, npc)
 
             --        player:delQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
 
-
     local wonderingstatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
     local fame = player:getFameLevel(xi.quest.fame_area.WINDURST)
     if (wonderingstatus == QUEST_AVAILABLE and fame >= 5) then

@@ -48,14 +48,14 @@ enum class Mod
 
     // Magic Evasion versus elements (resistance)
     // This has been repeatedly mixed up with SDT - be careful!
-    FIRE_RES    = 15, // Fire Resistance
-    ICE_RES     = 16, // Ice Resistance
-    WIND_RES    = 17, // Wind Resistance
-    EARTH_RES   = 18, // Earth Resistance
-    THUNDER_RES = 19, // Thunder Resistance
-    WATER_RES   = 20, // Water Resistance
-    LIGHT_RES   = 21, // Light Resistance
-    DARK_RES    = 22, // Dark Resistance
+    FIRE_MEVA    = 15, // Fire Resistance
+    ICE_MEVA     = 16, // Ice Resistance
+    WIND_MEVA    = 17, // Wind Resistance
+    EARTH_MEVA   = 18, // Earth Resistance
+    THUNDER_MEVA = 19, // Thunder Resistance
+    WATER_MEVA   = 20, // Water Resistance
+    LIGHT_MEVA   = 21, // Light Resistance
+    DARK_MEVA    = 22, // Dark Resistance
 
     ATT  = 23, // Attack
     RATT = 24, // Ranged Attack

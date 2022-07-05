@@ -122,7 +122,6 @@ local function fTP(tp, ftp1, ftp2, ftp3)
     return 1 -- no ftp mod
 end
 
-
 xi.mobskills.mobRangedMove = function(mob, target, skill, numberofhits, accmod, dmgmod, tpeffect)
     -- this will eventually contian ranged attack code
     return xi.mobskills.mobPhysicalMove(mob, target, skill, numberofhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.RANGED)
@@ -220,7 +219,6 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
     else
         maxRatio = ratio
     end
-
 
     if ratio < 0.38 then
         minRatio =  0
@@ -601,7 +599,6 @@ xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType,
     elseif attackType == xi.attackType.RANGED then
         dmg = target:rangedDmgTaken(dmg)
     end
-
 
     if dmg < 0 then
         return dmg

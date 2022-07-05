@@ -125,7 +125,6 @@ local function rewardAugmentParams(t)
     return augBits1, augBits2
 end
 
-
 local function checkAndSetProgression(player, trialId, conditions, multiplier)
     local trials = xi.magian.trials
     local cachePosition, cacheData = hasTrial(player, trialId)
@@ -147,8 +146,6 @@ local function checkAndSetProgression(player, trialId, conditions, multiplier)
         end
     end
 end
-
-
 
 local function checkItemIdExistsInTable(table, itemId)
     local exists = false
@@ -206,8 +203,6 @@ local function getItemIdByTrials(trialId)
     return itemId
 end
 
-
-
 local function returnUselessItems(player, items, itemIdException)
     for i,item in ipairs(items) do
         if item.id ~= itemIdException and item.quantity then
@@ -218,7 +213,6 @@ local function returnUselessItems(player, items, itemIdException)
         end
     end
 end
-
 
 -----------------------------------
 -- Delivery Crate
@@ -608,7 +602,6 @@ xi.magian.magianOnEventFinish = function(player, csid, option, EVENT_IDS)
         player:setLocalVar("invalidItem", 0)
         player:setLocalVar("storeTrialId", 0)
         player:setLocalVar("storeItemId", 0)
-
 
     -- gives back item after removing trial id
     elseif csid == EVENT_IDS[5] and (optionMod == 8 or optionMod == 11) then

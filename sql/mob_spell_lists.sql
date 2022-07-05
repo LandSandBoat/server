@@ -4925,7 +4925,18 @@ INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',486,204,1,255); -- flare (1~255
 INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',486,235,1,255); -- burn (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',486,249,1,255); -- blaze_spikes (1~255)
 
--- Next Available: 487
+-- Shen (487)
+INSERT INTO `mob_spell_lists` VALUES ('Shen',487,172,1,255); -- water_iv (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Shen',487,201,1,255); -- waterga_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Shen',487,214,1,255); -- flood (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Shen',487,240,1,255); -- drown (1-255)
+
+-- Shen's Filtrate (488)
+INSERT INTO `mob_spell_lists` VALUES ('Shens_Filtrate',488,172,1,255); -- water_iv (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Shens_Filtrate',488,201,1,255); -- waterga_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Shens_Filtrate',488,214,1,255); -- flood (1~255)
+
+-- Next Available: 489
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -4938,4 +4949,3 @@ UNLOCK TABLES;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-

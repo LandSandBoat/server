@@ -10,4 +10,3 @@ CREATE TABLE `char_spells` (
   INDEX `char_spells_spellid_index` (`spellid`),
   UNIQUE KEY `idx_char_spells_spellid_charid` (`spellid`,`charid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-

@@ -350,7 +350,6 @@ mission.sections =
         {
             ['_5e9'] = mission:event(44),
 
-
             onEventFinish =
             {
                 [44] = function(player, csid, option, npc)
