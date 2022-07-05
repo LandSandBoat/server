@@ -538,7 +538,6 @@ INSERT INTO `mob_groups` VALUES (36,6718,12,'Sword_Sorcerer_Solisoq',3600,0,3224
 INSERT INTO `mob_groups` VALUES (37,2684,12,'Moblin_Aidman',0,128,1703,0,0,75,79,0);
 INSERT INTO `mob_groups` VALUES (38,2692,12,'Moblin_Engineman',0,128,1708,0,0,75,79,0);
 
-
 -- ------------------------------------------------------------
 -- Mine_Shaft_2716 (Zone 13)
 -- ------------------------------------------------------------
@@ -8677,7 +8676,6 @@ INSERT INTO `mob_groups` VALUES (56,4730,121,'Holey_Horror',0,128,0,0,0,60,60,0)
 INSERT INTO `mob_groups` VALUES (57,4732,121,'Cath_Palug',0,128,0,0,9999,94,95,0);
 INSERT INTO `mob_groups` VALUES (58,4731,121,'Grwnan',0,128,0,0,9999,90,91,0);
 INSERT INTO `mob_groups` VALUES (59,4854,121,'Keeper_of_Heiligtum',0,128,0,0,0,0,0,0);
-
 
 -- ------------------------------------------------------------
 -- RoMaeve (Zone 122)
