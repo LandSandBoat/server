@@ -4998,6 +4998,14 @@ INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 252, 1, 255); -- stun (1
 INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 253, 1, 255); -- sleep (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 274, 1, 255); -- sleepga ii (1~255)
 
+-- Hazmat (493)
+INSERT INTO `mob_spell_lists` VALUES ('Hazmat',495,204,1,255); -- flare (1~255)
+
+-- Lii Jixa the Somnolist (494)
+INSERT INTO `mob_spell_lists` VALUES ('Lii_Jixa_the_Somnolist',496,3,1,255);  -- cure_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Lii_Jixa_the_Somnolist',496,29,1,255); -- banish_ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Lii_Jixa_the_Somnolist',496,98,1,255); -- repose (1~255)
+
 -- Slendlix Spindlethumb (498)
 INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',499,3,1,255);  -- cure_iii (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',499,23,1,255); -- dia (1~255)

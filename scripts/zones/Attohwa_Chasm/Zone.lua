@@ -85,6 +85,13 @@ zone_object.onGameHour = function(zone)
         starting at ID.npc.MIASMA_OFFSET. some are supposed to toggle open, but need retail test
         to determine which.  for now, they're just statically set per npc_list.animation
     --]]
+
+    -- Don't allow Citipati to spawn outside of night
+    if VanadielHour() >= 4 and VanadielHour() < 20 then
+        DisallowRespawn(ID.mob.CITIPATI, true)
+    else
+        DisallowRespawn(ID.mob.CITIPATI, false)
+    end
 end
 
 zone_object.onEventUpdate = function(player, csid, option)
