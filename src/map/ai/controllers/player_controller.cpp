@@ -243,6 +243,16 @@ void CPlayerController::setLastErrMsgTime(time_point _LastErrMsgTime)
     m_errMsgTime = _LastErrMsgTime;
 }
 
+time_point CPlayerController::getLastRangedAttackTime()
+{
+    return m_lastRangedAttackTime;
+}
+
+void CPlayerController::setLastRangedAttackTime(time_point _lastRangedAttackTime)
+{
+    m_lastRangedAttackTime = _lastRangedAttackTime;
+}
+
 time_point CPlayerController::getLastErrMsgTime()
 {
     return m_errMsgTime;

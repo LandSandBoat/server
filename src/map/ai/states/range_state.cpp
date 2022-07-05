@@ -136,7 +136,16 @@ bool CRangeState::Update(time_point tick)
         Complete();
     }
 
-    return IsCompleted() && tick > GetEntryTime() + m_aimTime + 1.5s;
+    if (IsCompleted())
+    {
+        if (tick > GetEntryTime() + m_aimTime + m_returnWeaponDelay)
+        {
+            ((CCharEntity*)m_PEntity)->m_LastRangedAttackTime = GetEntryTime() + m_aimTime + m_returnWeaponDelay;
+            return true;
+        }
+    }
+
+    return false;
 }
 
 void CRangeState::Cleanup(time_point tick)
@@ -155,12 +164,6 @@ bool CRangeState::CanUseRangedAttack(CBattleEntity* PTarget)
     {
         CItemWeapon* PRanged = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_RANGED));
         CItemWeapon* PAmmo   = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_AMMO));
-
-        if (!((PRanged && PRanged->isType(ITEM_WEAPON)) || (PAmmo && PAmmo->isThrowing())))
-        {
-            m_errorMsg = std::make_unique<CMessageBasicPacket>(PChar, PChar, 0, 0, MSGBASIC_NO_RANGED_WEAPON);
-            return false;
-        }
 
         auto SkillType = PRanged ? PRanged->getSkillType() : PAmmo->getSkillType();
 
@@ -202,6 +205,11 @@ bool CRangeState::CanUseRangedAttack(CBattleEntity* PTarget)
     if (!m_PEntity->PAI->TargetFind->canSee(&PTarget->loc.p))
     {
         m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, PTarget, 0, 0, MSGBASIC_CANNOT_PERFORM_ACTION);
+        return false;
+    }
+    if (m_PEntity->PAI->getTick() - ((CCharEntity*)m_PEntity)->m_LastRangedAttackTime < m_freePhaseTime)
+    {
+        m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, PTarget, 0, 0, MSGBASIC_WAIT_LONGER);
         return false;
     }
 

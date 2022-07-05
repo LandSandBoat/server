@@ -686,6 +686,17 @@ uint16 CBattleEntity::RATT(uint8 skill, float distance, uint16 bonusSkill)
     return ATT + (ATT * m_modStat[Mod::RATTP] / 100) + std::min<int16>((ATT * m_modStat[Mod::FOOD_RATTP] / 100), m_modStat[Mod::FOOD_RATT_CAP]);
 }
 
+uint16 CBattleEntity::GetBaseRATT(uint8 skill, uint16 bonusSkill)
+{
+    auto* PWeakness = StatusEffectContainer->GetStatusEffect(EFFECT_WEAKNESS);
+    if (PWeakness && PWeakness->GetPower() >= 2)
+    {
+        return 0;
+    }
+    int32 ATT = 8 + GetSkill(skill) + bonusSkill + m_modStat[Mod::RATT] + battleutils::GetRangedAttackBonuses(this) + (STR() * 3) / 4;
+    return ATT + (ATT * m_modStat[Mod::RATTP] / 100) + std::min<int16>((ATT * m_modStat[Mod::FOOD_RATTP] / 100), m_modStat[Mod::FOOD_RATT_CAP]);
+}
+
 uint16 CBattleEntity::RACC(uint8 skill, float distance, uint16 bonusSkill)
 {
     TracyZoneScoped;
@@ -710,6 +721,26 @@ uint16 CBattleEntity::RACC(uint8 skill, float distance, uint16 bonusSkill)
             acc = int32((float)acc * battleutils::GetRangedDistanceCorrection(this, distance));
         }
     }
+    return acc + std::min<int16>(((100 + getMod(Mod::FOOD_RACCP) * acc) / 100), getMod(Mod::FOOD_RACC_CAP));
+}
+
+uint16 CBattleEntity::GetBaseRACC(uint8 skill, uint16 bonusSkill)
+{
+    TracyZoneScoped;
+    auto* PWeakness = StatusEffectContainer->GetStatusEffect(EFFECT_WEAKNESS);
+    if (PWeakness && PWeakness->GetPower() >= 2)
+    {
+        return 0;
+    }
+    int    skill_level = GetSkill(skill) + bonusSkill;
+    uint16 acc         = skill_level;
+    if (skill_level > 200)
+    {
+        acc = (uint16)(200 + (skill_level - 200) * 0.9);
+    }
+    acc += getMod(Mod::RACC);
+    acc += battleutils::GetRangedAccuracyBonuses(this);
+    acc += (AGI() * 3) / 4;
     return acc + std::min<int16>(((100 + getMod(Mod::FOOD_RACCP) * acc) / 100), getMod(Mod::FOOD_RACC_CAP));
 }
 

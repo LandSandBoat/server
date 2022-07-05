@@ -463,6 +463,7 @@ public:
     bool       m_EquipSwap; // true if equipment was recently changed
     bool       m_EffectsChanged;
     time_point m_LastSynthTime;
+    time_point m_LastRangedAttackTime;
 
     CHAR_SUBSTATE m_Substate;
 
