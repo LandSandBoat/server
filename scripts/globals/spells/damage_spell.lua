@@ -28,7 +28,7 @@ xi.magic.singleWeatherStrong = { xi.weather.HOT_SPELL,         xi.weather.SNOW, 
 xi.magic.doubleWeatherStrong = { xi.weather.HEAT_WAVE,         xi.weather.BLIZZARDS,        xi.weather.GALES,              xi.weather.SAND_STORM,         xi.weather.THUNDERSTORMS,          xi.weather.SQUALL,              xi.weather.STELLAR_GLARE,   xi.weather.DARKNESS       }
 xi.magic.singleWeatherWeak   = { xi.weather.RAIN,              xi.weather.HOT_SPELL,        xi.weather.SNOW,               xi.weather.WIND,               xi.weather.DUST_STORM,             xi.weather.THUNDER,             xi.weather.GLOOM,           xi.weather.AURORAS        }
 xi.magic.doubleWeatherWeak   = { xi.weather.SQUALL,            xi.weather.HEAT_WAVE,        xi.weather.BLIZZARDS,          xi.weather.GALES,              xi.weather.SAND_STORM,             xi.weather.THUNDERSTORMS,       xi.weather.DARKNESS,        xi.weather.STELLAR_GLARE  }
-xi.magic.resistMod           = { xi.mod.FIRE_RES,              xi.mod.ICE_RES,              xi.mod.WIND_RES,               xi.mod.EARTH_RES,              xi.mod.THUNDER_RES,                xi.mod.WATER_RES,               xi.mod.LIGHT_RES,           xi.mod.DARK_RES           }
+xi.magic.resistMod           = { xi.mod.FIRE_MEVA,             xi.mod.ICE_MEVA,             xi.mod.WIND_MEVA,              xi.mod.EARTH_MEVA,             xi.mod.THUNDER_MEVA,               xi.mod.WATER_MEVA,              xi.mod.LIGHT_MEVA,          xi.mod.DARK_MEVA          }
 xi.magic.specificDmgTakenMod = { xi.mod.FIRE_SDT,              xi.mod.ICE_SDT,              xi.mod.WIND_SDT,               xi.mod.EARTH_SDT,              xi.mod.THUNDER_SDT,                xi.mod.WATER_SDT,               xi.mod.LIGHT_SDT,           xi.mod.DARK_SDT           }
 xi.magic.absorbMod           = { xi.mod.FIRE_ABSORB,           xi.mod.ICE_ABSORB,           xi.mod.WIND_ABSORB,            xi.mod.EARTH_ABSORB,           xi.mod.LTNG_ABSORB,                xi.mod.WATER_ABSORB,            xi.mod.LIGHT_ABSORB,        xi.mod.DARK_ABSORB        }
 xi.magic.barSpell            = { xi.effect.BARFIRE,            xi.effect.BARBLIZZARD,       xi.effect.BARAERO,             xi.effect.BARSTONE,            xi.effect.BARTHUNDER,              xi.effect.BARWATER              }
@@ -385,7 +385,6 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
     local spellGroup    = spell and spell:getSpellGroup() or xi.magic.spellGroup.NONE
 
     local magicAcc      = caster:getMod(xi.mod.MACC) + caster:getILvlMacc() + bonusMagicAccuracy
-    local magicEva      = 0
     local magicHitRate  = 0
     local resMod        = 0 -- Some spells may possibly be non elemental.
 
@@ -560,18 +559,19 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
     -- STEP 2: Get target magic evasion
     -- Base magic evasion (base magic evasion plus resistances(players), plus elemental defense(mobs)
     -----------------------------------
+    local magiceva = target:getMod(xi.mod.MEVA)
     if target:isPC() then
-        magiceva = target:getMod(xi.mod.MEVA) + resMod
+        magiceva = magiceva + resMod
     else
-        dLvl = utils.clamp(dLvl, 0, 99) -- Mobs should not have a disadvantage when targeted
-        magiceva = target:getMod(xi.mod.MEVA) + (4 * levelDiff) + resMod
+        levelDiff = utils.clamp(levelDiff, 0, 99) -- Mobs should not have a disadvantage when targeted
+        magiceva =  magiceva + (4 * levelDiff) + resMod
     end
 
     -----------------------------------
     -- STEP 3: Get Magic Hit Rate
     -- https://www.bg-wiki.com/ffxi/Magic_Hit_Rate
     -----------------------------------
-    local magicAccDiff = magicAcc - magicEva
+    local magicAccDiff = magicAcc - magiceva
 
     if magicAccDiff < 0 then
         magicHitRate = utils.clamp(50 + math.floor(magicAccDiff / 2), 5, 95)

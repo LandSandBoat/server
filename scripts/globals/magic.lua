@@ -428,12 +428,15 @@ function getCureFinal(caster, spell, basecure, minCure, isBlueMagic)
 end
 
 function isValidHealTarget(caster, target)
-    return target:getAllegiance() == caster:getAllegiance() and
-            (target:getObjType() == xi.objType.PC or
-            target:getObjType() == xi.objType.MOB or
-            target:getObjType() == xi.objType.TRUST or
-            target:getObjType() == xi.objType.FELLOW) and
-            target:getStatusEffect(xi.effect.ALL_MISS):getPower() ==2 -- Handles Super Jump
+    if target:hasStatusEffect(xi.effect.ALL_MISS) and target:getStatusEffect(xi.effect.ALL_MISS):getPower() > 1 then
+        return false
+    else
+        return target:getAllegiance() == caster:getAllegiance() and
+                (target:getObjType() == xi.objType.PC or
+                target:getObjType() == xi.objType.MOB or
+                target:getObjType() == xi.objType.TRUST or
+                target:getObjType() == xi.objType.FELLOW)
+    end
 end
 
 -- USED FOR DAMAGING MAGICAL SPELLS. Stage 3 of Calculating Magic Damage on wiki

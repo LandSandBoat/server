@@ -188,7 +188,7 @@ local function applyRoll(caster, target, inAbility, action, total, isDoubleup, c
         -- bust
         if caster:getID() == target:getID() then
             currentAbility:setMsg(xi.msg.basic.DOUBLEUP_BUST)     -- bust message for the COR rolling
-        elseif target:getStatusEffect(xi.effect.ALL_MISS):getPower() == 2 then -- Handle Super Jump
+        elseif target:hasStatusEffect(xi.effect.ALL_MISS) and target:getStatusEffect(xi.effect.ALL_MISS):getPower() > 1 then -- Handle Super Jump
             currentAbility:setMsg(xi.msg.basic.NO_EFFECT)
         else
             currentAbility:setMsg(xi.msg.basic.DOUBLEUP_BUST_SUB) -- bust message for the target getting the roll
