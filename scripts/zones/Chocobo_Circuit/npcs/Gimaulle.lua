@@ -2,7 +2,7 @@
 -- Area: Chocobo_Circuit
 -- NPC: Gimaulle
 -- Standard Info NPC
--- pos 
+-- pos
 -- event 212 213 214 215 228 229 230 231
 -----------------------------------
 local entity = {}

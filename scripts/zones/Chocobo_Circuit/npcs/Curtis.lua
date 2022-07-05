@@ -2,7 +2,7 @@
 -- Area: Chocobo_Circuit
 -- NPC: Curtis
 -- Race Attendant (Orange)
--- pos 
+-- pos
 -----------------------------------
 local entity = {}
 

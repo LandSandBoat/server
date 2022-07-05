@@ -2,8 +2,8 @@
 -- Area: Chocobo_Circuit
 -- NPC: Eugenia
 -- Spectator [Roams]
--- pos 
--- event 359 360 361 
+-- pos
+-- event 359 360 361
 -----------------------------------
 local entity = {}
 

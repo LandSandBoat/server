@@ -2,8 +2,8 @@
 -- Area: Chocobo_Circuit
 -- NPC: Lafaurelle
 -- Expert San d'Oria CRA Branch
--- pos 
--- event 473 474 475 476 477 478 479 480 481 
+-- pos
+-- event 473 474 475 476 477 478 479 480 481
 -----------------------------------
 local entity = {}
 

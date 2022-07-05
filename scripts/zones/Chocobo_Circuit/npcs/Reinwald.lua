@@ -2,7 +2,7 @@
 -- Area: Chocobo_Circuit
 -- NPC: Reinwald
 -- Merchant
--- pos 
+-- pos
 -----------------------------------
 local entity = {}
 

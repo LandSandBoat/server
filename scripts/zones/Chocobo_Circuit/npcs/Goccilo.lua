@@ -2,7 +2,7 @@
 -- Area: Chocobo_Circuit
 -- NPC: Goccilo
 -- Commentator
--- pos 
+-- pos
 -- event 100 115 210 427 458 469 479 488 497
 -----------------------------------
 local entity = {}
