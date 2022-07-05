@@ -11142,21 +11142,9 @@ int CLuaBaseEntity::getRACC()
         return 0;
     }
 
-    CBattleEntity* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
+    auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
 
-    int skill = PEntity->GetSkill(weapon->getSkillType());
-    int acc   = skill;
-
-    if (skill > 200)
-    {
-        acc = (int)(200 + (skill - 200) * 0.9);
-    }
-
-    acc += PEntity->getMod(Mod::RACC);
-    acc += PEntity->AGI() / 2;
-    acc = acc + std::min<int16>(((100 + PEntity->getMod(Mod::FOOD_RACCP)) * acc / 100), PEntity->getMod(Mod::FOOD_RACC_CAP));
-
-    return acc;
+    return PEntity->RACC(weapon->getSkillType(), distance(PEntity->loc.p, PEntity->GetBattleTarget()->loc.p),  weapon->getILvlSkill());
 }
 
 /************************************************************************
@@ -11178,7 +11166,9 @@ uint16 CLuaBaseEntity::getRATT()
         return 0;
     }
 
-    return static_cast<CBattleEntity*>(m_PBaseEntity)->RATT(weapon->getSkillType(), weapon->getILvlSkill());
+    auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
+
+    return PEntity->RATT(weapon->getSkillType(), distance(PEntity->loc.p, PEntity->GetBattleTarget()->loc.p),  weapon->getILvlSkill());
 }
 
 /************************************************************************
