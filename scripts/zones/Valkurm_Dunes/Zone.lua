@@ -19,6 +19,16 @@ end
 zone_object.onInitialize = function(zone)
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
     xi.mogTablet.onZoneInitialize(zone)
+    local results = zone:queryEntitiesByName("qm2")
+    if results ~= nil and results[1] ~= nil then
+        local qm2 = results[1]
+        if VanadielHour() < 5 or VanadielHour() >= 18 then
+            qm2:setStatus(xi.status.NORMAL)
+        else
+            qm2:setStatus(xi.status.DISAPPEAR)
+        end
+    end
+
 end
 
 zone_object.onZoneTick = function(zone)
@@ -58,6 +68,19 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
+end
+
+zone_object.onGameHour = function(zone)
+    local results = zone:queryEntitiesByName("qm2")
+    if results ~= nil and results[1] ~= nil then
+        local qm2 = results[1]
+        if VanadielHour() == 5 then
+            qm2:setStatus(xi.status.DISAPPEAR)
+        end
+        if VanadielHour() == 18 then
+            qm2:setStatus(xi.status.NORMAL)
+        end
+    end
 end
 
 zone_object.onZoneWeatherChange = function(weather)
