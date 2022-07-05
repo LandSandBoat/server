@@ -8478,14 +8478,14 @@ INSERT INTO `mob_groups` VALUES (26,4444,119,'Yagudo_Priest',330,0,2749,0,0,21,2
 INSERT INTO `mob_groups` VALUES (27,4439,119,'Yagudo_Persecutor',330,0,2740,0,0,16,20,0);
 INSERT INTO `mob_groups` VALUES (28,1341,119,'Fire_Elemental',330,4,831,0,0,27,29,0);
 INSERT INTO `mob_groups` VALUES (29,5771,119,'Naa_Zeku_the_Unwaiting',0,32,3055,3800,0,49,49,0);
-INSERT INTO `mob_groups` VALUES (30,890,119,'Daggerclaw_Dracos',0,32,558,0,0,27,28,0);
+INSERT INTO `mob_groups` VALUES (30,890,119,'Daggerclaw_Dracos',0,32,558,950,0,27,28,0);
 INSERT INTO `mob_groups` VALUES (31,4287,119,'Waraxe_Beak',0,128,2621,14800,0,55,56,0);
 INSERT INTO `mob_groups` VALUES (32,483,119,'Boggart',330,0,319,0,0,25,27,0);
 INSERT INTO `mob_groups` VALUES (33,827,119,'Crane_Fly',330,0,524,0,0,18,21,0);
 INSERT INTO `mob_groups` VALUES (34,3752,119,'Stag_Beetle',330,0,2322,0,0,20,23,0);
 INSERT INTO `mob_groups` VALUES (35,759,119,'Coeurl',330,0,496,0,0,22,26,0);
 INSERT INTO `mob_groups` VALUES (36,788,119,'Coo_Keja_the_Unseen',0,128,508,0,0,37,40,0);
-INSERT INTO `mob_groups` VALUES (37,4575,119,'Patripatan',0,32,3017,0,0,27,30,0);
+INSERT INTO `mob_groups` VALUES (37,4575,119,'Patripatan',0,32,3017,1500,0,27,30,0);
 INSERT INTO `mob_groups` VALUES (38,6658,119,'Goblin_Digger',330,0,1040,0,0,18,21,0);
 INSERT INTO `mob_groups` VALUES (39,1983,119,'Hobgoblin_Warrior',0,128,0,0,0,30,35,0);
 INSERT INTO `mob_groups` VALUES (40,1984,119,'Hobgoblin_White_Mage',0,128,0,0,0,30,35,0);
@@ -8532,6 +8532,8 @@ INSERT INTO `mob_groups` VALUES (74,0,119,'Hizamaru_Armor',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (75,0,119,'Ubuginu_Armor',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (76,0,119,'Hachiryu_Armor',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (77,0,119,'Omodaka_Armor',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (78,4459,119,'Yagudo_Votary',0,128,2774,0,0,21,25,0);
+INSERT INTO `mob_groups` VALUES (79,4456,119,'Yagudo_Theologist',0,128,2770,0,0,21,25,0);
 
 -- ------------------------------------------------------------
 -- Sauromugue_Champaign (Zone 120)
