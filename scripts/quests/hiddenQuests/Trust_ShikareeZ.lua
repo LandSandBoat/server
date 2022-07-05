@@ -1,8 +1,6 @@
 -----------------------------------
 -- Trust: Shikaree Z
 -----------------------------------
--- Perih Vashai !gotoid 17764470 / !pos 117.5 -3.7 90.453 241
------------------------------------
 require('scripts/globals/magic')
 require('scripts/globals/trust')
 require('scripts/globals/quests')
@@ -28,7 +26,7 @@ quest.sections =
                 --      https://www.bg-wiki.com/ffxi/BGWiki:Trusts#Shikaree_Z
                 not (player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.FLAMES_IN_THE_DARKNESS and
                 player:getCurrentMission(xi.mission.log_id.COP) <= xi.mission.id.cop.FIRE_IN_THE_EYES_OF_MEN) and
-                not (player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.A_FATE_DECIDED) and
+                player:getCurrentMission(xi.mission.log_id.COP) ~= xi.mission.id.cop.A_FATE_DECIDED and
                 player:hasKeyItem(xi.ki.WINDURST_TRUST_PERMIT)
         end,
 
