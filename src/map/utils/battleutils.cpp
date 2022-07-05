@@ -871,10 +871,8 @@ namespace battleutils
         // Deal with spikesEffect effect gear
         else if (PDefender->getMod(Mod::ITEM_SUBEFFECT) > 0)
         {
-            if (PDefender->objtype == TYPE_PC)
+            if (CCharEntity* PCharDef = dynamic_cast<CCharEntity*>(PDefender))
             {
-                CCharEntity* PCharDef = (CCharEntity*)PDefender;
-
                 for (auto&& slot : { SLOT_SUB, SLOT_BODY, SLOT_LEGS, SLOT_HEAD, SLOT_HANDS, SLOT_FEET })
                 {
                     CItemEquipment* PItem = PCharDef->getEquip(slot);
@@ -892,10 +890,11 @@ namespace battleutils
                         Action->spikesParam = battleutils::GetScaledItemModifier(PDefender, PItem, Mod::ITEM_ADDEFFECT_DMG);
                         chance              = battleutils::GetScaledItemModifier(PDefender, PItem, Mod::ITEM_ADDEFFECT_CHANCE);
 
-                        if (((CMobEntity*)PDefender)->m_HiPCLvl < PAttacker->GetMLevel())
+                        if (CMobEntity* PMobAtt = dynamic_cast<CMobEntity*>(PDefender))
                         {
-                            ((CMobEntity*)PDefender)->m_HiPCLvl = PAttacker->GetMLevel();
+                            PMobAtt->m_HiPCLvl = std::max(PMobAtt->m_HiPCLvl, PDefender->GetMLevel());
                         }
+
                         if (Action->spikesEffect && HandleSpikesEquip(PAttacker, PDefender, Action, (uint8)Action->spikesParam, Action->spikesEffect, chance))
                         {
                             return true;

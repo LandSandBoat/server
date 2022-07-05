@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -417,15 +417,34 @@ void HandleGroupListRequest(CTCPRequestPacket& PTCPRequest)
         uint32                   linkshellid   = linkshellid1 == 0 ? linkshellid2 : linkshellid1;
         std::list<SearchEntity*> LinkshellList = PDataLoader.GetLinkshellList(linkshellid);
 
-        CLinkshellListPacket PLinkshellPacket(linkshellid, (uint32)LinkshellList.size());
+        uint32 totalResults  = (uint32)LinkshellList.size();
+        uint32 currentResult = 0;
 
-        for (auto& it : LinkshellList)
+        // Iterate through the linkshell list, splitting up the results into
+        // smaller chunks.
+        std::list<SearchEntity*>::iterator it = LinkshellList.begin();
+
+        do
         {
-            PLinkshellPacket.AddPlayer(it);
-        }
+            CLinkshellListPacket PLinkshellPacket(linkshellid, totalResults);
 
-        PrintPacket((char*)PLinkshellPacket.GetData(), PLinkshellPacket.GetSize());
-        PTCPRequest.SendToSocket(PLinkshellPacket.GetData(), PLinkshellPacket.GetSize());
+            while (currentResult < totalResults)
+            {
+                bool success = PLinkshellPacket.AddPlayer(*it);
+                if (!success)
+                    break;
+
+                currentResult++;
+                ++it;
+            }
+
+            if (currentResult == totalResults)
+                PLinkshellPacket.SetFinal();
+
+            auto ret = PTCPRequest.SendToSocket(PLinkshellPacket.GetData(), PLinkshellPacket.GetSize());
+            if (ret <= 0)
+                break;
+        } while (currentResult < totalResults);
     }
 }
 
@@ -452,16 +471,36 @@ void HandleSearchRequest(CTCPRequestPacket& PTCPRequest)
 
     CDataLoader              PDataLoader;
     std::list<SearchEntity*> SearchList = PDataLoader.GetPlayersList(sr, &totalCount);
-    // PDataLoader->GetPlayersCount(sr)
-    CSearchListPacket PSearchPacket(totalCount);
 
-    for (auto& it : SearchList)
+    uint32 totalResults  = (uint32)SearchList.size();
+    uint32 currentResult = 0;
+
+    // Iterate through the search list, splitting up the results into
+    // smaller chunks.
+    std::list<SearchEntity*>::iterator it = SearchList.begin();
+
+    do
     {
-        PSearchPacket.AddPlayer(it);
-    }
+        CSearchListPacket PSearchPacket(totalCount);
 
-    // PrintPacket((int8*)PSearchPacket->GetData(), PSearchPacket->GetSize());
-    PTCPRequest.SendToSocket(PSearchPacket.GetData(), PSearchPacket.GetSize());
+        while (currentResult < totalResults)
+        {
+            bool success = PSearchPacket.AddPlayer(*it);
+            if (!success)
+                break;
+
+            currentResult++;
+            ++it;
+        }
+
+        if (currentResult == totalResults)
+            PSearchPacket.SetFinal();
+
+        // PrintPacket((int8*)PSearchPacket->GetData(), PSearchPacket->GetSize());
+        auto ret = PTCPRequest.SendToSocket(PSearchPacket.GetData(), PSearchPacket.GetSize());
+        if (ret <= 0)
+            break;
+    } while (currentResult < totalResults);
 }
 
 void HandleAuctionHouseRequest(CTCPRequestPacket& PTCPRequest)

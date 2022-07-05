@@ -34,17 +34,21 @@ CSearchListPacket::CSearchListPacket(uint32 Total)
 {
     memset(m_data, 0, sizeof(m_data));
 
-    ref<uint8>(m_data, (0x0A)) = 0x80;
+    ref<uint8>(m_data, (0x0A)) = 0x00;
     ref<uint8>(m_data, (0x0B)) = 0x80;
 
     ref<uint16>(m_data, (0x0E)) = Total; // The total number of character found (may differ from the amount that gets sent)
 }
 
 // A maximum of 20 characters can be added to a single packet.
-
-void CSearchListPacket::AddPlayer(SearchEntity* PPlayer)
+bool CSearchListPacket::AddPlayer(SearchEntity* PPlayer)
 {
     uint32 size_offset = m_offset / 8;
+    if ((sizeof(m_data) - size_offset) < (20 + 67))
+    {
+         return false; // not enough space available, worst case.
+    }
+
     m_offset += 8;
 
     m_offset    = packBitsLE(m_data, SEARCH_NAME, m_offset, 5);
@@ -110,7 +114,21 @@ void CSearchListPacket::AddPlayer(SearchEntity* PPlayer)
 
     ref<uint8>(m_data, size_offset) = m_offset / 8 - size_offset - 1; // Entity data size
     ref<uint16>(m_data, (0x08))     = m_offset / 8;                   // Size of the data to send
+
     delete PPlayer;
+
+    return true;
+}
+
+/************************************************************************
+*                                                                       *
+*  Set the packet as final in the results                               *
+*                                                                       *
+************************************************************************/
+
+void CSearchListPacket::SetFinal()
+{
+    ref<uint8>(m_data, (0x0A)) = 0x80; // is final packet
 }
 
 /************************************************************************
