@@ -10,7 +10,6 @@ require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 
-
 --    player:startEvent(110) -- standar dialog
 --    player:startEvent(115) -- i have enough for now, come later
 --    player:startEvent(114) -- get me x as soon as you can

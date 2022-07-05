@@ -52,7 +52,6 @@ ability_object.onAutomatonAbility = function(target, automaton, skill, master, a
         end
     end
 
-
     local damage = doAutoPhysicalWeaponskill(automaton, target, 0, skill:getTP(), true, action, false, params, skill)
 
     if damage > 0 then

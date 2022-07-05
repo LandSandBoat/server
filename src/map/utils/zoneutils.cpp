@@ -305,7 +305,6 @@ namespace zoneutils
                     memcpy(&sqlModelID, sql->GetData(16), 20);
                     PNpc->look = look_t(sqlModelID);
 
-
                     PNpc->name_prefix = (uint8)sql->GetIntData(17);
                     PNpc->widescan    = (uint8)sql->GetIntData(18);
 
@@ -337,8 +336,8 @@ namespace zoneutils
 
     void LoadMOBList()
     {
-        uint8 normalLevelRangeMin = luautils::GetSettingsVariable("NORMAL_MOB_MAX_LEVEL_RANGE_MIN");
-        uint8 normalLevelRangeMax = luautils::GetSettingsVariable("NORMAL_MOB_MAX_LEVEL_RANGE_MAX");
+        uint8 normalLevelRangeMin = settings::get<uint8>("main.NORMAL_MOB_MAX_LEVEL_RANGE_MIN");
+        uint8 normalLevelRangeMax = settings::get<uint8>("main.NORMAL_MOB_MAX_LEVEL_RANGE_MAX");
 
         const char* Query = "SELECT mob_groups.zoneid, mobname, mobid, pos_rot, pos_x, pos_y, pos_z, \
             respawntime, spawntype, dropid, mob_groups.HP, mob_groups.MP, minLevel, maxLevel, \
@@ -347,7 +346,7 @@ namespace zoneutils
             STR, DEX, VIT, AGI, `INT`, MND, CHR, EVA, DEF, ATT, ACC, \
             slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, \
             fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, \
-            fire_res, ice_res, wind_res, earth_res, lightning_res, water_res, light_res, dark_res, \
+            fire_meva, ice_meva, wind_meva, earth_meva, lightning_meva, water_meva, light_meva, dark_meva, \
             Element, mob_pools.familyid, mob_family_system.superFamilyID, name_prefix, entityFlags, animationsub, \
             (mob_family_system.HP / 100), (mob_family_system.MP / 100), hasSpellScript, spellList, mob_groups.poolid, \
             allegiance, namevis, aggro, roamflag, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects, \
@@ -444,14 +443,25 @@ namespace zoneutils
                     PMob->setModifier(Mod::LIGHT_SDT, (int16)sql->GetFloatData(48));   // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
                     PMob->setModifier(Mod::DARK_SDT, (int16)sql->GetFloatData(49));    // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
 
-                    PMob->setModifier(Mod::FIRE_RES, (int16)(sql->GetIntData(50))); // These are stored as signed integers which
-                    PMob->setModifier(Mod::ICE_RES, (int16)(sql->GetIntData(51)));  // is directly the modifier starting value.
-                    PMob->setModifier(Mod::WIND_RES, (int16)(sql->GetIntData(52))); // Positives signify increased resist chance.
-                    PMob->setModifier(Mod::EARTH_RES, (int16)(sql->GetIntData(53)));
-                    PMob->setModifier(Mod::THUNDER_RES, (int16)(sql->GetIntData(54)));
-                    PMob->setModifier(Mod::WATER_RES, (int16)(sql->GetIntData(55)));
-                    PMob->setModifier(Mod::LIGHT_RES, (int16)(sql->GetIntData(56)));
-                    PMob->setModifier(Mod::DARK_RES, (int16)(sql->GetIntData(57)));
+                    PMob->setModifier(Mod::FIRE_MEVA, (int16)(sql->GetIntData(50)));   // These are stored as signed integers which
+                    PMob->setModifier(Mod::ICE_MEVA, (int16)(sql->GetIntData(51)));    // is directly the modifier starting value.
+                    PMob->setModifier(Mod::WIND_MEVA, (int16)(sql->GetIntData(52)));   // Positives signify increased resist chance.
+                    PMob->setModifier(Mod::EARTH_MEVA, (int16)(sql->GetIntData(53)));
+                    PMob->setModifier(Mod::THUNDER_MEVA, (int16)(sql->GetIntData(54)));
+                    PMob->setModifier(Mod::WATER_MEVA, (int16)(sql->GetIntData(55)));
+                    PMob->setModifier(Mod::LIGHT_MEVA, (int16)(sql->GetIntData(56)));
+                    PMob->setModifier(Mod::DARK_MEVA, (int16)(sql->GetIntData(57)));
+
+                    /* Todo: hook this up, seems to force resist tiering
+                    PMob->setModifier(Mod::FIRE_RES_RANK, (int16)(sql->GetIntData(??)));
+                    PMob->setModifier(Mod::ICE_RES_RANK, (int16)(sql->GetIntData(??)));
+                    PMob->setModifier(Mod::WIND_RES_RANK, (int16)(sql->GetIntData(??)));
+                    PMob->setModifier(Mod::EARTH_RES_RANK, (int16)(sql->GetIntData(??)));
+                    PMob->setModifier(Mod::THUNDER_RES_RANK, (int16)(sql->GetIntData(??)));
+                    PMob->setModifier(Mod::WATER_RES_RANK, (int16)(sql->GetIntData(??)));
+                    PMob->setModifier(Mod::LIGHT_RES_RANK, (int16)(sql->GetIntData(??)));
+                    PMob->setModifier(Mod::DARK_RES_RANK, (int16)(sql->GetIntData(??)));
+                    */
 
                     PMob->m_Element     = (uint8)sql->GetIntData(58);
                     PMob->m_Family      = (uint16)sql->GetIntData(59);

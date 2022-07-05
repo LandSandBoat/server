@@ -185,4 +185,3 @@ zones[xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES] =
 }
 
 return zones[xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES]
-

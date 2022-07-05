@@ -21,7 +21,6 @@ ability_object.onAutomatonAbility = function(target, automaton, skill, master, a
         master:delStatusEffectSilent(xi.effect.FIRE_MANEUVER)
     end
 
-
     if automaton:getLocalVar("heat_capacitor") >= 3 then -- Heat Capacitor & Heat Capacitor II
         target:addTP(1000 * maneuvers)
     elseif automaton:getLocalVar("heat_capacitor") >= 2 then -- Heat Capacitor II

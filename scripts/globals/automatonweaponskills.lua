@@ -74,7 +74,6 @@ local function getRangedCRatio(attacker, defender, params, ignoredDef)
     return pdif, pdifcrit
 end
 
-
 -- Given the raw ratio value (atk/def) and levels, returns the cRatio (min then max)
 local function getMeleeCRatio(attacker, defender, params, ignoredDef)
     local cratio = attacker:getStat(xi.mod.ATT) * params.atkmulti / (defender:getStat(xi.mod.DEF) - ignoredDef)
