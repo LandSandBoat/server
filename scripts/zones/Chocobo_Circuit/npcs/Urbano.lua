@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Chocobo_Circuit
 -- NPC: Urbano
--- NPC
+-- Race Overview
 -- pos -14.3511 -15.0000 -131.1869
 -----------------------------------
 local entity = {}

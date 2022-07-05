@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Chocobo_Circuit
 -- NPC: Berthold
--- Spectator
+-- Spectator [Roams]
 -- pos -85.8890 -15.0901 -124.7663
 -- event 359 360 361
 -----------------------------------

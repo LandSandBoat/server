@@ -1,8 +1,9 @@
 -----------------------------------
 -- Area: Chocobo_Circuit
--- NPC: Chaquoillons
--- Standard Info NPC
+-- NPC: Markovich
+-- Commentator
 -- pos 
+-- event 479 488 497 
 -----------------------------------
 local entity = {}
 
@@ -10,7 +11,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(238)
+    player:startEvent(479)
 end
 
 entity.onEventUpdate = function(player, csid, option)

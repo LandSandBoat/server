@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Chocobo_Circuit
--- NPC: Chaquoillons
+-- NPC: Valerio
 -- Standard Info NPC
 -- pos 
 -----------------------------------
@@ -10,7 +10,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(238)
+    player:startEvent(351)
 end
 
 entity.onEventUpdate = function(player, csid, option)

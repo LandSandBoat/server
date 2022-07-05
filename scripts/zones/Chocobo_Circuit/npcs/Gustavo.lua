@@ -1,7 +1,9 @@
 -----------------------------------
 -- Area: Chocobo_Circuit
---  NPC: Gustavo
+-- NPC: Gustavo
 -- Standard Info NPC
+-- pos 
+-- event 226
 -----------------------------------
 local entity = {}
 

@@ -1,8 +1,9 @@
 -----------------------------------
 -- Area: Chocobo_Circuit
--- NPC: Chaquoillons
--- Standard Info NPC
+-- NPC: Eugenia
+-- Spectator [Roams]
 -- pos 
+--event 359 360 361 
 -----------------------------------
 local entity = {}
 
@@ -10,7 +11,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(238)
+    player:startEvent(359)
 end
 
 entity.onEventUpdate = function(player, csid, option)

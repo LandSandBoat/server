@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Chocobo_Circuit
 -- NPC: Fina
--- Standard Info NPC
+-- Race Attendant (Green)
 -- POS: -366.0453 4.0000 -532.8646
 
 -----------------------------------

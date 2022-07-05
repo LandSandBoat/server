@@ -1,8 +1,9 @@
 -----------------------------------
 -- Area: Chocobo_Circuit
--- NPC: Chaquoillons
--- Standard Info NPC
+-- NPC: Failene
+-- Betting Attendant (Blue)
 -- pos 
+-- event 212 213 214 215 217 221 228  232
 -----------------------------------
 local entity = {}
 
@@ -10,7 +11,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(238)
+    player:startEvent(212)
 end
 
 entity.onEventUpdate = function(player, csid, option)

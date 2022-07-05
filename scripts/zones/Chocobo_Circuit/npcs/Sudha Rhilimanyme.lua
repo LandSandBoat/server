@@ -1,8 +1,9 @@
 -----------------------------------
 -- Area: Chocobo_Circuit
--- NPC: Chaquoillons
+-- NPC: Sudha Rhilimanyme
 -- Standard Info NPC
 -- pos 
+-- event 267 271 272 273 274 275 283
 -----------------------------------
 local entity = {}
 
@@ -10,7 +11,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(238)
+    player:startEvent(267)
 end
 
 entity.onEventUpdate = function(player, csid, option)

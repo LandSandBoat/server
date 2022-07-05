@@ -1,7 +1,8 @@
 -----------------------------------
 -- Area: Chocobo_Circuit
---  NPC: Gustavo
--- Standard Info NPC
+-- NPC: Russel
+-- Race Attendant (Blue)
+-- pos 
 -----------------------------------
 local entity = {}
 

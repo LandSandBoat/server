@@ -1,7 +1,8 @@
 -----------------------------------
 -- Area: Chocobo_Circuit
---  NPC: Delaulne
--- Standard Info NPC
+-- NPC: Delaulne
+-- Race Attendant (Orange)
+-- pos 
 -----------------------------------
 local entity = {}
 

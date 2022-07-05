@@ -1,7 +1,8 @@
 -----------------------------------
 -- Area: Chocobo_Circuit
---  NPC: Pollante
--- Standard Info NPC
+-- NPC: Pollante
+-- Teleporter
+-- pos 
 -----------------------------------
 local entity = {}
 

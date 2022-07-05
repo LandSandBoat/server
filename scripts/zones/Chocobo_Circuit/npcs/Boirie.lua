@@ -1,6 +1,7 @@
+Boirie
 -----------------------------------
 -- Area: Chocobo_Circuit
--- NPC: Chaquoillons
+-- NPC: Boirie
 -- Standard Info NPC
 -- pos 
 -----------------------------------
@@ -10,7 +11,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(238)
+    player:startEvent(266)
 end
 
 entity.onEventUpdate = function(player, csid, option)
