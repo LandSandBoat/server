@@ -154,11 +154,11 @@ xi.player.onGameIn = function(player, firstLogin, zoning)
         end
     else
         -- things checked ONLY during zone in go here
-		if player:getLocalVar("[WasInAbyssea]") == 1 then
-			--abyssea time logged
-			player:setCharVar("lastEnteredAbyssea", os.time() + 14400)
-			player:setCharVar("[WasInAbyssea]", 0)
-		end
+        if player:getLocalVar("[WasInAbyssea]") == 1 then
+            --abyssea time logged
+            player:setCharVar("lastEnteredAbyssea", os.time() + 14400)
+            player:setCharVar("[WasInAbyssea]", 0)
+        end
     end
 
     -- Abyssea starting quest should be flagged when expansion is active

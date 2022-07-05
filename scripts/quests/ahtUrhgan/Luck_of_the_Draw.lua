@@ -126,7 +126,7 @@ quest.sections =
 
                 [3] = function(player, csid, option, npc)
                     if quest:complete(player) then
-	                    player:delKeyItem(xi.ki.FORGOTTEN_HEXAGUN)
+                        player:delKeyItem(xi.ki.FORGOTTEN_HEXAGUN)
                         player:unlockJob(xi.job.COR)
                         player:messageSpecial(talaccaCoveID.text.YOU_CAN_NOW_BECOME_A_CORSAIR)
                     end
