@@ -9,7 +9,7 @@ local m = Module:new("75_era_guild_vendors")
 
 xi = xi or {}
 
-local lookupTable = 
+local lookupTable =
 --[[
     -- Guild Name
     {"GuildType", "Zone", "NPCName", guildid, "DIALOG_NAME", opentime, closetime, holiday};
@@ -75,7 +75,7 @@ local lookupTable =
     {"Smithing", "Metalworks", "Amulya", 533, "AMULYA_SHOP_DIALOG", 8, 23, 2},
     {"Smithing", "Al_Zahbi", "Ndego", 60427, "NDEGO_SHOP_DIALOG", 8, 23, 2},
     -- Tenshodo Merchant
-    {"Tenshodo", "Lower_Jeuno", "Akamafula", 60417, "AKAMAFULA_SHOP_DIALOG", 7},
+    {"Tenshodo", "Lower_Jeuno", "Akamafula", 60417, "AKAMAFULA_SHOP_DIALOG", 1, 23, 7},
     {"Tenshodo", "Norg", "Achika", 60421, "ACHIKA_SHOP_DIALOG", 9, 23, 7},
     {"Tenshodo", "Norg", "Chiyo", 60422, "CHIYO_SHOP_DIALOG", 9, 23, 7},
     {"Tenshodo", "Norg", "Jirokichi", 60423, "JIROKICHI_SHOP_DIALOG", 9, 23, 7},
@@ -110,9 +110,3 @@ for _, shop in pairs(lookupTable) do
 end
 
 return m
-
-
-
-    
-
-
