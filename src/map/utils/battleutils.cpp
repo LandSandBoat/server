@@ -1614,7 +1614,7 @@ namespace battleutils
 
             if (PItem != nullptr && PItem->isType(ITEM_WEAPON))
             {
-                acc = PChar->RACC(PItem->getSkillType());
+                acc = PChar->RACC(PItem->getSkillType(), distance(PChar->loc.p, PDefender->loc.p));
             }
 
             // Check For Ambush Merit - Ranged
@@ -1625,13 +1625,13 @@ namespace battleutils
         }
         else if (PAttacker->objtype == TYPE_PET && ((CPetEntity*)PAttacker)->getPetType() == PET_TYPE::AUTOMATON)
         {
-            acc = PAttacker->RACC(SKILL_AUTOMATON_RANGED);
+            acc = PAttacker->RACC(SKILL_AUTOMATON_RANGED, distance(PAttacker->loc.p, PDefender->loc.p));
         }
         else if (PAttacker->objtype == TYPE_TRUST)
         {
-            auto archery_acc      = PAttacker->RACC(SKILL_ARCHERY);
-            auto marksmanship_acc = PAttacker->RACC(SKILL_MARKSMANSHIP);
-            auto throwing_acc     = PAttacker->RACC(SKILL_THROWING);
+            auto archery_acc      = PAttacker->RACC(SKILL_ARCHERY, distance(PAttacker->loc.p, PDefender->loc.p));
+            auto marksmanship_acc = PAttacker->RACC(SKILL_MARKSMANSHIP, distance(PAttacker->loc.p, PDefender->loc.p));
+            auto throwing_acc     = PAttacker->RACC(SKILL_THROWING, distance(PAttacker->loc.p, PDefender->loc.p));
 
             acc = std::max({ archery_acc, marksmanship_acc, throwing_acc });
         }
@@ -1669,7 +1669,7 @@ namespace battleutils
 
             if (PItem != nullptr && PItem->isType(ITEM_WEAPON))
             {
-                rAttack = PChar->RATT(PItem->getSkillType(), PItem->getILvlSkill());
+                rAttack = PChar->RATT(PItem->getSkillType(), distance(PChar->loc.p, PDefender->loc.p), PItem->getILvlSkill());
             }
             else
             {
@@ -1681,13 +1681,13 @@ namespace battleutils
                 }
                 else
                 {
-                    rAttack = PChar->RATT(PItem->getSkillType(), PItem->getILvlSkill());
+                    rAttack = PChar->RATT(PItem->getSkillType(), distance(PChar->loc.p, PDefender->loc.p), PItem->getILvlSkill());
                 }
             }
         }
         else if (PAttacker->objtype == TYPE_PET && ((CPetEntity*)PAttacker)->getPetType() == PET_TYPE::AUTOMATON)
         {
-            rAttack = PAttacker->RATT(SKILL_AUTOMATON_RANGED);
+            rAttack = PAttacker->RATT(SKILL_AUTOMATON_RANGED, distance(PAttacker->loc.p, PDefender->loc.p));
         }
         else
         {
@@ -7023,6 +7023,107 @@ namespace battleutils
         if (absorbedMP > 0)
         {
             PDefender->addMP(absorbedMP);
+        }
+    }
+
+    float GetRangedDistanceCorrection(CBattleEntity* PBattleEntity, float distance)
+    {
+        CCharEntity* PChar = nullptr;
+
+        if (PBattleEntity->objtype == TYPE_PC)
+        {
+            PChar = (CCharEntity*)PBattleEntity;
+        }
+        else // Automaton
+        {
+            if (distance <= 3.0f) // Automaton will generally stay around 3' from the target.
+                return 1.0f;
+            if (distance <= 25.0f) // Beyond 3' linearly drop 1%/yalm
+                return 1.0f - (distance / 100.0f);
+
+            return 0.75f; // Cap at 0.75 modifier past 25 yalms
+        }
+
+        if (PChar == nullptr)
+        {
+            return 1.0f; // Just in case PChar is null, then we will just return full damage.
+        }
+
+        uint8 RMainType = 0;
+        uint8 RMainSub  = 0;
+
+        CItemEquipment* PRangedSlot = PChar->getEquip(SLOT_RANGED);
+
+        if (PRangedSlot)
+        {
+            RMainType = ((CItemWeapon*)PRangedSlot)->getSkillType();
+            RMainSub  = ((CItemWeapon*)PRangedSlot)->getSubSkillType();
+        }
+
+        bool LongBowCurve  = (RMainType == 25 && RMainSub == 1); // Longbows Only
+        bool CrossBowCurve = ((RMainType == 25 && RMainSub == 0) || (RMainType == 26 && RMainSub == 0)); // Crossbows and Shortbows
+        bool GunCurve      = (RMainType == 26 && RMainSub == 1); // Guns Only
+
+        if (LongBowCurve)
+        {
+            if (distance <= 3.00f) // <=3'
+                return 0.65f + ((1.67f * distance) / 100);
+            if (distance <= 5.00f) // <=5.0'
+                return 0.65f + ((2.60f * distance) / 100);
+            if (distance < 7.50f) // <7.5'
+                return 0.65f + ((4.66f * distance) / 100);
+            if (distance <= 10.50f) // Sweet Spot from 7.5' to 10.5'
+                return 1.00f;
+            if (distance <= 15.00f) // <=15.0'
+                return 1.00f + ((-1.78f * distance) / 100);
+            if (distance <= 20.00f) // <=20.0'
+                return 1.00f + ((-1.15f * distance) / 100);
+
+            return 1.00f + ((-0.90f * distance) / 100); // Default to >20' Curve w/o Cap
+        }
+        else if (CrossBowCurve)
+        {
+            if (distance <= 3.00f) // <=3'
+                return 0.65f + ((3.30f * distance) / 100);
+            if (distance <= 5.00f) // <=5'
+                return 0.65f + ((4.40f * distance) / 100);
+            if (distance < 6.00f) // <6'
+                return 0.65f + ((5.83f * distance) / 100);
+            if (distance <= 10.00f) // Sweet Spot from 6' to 10'
+                return 1.00f;
+            if (distance <= 15.00f) // <=15'
+                return 1.00f + ((-2.00f * distance) / 100);
+            if (distance <= 20.00f) // <=20'
+                return 1.00f + ((-1.10f * distance) / 100);
+
+            return 0.86f; // Default to >20' Curve w/ 86% Cap
+
+        }
+        else if (GunCurve)
+        {
+            if (distance <= 3.00f) // <=3'
+                return 0.75 + ((3.33f * distance) / 100);
+            if (distance < 4.50f) // <4.5'
+                return 0.75 + ((5.56f * distance) / 100);
+            if (distance <= 5.50f) // Sweet spot from 4.5' to 5.5'
+                return 1.00f;
+            if (distance <= 7.50f) // <=7.5'
+                return 1.00f + ((-2.50f * distance) / 100);
+            if (distance <= 10) // <=10'
+                return 1.00f + ((-2.22f * distance) / 100);
+            if (distance <= 15) // <=15'
+                return 1.00f + ((-1.26f * distance) / 100);
+            if (distance <= 20) // <=20'
+                return 1.00f + ((-0.96f * distance) / 100);
+
+            return 1.00f + ((-0.67f * distance) / 100);
+        }
+        else // Default to Throwing Curve
+        {
+            if (distance <= 1.0f)
+                return 1.00f; // Sweet Spot Under or at 1'
+
+            return 1.00f - ((1.00f * distance) / 100); // Lose 1%/yalm
         }
     }
 

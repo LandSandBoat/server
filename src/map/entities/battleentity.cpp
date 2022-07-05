@@ -671,7 +671,7 @@ uint16 CBattleEntity::ATT()
     return ATT + (ATT * m_modStat[Mod::ATTP] / 100) + std::min<int16>((ATT * m_modStat[Mod::FOOD_ATTP] / 100), m_modStat[Mod::FOOD_ATT_CAP]);
 }
 
-uint16 CBattleEntity::RATT(uint8 skill, uint16 bonusSkill)
+uint16 CBattleEntity::RATT(uint8 skill, float distance, uint16 bonusSkill)
 {
     auto* PWeakness = StatusEffectContainer->GetStatusEffect(EFFECT_WEAKNESS);
     if (PWeakness && PWeakness->GetPower() >= 2)
@@ -679,10 +679,14 @@ uint16 CBattleEntity::RATT(uint8 skill, uint16 bonusSkill)
         return 0;
     }
     int32 ATT = 8 + GetSkill(skill) + bonusSkill + m_modStat[Mod::RATT] + battleutils::GetRangedAttackBonuses(this) + (STR() * 3) / 4;
+    if ((this->objtype == TYPE_PC) || (this->objtype == TYPE_PET && this->PMaster->objtype == TYPE_PC && ((CPetEntity*)this)->getPetType() == PET_TYPE::AUTOMATON)) // PC or PC Automaton
+    {
+        ATT = int32((float)ATT * battleutils::GetRangedDistanceCorrection(this, distance));
+    }
     return ATT + (ATT * m_modStat[Mod::RATTP] / 100) + std::min<int16>((ATT * m_modStat[Mod::FOOD_RATTP] / 100), m_modStat[Mod::FOOD_RATT_CAP]);
 }
 
-uint16 CBattleEntity::RACC(uint8 skill, uint16 bonusSkill)
+uint16 CBattleEntity::RACC(uint8 skill, float distance, uint16 bonusSkill)
 {
     TracyZoneScoped;
     auto* PWeakness = StatusEffectContainer->GetStatusEffect(EFFECT_WEAKNESS);
@@ -699,6 +703,13 @@ uint16 CBattleEntity::RACC(uint8 skill, uint16 bonusSkill)
     acc += getMod(Mod::RACC);
     acc += battleutils::GetRangedAccuracyBonuses(this);
     acc += (AGI() * 3) / 4;
+    if ((this->objtype == TYPE_PC) || (this->objtype == TYPE_PET && this->PMaster->objtype == TYPE_PC && ((CPetEntity*)this)->getPetType() == PET_TYPE::AUTOMATON)) // PC or PC Automaton
+    {
+        if (!this->StatusEffectContainer->HasStatusEffect(EFFECT_SHARPSHOT))
+        {
+            acc = int32((float)acc * battleutils::GetRangedDistanceCorrection(this, distance));
+        }
+    }
     return acc + std::min<int16>(((100 + getMod(Mod::FOOD_RACCP) * acc) / 100), getMod(Mod::FOOD_RACC_CAP));
 }
 
@@ -1619,6 +1630,15 @@ void CBattleEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& ac
 bool CBattleEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg)
 {
     TracyZoneScoped;
+
+    if (this->PMaster != nullptr && this->PMaster->objtype == TYPE_PC && !static_cast<CCharEntity*>(this->PMaster)->IsMobOwner(PTarget))
+    {
+        errMsg = std::make_unique<CMessageBasicPacket>(this, PTarget, 0, 0, MSGBASIC_ALREADY_CLAIMED);
+
+        PAI->Disengage();
+        return false;
+    }
+
     return !((distance(loc.p, PTarget->loc.p) - PTarget->m_ModelRadius) > GetMeleeRange() || !PAI->GetController()->IsAutoAttackEnabled());
 }
 

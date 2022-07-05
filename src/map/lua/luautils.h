@@ -123,8 +123,6 @@ namespace luautils
 
     std::vector<std::string> GetQuestAndMissionFilenamesList();
 
-    void print(sol::variadic_args va);
-
     // Cache helpers
     auto getEntityCachedFunction(CBaseEntity* PEntity, std::string funcName) -> sol::function;
     void CacheLuaObjectFromFile(std::string filename, bool printOutput = false);
