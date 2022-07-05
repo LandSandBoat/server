@@ -8,7 +8,7 @@ require("scripts/globals/mobs")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMod(xi.mod.UFASTCAST, 100)
+    mob:setMod(xi.mod.UFASTCAST, 85)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 600)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 20)
@@ -23,11 +23,19 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
+    mob:setLocalVar("death", 1)
 end
 
 entity.onMobDespawn = function(mob)
-    -- Set Weeping Willow's respawn time (21-24 hours)
-    GetMobByID(mob:getID() -6):setRespawnTime(math.random(75600, 86400))
+    local lumberDeath = mob:getLocalVar("death")
+
+    if lumberDeath then
+        -- Lumber Jack died, Set Weeping Willow's respawn time (21-24 hours)
+        GetMobByID(mob:getID() -6):setRespawnTime(math.random(75600, 86400))
+    else
+        -- Lumber Jack idle despawned, set Weeping Willow to 30 min respawn
+        GetMobByID(mob:getID() -6):setRespawnTime(1800)
+    end
 end
 
 return entity

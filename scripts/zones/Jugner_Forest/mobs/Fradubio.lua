@@ -29,37 +29,12 @@ end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
     if skill:getID() == 329 then
-        for i = ID.mob.DUESSA_START, ID.mob.DUESSA_END do
+        for i = ID.mob.FRADUBIO + 1, ID.mob.FRADUBIO + 5 do
             local pet = GetMobByID(i)
             if not pet:isSpawned() then
-                local petId = pet:getID()
-                switch (petId): caseof {
-                    [17203449] = function()
-                        pet:setSpawn(mob:getXPos() + 1, mob:getYPos(), mob:getZPos())
-                        pet:spawn()
-                        pet:updateEnmity(mob:getTarget())
-                    end,
-                    [17203450] = function()
-                        pet:setSpawn(mob:getXPos() + 2, mob:getYPos(), mob:getZPos())
-                        pet:spawn()
-                        pet:updateEnmity(mob:getTarget())
-                    end,
-                    [17203451] = function()
-                        pet:setSpawn(mob:getXPos() + 3, mob:getYPos(), mob:getZPos())
-                        pet:spawn()
-                        pet:updateEnmity(mob:getTarget())
-                    end,
-                    [17203452] = function()
-                        pet:setSpawn(mob:getXPos() + 4, mob:getYPos(), mob:getZPos())
-                        pet:spawn()
-                        pet:updateEnmity(mob:getTarget())
-                    end,
-                    [17203453] = function()
-                        pet:setSpawn(mob:getXPos() + 5, mob:getYPos(), mob:getZPos())
-                        pet:spawn()
-                        pet:updateEnmity(mob:getTarget())
-                    end,
-                }
+                pet:setSpawn(mob:getXPos() + 1, mob:getYPos(), mob:getZPos())
+                pet:spawn()
+                pet:updateEnmity(mob:getTarget())
                 break
             end
         end
@@ -71,7 +46,7 @@ end
 
 entity.onMobDespawn = function(mob)
     UpdateNMSpawnPoint(mob:getID())
-    for i = ID.mob.DUESSA_START, ID.mob.DUESSA_START do
+    for i = ID.mob.FRADUBIO + 1, ID.mob.FRADUBIO + 5 do
         GetMobByID(i):setHP(0)
     end
 end

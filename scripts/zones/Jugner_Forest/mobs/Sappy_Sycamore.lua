@@ -12,7 +12,7 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:addMod(xi.mod.SLEEPRES, 20)
     mob:addMod(xi.mod.BINDRES, 20)
-    mob:addMod(xi.mod.EARTH_RES, 100)
+    mob:addMod(xi.mod.EARTH_MEVA, 100)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)

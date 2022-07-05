@@ -37,6 +37,8 @@ entity.onMobDeath = function(mob, player, isKiller)
 end
 
 entity.onMobDespawn = function(mob)
+    UpdateNMSpawnPoint(mob:getID())
+
     local kingArthroID = mob:getID()
 
     GetMobByID(kingArthroID):setLocalVar("[POP]King_Arthro", 0)

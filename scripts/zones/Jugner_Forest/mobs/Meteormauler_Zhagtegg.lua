@@ -11,17 +11,14 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     -- Takes half damage from all attacks
-    mob:addMod(xi.mod.UDMGPHYS,-5000)
-    mob:addMod(xi.mod.UDMGRANGE,-5000)
-    mob:addMod(xi.mod.UDMGMAGIC,-5000)
-    mob:addMod(xi.mod.UDMGBREATH,-5000)
+    mob:addMod(xi.mod.DMG,-5000)
 
     -- May spawn in a party with two other Orcs
     if math.random(1,2) == 1 then
-        GetMobByID(ID.mob.METEORMAULER_GUARD1):setSpawn(mob:getXPos()+2, mob:getYPos(), mob:getZPos())
-        GetMobByID(ID.mob.METEORMAULER_GUARD2):setSpawn(mob:getXPos()+4, mob:getYPos(), mob:getZPos())
-        SpawnMob(ID.mob.METEORMAULER_GUARD1)
-        SpawnMob(ID.mob.METEORMAULER_GUARD2)
+        GetMobByID(ID.mob.METEORMAULER + 1):setSpawn(mob:getXPos()+2, mob:getYPos(), mob:getZPos())
+        GetMobByID(ID.mob.METEORMAULER + 2):setSpawn(mob:getXPos()+4, mob:getYPos(), mob:getZPos())
+        SpawnMob(ID.mob.METEORMAULER + 1)
+        SpawnMob(ID.mob.METEORMAULER + 2)
     end
 end
 
@@ -35,11 +32,8 @@ end
 
 entity.onMobRoam = function(mob)
     local mobId = mob:getID()
-    -- print("roam")
-
     for i = 1, 2 do
         local guard = GetMobByID(mobId + i)
-        print(guard:getName())
         if guard:isSpawned() and guard:getID() == mobId + 1 then
             guard:pathTo(mob:getXPos() + 1, mob:getYPos() + 3, mob:getZPos() + 0.15)
         elseif guard:isSpawned() and guard:getID() == mobId + 2 then
@@ -54,8 +48,8 @@ end
 entity.onMobDespawn = function(mob)
     UpdateNMSpawnPoint(mob:getID())
     mob:setRespawnTime(75600 + math.random(0, 600)) -- 21 hours, 10 minute window
-    DespawnMob(ID.mob.METEORMAULER_GUARD1)
-    DespawnMob(ID.mob.METEORMAULER_GUARD2)
+    DespawnMob(ID.mob.METEORMAULER + 1)
+    DespawnMob(ID.mob.METEORMAULER + 2)
 end
 
 return entity
