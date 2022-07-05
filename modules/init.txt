@@ -37,8 +37,33 @@
 # Live example:
 
 custom/commands/
-custom/lua/test_npcs_in_gm_home.lua
+custom/cpp/ah_pagination.cpp
+custom/cpp/ah_announcement.cpp
+custom/lua/custom_conquest.lua
+custom/lua/disable_zones.lua
+custom/lua/conquest_npc_shops_always_open.lua
+custom/lua/conquest_regional_npcs_always_up.lua
+custom/lua/claim_shield.lua
+custom/lua/new_player_linkshell.lua
+custom/lua/custom_containers.lua
+custom/lua/guild_no_kits.lua
+custom/lua/conquest_crystal_trade_fix.lua
+custom/lua/disable_guild_shops.lua
+custom/sql/ka_speedbelt_drop.sql
+custom/sql/starter_zone_fast_repops.sql
 era/lua/beastmen_multigroup_spawn_fix.lua
+era/lua/75_era_vendors.lua
+era/sql/75_era_spells.sql
+era/lua/exp_rings.lua
+era/sql/2010_exp_tables.sql
+era/sql/mob_groups_era.sql
+era/sql/gardening_results_era.sql
+era/sql/2hr_ability_cooldowns.sql
+era/lua/75_era_argus.lua
+era/sql/75_era_drops.sql
+era/sql/75_era_guild_vendors.sql
+era/lua/75_era_guild_vendors.lua
+era/sql/RoZ_era_nms.sql
 #-----------------------
 #        Dynamis
 #-----------------------
