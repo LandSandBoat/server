@@ -1,5 +1,5 @@
 -----------------------------------
--- Spell: Threnody II - xi.mod.DARK_RES
+-- Spell: Threnody II - xi.mod.DARK_MEVA
 -----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/magic")
@@ -11,7 +11,7 @@ spell_object.onMagicCastingCheck = function(caster,target,spell)
 end
 
 spell_object.onSpellCast = function(caster,target,spell)
-    return handleThrenody(caster, target, spell, 160, 90, xi.mod.DARK_RES)
+    return handleThrenody(caster, target, spell, 160, 90, xi.mod.DARK_MEVA)
 end
 
 return spell_object

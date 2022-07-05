@@ -96,14 +96,14 @@ struct Trust_t
     int16 light_sdt;
     int16 dark_sdt;
 
-    int16 fire_res;
-    int16 ice_res;
-    int16 wind_res;
-    int16 earth_res;
-    int16 thunder_res;
-    int16 water_res;
-    int16 light_res;
-    int16 dark_res;
+    int16 fire_meva;
+    int16 ice_meva;
+    int16 wind_meva;
+    int16 earth_meva;
+    int16 thunder_meva;
+    int16 water_meva;
+    int16 light_meva;
+    int16 dark_meva;
 
     Trust_t()
     : EcoSystem(ECOSYSTEM::ECO_ERROR)
@@ -157,14 +157,14 @@ struct Trust_t
         light_sdt   = 0;
         dark_sdt    = 0;
 
-        fire_res    = 0;
-        ice_res     = 0;
-        wind_res    = 0;
-        earth_res   = 0;
-        thunder_res = 0;
-        water_res   = 0;
-        light_res   = 0;
-        dark_res    = 0;
+        fire_meva    = 0;
+        ice_meva     = 0;
+        wind_meva    = 0;
+        earth_meva   = 0;
+        thunder_meva = 0;
+        water_meva   = 0;
+        light_meva   = 0;
+        dark_meva    = 0;
     }
 };
 
@@ -239,10 +239,10 @@ namespace trustutils
                 mob_resistances.wind_sdt, mob_resistances.earth_sdt, \
                 mob_resistances.lightning_sdt, mob_resistances.water_sdt, \
                 mob_resistances.light_sdt, mob_resistances.dark_sdt, \
-                mob_resistances.fire_res, mob_resistances.ice_res, \
-                mob_resistances.wind_res, mob_resistances.earth_res, \
-                mob_resistances.lightning_res, mob_resistances.water_res, \
-                mob_resistances.light_res, mob_resistances.dark_res \
+                mob_resistances.fire_meva, mob_resistances.ice_meva, \
+                mob_resistances.wind_meva, mob_resistances.earth_meva, \
+                mob_resistances.lightning_meva, mob_resistances.water_meva, \
+                mob_resistances.light_meva, mob_resistances.dark_meva \
                 FROM spell_list, mob_pools, mob_family_system, mob_resistances \
                 WHERE spell_list.spellid = %u \
                 AND (spell_list.spellid+5000) = mob_pools.poolid \
@@ -315,14 +315,14 @@ namespace trustutils
                 trust->light_sdt   = (int16)sql->GetFloatData(41); // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
                 trust->dark_sdt    = (int16)sql->GetFloatData(42); // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
 
-                trust->fire_res    = (int16)sql->GetIntData(43);
-                trust->ice_res     = (int16)sql->GetIntData(44);
-                trust->wind_res    = (int16)sql->GetIntData(45);
-                trust->earth_res   = (int16)sql->GetIntData(46);
-                trust->thunder_res = (int16)sql->GetIntData(47);
-                trust->water_res   = (int16)sql->GetIntData(48);
-                trust->light_res   = (int16)sql->GetIntData(49);
-                trust->dark_res    = (int16)sql->GetIntData(50);
+                trust->fire_meva    = (int16)sql->GetIntData(43);
+                trust->ice_meva     = (int16)sql->GetIntData(44);
+                trust->wind_meva    = (int16)sql->GetIntData(45);
+                trust->earth_meva   = (int16)sql->GetIntData(46);
+                trust->thunder_meva = (int16)sql->GetIntData(47);
+                trust->water_meva   = (int16)sql->GetIntData(48);
+                trust->light_meva   = (int16)sql->GetIntData(49);
+                trust->dark_meva    = (int16)sql->GetIntData(50);
 
                 g_PTrustList.push_back(trust);
             }
