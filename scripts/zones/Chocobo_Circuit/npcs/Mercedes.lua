@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Chocobo_Circuit
---  NPC: Mercedes
+-- NPC: Mercedes
 -- Standard Info NPC
 -----------------------------------
 local entity = {}

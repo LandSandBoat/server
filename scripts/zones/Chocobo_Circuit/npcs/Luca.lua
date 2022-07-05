@@ -1,7 +1,8 @@
 -----------------------------------
 -- Area: Chocobo_Circuit
---  NPC: Luca
+-- NPC: Luca
 -- Standard Info NPC
+-- POS: -313.4284 -0.0228 -484.1256
 -----------------------------------
 local entity = {}
 
