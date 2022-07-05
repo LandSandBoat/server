@@ -4938,6 +4938,9 @@ INSERT INTO `mob_spell_lists` VALUES ('Shens_Filtrate',488,214,1,255); -- flood 
 
 -- Next Available: 489
 
+-- AirSkyBoat Specific Starts at 5000
+-- 5000 -> 5010 is Era Dynamis
+
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
