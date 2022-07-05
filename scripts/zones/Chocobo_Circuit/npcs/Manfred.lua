@@ -2,7 +2,7 @@
 -- Area: Chocobo_Circuit
 -- NPC: Manfred
 -- Race Attendant (Green)
--- pos 
+-- pos
 -----------------------------------
 local entity = {}
 

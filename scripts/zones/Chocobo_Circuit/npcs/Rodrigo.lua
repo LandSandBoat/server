@@ -2,7 +2,7 @@
 -- Area: Chocobo_Circuit
 -- NPC: Rodrigo
 -- Standard Info NPC
--- pos 
+-- pos
 -----------------------------------
 local entity = {}
 

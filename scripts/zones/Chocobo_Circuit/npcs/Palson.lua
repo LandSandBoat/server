@@ -2,7 +2,7 @@
 -- Area: Chocobo_Circuit
 -- NPC: Palson
 -- Merchant
--- pos 
+-- pos
 -----------------------------------
 local entity = {}
 

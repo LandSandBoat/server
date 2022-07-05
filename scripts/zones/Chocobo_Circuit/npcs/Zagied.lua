@@ -2,7 +2,7 @@
 -- Area: Chocobo_Circuit
 -- NPC: Zagied
 -- Expert Bastok CRA Branch
--- pos 
+-- pos
 -- event 482 483 484 485 486 487 488 489 490
 -----------------------------------
 local entity = {}

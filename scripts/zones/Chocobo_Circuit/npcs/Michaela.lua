@@ -3,7 +3,7 @@
 -- NPC: Michaela
 -- Trophy Engraver
 -- Pos -319.3231 -0.0304 -521.0439
--- event 404 405 
+-- event 404 405
 -----------------------------------
 local entity = {}
 

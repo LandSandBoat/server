@@ -2,7 +2,7 @@
 -- Area: Chocobo_Circuit
 -- NPC: Ove
 -- Standard Info NPC
--- pos 
+-- pos
 -----------------------------------
 local entity = {}
 

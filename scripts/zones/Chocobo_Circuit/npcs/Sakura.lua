@@ -2,8 +2,8 @@
 -- Area: Chocobo_Circuit
 -- NPC: Sakura
 -- Commentator
--- pos 
--- event 479 488 497 
+-- pos
+-- event 479 488 497
 -----------------------------------
 local entity = {}
 

@@ -2,7 +2,7 @@
 -- Area: Chocobo_Circuit
 -- NPC: Russel
 -- Race Attendant (Blue)
--- pos 
+-- pos
 -----------------------------------
 local entity = {}
 

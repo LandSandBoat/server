@@ -2,7 +2,7 @@
 -- Area: Chocobo_Circuit
 -- NPC: Maxine
 -- Standard Info NPC
--- pos 
+-- pos
 -- event 352
 -----------------------------------
 local entity = {}
