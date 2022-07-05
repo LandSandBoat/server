@@ -2684,6 +2684,7 @@ xi.items =
     TWILIGHT_KNIFE                  = 19132,
     SMART_GRENADE                   = 19202,
     WAR_HOOP                        = 19203,
+    FULLMETAL_BULLET                = 19214,
     SAVANTS_TREATISE                = 19247,
     RAVAGERS_ORB                    = 19253,
     TANTRA_TATHLUM                  = 19254,
