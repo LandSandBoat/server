@@ -225,7 +225,7 @@ void SmallPacket0x000(map_session_data_t* const PSession, CCharEntity* const PCh
 
 void SmallPacket0xFFF(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
-    ShowDebug("parse: SmallPacket is not implemented Type<%03hX>", (data.ref<uint16>(0) & 0x1FF));
+    ShowWarning("parse: SmallPacket is not implemented Type<%03hX>", (data.ref<uint16>(0) & 0x1FF));
 }
 
 /************************************************************************
@@ -799,6 +799,8 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
     auto actionStr = actionToStr(action);
     TracyZoneString(fmt::format("Player Action: {}: {} -> targid: {}", PChar->GetName(), actionStr, TargID));
 
+    DebugActions(fmt::format("CLIENT {} PERFORMING ACTION {} (0x{:02X})", PChar->GetName(), actionStr, action));
+
     switch (action)
     {
         case 0x00: // trigger
@@ -1157,7 +1159,6 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
         }
         break;
     }
-    ShowInfo(fmt::format("CLIENT {} PERFORMING ACTION {} (0x{:02X})", PChar->GetName(), actionStr, action));
 }
 
 /************************************************************************
@@ -5801,12 +5802,12 @@ void SmallPacket0x0DD(map_session_data_t* const PSession, CCharEntity* const PCh
             if (PChar->getEquip(SLOT_RANGED) && PChar->getEquip(SLOT_RANGED)->isType(ITEM_WEAPON))
             {
                 int skill = ((CItemWeapon*)PChar->getEquip(SLOT_RANGED))->getSkillType();
-                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar->PPet, PChar->PPet->RACC(skill), PChar->PPet->RATT(skill), MSGBASIC_CHECKPARAM_RANGE));
+                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar->PPet, PChar->PPet->RACC(skill, distance(PChar->PPet->loc.p, PChar->PPet->GetBattleTarget()->loc.p)), PChar->PPet->RATT(skill, distance(PChar->PPet->loc.p, PChar->PPet->GetBattleTarget()->loc.p)), MSGBASIC_CHECKPARAM_RANGE));
             }
             else if (PChar->getEquip(SLOT_AMMO) && PChar->getEquip(SLOT_AMMO)->isType(ITEM_WEAPON))
             {
                 int skill = ((CItemWeapon*)PChar->getEquip(SLOT_AMMO))->getSkillType();
-                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar->PPet, PChar->PPet->RACC(skill), PChar->PPet->RATT(skill), MSGBASIC_CHECKPARAM_RANGE));
+                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar->PPet, PChar->PPet->RACC(skill, distance(PChar->PPet->loc.p, PChar->PPet->GetBattleTarget()->loc.p)), PChar->PPet->RATT(skill, distance(PChar->PPet->loc.p, PChar->PPet->GetBattleTarget()->loc.p)), MSGBASIC_CHECKPARAM_RANGE));
             }
             else
             {

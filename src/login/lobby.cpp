@@ -177,8 +177,11 @@ int32 lobbydata_parse(int32 fd)
                 // Extract all the necessary information about the character from the database.
                 while (sql->NextRow() != SQL_NO_DATA)
                 {
-                    char* strCharName = nullptr;
-                    sql->GetData(1, &strCharName, nullptr);
+                    char strCharName[16] = {}; // 15 characters + null terminator
+                    std::memset(strCharName, 0, sizeof(strCharName));
+
+                    std::string dbCharName = sql->GetStringData(1);
+                    std::memcpy(strCharName, dbCharName.c_str(), dbCharName.length());
 
                     auto gmlevel = sql->GetIntData(36);
                     if (maintMode == 0 || gmlevel > 0)
@@ -206,7 +209,7 @@ int32 lobbydata_parse(int32 fd)
                         ref<uint8>(CharList, charListOffset + 6)  = worldId;
                         ref<uint8>(CharList, charListOffset + 11) = charIdExtra;
 
-                        std::memcpy(CharList + charListOffset + 12, strCharName, 15);
+                        std::memcpy(CharList + charListOffset + 12, &strCharName, 16);
 
                         uint16 zone = (uint16)sql->GetUIntData(2);
 
@@ -337,13 +340,15 @@ int32 lobbydata_parse(int32 fd)
                     ref<uint32>(ReservePacket, (0x38)) = ZoneIP;
                     ref<uint16>(ReservePacket, (0x3C)) = ZonePort;
 
-                    char*       charname       = nullptr;
-                    std::size_t charnameLength = 0;
-                    sql->GetData(6, &charname, &charnameLength);
+                    char strCharName[16] = {}; // 15 characters + null terminator
+                    std::memset(strCharName, 0, sizeof(strCharName));
+
+                    std::string dbCharName = sql->GetStringData(6);
+                    std::memcpy(strCharName, dbCharName.c_str(), dbCharName.length());
 
                     ref<uint32>(ReservePacket, 28) = charid;
                     ref<uint32>(ReservePacket, 32) = charid;
-                    std::memcpy(ReservePacket + 36, charname, charnameLength);
+                    std::memcpy(ReservePacket + 36, &strCharName, 16);
 
                     ShowInfo("lobbydata_parse: zoneid:(%u),zoneip:(%s),zoneport:(%u) for char:(%u)", ZoneID, ip2str(ntohl(ZoneIP)), ZonePort, charid);
 
@@ -777,7 +782,7 @@ int32 lobbyview_parse(int32 fd)
                     // creating new char
                     char CharName[16];
                     std::memset(CharName, 0, sizeof(CharName));
-                    std::memcpy(CharName, sessions[fd]->rdata.data() + 32, sizeof(CharName) - 1);
+                    std::memcpy(CharName, sessions[fd]->rdata.data() + 32, sizeof(CharName));
 
                     // find assigns
                     const char* fmtQuery = "SELECT charname FROM chars WHERE charname LIKE '%s'";
@@ -821,7 +826,7 @@ int32 lobbyview_parse(int32 fd)
                     else
                     {
                         // copy charname
-                        std::memcpy(sd->charname, CharName, 15);
+                        std::memcpy(sd->charname, CharName, 16);
                         sendsize = 0x20;
                         LOBBY_ACTION_DONE(ReservePacket);
                         std::memcpy(MainReservePacket, ReservePacket, sendsize);

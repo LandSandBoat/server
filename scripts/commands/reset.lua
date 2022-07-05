@@ -58,6 +58,4 @@ function onTrigger(player, target)
     for _, v in pairs(effects) do
         player:delStatusEffect(v)
     end
-
-
 end

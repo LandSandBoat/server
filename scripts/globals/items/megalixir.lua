@@ -1,6 +1,6 @@
 -----------------------------------
--- ID: 4145
--- Item: Elixir
+-- ID: 4254
+-- Item: Megalixir
 -- Item Effect: Instantly restores 100% of HP and MP
 -----------------------------------
 require("scripts/globals/msg")

@@ -1,7 +1,7 @@
 -----------------------------------
 -- ID: 5440
 -- Dusty Wing
--- Increases TP of the user by 300
+-- Increases TP of the user by 3000
 -----------------------------------
 local item_object = {}
 
