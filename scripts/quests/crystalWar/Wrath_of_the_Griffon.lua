@@ -63,7 +63,10 @@ quest.sections =
             onEventFinish =
             {
                 [60] = function(player, csid, option, npc)
-                    quest:complete(player)
+                    if quest:complete(player) then
+                        xi.quest.setVar(player, xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.PERILS_OF_THE_GRIFFON, 'Timer', VanadielUniqueDay() + 1)
+                        xi.quest.setMustZone(player, xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.PERILS_OF_THE_GRIFFON)
+                    end
                 end,
             },
         },
@@ -111,17 +114,6 @@ quest.sections =
                     quest:setVar(player, 'Prog', 3)
                 end,
             },
-        },
-    },
-
-    {
-        check = function(player, status, vars)
-            return status == QUEST_COMPLETED
-        end,
-
-        [xi.zone.SOUTHERN_SAN_DORIA_S] =
-        {
-            ['Rholont'] = quest:event(49):replaceDefault(),
         },
     },
 }

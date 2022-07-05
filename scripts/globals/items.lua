@@ -755,6 +755,7 @@ xi.items =
     HI_POTION_I                     = 4117,
     HI_POTION_II                    = 4118,
     HI_POTION_III                   = 4119,
+    ELIXIR                          = 4145,
     REVITALIZER                     = 4146,
     REMEDY                          = 4155,
     FLASK_OF_SLEEPING_POTION        = 4161,
