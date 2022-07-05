@@ -1,4 +1,3 @@
-Maleroune
 -----------------------------------
 -- Area: Chocobo_Circuit
 -- NPC: Maleroune
