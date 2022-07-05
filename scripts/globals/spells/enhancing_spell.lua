@@ -409,6 +409,11 @@ xi.spells.enhancing.useEnhancingSpell = function(caster, target, spell)
     -- Handle exceptions and weird behaviour here, before calculating anything.
     ------------------------------------------------------------
 
+    if target:getStatusEffect(xi.effect.ALL_MISS):getPower() == 2 then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+        return 0
+    end
+
     -- TODO: Find a way to replace big if/else chain and still make it look good.
 
     -- Bar-Element (They use addStatusEffect argument 6. Bar-Status current implementation doesn't.)

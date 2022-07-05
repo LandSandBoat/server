@@ -475,6 +475,10 @@ xi.mobskills.mobBreathMove = function(mob, target, percent, base, element, cap)
 
     damage = math.floor(damage * combinedDamageTaken)
 
+    if target:hasStatusEffect(xi.effect.ALL_MISS) and target:getStausEffect(xi.effect.ALL_MISS):getPower() > 1 then
+        return 0
+    end
+
     -- Handle Phalanx
     if damage > 0 then
         damage = utils.clamp(damage - target:getMod(xi.mod.PHALANX), 0, 99999)
@@ -508,6 +512,12 @@ xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType,
         attackType== xi.attackType.PHYSICAL
     then
         skill:setMsg(xi.msg.basic.SKILL_MISS)
+        return 0
+    end
+
+    -- handle super jump
+    if target:hasStatusEffect(xi.effect.ALL_MISS) and target:getStausEffect(xi.effect.ALL_MISS):getPower() > 1 then
+        skill:setMsg(xi.msg.basic.SKILL_MISS_)
         return 0
     end
 

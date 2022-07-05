@@ -292,6 +292,12 @@ xi.summon.avatarFinalAdjustments = function(dmg, mob, skill, target, skilltype, 
         return 0
     end
 
+    -- handle super jump
+    if target:hasStatusEffect(xi.effect.ALL_MISS) and target:getStausEffect(xi.effect.ALL_MISS):getPower() > 1 then
+        skill:setMsg(xi.msg.basic.JA_MISS_2)
+        return 0
+    end
+
     -- Calculate Blood Pact Damage before stoneskin
     dmg = dmg + dmg * mob:getMod(xi.mod.BP_DAMAGE) / 100
 
