@@ -87,7 +87,7 @@ local function getSpellBonusAcc(caster, target, spell, params)
 
     --add acc for skillchains
     if skillchainTier > 0 then
-        magicAccBonus = magicAccBonus + 25
+        magicAccBonus = magicAccBonus + 30
     end
 
     --Add acc for klimaform
@@ -163,14 +163,17 @@ local function getSpellBonusAcc(caster, target, spell, params)
     return magicAccBonus
 end
 
-local function calculateMagicHitRate(magicacc, magiceva, percentBonus, casterLvl, targetLvl)
+local function calculateMagicHitRate(magicacc, magiceva, dLvl)
     local p = 0
-    --add a scaling bonus or penalty based on difference of targets level from caster
-    local levelDiff = utils.clamp(casterLvl - targetLvl, -5, 5)
+    local magicAccDiff = magicacc - magiceva
 
-    p = 70 - 0.5 * (magiceva - magicacc) + levelDiff * 3 + percentBonus
+    if magicAccDiff < 0 then
+        p = utils.clamp(50 + math.floor(magicAccDiff / 2), 5, 95)
+    else
+        p = utils.clamp(50 + magicAccDiff, 5, 95)
+    end
 
-    return utils.clamp(p, 5, 95)
+    return p
 end
 
 local function isHelixSpell(spell)
@@ -458,6 +461,7 @@ function applyResistanceEffect(caster, target, spell, params)
     local skill = params.skillType
     local bonus = params.bonus
     local effect = params.effect
+    local bonusRes = spell:getElement()
 
     -- If Stymie is active, as long as the mob is not immune then the effect is not resisted
     if effect ~= nil then -- Dispel's script doesn't have an "effect" to send here, nor should it.
@@ -467,31 +471,23 @@ function applyResistanceEffect(caster, target, spell, params)
         end
     end
 
-    if skill == xi.skill.SINGING and caster:hasStatusEffect(xi.effect.TROUBADOUR) then
-        if math.random(0, 99) < caster:getMerit(xi.merit.TROUBADOUR)-25 then
-            return 1.0
-        end
-    end
-
     local element = spell:getElement()
-    local percentBonus = 0
+    local effectRes = 0
     local magicaccbonus = getSpellBonusAcc(caster, target, spell, params)
-
-    if diff > 10 then
-        magicaccbonus = magicaccbonus + 10 + (diff - 10)/2
-    else
-        magicaccbonus = magicaccbonus + diff
-    end
 
     if bonus ~= nil then
         magicaccbonus = magicaccbonus + bonus
     end
 
-    if effect ~= nil then
-        percentBonus = percentBonus - getEffectResistance(target, effect)
+    if bonusRes ~= nil then
+        effectRes = effectRes - getEffectResistance(target, bonusRes)
     end
 
-    local p = getMagicHitRate(caster, target, skill, element, percentBonus, magicaccbonus)
+    if effect ~= nil then
+        effectRes = effectRes - getEffectResistance(target, effect)
+    end
+
+    local p = getMagicHitRate(caster, target, skill, element, effectRes, magicaccbonus, diff)
 
     return getMagicResist(p)
 end
@@ -511,7 +507,13 @@ function applyResistanceAddEffect(player, target, element, bonus)
     return getMagicResist(p)
 end
 
-function getMagicHitRate(caster, target, skillType, element, percentBonus, bonusAcc)
+function getMagicHitRate(caster, target, skillType, element, effectRes, bonusAcc, dStat)
+    local magicacc = 0
+    local magiceva = 0
+    local resMod = 0
+    local dLvl = caster:getMainLvl() - target:getMainLvl()
+    local dStatAcc = 0
+
     -- resist everything if real magic shield is active (see effects/magic_shield)
     if target:hasStatusEffect(xi.effect.MAGIC_SHIELD) then
         local magicshieldsub = target:getStatusEffect(xi.effect.MAGIC_SHIELD)
@@ -525,33 +527,75 @@ function getMagicHitRate(caster, target, skillType, element, percentBonus, bonus
         bonusAcc = 0
     end
 
-    local magicacc = caster:getMod(xi.mod.MACC) + caster:getILvlMacc()
-
-    -- Get the base acc (just skill + skill mod (79 + skillID = ModID) + magic acc mod)
-    if skillType ~= 0 then
-        magicacc = magicacc + caster:getSkillLevel(skillType)
-    else
-        -- for mob skills / additional effects which don't have a skill
-        magicacc = magicacc + utils.getSkillLvl(1, caster:getMainLvl())
+    if dStat == nil then
+        dStat = 0
     end
 
-    local resMod = 0 -- Some spells may possibly be non elemental, but have status effects.
+    dStat = utils.clamp(dStat, 0, 50) -- Clamp to maximum of 50 dStat
+
+    -- Redeclaring Skill Type to Apply dStat Appropriately Account for Both Mobs and Players
+    if skillType == xi.skill.ENFEEBLING_MAGIC then -- Enfeebling Magic is a special case where 15 dStat is where suqash starts.
+        if dStat > 15 then -- >15 dStat should be suashed.
+            local bonusDStat = dStat - 15
+            dStatAcc = 15 + (bonusDStat / 2)
+        else
+            dStatAcc = dStat
+        end
+    elseif -- All other magic types
+        skillType == xi.skill.ELEMENTAL_MAGIC or skillType == xi.skill.WIND_INSTRUMENT or
+        skillType == xi.skill.SINGING or skillType == xi.skill.STRING_INSTRUMENT or
+        skillType == xi.skill.HEALING_MAGIC or skillType == xi.skill.BLUE_MAGIC or
+        skillType == xi.skill.DARK_MAGIC or skillType == xi.skill.NINJUTSU
+        then -- Max 10 dStat before squash.
+        if dStat > 10 then -- >10 dStat should be suashed.
+            local bonusDStat = dStat - 10
+            dStatAcc = 10 + (bonusDStat / 2)
+        else
+            dStatAcc = dStat
+        end
+    else -- Is a skill so we shouldn't mess with this.
+        dStatAcc = dStat
+    end
+
+    if skillType ~= xi.skill.SINGING then -- If not a bard song
+        if target:isPC() then
+            local gearBonus = caster:getMod(xi.mod.MACC) + caster:getILvlMacc()
+            magicacc = caster:getSkillLevel(skillType) + gearBonus + dStatAcc
+        else
+            magicacc = utils.getSkillLvl(1, caster:getMainLvl()) + dStatAcc
+        end
+    else -- If a bard song
+        if target:isPC() then
+            local secondarySkill = caster:getEquippedItem(xi.slot.RANGED):getSkillType()
+            local gearBonus = caster:getMod(xi.mod.MACC) + caster:getILvlMacc()
+            if secondarySkill == 41 or secondarySkill == 42 then
+                magicacc = caster:getSkillLevel(skillType) + (secondarySkill / 3) + gearBonus + dStatAcc
+            else
+                magicacc = caster:getSkillLevel(skillType) + gearBonus + dStatAcc
+            end
+        else
+            magicacc = utils.getSkillLvl(1, caster:getMainLvl()) + dStatAcc
+        end
+    end
+
     if element ~= xi.magic.ele.NONE then
         resMod = target:getMod(xi.magic.resistMod[element])
 
         -- Add acc for elemental affinity accuracy and element specific accuracy
         local affinityBonus = AffinityBonusAcc(caster, element)
         local elementBonus = caster:getMod(spellAcc[element])
-
         bonusAcc = bonusAcc + affinityBonus + elementBonus
     end
 
-    magicacc = magicacc + caster:getMerit(xi.merit.MAGIC_ACCURACY)
 
-    magicacc = magicacc + caster:getMerit(xi.merit.NIN_MAGIC_ACCURACY)
+    if target:isPC() then
+        magiceva = target:getMod(xi.mod.MEVA) + resMod + effectRes
+    else
+        dLvl = utils.clamp(dLvl, 0, 99) -- Mobs should not have a disadvantage when targeted
+        magiceva = target:getMod(xi.mod.MEVA) + (4 * dLvl) + resMod + effectRes
+    end
 
-    -- Base magic evasion (base magic evasion plus resistances(players), plus elemental defense(mobs)
-    local magiceva = target:getMod(xi.mod.MEVA) + resMod
+    bonusAcc = bonusAcc + caster:getMerit(xi.merit.MAGIC_ACCURACY) + caster:getMerit(xi.merit.NIN_MAGIC_ACCURACY)
 
     magicacc = magicacc + bonusAcc
 
@@ -559,7 +603,7 @@ function getMagicHitRate(caster, target, skillType, element, percentBonus, bonus
     local maccFood = magicacc * (caster:getMod(xi.mod.FOOD_MACCP)/100)
     magicacc = magicacc + utils.clamp(maccFood, 0, caster:getMod(xi.mod.FOOD_MACC_CAP))
 
-    return calculateMagicHitRate(magicacc, magiceva, percentBonus, caster:getMainLvl(), target:getMainLvl())
+    return calculateMagicHitRate(magicacc, magiceva, dLvl)
 end
 
 -- Returns resistance value from given magic hit rate (p)
