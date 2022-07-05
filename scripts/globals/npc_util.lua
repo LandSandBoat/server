@@ -783,7 +783,6 @@ function npcUtil.tradeHasExactly(trade, items)
     return npcUtil.tradeHas(trade, items, true)
 end
 
-
 -- Checks to see if a trade only contains one item, but the total count can be variable
 function npcUtil.tradeHasOnly(trade, itemID)
     return npcUtil.tradeHasExactly(trade, {{ itemID, trade:getItemCount() }})

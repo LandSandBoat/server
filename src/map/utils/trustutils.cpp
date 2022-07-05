@@ -268,7 +268,6 @@ namespace trustutils
                 memcpy(&sqlModelID, sql->GetData(3), 20);
                 trust->look = look_t(sqlModelID);
 
-
                 trust->m_Family       = (uint16)sql->GetIntData(4);
                 trust->mJob           = (uint8)sql->GetIntData(5);
                 trust->sJob           = (uint8)sql->GetIntData(6);

@@ -305,7 +305,6 @@ namespace zoneutils
                     memcpy(&sqlModelID, sql->GetData(16), 20);
                     PNpc->look = look_t(sqlModelID);
 
-
                     PNpc->name_prefix = (uint8)sql->GetIntData(17);
                     PNpc->widescan    = (uint8)sql->GetIntData(18);
 

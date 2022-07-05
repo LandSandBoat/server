@@ -48,7 +48,6 @@ quest.sections =
         },
     },
 
-
     -- Informational: You can talk to nearby guards and by-standers, some will report having seen the thief allowing you to pick up the trail.
     {
         check = function(player, status, vars)

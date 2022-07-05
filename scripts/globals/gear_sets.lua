@@ -34,7 +34,6 @@ local absorbDamagePieceBonus = 1
 local instantCastBaseRate = 2
 local instantCastPieceBonus = 1
 
-
 --              {id, {item, ids, in, no, particular, order}, minimum matches required, match type, mods{id, value, modvalue for each additional match, additional whole set bonus}
 local gearSets =
 {
@@ -428,7 +427,6 @@ Empyrean +2
 -- Set Bonus: Occ. augments blue magic spells.
 -- no clue!
 
-
 --Bale Armor +2 Set
 -----------------------------------
 11071 -- Bale Burgeonet+2
@@ -448,7 +446,6 @@ Empyrean +2
 11157 -- Lancer's Schynbalds+2
 -- Set Bonus: Attack occasionally varies with wyvern's HP.
 -- Damage increases proportionate to Wyvern's HP, at 100%, damage is doubled. 2+ pieces required, more pieces increase proc rate. Full +2 set is about a 10% proc rate. (Confirmation needed)
-
 
 --Cirque Attire +2 Set
 -----------------------------------

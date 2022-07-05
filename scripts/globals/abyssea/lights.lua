@@ -72,7 +72,6 @@ local lightInfo =
         ["Hadal_Satiator"]         = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
     },
 
-
     [xi.zone.ABYSSEA_LA_THEINE] =
     {
         ["Angler_Tiger"]           = { azure = 8,   pearl = 5,   ruby = 8,   amber = 8  }, -- Tigers
@@ -571,8 +570,6 @@ xi.abyssea.AddDeathListeners = function(mob)
 		xi.abyssea.RemoveDeathListeners(mobArg)
     end)
 end
-
-
 
 xi.abyssea.DropLights = function(killer, mobName, killType, mob)
     if killer then

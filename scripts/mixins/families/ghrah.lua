@@ -94,7 +94,6 @@ g_mixins.families.ghrah = function(ghrahMob)
         end
     end)
 
-
     ghrahMob:addListener("COMBAT_TICK", "GHRAH_COMBAT", function(mob)
         local changeTime = mob:getLocalVar("changeTime")
 

@@ -770,7 +770,6 @@ std::vector<std::string> split(std::string const& s, std::string const& delimite
     return res;
 }
 
-
 std::string to_lower(std::string const& s)
 {
     // clang-format off

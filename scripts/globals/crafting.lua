@@ -165,7 +165,6 @@ local function canGetNewRank(player, skillLvL, craftID)
     return canGet
 end
 
-
 -----------------------------------
 -- tradeTestItem Action
 -----------------------------------

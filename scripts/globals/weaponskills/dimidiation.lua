@@ -32,7 +32,6 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     params.ignored200 = 0
     params.ignored300 = 0
 
-
     -- Apply aftermath
     xi.aftermath.addStatusEffect(player, tp, xi.slot.MAIN, xi.aftermath.type.MYTHIC)
 

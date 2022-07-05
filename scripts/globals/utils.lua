@@ -559,7 +559,6 @@ function utils.ffxiRotToDegrees(ffxiRot)
     return ffxiRotConversionFactor * ffxiRot
 end
 
-
 function utils.lateralTranslateWithOriginRotation(origin, translation)
     local degrees = utils.ffxiRotToDegrees(origin.rot)
     local rads = math.rad(degrees)
