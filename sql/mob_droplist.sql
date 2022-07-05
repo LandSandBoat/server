@@ -22304,9 +22304,9 @@ INSERT INTO `mob_droplist` VALUES (2682,0,0,1000,3315,@UNCOMMON);  -- Ominous Sk
 INSERT INTO `mob_droplist` VALUES (2682,0,0,1000,11910,@UNCOMMON); -- Derobade Mittens (Uncommon, 10%)
 
 -- ZoneID:   7 - Xolotl
-INSERT INTO `mob_droplist` VALUES (2683,0,0,1000,15182,500); -- Zoolater Hat (50.0%)
-INSERT INTO `mob_droplist` VALUES (2683,0,0,1000,14873,170); -- Bandomusha Kote (17.0%)
-INSERT INTO `mob_droplist` VALUES (2683,0,0,1000,18002,40);  -- Perseuss Harpe (4.0%)
+INSERT INTO `mob_droplist` VALUES (2683,0,0,1000,15182,@VCOMMON); -- Zoolater Hat (50.0%)
+INSERT INTO `mob_droplist` VALUES (2683,0,0,1000,14873,@COMMON); -- Bandomusha Kote (17.0%)
+INSERT INTO `mob_droplist` VALUES (2683,0,0,1000,18002,@VRARE);  -- Perseuss Harpe (4.0%)
 
 -- ZoneID: 215 - Yaanei
 INSERT INTO `mob_droplist` VALUES (2684,0,0,1000,11617,@ALWAYS);   -- Ferine Necklace (Always, 100%)
