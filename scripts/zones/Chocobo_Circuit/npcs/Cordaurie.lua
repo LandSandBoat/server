@@ -2,7 +2,7 @@
 -- Area: Chocobo_Circuit
 -- NPC: Cordaurie
 -- Standard Info NPC
--- pos 
+-- pos -253.4521 -4.0000 -506.1546
 -- event 287 291 292 293 294 295 300 304 
 -----------------------------------
 local entity = {}

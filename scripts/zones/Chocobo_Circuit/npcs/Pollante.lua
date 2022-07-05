@@ -2,7 +2,7 @@
 -- Area: Chocobo_Circuit
 -- NPC: Pollante
 -- Teleporter
--- pos 
+-- pos -327.0122 -4.0000 -4.31.0164
 -----------------------------------
 local entity = {}
 

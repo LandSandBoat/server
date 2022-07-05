@@ -1,8 +1,8 @@
 -----------------------------------
 -- Area: Chocobo_Circuit
 -- NPC: Valerio
--- Standard Info NPC
--- pos 
+-- Teleporter
+-- pos -500.0432 0.0000 -360.1892
 -----------------------------------
 local entity = {}
 

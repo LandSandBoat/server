@@ -2,7 +2,7 @@
 -- Area: Chocobo_Circuit
 -- NPC: Linus
 -- Standard Info NPC
--- pos 
+-- pos -270.6544 -4.0000 -507.0776
 -- event 267 271 275 279 280 281 282 283 
 -----------------------------------
 local entity = {}

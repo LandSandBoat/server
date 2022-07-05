@@ -2,7 +2,7 @@
 -- Area: Chocobo_Circuit
 -- NPC: Giancario
 -- Standard Info NPC
--- pos 
+-- pos -253.4672 -4.0000 -453.1639
 -- event 212 213 214 215 228 229 230 231
 -----------------------------------
 local entity = {}

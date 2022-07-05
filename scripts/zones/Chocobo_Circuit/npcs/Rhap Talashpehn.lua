@@ -3,7 +3,7 @@
 -- NPC: Rhap Talashpehn
 -- Standard Info NPC
 -- pos -371.4615 -4.0000 -507.2594
---event 287 291 295 300 304
+-- event 287 291 295 300 304
 -----------------------------------
 local entity = {}
 

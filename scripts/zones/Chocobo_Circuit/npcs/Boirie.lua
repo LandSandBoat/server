@@ -1,9 +1,8 @@
-Boirie
 -----------------------------------
 -- Area: Chocobo_Circuit
 -- NPC: Boirie
 -- Standard Info NPC
--- pos 
+-- pos -387.4615 -5.0000 -490.9008
 -----------------------------------
 local entity = {}
 

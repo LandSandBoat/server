@@ -3,7 +3,6 @@
 -- NPC: Couzanne
 -- Grandstand Exit
 -- pos -110.9048 -14.5000 -131.5597
-
 -----------------------------------
 local entity = {}
 

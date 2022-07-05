@@ -2,7 +2,7 @@
 -- Area: Chocobo_Circuit
 -- NPC: Fhaht Beablrucch
 -- Betting Attendant (Red)
--- pos 
+-- pos -313.0392 -4.0000 -419.0212
 -- event 212 213 214 215 219 223 228 234
 -----------------------------------
 local entity = {}

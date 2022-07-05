@@ -3,7 +3,6 @@
 -- NPC: Mulaitrand
 -- Chocobo Circuit Grandstand Attendant
 -- pos -388.2694 -5.0000 -467.1629
-
 -----------------------------------
 local entity = {}
 

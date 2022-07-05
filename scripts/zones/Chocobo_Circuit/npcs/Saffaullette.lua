@@ -3,7 +3,6 @@
 -- NPC: Saffaullette
 -- Chocobo Circuit Grandstand Attendant
 -- pos -252.2906 -5.0000 -490.7443
-
 -----------------------------------
 local entity = {}
 

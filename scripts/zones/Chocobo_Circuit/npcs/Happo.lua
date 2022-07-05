@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Chocobo_Circuit
 -- NPC: Happo
--- NPC spectator [roams]
+-- spectator [roams]
 -- pos -32.9832 -15 -126.9244
 -- event 356 357 358
 -----------------------------------

@@ -2,7 +2,7 @@
 -- Area: Chocobo_Circuit
 -- NPC: Magali
 -- Standard Info NPC
--- pos 
+-- pos -329.3409 0.0000 -296.6740
 -----------------------------------
 local entity = {}
 

@@ -3,7 +3,6 @@
 -- NPC: Perdric
 -- Grandstand Exit
 -- pos -84.5186 -15.0901 129.1561
-
 -----------------------------------
 local entity = {}
 

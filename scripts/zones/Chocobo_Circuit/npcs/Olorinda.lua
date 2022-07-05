@@ -3,7 +3,6 @@
 -- NPC: Olorinda
 -- Race Overview
 -- pos -114.7143 -14.500 -132.5795
-
 -----------------------------------
 local entity = {}
 

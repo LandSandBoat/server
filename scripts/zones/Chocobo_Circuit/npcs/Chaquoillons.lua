@@ -2,7 +2,7 @@
 -- Area: Chocobo_Circuit
 -- NPC: Chaquoillons
 -- Standard Info NPC
--- pos 
+-- pos -270.8263 -4.0000 -466.7501
 -----------------------------------
 local entity = {}
 

@@ -1,8 +1,9 @@
 -----------------------------------
 -- Area: Chocobo_Circuit
--- NPC: Mediverchanne
--- Teleporter
+-- NPC: Gimaulle
+-- Standard Info NPC
 -- pos 
+-- event 212 213 214 215 228 229 230 231
 -----------------------------------
 local entity = {}
 
@@ -10,7 +11,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(242)
+    player:startEvent(212)
 end
 
 entity.onEventUpdate = function(player, csid, option)

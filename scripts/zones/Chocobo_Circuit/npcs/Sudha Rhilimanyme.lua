@@ -2,7 +2,7 @@
 -- Area: Chocobo_Circuit
 -- NPC: Sudha Rhilimanyme
 -- Standard Info NPC
--- pos 
+-- pos -264.7245 -4.0000 -454.0705
 -- event 267 271 272 273 274 275 283
 -----------------------------------
 local entity = {}

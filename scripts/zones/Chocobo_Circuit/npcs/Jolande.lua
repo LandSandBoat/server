@@ -2,7 +2,7 @@
 -- Area: Chocobo_Circuit
 -- NPC: Jolande
 -- Standard Info NPC
--- pos 
+-- pos -496.4251 -0.0169 -370.3765
 -----------------------------------
 local entity = {}
 

@@ -2,7 +2,7 @@
 -- Area: Chocobo_Circuit
 -- NPC: Mercedes
 -- Race Attendant (Blue)
--- pos
+-- pos -362.8061 4.0000 -530.8210
 -----------------------------------
 local entity = {}
 

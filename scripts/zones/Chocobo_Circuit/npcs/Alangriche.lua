@@ -2,7 +2,7 @@
 -- Area: Chocobo_Circuit
 -- NPC: Alangriche
 -- Novice San d'Oria CRA Branch
--- pos
+-- pos 
 -----------------------------------
 local entity = {}
 

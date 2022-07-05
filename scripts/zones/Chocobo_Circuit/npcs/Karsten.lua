@@ -2,7 +2,7 @@
 -- Area: Chocobo_Circuit
 -- NPC: Karsten
 -- Standard Info NPC
--- pos 
+-- pos -340.8314 -0.0110 -299.6195
 -----------------------------------
 local entity = {}
 

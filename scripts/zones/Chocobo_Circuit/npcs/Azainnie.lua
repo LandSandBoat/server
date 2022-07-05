@@ -3,7 +3,6 @@
 -- NPC: Azainnie
 -- Grandstand Exit
 -- pos -62.2576 -15.0000 -132.6927
-
 -----------------------------------
 local entity = {}
 

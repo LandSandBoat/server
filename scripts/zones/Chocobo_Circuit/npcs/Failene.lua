@@ -2,7 +2,7 @@
 -- Area: Chocobo_Circuit
 -- NPC: Failene
 -- Betting Attendant (Blue)
--- pos 
+-- pos -313.2511 -4.0000 -413.9896
 -- event 212 213 214 215 217 221 228  232
 -----------------------------------
 local entity = {}

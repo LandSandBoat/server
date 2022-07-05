@@ -2,7 +2,7 @@
 -- Area: Chocobo_Circuit
 -- NPC: Olega
 -- Standard Info NPC
--- pos 
+-- pos -264.8404 -4.0000 -506.2439
 -- event 267 271 275 279 283 284 285 286 
 -----------------------------------
 local entity = {}

@@ -2,7 +2,7 @@
 -- Area: Chocobo_Circuit
 -- NPC: Cyphaireau
 -- Teleporter
--- POS: -369.2226 -4.0000 -492.1980
+-- pos -369.2226 -4.0000 -492.1980
 -----------------------------------
 local entity = {}
 

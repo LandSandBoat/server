@@ -3,7 +3,6 @@
 -- NPC: Gerlbotz
 -- Standard Info NPC
 -- pos -371.4615 -4.0000 -507.2594
-
 -----------------------------------
 local entity = {}
 

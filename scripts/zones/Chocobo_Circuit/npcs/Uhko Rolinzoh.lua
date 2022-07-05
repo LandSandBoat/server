@@ -3,7 +3,6 @@
 -- NPC: Uhko Rolinzoh
 -- Race Overview
 -- pos -90.2532 -15.0901 -132.7964
-
 -----------------------------------
 local entity = {}
 

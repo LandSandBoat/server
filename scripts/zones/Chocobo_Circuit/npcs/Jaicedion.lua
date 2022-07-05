@@ -3,7 +3,6 @@
 -- NPC: Jaicedion
 -- Standard Info NPC
 -- pos -39.9824 -15.0000 -132.5794
-
 -----------------------------------
 local entity = {}
 

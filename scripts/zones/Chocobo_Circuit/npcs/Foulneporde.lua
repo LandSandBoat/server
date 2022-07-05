@@ -2,7 +2,7 @@
 -- Area: Chocobo_Circuit
 -- NPC: Foulneporde
 -- Standard Info NPC
--- pos 
+-- pos -253.2932 -5.0000 -470.7203
 -----------------------------------
 local entity = {}
 

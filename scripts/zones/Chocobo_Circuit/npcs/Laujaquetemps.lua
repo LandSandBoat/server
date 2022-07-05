@@ -2,7 +2,7 @@
 -- Area: Chocobo_Circuit
 -- NPC: Laujaquetemps
 -- Betting Attendant (Orange)
--- pos 
+-- pos -319.9925 -4.0000 -429.9735
 -- event 212 213 214 215 217 221 228 232 
 -----------------------------------
 local entity = {}

@@ -2,7 +2,7 @@
 -- Area: Chocobo_Circuit
 -- NPC: Ilsoire
 -- Grandstand Entrance
--- pos 
+-- pos -329.9156 -5.0000 -412.8696
 -----------------------------------
 local entity = {}
 

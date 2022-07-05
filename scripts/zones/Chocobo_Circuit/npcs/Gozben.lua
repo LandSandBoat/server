@@ -2,7 +2,7 @@
 -- Area: Chocobo_Circuit
 -- NPC: Gozben
 -- Standard Info NPC
--- pos 
+-- pos -269.9810 -4.0000 -454.5238
 -- event 267 271 275 276 277 278 279 283 
 -----------------------------------
 local entity = {}

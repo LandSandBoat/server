@@ -2,7 +2,7 @@
 -- Area: Chocobo_Circuit
 -- NPC: Rhind Mhikkrol
 -- Spectator [Roam? not stated]
--- pos 
+-- pos -11.5554 -11.5000 -104.6120
 -- event 365 366 367 
 -----------------------------------
 local entity = {}
