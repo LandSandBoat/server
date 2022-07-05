@@ -8574,7 +8574,7 @@ INSERT INTO `mob_groups` VALUES (30,3424,120,'Sabertooth_Tiger',330,0,2138,0,0,2
 INSERT INTO `mob_groups` VALUES (31,2966,120,'Old_Sabertooth',0,128,0,0,0,20,20,0);
 INSERT INTO `mob_groups` VALUES (32,3485,120,'Sauromugue_Skink',330,0,2935,0,0,28,32,0);
 INSERT INTO `mob_groups` VALUES (33,5873,120,'Thunderclaw_Thuban',5400,0,3079,4000,0,47,48,0);
-INSERT INTO `mob_groups` VALUES (34,931,120,'Deadly_Dodo',0,32,578,0,0,39,40,0);
+INSERT INTO `mob_groups` VALUES (34,931,120,'Deadly_Dodo',0,32,578,4000,0,39,40,0);
 INSERT INTO `mob_groups` VALUES (35,3912,120,'Thunder_Elemental',330,4,2410,0,0,38,40,0);
 INSERT INTO `mob_groups` VALUES (36,1065,120,'Diving_Beetle',330,0,670,0,0,25,28,0);
 INSERT INTO `mob_groups` VALUES (37,1267,120,'Evil_Weapon',330,0,0,0,0,36,38,0);

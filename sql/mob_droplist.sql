@@ -5180,11 +5180,11 @@ INSERT INTO `mob_droplist` VALUES (577,0,0,1000,11377,210);    -- Oracles Pigach
 INSERT INTO `mob_droplist` VALUES (577,0,0,1000,16343,160);    -- Enkidus Subligar (16.0%)
 
 -- ZoneID: 120 - Deadly Dodo
-INSERT INTO `mob_droplist` VALUES (578,0,0,1000,4435,350); -- Slice Of Cockatrice Meat (35.0%)
-INSERT INTO `mob_droplist` VALUES (578,0,0,1000,854,320);  -- Cockatrice Skin (32.0%)
-INSERT INTO `mob_droplist` VALUES (578,0,0,1000,842,310);  -- Giant Bird Feather (31.0%)
-INSERT INTO `mob_droplist` VALUES (578,0,0,1000,1014,210); -- Dodo Skin (21.0%)
-INSERT INTO `mob_droplist` VALUES (578,2,0,1000,842,0);    -- Giant Bird Feather (Steal)
+INSERT INTO `mob_droplist` VALUES (578,0,0,1000,4435,@VCOMMON); -- Slice Of Cockatrice Meat (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (578,0,0,1000,854,@VCOMMON);  -- Cockatrice Skin (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (578,0,0,1000,842,@VCOMMON);  -- Giant Bird Feather (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (578,0,0,1000,1014,@VCOMMON); -- Dodo Skin (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (578,2,0,1000,842,0);         -- Giant Bird Feather (Steal)
 
 -- ZoneID: 162 - Deadly Iris
 INSERT INTO `mob_droplist` VALUES (579,0,0,1000,921,460); -- Bottle Of Ahriman Tears (46.0%)
@@ -24643,7 +24643,7 @@ INSERT INTO `mob_droplist` VALUES (2992,0,0,1000,15941,@VCOMMON); -- Headlong Be
 INSERT INTO `mob_droplist` VALUES (2993,0,0,1000,16037,59); -- Helenuss Earring (5.9%)
 
 -- ZoneID: 120 - Blighting Brand
-INSERT INTO `mob_droplist` VALUES (2994,0,0,1000,16038,70); -- Cassandras Earring (7.0%)
+INSERT INTO `mob_droplist` VALUES (2994,0,0,1000,16038,@RARE); -- Cassandras Earring (Rare, 5%)
 
 -- ZoneID:  95 - Belladonna
 INSERT INTO `mob_droplist` VALUES (2995,0,0,1000,15943,140); -- Virtuoso Belt (14.0%)
@@ -24946,7 +24946,7 @@ INSERT INTO `mob_droplist` VALUES (3078,0,0,1000,1625,40);     -- Moblin Helm (4
 INSERT INTO `mob_droplist` VALUES (3078,0,0,1000,1631,@VRARE); -- Moblin Armor (Very Rare, 1%)
 
 -- ZoneID: 120 - Thunderclaw Thuban
-INSERT INTO `mob_droplist` VALUES (3079,0,0,1000,16028,136); -- Psyche Earring (13.6%)
+INSERT INTO `mob_droplist` VALUES (3079,0,0,1000,16028,@UNCOMMON); -- Psyche Earring (Uncommon, 10%)
 
 -- ZoneID: 194 - Legalox Heftyhind
 INSERT INTO `mob_droplist` VALUES (3080,0,0,1000,2846,@VCOMMON); -- Piece Of Hefty Oak Lumber (Very Common, 24%)
