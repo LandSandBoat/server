@@ -4938,7 +4938,9 @@ INSERT INTO `mob_spell_lists` VALUES ('Shens_Filtrate',488,214,1,255); -- flood 
 
 -- Next Available: 489
 
--- asb temp
+-- AirSkyBoat Specific Starts at 5000
+-- 5000 -> 5010 is Era Dynamis
+
 -- Blackbeard (5021)
 INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 5021, 166, 1, 255); -- thunder iii
 INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 5021, 195, 1, 255); -- thundaga ii
