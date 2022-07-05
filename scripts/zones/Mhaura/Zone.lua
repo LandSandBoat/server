@@ -46,10 +46,6 @@ zone_object.onZoneIn = function(player, prevZone)
         player:setPos(8.23, -1.3, 4.48)
     end
 
-    if player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and player:getCharVar("PromathiaStatus")==3 and player:getCharVar("Promathia_kill_day") < os.time() and player:getCharVar("COP_shikarees_story")== 0 then
-        cs = 322
-    end
-
     return cs
 end
 
@@ -87,8 +83,6 @@ zone_object.onEventFinish = function(player, csid, option)
         else
             player:setPos(8, -1, 5, 62, 249) -- Something went wrong, dump them on the dock for safety.
         end
-    elseif csid == 322 then
-        player:setCharVar("COP_shikarees_story", 1)
     end
 end
 

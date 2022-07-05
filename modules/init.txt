@@ -38,3 +38,23 @@
 
 custom/commands/
 custom/lua/test_npcs_in_gm_home.lua
+era/lua/beastmen_multigroup_spawn_fix.lua
+#-----------------------
+#        Dynamis
+#-----------------------
+era/cpp/era_dynamisFunctions.cpp
+era/lua/dynamis/globals/era_dynamis.lua
+era/lua/dynamis/globals/era_dynamis_spawning.lua
+era/lua/dynamis/mobskills/era_pet_skills.lua
+era/lua/dynamis/mobskills/era_regain_skills.lua
+era/lua/dynamis/mobskills/era_valkurm_tp_moves.lua
+era/lua/dynamis/mobskills/era_buburimu_tp_moves.lua
+era/lua/dynamis/mobskills/era_qufim_tp_moves.lua
+era/lua/dynamis/mobskills/era_xarcabard_tp_moves.lua
+era/lua/dynamis/globals/era_dynamis_zones.lua
+era/sql/era_dyna_sql.sql
+#-----------------------
+#        Renamer
+#-----------------------
+renamer/cpp/renamer.cpp
+#-----------------------

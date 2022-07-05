@@ -361,8 +361,8 @@ int32 SqlConnection::QueryStr(const char* query)
         self->buf += query;
         if (mysql_real_query(&self->handle, self->buf.c_str(), (unsigned int)self->buf.length()))
         {
-            ShowTrace("Query: %s", self->buf);
-            ShowTrace("mysql_real_query: SQL_ERROR: %s (%u)", mysql_error(&self->handle), mysql_errno(&self->handle));
+            ShowError("Query: %s", self->buf);
+            ShowError("mysql_real_query: SQL_ERROR: %s (%u)", mysql_error(&self->handle), mysql_errno(&self->handle));
             return SQL_ERROR;
         }
     }
@@ -372,8 +372,8 @@ int32 SqlConnection::QueryStr(const char* query)
         self->result = mysql_store_result(&self->handle);
         if (mysql_errno(&self->handle) != 0)
         {
-            ShowTrace("Query: %s", self->buf);
-            ShowTrace("mysql_store_result: SQL_ERROR: %s (%u)", mysql_error(&self->handle), mysql_errno(&self->handle));
+            ShowError("Query: %s", self->buf);
+            ShowError("mysql_store_result: SQL_ERROR: %s (%u)", mysql_error(&self->handle), mysql_errno(&self->handle));
             return SQL_ERROR;
         }
     }

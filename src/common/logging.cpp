@@ -36,7 +36,11 @@ namespace logging
 {
     const std::vector<std::string> logNames =
     {
+        // Regular loggers
         "critical", "error", "warn", "info", "debug", "trace",
+
+        // Special loggers
+        "lua",
     };
 
     void InitializeLog(std::string serverName, std::string logFile, bool appendDate)
@@ -70,15 +74,11 @@ namespace logging
         }
 
         // https://github.com/gabime/spdlog/wiki/3.-Custom-formatting
-        // [date time:ms][server name][log level] message (func_name:func_line)
+        // [date time:ms][server name][log name] message (func_name:func_line)
         //                            ^level col^
-        spdlog::set_pattern(fmt::format("[%D %T:%e][{}]%^[%l]%$ %v (%!:%#)", serverName));
+        spdlog::set_pattern(fmt::format("[%D %T:%e][{}]%^[%n]%$ %v (%!:%#)", serverName));
 
-#ifdef _DEBUG
         spdlog::set_level(spdlog::level::debug);
-#else
-        spdlog::set_level(spdlog::level::info);
-#endif
 
         spdlog::enable_backtrace(10);
     }

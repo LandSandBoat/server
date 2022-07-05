@@ -37,6 +37,7 @@ namespace settings
     template <class... Ts>
     struct overloaded : Ts...
     {
+        // cppcheck-suppress syntaxError
         using Ts::operator()...;
     };
     // explicit deduction guide (not needed as of C++20)

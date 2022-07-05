@@ -1510,7 +1510,7 @@ namespace luautils
     {
         TracyZoneScoped;
         TracyZoneCString(variable);
-        return lua["xi"]["settings"][variable].valid() ? lua["xi"]["settings"][variable].get<uint8>() : 0;
+        return lua["xi"]["settings"]["main"][variable].valid() ? lua["xi"]["settings"]["main"][variable].get<uint8>() : 0;
     }
 
     /************************************************************************

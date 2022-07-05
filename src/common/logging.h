@@ -60,9 +60,13 @@ namespace logging
 #define ShowError(...)    { auto _msgStr = fmt::sprintf(__VA_ARGS__); TracyMessageStr(_msgStr); SPDLOG_LOGGER_ERROR(spdlog::get("error"), _msgStr); }
 #define ShowCritical(...) { auto _msgStr = fmt::sprintf(__VA_ARGS__); TracyMessageStr(_msgStr); SPDLOG_LOGGER_CRITICAL(spdlog::get("critical"), _msgStr); }
 
-// Trace Loggers
-#define TraceNavmesh(...) { if (settings::get<bool>("logging.TRACE_NAVMESH")) { ShowTrace(__VA_ARGS__); } }
-#define TracePackets(...) { if (settings::get<bool>("logging.TRACE_PACKETS")) { ShowTrace(__VA_ARGS__); } }
+// Debug Loggers
+#define DebugNavmesh(...) { if (settings::get<bool>("logging.DEBUG_NAVMESH")) { ShowDebug(__VA_ARGS__); } }
+#define DebugPackets(...) { if (settings::get<bool>("logging.DEBUG_PACKETS")) { ShowDebug(__VA_ARGS__); } }
+#define DebugActions(...) { if (settings::get<bool>("logging.DEBUG_ACTIONS")) { ShowDebug(__VA_ARGS__); } }
+
+// Special Loggers (different patterns)
+#define ShowLua(...) { auto _msgStr = fmt::sprintf(__VA_ARGS__); TracyMessageStr(_msgStr); SPDLOG_LOGGER_INFO(spdlog::get("lua"), _msgStr); }
 
 // clang-format on
 

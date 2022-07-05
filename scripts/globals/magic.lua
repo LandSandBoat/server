@@ -430,7 +430,8 @@ function isValidHealTarget(caster, target)
             (target:getObjType() == xi.objType.PC or
             target:getObjType() == xi.objType.MOB or
             target:getObjType() == xi.objType.TRUST or
-            target:getObjType() == xi.objType.FELLOW)
+            target:getObjType() == xi.objType.FELLOW) and
+            target:getStatusEffect(xi.effect.ALL_MISS):getPower() ==2 -- Handles Super Jump
 end
 
 -- USED FOR DAMAGING MAGICAL SPELLS. Stage 3 of Calculating Magic Damage on wiki
