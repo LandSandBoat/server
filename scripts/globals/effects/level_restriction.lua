@@ -15,7 +15,6 @@ effect_object.onEffectGain = function(target, effect)
     end
 end
 
-
 effect_object.onEffectTick = function(target, effect)
 end
 

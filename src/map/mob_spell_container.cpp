@@ -326,14 +326,14 @@ std::optional<SpellID> CMobSpellContainer::GetBestAgainstTargetWeakness(CBattleE
     // clang-format off
     std::vector<int16> resistances
     {
-        PTarget->getMod(Mod::FIRE_RES),
-        PTarget->getMod(Mod::ICE_RES),
-        PTarget->getMod(Mod::WIND_RES),
-        PTarget->getMod(Mod::EARTH_RES),
-        PTarget->getMod(Mod::THUNDER_RES),
-        PTarget->getMod(Mod::WATER_RES),
-        PTarget->getMod(Mod::LIGHT_RES),
-        PTarget->getMod(Mod::DARK_RES),
+        PTarget->getMod(Mod::FIRE_MEVA),
+        PTarget->getMod(Mod::ICE_MEVA),
+        PTarget->getMod(Mod::WIND_MEVA),
+        PTarget->getMod(Mod::EARTH_MEVA),
+        PTarget->getMod(Mod::THUNDER_MEVA),
+        PTarget->getMod(Mod::WATER_MEVA),
+        PTarget->getMod(Mod::LIGHT_MEVA),
+        PTarget->getMod(Mod::DARK_MEVA),
     };
     // clang-format on
 

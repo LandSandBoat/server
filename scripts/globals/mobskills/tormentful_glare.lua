@@ -19,7 +19,6 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.CURSE_I
 
-
     skill:setMsg(xi.mobskills.mobGazeMove(mob, target, typeEffect, 30, 0, 360))
 
     return typeEffect

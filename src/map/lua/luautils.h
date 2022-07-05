@@ -182,7 +182,6 @@ namespace luautils
     void  Terminate();                                 // Logs off all characters and terminates the server
 
     int32 GetTextIDVariable(uint16 ZoneID, const char* variable); // загружаем значение переменной TextID указанной зоны
-    uint8 GetSettingsVariable(const char* variable);              // Gets a Variable Value from Settings.lua
     bool  IsContentEnabled(const char* content);                  // Check if the content is enabled in settings.lua
 
     int32 OnGameDay(CZone* PZone);  // Automatic action of NPC every game day

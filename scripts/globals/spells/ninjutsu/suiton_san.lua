@@ -13,7 +13,7 @@ end
 
 spell_object.onSpellCast = function(caster, target, spell)
     local duration = 15 + caster:getMerit(xi.merit.SUITON_EFFECT) -- T1 bonus debuff duration
-    handleNinjutsuDebuff(caster, target, spell, 30, duration, xi.mod.THUNDER_RES)
+    handleNinjutsuDebuff(caster, target, spell, 30, duration, xi.mod.THUNDER_MEVA)
 
     return xi.spells.damage.useDamageSpell(caster, target, spell)
 end
