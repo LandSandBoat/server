@@ -13,7 +13,6 @@ xi.pyxis = xi.pyxis or {}
 
 xi.pyxis.spawn = {}
 
-
 xi.pyxis.spawn.chestLightValues =
 {
     [1] =
@@ -226,7 +225,6 @@ local function determineChestType(lightValues)
         return xi.pyxis.chestType.BLUE
     end
 end
-
 
 local function GetBlueChestInfos(player, lightValues)
     -- Lowers the required amount of correct guesses for blue pyxides by 1

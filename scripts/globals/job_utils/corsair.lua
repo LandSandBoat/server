@@ -12,7 +12,6 @@ xi.job_utils = xi.job_utils or {}
 xi.job_utils.corsair = xi.job_utils.corsair or {}
 -----------------------------------
 
-
 -- rollModifiers format: Effect Powers table, phantomBase, roll bonus increase, Effect, Mod, Optimal Job
 -- NOTE: nil items below are nil values on purpose.  This might break if parameters are added to various bindings
 -- TODO: replace "nil" pet values with tables, handle multiple effects in case of pet roll. Will need core changes.

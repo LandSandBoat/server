@@ -581,7 +581,6 @@ xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType,
         dmg = target:rangedDmgTaken(dmg)
     end
 
-
     if dmg < 0 then
         return dmg
     end

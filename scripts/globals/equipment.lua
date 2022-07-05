@@ -195,5 +195,4 @@ xi.equipment.hasRelic = function(player, relic, tier)
     return false
 end
 
-
 xi.equip = xi.equipment

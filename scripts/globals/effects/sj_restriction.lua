@@ -7,7 +7,6 @@ effect_object.onEffectGain = function(target, effect)
     target:recalculateStats()
 end
 
-
 effect_object.onEffectTick = function(target, effect)
 end
 

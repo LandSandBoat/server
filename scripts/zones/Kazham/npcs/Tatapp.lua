@@ -246,7 +246,6 @@ entity.onPath = function(npc)
     xi.path.patrol(npc, path)
 end
 
-
 entity.onTrade = function(player, npc, trade)
     -- item IDs
     -- 483       Broken Mithran Fishing Rod

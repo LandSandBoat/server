@@ -194,7 +194,6 @@ enum NAMEVIS : uint8
     VIS_GHOST_PHASE = 0x80,
 };
 
-
 enum class SPAWN_ANIMATION : uint8
 {
     NORMAL  = 0,

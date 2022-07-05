@@ -3,7 +3,6 @@ require("scripts/globals/caskets")
 require("scripts/globals/status")
 require("scripts/globals/mixins")
 
-
 g_mixins = g_mixins or {}
 
 -----------------------------------

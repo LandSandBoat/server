@@ -34,7 +34,6 @@ local absorbDamagePieceBonus = 1
 local instantCastBaseRate = 2
 local instantCastPieceBonus = 1
 
-
 --              {id, {item, ids, in, no, particular, order}, minimum matches required, match type, mods{id, value, modvalue for each additional match, additional whole set bonus}
 local gearSets =
 {
@@ -117,7 +116,7 @@ local gearSets =
              {id = 86, items = {15852, 15853}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.HP, 50, 0, 0}, {xi.mod.MP, 50, 0, 0}} }, -- Dasra's/Nasatya's Ring set gives HP/MP +50
              {id = 88, items = {16037, 16038}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.MATT, 5, 0, 0}, {xi.mod.MACC, 5, 0, 0}} }, -- Helenus's/Cassandra's earring set: Mag atk bonus+5 and Mag acc +5
              {id = 90, items = {15850, 15851}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.ATT, 6, 0, 0}, {xi.mod.ACC, 12, 0, 0}, {xi.mod.DEF, 6, 0, 0}} }, -- Lava's/Kusha's earring set: Atk+6/Acc+12
-             {id = 93, items = {16146, 14588, 15009, 16315, 15755},  matches = 2, matchType = matchtype.any, mods = {{xi.mod.FIRE_RES, 5, 5, 10}, {xi.mod.ICE_RES, 5, 5, 10}, {xi.mod.WIND_RES, 5, 5, 10}, {xi.mod.EARTH_RES, 5, 5, 10}, {xi.mod.THUNDER_RES, 5, 5, 10}, {xi.mod.WATER_RES, 5, 5, 10}, {xi.mod.LIGHT_RES, 5, 5, 10}, {xi.mod.DARK_RES, 5, 5, 10}} }, --  Iron Ram Haubert Set
+             {id = 93, items = {16146, 14588, 15009, 16315, 15755},  matches = 2, matchType = matchtype.any, mods = {{xi.mod.FIRE_MEVA, 5, 5, 10}, {xi.mod.ICE_MEVA, 5, 5, 10}, {xi.mod.WIND_MEVA, 5, 5, 10}, {xi.mod.EARTH_MEVA, 5, 5, 10}, {xi.mod.THUNDER_MEVA, 5, 5, 10}, {xi.mod.WATER_MEVA, 5, 5, 10}, {xi.mod.LIGHT_MEVA, 5, 5, 10}, {xi.mod.DARK_MEVA, 5, 5, 10}} }, --  Iron Ram Haubert Set
              {id = 101, items = {16035, 16036}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.AGI, 8, 0, 0}} }, -- Altdorf's/Wilhelm's earring: AGI+8
              {id = 102, items = {15042, 11402}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.ATT, 5, 0, 0}, {xi.mod.RATT, 5, 0, 0}} }, -- Gothic Gauntlets/Sabatons: Atk/RAtk +5
              {id = 104, items = {26713, 27853, 27999, 28140, 28279},  matches = 2, matchType = matchtype.any, mods = {{xi.mod.FASTCAST, 4, 2, 0}} }, -- Teal Set +1: Fast Cast +4-10%
@@ -428,7 +427,6 @@ Empyrean +2
 -- Set Bonus: Occ. augments blue magic spells.
 -- no clue!
 
-
 --Bale Armor +2 Set
 -----------------------------------
 11071 -- Bale Burgeonet+2
@@ -448,7 +446,6 @@ Empyrean +2
 11157 -- Lancer's Schynbalds+2
 -- Set Bonus: Attack occasionally varies with wyvern's HP.
 -- Damage increases proportionate to Wyvern's HP, at 100%, damage is doubled. 2+ pieces required, more pieces increase proc rate. Full +2 set is about a 10% proc rate. (Confirmation needed)
-
 
 --Cirque Attire +2 Set
 -----------------------------------

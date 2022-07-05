@@ -518,7 +518,6 @@ INSERT INTO `mob_spawn_mods` VALUES (16921023,55,300,1);
 INSERT INTO `mob_spawn_mods` VALUES (16921024,55,300,1);
 INSERT INTO `mob_spawn_mods` VALUES (16921025,55,300,1);
 
-
 -- Cryptonberry Executor + Assasins
 INSERT INTO `mob_spawn_mods` VALUES (16785710,55,180,1);
 INSERT INTO `mob_spawn_mods` VALUES (16785711,55,420,1);

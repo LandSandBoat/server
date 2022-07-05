@@ -11,7 +11,6 @@ require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 -----------------------------------
 
-
 local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.CONFESSIONS_OF_A_BELLMAKER)
 
 quest.reward =
