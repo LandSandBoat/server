@@ -15181,8 +15181,8 @@ INSERT INTO `mob_droplist` VALUES (1850,4,0,1000,4409,0);  -- Hard-Boiled Egg (D
 INSERT INTO `mob_droplist` VALUES (1850,0,0,1000,12449,0); -- Brass Cap (0.0%)
 
 -- ZoneID: 200 - Old Two-Wings
-INSERT INTO `mob_droplist` VALUES (1851,0,0,1000,924,700);   -- Vial Of Fiend Blood (70.0%)
-INSERT INTO `mob_droplist` VALUES (1851,0,0,1000,13598,400); -- Bat Cape (40.0%)
+INSERT INTO `mob_droplist` VALUES (1851,0,0,1000,924,@ALWAYS);    -- Vial Of Fiend Blood (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (1851,0,0,1000,13598,@VCOMMON); -- Bat Cape (Very Common, 24%)
 
 -- ZoneID: 253 - Olyphant
 INSERT INTO `mob_droplist` VALUES (1852,0,0,1000,2151,210);       -- Marid Hide (21.0%)
@@ -17777,14 +17777,14 @@ INSERT INTO `mob_droplist` VALUES (2202,0,0,1000,19213,@UNCOMMON); -- White Tath
 INSERT INTO `mob_droplist` VALUES (2202,0,0,1000,901,20);          -- Venomous Claw (2.0%)
 
 -- ZoneID: 200 - Serket
-INSERT INTO `mob_droplist` VALUES (2203,0,0,1000,4172,@ALWAYS); -- Reraiser (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (2203,0,0,1000,4173,990);     -- Hi-Reraiser (99.0%)
-INSERT INTO `mob_droplist` VALUES (2203,0,0,1000,901,750);      -- Venomous Claw (75.0%)
-INSERT INTO `mob_droplist` VALUES (2203,0,0,1000,4174,520);     -- Vile Elixir (52.0%)
-INSERT INTO `mob_droplist` VALUES (2203,0,0,1000,12348,500);    -- Serket Shield (50.0%)
-INSERT INTO `mob_droplist` VALUES (2203,0,0,1000,4175,400);     -- Vile Elixir +1 (40.0%)
-INSERT INTO `mob_droplist` VALUES (2203,0,0,1000,16767,350);    -- Triple Dagger (35.0%)
-INSERT INTO `mob_droplist` VALUES (2203,0,0,1000,13552,80);     -- Serket Ring (8.0%)
+INSERT INTO `mob_droplist` VALUES (2203,0,0,1000,4172,@VCOMMON);  -- Reraiser (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2203,0,0,1000,4173,@COMMON);   -- Hi-Reraiser (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (2203,0,0,1000,901,@COMMON);    -- Venomous Claw (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (2203,0,0,1000,4174,@VCOMMON);  -- Vile Elixir (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2203,0,0,1000,12348,@COMMON);  -- Serket Shield (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (2203,0,0,1000,4175,@COMMON);   -- Vile Elixir +1 (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (2203,0,0,1000,16767,@VCOMMON); -- Triple Dagger (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2203,0,0,1000,13552,@COMMON);  -- Serket Ring (Common, 15%)
 
 -- ZoneID: 117 - Serpopard Ishtar
 INSERT INTO `mob_droplist` VALUES (2204,0,0,1000,893,@UNCOMMON);   -- Giant Femur (Uncommon, 10%)
@@ -18216,10 +18216,11 @@ INSERT INTO `mob_droplist` VALUES (2265,2,0,1000,880,0);   -- Bone Chip (Steal)
 INSERT INTO `mob_droplist` VALUES (2265,4,0,1000,880,0);   -- Bone Chip (Despoil)
 
 -- ZoneID: 200 - Skewer Sam
-INSERT INTO `mob_droplist` VALUES (2266,0,0,1000,854,@ALWAYS); -- Cockatrice Skin (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (2266,0,0,1000,854,500);     -- Cockatrice Skin (50.0%)
-INSERT INTO `mob_droplist` VALUES (2266,0,0,1000,16857,490);   -- Wind Spear (49.0%)
-INSERT INTO `mob_droplist` VALUES (2266,0,0,1000,854,330);     -- Cockatrice Skin (33.0%)
+INSERT INTO `mob_droplist` VALUES (2266,0,0,1000,854,@VCOMMON);   -- Cockatrice Skin (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2266,0,0,1000,854,@VCOMMON);   -- Cockatrice Skin (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2266,0,0,1000,854,@VCOMMON);   -- Cockatrice Skin (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2266,0,0,1000,16857,@VCOMMON); -- Wind Spear (Very Common, 24%)
+
 INSERT INTO `mob_droplist` VALUES (2266,2,0,1000,842,0);       -- Giant Bird Feather (Steal)
 
 -- ZoneID:  75 - Skirmish Pephredo
@@ -24709,7 +24710,7 @@ INSERT INTO `mob_droplist` VALUES (3008,4,0,1000,4357,0);   -- Crawler Egg (Desp
 INSERT INTO `mob_droplist` VALUES (3009,0,0,1000,11497,117); -- Spurrer Beret (11.7%)
 
 -- ZoneID: 200 - Hovering Hotpot
-INSERT INTO `mob_droplist` VALUES (3010,0,0,1000,19121,127); -- Sleight Kukri (12.7%)
+INSERT INTO `mob_droplist` VALUES (3010,0,0,1000,19121,@COMMON); -- Sleight Kukri (Common, 15%)
 
 -- ZoneID:  48 - Lamia No9
 INSERT INTO `mob_droplist` VALUES (3011,0,0,1000,14960,0); -- Evokers Gages (0.0%)
@@ -24971,7 +24972,7 @@ INSERT INTO `mob_droplist` VALUES (3085,0,0,1000,11408,63); -- Moranas Pigaches 
 INSERT INTO `mob_droplist` VALUES (3086,0,0,1000,11533,333); -- Lyricists Gonnelle (33.3%)
 
 -- ZoneID: 200 - Frogamander
-INSERT INTO `mob_droplist` VALUES (3087,0,0,1000,15944,249); -- Selemnus Belt (24.9%)
+INSERT INTO `mob_droplist` VALUES (3087,0,0,1000,15944,@VCOMMON); -- Selemnus Belt (Very Common, 24%)
 
 -- ZoneID: 113 - Killer Jonny
 INSERT INTO `mob_droplist` VALUES (3088,0,0,1000,17969,31); -- Fendoir (3.1%)

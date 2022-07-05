@@ -12940,8 +12940,8 @@ INSERT INTO `mob_groups` VALUES (9,731,200,'Citadel_Bats',300,0,473,0,0,46,48,0)
 INSERT INTO `mob_groups` VALUES (10,980,200,'Demonic_Weapon',300,0,0,0,0,47,49,0);
 INSERT INTO `mob_groups` VALUES (11,1291,200,'Fallen_Soldier_blm',300,0,815,0,0,47,49,0);
 INSERT INTO `mob_groups` VALUES (12,407,200,'Bhuta',300,0,264,0,0,47,49,0);
-INSERT INTO `mob_groups` VALUES (13,2968,200,'Old_Two-Wings',0,128,1851,0,0,52,52,0);
-INSERT INTO `mob_groups` VALUES (14,3648,200,'Skewer_Sam',0,128,2266,0,0,54,54,0);
+INSERT INTO `mob_groups` VALUES (13,2968,200,'Old_Two-Wings',0,128,1851,8000,0,52,52,0);
+INSERT INTO `mob_groups` VALUES (14,3648,200,'Skewer_Sam',0,128,2266,9000,0,54,54,0);
 INSERT INTO `mob_groups` VALUES (15,6425,200,'Fortalice_Bats',300,0,919,0,0,92,96,0);
 INSERT INTO `mob_groups` VALUES (16,1328,200,'Fetid_Flesh',300,0,826,0,0,54,56,0);
 INSERT INTO `mob_groups` VALUES (17,5767,200,'Hazmat',0,32,3051,0,0,57,58,0);
