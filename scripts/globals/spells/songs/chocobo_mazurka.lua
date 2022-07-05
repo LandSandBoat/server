@@ -14,5 +14,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return xi.spells.enhancing.useEnhancingSong(caster, target, spell)
 end
 
-
 return spell_object

@@ -295,7 +295,6 @@ function calculateMagicDamage(caster, target, spell, params)
         dmg = dmg + hardCap * params.multiplier
     end
 
-
     if params.skillType == xi.skill.DIVINE_MAGIC and target:isUndead() then
         -- 150% bonus damage
         dmg = dmg * 1.5

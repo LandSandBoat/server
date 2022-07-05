@@ -672,7 +672,6 @@ function doPhysicalWeaponskill(attacker, target, wsID, wsParams, tp, action, pri
     return finaldmg, calcParams.criticalHit, calcParams.tpHitsLanded, calcParams.extraHitsLanded, calcParams.shadowsAbsorbed
 end
 
-
 -- Sets up the necessary calcParams for a ranged WS before passing it to calculateRawWSDmg. When the raw
 -- damage is returned, handles reductions based on target resistances and passes off to takeWeaponskillDamage.
  function doRangedWeaponskill(attacker, target, wsID, wsParams, tp, action, primaryMsg)
@@ -889,7 +888,6 @@ function takeWeaponskillDamage(defender, attacker, wsParams, primaryMsg, attack,
 
     xi.magian.checkMagianTrial(attacker, {['mob'] = defender, ['triggerWs'] = true,  ['wSkillId'] = wsResults.wsID})
 
-
     if finaldmg > 0 then
         defender:setLocalVar("weaponskillHit", 1)
     end
@@ -967,7 +965,6 @@ function getHitRate(attacker, target, capHitRate, bonus)
 
     hitrate = hitrate + hitdiff
     hitrate = hitrate / 100
-
 
     -- Applying hitrate caps
     if capHitRate then -- this isn't capped for when acc varies with tp, as more penalties are due

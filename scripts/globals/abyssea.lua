@@ -651,7 +651,6 @@ local checkMobID = function(zoneId, mobId)
     return false
 end
 
-
 xi.abyssea.qmOnTrigger = function(player, npc, mobId, kis, tradeReqs)
     -- validate QM pop data
     local zoneId = player:getZoneID()

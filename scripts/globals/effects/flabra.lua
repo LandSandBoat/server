@@ -19,4 +19,3 @@ effect_object.onEffectLose = function(target, effect)
 end
 
 return effect_object
-

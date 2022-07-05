@@ -32,7 +32,6 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     target:addStatusEffect(xi.effect.FLASH, 200, 0, 15)
     end
 
-
     return tpHits, extraHits, criticalHit, damage
 end
 

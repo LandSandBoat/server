@@ -31,7 +31,6 @@ entity.onTrigger = function(player, npc)
     end
 end
 
-
 entity.onEventUpdate = function(player, csid, option)
 end
 

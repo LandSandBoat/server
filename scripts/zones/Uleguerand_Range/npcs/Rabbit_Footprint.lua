@@ -59,7 +59,6 @@ end
 entity.onEventFinish = function(player, csid, option)
 end
 
-
 local function moveFootprint(npc)
     -- ffxiclopedia's pages for Black Coney and White Coney say 7 and 5 Earth seconds respectively, in game it is very fast
     -- https://ffxiclopedia.fandom.com/wiki/Black_Coney

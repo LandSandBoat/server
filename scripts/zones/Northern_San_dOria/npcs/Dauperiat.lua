@@ -43,7 +43,6 @@ entity.onTrigger = function(player, npc)
     elseif (blackMail == QUEST_ACCEPTED and questState == 1) then
         player:startEvent(646, 0, 530) --646  after giving letter to H, needs param
 
-
     elseif (blackMail == QUEST_ACCEPTED and questState == 2) then
         player:startEvent(647, 0, 530) --647 recap of 646
 

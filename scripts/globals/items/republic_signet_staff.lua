@@ -30,7 +30,6 @@ item_object.onItemCheck = function(target, user)
     return 0
 end
 
-
 item_object.onItemUse = function(target)
     target:delStatusEffectsByFlag(xi.effectFlag.INFLUENCE, true)
     target:addStatusEffect(xi.effect.SIGNET, 0, 0, 18000)

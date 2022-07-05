@@ -114,7 +114,6 @@ CInstance* CInstanceLoader::LoadInstance()
             memcpy(&sqlModelID, sql->GetData(13), 20);
             PMob->look = look_t(sqlModelID);
 
-
             PMob->SetMJob(sql->GetIntData(14));
             PMob->SetSJob(sql->GetIntData(15));
 
@@ -261,7 +260,6 @@ CInstance* CInstanceLoader::LoadInstance()
                 PNpc->namevis = (uint8)sql->GetIntData(11);
                 PNpc->status  = static_cast<STATUS_TYPE>(sql->GetIntData(12));
                 PNpc->m_flags = sql->GetUIntData(13);
-
 
                 uint16 sqlModelID[10];
                 memcpy(&sqlModelID, sql->GetData(14), 20);
