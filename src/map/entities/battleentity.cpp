@@ -637,13 +637,13 @@ uint16 CBattleEntity::ATT()
     {
         ATT += (STR() * 3) / 4;
     }
-    else if (weapon && weapon->isHandToHand())
-    {
-        ATT += (STR() * 5) / 8;
-    }
+    //else if (weapon && weapon->isHandToHand())
+    //{
+    //    ATT += (STR() * 5) / 8;
+    //}
     else
     {
-        ATT += (STR() * 3) / 4;
+        ATT += STR() / 2;
     }
 
     if (this->StatusEffectContainer->HasStatusEffect(EFFECT_ENDARK))
@@ -678,7 +678,7 @@ uint16 CBattleEntity::RATT(uint8 skill, float distance, uint16 bonusSkill)
     {
         return 0;
     }
-    int32 ATT = 8 + GetSkill(skill) + bonusSkill + m_modStat[Mod::RATT] + battleutils::GetRangedAttackBonuses(this) + (STR() * 3) / 4;
+    int32 ATT = 8 + GetSkill(skill) + bonusSkill + m_modStat[Mod::RATT] + battleutils::GetRangedAttackBonuses(this) + STR() / 2;
     if ((this->objtype == TYPE_PC) || (this->objtype == TYPE_PET && this->PMaster->objtype == TYPE_PC && ((CPetEntity*)this)->getPetType() == PET_TYPE::AUTOMATON)) // PC or PC Automaton
     {
         ATT = int32((float)ATT * battleutils::GetRangedDistanceCorrection(this, distance));
@@ -713,7 +713,7 @@ uint16 CBattleEntity::RACC(uint8 skill, float distance, uint16 bonusSkill)
     }
     acc += getMod(Mod::RACC);
     acc += battleutils::GetRangedAccuracyBonuses(this);
-    acc += (AGI() * 3) / 4;
+    acc += AGI() / 2;
     if ((this->objtype == TYPE_PC) || (this->objtype == TYPE_PET && this->PMaster->objtype == TYPE_PC && ((CPetEntity*)this)->getPetType() == PET_TYPE::AUTOMATON)) // PC or PC Automaton
     {
         if (!this->StatusEffectContainer->HasStatusEffect(EFFECT_SHARPSHOT))
@@ -740,7 +740,7 @@ uint16 CBattleEntity::GetBaseRACC(uint8 skill, uint16 bonusSkill)
     }
     acc += getMod(Mod::RACC);
     acc += battleutils::GetRangedAccuracyBonuses(this);
-    acc += (AGI() * 3) / 4;
+    acc += AGI() / 2;
     return acc + std::min<int16>(((100 + getMod(Mod::FOOD_RACCP) * acc) / 100), getMod(Mod::FOOD_RACC_CAP));
 }
 
@@ -795,7 +795,7 @@ uint16 CBattleEntity::ACC(uint8 attackNumber, uint8 offsetAccuracy)
         }
         else
         {
-            ACC += (int16)(DEX() * 0.75);
+            ACC += (int16)(DEX() * 0.5);
         }
         ACC         = (ACC + m_modStat[Mod::ACC] + offsetAccuracy);
         auto* PChar = dynamic_cast<CCharEntity*>(this);
