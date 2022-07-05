@@ -11,8 +11,7 @@ local disableZone =
     "Attohwa_Chasm",
     "Bibiki_Bay",
     "Carpenters_Landing",
-    "Ship_bound_for_Mhaura_Pirates",
-    "Ship_bound_for_Selbina_Pirates",
+    "Psoxja"
     "Uleguerand_Range"
 }
 
