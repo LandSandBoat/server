@@ -26,9 +26,9 @@ zones[xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES] =
     mob =
     {
         SEA_CREATURES = 17707014,   -- Starting Sea Creature Offset
-        PHANTOM = 17707019,
-        CROSSBONES = 17707020, -- Starting Pirate Offset
-        ENAGAKURE = 17707026
+        PHANTOM       = 17707019,
+        CROSSBONES    = 17707020, -- Starting Pirate Offset
+        ENAGAKURE     = 17707026
     },
     npc =
     {

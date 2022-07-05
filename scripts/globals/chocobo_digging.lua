@@ -856,7 +856,6 @@ local function canDig(player)
     return false
 end
 
-
 local function calculateSkillUp(player)
     local skillRank = player:getSkillRank(xi.skill.DIG)
     local maxSkill = utils.clamp((skillRank + 1) * 100, 0, 1000)
@@ -885,7 +884,6 @@ local function calculateSkillUp(player)
         end
     end
 end
-
 
 local function getChocoboDiggingItem(player)
     local allItems = digInfo[player:getZoneID()]

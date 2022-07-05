@@ -25,7 +25,7 @@ zone_object.onZoneIn = function(player, prevZone)
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         if prevZone == xi.zone.SHIP_BOUND_FOR_SELBINA or prevZone == xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES then
             local ship = GetNPCByID(ID.npc.SHIP)
-            ship:setAnimBegin(VanadielTime())
+            ship:setAnimationBegin(VanadielTime())
 
             cs = 202
             player:setPos(32.500, -2.500, -45.500, 192)

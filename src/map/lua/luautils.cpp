@@ -251,7 +251,7 @@ namespace luautils
         }
 
         // Handle settings
-        contentRestrictionEnabled = GetSettingsVariable("RESTRICT_CONTENT") != 0;
+        contentRestrictionEnabled = settings::get<bool>("main.RESTRICT_CONTENT");
 
         moduleutils::LoadLuaModules();
 
@@ -1502,19 +1502,6 @@ namespace luautils
 
     /************************************************************************
      *                                                                       *
-     *  Get a Variable From Settings.lua                                     *
-     *                                                                       *
-     ************************************************************************/
-
-    uint8 GetSettingsVariable(const char* variable)
-    {
-        TracyZoneScoped;
-        TracyZoneCString(variable);
-        return lua["xi"]["settings"][variable].valid() ? lua["xi"]["settings"][variable].get<uint8>() : 0;
-    }
-
-    /************************************************************************
-     *                                                                       *
      *  Check if an something is restricted in Settings.lua                  *
      *  ENABLE_ is subject to RESTRICT_BY_EXPANSION                          *
      *  ALLOW_ is NOT subject to RESTRICT_BY_EXPANSION                       *
@@ -1539,7 +1526,7 @@ namespace luautils
             else
             {
                 // Cache contentTag lookups in a map so that we don't re-hit the Lua file every time
-                contentEnabled = (GetSettingsVariable(contentVariable.c_str()) != 0);
+                contentEnabled = settings::get<bool>(fmt::format("main.{}", contentVariable));
 
                 contentEnabledMap[contentVariable] = contentEnabled;
             }

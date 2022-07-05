@@ -14,7 +14,6 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDeath = function(mob, player)
-
 end
 
 entity.onMobDespawn = function(mob, player)

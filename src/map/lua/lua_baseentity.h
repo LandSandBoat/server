@@ -816,9 +816,9 @@ public:
 
     uint32 getHistory(uint8 index);
 
-    void setAnimPath(uint8);
-    void setAnimStart(bool);
-    void setAnimBegin(uint32);
+    void setAnimationPath(uint8);
+    void setAnimationStart(bool);
+    void setAnimationBegin(uint32);
     void sendUpdateToZoneCharsInRange(float);
 
     static void Register();

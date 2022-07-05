@@ -59,6 +59,6 @@ CTradeUpdatePacket::CTradeUpdatePacket(CItem* PItem, uint8 SlotID)
     }
     else
     {
-        memcpy(data + (0x15), PItem->getSignature(), std::min<size_t>(strlen((const char*)PItem->getSignature()), 12));
+        memcpy(data + (0x1A), PItem->getSignature(), std::min<size_t>(strlen((const char*)PItem->getSignature()), 12));
     }
 }

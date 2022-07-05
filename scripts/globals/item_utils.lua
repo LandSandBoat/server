@@ -3,9 +3,47 @@
 -----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
+require("scripts/globals/utils")
 -----------------------------------
 xi = xi or {}
 xi.item_utils = {}
+
+xi.item_utils.removableEffects =
+{
+    xi.effect.PARALYSIS,
+    xi.effect.POISON,
+    xi.effect.BLINDNESS,
+    xi.effect.SILENCE,
+    xi.effect.DISEASE,
+    xi.effect.PETRIFICATION,
+    xi.effect.BIND,
+    xi.effect.WEIGHT,
+    xi.effect.ADDLE,
+    xi.effect.BURN,
+    xi.effect.FROST,
+    xi.effect.CHOKE,
+    xi.effect.RASP,
+    xi.effect.SHOCK,
+    xi.effect.DROWN,
+    xi.effect.DIA,
+    xi.effect.BIO,
+    xi.effect.STR_DOWN,
+    xi.effect.DEX_DOWN,
+    xi.effect.VIT_DOWN,
+    xi.effect.AGI_DOWN,
+    xi.effect.INT_DOWN,
+    xi.effect.MND_DOWN,
+    xi.effect.CHR_DOWN,
+    xi.effect.MAX_HP_DOWN,
+    xi.effect.MAX_MP_DOWN,
+    xi.effect.ATTACK_DOWN,
+    xi.effect.EVASION_DOWN,
+    xi.effect.DEFENSE_DOWN,
+    xi.effect.MAGIC_DEF_DOWN,
+    xi.effect.INHIBIT_TP,
+    xi.effect.MAGIC_ACC_DOWN,
+    xi.effect.MAGIC_ATK_DOWN
+}
 
 xi.item_utils.skillBookCheck = function(target, skillID)
     local skill = skillID
@@ -131,5 +169,41 @@ xi.item_utils.addTwoItemEffects = function(target, effect1, effect2, power1, pow
         end
     else
         target:addStatusEffect(effect2, power2, 0, duration, 0, power2)
+    end
+end
+
+xi.item_utils.removeStatus = function(target, effects)
+    for _, effect in ipairs(effects) do
+        if target:delStatusEffect(effect) then
+            return true
+        end
+    end
+    if target:eraseStatusEffect() ~= 255 then
+        return true
+    end
+    return false
+end
+
+xi.item_utils.removeMultipleEffects = function(target, effects, count, random)
+    local effectsToRemove = effects
+
+    if random == 1 then -- randomize which effects get removed
+        effectsToRemove = utils.shuffle(effects)
+    end
+
+    if count > 0 then
+        local removed = 0
+
+        for i = 0, count do
+            if not xi.item_utils.removeStatus(target, effectsToRemove) then
+                break
+            end
+            removed = removed + 1
+            if removed >= count then
+                break
+            end
+        end
+
+        return removed
     end
 end

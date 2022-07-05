@@ -26,8 +26,8 @@ zones[xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES] =
     mob =
     {
         SEA_CREATURES = 17711110, -- Starting Sea Creature offset
-        PHANTOM = 17711115,
-        CROSSBONES = 17711116, -- Starting pirate offset
+        PHANTOM       = 17711115,
+        CROSSBONES    = 17711116, -- Starting pirate offset
     },
     npc =
     {
@@ -185,4 +185,3 @@ zones[xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES] =
 }
 
 return zones[xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES]
-

@@ -44,7 +44,6 @@ ability_object.onUseAbility = function(player, target, ability, action)
     local petCurrentHP = pet:getHP()
     local petMaxHP = pet:getMaxHP()
 
-
     -- Need to start to calculate the HP to restore to the pet.
     -- Please note that I used this as base for the calculations:
     -- http://wiki.ffxiclopedia.org/wiki/Reward
@@ -94,7 +93,6 @@ ability_object.onUseAbility = function(player, target, ability, action)
 
     -- Now calculating the bonus based on gear.
     local body = player:getEquipID(xi.slot.BODY)
-
 
     switch (body) : caseof {
         [12646] = function (x) -- beast jackcoat

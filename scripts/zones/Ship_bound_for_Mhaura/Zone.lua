@@ -13,7 +13,7 @@ end
 
 zone_object.onZoneIn = function(player, prevZone, zone)
     local cs = -1
-    local zoneID = 221
+    local zone = GetZone(xi.zone.SHIP_BOUND_FOR_MHAURA)
 
     if
         player:getXPos() == 0 and
@@ -24,18 +24,16 @@ zone_object.onZoneIn = function(player, prevZone, zone)
         player:setPos(position, -2.100, 3.250, 64)
         if
             player:getGMLevel() == 0 and
-            GetZone(zoneID):getLocalVar('stateSet') == 0
+            zone:getLocalVar('state') ~= 3
         then
-            GetZone(zoneID):setLocalVar('stateSet', 1)
-            GetZone(zoneID):setLocalVar('state', 2)
-            GetZone(zoneID):setLocalVar('transportTime', os.time())
+            zone:setLocalVar('state', 2)
+            zone:setLocalVar('transportTime', os.time())
         end
     end
     return cs
 end
 
 zone_object.onTransportEvent = function(player, transport)
-    player:getZone():setLocalVar('stateSet', 0)
     player:getZone():setLocalVar('state', 1)
     player:startEvent(512)
 end
@@ -75,17 +73,21 @@ zone_object.onZoneTick = function(zone)
         if GetMobByID(ID.mob.PHANTOM):isSpawned() then
             DespawnMob(ID.mob.PHANTOM)
         end
+
         if GetMobByID(ID.mob.SEA_HORROR):isSpawned() then
             DespawnMob(ID.mob.SEA_HORROR)
         end
+
         zone:setLocalVar('state', 0)
+        print('check')
         xi.sea_creatures.despawn(ID)
     elseif zone:getLocalVar('state') == 2 then
         if GetMobByID(ID.mob.SEA_HORROR):isSpawned() then -- make sure we dont have horror from previous or docked zone
             DespawnMob(ID.mob.SEA_HORROR)
         end
+
         xi.sea_creatures.checkSpawns(ID, 5, 1) -- 5 percent on init
-        zone:setLocalVar('state', 0)
+        zone:setLocalVar('state', 3)
     end
 
     if os.time() - zone:getLocalVar('transportTime') % 60 then

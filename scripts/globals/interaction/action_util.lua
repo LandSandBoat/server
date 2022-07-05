@@ -113,7 +113,6 @@ function actionUtil.parseActionDef(actionDef)
     return action
 end
 
-
 -- Returns a string containing identification for a specific action
 function actionUtil.getActionVarName(secondLevelKey, thirdLevelKey, suffix)
     suffix = suffix or ""

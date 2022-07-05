@@ -16,7 +16,7 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
-    local zoneID = 227
+    local zone = GetZone(xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES)
 
     if
         player:getXPos() == 0 and
@@ -27,11 +27,10 @@ zone_object.onZoneIn = function(player, prevZone)
         player:setPos(position, -2.100, 3.250, 64)
         if
             player:getGMLevel() == 0 and
-            GetZone(zoneID):getLocalVar('stateSet') == 0
+            zone:getLocalVar('state') ~= 3
         then
-            GetZone(zoneID):setLocalVar('stateSet', 1)
-            GetZone(zoneID):setLocalVar('state', 2)
-            GetZone(zoneID):setLocalVar('transportTime', os.time())
+            zone:setLocalVar('state', 2)
+            zone:setLocalVar('transportTime', os.time())
         end
     end
 
@@ -75,12 +74,13 @@ zone_object.onZoneTick = function(zone)
         if GetMobByID(ID.mob.PHANTOM):isSpawned() then
             DespawnMob(ID.mob.PHANTOM)
         end
+
         xi.sea_creatures.despawn(ID)
         zone:setLocalVar('state', 0)
     elseif zone:getLocalVar('state') == 2 then
         xi.pirates.start(ID)
         xi.sea_creatures.checkSpawns(ID, 5, 1) -- 5 percent on init
-        zone:setLocalVar('state', 0)
+        zone:setLocalVar('state', 3)
     end
 
     if os.time() - zone:getLocalVar('transportTime') % 60 then
@@ -91,7 +91,6 @@ zone_object.onZoneTick = function(zone)
 end
 
 zone_object.onTransportEvent = function(player, transport)
-    player:getZone():setLocalVar('stateSet', 0)
     player:getZone():setLocalVar('state', 1)
     player:startEvent(255)
 end

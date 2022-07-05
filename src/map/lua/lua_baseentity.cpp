@@ -4790,35 +4790,35 @@ void CLuaBaseEntity::setAnimationSub(uint8 animationsub)
 }
 
 /************************************************************************
- *  Function: setAnimPath()
+ *  Function: setAnimationPath()
  *  Purpose : Updates an animation path for NPC
- *  Example : GetNPCByID(Door_Offset+12):setAnimPath(1)
+ *  Example : GetNPCByID(Door_Offset+12):setAnimationPath(1)
  ************************************************************************/
 
-void CLuaBaseEntity::setAnimPath(uint8 animPath)
+void CLuaBaseEntity::setAnimationPath(uint8 animPath)
 {
     m_PBaseEntity->manualConfig = true;
     m_PBaseEntity->animPath = animPath;
 }
 
 /************************************************************************
- *  Function: setAnimStart()
+ *  Function: setAnimationStart()
  *  Purpose : Initializes NPC start frames
- *  Example : GetNPCByID(Door_Offset+12):setAnimStart(1724234413)
+ *  Example : GetNPCByID(Door_Offset+12):setAnimationStart(1724234413)
  ************************************************************************/
 
-void CLuaBaseEntity::setAnimStart(bool animStart)
+void CLuaBaseEntity::setAnimationStart(bool animStart)
 {
     m_PBaseEntity->animStart = animStart;
 }
 
 /************************************************************************
- *  Function: setAnimBegin()
+ *  Function: setAnimationBegin()
  *  Purpose : Updates an animation start time for NPC
- *  Example : GetNPCByID(Door_Offset+12):setAnimStart(1724234413)
+ *  Example : GetNPCByID(Door_Offset+12):setAnimationStart(1724234413)
  ************************************************************************/
 
-void CLuaBaseEntity::setAnimBegin(uint32 animBegin)
+void CLuaBaseEntity::setAnimationBegin(uint32 animBegin)
 {
     m_PBaseEntity->animBegin = animBegin;
 }
@@ -14850,9 +14850,9 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getPlayerRegionInZone", CLuaBaseEntity::getPlayerRegionInZone);
     SOL_REGISTER("updateToEntireZone", CLuaBaseEntity::updateToEntireZone);
 
-    SOL_REGISTER("setAnimPath",CLuaBaseEntity::setAnimPath);
-    SOL_REGISTER("setAnimStart",CLuaBaseEntity::setAnimStart);
-    SOL_REGISTER("setAnimBegin",CLuaBaseEntity::setAnimBegin);
+    SOL_REGISTER("setAnimationPath",CLuaBaseEntity::setAnimationPath);
+    SOL_REGISTER("setAnimationStart",CLuaBaseEntity::setAnimationStart);
+    SOL_REGISTER("setAnimationBegin",CLuaBaseEntity::setAnimationBegin);
     SOL_REGISTER("sendUpdateToZoneCharsInRange",CLuaBaseEntity::sendUpdateToZoneCharsInRange);
 
     // Abyssea

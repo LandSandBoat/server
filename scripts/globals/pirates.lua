@@ -25,7 +25,7 @@ end
 
 xi.pirates.init = function(ID)
     local ship = GetNPCByID(ID.npc.PIRATE_SHIP.id)
-    ship:setAnimPath(ID.npc.PIRATE_SHIP.anim_path)
+    ship:setAnimationPath(ID.npc.PIRATE_SHIP.anim_path)
     ship:setStatus(xi.status.DISAPPEAR)
 
     for k, pirate in pairs(ID.npc.PIRATES) do
@@ -175,10 +175,10 @@ xi.pirates.update = function(ID, zone, tripTime)
         end,
         [1] = function (x)
             if tripTime >= 240 then
-                ship:setAnimPath(ID.npc.PIRATE_SHIP.anim_path)
+                ship:setAnimationPath(ID.npc.PIRATE_SHIP.anim_path)
                 ship:setAnimation(18)
-                ship:setAnimStart(true)
-                ship:setAnimBegin(VanadielTime())
+                ship:setAnimationStart(true)
+                ship:setAnimationBegin(VanadielTime())
                 ship:setStatus(xi.status.NORMAL)
                 xi.pirates.setShipPosition(ship, ID.npc.PIRATE_SHIP.start_pos)
                 ship:sendUpdateToZoneCharsInRange(2000)
@@ -264,10 +264,10 @@ xi.pirates.update = function(ID, zone, tripTime)
         [5] = function (x)
             if tripTime >= 706 then
                 xi.pirates.despawnNPCs(ID)
-                ship:setAnimPath(ID.npc.PIRATE_SHIP.anim_path)
+                ship:setAnimationPath(ID.npc.PIRATE_SHIP.anim_path)
                 ship:setAnimation(19)
-                ship:setAnimStart(true)
-                ship:setAnimBegin(VanadielTime())
+                ship:setAnimationStart(true)
+                ship:setAnimationBegin(VanadielTime())
                 xi.pirates.setShipPosition(ship, ID.npc.PIRATE_SHIP.start_pos)
                 ship:sendUpdateToZoneCharsInRange(2000)
                 ship:setLocalVar("pirateStatus", xi.pirates.status.DEPARTING)

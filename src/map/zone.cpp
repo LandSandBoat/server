@@ -1147,14 +1147,17 @@ void CZone::SetZoneDirection(uint8 direction)
 {
     m_ZoneDirection = direction;
 }
+
 void CZone::SetZoneAnimation(uint8 animation)
 {
     m_ZoneAnimation = animation;
 }
+
 void CZone::SetZoneAnimStartTime(uint32 startTime)
 {
     m_ZoneAnimStartTime = startTime;
 }
+
 void CZone::SetZoneAnimLength(uint16 length)
 {
     m_ZoneAnimLength = length;

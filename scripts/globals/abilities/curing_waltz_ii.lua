@@ -53,8 +53,6 @@ ability_object.onUseAbility = function(player, target, ability)
     local sjob = player:getSubJob()
     local cure = 0
 
-
-
     --Performing sj mj check.
     if mjob == xi.job.DNC then
         cure = (vit+chr)*0.5+130

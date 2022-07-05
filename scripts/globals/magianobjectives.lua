@@ -682,9 +682,6 @@ xi.magian.trials =
 [4682] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3497 } } }, -- NQ Forgotten Steps x50
 [4683] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3497 } } }, -- HQ Forgotten Steps x30
 
-
-
-
 -- Abyssean Armor
 -- Unkai Kote
 [4327] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3161 } } }, -- 0 -> +1 (Unkai Seal: Hn.)

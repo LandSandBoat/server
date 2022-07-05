@@ -68,4 +68,3 @@ CMenuMeritPacket::CMenuMeritPacket(CCharEntity* PChar)
 
     ref<uint8>(0x0C) = settings::get<uint8>("map.MAX_MERIT_POINTS") + PChar->PMeritPoints->GetMeritValue(MERIT_MAX_MERIT, PChar);
 }
-

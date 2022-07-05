@@ -957,13 +957,13 @@ namespace charutils
                         {
                             static_cast<CItemLinkshell*>(PItem)->SetLSType((LSTYPE)(PItem->getID() - 0x200));
                         }
-                        int8 EncodedString[16];
+                        int8 EncodedString[LinkshellStringLength];
                         EncodeStringLinkshell(sql->GetData(5), EncodedString);
                         PItem->setSignature(EncodedString);
                     }
                     else if (PItem->getFlag() & (ITEM_FLAG_INSCRIBABLE))
                     {
-                        int8 EncodedString[13];
+                        int8 EncodedString[SignatureStringLength];
                         EncodeStringSignature(sql->GetData(5), EncodedString);
                         PItem->setSignature(EncodedString);
                     }
