@@ -52,20 +52,20 @@ m:addOverride("xi.zones.Castle_Oztroja.npcs.Antiqix.onTrade", function(player, n
 	    end	
 		
         -- buy prismatic hourglass
-        if (gil == xi.settings.PRISMATIC_HOURGLASS_COST and count == 1 and not player:hasKeyItem(xi.ki.PRISMATIC_HOURGLASS)) then
+        if (gil == xi.settings.main.PRISMATIC_HOURGLASS_COST and count == 1 and not player:hasKeyItem(xi.ki.PRISMATIC_HOURGLASS)) then
             player:startEvent(54)
 
         -- return timeless hourglass for refund
-        elseif (count == 1 and trade:hasItemQty(TIMELESS_HOURGLASS, 1)) then
+        elseif (count == 1 and trade:hasItemQty(timelessHourglassID, 1)) then
             player:startEvent(97)
 
         -- currency exchanges
-        elseif (count == xi.settings.CURRENCY_EXCHANGE_RATE and trade:hasItemQty(currency[1], xi.settings.CURRENCY_EXCHANGE_RATE)) then
-            player:startEvent(55, xi.settings.CURRENCY_EXCHANGE_RATE)
-        elseif (count == xi.settings.CURRENCY_EXCHANGE_RATE and trade:hasItemQty(currency[2], xi.settings.CURRENCY_EXCHANGE_RATE)) then
-            player:startEvent(56, xi.settings.CURRENCY_EXCHANGE_RATE)
+        elseif (count == xi.settings.main.CURRENCY_EXCHANGE_RATE and trade:hasItemQty(currency[1], xi.settings.main.CURRENCY_EXCHANGE_RATE)) then
+            player:startEvent(55, xi.settings.main.CURRENCY_EXCHANGE_RATE)
+        elseif (count == xi.settings.main.CURRENCY_EXCHANGE_RATE and trade:hasItemQty(currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE)) then
+            player:startEvent(56, xi.settings.main.CURRENCY_EXCHANGE_RATE)
         elseif (count == 1 and trade:hasItemQty(currency[3], 1)) then
-            player:startEvent(58, currency[3], currency[2], xi.settings.CURRENCY_EXCHANGE_RATE)
+            player:startEvent(58, currency[3], currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE)
 
         -- shop
         else
@@ -130,20 +130,20 @@ m:addOverride("xi.zones.Beadeaux.npcs.Haggleblix.onTrade", function(player, npc,
 	    end		
 
         -- buy prismatic hourglass
-        if (gil == xi.settings.PRISMATIC_HOURGLASS_COST and count == 1 and not player:hasKeyItem(xi.ki.PRISMATIC_HOURGLASS)) then
+        if (gil == xi.settings.main.PRISMATIC_HOURGLASS_COST and count == 1 and not player:hasKeyItem(xi.ki.PRISMATIC_HOURGLASS)) then
             player:startEvent(134)
 
         -- return timeless hourglass for refund
-        elseif (count == 1 and trade:hasItemQty(TIMELESS_HOURGLASS, 1)) then
+        elseif (count == 1 and trade:hasItemQty(timelessHourglassID, 1)) then
             player:startEvent(153)
 
         -- currency exchanges
-        elseif (count == xi.settings.CURRENCY_EXCHANGE_RATE and trade:hasItemQty(currency[1], xi.settings.CURRENCY_EXCHANGE_RATE)) then
-            player:startEvent(135, xi.settings.CURRENCY_EXCHANGE_RATE)
-        elseif (count == xi.settings.CURRENCY_EXCHANGE_RATE and trade:hasItemQty(currency[2], xi.settings.CURRENCY_EXCHANGE_RATE)) then
-            player:startEvent(136, xi.settings.CURRENCY_EXCHANGE_RATE)
+        elseif (count == xi.settings.main.CURRENCY_EXCHANGE_RATE and trade:hasItemQty(currency[1], xi.settings.main.CURRENCY_EXCHANGE_RATE)) then
+            player:startEvent(135, xi.settings.main.CURRENCY_EXCHANGE_RATE)
+        elseif (count == xi.settings.main.CURRENCY_EXCHANGE_RATE and trade:hasItemQty(currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE)) then
+            player:startEvent(136, xi.settings.main.CURRENCY_EXCHANGE_RATE)
         elseif (count == 1 and trade:hasItemQty(currency[3], 1)) then
-            player:startEvent(138, currency[3], currency[2], xi.settings.CURRENCY_EXCHANGE_RATE)
+            player:startEvent(138, currency[3], currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE)
 
         -- shop
         else
@@ -208,20 +208,20 @@ m:addOverride("xi.zones.Davoi.npcs.Lootblox.onTrade", function(player, npc, trad
 	    end		
 
         -- buy prismatic hourglass
-        if (gil == xi.settings.PRISMATIC_HOURGLASS_COST and count == 1 and not player:hasKeyItem(xi.ki.PRISMATIC_HOURGLASS)) then
+        if (gil == xi.settings.main.PRISMATIC_HOURGLASS_COST and count == 1 and not player:hasKeyItem(xi.ki.PRISMATIC_HOURGLASS)) then
             player:startEvent(134)
 
         -- return timeless hourglass for refund
-        elseif (count == 1 and trade:hasItemQty(TIMELESS_HOURGLASS, 1)) then
+        elseif (count == 1 and trade:hasItemQty(timelessHourglassID, 1)) then
             player:startEvent(153)
 
         -- currency exchanges
-        elseif (count == xi.settings.CURRENCY_EXCHANGE_RATE and trade:hasItemQty(currency[1], xi.settings.CURRENCY_EXCHANGE_RATE)) then
-            player:startEvent(135, xi.settings.CURRENCY_EXCHANGE_RATE)
-        elseif (count == xi.settings.CURRENCY_EXCHANGE_RATE and trade:hasItemQty(currency[2], xi.settings.CURRENCY_EXCHANGE_RATE)) then
-            player:startEvent(136, xi.settings.CURRENCY_EXCHANGE_RATE)
+        elseif (count == xi.settings.main.CURRENCY_EXCHANGE_RATE and trade:hasItemQty(currency[1], xi.settings.main.CURRENCY_EXCHANGE_RATE)) then
+            player:startEvent(135, xi.settings.main.CURRENCY_EXCHANGE_RATE)
+        elseif (count == xi.settings.main.CURRENCY_EXCHANGE_RATE and trade:hasItemQty(currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE)) then
+            player:startEvent(136, xi.settings.main.CURRENCY_EXCHANGE_RATE)
         elseif (count == 1 and trade:hasItemQty(currency[3], 1)) then
-            player:startEvent(138, currency[3], currency[2], xi.settings.CURRENCY_EXCHANGE_RATE)
+            player:startEvent(138, currency[3], currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE)
 
         -- shop
         else
