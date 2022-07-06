@@ -589,7 +589,6 @@ function getMagicHitRate(caster, target, skillType, element, effectRes, bonusAcc
         bonusAcc = bonusAcc + affinityBonus + elementBonus
     end
 
-
     if target:isPC() then
         magiceva = target:getMod(xi.mod.MEVA) + resMod + effectRes
     else
