@@ -277,7 +277,7 @@ enum class DAMAGE_TYPE : uint16
 
 // For example
 // A guard is HIT + GUARDED
-// A parry is MISS + GUARDED
+// A parry is HIT + MISS + GUARDED
 // A block is HIT + BLOCK
 // It also seems weaponskills and job abilities set ABILITY in addition to these flags.
 // All of these flags are also seen in weaponskills.
