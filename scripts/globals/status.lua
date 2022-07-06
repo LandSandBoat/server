@@ -1238,7 +1238,7 @@ xi.mod =
     AVATAR_LVL                      = 1040, -- Avatar: Lv. ### (Increases all avatar's base level above 99)
     CARBUNCLE_LVL_BONUS             = 1041, -- Carbuncle: Lv.+ (Increases Carbuncle's base level above 99)
     CAIT_SITH_LVL_BONUS             = 1042, -- Cait Sith: Lv.+ (Increases Cait Sith's base level above 99)
-    
+
     -- Puppetmaster
     AUTOMATON_LVL_BONUS             = 1044, -- Automaton: Lv. (Increases automaton's base level above 99)
 
