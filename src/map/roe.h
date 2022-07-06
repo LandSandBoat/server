@@ -80,7 +80,6 @@ typedef std::array<uint16, 6>            RecordTimetable_D;
 typedef std::array<RecordTimetable_D, 7> RecordTimetable_W;
 struct RoeSystemData
 {
-    bool                     RoeEnabled = true;
     RecordTimetable_W        TimedRecordTable;
     std::bitset<4096>        ImplementedRecords;
     std::bitset<4096>        RepeatableRecords;
@@ -93,8 +92,8 @@ struct RoeSystemData
     std::bitset<4096>        UnityRecords;
     std::vector<uint16>      UnityRecordIDs;
     std::bitset<4096>        TimedRecords;
-    std::array<uint32, 4096> NotifyThresholds;
-    uint8                    unityLeaderRank[11]; // 0..10 for Unity Leader, stores rank position
+    std::array<uint32, 4096> NotifyThresholds    = {};
+    uint8                    unityLeaderRank[11] = {}; // 0..10 for Unity Leader, stores rank position
 
     RoeSystemData()
     {

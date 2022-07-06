@@ -30,34 +30,24 @@
 CBaseEntity::CBaseEntity()
 : objtype(ENTITYTYPE::TYPE_NONE)
 , status(STATUS_TYPE::DISAPPEAR)
-, isRenamed(false)
+, allegiance(ALLEGIANCE_TYPE::MOB)
+, spawnAnimation(SPAWN_ANIMATION::NORMAL)
+, PAI(nullptr)
+, m_nextUpdateTimer(std::chrono::steady_clock::now())
 {
     id       = 0;
     targid   = 0;
     m_TargID = 0;
-    memset(&look, 0, sizeof(look));
-    memset(&mainlook, 0, sizeof(mainlook));
 
-    // False positive: any reasonable compiler is IEEE754-1985 compatible
-    // portability: Using memset() on struct which contains a floating point number.
-    // This is not portable because memset() sets each byte of a block of memory to a specific value and
-    // the actual representation of a floating-point value is implementation defined. Note: In case of an IEEE754-1985 compatible
-    // implementation setting all bits to zero results in the value 0.0. [memsetClassFloat]
-    // cppcheck-suppress memsetClassFloat
-    memset(&loc, 0, sizeof(loc));
-
-    animation    = ANIMATION_NONE;
+    isRenamed = false;
+    animation    = 0;
     animationsub = 0;
-    speed        = 50 + map_config.speed_mod; // It is downright dumb to init every entity at PLAYER speed, but until speed is reworked this hack stays.
-    speedsub     = 50;                        // Retail does NOT adjust this when speed is adjusted.
+    speed        = 50 + settings::get<int8>("map.SPEED_MOD"); // It is downright dumb to init every entity at PLAYER speed, but until speed is reworked this hack stays.
+    speedsub     = 50;                                        // Retail does NOT adjust this when speed is adjusted.
     namevis      = 0;
-    allegiance   = ALLEGIANCE_TYPE::MOB;
     updatemask   = 0;
-    PAI          = nullptr;
     PBattlefield = nullptr;
     PInstance    = nullptr;
-
-    m_nextUpdateTimer = std::chrono::steady_clock::now();
 }
 
 CBaseEntity::~CBaseEntity()

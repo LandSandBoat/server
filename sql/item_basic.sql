@@ -8395,8 +8395,8 @@ INSERT INTO `item_basic` VALUES (11054,0,'pensee_earring','pensee_earring',1,635
 INSERT INTO `item_basic` VALUES (11055,0,'aredan_earring','aredan_earring',1,34820,24,0,7315);
 INSERT INTO `item_basic` VALUES (11056,0,'ghillie_earring','ghillie_earring',1,2084,24,0,0);
 INSERT INTO `item_basic` VALUES (11057,0,'ghillie_earring_+1','ghillie_earring_+1',1,2080,24,0,6930);
-INSERT INTO `item_basic` VALUES (11058,0,'hajduk_ring','hajduk_ring',1,2084,24,0,0);
-INSERT INTO `item_basic` VALUES (11059,0,'hajduk_ring_+1','hajduk_ring_+1',1,2080,24,0,0);
+INSERT INTO `item_basic` VALUES (11058,0,'hajduk_ring','hajduk_ring',1,2084,25,0,0);
+INSERT INTO `item_basic` VALUES (11059,0,'hajduk_ring_+1','hajduk_ring_+1',1,2080,25,0,0);
 INSERT INTO `item_basic` VALUES (11060,0,'evader_earring','evader_earring',1,2084,24,0,0);
 INSERT INTO `item_basic` VALUES (11061,0,'evader_earring_+1','evader_earring_+1',1,2080,24,0,0);
 INSERT INTO `item_basic` VALUES (11062,0,'fountain_ring','fountain_ring',1,38916,25,0,0);
@@ -19196,6 +19196,7 @@ INSERT INTO `item_basic` VALUES (23793,0,'ziamet_peti','ziamet_peti',1,63552,0,1
 INSERT INTO `item_basic` VALUES (23794,0,'ziamet_bazubands','ziamet_bazubands',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23795,0,'ziamet_salvars','ziamet_salvars',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23796,0,'ziamet_nails','ziamet_nails',1,63552,0,1,0);
+INSERT INTO `item_basic` VALUES (23797,0,'crepuscular_helm','crepuscular_helm',1,63572,0,1,0);
 INSERT INTO `item_basic` VALUES (25417,0,'warriors_bead_necklace','warriors_beads',1,2084,22,0,0);
 INSERT INTO `item_basic` VALUES (25418,0,'warriors_bead_necklace_+1','war._beads_+1',1,2080,22,0,0);
 INSERT INTO `item_basic` VALUES (25419,0,'warriors_bead_necklace_+2','war._beads_+2',1,2080,22,0,0);
@@ -19715,6 +19716,7 @@ INSERT INTO `item_basic` VALUES (26084,0,'sherida_earring','sherida_earring',1,6
 INSERT INTO `item_basic` VALUES (26085,0,'regal_earring','regal_earring',1,63568,0,0,0);
 INSERT INTO `item_basic` VALUES (26086,0,'nicanders_necklace','nicanders_necklace',1,34820,0,0,0);
 INSERT INTO `item_basic` VALUES (26088,0,'malignance_earring','malignance_earring',1,34820,24,0,2);
+INSERT INTO `item_basic` VALUES (26107,0,'thrud_earring','thrud_earring',1,63572,0,0,0);
 INSERT INTO `item_basic` VALUES (26108,0,'odr_earring','odr_earring',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (26109,0,'snotra_earring','snotra_earring',1,34820,24,0,2);
 INSERT INTO `item_basic` VALUES (26115,0,'balder_earring_+1','balder_earring_+1',1,63572,0,0,0);

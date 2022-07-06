@@ -16,7 +16,6 @@ function error(player, msg)
     player:PrintToPlayer("!checkinteraction {handlerName}")
 end
 
-
 local typeToName = {}
 for name, typeVal in pairs(Action.Type) do
    typeToName[typeVal] = name

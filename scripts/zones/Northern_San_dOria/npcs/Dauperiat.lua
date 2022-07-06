@@ -4,7 +4,7 @@
 -- Starts and Finishes Quest: Blackmail (R)
 -- !zone 231
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/titles")
 require("scripts/globals/keyitems")
 require("scripts/globals/shop")
@@ -43,7 +43,6 @@ entity.onTrigger = function(player, npc)
     elseif (blackMail == QUEST_ACCEPTED and questState == 1) then
         player:startEvent(646, 0, 530) --646  after giving letter to H, needs param
 
-
     elseif (blackMail == QUEST_ACCEPTED and questState == 2) then
         player:startEvent(647, 0, 530) --647 recap of 646
 
@@ -69,8 +68,8 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("BlackMailQuest", 2)
     elseif (csid == 648) then
         player:tradeComplete()
-        player:addGil(xi.settings.GIL_RATE * 900)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 900)
+        player:addGil(xi.settings.main.GIL_RATE * 900)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 900)
         if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.BLACKMAIL) == QUEST_ACCEPTED) then
             player:addFame(xi.quest.fame_area.SANDORIA, 30)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.BLACKMAIL)

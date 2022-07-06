@@ -3,8 +3,9 @@
 -- Seekers of Adoulin M4-1-1
 -----------------------------------
 -- !addmission 12 72
--- Levil   : !pos -87.204 3.350 12.655 256
--- Kipligg : !pos -32 0 22 256
+-- Levil        : !pos -87.204 3.350 12.655 256
+-- Kipligg      : !pos -32 0 22 256
+-- Port Storage : !pos 85.578 30.5 180.639 256
 -----------------------------------
 require('scripts/globals/items')
 require('scripts/globals/missions')

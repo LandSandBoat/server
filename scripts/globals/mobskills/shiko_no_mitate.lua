@@ -4,7 +4,7 @@
 -- Trust: Gessho: Shiko no Mitate : Defense Boost + Stoneskin + Issekigan
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}

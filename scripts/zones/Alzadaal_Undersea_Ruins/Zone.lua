@@ -4,7 +4,7 @@
 local ID = require("scripts/zones/Alzadaal_Undersea_Ruins/IDs")
 require("scripts/globals/missions")
 require("scripts/globals/besieged")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/titles")
 require("scripts/globals/zone")
 -----------------------------------

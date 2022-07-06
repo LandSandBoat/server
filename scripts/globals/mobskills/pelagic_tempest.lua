@@ -7,7 +7,7 @@
 --  Range: 10' cone
 --  Notes: Used by Murex affiliated with lightning element. Shock effect is fairly strong (28/tick).
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
@@ -25,9 +25,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, info.hitslanded)
 
-
     xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.SHOCK, 28, 3, 180)
-
 
     xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.TERROR, 1, 0, 180)
 

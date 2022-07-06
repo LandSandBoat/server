@@ -168,14 +168,14 @@ namespace gardenutils
                 elements[FLOWERPOT_ELEMENT_NONE] += 10;
         }
 
-        if (map_config.garden_day_matters)
+        if (settings::get<bool>("map.GARDEN_DAY_MATTERS"))
         {
             uint32 vanaDate   = PItem->getPlantTimestamp();
             uint32 dayElement = ((vanaDate % VTIME_WEEK) / VTIME_DAY) + 1;
             elements[dayElement] += 10;
         }
 
-        if (map_config.garden_pot_matters)
+        if (settings::get<bool>("map.GARDEN_POT_MATTERS"))
         {
             switch (PItem->getID())
             {
@@ -237,12 +237,12 @@ namespace gardenutils
             }
         }
 
-        if (map_config.garden_moonphase_matters)
+        if (settings::get<bool>("map.GARDEN_MOONPHASE_MATTERS"))
         {
             strength += (int16)std::ceil(CVanaTime::getInstance()->getMoonPhase() / 10.0f);
         }
 
-        if (map_config.garden_mh_aura_matters)
+        if (settings::get<bool>("map.GARDEN_MH_AURA_MATTERS"))
         {
             // Add up all of the installed furniture auras
             std::array<uint16, 8> auras = { 0 };

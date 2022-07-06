@@ -122,7 +122,6 @@ local function fTP(tp, ftp1, ftp2, ftp3)
     return 1 -- no ftp mod
 end
 
-
 xi.mobskills.mobRangedMove = function(mob, target, skill, numberofhits, accmod, dmgmod, tpeffect)
     -- this will eventually contian ranged attack code
     return xi.mobskills.mobPhysicalMove(mob, target, skill, numberofhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.RANGED)
@@ -220,7 +219,6 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
     else
         maxRatio = ratio
     end
-
 
     if ratio < 0.38 then
         minRatio =  0
@@ -521,6 +519,12 @@ end
 
 xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType, damageType, shadowbehav)
 
+    -- If target has Hysteria, no message skip rest
+    if mob:hasStatusEffect(xi.effect.HYSTERIA) then
+        skill:setMsg(xi.msg.basic.NONE)
+        return 0
+    end
+
     -- physical attack missed, skip rest
     if skill:hasMissMsg() then
         return 0
@@ -595,7 +599,6 @@ xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType,
     elseif attackType == xi.attackType.RANGED then
         dmg = target:rangedDmgTaken(dmg)
     end
-
 
     if dmg < 0 then
         return dmg
@@ -692,6 +695,12 @@ xi.mobskills.mobDrainMove = function(mob, target, drainType, drain, attackType, 
 end
 
 xi.mobskills.mobPhysicalDrainMove = function(mob, target, skill, drainType, drain)
+
+    -- If target has Hysteria, no message skip rest
+    if mob:hasStatusEffect(xi.effect.HYSTERIA) then
+        return xi.msg.basic.NONE
+    end
+
     if (xi.mobskills.mobPhysicalHit(skill)) then
         return xi.mobskills.mobDrainMove(mob, target, drainType, drain)
     end
@@ -734,6 +743,12 @@ xi.mobskills.mobDrainAttribute = function(mob, target, typeEffect, power, tick, 
 end
 
 xi.mobskills.mobDrainStatusEffectMove = function(mob, target)
+
+    -- If target has Hysteria, no message skip rest
+    if mob:hasStatusEffect(xi.effect.HYSTERIA) then
+        return xi.msg.basic.NONE
+    end
+
     -- try to drain buff
     local effect = mob:stealStatusEffect(target)
 

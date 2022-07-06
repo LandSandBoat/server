@@ -135,30 +135,30 @@ xi.mission.id =
     },
 
     -----------------------------------
-    --  Windurst (2)
+    --  Windurst - Interaction Framework (2)
     -----------------------------------
     [xi.mission.area[xi.mission.log_id.WINDURST]] =
     {
-        THE_HORUTOTO_RUINS_EXPERIMENT = 0,  -- ±
-        THE_HEART_OF_THE_MATTER       = 1,  -- ±
-        THE_PRICE_OF_PEACE            = 2,  -- ±
-        LOST_FOR_WORDS                = 3,  -- ±
-        A_TESTING_TIME                = 4,  -- ±
-        THE_THREE_KINGDOMS            = 5,  -- ±
-        THE_THREE_KINGDOMS_SANDORIA   = 6,  -- ±
-        THE_THREE_KINGDOMS_BASTOK     = 7,  -- ±
-        THE_THREE_KINGDOMS_SANDORIA2  = 8,  -- ±
-        THE_THREE_KINGDOMS_BASTOK2    = 9,  -- ±
-        TO_EACH_HIS_OWN_RIGHT         = 10, -- ±
-        WRITTEN_IN_THE_STARS          = 11, -- ±
-        A_NEW_JOURNEY                 = 12, -- ±
-        MAGICITE                      = 13, -- ±
-        THE_FINAL_SEAL                = 14, -- ±
-        THE_SHADOW_AWAITS             = 15, -- ±
-        FULL_MOON_FOUNTAIN            = 16, -- ±
-        SAINTLY_INVITATION            = 17, -- ±
-        THE_SIXTH_MINISTRY            = 18, -- ±
-        AWAKENING_OF_THE_GODS         = 19, -- ±
+        THE_HORUTOTO_RUINS_EXPERIMENT = 0,
+        THE_HEART_OF_THE_MATTER       = 1,
+        THE_PRICE_OF_PEACE            = 2,
+        LOST_FOR_WORDS                = 3,
+        A_TESTING_TIME                = 4,
+        THE_THREE_KINGDOMS            = 5,
+        THE_THREE_KINGDOMS_SANDORIA   = 6,
+        THE_THREE_KINGDOMS_BASTOK     = 7,
+        THE_THREE_KINGDOMS_SANDORIA2  = 8,
+        THE_THREE_KINGDOMS_BASTOK2    = 9,
+        TO_EACH_HIS_OWN_RIGHT         = 10,
+        WRITTEN_IN_THE_STARS          = 11,
+        A_NEW_JOURNEY                 = 12,
+        MAGICITE                      = 13,
+        THE_FINAL_SEAL                = 14,
+        THE_SHADOW_AWAITS             = 15,
+        FULL_MOON_FOUNTAIN            = 16,
+        SAINTLY_INVITATION            = 17,
+        THE_SIXTH_MINISTRY            = 18,
+        AWAKENING_OF_THE_GODS         = 19,
         VAIN                          = 20,
         THE_JESTER_WHOD_BE_KING       = 21,
         DOLL_OF_THE_DEAD              = 22,
@@ -503,60 +503,60 @@ xi.mission.id =
         DRIFTING_NORTHWEST              = 62,  -- ±
         KUMHAU_THE_FLASHFROST_NAAKUAL   = 63,  -- ±
         SOUL_SIPHON                     = 66,  -- ±
-        STONEWALLED                     = 67,
-        SALVATION                       = 69,
-        GLIMMER_OF_PORTENT              = 70,
+        STONEWALLED                     = 67,  -- ±
+        SALVATION                       = 69,  -- ±
+        GLIMMER_OF_PORTENT              = 70,  -- ±
         -- THE_SERPENTINE_LABYRINTH     =  -- Category
-        INTO_THE_FIRE                   = 71,
-        MELVIEN_DE_MALECROIX            = 72,
-        COURIER_CATASTROPHE             = 73,
-        DONE_AND_DELIVERED              = 74,
-        MINISTERIAL_WHISPERS            = 75,
-        A_DAY_IN_THE_LIFE_OF_A_PIONEER  = 76,
-        LIGHTING_THE_WAY                = 77,
-        SAJJAKA                         = 78,
-        STUDYING_UP                     = 79,
-        A_VOW_OF_TRUTH                  = 80,
-        DARRCUILN                       = 81,
-        THE_GATES                       = 82,
-        MORIMAR                         = 84,
-        A_NEW_FORCE_ARISES              = 85,
-        THE_SACRED_SAPLING              = 86,
-        TREE_GRAFTING                   = 87,
-        A_SHROUDED_CANOPY               = 88,
-        LEAFALLIA                       = 89,
-        ROSULATIAS_PROMISE              = 90,
-        THE_LIGHTSLAND                  = 91,
-        THE_LIGHT_OF_DAWN_COMES         = 92,
-        CRIES_FROM_THE_DEEP             = 93,
-        SEEDS_OF_DOUBT                  = 94,
-        THE_TOMATOES_OF_WRATH           = 95,
-        A_GRAVE_MISTAKE                 = 96,
-        AN_EMERGENCY_CONVOCATION        = 98,
-        BALAMOR_THE_DEATHBORNE_XOL      = 99,
-        ANAGNORISIS                     = 100,
-        JUST_THE_THING                  = 101,
-        SUGARCOATED_SALVATION           = 102,
-        ARCIELAS_RESOLVE                = 103,
-        BALAMORS_RUSE                   = 104,
-        THE_CHARLATAN                   = 105,
-        ROYAL_BLESSINGS                 = 107,
+        INTO_THE_FIRE                   = 71,  -- ±
+        MELVIEN_DE_MALECROIX            = 72,  -- ±
+        COURIER_CATASTROPHE             = 73,  -- ±
+        DONE_AND_DELIVERED              = 74,  -- ±
+        MINISTERIAL_WHISPERS            = 75,  -- ±
+        A_DAY_IN_THE_LIFE_OF_A_PIONEER  = 76,  -- ±
+        LIGHTING_THE_WAY                = 77,  -- ±
+        SAJJAKA                         = 78,  -- ±
+        STUDYING_UP                     = 79,  -- ±
+        A_VOW_OF_TRUTH                  = 80,  -- ±
+        DARRCUILN                       = 81,  -- ±
+        THE_GATES                       = 82,  -- ±
+        MORIMAR                         = 84,  -- ±
+        A_NEW_FORCE_ARISES              = 85,  -- ±
+        THE_SACRED_SAPLING              = 86,  -- ±
+        TREE_GRAFTING                   = 87,  -- ±
+        A_SHROUDED_CANOPY               = 88,  -- ±
+        LEAFALLIA                       = 89,  -- ±
+        ROSULATIAS_PROMISE              = 90,  -- ±
+        THE_LIGHTSLAND                  = 91,  -- ±
+        THE_LIGHT_OF_DAWN_COMES         = 92,  -- ±
+        CRIES_FROM_THE_DEEP             = 93,  -- ±
+        SEEDS_OF_DOUBT                  = 94,  -- ±
+        THE_TOMATOES_OF_WRATH           = 95,  -- ±
+        A_GRAVE_MISTAKE                 = 96,  -- ±
+        AN_EMERGENCY_CONVOCATION        = 98,  -- ±
+        BALAMOR_THE_DEATHBORNE_XOL      = 99,  -- ±
+        ANAGNORISIS                     = 100, -- ±
+        JUST_THE_THING                  = 101, -- ±
+        SUGARCOATED_SALVATION           = 102, -- ±
+        ARCIELAS_RESOLVE                = 103, -- ±
+        BALAMORS_RUSE                   = 104, -- ±
+        THE_CHARLATAN                   = 105, -- ±
+        ROYAL_BLESSINGS                 = 107, -- ±
         -- HADES                        =  -- Category
-        ARBOREAL_RUMORS                 = 108,
-        ARCIELAS_MISSIVE                = 109,
-        HEROES_UNITE                    = 110,
-        A_PORTENT_MOST_OMINOUS          = 111,
-        YGGDRASIL_BECKONS               = 112,
-        RETURNING_TO_THE_TREES          = 113,
-        THE_KEY_TO_THE_TURRIS           = 114,
-        TEODORS_SUMMONS                 = 116,
-        THE_SEVENTH_GUARDIAN            = 117,
-        WATERY_GRAVE                    = 118,
-        BLOOD_FOR_BLOOD                 = 120,
-        RECKONING                       = 121,
-        ABOMINATION                     = 123,
-        UNDYING_LIGHT                   = 125,
-        THE_LIGHT_WITHIN                = 129,
+        ARBOREAL_RUMORS                 = 108, -- ±
+        ARCIELAS_MISSIVE                = 109, -- ±
+        HEROES_UNITE                    = 110, -- ±
+        A_PORTENT_MOST_OMINOUS          = 111, -- ±
+        YGGDRASIL_BECKONS               = 112, -- ±
+        RETURNING_TO_THE_TREES          = 113, -- ±
+        THE_KEY_TO_THE_TURRIS           = 114, -- ±
+        TEODORS_SUMMONS                 = 116, -- ±
+        THE_SEVENTH_GUARDIAN            = 117, -- ±
+        WATERY_GRAVE                    = 118, -- ±
+        BLOOD_FOR_BLOOD                 = 120, -- ±
+        RECKONING                       = 121, -- ±
+        ABOMINATION                     = 123, -- ±
+        UNDYING_LIGHT                   = 125, -- ±
+        THE_LIGHT_WITHIN                = 129, -- ±
         -- FIN                          = 130,
     },
 
@@ -830,10 +830,10 @@ xi.mission.setLocalVar = function(player, areaId, questId, name, value)
     return player:setLocalVar(getVarPrefix(areaId, questId) .. name, value)
 end
 
-xi.mission.getMustZone = function(player, areaId, questId, name)
+xi.mission.getMustZone = function(player, areaId, questId)
     return player:getLocalVar(getVarPrefix(areaId, questId) .. "mustZone") == 1 and true or false
 end
 
-xi.mission.setMustZone = function(player, areaId, questId, name, value)
+xi.mission.setMustZone = function(player, areaId, questId)
     player:setLocalVar(getVarPrefix(areaId, questId) .. "mustZone", 1)
 end

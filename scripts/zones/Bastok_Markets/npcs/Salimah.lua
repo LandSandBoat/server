@@ -7,7 +7,7 @@
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 local ID = require("scripts/zones/Bastok_Markets/IDs")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 
@@ -82,8 +82,8 @@ entity.onEventFinish = function(player, csid, option)
             fame=60
         end
 
-        player:addGil(gil * xi.settings.GIL_RATE)
-        player:messageSpecial(ID.text.GIL_OBTAINED, gil * xi.settings.GIL_RATE)
+        player:addGil(gil * xi.settings.main.GIL_RATE)
+        player:messageSpecial(ID.text.GIL_OBTAINED, gil * xi.settings.main.GIL_RATE)
         player:addFame(xi.quest.fame_area.BASTOK, fame)
         player:addTitle(xi.title.MOMMYS_HELPER)
         player:needToZone(true)

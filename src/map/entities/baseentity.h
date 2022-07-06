@@ -194,6 +194,12 @@ enum NAMEVIS : uint8
     VIS_GHOST_PHASE = 0x80,
 };
 
+enum class SPAWN_ANIMATION : uint8
+{
+    NORMAL  = 0,
+    SPECIAL = 1,
+};
+
 // TODO:it is possible to make this structure part of the class, instead of the current ID and Targid, but without the Clean method
 
 struct EntityID_t
@@ -218,6 +224,15 @@ struct location_t
     uint16     prevzone;    // Previous zone (Not used for monsters and NPCs)
     bool       zoning;      // The flag is reset at each entrance to the new zone. We are needed to implement the logic of game tasks ("Quests")
     uint16     boundary;    // A certain area in the zone in which the entity is located (used by characters and transport)
+
+    location_t()
+    {
+        destination = 0;
+        zone        = nullptr;
+        prevzone    = 0;
+        zoning      = false;
+        boundary    = 0;
+    }
 };
 
 class CAIContainer;
@@ -292,6 +307,8 @@ public:
     uint8           updatemask; // what to update next server tick to players nearby
 
     bool isRenamed; // tracks if the entity's name has been overidden. Defaults to false.
+
+    SPAWN_ANIMATION spawnAnimation;
 
     std::unique_ptr<CAIContainer> PAI;          // AI container
     CBattlefield*                 PBattlefield; // pointer to battlefield (if in one)

@@ -428,4 +428,3 @@ INSERT INTO bcnm_treasure_chests VALUES (1304,6,16929029); -- Central Temenos - 
 INSERT INTO bcnm_treasure_chests VALUES (1305,5,16929004); -- Central Temenos - 3rd Floor
 INSERT INTO bcnm_treasure_chests VALUES (1306,4,16928965); -- Central Temenos - 4th Floor
 INSERT INTO bcnm_treasure_chests VALUES (1301,8,16929052); -- Central Temenos - Basement
-

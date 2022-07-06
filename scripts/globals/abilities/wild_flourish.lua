@@ -7,7 +7,7 @@
 -- Duration: 0:05
 -----------------------------------
 require("scripts/globals/weaponskills")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------

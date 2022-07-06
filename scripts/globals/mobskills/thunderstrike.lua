@@ -6,7 +6,7 @@
 --  Ignores Shadows
 --  Range: 13' radial
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------

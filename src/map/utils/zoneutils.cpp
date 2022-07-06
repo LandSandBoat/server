@@ -125,11 +125,12 @@ namespace zoneutils
 
     CBaseEntity* GetEntity(uint32 ID, uint8 filter)
     {
-        uint16 zoneID = (ID >> 12) & 0x0FFF;
-        CZone* PZone  = GetZone(zoneID);
+        const uint16 DynamicEntityStart  = 0x700;
+        uint16 zoneID                    = (ID >> 12) & 0x0FFF;
+        CZone* PZone                     = GetZone(zoneID);
         if (PZone)
         {
-            return PZone->GetEntity((uint16)(ID & 0x0FFF), filter);
+            return PZone->GetEntity((uint16)(ID & 0x00000800 ? (ID & 0x7FF) + DynamicEntityStart : ID & 0xFFF), filter);
         }
         else
         {
@@ -300,7 +301,9 @@ namespace zoneutils
                     PNpc->status  = static_cast<STATUS_TYPE>(sql->GetIntData(14));
                     PNpc->m_flags = sql->GetUIntData(15);
 
-                    std::memcpy(&PNpc->look, sql->GetData(16), 20);
+                    uint16 sqlModelID[10];
+                    memcpy(&sqlModelID, sql->GetData(16), 20);
+                    PNpc->look = look_t(sqlModelID);
 
                     PNpc->name_prefix = (uint8)sql->GetIntData(17);
                     PNpc->widescan    = (uint8)sql->GetIntData(18);
@@ -333,8 +336,8 @@ namespace zoneutils
 
     void LoadMOBList()
     {
-        uint8 normalLevelRangeMin = luautils::GetSettingsVariable("NORMAL_MOB_MAX_LEVEL_RANGE_MIN");
-        uint8 normalLevelRangeMax = luautils::GetSettingsVariable("NORMAL_MOB_MAX_LEVEL_RANGE_MAX");
+        uint8 normalLevelRangeMin = settings::get<uint8>("main.NORMAL_MOB_MAX_LEVEL_RANGE_MIN");
+        uint8 normalLevelRangeMax = settings::get<uint8>("main.NORMAL_MOB_MAX_LEVEL_RANGE_MAX");
 
         const char* Query = "SELECT mob_groups.zoneid, mobname, mobid, pos_rot, pos_x, pos_y, pos_z, \
             respawntime, spawntype, dropid, mob_groups.HP, mob_groups.MP, minLevel, maxLevel, \
@@ -343,7 +346,7 @@ namespace zoneutils
             STR, DEX, VIT, AGI, `INT`, MND, CHR, EVA, DEF, ATT, ACC, \
             slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, \
             fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, \
-            fire_res, ice_res, wind_res, earth_res, lightning_res, water_res, light_res, dark_res, \
+            fire_meva, ice_meva, wind_meva, earth_meva, lightning_meva, water_meva, light_meva, dark_meva, \
             Element, mob_pools.familyid, mob_family_system.superFamilyID, name_prefix, entityFlags, animationsub, \
             (mob_family_system.HP / 100), (mob_family_system.MP / 100), hasSpellScript, spellList, mob_groups.poolid, \
             allegiance, namevis, aggro, roamflag, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects, \
@@ -391,7 +394,9 @@ namespace zoneutils
                     PMob->m_minLevel = (uint8)sql->GetIntData(12);
                     PMob->m_maxLevel = (uint8)sql->GetIntData(13);
 
-                    memcpy(&PMob->look, sql->GetData(14), 23);
+                    uint16 sqlModelID[10];
+                    memcpy(&sqlModelID, sql->GetData(14), 20);
+                    PMob->look = look_t(sqlModelID);
 
                     PMob->SetMJob(sql->GetIntData(15));
                     PMob->SetSJob(sql->GetIntData(16));
@@ -438,14 +443,25 @@ namespace zoneutils
                     PMob->setModifier(Mod::LIGHT_SDT, (int16)sql->GetFloatData(48));   // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
                     PMob->setModifier(Mod::DARK_SDT, (int16)sql->GetFloatData(49));    // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
 
-                    PMob->setModifier(Mod::FIRE_RES, (int16)(sql->GetIntData(50))); // These are stored as signed integers which
-                    PMob->setModifier(Mod::ICE_RES, (int16)(sql->GetIntData(51)));  // is directly the modifier starting value.
-                    PMob->setModifier(Mod::WIND_RES, (int16)(sql->GetIntData(52))); // Positives signify increased resist chance.
-                    PMob->setModifier(Mod::EARTH_RES, (int16)(sql->GetIntData(53)));
-                    PMob->setModifier(Mod::THUNDER_RES, (int16)(sql->GetIntData(54)));
-                    PMob->setModifier(Mod::WATER_RES, (int16)(sql->GetIntData(55)));
-                    PMob->setModifier(Mod::LIGHT_RES, (int16)(sql->GetIntData(56)));
-                    PMob->setModifier(Mod::DARK_RES, (int16)(sql->GetIntData(57)));
+                    PMob->setModifier(Mod::FIRE_MEVA, (int16)(sql->GetIntData(50)));   // These are stored as signed integers which
+                    PMob->setModifier(Mod::ICE_MEVA, (int16)(sql->GetIntData(51)));    // is directly the modifier starting value.
+                    PMob->setModifier(Mod::WIND_MEVA, (int16)(sql->GetIntData(52)));   // Positives signify increased resist chance.
+                    PMob->setModifier(Mod::EARTH_MEVA, (int16)(sql->GetIntData(53)));
+                    PMob->setModifier(Mod::THUNDER_MEVA, (int16)(sql->GetIntData(54)));
+                    PMob->setModifier(Mod::WATER_MEVA, (int16)(sql->GetIntData(55)));
+                    PMob->setModifier(Mod::LIGHT_MEVA, (int16)(sql->GetIntData(56)));
+                    PMob->setModifier(Mod::DARK_MEVA, (int16)(sql->GetIntData(57)));
+
+                    /* Todo: hook this up, seems to force resist tiering
+                    PMob->setModifier(Mod::FIRE_RES_RANK, (int16)(sql->GetIntData(??)));
+                    PMob->setModifier(Mod::ICE_RES_RANK, (int16)(sql->GetIntData(??)));
+                    PMob->setModifier(Mod::WIND_RES_RANK, (int16)(sql->GetIntData(??)));
+                    PMob->setModifier(Mod::EARTH_RES_RANK, (int16)(sql->GetIntData(??)));
+                    PMob->setModifier(Mod::THUNDER_RES_RANK, (int16)(sql->GetIntData(??)));
+                    PMob->setModifier(Mod::WATER_RES_RANK, (int16)(sql->GetIntData(??)));
+                    PMob->setModifier(Mod::LIGHT_RES_RANK, (int16)(sql->GetIntData(??)));
+                    PMob->setModifier(Mod::DARK_RES_RANK, (int16)(sql->GetIntData(??)));
+                    */
 
                     PMob->m_Element     = (uint8)sql->GetIntData(58);
                     PMob->m_Family      = (uint16)sql->GetIntData(59);
@@ -616,7 +632,7 @@ namespace zoneutils
         }
         else
         {
-            ShowFatalError("zoneutils::CreateZone: Cannot load zone settings (%u)", ZoneID);
+            ShowCritical("zoneutils::CreateZone: Cannot load zone settings (%u)", ZoneID);
             return nullptr;
         }
     }
@@ -648,7 +664,7 @@ namespace zoneutils
         }
         else
         {
-            ShowFatalError("Unable to load any zones! Check IP and port params");
+            ShowCritical("Unable to load any zones! Check IP and port params");
             do_final(EXIT_FAILURE);
         }
 
@@ -990,7 +1006,11 @@ namespace zoneutils
 
     int GetWeatherElement(WEATHER weather)
     {
-        XI_DEBUG_BREAK_IF(weather >= MAX_WEATHER_ID);
+        if (weather >= MAX_WEATHER_ID)
+        {
+            ShowWarning("zoneutils::GetWeatherElement() - Invalid weather passed to function.");
+            return 0;
+        }
 
         // TODO: Fix weather ordering; at the moment, this current fire, water, earth, wind, snow, thunder
         // order MUST be preserved due to the weather enums going in this order. Those enums will
@@ -1060,7 +1080,7 @@ namespace zoneutils
         }
         else
         {
-            ShowFatalError("zoneutils::GetZoneIPP: Cannot find zone %u", zoneID);
+            ShowCritical("zoneutils::GetZoneIPP: Cannot find zone %u", zoneID);
         }
         return ipp;
     }

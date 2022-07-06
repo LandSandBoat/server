@@ -12,7 +12,7 @@
 -----------------------------------
 require("scripts/globals/magic")
 require("scripts/globals/status")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/weaponskills")
 -----------------------------------
 local weaponskill_object = {}
@@ -30,7 +30,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     params.skill = xi.skill.KATANA
     params.includemab = true
 
-    if xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+    if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.str_wsc = 0.4 params.int_wsc = 0.4
         params.ftp200 = 1.5 params.ftp300 = 2.5 -- http://wiki.ffo.jp/html/719.html
     end

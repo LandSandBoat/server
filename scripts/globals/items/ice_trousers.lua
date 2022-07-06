@@ -3,7 +3,7 @@
 -- Item: Ice Trousers
 -- Item Effect: Ice Spikes
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 local item_object = {}

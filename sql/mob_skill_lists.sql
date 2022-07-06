@@ -1,6 +1,5 @@
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -2327,7 +2326,6 @@ INSERT INTO `mob_skill_lists` VALUES ('Thinker_NM',706,1248);
 INSERT INTO `mob_skill_lists` VALUES ('Thinker_NM',706,1251);
 INSERT INTO `mob_skill_lists` VALUES ('Thinker_NM',706,1252);
 INSERT INTO `mob_skill_lists` VALUES ('Thinker_NM',706,1271);
-INSERT INTO `mob_skill_lists` VALUES ('Craver_NM',707,1229);
 INSERT INTO `mob_skill_lists` VALUES ('Craver_NM',707,1232);
 INSERT INTO `mob_skill_lists` VALUES ('Craver_NM',707,1233);
 INSERT INTO `mob_skill_lists` VALUES ('Craver_NM',707,1234);
@@ -3506,7 +3504,10 @@ INSERT INTO `mob_skill_lists` VALUES ('TRUST_Prishe',1028,3234); -- Nullifying D
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Prishe',1028,3235); -- Auroral Uppercut
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Prishe',1028,3236); -- Knuckle Sandwich
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Ulmia',1029,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Shikaree_Z',1030,0);
+INSERT INTO `mob_skill_lists` VALUES('TRUST_Shikaree_Z',1030,114); -- Raiden Thrust
+INSERT INTO `mob_skill_lists` VALUES('TRUST_Shikaree_Z',1030,118); -- Skewer
+INSERT INTO `mob_skill_lists` VALUES('TRUST_Shikaree_Z',1030,119); -- Wheeling Thrust
+INSERT INTO `mob_skill_lists` VALUES('TRUST_Shikaree_Z',1030,120); -- Impulse Drive
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Cherukiki',1031,0);
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Iron_Eater',1032,80); -- Shield Break
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Iron_Eater',1032,83); -- Armor Break
@@ -3785,11 +3786,26 @@ INSERT INTO `mob_skill_lists` VALUES('Shikaree_Z', 1167, 120); -- Impulse Drive
 INSERT INTO `mob_skill_lists` VALUES ('Cop_Wardens',1170,561); -- Electromagnetic Field
 INSERT INTO `mob_skill_lists` VALUES ('Cop_Wardens',1170,562); -- Reactive Armor
 
+INSERT INTO `mob_skill_lists` VALUES ('Tenzen_Ranged',1171,1396); -- Tenzen Ranged Attack
+
 -- 1162 -> Wamouracampa_curl
 
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Shantotto_II_Melee',1163,3739); -- shantotto_ii_melee (no name)
 INSERT INTO `mob_skill_lists` VALUES ('Teporingo',1164,258);
+INSERT INTO `mob_skill_lists` VALUES ('Bugbear_Muscleman',1165,361);
+INSERT INTO `mob_skill_lists` VALUES ('Goblin_NM',1166,590);
+INSERT INTO `mob_skill_lists` VALUES ('Goblin_NM',1166,591);
+INSERT INTO `mob_skill_lists` VALUES ('Goblin_NM',1166,1081);
+INSERT INTO `mob_skill_lists` VALUES ('Goblin_NM',1166,1082);
+INSERT INTO `mob_skill_lists` VALUES ('Goblin_NM',1166,1084);
+INSERT INTO `mob_skill_lists` VALUES ('Goblin_NM',1166,1086);
 INSERT INTO `mob_skill_lists` VALUES ('Ladybug_Night',1167,2178);
+INSERT INTO `mob_skill_lists` VALUES ('Apis',1168,493);
+INSERT INTO `mob_skill_lists` VALUES ('Apis',1168,494);
+INSERT INTO `mob_skill_lists` VALUES ('Apis',1168,495);
+INSERT INTO `mob_skill_lists` VALUES ('Apis',1168,496);
+INSERT INTO `mob_skill_lists` VALUES ('Apis',1168,497);
+INSERT INTO `mob_skill_lists` VALUES ('Apis',1168,1364);
 INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1169,1718);
 INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1169,1720);
 INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1169,1721);

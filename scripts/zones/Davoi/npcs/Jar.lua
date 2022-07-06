@@ -5,7 +5,7 @@
 -- Notes: Used to obtain Power Sandals
 -- !pos 183, 0, -190 149
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 local ID = require("scripts/zones/Davoi/IDs")
 -----------------------------------
 local entity = {}

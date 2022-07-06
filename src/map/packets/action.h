@@ -75,6 +75,7 @@ struct actionTarget_t
     SUBEFFECT  spikesEffect;     // 10 bits
     uint16     spikesParam;      // 14 bits
     uint16     spikesMessage;    // 10 bits
+    MODIFIER   modifier;         // 31 bits, but only the first 4 are known to be usable to the client.
 
     actionTarget_t()
     : reaction(REACTION::NONE)
@@ -89,6 +90,7 @@ struct actionTarget_t
     , spikesEffect(SUBEFFECT_NONE)
     , spikesParam(0)
     , spikesMessage(0)
+    , modifier(MODIFIER::NONE)
     {
     }
     actionTarget_t(const actionTarget_t&)            = delete;

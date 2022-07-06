@@ -8,7 +8,7 @@
 
 -- Special weaponskill unique to Ark Angel HM. Deals ~500-900 damage.
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------

@@ -11,8 +11,6 @@
 -- Pore-Ohre        : !pos 261 -17 -458 116
 -- Outer Horu. Ruin : !pos 466 0 -660 194
 -- _5e9 - Gate      : !pos 584 0 -660 194
------------------------------------
-require('scripts/settings/main')
 require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
@@ -351,7 +349,6 @@ mission.sections =
         [xi.zone.OUTER_HORUTOTO_RUINS] =
         {
             ['_5e9'] = mission:event(44),
-
 
             onEventFinish =
             {

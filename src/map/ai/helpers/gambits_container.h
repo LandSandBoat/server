@@ -50,6 +50,9 @@ namespace gambits
         CASTING_MA         = 17,
         RANDOM             = 18,
         NO_SAMBA           = 19,
+        NO_STORM           = 20,
+        PT_HAS_TANK        = 21,
+        NOT_PT_HAS_TANK    = 22,
     };
 
     enum class G_REACTION : uint16
@@ -76,6 +79,8 @@ namespace gambits
         HIGHEST_WALTZ       = 8,
         ENTRUSTED           = 9,
         BEST_INDI           = 10,
+        STORM_DAY           = 11,
+        HELIX_DAY           = 12,
     };
 
     enum class G_TP_TRIGGER : uint16
@@ -90,7 +95,19 @@ namespace gambits
     {
         G_TARGET    target;
         G_CONDITION condition;
-        uint32      condition_arg = 0;
+        uint32      condition_arg;
+
+        Predicate_t()
+        {
+            condition_arg = 0;
+        }
+
+        Predicate_t(G_TARGET _target, G_CONDITION _condition, uint32 _condition_arg)
+        : target(_target)
+        , condition(_condition)
+        , condition_arg(_condition_arg)
+        {
+        }
 
         bool parseInput(std::string const& key, uint32 value)
         {
@@ -148,14 +165,23 @@ namespace gambits
     {
         std::vector<Predicate_t> predicates;
         std::vector<Action_t>    actions;
-        uint16                   retry_delay = 0;
+        uint16                   retry_delay;
         time_point               last_used;
+
+        Gambit_t()
+        {
+            retry_delay = 0;
+        }
     };
 
     // TODO
     struct Chain_t
     {
         std::vector<Gambit_t> gambits;
+
+        Chain_t()
+        {
+        }
     };
 
     // TODO: smaller types, make less bad.
@@ -167,6 +193,24 @@ namespace gambits
         uint8      secondary;
         uint8      tertiary;
         TARGETTYPE valid_targets;
+
+        TrustSkill_t()
+        {
+            skill_id  = 0;
+            primary   = 0;
+            secondary = 0;
+            tertiary  = 0;
+        }
+
+        TrustSkill_t(G_REACTION _skill_type, uint32 _skill_id, uint8 _primary, uint8 _secondary, uint8 _tertiary, TARGETTYPE _valid_targets)
+        : skill_type(_skill_type)
+        , skill_id(_skill_id)
+        , primary(_primary)
+        , secondary(_secondary)
+        , tertiary(_tertiary)
+        , valid_targets(_valid_targets)
+        {
+        }
     };
 
     class CGambitsContainer
@@ -190,6 +234,7 @@ namespace gambits
         bool CheckTrigger(CBattleEntity* trigger_target, Predicate_t& predicate);
         bool TryTrustSkill();
         bool PartyHasHealer();
+        bool PartyHasTank();
 
         CTrustEntity*         POwner;
         time_point            m_lastAction;

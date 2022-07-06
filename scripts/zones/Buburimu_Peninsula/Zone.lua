@@ -39,7 +39,7 @@ zone_object.onZoneIn = function(player, prevZone)
     end
 
     -- AMK06/AMK07
-    if xi.settings.ENABLE_AMK == 1 then
+    if xi.settings.main.ENABLE_AMK == 1 then
         xi.amk.helpers.tryRandomlyPlaceDiggingLocation(player)
     end
 
@@ -69,7 +69,6 @@ zone_object.onGameHour = function(zone)
         end
     end
 end
-
 
 zone_object.onEventUpdate = function( player, csid, option)
     if csid == 3 then

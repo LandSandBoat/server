@@ -326,14 +326,14 @@ std::optional<SpellID> CMobSpellContainer::GetBestAgainstTargetWeakness(CBattleE
     // clang-format off
     std::vector<int16> resistances
     {
-        PTarget->getMod(Mod::FIRE_RES),
-        PTarget->getMod(Mod::ICE_RES),
-        PTarget->getMod(Mod::WIND_RES),
-        PTarget->getMod(Mod::EARTH_RES),
-        PTarget->getMod(Mod::THUNDER_RES),
-        PTarget->getMod(Mod::WATER_RES),
-        PTarget->getMod(Mod::LIGHT_RES),
-        PTarget->getMod(Mod::DARK_RES),
+        PTarget->getMod(Mod::FIRE_MEVA),
+        PTarget->getMod(Mod::ICE_MEVA),
+        PTarget->getMod(Mod::WIND_MEVA),
+        PTarget->getMod(Mod::EARTH_MEVA),
+        PTarget->getMod(Mod::THUNDER_MEVA),
+        PTarget->getMod(Mod::WATER_MEVA),
+        PTarget->getMod(Mod::LIGHT_MEVA),
+        PTarget->getMod(Mod::DARK_MEVA),
     };
     // clang-format on
 
@@ -387,6 +387,106 @@ std::optional<SpellID> CMobSpellContainer::GetBestAgainstTargetWeakness(CBattleE
 
     // If all else fails, just cast the best you have!
     return !choice ? GetBestAvailable(SPELLFAMILY_NONE) : choice;
+}
+
+std::optional<SpellID> CMobSpellContainer::GetStormDay()
+{
+    std::optional<SpellID> choice = std::nullopt;
+    std::size_t dotwIndex = battleutils::GetDayElement();
+    switch (dotwIndex)
+    {
+        case ELEMENT_FIRE:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_FIRESTORM);
+            break;
+        }
+        case ELEMENT_ICE:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_HAILSTORM);
+            break;
+        }
+        case ELEMENT_WIND:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_WINDSTORM);
+            break;
+        }
+        case ELEMENT_EARTH:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_SANDSTORM);
+            break;
+        }
+        case ELEMENT_THUNDER:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_THUNDERSTORM);
+            break;
+        }
+        case ELEMENT_WATER:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_RAINSTORM);
+            break;
+        }
+        case ELEMENT_LIGHT:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_AURORASTORM);
+            break;
+        }
+        case ELEMENT_DARK:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_VOIDSTORM);
+            break;
+        }
+    }
+    return choice;
+}
+
+std::optional<SpellID> CMobSpellContainer::GetHelixDay()
+{
+    std::optional<SpellID> choice = std::nullopt;
+    std::size_t dotwIndex = battleutils::GetDayElement();
+    switch (dotwIndex)
+    {
+        case ELEMENT_FIRE:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_PYROHELIX);
+            break;
+        }
+        case ELEMENT_ICE:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_CRYOHELIX);
+            break;
+        }
+        case ELEMENT_WIND:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_ANEMOHELIX);
+            break;
+        }
+        case ELEMENT_EARTH:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_GEOHELIX);
+            break;
+        }
+        case ELEMENT_THUNDER:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_IONOHELIX);
+            break;
+        }
+        case ELEMENT_WATER:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_HYDROHELIX);
+            break;
+        }
+        case ELEMENT_LIGHT:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_LUMINOHELIX);
+            break;
+        }
+        case ELEMENT_DARK:
+        {
+            choice = GetBestAvailable(SPELLFAMILY_NOCTOHELIX);
+            break;
+        }
+    }
+    return choice;
 }
 
 bool CMobSpellContainer::HasSpells() const

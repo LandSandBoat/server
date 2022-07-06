@@ -182,7 +182,11 @@ void CMobController::TryLink()
     {
         for (auto& member : PMob->PParty->members)
         {
-            CMobEntity* PPartyMember = (CMobEntity*)member;
+            CMobEntity* PPartyMember = dynamic_cast<CMobEntity*>(member);
+            if (!PPartyMember)
+            {
+                continue;
+            }
 
             if (PPartyMember->PAI->IsRoaming() && PPartyMember->CanLink(&PMob->loc.p, PMob->getMobMod(MOBMOD_SUPERLINK)))
             {
@@ -815,7 +819,7 @@ void CMobController::DoRoamTick(time_point tick)
                     // move back every 5 seconds
                     m_LastActionTime = m_Tick - (std::chrono::milliseconds(PMob->getBigMobMod(MOBMOD_ROAM_COOL)) + 10s);
                 }
-                else if (!(PMob->getMobMod(MOBMOD_NO_DESPAWN) != 0) && !map_config.mob_no_despawn)
+                else if (!(PMob->getMobMod(MOBMOD_NO_DESPAWN) != 0) && !settings::get<bool>("map.MOB_NO_DESPAWN"))
                 {
                     PMob->PAI->Despawn();
                     return;

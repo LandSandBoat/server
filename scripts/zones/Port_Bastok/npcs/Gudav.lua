@@ -3,7 +3,7 @@
 --  NPC: Gudav
 -- Starts Quests: A Foreman's Best Friend
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Port_Bastok/IDs")
@@ -43,7 +43,7 @@ entity.onEventFinish = function(player, csid, option)
             player:addKeyItem(xi.ki.MAP_OF_THE_GUSGEN_MINES)
             player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MAP_OF_THE_GUSGEN_MINES)
         end
-        player:addExp(2000 * xi.settings.EXP_RATE)
+        player:addExp(2000 * xi.settings.main.EXP_RATE)
         player:addFame(xi.quest.fame_area.BASTOK, 60)
         player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_FOREMAN_S_BEST_FRIEND)
     end

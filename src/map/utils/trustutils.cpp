@@ -28,7 +28,6 @@
 #include "../packets/char_sync.h"
 #include "../packets/entity_update.h"
 #include "../packets/message_standard.h"
-#include "../packets/trust_sync.h"
 #include "../status_effect_container.h"
 #include "../weapon_skill.h"
 #include "../zone_instance.h"
@@ -60,9 +59,12 @@ struct Trust_t
     float HPscale; // HP boost percentage
     float MPscale; // MP boost percentage
 
+    uint8  cmbSkill;
     uint16 cmbDmgMult;
     uint16 cmbDelay;
     uint8  speed;
+    uint8  subSpeed;
+
     // stat ranks
     uint8 strRank;
     uint8 dexRank;
@@ -97,14 +99,76 @@ struct Trust_t
     int16 light_sdt;
     int16 dark_sdt;
 
-    int16 fire_res;
-    int16 ice_res;
-    int16 wind_res;
-    int16 earth_res;
-    int16 thunder_res;
-    int16 water_res;
-    int16 light_res;
-    int16 dark_res;
+    int16 fire_meva;
+    int16 ice_meva;
+    int16 wind_meva;
+    int16 earth_meva;
+    int16 thunder_meva;
+    int16 water_meva;
+    int16 light_meva;
+    int16 dark_meva;
+
+    Trust_t()
+    : EcoSystem(ECOSYSTEM::ECO_ERROR)
+    {
+        trustID     = 0;
+        pool        = 0;
+
+        name_prefix = 0;
+        radius      = 0;
+        m_Family    = 0;
+
+        behaviour = 0;
+
+        mJob     = 0;
+        sJob    = 0;
+        HPscale = 0.f;
+        MPscale = 0.f;
+
+        cmbDmgMult = 0;
+        cmbDelay   = 0;
+        speed      = 0;
+
+        strRank = 0;
+        dexRank = 0;
+        vitRank = 0;
+        agiRank = 0;
+        intRank = 0;
+        mndRank = 0;
+        chrRank = 0;
+        attRank = 0;
+        defRank = 0;
+        evaRank = 0;
+        accRank = 0;
+
+        m_MobSkillList = 0;
+
+        hasSpellScript = false;
+        spellList      = 0;
+
+        slash_sdt  = 0;
+        pierce_sdt = 0;
+        hth_sdt    = 0;
+        impact_sdt = 0;
+
+        fire_sdt    = 0;
+        ice_sdt     = 0;
+        wind_sdt    = 0;
+        earth_sdt   = 0;
+        thunder_sdt = 0;
+        water_sdt   = 0;
+        light_sdt   = 0;
+        dark_sdt    = 0;
+
+        fire_meva    = 0;
+        ice_meva     = 0;
+        wind_meva    = 0;
+        earth_meva   = 0;
+        thunder_meva = 0;
+        water_meva   = 0;
+        light_meva   = 0;
+        dark_meva    = 0;
+    }
 };
 
 std::vector<Trust_t*> g_PTrustList;
@@ -150,8 +214,9 @@ namespace trustutils
                 mob_pools.sJob,\
                 mob_pools.hasSpellScript,\
                 mob_pools.spellList,\
-                mob_pools.cmbDmgMult,\
+                mob_pools.cmbSkill, \
                 mob_pools.cmbDelay,\
+                mob_pools.cmbDmgMult,\
                 mob_pools.name_prefix,\
                 mob_pools.behavior,\
                 mob_pools.skill_list_id,\
@@ -178,10 +243,10 @@ namespace trustutils
                 mob_resistances.wind_sdt, mob_resistances.earth_sdt, \
                 mob_resistances.lightning_sdt, mob_resistances.water_sdt, \
                 mob_resistances.light_sdt, mob_resistances.dark_sdt, \
-                mob_resistances.fire_res, mob_resistances.ice_res, \
-                mob_resistances.wind_res, mob_resistances.earth_res, \
-                mob_resistances.lightning_res, mob_resistances.water_res, \
-                mob_resistances.light_res, mob_resistances.dark_res \
+                mob_resistances.fire_meva, mob_resistances.ice_meva, \
+                mob_resistances.wind_meva, mob_resistances.earth_meva, \
+                mob_resistances.lightning_meva, mob_resistances.water_meva, \
+                mob_resistances.light_meva, mob_resistances.dark_meva \
                 FROM spell_list, mob_pools, mob_family_system, mob_resistances \
                 WHERE spell_list.spellid = %u \
                 AND (spell_list.spellid+5000) = mob_pools.poolid \
@@ -202,63 +267,74 @@ namespace trustutils
                 trust->pool = (uint32)sql->GetIntData(0);
                 trust->name.insert(0, (const char*)sql->GetData(1));
                 trust->packet_name.insert(0, (const char*)sql->GetData(2));
-                memcpy(&trust->look, sql->GetData(3), 20);
+
+                uint16 sqlModelID[10];
+                memcpy(&sqlModelID, sql->GetData(3), 20);
+                trust->look = look_t(sqlModelID);
 
                 trust->m_Family       = (uint16)sql->GetIntData(4);
                 trust->mJob           = (uint8)sql->GetIntData(5);
                 trust->sJob           = (uint8)sql->GetIntData(6);
                 trust->hasSpellScript = (bool)sql->GetIntData(7);
                 trust->spellList      = (uint16)sql->GetIntData(8);
-                trust->cmbDmgMult     = (uint16)sql->GetIntData(9);
+
+                trust->cmbSkill       = (uint8)sql->GetIntData(9);
                 trust->cmbDelay       = (uint16)sql->GetIntData(10);
-                trust->name_prefix    = (uint8)sql->GetUIntData(11);
-                trust->behaviour      = (uint16)sql->GetUIntData(12);
-                trust->m_MobSkillList = (uint16)sql->GetUIntData(13);
+                trust->cmbDmgMult     = (uint16)sql->GetIntData(11);
 
-                std::ignore = (uint16)sql->GetUIntData(14); // SpellID
+                trust->name_prefix    = (uint8)sql->GetUIntData(12);
+                trust->behaviour      = (uint16)sql->GetUIntData(13);
+                trust->m_MobSkillList = (uint16)sql->GetUIntData(14);
 
-                trust->radius    = sql->GetUIntData(15);
-                trust->EcoSystem = (ECOSYSTEM)sql->GetIntData(16);
-                trust->HPscale   = sql->GetFloatData(17);
-                trust->MPscale   = sql->GetFloatData(18);
+                std::ignore = (uint16)sql->GetUIntData(15); // SpellID
 
-                trust->speed = (uint8)sql->GetIntData(19);
+                trust->radius    = sql->GetUIntData(16);
+                trust->EcoSystem = (ECOSYSTEM)sql->GetIntData(17);
+                trust->HPscale   = sql->GetFloatData(18);
+                trust->MPscale   = sql->GetFloatData(19);
 
-                trust->strRank = (uint8)sql->GetIntData(20);
-                trust->dexRank = (uint8)sql->GetIntData(21);
-                trust->vitRank = (uint8)sql->GetIntData(22);
-                trust->agiRank = (uint8)sql->GetIntData(23);
-                trust->intRank = (uint8)sql->GetIntData(24);
-                trust->mndRank = (uint8)sql->GetIntData(25);
-                trust->chrRank = (uint8)sql->GetIntData(26);
-                trust->defRank = (uint8)sql->GetIntData(27);
-                trust->attRank = (uint8)sql->GetIntData(28);
-                trust->accRank = (uint8)sql->GetIntData(29);
-                trust->evaRank = (uint8)sql->GetIntData(30);
+                // retail seems to have a static *155* for all Trusts in client memory
+                // TODO: trust->speed = 155;
+                trust->speed = (uint8)sql->GetIntData(20);
+
+                // similarly speedSub is always 50
+                trust->subSpeed = 50;
+
+                trust->strRank   = (uint8)sql->GetIntData(21);
+                trust->dexRank   = (uint8)sql->GetIntData(22);
+                trust->vitRank   = (uint8)sql->GetIntData(23);
+                trust->agiRank   = (uint8)sql->GetIntData(24);
+                trust->intRank   = (uint8)sql->GetIntData(25);
+                trust->mndRank   = (uint8)sql->GetIntData(26);
+                trust->chrRank   = (uint8)sql->GetIntData(27);
+                trust->defRank   = (uint8)sql->GetIntData(28);
+                trust->attRank   = (uint8)sql->GetIntData(29);
+                trust->accRank   = (uint8)sql->GetIntData(30);
+                trust->evaRank   = (uint8)sql->GetIntData(31);
 
                 // resistances
-                trust->slash_sdt  = (uint16)(sql->GetFloatData(31) * 1000);
-                trust->pierce_sdt = (uint16)(sql->GetFloatData(32) * 1000);
-                trust->hth_sdt    = (uint16)(sql->GetFloatData(33) * 1000);
-                trust->impact_sdt = (uint16)(sql->GetFloatData(34) * 1000);
+                trust->slash_sdt  = (uint16)(sql->GetFloatData(32) * 1000);
+                trust->pierce_sdt = (uint16)(sql->GetFloatData(33) * 1000);
+                trust->hth_sdt    = (uint16)(sql->GetFloatData(34) * 1000);
+                trust->impact_sdt = (uint16)(sql->GetFloatData(35) * 1000);
 
-                trust->fire_sdt    = (int16)sql->GetFloatData(35); // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
-                trust->ice_sdt     = (int16)sql->GetFloatData(36); // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
-                trust->wind_sdt    = (int16)sql->GetFloatData(37); // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
-                trust->earth_sdt   = (int16)sql->GetFloatData(38); // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
-                trust->thunder_sdt = (int16)sql->GetFloatData(39); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
-                trust->water_sdt   = (int16)sql->GetFloatData(40); // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
-                trust->light_sdt   = (int16)sql->GetFloatData(41); // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
-                trust->dark_sdt    = (int16)sql->GetFloatData(42); // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
+                trust->fire_sdt    = (int16)sql->GetFloatData(36); // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
+                trust->ice_sdt     = (int16)sql->GetFloatData(37); // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
+                trust->wind_sdt    = (int16)sql->GetFloatData(38); // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
+                trust->earth_sdt   = (int16)sql->GetFloatData(39); // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
+                trust->thunder_sdt = (int16)sql->GetFloatData(40); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
+                trust->water_sdt   = (int16)sql->GetFloatData(41); // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
+                trust->light_sdt   = (int16)sql->GetFloatData(42); // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
+                trust->dark_sdt    = (int16)sql->GetFloatData(43); // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
 
-                trust->fire_res    = (int16)sql->GetIntData(43);
-                trust->ice_res     = (int16)sql->GetIntData(44);
-                trust->wind_res    = (int16)sql->GetIntData(45);
-                trust->earth_res   = (int16)sql->GetIntData(46);
-                trust->thunder_res = (int16)sql->GetIntData(47);
-                trust->water_res   = (int16)sql->GetIntData(48);
-                trust->light_res   = (int16)sql->GetIntData(49);
-                trust->dark_res    = (int16)sql->GetIntData(50);
+                trust->fire_meva    = (int16)sql->GetIntData(44);
+                trust->ice_meva     = (int16)sql->GetIntData(45);
+                trust->wind_meva    = (int16)sql->GetIntData(46);
+                trust->earth_meva   = (int16)sql->GetIntData(47);
+                trust->thunder_meva = (int16)sql->GetIntData(48);
+                trust->water_meva   = (int16)sql->GetIntData(49);
+                trust->light_meva   = (int16)sql->GetIntData(50);
+                trust->dark_meva    = (int16)sql->GetIntData(51);
 
                 g_PTrustList.push_back(trust);
             }
@@ -343,24 +419,51 @@ namespace trustutils
         auto baseDamage       = mobStyleDamage * 0.5f;
         auto damageMultiplier = static_cast<float>(trustData->cmbDmgMult) / 100.0f;
         auto adjustedDamage   = baseDamage * damageMultiplier;
-        auto finalDamage      = std::max(adjustedDamage, 1.0f);
+        auto finalDamage      = static_cast<uint16>(std::max(adjustedDamage, 1.0f));
 
-        (dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_MAIN]))->setDamage(static_cast<uint16>(finalDamage));
-        (dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_RANGED]))->setDamage(static_cast<uint16>(finalDamage));
-        (dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_AMMO]))->setDamage(static_cast<uint16>(finalDamage));
+        // Trust do not really have weapons, but they are modelled internally as
+        // if they do.
+        if (auto* mainWeapon = dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_MAIN]))
+        {
+            mainWeapon->setMaxHit(1);
+            mainWeapon->setSkillType(trustData->cmbSkill);
 
-        (dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_MAIN]))->setDelay((trustData->cmbDelay * 1000) / 60);
-        (dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_MAIN]))->setBaseDelay((trustData->cmbDelay * 1000) / 60);
+            mainWeapon->setDamage(finalDamage);
+            mainWeapon->setDelay((trustData->cmbDelay * 1000) / 60);
+            mainWeapon->setBaseDelay((trustData->cmbDelay * 1000) / 60);
+        }
 
-        (dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_RANGED]))->setDelay((trustData->cmbDelay * 1000) / 60);
-        (dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_RANGED]))->setBaseDelay((trustData->cmbDelay * 1000) / 60);
+        if (auto* subWeapon = dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_SUB]))
+        {
+            subWeapon->setDamage(finalDamage);
+            subWeapon->setDelay((trustData->cmbDelay * 1000) / 60);
+            subWeapon->setBaseDelay((trustData->cmbDelay * 1000) / 60);
+        }
 
-        (dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_AMMO]))->setDelay((trustData->cmbDelay * 1000) / 60);
-        (dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_AMMO]))->setBaseDelay((trustData->cmbDelay * 1000) / 60);
+        if (auto* rangedWeapon = dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_RANGED]))
+        {
+            rangedWeapon->setDamage(finalDamage);
+            rangedWeapon->setDelay((trustData->cmbDelay * 1000) / 60);
+            rangedWeapon->setBaseDelay((trustData->cmbDelay * 1000) / 60);
+        }
 
-        // Spell lists
-        auto* spellList = mobSpellList::GetMobSpellList(trustData->spellList);
-        if (spellList)
+        if (auto* ammoWeapon = dynamic_cast<CItemWeapon*>(PTrust->m_Weapons[SLOT_AMMO]))
+        {
+            ammoWeapon->setDamage(finalDamage);
+            ammoWeapon->setDelay((trustData->cmbDelay * 1000) / 60);
+            ammoWeapon->setBaseDelay((trustData->cmbDelay * 1000) / 60);
+        }
+
+        // NOTE: Trusts don't really have weapons, and they don't really have combat skills. They only have
+        // a damage type, and whether or not they are multi-hit. We handle this wrong everywhere.
+        // To give any Trust multi-hit, you need to give them cmbSkill == SKILL_HAND_TO_HAND (1).
+        if (trustData->cmbSkill == SKILL_HAND_TO_HAND)
+        {
+            PTrust->m_dualWield = true;
+        }
+
+        if (auto* spellList = mobSpellList::GetMobSpellList(trustData->spellList);
+            spellList != nullptr)
         {
             mobutils::SetSpellList(PTrust, trustData->spellList);
         }
@@ -453,7 +556,7 @@ namespace trustutils
                        (grade::GetHPScale(grade, scaleOver30Column) * subLevelOver30) + subLevelOver30 + subLevelOver10;
         }
 
-        PTrust->health.maxhp = (int16)(map_config.alter_ego_hp_multiplier * (raceStat + jobStat + bonusStat + sJobStat));
+        PTrust->health.maxhp = (int16)(settings::get<float>("map.ALTER_EGO_HP_MULTIPLIER") * (raceStat + jobStat + bonusStat + sJobStat));
 
         // MP
         raceStat = 0;
@@ -466,7 +569,7 @@ namespace trustutils
         {
             if (grade::GetJobGrade(sJob, 1) != 0 && sLvl > 0)
             {
-                raceStat = (grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * (sLvl - 1)) / map_config.sj_mp_divisor;
+                raceStat = (grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * (sLvl - 1)) /  settings::get<uint8>("map.SJ_MP_DIVISOR");
             }
         }
         else
@@ -489,7 +592,7 @@ namespace trustutils
             sJobStat = grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column);
         }
 
-        PTrust->health.maxmp = (int16)(map_config.alter_ego_mp_multiplier * (raceStat + jobStat + sJobStat));
+        PTrust->health.maxmp = (int16)( settings::get<float>("map.ALTER_EGO_MP_MULTIPLIER") * (raceStat + jobStat + sJobStat));
 
         PTrust->health.tp = 0;
         PTrust->UpdateHealth();
@@ -542,13 +645,14 @@ namespace trustutils
             sVIT = 0;
         }
 
-        PTrust->stats.STR = static_cast<uint16>((fSTR + mSTR + sSTR) * map_config.alter_ego_stat_multiplier);
-        PTrust->stats.DEX = static_cast<uint16>((fDEX + mDEX + sDEX) * map_config.alter_ego_stat_multiplier);
-        PTrust->stats.VIT = static_cast<uint16>((fVIT + mVIT + sVIT) * map_config.alter_ego_stat_multiplier);
-        PTrust->stats.AGI = static_cast<uint16>((fAGI + mAGI + sAGI) * map_config.alter_ego_stat_multiplier);
-        PTrust->stats.INT = static_cast<uint16>((fINT + mINT + sINT) * map_config.alter_ego_stat_multiplier);
-        PTrust->stats.MND = static_cast<uint16>((fMND + mMND + sMND) * map_config.alter_ego_stat_multiplier);
-        PTrust->stats.CHR = static_cast<uint16>((fCHR + mCHR + sCHR) * map_config.alter_ego_stat_multiplier);
+        auto statMultiplier = settings::get<float>("map.ALTER_EGO_STAT_MULTIPLIER");
+        PTrust->stats.STR = static_cast<uint16>((fSTR + mSTR + sSTR) * statMultiplier);
+        PTrust->stats.DEX = static_cast<uint16>((fDEX + mDEX + sDEX) * statMultiplier);
+        PTrust->stats.VIT = static_cast<uint16>((fVIT + mVIT + sVIT) * statMultiplier);
+        PTrust->stats.AGI = static_cast<uint16>((fAGI + mAGI + sAGI) * statMultiplier);
+        PTrust->stats.INT = static_cast<uint16>((fINT + mINT + sINT) * statMultiplier);
+        PTrust->stats.MND = static_cast<uint16>((fMND + mMND + sMND) * statMultiplier);
+        PTrust->stats.CHR = static_cast<uint16>((fCHR + mCHR + sCHR) * statMultiplier);
 
         // Skills =======================
         for (int i = SKILL_DIVINE_MAGIC; i <= SKILL_BLUE_MAGIC; i++)
@@ -556,7 +660,7 @@ namespace trustutils
             uint16 maxSkill = battleutils::GetMaxSkill((SKILLTYPE)i, mJob, mLvl > 99 ? 99 : mLvl);
             if (maxSkill != 0)
             {
-                PTrust->WorkingSkills.skill[i] = static_cast<uint16>(maxSkill * map_config.alter_ego_skill_multiplier);
+                PTrust->WorkingSkills.skill[i] = static_cast<uint16>(maxSkill * settings::get<float>("map.ALTER_EGO_SKILL_MULTIPLIER"));
             }
             else // if the mob is WAR/BLM and can cast spell
             {
@@ -565,7 +669,7 @@ namespace trustutils
 
                 if (maxSubSkill != 0)
                 {
-                    PTrust->WorkingSkills.skill[i] = static_cast<uint16>(maxSubSkill * map_config.alter_ego_skill_multiplier);
+                    PTrust->WorkingSkills.skill[i] = static_cast<uint16>(maxSubSkill * settings::get<float>("map.ALTER_EGO_SKILL_MULTIPLIER"));
                 }
             }
         }
@@ -575,7 +679,7 @@ namespace trustutils
             uint16 maxSkill = battleutils::GetMaxSkill((SKILLTYPE)i, mLvl > 99 ? 99 : mLvl);
             if (maxSkill != 0)
             {
-                PTrust->WorkingSkills.skill[i] = static_cast<uint16>(maxSkill * map_config.alter_ego_skill_multiplier);
+                PTrust->WorkingSkills.skill[i] = static_cast<uint16>(maxSkill * settings::get<float>("map.ALTER_EGO_SKILL_MULTIPLIER"));
             }
         }
 
@@ -599,6 +703,12 @@ namespace trustutils
         // Skills
         using namespace gambits;
         auto* controller = dynamic_cast<CTrustController*>(PTrust->PAI->GetController());
+
+        if (!controller)
+        {
+            ShowWarning("trustutils::LoadTrustStatsAndSkills() - Trust Controller was null.");
+            return;
+        }
 
         // Default TP selectors
         controller->m_GambitsContainer->tp_trigger = G_TP_TRIGGER::ASAP;

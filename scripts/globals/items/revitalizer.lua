@@ -1,7 +1,7 @@
 -----------------------------------
 -- ID: 4157
 -- Item: Revitalizer
--- Item Effect: Removes 60 HP over 180 seconds
+-- Item Effect: Resets all Job Ability Timers
 -----------------------------------
 require("scripts/globals/msg")
 -----------------------------------

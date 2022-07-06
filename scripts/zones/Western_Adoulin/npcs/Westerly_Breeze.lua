@@ -79,9 +79,9 @@ entity.onEventFinish = function(player, csid, option)
         -- Finishing Quest: 'Always More Quoth The Ravenous'
         player:tradeComplete()
         player:completeQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.ALWAYS_MORE_QUOTH_THE_RAVENOUS)
-        player:addExp(1500 * xi.settings.EXP_RATE)
-        player:addCurrency('bayld', 1000 * xi.settings.BAYLD_RATE)
-        player:messageSpecial(ID.text.BAYLD_OBTAINED, 1000 * xi.settings.BAYLD_RATE)
+        player:addExp(1500 * xi.settings.main.EXP_RATE)
+        player:addCurrency('bayld', 1000 * xi.settings.main.BAYLD_RATE)
+        player:messageSpecial(ID.text.BAYLD_OBTAINED, 1000 * xi.settings.main.BAYLD_RATE)
         player:addFame(xi.quest.fame_area.ADOULIN)
         player:setCharVar("Westerly_Breeze_Wait", 0)
     elseif csid == 3014 then
@@ -92,9 +92,9 @@ entity.onEventFinish = function(player, csid, option)
         player:tradeComplete()
         local gil_obtained = 0
         if (option == 1) then
-            gil_obtained = 39432 * xi.settings.GIL_RATE
+            gil_obtained = 39432 * xi.settings.main.GIL_RATE
         else
-            gil_obtained = 19716 * xi.settings.GIL_RATE
+            gil_obtained = 19716 * xi.settings.main.GIL_RATE
         end
         player:addGil(gil_obtained)
         player:messageSpecial(ID.text.GIL_OBTAINED, gil_obtained)

@@ -198,7 +198,7 @@ int32 makeConnection(uint32 ip, uint16 port, int32 type)
     remote_address.sin_addr.s_addr = htonl(ip);
     remote_address.sin_port        = htons(port);
 
-    ShowStatus("Connecting to %d.%d.%d.%d:%i", CONVIP(ip), port);
+    ShowInfo("Connecting to %d.%d.%d.%d:%i", CONVIP(ip), port);
 
     result = sConnect(fd, (struct sockaddr*)(&remote_address), sizeof(struct sockaddr_in));
     if (result == SOCKET_ERROR)
@@ -331,6 +331,13 @@ typedef struct _connect_history
     time_point               tick;
     int                      count;
     unsigned                 ddos : 1;
+    _connect_history()
+    {
+        next  = nullptr;
+        ip    = 0;
+        count = 0;
+        ddos  = 0;
+    }
 } ConnectHistory;
 
 using AccessControl = struct _access_control
@@ -871,9 +878,9 @@ void do_close_tcp(int32 fd)
 int socket_config_read(const char* cfgName)
 {
     TracyZoneScoped;
-    char  line[1024];
-    char  w1[1024];
-    char  w2[1024];
+    char  line[1024] = {};
+    char  w1[1024]   = {};
+    char  w2[1024]   = {};
     FILE* fp;
 
     fp = fopen(cfgName, "r");
@@ -975,7 +982,7 @@ void socket_init_tcp()
         return;
     }
 
-    const char* SOCKET_CONF_FILENAME = "./conf/packet_tcp.conf";
+    const char* SOCKET_CONF_FILENAME = "./src/common/packet_tcp.conf";
     socket_config_read(SOCKET_CONF_FILENAME);
     // sessions[0] is now currently used for disconnected sessions of the map server, and as such,
     // should hold enough buffer (it is a vacuum so to speak) as it is never flushed. [Skotlex]
@@ -1056,14 +1063,10 @@ int create_session(int fd, RecvFunc func_recv, SendFunc func_send, ParseFunc fun
 #ifdef _DEBUG
     ShowDebug(fmt::format("create_session fd: {}", fd).c_str());
 #endif // _DEBUG
-    sessions[fd] = std::make_unique<socket_data>();
+    sessions[fd] = std::make_unique<socket_data>(func_recv, func_send, func_parse);
 
     sessions[fd]->rdata.reserve(RFIFO_SIZE);
     sessions[fd]->wdata.reserve(WFIFO_SIZE);
-
-    sessions[fd]->func_recv  = func_recv;
-    sessions[fd]->func_send  = func_send;
-    sessions[fd]->func_parse = func_parse;
 
     sessions[fd]->rdata_tick = last_tick;
 
@@ -1182,7 +1185,7 @@ void socket_init_udp()
     {
         return;
     }
-    const char* SOCKET_CONF_FILENAME = "./conf/packet_udp.conf";
+    const char* SOCKET_CONF_FILENAME = "./src/common/packet_udp.conf";
     socket_config_read(SOCKET_CONF_FILENAME);
 }
 

@@ -58,7 +58,7 @@ CMenuUnityPacket::CMenuUnityPacket(CCharEntity* PChar)
     // CMenuUnityPacket: Update Type 0x0001
     // Full Unity Results: Total contributing members in Unity
     this->setSize(0x8C);
-    memset(data + 4, 0, sizeof(PACKET_SIZE - 4));
+    memset(data + 4, 0, PACKET_SIZE - 4);
 
     ref<uint8>(0x04) = 0x07; // Switch Block 7
     ref<uint8>(0x06) = 0x88; // Variable Data Size
@@ -74,7 +74,7 @@ CMenuUnityPacket::CMenuUnityPacket(CCharEntity* PChar)
     // CMenuUnityPacket: Update Type 0x0002
     // Full Unity Results: Total Points gained this week per unity
     this->setSize(0x8C);
-    memset(data + 4, 0, sizeof(PACKET_SIZE - 4));
+    memset(data + 4, 0, PACKET_SIZE - 4);
 
     ref<uint8>(0x04) = 0x07; // Switch Block 7
     ref<uint8>(0x06) = 0x88; // Variable Data Size
@@ -90,7 +90,7 @@ CMenuUnityPacket::CMenuUnityPacket(CCharEntity* PChar)
     for (int i = 3; i < 32; i++)
     {
         this->setSize(0x8C);
-        memset(data + 4, 0, sizeof(PACKET_SIZE - 4));
+        memset(data + 4, 0, PACKET_SIZE - 4);
 
         ref<uint8>(0x04) = 0x07; // Switch Block 7
         ref<uint8>(0x06) = 0x88; // Variable Data Size
@@ -101,7 +101,7 @@ CMenuUnityPacket::CMenuUnityPacket(CCharEntity* PChar)
 
     // CMenuUnityPacket: Update Type 0x0100
     this->setSize(0x8C);
-    memset(data + 4, 0, sizeof(PACKET_SIZE - 4));
+    memset(data + 4, 0, PACKET_SIZE - 4);
 
     ref<uint8>(0x04) = 0x07; // Switch Block 7
     ref<uint8>(0x06) = 0x88; // Variable Data Size
@@ -113,7 +113,7 @@ CMenuUnityPacket::CMenuUnityPacket(CCharEntity* PChar)
     // CMenuUnityPacket: Update Type 0x0101
     // Partial Unity Ranking: Total Members in Unity
     this->setSize(0x8C);
-    memset(data + 4, 0, sizeof(PACKET_SIZE - 4));
+    memset(data + 4, 0, PACKET_SIZE - 4);
 
     ref<uint8>(0x04) = 0x07; // Switch Block 7
     ref<uint8>(0x06) = 0x88; // Variable Data Size
@@ -130,7 +130,7 @@ CMenuUnityPacket::CMenuUnityPacket(CCharEntity* PChar)
     // CMenuUnityPacket: Update Type 0x0102
     // Partial Unity Ranking: Total Points this week in Unity
     this->setSize(0x8C);
-    memset(data + 4, 0, sizeof(PACKET_SIZE - 4));
+    memset(data + 4, 0, PACKET_SIZE - 4);
 
     ref<uint8>(0x04) = 0x07; // Switch Block 7
     ref<uint8>(0x06) = 0x88; // Variable Data Size
@@ -147,7 +147,7 @@ CMenuUnityPacket::CMenuUnityPacket(CCharEntity* PChar)
     for (int i = 3; i < 32; i++)
     {
         this->setSize(0x8C);
-        memset(data + 4, 0, sizeof(PACKET_SIZE - 4));
+        memset(data + 4, 0, PACKET_SIZE - 4);
 
         ref<uint8>(0x04) = 0x07; // Switch Block 7
         ref<uint8>(0x06) = 0x88; // Variable Data Size

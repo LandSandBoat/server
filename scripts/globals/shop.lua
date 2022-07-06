@@ -2,7 +2,7 @@
 --    Functions for Shop system
 -----------------------------------
 require("scripts/globals/conquest")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/keyitems")
 -----------------------------------
@@ -36,7 +36,7 @@ xi.shop =
         local priceMultiplier = 1
 
         if log then
-            priceMultiplier = (1 + (0.20 * (9 - player:getFameLevel(log)) / 8)) * xi.settings.SHOP_PRICE
+            priceMultiplier = (1 + (0.20 * (9 - player:getFameLevel(log)) / 8)) * xi.settings.main.SHOP_PRICE
         else
             log = -1
         end

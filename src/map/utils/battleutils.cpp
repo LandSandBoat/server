@@ -583,7 +583,8 @@ namespace battleutils
         WEATHER weakWeatherDouble[8]   = { WEATHER_SQUALL, WEATHER_HEAT_WAVE, WEATHER_BLIZZARDS, WEATHER_GALES,
                                            WEATHER_SAND_STORM, WEATHER_THUNDERSTORMS, WEATHER_DARKNESS, WEATHER_STELLAR_GLARE };
         uint32  obi[8]                 = { 15435, 15436, 15437, 15438, 15439, 15440, 15441, 15442 };
-        Mod     resistarray[8]         = { Mod::FIRE_RES, Mod::ICE_RES, Mod::WIND_RES, Mod::EARTH_RES, Mod::THUNDER_RES, Mod::WATER_RES, Mod::LIGHT_RES, Mod::DARK_RES };
+        Mod     resistarray[8]         = { Mod::FIRE_MEVA, Mod::ICE_MEVA, Mod::WIND_MEVA, Mod::EARTH_MEVA,
+                                           Mod::THUNDER_MEVA, Mod::WATER_MEVA, Mod::LIGHT_MEVA, Mod::DARK_MEVA };
         bool    obiBonus               = false;
 
         double half      = (double)(PDefender->getMod(resistarray[element - 1])) / 100;
@@ -675,7 +676,7 @@ namespace battleutils
 
         ELEMENT spikeElement = (ELEMENT)((uint8)GetSpikesDamageType(Action->spikesEffect) - (uint8)DAMAGE_TYPE::ELEMENTAL);
 
-        int32 damage = 0;
+        int32 damage = Action->spikesParam;
 
         // int16 intStat = PDefender->INT();
         // int16 mattStat = PDefender->getMod(Mod::MATT);
@@ -1424,177 +1425,9 @@ namespace battleutils
      *                                                                       *
      ************************************************************************/
 
-    // TODO: remove function, move additional effects into items script files (deleting from switch as they get done)
     void HandleRangedAdditionalEffect(CCharEntity* PAttacker, CBattleEntity* PDefender, apAction_t* Action)
     {
-        /*  CItemWeapon* PAmmo = (CItemWeapon*)PAttacker->getStorage(LOC_INVENTORY)->GetItem(PAttacker->equip[SLOT_AMMO]);
-            //add effects dont have 100% proc, presume level dependant. 95% chance but -5% for each level diff.
-            //capped at 5% proc when mob is 18 (!!!) levels higher than you.
-            uint8 chance = 95;
-            if(PDefender->GetMLevel() > PAttacker->GetMLevel()){
-                chance -= 5*(PDefender->GetMLevel() - PAttacker->GetMLevel());
-                chance = std::clamp(chance,5,95);
-            }
-            if (WELL512::WELL512::GetRandomNumber(100) >= chance || PAmmo == nullptr){ return; }
-
-            switch(PAmmo->getID()){
-            case 18700:{ //Wind Arrow
-            //damage doesn't exceed ~67 unless wearing wind staff/iceday/weather
-            //there isn't a formula, but INT affects damage, so this is guesstimated. It seems to be level
-            //invarient since its used on harder monsters for damage occasionally. Assuming the modifier
-            //is simply AGI with a degree of randomisation
-
-                    Action->additionalEffect = SUBEFFECT_WIND_DAMAGE;
-                    Action->addEffectMessage = 163;
-
-                    //calculate damage
-                    uint8 damage = (PAttacker->AGI() - PDefender->AGI())/2;
-                    damage = std::clamp(damage,0,50);
-                    damage += 10; //10~60
-                    damage += WELL512::GetRandomNumber(8); //10~67 randomised
-                    damage += (float)damage * ((float)PDefender->getMod(Mod::WINDRES)/-100);
-
-                    damage = HandleStoneskin(PDefender, damage);
-                    //set damage TODO: handle resi st/staff/day
-                    Action->addEffectParam = damage;
-                    PDefender->takeDamage(damage, PAttacker);
-                }
-                break;
-            case 18699:{ //Earth Arrow
-            //damage doesn't exceed ~67 unless wearing Earth staff/earthsday/weather
-            //there isn't a formula, but VIT affects damage, so this is guesstimated. It seems to be level
-            //invarient since its used on harder monsters for damage occasionally. Assuming the modifier
-            //is simply VIT with a degree of randomisation
-
-                    Action->additionalEffect = SUBEFFECT_EARTH_DAMAGE;
-                    Action->addEffectMessage = 163;
-
-                    //calculate damage
-                    uint8 damage = (PAttacker->VIT() - PDefender->VIT())/2;
-                    damage = std::clamp(damage,0,50);
-                    damage += 10; //10~60
-                    damage += WELL512::GetRandomNumber(8); //10~67 randomised
-                    //set damage TODO: handle resist/staff/day
-
-                    damage += (float)damage * ((float)PDefender->getMod(Mod::EARTHRES)/-100);
-                    damage = HandleStoneskin(PDefender, damage);
-                    Action->addEffectParam  = damage;
-                    PDefender->takeDamage(damage, PAttacker);
-                }
-                break;
-            case 18698:{ //Water Arrow
-            //damage doesn't exceed ~67 unless wearing light staff/iceday/weather
-            //there isn't a formula, but INT affects damage, so this is guesstimated. It seems to be level
-            //invarient since its used on harder monsters for damage occasionally. Assuming the modifier
-            //is simply MND with a degree of randomisation
-
-                    Action->additionalEffect = SUBEFFECT_WATER_DAMAGE;
-                    Action->addEffectMessage = 163;
-
-                    //calculate damage
-                    uint8 damage = (PAttacker->MND() - PDefender->MND())/2;
-                    damage = std::clamp(damage,0,50);
-                    damage += 10; //10~60
-                    damage += WELL512::GetRandomNumber(8); //10~67 randomised
-                    //set damage TODO: handle resist/staff/day
-                    damage += (float)damage * ((float)PDefender->getMod(Mod::WATERRES)/-100);
-                    damage = HandleStoneskin(PDefender, damage);
-                    Action->addEffectParam  = damage;
-                    PDefender->takeDamage(damage, PAttacker);
-                }
-                break;
-            case 18153:{ //Holy Bolt
-            //damage doesn't exceed ~67 unless wearing light staff/lightsday/weather
-            //there isn't a formula, but MND affects damage, so this is guesstimated. It seems to be level
-            //invarient since its used on harder monsters for damage occasionally. Assuming the modifier
-            //is simply MND with a degree of randomisation
-
-                    Action->additionalEffect = SUBEFFECT_LIGHT_DAMAGE;
-                    Action->addEffectMessage = 163;
-
-                    //calculate damage
-                    uint8 damage = (PAttacker->MND() - PDefender->MND())/2;
-                    damage = std::clamp(damage,0,50);
-                    damage += 10; //10~60
-                    damage += WELL512::GetRandomNumber(8); //10~67 randomised
-                    //set damage TODO: handle resist/staff/day
-                    damage += (float)damage * ((float)PDefender->getMod(Mod::LIGHTRES)/-100);
-                    damage = HandleStoneskin(PDefender, damage);
-                    Action->addEffectParam  = damage;
-                    PDefender->takeDamage(damage, PAttacker);
-                }
-                break;
-            case 17324:{ //Lightning Arrow
-            //damage doesn't exceed ~67
-            //there isn't a formula. It seems to be level
-            //invarient since its used on harder monsters for damage occasionally. Assuming the modifier
-            //is simply DEX with a degree of randomisation
-
-                    Action->additionalEffect = SUBEFFECT_LIGHTNING_DAMAGE;
-                    Action->addEffectMessage = 163;
-
-                    //calculate damage
-                    uint8 damage = (PAttacker->DEX() - PDefender->DEX())/2;
-                    damage = std::clamp(damage,0,50);
-                    damage += 10; //10~60
-                    damage += WELL512::GetRandomNumber(8); //10~67 randomised
-                    //set damage TODO: handle resist/staff/day
-                    damage += (float)damage * ((float)PDefender->getMod(Mod::THUNDERRES)/-100);
-                    damage = HandleStoneskin(PDefender, damage);
-                    Action->addEffectParam  = damage;
-                    PDefender->takeDamage(damage, PAttacker);
-                }
-                break;
-            case 17323:{ //Ice Arrow
-            //damage doesn't exceed ~67 unless wearing ice staff/iceday/weather
-            //there isn't a formula, but INT affects damage, so this is guesstimated. It seems to be level
-            //invarient since its used on harder monsters for damage occasionally. Assuming the modifier
-            //is simply INT with a degree of randomisation
-
-                    Action->additionalEffect = SUBEFFECT_ICE_DAMAGE;
-                    Action->addEffectMessage = 163;
-
-                    //calculate damage
-                    uint8 damage = (PAttacker->INT() - PDefender->INT())/2;
-                    damage = std::clamp(damage,0,50);
-                    damage += 10; //10~60
-                    damage += WELL512::GetRandomNumber(8); //10~67 randomised
-                    //set damage TODO: handle resist/staff/day
-                    damage += (float)damage * ((float)PDefender->getMod(Mod::ICERES)/-100);
-                    damage = HandleStoneskin(PDefender, damage);
-                    Action->addEffectParam  = damage;
-                    PDefender->takeDamage(damage, PAttacker);
-                }
-                break;
-            case 17327: // Grand knights Arrow
-            case 17322:{ //Fire Arrow
-            //damage doesn't exceed ~67 unless wearing ice staff/iceday/weather
-            //there isn't a formula, but INT affects damage, so this is guesstimated. It seems to be level
-            //invarient since its used on harder monsters for damage occasionally. Assuming the modifier
-            //is simply INT with a degree of randomisation
-
-                    Action->additionalEffect = SUBEFFECT_FIRE_DAMAGE;
-                    Action->addEffectMessage = 163;
-
-                    //calculate damage
-                    uint8 damage = (PAttacker->INT() - PDefender->INT())/2;
-                    damage = std::clamp(damage,0,50);
-
-                    damage += 10; //10~60
-                    damage += WELL512::GetRandomNumber(8); //10~67 randomised
-                    //set damage TODO: handle resist/staff/day
-                    damage += (float)damage * ((float)PDefender->getMod(Mod::FIRE_RES)/-100);
-
-                    if(PAmmo->getID() == 17327){
-                        damage *= 2;
-                    }
-                    damage = HandleStoneskin(PDefender, damage);
-
-                    Action->addEffectParam  = damage;
-                    PDefender->takeDamage(damage, PAttacker);
-                }
-                break;
-            }*/
+        // TODO: remove function
     }
 
     uint8 GetRangedHitRate(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isBarrage, int8 accBonus)
@@ -2300,7 +2133,7 @@ namespace battleutils
 
                 float ratio = 1.0f;
 
-                if (weapon->getSkillType() == SKILL_HAND_TO_HAND)
+                if (weapon && weapon->getSkillType() == SKILL_HAND_TO_HAND)
                 {
                     ratio = 2.0f;
                 }
@@ -2646,7 +2479,7 @@ namespace battleutils
                 if (isPet)
                 {
                     CPetEntity* petEntity = dynamic_cast<CPetEntity*>(PAttacker);
-                    isAvatar              = petEntity->getPetType() == PET_TYPE::AVATAR;
+                    isAvatar              = petEntity ? petEntity->getPetType() == PET_TYPE::AVATAR : false;
                 }
 
                 if (isAvatar)
@@ -2677,7 +2510,7 @@ namespace battleutils
             // Broth
 
             int32 maxHitRate  = 99;
-            auto* targ_weapon = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_MAIN]);
+            auto* targ_weapon = PAttacker ? dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_MAIN]) : nullptr;
 
             // As far as I can tell kick attacks fall under Hand-to-Hand so ignoring them and letting them go to 99
             bool isOffhand   = attackNumber == 1;
@@ -3634,6 +3467,12 @@ namespace battleutils
             KillerEffect += PDoubtEffect->GetPower();
         }
 
+        // Add intimidation rate from Intimidate status effect
+        if (CStatusEffect* PIntimidateEffect = PAttacker->StatusEffectContainer->GetStatusEffect(EFFECT_INTIMIDATE))
+        {
+            KillerEffect += PIntimidateEffect->GetPower();
+        }
+
         return (xirand::GetRandomNumber(100) < KillerEffect);
     }
 
@@ -3646,7 +3485,11 @@ namespace battleutils
 
     uint8 GetSkillchainSubeffect(SKILLCHAIN_ELEMENT skillchain)
     {
-        XI_DEBUG_BREAK_IF(skillchain < SC_NONE || skillchain > SC_DARKNESS_II);
+        if (skillchain < SC_NONE || skillchain > SC_DARKNESS_II)
+        {
+            ShowWarning("battleutils::GetSkillchainSubeffect() - Invalid Element passed to function.");
+            return 0;
+        }
 
         static const uint8 effects[] = {
             SUBEFFECT_NONE,          // SC_NONE
@@ -3673,7 +3516,11 @@ namespace battleutils
 
     uint8 GetSkillchainTier(SKILLCHAIN_ELEMENT skillchain)
     {
-        XI_DEBUG_BREAK_IF(skillchain < SC_NONE || skillchain > SC_DARKNESS_II);
+        if (skillchain < SC_NONE || skillchain > SC_DARKNESS_II)
+        {
+            ShowWarning("battleutils::GetSkillchainTier() - Invalid Element passed to function.");
+            return 0;
+        }
 
         static const uint8 tiers[] = {
             0, // SC_NONE
@@ -4001,8 +3848,11 @@ namespace battleutils
 
     int32 TakeSkillchainDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, int32 lastSkillDamage, CBattleEntity* taChar)
     {
-        XI_DEBUG_BREAK_IF(PAttacker == nullptr);
-        XI_DEBUG_BREAK_IF(PDefender == nullptr);
+        if (PAttacker == nullptr || PDefender == nullptr)
+        {
+            ShowWarning("battleutils::TakeSkillchainDamage() - PAttacker or PDefender was null.");
+            return 0;
+        }
 
         CStatusEffect* PEffect = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN, 0);
 
@@ -4089,13 +3939,22 @@ namespace battleutils
 
     CItemWeapon* GetEntityWeapon(CBattleEntity* PEntity, SLOTTYPE Slot)
     {
-        XI_DEBUG_BREAK_IF(Slot < SLOT_MAIN || Slot > SLOT_AMMO);
+        if (Slot < SLOT_MAIN || Slot > SLOT_AMMO)
+        {
+            ShowWarning("battleutils::GetEntityWeapon() - Received invalid slot type.");
+            return nullptr;
+        }
+
         return dynamic_cast<CItemWeapon*>(((CMobEntity*)PEntity)->m_Weapons[Slot]);
     }
 
     void MakeEntityStandUp(CBattleEntity* PEntity)
     {
-        XI_DEBUG_BREAK_IF(PEntity == nullptr);
+        if (PEntity == nullptr)
+        {
+            ShowWarning("battleutils::MakeEntityStandUp() - PEntity was null.");
+            return;
+        }
 
         if (PEntity->objtype == TYPE_PC)
         {
@@ -4117,7 +3976,11 @@ namespace battleutils
 
     bool HasNinjaTool(CBattleEntity* PEntity, CSpell* PSpell, bool ConsumeTool)
     {
-        XI_DEBUG_BREAK_IF(PEntity == nullptr || PSpell == nullptr);
+        if (PEntity == nullptr || PSpell == nullptr)
+        {
+            ShowWarning("battleutils::HasNinjaTool() - PEntity or PSpell was null.");
+            return false;
+        }
 
         if (PEntity->objtype == TYPE_PC)
         {
@@ -4373,8 +4236,11 @@ namespace battleutils
 
     void GenerateCureEnmity(CBattleEntity* PSource, CBattleEntity* PTarget, int32 amount)
     {
-        XI_DEBUG_BREAK_IF(PSource == nullptr);
-        XI_DEBUG_BREAK_IF(PTarget == nullptr);
+        if (!PSource || !PTarget)
+        {
+            ShowWarning("battleutils::GenerateCureEnmity - PSource or PTarget was null.")
+            return;
+        }
 
         for (auto* entity : *PTarget->PNotorietyContainer)
         {
@@ -4391,7 +4257,11 @@ namespace battleutils
     // Generate enmity for all targets in range
     void GenerateInRangeEnmity(CBattleEntity* PSource, int16 CE, int16 VE)
     {
-        XI_DEBUG_BREAK_IF(PSource == nullptr);
+        if (PSource == nullptr)
+        {
+            ShowWarning("battleutils::GenerateInRangeEnmity() - PSource received as null.");
+            return;
+        }
 
         CCharEntity* PIterSource = nullptr;
 
@@ -6691,6 +6561,12 @@ namespace battleutils
 
     int32 GetScaledItemModifier(CBattleEntity* PEntity, CItemEquipment* PItem, Mod mod)
     {
+        if (!PEntity || !PItem)
+        {
+            ShowWarning("battleutils::GetScaledItemModifier() - PEntity or PItem received as null.");
+            return 0;
+        }
+
         if (PEntity->GetMLevel() < PItem->getReqLvl())
         {
             auto modAmount = PItem->getModifier(mod);

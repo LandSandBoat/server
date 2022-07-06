@@ -1,7 +1,7 @@
 -----------------------------------
 -- Gambits decision making system
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 -----------------------------------
@@ -47,6 +47,9 @@ ai.condition =
     CASTING_MA         = 17,
     RANDOM             = 18,
     NO_SAMBA           = 19,
+    NO_STORM           = 20,
+    PT_HAS_TANK        = 21,
+    NOT_PT_HAS_TANK    = 22,
 }
 ai.c = ai.condition
 
@@ -77,6 +80,8 @@ ai.select =
     HIGHEST_WALTZ       = 8,
     ENTRUSTED           = 9,
     BEST_INDI           = 10,
+    STORM_DAY           = 11,
+    HELIX_DAY           = 12,
 }
 ai.s = ai.select
 

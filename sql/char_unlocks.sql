@@ -19,4 +19,3 @@ CREATE TABLE `char_unlocks` (
   `waypoints` blob DEFAULT 0,
   PRIMARY KEY (`charid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-

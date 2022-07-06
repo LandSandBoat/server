@@ -10,5 +10,6 @@ cmdprops =
 }
 
 function onTrigger(player)
-    UpdateServerMessage()
+    -- UpdateServerMessage()
+    player:PrintToPlayer("Command not implemented at this time.")
 end

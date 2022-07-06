@@ -1,7 +1,7 @@
 -----------------------------------
 -- Spell: Hyoton: Ichi
 -----------------------------------
-require("scripts/globals/spells/spell_damage")
+require("scripts/globals/spells/damage_spell")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
@@ -13,9 +13,9 @@ end
 
 spell_object.onSpellCast = function(caster, target, spell)
     local duration = 15 + caster:getMerit(xi.merit.HYOTON_EFFECT) -- T1 bonus debuff duration
-    handleNinjutsuDebuff(caster, target, spell, 30, duration, xi.mod.FIRE_RES)
+    handleNinjutsuDebuff(caster, target, spell, 30, duration, xi.mod.FIRE_MEVA)
 
-    return xi.spells.spell_damage.useDamageSpell(caster, target, spell)
+    return xi.spells.damage.useDamageSpell(caster, target, spell)
 end
 
 return spell_object

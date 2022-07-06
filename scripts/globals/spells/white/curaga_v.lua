@@ -2,7 +2,7 @@
 -- Spell: Curaga V
 -- Restores HP of all party members within area of effect.
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
@@ -29,7 +29,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD)/100))
 
     --Applying server mods
-    final = final * xi.settings.CURE_POWER
+    final = final * xi.settings.main.CURE_POWER
 
     local diff = (target:getMaxHP() - target:getHP())
     if (final > diff) then
