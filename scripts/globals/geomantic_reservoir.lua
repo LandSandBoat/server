@@ -46,13 +46,12 @@ local geoSpellTable =
 
 xi.geomanticReservoir.onTrigger = function(player, npc, geoSpell)
     -- TODO: According to BG-Wiki there is a sequence here that a player can proc '!!' and achieve a Geomancy skill-up.
-    if player:getMainJob() == xi.job.GEO then
-        if not player:hasSpell(geoSpell) then
-            player:startEvent(15000, 277)
-        else
-            player:messageSpecial(zones[player:getZoneID()].text.UNCANNY_SENSATION)
-        end
-    else -- Default text when player is not on GEO
+    -- https://www.bg-wiki.com/ffxi/Geomantic_Reservoir
+    local procEffectTime = math.random(230, 300)
+    if player:getMainJob() == xi.job.GEO and not player:hasSpell(geoSpell) then
+        player:startEvent(15000,  procEffectTime)
+        -- TODO add skillup logic if player clicks at the time the proc happens
+    else
         player:messageSpecial(zones[player:getZoneID()].text.NOTHING_OUT_OF_ORDINARY)
     end
 end
