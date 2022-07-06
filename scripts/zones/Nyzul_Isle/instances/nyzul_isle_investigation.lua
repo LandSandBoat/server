@@ -310,6 +310,7 @@ local function pickMobs(instance)
 
             if spawnedNMs > 0 then
                 local floorSection = math.floor(currentFloor / 20) + 1
+                local mobGroup = 0
                 local floorNMs = {}
 
                 if currentFloor % 2 == 0 then
