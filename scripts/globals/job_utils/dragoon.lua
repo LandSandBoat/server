@@ -362,9 +362,9 @@ xi.job_utils.dragoon.useSuperJump = function(player, target, ability)
 
     -- Prevent the player from performing actions while in the air
     player:queue(0, function(playerArg)
-        playerArg:addStatusEffectEx(xi.effect.ALL_MISS, xi.effect.NONE, 2, 3, 5)
-        playerArg:addStatusEffectEx(xi.effect.PHYSICAL_SHIELD, xi.effect.NONE, 1, 3, 5)
-        playerArg:addStatusEffectEx(xi.effect.MAGIC_SHIELD, xi.effect.NONE, 1, 3, 5)
+        playerArg:addStatusEffectEx(xi.effect.ALL_MISS, xi.effect.NONE, 2, 3, 5, 0, 0, 0, xi.effectFlag.NO_LOSS_MESSAGE)
+        playerArg:addStatusEffectEx(xi.effect.PHYSICAL_SHIELD, xi.effect.NONE, 1, 3, 5, 0, 0, 0, xi.effectFlag.NO_LOSS_MESSAGE)
+        playerArg:addStatusEffectEx(xi.effect.MAGIC_SHIELD, xi.effect.NONE, 1, 3, 5, 0, 0, 0, xi.effectFlag.NO_LOSS_MESSAGE)
         playerArg:stun(5000)
     end)
 
