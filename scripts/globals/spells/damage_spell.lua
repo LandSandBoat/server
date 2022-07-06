@@ -196,7 +196,7 @@ local pTable =
     [xi.magic.spell.HOLY_II     ] = { xi.mod.MND,  250,    2,  250, 300 },
 }
 
-function tryBuildResistance(target, resistance, isEnfeeb)
+local function tryBuildResistance(target, resistance, isEnfeeb)
     local isNM = target:isNM()
     local baseRes = target:getLocalVar(string.format("[RES]Base_%s", resistance))
     local castCool = target:getLocalVar(string.format("[RES]CastCool_%s", resistance))

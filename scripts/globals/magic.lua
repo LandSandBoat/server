@@ -637,7 +637,7 @@ function getMagicResist(magicHitRate)
     return resist
 end
 
-xi.magic.tryBuildResistance = function(target, resistance, isEnfeeb)
+local function tryBuildResistance(target, resistance, isEnfeeb)
     local isNM = target:isNM()
     local baseRes = target:getLocalVar(string.format("[RES]Base_%s", resistance))
     local castCool = target:getLocalVar(string.format("[RES]CastCool_%s", resistance))
