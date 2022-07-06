@@ -8,6 +8,7 @@ require("scripts/globals/magicburst")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
+require("scripts/globals/magic")
 require("scripts/globals/settings")
 -----------------------------------
 xi = xi or {}
@@ -194,6 +195,44 @@ local pTable =
     [xi.magic.spell.HOLY        ] = { xi.mod.MND,  125,    1,  125, 150 },
     [xi.magic.spell.HOLY_II     ] = { xi.mod.MND,  250,    2,  250, 300 },
 }
+
+function tryBuildResistance(target, resistance, isEnfeeb)
+    local isNM = target:isNM()
+    local baseRes = target:getLocalVar(string.format("[RES]Base_%s", resistance))
+    local castCool = target:getLocalVar(string.format("[RES]CastCool_%s", resistance))
+    local builtPercent = target:getLocalVar(string.format("[RES]BuiltPercent_%s", resistance))
+    local coolTime = 20
+    local buildPercent = 0
+
+    if baseRes == 0 then
+        target:setLocalVar(string.format("[RES]Base_%s", resistance), target:getMod(resistance))
+    end
+
+    if isNM == true then
+        buildPercent = 40 -- Equivalent to 4% Resistance Build (40/1000)
+    else
+        buildPercent = 20 -- Equivalent to 2% Resistance Build (20/1000)
+    end
+
+    if not isEnfeeb then
+        buildPercent = buildPercent / 2 -- Reduce Resistence Build to 2%/1% To Help With Timed Casts
+    end
+
+    if castCool <= os.time() then -- Reset Mod If 20s Since Last Spell Elapsed
+        target:setLocalVar(string.format("[RES]BuiltPercent_%s", resistance), 0) -- Reset BuiltPercent Var
+        target:setMod(resistance, baseRes) -- Reset Mod To Base
+        target:setLocalVar(string.format("[RES]CastCool_%s", resistance), os.time() + coolTime) -- Start Cool Var
+    else
+        if builtPercent + buildPercent + baseRes > 1000 then
+            buildPercent = 1000 - (builtPercent + baseRes)
+        end
+
+        target:setMod(resistance, baseRes + builtPercent + buildPercent)
+        target:setLocalVar(string.format("[RES]BuiltPercent_%s", resistance), builtPercent + buildPercent)
+        target:setLocalVar(string.format("[RES]CastCool_%s", resistance), os.time() + coolTime)
+    end
+
+end
 
 -----------------------------------
 -- Basic Functions
@@ -421,6 +460,9 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
     end
 
     if spellElement ~= xi.magic.ele.NONE then
+        if target:isMob() then
+            tryBuildResistance(target, xi.magic.resistMod[spellElement], false)
+        end
         -- Mod set in database. Base 0 means not resistant nor weak.
         resMod = target:getMod(xi.magic.resistMod[spellElement])
 

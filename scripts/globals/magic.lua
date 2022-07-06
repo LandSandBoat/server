@@ -464,7 +464,6 @@ function applyResistanceEffect(caster, target, spell, params)
     local skill = params.skillType
     local bonus = params.bonus
     local effect = params.effect
-    local bonusRes = spell:getElement()
 
     -- If Stymie is active, as long as the mob is not immune then the effect is not resisted
     if effect ~= nil then -- Dispel's script doesn't have an "effect" to send here, nor should it.
@@ -480,10 +479,6 @@ function applyResistanceEffect(caster, target, spell, params)
 
     if bonus ~= nil then
         magicaccbonus = magicaccbonus + bonus
-    end
-
-    if bonusRes ~= nil then
-        effectRes = effectRes - getEffectResistance(target, bonusRes)
     end
 
     if effect ~= nil then
@@ -582,6 +577,10 @@ function getMagicHitRate(caster, target, skillType, element, effectRes, bonusAcc
     end
 
     if element ~= xi.magic.ele.NONE then
+        if target:isMob() then
+            tryBuildResistance(target, xi.magic.resistMod[element], false)
+        end
+
         resMod = target:getMod(xi.magic.resistMod[element])
 
         -- Add acc for elemental affinity accuracy and element specific accuracy
@@ -638,6 +637,44 @@ function getMagicResist(magicHitRate)
     return resist
 end
 
+xi.magic.tryBuildResistance = function(target, resistance, isEnfeeb)
+    local isNM = target:isNM()
+    local baseRes = target:getLocalVar(string.format("[RES]Base_%s", resistance))
+    local castCool = target:getLocalVar(string.format("[RES]CastCool_%s", resistance))
+    local builtPercent = target:getLocalVar(string.format("[RES]BuiltPercent_%s", resistance))
+    local coolTime = 20
+    local buildPercent = 0
+
+    if baseRes == 0 then
+        target:setLocalVar(string.format("[RES]Base_%s", resistance), target:getMod(resistance))
+    end
+
+    if isNM == true then
+        buildPercent = 40 -- Equivalent to 4% Resistance Build (40/1000)
+    else
+        buildPercent = 20 -- Equivalent to 2% Resistance Build (20/1000)
+    end
+
+    if not isEnfeeb then
+        buildPercent = buildPercent / 2 -- Reduce Resistence Build to 2%/1% To Help With Timed Casts
+    end
+
+    if castCool <= os.time() then -- Reset Mod If 20s Since Last Spell Elapsed
+        target:setLocalVar(string.format("[RES]BuiltPercent_%s", resistance), 0) -- Reset BuiltPercent Var
+        target:setMod(resistance, baseRes) -- Reset Mod To Base
+        target:setLocalVar(string.format("[RES]CastCool_%s", resistance), os.time() + coolTime) -- Start Cool Var
+    else
+        if builtPercent + buildPercent + baseRes > 1000 then
+            buildPercent = 1000 - (builtPercent + baseRes)
+        end
+
+        target:setMod(resistance, baseRes + builtPercent + buildPercent)
+        target:setLocalVar(string.format("[RES]BuiltPercent_%s", resistance), builtPercent + buildPercent)
+        target:setLocalVar(string.format("[RES]CastCool_%s", resistance), os.time() + coolTime)
+    end
+
+end
+
 -- Returns the amount of resistance the
 -- target has to the given effect (stun, sleep, etc..)
 function getEffectResistance(target, effect)
@@ -673,6 +710,10 @@ function getEffectResistance(target, effect)
         effectres = xi.mod.CHARMRES
     elseif effect == xi.effect.AMNESIA then
         effectres = xi.mod.AMNESIARES
+    end
+
+    if target:isMob() and effectres ~= 0 then
+        tryBuildResistance(target, effectres, true)
     end
 
     if effectres ~= 0 then
