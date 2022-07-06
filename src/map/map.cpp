@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -102,6 +102,8 @@ std::unique_ptr<SqlConnection> sql;
 
 extern std::map<uint16, CZone*> g_PZoneList; // Global array of pointers for zones
 
+bool gLoadAllLua = false;
+
 namespace
 {
     uint32 MAX_BUFFER_SIZE             = 2500U;
@@ -192,6 +194,10 @@ int32 do_init(int32 argc, char** argv)
         else if (strcmp(argv[i], "--port") == 0)
         {
             map_port = std::stoi(argv[i + 1]);
+        }
+        else if (strcmp(argv[i], "--load_all") == 0)
+        {
+            gLoadAllLua = true;
         }
     }
 
@@ -580,6 +586,9 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
         if (map_session_data->PChar == nullptr)
         {
             uint32 CharID = ref<uint32>(buff, FFXI_HEADER_SIZE + 0x0C);
+            uint16 LangID = ref<uint16>(buff, FFXI_HEADER_SIZE + 0x58);
+
+            std::ignore = LangID;
 
             const char* fmtQuery = "SELECT charid FROM chars WHERE charid = %u LIMIT 1;";
 
@@ -693,7 +702,7 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
 
             if (SmallPD_Type != 0x15)
             {
-                ShowTrace("parse: %03hX | %04hX %04hX %02hX from user: %s",
+                DebugPackets("parse: %03hX | %04hX %04hX %02hX from user: %s",
                     SmallPD_Type, ref<uint16>(SmallPD_ptr, 2), ref<uint16>(buff, 2), SmallPD_Size, PChar->GetName());
             }
 

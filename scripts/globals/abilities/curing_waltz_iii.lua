@@ -52,8 +52,6 @@ ability_object.onUseAbility = function(player, target, ability)
     local mjob = player:getMainJob() --19 for DNC main.
     local cure = 0
 
-
-
     --Performing mj check.
     if mjob == xi.job.DNC then
         cure = (vit+chr)*0.75+270

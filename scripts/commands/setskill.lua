@@ -28,7 +28,6 @@ function onTrigger(player, skillName, skillLV, target)
         return
     end
 
-
     local skillID = tonumber(skillName) or xi.skill[string.upper(skillName)]
     local targ
 

@@ -23,7 +23,6 @@
 
 #include "monipulator2.h"
 
-
 CMonipulatorPacket2::CMonipulatorPacket2(CCharEntity* PChar)
 {
     this->setType(0x63);

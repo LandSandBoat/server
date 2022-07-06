@@ -24,8 +24,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
     end
   end
 
-
-  if(mob:getFamily() == 91) then
+  if (mob:getFamily() == 91) then
     local mobSkin = mob:getModelId()
 
     if (mobSkin == 1839) then

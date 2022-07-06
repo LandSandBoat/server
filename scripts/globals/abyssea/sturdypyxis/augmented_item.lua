@@ -76,7 +76,6 @@ local augdrops =
     },
 }
 
-
 ---------------------------------------------------------------------------------------------
 -- augs table holds potential augments with min/max values to be randomised for each item id
 -- example: Tarutaru sash [13212] would have 6 potential augments, each with its own values

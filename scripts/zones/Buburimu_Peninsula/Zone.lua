@@ -70,7 +70,6 @@ zone_object.onGameHour = function(zone)
     end
 end
 
-
 zone_object.onEventUpdate = function( player, csid, option)
     if csid == 3 then
         quests.rainbow.onEventUpdate(player)

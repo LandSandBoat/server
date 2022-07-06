@@ -480,4 +480,3 @@ xi.voidwalker.onHealing = function(player)
         player:messageSpecial(zoneTextTable.VOIDWALKER_MOB_HINT, abyssiteMessage[mobNearest.keyItem], direction, mobNearest.distance, mobNearest.keyItem)
     end
 end
-

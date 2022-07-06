@@ -1035,7 +1035,8 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
                         battleutils::RemoveAmmo(this);
                     }
                 }
-                if (actionTarget.reaction == REACTION::HIT)
+
+                if ((actionTarget.reaction & REACTION::HIT) != REACTION::NONE)
                 {
                     int wspoints = settings::get<uint8>("map.WS_POINTS_BASE");
                     if (PWeaponSkill->getPrimarySkillchain() != 0)
@@ -1560,8 +1561,8 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
     // if a hit did occur (even without barrage)
     if (hitOccured)
     {
-        // any misses with barrage cause remaing shots to miss, meaning we must check Action.reaction
-        if (actionTarget.reaction == REACTION::EVADE && (this->StatusEffectContainer->HasStatusEffect(EFFECT_BARRAGE) || isSange))
+        // any misses with barrage cause remaining shots to miss, meaning we must check Action.reaction
+        if ((actionTarget.reaction & REACTION::MISS) != REACTION::NONE && (this->StatusEffectContainer->HasStatusEffect(EFFECT_BARRAGE) || isSange))
         {
             actionTarget.messageID  = 352;
             actionTarget.reaction   = REACTION::HIT;

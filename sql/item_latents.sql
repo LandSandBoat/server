@@ -1,12 +1,10 @@
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
-
 
 DROP TABLE IF EXISTS `item_latents`;
 CREATE TABLE IF NOT EXISTS `item_latents` (
@@ -17,9 +15,6 @@ CREATE TABLE IF NOT EXISTS `item_latents` (
   `latentParam` smallint(5) NOT NULL,
   PRIMARY KEY (`itemId`,`modId`,`value`,`latentId`,`latentParam`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=13 PACK_KEYS=1;
-
-
-
 
 -- INSERT INTO `item_latents` VALUES (itemID,modId,modValue,latentId,latentParam);
 
@@ -2014,7 +2009,6 @@ INSERT INTO `item_latents` VALUES (16427,25,9,37,2);         -- Acc+9 First Quar
 INSERT INTO `item_latents` VALUES (16427,25,9,37,6);         -- Acc+9 Last Quarter Moon
 INSERT INTO `item_latents` VALUES (16427,25,15,37,4);        -- Acc+15 Full Moon
 
-
 INSERT INTO `item_latents` VALUES (16563,9,5,56,0);      -- Rune Blade +5 DEX
 INSERT INTO `item_latents` VALUES (16563,366,4,56,0);    -- Rune Blade DMG: 43
 INSERT INTO `item_latents` VALUES (16563,369,-4,56,0);   -- Rune Blade -4MP/tic
@@ -3012,7 +3006,6 @@ INSERT INTO `item_latents` VALUES (18895,288,4,13,280);      -- Double attack +4
 INSERT INTO `item_latents` VALUES (18895,288,4,13,281);      -- Double attack +4 ENTHUNDER_II
 INSERT INTO `item_latents` VALUES (18895,288,4,13,282);      -- Double attack +4 ENWATER_II
 
-
 INSERT INTO `item_latents` VALUES (18865,165,7,59,20);   -- Zonure - Vs. vermin: Critical hit rate +7%
 
 -- -------------------------------------------------------
@@ -3105,7 +3098,6 @@ INSERT INTO `item_latents` VALUES (19125,9,1,16,6);      -- DEX +1~4,party size 
 INSERT INTO `item_latents` VALUES (19126,23,14,6,1000);      -- ATT+14 TP<1000
 INSERT INTO `item_latents` VALUES (19126,25,5,6,1000);       -- ACC+5  TP<1000
 INSERT INTO `item_latents` VALUES (19126,366,6,6,1000);      -- DMG+6  TP<1000
-
 
 INSERT INTO `item_latents` VALUES (19158,165,7,59,14);   -- Scheherazade - Vs. lizards: Critical hit rate +7%
 
@@ -3233,7 +3225,6 @@ INSERT INTO `item_latents` VALUES (20540,366,4,6,1000);      -- Dmg+4  TP<1000
 INSERT INTO `item_latents` VALUES (20726,23,10,6,1000);      -- Att+10 TP>1000
 INSERT INTO `item_latents` VALUES (20726,25,15,6,1000);      -- Acc+15 TP>1000
 INSERT INTO `item_latents` VALUES (20726,366,6,6,1000);      -- Dmg+6  TP>1000
-
 
 -- -------------------------------------------------------
 -- Conqueror 119

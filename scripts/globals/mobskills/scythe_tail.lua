@@ -14,7 +14,6 @@ require("scripts/globals/mobskills")
 -----------------------------------
 local mobskill_object = {}
 
-
 mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end

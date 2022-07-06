@@ -19,4 +19,3 @@ ability_object.onUseAbility = function(player, target, ability, action)
 end
 
 return ability_object
-

@@ -19,13 +19,6 @@
 ===========================================================================
 */
 
-#ifndef _CMODIFIER_H
-#define _CMODIFIER_H
-
-#include "../common/cbasetypes.h"
-
-enum class Mod
-{
     // NAME                      = ID, // Comment
     NONE                         = 0,  // Essential, but does nothing :)
     DEF                          = 1,  // Target's Defense
@@ -42,14 +35,14 @@ enum class Mod
     INT                          = 12, // Intelligence
     MND                          = 13, // Mind
     CHR                          = 14, // Charisma
-    FIRE_RES                     = 15, // Fire Resistance
-    ICE_RES                      = 16, // Ice Resistance
-    WIND_RES                     = 17, // Wind Resistance
-    EARTH_RES                    = 18, // Earth Resistance
-    THUNDER_RES                  = 19, // Thunder Resistance
-    WATER_RES                    = 20, // Water Resistance
-    LIGHT_RES                    = 21, // Light Resistance
-    DARK_RES                     = 22, // Dark Resistance
+    FIRE_MEVA                    = 15, // Fire Resistance
+    ICE_MEVA                     = 16, // Ice Resistance
+    WIND_MEVA                    = 17, // Wind Resistance
+    EARTH_MEVA                   = 18, // Earth Resistance
+    THUNDER_MEVA                 = 19, // Thunder Resistance
+    WATER_MEVA                   = 20, // Water Resistance
+    LIGHT_MEVA                   = 21, // Light Resistance
+    DARK_MEVA                    = 22, // Dark Resistance
     ATT                          = 23, // Attack
     RATT                         = 24, // Ranged Attack
     ACC                          = 25, // Accuracy
@@ -770,57 +763,4 @@ enum class Mod
     // For example, +10% damage to Chant du Cygne would be ID 570 + 225 (795)
 
     // SPARE = 1040,
-};
 
-// temporary workaround for using enum class as unordered_map key until compilers support it
-struct EnumClassHash
-{
-    template <typename T>
-    std::size_t operator()(T t) const
-    {
-        return static_cast<std::size_t>(t);
-    }
-};
-
-/************************************************************************
- *  Modifier Class                                                       *
- ************************************************************************/
-
-class CModifier
-{
-public:
-    Mod   getModID();
-    int16 getModAmount() const;
-
-    void setModAmount(int16 amount);
-
-    CModifier(Mod type, int16 amount = 0);
-
-private:
-    Mod   m_id{ Mod::NONE };
-    int16 m_amount{ 0 };
-};
-
-enum class PetModType
-{
-    All        = 0,
-    Avatar     = 1,
-    Wyvern     = 2,
-    Automaton  = 3,
-    Harlequin  = 4,
-    Valoredge  = 5,
-    Sharpshot  = 6,
-    Stormwaker = 7
-};
-
-class CPetModifier : public CModifier
-{
-public:
-    CPetModifier(Mod type, PetModType pettype, int16 amount = 0);
-    PetModType getPetModType();
-
-private:
-    PetModType m_pettype{ PetModType::All };
-};
-
-#endif

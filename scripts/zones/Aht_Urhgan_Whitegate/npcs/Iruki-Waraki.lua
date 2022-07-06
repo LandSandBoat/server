@@ -16,7 +16,6 @@ require("scripts/globals/pets")
 -----------------------------------
 local entity = {}
 
-
 entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHas(trade, {xi.items.FLASK_OF_SLEEPING_POTION, xi.items.CUP_OF_CHAI}) and player:getCharVar("OperationTeaTimeProgress") == 1 then -- Chai, Sleeping Potion
         player:startEvent(780)

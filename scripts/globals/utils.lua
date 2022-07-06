@@ -147,7 +147,7 @@ function utils.takeShadows(target, dmg, shadowbehav)
                 shadowsLeft = targShadows - shadowbehav
 
                 if shadowsLeft > 0 then
-                    --update icon
+                    -- Update icon
                     local effect = target:getStatusEffect(xi.effect.COPY_IMAGE)
                     if effect ~= nil then
                         if shadowsLeft == 1 then
@@ -156,6 +156,8 @@ function utils.takeShadows(target, dmg, shadowbehav)
                             effect:setIcon(xi.effect.COPY_IMAGE_2)
                         elseif shadowsLeft == 3 then
                             effect:setIcon(xi.effect.COPY_IMAGE_3)
+                        elseif shadowsLeft >= 4 then
+                            effect:setIcon(xi.effect.COPY_IMAGE_4)
                         end
                     end
                 end
@@ -556,7 +558,6 @@ local ffxiRotConversionFactor = 360.0 / 255.0
 function utils.ffxiRotToDegrees(ffxiRot)
     return ffxiRotConversionFactor * ffxiRot
 end
-
 
 function utils.lateralTranslateWithOriginRotation(origin, translation)
     local degrees = utils.ffxiRotToDegrees(origin.rot)

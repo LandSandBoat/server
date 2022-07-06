@@ -19,5 +19,4 @@ item_object.onItemUse = function(target)
     target:addItem(1164, 99)
 end
 
-
 return item_object

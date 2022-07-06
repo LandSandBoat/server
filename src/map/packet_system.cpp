@@ -225,7 +225,7 @@ void SmallPacket0x000(map_session_data_t* const PSession, CCharEntity* const PCh
 
 void SmallPacket0xFFF(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
-    ShowDebug("parse: SmallPacket is not implemented Type<%03hX>", (data.ref<uint16>(0) & 0x1FF));
+    ShowWarning("parse: SmallPacket is not implemented Type<%03hX>", (data.ref<uint16>(0) & 0x1FF));
 }
 
 /************************************************************************
@@ -274,9 +274,10 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
 
         if (destination >= MAX_ZONEID)
         {
+            // TODO: work out how to drop player in moghouse that exits them to the zone they were in before this happened, like we used to.
             ShowWarning("packet_system::SmallPacket0x00A player tried to enter zone out of range: %d", destination);
-            ShowWarning("packet_system::SmallPacket0x00A dumping player `%s` to a valid zone!", PChar->GetName());
-            PChar->loc.destination = destination = (uint16)ZONE_SELBINA;
+            ShowWarning("packet_system::SmallPacket0x00A dumping player `%s` to homepoint!", PChar->GetName());
+            charutils::HomePoint(PChar);
         }
 
         zoneutils::GetZone(destination)->IncreaseZoneCounter(PChar);
@@ -320,12 +321,9 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
         ShowWarning("Client cannot receive packet or key is invalid: %s, Zone: %s (%i)",
                     PChar->GetName(), PChar->loc.zone->GetName(), PChar->loc.zone->GetID());
 
-        // Write a sane location for them
         // TODO: work out how to drop player in moghouse that exits them to the zone they were in before this happened, like we used to.
-        ShowWarning("packet_system::SmallPacket0x00A dumping player `%s` to a valid zone!", PChar->GetName());
-        auto prevZone          = PChar->loc.prevzone ? PChar->loc.prevzone : (uint16)ZONE_VALKURM_DUNES;
-        PChar->loc.destination = prevZone;
-        sql->Query("UPDATE chars SET pos_zone = %u WHERE charid = %u", prevZone, PChar->id);
+        ShowWarning("packet_system::SmallPacket0x00A dumping player `%s` to homepoint!", PChar->GetName());
+        charutils::HomePoint(PChar);
     }
 
     charutils::SaveCharPosition(PChar);
@@ -801,6 +799,8 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
     auto actionStr = actionToStr(action);
     TracyZoneString(fmt::format("Player Action: {}: {} -> targid: {}", PChar->GetName(), actionStr, TargID));
 
+    DebugActions(fmt::format("CLIENT {} PERFORMING ACTION {} (0x{:02X})", PChar->GetName(), actionStr, action));
+
     switch (action)
     {
         case 0x00: // trigger
@@ -1159,7 +1159,6 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
         }
         break;
     }
-    ShowInfo(fmt::format("CLIENT {} PERFORMING ACTION {} (0x{:02X})", PChar->GetName(), actionStr, action));
 }
 
 /************************************************************************
@@ -7257,7 +7256,7 @@ void SmallPacket0x10B(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x10C(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    if (roeutils::RoeSystem.RoeEnabled)
+    if (settings::get<bool>("main.ENABLE_ROE"))
     {
         uint16 recordID = data.ref<uint32>(0x04);
         roeutils::AddEminenceRecord(PChar, recordID);
@@ -7275,7 +7274,7 @@ void SmallPacket0x10C(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x10D(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    if (roeutils::RoeSystem.RoeEnabled)
+    if (settings::get<bool>("main.ENABLE_ROE"))
     {
         roeutils::DelEminenceRecord(PChar, data.ref<uint32>(0x04));
         PChar->pushPacket(new CRoeSparkUpdatePacket(PChar));
@@ -7291,7 +7290,7 @@ void SmallPacket0x10D(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x10E(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    if (roeutils::RoeSystem.RoeEnabled)
+    if (settings::get<bool>("main.ENABLE_ROE"))
     {
         uint16 recordID = data.ref<uint16>(0x04);
         roeutils::onRecordClaim(PChar, recordID);
@@ -7354,7 +7353,7 @@ void SmallPacket0x112(map_session_data_t* const PSession, CCharEntity* const PCh
     // Send spark updates
     PChar->pushPacket(new CRoeSparkUpdatePacket(PChar));
 
-    if (roeutils::RoeSystem.RoeEnabled)
+    if (settings::get<bool>("main.ENABLE_ROE"))
     {
         // Current RoE quests
         PChar->pushPacket(new CRoeUpdatePacket(PChar));
