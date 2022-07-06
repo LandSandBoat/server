@@ -40,6 +40,7 @@ zones[xi.zone.NYZUL_ISLE] =
         LAMP_ORDER                    = 7360, -- Apparently, this lamp must be activated in a specific order...
         LAMP_NOT_ALL_ACTIVE           = 7361, -- Not all lights have been activated...
         CONFIRMING_PROCEDURE          = 7362, -- Confirming operstion procedure.
+        OBJECTIVE_TEXT_OFFSET         = 7364, -- Objective: Eliminate enemy leader.
         ELIMINATE_ENEMY_LEADER        = 7365, -- Objective: Eliminate enemy leader.
         ELIMINATE_SPECIFIED_ENEMIES   = 7366, -- Objective: Eliminate specified enemies.
         ACTIVATE_ALL_LAMPS            = 7367, -- Objective: Activate all lamps.

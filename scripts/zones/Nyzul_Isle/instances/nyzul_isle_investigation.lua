@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Nyzul_Isle/IDs")
 require("scripts/globals/instance")
+require("scripts/globals/items")
 require("scripts/globals/keyitems")
 require("scripts/globals/status")
 require("scripts/globals/nyzul")
@@ -22,9 +23,11 @@ local function pickSetPoint(instance)
     instance:setLocalVar("gearObjective", 0)
 
     -- Condition for floors
-    if currentFloor % 20 == 0 then -- hard set objective and floor to boss stage for every 20th floor
+    -- hard set objective and floor to boss stage for every 20th floor
+    if currentFloor % 20 == 0 then
         instance:setStage(xi.nyzul.objective.ELIMINATE_ENEMY_LEADER)
         instance:setLocalVar("Nyzul_Isle_FloorLayout", 0)
+    -- 3.33% for a free floor
     elseif math.random(1, 30) == 1 and instance:getLocalVar("freeFloor") == 0 then -- 3.33% for a free floor
         instance:setStage(xi.nyzul.objective.FREE_FLOOR)
         instance:setLocalVar("freeFloor", 1)
@@ -35,7 +38,19 @@ local function pickSetPoint(instance)
             currentInstance:setProgress(15)
         end) -- Completes objective for free floor
     else
-        instance:setStage(math.random(xi.nyzul.objective.ELIMINATE_ENEMY_LEADER, xi.nyzul.objective.ELIMINATE_ALL_ENEMIES)) -- Randoms floor objective
+        -- Build the valid objectives list
+        local objective = {}
+
+        for i = xi.nyzul.objective.ELIMINATE_ENEMY_LEADER, xi.nyzul.objective.ELIMINATE_ALL_ENEMIES do
+            table.insert(objective, i)
+        end
+        -- Only remove objectives if not the staging room or free floor
+        if instance:getStage() ~= 0 and instance:getStage() ~= 6 then
+            table.remove(objective, instance:getStage())
+        end
+
+        -- Randomly pick the objective from the generated list
+        instance:setStage(utils.pickRandom(objective))
 
         if math.random(1, 30) <= 5 then
             instance:setLocalVar("gearObjective", math.random(xi.nyzul.gearObjective.AVOID_AGRO, xi.nyzul.gearObjective.DO_NOT_DESTROY))
@@ -65,7 +80,7 @@ local function pickSetPoint(instance)
         players:messageName(ID.text.WELCOME_TO_FLOOR, players, currentFloor, currentFloor)
 
         if instance:getStage() ~= xi.nyzul.objective.FREE_FLOOR then
-            players:messageName(ID.text.ELIMINATE_ENEMY_LEADER + instance:getStage(), players)
+            players:messageName(ID.text.OBJECTIVE_TEXT_OFFSET + instance:getStage(), players)
             local gearObjective = instance:getLocalVar("gearObjective")
 
             if gearObjective > 0 then
@@ -295,29 +310,30 @@ local function pickMobs(instance)
 
             if spawnedNMs > 0 then
                 local floorSection = math.floor(currentFloor / 20) + 1
+                local floorNMs = {}
+
+                if currentFloor % 2 == 0 then
+                    mobGroup = xi.nyzul.randomNMs.evenFloor[floorSection]
+                else
+                    mobGroup = xi.nyzul.randomNMs.oddFloor[floorSection]
+                end
+
+                for i = 1, #mobGroup do
+                    table.insert(floorNMs, mobGroup[i])
+                end
 
                 while spawnedNMs > 2 do
                     local sPoint   = math.random(1, #spawnPoint)
-                    local randomNM = 0
-                    local NM_mob   = 0
                     local SPX      = spawnPoint[sPoint][1]
                     local SPY      = spawnPoint[sPoint][2]
                     local SPZ      = spawnPoint[sPoint][3]
                     local SPRot    = spawnPoint[sPoint][4]
+                    local index = math.random(1, #floorNMs)
 
-                    if currentFloor % 2 == 0 then
-                        randomNM = math.random(1, #xi.nyzul.evenFloorNMs[floorSection])
-                        NM_mob   = xi.nyzul.evenFloorNMs[floorSection][randomNM]
-                        table.remove(xi.nyzul.evenFloorNMs[floorSection], randomNM)
-                    else
-                        randomNM = math.random(1, #xi.nyzul.oddFloorNMs[floorSection])
-                        NM_mob   = xi.nyzul.oddFloorNMs[floorSection][randomNM]
-                        table.remove(xi.nyzul.oddFloorNMs[floorSection], randomNM)
-                    end
+                    GetMobByID(floorNMs[index], instance):setSpawn(SPX, SPY, SPZ, SPRot)
+                    SpawnMob(floorNMs[index], instance)
 
-                    GetMobByID(NM_mob, instance):setSpawn(SPX, SPY, SPZ, SPRot)
-                    SpawnMob(NM_mob, instance)
-
+                    table.remove(floorNMs, index)
                     table.remove(spawnPoint, sPoint)
 
                     spawnedNMs = spawnedNMs - 1
@@ -396,7 +412,7 @@ instance_object.afterInstanceRegister = function(player)
     player:messageName(ID.text.COMMENCE, player, 51)
     player:messageName(ID.text.TIME_TO_COMPLETE, player, instance:getTimeLimit())
 
-    player:addTempItem(5348)
+    player:addTempItem(xi.items.UNDERSEA_RUINS_FIREFLIES)
 end
 
 -- Instance "tick"

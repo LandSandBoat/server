@@ -25,7 +25,7 @@ entity.onTrigger = function(player, npc)
             player:startOptionalCutscene(201, {[0] = 27, cs_option = {1, 2}})
         end
     elseif npc:getAnimationSub() == 0 then
-        npc:messageText(npc, ID.text.ELIMINATE_ENEMY_LEADER + instance:getStage(), false)
+        npc:messageText(npc, ID.text.OBJECTIVE_TEXT_OFFSET + instance:getStage(), false)
     end
 end
 
