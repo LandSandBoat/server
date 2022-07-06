@@ -755,7 +755,7 @@ namespace mobutils
 
     void SetupRoaming(CMobEntity* PMob)
     {
-        uint16 distance = 10;
+        uint16 distance = 7;
         uint16 turns    = 1;
         uint16 cool     = 20;
         uint16 rate     = 15;
@@ -763,8 +763,8 @@ namespace mobutils
         switch (PMob->m_EcoSystem)
         {
             case ECOSYSTEM::BEASTMAN:
-                distance = 20;
-                turns    = 5;
+                distance = 10;
+                turns    = 3;
                 cool     = 45;
                 break;
             default:
