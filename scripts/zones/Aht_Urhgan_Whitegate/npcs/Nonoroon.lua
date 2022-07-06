@@ -23,7 +23,7 @@ entity.onTrigger = function(player, npc)
         player:PrintToPlayer("Nonoroon: I see you have at least 6000 Zeni Points and are able to equip this weapon", 0xd)
         player:PrintToPlayer("Nonoroon: If you can help me out with this myth then you can have the final reward!", 0xd)
         player:PrintToPlayer("Nonoroon: Please make sure you are on the Job you wish to continue this path!", 0xd)
-        player:PrintToPlayer("Nonoroon: When you are ready Trade me 5 Impirial Gold Pieces and on the correct JOB!", 0x1F)
+        player:PrintToPlayer("Nonoroon: When you are ready Trade me 5 Imperial Gold Pieces and on the correct JOB!", 0x1F)
     else
         player:PrintToPlayer("You are not worthy come back when you are ready!", 0xd)
     end
