@@ -585,7 +585,8 @@ xi.job_utils.rune_fencer.useSwipeLunge = function(player, target, ability, actio
 
             -- Handle Magic Absorb
             if damage < 0 then
-                damage = -target:addHP(-damage)
+                local totalHealedHP = target:addHP(math.abs(damage)) -- Heal target, get total HP healed (addHP accounts for re-capping to get the actual value healed)
+                damage = -totalHealedHP                              -- Keep track of damage to determine later if we need to use heal or damage message
             else
                 -- We dealt damage. Check if we are going to kill it, and if we can kill it with less rune strength if rune strength > 1.
                 if numHits > 1 and runesUsed ~= numHits and target:getHP()-damage <= 0 and runeStrength > 1 then -- try less duplicate rune count if not on final duplicate rune
