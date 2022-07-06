@@ -483,17 +483,17 @@ struct apAction_t
     uint16         spikesMessage;    // 10 bits
 
     apAction_t()
+    : reaction(REACTION::NONE)
+    , speceffect(SPECEFFECT::NONE)
+    , additionalEffect(SUBEFFECT_NONE)
+    , spikesEffect(SUBEFFECT_NONE)
     {
         ActionTarget     = nullptr;
-        reaction         = REACTION::NONE;
         animation        = 0;
-        speceffect       = SPECEFFECT::NONE;
         param            = 0;
         messageID        = 0;
-        additionalEffect = SUBEFFECT_NONE;
         addEffectParam   = 0;
         addEffectMessage = 0;
-        spikesEffect     = SUBEFFECT_NONE;
         spikesParam      = 0;
         spikesMessage    = 0;
         knockback        = 0;
