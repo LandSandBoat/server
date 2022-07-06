@@ -985,6 +985,18 @@ INSERT INTO `item_mods_pet` VALUES (27087,8,16,3);  -- Automaton - STR: 16
 INSERT INTO `item_mods_pet` VALUES (27087,9,16,3);  -- Automaton - DEX: 16
 INSERT INTO `item_mods_pet` VALUES (27087,11,16,3); -- Automaton - AGI: 16
 
+-- Asteria Mitts
+INSERT INTO `item_mods_pet` VALUES (27106,28,25,1); -- Avatar - MATT: 25
+
+-- Asteria Mitts +1
+INSERT INTO `item_mods_pet` VALUES (27107,28,26,1); -- Avatar - MATT: 26
+
+-- Lamassu Mitts
+INSERT INTO `item_mods_pet` VALUES (27108,28,25,1); -- Avatar - MATT: 25
+
+-- Lamassu Mitts +1
+INSERT INTO `item_mods_pet` VALUES (27109,28,26,1); -- Avatar - MATT: 26
+
 -- Glyphic Spats
 INSERT INTO `item_mods_pet` VALUES (27180,30,10,1); -- Avatar - MACC: 10
 
