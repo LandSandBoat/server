@@ -450,26 +450,30 @@ enum class Mod
     NINJUTSU_DURATION = 1000,
 
     // Dragoon
-    ANCIENT_CIRCLE_DURATION    = 859, // Ancient Circle extended duration in seconds
-    JUMP_TP_BONUS              = 361, // bonus tp player receives when using jump (must be divided by 10)
-    JUMP_ATT_BONUS             = 362, // ATT% bonus for jump + high jump
-    HIGH_JUMP_ENMITY_REDUCTION = 363, // for gear that reduces more enmity from high jump
-    FORCE_JUMP_CRIT            = 828, // Critical hit rate bonus for jump and high jump
-    WYVERN_EFFECTIVE_BREATH    = 829, // Increases the threshold for triggering healing breath/offensive breath more inclined to pick elemental weakness
-    WYVERN_SUBJOB_TRAITS       = 974, // Adds subjob traits to wyvern on spawn
-    WYVERN_BREATH_MACC         = 986, // Increases accuracy of wyvern's breath. adds 10 magic accuracy per merit to the trait Strafe
+    ANCIENT_CIRCLE_DURATION    = 859,  // Ancient Circle extended duration in seconds
+    JUMP_TP_BONUS              = 361,  // bonus tp player receives when using jump (must be divided by 10)
+    JUMP_ATT_BONUS             = 362,  // ATT% bonus for jump + high jump
+    HIGH_JUMP_ENMITY_REDUCTION = 363,  // for gear that reduces more enmity from high jump
+    FORCE_JUMP_CRIT            = 828,  // Critical hit rate bonus for jump and high jump
+    WYVERN_EFFECTIVE_BREATH    = 829,  // Increases the threshold for triggering healing breath/offensive breath more inclined to pick elemental weakness
+    WYVERN_SUBJOB_TRAITS       = 974,  // Adds subjob traits to wyvern on spawn
+    WYVERN_BREATH_MACC         = 986,  // Increases accuracy of wyvern's breath. adds 10 magic accuracy per merit to the trait Strafe
+    WYVERN_LVL_BONUS           = 1043, // Wyvern: Lv.+ (Increases wyvern's base level above 99)
 
     // Summoner
-    AVATAR_PERPETUATION       = 371, // stores base cost of current avatar
-    WEATHER_REDUCTION         = 372, // stores perpetuation reduction depending on weather
-    DAY_REDUCTION             = 373, // stores perpetuation reduction depending on day
-    PERPETUATION_REDUCTION    = 346, // stores the MP/tick reduction from gear
-    BP_DELAY                  = 357, // stores blood pact delay reduction
-    ENHANCES_ELEMENTAL_SIPHON = 540, // Bonus Base MP added to Elemental Siphon skill.
-    BP_DELAY_II               = 541, // Blood Pact Delay Reduction II
-    BP_DAMAGE                 = 126, // Blood Pact: Rage Damage increase percentage
-    BLOOD_BOON                = 913, // Occasionally cuts down MP cost of Blood Pact abilities. Does not affect abilities that require Astral Flow.
-    AVATARS_FAVOR_ENHANCE     = 630, // Enhances Avatars Favor Effect by 1 tier per point
+    AVATAR_PERPETUATION       = 371,  // stores base cost of current avatar
+    WEATHER_REDUCTION         = 372,  // stores perpetuation reduction depending on weather
+    DAY_REDUCTION             = 373,  // stores perpetuation reduction depending on day
+    PERPETUATION_REDUCTION    = 346,  // stores the MP/tick reduction from gear
+    BP_DELAY                  = 357,  // stores blood pact delay reduction
+    ENHANCES_ELEMENTAL_SIPHON = 540,  // Bonus Base MP added to Elemental Siphon skill.
+    BP_DELAY_II               = 541,  // Blood Pact Delay Reduction II
+    BP_DAMAGE                 = 126,  // Blood Pact: Rage Damage increase percentage
+    BLOOD_BOON                = 913,  // Occasionally cuts down MP cost of Blood Pact abilities. Does not affect abilities that require Astral Flow.
+    AVATARS_FAVOR_ENHANCE     = 630,  // Enhances Avatars Favor Effect by 1 tier per point
+    AVATAR_LVL_BONUS          = 1040, // Avatar: Lv. ### (Increases all avatar's base level above 99)
+    CARBUNCLE_LVL_BONUS       = 1041, // Carbuncle: Lv.+ (Increases Carbuncle's base level above 99)
+    CAIT_SITH_LVL_BONUS       = 1042, // Cait Sith: Lv.+ (Increases Cait Sith's base level above 99)
 
     // Blue Mage
     BLUE_POINTS       = 309, // Tracks extra blue points
@@ -540,6 +544,7 @@ enum class Mod
     AUTO_ELEM_CAPACITY          = 987,  // Increases the automaton's elemental capacity for attachments
     AUTO_RANGED_DELAY           = 1001, // Decreases the amount of time between ranged attacks
     AUTO_RANGED_DAMAGEP         = 1002, // Increase automaton ranged weapon damage by a %
+    AUTOMATON_LVL_BONUS         = 1044, // Automaton: Lv. (Increases automaton's base level above 99)
 
     // Dancer
     FINISHING_MOVES          = 333, // Tracks # of finishing moves
@@ -901,7 +906,7 @@ enum class Mod
     // 888
     // 936
     //
-    // SPARE = 1040, and onward
+    // SPARE = 1045, and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it
