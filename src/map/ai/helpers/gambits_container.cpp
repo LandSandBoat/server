@@ -656,6 +656,16 @@ namespace gambits
                 return noStorm;
                 break;
             }
+            case G_CONDITION::PT_HAS_TANK:
+            {
+                return PartyHasTank();
+                break;
+            }
+            case G_CONDITION::NOT_PT_HAS_TANK:
+            {
+                return (!PartyHasTank());
+                break;
+            }
             case G_CONDITION::STATUS_FLAG:
             {
                 return trigger_target->StatusEffectContainer->HasStatusEffectByFlag(static_cast<EFFECTFLAG>(predicate.condition_arg));
@@ -911,5 +921,19 @@ namespace gambits
             }
         });
         return hasHealer;
+    }
+    // used to check for tanks in party (Volker, AA Hume)
+    bool CGambitsContainer::PartyHasTank()
+    {
+        bool hasTank = false;
+        static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember) {
+            auto jobType = PMember->GetMJob();
+
+            if (jobType == JOB_NIN || jobType == JOB_PLD || jobType == JOB_RUN)
+            {
+                hasTank = true;
+            }
+        });
+        return hasTank;
     }
 } // namespace gambits
