@@ -468,6 +468,7 @@ enum class Mod
     BP_DELAY_II               = 541, // Blood Pact Delay Reduction II
     BP_DAMAGE                 = 126, // Blood Pact: Rage Damage increase percentage
     BLOOD_BOON                = 913, // Occasionally cuts down MP cost of Blood Pact abilities. Does not affect abilities that require Astral Flow.
+    AVATARS_FAVOR_ENHANCE     = 630, // Enhances Avatars Favor Effect by 1 tier per point
 
     // Blue Mage
     BLUE_POINTS       = 309, // Tracks extra blue points

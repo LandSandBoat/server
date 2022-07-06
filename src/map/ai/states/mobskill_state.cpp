@@ -110,16 +110,16 @@ bool CMobSkillState::Update(time_point tick)
         }
         m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_STATE_EXIT", CLuaBaseEntity(m_PEntity), m_PSkill->getID());
 
-        if (m_PEntity->objtype == TYPE_PET && m_PEntity->PMaster && m_PEntity->PMaster->objtype == TYPE_PC && IsBloodPact(m_PSkill->getID()))
+        if (m_PEntity->objtype == TYPE_PET && m_PEntity->PMaster && m_PEntity->PMaster->objtype == TYPE_PC && (m_PSkill->isBloodPactRage() || m_PSkill->isBloodPactWard()))
         {
-            CCharEntity* PSummoner = (CCharEntity*)(m_PEntity->PMaster);
+            CCharEntity* PSummoner = dynamic_cast<CCharEntity*>(m_PEntity->PMaster);
             if (PSummoner && PSummoner->StatusEffectContainer->HasStatusEffect(EFFECT_AVATARS_FAVOR))
             {
-                int power = PSummoner->StatusEffectContainer->GetStatusEffect(EFFECT_AVATARS_FAVOR)->GetPower();
+                auto power = PSummoner->StatusEffectContainer->GetStatusEffect(EFFECT_AVATARS_FAVOR)->GetPower();
                 // Retail: Power is gained for BP use
-                int levelGained = 2;
+                auto levelGained = m_PSkill->isBloodPactRage() ? 3 : 2;
                 power += levelGained;
-                PSummoner->StatusEffectContainer->GetStatusEffect(EFFECT_AVATARS_FAVOR)->SetPower(power > 10 ? power : 10);
+                PSummoner->StatusEffectContainer->GetStatusEffect(EFFECT_AVATARS_FAVOR)->SetPower(power > 11 ? power : 11);
             }
         }
         return true;
@@ -143,10 +143,4 @@ void CMobSkillState::Cleanup(time_point tick)
 
         m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE, new CActionPacket(action));
     }
-}
-
-// TODO move this to lua/sql
-bool CMobSkillState::IsBloodPact(uint16 wsid)
-{
-    return (wsid >= 831 && wsid <= 919) || (wsid >= 1902 && wsid <= 1911) || (wsid >= 2447 && wsid <= 2457);
 }

@@ -54,7 +54,6 @@ protected:
     }
     virtual bool Update(time_point tick) override;
     virtual void Cleanup(time_point tick) override;
-    virtual bool IsBloodPact(uint16 wsid);
     void         SpendCost();
 
 private:

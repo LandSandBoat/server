@@ -14,7 +14,7 @@ effect_object.onEffectTick = function(target, effect)
 end
 
 effect_object.onEffectLose = function(target, effect)
-    target:addMod(xi.mod.DOUBLE_ATTACK, effect:getPower())
+    target:delMod(xi.mod.DOUBLE_ATTACK, effect:getPower())
 end
 
 return effect_object

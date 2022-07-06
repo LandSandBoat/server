@@ -1908,7 +1908,7 @@ void CStatusEffectContainer::TickRegen(time_point tick)
                         if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_AVATARS_FAVOR) &&
                             PPet->m_PetID >= PETID_CARBUNCLE && PPet->m_PetID <= PETID_CAIT_SITH)
                         {
-                            perpetuation -= 2;
+                            perpetuation = static_cast<int16>(perpetuation * 1.2);
                         }
 
                         // carbuncle mitts only work on carbuncle
