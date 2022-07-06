@@ -3572,7 +3572,10 @@ INSERT INTO `mob_skill_lists` VALUES ('TRUST_Uka_Totlihn',1062,167); -- Judgemen
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Flaviria_UC',1072,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Babban',1073,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Abenzio',1074,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rughadjeen',1075,0);
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rughadjeen',1075,0); -- Power Slash
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rughadjeen',1075,0); -- Sickle Moon
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rughadjeen',1075,0); -- Ground Strike
+-- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rughadjeen',1075,0); -- Victory Beacon
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Kukki-Chebukki',1076,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Margret',1077,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Chacharoon',1078,0);

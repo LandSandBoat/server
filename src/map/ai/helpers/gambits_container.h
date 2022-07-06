@@ -53,6 +53,7 @@ namespace gambits
         NO_STORM           = 20,
         PT_HAS_TANK        = 21,
         NOT_PT_HAS_TANK    = 22,
+        IS_ECOSYSTEM       = 23,
     };
 
     enum class G_REACTION : uint16
