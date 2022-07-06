@@ -663,7 +663,7 @@ namespace gambits
             }
             case G_CONDITION::NOT_PT_HAS_TANK:
             {
-                return (!PartyHasTank());
+                return !PartyHasTank();
                 break;
             }
             case G_CONDITION::STATUS_FLAG:
@@ -926,7 +926,9 @@ namespace gambits
     bool CGambitsContainer::PartyHasTank()
     {
         bool hasTank = false;
-        static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember) {
+        // clang-format off
+        static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+        {
             auto jobType = PMember->GetMJob();
 
             if (jobType == JOB_NIN || jobType == JOB_PLD || jobType == JOB_RUN)
@@ -934,6 +936,7 @@ namespace gambits
                 hasTank = true;
             }
         });
+        // clang-format on
         return hasTank;
     }
 } // namespace gambits
