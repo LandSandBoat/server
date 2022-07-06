@@ -475,7 +475,7 @@ xi.mobskills.mobBreathMove = function(mob, target, percent, base, element, cap)
 
     damage = math.floor(damage * combinedDamageTaken)
 
-    if target:hasStatusEffect(xi.effect.ALL_MISS) and target:getStausEffect(xi.effect.ALL_MISS):getPower() > 1 then
+    if target:hasStatusEffect(xi.effect.ALL_MISS) and target:getStatusEffect(xi.effect.ALL_MISS):getPower() > 1 then
         return 0
     end
 
@@ -516,8 +516,8 @@ xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType,
     end
 
     -- handle super jump
-    if target:hasStatusEffect(xi.effect.ALL_MISS) and target:getStausEffect(xi.effect.ALL_MISS):getPower() > 1 then
-        skill:setMsg(xi.msg.basic.SKILL_MISS_)
+    if target:hasStatusEffect(xi.effect.ALL_MISS) and target:getStatusEffect(xi.effect.ALL_MISS):getPower() > 1 then
+        skill:setMsg(xi.msg.basic.SKILL_MISS)
         return 0
     end
 
