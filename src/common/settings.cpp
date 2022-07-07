@@ -207,7 +207,7 @@ namespace settings
                 }
             }
         }
-        
+
         // Push the consolidated defaults + user settings back up into xi.settings
         for (auto [key, value] : settingsMap)
         {
