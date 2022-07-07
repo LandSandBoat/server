@@ -1,3 +1,4 @@
+require('scripts/globals/abyssea')
 require("scripts/globals/gear_sets")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
@@ -154,11 +155,19 @@ xi.player.onGameIn = function(player, firstLogin, zoning)
         end
     else
         -- things checked ONLY during zone in go here
-        if player:getLocalVar("[WasInAbyssea]") == 1 then
-            --abyssea time logged
-            player:setCharVar("lastEnteredAbyssea", os.time() + 14400)
-            player:setCharVar("[WasInAbyssea]", 0)
+        if
+            player:getLocalVar('gameLogin') == 1 and
+            xi.abyssea.isInAbysseaZone(player) and
+            not player:hasStatusEffect(xi.effect.VISITANT)
+        then
+            local zoneID = player:getZoneID()
+            local ID = zones[zoneID]
+
+            player:messageSpecial(ID.text.ABYSSEA_TIME_OFFSET + 8)
+            player:setPos(unpack(xi.abyssea.exitPositions[zoneID]))
         end
+
+        player:setLocalVar('gameLogin', 0)
     end
 
     -- Abyssea starting quest should be flagged when expansion is active

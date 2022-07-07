@@ -6,7 +6,6 @@
 -- Velda-Galda : !pos 138.631 -2.112 61.658 94
 -- Radford     : !pos -205.303 -8.000 26.874 87
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
@@ -17,7 +16,7 @@ local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.AFFAIRS_O
 
 mission.reward =
 {
-    keyItem = xi.ki.COUNT_BORELS_LETTER,
+    keyItem     = xi.ki.COUNT_BORELS_LETTER,
     nextMission = { xi.mission.log_id.WOTG, xi.mission.id.wotg.BORNE_BY_THE_WIND },
 }
 
@@ -60,6 +59,7 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     -- TODO: What are these args from caps?
+                    -- Observed : 175, 1, 7, 0, 324953651, 58062326, 21829264, 4095, 196677
                    return mission:progressEvent(175, 2, 27, 0, 0, 0, 0, 1, 4095)
                 end,
             },
@@ -91,7 +91,8 @@ mission.sections =
                     else
                         -- Progress
                         -- NOTE: Args trigger the "handing over the letter" end part of the CS
-                        return mission:progressEvent(179, 2, 0, 1)
+                        -- Observed : 1, 0, 1, 324953715, 58062326, 21829264, 4095, 196678
+                        return mission:progressEvent(179, player:getCampaignAllegiance(), 0, 1)
                     end
                 end,
             },
