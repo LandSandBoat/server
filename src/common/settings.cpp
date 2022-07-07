@@ -39,8 +39,10 @@ namespace settings
     // so we can pass them to the lua settings properly typed.
     bool isNumber(const std::string stringValue) 
     {
-        for (char const c : stringValue) {
-            if(std::isdigit(c) == 0) { 
+        for (char const c : stringValue) 
+        {
+            if(std::isdigit(c) == 0) 
+            { 
                 return false;
             }
         }
@@ -189,7 +191,8 @@ namespace settings
                 // If we try to assign this value in the if() statement, it will
                 // come back as a bool, so we have to check only then assign in the
                 // block.
-                if (std::getenv(envKey.c_str())) {
+                if (std::getenv(envKey.c_str())) 
+                {
                     auto value = std::string(std::getenv(envKey.c_str()));
                     ShowInfo(fmt::format("Applying ENV VAR {}: {} -> {}", envKey, key, value));
 
