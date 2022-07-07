@@ -1514,7 +1514,6 @@ namespace petutils
 
             if (PMaster->GetMJob() == JOB_SMN)
             {
-                // TODO: Does this need to check the item level of the sachet?
                 mLvl += PMaster->getMod(Mod::AVATAR_LVL_BONUS);
 
                 if (PetID == PETID_CARBUNCLE)
@@ -1570,7 +1569,6 @@ namespace petutils
 
             // In a 2014 update SE updated Avatar base damage
             // Based on testing this value appears to be Level now instead of Level * 0.74f
-            // TODO: Test if this scaling holds true for exceeding level 99 (item level sachets)
             uint16 weaponDamage = 1 + mLvl;
             if (PetID == PETID_CARBUNCLE || PetID == PETID_CAIT_SITH)
             {
@@ -1676,7 +1674,7 @@ namespace petutils
             // TEMP: should be MLevel when unsummoned, and PUP level when summoned
             if (PMaster->GetMJob() == JOB_PUP)
             {
-                PPet->SetMLevel(PMaster->GetMLevel() + PMaster->getMod(Mod::AUTOMATON_LVL_BONUS)); // TODO: Does this need to check the item level of the animator?
+                PPet->SetMLevel(PMaster->GetMLevel() + PMaster->getMod(Mod::AUTOMATON_LVL_BONUS));
                 PPet->SetSLevel(PMaster->GetMLevel() / 2); // Todo: SetSLevel() already reduces the level?
             }
             else
