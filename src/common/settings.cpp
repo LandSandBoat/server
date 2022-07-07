@@ -37,10 +37,11 @@ namespace settings
 
     // We need this to figure out which environment variables are numbers
     // so we can pass them to the lua settings propery typed.
-    bool isNumber(const std::string stringValue) {
-      for (char const c : stringValue) {
-        if(std::isdigit(c) == 0) return false;
-      }
+    bool isNumber(const std::string stringValue) 
+    {
+        for (char const c : stringValue) {
+            if(std::isdigit(c) == 0) return false;
+        }
 
       return true;
     }
@@ -186,18 +187,20 @@ namespace settings
                 // come back as a bool, so we have to check only then assign in the
                 // block.
                 if(std::getenv(envKey.c_str())) {
-                  auto value = std::string(std::getenv(envKey.c_str()));
-                  ShowInfo(fmt::format("Applying ENV VAR {}: {} -> {}", envKey, key, value));
+                    auto value = std::string(std::getenv(envKey.c_str()));
+                    ShowInfo(fmt::format("Applying ENV VAR {}: {} -> {}", envKey, key, value));
                   
-                  // If we don't convert the PORTS to doubles (or ints), then the LUA
-                  // doesn't interpret them correctly and it breaks everything.
-                  // Therefor we need to check if the value is a number.
-                  if(isNumber(value)) {
-                    settingsMap[key] = std::stod(value);
-                  }
-                  else {
-                    settingsMap[key] = value;
-                  }
+                    // If we don't convert the PORTS to doubles (or ints), then the LUA
+                    // doesn't interpret them correctly and it breaks everything.
+                    // Therefor we need to check if the value is a number.
+                    if(isNumber(value)) 
+                    {
+                        settingsMap[key] = std::stod(value);
+                    }
+                    else 
+                    {
+                      settingsMap[key] = value;
+                    }
                 }
             }
         }
@@ -205,10 +208,10 @@ namespace settings
         // Push the consolidated defaults + user settings back up into xi.settings
         for (auto [key, value] : settingsMap)
         {
-          auto parts                          = split(key, ".");
-          auto outer                          = to_lower(parts[0]);
-          auto inner                          = to_upper(parts[1]);
-          lua["xi"]["settings"][outer][inner] = value;
+            auto parts                          = split(key, ".");
+            auto outer                          = to_lower(parts[0]);
+            auto inner                          = to_upper(parts[1]);
+            lua["xi"]["settings"][outer][inner] = value;
         }
 
         // Test to ensure requires aren't trampling changes, and that the user's settings aren't reverting
@@ -217,3 +220,4 @@ namespace settings
         //lua.safe_script("require('settings/main'); require('settings/default/main'); print(xi.settings)");
     }
 } // namespace settings
+
