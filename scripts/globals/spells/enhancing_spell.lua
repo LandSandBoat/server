@@ -408,7 +408,7 @@ xi.spells.enhancing.useEnhancingSpell = function(caster, target, spell)
     -- Handle exceptions and weird behaviour here, before calculating anything.
     ------------------------------------------------------------
 
-    if target:getStatusEffect(xi.effect.ALL_MISS):getPower() == 2 then
+    if target:hasStatusEffect(xi.effect.ALL_MISS) and target:getStatusEffect(xi.effect.ALL_MISS):getPower() > 1 then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         return 0
     end

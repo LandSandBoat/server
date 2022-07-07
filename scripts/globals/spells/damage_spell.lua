@@ -8,6 +8,7 @@ require("scripts/globals/magicburst")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
+require("scripts/globals/magic")
 require("scripts/globals/settings")
 -----------------------------------
 xi = xi or {}
@@ -21,17 +22,17 @@ xi.spells.damage = xi.spells.damage or {}
 -----------------------------------
 -- Tables
 -----------------------------------
--- Structure:       function = { Fire,                 Ice,                   Air,                  Earth,                 Thunder,                 Water,                    Light,                    Dark                     }
-xi.magic.dayStrong           = { xi.day.FIRESDAY,      xi.day.ICEDAY,         xi.day.WINDSDAY,      xi.day.EARTHSDAY,      xi.day.LIGHTNINGDAY,     xi.day.WATERSDAY,         xi.day.LIGHTSDAY,         xi.day.DARKSDAY          }
-xi.magic.dayWeak             = { xi.day.WATERSDAY,     xi.day.FIRESDAY,       xi.day.ICEDAY,        xi.day.WINDSDAY,       xi.day.EARTHSDAY,        xi.day.LIGHTNINGDAY,      xi.day.DARKSDAY,          xi.day.LIGHTSDAY         }
-xi.magic.singleWeatherStrong = { xi.weather.HOT_SPELL, xi.weather.SNOW,       xi.weather.WIND,      xi.weather.DUST_STORM, xi.weather.THUNDER,      xi.weather.RAIN,          xi.weather.AURORAS,       xi.weather.GLOOM         }
-xi.magic.doubleWeatherStrong = { xi.weather.HEAT_WAVE, xi.weather.BLIZZARDS,  xi.weather.GALES,     xi.weather.SAND_STORM, xi.weather.THUNDERSTORMS,xi.weather.SQUALL,        xi.weather.STELLAR_GLARE, xi.weather.DARKNESS      }
-xi.magic.singleWeatherWeak   = { xi.weather.RAIN,      xi.weather.HOT_SPELL,  xi.weather.SNOW,      xi.weather.WIND,       xi.weather.DUST_STORM,   xi.weather.THUNDER,       xi.weather.GLOOM,         xi.weather.AURORAS       }
-xi.magic.doubleWeatherWeak   = { xi.weather.SQUALL,    xi.weather.HEAT_WAVE,  xi.weather.BLIZZARDS, xi.weather.GALES,      xi.weather.SAND_STORM,   xi.weather.THUNDERSTORMS, xi.weather.DARKNESS,      xi.weather.STELLAR_GLARE }
-xi.magic.resistMod           = { xi.mod.FIRE_MEVA,     xi.mod.ICE_MEVA,       xi.mod.WIND_MEVA,     xi.mod.EARTH_MEVA,     xi.mod.THUNDER_MEVA,     xi.mod.WATER_MEVA,        xi.mod.LIGHT_MEVA,        xi.mod.DARK_MEVA         }
-xi.magic.specificDmgTakenMod = { xi.mod.FIRE_SDT,      xi.mod.ICE_SDT,        xi.mod.WIND_SDT,      xi.mod.EARTH_SDT,      xi.mod.THUNDER_SDT,      xi.mod.WATER_SDT,         xi.mod.LIGHT_SDT,         xi.mod.DARK_SDT          }
-xi.magic.absorbMod           = { xi.mod.FIRE_ABSORB,   xi.mod.ICE_ABSORB,     xi.mod.WIND_ABSORB,   xi.mod.EARTH_ABSORB,   xi.mod.LTNG_ABSORB,      xi.mod.WATER_ABSORB,      xi.mod.LIGHT_ABSORB,      xi.mod.DARK_ABSORB       }
-xi.magic.barSpell            = { xi.effect.BARFIRE,    xi.effect.BARBLIZZARD, xi.effect.BARAERO,    xi.effect.BARSTONE,    xi.effect.BARTHUNDER,    xi.effect.BARWATER        }
+-- Structure:       function = { Fire,                         Ice,                         Air,                           Earth,                         Thunder,                           Water,                          Light,                      Dark                      }
+xi.magic.dayStrong           = { xi.day.FIRESDAY,              xi.day.ICEDAY,               xi.day.WINDSDAY,               xi.day.EARTHSDAY,              xi.day.LIGHTNINGDAY,               xi.day.WATERSDAY,               xi.day.LIGHTSDAY,           xi.day.DARKSDAY           }
+xi.magic.dayWeak             = { xi.day.WATERSDAY,             xi.day.FIRESDAY,             xi.day.ICEDAY,                 xi.day.WINDSDAY,               xi.day.EARTHSDAY,                  xi.day.LIGHTNINGDAY,            xi.day.DARKSDAY,            xi.day.LIGHTSDAY          }
+xi.magic.singleWeatherStrong = { xi.weather.HOT_SPELL,         xi.weather.SNOW,             xi.weather.WIND,               xi.weather.DUST_STORM,         xi.weather.THUNDER,                xi.weather.RAIN,                xi.weather.AURORAS,         xi.weather.GLOOM          }
+xi.magic.doubleWeatherStrong = { xi.weather.HEAT_WAVE,         xi.weather.BLIZZARDS,        xi.weather.GALES,              xi.weather.SAND_STORM,         xi.weather.THUNDERSTORMS,          xi.weather.SQUALL,              xi.weather.STELLAR_GLARE,   xi.weather.DARKNESS       }
+xi.magic.singleWeatherWeak   = { xi.weather.RAIN,              xi.weather.HOT_SPELL,        xi.weather.SNOW,               xi.weather.WIND,               xi.weather.DUST_STORM,             xi.weather.THUNDER,             xi.weather.GLOOM,           xi.weather.AURORAS        }
+xi.magic.doubleWeatherWeak   = { xi.weather.SQUALL,            xi.weather.HEAT_WAVE,        xi.weather.BLIZZARDS,          xi.weather.GALES,              xi.weather.SAND_STORM,             xi.weather.THUNDERSTORMS,       xi.weather.DARKNESS,        xi.weather.STELLAR_GLARE  }
+xi.magic.resistMod           = { xi.mod.FIRE_MEVA,             xi.mod.ICE_MEVA,             xi.mod.WIND_MEVA,              xi.mod.EARTH_MEVA,             xi.mod.THUNDER_MEVA,               xi.mod.WATER_MEVA,              xi.mod.LIGHT_MEVA,          xi.mod.DARK_MEVA          }
+xi.magic.specificDmgTakenMod = { xi.mod.FIRE_SDT,              xi.mod.ICE_SDT,              xi.mod.WIND_SDT,               xi.mod.EARTH_SDT,              xi.mod.THUNDER_SDT,                xi.mod.WATER_SDT,               xi.mod.LIGHT_SDT,           xi.mod.DARK_SDT           }
+xi.magic.absorbMod           = { xi.mod.FIRE_ABSORB,           xi.mod.ICE_ABSORB,           xi.mod.WIND_ABSORB,            xi.mod.EARTH_ABSORB,           xi.mod.LTNG_ABSORB,                xi.mod.WATER_ABSORB,            xi.mod.LIGHT_ABSORB,        xi.mod.DARK_ABSORB        }
+xi.magic.barSpell            = { xi.effect.BARFIRE,            xi.effect.BARBLIZZARD,       xi.effect.BARAERO,             xi.effect.BARSTONE,            xi.effect.BARTHUNDER,              xi.effect.BARWATER              }
 
 local elementalObi           = { xi.mod.FORCE_FIRE_DWBONUS,    xi.mod.FORCE_ICE_DWBONUS,    xi.mod.FORCE_WIND_DWBONUS,     xi.mod.FORCE_EARTH_DWBONUS,    xi.mod.FORCE_LIGHTNING_DWBONUS,    xi.mod.FORCE_WATER_DWBONUS,     xi.mod.FORCE_LIGHT_DWBONUS, xi.mod.FORCE_DARK_DWBONUS }
 local spellAcc               = { xi.mod.FIREACC,               xi.mod.ICEACC,               xi.mod.WINDACC,                xi.mod.EARTHACC,               xi.mod.THUNDERACC,                 xi.mod.WATERACC,                xi.mod.LIGHTACC,            xi.mod.DARKACC            }
@@ -194,6 +195,44 @@ local pTable =
     [xi.magic.spell.HOLY        ] = { xi.mod.MND,  125,    1,  125, 150 },
     [xi.magic.spell.HOLY_II     ] = { xi.mod.MND,  250,    2,  250, 300 },
 }
+
+local function tryBuildResistance(target, resistance, isEnfeeb)
+    local isNM = target:isNM()
+    local baseRes = target:getLocalVar(string.format("[RES]Base_%s", resistance))
+    local castCool = target:getLocalVar(string.format("[RES]CastCool_%s", resistance))
+    local builtPercent = target:getLocalVar(string.format("[RES]BuiltPercent_%s", resistance))
+    local coolTime = 20
+    local buildPercent = 0
+
+    if baseRes == 0 then
+        target:setLocalVar(string.format("[RES]Base_%s", resistance), target:getMod(resistance))
+    end
+
+    if isNM == true then
+        buildPercent = 40 -- Equivalent to 4% Resistance Build (40/1000)
+    else
+        buildPercent = 20 -- Equivalent to 2% Resistance Build (20/1000)
+    end
+
+    if not isEnfeeb then
+        buildPercent = buildPercent / 2 -- Reduce Resistence Build to 2%/1% To Help With Timed Casts
+    end
+
+    if castCool <= os.time() then -- Reset Mod If 20s Since Last Spell Elapsed
+        target:setLocalVar(string.format("[RES]BuiltPercent_%s", resistance), 0) -- Reset BuiltPercent Var
+        target:setMod(resistance, baseRes) -- Reset Mod To Base
+        target:setLocalVar(string.format("[RES]CastCool_%s", resistance), os.time() + coolTime) -- Start Cool Var
+    else
+        if builtPercent + buildPercent + baseRes > 1000 then
+            buildPercent = 1000 - (builtPercent + baseRes)
+        end
+
+        target:setMod(resistance, baseRes + builtPercent + buildPercent)
+        target:setLocalVar(string.format("[RES]BuiltPercent_%s", resistance), builtPercent + buildPercent)
+        target:setLocalVar(string.format("[RES]CastCool_%s", resistance), os.time() + coolTime)
+    end
+
+end
 
 -----------------------------------
 -- Basic Functions
@@ -385,7 +424,6 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
     local spellGroup    = spell and spell:getSpellGroup() or xi.magic.spellGroup.NONE
 
     local magicAcc      = caster:getMod(xi.mod.MACC) + caster:getILvlMacc() + bonusMagicAccuracy
-    local magicEva      = 0
     local magicHitRate  = 0
     local resMod        = 0 -- Some spells may possibly be non elemental.
 
@@ -422,6 +460,9 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
     end
 
     if spellElement ~= xi.magic.ele.NONE then
+        if target:isMob() then
+            tryBuildResistance(target, xi.magic.resistMod[spellElement], false)
+        end
         -- Mod set in database. Base 0 means not resistant nor weak.
         resMod = target:getMod(xi.magic.resistMod[spellElement])
 
@@ -554,20 +595,25 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
     -----------------------------------
     -- Apply level correction.
     -----------------------------------
-    local levelDiff = utils.clamp(caster:getMainLvl() - target:getMainLvl(), -5, 5)
-    magicAcc        = magicAcc + levelDiff * 3
+    local levelDiff = caster:getMainLvl() - target:getMainLvl()
 
     -----------------------------------
     -- STEP 2: Get target magic evasion
     -- Base magic evasion (base magic evasion plus resistances(players), plus elemental defense(mobs)
     -----------------------------------
-    magicEva = target:getMod(xi.mod.MEVA) + resMod
+    local magiceva = target:getMod(xi.mod.MEVA)
+    if target:isPC() then
+        magiceva = magiceva + resMod
+    else
+        levelDiff = utils.clamp(levelDiff, 0, 99) -- Mobs should not have a disadvantage when targeted
+        magiceva =  magiceva + (4 * levelDiff) + resMod
+    end
 
     -----------------------------------
     -- STEP 3: Get Magic Hit Rate
     -- https://www.bg-wiki.com/ffxi/Magic_Hit_Rate
     -----------------------------------
-    local magicAccDiff = magicAcc - magicEva
+    local magicAccDiff = magicAcc - magiceva
 
     if magicAccDiff < 0 then
         magicHitRate = utils.clamp(50 + math.floor(magicAccDiff / 2), 5, 95)
@@ -585,15 +631,6 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
         if randomVar <= (1 - magicHitRate / 100) ^ tierVar then
             resistTier = tierVar
             break
-        end
-    end
-
-    -- Apply extra roll for elemental resistance boons. Testimonial. This needs retail testing.
-    if randomVar > 0.5 then
-        if resMod > 0 then
-            resistTier = resistTier + 1
-        elseif resMod < 0 then
-            resistTier = resistTier - 1
         end
     end
 
