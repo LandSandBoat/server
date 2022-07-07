@@ -76,3 +76,21 @@ xi.wotg.helpers.meetsMission38Reqs = function(player)
         player:hasCompletedQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.FACE_OF_THE_FUTURE) or
         player:hasCompletedQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.AT_JOURNEYS_END)
 end
+
+xi.wotg.helpers.helmTrade = function(player, helmType, broke)
+    local wotgChance = 50
+
+    if
+        xi.quest.getVar(player, xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_PRICE_OF_VALOR, 'Prog') == 1 and
+        player:getZoneID() == xi.zone.EAST_RONFAURE_S and
+        helmType == xi.helm.type.LOGGING and
+        broke ~= 1 and
+        math.random(1, 100) < wotgChance and
+        not player:hasKeyItem(xi.ki.RONFAURE_MAPLE_SYRUP)
+    then
+        npcUtil.giveKeyItem(player, xi.ki.RONFAURE_MAPLE_SYRUP)
+        return true
+    end
+
+    return false
+end

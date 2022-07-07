@@ -1423,8 +1423,16 @@ xi.helm.onTrade = function(player, npc, trade, helmType, csid, func)
         local broke = doesToolBreak(player, info) and 1 or 0
         local full  = (player:getFreeSlotsCount() == 0) and 1 or 0
 
-        if csid then player:startEvent(csid, item, broke, full) end
+        if csid then
+            player:startEvent(csid, item, broke, full)
+        end
+
         player:sendEmote(npc, info.animation, xi.emoteMode.MOTION)
+
+        -- WotG : The Price of Valor; Success does not award an item, but only KI.
+        if xi.wotg.helpers.helmTrade(player, helmType, broke) then
+            return
+        end
 
         -- success! reward item and decrement number of remaining uses on the point
         if item ~= 0 and full == 0 then
