@@ -36,7 +36,11 @@ spell_object.onSpellCast = function(caster, target, spell)
             duration = duration * 2
         end
 
-        if target:addStatusEffect(xi.effect.LULLABY, 1, 0, duration) then
+        calculateBuildDuration(target, duration, params.effect)
+
+        if duration == 0 then
+            spell:setMsg(xi.msg.basic.NONE)
+        elseif target:addStatusEffect(xi.effect.LULLABY, 1, 0, duration) then
             spell:setMsg(xi.msg.basic.MAGIC_ENFEEB)
         else
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
