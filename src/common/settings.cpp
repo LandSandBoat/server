@@ -202,7 +202,7 @@ namespace settings
                     }
                     else 
                     {
-                      settingsMap[key] = value;
+                        settingsMap[key] = value;
                     }
                 }
             }
