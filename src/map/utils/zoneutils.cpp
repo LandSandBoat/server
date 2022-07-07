@@ -336,8 +336,8 @@ namespace zoneutils
 
     void LoadMOBList()
     {
-        uint8 normalLevelRangeMin = luautils::GetSettingsVariable("NORMAL_MOB_MAX_LEVEL_RANGE_MIN");
-        uint8 normalLevelRangeMax = luautils::GetSettingsVariable("NORMAL_MOB_MAX_LEVEL_RANGE_MAX");
+        uint8 normalLevelRangeMin = settings::get<uint8>("main.NORMAL_MOB_MAX_LEVEL_RANGE_MIN");
+        uint8 normalLevelRangeMax = settings::get<uint8>("main.NORMAL_MOB_MAX_LEVEL_RANGE_MAX");
 
         const char* Query = "SELECT mob_groups.zoneid, mobname, mobid, pos_rot, pos_x, pos_y, pos_z, \
             respawntime, spawntype, dropid, mob_groups.HP, mob_groups.MP, minLevel, maxLevel, \
@@ -434,14 +434,14 @@ namespace zoneutils
                     PMob->setModifier(Mod::HTH_SDT, (uint16)(sql->GetFloatData(40) * 1000));
                     PMob->setModifier(Mod::IMPACT_SDT, (uint16)(sql->GetFloatData(41) * 1000));
 
-                    PMob->setModifier(Mod::FIRE_SDT, (int16)sql->GetFloatData(42));    // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
-                    PMob->setModifier(Mod::ICE_SDT, (int16)sql->GetFloatData(43));     // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
-                    PMob->setModifier(Mod::WIND_SDT, (int16)sql->GetFloatData(44));    // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
-                    PMob->setModifier(Mod::EARTH_SDT, (int16)sql->GetFloatData(45));   // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
-                    PMob->setModifier(Mod::THUNDER_SDT, (int16)sql->GetFloatData(46)); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
-                    PMob->setModifier(Mod::WATER_SDT, (int16)sql->GetFloatData(47));   // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
-                    PMob->setModifier(Mod::LIGHT_SDT, (int16)sql->GetFloatData(48));   // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
-                    PMob->setModifier(Mod::DARK_SDT, (int16)sql->GetFloatData(49));    // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
+                    PMob->setModifier(Mod::FIRE_SDT, (int16)sql->GetIntData(42));      // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
+                    PMob->setModifier(Mod::ICE_SDT, (int16)sql->GetIntData(43));       // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
+                    PMob->setModifier(Mod::WIND_SDT, (int16)sql->GetIntData(44));      // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
+                    PMob->setModifier(Mod::EARTH_SDT, (int16)sql->GetIntData(45));     // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
+                    PMob->setModifier(Mod::THUNDER_SDT, (int16)sql->GetIntData(46));   // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
+                    PMob->setModifier(Mod::WATER_SDT, (int16)sql->GetIntData(47));     // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
+                    PMob->setModifier(Mod::LIGHT_SDT, (int16)sql->GetIntData(48));     // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
+                    PMob->setModifier(Mod::DARK_SDT, (int16)sql->GetIntData(49));      // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
 
                     PMob->setModifier(Mod::FIRE_MEVA, (int16)(sql->GetIntData(50)));   // These are stored as signed integers which
                     PMob->setModifier(Mod::ICE_MEVA, (int16)(sql->GetIntData(51)));    // is directly the modifier starting value.

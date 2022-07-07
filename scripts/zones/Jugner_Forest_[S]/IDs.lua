@@ -20,6 +20,7 @@ zones[xi.zone.JUGNER_FOREST_S] =
         LOGIN_CAMPAIGN_UNDERWAY   = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER              = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         LOGGING_IS_POSSIBLE_HERE  = 7077, -- Logging is possible here if you have <item>.
+        YOU_FIND_NOTHING_ORDINARY = 7117, -- You find nothing out of the ordinary.
         FISHING_MESSAGE_OFFSET    = 7370, -- You can't fish here.
         ALREADY_OBTAINED_TELE     = 7706, -- You already possess the gate crystal for this telepoint.
         YOU_FIND_SPARKLING_STONE  = 7724, -- You find a sparkling stone.
