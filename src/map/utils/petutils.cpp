@@ -1512,7 +1512,19 @@ namespace petutils
         {
             if (PMaster->GetMJob() == JOB_SMN)
             {
-                PPet->SetMLevel(PMaster->GetMLevel());
+                // TODO: Does this need to check the item level of the sachet?
+                uint8 mLevel = PMaster->GetMLevel() + PMaster->getMod(Mod::AVATAR_LVL_BONUS);
+
+                if (PetID == PETID_CARBUNCLE)
+                {
+                    mLevel += PMaster->getMod(Mod::CARBUNCLE_LVL_BONUS)
+                }
+                else if (PetID == PETID_CAIT_SITH)
+                {
+                    mLevel += PMaster->getMod(Mod::CAIT_SITH_LVL_BONUS)
+                }
+
+                PPet->SetMLevel(mLevel);
             }
             else if (PMaster->GetSJob() == JOB_SMN)
             {
@@ -1556,6 +1568,7 @@ namespace petutils
 
             // In a 2014 update SE updated Avatar base damage
             // Based on testing this value appears to be Level now instead of Level * 0.74f
+            // TODO: Test if this scaling holds true for exceeding level 99 (item level sachets)
             uint16 weaponDamage = 1 + PPet->GetMLevel();
             if (PetID == PETID_CARBUNCLE || PetID == PETID_CAIT_SITH)
             {
@@ -1661,7 +1674,7 @@ namespace petutils
             // TEMP: should be MLevel when unsummoned, and PUP level when summoned
             if (PMaster->GetMJob() == JOB_PUP)
             {
-                PPet->SetMLevel(PMaster->GetMLevel());
+                PPet->SetMLevel(PMaster->GetMLevel() + PMaster->getMod(Mod::AUTOMATON_LVL_BONUS)); // TODO: Does this need to check the item level of the animator?
                 PPet->SetSLevel(PMaster->GetMLevel() / 2); // Todo: SetSLevel() already reduces the level?
             }
             else
@@ -1720,7 +1733,8 @@ namespace petutils
         }
 
         PPet->SetMJob(JOB_DRG);
-        PPet->SetMLevel(PMaster->GetMLevel());
+        // https://www.bg-wiki.com/ffxi/Wyvern_(Dragoon_Pet)#About_the_Wyvern
+        PPet->SetMLevel(PMaster->GetMLevel() + charutils::getMainhandItemLevel(static_cast<CCharEntity*>(PMaster)) + PMaster->getMod(Mod::WYVERN_LVL_BONUS));
 
         LoadAvatarStats(PMaster, PPet);                                                                    // follows PC calcs (w/o SJ)
         ((CItemWeapon*)PPet->m_Weapons[SLOT_MAIN])->setDelay((uint16)(floor(1000.0f * (320.0f / 60.0f)))); // 320 delay
