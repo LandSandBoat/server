@@ -36,7 +36,9 @@ spell_object.onSpellCast = function(caster, target, spell)
             duration = duration * 2
         end
 
-        calculateBuildDuration(target, duration, params.effect)
+        duration = duration * resm
+
+        duration = calculateBuildDuration(target, duration, params.effect)
 
         if duration == 0 then
             spell:setMsg(xi.msg.basic.NONE)
