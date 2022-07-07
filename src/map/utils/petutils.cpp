@@ -543,7 +543,7 @@ namespace petutils
         PMob->stats.MND = (uint16)((fMND + mMND) * 0.9f);
         PMob->stats.CHR = (uint16)((fCHR + mCHR) * 0.9f);
         
-        // Set jugs damageType to impact (blunt) damage. All jugs at level 75 cap do blunt (impact) damage. https://ffxiclopedia.fandom.com/wiki/Category:Familiars
+        // Set jugs damageType to impact (blunt) damage. All jugs at level 75 cap do impact (blunt) damage. https://ffxiclopedia.fandom.com/wiki/Category:Familiars
         PMob->m_dmgType = DAMAGE_TYPE::IMPACT;
     }
 
