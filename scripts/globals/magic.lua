@@ -572,7 +572,7 @@ function getMagicHitRate(caster, target, skillType, element, effectRes, bonusAcc
             end
 
             if secondarySkill == xi.skill.WIND_INSTRUMENT or secondarySkill == xi.skill.STRING_INSTRUMENT then
-                magicacc = caster:getSkillLevel(skillType) + (secondarySkill / 3) + gearBonus + dStatAcc
+                magicacc = caster:getSkillLevel(skillType) + (caster:getSkillLevel(secondarySkill) / 3) + gearBonus + dStatAcc
             else
                 magicacc = caster:getSkillLevel(skillType) + gearBonus + dStatAcc
             end
