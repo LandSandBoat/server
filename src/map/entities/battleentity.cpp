@@ -86,6 +86,7 @@ CBattleEntity::CBattleEntity()
     m_Immunity   = 0;
     isCharmed    = false;
     m_unkillable = false;
+    m_dmgType = DAMAGE_TYPE::NONE;
 
     m_DeathType = DEATH_TYPE::NONE;
     BattleHistory.lastHitTaken_atkType = ATTACK_TYPE::NONE;
