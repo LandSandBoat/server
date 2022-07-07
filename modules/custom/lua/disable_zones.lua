@@ -11,7 +11,7 @@ local disableZone =
     "Attohwa_Chasm",
     "Bibiki_Bay",
     "Carpenters_Landing",
-    "Psoxja"
+    "Psoxja",
     "Uleguerand_Range"
 }
 
