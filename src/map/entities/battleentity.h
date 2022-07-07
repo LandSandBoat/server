@@ -521,6 +521,8 @@ public:
     uint16 GetBaseRACC(uint8 skill, uint16 bonusSkill = 0);
 
     uint8 GetSpeed();
+    
+    DAMAGE_TYPE m_dmgType;
 
     bool isDead(); // проверяем, мертва ли сущность
     bool isAlive();
