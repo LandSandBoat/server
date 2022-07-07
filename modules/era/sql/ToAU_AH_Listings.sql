@@ -3807,7 +3807,29 @@ WHERE
     -- Cooking OOE
     name = "lik_kabob" or
     name = "handful_of_bloody_chocolate" or
-    name = "orange_cake";
+    name = "orange_cake" or
+
+    -- Newer stuff!
+
+    name = "malignance_earring" or
+    name = "aqreqaq_bomblet" or
+    name = "jug_of_rancid_broth" or
+    name = "jug_of_pungent_broth" or
+    name = "jug_of_frizzante_broth" or
+    name = "jug_of_zestful_sap" or
+    name = "jug_of_gassy_sap" or
+    name = "jug_of_decaying_sap" or
+    name = "jug_of_putrescent_sap" or
+    name = "jug_of_turpid_sap" or
+    name = "jug_of_pristine_sap" or
+    name = "jug_of_truly_pristine_sap" or
+    name = "jug_of_aged_humus" or
+    name = "snotra_earring" or
+    name = "freke_ring" or
+    name = "sacro_cord" or
+    name = "skrymir_cord_+1" or
+    name = "yngvi_choker" or
+    name = "cath_palug_crown";
 
 -- Unsorted
 UPDATE item_basic
