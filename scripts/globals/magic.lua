@@ -1392,12 +1392,16 @@ function calculateBuildDuration(target, duration, effect)
         if target:getMod(buildRes) ~= 0 then
             local builtRes = target:getLocalVar(string.format("[RESBUILD]Base_%s", buildRes))
 
-            duration = duration - (builtRes + target:getMod(buildRes))
+            duration = duration - ((builtRes + target:getMod(buildRes)) / 10) -- Used to add more fidelity to the build. Adding a mod of 30 will be -3 seconds per cast.
             target:setLocalVar(string.format("[RESBUILD]Base_%s", buildRes), builtRes + target:getMod(buildRes))
         end
     end
 
     return math.floor(duration)
+end
+
+function resetBuildPercent(entity, buildRes)
+    entity:setLocalVar(string.format("[RESBUILD]Base_%s", buildRes), 0)
 end
 
 function calculatePotency(basePotency, magicSkill, caster, target)
