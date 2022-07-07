@@ -19,15 +19,15 @@ require("modules/module_utils")
 --------------------------------------------
 --       Module Extended Scripts          --
 --------------------------------------------
-require("modules/era/lua/dynamis/mob_spawning_files/dynamis_bastok_mobs")
-require("modules/era/lua/dynamis/mob_spawning_files/dynamis_beaucedine_mobs")
-require("modules/era/lua/dynamis/mob_spawning_files/dynamis_buburimu_mobs")
-require("modules/era/lua/dynamis/mob_spawning_files/dynamis_jeuno_mobs")
-require("modules/era/lua/dynamis/mob_spawning_files/dynamis_qufim_mobs")
-require("modules/era/lua/dynamis/mob_spawning_files/dynamis_san_d_oria_mobs")
-require("modules/era/lua/dynamis/mob_spawning_files/dynamis_valkurm_mobs")
-require("modules/era/lua/dynamis/mob_spawning_files/dynamis_windurst_mobs")
-require("modules/era/lua/dynamis/mob_spawning_files/dynamis_xarcabard_mobs")
+require("modules/era/lua_dynamis/mob_spawning_files/dynamis_bastok_mobs")
+require("modules/era/lua_dynamis/mob_spawning_files/dynamis_beaucedine_mobs")
+require("modules/era/lua_dynamis/mob_spawning_files/dynamis_buburimu_mobs")
+require("modules/era/lua_dynamis/mob_spawning_files/dynamis_jeuno_mobs")
+require("modules/era/lua_dynamis/mob_spawning_files/dynamis_qufim_mobs")
+require("modules/era/lua_dynamis/mob_spawning_files/dynamis_san_d_oria_mobs")
+require("modules/era/lua_dynamis/mob_spawning_files/dynamis_valkurm_mobs")
+require("modules/era/lua_dynamis/mob_spawning_files/dynamis_windurst_mobs")
+require("modules/era/lua_dynamis/mob_spawning_files/dynamis_xarcabard_mobs")
 --------------------------------------------
 --       Module Affected Scripts          --
 --------------------------------------------
@@ -76,7 +76,7 @@ xi.dynamis.dynaIDLookup = -- Used to check for different IDs based on zoneID. Re
             CONNECTING_WITH_THE_SERVER = 11730, -- Connecting with server. Please wait.≺Possible Special Code: 00≻
         },
     },
-    
+
     [xi.zone.BEAUCEDINE_GLACIER] = -- zoneID for array lookup
     {
         text = -- text for table lookup
@@ -752,7 +752,7 @@ xi.dynamis.handleDynamis = function(zone)
             end
             player:setLocalVar("Requires_Initial_Update", 1)
         end
-        
+
         if player:getGMLevel() < 2 then -- GMs can stay in zone until expiry.
             local hasValidHourglass = xi.dynamis.verifyHoldsValidHourglass(player, zoneDynamistoken, zoneTimepoint) -- Checks for a valid hourglass.
             if hasValidHourglass ~= true then
@@ -847,21 +847,21 @@ xi.dynamis.addTimeToDynamis = function(zone, mobIndex)
             local expirationTime = prevExpire + (60 * timeExtension) -- Add more time to increase previous expiration point.
             playersInZone = zone:getPlayers()
             SetServerVariable(string.format("[DYNA]Timepoint_%s", zoneID), expirationTime)
-    
+
             for _, player in pairs(playersInZone) do
                 player:messageSpecial(zones[zoneID].text.DYNAMIS_TIME_EXTEND, timeExtension) -- Send extension time message.
                 xi.dynamis.updatePlayerHourglass(player, zoneDynamisToken) -- Runs hourglass update function per player.
             end
-    
+
             local timeRemaining = xi.dynamis.getDynaTimeRemaining(expirationTime) -- Gets the time remaining in seconds.
             if timeRemaining > 660 then -- Checks if time remaining > 11 minutes.
                 SetServerVariable(string.format("[DYNA]Given10MinuteWarning_%s", zoneID), 0) -- Resets var if time remaining greater than threshold.
             end
-    
+
             if timeRemaining > 240 then -- Checks if time remaining > 4 minutes.
                 SetServerVariable(string.format("[DYNA]Given3MinuteWarning_%s", zoneID), 0) -- Resets var if time remaining greater than threshold.
             end
-    
+
             if timeRemaining > 120 then -- Checks if time remaining > 2 minutes.
                 SetServerVariable(string.format("[DYNA]Given1MinuteWarning_%s", zoneID), 0) -- Resets var if time remaining greater than threshold.
             end
@@ -891,7 +891,7 @@ xi.dynamis.cleanupDynamis = function(zone)
     SetServerVariable(string.format("[DYNA]OriginalRegistrant_%s", zoneID), 0)
     zone:resetLocalVars()
     xi.dynamis.ejectAllPlayers(zone) -- Remove Players (This is precautionary but not necessary.)
-    
+
     -- Cleanup Zone
     local mobsInZone = zone:getMobs()
     local npcsInZone = zone:getNPCs()
@@ -938,12 +938,12 @@ xi.dynamis.registerDynamis = function(player)
     xi.dynamis.onNewDynamis(player) -- Start spawning wave 1.
 
     local dynamisToken = GetServerVariable(string.format("[DYNA]Token_%s", xi.dynamis.dynaInfoEra[zoneID].dynaZone))
-    
+
     zone:setLocalVar(string.format("[DYNA]Token_%s", xi.dynamis.dynaInfoEra[zoneID].dynaZone), dynamisToken)
     if dynamisToken ~= 0 and dynamisToken ~= nil then -- Double check that we have a token.
         player:createHourglass(xi.dynamis.dynaInfoEra[zoneID].dynaZone, dynamisToken, player:getID()) -- Create initial perpetual.
         player:messageSpecial(xi.dynamis.dynaIDLookup[zoneID].text.INFORMATION_RECORDED, dynamis_perpetual) -- Send player the recorded message.
-        player:messageSpecial(zones[zoneID].text.ITEM_OBTAINED, dynamis_perpetual) -- Give player a message stating the perpetual has been obtained. 
+        player:messageSpecial(zones[zoneID].text.ITEM_OBTAINED, dynamis_perpetual) -- Give player a message stating the perpetual has been obtained.
     end
 end
 

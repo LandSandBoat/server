@@ -4025,15 +4025,15 @@ namespace charutils
                     // Per monster caps pulled from: https://ffxiclopedia.fandom.com/wiki/Experience_Points
                     if (PMember->GetMLevel() <= 50)
                     {
-                        exp = std::fmin(exp, 400.f);
+                        exp = std::fmin(exp, 200.f);
                     }
                     else if (PMember->GetMLevel() <= 60)
                     {
-                        exp = std::fmin(exp, 500.f);
+                        exp = std::fmin(exp, 250.f);
                     }
                     else
                     {
-                        exp = std::fmin(exp, 600.f);
+                        exp = std::fmin(exp, 300.f);
                     }
 
                     if (mobCheck > EMobDifficulty::DecentChallenge)
@@ -4062,7 +4062,7 @@ namespace charutils
                                     exp *= 1.5f;
                                     break;
                                 default:
-                                    exp *= 1.55f;
+                                    exp *= 1.5f;
                                     break;
                             }
                         }
@@ -4289,14 +4289,38 @@ namespace charutils
                             }
                         }
                     }
-                    // pet or companion exp penalty needs to be added here
-                    if (distance(PMember->loc.p, PMob->loc.p) > 100)
+
+                    auto* PEntity = dynamic_cast<CBattleEntity*>(PMember);
+                    if (PEntity->PPet != nullptr)
                     {
-                        PMember->pushPacket(new CMessageBasicPacket(PMember, PMember, 0, 0, 37));
-                        return;
+
+                        if ((PEntity->PPet->objtype == TYPE_TRUST) || (PEntity->PPet->objtype == TYPE_NPC))
+                        {
+                            exp *= 0.7f;
+                        }
+                        else if (PEntity->PPet->StatusEffectContainer->HasStatusEffect(EFFECT_CHARM))
+                        {
+                            exp *= 0.7f;
+                        }
+
+                        if (distance(PMember->loc.p, PMob->loc.p) > 100)
+                        {
+                            PMember->pushPacket(new CMessageBasicPacket(PMember, PMember, 0, 0, 37));
+                            return;
+                        }
                     }
 
                     exp = charutils::AddExpBonus(PMember, exp);
+
+                    if (PMob->m_ExpPenalty > lua["xi"]["settings"]["main"]["PL_PENALTY"].get<uint16>() * 3)
+                    {
+                        exp = std::max<float>(0.0, exp - PMob->m_ExpPenalty - (lua["xi"]["settings"]["main"]["PL_PENALTY"].get<uint16>() * 3));
+
+                        if (exp == 0.0f)
+                        {
+                            PMember->pushPacket(new CMessageBasicPacket(PMember, PMember, 0, 0, 21)); // No Experience Gained Message
+                        }
+                    }
 
                     charutils::AddExperiencePoints(false, PMember, PMob, (uint32)exp, mobCheck, chainactive);
                 }

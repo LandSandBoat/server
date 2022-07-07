@@ -4,9 +4,6 @@
 --           Secondary Source of Information: http://www.dynamisbums.com/strategy/san.html        --
 --                       NOTE: Please refer to instructions for setup.                            --
 ----------------------------------------------------------------------------------------------------
-require("scripts/globals/status")
-require("scripts/globals/utils")
-require("scripts/globals/zone")
 ----------------------------------------------------------------------------------------------------
 --                                      Instructions                                              --
 ----------------------------------------------------------------------------------------------------

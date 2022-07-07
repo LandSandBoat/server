@@ -8,9 +8,6 @@
 -- https://www.youtube.com/user/fatalbiohazard/search                                             --
 -- https://www.youtube.com/watch?v=Tdv6TJOhOTc&ab_channel=DavidWindsands                          --
 ----------------------------------------------------------------------------------------------------
-require("scripts/globals/status")
-require("scripts/globals/utils")
-require("scripts/globals/zone")
 ----------------------------------------------------------------------------------------------------
 --                                      Instructions                                              --
 ----------------------------------------------------------------------------------------------------

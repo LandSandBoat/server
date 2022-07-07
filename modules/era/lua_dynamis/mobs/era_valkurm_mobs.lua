@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/dynamis")
 require("scripts/globals/zone")
-require("modules/era/lua/dynamis/mob_spawning_files/dynamis_valkurm_mobs")
 -----------------------------------
 
 xi = xi or {}
