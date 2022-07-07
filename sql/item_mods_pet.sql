@@ -493,6 +493,26 @@ INSERT INTO `item_mods_pet` VALUES (21361,28,6,0); -- All Pets - MATT: 6
 -- Dunna
 INSERT INTO `item_mods_pet` VALUES (21372,160,-500,8); -- Luopan - DMG: -500
 
+-- Magneto
+-- TODO: Retail testing needed to confirm the hidden automaton stat bonuses (if any)
+-- INSERT INTO `item_mods_pet` VALUES (21375,8,77,4);  -- Automaton - STR: 77
+-- INSERT INTO `item_mods_pet` VALUES (21375,9,77,4);  -- Automaton - DEX: 77
+-- INSERT INTO `item_mods_pet` VALUES (21375,10,77,4); -- Automaton - VIT: 77
+-- INSERT INTO `item_mods_pet` VALUES (21375,11,77,4); -- Automaton - AGI: 77
+-- INSERT INTO `item_mods_pet` VALUES (21375,12,77,4); -- Automaton - INT: 77
+-- INSERT INTO `item_mods_pet` VALUES (21375,13,77,4); -- Automaton - MND: 77
+-- INSERT INTO `item_mods_pet` VALUES (21375,14,77,4); -- Automaton - CHR: 77
+
+-- Animator Z
+-- TODO: Retail testing needed to confirm the hidden automaton stat bonuses (if any)
+-- INSERT INTO `item_mods_pet` VALUES (21392,8,89,4);  -- Automaton - STR: 89
+-- INSERT INTO `item_mods_pet` VALUES (21392,9,89,4);  -- Automaton - DEX: 89
+-- INSERT INTO `item_mods_pet` VALUES (21392,10,89,4); -- Automaton - VIT: 89
+-- INSERT INTO `item_mods_pet` VALUES (21392,11,89,4); -- Automaton - AGI: 89
+-- INSERT INTO `item_mods_pet` VALUES (21392,12,89,4); -- Automaton - INT: 89
+-- INSERT INTO `item_mods_pet` VALUES (21392,13,89,4); -- Automaton - MND: 89
+-- INSERT INTO `item_mods_pet` VALUES (21392,14,89,4); -- Automaton - CHR: 89
+
 -- Hesperiidae
 INSERT INTO `item_mods_pet` VALUES (21430,25,10,0); -- All Pets - ACC: 10
 INSERT INTO `item_mods_pet` VALUES (21430,26,10,0); -- All Pets - RACC: 10
@@ -500,6 +520,89 @@ INSERT INTO `item_mods_pet` VALUES (21430,30,10,0); -- All Pets - MACC: 10
 
 -- Epitaph
 INSERT INTO `item_mods_pet` VALUES (21432,126,16,1); -- Avatar - BP_DAMAGE: 16
+
+-- Neo Animator
+-- TODO: Retail testing needed to confirm the hidden automaton stat bonuses (if any)
+-- INSERT INTO `item_mods_pet` VALUES (21433,8,89,4);   -- Automaton - STR: 89
+-- INSERT INTO `item_mods_pet` VALUES (21433,9,89,4);   -- Automaton - DEX: 89
+-- INSERT INTO `item_mods_pet` VALUES (21433,10,89,4);  -- Automaton - VIT: 89
+-- INSERT INTO `item_mods_pet` VALUES (21433,11,89,4);  -- Automaton - AGI: 89
+-- INSERT INTO `item_mods_pet` VALUES (21433,12,89,4);  -- Automaton - INT: 89
+-- INSERT INTO `item_mods_pet` VALUES (21433,13,89,4);  -- Automaton - MND: 89
+-- INSERT INTO `item_mods_pet` VALUES (21433,14,89,4);  -- Automaton - CHR: 89
+INSERT INTO `item_mods_pet` VALUES (21433,366,10,4); -- Automaton - MAIN_DMG_RATING: 10
+
+-- Divinator
+INSERT INTO `item_mods_pet` VALUES (21452,8,89,4);   -- Automaton - STR: 89
+INSERT INTO `item_mods_pet` VALUES (21452,9,89,4);   -- Automaton - DEX: 89
+INSERT INTO `item_mods_pet` VALUES (21452,10,89,4);  -- Automaton - VIT: 89
+INSERT INTO `item_mods_pet` VALUES (21452,11,89,4);  -- Automaton - AGI: 89
+INSERT INTO `item_mods_pet` VALUES (21452,12,89,4);  -- Automaton - INT: 89
+INSERT INTO `item_mods_pet` VALUES (21452,13,89,4);  -- Automaton - MND: 89
+INSERT INTO `item_mods_pet` VALUES (21452,14,89,4);  -- Automaton - CHR: 89
+
+-- Eminent Animator
+INSERT INTO `item_mods_pet` VALUES (21453,8,77,4);   -- Automaton - STR: 77
+INSERT INTO `item_mods_pet` VALUES (21453,9,77,4);   -- Automaton - DEX: 77
+INSERT INTO `item_mods_pet` VALUES (21453,10,77,4);  -- Automaton - VIT: 77
+INSERT INTO `item_mods_pet` VALUES (21453,11,77,4);  -- Automaton - AGI: 77
+INSERT INTO `item_mods_pet` VALUES (21453,12,77,4);  -- Automaton - INT: 77
+INSERT INTO `item_mods_pet` VALUES (21453,13,77,4);  -- Automaton - MND: 77
+INSERT INTO `item_mods_pet` VALUES (21453,14,77,4);  -- Automaton - CHR: 77
+
+-- Forefront Animator
+INSERT INTO `item_mods_pet` VALUES (21454,8,46,4);   -- Automaton - STR: 46
+INSERT INTO `item_mods_pet` VALUES (21454,9,46,4);   -- Automaton - DEX: 46
+INSERT INTO `item_mods_pet` VALUES (21454,10,46,4);  -- Automaton - VIT: 46
+INSERT INTO `item_mods_pet` VALUES (21454,11,46,4);  -- Automaton - AGI: 46
+INSERT INTO `item_mods_pet` VALUES (21454,12,46,4);  -- Automaton - INT: 46
+INSERT INTO `item_mods_pet` VALUES (21454,13,46,4);  -- Automaton - MND: 46
+INSERT INTO `item_mods_pet` VALUES (21454,14,46,4);  -- Automaton - CHR: 46
+
+-- Alternator
+INSERT INTO `item_mods_pet` VALUES (21455,8,70,4);   -- Automaton - STR: 70
+INSERT INTO `item_mods_pet` VALUES (21455,9,70,4);   -- Automaton - DEX: 70
+INSERT INTO `item_mods_pet` VALUES (21455,10,70,4);  -- Automaton - VIT: 70
+INSERT INTO `item_mods_pet` VALUES (21455,11,70,4);  -- Automaton - AGI: 70
+INSERT INTO `item_mods_pet` VALUES (21455,12,70,4);  -- Automaton - INT: 70
+INSERT INTO `item_mods_pet` VALUES (21455,13,70,4);  -- Automaton - MND: 70
+INSERT INTO `item_mods_pet` VALUES (21455,14,70,4);  -- Automaton - CHR: 70
+
+-- Animator P
+INSERT INTO `item_mods_pet` VALUES (21456,8,104,4);   -- Automaton - STR: 104
+INSERT INTO `item_mods_pet` VALUES (21456,9,104,4);   -- Automaton - DEX: 104
+INSERT INTO `item_mods_pet` VALUES (21456,10,104,4);  -- Automaton - VIT: 104
+INSERT INTO `item_mods_pet` VALUES (21456,11,104,4);  -- Automaton - AGI: 104
+INSERT INTO `item_mods_pet` VALUES (21456,12,104,4);  -- Automaton - INT: 104
+INSERT INTO `item_mods_pet` VALUES (21456,13,104,4);  -- Automaton - MND: 104
+INSERT INTO `item_mods_pet` VALUES (21456,14,104,4);  -- Automaton - CHR: 104
+
+-- Animator P +1
+INSERT INTO `item_mods_pet` VALUES (21457,8,109,4);   -- Automaton - STR: 109
+INSERT INTO `item_mods_pet` VALUES (21457,9,109,4);   -- Automaton - DEX: 109
+INSERT INTO `item_mods_pet` VALUES (21457,10,109,4);  -- Automaton - VIT: 109
+INSERT INTO `item_mods_pet` VALUES (21457,11,109,4);  -- Automaton - AGI: 109
+INSERT INTO `item_mods_pet` VALUES (21457,12,109,4);  -- Automaton - INT: 109
+INSERT INTO `item_mods_pet` VALUES (21457,13,109,4);  -- Automaton - MND: 109
+INSERT INTO `item_mods_pet` VALUES (21457,14,109,4);  -- Automaton - CHR: 109
+
+-- Animator P II
+INSERT INTO `item_mods_pet` VALUES (21458,8,104,4);   -- Automaton - STR: 104
+INSERT INTO `item_mods_pet` VALUES (21458,9,104,4);   -- Automaton - DEX: 104
+INSERT INTO `item_mods_pet` VALUES (21458,10,104,4);  -- Automaton - VIT: 104
+INSERT INTO `item_mods_pet` VALUES (21458,11,104,4);  -- Automaton - AGI: 104
+INSERT INTO `item_mods_pet` VALUES (21458,12,104,4);  -- Automaton - INT: 104
+INSERT INTO `item_mods_pet` VALUES (21458,13,104,4);  -- Automaton - MND: 104
+INSERT INTO `item_mods_pet` VALUES (21458,14,104,4);  -- Automaton - CHR: 104
+
+-- Animator P II +1
+INSERT INTO `item_mods_pet` VALUES (21459,8,109,4);   -- Automaton - STR: 109
+INSERT INTO `item_mods_pet` VALUES (21459,9,109,4);   -- Automaton - DEX: 109
+INSERT INTO `item_mods_pet` VALUES (21459,10,109,4);  -- Automaton - VIT: 109
+INSERT INTO `item_mods_pet` VALUES (21459,11,109,4);  -- Automaton - AGI: 109
+INSERT INTO `item_mods_pet` VALUES (21459,12,109,4);  -- Automaton - INT: 109
+INSERT INTO `item_mods_pet` VALUES (21459,13,109,4);  -- Automaton - MND: 109
+INSERT INTO `item_mods_pet` VALUES (21459,14,109,4);  -- Automaton - CHR: 109
 
 -- Arasy Sainti
 INSERT INTO `item_mods_pet` VALUES (21504,25,10,3); -- Automaton - ACC: 10
@@ -589,6 +692,24 @@ INSERT INTO `item_mods_pet` VALUES (22210,126,3,1); -- Avatar - BP_DAMAGE: 3
 
 -- Elan Strap +1
 INSERT INTO `item_mods_pet` VALUES (22211,126,5,1); -- Avatar - BP_DAMAGE: 5
+
+-- Eminent Animator II
+INSERT INTO `item_mods_pet` VALUES (22260,8,46,4);   -- Automaton - STR: 46
+INSERT INTO `item_mods_pet` VALUES (22260,9,46,4);   -- Automaton - DEX: 46
+INSERT INTO `item_mods_pet` VALUES (22260,10,46,4);  -- Automaton - VIT: 46
+INSERT INTO `item_mods_pet` VALUES (22260,11,46,4);  -- Automaton - AGI: 46
+INSERT INTO `item_mods_pet` VALUES (22260,12,46,4);  -- Automaton - INT: 46
+INSERT INTO `item_mods_pet` VALUES (22260,13,46,4);  -- Automaton - MND: 46
+INSERT INTO `item_mods_pet` VALUES (22260,14,46,4);  -- Automaton - CHR: 46
+
+-- Divinator II
+INSERT INTO `item_mods_pet` VALUES (22261,8,89,4);   -- Automaton - STR: 89
+INSERT INTO `item_mods_pet` VALUES (22261,9,89,4);   -- Automaton - DEX: 89
+INSERT INTO `item_mods_pet` VALUES (22261,10,89,4);  -- Automaton - VIT: 89
+INSERT INTO `item_mods_pet` VALUES (22261,11,89,4);  -- Automaton - AGI: 89
+INSERT INTO `item_mods_pet` VALUES (22261,12,89,4);  -- Automaton - INT: 89
+INSERT INTO `item_mods_pet` VALUES (22261,13,89,4);  -- Automaton - MND: 89
+INSERT INTO `item_mods_pet` VALUES (22261,14,89,4);  -- Automaton - CHR: 89
 
 -- Foire Taj +2
 INSERT INTO `item_mods_pet` VALUES (23057,25,31,3);   -- Automaton - ACC: 31
@@ -791,7 +912,6 @@ INSERT INTO `item_mods_pet` VALUES (23784,30,50,0); -- All Pets - MACC: 50
 INSERT INTO `item_mods_pet` VALUES (23786,25,50,0); -- All Pets - ACC: 50
 INSERT INTO `item_mods_pet` VALUES (23786,26,50,0); -- All Pets - RACC: 50
 INSERT INTO `item_mods_pet` VALUES (23786,30,50,0); -- All Pets - MACC: 50
--- TODO: Automaton: Lvl +1
 
 -- Bunzis Sabots (Checked)
 INSERT INTO `item_mods_pet` VALUES (23788,25,50,0); -- All Pets - ACC: 50
