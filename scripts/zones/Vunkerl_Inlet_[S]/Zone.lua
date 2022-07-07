@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: Vunkerl_Inlet_[S] (83)
---
 -----------------------------------
 local ID = require("scripts/zones/Vunkerl_Inlet_[S]/IDs")
 require("scripts/globals/status")

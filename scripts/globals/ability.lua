@@ -677,11 +677,21 @@ xi.reaction =
 {
     NONE     = 0x00,
     MISS     = 0x01,
+    GUARDED  = 0x02,
     PARRY    = 0x03,
     BLOCK    = 0x04,
     HIT      = 0x08,
     EVADE    = 0x09,
-    GUARD    = 0x14,
+    ABILITY  = 0x10,
+}
+
+xi.actionModifier =
+{
+    NONE        = 0x00,
+    COVER       = 0x01,
+    RESIST      = 0x02,
+    MAGIC_BURST = 0x04, -- Currently known to be used for Swipe/Lunge only
+    IMMUNOBREAK = 0x08,
 }
 
 xi.specEffect =
