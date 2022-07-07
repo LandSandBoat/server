@@ -14,6 +14,7 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/zone")
 require("scripts/missions/amk/helpers")
+require("scripts/missions/wotg/helpers")
 -----------------------------------
 
 xi = xi or {}

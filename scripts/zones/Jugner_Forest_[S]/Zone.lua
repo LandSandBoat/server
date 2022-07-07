@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: Jugner_Forest_[S] (82)
---
 -----------------------------------
 local ID = require("scripts/zones/Jugner_Forest_[S]/IDs")
 require("scripts/globals/chocobo")

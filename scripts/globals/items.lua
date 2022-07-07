@@ -200,6 +200,7 @@ xi.items =
     HANDFUL_OF_PUGIL_SCALES         = 868,
     SQUARE_OF_KARAKUL_LEATHER       = 879,
     BONE_CHIP                       = 880,
+    BEHEMOTH_HORN                   = 883,
     CORAL_FRAGMENT                  = 887,
     BAT_FANG                        = 891,
     CHICKEN_BONE                    = 898,
