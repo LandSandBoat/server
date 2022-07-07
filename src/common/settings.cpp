@@ -43,7 +43,7 @@ namespace settings
             if(std::isdigit(c) == 0) return false;
         }
 
-      return true;
+        return true;
     }
 
     /**
@@ -186,14 +186,14 @@ namespace settings
                 // If we try to assign this value in the if() statement, it will
                 // come back as a bool, so we have to check only then assign in the
                 // block.
-                if(std::getenv(envKey.c_str())) {
+                if (std::getenv(envKey.c_str())) {
                     auto value = std::string(std::getenv(envKey.c_str()));
                     ShowInfo(fmt::format("Applying ENV VAR {}: {} -> {}", envKey, key, value));
                   
                     // If we don't convert the PORTS to doubles (or ints), then the LUA
                     // doesn't interpret them correctly and it breaks everything.
                     // Therefor we need to check if the value is a number.
-                    if(isNumber(value)) 
+                    if (isNumber(value)) 
                     {
                         settingsMap[key] = std::stod(value);
                     }
@@ -220,4 +220,3 @@ namespace settings
         //lua.safe_script("require('settings/main'); require('settings/default/main'); print(xi.settings)");
     }
 } // namespace settings
-
