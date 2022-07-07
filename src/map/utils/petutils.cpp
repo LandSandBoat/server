@@ -1510,8 +1510,8 @@ namespace petutils
 
         if (PPet->getPetType() == PET_TYPE::AVATAR)
         {
-			uint8 mLvl = PMaster->GetMLevel();
-			
+            uint8 mLvl = PMaster->GetMLevel();
+
             if (PMaster->GetMJob() == JOB_SMN)
             {
                 // TODO: Does this need to check the item level of the sachet?
@@ -1736,8 +1736,8 @@ namespace petutils
 
         PPet->SetMJob(JOB_DRG);
         // https://www.bg-wiki.com/ffxi/Wyvern_(Dragoon_Pet)#About_the_Wyvern
-		uint8 mLvl = PMaster->GetMLevel();
-		uint8 iLvl = std::clamp(charutils::getMainhandItemLevel(static_cast<CCharEntity*>(PMaster)) - 99, 0, 20);
+        uint8 mLvl = PMaster->GetMLevel();
+        uint8 iLvl = std::clamp(charutils::getMainhandItemLevel(static_cast<CCharEntity*>(PMaster)) - 99, 0, 20);
 
         PPet->SetMLevel(mLvl + iLvl + PMaster->getMod(Mod::WYVERN_LVL_BONUS));
 
