@@ -1699,6 +1699,15 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
     TracyZoneScoped;
     auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
 
+    if (this->objtype == TYPE_MOB)
+    {
+        auto* PMob = dynamic_cast<CMobEntity*>(this);
+        if (charutils::CheckMob(PTarget->m_mlvl, PMob->m_maxLevel) == EMobDifficulty::TooWeak)
+        {
+            PMob->m_ExpPenalty = ((PMob->m_ExpPenalty + lua["xi"]["settings"]["main"]["PL_PENALTY"].get<uint16>()) < UINT16_MAX - 1) ? PMob->m_ExpPenalty + lua["xi"]["settings"]["main"]["PL_PENALTY"].get<uint16>() : UINT16_MAX - 1;
+        }
+    }
+
     if (PTarget->objtype == TYPE_PC)
     {
         // TODO: Should not be removed by AoE effects that don't target the player.
