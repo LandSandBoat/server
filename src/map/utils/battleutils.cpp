@@ -79,7 +79,7 @@
  *   lists used in battleutils                                           *
  ************************************************************************/
 
-std::array<std::array<uint16, 14>, 124>                                            g_SkillTable;
+std::array<std::array<uint16, 14>, 100>                                            g_SkillTable;
 std::array<std::array<uint8, MAX_JOBTYPE>, MAX_SKILLTYPE>                          g_SkillRanks;
 std::array<std::array<uint16, MAX_SKILLCHAIN_COUNT + 1>, MAX_SKILLCHAIN_LEVEL + 1> g_SkillChainDamageModifiers;
 
@@ -106,13 +106,13 @@ namespace battleutils
         const char* fmtQuery = "SELECT r0,r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13 \
                             FROM skill_caps \
                             ORDER BY level \
-                            LIMIT 124";
+                            LIMIT 100";
 
         int32 ret = sql->Query(fmtQuery);
 
         if (ret != SQL_ERROR && sql->NumRows() != 0)
         {
-            for (uint32 x = 0; x < 124 && sql->NextRow() == SQL_SUCCESS; ++x)
+            for (uint32 x = 0; x < 100 && sql->NextRow() == SQL_SUCCESS; ++x)
             {
                 for (uint32 y = 0; y < 14; ++y)
                 {

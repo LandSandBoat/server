@@ -544,7 +544,7 @@ namespace puppetutils
             rank = 13 + rank;
         }
 
-        return battleutils::GetMaxSkill(rank, level);
+        return battleutils::GetMaxSkill(rank, level > 99 ? 99 : level);
     }
 
     uint16 getSkillCap(CCharEntity* PChar, SKILLTYPE skill)
