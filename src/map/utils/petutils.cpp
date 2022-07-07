@@ -1517,11 +1517,11 @@ namespace petutils
 
                 if (PetID == PETID_CARBUNCLE)
                 {
-                    mLevel += PMaster->getMod(Mod::CARBUNCLE_LVL_BONUS)
+                    mLevel += PMaster->getMod(Mod::CARBUNCLE_LVL_BONUS);
                 }
                 else if (PetID == PETID_CAIT_SITH)
                 {
-                    mLevel += PMaster->getMod(Mod::CAIT_SITH_LVL_BONUS)
+                    mLevel += PMaster->getMod(Mod::CAIT_SITH_LVL_BONUS);
                 }
 
                 PPet->SetMLevel(mLevel);
