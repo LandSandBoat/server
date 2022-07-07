@@ -10,9 +10,12 @@ services:
       MYSQL_PASSWORD: xipassword
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: xidb
+    networks:
+      - lsb
     # Run all the .sql files in the /sql directory to initalize the DB. This only hapens the first time this service is started and will not handle additions/modifications
     volumes:
       - ./sql:/docker-entrypoint-initdb.d
+      - ~/lsb_server/data:/var/lib/mysql
     ports:
       - "3306:3306"
 
@@ -21,7 +24,9 @@ services:
     image: adminer
     restart: always
     depends_on:
-      - "db"
+      - db
+    networks:
+      - lsb
     ports:
       - 8080:8080
 
@@ -29,14 +34,90 @@ services:
   game:
     # Build whatever is in the Dockerfile in the server root folder
     build: .
+    environment:
+      XI_NETWORK_SQL_HOST: db
+      XI_NETWORK_SQL_PORT: 3306
+      XI_NETWORK_SQL_LOGIN: xiuser
+      XI_NETWORK_SQL_PASSWORD: xipassword
+      XI_NETWORK_SQL_DATABASE: xidb
+      XI_NETWORK_LOGIN_DATA_IP: 0.0.0.0
+      XI_NETWORK_LOGIN_DATA_PORT: 54230
+      XI_NETWORK_LOGIN_VIEW_IP: 0.0.0.0
+      XI_NETWORK_LOGIN_VIEW_PORT: 54001
+      XI_NETWORK_LOGIN_AUTH_IP: 0.0.0.0
+      XI_NETWORK_LOGIN_AUTH_PORT: 54231
+      XI_NETWORK_ZMQ_IP: 0.0.0.0
+      XI_NETWORK_ZMQ_PORT: 54003
+      XI_NETWORK_MAP_PORT: 54230
+      XI_NETWORK_SEARCH_PORT: 54002
     depends_on:
-      - "db"
+      - db
+      - traefik
+    networks:
+      - lsb
+    labels:
+      - "traefik.enable=true"
+
+      - "traefik.udp.routers.game.service=svc_game"
+      - "traefik.udp.services.svc_game.loadbalancer.server.port=54230"
+
+      - "traefik.tcp.routers.connect.rule=HostSNI(`*`)"
+      - "traefik.tcp.routers.connect.entrypoints=connect"
+      - "traefik.tcp.routers.connect.service=svc_connect"
+      - "traefik.tcp.services.svc_connect.loadbalancer.server.port=54230"
+
+      - "traefik.tcp.routers.connect1.rule=HostSNI(`*`)"
+      - "traefik.tcp.routers.connect1.entrypoints=connect1"
+      - "traefik.tcp.routers.connect1.service=svc_connect1"
+      - "traefik.tcp.services.svc_connect1.loadbalancer.server.port=54231"
+
+      - "traefik.tcp.routers.connect2.rule=HostSNI(`*`)"
+      - "traefik.tcp.routers.connect2.entrypoints=connect2"
+      - "traefik.tcp.routers.connect2.service=svc_connect2"
+      - "traefik.tcp.services.svc_connect2.loadbalancer.server.port=54001"
+      
+      - "traefik.tcp.routers.search.rule=HostSNI(`*`)"
+      - "traefik.tcp.routers.search.entrypoints=search"
+      - "traefik.tcp.routers.search.service=svc_search"
+      - "traefik.tcp.services.svc_search.loadbalancer.server.port=54002"
+  
+  traefik:
+    image: traefik
+    restart: unless-stopped
+    environment:
+      TRAEFIK_API_DASHBOARD: false
+      TRAEFIK_API_INSECURE: true
+      
+      TRAEFIK_ENTRYPOINTS_GAME: true
+      TRAEFIK_ENTRYPOINTS_GAME_ADDRESS: ":54230/udp"
+      TRAEFIK_ENTRYPOINTS_CONNECT: true
+      TRAEFIK_ENTRYPOINTS_CONNECT_ADDRESS: ":54230/tcp"
+      TRAEFIK_ENTRYPOINTS_CONNECT1: true
+      TRAEFIK_ENTRYPOINTS_CONNECT1_ADDRESS: ":54231/tcp"
+      TRAEFIK_ENTRYPOINTS_CONNECT2: true
+      TRAEFIK_ENTRYPOINTS_CONNECT2_ADDRESS: ":54001/tcp"
+      TRAEFIK_ENTRYPOINTS_SEARCH: true
+      TRAEFIK_ENTRYPOINTS_SEARCH_ADDRESS: ":54002/tcp"
+       
+      TRAEFIK_PROVIDERS_DOCKER: true
+      TRAEFIK_PROVIDERS_DOCKER_WATCH: true
+      TRAEFIK_PROVIDERS_DOCKER_NETWORK: "web"
+      TRAEFIK_PROVIDERS_DOCKER_EXPOSEDBYDEFAULT: false
+      
     ports:
-      # connect
-      - "54230:54230/tcp"
       - "54231:54231/tcp"
-      - "54001:54001/tcp"
-      # search
-      - "54002:54002/tcp"
-      # game
+      - "54230:54230/tcp"
       - "54230:54230/udp"
+      - "54001:54001/tcp"
+      - "54002:54002/tcp"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    networks:
+      - web
+      - lsb
+  
+networks:
+  lsb:
+    external: false
+  web:
+    external: true

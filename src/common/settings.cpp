@@ -35,16 +35,14 @@ namespace settings
 {
     std::unordered_map<std::string, SettingsVariant_t> settingsMap;
 
-    void network_settings_from_env()
-    {
-        lua["xi"]["settings"]["network"]["SQL_HOST"]     = std::getenv("XI_DB_HOST") ? std::getenv("XI_DB_HOST") : get<std::string>("network.SQL_HOST");
-        lua["xi"]["settings"]["network"]["SQL_PORT"]     = std::getenv("XI_DB_PORT") ? std::stoi(std::getenv("XI_DB_PORT")) : get<uint16>("network.SQL_PORT");
-        lua["xi"]["settings"]["network"]["SQL_LOGIN"]    = std::getenv("XI_DB_USER") ? std::getenv("XI_DB_USER") : get<std::string>("network.SQL_LOGIN");
-        lua["xi"]["settings"]["network"]["SQL_PASSWORD"] = std::getenv("XI_DB_USER_PASSWD") ? std::getenv("XI_DB_USER_PASSWD") : get<std::string>("network.SQL_PASSWORD");
-        lua["xi"]["settings"]["network"]["SQL_DATABASE"] = std::getenv("XI_DB_NAME") ? std::getenv("XI_DB_NAME") : get<std::string>("network.SQL_DATABASE");
+    // We need this to figure out which environment variables are numbers
+    // so we can pass them to the lua settings propery typed.
+    bool isNumber(const std::string stringValue) {
+      for (char const c : stringValue) {
+        if(std::isdigit(c) == 0) return false;
+      }
 
-        lua["xi"]["settings"]["network"]["ZMQ_IP"]   = std::getenv("XI_MSG_IP") ? std::getenv("XI_MSG_IP") : get<std::string>("network.ZMQ_IP");
-        lua["xi"]["settings"]["network"]["ZMQ_PORT"] = std::getenv("XI_MSG_PORT") ? std::stoi(std::getenv("XI_MSG_PORT")) : get<uint16>("network.ZMQ_PORT");
+      return true;
     }
 
     /**
@@ -168,7 +166,7 @@ namespace settings
             {
                 auto innerKey = innerKeyObj.as<std::string>();
                 auto key      = to_upper(fmt::format("{}.{}", outerKey, innerKey));
-
+                
                 if (innerValObj.is<bool>())
                 {
                     settingsMap[key] = innerValObj.as<bool>();
@@ -181,23 +179,41 @@ namespace settings
                 {
                     settingsMap[key] = innerValObj.as<std::string>();
                 }
+
+                // Apply any environment variables over the default/user settings.
+                auto envKey = fmt::format("XI_{}_{}", to_upper(outerKey), to_upper(innerKey));
+                // If we try to assign this value in the if() statement, it will
+                // come back as a bool, so we have to check only then assign in the
+                // block.
+                if(std::getenv(envKey.c_str())) {
+                  auto value = std::string(std::getenv(envKey.c_str()));
+                  ShowInfo(fmt::format("Applying ENV VAR {}: {} -> {}", envKey, key, value));
+                  
+                  // If we don't convert the PORTS to doubles (or ints), then the LUA
+                  // doesn't interpret them correctly and it breaks everything.
+                  // Therefor we need to check if the value is a number.
+                  if(isNumber(value)) {
+                    settingsMap[key] = std::stod(value);
+                  }
+                  else {
+                    settingsMap[key] = value;
+                  }
+                }
             }
         }
-
+        
         // Push the consolidated defaults + user settings back up into xi.settings
         for (auto [key, value] : settingsMap)
         {
-            auto parts                          = split(key, ".");
-            auto outer                          = to_lower(parts[0]);
-            auto inner                          = to_lower(parts[1]);
-            lua["xi"]["settings"][outer][inner] = value;
+          auto parts                          = split(key, ".");
+          auto outer                          = to_lower(parts[0]);
+          auto inner                          = to_upper(parts[1]);
+          lua["xi"]["settings"][outer][inner] = value;
         }
 
         // Test to ensure requires aren't trampling changes, and that the user's settings aren't reverting
         // to the defaults:
         //
-        // lua.safe_script("require('settings/main'); require('settings/default/main'); print(xi.settings)");
-
-        network_settings_from_env();
+        //lua.safe_script("require('settings/main'); require('settings/default/main'); print(xi.settings)");
     }
 } // namespace settings
