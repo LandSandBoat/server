@@ -11,7 +11,7 @@ local zone_object = {}
 zone_object.onInitialize = function(zone)
 end
 
-zone_object.onZoneIn = function(player, prevZone, zone)
+zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
     local zone = GetZone(xi.zone.SHIP_BOUND_FOR_MHAURA)
 

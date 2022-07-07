@@ -51,6 +51,8 @@ namespace gambits
         RANDOM             = 18,
         NO_SAMBA           = 19,
         NO_STORM           = 20,
+        PT_HAS_TANK        = 21,
+        NOT_PT_HAS_TANK    = 22,
     };
 
     enum class G_REACTION : uint16
@@ -232,6 +234,7 @@ namespace gambits
         bool CheckTrigger(CBattleEntity* trigger_target, Predicate_t& predicate);
         bool TryTrustSkill();
         bool PartyHasHealer();
+        bool PartyHasTank();
 
         CTrustEntity*         POwner;
         time_point            m_lastAction;

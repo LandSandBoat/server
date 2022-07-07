@@ -19,15 +19,14 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
-
 #include "zone_in.h"
-#include "map/zone.h"
 #include "../entities/charentity.h"
 #include "../instance.h"
 #include "../status_effect_container.h"
 #include "../utils/zoneutils.h"
 #include "../vana_time.h"
+#include "common/socket.h"
+#include "map/zone.h"
 
 /************************************************************************
  *                                                                       *
@@ -151,8 +150,8 @@ CZoneInPacket::CZoneInPacket(CCharEntity* PChar, int16 csid)
     ref<uint8>(0x21) = PChar->GetGender() * 128 + (1 << PChar->look.size);
 
     // Zone Animation for Transports
-    ref<uint8>(0x27) = PChar->loc.zone->GetZoneDirection();
-    ref<uint8>(0x2A) = PChar->loc.zone->GetZoneAnimation();
+    ref<uint8>(0x27)  = PChar->loc.zone->GetZoneDirection();
+    ref<uint8>(0x2A)  = PChar->loc.zone->GetZoneAnimation();
     ref<uint32>(0x78) = PChar->loc.zone->GetZoneAnimStartTime();
     ref<uint16>(0x7C) = PChar->loc.zone->GetZoneAnimLength();
 

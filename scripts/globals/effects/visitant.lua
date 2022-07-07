@@ -6,19 +6,6 @@ require("scripts/globals/zone")
 -----------------------------------
 local effect_object = {}
 
-local exitPositions =
-{
-    [xi.zone.ABYSSEA_KONSCHTAT]  = {   88.4, -68.09, -579.97, 128, 108 },
-    [xi.zone.ABYSSEA_TAHRONGI]   = {  -28.6,  46.17,  -680.3, 192, 117 },
-    [xi.zone.ABYSSEA_LA_THEINE]  = {   -562,      0,     640, 158, 102 },
-    [xi.zone.ABYSSEA_ATTOHWA]    = {   -340, -23.36,   48.49,  31, 118 },
-    [xi.zone.ABYSSEA_MISAREAUX]  = { 363.47,      0, -119.72, 129, 103 },
-    [xi.zone.ABYSSEA_VUNKERL]    = { 242.98,   0.24,    8.72, 157, 104 },
-    [xi.zone.ABYSSEA_ALTEPA]     = {    340,  -0.52,    -668, 192, 107 },
-    [xi.zone.ABYSSEA_ULEGUERAND] = {    270,   -7.8,     -82,  64, 112 },
-    [xi.zone.ABYSSEA_GRAUBERG]   = {    -64,      0,     600,   0, 106 },
-}
-
 local remainingTimeLimits =
 {
     300,
@@ -133,10 +120,13 @@ effect_object.onEffectLose = function(target, effect)
     local zoneID = target:getZoneID()
     local ID = zones[zoneID]
 
-    if xi.abyssea.isInAbysseaZone(target) then
+    if
+        target:getLocalVar('gameLogin') == 0 and
+        xi.abyssea.isInAbysseaZone(target)
+    then
         target:setLocalVar('finalCountdown', 0)
         target:messageSpecial(ID.text.ABYSSEA_TIME_OFFSET + 8)
-        target:setPos(unpack(exitPositions[zoneID]))
+        target:setPos(unpack(xi.abyssea.exitPositions[zoneID]))
     elseif effect:getIcon() == xi.effect.VISITANT then
         -- Player exited willingly, set their time stored as seconds remaining.  Cap at 120 minutes,
         -- and remove the 4 seconds that was granted as a buffer time.

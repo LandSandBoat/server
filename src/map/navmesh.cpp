@@ -430,6 +430,73 @@ bool CNavMesh::validPosition(const position_t& position)
     return m_navMesh->isValidPolyRef(startRef);
 }
 
+bool CNavMesh::findClosestValidPoint(const position_t& position, float* validPoint)
+{
+    float spos[3];
+    CNavMesh::ToDetourPos(&position, spos);
+
+    float polyPickExt[3];
+    polyPickExt[0] = 30;
+    polyPickExt[1] = 60;
+    polyPickExt[2] = 30;
+
+    dtQueryFilter filter;
+    filter.setIncludeFlags(0xffff);
+    filter.setExcludeFlags(0);
+
+    dtPolyRef startRef;
+
+    dtStatus status = m_navMeshQuery.findNearestPoly(spos, polyPickExt, &filter, &startRef, validPoint);
+
+    if (dtStatusFailed(status))
+    {
+        return false;
+    }
+
+    CNavMesh::ToFFXIPos(validPoint);
+    return true;
+}
+
+bool CNavMesh::findFurthestValidPoint(const position_t& startPosition, const position_t& endPosition, float* validEndPoint)
+{
+    float spos[3];
+    CNavMesh::ToDetourPos(&startPosition, spos);
+
+    float polyPickExt[3];
+    polyPickExt[0] = 30;
+    polyPickExt[1] = 60;
+    polyPickExt[2] = 30;
+
+    dtQueryFilter filter;
+    filter.setIncludeFlags(0xffff);
+    filter.setExcludeFlags(0);
+
+    dtPolyRef startRef;
+    float     validStartPoint[3];
+
+    dtStatus status = m_navMeshQuery.findNearestPoly(spos, polyPickExt, &filter, &startRef, validStartPoint);
+    if (dtStatusFailed(status))
+    {
+        return false;
+    }
+
+    dtPolyRef visited[16];
+    int       visitedCount = 0;
+
+    float targetPoint[3];
+    CNavMesh::ToDetourPos(&endPosition, targetPoint);
+
+    status = m_navMeshQuery.moveAlongSurface(startRef, validStartPoint, targetPoint, &filter, validEndPoint, visited, &visitedCount, 16);
+
+    if (dtStatusFailed(status))
+    {
+        return false;
+    }
+
+    CNavMesh::ToFFXIPos(validEndPoint);
+    return true;
+}
+
 void CNavMesh::snapToValidPosition(position_t& position)
 {
     TracyZoneScoped;

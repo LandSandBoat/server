@@ -371,7 +371,7 @@ void CTrustEntity::OnRangedAttack(CRangeState& state, action_t& action)
     if (hitOccured)
     {
         // any misses with barrage cause remaing shots to miss, meaning we must check Action.reaction
-        if (actionTarget.reaction == REACTION::EVADE && (this->StatusEffectContainer->HasStatusEffect(EFFECT_BARRAGE) || isSange))
+        if ((actionTarget.reaction & REACTION::MISS) != REACTION::NONE && (this->StatusEffectContainer->HasStatusEffect(EFFECT_BARRAGE) || isSange))
         {
             actionTarget.messageID  = 352;
             actionTarget.reaction   = REACTION::HIT;

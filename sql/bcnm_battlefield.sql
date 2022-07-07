@@ -1229,17 +1229,17 @@ INSERT INTO `bcnm_battlefield` VALUES (992,3,16908307,3);
 INSERT INTO `bcnm_battlefield` VALUES (992,3,16908308,2);
 INSERT INTO `bcnm_battlefield` VALUES (992,3,16908309,2);
 INSERT INTO `bcnm_battlefield` VALUES (993,1,16908310,3); -- warriors_path
-INSERT INTO `bcnm_battlefield` VALUES (993,1,16908311,0);
-INSERT INTO `bcnm_battlefield` VALUES (993,1,16908312,0);
-INSERT INTO `bcnm_battlefield` VALUES (993,1,16908313,0);
+INSERT INTO `bcnm_battlefield` VALUES (993,1,16908311,3);
+INSERT INTO `bcnm_battlefield` VALUES (993,1,16908312,3);
+INSERT INTO `bcnm_battlefield` VALUES (993,1,16908313,3);
 INSERT INTO `bcnm_battlefield` VALUES (993,2,16908314,3);
-INSERT INTO `bcnm_battlefield` VALUES (993,2,16908315,0);
-INSERT INTO `bcnm_battlefield` VALUES (993,2,16908316,0);
-INSERT INTO `bcnm_battlefield` VALUES (993,2,16908317,0);
+INSERT INTO `bcnm_battlefield` VALUES (993,2,16908315,3);
+INSERT INTO `bcnm_battlefield` VALUES (993,2,16908316,3);
+INSERT INTO `bcnm_battlefield` VALUES (993,2,16908317,3);
 INSERT INTO `bcnm_battlefield` VALUES (993,3,16908318,3);
-INSERT INTO `bcnm_battlefield` VALUES (993,3,16908319,0);
-INSERT INTO `bcnm_battlefield` VALUES (993,3,16908320,0);
-INSERT INTO `bcnm_battlefield` VALUES (993,3,16908321,0);
+INSERT INTO `bcnm_battlefield` VALUES (993,3,16908319,3);
+INSERT INTO `bcnm_battlefield` VALUES (993,3,16908320,3);
+INSERT INTO `bcnm_battlefield` VALUES (993,3,16908321,3);
 INSERT INTO `bcnm_battlefield` VALUES (1024,1,16921011,3); -- when_angels_fall
 INSERT INTO `bcnm_battlefield` VALUES (1024,1,16921012,3);
 INSERT INTO `bcnm_battlefield` VALUES (1024,1,16921013,3);

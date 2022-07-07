@@ -26777,6 +26777,10 @@ INSERT INTO `mob_droplist` VALUES (3224,0,0,1000,2815,@COMMON);  -- Aptant Of Ar
 -- ZoneID: 125 - Picolaton
 INSERT INTO `mob_droplist` VALUES (3225,0,0,1000,11343,@COMMON); -- Thrakon Breastplate (Common, 15%)
 
+-- Garrison Drops
+INSERT INTO `mob_droplist` VALUES (3226,0,0,1000,1604,@UNCOMMON); -- (Garrison) Mannequin Legs
+INSERT INTO `mob_droplist` VALUES (3226,0,0,1000,1605,@UNCOMMON); -- (Garrison) Mannequin Feet
+
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

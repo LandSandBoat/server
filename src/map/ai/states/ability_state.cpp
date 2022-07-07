@@ -59,7 +59,7 @@ CAbilityState::CAbilityState(CBattleEntity* PEntity, uint16 targid, uint16 abili
         auto& list             = action.getNewActionList();
         list.ActionTargetID    = PTarget->id;
         auto& actionTarget     = list.getNewActionTarget();
-        actionTarget.reaction  = (REACTION)24;
+        actionTarget.reaction  = REACTION::HIT | REACTION::ABILITY; // TODO: not all abilities are HIT + Ability (provoke/chi blast has been observed as only REACTION:ABILITY)
         actionTarget.animation = 121;
         actionTarget.messageID = 326;
         actionTarget.param     = PAbility->getID();

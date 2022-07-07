@@ -133,10 +133,10 @@ CZone::CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID)
     m_zoneEntities       = new CZoneEntities(this);
     m_CampaignHandler    = new CCampaignHandler(this);
 
-    m_ZoneDirection      = 0;
-    m_ZoneAnimation      = 0;
-    m_ZoneAnimStartTime  = 0;
-    m_ZoneAnimLength     = 0;
+    m_ZoneDirection     = 0;
+    m_ZoneAnimation     = 0;
+    m_ZoneAnimStartTime = 0;
+    m_ZoneAnimLength    = 0;
 
     // settings should load first
     LoadZoneSettings();

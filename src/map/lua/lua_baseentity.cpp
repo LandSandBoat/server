@@ -4798,7 +4798,7 @@ void CLuaBaseEntity::setAnimationSub(uint8 animationsub)
 void CLuaBaseEntity::setAnimationPath(uint8 animPath)
 {
     m_PBaseEntity->manualConfig = true;
-    m_PBaseEntity->animPath = animPath;
+    m_PBaseEntity->animPath     = animPath;
 }
 
 /************************************************************************
@@ -14850,10 +14850,10 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getPlayerRegionInZone", CLuaBaseEntity::getPlayerRegionInZone);
     SOL_REGISTER("updateToEntireZone", CLuaBaseEntity::updateToEntireZone);
 
-    SOL_REGISTER("setAnimationPath",CLuaBaseEntity::setAnimationPath);
-    SOL_REGISTER("setAnimationStart",CLuaBaseEntity::setAnimationStart);
-    SOL_REGISTER("setAnimationBegin",CLuaBaseEntity::setAnimationBegin);
-    SOL_REGISTER("sendUpdateToZoneCharsInRange",CLuaBaseEntity::sendUpdateToZoneCharsInRange);
+    SOL_REGISTER("setAnimationPath", CLuaBaseEntity::setAnimationPath);
+    SOL_REGISTER("setAnimationStart", CLuaBaseEntity::setAnimationStart);
+    SOL_REGISTER("setAnimationBegin", CLuaBaseEntity::setAnimationBegin);
+    SOL_REGISTER("sendUpdateToZoneCharsInRange", CLuaBaseEntity::sendUpdateToZoneCharsInRange);
 
     // Abyssea
     SOL_REGISTER("getAvailableTraverserStones", CLuaBaseEntity::getAvailableTraverserStones);

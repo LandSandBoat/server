@@ -585,7 +585,8 @@ xi.job_utils.rune_fencer.useSwipeLunge = function(player, target, ability, actio
 
             -- Handle Magic Absorb
             if damage < 0 then
-                damage = target:addHP(-damage)
+                local totalHealedHP = target:addHP(math.abs(damage)) -- Heal target, get total HP healed (addHP accounts for re-capping to get the actual value healed)
+                damage = -totalHealedHP                              -- Keep track of damage to determine later if we need to use heal or damage message
             else
                 -- We dealt damage. Check if we are going to kill it, and if we can kill it with less rune strength if rune strength > 1.
                 if numHits > 1 and runesUsed ~= numHits and target:getHP()-damage <= 0 and runeStrength > 1 then -- try less duplicate rune count if not on final duplicate rune
@@ -625,20 +626,24 @@ xi.job_utils.rune_fencer.useSwipeLunge = function(player, target, ability, actio
 
     if shadowsHit == numHits and cumulativeDamage == 0 then
         action:messageID(target:getID(), xi.msg.basic.SHADOW_ABSORB) -- set message to blinked hit(s)
+        action:reaction(target:getID(), xi.reaction.EVADE + xi.reaction.ABILITY) -- TODO: confirm these bit flags for reaction
+
         return shadowsHit
     end
 
     action:setAnimation(target:getID(), getAnimationEffusion(weaponSkillType, 0)) -- set animation for currently equipped weapon
 
-    if cumulativeDamage < 0 or cumulativeDamage == 0 and absorbed then -- TODO: figre out how to set "unknown" bit in message 102
-                                                                       -- "unknown" = 4 on message 102 for healed MB
+    action:reaction(target:getID(), xi.reaction.HIT + xi.reaction.ABILITY)
+
+    if cumulativeDamage < 0 or (cumulativeDamage == 0 and absorbed) then
         action:messageID(target:getID(), xi.msg.basic.JA_RECOVERS_HP)
     end
 
-    if magicBursted then -- TODO: set MB message somehow by setting "unknown" = 4 on message 110 for MB
+    if magicBursted then -- Note: the vanilla client does not report a healed magic burst, but this bit is set.
+        action:modifier(target:getID(), xi.actionModifier.MAGIC_BURST)
     end
 
-    return cumulativeDamage
+    return math.abs(cumulativeDamage)
 end
 
 -- see http://wiki.ffo.jp/html/1720.html, the effects resisted are against the strong element.

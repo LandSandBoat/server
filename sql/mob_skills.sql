@@ -44,7 +44,7 @@ INSERT INTO `mob_skills` VALUES (25,40,'evisceration',0,7.0,2000,0,4,0,0,0,9,1,0
 INSERT INTO `mob_skills` VALUES (30,45,'aeolian_edge',0,7.0,2000,0,4,0,0,0,9,0,0);
 INSERT INTO `mob_skills` VALUES (32,1,'fast_blade',0,7.0,2000,0,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (33,2,'burning_blade',0,7.0,2000,0,4,0,0,0,3,0,0);
-INSERT INTO `mob_skills` VALUES (34,3,'red_lotus_blade',0,7.0,2000,0,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (34,3,'red_lotus_blade',0,7.0,2000,0,4,0,0,0,3,6,0);
 INSERT INTO `mob_skills` VALUES (35,6,'flat_blade',0,7.0,2000,0,4,0,0,0,8,0,0);
 INSERT INTO `mob_skills` VALUES (36,4,'shining_blade',0,7.0,2000,0,4,0,0,0,4,0,0);
 INSERT INTO `mob_skills` VALUES (37,5,'seraph_blade',0,7.0,2000,0,4,0,0,0,4,0,0);
@@ -57,6 +57,7 @@ INSERT INTO `mob_skills` VALUES (91,102,'fell_cleave',0,7.0,2000,0,4,0,0,0,9,0,0
 INSERT INTO `mob_skills` VALUES (101,66,'vorpal_scythe',0,7.0,2000,0,4,0,0,0,1,4,0);
 INSERT INTO `mob_skills` VALUES (102,67,'guillotine',0,7.0,2000,0,4,0,0,0,7,0,0);
 INSERT INTO `mob_skills` VALUES (104,69,'spiral_hell',0,7.0,2000,0,4,0,0,0,10,4,0);
+INSERT INTO `mob_skills` VALUES (114,123,'raiden_thrust',0,7.0,2000,0,4,0,0,0,1,8,0);
 INSERT INTO `mob_skills` VALUES (116,125,'penta_thrust',0,7.0,2000,0,4,0,0,0,2,0,0);
 INSERT INTO `mob_skills` VALUES (118,127,'skewer',0,7.0,2000,0,4,0,0,0,1,8,0);
 INSERT INTO `mob_skills` VALUES (119,128,'wheeling_thrust',0,7.0,2000,0,4,0,0,0,11,0,0);
@@ -1218,16 +1219,16 @@ INSERT INTO `mob_skills` VALUES (1386,1021,'medusa_javelin',0,7.0,2000,1000,4,0,
 INSERT INTO `mob_skills` VALUES (1387,1017,'sideswipe',0,7.0,2000,2000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1388,1015,'ranged_attack',0,25.0,2000,0,4,4,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1389,1016,'eagle_eye_shot',0,25.0,2000,0,4,2,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1390,1037,'amatsu_torimai',0,15.0,2000,1500,4,0,0,0,1,4,0);
-INSERT INTO `mob_skills` VALUES (1391,1038,'amatsu_kazakiri',0,15.0,2000,1500,4,0,0,0,4,6,0);
-INSERT INTO `mob_skills` VALUES (1392,1039,'amatsu_yukiarashi',0,15.0,2000,1500,4,0,0,0,7,6,0);
-INSERT INTO `mob_skills` VALUES (1393,1040,'amatsu_tsukioboro',0,15.0,2000,1500,4,0,0,0,10,5,0);
-INSERT INTO `mob_skills` VALUES (1394,1041,'amatsu_hanaikusa',0,15.0,2000,1500,4,0,0,0,11,2,0);
-INSERT INTO `mob_skills` VALUES (1395,1036,'amatsu_tsukikage',0,15.0,2000,1500,4,0,0,0,12,6,0);
--- INSERT INTO `mob_skills` VALUES (1396,1140,'.',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1397,1042,'oisoya',0,15.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1390,1037,'amatsu_torimai',0,15.0,2000,1000,4,0,0,0,1,4,0);
+INSERT INTO `mob_skills` VALUES (1391,1038,'amatsu_kazakiri',0,15.0,2000,1000,4,0,0,0,4,6,0);
+INSERT INTO `mob_skills` VALUES (1392,1039,'amatsu_yukiarashi',0,15.0,2000,1000,4,0,0,0,7,6,0);
+INSERT INTO `mob_skills` VALUES (1393,1040,'amatsu_tsukioboro',0,15.0,2000,1000,4,0,0,0,10,5,0);
+INSERT INTO `mob_skills` VALUES (1394,1041,'amatsu_hanaikusa',0,15.0,2000,1000,4,0,0,0,11,2,0);
+INSERT INTO `mob_skills` VALUES (1395,1036,'amatsu_tsukikage',0,15.0,2000,1000,4,0,0,0,12,6,0);
+INSERT INTO `mob_skills` VALUES (1396,1034,'tenzen_ranged_alt',0,25,2000,0,4,4,0,0,0,0,0); -- tenzen ranged attack
+INSERT INTO `mob_skills` VALUES (1397,1042,'oisoya',0,15.0,2000,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1398,1032,'riceball',0,15.0,2000,1500,1,0,0,0,0,0,0); -- riceball eating
-INSERT INTO `mob_skills` VALUES (1399,1035,'cosmic_elucidation',0,15.0,2000,1500,4,0,0,0,0,0,0); -- cosmic elucidation
+INSERT INTO `mob_skills` VALUES (1399,1035,'cosmic_elucidation',0,15.0,2000,1000,4,0,0,0,0,0,0); -- cosmic elucidation
 -- INSERT INTO `mob_skills` VALUES (1400,1144,'.',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1401,1145,'soul_accretion',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1402,1146,'.',0,7.0,2000,1500,4,0,0,0,0,0,0);

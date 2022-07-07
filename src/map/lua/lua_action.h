@@ -51,6 +51,7 @@ public:
     void   setAnimation(uint32 actionTargetID, uint16 animation);
     void   speceffect(uint32 actionTargetID, uint8 speceffect);
     void   reaction(uint32 actionTargetID, uint8 reaction);
+    void   modifier(uint32 actionTargetID, uint8 modifier);
     void   additionalEffect(uint32 actionTargetID, uint16 additionalEffect);
     void   addEffectParam(uint32 actionTargetID, int32 addEffectParam);
     void   addEffectMessage(uint32 actionTargetID, uint16 addEffectMessage);

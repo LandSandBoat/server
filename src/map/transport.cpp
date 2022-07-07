@@ -163,7 +163,7 @@ void CTransportHandler::InitializeTransport()
             zoneTown.ship.timeDepartDock  = zoneTown.ship.timeArriveDock + (uint16)sql->GetIntData(13);
             zoneTown.ship.timeVoyageStart = zoneTown.ship.timeDepartDock + (uint16)sql->GetIntData(15) - 1;
 
-            zoneTown.ship.npc->animPath   = (uint8)sql->GetIntData(16);
+            zoneTown.ship.npc->animPath = (uint8)sql->GetIntData(16);
 
             zoneTown.ship.origin.p = zoneTown.ship.npc->loc.p;
             zoneTown.ship.state    = STATE_TRANSPORT_INIT;
@@ -249,7 +249,7 @@ void CTransportHandler::TransportTimer()
         {
             if (shipTimerOffset < townZone->ship.timeArriveDock)
             {
-                townZone->ship.state = STATE_TRANSPORT_ARRIVING;
+                townZone->ship.state          = STATE_TRANSPORT_ARRIVING;
                 townZone->ship.npc->animBegin = vanaTime;
                 townZone->ship.npc->animStart = true;
                 townZone->ship.animateSetup(townZone->ship.animationArrive, CVanaTime::getInstance()->getVanaTime());
@@ -285,7 +285,7 @@ void CTransportHandler::TransportTimer()
         {
             if (shipTimerOffset >= townZone->ship.timeVoyageStart)
             {
-                townZone->ship.state = STATE_TRANSPORT_AWAY;
+                townZone->ship.state    = STATE_TRANSPORT_AWAY;
                 townZone->ship.npc->loc = townZone->ship.origin;
                 townZone->ship.setVisible(false);
 
@@ -300,8 +300,8 @@ void CTransportHandler::TransportTimer()
             }
             else if (shipTimerOffset >= townZone->ship.timeDepartDock)
             {
-                uint32 departTime    = shipTimerOffset - townZone->ship.timeDepartDock;
-                townZone->ship.state = STATE_TRANSPORT_DEPARTING;
+                uint32 departTime             = shipTimerOffset - townZone->ship.timeDepartDock;
+                townZone->ship.state          = STATE_TRANSPORT_DEPARTING;
                 townZone->ship.npc->animBegin = vanaTime;
                 townZone->ship.npc->animStart = true;
                 townZone->ship.spawn();
@@ -339,9 +339,8 @@ void CTransportHandler::TransportTimer()
 
         if (zoneIterator->state == STATE_TRANSPORTZONE_VOYAGE)
         {
-
-            int zoneOffset = 5;
-            ZONEID zoneId = zoneIterator->voyageZone->GetID();
+            int    zoneOffset = 5;
+            ZONEID zoneId     = zoneIterator->voyageZone->GetID();
 
             if (zoneId == ZONE_BASTOK_JEUNO_AIRSHIP ||
                 zoneId == ZONE_WINDURST_JEUNO_AIRSHIP ||

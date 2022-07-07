@@ -9,9 +9,15 @@ require("scripts/globals/mobskills")
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)
-    return 0
+    if
+        mob:getObjType() == xi.objType.TRUST or
+        mob:getAnimationSub() == 0
+    then
+        return 0
+    else
+        return 1
+    end
 end
-
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.SILENCE
     local power = 1
