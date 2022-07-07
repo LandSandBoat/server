@@ -1518,6 +1518,32 @@ uint8 CLuaBaseEntity::getCurrentAction()
 }
 
 /************************************************************************
+ *  Function: canUseAbilities()
+ *  Purpose : Sees if a mob has perticular effects that stop it from doing thing
+ *  Example : mob:canUseAbilities()
+ *  Notes   : Can't use on NPCs
+ ************************************************************************/
+
+bool CLuaBaseEntity::canUseAbilities()
+{
+    if (auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity))
+    {
+        return !(PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_SLEEP) ||
+                PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_IMPAIRMENT) ||
+                PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_SLEEP_II) ||
+                PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_STUN) ||
+                PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_AMNESIA) ||
+                PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_LULLABY) ||
+                PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_PETRIFICATION) ||
+                PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_TERROR) ||
+                !(m_PBaseEntity->PAI->CanChangeState()));
+    }
+
+    ShowError("canUseAbilities() : Wrong Entity Type");
+    return false;
+}
+
+/************************************************************************
  *  Function: lookAt()
  *  Purpose : Forces an entity to 'look' at something like it's self-aware
  *  Example : npc:lookAt(player:getPos()) -- Make an NPC look at the PC
@@ -14123,6 +14149,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getStatus", CLuaBaseEntity::getStatus);
     SOL_REGISTER("setStatus", CLuaBaseEntity::setStatus);
     SOL_REGISTER("getCurrentAction", CLuaBaseEntity::getCurrentAction);
+    SOL_REGISTER("canUseAbilities", CLuaBaseEntity::canUseAbilities);
 
     SOL_REGISTER("lookAt", CLuaBaseEntity::lookAt);
     SOL_REGISTER("clearTargID", CLuaBaseEntity::clearTargID);
