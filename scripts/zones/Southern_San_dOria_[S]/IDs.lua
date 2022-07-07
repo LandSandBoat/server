@@ -45,6 +45,7 @@ zones[xi.zone.SOUTHERN_SAN_DORIA_S] =
         NOW_ALLIED_WITH         = 12149, -- You are now a member of the [/Knights of the Iron Ram/Republican Legion's Fourth Division/Cobra Unit]!
         ALLIED_SIGIL            = 12924, -- You have received the Allied Sigil!
         DOOR_IS_FIRMLY_LOCKED   = 13550, -- The door is firmly locked...
+        CONCERNED_FOR_WOUNDED   = 13679, -- Concerned for the wounded Sir Gaelise, Lilisette and Portia have been paying him regular visits as of late.  Alexei Mayakov suggests that the Chateau d'Oraguille is where the two of them are likely to be.
         RETRIEVE_DIALOG_ID      = 15587, -- You retrieve <item> from the porter moogle's care.
         COMMON_SENSE_SURVIVAL   = 15661, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
