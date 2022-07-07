@@ -40,7 +40,9 @@ namespace settings
     bool isNumber(const std::string stringValue) 
     {
         for (char const c : stringValue) {
-            if(std::isdigit(c) == 0) return false;
+            if(std::isdigit(c) == 0) { 
+                return false;
+            }
         }
 
         return true;
