@@ -721,12 +721,7 @@ namespace gambits
             }
             case G_CONDITION::IS_ECOSYSTEM:
             {
-                bool isEcosystem = false;
-                if (trigger_target->m_EcoSystem == ECOSYSTEM(predicate.condition_arg))
-                {
-                    isEcosystem = true;
-                }
-                return isEcosystem;
+                return trigger_target->m_EcoSystem == ECOSYSTEM(predicate.condition_arg);
                 break;
             }
             case G_CONDITION::RANDOM:
