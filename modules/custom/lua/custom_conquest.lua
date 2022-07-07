@@ -7,7 +7,8 @@ require("scripts/globals/teleports")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
-require("scripts/settings/main")
+require("scripts/globals/settings")
+require("scripts/globals/garrison")
 require("scripts/globals/status")
 require("scripts/globals/zone")
 -----------------------------------
@@ -975,9 +976,13 @@ end
 
 m:addOverride("xi.conquest.overseerOnTrigger", function(player, npc, guardNation, guardType, guardEvent, guardRegion)
     local pNation = player:getNation()
-
+    local zoneId = npc:getZoneID()
+    local status = player:getCharVar(string.format("[GARRISON]Status_%s", zoneId))
+    -- GARRISON
+    if status > 0 then
+        xi.garrison.onTrigger(player, npc)
     -- SUPPLY RUNS
-    if areSuppliesRotten(player, npc, guardType) then
+    elseif areSuppliesRotten(player, npc, guardType) then
         -- do nothing else
     elseif guardType >= xi.conquest.guard.OUTPOST and canDeliverSupplies(player, guardNation, guardEvent, guardRegion) then
         -- do nothing else
