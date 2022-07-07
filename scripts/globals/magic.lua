@@ -564,9 +564,14 @@ function getMagicHitRate(caster, target, skillType, element, effectRes, bonusAcc
         end
     else -- If a bard song
         if target:isPC() then
-            local secondarySkill = caster:getEquippedItem(xi.slot.RANGED):getSkillType()
+            local secondarySkill = 0
             local gearBonus = caster:getMod(xi.mod.MACC) + caster:getILvlMacc()
-            if secondarySkill == 41 or secondarySkill == 42 then
+
+            if caster:getEquippedItem(xi.slot.RANGED) ~= nil then
+                secondarySkill = caster:getEquippedItem(xi.slot.RANGED):getSkillType()
+            end
+
+            if secondarySkill == xi.skill.WIND_INSTRUMENT or secondarySkill == xi.skill.STRING_INSTRUMENT then
                 magicacc = caster:getSkillLevel(skillType) + (secondarySkill / 3) + gearBonus + dStatAcc
             else
                 magicacc = caster:getSkillLevel(skillType) + gearBonus + dStatAcc
