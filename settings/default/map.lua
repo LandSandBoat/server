@@ -55,13 +55,13 @@ xi.settings.map =
     VANADIEL_TIME_EPOCH = 0,
 
     -- For old fame calculation use .25
-    FAME_MULTIPLIER = 1.00,
+    FAME_MULTIPLIER = 0.25,
 
     -- Percentage of experience normally lost to keep upon death. 0 means full loss, where 1 means no loss.
     EXP_RETAIN = 0,
 
     -- Minimum level at which experience points can be lost
-    EXP_LOSS_LEVEL = 31,
+    EXP_LOSS_LEVEL = 4,
 
     -- Enable/disable Level Sync
     LEVEL_SYNC_ENABLE = true,
@@ -104,10 +104,10 @@ xi.settings.map =
     GARDEN_MH_AURA_MATTERS   = false,
 
     -- Use current retail skill up rates and margins (Retail = High Skill-Up rate; Skill-Up when at or under 10 levels above synth recipe level.)
-    CRAFT_MODERN_SYSTEM = true,
+    CRAFT_MODERN_SYSTEM = false,
 
     -- Craft level limit from witch specialization points beging to count. (Retail = 700; Level 75 era:600)
-    CRAFT_COMMON_CAP = 700,
+    CRAFT_COMMON_CAP = 600,
 
     -- Amount of points allowed in crafts over the level defined above. Points are shared across all crafting skills. (Retail = 400; All skills can go to max = 3200)
     CRAFT_SPECIALIZATION_POINTS = 400,
@@ -178,24 +178,24 @@ xi.settings.map =
     MAX_GIL_BONUS = 9999,
 
     --  Allow mobs to walk back home instead of despawning
-    MOB_NO_DESPAWN = false,
+    MOB_NO_DESPAWN = true,
 
     -- Allows parry, block, and guard to skill up regardless of the action occuring.
     -- This did not happen in previous eras
-    PARRY_OLD_SKILLUP_STYLE = false,
-    BLOCK_OLD_SKILLUP_STYLE = false,
-    GUARD_OLD_SKILLUP_STYLE = false,
+    PARRY_OLD_SKILLUP_STYLE = true,
+    BLOCK_OLD_SKILLUP_STYLE = true,
+    GUARD_OLD_SKILLUP_STYLE = true,
 
     -- Globally adjusts ALL battlefield level caps by this many levels.
     BATTLE_CAP_TWEAK = 0,
 
     -- Enable/disable level cap of mission battlefields stored in database.
-    LV_CAP_MISSION_BCNM = 0,
+    LV_CAP_MISSION_BCNM = 1,
 
     -- Max allowed merits points players can hold
     --  10 classic
     --  30 abyssea
-    MAX_MERIT_POINTS = 30,
+    MAX_MERIT_POINTS = 10,
 
     -- Minimum time between uses of yell command (in seconds).
     YELL_COOLDOWN = 30,
