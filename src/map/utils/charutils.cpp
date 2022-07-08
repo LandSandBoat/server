@@ -4284,25 +4284,24 @@ namespace charutils
                         {
                             exp *= 0.7f;
                         }
-
-                        if (distance(PMember->loc.p, PMob->loc.p) > 100)
-                        {
-                            PMember->pushPacket(new CMessageBasicPacket(PMember, PMember, 0, 0, 37));
-                            return;
-                        }
                     }
 
-                    exp = charutils::AddExpBonus(PMember, exp);
+                    if (distanceSquared(PMember->loc.p, PMob->loc.p) > 100 * 100)
+                    {
+                        PMember->pushPacket(new CMessageBasicPacket(PMember, PMember, 0, 0, 37));
+                        return;
+                    }
 
                     if (PMob->m_ExpPenalty > lua["xi"]["settings"]["main"]["PL_PENALTY"].get<uint16>() * 3)
                     {
                         exp = std::max<float>(0.0, exp - PMob->m_ExpPenalty - (lua["xi"]["settings"]["main"]["PL_PENALTY"].get<uint16>() * 3));
-
                         if (exp == 0.0f)
                         {
                             PMember->pushPacket(new CMessageBasicPacket(PMember, PMember, 0, 0, 21)); // No Experience Gained Message
                         }
                     }
+
+                    exp = charutils::AddExpBonus(PMember, exp);
 
                     charutils::AddExperiencePoints(false, PMember, PMob, (uint32)exp, mobCheck, chainactive);
                 }
