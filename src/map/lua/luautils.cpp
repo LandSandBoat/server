@@ -4786,7 +4786,6 @@ namespace luautils
             id = 0xFFFF - sql->NumRows() + 1;
         }
 
-
         return id;
     }
 }; // namespace luautils
