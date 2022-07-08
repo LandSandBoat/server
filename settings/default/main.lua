@@ -57,6 +57,9 @@ xi.settings.main =
     CAP_CURRENCY_SPARKS    = 99999,
     CAP_CURRENCY_VALOR     = 50000,
 
+    -- PL EXP Nerf
+    PL_PENALTY = 0,
+
     -- Magian Trials
     ENABLE_MAGIAN_TRIALS             = 1,
     MAGIAN_TRIALS_MOBKILL_MULTIPLIER = 1,
