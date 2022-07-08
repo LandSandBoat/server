@@ -1933,6 +1933,11 @@ namespace battleutils
         else
         {
             damageType = weapon ? weapon->getDmgType() : DAMAGE_TYPE::NONE;
+            
+            if ((PAttacker->objtype == TYPE_PET || (PAttacker->objtype == TYPE_MOB && PAttacker->isCharmed)) && PAttacker->PMaster->objtype == TYPE_PC)
+            {
+                damageType = PAttacker->m_dmgType == DAMAGE_TYPE::NONE ? DAMAGE_TYPE::IMPACT : PAttacker->m_dmgType;
+            }
 
             if (isRanged)
             {

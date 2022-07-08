@@ -286,14 +286,14 @@ namespace petutils
                 Pet->hth_sdt    = (uint16)(sql->GetFloatData(30) * 1000);
                 Pet->impact_sdt = (uint16)(sql->GetFloatData(31) * 1000);
 
-                Pet->fire_sdt    = (int16)sql->GetFloatData(32); // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
-                Pet->ice_sdt     = (int16)sql->GetFloatData(33); // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
-                Pet->wind_sdt    = (int16)sql->GetFloatData(34); // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
-                Pet->earth_sdt   = (int16)sql->GetFloatData(35); // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
-                Pet->thunder_sdt = (int16)sql->GetFloatData(36); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
-                Pet->water_sdt   = (int16)sql->GetFloatData(37); // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
-                Pet->light_sdt   = (int16)sql->GetFloatData(38); // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
-                Pet->dark_sdt    = (int16)sql->GetFloatData(39); // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->fire_sdt    = (int16)sql->GetIntData(32); // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->ice_sdt     = (int16)sql->GetIntData(33); // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->wind_sdt    = (int16)sql->GetIntData(34); // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->earth_sdt   = (int16)sql->GetIntData(35); // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->thunder_sdt = (int16)sql->GetIntData(36); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->water_sdt   = (int16)sql->GetIntData(37); // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->light_sdt   = (int16)sql->GetIntData(38); // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->dark_sdt    = (int16)sql->GetIntData(39); // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
 
                 // resistances
                 Pet->fire_meva    = (int16)sql->GetIntData(40);
@@ -542,6 +542,9 @@ namespace petutils
         PMob->stats.INT = (uint16)((fINT + mINT) * 0.9f);
         PMob->stats.MND = (uint16)((fMND + mMND) * 0.9f);
         PMob->stats.CHR = (uint16)((fCHR + mCHR) * 0.9f);
+        
+        // Set jugs damageType to impact (blunt) damage. All jugs at level 75 cap do impact (blunt) damage. https://ffxiclopedia.fandom.com/wiki/Category:Familiars
+        PMob->m_dmgType = DAMAGE_TYPE::IMPACT;
     }
 
     void LoadAutomatonStats(CCharEntity* PMaster, CPetEntity* PPet, Pet_t* petStats)
@@ -707,19 +710,23 @@ namespace petutils
             default: // case FRAME_HARLEQUIN:
                 PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(2, PPet->GetMLevel());
                 PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(10, PPet->GetMLevel()));
+                PPet->m_dmgType = DAMAGE_TYPE::IMPACT;
                 break;
             case FRAME_VALOREDGE:
                 PPet->m_Weapons[SLOT_SUB]->setShieldSize(3);
                 PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(5, PPet->GetMLevel());
                 PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(5, PPet->GetMLevel()));
+                PPet->m_dmgType = DAMAGE_TYPE::SLASHING;
                 break;
             case FRAME_SHARPSHOT:
                 PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(1, PPet->GetMLevel());
                 PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(11, PPet->GetMLevel()));
+                PPet->m_dmgType = DAMAGE_TYPE::PIERCING;
                 break;
             case FRAME_STORMWAKER:
                 PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(10, PPet->GetMLevel());
                 PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(12, PPet->GetMLevel()));
+                PPet->m_dmgType = DAMAGE_TYPE::IMPACT;
                 break;
         }
 
@@ -879,6 +886,12 @@ namespace petutils
             PPet->addModifier(Mod::MACC, PMaster->getMod(Mod::PET_MACC_MEVA));
             PPet->addModifier(Mod::MEVA, PMaster->getMod(Mod::PET_MACC_MEVA));
         }
+        
+        // Set damageType for Avatars
+        if (PPet->m_PetID == PETID_CAIT_SITH || PPet->m_PetID == PETID_FENRIR)
+            PPet->m_dmgType = DAMAGE_TYPE::SLASHING;
+        else
+            PPet->m_dmgType = DAMAGE_TYPE::IMPACT;
     }
 
     /************************************************************************
@@ -1731,6 +1744,9 @@ namespace petutils
         // Set D evasion and def
         PPet->setModifier(Mod::EVA, battleutils::GetMaxSkill(SKILL_HAND_TO_HAND, JOB_WAR, PPet->GetMLevel()));
         PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(SKILL_HAND_TO_HAND, JOB_WAR, PPet->GetMLevel()));
+        
+        // Set wyvern damageType to slashing damage. "Wyverns do slashing damage..." https://www.bg-wiki.com/ffxi/Wyvern_(Dragoon_Pet)
+        PPet->m_dmgType = DAMAGE_TYPE::SLASHING;
 
         // Job Point: Wyvern Max HP
         if (PMaster->objtype == TYPE_PC)

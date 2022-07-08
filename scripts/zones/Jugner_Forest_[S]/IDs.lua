@@ -29,6 +29,7 @@ zones[xi.zone.JUGNER_FOREST_S] =
         IDEAL_PLACE_TO_PLANT_ITEM = 8529, -- This seems to be an ideal place to plant <item>.
         YOU_PLANT_ITEM            = 8530, -- You plant <item>.
         ITEM_IS_PLANTED_HERE      = 8531, -- <item> has been planted here...
+        NO_RESPONSE               = 8535, -- There is no response...
         VOIDWALKER_DESPAWN        = 8558, -- The monster fades before your eyes, a look of disappointment on its face.
         VOIDWALKER_NO_MOB         = 8605, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
         VOIDWALKER_MOB_TOO_FAR    = 8606, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
