@@ -713,6 +713,10 @@ namespace charutils
         if (zoning == 2)
         {
             ShowDebug("Player <%s> logging in to zone <%u>", PChar->name.c_str(), PChar->getZone());
+
+            // Set this value so we can not process some effects until the player is fully in-game.
+            // This is cleared in the player global, onGameIn function.
+            PChar->SetLocalVar("gameLogin", 1);
         }
 
         PChar->SetMLevel(PChar->jobs.job[PChar->GetMJob()]);
@@ -957,13 +961,13 @@ namespace charutils
                         {
                             static_cast<CItemLinkshell*>(PItem)->SetLSType((LSTYPE)(PItem->getID() - 0x200));
                         }
-                        int8 EncodedString[16];
+                        int8 EncodedString[LinkshellStringLength];
                         EncodeStringLinkshell(sql->GetData(5), EncodedString);
                         PItem->setSignature(EncodedString);
                     }
                     else if (PItem->getFlag() & (ITEM_FLAG_INSCRIBABLE))
                     {
-                        int8 EncodedString[13];
+                        int8 EncodedString[SignatureStringLength];
                         EncodeStringSignature(sql->GetData(5), EncodedString);
                         PItem->setSignature(EncodedString);
                     }

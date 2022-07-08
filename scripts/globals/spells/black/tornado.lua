@@ -12,7 +12,7 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    handleNinjutsuDebuff(caster, target, spell, 30, 10, xi.mod.ICE_RES)
+    handleNinjutsuDebuff(caster, target, spell, 30, 10, xi.mod.ICE_MEVA)
 
     return xi.spells.damage.useDamageSpell(caster, target, spell)
 end

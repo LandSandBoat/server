@@ -5,6 +5,7 @@
 -----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/msg")
+require("scripts/globals/item_utils")
 -----------------------------------
 local item_object = {}
 
@@ -32,25 +33,9 @@ item_object.onItemUse = function(target)
     }
 
     local count = math.random(1, 2)
-    local statusEffectTable = utils.shuffle(effects)
+    local random = 1
 
-    local function removeStatus()
-        for _, effect in ipairs(statusEffectTable) do
-            if pet:delStatusEffect(effect) then return true end
-        end
-        if pet:eraseStatusEffect() ~= 255 then return true end
-        return false
-    end
-
-    local removed = 0
-
-    for i = 0, count do
-        if not removeStatus() then break end
-        removed = removed + 1
-        if removed >= count then break end
-    end
-
-    return removed
+    xi.item_utils.removeMultipleEffects(pet, effects, count, random)
 end
 
 return item_object

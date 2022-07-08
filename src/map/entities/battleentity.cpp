@@ -1715,7 +1715,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
             else if (attack.IsParried())
             {
                 actionTarget.messageID  = 70;
-                actionTarget.reaction   = REACTION::PARRY;
+                actionTarget.reaction   = REACTION::PARRY | REACTION::HIT;
                 actionTarget.speceffect = SPECEFFECT::NONE;
                 battleutils::HandleTacticalParry(PTarget);
                 battleutils::HandleIssekiganEnmityBonus(PTarget, this);
@@ -1790,10 +1790,11 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                 // Set this attack's critical flag.
                 attack.SetCritical(xirand::GetRandomNumber(100) < battleutils::GetCritHitRate(this, PTarget, !attack.IsFirstSwing()));
 
+                actionTarget.reaction   = REACTION::HIT;
+
                 // Critical hit.
                 if (attack.IsCritical())
                 {
-                    actionTarget.reaction   = REACTION::HIT;
                     actionTarget.speceffect = SPECEFFECT::CRITICAL_HIT;
                     actionTarget.messageID  = attack.GetAttackType() == PHYSICAL_ATTACK_TYPE::DAKEN ? 353 : 67;
 
@@ -1809,7 +1810,6 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                 // Not critical hit.
                 else
                 {
-                    actionTarget.reaction   = REACTION::HIT;
                     actionTarget.speceffect = SPECEFFECT::HIT;
                     actionTarget.messageID  = attack.GetAttackType() == PHYSICAL_ATTACK_TYPE::DAKEN ? 352 : 1;
                 }
@@ -1817,7 +1817,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                 // Guarded. TODO: Stuff guards that shouldn't.
                 if (attack.IsGuarded())
                 {
-                    actionTarget.reaction = REACTION::GUARD;
+                    actionTarget.reaction |= REACTION::GUARDED;
                     battleutils::HandleTacticalGuard(PTarget);
                 }
 
@@ -1835,7 +1835,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                 // Try shield block
                 if (attack.IsBlocked())
                 {
-                    actionTarget.reaction = REACTION::BLOCK;
+                    actionTarget.reaction |= REACTION::BLOCK;
                 }
 
                 actionTarget.param =
@@ -1891,23 +1891,27 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
             battleutils::HandleAfflatusMiseryAccuracyBonus(this);
         }
 
-        if (actionTarget.reaction != REACTION::HIT && actionTarget.reaction != REACTION::BLOCK && actionTarget.reaction != REACTION::GUARD && actionTarget.messageID != MSGBASIC_SHADOW_ABSORB)
+        // If we didn't hit at all, set param to 0 if we didn't blink any shadows.
+        if ((actionTarget.reaction & REACTION::HIT) == REACTION::NONE && actionTarget.messageID != MSGBASIC_SHADOW_ABSORB)
         {
             actionTarget.param = 0;
         }
 
-        if (actionTarget.reaction != REACTION::EVADE && actionTarget.reaction != REACTION::PARRY && attack.GetAttackType() != PHYSICAL_ATTACK_TYPE::DAKEN)
+        // if we did hit, run enspell/spike routines as long as this isn't a Daken swing
+        if ((actionTarget.reaction & REACTION::MISS) == REACTION::NONE && attack.GetAttackType() != PHYSICAL_ATTACK_TYPE::DAKEN)
         {
             battleutils::HandleEnspell(this, PTarget, &actionTarget, attack.IsFirstSwing(), (CItemWeapon*)this->m_Weapons[attack.GetWeaponSlot()],
                                        attack.GetDamage());
             battleutils::HandleSpikesDamage(this, PTarget, &actionTarget, attack.GetDamage());
         }
 
-        if (actionTarget.reaction == REACTION::PARRY && PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_BATTUTA))
+        // if we parried, run battuta check if applicable
+        if ((actionTarget.reaction & REACTION::PARRY) == REACTION::PARRY && PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_BATTUTA))
         {
             battleutils::HandleParrySpikesDamage(this, PTarget, &actionTarget, attack.GetDamage());
         }
 
+        // set recoil if we hit and dealt non-zero damage
         if (actionTarget.speceffect == SPECEFFECT::HIT && actionTarget.param > 0)
         {
             actionTarget.speceffect = SPECEFFECT::RECOIL;
@@ -1920,7 +1924,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
             uint16 zanshinChance = this->getMod(Mod::ZANSHIN) + battleutils::GetMeritValue(this, MERIT_ZASHIN_ATTACK_RATE);
             zanshinChance        = std::clamp<uint16>(zanshinChance, 0, 100);
             // zanshin may only proc on a missed/guarded/countered swing or as SAM main with hasso up (at 25% of the base zanshin rate)
-            if (((actionTarget.reaction == REACTION::EVADE || actionTarget.reaction == REACTION::GUARD || actionTarget.spikesEffect == SUBEFFECT_COUNTER) &&
+            if ((((actionTarget.reaction & REACTION::MISS) != REACTION::NONE || (actionTarget.reaction & REACTION::GUARDED) != REACTION::NONE || actionTarget.spikesEffect == SUBEFFECT_COUNTER) &&
                  xirand::GetRandomNumber(100) < zanshinChance) ||
                 (GetMJob() == JOB_SAM && this->StatusEffectContainer->HasStatusEffect(EFFECT_HASSO) && xirand::GetRandomNumber(100) < (zanshinChance / 4)))
             {

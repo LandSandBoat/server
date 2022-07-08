@@ -258,7 +258,7 @@ void CBattlefield::ApplyLevelRestrictions(CCharEntity* PChar) const
         // Check if it's a mission and if config setting applies.
         if (!settings::get<bool>("map.LV_CAP_MISSION_BCNM") && m_isMission == 1)
         {
-            cap = luautils::GetSettingsVariable("MAX_LEVEL"); // Cap to server max level to strip buffs - this is the retail diff between uncapped and capped to max lv.
+            cap = settings::get<uint8>("main.MAX_LEVEL"); // Cap to server max level to strip buffs - this is the retail diff between uncapped and capped to max lv.
         }
 
         PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DEATH, true);

@@ -11,6 +11,7 @@ xi.settings = xi.settings or {}
 
 xi.settings.logging =
 {
-    TRACE_NAVMESH = false,
-    TRACE_PACKETS = false,
+    DEBUG_NAVMESH = false,
+    DEBUG_PACKETS = false,
+    DEBUG_ACTIONS = false,
 }

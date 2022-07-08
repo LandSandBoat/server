@@ -9,6 +9,10 @@ require("scripts/globals/titles")
 local battlefield_object = {}
 
 battlefield_object.onBattlefieldTick = function(battlefield, tick)
+    if battlefield:getLocalVar("gameover") - battlefield:getRemainingTime() >= 10 then -- loss condition with enough delay that the full cosmic elucidation animation can go off
+        battlefield:lose()
+        return
+    end
     xi.battlefield.onBattlefieldTick(battlefield, tick)
 end
 

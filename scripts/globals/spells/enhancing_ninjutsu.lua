@@ -27,7 +27,6 @@ local pTable =
     [xi.magic.spell.YAIN_ICHI    ] = { 1, xi.effect.PAX,              15, 300, true  },
 }
 
-
 -- Ninjutsu Potency function.
 xi.spells.enhancing.calculateNinjutsuPower = function(caster, target, spell, spellId, tier, spellEffect)
     local power    = pTable[spellId][3]

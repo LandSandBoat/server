@@ -18,7 +18,6 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 5, 0, 60))
 
-
     return typeEffect
 end
 

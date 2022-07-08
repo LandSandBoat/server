@@ -38,5 +38,4 @@ function onTrigger(player, mount, target)
     end
 
     targ:addStatusEffectEx(xi.effect.MOUNTED, xi.effect.MOUNTED, mount, 0, 0, true)
-	targ:PrintToPlayer("Mount command temporarily enabled while quest is broken. Do not abuse!")
 end

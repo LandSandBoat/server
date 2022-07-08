@@ -31,8 +31,6 @@ entity.onMobEngaged = function(mob, target)
     end
 end
 
-
-
 entity.onMobFight = function(mob, target)
     if mob:hasStatusEffect(xi.effect.MEIKYO_SHISUI) then
         if mob:getLocalVar("order") == 0 then

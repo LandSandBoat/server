@@ -20,7 +20,6 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 1
 end
 
-
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.MAGIC_SHIELD
 

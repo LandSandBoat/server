@@ -6,7 +6,6 @@
 require("scripts/globals/status")
 require("scripts/globals/teleports")
 
-
 cmdprops =
 {
     permission = 1,

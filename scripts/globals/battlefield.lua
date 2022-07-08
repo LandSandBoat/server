@@ -217,7 +217,6 @@ function xi.battlefield.HandleWipe(battlefield, players)
     end
 end
 
-
 function xi.battlefield.onBattlefieldStatusChange(battlefield, players, status)
 end
 

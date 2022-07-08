@@ -25,7 +25,6 @@ function isHalloweenEnabled()
     return option
 end
 
-
 local function halloweenItemsCheck(player)
     local headSlot = player:getEquipID(xi.slot.HEAD)
     local mainHand = player:getEquipID(xi.slot.MAIN)
