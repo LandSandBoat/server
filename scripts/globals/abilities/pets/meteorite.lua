@@ -14,10 +14,15 @@ end
 
 ability_object.onPetAbility = function(target, pet, skill)
     local dint = pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
-    local dmg = 500 + dint*1.5 + skill:getTP()/20
-    target:updateEnmityFromDamage(pet, dmg)
-    target:takeDamage(dmg, pet, xi.attackType.MAGICAL, xi.damageType.LIGHT)
-    return dmg
+    local damage = 500 + dint*1.5 + skill:getTP()/20
+
+    damage = xi.mobskills.mobMagicalMove(pet, target, skill, damage, xi.magic.ele.LIGHT, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 0)
+    damage = xi.mobskills.mobAddBonuses(pet, target, damage.dmg, xi.magic.ele.LIGHT)
+    damage = xi.summon.avatarFinalAdjustments(damage, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.LIGHT, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+
+    target:updateEnmityFromDamage(pet, damage)
+    target:takeDamage(damage, pet, xi.attackType.MAGICAL, xi.damageType.LIGHT)
+    return damage
 end
 
 return ability_object
