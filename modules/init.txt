@@ -35,6 +35,41 @@
 # Will load only custom/cpp/custom_module.cpp and custom/lua/claim_shield.lua.
 #
 # Live example:
+#custom/commands/
+#custom/lua/test_npcs_in_gm_home.lua
+
+#-----------------------
+#      General Lua
+#-----------------------
+era/lua/
+#-----------------------
+#      General C++
+#-----------------------
+era/cpp/
+#-----------------------
+#      General SQL
+#-----------------------
+era/sql
+#-----------------------
+#        Dynamis
+#-----------------------
+# This loads special due to requirements between globals
+era/lua_dynamis/globals/era_dynamis.lua
+era/lua_dynamis/globals/era_dynamis_spawning.lua
+era/lua_dynamis/mobskills/era_pet_skills.lua
+era/lua_dynamis/mobskills/era_regain_skills.lua
+era/lua_dynamis/mobskills/era_valkurm_tp_moves.lua
+era/lua_dynamis/mobskills/era_buburimu_tp_moves.lua
+era/lua_dynamis/mobskills/era_qufim_tp_moves.lua
+era/lua_dynamis/mobskills/era_xarcabard_tp_moves.lua
+era/lua_dynamis/globals/era_dynamis_zones.lua
+#-----------------------
+#        Renamer
+#-----------------------
+renamer
+#-----------------------
+#		Custom
+#-----------------------
 
 custom/commands/
 custom/cpp/ah_pagination.cpp
@@ -49,37 +84,6 @@ custom/lua/custom_containers.lua
 custom/lua/guild_no_kits.lua
 custom/lua/conquest_crystal_trade_fix.lua
 custom/lua/disable_guild_shops.lua
+custom/lua/persist_nm_time_of_deaths.lua
 custom/sql/ka_speedbelt_drop.sql
 custom/sql/starter_zone_fast_repops.sql
-era/lua/beastmen_multigroup_spawn_fix.lua
-era/lua/75_era_vendors.lua
-era/sql/75_era_spells.sql
-era/lua/exp_rings.lua
-era/sql/2010_exp_tables.sql
-era/sql/mob_groups_era.sql
-era/sql/gardening_results_era.sql
-era/sql/2hr_ability_cooldowns.sql
-era/lua/75_era_argus.lua
-era/sql/75_era_drops.sql
-era/sql/75_era_guild_vendors.sql
-era/lua/75_era_guild_vendors.lua
-era/sql/RoZ_era_nms.sql
-#-----------------------
-#        Dynamis
-#-----------------------
-era/cpp/era_dynamisFunctions.cpp
-era/lua/dynamis/globals/era_dynamis.lua
-era/lua/dynamis/globals/era_dynamis_spawning.lua
-era/lua/dynamis/mobskills/era_pet_skills.lua
-era/lua/dynamis/mobskills/era_regain_skills.lua
-era/lua/dynamis/mobskills/era_valkurm_tp_moves.lua
-era/lua/dynamis/mobskills/era_buburimu_tp_moves.lua
-era/lua/dynamis/mobskills/era_qufim_tp_moves.lua
-era/lua/dynamis/mobskills/era_xarcabard_tp_moves.lua
-era/lua/dynamis/globals/era_dynamis_zones.lua
-era/sql/era_dyna_sql.sql
-#-----------------------
-#        Renamer
-#-----------------------
-renamer/cpp/renamer.cpp
-#-----------------------
