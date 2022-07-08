@@ -706,8 +706,8 @@ function getEffectResistance(target, effect, returnBuild)
 
     for effectIndex, effectTable in pairs(resTable) do
         if effectIndex == effect then
-            effectres = resTable.effectres
-            buildres = resTable.buildres
+            effectres = effectTable.effectres
+            buildres = effectTable.buildres
             break
         end
     end
