@@ -31,22 +31,22 @@ xi.settings.main =
     ENABLE_ACP       = 1,
     ENABLE_AMK       = 1,
     ENABLE_ASA       = 1,
-    ENABLE_ABYSSEA   = 1,
-    ENABLE_SOA       = 1,
-    ENABLE_ROV       = 1,
-    ENABLE_VOIDWATCH = 1, -- Not an expansion, but has its own storyline. (Not Implemented)
+    ENABLE_ABYSSEA   = 0,
+    ENABLE_SOA       = 0,
+    ENABLE_ROV       = 0,
+    ENABLE_VOIDWATCH = 0, -- Not an expansion, but has its own storyline. (Not Implemented)
 
     -- FIELDS OF VALOR/Grounds of Valor settings
     ENABLE_FIELD_MANUALS  = 1, -- Enables Fields of Valor
-    ENABLE_GROUNDS_TOMES  = 1, -- Enables Grounds of Valor
-    ENABLE_SURVIVAL_GUIDE = 1, -- Enables Survival Guides (Not Implemented)
+    ENABLE_GROUNDS_TOMES  = 0, -- Enables Grounds of Valor
+    ENABLE_SURVIVAL_GUIDE = 0, -- Enables Survival Guides (Not Implemented)
     REGIME_WAIT           = 1, -- Make people wait till 00:00 game time as in retail. If it's 0, there is no wait time.
     FOV_REWARD_ALLIANCE   = 0, -- Allow Fields of Valor rewards while being a member of an alliance. (default retail behavior: 0)
-    GOV_REWARD_ALLIANCE   = 1, -- Allow Grounds of Valor rewards while being a member of an alliance. (default retail behavior: 1)
+    GOV_REWARD_ALLIANCE   = 0, -- Allow Grounds of Valor rewards while being a member of an alliance. (default retail behavior: 1)
 
     -- Records of Eminence
-    ENABLE_ROE            = 1, -- Enable Records of Eminence
-    ENABLE_ROE_TIMED      = 1, -- Enable 4-hour timed records
+    ENABLE_ROE            = 0, -- Enable Records of Eminence
+    ENABLE_ROE_TIMED      = 0, -- Enable 4-hour timed records
     ENABLE_EXCHANGE_LIMIT = 1, -- Enable Maximum limit of sparks spent per Week (default retail behavior: 1)
 
     WEEKLY_EXCHANGE_LIMIT = 100000, -- Maximum amount of sparks/accolades that can be spent per week (default retail value: 100000)
@@ -66,7 +66,7 @@ xi.settings.main =
     MAGIAN_TRIALS_TRADE_MULTIPLIER   = 1,
 
     -- VoidWalker
-    ENABLE_VOIDWALKER = 1,
+    ENABLE_VOIDWALKER = 0,
 
     -- TREASURE CASKETS
     -- Retail droprate = 0.1 (10%) with no other effects active
@@ -86,7 +86,7 @@ xi.settings.main =
 
     -- CHARACTER CONFIG
     INITIAL_LEVEL_CAP              = 50, -- The initial level cap for new players.  There seems to be a hardcap of 255.
-    MAX_LEVEL                      = 99, -- Level max of the server, lowers the attainable cap by disabling Limit Break quests.
+    MAX_LEVEL                      = 75, -- Level max of the server, lowers the attainable cap by disabling Limit Break quests.
     NORMAL_MOB_MAX_LEVEL_RANGE_MIN = 0,  -- Lower Bound of Max Level Range for Normal Mobs (0 = Uncapped)
     NORMAL_MOB_MAX_LEVEL_RANGE_MAX = 0,  -- Upper Bound of Max Level Range for Normal Mobs (0 = Uncapped)
     START_GIL                      = 10, -- Amount of gil given to newly created characters.
@@ -114,7 +114,7 @@ xi.settings.main =
     DARK_POWER      = 1.000, -- Multiplies amount drained by Dark Magic.
     ITEM_POWER      = 1.000, -- Multiplies the effect of items such as Potions and Ethers.
     WEAPON_SKILL_POWER  = 1.000, -- Multiplies damage dealt by Weapon Skills.
-    USE_ADOULIN_WEAPON_SKILL_CHANGES = true, -- true/false. Change to toggle new Adoulin weapon skill damage calculations
+    USE_ADOULIN_WEAPON_SKILL_CHANGES = false, -- true/false. Change to toggle new Adoulin weapon skill damage calculations
 
     -- TRUSTS
     ENABLE_TRUST_CASTING = 1,
@@ -141,8 +141,8 @@ xi.settings.main =
 
     -- Sets spawn type for: Behemoth, Fafnir, Adamantoise, King Behemoth, Nidhog, Aspidochelone.
     -- Use 0 for timed spawns, 1 for force pop only, 2 for both
-    LandKingSystem_NQ = 1,
-    LandKingSystem_HQ = 1,
+    LandKingSystem_NQ = 0,
+    LandKingSystem_HQ = 0,
 
     -- Multiplier to NM lottery spawn chance. (Default 1.0) eg. 0 = disable lottery spawns. -1 for always 100% chance.
     NM_LOTTERY_CHANCE = 1.0,
@@ -150,8 +150,8 @@ xi.settings.main =
     NM_LOTTERY_COOLDOWN = 1.0,
 
     -- DYNAMIS SETTINGS
-    BETWEEN_2DYNA_WAIT_TIME     = 24,       -- Hours before player can re-enter Dynamis. Default is 1 Earthday (24 hours).
-    DYNA_MIDNIGHT_RESET         = true,     -- If true, makes the wait time count by number of server midnights instead of full 24 hour intervals
+    BETWEEN_2DYNA_WAIT_TIME     = 72,       -- Hours before player can re-enter Dynamis. Default is 1 Earthday (24 hours).
+    DYNA_MIDNIGHT_RESET         = false,     -- If true, makes the wait time count by number of server midnights instead of full 24 hour intervals
     DYNA_LEVEL_MIN              = 65,       -- Level min for entering in Dynamis
     TIMELESS_HOURGLASS_COST     = 500000,   -- Refund for the timeless hourglass for Dynamis.
     PRISMATIC_HOURGLASS_COST    = 50000,    -- Cost of the prismatic hourglass for Dynamis.
@@ -164,10 +164,10 @@ xi.settings.main =
     AF1_QUEST_LEVEL = 40,    -- Minimum level to start AF1 quest
     AF2_QUEST_LEVEL = 50,    -- Minimum level to start AF2 quest
     AF3_QUEST_LEVEL = 50,    -- Minimum level to start AF3 quest
-    OLDSCHOOL_G1    = false, -- Set to true to require farming Exoray Mold, Bombd Coal, and Ancient Papyrus drops instead of allowing key item method.
-    OLDSCHOOL_G2    = false, -- Set true to require the NMs for "Atop the Highest Mountains" be dead to get KI like before SE changed it.
+    OLDSCHOOL_G1    = true, -- Set to true to require farming Exoray Mold, Bombd Coal, and Ancient Papyrus drops instead of allowing key item method.
+    OLDSCHOOL_G2    = true, -- Set true to require the NMs for "Atop the Highest Mountains" be dead to get KI like before SE changed it.
     FRIGICITE_TIME  = 30,    -- When OLDSCHOOL_G2 is enabled, this is the time (in seconds) you have from killing Boreal NMs to click the "???" target.
-    ASSAULT_MINIMUM = 1,     -- Minimum amount of people needed to start an assault mission. TOAU era is 3, Default is 1.
+    ASSAULT_MINIMUM = 3,     -- Minimum amount of people needed to start an assault mission. TOAU era is 3, Default is 1.
 
     -- SPELL SPECIFIC SETTINGS
     DIA_OVERWRITE                   = 1,     -- Set to 1 to allow Bio to overwrite same tier Dia.  Default is 1.
@@ -180,11 +180,11 @@ xi.settings.main =
     ABSORB_SPELL_AMOUNT             = 8,     -- how much of a stat gets absorbed by DRK absorb spells - expected to be a multiple of 8.
     ABSORB_SPELL_TICK               = 9,     -- duration of 1 absorb spell tick
     SNEAK_INVIS_DURATION_MULTIPLIER = 1,     -- multiplies duration of sneak, invis, deodorize to reduce player torture. 1 = retail behavior.
-    USE_OLD_CURE_FORMULA            = false, -- true/false. if true, uses older cure formula (3*MND + VIT + 3*(healing skill/5)) // cure 6 will use the newer formula
+    USE_OLD_CURE_FORMULA            = true, -- true/false. if true, uses older cure formula (3*MND + VIT + 3*(healing skill/5)) // cure 6 will use the newer formula
     USE_OLD_MAGIC_DAMAGE            = false, -- true/false. if true, uses older magic damage formulas
 
     -- CELEBRATIONS
-    EXPLORER_MOOGLE_LV              = 10, -- Enables Explorer Moogle teleports and sets required level. Zero to disable.
+    EXPLORER_MOOGLE_LV              = 0, -- Enables Explorer Moogle teleports and sets required level. Zero to disable.
     HALLOWEEN_2005                  = 0,  -- Set to 1 to Enable the 2005 version of Harvest Festival, will start on Oct. 20 and end Nov. 1.
     HALLOWEEN_YEAR_ROUND            = 0,  -- Set to 1 to have Harvest Festival initialize outside of normal times.
 
@@ -195,11 +195,11 @@ xi.settings.main =
     -- MISC
     RIVERNE_PORTERS              = 120,  -- Time in seconds that Unstable Displacements in Cape Riverne stay open after trading a scale.
     LANTERNS_STAY_LIT            = 1200, -- time in seconds that lanterns in the Den of Rancor stay lit.
-    ENABLE_COP_ZONE_CAP          = 0,    -- Enable or disable lvl cap
+    ENABLE_COP_ZONE_CAP          = 1,    -- Enable or disable lvl cap
     ALLOW_MULTIPLE_EXP_RINGS     = 0,    -- Set to 1 to remove ownership restrictions on the Chariot/Empress/Emperor Band trio.
     BYPASS_EXP_RING_ONE_PER_WEEK = 0,    -- Set to 1 to bypass the limit of one ring per Conquest Tally Week.
     NUMBER_OF_DM_EARRINGS        = 1,    -- Number of earrings players can simultaneously own from Divine Might before scripts start blocking them (Default: 1)
-    HOMEPOINT_TELEPORT           = 1,    -- Enables the homepoint teleport system
+    HOMEPOINT_TELEPORT           = 0,    -- Enables the homepoint teleport system
     DIG_ABUNDANCE_BONUS          = 0,    -- Increase chance of digging up an item (450  = item digup chance +45)
     DIG_FATIGUE                  = 1,    -- Set to 0 to disable Dig Fatigue
     DIG_GRANT_BURROW             = 0,    -- Set to 1 to grant burrow ability
