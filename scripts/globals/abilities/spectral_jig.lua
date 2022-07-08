@@ -19,7 +19,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    local baseDuration = 180 + player:getJobPointLevel(xi.jp.JIG_DURATION)
+    local baseDuration = math.random(30, 180) + player:getJobPointLevel(xi.jp.JIG_DURATION)
     local durationMultiplier = 1.0 + utils.clamp(player:getMod(xi.mod.JIG_DURATION), 0, 50) / 100
     local finalDuration = math.floor(baseDuration * durationMultiplier * xi.settings.main.SNEAK_INVIS_DURATION_MULTIPLIER)
 

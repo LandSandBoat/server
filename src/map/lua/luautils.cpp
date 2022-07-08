@@ -2403,6 +2403,15 @@ namespace luautils
             return -1;
         }
 
+        if (PUser != nullptr)
+        {
+            auto* PEntity = static_cast<CBattleEntity*>(PUser);
+            if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_INVISIBLE))
+            {
+                PEntity->StatusEffectContainer->DelStatusEffect(EFFECT_INVISIBLE);
+            }
+        }
+
         auto result = onItemUse(CLuaBaseEntity(PTarget), CLuaBaseEntity(PUser), CLuaItem(PItem));
         if (!result.valid())
         {
