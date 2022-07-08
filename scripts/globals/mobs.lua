@@ -58,9 +58,11 @@ xi.mob.phOnDespawn = function(ph, phList, chance, cooldown, immediate)
                     if idtable[1] == ph:getID() then
                         DisallowRespawn(ph:getID(), false)
                         table.remove(group[3], it)
+
                         break
                     end
                 end
+
                 break
             end
         end
