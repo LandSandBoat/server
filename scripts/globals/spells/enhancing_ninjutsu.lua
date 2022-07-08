@@ -20,7 +20,6 @@ local pTable =
     [xi.magic.spell.MYOSHU_ICHI  ] = { 1, xi.effect.SUBTLE_BLOW_PLUS, 10, 180, true  },
     [xi.magic.spell.TONKO_ICHI   ] = { 1, xi.effect.INVISIBLE,         0, 180, false },
     [xi.magic.spell.TONKO_NI     ] = { 2, xi.effect.INVISIBLE,         0, 300, false },
-    [xi.magic.spell.TONKO_SAN    ] = { 2, xi.effect.INVISIBLE,         0, 420, false },
     [xi.magic.spell.UTSUSEMI_ICHI] = { 1, xi.effect.COPY_IMAGE,        3,   0, false },
     [xi.magic.spell.UTSUSEMI_NI  ] = { 1, xi.effect.COPY_IMAGE,        4,   0, false },
     [xi.magic.spell.UTSUSEMI_SAN ] = { 1, xi.effect.COPY_IMAGE,        5,   0, false },
