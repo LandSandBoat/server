@@ -1152,33 +1152,73 @@ namespace petutils
         int16 cost = 0;
         if (id <= 7)
         {
-            if (level < 19)
-            {
-                cost = 1;
-            }
-            else if (level < 38)
+            if (level < 5)
             {
                 cost = 2;
             }
-            else if (level < 57)
+            else if (level < 9)
             {
                 cost = 3;
             }
-            else if (level < 75)
+            else if (level < 14)
             {
                 cost = 4;
             }
-            else if (level < 81)
+            else if (level < 18)
             {
                 cost = 5;
             }
-            else if (level < 91)
+            else if (level < 23)
             {
                 cost = 6;
             }
-            else
+            else if (level < 27)
             {
                 cost = 7;
+            }
+            else if (level < 32)
+            {
+                cost = 8;
+            }
+            else if (level < 36)
+            {
+                cost = 9;
+            }
+            else if (level < 40)
+            {
+                cost = 10;
+            }
+            else if (level < 46)
+            {
+                cost = 11;
+            }
+            else if (level < 49)
+            {
+                cost = 12;
+            }
+            else if (level < 54)
+            {
+                cost = 13;
+            }
+            else if (level < 58)
+            {
+                cost = 14;
+            }
+            else if (level < 63)
+            {
+                cost = 15;
+            }
+            else if (level < 67)
+            {
+                cost = 16;
+            }
+            else if (level < 72)
+            {
+                cost = 17;
+            }
+            else
+            {
+                cost = 18;
             }
         }
         else if (id == 8)
@@ -1215,17 +1255,9 @@ namespace petutils
             {
                 cost = 8;
             }
-            else if (level < 81)
-            {
-                cost = 9;
-            }
-            else if (level < 91)
-            {
-                cost = 10;
-            }
             else
             {
-                cost = 11;
+                cost = 9;
             }
         }
         else if (id == 9)
@@ -1270,17 +1302,9 @@ namespace petutils
             {
                 cost = 10;
             }
-            else if (level < 81)
-            {
-                cost = 11;
-            }
-            else if (level < 91)
-            {
-                cost = 12;
-            }
             else
             {
-                cost = 13;
+                cost = 11;
             }
         }
         else if (id <= 16)
@@ -1325,17 +1349,9 @@ namespace petutils
             {
                 cost = 12;
             }
-            else if (level < 81)
-            {
-                cost = 13;
-            }
-            else if (level < 91)
-            {
-                cost = 14;
-            }
             else
             {
-                cost = 15;
+                cost = 13;
             }
         }
 
