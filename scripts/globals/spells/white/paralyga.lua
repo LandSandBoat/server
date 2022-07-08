@@ -41,7 +41,13 @@ spell_object.onSpellCast = function(caster, target, spell)
         local resist = applyResistanceEffect(caster, target, spell, params)
 
         if (resist >= 0.5) then --there are no quarter or less hits, if target resists more than .5 spell is resisted completely
-            if (target:addStatusEffect(xi.effect.PARALYSIS, potency, 0, duration*resist)) then
+            local resduration = duration * resist
+
+            resduration = calculateBuildDuration(target, duration, params.effect)
+
+            if resduration == 0 then
+                spell:setMsg(xi.msg.basic.NONE)
+            elseif (target:addStatusEffect(xi.effect.PARALYSIS, potency, 0, resduration)) then
                 spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
             else
                 -- no effect

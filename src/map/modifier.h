@@ -883,6 +883,24 @@ enum class Mod
     AUGMENT_BLU_MAGIC      = 1036, // Percent chance for BLU magic to receive 3x WSC value for spell (BLU AF3 Sets)
     GEOMANCY_MP_NO_DEPLETE = 1037, // Percent chance for Geomancy to cost 0 MP (GEO AF3 Sets)
 
+    // Permenant Resistance Build Modifiers
+    SLEEPRESBUILD          = 1138,
+    POISONRESBUILD         = 1139,
+    PARALYZERESBUILD       = 1140,
+    BLINDRESBUILD          = 1141,
+    SILENCERESBUILD        = 1142,
+    VIRUSRESBUILD          = 1143,
+    PETRIFYRESBUILD        = 1144,
+    BINDRESBUILD           = 1145,
+    CURSERESBUILD          = 1146,
+    GRAVITYRESBUILD        = 1147,
+    SLOWRESBUILD           = 1148,
+    STUNRESBUILD           = 1149,
+    CHARMRESBUILD          = 1150,
+    AMNESIARESBUILD        = 1151,
+    LULLABYRESBUILD        = 1152,
+    DEATHRESBUILD          = 1153,
+
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/globals/status.lua ASWELL!
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.

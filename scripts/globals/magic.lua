@@ -595,7 +595,7 @@ function getMagicHitRate(caster, target, skillType, element, effectRes, bonusAcc
 
     if element ~= xi.magic.ele.NONE then
         if target:isMob() then
-            tryBuildResistance(target, xi.magic.resistMod[element], false)
+            tryBuildResistance(target, xi.magic.resistMod[element], nil, false)
         end
 
         resMod = target:getMod(xi.magic.resistMod[element])
@@ -693,39 +693,44 @@ end
 
 -- Returns the amount of resistance the
 -- target has to the given effect (stun, sleep, etc..)
-function getEffectResistance(target, effect)
+function getEffectResistance(target, effect, returnBuild)
     local effectres = 0
+    local buildres = 0
     local statusres = target:getMod(xi.mod.STATUSRES)
-    if effect == xi.effect.SLEEP_I or effect == xi.effect.SLEEP_II then
-        effectres = xi.mod.SLEEPRES
-    elseif effect == xi.effect.LULLABY then
-        effectres = xi.mod.LULLABYRES
-    elseif effect == xi.effect.POISON then
-        effectres = xi.mod.POISONRES
-    elseif effect == xi.effect.PARALYSIS then
-        effectres = xi.mod.PARALYZERES
-    elseif effect == xi.effect.BLINDNESS then
-        effectres = xi.mod.BLINDRES
-    elseif effect == xi.effect.SILENCE then
-        effectres = xi.mod.SILENCERES
-    elseif effect == xi.effect.PLAGUE or effect == xi.effect.DISEASE then
-        effectres = xi.mod.VIRUSRES
-    elseif effect == xi.effect.PETRIFICATION then
-        effectres = xi.mod.PETRIFYRES
-    elseif effect == xi.effect.BIND then
-        effectres = xi.mod.BINDRES
-    elseif effect == xi.effect.CURSE_I or effect == xi.effect.CURSE_II or effect == xi.effect.BANE then
-        effectres = xi.mod.CURSERES
-    elseif effect == xi.effect.WEIGHT then
-        effectres = xi.mod.GRAVITYRES
-    elseif effect == xi.effect.SLOW or effect == xi.effect.ELEGY then
-        effectres = xi.mod.SLOWRES
-    elseif effect == xi.effect.STUN then
-        effectres = xi.mod.STUNRES
-    elseif effect == xi.effect.CHARM_I or effect == xi.effect.CHARM_II then
-        effectres = xi.mod.CHARMRES
-    elseif effect == xi.effect.AMNESIA then
-        effectres = xi.mod.AMNESIARES
+    local resTable =
+    {
+        [xi.effect.SLEEP_I] = { effectres = xi.mod.SLEEPRES, buildres = xi.mod.SLEEPRESBUILD },
+        [xi.effect.SLEEP_II] = { effectres = xi.mod.SLEEPRES, buildres = xi.mod.SLEEPRESBUILD },
+        [xi.effect.LULLABY] = { effectres = xi.mod.LULLABYRES, buildres = xi.mod.LULLABYRESBUILD },
+        [xi.effect.POISON] = { effectres = xi.mod.POISONRES, buildres = xi.mod.POISONRESBUILD },
+        [xi.effect.PARALYSIS] = { effectres = xi.mod.PARALYZERES, buildres = xi.mod.PARALYZERESBUILD },
+        [xi.effect.BLINDNESS] = { effectres = xi.mod.BLINDRES, buildres = xi.mod.BLINDRESBUILD },
+        [xi.effect.SILENCE] = { effectres = xi.mod.SILENCERES, buildres = xi.mod.SILENCERESBUILD },
+        [xi.effect.PLAGUE] = { effectres = xi.mod.VIRUSRES, buildres = xi.mod.VIRUSRESBUILD },
+        [xi.effect.PETRIFICATION] = { effectres = xi.mod.PETRIFYRES, buildres = xi.mod.PETRIFYRESBUILD },
+        [xi.effect.BIND] = { effectres = xi.mod.BINDRES, buildres = xi.mod.BINDRESBUILD },
+        [xi.effect.CURSE_I] = { effectres = xi.mod.CURSERES, buildres = xi.mod.CURSERESBUILD },
+        [xi.effect.CURSE_II] = { effectres = xi.mod.CURSERES, buildres = xi.mod.CURSERESBUILD },
+        [xi.effect.BANE] = { effectres = xi.mod.CURSERES, buildres = xi.mod.CURSERESBUILD },
+        [xi.effect.WEIGHT] = { effectres = xi.mod.GRAVITYRES, buildres = xi.mod.GRAVITYRESBUILD },
+        [xi.effect.SLOW] = { effectres = xi.mod.SLOWRES, buildres = xi.mod.SLOWRESBUILD },
+        [xi.effect.ELEGY] = { effectres = xi.mod.SLOWRES, buildres = xi.mod.SLOWRESBUILD },
+        [xi.effect.STUN] = { effectres = xi.mod.STUNRES, buildres = xi.mod.STUNRESBUILD },
+        [xi.effect.CHARM_I] = { effectres = xi.mod.CHARMRES, buildres = xi.mod.CHARMRESBUILD },
+        [xi.effect.CHARM_II] = { effectres = xi.mod.CHARMRES, buildres = xi.mod.CHARMRESBUILD },
+        [xi.effect.AMNESIA] = { effectres = xi.mod.AMNESIARES, buildres = xi.mod.AMNESIARESBUILD },
+    }
+
+    for effectIndex, effectTable in pairs(resTable) do
+        if effectIndex == effect then
+            effectres = effectTable.effectres
+            buildres = effectTable.buildres
+            break
+        end
+    end
+
+    if returnBuild ~= nil then
+        return buildres
     end
 
     if target:isMob() and effectres ~= 0 then
@@ -1394,6 +1399,26 @@ function calculateDuration(duration, magicSkill, spellGroup, caster, target, use
     end
 
     return math.floor(duration)
+end
+
+function calculateBuildDuration(target, duration, effect)
+
+    if target:isMob() then
+        local buildRes = getEffectResistance(target, effect, true)
+
+        if target:getMod(buildRes) ~= 0 then
+            local builtRes = target:getLocalVar(string.format("[RESBUILD]Base_%s", buildRes))
+
+            duration = duration - ((builtRes + target:getMod(buildRes)) / 10) -- Used to add more fidelity to the build. Adding a mod of 30 will be -3 seconds per cast.
+            target:setLocalVar(string.format("[RESBUILD]Base_%s", buildRes), builtRes + target:getMod(buildRes))
+        end
+    end
+
+    return math.floor(duration)
+end
+
+function resetBuildPercent(entity, buildRes)
+    entity:setLocalVar(string.format("[RESBUILD]Base_%s", buildRes), 0)
 end
 
 function calculatePotency(basePotency, magicSkill, caster, target)
