@@ -38,7 +38,13 @@ if (UNIX)
 
         # LuaJIT has no CMake support, so we break out to using make on it's own
         message(STATUS "Building LuaJIT from src")
-        execute_process(COMMAND make WORKING_DIRECTORY ${LuaJIT_SOURCE_DIR})
+
+        if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+            execute_process(COMMAND export MACOSX_DEPLOYMENT_TARGET=11.6 ; make WORKING_DIRECTORY ${LuaJIT_SOURCE_DIR}) # TODO don't hardcode MACOSX_DEPLOYMENT_TARGET
+        else()
+            execute_process(COMMAND make WORKING_DIRECTORY ${LuaJIT_SOURCE_DIR})
+        endif()
+
     endif()
 endif()
 
