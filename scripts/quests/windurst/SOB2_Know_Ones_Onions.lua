@@ -16,7 +16,6 @@ quest.reward =
 {
     fame     = 10,
     fameArea = xi.quest.fame_area.WINDURST,
-    item     = xi.items.SCROLL_OF_BLAZE_SPIKES,
     title    = xi.title.SOB_SUPER_HERO,
 }
 
@@ -106,8 +105,10 @@ quest.sections =
             onEventFinish =
             {
                 [398] = function(player, csid, option, npc)
-                    player:confirmTrade()
-                    quest:setVar(player, 'Prog', 2)
+                    if npcUtil.giveItem(player, xi.items.SCROLL_OF_BLAZE_SPIKES) then
+                        player:confirmTrade()
+                        quest:setVar(player, 'Prog', 2)
+                    end
                 end,
             },
         },
