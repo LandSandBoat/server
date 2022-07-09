@@ -463,13 +463,19 @@ params.bonus = $4
 params.effect = $5
 ]]
 function applyResistanceEffect(caster, target, spell, params)
-    local diff = params.diff or (caster:getStat(params.attribute) - target:getStat(params.attribute))
+    local diff = params.diff
     local skill = params.skillType
     local bonus = params.bonus
     local effect = params.effect
     local element = params.element -- Will be nil if this isn't specified.
     local magicaccbonus = 0
     local effectRes = 0
+
+    if diff == nil and params.attribute ~= nil then
+        diff = caster:getStat(params.attribute) - target:getStat(params.attribute)
+    elseif diff == nil then
+        diff = 0
+    end
 
     -- If Stymie is active, as long as the mob is not immune then the effect is not resisted
     if effect ~= nil and skill ~= nil then -- Dispel's script doesn't have an "effect" to send here, nor should it.
@@ -485,7 +491,7 @@ function applyResistanceEffect(caster, target, spell, params)
         element = xi.element.NONE
     end
 
-    if spell ~= nil then
+    if spell ~= nil and skill >= 32 and skill <= 45 then
         magicaccbonus = getSpellBonusAcc(caster, target, spell, params)
     end
 
@@ -503,10 +509,8 @@ function applyResistanceEffect(caster, target, spell, params)
 end
 
 -- Applies resistance for things that may not be spells - ie. Quick Draw
-function applyResistanceAbility(player, target, element, skill, bonus)
-    local p = getMagicHitRate(player, target, skill, element, 0, bonus)
-
-    return getMagicResist(p)
+function applyResistanceAbility(player, target, wsID, params)
+    return applyResistanceEffect(player, target, wsID, params)
 end
 
 -- Applies resistance for additional effects
@@ -568,14 +572,14 @@ function getMagicHitRate(caster, target, skillType, element, effectRes, bonusAcc
     end
 
     if skillType ~= xi.skill.SINGING and skillType ~= nil then -- If not a bard song
-        if target:isPC() then
+        if caster:isPC() then
             local gearBonus = caster:getMod(xi.mod.MACC) + caster:getILvlMacc()
             magicacc = caster:getSkillLevel(skillType) + gearBonus + dStatAcc
         else
             magicacc = utils.getSkillLvl(1, caster:getMainLvl()) + dStatAcc
         end
     elseif skillType ~= nil then -- If a bard song
-        if target:isPC() then
+        if caster:isPC() then
             local secondarySkill = 0
             local gearBonus = caster:getMod(xi.mod.MACC) + caster:getILvlMacc()
 
@@ -591,8 +595,10 @@ function getMagicHitRate(caster, target, skillType, element, effectRes, bonusAcc
         else
             magicacc = utils.getSkillLvl(1, caster:getMainLvl()) + dStatAcc
         end
-    else
-        magicacc = dStatAcc
+    elseif caster:isMob() and skillType == nil then
+        magicacc = dStatAcc + utils.getMobSkillLvl(1, caster:getMainLvl())
+    elseif caster:isPet() and skillType == nil then
+        magicacc = dStatAcc + utils.getMobSkillLvl(3, caster:getMainLvl())
     end
 
     if element ~= xi.magic.ele.NONE then
