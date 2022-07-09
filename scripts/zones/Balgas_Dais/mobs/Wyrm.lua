@@ -13,6 +13,7 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.DRAW_IN, 1) -- has a bug during flight, like Tiamat
+    mob:setMobMod(xi.mobMod.DRAW_IN_IGNORE_STATIONARY, 1)
     mob:setTP(3000) -- opens fight with a skill
 end
 

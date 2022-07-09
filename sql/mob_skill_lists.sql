@@ -3814,6 +3814,9 @@ INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1169,1723);
 
 -- Next available ID: 1170
 
+-- AirSkyBoat Skill Lists Start at 5000
+-- 5000 -> 5020 is Era Dynamis
+
 -- ------------------------------------------------------------
 -- Start of Ambuscade section
 -- NOTE: The mobs are changed every update in the DATs, so using out-of-date

@@ -16,7 +16,7 @@ zone_object.onInitialize = function(zone)
 end
 
 zone_object.onGameHour = function(zone)
-    SetServerVariable("Selbina_Deastination", math.random(1, 100))
+    SetServerVariable("Selbina_Destination", math.random(1, 100))
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -24,11 +24,18 @@ zone_object.onZoneIn = function(player, prevZone)
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         if prevZone == xi.zone.SHIP_BOUND_FOR_SELBINA or prevZone == xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES then
+            local ship = GetNPCByID(ID.npc.SHIP)
+            ship:setAnimBegin(VanadielTime())
+
             cs = 202
             player:setPos(32.500, -2.500, -45.500, 192)
         else
             player:setPos(17.981, -16.806, 99.83, 64)
         end
+    end
+
+    if player:getZPos() < -59.5 then -- fixing player position if logged off / crashed on ship
+        player:setPos(18.05, -1.38, -56.75)
     end
 
     if player:hasKeyItem(xi.ki.SEANCE_STAFF) and player:getCharVar("Enagakure_Killed") == 1 then
@@ -51,7 +58,7 @@ end
 
 zone_object.onEventFinish = function(player, csid, option)
     if csid == 200 then
-        if GetServerVariable("Selbina_Deastination") > 89 then
+        if GetServerVariable("Selbina_Destination") >= 89 then
             player:setPos(0, 0, 0, 0, xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES)
         else
             player:setPos(0, 0, 0, 0, xi.zone.SHIP_BOUND_FOR_MHAURA)

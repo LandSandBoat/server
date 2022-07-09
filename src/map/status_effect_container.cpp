@@ -1461,7 +1461,7 @@ void CStatusEffectContainer::RemoveAllStatusEffectsInIDRange(EFFECT start, EFFEC
 
 /************************************************************************
  *                                                                       *
- *  Устанавливаем имя эффекта для работы со скриптами                    *
+ *  Install the name of the effect to work with scripts                  *
  *                                                                       *
  ************************************************************************/
 
@@ -1475,8 +1475,15 @@ void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
     EFFECT   effect = StatusEffect->GetStatusID();
 
     // Determine if this is a BRD Song or COR Effect.
-    if (StatusEffect->GetSubID() == 0 || StatusEffect->GetSubID() > 20000 || (effect >= EFFECT_REQUIEM && effect <= EFFECT_NOCTURNE) ||
-        (effect >= EFFECT_DOUBLE_UP_CHANCE && effect <= EFFECT_NATURALISTS_ROLL) || effect == EFFECT_RUNEISTS_ROLL)
+    if (StatusEffect->GetSubID() == 0 ||
+        StatusEffect->GetSubID() > 20000 ||
+        (effect >= EFFECT_REQUIEM && effect <= EFFECT_NOCTURNE) ||
+        (effect >= EFFECT_DOUBLE_UP_CHANCE && effect <= EFFECT_NATURALISTS_ROLL) ||
+        effect == EFFECT_RUNEISTS_ROLL ||
+        effect == EFFECT_DRAIN_DAZE ||
+        effect == EFFECT_ASPIR_DAZE ||
+        effect == EFFECT_HASTE_DAZE ||
+        effect == EFFECT_BATTLEFIELD)
     {
         name.insert(0, "globals/effects/");
         name.insert(name.size(), effects::EffectsParams[effect].Name);
@@ -1490,6 +1497,7 @@ void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
             name.insert(name.size(), (const char*)Ptem->getName());
         }
     }
+
     StatusEffect->SetName(name);
     StatusEffect->SetFlag(effects::EffectsParams[effect].Flag);
     StatusEffect->SetType(effects::EffectsParams[effect].Type);

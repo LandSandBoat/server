@@ -330,7 +330,8 @@ xi.spells.enhancing.calculateEnhancingDuration = function(caster, target, spell,
 
     -- Deodorize, Invisible and Sneak have a random factor to base duration.
     if spellEffect == xi.effect.DEODORIZE or spellEffect == xi.effect.INVISIBLE or spellEffect == xi.effect.SNEAK then
-        duration = duration + 60 * math.random(0, 2)
+        duration = calculateDuration(math.random(130, 310), spell:getSkillType(), spell:getSpellGroup(), caster, target)
+        duration = duration + target:getMod(xi.mod.INVISIBLE_DURATION)
     end
 
     --------------------
@@ -407,6 +408,11 @@ xi.spells.enhancing.useEnhancingSpell = function(caster, target, spell)
     ------------------------------------------------------------
     -- Handle exceptions and weird behaviour here, before calculating anything.
     ------------------------------------------------------------
+
+    if target:hasStatusEffect(xi.effect.ALL_MISS) and target:getStatusEffect(xi.effect.ALL_MISS):getPower() > 1 then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+        return 0
+    end
 
     -- TODO: Find a way to replace big if/else chain and still make it look good.
 

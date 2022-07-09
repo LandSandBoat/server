@@ -7,6 +7,7 @@ require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 
+
 local drawInPos =
 {
     {330.00, -23.91, -89.09},
@@ -18,6 +19,12 @@ local drawInPos =
     {315.18, -23.96, -80.03},
     {317.55, -23.95, -83.00},
 }
+
+entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
+    mob:setMobMod(xi.mobMod.DRAW_IN_CUSTOM_RANGE, 15)
+end
+
 
 entity.onMobFight = function(mob, target)
     if mob:getHPP() > 25 then

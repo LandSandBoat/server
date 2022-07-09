@@ -3588,23 +3588,248 @@ namespace charutils
         }
     }
 
+    uint16 ApplyTH(int16 m_THLvl, uint16 rate)
+    {
+        TracyZoneScoped;
+
+        float multi = 1.00f;
+        bool ultra_rare = (rate == 1);
+        bool super_rare = (rate == 5);
+        bool very_rare = (rate == 10);
+        bool rare = (rate == 50);
+        bool uncommon = (rate == 100);
+        bool common = (rate == 150);
+        bool very_common = (rate == 240);
+
+        if (ultra_rare)
+        {
+            if (m_THLvl < 3)
+            {
+                multi = 1.00f + (1.00f * m_THLvl);
+                return multi;
+            }
+            else if (m_THLvl < 7)
+            {
+                multi = 2.00f + (0.50f * (m_THLvl - 2));
+                return multi;
+            }
+            else if (m_THLvl < 12)
+            {
+                multi = 7.00f + (1.00f * (m_THLvl - 6));
+                return multi;
+            }
+            else if (m_THLvl < 14)
+            {
+                multi = 10.00f + (1.00f * (m_THLvl - 11));
+                return multi;
+            }
+            else
+            {
+                multi = 13.00f + (2.00f * (m_THLvl - 14));
+                return multi;
+            }
+        }
+        else if (super_rare)
+        {
+            if (m_THLvl < 3)
+            {
+                multi = 1.00f + (0.50f * m_THLvl);
+                return multi;
+            }
+            else if (m_THLvl < 8)
+            {
+                multi = 2.40f + (0.40f * (m_THLvl - 2));
+                return multi;
+            }
+            else if (m_THLvl < 10)
+            {
+                multi = 5.20f + (0.60f * (m_THLvl - 7));
+                return multi;
+            }
+            else if (m_THLvl < 11)
+            {
+                multi = 7.00f + (0.80f * (m_THLvl - 9));
+                return multi;
+            }
+            else
+            {
+                multi = 9.00f + (1.00f * (m_THLvl - 10));
+                return multi;
+            }
+        }
+        else if (very_rare)
+        {
+            if (m_THLvl < 3)
+            {
+                multi = 1.00f + (0.20f * m_THLvl);
+                return multi;
+            }
+            else if (m_THLvl < 8)
+            {
+                multi = 1.50f + (0.10f * (m_THLvl - 2));
+                return multi;
+            }
+            else if (m_THLvl < 12)
+            {
+                multi = 2.10f + (0.20f * (m_THLvl - 7));
+                return multi;
+            }
+            else if (m_THLvl < 14)
+            {
+                multi = 3.10f + (0.40f * (m_THLvl - 11));
+                return multi;
+            }
+            else
+            {
+                multi = 4.00f + (0.50f * (m_THLvl - 13));
+                return multi;
+            }
+        }
+        else if (rare)
+        {
+            if (m_THLvl < 3)
+             {
+                 multi = 1.00f + (0.50f * m_THLvl);
+                 return multi;
+             }
+             else if (m_THLvl < 8)
+             {
+                 multi = 2.40f + (0.40f * (m_THLvl - 2));
+                 return multi;
+             }
+             else if (m_THLvl < 10)
+             {
+                 multi = 5.20f + (0.60f * (m_THLvl - 7));
+                 return multi;
+             }
+             else if (m_THLvl < 11)
+             {
+                 multi = 7.00f + (0.80f * (m_THLvl - 9));
+                 return multi;
+             }
+             else
+             {
+                 multi = 9.00f + (1.00f * (m_THLvl - 10));
+                 return multi;
+             }
+        }
+        else if (uncommon)
+        {
+            if (m_THLvl < 2)
+            {
+                multi = 1.00f + (0.20f * m_THLvl);
+                return multi;
+            }
+            else if (m_THLvl < 4)
+            {
+                multi = 1.20f + (0.15f * (m_THLvl - 1));
+                return multi;
+            }
+            else if (m_THLvl < 8)
+            {
+                multi = 1.80f + (0.10f * (m_THLvl - 3));
+                return multi;
+            }
+            else if (m_THLvl < 10)
+            {
+                multi = 2.40f + (0.15f * (m_THLvl - 7));
+                return multi;
+            }
+            else if (m_THLvl < 11)
+            {
+                multi = 2.40f + (0.25f * (m_THLvl - 9));
+                return multi;
+            }
+            else
+            {
+                multi = 2.65f + (0.15f * (m_THLvl - 10));
+                return multi;
+            }
+        }
+        else if (common)
+        {
+            if (m_THLvl < 2)
+            {
+                multi = 1.00f + (1.00f * m_THLvl);
+                return multi;
+            }
+            else
+            {
+                multi = 2.00f + (0.17f * (m_THLvl - 1));
+                return multi;
+            }
+        }
+        else if (very_common)
+        {
+            if (m_THLvl < 2)
+            {
+                multi = 1.00f + (1.00f * m_THLvl);
+                return multi;
+            }
+            else if (m_THLvl < 3)
+            {
+                multi = 2.00f + (0.33f * (m_THLvl - 1));
+                return multi;
+            }
+            else if (m_THLvl < 5)
+            {
+                multi = 2.33f + (0.17f * (m_THLvl - 2));
+                return multi;
+            }
+            else if (m_THLvl < 6)
+            {
+                multi = 2.67f + (0.11f * (m_THLvl - 4));
+                return multi;
+            }
+            else if (m_THLvl < 7)
+            {
+                multi = 2.78f + (0.05f * (m_THLvl - 5));
+                return multi;
+            }
+            else if (m_THLvl < 8)
+            {
+                multi = 2.83f + (0.04f * (m_THLvl - 6));
+                return multi;
+            }
+            else if (m_THLvl < 11)
+            {
+                multi = 2.87f + (0.62f * (m_THLvl - 7));
+                return multi;
+            }
+            else if (m_THLvl < 12)
+            {
+                multi = 3.06f + (0.02f * (m_THLvl - 10));
+                return multi;
+            }
+            else
+            {
+                multi = 3.08f + (0.08f * (m_THLvl - 11));
+                return multi;
+            }
+        }
+        else
+        {
+            return multi; // TH Didn't Apply
+        }
+}
+
     void DistributeItem(CCharEntity* PChar, CBaseEntity* PEntity, uint16 itemid, uint16 droprate)
     {
         TracyZoneScoped;
 
         uint8 tries    = 0;
         uint8 maxTries = 1;
-        uint8 bonus    = 0;
+        uint16 bonus    = 0;
         if (auto* PMob = dynamic_cast<CMobEntity*>(PEntity))
         {
             // THLvl is the number of 'extra chances' at an item. If the item is obtained, then break out.
             tries    = 0;
-            maxTries = 1 + (PMob->m_THLvl > 2 ? 2 : PMob->m_THLvl);
-            bonus    = (PMob->m_THLvl > 2 ? (PMob->m_THLvl - 2) * 10 : 0);
+            maxTries = 1;
+            bonus    = ApplyTH(PMob->m_THLvl, droprate);
         }
         while (tries < maxTries)
         {
-            if (droprate > 0 && xirand::GetRandomNumber(1000) < droprate * settings::get<float>("map.DROP_RATE_MULTIPLIER") + bonus)
+            if (droprate > 0 && xirand::GetRandomNumber(1000) < droprate * settings::get<float>("map.DROP_RATE_MULTIPLIER") * bonus)
             {
                 PChar->PTreasurePool->AddItem(itemid, PEntity);
                 break;
@@ -3804,15 +4029,15 @@ namespace charutils
                     // Per monster caps pulled from: https://ffxiclopedia.fandom.com/wiki/Experience_Points
                     if (PMember->GetMLevel() <= 50)
                     {
-                        exp = std::fmin(exp, 400.f);
+                        exp = std::fmin(exp, 200.f);
                     }
                     else if (PMember->GetMLevel() <= 60)
                     {
-                        exp = std::fmin(exp, 500.f);
+                        exp = std::fmin(exp, 250.f);
                     }
                     else
                     {
-                        exp = std::fmin(exp, 600.f);
+                        exp = std::fmin(exp, 300.f);
                     }
 
                     if (mobCheck > EMobDifficulty::DecentChallenge)
@@ -3841,7 +4066,7 @@ namespace charutils
                                     exp *= 1.5f;
                                     break;
                                 default:
-                                    exp *= 1.55f;
+                                    exp *= 1.5f;
                                     break;
                             }
                         }
@@ -4068,11 +4293,34 @@ namespace charutils
                             }
                         }
                     }
-                    // pet or companion exp penalty needs to be added here
-                    if (distance(PMember->loc.p, PMob->loc.p) > 100)
+
+                    auto* PEntity = dynamic_cast<CBattleEntity*>(PMember);
+                    if (PEntity->PPet != nullptr)
+                    {
+
+                        if ((PEntity->PPet->objtype == TYPE_TRUST) || (PEntity->PPet->objtype == TYPE_NPC))
+                        {
+                            exp *= 0.7f;
+                        }
+                        else if (PEntity->PPet->StatusEffectContainer->HasStatusEffect(EFFECT_CHARM))
+                        {
+                            exp *= 0.7f;
+                        }
+                    }
+
+                    if (distanceSquared(PMember->loc.p, PMob->loc.p) > 100 * 100)
                     {
                         PMember->pushPacket(new CMessageBasicPacket(PMember, PMember, 0, 0, 37));
                         return;
+                    }
+
+                    if (PMob->m_ExpPenalty > lua["xi"]["settings"]["main"]["PL_PENALTY"].get<uint16>() * 3)
+                    {
+                        exp = std::max<float>(0.0, exp - PMob->m_ExpPenalty - (lua["xi"]["settings"]["main"]["PL_PENALTY"].get<uint16>() * 3));
+                        if (exp == 0.0f)
+                        {
+                            PMember->pushPacket(new CMessageBasicPacket(PMember, PMember, 0, 0, 21)); // No Experience Gained Message
+                        }
                     }
 
                     exp = charutils::AddExpBonus(PMember, exp);

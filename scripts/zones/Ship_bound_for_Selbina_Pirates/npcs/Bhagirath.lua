@@ -58,7 +58,7 @@ entity.onTrigger = function(player, npc)
         vHour = 7
     end
 
-    player:messageSpecial(message, math.floor((2.4 * ((vHour * 60) + 40 - vMin)) / 60), vHour)
+    player:messageSpecial(message, math.abs(math.floor((2.4 * ((vHour * 60) + 40 - vMin)) / 60)), vHour)
 end
 
 entity.onEventUpdate = function(player, csid, option)

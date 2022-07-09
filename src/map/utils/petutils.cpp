@@ -542,6 +542,9 @@ namespace petutils
         PMob->stats.INT = (uint16)((fINT + mINT) * 0.9f);
         PMob->stats.MND = (uint16)((fMND + mMND) * 0.9f);
         PMob->stats.CHR = (uint16)((fCHR + mCHR) * 0.9f);
+        
+        // Set jugs damageType to impact (blunt) damage. All jugs at level 75 cap do impact (blunt) damage. https://ffxiclopedia.fandom.com/wiki/Category:Familiars
+        PMob->m_dmgType = DAMAGE_TYPE::IMPACT;
     }
 
     void LoadAutomatonStats(CCharEntity* PMaster, CPetEntity* PPet, Pet_t* petStats)
@@ -707,19 +710,23 @@ namespace petutils
             default: // case FRAME_HARLEQUIN:
                 PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(2, PPet->GetMLevel());
                 PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(10, PPet->GetMLevel()));
+                PPet->m_dmgType = DAMAGE_TYPE::IMPACT;
                 break;
             case FRAME_VALOREDGE:
                 PPet->m_Weapons[SLOT_SUB]->setShieldSize(3);
                 PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(5, PPet->GetMLevel());
                 PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(5, PPet->GetMLevel()));
+                PPet->m_dmgType = DAMAGE_TYPE::SLASHING;
                 break;
             case FRAME_SHARPSHOT:
                 PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(1, PPet->GetMLevel());
                 PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(11, PPet->GetMLevel()));
+                PPet->m_dmgType = DAMAGE_TYPE::PIERCING;
                 break;
             case FRAME_STORMWAKER:
                 PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(10, PPet->GetMLevel());
                 PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(12, PPet->GetMLevel()));
+                PPet->m_dmgType = DAMAGE_TYPE::IMPACT;
                 break;
         }
 
@@ -879,6 +886,12 @@ namespace petutils
             PPet->addModifier(Mod::MACC, PMaster->getMod(Mod::PET_MACC_MEVA));
             PPet->addModifier(Mod::MEVA, PMaster->getMod(Mod::PET_MACC_MEVA));
         }
+        
+        // Set damageType for Avatars
+        if (PPet->m_PetID == PETID_CAIT_SITH || PPet->m_PetID == PETID_FENRIR)
+            PPet->m_dmgType = DAMAGE_TYPE::SLASHING;
+        else
+            PPet->m_dmgType = DAMAGE_TYPE::IMPACT;
     }
 
     /************************************************************************
@@ -1139,33 +1152,73 @@ namespace petutils
         int16 cost = 0;
         if (id <= 7)
         {
-            if (level < 19)
-            {
-                cost = 1;
-            }
-            else if (level < 38)
+            if (level < 5)
             {
                 cost = 2;
             }
-            else if (level < 57)
+            else if (level < 9)
             {
                 cost = 3;
             }
-            else if (level < 75)
+            else if (level < 14)
             {
                 cost = 4;
             }
-            else if (level < 81)
+            else if (level < 18)
             {
                 cost = 5;
             }
-            else if (level < 91)
+            else if (level < 23)
             {
                 cost = 6;
             }
-            else
+            else if (level < 27)
             {
                 cost = 7;
+            }
+            else if (level < 32)
+            {
+                cost = 8;
+            }
+            else if (level < 36)
+            {
+                cost = 9;
+            }
+            else if (level < 40)
+            {
+                cost = 10;
+            }
+            else if (level < 46)
+            {
+                cost = 11;
+            }
+            else if (level < 49)
+            {
+                cost = 12;
+            }
+            else if (level < 54)
+            {
+                cost = 13;
+            }
+            else if (level < 58)
+            {
+                cost = 14;
+            }
+            else if (level < 63)
+            {
+                cost = 15;
+            }
+            else if (level < 67)
+            {
+                cost = 16;
+            }
+            else if (level < 72)
+            {
+                cost = 17;
+            }
+            else
+            {
+                cost = 18;
             }
         }
         else if (id == 8)
@@ -1202,17 +1255,9 @@ namespace petutils
             {
                 cost = 8;
             }
-            else if (level < 81)
-            {
-                cost = 9;
-            }
-            else if (level < 91)
-            {
-                cost = 10;
-            }
             else
             {
-                cost = 11;
+                cost = 9;
             }
         }
         else if (id == 9)
@@ -1257,17 +1302,9 @@ namespace petutils
             {
                 cost = 10;
             }
-            else if (level < 81)
-            {
-                cost = 11;
-            }
-            else if (level < 91)
-            {
-                cost = 12;
-            }
             else
             {
-                cost = 13;
+                cost = 11;
             }
         }
         else if (id <= 16)
@@ -1312,17 +1349,9 @@ namespace petutils
             {
                 cost = 12;
             }
-            else if (level < 81)
-            {
-                cost = 13;
-            }
-            else if (level < 91)
-            {
-                cost = 14;
-            }
             else
             {
-                cost = 15;
+                cost = 13;
             }
         }
 
@@ -1731,6 +1760,9 @@ namespace petutils
         // Set D evasion and def
         PPet->setModifier(Mod::EVA, battleutils::GetMaxSkill(SKILL_HAND_TO_HAND, JOB_WAR, PPet->GetMLevel()));
         PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(SKILL_HAND_TO_HAND, JOB_WAR, PPet->GetMLevel()));
+        
+        // Set wyvern damageType to slashing damage. "Wyverns do slashing damage..." https://www.bg-wiki.com/ffxi/Wyvern_(Dragoon_Pet)
+        PPet->m_dmgType = DAMAGE_TYPE::SLASHING;
 
         // Job Point: Wyvern Max HP
         if (PMaster->objtype == TYPE_PC)

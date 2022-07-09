@@ -133,6 +133,11 @@ CZone::CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID)
     m_zoneEntities       = new CZoneEntities(this);
     m_CampaignHandler    = new CCampaignHandler(this);
 
+    m_ZoneDirection      = 0;
+    m_ZoneAnimation      = 0;
+    m_ZoneAnimStartTime  = 0;
+    m_ZoneAnimLength     = 0;
+
     // settings should load first
     LoadZoneSettings();
 
@@ -846,7 +851,7 @@ void CZone::ZoneServer(time_point tick, bool check_regions)
         m_BattlefieldHandler->HandleBattlefields(tick);
     }
 
-    if (ZoneTimer && m_zoneEntities->CharListEmpty() && m_timeZoneEmpty + 5s < server_clock::now())
+    if (ZoneTimer && m_zoneEntities->CharListEmpty() && m_timeZoneEmpty + 300s < server_clock::now())
     {
         ZoneTimer->m_type = CTaskMgr::TASK_REMOVE;
         ZoneTimer         = nullptr;
@@ -1134,6 +1139,45 @@ void CZone::CheckRegions(CCharEntity* PChar)
         }
     }
     PChar->m_InsideRegionID = RegionID;
+}
+
+//==========================================================
+
+void CZone::SetZoneDirection(uint8 direction)
+{
+    m_ZoneDirection = direction;
+}
+void CZone::SetZoneAnimation(uint8 animation)
+{
+    m_ZoneAnimation = animation;
+}
+void CZone::SetZoneAnimStartTime(uint32 startTime)
+{
+    m_ZoneAnimStartTime = startTime;
+}
+void CZone::SetZoneAnimLength(uint16 length)
+{
+    m_ZoneAnimLength = length;
+}
+
+uint8 CZone::GetZoneDirection()
+{
+    return m_ZoneDirection;
+}
+
+uint8 CZone::GetZoneAnimation()
+{
+    return m_ZoneAnimation;
+}
+
+uint32 CZone::GetZoneAnimStartTime()
+{
+    return m_ZoneAnimStartTime;
+}
+
+uint16 CZone::GetZoneAnimLength()
+{
+    return m_ZoneAnimLength;
 }
 
 //===========================================================

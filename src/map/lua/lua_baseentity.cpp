@@ -4790,6 +4790,59 @@ void CLuaBaseEntity::setAnimationSub(uint8 animationsub)
 }
 
 /************************************************************************
+ *  Function: setAnimPath()
+ *  Purpose : Updates an animation path for NPC
+ *  Example : GetNPCByID(Door_Offset+12):setAnimPath(1)
+ ************************************************************************/
+
+void CLuaBaseEntity::setAnimPath(uint8 animPath)
+{
+    m_PBaseEntity->manualConfig = true;
+    m_PBaseEntity->animPath = animPath;
+}
+
+/************************************************************************
+ *  Function: setAnimStart()
+ *  Purpose : Initializes NPC start frames
+ *  Example : GetNPCByID(Door_Offset+12):setAnimStart(1724234413)
+ ************************************************************************/
+
+void CLuaBaseEntity::setAnimStart(bool animStart)
+{
+    m_PBaseEntity->animStart = animStart;
+}
+
+/************************************************************************
+ *  Function: setAnimBegin()
+ *  Purpose : Updates an animation start time for NPC
+ *  Example : GetNPCByID(Door_Offset+12):setAnimStart(1724234413)
+ ************************************************************************/
+
+void CLuaBaseEntity::setAnimBegin(uint32 animBegin)
+{
+    m_PBaseEntity->animBegin = animBegin;
+}
+
+/************************************************************************
+ *  Function: sendUpdateToZoneCharsInRange()
+ *  Purpose : Sends an entity update packet to all players in range within the zone
+ ************************************************************************/
+
+void CLuaBaseEntity::sendUpdateToZoneCharsInRange(float maxDistance = 0.0f)
+{
+    EntityList_t charList = m_PBaseEntity->loc.zone->GetZoneEntities()->GetCharList();
+
+    for (EntityList_t::const_iterator it = charList.begin(); it != charList.end(); ++it)
+    {
+        CCharEntity* PChar = (CCharEntity*)it->second;
+        if (maxDistance == 0 || distance(PChar->loc.p, m_PBaseEntity->loc.p) < maxDistance)
+        {
+            PChar->pushPacket(new CEntityUpdatePacket(m_PBaseEntity, ENTITY_SPAWN, UPDATE_ALL_MOB));
+        }
+    }
+}
+
+/************************************************************************
  *  Function: getCallForHelpFlag()
  *  Purpose : Find out if CFH has been called on a mob.
  *  Example : mob:getCallForHelpFlag()
@@ -11142,21 +11195,9 @@ int CLuaBaseEntity::getRACC()
         return 0;
     }
 
-    CBattleEntity* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
+    auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
 
-    int skill = PEntity->GetSkill(weapon->getSkillType());
-    int acc   = skill;
-
-    if (skill > 200)
-    {
-        acc = (int)(200 + (skill - 200) * 0.9);
-    }
-
-    acc += PEntity->getMod(Mod::RACC);
-    acc += PEntity->AGI() / 2;
-    acc = acc + std::min<int16>(((100 + PEntity->getMod(Mod::FOOD_RACCP)) * acc / 100), PEntity->getMod(Mod::FOOD_RACC_CAP));
-
-    return acc;
+    return PEntity->RACC(weapon->getSkillType(), distance(PEntity->loc.p, PEntity->GetBattleTarget()->loc.p),  weapon->getILvlSkill());
 }
 
 /************************************************************************
@@ -11178,7 +11219,9 @@ uint16 CLuaBaseEntity::getRATT()
         return 0;
     }
 
-    return static_cast<CBattleEntity*>(m_PBaseEntity)->RATT(weapon->getSkillType(), weapon->getILvlSkill());
+    auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
+
+    return PEntity->RATT(weapon->getSkillType(), distance(PEntity->loc.p, PEntity->GetBattleTarget()->loc.p),  weapon->getILvlSkill());
 }
 
 /************************************************************************
@@ -14848,6 +14891,11 @@ void CLuaBaseEntity::Register()
 
     SOL_REGISTER("getPlayerRegionInZone", CLuaBaseEntity::getPlayerRegionInZone);
     SOL_REGISTER("updateToEntireZone", CLuaBaseEntity::updateToEntireZone);
+
+    SOL_REGISTER("setAnimPath",CLuaBaseEntity::setAnimPath);
+    SOL_REGISTER("setAnimStart",CLuaBaseEntity::setAnimStart);
+    SOL_REGISTER("setAnimBegin",CLuaBaseEntity::setAnimBegin);
+    SOL_REGISTER("sendUpdateToZoneCharsInRange",CLuaBaseEntity::sendUpdateToZoneCharsInRange);
 
     // Abyssea
     SOL_REGISTER("getAvailableTraverserStones", CLuaBaseEntity::getAvailableTraverserStones);

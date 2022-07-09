@@ -26,6 +26,7 @@ end
 spell_object.onSpellCast = function(caster, target, spell)
     -- local dCHR = (caster:getStat(xi.mod.CHR) - target:getStat(xi.mod.CHR))
     local bonus = 0 -- No idea what value, but seems likely to need this edited later to get retail resist rates.
+    local duration = 30
     local params = {}
     params.diff = nil
     params.attribute = xi.mod.CHR
@@ -36,8 +37,15 @@ spell_object.onSpellCast = function(caster, target, spell)
 
     if (resist >= 0.25 and caster:getCharmChance(target, false) > 0) then
         spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
-        if (caster:isMob()) then
-            target:addStatusEffect(xi.effect.CHARM_I, 0, 0, 30*resist)
+
+        duration = duration * resist
+
+        duration = calculateBuildDuration(target, duration, params.effect)
+
+        if duration == 0 then
+            spell:setMsg(xi.msg.basic.NONE)
+        elseif (caster:isMob()) then
+            target:addStatusEffect(xi.effect.CHARM_I, 0, 0, duration)
             caster:charm(target)
         else
             caster:charmPet(target)
