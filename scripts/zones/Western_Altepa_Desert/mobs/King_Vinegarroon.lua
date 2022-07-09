@@ -10,7 +10,6 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
-    mob:setMobMod(xi.mobMod.DRAW_IN, 2)
 end
 
 entity.onMobDrawIn = function(mob, target)
@@ -60,6 +59,20 @@ end
 
 entity.onMobFight = function(mob, target)
     entity.mobRegen(mob)
+
+    local drawInWait = mob:getLocalVar("DrawInWait")
+
+    if target:getZPos() > -540 and os.time() > drawInWait then -- Northern Draw In
+        local rot = target:getRotPos()
+        target:setPos(target:getXPos(),target:getYPos(),-542,rot)
+        mob:messageBasic(232, 0, 0, target)
+        mob:setLocalVar("DrawInWait", os.time() + 2)
+    elseif target:getXPos() < -350 and os.time() > drawInWait then  -- Southern Draw In
+        local rot = target:getRotPos()
+        target:setPos(-348,target:getYPos(),target:getZPos(),rot)
+        mob:messageBasic(232, 0, 0, target)
+        mob:setLocalVar("DrawInWait", os.time() + 2)
+    end
 end
 
 return entity
