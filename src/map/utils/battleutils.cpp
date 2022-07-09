@@ -5747,8 +5747,13 @@ namespace battleutils
         }
     }
 
-    bool DrawIn(CBattleEntity* PTarget, CMobEntity* PMob, float offset)
+    bool DrawIn(CBattleEntity* PTarget, CMobEntity* PMob, float offset, uint8 drawInRange, uint16 maximumReach, bool includeParty)
     {
+        if (std::chrono::time_point_cast<std::chrono::seconds>(server_clock::now()).time_since_epoch().count() - PMob->GetLocalVar("DrawInTime") < 2)
+        {
+            return false;
+        }
+
         position_t& pos        = PMob->loc.p;
         position_t  nearEntity = nearPosition(pos, offset, (float)0);
 
@@ -5762,51 +5767,53 @@ namespace battleutils
         nearEntity.y -= 1.0f;
 
         bool  success        = false;
-        float drawInDistance = (float)(PMob->getMobMod(MOBMOD_DRAW_IN) > 1 ? PMob->getMobMod(MOBMOD_DRAW_IN) : PMob->GetMeleeRange() * 2);
+        // float drawInDistance = (float)(PMob->getMobMod(MOBMOD_DRAW_IN) > 1 ? PMob->getMobMod(MOBMOD_DRAW_IN) : PMob->GetMeleeRange() * 2);
 
-        if (std::chrono::time_point_cast<std::chrono::seconds>(server_clock::now()).time_since_epoch().count() - PMob->GetLocalVar("DrawInTime") < 2)
-        {
-            return false;
-        }
+        // if (std::chrono::time_point_cast<std::chrono::seconds>(server_clock::now()).time_since_epoch().count() - PMob->GetLocalVar("DrawInTime") < 2)
+        // {
+        //     return false;
+        // }
 
-        std::function<void(CBattleEntity*)> drawInFunc = [PMob, drawInDistance, &nearEntity, &success](CBattleEntity* PMember)
+        std::function<void(CBattleEntity*)> drawInFunc = [PMob, drawInRange, maximumReach, &nearEntity, &success](CBattleEntity* PMember)
         {
             float pDistance = distance(PMob->loc.p, PMember->loc.p);
-
-            if (PMob->loc.zone == PMember->loc.zone && pDistance > drawInDistance && PMember->status != STATUS_TYPE::CUTSCENE_ONLY)
+            if (PMob->loc.zone == PMember->loc.zone && pDistance > drawInRange && pDistance < maximumReach &&
+                PMember->status != STATUS_TYPE::CUTSCENE_ONLY && !PMember->isDead() && !PMember->isMounted())
+            // if (PMob->loc.zone == PMember->loc.zone && dist > drawInRange && dist < maximumReach &&
+            //     PMember->status != STATUS_TYPE::STATUS_CUTSCENE_ONLY && !PMember->isDead() && !PMember->isMounted())
             {
-                // don't draw in dead players for now!
-                // see tractor
-                if (PMember->isDead() || PMember->isMounted())
+                // draw in!
+                if (PMob->getMobMod(MOBMOD_DRAW_IN_FRONT))
                 {
-                    // don't do anything
-                }
-                else
-                {
-                    // draw in!
                     PMember->loc.p.x = nearEntity.x;
                     PMember->loc.p.y = nearEntity.y;
                     PMember->loc.p.z = nearEntity.z;
-
-                    if (PMember->objtype == TYPE_PC)
-                    {
-                        CCharEntity* PChar = static_cast<CCharEntity*>(PMember);
-                        PChar->pushPacket(new CPositionPacket(PChar));
-                    }
-                    else
-                    {
-                        PMember->loc.zone->UpdateEntityPacket(PMember, ENTITY_UPDATE, UPDATE_POS);
-                    }
-
-                    luautils::OnMobDrawIn(PMob, PMember);
-                    PMob->loc.zone->PushPacket(PMob, CHAR_INRANGE, new CMessageBasicPacket(PMember, PMember, 0, 0, 232));
-                    success = true;
                 }
+                else
+                {
+                    PMember->loc.p.x = PMob->loc.p.x;
+                    PMember->loc.p.y = nearEntity.y;
+                    PMember->loc.p.z = PMob->loc.p.z;
+                }
+
+                if (PMember->objtype == TYPE_PC)
+                {
+                    CCharEntity* PChar = static_cast<CCharEntity*>(PMember);
+                    PChar->pushPacket(new CPositionPacket(PChar));
+                }
+                else
+                {
+                    PMember->loc.zone->UpdateEntityPacket(PMember, ENTITY_UPDATE, UPDATE_POS);
+                }
+
+                luautils::OnMobDrawIn(PMob, PMember);
+                PMob->loc.zone->PushPacket(PMob, CHAR_INRANGE, new CMessageBasicPacket(PMember, PMember, 0, 0, 232));
+                success = true;
             }
         };
 
         // check if i should draw-in party/alliance
-        if (PMob->getMobMod(MOBMOD_DRAW_IN) > 1)
+        if (includeParty)
         {
             PTarget->ForAlliance(drawInFunc);
         }
