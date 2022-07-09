@@ -23,8 +23,8 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     local params = {}
     params.ftp100 = 3.5 params.ftp200 = 3.5 params.ftp300 = 3.5
     params.str_wsc = 0.0 params.dex_wsc = 0.0 params.vit_wsc = 0.6 params.agi_wsc = 0.0 params.int_wsc = 0.0 params.mnd_wsc = 0.0 params.chr_wsc = 0.0
-    params.ele = xi.magic.ele.ICE
-    params.skill = xi.skill.GREAT_SWORD
+    params.element = xi.magic.ele.ICE
+    params.skillType = xi.skill.GREAT_SWORD
     params.includemab = true
 
     if (xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
