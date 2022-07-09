@@ -53,7 +53,7 @@ xi.beastmengroups.zones =
     {xi.zone.VALKURM_DUNES, "Valkurm_Dunes", xi.beastmengroups.VALKURM_DUNES, 3},
     {xi.zone.BUBURIMU_PENINSULA, "Buburimu_Peninsula", xi.beastmengroups.BUBURIMU_PENINSULA, 3},
     {xi.zone.QUFIM_ISLAND, "Qufim_Island", xi.beastmengroups.QUFIM_ISLAND, 3},
-    {xi.zone.GIDDEUS, "Giddeus", xi.beastmengroups.GIDDEUS, 3, },
+    {xi.zone.GIDDEUS, "Giddeus", xi.beastmengroups.GIDDEUS, 3},
     {xi.zone.DANGRUF_WADI, "Dangruf_Wadi", xi.beastmengroups.DANGRUF_WADI, 5},
     {xi.zone.YUGHOTT_GROTTO, "Yughott_Grotto", xi.beastmengroups.YUGHOTT_GROTTO, 5},
     {xi.zone.GHELSBA_OUTPOST, "Ghelsba_Outpost", xi.beastmengroups.GHELSBA_OUTPOST, 5},
@@ -69,7 +69,6 @@ for _, zoneID in pairs(xi.beastmengroups.zones) do
             local spawnedMobs = zone:getMobs()
             for _, mob in pairs(spawnedMobs) do
                 if not mob:isMobType(xi.mobskills.mobType.NOTORIOUS) and mob:getSystem() == xi.ecosystem.BEASTMEN then
-                    local tableLength = #zoneID
                     local mobID = mob:getID()
                     local prevSpawn = 0
                     local originalSpawn = mob:getSpawnPos()
