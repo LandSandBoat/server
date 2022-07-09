@@ -1036,7 +1036,7 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
                     }
                 }
 
-                if ((actionTarget.reaction & REACTION::HIT) != REACTION::NONE)
+                if (actionTarget.reaction == REACTION::HIT)
                 {
                     int wspoints = settings::get<uint8>("map.WS_POINTS_BASE");
                     if (PWeaponSkill->getPrimarySkillchain() != 0)
