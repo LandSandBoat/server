@@ -25,7 +25,6 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.DRAW_IN_CUSTOM_RANGE, 15)
 end
 
-
 entity.onMobFight = function(mob, target)
     if mob:getHPP() > 25 then
         mob:setMod(xi.mod.REGAIN, 10)
