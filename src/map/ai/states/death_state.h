@@ -52,7 +52,7 @@ public:
 private:
     CBattleEntity* const m_PEntity;
     duration             m_deathTime;
-    bool                 m_raiseSent{ false };
+    time_point           m_lastRaiseSent;
     time_point           m_raiseTime;
 };
 
