@@ -8,6 +8,7 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/settings")
+require("scripts/globals/garrison")
 require("scripts/globals/status")
 require("scripts/globals/zone")
 -----------------------------------
@@ -987,6 +988,14 @@ end
 -----------------------------------
 
 xi.conquest.overseerOnTrade = function(player, npc, trade, guardNation, guardType)
+    -- Garrison Trade
+	if 
+		guardType == xi.conq.guard.OUTPOST and 
+		(trade:getItemId() >= 1528 and trade:getItemId() <= 1543) 
+	then
+		xi.garrison.onTrade(player, npc, trade, guardNation)
+	end
+	
     if player:getNation() == guardNation or guardNation == xi.nation.OTHER then
         local item = trade:getItemId()
         local tradeConfirmed = false
@@ -1054,9 +1063,13 @@ end
 
 xi.conquest.overseerOnTrigger = function(player, npc, guardNation, guardType, guardEvent, guardRegion)
     local pNation = player:getNation()
-
+    local zoneId = npc:getZoneID()
+    local status = player:getCharVar(string.format("[GARRISON]Status_%s", zoneId))
+	-- GARRISON
+	if status > 0 then
+		xi.garrison.onTrigger(player, npc)
     -- SUPPLY RUNS
-    if pNation == guardNation and areSuppliesRotten(player, npc, guardType) then
+    elseif pNation == guardNation and areSuppliesRotten(player, npc, guardType) then
         -- do nothing else
     elseif pNation == guardNation and guardType >= xi.conquest.guard.OUTPOST and canDeliverSupplies(player, guardNation, guardEvent, guardRegion) then
         -- do nothing else

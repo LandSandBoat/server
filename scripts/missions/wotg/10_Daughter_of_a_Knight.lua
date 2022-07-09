@@ -22,7 +22,7 @@ local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.DAUGHTER_
 
 mission.reward =
 {
-    keyItem = xi.ki.BOTTLE_OF_TREANT_TONIC,
+    keyItem     = xi.ki.BOTTLE_OF_TREANT_TONIC,
     nextMission = { xi.mission.log_id.WOTG, xi.mission.id.wotg.A_SPOONFUL_OF_SUGAR },
 }
 
@@ -40,6 +40,7 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     -- TODO: What are these args from caps?
+                    -- Observed: 647298804, 0, 1743, 1, 759, 600, 0, 4
                     return mission:progressEvent(935, 0, 2)
                 end,
             },
@@ -66,18 +67,24 @@ mission.sections =
                 onTrade = function(player, npc, trade)
                     if npcUtil.tradeHasExactly(trade, xi.items.CERNUNNOS_BULB) then
                         -- TODO: What are these args from caps?
+                        -- Observed : 647298804, 0, 1743, 1, 759, 600, 0, 4
                         return mission:progressEvent(937, 0, 2)
                     end
                 end,
 
                 onTrigger = function(player, npc)
-                    -- Reminder
-                    return mission:event(936)
+                    if mission:getVar(player, 'Option') == 0 then
+                        return mission:event(936)
+                    end
                 end,
             },
 
             onEventFinish =
             {
+                [936] = function(player, csid, option, npc)
+                    mission:setVar(player, 'Option', 1)
+                end,
+
                 [937] = function(player, csid, option, npc)
                     -- NOTE: We don't complete the trade, the player needs to keep the CERNUNNOS_BULB
                     player:setMissionStatus(mission.areaId, 2)
@@ -94,17 +101,6 @@ mission.sections =
             return currentMission == mission.missionId and missionStatus == 2
         end,
 
-        [xi.zone.SOUTHERN_SAN_DORIA] =
-        {
-            ['Amaura'] =
-            {
-                onTrigger = function(player, npc)
-                    -- Reminder
-                    return mission:event(938)
-                end,
-            },
-        },
-
         [xi.zone.JUGNER_FOREST_S] =
         {
             ['Humus-rich_Earth'] =
@@ -113,6 +109,7 @@ mission.sections =
                     if npcUtil.tradeHasExactly(trade, xi.items.CERNUNNOS_BULB) then
                         player:confirmTrade()
                         player:setMissionStatus(mission.areaId, 3)
+
                         return mission:messageSpecial(pastJugnerID.text.YOU_PLANT_ITEM, xi.items.CERNUNNOS_BULB)
                     end
                 end,
@@ -130,11 +127,20 @@ mission.sections =
             return currentMission == mission.missionId and missionStatus == 3
         end,
 
+        [xi.zone.SOUTHERN_SAN_DORIA] =
+        {
+            ['Amaura'] =
+            {
+                onTrigger = function(player, npc)
+                    return mission:event(938):oncePerZone()
+                end,
+            },
+        },
+
         [xi.zone.JUGNER_FOREST_S] =
         {
             ['Humus-rich_Earth'] =
             {
-                -- Reminder
                 onTrigger = function(player, npc)
                     return mission:messageSpecial(pastJugnerID.text.ITEM_IS_PLANTED_HERE, xi.items.CERNUNNOS_BULB)
                 end,
@@ -143,7 +149,6 @@ mission.sections =
 
         [xi.zone.JUGNER_FOREST] =
         {
-            -- TODO: This has shifted and appears as "Field Manual"
             ['Humus-rich_Earth'] =
             {
                 onTrigger = function(player, npc)
@@ -172,14 +177,17 @@ mission.sections =
             ['Humus-rich_Earth'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getLocalVar("CERNUNNOS_DEFEATED") == 1 then
-                        -- TODO: This CS looks strange, the Treant is blocking the camera.
+                    if player:getLocalVar("cernunnosDefeated") == 1 then
                         return mission:progressEvent(34, 104, 300, 200, 100, 0, 1648, 0, 0) -- TODO: What is this?
                     else
                         local mob = GetMobByID(presentJugnerID.mob.CERNUNNOS)
+
                         if not mob:isSpawned() then
-                            player:messageSpecial(presentJugnerID.text.DRAWN_UNWANTED_ATTENTION)
                             SpawnMob(presentJugnerID.mob.CERNUNNOS):updateClaim(player)
+
+                            return mission:messageSpecial(presentJugnerID.text.DRAWN_UNWANTED_ATTENTION)
+                        else
+                            return mission:messageSpecial(presentJugnerID.text.SENSE_UNUSUAL_PRESENCE)
                         end
                     end
                 end,
@@ -189,7 +197,8 @@ mission.sections =
             {
                 [34] = function(player, csid, option, npc)
                     npcUtil.giveKeyItem(player, xi.ki.CERNUNNOS_RESIN)
-                    player:setLocalVar("CERNUNNOS_DEFEATED", 0)
+
+                    player:setLocalVar("cernunnosDefeated", 0)
                     player:setMissionStatus(mission.areaId, 5)
                 end,
             },
@@ -224,16 +233,18 @@ mission.sections =
             onEventFinish =
             {
                 [939] = function(player, csid, option, npc)
-                    player:delLeyItem(xi.ki.CERNUNNOS_RESIN)
+                    player:delKeyItem(xi.ki.CERNUNNOS_RESIN)
                     player:setMissionStatus(mission.areaId, 6)
-                    mission:setVar(player, 'Wait', getVanaMidnight())
+
+                    mission:setVar(player, 'Timer', VanadielUniqueDay() + 1)
+                    mission:setMustZone(player)
                 end,
             },
         },
     },
 
     -- 6. Wait until the next game day, zone, and talk to her again for a cutscene and the Bottle of Treant Tonic.
-    -- If you talk to her too soon, you must zone before trying again. Talking to her at exactly 0:00 will reset the clock.
+    -- If you talk to her too soon, you must zone before trying again.
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and missionStatus == 6
@@ -244,10 +255,15 @@ mission.sections =
             ['Amaura'] =
             {
                 onTrigger = function(player, npc)
-                    if os.time() > mission:getVar(player, 'Wait') then -- The next day
-                        return mission:progressEvent(941, 0, 2964, 3585, 4416) -- TODO: What is this?
-                    else -- Reset the timer (brutal)
-                        mission:setVar(player, 'Wait', getVanaMidnight())
+                    if
+                        not mission:getMustZone(player) and
+                        mission:getVar(player, 'Timer') <= VanadielUniqueDay()
+                    then
+                        return mission:progressEvent(941)
+                    elseif mission:getLocalVar(player, 'amauraOption') == 0 then
+                        -- This event is only encountered once per zone, and then reverts to the default
+                        -- dialogue.
+
                         return mission:progressEvent(940)
                     end
                 end,
@@ -255,6 +271,11 @@ mission.sections =
 
             onEventFinish =
             {
+                [940] = function(player, csid, option, npc)
+                    mission:setLocalVar(player, 'amauraOption', 1)
+                    mission:setMustZone(player)
+                end,
+
                 [941] = function(player, csid, option, npc)
                     mission:complete(player)
                 end,

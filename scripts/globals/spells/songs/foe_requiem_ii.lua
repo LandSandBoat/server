@@ -51,6 +51,8 @@ spell_object.onSpellCast = function(caster, target, spell)
         duration = duration * 2
     end
 
+    duration = duration * resm
+
     -- Try to overwrite weaker slow / haste
     if canOverwrite(target, effect, power) then
         -- overwrite them

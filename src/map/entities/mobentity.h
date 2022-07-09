@@ -230,6 +230,7 @@ public:
     int8   m_battlefieldID; // battlefield belonging to
     uint16 m_bcnmID;        // belongs to which battlefield
     bool   m_giveExp;       // prevent exp gain
+    uint16 m_ExpPenalty;    // Exp Penalty for PL holding hate.
     bool   m_neutral;       // stop linking / aggroing
 
     position_t m_SpawnPoint; // spawn point of mob

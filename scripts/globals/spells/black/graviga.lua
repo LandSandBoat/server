@@ -28,7 +28,11 @@ spell_object.onSpellCast = function(caster, target, spell)
     duration = duration * applyResistanceEffect(caster, target, spell, params)
 
     if (duration >= 30) then --Do it!
-        if (target:addStatusEffect(xi.effect.WEIGHT, power, 0, duration)) then
+        duration = calculateBuildDuration(target, duration, params.effect)
+
+        if duration == 0 then
+            spell:setMsg(xi.msg.basic.NONE)
+        elseif (target:addStatusEffect(xi.effect.WEIGHT, power, 0, duration)) then
             spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         else
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)

@@ -1688,6 +1688,24 @@ xi.mod =
     AUGMENT_BLU_MAGIC      = 1036, -- Percent chance for BLU magic to receive 3x WSC value for spell (BLU AF3 Sets)
     GEOMANCY_MP_NO_DEPLETE = 1037, -- Percent chance for Geomancy to cost 0 MP (GEO AF3 Sets)
 
+    -- Permenant Resistance Build Modifiers
+    SLEEPRESBUILD                 = 1138,
+    POISONRESBUILD                = 1139,
+    PARALYZERESBUILD              = 1140,
+    BLINDRESBUILD                 = 1141,
+    SILENCERESBUILD               = 1142,
+    VIRUSRESBUILD                 = 1143,
+    PETRIFYRESBUILD               = 1144,
+    BINDRESBUILD                  = 1145,
+    CURSERESBUILD                 = 1146,
+    GRAVITYRESBUILD               = 1147,
+    SLOWRESBUILD                  = 1148,
+    STUNRESBUILD                  = 1149,
+    CHARMRESBUILD                 = 1150,
+    AMNESIARESBUILD               = 1151,
+    LULLABYRESBUILD               = 1152,
+    DEATHRESBUILD                 = 1153,
+
     -- IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN src/map/modifier.h ASWELL!
 
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
@@ -2443,6 +2461,11 @@ xi.mobMod =
     ALLI_HATE           = 68, -- Range around target to add alliance member to enmity list.
     NO_LINK             = 69, -- If set, mob cannot link until unset.
     NO_REST             = 70, -- Mob cannot regain hp (e.g. re-burrowing antlions during ENM).
+    DRAW_IN_INCLUDE_PARTY     = 71, -- this will cause the mob's draw-in to also affect all party and alliance members
+    DRAW_IN_FRONT             = 72, -- Mob will draw in slightly in front of them instead of the center of their hitbox
+    DRAW_IN_CUSTOM_RANGE      = 73, -- override the default range of MeleeRange*2 of when players start to get drawn-in
+    DRAW_IN_MAXIMUM_REACH     = 74, -- players further than this range (yalms) will be unaffected by the draw-in. default (0) is whole zone
+    DRAW_IN_IGNORE_STATIONARY = 75, -- stationary or bound mobs draw-in the moment they cannot attack you anymore (out of range). Place this mob mod to stop that behavior.
 }
 
 -----------------------------------

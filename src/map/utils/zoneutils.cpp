@@ -28,6 +28,7 @@
 
 #include "../campaign_system.h"
 #include "../conquest_system.h"
+#include "../entities/battleentity.h"
 #include "../entities/mobentity.h"
 #include "../entities/npcentity.h"
 #include "../items/item_weapon.h"
@@ -403,6 +404,39 @@ namespace zoneutils
 
                     ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setMaxHit(1);
                     ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setSkillType(sql->GetIntData(17));
+                    DAMAGE_TYPE damageType = DAMAGE_TYPE::NONE;
+                    switch (((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->getSkillType()) {
+                    // Combat Skills
+                    case SKILLTYPE::SKILL_NONE: 
+                        damageType = DAMAGE_TYPE::NONE; 
+                        break;
+                    case SKILLTYPE::SKILL_ARCHERY:
+                    case SKILLTYPE::SKILL_MARKSMANSHIP:
+                    case SKILLTYPE::SKILL_THROWING:
+                    case SKILLTYPE::SKILL_DAGGER: 
+                    case SKILLTYPE::SKILL_POLEARM: 
+                        damageType = DAMAGE_TYPE::PIERCING; 
+                        break;
+                    case SKILLTYPE::SKILL_SWORD:
+                    case SKILLTYPE::SKILL_GREAT_SWORD:
+                    case SKILLTYPE::SKILL_AXE:
+                    case SKILLTYPE::SKILL_GREAT_AXE: 
+                    case SKILLTYPE::SKILL_SCYTHE: 
+                    case SKILLTYPE::SKILL_KATANA:
+                    case SKILLTYPE::SKILL_GREAT_KATANA: 
+                        damageType = DAMAGE_TYPE::SLASHING; 
+                        break;
+                    case SKILLTYPE::SKILL_CLUB: 
+                    case SKILLTYPE::SKILL_STAFF: 
+                        damageType = DAMAGE_TYPE::IMPACT; 
+                        break;
+                    case SKILLTYPE::SKILL_HAND_TO_HAND: 
+                        damageType = DAMAGE_TYPE::HTH; 
+                        break;
+                    default: break;
+                }
+                ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDmgType(damageType);
+                
                     PMob->m_dmgMult = sql->GetUIntData(18);
                     ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDelay((sql->GetIntData(19) * 1000) / 60);
                     ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setBaseDelay((sql->GetIntData(19) * 1000) / 60);
@@ -434,14 +468,14 @@ namespace zoneutils
                     PMob->setModifier(Mod::HTH_SDT, (uint16)(sql->GetFloatData(40) * 1000));
                     PMob->setModifier(Mod::IMPACT_SDT, (uint16)(sql->GetFloatData(41) * 1000));
 
-                    PMob->setModifier(Mod::FIRE_SDT, (int16)sql->GetFloatData(42));    // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
-                    PMob->setModifier(Mod::ICE_SDT, (int16)sql->GetFloatData(43));     // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
-                    PMob->setModifier(Mod::WIND_SDT, (int16)sql->GetFloatData(44));    // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
-                    PMob->setModifier(Mod::EARTH_SDT, (int16)sql->GetFloatData(45));   // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
-                    PMob->setModifier(Mod::THUNDER_SDT, (int16)sql->GetFloatData(46)); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
-                    PMob->setModifier(Mod::WATER_SDT, (int16)sql->GetFloatData(47));   // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
-                    PMob->setModifier(Mod::LIGHT_SDT, (int16)sql->GetFloatData(48));   // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
-                    PMob->setModifier(Mod::DARK_SDT, (int16)sql->GetFloatData(49));    // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
+                    PMob->setModifier(Mod::FIRE_SDT, (int16)sql->GetIntData(42));      // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
+                    PMob->setModifier(Mod::ICE_SDT, (int16)sql->GetIntData(43));       // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
+                    PMob->setModifier(Mod::WIND_SDT, (int16)sql->GetIntData(44));      // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
+                    PMob->setModifier(Mod::EARTH_SDT, (int16)sql->GetIntData(45));     // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
+                    PMob->setModifier(Mod::THUNDER_SDT, (int16)sql->GetIntData(46));   // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
+                    PMob->setModifier(Mod::WATER_SDT, (int16)sql->GetIntData(47));     // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
+                    PMob->setModifier(Mod::LIGHT_SDT, (int16)sql->GetIntData(48));     // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
+                    PMob->setModifier(Mod::DARK_SDT, (int16)sql->GetIntData(49));      // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
 
                     PMob->setModifier(Mod::FIRE_MEVA, (int16)(sql->GetIntData(50)));   // These are stored as signed integers which
                     PMob->setModifier(Mod::ICE_MEVA, (int16)(sql->GetIntData(51)));    // is directly the modifier starting value.

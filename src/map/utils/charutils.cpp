@@ -713,6 +713,10 @@ namespace charutils
         if (zoning == 2)
         {
             ShowDebug("Player <%s> logging in to zone <%u>", PChar->name.c_str(), PChar->getZone());
+
+            // Set this value so we can not process some effects until the player is fully in-game.
+            // This is cleared in the player global, onGameIn function.
+            PChar->SetLocalVar("gameLogin", 1);
         }
 
         PChar->SetMLevel(PChar->jobs.job[PChar->GetMJob()]);
@@ -4040,7 +4044,7 @@ namespace charutils
                                     exp *= 1.5f;
                                     break;
                                 default:
-                                    exp *= 1.55f;
+                                    exp *= 1.5f;
                                     break;
                             }
                         }
@@ -4267,11 +4271,34 @@ namespace charutils
                             }
                         }
                     }
-                    // pet or companion exp penalty needs to be added here
-                    if (distance(PMember->loc.p, PMob->loc.p) > 100)
+
+                    auto* PEntity = dynamic_cast<CBattleEntity*>(PMember);
+                    if (PEntity->PPet != nullptr)
+                    {
+
+                        if ((PEntity->PPet->objtype == TYPE_TRUST) || (PEntity->PPet->objtype == TYPE_NPC))
+                        {
+                            exp *= 0.7f;
+                        }
+                        else if (PEntity->PPet->StatusEffectContainer->HasStatusEffect(EFFECT_CHARM))
+                        {
+                            exp *= 0.7f;
+                        }
+                    }
+
+                    if (distanceSquared(PMember->loc.p, PMob->loc.p) > 100 * 100)
                     {
                         PMember->pushPacket(new CMessageBasicPacket(PMember, PMember, 0, 0, 37));
                         return;
+                    }
+
+                    if (PMob->m_ExpPenalty > lua["xi"]["settings"]["main"]["PL_PENALTY"].get<uint16>() * 3)
+                    {
+                        exp = std::max<float>(0.0, exp - PMob->m_ExpPenalty - (lua["xi"]["settings"]["main"]["PL_PENALTY"].get<uint16>() * 3));
+                        if (exp == 0.0f)
+                        {
+                            PMember->pushPacket(new CMessageBasicPacket(PMember, PMember, 0, 0, 21)); // No Experience Gained Message
+                        }
                     }
 
                     exp = charutils::AddExpBonus(PMember, exp);

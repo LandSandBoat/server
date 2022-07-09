@@ -12,6 +12,10 @@ require("scripts/globals/quests")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
+    mob:setMobMod(xi.mobMod.DRAW_IN_INCLUDE_PARTY, 1)
+    mob:setMobMod(xi.mobMod.DRAW_IN_CUSTOM_RANGE, 15)
+
     -- Failsafe to make sure NPC is down when NM is up
     if xi.settings.main.OLDSCHOOL_G2 then
         GetNPCByID(ID.npc.BOREAL_COEURL_QM):showNPC(0)

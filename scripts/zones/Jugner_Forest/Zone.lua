@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: Jugner_Forest (104)
---
 -----------------------------------
 local ID = require("scripts/zones/Jugner_Forest/IDs")
 require("scripts/quests/i_can_hear_a_rainbow")
@@ -52,6 +50,12 @@ zone_object.onZoneIn = function( player, prevZone)
     end
 
     return cs
+end
+
+zone_object.onZoneOut = function(player)
+    if player:hasStatusEffect(xi.effect.BATTLEFIELD) then
+        player:delStatusEffect(xi.effect.BATTLEFIELD)
+	end
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)

@@ -263,7 +263,7 @@ REPLACE INTO `item_basic` (`itemid`, `subid`, `name`, `sortname`, `stackSize`, `
     (1962, 0, 'handful_of_platinum_arrowheads', 'plt._arrowheads', 99, 4, 43, 0, 35),
     (1979, 0, 'cup_of_leech_saliva', 'leech_saliva', 12, 4, 44, 0, 358),
     (1980, 0, 'jar_of_antican_acid', 'antican_acid', 12, 4, 50, 0, 714),
-    (1984, 0, 'snapping_mole', 'snapping_mole', 12, 4, 59, 0, 402),
+    (1984, 0, 'snapping_mole', 'snapping_mole', 12, 4, 59, 0, 42),
     (1997, 0, 'square_of_sailcloth', 'sailcloth', 12, 4, 40, 0, 1242),
     (1998, 0, 'square_of_sheep_chammy', 'sheep_chammy', 12, 4, 41, 0, 1085),
     (2013, 0, 'vial_of_lizard_blood', 'lizard_blood', 12, 4, 44, 0, 384),

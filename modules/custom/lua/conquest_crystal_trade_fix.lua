@@ -7,9 +7,10 @@ require("scripts/globals/teleports")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/zone")
+require("scripts/globals/garrison")
 -----------------------------------
 
 local m = Module:new("conquest_crystal_trade_fix")
@@ -45,6 +46,14 @@ local expRings =
 }
 
 m:addOverride("xi.conquest.overseerOnTrade", function(player, npc, trade, guardNation, guardType)
+    -- Garrison Trade
+	if 
+		guardType == xi.conq.guard.OUTPOST and 
+		(trade:getItemId() >= 1528 and trade:getItemId() <= 1543) 
+	then
+		xi.garrison.onTrade(player, npc, trade, guardNation)
+	end
+	
   if player:getNation() == guardNation or guardNation == xi.nation.OTHER then
       local item = trade:getItemId()
       local tradeConfirmed = false

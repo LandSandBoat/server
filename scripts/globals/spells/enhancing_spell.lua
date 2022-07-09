@@ -330,7 +330,8 @@ xi.spells.enhancing.calculateEnhancingDuration = function(caster, target, spell,
 
     -- Deodorize, Invisible and Sneak have a random factor to base duration.
     if spellEffect == xi.effect.DEODORIZE or spellEffect == xi.effect.INVISIBLE or spellEffect == xi.effect.SNEAK then
-        duration = duration + 60 * math.random(0, 2)
+        duration = calculateDuration(math.random(130, 310), spell:getSkillType(), spell:getSpellGroup(), caster, target)
+        duration = duration + target:getMod(xi.mod.INVISIBLE_DURATION)
     end
 
     --------------------

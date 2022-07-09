@@ -133,6 +133,14 @@ local function MobTakeAoEShadow(mob, target, max)
     return math.random(1, max)
 end
 
+local function getBarSpellDefBonus(mob, target, spellElement)
+    if spellElement >= xi.magic.element.FIRE and spellElement <= xi.magic.element.WATER then
+        if target:hasStatusEffect(xi.magic.barSpell[spellElement]) then -- bar- spell magic defense bonus
+            return target:getStatusEffect(xi.magic.barSpell[spellElement]):getSubPower()
+        end
+    end
+end
+
 xi.mobskills.mobRangedMove = function(mob, target, skill, numberofhits, accmod, dmgmod, tpeffect)
     -- this will eventually contian ranged attack code
     return xi.mobskills.mobPhysicalMove(mob, target, skill, numberofhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.RANGED)
@@ -292,24 +300,21 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgm
     --get all the stuff we need
     local resist = 1
 
-    local mdefBarBonus = 0
-    if
-        element >= xi.magic.element.FIRE and
-        element <= xi.magic.element.WATER and
-        target:hasStatusEffect(xi.magic.barSpell[element])
-    then -- bar- spell magic defense bonus
-        mdefBarBonus = target:getStatusEffect(xi.magic.barSpell[element]):getSubPower()
-    end
-    -- plus 100 forces it to be a number
-    local mab = (100 + mob:getMod(xi.mod.MATT)) / (100 + target:getMod(xi.mod.MDEF) + mdefBarBonus)
-
-    if mab > 1.3 then
-        mab = 1.3
+    local barspellDef = getBarSpellDefBonus(mob, target, element)
+    if barspellDef == nil then
+        barspellDef = 0
     end
 
-    if mab < 0.7 then
-        mab = 0.7
+    local mdef = barspellDef + target:getMod(xi.mod.MDEF)
+
+    if mdef == 0 then
+        mdef = 1
     end
+
+    local matt = mob:getMod(xi.mod.MATT)
+    local mab = (matt / mdef)
+    local bonusMacc = 0
+    mab = utils.clamp(mab, 0.7, 1.3)
 
     if tpeffect == xi.mobskills.magicalTpBonus.DMG_BONUS then
         damage = damage * (((skill:getTP() / 10)*tpvalue) / 100)
@@ -318,20 +323,24 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgm
     -- resistence is added last
     local finaldmg = damage * mab * dmgmod
 
-    -- get resistence
-    local avatarAccBonus = 0
-    if mob:isPet() and mob:getMaster() ~= nil then
+    local magicDefense = getElementalDamageReduction(target, element)
+
+    finaldmg = finaldmg * magicDefense
+
+    if mob:isPet() and mob:getMaster():isPC() then
         local master = mob:getMaster()
         if (master:getPetID() >= 0 and master:getPetID() <= 20) then -- check to ensure pet is avatar
-            avatarAccBonus = utils.clamp(master:getSkillLevel(xi.skill.SUMMONING_MAGIC) - master:getMaxSkillLevel(mob:getMainLvl(), xi.job.SMN, xi.skill.SUMMONING_MAGIC), 0, 200)
+            bonusMacc = bonusMacc + utils.clamp(master:getSkillLevel(xi.skill.SUMMONING_MAGIC) - master:getMaxSkillLevel(mob:getMainLvl(), xi.job.SMN, xi.skill.SUMMONING_MAGIC), 0, 200)
         end
     end
 
-    resist = xi.mobskills.applyPlayerResistance(mob, nil, target, mob:getStat(xi.mod.INT)-target:getStat(xi.mod.INT), avatarAccBonus, element)
+    -- get resistence
+    local params = {diff = (mob:getStat(xi.mod.INT)-target:getStat(xi.mod.INT)), skillType = nil, bonus = bonusMacc, element = element, effect = nil}
+    resist = applyResistanceEffect(mob, target, nil, params) -- Uses magic.lua resistance calcs as this moves to a global use case.
 
-    local magicDefense = getElementalDamageReduction(target, element)
+    finaldmg = finaldmg * resist
 
-    finaldmg = finaldmg * resist * magicDefense
+    utils.clamp(finaldmg, 0, 65535)
 
     returninfo.dmg = finaldmg
 
@@ -449,7 +458,9 @@ xi.mobskills.mobBreathMove = function(mob, target, percent, base, element, cap)
     -- elemental resistence
     if element ~= nil and element > 0 then
         -- no skill available, pass nil
-        local resist = xi.mobskills.applyPlayerResistance(mob, nil, target, mob:getStat(xi.mod.INT)-target:getStat(xi.mod.INT), 0, element)
+        -- get resistence
+        local params = {diff = (mob:getStat(xi.mod.INT)-target:getStat(xi.mod.INT)), skillType = nil, bonus = 0, element = element, effect = nil}
+        local resist = applyResistanceEffect(mob, target, nil, params) -- Uses magic.lua resistance calcs as this moves to a global use case.
 
         -- get elemental damage reduction
         local defense = getElementalDamageReduction(target, element)

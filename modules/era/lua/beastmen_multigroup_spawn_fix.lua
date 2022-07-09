@@ -34,6 +34,7 @@ xi.beastmengroups.GHELSBA_OUTPOST = {}
 xi.beastmengroups.FORT_GHELSBA = {}
 xi.beastmengroups.PALBOROUGH_MINES = {}
 xi.beastmengroups.SEA_SERPENT_GROTTO = {}
+xi.beastmengroups.MAZE_OF_SHAKHRAMI = {}
 
 xi.beastmengroups.zones =
 {
@@ -60,6 +61,7 @@ xi.beastmengroups.zones =
     {xi.zone.FORT_GHELSBA, "Fort_Ghelsba", xi.beastmengroups.FORT_GHELSBA, 5},
     {xi.zone.PALBOROUGH_MINES, "Palborough_Mines", xi.beastmengroups.PALBOROUGH_MINES, 5},
     {xi.zone.SEA_SERPENT_GROTTO, "Sea_Serpent_Grotto", xi.beastmengroups.SEA_SERPENT_GROTTO, 5},
+    {xi.zone.MAZE_OF_SHAKHRAMI, "Maze_of_Shakhrami", xi.beastmengroups.MAZE_OF_SHAKHRAMI, 5},
 }
 
 for _, zoneID in pairs(xi.beastmengroups.zones) do
@@ -116,6 +118,10 @@ for _, zoneID in pairs(xi.beastmengroups.zones) do
                             index = mobId[2]
                             break
                         end
+                    end
+
+                    if index == 0 or index == nil then
+                        return
                     end
 
                     for _, mobId in pairs(zoneID[3]) do

@@ -13,26 +13,26 @@ xi.customShop = xi.customShop or {}
 --Lower Jeuno
 xi.customShop.Amalasanda =
 {
-    704,36, -- Bamboo Stick
-    829,35070, --Silk Cloth 
-    626,52, -- Black Pepper
-    1240,2000, -- Koma
-    657,8000, -- Tama-Hagane
-    1415,20000, -- Urushi
-    4928,1700, -- Katon: Ichi
-    4934,1700, -- Huton: Ichi
-    4937,1700, -- Doton: Ichi
-    4943,1700, -- Suiton: Ni
-    1471,190, -- Sticky Rice
-    1554,140, -- Turmeric
-    1555,317, -- Coriander
-    1590,700, -- Holy Basil
-    1475,244, -- Curry Powder
-    5164,2595, -- Ground Wasabi
-    1652,492, -- Rice Vinegar
-    1161,70, -- Uchitake
-    1170,70, -- Makibishi
-    1176,70, -- Mizu-Deppo
+    704,     36, -- Bamboo Stick
+    829,  35070, --Silk Cloth 
+    626,     52, -- Black Pepper
+    1240,  2000, -- Koma
+    657,   8000, -- Tama-Hagane
+    1415, 20000, -- Urushi
+    4928,  1700, -- Katon: Ichi
+    4934,  1700, -- Huton: Ichi
+    4937,  1700, -- Doton: Ichi
+    4943,  1700, -- Suiton: Ni
+    1471,   190, -- Sticky Rice
+    1554,   140, -- Turmeric
+    1555,   317, -- Coriander
+    1590,   700, -- Holy Basil
+    1475,   244, -- Curry Powder
+    5164,  2595, -- Ground Wasabi
+    1652,   492, -- Rice Vinegar
+    1161,    70, -- Uchitake
+    1170,    70, -- Makibishi
+    1176,    70, -- Mizu-Deppo
 }
 
 xi.customShop.Creepstix =
@@ -75,22 +75,22 @@ xi.customShop.Stinknix =
 
 xi.customShop.Taza = 
 {        
-    4881,10304,        -- Scroll of Sleepga
-    4658,26244,        -- Scroll of Shell III
-    4735,19200,        -- Scroll of Protectra III
-    4739,14080,        -- Scroll of Shellra II
-    4740,26244,        -- Scroll of Shellra III
-    4685,15120,        -- Scroll of Barpetrify
-    4686,9600,        -- Scroll of Barvirus
-    4699,15120,        -- Scroll of Barpetra
-    4700,9600,        -- Scroll of Barvira
-    4867,18720,        -- Scroll of Sleep II
-    4769,19932,        -- Scroll of Stone III
-    4779,22682,        -- Scroll of Water III
-    4764,27744,        -- Scroll of Aero III
-    4754,33306,        -- Scroll of Fire III
-    4759,39368,        -- Scroll of Blizzard III
-    4774,45930,        -- Scroll of Thunder III
+    4881, 10304,        -- Scroll of Sleepga
+    4658, 26244,        -- Scroll of Shell III
+    4735, 19200,        -- Scroll of Protectra III
+    4739, 14080,        -- Scroll of Shellra II
+    4740, 26244,        -- Scroll of Shellra III
+    4685, 15120,        -- Scroll of Barpetrify
+    4686,  9600,        -- Scroll of Barvirus
+    4699, 15120,        -- Scroll of Barpetra
+    4700,  9600,        -- Scroll of Barvira
+    4867, 18720,        -- Scroll of Sleep II
+    4769, 19932,        -- Scroll of Stone III
+    4779, 22682,        -- Scroll of Water III
+    4764, 27744,        -- Scroll of Aero III
+    4754, 33306,        -- Scroll of Fire III
+    4759, 39368,        -- Scroll of Blizzard III
+    4774, 45930,        -- Scroll of Thunder III
 }
 
 --Nashmau
@@ -185,14 +185,14 @@ xi.customShop.MazuroOozuro =
 -- Upper Jeuno
 xi.customShop.Antonia = 
 {
-    17061,6256,  -- Mythril Rod
-    17027,11232, -- Oak Cudgel
-    17036,18048, -- Mythril Mace
-    17044,6033,  -- Warhammer
-    17098,37440, -- Oak Pole
-    16836,44550, -- Halberd
-    16774,10596, -- Scythe
-    17320,7    -- Iron Arrow
+    17061,  6256,  -- Mythril Rod
+    17027, 11232, -- Oak Cudgel
+    17036, 18048, -- Mythril Mace
+    17044,  6033,  -- Warhammer
+    17098, 37440, -- Oak Pole
+    16836, 44550, -- Halberd
+    16774, 10596, -- Scythe
+    17320,     7,    -- Iron Arrow
 }
 
 -- Windurst Waters
@@ -215,17 +215,17 @@ xi.customShop.OrezEbrez =
     12456,   552,3,     --Hachimaki
     12498,  1800,3,     --Cotton Headband
     12448,   151,3,     --Bronze Cap
-    12449,  1471,3      --Brass Cap
+    12449,  1471,3,      --Brass Cap
 }
 
 -- Windurst Woods
 xi.customShop.Mono_Nchaa =
 {
-    17318, 3,    2, -- Wooden Arrow
-    17308, 55,   2, -- Hawkeye
-    17216, 165,  2, -- Light Crossbow
-    17319, 4,    3, -- Bone Arrow
-    17336, 5,    3, -- Crossbow Bolt
+    17318,    3, 2, -- Wooden Arrow
+    17308,   55, 2, -- Hawkeye
+    17216,  165, 2, -- Light Crossbow
+    17319,    4, 3, -- Bone Arrow
+    17336,    5, 3, -- Crossbow Bolt
     5009,  2649, 3, -- Scroll of Hunter's Prelude
 }
 

@@ -18,6 +18,7 @@ entity.onMobSpawn = function(mob)
         SetDropRate(24, 3344, 0) -- do not drop clump_of_red_pondweed
     end
 
+    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
     mob:setLocalVar("[rage]timer", 1800) -- 30 minutes
 end
 
