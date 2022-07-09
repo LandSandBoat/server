@@ -31,11 +31,7 @@ require("scripts/globals/status")
 local entity = {}
 -- TODO INITIAL COMMIT Just put here so players cannot run through the NM's 
 entity.onMobInitialize = function(mob)
-    mob:addMod(xi.mod.SLEEPRES, 30)
-    mob:addMod(xi.mod.BINDRES, 30)
-    mob:addMod(xi.mod.GRAVITYRES, 30)
     mob:addMod(xi.mod.ATT, 200)
-    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
     mob:addMod(xi.mod.MDEF, 150)
     mob:addMod(xi.mod.DEF, 100)
     mob:addMod(xi.mod.MAIN_DMG_RATING, 50)
@@ -46,7 +42,6 @@ entity.onMobInitialize = function(mob)
     mob:addMod(xi.mod.CHR, 20)
     mob:addMod(xi.mod.AGI, 20)
     mob:addMod(xi.mod.DEX, 40)
-    mob:setMod(xi.mod.DEFP, 50)
     mob:addMod(xi.mod.DEFP, 475)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 10)
     mob:setMod(xi.mod.EARTH_MEVA, 170)
@@ -57,7 +52,7 @@ entity.onMobInitialize = function(mob)
     mob:setMod(xi.mod.THUNDER_MEVA, 170)
     mob:setMod(xi.mod.ICE_MEVA, 200)
     mob:setMod(xi.mod.WIND_MEVA, 170)
-	mob:setMod(xi.mod.EARTH_SDT, 170)
+    mob:setMod(xi.mod.EARTH_SDT, 170)
     mob:setMod(xi.mod.DARK_SDT, 250)
     mob:setMod(xi.mod.LIGHT_SDT, 128)
     mob:setMod(xi.mod.FIRE_SDT, 170)
@@ -65,14 +60,14 @@ entity.onMobInitialize = function(mob)
     mob:setMod(xi.mod.THUNDER_SDT, 170)
     mob:setMod(xi.mod.ICE_SDT, 200)
     mob:setMod(xi.mod.WIND_SDT, 170)
-    mob:setMod(xi.mod.SILENCERES, 100)
+    mob:setMod(xi.mod.SILENCERES, 10000)
     mob:setMod(xi.mod.FIRE_ABSORB, 100)
     mob:setMod(xi.mod.STUNRES, 50)
-    mob:setMod(xi.mod.BINDRES, 100)
-    mob:setMod(xi.mod.GRAVITYRES, 100)
-    mob:setMod(xi.mod.SLEEPRES, 100)
+    mob:setMod(xi.mod.BINDRES, 10000)
+    mob:setMod(xi.mod.GRAVITYRES, 10000)
+    mob:setMod(xi.mod.SLEEPRES, 10000)
     mob:setMod(xi.mod.PARALYZERES, 100)
-    mob:setMod(xi.mod.LULLABYRES, 100)
+    mob:setMod(xi.mod.LULLABYRES, 10000)
     mob:setMod(xi.mod.FASTCAST, 10)
     mob:addStatusEffect(xi.effect.REGAIN, 10, 3, 0)
     mob:addStatusEffect(xi.effect.REGEN, 30, 3, 0)
@@ -86,7 +81,7 @@ entity.onMobSpawn = function(mob)
         specials =
         {
             {id = xi.jsa.MANAFONT, hpp = math.random(66, 95)},
-            {id = xi.jsa.BENEDICTION, hpp = 0},
+            {id = xi.jsa.BENEDICTION, hpp = 25},
         },
     })
 
@@ -94,20 +89,20 @@ entity.onMobSpawn = function(mob)
     mob:setSpellList(296) -- Set BLM spell list
 end
 
-entity.onMobFight = function(mob, target)
-    if mob:getAnimationSub() == 1 and mob:getLocalVar("jobChanged") == 0 then
-        mob:setLocalVar("jobChanged", 1)
-        mob:setSpellList(297) -- Set WHM spell list.
-        -- set new JSA parameters
-        xi.mix.jobSpecial.config(mob, {
-            specials =
-            {
-                {id = xi.jsa.MANAFONT, hpp = 0},
-                {id = xi.jsa.BENEDICTION, hpp = math.random(25, 50)},
-            },
-        })
-    end
-end
+--entity.onMobFight = function(mob, target)
+--   if mob:getAnimationSub() == 1 and mob:getLocalVar("jobChanged") == 0 then
+--       mob:setLocalVar("jobChanged", 1)
+--        mob:setSpellList(297) -- Set WHM spell list.
+--        -- set new JSA parameters
+--        xi.mix.jobSpecial.config(mob, {
+--            specials =
+--            {
+--                {id = xi.jsa.MANAFONT, hpp = 0},
+--                {id = xi.jsa.BENEDICTION, hpp = math.random(25, 50)},
+--            },
+--        })
+--    end
+--end
 
 entity.onCriticalHit = function(mob)
     local randVal = math.random(1, 100)
