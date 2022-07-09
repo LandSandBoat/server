@@ -44,7 +44,7 @@ endif()
 
 find_library(LuaJIT_LIBRARY
     NAMES
-        luajit luajit_64 luajit-5.1 libluajit libluajit_64
+        libluajit.a luajit luajit_64 luajit-5.1 libluajit libluajit_64
     PATHS
         ${LuaJIT_SOURCE_DIR}/src/
         ${PROJECT_SOURCE_DIR}/ext/luajit/${libpath}
