@@ -195,7 +195,7 @@ m:addOverride("xi.zones.Caedarva_Mire.npcs.Seaprinces_Tombstone.onEventFinish", 
     local ID = require("scripts/zones/Caedarva_Mire/IDs")
 	
     if csid == 25 then
-	    if player:getCharVar("MythicWeaponExchange") == 2 then
+	    if player:getCharVar("MythicWeaponExchange") == 1 then
 		    player:setCharVar("MythicWeaponExchange", 0)
 		end
         if player:getCharVar("MythicReward") == 18991 then

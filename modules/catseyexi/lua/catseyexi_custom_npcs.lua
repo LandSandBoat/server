@@ -619,6 +619,8 @@ m:addOverride("xi.zones.Lower_Jeuno.Zone.onInitialize", function(zone)
                 player:setPos(-33.094, 4.770, 139.340, 0, 213) -- Labyrinth of Onzozo	
 	        elseif (npcUtil.tradeHasExactly(trade, {{ 'gil', 12 }})) then
                 player:setPos(17.172, -10.547, 8.043, 0, 174) -- Kuftal Tunnel
+	        elseif (npcUtil.tradeHasExactly(trade, {{ 'gil', 13 }})) then
+                player:setPos(-514.809, -12.156, -81.485, 171, 52) -- Bhaflau Thickets (Tandjana Islet)
 			end
         end,
 
@@ -639,6 +641,7 @@ m:addOverride("xi.zones.Lower_Jeuno.Zone.onInitialize", function(zone)
 	        player:PrintToPlayer("10 gil = Wajaom Woodlands (Level 55 - 59)", 28)
 	        player:PrintToPlayer("11 gil = Labyrinth of Onzozo (Level 60 - 69)", 28)
 	        player:PrintToPlayer("12 gil = Kuftal Tunnel (Level 70 - 75)", 28)
+		    player:PrintToPlayer("13 gil = Bhaflau Thickets (Level 72 - 75)", 28)
         end,
     })
 
