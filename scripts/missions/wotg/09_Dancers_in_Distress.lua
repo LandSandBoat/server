@@ -15,6 +15,7 @@ require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
 local pastJugnerID = require('scripts/zones/Jugner_Forest_[S]/IDs')
+local sandoriaSID  = require('scripts/zones/Southern_San_dOria_[S]/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.DANCERS_IN_DISTRESS)
@@ -24,7 +25,12 @@ mission.reward =
     nextMission = { xi.mission.log_id.WOTG, xi.mission.id.wotg.DAUGHTER_OF_A_KNIGHT },
 }
 
-local quizItems = { xi.items.LYNX_MEAT, xi.items.GOLD_BEASTCOIN, xi.items.NYUMOMO_DOLL }
+local quizItems =
+{
+    xi.items.LYNX_MEAT,
+    xi.items.GOLD_BEASTCOIN,
+    xi.items.NYUMOMO_DOLL,
+}
 
 mission.sections =
 {
@@ -36,11 +42,15 @@ mission.sections =
 
         [xi.zone.SOUTHERN_SAN_DORIA_S] =
         {
+            ['Lion_Springs'] = mission:messageSpecial(sandoriaSID.text.CONCERNED_FOR_WOUNDED),
+
             ['Raustigne'] =
             {
                 onTrigger = function(player, npc)
                     -- TODO: What are these args from caps?
-                    return mission:progressEvent(86, 2, 10, 1, 1, 3, 4, 8, 3)
+                    -- Observed (San d'Oria, DNC Main) : 1, 3, 1, 0, 0, 0, 0, 0
+
+                    return mission:progressEvent(86, player:getCampaignAllegiance(), 10, 1, 1, 3, 4, 8, 3)
                 end,
             },
 
@@ -64,15 +74,14 @@ mission.sections =
             ['Elegant_Footprints'] =
             {
                 onTrigger = function(player, npc)
-                    return mission:progressEvent(2)
+                    return mission:progressEvent(2) -- Check for params, you should join our dance troupe
                 end,
             },
 
             onEventUpdate =
             {
                 [2] = function(player, csid, option, npc)
-                    -- NOTE:
-                    -- The options chosen in the quiz are sequential
+                    -- NOTE: The options chosen in the quiz are sequential
                     -- Page 1 updates the CS with options 1, 2 or 3, depending on what you choose
                     -- Page 2 updates the CS with options 4, 5 or 6, depending on what you choose
                     -- etc. all the way up to 18.
@@ -81,6 +90,7 @@ mission.sections =
                     -- 1: Lynx Meat
                     -- 2: Gold Beastcoin
                     -- 3: Doll
+
                     if option == 19 then
                         local randomChoice = math.random(1, 3)
                         mission:setVar(player, 'Option', randomChoice)
@@ -93,6 +103,7 @@ mission.sections =
             {
                 [2] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 2)
+                    mission:setMustZone(player)
                 end,
             },
         },
@@ -110,14 +121,18 @@ mission.sections =
             {
                 onTrade = function(player, npc, trade)
                     local chosenItemIndex = mission:getVar(player, 'Option')
-                    if npcUtil.tradeHasExactly(trade, quizItems[chosenItemIndex]) then
+
+                    if
+                        not mission:getMustZone(player) and
+                        npcUtil.tradeHasExactly(trade, quizItems[chosenItemIndex])
+                    then
                         return mission:progressEvent(3, 0, 0, 0, 0, 0, 0, 0, chosenItemIndex)
                     end
                 end,
 
                 onTrigger = function(player, npc)
-                    -- Send reminder
                     local chosenItemIndex = mission:getVar(player, 'Option')
+
                     return mission:messageSpecial(pastJugnerID.text.LILISETTE_IS_PREPARING, quizItems[chosenItemIndex])
                 end,
             },

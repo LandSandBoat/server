@@ -150,14 +150,14 @@ CInstance* CInstanceLoader::LoadInstance()
             PMob->setModifier(Mod::HTH_SDT, (uint16)(sql->GetFloatData(39) * 1000));
             PMob->setModifier(Mod::IMPACT_SDT, (uint16)(sql->GetFloatData(40) * 1000));
 
-            PMob->setModifier(Mod::FIRE_SDT, (int16)sql->GetFloatData(41));    // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
-            PMob->setModifier(Mod::ICE_SDT, (int16)sql->GetFloatData(42));     // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
-            PMob->setModifier(Mod::WIND_SDT, (int16)sql->GetFloatData(43));    // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
-            PMob->setModifier(Mod::EARTH_SDT, (int16)sql->GetFloatData(44));   // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
-            PMob->setModifier(Mod::THUNDER_SDT, (int16)sql->GetFloatData(45)); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
-            PMob->setModifier(Mod::WATER_SDT, (int16)sql->GetFloatData(46));   // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
-            PMob->setModifier(Mod::LIGHT_SDT, (int16)sql->GetFloatData(47));   // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
-            PMob->setModifier(Mod::DARK_SDT, (int16)sql->GetFloatData(48));    // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
+            PMob->setModifier(Mod::FIRE_SDT, (int16)sql->GetIntData(41));      // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
+            PMob->setModifier(Mod::ICE_SDT, (int16)sql->GetIntData(42));       // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
+            PMob->setModifier(Mod::WIND_SDT, (int16)sql->GetIntData(43));      // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
+            PMob->setModifier(Mod::EARTH_SDT, (int16)sql->GetIntData(44));     // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
+            PMob->setModifier(Mod::THUNDER_SDT, (int16)sql->GetIntData(45));   // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
+            PMob->setModifier(Mod::WATER_SDT, (int16)sql->GetIntData(46));     // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
+            PMob->setModifier(Mod::LIGHT_SDT, (int16)sql->GetIntData(47));     // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
+            PMob->setModifier(Mod::DARK_SDT, (int16)sql->GetIntData(48));      // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
 
             PMob->setModifier(Mod::FIRE_MEVA, (int16)(sql->GetIntData(49)));   // These are stored as signed integers which
             PMob->setModifier(Mod::ICE_MEVA, (int16)(sql->GetIntData(50)));    // is directly the modifier starting value.

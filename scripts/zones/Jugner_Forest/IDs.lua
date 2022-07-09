@@ -37,6 +37,7 @@ zones[xi.zone.JUGNER_FOREST] =
         VOIDWALKER_DESPAWN       = 8697,  -- The monster fades before your eyes, a look of disappointment on its face.
         REGIME_REGISTERED        = 10871, -- New training regime registered!
         DRAWN_UNWANTED_ATTENTION = 11925, -- Your presence has drawn unwanted attention!
+        SENSE_UNUSUAL_PRESENCE   = 11927, -- You sense an unusual presence in the area...
         DELIVER_TO_AMAURE        = 11929, -- You must deliver the <item> to Amaura in Southern San d'Oria.
         VOIDWALKER_NO_MOB        = 12089, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
         VOIDWALKER_MOB_TOO_FAR   = 12090, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.

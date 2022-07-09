@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: Jugner_Forest (104)
---
 -----------------------------------
 local ID = require("scripts/zones/Jugner_Forest/IDs")
 require("scripts/quests/i_can_hear_a_rainbow")
