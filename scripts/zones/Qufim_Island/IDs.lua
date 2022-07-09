@@ -65,7 +65,7 @@ zones[xi.zone.QUFIM_ISLAND] =
     npc =
     {
         CASKET_BASE   = 17293678,
-        OVERSEER_BASE = 17293716, -- Pitoire_RK in npc_list
+        OVERSEER_BASE = 17293720, -- Pitoire_RK in npc_list
     },
 }
 
