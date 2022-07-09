@@ -7,7 +7,6 @@ require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 
-
 local drawInPos =
 {
     {330.00, -23.91, -89.09},
