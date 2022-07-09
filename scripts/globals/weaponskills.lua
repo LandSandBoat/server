@@ -1000,6 +1000,10 @@ function getHitRate(attacker, target, capHitRate, bonus)
 end
 
 function fTP(tp, ftp1, ftp2, ftp3)
+    if (tp < 1000) then
+        tp = 1000
+    end
+
     if tp >= 1000 and tp < 2000 then
         return ftp1 + ( ((ftp2 - ftp1) / 1000) * (tp - 1000) )
     elseif tp >= 2000 and tp <= 3000 then
@@ -1016,6 +1020,7 @@ local function fTPMob(tp, ftp1, ftp2, ftp3)
     if (tp < 1000) then
         tp = 1000
     end
+
     if (tp >= 1000 and tp < 1500) then
         return ftp1 + ( ((ftp2-ftp1)/500) * (tp-1000))
     elseif (tp >= 1500 and tp <= 3000) then
