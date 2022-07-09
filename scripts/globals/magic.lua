@@ -479,7 +479,7 @@ function applyResistanceEffect(caster, target, spell, params)
         end
     end
 
-    if element == nil and skill~= nil and skill >= 32 and skill <= 45 then -- Covers all magic
+    if element == nil and skill ~= nil and skill >= 32 and skill <= 45 then -- Covers all magic
         element = spell:getElement()
     elseif element == nil then -- Cover mobskills
         element = xi.element.NONE

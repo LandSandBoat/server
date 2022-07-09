@@ -789,6 +789,7 @@ public:
     void castSpell(sol::object const& spell, sol::object entity); // forces a mob to cast a spell (parameter = spell ID, otherwise picks a spell from its list)
     void useJobAbility(uint16 skillID, sol::object const& pet);   // forces a job ability use (players/pets only)
     void useMobAbility(sol::variadic_args va);                    // forces a mob to use a mobability (parameter = skill ID)
+    int32 triggerDrawIn(CLuaBaseEntity* PMobEntity, sol::object const& includePt, sol::object const& drawRange, sol::object const& maxReach, sol::object const& target); // forces a mob to draw in target
     bool hasTPMoves();
 
     void weaknessTrigger(uint8 level);
