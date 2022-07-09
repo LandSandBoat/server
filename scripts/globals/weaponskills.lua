@@ -767,7 +767,7 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
         ['type'] = xi.attackType.MAGICAL,
         ['slot'] = xi.slot.MAIN,
         ['weaponType'] = attacker:getWeaponSkillType(xi.slot.MAIN),
-        ['damageType'] = xi.damageType.ELEMENTAL + wsParams.ele
+        ['damageType'] = xi.damageType.ELEMENTAL + wsParams.element
     }
 
     local calcParams =
@@ -819,9 +819,9 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
         dmg = dmg + ((dmg * attacker:getMod(xi.mod.ALL_WSDMG_FIRST_HIT)) / 100) -- Add in our "first hit" WS dmg bonus
 
         -- Calculate magical bonuses and reductions
-        dmg = addBonusesAbility(attacker, wsParams.ele, target, dmg, wsParams)
-        dmg = dmg * applyResistanceAbility(attacker, target, wsParams.ele, wsParams.skill, bonusacc)
-        dmg = target:magicDmgTaken(dmg, wsParams.ele)
+        dmg = addBonusesAbility(attacker, wsParams.element, target, dmg, wsParams)
+        dmg = dmg * applyResistanceAbility(attacker, target, wsID, wsParams)
+        dmg = target:magicDmgTaken(dmg, wsParams.element)
 
         if dmg < 0 then
             calcParams.finalDmg = dmg
@@ -830,7 +830,7 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
             return dmg
         end
 
-        dmg = adjustForTarget(target, dmg, wsParams.ele)
+        dmg = adjustForTarget(target, dmg, wsParams.element)
 
         if dmg > 0 then
             dmg = dmg - target:getMod(xi.mod.PHALANX)
