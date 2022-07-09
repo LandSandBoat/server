@@ -22,10 +22,31 @@
 #
 # TEST AND MAKE SURE THAT EVERYTHING STILL WORKS!
 
+if (UNIX)
+    message(STATUS "Downloading LuaJIT src")
+    CPMAddPackage(
+        NAME LuaJIT
+        GITHUB_REPOSITORY LuaJIT/LuaJIT
+        GIT_TAG e3bae12fc0461cfa7e4bef3dfed2dad372e5da8d
+        DOWNLOAD_ONLY YES
+    )
+    if (LuaJIT_ADDED)
+        message(STATUS "Modifying LuaJIT build flags (adding -DLUAJIT_NO_UNWIND=1)")
+        file(READ "${LuaJIT_SOURCE_DIR}/src/Makefile" FILE_CONTENTS)
+        string(REPLACE "CCOPT= -O2 -fomit-frame-pointer\n" "CCOPT= -O2 -fomit-frame-pointer -DLUAJIT_NO_UNWIND=1\n" FILE_CONTENTS "${FILE_CONTENTS}")
+        file(WRITE "${LuaJIT_SOURCE_DIR}/src/Makefile" "${FILE_CONTENTS}")
+
+        # LuaJIT has no CMake support, so we break out to using make on it's own
+        message(STATUS "Building LuaJIT from src")
+        execute_process(COMMAND make WORKING_DIRECTORY ${LuaJIT_SOURCE_DIR})
+    endif()
+endif()
+
 find_library(LuaJIT_LIBRARY
     NAMES
         luajit luajit_64 luajit-5.1 libluajit libluajit_64
     PATHS
+        ${LuaJIT_SOURCE_DIR}/src/
         ${PROJECT_SOURCE_DIR}/ext/luajit/${libpath}
         /usr/
         /usr/bin/
