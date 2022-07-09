@@ -14,6 +14,7 @@ end
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
+    -- there are five zones, need to seperate into respective zone in areas
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(-319.816, -0.2895, -475.1285) --temp zone in testing --teleporters need scripting --zone in doors not scripted
     end
