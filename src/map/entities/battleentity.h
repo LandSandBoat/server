@@ -160,6 +160,7 @@ enum SUBSKILLTYPE
     SUBSKILL_GUN      = 1,
     SUBSKILL_CNN      = 2,
     SUBSKILL_SHURIKEN = 3,
+    SUBSKILL_LONGB    = 9,
 
     SUBSKILL_ANIMATOR    = 10,
     SUBSKILL_ANIMATOR_II = 11,
@@ -559,7 +560,7 @@ public:
     uint16 GetBaseRACC(uint8 skill, uint16 bonusSkill = 0);
 
     uint8 GetSpeed();
-    
+
     DAMAGE_TYPE m_dmgType;
 
     bool isDead(); // проверяем, мертва ли сущность

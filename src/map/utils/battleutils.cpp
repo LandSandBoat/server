@@ -1933,7 +1933,7 @@ namespace battleutils
         else
         {
             damageType = weapon ? weapon->getDmgType() : DAMAGE_TYPE::NONE;
-            
+
             if ((PAttacker->objtype == TYPE_PET || (PAttacker->objtype == TYPE_MOB && PAttacker->isCharmed)) && PAttacker->PMaster->objtype == TYPE_PC)
             {
                 damageType = PAttacker->m_dmgType == DAMAGE_TYPE::NONE ? DAMAGE_TYPE::IMPACT : PAttacker->m_dmgType;
@@ -6905,7 +6905,7 @@ namespace battleutils
             RMainSub  = ((CItemWeapon*)PRangedSlot)->getSubSkillType();
         }
 
-        bool LongBowCurve  = (RMainType == 25 && RMainSub == 1); // Longbows Only
+        bool LongBowCurve  = (RMainType == 25 && RMainSub == 9); // Longbows Only
         bool CrossBowCurve = ((RMainType == 25 && RMainSub == 0) || (RMainType == 26 && RMainSub == 0)); // Crossbows and Shortbows
         bool GunCurve      = (RMainType == 26 && RMainSub == 1); // Guns Only
 
