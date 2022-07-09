@@ -2013,12 +2013,25 @@ namespace charutils
                     if (PItem->isType(ITEM_WEAPON))
                     {
                         CItemWeapon* weapon = (CItemWeapon*)PChar->getEquip(SLOT_AMMO);
+                        bool longBowException = false;
+
+                        if (weapon != nullptr)
+                        {
+                            longBowException = ((CItemWeapon*)PItem)->getSkillType() == SKILL_ARCHERY &&
+                                               ((CItemWeapon*)PItem)->getSubSkillType() == SUBSKILL_LONGB &&
+                                                weapon->getSubSkillType() == SUBSKILL_XBO;
+                        }
+
                         if ((weapon != nullptr) && weapon->isType(ITEM_WEAPON))
                         {
                             if (((CItemWeapon*)PItem)->getSkillType() != weapon->getSkillType() ||
-                                ((CItemWeapon*)PItem)->getSubSkillType() != weapon->getSubSkillType())
+                                ((CItemWeapon*)PItem)->getSubSkillType() != weapon->getSubSkillType() ||
+                                !longBowException)
                             {
-                                UnequipItem(PChar, SLOT_AMMO, false);
+                                if (!longBowException)
+                                {
+                                    UnequipItem(PChar, SLOT_AMMO, false);
+                                }
                             }
                         }
                         PChar->m_Weapons[SLOT_RANGED] = (CItemWeapon*)PItem;
@@ -2032,12 +2045,23 @@ namespace charutils
                     if (PItem->isType(ITEM_WEAPON))
                     {
                         CItemWeapon* weapon = (CItemWeapon*)PChar->getEquip(SLOT_RANGED);
+                        bool longBowException = false;
+                        if (weapon != nullptr)
+                        {
+                            longBowException = ((CItemWeapon*)PItem)->getSkillType() == SKILL_ARCHERY &&
+                                               ((CItemWeapon*)PItem)->getSubSkillType() == SUBSKILL_XBO &&
+                                                weapon->getSubSkillType() == SUBSKILL_LONGB;
+                        }
+
                         if ((weapon != nullptr) && weapon->isType(ITEM_WEAPON))
                         {
                             if (((CItemWeapon*)PItem)->getSkillType() != weapon->getSkillType() ||
                                 ((CItemWeapon*)PItem)->getSubSkillType() != weapon->getSubSkillType())
                             {
-                                UnequipItem(PChar, SLOT_RANGED, false);
+                                if (!longBowException)
+                                {
+                                    UnequipItem(PChar, SLOT_RANGED, false);
+                                }
                             }
                         }
                         if (PChar->equip[SLOT_RANGED] == 0)

@@ -165,6 +165,12 @@ bool CRangeState::CanUseRangedAttack(CBattleEntity* PTarget)
         CItemWeapon* PRanged = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_RANGED));
         CItemWeapon* PAmmo   = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_AMMO));
 
+        if (!((PRanged && PRanged->isType(ITEM_WEAPON)) || (PAmmo && PAmmo->isThrowing())))
+        {
+            m_errorMsg = std::make_unique<CMessageBasicPacket>(PChar, PChar, 0, 0, MSGBASIC_NO_RANGED_WEAPON);
+            return false;
+        }
+
         auto SkillType = PRanged ? PRanged->getSkillType() : PAmmo->getSkillType();
 
         switch (SkillType)
@@ -176,6 +182,18 @@ bool CRangeState::CanUseRangedAttack(CBattleEntity* PTarget)
                 break;
             }
             case SKILL_ARCHERY:
+            {
+                PRanged = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_AMMO));
+                if (PRanged != nullptr && PRanged->isType(ITEM_WEAPON))
+                {
+                    break;
+                }
+                else
+                {
+                    m_errorMsg = std::make_unique<CMessageBasicPacket>(PChar, PChar, 0, 0, MSGBASIC_NO_RANGED_WEAPON);
+                    return false;
+                }
+            }
             case SKILL_MARKSMANSHIP:
             {
                 PRanged = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_AMMO));
