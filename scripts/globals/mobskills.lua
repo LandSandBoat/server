@@ -304,7 +304,6 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgm
     if barspellDef == nil then
         barspellDef = 0
     end
-    print(barspellDef)
 
     local mdef = barspellDef + target:getMod(xi.mod.MDEF)
 
