@@ -3844,21 +3844,35 @@ namespace charutils
         uint8 tries    = 0;
         uint8 maxTries = 1;
         uint16 bonus    = 0;
+        bool applyTH = false;
         if (auto* PMob = dynamic_cast<CMobEntity*>(PEntity))
         {
             // THLvl is the number of 'extra chances' at an item. If the item is obtained, then break out.
             tries    = 0;
             maxTries = 1;
             bonus    = ApplyTH(PMob->m_THLvl, droprate);
+            applyTH = true;
         }
         while (tries < maxTries)
         {
-            if (droprate > 0 && xirand::GetRandomNumber(1000) < droprate * settings::get<float>("map.DROP_RATE_MULTIPLIER") * bonus)
+            if (applyTH)
             {
-                PChar->PTreasurePool->AddItem(itemid, PEntity);
-                break;
+                if (droprate > 0 && xirand::GetRandomNumber(1000) < droprate * settings::get<float>("map.DROP_RATE_MULTIPLIER") * bonus)
+                {
+                    PChar->PTreasurePool->AddItem(itemid, PEntity);
+                    break;
+                }
+                tries++;
             }
-            tries++;
+            else
+            {
+                if (droprate > 0 && xirand::GetRandomNumber(1000) < droprate * settings::get<float>("map.DROP_RATE_MULTIPLIER") + bonus)
+                {
+                    PChar->PTreasurePool->AddItem(itemid, PEntity);
+                    break;
+                }
+                tries++;
+            }
         }
     }
 
