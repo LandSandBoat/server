@@ -8,7 +8,8 @@ require("scripts/zones/Apollyon/bcnms/sw_apollyon_helper")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    --mob:setMobMod(xi.mobMod.DRAW_IN, 2) -- need to set a maximum distance for draw-in
+    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
+    mob:setMobMod(xi.mobMod.DRAW_IN_CUSTOM_RANGE, 21)
 end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
