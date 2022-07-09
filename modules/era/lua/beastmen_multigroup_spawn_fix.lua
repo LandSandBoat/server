@@ -118,6 +118,10 @@ for _, zoneID in pairs(xi.beastmengroups.zones) do
                         end
                     end
 
+                    if index == 0 or index == nil then
+                        return
+                    end
+
                     for _, mobId in pairs(zoneID[3]) do
                         if mobId[2] == index then
                             if count == -1 then
