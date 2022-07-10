@@ -411,6 +411,7 @@ namespace trustutils
         // assume level matches master
         PTrust->SetMLevel(PMaster->GetMLevel());
         PTrust->SetSLevel(std::floor(PMaster->GetMLevel() / 2));
+        PTrust->iLvlBonus = charutils::getItemLevelDifference(PMaster);
 
         LoadTrustStatsAndSkills(PTrust);
 
@@ -475,8 +476,13 @@ namespace trustutils
     {
         JOBTYPE mJob = PTrust->GetMJob();
         JOBTYPE sJob = PTrust->GetSJob();
-        uint8   mLvl = PTrust->GetMLevel();
-        uint8   sLvl = PTrust->GetSLevel();
+        // get master ilvl bonus and apply here to allow higher level stats without causing Party Member Level > 99 EXP issues
+        uint8   mLvl = (PTrust->GetMLevel() + PTrust->iLvlBonus);
+        uint8   sLvl = (PTrust->GetSLevel());
+        if (sLvl > 0) // only apply iLvl bonus to the subjob when the trust has a subjob
+        {
+            sLvl = (PTrust->GetSLevel() + (std::floor(PTrust->iLvlBonus /2)));
+        }
 
         // Helpers to map HP/MPScale around 100 to 1-7 grades
         // std::clamp doesn't play nice with uint8, so -> unsigned int
@@ -654,10 +660,41 @@ namespace trustutils
         PTrust->stats.MND = static_cast<uint16>((fMND + mMND + sMND) * statMultiplier);
         PTrust->stats.CHR = static_cast<uint16>((fCHR + mCHR + sCHR) * statMultiplier);
 
+        // ilvl stats
+
+        uint8 trustILvl = PTrust->iLvlBonus;    // value is player ilvl - 99
+        float iLvlMeleeSkillBase = 0;           // used for w.skill/parry/guard/eva
+        //float iLvlShieldBase = 0;             // used for shield (unimplemented)
+        float iLvlMeleeMaccBase = 0;            // everything but staves (sub job mage)
+        float iLvlStaffMaccBase = 0;            // staves (main job mage)
+        float iLvlMevaBase = 12.5;              // fixed value since armor ilvl meva varies wildly
+
+        if (trustILvl >0 && trustILvl <= 10)    // ilvl 100-109
+        {
+            iLvlMeleeSkillBase = 10.8;
+            //iLvlShieldBase = 4.8;
+            iLvlMeleeMaccBase = 8.5;
+            iLvlStaffMaccBase = 10.2;
+        }
+        if (trustILvl >= 11 && trustILvl<= 19)  // ilvl 110-118
+        {
+            iLvlMeleeSkillBase = 11.7;
+            //iLvlShieldBase = 5.5;
+            iLvlMeleeMaccBase = 9.1;
+            iLvlStaffMaccBase = 11;
+        }
+        if (PTrust->iLvlBonus > 19)             // ilvl 119
+        {
+            iLvlMeleeSkillBase = 12.1;
+            //iLvlShieldBase = 5.6;
+            iLvlMeleeMaccBase = 9.4;
+            iLvlStaffMaccBase = 11.4;
+        }
+
         // Skills =======================
         for (int i = SKILL_DIVINE_MAGIC; i <= SKILL_BLUE_MAGIC; i++)
         {
-            uint16 maxSkill = battleutils::GetMaxSkill((SKILLTYPE)i, mJob, mLvl > 99 ? 99 : mLvl);
+            uint16 maxSkill = battleutils::GetMaxSkill((SKILLTYPE)i, mJob, mLvl > 99 ? 99 : mLvl) + (trustILvl * iLvlStaffMaccBase);
             if (maxSkill != 0)
             {
                 PTrust->WorkingSkills.skill[i] = static_cast<uint16>(maxSkill * settings::get<float>("map.ALTER_EGO_SKILL_MULTIPLIER"));
@@ -665,7 +702,7 @@ namespace trustutils
             else // if the mob is WAR/BLM and can cast spell
             {
                 // set skill as high as main level, so their spells won't get resisted
-                uint16 maxSubSkill = battleutils::GetMaxSkill((SKILLTYPE)i, sJob, mLvl > 99 ? 99 : mLvl);
+                uint16 maxSubSkill = battleutils::GetMaxSkill((SKILLTYPE)i, sJob, mLvl > 99 ? 99 : mLvl) + (trustILvl * iLvlMeleeMaccBase);
 
                 if (maxSubSkill != 0)
                 {
@@ -674,7 +711,7 @@ namespace trustutils
             }
         }
 
-        for (int i = SKILL_HAND_TO_HAND; i <= SKILL_STAFF; i++)
+        for (int i = SKILL_HAND_TO_HAND; i <= SKILL_STAFF; i++) // no iLvl Adjustment here, Trusts don't actually have weapons currently.
         {
             uint16 maxSkill = battleutils::GetMaxSkill((SKILLTYPE)i, mLvl > 99 ? 99 : mLvl);
             if (maxSkill != 0)
@@ -684,15 +721,15 @@ namespace trustutils
         }
 
         PTrust->addModifier(Mod::DEF, mobutils::GetBase(PTrust, PTrust->defRank));
-        PTrust->addModifier(Mod::EVA, mobutils::GetEvasion(PTrust));
-        PTrust->addModifier(Mod::ATT, mobutils::GetBase(PTrust, PTrust->attRank));
-        PTrust->addModifier(Mod::ACC, mobutils::GetBase(PTrust, PTrust->accRank));
+        PTrust->addModifier(Mod::EVA, (mobutils::GetEvasion(PTrust)) + (trustILvl * iLvlMeleeSkillBase));
+        PTrust->addModifier(Mod::ATT, (mobutils::GetBase(PTrust, PTrust->attRank)) + (trustILvl * iLvlMeleeSkillBase));
+        PTrust->addModifier(Mod::ACC, (mobutils::GetBase(PTrust, PTrust->accRank)) + (trustILvl * iLvlMeleeSkillBase));
 
-        PTrust->addModifier(Mod::RATT, mobutils::GetBase(PTrust, PTrust->attRank));
-        PTrust->addModifier(Mod::RACC, mobutils::GetBase(PTrust, PTrust->accRank));
+        PTrust->addModifier(Mod::RATT, (mobutils::GetBase(PTrust, PTrust->attRank)) + (trustILvl * iLvlMeleeSkillBase));
+        PTrust->addModifier(Mod::RACC, (mobutils::GetBase(PTrust, PTrust->accRank)) + (trustILvl * iLvlMeleeSkillBase));
 
         // Natural magic evasion
-        PTrust->addModifier(Mod::MEVA, mobutils::GetMagicEvasion(PTrust));
+        PTrust->addModifier(Mod::MEVA, (mobutils::GetMagicEvasion(PTrust)) + (trustILvl * iLvlMevaBase));
 
         // Add traits for sub and main
         battleutils::AddTraits(PTrust, traits::GetTraits(mJob), mLvl);
