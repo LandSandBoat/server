@@ -507,10 +507,10 @@ void SmallPacket0x00D(map_session_data_t* const PSession, CCharEntity* const PCh
             }
         }
 
-        if (PChar->PPet != nullptr)
-        {
-            PChar->setPetZoningInfo();
-        }
+        // if (PChar->PPet != nullptr)
+        // {
+            // PChar->setPetZoningInfo();
+        // }
 
         PSession->shuttingDown = 1;
         sql->Query("UPDATE char_stats SET zoning = 0 WHERE charid = %u", PChar->id);
@@ -3616,11 +3616,11 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
     TracyZoneScoped;
 
     // handle pets on zone
-    if (PChar->PPet != nullptr)
-    {
-        PChar->setPetZoningInfo();
-        petutils::DespawnPet(PChar);
-    }
+    // if (PChar->PPet != nullptr)
+    // {
+        // PChar->setPetZoningInfo();
+        // petutils::DespawnPet(PChar);
+    // }
 
     uint32 zoneLineID    = data.ref<uint32>(0x04);
     uint8  town          = data.ref<uint8>(0x16);
