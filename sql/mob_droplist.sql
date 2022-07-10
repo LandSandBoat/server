@@ -4771,11 +4771,9 @@ INSERT INTO `mob_droplist` VALUES (528,0,0,1000,816,130); -- Spool Of Silk Threa
 -- ZoneID: 115 - Crawler
 INSERT INTO `mob_droplist` VALUES (529,0,0,1000,816,180);   -- Spool Of Silk Thread (18.0%)
 INSERT INTO `mob_droplist` VALUES (529,0,0,1000,1156,140);  -- Crawler Calculus (14.0%)
-INSERT INTO `mob_droplist` VALUES (529,0,0,1000,582,60);    -- Meteorite (6.0%)
 INSERT INTO `mob_droplist` VALUES (529,0,0,1000,583,@RARE); -- Smooth Stone (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (529,4,0,1000,4357,0);    -- Crawler Egg (Despoil)
 
--- ZoneID: 115 - Crawler
 -- ZoneID: 116 - Crawler
 INSERT INTO `mob_droplist` VALUES (530,0,0,1000,816,140);  -- Spool Of Silk Thread (14.0%)
 INSERT INTO `mob_droplist` VALUES (530,0,0,1000,1156,140); -- Crawler Calculus (14.0%)
@@ -26780,6 +26778,13 @@ INSERT INTO `mob_droplist` VALUES (3225,0,0,1000,11343,@COMMON); -- Thrakon Brea
 -- Garrison Drops
 INSERT INTO `mob_droplist` VALUES (3226,0,0,1000,1604,@UNCOMMON); -- (Garrison) Mannequin Legs
 INSERT INTO `mob_droplist` VALUES (3226,0,0,1000,1605,@UNCOMMON); -- (Garrison) Mannequin Feet
+
+-- ZoneID: 115 - Crawler (Starfall Hillock)
+INSERT INTO `mob_droplist` VALUES (3227,0,0,1000,816,180);   -- Spool Of Silk Thread (18.0%)
+INSERT INTO `mob_droplist` VALUES (3227,0,0,1000,1156,140);  -- Crawler Calculus (14.0%)
+INSERT INTO `mob_droplist` VALUES (3227,0,0,1000,582,60);    -- Meteorite (6.0%)
+INSERT INTO `mob_droplist` VALUES (3227,0,0,1000,583,@RARE); -- Smooth Stone (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (3227,4,0,1000,4357,0);    -- Crawler Egg (Despoil)
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;

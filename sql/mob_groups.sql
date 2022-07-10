@@ -8196,7 +8196,7 @@ INSERT INTO `mob_groups` VALUES (18,4448,115,'Yagudo_Scribe',330,0,2761,0,0,4,8,
 INSERT INTO `mob_groups` VALUES (19,332,115,'Balloon',330,8,216,0,0,8,10,0);
 INSERT INTO `mob_groups` VALUES (20,2472,115,'Mad_Fox',330,1,1562,0,0,4,6,0);
 INSERT INTO `mob_groups` VALUES (21,2475,115,'Magicked_Bones_war',330,1,769,0,0,4,8,0);
-INSERT INTO `mob_groups` VALUES (22,831,115,'Crawler',330,0,530,0,0,3,8,0);
+INSERT INTO `mob_groups` VALUES (22,831,115,'Crawler',330,0,3227,0,0,3,8,0);
 INSERT INTO `mob_groups` VALUES (23,1524,115,'Giant_Bee',330,0,965,0,0,5,8,0);
 INSERT INTO `mob_groups` VALUES (24,6562,115,'Magicked_Bones_blm',330,1,769,0,0,4,8,0);
 INSERT INTO `mob_groups` VALUES (25,3947,115,'Tom_Tit_Tat',0,32,2427,0,0,10,10,0);
