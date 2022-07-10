@@ -526,7 +526,7 @@ function getMagicHitRate(caster, target, skillType, element, effectRes, bonusAcc
     local magiceva = 0
     local resMod = 0
     local dLvl = target:getMainLvl() - caster:getMainLvl()
-    local dLvlStatAcc = 0
+    local dStatAcc = 0
 
     -- resist everything if real magic shield is active (see effects/magic_shield)
     if target:hasStatusEffect(xi.effect.MAGIC_SHIELD) then
@@ -599,6 +599,8 @@ function getMagicHitRate(caster, target, skillType, element, effectRes, bonusAcc
         magicacc = dStatAcc + utils.getMobSkillLvl(1, caster:getMainLvl())
     elseif caster:isPet() and skillType == nil then
         magicacc = dStatAcc + utils.getMobSkillLvl(3, caster:getMainLvl())
+    else
+        magicacc = utils.getSkillLvl(4, caster:getMainLvl()) + dStatAcc
     end
 
     if element ~= xi.magic.ele.NONE then
