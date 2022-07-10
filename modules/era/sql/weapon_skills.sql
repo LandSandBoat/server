@@ -268,3 +268,4 @@ DELETE FROM `weapon_skills` WHERE
     name = "numbing_shot"       or -- June 2010
     name = "wildfire"           or -- September 2010
     name = "last_stand";           -- December 2011
+    
