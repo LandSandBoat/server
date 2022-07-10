@@ -2,7 +2,10 @@
 -- Area: Rolanberry Fields (110)
 --  HNM: Simurgh
 -----------------------------------
-mixins = {require("scripts/mixins/rage")}
+mixins =
+{
+    require("scripts/mixins/rage")
+}
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
@@ -13,7 +16,7 @@ end
 
 entity.onMobDespawn = function(mob)
     UpdateNMSpawnPoint(mob:getID())
-    mob:setRespawnTime(math.random(3600, 7200)) -- 1 to 2 hours
+    mob:setRespawnTime(math.random(75600, 86400)) -- 21 to 24 hours
 end
 
 return entity

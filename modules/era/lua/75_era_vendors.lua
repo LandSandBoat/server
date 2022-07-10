@@ -41,7 +41,7 @@ xi.customShop.Toji_Mumosulah =
 xi.customShop.Amalasanda =
 {
     704,     36, -- Bamboo Stick
-    829,  35070, -- Silk Cloth 
+    829,  35070, -- Silk Cloth
     626,     52, -- Black Pepper
     1240,  2000, -- Koma
     657,   8000, -- Tama-Hagane
@@ -90,7 +90,7 @@ xi.customShop.Hasim =
     4653,  32000, -- Scroll of Protect III
 }
 
-xi.customShop.Stinknix = 
+xi.customShop.Stinknix =
 {
     943,    294, -- Poison Dust
     944,   1035, -- Venom Dust
@@ -100,7 +100,7 @@ xi.customShop.Stinknix =
     17313, 1107, -- Grenade
 }
 
-xi.customShop.Susu = 
+xi.customShop.Susu =
 {
     4647, 20000, -- Scroll of Banishga II
     4683,  2030, -- Scroll of Barblind
@@ -120,8 +120,8 @@ xi.customShop.Susu =
     4627, 13300, -- Scroll of Viruna
 }
 
-xi.customShop.Taza = 
-{        
+xi.customShop.Taza =
+{
     4881, 10304, -- Scroll of Sleepga
     4658, 26244, -- Scroll of Shell III
     4735, 19200, -- Scroll of Protectra III
@@ -183,7 +183,7 @@ xi.customShop.SolbyMaholby =
 }
 
 -- Port Bastok
-xi.customShop.Valeriano = 
+xi.customShop.Valeriano =
 {
     4394,     10, -- Ginger Cookie
     17345,    43, -- Flute
@@ -196,7 +196,7 @@ xi.customShop.Valeriano =
 }
 
 -- Port Jeuno
-xi.customShop.Gekko = 
+xi.customShop.Gekko =
 {
     4150,  2387, -- Eye Drops
     4148,   290, -- Antidote
@@ -209,7 +209,7 @@ xi.customShop.Gekko =
 }
 
 -- Rabao
-xi.customShop.Brave_Ox = 
+xi.customShop.Brave_Ox =
 {
     4654,  77350, -- Protect IV
     4736,  73710, -- Protectra IV
@@ -230,7 +230,7 @@ xi.customShop.MazuroOozuro =
 }
 
 -- Upper Jeuno
-xi.customShop.Antonia = 
+xi.customShop.Antonia =
 {
     17061,  6256, -- Mythril Rod
     17027, 11232, -- Oak Cudgel
@@ -243,7 +243,7 @@ xi.customShop.Antonia =
 }
 
 -- Windurst Waters
-xi.customShop.OrezEbrez = 
+xi.customShop.OrezEbrez =
 {
     12466, 20000,1, --Red Cap
     12458,  8972,1, --Soil Hachimaki
@@ -287,74 +287,89 @@ local lookupTable =
  ]]
 {
  -- Bastok Markets
-    {"nation", "Bastok_Markets", "Mjoll", xi.customShop.Mjoll, xi.quest.fame_area.BASTOK, "MJOLL_SHOP_DIALOG"},
+    {"nation", "Bastok_Markets", "Mjoll", xi.customShop.Mjoll, xi.quest.fame_area.BASTOK, "MJOLL_SHOP_DIALOG", 1},
  -- Kazham
-    {"standard", "Kazham", "Toji_Mumosulah", xi.customShop.Toji_Mumosulah, xi.quest.fame_area.Kazham, "TOJIMUMOSULAH_SHOP_DIALOG"},
+    {"standard", "Kazham", "Toji_Mumosulah", xi.customShop.Toji_Mumosulah, xi.quest.fame_area.Kazham, "TOJIMUMOSULAH_SHOP_DIALOG", 1},
  -- Lower Jeuno
-    {"tenshodo", "Lower_Jeuno", "Amalasanda", xi.customShop.Amalasanda, xi.quest.fame_area.NORG, "AMALASANDA_SHOP_DIALOG"},
-    {"standard", "Lower_Jeuno", "Creepstix", xi.customShop.Creepstix, xi.quest.fame_area.JEUNO, "JUNK_SHOP_DIALOG"},
-    {"standard", "Lower_Jeuno", "Hasim", xi.customShop.Hasim, xi.quest.fame_area.JEUNO, "WAAG_DEEG_SHOP_DIALOG"},
-    {"standard", "Lower_Jeuno", "Susu", xi.customShop.Susu, xi.quest.fame_area.JEUNO, "WAAG_DEEG_SHOP_DIALOG"},
-    {"standard", "Lower_Jeuno", "Stinknix", xi.customShop.Stinknix, xi.quest.fame_area.JEUNO, "JUNK_SHOP_DIALOG"},
-    {"standard", "Lower_Jeuno", "Taza", xi.customShop.Taza, xi.quest.fame_area.JEUNO, "WAAG_DEEG_SHOP_DIALOG"},
+    {"tenshodo", "Lower_Jeuno", "Amalasanda", xi.customShop.Amalasanda, xi.quest.fame_area.NORG, "AMALASANDA_SHOP_DIALOG", 1},
+    {"standard", "Lower_Jeuno", "Creepstix", xi.customShop.Creepstix, xi.quest.fame_area.JEUNO, "JUNK_SHOP_DIALOG", 1},
+    {"standard", "Lower_Jeuno", "Hasim", xi.customShop.Hasim, xi.quest.fame_area.JEUNO, "WAAG_DEEG_SHOP_DIALOG", 1},
+    {"standard", "Lower_Jeuno", "Susu", xi.customShop.Susu, xi.quest.fame_area.JEUNO, "WAAG_DEEG_SHOP_DIALOG", 1},
+    {"standard", "Lower_Jeuno", "Stinknix", xi.customShop.Stinknix, xi.quest.fame_area.JEUNO, "JUNK_SHOP_DIALOG", 1},
+    {"standard", "Lower_Jeuno", "Taza", xi.customShop.Taza, xi.quest.fame_area.JEUNO, "WAAG_DEEG_SHOP_DIALOG", 1},
  -- Mhaura
-    {"none", "Mhaura", "Tya_Padolih"},
+    {"none", "Mhaura", "Tya_Padolih", xi.settings.main.ENABLE_WOTG},
  -- Nashmau
     {"none", "Nashmau","Chichiroon"},
-    {"nofame", "Nashmau", "Mamaroon", xi.customShop.Mamaroon, "MAMAROON_SHOP_DIALOG"},
-    {"nofame", "Nashmau", "Yoyoroon", xi.customShop.Yoyoroon, "YOYOROON_SHOP_DIALOG"}, 
+    {"nofame", "Nashmau", "Mamaroon", xi.customShop.Mamaroon, "MAMAROON_SHOP_DIALOG", xi.settings.main.ENABLE_TOAU},
+    {"nofame", "Nashmau", "Yoyoroon", xi.customShop.Yoyoroon, "YOYOROON_SHOP_DIALOG", xi.settings.main.ENABLE_TOAU},
  -- Norg
-    {"standard", "Norg", "Solby-Maholby", xi.customShop.SolbyMaholby, xi.quest.fame_area.NORG, "SOLBYMAHOLBY_SHOP_DIALOG"},
- -- port Bastok  
-    {"standard", "Port_Bastok", "Valeriano", xi.customShop.Valeriano, xi.quest.fame_area.BASTOK, "VALERIANO_SHOP_DIALOG"},
+    {"standard", "Norg", "Solby-Maholby", xi.customShop.SolbyMaholby, xi.quest.fame_area.NORG, "SOLBYMAHOLBY_SHOP_DIALOG", 1},
+ -- port Bastok
+    {"standard", "Port_Bastok", "Valeriano", xi.customShop.Valeriano, xi.quest.fame_area.BASTOK, "VALERIANO_SHOP_DIALOG", 1},
  -- Port Jeuno
-    {"standard", "Port_Jeuno", "Gekko", xi.customShop.Gekko, xi.quest.fame_area.JEUNO, "DUTY_FREE_SHOP_DIALOG"},
-    {"none", "Port_Jeuno", "Kindlix"},
-    {"none", "Port_Jeuno", "Pyropox"},
+    {"standard", "Port_Jeuno", "Gekko", xi.customShop.Gekko, xi.quest.fame_area.JEUNO, "DUTY_FREE_SHOP_DIALOG", 1},
+    {"none", "Port_Jeuno", "Kindlix", 1},
+    {"none", "Port_Jeuno", "Pyropox",1},
  -- Rabao
-    {"standard", "Rabao", "Brave_Ox", xi.customShop.Brave_Ox, xi.quest.fame_area.SELBINA_RABAO, "BRAVEOX_SHOP_DIALOG"},
+    {"standard", "Rabao", "Brave_Ox", xi.customShop.Brave_Ox, xi.quest.fame_area.SELBINA_RABAO, "BRAVEOX_SHOP_DIALOG", 1},
  -- Selbina
-    {"none", "Selbina", "Falgima"},
+    {"none", "Selbina", "Falgima", xi.settings.main.ENABLE_WOTG},
  -- Southern Sandoria
-    {"standard", "Southern_San_dOria", "Valeriano", xi.customShop.Valeriano, xi.quest.fame_area.SANDORIA, "VALERIANO_SHOP_DIALOG"},
+    {"standard", "Southern_San_dOria", "Valeriano", xi.customShop.Valeriano, xi.quest.fame_area.SANDORIA, "VALERIANO_SHOP_DIALOG", 1},
  -- Tavnazian Safehold
-    {"nofame", "Tavnazian_Safehold", "Mazuro-Oozuro", xi.customShop.MazuroOozuro, "MAZUROOOZURO_SHOP_DIALOG"},
+    {"nofame", "Tavnazian_Safehold", "Mazuro-Oozuro", xi.customShop.MazuroOozuro, "MAZUROOOZURO_SHOP_DIALOG", 1},
  -- Upper Jeuno
-    {"standard", "Upper_Jeuno", "Antonia", xi.customShop.Antonia, xi.quest.fame_area.JEUNO, "VIETTES_SHOP_DIALOG"},
- -- Windurst Waters  
-    {"nation", "Windurst_Waters", "Orez-Ebrez", xi.customShop.OrezEbrez, xi.nation.WINDURST, "OREZEBREZ_SHOP_DIALOG"},
+    {"standard", "Upper_Jeuno", "Antonia", xi.customShop.Antonia, xi.quest.fame_area.JEUNO, "VIETTES_SHOP_DIALOG", 1},
+ -- Windurst Waters
+    {"nation", "Windurst_Waters", "Orez-Ebrez", xi.customShop.OrezEbrez, xi.nation.WINDURST, "OREZEBREZ_SHOP_DIALOG", 1},
  -- Windurst Woods
-    {"nation", "Windurst_Woods", "Mono_Nchaa", xi.customShop.Mono_Nchaa, xi.nation.WINDURST, "MONONCHAA_SHOP_DIALOG"},
-    {"standard", "Windurst_Woods", "Valeriano", xi.customShop.Valeriano, xi.quest.fame_area.WINDURST, "VALERIANO_SHOP_DIALOG"},
+    {"nation", "Windurst_Woods", "Mono_Nchaa", xi.customShop.Mono_Nchaa, xi.nation.WINDURST, "MONONCHAA_SHOP_DIALOG", 1},
+    {"standard", "Windurst_Woods", "Valeriano", xi.customShop.Valeriano, xi.quest.fame_area.WINDURST, "VALERIANO_SHOP_DIALOG", 1},
 
 }
 
 for _, shop in pairs(lookupTable) do
     local ID = require(string.format("scripts/zones/%s/IDs", shop[2]))
     local onTrigger = string.format("xi.zones.%s.npcs.%s.onTrigger", shop[2], shop[3])
-    if shop[1] == 'nation' then
+    if
+    shop[1] == 'nation' and
+    shop[7] == 1
+    then
         m:addOverride(onTrigger,
         function(player, npc)
             player:showText(npc, ID.text[shop[6]])
             xi.shop.nation(player, shop[4], shop[5])
         end)
-    elseif shop[1] =='nofame' then
+    elseif
+        shop[1] =='nofame' and
+        shop[7] == 1
+    then
         m:addOverride(onTrigger,
         function(player, npc)
             player:showText(npc, ID.text[shop[5]])
             xi.shop.general(player, shop[4])
         end)
-    elseif shop[1] == 'none' then
+    elseif
+        shop[1] == 'none' and
+        shop[4] == 1
+    then
         m:addOverride(onTrigger,
         function(player, npc)
         end)
-    elseif shop[1] == 'standard' then
+    elseif
+        shop[1] == 'standard' and
+        shop[7] == 1
+    then
         m:addOverride(onTrigger,
         function(player, npc)
             player:showText(npc, ID.text[shop[6]])
             xi.shop.general(player, shop[4], shop[5])
         end)
-    elseif shop[1] == 'tenshodo' then
+    elseif
+        shop[1] == 'tenshodo' and
+        shop[7] == 1
+    then
         m:addOverride(onTrigger,
         function(player, npc)
             if player:hasKeyItem(xi.ki.TENSHODO_MEMBERS_CARD) then
