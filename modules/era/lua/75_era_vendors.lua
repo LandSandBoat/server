@@ -359,9 +359,3 @@ for _, shop in pairs(lookupTable) do
 end
 
 return m
-
-
-
-    
-
-
