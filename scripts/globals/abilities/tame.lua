@@ -27,7 +27,7 @@ ability_object.onUseAbility = function(player, target, ability)
         return 0
     end
 
-    local params = {diff = (player:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)), skillType = xi.skill.NONE, bonus = 0, effect = xi.effect.NONE, element = xi.magic.element.NONE}
+    local params = {diff = (player:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)), skillType = nil, bonus = 0, effect = xi.effect.NONE, element = xi.magic.element.NONE}
     local resist = applyResistanceAbility(player, target, ability:getID(), params)
 
     if resist <= 0.25 then
