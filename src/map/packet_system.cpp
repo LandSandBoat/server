@@ -509,7 +509,15 @@ void SmallPacket0x00D(map_session_data_t* const PSession, CCharEntity* const PCh
 
         if (PChar->PPet != nullptr)
         {
-            PChar->setPetZoningInfo();
+            auto* PPetEntity = dynamic_cast<CPetEntity*>(PChar->PPet);
+            if (PPetEntity->getPetType() == PET_TYPE::WYVERN)
+            {
+                PChar->setPetZoningInfo();
+            }
+            else
+            {
+                PChar->resetPetZoningInfo();
+            }
         }
 
         PSession->shuttingDown = 1;
@@ -3618,8 +3626,16 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
     // handle pets on zone
     if (PChar->PPet != nullptr)
     {
-        PChar->setPetZoningInfo();
-        petutils::DespawnPet(PChar);
+        auto* PPetEntity = dynamic_cast<CPetEntity*>(PChar->PPet);
+        if (PPetEntity->getPetType() == PET_TYPE::WYVERN)
+        {
+            PChar->setPetZoningInfo();
+            petutils::DespawnPet(PChar);
+        }
+        else
+        {
+            PChar->resetPetZoningInfo();
+        }
     }
 
     uint32 zoneLineID    = data.ref<uint32>(0x04);
