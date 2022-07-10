@@ -32,6 +32,11 @@ end
 entity.onTrade = function(player, npc, trade)
     local pZeni  = player:getCurrency("zeni_point")
     local pLevel = player:getMainLvl()
+    
+	if player:getMainJob() == xi.job.GEO or player:getMainJob() == xi.job.RUN then
+	    player:PrintToPlayer( "Nonoroon: Bro, that job doesn't get a mythic!", 0xd)
+		return
+	end
 
     if pZeni >= 6000 and pLevel > 74 and player:getCharVar("MythicWeaponExchange") == 1 and npcUtil.tradeHasExactly(trade, {{2187, 5}}) then
         player:tradeComplete()
