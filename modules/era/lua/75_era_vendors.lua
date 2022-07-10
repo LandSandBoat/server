@@ -23,18 +23,25 @@ xi.customShop.Mjoll =
 --Kazham
 xi.customShop.Toji_Mumosulah =
 {
-    17321,    16, 1, -- Silver Arrow
-    17318,     3, 2, -- Wooden Arrow
-    17320,     7, 3, -- Iron Arrow
-    5069,    199, 3, -- Scroll of Dark Threnody
-    5063,   1000, 3, -- Scroll of Ice Threnody
+    112,    456, -- Yellow Jar
+    13199,   95, -- Blood Stone
+    13076, 3510, -- Fang Necklace
+    13321, 1667, -- Bone Earring
+    17351, 4747, -- Gemshorn
+    16993,   69, -- Peeled Crayfish
+    16998,   36, -- Insect Paste
+    17876,  165, -- Fish Broth
+    17880,  695, -- Seedbed Soil
+    1021,   450, -- Hatchet
+    4987,   328, -- Scroll of Army's Paeon II
+    4988,  3312, -- Scroll of Army's Paeon III
 }
 
 --Lower Jeuno
 xi.customShop.Amalasanda =
 {
     704,     36, -- Bamboo Stick
-    829,  35070, --Silk Cloth 
+    829,  35070, -- Silk Cloth 
     626,     52, -- Black Pepper
     1240,  2000, -- Koma
     657,   8000, -- Tama-Hagane
@@ -281,9 +288,9 @@ local lookupTable =
 {
  -- Bastok Markets
     {"nation", "Bastok_Markets", "Mjoll", xi.customShop.Mjoll, xi.quest.fame_area.BASTOK, "MJOLL_SHOP_DIALOG"},
-    -- Kazham
+ -- Kazham
     {"standard", "Kazham", "Toji_Mumosulah", xi.customShop.Toji_Mumosulah, xi.quest.fame_area.Kazham, "TOJIMUMOSULAH_SHOP_DIALOG"},
-    -- Lower Jeuno
+ -- Lower Jeuno
     {"tenshodo", "Lower_Jeuno", "Amalasanda", xi.customShop.Amalasanda, xi.quest.fame_area.NORG, "AMALASANDA_SHOP_DIALOG"},
     {"standard", "Lower_Jeuno", "Creepstix", xi.customShop.Creepstix, xi.quest.fame_area.JEUNO, "JUNK_SHOP_DIALOG"},
     {"standard", "Lower_Jeuno", "Hasim", xi.customShop.Hasim, xi.quest.fame_area.JEUNO, "WAAG_DEEG_SHOP_DIALOG"},
@@ -326,29 +333,29 @@ for _, shop in pairs(lookupTable) do
     local ID = require(string.format("scripts/zones/%s/IDs", shop[2]))
     local onTrigger = string.format("xi.zones.%s.npcs.%s.onTrigger", shop[2], shop[3])
     if shop[1] == 'nation' then
-        m:addOverride(onTrigger),
+        m:addOverride(onTrigger,
         function(player, npc)
             player:showText(npc, ID.text[shop[6]])
             xi.shop.nation(player, shop[4], shop[5])
         end)
     elseif shop[1] =='nofame' then
-        m:addOverride(onTrigger),
+        m:addOverride(onTrigger,
         function(player, npc)
             player:showText(npc, ID.text[shop[5]])
             xi.shop.general(player, shop[4])
         end)
     elseif shop[1] == 'none' then
-        m:addOverride(onTrigger),
+        m:addOverride(onTrigger,
         function(player, npc)
         end)
     elseif shop[1] == 'standard' then
-        m:addOverride(onTrigger),
+        m:addOverride(onTrigger,
         function(player, npc)
             player:showText(npc, ID.text[shop[6]])
             xi.shop.general(player, shop[4], shop[5])
         end)
     elseif shop[1] == 'tenshodo' then
-        m:addOverride(onTrigger),
+        m:addOverride(onTrigger,
         function(player, npc)
             if player:hasKeyItem(xi.ki.TENSHODO_MEMBERS_CARD) then
                 player:showText(npc, ID.text[shop[6]])
