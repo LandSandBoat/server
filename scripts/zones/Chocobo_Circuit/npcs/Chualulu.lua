@@ -2,7 +2,7 @@
 -- Area: Chocobo_Circuit
 -- NPC: Chualulu
 -- Expert Windurst CRA Branch
--- pos
+-- pos 140.286 -0.990 -537.476
 -- event 491 492 493 494 495 496 497 498 499
 -----------------------------------
 local entity = {}
