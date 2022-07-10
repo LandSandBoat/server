@@ -12377,7 +12377,7 @@ INSERT INTO `mob_droplist` VALUES (1495,0,0,1000,18688,30);       -- Lamian Kama
 INSERT INTO `mob_droplist` VALUES (1496,0,0,1000,15851,40); -- Kushas Ring (4.0%)
 
 -- ZoneID: 192 - Nocuous Weapon
-INSERT INTO `mob_droplist` VALUES (1497,0,0,1000,19044,440); -- Disciple Grip (44.0%)
+INSERT INTO `mob_droplist` VALUES (1497,0,0,1000,19044,@VCOMMON); -- Disciple Grip (Very Common, 24%)
 
 -- ZoneID:  61 - Zazalda Jagil
 -- ZoneID:  85 - La Vaule Pugil
@@ -12955,8 +12955,8 @@ INSERT INTO `mob_droplist` VALUES (1583,0,0,1000,954,70);  -- Magic Pot Shard (7
 INSERT INTO `mob_droplist` VALUES (1583,0,0,1000,914,20);  -- Vial Of Mercury (2.0%)
 
 -- ZoneID: 192 - Maltha
-INSERT INTO `mob_droplist` VALUES (1584,0,0,1000,14464,330); -- Trailers Tunica (33.0%)
-INSERT INTO `mob_droplist` VALUES (1584,0,0,1000,637,220);   -- Vial Of Slime Oil (22.0%)
+INSERT INTO `mob_droplist` VALUES (1584,0,0,1000,14464,@VCOMMON); -- Trailers Tunica (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (1584,0,0,1000,637,@VCOMMON);   -- Vial Of Slime Oil (Very Common, 24%)
 
 -- ZoneID:  31 - Mammet-19 Epsilon
 -- ZoneID:  31 - Mammet-800
@@ -18256,8 +18256,8 @@ INSERT INTO `mob_droplist` VALUES (2271,4,0,1000,5668,0);   -- Smilodon Liver (D
 INSERT INTO `mob_droplist` VALUES (2272,0,0,1000,724,@VRARE); -- Piece Of Magnolia Lumber (Very Rare, 1%)
 
 -- ZoneID: 192 - Slendlix Spindlethumb
-INSERT INTO `mob_droplist` VALUES (2273,0,0,1000,11494,@COMMON); -- Circes Hat (Common, 15%)
-INSERT INTO `mob_droplist` VALUES (2273,2,0,1000,750,0);         -- Silver Beastcoin (Steal)
+INSERT INTO `mob_droplist` VALUES (2273,0,0,1000,11494,@VCOMMON); -- Circes Hat (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2273,2,0,1000,750,0);          -- Silver Beastcoin (Steal)
 
 -- ZoneID: 217 - Slough Bats
 INSERT INTO `mob_droplist` VALUES (2274,0,0,1000,922,250);    -- Bat Wing (25.0%)
