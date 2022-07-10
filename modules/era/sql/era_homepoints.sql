@@ -113,10 +113,10 @@ UPDATE npc_list SET status = 0 WHERE npcid = "17743945" AND polutils_name = "Hom
 UPDATE npc_list SET status = 2 WHERE npcid = "17743946" AND polutils_name = "Home Point #3";
 
 -- Port Jeuno
-UPDATE npc_list SET status = 0 WHERE npcid = "17784890" AND polutils_name = "Home Point #2";
-UPDATE npc_list SET status = 0 WHERE npcid = "17784891" AND polutils_name = "Home Point #3";
-UPDATE npc_list SET status = 0 WHERE npcid = "17784892" AND polutils_name = "Home Point #4";
-UPDATE npc_list SET status = 0 WHERE npcid = "17784893" AND polutils_name = "Home Point #5";
+UPDATE npc_list SET status = 2 WHERE npcid = "17784890" AND polutils_name = "Home Point #2";
+UPDATE npc_list SET status = 2 WHERE npcid = "17784891" AND polutils_name = "Home Point #3";
+UPDATE npc_list SET status = 2 WHERE npcid = "17784892" AND polutils_name = "Home Point #4";
+UPDATE npc_list SET status = 2 WHERE npcid = "17784893" AND polutils_name = "Home Point #5";
 
 -- Port San d'Oria
 UPDATE npc_list SET pos_x = "-66.0769", pos_y = "4.0000", pos_z = "-104.9475" WHERE npcid = "17727574";
