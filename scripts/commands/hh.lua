@@ -7,7 +7,7 @@
 
 cmdprops =
 {
-    permission = 1,
+    permission = 0,
     parameters = ""
 }
 
@@ -31,9 +31,9 @@ function onTrigger(player)
                         player:setCurrency("valor_point", tabs - 5000)
                         playerArg:PrintToPlayer("Enjoy your buffs!", xi.msg.channel.NS_SAY)
                         player:addStatusEffect(xi.effect.REGAIN, 5, 0, 7200)
-                        player:addStatusEffect(xi.effect.REGEN, 15, 0, 7200)
-                        player:addStatusEffect(xi.effect.REFRESH, 10, 0, 7200)
-                        player:addStatusEffect(xi.effect.HASTE, 3, 0, 7200)
+                        player:addStatusEffect(xi.effect.REGEN, 5, 0, 7200)
+                        player:addStatusEffect(xi.effect.REFRESH, 5, 0, 7200)
+                        player:addStatusEffect(xi.effect.HASTE, 5, 0, 7200)
                     else
                         playerArg:PrintToPlayer("You do not possess enough tabs.", 0xD)
                     end
