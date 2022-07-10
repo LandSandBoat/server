@@ -525,8 +525,8 @@ function getMagicHitRate(caster, target, skillType, element, effectRes, bonusAcc
     local magicacc = 0
     local magiceva = 0
     local resMod = 0
-    local dLvl = caster:getMainLvl() - target:getMainLvl()
-    local dStatAcc = 0
+    local dLvl = target:getMainLvl() - caster:getMainLvl()
+    local dLvlStatAcc = 0
 
     -- resist everything if real magic shield is active (see effects/magic_shield)
     if target:hasStatusEffect(xi.effect.MAGIC_SHIELD) then
@@ -658,6 +658,7 @@ function getMagicResist(magicHitRate)
         resist = 1.0
     end
 
+    print(resist)
     return resist
 end
 

@@ -595,7 +595,7 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
     -----------------------------------
     -- Apply level correction.
     -----------------------------------
-    local levelDiff = caster:getMainLvl() - target:getMainLvl()
+    local levelDiff = target:getMainLvl() - caster:getMainLvl()
 
     -----------------------------------
     -- STEP 2: Get target magic evasion
