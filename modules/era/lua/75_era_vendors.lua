@@ -324,7 +324,7 @@ local lookupTable =
 
 for _, shop in pairs(lookupTable) do
     local ID = require(string.format("scripts/zones/%s/IDs", shop[2]))
-    local onTrigger = string.format("xi.zones.%s.npcs.%s.onTrigger", shop[2], shop[3]
+    local onTrigger = string.format("xi.zones.%s.npcs.%s.onTrigger", shop[2], shop[3])
     if shop[1] == 'nation' then
         m:addOverride(onTrigger),
         function(player, npc)
