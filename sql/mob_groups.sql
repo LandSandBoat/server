@@ -12693,9 +12693,9 @@ INSERT INTO `mob_groups` VALUES (49,3876,194,'Ten_of_Batons',960,0,2390,0,0,40,4
 INSERT INTO `mob_groups` VALUES (50,3879,194,'Ten_of_Swords',960,0,2393,0,0,40,44,0);
 INSERT INTO `mob_groups` VALUES (51,3877,194,'Ten_of_Coins',960,0,2391,0,0,40,44,0);
 INSERT INTO `mob_groups` VALUES (52,6584,194,'Balloon',300,0,217,0,0,8,10,0);
-INSERT INTO `mob_groups` VALUES (53,495,194,'Bomb_King',0,128,333,0,0,16,18,0);
-INSERT INTO `mob_groups` VALUES (54,1090,194,'Doppelganger_Gog',0,128,691,0,0,23,25,0);
-INSERT INTO `mob_groups` VALUES (55,1089,194,'Doppelganger_Dio',0,128,690,0,0,23,25,0);
+INSERT INTO `mob_groups` VALUES (53,495,194,'Bomb_King',0,128,333,1100,0,16,18,0);
+INSERT INTO `mob_groups` VALUES (54,1090,194,'Doppelganger_Gog',0,128,691,800,0,23,25,0);
+INSERT INTO `mob_groups` VALUES (55,1089,194,'Doppelganger_Dio',0,128,690,800,0,23,25,0);
 INSERT INTO `mob_groups` VALUES (56,372,194,'Battue_Bats',480,0,244,0,0,1,5,0);
 INSERT INTO `mob_groups` VALUES (57,1737,194,'Goblin_Thug',900,0,1174,0,0,1,7,0);
 INSERT INTO `mob_groups` VALUES (58,1744,194,'Goblin_Weaver',900,0,1187,0,0,1,7,0);

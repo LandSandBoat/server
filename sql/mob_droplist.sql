@@ -3236,10 +3236,10 @@ INSERT INTO `mob_droplist` VALUES (332,0,0,1000,928,270);        -- Pinch Of Bom
 INSERT INTO `mob_droplist` VALUES (332,0,0,1000,2278,@UNCOMMON); -- ??? Ring (Uncommon, 10%)
 
 -- ZoneID: 194 - Bomb King
-INSERT INTO `mob_droplist` VALUES (333,0,0,1000,928,820);   -- Pinch Of Bomb Ash (82.0%)
-INSERT INTO `mob_droplist` VALUES (333,0,0,1000,13506,280); -- Bomb Ring (28.0%)
-INSERT INTO `mob_droplist` VALUES (333,0,0,1000,17316,200); -- Bomb Arm (20.0%)
-INSERT INTO `mob_droplist` VALUES (333,2,0,1000,17316,0);   -- Bomb Arm (Steal)
+INSERT INTO `mob_droplist` VALUES (333,0,0,1000,928,@ALWAYS);    -- Pinch Of Bomb Ash (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (333,0,0,1000,13506,@COMMON);  -- Bomb Ring (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (333,0,0,1000,17316,@VCOMMON); -- Bomb Arm (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (333,2,0,1000,17316,0);        -- Bomb Arm (Steal)
 
 -- ZoneID: 205 - Bomb Queen
 INSERT INTO `mob_droplist` VALUES (334,0,0,1000,13567,@ALWAYS); -- Bomb Queen Ring (Always, 100%)
@@ -5550,7 +5550,7 @@ INSERT INTO `mob_droplist` VALUES (636,0,0,1000,642,@VRARE); -- Chunk Of Zinc Or
 INSERT INTO `mob_droplist` VALUES (636,2,0,1000,768,0);      -- Flint Stone (Steal)
 
 -- ZoneID: 194 - Desmodont
-INSERT INTO `mob_droplist` VALUES (637,0,0,1000,11531,164); -- Fidelity Mantle (16.4%)
+INSERT INTO `mob_droplist` VALUES (637,0,0,1000,11531,@COMMON); -- Fidelity Mantle (Common, 15%)
 
 -- ZoneID: 130 - Despot
 INSERT INTO `mob_droplist` VALUES (638,0,0,1000,1422,@ALWAYS);  -- Gem Of The West (Always, 100%)
@@ -5897,11 +5897,11 @@ INSERT INTO `mob_droplist` VALUES (689,2,0,1000,1449,0);        -- Tukuku Whites
 
 -- ZoneID: 194 - Doppelganger Dio
 INSERT INTO `mob_droplist` VALUES (690,0,0,1000,940,@ALWAYS); -- Revival Tree Root (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (690,0,0,1000,16773,230);   -- Cruel Scythe (23.0%)
+INSERT INTO `mob_droplist` VALUES (690,0,0,1000,16773,@VCOMMON);   -- Cruel Scythe (Very Common, 24%)
 
 -- ZoneID: 194 - Doppelganger Gog
 INSERT INTO `mob_droplist` VALUES (691,0,0,1000,940,@ALWAYS); -- Revival Tree Root (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (691,0,0,1000,16863,270);   -- Cruel Spear (27.0%)
+INSERT INTO `mob_droplist` VALUES (691,0,0,1000,16863,@VCOMMON);   -- Cruel Spear (Very Common, 24%)
 
 -- ZoneID:  62 - Dorgerwor The Astute
 INSERT INTO `mob_droplist` VALUES (692,0,0,1000,16222,@UNCOMMON); -- Mercenarys Mantle (Uncommon, 10%)
@@ -23641,7 +23641,7 @@ INSERT INTO `mob_droplist` VALUES (2834,0,0,1000,5073,@VRARE);    -- Scroll Of C
 INSERT INTO `mob_droplist` VALUES (2835,0,0,1000,14469,@ALWAYS); -- Reverend Mail (Always, 100%)
 
 -- ZoneID: 194 - Ah Puch
-INSERT INTO `mob_droplist` VALUES (2836,0,0,1000,18610,250); -- Spiro Staff (25.0%)
+INSERT INTO `mob_droplist` VALUES (2836,0,0,1000,18610,@VCOMMON); -- Spiro Staff (Very Common, 24%)
 
 -- ZoneID: 143 - Bughi Howlblade
 INSERT INTO `mob_droplist` VALUES (2837,0,0,1000,501,@UNCOMMON); -- Quadav Helm (Uncommon, 10%)
@@ -24950,7 +24950,7 @@ INSERT INTO `mob_droplist` VALUES (3078,0,0,1000,1631,@VRARE); -- Moblin Armor (
 INSERT INTO `mob_droplist` VALUES (3079,0,0,1000,16028,136); -- Psyche Earring (13.6%)
 
 -- ZoneID: 194 - Legalox Heftyhind
-INSERT INTO `mob_droplist` VALUES (3080,0,0,1000,2846,310); -- Piece Of Hefty Oak Lumber (31.0%)
+INSERT INTO `mob_droplist` VALUES (3080,0,0,1000,2846,@VCOMMON); -- Piece Of Hefty Oak Lumber (Very Common, 24%)
 
 -- ZoneID:   4 - Shankha
 INSERT INTO `mob_droplist` VALUES (3081,0,0,1000,16187,122); -- Adoubeurs Pavise (12.2%)
