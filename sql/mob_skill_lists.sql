@@ -3490,6 +3490,7 @@ INSERT INTO `mob_skill_lists` VALUES ('TRUST_Tenzen',1023,1395); -- Amatsu: Tsuk
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mihli_Aliapoh',1024,162); -- Brainshaker
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mihli_Aliapoh',1024,166); -- True Strike
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mihli_Aliapoh',1024,168); -- Hexastrike
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Mihli_Aliapoh',1024,3203); -- Scouring Bubbles
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Valaineral',1025,34);  -- Red Lotus Blade
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Valaineral',1025,41);  -- Swift Blade
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Valaineral',1025,42);  -- Savage Blade
@@ -3572,10 +3573,10 @@ INSERT INTO `mob_skill_lists` VALUES ('TRUST_Uka_Totlihn',1062,167); -- Judgemen
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Flaviria_UC',1072,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Babban',1073,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Abenzio',1074,0);
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rughadjeen',1075,0); -- Power Slash
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rughadjeen',1075,0); -- Sickle Moon
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rughadjeen',1075,0); -- Ground Strike
--- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rughadjeen',1075,0); -- Victory Beacon
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rughadjeen',1075,49); -- Power Slash
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rughadjeen',1075,54); -- Sickle Moon
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rughadjeen',1075,56); -- Ground Strike
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Rughadjeen',1075,3237); -- Victory Beacon
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Kukki-Chebukki',1076,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Margret',1077,0);
 -- INSERT INTO `mob_skill_lists` VALUES ('TRUST_Chacharoon',1078,0);

@@ -20,7 +20,13 @@ spell_object.onSpellCast = function(caster, target, spell)
 end
 
 spell_object.onMobSpawn = function(mob)
-    xi.trust.message(mob, xi.trust.message_offset.SPAWN)
+    xi.trust.teamworkMessage(mob, {
+        [xi.magic.spell.NASHMEIRA] = xi.trust.message_offset.TEAMWORK_1,
+        [xi.magic.spell.GADALAR] = xi.trust.message_offset.TEAMWORK_2,
+        [xi.magic.spell.NAJELITH] = xi.trust.message_offset.TEAMWORK_3,
+        [xi.magic.spell.ZAZARG] = xi.trust.message_offset.TEAMWORK_4,
+        [xi.magic.spell.MIHLI_ALIAPOH] = xi.trust.message_offset.TEAMWORK_5
+    })
 
     -- TODO: Load/Apply MODs from mob_pool_mods instead
     mob:addMod(xi.mod.FASTCAST, 30)
@@ -47,6 +53,15 @@ spell_object.onMobSpawn = function(mob)
     mob:addSimpleGambit(ai.t.SELF, ai.c.MPP_LT, 50, ai.r.JA, ai.s.SPECIFIC, xi.ja.CHIVALRY)
 
     -- TODO: Add Trust Synergy for Serpent Generals
+
+    mob:addListener("WEAPONSKILL_USE", "RUGHADJEEN_WEAPONSKILL_USE", function(mobArg, target, wsid, tp, action)
+        if wsid == 3237 then -- Victory Beacon
+        -- Do not despair! The Goddess of Victory fights by our side!
+            if math.random(100) <= 33 then
+                xi.trust.message(mobArg, xi.trust.message_offset.SPECIAL_MOVE_1)
+            end
+        end
+    end)
 end
 
 spell_object.onMobDespawn = function(mob)
