@@ -4995,7 +4995,10 @@ INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 250, 1, 255); -- ice spi
 INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 252, 1, 255); -- stun (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 253, 1, 255); -- sleep (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 274, 1, 255); -- sleepga ii (1~255)
--- Next Avail 493
+
+-- Pilwiz (493)
+INSERT INTO `mob_spell_lists` VALUES ('Pilwiz',493,190,1,255);  -- stonega_ii (1~255)
+-- Next Avail 494
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;
