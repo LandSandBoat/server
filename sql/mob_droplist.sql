@@ -14839,15 +14839,15 @@ INSERT INTO `mob_droplist` VALUES (1805,0,0,1000,2720,@VRARE);  -- Etoile Bangle
 INSERT INTO `mob_droplist` VALUES (1805,0,0,1000,2725,@VRARE);  -- Argute Bracers -1 (Very Rare, 1%)
 
 -- ZoneID: 122 - Nightmare Vase
-INSERT INTO `mob_droplist` VALUES (1806,0,0,1000,954,140);         -- Magic Pot Shard (14.0%)
-INSERT INTO `mob_droplist` VALUES (1806,0,0,1000,942,@UNCOMMON);   -- Philosophers Stone (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (1806,0,0,1000,16913,@UNCOMMON); -- Shinogi (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (1806,0,0,1000,954,70);          -- Magic Pot Shard (7.0%)
-INSERT INTO `mob_droplist` VALUES (1806,0,0,1000,954,@RARE);       -- Magic Pot Shard (Rare, 5%)
-INSERT INTO `mob_droplist` VALUES (1806,0,0,1000,954,40);          -- Magic Pot Shard (4.0%)
-INSERT INTO `mob_droplist` VALUES (1806,0,0,1000,914,20);          -- Vial Of Mercury (2.0%)
-INSERT INTO `mob_droplist` VALUES (1806,0,0,1000,914,@VRARE);      -- Vial Of Mercury (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (1806,2,0,1000,954,0);           -- Magic Pot Shard (Steal)
+INSERT INTO `mob_droplist` VALUES (1806,0,0,1000,954,@ALWAYS);  -- Magic Pot Shard (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (1806,0,0,1000,954,@ALWAYS);  -- Magic Pot Shard (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (1806,0,0,1000,954,@VCOMMON); -- Magic Pot Shard (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (1806,0,0,1000,954,@VCOMMON); -- Magic Pot Shard (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (1806,0,0,1000,942,@VCOMMON); -- Philosophers Stone (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (1806,0,0,1000,16913,@VRARE); -- Shinogi (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (1806,0,0,1000,914,@ALWAYS);  -- Vial Of Mercury (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (1806,0,0,1000,914,@ALWAYS);  -- Vial Of Mercury (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (1806,2,0,1000,954,0);        -- Magic Pot Shard (Steal)
 
 -- ZoneID:  42 - Nightmare Worm
 INSERT INTO `mob_droplist` VALUES (1807,0,0,1000,3459,25);     -- Heralds Juju (2.5%)
@@ -24462,8 +24462,8 @@ INSERT INTO `mob_droplist` VALUES (2945,0,0,1000,2814,272); -- Aptant Of Bellum 
 INSERT INTO `mob_droplist` VALUES (2945,0,0,1000,2813,204); -- Aptant Of Durus (20.4%)
 
 -- ZoneID: 122 - Martinet
-INSERT INTO `mob_droplist` VALUES (2946,0,0,1000,2817,350); -- Aptant Of Pera (35.0%)
-INSERT INTO `mob_droplist` VALUES (2946,0,0,1000,2812,290); -- Aptant Of Aecus (29.0%)
+INSERT INTO `mob_droplist` VALUES (2946,0,0,1000,2817,@RARE); -- Aptant Of Pera (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (2946,0,0,1000,2812,@COMMON); -- Aptant Of Aecus (Common, 15%)
 
 -- ZoneID: 197 - Aqrabuamelu
 INSERT INTO `mob_droplist` VALUES (2947,0,0,1000,2818,86); -- Aptant Of Ishis (8.6%)
@@ -24971,7 +24971,7 @@ INSERT INTO `mob_droplist` VALUES (3084,0,0,1000,16035,41); -- Altdorfs Earring 
 INSERT INTO `mob_droplist` VALUES (3085,0,0,1000,11408,63); -- Moranas Pigaches (6.3%)
 
 -- ZoneID: 122 - Rogue Receptacle
-INSERT INTO `mob_droplist` VALUES (3086,0,0,1000,11533,333); -- Lyricists Gonnelle (33.3%)
+INSERT INTO `mob_droplist` VALUES (3086,0,0,1000,11533,@VCOMMON); -- Lyricists Gonnelle (Very Common, 24%)
 
 -- ZoneID: 200 - Frogamander
 INSERT INTO `mob_droplist` VALUES (3087,0,0,1000,15944,249); -- Selemnus Belt (24.9%)
@@ -26782,7 +26782,11 @@ INSERT INTO `mob_droplist` VALUES (3226,0,0,1000,1604,@UNCOMMON); -- (Garrison) 
 INSERT INTO `mob_droplist` VALUES (3226,0,0,1000,1605,@UNCOMMON); -- (Garrison) Mannequin Feet
 
 -- ZoneID: 121 - Bastet
-INSERT INTO `mob_droplist` VALUES (3228,0,0,1000,1604,@UNCOMMON); -- Bastet Fang (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (3228,0,0,1000,2830,@UNCOMMON); -- Bastet Fang (Uncommon, 10%)
+
+-- ZoneID: 122 - Nargun
+INSERT INTO `mob_droplist` VALUES (3229,0,0,1000,2815,@VCOMMON); -- Aptant of Arkhe (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (3229,0,0,1000,2817,@RARE);    -- Aptant of Pera (Rare, 5%)
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;

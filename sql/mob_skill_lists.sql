@@ -3811,8 +3811,8 @@ INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1169,1720);
 INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1169,1721);
 INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1169,1722);
 INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1169,1723);
-
 INSERT INTO `mob_skill_lists` VALUES ('Huwasi',1170,678);
+INSERT INTO `mob_skill_lists` VALUES ('Rogue_Receptacle',1171,520);
 
 -- Next available ID: 1170
 
