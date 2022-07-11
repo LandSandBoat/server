@@ -625,8 +625,14 @@ void SmallPacket0x015(map_session_data_t* const PSession, CCharEntity* const PCh
         uint16 newTargID   = data.ref<uint16>(0x16);
         uint8  newRotation = data.ref<uint8>(0x14);
 
-        bool   moved       = (PChar->loc.p.x != newX || PChar->loc.p.y != newY || PChar->loc.p.z != newZ || PChar->m_TargID != newTargID
-                           || PChar->loc.p.rotation != newRotation);
+        // clang-format off
+        bool moved =
+            PChar->loc.p.x != newX ||
+            PChar->loc.p.y != newY ||
+            PChar->loc.p.z != newZ ||
+            PChar->m_TargID != newTargID ||
+            PChar->loc.p.rotation != newRotation;
+        // clang-format on
 
         // Cache previous location
         PChar->m_previousLocation = PChar->loc;
@@ -656,11 +662,11 @@ void SmallPacket0x015(map_session_data_t* const PSession, CCharEntity* const PCh
         }
 
         // Request updates for all entity types
-        PChar->loc.zone->SpawnNPCs(PChar);   // Some NPCs can move, some rotate when other players talk to them, always request NPC updates.
+        PChar->loc.zone->SpawnNPCs(PChar); // Some NPCs can move, some rotate when other players talk to them, always request NPC updates.
         PChar->loc.zone->SpawnMOBs(PChar);
         PChar->loc.zone->SpawnPETs(PChar);
         PChar->loc.zone->SpawnTRUSTs(PChar);
-        PChar->requestedInfoSync = true;     // Ask to update PCs during CZoneEntities::ZoneServer
+        PChar->requestedInfoSync = true; // Ask to update PCs during CZoneEntities::ZoneServer
 
         if (PChar->PWideScanTarget != nullptr)
         {
