@@ -25,8 +25,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../../ability.h"
 #include "../../ai/helpers/gambits_container.h"
 #include "../../ai/states/despawn_state.h"
-#include "../../ai/states/range_state.h"
 #include "../../ai/states/magic_state.h"
+#include "../../ai/states/range_state.h"
 #include "../../enmity_container.h"
 #include "../../entities/charentity.h"
 #include "../../entities/trustentity.h"
@@ -219,15 +219,19 @@ void CTrustController::DoRoamTick(time_point tick)
     {
         if (POtherTrust != POwner && distance(POtherTrust->loc.p, POwner->loc.p) < 1.0f && !POwner->PAI->PathFind->IsFollowingPath())
         {
-            auto       diff_angle = worldAngle(POwner->loc.p, POtherTrust->loc.p) + 64;
-            auto       amount     = (currentPartyPos % 2) ? 1.0f : -1.0f;
-            position_t new_pos    = {
-                POwner->loc.p.x - (cosf(rotationToRadian(diff_angle)) * amount),
-                POtherTrust->loc.p.y,
-                POwner->loc.p.z + (sinf(rotationToRadian(diff_angle)) * amount),
-                0,
-                0,
+            auto diff_angle = worldAngle(POwner->loc.p, POtherTrust->loc.p) + 64;
+            auto amount     = (currentPartyPos % 2) ? 1.0f : -1.0f;
+
+            // clang-format off
+            position_t new_pos =
+            {
+                   POwner->loc.p.x - (cosf(rotationToRadian(diff_angle)) * amount),
+                   POtherTrust->loc.p.y,
+                   POwner->loc.p.z + (sinf(rotationToRadian(diff_angle)) * amount),
+                   0,
+                   0,
             };
+            // clang-format on
 
             if (POwner->PAI->PathFind->ValidPosition(new_pos) && POwner->PAI->PathFind->PathAround(new_pos, RoamDistance, PATHFLAG_RUN | PATHFLAG_WALLHACK))
             {
@@ -282,6 +286,7 @@ void CTrustController::Declump(CCharEntity* PMaster, CBattleEntity* PTarget)
             auto diffAngle  = worldAngle(POwner->loc.p, PTarget->loc.p) + 64;
             auto moveAmount = xirand::GetRandomNumber(0.0f, 1.5f) * ((currentPartyPos % 2) ? 1.0f : -1.0f);
 
+            // clang-format off
             position_t newPos =
             {
                 POwner->loc.p.x - (cosf(rotationToRadian(diffAngle)) * moveAmount),
@@ -290,6 +295,7 @@ void CTrustController::Declump(CCharEntity* PMaster, CBattleEntity* PTarget)
                 0,
                 0,
             };
+            // clang-format on
 
             if (POwner->PAI->PathFind->ValidPosition(newPos))
             {
@@ -417,10 +423,11 @@ bool CTrustController::Cast(uint16 targid, SpellID spellid)
         targid = POwner->targid;
     }
 
-    auto  PTarget      = (CBattleEntity*)POwner->GetEntity(targid, TYPE_MOB | TYPE_PC | TYPE_PET | TYPE_TRUST);
-    auto  PSpellFamily = PSpell->getSpellFamily();
-    bool  canCast      = true;
+    auto PTarget      = (CBattleEntity*)POwner->GetEntity(targid, TYPE_MOB | TYPE_PC | TYPE_PET | TYPE_TRUST);
+    auto PSpellFamily = PSpell->getSpellFamily();
+    bool canCast      = true;
 
+    // clang-format off
     static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
     {
         if (PMember->objtype == TYPE_TRUST && PMember->PAI->IsCurrentState<CMagicState>())
@@ -465,6 +472,7 @@ bool CTrustController::Cast(uint16 targid, SpellID spellid)
             }
         }
     });
+    // clang-format on
 
     if (!canCast)
     {

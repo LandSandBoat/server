@@ -30,7 +30,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 CAHHistoryPacket::CAHHistoryPacket(uint16 ItemID)
 : m_count(0)
 {
-
     memset(m_PData, 0, sizeof(m_PData));
 
     ref<uint8>(m_PData, (0x0A)) = 0x80;

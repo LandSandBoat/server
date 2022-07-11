@@ -240,13 +240,37 @@ namespace gambits
         time_point            m_lastAction;
         std::vector<Gambit_t> gambits;
 
-        std::set<JOBTYPE> melee_jobs = {
-            JOB_WAR, JOB_MNK, JOB_THF, JOB_PLD, JOB_DRK, JOB_BST, JOB_SAM, JOB_NIN, JOB_DRG, JOB_BLU, JOB_PUP, JOB_DNC, JOB_RUN,
+        // clang-format off
+        std::set<JOBTYPE> melee_jobs =
+        {
+            JOB_WAR,
+            JOB_MNK,
+            JOB_THF,
+            JOB_PLD,
+            JOB_DRK,
+            JOB_BST,
+            JOB_SAM,
+            JOB_NIN,
+            JOB_DRG,
+            JOB_BLU,
+            JOB_PUP,
+            JOB_DNC,
+            JOB_RUN,
         };
 
-        std::set<JOBTYPE> caster_jobs = {
-            JOB_WHM, JOB_BLM, JOB_RDM, JOB_BRD, JOB_SMN, JOB_BLU, JOB_SCH, JOB_GEO, JOB_RUN,
+        std::set<JOBTYPE> caster_jobs =
+        {
+            JOB_WHM,
+            JOB_BLM,
+            JOB_RDM,
+            JOB_BRD,
+            JOB_SMN,
+            JOB_BLU,
+            JOB_SCH,
+            JOB_GEO,
+            JOB_RUN,
         };
+        // clang-format on
     };
 
 } // namespace gambits
