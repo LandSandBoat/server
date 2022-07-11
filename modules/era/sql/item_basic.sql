@@ -267,7 +267,7 @@ REPLACE INTO `item_basic` (`itemid`, `subid`, `name`, `sortname`, `stackSize`, `
     (1997, 0, 'square_of_sailcloth', 'sailcloth', 12, 4, 40, 0, 1242),
     (1998, 0, 'square_of_sheep_chammy', 'sheep_chammy', 12, 4, 41, 0, 1085),
     (2013, 0, 'vial_of_lizard_blood', 'lizard_blood', 12, 4, 44, 0, 384),
-    (2014, 0, 'vial_of_bird_blood', 'bird_blood', 12, 4, 44, 0, 342),
+    (2014, 0, 'vial_of_bird_blood', 'bird_blood', 12, 4, 44, 0, 153),
     (2015, 0, 'vial_of_beast_blood', 'beast_blood', 12, 4, 44, 0, 500),
     (2128, 0, 'spindle', 'spindle', 99, 4, 40, 0, 14),
     (2131, 0, 'triturator', 'triturator', 99, 4, 44, 0, 28),
