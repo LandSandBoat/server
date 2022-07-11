@@ -71,6 +71,25 @@ jobs:
           exit 1
         fi
         exit 0
+    - name: CPP Formatting Checks
+      if: always()
+      run: |
+        touch cpp_formatting_checks.txt
+        for changed_file in ${{ steps.changed-files.outputs.all }}; do
+          if [[ -f $changed_file ]]; then
+            if [[ $changed_file == *.cpp || $changed_file == *.h ]]; then
+              clang-format -style=file -i ${changed_file}
+            fi
+          fi
+        done
+        git diff >> cpp_formatting_checks.txt
+        cat cpp_formatting_checks.txt
+        git reset --hard
+        if [ -s cpp_formatting_checks.txt ]
+        then
+          exit 1
+        fi
+        exit 0
     - name: Lua Checks
       if: always()
       run: |
@@ -122,27 +141,6 @@ jobs:
           exit 1
         fi
         exit 0
-    - name: Clang Format (C++ files)
-      if: 'false' # Don't run until fixed
-      run: |
-        clang-format --version
-        echo "Base Ref: ${{ github.event.pull_request.base.ref }}"
-        echo "Base SHA: ${{ github.event.pull_request.base.sha }}"
-        echo "Head Ref: ${{ github.event.pull_request.head.ref }}"
-        echo "Head SHA: ${{ github.event.pull_request.head.sha }}"
-        diff=`git diff -U0 --no-color ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} -- '*.cpp' '*.h' | clang-format-diff -p1`
-
-        if [ -z "$diff" ]
-        then
-            echo "Diff formatting looks good!"
-        else
-            echo "Problem with formatting!"
-            echo "To fix this locally, run: git diff -U0 --no-color ${{ github.event.pull_request.base.ref }}..HEAD -- '*.cpp' '*.h' | clang-format-diff -p1 -i"
-            echo ""
-            echo "$diff"
-
-            exit -1
-        fi
 
   Linux_Clang11_64bit:
     runs-on: ubuntu-latest
