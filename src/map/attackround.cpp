@@ -252,11 +252,11 @@ void CAttackRound::CreateAttacks(CItemWeapon* PWeapon, PHYSICAL_ATTACK_DIRECTION
     }
 
     // Checking the players triple, double and quadruple attack
-    int16 tripleAttack = m_attacker->getMod(Mod::TRIPLE_ATTACK);
-    int16 doubleAttack = m_attacker->getMod(Mod::DOUBLE_ATTACK);
-    int16 quadAttack   = m_attacker->getMod(Mod::QUAD_ATTACK);
-    bool multiHitOccurred = false;
-    
+    int16 tripleAttack     = m_attacker->getMod(Mod::TRIPLE_ATTACK);
+    int16 doubleAttack     = m_attacker->getMod(Mod::DOUBLE_ATTACK);
+    int16 quadAttack       = m_attacker->getMod(Mod::QUAD_ATTACK);
+    bool  multiHitOccurred = false;
+
     // Checking for Mythic Weapon Aftermath
     int16 occAttThriceRate = std::clamp<int16>(m_attacker->getMod(Mod::MYTHIC_OCC_ATT_THRICE), 0, 100);
     int16 occAttTwiceRate  = std::clamp<int16>(m_attacker->getMod(Mod::MYTHIC_OCC_ATT_TWICE), 0, 100);

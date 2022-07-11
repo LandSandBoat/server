@@ -34,10 +34,14 @@
 
 namespace logging
 {
-    const std::vector<std::string> logNames =
-    {
+    const std::vector<std::string> logNames = {
         // Regular loggers
-        "critical", "error", "warn", "info", "debug", "trace",
+        "critical",
+        "error",
+        "warn",
+        "info",
+        "debug",
+        "trace",
 
         // Special loggers
         "lua",
