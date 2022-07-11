@@ -134,6 +134,7 @@ INSERT INTO `mob_spawn_mods` VALUES (16990474,1,5000,1);
 INSERT INTO `mob_spawn_mods` VALUES (16990474,2,7000,1);
 INSERT INTO `mob_spawn_mods` VALUES (17404331,1,20000,1);
 INSERT INTO `mob_spawn_mods` VALUES (17404331,2,24000,1);
+INSERT INTO `mob_spawn_mods` VALUES (17404331,15,3000,1);
 INSERT INTO `mob_spawn_mods` VALUES (17461478,1,3000,1);
 INSERT INTO `mob_spawn_mods` VALUES (17461478,2,9900,1);
 INSERT INTO `mob_spawn_mods` VALUES (17285460,1,379,1);
@@ -596,6 +597,29 @@ INSERT INTO `mob_spawn_mods` VALUES (17588703,55,180,1);
 -- Values taken from wiki on 04/23/2018 (http://ffxiclopedia.wikia.com/wiki/Tonberry_Kinq)
 INSERT INTO `mob_spawn_mods` VALUES (17428677,1,18000,1); -- min gil 18000
 INSERT INTO `mob_spawn_mods` VALUES (17428677,2,30000,1); -- max gil 30000
+
+-- [Ancient Goobbue]
+-- Based on wiki (http://ffxiclopedia.wikia.com/wiki/Ancient_Goobbue)
+INSERT INTO `mob_spawn_mods` VALUES (17404290,1,18000,1); -- min gil 18000
+INSERT INTO `mob_spawn_mods` VALUES (17404290,2,30000,1); -- max gil 30000
+
+-- [Aquarius]
+-- Based on wiki (http://ffxiclopedia.wikia.com/wiki/Aquarius)
+INSERT INTO `mob_spawn_mods` VALUES (17404000,1,20000,1); -- min gil 18000
+INSERT INTO `mob_spawn_mods` VALUES (17404000,2,29000,1); -- max gil 29000
+INSERT INTO `mob_spawn_mods` VALUES (17404000,15,10000,1); -- mug gil 10000
+
+-- [Ellyllon]
+-- Based on wiki (http://ffxiclopedia.wikia.com/wiki/Ellyllon)
+INSERT INTO `mob_spawn_mods` VALUES (17092853,1,6000,1); -- min gil 6000
+INSERT INTO `mob_spawn_mods` VALUES (17092853,2,9300,1); -- max gil 9300
+INSERT INTO `mob_spawn_mods` VALUES (17092853,15,4500,1); -- mug gil 4500
+
+-- [Unut]
+-- Based on wiki (http://ffxiclopedia.wikia.com/wiki/Unut)
+INSERT INTO `mob_spawn_mods` VALUES (17092904,1,1800,1); -- min gil 1800
+INSERT INTO `mob_spawn_mods` VALUES (17092904,2,5800,1); -- max gil 5800
+INSERT INTO `mob_spawn_mods` VALUES (17092904,15,2500,1); -- mug gil 2500
 
 /*!40000 ALTER TABLE `mob_spawn_mods` ENABLE KEYS */;
 UNLOCK TABLES;

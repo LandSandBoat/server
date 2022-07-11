@@ -11,6 +11,7 @@ local entity = {}
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.DRAW_IN, 1)
     mob:setMobMod(xi.mobMod.DRAW_IN_INCLUDE_PARTY, 1)
+    mob:addMod(xi.mod.SLEEPRES, 500)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
