@@ -1036,7 +1036,7 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
                     }
                 }
 
-                if ((actionTarget.reaction & REACTION::HIT) != REACTION::NONE)
+                if (actionTarget.reaction == REACTION::HIT)
                 {
                     int wspoints = settings::get<uint8>("map.WS_POINTS_BASE");
                     if (PWeaponSkill->getPrimarySkillchain() != 0)
@@ -1401,6 +1401,13 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
 {
     TracyZoneScoped;
     auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
+
+    if (battleutils::IsParalyzed(this))
+    {
+        // display paralyzed
+        loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(this, PTarget, 0, 0, MSGBASIC_IS_PARALYZED));
+        return;
+    }
 
     int32 damage      = 0;
     int32 totalDamage = 0;
@@ -1789,6 +1796,14 @@ void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
     TracyZoneScoped;
     auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
     auto* PItem   = state.GetItem();
+
+    if (battleutils::IsParalyzed(this))
+    {
+        // display paralyzed
+        // TODO: Make paralyze eat the item or charge when proced.
+        loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(this, PTarget, 0, 0, MSGBASIC_IS_PARALYZED));
+        return;
+    }
 
     // TODO: I'm sure this is supposed to be in the action packet... (animation, message)
     if (PItem->getAoE())

@@ -1933,7 +1933,7 @@ namespace battleutils
         else
         {
             damageType = weapon ? weapon->getDmgType() : DAMAGE_TYPE::NONE;
-            
+
             if ((PAttacker->objtype == TYPE_PET || (PAttacker->objtype == TYPE_MOB && PAttacker->isCharmed)) && PAttacker->PMaster->objtype == TYPE_PC)
             {
                 damageType = PAttacker->m_dmgType == DAMAGE_TYPE::NONE ? DAMAGE_TYPE::IMPACT : PAttacker->m_dmgType;
@@ -4926,12 +4926,13 @@ namespace battleutils
             charmerBSTlevel = charmerLvl;
         }
 
-        // FIXME: Level and CHR ratios are complete guesses
+        // Based on https://www.bluegartr.com/threads/57288-Charm-and-Magic-Accuracy where charm rate hit 25% w/ 11 dStat
+        // Result on EP mob at 75 MJob w/ 67 BST + 11 dCHR should be 25% according to gauge messages.
         const float levelRatio = (charmerBSTlevel - targetLvl) / 100.f;
         charmChance *= (1.f + levelRatio);
 
-        const float chrRatio = (PCharmer->CHR() - PTarget->CHR()) / 100.f;
-        charmChance *= (1.f + chrRatio);
+        float chrRatio = ((PCharmer->CHR() - PTarget->CHR())) / 100.f;
+        charmChance *= (1.f * (chrRatio * 2.47));
 
         // Retail doesn't take light/apollo into account for Gauge
         if (includeCharmAffinityAndChanceMods)
@@ -6905,7 +6906,7 @@ namespace battleutils
             RMainSub  = ((CItemWeapon*)PRangedSlot)->getSubSkillType();
         }
 
-        bool LongBowCurve  = (RMainType == 25 && RMainSub == 1); // Longbows Only
+        bool LongBowCurve  = (RMainType == 25 && RMainSub == 9); // Longbows Only
         bool CrossBowCurve = ((RMainType == 25 && RMainSub == 0) || (RMainType == 26 && RMainSub == 0)); // Crossbows and Shortbows
         bool GunCurve      = (RMainType == 26 && RMainSub == 1); // Guns Only
 

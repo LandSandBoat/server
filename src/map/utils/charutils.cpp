@@ -2013,12 +2013,25 @@ namespace charutils
                     if (PItem->isType(ITEM_WEAPON))
                     {
                         CItemWeapon* weapon = (CItemWeapon*)PChar->getEquip(SLOT_AMMO);
+                        bool longBowException = false;
+
+                        if (weapon != nullptr)
+                        {
+                            longBowException = ((CItemWeapon*)PItem)->getSkillType() == SKILL_ARCHERY &&
+                                               ((CItemWeapon*)PItem)->getSubSkillType() == SUBSKILL_LONGB &&
+                                                weapon->getSubSkillType() == SUBSKILL_XBO;
+                        }
+
                         if ((weapon != nullptr) && weapon->isType(ITEM_WEAPON))
                         {
                             if (((CItemWeapon*)PItem)->getSkillType() != weapon->getSkillType() ||
-                                ((CItemWeapon*)PItem)->getSubSkillType() != weapon->getSubSkillType())
+                                ((CItemWeapon*)PItem)->getSubSkillType() != weapon->getSubSkillType() ||
+                                !longBowException)
                             {
-                                UnequipItem(PChar, SLOT_AMMO, false);
+                                if (!longBowException)
+                                {
+                                    UnequipItem(PChar, SLOT_AMMO, false);
+                                }
                             }
                         }
                         PChar->m_Weapons[SLOT_RANGED] = (CItemWeapon*)PItem;
@@ -2032,12 +2045,23 @@ namespace charutils
                     if (PItem->isType(ITEM_WEAPON))
                     {
                         CItemWeapon* weapon = (CItemWeapon*)PChar->getEquip(SLOT_RANGED);
+                        bool longBowException = false;
+                        if (weapon != nullptr)
+                        {
+                            longBowException = ((CItemWeapon*)PItem)->getSkillType() == SKILL_ARCHERY &&
+                                               ((CItemWeapon*)PItem)->getSubSkillType() == SUBSKILL_XBO &&
+                                                weapon->getSubSkillType() == SUBSKILL_LONGB;
+                        }
+
                         if ((weapon != nullptr) && weapon->isType(ITEM_WEAPON))
                         {
                             if (((CItemWeapon*)PItem)->getSkillType() != weapon->getSkillType() ||
                                 ((CItemWeapon*)PItem)->getSubSkillType() != weapon->getSubSkillType())
                             {
-                                UnequipItem(PChar, SLOT_RANGED, false);
+                                if (!longBowException)
+                                {
+                                    UnequipItem(PChar, SLOT_RANGED, false);
+                                }
                             }
                         }
                         if (PChar->equip[SLOT_RANGED] == 0)
@@ -3615,17 +3639,17 @@ namespace charutils
             }
             else if (m_THLvl < 12)
             {
-                multi = 7.00f + (1.00f * (m_THLvl - 6));
+                multi = 4.00f + (1.00f * (m_THLvl - 6));
                 return multi;
             }
             else if (m_THLvl < 14)
             {
-                multi = 10.00f + (1.00f * (m_THLvl - 11));
+                multi = 9.00f + (1.50f * (m_THLvl - 11));
                 return multi;
             }
             else
             {
-                multi = 13.00f + (2.00f * (m_THLvl - 14));
+                multi = 13.50f + (2.00f * (m_THLvl - 14));
                 return multi;
             }
         }
@@ -3638,22 +3662,22 @@ namespace charutils
             }
             else if (m_THLvl < 8)
             {
-                multi = 2.40f + (0.40f * (m_THLvl - 2));
+                multi = 2.00f + (0.40f * (m_THLvl - 2));
                 return multi;
             }
             else if (m_THLvl < 10)
             {
-                multi = 5.20f + (0.60f * (m_THLvl - 7));
+                multi = 4.00f + (0.60f * (m_THLvl - 7));
                 return multi;
             }
             else if (m_THLvl < 11)
             {
-                multi = 7.00f + (0.80f * (m_THLvl - 9));
+                multi = 5.20f + (0.80f * (m_THLvl - 9));
                 return multi;
             }
             else
             {
-                multi = 9.00f + (1.00f * (m_THLvl - 10));
+                multi = 9.20f + (1.00f * (m_THLvl - 10));
                 return multi;
             }
         }
@@ -3666,22 +3690,22 @@ namespace charutils
             }
             else if (m_THLvl < 8)
             {
-                multi = 1.50f + (0.10f * (m_THLvl - 2));
+                multi = 1.40f + (0.10f * (m_THLvl - 2));
                 return multi;
             }
             else if (m_THLvl < 12)
             {
-                multi = 2.10f + (0.20f * (m_THLvl - 7));
+                multi = 1.90f + (0.20f * (m_THLvl - 7));
                 return multi;
             }
             else if (m_THLvl < 14)
             {
-                multi = 3.10f + (0.40f * (m_THLvl - 11));
+                multi = 2.70f + (0.40f * (m_THLvl - 11));
                 return multi;
             }
             else
             {
-                multi = 4.00f + (0.50f * (m_THLvl - 13));
+                multi = 3.50f + (0.50f * (m_THLvl - 13));
                 return multi;
             }
         }
@@ -3689,27 +3713,27 @@ namespace charutils
         {
             if (m_THLvl < 3)
              {
-                 multi = 1.00f + (0.50f * m_THLvl);
+                 multi = 1.00f + (0.20f * m_THLvl);
                  return multi;
              }
              else if (m_THLvl < 8)
              {
-                 multi = 2.40f + (0.40f * (m_THLvl - 2));
+                 multi = 1.40f + (0.10f * (m_THLvl - 2));
                  return multi;
              }
-             else if (m_THLvl < 10)
+             else if (m_THLvl < 12)
              {
-                 multi = 5.20f + (0.60f * (m_THLvl - 7));
+                 multi = 1.90f + (0.20f * (m_THLvl - 7));
                  return multi;
              }
-             else if (m_THLvl < 11)
+             else if (m_THLvl < 14)
              {
-                 multi = 7.00f + (0.80f * (m_THLvl - 9));
+                 multi = 2.70f + (0.40f * (m_THLvl - 11));
                  return multi;
              }
              else
              {
-                 multi = 9.00f + (1.00f * (m_THLvl - 10));
+                 multi = 3.50f + (0.50f * (m_THLvl - 13));
                  return multi;
              }
         }
@@ -3720,9 +3744,14 @@ namespace charutils
                 multi = 1.00f + (0.20f * m_THLvl);
                 return multi;
             }
+            else if (m_THLvl < 3)
+            {
+                multi = 1.20f + (0.30f * (m_THLvl - 1));
+                return multi;
+            }
             else if (m_THLvl < 4)
             {
-                multi = 1.20f + (0.15f * (m_THLvl - 1));
+                multi = 1.50f + (0.15f * (m_THLvl - 1));
                 return multi;
             }
             else if (m_THLvl < 8)
@@ -3732,7 +3761,7 @@ namespace charutils
             }
             else if (m_THLvl < 10)
             {
-                multi = 2.40f + (0.15f * (m_THLvl - 7));
+                multi = 2.10f + (0.15f * (m_THLvl - 7));
                 return multi;
             }
             else if (m_THLvl < 11)
@@ -3753,9 +3782,14 @@ namespace charutils
                 multi = 1.00f + (1.00f * m_THLvl);
                 return multi;
             }
+            else if (m_THLvl < 3)
+            {
+                multi = 2.00f + (0.66f * (m_THLvl - 1));
+                return multi;
+            }
             else
             {
-                multi = 2.00f + (0.17f * (m_THLvl - 1));
+                multi = 2.66f + (0.16f * (m_THLvl - 2));
                 return multi;
             }
         }
@@ -3768,42 +3802,42 @@ namespace charutils
             }
             else if (m_THLvl < 3)
             {
-                multi = 2.00f + (0.33f * (m_THLvl - 1));
+                multi = 2.00f + (0.50f * (m_THLvl - 1));
                 return multi;
             }
             else if (m_THLvl < 5)
             {
-                multi = 2.33f + (0.17f * (m_THLvl - 2));
+                multi = 2.50f + (0.16f * (m_THLvl - 2));
                 return multi;
             }
             else if (m_THLvl < 6)
             {
-                multi = 2.67f + (0.11f * (m_THLvl - 4));
+                multi = 2.82f + (0.11f * (m_THLvl - 4));
                 return multi;
             }
             else if (m_THLvl < 7)
             {
-                multi = 2.78f + (0.05f * (m_THLvl - 5));
+                multi = 2.93f + (0.05f * (m_THLvl - 5));
                 return multi;
             }
             else if (m_THLvl < 8)
             {
-                multi = 2.83f + (0.04f * (m_THLvl - 6));
+                multi = 2.98f + (0.04f * (m_THLvl - 6));
                 return multi;
             }
             else if (m_THLvl < 11)
             {
-                multi = 2.87f + (0.62f * (m_THLvl - 7));
+                multi = 3.02f + (0.06f * (m_THLvl - 7));
                 return multi;
             }
             else if (m_THLvl < 12)
             {
-                multi = 3.06f + (0.02f * (m_THLvl - 10));
+                multi = 3.20f + (0.03f * (m_THLvl - 10));
                 return multi;
             }
             else
             {
-                multi = 3.08f + (0.08f * (m_THLvl - 11));
+                multi = 3.23f + (0.10f * (m_THLvl - 11));
                 return multi;
             }
         }
@@ -3811,7 +3845,7 @@ namespace charutils
         {
             return multi; // TH Didn't Apply
         }
-}
+    }
 
     void DistributeItem(CCharEntity* PChar, CBaseEntity* PEntity, uint16 itemid, uint16 droprate)
     {
@@ -3820,21 +3854,35 @@ namespace charutils
         uint8 tries    = 0;
         uint8 maxTries = 1;
         uint16 bonus    = 0;
+        bool applyTH = false;
         if (auto* PMob = dynamic_cast<CMobEntity*>(PEntity))
         {
             // THLvl is the number of 'extra chances' at an item. If the item is obtained, then break out.
             tries    = 0;
             maxTries = 1;
             bonus    = ApplyTH(PMob->m_THLvl, droprate);
+            applyTH = true;
         }
         while (tries < maxTries)
         {
-            if (droprate > 0 && xirand::GetRandomNumber(1000) < droprate * settings::get<float>("map.DROP_RATE_MULTIPLIER") * bonus)
+            if (applyTH)
             {
-                PChar->PTreasurePool->AddItem(itemid, PEntity);
-                break;
+                if (droprate > 0 && xirand::GetRandomNumber(1000) < droprate * settings::get<float>("map.DROP_RATE_MULTIPLIER") * bonus)
+                {
+                    PChar->PTreasurePool->AddItem(itemid, PEntity);
+                    break;
+                }
+                tries++;
             }
-            tries++;
+            else
+            {
+                if (droprate > 0 && xirand::GetRandomNumber(1000) < droprate * settings::get<float>("map.DROP_RATE_MULTIPLIER") + bonus)
+                {
+                    PChar->PTreasurePool->AddItem(itemid, PEntity);
+                    break;
+                }
+                tries++;
+            }
         }
     }
 
