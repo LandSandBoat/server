@@ -12,6 +12,7 @@ mixins =
 local entity = {}
 
 entity.onMobSpawn = function(mob)
+    mob:setLocalVar("petTimer", os.time() + 60)
     local mobID = mob:getID()
     local avatarID = mobID + 2
     local avatarMob = GetMobByID(avatarID)
@@ -37,6 +38,24 @@ entity.onMobSpawn = function(mob)
                 end
             end)
         end)
+    end
+
+    xi.mix.jobSpecial.config(mob, {
+        specials =
+        {
+            {id = xi.jsa.ASTRAL_FLOW, hpp = 100, cooldown = 60}, -- Uses Astral Flow on spawn and repeatedly through the fight
+        },
+    })
+end
+
+entity.onMobFight = function(mob)
+    -- Spawns Fire/Light/Water Elemental 1 minute into the fight and at every astral flow if elemental dies
+    local petSpawn = {288, 293, 294}
+    local petID = mob:getID() + 1
+    if os.time() > mob:getLocalVar("petTimer") and not GetMobByID(petID):isAlive() then
+        local chance = math.random(1,3)
+        mob:castSpell(petSpawn[chance])
+        mob:setLocalVar("petTimer", os.time() + 60)
     end
 end
 

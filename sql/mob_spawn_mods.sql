@@ -243,8 +243,22 @@ INSERT INTO `mob_spawn_mods` VALUES (17428495,55,180,1);
 INSERT INTO `mob_spawn_mods` VALUES (17428496,55,180,1);
 INSERT INTO `mob_spawn_mods` VALUES (17428807,55,180,1);
 INSERT INTO `mob_spawn_mods` VALUES (17428808,55,180,1);
+
+-- [Crimson Toothed Pawberry]
+-- Data taken from wiki (http://ffxiclopedia.wikia.com/wiki/Crimson-toothed_Pawberry)
+INSERT INTO `mob_spawn_mods` VALUES (17428813,1,18000,1); -- Min gil 18000
+INSERT INTO `mob_spawn_mods` VALUES (17428813,2,32000,1); -- Max gil 32000
+INSERT INTO `mob_spawn_mods` VALUES (17428813,15,5400,1); -- Mug gil 5400
+
 INSERT INTO `mob_spawn_mods` VALUES (17428813,55,300,1);
 INSERT INTO `mob_spawn_mods` VALUES (17428815,55,300,1);
+
+-- [Sozu Rogberry]
+-- Data taken from wiki (http://ffxiclopedia.wikia.com/wiki/Crimson-toothed_Pawberry)
+INSERT INTO `mob_spawn_mods` VALUES (17428751,1,1500,1); -- Min gil 1500
+INSERT INTO `mob_spawn_mods` VALUES (17428751,2,4600,1); -- Max gil 4600
+INSERT INTO `mob_spawn_mods` VALUES (17428751,15,1800,1); -- Mug gil 1800
+
 INSERT INTO `mob_spawn_mods` VALUES (17428751,55,300,1);
 INSERT INTO `mob_spawn_mods` VALUES (17428811,55,900,1);
 INSERT INTO `mob_spawn_mods` VALUES (17428812,55,900,1);
@@ -620,6 +634,12 @@ INSERT INTO `mob_spawn_mods` VALUES (17092853,15,4500,1); -- mug gil 4500
 INSERT INTO `mob_spawn_mods` VALUES (17092904,1,1800,1); -- min gil 1800
 INSERT INTO `mob_spawn_mods` VALUES (17092904,2,5800,1); -- max gil 5800
 INSERT INTO `mob_spawn_mods` VALUES (17092904,15,2500,1); -- mug gil 2500
+
+-- [Sozu Terberry]
+-- Data taken from wiki (http://ffxiclopedia.wikia.com/wiki/Crimson-toothed_Pawberry)
+INSERT INTO `mob_spawn_mods` VALUES (17428611,1,3000,1); -- Min gil 3000
+INSERT INTO `mob_spawn_mods` VALUES (17428611,2,4700,1); -- Max gil 4700
+INSERT INTO `mob_spawn_mods` VALUES (17428611,15,800,1); -- Mug gil 800
 
 /*!40000 ALTER TABLE `mob_spawn_mods` ENABLE KEYS */;
 UNLOCK TABLES;
