@@ -15,6 +15,7 @@ effect_object.onEffectGain = function(target, effect)
     local jpEffect = jpLevel * 3
 
     target:addMod(xi.mod.ATTP, effect:getPower())
+    target:addMod(xi.mod.RATTP, effect:getPower())
     target:addMod(xi.mod.TP_BONUS, effect:getSubPower())
 
     -- Job Point Bonus
@@ -30,6 +31,7 @@ effect_object.onEffectLose = function(target, effect)
     local jpEffect = jpLevel * 3
 
     target:delMod(xi.mod.ATTP, effect:getPower())
+    target:delMod(xi.mod.RATTP, effect:getPower())
     target:delMod(xi.mod.TP_BONUS, effect:getSubPower())
 
     -- Job Point Bonus
