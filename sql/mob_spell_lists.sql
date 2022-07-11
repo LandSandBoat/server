@@ -4973,7 +4973,29 @@ INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 490, 247, 1, 255); --
 INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 490, 258, 1, 255); -- Bind (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 490, 274, 1, 255); -- Sleepga II (1~255)
 
--- Next Avail 491
+-- Blackbeard (491)
+INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 491, 166, 1, 255); -- thunder iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 491, 195, 1, 255); -- thundaga ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 491, 201, 1, 255); -- waterga iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 491, 206, 1, 255); -- freeze (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 491, 212, 1, 255); -- burst (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 491, 214, 1, 255); -- flood (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 491, 250, 1, 255); -- ice spikes (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 491, 252, 1, 255); -- stun (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 491, 274, 1, 255); -- sleepga ii (1~255)
+
+-- Silverhook (492)
+INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 151, 1, 255); -- blizzard iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 180, 1, 255); -- blizzaga ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 201, 1, 255); -- waterga iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 206, 1, 255); -- freeze (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 212, 1, 255); -- burst (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 214, 1, 255); -- flood (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 250, 1, 255); -- ice spikes (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 252, 1, 255); -- stun (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 253, 1, 255); -- sleep (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 274, 1, 255); -- sleepga ii (1~255)
+-- Next Avail 493
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;

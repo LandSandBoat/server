@@ -379,7 +379,7 @@ int32 SqlConnection::QueryStr(const char* query)
     }
 
     auto endTime = hires_clock::now();
-    auto dTime = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
+    auto dTime   = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
     if (m_LatencyWarning)
     {
         if (dTime > 250ms)

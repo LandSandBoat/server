@@ -942,7 +942,7 @@ namespace fishingutils
     float               GetWeatherModifier(CCharEntity* PChar);
     uint16              CalculateStamina(int skill, uint8 count);
     uint16              CalculateAttack(bool legendary, uint8 difficulty, rod_t* rod);
-    uint16              CaculateHeal(bool legendary, uint8 difficulty, rod_t* rod);
+    uint16              CalculateHeal(bool legendary, uint8 difficulty, rod_t* rod);
     uint8               CalculateRegen(uint8 fishingSkill, rod_t* rod, FISHINGCATCHTYPE catchType,
                                        uint8 sizeType, uint8 catchSkill, bool legendaryCatch, bool NM);
     uint8               CalculateHookTime(CCharEntity* PChar, bool legendary,

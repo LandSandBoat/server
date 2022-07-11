@@ -43,9 +43,9 @@ enum ACCOUNT_STATUS_CODE : uint8
 
 enum ACCOUNT_PRIVILIGE_CODE : uint8
 {
-   USER  = 0x01,
-   ADMIN = 0x02,
-   ROOT  = 0x04,
+    USER  = 0x01,
+    ADMIN = 0x02,
+    ROOT  = 0x04,
 };
 
 /*

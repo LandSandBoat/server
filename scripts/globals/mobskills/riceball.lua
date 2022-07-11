@@ -2,7 +2,6 @@
 -- Riceball
 -- Dummy ability used for Tenzen using riceball.
 ---------------------------------------------
-require("settings/main")
 require("scripts/globals/msg")
 require("scripts/globals/mobskills")
 ---------------------------------------------

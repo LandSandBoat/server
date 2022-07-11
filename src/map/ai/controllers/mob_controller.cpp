@@ -145,7 +145,7 @@ bool CMobController::CheckDetection(CBattleEntity* PTarget)
 {
     TracyZoneScoped;
     if (CanDetectTarget(PTarget) || CanPursueTarget(PTarget) ||
-        PMob->StatusEffectContainer->HasStatusEffect({ EFFECT_BIND, EFFECT_SLEEP, EFFECT_SLEEP_II, EFFECT_LULLABY }))
+        PMob->StatusEffectContainer->HasStatusEffect({ EFFECT_BIND, EFFECT_SLEEP, EFFECT_SLEEP_II, EFFECT_LULLABY, EFFECT_PETRIFICATION }))
     {
         TapDeaggroTime();
     }
@@ -677,6 +677,8 @@ void CMobController::Move()
                 PMob->PAI->PathFind->FollowPath();
                 if (!PMob->PAI->PathFind->IsFollowingPath())
                 {
+                    bool needToMove = false;
+
                     // arrived at target - move if there is another mob under me
                     if (PTarget->objtype == TYPE_PC)
                     {
@@ -691,10 +693,18 @@ void CMobController::Move()
                                 if (PMob->PAI->PathFind->ValidPosition(new_pos))
                                 {
                                     PMob->PAI->PathFind->PathTo(new_pos, PATHFLAG_WALLHACK | PATHFLAG_RUN);
+                                    needToMove = true;
                                 }
                                 break;
                             }
                         }
+                    }
+
+                    // Fix corner case where mob is attacking target at essentially exactly the distance that canMoveForward returns true at.
+                    // where the mob doesn't rotate to face their target.
+                    if (!needToMove)
+                    {
+                        FaceTarget();
                     }
                 }
             }

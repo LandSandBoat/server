@@ -97,7 +97,7 @@ namespace settings
                     }
                     else if constexpr (std::is_same_v<T, std::string>)
                     {
-                        out = arg ? "true" : "false";
+                        out = std::string(arg ? "true" : "false");
                     }
                 },
                 [&](double const& arg)

@@ -74,8 +74,8 @@ CParty::CParty(CBattleEntity* PEntity)
 
     if (PEntity != nullptr && PEntity->PParty == nullptr)
     {
-        m_PartyID     = PEntity->id;
-        m_PartyType   = PEntity->objtype == TYPE_PC ? PARTY_PCS : PARTY_MOBS;
+        m_PartyID   = PEntity->id;
+        m_PartyType = PEntity->objtype == TYPE_PC ? PARTY_PCS : PARTY_MOBS;
 
         AddMember(PEntity);
         SetLeader((char*)PEntity->name.c_str());
@@ -490,11 +490,11 @@ void CParty::RemovePartyLeader(CBattleEntity* PEntity)
         SetLeader(newLeader.c_str());
     }
 
-    if (m_PartyType == PARTYTYPE::PARTY_MOBS)  // mob party, mob destructor being called and is leader of a party
+    if (m_PartyType == PARTYTYPE::PARTY_MOBS) // mob party, mob destructor being called and is leader of a party
     {
-        for (auto member: members)
+        for (auto member : members)
         {
-            if (member != PEntity)             // assign leader to next party member
+            if (member != PEntity) // assign leader to next party member
             {
                 m_PLeader = member;
                 DelMember(PEntity);

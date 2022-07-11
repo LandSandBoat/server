@@ -19,10 +19,9 @@ mission.reward =
 
 mission.sections =
 {
-    -- 0: Talk to Raustigne
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and missionStatus == 0
+            return currentMission == mission.missionId
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA_S] =
@@ -30,8 +29,9 @@ mission.sections =
             ['Raustigne'] =
             {
                 onTrigger = function(player, npc)
-                    -- TODO: What are these args from caps?
-                    return mission:progressEvent(87, 2, 7, 0, 0, 0, 0, 3, 4095)
+                    -- TODO     : What are these args from caps?
+                    -- Observed : 1, 23, 2964, 0, 0, 0, 0, 0
+                    return mission:progressEvent(87, player:getCampaignAllegiance(), 7, 0, 0, 0, 0, 3, 4095)
                 end,
             },
 
