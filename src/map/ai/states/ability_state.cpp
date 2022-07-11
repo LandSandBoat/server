@@ -59,7 +59,7 @@ CAbilityState::CAbilityState(CBattleEntity* PEntity, uint16 targid, uint16 abili
         auto& list             = action.getNewActionList();
         list.ActionTargetID    = PTarget->id;
         auto& actionTarget     = list.getNewActionTarget();
-        actionTarget.reaction  = (REACTION)24;
+        actionTarget.reaction  = REACTION::HIT | REACTION::ABILITY; // TODO: not all abilities are HIT + Ability (provoke/chi blast has been observed as only REACTION:ABILITY)
         actionTarget.animation = 121;
         actionTarget.messageID = 326;
         actionTarget.param     = PAbility->getID();
@@ -141,7 +141,7 @@ bool CAbilityState::CanUseAbility()
         }
         if (PChar->StatusEffectContainer->HasStatusEffect({ EFFECT_AMNESIA, EFFECT_IMPAIRMENT }) ||
             (PAbility->getID() >= ABILITY_CONCENTRIC_PULSE && PAbility->getID() <= ABILITY_RADIAL_ARCANA &&
-            PAbility->isPetAbility() && !charutils::hasAbility(PChar, PAbility->getID())) ||
+             PAbility->isPetAbility() && !charutils::hasAbility(PChar, PAbility->getID())) ||
             (!PAbility->isPetAbility() && !charutils::hasAbility(PChar, PAbility->getID())) ||
             (PAbility->isPetAbility() && PAbility->getID() >= ABILITY_HEALING_RUBY && !charutils::hasPetAbility(PChar, PAbility->getID() - ABILITY_HEALING_RUBY)))
         {

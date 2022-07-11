@@ -49,7 +49,12 @@ entity.onMobInitialize = function(mob)
             for _, jailer in ipairs(prudenceIDs) do
                 if mobArg:getID() ~= jailer then
                     local prudence_mimic = GetMobByID(jailer)
-                    if prudence_mimic:isAlive() and utils.canUseAbility(mobArg) == true and prudence_mimic:getLocalVar('[JoP]LastAbilityMimic') + 6 < os.time() and mobArg:checkDistance(prudence_mimic) <= 10 then
+                    if
+                        prudence_mimic:isAlive() and
+                        mobArg:canUseAbilities() and
+                        prudence_mimic:getLocalVar('[JoP]LastAbilityMimic') + 6 < os.time() and
+                        mobArg:checkDistance(prudence_mimic) <= 10
+                    then
                         prudence_mimic:setLocalVar('[JoP]mimic', 1)
                         prudence_mimic:setLocalVar('[JoP]LastAbilityMimic', os.time())
                         prudence_mimic:useMobAbility(skillID)
@@ -72,7 +77,10 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobFight = function(mob)
-    if mob:checkDistance(mob:getTarget()) >= 12 and utils.canUseAbility(mob) == true then
+    if
+        mob:checkDistance(mob:getTarget()) >= 12 and
+        mob:canUseAbilities()
+    then
         teleport(mob, 1000)
     end
 
@@ -94,7 +102,7 @@ entity.onMobFight = function(mob)
 
     if
         mob:actionQueueEmpty() == true and
-        utils.canUseAbility(mob) == true
+        mob:canUseAbilities()
     then
         perfectDodgeQueue = mob:getLocalVar("perfectDodgeQueue")
         if perfectDodgeQueue > 0 then

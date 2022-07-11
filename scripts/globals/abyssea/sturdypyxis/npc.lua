@@ -73,7 +73,6 @@ local function GetEvents(chestTier)
     return lockedEvent, unlockedEvent
 end
 
-
 xi.pyxis.npc.onPyxisTrade = function(player, npc, trade)
     local ID = zones[player:getZoneID()]
     local chestTier = npc:getLocalVar("TIER")

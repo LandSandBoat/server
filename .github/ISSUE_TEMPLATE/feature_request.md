@@ -1,7 +1,7 @@
 ---
 name: 🔨 Feature Request
 about: Feature Request
-title: "\U0001F528 <Feature Summary>"
+title: "\U0001F528 <Replace this with Feature Summary>"
 labels: enhancement
 assignees:
 ---

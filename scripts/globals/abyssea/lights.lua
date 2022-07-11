@@ -72,7 +72,6 @@ local lightInfo =
         ["Hadal_Satiator"]         = { azure = 16,  pearl = 16,  ruby = 16,  amber = 16 },
     },
 
-
     [xi.zone.ABYSSEA_LA_THEINE] =
     {
         ["Angler_Tiger"]           = { azure = 8,   pearl = 5,   ruby = 8,   amber = 8  }, -- Tigers
@@ -533,9 +532,9 @@ xi.abyssea.RemoveDeathListeners = function(mob)
 end
 
 xi.abyssea.AddDeathListeners = function(mob)
-	mob:addListener("MAGIC_TAKE", "ABYSSEA_MAGIC_DEATH_CHECK", function(target, caster, spell)
+    mob:addListener("MAGIC_TAKE", "ABYSSEA_MAGIC_DEATH_CHECK", function(target, caster, spell)
         if target:getHP() <= 0 and target:getDeathType() == xi.abyssea.deathType.NONE then
-			target:setDeathType(xi.abyssea.deathType.MAGICAL)
+            target:setDeathType(xi.abyssea.deathType.MAGICAL)
         end
     end)
 
@@ -557,22 +556,20 @@ xi.abyssea.AddDeathListeners = function(mob)
                     break
                 end
             end
-			target:setDeathType(wsType)
+            target:setDeathType(wsType)
         end
     end)
 
     mob:addListener("DEATH", "ABYSSEA_DEATH_LIGHTS_CHECK", function(mobArg, player)
-		local deathType = mobArg:getDeathType()
-		if deathType == xi.abyssea.deathType.NONE then
-			deathType = xi.abyssea.deathType.PHYSICAL
-		end
+        local deathType = mobArg:getDeathType()
+        if deathType == xi.abyssea.deathType.NONE then
+            deathType = xi.abyssea.deathType.PHYSICAL
+        end
         xi.abyssea.DropLights(player, mobArg:getName(), deathType, mobArg)
 
-		xi.abyssea.RemoveDeathListeners(mobArg)
+        xi.abyssea.RemoveDeathListeners(mobArg)
     end)
 end
-
-
 
 xi.abyssea.DropLights = function(killer, mobName, killType, mob)
     if killer then
@@ -593,7 +590,7 @@ xi.abyssea.DropLights = function(killer, mobName, killType, mob)
 
     local dropLight = 0
     local amount = 0
-    local dropRate = xi.settings.ABYSSEA_LIGHTS_DROP_RATE
+    local dropRate = xi.settings.main.ABYSSEA_LIGHTS_DROP_RATE
 
     if lightInfo[zoneID][mobName][lightTypes[killType].lightType] ~= nil then
         amount = lightInfo[zoneID][mobName][lightTypes[killType].lightType]
@@ -621,12 +618,12 @@ xi.abyssea.DropLights = function(killer, mobName, killType, mob)
             mobName == "Irate_Sheep" or
             mobName == "Luison"
         then
-            if xi.settings.ABYSSEA_LIGHTS_DROP_RATE > 0 then
+            if xi.settings.main.ABYSSEA_LIGHTS_DROP_RATE > 0 then
                 dropRate = 2
             end
         else
-            if xi.settings.ABYSSEA_LIGHTS_DROP_RATE > 10 then
-                dropRate = math.floor(xi.settings.ABYSSEA_LIGHTS_DROP_RATE /2)
+            if xi.settings.main.ABYSSEA_LIGHTS_DROP_RATE > 10 then
+                dropRate = math.floor(xi.settings.main.ABYSSEA_LIGHTS_DROP_RATE /2)
             end
         end
     end
@@ -639,7 +636,7 @@ xi.abyssea.DropLights = function(killer, mobName, killType, mob)
             mobName == "Amuckatrice" or
             mobName == "Camelopardalis"
         then
-            if xi.settings.ABYSSEA_LIGHTS_DROP_RATE > 0 then
+            if xi.settings.main.ABYSSEA_LIGHTS_DROP_RATE > 0 then
                 dropRate = 100
             end
         end

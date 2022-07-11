@@ -376,14 +376,14 @@ namespace fishingutils
     {
         uint8 bonusAdd = (legendary) ? rod->lgdBonusAtk : 0;
 
-        return (uint16)std::floor(difficulty * ((rod->fishAttack + bonusAdd) / 100)) * 20;
+        return (uint16)std::floor(difficulty * (((static_cast<float>(rod->fishAttack) + bonusAdd) / 100.0f)) * 20.0f);
     }
 
-    uint16 CaculateHeal(bool legendary, uint8 difficulty, rod_t* rod)
+    uint16 CalculateHeal(bool legendary, uint8 difficulty, rod_t* rod)
     {
         uint16 attack = CalculateAttack(legendary, difficulty, rod);
 
-        return (uint16)std::floor((attack / 20) * (rod->fishRecovery / 100)) * 10;
+        return (uint16)std::floor((static_cast<float>(attack) / 20.0f) * (static_cast<float>(rod->fishRecovery) / 100.0f)) * 10.0f;
     }
 
     uint8 CalculateRegen(uint8 fishingSkill, rod_t* rod, FISHINGCATCHTYPE catchType, uint8 sizeType, uint8 catchSkill, bool legendaryCatch, bool NM)
@@ -1657,7 +1657,7 @@ namespace fishingutils
         return 1;
         */
 
-        return 0; // Remove when chatching chests is enabled.
+        return 0; // Remove when catching chests is enabled.
     }
 
     /************************************************************************
@@ -1791,7 +1791,7 @@ namespace fishingutils
         maxChance = std::max(4, distMod + lowerLevelBonus - skillLevelPenalty);
 
         // Configuration multiplier.
-        maxChance = maxChance * map_config.fishing_skill_multiplier;
+        maxChance = maxChance * settings::get<float>("map.FISHING_SKILL_MULTIPLIER");
 
         // Moon phase skillup modifiers
         uint8 phase         = CVanaTime::getInstance()->getMoonPhase();
@@ -1911,7 +1911,7 @@ namespace fishingutils
 
     void StartFishing(CCharEntity* PChar)
     {
-        if (map_config.fishing_enable == 0)
+        if (!settings::get<bool>("map.FISHING_ENABLE"))
         {
             ShowWarning("Fishing is currently disabled");
             PChar->pushPacket(new CChatMessagePacket(PChar, CHAT_MESSAGE_TYPE::MESSAGE_SYSTEM_1, "Fishing is currently disabled"));
@@ -2461,7 +2461,7 @@ namespace fishingutils
             response->regen     = CalculateRegen(fishingSkill, rod, (FISHINGCATCHTYPE)response->catchtype, FishSelection->sizeType, FishSelection->maxSkill, FishSelection->legendary, false);
             response->response  = CalculateMovement(PChar, FishSelection->baseMove, FishSelection->sizeType, rod, response->count);
             response->attackdmg = CalculateAttack(FishSelection->legendary, FishSelection->difficulty, rod);
-            response->heal      = CaculateHeal(FishSelection->legendary, FishSelection->difficulty, rod);
+            response->heal      = CalculateHeal(FishSelection->legendary, FishSelection->difficulty, rod);
             response->timelimit = CalculateHookTime(PChar, FishSelection->legendary, FishSelection->legendary_flags, FishSelection->sizeType, rod, bait);
             response->sense     = CalculateFishSense(PChar, response, fishingSkill, (FISHINGCATCHTYPE)response->catchtype, FishSelection->sizeType, FishSelection->maxSkill,
                                                      FishSelection->legendary, FishSelection->minLength, FishSelection->maxLength, FishSelection->ranking, rod);
@@ -2511,7 +2511,7 @@ namespace fishingutils
             response->regen           = CalculateRegen(fishingSkill, rod, (FISHINGCATCHTYPE)response->catchtype, ItemSelection->sizeType, ItemSelection->maxSkill, false, false);
             response->response        = CalculateMovement(PChar, ItemSelection->baseMove, ItemSelection->sizeType, rod, 1);
             response->attackdmg       = CalculateAttack(ItemSelection->legendary, ItemSelection->difficulty, rod);
-            response->heal            = CaculateHeal(ItemSelection->legendary, ItemSelection->difficulty, rod);
+            response->heal            = CalculateHeal(ItemSelection->legendary, ItemSelection->difficulty, rod);
             response->timelimit       = CalculateHookTime(PChar, ItemSelection->legendary, ItemSelection->legendary_flags, ItemSelection->sizeType, rod, bait);
             response->sense           = CalculateFishSense(PChar, response, fishingSkill, (FISHINGCATCHTYPE)response->catchtype, ItemSelection->sizeType,
                                                            ItemSelection->maxSkill, false, ItemSelection->minLength, ItemSelection->maxLength, ItemSelection->ranking, rod);
@@ -2540,7 +2540,7 @@ namespace fishingutils
                 response->regen               = CalculateRegen(fishingSkill, rod, (FISHINGCATCHTYPE)response->catchtype, response->catchsizeType, MobSelection->level, false, MobSelection->nm);
                 response->response            = CalculateMovement(PChar, MobSelection->baseMove, response->catchsizeType, rod, 1);
                 response->attackdmg           = CalculateAttack(false, MobSelection->difficulty, rod);
-                response->heal                = CaculateHeal(false, MobSelection->difficulty, rod);
+                response->heal                = CalculateHeal(false, MobSelection->difficulty, rod);
                 response->timelimit           = CalculateHookTime(PChar, 0, 0, response->catchsizeType, rod, bait);
                 response->sense               = CalculateFishSense(PChar, response, fishingSkill, FISHINGCATCHTYPE_MOB, FISHINGSIZETYPE_LARGE, MobSelection->level, false,
                                                                    MobSelection->minLength, MobSelection->maxLength, MobSelection->ranking, rod);
@@ -2574,7 +2574,7 @@ namespace fishingutils
             response->regen           = CalculateRegen(fishingSkill, rod, (FISHINGCATCHTYPE)response->catchtype, response->catchsizeType, 1, false, false);
             response->response        = CalculateMovement(PChar, 15, response->catchsizeType, rod, 1);
             response->attackdmg       = CalculateAttack(false, 16, rod);
-            response->heal            = CaculateHeal(false, 16, rod);
+            response->heal            = CalculateHeal(false, 16, rod);
             response->timelimit       = CalculateHookTime(PChar, 0, 0, response->catchsizeType, rod, bait);
             response->sense           = CalculateFishSense(PChar, response, fishingSkill, FISHINGCATCHTYPE_CHEST, FISHINGSIZETYPE_LARGE, 1, false, 1, 1, 1, rod);
             response->angle           = ChestAngle;
@@ -2627,7 +2627,7 @@ namespace fishingutils
 
     void FishingAction(CCharEntity* PChar, FISHACTION action, uint16 stamina, uint32 special)
     {
-        if (map_config.fishing_enable == 0)
+        if (!settings::get<bool>("map.FISHING_ENABLE"))
         {
             ShowWarning("Fishing is currently disabled, but somehow we have someone commencing a fishing action");
             // Unlikely anyone can get here legit, since we already disabled "startFishing"

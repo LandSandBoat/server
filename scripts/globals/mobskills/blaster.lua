@@ -8,7 +8,7 @@
 -- Notes: Very potent paralysis xi.effect. Is NOT a Gaze Attack, unlike Chaotic Eye.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}
@@ -19,7 +19,6 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.PARALYSIS
-
 
     skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 50, 0, 60))
 

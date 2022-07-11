@@ -7,7 +7,7 @@
 --
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}
@@ -18,7 +18,6 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.STUN
-
 
     skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 1, 0, 6))
 

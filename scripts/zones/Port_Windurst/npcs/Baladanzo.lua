@@ -3,7 +3,7 @@
 --  NPC: Baladanzo
 -- Working 100%
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 

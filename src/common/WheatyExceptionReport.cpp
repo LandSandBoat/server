@@ -1003,7 +1003,7 @@ bool bWriteVariables, HANDLE pThreadHandle)                                     
         }
 
 #ifdef _M_IX86
-        Log(_T("%08X  %08X  %s (%s)"), sf.AddrPC.Offset, sf.AddrFrame.Offset, funcNameBuffer.data(), fileNameBuffer.data());
+        Log(_T("%08X  %08X  %s (%s)"), (DWORD)sf.AddrPC.Offset, (DWORD)sf.AddrFrame.Offset, funcNameBuffer.data(), fileNameBuffer.data());
 #endif
 #ifdef _M_X64
         Log(_T("%016I64X  %016I64X  %s (%s)"), sf.AddrPC.Offset, sf.AddrFrame.Offset, funcNameBuffer.data(), fileNameBuffer.data());
@@ -1623,7 +1623,7 @@ int __cdecl WheatyExceptionReport::Log(const TCHAR* format, ...)
         // Log to console
         if (gLogToConsole)
         {
-            ShowStacktrace(outString.c_str());
+            ShowCritical(outString.c_str());
         }
     }
 

@@ -8,12 +8,7 @@
 -- A_FEAST_FOR_GNATS  : !completequest 7 40
 -- Lion Springs Door  : !pos 96 0 106 80
 -----------------------------------
-require('scripts/globals/keyitems')
-require('scripts/globals/maws')
 require('scripts/globals/missions')
-require('scripts/globals/quests')
-require('scripts/settings/main')
-require('scripts/globals/titles')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 require('scripts/missions/wotg/helpers')
@@ -39,8 +34,9 @@ mission.sections =
             ['Lion_Springs'] =
             {
                 onTrigger = function(player, npc)
-                    -- TODO: What are these args from caps?
-                    return mission:progressEvent(85, 2, 13, 0, 1, 3, 4, 8, 3)
+                    -- TODO     : What are these args from caps?
+                    -- Observed : 1, 100, 0, 0, 0, 0, 0, 0 (San d'Oria, DNC Main)
+                    return mission:progressEvent(85, player:getCampaignAllegiance(), 13, 0, 1, 3, 4, 8, 3)
                 end,
             },
 

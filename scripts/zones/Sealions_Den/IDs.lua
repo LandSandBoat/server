@@ -21,6 +21,10 @@ zones[xi.zone.SEALIONS_DEN] =
         PARTY_MEMBERS_HAVE_FALLEN = 7407, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED = 7414, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
         CONQUEST_BASE             = 7428, -- Tallying conquest results...
+        TENZEN_MSG_OFFSET         = 7919, -- You will fall to my blade!
+        MAKKI_CHEBUKKI_OFFSET     = 7923, -- Samurai Sky Pirate Power!
+        KUKKI_CHEBUKKI_OFFSET     = 7928, -- What? Nooo!
+        CHERUKIKI_OFFSET          = 7934, -- We're doomed!
     },
     mob =
     {
@@ -31,6 +35,13 @@ zones[xi.zone.SEALIONS_DEN] =
     npc =
     {
         AIRSHIP_DOOR_OFFSET = 16908420,
+    },
+    aWarriorsPath =
+    {
+        TENZEN_ID         = 16908310,
+        MAKKI_SHAKKI_ID   = 16908311,
+        KUKKI_CHEBUKKI_ID = 16908312,
+        CHERUKKI_ID       = 16908313,
     },
 }
 

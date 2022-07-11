@@ -21,8 +21,8 @@
 
 #include "common/socket.h"
 
-#include "menu_merit.h"
 #include "job_points.h"
+#include "menu_merit.h"
 
 #include "../entities/charentity.h"
 #include "../utils/charutils.h"
@@ -66,6 +66,5 @@ CMenuMeritPacket::CMenuMeritPacket(CCharEntity* PChar)
     ref<uint16>(0x0A) |= ((atMaxLevelLimit && hasCappedXp) || PChar->MeritMode) << 14; // XP is capped, or player is in Merit Mode
     ref<uint16>(0x0A) |= (canUseMeritMode && PChar->MeritMode) << 15;                  // Merit Mode Enabled, and Current Job is eligible
 
-    ref<uint8>(0x0C) = map_config.max_merit_points + PChar->PMeritPoints->GetMeritValue(MERIT_MAX_MERIT, PChar);
+    ref<uint8>(0x0C) = settings::get<uint8>("map.MAX_MERIT_POINTS") + PChar->PMeritPoints->GetMeritValue(MERIT_MAX_MERIT, PChar);
 }
-

@@ -57,8 +57,8 @@ public:
     bool        battlefieldsFull(int battlefieldId);
     WEATHER     getWeather();
     void        reloadNavmesh();
-
-    auto insertDynamicEntity(sol::table table) -> std::optional<CLuaBaseEntity>;
+    bool        isNavigablePoint(const sol::table& position);
+    auto        insertDynamicEntity(sol::table table) -> std::optional<CLuaBaseEntity>;
 
     auto getSoloBattleMusic();
     auto getPartyBattleMusic();

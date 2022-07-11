@@ -19,8 +19,9 @@ zones[xi.zone.BEARCLAW_PINNACLE] =
         LOGIN_NUMBER              = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         PARTY_MEMBERS_HAVE_FALLEN = 7407, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED = 7414, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
+        ZEPHYR_RIPS               = 7422, -- The <item> rips!
         CONQUEST_BASE             = 7429, -- Tallying conquest results...
-        BLOWN_AWAY                = 7614, -- Blown out of area
+        BLOWN_AWAY                = 7614, -- The explosion has blown you out of the area!
         BEGINS_TO_MELT            = 7672, -- The Snoll Tzar has begun to melt!
         LARGE_STEAM               = 7673, -- The Snoll Tzar is emitting a large amount of steam.
         SHOOK_SALT                = 7674, -- The Snoll Tzar shakes off the salt!
@@ -31,6 +32,7 @@ zones[xi.zone.BEARCLAW_PINNACLE] =
     },
     npc =
     {
+        ENTRANCE_OFFSET = 16801888,
     },
 }
 

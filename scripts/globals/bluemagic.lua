@@ -176,7 +176,6 @@ local function BlueGetHitRate(attacker, target, capHitRate)
     hitrate = hitrate + hitdiff
     hitrate = hitrate / 100
 
-
     -- Applying hitrate caps
     if capHitRate then -- this isn't capped for when acc varies with tp, as more penalties are due
         if hitrate > 0.95 then
@@ -368,7 +367,7 @@ function BlueFinalAdjustments(caster, target, spell, dmg, params)
         dmg = 0
     end
 
-    dmg = dmg * xi.settings.BLUE_POWER
+    dmg = dmg * xi.settings.main.BLUE_POWER
 
     local attackType = params.attackType or xi.attackType.NONE
     local damageType = params.damageType or xi.damageType.NONE

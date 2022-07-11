@@ -12,7 +12,7 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    target:addStatusEffectEx(xi.effect.NINJUTSU_ELE_DEBUFF, 0, 30, 0, 10, 0, xi.mod.ICE_RES, 0)
+    target:addStatusEffectEx(xi.effect.NINJUTSU_ELE_DEBUFF, 0, 30, 0, 10, 0, xi.mod.ICE_MEVA, 0)
 
     return xi.spells.damage.useDamageSpell(caster, target, spell)
 end

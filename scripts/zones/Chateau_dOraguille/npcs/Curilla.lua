@@ -8,7 +8,7 @@
 local ID = require("scripts/zones/Chateau_dOraguille/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/magic")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/utils")
@@ -79,7 +79,7 @@ entity.onTrigger = function(player, npc)
             player:startEvent(108)
         end
     elseif
-        mJob == xi.job.RDM and mLvl >= xi.settings.AF2_QUEST_LEVEL and envelopedInDarkness == QUEST_COMPLETED and
+        mJob == xi.job.RDM and mLvl >= xi.settings.main.AF2_QUEST_LEVEL and envelopedInDarkness == QUEST_COMPLETED and
         peaceForTheSpirit == QUEST_AVAILABLE
     then
         player:startEvent(109) -- Start
@@ -94,7 +94,7 @@ entity.onTrigger = function(player, npc)
             player:startEvent(117)
         end
     elseif
-        mJob == xi.job.RDM and mLvl >= xi.settings.AF2_QUEST_LEVEL and
+        mJob == xi.job.RDM and mLvl >= xi.settings.main.AF2_QUEST_LEVEL and
         player:getQuestStatus(xi.quest.log_id.SANDORIA, sandyQuests.THE_CRIMSON_TRIAL) == QUEST_COMPLETED and
         envelopedInDarkness == QUEST_AVAILABLE
     then

@@ -15,7 +15,7 @@ require('scripts/globals/keyitems')
 require('scripts/globals/quests')
 require('scripts/globals/npc_util')
 require("scripts/globals/status")
-require('scripts/settings/main')
+require('scripts/globals/settings')
 -----------------------------------
 local whitegateID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 -----------------------------------
@@ -54,7 +54,7 @@ quest.sections =
                 player:hasCompletedMission(xi.mission.log_id.TOAU, xi.mission.id.toau.IMMORTAL_SENTRIES) and
                 player:hasCompletedQuest(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL) and
                 player:getMainJob() == xi.job.BLU and
-                player:getMainLvl() >= xi.settings.AF1_QUEST_LEVEL and
+                player:getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL and
                 xi.quest.getVar(player, xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AN_EMPTY_VESSEL, 'completeEvent') == 0
         end,
 

@@ -12,8 +12,146 @@ on:
       - everything
 
 jobs:
-  Linux_Clang11_64bit:
-    runs-on: ubuntu-latest
+  Sanity_Checks:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        fetch-depth: 0
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y software-properties-common cppcheck luajit-5.1-dev luarocks mariadb-server mariadb-client libmariadb-dev-compat
+        pip install -r tools/requirements.txt
+        luarocks install luacheck --local
+    - id: changed-files
+      name: Get Changed Files
+      uses: Ana06/get-changed-files@v2.1.0
+      with:
+        filter: |
+          src/**
+          scripts/**
+          sql/**
+      continue-on-error: true
+    - name: List Changed Files
+      if: always()
+      run: |
+        for changed_file in ${{ steps.changed-files.outputs.all }}; do
+          echo "${changed_file}"
+        done
+    - name: General File Checks
+      if: always()
+      run: |
+        touch general_checks.txt
+        for changed_file in ${{ steps.changed-files.outputs.all }}; do
+          if [[ -f $changed_file ]]; then
+            bash tools/ci/general.sh ${changed_file} >> general_checks.txt || true
+          fi
+        done
+        cat general_checks.txt
+        if [ -s general_checks.txt ]
+        then
+          exit 1
+        fi
+        exit 0
+    - name: CPP Checks
+      if: always()
+      run: |
+        touch cpp_checks.txt
+        for changed_file in ${{ steps.changed-files.outputs.all }}; do
+          if [[ -f $changed_file ]]; then
+            if [[ $changed_file == *.cpp ]]; then
+              bash tools/ci/cpp.sh ${changed_file} 2>> cpp_checks.txt || true
+            fi
+          fi
+        done
+        cat cpp_checks.txt
+        if [ -s cpp_checks.txt ]
+        then
+          exit 1
+        fi
+        exit 0
+    - name: CPP Formatting Checks
+      if: always()
+      run: |
+        clang-format-14 -version
+        touch cpp_formatting_checks.txt
+        for changed_file in ${{ steps.changed-files.outputs.all }}; do
+          if [[ -f $changed_file ]]; then
+            if [[ $changed_file == *.cpp || $changed_file == *.h ]]; then
+              clang-format-14 -style=file -i ${changed_file}
+            fi
+          fi
+        done
+        git diff >> cpp_formatting_checks.txt
+        cat cpp_formatting_checks.txt
+        git reset --hard
+        if [ -s cpp_formatting_checks.txt ]
+        then
+          exit 1
+        fi
+        exit 0
+    - name: Upload CPP Formatting Diff
+      if: hashFiles('cpp_formatting_checks.txt') != ''
+      uses: actions/upload-artifact@v2
+      with:
+        name: clang_format_diff
+        path: |
+          cpp_formatting_checks.txt
+    - name: Lua Checks
+      if: always()
+      run: |
+        touch lua_checks.txt
+        for changed_file in ${{ steps.changed-files.outputs.all }}; do
+          if [[ -f $changed_file ]]; then
+            if [[ $changed_file == *.lua ]]; then
+              bash tools/ci/lua.sh ${changed_file} >> lua_checks.txt || true
+            fi
+          fi
+        done
+        cat lua_checks.txt
+        if [ -s lua_checks.txt ]
+        then
+          exit 1
+        fi
+        exit 0
+    - name: SQL Checks
+      if: always()
+      run: |
+        touch sql_checks.txt
+        for changed_file in ${{ steps.changed-files.outputs.all }}; do
+          if [[ -f $changed_file ]]; then
+            if [[ $changed_file == *.sql ]]; then
+              bash tools/ci/sql.sh ${changed_file} >> sql_checks.txt || true
+            fi
+          fi
+        done
+        cat sql_checks.txt
+        if [ -s sql_checks.txt ]
+        then
+          exit 1
+        fi
+        exit 0
+    - name: Python Checks
+      if: always()
+      run: |
+        touch python_checks.txt
+        for changed_file in ${{ steps.changed-files.outputs.all }}; do
+          if [[ -f $changed_file ]]; then
+            if [[ $changed_file == *.py ]]; then
+              bash tools/ci/python.sh ${changed_file} >> python_checks.txt || true
+            fi
+          fi
+        done
+        cat python_checks.txt
+        if [ -s python_checks.txt ]
+        then
+          exit 1
+        fi
+        exit 0
+
+  Linux_Clang14_64bit:
+    runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v1
       with:
@@ -22,15 +160,15 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev
-    - name: Cache 'build' folder
-      uses: actions/cache@v3
-      with:
-        path: build
-        key: ${{ runner.os }}-clang
+    #- name: Cache 'build' folder
+    #  uses: actions/cache@v3
+    #  with:
+    #    path: build
+    #    key: ${{ runner.os }}-clang
     - name: Configure CMake
       run: |
-        export CC=/usr/bin/clang-11
-        export CXX=/usr/bin/clang++-11
+        export CC=/usr/bin/clang-14
+        export CXX=/usr/bin/clang++-14
         mkdir -p build
         cmake -S . -B build
     - name: Build
@@ -45,8 +183,8 @@ jobs:
           xi_map
           xi_search
 
-  Linux_GCC10_64bit:
-    runs-on: ubuntu-latest
+  Linux_GCC11_64bit:
+    runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v1
       with:
@@ -55,15 +193,15 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev
-    - name: Cache 'build' folder
-      uses: actions/cache@v3
-      with:
-        path: build
-        key: ${{ runner.os }}-gcc
+    #- name: Cache 'build' folder
+    #  uses: actions/cache@v3
+    #  with:
+    #    path: build
+    #    key: ${{ runner.os }}-gcc
     - name: Configure CMake
       run: |
-        export CC=/usr/bin/gcc-10
-        export CXX=/usr/bin/g++-10
+        export CC=/usr/bin/gcc-11
+        export CXX=/usr/bin/g++-11
         mkdir -p build
         CFLAGS=-m64 CXXFLAGS=-m64 LDFLAGS=-m64 cmake -S . -B build
     - name: Build
@@ -185,141 +323,9 @@ jobs:
         run: |
           cmake --build build -j4
 
-  Sanity_Checks:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v1
-      with:
-        fetch-depth: 0
-    - name: Install Dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y software-properties-common clang-format cppcheck luajit-5.1-dev luarocks mariadb-server-10.3 mariadb-client libmariadb-dev-compat
-        pip install -r tools/requirements.txt
-        luarocks install luacheck --local
-    - id: changed-files
-      name: Get Changed Files
-      uses: Ana06/get-changed-files@v2.1.0
-      with:
-        filter: |
-          src/**
-          scripts/**
-          sql/**
-      continue-on-error: true
-    - name: List Changed Files
-      if: always()
-      run: |
-        for changed_file in ${{ steps.changed-files.outputs.all }}; do
-          echo "${changed_file}"
-        done
-    - name: General File Checks
-      if: always()
-      run: |
-        touch general_checks.txt
-        for changed_file in ${{ steps.changed-files.outputs.all }}; do
-          if [[ -f $changed_file ]]; then
-            bash tools/ci/general.sh ${changed_file} >> general_checks.txt || true
-          fi
-        done
-        cat general_checks.txt
-        if [ -s general_checks.txt ]
-        then
-          exit 1
-        fi
-        exit 0
-    - name: CPP Checks
-      if: always()
-      run: |
-        touch cpp_checks.txt
-        for changed_file in ${{ steps.changed-files.outputs.all }}; do
-          if [[ -f $changed_file ]]; then
-            if [[ $changed_file == *.cpp ]]; then
-              bash tools/ci/cpp.sh ${changed_file} 2>> cpp_checks.txt || true
-            fi
-          fi
-        done
-        cat cpp_checks.txt
-        if [ -s cpp_checks.txt ]
-        then
-          exit 1
-        fi
-        exit 0
-    - name: Lua Checks
-      if: always()
-      run: |
-        touch lua_checks.txt
-        for changed_file in ${{ steps.changed-files.outputs.all }}; do
-          if [[ -f $changed_file ]]; then
-            if [[ $changed_file == *.lua ]]; then
-              bash tools/ci/lua.sh ${changed_file} >> lua_checks.txt || true
-            fi
-          fi
-        done
-        cat lua_checks.txt
-        if [ -s lua_checks.txt ]
-        then
-          exit 1
-        fi
-        exit 0
-    - name: SQL Checks
-      if: always()
-      run: |
-        touch sql_checks.txt
-        for changed_file in ${{ steps.changed-files.outputs.all }}; do
-          if [[ -f $changed_file ]]; then
-            if [[ $changed_file == *.sql ]]; then
-              bash tools/ci/sql.sh ${changed_file} >> sql_checks.txt || true
-            fi
-          fi
-        done
-        cat sql_checks.txt
-        if [ -s sql_checks.txt ]
-        then
-          exit 1
-        fi
-        exit 0
-    - name: Python Checks
-      if: always()
-      run: |
-        touch python_checks.txt
-        for changed_file in ${{ steps.changed-files.outputs.all }}; do
-          if [[ -f $changed_file ]]; then
-            if [[ $changed_file == *.py ]]; then
-              bash tools/ci/python.sh ${changed_file} >> python_checks.txt || true
-            fi
-          fi
-        done
-        cat python_checks.txt
-        if [ -s python_checks.txt ]
-        then
-          exit 1
-        fi
-        exit 0
-    - name: Clang Format (C++ files)
-      if: 'false' # Don't run until fixed
-      run: |
-        clang-format --version
-        echo "Base Ref: ${{ github.event.pull_request.base.ref }}"
-        echo "Base SHA: ${{ github.event.pull_request.base.sha }}"
-        echo "Head Ref: ${{ github.event.pull_request.head.ref }}"
-        echo "Head SHA: ${{ github.event.pull_request.head.sha }}"
-        diff=`git diff -U0 --no-color ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} -- '*.cpp' '*.h' | clang-format-diff -p1`
-
-        if [ -z "$diff" ]
-        then
-            echo "Diff formatting looks good!"
-        else
-            echo "Problem with formatting!"
-            echo "To fix this locally, run: git diff -U0 --no-color ${{ github.event.pull_request.base.ref }}..HEAD -- '*.cpp' '*.h' | clang-format-diff -p1 -i"
-            echo ""
-            echo "$diff"
-
-            exit -1
-        fi
-
   Full_Startup_Checks_Linux:
-    runs-on: ubuntu-latest
-    needs: Linux_Clang11_64bit
+    runs-on: ubuntu-22.04
+    needs: Linux_Clang14_64bit
     services:
       mysql:
         image: mariadb
@@ -340,7 +346,7 @@ jobs:
     - name: Install Dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y software-properties-common cmake mariadb-server-10.3 mariadb-client-10.3 libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks
+        sudo apt-get install -y software-properties-common cmake mariadb-server mariadb-client libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks
     - name: Verify MySQL connection from container
       run: |
         mysql -h 127.0.0.1 -uroot -proot -e "SHOW DATABASES"
@@ -351,12 +357,9 @@ jobs:
           mysql xidb -h 127.0.0.1 -uroot -proot < $f
         done
         mysql xidb -h 127.0.0.1 -uroot -proot -e "SHOW tables"
-    - name: Copy confs
-      run: |
-        cp conf/default/* conf/
     - name: Copy settings
       run: |
-        cp scripts/settings/default/* scripts/settings/
+        cp settings/default/* settings/
     - name: Enable Modules
       shell: bash
       run: |
@@ -464,8 +467,8 @@ jobs:
         fi
 
   MultiInstance_Startup_Checks_Linux:
-    runs-on: ubuntu-latest
-    needs: Linux_Clang11_64bit
+    runs-on: ubuntu-22.04
+    needs: Linux_Clang14_64bit
     services:
       mysql:
         image: mariadb
@@ -486,7 +489,7 @@ jobs:
     - name: Install Dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y software-properties-common cmake mariadb-server-10.3 mariadb-client-10.3 libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks
+        sudo apt-get install -y software-properties-common cmake mariadb-server mariadb-client libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks
     - name: Verify MySQL connection from container
       run: |
         mysql -h 127.0.0.1 -uroot -proot -e "SHOW DATABASES"
@@ -500,12 +503,9 @@ jobs:
     - name: Assign odd zones a different port
       run: |
         mysql xidb -h 127.0.0.1 -uroot -proot -e "UPDATE xidb.zone_settings SET zoneport = 54231 WHERE zoneid % 2 = 0;"
-    - name: Copy confs
-      run: |
-        cp conf/default/* conf/
     - name: Copy settings
       run: |
-        cp scripts/settings/default/* scripts/settings/
+        cp settings/default/* settings/
     - name: Startup checks
       env:
         MYSQL_HOST: mysql
@@ -576,12 +576,9 @@ jobs:
     - uses: zach2good/setup-mariadb@v1
       with:
           database: xidb
-    - name: Copy confs
-      run: |
-        cp conf/default/* conf/
     - name: Copy settings
       run: |
-        cp scripts/settings/default/* scripts/settings/
+        cp settings/default/* settings/
     - name: Install Python Dependencies
       run: |
         pip install -r tools/requirements.txt

@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -998,7 +998,7 @@ bool CStatusEffectContainer::ApplyCorsairEffect(CStatusEffect* PStatusEffect, ui
 {
     // Don't process if not a COR roll.
     if (!((PStatusEffect->GetStatusID() >= EFFECT_FIGHTERS_ROLL && PStatusEffect->GetStatusID() <= EFFECT_NATURALISTS_ROLL) ||
-                        (PStatusEffect->GetStatusID() == EFFECT_RUNEISTS_ROLL)))
+          (PStatusEffect->GetStatusID() == EFFECT_RUNEISTS_ROLL)))
     {
         return false;
     }
@@ -1784,7 +1784,7 @@ void CStatusEffectContainer::HandleAura(CStatusEffect* PStatusEffect)
                     PMember->StatusEffectContainer->AddStatusEffect(PEffect, true);
                 }
             });
-             // clang-format on
+            // clang-format on
         }
         else if (auraTarget == AURA_TARGET::ENEMIES)
         {

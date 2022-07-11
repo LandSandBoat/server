@@ -7,13 +7,12 @@
 --  Range: Melee
 --  Notes:
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 
 -----------------------------------
 local mobskill_object = {}
-
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0

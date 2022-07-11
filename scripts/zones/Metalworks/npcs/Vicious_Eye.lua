@@ -6,7 +6,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Metalworks/IDs")
 require("scripts/globals/shop")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}

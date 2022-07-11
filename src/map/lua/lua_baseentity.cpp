@@ -1518,6 +1518,32 @@ uint8 CLuaBaseEntity::getCurrentAction()
 }
 
 /************************************************************************
+ *  Function: canUseAbilities()
+ *  Purpose : Sees if a mob has perticular effects that stop it from doing thing
+ *  Example : mob:canUseAbilities()
+ *  Notes   : Can't use on NPCs
+ ************************************************************************/
+
+bool CLuaBaseEntity::canUseAbilities()
+{
+    if (auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity))
+    {
+        return !(PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_SLEEP) ||
+                 PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_IMPAIRMENT) ||
+                 PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_SLEEP_II) ||
+                 PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_STUN) ||
+                 PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_AMNESIA) ||
+                 PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_LULLABY) ||
+                 PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_PETRIFICATION) ||
+                 PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_TERROR) ||
+                 !(m_PBaseEntity->PAI->CanChangeState()));
+    }
+
+    ShowError("canUseAbilities() : Wrong Entity Type");
+    return false;
+}
+
+/************************************************************************
  *  Function: lookAt()
  *  Purpose : Forces an entity to 'look' at something like it's self-aware
  *  Example : npc:lookAt(player:getPos()) -- Make an NPC look at the PC
@@ -1859,7 +1885,7 @@ void CLuaBaseEntity::setElevator(uint8 id, uint32 lowerDoor, uint32 upperDoor, u
     // If giving the elevator ANIMATION_ELEVATOR_UP makes it go down, set this bool to true
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_NPC);
 
-    Elevator_t elevator;
+    Elevator_t elevator = {};
 
     elevator.id                 = id;
     elevator.LowerDoor          = static_cast<CNpcEntity*>(zoneutils::GetEntity(lowerDoor, TYPE_NPC));
@@ -2451,7 +2477,7 @@ void CLuaBaseEntity::updateToEntireZone(uint8 statusID, uint8 animation, sol::ob
 
 auto CLuaBaseEntity::getPos() -> sol::table
 {
-    auto pos = luautils::lua.create_table();
+    auto pos = lua.create_table();
 
     pos["x"]   = m_PBaseEntity->loc.p.x;
     pos["y"]   = m_PBaseEntity->loc.p.y;
@@ -2828,8 +2854,7 @@ sol::table CLuaBaseEntity::getTeleportTable(uint8 type)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    sol::state_view lua       = luautils::lua;
-    sol::table      teleTable = lua.create_table();
+    sol::table teleTable = lua.create_table();
 
     TELEPORT_TYPE tele_type = static_cast<TELEPORT_TYPE>(type);
     CCharEntity*  PChar     = (CCharEntity*)m_PBaseEntity;
@@ -3028,7 +3053,7 @@ sol::table CLuaBaseEntity::getTeleportMenu(uint8 type)
         return sol::lua_nil;
     }
 
-    auto table = luautils::lua.create_table();
+    auto table = lua.create_table();
     switch (teleType)
     {
         case TELEPORT_TYPE::HOMEPOINT:
@@ -4244,10 +4269,10 @@ void CLuaBaseEntity::addGearSetMod(uint8 modNameId, Mod modId, uint16 modValue)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    GearSetMod_t gearSetMod;
-    gearSetMod.modNameId = modNameId;
-    gearSetMod.modId     = modId;
-    gearSetMod.modValue  = modValue;
+    GearSetMod_t gearSetMod = {};
+    gearSetMod.modNameId    = modNameId;
+    gearSetMod.modId        = modId;
+    gearSetMod.modValue     = modValue;
 
     CCharEntity* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
 
@@ -4437,7 +4462,7 @@ sol::table CLuaBaseEntity::getRetrievableItemsForSlip(uint16 slipId)
 
     auto* slip = PChar->getStorage(LOC_INVENTORY)->GetItem(slipSlotId);
 
-    sol::table table = luautils::lua.create_table();
+    sol::table table = lua.create_table();
     // TODO Is extra sized defined anywhere?
     for (int i = 0; i < 24; i++)
     {
@@ -5764,7 +5789,7 @@ uint16 CLuaBaseEntity::getFame(sol::object const& areaObj)
 
     if (fameArea <= 15)
     {
-        float fameMultiplier = map_config.fame_multiplier;
+        float fameMultiplier = settings::get<float>("map.FAME_MULTIPLIER");
         auto* PChar          = static_cast<CCharEntity*>(m_PBaseEntity);
 
         switch (fameArea)
@@ -7117,7 +7142,7 @@ uint32 CLuaBaseEntity::getGil()
         }
         else if (!item->isType(ITEM_CURRENCY))
         {
-            ShowFatalError("lua::getGil : Item in currency slot is not gil!");
+            ShowCritical("lua::getGil : Item in currency slot is not gil!");
             return 0;
         }
 
@@ -7151,7 +7176,7 @@ void CLuaBaseEntity::addGil(int32 gil)
 
     if (item == nullptr || !item->isType(ITEM_CURRENCY))
     {
-        ShowFatalError("lua::addGil : No Gil in currency slot");
+        ShowCritical("lua::addGil : No Gil in currency slot");
         return;
     }
 
@@ -7174,7 +7199,7 @@ void CLuaBaseEntity::setGil(int32 amount)
 
     if (item == nullptr || !item->isType(ITEM_CURRENCY))
     {
-        ShowFatalError("lua::setGil : No Gil in currency slot");
+        ShowCritical("lua::setGil : No Gil in currency slot");
         return;
     }
 
@@ -7206,7 +7231,7 @@ bool CLuaBaseEntity::delGil(int32 gil)
     }
     else
     {
-        ShowFatalError("lua::delGil : No Gil in currency slot");
+        ShowCritical("lua::delGil : No Gil in currency slot");
     }
 
     return result;
@@ -8527,7 +8552,7 @@ sol::table CLuaBaseEntity::getParty()
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
     // clang-format off
-    auto table = luautils::lua.create_table();
+    auto table = lua.create_table();
     ((CBattleEntity*)m_PBaseEntity)->ForParty([&table](CBattleEntity* member)
     {
         table.add(CLuaBaseEntity(member));
@@ -8549,7 +8574,7 @@ sol::table CLuaBaseEntity::getPartyWithTrusts()
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     // clang-format off
-    auto table = luautils::lua.create_table();
+    auto table = lua.create_table();
     ((CCharEntity*)m_PBaseEntity)->ForPartyWithTrusts([&table](CBattleEntity* member)
     {
         table.add(CLuaBaseEntity(member));
@@ -8825,12 +8850,12 @@ sol::table CLuaBaseEntity::getAlliance()
     if (m_PBaseEntity->objtype == TYPE_NPC)
     {
         ShowWarning("CLuaBaseEntity::getAlliance() - NPC passed to function.");
-        return luautils::lua.create_table();
+        return lua.create_table();
     }
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    auto table = luautils::lua.create_table();
+    auto table = lua.create_table();
 
     // clang-format off
     PChar->ForAlliance([&table](CBattleEntity* PMember)
@@ -9080,7 +9105,7 @@ void CLuaBaseEntity::setInstance(CLuaInstance* PLuaInstance)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    CInstance* PInstance     = PLuaInstance->GetInstance();
+    CInstance*   PInstance   = PLuaInstance->GetInstance();
     CCharEntity* PChar       = dynamic_cast<CCharEntity*>(m_PBaseEntity);
     m_PBaseEntity->PInstance = PInstance;
 
@@ -10146,7 +10171,7 @@ sol::table CLuaBaseEntity::getNotorietyList()
 
     auto& notorietyContainer = static_cast<CBattleEntity*>(m_PBaseEntity)->PNotorietyContainer;
 
-    auto table = luautils::lua.create_table();
+    auto table = lua.create_table();
     for (auto* entry : *notorietyContainer)
     {
         table.add(CLuaBaseEntity(entry));
@@ -10358,7 +10383,7 @@ sol::table CLuaBaseEntity::getStatusEffects()
         return {};
     }
 
-    auto table = luautils::lua.create_table();
+    auto table = lua.create_table();
     // clang-format off
     static_cast<CBattleEntity*>(m_PBaseEntity)->StatusEffectContainer->ForEachEffect(
     [&table](CStatusEffect* PEffect)
@@ -10790,7 +10815,7 @@ int16 CLuaBaseEntity::getMaxGearMod(Mod modId)
 
     if (!PChar)
     {
-        ShowWarning("CLuaBaseEntity::getMaxGearMod() - m_PBaseEntity is not a player.")
+        ShowWarning("CLuaBaseEntity::getMaxGearMod() - m_PBaseEntity is not a player.");
         return 0;
     }
 
@@ -11783,7 +11808,7 @@ void CLuaBaseEntity::trustPartyMessage(uint32 message_id)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_TRUST);
 
-    auto* PTrust  = static_cast<CTrustEntity*>(m_PBaseEntity);
+    auto* PTrust = static_cast<CTrustEntity*>(m_PBaseEntity);
     if (auto* PMaster = dynamic_cast<CCharEntity*>(PTrust->PMaster))
     {
         // clang-format off
@@ -12452,7 +12477,7 @@ auto CLuaBaseEntity::getAllRuneEffects() -> sol::table
     auto*               PEntity        = static_cast<CBattleEntity*>(m_PBaseEntity);
     std::vector<EFFECT> runeEffectList = PEntity->StatusEffectContainer->GetAllRuneEffects();
 
-    auto table = luautils::lua.create_table();
+    auto table = lua.create_table();
 
     for (const auto& runeEffect : runeEffectList)
     {
@@ -12801,9 +12826,17 @@ void CLuaBaseEntity::spawn(sol::object const& despawnSec, sol::object const& res
 
 bool CLuaBaseEntity::isSpawned()
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
+    CMobEntity* PMobEntity = dynamic_cast<CMobEntity*>(m_PBaseEntity);
 
-    return static_cast<CMobEntity*>(m_PBaseEntity)->PAI->IsSpawned();
+    if (PMobEntity)
+    {
+        return static_cast<CMobEntity*>(m_PBaseEntity)->PAI->IsSpawned();
+    }
+    else
+    {
+        ShowError("CLuaBaseEntity::isSpawned() called on entity that is not a PMobEntity.");
+    }
+    return false;
 }
 
 /************************************************************************
@@ -13335,12 +13368,12 @@ sol::table CLuaBaseEntity::getEnmityList()
 
     if (enmityList)
     {
-        auto table = luautils::lua.create_table();
+        auto table = lua.create_table();
         for (auto member : *enmityList)
         {
             if (member.second.PEnmityOwner)
             {
-                auto subTable = luautils::lua.create_table();
+                auto subTable = lua.create_table();
 
                 subTable["entity"]   = CLuaBaseEntity(member.second.PEnmityOwner);
                 subTable["ce"]       = member.second.CE;
@@ -14116,6 +14149,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getStatus", CLuaBaseEntity::getStatus);
     SOL_REGISTER("setStatus", CLuaBaseEntity::setStatus);
     SOL_REGISTER("getCurrentAction", CLuaBaseEntity::getCurrentAction);
+    SOL_REGISTER("canUseAbilities", CLuaBaseEntity::canUseAbilities);
 
     SOL_REGISTER("lookAt", CLuaBaseEntity::lookAt);
     SOL_REGISTER("clearTargID", CLuaBaseEntity::clearTargID);

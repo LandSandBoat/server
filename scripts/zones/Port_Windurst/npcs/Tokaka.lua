@@ -4,7 +4,7 @@
 -- Starts & Finishes Repeatable Quest: Something Fishy
 -----------------------------------
 require("scripts/globals/quests")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 
@@ -17,7 +17,7 @@ entity.onTrade = function(player, npc, trade)
         local bastoreSardine = trade:hasItemQty(4360, 1)
 
         if (bastoreSardine == true and count == 1) then
-            player:startEvent(210, xi.settings.GIL_RATE*70, 4360)
+            player:startEvent(210, xi.settings.main.GIL_RATE*70, 4360)
         end
     end
 end
@@ -62,7 +62,7 @@ entity.onEventFinish = function(player, csid, option)
         end
 
         player:tradeComplete()
-        player:addGil(xi.settings.GIL_RATE*70)
+        player:addGil(xi.settings.main.GIL_RATE*70)
         player:setCharVar("TokakaSpokenTo", 0)
         player:needToZone(true)
     elseif (csid == 209) then

@@ -12,7 +12,7 @@
 -- 4.50      6.00      7.50
 -----------------------------------
 require("scripts/globals/weaponskills")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
@@ -31,7 +31,6 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     if (damage > 0 and target:hasStatusEffect(xi.effect.FLASH) == false) then
     target:addStatusEffect(xi.effect.FLASH, 200, 0, 15)
     end
-
 
     return tpHits, extraHits, criticalHit, damage
 end

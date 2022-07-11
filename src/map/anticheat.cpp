@@ -123,7 +123,7 @@ namespace anticheat
         {
             return false;
         }
-        if (!map_config.anticheat_enabled)
+        if (!settings::get<bool>("map.ANTICHEAT_ENABLED"))
         {
             return false;
         }
@@ -141,7 +141,7 @@ namespace anticheat
             // The message in the warning column in DB is sent as a system message to the offender
             PChar->pushPacket(new CChatMessagePacket(PChar, CHAT_MESSAGE_TYPE::MESSAGE_SYSTEM_1, warningmsg));
         }
-        if ((action & CHEAT_ACTION_JAIL) && (!map_config.anticheat_jail_disable))
+        if ((action & CHEAT_ACTION_JAIL) && (!settings::get<bool>("map.ANTICHEAT_JAIL_DISABLE")))
         {
             // Send to jail only if both the cheat type requires it *and* the admin
             // has not disabled auto-jailing globally.

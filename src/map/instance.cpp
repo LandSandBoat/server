@@ -125,7 +125,7 @@ void CInstance::LoadInstance()
     }
     else
     {
-        ShowFatalError("CZone::LoadInstance: Cannot load instance %u", m_instanceid);
+        ShowCritical("CZone::LoadInstance: Cannot load instance %u", m_instanceid);
         Fail();
     }
 }

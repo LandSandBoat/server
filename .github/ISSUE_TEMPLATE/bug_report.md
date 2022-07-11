@@ -1,7 +1,7 @@
 ---
 name: 🐛 Bug Report
 about: Bug Report
-title: "\U0001F41B <Bug Summary>"
+title: "\U0001F41B <Replace this with Bug Summary>"
 labels: bug
 assignees:
 ---

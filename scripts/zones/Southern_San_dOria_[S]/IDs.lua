@@ -42,8 +42,10 @@ zones[xi.zone.SOUTHERN_SAN_DORIA_S] =
         YEARS_OF_TRAINING       = 11813, -- After years of training in the Far East, I return only to find my nation burning at the hands of the infernal beastman hordes. The heathens shall pay dearly... My work has only just begun.
         FINE_WARRIOR            = 11814, -- You have the look of a fine warrior. It is a pity you are not one of my Crimson Wolves.
         EYES_OF_THE_GODDESS     = 11815, -- The eyes of the Goddess are ever upon us. We must remain steadfast against the evils from without, as well as those from within.
+        NOW_ALLIED_WITH         = 12149, -- You are now a member of the [/Knights of the Iron Ram/Republican Legion's Fourth Division/Cobra Unit]!
         ALLIED_SIGIL            = 12924, -- You have received the Allied Sigil!
         DOOR_IS_FIRMLY_LOCKED   = 13550, -- The door is firmly locked...
+        CONCERNED_FOR_WOUNDED   = 13679, -- Concerned for the wounded Sir Gaelise, Lilisette and Portia have been paying him regular visits as of late.  Alexei Mayakov suggests that the Chateau d'Oraguille is where the two of them are likely to be.
         RETRIEVE_DIALOG_ID      = 15587, -- You retrieve <item> from the porter moogle's care.
         COMMON_SENSE_SURVIVAL   = 15661, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },

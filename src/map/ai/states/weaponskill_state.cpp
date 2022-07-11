@@ -113,17 +113,22 @@ bool CWeaponSkillState::Update(time_point tick)
         action_t action;
         m_PEntity->OnWeaponSkillFinished(*this, action);
         m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
+
         auto* PTarget{ GetTarget() };
 
-        m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_USE", CLuaBaseEntity(m_PEntity), CLuaBaseEntity(PTarget), m_PSkill->getID(), m_spent, &action);
-        PTarget->PAI->EventHandler.triggerListener("WEAPONSKILL_TAKE", CLuaBaseEntity(PTarget), CLuaBaseEntity(m_PEntity), m_PSkill->getID(), m_spent, &action);
-
-        if (m_PEntity->objtype == TYPE_PC)
+        if (action.actiontype == ACTION_WEAPONSKILL_FINISH) // category changes upon being out of range. This does not count for RoE and delay is not increased beyond the normal delay.
         {
-            roeutils::event(ROE_EVENT::ROE_WSKILL_USE, static_cast<CCharEntity*>(m_PEntity), RoeDatagram("skillType", m_PSkill->getType()));
+            // only send lua the WS events if we are in range
+            m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_USE", CLuaBaseEntity(m_PEntity), CLuaBaseEntity(PTarget), m_PSkill->getID(), m_spent, &action);
+            PTarget->PAI->EventHandler.triggerListener("WEAPONSKILL_TAKE", CLuaBaseEntity(PTarget), CLuaBaseEntity(m_PEntity), m_PSkill->getID(), m_spent, &action);
+
+            if (m_PEntity->objtype == TYPE_PC)
+            {
+                roeutils::event(ROE_EVENT::ROE_WSKILL_USE, static_cast<CCharEntity*>(m_PEntity), RoeDatagram("skillType", m_PSkill->getType()));
+            }
         }
 
-        auto delay   = m_PSkill->getAnimationTime();
+        auto delay   = m_PSkill->getAnimationTime(); // TODO: Is delay time a fixed number if the weaponskill is used out of range?
         m_finishTime = tick + delay;
         Complete();
     }

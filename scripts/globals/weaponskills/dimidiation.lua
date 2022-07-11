@@ -11,7 +11,7 @@
 -- 2.25      4.5       6.75
 -----------------------------------
 require("scripts/globals/aftermath")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/weaponskills")
 -----------------------------------
@@ -31,7 +31,6 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     params.ignored100 = 0
     params.ignored200 = 0
     params.ignored300 = 0
-
 
     -- Apply aftermath
     xi.aftermath.addStatusEffect(player, tp, xi.slot.MAIN, xi.aftermath.type.MYTHIC)

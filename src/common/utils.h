@@ -27,11 +27,11 @@
 #include "../common/mmo.h"
 #include <math.h>
 
-constexpr size_t PacketNameLength = 15;
+constexpr size_t PacketNameLength = 16; // 15 + null terminator
 
 constexpr size_t DecodeStringLength    = 21; // used for size of decoded strings of signature/linkshells
-constexpr size_t SignatureStringLength = 12; // encoded signature string size
-constexpr size_t LinkshellStringLength = 16; // encoded linkshell string size
+constexpr size_t SignatureStringLength = 16; // encoded signature string size // 15 characters + null terminator
+constexpr size_t LinkshellStringLength = 20; // encoded linkshell string size // 19 characters + null terminator
 
 int32 checksum(uint8* buf, uint32 buflen, char checkhash[16]);
 int   config_switch(const char* str);
@@ -82,10 +82,12 @@ void        DecodeStringSignature(int8* signature, int8* target);
 void        PackSoultrapperName(std::string name, uint8 output[]);
 std::string UnpackSoultrapperName(uint8 input[]);
 
-std::string escape(std::string const& s);
+auto escape(std::string const& s) -> std::string;
+auto split(std::string const& s, std::string const& delimiter = " ") -> std::vector<std::string>;
+auto to_lower(std::string const& s) -> std::string;
+auto to_upper(std::string const& s) -> std::string;
+auto trim(const std::string& str, const std::string& whitespace = " \t") -> std::string;
 
-auto   split(std::string const& s, std::string const& delimiter = " ") -> std::vector<std::string>;
-auto   trim(const std::string& str, const std::string& whitespace = " \t") -> std::string ;
 look_t stringToLook(std::string str);
 
 // Float tools

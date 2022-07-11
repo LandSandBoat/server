@@ -10,14 +10,16 @@ xi.mog_garden = xi.mog_garden or {}
 xi.mog_garden.onInitialize = function(zone)
     -- Hide all NPCs by default
     local npcs = zone:getNPCs()
-    for _, npc in ipairs(npcs) do
-        npc:setStatus(xi.status.DISAPPEAR)
-    end
+    if next(npcs) ~= nil then -- Check to see if table is empty
+        for _, npc in ipairs(npcs) do
+            npc:setStatus(xi.status.DISAPPEAR)
+        end
 
-    -- Un-hide default NPCS
-    GetNPCByID(ID.npc.GREEN_THUMB_MOOGLE):setStatus(xi.status.NORMAL)
-    GetNPCByID(ID.npc.MOG_DINGHY):setStatus(xi.status.NORMAL)
-    GetNPCByID(ID.npc.PORTER_MOOGLE):setStatus(xi.status.NORMAL)
+        -- Un-hide default NPCS
+        GetNPCByID(ID.npc.GREEN_THUMB_MOOGLE):setStatus(xi.status.NORMAL)
+        GetNPCByID(ID.npc.MOG_DINGHY):setStatus(xi.status.NORMAL)
+        GetNPCByID(ID.npc.PORTER_MOOGLE):setStatus(xi.status.NORMAL)
+    end
 end
 
 xi.mog_garden.onZoneIn = function(player, prevZone)

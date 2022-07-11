@@ -4,7 +4,7 @@
 local ID = require("scripts/zones/Talacca_Cove/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/titles")
 -----------------------------------
 local zone_object = {}

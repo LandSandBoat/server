@@ -18,17 +18,17 @@ CREATE TABLE `unity_system` (
 -- Dumping data for table xidbw.unity_system: ~12 rows (approximately)
 /*!40000 ALTER TABLE `unity_system` DISABLE KEYS */;
 INSERT INTO `unity_system` (`leader`, `members_current`, `points_current`, `members_prev`, `points_prev`) VALUES
-	(1, 0, 0, 0, 0),
-	(2, 0, 0, 0, 0),
-	(3, 0, 0, 0, 0),
-	(4, 0, 0, 0, 0),
-	(5, 0, 0, 0, 0),
-	(6, 0, 0, 0, 0),
-	(7, 0, 0, 0, 0),
-	(8, 0, 0, 0, 0),
-	(9, 0, 0, 0, 0),
-	(10, 0, 0, 0, 0),
-	(11, 0, 0, 0, 0);
+    (1, 0, 0, 0, 0),
+    (2, 0, 0, 0, 0),
+    (3, 0, 0, 0, 0),
+    (4, 0, 0, 0, 0),
+    (5, 0, 0, 0, 0),
+    (6, 0, 0, 0, 0),
+    (7, 0, 0, 0, 0),
+    (8, 0, 0, 0, 0),
+    (9, 0, 0, 0, 0),
+    (10, 0, 0, 0, 0),
+    (11, 0, 0, 0, 0);
 /*!40000 ALTER TABLE `unity_system` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

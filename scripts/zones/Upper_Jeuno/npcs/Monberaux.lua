@@ -6,7 +6,7 @@
 -- !pos -43 0 -1 244
 -----------------------------------
 local ID = require("scripts/zones/Upper_Jeuno/IDs")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/titles")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
@@ -103,8 +103,8 @@ entity.onEventFinish = function(player, csid, option)
     then
         player:addTitle(xi.title.TWOS_COMPANY)
         player:setCharVar("theLostCardianVar", 0)
-        player:addGil(xi.settings.GIL_RATE*2100)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*2100)
+        player:addGil(xi.settings.main.GIL_RATE*2100)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*2100)
         player:addKeyItem(xi.ki.TWO_OF_SWORDS)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TWO_OF_SWORDS) -- Two of Swords (Key Item)
         player:addFame(xi.quest.fame_area.JEUNO, 30)

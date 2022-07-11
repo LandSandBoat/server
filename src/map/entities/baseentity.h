@@ -194,6 +194,12 @@ enum NAMEVIS : uint8
     VIS_GHOST_PHASE = 0x80,
 };
 
+enum class SPAWN_ANIMATION : uint8
+{
+    NORMAL  = 0,
+    SPECIAL = 1,
+};
+
 // TODO:it is possible to make this structure part of the class, instead of the current ID and Targid, but without the Clean method
 
 struct EntityID_t
@@ -282,14 +288,14 @@ public:
 
     bool IsDynamicEntity() const;
 
-    uint32          id;         // global identifier unique on the server
-    uint16          targid;     // local identifier unique to the zone
-    ENTITYTYPE      objtype;    // Type of entity
-    STATUS_TYPE     status;     // Entity status (different entities - different statuses)
-    uint16          m_TargID;   // the targid of the object the entity is looking at
-    string_t        name;       // Entity name
-    string_t        packetName; // Used to override name when being sent to the client
-    look_t          look; //
+    uint32          id;           // global identifier unique on the server
+    uint16          targid;       // local identifier unique to the zone
+    ENTITYTYPE      objtype;      // Type of entity
+    STATUS_TYPE     status;       // Entity status (different entities - different statuses)
+    uint16          m_TargID;     // the targid of the object the entity is looking at
+    string_t        name;         // Entity name
+    string_t        packetName;   // Used to override name when being sent to the client
+    look_t          look;         //
     look_t          mainlook;     // only used if mob use changeSkin() or player /lockstyle
     location_t      loc;          // Location of entity
     uint8           animation;    // animation
@@ -301,6 +307,8 @@ public:
     uint8           updatemask; // what to update next server tick to players nearby
 
     bool isRenamed; // tracks if the entity's name has been overidden. Defaults to false.
+
+    SPAWN_ANIMATION spawnAnimation;
 
     std::unique_ptr<CAIContainer> PAI;          // AI container
     CBattlefield*                 PBattlefield; // pointer to battlefield (if in one)

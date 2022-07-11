@@ -47,7 +47,7 @@ struct LotInfo
 
     LotInfo()
     {
-        lot = 0;
+        lot    = 0;
         member = nullptr;
     }
 };
@@ -62,7 +62,7 @@ struct TreasurePoolItem
 
     TreasurePoolItem()
     {
-        ID = 0;
+        ID     = 0;
         SlotID = 0;
     }
 };

@@ -22,14 +22,14 @@ local minionGroup =
 
 local spellLists =
 {
-    [459] = 488, -- Fire List
-    [460] = 489, -- Ice List
-    [461] = 490, -- Wind List
-    [462] = 491, -- Earth List
-    [463] = 492, -- Ltng List
-    [464] = 493, -- Water List
-    [465] = 487, -- Light List
-    [466] = 494, -- Dark List
+    [459] = 494, -- Fire List
+    [460] = 495, -- Ice List
+    [461] = 496, -- Wind List
+    [462] = 497, -- Earth List
+    [463] = 498, -- Ltng List
+    [464] = 499, -- Water List
+    [465] = 493, -- Light List
+    [466] = 500, -- Dark List
 }
 
 local astralFlowPets = function()
@@ -168,7 +168,7 @@ entity.onMobFight = function(mob, target)
     -- spawn minions in 2.5 minute intervals
     if
         os.time() > mob:getLocalVar("pop_pets") and
-        utils.canUseAbility(mob) == true
+        mob:canUseAbilities() == true
     then
         mob:setLocalVar("pop_pets", os.time() + 150)
 

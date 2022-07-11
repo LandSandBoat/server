@@ -6,7 +6,7 @@ extern std::function<void(map_session_data_t* const, CCharEntity* const, CBasicP
 
 class RenamerModule : public CPPModule
 {
-    static void SendListPacket(CCharEntity* PChar, std::string const& data)
+    void SendListPacket(CCharEntity* PChar, std::string const& data)
     {
         if (data.empty())
         {
@@ -22,45 +22,6 @@ class RenamerModule : public CPPModule
             customPacket->ref<uint8>(0x04 + i) = data[i];
         }
         PChar->pushPacket(customPacket);
-    }
-
-    static void Handle0x01Packet(map_session_data_t* const, CCharEntity* const PChar, CBasicPacket)
-    {
-        ShowInfo(fmt::format("{} requested renamer list for {}", PChar->GetName(), PChar->loc.zone->GetName()));
-
-        auto zoneId = PChar->getZone();
-        auto renamerTable = luautils::lua["xi"]["renamerTable"].get<sol::table>();
-
-        auto zoneTable = renamerTable[zoneId].get_or<sol::table>(sol::lua_nil);
-        if (zoneTable == sol::lua_nil)
-        {
-            return;
-        }
-
-        std::string dataString;
-        for (auto [key, value] : zoneTable)
-        {
-            auto entryTable = value.as<sol::table>();
-
-            // convert entityId to targid
-            auto entityCodedName   = entryTable[1].get<std::string>();
-            auto entityDisplayName = entryTable[2].get<std::string>();
-            auto packedString = fmt::format("{},{}.", entityCodedName, entityDisplayName);
-
-            // If the dataString gets too large, send a packet with what we've
-            // already prepared so we don't exceed the target size of 0x100.
-            if (0x04 + dataString.size() + packedString.size() > 0x100)
-            {
-                SendListPacket(PChar, dataString);
-                dataString.clear();
-            }
-            else
-            {
-                dataString += packedString;
-            }
-        }
-
-        SendListPacket(PChar, dataString);
     }
 
     void OnInit() override
@@ -88,7 +49,44 @@ class RenamerModule : public CPPModule
         lua[sol::create_if_nil]["xi"]["renamerTable"] = result;
 
         // Add a custom packet handler to the PacketParser array for id 0x01
-        PacketParser[0x01] = Handle0x01Packet;
+        PacketParser[0x01] = [&](map_session_data_t* const, CCharEntity* const PChar, CBasicPacket)
+        {
+            ShowInfo(fmt::format("{} requested renamer list for {}", PChar->GetName(), PChar->loc.zone->GetName()));
+
+            auto zoneId = PChar->getZone();
+            auto renamerTable = lua["xi"]["renamerTable"].get<sol::table>();
+
+            auto zoneTable = renamerTable[zoneId].get_or<sol::table>(sol::lua_nil);
+            if (zoneTable == sol::lua_nil)
+            {
+                return;
+            }
+
+            std::string dataString;
+            for (auto [key, value] : zoneTable)
+            {
+                auto entryTable = value.as<sol::table>();
+
+                // convert entityId to targid
+                auto entityCodedName   = entryTable[1].get<std::string>();
+                auto entityDisplayName = entryTable[2].get<std::string>();
+                auto packedString = fmt::format("{},{}.", entityCodedName, entityDisplayName);
+
+                // If the dataString gets too large, send a packet with what we've
+                // already prepared so we don't exceed the target size of 0x100.
+                if (0x04 + dataString.size() + packedString.size() > 0x100)
+                {
+                    SendListPacket(PChar, dataString);
+                    dataString.clear();
+                }
+                else
+                {
+                    dataString += packedString;
+                }
+            }
+
+            SendListPacket(PChar, dataString);
+        };
     }
 };
 

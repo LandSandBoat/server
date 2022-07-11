@@ -5,7 +5,7 @@
 -- !pos -59 -4 22 238
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Waters/IDs")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
@@ -22,7 +22,6 @@ end
 entity.onTrigger = function(player, npc)
 
             --        player:delQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
-
 
     local wonderingstatus = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDERING_MINSTREL)
     local fame = player:getFameLevel(xi.quest.fame_area.WINDURST)

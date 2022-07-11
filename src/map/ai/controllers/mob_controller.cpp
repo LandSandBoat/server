@@ -145,7 +145,7 @@ bool CMobController::CheckDetection(CBattleEntity* PTarget)
 {
     TracyZoneScoped;
     if (CanDetectTarget(PTarget) || CanPursueTarget(PTarget) ||
-        PMob->StatusEffectContainer->HasStatusEffect({ EFFECT_BIND, EFFECT_SLEEP, EFFECT_SLEEP_II, EFFECT_LULLABY }))
+        PMob->StatusEffectContainer->HasStatusEffect({ EFFECT_BIND, EFFECT_SLEEP, EFFECT_SLEEP_II, EFFECT_LULLABY, EFFECT_PETRIFICATION }))
     {
         TapDeaggroTime();
     }
@@ -308,7 +308,7 @@ bool CMobController::MobSkill(int wsList)
 
     if (auto overrideSkill = luautils::OnMobWeaponSkillPrepare(PMob, PTarget); overrideSkill > 0)
     {
-        skillList = {overrideSkill};
+        skillList = { overrideSkill };
     }
 
     if (skillList.empty())
@@ -677,6 +677,8 @@ void CMobController::Move()
                 PMob->PAI->PathFind->FollowPath();
                 if (!PMob->PAI->PathFind->IsFollowingPath())
                 {
+                    bool needToMove = false;
+
                     // arrived at target - move if there is another mob under me
                     if (PTarget->objtype == TYPE_PC)
                     {
@@ -685,16 +687,34 @@ void CMobController::Move()
                             if (PSpawnedMob.second != PMob && !PSpawnedMob.second->PAI->PathFind->IsFollowingPath() &&
                                 distance(PSpawnedMob.second->loc.p, PMob->loc.p) < 1.f)
                             {
-                                auto       angle = worldAngle(PMob->loc.p, PTarget->loc.p) + 64;
-                                position_t new_pos{ PMob->loc.p.x - (cosf(rotationToRadian(angle)) * 1.5f), PTarget->loc.p.y,
-                                                    PMob->loc.p.z + (sinf(rotationToRadian(angle)) * 1.5f), 0, 0 };
+                                auto angle = worldAngle(PMob->loc.p, PTarget->loc.p) + 64;
+
+                                // clang-format off
+                                position_t new_pos
+                                {
+                                    PMob->loc.p.x - (cosf(rotationToRadian(angle)) * 1.5f),
+                                    PTarget->loc.p.y,
+                                    PMob->loc.p.z + (sinf(rotationToRadian(angle)) * 1.5f),
+                                    0,
+                                    0
+                                };
+                                // clang-format on
+
                                 if (PMob->PAI->PathFind->ValidPosition(new_pos))
                                 {
                                     PMob->PAI->PathFind->PathTo(new_pos, PATHFLAG_WALLHACK | PATHFLAG_RUN);
+                                    needToMove = true;
                                 }
                                 break;
                             }
                         }
+                    }
+
+                    // Fix corner case where mob is attacking target at essentially exactly the distance that canMoveForward returns true at.
+                    // where the mob doesn't rotate to face their target.
+                    if (!needToMove)
+                    {
+                        FaceTarget();
                     }
                 }
             }
@@ -819,7 +839,7 @@ void CMobController::DoRoamTick(time_point tick)
                     // move back every 5 seconds
                     m_LastActionTime = m_Tick - (std::chrono::milliseconds(PMob->getBigMobMod(MOBMOD_ROAM_COOL)) + 10s);
                 }
-                else if (!(PMob->getMobMod(MOBMOD_NO_DESPAWN) != 0) && !map_config.mob_no_despawn)
+                else if (!(PMob->getMobMod(MOBMOD_NO_DESPAWN) != 0) && !settings::get<bool>("map.MOB_NO_DESPAWN"))
                 {
                     PMob->PAI->Despawn();
                     return;

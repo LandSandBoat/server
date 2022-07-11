@@ -2,7 +2,7 @@
 -- Chaotic Strike
 -- Ramuh delivers a three-hit attack that also stuns target.
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
@@ -13,8 +13,6 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-
-
     local numhits = 3
     local accmod = 1
     local dmgmod = 1.1

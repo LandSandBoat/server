@@ -8,7 +8,7 @@
 -- Notes:
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
@@ -21,7 +21,6 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.PETRIFICATION
     if (target:getMainLvl()%5 == 0) then
-
 
         local power = math.random(2, 30)
 

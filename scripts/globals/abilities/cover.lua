@@ -31,5 +31,4 @@ ability_object.onUseAbility = function(player, target, ability)
     ability:setMsg(xi.msg.basic.COVER_SUCCESS)
 end
 
-
 return ability_object

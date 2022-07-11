@@ -48,14 +48,14 @@ enum class Mod
 
     // Magic Evasion versus elements (resistance)
     // This has been repeatedly mixed up with SDT - be careful!
-    FIRE_RES    = 15, // Fire Resistance
-    ICE_RES     = 16, // Ice Resistance
-    WIND_RES    = 17, // Wind Resistance
-    EARTH_RES   = 18, // Earth Resistance
-    THUNDER_RES = 19, // Thunder Resistance
-    WATER_RES   = 20, // Water Resistance
-    LIGHT_RES   = 21, // Light Resistance
-    DARK_RES    = 22, // Dark Resistance
+    FIRE_MEVA    = 15, // Fire Resistance
+    ICE_MEVA     = 16, // Ice Resistance
+    WIND_MEVA    = 17, // Wind Resistance
+    EARTH_MEVA   = 18, // Earth Resistance
+    THUNDER_MEVA = 19, // Thunder Resistance
+    WATER_MEVA   = 20, // Water Resistance
+    LIGHT_MEVA   = 21, // Light Resistance
+    DARK_MEVA    = 22, // Dark Resistance
 
     ATT  = 23, // Attack
     RATT = 24, // Ranged Attack
@@ -153,18 +153,18 @@ enum class Mod
     PARRY             = 110, // Parry Skill
 
     // Magic Skills
-    DIVINE    = 111,  // Divine Magic Skill
-    HEALING   = 112,  // Healing Magic Skill
-    ENHANCE   = 113,  // Enhancing Magic Skill
-    ENFEEBLE  = 114,  // Enfeebling Magic Skill
-    ELEM      = 115,  // Elemental Magic Skill
-    DARK      = 116,  // Dark Magic Skill
-    SUMMONING = 117,  // Summoning Magic Skill
-    NINJUTSU  = 118,  // Ninjutsu Magic Skill
-    SINGING   = 119,  // Singing Magic Skill
-    STRING    = 120,  // String Magic Skill
-    WIND      = 121,  // Wind Magic Skill
-    BLUE      = 122,  // Blue Magic Skill
+    DIVINE    = 111, // Divine Magic Skill
+    HEALING   = 112, // Healing Magic Skill
+    ENHANCE   = 113, // Enhancing Magic Skill
+    ENFEEBLE  = 114, // Enfeebling Magic Skill
+    ELEM      = 115, // Elemental Magic Skill
+    DARK      = 116, // Dark Magic Skill
+    SUMMONING = 117, // Summoning Magic Skill
+    NINJUTSU  = 118, // Ninjutsu Magic Skill
+    SINGING   = 119, // Singing Magic Skill
+    STRING    = 120, // String Magic Skill
+    WIND      = 121, // Wind Magic Skill
+    BLUE      = 122, // Blue Magic Skill
     GEOMANCY  = 123, // Geomancy Magic Skill
     HANDBELL  = 124, // Handbell Magic SKill
 
@@ -308,17 +308,18 @@ enum class Mod
     DUAL_WIELD    = 259, // Percent reduction in dual wield delay.
 
     // Warrior
-    DOUBLE_ATTACK      = 288, // Percent chance to proc
-    WARCRY_DURATION    = 483, // Warcy duration bonus from gear
-    BERSERK_EFFECT     = 948, // Conqueror Berserk Effect
-    BERSERK_DURATION   = 954, // Berserk Duration
-    AGGRESSOR_DURATION = 955, // Aggressor Duration
-    DEFENDER_DURATION  = 956, // Defender Duration
+    DOUBLE_ATTACK      = 288,  // Percent chance to proc
+    DOUBLE_ATTACK_DMG  = 1038, // Increases "Double Attack" damage/"Double Attack" damage + (in percents, e.g. +20 = +20% damage)
+    WARCRY_DURATION    = 483,  // Warcy duration bonus from gear
+    BERSERK_EFFECT     = 948,  // Conqueror Berserk Effect
+    BERSERK_DURATION   = 954,  // Berserk Duration
+    AGGRESSOR_DURATION = 955,  // Aggressor Duration
+    DEFENDER_DURATION  = 956,  // Defender Duration
 
     // Monk
     BOOST_EFFECT        = 97,   // Boost power in tenths
-    CHAKRA_MULT         = 1026,  // Chakra multiplier increase (from gear)
-    CHAKRA_REMOVAL      = 1027,  // Extra statuses removed by Chakra
+    CHAKRA_MULT         = 1026, // Chakra multiplier increase (from gear)
+    CHAKRA_REMOVAL      = 1027, // Extra statuses removed by Chakra
     SUBTLE_BLOW         = 289,  // How much TP to reduce.
     COUNTER             = 291,  // Percent chance to counter
     KICK_ATTACK_RATE    = 292,  // Percent chance to kick
@@ -351,18 +352,19 @@ enum class Mod
     ENHANCES_SABOTEUR = 297, // Increases Saboteur Potency %
 
     // Thief
-    FLEE_DURATION     = 93,  // Flee duration in seconds
-    STEAL             = 298, // Increase/Decrease THF Steal chance
-    DESPOIL           = 896, // Increases THF Despoil chance
-    PERFECT_DODGE     = 883, // Increases Perfect Dodge duration in seconds
-    TRIPLE_ATTACK     = 302, // Percent chance
-    TREASURE_HUNTER   = 303, // Percent chance
-    SNEAK_ATK_DEX     = 830, // % DEX boost to Sneak Attack (if gear mod, needs to be equipped on hit)
-    TRICK_ATK_AGI     = 520, // % AGI boost to Trick Attack (if gear mod, needs to be equipped on hit)
-    MUG_EFFECT        = 835, // Mug effect as multiplier
-    ACC_COLLAB_EFFECT = 884, // Increases amount of enmity transferred for Accomplice/Collaborator
-    HIDE_DURATION     = 885, // Hide duration increase (percentage based)
-    GILFINDER         = 897, // Gilfinder, duh
+    FLEE_DURATION     = 93,   // Flee duration in seconds
+    STEAL             = 298,  // Increase/Decrease THF Steal chance
+    DESPOIL           = 896,  // Increases THF Despoil chance
+    PERFECT_DODGE     = 883,  // Increases Perfect Dodge duration in seconds
+    TRIPLE_ATTACK     = 302,  // Percent chance
+    TRIPLE_ATTACK_DMG = 1039, // Increases "Triple Attack" damage/"Triple Attack" damage + (in percents, e.g. +20 = +20% damage)
+    TREASURE_HUNTER   = 303,  // Percent chance
+    SNEAK_ATK_DEX     = 830,  // % DEX boost to Sneak Attack (if gear mod, needs to be equipped on hit)
+    TRICK_ATK_AGI     = 520,  // % AGI boost to Trick Attack (if gear mod, needs to be equipped on hit)
+    MUG_EFFECT        = 835,  // Mug effect as multiplier
+    ACC_COLLAB_EFFECT = 884,  // Increases amount of enmity transferred for Accomplice/Collaborator
+    HIDE_DURATION     = 885,  // Hide duration increase (percentage based)
+    GILFINDER         = 897,  // Gilfinder, duh
 
     // Paladin
     HOLY_CIRCLE_DURATION   = 857, // Holy Circle extended duration in seconds
@@ -680,8 +682,8 @@ enum class Mod
     WYVERN_BREATH = 402, //
 
     // Gear set modifiers
-    DA_DOUBLE_DAMAGE         = 408, // Double attack's double damage chance %.
-    TA_TRIPLE_DAMAGE         = 409, // Triple attack's triple damage chance %.
+    DA_DOUBLE_DMG_RATE       = 408, // Double attack's double damage chance %.
+    TA_TRIPLE_DMG_RATE       = 409, // Triple attack's triple damage chance %.
     ZANSHIN_DOUBLE_DAMAGE    = 410, // Zanshin's double damage chance %.
     RAPID_SHOT_DOUBLE_DAMAGE = 479, // Rapid shot's double damage chance %.
     ABSORB_DMG_CHANCE        = 480, // Chance to absorb damage %
@@ -897,7 +899,7 @@ enum class Mod
     // 888
     // 936
     //
-    // SPARE = 1038, and onward
+    // SPARE = 1040, and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

@@ -20,13 +20,15 @@
 */
 
 #include "common/kernel.h"
+
+#include "common/debug.h"
+#include "common/logging.h"
+#include "common/lua.h"
+#include "common/settings.h"
 #include "common/socket.h"
 #include "common/taskmgr.h"
 #include "common/timer.h"
 #include "common/version.h"
-
-#include "debug.h"
-#include "logging.h"
 
 #include <csignal>
 #include <cstdio>
@@ -48,8 +50,8 @@
 
 std::atomic<bool> gRunFlag = true;
 
-int    arg_c   = 0;
-char** arg_v   = nullptr;
+int    arg_c = 0;
+char** arg_v = nullptr;
 
 char* SERVER_NAME = nullptr;
 char  SERVER_TYPE = XI_SERVER_NONE;
@@ -101,7 +103,7 @@ static void dump_backtrace()
 {
     // gdb
 #if defined(__linux__)
-    int fd[2] = {};
+    int fd[2]  = {};
     int status = pipe(fd);
     if (status == -1)
     {
@@ -144,8 +146,8 @@ static void dump_backtrace()
             ShowError("read failed for gdb backtrace: %s", strerror(errno));
             _exit(EXIT_FAILURE);
         }
-        ShowFatalError("--- gdb backtrace ---");
-        ShowFatalError("%s", buf);
+        ShowCritical("--- gdb backtrace ---");
+        ShowCritical("%s", buf);
     }
 #endif
 }
@@ -264,6 +266,10 @@ int main(int argc, char** argv)
     usercheck();
     signals_init();
     timer_init();
+
+    lua_init();
+    settings::init();
+
     socket_init();
 
     do_init(argc, argv);

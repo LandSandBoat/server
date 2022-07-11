@@ -5,7 +5,7 @@
 -- TP Required: 35%
 -- Recast Time: 00:08
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
@@ -53,8 +53,6 @@ ability_object.onUseAbility = function(player, target, ability)
     local sjob = player:getSubJob()
     local cure = 0
 
-
-
     --Performing sj mj check.
     if mjob == xi.job.DNC then
         cure = (vit+chr)*0.5+130
@@ -70,7 +68,7 @@ ability_object.onUseAbility = function(player, target, ability)
     --Reducing TP.
 
     --Applying server mods
-    cure = cure * xi.settings.CURE_POWER
+    cure = cure * xi.settings.main.CURE_POWER
 
     --Cap the final amount to max HP.
     if ((target:getMaxHP() - target:getHP()) < cure) then

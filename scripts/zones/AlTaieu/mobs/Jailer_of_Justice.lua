@@ -33,7 +33,6 @@ entity.onMobSpawn = function(mob)
     mob:SetMobAbilityEnabled(true)
 end
 
-
 entity.onMobFight = function(mob, target)
     if mob:getHPP() < mob:getLocalVar("familiarTrigger") and mob:getLocalVar("familiar") == 0 then
         mob:setLocalVar("twohour_tp", mob:getTP())
@@ -52,7 +51,7 @@ entity.onMobFight = function(mob, target)
             else
                 if
                     not GetMobByID(xzomit):isSpawned() and
-                    utils.canUseAbility(mob) == true
+                    mob:canUseAbilities() == true
                 then
                     spawnXzomit(mob, xzomit)
                     mob:setLocalVar("lastPetPop", os.time())

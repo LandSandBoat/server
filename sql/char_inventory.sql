@@ -14,7 +14,3 @@ CREATE TABLE `char_inventory` (
   `extra` blob(24) DEFAULT NULL,
   PRIMARY KEY (`charid`,`location`,`slot`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=28;
-
--- ----------------------------
--- Records of char_inventory
--- ----------------------------

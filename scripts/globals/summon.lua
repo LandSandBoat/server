@@ -1,13 +1,11 @@
+-----------------------------------
+-- Avatar Global Functions
+-----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
-
-function getSummoningSkillOverCap(avatar)
-    local summoner = avatar:getMaster()
-    local summoningSkill = summoner:getSkillLevel(xi.skill.SUMMONING_MAGIC)
-    local maxSkill = summoner:getMaxSkillLevel(avatar:getMainLvl(), xi.job.SMN, xi.skill.SUMMONING_MAGIC)
-
-    return math.max(summoningSkill - maxSkill, 0)
-end
+-----------------------------------
+xi = xi or {}
+xi.summon = xi.summon or {}
 
 local function getDexCritRate(source, target)
     -- https://www.bg-wiki.com/bg/Critical_Hit_Rate
@@ -126,13 +124,20 @@ local function avatarHitDmg(weaponDmg, fSTR, pDif)
     return (weaponDmg + fSTR) * pDif
 end
 
-function AvatarPhysicalMove(avatar, target, skill, numberofhits, accmod, dmgmod, dmgmodsubsequent, tpeffect, mtp100,
-    mtp200, mtp300)
+xi.summon.getSummoningSkillOverCap = function(avatar)
+    local summoner = avatar:getMaster()
+    local summoningSkill = summoner:getSkillLevel(xi.skill.SUMMONING_MAGIC)
+    local maxSkill = summoner:getMaxSkillLevel(avatar:getMainLvl(), xi.job.SMN, xi.skill.SUMMONING_MAGIC)
+
+    return math.max(summoningSkill - maxSkill, 0)
+end
+
+xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, accmod, dmgmod, dmgmodsubsequent, tpeffect, mtp100, mtp200, mtp300)
     local returninfo = {}
 
     -- I have never read a limit on accuracy bonus from summoning skill which can currently go far past 200 over cap
     -- current retail is over +250 skill so I am removing the cap, my SMN is at 695 total skill
-    local acc = avatar:getACC() + getSummoningSkillOverCap(avatar)
+    local acc = avatar:getACC() + xi.summon.getSummoningSkillOverCap(avatar)
     local eva = target:getEVA()
 
     -- Level correction does not happen in Adoulin zones, Legion, or zones in Escha/Reisenjima
@@ -299,10 +304,12 @@ local attackTypeShields =
     [xi.attackType.MAGICAL ] = xi.effect.MAGIC_SHIELD,
 }
 
-function AvatarFinalAdjustments(dmg, mob, skill, target, skilltype, damagetype, shadowbehav)
-
-    -- physical attack missed, skip rest
-    if skilltype == xi.attackType.PHYSICAL and dmg == 0 then
+xi.summon.avatarFinalAdjustments = function(dmg, mob, skill, target, skilltype, damagetype, shadowbehav)
+    -- Physical Attack Missed
+    if
+        skilltype == xi.attackType.PHYSICAL and
+        dmg == 0
+    then
         return 0
     end
 
@@ -311,49 +318,7 @@ function AvatarFinalAdjustments(dmg, mob, skill, target, skilltype, damagetype, 
     skill:setMsg(xi.msg.basic.DAMAGE)
 
     -- Handle shadows depending on shadow behaviour / skilltype
-    if shadowbehav < 5 and shadowbehav ~= xi.mobskills.shadowBehavior.IGNORE_SHADOWS then -- remove 'shadowbehav' shadows.
-        local targShadows = target:getMod(xi.mod.UTSUSEMI)
-        local shadowType = xi.mod.UTSUSEMI
-        if targShadows == 0 then -- try blink, as utsusemi always overwrites blink this is okay
-            targShadows = target:getMod(xi.mod.BLINK)
-            shadowType = xi.mod.BLINK
-        end
-
-        if targShadows > 0 then
-            -- Blink has a VERY high chance of blocking tp moves, so im assuming its 100% because its easier!
-            if targShadows >= shadowbehav then -- no damage, just suck the shadows
-                skill:setMsg(xi.msg.basic.SHADOW_ABSORB)
-                target:setMod(shadowType, targShadows - shadowbehav)
-                if shadowType == xi.mod.UTSUSEMI then -- update icon
-                    local effect = target:getStatusEffect(xi.effect.COPY_IMAGE)
-                    if effect ~= nil then
-                        if targShadows - shadowbehav == 0 then
-                            target:delStatusEffect(xi.effect.COPY_IMAGE)
-                            target:delStatusEffect(xi.effect.BLINK)
-                        elseif targShadows - shadowbehav == 1 then
-                            effect:setIcon(xi.effect.COPY_IMAGE)
-                        elseif targShadows - shadowbehav == 2 then
-                            effect:setIcon(xi.effect.COPY_IMAGE_2)
-                        elseif targShadows - shadowbehav == 3 then
-                            effect:setIcon(xi.effect.COPY_IMAGE_3)
-                        end
-                    end
-                end
-                return shadowbehav
-            else -- less shadows than this move will take, remove all and factor damage down
-                dmg = dmg * (shadowbehav - targShadows) / shadowbehav
-                target:setMod(xi.mod.UTSUSEMI, 0)
-                target:setMod(xi.mod.BLINK, 0)
-                target:delStatusEffect(xi.effect.COPY_IMAGE)
-                target:delStatusEffect(xi.effect.BLINK)
-            end
-        end
-    elseif shadowbehav == xi.mobskills.shadowBehavior.WIPE_SHADOWS then -- take em all!
-        target:setMod(xi.mod.UTSUSEMI, 0)
-        target:setMod(xi.mod.BLINK, 0)
-        target:delStatusEffect(xi.effect.COPY_IMAGE)
-        target:delStatusEffect(xi.effect.BLINK)
-    end
+    dmg = utils.takeShadows(target, dmg, shadowbehav)
 
     -- handle Third Eye using shadowbehav as a guide
     local teye = target:getStatusEffect(xi.effect.THIRD_EYE)
@@ -370,6 +335,7 @@ function AvatarFinalAdjustments(dmg, mob, skill, target, skilltype, damagetype, 
                 skill:setMsg(xi.msg.basic.ANTICIPATE)
                 return 0
             end
+
             if math.random() * 10 < 8 - prevAnt then
                 -- anticipated!
                 teye:setPower(prevAnt + 1)
@@ -392,8 +358,11 @@ function AvatarFinalAdjustments(dmg, mob, skill, target, skilltype, damagetype, 
         return 0
     end
     -- handle pd
-    if target:hasStatusEffect(xi.effect.PERFECT_DODGE) or target:hasStatusEffect(xi.effect.ALL_MISS) and skilltype ==
-        xi.attackType.PHYSICAL then
+    if
+        target:hasStatusEffect(xi.effect.PERFECT_DODGE) or
+        target:hasStatusEffect(xi.effect.ALL_MISS) and
+        skilltype == xi.attackType.PHYSICAL
+    then
         return 0
     end
 
@@ -428,13 +397,13 @@ end
 
 -- returns true if mob attack hit
 -- used to stop tp move status effects
-function AvatarPhysicalHit(skill, dmg)
+xi.summon.avatarPhysicalHit = function(skill, dmg)
     -- if message is not the default. Then there was a miss, shadow taken etc
     return skill:getMsg() == xi.msg.basic.DAMAGE
 end
 
 -- Checks if the summoner is in a Trial Size Avatar Mini Fight (used to restrict summoning while in bcnm)
-function avatarMiniFightCheck(caster)
+xi.summon.avatarMiniFightCheck = function(caster)
     local result = 0
     local bcnmid
     if caster:hasStatusEffect(xi.effect.BATTLEFIELD) then

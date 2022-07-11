@@ -143,8 +143,11 @@ bool CPathFind::PathInRange(const position_t& point, float range, uint8 pathFlag
     {
         Clear();
     }
+
     m_distanceFromPoint = range;
+
     bool result = PathTo(point, pathFlags, false);
+
     PrunePathWithin(range);
     return result;
 }
@@ -254,6 +257,7 @@ void CPathFind::FollowPath()
     }
 
     m_onPoint = false;
+
     position_t& targetPoint = m_points[m_currentPoint];
 
     if (isNavMeshEnabled() && m_carefulPathing)
@@ -374,7 +378,7 @@ bool CPathFind::FindPath(const position_t& start, const position_t& end)
 
     if (m_points.empty())
     {
-        ShowNavError("CPathFind::FindPath Entity (%s - %d) could not find path", m_POwner->GetName(), m_POwner->id);
+        DebugNavmesh("CPathFind::FindPath Entity (%s - %d) could not find path", m_POwner->GetName(), m_POwner->id);
         return false;
     }
 
@@ -478,7 +482,7 @@ float CPathFind::GetRealSpeed()
         }
         else if (m_POwner->animation == ANIMATION_ATTACK)
         {
-            realSpeed = realSpeed + map_config.mob_speed_mod;
+            realSpeed = realSpeed + settings::get<int8>("map.MOB_SPEED_MOD");
         }
     }
 

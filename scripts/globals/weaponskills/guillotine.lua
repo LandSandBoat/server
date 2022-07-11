@@ -8,7 +8,7 @@
 -- 0.875    0.875    0.875
 -----------------------------------
 require("scripts/globals/status")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/weaponskills")
 -----------------------------------
 local weaponskill_object = {}
@@ -28,7 +28,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     -- attack multiplier (only some WSes use this, this varies the actual ratio value, see Tachi: Kasha) 1 is default.
     params.atk100 = 1; params.atk200 = 1; params.atk300 = 1
 
-    if (xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
+    if (xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
         params.str_wsc = 0.3 params.mnd_wsc = 0.5
     end
 
