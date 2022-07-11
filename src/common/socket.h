@@ -251,10 +251,10 @@ struct socket_data
     , func_send(_func_send)
     , func_parse(_func_parse)
     {
-        client_addr = 0;
-        flag.eof    = '\0';
-        flag.server = '\0';
-        rdata_pos = 0;
+        client_addr  = 0;
+        flag.eof     = '\0';
+        flag.server  = '\0';
+        rdata_pos    = 0;
         ver_mismatch = 0;
         session_data = nullptr;
     }
