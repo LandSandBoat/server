@@ -509,7 +509,15 @@ void SmallPacket0x00D(map_session_data_t* const PSession, CCharEntity* const PCh
 
         if (PChar->PPet != nullptr)
         {
-            PChar->setPetZoningInfo();
+            auto* PPetEntity = dynamic_cast<CPetEntity*>(PChar->PPet);
+            if (PPetEntity->getPetType() == PET_TYPE::WYVERN)
+            {
+                PChar->setPetZoningInfo();
+            }
+            else
+            {
+                PChar->resetPetZoningInfo();
+            }
         }
 
         PSession->shuttingDown = 1;
@@ -619,28 +627,33 @@ void SmallPacket0x015(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if (PChar->status != STATUS_TYPE::SHUTDOWN && PChar->status != STATUS_TYPE::DISAPPEAR)
     {
-        bool moved = ((PChar->loc.p.x != data.ref<float>(0x04)) || (PChar->loc.p.z != data.ref<float>(0x0C)) || (PChar->m_TargID != data.ref<uint16>(0x16)));
+        float  newX        = data.ref<float>(0x04);
+        float  newY        = data.ref<float>(0x08);
+        float  newZ        = data.ref<float>(0x0C);
+        uint16 newTargID   = data.ref<uint16>(0x16);
+        uint8  newRotation = data.ref<uint8>(0x14);
 
-        bool isUpdate = moved || PChar->updatemask & UPDATE_POS;
+        bool   moved       = (PChar->loc.p.x != newX || PChar->loc.p.y != newY || PChar->loc.p.z != newZ || PChar->m_TargID != newTargID
+                           || PChar->loc.p.rotation != newRotation);
 
         // Cache previous location
         PChar->m_previousLocation = PChar->loc;
 
         if (!PChar->isCharmed)
         {
-            PChar->loc.p.x = data.ref<float>(0x04);
-            PChar->loc.p.y = data.ref<float>(0x08);
-            PChar->loc.p.z = data.ref<float>(0x0C);
+            PChar->loc.p.x = newX;
+            PChar->loc.p.y = newY;
+            PChar->loc.p.z = newZ;
 
             PChar->loc.p.moving   = data.ref<uint16>(0x12);
-            PChar->loc.p.rotation = data.ref<uint8>(0x14);
+            PChar->loc.p.rotation = newRotation;
 
-            PChar->m_TargID = data.ref<uint16>(0x16);
+            PChar->m_TargID = newTargID;
         }
 
         if (moved)
         {
-            PChar->updatemask |= UPDATE_POS;
+            PChar->updatemask |= UPDATE_POS; // Indicate that we want to update this PChar's PChar->loc or targID
 
             // Calculate rough amount of steps taken
             if (PChar->m_previousLocation.zone->GetID() == PChar->loc.zone->GetID())
@@ -650,15 +663,12 @@ void SmallPacket0x015(map_session_data_t* const PSession, CCharEntity* const PCh
             }
         }
 
-        if (isUpdate)
-        {
-            PChar->requestedInfoSync = true;
-            PChar->loc.zone->SpawnNPCs(PChar);
-        }
-
+        // Request updates for all entity types
+        PChar->loc.zone->SpawnNPCs(PChar);   // Some NPCs can move, some rotate when other players talk to them, always request NPC updates.
         PChar->loc.zone->SpawnMOBs(PChar);
         PChar->loc.zone->SpawnPETs(PChar);
         PChar->loc.zone->SpawnTRUSTs(PChar);
+        PChar->requestedInfoSync = true;     // Ask to update PCs during CZoneEntities::ZoneServer
 
         if (PChar->PWideScanTarget != nullptr)
         {
@@ -3618,8 +3628,16 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
     // handle pets on zone
     if (PChar->PPet != nullptr)
     {
-        PChar->setPetZoningInfo();
-        petutils::DespawnPet(PChar);
+        auto* PPetEntity = dynamic_cast<CPetEntity*>(PChar->PPet);
+        if (PPetEntity->getPetType() == PET_TYPE::WYVERN)
+        {
+            PChar->setPetZoningInfo();
+            petutils::DespawnPet(PChar);
+        }
+        else
+        {
+            PChar->resetPetZoningInfo();
+        }
     }
 
     uint32 zoneLineID    = data.ref<uint32>(0x04);
