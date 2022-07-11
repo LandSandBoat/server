@@ -1,5 +1,5 @@
 -- --------------------------------------------------------
--- Wings Database Conversion File
+-- AirSkyBoat Database Conversion File
 -- --------------------------------------------------------
 -- Table Structure Definition
 --
