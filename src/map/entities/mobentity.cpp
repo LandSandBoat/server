@@ -909,12 +909,12 @@ int16 CMobEntity::ApplyTH(int16 m_THLvl, int16 rate)
         }
         else if (m_THLvl < 7)
         {
-            multi = 2.00f + (0.50f * (m_THLvl - 2));
+            multi = 3.00f + (0.50f * (m_THLvl - 2));
             return multi;
         }
         else if (m_THLvl < 12)
         {
-            multi = 4.00f + (1.00f * (m_THLvl - 6));
+            multi = 5.00f + (1.00f * (m_THLvl - 6));
             return multi;
         }
         else if (m_THLvl < 14)
@@ -924,7 +924,7 @@ int16 CMobEntity::ApplyTH(int16 m_THLvl, int16 rate)
         }
         else
         {
-            multi = 13.50f + (2.00f * (m_THLvl - 14));
+            multi = 12.00f + (2.00f * (m_THLvl - 14));
             return multi;
         }
     }
