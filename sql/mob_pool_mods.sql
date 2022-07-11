@@ -237,7 +237,7 @@ INSERT INTO `mob_pool_mods` VALUES (5106,1,250,0);
 INSERT INTO `mob_pool_mods` VALUES (5106,29,30,0);
 INSERT INTO `mob_pool_mods` VALUES (5106,366,10,0);
 -- Begin Trust MODs
-INSERT INTO `mob_pool_mods` VALUES (5896,167,1000);     -- Trust Shantotto HASTE_MAGIC +10%
+INSERT INTO `mob_pool_mods` VALUES (5896,167,1000,0);   -- Trust Shantotto HASTE_MAGIC +10%
 INSERT INTO `mob_pool_mods` VALUES (5899,73,25,0);      -- Trust Excenmille STORETP 25
 INSERT INTO `mob_pool_mods` VALUES (5915,6,100,0);      -- Trust Shikaree Z MPP 100
 INSERT INTO `mob_pool_mods` VALUES (5915,73,174,0);     -- Trust Shikaree Z STORETP 174
