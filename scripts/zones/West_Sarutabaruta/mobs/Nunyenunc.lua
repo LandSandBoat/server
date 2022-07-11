@@ -7,7 +7,7 @@ require("scripts/globals/hunts")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMod(xi.mod.LIGHT_RES, 50)
+    mob:setMod(xi.mod.LIGHT_MEVA, 50)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
