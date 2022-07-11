@@ -48,7 +48,7 @@ spell_object.onMobSpawn = function(mob)
     mob:addSimpleGambit(ai.t.TARGET, ai.c.NOT_STATUS, xi.effect.SILENCE, ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.SILENCE, 60)
 
     -- BGwiki states 5/tick regen.
-    mob:addMod(xi.mod.REGEN, 5)
+    -- REGEN MOD migrated to mob_pool_mods
 
     mob:SetAutoAttackEnabled(false)
 end

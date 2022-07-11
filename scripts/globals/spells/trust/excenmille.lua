@@ -40,7 +40,7 @@ spell_object.onMobSpawn = function(mob)
     mob:addSimpleGambit(ai.t.PARTY, ai.c.HPP_LT, 75,
                         ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.CURE)
 
-    mob:addMod(xi.mod.STORETP, 25)
+    -- STORETP MOD migrated to mob_pool_mods
 end
 
 spell_object.onMobDespawn = function(mob)

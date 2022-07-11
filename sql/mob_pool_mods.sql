@@ -236,6 +236,24 @@ INSERT INTO `mob_pool_mods` VALUES (5106,288,25,0);
 INSERT INTO `mob_pool_mods` VALUES (5106,1,250,0);
 INSERT INTO `mob_pool_mods` VALUES (5106,29,30,0);
 INSERT INTO `mob_pool_mods` VALUES (5106,366,10,0);
+-- Begin Trust MODs
+INSERT INTO `mob_pool_mods` VALUES (5896,167,1000);     -- Trust Shantotto HASTE_MAGIC +10%
+INSERT INTO `mob_pool_mods` VALUES (5899,73,25,0);      -- Trust Excenmille STORETP 25
+INSERT INTO `mob_pool_mods` VALUES (5915,6,100,0);      -- Trust Shikaree Z MPP 100
+INSERT INTO `mob_pool_mods` VALUES (5915,73,174,0);     -- Trust Shikaree Z STORETP 174
+INSERT INTO `mob_pool_mods` VALUES (5915,361,164,0);    -- Trust Shikaree Z JUMP_TP_BONUS 164
+INSERT INTO `mob_pool_mods` VALUES (5916,370,5,0);      -- Trust Cherukiki REGEN 5
+INSERT INTO `mob_pool_mods` VALUES (5922,6,150,0);      -- Trust Lehko MPP 150
+INSERT INTO `mob_pool_mods` VALUES (5922,30,10,0);      -- Trust Lehko MACC 10 (Enhanced Magic Accuracy Trait)
+INSERT INTO `mob_pool_mods` VALUES (5940,73,40,0);      -- Trust Semih Lafihna STORETP 40
+INSERT INTO `mob_pool_mods` VALUES (5955,368,75,0);     -- Trust Apururu UC REGAIN 75
+INSERT INTO `mob_pool_mods` VALUES (5967,30,20,0);      -- Trust Qultada MACC 10 (Enhanced Magic Accuracy Trait)
+INSERT INTO `mob_pool_mods` VALUES (5981,368,50,0);     -- Trust Sylvie UC REGAIN 50
+INSERT INTO `mob_pool_mods` VALUES (5981,960,180,0);    -- Trust Sylvie UC INDI_DURATION 180
+INSERT INTO `mob_pool_mods` VALUES (6019,3,-10,0);      -- Trust Shantotto II HPP -10%
+INSERT INTO `mob_pool_mods` VALUES (6019,25, 1000,0);   -- Trust Shantotto II ACC 1000 (Perfect hit rate hack, see script)
+INSERT INTO `mob_pool_mods` VALUES (6019,167,1000,0);   -- Trust Shantotto II HASTE_MAGIC +10%
+-- End Trust MODs
 INSERT INTO `mob_pool_mods` VALUES (7039,34,60,1);
 INSERT INTO `mob_pool_mods` VALUES (7039,4,15,1);
 INSERT INTO `mob_pool_mods` VALUES (7039,5,15,1);

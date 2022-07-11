@@ -49,7 +49,7 @@ spell_object.onMobSpawn = function(mob)
 
     mob:SetAutoAttackEnabled(false)
 
-    mob:addMod(xi.mod.STORETP, 40)
+    -- STORETP migrated to mob_pool_mods
 end
 
 spell_object.onMobDespawn = function(mob)
