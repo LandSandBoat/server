@@ -98,7 +98,7 @@ CCharEntity::CCharEntity()
     gotMessage = false;
     m_Locked   = false;
 
-    accid = 0;
+    accid        = 0;
     m_GMlevel    = 0;
     m_isGMHidden = false;
 
@@ -189,7 +189,7 @@ CCharEntity::CCharEntity()
     PMeritPoints = nullptr;
     PJobPoints   = nullptr;
 
-    PGuildShop   = nullptr;
+    PGuildShop = nullptr;
 
     m_isStyleLocked = false;
     m_isBlockingAid = false;
@@ -236,8 +236,8 @@ CCharEntity::CCharEntity()
     fishingToken = 0;
     hookDelay    = 13;
 
-    profile     = {};
-    search      = {};
+    profile = {};
+    search  = {};
     std::memset(&styleItems, 0, sizeof(styleItems));
 
     m_StartActionPos   = {};
@@ -963,8 +963,8 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
 
     PLatentEffectContainer->CheckLatentsTP();
 
-    SLOTTYPE damslot = SLOT_MAIN;
-    bool isRangedWS = (PWeaponSkill->getID() >= 192 && PWeaponSkill->getID() <= 218);
+    SLOTTYPE damslot    = SLOT_MAIN;
+    bool     isRangedWS = (PWeaponSkill->getID() >= 192 && PWeaponSkill->getID() <= 218);
 
     if (distance(loc.p, PBattleTarget->loc.p) - PBattleTarget->m_ModelRadius <= PWeaponSkill->getRange())
     {
@@ -1089,9 +1089,9 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
     }
     else
     {
-        actionList_t& actionList     = action.getNewActionList();
-        actionList.ActionTargetID    = PBattleTarget->id;
-        action.actiontype            = ACTION_MAGIC_FINISH; // all "Too Far" messages use cat 4
+        actionList_t& actionList  = action.getNewActionList();
+        actionList.ActionTargetID = PBattleTarget->id;
+        action.actiontype         = ACTION_MAGIC_FINISH; // all "Too Far" messages use cat 4
 
         actionTarget_t& actionTarget = actionList.getNewActionTarget();
         actionTarget.animation       = 0x1FC; // Seems hardcoded, two bits away from 0x1FF
@@ -1304,7 +1304,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             }
         }
         //#TODO: make this generic enough to not require an if
-        else if ( (PAbility->isAoE() || (PAbility->getID() == ABILITY_LIEMENT && getMod(Mod::LIEMENT_EXTENDS_TO_AREA) > 0)) && this->PParty != nullptr)
+        else if ((PAbility->isAoE() || (PAbility->getID() == ABILITY_LIEMENT && getMod(Mod::LIEMENT_EXTENDS_TO_AREA) > 0)) && this->PParty != nullptr)
         {
             PAI->TargetFind->reset();
 
@@ -1639,7 +1639,7 @@ bool CCharEntity::IsMobOwner(CBattleEntity* PBattleTarget)
 
     if (PBattleTarget == nullptr)
     {
-        ShowWarning("CCharEntity::IsMobOwner() - PBattleTarget was null.")
+        ShowWarning("CCharEntity::IsMobOwner() - PBattleTarget was null.");
         return false;
     }
 
@@ -1743,7 +1743,7 @@ void CCharEntity::OnRaise()
         {
             actionTarget.animation = 496;
             hpReturned             = (uint16)GetMaxHP();
-            ratioReturned          = ((GetMLevel() <= 50) ? 0.50f : 0.90f) * (1 -settings::get<uint8>("map.EXP_RETAIN"));
+            ratioReturned          = ((GetMLevel() <= 50) ? 0.50f : 0.90f) * (1 - settings::get<uint8>("map.EXP_RETAIN"));
         }
 
         addHP(((hpReturned < 1) ? 1 : hpReturned));
