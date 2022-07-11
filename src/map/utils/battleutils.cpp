@@ -674,7 +674,6 @@ namespace battleutils
 
     int32 CalculateSpikeDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action, uint16 damageTaken)
     {
-
         ELEMENT spikeElement = (ELEMENT)((uint8)GetSpikesDamageType(Action->spikesEffect) - (uint8)DAMAGE_TYPE::ELEMENTAL);
 
         int32 damage = Action->spikesParam;
@@ -819,7 +818,7 @@ namespace battleutils
                             }
                             if (spikesDamage > 0) // do not add HP if spikes damage was absorbed.
                             {
-                                Action->spikesMessage  = MSGBASIC_SPIKES_EFFECT_HP_DRAIN;
+                                Action->spikesMessage = MSGBASIC_SPIKES_EFFECT_HP_DRAIN;
                                 PDefender->addHP(spikesDamage);
                             }
                         }
@@ -4239,7 +4238,7 @@ namespace battleutils
     {
         if (!PSource || !PTarget)
         {
-            ShowWarning("battleutils::GenerateCureEnmity - PSource or PTarget was null.")
+            ShowWarning("battleutils::GenerateCureEnmity - PSource or PTarget was null.");
             return;
         }
 
@@ -6870,9 +6869,9 @@ namespace battleutils
 
                 uint8 runeAbsorbCount = 0;
 
-                for (int i = 0; i < numBits/4; i++) // unpacking is limited to the size of the return value of GetPower/GetSubPower. If this ever expands more Runes can be packed.
+                for (int i = 0; i < numBits / 4; i++) // unpacking is limited to the size of the return value of GetPower/GetSubPower. If this ever expands more Runes can be packed.
                 {
-                    DAMAGE_TYPE packedDamageType = (DAMAGE_TYPE) ( (absorbTypeBits >> i * 4) & 0xF ); //unpack damage type 4 bits at a time
+                    DAMAGE_TYPE packedDamageType = (DAMAGE_TYPE)((absorbTypeBits >> i * 4) & 0xF); // unpack damage type 4 bits at a time
 
                     if (packedDamageType == DamageType)
                     {

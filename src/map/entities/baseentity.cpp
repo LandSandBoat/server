@@ -39,7 +39,7 @@ CBaseEntity::CBaseEntity()
     targid   = 0;
     m_TargID = 0;
 
-    isRenamed = false;
+    isRenamed    = false;
     animation    = 0;
     animationsub = 0;
     speed        = 50 + settings::get<int8>("map.SPEED_MOD"); // It is downright dumb to init every entity at PLAYER speed, but until speed is reworked this hack stays.

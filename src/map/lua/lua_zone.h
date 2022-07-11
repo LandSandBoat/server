@@ -58,7 +58,7 @@ public:
     WEATHER     getWeather();
     void        reloadNavmesh();
     bool        isNavigablePoint(const sol::table& position);
-    auto insertDynamicEntity(sol::table table) -> std::optional<CLuaBaseEntity>;
+    auto        insertDynamicEntity(sol::table table) -> std::optional<CLuaBaseEntity>;
 
     auto getSoloBattleMusic();
     auto getPartyBattleMusic();

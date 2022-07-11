@@ -48,7 +48,7 @@ CPetEntity::CPetEntity(PET_TYPE petType)
     m_PetID        = 0;
     m_IsClaimable  = false;
 
-    PAI            = std::make_unique<CAIContainer>(this, std::make_unique<CPathFind>(this), std::make_unique<CPetController>(this), std::make_unique<CTargetFind>(this));
+    PAI = std::make_unique<CAIContainer>(this, std::make_unique<CPathFind>(this), std::make_unique<CPetController>(this), std::make_unique<CTargetFind>(this));
 }
 
 CPetEntity::~CPetEntity() = default;

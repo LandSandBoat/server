@@ -90,8 +90,8 @@ private:
     using ActionPQ_t = std::priority_queue<queueAction_t, std::vector<queueAction_t>, std::greater<queueAction_t>>;
 
     CBaseEntity* PEntity;
-    ActionPQ_t actionQueue;
-    ActionPQ_t timerQueue;
+    ActionPQ_t   actionQueue;
+    ActionPQ_t   timerQueue;
 };
 
 #endif
