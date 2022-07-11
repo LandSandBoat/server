@@ -2,7 +2,7 @@
 -- Area: Chocobo_Circuit
 -- NPC: Azainnie
 -- Grandstand Exit
--- pos -62.2576 -15.0000 -132.6927
+-- !pos -62.2576 -15.0000 -132.6927
 -----------------------------------
 local entity = {}
 
@@ -16,7 +16,11 @@ end
 entity.onEventUpdate = function(player, csid, option)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinsih = function(player, csid, option)
+    if csid == 328 and option == 1
+    then
+        player:setpos(-330.2306,-5.000,-413.3920) -- exits to illsoire
+    end
 end
 
 return entity
