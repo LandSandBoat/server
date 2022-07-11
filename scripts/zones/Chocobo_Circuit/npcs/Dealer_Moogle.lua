@@ -1,7 +1,7 @@
 -----------------------------------
--- Area: Port Bastok
+-- Area: Chocobo Circuit
 --  NPC: Dealer Moogle
--- !pos 153.359 8.499 -44.523 236
+-- !pos -307.558 0.000 -480.407 70
 -----------------------------------
 require("scripts/globals/dealer_moogle")
 -----------------------------------
