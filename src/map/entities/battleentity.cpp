@@ -88,6 +88,7 @@ CBattleEntity::CBattleEntity()
     m_unkillable = false;
 
     m_DeathType = DEATH_TYPE::NONE;
+
     BattleHistory.lastHitTaken_atkType = ATTACK_TYPE::NONE;
 }
 
@@ -1499,8 +1500,8 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
 
             if (damage < 0)
             {
-                msg = MSGBASIC_MAGIC_RECOVERS_HP;
-                actionTarget.param = static_cast<uint16>(std::clamp(damage * -1 , 0, PTarget->GetMaxHP() - PTarget->health.hp));
+                msg                = MSGBASIC_MAGIC_RECOVERS_HP;
+                actionTarget.param = static_cast<uint16>(std::clamp(damage * -1, 0, PTarget->GetMaxHP() - PTarget->health.hp));
             }
             else
             {
@@ -1790,7 +1791,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                 // Set this attack's critical flag.
                 attack.SetCritical(xirand::GetRandomNumber(100) < battleutils::GetCritHitRate(this, PTarget, !attack.IsFirstSwing()));
 
-                actionTarget.reaction   = REACTION::HIT;
+                actionTarget.reaction = REACTION::HIT;
 
                 // Critical hit.
                 if (attack.IsCritical())

@@ -45,6 +45,8 @@ zones[xi.zone.EAST_RONFAURE] =
         VOIDWALKER_UPGRADE_KI_2  = 11063, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
         VOIDWALKER_BREAK_KI      = 11064, -- The <keyitem> shatters into tiny fragments.
         VOIDWALKER_OBTAIN_KI     = 11065, -- Obtained key item: <keyitem>!
+        LEARNS_SPELL             = 11955, -- <name> learns <spell>!
+        UNCANNY_SENSATION        = 11957, -- You are assaulted by an uncanny sensation.
     },
 
     mob =

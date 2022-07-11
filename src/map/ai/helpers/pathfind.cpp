@@ -143,8 +143,11 @@ bool CPathFind::PathInRange(const position_t& point, float range, uint8 pathFlag
     {
         Clear();
     }
+
     m_distanceFromPoint = range;
+
     bool result = PathTo(point, pathFlags, false);
+
     PrunePathWithin(range);
     return result;
 }
@@ -254,6 +257,7 @@ void CPathFind::FollowPath()
     }
 
     m_onPoint = false;
+
     position_t& targetPoint = m_points[m_currentPoint];
 
     if (isNavMeshEnabled() && m_carefulPathing)

@@ -356,7 +356,7 @@ struct boundarydata_t
 
     boundarydata_t()
     {
-        count = 0;
+        count  = 0;
         bounds = nullptr;
     }
 };
@@ -376,13 +376,13 @@ struct fishingarea_t
 
     fishingarea_t()
     {
-        zoneId = 0;
-        areaId = 0;
-        areatype = 0;
+        zoneId     = 0;
+        areaId     = 0;
+        areatype   = 0;
         areaBounds = nullptr;
-        numBounds = 0;
-        height = 0;
-        radius = 0;
+        numBounds  = 0;
+        height     = 0;
+        radius     = 0;
         difficulty = 0;
     }
 };
@@ -414,7 +414,6 @@ struct weights_t
         MobPoolWeight   = 0;
         ChestPoolWeight = 0;
         NoCatchWeight   = 0;
-
     }
 };
 
@@ -490,7 +489,7 @@ struct big_fish_stats_t
     {
         length = 0;
         weight = 0;
-        epic = false;
+        epic   = false;
     }
 };
 
@@ -942,7 +941,7 @@ namespace fishingutils
     float               GetWeatherModifier(CCharEntity* PChar);
     uint16              CalculateStamina(int skill, uint8 count);
     uint16              CalculateAttack(bool legendary, uint8 difficulty, rod_t* rod);
-    uint16              CaculateHeal(bool legendary, uint8 difficulty, rod_t* rod);
+    uint16              CalculateHeal(bool legendary, uint8 difficulty, rod_t* rod);
     uint8               CalculateRegen(uint8 fishingSkill, rod_t* rod, FISHINGCATCHTYPE catchType,
                                        uint8 sizeType, uint8 catchSkill, bool legendaryCatch, bool NM);
     uint8               CalculateHookTime(CCharEntity* PChar, bool legendary,

@@ -183,7 +183,7 @@ std::function<void(map_session_data_t* const, CCharEntity* const, CBasicPacket)>
 void PrintPacket(CBasicPacket data)
 {
     std::string message;
-    char buffer[5];
+    char        buffer[5];
 
     for (size_t y = 0; y < data.getSize(); y++)
     {
@@ -625,8 +625,14 @@ void SmallPacket0x015(map_session_data_t* const PSession, CCharEntity* const PCh
         uint16 newTargID   = data.ref<uint16>(0x16);
         uint8  newRotation = data.ref<uint8>(0x14);
 
-        bool   moved       = (PChar->loc.p.x != newX || PChar->loc.p.y != newY || PChar->loc.p.z != newZ || PChar->m_TargID != newTargID
-                           || PChar->loc.p.rotation != newRotation);
+        // clang-format off
+        bool moved =
+            PChar->loc.p.x != newX ||
+            PChar->loc.p.y != newY ||
+            PChar->loc.p.z != newZ ||
+            PChar->m_TargID != newTargID ||
+            PChar->loc.p.rotation != newRotation;
+        // clang-format on
 
         // Cache previous location
         PChar->m_previousLocation = PChar->loc;
@@ -656,11 +662,11 @@ void SmallPacket0x015(map_session_data_t* const PSession, CCharEntity* const PCh
         }
 
         // Request updates for all entity types
-        PChar->loc.zone->SpawnNPCs(PChar);   // Some NPCs can move, some rotate when other players talk to them, always request NPC updates.
+        PChar->loc.zone->SpawnNPCs(PChar); // Some NPCs can move, some rotate when other players talk to them, always request NPC updates.
         PChar->loc.zone->SpawnMOBs(PChar);
         PChar->loc.zone->SpawnPETs(PChar);
         PChar->loc.zone->SpawnTRUSTs(PChar);
-        PChar->requestedInfoSync = true;     // Ask to update PCs during CZoneEntities::ZoneServer
+        PChar->requestedInfoSync = true; // Ask to update PCs during CZoneEntities::ZoneServer
 
         if (PChar->PWideScanTarget != nullptr)
         {
@@ -1662,7 +1668,7 @@ void SmallPacket0x034(map_session_data_t* const PSession, CCharEntity* const PCh
                     else
                     {
                         ShowInfo("%s->%s trade updating trade slot id %d with item %s, quantity %d", PChar->GetName(), PTarget->GetName(),
-                                   tradeSlotID, PItem->getName(), quantity);
+                                 tradeSlotID, PItem->getName(), quantity);
                         PItem->setReserve(quantity + PItem->getReserve());
                         PChar->UContainer->SetItem(tradeSlotID, PItem);
                     }
@@ -1670,7 +1676,7 @@ void SmallPacket0x034(map_session_data_t* const PSession, CCharEntity* const PCh
                 else
                 {
                     ShowInfo("%s->%s trade updating trade slot id %d with item %s, quantity %d", PChar->GetName(), PTarget->GetName(),
-                               tradeSlotID, PItem->getName(), quantity);
+                             tradeSlotID, PItem->getName(), quantity);
                     PItem->setReserve(quantity + PItem->getReserve());
                     PChar->UContainer->SetItem(tradeSlotID, PItem);
                 }
@@ -1678,7 +1684,7 @@ void SmallPacket0x034(map_session_data_t* const PSession, CCharEntity* const PCh
             else
             {
                 ShowInfo("%s->%s trade updating trade slot id %d with item %s, quantity 0", PChar->GetName(), PTarget->GetName(),
-                           tradeSlotID, PItem->getName());
+                         tradeSlotID, PItem->getName());
                 PItem->setReserve(0);
                 PChar->UContainer->SetItem(tradeSlotID, nullptr);
             }
@@ -3693,7 +3699,7 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
             {
                 PChar->m_moghouseID    = 0;
                 PChar->loc.destination = destinationZone;
-                PChar->loc.p = {};
+                PChar->loc.p           = {};
             }
             else
             {
@@ -4761,8 +4767,8 @@ void SmallPacket0x096(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x0AA(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    uint16     itemID     = data.ref<uint16>(0x04);
-    uint8      quantity   = data.ref<uint8>(0x07);
+    uint16 itemID   = data.ref<uint16>(0x04);
+    uint8  quantity = data.ref<uint8>(0x07);
 
     if (!PChar->PGuildShop)
     {

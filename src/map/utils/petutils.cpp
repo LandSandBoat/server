@@ -126,7 +126,7 @@ struct Pet_t
     Pet_t()
     : EcoSystem(ECOSYSTEM::ECO_ERROR)
     {
-        PetID     = 0;
+        PetID = 0;
 
         minLevel = -1;
         maxLevel = 99;
@@ -162,19 +162,19 @@ struct Pet_t
         hasSpellScript = false;
         spellList      = 0;
 
-        slash_sdt    = 0;
-        pierce_sdt   = 0;
-        hth_sdt      = 0;
-        impact_sdt   = 0;
+        slash_sdt  = 0;
+        pierce_sdt = 0;
+        hth_sdt    = 0;
+        impact_sdt = 0;
 
-        fire_sdt     = 0;
-        ice_sdt      = 0;
-        wind_sdt     = 0;
-        earth_sdt    = 0;
-        thunder_sdt  = 0;
-        water_sdt    = 0;
-        light_sdt    = 0;
-        dark_sdt     = 0;
+        fire_sdt    = 0;
+        ice_sdt     = 0;
+        wind_sdt    = 0;
+        earth_sdt   = 0;
+        thunder_sdt = 0;
+        water_sdt   = 0;
+        light_sdt   = 0;
+        dark_sdt    = 0;
 
         fire_meva    = 0;
         ice_meva     = 0;
