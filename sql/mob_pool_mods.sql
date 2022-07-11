@@ -521,6 +521,15 @@ INSERT INTO `mob_pool_mods` VALUES (5409,30,1036,1); -- SPECIAL_SKILL: 1036
 INSERT INTO `mob_pool_mods` VALUES (5409,33,50,1);   -- SPECIAL_COOL: 50
 INSERT INTO `mob_pool_mods` VALUES (5409,58,40,1);   -- SPECIAL_DELAY: 40
 
+-- Trust: Shikaree Z
+INSERT INTO `mob_pool_mods` VALUES (5915,6,100,0);      -- Trust Shikaree Z MPP 100
+
+-- Trust: Lehko
+INSERT INTO `mob_pool_mods` VALUES (5922,6,150,0);      -- Trust Lehko MPP 150
+
+-- Trust: Shantotto II
+INSERT INTO `mob_pool_mods` VALUES (6019,3,-10,0);      -- Trust Shantotto II HPP -10%
+
 -- Ixzdei Rdm
 INSERT INTO `mob_pool_mods` VALUES (7039,34,60,1); -- MAGIC_COOL: 60
 INSERT INTO `mob_pool_mods` VALUES (7039,4,15,1);  -- SIGHT_RANGE: 15
