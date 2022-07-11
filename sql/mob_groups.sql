@@ -10886,7 +10886,7 @@ INSERT INTO `mob_groups` VALUES (22,3415,159,'Rumble_Crawler',960,0,2131,0,0,53,
 INSERT INTO `mob_groups` VALUES (23,522,159,'Branding_Iron',960,0,192,0,0,55,58,0);
 INSERT INTO `mob_groups` VALUES (24,3976,159,'Torama',960,0,2454,0,0,55,58,0);
 INSERT INTO `mob_groups` VALUES (25,3714,159,'Sozu_Terberry',0,32,2300,0,0,65,65,0);
-INSERT INTO `mob_groups` VALUES (26,2552,159,'Manipulator',7200,0,1614,10000,0,59,60,0);
+INSERT INTO `mob_groups` VALUES (26,2552,159,'Manipulator',720,0,1614,10000,0,59,60,0);
 INSERT INTO `mob_groups` VALUES (27,3963,159,'Tonberry_Maledictor',960,0,2442,0,0,61,69,0);
 INSERT INTO `mob_groups` VALUES (28,3965,159,'Tonberry_Pursuer',960,0,2444,0,0,61,68,0);
 INSERT INTO `mob_groups` VALUES (29,3968,159,'Tonberry_Stabber',960,0,2447,0,0,61,69,0);
