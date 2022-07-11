@@ -69,21 +69,4 @@ era/lua_dynamis/globals/era_dynamis_zones.lua
 renamer
 #-----------------------
 #		Custom
-#-----------------------
-
-custom/commands/
-custom/cpp/ah_pagination.cpp
-custom/cpp/ah_announcement.cpp
-custom/lua/custom_conquest.lua
-custom/lua/disable_zones.lua
-custom/lua/conquest_npc_shops_always_open.lua
-custom/lua/conquest_regional_npcs_always_up.lua
-custom/lua/claim_shield.lua
-custom/lua/new_player_linkshell.lua
-custom/lua/custom_containers.lua
-custom/lua/guild_no_kits.lua
-custom/lua/conquest_crystal_trade_fix.lua
-custom/lua/disable_guild_shops.lua
-custom/lua/persist_nm_time_of_deaths.lua
-custom/sql/ka_speedbelt_drop.sql
-custom/sql/starter_zone_fast_repops.sql
+#----------------------
