@@ -6383,7 +6383,7 @@ INSERT INTO `mob_droplist` VALUES (757,0,0,1000,15174,@UNCOMMON); -- Frenzy Sall
 INSERT INTO `mob_droplist` VALUES (758,0,0,1000,2276,@UNCOMMON); -- ??? Headpiece (Uncommon, 10%)
 
 -- ZoneID: 121 - Elusive Edwin
-INSERT INTO `mob_droplist` VALUES (759,0,0,1000,16019,109); -- Forte Earring (10.9%)
+INSERT INTO `mob_droplist` VALUES (759,0,0,1000,16019,@UNCOMMON); -- Forte Earring (Uncommon, 10%)
 
 -- ZoneID:  40 - Elvaansticker Bxafraff
 INSERT INTO `mob_droplist` VALUES (760,0,0,1000,1452,@COMMON);  -- Ordelle Bronzepiece (Common, 15%)
@@ -11735,9 +11735,9 @@ INSERT INTO `mob_droplist` VALUES (1427,0,0,1000,4106,@VRARE); -- Wind Cluster (
 INSERT INTO `mob_droplist` VALUES (1427,0,0,1000,4932,@VRARE); -- Scroll Of Hyoton Ni (Very Rare, 1%)
 
 -- ZoneID: 121 - Keeper Of Halidom
-INSERT INTO `mob_droplist` VALUES (1428,0,0,1000,919,@ALWAYS);  -- Clump Of Boyahda Moss (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (1428,0,0,1000,919,@ALWAYS);  -- Clump Of Boyahda Moss (Always, 100%
+INSERT INTO `mob_droplist` VALUES (1428,0,0,1000,919,@VCOMMON); -- Clump Of Boyahda Moss (Very Common, 24%))
 INSERT INTO `mob_droplist` VALUES (1428,0,0,1000,1237,@ALWAYS); -- Bag Of Tree Cuttings (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (1428,0,0,1000,919,500);      -- Clump Of Boyahda Moss (50.0%)
 INSERT INTO `mob_droplist` VALUES (1428,0,0,1000,16990,@VRARE); -- Daihannya (Very Rare, 1%)
 
 -- ZoneID: 132 - Keesha Poppo
@@ -14959,7 +14959,7 @@ INSERT INTO `mob_droplist` VALUES (1820,0,0,1000,2229,@UNCOMMON); -- Vial Of Chi
 INSERT INTO `mob_droplist` VALUES (1820,0,0,1000,2219,80);        -- Lamian Fang Key (8.0%)
 
 -- ZoneID: 121 - Noble Mold
-INSERT INTO `mob_droplist` VALUES (1821,0,0,1000,15220,570); -- Rain Hat (57.0%)
+INSERT INTO `mob_droplist` VALUES (1821,0,0,1000,15220,@VCOMMON); -- Rain Hat (Very Common, 24%)
 
 -- ZoneID: 216 - Nonno
 INSERT INTO `mob_droplist` VALUES (1822,0,0,1000,3173,@UNCOMMON);  -- Goetia Seal Legs (Uncommon, 10%)
@@ -24730,7 +24730,7 @@ INSERT INTO `mob_droplist` VALUES (3013,0,0,1000,3096,142); -- Spotted Flyfrond 
 INSERT INTO `mob_droplist` VALUES (3013,0,0,1000,1617,85);  -- Flytrap Leaf (8.5%)
 
 -- ZoneID: 121 - Huwasi
-INSERT INTO `mob_droplist` VALUES (3014,0,0,1000,2840,160); -- Imperial Topaz (16.0%)
+INSERT INTO `mob_droplist` VALUES (3014,0,0,1000,2840,@UNCOMMON); -- Imperial Topaz (Uncommon, 10%)
 
 -- ZoneID: 151 - Lii Jixa The Somnolist
 INSERT INTO `mob_droplist` VALUES (3015,0,0,1000,18607,450); -- Ceres Spica (45.0%)
@@ -26780,6 +26780,9 @@ INSERT INTO `mob_droplist` VALUES (3225,0,0,1000,11343,@COMMON); -- Thrakon Brea
 -- Garrison Drops
 INSERT INTO `mob_droplist` VALUES (3226,0,0,1000,1604,@UNCOMMON); -- (Garrison) Mannequin Legs
 INSERT INTO `mob_droplist` VALUES (3226,0,0,1000,1605,@UNCOMMON); -- (Garrison) Mannequin Feet
+
+-- ZoneID: 121 - Bastet
+INSERT INTO `mob_droplist` VALUES (3228,0,0,1000,1604,@UNCOMMON); -- Bastet Fang (Uncommon, 10%)
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;

@@ -3812,6 +3812,8 @@ INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1169,1721);
 INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1169,1722);
 INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1169,1723);
 
+INSERT INTO `mob_skill_lists` VALUES ('Huwasi',1170,678);
+
 -- Next available ID: 1170
 
 -- AirSkyBoat Skill Lists Start at 5000
