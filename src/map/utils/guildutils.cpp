@@ -138,6 +138,9 @@ namespace guildutils
                 {
                     PItem->setQuantity(PItem->getQuantity() + PItem->getDailyIncrease());
                 }
+
+                const char* fmtQuery = "UPDATE guild_shops SET initial_quantity = %u WHERE itemid = %u AND guildid = %u";
+                sql->Query(fmtQuery, PItem->getQuantity(), PItem->getID(), PGuildShop->GetID());
             }
         }
         ShowDebug("UpdateGuildsStock is finished");
