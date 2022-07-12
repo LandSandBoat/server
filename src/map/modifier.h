@@ -68,7 +68,7 @@ enum class Mod
 
     MATT = 28, // Magic Attack
     MDEF = 29, // Magic Defense
-    MACC = 30, // Magic Accuracy
+    MACC = 30, // Magic Accuracy - note that this is NOT iLvl "magic accuracy skill" which happens in item_weapon.sql
     MEVA = 31, // Magic Evasion
 
     // Magic Accuracy and Elemental Attacks
@@ -129,6 +129,7 @@ enum class Mod
     INHIBIT_TP      = 488, // Inhibits TP Gain (percent)
 
     // Working Skills (weapon combat skills)
+    // These are NOT item Level skill, they are skill in your status menu. iLvl "skill" happens in item_weapon.sql
     HTH               = 80,  // Hand To Hand Skill
     DAGGER            = 81,  // Dagger Skill
     SWORD             = 82,  // Sword Skill
