@@ -129,3 +129,4 @@ REPLACE INTO `item_weapon` (`itemId`, `name`, `skill`, `subskill`, `ilvl_skill`,
     (22131, 'fail-not', 25, 9, 269, 0, 0, 1, 1, 600, 330, 0),
     (22132, 'artemiss_bow_+1', 25, 9, 0, 0, 0, 1, 1, 351, 2, 0),
     (22133, 'voluspa_bow', 25, 9, 215, 0, 0, 1, 1, 540, 204, 0);
+
