@@ -950,7 +950,7 @@ xi.mod =
     ENMITY_LOSS_REDUCTION           = 427,
     MATT                            = 28,
     MDEF                            = 29,
-    MACC                            = 30,
+    MACC                            = 30, -- This is NOT item level "magic accuracy skill" ! That happens in item_weapon.sql instead
     MEVA                            = 31,
     FIREATT                         = 32,
     ICEATT                          = 33,
@@ -992,6 +992,8 @@ xi.mod =
     MPHEAL                          = 71,
     HPHEAL                          = 72,
     STORETP                         = 73,
+
+    -- These are NOT item Level skill, they are skill in your status menu. iLvl "skill" happens in item_weapon.sql
     HTH                             = 80,
     DAGGER                          = 81,
     SWORD                           = 82,
@@ -1004,6 +1006,7 @@ xi.mod =
     GKATANA                         = 89,
     CLUB                            = 90,
     STAFF                           = 91,
+
     RAMPART_DURATION                = 92,  -- Rampart duration in seconds
     FLEE_DURATION                   = 93,  -- Flee duration in seconds
     MEDITATE_DURATION               = 94,  -- Meditate duration in seconds
@@ -1013,6 +1016,8 @@ xi.mod =
     STALWART_SOUL                   = 907, -- Reduces damage taken from Souleater
     BOOST_EFFECT                    = 97,  -- Boost power in tenths
     CAMOUFLAGE_DURATION             = 98,  -- Camouflage duration in percents
+
+    -- These are NOT item Level skill, they are skill in your status menu. iLvl "skill" happens in item_weapon.sql
     AUTO_MELEE_SKILL                = 101,
     AUTO_RANGED_SKILL               = 102,
     AUTO_MAGIC_SKILL                = 103,
