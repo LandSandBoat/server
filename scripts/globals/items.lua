@@ -273,6 +273,7 @@ xi.items =
     CLUMP_OF_GOOBBUE_HUMUS          = 1181,
     OFFERING_TO_UGGALEPIH           = 1183,
     UGGALEPIH_WHISTLE               = 1184,
+    RATTLING_EGG                    = 1189,
     ANTICAN_TAG                     = 1190,
     SAHAGIN_KEY                     = 1197,
     SACRED_SPRIG                    = 1198,

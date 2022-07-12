@@ -5013,15 +5013,15 @@ INSERT INTO `mob_spell_lists` VALUES('Noble_Mold', 500, 221, 1, 255); -- poison 
 INSERT INTO `mob_spell_lists` VALUES('Noble_Mold', 500, 240, 1, 255); -- drown (1~255)
 
 -- Sacrificial Goblet
-INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 500, 204, 1, 255); -- flare (1~255)
-INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 500, 206, 1, 255); -- freeze (1~255)
-INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 500, 208, 1, 255); -- tornado (1~255)
-INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 500, 210, 1, 255); -- quake (1~255)
-INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 500, 212, 1, 255); -- burst (1~255)
-INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 500, 214, 1, 255); -- flood (1~255)
-INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 500, 245, 1, 255); -- drain (1~255)
-INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 500, 247, 1, 255); -- aspir (1~255)
-INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 500, 226, 1, 255); -- poisonga ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 501, 204, 1, 255); -- flare (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 501, 206, 1, 255); -- freeze (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 501, 208, 1, 255); -- tornado (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 501, 210, 1, 255); -- quake (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 501, 212, 1, 255); -- burst (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 501, 214, 1, 255); -- flood (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 501, 245, 1, 255); -- drain (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 501, 247, 1, 255); -- aspir (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 501, 226, 1, 255); -- poisonga ii (1~255)
 
 -- Next Avail 501
 

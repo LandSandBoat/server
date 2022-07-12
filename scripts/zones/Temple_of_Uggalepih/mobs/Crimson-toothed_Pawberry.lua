@@ -52,9 +52,9 @@ entity.onMobFight = function(mob)
     -- Spawns Fire/Light/Water Elemental 1 minute into the fight and at every astral flow if elemental dies
     local petSpawn = {288, 293, 294}
     local petID = mob:getID() + 1
-    if os.time() > mob:getLocalVar("petTimer") and not GetMobByID(petID):isAlive() then
+    if os.time() > mob:getLocalVar("petTimer") and not GetMobByID(petID):isAlive() and mob:canUseAbilities() then
         local chance = math.random(1,3)
-        mob:castSpell(petSpawn[chance])
+        mob:castSpell(petSpawn[chance], mob)
         mob:setLocalVar("petTimer", os.time() + 60)
     end
 end
