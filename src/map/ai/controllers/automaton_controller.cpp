@@ -20,6 +20,10 @@
 */
 
 #include "automaton_controller.h"
+#include "../ai_container.h"
+#include "../states/ability_state.h"
+#include "../states/magic_state.h"
+#include "../states/weaponskill_state.h"
 #include "common/utils.h"
 #include "enmity_container.h"
 #include "entities/trustentity.h"
@@ -31,10 +35,6 @@
 #include "utils/itemutils.h"
 #include "utils/petutils.h"
 #include "utils/puppetutils.h"
-#include "../ai_container.h"
-#include "../states/ability_state.h"
-#include "../states/magic_state.h"
-#include "../states/weaponskill_state.h"
 
 CAutomatonController::CAutomatonController(CAutomatonEntity* PPet)
 : CPetController(PPet)
@@ -141,7 +141,7 @@ void CAutomatonController::setMagicCooldowns()
 // by ranged head types defaulting to ranged behavior.
 bool CAutomatonController::shouldStandBack()
 {
-    CBattleEntity* PMaster  = PAutomaton->PMaster;
+    CBattleEntity* PMaster = PAutomaton->PMaster;
 
     if (PMaster)
     {
@@ -499,10 +499,12 @@ bool CAutomatonController::TryHeal(const CurrentManeuvers& maneuvers)
 
     if (maneuvers.light && !PCastTarget && PAutomaton->getHead() == HEAD_SOULSOOTHER && PAutomaton->PMaster->PParty) // Light + Soulsoother head -> Heal party
     {
+        // clang-format off
         if (PMob)
         {
             uint16 highestEnmity = 0;
-            static_cast<CCharEntity*>(PAutomaton->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember) {
+            static_cast<CCharEntity*>(PAutomaton->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+            {
                 if (PMember->id != PAutomaton->PMaster->id)
                 {
                     auto enmity_obj = enmityList->find(PMember->id);
@@ -517,7 +519,8 @@ bool CAutomatonController::TryHeal(const CurrentManeuvers& maneuvers)
         }
         else
         {
-            static_cast<CCharEntity*>(PAutomaton->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember) {
+            static_cast<CCharEntity*>(PAutomaton->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+            {
                 if (PMember->id != PAutomaton->PMaster->id && distance(PAutomaton->loc.p, PAutomaton->PMaster->loc.p) < 20)
                 {
                     if (PMember->GetHPP() <= threshold)
@@ -527,6 +530,7 @@ bool CAutomatonController::TryHeal(const CurrentManeuvers& maneuvers)
                 }
             });
         }
+        // clang-format on
     }
 
     // This might be wrong
@@ -712,7 +716,9 @@ bool CAutomatonController::TryEnfeeble(const CurrentManeuvers& maneuvers)
         case HEAD_STORMWAKER:
         {
             bool dispel = false;
-            PTarget->StatusEffectContainer->ForEachEffect([&dispel](CStatusEffect* PStatus) {
+            // clang-format off
+            PTarget->StatusEffectContainer->ForEachEffect([&dispel](CStatusEffect* PStatus)
+            {
                 if (!dispel && PStatus->GetDuration() > 0)
                 {
                     if (PStatus->GetFlag() & EFFECTFLAG_DISPELABLE)
@@ -722,6 +728,7 @@ bool CAutomatonController::TryEnfeeble(const CurrentManeuvers& maneuvers)
                     }
                 }
             });
+            // clang-format on
             if (dispel)
             {
                 castPriority.push_back(SpellID::Dispel);
@@ -1072,7 +1079,9 @@ bool CAutomatonController::TryStatusRemoval(const CurrentManeuvers& maneuvers)
 
     std::vector<SpellID> castPriority;
 
-    PAutomaton->PMaster->StatusEffectContainer->ForEachEffect([&castPriority](CStatusEffect* PStatus) {
+    // clang-format off
+    PAutomaton->PMaster->StatusEffectContainer->ForEachEffect([&castPriority](CStatusEffect* PStatus)
+    {
         if (PStatus->GetDuration() > 0)
         {
             auto id = automaton::FindNaSpell(PStatus);
@@ -1082,6 +1091,7 @@ bool CAutomatonController::TryStatusRemoval(const CurrentManeuvers& maneuvers)
             }
         }
     });
+    // clang-format on
 
     for (SpellID& id : castPriority)
     {
@@ -1093,7 +1103,9 @@ bool CAutomatonController::TryStatusRemoval(const CurrentManeuvers& maneuvers)
 
     castPriority.clear();
 
-    PAutomaton->StatusEffectContainer->ForEachEffect([&castPriority](CStatusEffect* PStatus) {
+    // clang-format off
+    PAutomaton->StatusEffectContainer->ForEachEffect([&castPriority](CStatusEffect* PStatus)
+    {
         if (PStatus->GetDuration() > 0)
         {
             auto id = automaton::FindNaSpell(PStatus);
@@ -1103,6 +1115,7 @@ bool CAutomatonController::TryStatusRemoval(const CurrentManeuvers& maneuvers)
             }
         }
     });
+    // clang-format on
 
     for (SpellID& id : castPriority)
     {
@@ -1120,7 +1133,9 @@ bool CAutomatonController::TryStatusRemoval(const CurrentManeuvers& maneuvers)
             {
                 castPriority.clear();
 
-                member->StatusEffectContainer->ForEachEffect([&castPriority](CStatusEffect* PStatus) {
+                // clang-format off
+                member->StatusEffectContainer->ForEachEffect([&castPriority](CStatusEffect* PStatus)
+                {
                     if (PStatus->GetDuration() > 0)
                     {
                         auto id = automaton::FindNaSpell(PStatus);
@@ -1130,6 +1145,7 @@ bool CAutomatonController::TryStatusRemoval(const CurrentManeuvers& maneuvers)
                         }
                     }
                 });
+                // clang-format on
 
                 for (auto id : castPriority)
                 {
@@ -1321,7 +1337,9 @@ bool CAutomatonController::TryEnhance()
     if (PAutomaton->PMaster->PParty)
     {
         members = PAutomaton->PMaster->PParty->members.size();
-        static_cast<CCharEntity*>(PAutomaton->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember) {
+        // clang-format off
+        static_cast<CCharEntity*>(PAutomaton->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+        {
             if (PMember->id != PAutomaton->PMaster->id && distance(PAutomaton->loc.p, PMember->loc.p) < 20)
             {
                 protect = false;
@@ -1349,7 +1367,6 @@ bool CAutomatonController::TryEnhance()
                     isEngaged = true; // Assume everyone is engaged if the target isn't a mob
                 }
 
-                // clang-format off
                 PMember->StatusEffectContainer->ForEachEffect([&protect, &protectcount, &shell, &shellcount, &haste](CStatusEffect* PStatus)
                 {
                     if (PStatus->GetDuration() > 0)
@@ -1372,7 +1389,6 @@ bool CAutomatonController::TryEnhance()
                         }
                     }
                 });
-                // clang-format on
 
                 if (isEngaged)
                 {
@@ -1393,6 +1409,7 @@ bool CAutomatonController::TryEnhance()
                 }
             }
         });
+        // clang-format on
     }
 
     // No info on how this spell worked
@@ -1642,6 +1659,7 @@ namespace automaton
             {
                 SpellID id = (SpellID)sql->GetUIntData(0);
 
+                // clang-format off
                 AutomatonSpell PSpell
                 {
                     (uint16)sql->GetUIntData(1),
@@ -1650,6 +1668,7 @@ namespace automaton
                     (IMMUNITY)sql->GetUIntData(4),
                     {} // Will handle in a moment
                 };
+                // clang-format on
 
                 uint32 removes = sql->GetUIntData(5);
                 while (removes > 0)

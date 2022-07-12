@@ -68,7 +68,7 @@ enum class Mod
 
     MATT = 28, // Magic Attack
     MDEF = 29, // Magic Defense
-    MACC = 30, // Magic Accuracy
+    MACC = 30, // Magic Accuracy - note that this is NOT iLvl "magic accuracy skill" which happens in item_weapon.sql
     MEVA = 31, // Magic Evasion
 
     // Magic Accuracy and Elemental Attacks
@@ -129,6 +129,7 @@ enum class Mod
     INHIBIT_TP      = 488, // Inhibits TP Gain (percent)
 
     // Working Skills (weapon combat skills)
+    // These are NOT item Level skill, they are skill in your status menu. iLvl "skill" happens in item_weapon.sql
     HTH               = 80,  // Hand To Hand Skill
     DAGGER            = 81,  // Dagger Skill
     SWORD             = 82,  // Sword Skill
@@ -153,18 +154,18 @@ enum class Mod
     PARRY             = 110, // Parry Skill
 
     // Magic Skills
-    DIVINE    = 111,  // Divine Magic Skill
-    HEALING   = 112,  // Healing Magic Skill
-    ENHANCE   = 113,  // Enhancing Magic Skill
-    ENFEEBLE  = 114,  // Enfeebling Magic Skill
-    ELEM      = 115,  // Elemental Magic Skill
-    DARK      = 116,  // Dark Magic Skill
-    SUMMONING = 117,  // Summoning Magic Skill
-    NINJUTSU  = 118,  // Ninjutsu Magic Skill
-    SINGING   = 119,  // Singing Magic Skill
-    STRING    = 120,  // String Magic Skill
-    WIND      = 121,  // Wind Magic Skill
-    BLUE      = 122,  // Blue Magic Skill
+    DIVINE    = 111, // Divine Magic Skill
+    HEALING   = 112, // Healing Magic Skill
+    ENHANCE   = 113, // Enhancing Magic Skill
+    ENFEEBLE  = 114, // Enfeebling Magic Skill
+    ELEM      = 115, // Elemental Magic Skill
+    DARK      = 116, // Dark Magic Skill
+    SUMMONING = 117, // Summoning Magic Skill
+    NINJUTSU  = 118, // Ninjutsu Magic Skill
+    SINGING   = 119, // Singing Magic Skill
+    STRING    = 120, // String Magic Skill
+    WIND      = 121, // Wind Magic Skill
+    BLUE      = 122, // Blue Magic Skill
     GEOMANCY  = 123, // Geomancy Magic Skill
     HANDBELL  = 124, // Handbell Magic SKill
 
@@ -308,13 +309,13 @@ enum class Mod
     DUAL_WIELD    = 259, // Percent reduction in dual wield delay.
 
     // Warrior
-    DOUBLE_ATTACK      = 288, // Percent chance to proc
+    DOUBLE_ATTACK      = 288,  // Percent chance to proc
     DOUBLE_ATTACK_DMG  = 1038, // Increases "Double Attack" damage/"Double Attack" damage + (in percents, e.g. +20 = +20% damage)
-    WARCRY_DURATION    = 483, // Warcy duration bonus from gear
-    BERSERK_EFFECT     = 948, // Conqueror Berserk Effect
-    BERSERK_DURATION   = 954, // Berserk Duration
-    AGGRESSOR_DURATION = 955, // Aggressor Duration
-    DEFENDER_DURATION  = 956, // Defender Duration
+    WARCRY_DURATION    = 483,  // Warcy duration bonus from gear
+    BERSERK_EFFECT     = 948,  // Conqueror Berserk Effect
+    BERSERK_DURATION   = 954,  // Berserk Duration
+    AGGRESSOR_DURATION = 955,  // Aggressor Duration
+    DEFENDER_DURATION  = 956,  // Defender Duration
 
     // Monk
     BOOST_EFFECT        = 97,   // Boost power in tenths
@@ -352,19 +353,19 @@ enum class Mod
     ENHANCES_SABOTEUR = 297, // Increases Saboteur Potency %
 
     // Thief
-    FLEE_DURATION     = 93,  // Flee duration in seconds
-    STEAL             = 298, // Increase/Decrease THF Steal chance
-    DESPOIL           = 896, // Increases THF Despoil chance
-    PERFECT_DODGE     = 883, // Increases Perfect Dodge duration in seconds
-    TRIPLE_ATTACK     = 302, // Percent chance
+    FLEE_DURATION     = 93,   // Flee duration in seconds
+    STEAL             = 298,  // Increase/Decrease THF Steal chance
+    DESPOIL           = 896,  // Increases THF Despoil chance
+    PERFECT_DODGE     = 883,  // Increases Perfect Dodge duration in seconds
+    TRIPLE_ATTACK     = 302,  // Percent chance
     TRIPLE_ATTACK_DMG = 1039, // Increases "Triple Attack" damage/"Triple Attack" damage + (in percents, e.g. +20 = +20% damage)
-    TREASURE_HUNTER   = 303, // Percent chance
-    SNEAK_ATK_DEX     = 830, // % DEX boost to Sneak Attack (if gear mod, needs to be equipped on hit)
-    TRICK_ATK_AGI     = 520, // % AGI boost to Trick Attack (if gear mod, needs to be equipped on hit)
-    MUG_EFFECT        = 835, // Mug effect as multiplier
-    ACC_COLLAB_EFFECT = 884, // Increases amount of enmity transferred for Accomplice/Collaborator
-    HIDE_DURATION     = 885, // Hide duration increase (percentage based)
-    GILFINDER         = 897, // Gilfinder, duh
+    TREASURE_HUNTER   = 303,  // Percent chance
+    SNEAK_ATK_DEX     = 830,  // % DEX boost to Sneak Attack (if gear mod, needs to be equipped on hit)
+    TRICK_ATK_AGI     = 520,  // % AGI boost to Trick Attack (if gear mod, needs to be equipped on hit)
+    MUG_EFFECT        = 835,  // Mug effect as multiplier
+    ACC_COLLAB_EFFECT = 884,  // Increases amount of enmity transferred for Accomplice/Collaborator
+    HIDE_DURATION     = 885,  // Hide duration increase (percentage based)
+    GILFINDER         = 897,  // Gilfinder, duh
 
     // Paladin
     HOLY_CIRCLE_DURATION   = 857, // Holy Circle extended duration in seconds

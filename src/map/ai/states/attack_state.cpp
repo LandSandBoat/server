@@ -119,7 +119,7 @@ void CAttackState::UpdateTarget(uint16 targid)
         PNewTarget = m_PEntity->IsValidTarget(newTargid, TARGET_ENEMY, m_errorMsg);
         if (!PNewTarget)
         {
-            newTargid = 0;
+            newTargid          = 0;
             CCharEntity* PChar = dynamic_cast<CCharEntity*>(m_PEntity);
             if (PChar && PChar->m_hasAutoTarget) // Auto-Target
             {

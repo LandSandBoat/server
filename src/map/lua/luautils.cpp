@@ -765,7 +765,7 @@ namespace luautils
     {
         CacheLuaObjectFromFile("./scripts/globals/interaction/interaction_global.lua");
 
-        auto                initZones = lua["xi"]["globals"]["interaction"]["interaction_global"]["initZones"];
+        auto initZones = lua["xi"]["globals"]["interaction"]["interaction_global"]["initZones"];
 
         std::vector<uint16> zoneIds;
         // clang-format off
@@ -4764,7 +4764,7 @@ namespace luautils
         const char* Query = "SELECT itemid FROM item_basic WHERE name LIKE '%s';";
         int32       ret   = sql->Query(Query, name);
 
-        if (ret != SQL_ERROR && sql->NumRows() == 1)  // Found a single result
+        if (ret != SQL_ERROR && sql->NumRows() == 1) // Found a single result
         {
             while (sql->NextRow() == SQL_SUCCESS)
             {

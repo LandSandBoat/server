@@ -46,8 +46,7 @@ void lua_init()
     lua.do_string(
         "function __FILE__() return debug.getinfo(2, 'S').source end\n"
         "function __LINE__() return debug.getinfo(2, 'l').currentline end\n"
-        "function __FUNC__() return debug.getinfo(2, 'n').name end\n"
-    );
+        "function __FUNC__() return debug.getinfo(2, 'n').name end\n");
 
     // Bind print(...) globally
     lua.set_function("print", &lua_print);
@@ -103,7 +102,7 @@ std::string lua_to_string(sol::object const& obj, std::size_t depth)
         }
         case sol::type::table:
         {
-            auto table  = obj.as<sol::table>();
+            auto table = obj.as<sol::table>();
 
             // Stringify everything first
             std::vector<std::string> stringVec;
@@ -113,12 +112,14 @@ std::string lua_to_string(sol::object const& obj, std::size_t depth)
             }
 
             // Accumulate into a pretty string
+            // clang-format off
             std::string outStr = "table{ ";
             outStr += std::accumulate(std::begin(stringVec), std::end(stringVec), std::string(),
             [](std::string& ss, std::string& s)
             {
                 return ss.empty() ? s : ss + ", " + s;
             });
+            // clang-format on
             return outStr + " }";
         }
         default:

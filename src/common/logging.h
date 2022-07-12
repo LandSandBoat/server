@@ -42,7 +42,7 @@ namespace settings
 {
     template <typename T>
     T get(std::string);
-} // settings
+} // namespace settings
 
 namespace logging
 {

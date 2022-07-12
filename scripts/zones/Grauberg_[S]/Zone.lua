@@ -26,10 +26,15 @@ end
 
 zone_object.onZoneWeatherChange = function(weather)
     local npc = GetNPCByID(ID.npc.INDESCRIPT_MARKINGS)
-    if (weather == xi.weather.WIND or weather == xi.weather.GALES) then
-        npc:setStatus(xi.status.NORMAL)
-    else
-        npc:setStatus(xi.status.DISAPPEAR)
+    if npc ~= nil then
+        if
+            weather == xi.weather.WIND or
+            weather == xi.weather.GALES
+        then
+            npc:setStatus(xi.status.NORMAL)
+        else
+            npc:setStatus(xi.status.DISAPPEAR)
+        end
     end
 end
 
