@@ -4926,13 +4926,13 @@ namespace battleutils
             charmerBSTlevel = charmerLvl;
         }
 
-        // Based on https://www.bluegartr.com/threads/57288-Charm-and-Magic-Accuracy where charm rate hit 25% w/ 11 dStat
-        // Result on EP mob at 75 MJob w/ 67 BST + 11 dCHR should be 25% according to gauge messages.
+        // Based on https://www.bluegartr.com/threads/57288-Charm-and-Magic-Accuracy where charm rate hit 50% w/ 11 dStat
+        // Result on EP mob at 75 MJob w/ 67 BST + 11 dCHR should be 50% according to gauge messages.
         const float levelRatio = (charmerBSTlevel - targetLvl) / 100.f;
         charmChance *= (1.f + levelRatio);
 
         float chrRatio = ((PCharmer->CHR() - PTarget->CHR())) / 100.f;
-        charmChance *= (1.f * (chrRatio * 2.47));
+        charmChance *= (1.f * (chrRatio * 5.83));
 
         // Retail doesn't take light/apollo into account for Gauge
         if (includeCharmAffinityAndChanceMods)
