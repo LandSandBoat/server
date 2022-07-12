@@ -13141,7 +13141,6 @@ INSERT INTO `mob_droplist` VALUES (1613,4,0,1000,2518,0);   -- Smilodon Hide (De
 
 -- ZoneID: 159 - Manipulator
 INSERT INTO `mob_droplist` VALUES (1614,0,0,1000,12378,@ALWAYS);  -- Hard Shield (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (1614,2,0,1000,1268,@ALWAYS);   -- Doll Gizmo (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (1614,0,0,1000,1165,@ALWAYS);   -- Doll Shard (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (1614,0,0,1000,914,@VCOMMON);   -- Vial Of Mercury (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (1614,0,0,1000,1165,@UNCOMMON); -- Doll Shard (Uncommon, 10%)
