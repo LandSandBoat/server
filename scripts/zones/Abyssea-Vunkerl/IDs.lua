@@ -65,8 +65,33 @@ zones[xi.zone.ABYSSEA_VUNKERL] =
         INFO_KI                     = 7581, -- Your keen senses tell you that something may happen if only you had [this item/these items].
         USE_KI                      = 7584, -- Use the [key item/key items]? Yes. No.
     },
+
     mob =
     {
+         KHALKOTAUR             = 17666487,
+         QUASIMODO              = 17666488,
+         IKUTURSO               = 17666489,
+         DVALINN                = 17666490,
+         KADRAETH_THE_HATESPAWN = 17666491,
+         RAKSHAS                = 17666492,
+         SEPS                   = 17666493,
+         XAN                    = 17666494,
+         CHHIR_BATTI            = 17666495,
+         ARMILLARIA             = 17666496,
+         PASCERPOT              = 17666497,
+         GNAWTOOTH_GARY         = 17666498,
+         BUKHIS                 = 17666499,
+         SEDNA                  = 17666500,
+         DURINN                 = 17666501,
+         KARKADANN              = 17666502,
+         BUKHIS_1               = 17666503,
+         SEDNA_1                = 17666504,
+         DURINN_1               = 17666505,
+         KARKADANN_1            = 17666506,
+         BUKHIS_2               = 17666507,
+         SEDNA_2                = 17666508,
+         DURINN_2               = 17666509,
+         KARKADANN_2            = 17666510,
     },
     npc =
     {
