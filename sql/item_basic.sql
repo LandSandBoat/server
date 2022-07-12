@@ -19705,7 +19705,7 @@ INSERT INTO `item_basic` VALUES (26035,0,'moonlight_nodowa','moonlight_nodowa',1
 INSERT INTO `item_basic` VALUES (26036,0,'moonbeam_necklace','moonbeam_necklace',1,2084,22,0,0);
 INSERT INTO `item_basic` VALUES (26037,0,'moonlight_necklace','moonlight_necklace',1,2080,22,0,0);
 INSERT INTO `item_basic` VALUES (26038,0,'regal_necklace','regal_necklace',1,63568,0,0,0);
-INSERT INTO `item_basic` VALUES (26040,0,'yngvi_earring','yngvi_earring',1,34820,22,0,3225);
+INSERT INTO `item_basic` VALUES (26040,0,'yngvi_choker','yngvi_choker',1,34820,0,0,3225);
 INSERT INTO `item_basic` VALUES (26078,0,'kyrenes_earring','kyrenes_earring',1,34820,0,0,0);
 INSERT INTO `item_basic` VALUES (26079,0,'hypaspist_earring','hypaspist_earring',1,34820,0,0,0);
 INSERT INTO `item_basic` VALUES (26080,0,'mache_earring','mache_earring',1,2084,24,0,0);
