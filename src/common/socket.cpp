@@ -9,6 +9,7 @@
 #include "../common/utils.h"
 
 #include "socket.h"
+#include "settings.h"
 
 #include <cstdio>
 #include <cstdlib>
@@ -357,6 +358,8 @@ static std::vector<AccessControl> access_allow;
 static std::vector<AccessControl> access_deny;
 static int                        access_order = ACO_DENY_ALLOW;
 static int                        access_debug = 0;
+static bool                       udp_debug = false;
+static bool                       tcp_debug = false;
 //--
 static int      connect_count    = 10;
 static duration connect_interval = 3s;
@@ -388,34 +391,39 @@ static int connect_check_(uint32 ip)
 {
     TracyZoneScoped;
     ConnectHistory* hist = connect_history[ip & 0xFFFF];
-    size_t          i;
     int             is_allowip = 0;
     int             is_denyip  = 0;
     int             connect_ok = 0;
 
     // Search the allow list
-    for (i = 0; i < access_allow.size(); ++i)
+    for (auto const& entry : access_allow)
     {
-        if ((ip & access_allow[i].mask) == (access_allow[i].ip & access_allow[i].mask))
+        if ((ip & entry.mask) == (entry.ip & entry.mask))
         {
             if (access_debug)
             {
-                ShowInfo("connect_check: Found match from allow list:%d.%d.%d.%d IP:%d.%d.%d.%d Mask:%d.%d.%d.%d", CONVIP(ip), CONVIP(access_allow[i].ip),
-                         CONVIP(access_allow[i].mask));
+                ShowInfo(
+                    "connect_check: Found match from allow list:%d.%d.%d.%d IP:%d.%d.%d.%d Mask:%d.%d.%d.%d",
+                    CONVIP(ip),
+                    CONVIP(entry.ip),
+                    CONVIP(entry.mask));
             }
             is_allowip = 1;
             break;
         }
     }
     // Search the deny list
-    for (i = 0; i < access_deny.size(); ++i)
+    for (auto const& entry : access_deny)
     {
-        if ((ip & access_deny[i].mask) == (access_deny[i].ip & access_deny[i].mask))
+        if ((ip & entry.mask) == (entry.ip & entry.mask))
         {
             if (access_debug)
             {
-                ShowInfo("connect_check: Found match from deny list:%d.%d.%d.%d IP:%d.%d.%d.%d Mask:%d.%d.%d.%d", CONVIP(ip), CONVIP(access_deny[i].ip),
-                         CONVIP(access_deny[i].mask));
+                ShowInfo(
+                    "connect_check: Found match from deny list:%d.%d.%d.%d IP:%d.%d.%d.%d Mask:%d.%d.%d.%d",
+                    CONVIP(ip),
+                    CONVIP(entry.ip),
+                    CONVIP(entry.mask));
             }
             is_denyip = 1;
             break;
@@ -561,6 +569,11 @@ int access_ipmask(const char* str, AccessControl* acc)
     {
         ip   = 0;
         mask = 0;
+    }
+    else if (strcmp(str, "") == 0)
+    {
+        // no-op
+        return 1;
     }
     else
     {
@@ -974,6 +987,125 @@ int socket_config_read(const char* cfgName)
     return 0;
 }
 
+///
+/// <summary>
+/// Get the access list object collection from the provided string. The string
+/// provided is in the form of "127.0.0.1,192.168.0.0/16" where each entry is
+/// separated by a comma. This will break apart all individual entries and then
+/// for each entry that is validated will be pushed into our result collection,
+/// otherwise an error will be displayed.
+/// </summary>
+///
+/// <param name="access_list">The access list that we are parsing for individual entries.</param>
+/// <returns>std::vector<AccessControl> collection that contains all AccessControl entries.</returns>
+///
+std::vector<AccessControl> get_access_list(std::string access_list)
+{
+    // with the provided comma delimited access list, we will convert into a
+    // vector of string entries
+    std::vector<AccessControl> result;
+
+    std::stringstream ss(access_list);
+    while (ss.good())
+    {
+        std::string entry;
+        // get string delimited by comma character
+        getline(ss, entry, ',');
+
+        // validate our entry before pushing it into our results list
+        AccessControl acc{};
+        if (access_ipmask(entry.c_str(), &acc))
+        {
+            result.push_back(acc);
+        }
+        else
+        {
+            ShowError("socket_config_read: Invalid ip or ip range '%s'!", entry);
+        }
+    }
+
+    return result;
+}
+
+///
+/// <summary>
+/// Setting up the UDP settings, currently just has a debug flag.
+///
+/// @NOTE I've added a UDP debug flag, the access debug flag is shared between
+///       both UDP and TCP.  Can be confusing if you believe you are setting the
+///       flag and then it gets overwritten by the other setting.  The new flags
+///       are just not being leveraged just yet (not sure where they would go).
+/// </summary>
+///
+void socket_udp_setup()
+{
+    // debug setting
+    udp_debug    = settings::get<bool>("network.UDP_DEBUG");
+    access_debug = settings::get<bool>("network.UDP_DEBUG");
+}
+
+///
+/// <summary>
+/// Handling the TCP setup properties for the socket.  All leveraging the new
+/// settings handling of LUA files.  The only issue I had was related to the
+/// allow and deny lists.  There would need to be an extension to the get<T>()
+/// method in order to allow LUA lists { "a", "b" }.  To allieviate this I've
+/// implemented a get_access_list() method in order to parse a string that
+/// splits entries with commas.  All other settings are straight forward using
+/// the settings get<T>() method.  Added all "packet_tcp.conf" settings to the
+/// new "settings/default/network.lua" file.
+/// </summary>
+///
+void socket_tcp_setup()
+{
+    // debug setting (shared?)
+    access_debug = settings::get<bool>("network.TCP_DEBUG");
+
+    // sockets configuration
+    tcp_debug  = settings::get<bool>("network.TCP_DEBUG");
+    stall_time = settings::get<int>("network.TCP_STALL_TIME");
+
+    // IP rules settings
+    ip_rules = settings::get<bool>("network.TCP_ENABLE_IP_RULES");
+
+    // ordering of the checks
+    auto ordering = settings::get<std::string>("network.TCP_ORDER");
+    if (ordering == "deny,allow")
+    {
+        access_order = ACO_DENY_ALLOW;
+    }
+    else if (ordering == "allow,deny")
+    {
+        access_order = ACO_ALLOW_DENY;
+    }
+    else if (ordering == "mutual-failure")
+    {
+        access_order = ACO_MUTUAL_FAILURE;
+    }
+
+    // get the allow and deny list
+    if (access_debug)
+    {
+        ShowInfo("Loading allow access list...");
+    }
+    auto allow_list_str = settings::get<std::string>("network.TCP_ALLOW");
+    access_allow        = get_access_list(allow_list_str);
+
+    if (access_debug)
+    {
+        ShowInfo("Loading deny access list...");
+    }
+    auto deny_list_str = settings::get<std::string>("network.TCP_DENY");
+    access_deny        = get_access_list(deny_list_str);
+
+    // connection limit settings
+    connect_interval = std::chrono::milliseconds(
+        settings::get<int>("network.TCP_CONNECT_INTERVAL"));
+    connect_count   = settings::get<int>("network.TCP_CONNECT_COUNT");
+    connect_lockout = std::chrono::milliseconds(
+        settings::get<int>("network.TCP_CONNECT_LOCKOUT"));
+}
+
 void socket_init_tcp()
 {
     TracyZoneScoped;
@@ -982,15 +1114,24 @@ void socket_init_tcp()
         return;
     }
 
-    const char* SOCKET_CONF_FILENAME = "./src/common/packet_tcp.conf";
-    socket_config_read(SOCKET_CONF_FILENAME);
-    // sessions[0] is now currently used for disconnected sessions of the map server, and as such,
-    // should hold enough buffer (it is a vacuum so to speak) as it is never flushed. [Skotlex]
+    // setup our socket
+    socket_tcp_setup();
+
+    // sessions[0] is now currently used for disconnected sessions of the map
+    // server, and as such, should hold enough buffer (it is a vacuum so to
+    // speak) as it is never flushed. [Skotlex]
     create_session(0, null_recv, null_send, null_parse);
 
     // Delete old connection history every 5 minutes
     memset(connect_history, 0, sizeof(connect_history));
-    CTaskMgr::getInstance()->AddTask("connect_check_clear", server_clock::now() + 1s, NULL, CTaskMgr::TASK_INTERVAL, connect_check_clear, 5min);
+    CTaskMgr::getInstance()->AddTask(
+        "connect_check_clear",
+        server_clock::now() + 1s,
+        NULL,
+        CTaskMgr::TASK_INTERVAL,
+        connect_check_clear,
+        5min
+    );
 }
 
 void socket_final_tcp()
@@ -1185,8 +1326,9 @@ void socket_init_udp()
     {
         return;
     }
-    const char* SOCKET_CONF_FILENAME = "./src/common/packet_udp.conf";
-    socket_config_read(SOCKET_CONF_FILENAME);
+
+    // setup our socket
+    socket_udp_setup();
 }
 
 void do_close_udp(int32 fd)
