@@ -2307,7 +2307,14 @@ INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,540);
 INSERT INTO `mob_skill_lists` VALUES ('Demonic_Tiphia',700,334);
 INSERT INTO `mob_skill_lists` VALUES ('Demonic_Tiphia',700,335);
 INSERT INTO `mob_skill_lists` VALUES ('Demonic_Tiphia',700,336);
--- 701 to 702: free
+INSERT INTO `mob_skill_lists` VALUES ('Colo-Colo',701,392);  -- ultrasonics
+INSERT INTO `mob_skill_lists` VALUES ('Colo-Colo',701,394);  -- blood drain
+INSERT INTO `mob_skill_lists` VALUES ('Colo-Colo',701,1155); -- subsonics
+INSERT INTO `mob_skill_lists` VALUES ('Colo-Colo',701,1156); -- marrow drain
+INSERT INTO `mob_skill_lists` VALUES ('Furies',702,393); -- sonic boom
+INSERT INTO `mob_skill_lists` VALUES ('Furies',702,395); -- jet stream
+-- INSERT INTO `mob_skill_lists` VALUES ('Furies',702,1157); -- slipstream
+-- INSERT INTO `mob_skill_lists` VALUES ('Furies',702,1158); -- turbulence
 INSERT INTO `mob_skill_lists` VALUES ('Cactrot_Rapido',703,321);
 INSERT INTO `mob_skill_lists` VALUES ('Cactrot_Rapido',703,322);
 INSERT INTO `mob_skill_lists` VALUES ('Cactrot_Rapido',703,324);
