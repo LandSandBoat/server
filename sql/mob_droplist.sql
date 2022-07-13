@@ -5896,7 +5896,7 @@ INSERT INTO `mob_droplist` VALUES (691,0,0,1000,16863,270);   -- Cruel Spear (27
 INSERT INTO `mob_droplist` VALUES (692,0,0,1000,16222,@UNCOMMON); -- Mercenarys Mantle (Uncommon, 10%)
 
 -- ZoneID: 126 - Dosetsu Tree
-INSERT INTO `mob_droplist` VALUES (693,0,0,1000,17814,@UNCOMMON); -- Raikiri (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (693,0,0,1000,17814,@VCOMMON); -- Raikiri (Very Common, 24%)
 
 -- ZoneID:  92 - Doyen Quadav
 INSERT INTO `mob_droplist` VALUES (694,0,0,1000,2505,60); -- Heavy Quadav Backplate (6.0%)
@@ -19735,7 +19735,7 @@ INSERT INTO `mob_droplist` VALUES (2470,0,0,1000,646,@RARE);      -- Chunk Of Ad
 INSERT INTO `mob_droplist` VALUES (2470,0,0,1000,646,@RARE);      -- Chunk Of Adaman Ore (Rare, 5%)
 
 -- ZoneID: 126 - Trickster Kinetix
-INSERT INTO `mob_droplist` VALUES (2471,0,0,1000,16657,260); -- Tabar (26.0%)
+INSERT INTO `mob_droplist` VALUES (2471,0,0,1000,16657,@VCOMMON); -- Tabar (Very Common, 24%)
 
 -- ZoneID: 216 - Tristitia
 INSERT INTO `mob_droplist` VALUES (2472,0,0,1000,3219,@UNCOMMON);  -- Coin Of Wieldance (Uncommon, 10%)
@@ -24892,7 +24892,7 @@ INSERT INTO `mob_droplist` VALUES (3057,0,0,1000,16297,62); -- Shepherds Chain (
 INSERT INTO `mob_droplist` VALUES (3058,0,0,1000,2841,@VCOMMON); -- Ingot Of Quadav Silver (Very Common, 24%)
 
 -- ZoneID: 126 - Slippery Sucker
-INSERT INTO `mob_droplist` VALUES (3059,0,0,1000,16023,185); -- Mystique Earring (18.5%)
+INSERT INTO `mob_droplist` VALUES (3059,0,0,1000,16023,@UNCOMMON); -- Mystique Earring (Uncommon, 10%)
 
 -- ZoneID: 166 - Gloom Eye
 INSERT INTO `mob_droplist` VALUES (3060,0,0,1000,16300,@UNCOMMON); -- Wit Pendant (Uncommon, 10%)
@@ -25015,7 +25015,7 @@ INSERT INTO `mob_droplist` VALUES (3094,0,0,1000,2821,200); -- Aptant Of Haelan 
 INSERT INTO `mob_droplist` VALUES (3095,0,0,1000,16022,238); -- Fidelity Earring (23.8%)
 
 -- ZoneID: 126 - Qoofim
-INSERT INTO `mob_droplist` VALUES (3096,0,0,1000,16033,209); -- Sylph Earring (20.9%)
+INSERT INTO `mob_droplist` VALUES (3096,0,0,1000,16033,@COMMON); -- Sylph Earring (Common, 15%)
 
 -- ZoneID: 110 - Ravenous Crawler
 INSERT INTO `mob_droplist` VALUES (3097,0,0,1000,16020,265); -- Survivor Earring (26.5%)
@@ -26832,6 +26832,10 @@ INSERT INTO `mob_droplist` VALUES (3230,0,0,1000,2856,@COMMON); -- Square of Ens
 
 -- ZoneID: 125 - Dahu
 INSERT INTO `mob_droplist` VALUES (3231,0,0,1000,2835,@COMMON); -- Lock of Dahu Hair (Common, 15%)
+
+-- ZoneID: 126 - Atkorkamuy
+INSERT INTO `mob_droplist` VALUES (3235,0,0,1000,2813,@UNCOMMON); -- Aptant of Durus (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (3235,0,0,1000,2816,@UNCOMMON); -- Aptant of Tachus (Uncommon, 10%)
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;

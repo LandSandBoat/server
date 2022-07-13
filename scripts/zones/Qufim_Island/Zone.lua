@@ -52,4 +52,15 @@ zone_object.onEventFinish = function(player, csid, option)
     end
 end
 
+zone_object.onZoneWeatherChange = function(weather)
+    local dosetsu = GetMobByID(ID.mob.DOSETSU_TREE)
+    if
+        not dosetsu:isSpawned() and os.time() > dosetsu:getLocalVar("respawn")
+        and (weather == xi.weather.THUNDER or weather == xi.weather.THUNDERSTORMS)
+    then
+        DisallowRespawn(dosetsu:getID(), false)
+        dosetsu:setRespawnTime(math.random(30, 150)) -- pop 30-150 sec after wind weather starts
+    end
+end
+
 return zone_object

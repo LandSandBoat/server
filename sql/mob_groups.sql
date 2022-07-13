@@ -8938,9 +8938,9 @@ INSERT INTO `mob_groups` VALUES (21,338,126,'Banshee',330,1,222,0,0,31,33,0);
 INSERT INTO `mob_groups` VALUES (22,3912,126,'Thunder_Elemental',330,4,2410,0,0,35,36,0);
 INSERT INTO `mob_groups` VALUES (23,5848,126,'Slippery_Sucker',0,32,3059,3500,0,42,42,0);
 INSERT INTO `mob_groups` VALUES (24,40,126,'Acrophies',330,0,18,0,0,32,34,0);
-INSERT INTO `mob_groups` VALUES (25,6854,126,'Atkorkamuy',0,128,0,0,0,73,73,0);
+INSERT INTO `mob_groups` VALUES (25,6854,126,'Atkorkamuy',7200,0,3235,10000,0,73,73,0);
 INSERT INTO `mob_groups` VALUES (26,2286,126,'Kraken',1800,0,1464,0,0,37,38,0);
-INSERT INTO `mob_groups` VALUES (27,4004,126,'Trickster_Kinetix',0,32,2471,0,0,35,36,0);
+INSERT INTO `mob_groups` VALUES (27,4004,126,'Trickster_Kinetix',0,32,2471,2000,0,35,36,0);
 INSERT INTO `mob_groups` VALUES (28,6024,126,'Qoofim',3600,0,3096,4000,0,47,48,0);
 INSERT INTO `mob_groups` VALUES (29,120,126,'Ancient_Bat',330,2,80,0,0,27,29,0);
 INSERT INTO `mob_groups` VALUES (30,1983,126,'Hobgoblin_Warrior',0,128,0,0,0,30,35,0);
@@ -8963,7 +8963,7 @@ INSERT INTO `mob_groups` VALUES (44,1536,126,'Giant_Ranger_G',0,128,3226,0,0,30,
 INSERT INTO `mob_groups` VALUES (45,1530,126,'Giant_Hunter_G',0,128,3226,0,0,30,35,0);
 INSERT INTO `mob_groups` VALUES (46,2012,126,'Hunting_Chief',0,128,3226,0,0,35,35,0);
 
-INSERT INTO `mob_groups` VALUES (47,1093,126,'Dosetsu_Tree',75600,0,693,0,0,35,36,0);
+INSERT INTO `mob_groups` VALUES (47,1093,126,'Dosetsu_Tree',0,128,693,2700,0,35,36,0);
 INSERT INTO `mob_groups` VALUES (48,2079,126,'Ingaevon',0,128,0,0,0,53,55,0);
 INSERT INTO `mob_groups` VALUES (49,2496,126,'Malefic_Fencer',0,128,0,0,0,32,32,0);
 INSERT INTO `mob_groups` VALUES (50,3531,126,'Seed_Mandragora',0,128,0,0,0,32,32,0);
