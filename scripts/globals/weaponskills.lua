@@ -380,7 +380,8 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams, f
                 -- Calculate magical bonuses and reductions
                 local magicdmg = addBonusesAbility(attacker, wsParams.ele, target, finaldmg, wsParams)
 
-                magicdmg = magicdmg * applyResistanceAbility(attacker, target, wsParams.ele, wsParams.skill, calcParams.bonusAcc)
+                wsParams.bonus = calcParams.bonusAcc
+                magicdmg = magicdmg * applyResistanceAbility(attacker, target, wsParams.ele, wsParams)
                 magicdmg = target:magicDmgTaken(magicdmg, wsParams.ele)
 
                 if magicdmg > 0 then

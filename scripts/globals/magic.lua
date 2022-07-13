@@ -53,9 +53,12 @@ local hardCap = 120 --guesstimated
 -----------------------------------
 -- affinities that strengthen/weaken the index element
 local function AffinityBonusDmg(caster, ele)
-
-    local affinity = caster:getMod(strongAffinityDmg[ele])
-    local bonus = 1.00 + affinity * 0.05 -- 5% per level of affinity
+    local affinity = 0
+    local bonus = 0
+    if strongAffinityDmg[ele] ~= nil then
+        affinity = caster:getMod(strongAffinityDmg[ele])
+        bonus = 1.00 + affinity * 0.05 -- 5% per level of affinity
+    end
     return bonus
 end
 
@@ -1013,7 +1016,7 @@ function addBonusesAbility(caster, ele, target, dmg, params)
     local dayWeatherBonus = 1.00
     local weather = caster:getWeather()
 
-    if math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1 then
+    if elementalObi[ele] ~= nil and (math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1) then
         if weather == xi.magic.singleWeatherStrong[ele] then
             if caster:getMod(xi.mod.IRIDESCENCE) >= 1 then
                 dayWeatherBonus = dayWeatherBonus + 0.10
@@ -1052,6 +1055,7 @@ function addBonusesAbility(caster, ele, target, dmg, params)
     local mab = 1
     local mdefBarBonus = 0
     if
+        ele ~= nil and
         ele >= xi.magic.element.FIRE and
         ele <= xi.magic.element.WATER and
         target:hasStatusEffect(xi.magic.barSpell[ele])
@@ -1077,7 +1081,7 @@ end
 -- get elemental damage reduction
 function getElementalDamageReduction(target, element)
     local defense = 1
-    if element > 0 then
+    if element ~= nil and element > 0 then
         defense = 1 - (target:getMod(xi.magic.specificDmgTakenMod[element]) / 10000)
         return utils.clamp(defense, 0.0, 2.0)
     end
