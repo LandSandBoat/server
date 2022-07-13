@@ -1924,7 +1924,7 @@ INSERT INTO `mob_skills` VALUES (2088,1427,'victory_beacon',2,7.0,2000,1500,4,0,
 INSERT INTO `mob_skills` VALUES (2089,1428,'salamander_flame',2,7.0,2000,1500,4,0,0,0,0,0,0);  -- Gadalar
 INSERT INTO `mob_skills` VALUES (2090,1429,'typhonic_arrow',0,7.0,2000,1500,4,0,0,0,0,0,0);  -- Najelith
 INSERT INTO `mob_skills` VALUES (2091,1430,'meteoric_impact',0,7.0,2000,1500,4,0,0,0,0,0,0);  -- Zazarg
-INSERT INTO `mob_skills` VALUES (2092,1431,'scouring_bubbles',2,7.0,2000,1500,4,0,0,0,14,10,0);  -- Mihli
+INSERT INTO `mob_skills` VALUES (2092,1431,'scouring_bubbles',1,7.0,2000,1500,4,0,0,0,14,10,0);  -- Mihli
 -- INSERT INTO `mob_skills` VALUES (2093,1837,'.',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (2094,1432,'fire_angon',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (2095,1437,'batterhorn',0,7.0,2000,1500,4,0,0,0,0,0,0);
@@ -3033,7 +3033,7 @@ INSERT INTO `mob_skills` VALUES (3199,2030,'pirate_pummel',0,7.0,2000,1500,4,0,0
 INSERT INTO `mob_skills` VALUES (3200,2031,'powder_keg',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3201,2032,'walk_the_plank',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3202,257,'uriel_blade',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3203,1431,'scouring_bubbles',0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (3203,1431,'scouring_bubbles',1,7.0,2000,1500,4,0,0,0,14,10,0);  -- Mihli
 INSERT INTO `mob_skills` VALUES (3204,1036,'amatsu_tsukikage',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3205,673,'berserk-ruf',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (3206,2950,'astral_distortion',0,7.0,2000,1500,4,0,0,0,0,0,0);
@@ -3297,7 +3297,7 @@ INSERT INTO `mob_skills` VALUES (3460,204,'',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (3464,3208,'#1672',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (3465,3209,'#1673',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3466,2472,'paralyzing_microtube',0,7.0,2000,1500,4,0,0,0,7,5,0);
-INSERT INTO `mob_skills` VALUES (3467,2473,'silencing_microtube',0,7.0,2000,1500,4,0,0,0,0,3,6);
+INSERT INTO `mob_skills` VALUES (3467,2473,'silencing_microtube',0,7.0,2000,1500,4,0,0,0,3,6,0);
 INSERT INTO `mob_skills` VALUES (3468,2474,'binding_microtube',0,7.0,2000,1500,4,0,0,0,9,7,0);
 INSERT INTO `mob_skills` VALUES (3469,2475,'twirling_dervish',1,7.0,2000,1500,4,0,0,0,13,11,0);
 INSERT INTO `mob_skills` VALUES (3470,445,'great_wheel',0,7.0,2000,1500,4,0,0,0,0,0,0);
