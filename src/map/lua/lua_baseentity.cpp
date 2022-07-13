@@ -553,18 +553,18 @@ void CLuaBaseEntity::setCharVar(std::string const& varName, int32 value)
 }
 
 /************************************************************************
- *  Function: addCharVar()
+ *  Function: incrementCharVar()
  *  Purpose : Increments PC's variable by an explicit amount
- *  Example : player:addCharVar("[ZM]Status", 1) -- if 4, becomes 5
+ *  Example : player:incrementCharVar("[ZM]Status", 1) -- if 4, becomes 5
  *  Notes   : Can use values greater than 1 to increment more
  ************************************************************************/
 
-void CLuaBaseEntity::addCharVar(std::string const& varName, int32 value)
+void CLuaBaseEntity::incrementCharVar(std::string const& varName, int32 value)
 {
     if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
         auto startingVal = charutils::FetchCharVar(PChar->id, varName);
-        charutils::AddCharVar(PChar, varName, startingVal + value);
+        charutils::IncrementCharVar(PChar, varName, startingVal + value);
     }
 }
 
@@ -14118,7 +14118,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setCharVar", CLuaBaseEntity::setCharVar);
     SOL_REGISTER("getVar", CLuaBaseEntity::getCharVar); // Compatibility binding
     SOL_REGISTER("setVar", CLuaBaseEntity::setCharVar); // Compatibility binding
-    SOL_REGISTER("addCharVar", CLuaBaseEntity::addCharVar);
+    SOL_REGISTER("incrementCharVar", CLuaBaseEntity::incrementCharVar);
     SOL_REGISTER("setVolatileCharVar", CLuaBaseEntity::setVolatileCharVar);
     SOL_REGISTER("getLocalVar", CLuaBaseEntity::getLocalVar);
     SOL_REGISTER("setLocalVar", CLuaBaseEntity::setLocalVar);

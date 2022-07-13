@@ -52,7 +52,7 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("QuestMakingHeadlines_var", utils.mask.setBit(player:getCharVar("QuestMakingHeadlines_var"), 0, true))
     elseif csid == 60 then
         player:setCharVar("QuestHatInHand_var", utils.mask.setBit(player:getCharVar("QuestHatInHand_var"), 4, true))
-        player:addCharVar("QuestHatInHand_count", 1)
+        player:incrementCharVar("QuestHatInHand_count", 1)
     elseif csid == 939 then
         player:setCharVar("WildcatWindurst", utils.mask.setBit(player:getCharVar("WildcatWindurst"), 14, true))
     end
