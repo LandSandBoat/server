@@ -32,6 +32,7 @@ CREATE TABLE `mob_pool_mods` (
 LOCK TABLES `mob_pool_mods` WRITE;
 /*!40000 ALTER TABLE `mob_pool_mods` DISABLE KEYS */;
 
+<<<<<<< HEAD
 -- Absolute Virtue
 INSERT INTO `mob_pool_mods` VALUES (21,29,100,0); -- MDEF: 100
 

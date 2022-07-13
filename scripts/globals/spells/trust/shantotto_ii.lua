@@ -27,14 +27,14 @@ spell_object.onMobSpawn = function(mob)
 
     mob:addMod(xi.mod.MATT, power)
     mob:addMod(xi.mod.MACC, power)
-    -- Migrated Haste (Magic) MOD to mob_pool_mods
+    mob:addMod(xi.mod.HASTE_MAGIC, 1000) -- 10% Haste (Magic)
 
     -- Shantotto's tier I spells scale up to mimic tier 2, 3, etc, spells.
     mob:addMod(xi.mod.MAGIC_DAMAGE, spellDamage)
 
     -- Shantotto has 100% melee hit rate always.
     -- TODO: Add support for "perfect accuracy" in c++ land and stop hacking her accuracy.
-    -- Migrated ACC MOD to mob_pool_mods remove when above is resolved.
+    mob:addMod(xi.mod.ACC, 1000)
 
     -- Shantotto II attack type is suposed to be "typeless physical, like requiescat WS."
     mob:SetMobSkillAttack(1163)

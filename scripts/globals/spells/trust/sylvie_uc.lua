@@ -25,7 +25,8 @@ spell_object.onMobSpawn = function(mob)
     -- cure IV cures 456 HP @99
 
     mob:addMod(xi.mod.GEOMANCY_SKILL, 8 * mob:getMainLvl() + 1)
-    -- migrated INDI_DURATION and REGAIN to mob_pool_mods
+    mob:addMod(xi.mod.INDI_DURATION, 180)
+    mob:addMod(xi.mod.REGAIN, 50)
 
     if mob:getMainLvl() >= 99 then
         mob:addMod(xi.mod.GEOMANCY_BONUS, 3)

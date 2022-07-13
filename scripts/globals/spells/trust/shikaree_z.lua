@@ -24,7 +24,9 @@ end
 spell_object.onMobSpawn = function(mob)
     xi.trust.message(mob, xi.trust.message_offset.SPAWN)
 
-    -- Mods migrated to sql/mob_pool_mods
+    -- MPP mod migrated to sql/mob_pool_mods to apply at spawn
+    mob:addMod(xi.mod.STORETP, 174)
+    mob:addMod(xi.mod.JUMP_TP_BONUS, 164)
 
     mob:addSimpleGambit(ai.t.SELF, ai.c.STATUS, xi.effect.SLOW, ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.ERASE)
     mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_STATUS, xi.effect.HASTE, ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.HASTE)

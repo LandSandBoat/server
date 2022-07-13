@@ -30,7 +30,7 @@ spell_object.onMobSpawn = function(mob)
     local power = mob:getMainLvl() / 10
     mob:addMod(xi.mod.MATT, power)
     mob:addMod(xi.mod.MACC, power)
-    -- Migrated Haste (Magic) to mob_pool_mods
+    mob:addMod(xi.mod.HASTE_MAGIC, 1000) -- 10% Haste (Magic)
 
     mob:SetAutoAttackEnabled(false)
 end

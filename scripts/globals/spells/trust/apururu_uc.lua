@@ -61,7 +61,7 @@ spell_object.onMobSpawn = function(mob)
     mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_STATUS, xi.effect.STONESKIN, ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.STONESKIN)
 
     -- BGwiki states 75/tick regain.  Only used for Nott WS.
-    -- REGAIN MOD migrated to mob_pool_mods
+    mob:addMod(xi.mod.REGAIN, 75)
 
     mob:SetAutoAttackEnabled(false)
 end
