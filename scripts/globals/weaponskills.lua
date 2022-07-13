@@ -344,10 +344,14 @@ local function getRangedHitRate(attacker, target, capHitRate, bonus)
 end
 
 -- Function to calculate if a hit in a WS misses, criticals, and the respective damage done
-local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
+local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams, firstHitAccBonus)
     local criticalHit = false
     local finaldmg = 0
     -- local pdif = 0 Reminder for Future Implementation!
+
+    if firstHitAccBonus ~= nil and firstHitAccBonus == true then
+        calcParams.hitRate = calcParams.hitRate + 50 -- First hit gets a +100 ACC bonus which translates to +50 hit
+    end
 
     local missChance = math.random()
 
@@ -526,7 +530,7 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
 
     -- Calculate the damage from the first hit
     local dmg = mainBase * ftp
-    hitdmg, calcParams = getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
+    hitdmg, calcParams = getSingleHitDamage(attacker, target, dmg, wsParams, calcParams, true)
 
     if calcParams.melee then
         hitdmg = modifyMeleeHitDamage(attacker, target, calcParams.attackInfo, wsParams, hitdmg)
@@ -567,7 +571,7 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
     -- Do the extra hit for our offhand if applicable
     if calcParams.extraOffhandHit and finaldmg < targetHp then
         local offhandDmg = (calcParams.weaponDamage[2] + wsMods) * ftp
-        hitdmg, calcParams = getSingleHitDamage(attacker, target, offhandDmg, wsParams, calcParams)
+        hitdmg, calcParams = getSingleHitDamage(attacker, target, offhandDmg, wsParams, calcParams, false)
 
         if calcParams.melee then
             hitdmg = modifyMeleeHitDamage(attacker, target, calcParams.attackInfo, wsParams, hitdmg)
@@ -590,7 +594,7 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
     local numHits = getMultiAttacks(attacker, target, wsParams.numHits)
 
     while hitsDone < numHits and finaldmg < targetHp do -- numHits is hits in the base WS _and_ DA/TA/QA procs during those hits
-        hitdmg, calcParams = getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
+        hitdmg, calcParams = getSingleHitDamage(attacker, target, dmg, wsParams, calcParams, false)
 
         if calcParams.melee then
             hitdmg = modifyMeleeHitDamage(attacker, target, calcParams.attackInfo, wsParams, hitdmg)
