@@ -38,24 +38,22 @@ void CMobSpellList::AddSpell(SpellID spellId, uint16 minLvl, uint16 maxLvl)
 // Implement namespace to work with spells
 namespace mobSpellList
 {
-    CMobSpellList* PMobSpellList[MAX_MOBSPELLLIST_ID];
+    uint16                      MAX_MOBSPELLLIST_ID = 1;
+    std::vector<CMobSpellList*> PMobSpellList;
 
     // Load list of spells
     void LoadMobSpellList()
     {
-        memset(PMobSpellList, 0, sizeof(PMobSpellList));
-        PMobSpellList[0] = new CMobSpellList();
-
+        PMobSpellList.emplace_back(new CMobSpellList());
         const char* Query = "SELECT mob_spell_lists.spell_list_id, \
                             mob_spell_lists.spell_id, \
                             mob_spell_lists.min_level, \
                             mob_spell_lists.max_level, \
                             spell_list.content_tag \
                             FROM mob_spell_lists JOIN spell_list ON spell_list.spellid = mob_spell_lists.spell_id \
-                            WHERE spell_list_id < %u \
-                            ORDER BY min_level ASC;";
+                            ORDER BY spell_list_id ASC, min_level ASC;";
 
-        int32 ret = sql->Query(Query, MAX_MOBSPELLLIST_ID);
+        int32 ret = sql->Query(Query);
 
         if (ret != SQL_ERROR && sql->NumRows() != 0)
         {
@@ -65,10 +63,12 @@ namespace mobSpellList
                 uint16  minLvl  = (uint16)sql->GetIntData(2);
                 uint16  maxLvl  = (uint16)sql->GetIntData(3);
 
-                uint16 pos = sql->GetIntData(0);
-                if (!PMobSpellList[pos])
+                uint16 pos          = sql->GetIntData(0);
+                MAX_MOBSPELLLIST_ID = pos;
+
+                while (!(PMobSpellList.size() - 1 == pos))
                 {
-                    PMobSpellList[pos] = new CMobSpellList();
+                    PMobSpellList.emplace_back(new CMobSpellList());
                 }
 
                 PMobSpellList[pos]->AddSpell(spellId, minLvl, maxLvl);
@@ -79,7 +79,7 @@ namespace mobSpellList
     // Get Spell By ID
     CMobSpellList* GetMobSpellList(uint16 MobSpellListID)
     {
-        if (MobSpellListID < MAX_MOBSPELLLIST_ID)
+        if (MobSpellListID <= MAX_MOBSPELLLIST_ID)
         {
             return PMobSpellList[MobSpellListID];
         }

@@ -29,8 +29,6 @@
 
 #include "spell.h"
 
-#define MAX_MOBSPELLLIST_ID 500
-
 typedef struct
 {
     SpellID spellId;
