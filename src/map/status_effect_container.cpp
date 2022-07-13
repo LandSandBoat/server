@@ -1584,7 +1584,7 @@ void CStatusEffectContainer::LoadStatusEffects()
             }
             CStatusEffect* PStatusEffect =
                 new CStatusEffect(effectID, (uint16)sql->GetUIntData(1), (uint16)sql->GetUIntData(2),
-                                  sql->GetUIntData(3), duration, (uint16)sql->GetUIntData(5), (uint16)sql->GetUIntData(6),
+                                  sql->GetUIntData(3), duration, sql->GetUIntData(5), (uint16)sql->GetUIntData(6),
                                   (uint16)sql->GetUIntData(7), flags);
 
             PEffectList.push_back(PStatusEffect);
