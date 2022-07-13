@@ -2350,7 +2350,9 @@ INSERT INTO `mob_skill_lists` VALUES ('DynamisYagudoNM',710,619);
 INSERT INTO `mob_skill_lists` VALUES ('DynamisYagudoNM',710,620);
 INSERT INTO `mob_skill_lists` VALUES ('DynamisYagudoNM',710,764);
 INSERT INTO `mob_skill_lists` VALUES ('DynamisYagudoNM',710,1067);
-INSERT INTO `mob_skill_lists` VALUES ('Petrifying_Pair',711,370); -- baleful_gaze
+INSERT INTO `mob_skill_lists` VALUES ('Petrifying_Pair',711,367); -- fireball
+INSERT INTO `mob_skill_lists` VALUES ('Petrifying_Pair',711,369); -- brain crush
+INSERT INTO `mob_skill_lists` VALUES ('Petrifying_Pair',711,370); -- baleful gaze
 INSERT INTO `mob_skill_lists` VALUES ('Petrifying_Pair',711,373); -- secretion
 INSERT INTO `mob_skill_lists` VALUES ('Sahagin DRG',712,770);
 INSERT INTO `mob_skill_lists` VALUES ('Sahagin DRG',712,771);
