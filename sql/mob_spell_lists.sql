@@ -5038,7 +5038,12 @@ INSERT INTO `mob_spell_lists` VALUES('Guesh_Urvan', 504, 181, 1, 255); -- blizza
 INSERT INTO `mob_spell_lists` VALUES('Guesh_Urvan', 504, 356, 1, 255); -- paralyga (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Guesh_Urvan', 504, 362, 1, 255); -- bindga (1~255)
 
--- Next Avail 505
+-- Donnergugi (505)
+INSERT INTO `mob_spell_lists` VALUES('Donnergugi', 505, 161, 1, 255); -- stone iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Donnergugi', 505, 190, 1, 255); -- stonega ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Donnergugi', 505, 238, 1, 255); -- rasp (1~255)
+
+-- Next Avail 506
 
 -- AirSkyBoat Specific Starts at 5000
 -- 5000 -> 5010 is Era Dynamis

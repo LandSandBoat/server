@@ -1243,13 +1243,10 @@ INSERT INTO `mob_skill_lists` VALUES ('Serket',273,721);
 INSERT INTO `mob_skill_lists` VALUES ('Serket',273,722);
 INSERT INTO `mob_skill_lists` VALUES ('Serket',273,723);
 INSERT INTO `mob_skill_lists` VALUES ('Serket',273,724);
-INSERT INTO `mob_skill_lists` VALUES ('KingV',274,353);
 INSERT INTO `mob_skill_lists` VALUES ('KingV',274,354);
-INSERT INTO `mob_skill_lists` VALUES ('KingV',274,355);
-INSERT INTO `mob_skill_lists` VALUES ('KingV',274,719);
-INSERT INTO `mob_skill_lists` VALUES ('KingV',274,720);
 INSERT INTO `mob_skill_lists` VALUES ('KingV',274,722);
 INSERT INTO `mob_skill_lists` VALUES ('KingV',274,723);
+INSERT INTO `mob_skill_lists` VALUES ('KingV',274,355);
 -- 275: Matamata
 -- 276: Crepuscular Worm
 INSERT INTO `mob_skill_lists` VALUES ('Genbu',277,805);
@@ -3828,6 +3825,8 @@ INSERT INTO `mob_skill_lists` VALUES ('Barbaric_Weapon',1181,514);
 INSERT INTO `mob_skill_lists` VALUES ('Marquis_Sabnock',1182,1149);
 INSERT INTO `mob_skill_lists` VALUES ('Geush_Attack',1183,1460);
 INSERT INTO `mob_skill_lists` VALUES ('ZmeyGorynych',1184,380);
+INSERT INTO `mob_skill_lists` VALUES ('Dahu',1185,802); -- Great_Sandstorm
+INSERT INTO `mob_skill_lists` VALUES ('Picolaton',1186,403); -- Stormwind
 INSERT INTO `mob_skill_lists` VALUES ('Friar_Rush',1187,510);
 INSERT INTO `mob_skill_lists` VALUES ('Bayawak',1188,367);
 INSERT INTO `mob_skill_lists` VALUES ('Pyuu_The_Spatemaker',1189,770);

@@ -171,6 +171,7 @@ INSERT INTO `mob_pool_mods` VALUES (3265,56,1,1);
 INSERT INTO `mob_pool_mods` VALUES (3268,56,1,1);
 INSERT INTO `mob_pool_mods` VALUES (3301,29,100,0); -- (Race Runner) MDEF
 INSERT INTO `mob_pool_mods` VALUES (3379,4,4,1);
+INSERT INTO `mob_pool_mods` VALUES (3426,76,1,1);
 INSERT INTO `mob_pool_mods` VALUES (3540,3,100,1);
 INSERT INTO `mob_pool_mods` VALUES (3549,370,50,0);
 INSERT INTO `mob_pool_mods` VALUES (3598,368,70,0);

@@ -102,6 +102,7 @@ INSERT INTO `mob_spawn_mods` VALUES (17502568,1,18227,1);
 INSERT INTO `mob_spawn_mods` VALUES (17502568,2,18606,1);
 INSERT INTO `mob_spawn_mods` VALUES (17629524,1,6000,1);
 INSERT INTO `mob_spawn_mods` VALUES (17629524,2,9234,1);
+INSERT INTO `mob_spawn_mods` VALUES (17629524,15,2500,1); -- mug gil 2500
 INSERT INTO `mob_spawn_mods` VALUES (17629641,1,6000,1);
 INSERT INTO `mob_spawn_mods` VALUES (17629641,2,9234,1);
 INSERT INTO `mob_spawn_mods` VALUES (17629640,1,6000,1);
@@ -118,6 +119,7 @@ INSERT INTO `mob_spawn_mods` VALUES (17629281,1,2100,1);
 INSERT INTO `mob_spawn_mods` VALUES (17629281,2,4500,1);
 INSERT INTO `mob_spawn_mods` VALUES (17629643,1,6000,1);
 INSERT INTO `mob_spawn_mods` VALUES (17629643,2,9234,1);
+INSERT INTO `mob_spawn_mods` VALUES (17629643,15,4000,1); -- mug gil 4000
 INSERT INTO `mob_spawn_mods` VALUES (17629403,1,4800,1);
 INSERT INTO `mob_spawn_mods` VALUES (17629403,2,6000,1);
 INSERT INTO `mob_spawn_mods` VALUES (17629238,1,2000,1);
@@ -881,6 +883,25 @@ INSERT INTO `mob_spawn_mods` VALUES (17498436,15,3000,1); -- max gil 3000
 INSERT INTO `mob_spawn_mods` VALUES (17498516,1,3000,1);  -- min gil 3000
 INSERT INTO `mob_spawn_mods` VALUES (17498516,2,9000,1);  -- max gil 9000
 INSERT INTO `mob_spawn_mods` VALUES (17498516,15,3000,1); -- max gil 3000
+
+-- [Antican Praetor]
+-- Data taken from wiki (http://ffxiclopedia.wikia.com/wiki/Antican_Praetor)
+INSERT INTO `mob_spawn_mods` VALUES (17629621,1,4000,1); -- min gil 4000
+INSERT INTO `mob_spawn_mods` VALUES (17629621,2,8000,1); -- max gil 8000
+INSERT INTO `mob_spawn_mods` VALUES (17629639,1,4000,1); -- min gil 4000
+INSERT INTO `mob_spawn_mods` VALUES (17629639,2,8000,1); -- max gil 8000
+
+-- [Nussknacker]
+-- Data taken from wiki (http://ffxiclopedia.wikia.com/wiki/Nussknacker)
+INSERT INTO `mob_spawn_mods` VALUES (17093048,1,4000,1);  -- min gil 4000
+INSERT INTO `mob_spawn_mods` VALUES (17093048,2,8000,1);  -- max gil 8000
+INSERT INTO `mob_spawn_mods` VALUES (17093048,15,2000,1); -- mug gil 2000
+
+-- [Sabotender Bailarina]
+-- Data taken from wiki (http://ffxiclopedia.wikia.com/wiki/Sabotender_Bailarina)
+INSERT INTO `mob_spawn_mods` VALUES (17629587,1,12000,1); -- min gil 12000
+INSERT INTO `mob_spawn_mods` VALUES (17629587,2,20000,1); -- max gil 20000
+INSERT INTO `mob_spawn_mods` VALUES (17629587,15,3000,1); -- mug gil 3000
 
 /*!40000 ALTER TABLE `mob_spawn_mods` ENABLE KEYS */;
 UNLOCK TABLES;
