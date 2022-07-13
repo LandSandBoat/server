@@ -564,12 +564,12 @@ namespace message
             {
                 uint8* data   = (uint8*)extra.data();
                 uint32 charId = ref<uint32>(data, 0);
-                int32  value   = ref<int32>(data, 4);
+                int32  value  = ref<int32>(data, 4);
 
                 ShowDebug(fmt::format("Received message to update var for {}", charId));
 
                 uint8 varNameSize = ref<uint8>(data, 8);
-                auto varName      = std::string(data + 9, data + 9 + varNameSize);
+                auto  varName     = std::string(data + 9, data + 9 + varNameSize);
 
                 if (auto player = zoneutils::GetChar(charId))
                 {
@@ -588,7 +588,7 @@ namespace message
     void send_charvar_update(uint32 charId, std::string const& varName, uint32 value)
     {
         uint32 size = sizeof(uint32) + sizeof(int32) + sizeof(uint8) + static_cast<uint32>(varName.size());
-        char* buf   = new char[size];
+        char*  buf  = new char[size];
         memset(&buf[0], 0, size);
 
         ref<uint32>(buf, 0) = charId;

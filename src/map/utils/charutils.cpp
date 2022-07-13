@@ -5394,17 +5394,10 @@ namespace charutils
     bool hasMogLockerAccess(CCharEntity* PChar)
     {
         TracyZoneScoped;
-
-        char fmtQuery[] = "SELECT value FROM char_vars WHERE charid = %u AND varname = '%s' ";
-        sql->Query(fmtQuery, PChar->id, "mog-locker-expiry-timestamp");
-
-        if (sql->NextRow() == SQL_SUCCESS)
+        auto tstamp = static_cast<uint32>(PChar->getCharVar("mogLocker_expire"));
+        if (CVanaTime::getInstance()->getVanaTime() < tstamp)
         {
-            auto tstamp = (uint32)sql->GetIntData(0);
-            if (CVanaTime::getInstance()->getVanaTime() < tstamp)
-            {
-                return true;
-            }
+            return true;
         }
         return false;
     }
@@ -6070,6 +6063,24 @@ namespace charutils
         return 0;
     }
 
+    void ClearCharVarFromAll(std::string const& varName, bool localOnly)
+    {
+        if (!localOnly)
+        {
+            sql->Query("DELETE FROM char_vars WHERE varname = '%s';", varName);
+        }
+
+        // clang-format off
+        zoneutils::ForEachZone([varName](CZone* PZone)
+        {
+            PZone->ForEachChar([varName](CCharEntity* PChar)
+            {
+                PChar->updateCharVarCache(varName, 0);
+            });
+        });
+        // clang-format on
+    }
+
     void AddCharVar(CCharEntity* PChar, std::string const& var, int32 value)
     {
         if (PChar == nullptr)
@@ -6080,6 +6091,8 @@ namespace charutils
         const char* Query = "INSERT INTO char_vars SET charid = %u, varname = '%s', value = %i ON DUPLICATE KEY UPDATE value = value + %i;";
 
         sql->Query(Query, PChar->id, var, value, value);
+
+        PChar->removeFromCharVarCache(var);
     }
 
     int32 FetchCharVar(uint32 charId, std::string const& varName)
@@ -6108,6 +6121,7 @@ namespace charutils
             sql->Query("INSERT INTO char_vars SET charid = %u, varname = '%s', value = %i ON DUPLICATE KEY UPDATE value = %i;", charId, var, value, value);
         }
     }
+
     uint16 getWideScanRange(JOBTYPE job, uint8 level)
     {
         // Set Widescan range

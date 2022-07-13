@@ -32,6 +32,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <deque>
 #include <map>
 #include <unordered_map>
+#include <unordered_set>
 
 #include "battleentity.h"
 #include "petentity.h"
@@ -560,6 +561,7 @@ public:
     void  setCharVar(std::string const& varName, int32 value);
     void  setVolatileCharVar(std::string const& varName, int32 value);
     void  updateCharVarCache(std::string const& varName, int32 value);
+    void  removeFromCharVarCache(std::string const& varName);
 
     void clearCharVarsWithPrefix(std::string const& prefix);
 

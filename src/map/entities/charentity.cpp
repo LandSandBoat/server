@@ -2586,6 +2586,11 @@ void CCharEntity::updateCharVarCache(std::string const& charVarName, int32 value
     charVarCache[charVarName] = value;
 }
 
+void CCharEntity::removeFromCharVarCache(std::string const& varName)
+{
+    charVarCache.erase(varName);
+}
+
 void CCharEntity::clearCharVarsWithPrefix(std::string const& prefix)
 {
     if (prefix.size() < 5)

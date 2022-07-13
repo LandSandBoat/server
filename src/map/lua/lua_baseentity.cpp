@@ -530,14 +530,11 @@ void CLuaBaseEntity::customMenu(sol::object const& obj)
 
 int32 CLuaBaseEntity::getCharVar(std::string const& varName)
 {
-    if (m_PBaseEntity->objtype != TYPE_PC)
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
-        ShowError("Trying to getCharVar(%s) on invalid type", varName);
-        return 0;
+        return PChar->getCharVar(varName);
     }
-
-    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
-    return charutils::GetCharVar(PChar, varName);
+    return 0;
 }
 
 /************************************************************************
@@ -549,14 +546,10 @@ int32 CLuaBaseEntity::getCharVar(std::string const& varName)
 
 void CLuaBaseEntity::setCharVar(std::string const& varName, int32 value)
 {
-    if (m_PBaseEntity->objtype != TYPE_PC)
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
-        ShowError("Trying to setCharVar(%s -> %i) on invalid type", varName, value);
-        return;
+        PChar->setCharVar(varName, value);
     }
-
-    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
-    charutils::SetCharVar(PChar, varName, value);
 }
 
 /************************************************************************
@@ -568,14 +561,27 @@ void CLuaBaseEntity::setCharVar(std::string const& varName, int32 value)
 
 void CLuaBaseEntity::addCharVar(std::string const& varName, int32 value)
 {
-    if (m_PBaseEntity->objtype != TYPE_PC)
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
-        ShowError("Trying to addCharVar(%s -> %i) on invalid type", varName, value);
-        return;
+        auto startingVal = charutils::FetchCharVar(PChar->id, varName);
+        charutils::AddCharVar(PChar, varName, startingVal + value);
     }
+}
 
-    const char* Query = "INSERT INTO char_vars SET charid = %u, varname = '%s', value = %i ON DUPLICATE KEY UPDATE value = value + %i;";
-    sql->Query(Query, m_PBaseEntity->id, varName, value, value);
+/************************************************************************
+ *  Function: setVolatileCharVar()
+ *  Purpose : Updates PC's variable to an explicit value,
+ &            but allow it to be stored to the database at a later time.
+ *  Example : player:setVolatileCharVar("[DIG]DigCount", count)
+ *  Notes   : Passing a '0' value will delete the variable
+ ************************************************************************/
+
+void CLuaBaseEntity::setVolatileCharVar(std::string const& varName, int32 value)
+{
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        PChar->setVolatileCharVar(varName, value);
+    }
 }
 
 /************************************************************************
@@ -14113,6 +14119,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getVar", CLuaBaseEntity::getCharVar); // Compatibility binding
     SOL_REGISTER("setVar", CLuaBaseEntity::setCharVar); // Compatibility binding
     SOL_REGISTER("addCharVar", CLuaBaseEntity::addCharVar);
+    SOL_REGISTER("setVolatileCharVar", CLuaBaseEntity::setVolatileCharVar);
     SOL_REGISTER("getLocalVar", CLuaBaseEntity::getLocalVar);
     SOL_REGISTER("setLocalVar", CLuaBaseEntity::setLocalVar);
     SOL_REGISTER("resetLocalVars", CLuaBaseEntity::resetLocalVars);

@@ -153,11 +153,11 @@ namespace charutils
     int32 hasWeaponSkill(CCharEntity* PChar, uint16 WeaponSkillID); // declaration of function to check for weapon skill
     int32 delWeaponSkill(CCharEntity* PChar, uint16 WeaponSkillID); // declaration of function to delete weapon skill
 
-    void SaveCharJob(CCharEntity* PChar, JOBTYPE job);         // сохраняем уровень для выбранной профессий персонажа
-    void SaveCharExp(CCharEntity* PChar, JOBTYPE job);         // сохраняем опыт для выбранной профессии персонажа
-    void SaveCharEquip(CCharEntity* PChar);                    // сохраняем экипировку и внешний вид персонажа
-    void SaveCharLook(CCharEntity* PChar);                     // Saves a character's appearance based on style locking.
-    void SaveCharPosition(CCharEntity* PChar);                 // сохраняем позицию персонажа
+    void SaveCharJob(CCharEntity* PChar, JOBTYPE job); // сохраняем уровень для выбранной профессий персонажа
+    void SaveCharExp(CCharEntity* PChar, JOBTYPE job); // сохраняем опыт для выбранной профессии персонажа
+    void SaveCharEquip(CCharEntity* PChar);            // сохраняем экипировку и внешний вид персонажа
+    void SaveCharLook(CCharEntity* PChar);             // Saves a character's appearance based on style locking.
+    void SaveCharPosition(CCharEntity* PChar);         // сохраняем позицию персонажа
     // void SaveCharLinkshells(CCharEntity* PChar);            // TODO
     void SaveMissionsList(CCharEntity* PChar);                 // Save the missions list
     void SaveEminenceData(CCharEntity* PChar);                 // Save Eminence Record (RoE) data
@@ -222,6 +222,7 @@ namespace charutils
     void  SetCharVar(CCharEntity* PChar, std::string const& var, int32 value);
     int32 ClearCharVarsWithPrefix(CCharEntity* PChar, std::string const& prefix);
     int32 RemoveCharVarsWithTag(CCharEntity* PChar, std::string const& varsTag);
+    void  ClearCharVarFromAll(std::string const& varName, bool localOnly = false);
     void  AddCharVar(CCharEntity* PChar, std::string const& var, int32 value);
 
     int32 FetchCharVar(uint32 charId, std::string const& var);

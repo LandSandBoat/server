@@ -4035,7 +4035,7 @@ namespace luautils
 
     void ClearCharVarFromAll(std::string const& varName)
     {
-        sql->Query("DELETE FROM char_vars WHERE varname = '%s';", varName);
+        charutils::ClearCharVarFromAll(varName);
     }
 
     int32 OnTransportEvent(CCharEntity* PChar, uint32 TransportID)
