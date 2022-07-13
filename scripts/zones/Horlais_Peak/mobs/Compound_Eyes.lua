@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Horlais Peak
---  Mob: Sobbing Eyes
+--  Mob: Combound Eyes
 -- BCNM: Under Observation
 -----------------------------------
 require("scripts/globals/status")
@@ -8,8 +8,6 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setMod(xi.mod.SLEEPERES, 1000)
-    mob:setMod(xi.mod.SILENCERES, 75)
     mob:setMod(xi.mod.REGAIN, 100)
 end
 
