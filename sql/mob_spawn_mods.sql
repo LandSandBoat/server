@@ -700,6 +700,43 @@ INSERT INTO `mob_spawn_mods` VALUES (17617013,15,3000,1); -- Mug gil 3000
 INSERT INTO `mob_spawn_mods` VALUES (17616999,1,3000,1);  -- Min gil 3000
 INSERT INTO `mob_spawn_mods` VALUES (17616999,2,9000,1);  -- Max gil 9000
 INSERT INTO `mob_spawn_mods` VALUES (17616999,15,2000,1); -- Mug gil 2000
+-- [Amikiri]
+-- Data taken from wiki (http://ffxiclopedia.wikia.com/wiki/Amikiri)
+INSERT INTO `mob_spawn_mods` VALUES (17645774,1,10000,1); -- min gil 10000
+INSERT INTO `mob_spawn_mods` VALUES (17645774,2,15000,1); -- max gil 15000
+
+-- [Baobhan Sith]
+-- Data taken from wiki (http://ffxiclopedia.wikia.com/wiki/Baobhan_Sith)
+INSERT INTO `mob_spawn_mods` VALUES (17645719,1,8000,1);  -- min gil 8000
+INSERT INTO `mob_spawn_mods` VALUES (17645719,2,12000,1); -- max gil 12000
+
+-- [Goblinsavior Heronox]
+-- Data taken from wiki (http://ffxiclopedia.wikia.com/wiki/Goblinsavior_Heronox)
+INSERT INTO `mob_spawn_mods` VALUES (17645609,1,6000,1);  -- min gil 6000
+INSERT INTO `mob_spawn_mods` VALUES (17645609,2,10000,1); -- max gil 10000
+INSERT INTO `mob_spawn_mods` VALUES (17645609,15,3000,1); -- mug gil 3000
+
+-- [Taxim]
+-- Data taken from wiki (http://ffxiclopedia.wikia.com/wiki/Taxim)
+INSERT INTO `mob_spawn_mods` VALUES (17645742,1,3500,1); -- min gil 3500
+INSERT INTO `mob_spawn_mods` VALUES (17645742,2,5600,1); -- max gil 5600
+
+-- [Ungur]
+-- Data taken from wiki (http://ffxiclopedia.wikia.com/wiki/Ungur)
+INSERT INTO `mob_spawn_mods` VALUES (17645755,1,12000,1); -- min gil 12000
+INSERT INTO `mob_spawn_mods` VALUES (17645755,2,19400,1); -- max gil 19400
+INSERT INTO `mob_spawn_mods` VALUES (17645755,15,4700,1); -- mug gil 4700
+
+-- [Wyvernpoacher Drachlox]
+-- Data taken from wiki (http://ffxiclopedia.wikia.com/wiki/Wyvernpoacher_Drachlox)
+INSERT INTO `mob_spawn_mods` VALUES (17645640,1,4000,1);  -- min gil 4000
+INSERT INTO `mob_spawn_mods` VALUES (17645640,2,8000,1);  -- max gil 8000
+INSERT INTO `mob_spawn_mods` VALUES (17645640,15,4300,1); -- mug gil 4300
+
+-- [Amemet]
+-- Data taken from wiki (http://ffxiclopedia.wikia.com/wiki/Amemet)
+INSERT INTO `mob_spawn_mods` VALUES (17490016,1,6000,1);  -- min gil 6000
+INSERT INTO `mob_spawn_mods` VALUES (17490016,2,9100,1);  -- max gil 9100
 
 /*!40000 ALTER TABLE `mob_spawn_mods` ENABLE KEYS */;
 UNLOCK TABLES;

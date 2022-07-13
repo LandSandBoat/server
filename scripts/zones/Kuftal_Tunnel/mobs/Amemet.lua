@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Kuftal Tunnel
 --   NM: Amemet
--- TODO: Amemet should walk in a big circle
+-- TODO: Amemet should walk in a big circle.
 -----------------------------------
 require("scripts/globals/hunts")
 -----------------------------------
