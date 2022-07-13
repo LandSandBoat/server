@@ -6,7 +6,19 @@ local ID = require("scripts/zones/Yuhtunga_Jungle/IDs")
 -----------------------------------
 local entity = {}
 
-Blind, Bind, Paralyze, Silence, Weight, and Poison.
+local updateRegen = function(mob)
+    local regen = mob:getMod(xi.mod.REGEN)
+
+    if mob:getWeather() == xi.weather.SUNSHINE then
+        if regen ~= 50 then
+            mob:setMod(xi.mod.REGEN, 50)
+        end
+    else
+        if regen ~= 0 then
+            mob:setMod(xi.mod.REGEN, 0)
+        end
+    end
+end
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
@@ -25,6 +37,14 @@ entity.onAdditionalEffect = function(mob, target, damage)
     else
         return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.POISON)
     end
+end
+
+entity.onMobFight = function(mob, target)
+    updateRegen(mob)
+end
+
+entity.onMobRoam = function(mob)
+    updateRegen(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)

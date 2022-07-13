@@ -6,16 +6,16 @@ local ID = require("scripts/zones/Yuhtunga_Jungle/IDs")
 -----------------------------------
 local entity = {}
 
-function updateRegen(mob)
-    local regen = mob:getMod(tpz.mod.REGEN)
+local updateRegen = function(mob)
+    local regen = mob:getMod(xi.mod.REGEN)
 
     if mob:getWeather() == xi.weather.SUNSHINE then
         if regen ~= 50 then
-            mob:setMod(tpz.mod.REGEN, 50)
+            mob:setMod(xi.mod.REGEN, 50)
         end
     else
         if regen ~= 0 then
-            mob:setMod(tpz.mod.REGEN, 0)
+            mob:setMod(xi.mod.REGEN, 0)
         end
     end
 end
@@ -37,11 +37,11 @@ entity.onMobRoam = function(mob)
         local pos = mob:getPos()
         SpawnMob(ID.mob.VOLUPTUOUS_VILMA):setPos(pos.x, pos.y, pos.z, pos.rot)
     end
-    updateRegen()
+    updateRegen(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    updateRegen()
+    updateRegen(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
