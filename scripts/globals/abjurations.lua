@@ -537,4 +537,34 @@ xi.abjurations =
     xi.items.JINXED_GAMBIERAS,
     xi.items.EMICHO_GAMBIERAS,
     xi.items.EMICHO_GAMBIERAS_P1,
+
+    xi.items.CYLLENIAN_ABJURATION_HEAD,
+    xi.items.VEXED_MITRA,
+    xi.items.JINXED_MITRA,
+    xi.items.KAYKAUS_MITRA,
+    xi.items.KAYKAUS_MITRA_P1,
+
+    xi.items.CYLLENIAN_ABJURATION_BODY,
+    xi.items.VEXED_BLIAUT,
+    xi.items.JINXED_BLIAUT,
+    xi.items.KAYKAUS_BLIAUT,
+    xi.items.KAYKAUS_BLIAUT_P1,
+
+    xi.items.CYLLENIAN_ABJURATION_HANDS,
+    xi.items.VEXED_CUFFS,
+    xi.items.JINXED_CUFFS,
+    xi.items.KAYKAUS_CUFFS,
+    xi.items.KAYKAUS_CUFFS_P1,
+
+    xi.items.CYLLENIAN_ABJURATION_LEGS,
+    xi.items.VEXED_TIGHTS,
+    xi.items.JINXED_TIGHTS,
+    xi.items.KAYKAUS_TIGHTS,
+    xi.items.KAYKAUS_TIGHTS_P1,
+
+    xi.items.CYLLENIAN_ABJURATION_FEET,
+    xi.items.VEXED_BOOTS,
+    xi.items.JINXED_BOOTS,
+    xi.items.KAYKAUS_BOOTS,
+    xi.items.KAYKAUS_BOOTS_P1,
 }
