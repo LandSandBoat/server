@@ -73,8 +73,10 @@ namespace gambits
             return;
         }
 
-        auto runPredicate = [&](Predicate_t& predicate) -> bool {
-            auto isValidMember = [&](CBattleEntity* PPartyTarget) -> bool {
+        auto runPredicate = [&](Predicate_t& predicate) -> bool
+        {
+            auto isValidMember = [&](CBattleEntity* PPartyTarget) -> bool
+            {
                 return PPartyTarget->isAlive() && POwner->loc.zone == PPartyTarget->loc.zone && distance(POwner->loc.p, PPartyTarget->loc.p) <= 15.0f;
             };
 
@@ -89,12 +91,15 @@ namespace gambits
             else if (predicate.target == G_TARGET::PARTY)
             {
                 auto result = false;
-                static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember) {
+                // clang-format off
+                static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                {
                     if (isValidMember(PMember) && CheckTrigger(PMember, predicate))
                     {
                         result = true;
                     }
                 });
+                // clang-format on
                 return result;
             }
             else if (predicate.target == G_TARGET::MASTER)
@@ -104,45 +109,54 @@ namespace gambits
             else if (predicate.target == G_TARGET::TANK)
             {
                 auto result = false;
-                static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember) {
+                // clang-format off
+                static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                {
                     if (isValidMember(PMember) && CheckTrigger(PMember, predicate) && (PMember->GetMJob() == JOB_PLD || PMember->GetMJob() == JOB_RUN))
                     {
                         result = true;
                     }
                 });
+                // clang-format on
                 return result;
             }
             else if (predicate.target == G_TARGET::MELEE)
             {
                 auto result = false;
-                static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember) {
+                // clang-format off
+                static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                {
                     if (isValidMember(PMember) && CheckTrigger(PMember, predicate) && melee_jobs.find(PMember->GetMJob()) != melee_jobs.end())
                     {
                         result = true;
                     }
                 });
+                // clang-format on
                 return result;
             }
             else if (predicate.target == G_TARGET::RANGED)
             {
                 auto result = false;
-                static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember) {
+                static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                                                                               {
                     if (isValidMember(PMember) && CheckTrigger(PMember, predicate) && (PMember->GetMJob() == JOB_RNG || PMember->GetMJob() == JOB_COR))
                     {
                         result = true;
-                    }
-                });
+                    } });
                 return result;
             }
             else if (predicate.target == G_TARGET::CASTER)
             {
                 auto result = false;
-                static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember) {
+                // clang-format off
+                static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                {
                     if (isValidMember(PMember) && CheckTrigger(PMember, predicate) && caster_jobs.find(PMember->GetMJob()) != caster_jobs.end())
                     {
                         result = true;
                     }
                 });
+                // clang-format on
                 return result;
             }
             else if (predicate.target == G_TARGET::TOP_ENMITY)
@@ -150,31 +164,36 @@ namespace gambits
                 auto result = false;
                 if (auto* PMob = dynamic_cast<CMobEntity*>(POwner->GetBattleTarget()))
                 {
-                    static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember) {
+                    // clang-format off
+                    static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                    {
                         if (isValidMember(PMember) && CheckTrigger(PMember, predicate) && PMob->PEnmityContainer->GetHighestEnmity() == PMember)
                         {
                             result = true;
                         }
                     });
+                    // clang-format on
                 }
                 return result;
             }
             else if (predicate.target == G_TARGET::CURILLA)
             {
                 auto result = false;
+                // clang-format off
                 static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
                 {
                     if (isValidMember(PMember) && CheckTrigger(PMember, predicate))
                     {
                         auto name = std::string(reinterpret_cast<const char*>(PMember->GetName()));
                         std::transform(name.begin(), name.end(), name.begin(),
-                                       [](unsigned char c) { return std::tolower(c); });
+                        [](unsigned char c) { return std::tolower(c); });
                         if (name == "curilla")
                         {
                             result = true;
                         }
                     }
                 });
+                // clang-format on
                 return result;
             }
 
@@ -206,7 +225,8 @@ namespace gambits
                     break;
                 }
 
-                auto isValidMember = [this](CBattleEntity* PSettableTarget, CBattleEntity* PPartyTarget) {
+                auto isValidMember = [this](CBattleEntity* PSettableTarget, CBattleEntity* PPartyTarget)
+                {
                     return !PSettableTarget && PPartyTarget->isAlive() && POwner->loc.zone == PPartyTarget->loc.zone &&
                            distance(POwner->loc.p, PPartyTarget->loc.p) <= 15.0f;
                 };
@@ -225,12 +245,15 @@ namespace gambits
                 }
                 else if (gambit.predicates[0].target == G_TARGET::PARTY)
                 {
-                    static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember) {
+                    // clang-format off
+                    static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                    {
                         if (isValidMember(target, PMember) && CheckTrigger(PMember, gambit.predicates[0]))
                         {
                             target = PMember;
                         }
                     });
+                    // clang-format on
                 }
                 else if (gambit.predicates[0].target == G_TARGET::MASTER)
                 {
@@ -238,60 +261,77 @@ namespace gambits
                 }
                 else if (gambit.predicates[0].target == G_TARGET::TANK)
                 {
-                    static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember) {
+                    // clang-format off
+                    static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                    {
                         if (isValidMember(target, PMember) && CheckTrigger(PMember, gambit.predicates[0]) &&
                             (PMember->GetMJob() == JOB_PLD || PMember->GetMJob() == JOB_RUN))
                         {
                             target = PMember;
                         }
                     });
+                    // clang-format on
                 }
                 else if (gambit.predicates[0].target == G_TARGET::MELEE)
                 {
-                    static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember) {
+                    // clang-format off
+                    static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                    {
                         if (isValidMember(target, PMember) && CheckTrigger(PMember, gambit.predicates[0]) &&
                             melee_jobs.find(PMember->GetMJob()) != melee_jobs.end())
                         {
                             target = PMember;
                         }
                     });
+                    // clang-format on
                 }
                 else if (gambit.predicates[0].target == G_TARGET::RANGED)
                 {
-                    static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember) {
+                    // clang-format off
+                    static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                    {
                         if (isValidMember(target, PMember) && CheckTrigger(PMember, gambit.predicates[0]) &&
                             (PMember->GetMJob() == JOB_RNG || PMember->GetMJob() == JOB_COR))
                         {
                             target = PMember;
                         }
                     });
+                    // clang-format on
                 }
                 else if (gambit.predicates[0].target == G_TARGET::CASTER)
                 {
-                    static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember) {
+                    // clang-format off
+                    static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                    {
                         if (isValidMember(target, PMember) && CheckTrigger(PMember, gambit.predicates[0]) &&
                             caster_jobs.find(PMember->GetMJob()) != caster_jobs.end())
                         {
                             target = PMember;
                         }
                     });
+                    // clang-format on
                 }
                 else if (gambit.predicates[0].target == G_TARGET::TOP_ENMITY)
                 {
                     if (auto* PMob = dynamic_cast<CMobEntity*>(POwner->GetBattleTarget()))
                     {
-                        static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember) {
+                        // clang-format off
+                        static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                        {
                             if (isValidMember(target, PMember) && CheckTrigger(PMember, gambit.predicates[0]) &&
                                 PMob->PEnmityContainer->GetHighestEnmity() == PMember)
                             {
                                 target = PMember;
                             }
                         });
+                        // clang-format on
                     }
                 }
                 else if (gambit.predicates[0].target == G_TARGET::CURILLA)
                 {
-                    static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember) {
+                    // clang-format off
+                    static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                    {
                         if (isValidMember(target, PMember) && CheckTrigger(PMember, gambit.predicates[0]))
                         {
                             auto name = std::string(reinterpret_cast<const char*>(PMember->GetName()));
@@ -303,6 +343,7 @@ namespace gambits
                             }
                         }
                     });
+                    // clang-format on
                 }
 
                 if (!target)
@@ -343,8 +384,8 @@ namespace gambits
                     }
                     else if (action.select == G_SELECT::BEST_INDI)
                     {
-                        auto* PMaster = static_cast<CCharEntity*>(POwner->PMaster);
-                        auto spell_id = POwner->SpellContainer->GetBestIndiSpell(PMaster);
+                        auto* PMaster  = static_cast<CCharEntity*>(POwner->PMaster);
+                        auto  spell_id = POwner->SpellContainer->GetBestIndiSpell(PMaster);
                         if (spell_id.has_value())
                         {
                             controller->Cast(target->targid, spell_id.value());
@@ -352,9 +393,9 @@ namespace gambits
                     }
                     else if (action.select == G_SELECT::ENTRUSTED)
                     {
-                        auto* PMaster = static_cast<CCharEntity*>(POwner->PMaster);
-                        auto spell_id = POwner->SpellContainer->GetBestEntrustedSpell(PMaster);
-                        target = PMaster;
+                        auto* PMaster  = static_cast<CCharEntity*>(POwner->PMaster);
+                        auto  spell_id = POwner->SpellContainer->GetBestEntrustedSpell(PMaster);
+                        target         = PMaster;
                         if (spell_id.has_value())
                         {
                             controller->Cast(target->targid, spell_id.value());
@@ -433,13 +474,14 @@ namespace gambits
                 else if (action.reaction == G_REACTION::JA)
                 {
                     CAbility* PAbility = ability::GetAbility(action.select_arg);
-                    auto mLevel = POwner->GetMLevel();
+                    auto      mLevel   = POwner->GetMLevel();
 
                     if (action.select == G_SELECT::HIGHEST_WALTZ)
                     {
                         // bool canWaltz = false;
                         auto currentTP = POwner->health.tp;
 
+                        // clang-format off
                         ABILITY wlist[5] =
                         {
                             ABILITY_CURING_WALTZ_V,
@@ -448,12 +490,13 @@ namespace gambits
                             ABILITY_CURING_WALTZ_II,
                             ABILITY_CURING_WALTZ,
                         };
+                        // clang-format on
 
                         for (ABILITY const& waltz : wlist)
                         {
-                            auto waltzLevel  = ability::GetAbility(waltz)->getLevel();
+                            auto waltzLevel = ability::GetAbility(waltz)->getLevel();
                             // auto abilityName = ability::GetAbility(waltz)->getName();
-                            uint16 tpCost    = 0;
+                            uint16 tpCost = 0;
 
                             if (mLevel >= waltzLevel)
                             {
@@ -503,8 +546,8 @@ namespace gambits
 
                     if (action.select == G_SELECT::BEST_SAMBA)
                     {
-                        auto currentTP = POwner->health.tp;
-                        uint16 tpCost = 0;
+                        auto   currentTP = POwner->health.tp;
+                        uint16 tpCost    = 0;
 
                         if (mLevel >= 5)
                         {
@@ -513,37 +556,36 @@ namespace gambits
                                 if (PartyHasHealer())
                                 {
                                     PAbility = ability::GetAbility(ABILITY_HASTE_SAMBA);
-                                    tpCost = 350;
+                                    tpCost   = 350;
                                 }
                                 else
                                 {
                                     PAbility = ability::GetAbility(ABILITY_DRAIN_SAMBA_III);
-                                    tpCost = 400;
+                                    tpCost   = 400;
                                 }
                             }
-                            else if(mLevel < 65 && mLevel > 45)
+                            else if (mLevel < 65 && mLevel > 45)
                             {
                                 if (PartyHasHealer())
                                 {
-
                                     PAbility = ability::GetAbility(ABILITY_HASTE_SAMBA);
-                                    tpCost = 350;
+                                    tpCost   = 350;
                                 }
                                 else
                                 {
                                     PAbility = ability::GetAbility(ABILITY_DRAIN_SAMBA_II);
-                                    tpCost = 250;
+                                    tpCost   = 250;
                                 }
                             }
-                            else if(mLevel < 45 && mLevel > 35)
+                            else if (mLevel < 45 && mLevel > 35)
                             {
                                 PAbility = ability::GetAbility(ABILITY_DRAIN_SAMBA_II);
-                                tpCost = 250;
+                                tpCost   = 250;
                             }
                             else
                             {
                                 PAbility = ability::GetAbility(ABILITY_DRAIN_SAMBA);
-                                tpCost = 100;
+                                tpCost   = 100;
                             }
                         }
 
@@ -631,6 +673,7 @@ namespace gambits
             case G_CONDITION::NO_STORM:
             {
                 bool noStorm = true;
+                // clang-format off
                 if (trigger_target->StatusEffectContainer->HasStatusEffect(
                 {
                     EFFECT_FIRESTORM,
@@ -653,6 +696,7 @@ namespace gambits
                 {
                     noStorm = false;
                 }
+                // clang-format on
                 return noStorm;
                 break;
             }
@@ -738,7 +782,8 @@ namespace gambits
 
         auto* target = POwner->GetBattleTarget();
 
-        auto checkTPTrigger = [&]() -> bool {
+        auto checkTPTrigger = [&]() -> bool
+        {
             if (POwner->health.tp >= 3000)
             {
                 return true;
@@ -754,12 +799,15 @@ namespace gambits
                 case G_TP_TRIGGER::OPENER:
                 {
                     bool result = false;
-                    static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember) {
+                    // clang-format off
+                    static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                    {
                         if (PMember->health.tp >= 1000 && PMember != POwner)
                         {
                             result = true;
                         }
                     });
+                    // clang-format on
                     return result;
                     break;
                 }
@@ -912,7 +960,9 @@ namespace gambits
     bool CGambitsContainer::PartyHasHealer()
     {
         bool hasHealer = false;
-        static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember) {
+        // clang-format off
+        static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+        {
             auto jobType = PMember->GetMJob();
 
             if (jobType == JOB_WHM || jobType == JOB_RDM || jobType == JOB_PLD || jobType == JOB_SCH)
@@ -920,6 +970,7 @@ namespace gambits
                 hasHealer = true;
             }
         });
+        // clang-format on
         return hasHealer;
     }
     // used to check for tanks in party (Volker, AA Hume)

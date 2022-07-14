@@ -624,8 +624,8 @@ void CDataLoader::ExpireAHItems(uint16 expireAgeInDays)
             }
 
             qStr = fmt::format("INSERT INTO delivery_box (charid, charname, box, itemid, itemsubid, quantity, senderid, sender) VALUES "
-                "({}, '{}', 1, {}, 0, {}, 0, 'AH-Jeuno');",
-                listing.sellerID, listing.sellerName, listing.itemID, listing.ahStack == 1 ? listing.itemStack : 1);
+                               "({}, '{}', 1, {}, 0, {}, 0, 'AH-Jeuno');",
+                               listing.sellerID, listing.sellerName, listing.itemID, listing.ahStack == 1 ? listing.itemStack : 1);
 
             ret = sql2->Query(qStr.c_str());
 

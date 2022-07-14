@@ -111,8 +111,8 @@ struct Trust_t
     Trust_t()
     : EcoSystem(ECOSYSTEM::ECO_ERROR)
     {
-        trustID     = 0;
-        pool        = 0;
+        trustID = 0;
+        pool    = 0;
 
         name_prefix = 0;
         radius      = 0;
@@ -120,7 +120,7 @@ struct Trust_t
 
         behaviour = 0;
 
-        mJob     = 0;
+        mJob    = 0;
         sJob    = 0;
         HPscale = 0.f;
         MPscale = 0.f;
@@ -278,9 +278,9 @@ namespace trustutils
                 trust->hasSpellScript = (bool)sql->GetIntData(7);
                 trust->spellList      = (uint16)sql->GetIntData(8);
 
-                trust->cmbSkill       = (uint8)sql->GetIntData(9);
-                trust->cmbDelay       = (uint16)sql->GetIntData(10);
-                trust->cmbDmgMult     = (uint16)sql->GetIntData(11);
+                trust->cmbSkill   = (uint8)sql->GetIntData(9);
+                trust->cmbDelay   = (uint16)sql->GetIntData(10);
+                trust->cmbDmgMult = (uint16)sql->GetIntData(11);
 
                 trust->name_prefix    = (uint8)sql->GetUIntData(12);
                 trust->behaviour      = (uint16)sql->GetUIntData(13);
@@ -300,17 +300,17 @@ namespace trustutils
                 // similarly speedSub is always 50
                 trust->subSpeed = 50;
 
-                trust->strRank   = (uint8)sql->GetIntData(21);
-                trust->dexRank   = (uint8)sql->GetIntData(22);
-                trust->vitRank   = (uint8)sql->GetIntData(23);
-                trust->agiRank   = (uint8)sql->GetIntData(24);
-                trust->intRank   = (uint8)sql->GetIntData(25);
-                trust->mndRank   = (uint8)sql->GetIntData(26);
-                trust->chrRank   = (uint8)sql->GetIntData(27);
-                trust->defRank   = (uint8)sql->GetIntData(28);
-                trust->attRank   = (uint8)sql->GetIntData(29);
-                trust->accRank   = (uint8)sql->GetIntData(30);
-                trust->evaRank   = (uint8)sql->GetIntData(31);
+                trust->strRank = (uint8)sql->GetIntData(21);
+                trust->dexRank = (uint8)sql->GetIntData(22);
+                trust->vitRank = (uint8)sql->GetIntData(23);
+                trust->agiRank = (uint8)sql->GetIntData(24);
+                trust->intRank = (uint8)sql->GetIntData(25);
+                trust->mndRank = (uint8)sql->GetIntData(26);
+                trust->chrRank = (uint8)sql->GetIntData(27);
+                trust->defRank = (uint8)sql->GetIntData(28);
+                trust->attRank = (uint8)sql->GetIntData(29);
+                trust->accRank = (uint8)sql->GetIntData(30);
+                trust->evaRank = (uint8)sql->GetIntData(31);
 
                 // resistances
                 trust->slash_sdt  = (uint16)(sql->GetFloatData(32) * 1000);
@@ -569,7 +569,7 @@ namespace trustutils
         {
             if (grade::GetJobGrade(sJob, 1) != 0 && sLvl > 0)
             {
-                raceStat = (grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * (sLvl - 1)) /  settings::get<uint8>("map.SJ_MP_DIVISOR");
+                raceStat = (grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * (sLvl - 1)) / settings::get<uint8>("map.SJ_MP_DIVISOR");
             }
         }
         else
@@ -592,7 +592,7 @@ namespace trustutils
             sJobStat = grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column);
         }
 
-        PTrust->health.maxmp = (int16)( settings::get<float>("map.ALTER_EGO_MP_MULTIPLIER") * (raceStat + jobStat + sJobStat));
+        PTrust->health.maxmp = (int16)(settings::get<float>("map.ALTER_EGO_MP_MULTIPLIER") * (raceStat + jobStat + sJobStat));
 
         PTrust->health.tp = 0;
         PTrust->UpdateHealth();
@@ -646,13 +646,13 @@ namespace trustutils
         }
 
         auto statMultiplier = settings::get<float>("map.ALTER_EGO_STAT_MULTIPLIER");
-        PTrust->stats.STR = static_cast<uint16>((fSTR + mSTR + sSTR) * statMultiplier);
-        PTrust->stats.DEX = static_cast<uint16>((fDEX + mDEX + sDEX) * statMultiplier);
-        PTrust->stats.VIT = static_cast<uint16>((fVIT + mVIT + sVIT) * statMultiplier);
-        PTrust->stats.AGI = static_cast<uint16>((fAGI + mAGI + sAGI) * statMultiplier);
-        PTrust->stats.INT = static_cast<uint16>((fINT + mINT + sINT) * statMultiplier);
-        PTrust->stats.MND = static_cast<uint16>((fMND + mMND + sMND) * statMultiplier);
-        PTrust->stats.CHR = static_cast<uint16>((fCHR + mCHR + sCHR) * statMultiplier);
+        PTrust->stats.STR   = static_cast<uint16>((fSTR + mSTR + sSTR) * statMultiplier);
+        PTrust->stats.DEX   = static_cast<uint16>((fDEX + mDEX + sDEX) * statMultiplier);
+        PTrust->stats.VIT   = static_cast<uint16>((fVIT + mVIT + sVIT) * statMultiplier);
+        PTrust->stats.AGI   = static_cast<uint16>((fAGI + mAGI + sAGI) * statMultiplier);
+        PTrust->stats.INT   = static_cast<uint16>((fINT + mINT + sINT) * statMultiplier);
+        PTrust->stats.MND   = static_cast<uint16>((fMND + mMND + sMND) * statMultiplier);
+        PTrust->stats.CHR   = static_cast<uint16>((fCHR + mCHR + sCHR) * statMultiplier);
 
         // Skills =======================
         for (int i = SKILL_DIVINE_MAGIC; i <= SKILL_BLUE_MAGIC; i++)
