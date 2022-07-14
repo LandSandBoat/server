@@ -3722,6 +3722,7 @@ namespace luautils
         {
             PZone->ForEachChar([](CCharEntity* PChar)
             {
+                PChar->PersistData();
                 charutils::SaveCharPosition(PChar);
                 charutils::SaveCharStats(PChar);
                 charutils::SaveCharExp(PChar, PChar->GetMJob());

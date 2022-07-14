@@ -540,6 +540,7 @@ void SmallPacket0x00D(map_session_data_t* const PSession, CCharEntity* const PCh
         PChar->loc.zone->DecreaseZoneCounter(PChar);
     }
 
+    PChar->PersistData();
     charutils::SaveCharStats(PChar);
     charutils::SaveCharExp(PChar, PChar->GetMJob());
     charutils::SaveEminenceData(PChar);
