@@ -57,4 +57,34 @@ xi.abjurations =
     xi.items.CURSED_SUNE_ATE_M1,
     xi.items.SHURA_SUNE_ATE,
     xi.items.SHURA_SUNE_ATE_P1,
+
+    xi.items.EARTHEN_ABJURATION_HEAD,
+    xi.items.CURSED_CELATA,
+    xi.items.CURSED_CELATA_M1,
+    xi.items.ADAMAN_CELATA,
+    xi.items.ARMADA_CELATA,
+
+    xi.items.EARTHEN_ABJURATION_BODY,
+    xi.items.CURSED_HAUBERK,
+    xi.items.CURSED_HAUBERK_M1,
+    xi.items.ADAMAN_HAUBERK,
+    xi.items.ARMADA_HAUBERK,
+
+    xi.items.EARTHEN_ABJURATION_HANDS,
+    xi.items.CURSED_MUFFLERS,
+    xi.items.CURSED_MUFFLERS_M1,
+    xi.items.ADAMAN_MUFFLERS,
+    xi.items.ARMADA_MUFFLERS,
+
+    xi.items.EARTHEN_ABJURATION_LEGS,
+    xi.items.CURSED_BREECHES,
+    xi.items.CURSED_BREECHES_M1,
+    xi.items.ADAMAN_BREECHES,
+    xi.items.ARMADA_BREECHES,
+
+    xi.items.EARTHEN_ABJURATION_FEET,
+    xi.items.CURSED_SOLLERETS,
+    xi.items.CURSED_SOLLERETS_M1,
+    xi.items.ADAMAN_SOLLERETS,
+    xi.items.ARMADA_SOLLERETS,
 }
