@@ -4713,10 +4713,16 @@ namespace luautils
 
     void HandleCustomMenu(CCharEntity* PChar, std::string selection)
     {
-        // selection is of the form:
+        // Selection is of the form:
         // GMTELL(Testo): Question(Test Menu): Result (Option 1)
         // Cancelled:
         // GMTELL(Testo): Question(Test Menu (Play Effect)): Result (Canceled.)
+
+        if (selection.empty())
+        {
+            ShowWarning(fmt::format("Custom menu for {} was provided an empty string.", PChar->name));
+            return;
+        }
 
         std::string cleanedSelection = selection.substr(selection.find("): Result (") + 11);
         cleanedSelection.pop_back(); // Remove trailing ')'
