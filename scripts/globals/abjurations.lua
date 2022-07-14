@@ -717,4 +717,34 @@ xi.abjurations =
     xi.items.VOODOO_SOLLERETS,
     xi.items.ARGOSY_SOLLERETS,
     xi.items.ARGOSY_SOLLERETS_P1,
+
+    xi.items.VENERIAN_ABJURATION_HEAD,
+    xi.items.VEXED_COIF,
+    xi.items.JINXED_COIF,
+    xi.items.AMALRIC_COIF,
+    xi.items.AMALRIC_COIF_P1,
+
+    xi.items.VENERIAN_ABJURATION_BODY,
+    xi.items.VEXED_DOUBLET,
+    xi.items.JINXED_DOUBLET,
+    xi.items.AMALRIC_DOUBLET,
+    xi.items.AMALRIC_DOUBLET_P1,
+
+    xi.items.VENERIAN_ABJURATION_HANDS,
+    xi.items.VEXED_GAGES,
+    xi.items.JINXED_GAGES,
+    xi.items.AMALRIC_GAGES,
+    xi.items.AMALRIC_GAGES_P1,
+
+    xi.items.VENERIAN_ABJURATION_LEGS,
+    xi.items.VEXED_SLOPS,
+    xi.items.JINXED_SLOPS,
+    xi.items.AMALRIC_SLOPS,
+    xi.items.AMALRIC_SLOPS_P1,
+
+    xi.items.VENERIAN_ABJURATION_FEET,
+    xi.items.VEXED_NAILS,
+    xi.items.JINXED_NAILS,
+    xi.items.AMALRIC_NAILS,
+    xi.items.AMALRIC_NAILS_P1,
 }
