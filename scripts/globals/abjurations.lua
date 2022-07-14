@@ -117,4 +117,34 @@ xi.abjurations =
     xi.items.CURSED_PUMPS_M1,
     xi.items.ZENITH_PUMPS,
     xi.items.ZENITH_PUMPS_P1,
+
+    xi.items.MARTIAL_ABJURATION_HEAD,
+    xi.items.CURSED_SCHALLER,
+    xi.items.CURSED_SCHALLER_M1,
+    xi.items.KOENIG_SCHALLER,
+    xi.items.KAISER_SCHALLER,
+
+    xi.items.MARTIAL_ABJURATION_BODY,
+    xi.items.CURSED_CUIRASS,
+    xi.items.CURSED_CUIRASS_M1,
+    xi.items.KOENIG_CUIRASS,
+    xi.items.KAISER_CUIRASS,
+
+    xi.items.MARTIAL_ABJURATION_HANDS,
+    xi.items.CURSED_HANDSCHUHS,
+    xi.items.CURSED_HANDSCHUHS_M1,
+    xi.items.KOENIG_HANDSCHUHS,
+    xi.items.KAISER_HANDSCHUHS,
+
+    xi.items.MARTIAL_ABJURATION_LEGS,
+    xi.items.CURSED_DIECHLINGS,
+    xi.items.CURSED_DIECHLINGS_M1,
+    xi.items.KOENIG_DIECHLINGS,
+    xi.items.KAISER_DIECHLINGS,
+
+    xi.items.MARTIAL_ABJURATION_FEET,
+    xi.items.CURSED_SCHUHS,
+    xi.items.CURSED_SCHUHS_M1,
+    xi.items.KOENIG_SCHUHS,
+    xi.items.KAISER_SCHUHS,
 }
