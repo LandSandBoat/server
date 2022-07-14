@@ -387,4 +387,34 @@ xi.abjurations =
     xi.items.HEXED_SUNE_ATE_M1,
     xi.items.TENRYU_SUNE_ATE,
     xi.items.TENRYU_SUNE_ATE_P1,
+
+    xi.items.TRANSITORY_ABJURATION_HEAD,
+    xi.items.HEXED_BONNET,
+    xi.items.HEXED_BONNET_M1,
+    xi.items.KHEPER_BONNET,
+    xi.items.KHEPRI_BONNET,
+
+    xi.items.TRANSITORY_ABJURATION_BODY,
+    xi.items.HEXED_JACKET,
+    xi.items.HEXED_JACKET_M1,
+    xi.items.KHEPER_JACKET,
+    xi.items.KHEPRI_JACKET,
+
+    xi.items.TRANSITORY_ABJURATION_HANDS,
+    xi.items.HEXED_WRISTBANDS,
+    xi.items.HEXED_WRISTBANDS_M1,
+    xi.items.KHEPER_WRISTBANDS,
+    xi.items.KHEPRI_WRISTBANDS,
+
+    xi.items.TRANSITORY_ABJURATION_LEGS,
+    xi.items.HEXED_KECKS,
+    xi.items.HEXED_KECKS_M1,
+    xi.items.KHEPER_KECKS,
+    xi.items.KHEPRI_KECKS,
+
+    xi.items.TRANSITORY_ABJURATION_FEET,
+    xi.items.HEXED_GAMASHES,
+    xi.items.HEXED_GAMASHES_M1,
+    xi.items.KHEPER_GAMASHES,
+    xi.items.KHEPRI_GAMASHES,
 }
