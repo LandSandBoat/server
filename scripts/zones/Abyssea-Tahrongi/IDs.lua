@@ -67,6 +67,27 @@ zones[xi.zone.ABYSSEA_TAHRONGI] =
     },
     mob =
     {
+        HALIMEDE                    = 16961917,
+        VETEHINEN                   = 16961918,
+        OPHANIM                     = 16961919,
+        CANNERED_NOZ                = 16961920,
+        TREBLE_NOCTULES             = 16961921,
+        GANCANAGH                   = 16961922,
+        HEDETET                     = 16961923,
+        ABAS                        = 16961924,
+        ALECTRYON                   = 16961925,
+        TEFNET                      = 16961926,
+        MUSCALIET                   = 16961927,
+        LACHRYMATER                 = 16961928,
+        CHLORIS                     = 16961929,
+        GLAVOID                     = 16961930,
+        LACOVIE                     = 16961931,
+        CHLORIS_1                   = 16961946,
+        GLAVOID_1                   = 16961947,
+        LACOVIE_1                   = 16961948,
+        CHLORIS_2                   = 16961949,
+        GLAVOID_2                   = 16961950,
+        LACOVIE_2                   = 16961951,
     },
     npc =
     {
