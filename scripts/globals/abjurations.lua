@@ -297,4 +297,34 @@ xi.abjurations =
     xi.items.HEXED_GAMBIERAS_M1,
     xi.items.HRAFN_GAMBIERAS,
     xi.items.HUGINN_GAMBIERAS,
+
+    xi.items.FOREBODING_ABJURATION_HEAD,
+    xi.items.HEXED_COIF,
+    xi.items.HEXED_COIF_M1,
+    xi.items.AUSPEX_COIF,
+    xi.items.SPURRINA_COIF,
+
+    xi.items.FOREBODING_ABJURATION_BODY,
+    xi.items.HEXED_DOUBLET,
+    xi.items.HEXED_DOUBLET_M1,
+    xi.items.AUSPEX_DOUBLET,
+    xi.items.SPURRINA_DOUBLET,
+
+    xi.items.FOREBODING_ABJURATION_HANDS,
+    xi.items.HEXED_GAGES,
+    xi.items.HEXED_GAGES_M1,
+    xi.items.AUSPEX_GAGES,
+    xi.items.SPURRINA_GAGES,
+
+    xi.items.FOREBODING_ABJURATION_LEGS,
+    xi.items.HEXED_SLOPS,
+    xi.items.HEXED_SLOPS_M1,
+    xi.items.AUSPEX_SLOPS,
+    xi.items.SPURRINA_SLOPS,
+
+    xi.items.FOREBODING_ABJURATION_FEET,
+    xi.items.HEXED_NAILS,
+    xi.items.HEXED_NAILS_M1,
+    xi.items.AUSPEX_NAILS,
+    xi.items.SPURRINA_NAILS,
 }
