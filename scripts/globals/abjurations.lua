@@ -267,4 +267,34 @@ xi.abjurations =
     xi.items.CURSED_CLOGS_M1,
     xi.items.SHADOW_CLOGS,
     xi.items.VALKYRIES_CLOGS,
+
+    xi.items.CORVINE_ABJURATION_HEAD,
+    xi.items.HEXED_CORONET,
+    xi.items.HEXED_CORONET_M1,
+    xi.items.HRAFN_CORONET,
+    xi.items.HUGINN_CORONET,
+
+    xi.items.CORVINE_ABJURATION_BODY,
+    xi.items.HEXED_HAUBERT,
+    xi.items.HEXED_HAUBERT_M1,
+    xi.items.HRAFN_HAUBERT,
+    xi.items.HUGINN_HAUBERT,
+
+    xi.items.CORVINE_ABJURATION_HANDS,
+    xi.items.HEXED_GAUNTLETS,
+    xi.items.HEXED_GAUNTLETS_M1,
+    xi.items.HRAFN_GAUNTLETS,
+    xi.items.HUGINN_GAUNTLETS,
+
+    xi.items.CORVINE_ABJURATION_LEGS,
+    xi.items.HEXED_HOSE,
+    xi.items.HEXED_HOSE_M1,
+    xi.items.HRAFN_HOSE,
+    xi.items.HUGINN_HOSE,
+
+    xi.items.CORVINE_ABJURATION_FEET,
+    xi.items.HEXED_GAMBIERAS,
+    xi.items.HEXED_GAMBIERAS_M1,
+    xi.items.HRAFN_GAMBIERAS,
+    xi.items.HUGINN_GAMBIERAS,
 }
