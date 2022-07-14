@@ -158,6 +158,7 @@ xi.items =
     MYTHRIL_BEASTCOIN               = 749,
     SILVER_BEASTCOIN                = 750,
     CHUNK_OF_DURIUM_ORE             = 756,
+    FLINT_STONE                     = 768,
     RED_ROCK                        = 769,
     BLUE_ROCK                       = 770,
     YELLOW_ROCK                     = 771,
