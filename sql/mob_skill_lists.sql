@@ -3833,6 +3833,11 @@ INSERT INTO `mob_skill_lists` VALUES ('Pyuu_The_Spatemaker',1189,770);
 INSERT INTO `mob_skill_lists` VALUES ('Atkorkamuy',1190,463);
 INSERT INTO `mob_skill_lists` VALUES ('Qoofim',1191,450);
 INSERT INTO `mob_skill_lists` VALUES ('Qoofim',1191,451);
+INSERT INTO `mob_skill_lists` VALUES ('Upyri',1192,392);
+INSERT INTO `mob_skill_lists` VALUES ('Upyri',1192,394);
+INSERT INTO `mob_skill_lists` VALUES ('Upyri',1192,1155);
+INSERT INTO `mob_skill_lists` VALUES ('Upyri',1192,1156);
+INSERT INTO `mob_skill_lists` VALUES ('Upyri',1192,1401);
 
 -- Next available ID: 1192
 

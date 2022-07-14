@@ -5043,6 +5043,14 @@ INSERT INTO `mob_spell_lists` VALUES('Donnergugi', 505, 161, 1, 255); -- stone i
 INSERT INTO `mob_spell_lists` VALUES('Donnergugi', 505, 190, 1, 255); -- stonega ii (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Donnergugi', 505, 238, 1, 255); -- rasp (1~255)
 
+-- Gration (505)
+INSERT INTO `mob_spell_lists` VALUES('Gration', 505, 57, 1, 255);  -- haste (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Gration', 505, 104, 1, 255); -- enthunder (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Gration', 505, 167, 1, 255); -- thunder iv (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Gration', 505, 196, 1, 255); -- thundaga iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Gration', 505, 212, 1, 255); -- burst (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Gration', 505, 251, 1, 255); -- shock spikes (1~255)
+
 -- Next Avail 506
 
 -- AirSkyBoat Specific Starts at 5000

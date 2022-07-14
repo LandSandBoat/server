@@ -20188,10 +20188,10 @@ INSERT INTO `mob_droplist` VALUES (2525,0,0,1000,3246,@UNCOMMON);  -- Snow God C
 INSERT INTO `mob_droplist` VALUES (2525,0,0,1000,15910,@UNCOMMON); -- Primal Belt (Uncommon, 10%)
 
 -- ZoneID:  25 - Upyri
-INSERT INTO `mob_droplist` VALUES (2526,0,0,1000,14443,@ALWAYS); -- Vampire Cloak (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (2526,0,0,1000,15197,450);     -- Vampire Mask (45.0%)
-INSERT INTO `mob_droplist` VALUES (2526,0,0,1000,15338,350);     -- Vampire Boots (35.0%)
-INSERT INTO `mob_droplist` VALUES (2526,0,0,1000,14783,80);      -- Vampire Earring (8.0%)
+INSERT INTO `mob_droplist` VALUES (2526,0,0,1000,14443,@ALWAYS);  -- Vampire Cloak (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (2526,0,0,1000,15197,@VCOMMON); -- Vampire Mask (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2526,0,0,1000,15338,@VCOMMON); -- Vampire Boots (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2526,0,0,1000,14783,@RARE);    -- Vampire Earring (Rare, 5%)
 
 -- ZoneID:   3 - Uragnite
 INSERT INTO `mob_droplist` VALUES (2527,0,0,1000,888,340);  -- Seashell (34.0%)
@@ -23395,7 +23395,7 @@ INSERT INTO `mob_droplist` VALUES (2800,0,0,1000,1442,200);        -- Oblation A
 INSERT INTO `mob_droplist` VALUES (2800,0,0,1000,17804,@UNCOMMON); -- Ushikirimaru (Uncommon, 10%)
 
 -- ZoneID:  25 - Ziphius
-INSERT INTO `mob_droplist` VALUES (2801,0,0,1000,14807,370); -- Hospitaler Earring (37.0%)
+INSERT INTO `mob_droplist` VALUES (2801,0,0,1000,14807,@COMMON); -- Hospitaler Earring (Common, 15%)
 
 -- ZoneID:  90 - Zircon Quadav
 INSERT INTO `mob_droplist` VALUES (2802,0,0,1000,4862,60);    -- Scroll Of Blind (6.0%)
@@ -24886,7 +24886,7 @@ INSERT INTO `mob_droplist` VALUES (3055,0,0,1000,16018,333); -- Ataraxy Earring 
 INSERT INTO `mob_droplist` VALUES (3056,0,0,1000,17970,@UNCOMMON); -- Lyft Tabar (Uncommon, 10%)
 
 -- ZoneID:  25 - Okyupete
-INSERT INTO `mob_droplist` VALUES (3057,0,0,1000,16297,62); -- Shepherds Chain (6.2%)
+INSERT INTO `mob_droplist` VALUES (3057,0,0,1000,16297,@RARE); -- Shepherds Chain (Rare, 5%)
 
 -- ZoneID: 143 - Behya Hundredwall
 INSERT INTO `mob_droplist` VALUES (3058,0,0,1000,2841,@VCOMMON); -- Ingot Of Quadav Silver (Very Common, 24%)
@@ -24977,7 +24977,7 @@ INSERT INTO `mob_droplist` VALUES (3082,0,0,1000,2809,125); -- Vial Of Furia Pig
 INSERT INTO `mob_droplist` VALUES (3083,0,0,1000,11496,48); -- Fenrirs Crown (4.8%)
 
 -- ZoneID:  25 - Goaftrap
-INSERT INTO `mob_droplist` VALUES (3084,0,0,1000,16035,41); -- Altdorfs Earring (4.1%)
+INSERT INTO `mob_droplist` VALUES (3084,0,0,1000,16035,@RARE); -- Altdorfs Earring (Rare, 5%)
 
 -- ZoneID:  89 - Sarcopsylla
 INSERT INTO `mob_droplist` VALUES (3085,0,0,1000,11408,63); -- Moranas Pigaches (6.3%)
