@@ -1,54 +1,54 @@
 -- Buarainech
-INSERT INTO `mob_droplist` VALUES(3925, 0, 0, 1000, 2858, 250); -- Wolfram Steel Ingot
-INSERT INTO `mob_droplist` VALUES(3925, 0, 1, 1000, 2858, 250); -- Wolfram Steel Ingot
-INSERT INTO `mob_droplist` VALUES(3925, 0, 2, 1000, 2858, 250); -- Wolfram Steel Ingot
-INSERT INTO `mob_droplist` VALUES(3925, 0, 3, 1000, 2859, 550); -- Chunk of Cobalt Ore
-INSERT INTO `mob_droplist` VALUES(3925, 0, 4, 1000, 19307, 125); -- Blunt Lance
-INSERT INTO `mob_droplist` VALUES(3925, 0, 5, 1000, 11411, 188); -- Shrewd Pumps
-INSERT INTO `mob_droplist` VALUES(3925, 0, 6, 1000, 2275, 200); -- Scintillant Ingot
-INSERT INTO `mob_droplist` VALUES(3925, 0, 6, 1000, 747, 150); -- Orichalcum Ingot
+INSERT INTO `mob_droplist` VALUES(3998, 0, 0, 1000, 2858, 250); -- Wolfram Steel Ingot
+INSERT INTO `mob_droplist` VALUES(3998, 0, 1, 1000, 2858, 250); -- Wolfram Steel Ingot
+INSERT INTO `mob_droplist` VALUES(3998, 0, 2, 1000, 2858, 250); -- Wolfram Steel Ingot
+INSERT INTO `mob_droplist` VALUES(3998, 0, 3, 1000, 2859, 550); -- Chunk of Cobalt Ore
+INSERT INTO `mob_droplist` VALUES(3998, 0, 4, 1000, 19307, 125); -- Blunt Lance
+INSERT INTO `mob_droplist` VALUES(3998, 0, 5, 1000, 11411, 188); -- Shrewd Pumps
+INSERT INTO `mob_droplist` VALUES(3998, 0, 6, 1000, 2275, 200); -- Scintillant Ingot
+INSERT INTO `mob_droplist` VALUES(3998, 0, 6, 1000, 747, 150); -- Orichalcum Ingot
 -- Elatha
-INSERT INTO `mob_droplist` VALUES(3926, 0, 0, 1000, 2858, 260); -- Wolfram Steel Ingot
-INSERT INTO `mob_droplist` VALUES(3926, 0, 1, 1000, 2858, 260); -- Wolfram Steel Ingot
-INSERT INTO `mob_droplist` VALUES(3926, 0, 2, 1000, 2858, 260); -- Wolfram Steel Ingot
-INSERT INTO `mob_droplist` VALUES(3926, 0, 3, 1000, 2859, 550); -- Chunk of Cobalt Ore
-INSERT INTO `mob_droplist` VALUES(3926, 0, 4, 1000, 19162, 316); -- Dull Claymore
-INSERT INTO `mob_droplist` VALUES(3926, 0, 5, 1000, 15057, 272); -- Bricta's Cuffs
-INSERT INTO `mob_droplist` VALUES(3926, 0, 6, 1000, 2275, 200); -- Scintillant Ingot
-INSERT INTO `mob_droplist` VALUES(3926, 0, 6, 1000, 747, 82); -- Orichalcum Ingot
+INSERT INTO `mob_droplist` VALUES(3997, 0, 0, 1000, 2858, 260); -- Wolfram Steel Ingot
+INSERT INTO `mob_droplist` VALUES(3997, 0, 1, 1000, 2858, 260); -- Wolfram Steel Ingot
+INSERT INTO `mob_droplist` VALUES(3997, 0, 2, 1000, 2858, 260); -- Wolfram Steel Ingot
+INSERT INTO `mob_droplist` VALUES(3997, 0, 3, 1000, 2859, 550); -- Chunk of Cobalt Ore
+INSERT INTO `mob_droplist` VALUES(3997, 0, 4, 1000, 19162, 316); -- Dull Claymore
+INSERT INTO `mob_droplist` VALUES(3997, 0, 5, 1000, 15057, 272); -- Bricta's Cuffs
+INSERT INTO `mob_droplist` VALUES(3997, 0, 6, 1000, 2275, 200); -- Scintillant Ingot
+INSERT INTO `mob_droplist` VALUES(3997, 0, 6, 1000, 747, 82); -- Orichalcum Ingot
 -- Lugh
-INSERT INTO `mob_droplist` VALUES(3927, 0, 0, 1000, 2858, 500); -- Wolfram Steel Ingot
-INSERT INTO `mob_droplist` VALUES(3927, 0, 1, 1000, 2858, 500); -- Wolfram Steel Ingot
-INSERT INTO `mob_droplist` VALUES(3927, 0, 2, 1000, 2858, 500); -- Wolfram Steel Ingot
-INSERT INTO `mob_droplist` VALUES(3927, 0, 3, 1000, 2859, 550); -- Chunk of Cobalt Ore
-INSERT INTO `mob_droplist` VALUES(3927, 0, 4, 1000, 17767, 154); -- Chipped Scimitar
-INSERT INTO `mob_droplist` VALUES(3927, 0, 5, 1000, 11410, 77); -- Setanta's Ledelsens
-INSERT INTO `mob_droplist` VALUES(3927, 0, 6, 1000, 2275, 200); -- Scintillant Ingot
-INSERT INTO `mob_droplist` VALUES(3927, 0, 6, 1000, 747, 86); -- Orichalcum Ingot
+INSERT INTO `mob_droplist` VALUES(3996, 0, 0, 1000, 2858, 500); -- Wolfram Steel Ingot
+INSERT INTO `mob_droplist` VALUES(3996, 0, 1, 1000, 2858, 500); -- Wolfram Steel Ingot
+INSERT INTO `mob_droplist` VALUES(3996, 0, 2, 1000, 2858, 500); -- Wolfram Steel Ingot
+INSERT INTO `mob_droplist` VALUES(3996, 0, 3, 1000, 2859, 550); -- Chunk of Cobalt Ore
+INSERT INTO `mob_droplist` VALUES(3996, 0, 4, 1000, 17767, 154); -- Chipped Scimitar
+INSERT INTO `mob_droplist` VALUES(3996, 0, 5, 1000, 11410, 77); -- Setanta's Ledelsens
+INSERT INTO `mob_droplist` VALUES(3996, 0, 6, 1000, 2275, 200); -- Scintillant Ingot
+INSERT INTO `mob_droplist` VALUES(3996, 0, 6, 1000, 747, 86); -- Orichalcum Ingot
 -- Ethniu
-INSERT INTO `mob_droplist` VALUES(3928, 0, 0, 1000, 2858, 520); -- Wolfram Steel Ingot
-INSERT INTO `mob_droplist` VALUES(3928, 0, 1, 1000, 2858, 520); -- Wolfram Steel Ingot
-INSERT INTO `mob_droplist` VALUES(3928, 0, 2, 1000, 2858, 520); -- Wolfram Steel Ingot
-INSERT INTO `mob_droplist` VALUES(3928, 0, 3, 1000, 2859, 550); -- Chunk of Cobalt Ore
-INSERT INTO `mob_droplist` VALUES(3928, 0, 4, 1000, 19128, 200); -- Edgeless Knife
-INSERT INTO `mob_droplist` VALUES(3928, 0, 5, 1000, 16376, 200); -- Bahram Cuisses
-INSERT INTO `mob_droplist` VALUES(3928, 0, 6, 1000, 2275, 200); -- Scintillant Ingot
-INSERT INTO `mob_droplist` VALUES(3928, 0, 7, 1000, 747, 50); -- Orichalcum Ingot
+INSERT INTO `mob_droplist` VALUES(3995, 0, 0, 1000, 2858, 520); -- Wolfram Steel Ingot
+INSERT INTO `mob_droplist` VALUES(3995, 0, 1, 1000, 2858, 520); -- Wolfram Steel Ingot
+INSERT INTO `mob_droplist` VALUES(3995, 0, 2, 1000, 2858, 520); -- Wolfram Steel Ingot
+INSERT INTO `mob_droplist` VALUES(3995, 0, 3, 1000, 2859, 550); -- Chunk of Cobalt Ore
+INSERT INTO `mob_droplist` VALUES(3995, 0, 4, 1000, 19128, 200); -- Edgeless Knife
+INSERT INTO `mob_droplist` VALUES(3995, 0, 5, 1000, 16376, 200); -- Bahram Cuisses
+INSERT INTO `mob_droplist` VALUES(3995, 0, 6, 1000, 2275, 200); -- Scintillant Ingot
+INSERT INTO `mob_droplist` VALUES(3995, 0, 7, 1000, 747, 50); -- Orichalcum Ingot
 -- Tethra
-INSERT INTO `mob_droplist` VALUES(3929, 0, 0, 1000, 2858, 550); -- Wolfram Steel Ingot
-INSERT INTO `mob_droplist` VALUES(3929, 0, 0, 1000, 2858, 550); -- Wolfram Steel Ingot
-INSERT INTO `mob_droplist` VALUES(3929, 0, 0, 1000, 2858, 550); -- Wolfram Steel Ingot
-INSERT INTO `mob_droplist` VALUES(3929, 0, 0, 1000, 2859, 550); -- Chunk of Cobalt Ore
-INSERT INTO `mob_droplist` VALUES(3929, 0, 0, 1000, 18617, 233); -- Cracked Staff
-INSERT INTO `mob_droplist` VALUES(3929, 0, 0, 1000, 16302, 167); -- Bloodbead Gorget
-INSERT INTO `mob_droplist` VALUES(3929, 0, 0, 1000, 2275, 167); -- Scintillant Ingot
-INSERT INTO `mob_droplist` VALUES(3929, 0, 0, 1000, 747, 100); -- Orichalcum Ingot
+INSERT INTO `mob_droplist` VALUES(3994, 0, 0, 1000, 2858, 550); -- Wolfram Steel Ingot
+INSERT INTO `mob_droplist` VALUES(3994, 0, 0, 1000, 2858, 550); -- Wolfram Steel Ingot
+INSERT INTO `mob_droplist` VALUES(3994, 0, 0, 1000, 2858, 550); -- Wolfram Steel Ingot
+INSERT INTO `mob_droplist` VALUES(3994, 0, 0, 1000, 2859, 550); -- Chunk of Cobalt Ore
+INSERT INTO `mob_droplist` VALUES(3994, 0, 0, 1000, 18617, 233); -- Cracked Staff
+INSERT INTO `mob_droplist` VALUES(3994, 0, 0, 1000, 16302, 167); -- Bloodbead Gorget
+INSERT INTO `mob_droplist` VALUES(3994, 0, 0, 1000, 2275, 167); -- Scintillant Ingot
+INSERT INTO `mob_droplist` VALUES(3994, 0, 0, 1000, 747, 100); -- Orichalcum Ingot
 
-UPDATE `mob_groups` SET `respawntime`='14400', `spawntype`='0', `dropid`='3927', `HP`='34433', `MP`='20000', `maxLevel`='82' WHERE  `zoneid`=171 AND `groupid`=18;
-UPDATE `mob_groups` SET `respawntime`='14400', `spawntype`='0', `dropid`='3929', `HP`='25291', `MP`='20000', `maxLevel`='82' WHERE  `zoneid`=175 AND `groupid`=23;
-UPDATE `mob_groups` SET `respawntime`='14400', `spawntype`='0', `dropid`='3928', `HP`='25291', `MP`='20000', `maxLevel`='82' WHERE  `zoneid`=175 AND `groupid`=14;
-UPDATE `mob_groups` SET `respawntime`='14400', `spawntype`='0', `dropid`='3925', `HP`='17214', `MP`='20000', `maxLevel`='82' WHERE  `zoneid`=164 AND `groupid`=18;
-UPDATE `mob_groups` SET `respawntime`='14400', `spawntype`='0', `dropid`='3926', `HP`='49486', `MP`='20000', `maxLevel`='82' WHERE  `zoneid`=164 AND `groupid`=15;
+UPDATE `mob_groups` SET `respawntime`='14400', `spawntype`='0', `dropid`='3996', `HP`='34433', `MP`='20000', `maxLevel`='82' WHERE  `zoneid`=171 AND `groupid`=18;
+UPDATE `mob_groups` SET `respawntime`='14400', `spawntype`='0', `dropid`='3994', `HP`='25291', `MP`='20000', `maxLevel`='82' WHERE  `zoneid`=175 AND `groupid`=23;
+UPDATE `mob_groups` SET `respawntime`='14400', `spawntype`='0', `dropid`='3995', `HP`='25291', `MP`='20000', `maxLevel`='82' WHERE  `zoneid`=175 AND `groupid`=14;
+UPDATE `mob_groups` SET `respawntime`='14400', `spawntype`='0', `dropid`='3998', `HP`='17214', `MP`='20000', `maxLevel`='82' WHERE  `zoneid`=164 AND `groupid`=18;
+UPDATE `mob_groups` SET `respawntime`='14400', `spawntype`='0', `dropid`='3997', `HP`='49486', `MP`='20000', `maxLevel`='82' WHERE  `zoneid`=164 AND `groupid`=15;
 
 
 UPDATE `mob_pools` SET `spellList`='464', `skill_list_id`='5016' WHERE  `poolid`=6886;
