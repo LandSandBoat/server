@@ -9,3 +9,4 @@
 ##  3901 - Domain Invasion (Bahamut)
 ##  3900 - Domain Invasion (Amphisbaena, Tortuga, and Battosai)
 ##
+##  #### Do not assign custom drop ID's below 3900
