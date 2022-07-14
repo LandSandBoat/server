@@ -357,4 +357,34 @@ xi.abjurations =
     xi.items.HEXED_BOOTS_M1,
     xi.items.PAEAN_BOOTS,
     xi.items.IASO_BOOTS,
+
+    xi.items.SUPERNAL_ABJURATION_HEAD,
+    xi.items.HEXED_SOMEN,
+    xi.items.HEXED_SOMEN_M1,
+    xi.items.TENRYU_SOMEN,
+    xi.items.TENRYU_SOMEN_P1,
+
+    xi.items.SUPERNAL_ABJURATION_BODY,
+    xi.items.HEXED_DOMARU,
+    xi.items.HEXED_DOMARU_M1,
+    xi.items.TENRYU_DOMARU,
+    xi.items.TENRYU_DOMARU_P1,
+
+    xi.items.SUPERNAL_ABJURATION_HANDS,
+    xi.items.HEXED_TEKKO,
+    xi.items.HEXED_TEKKO_M1,
+    xi.items.TENRYU_TEKKO,
+    xi.items.TENRYU_TEKKO_P1,
+
+    xi.items.SUPERNAL_ABJURATION_LEGS,
+    xi.items.HEXED_HAKAMA,
+    xi.items.HEXED_HAKAMA_M1,
+    xi.items.TENRYU_HAKAMA,
+    xi.items.TENRYU_HAKAMA_P1,
+
+    xi.items.SUPERNAL_ABJURATION_FEET,
+    xi.items.HEXED_SUNE_ATE,
+    xi.items.HEXED_SUNE_ATE_M1,
+    xi.items.TENRYU_SUNE_ATE,
+    xi.items.TENRYU_SUNE_ATE_P1,
 }
