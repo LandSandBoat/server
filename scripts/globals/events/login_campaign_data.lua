@@ -122,7 +122,6 @@ local prizes =
 			26717, -- Cait Sith Cap
 			26738, -- Leafkin Cap
 			26707, -- Flan Masque
-			23737, -- Byakko Masque
 			26789, -- Shobuhouou Kabuto
 			
 			-- Cycle #4
@@ -516,6 +515,7 @@ local prizes =
 			-- 13567, -- Bomb Queen Ring
 			-- 13303, -- Jelly Ring
 			-- 17759, -- Koggelmander
+			-- 19236, -- Hightail Bullet
 			
 			-- Cycle #4 -- HQ Kings pop items/Carbuncle Prime/WOTG Nations/Naji's/TH+1 hat
 			-- 3340,  -- Sweet Tea (Nidhogg pop)
