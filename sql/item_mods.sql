@@ -56030,16 +56030,6 @@ INSERT INTO `item_mods` VALUES (26357,28,7);   -- MATT: 7
 INSERT INTO `item_mods` VALUES (26357,30,7);   -- MACC: 7
 INSERT INTO `item_mods` VALUES (26357,311,35); -- MAGIC_DAMAGE: 35
 
--- Campestress Cape
-INSERT INTO `item_mods` VALUES (26260,1,15);    -- DEF: 15
-INSERT INTO `item_mods` VALUES (26260,126,5);   -- BP_DAMAGE: 5
-INSERT INTO `item_mods` VALUES (26260,1040,1);  -- AVATAR_LVL_BONUS: 1
-
--- Visuciuss Mantle
-INSERT INTO `item_mods` VALUES (26263,1,16);    -- DEF: 16
-INSERT INTO `item_mods` VALUES (26263,505,10);  -- OVERLOAD_THRESH: 10
-INSERT INTO `item_mods` VALUES (26263,1044,1);  -- AUTOMATON_LVL_BONUS: 1
-
 -- Gerdr Belt+1
 INSERT INTO `item_mods` VALUES (26361,9,7);   -- DEX: 7
 INSERT INTO `item_mods` VALUES (26361,11,7);  -- AGI: 7
