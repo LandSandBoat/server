@@ -237,4 +237,34 @@ xi.abjurations =
     xi.items.CURSED_SABATONS_M1,
     xi.items.SHADOW_SABATONS,
     xi.items.VALKYRIES_SABATONS,
+
+    xi.items.HADEAN_ABJURATION_HEAD,
+    xi.items.CURSED_HAT,
+    xi.items.CURSED_HAT_M1,
+    xi.items.SHADOW_HAT,
+    xi.items.VALKYRIES_HAT,
+
+    xi.items.HADEAN_ABJURATION_BODY,
+    xi.items.CURSED_COAT,
+    xi.items.CURSED_COAT_M1,
+    xi.items.SHADOW_COAT,
+    xi.items.VALKYRIES_COAT,
+
+    xi.items.HADEAN_ABJURATION_HANDS,
+    xi.items.CURSED_CUFFS,
+    xi.items.CURSED_CUFFS_M1,
+    xi.items.SHADOW_CUFFS,
+    xi.items.VALKYRIES_CUFFS,
+
+    xi.items.HADEAN_ABJURATION_LEGS,
+    xi.items.CURSED_TREWS,
+    xi.items.CURSED_TREWS_M1,
+    xi.items.SHADOW_TREWS,
+    xi.items.VALKYRIES_TREWS,
+
+    xi.items.HADEAN_ABJURATION_FEET,
+    xi.items.CURSED_CLOGS,
+    xi.items.CURSED_CLOGS_M1,
+    xi.items.SHADOW_CLOGS,
+    xi.items.VALKYRIES_CLOGS,
 }
