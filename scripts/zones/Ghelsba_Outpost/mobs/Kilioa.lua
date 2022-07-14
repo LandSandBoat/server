@@ -12,11 +12,10 @@ local entity = {}
 entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.SLEEPRES, 1000)
     mob:setMod(xi.mod.LULLABYRES, 1000)
-    mob:setMobMod(xi.mobMod.NO_MOVE, 1) -- lock from moving
+    mob:setRoamFlags(xi.roamFlag.EVENT)
 end
 
 entity.onMobEngaged = function(mob, target)
-    mob:setMobMod(xi.mobMod.NO_MOVE, 0) -- unlock mob
     GetMobByID(mob:getID() - 1):updateEnmity(target) -- link Kalamainu
     mob:useMobAbility(373) -- secretion
 end

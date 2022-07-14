@@ -14,13 +14,9 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setMobMod(xi.mobMod.NO_MOVE, 1)
+    mob:setRoamFlags(xi.roamFlag.EVENT)
     mob:setLocalVar("tpskill", math.random(15, 30))
     mob:setLocalVar("capreset", 120)
-end
-
-entity.onMobEngaged = function(mob)
-    mob:setMobMod(xi.mobMod.NO_MOVE, 0)
 end
 
 entity.onMobFight = function(mob, target)

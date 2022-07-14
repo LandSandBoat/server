@@ -8,19 +8,15 @@ local entity = {}
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.SUPERLINK, 1)
     mob:setMod(xi.mod.SLEEPRES, 1000)
-    mob:setMod(xi.mod.BINDRES, 500)
+    mob:setMod(xi.mod.BINDRES, 50)
     mob:setMod(xi.mod.LULLABYRES, 1000)
     mob:setMobMod(xi.mobMod.SOUND_RANGE, 15)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setMobMod(xi.mobMod.NO_MOVE, 1)
+    mob:setRoamFlags(xi.roamFlag.EVENT)
     mob:setLocalVar("tpskill", math.random(15, 30))
     mob:setLocalVar("capreset", 120)
-end
-
-entity.onMobEngaged = function(mob)
-    mob:setMobMod(xi.mobMod.NO_MOVE, 0)
 end
 
 entity.onMobFight = function(mob, target)
