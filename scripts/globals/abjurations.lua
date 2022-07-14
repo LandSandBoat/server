@@ -567,4 +567,34 @@ xi.abjurations =
     xi.items.JINXED_BOOTS,
     xi.items.KAYKAUS_BOOTS,
     xi.items.KAYKAUS_BOOTS_P1,
+
+    xi.items.GROVE_ABJURATION_HEAD,
+    xi.items.BEWITCHED_KABUTO,
+    xi.items.VOODOO_KABUTO,
+    xi.items.RAO_KABUTO,
+    xi.items.RAO_KABUTO_P1,
+
+    xi.items.GROVE_ABJURATION_BODY,
+    xi.items.BEWITCHED_TOGI,
+    xi.items.VOODOO_TOGI,
+    xi.items.RAO_TOGI,
+    xi.items.RAO_TOGI_P1,
+
+    xi.items.GROVE_ABJURATION_HANDS,
+    xi.items.BEWITCHED_KOTE,
+    xi.items.VOODOO_KOTE,
+    xi.items.RAO_KOTE,
+    xi.items.RAO_KOTE_P1,
+
+    xi.items.GROVE_ABJURATION_LEGS,
+    xi.items.BEWITCHED_HAIDATE,
+    xi.items.VOODOO_HAIDATE,
+    xi.items.RAO_HAIDATE,
+    xi.items.RAO_HAIDATE_P1,
+
+    xi.items.GROVE_ABJURATION_FEET,
+    xi.items.BEWITCHED_SUNE_ATE,
+    xi.items.VOODOO_SUNE_ATE,
+    xi.items.RAO_SUNE_ATE,
+    xi.items.RAO_SUNE_ATE_P1,
 }
