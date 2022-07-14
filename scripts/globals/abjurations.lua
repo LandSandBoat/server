@@ -16,6 +16,7 @@ xi.abjurations =
     --  nq reward,
     --  hq reward
 
+    -- Begin Sky Abjurations
     xi.items.LIBATION_ABJURATION,
     xi.items.BOTTLE_OF_CURSED_BEVERAGE,
     xi.items.BOTTLE_OF_CURSED_BEVERAGE,
@@ -208,6 +209,7 @@ xi.abjurations =
     xi.items.HECATOMB_LEGGINGS,
     xi.items.HECATOMB_LEGGINGS_P1,
 
+    -- Begin Einherjar Abjurations
     xi.items.PHANTASMAL_ABJURATION_HEAD,
     xi.items.CURSED_HELM,
     xi.items.CURSED_HELM_M1,
@@ -268,6 +270,7 @@ xi.abjurations =
     xi.items.SHADOW_CLOGS,
     xi.items.VALKYRIES_CLOGS,
 
+    -- Begin Voidwatch/Legion Abjurations
     xi.items.CORVINE_ABJURATION_HEAD,
     xi.items.HEXED_CORONET,
     xi.items.HEXED_CORONET_M1,
@@ -418,6 +421,7 @@ xi.abjurations =
     xi.items.KHEPER_GAMASHES,
     xi.items.KHEPRI_GAMASHES,
 
+    -- Begin Escha - Ru'Aun Abjurations
     xi.items.ABYSSAL_ABJURATION_HEAD,
     xi.items.BEWITCHED_CROWN,
     xi.items.VOODOO_CROWN,
