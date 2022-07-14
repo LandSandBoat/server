@@ -7,10 +7,12 @@ require("scripts/globals/hunts")
 -----------------------------------
 local entity = {}
 
--- TODO: Grab spawn positions
-
 entity.onMobInitialize = function(mob)
-    mob:setMobMod(xi.mobMod.ROAM_DISTANCE, 1)
+    mob:setMobMod(xi.mobMod.NO_MOVE, 1)
+end
+
+entity.onMobEngaged = function(mob)
+    mob:setMobMod(xi.mobMod.NO_MOVE, 0)
 end
 
 entity.onMobRoam = function(mob)

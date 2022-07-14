@@ -535,10 +535,10 @@ INSERT INTO `mob_droplist` VALUES (49,0,0,1000,887,@RARE);       -- Coral Fragme
 INSERT INTO `mob_droplist` VALUES (49,0,0,1000,1311,20);         -- Piece Of Oxblood (2.0%)
 
 -- ZoneID: 158 - Alkyoneus
-INSERT INTO `mob_droplist` VALUES (50,0,0,1000,12292,630); -- Mahogany Shield (63.0%)
-INSERT INTO `mob_droplist` VALUES (50,0,0,1000,497,510);   -- Gigas Socks (51.0%)
-INSERT INTO `mob_droplist` VALUES (50,0,0,1000,499,300);   -- Gigas Necklace (30.0%)
-INSERT INTO `mob_droplist` VALUES (50,0,0,1000,14022,60);  -- Alkyoneuss Bracelets (6.0%)
+INSERT INTO `mob_droplist` VALUES (50,0,0,1000,12292,@VCOMMON); -- Mahogany Shield (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (50,0,0,1000,497,@ALWAYS);    -- Gigas Socks (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (50,0,0,1000,499,@COMMON);    -- Gigas Necklace (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (50,0,0,1000,14022,@RARE);    -- Alkyoneuss Bracelets (Rare, 5%)
 
 -- ZoneID:  85 - All-Seeing Onyx Eye
 INSERT INTO `mob_droplist` VALUES (51,0,0,1000,2681,@ALWAYS);  -- Evergreen Strongbox (Always, 100%)
@@ -6505,10 +6505,10 @@ INSERT INTO `mob_droplist` VALUES (771,0,0,1000,18944,20);       -- Death Sickle
 INSERT INTO `mob_droplist` VALUES (771,0,0,1000,19102,20);       -- Main Gauche (2.0%)
 
 -- ZoneID: 158 - Enkelados
-INSERT INTO `mob_droplist` VALUES (772,0,0,1000,497,750);   -- Gigas Socks (75.0%)
-INSERT INTO `mob_droplist` VALUES (772,0,0,1000,12292,350); -- Mahogany Shield (35.0%)
-INSERT INTO `mob_droplist` VALUES (772,0,0,1000,499,230);   -- Gigas Necklace (23.0%)
-INSERT INTO `mob_droplist` VALUES (772,0,0,1000,14020,60);  -- Enkeladoss Bracelets (6.0%)
+INSERT INTO `mob_droplist` VALUES (772,0,0,1000,497,@ALWAYS);    -- Gigas Socks (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (772,0,0,1000,12292,@VCOMMON); -- Mahogany Shield (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (772,0,0,1000,499,@COMMON);    -- Gigas Necklace (23.0%)
+INSERT INTO `mob_droplist` VALUES (772,0,0,1000,14020,@VCOMMON); -- Enkeladoss Bracelets (Very Common, 24%)
 
 -- ZoneID: 177 - Enkidu
 INSERT INTO `mob_droplist` VALUES (773,0,0,1000,644,430); -- Chunk Of Mythril Ore (43.0%)
@@ -6650,10 +6650,10 @@ INSERT INTO `mob_droplist` VALUES (786,0,0,1000,2861,200); -- Timeworn Talisman 
 -- ZoneID: 184 - Epialtes
 -- ZoneID: 184 - Hippolytos
 -- ZoneID: 184 - Eurymedon
-INSERT INTO `mob_droplist` VALUES (787,0,0,1000,497,450);         -- Gigas Socks (45.0%)
-INSERT INTO `mob_droplist` VALUES (787,0,0,1000,499,320);         -- Gigas Necklace (32.0%)
-INSERT INTO `mob_droplist` VALUES (787,0,0,1000,14018,@UNCOMMON); -- Gigas Bracelets (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (787,0,0,1000,12290,30);        -- Maple Shield (3.0%)
+INSERT INTO `mob_droplist` VALUES (787,0,0,1000,497,@ALWAYS);    -- Gigas Socks (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (787,0,0,1000,12290,@VCOMMON); -- Maple Shield (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (787,0,0,1000,499,@VCOMMON);   -- Gigas Necklace (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (787,0,0,1000,14018,@COMMON);  -- Gigas Bracelets (Common, 15%)
 
 -- ZoneID: 112 - Ereshkigal
 INSERT INTO `mob_droplist` VALUES (788,0,0,1000,825,@UNCOMMON);  -- Square Of Cotton Cloth (Uncommon, 10%)
@@ -11453,7 +11453,7 @@ INSERT INTO `mob_droplist` VALUES (1382,0,0,1000,4362,20);     -- Lizard Egg (2.
 INSERT INTO `mob_droplist` VALUES (1382,0,0,1000,4362,@VRARE); -- Lizard Egg (Very Rare, 1%)
 
 -- ZoneID: 158 - Ixtab
-INSERT INTO `mob_droplist` VALUES (1383,0,0,1000,940,300);       -- Revival Tree Root (30.0%)
+INSERT INTO `mob_droplist` VALUES (1383,0,0,1000,940,@VCOMMON);  -- Revival Tree Root (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (1383,0,0,1000,1281,@VCOMMON); -- Square Of Cheviot Cloth (Very Common, 24%)
 
 -- ZoneID: 194 - Jack Of Batons
@@ -13522,7 +13522,7 @@ INSERT INTO `mob_droplist` VALUES (1673,0,0,1000,4755,20); -- Scroll Of Fire Iv 
 INSERT INTO `mob_droplist` VALUES (1673,0,0,1000,4812,20); -- Scroll Of Flare (2.0%)
 
 -- ZoneID: 158 - Mimas
-INSERT INTO `mob_droplist` VALUES (1674,0,0,1000,16721,110); -- Huge Moth Axe (11.0%)
+INSERT INTO `mob_droplist` VALUES (1674,0,0,1000,16721,@RARE); -- Huge Moth Axe (Rare, 5%)
 
 -- ZoneID:  12 - Mimic
 INSERT INTO `mob_droplist` VALUES (1675,0,0,1000,1063,@ALWAYS); -- Newton Coffer Key (Always, 100%)
@@ -15106,10 +15106,10 @@ INSERT INTO `mob_droplist` VALUES (1843,0,0,1000,846,60); -- Insect Wing (6.0%)
 INSERT INTO `mob_droplist` VALUES (1843,2,0,1000,846,0);  -- Insect Wing (Steal)
 
 -- ZoneID: 157 - Ogygos
-INSERT INTO `mob_droplist` VALUES (1844,0,0,1000,497,960);         -- Gigas Socks (96.0%)
-INSERT INTO `mob_droplist` VALUES (1844,0,0,1000,12292,390);       -- Mahogany Shield (39.0%)
-INSERT INTO `mob_droplist` VALUES (1844,0,0,1000,499,120);         -- Gigas Necklace (12.0%)
-INSERT INTO `mob_droplist` VALUES (1844,0,0,1000,14019,@UNCOMMON); -- Ogygoss Bracelets (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (1844,0,0,1000,497,@ALWAYS);    -- Gigas Socks (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (1844,0,0,1000,12292,@VCOMMON); -- Mahogany Shield (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (1844,0,0,1000,499,@VCOMMON);   -- Gigas Necklace (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (1844,0,0,1000,14019,@VCOMMON); -- Ogygoss Bracelets (Very Common, 24%)
 
 -- ZoneID:  79 - Oil Slick
 INSERT INTO `mob_droplist` VALUES (1845,0,0,1000,637,140); -- Vial Of Slime Oil (14.0%)
@@ -16143,10 +16143,10 @@ INSERT INTO `mob_droplist` VALUES (1974,0,0,1000,16173,@UNCOMMON); -- Pallass Sh
 INSERT INTO `mob_droplist` VALUES (1974,0,0,1000,14021,20);        -- Pallass Bracelets (2.0%)
 
 -- ZoneID: 158 - Pallas
-INSERT INTO `mob_droplist` VALUES (1975,0,0,1000,497,800);   -- Gigas Socks (80.0%)
-INSERT INTO `mob_droplist` VALUES (1975,0,0,1000,12292,430); -- Mahogany Shield (43.0%)
-INSERT INTO `mob_droplist` VALUES (1975,0,0,1000,499,350);   -- Gigas Necklace (35.0%)
-INSERT INTO `mob_droplist` VALUES (1975,0,0,1000,14021,190); -- Pallass Bracelets (19.0%)
+INSERT INTO `mob_droplist` VALUES (1975,0,0,1000,497,@ALWAYS);    -- Gigas Socks (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (1975,0,0,1000,12292,@VCOMMON); -- Mahogany Shield (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (1975,0,0,1000,499,@COMMON);    -- Gigas Necklace (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (1975,0,0,1000,14021,@RARE);    -- Pallass Bracelets (Rare, 5%)
 
 -- ZoneID: 215 - Pallid Percy
 INSERT INTO `mob_droplist` VALUES (1976,0,0,1000,3121,430);  -- Unkai Seal Head (43.0%)
@@ -24482,10 +24482,10 @@ INSERT INTO `mob_droplist` VALUES (2947,0,0,1000,2818,86); -- Aptant Of Ishis (8
 INSERT INTO `mob_droplist` VALUES (2947,0,0,1000,2817,60); -- Aptant Of Pera (6.0%)
 
 -- ZoneID: 184 - Tyrant
-INSERT INTO `mob_droplist` VALUES (2948,0,0,1000,2845,164); -- Loop Of Aramid Fiber (16.4%)
+INSERT INTO `mob_droplist` VALUES (2948,0,0,1000,2845,@COMMON); -- Loop Of Aramid Fiber (Common, 16.4%)
 
 -- ZoneID: 158 - Autarch
-INSERT INTO `mob_droplist` VALUES (2949,0,0,1000,18507,102); -- Kinship Axe (10.2%)
+INSERT INTO `mob_droplist` VALUES (2949,0,0,1000,18507,@COMMON); -- Kinship Axe (Common, 15%)
 
 -- ZoneID:  89 - Kotan-Kor Kamuy
 INSERT INTO `mob_droplist` VALUES (2950,0,0,1000,17854,133); -- Cradle Horn (13.3%)

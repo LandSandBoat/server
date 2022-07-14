@@ -37,7 +37,7 @@ end
 zone_object.onZoneOut = function(player)
     if player:hasStatusEffect(xi.effect.BATTLEFIELD) then
         player:delStatusEffect(xi.effect.BATTLEFIELD)
-	end
+    end
 end
 
 zone_object.onRegionEnter = function(player, region)
@@ -59,7 +59,7 @@ zone_object.onZoneWeatherChange = function(weather)
         and (weather == xi.weather.THUNDER or weather == xi.weather.THUNDERSTORMS)
     then
         DisallowRespawn(dosetsu:getID(), false)
-        dosetsu:setRespawnTime(math.random(30, 150)) -- pop 30-150 sec after wind weather starts
+        dosetsu:setRespawnTime(math.random(30, 150)) -- pop 30-150 sec after thunder weather starts
     end
 end
 
