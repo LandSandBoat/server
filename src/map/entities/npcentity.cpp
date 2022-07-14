@@ -42,7 +42,7 @@ CNpcEntity::CNpcEntity()
     m_flags     = 0;
     name_prefix = 0;
 
-    PAI        = std::make_unique<CAIContainer>(this);
+    PAI = std::make_unique<CAIContainer>(this);
 }
 
 CNpcEntity::~CNpcEntity() = default;

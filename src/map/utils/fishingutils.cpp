@@ -376,14 +376,14 @@ namespace fishingutils
     {
         uint8 bonusAdd = (legendary) ? rod->lgdBonusAtk : 0;
 
-        return (uint16)std::floor(difficulty * ((rod->fishAttack + bonusAdd) / 100)) * 20;
+        return (uint16)std::floor(difficulty * (((static_cast<float>(rod->fishAttack) + bonusAdd) / 100.0f)) * 20.0f);
     }
 
     uint16 CalculateHeal(bool legendary, uint8 difficulty, rod_t* rod)
     {
         uint16 attack = CalculateAttack(legendary, difficulty, rod);
 
-        return (uint16)std::floor((attack / 20) * ((float)rod->fishRecovery / 100)) * 10;
+        return (uint16)std::floor((static_cast<float>(attack) / 20.0f) * (static_cast<float>(rod->fishRecovery) / 100.0f)) * 10.0f;
     }
 
     uint8 CalculateRegen(uint8 fishingSkill, rod_t* rod, FISHINGCATCHTYPE catchType, uint8 sizeType, uint8 catchSkill, bool legendaryCatch, bool NM)

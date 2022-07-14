@@ -550,7 +550,7 @@ int32 lobbyview_parse(int32 fd)
 
     if (RFIFOREST(fd) >= 9)
     {
-        auto maintMode  = settings::get<uint8>("login.MAINT_MODE");
+        auto maintMode = settings::get<uint8>("login.MAINT_MODE");
 
         char* buff = &sessions[fd]->rdata[0];
         ShowDebug("lobbyview_parse:Incoming Packet: <%x> from ip:<%s>", ref<uint8>(buff, 8), ip2str(sd->client_addr));

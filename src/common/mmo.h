@@ -239,7 +239,7 @@ struct look_t
         ranged  = look[9];
     }
 
-    look_t(std::vector<uint16> &look)
+    look_t(std::vector<uint16>& look)
     {
         if (look.size() == 10)
         {
@@ -259,7 +259,6 @@ struct look_t
             look_t();
         }
     }
-
 };
 
 struct skills_t
@@ -434,7 +433,7 @@ struct eminencelog_t
 
     eminencelog_t()
     {
-        std::memset(&active,   0, sizeof(active));
+        std::memset(&active, 0, sizeof(active));
         std::memset(&progress, 0, sizeof(progress));
         std::memset(&complete, 0, sizeof(complete));
     }
@@ -444,7 +443,8 @@ struct eminencecache_t
 {
     std::bitset<4096> activemap;
     uint32            lastWriteout;
-    bool              notifyTimedRecord;;
+    bool              notifyTimedRecord;
+    ;
 
     eminencecache_t()
     {
@@ -572,8 +572,8 @@ public:
     {
         std::memset(&m_name, 0, sizeof(m_name));
 
-        m_mjob = 0;
-        m_zone = 0;
+        m_mjob   = 0;
+        m_zone   = 0;
         m_nation = 0;
     };
     ~char_mini(){};

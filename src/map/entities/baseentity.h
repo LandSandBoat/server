@@ -288,14 +288,14 @@ public:
 
     bool IsDynamicEntity() const;
 
-    uint32          id;         // global identifier unique on the server
-    uint16          targid;     // local identifier unique to the zone
-    ENTITYTYPE      objtype;    // Type of entity
-    STATUS_TYPE     status;     // Entity status (different entities - different statuses)
-    uint16          m_TargID;   // the targid of the object the entity is looking at
-    string_t        name;       // Entity name
-    string_t        packetName; // Used to override name when being sent to the client
-    look_t          look; //
+    uint32          id;           // global identifier unique on the server
+    uint16          targid;       // local identifier unique to the zone
+    ENTITYTYPE      objtype;      // Type of entity
+    STATUS_TYPE     status;       // Entity status (different entities - different statuses)
+    uint16          m_TargID;     // the targid of the object the entity is looking at
+    string_t        name;         // Entity name
+    string_t        packetName;   // Used to override name when being sent to the client
+    look_t          look;         //
     look_t          mainlook;     // only used if mob use changeSkin() or player /lockstyle
     location_t      loc;          // Location of entity
     uint8           animation;    // animation

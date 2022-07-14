@@ -250,8 +250,8 @@ void message_server_init()
     zSocket->set(zmq::sockopt::rcvtimeo, 500);
 
     auto server = fmt::format("tcp://{}:{}",
-        settings::get<std::string>("network.ZMQ_IP"),
-        settings::get<std::string>("network.ZMQ_PORT"));
+                              settings::get<std::string>("network.ZMQ_IP"),
+                              settings::get<std::string>("network.ZMQ_PORT"));
 
     try
     {
