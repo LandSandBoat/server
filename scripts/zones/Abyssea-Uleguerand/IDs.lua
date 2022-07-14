@@ -67,6 +67,28 @@ zones[xi.zone.ABYSSEA_ULEGUERAND] =
     },
     mob =
     {
+        IRONCLAD_TRITURATOR      = 17813925,
+        DHORME_KHIMAIRA          = 17813927,
+        BLANGA                   = 17813930,
+        YAGUAROGUI               = 17813931,
+        KOGHATU                  = 17813933,
+        UPAS_KAMUY               = 17813935,
+        VERI_SELEN               = 17813937,
+        ANEMIC_ALOYSIUS          = 17813956,
+        CHILLWING_HWITTI         = 17813939,
+        AUDUMBLA                 = 17813940,
+        PANTOKRATOR              = 17813910,
+        APADEMAK                 = 17813911,
+        ISGEBIND                 = 17813912,
+        RESHEPH                  = 17813913,
+        PANTOKRATOR_1            = 17813914,
+        APADEMAK_1               = 17813915,
+        ISGEBIND_1               = 17813916,
+        RESHEPH_1                = 17813917,
+        PANTOKRATOR_2            = 17813918,
+        APADEMAK_2               = 17813919,
+        ISGEBIND_2               = 17813920,
+        RESHEPH_2                = 17813921,
     },
     npc =
     {

@@ -4,7 +4,8 @@
 -- Spawns Pantokrator
 -- !pos -198 -175 140 253
 -----------------------------------
-require("scripts/globals/abyssea")
+require('scripts/globals/abyssea')
+require('scripts/globals/keyitems')
 -----------------------------------
 local entity = {}
 
@@ -13,7 +14,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    -- xi.abyssea.qmOnTrigger(player, npc)
+    local ID = zones[player:getZoneID()]
+    xi.abyssea.qmOnTrigger(player, npc, ID.mob.PANTOKRATOR_1, { xi.ki.WARPED_IRON_GIANT_NAIL, xi.ki.DENTED_CHARIOT_SHIELD })
 end
 
 entity.onEventUpdate = function(player, csid, option)
