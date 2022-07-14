@@ -687,4 +687,34 @@ xi.abjurations =
     xi.items.VOODOO_LEGGINGS,
     xi.items.LUSTRATIO_LEGGINGS,
     xi.items.LUSTRATIO_LEGGINGS_P1,
+
+    xi.items.VALE_ABJURATION_HEAD,
+    xi.items.BEWITCHED_CELATA,
+    xi.items.VOODOO_CELATA,
+    xi.items.ARGOSY_CELATA,
+    xi.items.ARGOSY_CELATA_P1,
+
+    xi.items.VALE_ABJURATION_BODY,
+    xi.items.BEWITCHED_HAUBERK,
+    xi.items.VOODOO_HAUBERK,
+    xi.items.ARGOSY_HAUBERK,
+    xi.items.ARGOSY_HAUBERK_P1,
+
+    xi.items.VALE_ABJURATION_HANDS,
+    xi.items.BEWITCHED_MUFFLERS,
+    xi.items.VOODOO_MUFFLERS,
+    xi.items.ARGOSY_MUFFLERS,
+    xi.items.ARGOSY_MUFFLERS_P1,
+
+    xi.items.VALE_ABJURATION_LEGS,
+    xi.items.BEWITCHED_BREECHES,
+    xi.items.VOODOO_BREECHES,
+    xi.items.ARGOSY_BREECHES,
+    xi.items.ARGOSY_BREECHES_P1,
+
+    xi.items.VALE_ABJURATION_FEET,
+    xi.items.BEWITCHED_SOLLERETS,
+    xi.items.VOODOO_SOLLERETS,
+    xi.items.ARGOSY_SOLLERETS,
+    xi.items.ARGOSY_SOLLERETS_P1,
 }
