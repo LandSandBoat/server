@@ -142,6 +142,9 @@ namespace luautils
     bool  IsConquestAlliance();
     int32 SetRegionalConquestOverseers(uint8 regionID); // Update NPC Conquest Guard
     void  SendLuaFuncStringToZone(uint16 zoneId, std::string const& str);
+    void UpdateSanrakusMobs(); // Update sanraku's (ZNM) subject of interest and recommended fauna
+    void ZNMPopPriceDecay();   // Price of ZNM pop items decay over time
+    uint8 GetHealingTickDelay(); // Returns the configured healing tick delay
 
     auto GetReadOnlyItem(uint32 id) -> std::optional<CLuaItem>; // Returns a read only lookup item object of the specified ID
     auto GetAbility(uint16 id) -> std::optional<CLuaAbility>;

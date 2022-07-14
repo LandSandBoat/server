@@ -1,6 +1,7 @@
 -----------------------------------
 -- Area: Wajaom Woodlands
 --  ZNM: Vulpangue
+--  !pos -697 -7 -123
 -----------------------------------
 mixins = {require("scripts/mixins/rage")}
 require("scripts/globals/status")
