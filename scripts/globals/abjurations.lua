@@ -477,4 +477,34 @@ xi.abjurations =
     xi.items.JINXED_SUNE_ATE,
     xi.items.RYUO_SUNE_ATE,
     xi.items.RYUO_SUNE_ATE_P1,
+
+    xi.items.BUSHIN_ABJURATION_HEAD,
+    xi.items.BEWITCHED_SCHALLER,
+    xi.items.VOODOO_SCHALLER,
+    xi.items.SOUVERAN_SCHALLER,
+    xi.items.SOUVERAN_SCHALLER_P1,
+
+    xi.items.BUSHIN_ABJURATION_BODY,
+    xi.items.BEWITCHED_CUIRASS,
+    xi.items.VOODOO_CUIRASS,
+    xi.items.SOUVERAN_CUIRASS,
+    xi.items.SOUVERAN_CUIRASS_P1,
+
+    xi.items.BUSHIN_ABJURATION_HANDS,
+    xi.items.BEWITCHED_HANDSCHUHS,
+    xi.items.VOODOO_HANDSCHUHS,
+    xi.items.SOUVERAN_HANDSCHUHS,
+    xi.items.SOUVERAN_HANDSCHUHS_P1,
+
+    xi.items.BUSHIN_ABJURATION_LEGS,
+    xi.items.BEWITCHED_DIECHLINGS,
+    xi.items.VOODOO_DIECHLINGS,
+    xi.items.SOUVERAN_DIECHLINGS,
+    xi.items.SOUVERAN_DIECHLINGS_P1,
+
+    xi.items.BUSHIN_ABJURATION_FEET,
+    xi.items.BEWITCHED_SCHUHS,
+    xi.items.VOODOO_SCHUHS,
+    xi.items.SOUVERAN_SCHUHS,
+    xi.items.SOUVERAN_SCHUHS_P1,
 }
