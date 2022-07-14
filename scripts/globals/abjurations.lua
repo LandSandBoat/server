@@ -87,4 +87,34 @@ xi.abjurations =
     xi.items.CURSED_SOLLERETS_M1,
     xi.items.ADAMAN_SOLLERETS,
     xi.items.ARMADA_SOLLERETS,
+
+    xi.items.AQUARIAN_ABJURATION_HEAD,
+    xi.items.CURSED_CROWN,
+    xi.items.CURSED_CROWN_M1,
+    xi.items.ZENITH_CROWN,
+    xi.items.ZENITH_CROWN_P1,
+
+    xi.items.AQUARIAN_ABJURATION_BODY,
+    xi.items.CURSED_DALMATICA,
+    xi.items.CURSED_DALMATICA_M1,
+    xi.items.DALMATICA,
+    xi.items.DALMATICA_P1,
+
+    xi.items.AQUARIAN_ABJURATION_HANDS,
+    xi.items.CURSED_MITTS,
+    xi.items.CURSED_MITTS_M1,
+    xi.items.ZENITH_MITTS,
+    xi.items.ZENITH_MITTS_P1,
+
+    xi.items.AQUARIAN_ABJURATION_LEGS,
+    xi.items.CURSED_SLACKS,
+    xi.items.CURSED_SLACKS_M1,
+    xi.items.ZENITH_SLACKS,
+    xi.items.ZENITH_SLACKS_P1,
+
+    xi.items.AQUARIAN_ABJURATION_FEET,
+    xi.items.CURSED_PUMPS,
+    xi.items.CURSED_PUMPS_M1,
+    xi.items.ZENITH_PUMPS,
+    xi.items.ZENITH_PUMPS_P1,
 }
