@@ -55905,7 +55905,6 @@ INSERT INTO `item_mods` VALUES (26251,1039,20); -- TRIPLE_ATTACK_DMG: 20
 INSERT INTO `item_mods` VALUES (26258,1,16);  -- DEF: 16
 INSERT INTO `item_mods` VALUES (26258,900,1); -- UTSUSEMI_BONUS: 1
 
-<<<<<<< HEAD
 -- Campestress Cape
 INSERT INTO `item_mods` VALUES (26260,1,15);    -- DEF: 15
 INSERT INTO `item_mods` VALUES (26260,126,5);   -- BP_DAMAGE: 5
@@ -55916,8 +55915,6 @@ INSERT INTO `item_mods` VALUES (26263,1,16);    -- DEF: 16
 INSERT INTO `item_mods` VALUES (26263,505,10);  -- OVERLOAD_THRESH: 10
 INSERT INTO `item_mods` VALUES (26263,1044,1);  -- AUTOMATON_LVL_BONUS: 1
 
-=======
->>>>>>> 259f597283 (Update item_mods.sql and modifier.h to current version)
 -- Moonlight Cape
 INSERT INTO `item_mods` VALUES (26269,1,35);     -- DEF: 35
 INSERT INTO `item_mods` VALUES (26269,2,275);    -- HP: 275
