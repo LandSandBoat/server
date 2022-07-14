@@ -584,8 +584,8 @@ void SmallPacket0x011(map_session_data_t* const PSession, CCharEntity* const PCh
 {
     TracyZoneScoped;
     PSession->blowfish.status = BLOWFISH_ACCEPTED;
-    PChar->status = STATUS_TYPE::NORMAL;
-    PChar->health.tp = 0;
+    PChar->status             = STATUS_TYPE::NORMAL;
+    PChar->health.tp          = 0;
 
     for (uint8 i = 0; i < 16; ++i)
     {
