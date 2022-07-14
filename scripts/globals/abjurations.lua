@@ -657,4 +657,34 @@ xi.abjurations =
     xi.items.VOODOO_GREAVES,
     xi.items.CARMINE_GREAVES,
     xi.items.CARMINE_GREAVES_P1,
+
+    xi.items.TRITON_ABJURATION_HEAD,
+    xi.items.BEWITCHED_CAP,
+    xi.items.VOODOO_CAP,
+    xi.items.LUSTRATIO_CAP,
+    xi.items.LUSTRATIO_CAP_P1,
+
+    xi.items.TRITON_ABJURATION_BODY,
+    xi.items.BEWITCHED_HARNESS,
+    xi.items.VOODOO_HARNESS,
+    xi.items.LUSTRATIO_HARNESS,
+    xi.items.LUSTRATIO_HARNESS_P1,
+
+    xi.items.TRITON_ABJURATION_HANDS,
+    xi.items.BEWITCHED_GLOVES,
+    xi.items.VOODOO_GLOVES,
+    xi.items.LUSTRATIO_MITTENS,
+    xi.items.LUSTRATIO_MITTENS_P1,
+
+    xi.items.TRITON_ABJURATION_LEGS,
+    xi.items.BEWITCHED_SUBLIGAR,
+    xi.items.VOODOO_SUBLIGAR,
+    xi.items.LUSTRATIO_SUBLIGAR,
+    xi.items.LUSTRATIO_SUBLIGAR_P1,
+
+    xi.items.TRITON_ABJURATION_FEET,
+    xi.items.BEWITCHED_LEGGINGS,
+    xi.items.VOODOO_LEGGINGS,
+    xi.items.LUSTRATIO_LEGGINGS,
+    xi.items.LUSTRATIO_LEGGINGS_P1,
 }
