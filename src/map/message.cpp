@@ -689,7 +689,7 @@ namespace message
         zSocket->set(zmq::sockopt::routing_id, zmq::const_buffer(&ipp, sizeof(ipp)));
         zSocket->set(zmq::sockopt::rcvtimeo, 500);
 
-        string_t server = "tcp://";
+        std::string server = "tcp://";
         server.append(chatIp);
         server.append(":");
         server.append(std::to_string(chatPort));

@@ -59,10 +59,10 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 struct Pet_t
 {
-    uint16    PetID;     // ID in pet_list.sql
-    look_t    look;      // внешний вид
-    string_t  name;      // имя
-    ECOSYSTEM EcoSystem; // эко-система
+    uint16      PetID;     // ID in pet_list.sql
+    look_t      look;      // внешний вид
+    std::string name;      // имя
+    ECOSYSTEM   EcoSystem; // эко-система
 
     uint8 minLevel; // минимально-возможный  уровень
     uint8 maxLevel; // максимально-возможный уровень

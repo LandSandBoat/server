@@ -196,8 +196,6 @@ constexpr auto msgTypeToStr = [](uint8 msgtype)
     };
 };
 
-typedef std::string string_t;
-
 // For characters, the size is stored in `size`.
 // For NPCs and monsters, something like the type of model is stored.
 
@@ -491,7 +489,7 @@ struct search_t
 
 struct bazaar_t
 {
-    string_t message;
+    std::string message;
 
     bazaar_t()
     {

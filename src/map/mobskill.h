@@ -119,7 +119,7 @@ private:
     uint8  m_secondarySkillchain;
     uint8  m_tertiarySkillchain;
 
-    string_t m_name;
+    std::string m_name;
 };
 
 #endif
