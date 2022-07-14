@@ -447,4 +447,34 @@ xi.abjurations =
     xi.items.VOODOO_PUMPS,
     xi.items.APOGEE_PUMPS,
     xi.items.APOGEE_PUMPS_P1,
+
+    xi.items.AREAN_ABJURATION_HEAD,
+    xi.items.VEXED_SOMEN,
+    xi.items.JINXED_SOMEN,
+    xi.items.RYUO_SOMEN,
+    xi.items.RYUO_SOMEN_P1,
+
+    xi.items.AREAN_ABJURATION_BODY,
+    xi.items.VEXED_DOMARU,
+    xi.items.JINXED_DOMARU,
+    xi.items.RYUO_DOMARU,
+    xi.items.RYUO_DOMARU_P1,
+
+    xi.items.AREAN_ABJURATION_HANDS,
+    xi.items.VEXED_KOTE,
+    xi.items.JINXED_KOTE,
+    xi.items.RYUO_TEKKO,
+    xi.items.RYUO_TEKKO_P1,
+
+    xi.items.AREAN_ABJURATION_LEGS,
+    xi.items.VEXED_HAKAMA,
+    xi.items.JINXED_HAKAMA,
+    xi.items.RYUO_HAKAMA,
+    xi.items.RYUO_HAKAMA_P1,
+
+    xi.items.AREAN_ABJURATION_FEET,
+    xi.items.VEXED_SUNE_ATE,
+    xi.items.JINXED_SUNE_ATE,
+    xi.items.RYUO_SUNE_ATE,
+    xi.items.RYUO_SUNE_ATE_P1,
 }
