@@ -9,9 +9,9 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.SUPERLINK, 1)
-    mob:setMod(xi.mod.SLEEPRES, 100)
-    mob:setMod(xi.mod.BINDRES, 50)
-    mob:setMod(xi.mod.LULLABYRES, 100)
+    mob:setMod(xi.mod.SLEEPRES, 1000)
+    mob:setMod(xi.mod.BINDRES, 500)
+    mob:setMod(xi.mod.LULLABYRES, 1000)
     mob:setMobMod(xi.mobMod.SOUND_RANGE, 15)
 end
 
