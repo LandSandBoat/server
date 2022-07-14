@@ -7,6 +7,11 @@ mixins = {require("scripts/mixins/job_special")}
 -----------------------------------
 local entity = {}
 
+entity.onMobSpawn = function(mob)
+    mob:addMod(xi.mod.LULLABYRES, 750)
+    mob:addMod(xi.mod.SLEEPRES, 150)
+end
+
 entity.onMobDeath = function(mob, player, isKiller)
 end
 
