@@ -507,4 +507,34 @@ xi.abjurations =
     xi.items.VOODOO_SCHUHS,
     xi.items.SOUVERAN_SCHUHS,
     xi.items.SOUVERAN_SCHUHS_P1,
+
+    xi.items.CRONIAN_ABJURATION_HEAD,
+    xi.items.VEXED_CORONET,
+    xi.items.JINXED_CORONET,
+    xi.items.EMICHO_CORONET,
+    xi.items.EMICHO_CORONET_P1,
+
+    xi.items.CRONIAN_ABJURATION_BODY,
+    xi.items.VEXED_HAUBERT,
+    xi.items.JINXED_HAUBERT,
+    xi.items.EMICHO_HAUBERT,
+    xi.items.EMICHO_HAUBERT_P1,
+
+    xi.items.CRONIAN_ABJURATION_HANDS,
+    xi.items.VEXED_GAUNTLETS,
+    xi.items.JINXED_GAUNTLETS,
+    xi.items.EMICHO_GAUNTLETS,
+    xi.items.EMICHO_GAUNTLETS_P1,
+
+    xi.items.CRONIAN_ABJURATION_LEGS,
+    xi.items.VEXED_HOSE,
+    xi.items.JINXED_HOSE,
+    xi.items.EMICHO_HOSE,
+    xi.items.EMICHO_HOSE_P1,
+
+    xi.items.CRONIAN_ABJURATION_FEET,
+    xi.items.VEXED_GAMBIERAS,
+    xi.items.JINXED_GAMBIERAS,
+    xi.items.EMICHO_GAMBIERAS,
+    xi.items.EMICHO_GAMBIERAS_P1,
 }
