@@ -297,6 +297,8 @@ int32 SqlConnection::QueryStr(const char* query)
     TracyZoneScoped;
     TracyZoneCString(query);
 
+    DebugSQL(query);
+
     if (self == nullptr)
     {
         return SQL_ERROR;
