@@ -122,7 +122,7 @@ bool CWeaponSkillState::Update(time_point tick)
             m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_USE", CLuaBaseEntity(m_PEntity), CLuaBaseEntity(PTarget), m_PSkill->getID(), m_spent, &action);
             PTarget->PAI->EventHandler.triggerListener("WEAPONSKILL_TAKE", CLuaBaseEntity(PTarget), CLuaBaseEntity(m_PEntity), m_PSkill->getID(), m_spent, &action);
 
-            if(m_PEntity->objtype == TYPE_PC)
+            if (m_PEntity->objtype == TYPE_PC)
             {
                 roeutils::event(ROE_EVENT::ROE_WSKILL_USE, static_cast<CCharEntity*>(m_PEntity), RoeDatagram("skillType", m_PSkill->getType()));
             }

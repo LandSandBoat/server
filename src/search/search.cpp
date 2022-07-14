@@ -85,12 +85,12 @@ int32 ah_cleanup(time_point tick, CTaskMgr::CTask* PTask);
 
 void TCPComm(SOCKET socket);
 
-extern void        HandleSearchRequest(CTCPRequestPacket& PTCPRequest);
-extern void        HandleSearchComment(CTCPRequestPacket& PTCPRequest);
-extern void        HandleGroupListRequest(CTCPRequestPacket& PTCPRequest);
-extern void        HandleAuctionHouseHistory(CTCPRequestPacket& PTCPRequest);
-extern void        HandleAuctionHouseRequest(CTCPRequestPacket& PTCPRequest);
-extern search_req  _HandleSearchRequest(CTCPRequestPacket& PTCPRequest);
+extern void       HandleSearchRequest(CTCPRequestPacket& PTCPRequest);
+extern void       HandleSearchComment(CTCPRequestPacket& PTCPRequest);
+extern void       HandleGroupListRequest(CTCPRequestPacket& PTCPRequest);
+extern void       HandleAuctionHouseHistory(CTCPRequestPacket& PTCPRequest);
+extern void       HandleAuctionHouseRequest(CTCPRequestPacket& PTCPRequest);
+extern search_req _HandleSearchRequest(CTCPRequestPacket& PTCPRequest);
 
 extern std::unique_ptr<ConsoleService> gConsoleService;
 

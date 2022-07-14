@@ -356,7 +356,7 @@ struct boundarydata_t
 
     boundarydata_t()
     {
-        count = 0;
+        count  = 0;
         bounds = nullptr;
     }
 };
@@ -376,13 +376,13 @@ struct fishingarea_t
 
     fishingarea_t()
     {
-        zoneId = 0;
-        areaId = 0;
-        areatype = 0;
+        zoneId     = 0;
+        areaId     = 0;
+        areatype   = 0;
         areaBounds = nullptr;
-        numBounds = 0;
-        height = 0;
-        radius = 0;
+        numBounds  = 0;
+        height     = 0;
+        radius     = 0;
         difficulty = 0;
     }
 };
@@ -414,7 +414,6 @@ struct weights_t
         MobPoolWeight   = 0;
         ChestPoolWeight = 0;
         NoCatchWeight   = 0;
-
     }
 };
 
@@ -490,7 +489,7 @@ struct big_fish_stats_t
     {
         length = 0;
         weight = 0;
-        epic = false;
+        epic   = false;
     }
 };
 

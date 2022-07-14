@@ -550,7 +550,7 @@ namespace message
             }
             case MSG_LUA_FUNCTION:
             {
-                auto str = std::string((const char*)extra.data() + 4);
+                auto str    = std::string((const char*)extra.data() + 4);
                 auto result = lua.safe_script(str);
                 if (!result.valid())
                 {
