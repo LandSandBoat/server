@@ -147,4 +147,34 @@ xi.abjurations =
     xi.items.CURSED_SCHUHS_M1,
     xi.items.KOENIG_SCHUHS,
     xi.items.KAISER_SCHUHS,
+
+    xi.items.WYRMAL_ABJURATION_HEAD,
+    xi.items.CURSED_MASK,
+    xi.items.CURSED_MASK_M1,
+    xi.items.CRIMSON_MASK,
+    xi.items.BLOOD_MASK,
+
+    xi.items.WYRMAL_ABJURATION_BODY,
+    xi.items.CURSED_MAIL,
+    xi.items.CURSED_MAIL_M1,
+    xi.items.CRIMSON_SCALE_MAIL,
+    xi.items.BLOOD_SCALE_MAIL,
+
+    xi.items.WYRMAL_ABJURATION_HANDS,
+    xi.items.CURSED_FINGER_GAUNTLETS,
+    xi.items.CURSED_FINGER_GAUNTLETS_M1,
+    xi.items.CRIMSON_FINGER_GAUNTLETS,
+    xi.items.BLOOD_FINGER_GAUNTLETS,
+
+    xi.items.WYRMAL_ABJURATION_LEGS,
+    xi.items.CURSED_CUISSES,
+    xi.items.CURSED_CUISSES_M1,
+    xi.items.CRIMSON_CUISSES,
+    xi.items.BLOOD_CUISSES,
+
+    xi.items.WYRMAL_ABJURATION_FEET,
+    xi.items.CURSED_GREAVES,
+    xi.items.CURSED_GREAVES_M1,
+    xi.items.CRIMSON_GREAVES,
+    xi.items.BLOOD_GREAVES,
 }
