@@ -207,4 +207,34 @@ xi.abjurations =
     xi.items.CURSED_LEGGINGS_M1,
     xi.items.HECATOMB_LEGGINGS,
     xi.items.HECATOMB_LEGGINGS_P1,
+
+    xi.items.PHANTASMAL_ABJURATION_HEAD,
+    xi.items.CURSED_HELM,
+    xi.items.CURSED_HELM_M1,
+    xi.items.SHADOW_HELM,
+    xi.items.VALKYRIES_HELM,
+
+    xi.items.PHANTASMAL_ABJURATION_BODY,
+    xi.items.CURSED_BREASTPLATE,
+    xi.items.CURSED_BREASTPLATE_M1,
+    xi.items.SHADOW_BREASTPLATE,
+    xi.items.VALKYRIES_BREASTPLATE,
+
+    xi.items.PHANTASMAL_ABJURATION_HANDS,
+    xi.items.CURSED_GAUNTLETS,
+    xi.items.CURSED_GAUNTLETS_M1,
+    xi.items.SHADOW_GAUNTLETS,
+    xi.items.VALKYRIES_GAUNTLETS,
+
+    xi.items.PHANTASMAL_ABJURATION_LEGS,
+    xi.items.CURSED_CUISHES,
+    xi.items.CURSED_CUISHES_M1,
+    xi.items.SHADOW_CUISHES,
+    xi.items.VALKYRIES_CUISHES,
+
+    xi.items.PHANTASMAL_ABJURATION_FEET,
+    xi.items.CURSED_SABATONS,
+    xi.items.CURSED_SABATONS_M1,
+    xi.items.SHADOW_SABATONS,
+    xi.items.VALKYRIES_SABATONS,
 }
