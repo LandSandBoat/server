@@ -597,4 +597,34 @@ xi.abjurations =
     xi.items.VOODOO_SUNE_ATE,
     xi.items.RAO_SUNE_ATE,
     xi.items.RAO_SUNE_ATE_P1,
+
+    xi.items.JOVIAN_ABJURATION_HEAD,
+    xi.items.VEXED_BONNET,
+    xi.items.JINXED_BONNET,
+    xi.items.ADHEMAR_BONNET,
+    xi.items.ADHEMAR_BONNET_P1,
+
+    xi.items.JOVIAN_ABJURATION_BODY,
+    xi.items.VEXED_JACKET,
+    xi.items.JINXED_JACKET,
+    xi.items.ADHEMAR_JACKET,
+    xi.items.ADHEMAR_JACKET_P1,
+
+    xi.items.JOVIAN_ABJURATION_HANDS,
+    xi.items.VEXED_WRISTBANDS,
+    xi.items.JINXED_WRISTBANDS,
+    xi.items.ADHEMAR_WRISTBANDS,
+    xi.items.ADHEMAR_WRISTBANDS_P1,
+
+    xi.items.JOVIAN_ABJURATION_LEGS,
+    xi.items.VEXED_KECKS,
+    xi.items.JINXED_KECKS,
+    xi.items.ADHEMAR_KECKS,
+    xi.items.ADHEMAR_KECKS_P1,
+
+    xi.items.JOVIAN_ABJURATION_FEET,
+    xi.items.VEXED_GAMASHES,
+    xi.items.JINXED_GAMASHES,
+    xi.items.ADHEMAR_GAMASHES,
+    xi.items.ADHEMAR_GAMASHES_P1,
 }
