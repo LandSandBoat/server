@@ -627,4 +627,34 @@ xi.abjurations =
     xi.items.JINXED_GAMASHES,
     xi.items.ADHEMAR_GAMASHES,
     xi.items.ADHEMAR_GAMASHES_P1,
+
+    xi.items.SHINRYU_ABJURATION_HEAD,
+    xi.items.BEWITCHED_MASK,
+    xi.items.VOODOO_MASK,
+    xi.items.CARMINE_MASK,
+    xi.items.CARMINE_MASK_P1,
+
+    xi.items.SHINRYU_ABJURATION_BODY,
+    xi.items.BEWITCHED_MAIL,
+    xi.items.VOODOO_MAIL,
+    xi.items.CARMINE_SCALE_MAIL,
+    xi.items.CARMINE_SCALE_MAIL_P1,
+
+    xi.items.SHINRYU_ABJURATION_HANDS,
+    xi.items.BEWITCHED_FINGER_GAUNTLETS,
+    xi.items.VOODOO_FINGER_GAUNTLETS,
+    xi.items.CARMINE_FINGER_GAUNTLETS,
+    xi.items.CARMINE_FINGER_GAUNTLETS_P1,
+
+    xi.items.SHINRYU_ABJURATION_LEGS,
+    xi.items.BEWITCHED_CUISSES,
+    xi.items.VOODOO_CUISSES,
+    xi.items.CARMINE_CUISSES,
+    xi.items.CARMINE_CUISSES_P1,
+
+    xi.items.SHINRYU_ABJURATION_FEET,
+    xi.items.BEWITCHED_GREAVES,
+    xi.items.VOODOO_GREAVES,
+    xi.items.CARMINE_GREAVES,
+    xi.items.CARMINE_GREAVES_P1,
 }
