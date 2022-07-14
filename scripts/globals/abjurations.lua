@@ -177,4 +177,34 @@ xi.abjurations =
     xi.items.CURSED_GREAVES_M1,
     xi.items.CRIMSON_GREAVES,
     xi.items.BLOOD_GREAVES,
+
+    xi.items.NEPTUNAL_ABJURATION_HEAD,
+    xi.items.CURSED_CAP,
+    xi.items.CURSED_CAP_M1,
+    xi.items.HECATOMB_CAP,
+    xi.items.HECATOMB_CAP_P1,
+
+    xi.items.NEPTUNAL_ABJURATION_BODY,
+    xi.items.CURSED_HARNESS,
+    xi.items.CURSED_HARNESS_M1,
+    xi.items.HECATOMB_HARNESS,
+    xi.items.HECATOMB_HARNESS_P1,
+
+    xi.items.NEPTUNAL_ABJURATION_HANDS,
+    xi.items.CURSED_GLOVES,
+    xi.items.CURSED_GLOVES_M1,
+    xi.items.HECATOMB_MITTENS,
+    xi.items.HECATOMB_MITTENS_P1,
+
+    xi.items.NEPTUNAL_ABJURATION_LEGS,
+    xi.items.CURSED_SUBLIGAR,
+    xi.items.CURSED_SUBLIGAR_M1,
+    xi.items.HECATOMB_SUBLIGAR,
+    xi.items.HECATOMB_SUBLIGAR_P1,
+
+    xi.items.NEPTUNAL_ABJURATION_FEET,
+    xi.items.CURSED_LEGGINGS,
+    xi.items.CURSED_LEGGINGS_M1,
+    xi.items.HECATOMB_LEGGINGS,
+    xi.items.HECATOMB_LEGGINGS_P1,
 }
