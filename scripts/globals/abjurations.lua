@@ -327,4 +327,34 @@ xi.abjurations =
     xi.items.HEXED_NAILS_M1,
     xi.items.AUSPEX_NAILS,
     xi.items.SPURRINA_NAILS,
+
+    xi.items.LENITIVE_ABJURATION_HEAD,
+    xi.items.HEXED_MITRA,
+    xi.items.HEXED_MITRA_M1,
+    xi.items.PAEAN_MITRA,
+    xi.items.IASO_MITRA,
+
+    xi.items.LENITIVE_ABJURATION_BODY,
+    xi.items.HEXED_BLIAUT,
+    xi.items.HEXED_BLIAUT_M1,
+    xi.items.PAEAN_BLIAUT,
+    xi.items.IASO_BLIAUT,
+
+    xi.items.LENITIVE_ABJURATION_HANDS,
+    xi.items.HEXED_CUFFS,
+    xi.items.HEXED_CUFFS_M1,
+    xi.items.PAEAN_CUFFS,
+    xi.items.IASO_CUFFS,
+
+    xi.items.LENITIVE_ABJURATION_LEGS,
+    xi.items.HEXED_TIGHTS,
+    xi.items.HEXED_TIGHTS_M1,
+    xi.items.PAEAN_TIGHTS,
+    xi.items.IASO_TIGHTS,
+
+    xi.items.LENITIVE_ABJURATION_FEET,
+    xi.items.HEXED_BOOTS,
+    xi.items.HEXED_BOOTS_M1,
+    xi.items.PAEAN_BOOTS,
+    xi.items.IASO_BOOTS,
 }
