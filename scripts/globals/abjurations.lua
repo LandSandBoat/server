@@ -417,4 +417,34 @@ xi.abjurations =
     xi.items.HEXED_GAMASHES_M1,
     xi.items.KHEPER_GAMASHES,
     xi.items.KHEPRI_GAMASHES,
+
+    xi.items.ABYSSAL_ABJURATION_HEAD,
+    xi.items.BEWITCHED_CROWN,
+    xi.items.VOODOO_CROWN,
+    xi.items.APOGEE_CROWN,
+    xi.items.APOGEE_CROWN_P1,
+
+    xi.items.ABYSSAL_ABJURATION_BODY,
+    xi.items.BEWITCHED_DALMATICA,
+    xi.items.VOODOO_DALMATICA,
+    xi.items.APOGEE_DALMATICA,
+    xi.items.APOGEE_DALMATICA_P1,
+
+    xi.items.ABYSSAL_ABJURATION_HANDS,
+    xi.items.BEWITCHED_MITTS,
+    xi.items.VOODOO_MITTS,
+    xi.items.APOGEE_MITTS,
+    xi.items.APOGEE_MITTS_P1,
+
+    xi.items.ABYSSAL_ABJURATION_LEGS,
+    xi.items.BEWITCHED_SLACKS,
+    xi.items.VOODOO_SLACKS,
+    xi.items.APOGEE_SLACKS,
+    xi.items.APOGEE_SLACKS_P1,
+
+    xi.items.ABYSSAL_ABJURATION_FEET,
+    xi.items.BEWITCHED_PUMPS,
+    xi.items.VOODOO_PUMPS,
+    xi.items.APOGEE_PUMPS,
+    xi.items.APOGEE_PUMPS_P1,
 }
