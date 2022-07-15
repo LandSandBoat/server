@@ -1,6 +1,11 @@
 -----------------------------------
 -- CatsEyeXI Custom NPCs
 -----------------------------------
+require("scripts/globals/keyitems")
+require("scripts/globals/npc_util")
+-----------------------------------
+local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
+
 local m = Module:new("mythic_weapon")
 
 m:addOverride("xi.zones.Nashmau.npcs.Paparoon.onTrade", function(player, npc, trade)
@@ -78,6 +83,7 @@ m:addOverride("xi.zones.Nashmau.npcs.Paparoon.onTrigger", function(player, npc)
 end)
 
 m:addOverride("xi.zones.Caedarva_Mire.npcs.Seaprinces_Tombstone.onTrade", function(player, npc, trade)
+    -- !pos  -433 7 -586 79
     local tinninsFang = npcUtil.tradeHas(trade, 2609)
     local sarameyasHide = npcUtil.tradeHas(trade, 2619)
     local tygersTail = npcUtil.tradeHas(trade, 2629)
@@ -87,7 +93,7 @@ m:addOverride("xi.zones.Caedarva_Mire.npcs.Seaprinces_Tombstone.onTrade", functi
     local imperialGoldPieces = trade:hasItemQty(2187, 99)
     local catsEye = npcUtil.tradeHas(trade, 3443)
     local titleCheck = (player:hasTitle(xi.title.CERBERUS_MUZZLER) and player:hasTitle(xi.title.HYDRA_HEADHUNTER) and player:hasTitle(xi.title.KHIMAIRA_CARVER) and
-    player:hasTitle(xi.title.GORGONSTONE_SUNDERER) and player:hasTitle(xi.title.GORGONSTONE_SUNDERER) and player:hasTitle(xi.title.SHINING_SCALE_RIFLER))
+    player:hasTitle(xi.title.GORGONSTONE_SUNDERER) and player:hasTitle(xi.title.TROLL_SUBJUGATOR) and player:hasTitle(xi.title.SHINING_SCALE_RIFLER))
     
     if (player:getCharVar("PendingMythic") == 1 and npcUtil.tradeHasExactly(trade, 18971)) then -- conqueror
         player:setCharVar("MythicReward", 18991)
@@ -192,6 +198,7 @@ m:addOverride("xi.zones.Caedarva_Mire.npcs.Seaprinces_Tombstone.onTrade", functi
 end)
 
 m:addOverride("xi.zones.Caedarva_Mire.npcs.Seaprinces_Tombstone.onEventFinish", function(player, csid, option)
+    -- !pos  -433 7 -586 79
     local ID = require("scripts/zones/Caedarva_Mire/IDs")
 	
     if csid == 25 then
