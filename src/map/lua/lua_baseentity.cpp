@@ -14094,6 +14094,198 @@ uint32 CLuaBaseEntity::getHistory(uint8 index)
     return outStat;
 }
 
+auto CLuaBaseEntity::getChocoboRaisingInfo() -> sol::table
+{
+    ShowDebug("Getting Raising Chocobo Info (%s)", m_PBaseEntity->name);
+
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowDebug("Called on invalid entity");
+        return sol::lua_nil;
+    }
+
+    // Check to see if the user already has a chocobo
+    {
+        const char* Query = "SELECT \
+            charid, \
+            first_name, \
+            last_name, \
+            sex, \
+            UNIX_TIMESTAMP(`created`), \
+            last_update_age, \
+            stage, \
+            location, \
+            colour, \
+            dominant_gene, \
+            recessive_gene, \
+            strength, \
+            endurance, \
+            discernment, \
+            receptivity, \
+            affection, \
+            energy, \
+            satisfaction, \
+            conditions, \
+            ability1, \
+            ability2, \
+            personality, \
+            weather_preference, \
+            hunger, \
+            care_plan, \
+            held_item \
+            FROM char_chocobos WHERE charid = %u;";
+
+        int32 ret = sql->Query(Query, m_PBaseEntity->id);
+
+        if (ret == SQL_ERROR)
+        {
+            ShowDebug("SELECT Query failed");
+            return sol::lua_nil;
+        }
+
+        if (sql->NumRows() == 0)
+        {
+            ShowDebug("No Raised Chocobo information found");
+            return sol::lua_nil;
+        }
+
+        if (sql->NextRow() == SQL_SUCCESS)
+        {
+            auto table = lua.create_table();
+
+            table["charid"]          = sql->GetUIntData(0);
+            table["first_name"]      = sql->GetStringData(1);
+            table["last_name"]       = sql->GetStringData(2);
+            table["sex"]             = sql->GetUIntData(3);
+            table["created"]         = sql->GetUIntData(4);
+            table["last_update_age"] = sql->GetUIntData(5);
+            table["stage"]           = sql->GetUIntData(6);
+            table["location"]        = sql->GetUIntData(7);
+            table["colour"]          = sql->GetUIntData(8);
+
+            table["dominant_gene"]  = sql->GetUIntData(9);
+            table["recessive_gene"] = sql->GetUIntData(10);
+
+            table["strength"]    = sql->GetUIntData(11);
+            table["endurance"]   = sql->GetUIntData(12);
+            table["discernment"] = sql->GetUIntData(13);
+            table["receptivity"] = sql->GetUIntData(14);
+
+            table["affection"]          = sql->GetUIntData(15);
+            table["energy"]             = sql->GetUIntData(16);
+            table["satisfaction"]       = sql->GetUIntData(17);
+            table["conditions"]         = sql->GetUIntData(18);
+            table["ability1"]           = sql->GetUIntData(19);
+            table["ability2"]           = sql->GetUIntData(20);
+            table["personality"]        = sql->GetUIntData(21);
+            table["weather_preference"] = sql->GetUIntData(22);
+            table["hunger"]             = sql->GetUIntData(23);
+
+            table["care_plan"] = sql->GetUIntData(24);
+            table["held_item"] = sql->GetUIntData(25);
+
+            return table;
+        }
+    }
+
+    return sol::lua_nil;
+}
+
+bool CLuaBaseEntity::setChocoboRaisingInfo(sol::table table)
+{
+    ShowDebug("Setting Raising Chocobo Info (%s)", m_PBaseEntity->name);
+
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowDebug("Called on invalid entity");
+        return false;
+    }
+
+    const char* Query = "REPLACE INTO char_chocobos SET \
+                                charid = %u, \
+                                first_name = '%s', \
+                                last_name = '%s', \
+                                sex = %u, \
+                                created = FROM_UNIXTIME(%u), \
+                                last_update_age = %u, \
+                                stage = %u, \
+                                location = %u, \
+                                colour = %u, \
+                                dominant_gene = %u, \
+                                recessive_gene = %u, \
+                                strength = %u, \
+                                endurance = %u, \
+                                discernment = %u, \
+                                receptivity = %u, \
+                                affection = %u, \
+                                energy = %u, \
+                                satisfaction = %u, \
+                                conditions = %u, \
+                                ability1 = %u, \
+                                ability2 = %u, \
+                                personality = %u, \
+                                weather_preference = %u, \
+                                hunger = %u, \
+                                care_plan = %u, \
+                                held_item = %u;";
+
+    int32 ret = sql->Query(Query,
+                           m_PBaseEntity->id,
+                           table.get_or<std::string>("first_name", "Chocobo"),
+                           table.get_or<std::string>("last_name", "Chocobo"),
+                           table.get_or<uint32>("sex", 0),
+                           table.get_or<uint32>("created", 0),
+                           table.get_or<uint32>("last_update_age", 0),
+                           table.get_or<uint32>("stage", 1),
+                           table.get_or<uint32>("location", 0),
+                           table.get_or<uint32>("colour", 0),
+                           table.get_or<uint32>("dominant_gene", 0),
+                           table.get_or<uint32>("recessive_gene", 0),
+                           table.get_or<uint32>("strength", 0),
+                           table.get_or<uint32>("endurance", 0),
+                           table.get_or<uint32>("discernment", 0),
+                           table.get_or<uint32>("receptivity", 0),
+                           table.get_or<uint32>("affection", 0),
+                           table.get_or<uint32>("energy", 0),
+                           table.get_or<uint32>("satisfaction", 0),
+                           table.get_or<uint32>("conditions", 0),
+                           table.get_or<uint32>("ability1", 0),
+                           table.get_or<uint32>("ability2", 0),
+                           table.get_or<uint32>("personality", 0),
+                           table.get_or<uint32>("weather_preference", 0),
+                           table.get_or<uint32>("hunger", 0),
+                           table.get_or<uint32>("care_plan", 0),
+                           table.get_or<uint32>("held_item", 0));
+
+    if (ret == SQL_ERROR)
+    {
+        ShowDebug("REPLACE Query failed");
+        return false;
+    }
+
+    return true;
+}
+
+bool CLuaBaseEntity::deleteRaisedChocobo()
+{
+    ShowDebug("Deleting Raising Chocobo (%s)", m_PBaseEntity->name);
+
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowDebug("Called on invalid entity");
+        return false;
+    }
+
+    int32 ret = sql->Query("DELETE FROM char_chocobos WHERE charid = %u;", m_PBaseEntity->id);
+    if (ret == SQL_ERROR)
+    {
+        ShowDebug("DELETE Query failed");
+        return false;
+    }
+
+    return true;
+}
+
 //==========================================================//
 
 void CLuaBaseEntity::Register()

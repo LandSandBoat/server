@@ -818,6 +818,10 @@ public:
 
     uint32 getHistory(uint8 index);
 
+    auto getChocoboRaisingInfo() -> sol::table;
+    bool setChocoboRaisingInfo(sol::table table);
+    bool deleteRaisedChocobo();
+
     static void Register();
 };
 
