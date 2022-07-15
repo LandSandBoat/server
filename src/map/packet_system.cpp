@@ -270,14 +270,17 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
         char session_key[20 * 2 + 1];
         bin2hex(session_key, (uint8*)PSession->blowfish.key, 20);
 
-        uint16 destination = PChar->loc.destination;
+        uint16 destination = MAX_ZONEID + 1; // Forces the function to fail closed
 
-        if (destination >= MAX_ZONEID)
+        if (PChar != nullptr)
         {
-            // TODO: work out how to drop player in moghouse that exits them to the zone they were in before this happened, like we used to.
-            ShowWarning("packet_system::SmallPacket0x00A player tried to enter zone out of range: %d", destination);
-            ShowWarning("packet_system::SmallPacket0x00A dumping player `%s` to homepoint!", PChar->GetName());
-            charutils::HomePoint(PChar);
+            destination = PChar->loc.destination; // Only sets destination if PChar isn't nullptr
+        }
+
+        if (destination >= MAX_ZONEID) // Fails to putting player back to it's previous zone
+        {
+            ShowWarning("packet_system::SmallPacket0x00A GetZone Bad Args for IncreaseZoneCounter, MITIGATING: Sending %s to loc.prevzone.", PChar->GetName());
+            destination = PChar->loc.prevzone;
         }
 
         zoneutils::GetZone(destination)->IncreaseZoneCounter(PChar);

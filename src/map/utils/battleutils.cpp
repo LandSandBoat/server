@@ -1530,7 +1530,7 @@ namespace battleutils
         // get ratio (not capped for RAs)
         float ratio = (float)rAttack / (float)PDefender->DEF();
 
-        ratio = std::clamp<float>(ratio, 0, 3);
+        ratio        = std::clamp<float>(ratio, 0, 3);
         float cRatio = ratio;
 
         // level correct (0.025 not 0.05 like for melee)
@@ -2753,7 +2753,7 @@ namespace battleutils
         // Using 2013 model since it is the most up-to-date and tested version of the one used in 75 era
         // https://www.bg-wiki.com/index.php?title=PDIF&oldid=268066
         // Note that only player autoattacks use this function, weaponskill pDIF is calculated in scripts/global/weaponskills.lua
-        float ratio  = (static_cast<float>(attack)) / (static_cast<float>(defense));
+        float ratio    = (static_cast<float>(attack)) / (static_cast<float>(defense));
         float ratioCap = 2.25f;
 
         ratio = std::clamp<float>(ratio, 0, ratioCap);
@@ -2887,7 +2887,7 @@ namespace battleutils
         }
         else if (wRatio < 2.625f)
         {
-            upperLimit = wRatio + 0.375f;
+            upperLimit = std::min(wRatio + 0.375f, maxRatio);
         }
         else
         {
@@ -2912,7 +2912,7 @@ namespace battleutils
         }
         else
         {
-            lowerLimit = wRatio - 0.375f;
+            lowerLimit = std::min(wRatio - 0.375f, maxRatio);
         }
 
         float pDIF = 0.0f;
@@ -2920,13 +2920,14 @@ namespace battleutils
         // Bernoulli distribution, applied for cRatio < 0.5 and 0.75 < cRatio < 1.25
         // Other cRatio values are uniformly distributed
         // https://www.bluegartr.com/threads/108161-pDif-and-damage?p=5308205&viewfull=1#post5308205
-        float U = std::max<float>(0.0, std::min<float>(0.333, 1.3 * (2.0 - std::abs(wRatio - 1)) - 1.96));
-        bool bernoulli = xirand::GetRandomNumber(0.0f, 1.0f) < U ? true : false;
+        float U         = std::max<float>(0.0, std::min<float>(0.333, 1.3 * (2.0 - std::abs(wRatio - 1)) - 1.96));
+        bool  bernoulli = xirand::GetRandomNumber(0.0f, 1.0f) < U ? true : false;
 
         if (bernoulli)
         {
             pDIF = std::round(wRatio);
-        } else
+        }
+        else
         {
             pDIF = xirand::GetRandomNumber(lowerLimit, upperLimit);
         }
@@ -5784,7 +5785,7 @@ namespace battleutils
         // Move the target a little higher, just in case
         nearEntity.y -= 1.0f;
 
-        bool  success        = false;
+        bool success = false;
         // float drawInDistance = (float)(PMob->getMobMod(MOBMOD_DRAW_IN) > 1 ? PMob->getMobMod(MOBMOD_DRAW_IN) : PMob->GetMeleeRange() * 2);
 
         // if (std::chrono::time_point_cast<std::chrono::seconds>(server_clock::now()).time_since_epoch().count() - PMob->GetLocalVar("DrawInTime") < 2)
@@ -6905,9 +6906,9 @@ namespace battleutils
             RMainSub  = ((CItemWeapon*)PRangedSlot)->getSubSkillType();
         }
 
-        bool LongBowCurve  = (RMainType == 25 && RMainSub == 9); // Longbows Only
+        bool LongBowCurve  = (RMainType == 25 && RMainSub == 9);                                         // Longbows Only
         bool CrossBowCurve = ((RMainType == 25 && RMainSub == 0) || (RMainType == 26 && RMainSub == 0)); // Crossbows and Shortbows
-        bool GunCurve      = (RMainType == 26 && RMainSub == 1); // Guns Only
+        bool GunCurve      = (RMainType == 26 && RMainSub == 1);                                         // Guns Only
 
         if (LongBowCurve)
         {
@@ -6942,7 +6943,6 @@ namespace battleutils
                 return 1.00f + ((-1.10f * distance) / 100);
 
             return 0.86f; // Default to >20' Curve w/ 86% Cap
-
         }
         else if (GunCurve)
         {
