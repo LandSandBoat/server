@@ -4,7 +4,7 @@
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 -----------------------------------
-local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
+local ID = require("scripts/zones/Nashmau/IDs")
 
 local m = Module:new("mythic_weapon")
 
