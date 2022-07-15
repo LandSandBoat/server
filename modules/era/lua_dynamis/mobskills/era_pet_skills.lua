@@ -6,17 +6,18 @@
 ---------------------------------------------
 require("scripts/globals/dynamis")
 require("modules/module_utils")
+require("scripts/globals/mobskills/astral_flow")
 ---------------------------------------------
 local m = Module:new("era_pet_skills")
 
 m:addOverride("xi.globals.mobskills.call_wyvern.onMobWeaponSkill", function(target, mob, skill)
-    local mobName = xi.dynamis.mobList[mob:getZoneID()][mob:getZone():getLocalVar((string.format("MobIndex_%s", mob:getID())))].info[2]
     if mob:getLocalVar("CALL_WYVERN") == 1 then
         skill:setMsg(xi.msg.basic.NONE)
         return 0
     end
 
     if mob:isInDynamis() then
+        local mobName = xi.dynamis.mobList[mob:getZoneID()][mob:getZone():getLocalVar((string.format("MobIndex_%s", mob:getID())))].info[2]
         if mobName == "Apocalyptic Beast" then
             for i = 5, 1, -1 do
                 xi.dynamis.spawnDynamicPet(target, mob, xi.job.DRG)
@@ -38,7 +39,6 @@ m:addOverride("xi.globals.mobskills.astral_flow.onMobWeaponSkill", function(targ
     skill:setMsg(xi.msg.basic.USES)
     local mobID = mob:getID()
     local avatar = 0
-    local mobName = xi.dynamis.mobList[mob:getZoneID()][mob:getZone():getLocalVar((string.format("MobIndex_%s", mob:getID())))].info[2]
 
     if mob:getLocalVar("ASTRAL_FLOW") == 1 then
         skill:setMsg(xi.msg.basic.NONE)
@@ -46,14 +46,15 @@ m:addOverride("xi.globals.mobskills.astral_flow.onMobWeaponSkill", function(targ
     end
 
     if mob:isInDynamis() then
+        local mobName = xi.dynamis.mobList[mob:getZoneID()][mob:getZone():getLocalVar((string.format("MobIndex_%s", mob:getID())))].info[2]
         if mobName == "Apocalyptic Beast" then
             xi.dynamis.spawnDynamicPet(target, mob, xi.job.SMN)
         elseif mobName == "Dagourmarche" then
             xi.dynamis.spawnDynamicPet(target, mob, xi.job.SMN)
         end
     else
-        if avatarOffsets[mobID] then
-            avatar = mobID + avatarOffsets[mobID]
+        if xi.astralflow.avatarOffsets[mobID] then
+            avatar = mobID + xi.astralflow.avatarOffsets[mobID]
         else
             avatar = mobID + 2 -- default offset
         end
