@@ -6,6 +6,7 @@
 ---------------------------------------------
 require("scripts/globals/dynamis")
 require("modules/module_utils")
+require("scripts/globals/mobskills/astral_flow")
 ---------------------------------------------
 local m = Module:new("era_pet_skills")
 
@@ -52,8 +53,8 @@ m:addOverride("xi.globals.mobskills.astral_flow.onMobWeaponSkill", function(targ
             xi.dynamis.spawnDynamicPet(target, mob, xi.job.SMN)
         end
     else
-        if avatarOffsets[mobID] then
-            avatar = mobID + avatarOffsets[mobID]
+        if xi.astralflow.avatarOffsets[mobID] then
+            avatar = mobID + xi.astralflow.avatarOffsets[mobID]
         else
             avatar = mobID + 2 -- default offset
         end
