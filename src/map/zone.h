@@ -618,7 +618,7 @@ private:
     ZONE_TYPE      m_zoneType;
     REGION_TYPE    m_regionID;    // ID области
     CONTINENT_TYPE m_continentID; // ID континента
-    string_t       m_zoneName;    // имя зоны
+    std::string    m_zoneName;    // имя зоны
     uint16         m_zonePort;    // порт зоны
     uint32         m_zoneIP;      // IP зоны
     bool           m_useNavMesh;  // Use navmesh for roaming, chasing

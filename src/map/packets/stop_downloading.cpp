@@ -26,7 +26,7 @@
 #include "../entities/charentity.h"
 #include "stop_downloading.h"
 
-CStopDownloadingPacket::CStopDownloadingPacket(CCharEntity* PChar, std::vector<std::pair<uint32, string_t>> blacklist)
+CStopDownloadingPacket::CStopDownloadingPacket(CCharEntity* PChar, std::vector<std::pair<uint32, std::string>> blacklist)
 {
     this->setType(0x41);
     this->setSize(0xF8);

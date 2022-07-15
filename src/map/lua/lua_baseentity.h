@@ -66,9 +66,10 @@ public:
     void customMenu(sol::object const& obj);
 
     // Variables
-    int32  getCharVar(std::string const& varName);              // Returns a character variable
-    void   setCharVar(std::string const& varname, int32 value); // Sets a character variable
-    void   addCharVar(std::string const& varname, int32 value); // Increments/decriments/sets a character variable
+    int32  getCharVar(std::string const& varName);                    // Returns a character variable
+    void   setCharVar(std::string const& varname, int32 value);       // Sets a character variable
+    void   incrementCharVar(std::string const& varname, int32 value); // Increments/decriments/sets a character variable
+    void   setVolatileCharVar(std::string const& varName, int32 value);
     uint32 getLocalVar(std::string const& var);
     void   setLocalVar(std::string const& var, uint32 val);
     void   resetLocalVars();

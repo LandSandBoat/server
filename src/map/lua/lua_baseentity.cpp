@@ -530,9 +530,11 @@ void CLuaBaseEntity::customMenu(sol::object const& obj)
 
 int32 CLuaBaseEntity::getCharVar(std::string const& varName)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
-    return charutils::GetCharVar(PChar, varName);
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        return PChar->getCharVar(varName);
+    }
+    return 0;
 }
 
 /************************************************************************
@@ -544,25 +546,42 @@ int32 CLuaBaseEntity::getCharVar(std::string const& varName)
 
 void CLuaBaseEntity::setCharVar(std::string const& varName, int32 value)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
-    return charutils::SetCharVar(PChar, varName, value);
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        PChar->setCharVar(varName, value);
+    }
 }
 
 /************************************************************************
- *  Function: addCharVar()
+ *  Function: incrementCharVar()
  *  Purpose : Increments PC's variable by an explicit amount
- *  Example : player:addCharVar("[ZM]Status", 1) -- if 4, becomes 5
+ *  Example : player:incrementCharVar("[ZM]Status", 1) -- if 4, becomes 5
  *  Notes   : Can use values greater than 1 to increment more
  ************************************************************************/
 
-void CLuaBaseEntity::addCharVar(std::string const& varName, int32 value)
+void CLuaBaseEntity::incrementCharVar(std::string const& varName, int32 value)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        auto startingVal = charutils::FetchCharVar(PChar->id, varName);
+        charutils::IncrementCharVar(PChar, varName, startingVal + value);
+    }
+}
 
-    const char* Query = "INSERT INTO char_vars SET charid = %u, varname = '%s', value = %i ON DUPLICATE KEY UPDATE value = value + %i;";
+/************************************************************************
+ *  Function: setVolatileCharVar()
+ *  Purpose : Updates PC's variable to an explicit value,
+ &            but allow it to be stored to the database at a later time.
+ *  Example : player:setVolatileCharVar("[DIG]DigCount", count)
+ *  Notes   : Passing a '0' value will delete the variable
+ ************************************************************************/
 
-    sql->Query(Query, m_PBaseEntity->id, varName, value, value);
+void CLuaBaseEntity::setVolatileCharVar(std::string const& varName, int32 value)
+{
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        PChar->setVolatileCharVar(varName, value);
+    }
 }
 
 /************************************************************************
@@ -610,15 +629,14 @@ void CLuaBaseEntity::resetLocalVars()
 
 void CLuaBaseEntity::clearVarsWithPrefix(std::string const& prefix)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-    auto player = dynamic_cast<CCharEntity*>(m_PBaseEntity);
-
-    if (!player)
+    if (auto player = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
-        return;
+        charutils::ClearCharVarsWithPrefix(player, prefix);
     }
-
-    charutils::ClearCharVarsWithPrefix(player, prefix);
+    else
+    {
+        ShowError("Trying to clearVarsWithPrefix(%s) on invalid type", prefix);
+    }
 }
 
 /************************************************************************
@@ -14100,7 +14118,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setCharVar", CLuaBaseEntity::setCharVar);
     SOL_REGISTER("getVar", CLuaBaseEntity::getCharVar); // Compatibility binding
     SOL_REGISTER("setVar", CLuaBaseEntity::setCharVar); // Compatibility binding
-    SOL_REGISTER("addCharVar", CLuaBaseEntity::addCharVar);
+    SOL_REGISTER("incrementCharVar", CLuaBaseEntity::incrementCharVar);
+    SOL_REGISTER("setVolatileCharVar", CLuaBaseEntity::setVolatileCharVar);
     SOL_REGISTER("getLocalVar", CLuaBaseEntity::getLocalVar);
     SOL_REGISTER("setLocalVar", CLuaBaseEntity::setLocalVar);
     SOL_REGISTER("resetLocalVars", CLuaBaseEntity::resetLocalVars);

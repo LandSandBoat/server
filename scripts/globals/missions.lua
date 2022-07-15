@@ -810,8 +810,8 @@ local function getVarPrefix(areaId, questId)
     return string.format("Mission[%d][%d]", areaId, questId)
 end
 
-xi.mission.addVar = function(player, areaId, questId, name, value)
-    return player:addCharVar(getVarPrefix(areaId, questId) .. name, value)
+xi.mission.incrementVar = function(player, areaId, questId, name, value)
+    return player:incrementCharVar(getVarPrefix(areaId, questId) .. name, value)
 end
 
 xi.mission.getVar = function(player, areaId, questId, name)

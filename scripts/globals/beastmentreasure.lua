@@ -227,7 +227,7 @@ xi.beastmentreasure.handleNpcOnEventFinish = function(player, csid)
     local zd = zoneData[player:getZoneID()]
 
     if csid == 100 then
-        player:addCharVar(zd.statusvar, QUEST_ACCEPTED)
+        player:incrementCharVar(zd.statusvar, QUEST_ACCEPTED)
     elseif csid == 101 then
         player:confirmTrade()
         player:setCharVar(zd.statusvar, QUEST_COMPLETED)

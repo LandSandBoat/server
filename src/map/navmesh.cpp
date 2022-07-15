@@ -108,7 +108,7 @@ CNavMesh::CNavMesh(uint16 zoneID)
 
 CNavMesh::~CNavMesh() = default;
 
-bool CNavMesh::load(const std::string& filename)
+bool CNavMesh::load(std::string const& filename)
 {
     this->filename = filename;
 
