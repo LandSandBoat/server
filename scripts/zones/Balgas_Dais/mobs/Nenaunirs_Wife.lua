@@ -13,3 +13,5 @@ end
 
 entity.onMobDeath = function(mob, player, isKiller)
 end
+
+return entity
