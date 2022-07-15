@@ -1,7 +1,8 @@
 -----------------------------------
 -- Area: Chocobo_Circuit
---  NPC: Cyril
--- Standard Info NPC
+-- NPC: Cyril
+-- Abyssea Support NPC
+-- pos -330.5837 0.0000 -468.5058
 -----------------------------------
 local entity = {}
 

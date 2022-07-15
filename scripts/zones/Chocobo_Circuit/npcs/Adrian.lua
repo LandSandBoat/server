@@ -1,7 +1,8 @@
 -----------------------------------
 -- Area: Chocobo_Circuit
---  NPC: Adrian
--- Standard Info NPC
+-- NPC: Adrian
+-- Abyssea Support NPC
+-- pos -330.5837 0.0000 -468.5058
 -----------------------------------
 local entity = {}
 

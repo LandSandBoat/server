@@ -1,7 +1,8 @@
 -----------------------------------
 -- Area: Chocobo_Circuit
---  NPC: Cyphaireau
--- Standard Info NPC
+-- NPC: Cyphaireau
+-- Teleporter
+-- pos -369.2226 -4.0000 -492.1980
 -----------------------------------
 local entity = {}
 

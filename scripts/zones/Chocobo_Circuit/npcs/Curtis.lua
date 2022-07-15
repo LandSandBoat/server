@@ -1,7 +1,8 @@
 -----------------------------------
 -- Area: Chocobo_Circuit
---  NPC: Curtis
--- Standard Info NPC
+-- NPC: Curtis
+-- Race Attendant (Orange)
+-- pos -276.635 0.004 -533.735
 -----------------------------------
 local entity = {}
 

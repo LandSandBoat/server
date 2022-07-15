@@ -1,7 +1,8 @@
 -----------------------------------
 -- Area: Chocobo_Circuit
---  NPC: Channon
--- Standard Info NPC
+-- NPC: Channon
+-- Race Attendant (Red)
+-- pos -366.0453 4.0000 -532.8646
 -----------------------------------
 local entity = {}
 

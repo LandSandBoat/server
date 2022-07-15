@@ -18,6 +18,12 @@ CREATE TABLE `zonelines` (
 -- ----------------------------
 -- Records of zonelines
 -- ----------------------------
+-- chocobo circuit test zoneline
+-- INSERT INTO `zonelines` VALUES (0000000000,241,70,136.000,-1.499,-521.750,0); -- Windurst Woods
+-- INSERT INTO `zonelines` VALUES (0000000000,230,70,x,y,z,r); -- Southern San d’Oria
+-- INSERT INTO `zonelines` VALUES (0000000000,234,70,x,y,z,r); -- Bastok mines
+-- INSERT INTO `zonelines` VALUES (0000000000,246,70,x,y,z,r); -- Port Jeuno
+-- INSERT INTO `zonelines` VALUES (0000000000,50,70,x,y,z,r); -- Aht Urhgan Whitegate
 INSERT INTO `zonelines` VALUES (808465018,72,79,339.996,2.500,-721.286,200);
 INSERT INTO `zonelines` VALUES (808465274,108,106,-518.867,35.538,588.640,50);
 INSERT INTO `zonelines` VALUES (808465530,144,143,114.483,-42.000,-140.000,96);

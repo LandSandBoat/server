@@ -1,8 +1,9 @@
 -----------------------------------
 -- Area: Chocobo_Circuit
---  NPC: Mediverchanne
--- Standard Info NPC
------------------------------------
+-- NPC: Mediverchanne
+-- Teleporter
+-- pos
+----------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
