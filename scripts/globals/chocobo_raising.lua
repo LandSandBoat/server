@@ -28,11 +28,11 @@
 -- CHOCOBO_EGG_A_LITTLE_WARM : !additem 2318
 -- CHOCOBO_EGG_SOMEWHAT_WARM : !additem 2319
 -----------------------------------
+require("scripts/globals/chocobo_names")
 require("scripts/globals/items")
+require("scripts/globals/settings")
 require("scripts/globals/utils")
 require("scripts/globals/zone")
-require("scripts/globals/chocobo_names")
-require("scripts/settings/main")
 -----------------------------------
 xi = xi or {}
 xi.chocoboRaising = xi.chocoboRaising or {}
@@ -630,13 +630,13 @@ xi.chocoboRaising.initChocoboData = function(player)
         end
 
         local age = chocoState.report.day_start + idx - 1
-        local stage = ageToStage(age)
+        local currentStage = ageToStage(age)
 
         local event = { age, { possibleCarePlanEvent } }
 
         -- Handle age-up cs's
         for _, entry in pairs(ageBoundaries) do
-            if stage == entry[1] and age >= entry[2] then
+            if currentStage == entry[1] and age >= entry[2] then
                 table.insert(event[2], entry[3])
             end
         end
@@ -661,6 +661,7 @@ xi.chocoboRaising.initChocoboData = function(player)
     local current_start_day = nil
     local current_end_day = nil
     local current_event_cs_table = nil
+    -- local current_event_size = nil
 
     -- Each event is a table of cs's
     for idx, entry in pairs(events) do
@@ -678,7 +679,7 @@ xi.chocoboRaising.initChocoboData = function(player)
             current_event_cs_table = entry[2]
             current_start_day = chocoState.report.day_start + idx - 1
             current_end_day = chocoState.report.day_start + idx - 1
-            current_event_size = entry[2]
+            -- current_event_size = entry[2]
         end
     end
 
@@ -785,11 +786,15 @@ xi.chocoboRaising.startCutscene = function(player, npc, trade)
 end
 
 xi.chocoboRaising.onTradeVCSTrainer = function(player, npc, trade)
-    xi.chocoboRaising.startCutscene(player, npc, trade)
+    if xi.setting.main.ENABLE_CHOCOBO_RAISING then
+        xi.chocoboRaising.startCutscene(player, npc, trade)
+    end
 end
 
 xi.chocoboRaising.onTriggerVCSTrainer = function(player, npc)
-    xi.chocoboRaising.startCutscene(player, npc, nil)
+    if xi.setting.main.ENABLE_CHOCOBO_RAISING then
+        xi.chocoboRaising.startCutscene(player, npc, nil)
+    end
 end
 
 xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
