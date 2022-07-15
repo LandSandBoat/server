@@ -2,8 +2,8 @@
 -- Avatars Favor helper
 -----------------------------------
 require("scripts/globals/pets")
+require("scripts/globals/settings")
 require("scripts/globals/status")
-require("settings/main")
 -----------------------------------
 
 xi = xi or {}
