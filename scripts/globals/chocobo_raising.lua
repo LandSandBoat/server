@@ -29,6 +29,7 @@
 -- CHOCOBO_EGG_SOMEWHAT_WARM : !additem 2319
 -----------------------------------
 require("scripts/globals/items")
+require("scripts/globals/settings")
 require("scripts/globals/utils")
 require("scripts/globals/zone")
 require("scripts/globals/chocobo_names")
@@ -49,7 +50,7 @@ local csidTable =
     [xi.zone.BASTOK_MINES]       = { 508, 509, 512, 515, 542, 554, 555, 556, 560, 558 }, -- Zopago
     [xi.zone.WINDURST_WOODS]     = { 741, 742, 745, 748, 766, 810, 811, 812, 816, 773 }, -- Pulonono
 }
-utils.ignore(csidTable)
+utils.unused(csidTable)
 
 xi.chocoboRaising.onTradeVCSTrainer = function(player, npc, trade)
 end
