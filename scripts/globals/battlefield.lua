@@ -224,7 +224,11 @@ function xi.battlefield.HandleLootRolls(battlefield, lootTable, players, npc)
     players = players or battlefield:getPlayers()
     if battlefield:getStatus() == xi.battlefield.status.WON and battlefield:getLocalVar("lootSeen") == 0 then
         if npc then
-            npc:setAnimation(90)
+            npc:entityAnimationPacket("open")
+        npc:setLocalVar("open", 1)
+        npc:setUntargetable(true)
+        npc:timer(15000, function(npcArg) npcArg:entityAnimationPacket("kesu") end)
+        npc:timer(16000, function(npcArg) npcArg:setStatus(xi.status.DISAPPEAR) end)
         end
 
         for i = 1, #lootTable, 1 do
