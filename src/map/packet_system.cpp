@@ -243,7 +243,7 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if (PSession->blowfish.status == BLOWFISH_ACCEPTED && PChar->status == STATUS_TYPE::NORMAL) // Do nothing if character is zoned in
     {
-        ShowWarning("packet_system::SmallPacket0x00A player '%' attempting to send 0x00A when already logged in", PChar->GetName());
+        ShowWarning("packet_system::SmallPacket0x00A player '%s' attempting to send 0x00A when already logged in", PChar->GetName());
         return;
     }
 
