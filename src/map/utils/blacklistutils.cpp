@@ -60,7 +60,7 @@ namespace blacklistutils
 
     void SendBlacklist(CCharEntity* PChar)
     {
-        std::vector<std::pair<uint32, string_t>> blacklist;
+        std::vector<std::pair<uint32, std::string>> blacklist;
 
         // Obtain this users blacklist info..
         const char* query = "SELECT c.charid, c.charname FROM char_blacklist AS b INNER JOIN chars AS c ON b.charid_target = c.charid WHERE charid_owner = %u;";
@@ -74,8 +74,8 @@ namespace blacklistutils
         int currentCount = 0;
         while (sql->NextRow() == SQL_SUCCESS)
         {
-            uint32   accid_target = sql->GetUIntData(0);
-            string_t targetName   = (const char*)(sql->GetData(1));
+            uint32      accid_target = sql->GetUIntData(0);
+            std::string targetName   = (const char*)(sql->GetData(1));
 
             blacklist.emplace_back(accid_target, targetName);
             currentCount++;

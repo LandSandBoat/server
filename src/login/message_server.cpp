@@ -81,6 +81,7 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
         case MSG_CHAT_TELL:
         case MSG_LINKSHELL_RANK_CHANGE:
         case MSG_LINKSHELL_REMOVE:
+        case MSG_CHARVAR_UPDATE:
         {
             const char* query = "SELECT server_addr, server_port FROM accounts_sessions LEFT JOIN chars ON "
                                 "accounts_sessions.charid = chars.charid WHERE charname = '%s' LIMIT 1;";

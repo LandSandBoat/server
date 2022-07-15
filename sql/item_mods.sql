@@ -42623,21 +42623,23 @@ INSERT INTO `item_mods` VALUES (21140,311,248); -- MAGIC_DAMAGE: 248
 INSERT INTO `item_mods` VALUES (21140,355,186); -- ADDS_WEAPONSKILL: 186
 INSERT INTO `item_mods` VALUES (21140,756,30);  -- WSD+% (Vidohunir): 30
 
--- Nirvana
+-- Nirvana (119 I)
 INSERT INTO `item_mods` VALUES (21141,25,30);   -- ACC: 30
 INSERT INTO `item_mods` VALUES (21141,256,39);  -- AFTERMATH: 39
 INSERT INTO `item_mods` VALUES (21141,311,217); -- MAGIC_DAMAGE: 217
 INSERT INTO `item_mods` VALUES (21141,346,8);   -- PERPETUATION_REDUCTION: 8
 INSERT INTO `item_mods` VALUES (21141,355,187); -- ADDS_WEAPONSKILL: 187
 INSERT INTO `item_mods` VALUES (21141,757,30);  -- WSD+% (Garland Of Bliss): 30
+INSERT INTO `item_mods` VALUES (21141,1040,2);  -- AVATAR_LVL_BONUS: 2
 
--- Nirvana
+-- Nirvana (119 II)
 INSERT INTO `item_mods` VALUES (21142,25,30);   -- ACC: 30
 INSERT INTO `item_mods` VALUES (21142,256,39);  -- AFTERMATH: 39
 INSERT INTO `item_mods` VALUES (21142,311,217); -- MAGIC_DAMAGE: 217
 INSERT INTO `item_mods` VALUES (21142,346,8);   -- PERPETUATION_REDUCTION: 8
 INSERT INTO `item_mods` VALUES (21142,355,187); -- ADDS_WEAPONSKILL: 187
 INSERT INTO `item_mods` VALUES (21142,757,30);  -- WSD+% (Garland Of Bliss): 30
+INSERT INTO `item_mods` VALUES (21142,1040,2);  -- AVATAR_LVL_BONUS: 2
 
 -- Hvergelmir
 INSERT INTO `item_mods` VALUES (21143,5,150);   -- MP: 150
@@ -43245,12 +43247,16 @@ INSERT INTO `item_mods` VALUES (21373,163,-200); -- DMGMAGIC: -200
 INSERT INTO `item_mods` VALUES (21374,27,2);  -- ENMITY: 2
 INSERT INTO `item_mods` VALUES (21374,302,1); -- TRIPLE_ATTACK: 1
 
+-- Magneto
+INSERT INTO `item_mods` VALUES (21375,1044,18); -- AUTOMATON_LVL_BONUS: 18
+
 -- Inlamvuyeso
 INSERT INTO `item_mods` VALUES (21376,1,10);  -- DEF: 10
 INSERT INTO `item_mods` VALUES (21376,25,10); -- ACC: 10
 
 -- Idaraaja
-INSERT INTO `item_mods` VALUES (21377,541,4); -- BP_DELAY_II: 4
+INSERT INTO `item_mods` VALUES (21377,541,4);   -- BP_DELAY_II: 4
+INSERT INTO `item_mods` VALUES (21377,1040,18); -- AVATAR_LVL_BONUS: 18
 
 -- Yetshila
 INSERT INTO `item_mods` VALUES (21378,165,1); -- CRITHITRATE: 1
@@ -43266,14 +43272,16 @@ INSERT INTO `item_mods` VALUES (21380,29,4);  -- MDEF: 4
 INSERT INTO `item_mods` VALUES (21380,288,1); -- DOUBLE_ATTACK: 1
 
 -- Seraphicaller
-INSERT INTO `item_mods` VALUES (21381,541,5); -- BP_DELAY_II: 5
+INSERT INTO `item_mods` VALUES (21381,541,5);   -- BP_DELAY_II: 5
+INSERT INTO `item_mods` VALUES (21381,1040,20); -- AVATAR_LVL_BONUS: 20
 
 -- Dosis Tathlum
 INSERT INTO `item_mods` VALUES (21382,28,6);   -- MATT: 6
 INSERT INTO `item_mods` VALUES (21382,311,13); -- MAGIC_DAMAGE: 13
 
 -- Eminent Sachet
-INSERT INTO `item_mods` VALUES (21383,541,3); -- BP_DELAY_II: 3
+INSERT INTO `item_mods` VALUES (21383,541,3);   -- BP_DELAY_II: 3
+INSERT INTO `item_mods` VALUES (21383,1040,16); -- AVATAR_LVL_BONUS: 16
 
 -- Kalboron Stone
 INSERT INTO `item_mods` VALUES (21384,5,30); -- MP: 30
@@ -43289,6 +43297,12 @@ INSERT INTO `item_mods` VALUES (21385,27,2); -- ENMITY: 2
 INSERT INTO `item_mods` VALUES (21386,9,4);  -- DEX: 4
 INSERT INTO `item_mods` VALUES (21386,25,4); -- ACC: 4
 
+-- Convocaller
+INSERT INTO `item_mods` VALUES (21387,1040,7); -- AVATAR_LVL_BONUS: 7
+
+-- Dashavatara Sachet
+INSERT INTO `item_mods` VALUES (21388,1040,14); -- AVATAR_LVL_BONUS: 14
+
 -- Honed Tathlum
 INSERT INTO `item_mods` VALUES (21389,25,15); -- ACC: 15
 
@@ -43297,6 +43311,12 @@ INSERT INTO `item_mods` VALUES (21391,2,25);    -- HP: 25
 INSERT INTO `item_mods` VALUES (21391,23,13);   -- ATT: 13
 INSERT INTO `item_mods` VALUES (21391,73,2);    -- STORETP: 2
 INSERT INTO `item_mods` VALUES (21391,171,192); -- DELAY: 192
+
+-- Animator Z
+INSERT INTO `item_mods` VALUES (21392,1044,20); -- AUTOMATON_LVL_BONUS: 20
+
+-- Arasy Sachet
+INSERT INTO `item_mods` VALUES (21393,1040,20); -- AVATAR_LVL_BONUS: 20
 
 -- Sancus Sachet
 INSERT INTO `item_mods` VALUES (21394,357,6); -- BP_DELAY: 6
@@ -43397,12 +43417,38 @@ INSERT INTO `item_mods` VALUES (21431,73,3);  -- STORETP: 3
 INSERT INTO `item_mods` VALUES (21431,288,3); -- DOUBLE_ATTACK: 3
 
 -- Epitaph
-INSERT INTO `item_mods` VALUES (21432,126,16); -- BP_DAMAGE: 16
-INSERT INTO `item_mods` VALUES (21432,541,5);  -- BP_DELAY_II: 5
--- TODO: Avatar: Lvl: 119
+INSERT INTO `item_mods` VALUES (21432,126,16);  -- BP_DAMAGE: 16
+INSERT INTO `item_mods` VALUES (21432,541,5);   -- BP_DELAY_II: 5
+INSERT INTO `item_mods` VALUES (21432,1040,20); -- AVATAR_LVL_BONUS: 20
 
 -- Neo Animator
-INSERT INTO `item_mods` VALUES (21433,25,10); -- ACC: 10
+INSERT INTO `item_mods` VALUES (21433,25,10);   -- ACC: 10
+INSERT INTO `item_mods` VALUES (21433,841,5);   -- ALL_WSDMG_FIRST_HIT: 5
+INSERT INTO `item_mods` VALUES (21433,1044,20); -- AUTOMATON_LVL_BONUS: 20
+
+-- Divinator
+INSERT INTO `item_mods` VALUES (21452,1044,20); -- AUTOMATON_LVL_BONUS: 20
+
+-- Eminent Animator
+INSERT INTO `item_mods` VALUES (21453,1044,16); -- AUTOMATON_LVL_BONUS: 16
+
+-- Forefront Animator
+INSERT INTO `item_mods` VALUES (21454,1044,7); -- AUTOMATON_LVL_BONUS: 7
+
+-- Alternator
+INSERT INTO `item_mods` VALUES (21455,1044,14); -- AUTOMATON_LVL_BONUS: 14
+
+-- Animator P
+INSERT INTO `item_mods` VALUES (21456,1044,20); -- AUTOMATON_LVL_BONUS: 20
+
+-- Animator P +1
+INSERT INTO `item_mods` VALUES (21457,1044,20); -- AUTOMATON_LVL_BONUS: 20
+
+-- Animator P II
+INSERT INTO `item_mods` VALUES (21458,1044,20); -- AUTOMATON_LVL_BONUS: 20
+
+-- Animator P II +1
+INSERT INTO `item_mods` VALUES (21459,1044,20); -- AUTOMATON_LVL_BONUS: 20
 
 -- Matre Bell
 INSERT INTO `item_mods` VALUES (21460,5,5); -- MP: 5
@@ -44843,12 +44889,13 @@ INSERT INTO `item_mods` VALUES (22062,311,279); -- MAGIC_DAMAGE: 279
 INSERT INTO `item_mods` VALUES (22062,355,186); -- ADDS_WEAPONSKILL: 186
 INSERT INTO `item_mods` VALUES (22062,756,30);  -- WSD+% (Vidohunir): 30
 
--- Nirvana
+-- Nirvana (119 III)
 INSERT INTO `item_mods` VALUES (22063,25,30);   -- ACC: 30
 INSERT INTO `item_mods` VALUES (22063,256,39);  -- AFTERMATH: 39
 INSERT INTO `item_mods` VALUES (22063,311,279); -- MAGIC_DAMAGE: 279
 INSERT INTO `item_mods` VALUES (22063,355,187); -- ADDS_WEAPONSKILL: 187
 INSERT INTO `item_mods` VALUES (22063,757,30);  -- WSD+% (Garland Of Bliss): 30
+INSERT INTO `item_mods` VALUES (22063,1040,2);  -- AVATAR_LVL_BONUS: 2
 
 -- Hvergelmir
 INSERT INTO `item_mods` VALUES (22064,5,230);   -- MP: 230
@@ -45399,6 +45446,12 @@ INSERT INTO `item_mods` VALUES (22258,26,100); -- RACC: 100
 
 -- Kobonoibuki
 INSERT INTO `item_mods` VALUES (22259,26,100); -- RACC: 100
+
+-- Eminent Animator II
+INSERT INTO `item_mods` VALUES (22260,1044,16); -- AUTOMATON_LVL_BONUS: 16
+
+-- Divinator II
+INSERT INTO `item_mods` VALUES (22261,1044,20); -- AUTOMATON_LVL_BONUS: 20
 
 -- Amar Cluster
 INSERT INTO `item_mods` VALUES (22262,8,2);   -- STR: 2
@@ -51972,6 +52025,7 @@ INSERT INTO `item_mods` VALUES (23786,237,2);    -- LUMORIAN_KILLER: 2
 INSERT INTO `item_mods` VALUES (23786,238,2);    -- LUMINION_KILLER: 2
 INSERT INTO `item_mods` VALUES (23786,302,3);    -- TRIPLE_ATTACK: 3
 INSERT INTO `item_mods` VALUES (23786,384,300);  -- HASTE_GEAR: 300
+INSERT INTO `item_mods` VALUES (23786,1044,1);   -- AUTOMATON_LVL_BONUS: 1
 
 -- Agwus Pigaches
 INSERT INTO `item_mods` VALUES (23787,1,99);    -- DEF: 99
@@ -52020,6 +52074,7 @@ INSERT INTO `item_mods` VALUES (23788,160,-600); -- DMG: -600
 INSERT INTO `item_mods` VALUES (23788,311,30);   -- MAGIC_DAMAGE: 30
 INSERT INTO `item_mods` VALUES (23788,384,300);  -- HASTE_GEAR: 300
 INSERT INTO `item_mods` VALUES (23788,487,6);    -- MAG_BURST_BONUS: 6
+INSERT INTO `item_mods` VALUES (23788,1040,1);   -- AVATAR_LVL_BONUS: 1
 
 -- Nyame Sollerets
 INSERT INTO `item_mods` VALUES (23789,1,122);    -- DEF: 122
@@ -52244,19 +52299,22 @@ INSERT INTO `item_mods` VALUES (25491,26,25); -- RACC: 25
 INSERT INTO `item_mods` VALUES (25491,73,7);  -- STORETP: 7
 
 -- Dragoons Collar
-INSERT INTO `item_mods` VALUES (25495,23,15); -- ATT: 15
-INSERT INTO `item_mods` VALUES (25495,25,15); -- ACC: 15
-INSERT INTO `item_mods` VALUES (25495,165,2); -- CRITHITRATE: 2
+INSERT INTO `item_mods` VALUES (25495,23,15);  -- ATT: 15
+INSERT INTO `item_mods` VALUES (25495,25,15);  -- ACC: 15
+INSERT INTO `item_mods` VALUES (25495,165,2);  -- CRITHITRATE: 2
+INSERT INTO `item_mods` VALUES (25495,1043,1); -- WYVERN_LVL_BONUS: 1
 
 -- Dragoons Collar +1
-INSERT INTO `item_mods` VALUES (25496,23,20); -- ATT: 20
-INSERT INTO `item_mods` VALUES (25496,25,20); -- ACC: 20
-INSERT INTO `item_mods` VALUES (25496,165,3); -- CRITHITRATE: 3
+INSERT INTO `item_mods` VALUES (25496,23,20);  -- ATT: 20
+INSERT INTO `item_mods` VALUES (25496,25,20);  -- ACC: 20
+INSERT INTO `item_mods` VALUES (25496,165,3);  -- CRITHITRATE: 3
+INSERT INTO `item_mods` VALUES (25496,1043,1); -- WYVERN_LVL_BONUS: 1
 
 -- Dragoons Collar +2
-INSERT INTO `item_mods` VALUES (25497,23,25); -- ATT: 25
-INSERT INTO `item_mods` VALUES (25497,25,25); -- ACC: 25
-INSERT INTO `item_mods` VALUES (25497,165,4); -- CRITHITRATE: 4
+INSERT INTO `item_mods` VALUES (25497,23,25);  -- ATT: 25
+INSERT INTO `item_mods` VALUES (25497,25,25);  -- ACC: 25
+INSERT INTO `item_mods` VALUES (25497,165,4);  -- CRITHITRATE: 4
+INSERT INTO `item_mods` VALUES (25497,1043,1); -- WYVERN_LVL_BONUS: 1
 
 -- Summoners Collar
 INSERT INTO `item_mods` VALUES (25501,2,30);     -- HP: 30
@@ -55797,6 +55855,12 @@ INSERT INTO `item_mods` VALUES (26202,249,17); -- GRAVITYRES: 17
 INSERT INTO `item_mods` VALUES (26214,73,-10); -- STORETP: -10
 INSERT INTO `item_mods` VALUES (26214,840,5);  -- ALL_WSDMG_ALL_HITS: 5
 
+-- Dreki Ring
+INSERT INTO `item_mods` VALUES (26216,23,8);   -- ATT: 8
+INSERT INTO `item_mods` VALUES (26216,25,8);   -- ACC: 8
+INSERT INTO `item_mods` VALUES (26216,73,5);   -- STORETP: 5
+INSERT INTO `item_mods` VALUES (26216,1043,1); -- WYVERN_LVL_BONUS: 1
+
 -- Beithir Ring
 INSERT INTO `item_mods` VALUES (26218,8,3);  -- STR: 3
 INSERT INTO `item_mods` VALUES (26218,9,3);  -- DEX: 3
@@ -55840,6 +55904,16 @@ INSERT INTO `item_mods` VALUES (26251,1039,20); -- TRIPLE_ATTACK_DMG: 20
 -- Andartias Mantle
 INSERT INTO `item_mods` VALUES (26258,1,16);  -- DEF: 16
 INSERT INTO `item_mods` VALUES (26258,900,1); -- UTSUSEMI_BONUS: 1
+
+-- Campestress Cape
+INSERT INTO `item_mods` VALUES (26260,1,15);    -- DEF: 15
+INSERT INTO `item_mods` VALUES (26260,126,5);   -- BP_DAMAGE: 5
+INSERT INTO `item_mods` VALUES (26260,1040,1);  -- AVATAR_LVL_BONUS: 1
+
+-- Visuciuss Mantle
+INSERT INTO `item_mods` VALUES (26263,1,16);    -- DEF: 16
+INSERT INTO `item_mods` VALUES (26263,505,10);  -- OVERLOAD_THRESH: 10
+INSERT INTO `item_mods` VALUES (26263,1044,1);  -- AUTOMATON_LVL_BONUS: 1
 
 -- Moonlight Cape
 INSERT INTO `item_mods` VALUES (26269,1,35);     -- DEF: 35
@@ -62226,6 +62300,76 @@ INSERT INTO `item_mods` VALUES (27105,31,37);   -- MEVA: 37
 INSERT INTO `item_mods` VALUES (27105,68,22);   -- EVA: 22
 INSERT INTO `item_mods` VALUES (27105,115,13);  -- ELEM: 13
 INSERT INTO `item_mods` VALUES (27105,384,300); -- HASTE_GEAR: 300
+
+-- Asteria Mitts
+INSERT INTO `item_mods` VALUES (27106,1,82);    -- DEF: 82
+INSERT INTO `item_mods` VALUES (27106,2,18);    -- HP: 18
+INSERT INTO `item_mods` VALUES (27106,5,44);    -- MP: 44
+INSERT INTO `item_mods` VALUES (27106,8,6);     -- STR: 6
+INSERT INTO `item_mods` VALUES (27106,9,28);    -- DEX: 28
+INSERT INTO `item_mods` VALUES (27106,10,24);   -- VIT: 24
+INSERT INTO `item_mods` VALUES (27106,11,5);    -- AGI: 5
+INSERT INTO `item_mods` VALUES (27106,12,19);   -- INT: 19
+INSERT INTO `item_mods` VALUES (27106,13,33);   -- MND: 33
+INSERT INTO `item_mods` VALUES (27106,14,20);   -- CHR: 20
+INSERT INTO `item_mods` VALUES (27106,68,22);   -- EVA: 22
+INSERT INTO `item_mods` VALUES (27106,31,43);   -- MEVA: 43
+INSERT INTO `item_mods` VALUES (27106,29,3);    -- MDEF: 3
+INSERT INTO `item_mods` VALUES (27106,384,300); -- HASTE_GEAR: 300
+-- TODO: Add "Carbuncle: Halves perpetuation cost"
+
+-- Asteria Mitts +1
+INSERT INTO `item_mods` VALUES (27107,1,82);    -- DEF: 82
+INSERT INTO `item_mods` VALUES (27107,2,18);    -- HP: 18
+INSERT INTO `item_mods` VALUES (27107,5,44);    -- MP: 44
+INSERT INTO `item_mods` VALUES (27107,8,6);     -- STR: 6
+INSERT INTO `item_mods` VALUES (27107,9,28);    -- DEX: 28
+INSERT INTO `item_mods` VALUES (27107,10,24);   -- VIT: 24
+INSERT INTO `item_mods` VALUES (27107,11,5);    -- AGI: 5
+INSERT INTO `item_mods` VALUES (27107,12,19);   -- INT: 19
+INSERT INTO `item_mods` VALUES (27107,13,33);   -- MND: 33
+INSERT INTO `item_mods` VALUES (27107,14,20);   -- CHR: 20
+INSERT INTO `item_mods` VALUES (27107,68,22);   -- EVA: 22
+INSERT INTO `item_mods` VALUES (27107,31,43);   -- MEVA: 43
+INSERT INTO `item_mods` VALUES (27107,29,3);    -- MDEF: 3
+INSERT INTO `item_mods` VALUES (27107,384,300); -- HASTE_GEAR: 300
+INSERT INTO `item_mods` VALUES (27107,1041,1);  -- CARBUNCLE_LVL_BONUS: 1
+-- TODO: Add "Carbuncle: Halves perpetuation cost"
+
+-- Lamassu Mitts
+INSERT INTO `item_mods` VALUES (27108,1,82);    -- DEF: 82
+INSERT INTO `item_mods` VALUES (27108,2,18);    -- HP: 18
+INSERT INTO `item_mods` VALUES (27108,5,94);    -- MP: 44
+INSERT INTO `item_mods` VALUES (27108,8,6);     -- STR: 6
+INSERT INTO `item_mods` VALUES (27108,9,28);    -- DEX: 28
+INSERT INTO `item_mods` VALUES (27108,10,24);   -- VIT: 24
+INSERT INTO `item_mods` VALUES (27108,11,5);    -- AGI: 5
+INSERT INTO `item_mods` VALUES (27108,12,19);   -- INT: 19
+INSERT INTO `item_mods` VALUES (27108,13,33);   -- MND: 33
+INSERT INTO `item_mods` VALUES (27108,14,20);   -- CHR: 20
+INSERT INTO `item_mods` VALUES (27108,68,22);   -- EVA: 22
+INSERT INTO `item_mods` VALUES (27108,31,43);   -- MEVA: 43
+INSERT INTO `item_mods` VALUES (27108,29,3);    -- MDEF: 3
+INSERT INTO `item_mods` VALUES (27108,384,300); -- HASTE_GEAR: 300
+INSERT INTO `item_mods` VALUES (27108,117,21);  -- SUMMONING: 21
+
+-- Lamassu Mitts +1
+INSERT INTO `item_mods` VALUES (27109,1,82);    -- DEF: 82
+INSERT INTO `item_mods` VALUES (27109,2,18);    -- HP: 18
+INSERT INTO `item_mods` VALUES (27109,5,94);    -- MP: 44
+INSERT INTO `item_mods` VALUES (27109,8,6);     -- STR: 6
+INSERT INTO `item_mods` VALUES (27109,9,28);    -- DEX: 28
+INSERT INTO `item_mods` VALUES (27109,10,24);   -- VIT: 24
+INSERT INTO `item_mods` VALUES (27109,11,5);    -- AGI: 5
+INSERT INTO `item_mods` VALUES (27109,12,19);   -- INT: 19
+INSERT INTO `item_mods` VALUES (27109,13,33);   -- MND: 33
+INSERT INTO `item_mods` VALUES (27109,14,20);   -- CHR: 20
+INSERT INTO `item_mods` VALUES (27109,68,22);   -- EVA: 22
+INSERT INTO `item_mods` VALUES (27109,31,43);   -- MEVA: 43
+INSERT INTO `item_mods` VALUES (27109,29,3);    -- MDEF: 3
+INSERT INTO `item_mods` VALUES (27109,384,300); -- HASTE_GEAR: 300
+INSERT INTO `item_mods` VALUES (27109,117,21);  -- SUMMONING: 21
+INSERT INTO `item_mods` VALUES (27109,1042,1);  -- CAIT_SITH_LVL_BONUS: 1
 
 -- Emicho Gauntlets
 INSERT INTO `item_mods` VALUES (27113,1,103);   -- DEF: 103

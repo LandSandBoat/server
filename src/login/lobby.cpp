@@ -562,10 +562,10 @@ int32 lobbyview_parse(int32 fd)
                 int32         sendsize = 0x28;
                 unsigned char MainReservePacket[0x28];
 
-                string_t client_ver_data((buff + 0x74), 6); // Full length is 10 but we drop last 4
-                client_ver_data = client_ver_data + "xx_x"; // And then we replace those last 4..
+                std::string client_ver_data((buff + 0x74), 6); // Full length is 10 but we drop last 4
+                client_ver_data = client_ver_data + "xx_x";    // And then we replace those last 4..
 
-                string_t expected_version(settings::get<std::string>("login.CLIENT_VER"), 0, 6); // Same deal here!
+                std::string expected_version(settings::get<std::string>("login.CLIENT_VER"), 0, 6); // Same deal here!
                 expected_version   = expected_version + "xx_x";
                 bool ver_mismatch  = expected_version != client_ver_data;
                 bool fatalMismatch = false;
