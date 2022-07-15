@@ -236,7 +236,7 @@ xi.player.onGameIn = function(player, firstLogin, zoning)
     player:setLocalVar("ZoneInTime", os.time())
 
     -- Slight delay to ensure player is fully logged in
- 
+--[[ 
     -- add afterglow effect if player has it unlocked
     player:timer(350, function(player)
 
@@ -312,6 +312,7 @@ xi.player.onGameIn = function(player, firstLogin, zoning)
             end
         end
     end)
+]]--
 	
     player:timer(2500, function(playerArg)
         -- Login Campaign rewards points once daily
