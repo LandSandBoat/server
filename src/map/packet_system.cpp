@@ -5187,7 +5187,7 @@ void SmallPacket0x0B6(map_session_data_t* const PSession, CCharEntity* const PCh
     if (strcmp(RecipientName.c_str(), "_CUSTOM_MENU") == 0 &&
         luautils::HasCustomMenuContext(PChar))
     {
-        std::string selection((const char*)data[20]);
+        std::string selection((const char*)data[21]);
         luautils::HandleCustomMenu(PChar, selection);
         return;
     }
@@ -5208,7 +5208,7 @@ void SmallPacket0x0B6(map_session_data_t* const PSession, CCharEntity* const PCh
 
         std::string escaped_full_string;
         escaped_full_string.reserve(strlen((const char*)data[21]) * 2 + 1);
-        sql->EscapeString(escaped_full_string.data(), (const char*)data[20]);
+        sql->EscapeString(escaped_full_string.data(), (const char*)data[21]);
 
         const char* fmtQuery = "INSERT into audit_chat (speaker,type,recipient,message,datetime) VALUES('%s','TELL','%s','%s',current_timestamp())";
         if (sql->Query(fmtQuery, escaped_speaker, escaped_recipient, escaped_full_string.data()) == SQL_ERROR)
