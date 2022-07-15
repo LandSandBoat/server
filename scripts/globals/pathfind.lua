@@ -13,6 +13,7 @@ xi.path =
         RUN      = 1,
         WALLHACK = 2,
         REVERSE  = 4,
+        SCRIPT   = 8,
     },
 
     -- returns the point at the given index
