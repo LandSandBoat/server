@@ -40,9 +40,9 @@ entity.onEventFinish = function(player, csid, option)
             v:addAssaultPoint(LEBROS_ASSAULT_POINT, points)
             v:setCharVar("AssaultComplete", 1)
             if (v:hasCompletedAssault(v:getCurrentAssault())) then
-                v:addCharVar("AssaultPromotion", 1)
+                v:incrementCharVar("AssaultPromotion", 1)
             else
-                v:addCharVar("AssaultPromotion", 5)
+                v:incrementCharVar("AssaultPromotion", 5)
             end
             v:startEvent(102)
         end

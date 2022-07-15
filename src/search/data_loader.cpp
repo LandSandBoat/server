@@ -173,8 +173,8 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
     }
     if (sr.zoneid[0] > 0)
     {
-        string_t zoneList;
-        int      i = 1;
+        std::string zoneList;
+        int         i = 1;
         zoneList.append(std::to_string(static_cast<unsigned long long>(sr.zoneid[0])));
         while (i < 10 && sr.zoneid[i] != 0)
         {
@@ -343,7 +343,7 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
             // filter by name
             if (sr.nameLen > 0)
             {
-                string_t dbname;
+                std::string dbname;
                 dbname.insert(0, (char*)PPlayer->name);
 
                 // can't be this name, too long
@@ -624,8 +624,8 @@ void CDataLoader::ExpireAHItems(uint16 expireAgeInDays)
             }
 
             qStr = fmt::format("INSERT INTO delivery_box (charid, charname, box, itemid, itemsubid, quantity, senderid, sender) VALUES "
-                "({}, '{}', 1, {}, 0, {}, 0, 'AH-Jeuno');",
-                listing.sellerID, listing.sellerName, listing.itemID, listing.ahStack == 1 ? listing.itemStack : 1);
+                               "({}, '{}', 1, {}, 0, {}, 0, 'AH-Jeuno');",
+                               listing.sellerID, listing.sellerName, listing.itemID, listing.ahStack == 1 ? listing.itemStack : 1);
 
             ret = sql2->Query(qStr.c_str());
 

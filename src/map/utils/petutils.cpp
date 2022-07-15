@@ -59,10 +59,10 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 struct Pet_t
 {
-    uint16    PetID;     // ID in pet_list.sql
-    look_t    look;      // внешний вид
-    string_t  name;      // имя
-    ECOSYSTEM EcoSystem; // эко-система
+    uint16      PetID;     // ID in pet_list.sql
+    look_t      look;      // внешний вид
+    std::string name;      // имя
+    ECOSYSTEM   EcoSystem; // эко-система
 
     uint8 minLevel; // минимально-возможный  уровень
     uint8 maxLevel; // максимально-возможный уровень
@@ -126,7 +126,7 @@ struct Pet_t
     Pet_t()
     : EcoSystem(ECOSYSTEM::ECO_ERROR)
     {
-        PetID     = 0;
+        PetID = 0;
 
         minLevel = -1;
         maxLevel = 99;
@@ -162,19 +162,19 @@ struct Pet_t
         hasSpellScript = false;
         spellList      = 0;
 
-        slash_sdt    = 0;
-        pierce_sdt   = 0;
-        hth_sdt      = 0;
-        impact_sdt   = 0;
+        slash_sdt  = 0;
+        pierce_sdt = 0;
+        hth_sdt    = 0;
+        impact_sdt = 0;
 
-        fire_sdt     = 0;
-        ice_sdt      = 0;
-        wind_sdt     = 0;
-        earth_sdt    = 0;
-        thunder_sdt  = 0;
-        water_sdt    = 0;
-        light_sdt    = 0;
-        dark_sdt     = 0;
+        fire_sdt    = 0;
+        ice_sdt     = 0;
+        wind_sdt    = 0;
+        earth_sdt   = 0;
+        thunder_sdt = 0;
+        water_sdt   = 0;
+        light_sdt   = 0;
+        dark_sdt    = 0;
 
         fire_meva    = 0;
         ice_meva     = 0;

@@ -144,6 +144,7 @@ enum MSGSERVTYPE : uint8
     MSG_LINKSHELL_RANK_CHANGE,
     MSG_LINKSHELL_REMOVE,
     MSG_LUA_FUNCTION,
+    MSG_CHARVAR_UPDATE,
 
     // gm commands
     MSG_SEND_TO_ZONE,
@@ -184,6 +185,8 @@ constexpr auto msgTypeToStr = [](uint8 msgtype)
             return "MSG_LINKSHELL_REMOVE";
         case MSG_LUA_FUNCTION:
             return "MSG_LUA_FUNCTION";
+        case MSG_CHARVAR_UPDATE:
+            return "MSG_CHARVAR_UPDATE";
         case MSG_SEND_TO_ZONE:
             return "MSG_SEND_TO_ZONE";
         case MSG_SEND_TO_ENTITY:
@@ -192,8 +195,6 @@ constexpr auto msgTypeToStr = [](uint8 msgtype)
             return "Unknown";
     };
 };
-
-typedef std::string string_t;
 
 // For characters, the size is stored in `size`.
 // For NPCs and monsters, something like the type of model is stored.
@@ -239,7 +240,7 @@ struct look_t
         ranged  = look[9];
     }
 
-    look_t(std::vector<uint16> &look)
+    look_t(std::vector<uint16>& look)
     {
         if (look.size() == 10)
         {
@@ -259,7 +260,6 @@ struct look_t
             look_t();
         }
     }
-
 };
 
 struct skills_t
@@ -434,7 +434,7 @@ struct eminencelog_t
 
     eminencelog_t()
     {
-        std::memset(&active,   0, sizeof(active));
+        std::memset(&active, 0, sizeof(active));
         std::memset(&progress, 0, sizeof(progress));
         std::memset(&complete, 0, sizeof(complete));
     }
@@ -444,7 +444,8 @@ struct eminencecache_t
 {
     std::bitset<4096> activemap;
     uint32            lastWriteout;
-    bool              notifyTimedRecord;;
+    bool              notifyTimedRecord;
+    ;
 
     eminencecache_t()
     {
@@ -488,7 +489,7 @@ struct search_t
 
 struct bazaar_t
 {
-    string_t message;
+    std::string message;
 
     bazaar_t()
     {
@@ -572,8 +573,8 @@ public:
     {
         std::memset(&m_name, 0, sizeof(m_name));
 
-        m_mjob = 0;
-        m_zone = 0;
+        m_mjob   = 0;
+        m_zone   = 0;
         m_nation = 0;
     };
     ~char_mini(){};

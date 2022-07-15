@@ -68,7 +68,7 @@ mission.sections =
                         mission:complete(player)
                     elseif option == 1 then
                         -- Incorrect Password was Entered
-                        mission:addVar(player, 'failCount', 1)
+                        mission:incrementVar(player, 'failCount', 1)
                     else
                         -- Failed to answer, 'Of Course it won't help' during CS
                         player:setMissionStatus(mission.areaId, 2)

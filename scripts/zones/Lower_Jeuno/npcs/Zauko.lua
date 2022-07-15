@@ -125,8 +125,8 @@ end
 entity.onEventFinish = function(player, csid, option)
     -- SAVE THE CLOCKTOWER
     if csid == 50 then
-        player:addCharVar("saveTheClockTowerVar", 1)
-        player:addCharVar("saveTheClockTowerNPCz2", 256)
+        player:incrementCharVar("saveTheClockTowerVar", 1)
+        player:incrementCharVar("saveTheClockTowerNPCz2", 256)
 
     -- COMMUNITY SERVICE
     elseif csid == 117 then

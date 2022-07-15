@@ -35,7 +35,7 @@ class CBaseEntity;
 struct EventPrep
 {
     CBaseEntity* targetEntity = {};
-    string_t     scriptFile;
+    std::string  scriptFile;
 
     void reset()
     {

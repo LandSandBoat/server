@@ -123,7 +123,7 @@ CMobEntity::CMobEntity()
     m_maxRoamDistance = 50.0f;
     m_disableScent    = false;
 
-    m_Pool = 0;
+    m_Pool        = 0;
     m_RespawnTime = 300;
 
     m_SpellListContainer = nullptr;
@@ -757,8 +757,8 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
 
         if (damage < 0)
         {
-            msg = MSGBASIC_SKILL_RECOVERS_HP; // TODO: verify this message does/does not vary depending on mob/avatar/automaton use
-            target.param = std::clamp(-damage,0, PTarget->GetMaxHP() - PTarget->health.hp);
+            msg          = MSGBASIC_SKILL_RECOVERS_HP; // TODO: verify this message does/does not vary depending on mob/avatar/automaton use
+            target.param = std::clamp(-damage, 0, PTarget->GetMaxHP() - PTarget->health.hp);
         }
         else
         {
@@ -820,7 +820,7 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
 
     PTarget = dynamic_cast<CBattleEntity*>(state.GetTarget()); // TODO: why is this recast here? can state change between now and the original cast?
 
-    if(PTarget)
+    if (PTarget)
     {
         if (PTarget->objtype == TYPE_MOB && (PTarget->isDead() || (objtype == TYPE_PET && static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::AVATAR)))
         {

@@ -66,7 +66,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../packets/monipulator1.h"
 #include "../packets/monipulator2.h"
 #include "../packets/quest_mission_log.h"
-
 #include "../packets/roe_sparkupdate.h"
 #include "../packets/server_ip.h"
 #include "../packets/timer_bar_util.h"
@@ -79,6 +78,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../latent_effect_container.h"
 #include "../linkshell.h"
 #include "../map.h"
+#include "../message.h"
 #include "../mob_modifier.h"
 #include "../recast_container.h"
 #include "../roe.h"
@@ -2312,6 +2312,11 @@ namespace charutils
 
     void EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 containerID)
     {
+        if (PChar == nullptr || PChar->getStorage(containerID) == nullptr)
+        {
+            return;
+        }
+
         CItemEquipment* PItem = dynamic_cast<CItemEquipment*>(PChar->getStorage(containerID)->GetItem(slotID));
 
         if (PItem && PItem == PChar->getEquip((SLOTTYPE)equipSlotID))
@@ -2319,10 +2324,11 @@ namespace charutils
             return;
         }
 
-        if (equipSlotID == SLOT_SUB && PItem && !PItem->IsShield() && ((CItemWeapon*)PItem)->getSkillType() == SKILL_NONE)
+        if (equipSlotID == SLOT_SUB && PItem && !PItem->IsShield())
         {
-            CItemEquipment* PMainItem = PChar->getEquip(SLOT_MAIN);
-            if (!PMainItem || !((CItemWeapon*)PMainItem)->isTwoHanded())
+            auto PItemWeapon = dynamic_cast<CItemWeapon*>(PItem);
+            auto PMainItem   = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_MAIN));
+            if (PItemWeapon && PItemWeapon->getSkillType() == SKILL_NONE && (!PMainItem || !PMainItem->isTwoHanded()))
             {
                 PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 0x200));
                 return;
@@ -4588,7 +4594,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Устанавливаем ограничение уровня персонажа                           *
+     *  Establish a restriction of character level                          *
      *                                                                       *
      ************************************************************************/
 
@@ -4611,6 +4617,24 @@ namespace charutils
 
         sql->Query(Query, PChar->loc.p.rotation, PChar->loc.p.x, PChar->loc.p.y, PChar->loc.p.z, PChar->loc.boundary, PChar->id);
     }
+
+    /* TODO: Move linkshell persistence here
+    void SaveCharLinkshells(CCharEntity* PChar)
+    {
+        for (uint8 lsSlot = 16; lsSlot < 18; ++lsSlot)
+        {
+            if (PChar->equip[lsSlot] == 0)
+            {
+                sql->Query("DELETE FROM char_linkshells WHERE charid = %u AND lsslot = %u LIMIT 1;", PChar->id, lsSlot);
+            }
+            else
+            {
+                const char* fmtQuery = "INSERT INTO char_linkshells SET charid = %u, lsslot = %u, location = %u, slot = %u ON DUPLICATE KEY UPDATE location = %u, slot = %u;";
+                sql->Query(fmtQuery, PChar->id, lsSlot, PChar->equipLoc[lsSlot], PChar->equip[lsSlot], PChar->equipLoc[lsSlot], PChar->equip[lsSlot]);
+            }
+        }
+    }
+    */
 
     void SaveQuestsList(CCharEntity* PChar)
     {
@@ -5370,17 +5394,10 @@ namespace charutils
     bool hasMogLockerAccess(CCharEntity* PChar)
     {
         TracyZoneScoped;
-
-        char fmtQuery[] = "SELECT value FROM char_vars WHERE charid = %u AND varname = '%s' ";
-        sql->Query(fmtQuery, PChar->id, "mog-locker-expiry-timestamp");
-
-        if (sql->NextRow() == SQL_SUCCESS)
+        auto tstamp = static_cast<uint32>(PChar->getCharVar("mogLocker_expire"));
+        if (CVanaTime::getInstance()->getVanaTime() < tstamp)
         {
-            auto tstamp = (uint32)sql->GetIntData(0);
-            if (CVanaTime::getInstance()->getVanaTime() < tstamp)
-            {
-                return true;
-            }
+            return true;
         }
         return false;
     }
@@ -5994,75 +6011,115 @@ namespace charutils
 
     int32 GetCharVar(CCharEntity* PChar, std::string const& var)
     {
-        TracyZoneScoped;
-        TracyZoneString(PChar->name);
-        TracyZoneString(var);
-
         if (PChar == nullptr)
         {
-            ShowError("GetCharVar was requested for a nullptr PChar");
             return 0;
         }
 
-        const char* fmtQuery = "SELECT value FROM char_vars WHERE charid = %u AND varname = '%s' LIMIT 1;";
+        return PChar->getCharVar(var);
+    }
 
-        int32 ret = sql->Query(fmtQuery, PChar->id, var.c_str());
-
-        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+    void SetCharVar(uint32 charId, std::string const& var, int32 value)
+    {
+        if (auto player = zoneutils::GetChar(charId))
         {
-            return sql->GetIntData(0);
+            player->setCharVar(var, value);
+            return;
         }
 
-        // auto stmt = sql->GetPreparedStatement("GET_CHAR_VAR");
-        // stmt->Execute(PChar->id, var);
-
-        return 0;
+        PersistCharVar(charId, var, value);
+        message::send_charvar_update(charId, var, value);
     }
 
     void SetCharVar(CCharEntity* PChar, std::string const& var, int32 value)
     {
-        TracyZoneScoped;
-        TracyZoneString(PChar->name);
-        TracyZoneString(fmt::format("{} -> {}", var, value));
-
         if (PChar == nullptr)
         {
-            ShowError("SetCharVar was requested for a nullptr PChar");
             return;
         }
 
+        return PChar->setCharVar(var, value);
+    }
+
+    int32 ClearCharVarsWithPrefix(CCharEntity* PChar, std::string const& prefix)
+    {
+        if (PChar == nullptr)
+        {
+            return 0;
+        }
+
+        PChar->clearCharVarsWithPrefix(prefix);
+        return 0;
+    }
+
+    int32 RemoveCharVarsWithTag(CCharEntity* PChar, std::string const& varsTag)
+    {
+        if (PChar == nullptr)
+        {
+            return 0;
+        }
+
+        PChar->clearCharVarsWithPrefix(fmt::sprintf("[%s]", varsTag));
+        return 0;
+    }
+
+    void ClearCharVarFromAll(std::string const& varName, bool localOnly)
+    {
+        if (!localOnly)
+        {
+            sql->Query("DELETE FROM char_vars WHERE varname = '%s';", varName);
+        }
+
+        // clang-format off
+        zoneutils::ForEachZone([varName](CZone* PZone)
+        {
+            PZone->ForEachChar([varName](CCharEntity* PChar)
+            {
+                PChar->updateCharVarCache(varName, 0);
+            });
+        });
+        // clang-format on
+    }
+
+    void IncrementCharVar(CCharEntity* PChar, std::string const& var, int32 value)
+    {
+        if (PChar == nullptr)
+        {
+            return;
+        }
+
+        const char* Query = "INSERT INTO char_vars SET charid = %u, varname = '%s', value = %i ON DUPLICATE KEY UPDATE value = value + %i;";
+
+        sql->Query(Query, PChar->id, var, value, value);
+
+        PChar->removeFromCharVarCache(var);
+    }
+
+    int32 FetchCharVar(uint32 charId, std::string const& varName)
+    {
+        const char* fmtQuery = "SELECT value FROM char_vars WHERE charid = %u AND varname = '%s' LIMIT 1;";
+
+        int32 ret = sql->Query(fmtQuery, charId, varName);
+
+        int32 value = 0;
+        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+        {
+            value = sql->GetIntData(0);
+        }
+
+        return value;
+    }
+
+    void PersistCharVar(uint32 charId, std::string const& var, int32 value)
+    {
         if (value == 0)
         {
-            sql->Query(fmt::format("DELETE FROM char_vars WHERE charid = {} AND varname = '{}' LIMIT 1;",
-                                   PChar->id, var)
-                           .c_str());
+            sql->Query("DELETE FROM char_vars WHERE charid = %u AND varname = '%s' LIMIT 1;", charId, var);
         }
         else
         {
-            sql->Query(fmt::format("INSERT INTO char_vars SET charid = {}, varname = '{}', value = {} ON DUPLICATE KEY UPDATE value = {};",
-                                   PChar->id, var.c_str(), value, value)
-                           .c_str());
+            sql->Query("INSERT INTO char_vars SET charid = %u, varname = '%s', value = %i ON DUPLICATE KEY UPDATE value = %i;", charId, var, value, value);
         }
-    }
-
-    void ClearCharVarsWithPrefix(CCharEntity* PChar, std::string prefix)
-    {
-        TracyZoneScoped;
-
-        if (PChar == nullptr)
-        {
-            return;
-        }
-
-        // Validate that prefix is not too short, since we don't want it to
-        // accidentally clear a lot of variables it shouldn't.
-        if (prefix.size() < 5)
-        {
-            ShowError("Prefix too short to clear with: '%s'", prefix);
-            return;
-        }
-
-        sql->Query("DELETE FROM char_vars WHERE charid = %u AND varname LIKE '%s%%';", PChar->id, prefix.c_str());
     }
 
     uint16 getWideScanRange(JOBTYPE job, uint8 level)
