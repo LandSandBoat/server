@@ -94,11 +94,14 @@ public:
 
 private:
     CZone*       m_zone;
-    CBaseEntity* m_Transport; // указатель на транспорт в зоне
+    CBaseEntity* m_Transport; // Transport indicator in the zone
     time_point   m_EffectCheckTime{ server_clock::now() };
 
     time_point computeTime{ server_clock::now() };
     uint16     lastCharComputeTargId;
+
+    time_point charPersistTime{ server_clock::now() };
+    uint16     lastCharPersistTargId;
 };
 
 #endif

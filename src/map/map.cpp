@@ -65,6 +65,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "utils/mobutils.h"
 #include "utils/moduleutils.h"
 #include "utils/petutils.h"
+#include "utils/serverutils.h"
 #include "utils/trustutils.h"
 #include "utils/zoneutils.h"
 
@@ -270,6 +271,7 @@ int32 do_init(int32 argc, char** argv)
     CTaskMgr::getInstance()->AddTask("time_server", server_clock::now(), nullptr, CTaskMgr::TASK_INTERVAL, time_server, 2400ms);
     CTaskMgr::getInstance()->AddTask("map_cleanup", server_clock::now(), nullptr, CTaskMgr::TASK_INTERVAL, map_cleanup, 5s);
     CTaskMgr::getInstance()->AddTask("garbage_collect", server_clock::now(), nullptr, CTaskMgr::TASK_INTERVAL, map_garbage_collect, 15min);
+    CTaskMgr::getInstance()->AddTask("persist_server_vars", server_clock::now(), nullptr, CTaskMgr::TASK_INTERVAL, serverutils::PersistVolatileServerVars, 1min);
 
     g_PBuff   = new int8[MAX_BUFFER_SIZE + 20];
     PTempBuff = new int8[MAX_BUFFER_SIZE + 20];

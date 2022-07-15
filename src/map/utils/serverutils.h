@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -16,23 +16,28 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
 
+  This file is part of DarkStar-server source code.
+
 ===========================================================================
 */
 
-#ifndef _CSTOPDOWNLOADINGPACKET_H
-#define _CSTOPDOWNLOADINGPACKET_H
+#ifndef _SERVERUTILS_H
+#define _SERVERUTILS_H
 
-#include "basic.h"
-#include "common/cbasetypes.h"
-#include "common/mmo.h"
-#include <vector>
+#include "../../common/cbasetypes.h"
+#include "../../common/mmo.h"
+#include "../../common/taskmgr.h"
 
-class CCharEntity;
-
-class CStopDownloadingPacket : public CBasicPacket
+namespace serverutils
 {
-public:
-    CStopDownloadingPacket(CCharEntity* PChar, std::vector<std::pair<uint32, std::string>> blacklist);
-};
+    int32 GetServerVar(std::string const& var);
+    void  SetServerVar(std::string const& var, int32 value);
+    void  PersistServerVar(std::string const& var, int32 value);
 
-#endif
+    int32 GetVolatileServerVar(std::string const& var);
+    void  SetVolatileServerVar(std::string const& var, int32 value);
+
+    int32 PersistVolatileServerVars(time_point tick, CTaskMgr::CTask* PTask);
+} // namespace serverutils
+
+#endif // _SERVERUTILS_H

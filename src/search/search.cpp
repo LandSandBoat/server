@@ -477,8 +477,8 @@ void HandleAuctionHouseRequest(CTCPRequestPacket& PTCPRequest)
     // 7 - defense
     // 8 - resistance
     // 9 - name
-    string_t OrderByString = "ORDER BY";
-    uint8    paramCount    = ref<uint8>(data, 0x12);
+    std::string OrderByString = "ORDER BY";
+    uint8       paramCount    = ref<uint8>(data, 0x12);
     for (uint8 i = 0; i < paramCount; ++i) // параметры сортировки предметов
     {
         uint8 param = ref<uint32>(data, 0x18 + 8 * i);

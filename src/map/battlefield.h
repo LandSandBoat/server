@@ -126,7 +126,7 @@ public:
     uint16                        GetID() const;
     CZone*                        GetZone() const;
     uint16                        GetZoneID() const;
-    const std::string&            GetName() const;
+    std::string const&            GetName() const;
     const BattlefieldInitiator_t& GetInitiator() const;
     uint8                         GetArea() const;
     const BattlefieldRecord_t&    GetRecord() const;
@@ -143,7 +143,7 @@ public:
     duration                      GetFinishTime() const;
     duration                      GetRemainingTime() const;
     duration                      GetLastTimeUpdate() const;
-    uint64_t                      GetLocalVar(const std::string& name) const;
+    uint64_t                      GetLocalVar(std::string const& name) const;
 
     bool CheckInProgress();
     bool IsOccupied() const;
@@ -156,10 +156,10 @@ public:
     void ForEachAlly(const std::function<void(CMobEntity*)>& func);
 
     void SetID(uint16 id);
-    void SetName(const std::string& name);
-    void SetInitiator(const std::string& name);
+    void SetName(std::string const& name);
+    void SetInitiator(std::string const& name);
     void SetArea(uint8 area);
-    void SetRecord(const std::string& name, duration time, size_t partySize);
+    void SetRecord(std::string const& name, duration time, size_t partySize);
     void SetStatus(uint8 status);
     void SetRuleMask(uint16 rulemask);
     void SetStartTime(time_point time);
@@ -168,7 +168,7 @@ public:
     void SetWipeTime(time_point time);
     void SetMaxParticipants(uint8 max);
     void SetLevelCap(uint8 cap);
-    void SetLocalVar(const std::string& name, uint64_t value);
+    void SetLocalVar(std::string const& name, uint64_t value);
     void SetLastTimeUpdate(duration time);
 
     void         ApplyLevelRestrictions(CCharEntity* PChar) const;
