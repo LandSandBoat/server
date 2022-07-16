@@ -17,7 +17,7 @@ end
 entity.onTrigger = function(player, npc)
     local notes = player:getCurrency("allied_notes")
     local freelances = 99 -- Faking it for now
-    local ciphers = 0
+    local ciphers = xi.settings.main.ENABLE_TRUST_ALTER_EGO_EXTRAVAGANZA * 4
     -- 0 for not displaying ciphers
     -- 4 for Valaneiral (New Year's & Summer Alter Ego Extravaganzas)
     -- 8 for Adelheid (Spring & Autumn Alter Ego Extravaganzas)
