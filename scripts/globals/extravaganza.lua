@@ -32,7 +32,7 @@ end
 ----------------------------------------------------------
 
 xi.extravaganza.shadowEraTrigger = function(player, npc, notes)
-    if enabled > 0 then
+    if enabled == 1 or enabled == 3 then -- Available during Summer/NY or when set to have all enabled
         ciphers = xi.extravaganza.getShadowEraCiphers(npc)
         player:setLocalVar("ShadowCipher1", ciphers[1])
         player:setLocalVar("ShadowCipher2", ciphers[2])
