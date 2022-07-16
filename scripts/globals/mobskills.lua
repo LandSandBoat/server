@@ -195,7 +195,7 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
     hitdamage = hitdamage * dmgmod
 
     local dmgrandsel = math.random(0, 1) -- Can select either positive or negative.
-    local dmgrand = math.random(0, 10) -- Variance should be 0-10%
+    local dmgrand = math.random(0, 5) -- Variance should be 0-5%
     if dmgrandsel == 0 then
         hitdamage = hitdamage + (hitdamage * (dmgrand / 100))
     else
