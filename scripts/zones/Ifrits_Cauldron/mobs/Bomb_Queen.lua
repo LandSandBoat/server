@@ -20,19 +20,28 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    -- every ~20 seconds after first pet, a new pet will spawn around queen's position.
+    -- every ~30 seconds after first pet, a new pet will spawn around queen's position.
     -- 49.5% (198/400) chance for Prince/Princess. 1% (4/400) chance for Bomb Bastard.
     if os.time() > mob:getLocalVar("petCooldown") then
         local petId = mob:getID() + 1 + math.floor(math.random(0, 399) / 99)
         local pet = GetMobByID(petId)
 
-        if pet and not pet:isSpawned() then
+        if pet and not pet:isSpawned() and mob:canUseAbilities() then
             local pos = mob:getPos()
-            pet:setSpawn(pos.x + math.random(-2, 2), pos.y, pos.z + math.random(-2, 2), pos.rot)
-            pet:spawn()
-            pet:updateEnmity(target)
-
-            mob:setLocalVar("petCooldown", os.time() + 20)
+            mob:entityAnimationPacket("casm")
+            mob:SetAutoAttackEnabled(false)
+            mob:SetMagicCastingEnabled(false)
+            mob:SetMobAbilityEnabled(false)
+            mob:setLocalVar("petCooldown", os.time() + 30)
+            mob:timer(3000, function(mobArg)
+                mobArg:entityAnimationPacket("shsm")
+                mobArg:SetMobAbilityEnabled(true)
+                mobArg:SetAutoAttackEnabled(true)
+                mobArg:SetMagicCastingEnabled(true)
+                pet:setSpawn(pos.x + math.random(-2, 2), pos.y, pos.z + math.random(-2, 2), pos.rot)
+                pet:spawn()
+                pet:updateEnmity(target)
+            end)
         end
     end
 end
