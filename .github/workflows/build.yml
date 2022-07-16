@@ -498,6 +498,9 @@ jobs:
         for f in sql/*.sql; do
           echo -e "Importing $f into the database..."
           mysql xidb -h 127.0.0.1 -uroot -proot < $f
+        for f in modules/era/sql/*.sql; do
+          echo -e "Importing $f into the database..."
+          mysql xidb -h 127.0.0.1 -uroot -proot < $f
         done
         mysql xidb -h 127.0.0.1 -uroot -proot -e "SHOW tables"
     - name: Assign odd zones a different port
