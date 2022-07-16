@@ -4995,7 +4995,35 @@ INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 250, 1, 255); -- ice spi
 INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 252, 1, 255); -- stun (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 253, 1, 255); -- sleep (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 274, 1, 255); -- sleepga ii (1~255)
--- Next Avail 493
+
+-- Bastet (499)
+INSERT INTO `mob_spell_lists` VALUES('Bastet', 499, 165, 1, 255); -- thunder ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Bastet', 499, 195, 1, 255); -- thundaga ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Bastet', 499, 212, 1, 255); -- burst (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Bastet', 499, 239, 1, 255); -- shock (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Bastet', 499, 251, 1, 255); -- shock spikes (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Bastet', 499, 252, 1, 255); -- stun (1~255)
+
+-- Noble Mold (500)
+INSERT INTO `mob_spell_lists` VALUES('Noble_Mold', 500, 55, 1, 255); -- aquaveil (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Noble_Mold', 500, 105, 1, 255); -- enwater (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Noble_Mold', 500, 170, 1, 255); -- water ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Noble_Mold', 500, 200, 1, 255); -- waterga ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Noble_Mold', 500, 221, 1, 255); -- poison ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Noble_Mold', 500, 240, 1, 255); -- drown (1~255)
+
+-- Sacrificial Goblet
+INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 501, 204, 1, 255); -- flare (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 501, 206, 1, 255); -- freeze (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 501, 208, 1, 255); -- tornado (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 501, 210, 1, 255); -- quake (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 501, 212, 1, 255); -- burst (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 501, 214, 1, 255); -- flood (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 501, 245, 1, 255); -- drain (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 501, 247, 1, 255); -- aspir (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 501, 226, 1, 255); -- poisonga ii (1~255)
+
+-- Next Avail 501
 
 -- AirSkyBoat Specific Starts at 5000
 -- 5000 -> 5010 is Era Dynamis

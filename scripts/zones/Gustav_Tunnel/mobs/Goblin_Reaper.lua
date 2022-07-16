@@ -15,7 +15,7 @@ entity.onMobDeath = function(mob, player, isKiller)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, ID.mob.GOBLINSAVIOR_HERONOX_PH, 5, math.random(10800, 18000)) -- 3 to 5 hours
+    xi.mob.phOnDespawn(mob, ID.mob.GOBLINSAVIOR_HERONOX_PH, 5, 10800) -- 3 hour minimum
 end
 
 return entity

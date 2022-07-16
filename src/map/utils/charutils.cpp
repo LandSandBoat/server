@@ -3590,7 +3590,7 @@ namespace charutils
         }
     }
 
-    uint16 ApplyTH(int16 m_THLvl, uint16 rate)
+    float ApplyTH(int16 m_THLvl, uint16 rate)
     {
         TracyZoneScoped;
 
@@ -3612,12 +3612,12 @@ namespace charutils
             }
             else if (m_THLvl < 7)
             {
-                multi = 2.00f + (0.50f * (m_THLvl - 2));
+                multi = 3.00f + (0.50f * (m_THLvl - 2));
                 return multi;
             }
             else if (m_THLvl < 12)
             {
-                multi = 4.00f + (1.00f * (m_THLvl - 6));
+                multi = 5.00f + (1.00f * (m_THLvl - 6));
                 return multi;
             }
             else if (m_THLvl < 14)
@@ -3627,7 +3627,7 @@ namespace charutils
             }
             else
             {
-                multi = 13.50f + (2.00f * (m_THLvl - 14));
+                multi = 12.00f + (2.00f * (m_THLvl - 14));
                 return multi;
             }
         }
@@ -3663,7 +3663,12 @@ namespace charutils
         {
             if (m_THLvl < 3)
             {
-                multi = 1.00f + (0.20f * m_THLvl);
+                multi = 1.00f + (0.50f * m_THLvl);
+                return multi;
+            }
+            else if (m_THLvl < 5)
+            {
+                multi = 2.00f + (0.25f * (m_THLvl - 2));
                 return multi;
             }
             else if (m_THLvl < 8)
@@ -3780,12 +3785,12 @@ namespace charutils
             }
             else if (m_THLvl < 3)
             {
-                multi = 2.00f + (0.50f * (m_THLvl - 1));
+                multi = 2.00f + (0.33f * (m_THLvl - 1));
                 return multi;
             }
             else if (m_THLvl < 5)
             {
-                multi = 2.50f + (0.16f * (m_THLvl - 2));
+                multi = 2.34f + (0.16f * (m_THLvl - 2));
                 return multi;
             }
             else if (m_THLvl < 6)
@@ -3831,7 +3836,7 @@ namespace charutils
 
         uint8 tries    = 0;
         uint8 maxTries = 1;
-        uint16 bonus    = 0;
+        float bonus    = 0;
         bool applyTH = false;
         if (auto* PMob = dynamic_cast<CMobEntity*>(PEntity))
         {

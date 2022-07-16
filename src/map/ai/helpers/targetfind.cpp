@@ -246,41 +246,59 @@ void CTargetFind::addAllInMobList(CBattleEntity* PTarget, bool withPet)
 void CTargetFind::addAllInZone(CBattleEntity* PTarget, bool withPet)
 {
     TracyZoneScoped;
-    zoneutils::GetZone(PTarget->getZone())->ForEachCharInstance(PTarget, [&](CCharEntity* PChar) {
+    // clang-format off
+    zoneutils::GetZone(PTarget->getZone())->ForEachCharInstance(PTarget, [&](CCharEntity* PChar)
+    {
         if (PChar)
         {
             addEntity(PChar, withPet);
         }
     });
-    zoneutils::GetZone(PTarget->getZone())->ForEachMobInstance(PTarget, [&](CMobEntity* PMob) {
+    zoneutils::GetZone(PTarget->getZone())->ForEachMobInstance(PTarget, [&](CMobEntity* PMob)
+    {
         if (PMob)
         {
             addEntity(PMob, withPet);
         }
     });
-    zoneutils::GetZone(PTarget->getZone())->ForEachTrustInstance(PTarget, [&](CTrustEntity* PTrust) {
+    zoneutils::GetZone(PTarget->getZone())->ForEachTrustInstance(PTarget, [&](CTrustEntity* PTrust)
+    {
         if (PTrust)
         {
             addEntity(PTrust, withPet);
         }
     });
+    // clang-format on
 }
 
 void CTargetFind::addAllInAlliance(CBattleEntity* PTarget, bool withPet)
 {
-    PTarget->ForAlliance([this, withPet](CBattleEntity* PMember) { addEntity(PMember, withPet); });
+    // clang-format off
+    PTarget->ForAlliance([this, withPet](CBattleEntity* PMember)
+    {
+        addEntity(PMember, withPet);
+    });
+    // clang-format on
 }
 
 void CTargetFind::addAllInParty(CBattleEntity* PTarget, bool withPet)
 {
+    // clang-format off
     if (PTarget->objtype == TYPE_PC)
     {
-        static_cast<CCharEntity*>(PTarget)->ForPartyWithTrusts([this, withPet](CBattleEntity* PMember) { addEntity(PMember, withPet); });
+        static_cast<CCharEntity*>(PTarget)->ForPartyWithTrusts([this, withPet](CBattleEntity* PMember)
+        {
+            addEntity(PMember, withPet);
+        });
     }
     else
     {
-        PTarget->ForParty([this, withPet](CBattleEntity* PMember) { addEntity(PMember, withPet); });
+        PTarget->ForParty([this, withPet](CBattleEntity* PMember)
+        {
+            addEntity(PMember, withPet);
+        });
     }
+    // clang-format on
 }
 
 void CTargetFind::addAllInEnmityList()
@@ -326,12 +344,15 @@ void CTargetFind::addAllInRange(CBattleEntity* PTarget, float radius, ALLEGIANCE
         }
         else
         {
-            zoneutils::GetZone(PTarget->getZone())->ForEachCharInstance(PTarget, [&](CCharEntity* PChar) {
+            // clang-format off
+            zoneutils::GetZone(PTarget->getZone())->ForEachCharInstance(PTarget, [&](CCharEntity* PChar)
+            {
                 if (PChar && isWithinArea(&(PChar->loc.p)) && !PChar->isDead())
                 {
                     m_targets.push_back(PChar);
                 }
             });
+            // clang-format on
         }
     }
 }
@@ -374,12 +395,15 @@ bool CTargetFind::isMobOwner(CBattleEntity* PTarget)
 
     bool found = false;
 
-    m_PBattleEntity->ForAlliance([&found, &PTarget](CBattleEntity* PMember) {
+    // clang-format off
+    m_PBattleEntity->ForAlliance([&found, &PTarget](CBattleEntity* PMember)
+    {
         if (PMember->id == PTarget->m_OwnerID.id)
         {
             found = true;
         }
     });
+    // clang-format on
 
     return found;
 }

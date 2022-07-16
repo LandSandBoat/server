@@ -7,7 +7,9 @@ require("scripts/globals/msg")
 -----------------------------------
 local mobskill_object = {}
 
-local avatarOffsets =
+xi = xi or {}
+xi.astralflow = xi.astralflow or {}
+xi.astralflow.avatarOffsets =
 {
     [17444883] = 3, -- Vermilion-eared Noberry
     [17453078] = 3, -- Duke Dantalian
@@ -25,8 +27,8 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local mobID = mob:getID()
     local avatar = 0
 
-    if avatarOffsets[mobID] then
-        avatar = mobID + avatarOffsets[mobID]
+    if xi.astralflow.avatarOffsets[mobID] then
+        avatar = mobID + xi.astralflow.avatarOffsets[mobID]
     else
         avatar = mobID + 2 -- default offset
     end

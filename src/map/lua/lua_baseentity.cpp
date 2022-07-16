@@ -1518,6 +1518,32 @@ uint8 CLuaBaseEntity::getCurrentAction()
 }
 
 /************************************************************************
+ *  Function: canUseAbilities()
+ *  Purpose : Sees if a mob has perticular effects that stop it from doing thing
+ *  Example : mob:canUseAbilities()
+ *  Notes   : Can't use on NPCs
+ ************************************************************************/
+
+bool CLuaBaseEntity::canUseAbilities()
+{
+    if (auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity))
+    {
+        return !(PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_SLEEP) ||
+                 PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_IMPAIRMENT) ||
+                 PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_SLEEP_II) ||
+                 PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_STUN) ||
+                 PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_AMNESIA) ||
+                 PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_LULLABY) ||
+                 PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_PETRIFICATION) ||
+                 PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_TERROR) ||
+                 !(m_PBaseEntity->PAI->CanChangeState()));
+    }
+
+    ShowError("canUseAbilities() : Wrong Entity Type");
+    return false;
+}
+
+/************************************************************************
  *  Function: lookAt()
  *  Purpose : Forces an entity to 'look' at something like it's self-aware
  *  Example : npc:lookAt(player:getPos()) -- Make an NPC look at the PC
@@ -1859,7 +1885,7 @@ void CLuaBaseEntity::setElevator(uint8 id, uint32 lowerDoor, uint32 upperDoor, u
     // If giving the elevator ANIMATION_ELEVATOR_UP makes it go down, set this bool to true
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_NPC);
 
-    Elevator_t elevator         = {};
+    Elevator_t elevator = {};
 
     elevator.id                 = id;
     elevator.LowerDoor          = static_cast<CNpcEntity*>(zoneutils::GetEntity(lowerDoor, TYPE_NPC));
@@ -2086,7 +2112,7 @@ bool CLuaBaseEntity::sendGuild(uint16 guildID, uint8 open, uint8 close, uint8 ho
     XI_DEBUG_BREAK_IF(open > close);
 
     uint8 VanadielHour = (uint8)CVanaTime::getInstance()->getHour();
-    uint8 VanadielDay = (uint8)CVanaTime::getInstance()->getWeekday();
+    uint8 VanadielDay  = (uint8)CVanaTime::getInstance()->getWeekday();
 
     GUILDSTATUS status = GUILD_OPEN;
 
@@ -2642,7 +2668,6 @@ void CLuaBaseEntity::warp()
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
     PChar->loc.boundary    = 0;
-    PChar->m_moghouseID    = 0;
     PChar->loc.p           = PChar->profile.home_point.p;
     PChar->loc.destination = PChar->profile.home_point.destination;
 
@@ -2650,7 +2675,7 @@ void CLuaBaseEntity::warp()
     PChar->animation = ANIMATION_NONE;
 
     PChar->clearPacketList();
-    charutils::SendToZone(PChar, 2, zoneutils::GetZoneIPP(m_PBaseEntity->loc.destination));
+    charutils::SendToZone(PChar, 2, zoneutils::GetZoneIPP(PChar->loc.destination));
 }
 
 /************************************************************************
@@ -4796,7 +4821,7 @@ void CLuaBaseEntity::setAnimationSub(uint8 animationsub)
 void CLuaBaseEntity::setAnimPath(uint8 animPath)
 {
     m_PBaseEntity->manualConfig = true;
-    m_PBaseEntity->animPath = animPath;
+    m_PBaseEntity->animPath     = animPath;
 }
 
 /************************************************************************
@@ -9130,7 +9155,7 @@ void CLuaBaseEntity::setInstance(CLuaInstance* PLuaInstance)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    CInstance* PInstance     = PLuaInstance->GetInstance();
+    CInstance*   PInstance   = PLuaInstance->GetInstance();
     CCharEntity* PChar       = dynamic_cast<CCharEntity*>(m_PBaseEntity);
     m_PBaseEntity->PInstance = PInstance;
 
@@ -10840,7 +10865,7 @@ int16 CLuaBaseEntity::getMaxGearMod(Mod modId)
 
     if (!PChar)
     {
-        ShowWarning("CLuaBaseEntity::getMaxGearMod() - m_PBaseEntity is not a player.")
+        ShowWarning("CLuaBaseEntity::getMaxGearMod() - m_PBaseEntity is not a player.");
         return 0;
     }
 
@@ -11195,7 +11220,14 @@ int CLuaBaseEntity::getRACC()
 
     auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
 
-    return PEntity->RACC(weapon->getSkillType(), distance(PEntity->loc.p, PEntity->GetBattleTarget()->loc.p),  weapon->getILvlSkill());
+    if (PEntity->GetBattleTarget() != nullptr)
+    {
+        return PEntity->RACC(weapon->getSkillType(), distance(PEntity->loc.p, PEntity->GetBattleTarget()->loc.p), weapon->getILvlSkill());
+    }
+    else
+    {
+        return PEntity->RACC(weapon->getSkillType(), distance(PEntity->loc.p, PEntity->loc.p), weapon->getILvlSkill());
+    }
 }
 
 /************************************************************************
@@ -11219,7 +11251,14 @@ uint16 CLuaBaseEntity::getRATT()
 
     auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
 
-    return PEntity->RATT(weapon->getSkillType(), distance(PEntity->loc.p, PEntity->GetBattleTarget()->loc.p),  weapon->getILvlSkill());
+    if (PEntity->GetBattleTarget() != nullptr)
+    {
+        return PEntity->RATT(weapon->getSkillType(), distance(PEntity->loc.p, PEntity->GetBattleTarget()->loc.p), weapon->getILvlSkill());
+    }
+    else
+    {
+        return PEntity->RATT(weapon->getSkillType(), distance(PEntity->loc.p, PEntity->loc.p), weapon->getILvlSkill());
+    }
 }
 
 /************************************************************************
@@ -11823,7 +11862,7 @@ void CLuaBaseEntity::trustPartyMessage(uint32 message_id)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_TRUST);
 
-    auto* PTrust  = static_cast<CTrustEntity*>(m_PBaseEntity);
+    auto* PTrust = static_cast<CTrustEntity*>(m_PBaseEntity);
     if (auto* PMaster = dynamic_cast<CCharEntity*>(PTrust->PMaster))
     {
         // clang-format off
@@ -13626,7 +13665,7 @@ inline int32 CLuaBaseEntity::triggerDrawIn(CLuaBaseEntity* PMobEntity, sol::obje
     if ((target != sol::lua_nil) && target.is<CLuaBaseEntity*>())
     {
         CLuaBaseEntity* PTargetEntity = target.as<CLuaBaseEntity*>();
-        PTarget = dynamic_cast<CBattleEntity*>(PTargetEntity->m_PBaseEntity);
+        PTarget                       = dynamic_cast<CBattleEntity*>(PTargetEntity->m_PBaseEntity);
     }
 
     if (includePt != sol::lua_nil)
@@ -14215,6 +14254,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getStatus", CLuaBaseEntity::getStatus);
     SOL_REGISTER("setStatus", CLuaBaseEntity::setStatus);
     SOL_REGISTER("getCurrentAction", CLuaBaseEntity::getCurrentAction);
+    SOL_REGISTER("canUseAbilities", CLuaBaseEntity::canUseAbilities);
 
     SOL_REGISTER("lookAt", CLuaBaseEntity::lookAt);
     SOL_REGISTER("clearTargID", CLuaBaseEntity::clearTargID);
@@ -14890,10 +14930,10 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getPlayerRegionInZone", CLuaBaseEntity::getPlayerRegionInZone);
     SOL_REGISTER("updateToEntireZone", CLuaBaseEntity::updateToEntireZone);
 
-    SOL_REGISTER("setAnimPath",CLuaBaseEntity::setAnimPath);
-    SOL_REGISTER("setAnimStart",CLuaBaseEntity::setAnimStart);
-    SOL_REGISTER("setAnimBegin",CLuaBaseEntity::setAnimBegin);
-    SOL_REGISTER("sendUpdateToZoneCharsInRange",CLuaBaseEntity::sendUpdateToZoneCharsInRange);
+    SOL_REGISTER("setAnimPath", CLuaBaseEntity::setAnimPath);
+    SOL_REGISTER("setAnimStart", CLuaBaseEntity::setAnimStart);
+    SOL_REGISTER("setAnimBegin", CLuaBaseEntity::setAnimBegin);
+    SOL_REGISTER("sendUpdateToZoneCharsInRange", CLuaBaseEntity::sendUpdateToZoneCharsInRange);
 
     // Abyssea
     SOL_REGISTER("getAvailableTraverserStones", CLuaBaseEntity::getAvailableTraverserStones);

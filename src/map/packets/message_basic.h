@@ -33,30 +33,30 @@
  */
 enum MSGBASIC_ID : uint16
 {
-    MSGBASIC_NONE                     = 0,   /* Display nothing */
-    MSGBASIC_DEFEATS_TARG             = 6,   /* The <player> defeats <target>. */
-    MSGBASIC_MAGIC_RECOVERS_HP        = 7,   /* <caster> casts <spell>. <target> recovers <amount> HP. */
-    MSGBASIC_ALREADY_CLAIMED          = 12,  /* Cannot attack. Your target is already claimed. */
-    MSGBASIC_IS_INTERRUPTED           = 16,  /* The <player>'s casting is interrupted. */
-    MSGBASIC_UNABLE_TO_CAST           = 18,  /* Unable to cast spells at this time. */
-    MSGBASIC_FALLS_TO_GROUND          = 20,  /* The <target> falls to the ground. */
-    MSGBASIC_UNABLE_TO_USE_JA         = 87,  /* Unable to use job ability. */
-    MSGBASIC_UNABLE_TO_USE_JA2        = 88,  /* Unable to use job ability. */
-    MSGBASIC_IS_PARALYZED             = 29,  /* The <player> is paralyzed. */
-    MSGBASIC_SHADOW_ABSORB            = 31,  /* .. of <target>'s shadows absorb the damage and disappear. */
-    MSGBASIC_NOT_ENOUGH_MP            = 34,  /* The <player> does not have enough MP to cast (nullptr). */
-    MSGBASIC_NO_NINJA_TOOLS           = 35,  /* The <player> lacks the ninja tools to cast (nullptr). */
-    MSGBASIC_CANNOT_CAST_SPELL        = 47,  /* >player> cannot cast <spell>. */
-    MSGBASIC_CANNOT_USE_IN_AREA       = 40,  /* cannot use in this area */
-    MSGBASIC_UNABLE_TO_CAST_SPELLS    = 49,  /* The <player> is unable to cast spells. */
-    MSGBASIC_MAGIC_NO_EFFECT          = 75,  /* <caster>'s <spell> has no effect on <target>. */
-    MSGBASIC_MAGIC_TELEPORT           = 93,  /* <caster> casts <spell>. <target> vanishes. */
-    MSGBASIC_WAIT_LONGER              = 94,  /* You must wait longer to perform that action. */
-    MSGBASIC_PLAYER_DEFEATED_BY       = 97,  /* <player> was defeated by the <target>. */
-    MSGBASIC_USES_JA                  = 100, /* The <player> uses .. */
-    MSGBASIC_USES_JA2                 = 101, /* The <player> uses .. */
-    MSGBASIC_USES_RECOVERS_HP         = 102, /* The <player> uses .. <target> recovers .. HP. */
-    MSGBASIC_SKILL_RECOVERS_HP        = 103, /* The <player> uses .. <target> recovers .. HP. */
+    MSGBASIC_NONE                  = 0,   /* Display nothing */
+    MSGBASIC_DEFEATS_TARG          = 6,   /* The <player> defeats <target>. */
+    MSGBASIC_MAGIC_RECOVERS_HP     = 7,   /* <caster> casts <spell>. <target> recovers <amount> HP. */
+    MSGBASIC_ALREADY_CLAIMED       = 12,  /* Cannot attack. Your target is already claimed. */
+    MSGBASIC_IS_INTERRUPTED        = 16,  /* The <player>'s casting is interrupted. */
+    MSGBASIC_UNABLE_TO_CAST        = 18,  /* Unable to cast spells at this time. */
+    MSGBASIC_FALLS_TO_GROUND       = 20,  /* The <target> falls to the ground. */
+    MSGBASIC_UNABLE_TO_USE_JA      = 87,  /* Unable to use job ability. */
+    MSGBASIC_UNABLE_TO_USE_JA2     = 88,  /* Unable to use job ability. */
+    MSGBASIC_IS_PARALYZED          = 29,  /* The <player> is paralyzed. */
+    MSGBASIC_SHADOW_ABSORB         = 31,  /* .. of <target>'s shadows absorb the damage and disappear. */
+    MSGBASIC_NOT_ENOUGH_MP         = 34,  /* The <player> does not have enough MP to cast (nullptr). */
+    MSGBASIC_NO_NINJA_TOOLS        = 35,  /* The <player> lacks the ninja tools to cast (nullptr). */
+    MSGBASIC_CANNOT_CAST_SPELL     = 47,  /* >player> cannot cast <spell>. */
+    MSGBASIC_CANNOT_USE_IN_AREA    = 40,  /* cannot use in this area */
+    MSGBASIC_UNABLE_TO_CAST_SPELLS = 49,  /* The <player> is unable to cast spells. */
+    MSGBASIC_MAGIC_NO_EFFECT       = 75,  /* <caster>'s <spell> has no effect on <target>. */
+    MSGBASIC_MAGIC_TELEPORT        = 93,  /* <caster> casts <spell>. <target> vanishes. */
+    MSGBASIC_WAIT_LONGER           = 94,  /* You must wait longer to perform that action. */
+    MSGBASIC_PLAYER_DEFEATED_BY    = 97,  /* <player> was defeated by the <target>. */
+    MSGBASIC_USES_JA               = 100, /* The <player> uses .. */
+    MSGBASIC_USES_JA2              = 101, /* The <player> uses .. */
+    MSGBASIC_USES_RECOVERS_HP      = 102, /* The <player> uses .. <target> recovers .. HP. */
+    MSGBASIC_SKILL_RECOVERS_HP     = 103, /* The <player> uses .. <target> recovers .. HP. */
 
     MSGBASIC_USES_JA_TAKE_DAMAGE      = 317, /* The <player> uses .. <target> takes .. points of damage. */
     MSGBASIC_IS_INTIMIDATED           = 106, /* The <player> is intimidated by <target>'s presence. */
@@ -69,9 +69,9 @@ enum MSGBASIC_ID : uint16
     MSGBASIC_CANT_BE_USED_IN_AREA     = 316, /* That action cannot be used in this area. */
     MSGBASIC_REQUIRES_SHIELD          = 199, /* That action requires a shield. */
     /* Spikes */
-    MSGBASIC_SPIKES_EFFECT_DMG        = 44,  /* <target>'s spikes deal <number> damage to <attacker> */
-    MSGBASIC_SPIKES_EFFECT_HEAL       = 383, /* <target>'s spikes restore <number> HP to <attacker> */
-    MSGBASIC_SPIKES_EFFECT_HP_DRAIN   = 132, /* <target>'s spikes drain <number> HP from the <attacker>. */
+    MSGBASIC_SPIKES_EFFECT_DMG      = 44,  /* <target>'s spikes deal <number> damage to <attacker> */
+    MSGBASIC_SPIKES_EFFECT_HEAL     = 383, /* <target>'s spikes restore <number> HP to <attacker> */
+    MSGBASIC_SPIKES_EFFECT_HP_DRAIN = 132, /* <target>'s spikes drain <number> HP from the <attacker>. */
     /* Distance */
     MSGBASIC_TARG_OUT_OF_RANGE  = 4,  /* <target> is out of range. */
     MSGBASIC_UNABLE_TO_SEE_TARG = 5,  /* Unable to see <target>. */
@@ -148,13 +148,15 @@ enum MSGBASIC_ID : uint16
     MSGBASIC_LUOPAN_HP_RATE_UP     = 664, /* <player> uses <ability>. The luopan's HP consumption rate has been increased. */
     MSGBASIC_HAS_LUOPON_NO_USE     = 665, /* <player> has a pet. Unable to use ability. */
     /* RUN */
-    MSGBASIC_REQUIRE_RUNE                 = 666, /* That action requires the ability Rune Enchantment. */
-    MSGBASIC_SWORDPLAY_GAIN               = 667, /* <Player> uses <Ability>. Accuracy and evasion are enhanced. */
-    MSGBASIC_VALLATION_GAIN               = 668, /* <Target> receives the effect of Vallation, reducing damage taken from certain elemental magic spells. */ /* Vallation and Valiance both use this message for the RUN using the ja */
-    MSGBASIC_VALIANCE_GAIN_PARTY_MEMBER   = 669, /* Magic damage of a certain element is reduced for <Target> */ /* This message is when a party member recieves the aoe effect of Valiance */
-    MSGBASIC_LIEMENT_GAIN                 = 670, /* <Player> uses <Ability>. <Target> can now absorb magic damage of a certain element. */
-    MSGBASIC_PFLUG_GAIN                   = 671, /* <Player> uses <Ability>. <Target> now has enhanced resistance. */
-    MSGBASIC_GAMBIT_GAIN                  = 672, /* <Player> uses <Ability>. <Target> receives the effect of Gambit, reducing magic defense against magic of a certain element. */
+    MSGBASIC_REQUIRE_RUNE   = 666, /* That action requires the ability Rune Enchantment. */
+    MSGBASIC_SWORDPLAY_GAIN = 667, /* <Player> uses <Ability>. Accuracy and evasion are enhanced. */
+    MSGBASIC_VALLATION_GAIN = 668,
+    /* <Target> receives the effect of Vallation, reducing damage taken from certain elemental magic spells. */ /* Vallation and Valiance both use this message for the RUN using the ja */
+    MSGBASIC_VALIANCE_GAIN_PARTY_MEMBER = 669,
+    /* Magic damage of a certain element is reduced for <Target> */ /* This message is when a party member recieves the aoe effect of Valiance */
+    MSGBASIC_LIEMENT_GAIN = 670,                                    /* <Player> uses <Ability>. <Target> can now absorb magic damage of a certain element. */
+    MSGBASIC_PFLUG_GAIN   = 671,                                    /* <Player> uses <Ability>. <Target> now has enhanced resistance. */
+    MSGBASIC_GAMBIT_GAIN  = 672,                                    /* <Player> uses <Ability>. <Target> receives the effect of Gambit, reducing magic defense against magic of a certain element. */
     /* ROE */
     MSGBASIC_ROE_START    = 704,
     MSGBASIC_ROE_TIMED    = 705, // You have undertaken the timed record X.

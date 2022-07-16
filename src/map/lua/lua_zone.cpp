@@ -189,13 +189,16 @@ void CLuaZone::reloadNavmesh()
 
 bool CLuaZone::isNavigablePoint(const sol::table& point)
 {
-    position_t position {
+    // clang-format off
+    position_t position
+    {
         point["x"].get_or<float>(0),
         point["y"].get_or<float>(0),
         point["z"].get_or<float>(0),
         point["moving"].get_or<uint16>(0),
         point["rot"].get_or<uint8>(0)
     };
+    // clang-format on
 
     return m_pLuaZone->m_navMesh->validPosition(position);
 }

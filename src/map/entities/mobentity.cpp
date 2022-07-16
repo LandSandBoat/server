@@ -124,7 +124,7 @@ CMobEntity::CMobEntity()
     m_maxRoamDistance = 50.0f;
     m_disableScent    = false;
 
-    m_Pool = 0;
+    m_Pool        = 0;
     m_RespawnTime = 300;
 
     m_SpellListContainer = nullptr;
@@ -759,8 +759,8 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
 
         if (damage < 0)
         {
-            msg = MSGBASIC_SKILL_RECOVERS_HP; // TODO: verify this message does/does not vary depending on mob/avatar/automaton use
-            target.param = std::clamp(-damage,0, PTarget->GetMaxHP() - PTarget->health.hp);
+            msg          = MSGBASIC_SKILL_RECOVERS_HP; // TODO: verify this message does/does not vary depending on mob/avatar/automaton use
+            target.param = std::clamp(-damage, 0, PTarget->GetMaxHP() - PTarget->health.hp);
         }
         else
         {
@@ -822,7 +822,7 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
 
     PTarget = dynamic_cast<CBattleEntity*>(state.GetTarget()); // TODO: why is this recast here? can state change between now and the original cast?
 
-    if(PTarget)
+    if (PTarget)
     {
         if (PTarget->objtype == TYPE_MOB && (PTarget->isDead() || (objtype == TYPE_PET && static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::AVATAR)))
         {
@@ -887,7 +887,7 @@ void CMobEntity::DistributeRewards()
     }
 }
 
-int16 CMobEntity::ApplyTH(int16 m_THLvl, int16 rate)
+float CMobEntity::ApplyTH(int16 m_THLvl, int16 rate)
 {
     TracyZoneScoped;
 
@@ -960,7 +960,12 @@ int16 CMobEntity::ApplyTH(int16 m_THLvl, int16 rate)
     {
         if (m_THLvl < 3)
         {
-            multi = 1.00f + (0.20f * m_THLvl);
+            multi = 1.00f + (0.50f * m_THLvl);
+            return multi;
+        }
+        else if (m_THLvl < 5)
+        {
+            multi = 2.00f + (0.25f * (m_THLvl - 2));
             return multi;
         }
         else if (m_THLvl < 8)
@@ -1077,12 +1082,12 @@ int16 CMobEntity::ApplyTH(int16 m_THLvl, int16 rate)
         }
         else if (m_THLvl < 3)
         {
-            multi = 2.00f + (0.50f * (m_THLvl - 1));
+            multi = 2.00f + (0.34f * (m_THLvl - 1));
             return multi;
         }
         else if (m_THLvl < 5)
         {
-            multi = 2.50f + (0.16f * (m_THLvl - 2));
+            multi = 2.34f + (0.16f * (m_THLvl - 2));
             return multi;
         }
         else if (m_THLvl < 6)
@@ -1196,7 +1201,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
             for (int16 roll = 0; roll < maxRolls; ++roll)
             {
                 // Determine if this group should drop an item and determine bonus
-                int16 bonus = ApplyTH(m_THLvl, group.GroupRate);
+                float bonus = ApplyTH(m_THLvl, group.GroupRate);
                 if (group.GroupRate > 0 && xirand::GetRandomNumber(1000) < group.GroupRate * settings::get<float>("map.DROP_RATE_MULTIPLIER") * bonus)
                 {
                     // Each item in the group is given its own weight range which is the previous value to the previous value + item.DropRate
@@ -1224,7 +1229,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
         {
             for (int16 roll = 0; roll < maxRolls; ++roll)
             {
-                int16 bonus = ApplyTH(m_THLvl, item.DropRate);
+                float bonus = ApplyTH(m_THLvl, item.DropRate);
                 if (item.DropRate > 0 && xirand::GetRandomNumber(1000) < item.DropRate * settings::get<float>("map.DROP_RATE_MULTIPLIER") * bonus)
                 {
                     if (AddItemToPool(item.ItemID, ++dropCount))

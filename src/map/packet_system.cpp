@@ -183,7 +183,7 @@ std::function<void(map_session_data_t* const, CCharEntity* const, CBasicPacket)>
 void PrintPacket(CBasicPacket data)
 {
     std::string message;
-    char buffer[5];
+    char        buffer[5];
 
     for (size_t y = 0; y < data.getSize(); y++)
     {
@@ -270,14 +270,17 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
         char session_key[20 * 2 + 1];
         bin2hex(session_key, (uint8*)PSession->blowfish.key, 20);
 
-        uint16 destination = PChar->loc.destination;
+        uint16 destination = MAX_ZONEID + 1; // Forces the function to fail closed
 
-        if (destination >= MAX_ZONEID)
+        if (PChar != nullptr)
         {
-            // TODO: work out how to drop player in moghouse that exits them to the zone they were in before this happened, like we used to.
-            ShowWarning("packet_system::SmallPacket0x00A player tried to enter zone out of range: %d", destination);
-            ShowWarning("packet_system::SmallPacket0x00A dumping player `%s` to homepoint!", PChar->GetName());
-            charutils::HomePoint(PChar);
+            destination = PChar->loc.destination; // Only sets destination if PChar isn't nullptr
+        }
+
+        if (destination >= MAX_ZONEID) // Fails to putting player back to it's previous zone
+        {
+            ShowWarning("packet_system::SmallPacket0x00A GetZone Bad Args for IncreaseZoneCounter, MITIGATING: Sending %s to loc.prevzone.", PChar->GetName());
+            destination = PChar->loc.prevzone;
         }
 
         zoneutils::GetZone(destination)->IncreaseZoneCounter(PChar);
@@ -510,9 +513,16 @@ void SmallPacket0x00D(map_session_data_t* const PSession, CCharEntity* const PCh
         if (PChar->PPet != nullptr)
         {
             auto* PPetEntity = dynamic_cast<CPetEntity*>(PChar->PPet);
-            if (PPetEntity->getPetType() == PET_TYPE::WYVERN)
+            if (PChar->PPet->objtype != TYPE_MOB)
             {
-                PChar->setPetZoningInfo();
+                if (PPetEntity->getPetType() == PET_TYPE::WYVERN)
+                {
+                    PChar->setPetZoningInfo();
+                }
+                else
+                {
+                    PChar->resetPetZoningInfo();
+                }
             }
             else
             {
@@ -633,8 +643,14 @@ void SmallPacket0x015(map_session_data_t* const PSession, CCharEntity* const PCh
         uint16 newTargID   = data.ref<uint16>(0x16);
         uint8  newRotation = data.ref<uint8>(0x14);
 
-        bool   moved       = (PChar->loc.p.x != newX || PChar->loc.p.y != newY || PChar->loc.p.z != newZ || PChar->m_TargID != newTargID
-                           || PChar->loc.p.rotation != newRotation);
+        // clang-format off
+        bool moved =
+            PChar->loc.p.x != newX ||
+            PChar->loc.p.y != newY ||
+            PChar->loc.p.z != newZ ||
+            PChar->m_TargID != newTargID ||
+            PChar->loc.p.rotation != newRotation;
+        // clang-format on
 
         // Cache previous location
         PChar->m_previousLocation = PChar->loc;
@@ -664,11 +680,11 @@ void SmallPacket0x015(map_session_data_t* const PSession, CCharEntity* const PCh
         }
 
         // Request updates for all entity types
-        PChar->loc.zone->SpawnNPCs(PChar);   // Some NPCs can move, some rotate when other players talk to them, always request NPC updates.
+        PChar->loc.zone->SpawnNPCs(PChar); // Some NPCs can move, some rotate when other players talk to them, always request NPC updates.
         PChar->loc.zone->SpawnMOBs(PChar);
         PChar->loc.zone->SpawnPETs(PChar);
         PChar->loc.zone->SpawnTRUSTs(PChar);
-        PChar->requestedInfoSync = true;     // Ask to update PCs during CZoneEntities::ZoneServer
+        PChar->requestedInfoSync = true; // Ask to update PCs during CZoneEntities::ZoneServer
 
         if (PChar->PWideScanTarget != nullptr)
         {
@@ -1670,7 +1686,7 @@ void SmallPacket0x034(map_session_data_t* const PSession, CCharEntity* const PCh
                     else
                     {
                         ShowInfo("%s->%s trade updating trade slot id %d with item %s, quantity %d", PChar->GetName(), PTarget->GetName(),
-                                   tradeSlotID, PItem->getName(), quantity);
+                                 tradeSlotID, PItem->getName(), quantity);
                         PItem->setReserve(quantity + PItem->getReserve());
                         PChar->UContainer->SetItem(tradeSlotID, PItem);
                     }
@@ -1678,7 +1694,7 @@ void SmallPacket0x034(map_session_data_t* const PSession, CCharEntity* const PCh
                 else
                 {
                     ShowInfo("%s->%s trade updating trade slot id %d with item %s, quantity %d", PChar->GetName(), PTarget->GetName(),
-                               tradeSlotID, PItem->getName(), quantity);
+                             tradeSlotID, PItem->getName(), quantity);
                     PItem->setReserve(quantity + PItem->getReserve());
                     PChar->UContainer->SetItem(tradeSlotID, PItem);
                 }
@@ -1686,7 +1702,7 @@ void SmallPacket0x034(map_session_data_t* const PSession, CCharEntity* const PCh
             else
             {
                 ShowInfo("%s->%s trade updating trade slot id %d with item %s, quantity 0", PChar->GetName(), PTarget->GetName(),
-                           tradeSlotID, PItem->getName());
+                         tradeSlotID, PItem->getName());
                 PItem->setReserve(0);
                 PChar->UContainer->SetItem(tradeSlotID, nullptr);
             }
@@ -3629,10 +3645,16 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
     if (PChar->PPet != nullptr)
     {
         auto* PPetEntity = dynamic_cast<CPetEntity*>(PChar->PPet);
-        if (PPetEntity->getPetType() == PET_TYPE::WYVERN)
+        if (PChar->PPet->objtype != TYPE_MOB)
         {
-            PChar->setPetZoningInfo();
-            petutils::DespawnPet(PChar);
+            if (PPetEntity->getPetType() == PET_TYPE::WYVERN)
+            {
+                PChar->setPetZoningInfo();
+            }
+            else
+            {
+                PChar->resetPetZoningInfo();
+            }
         }
         else
         {
@@ -3709,7 +3731,7 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
             {
                 PChar->m_moghouseID    = 0;
                 PChar->loc.destination = destinationZone;
-                PChar->loc.p = {};
+                PChar->loc.p           = {};
             }
             else
             {
@@ -4777,8 +4799,8 @@ void SmallPacket0x096(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x0AA(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    uint16     itemID     = data.ref<uint16>(0x04);
-    uint8      quantity   = data.ref<uint8>(0x07);
+    uint16 itemID   = data.ref<uint16>(0x04);
+    uint8  quantity = data.ref<uint8>(0x07);
 
     if (!PChar->PGuildShop)
     {

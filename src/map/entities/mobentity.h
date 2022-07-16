@@ -126,9 +126,9 @@ public:
     bool       CanDeaggro() const;
     time_point GetDespawnTime();
     void       SetDespawnTime(duration _duration);
-    uint32     GetRandomGil(); // returns a random amount of gil
-    bool       CanRoamHome();  // is it possible for me to walk back?
-    bool       CanRoam();      // check if mob can walk around
+    uint32     GetRandomGil();   // returns a random amount of gil
+    bool       CanRoamHome();    // is it possible for me to walk back?
+    bool       CanRoam();        // check if mob can walk around
     void       TapDeaggroTime(); // call CMobController->TapDeaggroTime if PAI->GetController() is a CMobController, otherwise do nothing.
 
     bool CanLink(position_t* pos, int16 superLink = 0);
@@ -270,7 +270,7 @@ public:
 
 protected:
     void DistributeRewards();
-    int16 ApplyTH(int16 m_THLvl, int16 rate);
+    float ApplyTH(int16 m_THLvl, int16 rate);
     void DropItems(CCharEntity* PChar);
 
 private:
