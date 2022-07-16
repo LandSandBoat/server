@@ -136,6 +136,7 @@ xi.player.charCreate = function(player)
        player:setGil(xi.settings.main.START_GIL)
     end
 
+    player:addItem(15198) -- Sprout Beret
     player:addItem(536) -- adventurer coupon
     player:addTitle(xi.title.NEW_ADVENTURER)
     player:setCharVar("HQuest[moghouseExpo]notSeen", 1) -- needs Moghouse intro
