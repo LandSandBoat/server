@@ -43,42 +43,42 @@ local keyitems =
 
 local items =
 {
-    [0] =
+    [-1] =
     {
         id = 17002, -- Robber's Rig
         rank = 3,
         cost = 1500
     },
 
-    [1] =
+    [0] =
     {
         id = 15452, -- Fisherman's Belt
         rank = 4,
         cost = 10000
     },
 
-    [2] =
+    [1] =
     {
         id = 14195, -- Pair of Waders
         rank = 5,
         cost = 70000
     },
 
-    [3] =
+    [2] =
     {
         id = 14400, -- Fisherman's Apron
         rank = 7,
         cost = 100000
     },
 
-    [4] =
+    [3] =
     {
         id = 191, -- Fishing hole map
         rank = 9,
         cost = 150000
     },
 
-    [5] =
+    [4] =
     {
         id = 340, -- Fisherman's Signboard
         rank = 9,
@@ -87,7 +87,7 @@ local items =
 
     [6] =
     {
-        id = 3670, -- Fish and Lure
+        id = 3670, -- Net and Lure
         rank = 7,
         cost = 50000
     },
@@ -110,13 +110,13 @@ end
 
 entity.onEventUpdate = function(player, csid, option, target)
     if (csid == 10020) then
-        xi.crafting.unionRepresentativeTriggerFinish(player, option, target, 0, "guild_Fishing", keyitems, items)
+        xi.crafting.unionRepresentativeTriggerFishing(player, option, target, 0, "guild_Fishing", keyitems, items)
     end
 end
 
 entity.onEventFinish = function(player, csid, option, target)
     if (csid == 10020) then
-        xi.crafting.unionRepresentativeTriggerFinish(player, option, target, 0, "guild_Fishing", keyitems, items)
+        xi.crafting.unionRepresentativeTriggerFishing(player, option, target, 0, "guild_Fishing", keyitems, items)
     elseif (csid == 10021) then
         player:messageSpecial(ID.text.GP_OBTAINED, option)
     end
