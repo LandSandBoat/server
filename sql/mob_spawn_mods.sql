@@ -141,6 +141,7 @@ INSERT INTO `mob_spawn_mods` VALUES (17285460,1,379,1);
 INSERT INTO `mob_spawn_mods` VALUES (17285460,2,900,1);
 INSERT INTO `mob_spawn_mods` VALUES (17490231,1,6000,1);
 INSERT INTO `mob_spawn_mods` VALUES (17490231,2,9500,1);
+INSERT INTO `mob_spawn_mods` VALUES (17490231,15,3000,1);
 INSERT INTO `mob_spawn_mods` VALUES (17490016,1,6000,1);
 INSERT INTO `mob_spawn_mods` VALUES (17490016,2,9100,1);
 INSERT INTO `mob_spawn_mods` VALUES (17617158,1,15000,1);
@@ -700,6 +701,71 @@ INSERT INTO `mob_spawn_mods` VALUES (17617013,15,3000,1); -- Mug gil 3000
 INSERT INTO `mob_spawn_mods` VALUES (17616999,1,3000,1);  -- Min gil 3000
 INSERT INTO `mob_spawn_mods` VALUES (17616999,2,9000,1);  -- Max gil 9000
 INSERT INTO `mob_spawn_mods` VALUES (17616999,15,2000,1); -- Mug gil 2000
+-- [Amikiri]
+-- Data taken from wiki (http://ffxiclopedia.wikia.com/wiki/Amikiri)
+INSERT INTO `mob_spawn_mods` VALUES (17645774,1,10000,1); -- min gil 10000
+INSERT INTO `mob_spawn_mods` VALUES (17645774,2,15000,1); -- max gil 15000
+
+-- [Baobhan Sith]
+-- Data taken from wiki (http://ffxiclopedia.wikia.com/wiki/Baobhan_Sith)
+INSERT INTO `mob_spawn_mods` VALUES (17645719,1,8000,1);  -- min gil 8000
+INSERT INTO `mob_spawn_mods` VALUES (17645719,2,12000,1); -- max gil 12000
+
+-- [Goblinsavior Heronox]
+-- Data taken from wiki (http://ffxiclopedia.wikia.com/wiki/Goblinsavior_Heronox)
+INSERT INTO `mob_spawn_mods` VALUES (17645609,1,6000,1);  -- min gil 6000
+INSERT INTO `mob_spawn_mods` VALUES (17645609,2,10000,1); -- max gil 10000
+INSERT INTO `mob_spawn_mods` VALUES (17645609,15,3000,1); -- mug gil 3000
+
+-- [Taxim]
+-- Data taken from wiki (http://ffxiclopedia.wikia.com/wiki/Taxim)
+INSERT INTO `mob_spawn_mods` VALUES (17645742,1,3500,1); -- min gil 3500
+INSERT INTO `mob_spawn_mods` VALUES (17645742,2,5600,1); -- max gil 5600
+
+-- [Ungur]
+-- Data taken from wiki (http://ffxiclopedia.wikia.com/wiki/Ungur)
+INSERT INTO `mob_spawn_mods` VALUES (17645755,1,12000,1); -- min gil 12000
+INSERT INTO `mob_spawn_mods` VALUES (17645755,2,19400,1); -- max gil 19400
+INSERT INTO `mob_spawn_mods` VALUES (17645755,15,4700,1); -- mug gil 4700
+
+-- [Wyvernpoacher Drachlox]
+-- Data taken from wiki (http://ffxiclopedia.wikia.com/wiki/Wyvernpoacher_Drachlox)
+INSERT INTO `mob_spawn_mods` VALUES (17645640,1,4000,1);  -- min gil 4000
+INSERT INTO `mob_spawn_mods` VALUES (17645640,2,8000,1);  -- max gil 8000
+INSERT INTO `mob_spawn_mods` VALUES (17645640,15,4300,1); -- mug gil 4300
+
+-- [Arachne]
+-- Data taken from wiki (http://ffxiclopedia.wikia.com/wiki/Arachne)
+INSERT INTO `mob_spawn_mods` VALUES (17490217,1,4000,1);  -- min gil 4000
+INSERT INTO `mob_spawn_mods` VALUES (17490217,2,8000,1);  -- max gil 8000
+INSERT INTO `mob_spawn_mods` VALUES (17490217,15,3500,1); -- mug gil 3500
+
+-- [Bloodthirster Madkix]
+-- Data taken from wiki (http://ffxiclopedia.wikia.com/wiki/Bloodthirster_Madkix)
+INSERT INTO `mob_spawn_mods` VALUES (17490159,1,4000,1);  -- min gil 4000
+INSERT INTO `mob_spawn_mods` VALUES (17490159,2,8000,1);  -- max gil 8000
+
+-- [Guivre]
+-- Data taken from wiki (http://ffxiclopedia.wikia.com/wiki/Guivre)
+INSERT INTO `mob_spawn_mods` VALUES (17490234,1,14000,1); -- min gil 14000
+INSERT INTO `mob_spawn_mods` VALUES (17490234,2,18300,1); -- max gil 18300
+INSERT INTO `mob_spawn_mods` VALUES (17490234,15,3100,1); -- mug gil 3100
+
+-- [Pelican]
+-- Data taken from wiki (http://ffxiclopedia.wikia.com/wiki/Pelican)
+INSERT INTO `mob_spawn_mods` VALUES (17490101,1,12000,1); -- min gil 12000
+INSERT INTO `mob_spawn_mods` VALUES (17490101,2,18000,1); -- max gil 18000
+
+-- [Sabotender Mariachi]
+-- Data taken from wiki (http://ffxiclopedia.wikia.com/wiki/Sabotender_Mariachi)
+INSERT INTO `mob_spawn_mods` VALUES (17489980,1,15000,1); -- min gil 15000
+INSERT INTO `mob_spawn_mods` VALUES (17489980,2,20000,1); -- max gil 20000
+
+-- [Yowie]
+-- Data taken from wiki (http://ffxiclopedia.wikia.com/wiki/Yowie)
+INSERT INTO `mob_spawn_mods` VALUES (17490204,1,12000,1); -- min gil 12000
+INSERT INTO `mob_spawn_mods` VALUES (17490204,2,19000,1); -- max gil 19000
+INSERT INTO `mob_spawn_mods` VALUES (17490204,15,4000,1); -- mug gil 4000
 
 /*!40000 ALTER TABLE `mob_spawn_mods` ENABLE KEYS */;
 UNLOCK TABLES;

@@ -3818,6 +3818,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Ash_Dragon',1177,645);
 INSERT INTO `mob_skill_lists` VALUES ('Ash_Dragon',1177,642);
 INSERT INTO `mob_skill_lists` VALUES ('Ash_Dragon',1177,649);
 INSERT INTO `mob_skill_lists` VALUES ('Ash_Dragon',1177,647);
+INSERT INTO `mob_skill_lists` VALUES ('ZmeyGorynych',1184,380);
 
 -- Next available ID: 1178
 
