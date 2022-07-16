@@ -5394,7 +5394,7 @@ namespace charutils
     bool hasMogLockerAccess(CCharEntity* PChar)
     {
         TracyZoneScoped;
-        auto tstamp = static_cast<uint32>(PChar->getCharVar("mogLocker_expire"));
+        auto tstamp = static_cast<uint32>(PChar->getCharVar("mog-locker-expiry-timestamp"));
         if (CVanaTime::getInstance()->getVanaTime() < tstamp)
         {
             return true;
