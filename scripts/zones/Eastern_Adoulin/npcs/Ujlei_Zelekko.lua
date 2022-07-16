@@ -1,0 +1,60 @@
+-----------------------------------
+-- Area: Eastern Adoulin (257)
+--  NPC: Ujlei Zelekk
+-- Type: Peacekeepers Coalition Guard
+-- !pos -102.754 -0.65 16.161 257
+-- !gotoid 17830177
+-----------------------------------
+require("scripts/globals/items")
+require('scripts/globals/npc_util')
+require('scripts/globals/settings')
+-----------------------------------
+local entity = {}
+
+local items =
+{
+    [   4] = { cost = 2500, id = xi.items.COALITION_POTION },
+    [ 260] = { cost = 2500, id = xi.items.COALITION_ETHER },
+    [ 516] = { cost =   10, id = xi.items.SCROLL_OF_INSTANT_WARP },
+    [ 772] = { cost =   10, id = xi.items.SCROLL_OF_INSTANT_RERAISE },
+    [1028] = { cost = 1000, id = xi.items.SCROLL_OF_INSTANT_PROTECT },
+    [1284] = { cost = 1000, id = xi.items.SCROLL_OF_INSTANT_SHELL },
+    [1540] = { cost = 1000, id = xi.items.SCROLL_OF_INSTANT_STONESKIN },
+    [1796] = { cost = 2000, id = xi.items.CIPHER_OF_MARGRETS_ALTER_EGO },
+    [2052] = { cost = 2000, id = xi.items.CIPHER_OF_AMCHUCHUS_ALTER_EGO },
+}
+
+entity.onTrade = function(player, npc, trade)
+end
+
+entity.onTrigger = function(player, npc)
+    local cipher = xi.settings.main.ENABLE_TRUST_ALTER_EGO_EXTRAVAGANZA
+    local edification = 0
+    local bayld = player:getCurrency('bayld')
+
+    if cipher > 0 then -- TODO: logic to know when to display full Coalition Menu
+        player:startEvent(7513, 0, cipher * 20, edification, bayld)
+    else
+        -- Stare blankly For now
+    end
+end
+
+entity.onEventUpdate = function(player, csid, option)
+end
+
+entity.onEventFinish = function(player, csid, option)
+    local bayld = player:getCurrency('bayld')
+    local ID = zones[player:getZoneID()]
+
+    if csid == 7513 and option < 2053 then
+        if bayld >= items[option].cost then
+            if npcUtil.giveItem(player, items[option].id) then
+                player:delCurrency('bayld', items[option].cost)
+            end
+        elseif bayld < items[option].cost then
+            player:messageSpecial(ID.text.NOT_ENOUGH_BAYLD)
+        end
+    end
+end
+
+return entity
