@@ -1298,6 +1298,7 @@ xi.items =
     CIPHER_OF_NASHMEIRAS_ALT_EGO_II = 10170,
     CIPHER_OF_MAKKIS_ALTER_EGO      = 10180,
     CIPHER_OF_KINGS_ALTER_EGO       = 10181,
+    CIPHER_OF_MORIMARS_ALTER_EGO    = 10182,
     HEXED_HAUBERT                   = 10240,
     HEXED_DOMARU                    = 10241,
     HEXED_JACKET                    = 10242,

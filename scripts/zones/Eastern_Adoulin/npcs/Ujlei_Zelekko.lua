@@ -22,18 +22,28 @@ local items =
     [1540] = { cost = 1000, id = xi.items.SCROLL_OF_INSTANT_STONESKIN },
     [1796] = { cost = 2000, id = xi.items.CIPHER_OF_MARGRETS_ALTER_EGO },
     [2052] = { cost = 2000, id = xi.items.CIPHER_OF_AMCHUCHUS_ALTER_EGO },
+    [2308] = { cost = 2000, id = xi.items.CIPHER_OF_MORIMARS_ALTER_EGO },
+}
+
+local enable = xi.settings.main.ENABLE_TRUST_ALTER_EGO_EXTRAVAGANZA
+local edification = 0
+local ciphers =
+{
+    [0] =   0, -- no campaign
+    [1] =  20, -- Summer/NY campaign
+    [2] =  96, -- Spring/Fall campaign
+    [3] = 116, -- Both campaigns
 }
 
 entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local cipher = xi.settings.main.ENABLE_TRUST_ALTER_EGO_EXTRAVAGANZA
-    local edification = 0
     local bayld = player:getCurrency('bayld')
 
-    if cipher > 0 then -- TODO: logic to know when to display full Coalition Menu
-        player:startEvent(7513, 0, cipher * 20, edification, bayld)
+    print(ciphers[enable])
+    if enable > 0 then -- TODO: implement logic to know when to display full Coalition Menu
+        player:startEvent(7513, 0, ciphers[enable], edification, bayld)
     else
         -- Stare blankly For now
     end
@@ -46,7 +56,7 @@ entity.onEventFinish = function(player, csid, option)
     local bayld = player:getCurrency('bayld')
     local ID = zones[player:getZoneID()]
 
-    if csid == 7513 and option < 2053 then
+    if csid == 7513 and option < 2309 then
         if bayld >= items[option].cost then
             if npcUtil.giveItem(player, items[option].id) then
                 player:delCurrency('bayld', items[option].cost)
