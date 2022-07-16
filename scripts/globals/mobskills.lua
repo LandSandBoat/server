@@ -194,6 +194,14 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
 
     hitdamage = hitdamage * dmgmod
 
+    local dmgrandsel = math.random(0, 1) -- Can select either positive or negative.
+    local dmgrand = math.random(0, 10) -- Variance should be 0-10%
+    if dmgrandsel == 0 then
+        hitdamage = hitdamage + (hitdamage * (dmgrand / 100))
+    else
+        hitdamage = hitdamage - (hitdamage * (dmgrand / 100))
+    end
+
     -- Calculating with the known era pdif ratio for weaponskills.
     if mtp000 == nil or mtp150 == nil or mtp300 == nil then -- Nil gate for cMeleeRatio, will default mtp for each level to 1.
         mtp000 = 1.0
@@ -218,13 +226,9 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
     local chance = math.random()
 
     -- first hit has a higher chance to land
-    local firstHitChance = hitrate * 1.5
+    local firstHitChance = hitrate * 1.2
 
-    if tpeffect == xi.mobskills.magicalTpBonus.RANGED then
-        firstHitChance = hitrate * 1.2
-    end
-
-    firstHitChance = utils.clamp(firstHitChance, 35, 95)
+    firstHitChance = utils.clamp(firstHitChance, 25, 95)
 
     if (chance * 100) <= firstHitChance then -- it hit
         local isCrit = math.random() < critRate
