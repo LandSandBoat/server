@@ -5025,7 +5025,11 @@ INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 501, 245, 1, 255); --
 INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 501, 247, 1, 255); -- aspir (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 501, 226, 1, 255); -- poisonga ii (1~255)
 
--- Next Avail 501
+-- Pyuu the Spatemaker (502)
+INSERT INTO `mob_spell_lists` VALUES('PyuuTheSpatemaker',502,201,1,255); -- waterga iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('PyuuTheSpatemaker',502,172,1,255); -- water iv (1~255)
+
+-- Next Avail 503
 
 -- AirSkyBoat Specific Starts at 5000
 -- 5000 -> 5010 is Era Dynamis
