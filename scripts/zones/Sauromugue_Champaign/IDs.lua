@@ -45,8 +45,9 @@ zones[xi.zone.SAUROMUGUE_CHAMPAIGN] =
         VOIDWALKER_BREAK_KI      = 11005, -- The <keyitem> shatters into tiny fragments.
         VOIDWALKER_OBTAIN_KI     = 11006, -- Obtained key item: <keyitem>!
         COMMON_SENSE_SURVIVAL    = 12513, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        LEARNS_SPELL             = 12504, -- <name> learns <spell>!
+        UNCANNY_SENSATION        = 12506, -- You are assaulted by an uncanny sensation.
     },
-
     mob =
     {
         DEADLY_DODO_PH     =
