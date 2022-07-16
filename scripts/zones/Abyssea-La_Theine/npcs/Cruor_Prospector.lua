@@ -7,6 +7,7 @@
 require("scripts/globals/abyssea")
 require("scripts/globals/keyitems")
 require("scripts/globals/status")
+require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 
@@ -21,24 +22,25 @@ local itemType =
 local prospectorItems =
 {
     [itemType.ITEM] =
-    {-- Sel      Item                         Cost,  Qty
-        [ 1] = { xi.items.PERLE_SALADE,       4000 },
-        [ 2] = { xi.items.PERLE_HAUBERK,      5000 },
-        [ 3] = { xi.items.PERLE_MOUFLES,      3000 },
-        [ 4] = { xi.items.PERLE_BRAYETTES,    3000 },
-        [ 5] = { xi.items.PERLE_SOLLERETS,    3000 },
-        [ 6] = { xi.items.AURORE_BERET,       4000 },
-        [ 7] = { xi.items.AURORE_DOUBLET,     5000 },
-        [ 8] = { xi.items.AURORE_GLOVES,      3000 },
-        [ 9] = { xi.items.AURORE_BRAIS,       3000 },
-        [10] = { xi.items.AURORE_GAITERS,     3000 },
-        [11] = { xi.items.TEAL_CHAPEAU,       4000 },
-        [12] = { xi.items.TEAL_SAIO,          5000 },
-        [13] = { xi.items.TEAL_CUFFS,         3000 },
-        [14] = { xi.items.TEAL_SLOPS,         3000 },
-        [15] = { xi.items.TEAL_PIGACHES,      3000 },
-        [16] = { xi.items.FORBIDDEN_KEY,       500 },
-        [17] = { xi.items.SHADOW_THRONE,   2000000 },
+    {-- Sel      Item                                       Cost,  Qty
+        [ 1] = { xi.items.PERLE_SALADE,                     4000 },
+        [ 2] = { xi.items.PERLE_HAUBERK,                    5000 },
+        [ 3] = { xi.items.PERLE_MOUFLES,                    3000 },
+        [ 4] = { xi.items.PERLE_BRAYETTES,                  3000 },
+        [ 5] = { xi.items.PERLE_SOLLERETS,                  3000 },
+        [ 6] = { xi.items.AURORE_BERET,                     4000 },
+        [ 7] = { xi.items.AURORE_DOUBLET,                   5000 },
+        [ 8] = { xi.items.AURORE_GLOVES,                    3000 },
+        [ 9] = { xi.items.AURORE_BRAIS,                     3000 },
+        [10] = { xi.items.AURORE_GAITERS,                   3000 },
+        [11] = { xi.items.TEAL_CHAPEAU,                     4000 },
+        [12] = { xi.items.TEAL_SAIO,                        5000 },
+        [13] = { xi.items.TEAL_CUFFS,                       3000 },
+        [14] = { xi.items.TEAL_SLOPS,                       3000 },
+        [15] = { xi.items.TEAL_PIGACHES,                    3000 },
+        [16] = { xi.items.FORBIDDEN_KEY,                     500 },
+        [17] = { xi.items.CIPHER_OF_JOACHIMS_ALTER_EGO,     5000 },
+        [18] = { xi.items.SHADOW_THRONE,                 2000000 },
     },
 
     [itemType.TEMP] =
@@ -93,6 +95,12 @@ local prospectorItems =
                    { xi.effect.ABYSSEA_MND, xi.effect.MND_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 }, }, 470 },
     },
 }
+-- Trust Alter Ego Extravaganza
+local cipher = 0
+local enable = xi.settings.main.ENABLE_TRUST_ALTER_EGO_EXTRAVAGANZA
+if enable == 1 or enable == 3 then -- 1=Summer/NY campaign 3=All campaigns
+    cipher = 1
+end
 
 entity.onTrade = function(player, npc, trade)
 end
@@ -101,7 +109,7 @@ entity.onTrigger = function(player, npc)
     local cruor = player:getCurrency("cruor")
     local demilune = xi.abyssea.getDemiluneAbyssite(player)
 
-    player:startEvent(2002, cruor, demilune)
+    player:startEvent(2002, cruor, demilune, 0, 0, cipher)
 end
 
 entity.onEventUpdate = function(player, csid, option)
