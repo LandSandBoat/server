@@ -139,7 +139,7 @@ entity.onEventFinish = function(player, csid, option)
         player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COLLECT_TARUT_CARDS)
 
     elseif csid == 199 and option == 0 then
-        player:addCharVar("RubbishDay_prog", 1)
+        player:incrementCharVar("RubbishDay_prog", 1)
         player:setCharVar("RubbishDay_day", VanadielDayOfTheYear()) -- new vanadiel day
 
     elseif csid == 198 and option == 0 then

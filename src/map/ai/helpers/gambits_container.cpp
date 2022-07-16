@@ -763,6 +763,11 @@ namespace gambits
                 return trigger_target->PAI->IsCurrentState<CMagicState>();
                 break;
             }
+            case G_CONDITION::IS_ECOSYSTEM:
+            {
+                return trigger_target->m_EcoSystem == ECOSYSTEM(predicate.condition_arg);
+                break;
+            }
             case G_CONDITION::RANDOM:
             {
                 return xirand::GetRandomNumber<uint16>(100) < (int16)predicate.condition_arg;

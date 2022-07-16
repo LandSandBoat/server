@@ -68,6 +68,7 @@ namespace
     const int   CHARACTER_SYNC_DISTANCE_SWAP_THRESHOLD = 30;
     const int   CHARACTER_SYNC_PARTY_SIGNIFICANCE      = 100000;
     const int   CHARACTER_SYNC_ALLI_SIGNIFICANCE       = 10000;
+    const int   PERSIST_CHECK_CHARACTERS               = 20;
 } // namespace
 
 typedef std::pair<float, CCharEntity*> CharScorePair;
@@ -1523,6 +1524,36 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
     if (tick > m_EffectCheckTime)
     {
         m_EffectCheckTime = m_EffectCheckTime + 3s > tick ? m_EffectCheckTime + 3s : tick + 3s;
+    }
+
+    if (tick > charPersistTime && !charTargIds.empty())
+    {
+        charPersistTime = tick + 1s;
+
+        auto charTargIdIter = charTargIds.lower_bound(lastCharPersistTargId);
+        if (charTargIdIter == charTargIds.end())
+        {
+            charTargIdIter = charTargIds.begin();
+        }
+
+        size_t maxChecks = std::min<size_t>(charTargIds.size(), PERSIST_CHECK_CHARACTERS);
+
+        for (size_t i = 0; i < maxChecks; i++)
+        {
+            CCharEntity* pc = (CCharEntity*)m_charList[*charTargIdIter];
+            charTargIdIter++;
+            if (charTargIdIter == charTargIds.end())
+            {
+                charTargIdIter = charTargIds.begin();
+            }
+
+            if (pc && pc->PersistData(tick))
+            {
+                // We only want to persist at most 1 character per zone tick
+                break;
+            }
+        }
+        lastCharPersistTargId = *charTargIdIter;
     }
 
     if (tick > computeTime && !charTargIds.empty())

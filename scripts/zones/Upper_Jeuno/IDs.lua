@@ -37,6 +37,7 @@ zones[xi.zone.UPPER_JEUNO] =
         ITEM_DELIVERY_DIALOG             = 8084,  -- Delivering goods to residences everywhere!
         DECIMATION_LEARNED               = 8207,  -- You have learned the weapon skill Decimation!
         LEND_PRISHE_AMULET               = 8344,  -- You lend the <item> to Prishe.
+        YOU_OBTAIN_ITEM                  = 11188, -- You obtain <item>!
         UNLOCK_DANCER                    = 11838, -- You can now become a dancer!
     },
     mob =

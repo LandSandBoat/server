@@ -85,6 +85,18 @@ bool CMobSkill::isSpecial() const
     return m_Flag & SKILLFLAG_SPECIAL;
 }
 
+bool CMobSkill::isBloodPactRage() const
+{
+    // means it is a BP Rage
+    return m_Flag & SKILLFLAG_BLOODPACT_RAGE;
+}
+
+bool CMobSkill::isBloodPactWard() const
+{
+    // means it is a BP Ward
+    return m_Flag & SKILLFLAG_BLOODPACT_WARD;
+}
+
 void CMobSkill::setID(uint16 id)
 {
     m_ID = id;

@@ -41,12 +41,12 @@ std::vector<TrustSpell_ID*> g_PTrustIDList;
 
 struct Trust_t
 {
-    uint32    trustID;
-    uint32    pool;
-    look_t    look;        // appearance data
-    string_t  name;        // script name string
-    string_t  packet_name; // packet name string
-    ECOSYSTEM EcoSystem;   // ecosystem
+    uint32      trustID;
+    uint32      pool;
+    look_t      look;        // appearance data
+    std::string name;        // script name string
+    std::string packet_name; // packet name string
+    ECOSYSTEM   EcoSystem;   // ecosystem
 
     uint8  name_prefix;
     uint8  radius; // Model Radius - affects melee range etc.

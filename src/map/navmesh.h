@@ -68,7 +68,7 @@ public:
     CNavMesh(uint16 zoneID);
     ~CNavMesh();
 
-    bool load(const std::string& path);
+    bool load(std::string const& path);
     void reload();
     void unload();
 

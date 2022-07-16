@@ -74,8 +74,8 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 160 then
-        player:addCharVar("saveTheClockTowerVar", 1)
-        player:addCharVar("saveTheClockTowerNPCz1", 1)
+        player:incrementCharVar("saveTheClockTowerVar", 1)
+        player:incrementCharVar("saveTheClockTowerNPCz1", 1)
     elseif csid == 159 and option == 1 then
         player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.NORTHWARD)
     elseif csid == 61 then

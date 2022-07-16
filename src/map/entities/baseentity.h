@@ -293,8 +293,8 @@ public:
     ENTITYTYPE      objtype;      // Type of entity
     STATUS_TYPE     status;       // Entity status (different entities - different statuses)
     uint16          m_TargID;     // the targid of the object the entity is looking at
-    string_t        name;         // Entity name
-    string_t        packetName;   // Used to override name when being sent to the client
+    std::string     name;         // Entity name
+    std::string     packetName;   // Used to override name when being sent to the client
     look_t          look;         //
     look_t          mainlook;     // only used if mob use changeSkin() or player /lockstyle
     location_t      loc;          // Location of entity
@@ -306,11 +306,11 @@ public:
     ALLEGIANCE_TYPE allegiance; // what types of targets the entity can fight
     uint8           updatemask; // what to update next server tick to players nearby
 
-    uint32 animBegin;                   // Animation start time
-    uint8 animPath;                     // Which animation Path
-    bool animStart;                     // Is this starting an animation?
+    uint32 animBegin; // Animation start time
+    uint8  animPath;  // Which animation Path
+    bool   animStart; // Is this starting an animation?
 
-    bool manualConfig;                  // Is this entity configured with script
+    bool manualConfig; // Is this entity configured with script
 
     bool isRenamed; // tracks if the entity's name has been overidden. Defaults to false.
 

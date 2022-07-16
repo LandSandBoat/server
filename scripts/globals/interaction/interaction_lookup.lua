@@ -384,7 +384,7 @@ local function onHandler(data, secondLevelKey, thirdLevelKey, args, fallbackHand
                 or player:getLocalVar(fallbackVar) == 0) -- alternate between trying handler system and fallback handler
             )
     then
-        player:setLocalVar(fallbackVar, 1)
+        player:setLocalVar(fallbackVar, priority <= Action.Priority.Event and 1 or 0)
         local result = performNextAction(player, secondLevelKey, thirdLevelKey, actions, targetId) or defaultReturn
         return result
     end

@@ -61,7 +61,7 @@ public:
     CTask* AddTask(std::string InitName, time_point InitTick, std::any InitData, TASKTYPE InitType, TaskFunc_t InitFunc, duration InitInterval = 1s);
 
     duration DoTimer(time_point tick);
-    void     RemoveTask(const std::string& TaskName);
+    void     RemoveTask(std::string const& TaskName);
 
     static CTaskMgr* getInstance();
     static void      delInstance();

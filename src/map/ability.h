@@ -744,25 +744,25 @@ public:
     void        setName(int8* name);
 
 private:
-    uint16     m_ID;
-    JOBTYPE    m_Job;
-    uint8      m_level;
-    uint16     m_animationID;
-    duration   m_animationTime;
-    duration   m_castTime;
-    float      m_range;
-    uint8      m_aoe;
-    uint16     m_validTarget;
-    uint16     m_addType;
-    uint16     m_message;
-    uint16     m_recastTime;
-    uint16     m_recastId;
-    uint16     m_CE;
-    uint16     m_VE;
-    uint16     m_meritModID;
-    string_t   m_name;
-    uint16     m_mobskillId;
-    ACTIONTYPE m_actionType;
+    uint16      m_ID;
+    JOBTYPE     m_Job;
+    uint8       m_level;
+    uint16      m_animationID;
+    duration    m_animationTime;
+    duration    m_castTime;
+    float       m_range;
+    uint8       m_aoe;
+    uint16      m_validTarget;
+    uint16      m_addType;
+    uint16      m_message;
+    uint16      m_recastTime;
+    uint16      m_recastId;
+    uint16      m_CE;
+    uint16      m_VE;
+    uint16      m_meritModID;
+    std::string m_name;
+    uint16      m_mobskillId;
+    ACTIONTYPE  m_actionType;
 };
 
 /************************************************************************
