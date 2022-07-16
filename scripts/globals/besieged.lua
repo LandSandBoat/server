@@ -7,10 +7,19 @@ require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/status")
 require("scripts/globals/teleports")
+require('scripts/globals/settings')
+require('scripts/globals/items')
 -----------------------------------
 
 xi = xi or {}
 xi.besieged = xi.besieged or {}
+
+-- Trust Alter Ego Extravaganza Check
+local cipher = 0
+local enable = xi.settings.main.ENABLE_TRUST_ALTER_EGO_EXTRAVAGANZA
+if enable == 1 or enable == 3 then -- 1 = Summer/NY Campaign 3 = both Campaigns
+    cipher = 65536 * 16384
+end
 
 local function getMapBitmask(player)
     local mamook   = player:hasKeyItem(xi.ki.MAP_OF_MAMOOK) and 1 or 0 -- Map of Mammok
@@ -59,6 +68,7 @@ local function getISPItem(i)
         [45057] = {id = 3309, price = 5000}, -- barrage turbine
         [53249] = {id = 3311, price = 5000}, -- galvanizer
         [57345] = {id = 6409, price = 50000},
+        [69633] = {id = xi.items.CIPHER_OF_MIHLIS_ALTER_EGO, price = 5000}, -- mihli
         -- Private Second Class
         -- Map Key Items (handled separately)
         -- Private First Class
@@ -136,7 +146,7 @@ xi.besieged.onTrigger = function(player, npc, eventBase)
         player:startEvent(eventBase + 1, npc)
     else
         local maps = getMapBitmask(player)
-        player:startEvent(eventBase, player:getCurrency("imperial_standing"), maps, mercRank, 0, unpack(getImperialDefenseStats()))
+        player:startEvent(eventBase, player:getCurrency("imperial_standing"), (maps + cipher), mercRank, 0, unpack(getImperialDefenseStats()))
     end
 end
 
@@ -144,7 +154,7 @@ xi.besieged.onEventUpdate = function(player, csid, option)
     local itemId = getISPItem(option)
     if itemId and option < 0x40000000 then
         local maps = getMapBitmask(player)
-        player:updateEvent(player:getCurrency("imperial_standing"), maps, xi.besieged.getMercenaryRank(player), player:canEquipItem(itemId) and 2 or 1, unpack(getImperialDefenseStats()))
+        player:updateEvent(player:getCurrency("imperial_standing"), (maps + cipher), xi.besieged.getMercenaryRank(player), player:canEquipItem(itemId) and 2 or 1, unpack(getImperialDefenseStats()))
     end
 end
 
