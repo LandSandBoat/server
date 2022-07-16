@@ -471,8 +471,6 @@ local prizes =
 			-- 866, -- Wyvern Scales
 			-- 1816, -- Wyrm Horn
 			-- 1110, -- Beetle Blood
-			--2858, -- wolfram steel
-			--2859, -- cobalt ore
 			--2172, -- hydra scale
 			
 			
