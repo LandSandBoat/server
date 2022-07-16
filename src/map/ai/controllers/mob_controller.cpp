@@ -171,7 +171,7 @@ void CMobController::TryLink()
             {
                 std::unique_ptr<CBasicPacket> errMsg;
                 if (!PTarget->PPet->CanAttack(PMob, errMsg))
-                return;
+                    return;
             }
 
             petutils::AttackTarget(PTarget, PMob);
@@ -334,7 +334,7 @@ bool CMobController::MobSkill(int wsList)
             continue;
         }
 
-        if (PMobSkill->getValidTargets() == TARGET_ENEMY) // enemy
+        if (PMobSkill->getValidTargets() == TARGET_ENEMY && PMob->GetBattleTarget() != nullptr) // enemy
         {
             if (PMob->GetBattleTarget()->StatusEffectContainer->HasStatusEffect(EFFECT_ALL_MISS) && PMob->GetBattleTarget()->StatusEffectContainer->GetStatusEffect(EFFECT_ALL_MISS)->GetPower() == 2) // Handles Super Jump
             {
@@ -676,9 +676,9 @@ void CMobController::Move()
         //#TODO: can this be moved to scripts entirely?
         if (PMob->getMobMod(MOBMOD_DRAW_IN))
         {
-            uint8 drawInRange = PMob->getMobMod(MOBMOD_DRAW_IN_CUSTOM_RANGE) > 0 ? PMob->getMobMod(MOBMOD_DRAW_IN_CUSTOM_RANGE) : PMob->GetMeleeRange() * 2;
+            uint8  drawInRange  = PMob->getMobMod(MOBMOD_DRAW_IN_CUSTOM_RANGE) > 0 ? PMob->getMobMod(MOBMOD_DRAW_IN_CUSTOM_RANGE) : PMob->GetMeleeRange() * 2;
             uint16 maximumReach = PMob->getMobMod(MOBMOD_DRAW_IN_MAXIMUM_REACH) > 0 ? PMob->getMobMod(MOBMOD_DRAW_IN_MAXIMUM_REACH) : 0xFFFF;
-            bool includeParty = PMob->getMobMod(MOBMOD_DRAW_IN_INCLUDE_PARTY); // (and alliance)
+            bool   includeParty = PMob->getMobMod(MOBMOD_DRAW_IN_INCLUDE_PARTY); // (and alliance)
 
             if (currentDistance > drawInRange && currentDistance < maximumReach && battleutils::DrawIn(PTarget, PMob, PMob->GetMeleeRange() - 0.2f, drawInRange, maximumReach, includeParty))
             {
@@ -688,7 +688,7 @@ void CMobController::Move()
             {
                 drawInRange = PMob->GetMeleeRange(); // if i'm bound/can't move, draw in the moment they leave my melee range
                 if ((PMob->speed == 0 || PMob->getMobMod(MOBMOD_NO_MOVE)) && !PMob->getMobMod(MOBMOD_DRAW_IN_IGNORE_STATIONARY) &&
-                currentDistance > drawInRange && currentDistance < maximumReach && battleutils::DrawIn(PTarget, PMob, PMob->GetMeleeRange() - 1.2f, drawInRange, maximumReach, includeParty))
+                    currentDistance > drawInRange && currentDistance < maximumReach && battleutils::DrawIn(PTarget, PMob, PMob->GetMeleeRange() - 1.2f, drawInRange, maximumReach, includeParty))
                 {
                     FaceTarget();
                 }
@@ -710,7 +710,7 @@ void CMobController::Move()
             }
             else if (CanMoveForward(currentDistance))
             {
-            if ((!PMob->PAI->PathFind->IsFollowingPath() || distanceSquared(PMob->PAI->PathFind->GetDestination(), PTarget->loc.p) > 10)  && currentDistance > attack_range)
+                if ((!PMob->PAI->PathFind->IsFollowingPath() || distanceSquared(PMob->PAI->PathFind->GetDestination(), PTarget->loc.p) > 10) && currentDistance > attack_range)
                 {
                     // path to the target if we don't have a path already
                     PMob->PAI->PathFind->PathInRange(PTarget->loc.p, attack_range - 0.2f, PATHFLAG_WALLHACK | PATHFLAG_RUN);

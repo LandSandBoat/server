@@ -2112,7 +2112,7 @@ bool CLuaBaseEntity::sendGuild(uint16 guildID, uint8 open, uint8 close, uint8 ho
     XI_DEBUG_BREAK_IF(open > close);
 
     uint8 VanadielHour = (uint8)CVanaTime::getInstance()->getHour();
-    uint8 VanadielDay = (uint8)CVanaTime::getInstance()->getWeekday();
+    uint8 VanadielDay  = (uint8)CVanaTime::getInstance()->getWeekday();
 
     GUILDSTATUS status = GUILD_OPEN;
 
@@ -2668,7 +2668,6 @@ void CLuaBaseEntity::warp()
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
     PChar->loc.boundary    = 0;
-    PChar->m_moghouseID    = 0;
     PChar->loc.p           = PChar->profile.home_point.p;
     PChar->loc.destination = PChar->profile.home_point.destination;
 
@@ -2676,7 +2675,7 @@ void CLuaBaseEntity::warp()
     PChar->animation = ANIMATION_NONE;
 
     PChar->clearPacketList();
-    charutils::SendToZone(PChar, 2, zoneutils::GetZoneIPP(m_PBaseEntity->loc.destination));
+    charutils::SendToZone(PChar, 2, zoneutils::GetZoneIPP(PChar->loc.destination));
 }
 
 /************************************************************************
@@ -4822,7 +4821,7 @@ void CLuaBaseEntity::setAnimationSub(uint8 animationsub)
 void CLuaBaseEntity::setAnimPath(uint8 animPath)
 {
     m_PBaseEntity->manualConfig = true;
-    m_PBaseEntity->animPath = animPath;
+    m_PBaseEntity->animPath     = animPath;
 }
 
 /************************************************************************
@@ -11221,7 +11220,14 @@ int CLuaBaseEntity::getRACC()
 
     auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
 
-    return PEntity->RACC(weapon->getSkillType(), distance(PEntity->loc.p, PEntity->GetBattleTarget()->loc.p),  weapon->getILvlSkill());
+    if (PEntity->GetBattleTarget() != nullptr)
+    {
+        return PEntity->RACC(weapon->getSkillType(), distance(PEntity->loc.p, PEntity->GetBattleTarget()->loc.p), weapon->getILvlSkill());
+    }
+    else
+    {
+        return PEntity->RACC(weapon->getSkillType(), distance(PEntity->loc.p, PEntity->loc.p), weapon->getILvlSkill());
+    }
 }
 
 /************************************************************************
@@ -11245,7 +11251,14 @@ uint16 CLuaBaseEntity::getRATT()
 
     auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
 
-    return PEntity->RATT(weapon->getSkillType(), distance(PEntity->loc.p, PEntity->GetBattleTarget()->loc.p),  weapon->getILvlSkill());
+    if (PEntity->GetBattleTarget() != nullptr)
+    {
+        return PEntity->RATT(weapon->getSkillType(), distance(PEntity->loc.p, PEntity->GetBattleTarget()->loc.p), weapon->getILvlSkill());
+    }
+    else
+    {
+        return PEntity->RATT(weapon->getSkillType(), distance(PEntity->loc.p, PEntity->loc.p), weapon->getILvlSkill());
+    }
 }
 
 /************************************************************************
@@ -13652,7 +13665,7 @@ inline int32 CLuaBaseEntity::triggerDrawIn(CLuaBaseEntity* PMobEntity, sol::obje
     if ((target != sol::lua_nil) && target.is<CLuaBaseEntity*>())
     {
         CLuaBaseEntity* PTargetEntity = target.as<CLuaBaseEntity*>();
-        PTarget = dynamic_cast<CBattleEntity*>(PTargetEntity->m_PBaseEntity);
+        PTarget                       = dynamic_cast<CBattleEntity*>(PTargetEntity->m_PBaseEntity);
     }
 
     if (includePt != sol::lua_nil)
@@ -14917,10 +14930,10 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getPlayerRegionInZone", CLuaBaseEntity::getPlayerRegionInZone);
     SOL_REGISTER("updateToEntireZone", CLuaBaseEntity::updateToEntireZone);
 
-    SOL_REGISTER("setAnimPath",CLuaBaseEntity::setAnimPath);
-    SOL_REGISTER("setAnimStart",CLuaBaseEntity::setAnimStart);
-    SOL_REGISTER("setAnimBegin",CLuaBaseEntity::setAnimBegin);
-    SOL_REGISTER("sendUpdateToZoneCharsInRange",CLuaBaseEntity::sendUpdateToZoneCharsInRange);
+    SOL_REGISTER("setAnimPath", CLuaBaseEntity::setAnimPath);
+    SOL_REGISTER("setAnimStart", CLuaBaseEntity::setAnimStart);
+    SOL_REGISTER("setAnimBegin", CLuaBaseEntity::setAnimBegin);
+    SOL_REGISTER("sendUpdateToZoneCharsInRange", CLuaBaseEntity::sendUpdateToZoneCharsInRange);
 
     // Abyssea
     SOL_REGISTER("getAvailableTraverserStones", CLuaBaseEntity::getAvailableTraverserStones);
