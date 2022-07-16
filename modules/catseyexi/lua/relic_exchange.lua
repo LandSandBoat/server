@@ -699,7 +699,7 @@ m:addOverride("xi.zones.Sea_Serpent_Grotto.npcs.relic.onTrigger", function(playe
 	player:PrintToPlayer("???: and I'll exchange it for my soul. Let me return to the battlefield!", 0xD)
 end)
 
-m:addOverride("xi.zones.Cape_Terrigan.npcs.relic.onTrade", function(player, npc, trade)
+m:addOverride("xi.zones.Cape_Teriggan.npcs.relic.onTrade", function(player, npc, trade)
     local ID = require("scripts/zones/Cape_Terrigan/IDs")
     if (player:getCharVar("RELIC_IN_PROGRESS") == xi.items.FUTATOKOROTO and npcUtil.tradeHas(trade, {xi.items.RANPERRE_GOLDPIECE, xi.items.SNARLED_FRAGMENT, xi.items.SHARD_OF_NECROPSYCHE, xi.items.FUTATOKOROTO})) then -- currency, shard, necropsyche, stage 4
         player:startEvent(18, xi.items.YOICHINOYUMI)
@@ -746,7 +746,7 @@ m:addOverride("xi.zones.Cape_Terrigan.npcs.relic.onTrade", function(player, npc,
     end
 end)
 
-m:addOverride("xi.zones.Cape_Terrigan.npcs.relic.onTrigger", function(player, npc)
+m:addOverride("xi.zones.Cape_Teriggan.npcs.relic.onTrigger", function(player, npc)
     local ID = require("scripts/zones/Cape_Terrigan/IDs")
     if player:getCharVar("RelicWeaponVoucher") == 1 then
 	    player:setCharVar("RelicWeaponVoucher", 0)

@@ -109,6 +109,19 @@ bool CMobSkillState::Update(time_point tick)
             static_cast<CMobEntity*>(PTarget)->PEnmityContainer->UpdateEnmity(m_PEntity, 0, 0);
         }
         m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_STATE_EXIT", CLuaBaseEntity(m_PEntity), m_PSkill->getID());
+
+        if (m_PEntity->objtype == TYPE_PET && m_PEntity->PMaster && m_PEntity->PMaster->objtype == TYPE_PC && (m_PSkill->isBloodPactRage() || m_PSkill->isBloodPactWard()))
+        {
+            CCharEntity* PSummoner = dynamic_cast<CCharEntity*>(m_PEntity->PMaster);
+            if (PSummoner && PSummoner->StatusEffectContainer->HasStatusEffect(EFFECT_AVATARS_FAVOR))
+            {
+                auto power = PSummoner->StatusEffectContainer->GetStatusEffect(EFFECT_AVATARS_FAVOR)->GetPower();
+                // Retail: Power is gained for BP use
+                auto levelGained = m_PSkill->isBloodPactRage() ? 3 : 2;
+                power += levelGained;
+                PSummoner->StatusEffectContainer->GetStatusEffect(EFFECT_AVATARS_FAVOR)->SetPower(power > 11 ? power : 11);
+            }
+        }
         return true;
     }
     return false;

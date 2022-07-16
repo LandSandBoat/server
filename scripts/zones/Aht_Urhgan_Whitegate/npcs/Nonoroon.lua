@@ -19,7 +19,8 @@ entity.onTrigger = function(player, npc)
     local pZeni  = player:getCurrency("zeni_point")
     local pLevel = player:getMainLvl()
             
-    if pZeni >= 6000 and pLevel > 74 and player:getCharVar("MythicWeaponExchange") == 1 then -- Zeni Points Check and Player level check.
+--    if pZeni >= 6000 and pLevel > 74 and player:getCharVar("MythicWeaponExchange") == 1 then -- Zeni Points Check and Player level check.
+    if pZeni >= 6000 and pLevel > 74 then -- Zeni Points Check and Player level check.
         player:PrintToPlayer("Nonoroon: I see you have at least 6000 Zeni Points and are able to equip this weapon", 0xd)
         player:PrintToPlayer("Nonoroon: If you can help me out with this myth then you can have the final reward!", 0xd)
         player:PrintToPlayer("Nonoroon: Please make sure you are on the Job you wish to continue this path!", 0xd)
@@ -32,13 +33,25 @@ end
 entity.onTrade = function(player, npc, trade)
     local pZeni  = player:getCurrency("zeni_point")
     local pLevel = player:getMainLvl()
+    local baseWeapon = 18970 + player:getMainJob()
+    
+	if player:getMainJob() == xi.job.GEO or player:getMainJob() == xi.job.RUN then
+	    player:PrintToPlayer( "Nonoroon: Bro, that job doesn't get a mythic!", 0xd)
+		return
+	end
 
-    if pZeni >= 6000 and pLevel > 74 and player:getCharVar("MythicWeaponExchange") == 1 and npcUtil.tradeHasExactly(trade, {{2187, 5}}) then
+    --if pZeni >= 6000 and pLevel > 74 and player:getCharVar("MythicWeaponExchange") == 1 and npcUtil.tradeHasExactly(trade, {{2187, 5}}) then
+    if pZeni >= 6000 and pLevel > 74 and npcUtil.tradeHasExactly(trade, {{2187, 5}}) then
+	    if player:getMainJob() == xi.job.DNC then
+		    baseWeapon = 18969
+		end
         player:tradeComplete()
         player:delCurrency("zeni_point", 6000)
-        player:PrintToPlayer( "Nonoroon: Yooo man, here's your new base weapon. See the homie Paparoon to cash in that alexandrite!", 0xd)
-        npcUtil.giveItem(player, 18970 + player:getMainJob())
-		player:setCharVar("MythicWeaponExchange", 2)
+        player:PrintToPlayer( "Nonoroon: Yooo man, here's your new base weapon. Go see that homie paparoon for the next phase!", 0xd)
+        npcUtil.giveItem(player, baseWeapon)
+        if player:getCharVar("MythicWeaponExchange") == 1 then
+		    player:setCharVar("MythicWeaponExchange", 2)
+        end
     else
         player:PrintToPlayer( "Nonoroon: You need more Zeni Points, Incorrect level or wrong items to proceed .", 0xd)
     end

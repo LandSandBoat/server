@@ -176,10 +176,14 @@ namespace luautils
     bool   IsMoonFull(); // Returns true if the moon is full
     void   StartElevator(uint32 ElevatorID);
 
-    int32 GetServerVariable(std::string const& varName);
+    int32 GetServerVariable(std::string const& name);
     void  SetServerVariable(std::string const& name, int32 value);
-    void  ClearVarFromAll(std::string const& varName); // Deletes a specific player variable from all players
-    void  Terminate();                                 // Logs off all characters and terminates the server
+    int32 GetVolatileServerVariable(std::string const& varName);
+    void  SetVolatileServerVariable(std::string const& varName, int32 value);
+    int32 GetCharVar(uint32 charId, std::string const& varName);              // Get player var directly from SQL DB
+    void  SetCharVar(uint32 charId, std::string const& varName, int32 value); // Set player var in SQL DB using charId
+    void  ClearCharVarFromAll(std::string const& varName);                    // Deletes a specific player variable from all players
+    void  Terminate();                                                        // Logs off all characters and terminates the server
 
     int32 GetTextIDVariable(uint16 ZoneID, const char* variable); // загружаем значение переменной TextID указанной зоны
     bool  IsContentEnabled(const char* content);                  // Check if the content is enabled in settings.lua
@@ -226,12 +230,12 @@ namespace luautils
     auto  OnItemCheck(CBaseEntity* PTarget, CItem* PItem, ITEMCHECK param = ITEMCHECK::NONE, CBaseEntity* PCaster = nullptr) -> std::tuple<int32, int32, int32>; // check to see if item can be used
     int32 CheckForGearSet(CBaseEntity* PTarget);                                                                                                                 // check for gear sets
 
-    int32  OnMagicCastingCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CSpell* PSpell);                                                       // triggers when a player attempts to cast a spell
-    int32  OnSpellCast(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell);                                                         // triggered when casting a spell
-    int32  OnSpellPrecast(CBattleEntity* PCaster, CSpell* PSpell);                                                                              // triggered just before casting a spell
-    auto   OnMobMagicPrepare(CBattleEntity* PCaster, CBattleEntity* PTarget, std::optional<SpellID> startingSpellId) -> std::optional<SpellID>; // triggered when monster wants to use a spell on target
-    int32  OnMagicHit(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell);                                                          // triggered when spell cast on monster
-    int32  OnWeaponskillHit(CBattleEntity* PMob, CBaseEntity* PAttacker, uint16 PWeaponskill);                                                  // Triggered when Weaponskill strikes monster
+    int32 OnMagicCastingCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CSpell* PSpell);                                                       // triggers when a player attempts to cast a spell
+    int32 OnSpellCast(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell);                                                         // triggered when casting a spell
+    int32 OnSpellPrecast(CBattleEntity* PCaster, CSpell* PSpell);                                                                              // triggered just before casting a spell
+    auto  OnMobMagicPrepare(CBattleEntity* PCaster, CBattleEntity* PTarget, std::optional<SpellID> startingSpellId) -> std::optional<SpellID>; // triggered when monster wants to use a spell on target
+    int32 OnMagicHit(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell);                                                          // triggered when spell cast on monster
+    int32 OnWeaponskillHit(CBattleEntity* PMob, CBaseEntity* PAttacker, uint16 PWeaponskill);                                                  // Triggered when Weaponskill strikes monster
 
     int32 OnMobInitialize(CBaseEntity* PMob); // Used for passive trait
     int32 ApplyMixins(CBaseEntity* PMob);
@@ -321,7 +325,8 @@ namespace luautils
     bool HasCustomMenuContext(CCharEntity* PChar);
     void HandleCustomMenu(CCharEntity* PChar, std::string selection);
 
-    uint16 GetItemIDByName(std::string const& name); // Retrive the first itemId that matches a name
+    // Retrive the first itemId that matches a name
+    uint16 GetItemIDByName(std::string const& name);
 }; // namespace luautils
 
 #endif // _LUAUTILS_H -

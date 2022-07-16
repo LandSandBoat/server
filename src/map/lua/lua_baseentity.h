@@ -66,9 +66,10 @@ public:
     void customMenu(sol::object const& obj);
 
     // Variables
-    int32  getCharVar(std::string const& varName);              // Returns a character variable
-    void   setCharVar(std::string const& varname, int32 value); // Sets a character variable
-    void   addCharVar(std::string const& varname, int32 value); // Increments/decriments/sets a character variable
+    int32  getCharVar(std::string const& varName);                    // Returns a character variable
+    void   setCharVar(std::string const& varname, int32 value);       // Sets a character variable
+    void   incrementCharVar(std::string const& varname, int32 value); // Increments/decriments/sets a character variable
+    void   setVolatileCharVar(std::string const& varName, int32 value);
     uint32 getLocalVar(std::string const& var);
     void   setLocalVar(std::string const& var, uint32 val);
     void   resetLocalVars();
@@ -120,6 +121,7 @@ public:
     uint8 getStatus();
     void  setStatus(uint8 status); // Sets Character's Status
     uint8 getCurrentAction();
+    bool  canUseAbilities();
 
     void lookAt(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2); // look at given position
     void clearTargID();                                                                     // clears target of entity
@@ -815,6 +817,10 @@ public:
     void   setClaimedTraverserStones(uint16 totalStones);
 
     uint32 getHistory(uint8 index);
+
+    auto getChocoboRaisingInfo() -> sol::table;
+    bool setChocoboRaisingInfo(sol::table table);
+    bool deleteRaisedChocobo();
 
     static void Register();
 };

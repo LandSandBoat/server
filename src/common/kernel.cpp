@@ -50,8 +50,8 @@
 
 std::atomic<bool> gRunFlag = true;
 
-int    arg_c   = 0;
-char** arg_v   = nullptr;
+int    arg_c = 0;
+char** arg_v = nullptr;
 
 char* SERVER_NAME = nullptr;
 char  SERVER_TYPE = XI_SERVER_NONE;
@@ -103,7 +103,7 @@ static void dump_backtrace()
 {
     // gdb
 #if defined(__linux__)
-    int fd[2] = {};
+    int fd[2]  = {};
     int status = pipe(fd);
     if (status == -1)
     {

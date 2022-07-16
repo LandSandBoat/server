@@ -262,3 +262,14 @@ INSERT INTO `mob_droplist` VALUES (2823,0,0,1000,734,100);   -- Olla Grande
 INSERT INTO `mob_droplist` VALUES (2823,0,0,1000,740,100);   -- Olla Grande
 INSERT INTO `mob_droplist` VALUES (2823,0,0,1000,741,100);   -- Olla Grande
 INSERT INTO `mob_droplist` VALUES (2823,0,0,1000,730,100);   -- Olla Grande
+
+######
+## Update Angel skin drop-rates
+######
+# DELETE FROM `mob_droplist` WHERE dropId = 5000 AND itemId= 1312; #Remove rookie mistake
+# DELETE FROM `mob_droplist` WHERE dropId = 4000 AND itemId= 1312; #Remove from Nostokulshedra
+# DELETE FROM `mob_droplist` WHERE dropId = 456 AND itemId= 1312; #Remove from Chary
+INSERT `mob_droplist` VALUES(456,0,1,1000,1312,70); #piece_of_angel_skin Charybdis
+UPDATE `mob_droplist` SET itemRate = 70 WHERE dropId = 2196 AND itemId = 1312; #Update Seiryu droprate
+UPDATE mob_groups SET dropId = 3999 WHERE zoneId = 54 AND groupId = 52 AND `name` = 'Nostokulshedra'; #Add drop to this thing
+INSERT `mob_droplist` VALUES(3999,0,1,1000,1312,40); #piece_of_angel_skin Nostokulshedra
