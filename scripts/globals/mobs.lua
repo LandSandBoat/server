@@ -26,7 +26,7 @@ xi.mob.onMobDeathEx = function(mob, player, isKiller, isWeaponSkillKill)
             player:getCharVar("ChaosbringerKills") < 200 and
             not isWeaponSkillKill
         then
-            player:addCharVar("ChaosbringerKills", 1)
+            player:incrementCharVar("ChaosbringerKills", 1)
         end
     end
 

@@ -74,6 +74,7 @@ namespace message
     void send(uint16 zone, std::string const& luaFunc);
     void send(uint32 playerId, CBasicPacket* packet);
     void send(std::string const& playerName, CBasicPacket* packet);
+    void send_charvar_update(uint32 charId, std::string const& varName, uint32 value);
     void close();
 
     // For use on the zmq thread

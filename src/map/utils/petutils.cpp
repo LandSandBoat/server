@@ -59,10 +59,10 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 struct Pet_t
 {
-    uint16    PetID;     // ID in pet_list.sql
-    look_t    look;      // внешний вид
-    string_t  name;      // имя
-    ECOSYSTEM EcoSystem; // эко-система
+    uint16      PetID;     // ID in pet_list.sql
+    look_t      look;      // внешний вид
+    std::string name;      // имя
+    ECOSYSTEM   EcoSystem; // эко-система
 
     uint8 minLevel; // минимально-возможный  уровень
     uint8 maxLevel; // максимально-возможный уровень
@@ -542,7 +542,7 @@ namespace petutils
         PMob->stats.INT = (uint16)((fINT + mINT) * 0.9f);
         PMob->stats.MND = (uint16)((fMND + mMND) * 0.9f);
         PMob->stats.CHR = (uint16)((fCHR + mCHR) * 0.9f);
-        
+
         // Set jugs damageType to impact (blunt) damage. All jugs at level 75 cap do impact (blunt) damage. https://ffxiclopedia.fandom.com/wiki/Category:Familiars
         PMob->m_dmgType = DAMAGE_TYPE::IMPACT;
     }
@@ -708,24 +708,24 @@ namespace petutils
         switch (PAutomaton->getFrame())
         {
             default: // case FRAME_HARLEQUIN:
-                PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(2, PPet->GetMLevel());
-                PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(10, PPet->GetMLevel()));
+                PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(2, mlvl > 99 ? 99 : mlvl);
+                PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(10, mlvl > 99 ? 99 : mlvl));
                 PPet->m_dmgType = DAMAGE_TYPE::IMPACT;
                 break;
             case FRAME_VALOREDGE:
                 PPet->m_Weapons[SLOT_SUB]->setShieldSize(3);
-                PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(5, PPet->GetMLevel());
-                PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(5, PPet->GetMLevel()));
+                PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(5, mlvl > 99 ? 99 : mlvl);
+                PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(5, mlvl > 99 ? 99 : mlvl));
                 PPet->m_dmgType = DAMAGE_TYPE::SLASHING;
                 break;
             case FRAME_SHARPSHOT:
-                PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(1, PPet->GetMLevel());
-                PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(11, PPet->GetMLevel()));
+                PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(1, mlvl > 99 ? 99 : mlvl);
+                PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(11, mlvl > 99 ? 99 : mlvl));
                 PPet->m_dmgType = DAMAGE_TYPE::PIERCING;
                 break;
             case FRAME_STORMWAKER:
-                PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(10, PPet->GetMLevel());
-                PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(12, PPet->GetMLevel()));
+                PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(10, mlvl > 99 ? 99 : mlvl);
+                PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(12, mlvl > 99 ? 99 : mlvl));
                 PPet->m_dmgType = DAMAGE_TYPE::IMPACT;
                 break;
         }
@@ -886,7 +886,7 @@ namespace petutils
             PPet->addModifier(Mod::MACC, PMaster->getMod(Mod::PET_MACC_MEVA));
             PPet->addModifier(Mod::MEVA, PMaster->getMod(Mod::PET_MACC_MEVA));
         }
-        
+
         // Set damageType for Avatars
         if (PPet->m_PetID == PETID_CAIT_SITH || PPet->m_PetID == PETID_FENRIR)
             PPet->m_dmgType = DAMAGE_TYPE::SLASHING;
@@ -1539,9 +1539,22 @@ namespace petutils
 
         if (PPet->getPetType() == PET_TYPE::AVATAR)
         {
+            uint8 mLvl = PMaster->GetMLevel();
+
             if (PMaster->GetMJob() == JOB_SMN)
             {
-                PPet->SetMLevel(PMaster->GetMLevel());
+                mLvl += PMaster->getMod(Mod::AVATAR_LVL_BONUS);
+
+                if (PetID == PETID_CARBUNCLE)
+                {
+                    mLvl += PMaster->getMod(Mod::CARBUNCLE_LVL_BONUS);
+                }
+                else if (PetID == PETID_CAIT_SITH)
+                {
+                    mLvl += PMaster->getMod(Mod::CAIT_SITH_LVL_BONUS);
+                }
+
+                PPet->SetMLevel(mLvl);
             }
             else if (PMaster->GetSJob() == JOB_SMN)
             {
@@ -1560,19 +1573,19 @@ namespace petutils
 
             PPet->setModifier(Mod::CRIT_DMG_INCREASE, 8); // Avatars have Crit Att Bonus II for +8 crit dmg
 
-            if (PPet->GetMLevel() >= 70)
+            if (mLvl >= 70)
             {
                 PPet->setModifier(Mod::MATT, 32);
             }
-            else if (PPet->GetMLevel() >= 50)
+            else if (mLvl >= 50)
             {
                 PPet->setModifier(Mod::MATT, 28);
             }
-            else if (PPet->GetMLevel() >= 30)
+            else if (mLvl >= 30)
             {
                 PPet->setModifier(Mod::MATT, 24);
             }
-            else if (PPet->GetMLevel() >= 10)
+            else if (mLvl >= 10)
             {
                 PPet->setModifier(Mod::MATT, 20);
             }
@@ -1585,25 +1598,25 @@ namespace petutils
 
             // In a 2014 update SE updated Avatar base damage
             // Based on testing this value appears to be Level now instead of Level * 0.74f
-            uint16 weaponDamage = 1 + PPet->GetMLevel();
+            uint16 weaponDamage = 1 + mLvl;
             if (PetID == PETID_CARBUNCLE || PetID == PETID_CAIT_SITH)
             {
-                weaponDamage = static_cast<uint16>(floor(PPet->GetMLevel() * 0.9f));
+                weaponDamage = static_cast<uint16>(floor(mLvl * 0.9f));
             }
 
             ((CItemWeapon*)PPet->m_Weapons[SLOT_MAIN])->setDamage(weaponDamage);
 
             // Set B+ weapon skill (assumed capped for level derp)
             // attack is madly high for avatars (roughly x2)
-            PPet->setModifier(Mod::ATT, 2 * battleutils::GetMaxSkill(SKILL_CLUB, JOB_WHM, PPet->GetMLevel()));
-            PPet->setModifier(Mod::ACC, battleutils::GetMaxSkill(SKILL_CLUB, JOB_WHM, PPet->GetMLevel()));
+            PPet->setModifier(Mod::ATT, 2 * battleutils::GetMaxSkill(SKILL_CLUB, JOB_WHM, mLvl > 99 ? 99 : mLvl));
+            PPet->setModifier(Mod::ACC, battleutils::GetMaxSkill(SKILL_CLUB, JOB_WHM, mLvl > 99 ? 99 : mLvl));
             // Set E evasion and def
-            PPet->setModifier(Mod::EVA, battleutils::GetMaxSkill(SKILL_THROWING, JOB_WHM, PPet->GetMLevel()));
-            PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(SKILL_THROWING, JOB_WHM, PPet->GetMLevel()));
+            PPet->setModifier(Mod::EVA, battleutils::GetMaxSkill(SKILL_THROWING, JOB_WHM, mLvl > 99 ? 99 : mLvl));
+            PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(SKILL_THROWING, JOB_WHM, mLvl > 99 ? 99 : mLvl));
             // cap all magic skills so they play nice with spell scripts
             for (int i = SKILL_DIVINE_MAGIC; i <= SKILL_BLUE_MAGIC; i++)
             {
-                uint16 maxSkill = battleutils::GetMaxSkill((SKILLTYPE)i, PPet->GetMJob(), PPet->GetMLevel());
+                uint16 maxSkill = battleutils::GetMaxSkill((SKILLTYPE)i, PPet->GetMJob(), mLvl > 99 ? 99 : mLvl);
                 if (maxSkill != 0)
                 {
                     PPet->WorkingSkills.skill[i] = maxSkill;
@@ -1611,7 +1624,7 @@ namespace petutils
                 else // if the mob is WAR/BLM and can cast spell
                 {
                     // set skill as high as main level, so their spells won't get resisted
-                    uint16 maxSubSkill = battleutils::GetMaxSkill((SKILLTYPE)i, PPet->GetSJob(), PPet->GetMLevel());
+                    uint16 maxSubSkill = battleutils::GetMaxSkill((SKILLTYPE)i, PPet->GetSJob(), mLvl > 99 ? 99 : mLvl);
 
                     if (maxSubSkill != 0)
                     {
@@ -1635,7 +1648,7 @@ namespace petutils
                 PPet->addModifier(Mod::BP_DAMAGE, PChar->PJobPoints->GetJobPointValue(JP_BLOOD_PACT_DMG_BONUS) * 3);
             }
 
-            PMaster->addModifier(Mod::AVATAR_PERPETUATION, PerpetuationCost(PetID, PPet->GetMLevel()));
+            PMaster->addModifier(Mod::AVATAR_PERPETUATION, PerpetuationCost(PetID, mLvl));
         }
         else if (PPet->getPetType() == PET_TYPE::JUG_PET)
         {
@@ -1690,7 +1703,7 @@ namespace petutils
             // TEMP: should be MLevel when unsummoned, and PUP level when summoned
             if (PMaster->GetMJob() == JOB_PUP)
             {
-                PPet->SetMLevel(PMaster->GetMLevel());
+                PPet->SetMLevel(PMaster->GetMLevel() + PMaster->getMod(Mod::AUTOMATON_LVL_BONUS));
                 PPet->SetSLevel(PMaster->GetMLevel() / 2); // Todo: SetSLevel() already reduces the level?
             }
             else
@@ -1749,18 +1762,21 @@ namespace petutils
         }
 
         PPet->SetMJob(JOB_DRG);
-        PPet->SetMLevel(PMaster->GetMLevel());
+        // https://www.bg-wiki.com/ffxi/Wyvern_(Dragoon_Pet)#About_the_Wyvern
+        uint8 mLvl = PMaster->GetMLevel();
+        uint8 iLvl = std::clamp(charutils::getMainhandItemLevel(static_cast<CCharEntity*>(PMaster)) - 99, 0, 20);
+
+        PPet->SetMLevel(mLvl + iLvl + PMaster->getMod(Mod::WYVERN_LVL_BONUS));
 
         LoadAvatarStats(PMaster, PPet);                                                                    // follows PC calcs (w/o SJ)
         ((CItemWeapon*)PPet->m_Weapons[SLOT_MAIN])->setDelay((uint16)(floor(1000.0f * (320.0f / 60.0f)))); // 320 delay
-        ((CItemWeapon*)PPet->m_Weapons[SLOT_MAIN])->setDamage((uint16)(1 + floor(PPet->GetMLevel() * 0.9f)));
+        ((CItemWeapon*)PPet->m_Weapons[SLOT_MAIN])->setDamage((uint16)(1 + floor(mLvl * 0.9f)));
         // Set A+ weapon skill
-        PPet->setModifier(Mod::ATT, battleutils::GetMaxSkill(SKILL_GREAT_AXE, JOB_WAR, PPet->GetMLevel()));
-        PPet->setModifier(Mod::ACC, battleutils::GetMaxSkill(SKILL_GREAT_AXE, JOB_WAR, PPet->GetMLevel()));
+        PPet->setModifier(Mod::ATT, battleutils::GetMaxSkill(SKILL_GREAT_AXE, JOB_WAR, mLvl > 99 ? 99 : mLvl));
+        PPet->setModifier(Mod::ACC, battleutils::GetMaxSkill(SKILL_GREAT_AXE, JOB_WAR, mLvl > 99 ? 99 : mLvl));
         // Set D evasion and def
-        PPet->setModifier(Mod::EVA, battleutils::GetMaxSkill(SKILL_HAND_TO_HAND, JOB_WAR, PPet->GetMLevel()));
-        PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(SKILL_HAND_TO_HAND, JOB_WAR, PPet->GetMLevel()));
-        
+        PPet->setModifier(Mod::EVA, battleutils::GetMaxSkill(SKILL_HAND_TO_HAND, JOB_WAR, mLvl > 99 ? 99 : mLvl));
+        PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(SKILL_HAND_TO_HAND, JOB_WAR, mLvl > 99 ? 99 : mLvl));
         // Set wyvern damageType to slashing damage. "Wyverns do slashing damage..." https://www.bg-wiki.com/ffxi/Wyvern_(Dragoon_Pet)
         PPet->m_dmgType = DAMAGE_TYPE::SLASHING;
 
@@ -1791,7 +1807,7 @@ namespace petutils
     void FinalizePetStatistics(CBattleEntity* PMaster, CPetEntity* PPet)
     {
         // set C magic evasion
-        PPet->setModifier(Mod::MEVA, battleutils::GetMaxSkill(SKILL_ELEMENTAL_MAGIC, JOB_RDM, PPet->GetMLevel()));
+        PPet->setModifier(Mod::MEVA, battleutils::GetMaxSkill(SKILL_ELEMENTAL_MAGIC, JOB_RDM, PPet->GetMLevel() > 99 ? 99 : PPet->GetMLevel()));
         PPet->health.tp = 0;
         PMaster->applyPetModifiers(PPet);
         PPet->UpdateHealth();

@@ -3707,11 +3707,13 @@ INSERT INTO `mob_spell_lists` VALUES ('TRUST_Apururu_UC',367,133,68,255); -- she
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Apururu_UC',367,134,75,255); -- shellra_v (75~255)
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Apururu_UC',367,143,32,255); -- erase (32~255)
 
--- TRUST_Rughadjeen (372)
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_Rughadjeen',372,112,37,255); -- flash (37~255)
-
 -- TRUST_Rughadjeen (373)
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_Rughadjeen',373,21,55,255); -- holy (55~255)
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Rughadjeen',373,1,1,255);    -- cure (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Rughadjeen',373,2,11,255);   -- cure_ii (11~255)
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Rughadjeen',373,3,21,255);   -- cure_iii (21~255)
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Rughadjeen',373,4,41,255);   -- cure_iv (41~255)
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Rughadjeen',373,21,55,255);  -- holy (55~255)
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Rughadjeen',373,112,37,255); -- flash (37~255)
 
 -- TRUST_Kukki-Chebukki (374)
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Kukki-Chebukki',374,144,13,255); -- fire (13~255)

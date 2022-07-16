@@ -648,9 +648,9 @@ namespace roeutils
         }
 
         charutils::SaveEminenceData(PChar);
-        charutils::SetCharVar(PChar, "weekly_sparks_spent", 0);
-        charutils::SetCharVar(PChar, "weekly_accolades_spent", 0);
-        charutils::SetCharVar(PChar, "unity_changed", 0);
+        PChar->setCharVar("weekly_sparks_spent", 0);
+        PChar->setCharVar("weekly_accolades_spent", 0);
+        PChar->setCharVar("unity_changed", 0);
 
         int32 currentAccolades = charutils::GetPoints(PChar, "current_accolades");
         charutils::SetPoints(PChar, "prev_accolades", currentAccolades);
