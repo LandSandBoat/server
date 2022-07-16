@@ -15,18 +15,27 @@ local entity = {}
 
 local items =
 {
-    [1]  = {itemid = xi.items.INSOMNIA_EARRING,  price = 3000},
-    [2]  = {itemid = xi.items.HALE_RING,         price = 5000},
-    [3]  = {itemid = xi.items.CHIVALROUS_CHAIN,  price = 8000},
-    [4]  = {itemid = xi.items.PRECISE_BELT,      price = 10000},
-    [5]  = {itemid = xi.items.INTENSIFYING_CAPE, price = 10000},
-    [6]  = {itemid = xi.items.IMPERIAL_POLE,     price = 15000},
-    [7]  = {itemid = xi.items.DOOMBRINGER,       price = 15000},
-    [8]  = {itemid = xi.items.SAYOSAMONJI,       price = 15000},
-    [9]  = {itemid = xi.items.PAHLUWAN_DASTANAS, price = 20000},
-    [10] = {itemid = xi.items.YIGIT_CRACKOWS,    price = 20000},
-    [11] = {itemid = xi.items.AMIR_KORAZIN,      price = 20000},
+    [1]  = {itemid = xi.items.INSOMNIA_EARRING,             price = 3000},
+    [2]  = {itemid = xi.items.HALE_RING,                    price = 5000},
+    [3]  = {itemid = xi.items.CHIVALROUS_CHAIN,             price = 8000},
+    [4]  = {itemid = xi.items.PRECISE_BELT,                 price = 10000},
+    [5]  = {itemid = xi.items.INTENSIFYING_CAPE,            price = 10000},
+    [6]  = {itemid = xi.items.IMPERIAL_POLE,                price = 15000},
+    [7]  = {itemid = xi.items.DOOMBRINGER,                  price = 15000},
+    [8]  = {itemid = xi.items.SAYOSAMONJI,                  price = 15000},
+    [9]  = {itemid = xi.items.PAHLUWAN_DASTANAS,            price = 20000},
+    [10] = {itemid = xi.items.YIGIT_CRACKOWS,               price = 20000},
+    [11] = {itemid = xi.items.AMIR_KORAZIN,                 price = 20000},
+    [12] = {itemid = xi.items.CIPHER_OF_OVJANGS_ALTER_EGO,  price = 3000},
+    [13] = {itemid = xi.items.CIPHER_OF_MNEJINGS_ALTER_EGO, price = 3000},
 }
+
+-- Trust Alter Ego Extravaganza Check
+local cipher = 0
+local enable = xi.settings.main.ENABLE_TRUST_ALTER_EGO_EXTRAVAGANZA
+if enable >= 2 then -- 2 = Spring/Fall Campaign 3 = both Campaigns
+    cipher = 1
+end
 
 entity.onTrade = function(player, npc, trade)
 end
@@ -37,7 +46,7 @@ entity.onTrigger = function(player, npc)
     local assaultPoints = player:getAssaultPoint(xi.assaultUtil.assaultArea.LEBROS_CAVERN)
 
     if rank > 0 then
-        player:startEvent(275, rank, haveimperialIDtag, assaultPoints, player:getCurrentAssault())
+        player:startEvent(275, rank, haveimperialIDtag, assaultPoints, player:getCurrentAssault(), cipher)
     else
         player:startEvent(281)
     end

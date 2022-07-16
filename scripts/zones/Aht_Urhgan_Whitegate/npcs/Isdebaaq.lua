@@ -15,18 +15,27 @@ local entity = {}
 
 local items =
 {
-    [1]  = {itemid = xi.items.ANTIVENOM_EARRING,  price = 3000},
-    [2]  = {itemid = xi.items.EBULLIENT_RING,     price = 5000},
-    [3]  = {itemid = xi.items.ENLIGHTENED_CHAIN,  price = 8000},
-    [4]  = {itemid = xi.items.SPECTRAL_BELT,      price = 10000},
-    [5]  = {itemid = xi.items.BULLSEYE_CAPE,      price = 10000},
-    [6]  = {itemid = xi.items.STORM_TULWAR,       price = 15000},
-    [7]  = {itemid = xi.items.IMPERIAL_NEZA,      price = 15000},
-    [8]  = {itemid = xi.items.STORM_TABAR,        price = 15000},
-    [9]  = {itemid = xi.items.YIGIT_GAGES,        price = 20000},
-    [10] = {itemid = xi.items.AMIR_BOOTS,         price = 20000},
-    [11] = {itemid = xi.items.PAHLUWAN_SERAWEELS, price = 20000},
+    [1]  = {itemid = xi.items.ANTIVENOM_EARRING,            price = 3000},
+    [2]  = {itemid = xi.items.EBULLIENT_RING,               price = 5000},
+    [3]  = {itemid = xi.items.ENLIGHTENED_CHAIN,            price = 8000},
+    [4]  = {itemid = xi.items.SPECTRAL_BELT,                price = 10000},
+    [5]  = {itemid = xi.items.BULLSEYE_CAPE,                price = 10000},
+    [6]  = {itemid = xi.items.STORM_TULWAR,                 price = 15000},
+    [7]  = {itemid = xi.items.IMPERIAL_NEZA,                price = 15000},
+    [8]  = {itemid = xi.items.STORM_TABAR,                  price = 15000},
+    [9]  = {itemid = xi.items.YIGIT_GAGES,                  price = 20000},
+    [10] = {itemid = xi.items.AMIR_BOOTS,                   price = 20000},
+    [11] = {itemid = xi.items.PAHLUWAN_SERAWEELS,           price = 20000},
+    [12] = {itemid = xi.items.CIPHER_OF_OVJANGS_ALTER_EGO,  price = 3000},
+    [13] = {itemid = xi.items.CIPHER_OF_MNEJINGS_ALTER_EGO, price = 3000},
 }
+
+-- Trust Alter Ego Extravaganza Check
+local cipher = 0
+local enable = xi.settings.main.ENABLE_TRUST_ALTER_EGO_EXTRAVAGANZA
+if enable >= 2 then -- 2 = Spring/Fall Campaign 3 = both Campaigns
+    cipher = 1
+end
 
 entity.onTrade = function(player, npc, trade)
 end
@@ -37,7 +46,7 @@ entity.onTrigger = function(player, npc)
     local assaultPoints = player:getAssaultPoint(xi.assaultUtil.assaultArea.MAMOOL_JA_TRAINING_GROUNDS)
 
     if rank > 0 then
-        player:startEvent(274, rank, haveimperialIDtag, assaultPoints, player:getCurrentAssault())
+        player:startEvent(274, rank, haveimperialIDtag, assaultPoints, player:getCurrentAssault(), cipher)
     else
         player:startEvent(280)
     end
