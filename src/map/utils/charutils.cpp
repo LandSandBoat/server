@@ -2012,14 +2012,14 @@ namespace charutils
                 {
                     if (PItem->isType(ITEM_WEAPON))
                     {
-                        CItemWeapon* weapon = (CItemWeapon*)PChar->getEquip(SLOT_AMMO);
-                        bool longBowException = false;
+                        CItemWeapon* weapon           = (CItemWeapon*)PChar->getEquip(SLOT_AMMO);
+                        bool         longBowException = false;
 
                         if (weapon != nullptr)
                         {
                             longBowException = ((CItemWeapon*)PItem)->getSkillType() == SKILL_ARCHERY &&
                                                ((CItemWeapon*)PItem)->getSubSkillType() == SUBSKILL_LONGB &&
-                                                weapon->getSubSkillType() == SUBSKILL_XBO;
+                                               weapon->getSubSkillType() == SUBSKILL_XBO;
                         }
 
                         if ((weapon != nullptr) && weapon->isType(ITEM_WEAPON))
@@ -2044,13 +2044,13 @@ namespace charutils
                 {
                     if (PItem->isType(ITEM_WEAPON))
                     {
-                        CItemWeapon* weapon = (CItemWeapon*)PChar->getEquip(SLOT_RANGED);
-                        bool longBowException = false;
+                        CItemWeapon* weapon           = (CItemWeapon*)PChar->getEquip(SLOT_RANGED);
+                        bool         longBowException = false;
                         if (weapon != nullptr)
                         {
                             longBowException = ((CItemWeapon*)PItem)->getSkillType() == SKILL_ARCHERY &&
                                                ((CItemWeapon*)PItem)->getSubSkillType() == SUBSKILL_XBO &&
-                                                weapon->getSubSkillType() == SUBSKILL_LONGB;
+                                               weapon->getSubSkillType() == SUBSKILL_LONGB;
                         }
 
                         if ((weapon != nullptr) && weapon->isType(ITEM_WEAPON))
@@ -3487,12 +3487,18 @@ namespace charutils
     {
         uint32 baseExp = GetBaseExp(charlvl, moblvl);
 
-    if (baseExp >= 400) return EMobDifficulty::IncrediblyTough;   // 400+
-    if (baseExp >= 200) return EMobDifficulty::VeryTough;         // 200 - 399
-    if (baseExp > 100) return EMobDifficulty::Tough;              // 101 - 199
-    if (baseExp == 100) return EMobDifficulty::EvenMatch;         // 100
-    if (baseExp >= 80) return EMobDifficulty::DecentChallenge;    //  80 -  99
-    if (baseExp >= 1) return EMobDifficulty::EasyPrey;            //   1 -  79
+        if (baseExp >= 400)
+            return EMobDifficulty::IncrediblyTough; // 400+
+        if (baseExp >= 200)
+            return EMobDifficulty::VeryTough; // 200 - 399
+        if (baseExp > 100)
+            return EMobDifficulty::Tough; // 101 - 199
+        if (baseExp == 100)
+            return EMobDifficulty::EvenMatch; // 100
+        if (baseExp >= 80)
+            return EMobDifficulty::DecentChallenge; // 80 - 99
+        if (baseExp >= 1)
+            return EMobDifficulty::EasyPrey; // 1 - 79
 
         return EMobDifficulty::TooWeak;
     }
@@ -3600,14 +3606,14 @@ namespace charutils
     {
         TracyZoneScoped;
 
-        float multi = 1.00f;
-        bool ultra_rare = (rate == 1);
-        bool super_rare = (rate == 5);
-        bool very_rare = (rate == 10);
-        bool rare = (rate == 50);
-        bool uncommon = (rate == 100);
-        bool common = (rate == 150);
-        bool very_common = (rate == 240);
+        float multi       = 1.00f;
+        bool  ultra_rare  = (rate == 1);
+        bool  super_rare  = (rate == 5);
+        bool  very_rare   = (rate == 10);
+        bool  rare        = (rate == 50);
+        bool  uncommon    = (rate == 100);
+        bool  common      = (rate == 150);
+        bool  very_common = (rate == 240);
 
         if (ultra_rare)
         {
@@ -3701,30 +3707,30 @@ namespace charutils
         else if (rare)
         {
             if (m_THLvl < 3)
-             {
-                 multi = 1.00f + (0.20f * m_THLvl);
-                 return multi;
-             }
-             else if (m_THLvl < 8)
-             {
-                 multi = 1.40f + (0.10f * (m_THLvl - 2));
-                 return multi;
-             }
-             else if (m_THLvl < 12)
-             {
-                 multi = 1.90f + (0.20f * (m_THLvl - 7));
-                 return multi;
-             }
-             else if (m_THLvl < 14)
-             {
-                 multi = 2.70f + (0.40f * (m_THLvl - 11));
-                 return multi;
-             }
-             else
-             {
-                 multi = 3.50f + (0.50f * (m_THLvl - 13));
-                 return multi;
-             }
+            {
+                multi = 1.00f + (0.20f * m_THLvl);
+                return multi;
+            }
+            else if (m_THLvl < 8)
+            {
+                multi = 1.40f + (0.10f * (m_THLvl - 2));
+                return multi;
+            }
+            else if (m_THLvl < 12)
+            {
+                multi = 1.90f + (0.20f * (m_THLvl - 7));
+                return multi;
+            }
+            else if (m_THLvl < 14)
+            {
+                multi = 2.70f + (0.40f * (m_THLvl - 11));
+                return multi;
+            }
+            else
+            {
+                multi = 3.50f + (0.50f * (m_THLvl - 13));
+                return multi;
+            }
         }
         else if (uncommon)
         {
@@ -3843,14 +3849,14 @@ namespace charutils
         uint8 tries    = 0;
         uint8 maxTries = 1;
         float bonus    = 0;
-        bool applyTH = false;
+        bool  applyTH  = false;
         if (auto* PMob = dynamic_cast<CMobEntity*>(PEntity))
         {
             // THLvl is the number of 'extra chances' at an item. If the item is obtained, then break out.
             tries    = 0;
             maxTries = 1;
             bonus    = ApplyTH(PMob->m_THLvl, droprate);
-            applyTH = true;
+            applyTH  = true;
         }
         while (tries < maxTries)
         {
