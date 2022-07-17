@@ -1601,18 +1601,35 @@ namespace petutils
             uint16 weaponDamage = 1 + mLvl;
             if (PetID == PETID_CARBUNCLE || PetID == PETID_CAIT_SITH)
             {
-                weaponDamage = static_cast<uint16>(floor(mLvl * 0.9f));
+                weaponDamage = static_cast<uint16>(floor(PPet->GetMLevel() * 0.74f));
             }
 
             ((CItemWeapon*)PPet->m_Weapons[SLOT_MAIN])->setDamage(weaponDamage);
 
             // Set B+ weapon skill (assumed capped for level derp)
             // attack is madly high for avatars (roughly x2)
-            PPet->setModifier(Mod::ATT, 2 * battleutils::GetMaxSkill(SKILL_CLUB, JOB_WHM, mLvl > 99 ? 99 : mLvl));
-            PPet->setModifier(Mod::ACC, battleutils::GetMaxSkill(SKILL_CLUB, JOB_WHM, mLvl > 99 ? 99 : mLvl));
+            if (PetID == PETID_FENRIR)
+            {
+                PPet->setModifier(Mod::ATT, 2.6 * battleutils::GetMaxSkill(SKILL_CLUB, JOB_WHM, PPet->GetMLevel())); // Fenrir has been proven to have an additional 30% ATK
+            }
+            else
+            {
+                PPet->setModifier(Mod::ATT, 2 * battleutils::GetMaxSkill(SKILL_CLUB, JOB_WHM, PPet->GetMLevel()));
+            }
+
+            PPet->setModifier(Mod::ACC, battleutils::GetMaxSkill(SKILL_CLUB, JOB_WHM, PPet->GetMLevel()));
             // Set E evasion and def
-            PPet->setModifier(Mod::EVA, battleutils::GetMaxSkill(SKILL_THROWING, JOB_WHM, mLvl > 99 ? 99 : mLvl));
-            PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(SKILL_THROWING, JOB_WHM, mLvl > 99 ? 99 : mLvl));
+            PPet->setModifier(Mod::EVA, battleutils::GetMaxSkill(SKILL_THROWING, JOB_WHM, PPet->GetMLevel()));
+
+            if (PetID == PETID_DIABOLOS)
+            {
+                PPet->setModifier(Mod::DEF, 1.3 * battleutils::GetMaxSkill(SKILL_THROWING, JOB_WHM, PPet->GetMLevel())); // Diabolos has been proven to have an additional 30% DEF
+            }
+            else
+            {
+                PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(SKILL_THROWING, JOB_WHM, PPet->GetMLevel()));
+            }
+
             // cap all magic skills so they play nice with spell scripts
             for (int i = SKILL_DIVINE_MAGIC; i <= SKILL_BLUE_MAGIC; i++)
             {

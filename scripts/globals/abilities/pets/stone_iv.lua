@@ -15,10 +15,17 @@ end
 ability_object.onPetAbility = function(target, pet, skill)
     local dINT = math.floor(pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
     local tp = skill:getTP()
+    local damage = 90
+    local dmgmod = 0
 
-    local damage = math.floor(325 + 0.025 * tp)
+    if tp < 1500 then
+        dmgmod = math.floor((29/256) * (tp/10) + (928/256))
+    else
+        dmgmod = math.floor(((29/256) * (1500/10)) + ((14/256) * ((tp-1500)/10)) + (928/256))
+    end
+
     damage = damage + (dINT * 1.5)
-    damage = xi.mobskills.mobMagicalMove(pet, target, skill, damage, xi.magic.ele.EARTH, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 0)
+    damage = xi.mobskills.mobMagicalMove(pet, target, skill, damage, xi.magic.ele.EARTH, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT, 0)
     damage = xi.mobskills.mobAddBonuses(pet, target, damage.dmg, xi.magic.ele.EARTH)
     damage = xi.summon.avatarFinalAdjustments(damage, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.EARTH, 1)
 

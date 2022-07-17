@@ -16,7 +16,7 @@ end
 ability_object.onPetAbility = function(target, pet, skill)
     local numhits = 3
     local accmod = 1
-    local dmgmod = 10
+    local dmgmod = 6
     local dmgmodsubsequent = 1
 
     local totaldamage = 0

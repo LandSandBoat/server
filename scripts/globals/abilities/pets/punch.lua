@@ -15,7 +15,7 @@ end
 ability_object.onPetAbility = function(target, pet, skill)
     local numhits = 1
     local accmod = 1
-    local dmgmod = 3.5
+    local dmgmod = 3
 
     local totaldamage = 0
     local damage = xi.summon.avatarPhysicalMove(pet, target, skill, numhits, accmod, dmgmod, 0, xi.mobskills.magicalTpBonus.NO_EFFECT, 1, 2, 3)

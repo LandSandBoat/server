@@ -14,8 +14,13 @@ end
 ability_object.onPetAbility = function(target, pet, skill)
     local numhits = 1
     local accmod = 1
-    local dmgmod = 12
-    local dmgmodsubsequent = 0
+    local dmgmod = 7.25
+
+    if skill:getTP() == 3000 then
+        dmgmod = 11.25
+    end
+
+    local dmgmodsubsequent = 1
     local totaldamage = 0
     local damage = xi.summon.avatarPhysicalMove(pet, target, skill, numhits, accmod, dmgmod, dmgmodsubsequent, xi.mobskills.magicalTpBonus.NO_EFFECT, 1, 2, 3)
     totaldamage = xi.summon.avatarFinalAdjustments(damage.dmg, pet, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, numhits)
