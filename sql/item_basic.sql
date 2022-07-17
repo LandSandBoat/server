@@ -7568,7 +7568,7 @@ INSERT INTO `item_basic` VALUES (10146,961,'cipher_of_kukkis_alter_ego','cipher_
 INSERT INTO `item_basic` VALUES (10147,962,'cipher_of_margrets_alter_ego','cipher_margret',1,61504,0,0,0);
 INSERT INTO `item_basic` VALUES (10148,938,'cipher_of_gilgameshs_alter_ego','cipher_gilgamesh',1,61504,0,0,0);
 INSERT INTO `item_basic` VALUES (10149,939,'cipher_of_areuhats_alter_ego','cipher_areuhat',1,61504,0,0,0);
-INSERT INTO `item_basic` VALUES (10150,943,'cipher_of_lhes_alter_ego','cipher_lhe',1,61504,0,0,0);
+INSERT INTO `item_basic` VALUES (10150,964,'cipher_of_lhes_alter_ego','cipher_lhe',1,61504,0,0,0);
 INSERT INTO `item_basic` VALUES (10151,966,'cipher_of_mayakovs_alter_ego','cipher_mayakov',1,61504,0,0,0);
 INSERT INTO `item_basic` VALUES (10152,967,'cipher_of_qultadas_alter_ego','cipher_qultada',1,61504,0,0,0);
 INSERT INTO `item_basic` VALUES (10153,968,'cipher_of_adelheids_alter_ego','cipher_adelheid',1,61504,0,0,0);
