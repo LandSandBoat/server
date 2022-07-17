@@ -778,8 +778,8 @@ xi.quest.id =
         SAY_IT_WITH_A_HANDBAG            = 41, -- Can be completed, but reward latent not implemented
         QUELLING_THE_STORM               = 42,
         HONOR_UNDER_FIRE                 = 43,
-        THE_PRICE_OF_VALOR               = 44,
-        BONDS_THAT_NEVER_DIE             = 45,
+        THE_PRICE_OF_VALOR               = 44, -- + Converted
+        BONDS_THAT_NEVER_DIE             = 45, -- + Converted
         THE_LONG_MARCH_NORTH             = 46,
         THE_FORBIDDEN_PATH               = 47,
         A_JEWELERS_LAMENT                = 48,
@@ -1245,8 +1245,8 @@ local function getVarPrefix(areaId, questId)
 end
 
 -- Interaction Framework Helper Functions
-xi.quest.addVar = function(player, areaId, questId, name, value)
-    return player:addCharVar(getVarPrefix(areaId, questId) .. name, value)
+xi.quest.incrementVar = function(player, areaId, questId, name, value)
+    return player:incrementCharVar(getVarPrefix(areaId, questId) .. name, value)
 end
 
 xi.quest.getVar = function(player, areaId, questId, name)

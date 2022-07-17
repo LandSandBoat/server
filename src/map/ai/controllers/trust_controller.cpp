@@ -25,8 +25,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../../ability.h"
 #include "../../ai/helpers/gambits_container.h"
 #include "../../ai/states/despawn_state.h"
-#include "../../ai/states/range_state.h"
 #include "../../ai/states/magic_state.h"
+#include "../../ai/states/range_state.h"
 #include "../../enmity_container.h"
 #include "../../entities/charentity.h"
 #include "../../entities/trustentity.h"
@@ -35,6 +35,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../../packets/char.h"
 #include "../../recast_container.h"
 #include "../../status_effect_container.h"
+#include "../../utils/charutils.h"
 #include "../ai_container.h"
 
 CTrustController::CTrustController(CCharEntity* PChar, CTrustEntity* PTrust)
@@ -204,7 +205,25 @@ void CTrustController::DoRoamTick(time_point tick)
     auto* PMaster              = static_cast<CCharEntity*>(POwner->PMaster);
     auto  masterLastAttackTime = static_cast<CPlayerController*>(PMaster->PAI->GetController())->getLastAttackTime();
     bool  masterMeleeSwing     = masterLastAttackTime > server_clock::now() - 1s;
-    bool  trustEngageCondition = PMaster->GetBattleTarget() && masterMeleeSwing;
+
+    bool trustEngageCondition = false;
+    // NOTE: charvars are now cached, this is essentially a localvar read now.
+    switch (charutils::GetCharVar(PMaster, "TrustEngageType"))
+    {
+        case 1: // Master engages a monster, no melee swing required
+        {
+            trustEngageCondition = PMaster->GetBattleTarget();
+            break;
+        }
+        case 0: // Nothing set
+            [[fallthrough]];
+        default: // Something invalid set
+        {
+            // Default retail behaviour: Master engages a monster and executes a melee swing
+            trustEngageCondition = PMaster->GetBattleTarget() && masterMeleeSwing;
+            break;
+        }
+    }
 
     if (PMaster->PAI->IsEngaged() && trustEngageCondition)
     {
@@ -219,15 +238,19 @@ void CTrustController::DoRoamTick(time_point tick)
     {
         if (POtherTrust != POwner && distance(POtherTrust->loc.p, POwner->loc.p) < 1.0f && !POwner->PAI->PathFind->IsFollowingPath())
         {
-            auto       diff_angle = worldAngle(POwner->loc.p, POtherTrust->loc.p) + 64;
-            auto       amount     = (currentPartyPos % 2) ? 1.0f : -1.0f;
-            position_t new_pos    = {
-                POwner->loc.p.x - (cosf(rotationToRadian(diff_angle)) * amount),
-                POtherTrust->loc.p.y,
-                POwner->loc.p.z + (sinf(rotationToRadian(diff_angle)) * amount),
-                0,
-                0,
+            auto diff_angle = worldAngle(POwner->loc.p, POtherTrust->loc.p) + 64;
+            auto amount     = (currentPartyPos % 2) ? 1.0f : -1.0f;
+
+            // clang-format off
+            position_t new_pos =
+            {
+                   POwner->loc.p.x - (cosf(rotationToRadian(diff_angle)) * amount),
+                   POtherTrust->loc.p.y,
+                   POwner->loc.p.z + (sinf(rotationToRadian(diff_angle)) * amount),
+                   0,
+                   0,
             };
+            // clang-format on
 
             if (POwner->PAI->PathFind->ValidPosition(new_pos) && POwner->PAI->PathFind->PathAround(new_pos, RoamDistance, PATHFLAG_RUN | PATHFLAG_WALLHACK))
             {
@@ -282,6 +305,7 @@ void CTrustController::Declump(CCharEntity* PMaster, CBattleEntity* PTarget)
             auto diffAngle  = worldAngle(POwner->loc.p, PTarget->loc.p) + 64;
             auto moveAmount = xirand::GetRandomNumber(0.0f, 1.5f) * ((currentPartyPos % 2) ? 1.0f : -1.0f);
 
+            // clang-format off
             position_t newPos =
             {
                 POwner->loc.p.x - (cosf(rotationToRadian(diffAngle)) * moveAmount),
@@ -290,6 +314,7 @@ void CTrustController::Declump(CCharEntity* PMaster, CBattleEntity* PTarget)
                 0,
                 0,
             };
+            // clang-format on
 
             if (POwner->PAI->PathFind->ValidPosition(newPos))
             {
@@ -417,10 +442,11 @@ bool CTrustController::Cast(uint16 targid, SpellID spellid)
         targid = POwner->targid;
     }
 
-    auto  PTarget      = (CBattleEntity*)POwner->GetEntity(targid, TYPE_MOB | TYPE_PC | TYPE_PET | TYPE_TRUST);
-    auto  PSpellFamily = PSpell->getSpellFamily();
-    bool  canCast      = true;
+    auto PTarget      = (CBattleEntity*)POwner->GetEntity(targid, TYPE_MOB | TYPE_PC | TYPE_PET | TYPE_TRUST);
+    auto PSpellFamily = PSpell->getSpellFamily();
+    bool canCast      = true;
 
+    // clang-format off
     static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
     {
         if (PMember->objtype == TYPE_TRUST && PMember->PAI->IsCurrentState<CMagicState>())
@@ -465,6 +491,7 @@ bool CTrustController::Cast(uint16 targid, SpellID spellid)
             }
         }
     });
+    // clang-format on
 
     if (!canCast)
     {

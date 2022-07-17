@@ -23,16 +23,16 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 struct search_req
 {
-    uint16   zoneid[10];
-    uint8    jobid;
-    uint8    minlvl;
-    uint8    maxlvl;
-    uint8    race;
-    uint8    nation;
-    uint8    minRank;
-    uint8    maxRank;
-    uint32   flags;
-    string_t name;
-    uint8    nameLen;
-    uint8    commentType;
+    uint16      zoneid[10];
+    uint8       jobid;
+    uint8       minlvl;
+    uint8       maxlvl;
+    uint8       race;
+    uint8       nation;
+    uint8       minRank;
+    uint8       maxRank;
+    uint32      flags;
+    std::string name;
+    uint8       nameLen;
+    uint8       commentType;
 };

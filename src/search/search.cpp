@@ -85,12 +85,12 @@ int32 ah_cleanup(time_point tick, CTaskMgr::CTask* PTask);
 
 void TCPComm(SOCKET socket);
 
-extern void        HandleSearchRequest(CTCPRequestPacket& PTCPRequest);
-extern void        HandleSearchComment(CTCPRequestPacket& PTCPRequest);
-extern void        HandleGroupListRequest(CTCPRequestPacket& PTCPRequest);
-extern void        HandleAuctionHouseHistory(CTCPRequestPacket& PTCPRequest);
-extern void        HandleAuctionHouseRequest(CTCPRequestPacket& PTCPRequest);
-extern search_req  _HandleSearchRequest(CTCPRequestPacket& PTCPRequest);
+extern void       HandleSearchRequest(CTCPRequestPacket& PTCPRequest);
+extern void       HandleSearchComment(CTCPRequestPacket& PTCPRequest);
+extern void       HandleGroupListRequest(CTCPRequestPacket& PTCPRequest);
+extern void       HandleAuctionHouseHistory(CTCPRequestPacket& PTCPRequest);
+extern void       HandleAuctionHouseRequest(CTCPRequestPacket& PTCPRequest);
+extern search_req _HandleSearchRequest(CTCPRequestPacket& PTCPRequest);
 
 extern std::unique_ptr<ConsoleService> gConsoleService;
 
@@ -477,8 +477,8 @@ void HandleAuctionHouseRequest(CTCPRequestPacket& PTCPRequest)
     // 7 - defense
     // 8 - resistance
     // 9 - name
-    string_t OrderByString = "ORDER BY";
-    uint8    paramCount    = ref<uint8>(data, 0x12);
+    std::string OrderByString = "ORDER BY";
+    uint8       paramCount    = ref<uint8>(data, 0x12);
     for (uint8 i = 0; i < paramCount; ++i) // параметры сортировки предметов
     {
         uint8 param = ref<uint32>(data, 0x18 + 8 * i);

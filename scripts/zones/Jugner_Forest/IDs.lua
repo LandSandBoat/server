@@ -67,8 +67,10 @@ zones[xi.zone.JUGNER_FOREST] =
             [17203447] = 17203448,
         },
 
-        KING_ARTHRO = 17203216,
-        FRAELISSA   = 17203447,
+        KING_ARTHRO          = 17203216,
+        FRAELISSA            = 17203447,
+        FRADUBIO             = 17203448,
+        METEORMAULER         = 17203414,
 
         VOIDWALKER =
         {
