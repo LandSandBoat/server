@@ -4,7 +4,8 @@
 -- Spawns Azdaja
 -- !pos -568 -167 138 254
 -----------------------------------
-require("scripts/globals/abyssea")
+require('scripts/globals/abyssea')
+require('scripts/globals/keyitems')
 -----------------------------------
 local entity = {}
 
@@ -13,7 +14,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    -- xi.abyssea.qmOnTrigger(player, npc)
+    local ID = zones[player:getZoneID()]
+    xi.abyssea.qmOnTrigger(player, npc, ID.mob.AZDAJA, { xi.ki.VACANT_BUGARD_EYE })
 end
 
 entity.onEventUpdate = function(player, csid, option)
