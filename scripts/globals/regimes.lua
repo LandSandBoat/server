@@ -17,6 +17,7 @@ require("scripts/globals/zone")
 require("scripts/globals/msg")
 require("scripts/globals/roe")
 require("scripts/globals/npc_util")
+require("scripts/globals/extravaganza")
 -----------------------------------
 
 xi = xi or {}
@@ -1051,10 +1052,9 @@ xi.regime.clearRegimeVars = function(player)
 end
 
 xi.regime.bookOnTrigger = function(player, regimeType)
-    -- Trust Alter Ego Extravaganza Check
-    local cipher = 0
-    local enable = xi.settings.main.ENABLE_TRUST_ALTER_EGO_EXTRAVAGANZA
-    if enable >= 2 then -- 2 = Spring/Fall Campaign 3 = both Campaigns
+    local cipher = 0 -- Trust Alter Ego Extravaganza
+    local active = xi.extravaganza.campaignActive()
+    if active == xi.extravaganza.campaign.SPRING_FALL or active == xi.extravaganza.campaign.BOTH then
         cipher = 3
     end
 
@@ -1309,13 +1309,13 @@ xi.regime.bookOnEventFinish = function(player, option, regimeType)
             end,
 
             ['CIPHER_SAKURA'] = function()
-                if not(npcUtil.giveItem(player, xi.items.CIPHER_OF_SAKURAS_ALTER_EGO)) then
+                if not npcUtil.giveItem(player, xi.items.CIPHER_OF_SAKURAS_ALTER_EGO) then
                     player:addCurrency("valor_point", 300) --refund player if they can't obtain
                 end
             end,
 
             ['CIPHER_KORU'] = function()
-                if not (npcUtil.giveItem(player, xi.items.CIPHER_OF_KORU_MORUS_ALTER_EGO)) then
+                if not npcUtil.giveItem(player, xi.items.CIPHER_OF_KORU_MORUS_ALTER_EGO) then
                     player:addCurrency("valor_point", 300) --refund player if they can't obtain
                 end
             end,
