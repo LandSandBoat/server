@@ -285,7 +285,13 @@ INSERT INTO `mob_spawn_mods` VALUES (17289654,55,168,1);
 INSERT INTO `mob_spawn_mods` VALUES (17289655,55,168,1);
 INSERT INTO `mob_spawn_mods` VALUES (16916813,55,180,1);
 INSERT INTO `mob_spawn_mods` VALUES (17436964,55,180,1);
+
+-- [Geush Urvan]
+-- Values taken from wiki (http://ffxiclopedia.wikia.com/wiki/Geush_Urvan)
+INSERT INTO `mob_spawn_mods` VALUES (16798078,1,20000,1);
+INSERT INTO `mob_spawn_mods` VALUES (16798078,2,27300,1);
 INSERT INTO `mob_spawn_mods` VALUES (16798078,55,1800,1);
+
 INSERT INTO `mob_spawn_mods` VALUES (17330309,55,120,1);
 INSERT INTO `mob_spawn_mods` VALUES (17330310,55,120,1);
 INSERT INTO `mob_spawn_mods` VALUES (17330311,55,120,1);

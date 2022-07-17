@@ -5032,7 +5032,13 @@ INSERT INTO `mob_spell_lists` VALUES('PyuuTheSpatemaker',502,172,1,255); -- wate
 -- Mucoid Mass (503)
 INSERT INTO `mob_spell_lists` VALUES('Mucoid_Mass', 503, 242, 1, 255); -- absorb-acc (1~255)
 
--- Next Avail 504
+-- Guesh Urvan (504)
+INSERT INTO `mob_spell_lists` VALUES('Guesh_Urvan', 504, 152, 1, 255); -- blizzard iv (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Guesh_Urvan', 504, 181, 1, 255); -- blizzaga iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Guesh_Urvan', 504, 356, 1, 255); -- paralyga (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Guesh_Urvan', 504, 362, 1, 255); -- bindga (1~255)
+
+-- Next Avail 505
 
 -- AirSkyBoat Specific Starts at 5000
 -- 5000 -> 5010 is Era Dynamis

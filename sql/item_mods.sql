@@ -27205,6 +27205,7 @@ INSERT INTO `item_mods` VALUES (15464,68,7); -- EVA: 7
 INSERT INTO `item_mods` VALUES (15465,1,7);  -- DEF: 7
 INSERT INTO `item_mods` VALUES (15465,27,4); -- ENMITY: 4
 INSERT INTO `item_mods` VALUES (15465,68,9); -- EVA: 9
+INSERT INTO `item_mods` VALUES (15465,166,50); -- ENEMYCRITRATE: +50%
 
 -- Birdman Cape
 INSERT INTO `item_mods` VALUES (15466,1,7);   -- DEF: 7

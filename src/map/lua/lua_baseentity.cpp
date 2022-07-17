@@ -213,6 +213,9 @@ void CLuaBaseEntity::showText(CLuaBaseEntity* mob, uint16 messageID, sol::object
  *  Purpose : Displays text to a target PC (private)
  *  Example : player:messageText(target, ID.text.NOT_HAVE_ENOUGH_GP, false, 6);
  *  Notes   : Mainly used for sending retail text messages
+ *          : Value 1: Target of message (self select entity to send message to everyone in range)
+ *          : Value 2: Message ID
+ *          : Value 3: Set false to remove name at start of message
  ************************************************************************/
 
 void CLuaBaseEntity::messageText(CLuaBaseEntity* PLuaBaseEntity, uint16 messageID, sol::object const& arg2, sol::object const& arg3)
