@@ -9,22 +9,30 @@ require('scripts/globals/npc_util')
 xi = xi or {}
 xi.extravaganza = {}
 
-local enabled = xi.settings.main.ENABLE_TRUST_ALTER_EGO_EXTRAVAGANZA
+xi.extravaganza.campaign =
+{
+    NONE        =   0,
+    SUMMER_NY   =   1,
+    SPRING_FALL =   2,
+    BOTH        =   3,
+}
+
+xi.extravaganza.campaignActive = function()
+    return xi.settings.main.ENABLE_TRUST_ALTER_EGO_EXTRAVAGANZA
+end
 
 -----------------------------------------------
 -- Determine Which Ciphers to Grant by NPC Name
 -----------------------------------------------
 
 xi.extravaganza.getShadowEraCiphers = function(npc)
-    local ciphers = {}
-    switch (npc:getName()): caseof
+    local cipherNpcs =
     {
-        ["Shixo"]   = function (x) ciphers={xi.items.CIPHER_OF_NOILLURIES_ALTER_EGO, xi.items.CIPHER_OF_LEONOYNES_ALTER_EGO} end,
-        ["Shenni"]  = function (x) ciphers={xi.items.CIPHER_OF_ELIVIRAS_ALTER_EGO, xi.items.CIPHER_OF_MAXIMILIANS_ALTER_EGO} end,
-        ["Shuvo"]   = function (x) ciphers={xi.items.CIPHER_OF_LHUS_ALTER_EGO, xi.items.CIPHER_OF_KAYEELS_ALTER_EGO} end,
+        ["Shixo"]   =   { xi.items.CIPHER_OF_NOILLURIES_ALTER_EGO, xi.items.CIPHER_OF_LEONOYNES_ALTER_EGO },
+        ["Shenni"]  =   { xi.items.CIPHER_OF_ELIVIRAS_ALTER_EGO, xi.items.CIPHER_OF_MAXIMILIANS_ALTER_EGO },
+        ["Shuvo"]   =   { xi.items.CIPHER_OF_LHUS_ALTER_EGO, xi.items.CIPHER_OF_KAYEELS_ALTER_EGO },
     }
-
-    return ciphers
+    return cipherNpcs[npc:getName()]
 end
 
 ----------------------------------------------------------
@@ -32,10 +40,11 @@ end
 ----------------------------------------------------------
 
 xi.extravaganza.shadowEraTrigger = function(player, npc, notes)
-    if enabled == 1 or enabled == 3 then -- Available during Summer/NY or when set to have all enabled
-        ciphers = xi.extravaganza.getShadowEraCiphers(npc)
-        player:setLocalVar("ShadowCipher1", ciphers[1])
-        player:setLocalVar("ShadowCipher2", ciphers[2])
+    local active = xi.extravaganza.campaignActive()
+    if active == xi.extravaganza.campaign.SUMMER_NY or active == xi.extravaganza.campaign.BOTH then
+        local cipherids = xi.extravaganza.getShadowEraCiphers(npc)
+        player:setLocalVar("ShadowCipher1", cipherids[1])
+        player:setLocalVar("ShadowCipher2", cipherids[2])
         player:startEvent(7300, 0, notes, 6)
     else
         -- TODO: Need Cap of CS with params when event not active
@@ -52,6 +61,7 @@ xi.extravaganza.shadowEraFinish = function(player, csid, option)
     local ID = zones[player:getZoneID()]
     local notes = player:getCurrency("allied_notes")
     local cipherid = {player:getLocalVar("ShadowCipher1"), player:getLocalVar("ShadowCipher2")}
+    local choice = 0
 
     if csid == 7300 then -- All 3 Shadow Era Cipher vendors share the same CSID and options
         if option == 65537 then -- First Cipher
