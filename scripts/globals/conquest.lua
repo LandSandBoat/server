@@ -11,6 +11,7 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/zone")
 require("scripts/globals/items")
+require("scripts/globals/extravaganza")
 -----------------------------------
 
 xi = xi or {}
@@ -629,9 +630,7 @@ local function getArg1(player, guardNation, guardType)
     local pNation = player:getNation()
     local output = 0
     local signet = 0
-    local enabled = xi.settings.main.ENABLE_TRUST_ALTER_EGO_EXTRAVAGANZA -- Alter Ego Extravaganza
-    -- 0 = disabled, 1 = summer/ny, 2 = spring/fall, 3 = both
-    local extravaganza = enabled * 20 * 65536
+    local cipher = xi.extravaganza.campaignActive() * 20 * 65536
 
     if guardNation == xi.nation.WINDURST then
         output = 33
@@ -664,7 +663,7 @@ local function getArg1(player, guardNation, guardType)
         output = 1808
     end
 
-    return output + extravaganza
+    return output + cipher
 end
 
 -- arg6 encodes a player's rank and nationality:
