@@ -52120,16 +52120,17 @@ INSERT INTO `item_mods` VALUES (23795,1,1); -- DEF: 1
 INSERT INTO `item_mods` VALUES (23796,1,1); -- DEF: 1
 
 -- Poroggo Cass. +1
-INSERT INTO `item_mods` VALUES (23804,15,20);   -- FIRE_RES: 20
-INSERT INTO `item_mods` VALUES (23804,16,20);   -- ICE_RES: 20
-INSERT INTO `item_mods` VALUES (23804,17,20);   -- WIND_RES: 20
-INSERT INTO `item_mods` VALUES (23804,18,20);   -- EARTH_RES: 20
-INSERT INTO `item_mods` VALUES (23804,19,20);   -- THUNDER_RES: 20
-INSERT INTO `item_mods` VALUES (23804,20,20);   -- WATER_RES: 20
-INSERT INTO `item_mods` VALUES (23804,21,20);   -- LIGHT_RES: 20
-INSERT INTO `item_mods` VALUES (23804,22,20);   -- DARK_RES: 20
-INSERT INTO `item_mods` VALUES (23804,416,1000);   -- occasionaly nullify physical dmg
-INSERT INTO `item_mods` VALUES (23804,476,1000);   -- occasionaly nullify magic dmg
+-- Todo get exact occ_null percent from retail
+INSERT INTO `item_mods` VALUES (23804,958,20); -- STATUSRES: 20
+INSERT INTO `item_mods` VALUES (23804,416,100);   -- NULL_PHYSICAL_DAMAGE: 10 
+INSERT INTO `item_mods` VALUES (23804,467,100);   -- FIRE_NULL: 10 
+INSERT INTO `item_mods` VALUES (23804,468,100);   -- ICE_NULL: 10 
+INSERT INTO `item_mods` VALUES (23804,469,100);   -- WIND_NULL: 10 
+INSERT INTO `item_mods` VALUES (23804,470,100);   -- EARTH_NULL: 10 
+INSERT INTO `item_mods` VALUES (23804,471,100);   -- LTNG_NULL: 10 
+INSERT INTO `item_mods` VALUES (23804,472,100);   -- WATER_NULL: 10 
+INSERT INTO `item_mods` VALUES (23804,473,100);   -- LIGHT_NULL: 10 
+INSERT INTO `item_mods` VALUES (23804,474,100);   -- DARK_NULL: 10 
 
 -- Republic Platinum Medal
 INSERT INTO `item_mods` VALUES (25415,8,10);  -- STR: 10
