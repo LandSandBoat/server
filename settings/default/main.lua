@@ -121,7 +121,7 @@ xi.settings.main =
     ENABLE_TRUST_QUESTS  = 1,
     -- Extravaganza: 0 = disabled, 1 = summer/ny, 2 = spring/autumn, 3 = both
     ENABLE_TRUST_ALTER_EGO_EXTRAVAGANZA = 0,
-    -- Expo: 0 disabled, 1 = expo - HPP/MPP/Status Resistance, 2 = expo plus
+    -- Expo: 0 disabled, 1 = expo - HPP/MPP/Status Resistance, 2 = expo plus (not implemented)
     ENABLE_TRUST_ALTER_EGO_EXPO = 0,
 
     HARVESTING_BREAK_CHANCE = 33, -- % chance for the sickle to break during harvesting.  Set between 0 and 100.
