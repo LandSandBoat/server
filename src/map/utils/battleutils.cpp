@@ -4907,7 +4907,7 @@ namespace battleutils
             charmerBSTlevel = charmerLvl;
         }
 
-        // FIXME: Level and CHR ratios are complete guesses
+        // TODO: Obtain and adjust with accurate Level and CHR data.
         const float levelRatio = (charmerBSTlevel - targetLvl) / 100.f;
         charmChance *= (1.f + levelRatio);
 

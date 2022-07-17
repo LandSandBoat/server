@@ -4224,10 +4224,10 @@ void SmallPacket0x071(map_session_data_t* const PSession, CCharEntity* const PCh
                             sql->AffectedRows())
                         {
                             ShowDebug("%s has removed %s from party", PChar->GetName(), data[0x0C]);
-                            uint8 data[8]{};
-                            ref<uint32>(data, 0) = PChar->PParty->GetPartyID();
-                            ref<uint32>(data, 4) = id;
-                            message::send(MSG_PT_RELOAD, data, sizeof data, nullptr);
+                            uint8 removeData[8]{};
+                            ref<uint32>(removeData, 0) = PChar->PParty->GetPartyID();
+                            ref<uint32>(removeData, 4) = id;
+                            message::send(MSG_PT_RELOAD, removeData, sizeof removeData, nullptr);
                         }
                     }
                 }
@@ -4310,10 +4310,10 @@ void SmallPacket0x071(map_session_data_t* const PSession, CCharEntity* const PCh
                                 sql->AffectedRows())
                             {
                                 ShowDebug("%s has removed %s party from alliance", PChar->GetName(), data[0x0C]);
-                                uint8 data[8]{};
-                                ref<uint32>(data, 0) = PChar->PParty->GetPartyID();
-                                ref<uint32>(data, 4) = id;
-                                message::send(MSG_PT_RELOAD, data, sizeof data, nullptr);
+                                uint8 removeData[8]{};
+                                ref<uint32>(removeData, 0) = PChar->PParty->GetPartyID();
+                                ref<uint32>(removeData, 4) = id;
+                                message::send(MSG_PT_RELOAD, removeData, sizeof removeData, nullptr);
                             }
                         }
                     }
@@ -4516,9 +4516,9 @@ void SmallPacket0x077(map_session_data_t* const PSession, CCharEntity* const PCh
             {
                 ShowDebug("(Alliance)Changing leader to %s", data[0x04]);
                 PChar->PParty->m_PAlliance->assignAllianceLeader((const char*)data[0x04]);
-                uint8 data[4]{};
-                ref<uint32>(data, 0) = PChar->PParty->m_PAlliance->m_AllianceID;
-                message::send(MSG_PT_RELOAD, data, sizeof data, nullptr);
+                uint8 leaderData[4]{};
+                ref<uint32>(leaderData, 0) = PChar->PParty->m_PAlliance->m_AllianceID;
+                message::send(MSG_PT_RELOAD, leaderData, sizeof leaderData, nullptr);
             }
         }
         break;
