@@ -31,10 +31,15 @@ if (UNIX)
         DOWNLOAD_ONLY YES
     )
     if (LuaJIT_ADDED)
-        message(STATUS "Modifying LuaJIT build flags (adding -DLUAJIT_NO_UNWIND=1)")
-        file(READ "${LuaJIT_SOURCE_DIR}/src/Makefile" FILE_CONTENTS)
-        string(REPLACE "CCOPT= -O2 -fomit-frame-pointer\n" "CCOPT= -O2 -fomit-frame-pointer -DLUAJIT_NO_UNWIND=1\n" FILE_CONTENTS "${FILE_CONTENTS}")
-        file(WRITE "${LuaJIT_SOURCE_DIR}/src/Makefile" "${FILE_CONTENTS}")
+
+        # LuaJIT does not run properly on x86_84 systems without -DLUAJIT_NO_UNWIND=1 which disables external unwinding.
+        # Conversely, LuaJIT does not build properly on aarch64 *with* -DLUAJIT_NO_UNWIND=1, so only change the makefile where we know we need it.
+        if (${CMAKE_SYSTEM_PROCESSOR} MATCHES "x86_64")
+            message(STATUS "Modifying LuaJIT build flags (adding -DLUAJIT_NO_UNWIND=1)")
+            file(READ "${LuaJIT_SOURCE_DIR}/src/Makefile" FILE_CONTENTS)
+            string(REPLACE "CCOPT= -O2 -fomit-frame-pointer\n" "CCOPT= -O2 -fomit-frame-pointer -fPIC -DLUAJIT_NO_UNWIND=1\n" FILE_CONTENTS "${FILE_CONTENTS}")
+            file(WRITE "${LuaJIT_SOURCE_DIR}/src/Makefile" "${FILE_CONTENTS}")
+        endif()
 
         # LuaJIT has no CMake support, so we break out to using make on it's own
         message(STATUS "Building LuaJIT from src")
