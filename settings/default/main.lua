@@ -126,12 +126,12 @@ xi.settings.main =
 
     TRUST_ALTER_EGO_EXTRAVAGANZA_MESSAGE =
         "\n \n" ..
-        "[ The Alter Ego Extravaganza Campaign is active! ]\n" ..
+        "\129\153\129\154 The Alter Ego Extravaganza Campaign is active! \129\154\129\153\n" ..
         "This is an excellent time to fill out your roster of Trusts!",
 
     TRUST_ALTER_EGO_EXPO_MESSAGE =
         "\n \n" ..
-        "[ The Alter Ego Expo Campaign is active! ]\n" ..
+        "\129\153\129\154 The Alter Ego Expo Campaign is active! \129\154\129\153\n" ..
         "Trusts gain the benefits of Increased HP, MP, and Status Resistances!",
 
     HARVESTING_BREAK_CHANCE = 33, -- % chance for the sickle to break during harvesting.  Set between 0 and 100.
