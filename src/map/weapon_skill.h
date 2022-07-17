@@ -87,7 +87,7 @@ private:
     uint8    m_mainOnly;
     uint8    m_unlockId;
 
-    string_t m_name;
+    std::string m_name;
 };
 
 #endif

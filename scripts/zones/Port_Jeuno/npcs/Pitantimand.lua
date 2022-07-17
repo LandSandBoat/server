@@ -49,8 +49,8 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 64 then
-        player:addCharVar("saveTheClockTowerVar", 1)
-        player:addCharVar("saveTheClockTowerNPCz2", 512)
+        player:incrementCharVar("saveTheClockTowerVar", 1)
+        player:incrementCharVar("saveTheClockTowerNPCz2", 512)
     end
 end
 

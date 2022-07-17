@@ -46,6 +46,9 @@ zones[xi.zone.SOUTHERN_SAN_DORIA_S] =
         ALLIED_SIGIL            = 12924, -- You have received the Allied Sigil!
         DOOR_IS_FIRMLY_LOCKED   = 13550, -- The door is firmly locked...
         CONCERNED_FOR_WOUNDED   = 13679, -- Concerned for the wounded Sir Gaelise, Lilisette and Portia have been paying him regular visits as of late.  Alexei Mayakov suggests that the Chateau d'Oraguille is where the two of them are likely to be.
+        MUST_GATHER_SIGNATURES  = 14009, -- You must gather signatures from at least <number> knights of the Kingdom.
+        CURRENT_PETITIONS       = 14010, -- Current <keyitem>: <number>.
+        HAVE_GATHERED_SIGNATURE = 14281, -- You have gathered <number> [signature/signatures] for the <keyitem>!
         RETRIEVE_DIALOG_ID      = 15587, -- You retrieve <item> from the porter moogle's care.
         COMMON_SENSE_SURVIVAL   = 15661, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },

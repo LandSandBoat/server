@@ -457,7 +457,7 @@ INSERT INTO `status_effects` VALUES (427,'ramuhs_favor',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (428,'leviathans_favor',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (429,'fenrirs_favor',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (430,'diaboloss_favor',32,0,0,0,0,0,0,0,0);
-INSERT INTO `status_effects` VALUES (431,'avatars_favor',32,0,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (431,'avatars_favor',171966753,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (432,'multi_strikes',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (433,'double_shot',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (434,'transcendency',256,0,0,0,0,0,0,0,0);

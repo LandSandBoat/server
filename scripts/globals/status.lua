@@ -950,7 +950,7 @@ xi.mod =
     ENMITY_LOSS_REDUCTION           = 427,
     MATT                            = 28,
     MDEF                            = 29,
-    MACC                            = 30,
+    MACC                            = 30, -- This is NOT item level "magic accuracy skill" ! That happens in item_weapon.sql instead
     MEVA                            = 31,
     FIREATT                         = 32,
     ICEATT                          = 33,
@@ -992,6 +992,8 @@ xi.mod =
     MPHEAL                          = 71,
     HPHEAL                          = 72,
     STORETP                         = 73,
+
+    -- These are NOT item Level skill, they are skill in your status menu. iLvl "skill" happens in item_weapon.sql
     HTH                             = 80,
     DAGGER                          = 81,
     SWORD                           = 82,
@@ -1004,6 +1006,7 @@ xi.mod =
     GKATANA                         = 89,
     CLUB                            = 90,
     STAFF                           = 91,
+
     RAMPART_DURATION                = 92,  -- Rampart duration in seconds
     FLEE_DURATION                   = 93,  -- Flee duration in seconds
     MEDITATE_DURATION               = 94,  -- Meditate duration in seconds
@@ -1013,6 +1016,8 @@ xi.mod =
     STALWART_SOUL                   = 907, -- Reduces damage taken from Souleater
     BOOST_EFFECT                    = 97,  -- Boost power in tenths
     CAMOUFLAGE_DURATION             = 98,  -- Camouflage duration in percents
+
+    -- These are NOT item Level skill, they are skill in your status menu. iLvl "skill" happens in item_weapon.sql
     AUTO_MELEE_SKILL                = 101,
     AUTO_RANGED_SKILL               = 102,
     AUTO_MAGIC_SKILL                = 103,
@@ -1226,6 +1231,17 @@ xi.mod =
     TP_BONUS                        = 345,
     PERPETUATION_REDUCTION          = 346,
 
+    -- Dragoon
+    WYVERN_LVL_BONUS                = 1043, -- Wyvern: Lv.+ (Increases wyvern's base level above 99)
+
+    -- Summoner
+    AVATAR_LVL_BONUS                = 1040, -- Avatar: Lv. ###/+ (Increases all avatar's base level above 99)
+    CARBUNCLE_LVL_BONUS             = 1041, -- Carbuncle: Lv.+ (Increases Carbuncle's base level above 99)
+    CAIT_SITH_LVL_BONUS             = 1042, -- Cait Sith: Lv.+ (Increases Cait Sith's base level above 99)
+
+    -- Puppetmaster
+    AUTOMATON_LVL_BONUS             = 1044, -- Automaton: Lv. (Increases automaton's base level above 99)
+
     -- Geomancer
     FULL_CIRCLE                     = 1025, -- Increases the initial multiplier on MP returned via Full Circle
     BOLSTER_EFFECT                  = 1028, -- Adds bonus duration as +N seconds
@@ -1395,6 +1411,8 @@ xi.mod =
     MAXIMUM_SONGS_BONUS             = 453, --
     SONG_DURATION_BONUS             = 454, --
     SONG_SPELLCASTING_TIME          = 455, --
+
+    AVATARS_FAVOR_ENHANCE           = 630, -- Adds 1 rank to avatars favor
 
     QUICK_DRAW_DMG                  = 411, --
     QUICK_DRAW_MACC                 = 191, -- Quick draw magic accuracy

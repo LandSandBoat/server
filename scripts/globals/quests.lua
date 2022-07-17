@@ -1245,8 +1245,8 @@ local function getVarPrefix(areaId, questId)
 end
 
 -- Interaction Framework Helper Functions
-xi.quest.addVar = function(player, areaId, questId, name, value)
-    return player:addCharVar(getVarPrefix(areaId, questId) .. name, value)
+xi.quest.incrementVar = function(player, areaId, questId, name, value)
+    return player:incrementCharVar(getVarPrefix(areaId, questId) .. name, value)
 end
 
 xi.quest.getVar = function(player, areaId, questId, name)
