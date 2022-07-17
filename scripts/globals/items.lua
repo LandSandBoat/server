@@ -520,6 +520,7 @@ xi.items =
     HAUNTED_MULETA                  = 1824,
     PREMIUM_BAG                     = 1827,
     YAGUDO_HEADDRESS_CUTTING        = 1867,
+    SHIELD_BUG                      = 1881,
     SQUARE_OF_SILVER_BROCADE        = 1991,
     SQUARE_OF_RAINBOW_VELVET        = 1996,
     SQUARE_OF_GOLD_BROCADE          = 1999,

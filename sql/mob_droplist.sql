@@ -341,10 +341,10 @@ INSERT INTO `mob_droplist` VALUES (34,2,0,1000,838,0);   -- Spider Web (Steal)
 INSERT INTO `mob_droplist` VALUES (34,4,0,1000,838,0);   -- Spider Web (Despoil)
 
 -- ZoneID:  30 - Aiatar
-INSERT INTO `mob_droplist` VALUES (35,0,0,1000,1691,350);        -- Giant Scale (35.0%)
-INSERT INTO `mob_droplist` VALUES (35,0,0,1000,1122,270);        -- Wyvern Skin (27.0%)
-INSERT INTO `mob_droplist` VALUES (35,0,0,1000,15367,@UNCOMMON); -- Falconers Hose (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (35,0,0,1000,15370,@UNCOMMON); -- Sable Cuisses (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (35,0,0,1000,15370,@VCOMMON); -- Sable Cuisses (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (35,0,0,1000,1691,@VCOMMON);  -- Giant Scale (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (35,0,0,1000,1122,@UNCOMMON); -- Wyvern Skin (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (35,0,0,1000,15367,@RARE);    -- Falconers Hose (Rare, 5%)
 
 -- ZoneID:  77 - Aiatar
 INSERT INTO `mob_droplist` VALUES (36,0,0,1000,2286,@UNCOMMON); -- ??? Box (Uncommon, 10%)
@@ -3884,9 +3884,9 @@ INSERT INTO `mob_droplist` VALUES (417,0,0,1000,1162,@COMMON);  -- Tonberry Lant
 INSERT INTO `mob_droplist` VALUES (417,0,0,1000,1443,@RARE);    -- Pinch Of Dried Mugwort (Rare, 5%)
 
 -- ZoneID:  30 - Carmine Dobsonfly
-INSERT INTO `mob_droplist` VALUES (418,0,0,1000,15183,830); -- Dobson Bandana (83.0%)
-INSERT INTO `mob_droplist` VALUES (418,0,0,1000,14669,260); -- Jaeger Ring (26.0%)
-INSERT INTO `mob_droplist` VALUES (418,0,0,1000,15184,130); -- Voyager Sallet (13.0%)
+INSERT INTO `mob_droplist` VALUES (418,0,0,1000,15183,@UNCOMMON); -- Dobson Bandana (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (418,0,0,1000,14669,@UNCOMMON); -- Jaeger Ring (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (418,0,0,1000,15184,@RARE);     -- Voyager Sallet (Rare, 5%)
 
 -- ZoneID:  51 - Carmine Eruca
 -- ZoneID:  61 - Scoriaceous Eruca
@@ -10671,10 +10671,10 @@ INSERT INTO `mob_droplist` VALUES (1290,2,0,1000,2531,0);     -- Shard Of Obsidi
 INSERT INTO `mob_droplist` VALUES (1290,4,0,1000,4409,0);     -- Hard-Boiled Egg (Despoil)
 
 -- ZoneID:  30 - Heliodromos
-INSERT INTO `mob_droplist` VALUES (1291,0,0,1000,1690,@ALWAYS);    -- Hippogryph Tailfeather (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (1291,0,0,1000,1690,500);        -- Hippogryph Tailfeather (50.0%)
-INSERT INTO `mob_droplist` VALUES (1291,0,0,1000,1690,330);        -- Hippogryph Tailfeather (33.0%)
-INSERT INTO `mob_droplist` VALUES (1291,0,0,1000,15348,@UNCOMMON); -- Mountain Gaiters (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (1291,0,0,1000,15348,@COMMON);  -- Mountain Gaiters (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (1291,0,0,1000,1690,@UNCOMMON); -- Hippogryph Tailfeather (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (1291,0,0,1000,1690,@UNCOMMON); -- Hippogryph Tailfeather (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (1291,0,0,1000,1690,@UNCOMMON); -- Hippogryph Tailfeather (Uncommon, 10%)
 
 -- ZoneID: 118 - Helldiver
 INSERT INTO `mob_droplist` VALUES (1292,0,0,1000,847,@COMMON);     -- Bird Feather (Common, 15%)
@@ -18003,8 +18003,8 @@ INSERT INTO `mob_droplist` VALUES (2233,0,0,1000,3143,130);      -- Lancers Seal
 INSERT INTO `mob_droplist` VALUES (2234,0,0,1000,3101,180); -- Dented Skull (18.0%)
 
 -- ZoneID:  30 - Shieldtrap
-INSERT INTO `mob_droplist` VALUES (2235,0,0,1000,14885,@UNCOMMON); -- Sennight Bangles (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (2235,0,0,1000,1617,60);         -- Flytrap Leaf (6.0%)
+INSERT INTO `mob_droplist` VALUES (2235,0,0,1000,14885,@ALWAYS); -- Sennight Bangles (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (2235,0,0,1000,1617,@ALWAYS);  -- Flytrap Leaf (Always, 100%)
 
 -- ZoneID: 167 - Shii
 INSERT INTO `mob_droplist` VALUES (2236,0,0,1000,16980,900); -- Sukesada (90.0%)
