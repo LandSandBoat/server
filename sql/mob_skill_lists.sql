@@ -3841,6 +3841,12 @@ INSERT INTO `mob_skill_lists` VALUES ('Upyri',1192,1401);
 INSERT INTO `mob_skill_lists` VALUES ('Flockbock',1193,269);
 INSERT INTO `mob_skill_lists` VALUES ('Sengann',1194,253);
 INSERT INTO `mob_skill_lists` VALUES ('YalunEke',1195,567);
+INSERT INTO `mob_skill_lists` VALUES ('duendesVert',1196,393);
+INSERT INTO `mob_skill_lists` VALUES ('duendesVert',1196,395);
+INSERT INTO `mob_skill_lists` VALUES ('duendesVert',1196,1342);
+INSERT INTO `mob_skill_lists` VALUES ('duendesHoriz',1197,393);
+INSERT INTO `mob_skill_lists` VALUES ('duendesHoriz',1197,395);
+INSERT INTO `mob_skill_lists` VALUES ('duendesHoriz',1197,1341);
 
 -- Next available ID: 1192
 

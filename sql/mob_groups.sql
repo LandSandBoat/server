@@ -1055,7 +1055,7 @@ INSERT INTO `mob_groups` VALUES (36,1390,27,'Fomor_Samurai',924,0,878,0,0,44,48,
 INSERT INTO `mob_groups` VALUES (37,1388,27,'Fomor_Ranger',924,0,873,0,0,44,48,0);
 INSERT INTO `mob_groups` VALUES (38,1383,27,'Fomor_Dark_Knight',924,0,863,0,0,44,48,0);
 INSERT INTO `mob_groups` VALUES (39,1382,27,'Fomor_Black_Mage',924,0,861,0,0,44,48,0);
-INSERT INTO `mob_groups` VALUES (40,3997,27,'Tres_Duendes',86400,0,2468,0,0,42,49,0);
+INSERT INTO `mob_groups` VALUES (40,3997,27,'Tres_Duendes',0,128,2468,0,0,42,49,0);
 INSERT INTO `mob_groups` VALUES (41,1128,27,'Duendes_Amoroso',0,128,0,0,0,45,45,0);
 INSERT INTO `mob_groups` VALUES (42,1389,27,'Fomor_Red_Mage',924,0,875,0,0,44,48,0);
 INSERT INTO `mob_groups` VALUES (43,1169,27,'Eba',28800,0,739,0,0,48,48,0);

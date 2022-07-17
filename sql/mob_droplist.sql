@@ -6254,7 +6254,7 @@ INSERT INTO `mob_droplist` VALUES (738,0,0,1000,940,@ALWAYS);     -- Revival Tre
 INSERT INTO `mob_droplist` VALUES (738,0,0,1000,18714,@UNCOMMON); -- Valis Bow (Uncommon, 10%)
 
 -- ZoneID:  27 - Eba
-INSERT INTO `mob_droplist` VALUES (739,0,0,1000,14466,350); -- Fomor Tunic (35.0%)
+INSERT INTO `mob_droplist` VALUES (739,0,0,1000,14466,@VCOMMON); -- Fomor Tunic (Very Common, 24%)
 
 -- ZoneID:  61 - Ebony Pudding
 -- ZoneID:  62 - Ebony Pudding
@@ -12901,7 +12901,7 @@ INSERT INTO `mob_droplist` VALUES (1574,0,0,1000,2525,20);    -- Bottled Pixie (
 
 -- ZoneID:  27 - Mahisha
 -- ZoneID: 138 - Magnes Quadav
-INSERT INTO `mob_droplist` VALUES (1575,0,0,1000,15219,470); -- Sinister Mask (47.0%)
+INSERT INTO `mob_droplist` VALUES (1575,0,0,1000,15219,@UNCOMMON); -- Sinister Mask (Uncommon, 10%)
 
 -- ZoneID:  79 - Mahjlaef The Paintorn
 INSERT INTO `mob_droplist` VALUES (1576,0,0,1000,2630,@ALWAYS); -- Mahjlaefs Staff (Always, 100%)
@@ -19711,9 +19711,9 @@ INSERT INTO `mob_droplist` VALUES (2467,2,0,1000,897,0);    -- Scorpion Claw (St
 INSERT INTO `mob_droplist` VALUES (2467,4,0,1000,1616,0);   -- Antlion Jaw (Despoil)
 
 -- ZoneID:  27 - Tres Duendes
-INSERT INTO `mob_droplist` VALUES (2468,0,0,1000,17510,420); -- Vampiric Claws (42.0%)
-INSERT INTO `mob_droplist` VALUES (2468,0,0,1000,18007,380); -- Chiroptera Dagger (38.0%)
-INSERT INTO `mob_droplist` VALUES (2468,0,0,1000,17794,320); -- Niokiyotsuna (32.0%)
+INSERT INTO `mob_droplist` VALUES (2468,0,0,1000,17510,@VCOMMON); -- Vampiric Claws (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2468,0,0,1000,18007,@VCOMMON); -- Chiroptera Dagger (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2468,0,0,1000,17794,@VCOMMON); -- Niokiyotsuna (Very Common, 24%)
 
 -- ZoneID: 208 - Triarius X-Xv
 INSERT INTO `mob_droplist` VALUES (2469,0,0,1000,643,@ALWAYS);    -- Chunk Of Iron Ore (Always, 100%)

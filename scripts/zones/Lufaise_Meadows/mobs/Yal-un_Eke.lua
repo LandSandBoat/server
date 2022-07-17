@@ -35,3 +35,5 @@ entity.onMobDespawn = function(mob)
     mob:setLocalVar("yalunRespawn", os.time() + 3000)  -- 50 minute respawn
     DisallowRespawn(mob:getID(), true)
 end
+
+return entity
