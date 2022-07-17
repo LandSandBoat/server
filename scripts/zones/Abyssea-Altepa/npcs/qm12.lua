@@ -4,7 +4,8 @@
 -- Spawns Orthus
 -- !pos -400 0 112 218
 -----------------------------------
-require("scripts/globals/abyssea")
+require('scripts/globals/abyssea')
+require('scripts/globals/keyitems')
 -----------------------------------
 local entity = {}
 
@@ -13,7 +14,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    -- xi.abyssea.qmOnTrigger(player, npc)
+    local ID = zones[player:getZoneID()]
+    xi.abyssea.qmOnTrigger(player, npc, ID.mob.ORTHUS, { xi.ki.STEAMING_CERBERUS_TONGUE })
 end
 
 entity.onEventUpdate = function(player, csid, option)
