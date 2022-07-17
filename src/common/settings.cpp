@@ -157,6 +157,8 @@ namespace settings
             }
         }
 
+        network_settings_from_env();
+
         // Scrape user settings into cpp's settingsMap
         // This will overwrite the defaults, if user settings exist. Otherwise the
         // defaults will be left intact.
@@ -197,7 +199,5 @@ namespace settings
         // to the defaults:
         //
         // lua.safe_script("require('settings/main'); require('settings/default/main'); print(xi.settings)");
-
-        network_settings_from_env();
     }
 } // namespace settings
