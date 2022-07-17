@@ -1,9 +1,5 @@
 -----------------------------------
---
 -- Zone: The_Eldieme_Necropolis_[S] (175)
---
------------------------------------
-local ID = require("scripts/zones/The_Eldieme_Necropolis_[S]/IDs")
 -----------------------------------
 local zone_object = {}
 
@@ -12,9 +8,11 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
+
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(420.035, -58.114, -119.51, 191)
     end
+
     return cs
 end
 

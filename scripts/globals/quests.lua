@@ -734,7 +734,7 @@ xi.quest.id =
     -----------------------------------
     [xi.quest.area[xi.quest.log_id.CRYSTAL_WAR]] =
     {
-        LOST_IN_TRANSLOCATION            = 0,  -- +
+        LOST_IN_TRANSLOCATION            = 0,  -- + Converted
         MESSAGE_ON_THE_WINDS             = 1,  -- + Converted
         THE_WEEKLY_ADVENTURER            = 2,
         HEALING_HERBS                    = 3,
