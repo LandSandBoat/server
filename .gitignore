@@ -228,3 +228,7 @@ modules/init.txt
 
 # Doxygen
 doxygen/
+
+# Docker files (not officially supported)
+Dockerfile
+docker-compose*
