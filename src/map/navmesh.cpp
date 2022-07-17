@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -435,10 +435,10 @@ bool CNavMesh::findClosestValidPoint(const position_t& position, float* validPoi
     float spos[3];
     CNavMesh::ToDetourPos(&position, spos);
 
-    float polyPickExt[3];
-    polyPickExt[0] = 30;
-    polyPickExt[1] = 60;
-    polyPickExt[2] = 30;
+    float closestPolyPickExt[3];
+    closestPolyPickExt[0] = 30;
+    closestPolyPickExt[1] = 60;
+    closestPolyPickExt[2] = 30;
 
     dtQueryFilter filter;
     filter.setIncludeFlags(0xffff);
@@ -446,7 +446,7 @@ bool CNavMesh::findClosestValidPoint(const position_t& position, float* validPoi
 
     dtPolyRef startRef;
 
-    dtStatus status = m_navMeshQuery.findNearestPoly(spos, polyPickExt, &filter, &startRef, validPoint);
+    dtStatus status = m_navMeshQuery.findNearestPoly(spos, closestPolyPickExt, &filter, &startRef, validPoint);
 
     if (dtStatusFailed(status))
     {
@@ -462,10 +462,10 @@ bool CNavMesh::findFurthestValidPoint(const position_t& startPosition, const pos
     float spos[3];
     CNavMesh::ToDetourPos(&startPosition, spos);
 
-    float polyPickExt[3];
-    polyPickExt[0] = 30;
-    polyPickExt[1] = 60;
-    polyPickExt[2] = 30;
+    float furthestPolyPickExt[3];
+    furthestPolyPickExt[0] = 30;
+    furthestPolyPickExt[1] = 60;
+    furthestPolyPickExt[2] = 30;
 
     dtQueryFilter filter;
     filter.setIncludeFlags(0xffff);
@@ -474,7 +474,7 @@ bool CNavMesh::findFurthestValidPoint(const position_t& startPosition, const pos
     dtPolyRef startRef;
     float     validStartPoint[3];
 
-    dtStatus status = m_navMeshQuery.findNearestPoly(spos, polyPickExt, &filter, &startRef, validStartPoint);
+    dtStatus status = m_navMeshQuery.findNearestPoly(spos, furthestPolyPickExt, &filter, &startRef, validStartPoint);
     if (dtStatusFailed(status))
     {
         return false;
