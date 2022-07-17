@@ -5,9 +5,10 @@
 -- !pos -102.754 -0.65 16.161 257
 -- !gotoid 17830177
 -----------------------------------
-require("scripts/globals/items")
+require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/settings')
+require('scripts/globals/extravaganza')
 -----------------------------------
 local entity = {}
 
@@ -25,7 +26,7 @@ local items =
     [2308] = { cost = 2000, id = xi.items.CIPHER_OF_MORIMARS_ALTER_EGO },
 }
 
-local enable = xi.settings.main.ENABLE_TRUST_ALTER_EGO_EXTRAVAGANZA
+local active = xi.extravaganza.campaignActive()
 local edification = 0
 local ciphers =
 {
@@ -41,9 +42,9 @@ end
 entity.onTrigger = function(player, npc)
     local bayld = player:getCurrency('bayld')
 
-    print(ciphers[enable])
-    if enable > 0 then -- TODO: implement logic to know when to display full Coalition Menu
-        player:startEvent(7513, 0, ciphers[enable], edification, bayld)
+    print(ciphers[active])
+    if active > 0 then -- TODO: implement logic to know when to display full Coalition Menu
+        player:startEvent(7513, 0, ciphers[active], edification, bayld)
     else
         -- Stare blankly For now
     end
