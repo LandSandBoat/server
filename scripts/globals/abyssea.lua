@@ -82,8 +82,6 @@ xi.abyssea.itemType =
 
 local itemType = xi.abyssea.itemType
 
-local localProspectorItems = {}
-
 xi.abyssea.visionsCruorProspectorItems=
 {-- Sel      Item                                       Cost,  Qty
     [ 1] = { xi.items.PERLE_SALADE,                     4000 },
