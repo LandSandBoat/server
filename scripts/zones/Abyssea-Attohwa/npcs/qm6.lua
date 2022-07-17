@@ -4,16 +4,18 @@
 -- Spawns Drekavac
 -- !pos -158.000 -0.340 220.000 215
 -----------------------------------
-require("scripts/globals/abyssea")
+require('scripts/globals/abyssea')
+require('scripts/globals/items')
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    -- xi.abyssea.qmOnTrade(player, npc, trade)
+    local ID = zones[player:getZoneID()]
+    xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.DREKAVAC, { xi.items.CRACKED_DRAGONSCALE })
 end
 
 entity.onTrigger = function(player, npc)
-    -- xi.abyssea.qmOnTrigger(player, npc)
+    xi.abyssea.qmOnTrigger(player, npc, 0, 0, { xi.items.CRACKED_DRAGONSCALE })
 end
 
 entity.onEventUpdate = function(player, csid, option)

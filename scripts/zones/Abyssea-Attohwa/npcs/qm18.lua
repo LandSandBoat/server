@@ -4,7 +4,8 @@
 -- Spawns Smok
 -- !pos -530.208 -5.460 -39.323 215
 -----------------------------------
-require("scripts/globals/abyssea")
+require('scripts/globals/abyssea')
+require('scripts/globals/keyitems')
 -----------------------------------
 local entity = {}
 
@@ -13,7 +14,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    -- xi.abyssea.qmOnTrigger(player, npc)
+    local ID = zones[player:getZoneID()]
+    xi.abyssea.qmOnTrigger(player, npc, ID.mob.SMOK_1, { xi.ki.HOLLOW_DRAGON_EYE })
 end
 
 entity.onEventUpdate = function(player, csid, option)
