@@ -84,8 +84,12 @@ xi.summon.getSummoningSkillOverCap = function(avatar)
     return math.max(summoningSkill - maxSkill, 0)
 end
 
-xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, accmod, dmgmod, dmgmodsubsequent, tpeffect, mtp100, mtp200, mtp300)
+xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, accmod, dmgmod, dmgmodsubsequent, tpeffect, mtp100, mtp200, mtp300, wSC)
     local returninfo = {}
+
+    if wSC == nil then
+        wSC = 0
+    end
 
     -- I have never read a limit on accuracy bonus from summoning skill which can currently go far past 200 over cap
     -- current retail is over +250 skill so I am removing the cap, my SMN is at 695 total skill
@@ -176,6 +180,7 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
         critRate = utils.clamp(critRate, minCritRate, maxCritRate)
 
         local weaponDmg = avatar:getWeaponDmg()
+        weaponDmg = weaponDmg + wSC
 
         local fSTR = getAvatarFSTR(weaponDmg, avatar:getStat(xi.mod.STR), target:getStat(xi.mod.VIT))
 
