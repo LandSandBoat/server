@@ -339,7 +339,9 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgm
     local params = {diff = (mob:getStat(xi.mod.INT)-target:getStat(xi.mod.INT)), skillType = nil, bonus = bonusMacc, element = element, effect = nil}
     resist = applyResistanceEffect(mob, target, nil, params) -- Uses magic.lua resistance calcs as this moves to a global use case.
 
-    finaldmg = finaldmg * resist
+    if skill:getID() ~= 610 or skill:getID() ~= 1910 then -- Nether Blast Should Ignore Resist
+        finaldmg = finaldmg * resist
+    end
 
     returninfo.dmg = finaldmg
 

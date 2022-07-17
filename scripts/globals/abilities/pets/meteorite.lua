@@ -15,7 +15,6 @@ end
 ability_object.onPetAbility = function(target, pet, skill)
     local dint = pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
     local tp = skill:getTP()
-    local damage = 143
     local dmgmod = 0
 
     if tp < 1500 then
@@ -24,7 +23,7 @@ ability_object.onPetAbility = function(target, pet, skill)
         dmgmod = math.floor(((8/256) * (1500/10)) + ((4/256) * ((tp-1500)/10) + 896/256))
     end
 
-    damage = damage + (1.5 * dint)
+    local damage = pet:getMainLvl() + 2 + (0.30 * pet:getStat(xi.mod.INT)) + (dint * 1.5)
     damage = xi.mobskills.mobMagicalMove(pet, target, skill, damage, xi.magic.ele.LIGHT, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT, 0)
     damage = xi.mobskills.mobAddBonuses(pet, target, damage.dmg, xi.magic.ele.LIGHT)
     damage = xi.summon.avatarFinalAdjustments(damage, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.LIGHT, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
