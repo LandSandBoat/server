@@ -5051,6 +5051,19 @@ INSERT INTO `mob_spell_lists` VALUES('Gration', 505, 196, 1, 255); -- thundaga i
 INSERT INTO `mob_spell_lists` VALUES('Gration', 505, 212, 1, 255); -- burst (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Gration', 505, 251, 1, 255); -- shock spikes (1~255)
 
+-- Amaltheia (506)
+INSERT INTO `mob_spell_lists` VALUES('Amaltheia', 506, 5, 1, 255);  -- cure v (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Amaltheia', 506, 21, 1, 255); -- holy (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Amaltheia', 506, 31, 1, 255); -- banish iv (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Amaltheia', 506, 40, 1, 255); -- banishga iii (1~255)
+
+-- Kurrea (507)
+INSERT INTO `mob_spell_lists` VALUES('Kurrea', 507, 157, 1, 255); -- aero iv (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Kurrea', 507, 186, 1, 255); -- aeroga iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Kurrea', 507, 208, 1, 255); -- tornado (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Kurrea', 507, 359, 1, 255); -- silencega (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Kurrea', 507, 366, 1, 255); -- graviga (1~255)
+
 -- Next Avail 506
 
 -- AirSkyBoat Specific Starts at 5000

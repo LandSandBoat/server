@@ -3838,6 +3838,9 @@ INSERT INTO `mob_skill_lists` VALUES ('Upyri',1192,394);
 INSERT INTO `mob_skill_lists` VALUES ('Upyri',1192,1155);
 INSERT INTO `mob_skill_lists` VALUES ('Upyri',1192,1156);
 INSERT INTO `mob_skill_lists` VALUES ('Upyri',1192,1401);
+INSERT INTO `mob_skill_lists` VALUES ('Flockbock',1193,269);
+INSERT INTO `mob_skill_lists` VALUES ('Sengann',1194,253);
+INSERT INTO `mob_skill_lists` VALUES ('YalunEke',1195,567);
 
 -- Next available ID: 1192
 

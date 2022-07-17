@@ -11,6 +11,8 @@ local ID = require("scripts/zones/Lufaise_Meadows/IDs")
 -----------------------------------
 local entity = {}
 
+-- Confirm PH spots
+
 entity.onMobSpawn = function(mob)
     if mob:getID() == ID.mob.PADFOOT[GetServerVariable("realPadfoot")] then
         mob:setDropID(2911)

@@ -10,7 +10,7 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, {{ xi.item.LA_THEINE_CABBAGE, 12 }}) and not GetMobByID(ID.mob.HABETROT):isSpawned() and
+    if npcUtil.tradeHas(trade, {{ xi.items.LA_THEINE_CABBAGE, 12 }}) and not GetMobByID(ID.mob.HABETROT):isSpawned() and
         not GetMobByID(ID.mob.HABETROT + 1):isSpawned() then
         local mobToSpawn = (math.random(100) <= 20) and ID.mob.HABETROT or ID.mob.HABETROT + 1 -- 20% Chance to spawn Habetrot, else it's a Rumble Crawler
         npcUtil.popFromQM(player, npc, mobToSpawn)
