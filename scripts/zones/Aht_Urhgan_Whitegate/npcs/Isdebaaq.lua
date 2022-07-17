@@ -10,6 +10,7 @@ require("scripts/globals/besieged")
 require("scripts/globals/items")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
+require("scripts/globals/extravaganza")
 -----------------------------------
 local entity = {}
 
@@ -30,13 +31,6 @@ local items =
     [13] = {itemid = xi.items.CIPHER_OF_MNEJINGS_ALTER_EGO, price = 3000},
 }
 
--- Trust Alter Ego Extravaganza Check
-local cipher = 0
-local enable = xi.settings.main.ENABLE_TRUST_ALTER_EGO_EXTRAVAGANZA
-if enable >= 2 then -- 2 = Spring/Fall Campaign 3 = both Campaigns
-    cipher = 1
-end
-
 entity.onTrade = function(player, npc, trade)
 end
 
@@ -44,6 +38,12 @@ entity.onTrigger = function(player, npc)
     local rank = xi.besieged.getMercenaryRank(player)
     local haveimperialIDtag = player:hasKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG) and 1 or 0
     local assaultPoints = player:getAssaultPoint(xi.assaultUtil.assaultArea.MAMOOL_JA_TRAINING_GROUNDS)
+    local cipher = 0
+    local active = xi.extravaganza.campaignActive()
+
+    if active == xi.extravaganza.campaign.SPRING_FALL or active == xi.extravaganza.campaign.BOTH then
+        cipher = 1
+    end
 
     if rank > 0 then
         player:startEvent(274, rank, haveimperialIDtag, assaultPoints, player:getCurrentAssault(), cipher)
