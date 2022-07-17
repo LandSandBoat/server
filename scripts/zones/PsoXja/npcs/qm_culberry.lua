@@ -11,9 +11,9 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local pendantChance = 0
-    if npcUtil.tradeHas(trade, 18014) then -- odorous knife
+    if npcUtil.tradeHasExactly(trade, xi.items.ODOROUS_KNIFE) then
         pendantChance = 500
-    elseif npcUtil.tradeHas(trade, 18016) then -- odorous knife +1
+    elseif npcUtil.tradeHasExactly(trade, xi.items.ODOROUS_KNIFE_P1) then
         pendantChance = 1000
     end
 

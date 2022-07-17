@@ -3823,12 +3823,13 @@ INSERT INTO `mob_skill_lists` VALUES ('Ash_Dragon',1177,645);
 INSERT INTO `mob_skill_lists` VALUES ('Ash_Dragon',1177,642);
 INSERT INTO `mob_skill_lists` VALUES ('Ash_Dragon',1177,649);
 INSERT INTO `mob_skill_lists` VALUES ('Ash_Dragon',1177,647);
+INSERT INTO `mob_skill_lists` VALUES ('Mind_Hoarder',1180,524);
 INSERT INTO `mob_skill_lists` VALUES ('ZmeyGorynych',1184,380);
 INSERT INTO `mob_skill_lists` VALUES ('Friar_Rush',1187,510);
 INSERT INTO `mob_skill_lists` VALUES ('Bayawak',1188,367);
 INSERT INTO `mob_skill_lists` VALUES ('Pyuu_The_Spatemaker',1189,770);
 
--- Next available ID: 1178
+-- Next available ID: 1190
 
 -- AirSkyBoat Skill Lists Start at 5000
 -- 5000 -> 5020 is Era Dynamis
