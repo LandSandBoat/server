@@ -58,7 +58,7 @@ zones[xi.zone.THE_ELDIEME_NECROPOLIS] =
         NO_COMBINATION                   = 7604,  -- You were unable to enter a combination.
         REGIME_REGISTERED                = 9682,  -- New training regime registered!
         LEARNS_SPELL                     = 11600, -- <name> learns <spell>!
-        UNCANNY_SENSATION                = 11602, -- You are assaulted by an uncanny sensation.    
+        UNCANNY_SENSATION                = 11602, -- You are assaulted by an uncanny sensation.
         COMMON_SENSE_SURVIVAL            = 11636, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
