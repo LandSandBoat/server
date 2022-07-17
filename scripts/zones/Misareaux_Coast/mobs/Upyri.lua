@@ -19,16 +19,18 @@ end
 entity.onMobWeaponSkill = function(target, mob, skill)
     local hour = VanadielHour()
     local chance = math.random(1, 10)
-    -- Damaging abilities can repeat 2 or 3 times at night
-    if hour < 4 or hour >= 18 and (skill:getID() == 1401 or skill:getID() == 1156 or skill:getID() == 394) then
-        -- Use the same skill three times
-        if chance >= 9 then
-            for i = 1, 2 do
-                mob:getMobAbility(skill:getID())
-            end
-        -- Use the same skill twice
-        elseif chance >= 5 then
-            mob:getMobAbility(skill:getID())
+    if hour < 4 or hour >= 18 and skill:getID() == 1401 then
+        local tpCount = mob:getLocalVar("tpCount")
+
+        tpCount = tpCount +1
+        mob:setLocalVar("tpCount", tpCount)
+
+        if tpCount > 1 and chance >= 5 then
+            mob:setLocalVar("tpCount", 0)
+        elseif tpCount > 2 and chance >= 9 then
+            mob:setLocalVar("tpCount", 0)
+        else
+            mob:useMobAbility(skill:getID())
         end
     end
 end

@@ -1,8 +1,6 @@
 -----------------------------------
 -- Soul Accretion
--- Gaze dispel
--- Utsusemi/Blink absorb: Ignores shadows
--- Range: Melee?
+-- Drains 3 effects from target
 -----------------------------------
 require("scripts/globals/mobskills")
 require("scripts/globals/settings")
@@ -16,22 +14,25 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local count = math.random(1,3)
-    local effect = 0
+    -- try to drain buff
+    local effect1 = mob:stealStatusEffect(target, xi.effectFlag.DISPELABLE)
+    local effect2 = mob:stealStatusEffect(target, xi.effectFlag.DISPELABLE)
+    local effect3 = mob:stealStatusEffect(target, xi.effectFlag.DISPELABLE)
 
-    for i = 1, count do
-        if target:dispelStatusEffect() then
-            effect = effect +1
+    if effect1 ~= 0 then
+        local count = 1
+        if effect2 ~= 0 then
+            count = count + 1
         end
-    end
+        if effect3 ~= 0 then
+            count = count + 1
+        end
 
-    if effect > 0 then
-        skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT) -- no effect
+        skill:setMsg(xi.msg.basic.EFFECT_DRAINED)
+        return count
     else
-        skill:setMsg(xi.msg.basic.DISAPPEAR_NUM)
+        skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
     end
-
-    return count
 end
 
 return mobskill_object

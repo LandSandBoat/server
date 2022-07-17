@@ -17,7 +17,6 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     end
 end
 
-
 entity.onMobDeath = function(mob, player, isKiller)
     xi.hunts.checkHunt(mob, player, 446)
 end

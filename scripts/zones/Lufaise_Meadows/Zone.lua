@@ -20,6 +20,8 @@ zone_object.onInitialize = function(zone)
         SpawnMob(v)
     end
 
+    GetMobByID(ID.mob.YALUN_EKE):setLocalVar("chooseYalun", math.random(1,2))
+
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
 
     xi.helm.initZone(zone, xi.helm.type.LOGGING)
@@ -52,28 +54,28 @@ zone_object.onEventFinish = function(player, csid, option)
 end
 
 zone_object.onGameHour = function(zone)
-    -- Don't allow Manes or Shii to spawn outside of night
+    local cooldown = GetMobByID(ID.mob.SENGANN):getLocalVar("cooldown")
+    -- Don't allow Sengann to spawn outside of night
     if VanadielHour() >= 4 and VanadielHour() < 20 then
         DisallowRespawn(ID.mob.SENGANN, true)
-    else
+    elseif os.time() > cooldown then
         DisallowRespawn(ID.mob.SENGANN, false)
-        GetMobByID(ID.mob.SENGAN):setRespawnTime(math.random(30, 150)) -- pop 30-150 sec after night starts
     end
 end
 
 zone_object.onZoneWeatherChange = function(weather)
     if os.time() > GetMobByID(ID.mob.YALUN_EKE):getLocalVar("yalunRespawn") and weather == xi.weather.FOG then
-        local chooseYalun = GetMobByID(ID.mob.YALUN_EKE):setLocalVar("chooseYalun")
+        local chooseYalun = GetMobByID(ID.mob.YALUN_EKE):getLocalVar("chooseYalun")
         local count = 1
 
-        for ph, nm in pairs(ID.mob.ODQAN_PH) do
+        for k, v in pairs(ID.mob.YALUN_EKE_PH) do
             if count == chooseYalun then
-                DisallowRespawn(ph, true)
-                DisallowRespawn(nm, false)
-                local pos = GetMobByID(ph):getSpawnPos()
-                DespawnMob(ph) -- Ensure PH is not up
-                GetMobByID(nm):setSpawn(pos[1], pos[2], pos[3])
-                SpawnMob(nm) -- Spawn Yal-Un Eke
+                DisallowRespawn(k, true)
+                DisallowRespawn(v, false)
+                local pos = GetMobByID(k):getSpawnPos()
+                DespawnMob(k) -- Ensure PH is not up
+                GetMobByID(v):setSpawn(pos.x, pos.y, pos.z)
+                SpawnMob(v) -- Spawn Yal-Un Eke
             else
                 count = count + 1
             end

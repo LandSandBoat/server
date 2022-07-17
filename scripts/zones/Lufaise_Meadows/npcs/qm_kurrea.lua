@@ -9,7 +9,7 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, xi.items.ADAMANTOISE_SOUP) and npcUtil.popFromQM(player, npc, ID.mob.KURREA) then
+    if npcUtil.tradeHas(trade, 5210) and npcUtil.popFromQM(player, npc, ID.mob.KURREA) then
         player:confirmTrade()
         player:messageSpecial(ID.text.KURREA_SPAWN, xi.items.ADAMANTOISE_SOUP)
     else

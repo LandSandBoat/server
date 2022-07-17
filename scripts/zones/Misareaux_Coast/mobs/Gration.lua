@@ -21,15 +21,14 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    local nearbyPlayers = mob:getPlayersInRange(20)
-    if nearbyPlayers == nil then return end
-    for _,v in ipairs(nearbyPlayers) do
+    local enmityList = mob:getEnmityList()
+    for _,v in ipairs(enmityList) do
         local shouldintimidate = math.random(1, 20)
         if shouldintimidate >= 19 then
-            if v:hasStatusEffect(xi.effect.INTIMIDATE) == true then
-                v:delStatusEffectSilent(xi.effect.INTIMIDATE)
+            if v.entity:hasStatusEffect(xi.effect.INTIMIDATE) == true then
+                v.entity:delStatusEffectSilent(xi.effect.INTIMIDATE)
             end
-            v:addStatusEffectEx(xi.effect.INTIMIDATE, 0, 1, 0, 1)
+            v.entity:addStatusEffectEx(xi.effect.INTIMIDATE, 0, 1, 0, 1)
         end
     end
 end

@@ -26,6 +26,7 @@ zones[xi.zone.RIVERNE_SITE_A01] =
         SD_HAS_GROWN              = 7596, -- The spatial displacement has grown.
         SPACE_SEEMS_DISTORTED     = 7597, -- The space around you seems oddly distorted and disrupted.
         MONUMENT                  = 7604, -- Something has been engraved on this stone, but the message is too difficult to make out.
+        INSECT_WINGS              = 7728, -- There are tiny insect wings scattered all around here.
         HOMEPOINT_SET             = 7732, -- Home point set!
     },
     mob =

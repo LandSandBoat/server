@@ -15,22 +15,25 @@ end
 entity.onMobFight = function(mob, target)
     local shiftTime = mob:getLocalVar("shiftTime")
     local form = mob:getAnimationSub()
-
-    if os.time() > shiftTime then
+    if os.time() > shiftTime and mob:canUseAbilities() then
+        mob:setLocalVar("shiftTime", os.time() + 30)
         local whichForm = math.random(1,2)
-        if form == 0 and whichForm == 1 then -- Vertical Bats
-            mob:setAnimationSub(1)
+        if form == 1 and whichForm == 1 then -- Vertical Bats (100% Triple Attack)
+            mob:setDamage(40)
+            mob:setMod(xi.mod.DELAY, 0)
+            mob:setAnimationSub(3)
             mob:setMod(xi.mod.TRIPLE_ATTACK, 100)
             mob:setMobMod(xi.mobMod.SKILL_LIST, 1196)
-        elseif form == 0 and whichForm == 2 then -- Horizontal Bats
-            local duration = os.time() - shiftTime
-            mob:addStatusEffect(xi.effect.ATTACK_BOOST, 75, 0, duration)
-            mob:addStatusEffect(xi.effect.SLOW, 1250, 0, duration)
+        elseif form == 1 and whichForm == 2 then -- Horizontal Bats (Slow attacks but very strong hits)
+            mob:setDamage(80)
+            mob:setMod(xi.mod.DELAY, -2400)
             mob:setAnimationSub(2)
             mob:setMod(xi.mod.TRIPLE_ATTACK, 0)
             mob:setMobMod(xi.mobMod.SKILL_LIST, 1197)
-        elseif form > 0 then -- Normal Bats
-            mob:setAnimationSub(0)
+        elseif form > 1 then -- Normal Bats
+            mob:setDamage(40)
+            mob:setMod(xi.mod.DELAY, 0)
+            mob:setAnimationSub(1)
             mob:setMod(xi.mod.TRIPLE_ATTACK, 0)
             mob:setMobMod(xi.mobMod.SKILL_LIST, 47)
         end

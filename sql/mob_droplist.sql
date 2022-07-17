@@ -575,7 +575,6 @@ INSERT INTO `mob_droplist` VALUES (55,0,0,1000,859,@VCOMMON); -- Ram Skin (Very 
 INSERT INTO `mob_droplist` VALUES (55,0,0,1000,874,@ALWAYS);  -- Amaltheia Hide (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (55,0,0,1000,895,@VCOMMON); -- Ram Horn (Very Common, 24%)
 
-
 -- ZoneID: 218 - Amarok
 INSERT INTO `mob_droplist` VALUES (56,0,0,1000,3148,700);     -- Charis Seal Body (70.0%)
 INSERT INTO `mob_droplist` VALUES (56,0,0,1000,3146,680);     -- Navarchs Seal Body (68.0%)
@@ -3272,10 +3271,10 @@ INSERT INTO `mob_droplist` VALUES (340,0,0,1000,889,300);     -- Beetle Shell (3
 INSERT INTO `mob_droplist` VALUES (340,0,0,1000,894,270);     -- Beetle Jaw (27.0%)
 
 -- ZoneID:  29 - Boroka
-INSERT INTO `mob_droplist` VALUES (341,0,0,1000,13692,@ALWAYS); -- Skulkers Cape (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (341,0,0,1000,14874,380);     -- Horomusha Kote (38.0%)
-INSERT INTO `mob_droplist` VALUES (341,0,0,1000,13178,290);     -- Auditory Torque (29.0%)
-INSERT INTO `mob_droplist` VALUES (341,0,0,1000,14763,270);     -- Boroka Earring (27.0%)
+INSERT INTO `mob_droplist` VALUES (341,0,0,1000,13692,@ALWAYS);  -- Skulkers Cape (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (341,0,0,1000,14874,@VCOMMON); -- Horomusha Kote (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (341,0,0,1000,13178,@VCOMMON); -- Auditory Torque (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (341,0,0,1000,14763,@VCOMMON); -- Boroka Earring (Very Common, 24%)
 
 -- ZoneID: 153 - Bouncing Ball Fished
 INSERT INTO `mob_droplist` VALUES (342,0,0,1000,1125,20); -- Carbuncles Ruby (2.0%)
@@ -11212,8 +11211,8 @@ INSERT INTO `mob_droplist` VALUES (1357,0,0,1000,19057,110);      -- Caecus Grip
 INSERT INTO `mob_droplist` VALUES (1357,0,0,1000,3208,@UNCOMMON); -- Charis Seal Feet (Uncommon, 10%)
 
 -- ZoneID:  29 - Imdugud
-INSERT INTO `mob_droplist` VALUES (1358,0,0,1000,14758,470); -- Knightly Earring (47.0%)
-INSERT INTO `mob_droplist` VALUES (1358,0,0,1000,18096,160); -- Heavy Lance (16.0%)
+INSERT INTO `mob_droplist` VALUES (1358,0,0,1000,18096,@COMMON);   -- Heavy Lance (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (1358,0,0,1000,14758,@UNCOMMON); -- Knightly Earring (Uncommon, 10%)
 
 -- ZoneID:  99 - Immolatory Pugil
 INSERT INTO `mob_droplist` VALUES (1359,2,0,1000,868,260);  -- Handful Of Pugil Scales (Steal)
@@ -15082,7 +15081,7 @@ INSERT INTO `mob_droplist` VALUES (1838,0,0,1000,4562,@ALWAYS); -- Odontotyrannu
 
 -- ZoneID:  25 - Odqan
 INSERT INTO `mob_droplist` VALUES (1839,0,0,1000,1667,@ALWAYS);    -- Cluster Core (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (1839,0,0,1000,14658,350);       -- Atlauas Ring (35.0%)
+INSERT INTO `mob_droplist` VALUES (1839,0,0,1000,14658,@VCOMMON);  -- Atlauas Ring (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (1839,0,0,1000,1630,@VCOMMON);   -- Pinch Of Cluster Ash (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (1839,0,0,1000,15373,@UNCOMMON); -- Bravos Subligar (Uncommon, 10%)
 
@@ -20170,10 +20169,10 @@ INSERT INTO `mob_droplist` VALUES (2521,0,0,1000,1122,@UNCOMMON); -- Wyvern Skin
 INSERT INTO `mob_droplist` VALUES (2522,0,0,1000,3272,@UNCOMMON); -- Unseelie Eye (Uncommon, 10%)
 
 -- ZoneID:  29 - Unstable Cluster
-INSERT INTO `mob_droplist` VALUES (2523,0,0,1000,17813,430); -- Soboro Sukehiro (43.0%)
-INSERT INTO `mob_droplist` VALUES (2523,0,0,1000,1667,390);  -- Cluster Core (39.0%)
-INSERT INTO `mob_droplist` VALUES (2523,0,0,1000,1630,230);  -- Pinch Of Cluster Ash (23.0%)
-INSERT INTO `mob_droplist` VALUES (2523,0,0,1000,17305,230); -- Cluster Arm (23.0%)
+INSERT INTO `mob_droplist` VALUES (2523,0,0,1000,1667,@ALWAYS);   -- Cluster Core (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (2523,0,0,1000,17813,@VCOMMON); -- Soboro Sukehiro (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2523,0,0,1000,1630,@VCOMMON);  -- Pinch Of Cluster Ash (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2523,0,0,1000,17305,@VCOMMON); -- Cluster Arm (Very Common, 24%)
 
 -- ZoneID: 153 - Unut
 INSERT INTO `mob_droplist` VALUES (2524,0,0,1000,856,@ALWAYS); -- Rabbit Hide (Always, 100%)

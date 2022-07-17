@@ -10,13 +10,13 @@ local ID = require("scripts/zones/Misareaux_Coast/IDs")
 local entity = {}
 
 entity.onMobRoam = function(mob)
-    if not mob:getWeather() == xi.weather.FOG then
+    if mob:getWeather() ~= xi.weather.FOG then
         DespawnMob(mob:getID())
     end
 end
 
 entity.onMobDisengage = function(mob, weather)
-    if not mob:getWeather() == xi.weather.FOG then
+    if mob:getWeather() ~= xi.weather.FOG then
         DespawnMob(mob:getID())
     end
 end

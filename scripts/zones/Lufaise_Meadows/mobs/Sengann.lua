@@ -7,8 +7,6 @@ mixins = {require("scripts/mixins/fomor_hate")}
 -----------------------------------
 local entity = {}
 
--- TODO: Confirm spawn pos
-
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:setMod(xi.mod.ZANSHIN, 15)
@@ -33,6 +31,10 @@ end
 
 entity.onMobDeath = function(mob, player, isKiller)
     xi.hunts.checkHunt(mob, player, 441)
+end
+
+entity.onMobDespawn = function(mob)
+    mob:setLocalVar("cooldown", os.time() + 3000)
 end
 
 return entity

@@ -1,6 +1,6 @@
 -----------------------------------
--- Temporal Shift
--- Stuns and Poisons (20/tick) targets in a conical AoE.
+-- Knife Edge Circle
+-- Poisons (20/tick) targets in a conical AoE.
 -- Used by Tres Duendes
 -----------------------------------
 require("scripts/globals/settings")

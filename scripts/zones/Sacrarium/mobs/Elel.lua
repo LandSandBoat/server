@@ -6,8 +6,6 @@ mixins = {require("scripts/mixins/job_special")}
 -----------------------------------
 local entity = {}
 
--- Get multiple spawn points
-
 entity.onMobDisengage = function(mob)
     if not (mob:getWeather() == xi.weather.GLOOM or mob:getWeather() == xi.weather.DARKNESS) or (VanadielHour() >= 4 and VanadielHour() < 20) then
         DespawnMob(mob:getID())
@@ -29,6 +27,5 @@ entity.onMobDespawn = function(mob)
     mob:setLocalVar("cooldown", os.time() + 7200)
     DisallowRespawn(mob:getID(), true) -- prevents accidental 'pop' during no dark weather and immediate despawn
 end
-
 
 return entity

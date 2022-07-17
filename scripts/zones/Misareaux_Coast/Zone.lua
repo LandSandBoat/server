@@ -11,6 +11,8 @@ local zone_object = {}
 zone_object.onInitialize = function(zone)
     xi.helm.initZone(zone, xi.helm.type.LOGGING)
     misareauxGlobal.ziphiusHandleQM()
+
+    GetMobByID(ID.mob.ODQAN):setLocalVar("chooseOdqan", math.random(1,2))
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
@@ -43,15 +45,17 @@ end
 
 zone_object.onZoneWeatherChange = function(weather)
     if os.time() > GetMobByID(ID.mob.ODQAN):getLocalVar("odqanRespawn") and weather == xi.weather.FOG then
-        local chooseOdqan = GetMobByID(ID.mob.ODQAN):setLocalVar("chooseOdqan")
+        local chooseOdqan = GetMobByID(ID.mob.ODQAN):getLocalVar("chooseOdqan")
         local count = 1
 
-        for ph, nm in pairs(ID.mob.ODQAN_PH) do
+        for k, v in pairs(ID.mob.ODQAN_PH) do
             if count == chooseOdqan then
-                DisallowRespawn(ph, true)
-                DisallowRespawn(nm, false)
-                DespawnMob(ph) -- Ensure PH is not up
-                SpawnMob(nm) -- Spawn Odqan
+                DisallowRespawn(k, true)
+                DisallowRespawn(v, false)
+                local pos = GetMobByID(k):getSpawnPos()
+                DespawnMob(k) -- Ensure PH is not up
+                GetMobByID(v):setSpawn(pos.x, pos.y, pos.z)
+                SpawnMob(v) -- Spawn Odqan
             else
                 count = count + 1
             end

@@ -10,12 +10,13 @@ local entity = {}
 local spellLists = {17,13,15,12,14, 16, 19, 18}
 
 entity.onMobSpawn = function(mob)
-    mob:setlocalVar("currentDay", VanadielDayOfTheWeek())
+    local day = VanadielDayOfTheWeek()
+    mob:setLocalVar("currentDay", day)
 end
 
 entity.onMobFight = function(mob, target)
     -- Casts spells according to the current day of the week
-    if VanadielDayOfTheWeek() ~= mob:getlocalVar("currentDay") then
+    if VanadielDayOfTheWeek() ~= mob:getLocalVar("currentDay") then
         for k, v in pairs(xi.day) do
             if v == VanadielDayOfTheWeek() then
                 mob:setSpellList(spellLists[k])

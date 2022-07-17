@@ -68,7 +68,7 @@ zones[xi.zone.MISAREAUX_COAST] =
             16879976,
             16879977,
         },
-        ZIPHIUS_QM_BASE  = 16879918,
+        ZIPHIUS_QM_BASE  = 16879919,
         GRATION_QM       = 16879918,
     },
 }

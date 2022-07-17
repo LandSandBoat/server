@@ -10,10 +10,10 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local shieldChance = 0
-    if npcUtil.tradeHas(trade, xi.items.HICKORY_SHIELD) then
+    if npcUtil.tradeHasExactly(trade, xi.items.HICKORY_SHIELD) then
         shieldChance = 500
         npc:setLocalVar("shield", 1)
-    elseif npcUtil.tradeHas(trade, xi.items.PICAROONS_SHIELD) then
+    elseif npcUtil.tradeHasExactly(trade, xi.items.PICAROONS_SHIELD) then
         shieldChance = 1000
         npc:setLocalVar("shield", 2)
     end
@@ -30,6 +30,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
+    player:messageSpecial(ID.text.SHATTERED_SHIELD)
 end
 
 entity.onEventUpdate = function(player, csid, option)

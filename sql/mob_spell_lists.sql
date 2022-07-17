@@ -5053,7 +5053,6 @@ INSERT INTO `mob_spell_lists` VALUES('Gration', 505, 251, 1, 255); -- shock spik
 
 -- Amaltheia (506)
 INSERT INTO `mob_spell_lists` VALUES('Amaltheia', 506, 5, 1, 255);  -- cure v (1~255)
-INSERT INTO `mob_spell_lists` VALUES('Amaltheia', 506, 21, 1, 255); -- holy (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Amaltheia', 506, 31, 1, 255); -- banish iv (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Amaltheia', 506, 40, 1, 255); -- banishga iii (1~255)
 
