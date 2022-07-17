@@ -21,6 +21,7 @@ zones[xi.zone.BEAUCEDINE_GLACIER_S] =
         LOGIN_NUMBER            = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         UNWANTED_ATTENTION      = 8584, -- Your presence has drawn unwanted attention!
         UNUSUAL_PRESENCE        = 8586, -- You sense an unusual presence in the area...
+        NO_RESPONSE             = 8588, -- There is no response...
         VOIDWALKER_DESPAWN      = 8611, -- The monster fades before your eyes, a look of disappointment on its face.
         VOIDWALKER_NO_MOB       = 8662, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
         VOIDWALKER_MOB_TOO_FAR  = 8663, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
