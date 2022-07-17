@@ -2,7 +2,7 @@
 -- Area: Lower Delkfutt's Tower
 -- NPC: Geomantic Reservoir
 -- Unlocks: Geo-CHR
--- !pos 340.285 -15.601 19.968
+-- !pos 340.285 -15.601 19.968 184
 -----------------------------------
 require("scripts/globals/geomantic_reservoir")
 require("scripts/globals/spell_data")

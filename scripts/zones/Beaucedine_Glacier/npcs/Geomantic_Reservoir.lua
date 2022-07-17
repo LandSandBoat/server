@@ -2,7 +2,7 @@
 -- Area: Beaucedine Glacier
 -- NPC: Geomantic Reservoir
 -- Unlocks: Geo-INT
--- !pos 8.527 -59.729 -104.909
+-- !pos 8.527 -59.729 -104.909 111
 -----------------------------------
 require("scripts/globals/geomantic_reservoir")
 require("scripts/globals/spell_data")

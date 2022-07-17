@@ -2,7 +2,7 @@
 -- Area: Rolanberry Fields
 -- NPC: Geomantic Reservoir
 -- Unlocks: Geo-MND
--- !pos 243.900 -31.194 -255.254
+-- !pos 243.900 -31.194 -255.254 110
 -----------------------------------
 require("scripts/globals/geomantic_reservoir")
 require("scripts/globals/spell_data")

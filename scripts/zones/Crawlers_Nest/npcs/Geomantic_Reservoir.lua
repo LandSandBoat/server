@@ -2,7 +2,7 @@
 -- Area: Crawler's Nest
 -- NPC: Geomantic Reservoir
 -- Unlocks: Geo-STR
--- !pos -170.623 -1.376 347.089
+-- !pos -170.623 -1.376 347.089 197
 -----------------------------------
 require("scripts/globals/geomantic_reservoir")
 require("scripts/globals/spell_data")

@@ -2,7 +2,7 @@
 -- Area: Bostaunieux Oubliette
 -- NPC: Geomantic Reservoir
 -- Unlocks: Geo-Languor
--- !pos -13.337 0.009 -333.022
+-- !pos -13.337 0.009 -333.022 167
 -----------------------------------
 require("scripts/globals/geomantic_reservoir")
 require("scripts/globals/spell_data")

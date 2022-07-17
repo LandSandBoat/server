@@ -2,7 +2,7 @@
 -- Area: Sauromugue Champaign
 -- NPC: Geomantic Reservoir
 -- Unlocks: Geo-Fury
--- !pos 384.047 45.466 384.224
+-- !pos 384.047 45.466 384.224 120
 -----------------------------------
 require("scripts/globals/geomantic_reservoir")
 require("scripts/globals/spell_data")

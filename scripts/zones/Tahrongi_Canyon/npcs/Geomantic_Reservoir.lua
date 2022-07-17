@@ -2,7 +2,7 @@
 -- Area: Tahrongi Canyon
 -- NPC: Geomantic Reservoir
 -- Unlocks: Geo-Voidance
--- !pos 78.056 15.998 117.224
+-- !pos 78.056 15.998 117.224 117
 -----------------------------------
 require("scripts/globals/geomantic_reservoir")
 require("scripts/globals/spell_data")

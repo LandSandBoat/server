@@ -2,7 +2,7 @@
 -- Area: La Theine Plateau
 -- NPC: Geomantic Reservoir
 -- Unlocks: Geo-Regen
--- !pos 400.026 70.700 365.002
+-- !pos 400.026 70.700 365.002 102
 -----------------------------------
 require("scripts/globals/geomantic_reservoir")
 require("scripts/globals/spell_data")

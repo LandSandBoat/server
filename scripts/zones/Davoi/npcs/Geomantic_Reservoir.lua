@@ -2,7 +2,7 @@
 -- Area: Davoi
 -- NPC: Geomantic Reservoir
 -- Unlocks: Geo-Fend
--- !pos 173.098 3.643 -386.962
+-- !pos 173.098 3.643 -386.962 149
 -----------------------------------
 require("scripts/globals/geomantic_reservoir")
 require("scripts/globals/spell_data")

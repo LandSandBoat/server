@@ -2,7 +2,7 @@
 -- Area: Garlaige Citadel
 -- NPC: Geomantic Reservoir
 -- Unlocks: Geo-VIT
--- !pos -83.898 5.568 139.600
+-- !pos -83.898 5.568 139.600 200
 -----------------------------------
 require("scripts/globals/geomantic_reservoir")
 require("scripts/globals/spell_data")

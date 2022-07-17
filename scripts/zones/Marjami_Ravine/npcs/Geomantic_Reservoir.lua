@@ -2,7 +2,7 @@
 -- Area: Marjami Ravine
 -- NPC: Geomantic Reservoir
 -- Unlocks: Geo-Haste
--- !pos 189.015 -40.000 241.025
+-- !pos 189.015 -40.000 241.025 266
 -----------------------------------
 require("scripts/globals/geomantic_reservoir")
 require("scripts/globals/spell_data")
