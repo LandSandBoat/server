@@ -15,7 +15,6 @@ end
 ability_object.onPetAbility = function(target, pet, skill)
     local dINT = math.floor(pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
     local tp = skill:getTP()
-    local damage = 90
     local dmgmod = 0
 
     if tp < 1500 then
