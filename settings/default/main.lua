@@ -119,10 +119,20 @@ xi.settings.main =
     ENABLE_TRUST_CUSTOM_ENGAGEMENT = 0,
     ENABLE_TRUST_CASTING = 1,
     ENABLE_TRUST_QUESTS  = 1,
-    -- Extravaganza: 0 = disabled, 1 = summer/ny, 2 = spring/autumn, 3 = both
-    ENABLE_TRUST_ALTER_EGO_EXTRAVAGANZA = 0,
-    -- Expo: 0 disabled, 1 = expo - HPP/MPP/Status Resistance, 2 = expo plus (not implemented)
-    ENABLE_TRUST_ALTER_EGO_EXPO = 0,
+    ENABLE_TRUST_ALTER_EGO_EXTRAVAGANZA = 0, -- 0 = disabled, 1 = summer/ny, 2 = spring/autumn, 3 = both
+    ENABLE_TRUST_ALTER_EGO_EXTRAVAGANZA_ANNOUNCE = 0, -- 0 = disabled, 1 = add announcement to player login
+    ENABLE_TRUST_ALTER_EGO_EXPO = 0, -- 0 = disabled, 1 = expo - HPP/MPP/Status Resistance, 2 = expo plus (not implemented)
+    ENABLE_TRUST_ALTER_EGO_EXPO_ANNOUNCE = 0, -- 0 = disabled, 1 = add announcement to player login
+
+    TRUST_ALTER_EGO_EXTRAVAGANZA_MESSAGE =
+        "\n \n" ..
+        "[ The Alter Ego Extravaganza Campaign is active! ]\n" ..
+        "This is an excellent time to fill out your roster of Trusts!",
+
+    TRUST_ALTER_EGO_EXPO_MESSAGE =
+        "\n \n" ..
+        "[ The Alter Ego Expo Campaign is active! ]\n" ..
+        "Trusts gain the benefits of Increased HP, MP, and Status Resistances!",
 
     HARVESTING_BREAK_CHANCE = 33, -- % chance for the sickle to break during harvesting.  Set between 0 and 100.
     EXCAVATION_BREAK_CHANCE = 33, -- % chance for the pickaxe to break during excavation.  Set between 0 and 100.
