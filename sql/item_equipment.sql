@@ -12653,8 +12653,8 @@ INSERT INTO `item_equipment` VALUES (26952,'psycloth_vest',99,119,1622040,391,0,
 INSERT INTO `item_equipment` VALUES (26953,'vanya_robe',99,119,1589788,395,0,0,32,0,0);
 INSERT INTO `item_equipment` VALUES (26954,'behemoth_suit',1,0,4194303,396,0,0,32,128,0);
 INSERT INTO `item_equipment` VALUES (26955,'behemoth_suit_+1',1,0,4194303,396,0,0,32,128,0);
-INSERT INTO `item_equipment` VALUES (26956,'poroggo_coat',1,0,4194303,397,0,0,32,16,0);
-INSERT INTO `item_equipment` VALUES (26957,'poroggo_coat_+1',1,0,4194303,397,0,0,32,16,0);
+INSERT INTO `item_equipment` VALUES (26956,'poroggo_coat',1,0,4194303,477,0,0,32,16,0);
+INSERT INTO `item_equipment` VALUES (26957,'poroggo_coat_+1',1,0,4194303,477,0,0,32,16,0);
 INSERT INTO `item_equipment` VALUES (26958,'swellers_harness',99,119,137218,382,0,0,32,0,0);
 INSERT INTO `item_equipment` VALUES (26959,'kubira_meikogai',99,119,10689,302,0,0,32,0,0);
 INSERT INTO `item_equipment` VALUES (26960,'annoint._kalasiris',99,119,1720860,213,0,0,32,0,0);
