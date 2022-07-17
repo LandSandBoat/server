@@ -35,6 +35,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../../packets/char.h"
 #include "../../recast_container.h"
 #include "../../status_effect_container.h"
+#include "../../utils/charutils.h"
 #include "../ai_container.h"
 
 CTrustController::CTrustController(CCharEntity* PChar, CTrustEntity* PTrust)
@@ -204,7 +205,25 @@ void CTrustController::DoRoamTick(time_point tick)
     auto* PMaster              = static_cast<CCharEntity*>(POwner->PMaster);
     auto  masterLastAttackTime = static_cast<CPlayerController*>(PMaster->PAI->GetController())->getLastAttackTime();
     bool  masterMeleeSwing     = masterLastAttackTime > server_clock::now() - 1s;
-    bool  trustEngageCondition = PMaster->GetBattleTarget() && masterMeleeSwing;
+
+    bool trustEngageCondition = false;
+    // NOTE: charvars are now cached, this is essentially a localvar read now.
+    switch (charutils::GetCharVar(PMaster, "TrustEngageType"))
+    {
+        case 1: // Master engages a monster, no melee swing required
+        {
+            trustEngageCondition = PMaster->GetBattleTarget();
+            break;
+        }
+        case 0: // Nothing set
+            [[fallthrough]];
+        default: // Something invalid set
+        {
+            // Default retail behaviour: Master engages a monster and executes a melee swing
+            trustEngageCondition = PMaster->GetBattleTarget() && masterMeleeSwing;
+            break;
+        }
+    }
 
     if (PMaster->PAI->IsEngaged() && trustEngageCondition)
     {

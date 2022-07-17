@@ -23,7 +23,7 @@ local nms_to_persist =
 	{ "Wajaom_Woodlands", "Hydra", function() return 172800 + math.random(0, 48) * 1800 end }, -- 2 - 3 days with half hour windows
 	{ "Rolanberry_Fields", "Simurgh", function() return 75600 + math.random(0, 6) * 1800 end }, -- 21 - 24 hours with half hour windows
 	{ "Labyrinth_of_Onzozo", "Lord_of_Onzozo", function() return 75600 + math.random(0, 6) * 1800 end }, -- 21 - 24 hours with half hour windows
-	{ "Ro_Maeve", "Shikigami_Weapon", function() return 75600 + math.random(0, 6) * 1800 end }, -- 21 - 24 hours with half hour windows
+	{ "RoMaeve", "Shikigami_Weapon", function() return 75600 + math.random(0, 6) * 1800 end }, -- 21 - 24 hours with half hour windows
     { "Attohwa_Chasm", "Tiamat", function() return 259200 + math.random(0, 96) * 1800 end }, -- 3 - 5 days with half hour windows
 	{ "Uleguerand_Range", "Jormungand", function() return 259200 + math.random(0, 96) * 1800 end }, -- 3 - 5 days with half hour windows
 	{ "King_Ranperres_Tomb", "Vrtra", function() return 259200 + math.random(0, 96) * 1800 end }, -- 3 - 5 days with half hour windows

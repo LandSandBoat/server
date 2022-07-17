@@ -4,6 +4,8 @@
 -- ONLY 19 ITEMS PER PRICE BRACKET POSSIBLE!! (20 will overwrite the ingame back button.)
 
 -- Cycles: After 1 month the next items need to get cycled in. Comment out and uncomment items appropriately.
+-- Seasonal event categories supersede cycles. Harvest Festival for October and Starlight Celebration for December
+-- todo: add sesonal event categories for other events
 
 local prizes =
 {
@@ -36,8 +38,8 @@ local prizes =
         ["price"] = 50,
         ["items"] =
         {
-		-- CONSUMABLES II
-			
+		-- CONSUMABLES II and furnishings(7 per cycle)
+			--static items
 			1875, -- Ancient Beastcoin
 			3283, -- Aquarian Tatter
 			3282, -- Dryadic Tatter
@@ -52,6 +54,59 @@ local prizes =
 			3277, -- Seiryu Scrap
 			3276, -- Suzaku Scrap
 
+            -- Cycle #1
+		    -- 282, -- yovra replica
+		    -- 3706, -- vanaclock
+		    -- 154, -- miniature airship
+		    -- 192, -- hoary spire
+		    -- 264, -- stuffed chocobo
+		    -- 265, -- adamant statue
+		    -- 266, -- behemoth statue
+		   
+		    -- Cycle #2
+			-- 267,-- fafnir statue
+			-- 268, -- n moogle statue
+			-- 269, -- s lord statue
+			-- 270, -- odin statue
+			-- 271, -- alexander statue
+			-- 277, -- prishe statue
+			-- 278, -- cardian statue
+			
+			-- Cycle #3
+			-- 279, -- s lord statue ii
+			-- 280, -- s lord statue iii
+			-- 281, -- atomos statue
+			-- 284, -- goobbue statue
+			-- 286, -- nanaa mihgo statue
+			-- 287, -- nanaa mihgo s ii
+			-- 320, -- harpsichord
+			
+			-- Cycle #4
+			-- 365, -- poele classique
+			-- 366, -- kanonenofen
+			-- 367, -- pot topper
+			-- 415, -- aldebaran horn
+			-- 426, -- orchestrion
+			-- 3585, -- galley kitchen
+			-- 3652, -- memorial cake
+			
+			-- Cycle # 5
+			-- 3679, -- beastman gonfalon
+			-- 3681, -- alzadaal table
+			-- 88, -- timepiece
+			-- 3705, -- far east hearth
+			-- 3698, -- cherry tree
+			-- 3717, -- birch tree
+			
+			-- Cycle # 6
+			-- 195, -- the big one
+			-- 3739, -- autumn tree
+			-- 3740, -- model synergy furn
+			-- 3654, -- tender bouquet
+			-- 3642, -- katana kazari
+			-- 3641, -- kabuto kazari
+			
+			
         },
     },
 
@@ -165,12 +220,50 @@ local prizes =
 			-- 26703, -- Lycopodium Masque
 			-- 10446, -- Ahriman Cap
 			-- 27757, -- Bomb Masque
+            
+			-- Seasonal event Harvest Festival. Uncomment for October campaign only
+			-- 3651, -- harvest pastry
+			-- 25586, -- kakai cap
+			-- 13916, -- pumpkin-head
+			-- 17565, -- trick staff
+			-- 26707, -- flan masque
+			-- 25711, -- botulus suit
+			-- 10446, -- ahriman cap
+			-- 11300, -- eerie cloak
+			-- 18102, -- pitchfork
+			-- 16075, -- witch hat
+			-- 25910, -- cait sith subligar
+			-- 3646, -- mandra pricket
+			-- 3624, -- korrigan pricket
+			-- 203, -- bomb lantern
+			-- 205, -- mandra lantern
+			-- 204, -- pumpkin lantern
+			-- 3623, -- djinn pricket
+			-- 3622, -- jack o pricket
 			
-			-- Cycle #?
-			-- TODO: Add rest of Storage Slip 11
-			-- 25638, -- Pachypodium Masque
-			-- 25586, -- Kakai Cap
-
+			-- Seasonal event Starlight Celebration. Uncomment for December campaign only.
+			-- 18863, -- dream bell
+			-- 14520, -- dream robe 1
+			-- 11968, -- dream pants 1
+			-- 11966, -- dream trousers 1
+			-- 21097, -- leafkin bopper
+			-- 15753, -- dream boots 1
+			-- 15179, -- dream hat 1
+			-- 10383, -- dream mittens 1
+			-- 10875, -- snowman cap
+			-- 138, -- jeunoan tree
+			-- 86, -- san dorian tree
+			-- 115, -- bastokan tree
+			-- 116, -- windurstian tree
+			-- 176, -- snowman knight
+			-- 177, -- snowman miner
+			-- 178, -- snowman mage
+			-- 11490, -- snow bunny hat
+			-- 3621, -- leafberry wreath
+			-- 3619, -- cour des etoiles
+			-- 3620, -- silberkranz
+			
+			
         },
     },
 
@@ -179,7 +272,7 @@ local prizes =
         ["price"] = 200,
         ["items"] =
         {
-        -- WEAPON COSTUMES
+        -- WEAPON COSTUMES and crafting latent items
 		   
 		   -- Cycle #1/#5
 		   -- 20514, -- Aphelion Knuckles
@@ -265,7 +358,17 @@ local prizes =
 		   21074, -- Kupo Rod
 		   21153, -- Malice Masher
 		   22089, -- Sophistry
-
+           
+		   -- Cycle #5
+		   -- 11499, -- trainees specs
+		   -- 15008, -- trainee gloves
+		   -- 19101, -- trainee knife
+		   -- 18855, -- trainee hammer
+		   -- 19110, -- trainees needle
+		   -- 18502, -- trainee axe
+		   -- 19274, -- trainee burin
+		   -- 18763, -- trainee scissors
+		   -- 17764, -- trainee sword
         },
     },
 
@@ -315,12 +418,22 @@ local prizes =
         ["price"] = 1000,
         ["items"] =
         {
-        -- HIGHLEVEL MATERIALS
+		-- Crafting items, leave these here until we can modify our skillup rates again
+	        -- static item
+			25637, -- midrass helm+1
+			11009, -- shapers shawl
+			28585, -- craftkeepers ring
+			28586, -- craftmasters ring
+			28587, -- artificers ring
 			
+        -- Dyna currency 
+			-- static item
 			1456, -- 100 Byne Bill
 			1450, -- Lungo-Nango Jadeshell
 			1453, -- Montiont Silverpiece
 			
+	    -- HIGHLEVEL MATERIALS
+		    -- Cycle #1 
 			658, -- Damascus Ingot
 			747, -- Orichalcum Ingot
 			686, -- Imperial Wootz Ingot
@@ -333,12 +446,12 @@ local prizes =
 			1312, -- Angel Skin
 			723, -- Divine Lumber
 			720, -- Ancient Lumber
-			2535, -- Jacaranda Lumber
-			1446, -- Lacquer Tree Log
-			1133, -- Dragon Blood
-			4272, -- Dragon Meat
 			
-			-- Other interesting Materials:
+			-- Cycle #2 
+			-- 2535, -- Jacaranda Lumber
+			-- 1446, -- Lacquer Tree Log
+			-- 1133, -- Dragon Blood
+			-- 4272, -- Dragon Meat
 			-- 655, -- Adaman Ingot
 			-- 2275, -- Scintillant Ingot
 			-- 2001, -- Dark Adaman Sheet
@@ -347,6 +460,8 @@ local prizes =
 			-- 2340, -- Imperial Silk Cloth
 			-- 837, -- Malboro Fiber
 			-- 2152, -- Marid Leather
+			
+			-- Cycle #3
 			-- 730, -- Bloodwood Lumber
 			-- 901, -- Venomous Claw
 			-- 903, -- Dragon Talon
@@ -356,6 +471,7 @@ local prizes =
 			-- 866, -- Wyvern Scales
 			-- 1816, -- Wyrm Horn
 			-- 1110, -- Beetle Blood
+			--2172, -- hydra scale
 			
 			
         },
@@ -484,6 +600,8 @@ local prizes =
 			-- 25679, -- White Rarab Cap +1
 			-- 28586, -- Craftmaster's Ring
 			-- 11009, -- Shaper's Shawl
+			-- 15220, -- Rain hat
+			-- 25608, -- Tlahtlamah glasses
 			-- 27556, -- Echad Ring
 			-- 15543, -- Raja's Ring
 			-- 15544, -- Sattva Ring

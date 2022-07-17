@@ -229,7 +229,7 @@ local atoritutori = zone:insertDynamicEntity({
                 return
             elseif npcUtil.tradeHasExactly(trade, {{ 'gil', 37 }}) then
                 player:tradeComplete()
-                player:PrintToPlayer("Atori-Tutori: I require 10 slime juices and 10 fresh orc livers to complete this phase.", 0xD)
+                player:PrintToPlayer("Atori-Tutori: I require 10 infinity cores and 10 fresh orc livers to complete this phase.", 0xD)
                 return
     
             -- Blade: Shun
@@ -273,7 +273,7 @@ local atoritutori = zone:insertDynamicEntity({
                 return
             elseif npcUtil.tradeHasExactly(trade, {{ 'gil', 41 }}) then
                 player:tradeComplete()
-                player:PrintToPlayer("Atori-Tutori: I require 10 griffon hides and 10 infinity cores to complete this phase.", 0xD)
+                player:PrintToPlayer("Atori-Tutori: I require 10 slime juice and 10 fresh orc liver to complete this phase.", 0xD)
                 return
     
             -- Apex Arrow
