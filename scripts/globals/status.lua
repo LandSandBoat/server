@@ -2484,6 +2484,7 @@ xi.mobMod =
     DRAW_IN_CUSTOM_RANGE      = 73, -- override the default range of MeleeRange*2 of when players start to get drawn-in
     DRAW_IN_MAXIMUM_REACH     = 74, -- players further than this range (yalms) will be unaffected by the draw-in. default (0) is whole zone
     DRAW_IN_IGNORE_STATIONARY = 75, -- stationary or bound mobs draw-in the moment they cannot attack you anymore (out of range). Place this mob mod to stop that behavior.
+    ATTRACT_FAMILY_NM         = 76, -- NMs within the same family will link onto this mob (used on Sabotenders for Cactrot Rapido)
 }
 
 -----------------------------------

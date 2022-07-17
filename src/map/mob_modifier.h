@@ -79,31 +79,32 @@ enum MOBMODIFIER : int
     MOBMOD_SHARE_TARGET   = 48, // mob always targets same target as ID in this var
     MOBMOD_CHECK_AS_NM    = 49, // If set , mob will check as a NM
     // 50 Available for use
-    MOBMOD_ROAM_TURNS         = 51, // Maximum amount of turns during a roam
-    MOBMOD_ROAM_RATE          = 52, // Roaming frequency. roam_cool - rand(roam_cool / (roam_rate / 10))
-    MOBMOD_BEHAVIOR           = 53, // Add behaviors to mob
-    MOBMOD_GIL_BONUS          = 54, // Allow mob to drop gil. Multiplier to gil dropped by mob (bonus / 100) * total
-    MOBMOD_IDLE_DESPAWN       = 55, // Time (in seconds) to despawn after being idle
-    MOBMOD_HP_STANDBACK       = 56, // mob will always standback with hp % higher to value
-    MOBMOD_MAGIC_DELAY        = 57, // Amount of seconds mob waits before casting first spell
-    MOBMOD_SPECIAL_DELAY      = 58, // Amount of seconds mob waits before using first special
-    MOBMOD_WEAPON_BONUS       = 59, // Add a bonus percentage to mob weapon damage ( bonus / 100 )
-    MOBMOD_SPAWN_ANIMATIONSUB = 60, // reset animationsub to this on spawn
-    MOBMOD_HP_SCALE           = 61, // Scale the mobs max HP. ( hp_scale / 100 ) * maxhp
-    MOBMOD_NO_STANDBACK       = 62, // Mob will never standback
-    MOBMOD_ATTACK_SKILL_LIST  = 63, // skill list to use in place of regular attacks
-    MOBMOD_CHARMABLE          = 64, // mob is charmable
-    MOBMOD_NO_MOVE            = 65, // Mob will not be able to move
-    MOBMOD_MULTI_HIT          = 66, // Mob will have as many swings as defined.
-    MOBMOD_NO_AGGRO           = 67, // If set, mob cannot aggro until unset.
-    MOBMOD_ALLI_HATE          = 68, // Range around target to add alliance member to enmity list.
-    MOBMOD_NO_LINK            = 69, // If set, mob cannot link until unset.
-    MOBMOD_NO_REST            = 70, // Mob cannot regain hp (e.g. re-burrowing antlions during ENM).
+    MOBMOD_ROAM_TURNS                = 51, // Maximum amount of turns during a roam
+    MOBMOD_ROAM_RATE                 = 52, // Roaming frequency. roam_cool - rand(roam_cool / (roam_rate / 10))
+    MOBMOD_BEHAVIOR                  = 53, // Add behaviors to mob
+    MOBMOD_GIL_BONUS                 = 54, // Allow mob to drop gil. Multiplier to gil dropped by mob (bonus / 100) * total
+    MOBMOD_IDLE_DESPAWN              = 55, // Time (in seconds) to despawn after being idle
+    MOBMOD_HP_STANDBACK              = 56, // mob will always standback with hp % higher to value
+    MOBMOD_MAGIC_DELAY               = 57, // Amount of seconds mob waits before casting first spell
+    MOBMOD_SPECIAL_DELAY             = 58, // Amount of seconds mob waits before using first special
+    MOBMOD_WEAPON_BONUS              = 59, // Add a bonus percentage to mob weapon damage ( bonus / 100 )
+    MOBMOD_SPAWN_ANIMATIONSUB        = 60, // reset animationsub to this on spawn
+    MOBMOD_HP_SCALE                  = 61, // Scale the mobs max HP. ( hp_scale / 100 ) * maxhp
+    MOBMOD_NO_STANDBACK              = 62, // Mob will never standback
+    MOBMOD_ATTACK_SKILL_LIST         = 63, // skill list to use in place of regular attacks
+    MOBMOD_CHARMABLE                 = 64, // mob is charmable
+    MOBMOD_NO_MOVE                   = 65, // Mob will not be able to move
+    MOBMOD_MULTI_HIT                 = 66, // Mob will have as many swings as defined.
+    MOBMOD_NO_AGGRO                  = 67, // If set, mob cannot aggro until unset.
+    MOBMOD_ALLI_HATE                 = 68, // Range around target to add alliance member to enmity list.
+    MOBMOD_NO_LINK                   = 69, // If set, mob cannot link until unset.
+    MOBMOD_NO_REST                   = 70, // Mob cannot regain hp (e.g. re-burrowing antlions during ENM).
     MOBMOD_DRAW_IN_INCLUDE_PARTY     = 71, // this will cause the mob's draw-in to also affect all party and alliance members
     MOBMOD_DRAW_IN_FRONT             = 72, // Mob will draw in slightly in front of them instead of the center of their hitbox
     MOBMOD_DRAW_IN_CUSTOM_RANGE      = 73, // override the default range of MeleeRange*2 of when players start to get drawn-in
     MOBMOD_DRAW_IN_MAXIMUM_REACH     = 74, // players further than this range (yalms) will be unaffected by the draw-in. default (0) is whole zone
     MOBMOD_DRAW_IN_IGNORE_STATIONARY = 75, // stationary mobs draw-in the moment they cannot attack you anymore (out of range). put this mobmod on stationary mobs that have draw-in but use ranged attacks instead of melee attacks so that they will ignore this behavior (i.e. KSNM99 Wyrm or ToAU Mission Alexander)
+    MOBMOD_ATTRACT_FAMILY_NM         = 76, // NMs within the same family will link onto this mob (used on Sabotenders for Cactrot Rapido)
 };
 
 #endif
