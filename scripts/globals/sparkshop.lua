@@ -5,6 +5,7 @@
 require('scripts/globals/npc_util')
 require('scripts/globals/zone')
 require('scripts/globals/items')
+require('scripts/globals/extravaganza')
 -----------------------------------
 
 xi = xi or {}
@@ -595,15 +596,6 @@ local function getCurrencyCap(currencyName)
     return cap
 end
 
--- Trust Alter Ego Extravaganza Checks
-function xi.sparkshop.alterEgoExtraviganzaActive()
-    local enabled = xi.settings.main.ENABLE_TRUST_ALTER_EGO_EXTRAVAGANZA
-    -- 0 = disabled, 1 = summer/ny, 2 = spring/fall, 3 = both
-    local extravaganza = enabled * 16 * 65536
-
-    return extravaganza
-end
-
 function xi.sparkshop.onTrade(player, npc, trade, eventid)
     local copperVouchersStored = player:getCurrency("aman_vouchers")
     local count = trade:getItemQty(8711)
@@ -620,11 +612,11 @@ function xi.sparkshop.onTrigger(player, npc, event)
     local sparks = player:getCurrency("spark_of_eminence")
     local vouchers = player:getCurrency("aman_vouchers")
     local remainingLimit = xi.settings.main.WEEKLY_EXCHANGE_LIMIT - player:getCharVar("weekly_sparks_spent")
-    local trust = xi.sparkshop.alterEgoExtraviganzaActive()
+    local cipher = xi.extravaganza.campaignActive() * 16 * 65536 -- Trust Alter Ego Extravaganza
     local naakual = 0 -- TODO: Naakual Seven Treasures Item Logic
 
     -- opens shop and lists available sparks
-    player:startEvent(event, 0, sparks, vouchers, naakual, trust, remainingLimit)
+    player:startEvent(event, 0, sparks, vouchers, naakual, cipher, remainingLimit)
 end
 
 function xi.sparkshop.onEventUpdate(player,csid,option)
