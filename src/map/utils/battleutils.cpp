@@ -6116,7 +6116,7 @@ namespace battleutils
         return found;
     }
 
-    uint32 CalculateSpellCastTime(CBattleEntity* PEntity, CMagicState* PMagicState)
+    uint32 CalculateSpellCastTime(CBattleEntity* PEntity, CMagicState* PMagicState, uint16 spellid)
     {
         CSpell* PSpell = PMagicState->GetSpell();
         if (PSpell == nullptr)
@@ -6130,6 +6130,11 @@ namespace battleutils
         {
             PMagicState->SetInstantCast(true);
             return 0;
+        }
+
+        if (PEntity->GetLocalVar(("[CastTime]ID_" + std::to_string(spellid)).c_str()) != 0) // Usage: mob:setLocalVar("[CastTime]ID_spellId", casttimeseconds)
+        {
+            return PEntity->GetLocalVar(("[CastTime]ID_" + std::to_string(spellid)).c_str()) * 1000; // Convert to ms
         }
 
         bool   applyArts = true;
