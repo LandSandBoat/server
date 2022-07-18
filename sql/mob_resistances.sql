@@ -502,3 +502,7 @@ INSERT INTO `mob_resistances` VALUES (503,'Mammet',1,1,1,1,0,0,0,0,0,0,0,0,0,0,0
 INSERT INTO `mob_resistances` VALUES (504,'Luopan',1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 INSERT INTO `mob_resistances` VALUES (505,'Fungi',1,1,1,1,0,0,-2500,1250,0,0,-2500,1250,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 INSERT INTO `mob_resistances` VALUES (506,'Meeble',1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+INSERT INTO `mob_resistances` VALUES (507,'Shredded_Samson',1.5,0.5,0.2,0.2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+INSERT INTO `mob_resistances` VALUES (508,'Punctured_Percy',0.2,1.5,0.2,0.2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+INSERT INTO `mob_resistances` VALUES (509,'Mauled_Murdock',0.2,0.2,1.5,1.5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+INSERT INTO `mob_resistances` VALUES (510,'Annihilated_Anthony',0.2,0.2,0.2,0.2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);

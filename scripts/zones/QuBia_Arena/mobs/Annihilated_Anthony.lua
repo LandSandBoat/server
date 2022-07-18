@@ -7,6 +7,10 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:addMod(xi.mod.UDMGMAGIC, 200)
+end
+
 entity.onMobEngaged = function(mob, target)
     local mobId = mob:getID()
     DespawnMob(mobId + 1)
