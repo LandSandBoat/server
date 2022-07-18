@@ -246,36 +246,14 @@ INSERT into item_mods VALUES (27370,110,15); -- Parrying skill +15
 -- INSERT INTO `spell_list` VALUES (801,'geo-haste',0x00000000000000000000000000000000000000004A00,7,146,7,128,1,44,63,2000,12000,0,0,864,2000,0,0,1.00,1,300,0,210,'SOA');
 -- INSERT INTO `spell_list` VALUES (818,'geo-frailty',0x00000000000000000000000000000000000000004A00,7,147,3,128,4,44,294,2000,24000,0,0,881,2000,0,0,1.00,240,100,0,210,'SOA');
 
-# Dynamis - Beaucedine Hydras 
--- INSERT INTO mob_droplist VALUES(1342,0,0,1000,9564,130);  -- Headshard: GEO - WAR/RDM/PLD/NIN/MNK/WHM/BST/BLM/DRK/BRD/DRG/THF/RNG/SAM
-INSERT INTO mob_droplist VALUES(1343,0,0,1000,9564,130);  -- Headshard: GEO - WAR
-INSERT INTO mob_droplist VALUES(1344,0,0,1000,9564,130);  -- Headshard: GEO - BRD
-INSERT INTO mob_droplist VALUES(1345,0,0,1000,9608,130);  -- Torsoshard: GEO - MNK/NIN
-INSERT INTO mob_droplist VALUES(3145,0,0,1000,9608,130);  -- Torsoshard: GEO - RNG
-INSERT INTO mob_droplist VALUES(3146,0,0,1000,9608,130);  -- Torsoshard: GEO - SMN
-INSERT INTO mob_droplist VALUES(3213,0,0,1000,9652,130);  -- Handshard: GEO - PLD
-INSERT INTO mob_droplist VALUES(3214,0,0,1000,9652,130);  -- Handshard: GEO - RDM
-INSERT INTO mob_droplist VALUES(3215,0,0,1000,9652,130);  -- Handshard: GEO - WHM
-INSERT INTO mob_droplist VALUES(3216,0,0,1000,9696,130);  -- Legshard: GEO - BLM
-INSERT INTO mob_droplist VALUES(3217,0,0,1000,9696,130);  -- Legshard: GEO - THF
-INSERT INTO mob_droplist VALUES(3218,0,0,1000,9740,130);  -- Footshard: GEO - DRK/SAM
-INSERT INTO mob_droplist VALUES(3219,0,0,1000,9696,130);  -- Legshard: GEO - BST
-INSERT INTO mob_droplist VALUES(3220,0,0,1000,9740,130);  -- Footshard: GEO - DRG
-
-# Dynamis - Xarcabard Satellite Weapons
-INSERT INTO mob_droplist VALUES(3151,0,0,1000,9565,130); --  Headshard: RUN - Satellite_Knuckles
-INSERT INTO mob_droplist VALUES(3152,0,0,1000,9565,130); --  Headshard: RUN - Satellite_Daggers
-INSERT INTO mob_droplist VALUES(3153,0,0,1000,9565,130); --  Headshard: RUN - Satellite_Longswords
-INSERT INTO mob_droplist VALUES(3154,0,0,1000,9609,130); --  Torsoshard: RUN - Satellite_Claymores
-INSERT INTO mob_droplist VALUES(3155,0,0,1000,9609,130); --  Torsoshard: RUN - Satellite_Tabars
-INSERT INTO mob_droplist VALUES(3156,0,0,1000,9609,130); --  Torsoshard: RUN - Satellite_Great_Axes
-INSERT INTO mob_droplist VALUES(3157,0,0,1000,9653,130); --  Handshard: RUN - Satellite_Scythes
-INSERT INTO mob_droplist VALUES(3158,0,0,1000,9653,130); --  Handshard: RUN - Satellite_Spears
-INSERT INTO mob_droplist VALUES(3159,0,0,1000,9653,130); --  Handshard: RUN - Satellite_Kunai
-INSERT INTO mob_droplist VALUES(3160,0,0,1000,9697,130); --  Legshard: RUN - Satellite_Tachi
-INSERT INTO mob_droplist VALUES(3161,0,0,1000,9697,130); --  Legshard: RUN - Satellite_Hammers
-INSERT INTO mob_droplist VALUES(3162,0,0,1000,9697,130); --  Legshard: RUN - Satellite_Staves
-INSERT INTO mob_droplist VALUES(3163,0,0,1000,9741,130); --  Footshard: RUN - Satellite_Longbows
-INSERT INTO mob_droplist VALUES(3164,0,0,1000,9741,130); --  Footshard: RUN - Satellite_Guns
-INSERT INTO mob_droplist VALUES(3165,0,0,1000,9741,130); --  Footshard: RUN - Satellite_Horns
-INSERT INTO mob_droplist VALUES(3166,0,0,1000,9741,130); --  Footshard: RUN - Satellite_Shield
+# Add relic armor to Dynamis
+INSERT INTO `mob_droplist` VALUES (3148,0,0,1000,27016,130); -- Bagua Mitaines   (Dynammis - San d'Oria)
+INSERT INTO `mob_droplist` VALUES (3149,0,0,1000,27018,130); -- Futhark Mitons   (Dynammis - San d'Oria)
+INSERT INTO `mob_droplist` VALUES (2558,0,0,1000,27368,130); -- Bagua Sandals    (Dynamis - Bastok)
+INSERT INTO `mob_droplist` VALUES (2558,0,0,1000,27370,130); -- Futhark Bottes   (Dynamis - Bastok)
+INSERT INTO `mob_droplist` VALUES (2553,0,0,1000,27192,130); -- Bagua Pants      (Dynamis - Windurst)
+INSERT INTO `mob_droplist` VALUES (2553,0,0,1000,27194,130); -- Futhark Trousers (Dynamis - Windurst)
+INSERT INTO `mob_droplist` VALUES (2543,0,0,1000,26664,130); -- Bagua Galero     (Dynamis - Jeuno)
+INSERT INTO `mob_droplist` VALUES (2543,0,0,1000,26666,130); -- Futhark Bandeau  (Dynamis - Jeuno)
+INSERT INTO `mob_droplist` VALUES (2552,0,0,1000,26840,130); -- Bagua Tunic      (Dynamis - Beaucedine)
+INSERT INTO `mob_droplist` VALUES (2552,0,0,1000,26842,130); -- Futhark Coat     (Dynamis - Beaucedine)
