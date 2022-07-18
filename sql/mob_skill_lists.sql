@@ -3830,8 +3830,11 @@ INSERT INTO `mob_skill_lists` VALUES ('Picolaton',1186,403); -- Stormwind
 INSERT INTO `mob_skill_lists` VALUES ('Friar_Rush',1187,510);
 INSERT INTO `mob_skill_lists` VALUES ('Bayawak',1188,367);
 INSERT INTO `mob_skill_lists` VALUES ('Pyuu_The_Spatemaker',1189,770);
+INSERT INTO `mob_skill_lists` VALUES ('Atkorkamuy',1190,463);
+INSERT INTO `mob_skill_lists` VALUES ('Qoofim',1191,450);
+INSERT INTO `mob_skill_lists` VALUES ('Qoofim',1191,451);
 
--- Next available ID: 1190
+-- Next available ID: 1192
 
 -- AirSkyBoat Skill Lists Start at 5000
 -- 5000 -> 5020 is Era Dynamis
