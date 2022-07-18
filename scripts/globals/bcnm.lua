@@ -271,7 +271,7 @@ local battlefields =
         { 1,   33,    0},   -- The Holy Crest (Quest)
         { 2,   34, 1551},   -- Wings of Fury (BS20) -- TODO: mobskills Slipstream and Turbulence
         { 3,   35, 1552},   -- Petrifying Pair (BS30)
-        { 4,   36, 1552},   -- Toadal Recall (BS30) -- TODO: shroom-in-cap mechanic
+        { 4,   36, 1552},   -- Toadal Recall (BS30)
      -- { 5,   37,    0},   -- Mirror, Mirror (Quest)
     },
 
@@ -324,7 +324,7 @@ local battlefields =
      -- {11,  107, 1553},   -- Early Bird Catches the Wyrm (KS99)
         {12,  108, 1131},   -- Royal Succession (BS40)
         {13,  109, 1177},   -- Rapid Raptors (BS50)
-        {14,  110, 1130},   -- Wild Wild Whiskers (BS60) -- TODO: should use petrifactive breath more often than other mobskill. Message before spellcasting.
+        {14,  110, 1130},   -- Wild Wild Whiskers (BS60)
      -- {15,  111, 1175},   -- Seasons Greetings (KS30)
      -- {16,  112, 1178},   -- Royale Ramble (KS30)
      -- {17,  113, 1180},   -- Moa Constrictors (KS30)
