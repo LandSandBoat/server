@@ -247,7 +247,7 @@ namespace battleutils
     void    AddTraits(CBattleEntity* PEntity, TraitList_t* TraitList, uint8 level);
     bool    HasClaim(CBattleEntity* PEntity, CBattleEntity* PTarget);
 
-    uint32 CalculateSpellCastTime(CBattleEntity*, CMagicState*);
+    uint32 CalculateSpellCastTime(CBattleEntity*, CMagicState*, uint16 spellid);
     uint16 CalculateSpellCost(CBattleEntity*, CSpell*);
     uint32 CalculateSpellRecastTime(CBattleEntity*, CSpell*);
     int16  CalculateSpellTP(CBattleEntity* PEntity, CSpell* PSpell);
