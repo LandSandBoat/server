@@ -1,8 +1,8 @@
 -----------------------------------
 -- Zone: Abyssea-Altepa
---  NPC: qm20 (???)
--- Spawns Orthus
--- !pos -823 -8.4 -390 218
+--  NPC: qm_bennu_1 (???)
+-- Spawns Bennu
+-- !pos 91 -1 -140 218
 -----------------------------------
 local ID = require('scripts/zones/Abyssea-Altepa/IDs')
 require('scripts/globals/abyssea')
@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    xi.abyssea.qmOnTrigger(player, npc, ID.mob.ORTHUS_2, { xi.ki.STEAMING_CERBERUS_TONGUE })
+    xi.abyssea.qmOnTrigger(player, npc, ID.mob.BENNU_1, { xi.ki.RESPLENDENT_ROC_QUILL })
 end
 
 entity.onEventUpdate = function(player, csid, option)

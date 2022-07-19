@@ -1,8 +1,8 @@
 -----------------------------------
 -- Zone: Abyssea-Altepa
---  NPC: qm2 (???)
--- Spawns Amarok
--- !pos -558 0 161 218
+--  NPC: qm_tablilla (???)
+-- Spawns Tablilla
+-- !pos -877 -8 -524 218
 -----------------------------------
 local ID = require('scripts/zones/Abyssea-Altepa/IDs')
 require('scripts/globals/abyssea')
@@ -11,11 +11,11 @@ require('scripts/globals/items')
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.AMAROK, { xi.items.SHARABHA_HIDE, xi.items.TIGER_KINGS_HIDE, xi.items.HIGH_QUALITY_DHALMEL_HIDE })
+    xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.TABLILLA, { xi.items.SANDY_SHARD })
 end
 
 entity.onTrigger = function(player, npc)
-    xi.abyssea.qmOnTrigger(player, npc, 0, 0, { xi.items.SHARABHA_HIDE, xi.items.TIGER_KINGS_HIDE, xi.items.HIGH_QUALITY_DHALMEL_HIDE })
+    xi.abyssea.qmOnTrigger(player, npc, 0, 0, { xi.items.SANDY_SHARD })
 end
 
 entity.onEventUpdate = function(player, csid, option)

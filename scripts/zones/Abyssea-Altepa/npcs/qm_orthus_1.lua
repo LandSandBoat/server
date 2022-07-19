@@ -1,27 +1,28 @@
 -----------------------------------
 -- Zone: Abyssea-Altepa
---  NPC: qm8 (???)
--- Spawns Chickcharney
--- !pos 36 0 -240 218
+--  NPC: qm_orthus_1 (???)
+-- Spawns Orthus
+-- !pos -400 0 112 218
 -----------------------------------
 local ID = require('scripts/zones/Abyssea-Altepa/IDs')
 require('scripts/globals/abyssea')
-require('scripts/globals/items')
+require('scripts/globals/keyitems')
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.CHICKCHARNEY, { xi.items.HIGH_QUALITY_COCKATRICE_SKIN  })
 end
 
 entity.onTrigger = function(player, npc)
-    xi.abyssea.qmOnTrigger(player, npc, 0, 0, { xi.items.HIGH_QUALITY_COCKATRICE_SKIN  })
+    xi.abyssea.qmOnTrigger(player, npc, ID.mob.ORTHUS_1, { xi.ki.STEAMING_CERBERUS_TONGUE })
 end
 
 entity.onEventUpdate = function(player, csid, option)
+    xi.abyssea.qmOnEventUpdate(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
+    xi.abyssea.qmOnEventFinish(player, csid, option)
 end
 
 return entity

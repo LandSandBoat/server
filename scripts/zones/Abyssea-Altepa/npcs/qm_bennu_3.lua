@@ -1,6 +1,6 @@
 -----------------------------------
 -- Zone: Abyssea-Altepa
---  NPC: qm22 (???)
+--  NPC: qm_bennu_3 (???)
 -- Spawns Bennu
 -- !pos -221 0.950 -320 218
 -----------------------------------
@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    xi.abyssea.qmOnTrigger(player, npc, ID.mob.BENNU_2, { xi.ki.RESPLENDENT_ROC_QUILL })
+    xi.abyssea.qmOnTrigger(player, npc, ID.mob.BENNU_3, { xi.ki.RESPLENDENT_ROC_QUILL })
 end
 
 entity.onEventUpdate = function(player, csid, option)

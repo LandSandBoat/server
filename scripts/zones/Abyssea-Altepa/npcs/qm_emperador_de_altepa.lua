@@ -1,28 +1,27 @@
 -----------------------------------
 -- Zone: Abyssea-Altepa
---  NPC: qm17 (???)
--- Spawns Dragua
--- !pos -221 0.8 -350 218
+--  NPC: qm_emperador_de_altepa (???)
+-- Spawns Emperor de Altepa
+-- !pos -491 0 -611 218
 -----------------------------------
 local ID = require('scripts/zones/Abyssea-Altepa/IDs')
 require('scripts/globals/abyssea')
-require('scripts/globals/keyitems')
+require('scripts/globals/items')
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
+    xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.EMPERADOR_DE_ALTEPA, { xi.items.BOTTLE_OF_OASIS_WATER, xi.items.SPRIG_OF_GIANT_MISTLETOE })
 end
 
 entity.onTrigger = function(player, npc)
-    xi.abyssea.qmOnTrigger(player, npc, ID.mob.DRAGUA_1, { xi.ki.BLOODIED_DRAGON_EAR })
+    xi.abyssea.qmOnTrigger(player, npc, 0, 0, { xi.items.BOTTLE_OF_OASIS_WATER, xi.items.SPRIG_OF_GIANT_MISTLETOE })
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    xi.abyssea.qmOnEventUpdate(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    xi.abyssea.qmOnEventFinish(player, csid, option)
 end
 
 return entity

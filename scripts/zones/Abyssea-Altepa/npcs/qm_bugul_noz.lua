@@ -1,28 +1,27 @@
 -----------------------------------
 -- Zone: Abyssea-Altepa
---  NPC: qm12 (???)
--- Spawns Orthus
--- !pos -400 0 112 218
+--  NPC: qm_bugul_noz (???)
+-- Spawns Bugul Noz
+-- !pos -608 -1 -397 218
 -----------------------------------
 local ID = require('scripts/zones/Abyssea-Altepa/IDs')
 require('scripts/globals/abyssea')
-require('scripts/globals/keyitems')
+require('scripts/globals/items')
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
+    xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.BUGUL_NOZ, { xi.items.HANDFUL_OF_SABULOUS_CLAY })
 end
 
 entity.onTrigger = function(player, npc)
-    xi.abyssea.qmOnTrigger(player, npc, ID.mob.ORTHUS, { xi.ki.STEAMING_CERBERUS_TONGUE })
+    xi.abyssea.qmOnTrigger(player, npc, 0, 0, { xi.items.HANDFUL_OF_SABULOUS_CLAY })
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    xi.abyssea.qmOnEventUpdate(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    xi.abyssea.qmOnEventFinish(player, csid, option)
 end
 
 return entity

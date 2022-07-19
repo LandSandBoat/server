@@ -1,27 +1,28 @@
 -----------------------------------
 -- Zone: Abyssea-Altepa
---  NPC: qm3 (???)
--- Spawns Shaula
--- !pos -71 0 408 218
+--  NPC: qm_rani_2 (???)
+-- Spawns Rani
+-- !pos -801 -7.8 -368 218
 -----------------------------------
 local ID = require('scripts/zones/Abyssea-Altepa/IDs')
 require('scripts/globals/abyssea')
-require('scripts/globals/items')
+require('scripts/globals/keyitems')
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.SHAULA, { xi.items.VIAL_OF_VADLEANY_FLUID, xi.items.HIGH_QUALITY_SCORPION_CLAW })
 end
 
 entity.onTrigger = function(player, npc)
-    xi.abyssea.qmOnTrigger(player, npc, 0, 0, { xi.items.VIAL_OF_VADLEANY_FLUID, xi.items.HIGH_QUALITY_SCORPION_CLAW })
+    xi.abyssea.qmOnTrigger(player, npc, ID.mob.RANI_2, { xi.ki.BROKEN_IRON_GIANT_SPIKE, xi.ki.RUSTED_CHARIOT_GEAR })
 end
 
 entity.onEventUpdate = function(player, csid, option)
+    xi.abyssea.qmOnEventUpdate(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
+    xi.abyssea.qmOnEventFinish(player, csid, option)
 end
 
 return entity

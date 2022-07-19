@@ -1,27 +1,28 @@
 -----------------------------------
 -- Zone: Abyssea-Altepa
---  NPC: qm6 (???)
--- Spawns Sharabha
--- !pos -314 0 308 218
+--  NPC: qm_dragua_2 (???)
+-- Spawns Dragua
+-- !pos -221 0.8 -350 218
 -----------------------------------
 local ID = require('scripts/zones/Abyssea-Altepa/IDs')
 require('scripts/globals/abyssea')
-require('scripts/globals/items')
+require('scripts/globals/keyitems')
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.SHARABHA, { xi.items.SAND_CAKED_FANG })
 end
 
 entity.onTrigger = function(player, npc)
-    xi.abyssea.qmOnTrigger(player, npc, 0, 0, { xi.items.SAND_CAKED_FANG })
+    xi.abyssea.qmOnTrigger(player, npc, ID.mob.DRAGUA_2, { xi.ki.BLOODIED_DRAGON_EAR })
 end
 
 entity.onEventUpdate = function(player, csid, option)
+    xi.abyssea.qmOnEventUpdate(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
+    xi.abyssea.qmOnEventFinish(player, csid, option)
 end
 
 return entity

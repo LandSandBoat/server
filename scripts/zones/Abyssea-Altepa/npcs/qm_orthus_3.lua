@@ -1,8 +1,8 @@
 -----------------------------------
 -- Zone: Abyssea-Altepa
---  NPC: qm13 (???)
--- Spawns Dragua
--- !pos -221 1 -335 218
+--  NPC: qm_orthus_3 (???)
+-- Spawns Orthus
+-- !pos -823 -8.4 -390 218
 -----------------------------------
 local ID = require('scripts/zones/Abyssea-Altepa/IDs')
 require('scripts/globals/abyssea')
@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    xi.abyssea.qmOnTrigger(player, npc, ID.mob.DRAGUA, { xi.ki.BLOODIED_DRAGON_EAR })
+    xi.abyssea.qmOnTrigger(player, npc, ID.mob.ORTHUS_3, { xi.ki.STEAMING_CERBERUS_TONGUE })
 end
 
 entity.onEventUpdate = function(player, csid, option)
