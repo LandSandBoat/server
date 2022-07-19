@@ -1,3 +1,7 @@
+---------------------------------------------------------------
+-- Gardening Module to remove Results based on Era by Expansion
+---------------------------------------------------------------
+
 UPDATE gardening_results
 SET weight = 0 WHERE resultid IN 
 (
