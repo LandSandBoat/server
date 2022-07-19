@@ -1707,28 +1707,32 @@ xi.mod =
     GEOMANCY_MP_NO_DEPLETE = 1037, -- Percent chance for Geomancy to cost 0 MP (GEO AF3 Sets)
 
     -- Permenant Resistance Build Modifiers
-    SLEEPRESBUILD                 = 1138,
-    POISONRESBUILD                = 1139,
-    PARALYZERESBUILD              = 1140,
-    BLINDRESBUILD                 = 1141,
-    SILENCERESBUILD               = 1142,
-    VIRUSRESBUILD                 = 1143,
-    PETRIFYRESBUILD               = 1144,
-    BINDRESBUILD                  = 1145,
-    CURSERESBUILD                 = 1146,
-    GRAVITYRESBUILD               = 1147,
-    SLOWRESBUILD                  = 1148,
-    STUNRESBUILD                  = 1149,
-    CHARMRESBUILD                 = 1150,
-    AMNESIARESBUILD               = 1151,
-    LULLABYRESBUILD               = 1152,
-    DEATHRESBUILD                 = 1153,
+    SLEEPRESBUILD                 = 1138, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    POISONRESBUILD                = 1139, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    PARALYZERESBUILD              = 1140, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    BLINDRESBUILD                 = 1141, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    SILENCERESBUILD               = 1142, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    VIRUSRESBUILD                 = 1143, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    PETRIFYRESBUILD               = 1144, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    BINDRESBUILD                  = 1145, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    CURSERESBUILD                 = 1146, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    GRAVITYRESBUILD               = 1147, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    SLOWRESBUILD                  = 1148, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    STUNRESBUILD                  = 1149, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    CHARMRESBUILD                 = 1150, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    AMNESIARESBUILD               = 1151, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    LULLABYRESBUILD               = 1152, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    DEATHRESBUILD                 = 1153, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    PET_DMG_TAKEN_PHYSICAL        = 1154, -- Percent increase/decrease in pet physical damage taken for the target.
+    PET_DMG_TAKEN_MAGICAL         = 1155, -- Percent increase/decrease in pet magical damage taken for the target.
+    PET_DMG_TAKEN_BREATH          = 1156, -- Percent increase/decrease in pet breath damage taken for the target.
 
     -- IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN src/map/modifier.h ASWELL!
 
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     -- 570 - 825 used by WS DMG mods these are not spares.
     -- For Next ID, see modifier.h
+    -- Spares start at: 1157
 }
 
 xi.latent =

@@ -222,6 +222,10 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
         end
     end
 
+    if target:getMod(xi.mod.PET_DMG_TAKEN_PHYSICAL) ~= 0 then
+        finaldmg = finaldmg * (target:getMod(xi.mod.PET_DMG_TAKEN_PHYSICAL) / 100)
+    end
+
     returninfo.dmg = finaldmg
     returninfo.hitslanded = numHitsLanded
 
