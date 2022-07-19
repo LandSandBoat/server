@@ -1,6 +1,7 @@
 -----------------------------------
 -- Warrior Job Utilities
 -----------------------------------
+require('scripts/globals/items')
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
@@ -24,7 +25,7 @@ end
 xi.job_utils.warrior.checkTomahawk = function(player, target, ability)
     local ammoID = player:getEquipID(xi.slot.AMMO)
 
-    if ammoID == 18258 then
+    if ammoID == xi.items.THROWING_TOMAHAWK then
         return 0, 0
     else
         return xi.msg.basic.CANNOT_PERFORM, 0
