@@ -92,7 +92,7 @@ uint16 CBattlefield::GetZoneID() const
     return m_Zone->GetID();
 }
 
-const std::string& CBattlefield::GetName() const
+std::string const& CBattlefield::GetName() const
 {
     return m_Name;
 }
@@ -162,7 +162,7 @@ duration CBattlefield::GetLastTimeUpdate() const
     return m_LastPromptTime;
 }
 
-uint64_t CBattlefield::GetLocalVar(const std::string& name) const
+uint64_t CBattlefield::GetLocalVar(std::string const& name) const
 {
     auto var = m_LocalVars.find(name);
     return var != m_LocalVars.end() ? var->second : 0;
@@ -183,12 +183,12 @@ uint8 CBattlefield::GetLevelCap() const
     return m_LevelCap;
 }
 
-void CBattlefield::SetName(const std::string& name)
+void CBattlefield::SetName(std::string const& name)
 {
     m_Name = name;
 }
 
-void CBattlefield::SetInitiator(const std::string& name)
+void CBattlefield::SetInitiator(std::string const& name)
 {
     m_Initiator.name = name;
 }
@@ -208,7 +208,7 @@ void CBattlefield::SetArea(uint8 area)
     m_Area = area;
 }
 
-void CBattlefield::SetRecord(const std::string& name, duration time, size_t partySize)
+void CBattlefield::SetRecord(std::string const& name, duration time, size_t partySize)
 {
     m_Record.name      = !name.empty() ? name : m_Initiator.name;
     m_Record.time      = time;
@@ -236,7 +236,7 @@ void CBattlefield::SetLevelCap(uint8 cap)
     m_LevelCap = cap;
 }
 
-void CBattlefield::SetLocalVar(const std::string& name, uint64_t value)
+void CBattlefield::SetLocalVar(std::string const& name, uint64_t value)
 {
     m_LocalVars[name] = value;
 }

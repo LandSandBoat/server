@@ -104,7 +104,6 @@ zones[xi.zone.SAUROMUGUE_CHAMPAIGN] =
 
     npc =
     {
-        CASKET_BASE = 17269190,
         QM2         = 17269228,
     },
 }

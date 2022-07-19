@@ -61,8 +61,8 @@ entity.onEventFinish = function(player, csid, option)
     if csid == 112 then
         player:setCharVar("aClockMostdelicateVar", 1)
     elseif csid == 115 then
-        player:addCharVar("saveTheClockTowerVar", 1)
-        player:addCharVar("saveTheClockTowerNPCz1", 2)
+        player:incrementCharVar("saveTheClockTowerVar", 1)
+        player:incrementCharVar("saveTheClockTowerNPCz1", 2)
     end
 end
 

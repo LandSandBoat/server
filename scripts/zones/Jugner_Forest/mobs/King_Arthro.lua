@@ -13,6 +13,7 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+    mob:setMod(xi.mod.UFASTCAST, 100)
 end
 
 entity.onMobSpawn = function(mob)
@@ -32,25 +33,12 @@ entity.onAdditionalEffect = function(mob, target, damage)
     end
 end
 
-entity.onMobMagicPrepare = function(mob, target, spellId)
-    -- Instant cast on spells - Waterga IV, Poisonga II, Drown, and Enwater
-    local rnd = math.random()
-
-    if rnd < 0.2 then
-        return 202 -- Waterga IV
-    elseif rnd < 0.6 then
-        return 226 -- Poisonga II
-    elseif rnd < 0.8 then
-        return 240 -- Drown
-    else
-        return 105 -- Enwater
-    end
-end
-
 entity.onMobDeath = function(mob, player, isKiller)
 end
 
 entity.onMobDespawn = function(mob)
+    UpdateNMSpawnPoint(mob:getID())
+
     local kingArthroID = mob:getID()
 
     GetMobByID(kingArthroID):setLocalVar("[POP]King_Arthro", 0)

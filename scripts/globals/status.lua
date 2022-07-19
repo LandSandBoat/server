@@ -838,9 +838,10 @@ xi.effect =
     ELEMENTALRES_DOWN        = 802, -- Elemental resistance down
     FULL_SPEED_AHEAD         = 803, -- Helper for quest: Full Speed Ahead!
     HYSTERIA                 = 804, -- Used for Hysteroanima to stop after readying a weaponskill with no msg.
-    -- PLACEHOLDER           = 805, -- Description
-    -- 805-1022
-    -- PLACEHOLDER             = 1023 -- The client dat file seems to have only this many "slots", results of exceeding that are untested.
+    TOMAHAWK                 = 805, -- Silent status effect inflicted by a Warrior using the "Tomahawk" job ability
+    -- PLACEHOLDER           = 806, -- Description
+    -- 806-1022
+    -- PLACEHOLDER           = 1023 -- The client dat file seems to have only this many "slots", results of exceeding that are untested.
 }
 
 -----------------------------------
@@ -1231,6 +1232,17 @@ xi.mod =
     TP_BONUS                        = 345,
     PERPETUATION_REDUCTION          = 346,
 
+    -- Dragoon
+    WYVERN_LVL_BONUS                = 1043, -- Wyvern: Lv.+ (Increases wyvern's base level above 99)
+
+    -- Summoner
+    AVATAR_LVL_BONUS                = 1040, -- Avatar: Lv. ###/+ (Increases all avatar's base level above 99)
+    CARBUNCLE_LVL_BONUS             = 1041, -- Carbuncle: Lv.+ (Increases Carbuncle's base level above 99)
+    CAIT_SITH_LVL_BONUS             = 1042, -- Cait Sith: Lv.+ (Increases Cait Sith's base level above 99)
+
+    -- Puppetmaster
+    AUTOMATON_LVL_BONUS             = 1044, -- Automaton: Lv. (Increases automaton's base level above 99)
+
     -- Geomancer
     FULL_CIRCLE                     = 1025, -- Increases the initial multiplier on MP returned via Full Circle
     BOLSTER_EFFECT                  = 1028, -- Adds bonus duration as +N seconds
@@ -1400,6 +1412,8 @@ xi.mod =
     MAXIMUM_SONGS_BONUS             = 453, --
     SONG_DURATION_BONUS             = 454, --
     SONG_SPELLCASTING_TIME          = 455, --
+
+    AVATARS_FAVOR_ENHANCE           = 630, -- Adds 1 rank to avatars favor
 
     QUICK_DRAW_DMG                  = 411, --
     QUICK_DRAW_MACC                 = 191, -- Quick draw magic accuracy

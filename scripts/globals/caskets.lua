@@ -133,7 +133,15 @@ end
 -- Desc: Grabs an id for a casket if one is available if not, no casket will spawn.
 -----------------------------------
 local function getCasketID(mob)
-    local baseChestId = zones[mob:getZoneID()].npc.CASKET_BASE
+    local zone    = mob:getZone()
+    -- Get a list of all entities in this zone that have the name 'Treasure_Casket'
+    local caskets = zone:queryEntitiesByName('Treasure_Casket')
+    -- If there are none, bail out
+    if #caskets == 0 then
+        return 0
+    end
+    -- Get the ID of the first entry and use that as our base ID to offset against
+    local baseChestId = caskets[1]:getID()
     local chestId     = 0
 
     for i = baseChestId, baseChestId + 15 do
@@ -648,7 +656,11 @@ xi.caskets.onTrigger = function(player, npc)
     local chestOwner        = npc:getLocalVar("[caskets]PARTYID")     -- the id of the party that has rights to the chest.
     local leaderId          = player:getLeaderID()
     --local aumentflag      = 0x0202                                  -- Used for Evoliths (not implemented yet).
-    local eventBase         = zones[npc:getZoneID()].npc.CASKET_BASE           -- base id of the current chest.
+    local zone              = npc:getZone()
+    -- Get a list of all entities in this zone that have the name 'Treasure_Casket'
+    local caskets           = zone:queryEntitiesByName('Treasure_Casket')
+    -- Get the ID of the first entry and use that as our base ID to offset against
+    local eventBase         = caskets[1]:getID() -- base id of the current chest.
     local lockedEvent       = casketInfo.cs[chestId - eventBase] + 2  -- Chest locked cs's.
     local unlockedEvent     = casketInfo.cs[chestId - eventBase]      -- Chest unlocked cs's.
 

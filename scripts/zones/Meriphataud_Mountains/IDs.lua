@@ -104,7 +104,6 @@ zones[xi.zone.MERIPHATAUD_MOUNTAINS] =
 
     npc =
     {
-        CASKET_BASE   = 17265219,
         OVERSEER_BASE = 17265271, -- Chegourt_RK in npc_list
     },
 }

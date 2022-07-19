@@ -64,7 +64,7 @@ local garlaigeQmOnEventFinish = function(player, csid, option, npc)
 
     if option == 1 then
         player:messageSpecial(garlaigeID.text.THE_PRESENCE_MOVES + qmData[3]) -- Presence moved west.
-        quest:addVar(player, 'hagainProg', 1)
+        quest:incrementVar(player, 'hagainProg', 1)
     end
 end
 

@@ -133,7 +133,6 @@ zones[xi.zone.NORTH_GUSTABERG] =
 
     npc =
     {
-        CASKET_BASE   = 17212023,
         OVERSEER_BASE = 17212060, -- Ennigreaud_RK in npc_list
     },
 }

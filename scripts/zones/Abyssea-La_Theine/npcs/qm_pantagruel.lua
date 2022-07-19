@@ -4,13 +4,13 @@
 -- Spawns Pantagruel
 -- !pos -356 8 163 132
 -----------------------------------
+local ID = require('scripts/zones/Abyssea-La_Theine/IDs')
 require('scripts/globals/abyssea')
 require('scripts/globals/items')
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local ID = zones[player:getZoneID()]
     xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.PANTAGRUEL, { xi.items.OVERSIZED_SOCK })
 end
 
