@@ -18,7 +18,7 @@ effect_object.onEffectGain = function(target, effect)
     for i = 1, #xi.magic.specificDmgTakenMod do
         local sdtModMagic = target:getMod(xi.magic.specificDmgTakenMod[i])
         local reductionMagic = sdtModMagic * 0.25
-    
+
         target:addMod(xi.magic.specificDmgTakenMod[i], -reductionMagic)
     end
 end
