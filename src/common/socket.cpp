@@ -8,8 +8,8 @@
 #include "../common/timer.h"
 #include "../common/utils.h"
 
-#include "socket.h"
 #include "settings.h"
+#include "socket.h"
 
 #include <cstdio>
 #include <cstdlib>
@@ -358,8 +358,8 @@ static std::vector<AccessControl> access_allow;
 static std::vector<AccessControl> access_deny;
 static int                        access_order = ACO_DENY_ALLOW;
 static int                        access_debug = 0;
-static bool                       udp_debug = false;
-static bool                       tcp_debug = false;
+static bool                       udp_debug    = false;
+static bool                       tcp_debug    = false;
 //--
 static int      connect_count    = 10;
 static duration connect_interval = 3s;
@@ -390,7 +390,7 @@ static int connect_check(uint32 ip)
 static int connect_check_(uint32 ip)
 {
     TracyZoneScoped;
-    ConnectHistory* hist = connect_history[ip & 0xFFFF];
+    ConnectHistory* hist       = connect_history[ip & 0xFFFF];
     int             is_allowip = 0;
     int             is_denyip  = 0;
     int             connect_ok = 0;
@@ -1139,8 +1139,7 @@ void socket_init_tcp()
         NULL,
         CTaskMgr::TASK_INTERVAL,
         connect_check_clear,
-        5min
-    );
+        5min);
 }
 
 void socket_final_tcp()
