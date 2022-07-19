@@ -560,6 +560,22 @@ namespace luautils
             return;
         }
 
+        // Handle IDs then return
+        if (parts.size() == 3 && parts[2] == "IDs")
+        {
+            auto result = lua.safe_script_file(filename, &sol::script_pass_on_error);
+            if (!result.valid())
+            {
+                sol::error err = result;
+                ShowError("luautils::CacheLuaObjectFromFile: Load command error: %s: %s", filename, err.what());
+                return;
+            }
+
+            PopulateIDLookups();
+            ShowInfo("[FileWatcher] IDs %s", filename);
+            return;
+        }
+
         // Handle Quests and Missions then return
         if (parts.size() == 3 &&
             (parts[0] == "quests" || parts[0] == "missions"))
@@ -730,6 +746,91 @@ namespace luautils
         }
 
         CacheLuaObjectFromFile(filename);
+    }
+
+    void PopulateIDLookups(std::optional<uint16> maybeZoneId)
+    {
+        // clang-format off
+        auto handleZone = [&](CZone* PZone)
+        {
+            auto zoneName = std::string((const char*)PZone->GetName());
+            auto result   = lua.safe_script_file(fmt::format("scripts/zones/{}/IDs.lua", zoneName));
+            if (result.valid() && zoneName != "Residential_Area")
+            {
+                auto table = lua["zones"][PZone->GetID()].get<sol::table>();
+                for (auto [outerKey, outerValue] : table)
+                {
+                    auto outerName = outerKey.as<std::string>();
+                    if (outerName == "mob" || outerName == "npc")
+                    {
+                        for (auto [innerKey, innerValue] : outerValue.as<sol::table>())
+                        {
+                            if (innerKey.get_type() == sol::type::string && innerValue.get_type() == sol::type::number)
+                            {
+                                auto name = innerKey.as<std::string>();
+                                auto num  = innerValue.as<int32>();
+                                if (num == -1)
+                                {
+                                    bool found = false;
+                                    if (outerName == "mob")
+                                    {
+                                        PZone->ForEachMob([&](CMobEntity* PMob)
+                                        {
+                                            if (!found)
+                                            {
+                                                auto keyName = to_upper(std::string((const char*)PMob->GetName()));
+                                                if (keyName == name)
+                                                {
+                                                    lua["zones"][PZone->GetID()][outerName][keyName] = PMob->id;
+                                                    found = true;
+                                                    DebugIDLookup(fmt::format("New value for {}.ID.{}.{} = {}",
+                                                        zoneName, outerName, name, lua["zones"][PZone->GetID()][outerName][keyName].get<uint32>()));
+                                                }
+                                            }
+                                        });
+                                    }
+                                    else if (outerName == "npc")
+                                    {
+                                        bool found = false;
+                                        PZone->ForEachNpc([&](CNpcEntity* PNpc)
+                                        {
+                                            if (!found)
+                                            {
+                                                auto keyName = to_upper(std::string((const char*)PNpc->GetName()));
+                                                if (keyName == name)
+                                                {
+                                                    lua["zones"][PZone->GetID()][outerName][keyName] = PNpc->id;
+                                                    found = true;
+                                                    DebugIDLookup(fmt::format("New value for {}.ID.{}.{} = {}",
+                                                        zoneName, outerName, name, lua["zones"][PZone->GetID()][outerName][keyName].get<uint32>()));
+                                                }
+                                            }
+                                        });
+                                    }
+                                    if (!found)
+                                    {
+                                        ShowError(fmt::format("Could not complete id lookup for {}.ID.{}.{}", zoneName, outerName, name))
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        if (!maybeZoneId.has_value())
+        {
+            zoneutils::ForEachZone([&](CZone* PZone)
+            {
+                handleZone(PZone);
+            });
+        }
+        else
+        {
+            handleZone(zoneutils::GetZone(maybeZoneId.value()));
+        }
+        // clang-format on
     }
 
     // temporary solution for geysers in Dangruf_Wadi
