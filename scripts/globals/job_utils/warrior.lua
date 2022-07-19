@@ -22,8 +22,13 @@ xi.job_utils.warrior.checkMightyStrikes = function(player, target, ability)
 end
 
 xi.job_utils.warrior.checkTomahawk = function(player, target, ability)
-    --Placeholder code. Needs to check for direction and equiped ammo.
-    return 0, 0
+    local ammoID = player:getEquipID(xi.slot.AMMO)
+
+    if ammoID == 18258 then
+        return 0, 0
+    else
+        return xi.msg.basic.CANNOT_PERFORM, 0
+    end
 end
 
 -----------------------------------
@@ -63,7 +68,10 @@ xi.job_utils.warrior.useRetaliation = function(player, target, ability)
 end
 
 xi.job_utils.warrior.useTomahawk = function(player, target, ability)
-    --placeholder
+    local merits = player:getMerit(xi.merit.TOMAHAWK) - 15
+    local duration = 30 + merits
+
+    target:addStatusEffectEx(xi.effect.TOMAHAWK, 0, 25, 3, duration, 0, 0, 0)
 end
 
 xi.job_utils.warrior.useWarcry = function(player, target, ability)
