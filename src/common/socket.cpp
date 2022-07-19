@@ -570,11 +570,6 @@ int access_ipmask(const char* str, AccessControl* acc)
         ip   = 0;
         mask = 0;
     }
-    else if (strcmp(str, "") == 0)
-    {
-        // no-op
-        return 1;
-    }
     else
     {
         if (((n = sscanf(str, "%u.%u.%u.%u/%u.%u.%u.%u", a, a + 1, a + 2, a + 3, m, m + 1, m + 2, m + 3)) != 8 && // not an ip + standard mask
@@ -1012,6 +1007,12 @@ std::vector<AccessControl> get_access_list(std::string access_list)
         // get string delimited by comma character
         getline(ss, entry, ',');
 
+        if (entry == "")
+        {
+            // skip
+            continue;
+        }
+
         // validate our entry before pushing it into our results list
         AccessControl acc{};
         if (access_ipmask(entry.c_str(), &acc))
@@ -1090,6 +1091,10 @@ void socket_tcp_setup()
     }
     auto allow_list_str = settings::get<std::string>("network.TCP_ALLOW");
     access_allow        = get_access_list(allow_list_str);
+    if (access_debug)
+    {
+        ShowInfo("Size of allow access list: %d", access_allow.size());
+    }
 
     if (access_debug)
     {
@@ -1097,6 +1102,10 @@ void socket_tcp_setup()
     }
     auto deny_list_str = settings::get<std::string>("network.TCP_DENY");
     access_deny        = get_access_list(deny_list_str);
+    if (access_debug)
+    {
+        ShowInfo("Size of deny access list: %d", access_deny.size());
+    }
 
     // connection limit settings
     connect_interval = std::chrono::milliseconds(
