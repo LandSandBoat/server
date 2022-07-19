@@ -4,13 +4,13 @@
 -- Spawns Clingy Clare
 -- !pos 150.000 17.601 90.000 15
 -----------------------------------
+local ID = require('scripts/zones/Abyssea-Konschtat/IDs')
 require('scripts/globals/abyssea')
 require('scripts/globals/items')
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local ID = zones[player:getZoneID()]
     xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.CLINGY_CLARE, { xi.items.TINY_MORBOL_VINE })
 end
 
