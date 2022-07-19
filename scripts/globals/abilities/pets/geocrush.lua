@@ -17,6 +17,7 @@ ability_object.onPetAbility = function(target, pet, skill)
     local tp = skill:getTP() / 10
     local master = pet:getMaster()
     local merits = 0
+    local dmgmod = (((45/256) * tp) + (1370/256))
     if master ~= nil and master:isPC() then
         merits = master:getMerit(xi.merit.GEOCRUSH)
     end
@@ -26,10 +27,8 @@ ability_object.onPetAbility = function(target, pet, skill)
         tp = 300
     end
 
-    --note: this formula is only accurate for level 75 - 76+ may have a different intercept and/or slope
-    local damage = math.floor(512 + 1.72*(tp+1))
-    damage = damage + (dINT * 1.5)
-    damage = xi.mobskills.mobMagicalMove(pet, target, skill, damage, xi.magic.ele.EARTH, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 0)
+    local damage = pet:getMainLvl() + 2 + (0.30 * pet:getStat(xi.mod.INT)) + (dINT * 1.5)
+    damage = xi.mobskills.mobMagicalMove(pet, target, skill, damage, xi.magic.ele.EARTH, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT, 0)
     damage = xi.mobskills.mobAddBonuses(pet, target, damage.dmg, xi.magic.ele.EARTH)
     damage = xi.summon.avatarFinalAdjustments(damage, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.EARTH, 1)
 

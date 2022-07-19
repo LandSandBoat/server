@@ -738,7 +738,7 @@ namespace battleutils
                 bool crit = battleutils::GetCritHitRate(PDefender, PAttacker, true) > xirand::GetRandomNumber(100);
 
                 // Dmg math.
-                float  DamageRatio = GetDamageRatio(PDefender, PAttacker, crit, 0.f);
+                float  DamageRatio = GetDamageRatio(PDefender, PAttacker, crit, 0.f, SLOT_MAIN);
                 uint16 dmg         = (uint32)((PDefender->GetMainWeaponDmg() + battleutils::GetFSTR(PDefender, PAttacker, SLOT_MAIN)) * DamageRatio);
                 dmg                = attackutils::CheckForDamageMultiplier(((CCharEntity*)PDefender), dynamic_cast<CItemWeapon*>(PDefender->m_Weapons[SLOT_MAIN]), dmg,
                                                                            PHYSICAL_ATTACK_TYPE::NORMAL, SLOT_MAIN);
@@ -2731,9 +2731,9 @@ namespace battleutils
      *                                                                       *
      ************************************************************************/
 
-    float GetDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isCritical, float bonusAttPercent)
+    float GetDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isCritical, float bonusAttPercent, uint16 slot)
     {
-        uint16 attack = PAttacker->ATT();
+        uint16 attack = PAttacker->ATT(slot);
         // Bonus attack currently only from footwork
         if (bonusAttPercent >= 1)
         {
@@ -2828,7 +2828,7 @@ namespace battleutils
         // https://www.bluegartr.com/threads/114636-Monster-Avatar-Pet-damage
         // Monster pDIF = Avatar pDIF = Pet pDIF
 
-        auto* targ_weapon = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_MAIN]);
+        auto* targ_weapon = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[slot]);
 
         // Default for 1H is 2.0
         float maxRatio = 2.0f;
@@ -4586,7 +4586,7 @@ namespace battleutils
                         AttMultiplerPercent = PAttacker->getMod(Mod::JUMP_ATT_BONUS) / 100.f;
                     }
 
-                    float DamageRatio = battleutils::GetDamageRatio(PAttacker, PVictim, false, AttMultiplerPercent);
+                    float DamageRatio = battleutils::GetDamageRatio(PAttacker, PVictim, false, AttMultiplerPercent, SLOT_MAIN);
                     damageForRound    = (uint16)((PAttacker->GetMainWeaponDmg() + battleutils::GetFSTR(PAttacker, PVictim, SLOT_MAIN)) * DamageRatio);
 
                     // bonus applies to jump only, not high jump
@@ -6116,7 +6116,7 @@ namespace battleutils
         return found;
     }
 
-    uint32 CalculateSpellCastTime(CBattleEntity* PEntity, CMagicState* PMagicState)
+    uint32 CalculateSpellCastTime(CBattleEntity* PEntity, CMagicState* PMagicState, uint16 spellid)
     {
         CSpell* PSpell = PMagicState->GetSpell();
         if (PSpell == nullptr)
@@ -6130,6 +6130,11 @@ namespace battleutils
         {
             PMagicState->SetInstantCast(true);
             return 0;
+        }
+
+        if (PEntity->GetLocalVar(("[CastTime]ID_" + std::to_string(spellid)).c_str()) != 0) // Usage: mob:setLocalVar("[CastTime]ID_spellId", casttimeseconds)
+        {
+            return PEntity->GetLocalVar(("[CastTime]ID_" + std::to_string(spellid)).c_str()) * 1000; // Convert to ms
         }
 
         bool   applyArts = true;

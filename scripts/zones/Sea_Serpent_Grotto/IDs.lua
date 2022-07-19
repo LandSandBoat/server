@@ -55,7 +55,6 @@ zones[xi.zone.SEA_SERPENT_GROTTO] =
         },
         NAMTAR_PH =
         {
-            [17498178] = 17498184, -- -128.762 9.595 164.996
             [17498183] = 17498184, -- -157.606 9.905 168.518
         },
         WUUR_THE_SANDCOMBER_PH =
@@ -120,6 +119,7 @@ zones[xi.zone.SEA_SERPENT_GROTTO] =
         MIMIC        = 17498564,
         WATER_LEAPER = 17498565,
         GLYRYVILU    = 17498566,
+        CHARYBDIS    = 17498522,
     },
     npc =
     {

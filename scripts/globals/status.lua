@@ -1231,6 +1231,17 @@ xi.mod =
     TP_BONUS                        = 345,
     PERPETUATION_REDUCTION          = 346,
 
+    -- Dragoon
+    WYVERN_LVL_BONUS                = 1043, -- Wyvern: Lv.+ (Increases wyvern's base level above 99)
+
+    -- Summoner
+    AVATAR_LVL_BONUS                = 1040, -- Avatar: Lv. ###/+ (Increases all avatar's base level above 99)
+    CARBUNCLE_LVL_BONUS             = 1041, -- Carbuncle: Lv.+ (Increases Carbuncle's base level above 99)
+    CAIT_SITH_LVL_BONUS             = 1042, -- Cait Sith: Lv.+ (Increases Cait Sith's base level above 99)
+
+    -- Puppetmaster
+    AUTOMATON_LVL_BONUS             = 1044, -- Automaton: Lv. (Increases automaton's base level above 99)
+
     -- Geomancer
     FULL_CIRCLE                     = 1025, -- Increases the initial multiplier on MP returned via Full Circle
     BOLSTER_EFFECT                  = 1028, -- Adds bonus duration as +N seconds
@@ -1400,6 +1411,8 @@ xi.mod =
     MAXIMUM_SONGS_BONUS             = 453, --
     SONG_DURATION_BONUS             = 454, --
     SONG_SPELLCASTING_TIME          = 455, --
+
+    AVATARS_FAVOR_ENHANCE           = 630, -- Adds 1 rank to avatars favor
 
     QUICK_DRAW_DMG                  = 411, --
     QUICK_DRAW_MACC                 = 191, -- Quick draw magic accuracy
@@ -1694,28 +1707,32 @@ xi.mod =
     GEOMANCY_MP_NO_DEPLETE = 1037, -- Percent chance for Geomancy to cost 0 MP (GEO AF3 Sets)
 
     -- Permenant Resistance Build Modifiers
-    SLEEPRESBUILD                 = 1138,
-    POISONRESBUILD                = 1139,
-    PARALYZERESBUILD              = 1140,
-    BLINDRESBUILD                 = 1141,
-    SILENCERESBUILD               = 1142,
-    VIRUSRESBUILD                 = 1143,
-    PETRIFYRESBUILD               = 1144,
-    BINDRESBUILD                  = 1145,
-    CURSERESBUILD                 = 1146,
-    GRAVITYRESBUILD               = 1147,
-    SLOWRESBUILD                  = 1148,
-    STUNRESBUILD                  = 1149,
-    CHARMRESBUILD                 = 1150,
-    AMNESIARESBUILD               = 1151,
-    LULLABYRESBUILD               = 1152,
-    DEATHRESBUILD                 = 1153,
+    SLEEPRESBUILD                 = 1138, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    POISONRESBUILD                = 1139, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    PARALYZERESBUILD              = 1140, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    BLINDRESBUILD                 = 1141, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    SILENCERESBUILD               = 1142, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    VIRUSRESBUILD                 = 1143, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    PETRIFYRESBUILD               = 1144, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    BINDRESBUILD                  = 1145, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    CURSERESBUILD                 = 1146, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    GRAVITYRESBUILD               = 1147, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    SLOWRESBUILD                  = 1148, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    STUNRESBUILD                  = 1149, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    CHARMRESBUILD                 = 1150, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    AMNESIARESBUILD               = 1151, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    LULLABYRESBUILD               = 1152, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    DEATHRESBUILD                 = 1153, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    PET_DMG_TAKEN_PHYSICAL        = 1154, -- Percent increase/decrease in pet physical damage taken for the target.
+    PET_DMG_TAKEN_MAGICAL         = 1155, -- Percent increase/decrease in pet magical damage taken for the target.
+    PET_DMG_TAKEN_BREATH          = 1156, -- Percent increase/decrease in pet breath damage taken for the target.
 
     -- IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN src/map/modifier.h ASWELL!
 
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     -- 570 - 825 used by WS DMG mods these are not spares.
     -- For Next ID, see modifier.h
+    -- Spares start at: 1157
 }
 
 xi.latent =
@@ -2471,6 +2488,7 @@ xi.mobMod =
     DRAW_IN_CUSTOM_RANGE      = 73, -- override the default range of MeleeRange*2 of when players start to get drawn-in
     DRAW_IN_MAXIMUM_REACH     = 74, -- players further than this range (yalms) will be unaffected by the draw-in. default (0) is whole zone
     DRAW_IN_IGNORE_STATIONARY = 75, -- stationary or bound mobs draw-in the moment they cannot attack you anymore (out of range). Place this mob mod to stop that behavior.
+    ATTRACT_FAMILY_NM         = 76, -- NMs within the same family will link onto this mob (used on Sabotenders for Cactrot Rapido)
 }
 
 -----------------------------------

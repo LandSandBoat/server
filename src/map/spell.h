@@ -1148,7 +1148,7 @@ private:
     uint16      m_MagicBurstMessage{};             // Message used for magic bursts.
     uint16      m_CE{};                            // cumulative enmity of spell
     uint16      m_VE{};                            // volatile enmity of spell
-    string_t    m_name;                            // spell name
+    std::string m_name;                            // spell name
     uint32      m_modifiedRecastTime{};            // recast time after modifications
     uint8       m_requirements{};                  // requirements before being able to cast spell
     uint16      m_meritId{};                       // associated merit (if applicable)

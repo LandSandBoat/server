@@ -65,6 +65,8 @@ zones[xi.zone.YUHTUNGA_JUNGLE] =
         VOLUPTUOUS_VILMA        = 17281358,
         NASUS_OFFSET            = 17281491,
         SIREN                   = 17281547,
+        BAYAWAK                 = 17281388,
+        MEWW_THE_TURTLERIDER    = 17281281,
     },
     npc =
     {

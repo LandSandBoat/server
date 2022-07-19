@@ -80,8 +80,8 @@ namespace effects
     // Default effect of statuses are overwrite if equal or higher
     struct EffectParams_t
     {
-        uint32   Flag;
-        string_t Name;
+        uint32      Flag;
+        std::string Name;
         // type will erase all other effects that match
         // example: en- spells, spikes
         uint16 Type;
@@ -1471,8 +1471,8 @@ void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
     XI_DEBUG_BREAK_IF(StatusEffect->GetStatusID() == EFFECT_FOOD && StatusEffect->GetSubID() == 0);
     XI_DEBUG_BREAK_IF(StatusEffect->GetStatusID() == EFFECT_NONE && StatusEffect->GetSubID() == 0);
 
-    string_t name;
-    EFFECT   effect = StatusEffect->GetStatusID();
+    std::string name;
+    EFFECT      effect = StatusEffect->GetStatusID();
 
     // Determine if this is a BRD Song or COR Effect.
     if (StatusEffect->GetSubID() == 0 ||
@@ -1912,6 +1912,12 @@ void CStatusEffectContainer::TickRegen(time_point tick)
                     {
                         CPetEntity* PPet  = (CPetEntity*)m_POwner->PPet;
                         CItem*      hands = PChar->getEquip(SLOT_HANDS);
+
+                        if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_AVATARS_FAVOR) &&
+                            PPet->m_PetID >= PETID_CARBUNCLE && PPet->m_PetID <= PETID_CAIT_SITH)
+                        {
+                            perpetuation = static_cast<int16>(perpetuation * 1.2);
+                        }
 
                         // carbuncle mitts only work on carbuncle
                         if (hands && hands->getID() == 14062 && PPet->name == "Carbuncle")

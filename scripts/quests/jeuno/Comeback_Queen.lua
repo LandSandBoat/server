@@ -29,7 +29,7 @@ quest.reward =
 local function progressZone(player)
     local currentPos = player:getPos()
 
-    quest:addVar(player, 'Prog', 1)
+    quest:incrementVar(player, 'Prog', 1)
     player:setPos(currentPos['x'], currentPos['y'], currentPos['z'], currentPos['rot'], xi.zone.UPPER_JEUNO)
 end
 

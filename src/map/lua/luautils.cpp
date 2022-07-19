@@ -87,6 +87,7 @@
 #include "../utils/instanceutils.h"
 #include "../utils/itemutils.h"
 #include "../utils/moduleutils.h"
+#include "../utils/serverutils.h"
 #include "../utils/zoneutils.h"
 #include "../vana_time.h"
 #include "../weapon_skill.h"
@@ -159,7 +160,11 @@ namespace luautils
         lua.set_function("RunElevator", &luautils::StartElevator);
         lua.set_function("GetServerVariable", &luautils::GetServerVariable);
         lua.set_function("SetServerVariable", &luautils::SetServerVariable);
-        lua.set_function("ClearVarFromAll", &luautils::ClearVarFromAll);
+        lua.set_function("GetVolatileServerVariable", &luautils::GetVolatileServerVariable);
+        lua.set_function("SetVolatileServerVariable", &luautils::SetVolatileServerVariable);
+        lua.set_function("GetCharVar", &luautils::GetCharVar);
+        lua.set_function("SetCharVar", &luautils::SetCharVar);
+        lua.set_function("ClearCharVarFromAll", &luautils::ClearCharVarFromAll);
         lua.set_function("SendEntityVisualPacket", &luautils::SendEntityVisualPacket);
         lua.set_function("GetMobRespawnTime", &luautils::GetMobRespawnTime);
         lua.set_function("DisallowRespawn", &luautils::DisallowRespawn);
@@ -483,8 +488,13 @@ namespace luautils
         TracyZoneScoped;
         TracyZoneString(filename);
 
+        auto path = std::filesystem::path(filename);
+        if (path.empty() || path.extension() == "")
+        {
+            return;
+        }
+
         // Handle filename -> path conversion
-        std::filesystem::path    path(filename);
         std::vector<std::string> parts;
         for (auto part : path)
         {
@@ -3713,12 +3723,6 @@ namespace luautils
         return result.get_type(0) == sol::type::number ? result.get<int32>(0) : 0;
     }
 
-    void ClearVarFromAll(std::string const& varName)
-    {
-        TracyZoneScoped;
-        sql->Query("DELETE FROM char_vars WHERE varname = '%s';", varName);
-    }
-
     void Terminate()
     {
         TracyZoneScoped;
@@ -3727,6 +3731,7 @@ namespace luautils
         {
             PZone->ForEachChar([](CCharEntity* PChar)
             {
+                PChar->PersistData();
                 charutils::SaveCharPosition(PChar);
                 charutils::SaveCharStats(PChar);
                 charutils::SaveCharExp(PChar, PChar->GetMJob());
@@ -4007,45 +4012,40 @@ namespace luautils
         CTransportHandler::getInstance()->startElevator(ElevatorID);
     }
 
-    /************************************************************************
-     *                                                                       *
-     *  Получаем значение глобальной переменной сервера.                     *
-     *  Переменная действительна лишь в пределах зоны, в которой установлена *
-     *                                                                       *
-     ************************************************************************/
-
-    int32 GetServerVariable(std::string const& varName)
+    int32 GetServerVariable(std::string const& name)
     {
-        TracyZoneScoped;
-
-        int32 value = 0;
-
-        int32 ret = sql->Query("SELECT value FROM server_variables WHERE name = '%s' LIMIT 1;", varName);
-
-        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
-        {
-            value = sql->GetIntData(0);
-        }
-
-        return value;
+        return serverutils::GetServerVar(name);
     }
-
-    /************************************************************************
-     *                                                                       *
-     *  Устанавливаем значение глобальной переменной сервера.                *
-     *                                                                       *
-     ************************************************************************/
 
     void SetServerVariable(std::string const& name, int32 value)
     {
-        TracyZoneScoped;
+        serverutils::SetServerVar(name, value);
+    }
 
-        if (value == 0)
-        {
-            sql->Query("DELETE FROM server_variables WHERE name = '%s' LIMIT 1;", name);
-            return;
-        }
-        sql->Query("INSERT INTO server_variables VALUES ('%s', %i) ON DUPLICATE KEY UPDATE value = %i;", name, value, value);
+    int32 GetVolatileServerVariable(std::string const& varName)
+    {
+        return serverutils::GetVolatileServerVar(varName);
+    }
+
+    void SetVolatileServerVariable(std::string const& varName, int32 value)
+    {
+        serverutils::SetVolatileServerVar(varName, value);
+    }
+
+    int32 GetCharVar(uint32 charId, std::string const& varName)
+    {
+        return charutils::FetchCharVar(charId, varName);
+    }
+
+    // Using the charID set a char variable on the SQL DB
+    void SetCharVar(uint32 charId, std::string const& varName, int32 value)
+    {
+        charutils::SetCharVar(charId, varName, value);
+    }
+
+    void ClearCharVarFromAll(std::string const& varName)
+    {
+        charutils::ClearCharVarFromAll(varName);
     }
 
     int32 OnTransportEvent(CCharEntity* PChar, uint32 TransportID)
@@ -4723,10 +4723,16 @@ namespace luautils
 
     void HandleCustomMenu(CCharEntity* PChar, std::string selection)
     {
-        // selection is of the form:
+        // Selection is of the form:
         // GMTELL(Testo): Question(Test Menu): Result (Option 1)
         // Cancelled:
         // GMTELL(Testo): Question(Test Menu (Play Effect)): Result (Canceled.)
+
+        if (selection.empty())
+        {
+            ShowWarning(fmt::format("Custom menu for {} was provided an empty string.", PChar->name));
+            return;
+        }
 
         std::string cleanedSelection = selection.substr(selection.find("): Result (") + 11);
         cleanedSelection.pop_back(); // Remove trailing ')'
@@ -4752,7 +4758,13 @@ namespace luautils
 
                     if (cleanedSelection.compare(name) == 0)
                     {
-                        func(CLuaBaseEntity(PChar));
+                        auto result = func(CLuaBaseEntity(PChar));
+                        if (!result.valid())
+                        {
+                            sol::error err = result;
+                            ShowError("Menu error: %s", err.what());
+                        }
+                        break;
                     }
                 }
             }

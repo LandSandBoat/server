@@ -271,6 +271,10 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
         skill:setMsg(xi.msg.basic.SKILL_MISS)
     end
 
+    if target:getMod(xi.mod.PET_DMG_TAKEN_PHYSICAL) ~= 0 then
+        finaldmg = finaldmg * (target:getMod(xi.mod.PET_DMG_TAKEN_PHYSICAL) / 100)
+    end
+
     returninfo.dmg = finaldmg
     returninfo.hitslanded = hitslanded
 
@@ -335,11 +339,17 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgm
         end
     end
 
-    -- get resistence
-    local params = {diff = (mob:getStat(xi.mod.INT)-target:getStat(xi.mod.INT)), skillType = nil, bonus = bonusMacc, element = element, effect = nil}
-    resist = applyResistanceEffect(mob, target, nil, params) -- Uses magic.lua resistance calcs as this moves to a global use case.
+    if skill:getID() ~= 1910 then -- Nether Blast Should Ignore Resist
+        -- get resistence
+        local params = {diff = (mob:getStat(xi.mod.INT)-target:getStat(xi.mod.INT)), skillType = nil, bonus = bonusMacc, element = element, effect = nil}
+        resist = applyResistanceEffect(mob, target, nil, params) -- Uses magic.lua resistance calcs as this moves to a global use case.
 
-    finaldmg = finaldmg * resist
+        finaldmg = finaldmg * resist
+    end
+
+    if target:getMod(xi.mod.PET_DMG_TAKEN_MAGICAL) ~= 0 then
+        finaldmg = finaldmg * (target:getMod(xi.mod.PET_DMG_TAKEN_MAGICAL) / 100)
+    end
 
     returninfo.dmg = finaldmg
 
@@ -468,6 +478,10 @@ xi.mobskills.mobBreathMove = function(mob, target, percent, base, element, cap)
     end
 
     damage = utils.clamp(damage, 1, cap)
+
+    if target:getMod(xi.mod.PET_DMG_TAKEN_BREATH) ~= 0 then
+        damage = damage * (target:getMod(xi.mod.PET_DMG_TAKEN_BREATH) / 100)
+    end
 
     local liement = target:checkLiementAbsorb(xi.damageType.ELEMENTAL + element) -- check for Liement.
     if liement < 0 then -- skip BDT/DT etc for Liement if we absorb.

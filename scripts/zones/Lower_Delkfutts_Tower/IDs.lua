@@ -48,6 +48,7 @@ zones[xi.zone.LOWER_DELKFUTTS_TOWER] =
             [17531118] = 17531114, -- 397.252 -32.128 -32.807
         },
         DISASTER_IDOL = 17531121,
+        EURYMEDON     = 17531114,
     },
     npc =
     {

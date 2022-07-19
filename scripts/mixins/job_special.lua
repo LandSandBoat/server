@@ -177,6 +177,14 @@ local effectByAbility =
 -- [xi.jsa.ELEMENTAL_SFORZO] = xi.effect.ELEMENTAL_SFORZO,
 }
 
+local charmList =
+{
+    "Enkelados",
+    "Eurymedon",
+    "Nephiyl Moatfiller",
+    "Ophion",
+}
+
 xi.mix.jobSpecial.config = function(mob, params)
     if params.between and type(params.between) == "number" then
         mob:setLocalVar("[jobSpecial]between", utils.clamp(params.between, 0))
@@ -302,6 +310,13 @@ g_mixins.job_special = function(jobSpecialMob)
 
             if mob:getLocalVar("[jobSpecial]begCode_" .. i) == 1 then
                 mob:triggerListener("JOB_SPECIAL_BEG_" .. i, mob)
+            end
+
+            -- Certain mobs should Charm instead of Familiar if their pet is dead
+            for _,v in pairs(charmList) do
+                if mob:getName() == v and not mob:hasPet() then
+                    ability = 710
+                end
             end
 
             mob:useMobAbility(ability)

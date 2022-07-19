@@ -26,7 +26,7 @@ xi.mob.onMobDeathEx = function(mob, player, isKiller, isWeaponSkillKill)
             player:getCharVar("ChaosbringerKills") < 200 and
             not isWeaponSkillKill
         then
-            player:addCharVar("ChaosbringerKills", 1)
+            player:incrementCharVar("ChaosbringerKills", 1)
         end
     end
 
@@ -47,6 +47,35 @@ local function lotteryPrimed(phList)
         end
     end
     return false
+end
+
+local function persistLotteryPrimed(phList)
+    local nm
+    for k, v in pairs(phList) do
+        nm = GetMobByID(v)
+        local zone = nm:getZone()
+        local respawnPersist = zone:getLocalVar(string.format("[SPAWN]%s", nm:getName()))
+
+        if respawnPersist == 0 then
+            return false
+        elseif nm ~= nil and (nm:isSpawned() or nm:getRespawnTime() ~= 0 or (respawnPersist > os.time())) then
+            return true
+        end
+    end
+    return false
+end
+
+-- Needs to be added to the NM's onDespawn() function.
+xi.mob.lotteryPersist = function(mob, cooldown)
+    SetServerVariable(string.format("[SPAWN]%s", mob:getName()), cooldown + os.time())
+    mob:getZone():setLocalVar(string.format("[SPAWN]%s", mob:getName()), cooldown + os.time())
+end
+
+-- Needs to be added to the NM's zone onInit() function.
+xi.mob.lotteryPersistCache = function(zone, mobId)
+    local mob = GetMobByID(mobId)
+    local respawn = GetServerVariable(string.format("[SPAWN]%s", mob:getName()))
+    zone:setLocalVar(string.format("[SPAWN]%s", mob:getName()), respawn)
 end
 
 -- potential lottery placeholder was killed
@@ -87,7 +116,7 @@ xi.mob.phOnDespawn = function(ph, phList, chance, cooldown, immediate)
             local pop = nm:getLocalVar("pop")
 
             chance = math.ceil(chance * 10) -- chance / 1000.
-            if os.time() > pop and not lotteryPrimed(phList) and math.random(1000) <= chance then
+            if os.time() > pop and not lotteryPrimed(phList) and not persistLotteryPrimed(phList) and math.random(1000) <= chance then
 
                 -- on PH death, replace PH repop with NM repop
                 DisallowRespawn(phId, true)

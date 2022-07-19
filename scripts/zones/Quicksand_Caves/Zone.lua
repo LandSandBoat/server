@@ -130,4 +130,14 @@ end
 zone_object.onEventFinish = function(player, csid, option)
 end
 
+zone_object.onZoneWeatherChange = function(weather)
+    local nuss = GetMobByID(ID.mob.NUSSKNACKER)
+    if
+        not nuss:isSpawned() and os.time() > nuss:getLocalVar("cooldown") and
+        weather == xi.weather.SAND_STORM
+    then
+        DisallowRespawn(nuss:getID(), false)
+    end
+end
+
 return zone_object

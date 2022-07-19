@@ -147,7 +147,7 @@ namespace battleutils
     uint8 GetBlockRate(CBattleEntity* PAttacker, CBattleEntity* PDefender);
     uint8 GetParryRate(CBattleEntity* PAttacker, CBattleEntity* PDefender);
     uint8 GetGuardRate(CBattleEntity* PAttacker, CBattleEntity* PDefender);
-    float GetDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isCritical, float bonusAttPercent);
+    float GetDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isCritical, float bonusAttPercent, uint16 slot);
     float GetRangedDistanceCorrection(CBattleEntity* PBattleEntity, float distance);
 
     int32 TakePhysicalDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, PHYSICAL_ATTACK_TYPE physicalAttackType, int32 damage, bool isBlocked,
@@ -247,7 +247,7 @@ namespace battleutils
     void    AddTraits(CBattleEntity* PEntity, TraitList_t* TraitList, uint8 level);
     bool    HasClaim(CBattleEntity* PEntity, CBattleEntity* PTarget);
 
-    uint32 CalculateSpellCastTime(CBattleEntity*, CMagicState*);
+    uint32 CalculateSpellCastTime(CBattleEntity*, CMagicState*, uint16 spellid);
     uint16 CalculateSpellCost(CBattleEntity*, CSpell*);
     uint32 CalculateSpellRecastTime(CBattleEntity*, CSpell*);
     int16  CalculateSpellTP(CBattleEntity* PEntity, CSpell* PSpell);

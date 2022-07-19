@@ -19,6 +19,9 @@ zone_object.onChocoboDig = function(player, precheck)
 end
 
 zone_object.onInitialize = function(zone)
+    UpdateNMSpawnPoint(ID.mob.MEWW_THE_TURTLERIDER)
+    GetMobByID(ID.mob.MEWW_THE_TURTLERIDER):setRespawnTime(math.random(900, 10800))
+
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
 
     xi.helm.initZone(zone, xi.helm.type.HARVESTING)
@@ -57,7 +60,7 @@ end
 zone_object.onZoneOut = function(player)
     if player:hasStatusEffect(xi.effect.BATTLEFIELD) then
         player:delStatusEffect(xi.effect.BATTLEFIELD)
-	end
+    end
 end
 
 zone_object.onRegionEnter = function( player, region)
@@ -70,6 +73,17 @@ zone_object.onEventUpdate = function( player, csid, option)
 end
 
 zone_object.onEventFinish = function( player, csid, option)
+end
+
+zone_object.onZoneWeatherChange = function(weather)
+    local bayawak = GetMobByID(ID.mob.BAYAWAK)
+    if
+        not bayawak:isSpawned() and os.time() > bayawak:getLocalVar("cooldown")
+        and (weather == xi.weather.HOT_SPELL or weather == xi.weather.HEAT_WAVE)
+    then
+        DisallowRespawn(bayawak:getID(), false)
+        bayawak:setRespawnTime(math.random(30, 150)) -- pop 30-150 sec after fire weather starts
+    end
 end
 
 return zone_object

@@ -86,7 +86,7 @@ CBattleEntity::CBattleEntity()
     m_Immunity   = 0;
     isCharmed    = false;
     m_unkillable = false;
-    m_dmgType = DAMAGE_TYPE::NONE;
+    m_dmgType    = DAMAGE_TYPE::NONE;
 
     m_DeathType = DEATH_TYPE::NONE;
 
@@ -629,20 +629,20 @@ uint16 CBattleEntity::CHR()
     return std::clamp(stats.CHR + m_modStat[Mod::CHR], 0, 999);
 }
 
-uint16 CBattleEntity::ATT()
+uint16 CBattleEntity::ATT(uint16 slot)
 {
     TracyZoneScoped;
     // TODO: consider which weapon!
     int32 ATT    = 8 + m_modStat[Mod::ATT];
-    auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_MAIN]);
+    auto* weapon = dynamic_cast<CItemWeapon*>(m_Weapons[slot]);
     if (weapon && weapon->isTwoHanded())
     {
         ATT += (STR() * 3) / 4;
     }
-    //else if (weapon && weapon->isHandToHand())
+    // else if (weapon && weapon->isHandToHand())
     //{
-    //    ATT += (STR() * 5) / 8;
-    //}
+    //      ATT += (STR() * 5) / 8;
+    //  }
     else
     {
         ATT += STR() / 2;
@@ -1827,7 +1827,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                             csJpAtkBonus = 1 + ((static_cast<float>(targetDex) / 100) * csJpModifier);
                         }
 
-                        float DamageRatio = battleutils::GetDamageRatio(PTarget, this, attack.IsCritical(), csJpAtkBonus);
+                        float DamageRatio = battleutils::GetDamageRatio(PTarget, this, attack.IsCritical(), csJpAtkBonus, SLOT_MAIN);
                         auto  damage      = (int32)((PTarget->GetMainWeaponDmg() + naturalh2hDMG + battleutils::GetFSTR(PTarget, this, SLOT_MAIN)) * DamageRatio);
 
                         actionTarget.spikesParam =
@@ -1850,7 +1850,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
             else
             {
                 // Set this attack's critical flag.
-                attack.SetCritical(xirand::GetRandomNumber(100) < battleutils::GetCritHitRate(this, PTarget, !attack.IsFirstSwing()));
+                attack.SetCritical(xirand::GetRandomNumber(100) < battleutils::GetCritHitRate(this, PTarget, !attack.IsFirstSwing()), SLOT_MAIN);
 
                 actionTarget.reaction = REACTION::HIT;
 
@@ -1892,7 +1892,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                 }
 
                 // Process damage.
-                attack.ProcessDamage();
+                attack.ProcessDamage(attack.IsCritical());
 
                 // Try shield block
                 if (attack.IsBlocked())

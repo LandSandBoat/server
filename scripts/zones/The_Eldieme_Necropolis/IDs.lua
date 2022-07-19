@@ -25,7 +25,17 @@ zones[xi.zone.THE_ELDIEME_NECROPOLIS] =
         DEVICE_NOT_WORKING               = 7326,  -- The device is not working.
         SYS_OVERLOAD                     = 7335,  -- Warning! Sys...verload! Enterin...fety mode. ID eras...d.
         YOU_LOST_THE                     = 7340,  -- You lost the <item>.
+        BRAZIER_OUT                      = 7348,  -- The brazier's flame is out. You can probably light it using <item>.
+        BRAZIER_COOLDOWN                 = 7349,  -- The brazier's flame has completely burnt out. You can't relight it now...
         NOTHING_HAPPENED                 = 7350,  -- Nothing happened...
+        BRAZIER_ACTIVE                   = 7351,  -- The brazier's flame continues to burn...
+        SKULL_SIX_REMAIN                 = 7353,  -- An eerie voice echoes in your skull: (Six remain...)
+        SKULL_FIVE_REMAIN                = 7354,  -- An eerie voice echoes in your skull: (Five remain...)
+        SKULL_FOUR_REMAIN                = 7355,  -- An eerie voice echoes in your skull: (Four remain...)
+        SKULL_THREE_REMAIN               = 7356,  -- An eerie voice echoes in your skull: (Three remain...)
+        SKULL_TWO_REMAIN                 = 7357,  -- An eerie voice echoes in your skull: (Two remains...)
+        SKULL_ONE_REMAIN                 = 7358,  -- An eerie voice echoes in your skull: (One remains...)
+        SKULL_SPAWN                      = 7359,  -- An eerie voice echoes in your skull: (Know ye our power...)
         RETURN_RIBBON_TO_HER             = 7363,  -- You can hear a voice from somewhere. (...return...ribbon to...her...)
         THE_BRAZIER_IS_LIT               = 7377,  -- The brazier is lit.
         REFUSE_TO_LIGHT                  = 7378,  -- Unexpectedly, the <item> refuses to light.
@@ -66,6 +76,7 @@ zones[xi.zone.THE_ELDIEME_NECROPOLIS] =
         MIMIC               = 17576270,
         APPARATUS_ELEMENTAL = 17576271,
         NAMORODO            = 17576272,
+        SKULL_OFFSET        = 17575937,
     },
     npc =
     {
@@ -75,6 +86,7 @@ zones[xi.zone.THE_ELDIEME_NECROPOLIS] =
         TREASURE_CHEST     = 17576356,
         TREASURE_COFFER    = 17576357,
         SARCOPHAGUS_OFFSET = 17576394,
+        CANDLE_OFFSET      = 17576334,
     },
 }
 

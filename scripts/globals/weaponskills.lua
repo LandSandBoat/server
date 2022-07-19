@@ -351,6 +351,7 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams, f
 
     if firstHitAccBonus ~= nil and firstHitAccBonus == true then
         calcParams.hitRate = calcParams.hitRate + 50 -- First hit gets a +100 ACC bonus which translates to +50 hit
+        utils.clamp(calcParams.hitRate, 0.20, 0.95) -- Clamping to expected values.
     end
 
     local missChance = math.random()

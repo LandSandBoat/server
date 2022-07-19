@@ -340,25 +340,29 @@ namespace zoneutils
         uint8 normalLevelRangeMin = settings::get<uint8>("main.NORMAL_MOB_MAX_LEVEL_RANGE_MIN");
         uint8 normalLevelRangeMax = settings::get<uint8>("main.NORMAL_MOB_MAX_LEVEL_RANGE_MAX");
 
-        const char* Query = "SELECT mob_groups.zoneid, mobname, mobid, pos_rot, pos_x, pos_y, pos_z, \
-            respawntime, spawntype, dropid, mob_groups.HP, mob_groups.MP, minLevel, maxLevel, \
-            modelid, mJob, sJob, cmbSkill, cmbDmgMult, cmbDelay, behavior, links, mobType, immunity, \
-            ecosystemID, mobradius, speed, \
-            STR, DEX, VIT, AGI, `INT`, MND, CHR, EVA, DEF, ATT, ACC, \
-            slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, \
-            fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, \
-            fire_meva, ice_meva, wind_meva, earth_meva, lightning_meva, water_meva, light_meva, dark_meva, \
-            Element, mob_pools.familyid, mob_family_system.superFamilyID, name_prefix, entityFlags, animationsub, \
-            (mob_family_system.HP / 100), (mob_family_system.MP / 100), hasSpellScript, spellList, mob_groups.poolid, \
-            allegiance, namevis, aggro, roamflag, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects, \
-            mob_family_system.charmable \
-            FROM mob_groups INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid \
-            INNER JOIN mob_resistances ON mob_resistances.resist_id = mob_pools.resist_id \
-            INNER JOIN mob_spawn_points ON mob_groups.groupid = mob_spawn_points.groupid \
-            INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyID \
-            INNER JOIN zone_settings ON mob_groups.zoneid = zone_settings.zoneid \
-            WHERE NOT (pos_x = 0 AND pos_y = 0 AND pos_z = 0) AND IF(%d <> 0, '%s' = zoneip AND %d = zoneport, TRUE) \
-            AND mob_groups.zoneid = ((mobid >> 12) & 0xFFF);";
+        const char* Query = "SELECT    mob_groups.zoneid, mob_spawn_points.mobname, mob_spawn_points.mobid, mob_spawn_points.pos_rot, mob_spawn_points.pos_x, \
+        mob_spawn_points.pos_y, mob_spawn_points.pos_z, mob_groups.respawntime, mob_groups.spawntype, mob_groups.dropid, mob_groups.HP, \
+        mob_groups.MP, mob_groups.minLevel, mob_groups.maxLevel, mob_pools.modelid, mob_pools.mJob, mob_pools.sJob, \
+        mob_pools.cmbSkill, mob_pools.cmbDmgMult, mob_pools.cmbDelay, mob_pools.behavior, mob_pools.links, mob_pools.mobType, \
+        mob_pools.immunity, mob_family_system.ecosystemID, mob_family_system.mobradius, mob_family_system.speed, mob_family_system.STR, \
+        mob_family_system.DEX, mob_family_system.VIT, mob_family_system.AGI, mob_family_system.`INT`, mob_family_system.MND, \
+        mob_family_system.CHR, mob_family_system.EVA, mob_family_system.DEF, mob_family_system.ATT, mob_family_system.ACC, \
+        mob_resistances.slash_sdt, mob_resistances.pierce_sdt, mob_resistances.h2h_sdt, mob_resistances.impact_sdt, mob_resistances.fire_sdt, \
+        mob_resistances.ice_sdt, mob_resistances.wind_sdt, mob_resistances.earth_sdt, mob_resistances.lightning_sdt, mob_resistances.water_sdt, \
+        mob_resistances.light_sdt, mob_resistances.dark_sdt, mob_resistances.fire_meva, mob_resistances.ice_meva, mob_resistances.wind_meva, \
+        mob_resistances.earth_meva, mob_resistances.lightning_meva, mob_resistances.water_meva, mob_resistances.light_meva, \
+        mob_resistances.dark_meva, mob_family_system.Element, mob_pools.familyid, mob_family_system.superFamilyID, mob_pools.name_prefix, \
+        mob_pools.entityFlags, mob_pools.animationsub, (mob_family_system.HP / 100) AS mobFamilyHP, (mob_family_system.MP / 100) AS mobFamilyMP, \
+        mob_pools.hasSpellScript, mob_pools.spellList, mob_groups.poolid, mob_groups.allegiance, mob_pools.namevis, mob_pools.aggro, \
+        mob_pools.roamflag, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects, mob_family_system.charmable, \
+        mob_groups.content_tag \
+        FROM mob_groups INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid \
+        INNER JOIN mob_resistances ON mob_resistances.resist_id = mob_pools.resist_id \
+        INNER JOIN mob_spawn_points ON mob_groups.groupid = mob_spawn_points.groupid \
+        INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyID \
+        INNER JOIN zone_settings ON mob_groups.zoneid = zone_settings.zoneid \
+        WHERE NOT (pos_x = 0 AND pos_y = 0 AND pos_z = 0) AND IF(%d <> 0, '%s' = zoneip AND %d = zoneport, TRUE) \
+        AND mob_groups.zoneid = ((mobid >> 12) & 0xFFF);";
 
         char address[INET_ADDRSTRLEN];
         inet_ntop(AF_INET, &map_ip, address, INET_ADDRSTRLEN);
@@ -368,6 +372,13 @@ namespace zoneutils
         {
             while (sql->NextRow() == SQL_SUCCESS)
             {
+                const char* contentTag = (const char*)sql->GetData(77);
+
+                if (!luautils::IsContentEnabled(contentTag))
+                {
+                    continue;
+                }
+
                 uint16    ZoneID   = (uint16)sql->GetUIntData(0);
                 ZONE_TYPE zoneType = GetZone(ZoneID)->GetType();
 
@@ -405,38 +416,40 @@ namespace zoneutils
                     ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setMaxHit(1);
                     ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setSkillType(sql->GetIntData(17));
                     DAMAGE_TYPE damageType = DAMAGE_TYPE::NONE;
-                    switch (((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->getSkillType()) {
-                    // Combat Skills
-                    case SKILLTYPE::SKILL_NONE: 
-                        damageType = DAMAGE_TYPE::NONE; 
-                        break;
-                    case SKILLTYPE::SKILL_ARCHERY:
-                    case SKILLTYPE::SKILL_MARKSMANSHIP:
-                    case SKILLTYPE::SKILL_THROWING:
-                    case SKILLTYPE::SKILL_DAGGER: 
-                    case SKILLTYPE::SKILL_POLEARM: 
-                        damageType = DAMAGE_TYPE::PIERCING; 
-                        break;
-                    case SKILLTYPE::SKILL_SWORD:
-                    case SKILLTYPE::SKILL_GREAT_SWORD:
-                    case SKILLTYPE::SKILL_AXE:
-                    case SKILLTYPE::SKILL_GREAT_AXE: 
-                    case SKILLTYPE::SKILL_SCYTHE: 
-                    case SKILLTYPE::SKILL_KATANA:
-                    case SKILLTYPE::SKILL_GREAT_KATANA: 
-                        damageType = DAMAGE_TYPE::SLASHING; 
-                        break;
-                    case SKILLTYPE::SKILL_CLUB: 
-                    case SKILLTYPE::SKILL_STAFF: 
-                        damageType = DAMAGE_TYPE::IMPACT; 
-                        break;
-                    case SKILLTYPE::SKILL_HAND_TO_HAND: 
-                        damageType = DAMAGE_TYPE::HTH; 
-                        break;
-                    default: break;
-                }
-                ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDmgType(damageType);
-                
+                    switch (((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->getSkillType())
+                    {
+                        // Combat Skills
+                        case SKILLTYPE::SKILL_NONE:
+                            damageType = DAMAGE_TYPE::NONE;
+                            break;
+                        case SKILLTYPE::SKILL_ARCHERY:
+                        case SKILLTYPE::SKILL_MARKSMANSHIP:
+                        case SKILLTYPE::SKILL_THROWING:
+                        case SKILLTYPE::SKILL_DAGGER:
+                        case SKILLTYPE::SKILL_POLEARM:
+                            damageType = DAMAGE_TYPE::PIERCING;
+                            break;
+                        case SKILLTYPE::SKILL_SWORD:
+                        case SKILLTYPE::SKILL_GREAT_SWORD:
+                        case SKILLTYPE::SKILL_AXE:
+                        case SKILLTYPE::SKILL_GREAT_AXE:
+                        case SKILLTYPE::SKILL_SCYTHE:
+                        case SKILLTYPE::SKILL_KATANA:
+                        case SKILLTYPE::SKILL_GREAT_KATANA:
+                            damageType = DAMAGE_TYPE::SLASHING;
+                            break;
+                        case SKILLTYPE::SKILL_CLUB:
+                        case SKILLTYPE::SKILL_STAFF:
+                            damageType = DAMAGE_TYPE::IMPACT;
+                            break;
+                        case SKILLTYPE::SKILL_HAND_TO_HAND:
+                            damageType = DAMAGE_TYPE::HTH;
+                            break;
+                        default:
+                            break;
+                    }
+                    ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDmgType(damageType);
+
                     PMob->m_dmgMult = sql->GetUIntData(18);
                     ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDelay((sql->GetIntData(19) * 1000) / 60);
                     ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setBaseDelay((sql->GetIntData(19) * 1000) / 60);
@@ -593,7 +606,7 @@ namespace zoneutils
         // clang-format on
 
         // attach pets to mobs
-        const char* PetQuery = "SELECT mob_groups.zoneid, mob_mobid, pet_offset \
+        const char* PetQuery = "SELECT mob_groups.zoneid, mob_pets.mob_mobid, mob_pets.pet_offset, mob_groups.content_tag \
         FROM mob_pets \
         LEFT JOIN mob_spawn_points ON mob_pets.mob_mobid = mob_spawn_points.mobid \
         LEFT JOIN mob_groups ON mob_spawn_points.groupid = mob_groups.groupid \
@@ -607,6 +620,13 @@ namespace zoneutils
         {
             while (sql->NextRow() == SQL_SUCCESS)
             {
+                const char* contentTag = (const char*)sql->GetData(3);
+
+                if (!luautils::IsContentEnabled(contentTag))
+                {
+                    continue;
+                }
+
                 uint16 ZoneID   = (uint16)sql->GetUIntData(0);
                 uint32 masterid = sql->GetUIntData(1);
                 uint32 petid    = masterid + sql->GetUIntData(2);

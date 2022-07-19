@@ -86,6 +86,7 @@ INSERT INTO `mob_spawn_mods` VALUES (16806216,26,32,1);
 INSERT INTO `mob_spawn_mods` VALUES (16806217,26,32,1);
 INSERT INTO `mob_spawn_mods` VALUES (17207308,1,15000,1);
 INSERT INTO `mob_spawn_mods` VALUES (17207308,2,20000,1);
+INSERT INTO `mob_spawn_mods` VALUES (17207308,15,7500,1);
 INSERT INTO `mob_spawn_mods` VALUES (17235987,1,1076,1);
 INSERT INTO `mob_spawn_mods` VALUES (17235987,2,2765,1);
 INSERT INTO `mob_spawn_mods` VALUES (17203216,1,15000,1);
@@ -101,6 +102,7 @@ INSERT INTO `mob_spawn_mods` VALUES (17502568,1,18227,1);
 INSERT INTO `mob_spawn_mods` VALUES (17502568,2,18606,1);
 INSERT INTO `mob_spawn_mods` VALUES (17629524,1,6000,1);
 INSERT INTO `mob_spawn_mods` VALUES (17629524,2,9234,1);
+INSERT INTO `mob_spawn_mods` VALUES (17629524,15,2500,1); -- mug gil 2500
 INSERT INTO `mob_spawn_mods` VALUES (17629641,1,6000,1);
 INSERT INTO `mob_spawn_mods` VALUES (17629641,2,9234,1);
 INSERT INTO `mob_spawn_mods` VALUES (17629640,1,6000,1);
@@ -117,6 +119,7 @@ INSERT INTO `mob_spawn_mods` VALUES (17629281,1,2100,1);
 INSERT INTO `mob_spawn_mods` VALUES (17629281,2,4500,1);
 INSERT INTO `mob_spawn_mods` VALUES (17629643,1,6000,1);
 INSERT INTO `mob_spawn_mods` VALUES (17629643,2,9234,1);
+INSERT INTO `mob_spawn_mods` VALUES (17629643,15,4000,1); -- mug gil 4000
 INSERT INTO `mob_spawn_mods` VALUES (17629403,1,4800,1);
 INSERT INTO `mob_spawn_mods` VALUES (17629403,2,6000,1);
 INSERT INTO `mob_spawn_mods` VALUES (17629238,1,2000,1);
@@ -284,7 +287,13 @@ INSERT INTO `mob_spawn_mods` VALUES (17289654,55,168,1);
 INSERT INTO `mob_spawn_mods` VALUES (17289655,55,168,1);
 INSERT INTO `mob_spawn_mods` VALUES (16916813,55,180,1);
 INSERT INTO `mob_spawn_mods` VALUES (17436964,55,180,1);
+
+-- [Geush Urvan]
+-- Values taken from wiki (http://ffxiclopedia.wikia.com/wiki/Geush_Urvan)
+INSERT INTO `mob_spawn_mods` VALUES (16798078,1,20000,1);
+INSERT INTO `mob_spawn_mods` VALUES (16798078,2,27300,1);
 INSERT INTO `mob_spawn_mods` VALUES (16798078,55,1800,1);
+
 INSERT INTO `mob_spawn_mods` VALUES (17330309,55,120,1);
 INSERT INTO `mob_spawn_mods` VALUES (17330310,55,120,1);
 INSERT INTO `mob_spawn_mods` VALUES (17330311,55,120,1);
@@ -701,6 +710,7 @@ INSERT INTO `mob_spawn_mods` VALUES (17617013,15,3000,1); -- Mug gil 3000
 INSERT INTO `mob_spawn_mods` VALUES (17616999,1,3000,1);  -- Min gil 3000
 INSERT INTO `mob_spawn_mods` VALUES (17616999,2,9000,1);  -- Max gil 9000
 INSERT INTO `mob_spawn_mods` VALUES (17616999,15,2000,1); -- Mug gil 2000
+
 -- [Amikiri]
 -- Data taken from wiki (http://ffxiclopedia.wikia.com/wiki/Amikiri)
 INSERT INTO `mob_spawn_mods` VALUES (17645774,1,10000,1); -- min gil 10000
@@ -766,6 +776,132 @@ INSERT INTO `mob_spawn_mods` VALUES (17489980,2,20000,1); -- max gil 20000
 INSERT INTO `mob_spawn_mods` VALUES (17490204,1,12000,1); -- min gil 12000
 INSERT INTO `mob_spawn_mods` VALUES (17490204,2,19000,1); -- max gil 19000
 INSERT INTO `mob_spawn_mods` VALUES (17490204,15,4000,1); -- mug gil 4000
+-- [Abyss Sahagin]
+-- Data from wiki (http://ffxiclopedia.wikia.com/wiki/Abyss_Sahagin)
+INSERT INTO `mob_spawn_mods` VALUES (17498545,1,6000,1);  -- min gil 6000
+INSERT INTO `mob_spawn_mods` VALUES (17498545,2,9500,1);  -- max gil 9500
+INSERT INTO `mob_spawn_mods` VALUES (17498545,15,6000,1); -- mug gil 6000
+INSERT INTO `mob_spawn_mods` VALUES (17498558,1,6000,1);  -- min gil 6000
+INSERT INTO `mob_spawn_mods` VALUES (17498558,2,9500,1);  -- max gil 9500
+INSERT INTO `mob_spawn_mods` VALUES (17498558,15,6000,1); -- mug gil 6000
+
+-- [Charybdis]
+-- Data from wiki (http://ffxiclopedia.wikia.com/wiki/Charybdis)
+INSERT INTO `mob_spawn_mods` VALUES (17498522,1,18000,1); -- min gil 18000
+INSERT INTO `mob_spawn_mods` VALUES (17498522,2,29000,1); -- max gil 29000
+
+-- [Coral Sahagin]
+-- Data from wiki (http://ffxiclopedia.wikia.com/wiki/Coral_Sahagin)
+INSERT INTO `mob_spawn_mods` VALUES (17498559,1,6000,1);  -- min gil 6000
+INSERT INTO `mob_spawn_mods` VALUES (17498559,2,9500,1);  -- max gil 9500
+INSERT INTO `mob_spawn_mods` VALUES (17498559,15,6000,1); -- mug gil 6000
+
+-- [Denn the Orcavoiced]
+-- Data from wiki (http://ffxiclopedia.wikia.com/wiki/Denn_the_Orcavoiced)
+INSERT INTO `mob_spawn_mods` VALUES (17498464,1,3000,1);  -- min gil 3000
+INSERT INTO `mob_spawn_mods` VALUES (17498464,2,5000,1);  -- max gil 5000
+INSERT INTO `mob_spawn_mods` VALUES (17498464,15,2000,1); -- mug gil 2000
+
+-- [Fyuu the Seabellow]
+-- Data from wiki (http://ffxiclopedia.wikia.com/wiki/Fyuu_the_Seabellow)
+INSERT INTO `mob_spawn_mods` VALUES (17498269,1,800,1);   -- min gil 800
+INSERT INTO `mob_spawn_mods` VALUES (17498269,2,4000,1);  -- max gil 4000
+INSERT INTO `mob_spawn_mods` VALUES (17498269,15,2000,1); -- mug gil 2000
+
+-- [Masan]
+-- Data from wiki (http://ffxiclopedia.wikia.com/wiki/Masan)
+INSERT INTO `mob_spawn_mods` VALUES (17498159,1,800,1);   -- min gil 800
+INSERT INTO `mob_spawn_mods` VALUES (17498159,2,1500,1);  -- max gil 1500
+INSERT INTO `mob_spawn_mods` VALUES (17498159,15,1200,1); -- mug gil 1200
+
+-- [Mouu the Waverider]
+-- Data from wiki (http://ffxiclopedia.wikia.com/wiki/Mouu_the_Waverider)
+INSERT INTO `mob_spawn_mods` VALUES (17498356,1,1000,1);  -- min gil 1000
+INSERT INTO `mob_spawn_mods` VALUES (17498356,2,3000,1);  -- max gil 3000
+INSERT INTO `mob_spawn_mods` VALUES (17498356,15,2400,1); -- mug gil 2400
+
+-- [Namtar]
+-- Data from wiki (http://ffxiclopedia.wikia.com/wiki/Namtar)
+INSERT INTO `mob_spawn_mods` VALUES (17498184,1,1000,1);  -- min gil 1000
+INSERT INTO `mob_spawn_mods` VALUES (17498184,2,2000,1);  -- max gil 2000
+
+-- [Novv the Whitehearted]
+-- Data from wiki (http://ffxiclopedia.wikia.com/wiki/Novv_the_Whitehearted)
+INSERT INTO `mob_spawn_mods` VALUES (17498445,1,4800,1);  -- min gil 4800
+INSERT INTO `mob_spawn_mods` VALUES (17498445,2,8000,1);  -- max gil 8000
+INSERT INTO `mob_spawn_mods` VALUES (17498445,15,4700,1); -- max gil 4700
+
+-- [Ocean Sahagin]
+-- Data from wiki (http://ffxiclopedia.wikia.com/wiki/Ocean_Sahagin)
+INSERT INTO `mob_spawn_mods` VALUES (17498560,1,8000,1);   -- min gil 8000
+INSERT INTO `mob_spawn_mods` VALUES (17498560,2,14000,1);  -- max gil 14000
+INSERT INTO `mob_spawn_mods` VALUES (17498560,15,10000,1); -- max gil 10000
+
+-- [Pahh the Gullcaller]
+-- Data from wiki (http://ffxiclopedia.wikia.com/wiki/Pahh_the_Gullcaller)
+INSERT INTO `mob_spawn_mods` VALUES (17498341,1,3600,1);  -- min gil 3600
+INSERT INTO `mob_spawn_mods` VALUES (17498341,2,6000,1);  -- max gil 6000
+INSERT INTO `mob_spawn_mods` VALUES (17498341,15,3200,1); -- max gil 3200
+
+-- [Qull the Shellbester]
+-- Data from wiki (http://ffxiclopedia.wikia.com/wiki/Qull_the_Shellbuster)
+INSERT INTO `mob_spawn_mods` VALUES (17498285,1,3600,1);  -- min gil 3600
+INSERT INTO `mob_spawn_mods` VALUES (17498285,2,6000,1);  -- max gil 6000
+INSERT INTO `mob_spawn_mods` VALUES (17498285,15,3200,1); -- max gil 3200
+
+-- [Sea Hog]
+-- Data from wiki (http://ffxiclopedia.wikia.com/wiki/Sea_Hog)
+INSERT INTO `mob_spawn_mods` VALUES (17498420,1,3600,1);  -- min gil 3600
+INSERT INTO `mob_spawn_mods` VALUES (17498420,2,6000,1);  -- max gil 6000
+INSERT INTO `mob_spawn_mods` VALUES (17498420,15,1500,1); -- max gil 1500
+
+-- [Voll the Sharkfinned]
+-- Data from wiki (http://ffxiclopedia.wikia.com/wiki/Voll_the_Sharkfinned)
+INSERT INTO `mob_spawn_mods` VALUES (17498428,1,3000,1);  -- min gil 3000
+INSERT INTO `mob_spawn_mods` VALUES (17498428,2,4600,1);  -- max gil 4600
+
+-- [Worr the Clawfisted]
+-- Data from wiki (http://ffxiclopedia.wikia.com/wiki/Worr_the_Clawfisted)
+INSERT INTO `mob_spawn_mods` VALUES (17498413,1,3700,1);  -- min gil 3700
+INSERT INTO `mob_spawn_mods` VALUES (17498413,2,7500,1);  -- max gil 7500
+INSERT INTO `mob_spawn_mods` VALUES (17498413,15,2500,1); -- max gil 2500
+
+-- [Wuur the Sandcomber]
+-- Data from wiki (http://ffxiclopedia.wikia.com/wiki/Wuur_the_Sandcomber)
+INSERT INTO `mob_spawn_mods` VALUES (17498199,1,2400,1);  -- min gil 2400
+INSERT INTO `mob_spawn_mods` VALUES (17498199,2,3900,1);  -- max gil 3900
+INSERT INTO `mob_spawn_mods` VALUES (17498199,15,1100,1); -- max gil 1100
+
+-- [Yarr the Pearleyed]
+-- Data from wiki (http://ffxiclopedia.wikia.com/wiki/Yarr_the_Pearleyed)
+INSERT INTO `mob_spawn_mods` VALUES (17498436,1,3000,1);  -- min gil 3000
+INSERT INTO `mob_spawn_mods` VALUES (17498436,2,5000,1);  -- max gil 5000
+INSERT INTO `mob_spawn_mods` VALUES (17498436,15,3000,1); -- max gil 3000
+
+-- [Zuug the Shoreleaper]
+-- Data from wiki (http://ffxiclopedia.wikia.com/wiki/Zuug_the_Shoreleaper)
+INSERT INTO `mob_spawn_mods` VALUES (17498516,1,3000,1);  -- min gil 3000
+INSERT INTO `mob_spawn_mods` VALUES (17498516,2,9000,1);  -- max gil 9000
+INSERT INTO `mob_spawn_mods` VALUES (17498516,15,3000,1); -- max gil 3000
+
+-- [Antican Praetor]
+-- Data taken from wiki (http://ffxiclopedia.wikia.com/wiki/Antican_Praetor)
+INSERT INTO `mob_spawn_mods` VALUES (17629621,1,4000,1); -- min gil 4000
+INSERT INTO `mob_spawn_mods` VALUES (17629621,2,8000,1); -- max gil 8000
+INSERT INTO `mob_spawn_mods` VALUES (17629639,1,4000,1); -- min gil 4000
+INSERT INTO `mob_spawn_mods` VALUES (17629639,2,8000,1); -- max gil 8000
+
+-- [Nussknacker]
+-- Data taken from wiki (http://ffxiclopedia.wikia.com/wiki/Nussknacker)
+INSERT INTO `mob_spawn_mods` VALUES (17093048,1,4000,1);  -- min gil 4000
+INSERT INTO `mob_spawn_mods` VALUES (17093048,2,8000,1);  -- max gil 8000
+INSERT INTO `mob_spawn_mods` VALUES (17093048,15,2000,1); -- mug gil 2000
+
+-- [Sabotender Bailarina]
+-- Data taken from wiki (http://ffxiclopedia.wikia.com/wiki/Sabotender_Bailarina)
+INSERT INTO `mob_spawn_mods` VALUES (17629587,1,12000,1); -- min gil 12000
+INSERT INTO `mob_spawn_mods` VALUES (17629587,2,20000,1); -- max gil 20000
+INSERT INTO `mob_spawn_mods` VALUES (17629587,15,3000,1); -- mug gil 3000
 
 /*!40000 ALTER TABLE `mob_spawn_mods` ENABLE KEYS */;
 UNLOCK TABLES;

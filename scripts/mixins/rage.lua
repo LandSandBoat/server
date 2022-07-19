@@ -13,6 +13,22 @@ require("scripts/globals/status")
 
 g_mixins = g_mixins or {}
 
+local rageBuffs =
+{
+    {xi.mod.ATT, 9},
+    {xi.mod.RATT, 9},
+    {xi.mod.ACC, 9},
+    {xi.mod.RACC, 9},
+    {xi.mod.MATT, 9},
+    {xi.mod.MDEF, 9},
+    {xi.mod.MACC, 9},
+    {xi.mod.MEVA, 9},
+    {xi.mod.WSACC, 9},
+    {xi.mod.EVA, 9},
+    {xi.mod.RDEF, 9},
+    {xi.mod.REVA, 9},
+}
+
 g_mixins.rage = function(rageMob)
 
     rageMob:addListener("SPAWN", "RAGE_SPAWN", function(mob)
@@ -34,22 +50,31 @@ g_mixins.rage = function(rageMob)
                 mob:addMod(i, amt)
             end
 
-            -- TODO: ATT, DEF, MACC, MATT, EVA, attack speed all increase
+            -- boost mods
+            for _, buff in pairs(rageBuffs) do
+                local amt = math.ceil(mob:getMainLvl() * buff[2])
+                mob:setLocalVar("[rage]mod_" .. buff[1], amt)
+                mob:addMod(buff[1], amt)
+            end
         end
     end)
 
-    -- Todo: should happen when mob begins to regen while unclaimed. If 1st healing tick hasn't happened, retail mob is stil raged.
-    rageMob:addListener("DISENGAGE", "RAGE_DISENGAGE", function(mob)
-        if mob:getLocalVar("[rage]started") == 1 then
+    rageMob:addListener("ROAM_TICK", "RAGE_ROAM_TICK", function(mob)
+        if mob:getLocalVar("[rage]started") == 1 and mob:getHPP() == 100 then
             mob:setLocalVar("[rage]started", 0)
-
             -- unboost stats
             for i = xi.mod.STR, xi.mod.CHR do
                 local amt = mob:getLocalVar("[rage]mod_" .. i)
+                mob:setLocalVar("[rage]mod_" .. i, 0)
                 mob:delMod(i, amt)
             end
 
-            -- TODO: ATT, DEF, MACC, MATT, EVA, attack speed all decrease
+            -- unboost mods
+            for _, buff in pairs(rageBuffs) do
+                local amt = mob:getLocalVar("[rage]mod_" .. buff[1])
+                mob:setLocalVar("[rage]mod_" .. buff[1], 0)
+                mob:delMod(buff[1], amt)
+            end
         end
     end)
 

@@ -62,7 +62,7 @@ static void swap32_if_be(const uint32* v, const size_t memb)
 #endif
 }
 
-static bool read_to_vector(const std::string& file, std::vector<uint32>& vec)
+static bool read_to_vector(std::string const& file, std::vector<uint32>& vec)
 {
     std::unique_ptr<FILE, decltype(&fclose)> fp(fopen(file.c_str(), "rb"), &fclose);
     if (!fp)

@@ -4,6 +4,47 @@
 -- ---------------------------------------------------------------------------
 
 -- ------------------------------------------------------------
+-- Add content_tag to zones
+-- ------------------------------------------------------------
+
+ALTER TABLE `mob_groups`
+    ADD COLUMN IF NOT EXISTS `content_tag` varchar(14) DEFAULT NULL AFTER `allegiance`;
+
+UPDATE mob_groups SET content_tag='COP' WHERE zoneid='1' OR zoneid='2' OR zoneid='3' OR zoneid='4' OR zoneid='5'
+                  OR zoneid='6' OR zoneid='7' OR zoneid='8' OR zoneid='7' OR zoneid='8' OR zoneid='9' OR zoneid='10'
+                  OR zoneid='11' OR zoneid='12' OR zoneid='13' OR zoneid='16' OR zoneid='17' OR zoneid='18' OR zoneid='19'
+                  OR zoneid='20' OR zoneid='21' OR zoneid='22' OR zoneid='23' OR zoneid='24' OR zoneid='25' OR zoneid='26'
+                  OR zoneid='27' OR zoneid='28' OR zoneid='29' OR zoneid='30' OR zoneid='31' OR zoneid='32' OR zoneid='33'
+                  OR zoneid='34' OR zoneid='35' OR zoneid='36' OR zoneid='37' OR zoneid='38';
+
+UPDATE mob_groups SET content_tag='TOAU' WHERE zoneid='46' OR zoneid='47' OR zoneid='48' OR zoneid='49' OR zoneid='50' OR zoneid='51'
+                  OR zoneid='52' OR zoneid='53' OR zoneid='54' OR zoneid='55' OR zoneid='56' OR zoneid='57' OR zoneid='58' OR zoneid='59'
+                  OR zoneid='60' OR zoneid='61' OR zoneid='62' OR zoneid='63' OR zoneid='64' OR zoneid='65' OR zoneid='66' OR zoneid='67'
+                  OR zoneid='68' OR zoneid='69' OR zoneid='70' OR zoneid='71' OR zoneid='72' OR zoneid='73' OR zoneid='74' OR zoneid='75'
+                  OR zoneid='76' OR zoneid='77' OR zoneid='78' OR zoneid='79';
+
+UPDATE mob_groups SET content_tag='WOTG' WHERE zoneid='80' OR zoneid='81' OR zoneid='82' OR zoneid='83' OR zoneid='84' OR zoneid='85'
+                  OR zoneid='86' OR zoneid='87' OR zoneid='88' OR zoneid='89' OR zoneid='90' OR zoneid='91' OR zoneid='92' OR zoneid='93'
+                  OR zoneid='94' OR zoneid='95' OR zoneid='96' OR zoneid='97' OR zoneid='98' OR zoneid='99' OR zoneid='136' OR zoneid='137'
+                  OR zoneid='138' OR zoneid='155' OR zoneid='156' OR zoneid='164' OR zoneid='171' OR zoneid='175' OR zoneid='182';
+
+UPDATE mob_groups SET content_tag='ABYSSEA' WHERE zoneid='15' OR zoneid='45' OR zoneid='132' OR zoneid='215' OR zoneid='216'
+                  OR zoneid='217' OR zoneid='218' OR zoneid='253' OR zoneid='254' OR zoneid='255' OR zoneid='13' OR zoneid='44'
+                  OR zoneid='183' OR zoneid='287';
+
+UPDATE mob_groups SET content_tag='SOA' WHERE zoneid='258' OR zoneid='259' OR zoneid='260' OR zoneid='261' OR zoneid='262' OR zoneid='263'
+                  OR zoneid='262' OR zoneid='263' OR zoneid='264' OR zoneid='265' OR zoneid='266' OR zoneid='267' OR zoneid='268' OR zoneid='269'
+                  OR zoneid='270' OR zoneid='271' OR zoneid='272' OR zoneid='273' OR zoneid='274' OR zoneid='275' OR zoneid='276' OR zoneid='277'
+                  OR zoneid='278' OR zoneid='279' OR zoneid='280' OR zoneid='281' OR zoneid='282' OR zoneid='283' OR zoneid='284' OR zoneid='285'
+                  OR zoneid='286' OR zoneid='287';
+
+UPDATE mob_groups SET content_tag='ROV' WHERE zoneid='288' OR zoneid='289' OR zoneid='290' OR zoneid='291' OR zoneid='292' OR zoneid='293'
+                  OR zoneid='294' OR zoneid='295' OR zoneid='296' OR zoneid='297' OR zoneid='298';
+
+UPDATE mob_groups SET content_tag='NEODYNA' WHERE zoneid='39' OR zoneid='40' OR zoneid='41' OR zoneid='42' OR zoneid='134' OR zoneid='135'
+                  OR zoneid='185' OR zoneid='186' OR zoneid='187' OR zoneid='188';
+
+-- ------------------------------------------------------------
 -- Promyvion-Holla (Zone 16)
 -- ------------------------------------------------------------
 

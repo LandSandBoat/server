@@ -36,6 +36,7 @@ zones[xi.zone.SACRARIUM] =
         HEART_RACING              = 7369, -- Your heart is racing.
         LEAVE_QUICKLY_AS_POSSIBLE = 7370, -- Your common sense tells you to leave as quickly as possible.
         NOTHING_HAPPENS           = 7373, -- Nothing happens.
+        PRESENCE_FILLS            = 7375, -- An evil presence fills the room!
         COMMON_SENSE_SURVIVAL     = 7377, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
@@ -49,6 +50,7 @@ zones[xi.zone.SACRARIUM] =
             {16892074, {[xi.race.GALKA]    = true}},                             -- Indich (galka)
         },
         OLD_PROFESSOR_MARISELLE = 16891970,
+        ELEL                    = 16891948,
     },
     npc =
     {
