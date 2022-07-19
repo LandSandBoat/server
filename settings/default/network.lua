@@ -44,7 +44,7 @@ xi.settings.network =
     -- ===========================
 
     -- Display debug reports (When something goes wrong during the report, the report is saved.)
-    TCP_DEBUG = true,
+    TCP_DEBUG = false,
 
     -- How long can a socket stall before closing the connection (in seconds)
     TCP_STALL_TIME = 60,
@@ -62,6 +62,8 @@ xi.settings.network =
     --   mutual-failure : Allows only if an allow rule matches and no deny rules match.
     -- (default is deny,allow)
     TCP_ORDER = "deny,allow",
+    --TCP_ORDER = "allow,deny",
+    --TCP_ORDER = "mutual-failure",
 
     -- ===========================
     -- IP rules
@@ -72,15 +74,16 @@ xi.settings.network =
     -- (allow and deny) is used
 
     TCP_ALLOW = "",
-    -- TCP_ALLOW = "127.0.0.1,192.168.0.0/16",
-    -- TCP_ALLOW = "127.0.0.1"
-    -- TCP_ALLOW = "192.168.0.0/16"
-    -- TCP_ALLOW = "10.0.0.0/255.0.0.0"
-    -- TCP_ALLOW = "all"
+    --TCP_ALLOW = "127.0.0.1,192.168.0.0/16",
+    --TCP_ALLOW = "127.0.0.1"
+    --TCP_ALLOW = "192.168.0.0/16"
+    --TCP_ALLOW = "10.0.0.0/255.0.0.0"
+    --TCP_ALLOW = "all"
 
     TCP_DENY = "",
-    -- TCP_DENY = "127.0.0.1",
-    -- TCP_DENY = "10.0.0.0/255.0.0.0",
+    --TCP_DENY = "10.0.0.0/8,192.168.0.0/16",
+    --TCP_DENY = "127.0.0.1",
+    --TCP_DENY = "10.0.0.0/255.0.0.0",
 
     -- ===========================
     -- Connection Limit Settings
