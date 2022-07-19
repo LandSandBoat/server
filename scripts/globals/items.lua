@@ -3109,6 +3109,7 @@ xi.items =
     FORTITUDE_AXE                   = 18222,
     ORPHIC_EGG                      = 18256,
     BIBIKI_SEASHELL                 = 18257,
+    THROWING_TOMAHAWK               = 18258,
     CAESTUS                         = 18263,
     SPHARAI                         = 18264,
     BATARDEAU                       = 18269,
