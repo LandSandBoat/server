@@ -2580,7 +2580,18 @@ uint8 CLuaBaseEntity::getRotPos()
 
 void CLuaBaseEntity::setRotation(uint8 rotation)
 {
+    if (m_PBaseEntity == nullptr)
+    {
+        return;
+    }
+
     m_PBaseEntity->loc.p.rotation = rotation;
+
+    if (m_PBaseEntity->objtype == TYPE_PC)
+    {
+        ((CCharEntity*)m_PBaseEntity)->pushPacket(new CPositionPacket((CCharEntity*)m_PBaseEntity));
+    }
+
     m_PBaseEntity->updatemask |= UPDATE_POS;
 }
 
@@ -14394,6 +14405,25 @@ bool CLuaBaseEntity::deleteRaisedChocobo()
     return true;
 }
 
+/************************************************************************
+ *  Function: clearSession()
+ *  Purpose : Delete player's account session
+ *  Example : player:clearSession()
+ ************************************************************************/
+
+bool CLuaBaseEntity::clearSession(std::string const& playerName)
+{
+    const char* charName = playerName.c_str();
+    const char* Query    = "DELETE FROM accounts_sessions WHERE charid IN (SELECT charid from chars where charname = '%s')";
+
+    if (sql->Query(Query, charName) == SQL_SUCCESS && sql->AffectedRows() > 0)
+    {
+        return true;
+    }
+
+    return false;
+}
+
 //==========================================================//
 
 void CLuaBaseEntity::Register()
@@ -15158,6 +15188,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setClaimedTraverserStones", CLuaBaseEntity::setClaimedTraverserStones);
 
     SOL_REGISTER("getHistory", CLuaBaseEntity::getHistory);
+
+    SOL_REGISTER("clearSession", CLuaBaseEntity::clearSession);
 }
 
 std::ostream& operator<<(std::ostream& os, const CLuaBaseEntity& entity)

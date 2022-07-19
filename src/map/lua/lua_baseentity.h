@@ -827,6 +827,8 @@ public:
     bool setChocoboRaisingInfo(sol::table table);
     bool deleteRaisedChocobo();
 
+    bool clearSession(std::string const& playerName);
+
     static void Register();
 };
 
