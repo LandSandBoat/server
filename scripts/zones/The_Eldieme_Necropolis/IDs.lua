@@ -80,7 +80,6 @@ zones[xi.zone.THE_ELDIEME_NECROPOLIS] =
     },
     npc =
     {
-        CASKET_BASE        = 17576280,
         GATE_OFFSET        = 17576306,
         BRAZIER_OFFSET     = 17576343,
         TREASURE_CHEST     = 17576356,

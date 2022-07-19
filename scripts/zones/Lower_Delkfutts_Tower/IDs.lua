@@ -51,7 +51,6 @@ zones[xi.zone.LOWER_DELKFUTTS_TOWER] =
     },
     npc =
     {
-        CASKET_BASE = 17531134,
     },
 }
 

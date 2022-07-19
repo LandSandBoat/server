@@ -83,7 +83,6 @@ zones[xi.zone.TEMPLE_OF_UGGALEPIH] =
     },
     npc =
     {
-        CASKET_BASE          = 17428875,
         PLONGEUR_MONBERRY    = 17428933,
         BOOK_OFFSET          = 17428973,
         TEMPLE_GUARDIAN_DOOR = 17428978,

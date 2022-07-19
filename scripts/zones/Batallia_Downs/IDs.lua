@@ -100,7 +100,6 @@ zones[xi.zone.BATALLIA_DOWNS] =
 
     npc =
     {
-        CASKET_BASE = 17207794,
     },
 }
 

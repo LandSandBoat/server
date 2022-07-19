@@ -67,7 +67,6 @@ zones[xi.zone.YUHTUNGA_JUNGLE] =
     },
     npc =
     {
-        CASKET_BASE           = 17281559,
         BLUE_RAFFLESIA_OFFSET = 17281586,
         TUNING_OUT_QM         = 17281590, -- qm2 in npc_list
         OVERSEER_BASE         = 17281600, -- Zorchorevi_RK in npc_list
