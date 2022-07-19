@@ -16,23 +16,7 @@ ENV XI_DB_NAME=xidb
 WORKDIR /server
 
 # Update and install all requirements as well as some useful tools such as net-tools and nano
-RUN set -x \
- && apt update \
- && apt install -y \
-    net-tools \
-    nano \
-    software-properties-common \
-    git \
-    clang-11 \
-    cmake \
-    make \
-    libluajit-5.1-dev \
-    libzmq3-dev \
-    libssl-dev \
-    zlib1g-dev \
-    mariadb-server \
-    libmariadb-dev \
-    luarocks
+RUN apt update && apt install -y net-tools nano software-properties-common git clang-11 cmake make libluajit-5.1-dev libzmq3-dev libssl-dev zlib1g-dev mariadb-server libmariadb-dev luarocks
 
 # Use Clang 11
 ENV CC=/usr/bin/clang-11
@@ -42,13 +26,7 @@ ENV CXX=/usr/bin/clang++-11
 ADD . /server
 
 # Configure and build
-RUN set -x \
- && mkdir docker_build \
- && cd docker_build \
- && cmake .. \
- && make -j $(nproc) \
- && cd .. \
- && rm -r /server/docker_build
+RUN mkdir docker_build && cd docker_build && cmake .. && make -j $(nproc)  && cd .. && rm -r /server/docker_build
 
 # Copy the docker config files to the conf folder instead of the default config
 COPY /conf/default/* conf/
@@ -61,5 +39,3 @@ RUN chmod +x ./tools/wait_for_db_then_launch.sh
 
 # Startup the server when the container starts
 ENTRYPOINT ./tools/wait_for_db_then_launch.sh
-
-# EOF
