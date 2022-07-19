@@ -113,7 +113,6 @@ zones[xi.zone.PASHHOW_MARSHLANDS] =
 
     npc =
     {
-        CASKET_BASE   = 17224275,
         OVERSEER_BASE = 17224326, -- Mesachedeau_RK in npc_list
     },
 }

@@ -63,7 +63,6 @@ zones[xi.zone.SOUTH_GUSTABERG] =
     },
     npc =
     {
-        CASKET_BASE = 17216140,
     },
 }
 

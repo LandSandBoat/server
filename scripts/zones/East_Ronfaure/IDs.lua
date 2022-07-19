@@ -103,7 +103,6 @@ zones[xi.zone.EAST_RONFAURE] =
 
     npc =
     {
-        CASKET_BASE = 17191482,
         LOGGING =
         {
             17191530,
