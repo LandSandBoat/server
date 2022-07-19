@@ -699,51 +699,51 @@ enum EFFECT
     // Effect icons in packet can go from 0-767, so no custom effects should go in that range.
 
     // Purchased from Cruor Prospector
-    EFFECT_ABYSSEA_STR             = 768,
-    EFFECT_ABYSSEA_DEX             = 769,
-    EFFECT_ABYSSEA_VIT             = 770,
-    EFFECT_ABYSSEA_AGI             = 771,
-    EFFECT_ABYSSEA_INT             = 772,
-    EFFECT_ABYSSEA_MND             = 773,
-    EFFECT_ABYSSEA_CHR             = 774,
-    EFFECT_ABYSSEA_HP              = 775,
-    EFFECT_ABYSSEA_MP              = 776,
+    EFFECT_ABYSSEA_STR = 768,
+    EFFECT_ABYSSEA_DEX = 769,
+    EFFECT_ABYSSEA_VIT = 770,
+    EFFECT_ABYSSEA_AGI = 771,
+    EFFECT_ABYSSEA_INT = 772,
+    EFFECT_ABYSSEA_MND = 773,
+    EFFECT_ABYSSEA_CHR = 774,
+    EFFECT_ABYSSEA_HP  = 775,
+    EFFECT_ABYSSEA_MP  = 776,
 
     // *Prowess increases not currently retail accurate.
     // GoV Prowess bonus effects, real effect at ID 474
-    EFFECT_PROWESS_CASKET_RATE     = 777, // (Unimplemented)
-    EFFECT_PROWESS_SKILL_RATE      = 778, // (Unimplemented)
-    EFFECT_PROWESS_CRYSTAL_YIELD   = 779, // (Unimplemented)
-    EFFECT_PROWESS_TH              = 780, // +1 per tier
-    EFFECT_PROWESS_ATTACK_SPEED    = 781, // *flat 4% for now
-    EFFECT_PROWESS_HP_MP           = 782, // Base 3% and another 1% per tier.
-    EFFECT_PROWESS_ACC_RACC        = 783, // *flat 4% for now
-    EFFECT_PROWESS_ATT_RATT        = 784, // *flat 4% for now
-    EFFECT_PROWESS_MACC_MATK       = 785, // *flat 4% for now
-    EFFECT_PROWESS_CURE_POTENCY    = 786, // *flat 4% for now
-    EFFECT_PROWESS_WS_DMG          = 787, // (Unimplemented) 2% per tier.
-    EFFECT_PROWESS_KILLER          = 788, // *flat +4 for now
+    EFFECT_PROWESS_CASKET_RATE   = 777, // (Unimplemented)
+    EFFECT_PROWESS_SKILL_RATE    = 778, // (Unimplemented)
+    EFFECT_PROWESS_CRYSTAL_YIELD = 779, // (Unimplemented)
+    EFFECT_PROWESS_TH            = 780, // +1 per tier
+    EFFECT_PROWESS_ATTACK_SPEED  = 781, // *flat 4% for now
+    EFFECT_PROWESS_HP_MP         = 782, // Base 3% and another 1% per tier.
+    EFFECT_PROWESS_ACC_RACC      = 783, // *flat 4% for now
+    EFFECT_PROWESS_ATT_RATT      = 784, // *flat 4% for now
+    EFFECT_PROWESS_MACC_MATK     = 785, // *flat 4% for now
+    EFFECT_PROWESS_CURE_POTENCY  = 786, // *flat 4% for now
+    EFFECT_PROWESS_WS_DMG        = 787, // (Unimplemented) 2% per tier.
+    EFFECT_PROWESS_KILLER        = 788, // *flat +4 for now
     // End GoV Prowess fakery
-    EFFECT_FIELD_SUPPORT_FOOD      = 789, // Used by Fov/GoV food buff.
-    EFFECT_MARK_OF_SEED            = 790, // Tracks 30 min timer in ACP mission "Those Who Lurk in Shadows (II)"
-    EFFECT_ALL_MISS                = 791, // All attacks miss (ie - Tiamat while flying)
-    EFFECT_SUPER_BUFF              = 792, // Boss buff (ie - Nidhogg "2hour")
-    EFFECT_NINJUTSU_ELE_DEBUFF     = 793,
-    EFFECT_HEALING                 = 794,
-    EFFECT_LEAVEGAME               = 795,
-    EFFECT_HASTE_SAMBA_HASTE       = 796, // Small JA Haste given by Haste Samba on hit
-    EFFECT_TELEPORT                = 797,
-    EFFECT_CHAINBOUND              = 798,
-    EFFECT_SKILLCHAIN              = 799,
-    EFFECT_DYNAMIS                 = 800,
-    EFFECT_MEDITATE                = 801, // Dummy effect for SAM Meditate JA
-    EFFECT_ELEMENTALRES_DOWN       = 802, // Elemental resistance down
-    EFFECT_FULL_SPEED_AHEAD        = 803, // Used to track Full Speed Ahead quest minigame
-    EFFECT_HYSTERIA                = 804, // Used for Hysteroanima to stop after readying a weaponskill with no msg.
-    EFFECT_TOMAHAWK                = 805, // Silent status effect inflicted by a Warrior using the "Tomahawk" job ability
-    // EFFECT_PLACEHOLDER             = 806  // Description
+    EFFECT_FIELD_SUPPORT_FOOD  = 789, // Used by Fov/GoV food buff.
+    EFFECT_MARK_OF_SEED        = 790, // Tracks 30 min timer in ACP mission "Those Who Lurk in Shadows (II)"
+    EFFECT_ALL_MISS            = 791, // All attacks miss (ie - Tiamat while flying)
+    EFFECT_SUPER_BUFF          = 792, // Boss buff (ie - Nidhogg "2hour")
+    EFFECT_NINJUTSU_ELE_DEBUFF = 793,
+    EFFECT_HEALING             = 794,
+    EFFECT_LEAVEGAME           = 795,
+    EFFECT_HASTE_SAMBA_HASTE   = 796, // Small JA Haste given by Haste Samba on hit
+    EFFECT_TELEPORT            = 797,
+    EFFECT_CHAINBOUND          = 798,
+    EFFECT_SKILLCHAIN          = 799,
+    EFFECT_DYNAMIS             = 800,
+    EFFECT_MEDITATE            = 801, // Dummy effect for SAM Meditate JA
+    EFFECT_ELEMENTALRES_DOWN   = 802, // Elemental resistance down
+    EFFECT_FULL_SPEED_AHEAD    = 803, // Used to track Full Speed Ahead quest minigame
+    EFFECT_HYSTERIA            = 804, // Used for Hysteroanima to stop after readying a weaponskill with no msg.
+    EFFECT_TOMAHAWK            = 805, // Silent status effect inflicted by a Warrior using the "Tomahawk" job ability
+    // EFFECT_PLACEHOLDER           = 806  // Description
     // 806-1022
-    // EFFECT_PLACEHOLDER             = 1023 // The client dat file seems to have only this many "slots", results of exceeding that are untested.
+    // EFFECT_PLACEHOLDER           = 1023 // The client dat file seems to have only this many "slots", results of exceeding that are untested.
 };
 
 #define MAX_EFFECTID 806 // 768 real + 38 custom
