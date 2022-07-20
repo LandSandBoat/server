@@ -236,6 +236,11 @@ INSERT INTO `mob_pool_mods` VALUES (5106,288,25,0);
 INSERT INTO `mob_pool_mods` VALUES (5106,1,250,0);
 INSERT INTO `mob_pool_mods` VALUES (5106,29,30,0);
 INSERT INTO `mob_pool_mods` VALUES (5106,366,10,0);
+-- Begin Trust MODs (For non-scriptable MODs like HPP or MPP)
+INSERT INTO `mob_pool_mods` VALUES (5915,6,100,0);      -- Trust Shikaree Z MPP 100
+INSERT INTO `mob_pool_mods` VALUES (5922,6,150,0);      -- Trust Lehko MPP 150
+INSERT INTO `mob_pool_mods` VALUES (6019,3,-10,0);      -- Trust Shantotto II HPP -10%
+-- End Trust MODs
 INSERT INTO `mob_pool_mods` VALUES (7039,34,60,1);
 INSERT INTO `mob_pool_mods` VALUES (7039,4,15,1);
 INSERT INTO `mob_pool_mods` VALUES (7039,5,15,1);

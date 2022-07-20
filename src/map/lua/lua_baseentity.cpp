@@ -13195,7 +13195,7 @@ void CLuaBaseEntity::SetMobSkillAttack(int16 listId)
 
 int16 CLuaBaseEntity::getMobMod(uint16 mobModID)
 {
-    XI_DEBUG_BREAK_IF(!(m_PBaseEntity->objtype & TYPE_MOB));
+    XI_DEBUG_BREAK_IF(!(m_PBaseEntity->objtype & TYPE_MOB || m_PBaseEntity->objtype & TYPE_TRUST));
 
     return static_cast<CMobEntity*>(m_PBaseEntity)->getMobMod(mobModID);
 }
@@ -13210,7 +13210,7 @@ int16 CLuaBaseEntity::getMobMod(uint16 mobModID)
 void CLuaBaseEntity::addMobMod(uint16 mobModID, int16 value)
 {
     // putting this in here to find elusive bug
-    if (!(m_PBaseEntity->objtype & TYPE_MOB))
+    if (!(m_PBaseEntity->objtype & TYPE_MOB || m_PBaseEntity->objtype & TYPE_TRUST))
     {
         // this once broke on an entity (17532673) but it could not be found
         ShowError("CLuaBaseEntity::addMobMod Expected type mob (%d) but its a (%d)", m_PBaseEntity->id, m_PBaseEntity->objtype);
@@ -13232,7 +13232,7 @@ void CLuaBaseEntity::setMobMod(uint16 mobModID, int16 value)
     XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
 
     // putting this in here to find elusive bug
-    if (!(m_PBaseEntity->objtype & TYPE_MOB))
+    if (!(m_PBaseEntity->objtype & TYPE_MOB || m_PBaseEntity->objtype & TYPE_TRUST))
     {
         // this once broke on an entity (17532673) but it could not be found
         ShowError("CLuaBaseEntity::setMobMod Expected type mob (%d) but its a (%d)", m_PBaseEntity->id, m_PBaseEntity->objtype);
@@ -13252,7 +13252,7 @@ void CLuaBaseEntity::setMobMod(uint16 mobModID, int16 value)
 void CLuaBaseEntity::delMobMod(uint16 mobModID, int16 value)
 {
     // putting this in here to find elusive bug
-    if (!(m_PBaseEntity->objtype & TYPE_MOB))
+    if (!(m_PBaseEntity->objtype & TYPE_MOB || m_PBaseEntity->objtype & TYPE_TRUST))
     {
         // this once broke on an entity (17532673) but it could not be found
         ShowError("CLuaBaseEntity::addMobMod Expected type mob (%d) but its a (%d)", m_PBaseEntity->id, m_PBaseEntity->objtype);

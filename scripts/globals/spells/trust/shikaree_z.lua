@@ -24,8 +24,7 @@ end
 spell_object.onMobSpawn = function(mob)
     xi.trust.message(mob, xi.trust.message_offset.SPAWN)
 
-    -- TODO: Load/Apply MODs from mob_pool_mods instead
-    mob:addMod(xi.mod.MPP, 100)
+    -- MPP mod migrated to sql/mob_pool_mods to apply at spawn
     mob:addMod(xi.mod.STORETP, 174)
     mob:addMod(xi.mod.JUMP_TP_BONUS, 164)
 
