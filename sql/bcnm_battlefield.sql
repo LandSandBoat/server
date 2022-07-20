@@ -801,31 +801,33 @@ INSERT INTO `bcnm_battlefield` VALUES (512,3,17621010,0); -- Ancient Warrior
 INSERT INTO `bcnm_battlefield` VALUES (512,3,17621011,0); -- Ancient Warrior
 INSERT INTO `bcnm_battlefield` VALUES (512,3,17621012,0); -- Ancient Warrior
 INSERT INTO `bcnm_battlefield` VALUES (512,3,17621013,0); -- Ancient Warrior
-INSERT INTO `bcnm_battlefield` VALUES (515,1,17621248,3); -- Infernal Swarm
-INSERT INTO `bcnm_battlefield` VALUES (515,1,17621249,3);
-INSERT INTO `bcnm_battlefield` VALUES (515,1,17621250,3);
-INSERT INTO `bcnm_battlefield` VALUES (515,1,17621251,3);
-INSERT INTO `bcnm_battlefield` VALUES (515,1,17621252,3);
-INSERT INTO `bcnm_battlefield` VALUES (515,1,17621253,3);
-INSERT INTO `bcnm_battlefield` VALUES (515,1,17621254,3);
-INSERT INTO `bcnm_battlefield` VALUES (515,1,17621255,3);
-INSERT INTO `bcnm_battlefield` VALUES (515,1,17621256,3);
-INSERT INTO `bcnm_battlefield` VALUES (515,2,17621249,3);
-INSERT INTO `bcnm_battlefield` VALUES (515,2,17621250,3);
-INSERT INTO `bcnm_battlefield` VALUES (515,2,17621251,3);
-INSERT INTO `bcnm_battlefield` VALUES (515,2,17621252,3);
-INSERT INTO `bcnm_battlefield` VALUES (515,2,17621253,3);
-INSERT INTO `bcnm_battlefield` VALUES (515,2,17621254,3);
-INSERT INTO `bcnm_battlefield` VALUES (515,2,17621255,3);
-INSERT INTO `bcnm_battlefield` VALUES (515,2,17621256,3);
-INSERT INTO `bcnm_battlefield` VALUES (515,3,17621249,3);
-INSERT INTO `bcnm_battlefield` VALUES (515,3,17621250,3);
-INSERT INTO `bcnm_battlefield` VALUES (515,3,17621251,3);
-INSERT INTO `bcnm_battlefield` VALUES (515,3,17621252,3);
-INSERT INTO `bcnm_battlefield` VALUES (515,3,17621253,3);
-INSERT INTO `bcnm_battlefield` VALUES (515,3,17621254,3);
-INSERT INTO `bcnm_battlefield` VALUES (515,3,17621255,3);
-INSERT INTO `bcnm_battlefield` VALUES (515,3,17621256,3);
+INSERT INTO `bcnm_battlefield` VALUES (515,1,17621248,3); -- Infernal Swarm: Beelzebub
+INSERT INTO `bcnm_battlefield` VALUES (515,1,17621249,3); -- Hellfly
+INSERT INTO `bcnm_battlefield` VALUES (515,1,17621250,3); -- Hellfly
+INSERT INTO `bcnm_battlefield` VALUES (515,1,17621251,3); -- Hellfly
+INSERT INTO `bcnm_battlefield` VALUES (515,1,17621252,3); -- Hellfly
+INSERT INTO `bcnm_battlefield` VALUES (515,1,17621253,3); -- Hellfly
+INSERT INTO `bcnm_battlefield` VALUES (515,1,17621254,3); -- Hellfly
+INSERT INTO `bcnm_battlefield` VALUES (515,1,17621255,3); -- Hellfly
+INSERT INTO `bcnm_battlefield` VALUES (515,1,17621256,3); -- Hellfly
+INSERT INTO `bcnm_battlefield` VALUES (515,2,17621258,3); -- Beelzebub
+INSERT INTO `bcnm_battlefield` VALUES (515,2,17621259,3); -- Hellfly
+INSERT INTO `bcnm_battlefield` VALUES (515,2,17621260,3); -- Hellfly
+INSERT INTO `bcnm_battlefield` VALUES (515,2,17621261,3); -- Hellfly
+INSERT INTO `bcnm_battlefield` VALUES (515,2,17621262,3); -- Hellfly
+INSERT INTO `bcnm_battlefield` VALUES (515,2,17621263,3); -- Hellfly
+INSERT INTO `bcnm_battlefield` VALUES (515,2,17621264,3); -- Hellfly
+INSERT INTO `bcnm_battlefield` VALUES (515,2,17621265,3); -- Hellfly
+INSERT INTO `bcnm_battlefield` VALUES (515,3,17621266,3); -- Hellfly
+INSERT INTO `bcnm_battlefield` VALUES (515,3,17621268,3); -- Beelzebub
+INSERT INTO `bcnm_battlefield` VALUES (515,3,17621269,3); -- Hellfly
+INSERT INTO `bcnm_battlefield` VALUES (515,3,17621270,3); -- Hellfly
+INSERT INTO `bcnm_battlefield` VALUES (515,3,17621271,3); -- Hellfly
+INSERT INTO `bcnm_battlefield` VALUES (515,3,17621272,3); -- Hellfly
+INSERT INTO `bcnm_battlefield` VALUES (515,3,17621273,3); -- Hellfly
+INSERT INTO `bcnm_battlefield` VALUES (515,3,17621274,3); -- Hellfly
+INSERT INTO `bcnm_battlefield` VALUES (515,3,17621275,3); -- Hellfly
+INSERT INTO `bcnm_battlefield` VALUES (515,3,17621276,3); -- Hellfly
 INSERT INTO `bcnm_battlefield` VALUES (516,1,17621014,2); -- heir_to_the_light
 INSERT INTO `bcnm_battlefield` VALUES (516,1,17621015,2);
 INSERT INTO `bcnm_battlefield` VALUES (516,1,17621016,2);

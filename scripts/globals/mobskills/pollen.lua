@@ -17,7 +17,6 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local potency = skill:getParam()
-    local id = mob:getID()
 
     if (potency == 0) then
         potency = 12
