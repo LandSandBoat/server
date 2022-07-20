@@ -9,11 +9,11 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.SLEEPRES, 100)
     mob:setMod(xi.mod.LULLABYRES, 100)
     mob:setMobMod(xi.mobMod.NO_MOVE, 1) -- lock from moving
+    mob:setMobMod(xi.mobMod.SUPERLINK, 1)
 end
 
 entity.onMobEngaged = function(mob, target)
     mob:setMobMod(xi.mobMod.NO_MOVE, 0) -- unlock from moving
-    GetMobByID(mob:getID() + 1):updateEnmity(target) -- link Kilioa
     mob:useMobAbility(373) -- use secretion
 end
 
