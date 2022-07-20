@@ -67,8 +67,9 @@ end
 zone_object.onZoneWeatherChange = function(weather)
     local dahu = GetMobByID(ID.mob.DAHU)
     if
-        not dahu:isSpawned() and os.time() > dahu:getLocalVar("cooldown")
-        and (weather == xi.weather.DUST_STORM or weather == xi.weather.SAND_STORM)
+        not dahu:isSpawned() and os.time() > dahu:getLocalVar("cooldown") and
+        (weather == xi.weather.DUST_STORM or weather == xi.weather.SAND_STORM) and
+        xi.settings.main.ENABLE_WOTG == 1
     then
         DisallowRespawn(dahu:getID(), false)
         dahu:setRespawnTime(math.random(30, 150)) -- pop 30-150 sec after wind weather starts
