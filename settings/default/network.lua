@@ -33,6 +33,14 @@ xi.settings.network =
     ZMQ_PORT = 54003,
 
     -- ===========================
+    -- NOTE: The settings that follow will not necessarily need to be modified
+    --       in any way for the server to work out of the box.  This should only
+    --       be modified by those who understand networking.  Modifying these
+    --       values could potentially make it so that you can not log in to your
+    --       server.
+    -- ===========================
+
+    -- ===========================
     -- UDP Sockets Configuration
     -- ===========================
 
