@@ -3,7 +3,7 @@
 -- Dummy ability used for 2hr animation by Jailer of Love.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/settings/main")
+require("settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}

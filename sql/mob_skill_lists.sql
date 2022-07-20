@@ -3787,11 +3787,6 @@ INSERT INTO `mob_skill_lists` VALUES('Shikaree_Z', 1167, 118); -- Skewer
 INSERT INTO `mob_skill_lists` VALUES('Shikaree_Z', 1167, 119); -- Wheeling Thrust
 INSERT INTO `mob_skill_lists` VALUES('Shikaree_Z', 1167, 120); -- Impulse Drive
 
-INSERT INTO `mob_skill_lists` VALUES ('Cop_Wardens',1170,561); -- Electromagnetic Field
-INSERT INTO `mob_skill_lists` VALUES ('Cop_Wardens',1170,562); -- Reactive Armor
-
-INSERT INTO `mob_skill_lists` VALUES ('Tenzen_Ranged',1171,1396); -- Tenzen Ranged Attack
-
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_Shantotto_II_Melee',1163,3739); -- shantotto_ii_melee (no name)
 INSERT INTO `mob_skill_lists` VALUES ('Teporingo',1164,258);
 INSERT INTO `mob_skill_lists` VALUES ('Bugbear_Muscleman',1165,361);
@@ -3817,10 +3812,12 @@ INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1169,1723);
 INSERT INTO `mob_skill_lists` VALUES ('Cop_Wardens',1170,561); -- Electromagnetic Field
 INSERT INTO `mob_skill_lists` VALUES ('Cop_Wardens',1170,562); -- Reactive Armor
 
-INSERT INTO `mob_skill_lists` VALUES('Jailer_of_Hope', 1171, 1353);
-INSERT INTO `mob_skill_lists` VALUES('Jailer_of_Hope', 1171, 1355);
-INSERT INTO `mob_skill_lists` VALUES('Jailer_of_Hope', 1171, 1356);
-INSERT INTO `mob_skill_lists` VALUES('Jailer_of_Hope', 1171, 1358);
+INSERT INTO `mob_skill_lists` VALUES ('Tenzen_Ranged',1171,1396); -- Tenzen Ranged Attack
+
+INSERT INTO `mob_skill_lists` VALUES('Jailer_of_Hope', 1172, 1353);
+INSERT INTO `mob_skill_lists` VALUES('Jailer_of_Hope', 1172, 1355);
+INSERT INTO `mob_skill_lists` VALUES('Jailer_of_Hope', 1172, 1356);
+INSERT INTO `mob_skill_lists` VALUES('Jailer_of_Hope', 1172, 1358);
 
 INSERT INTO `mob_skill_lists` VALUES('Supplespine_Mujwuj', 1176, 1064);
 INSERT INTO `mob_skill_lists` VALUES('Supplespine_Mujwuj', 1176, 609);
