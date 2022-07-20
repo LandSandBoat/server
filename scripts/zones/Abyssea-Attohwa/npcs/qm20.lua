@@ -4,16 +4,17 @@
 -- Spawns Ulhuadshi
 -- !pos 361.193 20.005 199.340 215
 -----------------------------------
-require("scripts/globals/abyssea")
+local ID = require('scripts/zones/Abyssea-Attohwa/IDs')
+require('scripts/globals/abyssea')
+require('scripts/globals/keyitems')
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    -- xi.abyssea.qmOnTrade(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    -- xi.abyssea.qmOnTrigger(player, npc)
+    xi.abyssea.qmOnTrigger(player, npc, ID.mob.ULHUADSHI_2, { xi.ki.MUCID_WORM_SEGMENT, xi.ki.SHRIVELED_HECTEYES_STALK })
 end
 
 entity.onEventUpdate = function(player, csid, option)
