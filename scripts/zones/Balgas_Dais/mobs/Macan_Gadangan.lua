@@ -4,6 +4,7 @@
 -- BCNM: Wild Wild Whiskers
 -----------------------------------
 local ID = require("scripts/zones/Balgas_Dais/IDs")
+require("scripts/globals/spell_data.lua")
 -----------------------------------
 local entity = {}
 -- ELEM
@@ -17,7 +18,7 @@ local function magicRankUp(mob)
     local amount = mob:getLocalVar("casts")
 
     -- Increase magic rank after every 3 casts
-    if amount % 3 == 0 and mob:getLocalVar("magicRank") ~= 5 then
+    if amount % 3 == 0 and mob:getLocalVar("magicRank") ~= 4 then
         mob:setLocalVar("magicRank", mob:getLocalVar("magicRank") + 1)
         mob:addMod(xi.mod.MATT, 100)
     end
@@ -37,16 +38,17 @@ entity.onMobMagicPrepare = function(mob, target, spell)
         mob:messageText(target, ID.text.MACAN_WHISKERS_WILDLY, false)
     elseif rank == 4 then
         mob:messageText(target, ID.text.MACAN_WHISKERS_VIOLENTLY, false)
+        return xi.magic.spell.THUNDAGA_II
     elseif rank == 5 then
         mob:messageText(target, ID.text.MACAN_WHISKERS_UNCONTROLLABLY, false)
-        return 212 -- Burst
+        return xi.magic.spell.BURST
     end
 end
 
 entity.onMobFight = function(mob)
     local rank = mob:getLocalVar("magicRank")
 
-    if mob:getCurrentAction() == xi.act.MAGIC_INTERRUPT then
+    if mob:getCurrentAction() == xi.act.MAGIC_INTERRUPT and rank ~= 5 then
         mob:queue(0, function(mobArg)
             mobArg:useMobAbility(1336)
         end)
@@ -64,7 +66,7 @@ entity.onMobFight = function(mob)
     then
         mob:setLocalVar("control", 1)
         mob:queue(0, function(mobArg)
-            mobArg:useMobAbility(480)
+            mobArg:useMobAbility(652)
             mob:setLocalVar("control", 0)
         end)
     end
