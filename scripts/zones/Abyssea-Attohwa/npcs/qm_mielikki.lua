@@ -1,8 +1,8 @@
 -----------------------------------
 -- Zone: Abyssea-Attohwa
---  NPC: qm8 (???)
--- Spawns Kampe
--- !pos -401.612 3.738 -200.972 215
+--  NPC: qm_mielikki (???)
+-- Spawns Mielikki
+-- !pos 481.096 20.000 39.549 215
 -----------------------------------
 local ID = require('scripts/zones/Abyssea-Attohwa/IDs')
 require('scripts/globals/abyssea')
@@ -11,11 +11,11 @@ require('scripts/globals/items')
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.KAMPE, { xi.items.EXTENDED_EYESTALK })
+    xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.MIELIKKI, { xi.items.GREAT_ROOT })
 end
 
 entity.onTrigger = function(player, npc)
-    xi.abyssea.qmOnTrigger(player, npc, 0, 0, { xi.items.EXTENDED_EYESTALK })
+    xi.abyssea.qmOnTrigger(player, npc, 0, 0, { xi.items.GREAT_ROOT })
 end
 
 entity.onEventUpdate = function(player, csid, option)

@@ -1,8 +1,8 @@
 -----------------------------------
 -- Zone: Abyssea-Attohwa
---  NPC: qm5 (???)
--- Spawns Kharon
--- !pos -403.909 -4.234 200.832 215
+--  NPC: qm_kampe (???)
+-- Spawns Kampe
+-- !pos -401.612 3.738 -200.972 215
 -----------------------------------
 local ID = require('scripts/zones/Abyssea-Attohwa/IDs')
 require('scripts/globals/abyssea')
@@ -11,11 +11,11 @@ require('scripts/globals/items')
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.KHARON, { xi.items.SET_OF_WAILING_RAGS })
+    xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.KAMPE, { xi.items.EXTENDED_EYESTALK })
 end
 
 entity.onTrigger = function(player, npc)
-    xi.abyssea.qmOnTrigger(player, npc, 0, 0, { xi.items.SET_OF_WAILING_RAGS })
+    xi.abyssea.qmOnTrigger(player, npc, 0, 0, { xi.items.EXTENDED_EYESTALK })
 end
 
 entity.onEventUpdate = function(player, csid, option)

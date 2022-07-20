@@ -1,28 +1,27 @@
 -----------------------------------
 -- Zone: Abyssea-Attohwa
---  NPC: qm24 (???)
--- Spawns Ulhuadshi
--- !pos 340.193 20.005 220.340 215
+--  NPC: qm_nightshade (???)
+-- Spawns Nightshade
+-- !pos 410.304 19.500 13.227 215
 -----------------------------------
 local ID = require('scripts/zones/Abyssea-Attohwa/IDs')
 require('scripts/globals/abyssea')
-require('scripts/globals/keyitems')
+require('scripts/globals/items')
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
+    xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.NIGHTSHADE, { xi.items.WITHERED_BUD })
 end
 
 entity.onTrigger = function(player, npc)
-    xi.abyssea.qmOnTrigger(player, npc, ID.mob.ULHUADSHI_3, { xi.ki.MUCID_WORM_SEGMENT, xi.ki.SHRIVELED_HECTEYES_STALK })
+    xi.abyssea.qmOnTrigger(player, npc, 0, 0, { xi.items.WITHERED_BUD })
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    xi.abyssea.qmOnEventUpdate(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    xi.abyssea.qmOnEventFinish(player, csid, option)
 end
 
 return entity
