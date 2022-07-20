@@ -9,7 +9,7 @@ require("scripts/globals/utils")
 require("scripts/globals/spell_data")
 -----------------------------------
 local elementalSpells =
-{ -- xi.magic.spell.FIRE
+{
     {xi.magic.spell.BURN,  xi.magic.spell.FIRE},
     {xi.magic.spell.DROWN, xi.magic.spell.WATER},
     {xi.magic.spell.SHOCK, xi.magic.spell.THUNDER},
