@@ -70,7 +70,7 @@ namespace settings
             if (isLua)
             {
                 {
-                    auto res = lua.safe_script_file(filename, &sol::script_pass_on_error);
+                    auto res = lua.safe_script_file(filename);
                     if (!res.valid())
                     {
                         sol::error err = res;
@@ -133,7 +133,7 @@ namespace settings
             if (isLua)
             {
                 {
-                    auto res = lua.safe_script_file(filename, &sol::script_pass_on_error);
+                    auto res = lua.safe_script_file(filename);
                     if (!res.valid())
                     {
                         sol::error err = res;
