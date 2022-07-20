@@ -25,12 +25,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     potency = potency - math.random(0, potency/4)
 
-    if -- KSNM Infernal Swarm
-        id == 17621248 or -- IDs for Beelzebub
-        id == 17621258 or
-        id == 17621268
-    then
-        print("found ID")
+    if mob:getName() == "Beelzebub" then
         potency = 55
         potency = potency - math.random(0, 5)
     end

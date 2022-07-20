@@ -9,7 +9,7 @@ local entity = {}
 
 local loot =
 {
-    -- KSNM Inferl Swarm
+    -- KSNM Infernal Swarm
     [515] =
     {
         {
