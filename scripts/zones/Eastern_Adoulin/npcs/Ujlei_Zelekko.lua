@@ -26,23 +26,21 @@ local items =
     [2308] = { cost = 2000, id = xi.items.CIPHER_OF_MORIMARS_ALTER_EGO },
 }
 
-local active = xi.extravaganza.campaignActive()
-local edification = 0
-local ciphers =
-{
-    [0] =   0, -- no campaign
-    [1] =  20, -- Summer/NY campaign
-    [2] =  96, -- Spring/Fall campaign
-    [3] = 116, -- Both campaigns
-}
-
 entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
+    local active = xi.extravaganza.campaignActive()
     local bayld = player:getCurrency('bayld')
+    local edification = 0 -- TODO: Link Coalition Status to edification
+    local ciphers =
+    {
+        [0] =   0, -- no campaign
+        [1] =  20, -- Summer/NY campaign
+        [2] =  96, -- Spring/Fall campaign
+        [3] = 116, -- Both campaigns
+    }
 
-    print(ciphers[active])
     if active > 0 then -- TODO: implement logic to know when to display full Coalition Menu
         player:startEvent(7513, 0, ciphers[active], edification, bayld)
     else
