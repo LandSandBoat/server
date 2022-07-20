@@ -59,6 +59,15 @@ spell_object.onMobSpawn = function(mob)
 
     mob:addSimpleGambit(ai.t.TARGET, ai.c.NOT_STATUS, xi.effect.PARALYSIS, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.PARALYZE, 60)
     mob:addSimpleGambit(ai.t.TARGET, ai.c.NOT_STATUS, xi.effect.SLOW, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.SLOW, 60)
+
+    mob:addListener("WEAPONSKILL_USE", "MIHLI_ALIAPOH_WEAPONSKILL_USE", function(mobArg, target, wsid, tp, action)
+        if wsid == 3203 then -- Scouring Bubbles
+        -- Bah! Guess I'll pull out another one of my trrricks!
+            if math.random(100) <= 33 then
+                xi.trust.message(mobArg, xi.trust.message_offset.SPECIAL_MOVE_1)
+            end
+        end
+    end)
 end
 
 spell_object.onMobDespawn = function(mob)

@@ -28,7 +28,7 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 57 then
         player:setCharVar("QuestHatInHand_var", utils.mask.setBit(player:getCharVar("QuestHatInHand_var"), 3, true))
-        player:addCharVar("QuestHatInHand_count", 1)
+        player:incrementCharVar("QuestHatInHand_count", 1)
     end
 end
 

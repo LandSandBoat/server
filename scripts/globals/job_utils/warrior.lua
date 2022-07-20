@@ -1,6 +1,7 @@
 -----------------------------------
 -- Warrior Job Utilities
 -----------------------------------
+require('scripts/globals/items')
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
@@ -22,8 +23,13 @@ xi.job_utils.warrior.checkMightyStrikes = function(player, target, ability)
 end
 
 xi.job_utils.warrior.checkTomahawk = function(player, target, ability)
-    --Placeholder code. Needs to check for direction and equiped ammo.
-    return 0, 0
+    local ammoID = player:getEquipID(xi.slot.AMMO)
+
+    if ammoID == xi.items.THROWING_TOMAHAWK then
+        return 0, 0
+    else
+        return xi.msg.basic.CANNOT_PERFORM, 0
+    end
 end
 
 -----------------------------------
@@ -63,7 +69,11 @@ xi.job_utils.warrior.useRetaliation = function(player, target, ability)
 end
 
 xi.job_utils.warrior.useTomahawk = function(player, target, ability)
-    --placeholder
+    local merits = player:getMerit(xi.merit.TOMAHAWK) - 15
+    local duration = 30 + merits
+
+    target:addStatusEffectEx(xi.effect.TOMAHAWK, 0, 25, 3, duration, 0, 0, 0)
+    player:removeAmmo()
 end
 
 xi.job_utils.warrior.useWarcry = function(player, target, ability)

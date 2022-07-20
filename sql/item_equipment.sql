@@ -12086,7 +12086,7 @@ INSERT INTO `item_equipment` VALUES (26035,'moonlight_nodowa',99,0,6146,0,0,0,51
 INSERT INTO `item_equipment` VALUES (26036,'moonbeam_necklace',99,0,2101315,0,0,0,512,0,0);
 INSERT INTO `item_equipment` VALUES (26037,'moonlight_necklace',99,0,2101315,0,0,0,512,0,0);
 INSERT INTO `item_equipment` VALUES (26038,'regal_necklace',99,0,65536,0,0,0,512,0,0);
-INSERT INTO `item_equipment` VALUES (26040,'yngvi_earring',99,0,4194303,0,0,0,512,0,0);
+INSERT INTO `item_equipment` VALUES (26040,'yngvi_choker',99,0,4194303,0,0,0,512,0,0);
 INSERT INTO `item_equipment` VALUES (26080,'mache_earring',99,0,4194303,0,0,0,6144,0,0);
 INSERT INTO `item_equipment` VALUES (26081,'mache_earring_+1',99,0,4194303,0,0,0,6144,0,0);
 INSERT INTO `item_equipment` VALUES (26082,'lugalbanda_earring',99,0,1589256,0,0,0,6144,0,0);

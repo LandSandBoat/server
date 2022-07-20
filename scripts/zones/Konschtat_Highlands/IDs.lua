@@ -117,7 +117,6 @@ zones[xi.zone.KONSCHTAT_HIGHLANDS] =
 
     npc =
     {
-        CASKET_BASE = 17220111,
     },
 }
 

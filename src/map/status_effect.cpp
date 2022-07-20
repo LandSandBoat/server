@@ -196,7 +196,7 @@ void CStatusEffect::SetName(const int8* name)
     m_Name.insert(0, (const char*)name);
 }
 
-void CStatusEffect::SetName(string_t name)
+void CStatusEffect::SetName(std::string name)
 {
     m_Name = std::move(name);
 }

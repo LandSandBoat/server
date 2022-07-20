@@ -4,13 +4,13 @@
 -- Spawns Lentor
 -- !pos -248.000 47.971 403.000 15
 -----------------------------------
+local ID = require('scripts/zones/Abyssea-Konschtat/IDs')
 require('scripts/globals/abyssea')
 require('scripts/globals/items')
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local ID = zones[player:getZoneID()]
     xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.LENTOR, { xi.items.GIANT_SLUG_EYESTALK })
 end
 

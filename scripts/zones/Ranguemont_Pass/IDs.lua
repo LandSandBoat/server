@@ -48,7 +48,6 @@ zones[xi.zone.RANGUEMONT_PASS] =
     },
     npc =
     {
-        CASKET_BASE  = 17457315,
     },
 }
 

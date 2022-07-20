@@ -27,13 +27,14 @@
 
 enum SKILLFLAG
 {
-    SKILLFLAG_NONE     = 0x000,
-    SKILLFLAG_TWO_HOUR = 0x002,
-    // Special skill (ranged attack / call beast)
+    SKILLFLAG_NONE           = 0x000,
+    SKILLFLAG_TWO_HOUR       = 0x002, // Special skill (ranged attack / call beast)
     SKILLFLAG_SPECIAL        = 0x004,
     SKILLFLAG_HIT_ALL        = 0x008,
     SKILLFLAG_REPLACE_ATTACK = 0x010,
-    SKILLFLAG_DRAW_IN        = 0x020
+    SKILLFLAG_DRAW_IN        = 0x020,
+    SKILLFLAG_BLOODPACT_RAGE = 0x040,
+    SKILLFLAG_BLOODPACT_WARD = 0x080,
 };
 
 #define MAX_MOBSKILL_ID 4262
@@ -49,6 +50,8 @@ public:
     bool isSingle() const;
     bool isTwoHour() const;
     bool isSpecial() const;
+    bool isBloodPactWard() const;
+    bool isBloodPactRage() const;
     bool isAttackReplacement() const;
     bool isTpSkill() const;
 
@@ -116,7 +119,7 @@ private:
     uint8  m_secondarySkillchain;
     uint8  m_tertiarySkillchain;
 
-    string_t m_name;
+    std::string m_name;
 };
 
 #endif

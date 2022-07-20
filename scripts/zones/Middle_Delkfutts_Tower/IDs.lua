@@ -70,7 +70,6 @@ zones[xi.zone.MIDDLE_DELKFUTTS_TOWER] =
     },
     npc =
     {
-        CASKET_BASE    = 17420640,
         TREASURE_CHEST = 17420676,
     },
 }
