@@ -60,6 +60,6 @@ namespace zoneutils
     uint64       GetZoneIPP(uint16 zoneid);       // returns IPP for zone ID
     bool         IsResidentialArea(CCharEntity*); // returns whether or not the area is a residential zone
 
-};                                                // namespace zoneutils
+}; // namespace zoneutils
 
 #endif

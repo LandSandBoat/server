@@ -131,7 +131,7 @@ struct catchresponse_t
 struct fish_t
 {
     uint16               fishID;          // Fish Item ID
-    string_t             fishName;        // Fish Name
+    std::string          fishName;        // Fish Name
     uint8                maxSkill;        // Maximum hook skill level
     uint8                difficulty;      // 'Difficulty' of fish, used for most hook/rod calculations
     uint8                baseDelay;       // base hook arrow delay
@@ -193,27 +193,27 @@ struct fish_t
 
 struct rod_t
 {
-    uint16   rodID;
-    string_t rodName;      // Rod Name
-    uint8    material;     // Rod Material (wood/synthetic/legendary)
-    uint8    sizeType;     // small/large
-    uint32   rodFlags;     // Rod Flags (large bonus/small penalty)
-    uint16   minRank;      // Min rank
-    uint16   maxRank;      // Max rod rank
-    uint8    fishAttack;   // Fish Attack Multiplier
-    uint8    lgdBonusAtk;  // Legendary Fish Bonus Attack (added to fishAttack on legendary fish)
-    uint8    fishRecovery; // Fish Recovery Multiplier
-    uint8    fishTime;     // Rod base catch time limit
-    uint8    lgdBonusTime; // Legendary fish bonus time.
-    uint8    smDelayBonus; // Small fish arrow delay bonus
-    uint8    smMoveBonus;  // Small fish movement bonus
-    uint8    lgDelayBonus; // Large fish arrow delay bonus
-    uint8    lgMoveBonus;  // Large fish movement bonus
-    uint8    multiplier;   // muliplier used in time formulas, possibly other things
-    bool     breakable;    // Is the rod breakable?
-    uint16   brokenRodId;  // Replacement broken rod ID
-    bool     isMMM;        // Is Moblin Maze Monger rod? (does crazy stat mods)
-    bool     legendary;    // Is Rod Legendary
+    uint16      rodID;
+    std::string rodName;      // Rod Name
+    uint8       material;     // Rod Material (wood/synthetic/legendary)
+    uint8       sizeType;     // small/large
+    uint32      rodFlags;     // Rod Flags (large bonus/small penalty)
+    uint16      minRank;      // Min rank
+    uint16      maxRank;      // Max rod rank
+    uint8       fishAttack;   // Fish Attack Multiplier
+    uint8       lgdBonusAtk;  // Legendary Fish Bonus Attack (added to fishAttack on legendary fish)
+    uint8       fishRecovery; // Fish Recovery Multiplier
+    uint8       fishTime;     // Rod base catch time limit
+    uint8       lgdBonusTime; // Legendary fish bonus time.
+    uint8       smDelayBonus; // Small fish arrow delay bonus
+    uint8       smMoveBonus;  // Small fish movement bonus
+    uint8       lgDelayBonus; // Large fish arrow delay bonus
+    uint8       lgMoveBonus;  // Large fish movement bonus
+    uint8       multiplier;   // muliplier used in time formulas, possibly other things
+    bool        breakable;    // Is the rod breakable?
+    uint16      brokenRodId;  // Replacement broken rod ID
+    bool        isMMM;        // Is Moblin Maze Monger rod? (does crazy stat mods)
+    bool        legendary;    // Is Rod Legendary
 
     rod_t()
     {
@@ -242,14 +242,14 @@ struct rod_t
 
 struct bait_t
 {
-    uint16   baitID;    // Bait Item ID
-    string_t baitName;  // Bait Name
-    uint8    baitType;  // Type of bait (stackable bait/lure)
-    uint8    maxhook;   // Maximum number of fish bait can hook (sabiki rig can hook up to 3 of certain fish)
-    uint32   baitFlags; // Bait Flags (sinking, item bonus)
-    bool     losable;   // Can the bait be lost?
-    bool     isMMM;     // Is Moblin Maze Monger bait? (probably not special, haven't tested)
-    uint8    rankMod;   // How much bonus ranking does bait give rod
+    uint16      baitID;    // Bait Item ID
+    std::string baitName;  // Bait Name
+    uint8       baitType;  // Type of bait (stackable bait/lure)
+    uint8       maxhook;   // Maximum number of fish bait can hook (sabiki rig can hook up to 3 of certain fish)
+    uint32      baitFlags; // Bait Flags (sinking, item bonus)
+    bool        losable;   // Can the bait be lost?
+    bool        isMMM;     // Is Moblin Maze Monger bait? (probably not special, haven't tested)
+    uint8       rankMod;   // How much bonus ranking does bait give rod
 
     bait_t()
     {
@@ -265,28 +265,28 @@ struct bait_t
 
 struct fishmob_t
 {
-    uint32   mobId;      // Monster ID
-    string_t mobName;    // Monster Name
-    uint8    log;        // Log ID
-    uint8    quest;      // Quest ID
-    bool     nm;         // Notorious Monster, no need to set for quest monsters
-    uint32   nmFlags;    // Notorious Monster flags
-    uint8    areaId;     // Can this mob only be fished up from a certain area? i.e. PLD NM
-    uint16   rarity;     // [0-1000] : 0 = not rare, 1 = rarest, 1000 = most common
-    uint16   minRespawn; // minimum amount of time before mob can be hooked again
-    uint16   maxRespawn; // maximum amount of time before mob can be hooked again
-    uint8    level;      // level of monster (seem to be intervals of 10)
-    uint8    difficulty; // mob difficulty
-    uint8    baseDelay;  // base hook arrow delay
-    uint8    baseMove;   // base hook movement
-    uint16   reqBaitId;  // required bait
-    uint16   altBaitId;  // alternative required bait
-    uint16   reqKeyItem; // required key item
-    uint16   zoneId;     // mob zoneId
-    uint16   minLength;  // mob min length
-    uint16   maxLength;  // mob max length
-    uint8    ranking;
-    bool     questOnly; // only fishable during quest
+    uint32      mobId;      // Monster ID
+    std::string mobName;    // Monster Name
+    uint8       log;        // Log ID
+    uint8       quest;      // Quest ID
+    bool        nm;         // Notorious Monster, no need to set for quest monsters
+    uint32      nmFlags;    // Notorious Monster flags
+    uint8       areaId;     // Can this mob only be fished up from a certain area? i.e. PLD NM
+    uint16      rarity;     // [0-1000] : 0 = not rare, 1 = rarest, 1000 = most common
+    uint16      minRespawn; // minimum amount of time before mob can be hooked again
+    uint16      maxRespawn; // maximum amount of time before mob can be hooked again
+    uint8       level;      // level of monster (seem to be intervals of 10)
+    uint8       difficulty; // mob difficulty
+    uint8       baseDelay;  // base hook arrow delay
+    uint8       baseMove;   // base hook movement
+    uint16      reqBaitId;  // required bait
+    uint16      altBaitId;  // alternative required bait
+    uint16      reqKeyItem; // required key item
+    uint16      zoneId;     // mob zoneId
+    uint16      minLength;  // mob min length
+    uint16      maxLength;  // mob max length
+    uint8       ranking;
+    bool        questOnly; // only fishable during quest
 
     fishmob_t()
     {
@@ -356,7 +356,7 @@ struct boundarydata_t
 
     boundarydata_t()
     {
-        count = 0;
+        count  = 0;
         bounds = nullptr;
     }
 };
@@ -365,7 +365,7 @@ struct fishingarea_t
 {
     uint32        zoneId;     // Zone ID
     uint32        areaId;     // Area ID
-    string_t      areaName;   // Area Name
+    std::string   areaName;   // Area Name
     uint8         areatype;   // What type of bounds checking is done
     areavector_t* areaBounds; // Boundaries
     uint8         numBounds;  // Number of boundary vectors
@@ -376,13 +376,13 @@ struct fishingarea_t
 
     fishingarea_t()
     {
-        zoneId = 0;
-        areaId = 0;
-        areatype = 0;
+        zoneId     = 0;
+        areaId     = 0;
+        areatype   = 0;
         areaBounds = nullptr;
-        numBounds = 0;
-        height = 0;
-        radius = 0;
+        numBounds  = 0;
+        height     = 0;
+        radius     = 0;
         difficulty = 0;
     }
 };
@@ -414,7 +414,6 @@ struct weights_t
         MobPoolWeight   = 0;
         ChestPoolWeight = 0;
         NoCatchWeight   = 0;
-
     }
 };
 
@@ -490,7 +489,7 @@ struct big_fish_stats_t
     {
         length = 0;
         weight = 0;
-        epic = false;
+        epic   = false;
     }
 };
 
@@ -942,7 +941,7 @@ namespace fishingutils
     float               GetWeatherModifier(CCharEntity* PChar);
     uint16              CalculateStamina(int skill, uint8 count);
     uint16              CalculateAttack(bool legendary, uint8 difficulty, rod_t* rod);
-    uint16              CaculateHeal(bool legendary, uint8 difficulty, rod_t* rod);
+    uint16              CalculateHeal(bool legendary, uint8 difficulty, rod_t* rod);
     uint8               CalculateRegen(uint8 fishingSkill, rod_t* rod, FISHINGCATCHTYPE catchType,
                                        uint8 sizeType, uint8 catchSkill, bool legendaryCatch, bool NM);
     uint8               CalculateHookTime(CCharEntity* PChar, bool legendary,

@@ -98,7 +98,7 @@ CCharEntity::CCharEntity()
     gotMessage = false;
     m_Locked   = false;
 
-    accid = 0;
+    accid        = 0;
     m_GMlevel    = 0;
     m_isGMHidden = false;
 
@@ -189,7 +189,7 @@ CCharEntity::CCharEntity()
     PMeritPoints = nullptr;
     PJobPoints   = nullptr;
 
-    PGuildShop   = nullptr;
+    PGuildShop = nullptr;
 
     m_isStyleLocked = false;
     m_isBlockingAid = false;
@@ -236,8 +236,8 @@ CCharEntity::CCharEntity()
     fishingToken = 0;
     hookDelay    = 13;
 
-    profile     = {};
-    search      = {};
+    profile = {};
+    search  = {};
     std::memset(&styleItems, 0, sizeof(styleItems));
 
     m_StartActionPos   = {};
@@ -643,6 +643,73 @@ void CCharEntity::ClearTrusts()
     ReloadPartyInc();
 }
 
+void CCharEntity::RequestPersist(CHAR_PERSIST toPersist)
+{
+    dataToPersist |= toPersist;
+}
+
+bool CCharEntity::PersistData()
+{
+    bool didPersist = false;
+
+    if (!charVarChanges.empty())
+    {
+        for (auto&& charVarName : charVarChanges)
+        {
+            charutils::PersistCharVar(this->id, charVarName.c_str(), charVarCache[charVarName]);
+        }
+
+        charVarChanges.clear();
+        didPersist = true;
+    }
+
+    if (!dataToPersist)
+    {
+        return didPersist;
+    }
+    else
+    {
+        didPersist = true;
+    }
+
+    if (dataToPersist & CHAR_PERSIST::EQUIP)
+    {
+        charutils::SaveCharEquip(this);
+        charutils::SaveCharLook(this);
+    }
+
+    if (dataToPersist & CHAR_PERSIST::POSITION)
+    {
+        charutils::SaveCharPosition(this);
+    }
+
+    if (dataToPersist & CHAR_PERSIST::EFFECTS)
+    {
+        StatusEffectContainer->SaveStatusEffects(true);
+    }
+
+    /* TODO
+    if (dataToPersist & CHAR_PERSIST::LINKSHELL)
+    {
+        charutils::SaveCharLinkshells(this);
+    }
+    */
+
+    dataToPersist = 0;
+    return didPersist;
+}
+
+bool CCharEntity::PersistData(time_point tick)
+{
+    if (tick < nextDataPersistTime || !PersistData())
+    {
+        return false;
+    }
+
+    nextDataPersistTime = tick + TIME_BETWEEN_PERSIST;
+    return true;
+}
+
 void CCharEntity::Tick(time_point tick)
 {
     TracyZoneScoped;
@@ -963,8 +1030,8 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
 
     PLatentEffectContainer->CheckLatentsTP();
 
-    SLOTTYPE damslot = SLOT_MAIN;
-    bool isRangedWS = (PWeaponSkill->getID() >= 192 && PWeaponSkill->getID() <= 218);
+    SLOTTYPE damslot    = SLOT_MAIN;
+    bool     isRangedWS = (PWeaponSkill->getID() >= 192 && PWeaponSkill->getID() <= 218);
 
     if (distance(loc.p, PBattleTarget->loc.p) - PBattleTarget->m_ModelRadius <= PWeaponSkill->getRange())
     {
@@ -1089,9 +1156,9 @@ void CCharEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& acti
     }
     else
     {
-        actionList_t& actionList     = action.getNewActionList();
-        actionList.ActionTargetID    = PBattleTarget->id;
-        action.actiontype            = ACTION_MAGIC_FINISH; // all "Too Far" messages use cat 4
+        actionList_t& actionList  = action.getNewActionList();
+        actionList.ActionTargetID = PBattleTarget->id;
+        action.actiontype         = ACTION_MAGIC_FINISH; // all "Too Far" messages use cat 4
 
         actionTarget_t& actionTarget = actionList.getNewActionTarget();
         actionTarget.animation       = 0x1FC; // Seems hardcoded, two bits away from 0x1FF
@@ -1304,7 +1371,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             }
         }
         //#TODO: make this generic enough to not require an if
-        else if ( (PAbility->isAoE() || (PAbility->getID() == ABILITY_LIEMENT && getMod(Mod::LIEMENT_EXTENDS_TO_AREA) > 0)) && this->PParty != nullptr)
+        else if ((PAbility->isAoE() || (PAbility->getID() == ABILITY_LIEMENT && getMod(Mod::LIEMENT_EXTENDS_TO_AREA) > 0)) && this->PParty != nullptr)
         {
             PAI->TargetFind->reset();
 
@@ -1639,7 +1706,7 @@ bool CCharEntity::IsMobOwner(CBattleEntity* PBattleTarget)
 
     if (PBattleTarget == nullptr)
     {
-        ShowWarning("CCharEntity::IsMobOwner() - PBattleTarget was null.")
+        ShowWarning("CCharEntity::IsMobOwner() - PBattleTarget was null.");
         return false;
     }
 
@@ -1725,25 +1792,25 @@ void CCharEntity::OnRaise()
         {
             actionTarget.animation = 511;
             hpReturned             = (uint16)((GetLocalVar("MijinGakure") != 0) ? GetMaxHP() * 0.5 : GetMaxHP() * 0.1);
-            ratioReturned          = 0.50f * (1 - settings::get<uint8>("map.EXP_RETAIN"));
+            ratioReturned          = 0.50f * static_cast<double>(1 - settings::get<uint8>("map.EXP_RETAIN"));
         }
         else if (m_hasRaise == 2)
         {
             actionTarget.animation = 512;
             hpReturned             = (uint16)((GetLocalVar("MijinGakure") != 0) ? GetMaxHP() * 0.5 : GetMaxHP() * 0.25);
-            ratioReturned          = ((GetMLevel() <= 50) ? 0.50f : 0.75f) * (1 - settings::get<uint8>("map.EXP_RETAIN"));
+            ratioReturned          = ((GetMLevel() <= 50) ? 0.50f : 0.75f) * static_cast<double>(1 - settings::get<uint8>("map.EXP_RETAIN"));
         }
         else if (m_hasRaise == 3)
         {
             actionTarget.animation = 496;
             hpReturned             = (uint16)(GetMaxHP() * 0.5);
-            ratioReturned          = ((GetMLevel() <= 50) ? 0.50f : 0.90f) * (1 - settings::get<uint8>("map.EXP_RETAIN"));
+            ratioReturned          = ((GetMLevel() <= 50) ? 0.50f : 0.90f) * static_cast<double>(1 - settings::get<uint8>("map.EXP_RETAIN"));
         }
         else if (m_hasRaise == 4) // Used for spell "Arise" and Arise from the spell "Reraise IV"
         {
             actionTarget.animation = 496;
             hpReturned             = (uint16)GetMaxHP();
-            ratioReturned          = ((GetMLevel() <= 50) ? 0.50f : 0.90f) * (1 -settings::get<uint8>("map.EXP_RETAIN"));
+            ratioReturned          = ((GetMLevel() <= 50) ? 0.50f : 0.90f) * static_cast<double>(1 - settings::get<uint8>("map.EXP_RETAIN"));
         }
 
         addHP(((hpReturned < 1) ? 1 : hpReturned));
@@ -2487,4 +2554,60 @@ void CCharEntity::setLocked(bool locked)
         }
         battleutils::RelinquishClaim(this);
     }
+}
+
+int32 CCharEntity::getCharVar(std::string const& charVarName)
+{
+    if (auto charVar = charVarCache.find(charVarName); charVar != charVarCache.end())
+    {
+        return charVar->second;
+    }
+
+    auto value = charutils::FetchCharVar(this->id, charVarName);
+
+    charVarCache[charVarName] = value;
+    return value;
+}
+
+void CCharEntity::setCharVar(std::string const& charVarName, int32 value)
+{
+    charVarCache[charVarName] = value;
+    charutils::PersistCharVar(this->id, charVarName, value);
+}
+
+void CCharEntity::setVolatileCharVar(std::string const& charVarName, int32 value)
+{
+    charVarCache[charVarName] = value;
+    charVarChanges.insert(charVarName);
+}
+
+void CCharEntity::updateCharVarCache(std::string const& charVarName, int32 value)
+{
+    charVarCache[charVarName] = value;
+}
+
+void CCharEntity::removeFromCharVarCache(std::string const& varName)
+{
+    charVarCache.erase(varName);
+}
+
+void CCharEntity::clearCharVarsWithPrefix(std::string const& prefix)
+{
+    if (prefix.size() < 5)
+    {
+        ShowError("Prefix too short to clear with: '%s'", prefix);
+        return;
+    }
+
+    auto iter = charVarCache.begin();
+    while (iter != charVarCache.end())
+    {
+        if (iter->first.rfind(prefix, 0) == 0)
+        {
+            iter->second = 0;
+        }
+        ++iter;
+    }
+
+    sql->Query("DELETE FROM char_vars WHERE charid = %u AND varname LIKE '%s%%';", this->id, prefix.c_str());
 }

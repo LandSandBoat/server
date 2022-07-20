@@ -10,7 +10,7 @@ local entity = {}
 
 entity.onMobDeath = function(mob, player, isKiller)
     if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_TALEKEEPER_S_GIFT) == QUEST_ACCEPTED then
-        player:addCharVar("theTalekeepersGiftKilledNM", 1)
+        player:incrementCharVar("theTalekeepersGiftKilledNM", 1)
     end
 end
 

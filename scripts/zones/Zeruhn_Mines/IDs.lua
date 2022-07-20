@@ -36,7 +36,6 @@ zones[xi.zone.ZERUHN_MINES] =
     },
     npc =
     {
-        CASKET_BASE = 17481795,
         MINING      =
         {
             17481844,

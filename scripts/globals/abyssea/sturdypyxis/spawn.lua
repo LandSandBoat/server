@@ -162,8 +162,9 @@ end
 -- Desc: This method allow you to get next chest available
 ---------------------------------------------------------------------------------------------
 local function GetPyxisID(player)
-    local ID          = zones[player:getZoneID()]
-    local baseChestId = ID.npc.STURDY_PYXIS_BASE
+    local zone        = player:getZone()
+    local pyxii       = zone:queryEntitiesByName('Sturdy_Pyxis') -- Get the ID of the first entry and use that as our base ID to offset against
+    local baseChestId = pyxii[1]:getID()
     local chestId     = 0
 
     -- Get next chest ID available

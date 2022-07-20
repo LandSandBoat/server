@@ -673,7 +673,6 @@ namespace battleutils
 
     int32 CalculateSpikeDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action, uint16 damageTaken)
     {
-
         ELEMENT spikeElement = (ELEMENT)((uint8)GetSpikesDamageType(Action->spikesEffect) - (uint8)DAMAGE_TYPE::ELEMENTAL);
 
         int32 damage = Action->spikesParam;
@@ -818,7 +817,7 @@ namespace battleutils
                             }
                             if (spikesDamage > 0) // do not add HP if spikes damage was absorbed.
                             {
-                                Action->spikesMessage  = MSGBASIC_SPIKES_EFFECT_HP_DRAIN;
+                                Action->spikesMessage = MSGBASIC_SPIKES_EFFECT_HP_DRAIN;
                                 PDefender->addHP(spikesDamage);
                             }
                         }
@@ -871,10 +870,8 @@ namespace battleutils
         // Deal with spikesEffect effect gear
         else if (PDefender->getMod(Mod::ITEM_SUBEFFECT) > 0)
         {
-            if (PDefender->objtype == TYPE_PC)
+            if (CCharEntity* PCharDef = dynamic_cast<CCharEntity*>(PDefender))
             {
-                CCharEntity* PCharDef = (CCharEntity*)PDefender;
-
                 for (auto&& slot : { SLOT_SUB, SLOT_BODY, SLOT_LEGS, SLOT_HEAD, SLOT_HANDS, SLOT_FEET })
                 {
                     CItemEquipment* PItem = PCharDef->getEquip(slot);
@@ -892,10 +889,11 @@ namespace battleutils
                         Action->spikesParam = battleutils::GetScaledItemModifier(PDefender, PItem, Mod::ITEM_ADDEFFECT_DMG);
                         chance              = battleutils::GetScaledItemModifier(PDefender, PItem, Mod::ITEM_ADDEFFECT_CHANCE);
 
-                        if (((CMobEntity*)PDefender)->m_HiPCLvl < PAttacker->GetMLevel())
+                        if (CMobEntity* PMobAtt = dynamic_cast<CMobEntity*>(PDefender))
                         {
-                            ((CMobEntity*)PDefender)->m_HiPCLvl = PAttacker->GetMLevel();
+                            PMobAtt->m_HiPCLvl = std::max(PMobAtt->m_HiPCLvl, PDefender->GetMLevel());
                         }
+
                         if (Action->spikesEffect && HandleSpikesEquip(PAttacker, PDefender, Action, (uint8)Action->spikesParam, Action->spikesEffect, chance))
                         {
                             return true;
@@ -4238,7 +4236,7 @@ namespace battleutils
     {
         if (!PSource || !PTarget)
         {
-            ShowWarning("battleutils::GenerateCureEnmity - PSource or PTarget was null.")
+            ShowWarning("battleutils::GenerateCureEnmity - PSource or PTarget was null.");
             return;
         }
 
@@ -4908,7 +4906,7 @@ namespace battleutils
             charmerBSTlevel = charmerLvl;
         }
 
-        // FIXME: Level and CHR ratios are complete guesses
+        // TODO: Obtain and adjust with accurate Level and CHR data.
         const float levelRatio = (charmerBSTlevel - targetLvl) / 100.f;
         charmChance *= (1.f + levelRatio);
 
@@ -6860,9 +6858,9 @@ namespace battleutils
 
                 uint8 runeAbsorbCount = 0;
 
-                for (int i = 0; i < numBits/4; i++) // unpacking is limited to the size of the return value of GetPower/GetSubPower. If this ever expands more Runes can be packed.
+                for (int i = 0; i < numBits / 4; i++) // unpacking is limited to the size of the return value of GetPower/GetSubPower. If this ever expands more Runes can be packed.
                 {
-                    DAMAGE_TYPE packedDamageType = (DAMAGE_TYPE) ( (absorbTypeBits >> i * 4) & 0xF ); //unpack damage type 4 bits at a time
+                    DAMAGE_TYPE packedDamageType = (DAMAGE_TYPE)((absorbTypeBits >> i * 4) & 0xF); // unpack damage type 4 bits at a time
 
                     if (packedDamageType == DamageType)
                     {

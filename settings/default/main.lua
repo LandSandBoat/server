@@ -114,8 +114,9 @@ xi.settings.main =
     USE_ADOULIN_WEAPON_SKILL_CHANGES = true, -- true/false. Change to toggle new Adoulin weapon skill damage calculations
 
     -- TRUSTS
-    ENABLE_TRUST_CASTING = 1,
-    ENABLE_TRUST_QUESTS  = 1,
+    ENABLE_TRUST_CASTING           = 1,
+    ENABLE_TRUST_QUESTS            = 1,
+    ENABLE_TRUST_CUSTOM_ENGAGEMENT = 0,
 
     HARVESTING_BREAK_CHANCE = 33, -- % chance for the sickle to break during harvesting.  Set between 0 and 100.
     EXCAVATION_BREAK_CHANCE = 33, -- % chance for the pickaxe to break during excavation.  Set between 0 and 100.

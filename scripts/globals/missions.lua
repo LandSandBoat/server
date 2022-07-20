@@ -336,18 +336,18 @@ xi.mission.id =
         A_SPOONFUL_OF_SUGAR        = 10, -- ±
         AFFAIRS_OF_STATE           = 11, -- ±
         BORNE_BY_THE_WIND          = 12, -- ±
-        A_NATION_ON_THE_BRINK      = 13,
+        A_NATION_ON_THE_BRINK      = 13, -- ±
         CROSSROADS_OF_TIME         = 14, -- ±
         SANDSWEPT_MEMORIES         = 15, -- ±
         NORTHLAND_EXPOSURE         = 16, -- ±
-        TRAITOR_IN_THE_MIDST       = 17,
-        BETRAYAL_AT_BEAUCEDINE     = 18,
-        ON_THIN_ICE                = 19,
-        PROOF_OF_VALOR             = 20,
-        A_SANGUINARY_PRELUDE       = 21,
-        DUNGEONS_AND_DANCERS       = 22,
-        DISTORTER_OF_TIME          = 23,
-        THE_WILL_OF_THE_WORLD      = 24,
+        TRAITOR_IN_THE_MIDST       = 17, -- ±
+        BETRAYAL_AT_BEAUCEDINE     = 18, -- ±
+        ON_THIN_ICE                = 19, -- ±
+        PROOF_OF_VALOR             = 20, -- ±
+        A_SANGUINARY_PRELUDE       = 21, -- ±
+        DUNGEONS_AND_DANCERS       = 22, -- ±
+        DISTORTER_OF_TIME          = 23, -- ±
+        THE_WILL_OF_THE_WORLD      = 24, -- ±
         FATE_IN_HAZE               = 25,
         THE_SCENT_OF_BATTLE        = 26,
         ANOTHER_WORLD              = 27,
@@ -810,8 +810,8 @@ local function getVarPrefix(areaId, questId)
     return string.format("Mission[%d][%d]", areaId, questId)
 end
 
-xi.mission.addVar = function(player, areaId, questId, name, value)
-    return player:addCharVar(getVarPrefix(areaId, questId) .. name, value)
+xi.mission.incrementVar = function(player, areaId, questId, name, value)
+    return player:incrementCharVar(getVarPrefix(areaId, questId) .. name, value)
 end
 
 xi.mission.getVar = function(player, areaId, questId, name)

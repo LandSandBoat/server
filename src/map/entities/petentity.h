@@ -50,10 +50,10 @@ public:
     CPetEntity(PET_TYPE petType); // конструктор
     ~CPetEntity();                // деструктор
 
-    PET_TYPE    getPetType();
-    bool        isBstPet();
-    uint32      m_PetID;
-    std::string GetScriptName();
+    PET_TYPE     getPetType();
+    bool         isBstPet();
+    uint32       m_PetID;
+    std::string  GetScriptName();
     WYVERN_TYPE  getWyvernType();
     virtual void PostTick() override;
     virtual void FadeOut() override;

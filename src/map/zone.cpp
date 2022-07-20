@@ -432,6 +432,7 @@ void CZone::LoadNavMesh()
 
     if (!m_navMesh->load(file))
     {
+        DebugNavmesh("CZone::LoadNavMesh: Cannot load navmesh file (%s)", file);
         delete m_navMesh;
         m_navMesh = nullptr;
     }

@@ -110,7 +110,6 @@ zones[xi.zone.XARCABARD] =
     },
     npc =
     {
-        CASKET_BASE        = 17236254,
         OVERSEER_BASE      = 17236289, -- Jeantelas_RK in npc_list
         BOREAL_TIGER_QM    = 17236307, -- qm2 in npc_list
         BOREAL_COEURL_QM   = 17236308, -- qm3 in npc_list
