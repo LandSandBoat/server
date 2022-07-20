@@ -9,6 +9,116 @@ local entity = {}
 
 local loot =
 {
+    -- KSNM Inferl Swarm
+    [515] =
+    {
+        {
+            {itemid =   0, droprate = 350}, -- nothing
+            {itemid = 702, droprate = 150}, -- ebony_log
+            {itemid = 844, droprate = 500}, -- phoenix_feather
+        },
+        {
+            {itemid =   0, droprate = 500}, -- nothing
+            {itemid = 844, droprate = 500}, -- phoenix_feather
+        },
+        {
+            {itemid =     0, droprate = 250}, -- nothing
+            {itemid = 13419, droprate =  50}, -- soldiers earring
+            {itemid = 13420, droprate =  50}, -- kampfer earring
+            {itemid = 13421, droprate =  50}, -- medicine earring
+            {itemid = 13422, droprate =  50}, -- sorcerers earring
+            {itemid = 13423, droprate =  50}, -- fencers earring
+            {itemid = 13424, droprate =  50}, -- rogues earring
+            {itemid = 13425, droprate =  50}, -- guardian earring
+            {itemid = 13426, droprate =  50}, -- slayers earring
+            {itemid = 13427, droprate =  50}, -- tamers earring
+            {itemid = 13428, droprate =  50}, -- minstrels earring
+            {itemid = 13429, droprate =  50}, -- trackers earring
+            {itemid = 13430, droprate =  50}, -- ronin's earring
+            {itemid = 13431, droprate =  50}, -- shinobi earring
+            {itemid = 13432, droprate =  50}, -- drake earring
+            {itemid = 13433, droprate =  50}, -- conjurer earring
+        },
+        {
+            {itemid =     0, droprate = 250}, -- nothing
+            {itemid = 13419, droprate =  50}, -- soldiers earring
+            {itemid = 13420, droprate =  50}, -- kampfer earring
+            {itemid = 13421, droprate =  50}, -- medicine earring
+            {itemid = 13422, droprate =  50}, -- sorcerers earring
+            {itemid = 13423, droprate =  50}, -- fencers earring
+            {itemid = 13424, droprate =  50}, -- rogues earring
+            {itemid = 13425, droprate =  50}, -- guardian earring
+            {itemid = 13426, droprate =  50}, -- slayers earring
+            {itemid = 13427, droprate =  50}, -- tamers earring
+            {itemid = 13428, droprate =  50}, -- minstrels earring
+            {itemid = 13429, droprate =  50}, -- trackers earring
+            {itemid = 13430, droprate =  50}, -- ronins earring
+            {itemid = 13431, droprate =  50}, -- shinobi earring
+            {itemid = 13432, droprate =  50}, -- drake earring
+            {itemid = 13433, droprate =  50}, -- conjurer earring
+        },
+        {
+            {itemid =     0, droprate = 400}, -- nothing
+            {itemid = 13261, droprate = 150}, -- ocean sash
+            {itemid = 13262, droprate = 150}, -- forest sash
+            {itemid = 13263, droprate = 150}, -- steppe sash
+            {itemid = 13264, droprate = 150}, -- jungle sash
+        },
+        {
+            {itemid =     0, droprate = 450}, -- nothing
+            {itemid = 19023, droprate =  50}, -- staff strap
+            {itemid = 19027, droprate =  50}, -- claymore grip
+            {itemid = 19025, droprate = 300}, -- pole grip
+            {itemid = 19026, droprate = 150}, -- spear strap
+        },
+        {
+            {itemid =   0, droprate = 100}, -- nothing
+            {itemid = 942, droprate = 400}, -- philosophers stone
+            {itemid = 844, droprate = 500}, -- phoenix feather
+        },
+        {
+            {itemid =    0, droprate = 840}, -- nothing
+            {itemid = 4613, droprate =  10}, -- cure_v
+            {itemid = 4774, droprate =  10}, -- thunder_iii
+            {itemid = 4659, droprate =  10}, -- shell_iv
+            {itemid = 4902, droprate = 130}, -- light_spirit
+        },
+
+        {
+            {itemid =    0, droprate = 640}, -- nothing
+            {itemid =  644, droprate = 150}, -- mythril_ore
+            {itemid =  645, droprate =  50}, -- darksteel_ore
+            {itemid =  646, droprate =  10}, -- adaman_ore
+            {itemid =  738, droprate = 100}, -- platinum_ore
+            {itemid = 1465, droprate =  50}, -- granite
+        },
+        {
+            {itemid =    0, droprate = 350}, -- nothing
+            {itemid =  844, droprate = 500}, -- phoenix_feather
+            {itemid = 4173, droprate = 150}, -- hi-reraiser
+        },
+        {
+        },
+        {
+            {itemid =    0, droprate = 200}, -- nothing
+            {itemid =  830, droprate =  50}, -- rainbow_cloth
+            {itemid =  823, droprate = 100}, -- gold_thread
+            {itemid =  700, droprate = 100}, -- mahogany_log
+            {itemid =  703, droprate = 150}, -- petrified_log
+            {itemid =  887, droprate = 100}, -- coral_fragment
+            {itemid =  895, droprate = 200}, -- ram_horn
+            {itemid =  902, droprate = 100}, -- demon_horn
+        },
+        {
+            {itemid =    0, droprate = 270}, -- nothing
+            {itemid =  658, droprate =  10}, -- damascus_ingot
+            {itemid =  836, droprate =  10}, -- damascene_cloth
+            {itemid =  837, droprate =  10}, -- malboro_fiber
+            {itemid =  942, droprate = 250}, -- philosophers_stone
+            {itemid = 1110, droprate =  50}, -- beetle_blood
+            {itemid = 1132, droprate = 400}, -- raxa
+        },
+    },
     -- BCNM Demolition Squad
     [520] =
     {
