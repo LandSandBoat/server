@@ -24,7 +24,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     potency = potency - math.random(0, potency/4)
 
-    if mob:getPool() == 385
+    if mob:getPool() == 385 then
         potency = 25
         potency = potency - math.random(0, 5)
     end
