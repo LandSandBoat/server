@@ -3,10 +3,10 @@
 -- Item: grape_daifuku
 -- Food Effect: 30 Min, All Races
 -----------------------------------
--- HP + 20 (Pet & Master)
--- Vitality + 3 (Pet & Master)
+-- HP + 20 STR + 2 VIT + 3 (Pet & Master)
+-- Accuracy/Ranged Accuracy +10% (cap 80 on master, cap 105 on pet)
+-- Attack/Ranged Attack +11% (cap 50 on master, cap 75 on pet)
 -- Master MAB + 3 , Pet MAB + 14
--- Accuracy/Ranged Accuracy +10% (cap 50 on master, cap 75 on pet)
 -----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
