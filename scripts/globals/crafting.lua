@@ -111,7 +111,7 @@ end
 -----------------------------------
 
 xi.crafting.signupGuild = function(player, nbr)
-    player:addCharVar("Guild_Member", nbr)
+    player:incrementCharVar("Guild_Member", nbr)
 end
 
 -----------------------------------
@@ -348,6 +348,7 @@ xi.crafting.unionRepresentativeTriggerFishing = function(player, option, target,
             player:messageSpecial(text.GUILD_TERMINATE_CONTRACT, guildID, oldGuild)
             player:setCharVar('[GUILD]daily_points', 1)
         end
+
     elseif category == 3 then -- keyitem
         local ki = keyitems[bit.band(bit.rshift(option, 5), 15) - 1]
 
@@ -360,12 +361,14 @@ xi.crafting.unionRepresentativeTriggerFishing = function(player, option, target,
                player:messageText(target, text.NOT_HAVE_ENOUGH_GP, false, 6)
             end
         end
-    elseif category >= 0 then -- item
+    elseif (category == 0 and option ~= 1073741824) or category == 1 or category == 2 then -- item
+
         local idx      = bit.band(option, 3)
         local i        = items[(category - 1) * 4 + idx]
         local quantity = math.min(bit.rshift(option, 9), 12)
         local cost     = quantity * i.cost
         print('WE ARE IN ITEMS')
+        print('cat', category)
         print('idx', idx)
         print('i', i)
         print('quantity', quantity)
