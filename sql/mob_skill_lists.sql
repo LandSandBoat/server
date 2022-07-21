@@ -3811,6 +3811,9 @@ INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1169,1720);
 INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1169,1721);
 INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1169,1722);
 INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1169,1723);
+INSERT INTO `mob_skill_lists` VALUES('Osschaart', 1170, 549); -- eyes on me
+INSERT INTO `mob_skill_lists` VALUES('Osschaart', 1170, 550); -- hypnosis
+INSERT INTO `mob_skill_lists` VALUES('Osschaart', 1170, 551); -- mind break
 INSERT INTO `mob_skill_lists` VALUES ('Huwasi',1174,678);
 INSERT INTO `mob_skill_lists` VALUES ('Rogue_Receptacle',1175,520);
 INSERT INTO `mob_skill_lists` VALUES('Supplespine_Mujwuj', 1176, 1064);
