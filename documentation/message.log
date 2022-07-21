@@ -274,13 +274,13 @@
 274 - <caster> casts <spell>. Magic Burst! <number> HP drained from <target>.
 275 - <caster> casts <spell>. Magic Burst! <number> MP drained from <target>.
 276 - <player> recovers <number> mp.
-277," ""is <status>"" - that's the entire message."
+277 - <target> is <status>.
 278 - <player> receives the effect of <status>.
 279 - <player> is <status>.
 280 - <player> is <status>.
 281 - <number> HP is drained from <player>.
 282 - <target> evades.
-283," ""No effect"" - that's the entire message."
+283 - No effect on <target>.
 284 - <target> resists the effects of the spell!
 285 - <player>'s attacks are enhanced.
 286 - <player> is fortified against undead.
