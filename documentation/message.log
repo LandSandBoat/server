@@ -1,102 +1,102 @@
-0 - Display nothing
-1 - <actor> hits <target> for <amount> points of damage.
-2 - <caster> casts <spell>. <target> takes <amount> damage.
-3 - <caster> starts casting <spell>.
-4 - <target> is out of range.
-5 - Unable to see <target>.
-6 - The <player> defeats <target>.
-7 - <caster> casts <spell>. <target> recovers <amount> HP.
-8 - <player> gains <amount> experience point(s).
-9 - <player> attains level <value>.
-10 - <player> loses <value> experience point(s).
-11 - <player> falls to level <value>
-12 - Cannot attack. Your target is already claimed.
-14 - <attacker>'s attack is countered by <defender>. <number> of <attacker>'s shadows absorb the damage and disappear.
-15 - <attacker> misses <target>.
-16 - The <caster>'s casting is interrupted.
-17 - Unable to cast spells at this time.
-18 - Unable to cast spells at this time.
-19 - <player> calls for help!
-20 - <player> falls to the ground.
-21 - No experience points gained.
-22 - You cannot call for help at this time.
-23 - <player> learns a new spell!
-24 - ${target} recovers ${number} HP.
-25 - ${target} recovers ${number} MP.
-26 - ${target} recovers ${number} HP and MP.
-27 - Debug Message: Cannot execute command. No (BTCALC) command in ATEL source.
-28 -  ${actor} uses a ${item}.
-29 - The <player> is paralyzed.
-30 - <target> anticipates the attack.
-31 - .. of <target>'s shadows absorb the damage and disappear.
-32 - <defender> dodges the attack.
-33 - <attacker>'s attack is countered by <defender>. <attacker> takes <number> points of damage.
-34 - The <player> does not have enough MP to cast (NULL).
-35 - The <player> lacks the ninja tools to cast (NULL).
-36 - You lose sight of <target>.
-37 - You are too far from the battle to gain experience.
-38 - <player>'s <weapon> skill rises <number> points.
-39 - You need the Dual Wield ability to equip the <item> as a sub-weapon.
-40 - You cannot use <spell> in this area.
-41 - <player>: Status ailment check (<status id>) Cannot rest at this time.
-42 - <caster> casts <spell> on <target>.
-43 - ${actor} readies ${weapon_skill}.
-44 - <defender>'s spikes deal <number> points of damage to the <attacker>.
-45 - <player> learns <weaponskill>!
-46 - Debug Message: Current POP number: (<number>)
-47 - <caster> cannot cast <spell>.
-48 - <spell> cannot be cast on <target>. (example: tractor)
-49 - The <player> is unable to cast spells.
-50 - <player> earns a merit point! (Total: <number>)
-51 - --Out of sight--
-52 - <enemy> gives up chasing <player>. --Find Path Error--
-53 - <target>'s <skill> skill reaches level <level>.
-54 - <player> gains <number> Besieged points.
-55 - Unable to use item.
-56 - Unable to use item.
-57 - Job changed.
-58 - Invalid job number.
-59 - You do not have access to specified job yet.
-60 - You do not have access to support jobs yet.
-61 - You cannot have the same job as both main and supprot jobs.
-62 - The ${item} fails to activate.
-63 - <name> misses <target>.
-64 - <name> is no longer <status>.
-65 - You are not carrying any Petras.${lb}You cannot use the ${item}.
-66 - Debug: Resisted spell!
-67 - <attacker> scores a critical hit! <target> takes <number> damage.
-68 - Debug: Casting interrupted!
-69 - <defender> blocks the <attacker>'s attack with his shield.
-70 - <defender> parries the <attacker>'s attack with his weapon.
-71 - The <player> cannot perform that action.
-72 - That action cannot be performed on <target>.
-73 - Debug: <target>'s status is now hastened.
-74 - Debug: <target> recovers from <status>.
-75 - <caster>'s <spell> has no effect on <target>.
-76 - No valid target within area of effect.
-77 - <user> uses Sange. <target> takes <number> point(s) of damage.
-78 - <target> is too far away.
-79 - Debug: <user> uses Double Attack(<value>%).
-80 - Debug: <user> uses Triple Attack(<value>%).
-81 - Debug: Battle Debug No. (<value>) used on <target>.
-82 - <caster> casts <spell>. <target> is <status>!
-83 - <caster> casts <spell>. <caster> successfully removes <target>'s <status>.
-84 - <target> is <status>.
-85 - <caster> casts <spell>. <target> resists the spell.
-86 - <caster> casts <spell>, but <target> is outside the area of effect.
-87 - Unable to use job ability.
-88 - Unable to use job ability.
-89 - Unable to use weaponskill.
-90 - Unable to use weaponskill.
-91 - ${actor} does not have any ${item}.
-92 - Cannot use the ${item} on ${target}.
-93 - <caster> casts <spell>. <target> vanishes.
-94 - You must wait longer to perform that action.
-95 - You cannot learn <spell>. You do not meet the job or level requirements.
-96 - You already know <spell>.
-97 - <defender> was defeated by <attacker>.
-98 - You obtain a ${item} from ${target}.
-99 - <user> > <target>: <value>, <value>
+000 - Display nothing
+001 - <actor> hits <target> for <amount> points of damage.
+002 - <caster> casts <spell>. <target> takes <amount> damage.
+003 - <caster> starts casting <spell>.
+004 - <target> is out of range.
+005 - Unable to see <target>.
+006 - The <player> defeats <target>.
+007 - <caster> casts <spell>. <target> recovers <amount> HP.
+008 - <player> gains <amount> experience point(s).
+009 - <player> attains level <value>.
+010 - <player> loses <value> experience point(s).
+011 - <player> falls to level <value>
+012 - Cannot attack. Your target is already claimed.
+014 - <attacker>'s attack is countered by <defender>. <number> of <attacker>'s shadows absorb the damage and disappear.
+015 - <attacker> misses <target>.
+016 - The <caster>'s casting is interrupted.
+017 - Unable to cast spells at this time.
+018 - Unable to cast spells at this time.
+019 - <player> calls for help!
+020 - <player> falls to the ground.
+021 - No experience points gained.
+022 - You cannot call for help at this time.
+023 - <player> learns a new spell!
+024 - ${target} recovers ${number} HP.
+025 - ${target} recovers ${number} MP.
+026 - ${target} recovers ${number} HP and MP.
+027 - Debug Message: Cannot execute command. No (BTCALC) command in ATEL source.
+028 -  ${actor} uses a ${item}.
+029 - The <player> is paralyzed.
+030 - <target> anticipates the attack.
+031 - .. of <target>'s shadows absorb the damage and disappear.
+032 - <defender> dodges the attack.
+033 - <attacker>'s attack is countered by <defender>. <attacker> takes <number> points of damage.
+034 - The <player> does not have enough MP to cast (NULL).
+035 - The <player> lacks the ninja tools to cast (NULL).
+036 - You lose sight of <target>.
+037 - You are too far from the battle to gain experience.
+038 - <player>'s <weapon> skill rises <number> points.
+039 - You need the Dual Wield ability to equip the <item> as a sub-weapon.
+040 - You cannot use <spell> in this area.
+041 - <player>: Status ailment check (<status id>) Cannot rest at this time.
+042 - <caster> casts <spell> on <target>.
+043 - ${actor} readies ${weapon_skill}.
+044 - <defender>'s spikes deal <number> points of damage to the <attacker>.
+045 - <player> learns <weaponskill>!
+046 - Debug Message: Current POP number: (<number>)
+047 - <caster> cannot cast <spell>.
+048 - <spell> cannot be cast on <target>. (example: tractor)
+049 - The <player> is unable to cast spells.
+050 - <player> earns a merit point! (Total: <number>)
+051 - --Out of sight--
+052 - <enemy> gives up chasing <player>. --Find Path Error--
+053 - <target>'s <skill> skill reaches level <level>.
+054 - <player> gains <number> Besieged points.
+055 - Unable to use item.
+056 - Unable to use item.
+057 - Job changed.
+058 - Invalid job number.
+059 - You do not have access to specified job yet.
+060 - You do not have access to support jobs yet.
+061 - You cannot have the same job as both main and supprot jobs.
+062 - The ${item} fails to activate.
+063 - <name> misses <target>.
+064 - <name> is no longer <status>.
+065 - You are not carrying any Petras.${lb}You cannot use the ${item}.
+066 - Debug: Resisted spell!
+067 - <attacker> scores a critical hit! <target> takes <number> damage.
+068 - Debug: Casting interrupted!
+069 - <defender> blocks the <attacker>'s attack with his shield.
+070 - <defender> parries the <attacker>'s attack with his weapon.
+071 - The <player> cannot perform that action.
+072 - That action cannot be performed on <target>.
+073 - Debug: <target>'s status is now hastened.
+074 - Debug: <target> recovers from <status>.
+075 - <caster>'s <spell> has no effect on <target>.
+076 - No valid target within area of effect.
+077 - <user> uses Sange. <target> takes <number> point(s) of damage.
+078 - <target> is too far away.
+079 - Debug: <user> uses Double Attack(<value>%).
+080 - Debug: <user> uses Triple Attack(<value>%).
+081 - Debug: Battle Debug No. (<value>) used on <target>.
+082 - <caster> casts <spell>. <target> is <status>!
+083 - <caster> casts <spell>. <caster> successfully removes <target>'s <status>.
+084 - <target> is <status>.
+085 - <caster> casts <spell>. <target> resists the spell.
+086 - <caster> casts <spell>, but <target> is outside the area of effect.
+087 - Unable to use job ability.
+088 - Unable to use job ability.
+089 - Unable to use weaponskill.
+090 - Unable to use weaponskill.
+091 - ${actor} does not have any ${item}.
+092 - Cannot use the ${item} on ${target}.
+093 - <caster> casts <spell>. <target> vanishes.
+094 - You must wait longer to perform that action.
+095 - You cannot learn <spell>. You do not meet the job or level requirements.
+096 - You already know <spell>.
+097 - <defender> was defeated by <attacker>.
+098 - You obtain a ${item} from ${target}.
+099 - <user> > <target>: <value>, <value>
 100 - The <player> uses ..
 101 - The <entity> uses ..
 102 - The <player> uses .. <target> recovers .. HP.
