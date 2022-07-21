@@ -1,8 +1,8 @@
 -----------------------------------
--- Area: East Ronfaure
+-- Area: Beadeaux
 -- NPC: Geomantic Reservoir
--- Unlocks: Geo-Poison
--- !pos 379.572 -39.057 57.502 101
+-- Unlocks: Geo-Slow
+-- !pos 162.194 -3.250 38.661 147
 -----------------------------------
 require("scripts/globals/geomantic_reservoir")
 require("scripts/globals/spell_data")
@@ -13,14 +13,14 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    xi.geomanticReservoir.onTrigger(player, npc, xi.magic.spell.GEO_POISON)
+    xi.geomanticReservoir.onTrigger(player, npc, xi.magic.spell.GEO_SLOW)
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    xi.geomanticReservoir.onEventFinish(player, csid, xi.magic.spell.GEO_POISON)
+    xi.geomanticReservoir.onEventFinish(player, csid, xi.magic.spell.GEO_SLOW)
 end
 
 return entity

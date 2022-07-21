@@ -1,8 +1,8 @@
 -----------------------------------
--- Area: East Ronfaure
+-- Area: Fei'Yin
 -- NPC: Geomantic Reservoir
--- Unlocks: Geo-Poison
--- !pos 379.572 -39.057 57.502 101
+-- Unlocks: Geo-Paralysis
+-- !pos 4.239 -0.009 255.206 204
 -----------------------------------
 require("scripts/globals/geomantic_reservoir")
 require("scripts/globals/spell_data")
@@ -13,14 +13,14 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    xi.geomanticReservoir.onTrigger(player, npc, xi.magic.spell.GEO_POISON)
+    xi.geomanticReservoir.onTrigger(player, npc, xi.magic.spell.GEO_PARALYSIS)
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    xi.geomanticReservoir.onEventFinish(player, csid, xi.magic.spell.GEO_POISON)
+    xi.geomanticReservoir.onEventFinish(player, csid, xi.magic.spell.GEO_PARALYSIS)
 end
 
 return entity

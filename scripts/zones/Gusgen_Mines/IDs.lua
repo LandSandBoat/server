@@ -41,6 +41,8 @@ zones[xi.zone.GUSGEN_MINES] =
         ALREADY_POSSESS_TEMP     = 8308,  -- You already possess that temporary item.
         NO_COMBINATION           = 8313,  -- You were unable to enter a combination.
         REGIME_REGISTERED        = 10391, -- New training regime registered!
+        LEARNS_SPELL             = 11439, -- <name> learns <spell>!
+        UNCANNY_SENSATION        = 11441, -- You are assaulted by an uncanny sensation.
         COMMON_SENSE_SURVIVAL    = 11476, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =

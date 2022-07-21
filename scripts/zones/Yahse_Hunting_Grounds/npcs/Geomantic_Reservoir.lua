@@ -1,8 +1,8 @@
 -----------------------------------
--- Area: East Ronfaure
+-- Area: Yahse Hunting Grounds
 -- NPC: Geomantic Reservoir
--- Unlocks: Geo-Poison
--- !pos 379.572 -39.057 57.502 101
+-- Unlocks: Geo-Wilt
+-- !pos 412.263 4.161 111.199 260
 -----------------------------------
 require("scripts/globals/geomantic_reservoir")
 require("scripts/globals/spell_data")
@@ -13,14 +13,14 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    xi.geomanticReservoir.onTrigger(player, npc, xi.magic.spell.GEO_POISON)
+    xi.geomanticReservoir.onTrigger(player, npc, xi.magic.spell.GEO_WILT)
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    xi.geomanticReservoir.onEventFinish(player, csid, xi.magic.spell.GEO_POISON)
+    xi.geomanticReservoir.onEventFinish(player, csid, xi.magic.spell.GEO_WILT)
 end
 
 return entity
