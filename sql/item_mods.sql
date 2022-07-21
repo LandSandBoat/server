@@ -53910,7 +53910,11 @@ INSERT INTO `item_mods` VALUES (25718,165,3);   -- CRITHITRATE: 3
 INSERT INTO `item_mods` VALUES (25718,384,400); -- HASTE_GEAR: 400
 
 -- Jubilee Shirt
-INSERT INTO `item_mods` VALUES (25722,1,1); -- DEF: 1
+INSERT INTO `item_mods` VALUES (25722,1,1);     -- DEF: 1
+
+-- Kupo Suit
+INSERT INTO `item_mods` VALUES (25726,169,18);  -- MOVE: +18%
+INSERT INTO `item_mods` VALUES (25726,1,1);     -- DEF: 1
 
 -- Meghanada Cuirie
 INSERT INTO `item_mods` VALUES (25747,1,123);    -- DEF: 123
@@ -56082,6 +56086,9 @@ INSERT INTO `item_mods` VALUES (26406,132,3); -- LEATHER: 3
 INSERT INTO `item_mods` VALUES (26406,133,3); -- BONE: 3
 INSERT INTO `item_mods` VALUES (26406,134,3); -- ALCHEMY: 3
 INSERT INTO `item_mods` VALUES (26406,135,3); -- COOK: 3
+
+-- Diamond buckler
+INSERT INTO `item_mods` VALUES (26410,1,1);   -- DEF: 1
 
 -- Ammurapi Shield
 INSERT INTO `item_mods` VALUES (26419,1,47);   -- DEF: 47
