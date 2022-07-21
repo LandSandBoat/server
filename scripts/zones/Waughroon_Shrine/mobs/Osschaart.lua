@@ -3,7 +3,7 @@
 --  Mob: Osschaart
 -- KSNM: Copycat
 -----------------------------------
-twoHourAbility =
+local twoHourAbility =
 {
     688, -- mighty_strikes
     690, -- hundred_fists
@@ -67,14 +67,8 @@ local function charm(mob)
     end
 end
 
-local function useTwoHour(mob)
-
-end
-
 entity.onMobFight = function(mob, target)
     local job = mob:getLocalVar("charmedJob")
-    print(job)
-    print(twoHourAbility[job])
     if mob:getLocalVar("charmTimer") < os.time() then
         charm(mob)
     end
@@ -83,7 +77,6 @@ entity.onMobFight = function(mob, target)
         mob:getHPP() < 35 and mob:getLocalVar("twoHour") == 0
     then
         mob:setLocalVar("twoHour", 1)
-        print(twoHourAbility[job])
         mob:useMobAbility(twoHourAbility[job])
     end
 
