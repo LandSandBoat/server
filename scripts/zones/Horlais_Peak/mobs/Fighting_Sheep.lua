@@ -12,6 +12,10 @@ entity.onMobInitialize = function(mob)
     mob:setMod(xi.mod.ICE_MEVA, 75) -- Todo: Move to mob_resists.sql
 end
 
+entity.onMobSpawn = function(mob)
+    mob:addMod(xi.mod.REGAIN, 3000)
+end
+
 entity.onMobDeath = function(mob, player, isKiller)
 end
 
