@@ -2198,7 +2198,16 @@ void SmallPacket0x04B(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if (msg_language == 0x02)
     {
-        PChar->pushPacket(new CServerMessagePacket(settings::get<std::string>("main.SERVER_MESSAGE"), msg_language, msg_timestamp, msg_offset));
+        std::string login_message = settings::get<std::string>("main.SERVER_MESSAGE");
+        if (settings::get<bool>("main.ENABLE_TRUST_ALTER_EGO_EXTRAVAGANZA_ANNOUNCE"))
+        {
+            login_message = login_message + (settings::get<std::string>("main.TRUST_ALTER_EGO_EXTRAVAGANZA_MESSAGE"));
+        }
+        if (settings::get<bool>("main.ENABLE_TRUST_ALTER_EGO_EXPO_ANNOUNCE"))
+        {
+            login_message = login_message + (settings::get<std::string>("main.TRUST_ALTER_EGO_EXPO_MESSAGE"));
+        }
+        PChar->pushPacket(new CServerMessagePacket(login_message, msg_language, msg_timestamp, msg_offset));
     }
 
     PChar->pushPacket(new CCharSyncPacket(PChar));
@@ -4224,10 +4233,10 @@ void SmallPacket0x071(map_session_data_t* const PSession, CCharEntity* const PCh
                             sql->AffectedRows())
                         {
                             ShowDebug("%s has removed %s from party", PChar->GetName(), data[0x0C]);
-                            uint8 data[8]{};
-                            ref<uint32>(data, 0) = PChar->PParty->GetPartyID();
-                            ref<uint32>(data, 4) = id;
-                            message::send(MSG_PT_RELOAD, data, sizeof data, nullptr);
+                            uint8 removeData[8]{};
+                            ref<uint32>(removeData, 0) = PChar->PParty->GetPartyID();
+                            ref<uint32>(removeData, 4) = id;
+                            message::send(MSG_PT_RELOAD, removeData, sizeof removeData, nullptr);
                         }
                     }
                 }
@@ -4310,10 +4319,10 @@ void SmallPacket0x071(map_session_data_t* const PSession, CCharEntity* const PCh
                                 sql->AffectedRows())
                             {
                                 ShowDebug("%s has removed %s party from alliance", PChar->GetName(), data[0x0C]);
-                                uint8 data[8]{};
-                                ref<uint32>(data, 0) = PChar->PParty->GetPartyID();
-                                ref<uint32>(data, 4) = id;
-                                message::send(MSG_PT_RELOAD, data, sizeof data, nullptr);
+                                uint8 removeData[8]{};
+                                ref<uint32>(removeData, 0) = PChar->PParty->GetPartyID();
+                                ref<uint32>(removeData, 4) = id;
+                                message::send(MSG_PT_RELOAD, removeData, sizeof removeData, nullptr);
                             }
                         }
                     }
@@ -4516,9 +4525,9 @@ void SmallPacket0x077(map_session_data_t* const PSession, CCharEntity* const PCh
             {
                 ShowDebug("(Alliance)Changing leader to %s", data[0x04]);
                 PChar->PParty->m_PAlliance->assignAllianceLeader((const char*)data[0x04]);
-                uint8 data[4]{};
-                ref<uint32>(data, 0) = PChar->PParty->m_PAlliance->m_AllianceID;
-                message::send(MSG_PT_RELOAD, data, sizeof data, nullptr);
+                uint8 leaderData[4]{};
+                ref<uint32>(leaderData, 0) = PChar->PParty->m_PAlliance->m_AllianceID;
+                message::send(MSG_PT_RELOAD, leaderData, sizeof leaderData, nullptr);
             }
         }
         break;

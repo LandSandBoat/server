@@ -108,7 +108,6 @@ zones[xi.zone.JUGNER_FOREST] =
 
     npc =
     {
-        CASKET_BASE   = 17203786,
         OVERSEER_BASE = 17203848, -- Chaplion_RK in npc_list
         LOGGING =
         {

@@ -33,6 +33,8 @@ zones[xi.zone.BEHEMOTHS_DOMINION] =
         ALREADY_POSSESS_TEMP     = 7354,  -- You already possess that temporary item.
         NO_COMBINATION           = 7359,  -- You were unable to enter a combination.
         REGIME_REGISTERED        = 9537,  -- New training regime registered!
+        LEARNS_SPELL             = 11526, -- <name> learns <spell>!
+        UNCANNY_SENSATION        = 11528, -- You are assaulted by an uncanny sensation.
         COMMON_SENSE_SURVIVAL    = 11535, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
@@ -46,7 +48,6 @@ zones[xi.zone.BEHEMOTHS_DOMINION] =
     npc =
     {
         BEHEMOTH_QM      = 17297459,
-        CASKET_BASE      = 17297460,
         CERMET_HEADSTONE = 17297493,
     },
 }

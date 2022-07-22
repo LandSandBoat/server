@@ -7,4 +7,5 @@ return {
     ['Regal_Pawprints_5'] = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
     ['Regal_Pawprints_6'] = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
     ['Regal_Pawprints_7'] = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
+    ['Regal_Pawprints_8'] = { messageSpecial = ID.text.NO_RESPONSE },
 }

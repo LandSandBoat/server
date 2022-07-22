@@ -1797,25 +1797,25 @@ void CCharEntity::OnRaise()
         {
             actionTarget.animation = 511;
             hpReturned             = (uint16)((GetLocalVar("MijinGakure") != 0) ? GetMaxHP() * 0.5 : GetMaxHP() * 0.1);
-            ratioReturned          = 0.50f * (1 - settings::get<uint8>("map.EXP_RETAIN"));
+            ratioReturned          = 0.50f * static_cast<double>(1 - settings::get<uint8>("map.EXP_RETAIN"));
         }
         else if (m_hasRaise == 2)
         {
             actionTarget.animation = 512;
             hpReturned             = (uint16)((GetLocalVar("MijinGakure") != 0) ? GetMaxHP() * 0.5 : GetMaxHP() * 0.25);
-            ratioReturned          = ((GetMLevel() <= 50) ? 0.50f : 0.75f) * (1 - settings::get<uint8>("map.EXP_RETAIN"));
+            ratioReturned          = ((GetMLevel() <= 50) ? 0.50f : 0.75f) * static_cast<double>(1 - settings::get<uint8>("map.EXP_RETAIN"));
         }
         else if (m_hasRaise == 3)
         {
             actionTarget.animation = 496;
             hpReturned             = (uint16)(GetMaxHP() * 0.5);
-            ratioReturned          = ((GetMLevel() <= 50) ? 0.50f : 0.90f) * (1 - settings::get<uint8>("map.EXP_RETAIN"));
+            ratioReturned          = ((GetMLevel() <= 50) ? 0.50f : 0.90f) * static_cast<double>(1 - settings::get<uint8>("map.EXP_RETAIN"));
         }
         else if (m_hasRaise == 4) // Used for spell "Arise" and Arise from the spell "Reraise IV"
         {
             actionTarget.animation = 496;
             hpReturned             = (uint16)GetMaxHP();
-            ratioReturned          = ((GetMLevel() <= 50) ? 0.50f : 0.90f) * (1 - settings::get<uint8>("map.EXP_RETAIN"));
+            ratioReturned          = ((GetMLevel() <= 50) ? 0.50f : 0.90f) * static_cast<double>(1 - settings::get<uint8>("map.EXP_RETAIN"));
         }
 
         addHP(((hpReturned < 1) ? 1 : hpReturned));

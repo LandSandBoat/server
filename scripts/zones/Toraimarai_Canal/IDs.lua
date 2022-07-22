@@ -54,7 +54,6 @@ zones[xi.zone.TORAIMARAI_CANAL] =
     {
         TOME_OF_MAGIC_OFFSET = 17469828,
         TREASURE_COFFER      = 17469835,
-        CASKET_BASE          = 17469772,
     },
 }
 

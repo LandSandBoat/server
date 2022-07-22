@@ -51,15 +51,15 @@ zones[xi.zone.ARRAPAGO_REEF] =
     },
     mob =
     {
-        BLOODY_BONES_PH       =
+        BLOODY_BONES_PH =
         {
             [16998653] = 16998655, -- 136.234 -6.831 468.779
         },
-        MEDUSA                = 16998862,
-        LIL_APKALLU           = 16998871,
-        VELIONIS              = 16998872,
-        ZAREEHKL_THE_JUBILANT = 16998873,
-        NUHN                  = 16998874,
+        MEDUSA                = DYNAMIC_LOOKUP,
+        LIL_APKALLU           = DYNAMIC_LOOKUP,
+        VELIONIS              = DYNAMIC_LOOKUP,
+        ZAREEHKL_THE_JUBILANT = DYNAMIC_LOOKUP,
+        NUHN                  = DYNAMIC_LOOKUP,
     },
     npc =
     {
