@@ -354,9 +354,9 @@ INSERT INTO `bcnm_battlefield` VALUES (77,3,17367198,3);
 INSERT INTO `bcnm_battlefield` VALUES (77,3,17367199,3);
 INSERT INTO `bcnm_battlefield` VALUES (77,3,17367200,3);
 INSERT INTO `bcnm_battlefield` VALUES (77,3,17367201,3);
-INSERT INTO `bcnm_battlefield` VALUES (78,1,17367236,3); -- final_bout
-INSERT INTO `bcnm_battlefield` VALUES (78,2,17367238,3);
-INSERT INTO `bcnm_battlefield` VALUES (78,3,17367240,3);
+INSERT INTO `bcnm_battlefield` VALUES (78,1,17367236,3); -- final bout: The Waughroon Kid
+INSERT INTO `bcnm_battlefield` VALUES (78,2,17367238,3); -- The Waughroon Kid
+INSERT INTO `bcnm_battlefield` VALUES (78,3,17367240,3); -- The Waughroon Kid
 INSERT INTO `bcnm_battlefield` VALUES (79,1,17367242,3); -- up_in_arms
 INSERT INTO `bcnm_battlefield` VALUES (79,2,17367244,3);
 INSERT INTO `bcnm_battlefield` VALUES (79,3,17367246,3);
