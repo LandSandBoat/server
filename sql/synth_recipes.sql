@@ -4740,6 +4740,7 @@ INSERT INTO `synth_recipes` VALUES (75518,1,0,0,98,60,0,0,0,0,0,4100,4242,13941,
 INSERT INTO `synth_recipes` VALUES (75519,1,0,0,91,0,0,0,0,0,0,4100,4242,18406,0,0,0,0,0,0,0,2302,2302,2302,2302,1,1,2,2,'Jadagna_+1_Desynth');
 INSERT INTO `synth_recipes` VALUES (75520,1,0,0,0,85,0,0,0,0,0,4100,4242,13414,0,0,0,0,0,0,0,813,813,746,746,1,1,1,2,'Heavens_Earring_Desynth');
 INSERT INTO `synth_recipes` VALUES (75521,1,0,0,0,85,0,0,0,0,0,4100,4242,14719,0,0,0,0,0,0,0,813,813,746,746,1,1,1,2,'Heavens_Earring_+1_Desynth');
+INSERT INTO `synth_recipes` VALUES (75522,0,0,70,0,0,0,0,0,0,0,4102,4244,9091,0,0,0,0,0,0,0,19320,19320,19320,19320,1,1,1,1,'Lu Shang\'s Fishing Rod +1'); -- BGWiki and JP Wiki
 
 -- -----------
 -- RECIPES END
