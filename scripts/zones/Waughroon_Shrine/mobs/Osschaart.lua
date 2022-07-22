@@ -5,28 +5,27 @@
 -----------------------------------
 local twoHourAbility =
 {
-    688, -- mighty_strikes
-    690, -- hundred_fists
-    689, -- benediction
-    691, -- manafont
-    692, -- chainspell
-    693, -- perfect_dodge
-    694, -- invincible
-    695, -- blood_weapon
-    740, -- familiar
-    696, -- soul_voice
-    0, -- eagle_eye_shot NEEDS CAPTURE
-    730, -- meikyo_shisui
-    731, -- mijin_gakure
-    1893, -- spirit_surge
-    734, -- astral_flow
-    1933, -- azure_lore
-    0, -- wild_card
-    0, -- overdrive
-    0, -- trance
-    0, -- tabula_rasa
-    0, -- bolster
-    0, -- elemental_sforzo
+    xi.jsa.MIGHTY_STRIKES,
+    xi.jsa.HUNDRED_FISTS,
+    xi.jsa.BENEDICTION,
+    xi.jsa.MANAFONT,
+    xi.jsa.CHAINSPELL,
+    xi.jsa.PERFECT_DODGE,
+    xi.jsa.INVINCIBLE,
+    xi.jsa.BLOOD_WEAPON,
+    xi.jsa.FAMILIAR,
+    xi.jsa.SOUL_VOICE,
+    xi.jsa.MEIKYO_SHISUI,
+    xi.jsa.MIJIN_GAKURE,
+    xi.jsa.CALL_WYVERN,
+    xi.jsa.ASTRAL_FLOW,
+    xi.jsa.AZURE_LORE,
+    0, -- WILD_CARD
+    0, -- OVERDRIVE,
+    0, -- TRANCE,
+    0, -- TABULA_RASA,
+    0, -- BOLSTER,
+    0, -- ELEMENTAL_SFORZO,
 }
 local entity = {}
 
