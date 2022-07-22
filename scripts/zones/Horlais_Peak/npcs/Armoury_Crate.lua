@@ -429,9 +429,6 @@ local loot =
             {itemid = 4203, droprate = 113},  -- Vitality Potion
         },
         {
-            {itemid = 3341, droprate = 1000}, -- Beastly Shank
-        },
-        {
             {itemid = 4209, droprate = 169},  -- Mind Potion
             {itemid = 4207, droprate = 70},   -- Intelligence Potion
             {itemid = 4211, droprate = 113},  -- Charisma Potion

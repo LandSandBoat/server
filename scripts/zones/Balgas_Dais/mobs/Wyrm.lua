@@ -8,65 +8,83 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-entity.onMobInitialize = function(mob)
+local grounded = function(mob)
+    mob:setMobMod(xi.mobMod.NO_MOVE, 0)
+    mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setMobMod(xi.mobMod.DRAW_IN, 1) -- has a bug during flight, like Tiamat
+    mob:addMod(xi.mod.EVA, 50)
+    mob:addMod(xi.mod.ATT, 100)
+    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
+    mob:setMobMod(xi.mobMod.DRAW_IN_INCLUDE_PARTY, 1)
     mob:setMobMod(xi.mobMod.DRAW_IN_IGNORE_STATIONARY, 1)
+    mob:SetMobSkillAttack(0) -- resetting so it doesn't respawn in flight mode.
+    mob:setAnimationSub(0) -- subanim 0 is only used when it spawns until first flight.
     mob:setTP(3000) -- opens fight with a skill
+    mob:setLocalVar("state", 0)
+    grounded(mob)
 end
 
 entity.onMobEngaged = function(mob, target)
     mob:setMod(xi.mod.REGAIN, 100) -- very close to the capture by comparing stop watch measures
-    mob:setMod(xi.mod.REGEN, 100) -- might be higher: capture showed no change in HP with Poison II and Bio III procced
-end
-
-local function notBusy(mob)
-    local action = mob:getCurrentAction()
-    if
-        action == xi.act.MOBABILITY_START or
-        action == xi.act.MOBABILITY_USING or
-        action == xi.act.MOBABILITY_FINISH
-    then
-        return false -- when the Wyrm is in any stage of using a mobskill
-    else
-        return true
-    end
+    mob:setMod(xi.mod.REGEN, 50)
 end
 
 entity.onMobFight = function(mob, target)
+    local state = mob:getLocalVar("state")
 
-    -- Return to ground at 33% HP
-    if
-        mob:getAnimationSub() == 1 and -- is flying
-        mob:getHPP() <= 33 and
-        notBusy(mob)
-    then
-        mob:useMobAbility(954)
-        -- Touchdown will set the following for us in the skill script:
-        -- lifted wings model stance: mob:setAnimationSub(2)
-        -- reset default attack:      mob:SetMobSkillAttack(0)
-        -- reset melee attacks:       mob:delStatusEffect(xi.effect.ALL_MISS)
-        mob:addStatusEffect(xi.effect.EVASION_BOOST, 75, 0, 0)
-        mob:addStatusEffect(xi.effect.DEFENSE_BOOST, 75, 0, 0)
-        mob:addStatusEffect(xi.effect.MAGIC_DEF_BOOST, 75, 0, 0)
-        mob:setMobMod(xi.mobMod.SKILL_LIST, 262) -- restore standard ground skill set
-        mob:setBehaviour(1024) -- reset behavior to not face target
+    if state == 1 then -- Path to center of arena and fly
+        local spawn = mob:getSpawnPos()
+        local current = mob:getPos()
+        local diffX = spawn.x - current.x
+        local diffY = spawn.y - current.y
+        local diffZ = spawn.z - current.z
 
-    -- Go airborne at 66% HP, gets only called once
-    -- TODO: Should move physically to center/origin before taking off; maybe with pathTo()?
-    elseif
-        mob:getHPP() > 33 and
-        mob:getHPP() <= 66 and
-        mob:getAnimationSub() == 0 and -- is on ground
-        notBusy(mob)
-    then
-        mob:setAnimationSub(1) -- flying model stance
-        mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0) -- melee attacks miss now
-        mob:SetMobSkillAttack(1146) -- change default attack to ranged fire magic damage
-        mob:setMobMod(xi.mobMod.SKILL_LIST, 1147) -- change skill set to flying moves
-        mob:setBehaviour(0) -- face target while flying
+        local distance = math.sqrt(math.pow(diffX, 2) + math.pow(diffY, 2) + math.pow(diffZ, 2))
+        if distance < 3 then
+            mob:setLocalVar("state", 2) -- fly state
+            mob:setBehaviour(0)
+            mob:setAnimationSub(1)
+            mob:setMobMod(xi.mobMod.NO_MOVE, 1)
+            mob:addStatusEffectEx(xi.effect.ALL_MISS, 0, 1, 0, 0)
+            mob:SetMobSkillAttack(1146)
+        else
+            mob:pathTo(spawn.x , spawn.y, spawn.z)
+        end
+    elseif state == 2 then
+        mob:lookAt(target:getPos())
+    end
+
+    if mob:canUseAbilities() then
+        -- Fly @ 66%
+        if mob:getAnimationSub() == 0 and mob:getHPP() <= 66 and state == 0 then
+            local spawn = mob:getSpawnPos()
+            mob:pathTo(spawn.x , spawn.y, spawn.z)
+            mob:setLocalVar("state", 1) -- moving to spawn
+        -- Land @ 33%
+        elseif mob:getAnimationSub() == 1 and mob:getHPP() <= 33 and state == 2 then
+            mob:setLocalVar("state", 3) -- final state
+            mob:useMobAbility(954)
+            grounded(mob)
+            mob:addStatusEffect(xi.effect.EVASION_BOOST, 50, 0, 0)
+            mob:addStatusEffect(xi.effect.DEFENSE_BOOST, 50, 0, 0)
+            mob:addStatusEffect(xi.effect.MAGIC_DEF_BOOST, 40, 0, 0)
+        -- Ensure Wyrm lands if Touchdown is interrupted
+        elseif mob:getAnimationSub() ~= 2 and state == 3 and mob:canUseAbilities() then
+            mob:setAnimationSub(2)
+            grounded(mob)
+            mob:delStatusEffect(xi.effect.ALL_MISS)
+            mob:SetMobSkillAttack(0)
+        end
+    end
+
+    -- Wakeup from sleep immediately if flying
+    if mob:getAnimationSub() == 1 and
+       (mob:hasStatusEffect(xi.effect.SLEEP_I) or
+       mob:hasStatusEffect(xi.effect.SLEEP_II) or
+       mob:hasStatusEffect(xi.effect.LULLABY)) then
+        mob:wakeUp()
     end
 end
 
