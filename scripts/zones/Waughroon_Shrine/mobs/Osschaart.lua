@@ -44,7 +44,6 @@ local function charm(mob)
 
     for _, v in pairs(players) do
         if v ~= nil and v:getLocalVar("playerCharmed") ~= 1 then
-            mob:updateEnmity(v)
             v:setPos(mob:getXPos() + 0.3, mob:getYPos(), mob:getZPos() + 0.3, mob:getRotPos())
             mob:useMobAbility(1337, v)
             v:setLocalVar("playerCharmed", 1)
