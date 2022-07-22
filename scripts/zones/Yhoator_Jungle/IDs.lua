@@ -62,7 +62,6 @@ zones[xi.zone.YHOATOR_JUNGLE] =
     },
     npc =
     {
-        CASKET_BASE       = 17285619,
         OVERSEER_BASE     = 17285650, -- Ilieumort_RK in npc_list
         PEDDLESTOX        = 17285686,
         BEASTMEN_TREASURE =

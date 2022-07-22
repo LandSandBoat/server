@@ -2038,7 +2038,9 @@ namespace fishingutils
                     break;
                 case FISHINGCATCHTYPE_CHEST:
                     PChar->hookedFish->successtype = FISHINGSUCCESSTYPE_CATCHCHEST;
-                    CatchChest(PChar, PChar->hookedFish->catchid, PChar->hookedFish->distance, PChar->hookedFish->angle);
+
+                    // TODO: Below function is currently not implemented.
+                    // CatchChest(PChar, PChar->hookedFish->catchid, PChar->hookedFish->distance, PChar->hookedFish->angle);
                     break;
             }
         }

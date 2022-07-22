@@ -64,7 +64,6 @@ zones[xi.zone.ORDELLES_CAVES] =
     },
     npc =
     {
-        CASKET_BASE    = 17568148,
         TREASURE_CHEST = 17568192,
     },
 }

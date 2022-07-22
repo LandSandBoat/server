@@ -17,8 +17,9 @@ class HXIClient:
 
         # Read from version.conf default
         if client_str == '':
-            with open('conf/default/version.conf') as f:
-                client_str = f.readlines()[1].split(":")[1].strip()
+            with open('settings/default/login.lua') as f:
+                settings_file = f.read()
+                client_str = re.search(r'CLIENT_VER = "(.*?)"', settings_file)[1]
 
         print("Client version:", client_str)
         self.client_str = client_str

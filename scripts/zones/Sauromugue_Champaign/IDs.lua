@@ -44,9 +44,10 @@ zones[xi.zone.SAUROMUGUE_CHAMPAIGN] =
         VOIDWALKER_UPGRADE_KI_2  = 11004, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
         VOIDWALKER_BREAK_KI      = 11005, -- The <keyitem> shatters into tiny fragments.
         VOIDWALKER_OBTAIN_KI     = 11006, -- Obtained key item: <keyitem>!
+        LEARNS_SPELL             = 12504, -- <name> learns <spell>!
+        UNCANNY_SENSATION        = 12506, -- You are assaulted by an uncanny sensation.
         COMMON_SENSE_SURVIVAL    = 12513, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
-
     mob =
     {
         DEADLY_DODO_PH     =
@@ -104,7 +105,6 @@ zones[xi.zone.SAUROMUGUE_CHAMPAIGN] =
 
     npc =
     {
-        CASKET_BASE = 17269190,
         QM2         = 17269228,
     },
 }

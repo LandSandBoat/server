@@ -52,7 +52,6 @@ zones[xi.zone.KING_RANPERRES_TOMB] =
     },
     npc =
     {
-        CASKET_BASE    = 17555907,
         TREASURE_CHEST = 17555955,
     },
 }
