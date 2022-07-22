@@ -4932,6 +4932,11 @@ namespace battleutils
         charmChance *= (1.f + levelRatio);
 
         float chrRatio = ((PCharmer->CHR() - PTarget->CHR())) / 100.f;
+        if (chrRatio == 0.f)
+        {
+            chrRatio = 1 / 100.f;
+        }
+
         charmChance *= (1.f * (chrRatio * 5.83));
 
         // Retail doesn't take light/apollo into account for Gauge
