@@ -36,16 +36,16 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     if (damage > 0) then
         local duration = (tp/1000 * 30) + 60
         if (target:hasStatusEffect(xi.effect.DEFENSE_DOWN) == false) then
-            target:addStatusEffect(xi.effect.DEFENSE_DOWN, 12.5, 0, duration * applyResistanceAddEffect(player, target, xi.magic.ele.WIND, 0))
+            target:addStatusEffect(xi.effect.DEFENSE_DOWN, 12.5, 0, duration * applyResistanceAddEffect(player, target, xi.magic.ele.WIND, ((player:getMainLvl() / 7.5) * (tp / 1000))))
         end
         if (target:hasStatusEffect(xi.effect.ATTACK_DOWN) == false) then
-            target:addStatusEffect(xi.effect.ATTACK_DOWN, 12.5, 0, duration * applyResistanceAddEffect(player, target, xi.magic.ele.WATER, 0))
+            target:addStatusEffect(xi.effect.ATTACK_DOWN, 12.5, 0, duration * applyResistanceAddEffect(player, target, xi.magic.ele.WATER, ((player:getMainLvl() / 7.5) * (tp / 1000))))
         end
         if (target:hasStatusEffect(xi.effect.EVASION_DOWN) == false) then
-            target:addStatusEffect(xi.effect.EVASION_DOWN, 20, 0, duration * applyResistanceAddEffect(player, target, xi.magic.ele.ICE, 0))
+            target:addStatusEffect(xi.effect.EVASION_DOWN, 20, 0, duration * applyResistanceAddEffect(player, target, xi.magic.ele.ICE, ((player:getMainLvl() / 7.5) * (tp / 1000))))
         end
         if (target:hasStatusEffect(xi.effect.ACCURACY_DOWN) == false) then
-            target:addStatusEffect(xi.effect.ACCURACY_DOWN, 20, 0, duration * applyResistanceAddEffect(player, target, xi.magic.ele.EARTH, 0))
+            target:addStatusEffect(xi.effect.ACCURACY_DOWN, 20, 0, duration * applyResistanceAddEffect(player, target, xi.magic.ele.EARTH, ((player:getMainLvl() / 7.5) * (tp / 1000))))
         end
     end
     return tpHits, extraHits, criticalHit, damage
