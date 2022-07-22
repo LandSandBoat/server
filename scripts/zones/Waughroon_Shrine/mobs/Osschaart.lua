@@ -15,6 +15,7 @@ local twoHourAbility =
     xi.jsa.BLOOD_WEAPON,
     xi.jsa.FAMILIAR,
     xi.jsa.SOUL_VOICE,
+    0, -- EAGLE_EYE_SHOT
     xi.jsa.MEIKYO_SHISUI,
     xi.jsa.MIJIN_GAKURE,
     xi.jsa.CALL_WYVERN,
