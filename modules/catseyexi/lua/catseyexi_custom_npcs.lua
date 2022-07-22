@@ -1596,4 +1596,303 @@ m:addOverride("xi.zones.Windurst_Woods.Zone.onInitialize", function(zone)
 
 end)
 
+---------------------------------------------
+--               BIBIKI BAY                --
+---------------------------------------------
+m:addOverride("xi.zones.Bibiki_Bay.Zone.onInitialize", function(zone)
+    local ID = require("scripts/zones/Bibiki_Bay/IDs")
+    -- Call the zone's original function for onInitialize
+    super(zone)
+    
+    local drunktaru = zone:insertDynamicEntity({  -- sell pup attachments
+    objtype  = xi.objType.NPC,
+    name     = "Drunk Taru",
+    look     = "0x0100000607100020083007400050006000700000",
+    x        = 313.542,
+    y        =  -2.850,
+    z        = 170.185,
+    rotation =      37,
+    widescan =       1,
+
+    onTrade = function(player, npc, trade)
+        local isGEO = player:getMainJob() == xi.job.GEO and player:getJobLevel(xi.job.GEO) == 75
+        local afProgress = player:getCharVar("[GEO]AF_Progress")
+        
+        if isGEO then 
+            npc:setRotation(player:getRotPos() + 127)
+            -- AF1 (Feet)
+            if afProgress < 1 and npcUtil.tradeHasExactly(trade, 5714) then  -- pearlscale
+                player:tradeComplete()
+                player:PrintToPlayer(string.format("Drunk Taru: My savior! How could I ever repay you? I'm going to get this pearlscale to Koru-Moru right away!"), 0xD)
+                
+                npc:timer(2000, function(npcArg)
+                    player:PrintToPlayer(string.format("Drunk Taru: Oh, your reward?"), 0xD)
+                end)
+                
+                npc:timer(4000, function(npcArg)
+                    player:PrintToPlayer(string.format("Drunk Taru: ..."), 0xD)
+                end)
+                
+                npc:timer(6000, function(npcArg)
+                    player:PrintToPlayer(string.format("Drunk Taru: ..."), 0xD)
+                end)
+                
+                npc:timer(8000, function(npcArg)
+                    player:PrintToPlayer(string.format("Drunk Taru: I always get myself into trouble when I drink, but I guess a deal is a deal!"), 0xD)
+                end)
+                
+                npc:timer(10000, function(npcArg)
+                    player:setCharVar("[GEO]AF_Progress", 1)
+                    player:addItem(28346) -- Geomancy Sandals
+                    player:messageSpecial(ID.text.ITEM_OBTAINED, 28346)
+                end)
+    
+                npc:timer(12000, function(npcArg)
+                    npc:setRotation(player:getRotPos() + 1)
+                end)
+    
+                -- End AF1 (Feet) -- Start AF2 (Hands)
+        
+            elseif afProgress == 1 and npcUtil.tradeHasExactly(trade, 1406) then -- seal_of_byakko
+                player:tradeComplete()
+                player:PrintToPlayer(string.format("Drunk Taru: Wow! You're not as dumb as you look."), 0xD)
+                
+                npc:timer(2000, function(npcArg)
+                    player:PrintToPlayer(string.format("Drunk Taru: Yes, this seal should do, this should do juuuuuust f..."), 0xD)
+                end)
+                
+                npc:timer(4000, function(npcArg)
+                    player:PrintToPlayer(string.format("Drunk Taru: Let me guess, you want your reward now? dang nabbit!"), 0xD)
+                end)
+                
+                npc:timer(6000, function(npcArg)
+                    player:PrintToPlayer(string.format("Drunk Taru: Whatever happened to doing things from the goodness of your heart??"), 0xD)
+                end)
+                
+                npc:timer(8000, function(npcArg)
+                    player:setCharVar("[GEO]AF_Progress", 2)
+                    player:addItem(28066) -- Geomancy Mitaines
+                    player:messageSpecial(ID.text.ITEM_OBTAINED, 28066)
+                end)
+            
+                npc:timer(10000, function(npcArg)
+                    npc:setRotation(player:getRotPos() + 1)
+                end)
+    
+            -- End AF2 (Hands) -- Start AF3 (Head)
+    
+            elseif afProgress == 2 and npcUtil.tradeHasExactly(trade, 576) then -- sirens_tear
+                player:tradeComplete()
+                player:PrintToPlayer(string.format("Drunk Taru: I'm beginning to think I may have underestimated you, Albert."), 0xD)
+                
+                npc:timer(2000, function(npcArg)
+                    player:PrintToPlayer(string.format("Drunk Taru: I've been saving this to give to someone special..."), 0xD)
+                end)
+                
+                npc:timer(4000, function(npcArg)
+                    player:PrintToPlayer(string.format("Drunk Taru: ..."), 0xD)
+                end)
+                
+                npc:timer(6000, function(npcArg)
+                    player:PrintToPlayer(string.format("Drunk Taru: That someone special never came, so I guess you can have it."), 0xD)
+                end)
+                
+                npc:timer(8000, function(npcArg)
+                    player:setCharVar("[GEO]AF_Progress", 3)
+                    player:addItem(27786) -- Geomancy Galero
+                    player:messageSpecial(ID.text.ITEM_OBTAINED, 27786)
+                end)
+                    
+                npc:timer(10000, function(npcArg)
+                    npc:setRotation(player:getRotPos() + 1)
+                end)
+    
+            -- End AF3 (Head) -- Start AF4 (Pants)
+    
+            elseif afProgress == 3 and npcUtil.tradeHasExactly(trade, 2704) then -- square_of_oil-soaked_cloth
+                player:tradeComplete()
+                player:PrintToPlayer(string.format("Drunk Taru: Mmmm.... yass... that's the spot!"), 0xD)
+                
+                npc:timer(2000, function(npcArg)
+                    player:PrintToPlayer(string.format("Drunk Taru: Don't be shy, squirt some more on there!"), 0xD)
+                end)
+                
+                npc:timer(4000, function(npcArg)
+                    player:PrintToPlayer("\129\153\129\154 Drunk Taru falls asleep... \129\153\129\154")
+                end)
+                
+                npc:timer(6000, function(npcArg)
+                    player:PrintToPlayer(string.format("You sneakily grab your reward and inch away ..."), 0xD)
+                end)
+                
+                npc:timer(8000, function(npcArg)
+                    player:setCharVar("[GEO]AF_Progress", 4)
+                    player:addItem(28206) -- Geomancy Pants
+                    player:messageSpecial(ID.text.ITEM_OBTAINED, 28206)
+                end)
+                    
+                npc:timer(10000, function(npcArg)
+                    npc:setRotation(player:getRotPos() + 1)
+                end)
+            end
+        
+            npc:setRotation(37)
+        
+        end
+    end,
+
+    onTrigger = function(player, npc)
+        local isGEO = player:getMainJob() == xi.job.GEO and player:getJobLevel(xi.job.GEO) == 75
+        local afProgress = player:getCharVar("[GEO]AF_Progress")
+        
+        -- First AF Piece (Feet)    
+        if isGEO then 
+            npc:setRotation(player:getRotPos() + 127)
+            if afProgress < 1 then
+                player:PrintToPlayer(string.format("Drunk Taru: My faaaaavorite drinking buddy-wuddy! Let's get some mead! Let me just get my sho..."), 0xD)
+                
+                npc:timer(2000, function(npcArg)
+                    player:PrintToPlayer(string.format("Drunk Taru: Oh no! Have you seen my shoes? I could have sworn I left them by the ledge."), 0xD)
+                end)
+                
+                npc:timer(4000, function(npcArg)
+                    player:PrintToPlayer(string.format("Drunk Taru: Yep! There they are... swimming away..."), 0xD)
+                end)
+                
+                npc:timer(6000, function(npcArg)
+                    player:PrintToPlayer(string.format("Drunk Taru: Ugh! It took me forever to have those made. They're made from the rare fish, pearlscale."), 0xD)
+                end)
+                
+                npc:timer(8000, function(npcArg)
+                    player:PrintToPlayer(string.format("Drunk Taru: Would you be a sweetheart and fetch me a new \"pearlscale\"? I promise-womise to make it worth your while!"), 0xD)
+                end)
+                
+                npc:timer(10000, function(npcArg)
+                    npc:setRotation(player:getRotPos() + 1)
+                end)
+                
+            -- End Feet -- Start Hands
+            
+            elseif afProgress == 1 then
+                player:PrintToPlayer(string.format("Drunk Taru: Buuuuuuurrrp! Let me guess, someone stole your sweetroll?"), 0xD)
+                
+                npc:timer(2000, function(npcArg)
+                    player:PrintToPlayer(string.format("Drunk Taru: That's too bad, now listen here Albert..."), 0xD)
+                end)
+                
+                npc:timer(4000, function(npcArg)
+                    player:PrintToPlayer(string.format("Drunk Taru: I just got into a little scuffle at the pub, and shredded my new tiger mitts!"), 0xD)
+                end)
+                
+                npc:timer(6000, function(npcArg)
+                    player:PrintToPlayer(string.format("Drunk Taru: I don't suppose you'd snag a \"Seal of Byakko\" for me, so I could have a new pair made?"), 0xD)
+                end)
+                
+                npc:timer(8000, function(npcArg)
+                    player:PrintToPlayer(string.format("*Drunk Taru staggers*"), 0xD)
+                end)
+        
+                npc:timer(10000, function(npcArg)
+                    player:PrintToPlayer(string.format("Drunk Taru: Go on now... git!"), 0xD)
+                end)
+            
+                npc:timer(12000, function(npcArg)
+                    npc:setRotation(player:getRotPos() + 1)
+                end)
+    
+            -- End Hands -- Start Head
+            
+            elseif afProgress == 2 then
+                player:PrintToPlayer(string.format("Drunk Taru: You wanna call yourself a Geomancer...?"), 0xD)
+                
+                npc:timer(2000, function(npcArg)
+                    player:PrintToPlayer(string.format("Drunk Taru: Oh you..."), 0xD)
+                end)
+                
+                npc:timer(4000, function(npcArg)
+                    player:PrintToPlayer(string.format("Drunk Taru: Don't cry Albert... It's OK to give up!"), 0xD)
+                end)
+                
+                npc:timer(6000, function(npcArg)
+                    player:PrintToPlayer(string.format("Drunk Taru: I'll tell you what, bring me back a \"Siren's tear\" and I'll give you something that will make you feel better."), 0xD)
+                end)
+            
+                npc:timer(8000, function(npcArg)
+                    npc:setRotation(player:getRotPos() + 1)
+                end)
+    
+            -- End Head -- Start Legs
+            
+            elseif afProgress == 3 then
+                player:PrintToPlayer(string.format("Drunk Taru: Why do you hesitate?"), 0xD)
+                
+                npc:timer(2000, function(npcArg)
+                    player:PrintToPlayer(string.format("Drunk Taru: Have we not done this time and time again?"), 0xD)
+                end)
+                
+                npc:timer(4000, function(npcArg)
+                    player:PrintToPlayer(string.format("Drunk Taru: Oil me up, man!"), 0xD)
+                end)
+                
+                npc:timer(6000, function(npcArg)
+                    player:PrintToPlayer(string.format("Drunk Taru: Fine, if you won't do it, give me the \"square of oil-soaked cloth\" and I'll do it myself!"), 0xD)
+                end)
+        
+                npc:timer(8000, function(npcArg)
+                    npc:setRotation(player:getRotPos() + 1)
+                end)
+            
+            -- End Legs -- Start Body
+        
+            -- Player has killed Sandworm
+            elseif afProgress == 4 and player:hasTitle(xi.title.SANDWORM_WRANGLER) then 
+                local name = player:getName()
+                player:PrintToPlayer(string.format("Drunk Taru: You've come a long way, %s...", name), 0xD)
+                
+                npc:timer(2000, function(npcArg)
+                    player:PrintToPlayer(string.format("Drunk Taru: You should be proud to call yourself a Geomancer."), 0xD)
+                end)
+        
+                npc:timer(4000, function(npcArg)
+                    player:PrintToPlayer("\129\153\129\154 Congratulations! You have finished the Geomancer Artifact Quests! \129\154\129\153\n")
+                end)
+        
+                npc:timer(6000, function(npcArg)
+                    player:setCharVar("[GEO]AF_Progress", 5)
+                    player:addItem(27926) -- Geomancy Tunic
+                    player:messageSpecial(ID.text.ITEM_OBTAINED, 27926)
+                end)        
+            
+                npc:timer(8000, function(npcArg)
+                    npc:setRotation(player:getRotPos() + 1)
+                end)
+    
+            -- Fallback
+            elseif afProgress == 4 then
+                player:PrintToPlayer(string.format("Drunk Taru: Albert... Come closer... I have a secret to tell you..."), 0xD)
+                
+                npc:timer(2000, function(npcArg)
+                    player:PrintToPlayer(string.format("Drunk Taru: The reason I've been so moody lately, is my pet Sandworm ran away."), 0xD)
+                end)
+                
+                npc:timer(4000, function(npcArg)
+                    player:PrintToPlayer(string.format("Drunk Taru: Won't you find him for me, Albert?"), 0xD)
+                end)
+                
+                npc:timer(6000, function(npcArg)
+                    player:PrintToPlayer(string.format("Drunk Taru: I promise-womise this is the last thing I'll ever ask of you!"), 0xD)
+                end)
+            
+                npc:timer(8000, function(npcArg)
+                    npc:setRotation(player:getRotPos() + 1)
+                end)
+            end
+        end
+    end,
+    })
+
+    utils.unused(drunktaru)
+    
+end) 
+
 return m
