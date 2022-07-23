@@ -13,7 +13,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:addMod(xi.mod.REGAIN, 3000)
+    mob:SetMobSkillAttack(701)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
