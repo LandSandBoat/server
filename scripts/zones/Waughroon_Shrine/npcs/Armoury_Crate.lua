@@ -522,7 +522,7 @@ local loot =
             {itemid = xi.items.SQUARE_OF_RAXA,          droprate = 50},
             {itemid = xi.items.RERAISER,                droprate = 50},
             {itemid = xi.items.VILE_ELIXIR,             droprate = 50},
-            {itemid = xi.items.VILE_ELIXIR_1,           droprate = 50},
+            {itemid = xi.items.VILE_ELIXIR_P1,          droprate = 50},
             {itemid = xi.items.WYVERN_SCALES,           droprate = 50},
             {itemid = xi.items.PHILOSOPHERS_STONE,      droprate = 50},
         },
