@@ -17,7 +17,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
         return 1
     elseif mob:hasStatusEffect(xi.effect.BLOOD_WEAPON) then
         return 1
-    elseif not target:isInfront(mob, 128) then
+    elseif target:isBehind(mob, 96) then
         return 1
     elseif mob:getAnimationSub() == 1 then
         return 1
@@ -29,14 +29,15 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.TERROR
     local power = 30
     -- Three minutes is WAY too long, especially on Wyrms. Reduced to Wiki's definition of 'long time'. Reference: http://wiki.ffxiclopedia.org/wiki/Absolute_Terror
-    local duration = 30
+    local duration
     if skill:isAoE() then
-        duration = 10
+        duration = math.random(10,18)
+    else
+        duration = 10 + math.random(0,40)
     end
 
     skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, 0, duration))
     return typeEffect
-
 end
 
 return mobskill_object
