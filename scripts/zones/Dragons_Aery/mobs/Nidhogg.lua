@@ -17,6 +17,8 @@ entity.onMobSpawn = function(mob)
 
     if xi.settings.main.LandKingSystem_NQ > 0 or xi.settings.main.LandKingSystem_HQ > 0 then
         GetNPCByID(ID.npc.FAFNIR_QM):setStatus(xi.status.DISAPPEAR)
+        SetDropRate(1781, 1526, 150) -- 15% drop rate for wyrm beard
+        mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
     end
 
     mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
