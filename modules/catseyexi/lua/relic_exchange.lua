@@ -700,7 +700,7 @@ m:addOverride("xi.zones.Sea_Serpent_Grotto.npcs.relic.onTrigger", function(playe
 end)
 
 m:addOverride("xi.zones.Cape_Teriggan.npcs.relic.onTrade", function(player, npc, trade)
-    local ID = require("scripts/zones/Cape_Terrigan/IDs")
+    local ID = require("scripts/zones/Cape_Teriggan/IDs")
     if (player:getCharVar("RELIC_IN_PROGRESS") == xi.items.FUTATOKOROTO and npcUtil.tradeHas(trade, {xi.items.RANPERRE_GOLDPIECE, xi.items.SNARLED_FRAGMENT, xi.items.SHARD_OF_NECROPSYCHE, xi.items.FUTATOKOROTO})) then -- currency, shard, necropsyche, stage 4
         player:startEvent(18, xi.items.YOICHINOYUMI)
     end
@@ -747,7 +747,7 @@ m:addOverride("xi.zones.Cape_Teriggan.npcs.relic.onTrade", function(player, npc,
 end)
 
 m:addOverride("xi.zones.Cape_Teriggan.npcs.relic.onTrigger", function(player, npc)
-    local ID = require("scripts/zones/Cape_Terrigan/IDs")
+    local ID = require("scripts/zones/Cape_Teriggan/IDs")
     if player:getCharVar("RelicWeaponVoucher") == 1 then
 	    player:setCharVar("RelicWeaponVoucher", 0)
 --	    player:setCharVar("RelicWeaponVoucherUsed") == 1
