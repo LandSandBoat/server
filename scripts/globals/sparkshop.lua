@@ -1,8 +1,11 @@
 -----------------------------------
--- TO DO: add event trusts
+-- Spark Shop
+-- TO DO: Add Naakaul Seven Treasures
 -----------------------------------
- require("scripts/globals/npc_util")
- require("scripts/globals/zone")
+require('scripts/globals/npc_util')
+require('scripts/globals/zone')
+require('scripts/globals/items')
+require('scripts/globals/extravaganza')
 -----------------------------------
 
 xi = xi or {}
@@ -546,6 +549,13 @@ local optionToItem =
         [57] = { cost =  7000, id = 21355 }, -- Hachiya shuriken
         [58] = { cost =  7000, id = 22260 }, -- Eminent animator II
     },
+    [12] = { -- Alter Ego Extravaganza Trusts
+        [10133] = { cost =  500, id = xi.items.CIPHER_OF_F_COFFINS_ALTER_EGO }, -- F. Coffin
+        [10138] = { cost =  500, id = xi.items.CIPHER_OF_CIDS_ALTER_EGO }, -- Cid
+        [10148] = { cost =  500, id = xi.items.CIPHER_OF_GILGAMESHS_ALTER_EGO }, -- Gilgamesh
+        [10152] = { cost =  500, id = xi.items.CIPHER_OF_QULTADAS_ALTER_EGO }, -- Qultada
+        [10181] = { cost =  500, id = xi.items.CIPHER_OF_KINGS_ALTER_EGO }, -- King
+    },
     [20] = { -- Currency Exchange
         [ 0] = { amount = 1000, name = "spark_of_eminence"      },
         [ 1] = { amount = 1000, name = "conquest_points"        },
@@ -586,8 +596,6 @@ local function getCurrencyCap(currencyName)
     return cap
 end
 
--- TO DO: add event trusts
-
 function xi.sparkshop.onTrade(player, npc, trade, eventid)
     local copperVouchersStored = player:getCurrency("aman_vouchers")
     local count = trade:getItemQty(8711)
@@ -604,9 +612,11 @@ function xi.sparkshop.onTrigger(player, npc, event)
     local sparks = player:getCurrency("spark_of_eminence")
     local vouchers = player:getCurrency("aman_vouchers")
     local remainingLimit = xi.settings.main.WEEKLY_EXCHANGE_LIMIT - player:getCharVar("weekly_sparks_spent")
+    local cipher = xi.extravaganza.campaignActive() * 16 * 65536 -- Trust Alter Ego Extravaganza
+    local naakual = 0 -- TODO: Naakual Seven Treasures Item Logic
 
     -- opens shop and lists available sparks
-    player:startEvent(event, 0, sparks, vouchers, 0, 0, remainingLimit)
+    player:startEvent(event, 0, sparks, vouchers, naakual, cipher, remainingLimit)
 end
 
 function xi.sparkshop.onEventUpdate(player,csid,option)
@@ -620,10 +630,10 @@ function xi.sparkshop.onEventUpdate(player,csid,option)
     qty = qty > 0 and qty or 1
 
     -- There are three specific cases for Sparks rewards currently implemented:
-    -- 1. Grant an Item based on Sparks cost (Category <= 10)
+    -- 1. Grant an Item based on Sparks cost (Category <= 10 or 12)
     -- 2. Grant Currency based on Vouchers spent (Category == 20)
     -- 3. Grant Provision Items based on Vouchers spent (Category == 30)
-    if category <= 10 then
+    if category <= 10 or category == 12 then
         local item = optionToItem[category][selection]
         local cost = item.cost * qty
 

@@ -110,7 +110,6 @@ zones[xi.zone.KUFTAL_TUNNEL] =
     npc =
     {
         PHANTOM_WORM_QM = 17490253,
-        CASKET_BASE     = 17490257,
         DOOR_ROCK       = 17490280,
         TREASURE_COFFER = 17490304,
     },

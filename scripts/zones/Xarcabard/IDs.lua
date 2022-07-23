@@ -47,6 +47,8 @@ zones[xi.zone.XARCABARD] =
         VOIDWALKER_UPGRADE_KI_2        = 11490, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
         VOIDWALKER_BREAK_KI            = 11491, -- The <keyitem> shatters into tiny fragments.
         VOIDWALKER_OBTAIN_KI           = 11492, -- Obtained key item: <keyitem>!
+        LEARNS_SPELL                   = 11541, -- <name> learns <spell>!
+        UNCANNY_SENSATION              = 11543, -- You are assaulted by an uncanny sensation.
         COMMON_SENSE_SURVIVAL          = 11550, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
@@ -110,7 +112,6 @@ zones[xi.zone.XARCABARD] =
     },
     npc =
     {
-        CASKET_BASE        = 17236254,
         OVERSEER_BASE      = 17236289, -- Jeantelas_RK in npc_list
         BOREAL_TIGER_QM    = 17236307, -- qm2 in npc_list
         BOREAL_COEURL_QM   = 17236308, -- qm3 in npc_list

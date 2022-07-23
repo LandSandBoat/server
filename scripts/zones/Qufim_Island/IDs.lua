@@ -40,6 +40,8 @@ zones[xi.zone.QUFIM_ISLAND] =
         ALREADY_POSSESS_TEMP           = 8066,  -- You already possess that temporary item.
         NO_COMBINATION                 = 8071,  -- You were unable to enter a combination.
         REGIME_REGISTERED              = 10347, -- New training regime registered!
+        LEARNS_SPELL                   = 12663, -- <name> learns <spell>!
+        UNCANNY_SENSATION              = 12665, -- You are assaulted by an uncanny sensation.
         COMMON_SENSE_SURVIVAL          = 12672, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
         HOMEPOINT_SET                  = 12714, -- Home point set!
     },
@@ -63,8 +65,6 @@ zones[xi.zone.QUFIM_ISLAND] =
     },
     npc =
     {
-        CASKET_BASE   = 17293678,
-        OVERSEER_BASE = 17293716, -- Pitoire_RK in npc_list
     },
 }
 

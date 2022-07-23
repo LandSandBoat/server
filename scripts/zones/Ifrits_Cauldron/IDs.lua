@@ -82,7 +82,6 @@ zones[xi.zone.IFRITS_CAULDRON] =
     },
     npc =
     {
-        CASKET_BASE        = 17617182,
         FLAME_SPOUT_OFFSET = 17617204,
         TREASURE_COFFER    = 17617224,
         MINING =

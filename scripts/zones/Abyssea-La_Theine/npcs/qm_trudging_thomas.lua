@@ -4,13 +4,13 @@
 -- Spawns Trudging Thomas
 -- !pos 278 24 -82 132
 -----------------------------------
+local ID = require('scripts/zones/Abyssea-La_Theine/IDs')
 require('scripts/globals/abyssea')
 require('scripts/globals/items')
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local ID = zones[player:getZoneID()]
     xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.TRUDGING_THOMAS, { xi.items.RAW_MUTTON_CHOP })
 end
 

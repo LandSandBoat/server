@@ -22,40 +22,41 @@
 #
 # TEST AND MAKE SURE THAT EVERYTHING STILL WORKS!
 
-if (UNIX)
-    message(STATUS "Downloading LuaJIT src")
-    CPMAddPackage(
-        NAME LuaJIT
-        GITHUB_REPOSITORY LuaJIT/LuaJIT
-        GIT_TAG e3bae12fc0461cfa7e4bef3dfed2dad372e5da8d
-        DOWNLOAD_ONLY YES
-    )
-    if (LuaJIT_ADDED)
-
-        # LuaJIT does not run properly on x86_84 systems without -DLUAJIT_NO_UNWIND=1 which disables external unwinding.
-        # Conversely, LuaJIT does not build properly on aarch64 *with* -DLUAJIT_NO_UNWIND=1, so only change the makefile where we know we need it.
-        if (${CMAKE_SYSTEM_PROCESSOR} MATCHES "x86_64")
-            message(STATUS "Modifying LuaJIT build flags (adding -DLUAJIT_NO_UNWIND=1)")
-            file(READ "${LuaJIT_SOURCE_DIR}/src/Makefile" FILE_CONTENTS)
-            string(REPLACE "CCOPT= -O2 -fomit-frame-pointer\n" "CCOPT= -O2 -fomit-frame-pointer -fPIC -DLUAJIT_NO_UNWIND=1\n" FILE_CONTENTS "${FILE_CONTENTS}")
-            file(WRITE "${LuaJIT_SOURCE_DIR}/src/Makefile" "${FILE_CONTENTS}")
-        endif()
-
-        # LuaJIT has no CMake support, so we break out to using make on it's own
-        message(STATUS "Building LuaJIT from src")
-
-        if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-            execute_process(COMMAND export MACOSX_DEPLOYMENT_TARGET=11.6 ; make WORKING_DIRECTORY ${LuaJIT_SOURCE_DIR}) # TODO don't hardcode MACOSX_DEPLOYMENT_TARGET
-        else()
-            execute_process(COMMAND make WORKING_DIRECTORY ${LuaJIT_SOURCE_DIR})
-        endif()
-
-    endif()
-endif()
+########## Removed as we don't need to build LuaJIT with #-DSOL_NO_EXCEPTIONS=1. We may want to build our own LuaJIT in the future, so leaving this commented out.
+#if (UNIX)
+#    message(STATUS "Downloading LuaJIT src")
+#    CPMAddPackage(
+#        NAME LuaJIT
+#        GITHUB_REPOSITORY LuaJIT/LuaJIT
+#        GIT_TAG e3bae12fc0461cfa7e4bef3dfed2dad372e5da8d
+#        DOWNLOAD_ONLY YES
+#    )
+#    if (LuaJIT_ADDED)
+#
+#        # LuaJIT does not run properly on x86_84 systems without -DLUAJIT_NO_UNWIND=1 which disables external unwinding.
+#        # Conversely, LuaJIT does not build properly on aarch64 *with* -DLUAJIT_NO_UNWIND=1, so only change the makefile where we know we need it.
+#        if (${CMAKE_SYSTEM_PROCESSOR} MATCHES "x86_64")
+#            message(STATUS "Modifying LuaJIT build flags (adding -DLUAJIT_NO_UNWIND=1)")
+#            file(READ "${LuaJIT_SOURCE_DIR}/src/Makefile" FILE_CONTENTS)
+#            string(REPLACE "CCOPT= -O2 -fomit-frame-pointer\n" "CCOPT= -O2 -fomit-frame-pointer -fPIC -DLUAJIT_NO_UNWIND=1\n" FILE_CONTENTS "${FILE_CONTENTS}")
+#            file(WRITE "${LuaJIT_SOURCE_DIR}/src/Makefile" "${FILE_CONTENTS}")
+#        endif()
+#
+#        # LuaJIT has no CMake support, so we break out to using make on it's own
+#        message(STATUS "Building LuaJIT from src")
+#
+#        if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+#            execute_process(COMMAND export MACOSX_DEPLOYMENT_TARGET=11.6 ; make WORKING_DIRECTORY ${LuaJIT_SOURCE_DIR}) # TODO don't hardcode MACOSX_DEPLOYMENT_TARGET
+#        else()
+#            execute_process(COMMAND make WORKING_DIRECTORY ${LuaJIT_SOURCE_DIR})
+#        endif()
+#
+#    endif()
+#endif()
 
 find_library(LuaJIT_LIBRARY
     NAMES
-        libluajit.a luajit luajit_64 luajit-5.1 libluajit libluajit_64
+        luajit luajit_64 luajit-5.1 libluajit libluajit_64
     PATHS
         ${LuaJIT_SOURCE_DIR}/src/
         ${PROJECT_SOURCE_DIR}/ext/luajit/${libpath}
