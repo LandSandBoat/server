@@ -135,13 +135,8 @@ namespace mobutils
      *                                                                       *
      ************************************************************************/
 
-    uint16 GetBaseToRank(CMobEntity * PMob, uint8 rank, uint16 lvl)
+    uint16 GetBaseToRank(CMobEntity* PMob, uint8 rank, uint16 lvl)
     {
-        bool isNM = PMob->m_Type & MOBTYPE_NOTORIOUS && !PMob->isInDynamis();
-        bool isEventMob = PMob->m_Type & MOBTYPE_EVENT && !PMob->isInDynamis();
-        bool isBattlefieldMob = PMob->m_Type & MOBTYPE_BATTLEFIELD && !PMob->isInDynamis();
-        bool isDynamisNM = PMob->isInDynamis() && PMob->getMobMod(MOBMOD_CHECK_AS_NM) > 1;
-
         switch (rank)
         {
             case 1:
