@@ -21,7 +21,7 @@ entity.onMobWeaponSkillPrepare = function(mob, target)
 end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
-    if skill:getID() == 701 then
+    if skill:getID() == 274 then
         mob:addTP(mob:getLocalVar("skill_tp"))
         mob:setLocalVar("skill_tp", 0)
     end
