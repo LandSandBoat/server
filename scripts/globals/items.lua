@@ -3194,6 +3194,7 @@ xi.items =
     PYF_HARP                        = 18573,
     IMPERIAL_POLE                   = 18583,
     PERDU_STAFF                     = 18588,
+    RAM_STAFF                       = 18612,
     SAMUDRA                         = 18618,
     IMPERIAL_KAMAN                  = 18685,
     IMPERIAL_GUN                    = 18686,
