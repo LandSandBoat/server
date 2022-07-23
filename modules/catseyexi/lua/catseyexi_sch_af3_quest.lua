@@ -75,7 +75,8 @@ local sch_af3 = zone:insertDynamicEntity({ -- Sch af3 fix
 		        player:addItem(16140)
                 player:messageSpecial(ID.text.ITEM_OBTAINED, 16140)
                 player:delKeyItem(xi.ki.UNADDRESSED_SEALED_LETTER)
-                player:setCharVar("[SCH]afstatus", 3)			
+                player:setCharVar("[SCH]afstatus", 3)	
+                player:completeQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.DOWNWARD_HELIX)			
 		    end
 		end,
     })
