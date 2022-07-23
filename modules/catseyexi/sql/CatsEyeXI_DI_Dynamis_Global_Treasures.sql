@@ -11,16 +11,17 @@ DELETE FROM npc_list WHERE npcid = "17961712";
 UPDATE zone_settings SET misc = '2520' WHERE name = 'Escha_RuAun';
 UPDATE zone_settings SET misc = '2520' WHERE name = 'Reisenjima_Henge';
 UPDATE zone_settings SET misc = '2520' WHERE name = 'Provenance';
-UPDATE zone_settings SET misc = '2520' WHERE name = 'Dynamis-Valkurm';
-UPDATE zone_settings SET misc = '2520' WHERE name = 'Dynamis-Buburimu';
-UPDATE zone_settings SET misc = '2520' WHERE name = 'Dynamis-Qufim';
-UPDATE zone_settings SET misc = '2520' WHERE name = 'Dynamis-Tavnazia';
-UPDATE zone_settings SET misc = '2520' WHERE name = 'Dynamis-Beaucedine';
-UPDATE zone_settings SET misc = '2520' WHERE name = 'Dynamis-Xarcabard';
-UPDATE zone_settings SET misc = '2520' WHERE name = 'Dynamis-San_dOria';
-UPDATE zone_settings SET misc = '2520' WHERE name = 'Dynamis-Bastok';
-UPDATE zone_settings SET misc = '2520' WHERE name = 'Dynamis-Windurst';
-UPDATE zone_settings SET misc = '2520' WHERE name = 'Dynamis-Jeuno';
+-- Temporarily disable global loot pool in Dyna
+-- UPDATE zone_settings SET misc = '2520' WHERE name = 'Dynamis-Valkurm';
+-- UPDATE zone_settings SET misc = '2520' WHERE name = 'Dynamis-Buburimu';
+-- UPDATE zone_settings SET misc = '2520' WHERE name = 'Dynamis-Qufim';
+-- UPDATE zone_settings SET misc = '2520' WHERE name = 'Dynamis-Tavnazia';
+-- UPDATE zone_settings SET misc = '2520' WHERE name = 'Dynamis-Beaucedine';
+-- UPDATE zone_settings SET misc = '2520' WHERE name = 'Dynamis-Xarcabard';
+-- UPDATE zone_settings SET misc = '2520' WHERE name = 'Dynamis-San_dOria';
+-- UPDATE zone_settings SET misc = '2520' WHERE name = 'Dynamis-Bastok';
+-- UPDATE zone_settings SET misc = '2520' WHERE name = 'Dynamis-Windurst';
+-- UPDATE zone_settings SET misc = '2520' WHERE name = 'Dynamis-Jeuno';
 
 -- Amphisbaena -- Skill_List_ID 817
 REPLACE INTO `mob_groups` (`groupid`, `poolid`, `zoneid`, `name`, `respawntime`, `spawntype`, `dropid`, `HP`, `MP`, `minLevel`, `maxLevel`, `allegiance`) VALUES (43, 1872, 132, 'Hadhayosh', 0, 128, 1268, 20000, 9999, 150, 150, 0);

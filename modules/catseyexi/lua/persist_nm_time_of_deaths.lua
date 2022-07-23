@@ -15,9 +15,9 @@ local m = Module:new("persist_nm_time_of_deaths")
 -- Format:
 local nms_to_persist =
 {
-    { "Behemoths_Dominion", "Behemoth", function() return 75600 + math.random(0, 6) * 1800 end }, -- 21 - 24 hours with half hour windows
-	{ "Dragons_Aery", "Fafnir", function() return 75600 + math.random(0, 6) * 1800 end }, -- 21 - 24 hours with half hour windows
-	{ "Valley_of_Sorrows", "Adamantoise", function() return 75600 + math.random(0, 6) * 1800 end }, -- 21 - 24 hours with half hour windows
+--  { "Behemoths_Dominion", "Behemoth", function() return 75600 + math.random(0, 6) * 1800 end }, -- 21 - 24 hours with half hour windows
+--	{ "Dragons_Aery", "Fafnir", function() return 75600 + math.random(0, 6) * 1800 end }, -- 21 - 24 hours with half hour windows
+--	{ "Valley_of_Sorrows", "Adamantoise", function() return 75600 + math.random(0, 6) * 1800 end }, -- 21 - 24 hours with half hour windows
 	{ "Caedarva_Mire", "Khimaira", function() return 172800 + math.random(0, 48) * 1800 end }, -- 2 - 3 days with half hour windows
 	{ "Mount_Zhayolm", "Cerberus", function() return 172800 + math.random(0, 48) * 1800 end }, -- 2 - 3 days with half hour windows
 	{ "Wajaom_Woodlands", "Hydra", function() return 172800 + math.random(0, 48) * 1800 end }, -- 2 - 3 days with half hour windows

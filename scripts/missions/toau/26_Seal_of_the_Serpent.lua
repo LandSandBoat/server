@@ -35,13 +35,13 @@ mission.sections =
             ['Imperial_Whitegate'] =
             {
                 onTrigger = function(player, npc)
-                    if
+--[[                    if
                         player:getEquipID(xi.slot.MAIN) == 0 and
                         player:getEquipID(xi.slot.SUB) == 0 and
                         whitegateShared.doRoyalPalaceArmorCheck(player)
-                    then
+                    then ]]--
                         return mission:progressEvent(3111)
-                    end
+--                    end
                 end,
             },
 

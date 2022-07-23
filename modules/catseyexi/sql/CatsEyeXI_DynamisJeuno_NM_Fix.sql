@@ -51,3 +51,11 @@ DELETE FROM mob_spawn_points WHERE mobid =17547475 AND mobname = 'Vanguard_Alche
 DELETE FROM mob_spawn_points WHERE mobid =17547483 AND mobname = 'Vanguard_Pathfinder';
 DELETE FROM mob_spawn_points WHERE mobid =17547489 AND mobname = 'Vanguard_Ambusher';
 DELETE FROM mob_spawn_points WHERE mobid =17547491 AND mobname = 'Vanguard_Hitman';
+DELETE FROM `mob_spawn_points` WHERE mobid="17547377";
+DELETE FROM `mob_spawn_points` WHERE mobid="17547381";
+DELETE FROM `mob_spawn_points` WHERE mobid="17547378";
+DELETE FROM `mob_spawn_points` WHERE mobid="17547382";
+DELETE FROM `mob_spawn_points` WHERE mobid="17547324";
+DELETE FROM `mob_spawn_points` WHERE mobid="17547424";
+DELETE FROM `mob_spawn_points` WHERE mobid="17547322";
+DELETE FROM `mob_spawn_points` WHERE mobid="17547402";
