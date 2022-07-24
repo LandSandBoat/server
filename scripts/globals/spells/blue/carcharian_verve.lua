@@ -19,7 +19,7 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    local atk_bonus = xi.effect.ATTACK_BONUS
+    local atk_bonus = xi.effect.ATTACK_BOOST
     local matk_bonus = xi.effect.MAGIC_ATK_BOOST
     local aquaveil = xi.effect.AQUAVEIL
     local power = 20
@@ -36,11 +36,9 @@ spell_object.onSpellCast = function(caster, target, spell)
         caster:delStatusEffect(xi.effect.DIFFUSION)
     end
 
-    target:addStatusEffect(atk_bonus, power, 1, duration)
-    target:addStatusEffect(matk_bonus, power, 1, duration)
-    target:addStatusEffect(aquaveil, 10, 1, aquaveil_duration)
+    target:addStatusEffect(atk_bonus, power, 3, duration)
+    target:addStatusEffect(matk_bonus, power, 3, duration)
+    target:addStatusEffect(aquaveil, 10, 3, aquaveil_duration)
 
     return aquaveil
 end
-
-return spell_object

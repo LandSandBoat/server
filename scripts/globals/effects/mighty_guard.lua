@@ -17,7 +17,6 @@ effect_object.onEffectTick = function(target, effect)
 end
 
 effect_object.onEffectLose = function(target, effect)
-    local jpLevel = target:getJobPointLevel(xi.jp.MIGHTY_STRIKES_EFFECT)
     target:delMod(xi.mod.REGEN, 30)
     target:delMod(xi.mod.HASTE_MAGIC, 15)
     target:delMod(xi.mod.DEFENSE_BOOST, 25)
