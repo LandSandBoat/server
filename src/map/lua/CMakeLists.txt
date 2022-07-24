@@ -13,6 +13,8 @@ set(LUA_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/lua_item.h
     ${CMAKE_CURRENT_SOURCE_DIR}/lua_mobskill.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/lua_mobskill.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/lua_petskill.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/lua_petskill.h
     ${CMAKE_CURRENT_SOURCE_DIR}/lua_region.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/lua_region.h
     ${CMAKE_CURRENT_SOURCE_DIR}/lua_spell.cpp

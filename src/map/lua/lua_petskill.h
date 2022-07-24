@@ -1,7 +1,7 @@
 ﻿/*
 ===========================================================================
 
-  Copyright (c) 2010-2015 Darkstar Dev Teams
+  Copyright (c) 2022 LandSandBoat Dev Team
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -19,21 +19,41 @@
 ===========================================================================
 */
 
-#include "common/socket.h"
+#ifndef _LUAPETSKILL_H
+#define _LUAPETSKILL_H
 
-#include <cstring>
+#include "common/cbasetypes.h"
+#include "luautils.h"
 
-#include "char_abilities.h"
+class CPetSkill;
 
-#include "../entities/charentity.h"
-
-CCharAbilitiesPacket::CCharAbilitiesPacket(CCharEntity* PChar)
+class CLuaPetSkill
 {
-    this->setType(0xAC);
-    this->setSize(0xE4);
+    CPetSkill* m_PLuaPetSkill;
 
-    memcpy(data + (0x04), PChar->m_WeaponSkills, 32);
-    memcpy(data + (0x44), PChar->m_Abilities, 64);
-    memcpy(data + (0x84), PChar->m_PetCommands, 57);
-    memcpy(data + (0xC4), PChar->m_TraitList, 16);
-}
+public:
+    CLuaPetSkill(CPetSkill*);
+
+    CPetSkill* GetMobSkill() const
+    {
+        return m_PLuaPetSkill;
+    }
+
+    friend std::ostream& operator<<(std::ostream& out, const CLuaPetSkill& mobskill);
+
+    float  getTP();
+    uint8  getMobHPP();
+    uint16 getID();
+    int16  getParam();
+    bool   isAoE();
+    bool   isConal();
+    bool   isSingle();
+    bool   hasMissMsg();
+    void   setMsg(uint16 message);
+    uint16 getMsg();
+    uint16 getTotalTargets();
+
+    static void Register();
+};
+
+#endif
