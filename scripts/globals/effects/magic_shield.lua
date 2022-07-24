@@ -29,6 +29,8 @@ effect_object.onEffectGain = function(target, effect)
         target:addMod(xi.mod.DARK_ABSORB, 100)
     elseif power == 1 then
         target:addMod(xi.mod.UDMGMAGIC, -10000)
+    elseif power == 4 then
+        target:addMod(xi.mod.MAGIC_BARRIER, effect:getSubPower())
     else
         target:addMod(xi.mod.DMGMAGIC, -5000)
     end
@@ -52,6 +54,8 @@ effect_object.onEffectLose = function(target, effect)
         target:delMod(xi.mod.DARK_ABSORB, 100)
     elseif power == 1 then
         target:delMod(xi.mod.UDMGMAGIC, -10000)
+    elseif power == 4 then
+        target:setMod(xi.mod.MAGIC_BARRIER, 0)
     else
         target:delMod(xi.mod.DMGMAGIC, -5000)
     end

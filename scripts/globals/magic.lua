@@ -707,9 +707,11 @@ end
     -- handle one for all
     dmg = utils.oneforall(target, dmg)
 
-    --handling stoneskin
+    --handling stoneskin and magicbarrier
     dmg = utils.stoneskin(target, dmg)
+    dmg = utils.magicbarrier(target, dmg)
     dmg = utils.clamp(dmg, -99999, 99999)
+
 
     if dmg < 0 then
         dmg = target:addHP(-dmg)

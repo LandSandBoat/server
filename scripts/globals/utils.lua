@@ -95,6 +95,26 @@ function utils.stoneskin(target, dmg)
     return dmg
 end
 
+-- returns unabsorbed damage
+function utils.magicbarrier(target, dmg)
+    --handling stoneskin
+    if dmg > 0 then
+        local skin = target:getMod(xi.mod.MAGIC_BARRIER)
+        if skin > 0 then
+            if skin > dmg then --absorb all damage
+                target:delMod(xi.mod.MAGIC_BARRIER, dmg)
+                return 0
+            else --absorbs some damage then wear
+                target:delStatusEffect(xi.effect.MAGIC_SHIELD)
+                target:setMod(xi.mod.MAGIC_BARRIER, 0)
+                return dmg - skin
+            end
+        end
+    end
+
+    return dmg
+end
+
 -- returns reduced magic damage from RUN buff, "One for All"
 function utils.oneforall(target, dmg)
     if dmg > 0 then

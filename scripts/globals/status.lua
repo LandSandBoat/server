@@ -1172,6 +1172,7 @@ xi.mod =
     PERFECT_DODGE                   = 883, -- Increases Perfect Dodge duration in seconds
     BLINK                           = 299,
     STONESKIN                       = 300,
+    MAGIC_BARRIER                   = 1045, -- Blue magic barrier stoneskin
     PHALANX                         = 301,
     TRIPLE_ATTACK                   = 302,
     TRIPLE_ATTACK_DMG               = 1039, -- Increases "Triple Attack" damage/"Triple Attack" damage + (in percents, e.g. +20 = +20% damage)
