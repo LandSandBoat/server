@@ -45,7 +45,10 @@ xi.job_utils.warrior.useBerserk = function(player, target, ability)
 end
 
 xi.job_utils.warrior.useBloodRage = function(player, target, ability)
-    player:addStatusEffect(xi.effect.BLOOD_RAGE, 1, 0, 30)
+    local power = 20 + player:getJobPointLevel(xi.jp.BLOOD_RAGE_EFFECT)
+    local duration = 30 + player:getMod(xi.mod.ENHANCES_BLOOD_RAGE)
+
+    player:addStatusEffect(xi.effect.BLOOD_RAGE, power, 0, duration)
 end
 
 xi.job_utils.warrior.useBrazenRush = function(player, target, ability)
