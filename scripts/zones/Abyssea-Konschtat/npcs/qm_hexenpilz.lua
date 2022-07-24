@@ -4,13 +4,13 @@
 -- Spawns Hexenpilz
 -- !pos -182.000 2.858 32.000 15
 -----------------------------------
+local ID = require('scripts/zones/Abyssea-Konschtat/IDs')
 require('scripts/globals/abyssea')
 require('scripts/globals/items')
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local ID = zones[player:getZoneID()]
     xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.HEXENPILZ, { xi.items.OBLIVISPORE_MUSHROOM })
 end
 

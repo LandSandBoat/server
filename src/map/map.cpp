@@ -245,6 +245,7 @@ int32 do_init(int32 argc, char** argv)
     ability::LoadAbilitiesList();
     battleutils::LoadWeaponSkillsList();
     battleutils::LoadMobSkillsList();
+    battleutils::LoadPetSkillsList();
     battleutils::LoadSkillChainDamageModifiers();
     petutils::LoadPetList();
     trustutils::LoadTrustList();
@@ -258,6 +259,8 @@ int32 do_init(int32 argc, char** argv)
 
     fishingutils::InitializeFishingSystem();
     instanceutils::LoadInstanceList();
+
+    luautils::PopulateIDLookups();
 
     ShowInfo("do_init: server is binding with port %u", map_port == 0 ? settings::get<uint16>("network.MAP_PORT") : map_port);
     map_fd = makeBind_udp(INADDR_ANY, map_port == 0 ? settings::get<uint16>("network.MAP_PORT") : map_port);
@@ -347,6 +350,7 @@ void do_final(int code)
     itemutils::FreeItemList();
     battleutils::FreeWeaponSkillsList();
     battleutils::FreeMobSkillList();
+    battleutils::FreePetSkillList();
 
     petutils::FreePetList();
     trustutils::FreeTrustList();

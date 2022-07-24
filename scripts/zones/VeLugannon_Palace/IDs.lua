@@ -54,7 +54,6 @@ zones[xi.zone.VELUGANNON_PALACE] =
     npc =
     {
         QM3             = 17502583,
-        CASKET_BASE     = 17502585,
         Y_DOOR_OFFSET   = 17502608,
         B_DOOR_OFFSET   = 17502616,
         Y_LITH_OFFSET   = 17502624,

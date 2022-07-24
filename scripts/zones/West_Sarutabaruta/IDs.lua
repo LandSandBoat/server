@@ -118,7 +118,6 @@ zones[xi.zone.WEST_SARUTABARUTA] =
 
     npc =
     {
-        CASKET_BASE     = 17248770,
         SIGNPOST_OFFSET = 17248797,
         OVERSEER_BASE   = 17248830, -- Naguipeillont_RK in npc_list
 

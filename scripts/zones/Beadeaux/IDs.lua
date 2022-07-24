@@ -31,6 +31,8 @@ zones[xi.zone.BEADEAUX] =
         YOU_CAN_NOW_BECOME_A_DARK_KNIGHT   = 7357, -- You can now become a dark knight!
         FOUL_SMELLING_SOIL_IS_SPILLING_OUT = 7358, -- Foul-smelling soil is spilling out.
         CHEST_UNLOCKED                     = 7368, -- You unlock the chest!
+        LEARNS_SPELL                       = 7786, -- <name> learns <spell>!
+        UNCANNY_SENSATION                  = 7788, -- You are assaulted by an uncanny sensation.
         COMMON_SENSE_SURVIVAL              = 7795, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =

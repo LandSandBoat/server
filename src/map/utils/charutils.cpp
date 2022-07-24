@@ -2600,34 +2600,43 @@ namespace charutils
 
             for (auto PAbility : AbilitiesList)
             {
-                if (PPet->GetMLevel() >= PAbility->getLevel() && PetID >= 8 && PetID <= 20 && CheckAbilityAddtype(PChar, PAbility))
+                if (PPet->GetMLevel() >= PAbility->getLevel() && ((PetID >= PETID_CARBUNCLE && PetID <= PETID_CAIT_SITH) || PetID == PETID_SIREN) && CheckAbilityAddtype(PChar, PAbility))
                 {
-                    if (PetID == 8)
+                    if (PetID == PETID_CARBUNCLE)
                     {
                         if (PAbility->getID() >= ABILITY_HEALING_RUBY && PAbility->getID() <= ABILITY_SOOTHING_RUBY)
                         {
                             addPetAbility(PChar, PAbility->getID() - ABILITY_HEALING_RUBY);
                         }
                     }
-                    else if (PetID >= 9 && PetID <= 15)
+                    else if (PetID >= PETID_FENRIR && PetID <= PETID_RAMUH)
                     {
                         if (PAbility->getID() >= (ABILITY_HEALING_RUBY + ((PetID - 8) * 16)) && PAbility->getID() < (ABILITY_HEALING_RUBY + ((PetID - 7) * 16)))
                         {
                             addPetAbility(PChar, PAbility->getID() - ABILITY_HEALING_RUBY);
                         }
                     }
-                    else if (PetID == 16)
+                    else if (PetID == PETID_DIABOLOS)
                     {
                         if (PAbility->getID() >= ABILITY_CAMISADO && PAbility->getID() <= ABILITY_PERFECT_DEFENSE)
                         {
                             addPetAbility(PChar, PAbility->getID() - ABILITY_HEALING_RUBY);
                         }
                     }
-                    else if (PetID == 20)
+                    else if (PetID == PETID_CAIT_SITH)
                     {
                         if (PAbility->getID() > ABILITY_SOOTHING_RUBY && PAbility->getID() <= ABILITY_MOONLIT_CHARGE)
                         {
                             addPetAbility(PChar, PAbility->getID() - ABILITY_HEALING_RUBY);
+                        }
+                    }
+                    else if (PetID == PETID_SIREN)
+                    {
+                        if (PAbility->getID() >= ABILITY_CLARSACH_CALL && PAbility->getID() <= ABILITY_HYSTERIC_ASSAULT)
+                        {
+                            uint16 sirenAbilltyPacketOffset = 0x1C0;
+                            uint16 sirenAbilityPacketBit    = (PAbility->getID() - ABILITY_CLARSACH_CALL) + sirenAbilltyPacketOffset;
+                            addPetAbility(PChar, sirenAbilityPacketBit);
                         }
                     }
                 }

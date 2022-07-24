@@ -8,6 +8,7 @@ local ID = require("scripts/zones/Southern_San_dOria_[S]/IDs")
 require("scripts/globals/status")
 require("scripts/globals/campaign")
 require("scripts/globals/utils")
+require("scripts/globals/extravaganza")
 -----------------------------------
 local entity = {}
 
@@ -17,7 +18,7 @@ end
 entity.onTrigger = function(player, npc)
     local notes = player:getCurrency("allied_notes")
     local freelances = 99 -- Faking it for now
-    local ciphers = 0
+    local cipher = xi.extravaganza.campaignActive() * 4
     -- 0 for not displaying ciphers
     -- 4 for Valaneiral (New Year's & Summer Alter Ego Extravaganzas)
     -- 8 for Adelheid (Spring & Autumn Alter Ego Extravaganzas)
@@ -35,7 +36,7 @@ entity.onTrigger = function(player, npc)
     if medalRank == 0 then
         player:startEvent(111)
     else
-        player:startEvent(110, allegiance, notes, freelances, ciphers, medalRank, bonusEffects, timeStamp, 0)
+        player:startEvent(110, allegiance, notes, freelances, cipher, medalRank, bonusEffects, timeStamp, 0)
     end
 end
 

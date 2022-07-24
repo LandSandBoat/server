@@ -44,9 +44,10 @@ zones[xi.zone.BEAUCEDINE_GLACIER] =
         VOIDWALKER_UPGRADE_KI_2        = 11888, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
         VOIDWALKER_BREAK_KI            = 11889, -- The <keyitem> shatters into tiny fragments.
         VOIDWALKER_OBTAIN_KI           = 11890, -- Obtained key item: <keyitem>!
+        LEARNS_SPELL                   = 12780, -- <name> learns <spell>!
+        UNCANNY_SENSATION              = 12782, -- You are assaulted by an uncanny sensation.
         COMMON_SENSE_SURVIVAL          = 12789, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
-
     mob =
     {
         GARGANTUA_PH =
@@ -102,7 +103,6 @@ zones[xi.zone.BEAUCEDINE_GLACIER] =
 
     npc =
     {
-        CASKET_BASE     = 17232181,
         MIRROR_POND_J8  = 17232206,
         OVERSEER_BASE   = 17232217, -- Parledaire_RK in npc_list
     },

@@ -311,6 +311,7 @@ enum class Mod
     BERSERK_DURATION   = 954,  // Berserk Duration
     AGGRESSOR_DURATION = 955,  // Aggressor Duration
     DEFENDER_DURATION  = 956,  // Defender Duration
+    ENHANCES_RESTRAINT = 1045, // Enhances "Restraint" effect/"Restraint" + (Increases the damage bonus of Restraint by XXX%)
 
     // Monk
     BOOST_EFFECT        = 97,   // Boost power in tenths

@@ -461,7 +461,7 @@ INSERT INTO `status_effects` VALUES (431,'avatars_favor',171966753,0,0,0,0,0,0,0
 INSERT INTO `status_effects` VALUES (432,'multi_strikes',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (433,'double_shot',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (434,'transcendency',256,0,0,0,0,0,0,0,0);
-INSERT INTO `status_effects` VALUES (435,'restraint',32,0,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (435,'restraint',5243168,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (436,'perfect_counter',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (437,'mana_wall',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (438,'divine_emblem',32,0,0,0,0,0,0,0,0);
@@ -633,6 +633,7 @@ INSERT INTO `status_effects` VALUES (610,'negate_charm',289,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (611,'magic_evasion_boost_ii',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (612,'colure_active',9437440,0,0,3,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (623,'rampart',5243168,0,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (625,'sirens_favor',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (768,'abyssea_str',256,0,0,0,0,0,1,0,0);
 INSERT INTO `status_effects` VALUES (769,'abyssea_dex',256,0,0,0,0,0,5,0,0);
 INSERT INTO `status_effects` VALUES (770,'abyssea_vit',256,0,0,0,0,0,4,0,0);
@@ -669,6 +670,7 @@ INSERT INTO `status_effects` VALUES (800,'dynamis',33554432,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (801,'meditate',32,0,0,0,0,0,7,0,0);
 INSERT INTO `status_effects` VALUES (802,'elemental_resistance_down',8389408,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (803,'full_speed_ahead',768,0,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (805,'tomahawk',544,0,0,0,0,0,0,0,0);
 
 /*!40000 ALTER TABLE `status_effects` ENABLE KEYS */;
 UNLOCK TABLES;
