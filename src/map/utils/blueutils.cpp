@@ -441,6 +441,15 @@ namespace blueutils
             uint8 category    = point.first;
             uint8 totalWeight = point.second;
 
+            // Weight has to be at least 8 to receive a trait
+            if (totalWeight < 8) break;
+
+            // BLU Job Gift increases totalWeight by 8 for each level of the job gift
+            // Except for TH, DA, and Refresh
+            if(PChar->getMod(Mod::BLUE_TRAIT_BONUS) && GIFTABLE_TRAIT(category)) {
+                totalWeight += 8 * PChar->getMod(Mod::BLUE_TRAIT_BONUS);
+            }
+
             for (auto& i : *PTraitsList)
             {
                 if (i->getLevel() == 0)

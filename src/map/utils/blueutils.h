@@ -22,6 +22,8 @@
 #ifndef _BLUEUTILS_H
 #define _BLUEUTILS_H
 
+#define GIFTABLE_TRAIT(a) (a != 110 && a != 114)
+
 #include "common/cbasetypes.h"
 #include "common/mmo.h"
 

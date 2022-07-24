@@ -471,9 +471,10 @@ enum class Mod
     CAIT_SITH_LVL_BONUS       = 1042, // Cait Sith: Lv.+ (Increases Cait Sith's base level above 99)
 
     // Blue Mage
-    BLUE_POINTS       = 309, // Tracks extra blue points
-    BLUE_LEARN_CHANCE = 945, // Additional chance to learn blue magic
-    BLUE_MAGIC_BARRIER = 1045,
+    BLUE_POINTS       = 309,   // Tracks extra blue points
+    BLUE_LEARN_CHANCE = 945,   // Additional chance to learn blue magic
+    BLUE_MAGIC_BARRIER = 1045, //
+    BLUE_TRAIT_BONUS = 1046,  //JP Gift
 
     // Corsair
     EXP_BONUS        = 382, //
@@ -902,7 +903,7 @@ enum class Mod
     // 888
     // 936
     //
-    // SPARE = 1046, and onward
+    // SPARE = 1047, and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

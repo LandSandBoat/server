@@ -1023,7 +1023,7 @@ INSERT INTO `job_point_gifts` VALUES (16, 60, 28, 5, 'BLU_Magic Attack Bonus');
 INSERT INTO `job_point_gifts` VALUES (16, 80, 31, 5, 'BLU_Magic Evasion Bonus');
 INSERT INTO `job_point_gifts` VALUES (16, 95, 915, 11, 'BLU_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` VALUES (16, 100, 997, 1, 'BLU_Superior 2');
-INSERT INTO `job_point_gifts` VALUES (16, 100, 982, 1, 'BLU_Job Trait Bonus');
+INSERT INTO `job_point_gifts` VALUES (16, 100, 1046, 1, 'BLU_Job Trait Bonus');
 INSERT INTO `job_point_gifts` VALUES (16, 125, 30, 5, 'BLU_Magic Accuracy Bonus');
 INSERT INTO `job_point_gifts` VALUES (16, 145, 915, 13, 'BLU_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` VALUES (16, 150, 122, 5, 'BLU_Blue Magic Skill Bonus');
@@ -1062,7 +1062,7 @@ INSERT INTO `job_point_gifts` VALUES (16, 1050, 30, 10, 'BLU_Magic Accuracy Bonu
 INSERT INTO `job_point_gifts` VALUES (16, 1125, 122, 10, 'BLU_Blue Magic Skill Bonus');
 INSERT INTO `job_point_gifts` VALUES (16, 1195, 915, 33, 'BLU_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` VALUES (16, 1200, 997, 1, 'BLU_Superior 4');
-INSERT INTO `job_point_gifts` VALUES (16, 1200, 982, 1, 'BLU_Jobs Trait Bonus');
+INSERT INTO `job_point_gifts` VALUES (16, 1200, 1046, 1, 'BLU_Jobs Trait Bonus');
 INSERT INTO `job_point_gifts` VALUES (16, 1280, 1, 25, 'BLU_Physical Defense Bonus');
 INSERT INTO `job_point_gifts` VALUES (16, 1355, 915, 35, 'BLU_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` VALUES (16, 1360, 23, 25, 'BLU_Attack Bonus');
