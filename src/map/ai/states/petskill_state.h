@@ -32,7 +32,6 @@ class CPetSkillState : public CState
 public:
     CPetSkillState(CPetEntity* PEntity, uint16 targid, uint16 wsid);
 
-    //CMobSkill* GetSkill();
     CPetSkill* GetPetSkill();
 
     int16 GetSpentTP()
