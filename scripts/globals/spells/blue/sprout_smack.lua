@@ -50,7 +50,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     if target:hasStatusEffect(xi.effect.SLOW) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
     else
-        target:addStatusEffect(xi.effect.SLOW, 1500, 0, 20)
+        target:addStatusEffect(xi.effect.SLOW, 1500, 3, 20)
     end
 
     return damage

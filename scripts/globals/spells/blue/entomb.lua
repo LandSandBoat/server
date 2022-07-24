@@ -37,7 +37,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     })
     if (resist > 0.0625) then
         if (target:canGainStatusEffect(xi.effect.PETRIFICATION)) then
-            target:addStatusEffect(xi.effect.PETRIFICATION, 1, 0, math.min(60 * resist, 1))
+            target:addStatusEffect(xi.effect.PETRIFICATION, 1, 3, math.min(60 * resist, 1))
         end
     end
 

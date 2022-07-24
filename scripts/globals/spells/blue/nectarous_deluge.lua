@@ -37,7 +37,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     })
     if (resist > 0.0625) then
         if (target:canGainStatusEffect(xi.effect.POISON)) then
-            target:addStatusEffect(xi.effect.POISON, 80, 0, 30 * resist) -- duration unknown
+            target:addStatusEffect(xi.effect.POISON, 80, 3, 30 * resist) -- duration unknown
         end
     end
 

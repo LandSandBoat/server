@@ -33,7 +33,7 @@ spell_object.onSpellCast = function(caster, target, spell)
         target:takeSpellDamage(caster, spell, playerHP, xi.attackType.MAGICAL, xi.damageType.FIRE)
         caster:setHP(1)
         caster:delStatusEffect(xi.effect.WEAKNESS)
-        caster:addStatusEffect(xi.effect.WEAKNESS, 1, 0, duration)
+        caster:addStatusEffect(xi.effect.WEAKNESS, 1, 3, duration)
     end
 
     return damage

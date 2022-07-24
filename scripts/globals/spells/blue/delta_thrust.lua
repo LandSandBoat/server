@@ -48,7 +48,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     })
     if (resist > 0.0625) then
         if (target:canGainStatusEffect(xi.effect.PLAGUE)) then
-            target:addStatusEffect(xi.effect.PLAGUE, 10, 0, 120)
+            target:addStatusEffect(xi.effect.PLAGUE, 10, 3, 120)
         end
     end
 

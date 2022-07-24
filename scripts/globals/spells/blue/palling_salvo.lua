@@ -37,7 +37,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     })
     if (resist > 0.0625) then
         if (target:canGainStatusEffect(xi.effect.BIO)) then
-            target:addStatusEffect(xi.effect.BIO, 15, 0, math.min(180 * resist, 1), 0, 10, 0)
+            target:addStatusEffect(xi.effect.BIO, 15, 3, math.min(180 * resist, 1), 0, 10, 0)
         end
     end
 

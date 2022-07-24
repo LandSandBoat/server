@@ -49,7 +49,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     if (target:hasStatusEffect(xi.effect.VIT_DOWN)) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
     else
-        target:addStatusEffect(xi.effect.VIT_DOWN, 15, 0, 20)
+        target:addStatusEffect(xi.effect.VIT_DOWN, 15, 3, 20)
     end
 
     return damage

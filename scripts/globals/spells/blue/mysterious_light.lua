@@ -48,7 +48,7 @@ spell_object.onSpellCast = function(caster, target, spell)
 
     if (damage > 0 and resist > 0.0625) then
         target:delStatusEffect(xi.effect.WEIGHT)
-        target:addStatusEffect(xi.effect.WEIGHT, 4, 0, getBlueEffectDuration(caster, resist, xi.effect.WEIGHT))
+        target:addStatusEffect(xi.effect.WEIGHT, 4, 3, getBlueEffectDuration(caster, resist, xi.effect.WEIGHT))
     end
 
     return damage

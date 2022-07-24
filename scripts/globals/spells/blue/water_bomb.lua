@@ -46,7 +46,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     
     if (resist > 0.0625) then
         if (target:canGainStatusEffect(xi.effect.SILENCE)) then
-            target:addStatusEffect(xi.effect.SILENCE, 1, 0, 180 * resist)
+            target:addStatusEffect(xi.effect.SILENCE, 1, 3, 180 * resist)
         end
     end
 

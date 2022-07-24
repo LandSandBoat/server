@@ -54,12 +54,12 @@ spell_object.onSpellCast = function(caster, target, spell)
     if (damage > 0 and resist > 0.3) then
     local typeEffect = xi.effect.SLOW
         target:delStatusEffect(typeEffect)
-        target:addStatusEffect(typeEffect, 3500, 0, getBlueEffectDuration(caster, resist, typeEffect))
+        target:addStatusEffect(typeEffect, 3500, 3, getBlueEffectDuration(caster, resist, typeEffect))
     end
 
     if (damage > 0 and resist > 0.3) then
         target:delStatusEffect(xi.effect.SILENCE)
-        target:addStatusEffect(xi.effect.SILENCE, 25, 0, getBlueEffectDuration(caster, resist, xi.effect.SILENCE))
+        target:addStatusEffect(xi.effect.SILENCE, 25, 3, getBlueEffectDuration(caster, resist, xi.effect.SILENCE))
     end
 
     return damage

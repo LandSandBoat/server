@@ -37,7 +37,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     })
     if (resist > 0.0625) then
         if (target:canGainStatusEffect(xi.effect.BIND)) then
-            target:addStatusEffect(xi.effect.BIND, 1, 0, 60 * resist) -- duration unknown
+            target:addStatusEffect(xi.effect.BIND, 1, 3, 60 * resist) -- duration unknown
         end
     end
 

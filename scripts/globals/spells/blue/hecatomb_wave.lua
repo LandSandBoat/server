@@ -51,7 +51,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     if (damage > 0 and resist > 0.125) then
         local typeEffect = xi.effect.BLINDNESS
         target:delStatusEffect(typeEffect)
-        target:addStatusEffect(typeEffect, 5, 0, getBlueEffectDuration(caster, resist, typeEffect))
+        target:addStatusEffect(typeEffect, 5, 3, getBlueEffectDuration(caster, resist, typeEffect))
     end
 
     return damage

@@ -53,7 +53,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
     if (resist > 0.25) then -- This line may need adjusting for retail accuracy.
-        target:addStatusEffect(xi.effect.STUN, 1, 0, 5 * resist)
+        target:addStatusEffect(xi.effect.STUN, 1, 3, 5 * resist)
     end
 
     return damage

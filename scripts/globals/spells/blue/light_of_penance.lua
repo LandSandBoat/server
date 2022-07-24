@@ -44,13 +44,13 @@ spell_object.onSpellCast = function(caster, target, spell)
                 target:delTP(power)
                 spell:setMsg(xi.msg.basic.MAGIC_TP_REDUCE)
             elseif (target:hasStatusEffect(typeEffectOne)) then
-                target:addStatusEffect(typeEffectTwo, 1, 0, duration)
+                target:addStatusEffect(typeEffectTwo, 1, 3, duration)
                 target:delTP(power)
                 returnEffect = typeEffectTwo -- make it return bind message if blind can't be inflicted
                 spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
             else
-                target:addStatusEffect(typeEffectOne, 50, 0, duration)
-                target:addStatusEffect(typeEffectTwo, 1, 0, duration)
+                target:addStatusEffect(typeEffectOne, 50, 3, duration)
+                target:addStatusEffect(typeEffectTwo, 1, 3, duration)
                 target:delTP(power)
                 spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
             end

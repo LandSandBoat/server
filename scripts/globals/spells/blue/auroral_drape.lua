@@ -33,7 +33,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     })
 
     if (silence > 0.5) then -- Do it!
-        if (target:addStatusEffect(xi.effect.SILENCE, 1, 0, duration)) then
+        if (target:addStatusEffect(xi.effect.SILENCE, 1, 3, duration)) then
             spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         else
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
@@ -51,7 +51,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     })
 
     if (blind > 0.5) then -- Do it!
-        if (target:addStatusEffect(xi.effect.BLINDNESS, 60, 0, duration)) then
+        if (target:addStatusEffect(xi.effect.BLINDNESS, 60,3, duration)) then
             spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         else
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)

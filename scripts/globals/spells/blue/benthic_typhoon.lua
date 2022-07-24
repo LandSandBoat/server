@@ -58,11 +58,11 @@ spell_object.onSpellCast = function(caster, target, spell)
     })
 
     if (resist > 0.5) then -- This line may need adjusting for retail accuracy.
-        target:addStatusEffect(xi.effect.DEFENSE_DOWN, 10, 0, 60 * resist) -- pre-resist duration needs confirmed/adjusted
+        target:addStatusEffect(xi.effect.DEFENSE_DOWN, 10, 3, 60 * resist) -- pre-resist duration needs confirmed/adjusted
     end
 
     if (resistb > 0.5) then -- This line may need adjusting for retail accuracy.
-        target:addStatusEffect(xi.effect.MAGIC_DEF_DOWN, 10, 0, 60 * resist) -- pre-resist duration needs confirmed/adjusted
+        target:addStatusEffect(xi.effect.MAGIC_DEF_DOWN, 10, 3, 60 * resist) -- pre-resist duration needs confirmed/adjusted
     end
 
     return damage

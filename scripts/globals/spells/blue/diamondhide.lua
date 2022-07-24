@@ -30,7 +30,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     local power = ((blueskill)/3) *2
     local duration = 300
 
-    if not target:addStatusEffect(typeEffect, power, 0, duration, 0, 0, 2) then
+    if not target:addStatusEffect(typeEffect, power, 3, duration, 0, 0, 2) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     end
 

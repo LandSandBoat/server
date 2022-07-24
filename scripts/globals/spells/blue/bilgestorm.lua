@@ -46,7 +46,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     })
     if (resist > 0.0625) then
         if (target:canGainStatusEffect(xi.effect.DEFENSE_DOWN)) then
-            target:addStatusEffect(xi.effect.DEFENSE_DOWN, 25, 0, 60 * resist)
+            target:addStatusEffect(xi.effect.DEFENSE_DOWN, 25, 3, 60 * resist)
         end
     end
 
@@ -57,7 +57,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     })
     if (resist > 0.0625) then
         if (target:canGainStatusEffect(xi.effect.ATTACK_DOWN)) then
-            target:addStatusEffect(xi.effect.ATTACK_DOWN, 25, 0, 60 * resist)
+            target:addStatusEffect(xi.effect.ATTACK_DOWN, 25, 3, 60 * resist)
         end
     end
 
@@ -68,7 +68,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     })
     if (resist > 0.0625) then
         if (target:canGainStatusEffect(xi.effect.ACCURACY_DOWN)) then
-            target:addStatusEffect(xi.effect.ACCURACY_DOWN, 25, 0, 60 * resist)
+            target:addStatusEffect(xi.effect.ACCURACY_DOWN, 25, 3, 60 * resist)
         end
     end
 

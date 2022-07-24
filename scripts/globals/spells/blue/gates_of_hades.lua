@@ -43,7 +43,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     })
     if (resist > 0.0625) then
         if (target:canGainStatusEffect(xi.effect.MAGIC_DEF_DOWN)) then
-            target:addStatusEffect(xi.effect.BURN, 22, 0, 90)
+            target:addStatusEffect(xi.effect.BURN, 22, 3, 90)
         end
     end
 

@@ -39,7 +39,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     local resist = applyResistance(caster, target, spell, params)
     if (damage > 0 and resist > 0.0625) then
         if (target:canGainStatusEffect(xi.effect.STUN)) then
-            target:addStatusEffect(xi.effect.STUN, 1, 0, 5 * resist) -- needs verification
+            target:addStatusEffect(xi.effect.STUN, 1, 3, 5 * resist) -- needs verification
         end
     end
 

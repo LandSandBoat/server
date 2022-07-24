@@ -27,7 +27,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     local power = 2
     local duration = 5 -- need to implement a physical shield that acts like a shadow
 
-    if (target:addStatusEffect(typeEffect, power, 0, duration) == false) then
+    if (target:addStatusEffect(typeEffect, power, 3, duration) == false) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     end
 

@@ -29,7 +29,7 @@ spell_object.onSpellCast = function(caster, target, spell)
         effect:setPower(effect:getPower() + power)
         player:addMod(xi.mod.ATTP, power)
     else
-        player:addStatusEffect(xi.effect.BOOST, power, 0, 180)
+        player:addStatusEffect(xi.effect.BOOST, power, 3, 180)
     end
 end
 

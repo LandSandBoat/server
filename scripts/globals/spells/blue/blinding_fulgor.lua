@@ -37,7 +37,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     })
     if (resist > 0.0625) then
         if (target:canGainStatusEffect(xi.effect.FLASH)) then
-            target:addStatusEffect(xi.effect.FLASH, 200, 0, 15 * resist)
+            target:addStatusEffect(xi.effect.FLASH, 200, 3, 15 * resist)
         end
     end
 

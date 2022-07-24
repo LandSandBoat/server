@@ -44,7 +44,7 @@ spell_object.onSpellCast = function(caster, target, spell)
         caster:delStatusEffect(xi.effect.DIFFUSION)
     end
 
-    if not target:addStatusEffect(typeEffect, power, 0, duration, 0, 0, 2) then
+    if not target:addStatusEffect(typeEffect, power, 3, duration, 0, 0, 2) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     end
 

@@ -53,37 +53,37 @@ spell_object.onSpellCast = function(caster, target, spell)
     if (damage > 0 and resist > 0.3) then
         local typeEffect = xi.effect.PARALYSIS
         target:delStatusEffect(typeEffect)
-        target:addStatusEffect(typeEffect, 25, 0, getBlueEffectDuration(caster, resist, typeEffect))
+        target:addStatusEffect(typeEffect, 25,3, getBlueEffectDuration(caster, resist, typeEffect))
     end
 
     if (damage > 0 and resist > 0.3) then
     local typeEffect = xi.effect.WEIGHT
         target:delStatusEffect(typeEffect)
-        target:addStatusEffect(typeEffect, 25, 0, getBlueEffectDuration(caster, resist, typeEffect))
+        target:addStatusEffect(typeEffect, 25, 3, getBlueEffectDuration(caster, resist, typeEffect))
     end
 
     if (damage > 0 and resist > 0.3) then
     local typeEffect = xi.effect.POISON
         target:delStatusEffect(typeEffect)
-        target:addStatusEffect(typeEffect, 4, 0, getBlueEffectDuration(caster, resist, typeEffect))
+        target:addStatusEffect(typeEffect, 4, 3, getBlueEffectDuration(caster, resist, typeEffect))
     end
 
     if (damage > 0 and resist > 0.3) then
     local typeEffect = xi.effect.SLOW
         target:delStatusEffect(typeEffect)
-        target:addStatusEffect(typeEffect, 2000, 0, getBlueEffectDuration(caster, resist, typeEffect))
+        target:addStatusEffect(typeEffect, 2000, 3, getBlueEffectDuration(caster, resist, typeEffect))
     end
 
     if (damage > 0 and resist > 0.3) then
     local typeEffect = xi.effect.SILENCE
         target:delStatusEffect(typeEffect)
-        target:addStatusEffect(typeEffect, 25, 0, getBlueEffectDuration(caster, resist, typeEffect))
+        target:addStatusEffect(typeEffect, 25,3, getBlueEffectDuration(caster, resist, typeEffect))
     end
 
     if (damage > 0 and resist > 0.3) then
     local typeEffect = xi.effect.BIND
         target:delStatusEffect(typeEffect)
-        target:addStatusEffect(typeEffect, 1, 0, getBlueEffectDuration(caster, resist, typeEffect))
+        target:addStatusEffect(typeEffect, 1, 3, getBlueEffectDuration(caster, resist, typeEffect))
     end
         if (damage > 0 and resist > 0.3) then
     local typeEffect = xi.effect.BLINDNESS

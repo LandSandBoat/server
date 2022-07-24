@@ -49,7 +49,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     })
     if (resist > 0.0625) then
         if (target:canGainStatusEffect(xi.effect.PARALYSIS)) then
-            target:addStatusEffect(xi.effect.PARALYSIS, 20, 0, 60 * resist)
+            target:addStatusEffect(xi.effect.PARALYSIS, 20, 3, 60 * resist)
         end
     end
 

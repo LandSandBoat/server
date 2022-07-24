@@ -39,7 +39,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     if resist < 0.5 then
         spell:setMsg(xi.msg.basic.MAGIC_RESIST) --resist message
     else
-        if target:addStatusEffect(xi.effect.SLOW, 2000, 0, getBlueEffectDuration(caster, resist, xi.effect.SLOW)) then
+        if target:addStatusEffect(xi.effect.SLOW, 2000, 3, getBlueEffectDuration(caster, resist, xi.effect.SLOW)) then
             spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         else
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)

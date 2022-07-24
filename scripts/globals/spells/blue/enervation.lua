@@ -39,15 +39,15 @@ spell_object.onSpellCast = function(caster, target, spell)
         if (target:hasStatusEffect(typeEffectOne) and target:hasStatusEffect(typeEffectTwo)) then -- the def/mag def down does not overwrite the same debuff from any other source
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect
         elseif (target:hasStatusEffect(typeEffectOne)) then
-            target:addStatusEffect(typeEffectTwo, 8, 0, duration)
+            target:addStatusEffect(typeEffectTwo, 8, 3, duration)
             returnEffect = typeEffectTwo
             spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         elseif (target:hasStatusEffect(typeEffectTwo)) then
-            target:addStatusEffect(typeEffectOne, 10, 0, duration)
+            target:addStatusEffect(typeEffectOne, 10, 3, duration)
             spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         else
-            target:addStatusEffect(typeEffectOne, 10, 0, duration)
-            target:addStatusEffect(typeEffectTwo, 8, 0, duration)
+            target:addStatusEffect(typeEffectOne, 10, 3, duration)
+            target:addStatusEffect(typeEffectTwo, 8, 3, duration)
             spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         end
     end

@@ -45,7 +45,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     })
     if (resist > 0.0625) then
         if (target:canGainStatusEffect(xi.effect.SLOW)) then
-            target:addStatusEffect(xi.effect.WEIGHT, 75, 0, 90 * resist)
+            target:addStatusEffect(xi.effect.WEIGHT, 75, 3, 90 * resist)
         end
     end
 

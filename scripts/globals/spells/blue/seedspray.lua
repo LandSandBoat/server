@@ -50,7 +50,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     if (damage > 0 and chance > 1) then
         local typeEffect = xi.effect.DEFENSE_DOWN
         target:delStatusEffect(typeEffect)
-        target:addStatusEffect(typeEffect, 4, 0, getBlueEffectDuration(caster, 0, typeEffect))
+        target:addStatusEffect(typeEffect, 4, 3, getBlueEffectDuration(caster, 0, typeEffect))
     end
 
     return damage

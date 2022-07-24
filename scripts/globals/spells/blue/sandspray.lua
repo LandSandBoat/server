@@ -37,7 +37,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     local power = 25
 
     if (resist > 0.5) then -- Do it!
-        if (target:addStatusEffect(typeEffect, power, 0, duration)) then
+        if (target:addStatusEffect(typeEffect, power, 3, duration)) then
             spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         else
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
