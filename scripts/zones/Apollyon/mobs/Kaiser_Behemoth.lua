@@ -43,7 +43,7 @@ entity.onSpellPrecast = function(mob, spell)
         spell:setFlag(xi.magic.spellFlag.HIT_ALL)
         spell:setRadius(30)
         spell:setAnimation(280)
-        spell:setMPCost(1)
+        spell:setMPCost(0)
     end
 end
 
