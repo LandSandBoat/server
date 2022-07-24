@@ -48,7 +48,7 @@ public:
     uint16 getRange();
     auto   getName() -> const char*;
     uint16 getAnimation();
-    uint16 getAddType();
+    uint16 getAddType(); // see map/ability.h for definitions. These can tell if the ability is a Merit ability, Astral Flow only ability, etc
 
     void   setMsg(uint16 messageID);
     void   setAnimation(uint16 animationID);
