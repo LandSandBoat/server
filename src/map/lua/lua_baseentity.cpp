@@ -75,6 +75,7 @@
 #include "../ai/states/range_state.h"
 #include "../ai/states/respawn_state.h"
 #include "../ai/states/weaponskill_state.h"
+#include "../ai/states/petskill_state.h"
 
 #include "../ai/controllers/mob_controller.h"
 #include "../ai/controllers/trust_controller.h"
@@ -1526,6 +1527,15 @@ uint8 CLuaBaseEntity::getCurrentAction()
     else if (m_PBaseEntity->PAI->IsCurrentState<CMobSkillState>())
     {
         action = 34;
+    }
+    else if (m_PBaseEntity->PAI->IsCurrentState<CPetSkillState>())
+    {
+        CPetSkillState* PPetSkillState = dynamic_cast<CPetSkillState*>(m_PBaseEntity->PAI->GetCurrentState());
+
+        if (PPetSkillState)
+        {
+            action = PPetSkillState->GetPetSkill()->getSkillFinishCategory();
+        }
     }
     else
     {

@@ -28,6 +28,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../packets/entity_animation.h"
 #include "controllers/mob_controller.h"
 #include "controllers/player_controller.h"
+#include "controllers/pet_controller.h"
 #include "states/ability_state.h"
 #include "states/attack_state.h"
 #include "states/death_state.h"
@@ -36,6 +37,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "states/item_state.h"
 #include "states/magic_state.h"
 #include "states/mobskill_state.h"
+#include "states/petskill_state.h"
 #include "states/raise_state.h"
 #include "states/range_state.h"
 #include "states/respawn_state.h"
@@ -110,6 +112,16 @@ bool CAIContainer::MobSkill(uint16 targid, uint16 wsid)
     if (AIController)
     {
         return AIController->MobSkill(targid, wsid);
+    }
+    return false;
+}
+
+bool CAIContainer::PetSkill(uint16 targid, uint16 wsid)
+{
+    auto* AIController = dynamic_cast<CPetController*>(Controller.get());
+    if (AIController)
+    {
+        return AIController->PetSkill(targid, wsid);
     }
     return false;
 }
@@ -249,6 +261,16 @@ bool CAIContainer::Internal_MobSkill(uint16 targid, uint16 wsid)
     if (entity)
     {
         return ChangeState<CMobSkillState>(entity, targid, wsid);
+    }
+    return false;
+}
+
+bool CAIContainer::Internal_PetSkill(uint16 targid, uint16 abilityid)
+{
+    auto* entity{ dynamic_cast<CPetEntity*>(PEntity) };
+    if (entity)
+    {
+        return ChangeState<CPetSkillState>(entity, targid, abilityid);
     }
     return false;
 }

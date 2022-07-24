@@ -245,6 +245,7 @@ int32 do_init(int32 argc, char** argv)
     ability::LoadAbilitiesList();
     battleutils::LoadWeaponSkillsList();
     battleutils::LoadMobSkillsList();
+    battleutils::LoadPetSkillsList();
     battleutils::LoadSkillChainDamageModifiers();
     petutils::LoadPetList();
     trustutils::LoadTrustList();
@@ -349,6 +350,7 @@ void do_final(int code)
     itemutils::FreeItemList();
     battleutils::FreeWeaponSkillsList();
     battleutils::FreeMobSkillList();
+    battleutils::FreePetSkillList();
 
     petutils::FreePetList();
     trustutils::FreeTrustList();
