@@ -17,6 +17,8 @@ entity.onMobSpawn = function(mob)
 
     if xi.settings.main.LandKingSystem_NQ > 0 or xi.settings.main.LandKingSystem_HQ > 0 then
         GetNPCByID(ID.npc.FAFNIR_QM):setStatus(xi.status.DISAPPEAR)
+        SetDropRate(918, 1526, 0) -- do not drop wyrm beard
+        mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
     end
     if xi.settings.main.LandKingSystem_HQ == 0 then
         SetDropRate(918, 3340, 0) -- do not drop cup_of_sweet_tea
