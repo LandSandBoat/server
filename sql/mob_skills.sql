@@ -1697,7 +1697,7 @@ INSERT INTO `mob_skills` VALUES (1840,1148,'rushing_stab',0,7.0,2000,1500,4,0,0,
 -- INSERT INTO `mob_skills` VALUES (1862,1606,'awful_eye',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1863,1607,'heavy_bellow',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1864,1608,'intimidate',0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1865,194,'aqua_ball',0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1865,194,'aqua_ball_shooting_fish',0,12,2000,0,4,0,0,7,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1866,1610,'splash_breath',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1867,1611,'screwdriver',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1868,1612,'water_wall',0,7.0,2000,1500,4,0,0,0,0,0,0);
