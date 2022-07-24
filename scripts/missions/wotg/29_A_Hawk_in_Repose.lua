@@ -51,6 +51,7 @@ mission.sections =
                 end,
 
                 [503] = function(player, csid, option, npc)
+                    player:confirmTrade()
                     mission:complete(player)
                 end,
             },
