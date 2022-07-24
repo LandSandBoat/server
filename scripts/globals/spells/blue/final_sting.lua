@@ -23,7 +23,6 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    local duration = 300
     local playerHP = caster:getLocalVar("final-sting_hp")
 
     local params = {}
@@ -50,7 +49,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     if damage > 0 then
         local capped = playerHP > (target:getMaxHP() * 0.5)
         local final_damage = 0
-        -- 
+
         if (capped) then
             local level_diff = target:getMainLvl() - caster:getMainLevel()
             local penalty = 0
@@ -59,7 +58,7 @@ spell_object.onSpellCast = function(caster, target, spell)
                 penalty = 0.45
             elseif (level_diff > 4) then -- VT
                 penalty = 0.30
-            elseif (level > -1 ) then -- EM and DC
+            elseif (level_diff > -1 ) then -- EM and DC
                 penalty = 0.15
             end
             final_damage = (0.65 - penalty) * target:getMaxHP()

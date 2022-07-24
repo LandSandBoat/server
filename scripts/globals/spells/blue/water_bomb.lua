@@ -43,7 +43,7 @@ spell_object.onSpellCast = function(caster, target, spell)
         skillType = xi.skill.BLUE_MAGIC,
         effect = xi.effect.SILENCE
     })
-    
+
     if (resist > 0.0625) then
         if (target:canGainStatusEffect(xi.effect.SILENCE)) then
             target:addStatusEffect(xi.effect.SILENCE, 1, 3, 180 * resist)

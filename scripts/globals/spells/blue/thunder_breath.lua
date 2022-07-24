@@ -26,7 +26,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     if (caster:hasStatusEffect(xi.effect.AZURE_LORE)) then
         multi = multi + 0.50
     end
-    
+
     local params = {}
     params.diff = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
     params.attribute = xi.mod.INT

@@ -47,7 +47,7 @@ spell_object.onSpellCast = function(caster, target, spell)
         attribute = xi.mod.INT,
         skillType = xi.skill.BLUE_MAGIC,
         bonus = 0,
-        effect = xi.effect.STUN,
+        effect = xi.effect.STUN
     })
 
     if (resist > 0.5) then -- This line may need adjusting for retail accuracy.

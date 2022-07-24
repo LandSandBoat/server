@@ -29,17 +29,16 @@ spell_object.onSpellCast = function(caster, target, spell)
     if (resist > 0.0625) then
         -- Base: 1000TP, Amorphs 750TP, Aquans 1250TP
         -- TP Reduction based on monster strength of spell
-        
         local bird = {}
         function bird:getSystem()
             return xi.eco.BIRD
         end
 
         local reduction = 1000 + (utils.getSystemStrengthBonus(bird, target) * 250)
-        target:setTP(math.max(target:getTP() - 1000, 0))
+        target:setTP(math.max(target:getTP() - reduction, 0))
     end
 
-    return damage
+    return 0
 end
 
 return spell_object

@@ -44,7 +44,7 @@ spell_object.onSpellCast = function(caster, target, spell)
         skillType = xi.skill.BLUE_MAGIC,
         effect = xi.effect.DEFENSE_DOWN
     })
-    if (resist > 0.0625) then
+    if (defense > 0.0625) then
         if (target:canGainStatusEffect(xi.effect.DEFENSE_DOWN)) then
             target:addStatusEffect(xi.effect.DEFENSE_DOWN, 25, 3, 60 * resist)
         end
@@ -55,7 +55,7 @@ spell_object.onSpellCast = function(caster, target, spell)
         skillType = xi.skill.BLUE_MAGIC,
         effect = xi.effect.ATTACK_DOWN
     })
-    if (resist > 0.0625) then
+    if (attack > 0.0625) then
         if (target:canGainStatusEffect(xi.effect.ATTACK_DOWN)) then
             target:addStatusEffect(xi.effect.ATTACK_DOWN, 25, 3, 60 * resist)
         end
@@ -66,7 +66,7 @@ spell_object.onSpellCast = function(caster, target, spell)
         skillType = xi.skill.BLUE_MAGIC,
         effect = xi.effect.ACCURACY_DOWN
     })
-    if (resist > 0.0625) then
+    if (accuracy > 0.0625) then
         if (target:canGainStatusEffect(xi.effect.ACCURACY_DOWN)) then
             target:addStatusEffect(xi.effect.ACCURACY_DOWN, 25, 3, 60 * resist)
         end

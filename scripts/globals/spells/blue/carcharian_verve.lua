@@ -30,7 +30,7 @@ spell_object.onSpellCast = function(caster, target, spell)
         local diffMerit = caster:getMerit(xi.merit.DIFFUSION)
 
         if (diffMerit > 0) then
-            duration = duration + (duration/100)* diffMerit
+            duration = duration + (duration/100) * diffMerit
         end
 
         caster:delStatusEffect(xi.effect.DIFFUSION)
@@ -42,3 +42,5 @@ spell_object.onSpellCast = function(caster, target, spell)
 
     return aquaveil
 end
+
+return spell_object

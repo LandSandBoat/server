@@ -61,7 +61,6 @@ INSERT INTO `blue_traits` VALUES (30, 2, 118, 963, 5); -- inquartata
 INSERT INTO `blue_traits` VALUES (31, 2, 125, 30, 10); -- MACC
 INSERT INTO `blue_traits` VALUES (32, 2, 126, 31, 10); -- MEVA
 
-
 -- REDO
 INSERT INTO `blue_traits` VALUES (101,8,1,25,10); -- accuracy bonus(1)
 INSERT INTO `blue_traits` VALUES (101,8,1,26,10); -- accuracy bonus(1)

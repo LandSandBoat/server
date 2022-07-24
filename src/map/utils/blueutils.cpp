@@ -442,7 +442,8 @@ namespace blueutils
             uint8 totalWeight = point.second;
 
             // Weight has to be at least 8 to receive a trait
-            if (totalWeight < 8) break;
+            if (totalWeight < 8) 
+                break;
 
             // BLU Job Gift increases totalWeight by 8 for each level of the job gift
             // Except for TH, DA, and Refresh

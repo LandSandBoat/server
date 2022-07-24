@@ -41,7 +41,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     local damage = BluePhysicalSpell(caster, target, spell, params)
     damage = BlueFinalAdjustments(caster, target, spell, damage, params)
 
-    if (targetisUndead() == false) then
+    if (target:isUndead() == false) then
         caster:addHP(damage)
     end
 

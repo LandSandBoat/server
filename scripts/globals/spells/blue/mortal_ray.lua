@@ -35,8 +35,6 @@ spell_object.onSpellCast = function(caster, target, spell)
     end
 
     local resist = applyResistance(caster, target, spell, params)
-    
-
     if (resist > 0.0625) then
         if (target:isFacing(caster)) then
             spell:setMsg(xi.msg.basic.MAGIC_ENFEEB)

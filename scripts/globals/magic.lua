@@ -712,7 +712,6 @@ end
     dmg = utils.magicbarrier(target, dmg)
     dmg = utils.clamp(dmg, -99999, 99999)
 
-
     if dmg < 0 then
         dmg = target:addHP(-dmg)
         spell:setMsg(xi.msg.basic.MAGIC_RECOVERS_HP)

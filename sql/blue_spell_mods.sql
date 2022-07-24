@@ -1071,14 +1071,3 @@ INSERT INTO `blue_spell_mods` VALUES ('745', '0', '0'); --
 -- Blistering Roar
 -- ----------------------------
 INSERT INTO `blue_spell_mods` VALUES ('746', '0', '0'); -- 
-
-
-
-
-
-
-
-
-
-
-

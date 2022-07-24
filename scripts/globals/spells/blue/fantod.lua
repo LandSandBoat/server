@@ -22,14 +22,14 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    local power = 12.5 + (0.10 * player:getMod(xi.mod.BOOST_EFFECT))
+    local power = 12.5 + (0.10 * caster:getMod(xi.mod.BOOST_EFFECT))
 
-    if player:hasStatusEffect(xi.effect.BOOST) then
-        local effect = player:getStatusEffect(xi.effect.BOOST)
+    if caster:hasStatusEffect(xi.effect.BOOST) then
+        local effect = caster:getStatusEffect(xi.effect.BOOST)
         effect:setPower(effect:getPower() + power)
-        player:addMod(xi.mod.ATTP, power)
+        caster:addMod(xi.mod.ATTP, power)
     else
-        player:addStatusEffect(xi.effect.BOOST, power, 3, 180)
+        caster:addStatusEffect(xi.effect.BOOST, power, 3, 180)
     end
 end
 
