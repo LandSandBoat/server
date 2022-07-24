@@ -246,7 +246,7 @@ local battlefields =
         { 8,    8, 1552},   -- Carapace Combatants (BS30)
      -- { 9,    9, 1551},   -- Shooting Fish (BS20) -- TODO: mobs use ranged attacks with knockback
         {10,   10, 1552},   -- Dropping Like Flies (BS30)
-     -- {11,   11, 1553},   -- Horns of War (KS99) -- TODO: Chlevnik is unscripted
+        {11,   11, 1553},   -- Horns of War (KS99)
         {12,   12, 1131},   -- Under Observation (BS40)
         {13,   13, 1177},   -- Eye of the Tiger (BS50) -- TODO: Crossthrash mobskill
      -- {14,   14, 1130},   -- Shots in the Dark (BS60) -- TODO: Warmachine combat behavior
