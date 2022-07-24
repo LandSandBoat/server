@@ -13,12 +13,18 @@ local entity = {}
 entity.onMobSpawn = function(mob)
     if xi.settings.main.LandKingSystem_NQ > 0 or xi.settings.main.LandKingSystem_HQ > 0 then
         GetNPCByID(ID.npc.BEHEMOTH_QM):setStatus(xi.status.DISAPPEAR)
+        mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
+        SetDropRate(251, 1527, 0) -- do not drop behemoth tongue
     end
     if xi.settings.main.LandKingSystem_HQ == 0 then
         SetDropRate(270, 3342, 0) -- do not drop savory_shank
     end
 
     mob:setLocalVar("[rage]timer", 1800) -- 30 minutes
+    mob:addMod(xi.mod.SLEEPRES, 90)
+    mob:setMod(xi.mod.TRIPLE_ATTACK, 5)
+    mob:setMod(xi.mod.MDEF, 20)
+    mob:addMod(xi.mod.EVA, 50)
 end
 
 entity.onMobFight = function(mob, target)

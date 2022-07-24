@@ -54,30 +54,34 @@ zone_object.onEventFinish = function(player, csid, option)
 end
 
 zone_object.onGameHour = function(zone)
-    local cooldown = GetMobByID(ID.mob.SENGANN):getLocalVar("cooldown")
-    -- Don't allow Sengann to spawn outside of night
-    if VanadielHour() >= 4 and VanadielHour() < 20 then
-        DisallowRespawn(ID.mob.SENGANN, true)
-    elseif os.time() > cooldown then
-        DisallowRespawn(ID.mob.SENGANN, false)
+    if xi.settings.main.ENABLE_WOTG == 1 then
+        local cooldown = GetMobByID(ID.mob.SENGANN):getLocalVar("cooldown")
+        -- Don't allow Sengann to spawn outside of night
+        if VanadielHour() >= 4 and VanadielHour() < 20 then
+            DisallowRespawn(ID.mob.SENGANN, true)
+        elseif os.time() > cooldown then
+            DisallowRespawn(ID.mob.SENGANN, false)
+        end
     end
 end
 
 zone_object.onZoneWeatherChange = function(weather)
-    if os.time() > GetMobByID(ID.mob.YALUN_EKE):getLocalVar("yalunRespawn") and weather == xi.weather.FOG then
-        local chooseYalun = GetMobByID(ID.mob.YALUN_EKE):getLocalVar("chooseYalun")
-        local count = 1
+    if xi.settings.main.ENABLE_WOTG == 1 then
+        if os.time() > GetMobByID(ID.mob.YALUN_EKE):getLocalVar("yalunRespawn") and weather == xi.weather.FOG then
+            local chooseYalun = GetMobByID(ID.mob.YALUN_EKE):getLocalVar("chooseYalun")
+            local count = 1
 
-        for k, v in pairs(ID.mob.YALUN_EKE_PH) do
-            if count == chooseYalun then
-                DisallowRespawn(k, true)
-                DisallowRespawn(v, false)
-                local pos = GetMobByID(k):getSpawnPos()
-                DespawnMob(k) -- Ensure PH is not up
-                GetMobByID(v):setSpawn(pos.x, pos.y, pos.z)
-                SpawnMob(v) -- Spawn Yal-Un Eke
-            else
-                count = count + 1
+            for k, v in pairs(ID.mob.YALUN_EKE_PH) do
+                if count == chooseYalun then
+                    DisallowRespawn(k, true)
+                    DisallowRespawn(v, false)
+                    local pos = GetMobByID(k):getSpawnPos()
+                    DespawnMob(k) -- Ensure PH is not up
+                    GetMobByID(v):setSpawn(pos.x, pos.y, pos.z)
+                    SpawnMob(v) -- Spawn Yal-Un Eke
+                else
+                    count = count + 1
+                end
             end
         end
     end

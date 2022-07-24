@@ -47,7 +47,11 @@ end
 zone_object.onZoneOut = function(player)
     if player:hasStatusEffect(xi.effect.BATTLEFIELD) then
         player:delStatusEffect(xi.effect.BATTLEFIELD)
-	end
+    end
+end
+
+zone_object.onGameDay = function()
+    SetServerVariable("[DIG]ZONE121_ITEMS", 0)
 end
 
 zone_object.onRegionEnter = function(player, region)

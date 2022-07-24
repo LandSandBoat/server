@@ -1180,6 +1180,8 @@ INSERT INTO `mob_skill_lists` VALUES ('CynoprosopiWyrm',261,958);
 INSERT INTO `mob_skill_lists` VALUES ('KS99_Wyrm',262,951);
 INSERT INTO `mob_skill_lists` VALUES ('KS99_Wyrm',262,952);
 INSERT INTO `mob_skill_lists` VALUES ('KS99_Wyrm',262,953);
+INSERT INTO `mob_skill_lists` VALUES ('KS99_Wyrm',262,955);
+INSERT INTO `mob_skill_lists` VALUES ('KS99_Wyrm',262,956);
 INSERT INTO `mob_skill_lists` VALUES ('KS99_Wyrm',262,957);
 INSERT INTO `mob_skill_lists` VALUES ('KS99_Wyrm',262,958);
 INSERT INTO `mob_skill_lists` VALUES ('NidhoggWyrm',263,1039); -- Outside alliance targeting version of Hurricane Wing

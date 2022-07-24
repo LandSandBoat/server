@@ -4870,8 +4870,9 @@ namespace battleutils
             }
         }
 
-        uint8 charmerLvl = PCharmer->GetMLevel();
-        uint8 targetLvl  = PTarget->GetMLevel();
+        uint8  charmerLvl = PCharmer->GetMLevel();
+        uint8  targetLvl  = PTarget->GetMLevel();
+        uint16 charmres   = PTarget->getMod(Mod::CHARMRES) / 100.f;
 
         // printf("Charmer = %s, Lvl. %u\n", PCharmer->name.c_str(), charmerLvl);
         // printf("Target = %s, Lvl. %u\n", PTarget->name.c_str(), targetLvl);
@@ -4928,11 +4929,19 @@ namespace battleutils
 
         // Based on https://www.bluegartr.com/threads/57288-Charm-and-Magic-Accuracy where charm rate hit 50% w/ 11 dStat
         // Result on EP mob at 75 MJob w/ 67 BST + 11 dCHR should be 50% according to gauge messages.
-        const float levelRatio = (charmerBSTlevel - targetLvl) / 100.f;
+        float levelRatio = (charmerBSTlevel - targetLvl) / 100.f;
         charmChance *= (1.f + levelRatio);
 
+        if (PCharmer->GetMJob() == JOB_BST)
+        {
+            charmChance *= 1.1f;
+        }
+
         float chrRatio = ((PCharmer->CHR() - PTarget->CHR())) / 100.f;
+
+        chrRatio = std::clamp(chrRatio, (1 / 100.f), chrRatio); // Clamp so we can't have -charmChance
         charmChance *= (1.f * (chrRatio * 5.83));
+        charmChance *= 1 - charmres;
 
         // Retail doesn't take light/apollo into account for Gauge
         if (includeCharmAffinityAndChanceMods)

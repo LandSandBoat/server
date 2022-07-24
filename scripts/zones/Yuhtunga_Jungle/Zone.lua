@@ -32,6 +32,9 @@ end
 
 zone_object.onGameDay = function()
     xi.bmt.updatePeddlestox(xi.zone.YUHTUNGA_JUNGLE, ID.npc.PEDDLESTOX)
+
+    -- Chocobo Digging.
+    SetServerVariable("[DIG]ZONE105_ITEMS", 0)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
@@ -76,14 +79,16 @@ zone_object.onEventFinish = function( player, csid, option)
 end
 
 zone_object.onZoneWeatherChange = function(weather)
-    local bayawak = GetMobByID(ID.mob.BAYAWAK)
-    if
-        not bayawak:isSpawned() and os.time() > bayawak:getLocalVar("cooldown") and
-        xi.settings.main.ENABLE_WOTG == 1 and
-        (weather == xi.weather.HOT_SPELL or weather == xi.weather.HEAT_WAVE)
-    then
-        DisallowRespawn(bayawak:getID(), false)
-        bayawak:setRespawnTime(math.random(30, 150)) -- pop 30-150 sec after fire weather starts
+    if xi.settings.main.ENABLE_WOTG == 1 then
+        local bayawak = GetMobByID(ID.mob.BAYAWAK)
+        if
+            not bayawak:isSpawned() and os.time() > bayawak:getLocalVar("cooldown") and
+            xi.settings.main.ENABLE_WOTG == 1 and
+            (weather == xi.weather.HOT_SPELL or weather == xi.weather.HEAT_WAVE)
+        then
+            DisallowRespawn(bayawak:getID(), false)
+            bayawak:setRespawnTime(math.random(30, 150)) -- pop 30-150 sec after fire weather starts
+        end
     end
 end
 

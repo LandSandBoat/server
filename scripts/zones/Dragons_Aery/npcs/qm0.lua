@@ -19,9 +19,9 @@ end
 
 entity.onTrade = function(player, npc, trade)
     if not GetMobByID(ID.mob.FAFNIR):isSpawned() and not GetMobByID(ID.mob.NIDHOGG):isSpawned() then
-        if xi.settings.main.LandKingSystem_NQ ~= 0 and npcUtil.tradeHas(trade, 3339) and npcUtil.popFromQM(player, npc, ID.mob.FAFNIR) then
+        if xi.settings.main.LandKingSystem_NQ ~= 0 and npcUtil.tradeHasExactly(trade, xi.items.HONEY_WINE) and npcUtil.popFromQM(player, npc, ID.mob.FAFNIR) then
             player:confirmTrade()
-        elseif xi.settings.main.LandKingSystem_HQ ~= 0 and npcUtil.tradeHas(trade, 3340) and npcUtil.popFromQM(player, npc, ID.mob.NIDHOGG) then
+        elseif xi.settings.main.LandKingSystem_HQ ~= 0 and npcUtil.tradeHasExactly(trade, xi.items.SWEET_TEA) and npcUtil.popFromQM(player, npc, ID.mob.NIDHOGG) then
             player:confirmTrade()
         end
     end

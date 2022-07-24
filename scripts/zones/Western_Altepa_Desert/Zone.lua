@@ -27,6 +27,9 @@ end
 
 zone_object.onGameDay = function()
     xi.bmt.updatePeddlestox(xi.zone.WESTERN_ALTEPA_DESERT, ID.npc.PEDDLESTOX)
+
+    -- Chocobo Digging.
+    SetServerVariable("[DIG]ZONE125_ITEMS", 0)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
@@ -65,14 +68,15 @@ zone_object.onEventFinish = function(player, csid, option)
 end
 
 zone_object.onZoneWeatherChange = function(weather)
-    local dahu = GetMobByID(ID.mob.DAHU)
-    if
-        not dahu:isSpawned() and os.time() > dahu:getLocalVar("cooldown") and
-        (weather == xi.weather.DUST_STORM or weather == xi.weather.SAND_STORM) and
-        xi.settings.main.ENABLE_WOTG == 1
-    then
-        DisallowRespawn(dahu:getID(), false)
-        dahu:setRespawnTime(math.random(30, 150)) -- pop 30-150 sec after wind weather starts
+    if xi.settings.main.ENABLE_WOTG == 1 then
+        local dahu = GetMobByID(ID.mob.DAHU)
+        if
+            not dahu:isSpawned() and os.time() > dahu:getLocalVar("cooldown") and
+            (weather == xi.weather.DUST_STORM or weather == xi.weather.SAND_STORM)
+        then
+            DisallowRespawn(dahu:getID(), false)
+            dahu:setRespawnTime(math.random(30, 150)) -- pop 30-150 sec after wind weather starts
+        end
     end
 
     local kingV = GetMobByID(ID.mob.KING_VINEGARROON)

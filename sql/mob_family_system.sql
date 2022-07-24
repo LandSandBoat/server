@@ -501,7 +501,7 @@ INSERT INTO `mob_family_system` VALUES (475,'Shinryu',78,'Supreme_Being',10,'Dem
 INSERT INTO `mob_family_system` VALUES (476,'Prishe',86,'Humanoid',13,'Humanoid',0,40,100,90,2,5,3,6,6,2,4,1,3,1,3,0,1,0);
 INSERT INTO `mob_family_system` VALUES (477,'Selh\'teus',186,'Kuluu',13,'Humanoid',0,40,90,110,3,3,2,3,2,2,3,1,3,1,3,0,1,0);
 INSERT INTO `mob_family_system` VALUES (478,'God',78,'Supreme_Being',0,'Unclassified',3,40,120,140,1,1,1,1,1,1,1,1,1,1,1,0,3,0);
-INSERT INTO `mob_family_system` VALUES (479,'Behemoth-KB',27,'Behemoth',6,'Beast',4,40,110,90,3,3,3,3,3,3,3,1,3,1,3,6,1,0);
+INSERT INTO `mob_family_system` VALUES (479,'Behemoth-KB',27,'Behemoth',6,'Beast',6,60,110,90,3,3,3,3,3,3,3,1,3,1,3,6,1,0);
 INSERT INTO `mob_family_system` VALUES (480,'Zeid',86,'Humanoid',13,'Humanoid',0,40,120,100,3,4,1,5,5,4,6,1,3,1,3,0,6,0);
 INSERT INTO `mob_family_system` VALUES (481,'Ajido-Marujido',86,'Humanoid',13,'Humanoid',0,40,70,140,6,4,5,3,1,5,4,1,3,1,3,0,3,0);
 INSERT INTO `mob_family_system` VALUES (482,'Volker',86,'Humanoid',13,'Humanoid',0,40,90,110,4,4,4,4,4,4,4,1,3,1,3,0,1,0);

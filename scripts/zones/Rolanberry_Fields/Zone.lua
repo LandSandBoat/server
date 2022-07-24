@@ -50,6 +50,10 @@ zone_object.onGameHour = function(zone)
     end
 end
 
+zone_object.onGameDay = function()
+    SetServerVariable("[DIG]ZONE110_ITEMS", 0)
+end
+
 zone_object.onEventUpdate = function(player, csid, option)
     if csid == 2 then
         quests.rainbow.onEventUpdate(player)

@@ -260,9 +260,6 @@ local loot =
     [76] =
     {
         {
-            {itemid =  3343, droprate = 1000}, -- Blue Pondweed
-        },
-        {
             {itemid = 18047, droprate =  188}, -- Havoc Scythe
             {itemid = 17939, droprate =   27}, -- Kriegsbeil
             {itemid = 17937, droprate =  170}, -- Leopard Axe

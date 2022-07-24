@@ -13,13 +13,15 @@ local entity = {}
 entity.onMobSpawn = function(mob)
     if xi.settings.main.LandKingSystem_NQ > 0 or xi.settings.main.LandKingSystem_HQ > 0 then
         GetNPCByID(ID.npc.ADAMANTOISE_QM):setStatus(xi.status.DISAPPEAR)
+        mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
+        SetDropRate(24, 1525, 0) -- do not drop adamantoise egg
     end
     if xi.settings.main.LandKingSystem_HQ == 0 then
         SetDropRate(24, 3344, 0) -- do not drop clump_of_red_pondweed
     end
-
     mob:setMobMod(xi.mobMod.DRAW_IN, 1)
     mob:setLocalVar("[rage]timer", 1800) -- 30 minutes
+    mob:setMod(xi.mod.DMGMAGIC,-3500)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
