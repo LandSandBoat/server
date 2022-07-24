@@ -905,6 +905,7 @@ enum class Mod
     PET_DMG_TAKEN_PHYSICAL = 1154, // Percent increase/decrease in pet physical damage taken for the target.
     PET_DMG_TAKEN_MAGICAL  = 1155, // Percent increase/decrease in pet physical damage taken for the target.
     PET_DMG_TAKEN_BREATH   = 1156, // Percent increase/decrease in pet physical damage taken for the target.
+    DIG_BYPASS_FATIGUE     = 1157, // Chocobo digging modifier found in "Blue Race Silks". Modifier works as a direct percent. Used in Chocobo_Digging.lua
 
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/globals/status.lua ASWELL!
 
@@ -922,7 +923,7 @@ enum class Mod
     // 888
     // 936
     //
-    // SPARE = 1157, and onward
+    // SPARE = 1158, and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it
