@@ -57,7 +57,6 @@
 #include "../map.h"
 #include "../mob_modifier.h"
 #include "../mobskill.h"
-#include "../petskill.h"
 #include "../modifier.h"
 #include "../notoriety_container.h"
 #include "../packets/char_sync.h"
@@ -65,6 +64,7 @@
 #include "../packets/pet_sync.h"
 #include "../packets/position.h"
 #include "../party.h"
+#include "../petskill.h"
 #include "../recast_container.h"
 #include "../spell.h"
 #include "../status_effect_container.h"
@@ -85,7 +85,7 @@ std::array<std::array<uint8, MAX_JOBTYPE>, MAX_SKILLTYPE>                       
 std::array<std::array<uint16, MAX_SKILLCHAIN_COUNT + 1>, MAX_SKILLCHAIN_LEVEL + 1> g_SkillChainDamageModifiers;
 
 std::array<CWeaponSkill*, MAX_WEAPONSKILL_ID> g_PWeaponSkillList; // Holds all Weapon skills
-std::array<CMobSkill*,    MAX_MOBSKILL_ID>    g_PMobSkillList;    // List of mob skills
+std::array<CMobSkill*, MAX_MOBSKILL_ID>       g_PMobSkillList;    // List of mob skills
 std::unordered_map<uint8, CPetSkill*>         g_PPetSkillList;    // List of pet skills
 
 std::array<std::list<CWeaponSkill*>, MAX_SKILLTYPE> g_PWeaponSkillsList;
@@ -484,7 +484,7 @@ namespace battleutils
         }
     }
 
-     /************************************************************************
+    /************************************************************************
      *                                                                       *
      *  Get Pet Skill by Id                                                  *
      *                                                                       *

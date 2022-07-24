@@ -10,10 +10,11 @@ ability_object.onAbilityCheck = function(player, target, ability)
     return xi.job_utils.summoner.canUseBloodPact(player, player:getPet(), target, ability)
 end
 
+-- http://wiki.ffo.jp/html/37926.html
 ability_object.onPetAbility = function(target, pet, petskill)
     local numhits = 1
     local accmod = 1
-    local dmgmod = 2.5
+    local dmgmod = 3.0
 
     local totaldamage = 0
 

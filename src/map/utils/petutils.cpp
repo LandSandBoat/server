@@ -1272,7 +1272,7 @@ namespace petutils
                 cost = 13;
             }
         }
-        else if ( (id>= PETID_IFRIT && id <= PETID_DIABOLOS) || id == PETID_SIREN)
+        else if ((id >= PETID_IFRIT && id <= PETID_DIABOLOS) || id == PETID_SIREN)
         {
             if (level < 10)
             {

@@ -32,10 +32,10 @@
 #include "../mob_spell_list.h"
 #include "../packets/entity_update.h"
 #include "../packets/pet_sync.h"
+#include "../status_effect_container.h"
 #include "../utils/battleutils.h"
 #include "../utils/mobutils.h"
 #include "../utils/petutils.h"
-#include "../status_effect_container.h"
 
 #include "common/utils.h"
 #include "petentity.h"
@@ -278,9 +278,9 @@ void CPetEntity::OnPetSkillFinished(CPetSkillState& state, action_t& action)
         findFlags |= FINDFLAGS_PET;
     }
 
-    action.id = id;
+    action.id         = id;
     action.actiontype = (ACTIONTYPE)PSkill->getSkillFinishCategory();
-    action.actionid = PSkill->getID();
+    action.actionid   = PSkill->getID();
 
     if (PAI->TargetFind->isWithinRange(&PTarget->loc.p, distance))
     {
@@ -348,7 +348,6 @@ void CPetEntity::OnPetSkillFinished(CPetSkillState& state, action_t& action)
         int32 damage = 0;
 
         target.animation = PSkill->getAnimationID();
-
 
         /* if (petType == PET_TYPE::AUTOMATON) // TODO: figure out Automaton
         {

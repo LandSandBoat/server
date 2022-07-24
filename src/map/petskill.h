@@ -85,12 +85,11 @@ public:
     void setTertiarySkillchain(uint8 skillchain);
 
     const std::string getName() const;
-    void              setName(std::string name);
+    void              setName(const std::string& name);
 
 private:
-
     uint16      m_ID;
-    uint16      m_AnimID;            // animation id
+    uint16      m_AnimID; // animation id
     std::string m_name;
     uint8       m_Aoe;
     float       m_Distance;
@@ -106,9 +105,9 @@ private:
     uint8       m_secondarySkillchain;
     uint8       m_tertiarySkillchain;
 
-    int16       m_TP;                // the tp at the time of finish readying (for scripts)
-    uint8       m_HPP;               // HPP at the time of using mob skill (for scripts)
-    uint16      m_TotalTargets;
+    int16  m_TP;  // the tp at the time of finish readying (for scripts)
+    uint8  m_HPP; // HPP at the time of using mob skill (for scripts)
+    uint16 m_TotalTargets;
 };
 
 #endif

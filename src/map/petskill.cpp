@@ -128,7 +128,7 @@ const std::string CPetSkill::getName() const
     return m_name;
 }
 
-void CPetSkill::setName(std::string name)
+void CPetSkill::setName(const std::string& name)
 {
     m_name = name;
 }
@@ -184,7 +184,6 @@ uint16 CPetSkill::getAnimationID() const
     return m_AnimID;
 }
 
-
 int16 CPetSkill::getTP() const
 {
     return m_TP;
@@ -210,7 +209,6 @@ uint8 CPetSkill::getSkillFinishCategory() const
 {
     return m_SkillFinishCategory;
 }
-
 
 uint16 CPetSkill::getMsgForAction() const
 {

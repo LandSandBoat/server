@@ -11,7 +11,6 @@ xi.job_utils = xi.job_utils or {}
 xi.job_utils.summoner = xi.job_utils.summoner or {}
 -----------------------------------
 
-
 -- sort of a misnomer, as if Apogee is up, the "base" mp cost rises.
 local function getBaseMPCost(player, abilityId)
     local baseMPCostMap =
@@ -26,7 +25,8 @@ local function getBaseMPCost(player, abilityId)
         return 9999
     end
 
-    -- Apogee, 1.5x MP cost, don't delete effect here because we need to reset BP: Ward/Rage timer
+    -- https://www.bg-wiki.com/ffxi/Apogee
+    -- Apogee, 1.5x MP cost, don't delete effect here because we need to reset BP: Ward/Rage timer upon use
     if player:hasStatusEffect(xi.effect.APOGEE) then
         baseMPCost = baseMPCost * 1.5
     end
@@ -36,18 +36,18 @@ end
 
 local function getMPCost(baseMPCost, player, petskill)
 
-    local MPCost = baseMPCost
+    local mpCost = baseMPCost
 
     -- don't proc blood boon on Astral Flow
-    if not petskill:getAddType() == ADDTYPE_ASTRAL_FLOW then
+    if petskill:getAddType() ~= xi.addType.ADDTYPE_ASTRAL_FLOW then
         local bloodBoonRate = player:getMod(xi.mod.BLOOD_BOON)
         -- assuming it works like Conserve MP... https://www.bg-wiki.com/ffxi/Conserve_MP
         if math.random(100) < bloodBoonRate then
-            MPCost = MPCost * math.random(8, 15) / 16
+            mpCost = mpCost * math.random(8, 15) / 16
         end
     end
 
-    return MPCost
+    return mpCost
 end
 
 xi.job_utils.summoner.canUseBloodPact = function(player, pet, target, ability)
@@ -59,9 +59,9 @@ xi.job_utils.summoner.canUseBloodPact = function(player, pet, target, ability)
         -- Second, if your pet is in range, but you're out of range of your pet, retail provides no message for some reason but the pet does nothing.
         -- No out of range error message is unhelpful so we are setting that message anyway.
 
-		-- TODO: The hardcoded ranges of 21/22 need to take into account mob size.
-		-- TODO: add "era" setting or setting in general for this. Era used to have a smaller range for BPs.
-		-- This is a "new" change -- https://forum.square-enix.com/ffxi/threads/48564-Sep-16-2015-%28JST%29-Version-Update
+        -- TODO: The hardcoded ranges of 21/22 need to take into account mob size.
+        -- TODO: add "era" setting or setting in general for this. Era used to have a smaller range for BPs.
+        -- This is a "new" change -- https://forum.square-enix.com/ffxi/threads/48564-Sep-16-2015-%28JST%29-Version-Update
         -- TODO: verify who/what is "out of range" for out of range messages
 
         -- check if target is too far from pet for ability
@@ -75,7 +75,7 @@ xi.job_utils.summoner.canUseBloodPact = function(player, pet, target, ability)
         end
 
         -- check if player is too far from target
-		if target:checkDistance(player) >= 22 then
+        if target:checkDistance(player) >= 22 then
             return xi.msg.basic.TARG_OUT_OF_RANGE, 0
         end
 
@@ -96,13 +96,12 @@ xi.job_utils.onUseBloodPact = function(player, pet, target, petskill)
     local bloodPactAbility = GetAbility(petskill:getID()) -- Player abilities and Avatar abilities are mapped 1:1
 
     local baseMPCost = getBaseMPCost(player, bloodPactAbility:getID())
-    local MPCost = getMPCost(baseMPCost, player, bloodPactAbility)
+    local mpCost = getMPCost(baseMPCost, player, bloodPactAbility)
 
     if player:hasStatusEffect(xi.effect.APOGEE) then
-        print(bloodPactAbility:getRecastID())
         player:resetRecast(xi.recast.ABILITY, bloodPactAbility:getRecastID())
         player:delStatusEffect(xi.effect.APOGEE)
     end
 
-    player:delMP(MPCost)
+    player:delMP(mpCost)
 end

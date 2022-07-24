@@ -71,7 +71,6 @@
 #include "../map.h"
 #include "../message.h"
 #include "../mobskill.h"
-#include "../petskill.h"
 #include "../packets/action.h"
 #include "../packets/char_emotion.h"
 #include "../packets/char_update.h"
@@ -79,6 +78,7 @@
 #include "../packets/entity_visual.h"
 #include "../packets/menu_raisetractor.h"
 #include "../party.h"
+#include "../petskill.h"
 #include "../roe.h"
 #include "../spell.h"
 #include "../status_effect_container.h"
@@ -3811,7 +3811,6 @@ namespace luautils
             ShowError("luautils::onPetAbility: %s", err.what());
             return 0;
         }
-
 
         if (PPet->getPetType() == PET_TYPE::AVATAR && PPet->PMaster->objtype == TYPE_PC)
         {
