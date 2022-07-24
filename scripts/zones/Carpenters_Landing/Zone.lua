@@ -16,8 +16,10 @@ zone_object.onChocoboDig = function(player, precheck)
 end
 
 zone_object.onInitialize = function(zone)
-    UpdateNMSpawnPoint(ID.mob.TEMPEST_TIGON)
-    GetMobByID(ID.mob.TEMPEST_TIGON):setRespawnTime(math.random(900, 10800))
+    if xi.settings.main.ENABLE_WOTG == 1 then
+        UpdateNMSpawnPoint(ID.mob.TEMPEST_TIGON)
+        GetMobByID(ID.mob.TEMPEST_TIGON):setRespawnTime(math.random(900, 10800))
+    end
 
     xi.helm.initZone(zone, xi.helm.type.LOGGING)
     func.herculesTreeOnGameHour()
