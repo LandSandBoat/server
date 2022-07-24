@@ -355,7 +355,9 @@ namespace zoneutils
         mob_pools.entityFlags, mob_pools.animationsub, (mob_family_system.HP / 100) AS mobFamilyHP, (mob_family_system.MP / 100) AS mobFamilyMP, \
         mob_pools.hasSpellScript, mob_pools.spellList, mob_groups.poolid, mob_groups.allegiance, mob_pools.namevis, mob_pools.aggro, \
         mob_pools.roamflag, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects, mob_family_system.charmable, \
-        mob_groups.content_tag \
+        mob_groups.content_tag, \
+        mob_resistances.fire_eem, mob_resistances.ice_eem, mob_resistances.wind_eem, mob_resistances.earth_eem, mob_resistances.lightning_eem, mob_resistances.water_eem, \
+        mob_resistances.light_eem, mob_resistances.dark_eem \
         FROM mob_groups INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid \
         INNER JOIN mob_resistances ON mob_resistances.resist_id = mob_pools.resist_id \
         INNER JOIN mob_spawn_points ON mob_groups.groupid = mob_spawn_points.groupid \
@@ -489,6 +491,15 @@ namespace zoneutils
                     PMob->setModifier(Mod::WATER_SDT, (int16)sql->GetIntData(47));   // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
                     PMob->setModifier(Mod::LIGHT_SDT, (int16)sql->GetIntData(48));   // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
                     PMob->setModifier(Mod::DARK_SDT, (int16)sql->GetIntData(49));    // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
+
+                    PMob->setModifier(Mod::FIRE_EEM, (int16)sql->GetIntData(78));    // Modifier 1157, base 100 stored as signed integer. Positives signify modified meva for that element.
+                    PMob->setModifier(Mod::ICE_EEM, (int16)sql->GetIntData(79));     // Modifier 1158, base 100 stored as signed integer. Positives signify modified meva for that element.
+                    PMob->setModifier(Mod::WIND_EEM, (int16)sql->GetIntData(80));    // Modifier 1159, base 100 stored as signed integer. Positives signify modified meva for that element.
+                    PMob->setModifier(Mod::EARTH_EEM, (int16)sql->GetIntData(81));   // Modifier 1160, base 100 stored as signed integer. Positives signify modified meva for that element.
+                    PMob->setModifier(Mod::THUNDER_EEM, (int16)sql->GetIntData(82)); // Modifier 1161, base 100 stored as signed integer. Positives signify modified meva for that element.
+                    PMob->setModifier(Mod::WATER_EEM, (int16)sql->GetIntData(83));   // Modifier 1162, base 100 stored as signed integer. Positives signify modified meva for that element.
+                    PMob->setModifier(Mod::LIGHT_EEM, (int16)sql->GetIntData(84));   // Modifier 1163, base 100 stored as signed integer. Positives signify modified meva for that element.
+                    PMob->setModifier(Mod::DARK_EEM, (int16)sql->GetIntData(85));    // Modifier 1164, base 100 stored as signed integer. Positives signify modified meva for that element.
 
                     PMob->setModifier(Mod::FIRE_MEVA, (int16)(sql->GetIntData(50))); // These are stored as signed integers which
                     PMob->setModifier(Mod::ICE_MEVA, (int16)(sql->GetIntData(51)));  // is directly the modifier starting value.
