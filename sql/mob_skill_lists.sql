@@ -3819,7 +3819,9 @@ INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1169,1723);
 INSERT INTO `mob_skill_lists` VALUES('Supplespine_Mujwuj', 1176, 1064);
 INSERT INTO `mob_skill_lists` VALUES('Supplespine_Mujwuj', 1176, 609);
 
--- Next available ID: 1176
+INSERT INTO `mob_skill_lists` VALUES('Infernal_Swarm',1177,334); -- sharp_sting
+INSERT INTO `mob_skill_lists` VALUES('Infernal_Swarm',1177,335); -- pollen
+-- Next available ID: 1178
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section
