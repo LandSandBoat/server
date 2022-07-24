@@ -907,6 +907,15 @@ enum class Mod
     PET_DMG_TAKEN_BREATH   = 1156, // Percent increase/decrease in pet physical damage taken for the target.
     DIG_BYPASS_FATIGUE     = 1157, // Chocobo digging modifier found in "Blue Race Silks". Modifier works as a direct percent. Used in Chocobo_Digging.lua
 
+    FIRE_EEM    = 1158, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    ICE_EEM     = 1159, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    WIND_EEM    = 1160, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    EARTH_EEM   = 1161, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    THUNDER_EEM = 1162, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    WATER_EEM   = 1163, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    LIGHT_EEM   = 1164, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    DARK_EEM    = 1165, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/globals/status.lua ASWELL!
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
@@ -923,7 +932,7 @@ enum class Mod
     // 888
     // 936
     //
-    // SPARE = 1158, and onward
+    // SPARE = 1166, and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

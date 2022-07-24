@@ -31,6 +31,7 @@ xi.magic.singleWeatherWeak   = { xi.weather.RAIN,              xi.weather.HOT_SP
 xi.magic.doubleWeatherWeak   = { xi.weather.SQUALL,            xi.weather.HEAT_WAVE,        xi.weather.BLIZZARDS,          xi.weather.GALES,              xi.weather.SAND_STORM,             xi.weather.THUNDERSTORMS,       xi.weather.DARKNESS,        xi.weather.STELLAR_GLARE  }
 xi.magic.resistMod           = { xi.mod.FIRE_MEVA,             xi.mod.ICE_MEVA,             xi.mod.WIND_MEVA,              xi.mod.EARTH_MEVA,             xi.mod.THUNDER_MEVA,               xi.mod.WATER_MEVA,              xi.mod.LIGHT_MEVA,          xi.mod.DARK_MEVA          }
 xi.magic.specificDmgTakenMod = { xi.mod.FIRE_SDT,              xi.mod.ICE_SDT,              xi.mod.WIND_SDT,               xi.mod.EARTH_SDT,              xi.mod.THUNDER_SDT,                xi.mod.WATER_SDT,               xi.mod.LIGHT_SDT,           xi.mod.DARK_SDT           }
+xi.magic.eleEvaMult          = { xi.mod.FIRE_EEM,              xi.mod.ICE_EEM,              xi.mod.WIND_EEM,               xi.mod.EARTH_EEM,              xi.mod.THUNDER_EEM,                xi.mod.WATER_EEM,               xi.mod.LIGHT_EEM,           xi.mod.DARK_EEM}
 xi.magic.absorbMod           = { xi.mod.FIRE_ABSORB,           xi.mod.ICE_ABSORB,           xi.mod.WIND_ABSORB,            xi.mod.EARTH_ABSORB,           xi.mod.LTNG_ABSORB,                xi.mod.WATER_ABSORB,            xi.mod.LIGHT_ABSORB,        xi.mod.DARK_ABSORB        }
 xi.magic.barSpell            = { xi.effect.BARFIRE,            xi.effect.BARBLIZZARD,       xi.effect.BARAERO,             xi.effect.BARSTONE,            xi.effect.BARTHUNDER,              xi.effect.BARWATER              }
 
@@ -417,7 +418,7 @@ end
 
 -- This function is used to calculate Resist tiers. The resist tiers work differently for enfeebles (which usually affect duration, not potency) than for nukes.
 -- This is for nukes damage only. If an spell happens to do both damage and apply an status effect, they are calculated separately.
-xi.spells.damage.calculateResist = function(caster, target, spell, skillType, spellElement, statDiff, bonusMagicAccuracy)
+xi.spells.damage.calculateResist = function(caster, target, spell, skillType, spellElement, statDiff, bonusMagicAccuracy, element)
     local resist        = 1 -- The variable we want to calculate
     local casterJob     = caster:getMainJob()
     local casterWeather = caster:getWeather()
@@ -624,20 +625,44 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
     -----------------------------------
     -- STEP 4: Get Resist Tier
     -----------------------------------
-    local resistTier = 0
-    local randomVar  = math.random()
+    local evaMult = 1
 
-    for tierVar = 3, 1, -1 do
-        if randomVar <= (1 - magicHitRate / 100) ^ tierVar then
-            resistTier = tierVar
-            break
+    if target:getObjType() == xi.objType.MOB then
+        evaMult = target:getMod(xi.magic.eleEvaMult[element]) / 100
+        local sortEvaMult = {1.50, 1.30, 1.15, 1.00, 0.85, 0.70, 0.60, 0.50, 0.40, 0.30, 0.25, 0.20, 0.15, 0.10,}
+        for _, tier in pairs(sortEvaMult) do -- Finds the highest tier for the resist. We sort just to be safe.
+            if evaMult >= tier then
+                evaMult = tier
+                target:setLocalVar("[MagicBurst]Resist_Tier", tier)
+                break
+            end
         end
     end
 
-    resistTier = utils.clamp(resistTier, 0, 3)
-    resist     = 1 / (2 ^ resistTier)
+    local p = utils.clamp(((magicHitRate * evaMult) / 100), 0.05, 3.00) -- clamp at minimum 0.05, clamp at max of 3.0 to be safe
+    local resistVal = 1
 
-    return resist
+    -- Resistance thresholds based on p.  A higher p leads to lower resist rates, and a lower p leads to higher resist rates.
+    local half     = (1 - p)
+    local quart     = ((1 - p)^2)
+    local eighth    = ((1 - p)^3)
+    local sixteenth = ((1 - p)^4)
+    local resvar    = math.random()
+
+    -- Determine final resist based on which thresholds have been crossed.
+    if resvar <= sixteenth then
+        resistVal = 0.0625
+    elseif resvar <= eighth then
+        resistVal = 0.125
+    elseif resvar <= quart then
+        resistVal = 0.25
+    elseif resvar <= half then
+        resistVal = 0.5
+    else
+        resistVal = 1.0
+    end
+
+    return resistVal
 end
 
 xi.spells.damage.calculateIfMagicBurst = function(caster, target, spell, spellElement)
@@ -646,6 +671,25 @@ xi.spells.damage.calculateIfMagicBurst = function(caster, target, spell, spellEl
 
     if skillchainCount > 0 then
         magicBurst = 1.25 + (0.1 * skillchainCount) -- Here we add SDT DAMAGE bonus for magic bursts aswell, once SDT is implemented. https://www.bg-wiki.com/ffxi/Resist#SDT_and_Magic_Bursting
+    end
+
+    if target:getObjType() == xi.objType.MOB then
+        local resTier = target:getLocalVar("[MagicBurst]Resist_Tier")
+        local resTierBonusLookup =
+        {
+            [1.50] = 1.50,
+            [1.30] = 1.15,
+            [1.15] = 0.85,
+            [1.00] = 0.60,
+            [0.85] = 0.50,
+            [0.70] = 0.40,
+            [0.60] = 0.15,
+            [0.50] = 0.05,
+        }
+
+        if resTierBonusLookup[resTier] ~= nil then
+            magicBurst = magicBurst + (magicBurst * resTierBonusLookup[resTier])
+        end
     end
 
     return magicBurst
@@ -934,7 +978,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     local eleStaffBonus               = xi.spells.damage.calculateEleStaffBonus(caster, spell, spellElement)
     local magianAffinity              = xi.spells.damage.calculateMagianAffinity(caster, spell)
     local sdt                         = xi.spells.damage.calculateSDT(caster, target, spell, spellElement)
-    local resist                      = xi.spells.damage.calculateResist(caster, target,  spell, skillType, spellElement, statDiff, 0)
+    local resist                      = xi.spells.damage.calculateResist(caster, target,  spell, skillType, spellElement, statDiff, 0, spellElement)
     local magicBurst                  = xi.spells.damage.calculateIfMagicBurst(caster, target,  spell, spellElement)
     local magicBurstBonus             = xi.spells.damage.calculateIfMagicBurstBonus(caster, target, spell, spellId, spellElement)
     local dayAndWeather               = xi.spells.damage.calculateDayAndWeather(caster, target, spell, spellId, spellElement)
