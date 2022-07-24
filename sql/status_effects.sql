@@ -461,7 +461,7 @@ INSERT INTO `status_effects` VALUES (431,'avatars_favor',171966753,0,0,0,0,0,0,0
 INSERT INTO `status_effects` VALUES (432,'multi_strikes',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (433,'double_shot',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (434,'transcendency',256,0,0,0,0,0,0,0,0);
-INSERT INTO `status_effects` VALUES (435,'restraint',32,0,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (435,'restraint',5243168,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (436,'perfect_counter',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (437,'mana_wall',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (438,'divine_emblem',32,0,0,0,0,0,0,0,0);
