@@ -34,6 +34,7 @@ zones[xi.zone.BATALLIA_DOWNS] =
         NO_COMBINATION           = 7717,  -- You were unable to enter a combination.
         VOIDWALKER_DESPAWN       = 7748,  -- The monster fades before your eyes, a look of disappointment on its face.
         REGIME_REGISTERED        = 9995,  -- New training regime registered!
+        SEE_WEATHERED_GRAVESTONE = 11335, -- You see a weathered gravestone.
         VOIDWALKER_NO_MOB        = 11336, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
         VOIDWALKER_MOB_TOO_FAR   = 11337, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
         VOIDWALKER_MOB_HINT      = 11338, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
