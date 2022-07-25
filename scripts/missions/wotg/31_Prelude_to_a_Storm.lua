@@ -39,8 +39,14 @@ mission.sections =
 
         [xi.zone.XARCABARD_S] =
         {
-            -- TODO: This might need to be messageName to correct formatting.
-            ['Rally_Point_Red'] = mission:messageSpecial(pastXarcabardID.text.REQUIRED_TO_DELIVER),
+            ['Rally_Point_Red'] =
+            {
+                onTrigger = function(player, npc)
+                    player:messageName(pastXarcabardID.text.REQUIRED_TO_DELIVER, nil)
+
+                    return mission:noAction()
+                end,
+            },
 
             ['Rally_Point_Green'] =
             {
@@ -51,7 +57,9 @@ mission.sections =
                         return mission:progressEvent(21, 137, 300, 200, 100, 0, 6553620, 0, 0)
                     elseif missionStatus == 1 then
                         if player:hasKeyItem(xi.ki.MAGELIGHT_SIGNAL_FLARE) then
-                            return mission:messageSpecial(pastXarcabardID.text.HELP_FEDERATION_PREPARE)
+                            player:messageName(pastXarcabardID.text.HELP_FEDERATION_PREPARE, nil)
+
+                            return mission:noAction()
                         else
                             return mission:progressEvent(25, 137, 23, 2963)
                         end
