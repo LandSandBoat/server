@@ -4997,7 +4997,29 @@ INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 250, 1, 255); -- ice spi
 INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 252, 1, 255); -- stun (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 253, 1, 255); -- sleep (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 274, 1, 255); -- sleepga ii (1~255)
--- Next Avail 493
+
+-- Princess Jelly (493)
+INSERT INTO `mob_spell_lists` VALUES('Princess_Jelly', 493, 235, 1, 255); -- burn (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Princess_Jelly', 493, 144, 1, 255); -- fire (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Princess_Jelly', 493, 240, 1, 255); -- drown (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Princess_Jelly', 493, 169, 1, 255); -- water (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Princess_Jelly', 493, 239, 1, 255); -- shock (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Princess_Jelly', 493, 164, 1, 255); -- thunder (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Princess_Jelly', 493, 238, 1, 255); -- rasp (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Princess_Jelly', 493, 159, 1, 255); -- stone (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Princess_Jelly', 493, 237, 1, 255); -- choke (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Princess_Jelly', 493, 154, 1, 255); -- aero (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Princess_Jelly', 493, 236, 1, 255); -- frost (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Princess_Jelly', 493, 149, 1, 255); -- blizzard (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Princess_Jelly', 493, 230, 1, 255); -- bio (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Princess_Jelly', 493, 245, 1, 255); -- drain (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Princess_Jelly', 493, 23, 1, 255);  -- dia (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Princess_Jelly', 493, 28, 1, 255);  -- banish (1~255)
+
+-- Queen Jelly (494)
+INSERT INTO `mob_spell_lists` VALUES('Queen_Jelly', 494, 174, 1, 255); -- firaga (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Queen_Jelly', 494, 199, 1, 255); -- waterga (1~255)
+-- Next Avail (495)
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;
