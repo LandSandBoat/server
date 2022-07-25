@@ -36,6 +36,7 @@ namespace PacketGuard
         allowList[SUBSTATE_IN_CS][0x01A] = true; // Player Action
         allowList[SUBSTATE_IN_CS][0x03A] = true; // Sort Inventory
         allowList[SUBSTATE_IN_CS][0x053] = true; // LockStyleSet
+        allowList[SUBSTATE_IN_CS][0x058] = true; // Synthesis Suggestion
         allowList[SUBSTATE_IN_CS][0x05A] = true; // Map Update (Conquest, Besieged, Campaign)
         allowList[SUBSTATE_IN_CS][0x05B] = true; // Event Update (Completion or Update)
         allowList[SUBSTATE_IN_CS][0x05C] = true; // Event Update (Update Player Position)

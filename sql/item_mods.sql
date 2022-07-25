@@ -4744,11 +4744,12 @@ INSERT INTO `item_mods` VALUES (11083,569,10); -- EBULLIENCE_AMOUNT: 10
 INSERT INTO `item_mods` VALUES (11083,838,10); -- REGEN_MULTIPLIER: 10
 
 -- Ravagers Lorica +2
-INSERT INTO `item_mods` VALUES (11084,1,68);  -- DEF: 68
-INSERT INTO `item_mods` VALUES (11084,23,20); -- ATT: 20
-INSERT INTO `item_mods` VALUES (11084,25,20); -- ACC: 20
-INSERT INTO `item_mods` VALUES (11084,73,8);  -- STORETP: 8
-INSERT INTO `item_mods` VALUES (11084,85,7);  -- GAXE: 7
+INSERT INTO `item_mods` VALUES (11084,1,68);    -- DEF: 68
+INSERT INTO `item_mods` VALUES (11084,23,20);   -- ATT: 20
+INSERT INTO `item_mods` VALUES (11084,25,20);   -- ACC: 20
+INSERT INTO `item_mods` VALUES (11084,73,8);    -- STORETP: 8
+INSERT INTO `item_mods` VALUES (11084,85,7);    -- GAXE: 7
+INSERT INTO `item_mods` VALUES (11084,1046,30); -- ENHANCES_BLOOD_RAGE: 30
 
 -- Tantra Cyclas +2
 INSERT INTO `item_mods` VALUES (11085,1,64);  -- DEF: 64
@@ -4895,11 +4896,12 @@ INSERT INTO `item_mods` VALUES (11103,337,20); -- DARK_ARTS_SKILL: 20
 INSERT INTO `item_mods` VALUES (11103,369,1);  -- REFRESH: 1
 
 -- Ravagers Mufflers +2
-INSERT INTO `item_mods` VALUES (11104,1,32);  -- DEF: 32
-INSERT INTO `item_mods` VALUES (11104,8,9);   -- STR: 9
-INSERT INTO `item_mods` VALUES (11104,9,9);   -- DEX: 9
-INSERT INTO `item_mods` VALUES (11104,25,12); -- ACC: 12
-INSERT INTO `item_mods` VALUES (11104,84,5);  -- AXE: 5
+INSERT INTO `item_mods` VALUES (11104,1,32);     -- DEF: 32
+INSERT INTO `item_mods` VALUES (11104,8,9);      -- STR: 9
+INSERT INTO `item_mods` VALUES (11104,9,9);      -- DEX: 9
+INSERT INTO `item_mods` VALUES (11104,25,12);    -- ACC: 12
+INSERT INTO `item_mods` VALUES (11104,84,5);     -- AXE: 5
+INSERT INTO `item_mods` VALUES (11104,1045,100); -- ENHANCES_RESTRAINT: 100
 
 -- Tantra Gloves +2
 INSERT INTO `item_mods` VALUES (11105,1,27);    -- DEF: 27
@@ -5439,11 +5441,12 @@ INSERT INTO `item_mods` VALUES (11183,568,5); -- RAPTURE_AMOUNT: 5
 INSERT INTO `item_mods` VALUES (11183,569,5); -- EBULLIENCE_AMOUNT: 5
 
 -- Ravagers Lorica +1
-INSERT INTO `item_mods` VALUES (11184,1,65);  -- DEF: 65
-INSERT INTO `item_mods` VALUES (11184,23,15); -- ATT: 15
-INSERT INTO `item_mods` VALUES (11184,25,15); -- ACC: 15
-INSERT INTO `item_mods` VALUES (11184,73,5);  -- STORETP: 5
-INSERT INTO `item_mods` VALUES (11184,85,5);  -- GAXE: 5
+INSERT INTO `item_mods` VALUES (11184,1,65);    -- DEF: 65
+INSERT INTO `item_mods` VALUES (11184,23,15);   -- ATT: 15
+INSERT INTO `item_mods` VALUES (11184,25,15);   -- ACC: 15
+INSERT INTO `item_mods` VALUES (11184,73,5);    -- STORETP: 5
+INSERT INTO `item_mods` VALUES (11184,85,5);    -- GAXE: 5
+INSERT INTO `item_mods` VALUES (11184,1046,15); -- ENHANCES_BLOOD_RAGE: 15
 
 -- Tantra Cyclas +1
 INSERT INTO `item_mods` VALUES (11185,1,61);  -- DEF: 61
@@ -5582,11 +5585,12 @@ INSERT INTO `item_mods` VALUES (11203,336,15); -- LIGHT_ARTS_SKILL: 15
 INSERT INTO `item_mods` VALUES (11203,337,15); -- DARK_ARTS_SKILL: 15
 
 -- Ravagers Mufflers +1
-INSERT INTO `item_mods` VALUES (11204,1,30); -- DEF: 30
-INSERT INTO `item_mods` VALUES (11204,8,7);  -- STR: 7
-INSERT INTO `item_mods` VALUES (11204,9,7);  -- DEX: 7
-INSERT INTO `item_mods` VALUES (11204,25,9); -- ACC: 9
-INSERT INTO `item_mods` VALUES (11204,84,3); -- AXE: 3
+INSERT INTO `item_mods` VALUES (11204,1,30);    -- DEF: 30
+INSERT INTO `item_mods` VALUES (11204,8,7);     -- STR: 7
+INSERT INTO `item_mods` VALUES (11204,9,7);     -- DEX: 7
+INSERT INTO `item_mods` VALUES (11204,25,9);    -- ACC: 9
+INSERT INTO `item_mods` VALUES (11204,84,3);    -- AXE: 3
+INSERT INTO `item_mods` VALUES (11204,1045,50); -- ENHANCES_RESTRAINT: 50
 
 -- Tantra Gloves +1
 INSERT INTO `item_mods` VALUES (11205,1,25);    -- DEF: 25
@@ -59690,6 +59694,7 @@ INSERT INTO `item_mods` VALUES (26898,68,20);   -- EVA: 20
 INSERT INTO `item_mods` VALUES (26898,73,8);    -- STORETP: 8
 INSERT INTO `item_mods` VALUES (26898,85,9);    -- GAXE: 9
 INSERT INTO `item_mods` VALUES (26898,384,300); -- HASTE_GEAR: 300
+INSERT INTO `item_mods` VALUES (26898,1046,32); -- ENHANCES_BLOOD_RAGE: 32
 
 -- Boii Lorica +1
 INSERT INTO `item_mods` VALUES (26899,1,144);   -- DEF: 144
@@ -59709,6 +59714,7 @@ INSERT INTO `item_mods` VALUES (26899,68,44);   -- EVA: 44
 INSERT INTO `item_mods` VALUES (26899,73,9);    -- STORETP: 9
 INSERT INTO `item_mods` VALUES (26899,85,11);   -- GAXE: 11
 INSERT INTO `item_mods` VALUES (26899,384,300); -- HASTE_GEAR: 300
+INSERT INTO `item_mods` VALUES (26899,1046,34); -- ENHANCES_BLOOD_RAGE: 34
 
 -- Bhikku Cyclas
 INSERT INTO `item_mods` VALUES (26900,1,90);    -- DEF: 90
@@ -61619,36 +61625,38 @@ INSERT INTO `item_mods` VALUES (27051,68,22);   -- EVA: 22
 INSERT INTO `item_mods` VALUES (27051,384,500); -- HASTE_GEAR: 500
 
 -- Boii Mufflers
-INSERT INTO `item_mods` VALUES (27052,1,71);    -- DEF: 71
-INSERT INTO `item_mods` VALUES (27052,2,12);    -- HP: 12
-INSERT INTO `item_mods` VALUES (27052,8,9);     -- STR: 9
-INSERT INTO `item_mods` VALUES (27052,9,24);    -- DEX: 24
-INSERT INTO `item_mods` VALUES (27052,10,20);   -- VIT: 20
-INSERT INTO `item_mods` VALUES (27052,11,4);    -- AGI: 4
-INSERT INTO `item_mods` VALUES (27052,12,4);    -- INT: 4
-INSERT INTO `item_mods` VALUES (27052,13,14);   -- MND: 14
-INSERT INTO `item_mods` VALUES (27052,14,10);   -- CHR: 10
-INSERT INTO `item_mods` VALUES (27052,25,12);   -- ACC: 12
-INSERT INTO `item_mods` VALUES (27052,31,21);   -- MEVA: 21
-INSERT INTO `item_mods` VALUES (27052,68,11);   -- EVA: 11
-INSERT INTO `item_mods` VALUES (27052,84,18);   -- AXE: 18
-INSERT INTO `item_mods` VALUES (27052,384,300); -- HASTE_GEAR: 300
+INSERT INTO `item_mods` VALUES (27052,1,71);     -- DEF: 71
+INSERT INTO `item_mods` VALUES (27052,2,12);     -- HP: 12
+INSERT INTO `item_mods` VALUES (27052,8,9);      -- STR: 9
+INSERT INTO `item_mods` VALUES (27052,9,24);     -- DEX: 24
+INSERT INTO `item_mods` VALUES (27052,10,20);    -- VIT: 20
+INSERT INTO `item_mods` VALUES (27052,11,4);     -- AGI: 4
+INSERT INTO `item_mods` VALUES (27052,12,4);     -- INT: 4
+INSERT INTO `item_mods` VALUES (27052,13,14);    -- MND: 14
+INSERT INTO `item_mods` VALUES (27052,14,10);    -- CHR: 10
+INSERT INTO `item_mods` VALUES (27052,25,12);    -- ACC: 12
+INSERT INTO `item_mods` VALUES (27052,31,21);    -- MEVA: 21
+INSERT INTO `item_mods` VALUES (27052,68,11);    -- EVA: 11
+INSERT INTO `item_mods` VALUES (27052,84,18);    -- AXE: 18
+INSERT INTO `item_mods` VALUES (27052,384,300);  -- HASTE_GEAR: 300
+INSERT INTO `item_mods` VALUES (27052,1045,100); -- ENHANCES_RESTRAINT: 100
 
 -- Boii Mufflers +1
-INSERT INTO `item_mods` VALUES (27053,1,100);   -- DEF: 100
-INSERT INTO `item_mods` VALUES (27053,2,27);    -- HP: 27
-INSERT INTO `item_mods` VALUES (27053,8,12);    -- STR: 12
-INSERT INTO `item_mods` VALUES (27053,9,36);    -- DEX: 36
-INSERT INTO `item_mods` VALUES (27053,10,32);   -- VIT: 32
-INSERT INTO `item_mods` VALUES (27053,11,7);    -- AGI: 7
-INSERT INTO `item_mods` VALUES (27053,12,6);    -- INT: 6
-INSERT INTO `item_mods` VALUES (27053,13,23);   -- MND: 23
-INSERT INTO `item_mods` VALUES (27053,14,16);   -- CHR: 16
-INSERT INTO `item_mods` VALUES (27053,25,20);   -- ACC: 20
-INSERT INTO `item_mods` VALUES (27053,31,32);   -- MEVA: 32
-INSERT INTO `item_mods` VALUES (27053,68,24);   -- EVA: 24
-INSERT INTO `item_mods` VALUES (27053,84,21);   -- AXE: 21
-INSERT INTO `item_mods` VALUES (27053,384,400); -- HASTE_GEAR: 400
+INSERT INTO `item_mods` VALUES (27053,1,100);    -- DEF: 100
+INSERT INTO `item_mods` VALUES (27053,2,27);     -- HP: 27
+INSERT INTO `item_mods` VALUES (27053,8,12);     -- STR: 12
+INSERT INTO `item_mods` VALUES (27053,9,36);     -- DEX: 36
+INSERT INTO `item_mods` VALUES (27053,10,32);    -- VIT: 32
+INSERT INTO `item_mods` VALUES (27053,11,7);     -- AGI: 7
+INSERT INTO `item_mods` VALUES (27053,12,6);     -- INT: 6
+INSERT INTO `item_mods` VALUES (27053,13,23);    -- MND: 23
+INSERT INTO `item_mods` VALUES (27053,14,16);    -- CHR: 16
+INSERT INTO `item_mods` VALUES (27053,25,20);    -- ACC: 20
+INSERT INTO `item_mods` VALUES (27053,31,32);    -- MEVA: 32
+INSERT INTO `item_mods` VALUES (27053,68,24);    -- EVA: 24
+INSERT INTO `item_mods` VALUES (27053,84,21);    -- AXE: 21
+INSERT INTO `item_mods` VALUES (27053,384,400);  -- HASTE_GEAR: 400
+INSERT INTO `item_mods` VALUES (27053,1045,110); -- ENHANCES_RESTRAINT: 110
 
 -- Bhikku Gloves
 INSERT INTO `item_mods` VALUES (27054,1,63);    -- DEF: 63

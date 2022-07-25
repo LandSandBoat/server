@@ -36,6 +36,7 @@
 #include "lua_instance.h"
 #include "lua_item.h"
 #include "lua_mobskill.h"
+#include "lua_petskill.h"
 #include "lua_region.h"
 #include "lua_spell.h"
 #include "lua_statuseffect.h"
@@ -77,6 +78,7 @@
 #include "../packets/entity_visual.h"
 #include "../packets/menu_raisetractor.h"
 #include "../party.h"
+#include "../petskill.h"
 #include "../roe.h"
 #include "../spell.h"
 #include "../status_effect_container.h"
@@ -204,6 +206,7 @@ namespace luautils
         CLuaBattlefield::Register();
         CLuaInstance::Register();
         CLuaMobSkill::Register();
+        CLuaPetSkill::Register();
         CLuaRegion::Register();
         CLuaSpell::Register();
         CLuaStatusEffect::Register();
@@ -3783,6 +3786,38 @@ namespace luautils
                 {
                     charutils::TrySkillUP(PMaster, SKILL_SUMMONING_MAGIC, PMaster->GetMLevel());
                 }
+            }
+        }
+
+        return result.get_type(0) == sol::type::number ? result.get<int32>(0) : 0;
+    }
+
+    int32 OnPetAbility(CBaseEntity* PTarget, CPetEntity* PPet, CPetSkill* PPetSkill, CBaseEntity* PMobMaster, action_t* action)
+    {
+        TracyZoneScoped;
+
+        std::string filename = fmt::format("./scripts/globals/abilities/pets/{}.lua", PPetSkill->getName());
+
+        sol::function onPetAbility = GetCacheEntryFromFilename(filename)["onPetAbility"];
+        if (!onPetAbility.valid())
+        {
+            return 0;
+        }
+
+        auto result = onPetAbility(CLuaBaseEntity(PTarget), CLuaBaseEntity(PPet), CLuaPetSkill(PPetSkill), CLuaBaseEntity(PMobMaster), CLuaAction(action));
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onPetAbility: %s", err.what());
+            return 0;
+        }
+
+        if (PPet->getPetType() == PET_TYPE::AVATAR && PPet->PMaster->objtype == TYPE_PC)
+        {
+            CCharEntity* PMaster = (CCharEntity*)PPet->PMaster;
+            if (PMaster->GetMJob() == JOB_SMN)
+            {
+                charutils::TrySkillUP(PMaster, SKILL_SUMMONING_MAGIC, PMaster->GetMLevel());
             }
         }
 
