@@ -1272,7 +1272,8 @@ namespace petutils
                 cost = 13;
             }
         }
-        else if ((id >= PETID_IFRIT && id <= PETID_DIABOLOS) || id == PETID_SIREN)
+        // NOTE: This condition covers PETID_IFRIT through the below conditions
+        else if (id <= PETID_DIABOLOS || id == PETID_SIREN)
         {
             if (level < 10)
             {
