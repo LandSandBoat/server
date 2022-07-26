@@ -7093,6 +7093,11 @@ INSERT INTO `mob_pools` VALUES (7039,'Ixzdei_RDM','Ixzdei',272,0x000086040000000
 INSERT INTO `mob_pools` VALUES (7040,'Hastatus_XIII-XXV','Hastatus_XIII-XXV',25,0x0000EF0400000000000000000000000000000000,1,1,5,265,100,0,1,0,1,0,0,0,0,1155,0,0,0,0,0,25,25); -- Was missing somehow?
 -- Garrison NPCs
 INSERT INTO `mob_pools` VALUES (7041,'Garrison','Garrison',145,0x0000B70400000000000000000000000000000000,1,1,1,220,100,0,0,0,0,0,0,8,0,129,0,0,0,2,0,0,145); -- We only need 1 now
+-- Pulling the Plug ENM
+INSERT INTO `mob_pools` VALUES (7042,'Memory_Receptacle_red','Memory_Receptacle',181,0x00005104,1,1,7,240,100,0,1,1,0,16,0,0,6,131,0,0,0,0,0,181,181);
+INSERT INTO `mob_pools` VALUES (7043,'Memory_Receptacle_blue','Memory_Receptacle',507,0x00005004,1,1,7,240,100,0,0,0,0,16,0,0,6,131,0,0,0,0,0,181,181);
+INSERT INTO `mob_pools` VALUES (7044,'Memory_Receptacle_green','Memory_Receptacle',507,0x00004F04,1,1,7,240,100,0,0,0,0,16,0,0,6,131,0,0,0,0,0,181,181);
+INSERT INTO `mob_pools` VALUES (7045,'Memory_Receptacle_teal','Memory_Receptacle',507,0x00004E04,1,1,7,240,100,0,0,0,0,16,0,0,6,131,0,0,0,0,0,181,181);
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section
