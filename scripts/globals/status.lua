@@ -1233,7 +1233,7 @@ xi.mod =
     PERPETUATION_REDUCTION          = 346,
 
     -- Warrior
-    AUGMENT_BERSERK                 = 948,  -- Augments "Berserk" (Conqueror)
+    BERSERK_POTENCY                 = 948,  -- Augments "Berserk"/Enhances "Berserk" effect (Conqueror)
     BERSERK_DURATION                = 954,  -- Berserk Duration
     AGGRESSOR_DURATION              = 955,  -- Aggressor Duration
     DEFENDER_DURATION               = 956,  -- Defender Duration
