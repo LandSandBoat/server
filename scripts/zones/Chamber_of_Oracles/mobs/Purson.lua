@@ -1,0 +1,27 @@
+-----------------------------------
+-- Area: Chamber of Oracles
+--  Mob: Purson
+-- KSNM30: The Scarlet King
+-----------------------------------
+local entity = {}
+
+entity.onMobSpawn = function(mob)
+    mob:setMod(xi.mod.DOUBLE_ATTACK, 40)
+end
+
+entity.onMobEngaged = function(mob)
+    mob:setLocalVar("timer", os.time() + 10)
+    mob:useMobAbility(800)
+end
+
+entity.onMobFight = function(mob, target)
+    if mob:getLocalVar("timer") < os.time() then
+        mob:useMobAbility(695)
+        mob:setLocalVar("timer", os.time() + 45)
+    end
+end
+
+entity.onMobDeath = function(mob, player, isKiller)
+end
+
+return entity
