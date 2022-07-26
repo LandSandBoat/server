@@ -6,6 +6,7 @@ require("scripts/globals/status")
 -----------------------------------
 local effect_object = {}
 
+-- DEFP penalty reduction from Warrior's Calligae NQ/+1/+2 handled by latent effect
 effect_object.onEffectGain = function(target, effect)
     local power = effect:getPower()
     local jpLevel = target:getJobPointLevel(xi.jp.BERSERK_EFFECT)
