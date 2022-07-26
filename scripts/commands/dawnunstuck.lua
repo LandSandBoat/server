@@ -28,6 +28,7 @@ function onTrigger(player)
 
     if
 	    target:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and target:getCharVar("PromathiaStatus") == 1
+		and target:getZoneID() == 36
 	then
 	    target:PrintToPlayer("Attempting to unstuck you...")
         

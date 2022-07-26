@@ -810,9 +810,8 @@ m:addOverride("xi.zones.South_Gustaberg.Zone.onInitialize", function(zone)
                                     end)
 
                                     npc:timer(4600, function(npcArg)
-                                        if npcUtil.giveItem(player, 28067) -- Runeist Mitons
-                                            player:setCharVar("[RUN]AFprog", 4)
-                                        end
+                                        npcUtil.giveItem(player, 28067) -- Runeist Mitons
+                                        player:setCharVar("[RUN]AFprog", 4)
                                     end)
                                 end,
                             },
@@ -1211,10 +1210,9 @@ m:addOverride("xi.zones.East_Ronfaure.Zone.onInitialize", function(zone)
                 end)
 
                 npc:timer(4600, function(npcArg)
-                    if npcUtil.giveItem(player, 28347) -- Runeist Bottes
-                        player:delKeyItem(xi.ki.FLASK_OF_FRUISERUM)
-                        player:setCharVar("[RUN]power", 2)
-                    end
+                    npcUtil.giveItem(player, 28347) -- Runeist Bottes
+                    player:delKeyItem(xi.ki.FLASK_OF_FRUISERUM)
+                    player:setCharVar("[RUN]power", 2)
                 end)
 
             -- KI Turn-in wisdom.
@@ -1231,10 +1229,9 @@ m:addOverride("xi.zones.East_Ronfaure.Zone.onInitialize", function(zone)
                 end)
 
                 npc:timer(4600, function(npcArg)
-                    if npcUtil.giveItem(player, 28207) -- Runeist Trousers
-                        player:delKeyItem(xi.ki.LETTER_FROM_OCTAVIEN)
-                        player:setCharVar("[RUN]wisdom", 2)
-                    end
+                    npcUtil.giveItem(player, 28207) -- Runeist Trousers
+                    player:delKeyItem(xi.ki.LETTER_FROM_OCTAVIEN)
+                    player:setCharVar("[RUN]wisdom", 2)
                 end)
 
             -- KI Turn-in courage.
@@ -1248,10 +1245,9 @@ m:addOverride("xi.zones.East_Ronfaure.Zone.onInitialize", function(zone)
                 end)
 
                 npc:timer(3100, function(npcArg)
-                    if npcUtil.giveItem(player, 27927) -- Runeist Coat
-                        player:delKeyItem(xi.ki.FROST_ENCRUSTED_FLAME_GEM)
-                        player:setCharVar("[RUN]courage", 2)
-                    end
+                    npcUtil.giveItem(player, 27927) -- Runeist Coat
+                    player:delKeyItem(xi.ki.FROST_ENCRUSTED_FLAME_GEM)
+                    player:setCharVar("[RUN]courage", 2)
                 end)
 
             -- 3-way quest branch.
@@ -1761,9 +1757,8 @@ m:addOverride("xi.zones.Eastern_Altepa_Desert.Zone.onInitialize", function(zone)
                                     end)
 
                                     npc:timer(6100, function(npcArg)
-                                        if npcUtil.giveItem(player, 27787) then -- Runeist Bandaeu
-                                            player:setCharVar("[RUN]AFprog", 8)
-                                        end
+                                        npcUtil.giveItem(player, 27787) -- Runeist Bandaeu
+                                        player:setCharVar("[RUN]AFprog", 8)
                                     end)
                                 end,
                             },
