@@ -262,10 +262,7 @@ function BluePhysicalSpell(caster, target, spell, params)
     end
 
     -- Calculate final WSC bonuses
-    -- print("pre-calc wsc value is ".. wsc)
-    -- print("bonusWSC value is ".. bonusWSC)
     wsc = wsc + (wsc * bonusWSC)
-    -- print("post-calc wsc value is ".. wsc)
 
     -- See BG Wiki for reference. Chain Affinity will double the WSC. BLU AF3 set will
     -- Triple the WSC when the set bonus procs. The AF3 set bonus stacks with Chain
