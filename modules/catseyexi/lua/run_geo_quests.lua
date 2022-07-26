@@ -15,9 +15,6 @@ local m = Module:new("run_geo_quests")
 --               RUN UNLOCK                --
 ---------------------------------------------
 m:addOverride("xi.zones.RuLude_Gardens.Zone.onInitialize", function(zone)
-    require("scripts/globals/status")
-    local ID = require("scripts/zones/RuLude_Gardens/IDs")
-
     -- Call the zone's original function for onInitialize
     super(zone)
     
@@ -35,27 +32,33 @@ m:addOverride("xi.zones.RuLude_Gardens.Zone.onInitialize", function(zone)
         end,
 
         onTrigger = function(player, npc)
-            if player:hasSpell(xi.magic.spell.MAAT) and player:getCharVar("[RUN]Unlocked") == 0 then
+            local runVar = player:getCharVar("[RUN]Unlocked")
+
+            -- Unlock job if conditions are met.
+            if player:hasSpell(xi.magic.spell.MAAT) and runVar == 0 then
                 player:PrintToPlayer("Volgoi: With the powers channeled through Altana, I now pronounce you a Rune Fencer!", 0xD)
 
-                npc:timer(500, function(npcArg)
+                npc:timer(200, function(npcArg)
                     player:setAnimation(101)
                 end)
-                npc:timer(1500, function(npcArg)
-                    player:PrintToPlayer("Congratulations! You have unlocked \"Rune Fencer\"!")
-                end)
 
-                player:changeJob(xi.job.RUN)
-                player:setLevel(1)
+                npc:timer(1000, function(npcArg)
+                    if npcUtil.giveItem(player, 5102) then -- Scroll of Foil
+                        npcUtil.giveKeyItem(player, xi.ki.JOB_GESTURE_RUNE_FENCER)
+                        player:unlockJob(xi.job.RUN)
+                        player:setCharVar("[RUN]Unlocked", 1)
+                    else
+                        player:PrintToPlayer("Volgoi: Something is wrong... Are you carrying too many stuff?", 0xD)
+                    end
 
-                npc:timer(2500, function(npcArg)
-                    player:setCharVar("[RUN]Unlocked", 1)
                     player:setAnimation(0)
-                    player:addItem(5102) -- Scroll of Foil
-                    player:messageSpecial(ID.text.ITEM_OBTAINED, 5102)
                 end)
-            elseif player:getCharVar("[RUN]Unlocked") == 1 then
+
+            -- Already unlocked job.
+            elseif runVar == 1 then
                 player:PrintToPlayer("Volgoi: Never tell how you got this power. Just don't.", 0xD)
+
+            -- Default dialog.
             else
                 player:PrintToPlayer("Volgoi: Think you got what it takes to become a Rune Fencer?", 0xD)
                 npc:timer(1500, function(npcArg)
@@ -72,9 +75,6 @@ end)
 --                GEO UNLOCK               --
 ---------------------------------------------
 m:addOverride("xi.zones.RuLude_Gardens.Zone.onInitialize", function(zone)
-    require("scripts/globals/status")
-    local ID = require("scripts/zones/RuLude_Gardens/IDs")
-
     -- Call the zone's original function for onInitialize
     super(zone)
     
@@ -92,7 +92,10 @@ m:addOverride("xi.zones.RuLude_Gardens.Zone.onInitialize", function(zone)
         end,
 
         onTrigger = function(player, npc)
-            if player:getCharVar("GEO_Unlocked") == 1 then 
+            local geoVar = player:getCharVar("GEO_Unlocked")
+
+            -- Already unlocked job. Open GEO shop.
+            if geoVar == 1 then 
                 local stock =
                 {
                     6074,    1000,  -- Indi-Poison
@@ -131,34 +134,35 @@ m:addOverride("xi.zones.RuLude_Gardens.Zone.onInitialize", function(zone)
 
                 player:PrintToPlayer("Welcome to the Geomancer magic shop!", 0, npc:getPacketName())
                 xi.shop.general(player, stock)
-            else
-                if player:hasSpell(xi.magic.spell.MAAT) then
-                    player:PrintToPlayer("Sylvie: With the powers channeled through Altana, I now pronounce you a Geomancer!", 0xD)
-                    npc:timer(1500, function(npcArg)
-                        player:setAnimation(101)
-                        player:PrintToPlayer("Congratulations! You have unlocked \"Geomancer\"!")
-                    end)
 
-                    player:changeJob(xi.job.GEO)
-                    player:setLevel(1)
-     
-                    npc:timer(2000, function(npcArg)
+            -- Unlock job.if conditions are met.
+            elseif player:hasSpell(xi.magic.spell.MAAT) and geoVar == 0 then
+                player:PrintToPlayer("Sylvie: With the powers channeled through Altana, I now pronounce you a Geomancer!", 0xD)
+
+                npc:timer(200, function(npcArg)
+                    player:setAnimation(101)
+                end)
+
+                npc:timer(1000, function(npcArg)
+                    if npcUtil.giveItem(player, 21460) then
+                        npcUtil.giveKeyItem(player, xi.ki.LUOPAN)
+                        npcUtil.giveKeyItem(player, xi.ki.JOB_GESTURE_GEOMANCER)
+                        player:unlockJob(xi.job.GEO)
                         player:setCharVar("GEO_Unlocked", 1)
-                        player:setAnimation(0)
-                        player:addKeyItem(2290)
-                        player:messageSpecial( ID.text.KEYITEM_OBTAINED, 2290 )
-                        player:addKeyItem(2963)
-                        player:messageSpecial( ID.text.KEYITEM_OBTAINED, 2963 )
-                        player:addItem(21460)
-                        player:messageSpecial( ID.text.ITEM_OBTAINED, 21460 ) -- Give Matre Bell
-                    end)
-                else
-                    player:PrintToPlayer("Sylvie: Think you got what it takes to become a Geomancer?", 0xD)
-                    npc:timer(1500, function(npcArg)
-                        player:PrintToPlayer("Sylvie: I need to see some evidence of your mastery over Maat\'s alter ego first!", 0xD)
-                    end)
-                end
-            end 
+                    else
+                        player:PrintToPlayer("Sylvie: Something is wrong... Are you carrying too many stuff?", 0xD)
+                    end
+
+                    player:setAnimation(0)
+                end)
+
+            -- Default dialog.
+            else
+                player:PrintToPlayer("Sylvie: Think you got what it takes to become a Geomancer?", 0xD)
+                npc:timer(1500, function(npcArg)
+                    player:PrintToPlayer("Sylvie: I need to see some evidence of your mastery over Maat\'s alter ego first!", 0xD)
+                end)
+            end
         end,
     })
 
@@ -810,8 +814,9 @@ m:addOverride("xi.zones.South_Gustaberg.Zone.onInitialize", function(zone)
                                     end)
 
                                     npc:timer(4600, function(npcArg)
-                                        npcUtil.giveItem(player, 28067) -- Runeist Mitons
-                                        player:setCharVar("[RUN]AFprog", 4)
+                                        if npcUtil.giveItem(player, 28067) then -- Runeist Mitons
+                                            player:setCharVar("[RUN]AFprog", 4)
+                                        end
                                     end)
                                 end,
                             },
@@ -1210,9 +1215,17 @@ m:addOverride("xi.zones.East_Ronfaure.Zone.onInitialize", function(zone)
                 end)
 
                 npc:timer(4600, function(npcArg)
-                    npcUtil.giveItem(player, 28347) -- Runeist Bottes
-                    player:delKeyItem(xi.ki.FLASK_OF_FRUISERUM)
-                    player:setCharVar("[RUN]power", 2)
+                    if npcUtil.giveItem(player, 28347) then -- Runeist Bottes
+                        player:delKeyItem(xi.ki.FLASK_OF_FRUISERUM)
+                        player:setCharVar("[RUN]power", 2)
+
+                        if player:getCharVar("[RUN]power") == 2 and player:getCharVar("[RUN]wisdom") == 2 and player:getCharVar("[RUN]courage") == 2 then
+                            player:PrintToPlayer("You have obtained all three runes.", 0, npc:getPacketName())
+                            npc:timer(4500, function(npcArg)
+                                player:PrintToPlayer("I have something to tell you.", 0, npc:getPacketName())
+                            end)
+                        end
+                    end
                 end)
 
             -- KI Turn-in wisdom.
@@ -1229,9 +1242,17 @@ m:addOverride("xi.zones.East_Ronfaure.Zone.onInitialize", function(zone)
                 end)
 
                 npc:timer(4600, function(npcArg)
-                    npcUtil.giveItem(player, 28207) -- Runeist Trousers
-                    player:delKeyItem(xi.ki.LETTER_FROM_OCTAVIEN)
-                    player:setCharVar("[RUN]wisdom", 2)
+                    if npcUtil.giveItem(player, 28207) then -- Runeist Trousers
+                        player:delKeyItem(xi.ki.LETTER_FROM_OCTAVIEN)
+                        player:setCharVar("[RUN]wisdom", 2)
+
+                        if player:getCharVar("[RUN]power") == 2 and player:getCharVar("[RUN]wisdom") == 2 and player:getCharVar("[RUN]courage") == 2 then
+                            player:PrintToPlayer("You have obtained all three runes.", 0, npc:getPacketName())
+                            npc:timer(4500, function(npcArg)
+                                player:PrintToPlayer("I have something to tell you.", 0, npc:getPacketName())
+                            end)
+                        end
+                    end
                 end)
 
             -- KI Turn-in courage.
@@ -1245,9 +1266,17 @@ m:addOverride("xi.zones.East_Ronfaure.Zone.onInitialize", function(zone)
                 end)
 
                 npc:timer(3100, function(npcArg)
-                    npcUtil.giveItem(player, 27927) -- Runeist Coat
-                    player:delKeyItem(xi.ki.FROST_ENCRUSTED_FLAME_GEM)
-                    player:setCharVar("[RUN]courage", 2)
+                    if npcUtil.giveItem(player, 27927) then-- Runeist Coat
+                        player:delKeyItem(xi.ki.FROST_ENCRUSTED_FLAME_GEM)
+                        player:setCharVar("[RUN]courage", 2)
+
+                        if player:getCharVar("[RUN]power") == 2 and player:getCharVar("[RUN]wisdom") == 2 and player:getCharVar("[RUN]courage") == 2 then
+                            player:PrintToPlayer("You have obtained all three runes.", 0, npc:getPacketName())
+                            npc:timer(4500, function(npcArg)
+                                player:PrintToPlayer("I have something to tell you.", 0, npc:getPacketName())
+                            end)
+                        end
+                    end
                 end)
 
             -- 3-way quest branch.
@@ -1757,8 +1786,9 @@ m:addOverride("xi.zones.Eastern_Altepa_Desert.Zone.onInitialize", function(zone)
                                     end)
 
                                     npc:timer(6100, function(npcArg)
-                                        npcUtil.giveItem(player, 27787) -- Runeist Bandaeu
-                                        player:setCharVar("[RUN]AFprog", 8)
+                                        if npcUtil.giveItem(player, 27787) then -- Runeist Bandaeu
+                                            player:setCharVar("[RUN]AFprog", 8)
+                                        end
                                     end)
                                 end,
                             },
