@@ -136,8 +136,64 @@ local loot =
             {itemid = 1132, droprate = 109}, -- Square Of Raxa
             {itemid = 0, droprate = 500}, -- Nothing
         }
-    }
-
+    },
+    -- The Scarlet King
+    [199] =
+    {
+        {
+            {itemid = 1116, droprate = 1000}, -- Manticore Hair
+        },
+        {
+            {itemid = 1163, droprate = 1000}, -- Manticore Hide
+        },
+        {
+            {itemid = 1110,  droprate = 200}, -- Beetle Blood
+            {itemid = 17579, droprate = 200}, -- WWyvern Perch
+            {itemid = 17825, droprate = 200}, -- Honebami
+            {itemid = 17997, droprate = 200}, -- Argent Dagger
+            {itemid = 17998, droprate = 200}, -- Thanatos Baselard
+        },
+        {
+            {itemid = 4659,  droprate = 250}, -- Shell IV
+            {itemid = 17577, droprate = 150}, -- Capricorn Staff
+            {itemid = 17938, droprate = 150}, -- Woodville's Axe
+            {itemid = 18048, droprate = 150}, -- King Maker
+            {itemid = 18211, droprate = 150}, -- Gawain's Axe
+            {itemid = 18372, droprate = 150}, -- Balan's Sword
+        },
+        {
+            {itemid = 4174,  droprate = 350}, -- Vile Elixir
+            {itemid = 4175,  droprate = 100}, -- Vile Elixir +1
+            {itemid = 4613,  droprate = 100}, -- Cure V
+            {itemid = 19025, droprate = 250}, -- Pole Grip
+            {itemid = 19026, droprate = 100}, -- Spear Strap
+            {itemid = 19027, droprate = 100}, -- Claymore Grip
+        },
+        {
+            {itemid = 645,  droprate =  50}, -- Chunk Of Darksteel Ore
+            {itemid = 646,  droprate =  50}, -- Chunk Of Adaman Ore
+            {itemid = 700,  droprate = 100}, -- Mahogany Log
+            {itemid = 703,  droprate = 100}, -- Petrified Log
+            {itemid = 738,  droprate =  50}, -- Chunk Of Platinum Ore
+            {itemid = 739,  droprate =  50}, -- Chunk Of Orichalcum Ore
+            {itemid = 745,  droprate =  25}, -- Gold Ingot
+            {itemid = 746,  droprate =  50}, -- Chunk Of Gold Ore
+            {itemid = 830,  droprate =  25}, -- Square Of Rainbow Cloth
+            {itemid = 844,  droprate = 100}, -- Phoenix Feather
+            {itemid = 1132, droprate = 100}, -- Square Of Raxa
+            {itemid = 4172, droprate = 100}, -- Reraiser
+            {itemid = 4173, droprate =  50}, -- Hi-reraiser
+            {itemid = 4774, droprate = 150}, -- Thunder III
+        },
+        {
+            {itemid = 0,    droprate = 650}, -- Nothing
+            {itemid = 658,  droprate = 100}, -- Damascus Ingot
+            {itemid = 836,  droprate =  50}, -- Square Of Damascene Cloth
+            {itemid = 837,  droprate =  50}, -- Spool Of Malboro Fiber
+            {itemid = 942,  droprate =  50}, -- Philosophers Stone
+            {itemid = 1132, droprate = 100}, -- Square Of Raxa
+        }
+    },
 }
 
 entity.onTrade = function(player, npc, trade)
