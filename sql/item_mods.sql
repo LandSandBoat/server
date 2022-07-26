@@ -2965,11 +2965,11 @@ INSERT INTO `item_mods` VALUES (10729,115,9); -- ELEM: 9
 INSERT INTO `item_mods` VALUES (10729,116,9); -- DARK: 9
 
 -- Warriors Calligae +2
-INSERT INTO `item_mods` VALUES (10730,1,25);    -- DEF: 25
-INSERT INTO `item_mods` VALUES (10730,2,21);    -- HP: 21
-INSERT INTO `item_mods` VALUES (10730,9,8);     -- DEX: 8
-INSERT INTO `item_mods` VALUES (10730,11,8);    -- AGI: 8
-INSERT INTO `item_mods` VALUES (10730,954,10);  -- BERSERK_DURATION: 10
+INSERT INTO `item_mods` VALUES (10730,1,25);   -- DEF: 25
+INSERT INTO `item_mods` VALUES (10730,2,21);   -- HP: 21
+INSERT INTO `item_mods` VALUES (10730,9,8);    -- DEX: 8
+INSERT INTO `item_mods` VALUES (10730,11,8);   -- AGI: 8
+INSERT INTO `item_mods` VALUES (10730,954,10); -- BERSERK_DURATION: 10
 
 -- Melee Gaiters +2
 INSERT INTO `item_mods` VALUES (10731,1,20);   -- DEF: 20
@@ -25515,10 +25515,10 @@ INSERT INTO `item_mods` VALUES (15131,13,3);  -- MND: 3
 INSERT INTO `item_mods` VALUES (15131,357,2); -- BP_DELAY: 2
 
 -- Warriors Calligae
-INSERT INTO `item_mods` VALUES (15132,1,19);    -- DEF: 19
-INSERT INTO `item_mods` VALUES (15132,2,10);    -- HP: 10
-INSERT INTO `item_mods` VALUES (15132,11,5);    -- AGI: 5
-INSERT INTO `item_mods` VALUES (15132,27,1);    -- ENMITY: 1
+INSERT INTO `item_mods` VALUES (15132,1,19); -- DEF: 19
+INSERT INTO `item_mods` VALUES (15132,2,10); -- HP: 10
+INSERT INTO `item_mods` VALUES (15132,11,5); -- AGI: 5
+INSERT INTO `item_mods` VALUES (15132,27,1); -- ENMITY: 1
 
 -- Melee Gaiters
 INSERT INTO `item_mods` VALUES (15133,1,15);   -- DEF: 15
@@ -28232,10 +28232,10 @@ INSERT INTO `item_mods` VALUES (15664,27,-5); -- ENMITY: -5
 INSERT INTO `item_mods` VALUES (15664,68,5);  -- EVA: 5
 
 -- Warriors Calligae +1
-INSERT INTO `item_mods` VALUES (15665,1,20);    -- DEF: 20
-INSERT INTO `item_mods` VALUES (15665,2,15);    -- HP: 15
-INSERT INTO `item_mods` VALUES (15665,11,6);    -- AGI: 6
-INSERT INTO `item_mods` VALUES (15665,27,1);    -- ENMITY: 1
+INSERT INTO `item_mods` VALUES (15665,1,20); -- DEF: 20
+INSERT INTO `item_mods` VALUES (15665,2,15); -- HP: 15
+INSERT INTO `item_mods` VALUES (15665,11,6); -- AGI: 6
+INSERT INTO `item_mods` VALUES (15665,27,1); -- ENMITY: 1
 
 -- Melee Gaiters +1
 INSERT INTO `item_mods` VALUES (15666,1,16);   -- DEF: 16
