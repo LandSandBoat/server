@@ -3618,11 +3618,11 @@ INSERT INTO `mob_skill_lists` VALUES ('TRUST_Adelheid',1083,3469); -- Twirling D
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAHM',1107,41);        -- Swift Blade
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAHM',1107,103);       -- Cross Reaver
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAHM',1107,225);       -- Chant du Cygne
-INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAEV',1108,40);        -- Vorpal Blade
-INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAEV',1108,933);       -- Dominion Slash
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAHM',1107,3706);       -- Cross Reaver
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAHM',1107,3708);       -- Swift Blade
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAHM',1107,3709);       -- Chant du Cygne
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAEV',1108,40);        -- Vorpal Blade
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAEV',1108,933);       -- Dominion Slash
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAEV',1108,3710);      -- Arrogance Incarnate
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAEV',1108,3711);      -- Vorpal Blade
 INSERT INTO `mob_skill_lists` VALUES ('TRUST_AAEV',1108,3712);      -- Dominion Slash
