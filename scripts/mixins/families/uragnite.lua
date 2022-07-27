@@ -56,15 +56,30 @@ local function exitShell(mob)
     mob:setMobMod(xi.mobMod.NO_MOVE, 0)
 end
 
+local function shellTimer(mob)
+    -- Uragnites go into their shell every 40-60 seconds
+    local timeToShell = mob:getLocalVar("[uragnite]shellTimer")
+
+    -- mob:isMobType check due to Shell We Dance ENM. Those uragnites do not enter their shell except through damage
+    if os.time() > timeToShell and bit.band(mob:getAnimationSub(), 1) == 0 and mob:isFollowingPath() == false and not mob:isMobType(xi.mobskills.mobType.BATTLEFIELD) then
+        enterShell(mob)
+
+        local timeInShell = math.random(mob:getLocalVar("[uragnite]timeInShellMin"), mob:getLocalVar("[uragnite]timeInShellMax"))
+        local shellRandom = timeInShell + (os.time() + math.random(40,60))
+        mob:setLocalVar("[uragnite]shellTimer", shellRandom)
+
+        mob:timer(timeInShell * 1000, function(uragnite)
+            exitShell(uragnite)
+        end)
+    end
+end
+
 xi.mix.uragnite.config = function(mob, params)
     if params.inShellSkillList and type(params.inShellSkillList) == "number" then
         mob:setLocalVar("[uragnite]inShellSkillList", params.inShellSkillList)
     end
     if params.noShellSkillList and type(params.noShellSkillList) == "number" then
         mob:setLocalVar("[uragnite]noShellSkillList", params.noShellSkillList)
-    end
-    if params.chanceToShell and type(params.chanceToShell) == "number" then
-        mob:setLocalVar("[uragnite]chanceToShell", params.chanceToShell)
     end
     if params.timeInShellMin and type(params.timeInShellMin) == "number" then
         mob:setLocalVar("[uragnite]timeInShellMin", params.timeInShellMin)
@@ -84,22 +99,33 @@ g_mixins.families.uragnite = function(uragniteMob)
     uragniteMob:addListener("SPAWN", "URAGNITE_SPAWN", function(mob)
         mob:setLocalVar("[uragnite]noShellSkillList", 251)
         mob:setLocalVar("[uragnite]inShellSkillList", 250)
-        mob:setLocalVar("[uragnite]chanceToShell", 20)
         mob:setLocalVar("[uragnite]timeInShellMin", 30)
         mob:setLocalVar("[uragnite]timeInShellMax", 45)
-        mob:setLocalVar("[uragnite]inShellRegen", 50)
+        mob:setLocalVar("[uragnite]inShellRegen", 22)
     end)
 
     uragniteMob:addListener("TAKE_DAMAGE", "URAGNITE_TAKE_DAMAGE", function(mob, amount, attacker, attackType, damageType)
-        if attackType == xi.attackType.PHYSICAL then
-            if math.random(100) <= mob:getLocalVar("[uragnite]chanceToShell") and bit.band(mob:getAnimationSub(), 1) == 0 then
-                enterShell(mob)
-                local timeInShell = math.random(mob:getLocalVar("[uragnite]timeInShellMin"), mob:getLocalVar("[uragnite]timeInShellMax"))
-                mob:timer(timeInShell * 1000, function(mobArg)
-                    exitShell(mobArg)
-                end)
-            end
+        local mobHPP = mob:getHPP()
+        local newHP = mob:getHP() - amount
+
+        -- Uragnites are triggered into their shell by damage every 10% of health
+        if mobHPP < 100 and math.floor( mobHPP / 10) > math.floor (newHP / (mob:getMaxHP() / 10)) and bit.band(mob:getAnimationSub(), 1) == 0 then
+            enterShell(mob)
+            mob:useMobAbility(1572) -- Going into shell caused by damage always triggers venom shell
+
+            local timeInShell = math.random(mob:getLocalVar("[uragnite]timeInShellMin"), mob:getLocalVar("[uragnite]timeInShellMax"))
+            mob:timer(timeInShell * 1000, function(uragnite)
+                exitShell(uragnite)
+            end)
         end
+    end)
+
+    uragniteMob:addListener("ROAM_TICK", "URAGNITE_ROAM_TIMER", function(mob)
+        shellTimer(mob)
+    end)
+
+    uragniteMob:addListener("COMBAT_TICK", "URAGNITE_COMBAT_TIMER",  function(mob)
+        shellTimer(mob)
     end)
 end
 
