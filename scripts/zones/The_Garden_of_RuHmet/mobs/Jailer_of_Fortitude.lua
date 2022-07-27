@@ -12,16 +12,20 @@ require("scripts/globals/magic")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    xi.mix.jobSpecial.config(mob, {
-        specials =
-        {
-            {id = xi.jsa.INVINCIBLE, cooldown = 180, hpp = math.random(90, 95)}, -- "Has access to Invincible, which it may use several times."
-        },
-    })
-
     -- Change animation to humanoid w/ prismatic core
     mob:setAnimationSub(1)
     mob:setModelId(1169)
+end
+
+entity.onMobEngaged = function(mob, target)
+    mob:setLocalVar("delay", 0)
+    mob:setLocalVar("LAST_CAST", 0)
+    mob:setLocalVar("COPY_SPELL", 0)
+    mob:setLocalVar("twoHourCd", 0)
+    local mobId = mob:getID()
+    for i = mobId + 1, mobId + 2 do -- Kf'ghrah share hate with Jailer of Fortitude
+        GetMobByID(i):updateEnmity(target)
+    end
 end
 
 entity.onMobFight = function(mob, target)
@@ -43,6 +47,25 @@ entity.onMobFight = function(mob, target)
             else
                 mob:setLocalVar("delay", delay+1)
             end
+        end
+    end
+
+    -- Jailer of Fortitude does not use Invincible until he is below 50% HP and both Ghrah adds are dead.
+    -- He will immediately use invincible upon both of them dying then again 3 minutes later.
+    local canTwoHour = mob:getLocalVar("canTwoHour")
+    local twoHourCd = mob:getLocalVar("twoHourCd")
+    local battleTime = mob:getBattleTime()
+    for i = ID.mob.KFGHRAH_WHM, ID.mob.KFGHRAH_BLM do
+        local kfgrah = GetMobByID(i)
+        if not kfgrah:isAlive() and mob:getHPP() < 50 and canTwoHour == 0 then
+            mob:setLocalVar("canTwoHour", 1) -- both Kf'ghrah dead, first invincible
+        end
+    end
+
+    if mob:getLocalVar("canTwoHour") == 1 then
+        if battleTime - twoHourCd > 180 then -- second invincible roughly 3 minutes after the first
+            mob:setLocalVar("twoHourCd", mob:getBattleTime())
+            mob:useMobAbility(694)
         end
     end
 end

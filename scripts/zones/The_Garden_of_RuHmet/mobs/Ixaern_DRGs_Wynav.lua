@@ -2,6 +2,7 @@
 -- Area: The Garden of Ru'Hmet
 --  Mob: Ix'aern DRG's Wynav
 -----------------------------------
+local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs")
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
@@ -35,6 +36,20 @@ entity.onMobMagicPrepare = function(mob, target, spellId)
         return spellList[math.random(1, 9)] -- Virelai possible.
     else
         return spellList[math.random(1, 8)] -- No Virelai!
+    end
+end
+
+entity.onPath = function(mob)
+    local ixdrg = GetMobByID(ID.mob.IXAERN_DRG)
+    if ixdrg:isSpawned() then
+        local mobId = mob:getID()
+        local pet = GetMobByID(mobId - 1)
+        switch (mobId): caseof
+        {
+            [16921023] = function() mob:pathTo(ixdrg:getXPos() + 1.0, ixdrg:getYPos(), ixdrg:getZPos() - 0.50) end,
+            [16921024] = function() mob:pathTo(pet:getXPos() + 1.0, pet:getYPos(), pet:getZPos() - 0.50) end,
+            [16921025] = function() mob:pathTo(pet:getXPos() + 1.0, pet:getYPos(), pet:getZPos() - 0.50) end,
+        }
     end
 end
 

@@ -4,6 +4,7 @@
 -- Note: PH for Ix'Aern DRK and DRG
 -----------------------------------
 local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs")
+mixins = {require("scripts/mixins/families/aern")}
 -----------------------------------
 local entity = {}
 
