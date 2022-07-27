@@ -24,6 +24,7 @@
 #include "attackround.h"
 #include "entities/battleentity.h"
 #include "items/item_weapon.h"
+#include "job_points.h"
 #include "status_effect_container.h"
 #include "utils/puppetutils.h"
 
@@ -573,4 +574,47 @@ void CAttack::ProcessDamage()
         }
     }
     m_isBlocked = attackutils::IsBlocked(m_attacker, m_victim);
+
+    // Apply Restraint Weaponskill Damage Modifier
+    // Effect power tracks the total bonus
+    // Effect sub power tracks remainder left over from whole percentage flooring
+    if (m_isFirstSwing && m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_RESTRAINT))
+    {
+        CStatusEffect* effect = m_attacker->StatusEffectContainer->GetStatusEffect(EFFECT_RESTRAINT);
+
+        if (effect->GetPower() < 30)
+        {
+            uint8 jpBonus = 0;
+
+            if (m_attacker->objtype == TYPE_PC)
+            {
+                jpBonus = static_cast<CCharEntity*>(m_attacker)->PJobPoints->GetJobPointValue(JP_RESTRAINT_EFFECT) * 2;
+            }
+
+            // Convert weapon delay and divide
+            // Pull remainder of previous hit's value from Effect sub Power
+            float boostPerRound = ((m_attacker->GetWeaponDelay(false) / 1000.0f) * 60.0f) / 385.0f;
+            float remainder     = effect->GetSubPower() / 100.0f;
+
+            // Cap floor at 1 WSD per hit
+            // Calculate bonuses from Enhances Restraint, Job Point upgrades, and remainder from previous hit
+            boostPerRound = std::clamp<float>(boostPerRound, 1, boostPerRound);
+            boostPerRound = (boostPerRound * (1 + m_attacker->getMod(Mod::ENHANCES_RESTRAINT) / 100.0f) * (1 + jpBonus / 100.0f)) + remainder;
+
+            // Calculate new remainder and multiply by 100 so significant digits aren't lost
+            // Floor Boost per Round
+            remainder     = (1 - (std::ceil(boostPerRound) - boostPerRound)) * 100;
+            boostPerRound = std::floor(boostPerRound);
+
+            // Cap total power to +30% WSD
+            if (effect->GetPower() + boostPerRound > 30)
+            {
+                boostPerRound = 30 - effect->GetPower();
+            }
+
+            effect->SetPower(effect->GetPower() + boostPerRound);
+            effect->SetSubPower(remainder);
+            m_attacker->addModifier(Mod::ALL_WSDMG_FIRST_HIT, boostPerRound);
+        }
+    }
 }

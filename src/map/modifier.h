@@ -304,13 +304,15 @@ enum class Mod
     DUAL_WIELD    = 259, // Percent reduction in dual wield delay.
 
     // Warrior
-    DOUBLE_ATTACK      = 288,  // Percent chance to proc
-    DOUBLE_ATTACK_DMG  = 1038, // Increases "Double Attack" damage/"Double Attack" damage + (in percents, e.g. +20 = +20% damage)
-    WARCRY_DURATION    = 483,  // Warcy duration bonus from gear
-    BERSERK_EFFECT     = 948,  // Conqueror Berserk Effect
-    BERSERK_DURATION   = 954,  // Berserk Duration
-    AGGRESSOR_DURATION = 955,  // Aggressor Duration
-    DEFENDER_DURATION  = 956,  // Defender Duration
+    DOUBLE_ATTACK       = 288,  // Percent chance to proc
+    DOUBLE_ATTACK_DMG   = 1038, // Increases "Double Attack" damage/"Double Attack" damage + (in percents, e.g. +20 = +20% damage)
+    WARCRY_DURATION     = 483,  // Warcy duration bonus from gear
+    BERSERK_EFFECT      = 948,  // Conqueror Berserk Effect
+    BERSERK_DURATION    = 954,  // Berserk Duration
+    AGGRESSOR_DURATION  = 955,  // Aggressor Duration
+    DEFENDER_DURATION   = 956,  // Defender Duration
+    ENHANCES_RESTRAINT  = 1045, // Enhances "Restraint" effect/"Restraint" + (Increases the damage bonus of Restraint by XXX%)
+    ENHANCES_BLOOD_RAGE = 1046, // Enhances "Blood Rage" effect/"Blood Rage" duration +
 
     // Monk
     BOOST_EFFECT        = 97,   // Boost power in tenths
@@ -901,7 +903,7 @@ enum class Mod
     // 888
     // 936
     //
-    // SPARE = 1045, and onward
+    // SPARE = 1047, and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

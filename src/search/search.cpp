@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -550,10 +550,11 @@ void HandleAuctionHouseRequest(CTCPRequestPacket& PTCPRequest)
     for (uint8 i = 0; i < PacketsCount; ++i)
     {
         CAHItemsListPacket PAHPacket(20 * i);
+        uint16             itemListSize = static_cast<uint16>(ItemList.size());
 
-        PAHPacket.SetItemCount((uint16)ItemList.size());
+        PAHPacket.SetItemCount(itemListSize);
 
-        for (uint16 y = 20 * i; (y != 20 * (i + 1)) && (y < ItemList.size()); ++y)
+        for (uint16 y = 20 * i; (y != 20 * (i + 1)) && (y < itemListSize); ++y)
         {
             PAHPacket.AddItem(ItemList.at(y));
         }

@@ -245,6 +245,7 @@ int32 do_init(int32 argc, char** argv)
     ability::LoadAbilitiesList();
     battleutils::LoadWeaponSkillsList();
     battleutils::LoadMobSkillsList();
+    battleutils::LoadPetSkillsList();
     battleutils::LoadSkillChainDamageModifiers();
     petutils::LoadPetList();
     trustutils::LoadTrustList();
@@ -349,6 +350,7 @@ void do_final(int code)
     itemutils::FreeItemList();
     battleutils::FreeWeaponSkillsList();
     battleutils::FreeMobSkillList();
+    battleutils::FreePetSkillList();
 
     petutils::FreePetList();
     trustutils::FreeTrustList();
@@ -812,7 +814,7 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
             PacketList_t packetList = PChar->getPacketList();
             packets                 = 0;
 
-            while (!packetList.empty() && *buffsize + packetList.front()->getSize() < MAX_BUFFER_SIZE && packets < PacketCount)
+            while (!packetList.empty() && *buffsize + packetList.front()->getSize() < MAX_BUFFER_SIZE && static_cast<size_t>(packets) < PacketCount)
             {
                 PSmallPacket = packetList.front();
                 packetList.pop_front();
