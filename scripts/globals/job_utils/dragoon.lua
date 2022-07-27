@@ -75,7 +75,13 @@ end
 
 -- Generic Function for damage-based Jumps
 local function performWSJump(player, target, action, params)
-    local taChar = player:getTrickAttackChar(target)
+    local taChar = nil
+
+    -- Check if preformer is PC to avoid (HIT DEBUG CONDITION: m_PBaseEntity->objtype != TYPE_PC) in lua_baseentitity.
+    if player:isPC() then
+        taChar = player:getTrickAttackChar(target)
+    end
+
     local damage, criticalHit, tpHits, extraHits = doPhysicalWeaponskill(player, target, 0, params, 0, action, true, taChar)
     local totalHits = tpHits + extraHits
 
