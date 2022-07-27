@@ -665,7 +665,7 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
     return resistVal
 end
 
-xi.spells.damage.calculateIfMagicBurst = function(caster, target, spell, spellElement)
+xi.spells.damage.calculateIfMagicBurst = function(caster, target, spell, spellElement) -- Calculates if a magic burst should occur.
     local magicBurst         = 1 -- The variable we want to calculate
     local _, skillchainCount = FormMagicBurst(spellElement, target) -- External function. Not present in magic.lua.
 
@@ -673,29 +673,10 @@ xi.spells.damage.calculateIfMagicBurst = function(caster, target, spell, spellEl
         magicBurst = 1.25 + (0.1 * skillchainCount) -- Here we add SDT DAMAGE bonus for magic bursts aswell, once SDT is implemented. https://www.bg-wiki.com/ffxi/Resist#SDT_and_Magic_Bursting
     end
 
-    if target:getObjType() == xi.objType.MOB then
-        local resTier = target:getLocalVar("[MagicBurst]Resist_Tier")
-        local resTierBonusLookup =
-        {
-            [1.50] = 1.50,
-            [1.30] = 1.15,
-            [1.15] = 0.85,
-            [1.00] = 0.60,
-            [0.85] = 0.50,
-            [0.70] = 0.40,
-            [0.60] = 0.15,
-            [0.50] = 0.05,
-        }
-
-        if resTierBonusLookup[resTier] ~= nil then
-            magicBurst = magicBurst + (magicBurst * resTierBonusLookup[resTier])
-        end
-    end
-
     return magicBurst
 end
 
-xi.spells.damage.calculateIfMagicBurstBonus = function(caster, target, spell, spellId, spellElement)
+xi.spells.damage.calculateIfMagicBurstBonus = function(caster, target, spell, spellId, spellElement) -- Calculates the bonus damage applied to the spell.
     local magicBurstBonus        = 1.0 -- The variable we want to calculate
     local modBurst               = 1.0
     local ancientMagicBurstBonus = 0
@@ -735,6 +716,23 @@ xi.spells.damage.calculateIfMagicBurstBonus = function(caster, target, spell, sp
 
     if skillchainCount > 0 then
         magicBurstBonus = modBurst -- + modBurstTrait once investigated. Probably needs to be divided by 100
+        if target:getObjType() == xi.objType.MOB then
+            local resTier = target:getLocalVar("[MagicBurst]Resist_Tier")
+            local resTierBonusLookup =
+            {
+                [1.50] = 1.50,
+                [1.30] = 1.15,
+                [1.15] = 0.85,
+                [1.00] = 0.60,
+                [0.85] = 0.50,
+                [0.70] = 0.40,
+                [0.60] = 0.15,
+                [0.50] = 0.05,
+            }
+            if resTierBonusLookup[resTier] ~= nil then
+                magicBurstBonus = magicBurstBonus + (magicBurstBonus * resTierBonusLookup[resTier])
+            end
+        end
     end
 
     return magicBurstBonus
