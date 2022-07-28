@@ -1,4 +1,3 @@
 path_classifiers:
-  test:
-    - src
-    - exclude: ext
+  library:
+    - ext/
