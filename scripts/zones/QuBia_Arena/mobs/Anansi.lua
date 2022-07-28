@@ -10,7 +10,8 @@ local entity = {}
 local function spawnSpider(mob, attacker, uint)
     local spider = mob:getID() + uint
 
-    if uint > 8 then
+    if uint > 9 then
+        mob:setBehaviour(0)
         return
     end
 
@@ -24,6 +25,7 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:addMod(xi.mod.SLEEPRES, 100)
+    mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_DESPAWN))
 
     mob:addListener("TAKE_DAMAGE", "ANANSI_TAKE_DAMAGE", function(mobArg, amount, attacker, attackType, damageType)
         if amount > mobArg:getHP() then
@@ -32,17 +34,17 @@ entity.onMobSpawn = function(mob)
                 target = target:getMaster()
             end
 
-            -- Spawn first spider to prevent battlefield ending
-            GetMobByID(mobArg:getID()+2):setSpawn(mobArg:getXPos(), mobArg:getYPos(), mobArg:getZPos(), mobArg:getRotPos())
-            SpawnMob(mobArg:getID()+2):updateEnmity(attacker)
-
             -- Recursively spawn the rest of the spiders
-            spawnSpider(mob, attacker, 3)
+            spawnSpider(mob, attacker, 2)
         end
     end)
 end
 
 entity.onMobDeath = function(mob)
+end
+
+entity.onMobDespawn = function(mob)
+    -- mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NONE))
 end
 
 return entity
