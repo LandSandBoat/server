@@ -1,8 +1,8 @@
 -----------------------------------
 -- Zone: Abyssea-Grauberg
---  NPC: qm19 (???)
--- Spawns Raja
--- !pos 465 56 679 254
+--  NPC: qm_amphitrite_2 (???)
+-- Spawns Amphitrite
+-- !pos -136 -31 -231 254
 -----------------------------------
 local ID = require('scripts/zones/Abyssea-Grauberg/IDs')
 require('scripts/globals/abyssea')
@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    xi.abyssea.qmOnTrigger(player, npc, ID.mob.RAJA_3, { xi.ki.WARPED_CHARIOT_PLATE, xi.ki.SHATTERED_IRON_GIANT_CHAIN })
+    xi.abyssea.qmOnTrigger(player, npc, ID.mob.AMPHITRITE_2, { xi.ki.VARIEGATED_URAGNITE_SHELL })
 end
 
 entity.onEventUpdate = function(player, csid, option)

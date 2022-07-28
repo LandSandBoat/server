@@ -1,8 +1,8 @@
 -----------------------------------
 -- Zone: Abyssea-Grauberg
---  NPC: qm17 (???)
--- Spawns Azdaja
--- !pos -552 -169 138 254
+--  NPC: qm_raja_1 (???)
+-- Spawns Raja
+-- !pos 481 56 680 254
 -----------------------------------
 local ID = require('scripts/zones/Abyssea-Grauberg/IDs')
 require('scripts/globals/abyssea')
@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    xi.abyssea.qmOnTrigger(player, npc, ID.mob.AZDAJA_2, { xi.ki.VACANT_BUGARD_EYE })
+    xi.abyssea.qmOnTrigger(player, npc, ID.mob.RAJA_1, { xi.ki.WARPED_CHARIOT_PLATE, xi.ki.SHATTERED_IRON_GIANT_CHAIN })
 end
 
 entity.onEventUpdate = function(player, csid, option)

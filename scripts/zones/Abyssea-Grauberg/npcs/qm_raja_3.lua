@@ -1,27 +1,28 @@
 -----------------------------------
 -- Zone: Abyssea-Grauberg
---  NPC: qm9 (???)
--- Spawns Lorelei
--- !pos -192 -31 480 254
+--  NPC: qm_raja_3 (???)
+-- Spawns Raja
+-- !pos 465 56 679 254
 -----------------------------------
 local ID = require('scripts/zones/Abyssea-Grauberg/IDs')
 require('scripts/globals/abyssea')
-require('scripts/globals/items')
+require('scripts/globals/keyitems')
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.LORELEI, { xi.items.FAY_TEARDROP })
 end
 
 entity.onTrigger = function(player, npc)
-    xi.abyssea.qmOnTrigger(player, npc, 0, 0, { xi.items.FAY_TEARDROP })
+    xi.abyssea.qmOnTrigger(player, npc, ID.mob.RAJA_3, { xi.ki.WARPED_CHARIOT_PLATE, xi.ki.SHATTERED_IRON_GIANT_CHAIN })
 end
 
 entity.onEventUpdate = function(player, csid, option)
+    xi.abyssea.qmOnEventUpdate(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
+    xi.abyssea.qmOnEventFinish(player, csid, option)
 end
 
 return entity

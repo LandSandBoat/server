@@ -1,27 +1,28 @@
 -----------------------------------
 -- Zone: Abyssea-Grauberg
---  NPC: qm2 (???)
--- Spawns Ningishzida
--- !pos 380 -31 239 254
+--  NPC: qm_amphitrite_1 (???)
+-- Spawns Amphitrite
+-- !pos -147 -31 -220 254
 -----------------------------------
 local ID = require('scripts/zones/Abyssea-Grauberg/IDs')
 require('scripts/globals/abyssea')
-require('scripts/globals/items')
+require('scripts/globals/keyitems')
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.NINGISHZIDA, { xi.items.MINARUJA_SKULL, xi.items.JACULUS_WING, xi.items.HIGH_QUALITY_WIVRE_HIDE })
 end
 
 entity.onTrigger = function(player, npc)
-    xi.abyssea.qmOnTrigger(player, npc, 0, 0, { xi.items.MINARUJA_SKULL, xi.items.JACULUS_WING, xi.items.HIGH_QUALITY_WIVRE_HIDE })
+    xi.abyssea.qmOnTrigger(player, npc, ID.mob.AMPHITRITE_1, { xi.ki.VARIEGATED_URAGNITE_SHELL })
 end
 
 entity.onEventUpdate = function(player, csid, option)
+    xi.abyssea.qmOnEventUpdate(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
+    xi.abyssea.qmOnEventFinish(player, csid, option)
 end
 
 return entity

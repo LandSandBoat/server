@@ -1,8 +1,8 @@
 -----------------------------------
 -- Zone: Abyssea-Grauberg
---  NPC: qm7 (???)
--- Spawns Xiabalba
--- !pos -487 -168 211 254
+--  NPC: qm_burstrox_powderpate (???)
+-- Spawns Burstrox Powderpate
+-- !pos 396 40 -436 254
 -----------------------------------
 local ID = require('scripts/zones/Abyssea-Grauberg/IDs')
 require('scripts/globals/abyssea')
@@ -11,11 +11,11 @@ require('scripts/globals/items')
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.XIABALBA, { xi.items.DECAYING_MOLAR })
+    xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.BURSTROX_POWDERPATE, { xi.items.LENGTH_OF_GOBLIN_ROPE })
 end
 
 entity.onTrigger = function(player, npc)
-    xi.abyssea.qmOnTrigger(player, npc, 0, 0, { xi.items.DECAYING_MOLAR })
+    xi.abyssea.qmOnTrigger(player, npc, 0, 0, { xi.items.LENGTH_OF_GOBLIN_ROPE })
 end
 
 entity.onEventUpdate = function(player, csid, option)
