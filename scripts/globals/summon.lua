@@ -333,6 +333,11 @@ xi.summon.avatarFinalAdjustments = function(dmg, mob, skill, target, skilltype, 
     -- handling stoneskin
     dmg = utils.stoneskin(target, dmg)
 
+    if dmg > 0 then
+        target:updateEnmityFromDamage(mob, dmg)
+        target:handleAfflatusMiseryDamage(dmg)
+    end
+
     return dmg
 end
 
