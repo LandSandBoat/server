@@ -1438,12 +1438,10 @@ INSERT INTO `mob_skill_lists` VALUES ('Eldertaur',317,499); -- back_swish
 INSERT INTO `mob_skill_lists` VALUES ('Eldertaur',317,500); -- mow
 INSERT INTO `mob_skill_lists` VALUES ('Eldertaur',317,501); -- frightful_roar
 INSERT INTO `mob_skill_lists` VALUES ('Eldertaur',317,503); -- unblessed_armor
-INSERT INTO `mob_skill_lists` VALUES ('Eldertaur',317,1360); -- apocalyptic_ray
 INSERT INTO `mob_skill_lists` VALUES ('Mindertaur',318,498); -- triclip
 INSERT INTO `mob_skill_lists` VALUES ('Mindertaur',318,499); -- back_swish
 INSERT INTO `mob_skill_lists` VALUES ('Mindertaur',318,500); -- mow
 INSERT INTO `mob_skill_lists` VALUES ('Mindertaur',318,501); -- frightful_roar
-INSERT INTO `mob_skill_lists` VALUES ('Mindertaur',318,502); -- mortal_ray (TODO: change to Chthonian Ray when it is coded)
 INSERT INTO `mob_skill_lists` VALUES ('Mindertaur',318,503); -- unblessed_armor
 INSERT INTO `mob_skill_lists` VALUES ('Avatar-Shiva',319,881);
 INSERT INTO `mob_skill_lists` VALUES ('Avatar-Shiva',319,882);
