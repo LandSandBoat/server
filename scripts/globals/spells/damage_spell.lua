@@ -872,6 +872,9 @@ xi.spells.damage.calculateTMDA = function(caster, target, damageType)
 
     targetMagicDamageAdjustment = 1 + utils.clamp(combinedDamageTaken + magicDamageTakenII, -0.5, 0.125)  -- "Magic Damage Taken II" bypasses the regular cap, but combined cap is -87.5%
 
+    local uncappedMagicDamageTaken = target:getMod(xi.mod.UDMGMAGIC) / 10000   -- Mod is base 10000
+    targetMagicDamageAdjustment = targetMagicDamageAdjustment + uncappedMagicDamageTaken
+
     return targetMagicDamageAdjustment
 end
 
