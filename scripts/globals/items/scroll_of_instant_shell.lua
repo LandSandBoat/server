@@ -12,7 +12,7 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    local power = 2188 -- shell_iii base power
+    local power = 1900 -- shell_iii base power
     local duration = 1800
 
     target:addStatusEffect(xi.effect.SHELL, power, duration)
