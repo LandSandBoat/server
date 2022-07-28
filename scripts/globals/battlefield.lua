@@ -224,7 +224,7 @@ function xi.battlefield.HandleLootRolls(battlefield, lootTable, players, npc)
     players = players or battlefield:getPlayers()
     if battlefield:getStatus() == xi.battlefield.status.WON and battlefield:getLocalVar("lootSeen") == 0 then
         if npc then
-            npc:setAnimation(90)
+            npc:entityAnimationPacket("open")
         end
 
         for i = 1, #lootTable, 1 do
