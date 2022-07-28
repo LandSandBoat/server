@@ -743,7 +743,6 @@ xi.mobskills.mobDrainAttribute = function(mob, target, typeEffect, power, tick, 
 end
 
 xi.mobskills.mobDrainStatusEffectMove = function(mob, target)
-
     -- If target has Hysteria, no message skip rest
     if mob:hasStatusEffect(xi.effect.HYSTERIA) then
         return xi.msg.basic.NONE
@@ -752,7 +751,7 @@ xi.mobskills.mobDrainStatusEffectMove = function(mob, target)
     -- try to drain buff
     local effect = mob:stealStatusEffect(target)
 
-    if (effect ~= 0) then
+    if effect ~= 0 then
         return xi.msg.basic.EFFECT_DRAINED
     end
 
@@ -761,15 +760,13 @@ end
 
 -- Adds a status effect to a target
 xi.mobskills.mobStatusEffectMove = function(mob, target, typeEffect, power, tick, duration)
-
-    if (target:canGainStatusEffect(typeEffect, power)) then
+    if target:canGainStatusEffect(typeEffect, power) then
         local statmod = xi.mod.INT
         local element = mob:getStatusEffectElement(typeEffect)
 
         local resist = xi.mobskills.applyPlayerResistance(mob, typeEffect, target, mob:getStat(statmod)-target:getStat(statmod), 0, element)
 
-        if (resist >= 0.25) then
-
+        if resist >= 0.25 then
             local totalDuration = utils.clamp(duration * resist, 1)
             target:addStatusEffect(typeEffect, power, tick, totalDuration)
 
@@ -783,8 +780,7 @@ end
 
 -- similar to status effect move except, this will not land if the attack missed
 xi.mobskills.mobPhysicalStatusEffectMove = function(mob, target, skill, typeEffect, power, tick, duration)
-
-    if (xi.mobskills.mobPhysicalHit(skill)) then
+    if xi.mobskills.mobPhysicalHit(skill) then
         return xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, tick, duration)
     end
 
@@ -800,25 +796,23 @@ xi.mobskills.mobGazeMove = function(mob, target, typeEffect, power, tick, durati
 end
 
 xi.mobskills.mobBuffMove = function(mob, typeEffect, power, tick, duration)
-
-    if (mob:addStatusEffect(typeEffect, power, tick, duration)) then
+    if mob:addStatusEffect(typeEffect, power, tick, duration) then
         return xi.msg.basic.SKILL_GAIN_EFFECT
     end
     return xi.msg.basic.SKILL_NO_EFFECT
 end
 
-xi.mobskills.mobHealMove = function(target, heal)
-
-    local mobHP = target:getHP()
+xi.mobskills.mobHealMove = function(target, healAmount)
+    local mobHP    = target:getHP()
     local mobMaxHP = target:getMaxHP()
 
-    if (mobHP+heal > mobMaxHP) then
-        heal = mobMaxHP - mobHP
+    if mobHP + healAmount > mobMaxHP then
+        healAmount = mobMaxHP - mobHP
     end
 
     target:wakeUp()
 
-    target:addHP(heal)
+    target:addHP(healAmount)
 
-    return heal
+    return healAmount
 end

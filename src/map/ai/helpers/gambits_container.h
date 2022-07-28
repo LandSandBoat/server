@@ -16,16 +16,17 @@ namespace gambits
 {
     enum class G_TARGET : uint16
     {
-        SELF       = 0,
-        PARTY      = 1,
-        TARGET     = 2,
-        MASTER     = 3,
-        TANK       = 4,
-        MELEE      = 5,
-        RANGED     = 6,
-        CASTER     = 7,
-        TOP_ENMITY = 8,
-        CURILLA    = 9, // Special case for Rainemard
+        SELF        = 0,
+        PARTY       = 1,
+        TARGET      = 2,
+        MASTER      = 3,
+        TANK        = 4,
+        MELEE       = 5,
+        RANGED      = 6,
+        CASTER      = 7,
+        TOP_ENMITY  = 8,
+        CURILLA     = 9, // Special case for Rainemard
+        PARTY_MULTI = 10,
     };
 
     enum class G_CONDITION : uint16
@@ -54,6 +55,7 @@ namespace gambits
         PT_HAS_TANK        = 21,
         NOT_PT_HAS_TANK    = 22,
         IS_ECOSYSTEM       = 23,
+        HP_MISSING         = 24,
     };
 
     enum class G_REACTION : uint16
@@ -64,7 +66,6 @@ namespace gambits
         JA      = 3,
         WS      = 4,
         MS      = 5,
-        MSG     = 6,
     };
 
     enum class G_SELECT : uint16

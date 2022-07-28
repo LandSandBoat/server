@@ -1,13 +1,8 @@
 -----------------------------------
--- Pollen
---
--- Description: Restores HP.
---
+-- Max Potion - Restores 500 HP.
 -----------------------------------
-require("scripts/globals/mobskills")
-require("scripts/globals/settings")
 require("scripts/globals/status")
-require("scripts/globals/msg")
+require("scripts/globals/mobskills")
 -----------------------------------
 local mobskill_object = {}
 
@@ -16,17 +11,8 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local potency = skill:getParam()
-
-    if potency == 0 then
-        potency = 12
-    end
-
-    potency = potency - math.random(0, potency/4)
-
     skill:setMsg(xi.msg.basic.SELF_HEAL)
-
-    return xi.mobskills.mobHealMove(mob, mob:getMaxHP() * potency / 100)
+    return xi.mobskills.mobHealMove(target, 500)
 end
 
 return mobskill_object

@@ -1,20 +1,20 @@
 -----------------------------------
--- ID: 4151
--- Item: Echo Drops
--- Item Effect: This potion remedies silence.
+-- Echo Drops - Removes Silence.
 -----------------------------------
 require("scripts/globals/status")
+require("scripts/globals/mobskills")
 -----------------------------------
-local item_object = {}
+local mobskill_object = {}
 
-item_object.onItemCheck = function(target)
+mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-item_object.onItemUse = function(target)
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     if target:hasStatusEffect(xi.effect.SILENCE) then
         target:delStatusEffect(xi.effect.SILENCE)
     end
+    return 0
 end
 
-return item_object
+return mobskill_object
