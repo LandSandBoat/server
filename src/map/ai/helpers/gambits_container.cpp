@@ -818,8 +818,25 @@ namespace gambits
                     return result;
                     break;
                 }
-                case G_TP_TRIGGER::CLOSER:
+                case G_TP_TRIGGER::CLOSER: // Hold TP indefinitely to close a SC.
                 {
+                    auto* PSCEffect = target->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN);
+
+                    // TODO: ...and has a valid WS...
+
+                    return PSCEffect && PSCEffect->GetStartTime() + 3s < server_clock::now() && PSCEffect->GetTier() == 0;
+                    break;
+                }
+                case G_TP_TRIGGER::CLOSER_UNTIL_TP: // Will hold TP to close a SC, but WS immediately once specified value is reached.
+                {
+                    if (tp_value <= 1500) // If the value provided by the script is missing or too low
+                    {
+                        tp_value = 1500; // Apply the minimum TP Hold Threshold
+                    }
+                    if (POwner->health.tp >= tp_value) // tp_value reached
+                    {
+                        return true; // Time to WS!
+                    }
                     auto* PSCEffect = target->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN);
 
                     // TODO: ...and has a valid WS...
