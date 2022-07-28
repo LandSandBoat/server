@@ -13428,11 +13428,7 @@ sol::table CLuaBaseEntity::getEnmityList()
 
 std::optional<CLuaBaseEntity> CLuaBaseEntity::getTrickAttackChar(CLuaBaseEntity* PLuaBaseEntity)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
-    CBattleEntity* PMob = static_cast<CBattleEntity*>(PLuaBaseEntity->GetBaseEntity());
-
-    if (PMob != nullptr)
+    if (CBattleEntity* PMob = dynamic_cast<CBattleEntity*>(PLuaBaseEntity->GetBaseEntity()))
     {
         CBattleEntity* taTarget = battleutils::getAvailableTrickAttackChar((CBattleEntity*)m_PBaseEntity, PMob);
         if (taTarget)
