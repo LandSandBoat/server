@@ -40,8 +40,8 @@ entity.onTrigger = function(player, npc)
     local testItem    = xi.crafting.getTestItem(player, npc, xi.skill.GOLDSMITHING)
     local guildMember = xi.crafting.isGuildMember(player, 6)
     local rankCap     = xi.crafting.getCraftSkillCap(player, xi.skill.GOLDSMITHING)
-    local Rank        = player:getSkillRank(xi.skill.GOLDSMITHING)
-    local realSkill   = (craftSkill - Rank) / 32
+    local rank        = player:getSkillRank(xi.skill.GOLDSMITHING)
+    local realSkill   = (craftSkill - rank) / 32
     local expertQuestStatus = 0
 
     if guildMember == 1 then

@@ -11,7 +11,7 @@ require('scripts/globals/items')
 require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/settings/main')
+require('scripts/globals/settings')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
@@ -91,7 +91,6 @@ mission.sections =
                     end
                 end,
             },
-
 
             onEventFinish =
             {

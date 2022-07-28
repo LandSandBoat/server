@@ -4,7 +4,7 @@
 local ID = require("scripts/zones/Lower_Delkfutts_Tower/IDs")
 require("scripts/globals/conquest")
 require("scripts/globals/missions")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/zone")
 -----------------------------------
 local zone_object = {}

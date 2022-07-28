@@ -4,7 +4,7 @@
 local ID = require("scripts/zones/PsoXja/IDs")
 require("scripts/globals/conquest")
 require("scripts/globals/missions")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/treasure")
 require("scripts/globals/status")
 -----------------------------------
@@ -55,10 +55,11 @@ zone_object.afterZoneIn = function(player)
     player:entityVisualPacket("s123")
 
     -- ZONE WIDE LEVEL RESTRICTION
-    if (xi.settings.ENABLE_COP_ZONE_CAP == 1) then
-        local LVLcap = player:getCharVar("PSOXJA_RESTRICTION_LVL")
-        if (LVLcap > 0) then -- LV cap depends on entrance
-            player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, LVLcap, 0, 0)
+    if xi.settings.main.ENABLE_COP_ZONE_CAP == 1 then
+        local lvlCap = player:getCharVar("PSOXJA_RESTRICTION_LVL")
+
+        if (lvlCap > 0) then -- LV cap depends on entrance
+            player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, lvlCap, 0, 0)
         end
     end
 end

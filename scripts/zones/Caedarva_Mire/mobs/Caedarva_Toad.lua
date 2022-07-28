@@ -8,12 +8,11 @@ require("scripts/globals/quests")
 local entity = {}
 
 entity.onMobDeath = function(mob, player, isKiller)
+    local theWaywardAutomaton = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATON)
+    local theWaywardAutomatonProgress = player:getCharVar("TheWaywardAutomatonProgress")
 
-    local TheWaywardAutomation = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATION)
-    local TheWaywardAutomationProgress = player:getCharVar("TheWaywardAutomationProgress")
-
-    if (TheWaywardAutomation == QUEST_ACCEPTED and TheWaywardAutomationProgress == 2 and player:getCharVar("TheWaywardAutomationNM") == 0) then
-        player:setCharVar("TheWaywardAutomationNM", 1)
+    if theWaywardAutomaton == QUEST_ACCEPTED and theWaywardAutomatonProgress == 2 and player:getCharVar("TheWaywardAutomatonNM") == 0 then
+        player:setCharVar("TheWaywardAutomatonNM", 1)
     end
 end
 

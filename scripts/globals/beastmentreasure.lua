@@ -10,7 +10,8 @@ require('scripts/globals/zone')
 xi = xi or {}
 xi.beastmentreasure = xi.beastmentreasure or {}
 
-local zoneData = {
+local zoneData =
+{
     [xi.zone.YUHTUNGA_JUNGLE] =
     {
         statusvar = 'BMT_Lowlands_Status',
@@ -70,7 +71,8 @@ local zoneData = {
     }
 }
 
-local sharedLoot = {
+local sharedLoot =
+{
     -- All items are assigned a "weight" here
     rocksgems =
     {
@@ -225,7 +227,7 @@ xi.beastmentreasure.handleNpcOnEventFinish = function(player, csid)
     local zd = zoneData[player:getZoneID()]
 
     if csid == 100 then
-        player:addCharVar(zd.statusvar, QUEST_ACCEPTED)
+        player:incrementCharVar(zd.statusvar, QUEST_ACCEPTED)
     elseif csid == 101 then
         player:confirmTrade()
         player:setCharVar(zd.statusvar, QUEST_COMPLETED)

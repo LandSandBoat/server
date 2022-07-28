@@ -131,6 +131,18 @@ void CLuaAction::reaction(uint32 actionTargetID, uint8 reaction)
     }
 }
 
+void CLuaAction::modifier(uint32 actionTargetID, uint8 modifier)
+{
+    for (auto&& actionList : m_PLuaAction->actionLists)
+    {
+        if (actionList.ActionTargetID == actionTargetID)
+        {
+            actionList.actionTargets[0].modifier = static_cast<MODIFIER>(modifier);
+            return;
+        }
+    }
+}
+
 void CLuaAction::additionalEffect(uint32 actionTargetID, uint16 additionalEffect)
 {
     for (auto&& actionList : m_PLuaAction->actionLists)
@@ -182,6 +194,7 @@ void CLuaAction::Register()
     SOL_REGISTER("setAnimation", CLuaAction::setAnimation);
     SOL_REGISTER("speceffect", CLuaAction::speceffect);
     SOL_REGISTER("reaction", CLuaAction::reaction);
+    SOL_REGISTER("modifier", CLuaAction::modifier);
     SOL_REGISTER("additionalEffect", CLuaAction::additionalEffect);
     SOL_REGISTER("addEffectParam", CLuaAction::addEffectParam);
     SOL_REGISTER("addEffectMessage", CLuaAction::addEffectMessage);

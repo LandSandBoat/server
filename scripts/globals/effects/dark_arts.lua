@@ -6,7 +6,9 @@ require("scripts/globals/status")
 local effect_object = {}
 
 effect_object.onEffectGain = function(target, effect)
-    target:recalculateAbilitiesTable()
+    if target:getObjType() ~= xi.objType.TRUST then -- account for trusts
+        target:recalculateAbilitiesTable()
+    end
     local bonus = effect:getPower()
     local helix = effect:getSubPower()
 
@@ -24,14 +26,26 @@ effect_object.onEffectGain = function(target, effect)
         target:addMod(xi.mod.HELIX_EFFECT, helix)
         target:addMod(xi.mod.HELIX_DURATION, 72)
     end
-    target:recalculateSkillsTable()
+    if target:getObjType() ~= xi.objType.TRUST then
+        target:recalculateSkillsTable()
+    else -- account for trusts
+        local rankD = target:getSkillLevel(xi.skill.ENFEEBLING_MAGIC)
+        local artsRank = target:getMaxSkillLevel(target:getMainLvl(), xi.job.RDM, xi.skill.ENHANCING_MAGIC)
+        local trustArts = artsRank - rankD
+
+        -- TODO: update charutils to work with Trusts
+        target:addMod(xi.mod.MACC, trustArts)
+        -- cheats in MACC since Skill MODs aren't processed outside of charutils
+    end
 end
 
 effect_object.onEffectTick = function(target, effect)
 end
 
 effect_object.onEffectLose = function(target, effect)
-    target:recalculateAbilitiesTable()
+    if target:getObjType() ~= xi.objType.TRUST then -- account for trusts
+        target:recalculateAbilitiesTable()
+    end
     local bonus = effect:getPower()
     local helix = effect:getSubPower()
 
@@ -49,7 +63,17 @@ effect_object.onEffectLose = function(target, effect)
         target:delMod(xi.mod.HELIX_EFFECT, helix)
         target:delMod(xi.mod.HELIX_DURATION, 72)
     end
-    target:recalculateSkillsTable()
+    if target:getObjType() ~= xi.objType.TRUST then -- account for trusts
+        target:recalculateSkillsTable()
+    else
+        local rankD = target:getSkillLevel(xi.skill.ENFEEBLING_MAGIC)
+        local artsRank = target:getMaxSkillLevel(target:getMainLvl(), xi.job.RDM, xi.skill.ENHANCING_MAGIC)
+        local trustArts = artsRank - rankD
+
+        -- TODO: update charutils to work with Trusts
+        target:delMod(xi.mod.MACC, trustArts)
+        -- cheats out MACC since Skill MODs aren't processed outside of charutils
+    end
 end
 
 return effect_object

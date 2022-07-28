@@ -8,7 +8,7 @@ local ID = require("scripts/zones/Port_Bastok/IDs")
 require("scripts/globals/teleports")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------
@@ -53,15 +53,15 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local LureBastok = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LURE_OF_THE_WILDCAT)
-    local WildcatBastok = player:getCharVar("WildcatBastok")
-    if (LureBastok ~= 2 and xi.settings.ENABLE_TOAU == 1) then
-        if (LureBastok == 0) then
+    local lureBastok = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LURE_OF_THE_WILDCAT)
+    local wildcatBastok = player:getCharVar("WildcatBastok")
+    if (lureBastok ~= 2 and xi.settings.main.ENABLE_TOAU == 1) then
+        if (lureBastok == 0) then
             player:startEvent(357)
         else
-            if (WildcatBastok == 0) then
+            if (wildcatBastok == 0) then
                 player:startEvent(358)
-            elseif utils.mask.isFull(WildcatBastok, 20) then
+            elseif utils.mask.isFull(wildcatBastok, 20) then
                 player:startEvent(360)
             else
                 player:startEvent(359)

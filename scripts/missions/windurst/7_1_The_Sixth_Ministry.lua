@@ -9,8 +9,6 @@
 -- Zokima-Rokima    : !pos 0 -16 124 239
 -- Tosuka-Porika    : !pos -26 -6 103 238
 -- _4pc             : !pos 132 12 -19 169
------------------------------------
-require('scripts/settings/main')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/items')
 require('scripts/globals/keyitems')

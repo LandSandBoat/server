@@ -7,7 +7,7 @@
 --  Range: Melee
 --  Notes: Reduces defense by 75%.  Can be removed with Monk Job Ability Counterstance.
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------

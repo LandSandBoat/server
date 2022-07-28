@@ -4,6 +4,7 @@
 require("scripts/globals/teleports")
 require("scripts/globals/zone")
 require("scripts/globals/status")
+require("scripts/globals/items")
 -----------------------------------
 xi = xi or {}
 xi.campaign = {}
@@ -107,7 +108,7 @@ end
 -- -------------------------------------------------------------------
 
 xi.campaign.getSandOriaNotesItem = function(i)
-    local SandOria_AN =
+    local sandOria_AN =
     {
         [2] = {id = 15754, price = 980}, -- Sprinter's Shoes
         [258] = {id = 5428, price = 10}, -- Scroll of Instant Retrace
@@ -117,8 +118,8 @@ xi.campaign.getSandOriaNotesItem = function(i)
         [1282] = {id = 15841, price = 5000, adj = 5000}, -- Recall Ring: Jugner
         [1538] = {id = 15842, price = 5000, adj = 5000}, -- Recall Ring: Pashow
         [1794] = {id = 15843, price = 5000, adj = 5000}, -- Recall Ring: Meriphataud
-        [2050] = {id = 10116, price = 2000}, -- Cipher: Valaineral
-        [2306] = {id = 10153, price = 2000}, -- Cipher: Adelheid
+        [2050] = {id = xi.items.CIPHER_OF_VALAINERALS_ALTER_EGO, price = 2000}, -- Cipher: Valaineral
+        [2306] = {id = xi.items.CIPHER_OF_ADELHEIDS_ALTER_EGO, price = 2000}, -- Cipher: Adelheid
         -- Stars Service
         [18] = {id = 14581, price = 15000, adj = 10000}, -- Iron Ram Chainmain
         [274] = {id = 15005, price = 10500, adj = 7000}, -- Iron Ram Mufflers
@@ -147,12 +148,12 @@ xi.campaign.getSandOriaNotesItem = function(i)
         [82] = {id = 17684, price = 150000, adj = 100000}, -- Griffinclaw
         [338] = {id = 11636, price = 75000, adj = 50000} -- Royal Knight Sigil Ring
     }
-    local item = SandOria_AN[i]
+    local item = sandOria_AN[i]
     return item.id, item.price, item.adj
 end
 
 xi.campaign.getBastokNotesItem = function(i)
-    local Bastok_AN =
+    local bastok_AN =
     {
         [2] = {id = 15754, price = 980}, -- Sprinter's Shoes
         [258] = {id = 5428, price = 10}, -- Scroll of Instant Retrace
@@ -192,12 +193,12 @@ xi.campaign.getBastokNotesItem = function(i)
         [82] = {id = 17685, price = 150000, adj = 100000}, -- Lex Talionis
         [338] = {id = 11545, price = 75000, adj = 50000} -- Fourth Mantle
     }
-    local item = Bastok_AN[i]
+    local item = bastok_AN[i]
     return item.id, item.price, item.adj
 end
 
 xi.campaign.getWindurstNotesItem = function(i)
-    local Windurst_AN =
+    local windurst_AN =
     {
         [2] = {id = 15754, price = 980}, -- Sprinter's Shoes
         [258] = {id = 5428, price = 10}, -- Scroll of Instant Retrace
@@ -241,7 +242,7 @@ xi.campaign.getWindurstNotesItem = function(i)
         [82] = {id = 17684, price = 150000, adj = 10000}, -- Samudra
         [338] = {id = 11636, price = 75000, adj = 50000} -- Mercenary Major Charm
     }
-    local item = Windurst_AN[i]
+    local item = windurst_AN[i]
     return item.id, item.price, item.adj
 end
 

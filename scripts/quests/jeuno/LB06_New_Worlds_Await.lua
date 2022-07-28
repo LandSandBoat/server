@@ -3,8 +3,6 @@
 -----------------------------------
 -- Log ID: 3, Quest ID: 133
 -- Nomad Moogle : !pos 10.012 1.453 121.883 243
------------------------------------
-require('scripts/settings/main')
 require('scripts/globals/items')
 require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
@@ -28,7 +26,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                xi.settings.MAX_LEVEL >= 75 and
+                xi.settings.main.MAX_LEVEL >= 75 and
                 player:getMainLvl() >= 75 and
                 player:getLevelCap() == 75 and
                 not player:hasKeyItem(xi.ki.LIMIT_BREAKER)
@@ -72,7 +70,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                xi.settings.MAX_LEVEL == 75 and
+                xi.settings.main.MAX_LEVEL == 75 and
                 player:getMainLvl() >= 75 and
                 player:getLevelCap() == 75 and
                 player:hasKeyItem(xi.ki.LIMIT_BREAKER)
@@ -93,7 +91,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                xi.settings.MAX_LEVEL >= 80 and
+                xi.settings.main.MAX_LEVEL >= 80 and
                 player:getMainLvl() >= 75 and
                 player:getLevelCap() == 75 and
                 player:hasKeyItem(xi.ki.LIMIT_BREAKER)

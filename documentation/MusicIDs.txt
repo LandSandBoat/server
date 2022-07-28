@@ -69,7 +69,7 @@
   66    Arciela                     CS
   67    Mog Resort                  Mog Garden
   68    Worlds Away                 CS
-  69    ?                           CS
+  69    Distant Worlds              CS
   70    Monstrosity                 Monstrosity
   71    The Pioneers (Piano)        CS
   72    The Divine                  Kamihr Drifts
@@ -79,18 +79,18 @@
   76    Forever Today               Adoulin Ending Song
   77    Unused ID                   Unused ID
   78    Forever Today (EP. Ver - Instrumental)
-  79    ?                           Reisenjima, Rhapsodies CS music
-  80    ?                           Escha Zi'Tah, Escha Ru'Aun
+  79    Iroha                       Reisenjima, Rhapsodies CS music
+  80    The Boundless Black         Escha Zi'Tah, Escha Ru'Aun
   81    Isle of the Gods            Rhapsodies final boss
   82    Wail of the Void            Rhapsodies finale
   83    Rhapsodies of Vana'diel     Ending Song
-  84    Unknown name                Mount riding music
-  85    Unused ID                   Unused ID
-  86    Unused ID                   Unused ID
-  87    Unused ID                   Unused ID
-  88    Unused ID                   Unused ID
-  89    Unused ID                   Unused ID
-  90    Unused ID                   Unused ID
+  84    Full Speed Ahead!           Mount riding music
+  85    ?                           ???
+  86    Awakening                   Dynamis, Shadow Lord Fight
+  87    ?                           ???
+  88    ?                           Dynamis Divergence
+  89    ?                           ???
+  90    ?                           ???
   91    Unused ID                   Unused ID
   92    Unused ID                   Unused ID
   93    Unused ID                   Unused ID

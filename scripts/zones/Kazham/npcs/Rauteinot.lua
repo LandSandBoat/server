@@ -4,7 +4,7 @@
 -- Starts and Finishes Quest: Missionary Man
 -- !pos -42 -10 -89 250
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/shop")
 require("scripts/globals/quests")
@@ -19,23 +19,22 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local MissionaryMan = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.MISSIONARY_MAN)
-    local MissionaryManVar = player:getCharVar("MissionaryManVar")
+    local missionaryMan = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.MISSIONARY_MAN)
+    local missionaryManVar = player:getCharVar("MissionaryManVar")
 
-    if (MissionaryMan == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 3) then
+    if (missionaryMan == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 3) then
         player:startEvent(137, 0, 1146) -- Start quest "Missionary Man"
-    elseif (MissionaryMan == QUEST_ACCEPTED and MissionaryManVar == 1) then
+    elseif (missionaryMan == QUEST_ACCEPTED and missionaryManVar == 1) then
         player:startEvent(138, 0, 1146) -- During quest (before trade marble) "Missionary Man"
-    elseif (MissionaryMan == QUEST_ACCEPTED and (MissionaryManVar == 2 or MissionaryManVar == 3)) then
+    elseif (missionaryMan == QUEST_ACCEPTED and (missionaryManVar == 2 or missionaryManVar == 3)) then
         player:startEvent(140) -- During quest (after trade marble) "Missionary Man"
-    elseif (MissionaryMan == QUEST_ACCEPTED and MissionaryManVar == 4) then
+    elseif (missionaryMan == QUEST_ACCEPTED and missionaryManVar == 4) then
         player:startEvent(141) -- Finish quest "Missionary Man"
-    elseif (MissionaryMan == QUEST_COMPLETED) then
+    elseif (missionaryMan == QUEST_COMPLETED) then
         player:startEvent(142) -- New standard dialog
     else
         player:startEvent(136) -- Standard dialog
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)

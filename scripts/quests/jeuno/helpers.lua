@@ -13,7 +13,7 @@ xi.jeuno = xi.jeuno or {}
 xi.jeuno.helpers = xi.jeuno.helpers or {}
 
 -- Base class for use by the Gobbiebag questline to reduce redundant code.
--- The quests differ slightly in requested items, inventory size key, text, etc...
+-- The quests differ slightly in requested items, inventory size key, text, etc.
 -- The params parameter stores the tunable information needed to perform the proper quest in the chain.
 xi.jeuno.helpers.GobbiebagQuest = {}
 

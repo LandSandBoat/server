@@ -24,12 +24,12 @@ entity.onMobDespawn = function(mob)
     local nqId = mob:getID()
 
     if nqId == ID.mob.YAGUDO_AVATAR then
-        local hqId = mob:getID() + 3
-        local ToD = GetServerVariable("[POP]Tzee_Xicu_the_Manifest")
-        local kills = GetServerVariable("[PH]Tzee_Xicu_the_Manifest")
-        local popNow = (math.random(1, 5) == 3 or kills > 6)
+        local hqId        = mob:getID() + 3
+        local timeOfDeath = GetServerVariable("[POP]Tzee_Xicu_the_Manifest")
+        local kills       = GetServerVariable("[PH]Tzee_Xicu_the_Manifest")
+        local popNow      = (math.random(1, 5) == 3 or kills > 6)
 
-        if os.time() > ToD and popNow then
+        if os.time() > timeOfDeath and popNow then
             DisallowRespawn(nqId, true)
             DisallowRespawn(hqId, false)
             UpdateNMSpawnPoint(hqId)

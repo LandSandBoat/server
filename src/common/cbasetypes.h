@@ -25,7 +25,7 @@
     }
 #else
 #include "assert.h"
-#define XI_DEBUG_BREAK_IF(_CONDITION_) \
+#define XI_DEBUG_BREAK_IF(_CONDITION_)                      \
     if (_CONDITION_)                                        \
     {                                                       \
         ShowError("HIT DEBUG CONDITION: %s", #_CONDITION_); \
@@ -33,7 +33,7 @@
     }
 #endif
 #else
-#define XI_DEBUG_BREAK_IF(_CONDITION_) \
+#define XI_DEBUG_BREAK_IF(_CONDITION_)                      \
     if (_CONDITION_)                                        \
     {                                                       \
         ShowError("HIT DEBUG CONDITION: %s", #_CONDITION_); \
@@ -63,6 +63,10 @@ using namespace std::literals::chrono_literals;
 using server_clock = std::chrono::system_clock;
 using time_point   = server_clock::time_point;
 using duration     = server_clock::duration;
+
+using hires_clock      = std::chrono::high_resolution_clock;
+using hires_time_point = server_clock::time_point;
+using hires_duration   = server_clock::duration;
 
 #include <queue>
 

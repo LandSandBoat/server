@@ -38,8 +38,8 @@ public:
     void         setEntityFlags(uint32 EntityFlags); // Change the current value in m_flags
     void         HideHP(bool hide);
     bool         IsHPHidden() const;
-    void         Untargetable(bool untargetable);
-    bool         IsUntargetable() const;
+    void         SetUntargetable(bool untargetable);
+    bool         GetUntargetable() const;
     bool         IsTriggerable() const;
     virtual bool isWideScannable() override;
     virtual void PostTick() override;
@@ -47,8 +47,8 @@ public:
     {
     }
 
-    CNpcEntity();  // конструктор
-    ~CNpcEntity(); // деструктор
+    CNpcEntity();
+    ~CNpcEntity();
 
 private:
 };

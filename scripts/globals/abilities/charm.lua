@@ -13,7 +13,7 @@
 -- Tough            |1.5 Minutes
 -- Very Tough       |1-20 seconds
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/pets")
 require("scripts/globals/msg")
@@ -34,16 +34,16 @@ ability_object.onUseAbility = function(player, target, ability)
     if target:isPC() then
         ability:setMsg(xi.msg.basic.NO_EFFECT)
     else
-        local Tamed = false
+        local isTamed = false
 
         if player:getLocalVar("Tamed_Mob") == target:getID() then
             player:addMod(xi.mod.CHARM_CHANCE, 10)
-            Tamed = true
+            isTamed = true
         end
 
         player:charmPet(target)
 
-        if Tamed then
+        if isTamed then
             player:delMod(xi.mod.CHARM_CHANCE, 10)
             player:setLocalVar("Tamed_Mob", 0)
         end

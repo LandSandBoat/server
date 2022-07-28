@@ -27,9 +27,9 @@
 #include "status_effect_container.h"
 
 /************************************************************************
- *																		*
- *  Constructor.															*
- *																		*
+ *                                                                        *
+ *  Constructor.                                                            *
+ *                                                                        *
  ************************************************************************/
 CAttackRound::CAttackRound(CBattleEntity* attacker, CBattleEntity* defender)
 : m_subWeaponType(DAMAGE_TYPE::NONE)
@@ -89,16 +89,16 @@ CAttackRound::CAttackRound(CBattleEntity* attacker, CBattleEntity* defender)
 }
 
 /************************************************************************
- *																		*
- *  Destructor.															*
- *																		*
+ *                                                                        *
+ *  Destructor.                                                            *
+ *                                                                        *
  ************************************************************************/
 CAttackRound::~CAttackRound() = default;
 
 /************************************************************************
- *																		*
- *  Returns the attack swing count.										*
- *																		*
+ *                                                                        *
+ *  Returns the attack swing count.                                        *
+ *                                                                        *
  ************************************************************************/
 uint8 CAttackRound::GetAttackSwingCount()
 {
@@ -106,9 +106,9 @@ uint8 CAttackRound::GetAttackSwingCount()
 }
 
 /************************************************************************
- *																		*
- *  Returns an attack via index.											*
- *																		*
+ *                                                                        *
+ *  Returns an attack via index.                                            *
+ *                                                                        *
  ************************************************************************/
 CAttack& CAttackRound::GetAttack(uint8 index)
 {
@@ -116,9 +116,9 @@ CAttack& CAttackRound::GetAttack(uint8 index)
 }
 
 /************************************************************************
- *																		*
- *  Returns the current attack.											*
- *																		*
+ *                                                                        *
+ *  Returns the current attack.                                            *
+ *                                                                        *
  ************************************************************************/
 CAttack& CAttackRound::GetCurrentAttack()
 {
@@ -126,9 +126,9 @@ CAttack& CAttackRound::GetCurrentAttack()
 }
 
 /************************************************************************
- *																		*
- *  Sets the SATA flag.													*
- *																		*
+ *                                                                        *
+ *  Sets the SATA flag.                                                    *
+ *                                                                        *
  ************************************************************************/
 void CAttackRound::SetSATA(bool value)
 {
@@ -136,9 +136,9 @@ void CAttackRound::SetSATA(bool value)
 }
 
 /************************************************************************
- *																		*
- *  Returns the SATA flag.												*
- *																		*
+ *                                                                        *
+ *  Returns the SATA flag.                                                *
+ *                                                                        *
  ************************************************************************/
 bool CAttackRound::GetSATAOccured() const
 {
@@ -146,9 +146,9 @@ bool CAttackRound::GetSATAOccured() const
 }
 
 /************************************************************************
- *																		*
- *  Returns the TA entity.												*
- *																		*
+ *                                                                        *
+ *  Returns the TA entity.                                                *
+ *                                                                        *
  ************************************************************************/
 CBattleEntity* CAttackRound::GetTAEntity()
 {
@@ -180,9 +180,9 @@ bool CAttackRound::IsH2H()
 }
 
 /************************************************************************
- *																		*
- *  Adds an attack swing.												*
- *																		*
+ *                                                                        *
+ *  Adds an attack swing.                                                *
+ *                                                                        *
  ************************************************************************/
 void CAttackRound::AddAttackSwing(PHYSICAL_ATTACK_TYPE type, PHYSICAL_ATTACK_DIRECTION direction, uint8 count)
 {
@@ -202,9 +202,9 @@ void CAttackRound::AddAttackSwing(PHYSICAL_ATTACK_TYPE type, PHYSICAL_ATTACK_DIR
 }
 
 /************************************************************************
- *																		*
- *  Deletes the first attack in the list.								*
- *																		*
+ *                                                                        *
+ *  Deletes the first attack in the list.                                *
+ *                                                                        *
  ************************************************************************/
 void CAttackRound::DeleteAttackSwing()
 {
@@ -213,7 +213,7 @@ void CAttackRound::DeleteAttackSwing()
 
 /************************************************************************
  *                                                                       *
- *  Creates up to many attacks for a particular hand.			        *
+ *  Creates up to many attacks for a particular hand.                    *
  *                                                                       *
  ************************************************************************/
 void CAttackRound::CreateAttacks(CItemWeapon* PWeapon, PHYSICAL_ATTACK_DIRECTION direction)
@@ -252,9 +252,11 @@ void CAttackRound::CreateAttacks(CItemWeapon* PWeapon, PHYSICAL_ATTACK_DIRECTION
     }
 
     // Checking the players triple, double and quadruple attack
-    int16 tripleAttack = m_attacker->getMod(Mod::TRIPLE_ATTACK);
-    int16 doubleAttack = m_attacker->getMod(Mod::DOUBLE_ATTACK);
-    int16 quadAttack   = m_attacker->getMod(Mod::QUAD_ATTACK);
+    int16 tripleAttack     = m_attacker->getMod(Mod::TRIPLE_ATTACK);
+    int16 doubleAttack     = m_attacker->getMod(Mod::DOUBLE_ATTACK);
+    int16 quadAttack       = m_attacker->getMod(Mod::QUAD_ATTACK);
+    bool  multiHitOccurred = false;
+
     // Checking for Mythic Weapon Aftermath
     int16 occAttThriceRate = std::clamp<int16>(m_attacker->getMod(Mod::MYTHIC_OCC_ATT_THRICE), 0, 100);
     int16 occAttTwiceRate  = std::clamp<int16>(m_attacker->getMod(Mod::MYTHIC_OCC_ATT_TWICE), 0, 100);
@@ -301,15 +303,18 @@ void CAttackRound::CreateAttacks(CItemWeapon* PWeapon, PHYSICAL_ATTACK_DIRECTION
     // Quad/Triple/Double Attack
     else if (xirand::GetRandomNumber(100) < quadAttack)
     {
-        AddAttackSwing(PHYSICAL_ATTACK_TYPE::QUAD, direction, 3);
+        AddAttackSwing(PHYSICAL_ATTACK_TYPE::QUAD, direction, 4);
+        multiHitOccurred = true;
     }
     else if (xirand::GetRandomNumber(100) < tripleAttack)
     {
-        AddAttackSwing(PHYSICAL_ATTACK_TYPE::TRIPLE, direction, 2);
+        AddAttackSwing(PHYSICAL_ATTACK_TYPE::TRIPLE, direction, 3);
+        multiHitOccurred = true;
     }
     else if (xirand::GetRandomNumber(100) < doubleAttack)
     {
-        AddAttackSwing(PHYSICAL_ATTACK_TYPE::DOUBLE, direction, 1);
+        AddAttackSwing(PHYSICAL_ATTACK_TYPE::DOUBLE, direction, 2);
+        multiHitOccurred = true;
     }
     // Mythic Weapons Aftermath, only main hand
     else if (direction == PHYSICAL_ATTACK_DIRECTION::RIGHTATTACK && xirand::GetRandomNumber(100) < occAttThriceRate)
@@ -389,13 +394,17 @@ void CAttackRound::CreateAttacks(CItemWeapon* PWeapon, PHYSICAL_ATTACK_DIRECTION
         }
     }
 
-    // Default hit
-    AddAttackSwing(PHYSICAL_ATTACK_TYPE::NORMAL, direction, 1);
+    // Default hit, necessary to check for multi hits as the hits are assigned as PHYSICAL_ATTACK_TYPE
+    // Double and Triple Attack Damage + mods are assigned to hits based on attack type
+    if (multiHitOccurred == false)
+    {
+        AddAttackSwing(PHYSICAL_ATTACK_TYPE::NORMAL, direction, 1);
+    }
 }
 
 /************************************************************************
  *                                                                       *
- *  Creates kick attacks.										        *
+ *  Creates kick attacks.                                                *
  *                                                                       *
  ************************************************************************/
 void CAttackRound::CreateKickAttacks()
@@ -427,9 +436,9 @@ void CAttackRound::CreateKickAttacks()
 }
 
 /************************************************************************
- *																		*
- *  Creates a Daken throw.												*
- *																		*
+ *                                                                        *
+ *  Creates a Daken throw.                                                *
+ *                                                                        *
  ************************************************************************/
 void CAttackRound::CreateDakenAttack()
 {

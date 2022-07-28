@@ -4,7 +4,7 @@
 local ID = require("scripts/zones/Full_Moon_Fountain/IDs")
 require("scripts/globals/conquest")
 require("scripts/globals/missions")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/titles")
 -----------------------------------
 local zone_object = {}

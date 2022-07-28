@@ -76,7 +76,6 @@ zone_object.onRegionEnter = function(player, region)
         end,
 
         default = function (x)
-        --print("default")
         end,
     }
 

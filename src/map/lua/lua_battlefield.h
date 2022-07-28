@@ -60,18 +60,18 @@ public:
     uint32   getLastTimeUpdate();
     auto     getInitiator() -> std::pair<uint32, std::string>;
 
-    void  setLastTimeUpdate(uint32 seconds);
-    void  setTimeLimit(uint32 seconds);
-    void  setWipeTime(uint32 seconds);
-    void  setRecord(std::string const& name, uint32 seconds);
-    void  setStatus(uint8 status);
-    void  setLocalVar(std::string const& name, uint64_t value);
-    bool  loadMobs();
-    bool  spawnLoot(sol::object const& PEntityObj);
-    auto  insertEntity(uint16 targid, bool ally, bool inBattlefield) -> std::optional<CLuaBaseEntity>;
-    bool  cleanup(bool cleanup);
-    void  win();
-    void  lose();
+    void setLastTimeUpdate(uint32 seconds);
+    void setTimeLimit(uint32 seconds);
+    void setWipeTime(uint32 seconds);
+    void setRecord(std::string const& name, uint32 seconds);
+    void setStatus(uint8 status);
+    void setLocalVar(std::string const& name, uint64_t value);
+    bool loadMobs();
+    bool spawnLoot(sol::object const& PEntityObj);
+    auto insertEntity(uint16 targid, bool ally, bool inBattlefield) -> std::optional<CLuaBaseEntity>;
+    bool cleanup(bool cleanup);
+    void win();
+    void lose();
 
     static void Register();
 };

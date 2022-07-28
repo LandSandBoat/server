@@ -14,18 +14,18 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local Rftd = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.REQUIEM_FOR_THE_DEPARTED)
+    local rftd = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.REQUIEM_FOR_THE_DEPARTED)
 
     -- Change to BRASS_RIBBON_OF_SERVICE later when Campaign has been added.
-    if Rftd == QUEST_AVAILABLE and player:hasKeyItem(xi.ki.BRONZE_RIBBON_OF_SERVICE) and player:getMainLvl() >= 30 then
+    if rftd == QUEST_AVAILABLE and player:hasKeyItem(xi.ki.BRONZE_RIBBON_OF_SERVICE) and player:getMainLvl() >= 30 then
         player:startEvent(105) -- Start quest "Requiem for the Departed"
-    elseif Rftd == QUEST_ACCEPTED then
+    elseif rftd == QUEST_ACCEPTED then
         if player:hasKeyItem(xi.ki.SHEAF_OF_HANDMADE_INCENSE) then
             player:startEvent(107) -- During quest "Requiem for the Departed" (with Handmade Incense KI)
         else
             player:startEvent(106) -- During quest "Requiem for the Departed" (before retrieving KI Handmade Incense)
         end
-    elseif Rftd == QUEST_COMPLETED then
+    elseif rftd == QUEST_COMPLETED then
         player:startEvent(108) -- New standard dialog after "Requiem for the Departed"
     else
         player:startEvent(104) -- Standard dialog

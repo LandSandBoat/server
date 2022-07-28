@@ -22,7 +22,7 @@ entity.onEventFinish = function(player, csid, option, door)
         SpawnMob(ID.mob[6].rampart3, instance)
         SpawnMob(ID.mob[6].rampart4, instance)
         door:setAnimation(8)
-        door:untargetable(true)
+        door:setUntargetable(true)
     end
 end
 

@@ -10,12 +10,14 @@
 -----------------------------------
 require("scripts/globals/teleports")
 require("scripts/globals/keyitems")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 require("scripts/globals/zone")
 require("scripts/globals/msg")
 require("scripts/globals/roe")
+require("scripts/globals/npc_util")
+require("scripts/globals/extravaganza")
 -----------------------------------
 
 xi = xi or {}
@@ -35,7 +37,8 @@ xi.regime.type =
 -- reward is the gil/tabs you get for completing
 -----------------------------------
 
-local regimeInfo = {
+local regimeInfo =
+{
 
     -----------------------------------
     -- Fields of Valor information
@@ -470,27 +473,26 @@ local regimeInfo = {
         },
         finishOptions =
         {
-            [  3] = {act = "CANCEL_REGIME",   cost =  0, discounted =  0},
-            [ 20] = {act = "REPATRIATION",    cost = 50, discounted = 10},
-            [ 36] = {act = "CIRCUMSPECTION",  cost =  5, discounted =  5},
-            [ 52] = {act = "HOMING_INSTINCT", cost = 50, discounted = 25},
-            [ 68] = {act = "RERAISE",         cost = 10, discounted =  5},
-            [ 84] = {act = "RERAISE_II",      cost = 20, discounted = 10},
-            [100] = {act = "RERAISE_III",     cost = 30, discounted = 15},
-            [116] = {act = "REGEN",           cost = 20, discounted = 10},
-            [132] = {act = "REFRESH",         cost = 20, discounted = 10},
-            [148] = {act = "PROTECT",         cost = 15, discounted =  5},
-            [164] = {act = "SHELL",           cost = 15, discounted =  5},
-            [180] = {act = "HASTE",           cost = 20, discounted = 10},
-            [196] = {act = "DRIED_MEAT",      cost = 50, discounted = 25, food = true},
-            [212] = {act = "SALTED_FISH",     cost = 50, discounted = 25, food = true},
-            [228] = {act = "HARD_COOKIE",     cost = 50, discounted = 25, food = true},
-            [244] = {act = "INSTANT_NOODLES", cost = 50, discounted = 25, food = true},
-            [260] = {act = "DRIED_AGARICUS",  cost = 50, discounted = 25, food = true},
-            [276] = {act = "INSTANT_RICE",    cost = 50, discounted = 25, food = true},
-
-            -- TODO: implement Trust: Sakura and Trust: Koru-Moru (Alter Ego Extravaganza)
-            -- CIPHER_SAKURA   = 292,
+            [  3] = {act = "CANCEL_REGIME",   cost =   0, discounted =   0},
+            [ 20] = {act = "REPATRIATION",    cost =  50, discounted =  10},
+            [ 36] = {act = "CIRCUMSPECTION",  cost =   5, discounted =   5},
+            [ 52] = {act = "HOMING_INSTINCT", cost =  50, discounted =  25},
+            [ 68] = {act = "RERAISE",         cost =  10, discounted =   5},
+            [ 84] = {act = "RERAISE_II",      cost =  20, discounted =  10},
+            [100] = {act = "RERAISE_III",     cost =  30, discounted =  15},
+            [116] = {act = "REGEN",           cost =  20, discounted =  10},
+            [132] = {act = "REFRESH",         cost =  20, discounted =  10},
+            [148] = {act = "PROTECT",         cost =  15, discounted =   5},
+            [164] = {act = "SHELL",           cost =  15, discounted =   5},
+            [180] = {act = "HASTE",           cost =  20, discounted =  10},
+            [196] = {act = "DRIED_MEAT",      cost =  50, discounted =  25, food = true},
+            [212] = {act = "SALTED_FISH",     cost =  50, discounted =  25, food = true},
+            [228] = {act = "HARD_COOKIE",     cost =  50, discounted =  25, food = true},
+            [244] = {act = "INSTANT_NOODLES", cost =  50, discounted =  25, food = true},
+            [260] = {act = "DRIED_AGARICUS",  cost =  50, discounted =  25, food = true},
+            [276] = {act = "INSTANT_RICE",    cost =  50, discounted =  25, food = true},
+            [292] = {act = "CIPHER_SAKURA",   cost = 300, discounted = 300},
+            [308] = {act = "CIPHER_KORU",     cost = 300, discounted = 300},
         },
         zone =
         {
@@ -1050,12 +1052,18 @@ xi.regime.clearRegimeVars = function(player)
 end
 
 xi.regime.bookOnTrigger = function(player, regimeType)
+    local cipher = 0 -- Trust Alter Ego Extravaganza
+    local active = xi.extravaganza.campaignActive()
+    if active == xi.extravaganza.campaign.SPRING_FALL or active == xi.extravaganza.campaign.BOTH then
+        cipher = 3
+    end
+
     local info = regimeInfo[regimeType].zone[player:getZoneID()]
      -- checks if hunt is active, if so prompts player to cancel
     if player:getCharVar("[hunt]status") >= 1 then
         player:startEvent(info.event, 0, 0, 3, 1, 0, 0, player:getCurrency("valor_point"), player:getCharVar("[hunt]id"))
 
-    elseif (regimeType == xi.regime.type.FIELDS and xi.settings.ENABLE_FIELD_MANUALS == 1) or (regimeType == xi.regime.type.GROUNDS and xi.settings.ENABLE_GROUNDS_TOMES == 1) then
+    elseif (regimeType == xi.regime.type.FIELDS and xi.settings.main.ENABLE_FIELD_MANUALS == 1) or (regimeType == xi.regime.type.GROUNDS and xi.settings.main.ENABLE_GROUNDS_TOMES == 1) then
         -- arg2 is a bitmask that controls which pages appear for examination
         -- here, we only show pages that have regime info
         -- arg4 reduces prices of field suppord
@@ -1071,7 +1079,7 @@ xi.regime.bookOnTrigger = function(player, regimeType)
             arg4 = 1
         end
 
-        player:startEvent(info.event, 0, arg2, 0, arg4, 0, 0, player:getCurrency("valor_point"), player:getCharVar("[regime]id"))
+        player:startEvent(info.event, 0, arg2, cipher, arg4, 0, 0, player:getCurrency("valor_point"), player:getCharVar("[regime]id"))
     else
         player:PrintToPlayer("Disabled.")
     end
@@ -1171,9 +1179,9 @@ xi.regime.bookOnEventFinish = function(player, option, regimeType)
 
             ['CIRCUMSPECTION'] = function()
                 player:delStatusEffectSilent(xi.effect.SNEAK)
-                player:addStatusEffect(xi.effect.SNEAK, 0, 10, 900 * xi.settings.SNEAK_INVIS_DURATION_MULTIPLIER)
+                player:addStatusEffect(xi.effect.SNEAK, 0, 10, 900 * xi.settings.main.SNEAK_INVIS_DURATION_MULTIPLIER)
                 player:delStatusEffectSilent(xi.effect.INVISIBLE)
-                player:addStatusEffect(xi.effect.INVISIBLE, 0, 10, 900 * xi.settings.SNEAK_INVIS_DURATION_MULTIPLIER)
+                player:addStatusEffect(xi.effect.INVISIBLE, 0, 10, 900 * xi.settings.main.SNEAK_INVIS_DURATION_MULTIPLIER)
             end,
 
             ['HOMING_INSTINCT'] = function()
@@ -1299,6 +1307,18 @@ xi.regime.bookOnEventFinish = function(player, option, regimeType)
             ['INSTANT_RICE'] = function()
                 player:addStatusEffectEx(xi.effect.FIELD_SUPPORT_FOOD, 251, 6, 0, 1800)
             end,
+
+            ['CIPHER_SAKURA'] = function()
+                if not npcUtil.giveItem(player, xi.items.CIPHER_OF_SAKURAS_ALTER_EGO) then
+                    player:addCurrency("valor_point", 300) --refund player if they can't obtain
+                end
+            end,
+
+            ['CIPHER_KORU'] = function()
+                if not npcUtil.giveItem(player, xi.items.CIPHER_OF_KORU_MORUS_ALTER_EGO) then
+                    player:addCurrency("valor_point", 300) --refund player if they can't obtain
+                end
+            end,
         }
 
     -- select a training regime
@@ -1344,13 +1364,13 @@ xi.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
         return
     end
 
-    -- people in alliance get no fields credit unless FOV_REWARD_ALLIANCE is 1 in scripts/settings/main.lua
-    if xi.settings.FOV_REWARD_ALLIANCE ~= 1 and regimeType == xi.regime.type.FIELDS and player:checkSoloPartyAlliance() == 2 then
+    -- people in alliance get no fields credit unless FOV_REWARD_ALLIANCE is 1 in scripts/globals/settings.lua
+    if xi.settings.main.FOV_REWARD_ALLIANCE ~= 1 and regimeType == xi.regime.type.FIELDS and player:checkSoloPartyAlliance() == 2 then
         return
     end
 
-    -- people in alliance get no grounds credit unless GOV_REWARD_ALLIANCE is 1 in scripts/settings/main.lua
-    if xi.settings.GOV_REWARD_ALLIANCE ~= 1 and regimeType == xi.regime.type.GROUNDS and player:checkSoloPartyAlliance() == 2 then
+    -- people in alliance get no grounds credit unless GOV_REWARD_ALLIANCE is 1 in scripts/globals/settings.lua
+    if xi.settings.main.GOV_REWARD_ALLIANCE ~= 1 and regimeType == xi.regime.type.GROUNDS and player:checkSoloPartyAlliance() == 2 then
         return
     end
 
@@ -1397,8 +1417,8 @@ xi.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
 
     -- adjust reward down if regime is higher than server mob level cap
     -- example: if you have mobs capped at level 80, and the regime is level 100, you will only get 80% of the reward
-    if xi.settings.NORMAL_MOB_MAX_LEVEL_RANGE_MAX > 0 and page[6] > xi.settings.NORMAL_MOB_MAX_LEVEL_RANGE_MAX then
-        local avgCapLevel = (xi.settings.NORMAL_MOB_MAX_LEVEL_RANGE_MIN + xi.settings.NORMAL_MOB_MAX_LEVEL_RANGE_MAX) / 2
+    if xi.settings.main.NORMAL_MOB_MAX_LEVEL_RANGE_MAX > 0 and page[6] > xi.settings.main.NORMAL_MOB_MAX_LEVEL_RANGE_MAX then
+        local avgCapLevel = (xi.settings.main.NORMAL_MOB_MAX_LEVEL_RANGE_MIN + xi.settings.main.NORMAL_MOB_MAX_LEVEL_RANGE_MAX) / 2
         local avgMobLevel = (page[5] + page[6]) / 2
         reward = math.floor(reward * avgCapLevel / avgMobLevel)
     end
@@ -1427,13 +1447,13 @@ xi.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
 
     -- award gil and tabs once per day, or at every page completion if REGIME_WAIT is 0 in settings.lua
     local vanadielEpoch = vanaDay()
-    if xi.settings.REGIME_WAIT == 0 or player:getCharVar("[regime]lastReward") < vanadielEpoch then
+    if xi.settings.main.REGIME_WAIT == 0 or player:getCharVar("[regime]lastReward") < vanadielEpoch then
         -- gil
         player:addGil(reward)
         player:messageBasic(xi.msg.basic.FOV_OBTAINS_GIL, reward)
 
         -- tabs
-        local tabs = math.floor(reward / 10) * xi.settings.TABS_RATE
+        local tabs = math.floor(reward / 10) * xi.settings.main.TABS_RATE
         tabs = utils.clamp(tabs, 0, 50000 - player:getCurrency("valor_point")) -- Retail caps players at 50000 tabs
         player:addCurrency("valor_point", tabs)
         player:messageBasic(xi.msg.basic.FOV_OBTAINS_TABS, tabs, player:getCurrency("valor_point"))
@@ -1442,7 +1462,7 @@ xi.regime.checkRegime = function(player, mob, regimeId, index, regimeType)
     end
 
     -- award XP every page completion
-    player:addExp(reward * xi.settings.BOOK_EXP_RATE)
+    player:addExp(reward * xi.settings.main.BOOK_EXP_RATE)
 
     -- repeating regimes
     if player:getCharVar("[regime]repeat") == 1 then

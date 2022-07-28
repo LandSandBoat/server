@@ -17,36 +17,34 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local X = player:getXPos()
-    local Z = player:getZPos()
-    local MythrilDoorCheck = player:getCharVar("SSG_MythrilDoor")
+    local xPos = player:getXPos()
+    local zPos = player:getZPos()
+    local mythrilDoorCheck = player:getCharVar("SSG_MythrilDoor")
 
-    if X >= 40  and Z >= 15 then
-        if MythrilDoorCheck == 0 then -- Door has never been checked
+    if xPos >= 40  and zPos >= 15 then
+        if mythrilDoorCheck == 0 then -- Door has never been checked
             player:messageSpecial(ID.text.FIRST_CHECK)
             player:setCharVar("SSG_MythrilDoor", 1)
-        elseif MythrilDoorCheck == 1 then -- Door has been checked once
+        elseif mythrilDoorCheck == 1 then -- Door has been checked once
             player:messageSpecial(ID.text.SECOND_CHECK)
             player:setCharVar("SSG_MythrilDoor", 2)
-        elseif MythrilDoorCheck == 2 then -- Door has been checked twice
+        elseif mythrilDoorCheck == 2 then -- Door has been checked twice
             player:messageSpecial(ID.text.THIRD_CHECK)
             player:setCharVar("SSG_MythrilDoor", 3)
-        elseif MythrilDoorCheck == 3 then -- Door has been checked three times
+        elseif mythrilDoorCheck == 3 then -- Door has been checked three times
             player:messageSpecial(ID.text.FOURTH_CHECK)
             player:setCharVar("SSG_MythrilDoor", 4)
-        elseif MythrilDoorCheck == 4 then -- Door has been checked four times
+        elseif mythrilDoorCheck == 4 then -- Door has been checked four times
             player:messageSpecial(ID.text.FIFTH_CHECK)
             player:setCharVar("SSG_MythrilDoor", 5)
-        elseif MythrilDoorCheck == 5 then -- Door has been checked five times
+        elseif mythrilDoorCheck == 5 then -- Door has been checked five times
             player:messageSpecial(ID.text.MYTHRIL_CHECK)
             player:setCharVar("SSG_MythrilDoor", 6)
-        elseif MythrilDoorCheck == 6 or MythrilDoorCheck == 7 then -- Door has been checked six or more times
+        elseif mythrilDoorCheck == 6 or mythrilDoorCheck == 7 then -- Door has been checked six or more times
             player:messageSpecial(ID.text.COMPLETED_CHECK, 749)
             player:setCharVar("SSG_MythrilDoor", 7)
         end
-
-        return 1 -- Keep the door closed
-    elseif X < 40 and Z < 24 then
+    elseif xPos < 40 and zPos < 24 then
         return -1 -- Open the door if coming from the "inside"
     end
 end

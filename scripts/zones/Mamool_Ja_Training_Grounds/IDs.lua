@@ -29,7 +29,8 @@ zones[xi.zone.MAMOOL_JA_TRAINING_GROUNDS] =
         BRUJEEL_TEXT            = 7529, -- Am I glad to see you!
     },
 
-    mob = {
+    mob =
+    {
         [xi.assaultUtil.mission.IMPERIAL_AGENT_RESCUE] =
         {
             MOBS_START =
@@ -37,11 +38,13 @@ zones[xi.zone.MAMOOL_JA_TRAINING_GROUNDS] =
                 17047553, 17047554, 17047556, 17047557, 17047559, 17047560, 17047561, 17047563, 17047564, 17047565, 17047566,
                 GATE_1 = 17047567, GATE_2 = 17047568, GATE_3 = 17047569,
             },
+
             GATES      =
             {
                 17047567, 17047568, 17047569,
             },
         },
+
         [xi.assaultUtil.mission.PREEMPTIVE_STRIKE] =
         {
             MOBS_START =

@@ -15,7 +15,7 @@ entity.onMobDeath = function(mob, player, isKiller)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, ID.mob.TUMBLING_TRUFFLE_PH, 5, math.random(3600, 28800)) -- 1 to 8 hours
+    xi.mob.phOnDespawn(mob, ID.mob.TUMBLING_TRUFFLE_PH, 5, 3600) -- 1 hour minimum
 end
 
 return entity

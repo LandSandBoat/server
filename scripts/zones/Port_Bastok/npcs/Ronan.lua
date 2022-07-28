@@ -3,7 +3,7 @@
 --  NPC: Ronan
 -- Start & Finishes Quest: Out of One's Shell
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/titles")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Port_Bastok/IDs")
@@ -19,17 +19,17 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local OutOfOneShell = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.OUT_OF_ONE_S_SHELL)
+    local outOfOneShell = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.OUT_OF_ONE_S_SHELL)
 
-    if OutOfOneShell == QUEST_ACCEPTED and player:getCharVar("OutOfOneShell") == 1 then
+    if outOfOneShell == QUEST_ACCEPTED and player:getCharVar("OutOfOneShell") == 1 then
         if player:needToZone() then
             player:startEvent(85)
         else
             player:startEvent(86)
         end
-    elseif OutOfOneShell == QUEST_ACCEPTED then
+    elseif outOfOneShell == QUEST_ACCEPTED then
         player:showText(npc, ID.text.RONAN_DIALOG_1)
-    elseif OutOfOneShell == QUEST_COMPLETED then
+    elseif outOfOneShell == QUEST_COMPLETED then
         player:startEvent(89)
     elseif player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_QUADAV_S_CURSE) == QUEST_COMPLETED and player:getFameLevel(xi.quest.fame_area.BASTOK) >= 2 then
         player:startEvent(82)

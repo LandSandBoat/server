@@ -15,7 +15,7 @@ function error(player, msg)
 end
 
 function onTrigger(player, target)
-    local ValidSpells =
+    local validSpells =
     {
         896, 897, 898, 899, 900, 901, 902, 903, 904, 905, 906, 907, 908, 909, 910, 911, 912, 913, 914, 915, 916, 917, 918, 919, 920,
         921, 922, 923, 924, 925, 926, 927, 928, 929, 930, 931, 932, 933, 934, 935, 936, 937, 938, 939, 940, 941, 942, 943, 944, 945,
@@ -41,12 +41,12 @@ function onTrigger(player, target)
     local save = true
     local silent = true -- Hide message
     local sendUpdate = false -- Prevent packet spam
-    for i = 1, #ValidSpells do
-        if i == #ValidSpells then
+    for i = 1, #validSpells do
+        if i == #validSpells then
             silent = false
             sendUpdate = true
         end
-        targ:addSpell(ValidSpells[i], silent, save, sendUpdate)
+        targ:addSpell(validSpells[i], silent, save, sendUpdate)
     end
     player:PrintToPlayer(string.format("%s now has all trusts.", targ:getName()))
 end

@@ -7,7 +7,8 @@ require("scripts/globals/status")
 g_mixins = g_mixins or {}
 
 g_mixins.dynamis_beastmen = function(dynamisBeastmenMob)
-    local procjobs = {
+    local procjobs =
+    {
         [xi.job.WAR] = "ws",
         [xi.job.MNK] = "ja",
         [xi.job.WHM] = "ma",

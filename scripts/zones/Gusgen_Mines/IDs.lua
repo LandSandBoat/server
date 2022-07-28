@@ -41,6 +41,8 @@ zones[xi.zone.GUSGEN_MINES] =
         ALREADY_POSSESS_TEMP     = 8308,  -- You already possess that temporary item.
         NO_COMBINATION           = 8313,  -- You were unable to enter a combination.
         REGIME_REGISTERED        = 10391, -- New training regime registered!
+        LEARNS_SPELL             = 11439, -- <name> learns <spell>!
+        UNCANNY_SENSATION        = 11441, -- You are assaulted by an uncanny sensation.
         COMMON_SENSE_SURVIVAL    = 11476, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
@@ -50,10 +52,15 @@ zones[xi.zone.GUSGEN_MINES] =
         PUDDING_OFFSET      = 17580338,
         APPARATUS_ELEMENTAL = 17580340,
         AROMA_FLY           = 17580341,
+        ASPHYXIATED_AMSEL   = 17580044,
+        BURNED_BERGMANN     = 17580042,
+        CRUSHED_KRAUSE      = 17580040,
+        PULVERIZED_PFEFFER  = 17580041,
+        SMOTHERED_SCHMIDT   = 17580039,
+        WOUNDED_WURFEL      = 17580043,
     },
     npc =
     {
-        CASKET_BASE    = 17580348,
         TREASURE_CHEST = 17580403,
         MINING =
         {

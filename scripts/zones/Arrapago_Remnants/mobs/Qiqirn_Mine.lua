@@ -11,7 +11,7 @@ local entity = {}
 entity.onMobSpawn = function(mob)
     mob:setUnkillable(true)
     mob:hideName(true)
-    mob:untargetable(true)
+    mob:setUntargetable(true)
     mob:hideHP(true)
     mob:SetAutoAttackEnabled(false)
     mob:setStatus(xi.status.DISAPPEAR)

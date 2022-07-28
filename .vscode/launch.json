@@ -1,0 +1,63 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "compounds": [
+        {
+            "name": "(Windows) Run Everything",
+            "preLaunchTask": "CMake Build",
+            "configurations": [
+                "(Windows) xi_map",
+                "(Windows) xi_connect",
+                "(Windows) xi_search",
+            ],
+        }
+    ],
+    "configurations": [
+        {
+            "name": "(Windows) xi_connect",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/xi_connect.exe",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "console": "integratedTerminal",
+            "logging": {
+                "moduleLoad": false,
+                "exceptions": false,
+            },
+        },
+        {
+            "name": "(Windows) xi_search",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/xi_search.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "console": "integratedTerminal",
+            "logging": {
+                "moduleLoad": false,
+                "exceptions": false,
+            },
+        },
+        {
+            "name": "(Windows) xi_map",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/xi_map.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "console": "integratedTerminal",
+            "logging": {
+                "moduleLoad": false,
+                "exceptions": false,
+            },
+        },
+    ],
+}

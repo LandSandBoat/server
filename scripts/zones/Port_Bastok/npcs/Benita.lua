@@ -4,19 +4,19 @@
 -- Starts Quest: The Wisdom Of Elders
 -----------------------------------
 require("scripts/globals/quests")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 local ID = require("scripts/zones/Port_Bastok/IDs")
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     local count = trade:getItemCount()
-    local BombAsh = trade:hasItemQty(928, 1)
+    local bombAsh = trade:hasItemQty(928, 1)
 
-    if count == 1 and BombAsh == true then
-        local TheWisdom = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_WISDOM_OF_ELDERS)
-        local TheWisdomVar = player:getCharVar("TheWisdomVar")
-        if TheWisdom == 1 and TheWisdomVar == 2 then
+    if count == 1 and bombAsh == true then
+        local theWisdom = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_WISDOM_OF_ELDERS)
+        local theWisdomVar = player:getCharVar("TheWisdomVar")
+        if theWisdom == 1 and theWisdomVar == 2 then
             player:tradeComplete()
             player:startEvent(176)
         end
@@ -24,10 +24,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local TheWisdom = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_WISDOM_OF_ELDERS)
+    local theWisdom = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_WISDOM_OF_ELDERS)
     local pLevel = player:getMainLvl()
 
-    if TheWisdom == 0 and pLevel >= 6 then
+    if theWisdom == 0 and pLevel >= 6 then
         player:startEvent(174)
     else
         local rand = math.random(1, 2)
@@ -37,7 +37,6 @@ entity.onTrigger = function(player, npc)
             player:startEvent(103)
         end
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)

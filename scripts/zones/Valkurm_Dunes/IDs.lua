@@ -10,6 +10,7 @@ zones[xi.zone.VALKURM_DUNES] =
 {
     text =
     {
+        MOG_TABLET_BASE                = 22,    -- A mog tablet has been discovered in [West Ronfaure/East Ronfaure/the La Theine Plateau/the Valkurm Dunes/Jugner Forest/the Batallia Downs/North Gustaberg/South Gustaberg/the Konschtat Highlands/the Pashhow Marshlands/the Rolanberry Fields/Beaucedine Glacier/Xarcabard/West Sarutabaruta/East Sarutabaruta/the Tahrongi Canyon/the Buburimu Peninsula/the Meriphataud Mountains/the Sauromugue Champaign/Qufim Island/Behemoth's Dominion/Cape Teriggan/the Eastern Altepa Desert/the Sanctuary of Zi'Tah/Ro'Maeve/the Yuhtunga Jungle/the Yhoator Jungle/the Western Altepa Desert/the Valley of Sorrows]!
         NOTHING_HAPPENS                = 141,   -- Nothing happens...
         ITEM_CANNOT_BE_OBTAINED        = 6406,  -- You cannot obtain the <item>. Come back after sorting your inventory.
         ITEM_OBTAINED                  = 6412,  -- Obtained: <item>.
@@ -50,11 +51,6 @@ zones[xi.zone.VALKURM_DUNES] =
         VALKURM_EMPEROR_PH =
         {
             [17199434] = 17199438, -- -228.957 2.776 -101.226
-            [17199437] = 17199438, -- -264.829 -0.843 -91.306
-            [17199420] = 17199438, -- -95.250 -0.268 -49.386
-            [17199419] = 17199438, -- -144.284 -1.103 4.202
-            [17199435] = 17199438, -- -270.823 -2.168 -16.349
-            [17199436] = 17199438, -- -327.000 -1.000 -21.000
         },
         GOLDEN_BAT_PH      =
         {
@@ -68,7 +64,6 @@ zones[xi.zone.VALKURM_DUNES] =
     },
     npc =
     {
-        CASKET_BASE   = 17199672,
         SUNSAND_QM    = 17199699, -- qm1 in npc_list
         OVERSEER_BASE = 17199709, -- Quanteilleron_RK in npc_list
     },

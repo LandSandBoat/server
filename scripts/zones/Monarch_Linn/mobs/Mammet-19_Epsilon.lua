@@ -6,49 +6,97 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-local function changeForm(mob)
-    local newform = math.random(0, 2)
-    if (mob:getAnimationSub() == newform) then
-        newform = 3
-    end
-    -- setDamage works beautifully, but setDelay doesn't seem to be working.  Increased DMG turned off.
-    if (newform == 0) then -- Hand Form, ~3s delay
-        mob:SetMagicCastingEnabled(false)
-        mob:setDelay(2400)
-        mob:setDamage(40)
-    elseif (newform == 1) then -- Sword Form, ~2s delay, melee hits for ~50-100 vs WHM/BLM w/o buffs, 40 DMG seems to work.
-        mob:SetMagicCastingEnabled(false)
-        mob:setDelay(1500)
-        mob:setDamage(40)
-    elseif (newform == 2) then -- Polearm Form, ~3-3.5s delay, melee hits for ~100-150.  Takes about 70-80 DMG to make this happen.
-        mob:SetMagicCastingEnabled(false)
-        mob:setDelay(3250)
-        mob:setDamage(75)
-    elseif (newform == 3) then -- Staff Form, ~4s delay, ~10 seconds between spell ends and next cast
-        mob:setMobMod(xi.mobMod.MAGIC_COOL, 10)
-        mob:SetMagicCastingEnabled(true)
-        mob:setDelay(3700)
-        mob:setDamage(40)
-    end
-    mob:setAnimationSub(newform)
-    mob:setLocalVar('changeTime', mob:getBattleTime())
-end
+local forms =
+{
+    UNARMED = 0,
+    SWORD   = 1,
+    POLEARM = 2,
+    STAFF   = 3,
+}
+
+local tpMoves =
+{
+    -- NOTE: Mammets always have access to:
+    -- Transmogrification: Absorbs all physical damage for ~30 seconds
+    -- Tremorous Tread: Low AoE damage with a Stun effect, absorbed by Utsusemi.
+    [0] = { 487, 540 },
+    -- Sword Skills:
+    -- Velocious Blade: 5-hit attack, high da
+    -- Sonic Blade: High AoE damage.
+    -- Scission Thrust: Low conal AoE damage.
+    [1] = { 347, 419, 422 },
+    -- Percussive Foin: Medium directional AoE damage.
+    -- Gravity Wheel: High AoE damage and Gravity.
+    -- Microquake: High single-target damage.
+    [2] = { 441, 447, 457 },
+    -- Psychomancy: AoE Aspir, drains 80+ MP.
+    -- Mind Wall: Gives the Mammet a special Magic Shield effect causing it to absorb offensive magic used against it for ~30 seconds.
+    [3] = { 464, 471},
+}
 
 entity.onMobSpawn = function(mob)
     mob:SetMagicCastingEnabled(false)
 end
 
 entity.onMobFight = function(mob, target)
-    -- Mammets seem to be able to change to any given form, per YouTube videos
-    -- Added a random chance to change forms every 3 seconds if 60 seconds have passed, just to make things less formulaic.
-        -- May be able to change forms more often.  Witnessed one at ~50 seconds, most were 60-80.
-        -- Believe it or not, these changes may be too slow @ 50% chance.  Probability is a pain.
-    -- L40 means their "weapons" are 40 DMG by default.
-    if ((mob:getBattleTime() > mob:getLocalVar('changeTime') + 60 or mob:getLocalVar('changeTime') == 0) and math.random(0, 1) == 1
-        and not mob:hasStatusEffect(xi.effect.FOOD)) then
-        changeForm(mob)
-    end
+    -- Chages forms after 30-60 seconds randomly
+    local timeTracker = mob:getLocalVar("formTimeTracker")
+    local currentTime = mob:getBattleTime()
+    -- NOTE: Yellow Liquid applies xi.effect.FOOD to the Mammets
+    local cannotChangeForm = mob:hasStatusEffect(xi.effect.FOOD)
 
+    if currentTime >= timeTracker and not cannotChangeForm then
+        -- Pick a new form --
+        local rand = math.random(0, 3)
+        mob:setAnimationSub(rand)
+        switch (rand): caseof
+        {
+            [forms.UNARMED] = function()
+                mob:SetMagicCastingEnabled(false)
+                mob:setDelay(2400)
+                mob:setDamage(40)
+            end,
+            [forms.SWORD] = function()
+                mob:SetMagicCastingEnabled(false)
+                mob:setDelay(1500)
+                mob:setDamage(40)
+            end,
+            [forms.POLEARM] = function()
+                mob:SetMagicCastingEnabled(false)
+                mob:setDelay(3250)
+                mob:setDamage(75)
+            end,
+            [forms.STAFF] = function()
+                mob:setMobMod(xi.mobMod.MAGIC_COOL, 20)
+                mob:SetMagicCastingEnabled(true)
+                mob:setDelay(3700)
+                mob:setDamage(40)
+            end,
+        }
+        mob:setLocalVar("formTimeTracker", mob:getBattleTime() + math.random(30, 60))
+    end
+end
+
+entity.onMobWeaponSkillPrepare = function(mob, target)
+    switch (mob:getAnimationSub()): caseof
+    {
+        [forms.UNARMED] = function()
+            local wsChoice = math.random(1,2)
+            return tpMoves[forms.UNARMED][wsChoice]
+        end,
+        [forms.SWORD] = function()
+            local wsChoice = math.random(1,3)
+            return tpMoves[forms.SWORD][wsChoice]
+        end,
+        [forms.POLEARM] = function()
+            local wsChoice = math.random(1,3)
+            return tpMoves[forms.POLEARM][wsChoice]
+        end,
+        [forms.STAFF] = function()
+            local wsChoice = math.random(1,2)
+            return tpMoves[forms.STAFF][wsChoice]
+        end,
+    }
 end
 
 entity.onMobDeath = function(mob, player, isKiller)

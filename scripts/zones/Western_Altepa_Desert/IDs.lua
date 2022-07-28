@@ -48,6 +48,11 @@ zones[xi.zone.WESTERN_ALTEPA_DESERT] =
     },
     mob =
     {
+        PICOLATON_PH =
+        {
+            [17289637] = 17289638,
+        },
+
         CACTUAR_CANTAUTOR_PH =
         {
             [17289559] = 17289560, -- -458.944 0.018 -557.266
@@ -77,7 +82,6 @@ zones[xi.zone.WESTERN_ALTEPA_DESERT] =
     },
     npc =
     {
-        CASKET_BASE       = 17289723,
         ALTEPA_GATE       = 17289747,
         PEDDLESTOX        = 17289772,
         BEASTMEN_TREASURE =

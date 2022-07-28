@@ -31,12 +31,14 @@ zones[xi.zone.EAST_RONFAURE_S] =
         VOIDWALKER_OBTAIN_KI     = 8055, -- Obtained key item: <keyitem>!
         COMMON_SENSE_SURVIVAL    = 8965, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         GOBLINTRAP_PH =
         {
             [17109295] = 17109296, -- 156 0 -438
         },
+
         SKOGS_FRU_PH =
         {
             [17109268] = 17109338,
@@ -44,31 +46,41 @@ zones[xi.zone.EAST_RONFAURE_S] =
             [17109307] = 17109338,
             [17109308] = 17109338,
         },
+
         MYRADROSH    = 17109235,
-        VOIDWALKER   =
+
+        VOIDWALKER =
         {
-            [xi.keyItem.CLEAR_ABYSSITE] = {
+            [xi.keyItem.CLEAR_ABYSSITE] =
+            {
                 17109393, -- Sunderclaw
                 17109392, -- Sunderclaw
                 17109391, -- Sunderclaw
                 17109390, -- Sunderclaw
-                17109389,  -- Quagmire Pugil
-                17109388,  -- Quagmire Pugil
-                17109387,  -- Quagmire Pugil
-                17109386,  -- Quagmire Pugil
+                17109389, -- Quagmire Pugil
+                17109388, -- Quagmire Pugil
+                17109387, -- Quagmire Pugil
+                17109386, -- Quagmire Pugil
             },
-            [xi.keyItem.COLORFUL_ABYSSITE] = {
+
+            [xi.keyItem.COLORFUL_ABYSSITE] =
+            {
                 17109385, -- Capricornus
-                17109384  -- Yacumama
+                17109384, -- Yacumama
             },
-            [xi.keyItem.BLUE_ABYSSITE] = {
-                17109383  -- Krabkatoa
+
+            [xi.keyItem.BLUE_ABYSSITE] =
+            {
+                17109383, -- Krabkatoa
             },
-            [xi.keyItem.BLACK_ABYSSITE] = {
-                17109382  -- Yilbegan
+
+            [xi.keyItem.BLACK_ABYSSITE] =
+            {
+                17109382, -- Yilbegan
             }
         }
     },
+
     npc =
     {
         LOGGING =

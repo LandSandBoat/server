@@ -24,15 +24,16 @@
 #include "attackround.h"
 #include "entities/battleentity.h"
 #include "items/item_weapon.h"
+#include "job_points.h"
 #include "status_effect_container.h"
 #include "utils/puppetutils.h"
 
 #include <cmath>
 
 /************************************************************************
- *																		*
- *  Constructor.															*
- *																		*
+ *                                                                      *
+ *  Constructor.                                                            *
+ *                                                                      *
  ************************************************************************/
 CAttack::CAttack(CBattleEntity* attacker, CBattleEntity* defender, PHYSICAL_ATTACK_TYPE type, PHYSICAL_ATTACK_DIRECTION direction, CAttackRound* attackRound)
 : m_attacker(attacker)
@@ -44,9 +45,9 @@ CAttack::CAttack(CBattleEntity* attacker, CBattleEntity* defender, PHYSICAL_ATTA
 }
 
 /************************************************************************
- *																		*
- *  Returns the attack direction.										*
- *																		*
+ *                                                                      *
+ *  Returns the attack direction.                                       *
+ *                                                                      *
  ************************************************************************/
 PHYSICAL_ATTACK_DIRECTION CAttack::GetAttackDirection()
 {
@@ -54,9 +55,9 @@ PHYSICAL_ATTACK_DIRECTION CAttack::GetAttackDirection()
 }
 
 /************************************************************************
- *																		*
- *  Returns the attack type.												*
- *																		*
+ *                                                                      *
+ *  Returns the attack type.                                                *
+ *                                                                      *
  ************************************************************************/
 PHYSICAL_ATTACK_TYPE CAttack::GetAttackType()
 {
@@ -64,9 +65,9 @@ PHYSICAL_ATTACK_TYPE CAttack::GetAttackType()
 }
 
 /************************************************************************
- *																		*
- *  Sets the attack type.												*
- *																		*
+ *                                                                      *
+ *  Sets the attack type.                                               *
+ *                                                                      *
  ************************************************************************/
 void CAttack::SetAttackType(PHYSICAL_ATTACK_TYPE type)
 {
@@ -74,9 +75,9 @@ void CAttack::SetAttackType(PHYSICAL_ATTACK_TYPE type)
 }
 
 /************************************************************************
- *																		*
- *  Returns the isCritical flag.											*
- *																		*
+ *                                                                      *
+ *  Returns the isCritical flag.                                            *
+ *                                                                      *
  ************************************************************************/
 bool CAttack::IsCritical() const
 {
@@ -84,9 +85,9 @@ bool CAttack::IsCritical() const
 }
 
 /************************************************************************
- *																		*
- *  Sets the critical flag.												*
- *																		*
+ *                                                                      *
+ *  Sets the critical flag.                                             *
+ *                                                                      *
  ************************************************************************/
 void CAttack::SetCritical(bool value)
 {
@@ -112,9 +113,9 @@ void CAttack::SetCritical(bool value)
 }
 
 /************************************************************************
- *																		*
- *  Sets the guarded flag.												*
- *																		*
+ *                                                                      *
+ *  Sets the guarded flag.                                              *
+ *                                                                      *
  ************************************************************************/
 void CAttack::SetGuarded(bool isGuarded)
 {
@@ -122,9 +123,9 @@ void CAttack::SetGuarded(bool isGuarded)
 }
 
 /************************************************************************
- *																		*
- *  Gets the guarded flag.												*
- *																		*
+ *                                                                      *
+ *  Gets the guarded flag.                                              *
+ *                                                                      *
  ************************************************************************/
 bool CAttack::IsGuarded()
 {
@@ -144,9 +145,9 @@ bool CAttack::IsGuarded()
 }
 
 /************************************************************************
- *																		*
- *  Gets the evaded flag.												*
- *																		*
+ *                                                                      *
+ *  Gets the evaded flag.                                               *
+ *                                                                      *
  ************************************************************************/
 bool CAttack::IsEvaded() const
 {
@@ -154,9 +155,9 @@ bool CAttack::IsEvaded() const
 }
 
 /************************************************************************
- *																		*
- *  Sets the evaded flag.												*
- *																		*
+ *                                                                      *
+ *  Sets the evaded flag.                                               *
+ *                                                                      *
  ************************************************************************/
 void CAttack::SetEvaded(bool value)
 {
@@ -164,9 +165,9 @@ void CAttack::SetEvaded(bool value)
 }
 
 /************************************************************************
- *																		*
- *  Gets the blocked flag.												*
- *																		*
+ *                                                                      *
+ *  Gets the blocked flag.                                              *
+ *                                                                      *
  ************************************************************************/
 bool CAttack::IsBlocked() const
 {
@@ -188,9 +189,9 @@ bool CAttack::IsAnticipated() const
 }
 
 /************************************************************************
- *																		*
- *  Returns the isFirstSwing flag.										*
- *																		*
+ *                                                                      *
+ *  Returns the isFirstSwing flag.                                      *
+ *                                                                      *
  ************************************************************************/
 bool CAttack::IsFirstSwing() const
 {
@@ -198,9 +199,9 @@ bool CAttack::IsFirstSwing() const
 }
 
 /************************************************************************
- *																		*
- *  Sets this swing as the first.										*
- *																		*
+ *                                                                      *
+ *  Sets this swing as the first.                                       *
+ *                                                                      *
  ************************************************************************/
 void CAttack::SetAsFirstSwing(bool isFirst)
 {
@@ -208,9 +209,9 @@ void CAttack::SetAsFirstSwing(bool isFirst)
 }
 
 /************************************************************************
- *																		*
- *  Gets the damage ratio.												*
- *																		*
+ *                                                                      *
+ *  Gets the damage ratio.                                              *
+ *                                                                      *
  ************************************************************************/
 float CAttack::GetDamageRatio() const
 {
@@ -218,9 +219,9 @@ float CAttack::GetDamageRatio() const
 }
 
 /************************************************************************
- *																		*
- *  Sets the attack type.												*
- *																		*
+ *                                                                      *
+ *  Sets the attack type.                                               *
+ *                                                                      *
  ************************************************************************/
 uint8 CAttack::GetWeaponSlot()
 {
@@ -236,9 +237,9 @@ uint8 CAttack::GetWeaponSlot()
 }
 
 /************************************************************************
- *																		*
- *  Returns the animation ID.											*
- *																		*
+ *                                                                      *
+ *  Returns the animation ID.                                           *
+ *                                                                      *
  ************************************************************************/
 uint16 CAttack::GetAnimationID()
 {
@@ -265,9 +266,9 @@ uint16 CAttack::GetAnimationID()
 }
 
 /************************************************************************
- *																		*
- *  Returns the hitrate for this swing.									*
- *																		*
+ *                                                                      *
+ *  Returns the hitrate for this swing.                                 *
+ *                                                                      *
  ************************************************************************/
 uint8 CAttack::GetHitRate()
 {
@@ -311,9 +312,9 @@ uint8 CAttack::GetHitRate()
 }
 
 /************************************************************************
- *																		*
- *  Returns the damage for this swing.									*
- *																		*
+ *                                                                      *
+ *  Returns the damage for this swing.                                  *
+ *                                                                      *
  ************************************************************************/
 int32 CAttack::GetDamage() const
 {
@@ -321,9 +322,9 @@ int32 CAttack::GetDamage() const
 }
 
 /************************************************************************
- *																		*
- *  Sets the damage for this swing.										*
- *																		*
+ *                                                                      *
+ *  Sets the damage for this swing.                                     *
+ *                                                                      *
  ************************************************************************/
 void CAttack::SetDamage(int32 value)
 {
@@ -467,9 +468,9 @@ bool CAttack::CheckCover()
 }
 
 /************************************************************************
- *																		*
- *  Processes the damage for this swing.									*
- *																		*
+ *                                                                      *
+ *  Processes the damage for this swing.                                    *
+ *                                                                      *
  ************************************************************************/
 void CAttack::ProcessDamage()
 {
@@ -492,7 +493,7 @@ void CAttack::ProcessDamage()
     {
         m_naturalH2hDamage = (int32)(m_attacker->GetSkill(SKILL_HAND_TO_HAND) * 0.11f) + 3;
         m_baseDamage       = m_attacker->GetMainWeaponDmg();
-        m_damage = (uint32)(((m_baseDamage + m_naturalH2hDamage + m_trickAttackDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * m_damageRatio));
+        m_damage           = (uint32)(((m_baseDamage + m_naturalH2hDamage + m_trickAttackDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * m_damageRatio));
     }
     else if (slot == SLOT_MAIN)
     {
@@ -505,6 +506,16 @@ void CAttack::ProcessDamage()
     else if (slot == SLOT_AMMO)
     {
         m_damage = (uint32)((m_attacker->GetRangedWeaponDmg() + battleutils::GetFSTR(m_attacker, m_victim, slot)) * m_damageRatio);
+    }
+
+    // Apply "Double Attack" damage and "Triple Attack" damage mods
+    if (m_attackType == PHYSICAL_ATTACK_TYPE::DOUBLE && m_attacker->objtype == TYPE_PC)
+    {
+        m_damage = (int32)(m_damage * ((100.0f + m_attacker->getMod(Mod::DOUBLE_ATTACK_DMG)) / 100.0f));
+    }
+    else if (m_attackType == PHYSICAL_ATTACK_TYPE::TRIPLE && m_attacker->objtype == TYPE_PC)
+    {
+        m_damage = (int32)(m_damage * ((100.0f + m_attacker->getMod(Mod::TRIPLE_ATTACK_DMG)) / 100.0f));
     }
 
     // Soul eater.
@@ -521,7 +532,7 @@ void CAttack::ProcessDamage()
 
     // Set attack type to Samba if the attack type is normal.  Don't overwrite other types.  Used for Samba double damage.
     if (m_attackType == PHYSICAL_ATTACK_TYPE::NORMAL && (m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_DRAIN_SAMBA) ||
-        m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_ASPIR_SAMBA) || m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_HASTE_SAMBA)))
+                                                         m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_ASPIR_SAMBA) || m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_HASTE_SAMBA)))
     {
         SetAttackType(PHYSICAL_ATTACK_TYPE::SAMBA);
     }
@@ -557,10 +568,53 @@ void CAttack::ProcessDamage()
             }
         }
         else if (m_attacker->objtype == TYPE_PET && m_attacker->PMaster && m_attacker->PMaster->objtype == TYPE_PC &&
-            static_cast<CPetEntity*>(m_attacker)->getPetType() == PET_TYPE::AUTOMATON)
+                 static_cast<CPetEntity*>(m_attacker)->getPetType() == PET_TYPE::AUTOMATON)
         {
             puppetutils::TrySkillUP((CAutomatonEntity*)m_attacker, SKILL_AUTOMATON_MELEE, m_victim->GetMLevel());
         }
     }
     m_isBlocked = attackutils::IsBlocked(m_attacker, m_victim);
+
+    // Apply Restraint Weaponskill Damage Modifier
+    // Effect power tracks the total bonus
+    // Effect sub power tracks remainder left over from whole percentage flooring
+    if (m_isFirstSwing && m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_RESTRAINT))
+    {
+        CStatusEffect* effect = m_attacker->StatusEffectContainer->GetStatusEffect(EFFECT_RESTRAINT);
+
+        if (effect->GetPower() < 30)
+        {
+            uint8 jpBonus = 0;
+
+            if (m_attacker->objtype == TYPE_PC)
+            {
+                jpBonus = static_cast<CCharEntity*>(m_attacker)->PJobPoints->GetJobPointValue(JP_RESTRAINT_EFFECT) * 2;
+            }
+
+            // Convert weapon delay and divide
+            // Pull remainder of previous hit's value from Effect sub Power
+            float boostPerRound = ((m_attacker->GetWeaponDelay(false) / 1000.0f) * 60.0f) / 385.0f;
+            float remainder     = effect->GetSubPower() / 100.0f;
+
+            // Cap floor at 1 WSD per hit
+            // Calculate bonuses from Enhances Restraint, Job Point upgrades, and remainder from previous hit
+            boostPerRound = std::clamp<float>(boostPerRound, 1, boostPerRound);
+            boostPerRound = (boostPerRound * (1 + m_attacker->getMod(Mod::ENHANCES_RESTRAINT) / 100.0f) * (1 + jpBonus / 100.0f)) + remainder;
+
+            // Calculate new remainder and multiply by 100 so significant digits aren't lost
+            // Floor Boost per Round
+            remainder     = (1 - (std::ceil(boostPerRound) - boostPerRound)) * 100;
+            boostPerRound = std::floor(boostPerRound);
+
+            // Cap total power to +30% WSD
+            if (effect->GetPower() + boostPerRound > 30)
+            {
+                boostPerRound = 30 - effect->GetPower();
+            }
+
+            effect->SetPower(effect->GetPower() + boostPerRound);
+            effect->SetSubPower(remainder);
+            m_attacker->addModifier(Mod::ALL_WSDMG_FIRST_HIT, boostPerRound);
+        }
+    }
 }

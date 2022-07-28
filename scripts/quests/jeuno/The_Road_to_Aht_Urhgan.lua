@@ -8,7 +8,7 @@ require('scripts/globals/items')
 require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/settings/main')
+require('scripts/globals/settings')
 require('scripts/globals/teleports')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
@@ -97,7 +97,7 @@ local function handleSelectionEventFinish(player, csid, option, npc)
     then
         if quest:complete(player) then
             npcUtil.giveKeyItem(player, xi.ki.BOARDING_PERMIT)
-            npcUtil.completeMission(player, xi.mission.log_id.ROV, xi.mission.id.rov.INESCAPABLE_BINDS, { nextMission = xi.mission.id.rov.DESERT_WINDS, })
+            npcUtil.completeMission(player, xi.mission.log_id.ROV, xi.mission.id.rov.INESCAPABLE_BINDS, { nextMission = { xi.mission.log_id.ROV, xi.mission.id.rov.DESERT_WINDS } })
         end
     -- Let me think about it.
     elseif option == 2 then
@@ -119,7 +119,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                xi.settings.ENABLE_TOAU == 1
+                xi.settings.main.ENABLE_TOAU == 1
         end,
 
         [xi.zone.LOWER_JEUNO] =

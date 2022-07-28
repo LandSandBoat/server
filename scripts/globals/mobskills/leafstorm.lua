@@ -6,7 +6,7 @@
 --
 -- Notes: When used by Cernunnos: Leafstorm dispels all positive status effects (including food) and gives a Slow effect equivalent to Slow I.
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------

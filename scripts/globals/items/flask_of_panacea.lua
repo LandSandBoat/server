@@ -42,5 +42,4 @@ item_object.onItemUse = function(target)
     target:delStatusEffect(xi.effect.MAGIC_ATK_DOWN)
 end
 
-
 return item_object

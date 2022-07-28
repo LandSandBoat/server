@@ -13,12 +13,12 @@ entity.onMobSpawn = function(mob)
     -- setMod
     mob:setMod(xi.mod.REGEN, 500)
 
-    local JoL = GetMobByID(ID.mob.JAILER_OF_LOVE)
+    local jailerOfLove = GetMobByID(ID.mob.JAILER_OF_LOVE)
     -- Special check for regen modification by JoL pets killed
-    if (JoL:getLocalVar("JoL_Qn_xzomit_Killed") == 9) then
+    if (jailerOfLove:getLocalVar("JoL_Qn_xzomit_Killed") == 9) then
         mob:addMod(xi.mod.REGEN, -130)
     end
-    if (JoL:getLocalVar("JoL_Qn_hpemde_Killed") == 9) then
+    if (jailerOfLove:getLocalVar("JoL_Qn_hpemde_Killed") == 9) then
         mob:addMod(xi.mod.REGEN, -130)
     end
 end
@@ -34,12 +34,13 @@ entity.onSpellPrecast = function(mob, spell)
 end
 
 entity.onMagicHit = function(caster, target, spell)
-    -- local REGEN = target:getMod(xi.mod.REGEN)
-    local DAY = VanadielDayOfTheWeek()
-    local ELEM = spell:getElement()
+    -- local regenMod = target:getMod(xi.mod.REGEN)
+    local dayOfWeek = VanadielDayOfTheWeek()
+    local spellElement = spell:getElement()
+
     if (GetServerVariable("AV_Regen_Reduction") < 60) then
         -- Had to serverVar the regen instead of localVar because localVar reset on claim loss.
-        if (ELEM == xi.magic.dayElement[DAY] and (caster:isPC() or caster:isPet())) then
+        if (spellElement == xi.magic.dayElement[dayOfWeek] and (caster:isPC() or caster:isPet())) then
             SetServerVariable("AV_Regen_Reduction", 1+GetServerVariable("AV_Regen_Reduction"))
             target:addMod(xi.mod.REGEN, -2)
         end

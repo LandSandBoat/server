@@ -93,13 +93,17 @@ mission.sections =
                 end,
 
                 [115] = function(player, csid, option, npc)
-                    if mission:getVar(player, 'Option') == 6 then
+                    mission:setVarBit(player, 'Option', 0)
+
+                    if mission:getVar(player, 'Option') == 7 then
                         mission:complete(player)
                     end
                 end,
 
                 [116] = function(player, csid, option, npc)
-                    if mission:getVar(player, 'Option') == 5 then
+                    mission:setVarBit(player, 'Option', 1)
+
+                    if mission:getVar(player, 'Option') == 7 then
                         mission:complete(player)
                     end
                 end,
@@ -120,7 +124,9 @@ mission.sections =
             onEventFinish =
             {
                 [14] = function(player, csid, option, npc)
-                    if mission:getVar(player, 'Option') == 3 then
+                    mission:setVarBit(player, 'Option', 2)
+
+                    if mission:getVar(player, 'Option') == 7 then
                         mission:complete(player)
                     end
                 end,

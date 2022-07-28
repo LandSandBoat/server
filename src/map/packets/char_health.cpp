@@ -48,8 +48,8 @@ CCharHealthPacket::CCharHealthPacket(CCharEntity* PChar)
         ref<uint8>(0x21) = PChar->GetMLevel();
         ref<uint8>(0x22) = PChar->GetSJob();
         ref<uint8>(0x23) = PChar->GetSLevel();
-        //0x24: master level
-        //0x25: bitflags, bit 0 = master breaker
+        ref<uint8>(0x24) = 0; // Master Level
+        ref<uint8>(0x25) = 0; // Master Breaker
     }
 }
 

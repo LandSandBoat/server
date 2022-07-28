@@ -28,6 +28,8 @@ zones[xi.zone.UPPER_DELKFUTTS_TOWER] =
         ALREADY_POSSESS_TEMP     = 7385,  -- You already possess that temporary item.
         NO_COMBINATION           = 7390,  -- You were unable to enter a combination.
         REGIME_REGISTERED        = 9468,  -- New training regime registered!
+        LEARNS_SPELL             = 10516, -- <name> learns <spell>!
+        UNCANNY_SENSATION        = 10518, -- You are assaulted by an uncanny sensation.
         HOMEPOINT_SET            = 10527, -- Home point set!
     },
     mob =
@@ -52,7 +54,6 @@ zones[xi.zone.UPPER_DELKFUTTS_TOWER] =
     npc =
     {
         TREASURE_CHEST = 17424564,
-        CASKET_BASE    = 17424525,
     },
 }
 

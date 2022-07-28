@@ -30,37 +30,48 @@ zones[xi.zone.MERIPHATAUD_MOUNTAINS_S] =
         VOIDWALKER_OBTAIN_KI    = 7923, -- Obtained key item: <keyitem>!
         COMMON_SENSE_SURVIVAL   = 8948, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         CENTIPEDAL_CENTRUROIDES_PH =
         {
             [17174708] = 17174709,
         },
+
         BLOODLAPPER = 17174889,
-        VOIDWALKER        =
+
+        VOIDWALKER =
         {
-            [xi.keyItem.CLEAR_ABYSSITE] = {
+            [xi.keyItem.CLEAR_ABYSSITE] =
+            {
                 17174917, -- Raker bee
                 17174916, -- Raker bee
                 17174915, -- Raker bee
                 17174914, -- Raker bee
-                17174913,  -- Rummager beetle
-                17174912,  -- Rummager beetle
-                17174911,  -- Rummager beetle
-                17174910,  -- Rummager beetle
+                17174913, -- Rummager beetle
+                17174912, -- Rummager beetle
+                17174911, -- Rummager beetle
+                17174910, -- Rummager beetle
             },
-            [xi.keyItem.COLORFUL_ABYSSITE] = {
+
+            [xi.keyItem.COLORFUL_ABYSSITE] =
+            {
                 17174909,  -- Jyeshtha
                 17174908, -- Farruca Fly
             },
-            [xi.keyItem.BROWN_ABYSSITE] = {
+
+            [xi.keyItem.BROWN_ABYSSITE] =
+            {
                 17174907  -- Orcus
             },
-            [xi.keyItem.BLACK_ABYSSITE] = {
+
+            [xi.keyItem.BLACK_ABYSSITE] =
+            {
                 17174906  -- Yilbegan
             }
         }
     },
+
     npc =
     {
         INDESCRIPT_MARKINGS = 17175342,

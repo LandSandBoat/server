@@ -14,16 +14,16 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local AltanaSorrow = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.ALTANA_S_SORROW)
+    local altanaSorrow = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.ALTANA_S_SORROW)
 
     if
-        AltanaSorrow == QUEST_AVAILABLE and
+        altanaSorrow == QUEST_AVAILABLE and
         player:getFameLevel(xi.quest.fame_area.BASTOK) >= 4 and
         player:getMainLvl() >= 10
     then
         player:startEvent(141) -- Start quest "Altana's Sorrow"
 
-    elseif AltanaSorrow == QUEST_ACCEPTED then
+    elseif altanaSorrow == QUEST_ACCEPTED then
         if player:hasKeyItem(xi.ki.BUCKET_OF_DIVINE_PAINT) then
             player:startEvent(143) -- CS with Bucket of Divine Paint KI
         elseif player:hasKeyItem(xi.ki.LETTER_FROM_VIRNAGE) then
@@ -34,7 +34,7 @@ entity.onTrigger = function(player, npc)
             player:startEvent(142) -- During quest "Altana's Sorrow" (before KI)
         end
 
-    elseif AltanaSorrow == QUEST_COMPLETED then
+    elseif altanaSorrow == QUEST_COMPLETED then
         player:startEvent(145) -- New standard dialog
 
     else

@@ -46,11 +46,11 @@ CSynthResultMessagePacket::CSynthResultMessagePacket(CCharEntity* PChar, SYNTH_M
         uint8 count = 0;
         for (uint8 slotID = 1; slotID <= 8; ++slotID)
         {
-            uint32 quantity = PChar->CraftContainer->getQuantity(slotID);
-            if (quantity == 0)
+            uint32 slotQuantity = PChar->CraftContainer->getQuantity(slotID);
+            if (slotQuantity == 0)
             {
-                uint16 itemID                   = PChar->CraftContainer->getItemID(slotID);
-                ref<uint16>(0x0A + (count * 2)) = itemID;
+                uint16 failedItemID             = PChar->CraftContainer->getItemID(slotID);
+                ref<uint16>(0x0A + (count * 2)) = failedItemID;
                 count++;
             }
         }

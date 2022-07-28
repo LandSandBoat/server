@@ -24,7 +24,7 @@ entity.onMobSpawn = function(mob)
             local modelId = 791 -- Carbuncle
             mobArg:setModelId(modelId)
             mobArg:hideName(false)
-            mobArg:untargetable(true)
+            mobArg:setUntargetable(true)
             mobArg:setUnkillable(true)
             mobArg:SetAutoAttackEnabled(false)
             mobArg:SetMagicCastingEnabled(false)

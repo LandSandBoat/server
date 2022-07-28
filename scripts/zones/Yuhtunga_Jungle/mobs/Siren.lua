@@ -8,8 +8,8 @@ mixins = {require("scripts/mixins/job_special")}
 local entity = {}
 
 entity.onMobFight = function(mob, target)
-    local ClarsachCall = mob:getLocalVar("ClarsachCall")
-    if mob:getHPP() <= 25 and ClarsachCall == 0 then
+    local clarsachCall = mob:getLocalVar("ClarsachCall")
+    if mob:getHPP() <= 25 and clarsachCall == 0 then
         mob:useMobAbility(3515)
         mob:setLocalVar("ClarsachCall", 1)
     end

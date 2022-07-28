@@ -8,10 +8,10 @@ local entity = {}
 local ID = require("scripts/zones/Waughroon_Shrine/IDs")
 require("scripts/globals/status")
 
-local MIMIC_DISTANCE = 15
+local mimicDistance = 15
 -- 25% should cover: "sometimes after ... " - https://ffxiclopedia.fandom.com/wiki/Operation_Desert_Swarm
-local SELF_BIND_CHANCE = 0.25  -- 25%
-local SELF_STUN_CHANCE = 0.25  -- 25%
+local selfBindChance = 0.25  -- 25%
+local selfStunChance = 0.25  -- 25%
 
 -- Mobs sync/mimic TP moves.
 
@@ -28,7 +28,7 @@ entity.onMobInitialize = function(scorpion)
                     local potential_mimic = GetMobByID(allyId)
                     local dist = mob:checkDistance(potential_mimic)
 
-                    if dist < MIMIC_DISTANCE then
+                    if dist < mimicDistance then
                         -- set flag so prevent infinite loops
                         potential_mimic:setLocalVar('[ODS]mimic', 1)
                         if skillID == 354 then
@@ -49,12 +49,12 @@ entity.onMobInitialize = function(scorpion)
         -- Sometimes Wild Rage self stuns and sometimes Earth Pounder self binds
         -- https://ffxiclopedia.fandom.com/wiki/Operation_Desert_Swarm
         --
-        if skillID == 354 and math.random() < SELF_STUN_CHANCE then
+        if skillID == 354 and math.random() < selfStunChance then
             -- Wild Rage
             mob:showText(mob,ID.text.SCORPION_IS_STUNNED)
             mob:addStatusEffect(xi.effect.STUN,0,0,10)
             -- Earth Pounder
-        elseif skillID == 355 and math.random() < SELF_BIND_CHANCE then
+        elseif skillID == 355 and math.random() < selfBindChance then
             mob:showText(mob,ID.text.SCORPION_IS_BOUND)
             mob:addStatusEffect(xi.effect.BIND,0,0,10)
         end

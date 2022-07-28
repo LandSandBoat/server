@@ -8,7 +8,7 @@ local ID = require("scripts/zones/Southern_San_dOria/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/trust")
 -----------------------------------
 local entity = {}
@@ -18,19 +18,19 @@ entity.onTrade = function(player,npc,trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local TrustSandoria = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRUST_SANDORIA)
-    local TrustBastok   = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRUST_BASTOK)
-    local TrustWindurst = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUST_WINDURST)
+    local trustSandoria = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TRUST_SANDORIA)
+    local trustBastok   = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRUST_BASTOK)
+    local trustWindurst = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TRUST_WINDURST)
 
-    if player:getMainLvl() >= 5 and xi.settings.ENABLE_TRUST_QUESTS == 1 and TrustSandoria == QUEST_AVAILABLE then
-        if TrustWindurst == QUEST_AVAILABLE and TrustBastok == QUEST_AVAILABLE then
+    if player:getMainLvl() >= 5 and xi.settings.main.ENABLE_TRUST_QUESTS == 1 and trustSandoria == QUEST_AVAILABLE then
+        if trustWindurst == QUEST_AVAILABLE and trustBastok == QUEST_AVAILABLE then
             player:startEvent(3500)
-        elseif TrustWindurst == QUEST_COMPLETED or TrustBastok == QUEST_COMPLETED then
+        elseif trustWindurst == QUEST_COMPLETED or trustBastok == QUEST_COMPLETED then
             player:startEvent(3504)
         end
     elseif player:hasKeyItem(xi.ki.RED_INSTITUTE_CARD) then
         player:startEvent(3501)
-    elseif TrustSandoria == QUEST_COMPLETED then
+    elseif trustSandoria == QUEST_COMPLETED then
         player:startEvent(3502)
     else
         player:startEvent(3505)

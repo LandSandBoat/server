@@ -12,12 +12,12 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
     if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_SQUIRE_S_TEST_II) == QUEST_ACCEPTED) then
         player:startEvent(629)
     elseif (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM) == QUEST_COMPLETED) then
-        local Fired = player:getCharVar("Fired")
-        if Fired == 1 then
+        local fired = player:getCharVar("Fired")
+
+        if fired == 1 then
             player:startEvent(567) -- i got fired in a day
         else
             player:startEvent(505) -- theres work ill go check it out
@@ -25,7 +25,6 @@ entity.onTrigger = function(player, npc)
     else
         player:startEvent(566)
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)

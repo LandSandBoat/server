@@ -4,7 +4,7 @@
 -- Starts & Finishes Quest: Mom, The Adventurer?
 -- Starts Quest: The Signpost Marks the Spot
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/titles")
 require("scripts/globals/quests")
@@ -64,8 +64,8 @@ entity.onEventFinish = function(player, csid, option)
         player:needToZone(true)
         player:delKeyItem(xi.ki.LETTER_FROM_ROH_LATTEH)
         player:addTitle(xi.title.RINGBEARER)
-        player:addGil(xi.settings.GIL_RATE * gilReward)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * gilReward)
+        player:addGil(xi.settings.main.GIL_RATE * gilReward)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * gilReward)
         player:setCharVar("MomTheAdventurer_Event", 0)
 
         if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.MOM_THE_ADVENTURER) == QUEST_ACCEPTED) then

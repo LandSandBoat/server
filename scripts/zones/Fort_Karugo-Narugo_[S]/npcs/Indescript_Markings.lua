@@ -27,7 +27,8 @@ entity.onTrigger = function(player, npc)
         player:setCharVar("AF_SCH_BOOTS", loafersQuestProgress + 1)
 
         -- Move the markings around
-        local positions = {
+        local positions =
+        {
             [1] = {-72.612, -28.5, 671.24}, -- G-5 NE
             [2] = {-158,    -61,   268},    -- G-7
             [3] = {-2,      -52,   235},    -- H-8

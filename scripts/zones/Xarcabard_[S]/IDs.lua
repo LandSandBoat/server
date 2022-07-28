@@ -14,10 +14,14 @@ zones[xi.zone.XARCABARD_S] =
         ITEM_OBTAINED           = 6390, -- Obtained: <item>.
         GIL_OBTAINED            = 6391, -- Obtained <number> gil.
         KEYITEM_OBTAINED        = 6393, -- Obtained key item: <keyitem>.
+        NOTHING_OUT_OF_ORDINARY = 6404, -- There is nothing out of the ordinary here.
         CARRIED_OVER_POINTS     = 7001, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER            = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         VOIDWALKER_DESPAWN      = 8172, -- The monster fades before your eyes, a look of disappointment on its face.
+        NO_RESPONSE             = 8219, -- There is no response...
+        REQUIRED_TO_DELIVER     = 8255, -- You are required to deliver word of Operation Snowstorm's commencement to the Windurstian and Bastokan forces. First, make your way to the Federation encampment.
+        HELP_FEDERATION_PREPARE = 8256, -- You must help the Federation prepare for the operation. Head to the underground passage without delay!
         VOIDWALKER_NO_MOB       = 8576, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
         VOIDWALKER_MOB_TOO_FAR  = 8577, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
         VOIDWALKER_MOB_HINT     = 8578, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
@@ -34,9 +38,10 @@ zones[xi.zone.XARCABARD_S] =
         {
             [17338384] = 17338386,
         },
-        VOIDWALKER        =
+        VOIDWALKER =
         {
-            [xi.keyItem.CLEAR_ABYSSITE] = {
+            [xi.keyItem.CLEAR_ABYSSITE] =
+            {
                 17338607, -- Gorehound
                 17338606, -- Gorehound
                 17338605, -- Gorehound
@@ -46,18 +51,25 @@ zones[xi.zone.XARCABARD_S] =
                 17338601, -- Gjenganger
                 17338600, -- Gjenganger
             },
-            [xi.keyItem.COLORFUL_ABYSSITE] = {
+
+            [xi.keyItem.COLORFUL_ABYSSITE] =
+            {
                 17338599, -- Erebus
-                17338598  -- Feuerunke
+                17338598, -- Feuerunke
             },
-            [xi.keyItem.PURPLE_ABYSSITE] = {
-                17338597  -- Lord Ruthven
+
+            [xi.keyItem.PURPLE_ABYSSITE] =
+            {
+                17338597, -- Lord Ruthven
             },
-            [xi.keyItem.BLACK_ABYSSITE] = {
-                17338596  -- Yilbegan
+
+            [xi.keyItem.BLACK_ABYSSITE] =
+            {
+                17338596, -- Yilbegan
             }
         }
     },
+
     npc =
     {
     },

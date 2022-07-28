@@ -11,6 +11,7 @@ local zone_object = {}
 
 zone_object.onInitialize = function(zone)
     xi.treasure.initZone(zone)
+    SetServerVariable("[POP]SteamCleaner", 0) -- should "reset" on server repop
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)

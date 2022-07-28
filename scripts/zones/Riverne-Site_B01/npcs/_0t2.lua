@@ -2,16 +2,16 @@
 -- Area: Riverne Site #B01
 --  NPC: Unstable Displacement
 -----------------------------------
-local RIVERNE_SITE_B01 = require("scripts/zones/Riverne-Site_B01/globals")
+local riverneBGlobal = require("scripts/zones/Riverne-Site_B01/globals")
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    RIVERNE_SITE_B01.unstableDisplacementTrade(player, npc, trade)
+    riverneBGlobal.unstableDisplacementTrade(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    RIVERNE_SITE_B01.unstableDisplacementTrigger(player, npc, 22)
+    riverneBGlobal.unstableDisplacementTrigger(player, npc, 22)
 end
 
 entity.onEventUpdate = function(player, csid, option)

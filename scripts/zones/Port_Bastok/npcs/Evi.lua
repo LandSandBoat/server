@@ -3,7 +3,7 @@
 --  NPC: Evi
 -- Starts Quests: Past Perfect (100%)
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Port_Bastok/IDs")
@@ -14,28 +14,23 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
+    local pastPerfect = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.PAST_PERFECT)
 
-    local PastPerfect = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.PAST_PERFECT)
-
-    if (PastPerfect == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.TATTERED_MISSION_ORDERS)) then
+    if (pastPerfect == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.TATTERED_MISSION_ORDERS)) then
         player:startEvent(131)
     elseif (player:getFameLevel(xi.quest.fame_area.BASTOK) >= 2 and player:getCharVar("PastPerfectVar") == 2) then
         player:startEvent(130)
-    elseif (PastPerfect == QUEST_AVAILABLE) then
+    elseif (pastPerfect == QUEST_AVAILABLE) then
         player:startEvent(104)
     else
         player:startEvent(21)
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    -- printf("CSID2: %u", csid)
-    -- printf("RESULT2: %u", option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if (csid == 104 and player:getCharVar("PastPerfectVar") == 0) then
         player:setCharVar("PastPerfectVar", 1)
     elseif (csid == 130) then
@@ -53,7 +48,6 @@ entity.onEventFinish = function(player, csid, option)
             end
         end
     end
-
 end
 
 return entity

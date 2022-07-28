@@ -105,7 +105,7 @@ CCharUpdatePacket::CCharUpdatePacket(CCharEntity* PChar)
 
     if (PChar->animation == ANIMATION_FISHING_START)
     {
-        ref<uint8>(0x4A) = 0x0D; // was 0x10
+        ref<uint16>(0x4A) = PChar->hookDelay;
     }
     ref<uint64>(0x4C) = PChar->StatusEffectContainer->m_Flags;
 

@@ -24,8 +24,8 @@ end
 
 entity.onTrigger = function(player, npc)
     local sayItWithAHandbagCS = player:getCharVar("sayItWithAHandbagCS")
-    local SkillCap = xi.crafting.getCraftSkillCap(player, xi.skill.LEATHERCRAFT)
-    local SkillLevel = player:getSkillLevel(xi.skill.LEATHERCRAFT)
+    local skillCap = xi.crafting.getCraftSkillCap(player, xi.skill.LEATHERCRAFT)
+    local skillLevel = player:getSkillLevel(xi.skill.LEATHERCRAFT)
 
     if
         player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SAY_IT_WITH_A_HANDBAG) == QUEST_COMPLETED
@@ -46,9 +46,9 @@ entity.onTrigger = function(player, npc)
         player:startEvent(908)
     elseif xi.crafting.isGuildMember(player, 7) == 1 then
         if not player:hasStatusEffect(xi.effect.LEATHERCRAFT_IMAGERY) then
-            player:startEvent(651, SkillCap, SkillLevel, 1, 239, player:getGil(), 0, 0, 0)
+            player:startEvent(651, skillCap, skillLevel, 1, 239, player:getGil(), 0, 0, 0)
         else
-            player:startEvent(651, SkillCap, SkillLevel, 1, 239, player:getGil(), 7128, 0, 0)
+            player:startEvent(651, skillCap, skillLevel, 1, 239, player:getGil(), 7128, 0, 0)
         end
     else
         player:startEvent(651) -- Standard Dialogue

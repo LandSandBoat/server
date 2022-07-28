@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: Korroloka Tunnel (173)
---
 -----------------------------------
 local ID = require("scripts/zones/Korroloka_Tunnel/IDs")
 require("scripts/globals/conquest")
@@ -51,10 +49,10 @@ zone_object.onRegionEnter = function(player, region)
 end
 
 zone_object.onRegionLeave = function(player, region)
-    local RegionID = region:GetRegionID()
+    local regionId = region:GetRegionID()
     local pooltime = os.time() - player:getLocalVar("POOL_TIME")
 
-    if RegionID <= 3 and player:getCharVar("BathedInScent") == 1 then
+    if regionId <= 3 and player:getCharVar("BathedInScent") == 1 then
         if pooltime >= 300 then
             player:messageSpecial(ID.text.LEFT_SPRING_CLEAN)
             player:setLocalVar("POOL_TIME", 0)

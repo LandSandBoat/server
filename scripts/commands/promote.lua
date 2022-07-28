@@ -80,18 +80,22 @@ function onTrigger(player, target, level)
         end
 
         -- remove GM flags
-        local FLAG_GM               = 0x04000000
-        local FLAG_SENIOR           = 0x01000000 -- Do NOT set these flags. These are here to
-        local FLAG_LEAD             = 0x02000000 -- ensure all GM status is removed.
+        local gmFlags =
+        {
+            GM     = 0x04000000,
+            SENIOR = 0x01000000, -- Do NOT set these flags. These are here to
+            LEAD   = 0x02000000, -- ensure all GM status is removed.
+        }
 
-        if targ:checkNameFlags(FLAG_GM) then
-            targ:setFlag(FLAG_GM)
+        -- TODO: Convert this to a loop
+        if targ:checkNameFlags(gmFlags.GM) then
+            targ:setFlag(gmFlags.GM)
         end
-        if targ:checkNameFlags(FLAG_SENIOR) then
-            targ:setFlag(FLAG_SENIOR)
+        if targ:checkNameFlags(gmFlags.SENIOR) then
+            targ:setFlag(gmFlags.SENIOR)
         end
-        if targ:checkNameFlags(FLAG_LEAD) then
-            targ:setFlag(FLAG_LEAD)
+        if targ:checkNameFlags(gmFlags.LEAD) then
+            targ:setFlag(gmFlags.LEAD)
         end
 
         -- remove hidden

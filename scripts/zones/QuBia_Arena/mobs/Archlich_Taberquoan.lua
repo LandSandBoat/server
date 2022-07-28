@@ -13,8 +13,9 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
-    local BattleTime = mob:getBattleTime()
-    if (BattleTime - mob:getLocalVar("RepopWarriors") > 30) then
+    local battleTime = mob:getBattleTime()
+
+    if (battleTime - mob:getLocalVar("RepopWarriors") > 30) then
         local warriorsSpawned = 0
         for warrior = mob:getID()+3, mob:getID()+6 do
             if (not GetMobByID(warrior):isSpawned() and warriorsSpawned < 2) then
@@ -26,7 +27,7 @@ entity.onMobFight = function(mob, target)
             end
         end
 
-        mob:setLocalVar("RepopWarriors", BattleTime)
+        mob:setLocalVar("RepopWarriors", battleTime)
     end
 end
 

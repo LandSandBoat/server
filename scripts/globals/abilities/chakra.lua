@@ -10,13 +10,13 @@ require("scripts/globals/status")
 -----------------------------------
 local ability_object = {}
 
-local ChakraStatusEffects =
+local chakraStatusEffects =
 {
     POISON       = 0, -- Removed by default
     BLINDNESS    = 0, -- Removed by default
     PARALYSIS    = 1,
     DISEASE      = 2,
-    PLAGUE       = 4
+    PLAGUE       = 4,
 }
 
 ability_object.onAbilityCheck = function(player, target, ability)
@@ -25,7 +25,7 @@ end
 
 ability_object.onUseAbility = function(player, target, ability)
     local chakraRemoval = player:getMod(xi.mod.CHAKRA_REMOVAL)
-    for k, v in pairs(ChakraStatusEffects) do
+    for k, v in pairs(chakraStatusEffects) do
         if bit.band(chakraRemoval, v) == v then
             player:delStatusEffect(xi.effect[k])
         end

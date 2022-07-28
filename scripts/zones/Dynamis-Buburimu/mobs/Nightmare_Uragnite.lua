@@ -2,9 +2,10 @@
 -- Area: Dynamis - Buburimu
 --  Mob: Nightmare Uragnite
 -----------------------------------
-mixins = {
+mixins =
+{
     require("scripts/mixins/dynamis_dreamland"),
-    require("scripts/mixins/families/uragnite")
+    require("scripts/mixins/families/uragnite"),
 }
 -----------------------------------
 local entity = {}

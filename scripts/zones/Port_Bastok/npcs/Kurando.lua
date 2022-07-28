@@ -19,11 +19,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local FearofFlying = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FEAR_OF_FLYING)
+    local fearofFlying = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FEAR_OF_FLYING)
     -- csid 173 ?
-    if (FearofFlying == QUEST_AVAILABLE and    player:getFameLevel(xi.quest.fame_area.BASTOK) >=3) then
+    if (fearofFlying == QUEST_AVAILABLE and    player:getFameLevel(xi.quest.fame_area.BASTOK) >=3) then
         player:startEvent(170) -- Quest Start Dialogue
-    elseif (FearofFlying == QUEST_COMPLETED) then
+    elseif (fearofFlying == QUEST_COMPLETED) then
         player:startEvent(172) -- Dialogue after Completion
     else
         player:startEvent(28) -- Default Dialogue
@@ -35,14 +35,11 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if (csid == 170) then
         player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FEAR_OF_FLYING)
-
     elseif (csid == 171) then
         if    (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13113)
-
         else
             player:tradeComplete()
             player:addItem(13113, 1)

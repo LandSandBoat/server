@@ -88,12 +88,11 @@ CCampaignPacket::CCampaignPacket(CCharEntity* PChar, CampaignState state, uint8 
     this->setType(0x71);
     this->setSize(0xCC);
 
-    ref<uint8>(0x04) = 0x02;
-    ref<uint8>(0x06) = 0xC4;
-    ref<uint8>(0x08) = 0x01;
+    ref<uint8>(0x04)  = 0x02;
+    ref<uint8>(0x06)  = 0xC4;
+    ref<uint8>(0x08)  = 0x01;
     ref<uint32>(0x0C) = campaign::GetAlliedNotes(PChar);
-    ref<uint32>(0x10) = state.controlBeastman << 15 | state.controlWindurst << 10
-        | state.controlBastok << 5 | state.controlSandoria;
+    ref<uint32>(0x10) = state.controlBeastman << 15 | state.controlWindurst << 10 | state.controlBastok << 5 | state.controlSandoria;
 
     SetNations(state.nations);
 

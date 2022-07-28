@@ -31,9 +31,10 @@ public:
 
     CCharEntity* GetCharByName(int8* name); // finds the player if exists in zone
     CCharEntity* GetCharByID(uint32 id);
+    CBaseEntity* GetEntity(uint16 targid, uint8 filter = -1); // получаем указатель на любую сущность в зоне
+
     void UpdateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask);
     void UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask, bool alwaysInclude = false);
-    CBaseEntity* GetEntity(uint16 targid, uint8 filter = -1); // получаем указатель на любую сущность в зоне
 
     void SpawnPCs(CCharEntity* PChar);  // отображаем персонажей в зоне
     void SpawnMOBs(CCharEntity* PChar); // отображаем MOBs в зоне
@@ -85,20 +86,22 @@ public:
     EntityList_t m_npcList;  // список всех NPCs в зоне
     EntityList_t m_charList; // список всех PCs  в зоне
 
-    std::set<uint16> charTargIds; // Sorted set of targids for characters
+    std::set<uint16> charTargIds;    // Sorted set of targids for characters
+    std::set<uint16> dynamicTargIds; // Sorted set of targids for dynamic entities
 
     CZoneEntities(CZone*);
     ~CZoneEntities();
 
 private:
     CZone*       m_zone;
-    CBaseEntity* m_Transport; // указатель на транспорт в зоне
+    CBaseEntity* m_Transport; // Transport indicator in the zone
     time_point   m_EffectCheckTime{ server_clock::now() };
 
-    time_point computeTime { server_clock::now() };
-    uint16 lastCharComputeTargId;
+    time_point computeTime{ server_clock::now() };
+    uint16     lastCharComputeTargId;
 
-    uint16 m_DynamicTargIDCount;
+    time_point charPersistTime{ server_clock::now() };
+    uint16     lastCharPersistTargId;
 };
 
 #endif

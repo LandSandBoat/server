@@ -6,7 +6,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Woods/IDs")
 require("scripts/globals/npc_util")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
@@ -42,9 +42,9 @@ entity.onTrigger = function(player, npc)
 
     -- PAYING LIP SERVICE
     elseif payingLipService == QUEST_ACCEPTED then
-        player:startEvent(478, 0, 912, 1016, xi.settings.GIL_RATE*150, xi.settings.GIL_RATE*200)
+        player:startEvent(478, 0, 912, 1016, xi.settings.main.GIL_RATE*150, xi.settings.main.GIL_RATE*200)
     elseif payingLipService == QUEST_AVAILABLE then
-        player:startEvent(477, 0, 912, 1016, xi.settings.GIL_RATE*150, xi.settings.GIL_RATE*200)
+        player:startEvent(477, 0, 912, 1016, xi.settings.main.GIL_RATE*150, xi.settings.main.GIL_RATE*200)
 
     -- STANDARD DIALOG
     else
@@ -73,11 +73,11 @@ entity.onEventFinish = function(player, csid, option)
         end
 
         if option == 1 then
-            player:addGil(xi.settings.GIL_RATE*150)
-            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*150)
+            player:addGil(xi.settings.main.GIL_RATE*150)
+            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*150)
         else
-            player:addGil(xi.settings.GIL_RATE*200)
-            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*200)
+            player:addGil(xi.settings.main.GIL_RATE*200)
+            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*200)
         end
 
         player:confirmTrade()

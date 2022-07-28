@@ -300,6 +300,11 @@ mission.sections =
         [xi.zone.PSOXJA] =
         {
             ['_i99'] = mission:event(112),
+
+            onEventFinish =
+            {
+                [112] = setPromyvionVahzlPos,
+            },
         },
     },
 }

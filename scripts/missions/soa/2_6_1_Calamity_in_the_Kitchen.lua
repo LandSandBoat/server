@@ -7,17 +7,14 @@
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
-require('scripts/globals/utils')
 require('scripts/globals/zone')
-require('scripts/settings/main')
------------------------------------
-local ID = require('scripts/zones/Western_Adoulin/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.SOA, xi.mission.id.soa.CALAMITY_IN_THE_KITCHEN)
 
 mission.reward =
 {
+    keyItem     = xi.ki.BOX_OF_ADOULINIAN_TOMATOES,
     nextMission = { xi.mission.log_id.SOA, xi.mission.id.soa.ARCIELAS_PROMISE },
 }
 
@@ -33,15 +30,27 @@ mission.sections =
             ['Chalvava'] =
             {
                 onTrigger = function(player, npc)
-                    return mission:progressEvent(344)
+                    if player:getMissionStatus(mission.areaId) == 0 then
+                        return mission:progressEvent(344, 258)
+                    else
+                        return mission:progressEvent(345, 258)
+                    end
                 end,
             },
 
             onEventFinish =
             {
                 [344] = function(player, csid, option, npc)
-                    if mission:complete(player) then
-                        npcUtil.giveKeyItem(player, xi.ki.BOX_OF_ADOULINIAN_TOMATOES)
+                    if option == 1 then
+                        mission:complete(player)
+                    else
+                        player:setMissionStatus(mission.areaId, 1)
+                    end
+                end,
+
+                [345] = function(player, csid, option, npc)
+                    if option == 1 then
+                        mission:complete(player)
                     end
                 end,
             },

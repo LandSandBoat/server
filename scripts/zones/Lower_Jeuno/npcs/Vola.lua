@@ -25,28 +25,28 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local FistfulOfFury = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.FISTFUL_OF_FURY)
-    local BeatAroundTheBushin = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEAT_AROUND_THE_BUSHIN)
+    local fistfulOfFury = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.FISTFUL_OF_FURY)
+    local beatAroundTheBushin = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEAT_AROUND_THE_BUSHIN)
 
     if
         player:getFameLevel(xi.quest.fame_area.NORG) >= 3 and
-        FistfulOfFury == QUEST_AVAILABLE and
+        fistfulOfFury == QUEST_AVAILABLE and
         player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SILENCE_OF_THE_RAMS) == QUEST_COMPLETED
     then
         player:startEvent(216) -- Start Quest "Fistful of Fury"
 
-    elseif FistfulOfFury == QUEST_ACCEPTED then
+    elseif fistfulOfFury == QUEST_ACCEPTED then
         player:startEvent(215) -- During Quest "Fistful of Fury"
 
     elseif
-        BeatAroundTheBushin == QUEST_AVAILABLE and
+        beatAroundTheBushin == QUEST_AVAILABLE and
         player:getMainJob() == xi.job.MNK and
         player:getMainLvl() >= 71 and
         player:getFameLevel(xi.quest.fame_area.NORG) >= 6
     then
         player:startEvent(160) -- Start Quest "Beat Around the Bushin"
 
-    elseif BeatAroundTheBushin ~= QUEST_AVAILABLE then
+    elseif beatAroundTheBushin ~= QUEST_AVAILABLE then
         player:startEvent(214) -- During & After Quest "Beat Around the Bushin"
 
     else

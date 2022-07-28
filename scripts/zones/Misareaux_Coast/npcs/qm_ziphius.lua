@@ -9,15 +9,16 @@
 -- !pos 207.000,-16.000,479.000 25
 -- !pos 253.000,-16.000,411.500 25
 -----------------------------------
-local MISAREAUX_COAST = require("scripts/zones/Misareaux_Coast/globals")
+local misareauxGlobal = require("scripts/zones/Misareaux_Coast/globals")
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    MISAREAUX_COAST.ziphiusOnTrade(player, npc, trade)
+    misareauxGlobal.ziphiusOnTrade(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    MISAREAUX_COAST.ziphiusOnTrigger(player, npc)
+    misareauxGlobal.ziphiusOnTrigger(player, npc)
 end
+
 return entity

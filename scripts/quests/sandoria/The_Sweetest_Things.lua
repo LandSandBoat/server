@@ -10,7 +10,7 @@ require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
-require('scripts/settings/main')
+require('scripts/globals/settings')
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_SWEETEST_THINGS)
@@ -24,7 +24,7 @@ quest.reward =
 
 local raimbroyOnTrade = function(player, npc, trade)
     if npcUtil.tradeHasExactly(trade, {{ xi.items.POT_OF_HONEY, 5 }}) then
-        return quest:progressEvent(535, 400 * xi.settings.GIL_RATE)
+        return quest:progressEvent(535, 400 * xi.settings.main.GIL_RATE)
     else
         return quest:event(522)
     end
@@ -100,7 +100,7 @@ quest.sections =
                         -- we need to implement a latch, since both event finishes will trigger
                         -- after the complete.
 
-                        player:addGil(400 * xi.settings.GIL_RATE)
+                        player:addGil(400 * xi.settings.main.GIL_RATE)
                         quest:setLocalVar(player, 'firstComplete', 1)
                     end
                 end,
@@ -128,7 +128,7 @@ quest.sections =
                         player:confirmTrade()
 
                         player:addTitle(xi.title.APIARIST)
-                        player:addGil(400 * xi.settings.GIL_RATE)
+                        player:addGil(400 * xi.settings.main.GIL_RATE)
                         player:addFame(xi.quest.fame_area.SANDORIA, 5)
                     else
                         quest:setLocalVar(player, 'firstComplete', 0)

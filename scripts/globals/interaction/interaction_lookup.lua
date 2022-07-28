@@ -16,25 +16,25 @@ require('scripts/globals/interaction/interaction_util')
 --[[ Illustration of the structure of the data:
 {
     -- First level (zone ID)
-    [xi.zone.SOME_ZONE] = {
-
+    [xi.zone.SOME_ZONE] =
+    {
         -- Second level (entity name)
-        ['Some_NPC'] = {
-
+        ['Some_NPC'] =
+        {
             -- Third level (handler name)
-            ['onTrigger'] = {
-
+            ['onTrigger'] =
+            {
                 -- List of handlers in the form below
                 { check = function (player) .. end, handler = function (player) .. end, container = .. },
             }
         },
 
         -- Second level (zone-wide handler name)
-        ['onEventFinish'] = {
-
+        ['onEventFinish'] =
+        {
             -- Third level (specifier for handler, here the ID of the event)
-            [123] = {
-
+            [123] =
+            {
                 -- List of handlers in the form below
                 { check = function (player) .. end, handler = function (player) .. end, container = .. },
             }
@@ -42,8 +42,7 @@ require('scripts/globals/interaction/interaction_util')
     }
 }
 --]]
-InteractionLookup = {
-}
+InteractionLookup = {}
 
 function InteractionLookup:new(original)
     local obj = original or {}
@@ -54,7 +53,6 @@ function InteractionLookup:new(original)
     obj.zoneDefaults = obj.zoneDefaults or {}
     return obj
 end
-
 
 -----------------------------------
 -- Add/Remove helpers
@@ -230,7 +228,6 @@ local function runHandler(handler, args)
     end
 end
 
-
 -- Use preprocessed lookup to run relevant handlers
 local function runHandlersInData(data, player, secondLevelKey, thirdLevelKey, args)
     if not data then
@@ -276,7 +273,6 @@ local function runHandlersInData(data, player, secondLevelKey, thirdLevelKey, ar
 
     return actions
 end
-
 
 -- Find the current highest priority actions
 local function getHighestPriorityActions(data, player, secondLevelKey, thirdLevelKey, args)
@@ -357,8 +353,6 @@ local function performNextAction(player, containerId, handlerId, actions, target
     return didPerformAction and returnValue
 end
 
-
-
 -----------------------------------
 -- Handlers
 -----------------------------------
@@ -390,11 +384,10 @@ local function onHandler(data, secondLevelKey, thirdLevelKey, args, fallbackHand
                 or player:getLocalVar(fallbackVar) == 0) -- alternate between trying handler system and fallback handler
             )
     then
-        player:setLocalVar(fallbackVar, 1)
+        player:setLocalVar(fallbackVar, priority <= Action.Priority.Event and 1 or 0)
         local result = performNextAction(player, secondLevelKey, thirdLevelKey, actions, targetId) or defaultReturn
         return result
     end
-
 
     -- Else we try to fallback to Lua files for the entity/zone
     player:setLocalVar(fallbackVar, 0)
@@ -414,7 +407,6 @@ local function onHandler(data, secondLevelKey, thirdLevelKey, args, fallbackHand
     result = performNextAction(player, secondLevelKey, thirdLevelKey, actions, targetId)
     return result
 end
-
 
 function InteractionLookup:afterZoneIn(player, fallbackFn)
     return onHandler(self.data, 'afterZoneIn', 1, { player }, fallbackFn)

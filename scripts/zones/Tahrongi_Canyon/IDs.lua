@@ -56,6 +56,8 @@ zones[xi.zone.TAHRONGI_CANYON] =
         VOIDWALKER_UPGRADE_KI_2      = 11016, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
         VOIDWALKER_BREAK_KI          = 11017, -- The <keyitem> shatters into tiny fragments.
         VOIDWALKER_OBTAIN_KI         = 11018, -- Obtained key item: <keyitem>!
+        LEARNS_SPELL                 = 11945, -- <name> learns <spell>!
+        UNCANNY_SENSATION            = 11947, -- You are assaulted by an uncanny sensation.
         COMMON_SENSE_SURVIVAL        = 11954, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
@@ -65,15 +67,19 @@ zones[xi.zone.TAHRONGI_CANYON] =
             [17256560] = 17256563, -- -9.176 -8.191 -64.347 (south)
             [17256686] = 17256690, -- 22.360 23.757 281.584 (north)
         },
+
         HERBAGE_HUNTER_PH =
         {
             [17256835] = 17256836, -- -119.301, 24.087, 448.636
         },
+
         HABROK            = 17256493,
         YARA_MA_YHA_WHO   = 17256900,
-        VOIDWALKER  =
+
+        VOIDWALKER =
         {
-            [xi.keyItem.CLEAR_ABYSSITE] = {
+            [xi.keyItem.CLEAR_ABYSSITE] =
+            {
                 17256918, -- Prickly Sheep
                 17256917, -- Prickly Sheep
                 17256916, -- Prickly Sheep
@@ -83,22 +89,29 @@ zones[xi.zone.TAHRONGI_CANYON] =
                 17256912,  -- Void Hare
                 17256911,  -- Void Hare
             },
-            [xi.keyItem.COLORFUL_ABYSSITE] = {
-                17256910,  -- Chesma
+
+            [xi.keyItem.COLORFUL_ABYSSITE] =
+            {
+                17256910, -- Chesma
                 17256909, -- Tammuz
             },
-            [xi.keyItem.GREY_ABYSSITE] = {
-                17256908  -- Dawon
+
+            [xi.keyItem.GREY_ABYSSITE] =
+            {
+                17256908, -- Dawon
             },
-            [xi.keyItem.BLACK_ABYSSITE] = {
-                17256907  -- Yilbegan
+
+            [xi.keyItem.BLACK_ABYSSITE] =
+            {
+                17256907, -- Yilbegan
             }
         }
     },
+
     npc =
     {
-        CASKET_BASE     = 17257008,
         SIGNPOST_OFFSET = 17257033,
+
         EXCAVATION =
         {
             17257055,

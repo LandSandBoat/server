@@ -8,7 +8,7 @@ local ID = require("scripts/zones/Lower_Jeuno/IDs")
 require("scripts/globals/items")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 
@@ -530,11 +530,11 @@ entity.onTrigger = function(player, npc)
     end
 
     local arg4 =
-        ((xi.settings.ENABLE_ACP == 0 or kiArgs[1] == 254) and 2 or 0) +
-        ((xi.settings.ENABLE_AMK == 0 or kiArgs[2] == 254) and 4 or 0) +
-        ((xi.settings.ENABLE_ASA == 0 or kiArgs[3] == 254) and 8 or 0) +
-        ((xi.settings.ENABLE_ACP * xi.settings.ENABLE_AMK * xi.settings.ENABLE_ASA == 0 or receivedNexusCape == 1) and 16 or 0) +
-        ((xi.settings.ENABLE_ACP * xi.settings.ENABLE_AMK * xi.settings.ENABLE_ASA == 0 or receivedNexusCape == 0) and 32 or 0)
+        ((xi.settings.main.ENABLE_ACP == 0 or kiArgs[1] == 254) and 2 or 0) +
+        ((xi.settings.main.ENABLE_AMK == 0 or kiArgs[2] == 254) and 4 or 0) +
+        ((xi.settings.main.ENABLE_ASA == 0 or kiArgs[3] == 254) and 8 or 0) +
+        ((xi.settings.main.ENABLE_ACP * xi.settings.main.ENABLE_AMK * xi.settings.main.ENABLE_ASA == 0 or receivedNexusCape == 1) and 16 or 0) +
+        ((xi.settings.main.ENABLE_ACP * xi.settings.main.ENABLE_AMK * xi.settings.main.ENABLE_ASA == 0 or receivedNexusCape == 0) and 32 or 0)
 
     player:startEvent(10099, kiArgs[1], kiArgs[2], kiArgs[3], arg4, 0, 0, 0, 0)
 end

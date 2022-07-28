@@ -9,7 +9,7 @@ require("scripts/globals/teleports")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------
@@ -57,7 +57,7 @@ entity.onTrigger = function(player, npc)
     local lureWindurst = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LURE_OF_THE_WILDCAT)
     local wildcatWindurst = player:getCharVar("WildcatWindurst")
 
-    if lureWindurst ~= QUEST_COMPLETED and xi.settings.ENABLE_TOAU == 1 then
+    if lureWindurst ~= QUEST_COMPLETED and xi.settings.main.ENABLE_TOAU == 1 then
         if lureWindurst == QUEST_AVAILABLE then
             player:startEvent(736)
         else

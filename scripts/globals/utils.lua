@@ -10,7 +10,6 @@ utils.MAX_INT32  = 2147483647
 
 -- Used to keep the linter quiet
 function utils.unused(...)
-    return
 end
 
 -- Shuffles a table and returns a new table containing the randomized result.
@@ -96,6 +95,20 @@ function utils.stoneskin(target, dmg)
     return dmg
 end
 
+-- returns reduced magic damage from RUN buff, "One for All"
+function utils.oneforall(target, dmg)
+    if dmg > 0 then
+        local oneForAllEffect = target:getStatusEffect(xi.effect.ONE_FOR_ALL)
+
+        if oneForAllEffect ~= nil then
+            local power = oneForAllEffect:getPower()
+            dmg = math.max(0, dmg - power)
+        end
+    end
+
+    return dmg
+end
+
 function utils.takeShadows(target, dmg, shadowbehav)
     if shadowbehav == nil then
         shadowbehav = 1
@@ -134,7 +147,7 @@ function utils.takeShadows(target, dmg, shadowbehav)
                 shadowsLeft = targShadows - shadowbehav
 
                 if shadowsLeft > 0 then
-                    --update icon
+                    -- Update icon
                     local effect = target:getStatusEffect(xi.effect.COPY_IMAGE)
                     if effect ~= nil then
                         if shadowsLeft == 1 then
@@ -143,6 +156,8 @@ function utils.takeShadows(target, dmg, shadowbehav)
                             effect:setIcon(xi.effect.COPY_IMAGE_2)
                         elseif shadowsLeft == 3 then
                             effect:setIcon(xi.effect.COPY_IMAGE_3)
+                        elseif shadowsLeft >= 4 then
+                            effect:setIcon(xi.effect.COPY_IMAGE_4)
                         end
                     end
                 end
@@ -182,7 +197,6 @@ function utils.conalDamageAdjustment(attacker, target, skill, max_damage, minimu
 
     if conal_angle_power < 0 then
         -- #TODO The below print will be a valid print upon fixing to-do above relating to beam center orgin
-        -- print("Error: conalDamageAdjustment - Mob TP move hit target beyond conal angle: ".. cone_angle)
         conal_angle_power = 0
     end
 
@@ -480,6 +494,80 @@ end
 function utils.splitStr(s, sep)
     local fields = {}
     local pattern = string.format("([^%s]+)", sep)
-    string.gsub(s, pattern, function(c) fields[#fields + 1] = c end)
+    local _ = string.gsub(s, pattern, function(c) fields[#fields + 1] = c end)
     return fields
+end
+
+function utils.mobTeleport(mob, hideDuration, pos, disAnim, reapAnim)
+
+    --TODO Table of animations that are used for teleports for reference
+
+    if hideDuration == nil then
+        hideDuration = 5000
+    end
+
+    if disAnim == nil then
+        disAnim = "kesu"
+    end
+
+    if reapAnim == nil then
+        reapAnim = "deru"
+    end
+
+    if pos == nil then
+        pos = mob:getPos()
+    end
+
+    local mobSpeed = mob:getSpeed()
+
+    if hideDuration < 1000 then
+        hideDuration = 1000
+    end
+
+    if mob:isDead() then
+        return
+    end
+
+    mob:entityAnimationPacket(disAnim)
+    mob:hideName(true)
+    mob:setUntargetable(true)
+    mob:SetAutoAttackEnabled(false)
+    mob:SetMagicCastingEnabled(false)
+    mob:SetMobAbilityEnabled(false)
+    mob:setPos(pos, 0)
+    mob:setSpeed(0)
+
+    mob:timer(hideDuration, function(mobArg)
+        mobArg:setPos(pos, 0)
+        mobArg:hideName(false)
+        mobArg:setUntargetable(false)
+        mobArg:SetAutoAttackEnabled(true)
+        mobArg:SetMagicCastingEnabled(true)
+        mobArg:SetMobAbilityEnabled(true)
+        mobArg:setSpeed(mobSpeed)
+        mobArg:entityAnimationPacket(reapAnim)
+
+        if mobArg:isDead() then
+            return
+        end
+    end)
+end
+
+local ffxiRotConversionFactor = 360.0 / 255.0
+
+function utils.ffxiRotToDegrees(ffxiRot)
+    return ffxiRotConversionFactor * ffxiRot
+end
+
+function utils.lateralTranslateWithOriginRotation(origin, translation)
+    local degrees = utils.ffxiRotToDegrees(origin.rot)
+    local rads = math.rad(degrees)
+    local new_coords = {}
+
+    new_coords.x = origin.x + ((math.cos(rads) * translation.x) + (math.sin(rads) * translation.z))
+    new_coords.z = origin.z + ((math.cos(rads) * translation.z) - (math.sin(rads) * translation.x))
+    new_coords.y = origin.y
+    new_coords.rot = origin.rot
+
+    return new_coords
 end

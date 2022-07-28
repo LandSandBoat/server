@@ -12,13 +12,9 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    -- printf("onUpdate CSID: %u", csid)
-    -- printf("onUpdate RESULT: %u", option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    -- printf("onFinish CSID: %u", csid)
-    -- printf("onFinish RESULT: %u", option)
     if (csid == 12 and option == 1) then
         player:setPos(471.776, -42.088, 153.301, 163, 130)
     end

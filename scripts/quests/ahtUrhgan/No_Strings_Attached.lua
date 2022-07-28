@@ -7,7 +7,7 @@
 -- Ghatsad      : !pos 34.325 -7.804 57.511 50
 -- qm10         : !pos 457.128 -8.249 60.795 54
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require('scripts/globals/items')
 require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
@@ -34,7 +34,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:getMainLvl() >= xi.settings.ADVANCED_JOB_LEVEL
+                player:getMainLvl() >= xi.settings.main.ADVANCED_JOB_LEVEL
         end,
 
         [xi.zone.BASTOK_MARKETS] =
@@ -188,7 +188,7 @@ quest.sections =
 
                 onTrigger = function(player, npc)
                     if
-                        player:getMainLvl() < xi.settings.AF1_QUEST_LEVEL and
+                        player:getMainLvl() < xi.settings.main.AF1_QUEST_LEVEL and
                         player:getMainJob() == xi.job.PUP
                     then
                         return quest:progressEvent(267)

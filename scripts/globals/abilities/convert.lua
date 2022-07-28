@@ -15,18 +15,18 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    local MP = player:getMP()
-    local HP = player:getHP()
+    local playerMP = player:getMP()
+    local playerHP = player:getHP()
     local jpValue = player:getJobPointLevel(xi.jp.CONVERT_EFFECT)
 
-    if MP > 0 then
+    if playerMP > 0 then
         -- Murgleis sword augments Convert.
-        if player:getMod(xi.mod.AUGMENTS_CONVERT) > 0 and HP > player:getMaxHP()/2 then
-            HP = HP * player:getMod(xi.mod.AUGMENTS_CONVERT)
+        if player:getMod(xi.mod.AUGMENTS_CONVERT) > 0 and playerHP > player:getMaxHP()/2 then
+            playerHP = playerHP * player:getMod(xi.mod.AUGMENTS_CONVERT)
         end
 
-        player:setHP(MP + (HP * (jpValue * 0.01)))
-        player:setMP(HP)
+        player:setHP(playerMP + (playerHP * (jpValue * 0.01)))
+        player:setMP(playerHP)
     end
 end
 

@@ -14,8 +14,8 @@ entity.onMobSpawn = function(mob)
     mob:setModelId(1167) -- light
 
     -- Todo: confirm this is legit and move to mob_reistances table if so
-    mob:addmob(xi.mod.LIGHT_RES, 100)
-    mob:addmob(xi.mod.DARK_RES, -100)
+    mob:addmob(xi.mod.LIGHT_MEVA, 100)
+    mob:addmob(xi.mod.DARK_MEVA, -100)
 end
 
 entity.onMobRoam = function(mob)

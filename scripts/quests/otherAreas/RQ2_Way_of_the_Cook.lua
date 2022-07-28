@@ -20,9 +20,9 @@ local totalHoursLeft = 0
 
 quest.reward =
 {
-    fame  = 120,
+    fame     = 120,
     fameArea = xi.quest.fame_area.WINDURST,
-    title = xi.title.ONE_STAR_PURVEYOR,
+    title    = xi.title.ONE_STAR_PURVEYOR,
 }
 
 quest.sections =
@@ -30,7 +30,7 @@ quest.sections =
     -- Section: Check if quest is available.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) > 2 and
+            return status == QUEST_AVAILABLE and
                 player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.RYCHARDE_THE_CHEF) == QUEST_COMPLETED
         end,
 
@@ -39,17 +39,24 @@ quest.sections =
             ['Rycharde'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getCharVar("Quest[4][0]DayCompleted") + 7 < VanadielUniqueDay() then
-                        return quest:progressEvent(76, xi.items.DHALMEL_MEAT, xi.items.BEEHIVE_CHIP) -- Way of the Cook starting event.
+                    if
+                        player:getCharVar("Quest[4][0]DayCompleted") + 7 < VanadielUniqueDay() and
+                        player:getFameLevel(xi.quest.fame_area.WINDURST) > 2
+                    then
+                        return quest:progressEvent(76, xi.items.BEEHIVE_CHIP, xi.items.DHALMEL_MEAT) -- Way of the Cook starting event.
+                    else
+                        return quest:event(75) -- Default dialog after completing previous quest.
                     end
                 end,
             },
+
+            ['Take'] = quest:event(68),
 
             onEventFinish =
             {
                 [76] = function(player, csid, option, npc)
                     if option == 74 then -- Accept quest option.
-                        player:setCharVar("Quest[4][0]DayCompleted", 0)         -- Delete previous quest (Rycharde the Chef) variables
+                        player:setCharVar("Quest[4][0]DayCompleted", 0)            -- Delete previous quest (Rycharde the Chef) variables
                         quest:setVar(player, 'HourStarted', VanadielHour())        -- Set current quest started variables
                         quest:setVar(player, 'DayStarted', VanadielDayOfTheYear()) -- Set current quest started variables
                         quest:begin(player)
@@ -90,17 +97,24 @@ quest.sections =
                         else
                             return quest:progressEvent(81) -- Quest completed late.
                         end
+                    elseif
+                        npcUtil.tradeHasExactly(trade, {xi.items.DHALMEL_MEAT}) or
+                        npcUtil.tradeHasExactly(trade, {xi.items.BEEHIVE_CHIP})
+                    then
+                        return quest:event(73) -- Incomplete trade.
                     end
                 end,
             },
+
+            ['Take'] = quest:event(65),
 
             onEventFinish =
             {
                 [80] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:tradeComplete()
-                        player:addGil(xi.settings.GIL_RATE * 1500)
-                        player:messageSpecial(mhauraID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 1500)
+                        player:addGil(xi.settings.main.GIL_RATE * 1500)
+                        player:messageSpecial(mhauraID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 1500)
                         quest:setVar(player, 'DayCompleted', VanadielUniqueDay()) -- Set completition day of WAY_OF_THE_COOK quest.
                     end
                 end,
@@ -108,8 +122,8 @@ quest.sections =
                 [81] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:tradeComplete()
-                        player:addGil(xi.settings.GIL_RATE * 1000)
-                        player:messageSpecial(mhauraID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 1000)
+                        player:addGil(xi.settings.main.GIL_RATE * 1000)
+                        player:messageSpecial(mhauraID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 1000)
                         quest:setVar(player, 'DayCompleted', VanadielUniqueDay()) -- Set completition day of WAY_OF_THE_COOK quest.
                     end
                 end,

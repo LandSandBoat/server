@@ -3,8 +3,6 @@
 -----------------------------------
 -- Log ID: 3, Quest ID: 134
 -- Nomad Moogle : !pos 10.012 1.453 121.883 243
------------------------------------
-require('scripts/settings/main')
 require('scripts/globals/items')
 require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
@@ -30,7 +28,7 @@ quest.sections =
             return status == QUEST_AVAILABLE and
                 player:getMainLvl() >= 76 and
                 player:getLevelCap() == 80 and
-                xi.settings.MAX_LEVEL >= 85
+                xi.settings.main.MAX_LEVEL >= 85
         end,
 
         [xi.zone.RULUDE_GARDENS] =

@@ -13,7 +13,7 @@ require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 
-local TrustMemory = function(player)
+local trustMemory = function(player)
     local memories = 0
     -- 2 - Saw him at the start of the game
     if player:getNation() == xi.nation.WINDURST then
@@ -81,9 +81,9 @@ entity.onTrigger = function(player, npc)
 
         -- TRUST
     elseif player:hasKeyItem(xi.ki.WINDURST_TRUST_PERMIT) and not player:hasSpell(904) then
-        local Rank6 = player:getRank(player:getNation()) >= 6 and 1 or 0
+        local rank6 = player:getRank(player:getNation()) >= 6 and 1 or 0
 
-        player:startEvent(866, 0, 0, 0, TrustMemory(player), 0, 0, 0, Rank6)
+        player:startEvent(866, 0, 0, 0, trustMemory(player), 0, 0, 0, rank6)
     end
 end
 

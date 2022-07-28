@@ -14,18 +14,18 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local Eati = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.EVIL_AT_THE_INLET)
+    local evilAtTheInlet = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.EVIL_AT_THE_INLET)
 
     -- Change to BRASS_RIBBON_OF_SERVICE later when Campaign has been added.
-    if Eati == QUEST_AVAILABLE and player:hasKeyItem(xi.ki.BRONZE_RIBBON_OF_SERVICE) and player:getMainLvl() >= 30 then
+    if evilAtTheInlet == QUEST_AVAILABLE and player:hasKeyItem(xi.ki.BRONZE_RIBBON_OF_SERVICE) and player:getMainLvl() >= 30 then
         player:startEvent(107) -- Start quest "Evil at the Inlet"
-    elseif Eati == QUEST_ACCEPTED then
+    elseif evilAtTheInlet == QUEST_ACCEPTED then
         if player:hasKeyItem(xi.ki.EVIL_WARDING_SEAL) then
             player:startEvent(108) -- During quest after receiving KI and before losing KI
         else
             player:startEvent(109) -- After losing KI and returning for reward
         end
-    elseif Eati == QUEST_COMPLETED then
+    elseif evilAtTheInlet == QUEST_COMPLETED then
         player:startEvent(110) -- New standard dialog after "Evil at the Inlet"
     else
         player:startEvent(106) -- Standard dialog

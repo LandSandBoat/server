@@ -14,7 +14,7 @@ require('scripts/globals/npc_util')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
-local portWindurstID = require('scripts/zones/Port_Windurst/IDs')
+local northSandoriaID = require('scripts/zones/Northern_San_dOria/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY_WINDURST)
@@ -39,11 +39,13 @@ mission.sections =
                 end,
 
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.DULL_SWORD) then
+                    local missionStatus = player:getMissionStatus(mission.areaId)
+
+                    if missionStatus == 4 then -- Reject Sword and request Aspir Knife.
                         return mission:progressEvent(40)
-                    elseif player:getMissionStatus(player:getNation()) == 5 then
+                    elseif missionStatus == 5 then -- Waiting for Aspir Knife.
                         return mission:progressEvent(43)
-                    else
+                    elseif missionStatus >= 6 then -- After trading Aspir Knife.
                         return mission:progressEvent(44)
                     end
                 end,
@@ -53,11 +55,11 @@ mission.sections =
             {
                 [40] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 5)
-                    player:delKeyItem(xi.ki.DULL_SWORD)
                 end,
 
                 [41] = function(player, csid, option, npc)
                     player:confirmTrade()
+                    player:delKeyItem(xi.ki.DULL_SWORD)
                     player:setMissionStatus(mission.areaId, 6)
                 end,
             },
@@ -71,9 +73,15 @@ mission.sections =
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
                     if missionStatus == 3 then
-                        local needsSemihTrust = (not player:hasSpell(940) and not player:findItem(xi.items.CIPHER_OF_SEMIHS_ALTER_EGO)) and 1 or 0
+                        local needsSemihTrust = (not player:hasSpell(940) and not player:hasItem(xi.items.CIPHER_OF_SEMIHS_ALTER_EGO)) and 1 or 0
+                        local hasTrustQuest =
+                        (
+                            player:hasKeyItem(xi.ki.SAN_DORIA_TRUST_PERMIT) or
+                            player:hasKeyItem(xi.ki.BASTOK_TRUST_PERMIT) or
+                            player:hasKeyItem(xi.ki.WINDURST_TRUST_PERMIT)
+                        ) and 0 or 1
 
-                        return mission:progressEvent(238, 1, 1, 1, 1, xi.nation.BASTOK, 0, 0, needsSemihTrust)
+                        return mission:progressEvent(239, 0, 0, 0, xi.nation.BASTOK, 0, hasTrustQuest, needsSemihTrust)
                     elseif missionStatus == 5 then
                         return mission:event(240)
                     elseif missionStatus == 6 then
@@ -102,17 +110,17 @@ mission.sections =
 
             onEventFinish =
             {
-                [ 42] = function(player, csid, option, npc)
+                [42] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 3)
                 end,
 
-                [238] = function(player, csid, option, npc)
+                [239] = function(player, csid, option, npc)
                     player:setMissionStatus(mission.areaId, 4)
                     npcUtil.giveKeyItem(player, xi.ki.SWORD_OFFERING)
 
                     if
                         not player:hasSpell(940) and
-                        not player:findItem(xi.items.CIPHER_OF_SEMIHS_ALTER_EGO)
+                        not player:hasItem(xi.items.CIPHER_OF_SEMIHS_ALTER_EGO)
                     then
                         npcUtil.giveItem(player, xi.items.CIPHER_OF_SEMIHS_ALTER_EGO)
                     end
@@ -120,8 +128,15 @@ mission.sections =
             },
         },
 
+        [xi.zone.NORTHERN_SAN_DORIA] =
+        {
+            ['Helaku'] = mission:messageText(northSandoriaID.text.THE_EMISSARY_PLACEHOLDER),
+        },
+
         [xi.zone.PORT_WINDURST] =
         {
+            ['Ada'] = mission:event(51),
+
             ['Gold_Skull'] =
             {
                 onTrigger = function(player, npc)
@@ -131,28 +146,24 @@ mission.sections =
                         player:hasKeyItem(xi.ki.SWORD_OFFERING) and
                         not player:hasKeyItem(xi.ki.DULL_SWORD)
                     then
-                        return mission:progressEvent(53)
-                    elseif missionStatus == 2 then
-                        return mission:progressEvent(50)
-                    elseif missionStatus == 12 then -- TODO: Find out what the below does, this is dead code
+                        return mission:progressEvent(53) -- Trade Sword with fake.
+                    elseif missionStatus <= 3 then -- After getting instructions and before getting Magic Sword.
+                        return mission:event(50)
+                    elseif missionStatus <= 6 then -- After trading Sword with fake and before reporting to Melek.
                         return mission:progressEvent(54)
-                    elseif missionStatus == 14 then
-                        return mission:messageText(npc, portWindurstID.text.GOLD_SKULL_DIALOG)
-                    elseif missionStatus == 15 then
-                        return mission:progressEvent(57)
                     end
                 end,
             },
+
+            ['Josef'] = mission:event(52),
 
             ['Melek'] =
             {
                 onTrigger = function(player, npc)
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
-                    if missionStatus == 2 then
+                    if missionStatus <= 5 then
                         return mission:progressEvent(49)
-                    elseif missionStatus <= 5 then
-                        return mission:messageText(portWindurstID.text.MELEK_DIALOG_B)
                     elseif missionStatus == 6 then
                         return mission:progressEvent(55)
                     end
@@ -168,7 +179,6 @@ mission.sections =
 
                 [55] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        player:confirmTrade()
                         player:addMission(xi.mission.log_id.BASTOK, xi.mission.id.bastok.THE_EMISSARY)
                         player:setMissionStatus(mission.areaId, 7)
                     end

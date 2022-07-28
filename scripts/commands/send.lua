@@ -386,4 +386,3 @@ function onTrigger(player, bytes)
         player:PrintToPlayer( string.format("Sent %s to zone %i.", targ:getName(), zone) )
     end
 end
-

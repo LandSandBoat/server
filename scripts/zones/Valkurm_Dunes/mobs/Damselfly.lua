@@ -15,7 +15,7 @@ entity.onMobDeath = function(mob, player, isKiller)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, ID.mob.VALKURM_EMPEROR_PH, 5, 3600) -- 1 hour
+    xi.mob.phOnDespawn(mob, ID.mob.VALKURM_EMPEROR_PH, 10, 3600) -- 1 hour
 end
 
 return entity

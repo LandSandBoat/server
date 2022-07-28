@@ -14,9 +14,17 @@ zones[xi.zone.BEAUCEDINE_GLACIER_S] =
         ITEM_OBTAINED           = 6390, -- Obtained: <item>.
         GIL_OBTAINED            = 6391, -- Obtained <number> gil.
         KEYITEM_OBTAINED        = 6393, -- Obtained key item: <keyitem>.
+        NOTHING_OUT_OF_ORDINARY = 6404, -- There is nothing out of the ordinary here.
+        NOW_IS_NOT_THE_TIME     = 6406, -- Now is not the time for that!
         CARRIED_OVER_POINTS     = 7001, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER            = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        NONDESCRIPT_MASS        = 7759, -- A nondescript mass squirms hypnotically beneath the rock.
+        REMAINS_OF_COOKFIRE     = 7783, -- You see the charred remains of a cookfire.
+        UNWANTED_ATTENTION      = 8584, -- Your presence has drawn unwanted attention!
+        UNUSUAL_PRESENCE        = 8586, -- You sense an unusual presence in the area...
+        NO_RESPONSE             = 8588, -- There is no response...
+        GREETINGS_TRAVELER      = 8615, -- Greetings, fair traveler. My people would entreat thy assistance, and offer rich reward in return. Thou shouldst speak with my sister Callisto, who abides in Grauberg's Witchfire Glen.
         VOIDWALKER_DESPAWN      = 8611, -- The monster fades before your eyes, a look of disappointment on its face.
         VOIDWALKER_NO_MOB       = 8662, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
         VOIDWALKER_MOB_TOO_FAR  = 8663, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
@@ -28,17 +36,22 @@ zones[xi.zone.BEAUCEDINE_GLACIER_S] =
         VOIDWALKER_OBTAIN_KI    = 8670, -- Obtained key item: <keyitem>!
         COMMON_SENSE_SURVIVAL   = 8695, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
+        ORCISH_BLOODLETTER = DYNAMIC_LOOKUP,
+
         GRANDGOULE_PH =
         {
             [17334475] = 17334482,
             [17334476] = 17334482,
             [17334477] = 17334482,
         },
-        VOIDWALKER        =
+
+        VOIDWALKER =
         {
-            [xi.keyItem.CLEAR_ABYSSITE] = {
+            [xi.keyItem.CLEAR_ABYSSITE] =
+            {
                 17334561, -- Gorehound
                 17334560, -- Gorehound
                 17334559, -- Gorehound
@@ -48,18 +61,25 @@ zones[xi.zone.BEAUCEDINE_GLACIER_S] =
                 17334555, -- Gjenganger
                 17334554, -- Gjenganger
             },
-            [xi.keyItem.COLORFUL_ABYSSITE] = {
+
+            [xi.keyItem.COLORFUL_ABYSSITE] =
+            {
                 17334555, -- Erebus
-                17334556  -- Feuerunke
+                17334556, -- Feuerunke
             },
-            [xi.keyItem.PURPLE_ABYSSITE] = {
+
+            [xi.keyItem.PURPLE_ABYSSITE] =
+            {
                 17334557  -- Lord Ruthven
             },
-            [xi.keyItem.BLACK_ABYSSITE] = {
-                17334558  -- Yilbegan
-            }
+
+            [xi.keyItem.BLACK_ABYSSITE] =
+            {
+                17334558, -- Yilbegan
+            },
         }
     },
+
     npc =
     {
     },

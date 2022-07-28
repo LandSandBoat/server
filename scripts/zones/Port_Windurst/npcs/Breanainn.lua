@@ -3,7 +3,7 @@
 --  NPC: Breanainn
 -- !pos 212 -6 96 240
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 

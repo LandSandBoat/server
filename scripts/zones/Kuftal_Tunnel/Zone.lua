@@ -43,7 +43,8 @@ zone_object.onGameHour = function(zone)
     local dir = VanadielMoonDirection() -- 0 (neither) 1 (waning) or 2 (waxing)
     local boulderOpen =
     {
-        [1] = {
+        [1] =
+        {
             [ 1] = function() return (phase >= 29 and phase <= 43) end,
             [ 3] = function() return (phase >= 12 and phase <= 26) end,
             [ 5] = function() return (phase <= 10  or phase >= 95) end,
@@ -57,7 +58,9 @@ zone_object.onGameHour = function(zone)
             [21] = function() return (phase >= 62 and phase <= 76) end,
             [23] = function() return (phase >= 45 and phase <= 60) end,
         },
-        [2] = {
+
+        [2] =
+        {
             [ 1] = function() return (phase >= 57 and phase <= 71) end,
             [ 3] = function() return (phase >= 74 and phase <= 88) end,
             [ 5] = function() return (phase <=  5  or phase >= 90) end,

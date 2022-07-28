@@ -2,7 +2,7 @@
 -- Zone: Aht_Urhgan_Whitegate (50)
 -----------------------------------
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
@@ -65,7 +65,7 @@ zone_object.onRegionEnter = function(player, region)
                 player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS) == QUEST_COMPLETED and
                 player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.AGAINST_ALL_ODDS) == QUEST_AVAILABLE and
                 player:getMainJob() == xi.job.COR and
-                player:getMainLvl() >= xi.settings.AF3_QUEST_LEVEL
+                player:getMainLvl() >= xi.settings.main.AF3_QUEST_LEVEL
             then
                 player:startEvent(797)
             end

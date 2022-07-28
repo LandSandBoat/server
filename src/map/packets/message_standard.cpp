@@ -42,7 +42,7 @@ CMessageStandardPacket::CMessageStandardPacket(uint32 param0, uint16 MessageID)
 
     ref<uint16>(0x0A) = MessageID;
 
-    snprintf((char*)data + (0x0D), 16, "Para0 %d ", param0);
+    snprintf((char*)data + (0x0D), 16, "Para0 %u ", param0);
 }
 
 CMessageStandardPacket::CMessageStandardPacket(uint32 param0, uint32 param1, uint16 MessageID)
@@ -52,7 +52,7 @@ CMessageStandardPacket::CMessageStandardPacket(uint32 param0, uint32 param1, uin
 
     ref<uint16>(0x0A) = MessageID;
 
-    snprintf((char*)data + (0x0D), 24, "Para0 %d Para1 %d", param0, param1);
+    snprintf((char*)data + (0x0D), 24, "Para0 %u Para1 %u", param0, param1);
 }
 
 CMessageStandardPacket::CMessageStandardPacket(CCharEntity* PChar, uint32 param0, uint32 param1, MsgStd MessageID)
@@ -78,7 +78,7 @@ CMessageStandardPacket::CMessageStandardPacket(CCharEntity* PChar, uint32 param0
     }
     else
     {
-        snprintf((char*)data + (0x0D), 24, "Para0 %d Para1 %d", param0, param1);
+        snprintf((char*)data + (0x0D), 24, "Para0 %u Para1 %u", param0, param1);
     }
 }
 
@@ -89,7 +89,7 @@ CMessageStandardPacket::CMessageStandardPacket(uint32 param0, uint32 param1, uin
 
     ref<uint16>(0x0A) = static_cast<uint16>(MessageID);
 
-    snprintf((char*)data + (0x0D), 100, "Para0 %d Para1 %d Para2 %d Para3 %d", param0, param1, param2, param3);
+    snprintf((char*)data + (0x0D), 100, "Para0 %u Para1 %u Para2 %u Para3 %u", param0, param1, param2, param3);
 
     this->setSize((this->getSize() + (strlen((char*)data + (0x0D)) >> 1)) & 0xFE);
 }

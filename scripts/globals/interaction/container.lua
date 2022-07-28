@@ -97,8 +97,8 @@ end
 -- Variable helper functions
 -----------------------------------
 
-function Container:addVar(player, name, value)
-    return player:addCharVar(self.varPrefix .. name, value)
+function Container:incrementVar(player, name, value)
+    return player:incrementCharVar(self.varPrefix .. name, value)
 end
 
 function Container:getVar(player, name)

@@ -30,7 +30,7 @@ CCurrencyPacket2::CCurrencyPacket2(CCharEntity* PChar)
     this->setType(0x118);
     this->setSize(132);
 
-    const char* query  = "SELECT bayld, kinetic_unit, imprimaturs, mystical_canteen, obsidian_fragment, lebondopt_wing, \
+    const char* query = "SELECT bayld, kinetic_unit, imprimaturs, mystical_canteen, obsidian_fragment, lebondopt_wing, \
                          pulchridopt_wing, mweya_plasm, ghastly_stone, ghastly_stone_1, ghastly_stone_2, verdigris_stone, \
                          verdigris_stone_1, verdigris_stone_2, wailing_stone, wailing_stone_1, wailing_stone_2, \
                          snowslit_stone, snowslit_stone_1, snowslit_stone_2, snowtip_stone, snowtip_stone_1, snowtip_stone_2, \
@@ -49,7 +49,7 @@ CCurrencyPacket2::CCurrencyPacket2(CCharEntity* PChar)
                          silver_aman_voucher \
                          FROM char_points WHERE charid = % d ";
 
-                                        int ret = sql->Query(query, PChar->id);
+    int ret = sql->Query(query, PChar->id);
     if (ret != SQL_ERROR && sql->NextRow() == SQL_SUCCESS)
     {
         ref<uint32>(0x04) = sql->GetUIntData(0); // bayld

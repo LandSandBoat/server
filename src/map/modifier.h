@@ -1,21 +1,16 @@
 ﻿/*
 ===========================================================================
-
   Copyright (c) 2010-2015 Darkstar Dev Teams
-
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
-
   This program is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
-
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see http://www.gnu.org/licenses/
-
 ===========================================================================
 */
 
@@ -28,8 +23,8 @@ enum class Mod
 {
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/globals/status.lua ASWELL!
 
-    NONE = 0, // Essential, but does nothing :)
-    //  NAME                  = ID, // Comment
+    NONE = 0,       // Essential, but does nothing :)
+                    //  NAME                  = ID, // Comment
     DEF        = 1, // Target's Defense
     HP         = 2, // Target's HP
     HPP        = 3, // HP Percentage
@@ -48,14 +43,14 @@ enum class Mod
 
     // Magic Evasion versus elements (resistance)
     // This has been repeatedly mixed up with SDT - be careful!
-    FIRE_RES    = 15, // Fire Resistance
-    ICE_RES     = 16, // Ice Resistance
-    WIND_RES    = 17, // Wind Resistance
-    EARTH_RES   = 18, // Earth Resistance
-    THUNDER_RES = 19, // Thunder Resistance
-    WATER_RES   = 20, // Water Resistance
-    LIGHT_RES   = 21, // Light Resistance
-    DARK_RES    = 22, // Dark Resistance
+    FIRE_MEVA    = 15, // Fire Resistance
+    ICE_MEVA     = 16, // Ice Resistance
+    WIND_MEVA    = 17, // Wind Resistance
+    EARTH_MEVA   = 18, // Earth Resistance
+    THUNDER_MEVA = 19, // Thunder Resistance
+    WATER_MEVA   = 20, // Water Resistance
+    LIGHT_MEVA   = 21, // Light Resistance
+    DARK_MEVA    = 22, // Dark Resistance
 
     ATT  = 23, // Attack
     RATT = 24, // Ranged Attack
@@ -68,7 +63,7 @@ enum class Mod
 
     MATT = 28, // Magic Attack
     MDEF = 29, // Magic Defense
-    MACC = 30, // Magic Accuracy
+    MACC = 30, // Magic Accuracy - note that this is NOT iLvl "magic accuracy skill" which happens in item_weapon.sql
     MEVA = 31, // Magic Evasion
 
     // Magic Accuracy and Elemental Attacks
@@ -129,6 +124,7 @@ enum class Mod
     INHIBIT_TP      = 488, // Inhibits TP Gain (percent)
 
     // Working Skills (weapon combat skills)
+    // These are NOT item Level skill, they are skill in your status menu. iLvl "skill" happens in item_weapon.sql
     HTH               = 80,  // Hand To Hand Skill
     DAGGER            = 81,  // Dagger Skill
     SWORD             = 82,  // Sword Skill
@@ -153,20 +149,20 @@ enum class Mod
     PARRY             = 110, // Parry Skill
 
     // Magic Skills
-    DIVINE    = 111,  // Divine Magic Skill
-    HEALING   = 112,  // Healing Magic Skill
-    ENHANCE   = 113,  // Enhancing Magic Skill
-    ENFEEBLE  = 114,  // Enfeebling Magic Skill
-    ELEM      = 115,  // Elemental Magic Skill
-    DARK      = 116,  // Dark Magic Skill
-    SUMMONING = 117,  // Summoning Magic Skill
-    NINJUTSU  = 118,  // Ninjutsu Magic Skill
-    SINGING   = 119,  // Singing Magic Skill
-    STRING    = 120,  // String Magic Skill
-    WIND      = 121,  // Wind Magic Skill
-    BLUE      = 122,  // Blue Magic Skill
-    GEOMANCY  = 1026, // Geomancy Magic Skill
-    HANDBELL  = 1027, // Handbell Magic SKill
+    DIVINE    = 111, // Divine Magic Skill
+    HEALING   = 112, // Healing Magic Skill
+    ENHANCE   = 113, // Enhancing Magic Skill
+    ENFEEBLE  = 114, // Enfeebling Magic Skill
+    ELEM      = 115, // Elemental Magic Skill
+    DARK      = 116, // Dark Magic Skill
+    SUMMONING = 117, // Summoning Magic Skill
+    NINJUTSU  = 118, // Ninjutsu Magic Skill
+    SINGING   = 119, // Singing Magic Skill
+    STRING    = 120, // String Magic Skill
+    WIND      = 121, // Wind Magic Skill
+    BLUE      = 122, // Blue Magic Skill
+    GEOMANCY  = 123, // Geomancy Magic Skill
+    HANDBELL  = 124, // Handbell Magic SKill
 
     // Synthesis Skills
     FISH      = 127, // Fishing Skill
@@ -195,6 +191,7 @@ enum class Mod
     PENGUIN_RING_EFFECT   = 152, // +2 on fishing arrow delay / fish movement for mini - game
     ALBATROSS_RING_EFFECT = 153, // adds 30 seconds to mini - game time
     PELICAN_RING_EFFECT   = 154, // adds extra skillup roll for fishing
+    FISHING_SKILL_GAIN    = 155, // food for fishing skill ups
 
     // Damage - 10000 base, 375 = 3.75%
     DMG         = 160, // Damage Taken %
@@ -307,17 +304,20 @@ enum class Mod
     DUAL_WIELD    = 259, // Percent reduction in dual wield delay.
 
     // Warrior
-    DOUBLE_ATTACK      = 288, // Percent chance to proc
-    WARCRY_DURATION    = 483, // Warcy duration bonus from gear
-    BERSERK_EFFECT     = 948, // Conqueror Berserk Effect
-    BERSERK_DURATION   = 954, // Berserk Duration
-    AGGRESSOR_DURATION = 955, // Aggressor Duration
-    DEFENDER_DURATION  = 956, // Defender Duration
+    DOUBLE_ATTACK       = 288,  // Percent chance to proc
+    DOUBLE_ATTACK_DMG   = 1038, // Increases "Double Attack" damage/"Double Attack" damage + (in percents, e.g. +20 = +20% damage)
+    WARCRY_DURATION     = 483,  // Warcy duration bonus from gear
+    BERSERK_POTENCY     = 948,  // Augments "Berserk"/Enhances "Berserk" effect (Conqueror)
+    BERSERK_DURATION    = 954,  // Berserk Duration
+    AGGRESSOR_DURATION  = 955,  // Aggressor Duration
+    DEFENDER_DURATION   = 956,  // Defender Duration
+    ENHANCES_RESTRAINT  = 1045, // Enhances "Restraint" effect/"Restraint" + (Increases the damage bonus of Restraint by XXX%)
+    ENHANCES_BLOOD_RAGE = 1046, // Enhances "Blood Rage" effect/"Blood Rage" duration +
 
     // Monk
     BOOST_EFFECT        = 97,   // Boost power in tenths
-    CHAKRA_MULT         = 123,  // Chakra multiplier increase (from gear)
-    CHAKRA_REMOVAL      = 124,  // Extra statuses removed by Chakra
+    CHAKRA_MULT         = 1026, // Chakra multiplier increase (from gear)
+    CHAKRA_REMOVAL      = 1027, // Extra statuses removed by Chakra
     SUBTLE_BLOW         = 289,  // How much TP to reduce.
     COUNTER             = 291,  // Percent chance to counter
     KICK_ATTACK_RATE    = 292,  // Percent chance to kick
@@ -350,18 +350,19 @@ enum class Mod
     ENHANCES_SABOTEUR = 297, // Increases Saboteur Potency %
 
     // Thief
-    FLEE_DURATION     = 93,  // Flee duration in seconds
-    STEAL             = 298, // Increase/Decrease THF Steal chance
-    DESPOIL           = 896, // Increases THF Despoil chance
-    PERFECT_DODGE     = 883, // Increases Perfect Dodge duration in seconds
-    TRIPLE_ATTACK     = 302, // Percent chance
-    TREASURE_HUNTER   = 303, // Percent chance
-    SNEAK_ATK_DEX     = 830, // % DEX boost to Sneak Attack (if gear mod, needs to be equipped on hit)
-    TRICK_ATK_AGI     = 520, // % AGI boost to Trick Attack (if gear mod, needs to be equipped on hit)
-    MUG_EFFECT        = 835, // Mug effect as multiplier
-    ACC_COLLAB_EFFECT = 884, // Increases amount of enmity transferred for Accomplice/Collaborator
-    HIDE_DURATION     = 885, // Hide duration increase (percentage based)
-    GILFINDER         = 897, // Gilfinder, duh
+    FLEE_DURATION     = 93,   // Flee duration in seconds
+    STEAL             = 298,  // Increase/Decrease THF Steal chance
+    DESPOIL           = 896,  // Increases THF Despoil chance
+    PERFECT_DODGE     = 883,  // Increases Perfect Dodge duration in seconds
+    TRIPLE_ATTACK     = 302,  // Percent chance
+    TRIPLE_ATTACK_DMG = 1039, // Increases "Triple Attack" damage/"Triple Attack" damage + (in percents, e.g. +20 = +20% damage)
+    TREASURE_HUNTER   = 303,  // Percent chance
+    SNEAK_ATK_DEX     = 830,  // % DEX boost to Sneak Attack (if gear mod, needs to be equipped on hit)
+    TRICK_ATK_AGI     = 520,  // % AGI boost to Trick Attack (if gear mod, needs to be equipped on hit)
+    MUG_EFFECT        = 835,  // Mug effect as multiplier
+    ACC_COLLAB_EFFECT = 884,  // Increases amount of enmity transferred for Accomplice/Collaborator
+    HIDE_DURATION     = 885,  // Hide duration increase (percentage based)
+    GILFINDER         = 897,  // Gilfinder, duh
 
     // Paladin
     HOLY_CIRCLE_DURATION   = 857, // Holy Circle extended duration in seconds
@@ -390,30 +391,30 @@ enum class Mod
     JUG_LEVEL_RANGE     = 564, // Decreases the level range of spawned jug pets. Maxes out at 2.
 
     // Bard
-    MINNE_EFFECT           = 433, //
-    MINUET_EFFECT          = 434, //
-    PAEON_EFFECT           = 435, //
-    REQUIEM_EFFECT         = 436, //
-    THRENODY_EFFECT        = 437, //
-    MADRIGAL_EFFECT        = 438, //
-    MAMBO_EFFECT           = 439, //
-    LULLABY_EFFECT         = 440, //
-    ETUDE_EFFECT           = 441, //
-    BALLAD_EFFECT          = 442, //
-    MARCH_EFFECT           = 443, //
-    FINALE_EFFECT          = 444, //
-    CAROL_EFFECT           = 445, //
-    MAZURKA_EFFECT         = 446, //
-    ELEGY_EFFECT           = 447, //
-    PRELUDE_EFFECT         = 448, //
-    HYMNUS_EFFECT          = 449, //
-    VIRELAI_EFFECT         = 450, //
-    SCHERZO_EFFECT         = 451, //
-    ALL_SONGS_EFFECT       = 452, //
-    MAXIMUM_SONGS_BONUS    = 453, //
-    SONG_DURATION_BONUS    = 454, //
-    SONG_SPELLCASTING_TIME = 455, //
-    SONG_RECAST_DELAY      = 833, // Reduces song recast time in seconds.
+    MINNE_EFFECT           = 433,  //
+    MINUET_EFFECT          = 434,  //
+    PAEON_EFFECT           = 435,  //
+    REQUIEM_EFFECT         = 436,  //
+    THRENODY_EFFECT        = 437,  //
+    MADRIGAL_EFFECT        = 438,  //
+    MAMBO_EFFECT           = 439,  //
+    LULLABY_EFFECT         = 440,  //
+    ETUDE_EFFECT           = 441,  //
+    BALLAD_EFFECT          = 442,  //
+    MARCH_EFFECT           = 443,  //
+    FINALE_EFFECT          = 444,  //
+    CAROL_EFFECT           = 445,  //
+    MAZURKA_EFFECT         = 446,  //
+    ELEGY_EFFECT           = 447,  //
+    PRELUDE_EFFECT         = 448,  //
+    HYMNUS_EFFECT          = 449,  //
+    VIRELAI_EFFECT         = 450,  //
+    SCHERZO_EFFECT         = 451,  //
+    ALL_SONGS_EFFECT       = 452,  //
+    MAXIMUM_SONGS_BONUS    = 453,  //
+    SONG_DURATION_BONUS    = 454,  //
+    SONG_SPELLCASTING_TIME = 455,  //
+    SONG_RECAST_DELAY      = 833,  // Reduces song recast time in seconds.
     AUGMENT_SONG_STAT      = 1003, // Bonus to Stat of Element of Enhancing Song.
 
     // Ranger
@@ -438,33 +439,38 @@ enum class Mod
     THIRD_EYE_ANTICIPATE_RATE = 839, // Adds anticipate rate in percents
 
     // Ninja
-    UTSUSEMI       = 307, // Everyone's favorite --tracks shadows.
-    UTSUSEMI_BONUS = 900, // Extra shadows from gear
-    NINJA_TOOL     = 308, // Percent chance to not use a tool.
-    NIN_NUKE_BONUS = 522, // magic attack bonus for NIN nukes
-    DAKEN          = 911, // chance to throw a shuriken without consuming it
+    UTSUSEMI          = 307, // Everyone's favorite --tracks shadows.
+    UTSUSEMI_BONUS    = 900, // Extra shadows from gear
+    NINJA_TOOL        = 308, // Percent chance to not use a tool.
+    NIN_NUKE_BONUS    = 522, // magic attack bonus for NIN nukes
+    DAKEN             = 911, // chance to throw a shuriken without consuming it
     NINJUTSU_DURATION = 1000,
 
     // Dragoon
-    ANCIENT_CIRCLE_DURATION    = 859, // Ancient Circle extended duration in seconds
-    JUMP_TP_BONUS              = 361, // bonus tp player receives when using jump (must be divided by 10)
-    JUMP_ATT_BONUS             = 362, // ATT% bonus for jump + high jump
-    HIGH_JUMP_ENMITY_REDUCTION = 363, // for gear that reduces more enmity from high jump
-    FORCE_JUMP_CRIT            = 828, // Critical hit rate bonus for jump and high jump
-    WYVERN_EFFECTIVE_BREATH    = 829, // Increases the threshold for triggering healing breath/offensive breath more inclined to pick elemental weakness
-    WYVERN_SUBJOB_TRAITS       = 974, // Adds subjob traits to wyvern on spawn
-    WYVERN_BREATH_MACC         = 986, // Increases accuracy of wyvern's breath. adds 10 magic accuracy per merit to the trait Strafe
+    ANCIENT_CIRCLE_DURATION    = 859,  // Ancient Circle extended duration in seconds
+    JUMP_TP_BONUS              = 361,  // bonus tp player receives when using jump (must be divided by 10)
+    JUMP_ATT_BONUS             = 362,  // ATT% bonus for jump + high jump
+    HIGH_JUMP_ENMITY_REDUCTION = 363,  // for gear that reduces more enmity from high jump
+    FORCE_JUMP_CRIT            = 828,  // Critical hit rate bonus for jump and high jump
+    WYVERN_EFFECTIVE_BREATH    = 829,  // Increases the threshold for triggering healing breath/offensive breath more inclined to pick elemental weakness
+    WYVERN_SUBJOB_TRAITS       = 974,  // Adds subjob traits to wyvern on spawn
+    WYVERN_BREATH_MACC         = 986,  // Increases accuracy of wyvern's breath. adds 10 magic accuracy per merit to the trait Strafe
+    WYVERN_LVL_BONUS           = 1043, // Wyvern: Lv.+ (Increases wyvern's base level above 99)
 
     // Summoner
-    AVATAR_PERPETUATION       = 371, // stores base cost of current avatar
-    WEATHER_REDUCTION         = 372, // stores perpetuation reduction depending on weather
-    DAY_REDUCTION             = 373, // stores perpetuation reduction depending on day
-    PERPETUATION_REDUCTION    = 346, // stores the MP/tick reduction from gear
-    BP_DELAY                  = 357, // stores blood pact delay reduction
-    ENHANCES_ELEMENTAL_SIPHON = 540, // Bonus Base MP added to Elemental Siphon skill.
-    BP_DELAY_II               = 541, // Blood Pact Delay Reduction II
-    BP_DAMAGE                 = 126, // Blood Pact: Rage Damage increase percentage
-    BLOOD_BOON                = 913, // Occasionally cuts down MP cost of Blood Pact abilities. Does not affect abilities that require Astral Flow.
+    AVATAR_PERPETUATION       = 371,  // stores base cost of current avatar
+    WEATHER_REDUCTION         = 372,  // stores perpetuation reduction depending on weather
+    DAY_REDUCTION             = 373,  // stores perpetuation reduction depending on day
+    PERPETUATION_REDUCTION    = 346,  // stores the MP/tick reduction from gear
+    BP_DELAY                  = 357,  // stores blood pact delay reduction
+    ENHANCES_ELEMENTAL_SIPHON = 540,  // Bonus Base MP added to Elemental Siphon skill.
+    BP_DELAY_II               = 541,  // Blood Pact Delay Reduction II
+    BP_DAMAGE                 = 126,  // Blood Pact: Rage Damage increase percentage
+    BLOOD_BOON                = 913,  // Occasionally cuts down MP cost of Blood Pact abilities. Does not affect abilities that require Astral Flow.
+    AVATARS_FAVOR_ENHANCE     = 630,  // Enhances Avatars Favor Effect by 1 tier per point
+    AVATAR_LVL_BONUS          = 1040, // Avatar: Lv.+ (Increases all avatar's base level above 99)
+    CARBUNCLE_LVL_BONUS       = 1041, // Carbuncle: Lv.+ (Increases Carbuncle's base level above 99)
+    CAIT_SITH_LVL_BONUS       = 1042, // Cait Sith: Lv.+ (Increases Cait Sith's base level above 99)
 
     // Blue Mage
     BLUE_POINTS       = 309, // Tracks extra blue points
@@ -511,30 +517,31 @@ enum class Mod
     PHANTOM_DURATION       = 882, // Phantom Roll Duration +.
 
     // Puppetmaster
-    MANEUVER_BONUS              = 504, // Maneuver Stat Bonus
-    OVERLOAD_THRESH             = 505, // Overload Threshold Bonus
-    AUTO_DECISION_DELAY         = 842, // Reduces the Automaton's global decision delay
-    AUTO_SHIELD_BASH_DELAY      = 843, // Reduces the Automaton's global shield bash delay
-    AUTO_MAGIC_DELAY            = 844, // Reduces the Automaton's global magic delay
-    AUTO_HEALING_DELAY          = 845, // Reduces the Automaton's global healing delay
-    AUTO_HEALING_THRESHOLD      = 846, // Increases the healing trigger threshold
-    BURDEN_DECAY                = 847, // Increases amount of burden removed per tick
-    AUTO_SHIELD_BASH_SLOW       = 848, // Adds a slow effect to Shield Bash
-    AUTO_TP_EFFICIENCY          = 849, // Causes the Automaton to wait to form a skillchain when its master is > 90% TP
-    AUTO_SCAN_RESISTS           = 850, // Causes the Automaton to scan a target's resistances
-    REPAIR_EFFECT               = 853, // Removes # of status effects from the Automaton
-    REPAIR_POTENCY              = 854, // Note: Only affects amount regenerated by a %, not the instant restore!
-    PREVENT_OVERLOAD            = 855, // Overloading erases a water maneuver (except on water overloads) instead, if there is one
-    SUPPRESS_OVERLOAD           = 125, // Kenkonken "Suppresses Overload" mod. Unclear how this works exactly. Requires testing on retail.
-    AUTO_STEAM_JACKET           = 938, // Causes the Automaton to mitigate damage from successive attacks of the same type
-    AUTO_STEAM_JACKET_REDUCTION = 939, // Amount of damage reduced with Steam Jacket
-    AUTO_SCHURZEN               = 940, // Prevents fatal damage leaving the automaton at 1HP and consumes an Earth manuever
-    AUTO_EQUALIZER              = 941, // Reduces damage received according to damage taken
-    AUTO_PERFORMANCE_BOOST      = 942, // Increases the performance of other attachments by a percentage
-    AUTO_ANALYZER               = 943, // Causes the Automaton to mitigate damage from a special attack a number of times
-    AUTO_ELEM_CAPACITY          = 987, // Increases the automaton's elemental capacity for attachments
+    MANEUVER_BONUS              = 504,  // Maneuver Stat Bonus
+    OVERLOAD_THRESH             = 505,  // Overload Threshold Bonus
+    AUTO_DECISION_DELAY         = 842,  // Reduces the Automaton's global decision delay
+    AUTO_SHIELD_BASH_DELAY      = 843,  // Reduces the Automaton's global shield bash delay
+    AUTO_MAGIC_DELAY            = 844,  // Reduces the Automaton's global magic delay
+    AUTO_HEALING_DELAY          = 845,  // Reduces the Automaton's global healing delay
+    AUTO_HEALING_THRESHOLD      = 846,  // Increases the healing trigger threshold
+    BURDEN_DECAY                = 847,  // Increases amount of burden removed per tick
+    AUTO_SHIELD_BASH_SLOW       = 848,  // Adds a slow effect to Shield Bash
+    AUTO_TP_EFFICIENCY          = 849,  // Causes the Automaton to wait to form a skillchain when its master is > 90% TP
+    AUTO_SCAN_RESISTS           = 850,  // Causes the Automaton to scan a target's resistances
+    REPAIR_EFFECT               = 853,  // Removes # of status effects from the Automaton
+    REPAIR_POTENCY              = 854,  // Note: Only affects amount regenerated by a %, not the instant restore!
+    PREVENT_OVERLOAD            = 855,  // Overloading erases a water maneuver (except on water overloads) instead, if there is one
+    SUPPRESS_OVERLOAD           = 125,  // Kenkonken "Suppresses Overload" mod. Unclear how this works exactly. Requires testing on retail.
+    AUTO_STEAM_JACKET           = 938,  // Causes the Automaton to mitigate damage from successive attacks of the same type
+    AUTO_STEAM_JACKET_REDUCTION = 939,  // Amount of damage reduced with Steam Jacket
+    AUTO_SCHURZEN               = 940,  // Prevents fatal damage leaving the automaton at 1HP and consumes an Earth manuever
+    AUTO_EQUALIZER              = 941,  // Reduces damage received according to damage taken
+    AUTO_PERFORMANCE_BOOST      = 942,  // Increases the performance of other attachments by a percentage
+    AUTO_ANALYZER               = 943,  // Causes the Automaton to mitigate damage from a special attack a number of times
+    AUTO_ELEM_CAPACITY          = 987,  // Increases the automaton's elemental capacity for attachments
     AUTO_RANGED_DELAY           = 1001, // Decreases the amount of time between ranged attacks
     AUTO_RANGED_DAMAGEP         = 1002, // Increase automaton ranged weapon damage by a %
+    AUTOMATON_LVL_BONUS         = 1044, // Automaton: Lv. (Increases automaton's base level above 99)
 
     // Dancer
     FINISHING_MOVES          = 333, // Tracks # of finishing moves
@@ -570,18 +577,18 @@ enum class Mod
     GRIMOIRE_SPELLCASTING    = 489, // "Grimoire: Reduces spellcasting time" bonus
 
     // Geo
-    CARDINAL_CHANT          = 959,
-    INDI_DURATION           = 960,
-    GEOMANCY_BONUS          = 961, // Used to increase potency of "Geomancy +" items (only the highest value is counted)
-    WIDENED_COMPASS         = 962,
-    MENDING_HALATION        = 968, // This mod should never exceed 1 as the multiplier is the merit, this is basicaly just a bool mod
-    RADIAL_ARCANA           = 969,
-    CURATIVE_RECANTATION    = 970,
-    PRIMEVAL_ZEAL           = 971,
-    FULL_CIRCLE             = 1025, // Increases the initial multiplier on MP returned via Full Circle
-    BOLSTER_EFFECT          = 1028, // Adds bonus duration as +N seconds
-    LIFE_CYCLE_EFFECT       = 1029, // Adds bonus HP% returned to the luopan when using Life Cycle
-    AURA_SIZE               = 1030, // Used to extend aura size, the formula is 6.25 + (PEntity->getMod(Mod::AURA_SIZE) / 100) so adding 100 will make this 7.25
+    CARDINAL_CHANT       = 959,
+    INDI_DURATION        = 960,
+    GEOMANCY_BONUS       = 961, // Used to increase potency of "Geomancy +" items (only the highest value is counted)
+    WIDENED_COMPASS      = 962,
+    MENDING_HALATION     = 968, // This mod should never exceed 1 as the multiplier is the merit, this is basicaly just a bool mod
+    RADIAL_ARCANA        = 969,
+    CURATIVE_RECANTATION = 970,
+    PRIMEVAL_ZEAL        = 971,
+    FULL_CIRCLE          = 1025, // Increases the initial multiplier on MP returned via Full Circle
+    BOLSTER_EFFECT       = 1028, // Adds bonus duration as +N seconds
+    LIFE_CYCLE_EFFECT    = 1029, // Adds bonus HP% returned to the luopan when using Life Cycle
+    AURA_SIZE            = 1030, // Used to extend aura size, the formula is 6.25 + (PEntity->getMod(Mod::AURA_SIZE) / 100) so adding 100 will make this 7.25
 
     ENSPELL           = 341, // stores the type of enspell active (0 if nothing)
     ENSPELL_DMG       = 343, // stores the base damage of the enspell before reductions
@@ -679,8 +686,8 @@ enum class Mod
     WYVERN_BREATH = 402, //
 
     // Gear set modifiers
-    DA_DOUBLE_DAMAGE         = 408, // Double attack's double damage chance %.
-    TA_TRIPLE_DAMAGE         = 409, // Triple attack's triple damage chance %.
+    DA_DOUBLE_DMG_RATE       = 408, // Double attack's double damage chance %.
+    TA_TRIPLE_DMG_RATE       = 409, // Triple attack's triple damage chance %.
     ZANSHIN_DOUBLE_DAMAGE    = 410, // Zanshin's double damage chance %.
     RAPID_SHOT_DOUBLE_DAMAGE = 479, // Rapid shot's double damage chance %.
     ABSORB_DMG_CHANCE        = 480, // Chance to absorb damage %
@@ -723,14 +730,14 @@ enum class Mod
     PHYS_ABSORB      = 512, // Occasionally absorbs physical damage taken, in percents
     ABSORB_DMG_TO_MP = 516, // Unlike PLD gear mod, works on all damage types (Ethereal Earring)
 
-    ITEM_ADDEFFECT_TYPE       = 431, // see procType table in scripts\globals\additional_effects.lua
-    ITEM_SUBEFFECT            = 499, // Animation ID of Spikes and Additional Effects
-    ITEM_ADDEFFECT_DMG        = 500, // Damage of an items Additional Effect or Spikes
-    ITEM_ADDEFFECT_CHANCE     = 501, // Chance of an items Additional Effect or Spikes
-    ITEM_ADDEFFECT_ELEMENT    = 950, // Element of the Additional Effect or Spikes, for resist purposes
-    ITEM_ADDEFFECT_STATUS     = 951, // Status Effect ID to try to apply via Additional Effect or Spikes
-    ITEM_ADDEFFECT_POWER      = 952, // Base Power for effect in MOD_ITEM_ADDEFFECT_STATUS
-    ITEM_ADDEFFECT_DURATION   = 953, // Base Duration for effect in MOD_ITEM_ADDEFFECT_STATUS
+    ITEM_ADDEFFECT_TYPE     = 431, // see procType table in scripts\globals\additional_effects.lua
+    ITEM_SUBEFFECT          = 499, // Animation ID of Spikes and Additional Effects
+    ITEM_ADDEFFECT_DMG      = 500, // Damage of an items Additional Effect or Spikes
+    ITEM_ADDEFFECT_CHANCE   = 501, // Chance of an items Additional Effect or Spikes
+    ITEM_ADDEFFECT_ELEMENT  = 950, // Element of the Additional Effect or Spikes, for resist purposes
+    ITEM_ADDEFFECT_STATUS   = 951, // Status Effect ID to try to apply via Additional Effect or Spikes
+    ITEM_ADDEFFECT_POWER    = 952, // Base Power for effect in MOD_ITEM_ADDEFFECT_STATUS
+    ITEM_ADDEFFECT_DURATION = 953, // Base Duration for effect in MOD_ITEM_ADDEFFECT_STATUS
 
     GOV_CLEARS = 496, // 4% bonus per Grounds of Valor Page clear
 
@@ -751,10 +758,10 @@ enum class Mod
     EAT_RAW_FISH = 412, //
     EAT_RAW_MEAT = 413, //
 
-    ENHANCES_CURSNA_RCVD = 67,  // Potency of "Cursna" effects received
-    ENHANCES_CURSNA      = 310, // Used by gear with the "Enhances Cursna" or "Cursna+" attribute
-    ENHANCES_HOLYWATER   = 495, // Used by gear with the "Enhances Holy Water" or "Holy Water+" attribute
-    ENHANCES_PROT_SHELL_RCVD  = 977, // Enhances Protect and Shell Effects Received (Binary MOD)
+    ENHANCES_CURSNA_RCVD     = 67,  // Potency of "Cursna" effects received
+    ENHANCES_CURSNA          = 310, // Used by gear with the "Enhances Cursna" or "Cursna+" attribute
+    ENHANCES_HOLYWATER       = 495, // Used by gear with the "Enhances Holy Water" or "Holy Water+" attribute
+    ENHANCES_PROT_SHELL_RCVD = 977, // Enhances Protect and Shell Effects Received (Binary MOD)
 
     RETALIATION = 414, // Increases damage of Retaliation hits
 
@@ -839,8 +846,8 @@ enum class Mod
     // For example, +10% damage to Chant du Cygne would be ID 570 + 225 (795)
     WEAPONSKILL_DAMAGE_BASE = 570,
 
-    ALL_WSDMG_ALL_HITS = 840, // Generic (all Weaponskills) damage, on all hits.
-    // Per https://www.bg-wiki.com/bg/Weapon_Skill_Damage we need all 3..
+    ALL_WSDMG_ALL_HITS = 840,  // Generic (all Weaponskills) damage, on all hits.
+                               // Per https://www.bg-wiki.com/bg/Weapon_Skill_Damage we need all 3..
     ALL_WSDMG_FIRST_HIT = 841, // Generic (all Weaponskills) damage, first hit only.
     WS_NO_DEPLETE       = 949, // % chance a Weaponskill depletes no TP.
     WS_STR_BONUS        = 980, // % bonus to str_wsc.
@@ -871,6 +878,15 @@ enum class Mod
     SUPERIOR_LEVEL  = 997, // SU0..5
     ONE_HOUR_RECAST = 996, // Decreases the recast time of one-hour abilities by n minutes.
 
+    // AF3 Set Bonus Modifiers
+    AUGMENT_CONSERVE_MP    = 1031, // Percent chance to deal extra damage based on Conserve MP Amount (BLM AF3 Sets)
+    AUGMENT_COMPOSURE      = 1032, // Percent Enhancing Duration Extension for Others (RDM AF3 Sets)
+    AUGMENT_DAMAGE_HP      = 1033, // Percent chance to increase damage based on player HP% (DRK AF3 Sets)
+    AUGMENT_DAMAGE_PET_HP  = 1034, // Percent chance to increase damage based on pet HP% (BST/DRG AF3 Sets)
+    AUGMENT_BLOOD_BOON     = 1035, // Percent chance to deal extra damage based on Blood Boon Amount (SMN AF3 Sets)
+    AUGMENT_BLU_MAGIC      = 1036, // Percent chance for BLU magic to receive 3x WSC value for spell (BLU AF3 Sets)
+    GEOMANCY_MP_NO_DEPLETE = 1037, // Percent chance for Geomancy to cost 0 MP (GEO AF3 Sets)
+
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/globals/status.lua ASWELL!
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
@@ -880,14 +896,14 @@ enum class Mod
     // 53
     // 74 to 79
     // 138 to 143
-    // 155 to 159
+    // 156 to 159
     // 192 to 223
     // 239
     // 261 to 287
     // 888
     // 936
     //
-    // SPARE = 1031, and onward
+    // SPARE = 1047, and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

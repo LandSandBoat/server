@@ -5,7 +5,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Temenos/IDs")
 require("scripts/globals/conquest")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 local zone_object = {}

@@ -12,28 +12,28 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local X = player:getXPos()
-    local Z = player:getZPos()
+    local xPos = player:getXPos()
+    local zPos = player:getZPos()
 
-    if X > -79.3 and X < -67.3 and Z > 94.5 and Z < 106.5 then
+    if xPos > -79.3 and xPos < -67.3 and zPos > 94.5 and zPos < 106.5 then
         if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRIMY_SIGNPOSTS) == QUEST_ACCEPTED and not utils.mask.getBit(player:getCharVar("CleanSignPost"), 0) then
             player:startEvent(6, 1)
         else
             player:startEvent(1)
         end
-    elseif X > -266.2 and X < -254.2 and Z > -29.2 and Z < -17.2 then
+    elseif xPos > -266.2 and xPos < -254.2 and zPos > -29.2 and zPos < -17.2 then
         if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRIMY_SIGNPOSTS) == QUEST_ACCEPTED and not utils.mask.getBit(player:getCharVar("CleanSignPost"), 1) then
             player:startEvent(7, 1)
         else
             player:startEvent(2)
         end
-    elseif X > -463.7 and X < -451.7 and Z > -422.1 and Z < -410.1 then
+    elseif xPos > -463.7 and xPos < -451.7 and zPos > -422.1 and zPos < -410.1 then
         if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRIMY_SIGNPOSTS) == QUEST_ACCEPTED and not utils.mask.getBit(player:getCharVar("CleanSignPost"), 2) then
             player:startEvent(8, 1)
         else
             player:startEvent(3)
         end
-    elseif X > 295.4 and X < 307.3 and Z > 412.8 and Z < 424.8 then
+    elseif xPos > 295.4 and xPos < 307.3 and zPos > 412.8 and zPos < 424.8 then
         if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRIMY_SIGNPOSTS) == QUEST_ACCEPTED and not utils.mask.getBit(player:getCharVar("CleanSignPost"), 3) then
             player:startEvent(9, 1)
         else

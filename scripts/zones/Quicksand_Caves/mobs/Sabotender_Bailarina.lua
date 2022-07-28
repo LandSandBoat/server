@@ -10,7 +10,7 @@ local entity = {}
 entity.onMobFight = function(mob, target)
     local lifePercent = mob:getHPP()
     local phase = mob:getLocalVar("phase")
-    local TP = mob:getTP()
+    local mobTP = mob:getTP()
     local currentTime = VanadielHour()
 
     if (currentTime >= 6 and currentTime <= 18) then -- autoregen during daytime only
@@ -28,11 +28,11 @@ entity.onMobFight = function(mob, target)
         mob:setLocalVar("phase", 2)
     end
 
-    if phase == 1 and TP >= 1000 then
+    if phase == 1 and mobTP >= 1000 then
             mob:setLocalVar("1000", 2)
     end
 
-    if phase == 2 and TP >= 1000 then
+    if phase == 2 and mobTP >= 1000 then
             mob:setLocalVar("1000", 3)
     end
 

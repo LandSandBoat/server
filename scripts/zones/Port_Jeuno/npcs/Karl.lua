@@ -23,22 +23,22 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local ChildsPlay = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CHILD_S_PLAY)
-    local WildcatJeuno = player:getCharVar("WildcatJeuno")
+    local childsPlay = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CHILD_S_PLAY)
+    local wildcatJeuno = player:getCharVar("WildcatJeuno")
 
     if
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
-        not utils.mask.getBit(WildcatJeuno, 16)
+        not utils.mask.getBit(wildcatJeuno, 16)
     then
         player:startEvent(316)
 
     elseif
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_WONDER_MAGIC_SET) == QUEST_ACCEPTED and
-        ChildsPlay == QUEST_AVAILABLE
+        childsPlay == QUEST_AVAILABLE
     then
         player:startEvent(0) -- Start quest
 
-    elseif ChildsPlay == QUEST_ACCEPTED then
+    elseif childsPlay == QUEST_ACCEPTED then
         player:startEvent(61) -- mid quest CS
 
     else

@@ -15,7 +15,8 @@ end
 entity.onTrigger = function(player, npc)
     -- Standard shop
     player:showText(npc, ID.text.KANIL_SHOP_TEXT)
-    local stock = {
+    local stock =
+    {
         610, 60,     -- San D'Or. Flour
         4509, 12,     -- Distilled Water
         936, 16,     -- Rock Salt

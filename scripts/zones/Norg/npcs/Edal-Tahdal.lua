@@ -4,7 +4,7 @@
 -- Starts and Finishes Quest: Trial by Water
 -- !pos -13 1 -20 252
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/titles")
 require("scripts/globals/keyitems")
 require("scripts/globals/shop")
@@ -17,17 +17,16 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
+    local trialByWater = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WATER)
+    local whisperOfTides = player:hasKeyItem(xi.ki.WHISPER_OF_TIDES)
 
-    local TrialByWater = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WATER)
-    local WhisperOfTides = player:hasKeyItem(xi.ki.WHISPER_OF_TIDES)
-
-    if ((TrialByWater == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.NORG) >= 4) or (TrialByWater == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByWater_date"))) then
+    if ((trialByWater == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.NORG) >= 4) or (trialByWater == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByWater_date"))) then
         player:startEvent(109, 0, xi.ki.TUNING_FORK_OF_WATER) -- Start and restart quest "Trial by Water"
-    elseif (TrialByWater == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.TUNING_FORK_OF_WATER) == false and WhisperOfTides == false) then
+    elseif (trialByWater == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.TUNING_FORK_OF_WATER) == false and whisperOfTides == false) then
         player:startEvent(190, 0, xi.ki.TUNING_FORK_OF_WATER) -- Defeat against Avatar : Need new Fork
-    elseif (TrialByWater == QUEST_ACCEPTED and WhisperOfTides == false) then
+    elseif (trialByWater == QUEST_ACCEPTED and whisperOfTides == false) then
         player:startEvent(110, 0, xi.ki.TUNING_FORK_OF_WATER, 2)
-    elseif (TrialByWater == QUEST_ACCEPTED and WhisperOfTides) then
+    elseif (trialByWater == QUEST_ACCEPTED and whisperOfTides) then
         local numitem = 0
 
         if (player:hasItem(17439)) then numitem = numitem + 1; end  -- Leviathan's Rod
@@ -40,14 +39,12 @@ entity.onTrigger = function(player, npc)
     else
         player:startEvent(113) -- Standard dialog
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if (csid == 109 and option == 1) then
         if (player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WATER) == QUEST_COMPLETED) then
             player:delQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WATER)
@@ -71,8 +68,8 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, item)
         else
             if (option == 5) then
-                player:addGil(xi.settings.GIL_RATE * 10000)
-                player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 10000) -- Gil
+                player:addGil(xi.settings.main.GIL_RATE * 10000)
+                player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 10000) -- Gil
             elseif (option == 6) then
                 player:addSpell(300) -- Avatar
                 player:messageSpecial(ID.text.AVATAR_UNLOCKED, 0, 0, 2)
@@ -87,7 +84,6 @@ entity.onEventFinish = function(player, csid, option)
             player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WATER)
         end
     end
-
 end
 
 return entity

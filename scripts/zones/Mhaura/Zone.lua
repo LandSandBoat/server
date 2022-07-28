@@ -5,7 +5,7 @@ local ID = require("scripts/zones/Mhaura/IDs")
 require("scripts/globals/conquest")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/zone")
 -----------------------------------
 local zone_object = {}
@@ -52,7 +52,7 @@ end
 
 zone_object.onTransportEvent = function(player, transport)
     if transport == 47 or transport == 46 then
-        if not player:hasKeyItem(xi.ki.BOARDING_PERMIT) or xi.settings.ENABLE_TOAU == 0 then
+        if not player:hasKeyItem(xi.ki.BOARDING_PERMIT) or xi.settings.main.ENABLE_TOAU == 0 then
             player:setPos(8.200, -1.363, 3.445, 192)
             player:messageSpecial(ID.text.DO_NOT_POSSESS, xi.ki.BOARDING_PERMIT)
         else

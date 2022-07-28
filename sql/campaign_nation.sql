@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: dspdb
 -- ------------------------------------------------------
--- Server version	10.2.8-MariaDB
+-- Server version    10.2.8-MariaDB
 
 --
 -- Table structure for table `campaign_nation`

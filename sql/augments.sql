@@ -79,9 +79,9 @@ INSERT INTO `augments` VALUES (50,0,384,-100,0,0); -- Slow+1
 INSERT INTO `augments` VALUES (51,0,72,1,0,0); -- HP recovered while healing+1
 INSERT INTO `augments` VALUES (52,0,71,1,0,0); -- MP recovered while healing+1
 INSERT INTO `augments` VALUES (53,0,168,-1,0,0); -- Spell interruption rate down 1%
-INSERT INTO `augments` VALUES (54,0,161,-1,0,0); -- Phys. dmg. taken -1%
-INSERT INTO `augments` VALUES (55,0,163,-1,0,0); -- Magic dmg. taken -1%
-INSERT INTO `augments` VALUES (56,0,162,-1,0,0); -- Breath dmg. taken -1%
+INSERT INTO `augments` VALUES (54,100,161,-1,0,0); -- Phys. dmg. taken -1%
+INSERT INTO `augments` VALUES (55,100,163,-1,0,0); -- Magic dmg. taken -1%
+INSERT INTO `augments` VALUES (56,100,162,-1,0,0); -- Breath dmg. taken -1%
 INSERT INTO `augments` VALUES (57,0,562,1,0,0); -- Magic crit. hit rate+1%
 INSERT INTO `augments` VALUES (58,0,29,-1,0,0); -- Mag.Def.Bns.-1
 INSERT INTO `augments` VALUES (59,0,0,0,0,0); -- Latent effect: Regain+1 (Do via Latent: triggered with your current weapon drawn for 1 TP/tick.)
@@ -99,7 +99,7 @@ INSERT INTO `augments` VALUES (69,0,26,1,0,0); -- Rng.Acc.+1 Rng.Atk.+1
 INSERT INTO `augments` VALUES (69,0,24,1,0,0); -- Cont.
 INSERT INTO `augments` VALUES (70,0,30,33,0,0); -- Mag. Acc.+33 Mag.Atk.Bns+33
 INSERT INTO `augments` VALUES (70,0,28,33,0,0); -- Cont.
-INSERT INTO `augments` VALUES (71,0,160,-1,0,0); -- Damage Taken -1%
+INSERT INTO `augments` VALUES (71,0,160,-100,0,0); -- Damage Taken -1%
 INSERT INTO `augments` VALUES (72,0,0,0,0,0); -- 72 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (73,0,0,0,0,0); -- 73 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (74,0,0,0,0,0); -- Cap. Point +1%
@@ -151,13 +151,13 @@ INSERT INTO `augments` VALUES (109,0,288,1,1,0); -- Pet: Dbl.Atk.+1% Crit.hit ra
 INSERT INTO `augments` VALUES (109,0,165,1,1,0); -- Cont.
 INSERT INTO `augments` VALUES (110,0,370,1,1,0); -- Pet: Regen+1
 INSERT INTO `augments` VALUES (111,0,384,100,1,0); -- Pet: Haste+1
-INSERT INTO `augments` VALUES (112,0,160,-1,1,0); -- Pet: Damage taken -1%
+INSERT INTO `augments` VALUES (112,0,160,-100,1,0); -- Pet: Damage taken -1%
 INSERT INTO `augments` VALUES (113,0,26,1,1,0); -- Pet: Rng.Acc.+1
 INSERT INTO `augments` VALUES (114,0,24,1,1,0); -- Pet: Rng.Atk.+1
 INSERT INTO `augments` VALUES (115,0,73,1,1,0); -- Pet: Store TP+1
 INSERT INTO `augments` VALUES (116,0,289,1,1,0); -- Pet: Subtle Blow+1
 INSERT INTO `augments` VALUES (117,0,31,1,1,0); -- Pet: Mag. Evasion+1
-INSERT INTO `augments` VALUES (118,0,161,-1,1,0); -- Pet: Phys. dmg. taken -1%
+INSERT INTO `augments` VALUES (118,100,161,-1,1,0); -- Pet: Phys. dmg. taken -1%
 INSERT INTO `augments` VALUES (119,0,29,1,1,0); -- Pet: Mag.Def.Bns.+1
 INSERT INTO `augments` VALUES (120,0,28,1,1,1); -- Avatar: Mag.Atk.Bns.+1
 INSERT INTO `augments` VALUES (121,0,0,0,1,0); -- Pet: Breath +1
@@ -170,7 +170,7 @@ INSERT INTO `augments` VALUES (124,0,26,1,1,0); -- Cont.
 INSERT INTO `augments` VALUES (125,0,30,1,1,0); -- Pet: Mag.Acc.+1 Mag.Dmg.+1
 INSERT INTO `augments` VALUES (125,0,311,1,1,0); -- Cont.
 INSERT INTO `augments` VALUES (126,0,311,1,1,0); -- Pet: Magic Damage +1
-INSERT INTO `augments` VALUES (127,0,163,-1,1,0); -- Pet: Magic Damage Taken -1%
+INSERT INTO `augments` VALUES (127,100,163,-1,1,0); -- Pet: Magic Damage Taken -1%
 INSERT INTO `augments` VALUES (128,0,0,0,0,0); -- 128 doesnt seem to be a valid Augment,incomplete or garbled text displays
 INSERT INTO `augments` VALUES (129,0,25,1,0,0); -- Accuracy+1 Rng.Acc.+1
 INSERT INTO `augments` VALUES (129,0,26,1,0,0); -- Cont.
@@ -411,7 +411,7 @@ INSERT INTO `augments` VALUES (328,0,421,1,0,0); -- Crit. hit damage+1%
 INSERT INTO `augments` VALUES (329,0,374,1,0,0); -- Cure potency+1%
 INSERT INTO `augments` VALUES (330,0,491,1,0,0); -- Waltz potency+1%
 INSERT INTO `augments` VALUES (331,0,497,-1,0,0); -- Waltz ability delay -1
-INSERT INTO `augments` VALUES (332,0,175,1,0,0); -- Sklchn.dmg.+1%
+INSERT INTO `augments` VALUES (332,100,175,1,0,0); -- Sklchn.dmg.+1%
 INSERT INTO `augments` VALUES (333,0,944,1,0,0); -- Conserve TP+1
 INSERT INTO `augments` VALUES (334,0,487,1,0,0); -- Magic burst dmg.+1%
 INSERT INTO `augments` VALUES (335,0,563,1,0,0); -- Mag. crit. hit dmg.+1%
@@ -1426,8 +1426,8 @@ INSERT INTO `augments` VALUES (1151,0,0,0,0,0);
 INSERT INTO `augments` VALUES (1152,0,1,10,0,0); -- DEF +10
 INSERT INTO `augments` VALUES (1153,0,68,3,0,0); -- Evasion +3
 INSERT INTO `augments` VALUES (1154,0,31,3,0,0); -- Mag. Evasion +3
-INSERT INTO `augments` VALUES (1155,0,161,-2,0,0); -- Physical Damage Taken -2%
-INSERT INTO `augments` VALUES (1156,0,163,-2,0,0); -- Magic Damage Taken -2%
+INSERT INTO `augments` VALUES (1155,100,161,-2,0,0); -- Physical Damage Taken -2%
+INSERT INTO `augments` VALUES (1156,100,163,-2,0,0); -- Magic Damage Taken -2%
 INSERT INTO `augments` VALUES (1157,0,168,2,0,0); -- Spell Interruption Rate Down 2%
 INSERT INTO `augments` VALUES (1158,0,958,2,0,0); -- Occ. Resistance to Status Ailments +2
 
@@ -1521,8 +1521,8 @@ INSERT INTO `augments` VALUES (1244,0,0,0,0,0);
 INSERT INTO `augments` VALUES (1245,0,0,0,0,0);
 -- End unused block
 
-INSERT INTO `augments` VALUES (1246,0,161,-2,1,0); -- Pet: Phy. Dmg. Taken -2%
-INSERT INTO `augments` VALUES (1247,0,163,-2,1,0); -- Pet: Magic Dmg. Taken -2%
+INSERT INTO `augments` VALUES (1246,100,161,-2,1,0); -- Pet: Phy. Dmg. Taken -2%
+INSERT INTO `augments` VALUES (1247,100,163,-2,1,0); -- Pet: Magic Dmg. Taken -2%
 INSERT INTO `augments` VALUES (1248,0,890,1,0,0); -- Enhancing Magic Effect Duration +1
 INSERT INTO `augments` VALUES (1249,0,477,1,0,0); -- Helix Effect Duration+1
 INSERT INTO `augments` VALUES (1250,0,960,1,0,0); -- Indi Effect Duration+1

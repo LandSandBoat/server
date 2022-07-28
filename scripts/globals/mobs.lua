@@ -26,7 +26,7 @@ xi.mob.onMobDeathEx = function(mob, player, isKiller, isWeaponSkillKill)
             player:getCharVar("ChaosbringerKills") < 200 and
             not isWeaponSkillKill
         then
-            player:addCharVar("ChaosbringerKills", 1)
+            player:incrementCharVar("ChaosbringerKills", 1)
         end
     end
 
@@ -53,12 +53,12 @@ end
 xi.mob.phOnDespawn = function(ph, phList, chance, cooldown, immediate)
     if type(immediate) ~= "boolean" then immediate = false end
 
-    if xi.settings.NM_LOTTERY_CHANCE then
-        chance = xi.settings.NM_LOTTERY_CHANCE >= 0 and (chance * xi.settings.NM_LOTTERY_CHANCE) or 100
+    if xi.settings.main.NM_LOTTERY_CHANCE then
+        chance = xi.settings.main.NM_LOTTERY_CHANCE >= 0 and (chance * xi.settings.main.NM_LOTTERY_CHANCE) or 100
     end
 
-    if xi.settings.NM_LOTTERY_COOLDOWN then
-        cooldown = xi.settings.NM_LOTTERY_COOLDOWN >= 0 and (cooldown * xi.settings.NM_LOTTERY_COOLDOWN) or cooldown
+    if xi.settings.main.NM_LOTTERY_COOLDOWN then
+        cooldown = xi.settings.main.NM_LOTTERY_COOLDOWN >= 0 and (cooldown * xi.settings.main.NM_LOTTERY_COOLDOWN) or cooldown
     end
 
     local phId = ph:getID()

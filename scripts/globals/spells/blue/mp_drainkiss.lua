@@ -20,7 +20,7 @@
 -- Unlike Magic Hammer, MP drained is not enhanced by Magic Attack Bonus.
 -- A positive Monster Correlation (vs Birds) or a negative Monster Correlation (vs Aquans), affects both accuracy and potency.
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/utils")
@@ -54,7 +54,7 @@ spell_object.onSpellCast = function(caster, target, spell)
         dmg = 0
     end
 
-    dmg = dmg * xi.settings.BLUE_POWER
+    dmg = dmg * xi.settings.main.BLUE_POWER
 
     if (target:isUndead()) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect

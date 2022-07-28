@@ -7,7 +7,7 @@ require("scripts/globals/conquest")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/pathfind")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/chocobo")
 require("scripts/globals/status")
 -----------------------------------
@@ -53,12 +53,12 @@ zone_object.onRegionEnter = function(player, region)
 end
 
 zone_object.onGameHour = function(zone)
-    local VanadielHour = VanadielHour()
+    local vanadielHour = VanadielHour()
     local playerOnQuestId = GetServerVariable("[JEUNO]CommService")
 
     -- Community Service Quest
     -- 7AM: it's daytime. turn off all the lights
-    if VanadielHour == 7 then
+    if vanadielHour == 7 then
         for i=0, 11 do
             local lamp = GetNPCByID(ID.npc.STREETLAMP_OFFSET + i)
             lamp:setAnimation(xi.anim.CLOSE_DOOR)
@@ -66,7 +66,7 @@ zone_object.onGameHour = function(zone)
 
     -- 8PM: make quest available
     -- notify anyone in zone with membership card that zauko is recruiting
-    elseif VanadielHour == 18 then
+    elseif vanadielHour == 18 then
         SetServerVariable("[JEUNO]CommService", 0)
         local players = zone:getPlayers()
         for name, player in pairs(players) do
@@ -76,7 +76,7 @@ zone_object.onGameHour = function(zone)
         end
 
     -- 9PM: notify the person on the quest that they can begin lighting lamps
-    elseif VanadielHour == 21 then
+    elseif vanadielHour == 21 then
         local playerOnQuest = GetPlayerByID(GetServerVariable("[JEUNO]CommService"))
         if playerOnQuest then
             playerOnQuest:startEvent(114)
@@ -85,7 +85,7 @@ zone_object.onGameHour = function(zone)
     -- 1AM: if nobody has accepted the quest yet, NPC Vhana Ehgaklywha takes up the task
     -- she starts near Zauko and paths all the way to the Rolanberry exit.
     -- xi.path.flag.WALLHACK because she gets stuck on some terrain otherwise.
-    elseif VanadielHour == 1 then
+    elseif vanadielHour == 1 then
         if playerOnQuestId == 0 then
             local npc = GetNPCByID(ID.npc.VHANA_EHGAKLYWHA)
             npc:clearPath()

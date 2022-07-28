@@ -25,29 +25,29 @@ xi.apollyon_ne.handleMobDeathFloorOne = function(mob, player, isKiller, noKiller
         mobId == ID.mob.APOLLYON_NE_MOB[1] + 12
     then
         if isKiller or noKiller then
-            local battlefield = mob:getBattlefield()
-            local F1key       = battlefield:getLocalVar("randomF1key")
-            local F1chest     = battlefield:getLocalVar("randomF1chest")
+            local battlefield   = mob:getBattlefield()
+            local floorOneKey   = battlefield:getLocalVar("randomF1key")
+            local floorOneChest = battlefield:getLocalVar("randomF1chest")
 
             -- Handle Teleporter
             if
-                (F1key == 1 and mobId == ID.mob.APOLLYON_NE_MOB[1]) or      -- Goobbue is Key
-                (F1key == 2 and mobId == ID.mob.APOLLYON_NE_MOB[1] + 11) or -- Barometz is Key
-                (F1key == 3 and mobId == ID.mob.APOLLYON_NE_MOB[1] + 12)    -- Borametz is Key
+                (floorOneKey == 1 and mobId == ID.mob.APOLLYON_NE_MOB[1]) or      -- Goobbue is Key
+                (floorOneKey == 2 and mobId == ID.mob.APOLLYON_NE_MOB[1] + 11) or -- Barometz is Key
+                (floorOneKey == 3 and mobId == ID.mob.APOLLYON_NE_MOB[1] + 12)    -- Borametz is Key
             then
                 xi.limbus.handleDoors(battlefield, true, ID.npc.APOLLYON_NE_PORTAL[1])
 
                 -- Prepare Floor 2
-                local F2key, F2chest = unpack(utils.uniqueRandomTable(0, 3, 2))
+                local floorTwoKey, floorTwoChest = unpack(utils.uniqueRandomTable(0, 3, 2))
 
-                battlefield:setLocalVar("randomF2key", ID.mob.APOLLYON_NE_MOB[2] + F2key)
-                battlefield:setLocalVar("randomF2chest", ID.mob.APOLLYON_NE_MOB[2] + F2chest)
+                battlefield:setLocalVar("randomF2key", ID.mob.APOLLYON_NE_MOB[2] + floorTwoKey)
+                battlefield:setLocalVar("randomF2chest", ID.mob.APOLLYON_NE_MOB[2] + floorTwoChest)
 
             -- Handle Treasure Crate
             elseif
-                (F1chest == 1 and mobId == ID.mob.APOLLYON_NE_MOB[1]) or      -- Goobbue has Crate
-                (F1chest == 2 and mobId == ID.mob.APOLLYON_NE_MOB[1] + 11) or -- Barometz has Crate
-                (F1chest == 3 and mobId == ID.mob.APOLLYON_NE_MOB[1] + 12)    -- Borametz has Crate
+                (floorOneChest == 1 and mobId == ID.mob.APOLLYON_NE_MOB[1]) or      -- Goobbue has Crate
+                (floorOneChest == 2 and mobId == ID.mob.APOLLYON_NE_MOB[1] + 11) or -- Barometz has Crate
+                (floorOneChest == 3 and mobId == ID.mob.APOLLYON_NE_MOB[1] + 12)    -- Borametz has Crate
             then
                 local mobX = mob:getXPos()
                 local mobY = mob:getYPos()
@@ -66,14 +66,14 @@ end
 
 xi.apollyon_ne.handleMobDeathFloorTwo = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
-        local mobId       = mob:getID()
-        local battlefield = mob:getBattlefield()
-        local players     = battlefield:getPlayers()
-        local F2key       = battlefield:getLocalVar("randomF2key")
-        local F2chest     = battlefield:getLocalVar("randomF2chest")
+        local mobId         = mob:getID()
+        local battlefield   = mob:getBattlefield()
+        local players       = battlefield:getPlayers()
+        local floorTwoKey   = battlefield:getLocalVar("randomF2key")
+        local floorTwoChest = battlefield:getLocalVar("randomF2chest")
 
         -- Handle Teleporter
-        if mobId == F2key then
+        if mobId == floorTwoKey then
             xi.limbus.handleDoors(battlefield, true, ID.npc.APOLLYON_NE_PORTAL[2])
 
             -- Prepare Floor 3
@@ -97,7 +97,7 @@ xi.apollyon_ne.handleMobDeathFloorTwo = function(mob, player, isKiller, noKiller
             end
 
         -- Handle treasure Crate
-        elseif mobId == F2chest then
+        elseif mobId == floorTwoChest then
             local mobX = mob:getXPos()
             local mobY = mob:getYPos()
             local mobZ = mob:getZPos()
@@ -114,20 +114,20 @@ end
 
 xi.apollyon_ne.handleMobDeathFloorThree = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
-        local mobId       = mob:getID()
-        local battlefield = mob:getBattlefield()
-        local F3key       = battlefield:getLocalVar("randomF3key")
-        local F3chest     = battlefield:getLocalVar("randomF3chest")
+        local mobId           = mob:getID()
+        local battlefield     = mob:getBattlefield()
+        local floorThreeKey   = battlefield:getLocalVar("randomF3key")
+        local floorThreeChest = battlefield:getLocalVar("randomF3chest")
 
         -- Handle Teleporter
-        if F3key == mobId then
+        if floorThreeKey == mobId then
             xi.limbus.handleDoors(battlefield, true, ID.npc.APOLLYON_NE_PORTAL[3])
 
             -- Prepare Floor 4
             battlefield:setLocalVar("randomF4key", ID.mob.APOLLYON_NE_MOB[4] + math.random(0, 2))
 
         -- Handle treasure Crate
-        elseif F3chest == mobId then
+        elseif floorThreeChest == mobId then
             local mobX = mob:getXPos()
             local mobY = mob:getYPos()
             local mobZ = mob:getZPos()
@@ -144,12 +144,12 @@ end
 
 xi.apollyon_ne.handleMobDeathFloorFour = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
-        local mobId       = mob:getID()
-        local battlefield = mob:getBattlefield()
-        local F4key       = battlefield:getLocalVar("randomF4key")
+        local mobId        = mob:getID()
+        local battlefield  = mob:getBattlefield()
+        local floorFourKey = battlefield:getLocalVar("randomF4key")
 
         -- Handle Teleporter
-        if F4key == mobId then
+        if floorFourKey == mobId then
             xi.limbus.handleDoors(battlefield, true, ID.npc.APOLLYON_NE_PORTAL[4])
 
         -- Handle treasure Crate

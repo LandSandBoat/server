@@ -1,12 +1,10 @@
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
-
 
 DROP TABLE IF EXISTS `item_latents`;
 CREATE TABLE IF NOT EXISTS `item_latents` (
@@ -17,9 +15,6 @@ CREATE TABLE IF NOT EXISTS `item_latents` (
   `latentParam` smallint(5) NOT NULL,
   PRIMARY KEY (`itemId`,`modId`,`value`,`latentId`,`latentParam`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=13 PACK_KEYS=1;
-
-
-
 
 -- INSERT INTO `item_latents` VALUES (itemID,modId,modValue,latentId,latentParam);
 
@@ -1462,8 +1457,9 @@ INSERT INTO `item_latents` VALUES (15162,68,2,29,0);
 INSERT INTO `item_latents` VALUES (15164,68,2,29,0);
 INSERT INTO `item_latents` VALUES (15168,68,2,29,0);
 INSERT INTO `item_latents` VALUES (15168,68,2,31,0);
+
 INSERT INTO `item_latents` VALUES (15174,25,12,10,0);
-INSERT INTO `item_latents` VALUES (15174,370,-100,10,0);
+INSERT INTO `item_latents` VALUES (15174,404,100,10,0);
 INSERT INTO `item_latents` VALUES (15174,384,400,10,0);
 
 -- -------------------------------------------------------
@@ -1644,7 +1640,7 @@ INSERT INTO `item_latents` VALUES (15520,68,7,58,0);     -- storm torque eva +7
 -- Berserker's Torque
 -- -------------------------------------------------------
 INSERT INTO `item_latents` VALUES (15530,368,10,10,0);   -- HP-50/Tick of TP while weapon drawn
-INSERT INTO `item_latents` VALUES (15530,370,-50,10,0);
+INSERT INTO `item_latents` VALUES (15530,404,50,10,0);
 
 -- -------------------------------------------------------
 -- Shark Necklace
@@ -2012,7 +2008,6 @@ INSERT INTO `item_latents` VALUES (16427,25,3,37,0);         -- Acc+3 New Moon
 INSERT INTO `item_latents` VALUES (16427,25,9,37,2);         -- Acc+9 First Quarter Moon
 INSERT INTO `item_latents` VALUES (16427,25,9,37,6);         -- Acc+9 Last Quarter Moon
 INSERT INTO `item_latents` VALUES (16427,25,15,37,4);        -- Acc+15 Full Moon
-
 
 INSERT INTO `item_latents` VALUES (16563,9,5,56,0);      -- Rune Blade +5 DEX
 INSERT INTO `item_latents` VALUES (16563,366,4,56,0);    -- Rune Blade DMG: 43
@@ -3011,7 +3006,6 @@ INSERT INTO `item_latents` VALUES (18895,288,4,13,280);      -- Double attack +4
 INSERT INTO `item_latents` VALUES (18895,288,4,13,281);      -- Double attack +4 ENTHUNDER_II
 INSERT INTO `item_latents` VALUES (18895,288,4,13,282);      -- Double attack +4 ENWATER_II
 
-
 INSERT INTO `item_latents` VALUES (18865,165,7,59,20);   -- Zonure - Vs. vermin: Critical hit rate +7%
 
 -- -------------------------------------------------------
@@ -3104,7 +3098,6 @@ INSERT INTO `item_latents` VALUES (19125,9,1,16,6);      -- DEX +1~4,party size 
 INSERT INTO `item_latents` VALUES (19126,23,14,6,1000);      -- ATT+14 TP<1000
 INSERT INTO `item_latents` VALUES (19126,25,5,6,1000);       -- ACC+5  TP<1000
 INSERT INTO `item_latents` VALUES (19126,366,6,6,1000);      -- DMG+6  TP<1000
-
 
 INSERT INTO `item_latents` VALUES (19158,165,7,59,14);   -- Scheherazade - Vs. lizards: Critical hit rate +7%
 
@@ -3232,7 +3225,6 @@ INSERT INTO `item_latents` VALUES (20540,366,4,6,1000);      -- Dmg+4  TP<1000
 INSERT INTO `item_latents` VALUES (20726,23,10,6,1000);      -- Att+10 TP>1000
 INSERT INTO `item_latents` VALUES (20726,25,15,6,1000);      -- Acc+15 TP>1000
 INSERT INTO `item_latents` VALUES (20726,366,6,6,1000);      -- Dmg+6  TP>1000
-
 
 -- -------------------------------------------------------
 -- Conqueror 119
@@ -3485,3 +3477,5 @@ INSERT INTO `item_latents` VALUES (27367,399,16,52,7);   -- Pedagogy Loafers+1: 
 INSERT INTO `item_latents` VALUES (27367,399,16,52,8);   -- Pedagogy Loafers+1: Weather: Enhances Celerity and Alacrity Effect +16% (DARK)
 INSERT INTO `item_latents` VALUES (28235,169,25,26,2);   -- Hachiya Kyahan: Dusk to dawn: Movement speed +25%
 INSERT INTO `item_latents` VALUES (28256,169,25,26,2);   -- Hachiya Kyahan +1: Dusk to dawn: Movement speed +25%
+INSERT INTO `item_latents` VALUES (28445,23,10,14,0);   -- Shetal Stone ATT +10 No Food Active
+INSERT INTO `item_latents` VALUES (28445,68,10,14,0);   -- Shetal Stone EVA +10 No Food Active

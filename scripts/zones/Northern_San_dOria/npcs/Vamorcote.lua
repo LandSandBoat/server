@@ -5,7 +5,7 @@
 -- !pos -137.070 10.999 161.855 231
 -----------------------------------
 require("scripts/globals/quests")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
 -----------------------------------
 local entity = {}
@@ -46,8 +46,8 @@ entity.onEventFinish = function(player, csid, option)
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_SETTING_SUN)
     elseif csid == 658 then --The player trades the Engraved Key to the NPC. Here come the rewards!
         player:tradeComplete()
-        player:addGil(xi.settings.GIL_RATE * 10000)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 10000)
+        player:addGil(xi.settings.main.GIL_RATE * 10000)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 10000)
         player:addFame(xi.quest.fame_area.SANDORIA, 30)
         player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_SETTING_SUN)
     end

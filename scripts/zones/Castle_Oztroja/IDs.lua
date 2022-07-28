@@ -38,6 +38,8 @@ zones[xi.zone.CASTLE_OZTROJA] =
         YAGUDO_AVATAR_DEATH                = 7454, -- Our lord, Tzee Xicu the Manifest!  Even should our bodies be crushed and broken, may our souls endure into eternity...
         YAGUDO_KING_ENGAGE                 = 7455, -- You are not here as sacrifices, are you? Could you possibly be committing this affront in the face of a deity?  Very well, I will personally mete out your divine punishment, kyah!
         YAGUDO_KING_DEATH                  = 7456, -- You have...bested me... However, I...am...a god... I will never die...never rot...never fade...never...
+        LEARNS_SPELL                       = 8295, -- <name> learns <spell>!
+        UNCANNY_SENSATION                  = 8297, -- You are assaulted by an uncanny sensation.
         COMMON_SENSE_SURVIVAL              = 8304, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =

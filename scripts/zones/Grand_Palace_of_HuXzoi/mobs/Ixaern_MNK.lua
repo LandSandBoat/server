@@ -3,7 +3,7 @@
 --  Mob: Ix'aern MNK
 -----------------------------------
 local ID = require("scripts/zones/Grand_Palace_of_HuXzoi/IDs")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
@@ -62,7 +62,7 @@ entity.onMobDespawn = function(mob)
     else
         qm:setPos(460, 0, 540, 0) -- I-7
     end
-    qm:updateNPCHideTime(xi.settings.FORCE_SPAWN_QM_RESET_TIME)
+    qm:updateNPCHideTime(xi.settings.main.FORCE_SPAWN_QM_RESET_TIME)
 end
 
 return entity

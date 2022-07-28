@@ -29,7 +29,7 @@ quest.reward =
 local function progressZone(player)
     local currentPos = player:getPos()
 
-    quest:addVar(player, 'Prog', 1)
+    quest:incrementVar(player, 'Prog', 1)
     player:setPos(currentPos['x'], currentPos['y'], currentPos['z'], currentPos['rot'], xi.zone.UPPER_JEUNO)
 end
 
@@ -39,7 +39,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
                 player:getMainJob() == xi.job.DNC and
-                player:getMainLvl() >= xi.settings.AF3_QUEST_LEVEL and
+                player:getMainLvl() >= xi.settings.main.AF3_QUEST_LEVEL and
                 player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_ROAD_TO_DIVADOM) and
                 not quest:getMustZone(player) and
                 quest:getVar(player, 'Timer') <= VanadielUniqueDay()

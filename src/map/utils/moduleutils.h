@@ -22,8 +22,8 @@
 #ifndef _MODULEUTILS_H
 #define _MODULEUTILS_H
 
-#include "common/logging.h"
 #include "../lua/luautils.h"
+#include "common/logging.h"
 
 #include <memory>
 
@@ -40,13 +40,13 @@ class CPPModule
 {
 public:
     CPPModule()
-    : lua(luautils::lua)
+    : lua(::lua)
     , sql(::sql)
     {
         moduleutils::RegisterCPPModule(this);
     }
 
-    virtual ~CPPModule(){};
+    virtual ~CPPModule() = default;
 
     // Required
     virtual void OnInit() = 0;
@@ -56,6 +56,7 @@ public:
     virtual void OnTimeServerTick(){};
     virtual void OnCharZoneIn(CCharEntity* PChar){};
     virtual void OnCharZoneOut(CCharEntity* PChar){};
+    virtual void OnPushPacket(CBasicPacket* packet){};
 
     template <typename T>
     static T* Register()
@@ -81,6 +82,7 @@ namespace moduleutils
     void OnTimeServerTick();
     void OnCharZoneIn(CCharEntity* PChar);
     void OnCharZoneOut(CCharEntity* PChar);
+    void OnPushPacket(CBasicPacket* packet);
 
     // The program has two "states":
     // - Load-time: As all data is being loaded and init'd

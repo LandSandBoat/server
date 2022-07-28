@@ -61,7 +61,7 @@ uint32 CLuaInstance::getEntranceZoneID()
 
 sol::table CLuaInstance::getAllies()
 {
-    auto table = luautils::lua.create_table();
+    auto table = lua.create_table();
     for (auto& member : m_PLuaInstance->m_allyList)
     {
         table.add(CLuaBaseEntity(member.second));
@@ -72,7 +72,7 @@ sol::table CLuaInstance::getAllies()
 
 sol::table CLuaInstance::getChars()
 {
-    auto table = luautils::lua.create_table();
+    auto table = lua.create_table();
     for (auto& member : m_PLuaInstance->m_charList)
     {
         table.add(CLuaBaseEntity(member.second));
@@ -83,7 +83,7 @@ sol::table CLuaInstance::getChars()
 
 sol::table CLuaInstance::getMobs()
 {
-    auto table = luautils::lua.create_table();
+    auto table = lua.create_table();
     for (auto& member : m_PLuaInstance->m_mobList)
     {
         table.add(CLuaBaseEntity(member.second));
@@ -94,7 +94,7 @@ sol::table CLuaInstance::getMobs()
 
 sol::table CLuaInstance::getNpcs()
 {
-    auto table = luautils::lua.create_table();
+    auto table = lua.create_table();
     for (auto& member : m_PLuaInstance->m_npcList)
     {
         table.add(CLuaBaseEntity(member.second));
@@ -105,7 +105,7 @@ sol::table CLuaInstance::getNpcs()
 
 sol::table CLuaInstance::getPets()
 {
-    auto table = luautils::lua.create_table();
+    auto table = lua.create_table();
     for (auto& member : m_PLuaInstance->m_petList)
     {
         table.add(CLuaBaseEntity(member.second));
@@ -123,7 +123,7 @@ uint32 CLuaInstance::getTimeLimit()
 sol::table CLuaInstance::getEntryPos()
 {
     position_t entry = m_PLuaInstance->GetEntryLoc();
-    sol::table table = luautils::lua.create_table();
+    sol::table table = lua.create_table();
 
     table["x"]   = entry.x;
     table["y"]   = entry.y;

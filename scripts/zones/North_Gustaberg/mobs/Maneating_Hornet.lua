@@ -14,7 +14,7 @@ entity.onMobDeath = function(mob, player, isKiller)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, ID.mob.STINGING_SOPHIE_PH, 5, math.random(1200, 3600)) -- 20 to 60 minutes
+    xi.mob.phOnDespawn(mob, ID.mob.STINGING_SOPHIE_PH, 5, 1) -- Pure Lottery
 end
 
 return entity

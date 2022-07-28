@@ -22,7 +22,7 @@ local minionGroup =
 
 entity.onMobEngaged = function(mob, target)
     mob:hideName(false)
-    mob:untargetable(false)
+    mob:setUntargetable(false)
     mob:setAnimationSub(2)
 end
 

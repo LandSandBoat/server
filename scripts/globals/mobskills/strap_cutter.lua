@@ -13,9 +13,9 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 -- todo make a random for which gear to remove and how many pieces
-    local REMOVE = 0xFFFF
+    local remove = 0xFFFF
 
-    target:addStatusEffectEx(xi.effect.ENCUMBRANCE_I, xi.effect.ENCUMBRANCE_I, REMOVE, 0, 60)
+    target:addStatusEffectEx(xi.effect.ENCUMBRANCE_I, xi.effect.ENCUMBRANCE_I, remove, 0, 60)
 end
 
 return mobskill_object

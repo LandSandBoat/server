@@ -132,8 +132,8 @@ mission.sections =
             {
                 [200] = function(player, csid, option, npc)
                     if option == 1 then
-                        SpawnMob(behemothsDominionID.mob.ANCIENT_WEAPON):updateClaim(player)
-                        SpawnMob(behemothsDominionID.mob.LEGENDARY_WEAPON):updateClaim(player)
+                        SpawnMob(behemothsDominionID.mob.ANCIENT_WEAPON)
+                        SpawnMob(behemothsDominionID.mob.LEGENDARY_WEAPON)
                     end
                 end,
             },

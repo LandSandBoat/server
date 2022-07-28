@@ -71,7 +71,6 @@ zones[xi.zone.WEST_RONFAURE] =
     },
     npc =
     {
-        CASKET_BASE     = 17187467,
         SIGNPOST_OFFSET = 17187505,
         OVERSEER_BASE   = 17187525, -- Doladepaiton_RK in npc_list
     },

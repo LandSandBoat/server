@@ -19,9 +19,6 @@ zone_object.onZoneIn = function(player, prevZone)
     return xi.dynamis.zoneOnZoneIn(player, prevZone)
 end
 
-zone_object.onZoneTick = function(zone)
-end
-
 zone_object.onRegionEnter = function(player, region)
 end
 

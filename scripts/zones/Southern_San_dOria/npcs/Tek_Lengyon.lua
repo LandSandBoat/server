@@ -15,14 +15,14 @@ end
 
 entity.onTrigger = function(player, npc)
     local guildMember = xi.crafting.isGuildMember(player, 7)
-    local SkillCap = xi.crafting.getCraftSkillCap(player, xi.skill.LEATHERCRAFT)
-    local SkillLevel = player:getSkillLevel(xi.skill.LEATHERCRAFT)
+    local skillCap = xi.crafting.getCraftSkillCap(player, xi.skill.LEATHERCRAFT)
+    local skillLevel = player:getSkillLevel(xi.skill.LEATHERCRAFT)
 
     if (guildMember == 1) then
         if (player:hasStatusEffect(xi.effect.LEATHERCRAFT_IMAGERY) == false) then
-            player:startEvent(652, SkillCap, SkillLevel, 2, 239, player:getGil(), 0, 0, 0)
+            player:startEvent(652, skillCap, skillLevel, 2, 239, player:getGil(), 0, 0, 0)
         else
-            player:startEvent(652, SkillCap, SkillLevel, 2, 239, player:getGil(), 7075, 0, 0)
+            player:startEvent(652, skillCap, skillLevel, 2, 239, player:getGil(), 7075, 0, 0)
         end
     else
         player:startEvent(652) -- Standard Dialogue

@@ -5,8 +5,6 @@
 -- Laila           : !pos -54.045 -1 100.996 244
 -- Rhea Myuliah    : !pos -56.220 -1 101.805 244
 -- Glowing Pebbles : !pos 104.2 4.1 443.6 82
------------------------------------
-require('scripts/settings/main')
 require('scripts/globals/interaction/quest')
 require('scripts/globals/items')
 require('scripts/globals/npc_util')
@@ -30,7 +28,7 @@ quest.sections =
             return status == QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_UNFINISHED_WALTZ) and
                 player:getMainJob() == xi.job.DNC and
-                player:getMainLvl() >= xi.settings.AF2_QUEST_LEVEL and
+                player:getMainLvl() >= xi.settings.main.AF2_QUEST_LEVEL and
                 not quest:getMustZone(player) and
                 quest:getVar(player, 'Timer') <= VanadielUniqueDay()
         end,

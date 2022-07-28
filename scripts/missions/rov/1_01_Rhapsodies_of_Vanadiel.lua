@@ -6,7 +6,7 @@
 -- !addmission 13 0
 -----------------------------------
 require('scripts/globals/missions')
-require('scripts/settings/main')
+require('scripts/globals/settings')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
@@ -37,7 +37,7 @@ mission.sections[1] = {}
 
 mission.sections[1].check = function(player, currentMission, missionStatus, vars)
     return currentMission == mission.missionId and
-        xi.settings.ENABLE_ROV == 1 and
+        xi.settings.main.ENABLE_ROV == 1 and
         player:getMainLvl() >= 3
 end
 

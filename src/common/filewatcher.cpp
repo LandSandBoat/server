@@ -4,23 +4,26 @@
 
 #include <filesystem>
 #include <functional>
-#include <string>
 #include <memory>
+#include <string>
 
-Filewatcher::Filewatcher(std::string const& path)
+Filewatcher::Filewatcher(std::vector<std::string> paths)
 #ifdef USE_GENERIC_FILEWATCHER
 : fileWatcher(std::make_unique<efsw::FileWatcher>(true))
 #else
 : fileWatcher(std::make_unique<efsw::FileWatcher>(false))
 #endif
-, basePath(path)
+, basePaths(paths)
 {
-    fileWatcher->addWatch(path, this, true);
+    for (auto& path : paths)
+    {
+        fileWatcher->addWatch(path, this, true);
+    }
     fileWatcher->watch();
 }
 
 // cppcheck-suppress passedByValue
-void Filewatcher::handleFileAction(efsw::WatchID watchid, const std::string& dir, const std::string& filename, efsw::Action action, std::string oldFilename)
+void Filewatcher::handleFileAction(efsw::WatchID watchid, std::string const& dir, std::string const& filename, efsw::Action action, std::string oldFilename)
 {
     TracySetThreadName("Filewatcher Thread");
     TracyZoneScoped;

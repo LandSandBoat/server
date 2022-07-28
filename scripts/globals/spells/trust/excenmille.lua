@@ -16,10 +16,10 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    local SandoriaFirstTrust = caster:getCharVar("SandoriaFirstTrust")
+    local sandoriaFirstTrust = caster:getCharVar("SandoriaFirstTrust")
     local zone = caster:getZoneID()
 
-    if SandoriaFirstTrust == 1 and (zone == xi.zone.WEST_RONFAURE or zone == xi.zone.EAST_RONFAURE) then
+    if sandoriaFirstTrust == 1 and (zone == xi.zone.WEST_RONFAURE or zone == xi.zone.EAST_RONFAURE) then
         caster:setCharVar("SandoriaFirstTrust", 2)
     end
 

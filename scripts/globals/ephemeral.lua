@@ -9,7 +9,7 @@ xi = xi or {}
 xi.ephemeral = {}
 
 -- Cap per crystal type that can be stored. Retail/Default is 5000
-local CrystalCap = 5000
+local crystalCap = 5000
 
 -- Information for currency storage and event params
 local crystalData =
@@ -39,8 +39,8 @@ xi.ephemeral.onTrade = function(player, trade, successEvent, failEvent)
     for _, v in pairs(crystalData) do
         if npcUtil.tradeHas(trade, v.crystal) or npcUtil.tradeHas(trade, v.cluster) then
             -- Check how far from crystal cap we are
-            local currentCount = math.min(player:getCurrency(v.name), CrystalCap) -- In case there is a db discrepancy
-            local diff = CrystalCap - currentCount
+            local currentCount = math.min(player:getCurrency(v.name), crystalCap) -- In case there is a db discrepancy
+            local diff = crystalCap - currentCount
 
             -- Count clusters and subtract any that won't fit
             local hqQty = trade:getItemQty(v.cluster)

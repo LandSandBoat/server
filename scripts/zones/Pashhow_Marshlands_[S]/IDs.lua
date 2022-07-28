@@ -31,6 +31,7 @@ zones[xi.zone.PASHHOW_MARSHLANDS_S] =
         VOIDWALKER_OBTAIN_KI    = 8050, -- Obtained key item: <keyitem>!
         COMMON_SENSE_SURVIVAL   = 9079, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         SUGAAR_PH =
@@ -41,48 +42,60 @@ zones[xi.zone.PASHHOW_MARSHLANDS_S] =
             [17145865] = 17145867, -- -417.691 23.840 -485.922
             [17145866] = 17145867, -- -444.380 24.499 -487.828
         },
+
         NOMMO_PH =
         {
             [17146007] = 17146012, -- -168.292 24.499 396.933
             [17146008] = 17146012, -- -165.745 24.499 349.06
         },
+
         KINEPIKWA = 17146147,
-        VOIDWALKER  =
+
+        VOIDWALKER =
         {
-            [xi.keyItem.CLEAR_ABYSSITE] = {
+            [xi.keyItem.CLEAR_ABYSSITE] =
+            {
                 17146186, -- Globster
                 17146185, -- Globster
                 17146184, -- Globster
                 17146183, -- Globster
-                17146182,  -- Ground Guzzler
-                17146181,  -- Ground Guzzler
-                17146180,  -- Ground Guzzler
-                17146179,  -- Ground Guzzler
+                17146182, -- Ground Guzzler
+                17146181, -- Ground Guzzler
+                17146180, -- Ground Guzzler
+                17146179, -- Ground Guzzler
             },
-            [xi.keyItem.COLORFUL_ABYSSITE] = {
+
+            [xi.keyItem.COLORFUL_ABYSSITE] =
+            {
                 17146178, -- Lamprey Lord
                 17146177, -- Shoggoth
             },
-            [xi.keyItem.ORANGE_ABYSSITE] = {
-                17146170  -- Blobdingnag
+
+            [xi.keyItem.ORANGE_ABYSSITE] =
+            {
+                17146170, -- Blobdingnag
             },
-            [xi.keyItem.BLACK_ABYSSITE] = {
-                17146169  -- Yilbegan
+
+            [xi.keyItem.BLACK_ABYSSITE] =
+            {
+                17146169, -- Yilbegan
             }
         }
     },
+
     pet =
     {
         [17146170] = -- Blobdingnag
         {
-            17146176,-- Septic Boils
-            17146175,-- Septic Boils
-            17146174,-- Septic Boils
-            17146173,-- Septic Boils
-            17146172,-- Septic Boils
-            17146171,-- Septic Boils
+            17146176, -- Septic Boils
+            17146175, -- Septic Boils
+            17146174, -- Septic Boils
+            17146173, -- Septic Boils
+            17146172, -- Septic Boils
+            17146171, -- Septic Boils
         },
     },
+
     npc =
     {
         INDESCRIPT_MARKINGS_OFFSET = 17146626,

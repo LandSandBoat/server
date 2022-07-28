@@ -135,7 +135,8 @@ end
 -----------------------------------
 
 -- Schedule for Timed Records.
-local timedSchedule = {
+local timedSchedule =
+{
 -- 4-hour timeslots (6 per day) all days/times are in JST
 --    00-04  04-08  08-12  12-16  16-20  20-00
     {  4021,  4010,  4016,  4012,  4018,  4013}, -- Sunday
@@ -147,14 +148,15 @@ local timedSchedule = {
     {  4020,  4009,  4015,  4011,  4017,  4014}, -- Saturday
 }
 -- Load timetable for timed records
-if xi.settings.ENABLE_ROE and xi.settings.ENABLE_ROE_TIMED > 0 then
+if xi.settings.main.ENABLE_ROE and xi.settings.main.ENABLE_ROE_TIMED > 0 then
     RoeParseTimed(timedSchedule)
 end
 
 dofile("scripts/globals/roe_records.lua")
 local records = getRoeRecords(triggers)
 
-local defaults = {
+local defaults =
+{
     check = masterCheck,        -- Check function should return true/false
     increment = 1,              -- Amount to increment per successful check
     notify = 1,                 -- Progress notifications shown every X increases
@@ -189,7 +191,8 @@ RoeParseRecords(records)
     Example of usage + reward table (all params are optional):
 
     completeRecord(player, record#)
-    reward = {
+    reward =
+    {
         item = { {640,2}, 641 },          -- see npcUtil.giveItem for formats (Only given on first completion)
         keyItem = xi.ki.ZERUHN_REPORT,   -- see npcUtil.giveKeyItem for formats
         sparks = 500,
@@ -215,12 +218,12 @@ local function completeRecord(player, record)
     if rewards["sparks"] ~= nil and type(rewards["sparks"]) == "number" then
         local bonus = 1
         if player:getEminenceCompleted(record) then
-            player:addCurrency('spark_of_eminence', rewards["sparks"] * bonus * xi.settings.SPARKS_RATE, xi.settings.CAP_CURRENCY_SPARKS)
-            player:messageBasic(xi.msg.basic.ROE_RECEIVE_SPARKS, rewards["sparks"] * xi.settings.SPARKS_RATE, player:getCurrency("spark_of_eminence"))
+            player:addCurrency('spark_of_eminence', rewards["sparks"] * bonus * xi.settings.main.SPARKS_RATE, xi.settings.main.CAP_CURRENCY_SPARKS)
+            player:messageBasic(xi.msg.basic.ROE_RECEIVE_SPARKS, rewards["sparks"] * xi.settings.main.SPARKS_RATE, player:getCurrency("spark_of_eminence"))
         else
             bonus = 3
-            player:addCurrency('spark_of_eminence', rewards["sparks"] * bonus * xi.settings.SPARKS_RATE, xi.settings.CAP_CURRENCY_SPARKS)
-            player:messageBasic(xi.msg.basic.ROE_FIRST_TIME_SPARKS, rewards["sparks"] * bonus * xi.settings.SPARKS_RATE, player:getCurrency("spark_of_eminence"))
+            player:addCurrency('spark_of_eminence', rewards["sparks"] * bonus * xi.settings.main.SPARKS_RATE, xi.settings.main.CAP_CURRENCY_SPARKS)
+            player:messageBasic(xi.msg.basic.ROE_FIRST_TIME_SPARKS, rewards["sparks"] * bonus * xi.settings.main.SPARKS_RATE, player:getCurrency("spark_of_eminence"))
         end
     end
 
@@ -236,7 +239,7 @@ local function completeRecord(player, record)
     end
 
     if rewards["xp"] ~= nil and type(rewards["xp"]) == "number" then
-        player:addExp(rewards["xp"] * xi.settings.ROE_EXP_RATE)
+        player:addExp(rewards["xp"] * xi.settings.main.ROE_EXP_RATE)
     end
 
     if rewards["capacity"] ~= nil and type(rewards["capacity"]) == "number" then
@@ -253,7 +256,7 @@ local function completeRecord(player, record)
             bonusAccoladeRate = bonusAccoladeRate + ((player:getUnityRank() - 1) * 0.05)
         end
         local accoladePayout = math.floor(rewards["accolades"] * bonusAccoladeRate)
-        player:addCurrency("unity_accolades", accoladePayout, xi.settings.CAP_CURRENCY_ACCOLADES)
+        player:addCurrency("unity_accolades", accoladePayout, xi.settings.main.CAP_CURRENCY_ACCOLADES)
         player:messageBasic(xi.msg.basic.ROE_RECEIVED_ACCOLADES, accoladePayout, player:getCurrency("unity_accolades"))
     end
 

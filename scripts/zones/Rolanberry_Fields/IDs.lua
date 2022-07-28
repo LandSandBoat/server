@@ -42,8 +42,11 @@ zones[xi.zone.ROLANBERRY_FIELDS] =
         VOIDWALKER_OBTAIN_KI     = 10967, -- Obtained key item: <keyitem>!
         AWAIT_YOUR_CHALLENGE     = 12184, -- We await your challenge, traveler.
         LACK_LEGION_POINTS       = 12221, -- It would seem that you lack the necessary amount of Legion points.
+        LEARNS_SPELL             = 12269, -- <name> learns <spell>!
+        UNCANNY_SENSATION        = 12271, -- You are assaulted by an uncanny sensation.
         COMMON_SENSE_SURVIVAL    = 12278, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         BLACK_TRIPLE_STARS_PH =
@@ -51,22 +54,27 @@ zones[xi.zone.ROLANBERRY_FIELDS] =
             [17227968] = 17227972, -- 4 -16 -119 (north)
             [17227988] = 17227992, -- 76 -15 -209 (south)
         },
+
         DROOLING_DAISY_PH =
         {
             [17228235] = 17228236, -- -691.786 -34.802 -335.763
         },
+
         ELDRITCH_EDGE_PH  =
         {
             [17228152] = 17228150, -- 440 -28 -44
             [17228148] = 17228150, -- 396.992 -24.01 -152.613
             [17228149] = 17228150, -- 395 -24 -147
         },
+
         SILK_CATERPILLAR  = 17227782,
         SIMURGH           = 17228242,
         CHUGLIX_BERRYPAWS = 17228249,
-        VOIDWALKER        =
+
+        VOIDWALKER =
         {
-            [xi.keyItem.CLEAR_ABYSSITE] = {
+            [xi.keyItem.CLEAR_ABYSSITE] =
+            {
                 17228261,  -- Lacus
                 17228260,  -- Thunor
                 17228259, -- Beorht
@@ -76,21 +84,27 @@ zones[xi.zone.ROLANBERRY_FIELDS] =
                 17228255, -- Deorc
                 17228254, -- Aither
             },
-            [xi.keyItem.COLORFUL_ABYSSITE] = {
+
+            [xi.keyItem.COLORFUL_ABYSSITE] =
+            {
                 17228253, -- Skuld
-                17228252  -- Urd
+                17228252, -- Urd
             },
-            [xi.keyItem.YELLOW_ABYSSITE] = {
-                17228251  -- Verthandi
+
+            [xi.keyItem.YELLOW_ABYSSITE] =
+            {
+                17228251, -- Verthandi
             },
-            [xi.keyItem.BLACK_ABYSSITE] = {
-                17228250  -- Yilbegan
+
+            [xi.keyItem.BLACK_ABYSSITE] =
+            {
+                17228250, -- Yilbegan
             }
         }
     },
+
     npc =
     {
-        CASKET_BASE = 17228319,
     },
 }
 

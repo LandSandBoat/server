@@ -20,6 +20,7 @@ zones[xi.zone.JUGNER_FOREST_S] =
         LOGIN_CAMPAIGN_UNDERWAY   = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER              = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         LOGGING_IS_POSSIBLE_HERE  = 7077, -- Logging is possible here if you have <item>.
+        YOU_FIND_NOTHING_ORDINARY = 7117, -- You find nothing out of the ordinary.
         FISHING_MESSAGE_OFFSET    = 7370, -- You can't fish here.
         ALREADY_OBTAINED_TELE     = 7706, -- You already possess the gate crystal for this telepoint.
         YOU_FIND_SPARKLING_STONE  = 7724, -- You find a sparkling stone.
@@ -28,6 +29,7 @@ zones[xi.zone.JUGNER_FOREST_S] =
         IDEAL_PLACE_TO_PLANT_ITEM = 8529, -- This seems to be an ideal place to plant <item>.
         YOU_PLANT_ITEM            = 8530, -- You plant <item>.
         ITEM_IS_PLANTED_HERE      = 8531, -- <item> has been planted here...
+        NO_RESPONSE               = 8535, -- There is no response...
         VOIDWALKER_DESPAWN        = 8558, -- The monster fades before your eyes, a look of disappointment on its face.
         VOIDWALKER_NO_MOB         = 8605, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
         VOIDWALKER_MOB_TOO_FAR    = 8606, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
@@ -39,38 +41,49 @@ zones[xi.zone.JUGNER_FOREST_S] =
         VOIDWALKER_OBTAIN_KI      = 8613, -- Obtained key item: <keyitem>!
         COMMON_SENSE_SURVIVAL     = 9508, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         DRUMSKULL_ZOGDREGG_PH =
         {
             [17113380] = 17113381, -- 195.578 -0.556 -347.699
         },
+
         FINGERFILCHER_DRADZAD = 17113462,
         COBRACLAW_BUCHZVOTCH  = 17113464,
-        VOIDWALKER  =
+
+        VOIDWALKER =
         {
-            [xi.keyItem.CLEAR_ABYSSITE] = {
+            [xi.keyItem.CLEAR_ABYSSITE] =
+            {
                 17113500, -- Sunderclaw
                 17113499, -- Sunderclaw
                 17113498, -- Sunderclaw
                 17113497, -- Sunderclaw
-                17113496,  -- Quagmire Pugil
-                17113495,  -- Quagmire Pugil
-                17113494,  -- Quagmire Pugil
-                17113493,  -- Quagmire Pugil
+                17113496, -- Quagmire Pugil
+                17113495, -- Quagmire Pugil
+                17113494, -- Quagmire Pugil
+                17113493, -- Quagmire Pugil
             },
-            [xi.keyItem.COLORFUL_ABYSSITE] = {
+
+            [xi.keyItem.COLORFUL_ABYSSITE] =
+            {
                 17113492, -- Capricornus
-                17113491  -- Yacumama
+                17113491, -- Yacumama
             },
-            [xi.keyItem.BLUE_ABYSSITE] = {
-                17113490  -- Krabkatoa
+
+            [xi.keyItem.BLUE_ABYSSITE] =
+            {
+                17113490, -- Krabkatoa
             },
-            [xi.keyItem.BLACK_ABYSSITE] = {
-                17113489  -- Yilbegan
+
+            [xi.keyItem.BLACK_ABYSSITE] =
+            {
+                17113489, -- Yilbegan
             }
         },
     },
+
     npc =
     {
         LOGGING =

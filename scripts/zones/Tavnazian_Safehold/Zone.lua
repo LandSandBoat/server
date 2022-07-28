@@ -3,7 +3,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Tavnazian_Safehold/IDs")
 require("scripts/globals/conquest")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/missions")
 -----------------------------------
 local zone_object = {}

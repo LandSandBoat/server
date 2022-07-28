@@ -41,7 +41,7 @@ zone_object.onZoneIn = function(player, prevZone)
     end
 
     -- AMK06/AMK07
-    if xi.settings.ENABLE_AMK == 1 then
+    if xi.settings.main.ENABLE_AMK == 1 then
         xi.amk.helpers.tryRandomlyPlaceDiggingLocation(player)
     end
 
@@ -65,11 +65,11 @@ zone_object.onEventFinish = function(player, csid, option)
 end
 
 zone_object.onZoneWeatherChange = function(weather)
-    local KV = GetMobByID(ID.mob.KING_VINEGARROON)
+    local kvMob = GetMobByID(ID.mob.KING_VINEGARROON)
 
-    if KV:getCurrentAction() == xi.act.DESPAWN and (weather == xi.weather.DUST_STORM or weather == xi.weather.SAND_STORM) then
-        KV:spawn()
-    elseif KV:getCurrentAction() == xi.act.ROAMING and weather ~= xi.weather.DUST_STORM and weather ~= xi.weather.SAND_STORM then
+    if kvMob:getCurrentAction() == xi.act.DESPAWN and (weather == xi.weather.DUST_STORM or weather == xi.weather.SAND_STORM) then
+        kvMob:spawn()
+    elseif kvMob:getCurrentAction() == xi.act.ROAMING and weather ~= xi.weather.DUST_STORM and weather ~= xi.weather.SAND_STORM then
         DespawnMob(ID.mob.KING_VINEGARROON)
     end
 end

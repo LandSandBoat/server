@@ -10,7 +10,6 @@ local ID = require("scripts/zones/Temenos/IDs")
 -----------------------------------
 local entity = {}
 
-
 local flags = xi.path.flag.NONE
 local path =
 {

@@ -34,6 +34,7 @@ zones[xi.zone.BATALLIA_DOWNS] =
         NO_COMBINATION           = 7717,  -- You were unable to enter a combination.
         VOIDWALKER_DESPAWN       = 7748,  -- The monster fades before your eyes, a look of disappointment on its face.
         REGIME_REGISTERED        = 9995,  -- New training regime registered!
+        SEE_WEATHERED_GRAVESTONE = 11335, -- You see a weathered gravestone.
         VOIDWALKER_NO_MOB        = 11336, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
         VOIDWALKER_MOB_TOO_FAR   = 11337, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
         VOIDWALKER_MOB_HINT      = 11338, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
@@ -42,6 +43,8 @@ zones[xi.zone.BATALLIA_DOWNS] =
         VOIDWALKER_UPGRADE_KI_2  = 11342, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
         VOIDWALKER_BREAK_KI      = 11343, -- The <keyitem> shatters into tiny fragments.
         VOIDWALKER_OBTAIN_KI     = 11344, -- Obtained key item: <keyitem>!
+        LEARNS_SPELL             = 12842, -- <name> learns <spell>!
+        UNCANNY_SENSATION        = 12844, -- You are assaulted by an uncanny sensation.
         COMMON_SENSE_SURVIVAL    = 12851, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
         RAPTOR_OVERCOME_MUNCHIES = 13004, -- The raptor has overcome the munchies! (<number>/<number>)
         RAPTOR_SECOND_WIND       = 13005, -- The raptor has gained a second wind!
@@ -53,23 +56,23 @@ zones[xi.zone.BATALLIA_DOWNS] =
         PRANKSTER_MAVERIX_PH =
         {
             [17207635] = 17207640,
-            [17207636] = 17207640,
-            [17207637] = 17207640,
-            [17207638] = 17207640,
-            [17207639] = 17207640,
         },
+
         TOTTERING_TOBY_PH =
         {
             [17207449] = 17207476, -- -194.234 -18.485 132.208
         },
+
         AHTU              = 17207657,
         STURMTIGER        = 17207696,
         SUPARNA           = 17207697,
         SUPARNA_FLEDGLING = 17207698,
         VEGNIX_GREENTHUMB = 17207710,
-        VOIDWALKER        =
+
+        VOIDWALKER =
         {
-            [xi.keyItem.CLEAR_ABYSSITE] = {
+            [xi.keyItem.CLEAR_ABYSSITE] =
+            {
                 17207722,  -- Lacus
                 17207721,  -- Thunor
                 17207720, -- Beorht
@@ -79,24 +82,27 @@ zones[xi.zone.BATALLIA_DOWNS] =
                 17207716, -- Deorc
                 17207715, -- Aither
             },
-            [xi.keyItem.COLORFUL_ABYSSITE] = {
+
+            [xi.keyItem.COLORFUL_ABYSSITE] =
+            {
                 17207714, -- Skuld
                 17207713  -- Urd
             },
-            [xi.keyItem.YELLOW_ABYSSITE] = {
+
+            [xi.keyItem.YELLOW_ABYSSITE] =
+            {
                 17207712  -- Verthandi
             },
-            [xi.keyItem.BLACK_ABYSSITE] = {
+
+            [xi.keyItem.BLACK_ABYSSITE] =
+            {
                 17207711  -- Yilbegan
             }
         }
     },
+
     npc =
     {
-        CASKET_BASE      = 17207794,
-        SYRILLIA         = 17207972,
-        BLUE_BEAM_BASE   = 17207973, -- NPC[2a4] in npc_list
-        RAPTOR_FOOD_BASE = 17207981,
     },
 }
 

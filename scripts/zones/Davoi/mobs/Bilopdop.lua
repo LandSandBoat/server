@@ -13,7 +13,7 @@ entity.onMobDeath = function(mob, player, isKiller)
     local martialArtsScroll = player:hasKeyItem(xi.ki.SAN_DORIAN_MARTIAL_ARTS_SCROLL)
 
     if (theFirstMeeting == QUEST_ACCEPTED and martialArtsScroll == false) then
-        player:addCharVar("theFirstMeetingKilledNM", 1)
+        player:incrementCharVar("theFirstMeetingKilledNM", 1)
     end
 end
 

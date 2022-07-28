@@ -44,7 +44,6 @@ entity.onTrigger = function(player, npc)
     local xPos = npc:getXPos()
     local zPos = npc:getZPos()
 
-
     for offsetValue, signPost in pairs(signPostPositions) do
         if isNpcInBounds(xPos, zPos, signPost) then
             player:messageSpecial(ID.text.SIGNPOST_OFFSET + offsetValue)

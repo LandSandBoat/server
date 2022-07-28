@@ -13,8 +13,8 @@ require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/items')
 -----------------------------------
-local PhanauetID = require('scripts/zones/Phanauet_Channel/IDs')
-local DavoiID = require('scripts/zones/Davoi/IDs')
+local phanauetID = require('scripts/zones/Phanauet_Channel/IDs')
+local davoiID = require('scripts/zones/Davoi/IDs')
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TEA_WITH_A_TONBERRY)
@@ -134,7 +134,7 @@ quest.sections =
                     if player:hasKeyItem(xi.keyItem.TONBERRY_BLACKBOARD) then
                         return quest:progressEvent(5, 1, 627, xi.items.INGOT_OF_ROYAL_TREASURY_GOLD, 63, 3, 30, 30, 0)
                     elseif quest:getVar(player, 'Prog') == 3 then
-                        return quest:messageName(PhanauetID.text.RICHE_DAVOI_WATERFALL, 0, 0, xi.items.INGOT_OF_ROYAL_TREASURY_GOLD):replaceDefault()
+                        return quest:messageName(phanauetID.text.RICHE_DAVOI_WATERFALL, 0, 0, xi.items.INGOT_OF_ROYAL_TREASURY_GOLD):replaceDefault()
                     end
                 end,
             },
@@ -156,11 +156,11 @@ quest.sections =
                     local progress = quest:getVar(player, 'Prog')
 
                     if progress == 3 then
-                        return quest:messageSpecial(DavoiID.text.WHERE_THE_TONBERRY_TOLD_YOU, 0, xi.items.INGOT_OF_ROYAL_TREASURY_GOLD)
+                        return quest:messageSpecial(davoiID.text.WHERE_THE_TONBERRY_TOLD_YOU, 0, xi.items.INGOT_OF_ROYAL_TREASURY_GOLD)
                     elseif progress == 4 then
                         return quest:event(126, 149, xi.items.INGOT_OF_ROYAL_TREASURY_GOLD)
                     elseif progress == 5 then
-                        return quest:messageSpecial(DavoiID.text.NOTHING_TO_DO)
+                        return quest:messageSpecial(davoiID.text.NOTHING_TO_DO)
                     end
                 end,
 
@@ -168,10 +168,10 @@ quest.sections =
                     if
                         quest:getVar(player, 'Prog') == 3 and
                         npcUtil.tradeHas(trade, xi.items.INGOT_OF_ROYAL_TREASURY_GOLD) and
-                        npcUtil.popFromQM(player, npc, DavoiID.mob.HEMATIC_CYST, {radius = 1, hide = 0})
+                        npcUtil.popFromQM(player, npc, davoiID.mob.HEMATIC_CYST, {radius = 1, hide = 0})
                     then
                         player:confirmTrade()
-                        return quest:messageSpecial(DavoiID.text.UNDER_ATTACK)
+                        return quest:messageSpecial(davoiID.text.UNDER_ATTACK)
                     end
                 end,
             },

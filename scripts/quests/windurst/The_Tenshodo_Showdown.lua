@@ -30,7 +30,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
                 player:getMainJob() == xi.job.THF and
-                player:getMainLvl() >= xi.settings.AF1_QUEST_LEVEL
+                player:getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL
         end,
 
         [xi.zone.WINDURST_WOODS] =
@@ -142,7 +142,7 @@ quest.sections =
             return status == QUEST_COMPLETED and
                 player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.AS_THICK_AS_THIEVES) == QUEST_AVAILABLE and
                 player:getMainJob() == xi.job.THF and
-                player:getMainLvl() < xi.settings.AF2_QUEST_LEVEL
+                player:getMainLvl() < xi.settings.main.AF2_QUEST_LEVEL
         end,
 
         [xi.zone.WINDURST_WOODS] =

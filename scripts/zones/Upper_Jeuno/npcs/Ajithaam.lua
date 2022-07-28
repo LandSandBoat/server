@@ -7,7 +7,7 @@ local ID = require("scripts/zones/Upper_Jeuno/IDs")
 require("scripts/globals/teleports")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------
@@ -57,16 +57,16 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local LureJeuno = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LURE_OF_THE_WILDCAT)
-    local WildcatJeuno = player:getCharVar("WildcatJeuno")
+    local lureJeuno = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LURE_OF_THE_WILDCAT)
+    local wildcatJeuno = player:getCharVar("WildcatJeuno")
 
-    if LureJeuno ~= 2 and xi.settings.ENABLE_TOAU == 1 then
-        if LureJeuno == 0 then
+    if lureJeuno ~= 2 and xi.settings.main.ENABLE_TOAU == 1 then
+        if lureJeuno == 0 then
             player:startEvent(10088)
         else
-            if WildcatJeuno == 0 then
+            if wildcatJeuno == 0 then
                 player:startEvent(10089)
-            elseif utils.mask.isFull(WildcatJeuno, 20) then
+            elseif utils.mask.isFull(wildcatJeuno, 20) then
                 player:startEvent(10091)
             else
                 player:startEvent(10090)

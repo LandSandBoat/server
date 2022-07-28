@@ -12,9 +12,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local SOA_Mission = player:getCurrentMission(xi.mission.log_id.SOA)
+    local soaMission = player:getCurrentMission(xi.mission.log_id.SOA)
 
-    if (SOA_Mission == xi.mission.id.soa.THE_MERCILESS_ONE) then
+    if soaMission == xi.mission.id.soa.THE_MERCILESS_ONE then
         -- Reminds player to accompany Ingrid to Castle Adoulin
         player:startEvent(139)
     else

@@ -11,12 +11,12 @@ end
 
 entity.onMobDespawn = function(mob)
     local instance = mob:getInstance()
-    local CRAB = GetMobByID(ID.mob.UNDEAD_CRAB, instance)
-    local RAND = math.random(1, 5)
+    local crabMob  = GetMobByID(ID.mob.UNDEAD_CRAB, instance)
+    local randVal  = math.random(1, 5)
 
-    if RAND == 1 and CRAB:getLocalVar("CrabSpawned") == 0 then
+    if randVal == 1 and crabMob:getLocalVar("CrabSpawned") == 0 then
         SpawnMob(ID.mob.UNDEAD_CRAB, instance)
-        CRAB:setLocalVar("CrabSpawned", 1)
+        crabMob:setLocalVar("CrabSpawned", 1)
     else
         instance:setProgress(instance:getProgress() + 1)
     end

@@ -6,7 +6,7 @@
 --  2-3 Shadows
 --  Range: Unknown
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------

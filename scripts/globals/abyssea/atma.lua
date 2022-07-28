@@ -57,7 +57,7 @@ xi.atma.atmaMods =
     [xi.ki.ATMA_OF_THE_DEEP_DEVOURER]          = {xi.mod.SUBTLE_BLOW, 5, xi.mod.STORETP, 5, xi.mod.SONG_SPELLCASTING_TIME, 20},
     [xi.ki.ATMA_OF_THE_MOUNTED_CHAMPION]       = {xi.mod.VIT, 50, xi.mod.REGEN, 20, xi.mod.ENMITY_REDUCTION_PHYSICAL, -20},
     [xi.ki.ATMA_OF_THE_RAZED_RUINS]            = {xi.mod.DEX, 50, xi.mod.CRITHITRATE, 30, xi.mod.CRIT_DMG_INCREASE, 30},
-    [xi.ki.ATMA_OF_THE_BLUDGEONING_BRUTE]      = {xi.mod.REGAIN, 10, xi.mod.THUNDER_RES, 50, xi.mod.WATER_RES, 50},
+    [xi.ki.ATMA_OF_THE_BLUDGEONING_BRUTE]      = {xi.mod.REGAIN, 10, xi.mod.THUNDER_MEVA, 50, xi.mod.WATER_MEVA, 50},
     [xi.ki.ATMA_OF_THE_RAPID_REPTILIAN]        = {xi.mod.TRIPLE_ATTACK, 5, xi.mod.DMGBREATH, -4000},
     [xi.ki.ATMA_OF_THE_WINGED_ENIGMA]          = {xi.mod.HASTE_GEAR, 100},
     [xi.ki.ATMA_OF_THE_CRADLE]                 = {xi.mod.VIT, 20, xi.mod.DEX, 20},
@@ -68,14 +68,14 @@ xi.atma.atmaMods =
     [xi.ki.ATMA_OF_THE_WOULD_BE_KING]          = {xi.mod.REGAIN, 100, xi.mod.STORETP, 20, xi.mod.TP_BONUS, 20},
     [xi.ki.ATMA_OF_THE_BLINDING_HORN]          = {xi.mod.CONSERVE_MP, 20, xi.mod.THUNDERATT, 30, xi.mod.DMGMAGIC, -2000},
     [xi.ki.ATMA_OF_THE_DEMONIC_LASH]           = {xi.mod.ATT, 40, xi.mod.DOUBLE_ATTACK, 10, xi.mod.MAGIC_ABSORB, 20},
-    [xi.ki.ATMA_OF_APPARITIONS]                = {xi.mod.EVA, 20, xi.mod.WIND_RES, 50},
-    [xi.ki.ATMA_OF_THE_SHIMMERING_SHELL]       = {xi.mod.AGI, 20, xi.mod.FIRE_RES, 50},
-    [xi.ki.ATMA_OF_THE_MURKY_MIASMA]           = {xi.mod.DARK_RES, 50, xi.mod.STUNRES, 30},
+    [xi.ki.ATMA_OF_APPARITIONS]                = {xi.mod.EVA, 20, xi.mod.WIND_MEVA, 50},
+    [xi.ki.ATMA_OF_THE_SHIMMERING_SHELL]       = {xi.mod.AGI, 20, xi.mod.FIRE_MEVA, 50},
+    [xi.ki.ATMA_OF_THE_MURKY_MIASMA]           = {xi.mod.DARK_MEVA, 50, xi.mod.STUNRES, 30},
     [xi.ki.ATMA_OF_THE_AVARICIOUS_APE]         = {xi.mod.HASTE_GEAR, 100}, -- not implemented: Monster Correlation
     [xi.ki.ATMA_OF_THE_MERCILESS_MATRIARCH]    = {xi.mod.MACC, 50, xi.mod.FASTCAST, 20, xi.mod.ENMITY, -50},
-    [xi.ki.ATMA_OF_THE_BROTHER_WOLF]           = {xi.mod.MATT, 20, xi.mod.MDEF, 20, xi.mod.FIRE_RES, 100},
-    [xi.ki.ATMA_OF_THE_EARTH_WYRM]             = {xi.mod.EARTH_RES, 100, xi.mod.DMG, -2000, xi.mod.FORCE_EARTH_DWBONUS, 1},
-    [xi.ki.ATMA_OF_THE_ASCENDING_ONE]          = {xi.mod.WIND_RES, 100, xi.mod.HASTE_GEAR, 500, xi.mod.SNAP_SHOT, 5},
+    [xi.ki.ATMA_OF_THE_BROTHER_WOLF]           = {xi.mod.MATT, 20, xi.mod.MDEF, 20, xi.mod.FIRE_MEVA, 100},
+    [xi.ki.ATMA_OF_THE_EARTH_WYRM]             = {xi.mod.EARTH_MEVA, 100, xi.mod.DMG, -2000, xi.mod.FORCE_EARTH_DWBONUS, 1},
+    [xi.ki.ATMA_OF_THE_ASCENDING_ONE]          = {xi.mod.WIND_MEVA, 100, xi.mod.HASTE_GEAR, 500, xi.mod.SNAP_SHOT, 5},
     [xi.ki.ATMA_OF_THE_SCORPION_QUEEN]         = {xi.mod.STORETP, 20, xi.mod.CRITHITRATE, 30, xi.mod.BINDRES, 50},
     [xi.ki.ATMA_OF_A_THOUSAND_NEEDLES]         = {xi.mod.HPP, 20, xi.mod.MPP, 20, xi.mod.DEX, 10},
     [xi.ki.ATMA_OF_THE_BURNING_EFFIGY]         = {xi.mod.STR, 20, xi.mod.FORCE_FIRE_DWBONUS, 1}, -- fire based ws + 0.2 fTP] = {},
@@ -86,12 +86,12 @@ xi.atma.atmaMods =
     [xi.ki.ATMA_OF_THE_RAISED_TAIL]            = {xi.mod.ATT, 40, xi.mod.EVA, 40},
     [xi.ki.ATMA_OF_THE_SAND_EMPEROR]           = {xi.mod.ACC, 40, xi.mod.EVA, 40},
     [xi.ki.ATMA_OF_THE_OMNIPOTENT]             = {xi.mod.DEX, 50, xi.mod.HASTE_GEAR, 1000, xi.mod.ENMITY, 20},
-    [xi.ki.ATMA_OF_THE_WAR_LION]               = {xi.mod.DEX, 20, xi.mod.THUNDER_RES, 100, xi.mod.FORCE_LIGHTNING_DWBONUS, 1},
-    [xi.ki.ATMA_OF_THE_FROZEN_FETTERS]         = {xi.mod.INT, 20, xi.mod.ICE_RES, 100, xi.mod.FORCE_ICE_DWBONUS, 1},
+    [xi.ki.ATMA_OF_THE_WAR_LION]               = {xi.mod.DEX, 20, xi.mod.THUNDER_MEVA, 100, xi.mod.FORCE_LIGHTNING_DWBONUS, 1},
+    [xi.ki.ATMA_OF_THE_FROZEN_FETTERS]         = {xi.mod.INT, 20, xi.mod.ICE_MEVA, 100, xi.mod.FORCE_ICE_DWBONUS, 1},
     [xi.ki.ATMA_OF_THE_PLAGUEBRINGER]          = {xi.mod.REGEN, 10, xi.mod.STORETP, 20, xi.mod.DOUBLE_ATTACK, 7},
     [xi.ki.ATMA_OF_THE_SHRIEKING_ONE]          = {xi.mod.DEF, 60, xi.mod.MDEF, 20, xi.mod.STORETP, 20},
-    [xi.ki.ATMA_OF_THE_HOLY_MOUNTAIN]          = {xi.mod.LIGHT_RES, 100, xi.mod.LIGHTACC, 50, xi.mod.FORCE_LIGHT_DWBONUS, 1},
-    [xi.ki.ATMA_OF_THE_LAKE_LURKER]            = {xi.mod.MND, 20, xi.mod.WATER_RES, 100, xi.mod.FORCE_WATER_DWBONUS, 1},
+    [xi.ki.ATMA_OF_THE_HOLY_MOUNTAIN]          = {xi.mod.LIGHT_MEVA, 100, xi.mod.LIGHTACC, 50, xi.mod.FORCE_LIGHT_DWBONUS, 1},
+    [xi.ki.ATMA_OF_THE_LAKE_LURKER]            = {xi.mod.MND, 20, xi.mod.WATER_MEVA, 100, xi.mod.FORCE_WATER_DWBONUS, 1},
     [xi.ki.ATMA_OF_THE_CRUSHING_CUDGEL]        = {xi.mod.ACC, 20, xi.mod.SKILLCHAINDMG, 500},
     [xi.ki.ATMA_OF_PURGATORY]                  = {xi.mod.VIT, 40, xi.mod.INT, 40},
     [xi.ki.ATMA_OF_BLIGHTED_BREATH]            = {xi.mod.SONG_SPELLCASTING_TIME, 40, xi.mod.LIGHTACC, 40},
@@ -104,7 +104,7 @@ xi.atma.atmaMods =
     [xi.ki.ATMA_OF_THE_SEA_DAUGHTER]           = {xi.mod.REGAIN, 50, xi.mod.HASTE_GEAR, -1500, xi.mod.REGEN, 30},
     [xi.ki.ATMA_OF_THE_HATEFUL_STREAM]         = {}, -- Not yet implemented. No easy way to do this ATMA. No way I am doing bit work in onTick for it..
     [xi.ki.ATMA_OF_THE_FOE_FLAYER]             = {xi.mod.MPP, 20, xi.mod.REFRESH, 20, xi.mod.FASTCAST, 20, xi.mod.MACC, 50},
-    [xi.ki.ATMA_OF_THE_ENDLESS_NIGHTMARE]      = {xi.mod.MND, 20, xi.mod.DARK_RES, 100, xi.mod.FORCE_DARK_DWBONUS, 1},
+    [xi.ki.ATMA_OF_THE_ENDLESS_NIGHTMARE]      = {xi.mod.MND, 20, xi.mod.DARK_MEVA, 100, xi.mod.FORCE_DARK_DWBONUS, 1},
     [xi.ki.ATMA_OF_THE_SUNDERING_SLASH]        = {xi.mod.ATT, 20, xi.mod.REGAIN, 30},
     [xi.ki.ATMA_OF_ENTWINED_SERPENTS]          = {xi.mod.ATT, 20, xi.mod.DOUBLE_ATTACK, 15},
     [xi.ki.ATMA_OF_THE_HORNED_BEAST]           = {xi.mod.ACC, 60, xi.mod.PETRIFYRES, 50},
@@ -168,31 +168,31 @@ xi.atma.atmaMods =
 -- in the future; however, we would need to check for the offset to modify parameter
 -- number in the array.  See: onTrigger function for handling in a single loop
 local function getAtmaMask(player)
-	local atmaMask = { 0, 0, 0, 0, 0, 0 }
+    local atmaMask = { 0, 0, 0, 0, 0, 0 }
 
     local atmaCount = xi.ki.ATMA_OF_THE_APOCALYPSE - xi.ki.ATMA_OF_THE_LION
-	local atmaBase = xi.ki.ATMA_OF_THE_LION - 1
-	for i = 1, atmaCount + 1 do
-		if player:hasKeyItem(atmaBase + i) then
-			local parameterNum = math.floor((i + 32) / 32)
+    local atmaBase = xi.ki.ATMA_OF_THE_LION - 1
+    for i = 1, atmaCount + 1 do
+        if player:hasKeyItem(atmaBase + i) then
+            local parameterNum = math.floor((i + 32) / 32)
             local atmaOffset = bit.lshift(1, (i - 1) % 32)
 
             atmaMask[parameterNum] = atmaMask[parameterNum] + atmaOffset
-		end
-	end
+        end
+    end
 
     atmaCount = xi.ki.ATMA_OF_THE_SAVIOR - xi.ki.ATMA_OF_THE_HEIR
-	atmaBase = xi.ki.ATMA_OF_THE_HEIR - 1
-	for i = 1, atmaCount + 1 do
-		if player:hasKeyItem(atmaBase + i) then
-			local parameterNum = math.floor((i + 32) / 32) + 4
+    atmaBase = xi.ki.ATMA_OF_THE_HEIR - 1
+    for i = 1, atmaCount + 1 do
+        if player:hasKeyItem(atmaBase + i) then
+            local parameterNum = math.floor((i + 32) / 32) + 4
             local atmaOffset = bit.lshift(1, (i - 1) % 32)
 
             atmaMask[parameterNum] = atmaMask[parameterNum] + atmaOffset
-		end
-	end
+        end
+    end
 
-	return atmaMask
+    return atmaMask
 end
 
 local function getFreeAtmaSlot(player)
@@ -220,59 +220,59 @@ local function hasDuplicateAtmaEffect(player, atmaValue)
 end
 
 local function delAtma(player, selectedAtma)
-	if player:hasStatusEffect(xi.effect.ATMA, selectedAtma) then
-		player:delStatusEffect(xi.effect.ATMA, selectedAtma)
+    if player:hasStatusEffect(xi.effect.ATMA, selectedAtma) then
+        player:delStatusEffect(xi.effect.ATMA, selectedAtma)
     end
 end
 
 local function addAtma(player, selectedAtma)
-	local atmaBase = xi.ki.ATMA_OF_THE_LION - 1
-	local atmaValue = atmaBase + selectedAtma
+    local atmaBase = xi.ki.ATMA_OF_THE_LION - 1
+    local atmaValue = atmaBase + selectedAtma
     local availableAtmaSlot = getFreeAtmaSlot(player)
 
-	if
+    if
         availableAtmaSlot > 0 and
         not hasDuplicateAtmaEffect(player, atmaValue)
     then
-		player:addStatusEffectEx(xi.effect.ATMA, xi.effect.ATMA, atmaValue, 0, 0, availableAtmaSlot)
+        player:addStatusEffectEx(xi.effect.ATMA, xi.effect.ATMA, atmaValue, 0, 0, availableAtmaSlot)
 
-		local atmaEffect = player:getStatusEffect(xi.effect.ATMA, availableAtmaSlot)
-		atmaEffect:setFlag(xi.effectFlag.ON_ZONE)
-		atmaEffect:setFlag(xi.effectFlag.INFLUENCE)
-	end
+        local atmaEffect = player:getStatusEffect(xi.effect.ATMA, availableAtmaSlot)
+        atmaEffect:setFlag(xi.effectFlag.ON_ZONE)
+        atmaEffect:setFlag(xi.effectFlag.INFLUENCE)
+    end
 end
 
 xi.atma.onEffectGain = function(target, effect)
-	local atma = effect:getPower()
-	local mods = xi.atma.atmaMods[atma]
-	if mods ~= nil then
-		for i = 1, #mods, 2 do
-			target:addMod(mods[i], mods[i + 1])
-		end
-	end
+    local atma = effect:getPower()
+    local mods = xi.atma.atmaMods[atma]
+    if mods ~= nil then
+        for i = 1, #mods, 2 do
+            target:addMod(mods[i], mods[i + 1])
+        end
+    end
 end
 
 xi.atma.onEffectTick = function(target, effect)
-	if not xi.abyssea.isInAbysseaZone(target) then
-		target:delStatusEffect(effect)
-	end
+    if not xi.abyssea.isInAbysseaZone(target) then
+        target:delStatusEffect(effect)
+    end
 end
 
 xi.atma.onEffectLose = function(target, effect)
-	local atma = effect:getPower()
-	local mods = xi.atma.atmaMods[atma]
+    local atma = effect:getPower()
+    local mods = xi.atma.atmaMods[atma]
 
-	if mods ~= nil then
-		for i = 1, #mods, 2 do
-			target:delMod(mods[i], mods[i + 1])
-		end
-	end
+    if mods ~= nil then
+        for i = 1, #mods, 2 do
+            target:delMod(mods[i], mods[i + 1])
+        end
+    end
 end
 
 xi.atma.onTrigger = function(player,npc)
     local atmaMask   = getAtmaMask(player)
     local activeAtma = { 0, 0, 0 }
-	local menuParams = 0x1000000
+    local menuParams = 0x1000000
 
     local shiftVal = 0
     for atmaSlot = 1, 3 do
@@ -280,7 +280,7 @@ xi.atma.onTrigger = function(player,npc)
             activeAtma[atmaSlot] = player:getStatusEffect(xi.effect.ATMA, atmaSlot):getPower()
 
             -- Remove active Atmas from their appropriate bitfield
-	        if activeAtma[atmaSlot] ~= 0 then
+            if activeAtma[atmaSlot] ~= 0 then
                 local groupOffset = activeAtma[atmaSlot] >= xi.ki.ATMA_OF_THE_HEIR and xi.ki.ATMA_OF_THE_HEIR or xi.ki.ATMA_OF_THE_LION
                 local parameterNum = math.floor((activeAtma[atmaSlot] - groupOffset + 1 + 32) / 32)
 
@@ -288,10 +288,10 @@ xi.atma.onTrigger = function(player,npc)
                     parameterNum = parameterNum + 4
                 end
 
-		        menuParams = menuParams + bit.lshift(activeAtma[atmaSlot] - groupOffset + 1, shiftVal * 8)
-		        atmaMask[parameterNum] = atmaMask[parameterNum] - bit.lshift(1, (activeAtma[atmaSlot] - groupOffset) % 32)
+                menuParams = menuParams + bit.lshift(activeAtma[atmaSlot] - groupOffset + 1, shiftVal * 8)
+                atmaMask[parameterNum] = atmaMask[parameterNum] - bit.lshift(1, (activeAtma[atmaSlot] - groupOffset) % 32)
                 shiftVal = shiftVal + 1
-	        end
+            end
 
             -- Set Bits for Active Atma Count (Two different bytes!)
             if atmaSlot == 1 then
@@ -302,25 +302,25 @@ xi.atma.onTrigger = function(player,npc)
         end
     end
 
-	if getFreeAtmaSlot(player) == 0 then
-		atmaMask[1] = 0
-	end
+    if getFreeAtmaSlot(player) == 0 then
+        atmaMask[1] = 0
+    end
 
-	player:startEvent(2003, 7548, menuParams, atmaMask[1], atmaMask[2], atmaMask[3], atmaMask[4], atmaMask[5], atmaMask[6])
+    player:startEvent(2003, 7548, menuParams, atmaMask[1], atmaMask[2], atmaMask[3], atmaMask[4], atmaMask[5], atmaMask[6])
 end
 
 xi.atma.onEventUpdate = function(player,csid,option)
-	player:updateEvent(0,0)
+    player:updateEvent(0,0)
 end
 
 xi.atma.onEventFinish = function(player,csid,option)
-	if option < 0x40000000 then
-		if option % 0x10000 == 1 then
-			local selection = (option - 1) / 0x10000
-			addAtma(player, selection)
-		else
-			local selection = (option - 2) / 0x10000
-			delAtma(player, selection)
-		end
-	end
+    if option < 0x40000000 then
+        if option % 0x10000 == 1 then
+            local selection = (option - 1) / 0x10000
+            addAtma(player, selection)
+        else
+            local selection = (option - 2) / 0x10000
+            delAtma(player, selection)
+        end
+    end
 end

@@ -9,7 +9,8 @@ require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 
-local clammingItems = {
+local clammingItems =
+{
     1311,  -- Oxblood
     885,   -- Turtle Shell
     1193,  -- HQ Crab Shell

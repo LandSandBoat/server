@@ -11,7 +11,7 @@ effect_object.onEffectGain = function(target, effect)
 end
 
 effect_object.onEffectTick = function(target, effect)
-	if not xi.abyssea.isInAbysseaZone(target) then
+    if not xi.abyssea.isInAbysseaZone(target) then
         target:delStatusEffect(effect)
     end
 end

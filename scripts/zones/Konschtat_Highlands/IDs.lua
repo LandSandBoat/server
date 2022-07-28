@@ -53,6 +53,8 @@ zones[xi.zone.KONSCHTAT_HIGHLANDS] =
         VOIDWALKER_UPGRADE_KI_2      = 10978, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
         VOIDWALKER_BREAK_KI          = 10979, -- The <keyitem> shatters into tiny fragments.
         VOIDWALKER_OBTAIN_KI         = 10980, -- Obtained key item: <keyitem>!
+        LEARNS_SPELL                 = 11916, -- <name> learns <spell>!
+        UNCANNY_SENSATION            = 11918, -- You are assaulted by an uncanny sensation.
         COMMON_SENSE_SURVIVAL        = 11925, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
@@ -62,12 +64,14 @@ zones[xi.zone.KONSCHTAT_HIGHLANDS] =
             [17219791] = 17219795, -- -305.204 -11.695 -96.078
             [17219928] = 17219933, -- -293.900  33.393 342.710
         },
+
         RAMPAGING_RAM_PH =
         {
             [17219885] = 17219886, -- 21 40 514
             [17219987] = 17219886, -- -163.198 62.392 568.282
             [17219886] = 17219887, -- Rampaging can't spawn if Steelfleece is up
         },
+
         STEELFLEECE_PH =
         {
             [17219885] = 17219887, -- 21 40 514
@@ -75,12 +79,15 @@ zones[xi.zone.KONSCHTAT_HIGHLANDS] =
             [17219987] = 17219887, -- -163.198 62.392 568.282
             [17219887] = 17219886, -- Steelfleece can't spawn if Rampaging is up
         },
+
         FORGER         = 17219999,
         HATY           = 17220000,
         BENDIGEIT_VRAN = 17220001,
-        VOIDWALKER  =
+
+        VOIDWALKER =
         {
-            [xi.keyItem.CLEAR_ABYSSITE] = {
+            [xi.keyItem.CLEAR_ABYSSITE] =
+            {
                 17220019, -- Prickly Sheep
                 17220018, -- Prickly Sheep
                 17220017, -- Prickly Sheep
@@ -90,21 +97,27 @@ zones[xi.zone.KONSCHTAT_HIGHLANDS] =
                 17220013,  -- Void Hare
                 17220012,  -- Void Hare
             },
-            [xi.keyItem.COLORFUL_ABYSSITE] = {
+
+            [xi.keyItem.COLORFUL_ABYSSITE] =
+            {
                 17220011,  -- Chesma
                 17220010, -- Tammuz
             },
-            [xi.keyItem.GREY_ABYSSITE] = {
-                17220009  -- Dawon
+
+            [xi.keyItem.GREY_ABYSSITE] =
+            {
+                17220009, -- Dawon
             },
-            [xi.keyItem.BLACK_ABYSSITE] = {
-                17220008  -- Yilbegan
+
+            [xi.keyItem.BLACK_ABYSSITE] =
+            {
+                17220008, -- Yilbegan
             }
         }
     },
+
     npc =
     {
-        CASKET_BASE = 17220111,
     },
 }
 

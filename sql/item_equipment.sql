@@ -8278,6 +8278,7 @@ INSERT INTO `item_equipment` VALUES (18562,'yhatdhara_+1',97,0,385,199,0,0,1,0,0
 INSERT INTO `item_equipment` VALUES (18563,'ark_scythe',1,0,4194303,586,0,0,1,0,0);
 INSERT INTO `item_equipment` VALUES (18564,'devilish_scythe',99,0,128,201,0,0,1,0,0);
 INSERT INTO `item_equipment` VALUES (18565,'adflictio',99,0,128,596,0,0,1,0,0);
+INSERT INTO `item_equipment` VALUES (18566,'crepuscular_scythe',99,119,128,526,0,0,1,0,0);
 INSERT INTO `item_equipment` VALUES (18571,'daurdabla',99,0,512,100,0,0,4,0,0);
 INSERT INTO `item_equipment` VALUES (18572,'gjallarhorn',99,0,512,84,0,0,4,0,0);
 INSERT INTO `item_equipment` VALUES (18573,'pyf_harp',85,0,512,78,0,0,4,0,0);
@@ -9805,7 +9806,7 @@ INSERT INTO `item_equipment` VALUES (20666,'blizzard_brand',1,0,4194303,782,0,0,
 INSERT INTO `item_equipment` VALUES (20667,'blizzard_brand_+1',1,0,4194303,782,0,0,3,0,0);
 INSERT INTO `item_equipment` VALUES (20668,'firetongue',1,0,4194303,783,0,0,3,0,0);
 INSERT INTO `item_equipment` VALUES (20669,'firetongue_+1',1,0,4194303,783,0,0,3,0,0);
-INSERT INTO `item_equipment` VALUES (20672,'ice_brand',99,119,32848,265,0,0,3,0,0); -- TODO: capture model from retail (using Onion Sword model)
+INSERT INTO `item_equipment` VALUES (20672,'ice_brand',99,119,32848,782,0,0,3,0,0);
 INSERT INTO `item_equipment` VALUES (20674,'aern_sword',1,0,4194303,825,0,0,3,0,0);
 INSERT INTO `item_equipment` VALUES (20675,'aern_sword_ii',1,0,4194303,891,0,0,3,0,0);
 INSERT INTO `item_equipment` VALUES (20677,'colada',99,119,32848,390,0,0,3,0,0);
@@ -10186,7 +10187,7 @@ INSERT INTO `item_equipment` VALUES (21067,'nodal_wand',99,119,1048576,633,0,0,3
 INSERT INTO `item_equipment` VALUES (21068,'nodal_wand',99,119,1048576,633,0,0,3,0,0);
 INSERT INTO `item_equipment` VALUES (21069,'nodal_wand',99,119,1048576,633,0,0,3,0,0);
 INSERT INTO `item_equipment` VALUES (21070,'idris',99,119,1048576,707,0,0,3,0,0);
-INSERT INTO `item_equipment` VALUES (21071,'cath_palug_hammer',99,119,1048580,113,0,0,3,0,0);  -- TODO: capture model from retail (using bronze hammer model)
+INSERT INTO `item_equipment` VALUES (21071,'cath_palug_hammer',99,119,1048580,860,0,0,3,0,0);
 INSERT INTO `item_equipment` VALUES (21072,'gada',99,119,1589260,437,0,0,3,0,0);
 INSERT INTO `item_equipment` VALUES (21073,'izcalli',99,119,4,115,0,0,3,0,0);
 INSERT INTO `item_equipment` VALUES (21074,'kupo_rod',1,0,4194303,374,0,0,3,0,0);
@@ -10616,8 +10617,8 @@ INSERT INTO `item_equipment` VALUES (21524,'pantin_fists',99,119,131072,121,0,0,
 INSERT INTO `item_equipment` VALUES (21525,'pitre_fists',99,119,131072,121,0,0,1,0,4);
 INSERT INTO `item_equipment` VALUES (21526,'xiucoatl',99,119,131072,480,0,0,1,0,5);
 INSERT INTO `item_equipment` VALUES (21527,'sakpatas_fists',99,119,131074,508,0,0,1,0,0); -- TODO: capture model from retail (using Oberon's Sainti model)
-INSERT INTO `item_equipment` VALUES (21528,'dragon_fangs',99,119,131074,126,0,0,1,0,0); -- TODO: capture model from retail (using Cesti model)
-INSERT INTO `item_equipment` VALUES (21529,'premium_heart',99,119,131074,127,0,0,1,0,0); -- TODO: capture model from retail (using Smash Cesti model)
+INSERT INTO `item_equipment` VALUES (21528,'dragon_fangs',99,119,131074,482,0,0,1,0,0);
+INSERT INTO `item_equipment` VALUES (21529,'premium_heart',99,119,131074,481,0,0,1,0,0);
 INSERT INTO `item_equipment` VALUES (21554,'arasy_knife',99,119,474849,157,0,0,3,0,1);
 INSERT INTO `item_equipment` VALUES (21555,'arasy_knife_+1',99,119,474849,157,0,0,3,0,1);
 INSERT INTO `item_equipment` VALUES (21556,'beryllium_kris',99,119,1589256,346,0,0,3,0,2);
@@ -10631,7 +10632,7 @@ INSERT INTO `item_equipment` VALUES (21563,'eletta_knife',99,119,464688,724,0,0,
 INSERT INTO `item_equipment` VALUES (21564,'kaja_knife',99,119,464688,836,0,0,3,0,0);
 INSERT INTO `item_equipment` VALUES (21565,'tauret',99,119,464688,847,0,0,3,0,0);
 INSERT INTO `item_equipment` VALUES (21566,'voluspa_knife',99,119,474849,158,0,0,3,0,0);
-INSERT INTO `item_equipment` VALUES (21570,'air_knife',99,119,262176,159,0,0,3,0,0); -- TODO: capture model from retail (using Onion Knife model)
+INSERT INTO `item_equipment` VALUES (21570,'air_knife',99,119,262176,785,0,0,3,0,0);
 INSERT INTO `item_equipment` VALUES (21573,'assassins_knife',99,119,32,157,0,0,3,0,4);
 INSERT INTO `item_equipment` VALUES (21574,'plun._knife',99,119,32,157,0,0,3,0,4);
 INSERT INTO `item_equipment` VALUES (21575,'gandring',99,119,32,814,0,0,3,0,5);
@@ -10662,7 +10663,7 @@ INSERT INTO `item_equipment` VALUES (21619,'eletta_sword',99,119,2209777,288,0,0
 INSERT INTO `item_equipment` VALUES (21620,'kaja_sword',99,119,2209777,837,0,0,3,0,0);
 INSERT INTO `item_equipment` VALUES (21621,'naegling',99,119,2209777,848,0,0,3,0,0);
 INSERT INTO `item_equipment` VALUES (21622,'voluspa_sword',99,119,2195665,275,0,0,3,0,0);
-INSERT INTO `item_equipment` VALUES (21623,'twinned_blade',1,0,4194303,265,0,0,3,0,0); -- TODO: capture model from retail (using Onion Sword model)
+INSERT INTO `item_equipment` VALUES (21623,'twinned_blade',1,0,4194303,873,0,0,3,0,0);
 INSERT INTO `item_equipment` VALUES (21625,'duelists_sword',99,119,16,278,0,0,3,0,4);
 INSERT INTO `item_equipment` VALUES (21626,'vitiation_sword',99,119,16,278,0,0,3,0,4);
 INSERT INTO `item_equipment` VALUES (21627,'crocea_mors',99,119,16,819,0,0,3,0,5);
@@ -10694,7 +10695,7 @@ INSERT INTO `item_equipment` VALUES (21671,'ajja_claymore',99,119,2097345,69,0,0
 INSERT INTO `item_equipment` VALUES (21672,'eletta_claymore',99,119,2097345,542,0,0,1,0,0);
 INSERT INTO `item_equipment` VALUES (21673,'kaja_claymore',99,119,2097345,838,0,0,1,0,0);
 INSERT INTO `item_equipment` VALUES (21674,'nandaka',99,119,2097345,849,0,0,1,0,0);
-INSERT INTO `item_equipment` VALUES (21681,'ophidian_sword',1,0,4194303,808,0,0,1,0,0); -- TODO: capture model from retail (using lament sword model)
+INSERT INTO `item_equipment` VALUES (21681,'ophidian_sword',1,0,4194303,863,0,0,1,0,0);
 INSERT INTO `item_equipment` VALUES (21682,'lament',1,0,4194303,808,0,0,1,0,0);
 INSERT INTO `item_equipment` VALUES (21683,'ragnarok',99,119,193,546,0,1,1,0,0);
 INSERT INTO `item_equipment` VALUES (21684,'caladbolg',99,119,192,573,0,1,1,0,0);
@@ -10733,7 +10734,7 @@ INSERT INTO `item_equipment` VALUES (21719,'ajja_axe',99,119,2098561,81,0,0,3,0,
 INSERT INTO `item_equipment` VALUES (21720,'eletta_axe',99,119,2098561,591,0,0,3,0,0);
 INSERT INTO `item_equipment` VALUES (21721,'kaja_axe',99,119,2098561,850,0,0,3,0,0);
 INSERT INTO `item_equipment` VALUES (21722,'dolichenus',99,119,2098561,850,0,0,3,0,0);
-INSERT INTO `item_equipment` VALUES (21725,'malefic_axe',99,119,256,76,0,0,3,0,0); -- TODO: capture model from retail (using Bronze Axe model)
+INSERT INTO `item_equipment` VALUES (21725,'malefic_axe',99,119,256,793,0,0,3,0,0);
 INSERT INTO `item_equipment` VALUES (21741,'demonic_axe',1,0,4194303,793,0,0,3,0,0);
 INSERT INTO `item_equipment` VALUES (21742,'aern_axe',1,0,4194303,827,0,0,3,0,0);
 INSERT INTO `item_equipment` VALUES (21743,'aern_axe_ii',1,0,4194303,893,0,0,3,0,0);
@@ -10756,7 +10757,7 @@ INSERT INTO `item_equipment` VALUES (21759,'autarchs_axe',1,0,4194303,95,0,0,1,0
 INSERT INTO `item_equipment` VALUES (21761,'zadha_chopper',1,0,4194303,99,0,0,1,0,0);
 INSERT INTO `item_equipment` VALUES (21762,'arasy_axe',99,119,2097281,92,0,0,1,0,1);
 INSERT INTO `item_equipment` VALUES (21763,'arasy_axe_+1',99,119,2097281,92,0,0,1,0,1);
-INSERT INTO `item_equipment` VALUES (21764,'drastic_axe',99,119,1,95,0,0,1,0,0); -- TODO: capture model from retail (using Greataxe model)
+INSERT INTO `item_equipment` VALUES (21764,'drastic_axe',99,119,1,794,0,0,1,0,0);
 INSERT INTO `item_equipment` VALUES (21765,'hepatizon_axe',99,119,2097281,93,0,0,1,0,2);
 INSERT INTO `item_equipment` VALUES (21766,'hepatizon_axe_+1',99,119,2097281,93,0,0,1,0,2);
 INSERT INTO `item_equipment` VALUES (21767,'raetic_chopper',99,119,2638473,335,0,0,1,0,3);
@@ -10778,7 +10779,7 @@ INSERT INTO `item_equipment` VALUES (21809,'liberator',99,119,128,561,0,1,1,0,0)
 INSERT INTO `item_equipment` VALUES (21810,'redemption',99,119,128,576,0,1,1,0,0);
 INSERT INTO `item_equipment` VALUES (21812,'arasy_scythe',99,119,128,194,0,0,1,0,1);
 INSERT INTO `item_equipment` VALUES (21813,'arasy_scythe_+1',99,119,128,194,0,0,1,0,1);
-INSERT INTO `item_equipment` VALUES (21814,'final_sickle',99,119,128,195,0,0,1,0,0); -- TODO: capture model from retail (using Scythe model)
+INSERT INTO `item_equipment` VALUES (21814,'final_sickle',99,119,128,795,0,0,1,0,0);
 INSERT INTO `item_equipment` VALUES (21815,'maliya_sickle',99,119,393,393,0,0,1,0,2);
 INSERT INTO `item_equipment` VALUES (21816,'maliya_sickle_+1',99,119,393,393,0,0,1,0,2);
 INSERT INTO `item_equipment` VALUES (21817,'rune_scythe',70,0,393,521,0,0,1,0,0);
@@ -10819,7 +10820,7 @@ INSERT INTO `item_equipment` VALUES (21880,'ajja_lance',99,119,10305,391,0,0,1,0
 INSERT INTO `item_equipment` VALUES (21881,'eletta_lance',99,119,10305,453,0,0,1,0,0);
 INSERT INTO `item_equipment` VALUES (21882,'kaja_lance',99,119,10305,841,0,0,1,0,0);
 INSERT INTO `item_equipment` VALUES (21883,'shining_one',99,119,10305,841,0,0,1,0,0);
-INSERT INTO `item_equipment` VALUES (21886,'iapetus',1,0,4194303,205,0,0,1,0,0); -- TODO: capture model from retail (using bronze spear model)
+INSERT INTO `item_equipment` VALUES (21886,'iapetus',1,0,4194303,890,0,0,1,0,0);
 INSERT INTO `item_equipment` VALUES (21904,'kanaria',99,119,4096,371,0,0,3,0,0);
 INSERT INTO `item_equipment` VALUES (21905,'taka',99,119,4096,605,0,0,3,0,0);
 INSERT INTO `item_equipment` VALUES (21906,'kikoku',99,119,4096,551,0,1,3,0,0);
@@ -10886,6 +10887,7 @@ INSERT INTO `item_equipment` VALUES (22037,'sifang_wand',99,119,1048576,218,0,0,
 INSERT INTO `item_equipment` VALUES (22038,'bhima',99,119,1048576,818,0,0,3,0,5);
 INSERT INTO `item_equipment` VALUES (22039,'floral_hagoita',1,0,4194303,835,0,0,3,0,0);
 INSERT INTO `item_equipment` VALUES (22040,'daybreak',99,0,1589788,532,0,0,3,0,0);
+INSERT INTO `item_equipment` VALUES (22042,'wizards_rod',99,119,1605656,845,0,0,3,0,0);
 INSERT INTO `item_equipment` VALUES (22054,'grioavolr',99,119,1589788,601,0,0,1,0,0);
 INSERT INTO `item_equipment` VALUES (22055,'oranyan',99,119,1589788,306,0,0,1,0,0);
 INSERT INTO `item_equipment` VALUES (22056,'gozuki_mezuki',99,119,4194303,361,0,0,1,0,0);
@@ -10898,7 +10900,7 @@ INSERT INTO `item_equipment` VALUES (22063,'nirvana',99,119,16384,567,0,1,1,0,0)
 INSERT INTO `item_equipment` VALUES (22064,'hvergelmir',99,119,540680,581,0,1,1,0,0);
 INSERT INTO `item_equipment` VALUES (22065,'aern_staff',1,0,4194303,829,0,0,1,0,0);
 INSERT INTO `item_equipment` VALUES (22066,'aern_staff_ii',1,0,4194303,895,0,0,1,0,0);
-INSERT INTO `item_equipment` VALUES (22068,'savage._pole',1,0,4194303,829,0,0,1,0,0);  -- TODO: capture model from retail (using Aern Staff model)
+INSERT INTO `item_equipment` VALUES (22068,'savage._pole',1,0,4194303,870,0,0,1,0,0);
 INSERT INTO `item_equipment` VALUES (22069,'hapy_staff',1,0,4194303,806,0,0,1,0,0);
 INSERT INTO `item_equipment` VALUES (22072,'lamia_staff',1,0,4194303,832,0,0,1,0,0);
 INSERT INTO `item_equipment` VALUES (22074,'arasy_staff',99,119,1590047,292,0,0,1,0,1);
@@ -10916,7 +10918,7 @@ INSERT INTO `item_equipment` VALUES (22085,'kaja_staff',99,119,1590047,846,0,0,1
 INSERT INTO `item_equipment` VALUES (22086,'xoanon',99,119,1590047,846,0,0,1,0,0);
 INSERT INTO `item_equipment` VALUES (22087,'malignance_pole',99,119,1597518,291,0,0,1,0,0); -- TODO: capture model from retail (using Onion Staff model)
 INSERT INTO `item_equipment` VALUES (22088,'voluspa_pole',99,119,1589262,298,0,0,1,0,0);
-INSERT INTO `item_equipment` VALUES (22089,'sophistry',1,0,4194303,291,0,0,1,0,0); -- TODO: capture model from retail (using Onion Staff model)
+INSERT INTO `item_equipment` VALUES (22089,'sophistry',1,0,4194303,871,0,0,1,0,0);
 INSERT INTO `item_equipment` VALUES (22091,'sorcerers_staff',99,119,8,326,0,0,1,0,4);
 INSERT INTO `item_equipment` VALUES (22092,'archmages_staff',99,119,8,326,0,0,1,0,4);
 INSERT INTO `item_equipment` VALUES (22093,'kaumodaki',99,119,8,820,0,0,1,0,5);
@@ -11045,6 +11047,7 @@ INSERT INTO `item_equipment` VALUES (22297,'aurgelmir_orb',99,0,2473971,0,0,0,8,
 INSERT INTO `item_equipment` VALUES (22298,'aurgelmir_orb_+1',99,0,2473971,0,0,0,8,0,0);
 INSERT INTO `item_equipment` VALUES (22299,'per._lucky_egg',99,0,4194303,0,0,0,8,0,0);
 INSERT INTO `item_equipment` VALUES (22300,'crepuscular_pebble',99,0,4194303,0,0,0,8,4,0);
+INSERT INTO `item_equipment` VALUES (22301,'sroda_tathlum',99,0,4194303,0,0,0,8,4,0);
 INSERT INTO `item_equipment` VALUES (23040,'pummelers_mask_+2',99,119,1,64,0,0,16,0,0);
 INSERT INTO `item_equipment` VALUES (23041,'anch._crown_+2',99,119,2,66,0,0,16,0,0);
 INSERT INTO `item_equipment` VALUES (23042,'theophany_cap_+2',99,119,4,68,0,0,16,0,0);
@@ -11539,20 +11542,41 @@ INSERT INTO `item_equipment` VALUES (23751,'heidrek_boots',99,119,2462754,252,0,
 INSERT INTO `item_equipment` VALUES (23752,'angantyr_boots',99,119,1720860,267,0,0,256,0,0);
 INSERT INTO `item_equipment` VALUES (23753,'sandogasa',1,0,4194303,0,0,0,16,0,0);
 INSERT INTO `item_equipment` VALUES (23754,'sandogasa_+1',1,0,4194303,0,0,0,16,0,0);
+INSERT INTO `item_equipment` VALUES (23755,'ikengas_hat',99,119,66560,464,0,0,16,0,0);
+INSERT INTO `item_equipment` VALUES (23756,'gletis_mask',99,119,303392,465,0,0,16,0,0);
+INSERT INTO `item_equipment` VALUES (23757,'sakpatas_helm',99,119,193,466,0,0,16,0,0);
+INSERT INTO `item_equipment` VALUES (23758,'mpacas_cap',99,119,137218,467,0,0,16,0,0);
+INSERT INTO `item_equipment` VALUES (23759,'agwus_cap',99,119,3670024,468,0,0,16,0,0);
+INSERT INTO `item_equipment` VALUES (23760,'bunzis_hat',99,119,16916,469,0,0,16,0,0);
 INSERT INTO `item_equipment` VALUES (23761,'nyame_helm',99,119,4194303,470,0,0,16,0,0);
+INSERT INTO `item_equipment` VALUES (23762,'ikengas_vest',99,119,66560,464,0,0,32,0,0);
+INSERT INTO `item_equipment` VALUES (23763,'gletis_cuirass',99,119,303392,465,0,0,32,0,0);
+INSERT INTO `item_equipment` VALUES (23764,'sakpatas_plate',99,119,193,466,0,0,32,0,0);
+INSERT INTO `item_equipment` VALUES (23765,'mpacas_doublet',99,119,137218,467,0,0,32,0,0);
+INSERT INTO `item_equipment` VALUES (23766,'agwus_robe',99,119,3670024,468,0,0,32,0,0);
+INSERT INTO `item_equipment` VALUES (23767,'bunzis_rob',99,119,16916,469,0,0,32,0,0);
 INSERT INTO `item_equipment` VALUES (23768,'nyame_mail',99,119,4194303,470,0,0,32,0,0);
+INSERT INTO `item_equipment` VALUES (23769,'ikengas_gloves',99,119,66560,464,0,0,64,0,0);
+INSERT INTO `item_equipment` VALUES (23770,'gletis_gauntlets',99,119,303392,465,0,0,64,0,0);
+INSERT INTO `item_equipment` VALUES (23771,'sakpatas_gauntlets',99,119,193,466,0,0,64,0,0);
+INSERT INTO `item_equipment` VALUES (23772,'mpacas_gloves',99,119,137218,467,0,0,64,0,0);
+INSERT INTO `item_equipment` VALUES (23773,'agwus_gages',99,119,3670024,468,0,0,64,0,0);
 INSERT INTO `item_equipment` VALUES (23775,'nyame_gauntlets',99,119,4194303,470,0,0,64,0,0);
-INSERT INTO `item_equipment` VALUES (23781,'bunzis_pants',99,119,16916,470,0,0,128,0,0);    -- TODO: capture model from retail
+INSERT INTO `item_equipment` VALUES (23776,'ikengas_trousers',99,119,66560,464,0,0,128,0,0);
+INSERT INTO `item_equipment` VALUES (23778,'sakpatas_cuisses',99,119,193,466,0,0,128,0,0);
+INSERT INTO `item_equipment` VALUES (23779,'mpacas_hose',99,119,137218,467,0,0,128,0,0);
+INSERT INTO `item_equipment` VALUES (23780,'agwus_slops',99,119,3670024,468,0,0,128,0,0);
+INSERT INTO `item_equipment` VALUES (23781,'bunzis_pants',99,119,16916,469,0,0,128,0,0);
 INSERT INTO `item_equipment` VALUES (23782,'nyame_flanchard',99,119,4194303,470,0,0,128,0,0);
-INSERT INTO `item_equipment` VALUES (23783,'ikengas_clogs',99,119,66560,470,0,0,256,0,0);   -- TODO: capture model from retail
-INSERT INTO `item_equipment` VALUES (23784,'gletis_boots',99,119,303392,470,0,0,256,0,0);   -- TODO: capture model from retail
-INSERT INTO `item_equipment` VALUES (23785,'sakpatas_leggings',99,119,193,470,0,0,256,0,0); -- TODO: capture model from retail
-INSERT INTO `item_equipment` VALUES (23786,'mpacas_boots',99,119,137218,470,0,0,256,0,0);   -- TODO: capture model from retail
-INSERT INTO `item_equipment` VALUES (23787,'agwus_pigaches',99,119,3670024,470,0,0,256,0,0); -- TODO: capture model from retail
-INSERT INTO `item_equipment` VALUES (23788,'bunzis_sabots',99,119,16916,470,0,0,256,0,0);   -- TODO: capture model from retail
+INSERT INTO `item_equipment` VALUES (23783,'ikengas_clogs',99,119,66560,467,0,0,256,0,0);
+INSERT INTO `item_equipment` VALUES (23784,'gletis_boots',99,119,303392,465,0,0,256,0,0);
+INSERT INTO `item_equipment` VALUES (23785,'sakpatas_leggings',99,119,193,466,0,0,256,0,0);
+INSERT INTO `item_equipment` VALUES (23786,'mpacas_boots',99,119,137218,467,0,0,256,0,0);
+INSERT INTO `item_equipment` VALUES (23787,'agwus_pigaches',99,119,3670024,468,0,0,256,0,0);
+INSERT INTO `item_equipment` VALUES (23788,'bunzis_sabots',99,119,16916,469,0,0,256,0,0);
 INSERT INTO `item_equipment` VALUES (23789,'nyame_sollerets',99,119,4194303,470,0,0,256,0,0);
-INSERT INTO `item_equipment` VALUES (23790,'adenium_masque',1,0,4194303,172,0,0,16,0,0);    -- TODO: capture model from retail
-INSERT INTO `item_equipment` VALUES (23791,'adenium_suit',1,0,4194303,172,0,0,32,448,0);    -- TODO: capture model from retail
+INSERT INTO `item_equipment` VALUES (23790,'adenium_masque',1,0,4194303,471,0,0,16,0,0);
+INSERT INTO `item_equipment` VALUES (23791,'adenium_suit',1,0,4194303,471,0,0,32,448,0);
 INSERT INTO `item_equipment` VALUES (23792,'ziamet_khud',1,0,4194303,172,0,0,16,0,0);
 INSERT INTO `item_equipment` VALUES (23793,'ziamet_peti',1,0,4194303,172,0,0,32,0,0);
 INSERT INTO `item_equipment` VALUES (23794,'ziamet_bazubands',1,0,4194303,172,0,0,64,0,0);
@@ -11785,7 +11809,7 @@ INSERT INTO `item_equipment` VALUES (25719,'merlinic_jubbah',99,119,1589272,415,
 INSERT INTO `item_equipment` VALUES (25720,'chironic_doublet',99,119,524820,416,0,0,32,0,0);
 INSERT INTO `item_equipment` VALUES (25721,'vedic_coat',99,119,1622044,261,0,0,32,0,0);
 INSERT INTO `item_equipment` VALUES (25722,'jubilee_shirt',1,0,4194303,583,0,0,32,0,0);
-INSERT INTO `item_equipment` VALUES (25726,'kupo_suit',1,0,4194303,307,0,0,32,0,0);
+INSERT INTO `item_equipment` VALUES (25726,'kupo_suit',1,0,4194303,307,0,0,32,128,0);
 INSERT INTO `item_equipment` VALUES (25727,'passion_jacket',99,119,2593826,134,0,0,32,0,0);
 INSERT INTO `item_equipment` VALUES (25728,'zendik_robe',99,119,1720860,213,0,0,32,0,0);
 INSERT INTO `item_equipment` VALUES (25729,'vatic_byrnie',99,119,14785,41,0,0,32,0,0);
@@ -12062,7 +12086,7 @@ INSERT INTO `item_equipment` VALUES (26035,'moonlight_nodowa',99,0,6146,0,0,0,51
 INSERT INTO `item_equipment` VALUES (26036,'moonbeam_necklace',99,0,2101315,0,0,0,512,0,0);
 INSERT INTO `item_equipment` VALUES (26037,'moonlight_necklace',99,0,2101315,0,0,0,512,0,0);
 INSERT INTO `item_equipment` VALUES (26038,'regal_necklace',99,0,65536,0,0,0,512,0,0);
-INSERT INTO `item_equipment` VALUES (26040,'yngvi_earring',99,0,4194303,0,0,0,512,0,0);
+INSERT INTO `item_equipment` VALUES (26040,'yngvi_choker',99,0,4194303,0,0,0,512,0,0);
 INSERT INTO `item_equipment` VALUES (26080,'mache_earring',99,0,4194303,0,0,0,6144,0,0);
 INSERT INTO `item_equipment` VALUES (26081,'mache_earring_+1',99,0,4194303,0,0,0,6144,0,0);
 INSERT INTO `item_equipment` VALUES (26082,'lugalbanda_earring',99,0,1589256,0,0,0,6144,0,0);
@@ -12072,6 +12096,8 @@ INSERT INTO `item_equipment` VALUES (26085,'regal_earring',99,0,1606172,0,0,0,61
 INSERT INTO `item_equipment` VALUES (26088,'malignance_earring',99,0,1589404,0,0,0,6144,0,0);
 INSERT INTO `item_equipment` VALUES (26108,'odr_earring',99,0,2462754,0,0,0,6144,0,0);
 INSERT INTO `item_equipment` VALUES (26109,'snotra_earring',99,0,16,0,0,0,6144,0,0);
+INSERT INTO `item_equipment` VALUES (26115,'balder_earring_+1',99,119,4194303,0,0,0,512,0,0);
+INSERT INTO `item_equipment` VALUES (26118,'sroda_earring',99,119,4194303,0,0,0,512,0,0);
 INSERT INTO `item_equipment` VALUES (26160,'evanescence_ring',99,0,4194303,0,0,0,24576,0,0);
 INSERT INTO `item_equipment` VALUES (26161,'shukuyu_ring',99,0,4194303,0,0,0,24576,0,0);
 INSERT INTO `item_equipment` VALUES (26162,'rahab_ring',99,0,4194303,0,0,0,24576,0,0);
@@ -12132,6 +12158,7 @@ INSERT INTO `item_equipment` VALUES (26216,'dreki_ring',99,0,8192,0,0,0,24576,0,
 INSERT INTO `item_equipment` VALUES (26217,'ligeia_ring',99,0,4194303,0,0,0,24576,0,0);
 INSERT INTO `item_equipment` VALUES (26218,'beithir_ring',99,0,441827,0,0,0,24576,0,0);
 INSERT INTO `item_equipment` VALUES (26219,'najis_loop',1,0,4194303,0,0,0,24576,0,0);
+INSERT INTO `item_equipment` VALUES (26221,'sroda_ring',99,119,4194303,0,0,0,24576,0,0);
 INSERT INTO `item_equipment` VALUES (26240,'tantalic_cape',99,0,4194303,0,0,0,32768,0,0);
 INSERT INTO `item_equipment` VALUES (26241,'scintillating_cape',99,0,16384,0,0,0,32768,0,0);
 INSERT INTO `item_equipment` VALUES (26242,'phalangite_mantle',99,0,2473971,0,0,0,32768,0,0);
@@ -12190,14 +12217,17 @@ INSERT INTO `item_equipment` VALUES (26342,'regal_belt',99,0,16384,0,0,0,1024,0,
 INSERT INTO `item_equipment` VALUES (26351,'sacro_cord',99,0,1605660,0,0,0,1024,0,0);
 INSERT INTO `item_equipment` VALUES (26356,'skrymir_cord',99,0,4194303,0,0,0,1024,0,0); -- FFXI clopedia BGWiki and JPWiki all in agreement
 INSERT INTO `item_equipment` VALUES (26357,'skrymir_cord_+1',99,0,4194303,0,0,0,1024,0,0); -- FFXI clopedia BGWiki and JPWiki all in agreement
+INSERT INTO `item_equipment` VALUES (26359,'orpheuss_sash',99,119,4194303,0,0,0,1024,0,0);
+INSERT INTO `item_equipment` VALUES (26361,'gerdr_belt+1',99,119,4194303,0,0,0,1024,0,0);
 INSERT INTO `item_equipment` VALUES (26400,'culminus',99,119,1622556,657,1,0,2,0,0);
 INSERT INTO `item_equipment` VALUES (26401,'forfend',99,119,2385,45,1,0,2,0,0);
 INSERT INTO `item_equipment` VALUES (26402,'forfend_+1',99,119,2385,45,1,0,2,0,0);
 INSERT INTO `item_equipment` VALUES (26403,'srivatsa',99,119,64,658,5,0,2,0,0);
 INSERT INTO `item_equipment` VALUES (26406,'kupo_shield',1,0,4194303,56,3,0,2,0,0);
 INSERT INTO `item_equipment` VALUES (26409,'dullahan_shield',1,0,4194303,669,3,0,2,0,0);
+INSERT INTO `item_equipment` VALUES (26410,'diamond_buckler',1,0,4194303,659,1,0,2,0,0);
 INSERT INTO `item_equipment` VALUES (26413,'voluspa_shield',99,119,193,30,3,0,2,0,0);
-INSERT INTO `item_equipment` VALUES (26414,'twinned_shield',1,0,4194303,36,2,0,2,0,0); -- TODO: capture model from retail (using Maple Shield model)
+INSERT INTO `item_equipment` VALUES (26414,'twinned_shield',1,0,4194303,672,2,0,2,0,0);
 INSERT INTO `item_equipment` VALUES (26419,'ammurapi_shield',99,119,1589788,42,1,0,2,0,0);
 INSERT INTO `item_equipment` VALUES (26420,'adapa_shield',99,119,385,29,3,0,2,0,0);
 INSERT INTO `item_equipment` VALUES (26421,'nusku_shield',99,119,66560,46,2,0,2,0,0);

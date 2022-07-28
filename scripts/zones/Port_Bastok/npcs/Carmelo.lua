@@ -16,36 +16,36 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local SirensTear = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_SIRENS_TEAR)
-    local LoveAndIce = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LOVE_AND_ICE)
-    local LoveAndIceProgress = player:getCharVar("LoveAndIceProgress")
-    local ATestOfTrueLove = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_TEST_OF_TRUE_LOVE)
-    local ATestOfTrueLoveProgress = player:getCharVar("ATestOfTrueLoveProgress")
-    local LoversInTheDusk = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LOVERS_IN_THE_DUSK)
+    local sirensTear = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_SIRENS_TEAR)
+    local loveAndIce = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LOVE_AND_ICE)
+    local loveAndIceProgress = player:getCharVar("LoveAndIceProgress")
+    local aTestOfTrueLove = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_TEST_OF_TRUE_LOVE)
+    local aTestOfTrueLoveProgress = player:getCharVar("ATestOfTrueLoveProgress")
+    local loversInTheDusk = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LOVERS_IN_THE_DUSK)
 
-    if (LoveAndIce == QUEST_AVAILABLE and SirensTear == QUEST_COMPLETED) then
+    if (loveAndIce == QUEST_AVAILABLE and sirensTear == QUEST_COMPLETED) then
         if (player:getFameLevel(xi.quest.fame_area.BASTOK) >= 5 and player:seenKeyItem(xi.ki.CARRIER_PIGEON_LETTER) == true) then
             player:startEvent(185)
         else
             player:startEvent(187)
         end
-    elseif (LoveAndIce == QUEST_ACCEPTED and LoveAndIceProgress == 1) then
+    elseif (loveAndIce == QUEST_ACCEPTED and loveAndIceProgress == 1) then
         player:startEvent(186)
-    elseif (player:getFameLevel(xi.quest.fame_area.BASTOK) >= 7 and ATestOfTrueLove == QUEST_AVAILABLE and LoveAndIce == QUEST_COMPLETED and player:needToZone() == false) then
+    elseif (player:getFameLevel(xi.quest.fame_area.BASTOK) >= 7 and aTestOfTrueLove == QUEST_AVAILABLE and loveAndIce == QUEST_COMPLETED and player:needToZone() == false) then
         player:startEvent(270)
-    elseif (ATestOfTrueLove == QUEST_ACCEPTED and ATestOfTrueLoveProgress < 3) then
+    elseif (aTestOfTrueLove == QUEST_ACCEPTED and aTestOfTrueLoveProgress < 3) then
         player:startEvent(271)
-    elseif (ATestOfTrueLove == QUEST_ACCEPTED and ATestOfTrueLoveProgress == 3) then
+    elseif (aTestOfTrueLove == QUEST_ACCEPTED and aTestOfTrueLoveProgress == 3) then
         player:startEvent(272)
-    elseif (ATestOfTrueLove == QUEST_ACCEPTED and ATestOfTrueLoveProgress == 4 and player:needToZone() == true) then
+    elseif (aTestOfTrueLove == QUEST_ACCEPTED and aTestOfTrueLoveProgress == 4 and player:needToZone() == true) then
         player:startEvent(273)
-    elseif (ATestOfTrueLove == QUEST_ACCEPTED and ATestOfTrueLoveProgress == 4 and player:needToZone() == false) then
+    elseif (aTestOfTrueLove == QUEST_ACCEPTED and aTestOfTrueLoveProgress == 4 and player:needToZone() == false) then
         player:startEvent(274)
-    elseif (LoversInTheDusk == QUEST_AVAILABLE and ATestOfTrueLove == QUEST_COMPLETED and player:needToZone() == false) then
+    elseif (loversInTheDusk == QUEST_AVAILABLE and aTestOfTrueLove == QUEST_COMPLETED and player:needToZone() == false) then
         player:startEvent(275)
-    elseif (LoversInTheDusk == QUEST_ACCEPTED) then
+    elseif (loversInTheDusk == QUEST_ACCEPTED) then
         player:startEvent(276)
-    elseif (LoversInTheDusk == QUEST_COMPLETED) then
+    elseif (loversInTheDusk == QUEST_COMPLETED) then
         player:startEvent(277)
     end
 end

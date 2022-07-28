@@ -97,6 +97,7 @@ INSERT INTO `mob_spawn_mods` VALUES (16806216,26,32,1);
 INSERT INTO `mob_spawn_mods` VALUES (16806217,26,32,1);
 INSERT INTO `mob_spawn_mods` VALUES (17207308,1,15000,1);
 INSERT INTO `mob_spawn_mods` VALUES (17207308,2,20000,1);
+INSERT INTO `mob_spawn_mods` VALUES (17207308,15,7500,1);
 INSERT INTO `mob_spawn_mods` VALUES (17235987,1,1076,1);
 INSERT INTO `mob_spawn_mods` VALUES (17235987,2,2765,1);
 INSERT INTO `mob_spawn_mods` VALUES (17203216,1,15000,1);
@@ -517,7 +518,6 @@ INSERT INTO `mob_spawn_mods` VALUES (16921022,55,300,1);
 INSERT INTO `mob_spawn_mods` VALUES (16921023,55,300,1);
 INSERT INTO `mob_spawn_mods` VALUES (16921024,55,300,1);
 INSERT INTO `mob_spawn_mods` VALUES (16921025,55,300,1);
-
 
 -- Cryptonberry Executor + Assasins
 INSERT INTO `mob_spawn_mods` VALUES (16785710,55,180,1);

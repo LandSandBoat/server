@@ -28,33 +28,40 @@ spell_object.onSpellCast = function(caster, target, spell)
     local duration = 180 * resist -- BG wiki suggests only duration gets effected by resist, not stat amount.
 
     -- Todo: loop to avoid repeatedly doing same thing for each stat
-    local STR_Loss = ((target:getStat(xi.mod.STR) / 100) * 20) -- Should be 20%
-    local DEX_Loss = ((target:getStat(xi.mod.DEX) / 100) * 20)
-    local VIT_Loss = ((target:getStat(xi.mod.VIT) / 100) * 20)
-    local AGI_Loss = ((target:getStat(xi.mod.AGI) / 100) * 20)
-    local INT_Loss = ((target:getStat(xi.mod.INT) / 100) * 20)
-    local MND_Loss = ((target:getStat(xi.mod.MND) / 100) * 20)
-    local CHR_Loss = ((target:getStat(xi.mod.CHR) / 100) * 20)
+    local strLoss = ((target:getStat(xi.mod.STR) / 100) * 20) -- Should be 20%
+    local dexLoss = ((target:getStat(xi.mod.DEX) / 100) * 20)
+    local vitLoss = ((target:getStat(xi.mod.VIT) / 100) * 20)
+    local agiLoss = ((target:getStat(xi.mod.AGI) / 100) * 20)
+    local intLoss = ((target:getStat(xi.mod.INT) / 100) * 20)
+    local mndLoss = ((target:getStat(xi.mod.MND) / 100) * 20)
+    local chrLoss = ((target:getStat(xi.mod.CHR) / 100) * 20)
+
     if (target:hasStatusEffect(xi.effect.STR_DOWN) == false) then
-        target:addStatusEffect(xi.effect.STR_DOWN, STR_Loss, 0, duration)
+        target:addStatusEffect(xi.effect.STR_DOWN, strLoss, 0, duration)
     end
+
     if (target:hasStatusEffect(xi.effect.DEX_DOWN) == false) then
-        target:addStatusEffect(xi.effect.DEX_DOWN, DEX_Loss, 0, duration)
+        target:addStatusEffect(xi.effect.DEX_DOWN, dexLoss, 0, duration)
     end
+
     if (target:hasStatusEffect(xi.effect.VIT_DOWN) == false) then
-        target:addStatusEffect(xi.effect.VIT_DOWN, VIT_Loss, 0, duration)
+        target:addStatusEffect(xi.effect.VIT_DOWN, vitLoss, 0, duration)
     end
+
     if (target:hasStatusEffect(xi.effect.AGI_DOWN) == false) then
-        target:addStatusEffect(xi.effect.AGI_DOWN, AGI_Loss, 0, duration)
+        target:addStatusEffect(xi.effect.AGI_DOWN, agiLoss, 0, duration)
     end
+
     if (target:hasStatusEffect(xi.effect.INT_DOWN) == false) then
-        target:addStatusEffect(xi.effect.INT_DOWN, INT_Loss, 0, duration)
+        target:addStatusEffect(xi.effect.INT_DOWN, intLoss, 0, duration)
     end
+
     if (target:hasStatusEffect(xi.effect.MND_DOWN) == false) then
-        target:addStatusEffect(xi.effect.MND_DOWN, MND_Loss, 0, duration)
+        target:addStatusEffect(xi.effect.MND_DOWN, mndLoss, 0, duration)
     end
+
     if (target:hasStatusEffect(xi.effect.CHR_DOWN) == false) then
-        target:addStatusEffect(xi.effect.CHR_DOWN, CHR_Loss, 0, duration)
+        target:addStatusEffect(xi.effect.CHR_DOWN, chrLoss, 0, duration)
     end
 
     -- Diverting use of doElementalNuke till spellParams is implemented for this spell

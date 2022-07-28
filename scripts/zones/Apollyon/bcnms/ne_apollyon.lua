@@ -11,10 +11,10 @@ require("scripts/globals/utils")
 local battlefield_object = {}
 
 battlefield_object.onBattlefieldInitialise = function(battlefield)
-    local F1key, F1chest = unpack(utils.uniqueRandomTable(1, 3, 2))
+    local floorOnekey, floorOnechest = unpack(utils.uniqueRandomTable(1, 3, 2))
 
-    battlefield:setLocalVar("randomF1key", F1key)     -- Set var to determine Floor 1 Key Mob.
-    battlefield:setLocalVar("randomF1chest", F1chest) -- Set var to determine Floor 1 Chest Mob.
+    battlefield:setLocalVar("randomF1key", floorOnekey)     -- Set var to determine Floor 1 Key Mob.
+    battlefield:setLocalVar("randomF1chest", floorOnechest) -- Set var to determine Floor 1 Chest Mob.
     battlefield:setLocalVar("loot", 1)
     SetServerVariable("[NE_Apollyon]Time", battlefield:getTimeLimit() / 60)
     xi.limbus.handleDoors(battlefield)

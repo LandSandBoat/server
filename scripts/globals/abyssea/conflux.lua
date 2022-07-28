@@ -190,7 +190,7 @@ xi.conflux.confluxOnTrigger = function(player, npc)
         maskOffset >= 3 and
         maskOffset <= 5
     then
-		activatedMask = utils.mask.setBit(activatedMask, 8, true)
+        activatedMask = utils.mask.setBit(activatedMask, 8, true)
     end
 
     local p2, p3, p4, p5 = unpack(packCostParameters(confluxInfo[3]))

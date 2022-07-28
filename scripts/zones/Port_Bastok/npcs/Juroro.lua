@@ -4,7 +4,7 @@
 -- Starts and Finishes Quest: Trial by Earth
 -- !pos 32 7 -41 236
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Port_Bastok/IDs")
@@ -15,25 +15,24 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
+    local trialByEarth = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH)
+    local whisperOfTremors = player:hasKeyItem(xi.ki.WHISPER_OF_TREMORS)
+    local thePuppetMaster = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PUPPET_MASTER)
+    local thePuppetMasterProgress = player:getCharVar("ThePuppetMasterProgress")
 
-    local TrialByEarth = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH)
-    local WhisperOfTremors = player:hasKeyItem(xi.ki.WHISPER_OF_TREMORS)
-    local ThePuppetMaster = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PUPPET_MASTER)
-    local ThePuppetMasterProgress = player:getCharVar("ThePuppetMasterProgress")
-
-    if (ThePuppetMaster == QUEST_ACCEPTED and ThePuppetMasterProgress == 1) then
+    if (thePuppetMaster == QUEST_ACCEPTED and thePuppetMasterProgress == 1) then
         player:startEvent(256, 0, 329, 0, 1169, 0, 0, 0, 0)
-    elseif (ThePuppetMaster == QUEST_ACCEPTED and ThePuppetMasterProgress == 2 and player:hasItem(1169) == false) then -- you've lost/tossed away the earth pendulum
+    elseif (thePuppetMaster == QUEST_ACCEPTED and thePuppetMasterProgress == 2 and player:hasItem(1169) == false) then -- you've lost/tossed away the earth pendulum
         player:startEvent(257, 0, 1169, 0, 0, 0, 0, 0, 0)
-    elseif (ThePuppetMaster == QUEST_ACCEPTED and ThePuppetMasterProgress == 3) then
+    elseif (thePuppetMaster == QUEST_ACCEPTED and thePuppetMasterProgress == 3) then
         player:startEvent(258)
-    elseif ((TrialByEarth == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.BASTOK) >= 6) or (TrialByEarth == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByEarth_date"))) then
+    elseif ((trialByEarth == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.BASTOK) >= 6) or (trialByEarth == QUEST_COMPLETED and os.time() > player:getCharVar("TrialByEarth_date"))) then
         player:startEvent(249, 0, xi.ki.TUNING_FORK_OF_EARTH) -- Start and restart quest "Trial by Earth"
-    elseif (TrialByEarth == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.TUNING_FORK_OF_EARTH) == false and WhisperOfTremors == false) then
+    elseif (trialByEarth == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.TUNING_FORK_OF_EARTH) == false and whisperOfTremors == false) then
         player:startEvent(284, 0, xi.ki.TUNING_FORK_OF_EARTH) -- Defeat against Titan : Need new Fork
-    elseif (TrialByEarth == QUEST_ACCEPTED and WhisperOfTremors == false) then
+    elseif (trialByEarth == QUEST_ACCEPTED and whisperOfTremors == false) then
         player:startEvent(250, 0, xi.ki.TUNING_FORK_OF_EARTH, 1)
-    elseif (TrialByEarth == QUEST_ACCEPTED and WhisperOfTremors) then
+    elseif (trialByEarth == QUEST_ACCEPTED and whisperOfTremors) then
         local numitem = 0
 
         if (player:hasItem(17438)) then numitem = numitem + 1; end  -- Titan's Cudgel
@@ -46,14 +45,12 @@ entity.onTrigger = function(player, npc)
     else
         player:startEvent(253) -- Standard dialog
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if (csid == 256) then
         if (player:getFreeSlotsCount() ~= 0) then
                 player:addItem(1169)
@@ -94,8 +91,8 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, item)
         else
             if (option == 5) then
-                player:addGil(xi.settings.GIL_RATE * 10000)
-                player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 10000) -- Gils
+                player:addGil(xi.settings.main.GIL_RATE * 10000)
+                player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 10000) -- Gils
             elseif (option == 6) then
                 player:addSpell(299) -- Avatar Titan Spell
                 player:messageSpecial(ID.text.TITAN_UNLOCKED, 0, 0, 1)
@@ -110,7 +107,6 @@ entity.onEventFinish = function(player, csid, option)
             player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH)
         end
     end
-
 end
 
 return entity

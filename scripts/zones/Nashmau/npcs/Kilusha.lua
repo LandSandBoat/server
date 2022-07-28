@@ -10,7 +10,6 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 -----------------------------------
-
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -66,7 +65,8 @@ entity.onEventFinish = function(player, csid, option)
     if csid == 23 then
         player:setCharVar("EinherjarIntro", 0) -- deletes CharVar set at character creation
     elseif csid == 24 and option ~= 1073741824 and option ~= 0 then
-        local kilushaItems = {
+        local kilushaItems =
+        {
             [1] = {item = xi.items.ANIMATOR_P1, cost = 15000},
             [2] = {item = xi.items.ASLAN_CAPE, cost = 15000},
             [3] = {item = xi.items.GLEEMANS_CAPE, cost = 15000},

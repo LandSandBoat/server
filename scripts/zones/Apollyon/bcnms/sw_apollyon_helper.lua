@@ -170,6 +170,10 @@ xi.apollyon_sw.handleMobDeathFloorFour = function(mob, player, isKiller, noKille
                 GetMobByID(ID.mob.APOLLYON_SW_MOB[4] + table[3]):isDead()
             then
                 GetNPCByID(ID.npc.APOLLYON_SW_CRATE[4]):setStatus(xi.status.NORMAL)
+                -- Once the elementals that correspond with the day you entered are killed, you can move
+                -- to phase 0, and that will set the scenario to a 'win' since there are no default
+                -- "kill to win" mobs
+                battlefield:setLocalVar("phaseChange", 0)
             end
         end
     end
