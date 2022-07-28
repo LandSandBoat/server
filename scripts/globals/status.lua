@@ -1233,6 +1233,10 @@ xi.mod =
     PERPETUATION_REDUCTION          = 346,
 
     -- Warrior
+    BERSERK_POTENCY                 = 948,  -- Augments "Berserk"/Enhances "Berserk" effect (Conqueror)
+    BERSERK_DURATION                = 954,  -- Berserk Duration
+    AGGRESSOR_DURATION              = 955,  -- Aggressor Duration
+    DEFENDER_DURATION               = 956,  -- Defender Duration
     ENHANCES_RESTRAINT              = 1045, -- Enhances "Restraint" effect/"Restraint" + (Increases the damage bonus of Restraint by XXX%)
     ENHANCES_BLOOD_RAGE             = 1046, -- Enhances "Blood Rage" effect/"Blood Rage" duration +
 
@@ -1651,10 +1655,6 @@ xi.mod =
     SHIELD_DEF_BONUS                = 905, -- Shield Defense Bonus
     SNEAK_DURATION                  = 946, -- Additional duration in seconds
     INVISIBLE_DURATION              = 947, -- Additional duration in seconds
-    BERSERK_EFFECT                  = 948, -- Conqueror Berserk Effect
-    BERSERK_DURATION                = 954, -- Berserk Duration
-    AGGRESSOR_DURATION              = 955, -- Aggressor Duration
-    DEFENDER_DURATION               = 956, -- Defender Duration
     CARDINAL_CHANT                  = 959,
     INDI_DURATION                   = 960,
     GEOMANCY_BONUS                  = 961, -- Used to increase potency of "Geomancy +" items (only the highest value is counted)

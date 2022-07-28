@@ -307,7 +307,7 @@ enum class Mod
     DOUBLE_ATTACK       = 288,  // Percent chance to proc
     DOUBLE_ATTACK_DMG   = 1038, // Increases "Double Attack" damage/"Double Attack" damage + (in percents, e.g. +20 = +20% damage)
     WARCRY_DURATION     = 483,  // Warcy duration bonus from gear
-    BERSERK_EFFECT      = 948,  // Conqueror Berserk Effect
+    BERSERK_POTENCY     = 948,  // Augments "Berserk"/Enhances "Berserk" effect (Conqueror)
     BERSERK_DURATION    = 954,  // Berserk Duration
     AGGRESSOR_DURATION  = 955,  // Aggressor Duration
     DEFENDER_DURATION   = 956,  // Defender Duration
