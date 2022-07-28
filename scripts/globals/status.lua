@@ -1364,6 +1364,7 @@ xi.mod =
     MAGIC_DAMAGE                    = 311, --  Magic damage added directly to the spell's base damage
 
     -- Gear set modifiers
+    NULL_BREATH_DAMAGE              = 287,  -- Occasionally annuls damage from breath attacks, in percents
     DA_DOUBLE_DMG_RATE              = 408,  -- Double attack's double damage chance %.
     TA_TRIPLE_DMG_RATE              = 409,  -- Triple attack's triple damage chance %.
     ZANSHIN_DOUBLE_DAMAGE           = 410,  -- Zanshin's double damage chance %.

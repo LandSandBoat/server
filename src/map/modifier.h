@@ -686,6 +686,7 @@ enum class Mod
     WYVERN_BREATH = 402, //
 
     // Gear set modifiers
+    NULL_BREATH_DAMAGE       = 287, // Occasionally annuls damage from breath attacks, in percents
     DA_DOUBLE_DMG_RATE       = 408, // Double attack's double damage chance %.
     TA_TRIPLE_DMG_RATE       = 409, // Triple attack's triple damage chance %.
     ZANSHIN_DOUBLE_DAMAGE    = 410, // Zanshin's double damage chance %.
@@ -899,7 +900,7 @@ enum class Mod
     // 156 to 159
     // 192 to 223
     // 239
-    // 261 to 287
+    // 261 to 286
     // 888
     // 936
     //
