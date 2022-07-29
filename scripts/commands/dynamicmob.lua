@@ -61,7 +61,7 @@ function onTrigger(player, MobName, GroupID, ZoneID, DropID)
         end
         if DropID == nil then
         error(player, "no DropID set, use 0 for no drops")
-        ... return
+            return
         end
 
 
