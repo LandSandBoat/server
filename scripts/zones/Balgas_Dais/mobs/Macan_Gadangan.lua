@@ -12,6 +12,12 @@ entity.onMobSpawn = function(mob)
     mob:setLocalVar("magicRank", 1)
     mob:setLocalVar("casts", 0)
     mob:setLocalVar("control", 0)
+
+    mob:addListener("MAGIC_INTERRUPTED", "MACAN_MAGIC_INTERRUPTED", function(mobArg, target, spell, action)
+        mob:queue(0, function(mobArg)
+            mobArg:useMobAbility(1336)
+        end)
+    end
 end
 
 local function magicRankUp(mob)
@@ -47,12 +53,6 @@ end
 
 entity.onMobFight = function(mob)
     local rank = mob:getLocalVar("magicRank")
-
-    if mob:getCurrentAction() == xi.act.MAGIC_INTERRUPT and rank ~= 5 then
-        mob:queue(0, function(mobArg)
-            mobArg:useMobAbility(1336)
-        end)
-    end
 
     if mob:hasStatusEffect(xi.effect.SILENCE) then
         mob:setLocalVar("magicRank", 5)
