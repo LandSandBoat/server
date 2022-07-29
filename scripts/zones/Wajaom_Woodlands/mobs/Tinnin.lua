@@ -53,7 +53,7 @@ entity.onMobInitialize = function(mob)
     mob:setMod(xi.mod.FASTCAST, 10)
     mob:addStatusEffect(xi.effect.REGAIN, 10, 3, 0)
     mob:addStatusEffect(xi.effect.REFRESH, 50, 3, 0)
-    mob:addMod(xi.mod.MOVE, 12) 
+    mob:addMod(xi.mod.MOVE, 12)
     mob:setMobMod(xi.mobMod.GIL_MIN, 12000)
     mob:setMobMod(xi.mobMod.GIL_MAX, 30000)
     mob:setMobMod(xi.mobMod.MUG_GIL, 8000)
@@ -70,7 +70,7 @@ entity.onMobSpawn = function(mob)
     -- Mighty Strikes
       xi.mix.jobSpecial.config(mob, {
         specials ={{id = xi.jsa.MIGHTY_STRIKES, cooldown = 120, hpp = 100},}})
-   
+
     -- Regen Head every 1.5-4 minutes 90-240
     mob:setLocalVar("headTimer", os.time() + math.random(60, 190))
 

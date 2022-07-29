@@ -16,7 +16,7 @@ local entity = {}
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.GA_CHANCE, 50)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
-end 
+end
 entity.onMobSpawn = function(mob)
     mob:addMod(xi.mod.ATT, 200)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
@@ -61,7 +61,7 @@ entity.onMobSpawn = function(mob)
     mob:addStatusEffect(xi.effect.REGAIN, 10, 3, 0)
     mob:addStatusEffect(xi.effect.REGEN, 30, 3, 0)
     mob:addStatusEffect(xi.effect.REFRESH, 50, 3, 0)
-    mob:addMod(xi.mod.MOVE, 12) 
+    mob:addMod(xi.mod.MOVE, 12)
     mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
 end
 
