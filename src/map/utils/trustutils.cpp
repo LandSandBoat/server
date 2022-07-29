@@ -415,7 +415,7 @@ namespace trustutils
         LoadTrustStatsAndSkills(PTrust);
 
         // Use Mob formulas to work out base "weapon" damage, but scale down to reasonable values.
-        auto mobStyleDamage   = static_cast<float>(mobutils::GetWeaponDamage(PTrust));
+        auto mobStyleDamage   = static_cast<float>(mobutils::GetWeaponDamage(PTrust, SLOT_MAIN));
         auto baseDamage       = mobStyleDamage * 0.5f;
         auto damageMultiplier = static_cast<float>(trustData->cmbDmgMult) / 100.0f;
         auto adjustedDamage   = baseDamage * damageMultiplier;

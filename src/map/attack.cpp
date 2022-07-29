@@ -488,6 +488,17 @@ void CAttack::ProcessDamage(bool isCritical)
     }
 
     SLOTTYPE slot = (SLOTTYPE)GetWeaponSlot();
+
+    if (m_attacker->objtype == TYPE_MOB)
+    {
+        auto* PMob    = static_cast<CBaseEntity*>(m_attacker);
+        auto* PTarget = static_cast<CBaseEntity*>(m_victim);
+        if (distance(PMob->loc.p, PTarget->loc.p) > 2)
+        {
+            slot = SLOT_RANGED;
+        }
+    }
+
     if (m_attackRound->IsH2H())
     {
         m_naturalH2hDamage = (int32)(m_attacker->GetSkill(SKILL_HAND_TO_HAND) * 0.11f) + 3;
@@ -502,7 +513,7 @@ void CAttack::ProcessDamage(bool isCritical)
     {
         m_damage = (uint32)(((m_attacker->GetSubWeaponDmg() + m_trickAttackDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * battleutils::GetDamageRatio(m_attacker, m_attacker->GetBattleTarget(), isCritical, 0, SLOT_SUB)));
     }
-    else if (slot == SLOT_AMMO)
+    else if (slot == SLOT_AMMO || slot == SLOT_RANGED)
     {
         m_damage = (uint32)((m_attacker->GetRangedWeaponDmg() + battleutils::GetFSTR(m_attacker, m_victim, slot)) * battleutils::GetDamageRatio(m_attacker, m_attacker->GetBattleTarget(), isCritical, 0, SLOT_AMMO));
     }
