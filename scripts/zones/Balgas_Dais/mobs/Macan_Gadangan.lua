@@ -14,10 +14,10 @@ entity.onMobSpawn = function(mob)
     mob:setLocalVar("control", 0)
 
     mob:addListener("MAGIC_INTERRUPTED", "MACAN_MAGIC_INTERRUPTED", function(mobArg, target, spell, action)
-        mob:queue(0, function(mobArg)
-            mobArg:useMobAbility(1336)
+        mobArg:queue(0, function(mobArg1)
+            mobArg1:useMobAbility(1336)
         end)
-    end
+    end)
 end
 
 local function magicRankUp(mob)
