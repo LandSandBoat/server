@@ -52181,6 +52181,19 @@ INSERT INTO `item_mods` VALUES (23795,1,1); -- DEF: 1
 -- Ziamet Nails
 INSERT INTO `item_mods` VALUES (23796,1,1); -- DEF: 1
 
+-- Poroggo Cass. +1
+-- Todo get exact occ_null percent from retail
+INSERT INTO `item_mods` VALUES (23804,958,20); -- STATUSRES: 20
+INSERT INTO `item_mods` VALUES (23804,416,20);   -- NULL_PHYSICAL_DAMAGE: 10 
+INSERT INTO `item_mods` VALUES (23804,467,20);   -- FIRE_NULL: 10 
+INSERT INTO `item_mods` VALUES (23804,468,20);   -- ICE_NULL: 10 
+INSERT INTO `item_mods` VALUES (23804,469,20);   -- WIND_NULL: 10 
+INSERT INTO `item_mods` VALUES (23804,470,20);   -- EARTH_NULL: 10 
+INSERT INTO `item_mods` VALUES (23804,471,20);   -- LTNG_NULL: 10 
+INSERT INTO `item_mods` VALUES (23804,472,20);   -- WATER_NULL: 10 
+INSERT INTO `item_mods` VALUES (23804,473,20);   -- LIGHT_NULL: 10 
+INSERT INTO `item_mods` VALUES (23804,474,20);   -- DARK_NULL: 10 
+
 -- Republic Platinum Medal
 INSERT INTO `item_mods` VALUES (25415,8,10);  -- STR: 10
 INSERT INTO `item_mods` VALUES (25415,23,30); -- ATT: 30

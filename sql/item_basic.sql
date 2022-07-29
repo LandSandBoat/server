@@ -19197,6 +19197,8 @@ INSERT INTO `item_basic` VALUES (23794,0,'ziamet_bazubands','ziamet_bazubands',1
 INSERT INTO `item_basic` VALUES (23795,0,'ziamet_salvars','ziamet_salvars',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23796,0,'ziamet_nails','ziamet_nails',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (23797,0,'crepuscular_helm','crepuscular_helm',1,63572,0,1,0);
+INSERT INTO `item_basic` VALUES (23803,0,'poroggo_cassock','poroggo_cassock',1,28740,0,1,0);
+INSERT INTO `item_basic` VALUES (23804,0,'poroggo_cass._+1','poroggo_cass._+1',1,28740,0,1,0);
 INSERT INTO `item_basic` VALUES (25417,0,'warriors_bead_necklace','warriors_beads',1,2084,22,0,0);
 INSERT INTO `item_basic` VALUES (25418,0,'warriors_bead_necklace_+1','war._beads_+1',1,2080,22,0,0);
 INSERT INTO `item_basic` VALUES (25419,0,'warriors_bead_necklace_+2','war._beads_+2',1,2080,22,0,0);
