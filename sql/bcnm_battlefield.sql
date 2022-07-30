@@ -360,6 +360,21 @@ INSERT INTO `bcnm_battlefield` VALUES (78,3,17367240,3); -- The Waughroon Kid
 INSERT INTO `bcnm_battlefield` VALUES (79,1,17367242,3); -- up_in_arms
 INSERT INTO `bcnm_battlefield` VALUES (79,2,17367244,3);
 INSERT INTO `bcnm_battlefield` VALUES (79,3,17367246,3);
+INSERT INTO `bcnm_battlefield` VALUES (80,1,17367248,3); -- Copycat: Osschaart
+INSERT INTO `bcnm_battlefield` VALUES (80,1,17367250,2); -- Osschart's Bat
+INSERT INTO `bcnm_battlefield` VALUES (80,1,17367251,2); -- Osschart's Wyvern
+INSERT INTO `bcnm_battlefield` VALUES (80,1,17367252,2); -- Osschart's Avatar
+INSERT INTO `bcnm_battlefield` VALUES (80,1,17367253,2); -- Osschart's Automaton
+INSERT INTO `bcnm_battlefield` VALUES (80,2,17367254,3); -- Osschaart
+INSERT INTO `bcnm_battlefield` VALUES (80,2,17367256,2); -- Osschart's Bat
+INSERT INTO `bcnm_battlefield` VALUES (80,2,17367257,2); -- Osschart's Wyvern
+INSERT INTO `bcnm_battlefield` VALUES (80,2,17367258,2); -- Osschart's Avatar
+INSERT INTO `bcnm_battlefield` VALUES (80,2,17367259,2); -- Osschart's Automaton
+INSERT INTO `bcnm_battlefield` VALUES (80,3,17367260,3); -- Osschaart
+INSERT INTO `bcnm_battlefield` VALUES (80,3,17367262,2); -- Osschart's Bat
+INSERT INTO `bcnm_battlefield` VALUES (80,3,17367263,2); -- Osschart's Wyvern
+INSERT INTO `bcnm_battlefield` VALUES (80,3,17367264,2); -- Osschart's Avatar
+INSERT INTO `bcnm_battlefield` VALUES (80,3,17367265,2); -- Osschart's Automaton
 INSERT INTO `bcnm_battlefield` VALUES (81,1,17367266,3); -- operation_desert_swarm
 INSERT INTO `bcnm_battlefield` VALUES (81,1,17367267,3);
 INSERT INTO `bcnm_battlefield` VALUES (81,1,17367268,3);

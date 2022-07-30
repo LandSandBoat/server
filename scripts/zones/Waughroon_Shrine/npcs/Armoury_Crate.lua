@@ -474,6 +474,69 @@ local loot =
         },
     },
 
+    -- KSNM Copycat
+    [80] =
+    {
+        {
+            {itemid = xi.items.CHUNK_OF_ADAMAN_ORE, droprate = 1000},
+        },
+        {
+            {itemid = xi.items.AHRIMAN_LENS, droprate = 250},
+            {itemid = xi.items.AHRIMAN_WING, droprate = 250},
+            {itemid = xi.items.POLE_GRIP,    droprate =  50},
+            {itemid = xi.items.SWORD_STRAP,  droprate =  15},
+            {itemid = xi.items.SPEAR_STRAP,  droprate = 250},
+        },
+        {
+            {itemid = xi.items.COFFINMAKER,  droprate = 250},
+            {itemid = xi.items.DESTROYERS,   droprate = 250},
+            {itemid = xi.items.EXPUNGER,     droprate = 250},
+            {itemid = xi.items.RETRIBUTOR,   droprate = 250},
+        },
+        {
+            {itemid = xi.items.ATTILAS_EARRING, droprate = 250},
+            {itemid = xi.items.DURANDAL,        droprate = 250},
+            {itemid = xi.items.HOPLITES_HARP,   droprate = 250},
+            {itemid = xi.items.SORROWFUL_HARP,  droprate = 250},
+        },
+        {
+            {itemid = xi.items.FUMA_SUNE_ATE,       droprate = 550},
+            {itemid = xi.items.CHUNK_OF_ADAMAN_ORE, droprate = 200},
+            {itemid = xi.items.ORICHALCUM_INGOT,    droprate = 250},
+        },
+        {
+            {itemid = xi.items.CORAL_FRAGMENT,          droprate = 50},
+            {itemid = xi.items.CHUNK_OF_DARKSTEEL_ORE,  droprate = 50},
+            {itemid = xi.items.DEMON_HORN,              droprate = 50},
+            {itemid = xi.items.EBONY_LOG,               droprate = 50},
+            {itemid = xi.items.CHUNK_OF_GOLD_ORE,       droprate = 50},
+            {itemid = xi.items.SPOOL_OF_GOLD_THREAD,    droprate = 50},
+            {itemid = xi.items.HI_RERAISER,             droprate = 50},
+            {itemid = xi.items.CHUNK_OF_PLATINUM_ORE,   droprate = 50},
+            {itemid = xi.items.MAHOGANY_LOG,            droprate = 50},
+            {itemid = xi.items.SPOOL_OF_MALBORO_FIBER,  droprate = 50},
+            {itemid = xi.items.CHUNK_OF_MYTHRIL_ORE,    droprate = 50},
+            {itemid = xi.items.PETRIFIED_LOG,           droprate = 50},
+            {itemid = xi.items.SQUARE_OF_RAINBOW_CLOTH, droprate = 50},
+            {itemid = xi.items.RAM_HORN,                droprate = 50},
+            {itemid = xi.items.SQUARE_OF_RAXA,          droprate = 50},
+            {itemid = xi.items.RERAISER,                droprate = 50},
+            {itemid = xi.items.VILE_ELIXIR,             droprate = 50},
+            {itemid = xi.items.VILE_ELIXIR_P1,          droprate = 50},
+            {itemid = xi.items.WYVERN_SCALES,           droprate = 50},
+            {itemid = xi.items.PHILOSOPHERS_STONE,      droprate = 50},
+        },
+        {
+            {itemid = xi.items.VIAL_OF_BLACK_BEETLE_BLOOD, droprate =  50},
+            {itemid = xi.items.SQUARE_OF_DAMASCENE_CLOTH,  droprate =  50},
+            {itemid = xi.items.DAMASCUS_INGOT,             droprate =  50},
+            {itemid = xi.items.SPOOL_OF_MALBORO_FIBER,     droprate =  50},
+            {itemid = xi.items.PHILOSOPHERS_STONE,         droprate = 300},
+            {itemid = xi.items.PHOENIX_FEATHER,            droprate = 300},
+            {itemid = xi.items.SQUARE_OF_RAXA,             droprate = 200},
+        },
+    },
+
     -- KSNM Operation Desert Swarm
     [81] =
     {
