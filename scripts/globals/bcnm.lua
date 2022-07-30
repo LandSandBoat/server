@@ -291,7 +291,7 @@ local battlefields =
         {11,   75, 1552},   -- Grove Guardians (BS30)
         {12,   76, 1553},   -- The Hills are Alive (KS99)
      -- {13,   77, 1131},   -- Royal Jelly (BS40) -- TODO: all combat mechanics, loot
-     -- {14,   78, 1177},   -- The Final Bout (BS50) -- TODO: mobskills Big Blow and Counterstance
+        {14,   78, 1177},   -- The Final Bout (BS50)
         {15,   79, 1130},   -- Up in Arms (BS60)
      -- {16,   80, 1175},   -- Copycat (KS30)
      -- {17,   81, 1178},   -- Operation Desert Swarm (KS30) -- TODO: Wild Rage gets stronger as they die. Build sleep resistance. Testing.
