@@ -123,7 +123,6 @@ zones[xi.zone.SEA_SERPENT_GROTTO] =
     },
     npc =
     {
-        CASKET_BASE     = 17498579,
         TREASURE_CHEST  = 17498625,
         TREASURE_COFFER = 17498626,
     },

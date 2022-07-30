@@ -4,13 +4,13 @@
 -- Spawns Nguruvilu
 -- !pos 311 23 -524 132
 -----------------------------------
+local ID = require('scripts/zones/Abyssea-La_Theine/IDs')
 require('scripts/globals/abyssea')
 require('scripts/globals/items')
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local ID = zones[player:getZoneID()]
     xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.NGURUVILU, { xi.items.WINTER_PUK_EGG })
 end
 

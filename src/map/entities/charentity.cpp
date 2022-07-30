@@ -70,6 +70,7 @@
 #include "../modifier.h"
 #include "../packets/char_job_extra.h"
 #include "../packets/status_effects.h"
+#include "../petskill.h"
 #include "../spell.h"
 #include "../status_effect_container.h"
 #include "../trade_container.h"
@@ -1301,7 +1302,25 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
         // #TODO: get rid of this to script, too
         if (PAbility->isPetAbility())
         {
-            if (PPet) // is a bp - don't display msg and notify pet
+            CPetEntity* PPetEntity = dynamic_cast<CPetEntity*>(PPet);
+            CPetSkill*  PPetSkill  = battleutils::GetPetSkill(PAbility->getID());
+
+            if (PPetEntity && PPetSkill) // is a real pet (not charmed) and has pet ability  - don't display msg and notify pet
+            {
+                actionList_t& actionList     = action.getNewActionList();
+                actionList.ActionTargetID    = PTarget->id;
+                actionTarget_t& actionTarget = actionList.getNewActionTarget();
+                actionTarget.animation       = 94; // assault anim
+                actionTarget.reaction        = REACTION::NONE;
+                actionTarget.speceffect      = SPECEFFECT::RECOIL;
+                actionTarget.param           = 0;
+                actionTarget.messageID       = 0;
+
+                auto PPetTarget = PTarget->targid;
+
+                PPetEntity->PAI->PetSkill(PPetTarget, PPetSkill->getID());
+            }
+            else if (PPet) // may be a bp, fallback - don't display msg and notify pet
             {
                 actionList_t& actionList     = action.getNewActionList();
                 actionList.ActionTargetID    = PTarget->id;

@@ -99,7 +99,7 @@ map_session_list_t map_session_list = {};
 
 std::thread messageThread;
 
-std::unique_ptr<SqlConnection> sql;
+std::unique_ptr<SqlConnection> sql; // lgtm [cpp/short-global-name]
 
 extern std::map<uint16, CZone*> g_PZoneList; // Global array of pointers for zones
 
@@ -245,6 +245,7 @@ int32 do_init(int32 argc, char** argv)
     ability::LoadAbilitiesList();
     battleutils::LoadWeaponSkillsList();
     battleutils::LoadMobSkillsList();
+    battleutils::LoadPetSkillsList();
     battleutils::LoadSkillChainDamageModifiers();
     petutils::LoadPetList();
     trustutils::LoadTrustList();
@@ -258,6 +259,8 @@ int32 do_init(int32 argc, char** argv)
 
     fishingutils::InitializeFishingSystem();
     instanceutils::LoadInstanceList();
+
+    luautils::PopulateIDLookups();
 
     ShowInfo("do_init: server is binding with port %u", map_port == 0 ? settings::get<uint16>("network.MAP_PORT") : map_port);
     map_fd = makeBind_udp(INADDR_ANY, map_port == 0 ? settings::get<uint16>("network.MAP_PORT") : map_port);
@@ -347,6 +350,7 @@ void do_final(int code)
     itemutils::FreeItemList();
     battleutils::FreeWeaponSkillsList();
     battleutils::FreeMobSkillList();
+    battleutils::FreePetSkillList();
 
     petutils::FreePetList();
     trustutils::FreeTrustList();
@@ -810,7 +814,7 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
             PacketList_t packetList = PChar->getPacketList();
             packets                 = 0;
 
-            while (!packetList.empty() && *buffsize + packetList.front()->getSize() < MAX_BUFFER_SIZE && packets < PacketCount)
+            while (!packetList.empty() && *buffsize + packetList.front()->getSize() < MAX_BUFFER_SIZE && static_cast<size_t>(packets) < PacketCount)
             {
                 PSmallPacket = packetList.front();
                 packetList.pop_front();

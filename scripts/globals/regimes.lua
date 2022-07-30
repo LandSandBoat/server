@@ -16,6 +16,8 @@ require("scripts/globals/utils")
 require("scripts/globals/zone")
 require("scripts/globals/msg")
 require("scripts/globals/roe")
+require("scripts/globals/npc_util")
+require("scripts/globals/extravaganza")
 -----------------------------------
 
 xi = xi or {}
@@ -471,27 +473,26 @@ local regimeInfo =
         },
         finishOptions =
         {
-            [  3] = {act = "CANCEL_REGIME",   cost =  0, discounted =  0},
-            [ 20] = {act = "REPATRIATION",    cost = 50, discounted = 10},
-            [ 36] = {act = "CIRCUMSPECTION",  cost =  5, discounted =  5},
-            [ 52] = {act = "HOMING_INSTINCT", cost = 50, discounted = 25},
-            [ 68] = {act = "RERAISE",         cost = 10, discounted =  5},
-            [ 84] = {act = "RERAISE_II",      cost = 20, discounted = 10},
-            [100] = {act = "RERAISE_III",     cost = 30, discounted = 15},
-            [116] = {act = "REGEN",           cost = 20, discounted = 10},
-            [132] = {act = "REFRESH",         cost = 20, discounted = 10},
-            [148] = {act = "PROTECT",         cost = 15, discounted =  5},
-            [164] = {act = "SHELL",           cost = 15, discounted =  5},
-            [180] = {act = "HASTE",           cost = 20, discounted = 10},
-            [196] = {act = "DRIED_MEAT",      cost = 50, discounted = 25, food = true},
-            [212] = {act = "SALTED_FISH",     cost = 50, discounted = 25, food = true},
-            [228] = {act = "HARD_COOKIE",     cost = 50, discounted = 25, food = true},
-            [244] = {act = "INSTANT_NOODLES", cost = 50, discounted = 25, food = true},
-            [260] = {act = "DRIED_AGARICUS",  cost = 50, discounted = 25, food = true},
-            [276] = {act = "INSTANT_RICE",    cost = 50, discounted = 25, food = true},
-
-            -- TODO: implement Trust: Sakura and Trust: Koru-Moru (Alter Ego Extravaganza)
-            -- CIPHER_SAKURA   = 292,
+            [  3] = {act = "CANCEL_REGIME",   cost =   0, discounted =   0},
+            [ 20] = {act = "REPATRIATION",    cost =  50, discounted =  10},
+            [ 36] = {act = "CIRCUMSPECTION",  cost =   5, discounted =   5},
+            [ 52] = {act = "HOMING_INSTINCT", cost =  50, discounted =  25},
+            [ 68] = {act = "RERAISE",         cost =  10, discounted =   5},
+            [ 84] = {act = "RERAISE_II",      cost =  20, discounted =  10},
+            [100] = {act = "RERAISE_III",     cost =  30, discounted =  15},
+            [116] = {act = "REGEN",           cost =  20, discounted =  10},
+            [132] = {act = "REFRESH",         cost =  20, discounted =  10},
+            [148] = {act = "PROTECT",         cost =  15, discounted =   5},
+            [164] = {act = "SHELL",           cost =  15, discounted =   5},
+            [180] = {act = "HASTE",           cost =  20, discounted =  10},
+            [196] = {act = "DRIED_MEAT",      cost =  50, discounted =  25, food = true},
+            [212] = {act = "SALTED_FISH",     cost =  50, discounted =  25, food = true},
+            [228] = {act = "HARD_COOKIE",     cost =  50, discounted =  25, food = true},
+            [244] = {act = "INSTANT_NOODLES", cost =  50, discounted =  25, food = true},
+            [260] = {act = "DRIED_AGARICUS",  cost =  50, discounted =  25, food = true},
+            [276] = {act = "INSTANT_RICE",    cost =  50, discounted =  25, food = true},
+            [292] = {act = "CIPHER_SAKURA",   cost = 300, discounted = 300},
+            [308] = {act = "CIPHER_KORU",     cost = 300, discounted = 300},
         },
         zone =
         {
@@ -1051,6 +1052,12 @@ xi.regime.clearRegimeVars = function(player)
 end
 
 xi.regime.bookOnTrigger = function(player, regimeType)
+    local cipher = 0 -- Trust Alter Ego Extravaganza
+    local active = xi.extravaganza.campaignActive()
+    if active == xi.extravaganza.campaign.SPRING_FALL or active == xi.extravaganza.campaign.BOTH then
+        cipher = 3
+    end
+
     local info = regimeInfo[regimeType].zone[player:getZoneID()]
      -- checks if hunt is active, if so prompts player to cancel
     if player:getCharVar("[hunt]status") >= 1 then
@@ -1072,7 +1079,7 @@ xi.regime.bookOnTrigger = function(player, regimeType)
             arg4 = 1
         end
 
-        player:startEvent(info.event, 0, arg2, 0, arg4, 0, 0, player:getCurrency("valor_point"), player:getCharVar("[regime]id"))
+        player:startEvent(info.event, 0, arg2, cipher, arg4, 0, 0, player:getCurrency("valor_point"), player:getCharVar("[regime]id"))
     else
         player:PrintToPlayer("Disabled.")
     end
@@ -1299,6 +1306,18 @@ xi.regime.bookOnEventFinish = function(player, option, regimeType)
 
             ['INSTANT_RICE'] = function()
                 player:addStatusEffectEx(xi.effect.FIELD_SUPPORT_FOOD, 251, 6, 0, 1800)
+            end,
+
+            ['CIPHER_SAKURA'] = function()
+                if not npcUtil.giveItem(player, xi.items.CIPHER_OF_SAKURAS_ALTER_EGO) then
+                    player:addCurrency("valor_point", 300) --refund player if they can't obtain
+                end
+            end,
+
+            ['CIPHER_KORU'] = function()
+                if not npcUtil.giveItem(player, xi.items.CIPHER_OF_KORU_MORUS_ALTER_EGO) then
+                    player:addCurrency("valor_point", 300) --refund player if they can't obtain
+                end
             end,
         }
 
