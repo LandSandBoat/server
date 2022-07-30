@@ -442,6 +442,38 @@ namespace petutils
         }
         return 0;
     }
+    uint16 GetJugMod(CPetEntity* PMob, uint8 lvlMin, uint8 lvlMax, Mod mod, uint16 modMin, uint16 modMax)
+    {
+        uint8  lvl        = PMob->GetMLevel();
+        uint16 statAdjust = 0;
+
+        switch (mod)
+        {
+            case Mod::DEF:
+                statAdjust = 8 + PMob->VIT() / 2;
+                break;
+            case Mod::EVA:
+                statAdjust = PMob->GetSkill(SKILL_EVASION) + PMob->AGI() / 2;
+                break;
+            case Mod::ACC:
+                statAdjust = PMob->DEX() / 2;
+                break;
+            case Mod::ATT:
+                statAdjust = 8 + PMob->STR() / 2;
+                break;
+            default:
+                break;
+        }
+
+        // linear interpolation a + t(b - a)
+        uint8 lvlRange   = lvlMax - lvlMin;
+        uint8 lvlFromMin = lvl - lvlMin;
+        float a          = (float)modMin - (float)statAdjust;
+        float b          = (float)modMax - (float)statAdjust;
+        float t          = (float)lvlFromMin / (float)lvlRange;
+
+        return (a + t * (b - a));
+    }
 
     void LoadJugStats(CPetEntity* PMob, Pet_t* petStats)
     {
@@ -449,6 +481,8 @@ namespace petutils
 
         float growth = 1.0;
         uint8 lvl    = PMob->GetMLevel();
+        uint8 lvlmax = PMob->m_maxLevel;
+        uint8 lvlmin = PMob->m_minLevel;
 
         // give hp boost every 10 levels after 25
         // special boosts at 25 and 50
@@ -506,11 +540,6 @@ namespace petutils
         PMob->health.hp = PMob->GetMaxHP();
         PMob->health.mp = PMob->GetMaxMP();
 
-        PMob->setModifier(Mod::DEF, GetJugBase(PMob, petStats->defRank));
-        PMob->setModifier(Mod::EVA, GetJugBase(PMob, petStats->evaRank));
-        PMob->setModifier(Mod::ATT, GetJugBase(PMob, petStats->attRank));
-        PMob->setModifier(Mod::ACC, GetJugBase(PMob, petStats->accRank));
-
         ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDamage(GetJugWeaponDamage(PMob));
 
         // reduce weapon delay of MNK
@@ -544,7 +573,214 @@ namespace petutils
         PMob->stats.CHR = (uint16)((fCHR + mCHR) * 0.9f);
 
         // Set jugs damageType to impact (blunt) damage. All jugs at level 75 cap do impact (blunt) damage. https://ffxiclopedia.fandom.com/wiki/Category:Familiars
+        uint32 id       = PMob->m_PetID;
         PMob->m_dmgType = DAMAGE_TYPE::IMPACT;
+
+        uint16 def = 0;
+        uint16 eva = 0;
+        uint16 acc = 0;
+        uint16 att = 0;
+
+        // Killer Effect and DEF/EVA/ACC/ATT
+        switch (id)
+        {
+            case 21: // SHEEP FAMILIAR
+                PMob->addModifier(Mod::LIZARD_KILLER, 10);
+                def = GetJugMod(PMob, lvlmin, lvlmax, Mod::DEF, 110, 161);
+                eva = GetJugMod(PMob, lvlmin, lvlmax, Mod::EVA, 73, 116);
+                acc = GetJugMod(PMob, lvlmin, lvlmax, Mod::ACC, 78, 124);
+                att = GetJugMod(PMob, lvlmin, lvlmax, Mod::ATT, 88, 146);
+                break;
+            case 22: // HARE FAMILIAR
+                PMob->addModifier(Mod::LIZARD_KILLER, 10);
+                def = GetJugMod(PMob, lvlmin, lvlmax, Mod::DEF, 110, 161);
+                eva = GetJugMod(PMob, lvlmin, lvlmax, Mod::EVA, 73, 116);
+                acc = GetJugMod(PMob, lvlmin, lvlmax, Mod::ACC, 79, 126);
+                att = GetJugMod(PMob, lvlmin, lvlmax, Mod::ATT, 87, 144);
+                break;
+            case 23: // CRAB FAMILIAR
+                PMob->addModifier(Mod::AMORPH_KILLER, 10);
+                def = GetJugMod(PMob, lvlmin, lvlmax, Mod::DEF, 122, 297);
+                eva = GetJugMod(PMob, lvlmin, lvlmax, Mod::EVA, 69, 182);
+                acc = GetJugMod(PMob, lvlmin, lvlmax, Mod::ACC, 76, 198);
+                att = GetJugMod(PMob, lvlmin, lvlmax, Mod::ATT, 86, 211);
+                break;
+            case 24: // COURIER CARRIE
+                PMob->addModifier(Mod::AMORPH_KILLER, 10);
+                def = GetJugMod(PMob, lvlmin, lvlmax, Mod::DEF, 122, 433);
+                eva = GetJugMod(PMob, lvlmin, lvlmax, Mod::EVA, 69, 283);
+                acc = GetJugMod(PMob, lvlmin, lvlmax, Mod::ACC, 76, 305);
+                att = GetJugMod(PMob, lvlmin, lvlmax, Mod::ATT, 86, 319);
+                break;
+            case 25: // HOMUNCULUS
+                PMob->addModifier(Mod::BEAST_KILLER, 10);
+                def = GetJugMod(PMob, lvlmin, lvlmax, Mod::DEF, 98, 378);
+                eva = GetJugMod(PMob, lvlmin, lvlmax, Mod::EVA, 71, 294);
+                acc = GetJugMod(PMob, lvlmin, lvlmax, Mod::ACC, 78, 314);
+                att = GetJugMod(PMob, lvlmin, lvlmax, Mod::ATT, 84, 316);
+                break;
+            case 26: // FLYTRAP FAMILIAR
+                PMob->addModifier(Mod::BEAST_KILLER, 10);
+                def = GetJugMod(PMob, lvlmin, lvlmax, Mod::DEF, 117, 185);
+                eva = GetJugMod(PMob, lvlmin, lvlmax, Mod::EVA, 88, 133);
+                acc = GetJugMod(PMob, lvlmin, lvlmax, Mod::ACC, 93, 144);
+                att = GetJugMod(PMob, lvlmin, lvlmax, Mod::ATT, 99, 148);
+                break;
+            case 27: // TIGER FAMILIAR
+                PMob->addModifier(Mod::LIZARD_KILLER, 10);
+                def = GetJugMod(PMob, lvlmin, lvlmax, Mod::DEF, 115, 181);
+                eva = GetJugMod(PMob, lvlmin, lvlmax, Mod::EVA, 88, 132);
+                acc = GetJugMod(PMob, lvlmin, lvlmax, Mod::ACC, 94, 143);
+                att = GetJugMod(PMob, lvlmin, lvlmax, Mod::ATT, 108, 162);
+                break;
+            case 28: // FLOWERPOT BILL
+                PMob->addModifier(Mod::BEAST_KILLER, 10);
+                def = GetJugMod(PMob, lvlmin, lvlmax, Mod::DEF, 118, 185);
+                eva = GetJugMod(PMob, lvlmin, lvlmax, Mod::EVA, 87, 133);
+                acc = GetJugMod(PMob, lvlmin, lvlmax, Mod::ACC, 95, 144);
+                att = GetJugMod(PMob, lvlmin, lvlmax, Mod::ATT, 101, 148);
+                break;
+            case 29: // EFT FAMILIAR
+                PMob->addModifier(Mod::VERMIN_KILLER, 10);
+                def = GetJugMod(PMob, lvlmin, lvlmax, Mod::DEF, 139, 213);
+                eva = GetJugMod(PMob, lvlmin, lvlmax, Mod::EVA, 104, 148);
+                acc = GetJugMod(PMob, lvlmin, lvlmax, Mod::ACC, 110, 158);
+                att = GetJugMod(PMob, lvlmin, lvlmax, Mod::ATT, 125, 179);
+                break;
+            case 30: // LIZARD FAMILIAR
+                PMob->addModifier(Mod::VERMIN_KILLER, 10);
+                def = GetJugMod(PMob, lvlmin, lvlmax, Mod::DEF, 138, 210);
+                eva = GetJugMod(PMob, lvlmin, lvlmax, Mod::EVA, 104, 148);
+                acc = GetJugMod(PMob, lvlmin, lvlmax, Mod::ACC, 112, 160);
+                att = GetJugMod(PMob, lvlmin, lvlmax, Mod::ATT, 125, 179);
+                break;
+            case 31: // MAYFLY FAMILIAR
+                PMob->addModifier(Mod::PLANTOID_KILLER, 10);
+                def = GetJugMod(PMob, lvlmin, lvlmax, Mod::DEF, 139, 213);
+                eva = GetJugMod(PMob, lvlmin, lvlmax, Mod::EVA, 106, 150);
+                acc = GetJugMod(PMob, lvlmin, lvlmax, Mod::ACC, 110, 158);
+                att = GetJugMod(PMob, lvlmin, lvlmax, Mod::ATT, 125, 178);
+                break;
+            case 32: // FUNGUAR FAMILIAR
+                PMob->addModifier(Mod::BEAST_KILLER, 10);
+                def = GetJugMod(PMob, lvlmin, lvlmax, Mod::DEF, 136, 320);
+                eva = GetJugMod(PMob, lvlmin, lvlmax, Mod::EVA, 106, 242);
+                acc = GetJugMod(PMob, lvlmin, lvlmax, Mod::ACC, 112, 256);
+                att = GetJugMod(PMob, lvlmin, lvlmax, Mod::ATT, 131, 292);
+                break;
+            case 33: // BEETLE FAMILIAR
+                PMob->addModifier(Mod::PLANTOID_KILLER, 10);
+                def = GetJugMod(PMob, lvlmin, lvlmax, Mod::DEF, 185, 270);
+                eva = GetJugMod(PMob, lvlmin, lvlmax, Mod::EVA, 124, 156);
+                acc = GetJugMod(PMob, lvlmin, lvlmax, Mod::ACC, 135, 173);
+                att = GetJugMod(PMob, lvlmin, lvlmax, Mod::ATT, 148, 186);
+                break;
+            case 34: // ANTLION FAMILIAR
+                PMob->addModifier(Mod::PLANTOID_KILLER, 10);
+                def = GetJugMod(PMob, lvlmin, lvlmax, Mod::DEF, 182, 302);
+                eva = GetJugMod(PMob, lvlmin, lvlmax, Mod::EVA, 119, 164);
+                acc = GetJugMod(PMob, lvlmin, lvlmax, Mod::ACC, 126, 175);
+                att = GetJugMod(PMob, lvlmin, lvlmax, Mod::ATT, 143, 196);
+                break;
+            case 35: // MITE FAMILIAR
+                PMob->addModifier(Mod::PLANTOID_KILLER, 10);
+                def = GetJugMod(PMob, lvlmin, lvlmax, Mod::DEF, 170, 237);
+                eva = GetJugMod(PMob, lvlmin, lvlmax, Mod::EVA, 139, 188);
+                acc = GetJugMod(PMob, lvlmin, lvlmax, Mod::ACC, 147, 202);
+                att = GetJugMod(PMob, lvlmin, lvlmax, Mod::ATT, 201, 321);
+                break;
+            case 36: // LULLABY MELODIA
+                PMob->addModifier(Mod::LIZARD_KILLER, 10);
+                def = GetJugMod(PMob, lvlmin, lvlmax, Mod::DEF, 180, 260);
+                eva = GetJugMod(PMob, lvlmin, lvlmax, Mod::EVA, 140, 190);
+                acc = GetJugMod(PMob, lvlmin, lvlmax, Mod::ACC, 147, 202);
+                att = GetJugMod(PMob, lvlmin, lvlmax, Mod::ATT, 166, 225);
+                break;
+            case 37: // KEENEARED STEFFI
+                PMob->addModifier(Mod::LIZARD_KILLER, 10);
+                def = GetJugMod(PMob, lvlmin, lvlmax, Mod::DEF, 176, 250);
+                eva = GetJugMod(PMob, lvlmin, lvlmax, Mod::EVA, 132, 179);
+                acc = GetJugMod(PMob, lvlmin, lvlmax, Mod::ACC, 143, 193);
+                att = GetJugMod(PMob, lvlmin, lvlmax, Mod::ATT, 157, 211);
+                break;
+            case 38: // FLOWERPOT BEN
+                PMob->addModifier(Mod::BEAST_KILLER, 10);
+                def = GetJugMod(PMob, lvlmin, lvlmax, Mod::DEF, 208, 305);
+                eva = GetJugMod(PMob, lvlmin, lvlmax, Mod::EVA, 161, 232);
+                acc = GetJugMod(PMob, lvlmin, lvlmax, Mod::ACC, 175, 248);
+                att = GetJugMod(PMob, lvlmin, lvlmax, Mod::ATT, 180, 251);
+                break;
+            case 39: // SABER SIRAVARDE
+                PMob->addModifier(Mod::LIZARD_KILLER, 10);
+                def = GetJugMod(PMob, lvlmin, lvlmax, Mod::DEF, 207, 307);
+                eva = GetJugMod(PMob, lvlmin, lvlmax, Mod::EVA, 164, 231);
+                acc = GetJugMod(PMob, lvlmin, lvlmax, Mod::ACC, 174, 247);
+                att = GetJugMod(PMob, lvlmin, lvlmax, Mod::ATT, 189, 267);
+                break;
+            case 40: // COLDBLOOD COMO
+                PMob->addModifier(Mod::VERMIN_KILLER, 10);
+                def = GetJugMod(PMob, lvlmin, lvlmax, Mod::DEF, 206, 316);
+                eva = GetJugMod(PMob, lvlmin, lvlmax, Mod::EVA, 166, 242);
+                acc = GetJugMod(PMob, lvlmin, lvlmax, Mod::ACC, 176, 258);
+                att = GetJugMod(PMob, lvlmin, lvlmax, Mod::ATT, 198, 290);
+                break;
+            case 41: // SHELLBUSTER OROB
+                PMob->addModifier(Mod::PLANTOID_KILLER, 10);
+                def = GetJugMod(PMob, lvlmin, lvlmax, Mod::DEF, 209, 320);
+                eva = GetJugMod(PMob, lvlmin, lvlmax, Mod::EVA, 168, 244);
+                acc = GetJugMod(PMob, lvlmin, lvlmax, Mod::ACC, 174, 256);
+                att = GetJugMod(PMob, lvlmin, lvlmax, Mod::ATT, 196, 288);
+                break;
+            case 42: // VORACIOUS AUDREY
+                PMob->addModifier(Mod::BEAST_KILLER, 10);
+                def = GetJugMod(PMob, lvlmin, lvlmax, Mod::DEF, 208, 320);
+                eva = GetJugMod(PMob, lvlmin, lvlmax, Mod::EVA, 167, 242);
+                acc = GetJugMod(PMob, lvlmin, lvlmax, Mod::ACC, 174, 256);
+                att = GetJugMod(PMob, lvlmin, lvlmax, Mod::ATT, 195, 290);
+                break;
+            case 43: // AMBUSHER ALLIE
+                PMob->addModifier(Mod::VERMIN_KILLER, 10);
+                def = GetJugMod(PMob, lvlmin, lvlmax, Mod::DEF, 224, 350);
+                eva = GetJugMod(PMob, lvlmin, lvlmax, Mod::EVA, 175, 268);
+                acc = GetJugMod(PMob, lvlmin, lvlmax, Mod::ACC, 185, 283);
+                att = GetJugMod(PMob, lvlmin, lvlmax, Mod::ATT, 210, 317);
+                break;
+            case 44: // LIFEDRINKER LARS
+                PMob->addModifier(Mod::PLANTOID_KILLER, 10);
+                def = GetJugMod(PMob, lvlmin, lvlmax, Mod::DEF, 258, 354);
+                eva = GetJugMod(PMob, lvlmin, lvlmax, Mod::EVA, 216, 291);
+                acc = GetJugMod(PMob, lvlmin, lvlmax, Mod::ACC, 229, 309);
+                att = GetJugMod(PMob, lvlmin, lvlmax, Mod::ATT, 307, 478);
+                break;
+            case 45: // PANZER GALAHAD
+                PMob->addModifier(Mod::PLANTOID_KILLER, 10);
+                def = GetJugMod(PMob, lvlmin, lvlmax, Mod::DEF, 306, 439);
+                eva = GetJugMod(PMob, lvlmin, lvlmax, Mod::EVA, 209, 283);
+                acc = GetJugMod(PMob, lvlmin, lvlmax, Mod::ACC, 227, 307);
+                att = GetJugMod(PMob, lvlmin, lvlmax, Mod::ATT, 241, 322);
+                break;
+            case 46: // CHOPSUEY CHUCKY
+                PMob->addModifier(Mod::PLANTOID_KILLER, 10);
+                def = GetJugMod(PMob, lvlmin, lvlmax, Mod::DEF, 318, 488);
+                eva = GetJugMod(PMob, lvlmin, lvlmax, Mod::EVA, 218, 293);
+                acc = GetJugMod(PMob, lvlmin, lvlmax, Mod::ACC, 229, 309);
+                att = GetJugMod(PMob, lvlmin, lvlmax, Mod::ATT, 254, 344);
+                break;
+            case 47: // AMIGO SABOTENDER
+                PMob->addModifier(Mod::BEAST_KILLER, 10);
+                def = GetJugMod(PMob, lvlmin, lvlmax, Mod::DEF, 341, 373);
+                eva = GetJugMod(PMob, lvlmin, lvlmax, Mod::EVA, 284, 296);
+                acc = GetJugMod(PMob, lvlmin, lvlmax, Mod::ACC, 294, 308);
+                att = GetJugMod(PMob, lvlmin, lvlmax, Mod::ATT, 328, 348);
+                break;
+            default:
+                break;
+        }
+
+        PMob->setModifier(Mod::DEF, def);
+        PMob->setModifier(Mod::EVA, eva);
+        PMob->setModifier(Mod::ATT, att);
+        PMob->setModifier(Mod::ACC, acc);
     }
 
     void LoadAutomatonStats(CCharEntity* PMaster, CPetEntity* PPet, Pet_t* petStats)
