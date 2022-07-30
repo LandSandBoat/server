@@ -66,7 +66,7 @@ CMagicState::CMagicState(CBattleEntity* PEntity, uint16 targid, SpellID spellid,
                                                                         errorMsg == 1 ? MSGBASIC_CANNOT_CAST_SPELL : errorMsg));
     }
 
-    m_castTime = std::chrono::milliseconds(battleutils::CalculateSpellCastTime(m_PEntity, this));
+    m_castTime = std::chrono::milliseconds(battleutils::CalculateSpellCastTime(m_PEntity, this, static_cast<uint16>(m_PSpell->getID())));
     m_startPos = m_PEntity->loc.p;
 
     action_t action;
@@ -140,6 +140,7 @@ bool CMagicState::Update(time_point tick)
         if (m_interrupted)
         {
             m_PEntity->OnCastInterrupted(*this, action, msg);
+            m_PEntity->PAI->EventHandler.triggerListener("MAGIC_INTERRUPTED", CLuaBaseEntity(m_PEntity), CLuaBaseEntity(PTarget), CLuaSpell(m_PSpell.get()), &action);
         }
         else
         {

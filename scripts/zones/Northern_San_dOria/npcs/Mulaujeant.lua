@@ -20,9 +20,9 @@ entity.onTrigger = function(player, npc)
 
     if missionaryManVar == 2 then
         player:startEvent(698, 0, 1146) -- Start statue creation
-    elseif missionaryManVar == 3 and finishtime < os.time() then
-        player:startEvent(699) -- During statue creation
     elseif missionaryManVar == 3 and finishtime >= os.time() then
+            player:startEvent(699) -- During statue creation
+    elseif missionaryManVar == 3 and finishtime < os.time() then
         player:startEvent(700) -- End of statue creation
     elseif missionaryManVar == 4 then
         player:startEvent(701) -- During quest (after creation)

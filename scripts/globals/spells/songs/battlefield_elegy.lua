@@ -46,11 +46,17 @@ spell_object.onSpellCast = function(caster, target, spell)
             duration = duration * 2
         end
 
+        duration = duration * resm
+
         -- Ensure the reduction is capped at 50%
         power = utils.clamp(power, 0, 5000)
 
+        duration = calculateBuildDuration(target, duration, params.effect)
+
+        if duration == 0 then
+            spell:setMsg(xi.msg.basic.NONE)
         -- Try to overwrite weaker elegy
-        if target:addStatusEffect(xi.effect.ELEGY, power, 0, duration) then
+        elseif target:addStatusEffect(xi.effect.ELEGY, power, 0, duration) then
             spell:setMsg(xi.msg.basic.MAGIC_ENFEEB)
         else
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- no effect

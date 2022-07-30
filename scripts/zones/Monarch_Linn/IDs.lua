@@ -20,10 +20,17 @@ zones[xi.zone.MONARCH_LINN] =
         GLOWING_MIST              = 7134, -- A glowing mist of ever-changing proportions floats before you...
         PARTY_MEMBERS_HAVE_FALLEN = 7448, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED = 7455, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
+        KI_TORN                   = 7463, -- The <keyItem> is torn from your hands and sucked into the spatial displacement!
         CONQUEST_BASE             = 7470, -- Tallying conquest results...
     },
     mob =
     {
+        MAMMET_800 =
+        {
+            16904233,
+            16904243,
+            16904253,
+        },
     },
     npc =
     {

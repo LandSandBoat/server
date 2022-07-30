@@ -89,7 +89,7 @@ bool CAttack::IsCritical() const
  *  Sets the critical flag.                                             *
  *                                                                      *
  ************************************************************************/
-void CAttack::SetCritical(bool value)
+void CAttack::SetCritical(bool value, uint16 slot)
 {
     m_isCritical = value;
 
@@ -108,7 +108,7 @@ void CAttack::SetCritical(bool value)
             }
         }
 
-        m_damageRatio = battleutils::GetDamageRatio(m_attacker, m_victim, m_isCritical, attBonus);
+        m_damageRatio = battleutils::GetDamageRatio(m_attacker, m_victim, m_isCritical, attBonus, slot);
     }
 }
 
@@ -472,7 +472,7 @@ bool CAttack::CheckCover()
  *  Processes the damage for this swing.                                    *
  *                                                                      *
  ************************************************************************/
-void CAttack::ProcessDamage()
+void CAttack::ProcessDamage(bool isCritical)
 {
     // Sneak attack.
     if (m_attacker->GetMJob() == JOB_THF && m_isFirstSwing && m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK_ATTACK) &&
@@ -489,23 +489,34 @@ void CAttack::ProcessDamage()
     }
 
     SLOTTYPE slot = (SLOTTYPE)GetWeaponSlot();
+
+    if (m_attacker->objtype == TYPE_MOB)
+    {
+        auto* PMob    = static_cast<CBaseEntity*>(m_attacker);
+        auto* PTarget = static_cast<CBaseEntity*>(m_victim);
+        if (distance(PMob->loc.p, PTarget->loc.p) > 2)
+        {
+            slot = SLOT_RANGED;
+        }
+    }
+
     if (m_attackRound->IsH2H())
     {
         m_naturalH2hDamage = (int32)(m_attacker->GetSkill(SKILL_HAND_TO_HAND) * 0.11f) + 3;
         m_baseDamage       = m_attacker->GetMainWeaponDmg();
-        m_damage           = (uint32)(((m_baseDamage + m_naturalH2hDamage + m_trickAttackDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * m_damageRatio));
+        m_damage           = (uint32)(((m_baseDamage + m_naturalH2hDamage + m_trickAttackDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * battleutils::GetDamageRatio(m_attacker, m_attacker->GetBattleTarget(), isCritical, 0, SLOT_MAIN)));
     }
     else if (slot == SLOT_MAIN)
     {
-        m_damage = (uint32)(((m_attacker->GetMainWeaponDmg() + m_trickAttackDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * m_damageRatio));
+        m_damage = (uint32)(((m_attacker->GetMainWeaponDmg() + m_trickAttackDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * battleutils::GetDamageRatio(m_attacker, m_attacker->GetBattleTarget(), isCritical, 0, SLOT_MAIN)));
     }
     else if (slot == SLOT_SUB)
     {
-        m_damage = (uint32)(((m_attacker->GetSubWeaponDmg() + m_trickAttackDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * m_damageRatio));
+        m_damage = (uint32)(((m_attacker->GetSubWeaponDmg() + m_trickAttackDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * battleutils::GetDamageRatio(m_attacker, m_attacker->GetBattleTarget(), isCritical, 0, SLOT_SUB)));
     }
-    else if (slot == SLOT_AMMO)
+    else if (slot == SLOT_AMMO || slot == SLOT_RANGED)
     {
-        m_damage = (uint32)((m_attacker->GetRangedWeaponDmg() + battleutils::GetFSTR(m_attacker, m_victim, slot)) * m_damageRatio);
+        m_damage = (uint32)((m_attacker->GetRangedWeaponDmg() + battleutils::GetFSTR(m_attacker, m_victim, slot)) * battleutils::GetDamageRatio(m_attacker, m_attacker->GetBattleTarget(), isCritical, 0, SLOT_AMMO));
     }
 
     // Apply "Double Attack" damage and "Triple Attack" damage mods
@@ -535,6 +546,11 @@ void CAttack::ProcessDamage()
                                                          m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_ASPIR_SAMBA) || m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_HASTE_SAMBA)))
     {
         SetAttackType(PHYSICAL_ATTACK_TYPE::SAMBA);
+    }
+
+    if (m_attacker->objtype == TYPE_PET && m_attacker->GetBattleTarget() != nullptr && m_attacker->GetBattleTarget()->getMod(Mod::PET_DMG_TAKEN_PHYSICAL) != 0)
+    {
+        m_damage *= m_attacker->GetBattleTarget()->getMod(Mod::PET_DMG_TAKEN_PHYSICAL) / 100;
     }
 
     // Get damage multipliers.

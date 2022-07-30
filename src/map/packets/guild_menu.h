@@ -30,7 +30,7 @@ enum GUILDSTATUS
 {
     GUILD_OPEN    = 0,
     GUILD_CLOSE   = 1,
-    GUILD_HOLYDAY = 2
+    GUILD_HOLIDAY = 2
 };
 
 class CGuildMenuPacket : public CBasicPacket

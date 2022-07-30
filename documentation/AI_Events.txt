@@ -43,3 +43,4 @@ MAGIC_START - Entity, Spell, action
 MAGIC_USE - Entity, Target, Spell, action
 MAGIC_STATE_EXIT - Entity, Spell
 MAGIC_TAKE - Target, Entity, Spell, ?action?
+MAGIC_INTERRUPTED - Entity, Target, Spell, action

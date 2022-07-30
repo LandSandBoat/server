@@ -114,7 +114,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         player:hasKeyItem(xi.ki.CHARRED_HELM) and
-                        npcUtil.tradeHasExactly(trade, xi.items.GOLD_THREAD)
+                        npcUtil.tradeHasExactly(trade, xi.items.SPOOL_OF_GOLD_THREAD)
                     then
                         return quest:progressEvent(162)
                     end

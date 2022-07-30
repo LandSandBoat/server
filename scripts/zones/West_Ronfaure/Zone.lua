@@ -31,8 +31,18 @@ zone_object.onZoneIn = function(player, prevZone)
     return cs
 end
 
+zone_object.onZoneOut = function(player)
+    if player:hasStatusEffect(xi.effect.BATTLEFIELD) then
+        player:delStatusEffect(xi.effect.BATTLEFIELD)
+    end
+end
+
 zone_object.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
+end
+
+zone_object.onGameDay = function()
+    SetServerVariable("[DIG]ZONE100_ITEMS", 0)
 end
 
 zone_object.onRegionEnter = function(player, region)

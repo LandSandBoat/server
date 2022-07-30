@@ -549,4 +549,7 @@
         "resumable": "cpp",
         "typeindex": "cpp"
     },
+    "cSpell.ignoreWords": [
+        "PATHFLAG"
+    ],
 }

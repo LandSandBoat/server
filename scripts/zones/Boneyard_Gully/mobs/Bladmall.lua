@@ -4,12 +4,15 @@
 --  ENM: Shell We Dance?
 -----------------------------------
 local ID = require("scripts/zones/Boneyard_Gully/IDs")
+mixins = {require("scripts/mixins/families/uragnite")}
 require("scripts/globals/titles")
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.HP_STANDBACK, 1)
+    mob:setMod(xi.mod.MDEF, 50)
 end
 
 entity.onMobFight = function(mob,target)

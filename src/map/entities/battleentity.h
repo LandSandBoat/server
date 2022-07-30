@@ -160,6 +160,7 @@ enum SUBSKILLTYPE
     SUBSKILL_GUN      = 1,
     SUBSKILL_CNN      = 2,
     SUBSKILL_SHURIKEN = 3,
+    SUBSKILL_LONGB    = 9,
 
     SUBSKILL_ANIMATOR    = 10,
     SUBSKILL_ANIMATOR_II = 11,
@@ -550,13 +551,17 @@ public:
     uint16 MND();
     uint16 CHR();
     uint16 DEF();
-    uint16 ATT();
+    uint16 ATT(uint16 slot);
     uint16 ACC(uint8 attackNumber, uint8 offsetAccuracy);
     uint16 EVA();
-    uint16 RATT(uint8 skill, uint16 bonusSkill = 0);
-    uint16 RACC(uint8 skill, uint16 bonusSkill = 0);
+    uint16 RATT(uint8 skill, float distance, uint16 bonusSkill = 0);
+    uint16 GetBaseRATT(uint8 skill, uint16 bonusSkill = 0);
+    uint16 RACC(uint8 skill, float distance, uint16 bonusSkill = 0);
+    uint16 GetBaseRACC(uint8 skill, uint16 bonusSkill = 0);
 
     uint8 GetSpeed();
+
+    DAMAGE_TYPE m_dmgType;
 
     bool isDead(); // проверяем, мертва ли сущность
     bool isAlive();

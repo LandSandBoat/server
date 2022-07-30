@@ -14,7 +14,7 @@ entity.onMobDeath = function(mob, player, isKiller)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, ID.mob.KEEPER_OF_HALIDOM_PH, 10, 7200) -- 2 hours
+    xi.mob.phOnDespawn(mob, ID.mob.KEEPER_OF_HALIDOM_PH, 10, 3600) -- 1 Hour Minimum
 end
 
 return entity

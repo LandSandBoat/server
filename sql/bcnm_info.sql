@@ -209,7 +209,7 @@ INSERT INTO `bcnm_info` VALUES (643,6,'brothers','nobody',0,1800,1800,75,18,643,
 INSERT INTO `bcnm_info` VALUES (644,6,'holy_cow','nobody',0,1800,1800,75,18,644,15,0);
 INSERT INTO `bcnm_info` VALUES (672,8,'head_wind','nobody',0,1800,1800,50,6,0,5,1);
 INSERT INTO `bcnm_info` VALUES (673,8,'like_the_wind','nobody',0,900,900,75,18,673,15,0);
-INSERT INTO `bcnm_info` VALUES (674,8,'sheep_in_antlions_clothing','nobody',0,1800,1800,75,18,674,15,0);
+INSERT INTO `bcnm_info` VALUES (674,8,'sheep_in_antlions_clothing','nobody',0,900,900,75,18,674,15,0);
 INSERT INTO `bcnm_info` VALUES (675,8,'shell_we_dance','nobody',0,1800,1800,75,18,675,15,0);
 INSERT INTO `bcnm_info` VALUES (676,8,'totentanz','nobody',0,1800,1800,75,18,676,15,0);
 INSERT INTO `bcnm_info` VALUES (677,8,'tango_with_a_tracker','nobody',0,1800,1800,0,6,0,7,0);

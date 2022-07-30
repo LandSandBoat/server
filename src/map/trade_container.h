@@ -80,6 +80,8 @@ public:
 
     void Clean(); // we clean the container
 
+    uint8 m_failType;
+
 private:
     uint8 m_type;       // Container type (crystal type, store nation, etc.)
     uint8 m_craftType;  // The craft synthesis type (CRAFT_TYPE)

@@ -228,6 +228,8 @@ namespace synthutils
         bool  canHQ       = true; // We assume by default that we can HQ
 
         double chance    = 0;
+        double chanceHQ2 = 0;
+        double chanceHQ3 = 0;
         double random    = 0;
         double success   = 0;
         double synthDiff = 0;
@@ -332,25 +334,35 @@ namespace synthutils
             switch (finalhqtier)
             {
                 case 4: // 1 in 2
-                    chance = 0.5;
+                    chance    = 0.500;
+                    chanceHQ2 = 9.360;
+                    chanceHQ3 = 3.300;
                     break;
                 case 3: // 1 in 4
-                    chance = 0.25;
+                    chance    = 0.250;
+                    chanceHQ2 = 5.310;
+                    chanceHQ3 = 2.020;
                     break;
-                case 2: // 1 in 20
-                    chance = 0.05;
+                case 2: // 1 in 9
+                    chance    = 0.066;
+                    chanceHQ2 = 2.720;
+                    chanceHQ3 = 1.200;
                     break;
                 case 1: // 1 in 100
-                    chance = 0.01;
+                    chance    = 0.010;
+                    chanceHQ2 = 1.760;
+                    chanceHQ3 = 1.000;
                     break;
                 default: // No chance
-                    chance = 0;
+                    chance    = 0;
+                    chanceHQ2 = 0;
+                    chanceHQ3 = 0;
                     break;
             }
 
             if (PChar->CraftContainer->getCraftType() == 1) // if it's a desynth raise HQ chance
             {
-                chance *= 1.5;
+                chance *= 0.4 + (finalhqtier * 0.03);
             }
 
             int16 modSynthHqRate = PChar->getMod(Mod::SYNTH_HQ_RATE);
@@ -375,14 +387,14 @@ namespace synthutils
             if (random < chance) // We HQ. Proceed to selct HQ Tier
             {
                 result = SYNTHESIS_HQ;
-                random = xirand::GetRandomNumber(1, 100);
+                random = xirand::GetRandomNumber(100.);
 
-                if (random < 26) // 25% Chance after HQ to upgrade to HQ2
+                if (random < chanceHQ2) // Upgrade to HQ2
                 {
                     result = SYNTHESIS_HQ2;
-                    random = xirand::GetRandomNumber(1, 100);
+                    random = xirand::GetRandomNumber(100.);
 
-                    if (random < 26) // 25% Chance after HQ2 to upgrade to HQ3
+                    if (random < chanceHQ3) // Upgrade to HQ3
                     {
                         result = SYNTHESIS_HQ3;
                     }
@@ -392,6 +404,7 @@ namespace synthutils
 
         // Section 3: System handling. The result of the synthesis is written in the quantity field of the crystal cell.
         PChar->CraftContainer->setQuantity(0, result);
+        PChar->CraftContainer->m_failType = PChar->CraftContainer->getCraftType();
 
         switch (result)
         {
@@ -444,7 +457,7 @@ namespace synthutils
             int16 baseDiff = PChar->CraftContainer->getQuantity(skillID - 40) - charSkill / 10; // the 5 lvl difference rule for breaks does NOT consider the effects of image support/gear
 
             // We don't Skill Up if over 10 levels above synth skill. (Or at AND above synth skill in era)
-            if ((settings::get<bool>("map.CRAFT_MODERN_SYSTEM") && (baseDiff <= -11)) || (!settings::get<bool>("map.CRAFT_MODERN_SYSTEM") && (baseDiff <= 0)))
+            if (baseDiff <= 0)
             {
                 continue; // Break current loop iteration.
             }
@@ -456,25 +469,66 @@ namespace synthutils
             }
 
             // Section 2: Skill up equations and penalties
-            double skillUpChance = 0;
-
+            double skillUpChance         = 0;
             double craftChanceMultiplier = settings::get<double>("map.CRAFT_CHANCE_MULTIPLIER");
+            double coeff                 = 0.0;
 
-            if (settings::get<bool>("map.CRAFT_MODERN_SYSTEM"))
+            if (charSkill < 400)
             {
-                if (baseDiff > 0)
-                {
-                    skillUpChance = (double)baseDiff * craftChanceMultiplier * (3 - (log(1.2 + charSkill / 100))) / 5; // Original skill up equation with "x2 chance" applied.
-                }
-                else
-                {
-                    skillUpChance = craftChanceMultiplier * (3 - (log(1.2 + charSkill / 100))) / (6 - baseDiff); // Equation used when over cap.
-                }
+                skillUpChance = 0.5;
             }
-            else
+            else if (charSkill < 600)
             {
-                skillUpChance = (double)baseDiff * craftChanceMultiplier * (3 - (log(1.2 + charSkill / 100))) / 10; // Original skill up equation
+                skillUpChance = 0.40;
             }
+            else if (charSkill < 950)
+            {
+                skillUpChance = 0.25;
+            }
+            else if (charSkill < 1000)
+            {
+                skillUpChance = 0.20;
+            }
+
+            switch (baseDiff)
+            {
+                case 1:
+                    coeff = 0.78;
+                    break;
+                case 2:
+                    coeff = 0.87;
+                    break;
+                case 3:
+                    coeff = 0.97;
+                    break;
+                case 4:
+                    coeff = 1.05;
+                    break;
+                case 5:
+                    coeff = 1.10;
+                    break;
+                case 6:
+                    coeff = 1.18;
+                    break;
+                case 7:
+                    coeff = 1.20;
+                    break;
+                case 8:
+                    coeff = 1.22;
+                    break;
+                case 9:
+                    coeff = 1.24;
+                    break;
+                case 10:
+                    coeff = 1.26;
+                    break;
+                default:
+                    coeff = 0.78;
+                    break;
+            }
+
+            skillUpChance *= coeff;
+            skillUpChance *= craftChanceMultiplier;
 
             // Apply synthesis skill gain rate modifier before synthesis fail modifier
             int16 modSynthSkillGain = PChar->getMod(Mod::SYNTH_SKILL_GAIN);
@@ -668,6 +722,19 @@ namespace synthutils
         double random   = 0;
         double lostItem = std::clamp(0.15 - reduction + (synthDiff > 0 ? synthDiff / 20 : 0), 0.0, 1.0);
 
+        if (PChar->CraftContainer->m_failType == 1) // desynth failures break the items much more frequently
+        {
+            lostItem += 0.35;
+        }
+        else if (PChar->CraftContainer->m_failType == 2) // special item that cannot break, i.e. Lu Shang's Broken Rod
+        {
+            lostItem = 0.0;
+        }
+        else if (PChar->CraftContainer->m_failType == 3) // special item that always breaks, i.e. Hakutaku Eye Cluster
+        {
+            lostItem = 1.0;
+        }
+
         // Translation of JP wiki for the "Synthesis failure rate" modifier is "Synthetic material loss rate"
         // see: http://wiki.ffo.jp/html/18416.html
         lostItem += (double)modSynthFailRate * 0.01;
@@ -815,8 +882,6 @@ namespace synthutils
 
         uint8 invSlotID  = 0;
         uint8 tempSlotID = 0;
-        // uint16 itemID     = 0;
-        // uint32 quantity   = 0;
 
         for (uint8 slotID = 1; slotID <= 8; ++slotID)
         {
@@ -836,6 +901,7 @@ namespace synthutils
         }
 
         PChar->animation = ANIMATION_SYNTH;
+        PChar->SetLocalVar("InSynth", 1);
         PChar->updatemask |= UPDATE_HP;
         PChar->pushPacket(new CCharUpdatePacket(PChar));
 
@@ -860,10 +926,11 @@ namespace synthutils
     int32 doSynthResult(CCharEntity* PChar)
     {
         uint8 m_synthResult = PChar->CraftContainer->getQuantity(0);
+        PChar->SetLocalVar("InSynth", 0);
         if (settings::get<bool>("map.ANTICHEAT_ENABLED"))
         {
             std::chrono::duration animationDuration = server_clock::now() - PChar->m_LastSynthTime;
-            if (animationDuration < 5s)
+            if (animationDuration < 10s)
             {
                 // Attempted cheating - Did not spend enough time doing the synth animation.
                 // Check whether the cheat type action requires us to actively block the cheating attempt

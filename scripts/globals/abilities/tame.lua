@@ -26,7 +26,10 @@ ability_object.onUseAbility = function(player, target, ability)
         target:addEnmity(player, 1, 0)
         return 0
     end
-    local resist = applyResistanceAbility(player, target, xi.magic.ele.NONE, xi.skill.NONE, player:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
+
+    local params = {diff = (player:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)), skillType = nil, bonus = 0, effect = xi.effect.NONE, element = xi.magic.element.NONE}
+    local resist = applyResistanceAbility(player, target, ability:getID(), params)
+
     if resist <= 0.25 then
         ability:setMsg(xi.msg.basic.JA_MISS_2)
         target:addEnmity(player, 1, 0)
