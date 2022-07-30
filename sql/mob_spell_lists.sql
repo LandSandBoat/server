@@ -5151,6 +5151,49 @@ INSERT INTO `mob_spell_lists` VALUES('Silverhook', 5022, 274, 1, 255); -- sleepg
 INSERT INTO `mob_spell_lists` VALUES('Kurrea', 5023, 54, 1, 255);  -- stoneskin (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Kurrea', 5023, 356, 1, 255); -- paralyga (1~255)
 
+-- Jailer of Love (Light) (493)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Light',5024,21,1,255); -- Holy (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Light',5024,30,1,255); -- Banish III (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Light',5024,35,1,255); -- Diaga III (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Light',5024,40,1,255); -- Banishga III (1~255)
+
+-- Jailer of Love (Fire) (494)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Fire',5025,147,1,255); -- Fire IV (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Fire',5025,176,1,255); -- Firaga III (1~255)
+
+-- Jailer of Love (Ice) (495)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Ice',5026,152,1,255); -- Blizzard IV (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Ice',5026,181,1,255); -- Blizzaga III (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Ice',5026,362,1,255); -- Bindga (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Ice',5026,356,1,255); -- Paralyga (1~255)
+
+-- Jailer of Love (Wind) (496)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Wind',5027,157,1,255); -- Aero IV (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Wind',5027,186,1,255); -- Aeroga III (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Wind',5027,359,1,255); -- Silencega (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Wind',5027,366,1,255); -- Graviga (1~255)
+
+-- Jailer of Love (Earth) (497)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Earth',5028,162,1,255); -- Stone IV (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Earth',5028,191,1,255); -- Stonega III (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Earth',5028,357,1,255); -- Slowga (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Earth',5028,365,1,255); -- Breakga (1~255)
+
+-- Jailer of Love (Thunder )(498)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Lightning',5029,167,1,255); -- Thunder IV (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Lightning',5029,196,1,255); -- Thundaga III (1~255)
+
+-- Jailer of Love (Water) (499)
+INSERT INTO `mob_spell_lists` VALUES('Jailer_of_Love_Water',5030,172,1,255); -- Water IV (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Jailer_of_Love_Water',5030,201,1,255); -- Waterga III (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Jailer_of_Love_Water',5030,226,1,255); -- Poisonga II (1~255)
+
+-- Jailer of Love (Dark) (500)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Dark',5031,232,1,255); -- Bio III (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Dark',5031,274,1,255); -- Sleepga II (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Dark',5031,360,1,255); -- Dispelga (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Dark',5031,361,1,255); -- Blindga (1~255)
+
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

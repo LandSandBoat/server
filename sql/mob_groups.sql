@@ -1262,7 +1262,7 @@ INSERT INTO `mob_groups` VALUES (49,2132,33,'Jailer_of_Hope',0,128,1398,34000,0,
 INSERT INTO `mob_groups` VALUES (50,2133,33,'Jailer_of_Justice',0,128,1399,37000,0,85,85,0);
 INSERT INTO `mob_groups` VALUES (51,3271,33,'Qnxzomit',0,128,0,2000,0,67,67,0);
 INSERT INTO `mob_groups` VALUES (52,2135,33,'Jailer_of_Prudence',0,128,1401,34000,0,85,85,0);
-INSERT INTO `mob_groups` VALUES (53,2134,33,'Jailer_of_Love',0,128,1400,0,0,90,90,0);
+INSERT INTO `mob_groups` VALUES (53,2134,33,'Jailer_of_Love',0,128,1400,57000,25000,90,90,0);
 INSERT INTO `mob_groups` VALUES (54,3422,33,'Ruphuabo',0,128,0,0,0,67,67,0);
 INSERT INTO `mob_groups` VALUES (55,3270,33,'Qnhpemde',0,128,0,0,0,67,67,0);
 INSERT INTO `mob_groups` VALUES (56,21,33,'Absolute_Virtue',0,128,3,66000,0,92,92,0);
@@ -1270,6 +1270,7 @@ INSERT INTO `mob_groups` VALUES (57,6190,33,'Ulaern_whm',960,0,2514,0,5000,70,73
 INSERT INTO `mob_groups` VALUES (58,6197,33,'Ulaern_brd',960,0,2514,0,0,70,73,0);
 INSERT INTO `mob_groups` VALUES (59,6194,33,'Ulaern_pld',960,0,2514,0,0,70,73,0);
 INSERT INTO `mob_groups` VALUES (60,7033,33,'Omhpemde_nodive',960,0,1854,0,0,73,77,0);
+INSERT INTO `mob_groups` VALUES (61,7047,33,'Qnxzomit_jol',0,128,0,0,0,80,80,0);
 
 -- ------------------------------------------------------------
 -- Grand_Palace_of_HuXzoi (Zone 34)

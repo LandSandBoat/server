@@ -3831,20 +3831,22 @@ INSERT INTO `mob_skill_lists` VALUES ('duendesHoriz',1197,393);
 INSERT INTO `mob_skill_lists` VALUES ('duendesHoriz',1197,395);
 INSERT INTO `mob_skill_lists` VALUES ('duendesHoriz',1197,1341);
 INSERT INTO `mob_skill_lists` VALUES ('Okyupete',1198,400);
-INSERT INTO `mob_skill_lists` VALUES ('Shikaree_X', 1199, 18); -- Shadowstitch
-INSERT INTO `mob_skill_lists` VALUES ('Shikaree_X', 1199, 23); -- Dancing edge
-INSERT INTO `mob_skill_lists` VALUES ('Shikaree_X', 1199, 25); -- Evisceration
-INSERT INTO `mob_skill_lists` VALUES ('Shikaree_Y', 1200, 101); -- Vorpal Scythe
-INSERT INTO `mob_skill_lists` VALUES ('Shikaree_Y', 1200, 102); -- Guillotine
-INSERT INTO `mob_skill_lists` VALUES ('Shikaree_Y', 1200, 104); -- Spiral Hell
-INSERT INTO `mob_skill_lists` VALUES ('Shikaree_Z', 1201, 116); -- Penta Thrust
-INSERT INTO `mob_skill_lists` VALUES ('Shikaree_Z', 1201, 118); -- Skewer
-INSERT INTO `mob_skill_lists` VALUES ('Shikaree_Z', 1201, 119); -- Wheeling Thrust
-INSERT INTO `mob_skill_lists` VALUES ('Shikaree_Z', 1201, 120); -- Impulse Drive
--- Next available ID: 1202
+INSERT INTO `mob_skill_lists` VALUES ('Shikaree_X',1199,18); -- Shadowstitch
+INSERT INTO `mob_skill_lists` VALUES ('Shikaree_X',1199,23); -- Dancing edge
+INSERT INTO `mob_skill_lists` VALUES ('Shikaree_X',1199,25); -- Evisceration
+INSERT INTO `mob_skill_lists` VALUES ('Shikaree_Y',1200,101); -- Vorpal Scythe
+INSERT INTO `mob_skill_lists` VALUES ('Shikaree_Y',1200,102); -- Guillotine
+INSERT INTO `mob_skill_lists` VALUES ('Shikaree_Y',1200,104); -- Spiral Hell
+INSERT INTO `mob_skill_lists` VALUES ('Shikaree_Z',1201,116); -- Penta Thrust
+INSERT INTO `mob_skill_lists` VALUES ('Shikaree_Z',1201,118); -- Skewer
+INSERT INTO `mob_skill_lists` VALUES ('Shikaree_Z',1201,119); -- Wheeling Thrust
+INSERT INTO `mob_skill_lists` VALUES ('Shikaree_Z',1201,120); -- Impulse Drive
+INSERT INTO `mob_skill_lists` VALUES ('Jailer_of_Hope', 1202, 1353);
+INSERT INTO `mob_skill_lists` VALUES ('Jailer_of_Hope', 1202, 1355);
+INSERT INTO `mob_skill_lists` VALUES ('Jailer_of_Hope', 1202, 1356);
+INSERT INTO `mob_skill_lists` VALUES ('Jailer_of_Hope', 1202, 1358);
 
--- AirSkyBoat Skill Lists Start at 5000
--- 5000 -> 5020 is Era Dynamis
+-- Next available ID: 1177
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section
