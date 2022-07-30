@@ -11,4 +11,5 @@ return {
     ['Orn']             = { event = 652 },
     ['Serukoko']        = { event = 373 },
     ['Sohdede']         = { event = 374 },
+    ['Chamama']         = { event = 651 },
 }
