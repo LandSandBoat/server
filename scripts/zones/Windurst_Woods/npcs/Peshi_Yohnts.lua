@@ -65,11 +65,12 @@ entity.onTrigger = function(player, npc)
         Feeding the proper parameter currently hangs the client in cutscene. This may
         possibly be due to an unimplemented packet or function (display recipe?) Work
         around to present dialog to player to let them know the trade is ready to be
-        received by triggering with lower rank up parameters.
+        received by feeding raw text using showText instead. This workaround can be
+        removed once the packets no longer hang the client.
         --]]
-        player:showText(npc, 7450)
-        player:showText(npc, 7452)
-        player:startEvent(10016, testItem, realSkill, 44, guildMember, 0, 0, 0, 0)
+        player:showText(npc, ID.text.PESHI_YOHNTS_EXPERT_BASE,  0, xi.keyItem.WAY_OF_THE_BONEWORKER)
+        player:showText(npc, ID.text.PESHI_YOHNTS_EXPERT_ALT, testItem)
+        player:showText(npc, ID.text.PESHI_YOHNTS_EXPERT_BASE + 2)
     else
         player:startEvent(10016, testItem, realSkill, rankCap, guildMember, expertQuestStatus, 0, 0, 0)
     end
