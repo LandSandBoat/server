@@ -116,13 +116,22 @@ bool CWeaponSkillState::Update(time_point tick)
 
         auto* PTarget{ GetTarget() };
 
+        // Reset Restraint bonus and trackers on weaponskill use
+        if (m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_RESTRAINT))
+        {
+            uint16 WSBonus = m_PEntity->StatusEffectContainer->GetStatusEffect(EFFECT_RESTRAINT)->GetPower();
+            m_PEntity->StatusEffectContainer->GetStatusEffect(EFFECT_RESTRAINT)->SetPower(0);
+            m_PEntity->StatusEffectContainer->GetStatusEffect(EFFECT_RESTRAINT)->SetSubPower(0);
+            m_PEntity->delModifier(Mod::ALL_WSDMG_FIRST_HIT, WSBonus);
+        }
+
         if (action.actiontype == ACTION_WEAPONSKILL_FINISH) // category changes upon being out of range. This does not count for RoE and delay is not increased beyond the normal delay.
         {
             // only send lua the WS events if we are in range
             m_PEntity->PAI->EventHandler.triggerListener("WEAPONSKILL_USE", CLuaBaseEntity(m_PEntity), CLuaBaseEntity(PTarget), m_PSkill->getID(), m_spent, &action);
             PTarget->PAI->EventHandler.triggerListener("WEAPONSKILL_TAKE", CLuaBaseEntity(PTarget), CLuaBaseEntity(m_PEntity), m_PSkill->getID(), m_spent, &action);
 
-            if(m_PEntity->objtype == TYPE_PC)
+            if (m_PEntity->objtype == TYPE_PC)
             {
                 roeutils::event(ROE_EVENT::ROE_WSKILL_USE, static_cast<CCharEntity*>(m_PEntity), RoeDatagram("skillType", m_PSkill->getType()));
             }

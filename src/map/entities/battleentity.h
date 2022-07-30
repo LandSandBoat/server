@@ -160,6 +160,7 @@ enum SUBSKILLTYPE
     SUBSKILL_GUN      = 1,
     SUBSKILL_CNN      = 2,
     SUBSKILL_SHURIKEN = 3,
+    SUBSKILL_LONGB    = 9,
 
     SUBSKILL_ANIMATOR    = 10,
     SUBSKILL_ANIMATOR_II = 11,
@@ -283,28 +284,28 @@ enum class DAMAGE_TYPE : uint16
 // All of these flags are also seen in weaponskills.
 enum class REACTION : uint8
 {
-    NONE         = 0x00, // No Reaction
-    MISS         = 0x01, // Miss
-    GUARDED      = 0x02, // Bit to indicate guard, used individually to indicate guard during WS packet as well
-    PARRY        = 0x03, // Block with weapons (MISS + GUARDED)
-    BLOCK        = 0x04, // Block with shield, bit to indicate blocked during WS packet as well
-    HIT          = 0x08, // Hit
-    EVADE        = 0x09, // Evasion (MISS + HIT)
-    ABILITY      = 0x10, // Observed on JA and WS
+    NONE    = 0x00, // No Reaction
+    MISS    = 0x01, // Miss
+    GUARDED = 0x02, // Bit to indicate guard, used individually to indicate guard during WS packet as well
+    PARRY   = 0x03, // Block with weapons (MISS + GUARDED)
+    BLOCK   = 0x04, // Block with shield, bit to indicate blocked during WS packet as well
+    HIT     = 0x08, // Hit
+    EVADE   = 0x09, // Evasion (MISS + HIT)
+    ABILITY = 0x10, // Observed on JA and WS
 };
 
 // These operators are used to combine bits that may not have a discrete value upon combining.
-inline REACTION operator |(REACTION a, REACTION b)
+inline REACTION operator|(REACTION a, REACTION b)
 {
     return (REACTION)((uint8)a | (uint8)b);
 }
 
-inline REACTION operator &(REACTION a, REACTION b)
+inline REACTION operator&(REACTION a, REACTION b)
 {
     return (REACTION)((uint8)a & (uint8)b);
 }
 
-inline REACTION operator |=(REACTION& a, REACTION b)
+inline REACTION operator|=(REACTION& a, REACTION b)
 {
     a = a | b;
 
@@ -550,13 +551,17 @@ public:
     uint16 MND();
     uint16 CHR();
     uint16 DEF();
-    uint16 ATT();
+    uint16 ATT(uint16 slot);
     uint16 ACC(uint8 attackNumber, uint8 offsetAccuracy);
     uint16 EVA();
-    uint16 RATT(uint8 skill, uint16 bonusSkill = 0);
-    uint16 RACC(uint8 skill, uint16 bonusSkill = 0);
+    uint16 RATT(uint8 skill, float distance, uint16 bonusSkill = 0);
+    uint16 GetBaseRATT(uint8 skill, uint16 bonusSkill = 0);
+    uint16 RACC(uint8 skill, float distance, uint16 bonusSkill = 0);
+    uint16 GetBaseRACC(uint8 skill, uint16 bonusSkill = 0);
 
     uint8 GetSpeed();
+
+    DAMAGE_TYPE m_dmgType;
 
     bool isDead(); // проверяем, мертва ли сущность
     bool isAlive();

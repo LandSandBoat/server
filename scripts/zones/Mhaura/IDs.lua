@@ -42,6 +42,7 @@ zones[xi.zone.MHAURA] =
     },
     npc =
     {
+        SHIP            = 17797182,
         LAUGHING_BISON  = 17797183,
         EXPLORER_MOOGLE = 17797253,
     },

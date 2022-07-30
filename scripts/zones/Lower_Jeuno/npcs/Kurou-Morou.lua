@@ -102,7 +102,7 @@ entity.onEventFinish = function(player, csid, option)
         player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.YOUR_CRYSTAL_BALL)
 
     elseif csid == 204 and option == 0 then
-        player:addCharVar("QuestNeverToReturn_prog", 1)  -- Keep track of how many times the players fortune has been read
+        player:incrementCharVar("QuestNeverToReturn_prog", 1)  -- Keep track of how many times the players fortune has been read
         player:setCharVar("QuestNeverToReturn_day", VanadielDayOfTheYear()) -- new vanadiel day
 
     elseif csid == 202 and option == 0 then

@@ -71,6 +71,7 @@
 #include "../ai/states/item_state.h"
 #include "../ai/states/magic_state.h"
 #include "../ai/states/mobskill_state.h"
+#include "../ai/states/petskill_state.h"
 #include "../ai/states/raise_state.h"
 #include "../ai/states/range_state.h"
 #include "../ai/states/respawn_state.h"
@@ -213,6 +214,9 @@ void CLuaBaseEntity::showText(CLuaBaseEntity* mob, uint16 messageID, sol::object
  *  Purpose : Displays text to a target PC (private)
  *  Example : player:messageText(target, ID.text.NOT_HAVE_ENOUGH_GP, false, 6);
  *  Notes   : Mainly used for sending retail text messages
+ *          : Value 1: Target of message (self select entity to send message to everyone in range)
+ *          : Value 2: Message ID
+ *          : Value 3: Set false to remove name at start of message
  ************************************************************************/
 
 void CLuaBaseEntity::messageText(CLuaBaseEntity* PLuaBaseEntity, uint16 messageID, sol::object const& arg2, sol::object const& arg3)
@@ -530,9 +534,11 @@ void CLuaBaseEntity::customMenu(sol::object const& obj)
 
 int32 CLuaBaseEntity::getCharVar(std::string const& varName)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
-    return charutils::GetCharVar(PChar, varName);
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        return PChar->getCharVar(varName);
+    }
+    return 0;
 }
 
 /************************************************************************
@@ -544,25 +550,42 @@ int32 CLuaBaseEntity::getCharVar(std::string const& varName)
 
 void CLuaBaseEntity::setCharVar(std::string const& varName, int32 value)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
-    return charutils::SetCharVar(PChar, varName, value);
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        PChar->setCharVar(varName, value);
+    }
 }
 
 /************************************************************************
- *  Function: addCharVar()
+ *  Function: incrementCharVar()
  *  Purpose : Increments PC's variable by an explicit amount
- *  Example : player:addCharVar("[ZM]Status", 1) -- if 4, becomes 5
+ *  Example : player:incrementCharVar("[ZM]Status", 1) -- if 4, becomes 5
  *  Notes   : Can use values greater than 1 to increment more
  ************************************************************************/
 
-void CLuaBaseEntity::addCharVar(std::string const& varName, int32 value)
+void CLuaBaseEntity::incrementCharVar(std::string const& varName, int32 value)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        auto startingVal = charutils::FetchCharVar(PChar->id, varName);
+        charutils::IncrementCharVar(PChar, varName, startingVal + value);
+    }
+}
 
-    const char* Query = "INSERT INTO char_vars SET charid = %u, varname = '%s', value = %i ON DUPLICATE KEY UPDATE value = value + %i;";
+/************************************************************************
+ *  Function: setVolatileCharVar()
+ *  Purpose : Updates PC's variable to an explicit value,
+ &            but allow it to be stored to the database at a later time.
+ *  Example : player:setVolatileCharVar("[DIG]DigCount", count)
+ *  Notes   : Passing a '0' value will delete the variable
+ ************************************************************************/
 
-    sql->Query(Query, m_PBaseEntity->id, varName, value, value);
+void CLuaBaseEntity::setVolatileCharVar(std::string const& varName, int32 value)
+{
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        PChar->setVolatileCharVar(varName, value);
+    }
 }
 
 /************************************************************************
@@ -610,15 +633,14 @@ void CLuaBaseEntity::resetLocalVars()
 
 void CLuaBaseEntity::clearVarsWithPrefix(std::string const& prefix)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-    auto player = dynamic_cast<CCharEntity*>(m_PBaseEntity);
-
-    if (!player)
+    if (auto player = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
-        return;
+        charutils::ClearCharVarsWithPrefix(player, prefix);
     }
-
-    charutils::ClearCharVarsWithPrefix(player, prefix);
+    else
+    {
+        ShowError("Trying to clearVarsWithPrefix(%s) on invalid type", prefix);
+    }
 }
 
 /************************************************************************
@@ -1509,12 +1531,47 @@ uint8 CLuaBaseEntity::getCurrentAction()
     {
         action = 34;
     }
+    else if (m_PBaseEntity->PAI->IsCurrentState<CPetSkillState>())
+    {
+        CPetSkillState* PPetSkillState = dynamic_cast<CPetSkillState*>(m_PBaseEntity->PAI->GetCurrentState());
+
+        if (PPetSkillState)
+        {
+            action = PPetSkillState->GetPetSkill()->getSkillFinishCategory();
+        }
+    }
     else
     {
         ShowWarning("getCurrentAction: Unhandled State for %s, defaulting to NONE (0).", m_PBaseEntity->GetName());
     }
 
     return action;
+}
+
+/************************************************************************
+ *  Function: canUseAbilities()
+ *  Purpose : Sees if a mob has perticular effects that stop it from doing thing
+ *  Example : mob:canUseAbilities()
+ *  Notes   : Can't use on NPCs
+ ************************************************************************/
+
+bool CLuaBaseEntity::canUseAbilities()
+{
+    if (auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity))
+    {
+        return !(PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_SLEEP) ||
+                 PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_IMPAIRMENT) ||
+                 PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_SLEEP_II) ||
+                 PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_STUN) ||
+                 PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_AMNESIA) ||
+                 PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_LULLABY) ||
+                 PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_PETRIFICATION) ||
+                 PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_TERROR) ||
+                 !(m_PBaseEntity->PAI->CanChangeState()));
+    }
+
+    ShowError("canUseAbilities() : Wrong Entity Type");
+    return false;
 }
 
 /************************************************************************
@@ -1859,7 +1916,7 @@ void CLuaBaseEntity::setElevator(uint8 id, uint32 lowerDoor, uint32 upperDoor, u
     // If giving the elevator ANIMATION_ELEVATOR_UP makes it go down, set this bool to true
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_NPC);
 
-    Elevator_t elevator         = {};
+    Elevator_t elevator = {};
 
     elevator.id                 = id;
     elevator.LowerDoor          = static_cast<CNpcEntity*>(zoneutils::GetEntity(lowerDoor, TYPE_NPC));
@@ -2086,17 +2143,15 @@ bool CLuaBaseEntity::sendGuild(uint16 guildID, uint8 open, uint8 close, uint8 ho
     XI_DEBUG_BREAK_IF(open > close);
 
     uint8 VanadielHour = (uint8)CVanaTime::getInstance()->getHour();
-    // uint8 VanadielDay = (uint8)CVanaTime::getInstance()->getWeekday();
+    uint8 VanadielDay  = (uint8)CVanaTime::getInstance()->getWeekday();
 
     GUILDSTATUS status = GUILD_OPEN;
 
-    /*
-     * No more guild holidays since 2014
     if (VanadielDay == holiday)
     {
-        status = GUILD_HOLYDAY;
+        status = GUILD_HOLIDAY;
     }
-    */
+
     if ((VanadielHour < open) || (VanadielHour >= close))
     {
         status = GUILD_CLOSE;
@@ -2535,7 +2590,18 @@ uint8 CLuaBaseEntity::getRotPos()
 
 void CLuaBaseEntity::setRotation(uint8 rotation)
 {
+    if (m_PBaseEntity == nullptr)
+    {
+        return;
+    }
+
     m_PBaseEntity->loc.p.rotation = rotation;
+
+    if (m_PBaseEntity->objtype == TYPE_PC)
+    {
+        ((CCharEntity*)m_PBaseEntity)->pushPacket(new CPositionPacket((CCharEntity*)m_PBaseEntity));
+    }
+
     m_PBaseEntity->updatemask |= UPDATE_POS;
 }
 
@@ -2644,7 +2710,6 @@ void CLuaBaseEntity::warp()
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
     PChar->loc.boundary    = 0;
-    PChar->m_moghouseID    = 0;
     PChar->loc.p           = PChar->profile.home_point.p;
     PChar->loc.destination = PChar->profile.home_point.destination;
 
@@ -2652,7 +2717,7 @@ void CLuaBaseEntity::warp()
     PChar->animation = ANIMATION_NONE;
 
     PChar->clearPacketList();
-    charutils::SendToZone(PChar, 2, zoneutils::GetZoneIPP(m_PBaseEntity->loc.destination));
+    charutils::SendToZone(PChar, 2, zoneutils::GetZoneIPP(PChar->loc.destination));
 }
 
 /************************************************************************
@@ -4785,6 +4850,59 @@ void CLuaBaseEntity::setAnimationSub(uint8 animationsub)
         else
         {
             m_PBaseEntity->loc.zone->UpdateEntityPacket(m_PBaseEntity, ENTITY_UPDATE, UPDATE_COMBAT);
+        }
+    }
+}
+
+/************************************************************************
+ *  Function: setAnimPath()
+ *  Purpose : Updates an animation path for NPC
+ *  Example : GetNPCByID(Door_Offset+12):setAnimPath(1)
+ ************************************************************************/
+
+void CLuaBaseEntity::setAnimPath(uint8 animPath)
+{
+    m_PBaseEntity->manualConfig = true;
+    m_PBaseEntity->animPath     = animPath;
+}
+
+/************************************************************************
+ *  Function: setAnimStart()
+ *  Purpose : Initializes NPC start frames
+ *  Example : GetNPCByID(Door_Offset+12):setAnimStart(1724234413)
+ ************************************************************************/
+
+void CLuaBaseEntity::setAnimStart(bool animStart)
+{
+    m_PBaseEntity->animStart = animStart;
+}
+
+/************************************************************************
+ *  Function: setAnimBegin()
+ *  Purpose : Updates an animation start time for NPC
+ *  Example : GetNPCByID(Door_Offset+12):setAnimStart(1724234413)
+ ************************************************************************/
+
+void CLuaBaseEntity::setAnimBegin(uint32 animBegin)
+{
+    m_PBaseEntity->animBegin = animBegin;
+}
+
+/************************************************************************
+ *  Function: sendUpdateToZoneCharsInRange()
+ *  Purpose : Sends an entity update packet to all players in range within the zone
+ ************************************************************************/
+
+void CLuaBaseEntity::sendUpdateToZoneCharsInRange(float maxDistance = 0.0f)
+{
+    EntityList_t charList = m_PBaseEntity->loc.zone->GetZoneEntities()->GetCharList();
+
+    for (EntityList_t::const_iterator it = charList.begin(); it != charList.end(); ++it)
+    {
+        CCharEntity* PChar = (CCharEntity*)it->second;
+        if (maxDistance == 0 || distance(PChar->loc.p, m_PBaseEntity->loc.p) < maxDistance)
+        {
+            PChar->pushPacket(new CEntityUpdatePacket(m_PBaseEntity, ENTITY_SPAWN, UPDATE_ALL_MOB));
         }
     }
 }
@@ -9079,7 +9197,7 @@ void CLuaBaseEntity::setInstance(CLuaInstance* PLuaInstance)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
-    CInstance* PInstance     = PLuaInstance->GetInstance();
+    CInstance*   PInstance   = PLuaInstance->GetInstance();
     CCharEntity* PChar       = dynamic_cast<CCharEntity*>(m_PBaseEntity);
     m_PBaseEntity->PInstance = PInstance;
 
@@ -10789,7 +10907,7 @@ int16 CLuaBaseEntity::getMaxGearMod(Mod modId)
 
     if (!PChar)
     {
-        ShowWarning("CLuaBaseEntity::getMaxGearMod() - m_PBaseEntity is not a player.")
+        ShowWarning("CLuaBaseEntity::getMaxGearMod() - m_PBaseEntity is not a player.");
         return 0;
     }
 
@@ -11076,7 +11194,7 @@ uint16 CLuaBaseEntity::getStat(uint16 statId)
             value = PEntity->CHR();
             break;
         case Mod::ATT:
-            value = PEntity->ATT();
+            value = PEntity->ATT(SLOT_MAIN);
             break;
         case Mod::DEF:
             value = PEntity->DEF();
@@ -11142,21 +11260,16 @@ int CLuaBaseEntity::getRACC()
         return 0;
     }
 
-    CBattleEntity* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
+    auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
 
-    int skill = PEntity->GetSkill(weapon->getSkillType());
-    int acc   = skill;
-
-    if (skill > 200)
+    if (PEntity->GetBattleTarget() != nullptr)
     {
-        acc = (int)(200 + (skill - 200) * 0.9);
+        return PEntity->RACC(weapon->getSkillType(), distance(PEntity->loc.p, PEntity->GetBattleTarget()->loc.p), weapon->getILvlSkill());
     }
-
-    acc += PEntity->getMod(Mod::RACC);
-    acc += PEntity->AGI() / 2;
-    acc = acc + std::min<int16>(((100 + PEntity->getMod(Mod::FOOD_RACCP)) * acc / 100), PEntity->getMod(Mod::FOOD_RACC_CAP));
-
-    return acc;
+    else
+    {
+        return PEntity->RACC(weapon->getSkillType(), distance(PEntity->loc.p, PEntity->loc.p), weapon->getILvlSkill());
+    }
 }
 
 /************************************************************************
@@ -11178,7 +11291,16 @@ uint16 CLuaBaseEntity::getRATT()
         return 0;
     }
 
-    return static_cast<CBattleEntity*>(m_PBaseEntity)->RATT(weapon->getSkillType(), weapon->getILvlSkill());
+    auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
+
+    if (PEntity->GetBattleTarget() != nullptr)
+    {
+        return PEntity->RATT(weapon->getSkillType(), distance(PEntity->loc.p, PEntity->GetBattleTarget()->loc.p), weapon->getILvlSkill());
+    }
+    else
+    {
+        return PEntity->RATT(weapon->getSkillType(), distance(PEntity->loc.p, PEntity->loc.p), weapon->getILvlSkill());
+    }
 }
 
 /************************************************************************
@@ -11354,7 +11476,7 @@ int CLuaBaseEntity::getMeleeHitDamage(CLuaBaseEntity* PLuaBaseEntity, sol::objec
 
     if (xirand::GetRandomNumber(100) < hitrate)
     {
-        float DamageRatio = battleutils::GetDamageRatio(PAttacker, PDefender, false, 0.f);
+        float DamageRatio = battleutils::GetDamageRatio(PAttacker, PDefender, false, 0.f, SLOT_MAIN);
         int   damage      = (uint16)((PAttacker->GetMainWeaponDmg() + battleutils::GetFSTR(PAttacker, PDefender, SLOT_MAIN)) * DamageRatio);
 
         return damage;
@@ -11782,7 +11904,7 @@ void CLuaBaseEntity::trustPartyMessage(uint32 message_id)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_TRUST);
 
-    auto* PTrust  = static_cast<CTrustEntity*>(m_PBaseEntity);
+    auto* PTrust = static_cast<CTrustEntity*>(m_PBaseEntity);
     if (auto* PMaster = dynamic_cast<CCharEntity*>(PTrust->PMaster))
     {
         // clang-format off
@@ -13374,11 +13496,7 @@ sol::table CLuaBaseEntity::getEnmityList()
 
 std::optional<CLuaBaseEntity> CLuaBaseEntity::getTrickAttackChar(CLuaBaseEntity* PLuaBaseEntity)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
-    CBattleEntity* PMob = static_cast<CBattleEntity*>(PLuaBaseEntity->GetBaseEntity());
-
-    if (PMob != nullptr)
+    if (CBattleEntity* PMob = dynamic_cast<CBattleEntity*>(PLuaBaseEntity->GetBaseEntity()))
     {
         CBattleEntity* taTarget = battleutils::getAvailableTrickAttackChar((CBattleEntity*)m_PBaseEntity, PMob);
         if (taTarget)
@@ -13549,6 +13667,57 @@ void CLuaBaseEntity::useMobAbility(sol::variadic_args va)
         }
     }));
     // clang-format on
+}
+
+/************************************************************************
+ *  Function: triggerDrawIn()
+ *  Purpose : Forces a mob to use DrawIn on the mob's current target
+ *  Example : mob:triggerDrawIn(bool includeParty, CLuaBaseEntity* PEntity)
+ *  Note    : Params can assume a default value by passing nil
+ *          : e.g. triggerDrawIn(true) to pull in a party/alliance
+ ************************************************************************/
+inline int32 CLuaBaseEntity::triggerDrawIn(CLuaBaseEntity* PMobEntity, sol::object const& includePt, sol::object const& drawRange, sol::object const& maxReach, sol::object const& target)
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
+
+    auto*          PMob    = static_cast<CMobEntity*>(PMobEntity->m_PBaseEntity);
+    CBattleEntity* PTarget = PMob->GetBattleTarget();
+
+    // Default values
+    uint8  drawInRange  = PMob->GetMeleeRange() * 2;
+    uint16 maximumReach = 0xFFFF;
+    bool   includeParty = false;
+    float  offset       = PMob->GetMeleeRange() - 0.2f;
+
+    if ((drawRange != sol::lua_nil) && drawRange.is<uint8>())
+    {
+        drawInRange = drawRange.as<uint8>();
+    }
+
+    if ((maxReach != sol::lua_nil) && maxReach.is<uint16>())
+    {
+        maximumReach = maxReach.as<uint16>();
+    }
+
+    if ((target != sol::lua_nil) && target.is<CLuaBaseEntity*>())
+    {
+        CLuaBaseEntity* PTargetEntity = target.as<CLuaBaseEntity*>();
+        PTarget                       = dynamic_cast<CBattleEntity*>(PTargetEntity->m_PBaseEntity);
+    }
+
+    if (includePt != sol::lua_nil)
+    {
+        includeParty = includePt.as<bool>();
+    }
+
+    if (PTarget)
+    {
+        // Draw in requires a target
+        battleutils::DrawIn(PTarget, PMob, offset, drawInRange, maximumReach, includeParty);
+    }
+
+    return 0;
 }
 
 /************************************************************************
@@ -14050,6 +14219,217 @@ uint32 CLuaBaseEntity::getHistory(uint8 index)
     return outStat;
 }
 
+auto CLuaBaseEntity::getChocoboRaisingInfo() -> sol::table
+{
+    ShowDebug("Getting Raising Chocobo Info (%s)", m_PBaseEntity->name);
+
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowDebug("Called on invalid entity");
+        return sol::lua_nil;
+    }
+
+    // Check to see if the user already has a chocobo
+    {
+        const char* Query = "SELECT \
+            charid, \
+            first_name, \
+            last_name, \
+            sex, \
+            UNIX_TIMESTAMP(`created`), \
+            last_update_age, \
+            stage, \
+            location, \
+            colour, \
+            dominant_gene, \
+            recessive_gene, \
+            strength, \
+            endurance, \
+            discernment, \
+            receptivity, \
+            affection, \
+            energy, \
+            satisfaction, \
+            conditions, \
+            ability1, \
+            ability2, \
+            personality, \
+            weather_preference, \
+            hunger, \
+            care_plan, \
+            held_item \
+            FROM char_chocobos WHERE charid = %u;";
+
+        int32 ret = sql->Query(Query, m_PBaseEntity->id);
+
+        if (ret == SQL_ERROR)
+        {
+            ShowDebug("SELECT Query failed");
+            return sol::lua_nil;
+        }
+
+        if (sql->NumRows() == 0)
+        {
+            ShowDebug("No Raised Chocobo information found");
+            return sol::lua_nil;
+        }
+
+        if (sql->NextRow() == SQL_SUCCESS)
+        {
+            auto table = lua.create_table();
+
+            table["charid"]          = sql->GetUIntData(0);
+            table["first_name"]      = sql->GetStringData(1);
+            table["last_name"]       = sql->GetStringData(2);
+            table["sex"]             = sql->GetUIntData(3);
+            table["created"]         = sql->GetUIntData(4);
+            table["last_update_age"] = sql->GetUIntData(5);
+            table["stage"]           = sql->GetUIntData(6);
+            table["location"]        = sql->GetUIntData(7);
+            table["colour"]          = sql->GetUIntData(8);
+
+            table["dominant_gene"]  = sql->GetUIntData(9);
+            table["recessive_gene"] = sql->GetUIntData(10);
+
+            table["strength"]    = sql->GetUIntData(11);
+            table["endurance"]   = sql->GetUIntData(12);
+            table["discernment"] = sql->GetUIntData(13);
+            table["receptivity"] = sql->GetUIntData(14);
+
+            table["affection"]          = sql->GetUIntData(15);
+            table["energy"]             = sql->GetUIntData(16);
+            table["satisfaction"]       = sql->GetUIntData(17);
+            table["conditions"]         = sql->GetUIntData(18);
+            table["ability1"]           = sql->GetUIntData(19);
+            table["ability2"]           = sql->GetUIntData(20);
+            table["personality"]        = sql->GetUIntData(21);
+            table["weather_preference"] = sql->GetUIntData(22);
+            table["hunger"]             = sql->GetUIntData(23);
+
+            table["care_plan"] = sql->GetUIntData(24);
+            table["held_item"] = sql->GetUIntData(25);
+
+            return table;
+        }
+    }
+
+    return sol::lua_nil;
+}
+
+bool CLuaBaseEntity::setChocoboRaisingInfo(sol::table table)
+{
+    ShowDebug("Setting Raising Chocobo Info (%s)", m_PBaseEntity->name);
+
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowDebug("Called on invalid entity");
+        return false;
+    }
+
+    const char* Query = "REPLACE INTO char_chocobos SET \
+                                charid = %u, \
+                                first_name = '%s', \
+                                last_name = '%s', \
+                                sex = %u, \
+                                created = FROM_UNIXTIME(%u), \
+                                last_update_age = %u, \
+                                stage = %u, \
+                                location = %u, \
+                                colour = %u, \
+                                dominant_gene = %u, \
+                                recessive_gene = %u, \
+                                strength = %u, \
+                                endurance = %u, \
+                                discernment = %u, \
+                                receptivity = %u, \
+                                affection = %u, \
+                                energy = %u, \
+                                satisfaction = %u, \
+                                conditions = %u, \
+                                ability1 = %u, \
+                                ability2 = %u, \
+                                personality = %u, \
+                                weather_preference = %u, \
+                                hunger = %u, \
+                                care_plan = %u, \
+                                held_item = %u;";
+
+    int32 ret = sql->Query(Query,
+                           m_PBaseEntity->id,
+                           table.get_or<std::string>("first_name", "Chocobo"),
+                           table.get_or<std::string>("last_name", "Chocobo"),
+                           table.get_or<uint32>("sex", 0),
+                           table.get_or<uint32>("created", 0),
+                           table.get_or<uint32>("last_update_age", 0),
+                           table.get_or<uint32>("stage", 1),
+                           table.get_or<uint32>("location", 0),
+                           table.get_or<uint32>("colour", 0),
+                           table.get_or<uint32>("dominant_gene", 0),
+                           table.get_or<uint32>("recessive_gene", 0),
+                           table.get_or<uint32>("strength", 0),
+                           table.get_or<uint32>("endurance", 0),
+                           table.get_or<uint32>("discernment", 0),
+                           table.get_or<uint32>("receptivity", 0),
+                           table.get_or<uint32>("affection", 0),
+                           table.get_or<uint32>("energy", 0),
+                           table.get_or<uint32>("satisfaction", 0),
+                           table.get_or<uint32>("conditions", 0),
+                           table.get_or<uint32>("ability1", 0),
+                           table.get_or<uint32>("ability2", 0),
+                           table.get_or<uint32>("personality", 0),
+                           table.get_or<uint32>("weather_preference", 0),
+                           table.get_or<uint32>("hunger", 0),
+                           table.get_or<uint32>("care_plan", 0),
+                           table.get_or<uint32>("held_item", 0));
+
+    if (ret == SQL_ERROR)
+    {
+        ShowDebug("REPLACE Query failed");
+        return false;
+    }
+
+    return true;
+}
+
+bool CLuaBaseEntity::deleteRaisedChocobo()
+{
+    ShowDebug("Deleting Raising Chocobo (%s)", m_PBaseEntity->name);
+
+    if (m_PBaseEntity->objtype != TYPE_PC)
+    {
+        ShowDebug("Called on invalid entity");
+        return false;
+    }
+
+    int32 ret = sql->Query("DELETE FROM char_chocobos WHERE charid = %u;", m_PBaseEntity->id);
+    if (ret == SQL_ERROR)
+    {
+        ShowDebug("DELETE Query failed");
+        return false;
+    }
+
+    return true;
+}
+
+/************************************************************************
+ *  Function: clearSession()
+ *  Purpose : Delete player's account session
+ *  Example : player:clearSession()
+ ************************************************************************/
+
+bool CLuaBaseEntity::clearSession(std::string const& playerName)
+{
+    const char* charName = playerName.c_str();
+    const char* Query    = "DELETE FROM accounts_sessions WHERE charid IN (SELECT charid from chars where charname = '%s')";
+
+    if (sql->Query(Query, charName) == SQL_SUCCESS && sql->AffectedRows() > 0)
+    {
+        return true;
+    }
+
+    return false;
+}
+
 //==========================================================//
 
 void CLuaBaseEntity::Register()
@@ -14074,7 +14454,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setCharVar", CLuaBaseEntity::setCharVar);
     SOL_REGISTER("getVar", CLuaBaseEntity::getCharVar); // Compatibility binding
     SOL_REGISTER("setVar", CLuaBaseEntity::setCharVar); // Compatibility binding
-    SOL_REGISTER("addCharVar", CLuaBaseEntity::addCharVar);
+    SOL_REGISTER("incrementCharVar", CLuaBaseEntity::incrementCharVar);
+    SOL_REGISTER("setVolatileCharVar", CLuaBaseEntity::setVolatileCharVar);
     SOL_REGISTER("getLocalVar", CLuaBaseEntity::getLocalVar);
     SOL_REGISTER("setLocalVar", CLuaBaseEntity::setLocalVar);
     SOL_REGISTER("resetLocalVars", CLuaBaseEntity::resetLocalVars);
@@ -14123,6 +14504,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getStatus", CLuaBaseEntity::getStatus);
     SOL_REGISTER("setStatus", CLuaBaseEntity::setStatus);
     SOL_REGISTER("getCurrentAction", CLuaBaseEntity::getCurrentAction);
+    SOL_REGISTER("canUseAbilities", CLuaBaseEntity::canUseAbilities);
 
     SOL_REGISTER("lookAt", CLuaBaseEntity::lookAt);
     SOL_REGISTER("clearTargID", CLuaBaseEntity::clearTargID);
@@ -14776,6 +15158,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("castSpell", CLuaBaseEntity::castSpell);
     SOL_REGISTER("useJobAbility", CLuaBaseEntity::useJobAbility);
     SOL_REGISTER("useMobAbility", CLuaBaseEntity::useMobAbility);
+    SOL_REGISTER("triggerDrawIn", CLuaBaseEntity::triggerDrawIn);
     SOL_REGISTER("hasTPMoves", CLuaBaseEntity::hasTPMoves);
 
     SOL_REGISTER("weaknessTrigger", CLuaBaseEntity::weaknessTrigger);
@@ -14797,6 +15180,11 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getPlayerRegionInZone", CLuaBaseEntity::getPlayerRegionInZone);
     SOL_REGISTER("updateToEntireZone", CLuaBaseEntity::updateToEntireZone);
 
+    SOL_REGISTER("setAnimPath", CLuaBaseEntity::setAnimPath);
+    SOL_REGISTER("setAnimStart", CLuaBaseEntity::setAnimStart);
+    SOL_REGISTER("setAnimBegin", CLuaBaseEntity::setAnimBegin);
+    SOL_REGISTER("sendUpdateToZoneCharsInRange", CLuaBaseEntity::sendUpdateToZoneCharsInRange);
+
     // Abyssea
     SOL_REGISTER("getAvailableTraverserStones", CLuaBaseEntity::getAvailableTraverserStones);
     SOL_REGISTER("getTraverserEpoch", CLuaBaseEntity::getTraverserEpoch);
@@ -14806,6 +15194,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setClaimedTraverserStones", CLuaBaseEntity::setClaimedTraverserStones);
 
     SOL_REGISTER("getHistory", CLuaBaseEntity::getHistory);
+
+    SOL_REGISTER("clearSession", CLuaBaseEntity::clearSession);
 }
 
 std::ostream& operator<<(std::ostream& os, const CLuaBaseEntity& entity)

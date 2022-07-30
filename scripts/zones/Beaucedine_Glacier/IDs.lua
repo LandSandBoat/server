@@ -29,6 +29,7 @@ zones[xi.zone.BEAUCEDINE_GLACIER] =
         YOU_CANNOT_ENTER_DYNAMIS       = 7882,  -- You cannot enter Dynamis - [Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia] for <number> [day/days] (Vana'diel time).
         PLAYERS_HAVE_NOT_REACHED_LEVEL = 7884,  -- Players who have not reached level <number> are prohibited from entering Dynamis.
         DYNA_NPC_DEFAULT_MESSAGE       = 7894,  -- There is an unusual arrangement of branches here.
+        GARRISON_BASE                  = 8244,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
         PLAYER_OBTAINS_ITEM            = 8577,  -- <name> obtains <item>!
         UNABLE_TO_OBTAIN_ITEM          = 8578,  -- You were unable to obtain the item.
         PLAYER_OBTAINS_TEMP_ITEM       = 8579,  -- <name> obtains the temporary item: <item>!
@@ -44,9 +45,10 @@ zones[xi.zone.BEAUCEDINE_GLACIER] =
         VOIDWALKER_UPGRADE_KI_2        = 11888, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
         VOIDWALKER_BREAK_KI            = 11889, -- The <keyitem> shatters into tiny fragments.
         VOIDWALKER_OBTAIN_KI           = 11890, -- Obtained key item: <keyitem>!
+        LEARNS_SPELL                   = 12780, -- <name> learns <spell>!
+        UNCANNY_SENSATION              = 12782, -- You are assaulted by an uncanny sensation.
         COMMON_SENSE_SURVIVAL          = 12789, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
-
     mob =
     {
         GARGANTUA_PH =
@@ -102,7 +104,6 @@ zones[xi.zone.BEAUCEDINE_GLACIER] =
 
     npc =
     {
-        CASKET_BASE     = 17232181,
         MIRROR_POND_J8  = 17232206,
         OVERSEER_BASE   = 17232217, -- Parledaire_RK in npc_list
     },

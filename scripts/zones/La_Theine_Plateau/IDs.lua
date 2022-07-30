@@ -57,9 +57,10 @@ zones[xi.zone.LA_THEINE_PLATEAU] =
         VOIDWALKER_UPGRADE_KI_2      = 11316, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
         VOIDWALKER_BREAK_KI          = 11317, -- The <keyitem> shatters into tiny fragments.
         VOIDWALKER_OBTAIN_KI         = 11318, -- Obtained key item: <keyitem>!
+        LEARNS_SPELL                 = 12336, -- <name> learns <spell>!
+        UNCANNY_SENSATION            = 12338, -- You are assaulted by an uncanny sensation.
         COMMON_SENSE_SURVIVAL        = 12345, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
-
     mob =
     {
         TUMBLING_TRUFFLE_PH =
@@ -119,7 +120,6 @@ zones[xi.zone.LA_THEINE_PLATEAU] =
     npc =
     {
         FALLEN_EGG  = 17195583,
-        CASKET_BASE = 17195584,
         RAINBOW     = 17195607,
     },
 }

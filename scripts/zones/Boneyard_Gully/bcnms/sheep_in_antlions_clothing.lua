@@ -28,6 +28,15 @@ battlefield_object.onBattlefieldInitialise = function(battlefield)
     tuchulcha:setLocalVar('sand_pit1', pos[4])
     tuchulcha:setLocalVar('sand_pit2', pos[5])
     tuchulcha:setLocalVar('sand_pit3', pos[6])
+
+    local startPos = nil
+    if tuchulcha:getID() == 16810001 then startPos = { -605.801,-0.584,-487.617,171 }
+    elseif tuchulcha:getID() == 16810007 then startPos = { -46.139,-0.642,73.003,7 }
+    elseif tuchulcha:getID() == 16810013 then startPos = { 433.643,-0.734,552.286,240 } end
+    if startPos ~= nil then
+        tuchulcha:setSpawn(startPos[1],startPos[2],startPos[3],startPos[4])
+        tuchulcha:setPos(startPos[1],startPos[2],startPos[3],startPos[4])
+    end
 end
 
 battlefield_object.onBattlefieldTick = function(battlefield, tick)

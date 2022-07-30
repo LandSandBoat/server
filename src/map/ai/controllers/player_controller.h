@@ -49,6 +49,8 @@ public:
 
     time_point getLastAttackTime();
     void       setLastAttackTime(time_point);
+    time_point getLastRangedAttackTime();
+    void setLastRangedAttackTime(time_point);
 
     void       setLastErrMsgTime(time_point);
     time_point getLastErrMsgTime();
@@ -57,6 +59,7 @@ public:
 
 protected:
     time_point    m_lastAttackTime{ server_clock::now() };
+    time_point    m_lastRangedAttackTime { server_clock::now() };
     time_point    m_errMsgTime{ server_clock::now() };
     CWeaponSkill* m_lastWeaponSkill{ nullptr };
 };

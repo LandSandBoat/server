@@ -66,9 +66,10 @@ public:
     void customMenu(sol::object const& obj);
 
     // Variables
-    int32  getCharVar(std::string const& varName);              // Returns a character variable
-    void   setCharVar(std::string const& varname, int32 value); // Sets a character variable
-    void   addCharVar(std::string const& varname, int32 value); // Increments/decriments/sets a character variable
+    int32  getCharVar(std::string const& varName);                    // Returns a character variable
+    void   setCharVar(std::string const& varname, int32 value);       // Sets a character variable
+    void   incrementCharVar(std::string const& varname, int32 value); // Increments/decriments/sets a character variable
+    void   setVolatileCharVar(std::string const& varName, int32 value);
     uint32 getLocalVar(std::string const& var);
     void   setLocalVar(std::string const& var, uint32 val);
     void   resetLocalVars();
@@ -120,6 +121,7 @@ public:
     uint8 getStatus();
     void  setStatus(uint8 status); // Sets Character's Status
     uint8 getCurrentAction();
+    bool  canUseAbilities();
 
     void lookAt(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2); // look at given position
     void clearTargID();                                                                     // clears target of entity
@@ -786,10 +788,11 @@ public:
 
     bool actionQueueEmpty(); // returns whether the action queue is empty or not
 
-    void castSpell(sol::object const& spell, sol::object entity); // forces a mob to cast a spell (parameter = spell ID, otherwise picks a spell from its list)
-    void useJobAbility(uint16 skillID, sol::object const& pet);   // forces a job ability use (players/pets only)
-    void useMobAbility(sol::variadic_args va);                    // forces a mob to use a mobability (parameter = skill ID)
-    bool hasTPMoves();
+    void  castSpell(sol::object const& spell, sol::object entity);                                                                                                       // forces a mob to cast a spell (parameter = spell ID, otherwise picks a spell from its list)
+    void  useJobAbility(uint16 skillID, sol::object const& pet);                                                                                                         // forces a job ability use (players/pets only)
+    void  useMobAbility(sol::variadic_args va);                                                                                                                          // forces a mob to use a mobability (parameter = skill ID)
+    int32 triggerDrawIn(CLuaBaseEntity* PMobEntity, sol::object const& includePt, sol::object const& drawRange, sol::object const& maxReach, sol::object const& target); // forces a mob to draw in target
+    bool  hasTPMoves();
 
     void weaknessTrigger(uint8 level);
     void restoreFromChest(CLuaBaseEntity* PLuaBaseEntity, uint32 restoreType);
@@ -815,6 +818,16 @@ public:
     void   setClaimedTraverserStones(uint16 totalStones);
 
     uint32 getHistory(uint8 index);
+
+    void setAnimPath(uint8);
+    void setAnimStart(bool);
+    void setAnimBegin(uint32);
+    void sendUpdateToZoneCharsInRange(float);
+    auto getChocoboRaisingInfo() -> sol::table;
+    bool setChocoboRaisingInfo(sol::table table);
+    bool deleteRaisedChocobo();
+
+    bool clearSession(std::string const& playerName);
 
     static void Register();
 };

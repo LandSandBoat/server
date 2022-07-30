@@ -24,7 +24,7 @@ class AHPaginationModule : public CPPModule
 
         // If this is set to 7, the client won't let you put up more than 7 items. So, 6.
         auto ITEMS_PER_PAGE = 6U;
-        auto TOTAL_PAGES = 6;
+        auto TOTAL_PAGES = 12;
 
         ShowInfo("[AH PAGES] Setting AH_LIST_LIMIT to %i.", ITEMS_PER_PAGE * TOTAL_PAGES)
         lua["xi"]["settings"]["search"]["AH_LIST_LIMIT"] = ITEMS_PER_PAGE * TOTAL_PAGES;

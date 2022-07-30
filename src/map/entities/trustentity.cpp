@@ -31,6 +31,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../ai/states/range_state.h"
 #include "../ai/states/weaponskill_state.h"
 #include "../attack.h"
+#include "../enmity_container.h"
 #include "../mob_spell_container.h"
 #include "../mob_spell_list.h"
 #include "../packets/char_health.h"
@@ -40,7 +41,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../status_effect_container.h"
 #include "../utils/battleutils.h"
 #include "../utils/trustutils.h"
-#include "../enmity_container.h"
 
 CTrustEntity::CTrustEntity(CCharEntity* PChar)
 : CMobEntity()
@@ -53,7 +53,7 @@ CTrustEntity::CTrustEntity(CCharEntity* PChar)
     m_MovementType = MELEE_RANGE;
     m_IsClaimable  = false;
 
-    PAI            = std::make_unique<CAIContainer>(this, std::make_unique<CPathFind>(this), std::make_unique<CTrustController>(PChar, this),
+    PAI = std::make_unique<CAIContainer>(this, std::make_unique<CPathFind>(this), std::make_unique<CTrustController>(PChar, this),
                                          std::make_unique<CTargetFind>(this));
 }
 
@@ -589,15 +589,15 @@ void CTrustEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& act
     }
     else
     {
-        actionList_t& actionList     = action.getNewActionList();
-        actionList.ActionTargetID    = PBattleTarget->id;
-        action.actiontype            = ACTION_MAGIC_FINISH; // all "too far" messages use cat 4
+        actionList_t& actionList  = action.getNewActionList();
+        actionList.ActionTargetID = PBattleTarget->id;
+        action.actiontype         = ACTION_MAGIC_FINISH; // all "too far" messages use cat 4
 
         actionTarget_t& actionTarget = actionList.getNewActionTarget();
         actionTarget.animation       = 0x1FC; // seems hardcoded, 2 bits away from 0x1FF.
         actionTarget.messageID       = MSGBASIC_TOO_FAR_AWAY;
 
-        actionTarget.speceffect      = SPECEFFECT::NONE; // It seems most mobs use NONE, but player-like models use BLOOD for their weaponskills
-                                                         // TODO: figure out a good way to differentiate between the two. There does not seem to be a functional difference.
+        actionTarget.speceffect = SPECEFFECT::NONE; // It seems most mobs use NONE, but player-like models use BLOOD for their weaponskills
+                                                    // TODO: figure out a good way to differentiate between the two. There does not seem to be a functional difference.
     }
 }

@@ -10,7 +10,8 @@ require("scripts/globals/mobskills")
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)
-    if (mob:getMainJob() == xi.job.WAR or mob:getMainJob() == xi.job.SAM) then
+    local mobSkin = mob:getModelId() -- Mobskill based on modelid, these are the gigas with weapons
+    if mobSkin == 274 or mobSkin == 275 or mobSkin == 640 or mobSkin == 703 or mobSkin == 707 or mobSkin == 708 or mobSkin == 710 or mobSkin == 720 then
         return 0
     end
     return 1

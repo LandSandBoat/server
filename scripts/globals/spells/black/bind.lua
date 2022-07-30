@@ -27,8 +27,14 @@ spell_object.onSpellCast = function(caster, target, spell)
     local resist = applyResistanceEffect(caster, target, spell, params)
 
     if resist >= 0.5 then --Do it!
+        local resduration = duration * resist
+
+        resduration = calculateBuildDuration(target, duration, params.effect)
+
+        if resduration == 0 then
+            spell:setMsg(xi.msg.basic.NONE)
         --Try to erase a weaker bind.
-        if target:addStatusEffect(params.effect, target:getSpeed(), 0 , duration * resist) then
+        elseif target:addStatusEffect(params.effect, target:getSpeed(), 0 , resduration) then
             spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         else
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)

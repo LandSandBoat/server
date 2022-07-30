@@ -52,7 +52,9 @@ protected:
 
 private:
     CBattleEntity* const m_PEntity;
-    duration             m_aimTime;
+    duration             m_aimTime; // The calculated "phase 1" delay based on weapon and job trait reductions
+    const duration m_returnWeaponDelay = std::chrono::milliseconds(1600);  // Phase 2: Putting the weapon back after a shot
+    const duration m_freePhaseTime = std::chrono::milliseconds(1100); // Phase 3: The cooldown after a ranged attack is executed.
     bool                 m_rapidShot{ false };
     position_t           m_startPos;
 };

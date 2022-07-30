@@ -66,7 +66,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../packets/monipulator1.h"
 #include "../packets/monipulator2.h"
 #include "../packets/quest_mission_log.h"
-
 #include "../packets/roe_sparkupdate.h"
 #include "../packets/server_ip.h"
 #include "../packets/timer_bar_util.h"
@@ -79,6 +78,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../latent_effect_container.h"
 #include "../linkshell.h"
 #include "../map.h"
+#include "../message.h"
 #include "../mob_modifier.h"
 #include "../recast_container.h"
 #include "../roe.h"
@@ -2012,13 +2012,26 @@ namespace charutils
                 {
                     if (PItem->isType(ITEM_WEAPON))
                     {
-                        CItemWeapon* weapon = (CItemWeapon*)PChar->getEquip(SLOT_AMMO);
+                        CItemWeapon* weapon           = (CItemWeapon*)PChar->getEquip(SLOT_AMMO);
+                        bool         longBowException = false;
+
+                        if (weapon != nullptr)
+                        {
+                            longBowException = ((CItemWeapon*)PItem)->getSkillType() == SKILL_ARCHERY &&
+                                               ((CItemWeapon*)PItem)->getSubSkillType() == SUBSKILL_LONGB &&
+                                               weapon->getSubSkillType() == SUBSKILL_XBO;
+                        }
+
                         if ((weapon != nullptr) && weapon->isType(ITEM_WEAPON))
                         {
                             if (((CItemWeapon*)PItem)->getSkillType() != weapon->getSkillType() ||
-                                ((CItemWeapon*)PItem)->getSubSkillType() != weapon->getSubSkillType())
+                                ((CItemWeapon*)PItem)->getSubSkillType() != weapon->getSubSkillType() ||
+                                !longBowException)
                             {
-                                UnequipItem(PChar, SLOT_AMMO, false);
+                                if (!longBowException)
+                                {
+                                    UnequipItem(PChar, SLOT_AMMO, false);
+                                }
                             }
                         }
                         PChar->m_Weapons[SLOT_RANGED] = (CItemWeapon*)PItem;
@@ -2031,13 +2044,24 @@ namespace charutils
                 {
                     if (PItem->isType(ITEM_WEAPON))
                     {
-                        CItemWeapon* weapon = (CItemWeapon*)PChar->getEquip(SLOT_RANGED);
+                        CItemWeapon* weapon           = (CItemWeapon*)PChar->getEquip(SLOT_RANGED);
+                        bool         longBowException = false;
+                        if (weapon != nullptr)
+                        {
+                            longBowException = ((CItemWeapon*)PItem)->getSkillType() == SKILL_ARCHERY &&
+                                               ((CItemWeapon*)PItem)->getSubSkillType() == SUBSKILL_XBO &&
+                                               weapon->getSubSkillType() == SUBSKILL_LONGB;
+                        }
+
                         if ((weapon != nullptr) && weapon->isType(ITEM_WEAPON))
                         {
                             if (((CItemWeapon*)PItem)->getSkillType() != weapon->getSkillType() ||
                                 ((CItemWeapon*)PItem)->getSubSkillType() != weapon->getSubSkillType())
                             {
-                                UnequipItem(PChar, SLOT_RANGED, false);
+                                if (!longBowException)
+                                {
+                                    UnequipItem(PChar, SLOT_RANGED, false);
+                                }
                             }
                         }
                         if (PChar->equip[SLOT_RANGED] == 0)
@@ -2312,6 +2336,11 @@ namespace charutils
 
     void EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 containerID)
     {
+        if (PChar == nullptr || PChar->getStorage(containerID) == nullptr)
+        {
+            return;
+        }
+
         CItemEquipment* PItem = dynamic_cast<CItemEquipment*>(PChar->getStorage(containerID)->GetItem(slotID));
 
         if (PItem && PItem == PChar->getEquip((SLOTTYPE)equipSlotID))
@@ -2319,10 +2348,11 @@ namespace charutils
             return;
         }
 
-        if (equipSlotID == SLOT_SUB && PItem && !PItem->IsShield() && ((CItemWeapon*)PItem)->getSkillType() == SKILL_NONE)
+        if (equipSlotID == SLOT_SUB && PItem && !PItem->IsShield())
         {
-            CItemEquipment* PMainItem = PChar->getEquip(SLOT_MAIN);
-            if (!PMainItem || !((CItemWeapon*)PMainItem)->isTwoHanded())
+            auto PItemWeapon = dynamic_cast<CItemWeapon*>(PItem);
+            auto PMainItem   = dynamic_cast<CItemWeapon*>(PChar->getEquip(SLOT_MAIN));
+            if (PItemWeapon && PItemWeapon->getSkillType() == SKILL_NONE && (!PMainItem || !PMainItem->isTwoHanded()))
             {
                 PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 0x200));
                 return;
@@ -2594,34 +2624,43 @@ namespace charutils
 
             for (auto PAbility : AbilitiesList)
             {
-                if (PPet->GetMLevel() >= PAbility->getLevel() && PetID >= 8 && PetID <= 20 && CheckAbilityAddtype(PChar, PAbility))
+                if (PPet->GetMLevel() >= PAbility->getLevel() && ((PetID >= PETID_CARBUNCLE && PetID <= PETID_CAIT_SITH) || PetID == PETID_SIREN) && CheckAbilityAddtype(PChar, PAbility))
                 {
-                    if (PetID == 8)
+                    if (PetID == PETID_CARBUNCLE)
                     {
                         if (PAbility->getID() >= ABILITY_HEALING_RUBY && PAbility->getID() <= ABILITY_SOOTHING_RUBY)
                         {
                             addPetAbility(PChar, PAbility->getID() - ABILITY_HEALING_RUBY);
                         }
                     }
-                    else if (PetID >= 9 && PetID <= 15)
+                    else if (PetID >= PETID_FENRIR && PetID <= PETID_RAMUH)
                     {
                         if (PAbility->getID() >= (ABILITY_HEALING_RUBY + ((PetID - 8) * 16)) && PAbility->getID() < (ABILITY_HEALING_RUBY + ((PetID - 7) * 16)))
                         {
                             addPetAbility(PChar, PAbility->getID() - ABILITY_HEALING_RUBY);
                         }
                     }
-                    else if (PetID == 16)
+                    else if (PetID == PETID_DIABOLOS)
                     {
                         if (PAbility->getID() >= ABILITY_CAMISADO && PAbility->getID() <= ABILITY_PERFECT_DEFENSE)
                         {
                             addPetAbility(PChar, PAbility->getID() - ABILITY_HEALING_RUBY);
                         }
                     }
-                    else if (PetID == 20)
+                    else if (PetID == PETID_CAIT_SITH)
                     {
                         if (PAbility->getID() > ABILITY_SOOTHING_RUBY && PAbility->getID() <= ABILITY_MOONLIT_CHARGE)
                         {
                             addPetAbility(PChar, PAbility->getID() - ABILITY_HEALING_RUBY);
+                        }
+                    }
+                    else if (PetID == PETID_SIREN)
+                    {
+                        if (PAbility->getID() >= ABILITY_CLARSACH_CALL && PAbility->getID() <= ABILITY_HYSTERIC_ASSAULT)
+                        {
+                            uint16 sirenAbilltyPacketOffset = 0x1C0;
+                            uint16 sirenAbilityPacketBit    = (PAbility->getID() - ABILITY_CLARSACH_CALL) + sirenAbilltyPacketOffset;
+                            addPetAbility(PChar, sirenAbilityPacketBit);
                         }
                     }
                 }
@@ -3458,33 +3497,17 @@ namespace charutils
         uint32 baseExp = GetBaseExp(charlvl, moblvl);
 
         if (baseExp >= 400)
-        {
-            return EMobDifficulty::IncrediblyTough;
-        }
-        if (baseExp >= 350)
-        {
-            return EMobDifficulty::VeryTough;
-        }
-        if (baseExp >= 220)
-        {
-            return EMobDifficulty::Tough;
-        }
+            return EMobDifficulty::IncrediblyTough; // 400+
         if (baseExp >= 200)
-        {
-            return EMobDifficulty::EvenMatch;
-        }
-        if (baseExp >= 160)
-        {
-            return EMobDifficulty::DecentChallenge;
-        }
-        if (baseExp >= 60)
-        {
-            return EMobDifficulty::EasyPrey;
-        }
-        if (baseExp >= 1 && moblvl > 55)
-        {
-            return EMobDifficulty::IncrediblyEasyPrey;
-        }
+            return EMobDifficulty::VeryTough; // 200 - 399
+        if (baseExp > 100)
+            return EMobDifficulty::Tough; // 101 - 199
+        if (baseExp == 100)
+            return EMobDifficulty::EvenMatch; // 100
+        if (baseExp >= 80)
+            return EMobDifficulty::DecentChallenge; // 80 - 99
+        if (baseExp >= 1)
+            return EMobDifficulty::EasyPrey; // 1 - 79
 
         return EMobDifficulty::TooWeak;
     }
@@ -3588,28 +3611,282 @@ namespace charutils
         }
     }
 
+    float ApplyTH(int16 m_THLvl, uint16 rate)
+    {
+        TracyZoneScoped;
+
+        float multi       = 1.00f;
+        bool  ultra_rare  = (rate == 1);
+        bool  super_rare  = (rate == 5);
+        bool  very_rare   = (rate == 10);
+        bool  rare        = (rate == 50);
+        bool  uncommon    = (rate == 100);
+        bool  common      = (rate == 150);
+        bool  very_common = (rate == 240);
+
+        if (ultra_rare)
+        {
+            if (m_THLvl < 3)
+            {
+                multi = 1.00f + (1.00f * m_THLvl);
+                return multi;
+            }
+            else if (m_THLvl < 7)
+            {
+                multi = 3.00f + (0.50f * (m_THLvl - 2));
+                return multi;
+            }
+            else if (m_THLvl < 12)
+            {
+                multi = 5.00f + (1.00f * (m_THLvl - 6));
+                return multi;
+            }
+            else if (m_THLvl < 14)
+            {
+                multi = 9.00f + (1.50f * (m_THLvl - 11));
+                return multi;
+            }
+            else
+            {
+                multi = 12.00f + (2.00f * (m_THLvl - 14));
+                return multi;
+            }
+        }
+        else if (super_rare)
+        {
+            if (m_THLvl < 3)
+            {
+                multi = 1.00f + (0.50f * m_THLvl);
+                return multi;
+            }
+            else if (m_THLvl < 8)
+            {
+                multi = 2.00f + (0.40f * (m_THLvl - 2));
+                return multi;
+            }
+            else if (m_THLvl < 10)
+            {
+                multi = 4.00f + (0.60f * (m_THLvl - 7));
+                return multi;
+            }
+            else if (m_THLvl < 11)
+            {
+                multi = 5.20f + (0.80f * (m_THLvl - 9));
+                return multi;
+            }
+            else
+            {
+                multi = 9.20f + (1.00f * (m_THLvl - 10));
+                return multi;
+            }
+        }
+        else if (very_rare)
+        {
+            if (m_THLvl < 3)
+            {
+                multi = 1.00f + (0.50f * m_THLvl);
+                return multi;
+            }
+            else if (m_THLvl < 5)
+            {
+                multi = 2.00f + (0.25f * (m_THLvl - 2));
+                return multi;
+            }
+            else if (m_THLvl < 8)
+            {
+                multi = 1.40f + (0.10f * (m_THLvl - 2));
+                return multi;
+            }
+            else if (m_THLvl < 12)
+            {
+                multi = 1.90f + (0.20f * (m_THLvl - 7));
+                return multi;
+            }
+            else if (m_THLvl < 14)
+            {
+                multi = 2.70f + (0.40f * (m_THLvl - 11));
+                return multi;
+            }
+            else
+            {
+                multi = 3.50f + (0.50f * (m_THLvl - 13));
+                return multi;
+            }
+        }
+        else if (rare)
+        {
+            if (m_THLvl < 3)
+            {
+                multi = 1.00f + (0.20f * m_THLvl);
+                return multi;
+            }
+            else if (m_THLvl < 8)
+            {
+                multi = 1.40f + (0.10f * (m_THLvl - 2));
+                return multi;
+            }
+            else if (m_THLvl < 12)
+            {
+                multi = 1.90f + (0.20f * (m_THLvl - 7));
+                return multi;
+            }
+            else if (m_THLvl < 14)
+            {
+                multi = 2.70f + (0.40f * (m_THLvl - 11));
+                return multi;
+            }
+            else
+            {
+                multi = 3.50f + (0.50f * (m_THLvl - 13));
+                return multi;
+            }
+        }
+        else if (uncommon)
+        {
+            if (m_THLvl < 2)
+            {
+                multi = 1.00f + (0.20f * m_THLvl);
+                return multi;
+            }
+            else if (m_THLvl < 3)
+            {
+                multi = 1.20f + (0.30f * (m_THLvl - 1));
+                return multi;
+            }
+            else if (m_THLvl < 4)
+            {
+                multi = 1.50f + (0.15f * (m_THLvl - 1));
+                return multi;
+            }
+            else if (m_THLvl < 8)
+            {
+                multi = 1.80f + (0.10f * (m_THLvl - 3));
+                return multi;
+            }
+            else if (m_THLvl < 10)
+            {
+                multi = 2.10f + (0.15f * (m_THLvl - 7));
+                return multi;
+            }
+            else if (m_THLvl < 11)
+            {
+                multi = 2.40f + (0.25f * (m_THLvl - 9));
+                return multi;
+            }
+            else
+            {
+                multi = 2.65f + (0.15f * (m_THLvl - 10));
+                return multi;
+            }
+        }
+        else if (common)
+        {
+            if (m_THLvl < 2)
+            {
+                multi = 1.00f + (1.00f * m_THLvl);
+                return multi;
+            }
+            else if (m_THLvl < 3)
+            {
+                multi = 2.00f + (0.66f * (m_THLvl - 1));
+                return multi;
+            }
+            else
+            {
+                multi = 2.66f + (0.16f * (m_THLvl - 2));
+                return multi;
+            }
+        }
+        else if (very_common)
+        {
+            if (m_THLvl < 2)
+            {
+                multi = 1.00f + (1.00f * m_THLvl);
+                return multi;
+            }
+            else if (m_THLvl < 3)
+            {
+                multi = 2.00f + (0.33f * (m_THLvl - 1));
+                return multi;
+            }
+            else if (m_THLvl < 5)
+            {
+                multi = 2.34f + (0.16f * (m_THLvl - 2));
+                return multi;
+            }
+            else if (m_THLvl < 6)
+            {
+                multi = 2.82f + (0.11f * (m_THLvl - 4));
+                return multi;
+            }
+            else if (m_THLvl < 7)
+            {
+                multi = 2.93f + (0.05f * (m_THLvl - 5));
+                return multi;
+            }
+            else if (m_THLvl < 8)
+            {
+                multi = 2.98f + (0.04f * (m_THLvl - 6));
+                return multi;
+            }
+            else if (m_THLvl < 11)
+            {
+                multi = 3.02f + (0.06f * (m_THLvl - 7));
+                return multi;
+            }
+            else if (m_THLvl < 12)
+            {
+                multi = 3.20f + (0.03f * (m_THLvl - 10));
+                return multi;
+            }
+            else
+            {
+                multi = 3.23f + (0.10f * (m_THLvl - 11));
+                return multi;
+            }
+        }
+        else
+        {
+            return multi; // TH Didn't Apply
+        }
+    }
+
     void DistributeItem(CCharEntity* PChar, CBaseEntity* PEntity, uint16 itemid, uint16 droprate)
     {
         TracyZoneScoped;
 
         uint8 tries    = 0;
         uint8 maxTries = 1;
-        uint8 bonus    = 0;
+        float bonus    = 0;
+        bool  applyTH  = false;
         if (auto* PMob = dynamic_cast<CMobEntity*>(PEntity))
         {
             // THLvl is the number of 'extra chances' at an item. If the item is obtained, then break out.
             tries    = 0;
-            maxTries = 1 + (PMob->m_THLvl > 2 ? 2 : PMob->m_THLvl);
-            bonus    = (PMob->m_THLvl > 2 ? (PMob->m_THLvl - 2) * 10 : 0);
+            maxTries = 1;
+            bonus    = ApplyTH(PMob->m_THLvl, droprate);
+            applyTH  = true;
         }
         while (tries < maxTries)
         {
-            if (droprate > 0 && xirand::GetRandomNumber(1000) < droprate * settings::get<float>("map.DROP_RATE_MULTIPLIER") + bonus)
+            if (applyTH)
             {
-                PChar->PTreasurePool->AddItem(itemid, PEntity);
-                break;
+                if (droprate > 0 && xirand::GetRandomNumber(1000) < droprate * settings::get<float>("map.DROP_RATE_MULTIPLIER") * bonus)
+                {
+                    PChar->PTreasurePool->AddItem(itemid, PEntity);
+                    break;
+                }
+                tries++;
             }
-            tries++;
+            else
+            {
+                if (droprate > 0 && xirand::GetRandomNumber(1000) < droprate * settings::get<float>("map.DROP_RATE_MULTIPLIER") + bonus)
+                {
+                    PChar->PTreasurePool->AddItem(itemid, PEntity);
+                    break;
+                }
+                tries++;
+            }
         }
     }
 
@@ -3804,15 +4081,15 @@ namespace charutils
                     // Per monster caps pulled from: https://ffxiclopedia.fandom.com/wiki/Experience_Points
                     if (PMember->GetMLevel() <= 50)
                     {
-                        exp = std::fmin(exp, 400.f);
+                        exp = std::fmin(exp, 200.f);
                     }
                     else if (PMember->GetMLevel() <= 60)
                     {
-                        exp = std::fmin(exp, 500.f);
+                        exp = std::fmin(exp, 250.f);
                     }
                     else
                     {
-                        exp = std::fmin(exp, 600.f);
+                        exp = std::fmin(exp, 300.f);
                     }
 
                     if (mobCheck > EMobDifficulty::DecentChallenge)
@@ -3841,7 +4118,7 @@ namespace charutils
                                     exp *= 1.5f;
                                     break;
                                 default:
-                                    exp *= 1.55f;
+                                    exp *= 1.5f;
                                     break;
                             }
                         }
@@ -4068,11 +4345,34 @@ namespace charutils
                             }
                         }
                     }
-                    // pet or companion exp penalty needs to be added here
-                    if (distance(PMember->loc.p, PMob->loc.p) > 100)
+
+                    auto* PEntity = dynamic_cast<CBattleEntity*>(PMember);
+                    if (PEntity->PPet != nullptr)
+                    {
+
+                        if ((PEntity->PPet->objtype == TYPE_TRUST) || (PEntity->PPet->objtype == TYPE_NPC))
+                        {
+                            exp *= 0.7f;
+                        }
+                        else if (PEntity->PPet->StatusEffectContainer->HasStatusEffect(EFFECT_CHARM))
+                        {
+                            exp *= 0.7f;
+                        }
+                    }
+
+                    if (distanceSquared(PMember->loc.p, PMob->loc.p) > 100 * 100)
                     {
                         PMember->pushPacket(new CMessageBasicPacket(PMember, PMember, 0, 0, 37));
                         return;
+                    }
+
+                    if (PMob->m_ExpPenalty > lua["xi"]["settings"]["main"]["PL_PENALTY"].get<uint16>() * 3)
+                    {
+                        exp = std::max<float>(0.0, exp - PMob->m_ExpPenalty - (lua["xi"]["settings"]["main"]["PL_PENALTY"].get<uint16>() * 3));
+                        if (exp == 0.0f)
+                        {
+                            PMember->pushPacket(new CMessageBasicPacket(PMember, PMember, 0, 0, 21)); // No Experience Gained Message
+                        }
                     }
 
                     exp = charutils::AddExpBonus(PMember, exp);
@@ -4588,7 +4888,7 @@ namespace charutils
 
     /************************************************************************
      *                                                                       *
-     *  Устанавливаем ограничение уровня персонажа                           *
+     *  Establish a restriction of character level                          *
      *                                                                       *
      ************************************************************************/
 
@@ -4611,6 +4911,24 @@ namespace charutils
 
         sql->Query(Query, PChar->loc.p.rotation, PChar->loc.p.x, PChar->loc.p.y, PChar->loc.p.z, PChar->loc.boundary, PChar->id);
     }
+
+    /* TODO: Move linkshell persistence here
+    void SaveCharLinkshells(CCharEntity* PChar)
+    {
+        for (uint8 lsSlot = 16; lsSlot < 18; ++lsSlot)
+        {
+            if (PChar->equip[lsSlot] == 0)
+            {
+                sql->Query("DELETE FROM char_linkshells WHERE charid = %u AND lsslot = %u LIMIT 1;", PChar->id, lsSlot);
+            }
+            else
+            {
+                const char* fmtQuery = "INSERT INTO char_linkshells SET charid = %u, lsslot = %u, location = %u, slot = %u ON DUPLICATE KEY UPDATE location = %u, slot = %u;";
+                sql->Query(fmtQuery, PChar->id, lsSlot, PChar->equipLoc[lsSlot], PChar->equip[lsSlot], PChar->equipLoc[lsSlot], PChar->equip[lsSlot]);
+            }
+        }
+    }
+    */
 
     void SaveQuestsList(CCharEntity* PChar)
     {
@@ -5370,17 +5688,10 @@ namespace charutils
     bool hasMogLockerAccess(CCharEntity* PChar)
     {
         TracyZoneScoped;
-
-        char fmtQuery[] = "SELECT value FROM char_vars WHERE charid = %u AND varname = '%s' ";
-        sql->Query(fmtQuery, PChar->id, "mog-locker-expiry-timestamp");
-
-        if (sql->NextRow() == SQL_SUCCESS)
+        auto tstamp = static_cast<uint32>(PChar->getCharVar("mog-locker-expiry-timestamp"));
+        if (CVanaTime::getInstance()->getVanaTime() < tstamp)
         {
-            auto tstamp = (uint32)sql->GetIntData(0);
-            if (CVanaTime::getInstance()->getVanaTime() < tstamp)
-            {
-                return true;
-            }
+            return true;
         }
         return false;
     }
@@ -5994,75 +6305,115 @@ namespace charutils
 
     int32 GetCharVar(CCharEntity* PChar, std::string const& var)
     {
-        TracyZoneScoped;
-        TracyZoneString(PChar->name);
-        TracyZoneString(var);
-
         if (PChar == nullptr)
         {
-            ShowError("GetCharVar was requested for a nullptr PChar");
             return 0;
         }
 
-        const char* fmtQuery = "SELECT value FROM char_vars WHERE charid = %u AND varname = '%s' LIMIT 1;";
+        return PChar->getCharVar(var);
+    }
 
-        int32 ret = sql->Query(fmtQuery, PChar->id, var.c_str());
-
-        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+    void SetCharVar(uint32 charId, std::string const& var, int32 value)
+    {
+        if (auto player = zoneutils::GetChar(charId))
         {
-            return sql->GetIntData(0);
+            player->setCharVar(var, value);
+            return;
         }
 
-        // auto stmt = sql->GetPreparedStatement("GET_CHAR_VAR");
-        // stmt->Execute(PChar->id, var);
-
-        return 0;
+        PersistCharVar(charId, var, value);
+        message::send_charvar_update(charId, var, value);
     }
 
     void SetCharVar(CCharEntity* PChar, std::string const& var, int32 value)
     {
-        TracyZoneScoped;
-        TracyZoneString(PChar->name);
-        TracyZoneString(fmt::format("{} -> {}", var, value));
-
         if (PChar == nullptr)
         {
-            ShowError("SetCharVar was requested for a nullptr PChar");
             return;
         }
 
+        return PChar->setCharVar(var, value);
+    }
+
+    int32 ClearCharVarsWithPrefix(CCharEntity* PChar, std::string const& prefix)
+    {
+        if (PChar == nullptr)
+        {
+            return 0;
+        }
+
+        PChar->clearCharVarsWithPrefix(prefix);
+        return 0;
+    }
+
+    int32 RemoveCharVarsWithTag(CCharEntity* PChar, std::string const& varsTag)
+    {
+        if (PChar == nullptr)
+        {
+            return 0;
+        }
+
+        PChar->clearCharVarsWithPrefix(fmt::sprintf("[%s]", varsTag));
+        return 0;
+    }
+
+    void ClearCharVarFromAll(std::string const& varName, bool localOnly)
+    {
+        if (!localOnly)
+        {
+            sql->Query("DELETE FROM char_vars WHERE varname = '%s';", varName);
+        }
+
+        // clang-format off
+        zoneutils::ForEachZone([varName](CZone* PZone)
+        {
+            PZone->ForEachChar([varName](CCharEntity* PChar)
+            {
+                PChar->updateCharVarCache(varName, 0);
+            });
+        });
+        // clang-format on
+    }
+
+    void IncrementCharVar(CCharEntity* PChar, std::string const& var, int32 value)
+    {
+        if (PChar == nullptr)
+        {
+            return;
+        }
+
+        const char* Query = "INSERT INTO char_vars SET charid = %u, varname = '%s', value = %i ON DUPLICATE KEY UPDATE value = value + %i;";
+
+        sql->Query(Query, PChar->id, var, value, value);
+
+        PChar->removeFromCharVarCache(var);
+    }
+
+    int32 FetchCharVar(uint32 charId, std::string const& varName)
+    {
+        const char* fmtQuery = "SELECT value FROM char_vars WHERE charid = %u AND varname = '%s' LIMIT 1;";
+
+        int32 ret = sql->Query(fmtQuery, charId, varName);
+
+        int32 value = 0;
+        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+        {
+            value = sql->GetIntData(0);
+        }
+
+        return value;
+    }
+
+    void PersistCharVar(uint32 charId, std::string const& var, int32 value)
+    {
         if (value == 0)
         {
-            sql->Query(fmt::format("DELETE FROM char_vars WHERE charid = {} AND varname = '{}' LIMIT 1;",
-                                   PChar->id, var)
-                           .c_str());
+            sql->Query("DELETE FROM char_vars WHERE charid = %u AND varname = '%s' LIMIT 1;", charId, var);
         }
         else
         {
-            sql->Query(fmt::format("INSERT INTO char_vars SET charid = {}, varname = '{}', value = {} ON DUPLICATE KEY UPDATE value = {};",
-                                   PChar->id, var.c_str(), value, value)
-                           .c_str());
+            sql->Query("INSERT INTO char_vars SET charid = %u, varname = '%s', value = %i ON DUPLICATE KEY UPDATE value = %i;", charId, var, value, value);
         }
-    }
-
-    void ClearCharVarsWithPrefix(CCharEntity* PChar, std::string prefix)
-    {
-        TracyZoneScoped;
-
-        if (PChar == nullptr)
-        {
-            return;
-        }
-
-        // Validate that prefix is not too short, since we don't want it to
-        // accidentally clear a lot of variables it shouldn't.
-        if (prefix.size() < 5)
-        {
-            ShowError("Prefix too short to clear with: '%s'", prefix);
-            return;
-        }
-
-        sql->Query("DELETE FROM char_vars WHERE charid = %u AND varname LIKE '%s%%';", PChar->id, prefix.c_str());
     }
 
     uint16 getWideScanRange(JOBTYPE job, uint8 level)

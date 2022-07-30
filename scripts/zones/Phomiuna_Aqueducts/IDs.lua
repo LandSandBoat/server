@@ -30,6 +30,9 @@ zones[xi.zone.PHOMIUNA_AQUEDUCTS] =
     },
     mob =
     {
+        EBA          = 16887953,
+        MAHISHA      = 16887885,
+        TRES_DUENDES = 16887908,
     },
     npc =
     {

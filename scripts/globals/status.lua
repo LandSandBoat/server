@@ -838,9 +838,10 @@ xi.effect =
     ELEMENTALRES_DOWN        = 802, -- Elemental resistance down
     FULL_SPEED_AHEAD         = 803, -- Helper for quest: Full Speed Ahead!
     HYSTERIA                 = 804, -- Used for Hysteroanima to stop after readying a weaponskill with no msg.
-    -- PLACEHOLDER           = 805, -- Description
-    -- 805-1022
-    -- PLACEHOLDER             = 1023 -- The client dat file seems to have only this many "slots", results of exceeding that are untested.
+    TOMAHAWK                 = 805, -- Silent status effect inflicted by a Warrior using the "Tomahawk" job ability
+    -- PLACEHOLDER           = 806, -- Description
+    -- 806-1022
+    -- PLACEHOLDER           = 1023 -- The client dat file seems to have only this many "slots", results of exceeding that are untested.
 }
 
 -----------------------------------
@@ -950,7 +951,7 @@ xi.mod =
     ENMITY_LOSS_REDUCTION           = 427,
     MATT                            = 28,
     MDEF                            = 29,
-    MACC                            = 30,
+    MACC                            = 30, -- This is NOT item level "magic accuracy skill" ! That happens in item_weapon.sql instead
     MEVA                            = 31,
     FIREATT                         = 32,
     ICEATT                          = 33,
@@ -992,6 +993,8 @@ xi.mod =
     MPHEAL                          = 71,
     HPHEAL                          = 72,
     STORETP                         = 73,
+
+    -- These are NOT item Level skill, they are skill in your status menu. iLvl "skill" happens in item_weapon.sql
     HTH                             = 80,
     DAGGER                          = 81,
     SWORD                           = 82,
@@ -1004,6 +1007,7 @@ xi.mod =
     GKATANA                         = 89,
     CLUB                            = 90,
     STAFF                           = 91,
+
     RAMPART_DURATION                = 92,  -- Rampart duration in seconds
     FLEE_DURATION                   = 93,  -- Flee duration in seconds
     MEDITATE_DURATION               = 94,  -- Meditate duration in seconds
@@ -1013,6 +1017,8 @@ xi.mod =
     STALWART_SOUL                   = 907, -- Reduces damage taken from Souleater
     BOOST_EFFECT                    = 97,  -- Boost power in tenths
     CAMOUFLAGE_DURATION             = 98,  -- Camouflage duration in percents
+
+    -- These are NOT item Level skill, they are skill in your status menu. iLvl "skill" happens in item_weapon.sql
     AUTO_MELEE_SKILL                = 101,
     AUTO_RANGED_SKILL               = 102,
     AUTO_MAGIC_SKILL                = 103,
@@ -1226,6 +1232,25 @@ xi.mod =
     TP_BONUS                        = 345,
     PERPETUATION_REDUCTION          = 346,
 
+    -- Warrior
+    BERSERK_POTENCY                 = 948,  -- Augments "Berserk"/Enhances "Berserk" effect (Conqueror)
+    BERSERK_DURATION                = 954,  -- Berserk Duration
+    AGGRESSOR_DURATION              = 955,  -- Aggressor Duration
+    DEFENDER_DURATION               = 956,  -- Defender Duration
+    ENHANCES_RESTRAINT              = 1045, -- Enhances "Restraint" effect/"Restraint" + (Increases the damage bonus of Restraint by XXX%)
+    ENHANCES_BLOOD_RAGE             = 1046, -- Enhances "Blood Rage" effect/"Blood Rage" duration +
+
+    -- Dragoon
+    WYVERN_LVL_BONUS                = 1043, -- Wyvern: Lv.+ (Increases wyvern's base level above 99)
+
+    -- Summoner
+    AVATAR_LVL_BONUS                = 1040, -- Avatar: Lv. ###/+ (Increases all avatar's base level above 99)
+    CARBUNCLE_LVL_BONUS             = 1041, -- Carbuncle: Lv.+ (Increases Carbuncle's base level above 99)
+    CAIT_SITH_LVL_BONUS             = 1042, -- Cait Sith: Lv.+ (Increases Cait Sith's base level above 99)
+
+    -- Puppetmaster
+    AUTOMATON_LVL_BONUS             = 1044, -- Automaton: Lv. (Increases automaton's base level above 99)
+
     -- Geomancer
     FULL_CIRCLE                     = 1025, -- Increases the initial multiplier on MP returned via Full Circle
     BOLSTER_EFFECT                  = 1028, -- Adds bonus duration as +N seconds
@@ -1395,6 +1420,8 @@ xi.mod =
     MAXIMUM_SONGS_BONUS             = 453, --
     SONG_DURATION_BONUS             = 454, --
     SONG_SPELLCASTING_TIME          = 455, --
+
+    AVATARS_FAVOR_ENHANCE           = 630, -- Adds 1 rank to avatars favor
 
     QUICK_DRAW_DMG                  = 411, --
     QUICK_DRAW_MACC                 = 191, -- Quick draw magic accuracy
@@ -1628,10 +1655,6 @@ xi.mod =
     SHIELD_DEF_BONUS                = 905, -- Shield Defense Bonus
     SNEAK_DURATION                  = 946, -- Additional duration in seconds
     INVISIBLE_DURATION              = 947, -- Additional duration in seconds
-    BERSERK_EFFECT                  = 948, -- Conqueror Berserk Effect
-    BERSERK_DURATION                = 954, -- Berserk Duration
-    AGGRESSOR_DURATION              = 955, -- Aggressor Duration
-    DEFENDER_DURATION               = 956, -- Defender Duration
     CARDINAL_CHANT                  = 959,
     INDI_DURATION                   = 960,
     GEOMANCY_BONUS                  = 961, -- Used to increase potency of "Geomancy +" items (only the highest value is counted)
@@ -1688,11 +1711,43 @@ xi.mod =
     AUGMENT_BLU_MAGIC      = 1036, -- Percent chance for BLU magic to receive 3x WSC value for spell (BLU AF3 Sets)
     GEOMANCY_MP_NO_DEPLETE = 1037, -- Percent chance for Geomancy to cost 0 MP (GEO AF3 Sets)
 
+    -- Permenant Resistance Build Modifiers
+    SLEEPRESBUILD                 = 1138, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    POISONRESBUILD                = 1139, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    PARALYZERESBUILD              = 1140, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    BLINDRESBUILD                 = 1141, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    SILENCERESBUILD               = 1142, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    VIRUSRESBUILD                 = 1143, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    PETRIFYRESBUILD               = 1144, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    BINDRESBUILD                  = 1145, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    CURSERESBUILD                 = 1146, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    GRAVITYRESBUILD               = 1147, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    SLOWRESBUILD                  = 1148, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    STUNRESBUILD                  = 1149, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    CHARMRESBUILD                 = 1150, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    AMNESIARESBUILD               = 1151, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    LULLABYRESBUILD               = 1152, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    DEATHRESBUILD                 = 1153, -- Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    PET_DMG_TAKEN_PHYSICAL        = 1154, -- Percent increase/decrease in pet physical damage taken for the target.
+    PET_DMG_TAKEN_MAGICAL         = 1155, -- Percent increase/decrease in pet magical damage taken for the target.
+    PET_DMG_TAKEN_BREATH          = 1156, -- Percent increase/decrease in pet breath damage taken for the target.
+    DIG_BYPASS_FATIGUE            = 1157, -- Chocobo digging modifier found in "Blue Race Silks". Modifier works as a direct percent. Used in Chocobo_Digging.lua
+
+    FIRE_EEM                      = 1158, -- Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    ICE_EEM                       = 1159, -- Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    WIND_EEM                      = 1160, -- Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    EARTH_EEM                     = 1161, -- Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    THUNDER_EEM                   = 1162, -- Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    WATER_EEM                     = 1163, -- Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    LIGHT_EEM                     = 1164, -- Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    DARK_EEM                      = 1165, -- Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+
     -- IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN src/map/modifier.h ASWELL!
 
     -- The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
     -- 570 - 825 used by WS DMG mods these are not spares.
     -- For Next ID, see modifier.h
+    -- Spares start at: 1166
 }
 
 xi.latent =
@@ -2443,6 +2498,12 @@ xi.mobMod =
     ALLI_HATE           = 68, -- Range around target to add alliance member to enmity list.
     NO_LINK             = 69, -- If set, mob cannot link until unset.
     NO_REST             = 70, -- Mob cannot regain hp (e.g. re-burrowing antlions during ENM).
+    DRAW_IN_INCLUDE_PARTY     = 71, -- this will cause the mob's draw-in to also affect all party and alliance members
+    DRAW_IN_FRONT             = 72, -- Mob will draw in slightly in front of them instead of the center of their hitbox
+    DRAW_IN_CUSTOM_RANGE      = 73, -- override the default range of MeleeRange*2 of when players start to get drawn-in
+    DRAW_IN_MAXIMUM_REACH     = 74, -- players further than this range (yalms) will be unaffected by the draw-in. default (0) is whole zone
+    DRAW_IN_IGNORE_STATIONARY = 75, -- stationary or bound mobs draw-in the moment they cannot attack you anymore (out of range). Place this mob mod to stop that behavior.
+    ATTRACT_FAMILY_NM         = 76, -- NMs within the same family will link onto this mob (used on Sabotenders for Cactrot Rapido)
 }
 
 -----------------------------------
@@ -2666,43 +2727,44 @@ xi.recast =
 
 xi.action =
 {
-    NONE                 = 0,
-    ATTACK               = 1,
-    RANGED_FINISH        = 2,
-    WEAPONSKILL_FINISH   = 3,
-    MAGIC_FINISH         = 4,
-    ITEM_FINISH          = 5,
-    JOBABILITY_FINISH    = 6,
-    WEAPONSKILL_START    = 7,
-    MAGIC_START          = 8,
-    ITEM_START           = 9,
-    JOBABILITY_START     = 10,
-    MOBABILITY_FINISH    = 11,
-    RANGED_START         = 12,
-    RAISE_MENU_SELECTION = 13,
-    DANCE                = 14,
-    UNKNOWN_15           = 15,
-    ROAMING              = 16,
-    ENGAGE               = 17,
-    DISENGAGE            = 18,
-    CHANGE_TARGET        = 19,
-    FALL                 = 20,
-    DROPITEMS            = 21,
-    DEATH                = 22,
-    FADE_OUT             = 23,
-    DESPAWN              = 24,
-    SPAWN                = 25,
-    STUN                 = 26,
-    SLEEP                = 27,
-    ITEM_USING           = 28,
-    ITEM_INTERRUPT       = 29,
-    MAGIC_CASTING        = 30,
-    MAGIC_INTERRUPT      = 31,
-    RANGED_INTERRUPT     = 32,
-    MOBABILITY_START     = 33,
-    MOBABILITY_USING     = 34,
-    MOBABILITY_INTERRUPT = 35,
-    LEAVE                = 36,
+    NONE                  = 0,
+    ATTACK                = 1,
+    RANGED_FINISH         = 2,
+    WEAPONSKILL_FINISH    = 3,
+    MAGIC_FINISH          = 4,
+    ITEM_FINISH           = 5,
+    JOBABILITY_FINISH     = 6,
+    WEAPONSKILL_START     = 7,
+    MAGIC_START           = 8,
+    ITEM_START            = 9,
+    JOBABILITY_START      = 10,
+    MOBABILITY_FINISH     = 11,
+    RANGED_START          = 12,
+    PET_MOBABILITY_FINISH = 13,
+    DANCE                 = 14,
+    RUN_WARD_EFFUSION     = 15,
+    ROAMING               = 16,
+    ENGAGE                = 17,
+    DISENGAGE             = 18,
+    CHANGE_TARGET         = 19,
+    FALL                  = 20,
+    DROPITEMS             = 21,
+    DEATH                 = 22,
+    FADE_OUT              = 23,
+    DESPAWN               = 24,
+    SPAWN                 = 25,
+    STUN                  = 26,
+    SLEEP                 = 27,
+    ITEM_USING            = 28,
+    ITEM_INTERRUPT        = 29,
+    MAGIC_CASTING         = 30,
+    MAGIC_INTERRUPT       = 31,
+    RANGED_INTERRUPT      = 32,
+    MOBABILITY_START      = 33,
+    MOBABILITY_USING      = 34,
+    MOBABILITY_INTERRUPT  = 35,
+    LEAVE                 = 36,
+    RAISE_MENU_SELECTION  = 37,
 }
 xi.act = xi.action
 

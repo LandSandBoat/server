@@ -56,9 +56,10 @@ zones[xi.zone.TAHRONGI_CANYON] =
         VOIDWALKER_UPGRADE_KI_2      = 11016, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
         VOIDWALKER_BREAK_KI          = 11017, -- The <keyitem> shatters into tiny fragments.
         VOIDWALKER_OBTAIN_KI         = 11018, -- Obtained key item: <keyitem>!
+        LEARNS_SPELL                 = 11945, -- <name> learns <spell>!
+        UNCANNY_SENSATION            = 11947, -- You are assaulted by an uncanny sensation.
         COMMON_SENSE_SURVIVAL        = 11954, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
-
     mob =
     {
         SERPOPARD_ISHTAR_PH =
@@ -109,7 +110,6 @@ zones[xi.zone.TAHRONGI_CANYON] =
 
     npc =
     {
-        CASKET_BASE     = 17257008,
         SIGNPOST_OFFSET = 17257033,
 
         EXCAVATION =

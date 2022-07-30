@@ -37,15 +37,7 @@ zone_object.onRegionEnter = function(player, region)
 
     if regionID == 1 then
         if player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN then
-            if
-                player:getCharVar("COP_3-taru_story") == 2 and
-                player:getCharVar("COP_shikarees_story") == 1 and
-                player:getCharVar("COP_louverance_story") == 3 and
-                player:getCharVar("COP_tenzen_story") == 1 and
-                player:getCharVar("COP_jabbos_story") == 1
-            then
-                player:startEvent(122)
-            elseif player:getCharVar("PromathiaStatus") == 7 then
+            if player:getCharVar("Mission[6][840]Status") == 8 then
                 if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == QUEST_AVAILABLE then
                     player:startEvent(142)
                 elseif
@@ -87,14 +79,7 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    if csid == 122 then
-        player:setCharVar("PromathiaStatus", 4)
-        player:setCharVar("COP_3-taru_story", 0)
-        player:setCharVar("COP_shikarees_story", 0)
-        player:setCharVar("COP_louverance_story", 0)
-        player:setCharVar("COP_tenzen_story", 0)
-        player:setCharVar("COP_jabbos_story", 0)
-    elseif csid == 142 then
+    if csid == 142 then
         player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE)
     elseif csid == 143 then
         player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE)

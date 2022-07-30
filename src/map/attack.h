@@ -77,7 +77,7 @@ public:
     int32                     GetDamage() const;                    // Returns the damage for this attack.
     void                      SetDamage(int32);                     // Sets the damage for this attack.
     bool                      IsCritical() const;                   // Returns the isCritical flag.
-    void                      SetCritical(bool);                    // Sets the isCritical flag;
+    void                      SetCritical(bool, uint16 slot);       // Sets the isCritical flag;
     bool                      IsFirstSwing() const;                 // Returns the isFirstSwing flag.
     void                      SetAsFirstSwing(bool isFirst = true); // Sets this attack as the first swing.
     float                     GetDamageRatio() const;               // Gets the damage ratio.
@@ -91,9 +91,9 @@ public:
     bool                      CheckAnticipated();
     bool                      IsCountered() const;
     bool                      CheckCounter();
-    bool                      IsCovered() const; // Returns the covered flag.
-    bool                      CheckCover();      // Sets the covered flag and returns it.
-    void                      ProcessDamage();   // Processes the damage for this swing.
+    bool                      IsCovered() const;              // Returns the covered flag.
+    bool                      CheckCover();                   // Sets the covered flag and returns it.
+    void                      ProcessDamage(bool isCritical); // Processes the damage for this swing.
 
     void SetAttackType(PHYSICAL_ATTACK_TYPE type); // Sets the attack type.
 

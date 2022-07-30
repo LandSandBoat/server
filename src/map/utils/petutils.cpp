@@ -59,10 +59,10 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 struct Pet_t
 {
-    uint16    PetID;     // ID in pet_list.sql
-    look_t    look;      // внешний вид
-    string_t  name;      // имя
-    ECOSYSTEM EcoSystem; // эко-система
+    uint16      PetID;     // ID in pet_list.sql
+    look_t      look;      // внешний вид
+    std::string name;      // имя
+    ECOSYSTEM   EcoSystem; // эко-система
 
     uint8 minLevel; // минимально-возможный  уровень
     uint8 maxLevel; // максимально-возможный уровень
@@ -126,7 +126,7 @@ struct Pet_t
     Pet_t()
     : EcoSystem(ECOSYSTEM::ECO_ERROR)
     {
-        PetID     = 0;
+        PetID = 0;
 
         minLevel = -1;
         maxLevel = 99;
@@ -162,19 +162,19 @@ struct Pet_t
         hasSpellScript = false;
         spellList      = 0;
 
-        slash_sdt    = 0;
-        pierce_sdt   = 0;
-        hth_sdt      = 0;
-        impact_sdt   = 0;
+        slash_sdt  = 0;
+        pierce_sdt = 0;
+        hth_sdt    = 0;
+        impact_sdt = 0;
 
-        fire_sdt     = 0;
-        ice_sdt      = 0;
-        wind_sdt     = 0;
-        earth_sdt    = 0;
-        thunder_sdt  = 0;
-        water_sdt    = 0;
-        light_sdt    = 0;
-        dark_sdt     = 0;
+        fire_sdt    = 0;
+        ice_sdt     = 0;
+        wind_sdt    = 0;
+        earth_sdt   = 0;
+        thunder_sdt = 0;
+        water_sdt   = 0;
+        light_sdt   = 0;
+        dark_sdt    = 0;
 
         fire_meva    = 0;
         ice_meva     = 0;
@@ -286,14 +286,14 @@ namespace petutils
                 Pet->hth_sdt    = (uint16)(sql->GetFloatData(30) * 1000);
                 Pet->impact_sdt = (uint16)(sql->GetFloatData(31) * 1000);
 
-                Pet->fire_sdt    = (int16)sql->GetFloatData(32); // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
-                Pet->ice_sdt     = (int16)sql->GetFloatData(33); // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
-                Pet->wind_sdt    = (int16)sql->GetFloatData(34); // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
-                Pet->earth_sdt   = (int16)sql->GetFloatData(35); // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
-                Pet->thunder_sdt = (int16)sql->GetFloatData(36); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
-                Pet->water_sdt   = (int16)sql->GetFloatData(37); // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
-                Pet->light_sdt   = (int16)sql->GetFloatData(38); // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
-                Pet->dark_sdt    = (int16)sql->GetFloatData(39); // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->fire_sdt    = (int16)sql->GetIntData(32); // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->ice_sdt     = (int16)sql->GetIntData(33); // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->wind_sdt    = (int16)sql->GetIntData(34); // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->earth_sdt   = (int16)sql->GetIntData(35); // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->thunder_sdt = (int16)sql->GetIntData(36); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->water_sdt   = (int16)sql->GetIntData(37); // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->light_sdt   = (int16)sql->GetIntData(38); // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->dark_sdt    = (int16)sql->GetIntData(39); // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
 
                 // resistances
                 Pet->fire_meva    = (int16)sql->GetIntData(40);
@@ -542,6 +542,9 @@ namespace petutils
         PMob->stats.INT = (uint16)((fINT + mINT) * 0.9f);
         PMob->stats.MND = (uint16)((fMND + mMND) * 0.9f);
         PMob->stats.CHR = (uint16)((fCHR + mCHR) * 0.9f);
+
+        // Set jugs damageType to impact (blunt) damage. All jugs at level 75 cap do impact (blunt) damage. https://ffxiclopedia.fandom.com/wiki/Category:Familiars
+        PMob->m_dmgType = DAMAGE_TYPE::IMPACT;
     }
 
     void LoadAutomatonStats(CCharEntity* PMaster, CPetEntity* PPet, Pet_t* petStats)
@@ -705,21 +708,25 @@ namespace petutils
         switch (PAutomaton->getFrame())
         {
             default: // case FRAME_HARLEQUIN:
-                PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(2, PPet->GetMLevel());
-                PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(10, PPet->GetMLevel()));
+                PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(2, mlvl > 99 ? 99 : mlvl);
+                PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(10, mlvl > 99 ? 99 : mlvl));
+                PPet->m_dmgType = DAMAGE_TYPE::IMPACT;
                 break;
             case FRAME_VALOREDGE:
                 PPet->m_Weapons[SLOT_SUB]->setShieldSize(3);
-                PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(5, PPet->GetMLevel());
-                PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(5, PPet->GetMLevel()));
+                PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(5, mlvl > 99 ? 99 : mlvl);
+                PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(5, mlvl > 99 ? 99 : mlvl));
+                PPet->m_dmgType = DAMAGE_TYPE::SLASHING;
                 break;
             case FRAME_SHARPSHOT:
-                PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(1, PPet->GetMLevel());
-                PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(11, PPet->GetMLevel()));
+                PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(1, mlvl > 99 ? 99 : mlvl);
+                PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(11, mlvl > 99 ? 99 : mlvl));
+                PPet->m_dmgType = DAMAGE_TYPE::PIERCING;
                 break;
             case FRAME_STORMWAKER:
-                PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(10, PPet->GetMLevel());
-                PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(12, PPet->GetMLevel()));
+                PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(10, mlvl > 99 ? 99 : mlvl);
+                PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(12, mlvl > 99 ? 99 : mlvl));
+                PPet->m_dmgType = DAMAGE_TYPE::IMPACT;
                 break;
         }
 
@@ -879,6 +886,12 @@ namespace petutils
             PPet->addModifier(Mod::MACC, PMaster->getMod(Mod::PET_MACC_MEVA));
             PPet->addModifier(Mod::MEVA, PMaster->getMod(Mod::PET_MACC_MEVA));
         }
+
+        // Set damageType for Avatars
+        if (PPet->m_PetID == PETID_CAIT_SITH || PPet->m_PetID == PETID_FENRIR)
+            PPet->m_dmgType = DAMAGE_TYPE::SLASHING;
+        else
+            PPet->m_dmgType = DAMAGE_TYPE::IMPACT;
     }
 
     /************************************************************************
@@ -1137,38 +1150,80 @@ namespace petutils
     int16 PerpetuationCost(uint32 id, uint8 level)
     {
         int16 cost = 0;
-        if (id <= 7)
+
+        // Fire Spirit through Dark Spirit
+        if (id <= PETID_DARKSPIRIT)
         {
-            if (level < 19)
-            {
-                cost = 1;
-            }
-            else if (level < 38)
+            if (level < 5)
             {
                 cost = 2;
             }
-            else if (level < 57)
+            else if (level < 9)
             {
                 cost = 3;
             }
-            else if (level < 75)
+            else if (level < 14)
             {
                 cost = 4;
             }
-            else if (level < 81)
+            else if (level < 18)
             {
                 cost = 5;
             }
-            else if (level < 91)
+            else if (level < 23)
             {
                 cost = 6;
             }
-            else
+            else if (level < 27)
             {
                 cost = 7;
             }
+            else if (level < 32)
+            {
+                cost = 8;
+            }
+            else if (level < 36)
+            {
+                cost = 9;
+            }
+            else if (level < 40)
+            {
+                cost = 10;
+            }
+            else if (level < 46)
+            {
+                cost = 11;
+            }
+            else if (level < 49)
+            {
+                cost = 12;
+            }
+            else if (level < 54)
+            {
+                cost = 13;
+            }
+            else if (level < 58)
+            {
+                cost = 14;
+            }
+            else if (level < 63)
+            {
+                cost = 15;
+            }
+            else if (level < 67)
+            {
+                cost = 16;
+            }
+            else if (level < 72)
+            {
+                cost = 17;
+            }
+            else
+            {
+                cost = 18;
+            }
         }
-        else if (id == 8)
+        else if (id == PETID_CARBUNCLE)
         {
             if (level < 10)
             {
@@ -1202,20 +1257,12 @@ namespace petutils
             {
                 cost = 8;
             }
-            else if (level < 81)
+            else
             {
                 cost = 9;
             }
-            else if (level < 91)
-            {
-                cost = 10;
-            }
-            else
-            {
-                cost = 11;
-            }
         }
-        else if (id == 9)
+        else if (id == PETID_FENRIR)
         {
             if (level < 8)
             {
@@ -1257,20 +1304,13 @@ namespace petutils
             {
                 cost = 10;
             }
-            else if (level < 81)
+            else
             {
                 cost = 11;
             }
-            else if (level < 91)
-            {
-                cost = 12;
-            }
-            else
-            {
-                cost = 13;
-            }
         }
-        else if (id <= 16)
+        // NOTE: This condition covers PETID_IFRIT through the below conditions
+        else if (id <= PETID_DIABOLOS || id == PETID_SIREN)
         {
             if (level < 10)
             {
@@ -1312,17 +1352,9 @@ namespace petutils
             {
                 cost = 12;
             }
-            else if (level < 81)
-            {
-                cost = 13;
-            }
-            else if (level < 91)
-            {
-                cost = 14;
-            }
             else
             {
-                cost = 15;
+                cost = 13;
             }
         }
 
@@ -1386,7 +1418,7 @@ namespace petutils
 
         PET_TYPE petType = PET_TYPE::JUG_PET;
 
-        if (PetID <= PETID_CAIT_SITH)
+        if (PetID <= PETID_CAIT_SITH || PetID == PETID_SIREN)
         {
             petType = PET_TYPE::AVATAR;
         }
@@ -1510,9 +1542,22 @@ namespace petutils
 
         if (PPet->getPetType() == PET_TYPE::AVATAR)
         {
+            uint8 mLvl = PMaster->GetMLevel();
+
             if (PMaster->GetMJob() == JOB_SMN)
             {
-                PPet->SetMLevel(PMaster->GetMLevel());
+                mLvl += PMaster->getMod(Mod::AVATAR_LVL_BONUS);
+
+                if (PetID == PETID_CARBUNCLE)
+                {
+                    mLvl += PMaster->getMod(Mod::CARBUNCLE_LVL_BONUS);
+                }
+                else if (PetID == PETID_CAIT_SITH)
+                {
+                    mLvl += PMaster->getMod(Mod::CAIT_SITH_LVL_BONUS);
+                }
+
+                PPet->SetMLevel(mLvl);
             }
             else if (PMaster->GetSJob() == JOB_SMN)
             {
@@ -1531,19 +1576,19 @@ namespace petutils
 
             PPet->setModifier(Mod::CRIT_DMG_INCREASE, 8); // Avatars have Crit Att Bonus II for +8 crit dmg
 
-            if (PPet->GetMLevel() >= 70)
+            if (mLvl >= 70)
             {
                 PPet->setModifier(Mod::MATT, 32);
             }
-            else if (PPet->GetMLevel() >= 50)
+            else if (mLvl >= 50)
             {
                 PPet->setModifier(Mod::MATT, 28);
             }
-            else if (PPet->GetMLevel() >= 30)
+            else if (mLvl >= 30)
             {
                 PPet->setModifier(Mod::MATT, 24);
             }
-            else if (PPet->GetMLevel() >= 10)
+            else if (mLvl >= 10)
             {
                 PPet->setModifier(Mod::MATT, 20);
             }
@@ -1556,25 +1601,41 @@ namespace petutils
 
             // In a 2014 update SE updated Avatar base damage
             // Based on testing this value appears to be Level now instead of Level * 0.74f
-            uint16 weaponDamage = 1 + PPet->GetMLevel();
+            uint16 weaponDamage = 1 + mLvl;
             if (PetID == PETID_CARBUNCLE || PetID == PETID_CAIT_SITH)
             {
-                weaponDamage = static_cast<uint16>(floor(PPet->GetMLevel() * 0.9f));
+                weaponDamage = floor(weaponDamage * 0.74);
             }
 
             ((CItemWeapon*)PPet->m_Weapons[SLOT_MAIN])->setDamage(weaponDamage);
 
-            // Set B+ weapon skill (assumed capped for level derp)
-            // attack is madly high for avatars (roughly x2)
-            PPet->setModifier(Mod::ATT, 2 * battleutils::GetMaxSkill(SKILL_CLUB, JOB_WHM, PPet->GetMLevel()));
-            PPet->setModifier(Mod::ACC, battleutils::GetMaxSkill(SKILL_CLUB, JOB_WHM, PPet->GetMLevel()));
+            // Set B weapon skill which is consistent with every other mob
+            if (PetID == PETID_FENRIR)
+            {
+                PPet->setModifier(Mod::ATT, 1.3 * battleutils::GetMaxSkill(SKILL_SWORD, JOB_WAR, PPet->GetMLevel())); // Fenrir has been proven to have an additional 30% ATK
+            }
+            else
+            {
+                PPet->setModifier(Mod::ATT, battleutils::GetMaxSkill(SKILL_SWORD, JOB_WAR, PPet->GetMLevel()));
+            }
+
+            PPet->setModifier(Mod::ACC, battleutils::GetMaxSkill(SKILL_SWORD, JOB_WAR, PPet->GetMLevel()));
             // Set E evasion and def
             PPet->setModifier(Mod::EVA, battleutils::GetMaxSkill(SKILL_THROWING, JOB_WHM, PPet->GetMLevel()));
-            PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(SKILL_THROWING, JOB_WHM, PPet->GetMLevel()));
+
+            if (PetID == PETID_DIABOLOS)
+            {
+                PPet->setModifier(Mod::DEF, 1.3 * battleutils::GetMaxSkill(SKILL_THROWING, JOB_WHM, PPet->GetMLevel())); // Diabolos has been proven to have an additional 30% DEF
+            }
+            else
+            {
+                PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(SKILL_THROWING, JOB_WHM, PPet->GetMLevel()));
+            }
+
             // cap all magic skills so they play nice with spell scripts
             for (int i = SKILL_DIVINE_MAGIC; i <= SKILL_BLUE_MAGIC; i++)
             {
-                uint16 maxSkill = battleutils::GetMaxSkill((SKILLTYPE)i, PPet->GetMJob(), PPet->GetMLevel());
+                uint16 maxSkill = battleutils::GetMaxSkill((SKILLTYPE)i, PPet->GetMJob(), mLvl > 99 ? 99 : mLvl);
                 if (maxSkill != 0)
                 {
                     PPet->WorkingSkills.skill[i] = maxSkill;
@@ -1582,7 +1643,7 @@ namespace petutils
                 else // if the mob is WAR/BLM and can cast spell
                 {
                     // set skill as high as main level, so their spells won't get resisted
-                    uint16 maxSubSkill = battleutils::GetMaxSkill((SKILLTYPE)i, PPet->GetSJob(), PPet->GetMLevel());
+                    uint16 maxSubSkill = battleutils::GetMaxSkill((SKILLTYPE)i, PPet->GetSJob(), mLvl > 99 ? 99 : mLvl);
 
                     if (maxSubSkill != 0)
                     {
@@ -1606,7 +1667,7 @@ namespace petutils
                 PPet->addModifier(Mod::BP_DAMAGE, PChar->PJobPoints->GetJobPointValue(JP_BLOOD_PACT_DMG_BONUS) * 3);
             }
 
-            PMaster->addModifier(Mod::AVATAR_PERPETUATION, PerpetuationCost(PetID, PPet->GetMLevel()));
+            PMaster->addModifier(Mod::AVATAR_PERPETUATION, PerpetuationCost(PetID, mLvl));
         }
         else if (PPet->getPetType() == PET_TYPE::JUG_PET)
         {
@@ -1661,7 +1722,7 @@ namespace petutils
             // TEMP: should be MLevel when unsummoned, and PUP level when summoned
             if (PMaster->GetMJob() == JOB_PUP)
             {
-                PPet->SetMLevel(PMaster->GetMLevel());
+                PPet->SetMLevel(PMaster->GetMLevel() + PMaster->getMod(Mod::AUTOMATON_LVL_BONUS));
                 PPet->SetSLevel(PMaster->GetMLevel() / 2); // Todo: SetSLevel() already reduces the level?
             }
             else
@@ -1720,17 +1781,23 @@ namespace petutils
         }
 
         PPet->SetMJob(JOB_DRG);
-        PPet->SetMLevel(PMaster->GetMLevel());
+        // https://www.bg-wiki.com/ffxi/Wyvern_(Dragoon_Pet)#About_the_Wyvern
+        uint8 mLvl = PMaster->GetMLevel();
+        uint8 iLvl = std::clamp(charutils::getMainhandItemLevel(static_cast<CCharEntity*>(PMaster)) - 99, 0, 20);
+
+        PPet->SetMLevel(mLvl + iLvl + PMaster->getMod(Mod::WYVERN_LVL_BONUS));
 
         LoadAvatarStats(PMaster, PPet);                                                                    // follows PC calcs (w/o SJ)
         ((CItemWeapon*)PPet->m_Weapons[SLOT_MAIN])->setDelay((uint16)(floor(1000.0f * (320.0f / 60.0f)))); // 320 delay
-        ((CItemWeapon*)PPet->m_Weapons[SLOT_MAIN])->setDamage((uint16)(1 + floor(PPet->GetMLevel() * 0.9f)));
+        ((CItemWeapon*)PPet->m_Weapons[SLOT_MAIN])->setDamage((uint16)(1 + floor(mLvl * 0.9f)));
         // Set A+ weapon skill
-        PPet->setModifier(Mod::ATT, battleutils::GetMaxSkill(SKILL_GREAT_AXE, JOB_WAR, PPet->GetMLevel()));
-        PPet->setModifier(Mod::ACC, battleutils::GetMaxSkill(SKILL_GREAT_AXE, JOB_WAR, PPet->GetMLevel()));
+        PPet->setModifier(Mod::ATT, battleutils::GetMaxSkill(SKILL_GREAT_AXE, JOB_WAR, mLvl > 99 ? 99 : mLvl));
+        PPet->setModifier(Mod::ACC, battleutils::GetMaxSkill(SKILL_GREAT_AXE, JOB_WAR, mLvl > 99 ? 99 : mLvl));
         // Set D evasion and def
-        PPet->setModifier(Mod::EVA, battleutils::GetMaxSkill(SKILL_HAND_TO_HAND, JOB_WAR, PPet->GetMLevel()));
-        PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(SKILL_HAND_TO_HAND, JOB_WAR, PPet->GetMLevel()));
+        PPet->setModifier(Mod::EVA, battleutils::GetMaxSkill(SKILL_HAND_TO_HAND, JOB_WAR, mLvl > 99 ? 99 : mLvl));
+        PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(SKILL_HAND_TO_HAND, JOB_WAR, mLvl > 99 ? 99 : mLvl));
+        // Set wyvern damageType to slashing damage. "Wyverns do slashing damage..." https://www.bg-wiki.com/ffxi/Wyvern_(Dragoon_Pet)
+        PPet->m_dmgType = DAMAGE_TYPE::SLASHING;
 
         // Job Point: Wyvern Max HP
         if (PMaster->objtype == TYPE_PC)
@@ -1759,7 +1826,7 @@ namespace petutils
     void FinalizePetStatistics(CBattleEntity* PMaster, CPetEntity* PPet)
     {
         // set C magic evasion
-        PPet->setModifier(Mod::MEVA, battleutils::GetMaxSkill(SKILL_ELEMENTAL_MAGIC, JOB_RDM, PPet->GetMLevel()));
+        PPet->setModifier(Mod::MEVA, battleutils::GetMaxSkill(SKILL_ELEMENTAL_MAGIC, JOB_RDM, PPet->GetMLevel() > 99 ? 99 : PPet->GetMLevel()));
         PPet->health.tp = 0;
         PMaster->applyPetModifiers(PPet);
         PPet->UpdateHealth();

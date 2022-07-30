@@ -112,6 +112,7 @@ CMobEntity::CMobEntity()
     m_dmgMult = 100;
 
     m_giveExp       = false;
+    m_ExpPenalty    = 0;
     m_neutral       = false;
     m_Aggro         = false;
     m_TrueDetection = false;
@@ -123,7 +124,7 @@ CMobEntity::CMobEntity()
     m_maxRoamDistance = 50.0f;
     m_disableScent    = false;
 
-    m_Pool = 0;
+    m_Pool        = 0;
     m_RespawnTime = 300;
 
     m_SpellListContainer = nullptr;
@@ -551,6 +552,7 @@ void CMobEntity::Spawn()
     TracyZoneScoped;
     CBattleEntity::Spawn();
     m_giveExp      = true;
+    m_ExpPenalty   = 0;
     m_HiPCLvl      = 0;
     m_HiPartySize  = 0;
     m_THLvl        = 0;
@@ -757,8 +759,8 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
 
         if (damage < 0)
         {
-            msg = MSGBASIC_SKILL_RECOVERS_HP; // TODO: verify this message does/does not vary depending on mob/avatar/automaton use
-            target.param = std::clamp(-damage,0, PTarget->GetMaxHP() - PTarget->health.hp);
+            msg          = MSGBASIC_SKILL_RECOVERS_HP; // TODO: verify this message does/does not vary depending on mob/avatar/automaton use
+            target.param = std::clamp(-damage, 0, PTarget->GetMaxHP() - PTarget->health.hp);
         }
         else
         {
@@ -820,7 +822,7 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
 
     PTarget = dynamic_cast<CBattleEntity*>(state.GetTarget()); // TODO: why is this recast here? can state change between now and the original cast?
 
-    if(PTarget)
+    if (PTarget)
     {
         if (PTarget->objtype == TYPE_MOB && (PTarget->isDead() || (objtype == TYPE_PET && static_cast<CPetEntity*>(this)->getPetType() == PET_TYPE::AVATAR)))
         {
@@ -882,6 +884,246 @@ void CMobEntity::DistributeRewards()
     else
     {
         luautils::OnMobDeath(this, nullptr);
+    }
+}
+
+float CMobEntity::ApplyTH(int16 m_THLvl, int16 rate)
+{
+    TracyZoneScoped;
+
+    float multi = 1.00f;
+    bool ultra_rare = (rate == 1);
+    bool super_rare = (rate == 5);
+    bool very_rare = (rate == 10);
+    bool rare = (rate == 50);
+    bool uncommon = (rate == 100);
+    bool common = (rate == 150);
+    bool very_common = (rate == 240);
+
+    if (ultra_rare)
+    {
+        if (m_THLvl < 3)
+        {
+            multi = 1.00f + (1.00f * m_THLvl);
+            return multi;
+        }
+        else if (m_THLvl < 7)
+        {
+            multi = 3.00f + (0.50f * (m_THLvl - 2));
+            return multi;
+        }
+        else if (m_THLvl < 12)
+        {
+            multi = 5.00f + (1.00f * (m_THLvl - 6));
+            return multi;
+        }
+        else if (m_THLvl < 14)
+        {
+            multi = 9.00f + (1.50f * (m_THLvl - 11));
+            return multi;
+        }
+        else
+        {
+            multi = 12.00f + (2.00f * (m_THLvl - 14));
+            return multi;
+        }
+    }
+    else if (super_rare)
+    {
+        if (m_THLvl < 3)
+        {
+            multi = 1.00f + (0.50f * m_THLvl);
+            return multi;
+        }
+        else if (m_THLvl < 8)
+        {
+            multi = 2.00f + (0.40f * (m_THLvl - 2));
+            return multi;
+        }
+        else if (m_THLvl < 10)
+        {
+            multi = 4.00f + (0.60f * (m_THLvl - 7));
+            return multi;
+        }
+        else if (m_THLvl < 11)
+        {
+            multi = 5.20f + (0.80f * (m_THLvl - 9));
+            return multi;
+        }
+        else
+        {
+            multi = 9.20f + (1.00f * (m_THLvl - 10));
+            return multi;
+        }
+    }
+    else if (very_rare)
+    {
+        if (m_THLvl < 3)
+        {
+            multi = 1.00f + (0.50f * m_THLvl);
+            return multi;
+        }
+        else if (m_THLvl < 5)
+        {
+            multi = 2.00f + (0.25f * (m_THLvl - 2));
+            return multi;
+        }
+        else if (m_THLvl < 8)
+        {
+            multi = 1.40f + (0.10f * (m_THLvl - 2));
+            return multi;
+        }
+        else if (m_THLvl < 12)
+        {
+            multi = 1.90f + (0.20f * (m_THLvl - 7));
+            return multi;
+        }
+        else if (m_THLvl < 14)
+        {
+            multi = 2.70f + (0.40f * (m_THLvl - 11));
+            return multi;
+        }
+        else
+        {
+            multi = 3.50f + (0.50f * (m_THLvl - 13));
+            return multi;
+        }
+    }
+    else if (rare)
+    {
+        if (m_THLvl < 3)
+         {
+             multi = 1.00f + (0.20f * m_THLvl);
+             return multi;
+         }
+         else if (m_THLvl < 8)
+         {
+             multi = 1.40f + (0.10f * (m_THLvl - 2));
+             return multi;
+         }
+         else if (m_THLvl < 12)
+         {
+             multi = 1.90f + (0.20f * (m_THLvl - 7));
+             return multi;
+         }
+         else if (m_THLvl < 14)
+         {
+             multi = 2.70f + (0.40f * (m_THLvl - 11));
+             return multi;
+         }
+         else
+         {
+             multi = 3.50f + (0.50f * (m_THLvl - 13));
+             return multi;
+         }
+    }
+    else if (uncommon)
+    {
+        if (m_THLvl < 2)
+        {
+            multi = 1.00f + (0.20f * m_THLvl);
+            return multi;
+        }
+        else if (m_THLvl < 3)
+        {
+            multi = 1.20f + (0.30f * (m_THLvl - 1));
+            return multi;
+        }
+        else if (m_THLvl < 4)
+        {
+            multi = 1.50f + (0.15f * (m_THLvl - 1));
+            return multi;
+        }
+        else if (m_THLvl < 8)
+        {
+            multi = 1.80f + (0.10f * (m_THLvl - 3));
+            return multi;
+        }
+        else if (m_THLvl < 10)
+        {
+            multi = 2.10f + (0.15f * (m_THLvl - 7));
+            return multi;
+        }
+        else if (m_THLvl < 11)
+        {
+            multi = 2.40f + (0.25f * (m_THLvl - 9));
+            return multi;
+        }
+        else
+        {
+            multi = 2.65f + (0.15f * (m_THLvl - 10));
+            return multi;
+        }
+    }
+    else if (common)
+    {
+        if (m_THLvl < 2)
+        {
+            multi = 1.00f + (1.00f * m_THLvl);
+            return multi;
+        }
+        else if (m_THLvl < 3)
+        {
+            multi = 2.00f + (0.66f * (m_THLvl - 1));
+            return multi;
+        }
+        else
+        {
+            multi = 2.66f + (0.16f * (m_THLvl - 2));
+            return multi;
+        }
+    }
+    else if (very_common)
+    {
+        if (m_THLvl < 2)
+        {
+            multi = 1.00f + (1.00f * m_THLvl);
+            return multi;
+        }
+        else if (m_THLvl < 3)
+        {
+            multi = 2.00f + (0.34f * (m_THLvl - 1));
+            return multi;
+        }
+        else if (m_THLvl < 5)
+        {
+            multi = 2.34f + (0.16f * (m_THLvl - 2));
+            return multi;
+        }
+        else if (m_THLvl < 6)
+        {
+            multi = 2.82f + (0.11f * (m_THLvl - 4));
+            return multi;
+        }
+        else if (m_THLvl < 7)
+        {
+            multi = 2.93f + (0.05f * (m_THLvl - 5));
+            return multi;
+        }
+        else if (m_THLvl < 8)
+        {
+            multi = 2.98f + (0.04f * (m_THLvl - 6));
+            return multi;
+        }
+        else if (m_THLvl < 11)
+        {
+            multi = 3.02f + (0.06f * (m_THLvl - 7));
+            return multi;
+        }
+        else if (m_THLvl < 12)
+        {
+            multi = 3.20f + (0.03f * (m_THLvl - 10));
+            return multi;
+        }
+        else
+        {
+            multi = 3.23f + (0.10f * (m_THLvl - 11));
+            return multi;
+        }
+    }
+    else
+    {
+        return multi; // TH Didn't Apply
     }
 }
 
@@ -952,15 +1194,15 @@ void CMobEntity::DropItems(CCharEntity* PChar)
     if (!getMobMod(MOBMOD_NO_DROPS) && (!DropList.Items.empty() || !DropList.Groups.empty()))
     {
         // THLvl is the number of 'extra chances' at an item. If the item is obtained, then break out.
-        int16 maxRolls = 1 + (m_THLvl > 2 ? 2 : m_THLvl);
-        int16 bonus    = (m_THLvl > 2 ? (m_THLvl - 2) * 10 : 0);
+        int16 maxRolls = 1;
 
         for (const DropGroup_t& group : DropList.Groups)
         {
             for (int16 roll = 0; roll < maxRolls; ++roll)
             {
-                // Determine if this group should drop an item
-                if (group.GroupRate > 0 && xirand::GetRandomNumber(1000) < group.GroupRate * settings::get<float>("map.DROP_RATE_MULTIPLIER") + bonus)
+                // Determine if this group should drop an item and determine bonus
+                float bonus = ApplyTH(m_THLvl, group.GroupRate);
+                if (group.GroupRate > 0 && xirand::GetRandomNumber(1000) < group.GroupRate * settings::get<float>("map.DROP_RATE_MULTIPLIER") * bonus)
                 {
                     // Each item in the group is given its own weight range which is the previous value to the previous value + item.DropRate
                     // Such as 2 items with drop rates of 200 and 800 would be 0-199 and 200-999 respectively
@@ -987,7 +1229,8 @@ void CMobEntity::DropItems(CCharEntity* PChar)
         {
             for (int16 roll = 0; roll < maxRolls; ++roll)
             {
-                if (item.DropRate > 0 && xirand::GetRandomNumber(1000) < item.DropRate * settings::get<float>("map.DROP_RATE_MULTIPLIER") + bonus)
+                float bonus = ApplyTH(m_THLvl, item.DropRate);
+                if (item.DropRate > 0 && xirand::GetRandomNumber(1000) < item.DropRate * settings::get<float>("map.DROP_RATE_MULTIPLIER") * bonus)
                 {
                     if (AddItemToPool(item.ItemID, ++dropCount))
                     {
@@ -1102,7 +1345,7 @@ void CMobEntity::DropItems(CCharEntity* PChar)
             LV >= 80 = Avatrites can also drop, same rules. If one drops, the other does not.
             unfortunately, the order of the items/weathers/days don't match.
         */
-        if (GetMLevel() >= 50)
+        if (GetMLevel() >= 50 && luautils::IsContentEnabled("ABYSSEA"))
         {
             uint8 weather = PChar->loc.zone->GetWeather();
             uint8 element = 0;

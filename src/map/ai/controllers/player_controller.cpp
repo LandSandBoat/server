@@ -202,8 +202,8 @@ bool CPlayerController::WeaponSkill(uint16 targid, uint16 wsid)
         }
 
         std::unique_ptr<CBasicPacket> errMsg;
-        auto* PTarget = PChar->IsValidTarget(targid, battleutils::isValidSelfTargetWeaponskill(wsid) ? TARGET_SELF : TARGET_ENEMY, errMsg);
 
+        auto* PTarget = PChar->IsValidTarget(targid, battleutils::isValidSelfTargetWeaponskill(wsid) ? TARGET_SELF : TARGET_ENEMY, errMsg);
         if (PTarget)
         {
             if (!facing(PChar->loc.p, PTarget->loc.p, 64) && PTarget != PChar)
@@ -241,6 +241,16 @@ void CPlayerController::setLastAttackTime(time_point _lastAttackTime)
 void CPlayerController::setLastErrMsgTime(time_point _LastErrMsgTime)
 {
     m_errMsgTime = _LastErrMsgTime;
+}
+
+time_point CPlayerController::getLastRangedAttackTime()
+{
+    return m_lastRangedAttackTime;
+}
+
+void CPlayerController::setLastRangedAttackTime(time_point _lastRangedAttackTime)
+{
+    m_lastRangedAttackTime = _lastRangedAttackTime;
 }
 
 time_point CPlayerController::getLastErrMsgTime()

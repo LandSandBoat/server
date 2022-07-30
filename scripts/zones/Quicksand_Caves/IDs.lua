@@ -102,6 +102,7 @@ zones[xi.zone.QUICKSAND_CAVES] =
         ANCIENT_VESSEL        = 17629642,
         TRIBUNUS_VII_I        = 17629643,
         GIRTABLULU            = 17629645,
+        NUSSKNACKER           = 17629403,
     },
     npc =
     {
@@ -112,7 +113,6 @@ zones[xi.zone.QUICKSAND_CAVES] =
             [3] = {479.000, -14.000, -815.000},
             [4] = {814.000, -14.000, -761.000}
         },
-        CASKET_BASE            = 17629671,
         ORNATE_DOOR_OFFSET     = 17629693,
         CHAINS_THAT_BIND_US_QM = 17629746,
         TREASURE_COFFER        = 17629747,

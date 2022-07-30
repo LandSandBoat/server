@@ -26,10 +26,6 @@ zone_object.onZoneIn = function(player, prevZone)
         player:setPos(70.956, 5.99, 139.843, 134)
     end
 
-    if player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and player:getCharVar("PromathiaStatus") == 3 and player:getCharVar("Promathia_kill_day") < os.time() and player:getCharVar("COP_jabbos_story") == 0 then
-        cs = 57
-    end
-
     return cs
 end
 
@@ -40,9 +36,6 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    if csid == 57 then
-        player:setCharVar("COP_jabbos_story", 1)
-    end
 end
 
 return zone_object

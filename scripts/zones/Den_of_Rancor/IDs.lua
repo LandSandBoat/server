@@ -66,13 +66,16 @@ zones[xi.zone.DEN_OF_RANCOR] =
             [17432978] = 17432974,
             [17432979] = 17432974,
         },
+        SOZU_BLIBERRY_PH =
+        {
+            [17432608] = 17432609,
+        },
         MIMIC       = 17432583,
         HAKUTAKU    = 17433005,
         MOKUMOKUREN = 17433006,
     },
     npc =
     {
-        CASKET_BASE     = 17433024,
         LANTERN_OFFSET  = 17433047,
         DROP_GATE       = 17433051,
         TREASURE_COFFER = 17433077,

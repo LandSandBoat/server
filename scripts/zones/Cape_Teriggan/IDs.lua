@@ -33,6 +33,7 @@ zones[xi.zone.CAPE_TERIGGAN] =
         FOUND_ALL_FRAGS            = 7675,  -- You have obtained all of the fragments. You must hurry to the ruins of the ancient shrine!
         ZILART_MONUMENT            = 7677,  -- It is an ancient Zilart monument.
         SENSE_OMINOUS_PRESENCE     = 7694,  -- You sense an ominous presence...
+        GARRISON_BASE              = 7881,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
         PLAYER_OBTAINS_ITEM        = 7928,  -- <name> obtains <item>!
         UNABLE_TO_OBTAIN_ITEM      = 7929,  -- You were unable to obtain the item.
         PLAYER_OBTAINS_TEMP_ITEM   = 7930,  -- <name> obtains the temporary item: <item>!
@@ -58,7 +59,7 @@ zones[xi.zone.CAPE_TERIGGAN] =
     npc =
     {
         CASKET_BASE      = 17240445,
-        OVERSEER_BASE    = 17240472,
+        OVERSEER_BASE    = 17240472, -- Salimardi_RK in npc_list
         CERMET_HEADSTONE = 17240497,
     },
 }

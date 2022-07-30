@@ -58,7 +58,7 @@ local headAndFrameItems =
 
     [4] =
     {
-        xi.items.GOLD_THREAD,
+        xi.items.SPOOL_OF_GOLD_THREAD,
         xi.items.SQUARE_OF_VELVET_CLOTH,
         xi.items.SQUARE_OF_WAMOURA_CLOTH,
         xi.items.BRASS_RING

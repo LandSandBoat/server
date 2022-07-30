@@ -6,6 +6,19 @@ require("scripts/globals/hunts")
 -----------------------------------
 local entity = {}
 
+entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
+end
+
+entity.onMobFight = function(mob, target)
+    local castTime = mob:getLocalVar("dukeWater")
+
+    if os.time() > castTime then
+        mob:castSpell(169, target)
+        mob:setLocalVar("dukeWater", os.time() + 10)
+    end
+end
+
 entity.onMobDeath = function(mob, player, isKiller)
     xi.hunts.checkHunt(mob, player, 255)
 end

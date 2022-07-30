@@ -15,7 +15,8 @@ entity.onTrade = function(player, npc, trade)
         spawnChance = 50
     end
 
-    if spawnChance > 0 then
+    local cooldown = npc:getLocalVar("despawned")
+    if spawnChance > 0 and os.time() > cooldown then
         player:confirmTrade()
         if math.random(100) <= spawnChance and npcUtil.popFromQM(player, npc, ID.mob.EDACIOUS_OPO_OPO) then
             player:messageSpecial(ID.text.FAINT_CRY)

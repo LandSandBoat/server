@@ -70,6 +70,9 @@ end
 
 entity.onMobSpawn = function(mob)
     entity.onPath(mob)
+    mob:addListener("ITEM_STOLEN", "MANIPULATOR_ITEM_STOLEN", function(mobArg, player, itemId)
+        mob:delMod(xi.mod.DELAY, 400)
+    end)
 end
 
 entity.onMobRoam = function(mob)

@@ -3707,11 +3707,13 @@ INSERT INTO `mob_spell_lists` VALUES ('TRUST_Apururu_UC',367,133,68,255); -- she
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Apururu_UC',367,134,75,255); -- shellra_v (75~255)
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Apururu_UC',367,143,32,255); -- erase (32~255)
 
--- TRUST_Rughadjeen (372)
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_Rughadjeen',372,112,37,255); -- flash (37~255)
-
 -- TRUST_Rughadjeen (373)
-INSERT INTO `mob_spell_lists` VALUES ('TRUST_Rughadjeen',373,21,55,255); -- holy (55~255)
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Rughadjeen',373,1,1,255);    -- cure (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Rughadjeen',373,2,11,255);   -- cure_ii (11~255)
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Rughadjeen',373,3,21,255);   -- cure_iii (21~255)
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Rughadjeen',373,4,41,255);   -- cure_iv (41~255)
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Rughadjeen',373,21,55,255);  -- holy (55~255)
+INSERT INTO `mob_spell_lists` VALUES ('TRUST_Rughadjeen',373,112,37,255); -- flash (37~255)
 
 -- TRUST_Kukki-Chebukki (374)
 INSERT INTO `mob_spell_lists` VALUES ('TRUST_Kukki-Chebukki',374,144,13,255); -- fire (13~255)
@@ -4973,7 +4975,181 @@ INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 490, 247, 1, 255); --
 INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 490, 258, 1, 255); -- Bind (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Kukki_Chebukki_COP', 490, 274, 1, 255); -- Sleepga II (1~255)
 
--- Next Avail 491
+-- Blackbeard (491)
+INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 491, 166, 1, 255); -- thunder iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 491, 195, 1, 255); -- thundaga ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 491, 201, 1, 255); -- waterga iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 491, 206, 1, 255); -- freeze (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 491, 212, 1, 255); -- burst (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 491, 214, 1, 255); -- flood (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 491, 250, 1, 255); -- ice spikes (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 491, 252, 1, 255); -- stun (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 491, 274, 1, 255); -- sleepga ii (1~255)
+
+-- Silverhook (492)
+INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 151, 1, 255); -- blizzard iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 180, 1, 255); -- blizzaga ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 201, 1, 255); -- waterga iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 206, 1, 255); -- freeze (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 212, 1, 255); -- burst (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 214, 1, 255); -- flood (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 250, 1, 255); -- ice spikes (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 252, 1, 255); -- stun (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 253, 1, 255); -- sleep (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 274, 1, 255); -- sleepga ii (1~255)
+
+-- Osschaart (493)
+INSERT INTO `mob_spell_lists` VALUES('Osschaart', 494, 181, 1, 255); -- blizzaga iii(1~255)
+INSERT INTO `mob_spell_lists` VALUES('Osschaart', 494, 191, 1, 255); -- stonega iii(1~255)
+INSERT INTO `mob_spell_lists` VALUES('Osschaart', 494, 212, 1, 255); -- burst (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Osschaart', 494, 226, 1, 255); -- poisonga ii(1~255)
+INSERT INTO `mob_spell_lists` VALUES('Osschaart', 494, 232, 1, 255); -- bio iii(1~255)
+INSERT INTO `mob_spell_lists` VALUES('Osschaart', 494, 238, 1, 255); -- rasp (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Osschaart', 494, 240, 1, 255); -- drown (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Osschaart', 494, 254, 1, 255); -- blind (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Osschaart', 494, 258, 1, 255); -- bind (1~255)
+
+-- Slendlix Spindlethumb (498)
+INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',498,3,1,255);  -- cure_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',498,23,1,255); -- dia (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',498,33,1,255); -- diaga (1~255)
+
+-- Bastet (499)
+INSERT INTO `mob_spell_lists` VALUES('Bastet', 499, 165, 1, 255); -- thunder ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Bastet', 499, 195, 1, 255); -- thundaga ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Bastet', 499, 212, 1, 255); -- burst (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Bastet', 499, 239, 1, 255); -- shock (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Bastet', 499, 251, 1, 255); -- shock spikes (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Bastet', 499, 252, 1, 255); -- stun (1~255)
+
+-- Noble Mold (500)
+INSERT INTO `mob_spell_lists` VALUES('Noble_Mold', 500, 55, 1, 255); -- aquaveil (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Noble_Mold', 500, 105, 1, 255); -- enwater (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Noble_Mold', 500, 170, 1, 255); -- water ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Noble_Mold', 500, 200, 1, 255); -- waterga ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Noble_Mold', 500, 221, 1, 255); -- poison ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Noble_Mold', 500, 240, 1, 255); -- drown (1~255)
+
+-- Sacrificial Goblet
+INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 501, 204, 1, 255); -- flare (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 501, 206, 1, 255); -- freeze (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 501, 208, 1, 255); -- tornado (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 501, 210, 1, 255); -- quake (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 501, 212, 1, 255); -- burst (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 501, 214, 1, 255); -- flood (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 501, 245, 1, 255); -- drain (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 501, 247, 1, 255); -- aspir (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Sacrificial_Goblet', 501, 226, 1, 255); -- poisonga ii (1~255)
+
+-- Pyuu the Spatemaker (502)
+INSERT INTO `mob_spell_lists` VALUES('PyuuTheSpatemaker',502,201,1,255); -- waterga iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('PyuuTheSpatemaker',502,172,1,255); -- water iv (1~255)
+
+-- Mucoid Mass (503)
+INSERT INTO `mob_spell_lists` VALUES('Mucoid_Mass', 503, 242, 1, 255); -- absorb-acc (1~255)
+
+-- Guesh Urvan (504)
+INSERT INTO `mob_spell_lists` VALUES('Guesh_Urvan', 504, 152, 1, 255); -- blizzard iv (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Guesh_Urvan', 504, 181, 1, 255); -- blizzaga iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Guesh_Urvan', 504, 356, 1, 255); -- paralyga (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Guesh_Urvan', 504, 362, 1, 255); -- bindga (1~255)
+
+-- Donnergugi (505)
+INSERT INTO `mob_spell_lists` VALUES('Donnergugi', 505, 161, 1, 255); -- stone iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Donnergugi', 505, 190, 1, 255); -- stonega ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Donnergugi', 505, 238, 1, 255); -- rasp (1~255)
+
+-- Gration (505)
+INSERT INTO `mob_spell_lists` VALUES('Gration', 505, 57, 1, 255);  -- haste (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Gration', 505, 104, 1, 255); -- enthunder (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Gration', 505, 167, 1, 255); -- thunder iv (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Gration', 505, 196, 1, 255); -- thundaga iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Gration', 505, 212, 1, 255); -- burst (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Gration', 505, 251, 1, 255); -- shock spikes (1~255)
+
+-- Amaltheia (506)
+INSERT INTO `mob_spell_lists` VALUES('Amaltheia', 506, 5, 1, 255);  -- cure v (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Amaltheia', 506, 31, 1, 255); -- banish iv (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Amaltheia', 506, 40, 1, 255); -- banishga iii (1~255)
+
+-- Kurrea (507)
+INSERT INTO `mob_spell_lists` VALUES('Kurrea', 507, 157, 1, 255); -- aero iv (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Kurrea', 507, 186, 1, 255); -- aeroga iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Kurrea', 507, 208, 1, 255); -- tornado (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Kurrea', 507, 359, 1, 255); -- silencega (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Kurrea', 507, 366, 1, 255); -- graviga (1~255)
+
+-- Caithleann (508)
+INSERT INTO `mob_spell_lists` VALUES ('Caithleann',508,24,31,59);   -- dia_ii (31~59)
+INSERT INTO `mob_spell_lists` VALUES ('Caithleann',508,34,55,70);   -- diaga_ii (55~70)
+INSERT INTO `mob_spell_lists` VALUES ('Caithleann',508,45,47,62);   -- protect_iii (47~62)
+INSERT INTO `mob_spell_lists` VALUES ('Caithleann',508,50,57,67);   -- shell_iii (57~67)
+INSERT INTO `mob_spell_lists` VALUES ('Caithleann',508,54,34,255);  -- stoneskin (34~255)
+INSERT INTO `mob_spell_lists` VALUES ('Caithleann',508,55,12,255);  -- aquaveil (12~255)
+INSERT INTO `mob_spell_lists` VALUES ('Caithleann',508,57,48,255);  -- haste (48~255)
+INSERT INTO `mob_spell_lists` VALUES ('Caithleann',508,59,18,255);  -- silence (18~255)
+INSERT INTO `mob_spell_lists` VALUES ('Caithleann',508,100,24,255); -- enfire (24~255)
+INSERT INTO `mob_spell_lists` VALUES ('Caithleann',508,101,22,255); -- enblizzard (22~255)
+INSERT INTO `mob_spell_lists` VALUES ('Caithleann',508,102,20,255); -- enaero (20~255)
+INSERT INTO `mob_spell_lists` VALUES ('Caithleann',508,103,18,255); -- enstone (18~255)
+INSERT INTO `mob_spell_lists` VALUES ('Caithleann',508,104,16,255); -- enthunder (16~255)
+INSERT INTO `mob_spell_lists` VALUES ('Caithleann',508,105,27,255); -- enwater (27~255)
+INSERT INTO `mob_spell_lists` VALUES ('Caithleann',508,108,21,75);  -- regen (21~75)
+INSERT INTO `mob_spell_lists` VALUES ('Caithleann',508,216,21,255); -- gravity (21~255)
+INSERT INTO `mob_spell_lists` VALUES ('Caithleann',508,221,46,255); -- poison_ii (46~255)
+INSERT INTO `mob_spell_lists` VALUES ('Caithleann',508,231,36,70);  -- bio_ii (36~70)
+INSERT INTO `mob_spell_lists` VALUES ('Caithleann',508,253,25,45);  -- sleep (25~45)
+INSERT INTO `mob_spell_lists` VALUES ('Caithleann',508,258,11,255); -- bind (11~255)
+INSERT INTO `mob_spell_lists` VALUES ('Caithleann',508,259,46,255); -- sleep_ii (46~255)
+INSERT INTO `mob_spell_lists` VALUES ('Caithleann',508,260,32,255); -- dispel (32~255)
+INSERT INTO `mob_spell_lists` VALUES ('Caithleann',508,321,40,72);  -- katon_ni (40~72)
+INSERT INTO `mob_spell_lists` VALUES ('Caithleann',508,324,40,72);  -- hyoton_ni (40~72)
+INSERT INTO `mob_spell_lists` VALUES ('Caithleann',508,327,40,72);  -- huton_ni (40~72)
+INSERT INTO `mob_spell_lists` VALUES ('Caithleann',508,330,40,72);  -- doton_ni (40~72)
+INSERT INTO `mob_spell_lists` VALUES ('Caithleann',508,333,40,72);  -- raiton_ni (40~72)
+INSERT INTO `mob_spell_lists` VALUES ('Caithleann',508,336,40,72);  -- suiton_ni (40~72)
+INSERT INTO `mob_spell_lists` VALUES ('Caithleann',508,339,37,72);  -- utsusemi_ni (37~72)
+INSERT INTO `mob_spell_lists` VALUES ('Caithleann',508,341,30,64);  -- jubaku_ichi (30~64)
+INSERT INTO `mob_spell_lists` VALUES ('Caithleann',508,345,48,75);  -- hojo_ni (48~75)
+INSERT INTO `mob_spell_lists` VALUES ('Caithleann',508,348,44,72);  -- kurayami_ni (44~72)
+INSERT INTO `mob_spell_lists` VALUES ('Caithleann',508,351,56,74);  -- dokumori_ni (56~74)
+
+-- Indich (509)
+INSERT INTO `mob_spell_lists` VALUES('Kurrea', 509, 112, 1, 255); -- flash (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Kurrea', 509, 376, 1, 255); -- horde_lullaby (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Kurrea', 509, 463, 1, 255); -- foe_lullaby (1~255)
+
+-- Next Avail 506
+
+-- AirSkyBoat Specific Starts at 5000
+-- 5000 -> 5010 is Era Dynamis
+
+-- Blackbeard (5021)
+INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 5021, 166, 1, 255); -- thunder iii
+INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 5021, 195, 1, 255); -- thundaga ii
+INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 5021, 201, 1, 255); -- waterga iii
+INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 5021, 206, 1, 255); -- freeze
+INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 5021, 212, 1, 255); -- burst
+INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 5021, 214, 1, 255); -- flood
+INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 5021, 250, 1, 255); -- ice spikes
+INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 5021, 252, 1, 255); -- stun
+INSERT INTO `mob_spell_lists` VALUES('Blackbeard', 5021, 274, 1, 255); -- sleepga ii
+
+-- Silverhook (5022)
+INSERT INTO `mob_spell_lists` VALUES('Silverhook', 5022, 151, 1, 255); -- blizzard iii
+INSERT INTO `mob_spell_lists` VALUES('Silverhook', 5022, 180, 1, 255); -- blizzaga ii
+INSERT INTO `mob_spell_lists` VALUES('Silverhook', 5022, 201, 1, 255); -- waterga iii
+INSERT INTO `mob_spell_lists` VALUES('Silverhook', 5022, 206, 1, 255); -- freeze
+INSERT INTO `mob_spell_lists` VALUES('Silverhook', 5022, 212, 1, 255); -- burst
+INSERT INTO `mob_spell_lists` VALUES('Silverhook', 5022, 214, 1, 255); -- flood
+INSERT INTO `mob_spell_lists` VALUES('Silverhook', 5022, 250, 1, 255); -- ice spikes
+INSERT INTO `mob_spell_lists` VALUES('Silverhook', 5022, 252, 1, 255); -- stun
+INSERT INTO `mob_spell_lists` VALUES('Silverhook', 5022, 253, 1, 255); -- sleep
+INSERT INTO `mob_spell_lists` VALUES('Silverhook', 5022, 274, 1, 255); -- sleepga ii
+
+-- Aries (5023)
+INSERT INTO `mob_spell_lists` VALUES('Kurrea', 5023, 54, 1, 255);  -- stoneskin (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Kurrea', 5023, 356, 1, 255); -- paralyga (1~255)
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;

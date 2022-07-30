@@ -9,13 +9,28 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if (npcUtil.tradeHas(trade, 12370) or npcUtil.tradeHas(trade, 12359)) and npcUtil.popFromQM(player, npc, ID.mob.GRATION) then -- Hickory Shield or Picaroon's Shield
+    local shieldChance = 0
+    if npcUtil.tradeHasExactly(trade, xi.items.HICKORY_SHIELD) then
+        shieldChance = 500
+        npc:setLocalVar("shield", 1)
+    elseif npcUtil.tradeHasExactly(trade, xi.items.PICAROONS_SHIELD) then
+        shieldChance = 1000
+        npc:setLocalVar("shield", 2)
+    end
+
+    if shieldChance > 0 and npcUtil.popFromQM(player, npc, ID.mob.GRATION) then
         player:confirmTrade()
+        SetDropRate(1218, 12360, shieldChance)
+        if npc:getLocalVar("shield") == 1 then
+            player:messageSpecial(ID.text.SNATCHED_AWAY, 12359)
+        else
+            player:messageSpecial(ID.text.SNATCHED_AWAY, 12370)
+        end
     end
 end
 
 entity.onTrigger = function(player, npc)
-    player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
+    player:messageSpecial(ID.text.SHATTERED_SHIELD)
 end
 
 entity.onEventUpdate = function(player, csid, option)

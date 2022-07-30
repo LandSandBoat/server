@@ -26,7 +26,7 @@ local battlefields =
         { 0,  640,    0},   -- Flames of the Dead (PM5-3 U3)
      -- { 1,  641,    0},   -- Follow the White Rabbit (ENM)
      -- { 2,  642,    0},   -- When Hell Freezes Over (ENM)
-     -- { 3,  643,    0},   -- Brothers (ENM) -- TODO: Chthonian Ray mobskill
+        { 3,  643,    0},   -- Brothers (ENM)
         { 4,  644,    0},   -- Holy Cow (ENM)
      -- { 5,    ?, 3454},   -- Taurassic Park (HKC30)
     },
@@ -36,7 +36,7 @@ local battlefields =
         { 0,  672,    0},   -- Head Wind (PM5-3 U2)
      -- { 1,  673,    0},   -- Like the Wind (ENM) -- TODO: mob constantly runs during battle
         { 2,  674,    0},   -- Sheep in Antlion's Clothing (ENM)
-     -- { 3,  675,    0},   -- Shell We Dance? (ENM) -- TODO: Needs testing, cleanup, and mixin work
+        { 3,  675,    0},   -- Shell We Dance? (ENM)
      -- { 4,  676,    0},   -- Totentanz (ENM)
      -- { 5,  677,    0},   -- Tango with a Tracker (Quest)
      -- { 6,  678,    0},   -- Requiem of Sin (Quest)
@@ -86,7 +86,7 @@ local battlefields =
     [xi.zone.SPIRE_OF_VAHZL] =
     {
         { 0,  864,    0},   -- Desires of Emptiness (PM5-2)
-     -- { 1,  865,    0},   -- Pulling the Plug (ENM)
+        { 1,  865,    0},   -- Pulling the Plug (ENM)
      -- { 2,  866, 3352},   -- Empty Aspirations (KC50)
     },
 
@@ -109,7 +109,7 @@ local battlefields =
      -- { 3,  963,    0},   -- Bad Seed (ENM)
      -- { 4,  964,    0},   -- Bugard in the Clouds (ENM)
      -- { 5,  965,    0},   -- Beloved of the Atlantes (ENM)
-     -- { 6,  966,    0},   -- Uninvited Guests (Quest)
+        { 6,  966,    0},   -- Uninvited Guests (Quest)
      -- { 7,  967, 3455},   -- Nest of Nightmares (HKC50)
      -- { 8,    ?,    0},   -- *The Savage (HTMBF)
     },
@@ -246,12 +246,12 @@ local battlefields =
         { 8,    8, 1552},   -- Carapace Combatants (BS30)
      -- { 9,    9, 1551},   -- Shooting Fish (BS20) -- TODO: mobs use ranged attacks with knockback
         {10,   10, 1552},   -- Dropping Like Flies (BS30)
-     -- {11,   11, 1553},   -- Horns of War (KS99) -- TODO: Chlevnik is unscripted
+        {11,   11, 1553},   -- Horns of War (KS99)
         {12,   12, 1131},   -- Under Observation (BS40)
         {13,   13, 1177},   -- Eye of the Tiger (BS50) -- TODO: Crossthrash mobskill
      -- {14,   14, 1130},   -- Shots in the Dark (BS60) -- TODO: Warmachine combat behavior
         {15,   15, 1175},   -- Double Dragonian (KS30) -- TODO: Chaos Blade strengthens after 2hr
-     -- {16,   16, 1178},   -- Today's Horoscope (KS30)
+        {16,   16, 1178},   -- Today's Horoscope (KS30)
         {17,   17, 1180},   -- Contaminated Colosseum (KS30)
      -- {18,   18, 3351},   -- Kindergarten Cap (KC30)
      -- {19,   19, 3352},   -- Last Orc-Shunned Hero (KC50)
@@ -289,11 +289,11 @@ local battlefields =
         { 9,   73, 1552},   -- Birds of a Feather (BS30)
      -- {10,   74, 1551},   -- Crustacean Conundrum (BS20) -- TODO: You can only do 0-2 damage no matter what your attack is
         {11,   75, 1552},   -- Grove Guardians (BS30)
-     -- {12,   76, 1553},   -- The Hills are Alive (KS99) -- TODO: Tartaruga Gigante is not coded
+        {12,   76, 1553},   -- The Hills are Alive (KS99)
      -- {13,   77, 1131},   -- Royal Jelly (BS40) -- TODO: all combat mechanics, loot
-     -- {14,   78, 1177},   -- The Final Bout (BS50) -- TODO: mobskills Big Blow and Counterstance
+        {14,   78, 1177},   -- The Final Bout (BS50)
         {15,   79, 1130},   -- Up in Arms (BS60)
-     -- {16,   80, 1175},   -- Copycat (KS30)
+        {16,   80, 1175},   -- Copycat (KS30)
      -- {17,   81, 1178},   -- Operation Desert Swarm (KS30) -- TODO: Wild Rage gets stronger as they die. Build sleep resistance. Testing.
      -- {18,   82, 1180},   -- Prehistoric Pigeons (KS30) -- TODO: Build resistance to sleep quickly. When one dies, remaining ones become more powerful.
      -- {19,   83, 3351},   -- The Palborough Project (KC30)
@@ -321,11 +321,11 @@ local battlefields =
         { 8,  104, 1552},   -- Creeping Doom (BS30)
         { 9,  105, 1551},   -- Charming Trio (BS20)
         {10,  106, 1552},   -- Harem Scarem (BS30)
-     -- {11,  107, 1553},   -- Early Bird Catches the Wyrm (KS99)
+        {11,  107, 1553},   -- Early Bird Catches the Wyrm (KS99)
         {12,  108, 1131},   -- Royal Succession (BS40)
         {13,  109, 1177},   -- Rapid Raptors (BS50)
         {14,  110, 1130},   -- Wild Wild Whiskers (BS60) -- TODO: should use petrifactive breath more often than other mobskill. Message before spellcasting.
-     -- {15,  111, 1175},   -- Seasons Greetings (KS30)
+        {15,  111, 1175},   -- Seasons Greetings (KS30)
      -- {16,  112, 1178},   -- Royale Ramble (KS30)
      -- {17,  113, 1180},   -- Moa Constrictors (KS30)
      -- {18,  114, 3351},   -- The V Formation (KC30)
@@ -550,7 +550,6 @@ local function checkReqs(player, npc, bfid, registrant)
     local asa      = player:getCurrentMission(xi.mission.log_id.ASA)
     local natStat  = player:getMissionStatus(player:getNation())
     local rozStat  = player:getMissionStatus(xi.mission.log_id.ZILART)
-    local copStat  = player:getCharVar("PromathiaStatus")
     local toauStat = player:getMissionStatus(xi.mission.log_id.TOAU)
     local wotgStat = player:getMissionStatus(xi.mission.log_id.WOTG)
     local stc      = player:hasCompletedMission(xi.mission.log_id.SANDORIA, mi.sandoria.SAVE_THE_CHILDREN)
@@ -669,10 +668,11 @@ local function checkReqs(player, npc, bfid, registrant)
         [ 963] = function() return ( player:hasKeyItem(xi.ki.MONARCH_BEARD)                                                                                                ) end, -- ENM: Bad Seed
         [ 964] = function() return ( player:hasKeyItem(xi.ki.MONARCH_BEARD)                                                                                                ) end, -- ENM: Bugard in the Clouds
         [ 965] = function() return ( player:hasKeyItem(xi.ki.MONARCH_BEARD)                                                                                                ) end, -- ENM: Beloved of Atlantes
+        [ 966] = function() return ( player:hasKeyItem(xi.ki.MONARCH_LINN_PATROL_PERMIT)                                                                                   ) end, -- Quest: Uninvited Guest
         [ 992] = function() return ( cop == mi.cop.ONE_TO_BE_FEARED and player:getCharVar('Mission[6][638]Status') == 3                                                    ) end, -- PM6-4: One to be Feared
         [ 993] = function() return ( cop == mi.cop.THE_WARRIORS_PATH and player:getCharVar('Mission[6][748]Status') == 1                                                   ) end, -- PM7-5: The Warrior's Path
-        [1024] = function() return ( cop == mi.cop.WHEN_ANGELS_FALL and copStat == 4                                                                                       ) end, -- PM8-3: When Angels Fall
-        [1056] = function() return ( cop == mi.cop.DAWN and copStat == 2                                                                                                   ) end, -- PM8-4: Dawn
+        [1024] = function() return ( player:getCharVar('Mission[6][828]Status') == 4                                                                                       ) end, -- PM8-3: When Angels Fall
+        [1056] = function() return ( cop == mi.cop.DAWN and player:getCharVar('Mission[6][840]Status') == 2                                                               ) end, -- PM8-4: Dawn
         [1057] = function() return ( player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
                                      player:getCharVar('ApocalypseNigh') == 4                                                                                              ) end, -- Apocalypse Nigh
         [1090] = function() return ( player:hasKeyItem(xi.ki.TOGGLE_SWITCH)                                                                                                ) end, -- Quest: Puppetmaster Blues
@@ -728,8 +728,12 @@ local function checkReqs(player, npc, bfid, registrant)
         [ 963] = function() return ( player:hasKeyItem(xi.ki.MONARCH_BEARD)                                                                                ) end, -- ENM: Bad Seed
         [ 964] = function() return ( player:hasKeyItem(xi.ki.MONARCH_BEARD)                                                                                ) end, -- ENM: Bugard in the Clouds
         [ 965] = function() return ( player:hasKeyItem(xi.ki.MONARCH_BEARD)                                                                                ) end, -- ENM: Beloved of Atlantes
+        [ 966] = function() return ( player:hasKeyItem(xi.ki.MONARCH_LINN_PATROL_PERMIT)                                                                   ) end, -- Quest: Uninvited Guests
         [ 928] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.ANCIENT_VOWS) or
                                    ( cop == mi.cop.ANCIENT_VOWS and player:getCharVar('Mission[6][248]Status') >= 2)                                       ) end, -- Quest: Ouryu Cometh
+        [1024] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.WHEN_ANGELS_FALL) or
+                                    player:getCharVar('Mission[6][828]Status') >= 4                                                                        ) end, -- PM8-3: When Angels Fall
+        [1056] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.DAWN) or player:getCharVar('Mission[6][840]Status') >= 2    ) end, -- PM8-4: Dawn
         [1057] = function() return ( player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) or
                                    ( player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_ACCEPTED and
                                      player:getCharVar('ApocalypseNigh') == 4)                                                                             ) end, -- Quest: Apocalypse Nigh
@@ -854,8 +858,8 @@ local function checkSkip(player, bfid)
         [ 960] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.ANCIENT_VOWS)                                                                                       ) end, -- PM2-5: Ancient Vows
         [ 961] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.THE_SAVAGE) or (cop == mi.cop.THE_SAVAGE and player:getCharVar('Mission[6][418]Status') > 1)        ) end, -- PM4-2: The Savage
         [ 993] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.THE_WARRIORS_PATH)                                                                                  ) end, -- PM7-5: The Warrior's Path
-        [1024] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.WHEN_ANGELS_FALL) or (cop == mi.cop.WHEN_ANGELS_FALL and copStat > 4)                               ) end, -- PM8-3: When Angels Fall
-        [1056] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.DAWN) or (cop == mi.cop.DAWN and copStat > 2)                                                       ) end, -- PM8-4: Dawn
+        [1024] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.WHEN_ANGELS_FALL) or player:getCharVar('Mission[6][828]Status') > 4                                 ) end, -- PM8-3: When Angels Fall
+        [1056] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.DAWN) or player:getCharVar('Mission[6][840]Status') > 2                                            ) end, -- PM8-4: Dawn
         [1057] = function() return ( player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH)                                                                           ) end, -- Apocalypse Nigh
         [2721] = function() return ( player:hasCompletedMission(xi.mission.log_id.WOTG, mi.wotg.PURPLE_THE_NEW_BLACK)                                                                             ) end, -- WOTG07: Purple, The New Black
     }

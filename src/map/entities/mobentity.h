@@ -126,9 +126,9 @@ public:
     bool       CanDeaggro() const;
     time_point GetDespawnTime();
     void       SetDespawnTime(duration _duration);
-    uint32     GetRandomGil(); // returns a random amount of gil
-    bool       CanRoamHome();  // is it possible for me to walk back?
-    bool       CanRoam();      // check if mob can walk around
+    uint32     GetRandomGil();   // returns a random amount of gil
+    bool       CanRoamHome();    // is it possible for me to walk back?
+    bool       CanRoam();        // check if mob can walk around
     void       TapDeaggroTime(); // call CMobController->TapDeaggroTime if PAI->GetController() is a CMobController, otherwise do nothing.
 
     bool CanLink(position_t* pos, int16 superLink = 0);
@@ -230,6 +230,7 @@ public:
     int8   m_battlefieldID; // battlefield belonging to
     uint16 m_bcnmID;        // belongs to which battlefield
     bool   m_giveExp;       // prevent exp gain
+    uint16 m_ExpPenalty;    // Exp Penalty for PL holding hate.
     bool   m_neutral;       // stop linking / aggroing
 
     position_t m_SpawnPoint; // spawn point of mob
@@ -269,6 +270,7 @@ public:
 
 protected:
     void DistributeRewards();
+    float ApplyTH(int16 m_THLvl, int16 rate);
     void DropItems(CCharEntity* PChar);
 
 private:

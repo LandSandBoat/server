@@ -105,7 +105,7 @@ local questAccepted =
         [30008] = function(player, csid, option, npc)
             if quest:complete(player) then
                 player:changeContainerSize(xi.inv.MOGSAFE, 10)
-                player:changeContainerSize(xi.inv.MOGSAFE2, 10)
+--                player:changeContainerSize(xi.inv.MOGSAFE2, 10)
             end
         end,
     },

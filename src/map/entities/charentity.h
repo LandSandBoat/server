@@ -32,6 +32,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <deque>
 #include <map>
 #include <unordered_map>
+#include <unordered_set>
 
 #include "battleentity.h"
 #include "petentity.h"
@@ -43,6 +44,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #define MAX_MISSIONAREA  15
 #define MAX_MISSIONID    851
 #define MAX_ABYSSEAZONES 9
+
+#define TIME_BETWEEN_PERSIST 2min
 
 class CItemWeapon;
 class CTrustEntity;
@@ -240,11 +243,13 @@ enum CHAR_SUBSTATE
     SUBSTATE_LAST,
 };
 
-/************************************************************************
- *                                                                       *
- *                                                                       *
- *                                                                       *
- ************************************************************************/
+enum CHAR_PERSIST : uint8
+{
+    EQUIP     = 0x01,
+    POSITION  = 0x02,
+    EFFECTS   = 0x04,
+    LINKSHELL = 0x08,
+};
 
 class CBasicPacket;
 class CLinkshell;
@@ -304,11 +309,11 @@ public:
     uint8             m_ZonesList[36];        // List of visited zone character
     std::bitset<1024> m_SpellList;            // List of studied spells
     uint8             m_TitleList[143];       // List of obtained titles
-    uint8             m_Abilities[62];        // List of current abilities
+    uint8             m_Abilities[64];        // List of current abilities
     uint8             m_LearnedAbilities[49]; // LearnableAbilities (corsairRolls)
     std::bitset<50>   m_LearnedWeaponskills;  // LearnableWeaponskills
     uint8             m_TraitList[16];        // List of advance active abilities in the form of a bit mask
-    uint8             m_PetCommands[32];      // List of available pet commands
+    uint8             m_PetCommands[57];      // List of available pet commands
     uint8             m_WeaponSkills[32];
     questlog_t        m_questLog[MAX_QUESTAREA];     // список всех квестов
     missionlog_t      m_missionLog[MAX_MISSIONAREA]; // список миссий
@@ -329,7 +334,7 @@ public:
     std::vector<CTrustEntity*> PTrusts; // Active trusts
 
     template <typename F, typename... Args>
-    void ForPartyWithTrusts(F func, Args&&... args)
+    void ForPartyWithTrusts(F const& func, Args&&... args)
     {
         if (PParty)
         {
@@ -463,6 +468,7 @@ public:
     bool       m_EquipSwap; // true if equipment was recently changed
     bool       m_EffectsChanged;
     time_point m_LastSynthTime;
+    time_point m_LastRangedAttackTime;
 
     CHAR_SUBSTATE m_Substate;
 
@@ -496,12 +502,17 @@ public:
     void ClearTrusts();
     void RemoveTrust(CTrustEntity*);
 
+    void RequestPersist(CHAR_PERSIST toPersist);
+    bool PersistData();
+    bool PersistData(time_point tick);
+
     virtual void Tick(time_point) override;
     void         PostTick() override;
 
     virtual void addTrait(CTrait*) override;
     virtual void delTrait(CTrait*) override;
 
+    bool         IsMobOwner(CBattleEntity* PTarget);
     virtual bool ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) override;
     virtual bool CanUseSpell(CSpell*) override;
 
@@ -548,13 +559,20 @@ public:
 
     virtual void OnItemFinish(CItemState&, action_t&);
 
+    int32 getCharVar(std::string const& varName);
+    void  setCharVar(std::string const& varName, int32 value);
+    void  setVolatileCharVar(std::string const& varName, int32 value);
+    void  updateCharVarCache(std::string const& varName, int32 value);
+    void  removeFromCharVarCache(std::string const& varName);
+
+    void clearCharVarsWithPrefix(std::string const& prefix);
+
     bool m_Locked; // Is the player locked in a cutscene
 
     CCharEntity();
     ~CCharEntity();
 
 protected:
-    bool IsMobOwner(CBattleEntity* PTarget);
     void TrackArrowUsageForScavenge(CItemWeapon* PAmmo);
 
 private:
@@ -580,6 +598,12 @@ private:
     bool m_isStyleLocked;
     bool m_isBlockingAid;
     bool m_reloadParty;
+
+    std::unordered_map<std::string, int32> charVarCache;
+    std::unordered_set<std::string>        charVarChanges;
+
+    uint8      dataToPersist;
+    time_point nextDataPersistTime;
 
     PacketList_t                                     PacketList;           // the list of packets to be sent to the character during the next network cycle
     std::unordered_map<uint32, CCharPacket*>         PendingCharPackets;   // Keep track of which char packets are queued up for this char, such that they can be updated

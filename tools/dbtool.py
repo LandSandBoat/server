@@ -88,6 +88,7 @@ player_data = [
     'linkshells.sql',
     'server_variables.sql',
     'unity_system.sql',
+    'zone_settings.sql',
 ]
 
 import_files = []
@@ -155,11 +156,11 @@ def fetch_credentials():
                     val = parts[1].strip()
                     credentials[type] = val
 
-        database = os.getenv('XI_DB_NAME') or credentials['SQL_DATABASE']
-        host = os.getenv('XI_DB_HOST') or credentials['SQL_HOST']
-        port = os.getenv('XI_DB_PORT') or int(credentials['SQL_PORT'])
-        login = os.getenv('XI_DB_USER') or credentials['SQL_LOGIN']
-        password = os.getenv('XI_DB_USER_PASSWD') or credentials['SQL_PASSWORD']
+        database = os.getenv('XI_NETWORK_SQL_DATABASE') or credentials['SQL_DATABASE']
+        host = os.getenv('XI_NETWORK_SQL_HOST') or credentials['SQL_HOST']
+        port = os.getenv('XI_NETWORK_SQL_PORT') or int(credentials['SQL_PORT'])
+        login = os.getenv('XI_NETWORK_SQL_LOGIN') or credentials['SQL_LOGIN']
+        password = os.getenv('XI_NETWORK_SQL_PASSWORD') or credentials['SQL_PASSWORD']
     except: # lgtm [py/catch-base-exception]
         print(colorama.Fore.RED + 'Error fetching credentials.\nCheck ../settings/network.lua.')
         return False
@@ -289,7 +290,6 @@ def fetch_files(express=False):
 
 def write_version(silent=False):
     global db_ver
-    success = False
     update_client = auto_update_client
     if not silent and current_client != release_client:
         update_client = input('Update client version? [y/N] ').lower() == 'y'

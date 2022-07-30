@@ -65,6 +65,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "utils/mobutils.h"
 #include "utils/moduleutils.h"
 #include "utils/petutils.h"
+#include "utils/serverutils.h"
 #include "utils/trustutils.h"
 #include "utils/zoneutils.h"
 
@@ -98,7 +99,7 @@ map_session_list_t map_session_list = {};
 
 std::thread messageThread;
 
-std::unique_ptr<SqlConnection> sql;
+std::unique_ptr<SqlConnection> sql; // lgtm [cpp/short-global-name]
 
 extern std::map<uint16, CZone*> g_PZoneList; // Global array of pointers for zones
 
@@ -244,6 +245,7 @@ int32 do_init(int32 argc, char** argv)
     ability::LoadAbilitiesList();
     battleutils::LoadWeaponSkillsList();
     battleutils::LoadMobSkillsList();
+    battleutils::LoadPetSkillsList();
     battleutils::LoadSkillChainDamageModifiers();
     petutils::LoadPetList();
     trustutils::LoadTrustList();
@@ -258,6 +260,8 @@ int32 do_init(int32 argc, char** argv)
     fishingutils::InitializeFishingSystem();
     instanceutils::LoadInstanceList();
 
+    luautils::PopulateIDLookups();
+
     ShowInfo("do_init: server is binding with port %u", map_port == 0 ? settings::get<uint16>("network.MAP_PORT") : map_port);
     map_fd = makeBind_udp(INADDR_ANY, map_port == 0 ? settings::get<uint16>("network.MAP_PORT") : map_port);
 
@@ -270,6 +274,7 @@ int32 do_init(int32 argc, char** argv)
     CTaskMgr::getInstance()->AddTask("time_server", server_clock::now(), nullptr, CTaskMgr::TASK_INTERVAL, time_server, 2400ms);
     CTaskMgr::getInstance()->AddTask("map_cleanup", server_clock::now(), nullptr, CTaskMgr::TASK_INTERVAL, map_cleanup, 5s);
     CTaskMgr::getInstance()->AddTask("garbage_collect", server_clock::now(), nullptr, CTaskMgr::TASK_INTERVAL, map_garbage_collect, 15min);
+    CTaskMgr::getInstance()->AddTask("persist_server_vars", server_clock::now(), nullptr, CTaskMgr::TASK_INTERVAL, serverutils::PersistVolatileServerVars, 1min);
 
     g_PBuff   = new int8[MAX_BUFFER_SIZE + 20];
     PTempBuff = new int8[MAX_BUFFER_SIZE + 20];
@@ -345,6 +350,7 @@ void do_final(int code)
     itemutils::FreeItemList();
     battleutils::FreeWeaponSkillsList();
     battleutils::FreeMobSkillList();
+    battleutils::FreePetSkillList();
 
     petutils::FreePetList();
     trustutils::FreeTrustList();
@@ -703,7 +709,7 @@ int32 parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_data_t*
             if (SmallPD_Type != 0x15)
             {
                 DebugPackets("parse: %03hX | %04hX %04hX %02hX from user: %s",
-                    SmallPD_Type, ref<uint16>(SmallPD_ptr, 2), ref<uint16>(buff, 2), SmallPD_Size, PChar->GetName());
+                             SmallPD_Type, ref<uint16>(SmallPD_ptr, 2), ref<uint16>(buff, 2), SmallPD_Size, PChar->GetName());
             }
 
             if (settings::get<bool>("map.PACKETGUARD_ENABLED") && PacketGuard::IsRateLimitedPacket(PChar, SmallPD_Type))
@@ -808,7 +814,7 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
             PacketList_t packetList = PChar->getPacketList();
             packets                 = 0;
 
-            while (!packetList.empty() && *buffsize + packetList.front()->getSize() < MAX_BUFFER_SIZE && packets < PacketCount)
+            while (!packetList.empty() && *buffsize + packetList.front()->getSize() < MAX_BUFFER_SIZE && static_cast<size_t>(packets) < PacketCount)
             {
                 PSmallPacket = packetList.front();
                 packetList.pop_front();

@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -51,22 +51,18 @@ namespace mobutils
      *                                                                       *
      ************************************************************************/
 
-    uint16 GetWeaponDamage(CMobEntity* PMob)
+    uint16 GetWeaponDamage(CMobEntity* PMob, uint16 slot)
     {
         uint16 lvl   = PMob->GetMLevel();
         uint8  bonus = 0;
 
-        if (lvl >= 75)
+        if (slot == SLOT_RANGED)
         {
-            bonus = 3;
+            bonus = 5;
         }
-        else if (lvl >= 60)
+        else
         {
             bonus = 2;
-        }
-        else if (lvl >= 50)
-        {
-            bonus = 1;
         }
 
         uint16 damage = lvl + bonus;
@@ -135,7 +131,7 @@ namespace mobutils
      *                                                                       *
      ************************************************************************/
 
-    uint16 GetBaseToRank(uint8 rank, uint16 lvl)
+    uint16 GetBaseToRank(CMobEntity* PMob, uint8 rank, uint16 lvl)
     {
         switch (rank)
         {
@@ -154,6 +150,7 @@ namespace mobutils
             case 7:
                 return (2 + ((lvl - 1) * 20) / 100); // G
         }
+
         return 0;
     }
 
@@ -369,7 +366,7 @@ namespace mobutils
                 }
                 else
                 {
-                    PMob->health.maxmp = (int32)(PMob->health.maxmp *settings::get<float>("map.MOB_MP_MULTIPLIER"));
+                    PMob->health.maxmp = (int32)(PMob->health.maxmp * settings::get<float>("map.MOB_MP_MULTIPLIER"));
                 }
             }
 
@@ -379,7 +376,8 @@ namespace mobutils
             PMob->health.mp = PMob->GetMaxMP();
         }
 
-        ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDamage(GetWeaponDamage(PMob));
+        ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDamage(GetWeaponDamage(PMob, SLOT_MAIN));
+        ((CItemWeapon*)PMob->m_Weapons[SLOT_RANGED])->setDamage(GetWeaponDamage(PMob, SLOT_RANGED));
 
         // reduce weapon delay of MNK
         if (PMob->GetMJob() == JOB_MNK)
@@ -393,29 +391,29 @@ namespace mobutils
             PMob->m_dualWield = true;
         }
 
-        uint16 fSTR = GetBaseToRank(PMob->strRank, mLvl);
-        uint16 fDEX = GetBaseToRank(PMob->dexRank, mLvl);
-        uint16 fVIT = GetBaseToRank(PMob->vitRank, mLvl);
-        uint16 fAGI = GetBaseToRank(PMob->agiRank, mLvl);
-        uint16 fINT = GetBaseToRank(PMob->intRank, mLvl);
-        uint16 fMND = GetBaseToRank(PMob->mndRank, mLvl);
-        uint16 fCHR = GetBaseToRank(PMob->chrRank, mLvl);
+        uint16 fSTR = GetBaseToRank(PMob, PMob->strRank, mLvl);
+        uint16 fDEX = GetBaseToRank(PMob, PMob->dexRank, mLvl);
+        uint16 fVIT = GetBaseToRank(PMob, PMob->vitRank, mLvl);
+        uint16 fAGI = GetBaseToRank(PMob, PMob->agiRank, mLvl);
+        uint16 fINT = GetBaseToRank(PMob, PMob->intRank, mLvl);
+        uint16 fMND = GetBaseToRank(PMob, PMob->mndRank, mLvl);
+        uint16 fCHR = GetBaseToRank(PMob, PMob->chrRank, mLvl);
 
-        uint16 mSTR = GetBaseToRank(grade::GetJobGrade(PMob->GetMJob(), 2), mLvl);
-        uint16 mDEX = GetBaseToRank(grade::GetJobGrade(PMob->GetMJob(), 3), mLvl);
-        uint16 mVIT = GetBaseToRank(grade::GetJobGrade(PMob->GetMJob(), 4), mLvl);
-        uint16 mAGI = GetBaseToRank(grade::GetJobGrade(PMob->GetMJob(), 5), mLvl);
-        uint16 mINT = GetBaseToRank(grade::GetJobGrade(PMob->GetMJob(), 6), mLvl);
-        uint16 mMND = GetBaseToRank(grade::GetJobGrade(PMob->GetMJob(), 7), mLvl);
-        uint16 mCHR = GetBaseToRank(grade::GetJobGrade(PMob->GetMJob(), 8), mLvl);
+        uint16 mSTR = GetBaseToRank(PMob, grade::GetJobGrade(PMob->GetMJob(), 2), mLvl);
+        uint16 mDEX = GetBaseToRank(PMob, grade::GetJobGrade(PMob->GetMJob(), 3), mLvl);
+        uint16 mVIT = GetBaseToRank(PMob, grade::GetJobGrade(PMob->GetMJob(), 4), mLvl);
+        uint16 mAGI = GetBaseToRank(PMob, grade::GetJobGrade(PMob->GetMJob(), 5), mLvl);
+        uint16 mINT = GetBaseToRank(PMob, grade::GetJobGrade(PMob->GetMJob(), 6), mLvl);
+        uint16 mMND = GetBaseToRank(PMob, grade::GetJobGrade(PMob->GetMJob(), 7), mLvl);
+        uint16 mCHR = GetBaseToRank(PMob, grade::GetJobGrade(PMob->GetMJob(), 8), mLvl);
 
-        uint16 sSTR = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 2), PMob->GetSLevel());
-        uint16 sDEX = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 3), PMob->GetSLevel());
-        uint16 sVIT = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 4), PMob->GetSLevel());
-        uint16 sAGI = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 5), PMob->GetSLevel());
-        uint16 sINT = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 6), PMob->GetSLevel());
-        uint16 sMND = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 7), PMob->GetSLevel());
-        uint16 sCHR = GetBaseToRank(grade::GetJobGrade(PMob->GetSJob(), 8), PMob->GetSLevel());
+        uint16 sSTR = GetBaseToRank(PMob, grade::GetJobGrade(PMob->GetSJob(), 2), PMob->GetSLevel());
+        uint16 sDEX = GetBaseToRank(PMob, grade::GetJobGrade(PMob->GetSJob(), 3), PMob->GetSLevel());
+        uint16 sVIT = GetBaseToRank(PMob, grade::GetJobGrade(PMob->GetSJob(), 4), PMob->GetSLevel());
+        uint16 sAGI = GetBaseToRank(PMob, grade::GetJobGrade(PMob->GetSJob(), 5), PMob->GetSLevel());
+        uint16 sINT = GetBaseToRank(PMob, grade::GetJobGrade(PMob->GetSJob(), 6), PMob->GetSLevel());
+        uint16 sMND = GetBaseToRank(PMob, grade::GetJobGrade(PMob->GetSJob(), 7), PMob->GetSLevel());
+        uint16 sCHR = GetBaseToRank(PMob, grade::GetJobGrade(PMob->GetSJob(), 8), PMob->GetSLevel());
 
         // As per conversation with Jimmayus, all mobs at any level get bonus stats from subjobs.
         // From lvl 45 onwards, 1/2. Before lvl 30, 1/4. In between, the value gets progresively higher, from 1/4 at 30 to 1/2 at 44.
@@ -460,13 +458,13 @@ namespace mobutils
         PMob->stats.CHR = fCHR + mCHR + sCHR;
 
         auto statMultiplier = isNM ? settings::get<float>("map.NM_STAT_MULTIPLIER") : settings::get<float>("map.MOB_STAT_MULTIPLIER");
-        PMob->stats.STR = (uint16)(PMob->stats.STR * statMultiplier);
-        PMob->stats.DEX = (uint16)(PMob->stats.DEX * statMultiplier);
-        PMob->stats.VIT = (uint16)(PMob->stats.VIT * statMultiplier);
-        PMob->stats.AGI = (uint16)(PMob->stats.AGI * statMultiplier);
-        PMob->stats.INT = (uint16)(PMob->stats.INT * statMultiplier);
-        PMob->stats.MND = (uint16)(PMob->stats.MND * statMultiplier);
-        PMob->stats.CHR = (uint16)(PMob->stats.CHR * statMultiplier);
+        PMob->stats.STR     = (uint16)(PMob->stats.STR * statMultiplier);
+        PMob->stats.DEX     = (uint16)(PMob->stats.DEX * statMultiplier);
+        PMob->stats.VIT     = (uint16)(PMob->stats.VIT * statMultiplier);
+        PMob->stats.AGI     = (uint16)(PMob->stats.AGI * statMultiplier);
+        PMob->stats.INT     = (uint16)(PMob->stats.INT * statMultiplier);
+        PMob->stats.MND     = (uint16)(PMob->stats.MND * statMultiplier);
+        PMob->stats.CHR     = (uint16)(PMob->stats.CHR * statMultiplier);
 
         // special case, give spell list to my pet
         if (PMob->getMobMod(MOBMOD_PET_SPELL_LIST) && PMob->PPet != nullptr)
@@ -726,7 +724,7 @@ namespace mobutils
 
     void SetupRoaming(CMobEntity* PMob)
     {
-        uint16 distance = 10;
+        uint16 distance = 7;
         uint16 turns    = 1;
         uint16 cool     = 20;
         uint16 rate     = 15;
@@ -734,8 +732,8 @@ namespace mobutils
         switch (PMob->m_EcoSystem)
         {
             case ECOSYSTEM::BEASTMAN:
-                distance = 20;
-                turns    = 5;
+                distance = 10;
+                turns    = 3;
                 cool     = 45;
                 break;
             default:
@@ -802,7 +800,8 @@ namespace mobutils
 
         // boost dynamis mobs weapon damage
         PMob->setMobMod(MOBMOD_WEAPON_BONUS, 135);
-        ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDamage(GetWeaponDamage(PMob));
+        ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDamage(GetWeaponDamage(PMob, SLOT_MAIN));
+        ((CItemWeapon*)PMob->m_Weapons[SLOT_RANGED])->setDamage(GetWeaponDamage(PMob, SLOT_RANGED));
 
         // job resist traits are much more powerful in dynamis
         // according to wiki
@@ -1308,14 +1307,14 @@ Usage:
                 PMob->setModifier(Mod::HTH_SDT, (uint16)(sql->GetFloatData(36) * 1000));
                 PMob->setModifier(Mod::IMPACT_SDT, (uint16)(sql->GetFloatData(37) * 1000));
 
-                PMob->setModifier(Mod::FIRE_SDT, (int16)sql->GetFloatData(38));    // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
-                PMob->setModifier(Mod::ICE_SDT, (int16)sql->GetFloatData(39));     // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
-                PMob->setModifier(Mod::WIND_SDT, (int16)sql->GetFloatData(40));    // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
-                PMob->setModifier(Mod::EARTH_SDT, (int16)sql->GetFloatData(41));   // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
-                PMob->setModifier(Mod::THUNDER_SDT, (int16)sql->GetFloatData(42)); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
-                PMob->setModifier(Mod::WATER_SDT, (int16)sql->GetFloatData(43));   // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
-                PMob->setModifier(Mod::LIGHT_SDT, (int16)sql->GetFloatData(44));   // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
-                PMob->setModifier(Mod::DARK_SDT, (int16)sql->GetFloatData(45));    // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::FIRE_SDT, (int16)sql->GetIntData(38));    // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::ICE_SDT, (int16)sql->GetIntData(39));     // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::WIND_SDT, (int16)sql->GetIntData(40));    // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::EARTH_SDT, (int16)sql->GetIntData(41));   // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::THUNDER_SDT, (int16)sql->GetIntData(42)); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::WATER_SDT, (int16)sql->GetIntData(43));   // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::LIGHT_SDT, (int16)sql->GetIntData(44));   // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::DARK_SDT, (int16)sql->GetIntData(45));    // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
 
                 PMob->setModifier(Mod::FIRE_MEVA, (int16)(sql->GetIntData(46))); // These are stored as signed integers which
                 PMob->setModifier(Mod::ICE_MEVA, (int16)(sql->GetIntData(47)));  // is directly the modifier starting value.
@@ -1466,18 +1465,18 @@ Usage:
                 PMob->setModifier(Mod::HTH_SDT, (uint16)(sql->GetFloatData(36) * 1000));
                 PMob->setModifier(Mod::IMPACT_SDT, (uint16)(sql->GetFloatData(37) * 1000));
 
-                PMob->setModifier(Mod::FIRE_SDT, (int16)sql->GetFloatData(38));    // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
-                PMob->setModifier(Mod::ICE_SDT, (int16)sql->GetFloatData(39));     // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
-                PMob->setModifier(Mod::WIND_SDT, (int16)sql->GetFloatData(40));    // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
-                PMob->setModifier(Mod::EARTH_SDT, (int16)sql->GetFloatData(41));   // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
-                PMob->setModifier(Mod::THUNDER_SDT, (int16)sql->GetFloatData(42)); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
-                PMob->setModifier(Mod::WATER_SDT, (int16)sql->GetFloatData(43));   // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
-                PMob->setModifier(Mod::LIGHT_SDT, (int16)sql->GetFloatData(44));   // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
-                PMob->setModifier(Mod::DARK_SDT, (int16)sql->GetFloatData(45));    // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::FIRE_SDT, (int16)sql->GetIntData(38));    // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::ICE_SDT, (int16)sql->GetIntData(39));     // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::WIND_SDT, (int16)sql->GetIntData(40));    // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::EARTH_SDT, (int16)sql->GetIntData(41));   // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::THUNDER_SDT, (int16)sql->GetIntData(42)); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::WATER_SDT, (int16)sql->GetIntData(43));   // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::LIGHT_SDT, (int16)sql->GetIntData(44));   // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
+                PMob->setModifier(Mod::DARK_SDT, (int16)sql->GetIntData(45));    // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
 
-                PMob->setModifier(Mod::FIRE_MEVA, (int16)(sql->GetIntData(46)));   // These are stored as signed integers which
-                PMob->setModifier(Mod::ICE_MEVA, (int16)(sql->GetIntData(47)));    // is directly the modifier starting value.
-                PMob->setModifier(Mod::WIND_MEVA, (int16)(sql->GetIntData(48)));   // Positives signify increased resist chance.
+                PMob->setModifier(Mod::FIRE_MEVA, (int16)(sql->GetIntData(46))); // These are stored as signed integers which
+                PMob->setModifier(Mod::ICE_MEVA, (int16)(sql->GetIntData(47)));  // is directly the modifier starting value.
+                PMob->setModifier(Mod::WIND_MEVA, (int16)(sql->GetIntData(48))); // Positives signify increased resist chance.
                 PMob->setModifier(Mod::EARTH_MEVA, (int16)(sql->GetIntData(49)));
                 PMob->setModifier(Mod::THUNDER_MEVA, (int16)(sql->GetIntData(50)));
                 PMob->setModifier(Mod::WATER_MEVA, (int16)(sql->GetIntData(51)));

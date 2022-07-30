@@ -734,7 +734,7 @@ xi.quest.id =
     -----------------------------------
     [xi.quest.area[xi.quest.log_id.CRYSTAL_WAR]] =
     {
-        LOST_IN_TRANSLOCATION            = 0,  -- +
+        LOST_IN_TRANSLOCATION            = 0,  -- + Converted
         MESSAGE_ON_THE_WINDS             = 1,  -- + Converted
         THE_WEEKLY_ADVENTURER            = 2,
         HEALING_HERBS                    = 3,
@@ -778,15 +778,15 @@ xi.quest.id =
         SAY_IT_WITH_A_HANDBAG            = 41, -- Can be completed, but reward latent not implemented
         QUELLING_THE_STORM               = 42,
         HONOR_UNDER_FIRE                 = 43,
-        THE_PRICE_OF_VALOR               = 44,
-        BONDS_THAT_NEVER_DIE             = 45,
+        THE_PRICE_OF_VALOR               = 44, -- + Converted
+        BONDS_THAT_NEVER_DIE             = 45, -- + Converted
         THE_LONG_MARCH_NORTH             = 46,
         THE_FORBIDDEN_PATH               = 47,
         A_JEWELERS_LAMENT                = 48,
         BENEATH_THE_MASK                 = 49,
         WHAT_PRICE_LOYALTY               = 50,
-        SONGBIRDS_IN_A_SNOWSTORM         = 51,
-        BLOOD_OF_HEROES                  = 52,
+        SONGBIRDS_IN_A_SNOWSTORM         = 51, -- + Converted
+        BLOOD_OF_HEROES                  = 52, -- + Converted
         SINS_OF_THE_MOTHERS              = 53,
         HOWL_FROM_THE_HEAVENS            = 54,
         SUCCOR_TO_THE_SIDHE              = 55,
@@ -1245,8 +1245,8 @@ local function getVarPrefix(areaId, questId)
 end
 
 -- Interaction Framework Helper Functions
-xi.quest.addVar = function(player, areaId, questId, name, value)
-    return player:addCharVar(getVarPrefix(areaId, questId) .. name, value)
+xi.quest.incrementVar = function(player, areaId, questId, name, value)
+    return player:incrementCharVar(getVarPrefix(areaId, questId) .. name, value)
 end
 
 xi.quest.getVar = function(player, areaId, questId, name)

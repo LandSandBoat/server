@@ -50,7 +50,6 @@ zones[xi.zone.INNER_HORUTOTO_RUINS] =
     },
     npc =
     {
-        CASKET_BASE        = 17563838,
         PORTAL_CIRCLE_BASE = 17563861,
         TREASURE_CHEST     = 17563914,
     },

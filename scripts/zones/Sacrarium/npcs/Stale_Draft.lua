@@ -35,6 +35,7 @@ entity.onTrade = function(player, npc, trade)
             player:tradeComplete()
             player:setCharVar("FOMOR_HATE", 0)
             SpawnMob(nmId):updateClaim(player)
+            player:messageSpecial(ID.text.PRESENCE_FILLS)
         else
             player:messageSpecial(ID.text.NOTHING_HAPPENS)
         end

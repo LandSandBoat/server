@@ -224,7 +224,7 @@ function xi.battlefield.HandleLootRolls(battlefield, lootTable, players, npc)
     players = players or battlefield:getPlayers()
     if battlefield:getStatus() == xi.battlefield.status.WON and battlefield:getLocalVar("lootSeen") == 0 then
         if npc then
-            npc:setAnimation(90)
+            npc:entityAnimationPacket("open")
         end
 
         for i = 1, #lootTable, 1 do
@@ -260,6 +260,22 @@ function xi.battlefield.HandleLootRolls(battlefield, lootTable, players, npc)
 
                         break
                     end
+                end
+            end
+        end
+
+        -- Add Honey Wine/Beastly Shank/Blue Pondwood to loot pool if Kings are force popped
+        local kingPops =
+        {
+            {  11, xi.items.BEASTLY_SHANK },
+            {  76, xi.items.BLUE_PONDWEED },
+            { 107,    xi.items.HONEY_WINE },
+        }
+
+        if xi.settings.main.LandKingSystem_NQ > 0 then
+            for _, v in pairs(kingPops) do
+                if v[1] == battlefield:getID() then
+                    players[1]:addTreasure(v[2], npc)
                 end
             end
         end

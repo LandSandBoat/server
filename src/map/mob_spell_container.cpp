@@ -306,7 +306,7 @@ std::optional<SpellID> CMobSpellContainer::GetBestEntrustedSpell(CBattleEntity* 
         case JOB_SCH:
         case JOB_PLD:
         case JOB_RUN:
-           choice = SpellID::Indi_Refresh;
+            choice = SpellID::Indi_Refresh;
             break;
         case JOB_NIN:
             choice = SpellID::Indi_Regen;
@@ -391,8 +391,8 @@ std::optional<SpellID> CMobSpellContainer::GetBestAgainstTargetWeakness(CBattleE
 
 std::optional<SpellID> CMobSpellContainer::GetStormDay()
 {
-    std::optional<SpellID> choice = std::nullopt;
-    std::size_t dotwIndex = battleutils::GetDayElement();
+    std::optional<SpellID> choice    = std::nullopt;
+    std::size_t            dotwIndex = battleutils::GetDayElement();
     switch (dotwIndex)
     {
         case ELEMENT_FIRE:
@@ -441,8 +441,8 @@ std::optional<SpellID> CMobSpellContainer::GetStormDay()
 
 std::optional<SpellID> CMobSpellContainer::GetHelixDay()
 {
-    std::optional<SpellID> choice = std::nullopt;
-    std::size_t dotwIndex = battleutils::GetDayElement();
+    std::optional<SpellID> choice    = std::nullopt;
+    std::size_t            dotwIndex = battleutils::GetDayElement();
     switch (dotwIndex)
     {
         case ELEMENT_FIRE:

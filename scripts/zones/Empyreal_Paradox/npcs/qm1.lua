@@ -37,7 +37,6 @@ entity.onEventFinish = function(player,csid,option)
         player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.DAWN)
         player:addMission(xi.mission.log_id.ZILART, xi.mission.id.zilart.AWAKENING)
         player:setMissionStatus(xi.mission.log_id.ZILART, 3)
-        player:setCharVar("PromathiaStatus", 7)
         player:delQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED)
         player:delQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH)
     end

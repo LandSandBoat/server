@@ -10,10 +10,19 @@ require("scripts/globals/treasure")
 local zone_object = {}
 
 zone_object.onInitialize = function(zone)
-    -- Charybdis PH alternates, remove one
-    local keys = {}
-    for k, v in pairs(ID.mob.CHARYBDIS_PH) do table.insert(keys, k) end
-    DespawnMob(keys[math.random(#keys)])
+    -- Only one Charbydis PH is up at one time
+    local chooseManta = math.random(1,2)
+    local mantaOne = ID.mob.CHARYBDIS - 2
+    local mantaTwo = ID.mob.CHARYBDIS - 4
+    if chooseManta == 2 then
+        DisallowRespawn(mantaOne, true)
+        DespawnMob(mantaOne)
+        SpawnMob(mantaTwo)
+    else
+        DisallowRespawn(mantaTwo, true)
+        DespawnMob(mantaTwo)
+        SpawnMob(mantaOne)
+    end
 
     xi.treasure.initZone(zone)
 end

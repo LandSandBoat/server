@@ -41,12 +41,12 @@ std::vector<TrustSpell_ID*> g_PTrustIDList;
 
 struct Trust_t
 {
-    uint32    trustID;
-    uint32    pool;
-    look_t    look;        // appearance data
-    string_t  name;        // script name string
-    string_t  packet_name; // packet name string
-    ECOSYSTEM EcoSystem;   // ecosystem
+    uint32      trustID;
+    uint32      pool;
+    look_t      look;        // appearance data
+    std::string name;        // script name string
+    std::string packet_name; // packet name string
+    ECOSYSTEM   EcoSystem;   // ecosystem
 
     uint8  name_prefix;
     uint8  radius; // Model Radius - affects melee range etc.
@@ -111,8 +111,8 @@ struct Trust_t
     Trust_t()
     : EcoSystem(ECOSYSTEM::ECO_ERROR)
     {
-        trustID     = 0;
-        pool        = 0;
+        trustID = 0;
+        pool    = 0;
 
         name_prefix = 0;
         radius      = 0;
@@ -120,7 +120,7 @@ struct Trust_t
 
         behaviour = 0;
 
-        mJob     = 0;
+        mJob    = 0;
         sJob    = 0;
         HPscale = 0.f;
         MPscale = 0.f;
@@ -278,9 +278,9 @@ namespace trustutils
                 trust->hasSpellScript = (bool)sql->GetIntData(7);
                 trust->spellList      = (uint16)sql->GetIntData(8);
 
-                trust->cmbSkill       = (uint8)sql->GetIntData(9);
-                trust->cmbDelay       = (uint16)sql->GetIntData(10);
-                trust->cmbDmgMult     = (uint16)sql->GetIntData(11);
+                trust->cmbSkill   = (uint8)sql->GetIntData(9);
+                trust->cmbDelay   = (uint16)sql->GetIntData(10);
+                trust->cmbDmgMult = (uint16)sql->GetIntData(11);
 
                 trust->name_prefix    = (uint8)sql->GetUIntData(12);
                 trust->behaviour      = (uint16)sql->GetUIntData(13);
@@ -300,17 +300,17 @@ namespace trustutils
                 // similarly speedSub is always 50
                 trust->subSpeed = 50;
 
-                trust->strRank   = (uint8)sql->GetIntData(21);
-                trust->dexRank   = (uint8)sql->GetIntData(22);
-                trust->vitRank   = (uint8)sql->GetIntData(23);
-                trust->agiRank   = (uint8)sql->GetIntData(24);
-                trust->intRank   = (uint8)sql->GetIntData(25);
-                trust->mndRank   = (uint8)sql->GetIntData(26);
-                trust->chrRank   = (uint8)sql->GetIntData(27);
-                trust->defRank   = (uint8)sql->GetIntData(28);
-                trust->attRank   = (uint8)sql->GetIntData(29);
-                trust->accRank   = (uint8)sql->GetIntData(30);
-                trust->evaRank   = (uint8)sql->GetIntData(31);
+                trust->strRank = (uint8)sql->GetIntData(21);
+                trust->dexRank = (uint8)sql->GetIntData(22);
+                trust->vitRank = (uint8)sql->GetIntData(23);
+                trust->agiRank = (uint8)sql->GetIntData(24);
+                trust->intRank = (uint8)sql->GetIntData(25);
+                trust->mndRank = (uint8)sql->GetIntData(26);
+                trust->chrRank = (uint8)sql->GetIntData(27);
+                trust->defRank = (uint8)sql->GetIntData(28);
+                trust->attRank = (uint8)sql->GetIntData(29);
+                trust->accRank = (uint8)sql->GetIntData(30);
+                trust->evaRank = (uint8)sql->GetIntData(31);
 
                 // resistances
                 trust->slash_sdt  = (uint16)(sql->GetFloatData(32) * 1000);
@@ -318,14 +318,14 @@ namespace trustutils
                 trust->hth_sdt    = (uint16)(sql->GetFloatData(34) * 1000);
                 trust->impact_sdt = (uint16)(sql->GetFloatData(35) * 1000);
 
-                trust->fire_sdt    = (int16)sql->GetFloatData(36); // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
-                trust->ice_sdt     = (int16)sql->GetFloatData(37); // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
-                trust->wind_sdt    = (int16)sql->GetFloatData(38); // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
-                trust->earth_sdt   = (int16)sql->GetFloatData(39); // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
-                trust->thunder_sdt = (int16)sql->GetFloatData(40); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
-                trust->water_sdt   = (int16)sql->GetFloatData(41); // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
-                trust->light_sdt   = (int16)sql->GetFloatData(42); // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
-                trust->dark_sdt    = (int16)sql->GetFloatData(43); // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
+                trust->fire_sdt    = (int16)sql->GetIntData(36); // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
+                trust->ice_sdt     = (int16)sql->GetIntData(37); // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
+                trust->wind_sdt    = (int16)sql->GetIntData(38); // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
+                trust->earth_sdt   = (int16)sql->GetIntData(39); // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
+                trust->thunder_sdt = (int16)sql->GetIntData(40); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
+                trust->water_sdt   = (int16)sql->GetIntData(41); // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
+                trust->light_sdt   = (int16)sql->GetIntData(42); // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
+                trust->dark_sdt    = (int16)sql->GetIntData(43); // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
 
                 trust->fire_meva    = (int16)sql->GetIntData(44);
                 trust->ice_meva     = (int16)sql->GetIntData(45);
@@ -415,7 +415,7 @@ namespace trustutils
         LoadTrustStatsAndSkills(PTrust);
 
         // Use Mob formulas to work out base "weapon" damage, but scale down to reasonable values.
-        auto mobStyleDamage   = static_cast<float>(mobutils::GetWeaponDamage(PTrust));
+        auto mobStyleDamage   = static_cast<float>(mobutils::GetWeaponDamage(PTrust, SLOT_MAIN));
         auto baseDamage       = mobStyleDamage * 0.5f;
         auto damageMultiplier = static_cast<float>(trustData->cmbDmgMult) / 100.0f;
         auto adjustedDamage   = baseDamage * damageMultiplier;
@@ -473,6 +473,13 @@ namespace trustutils
 
     void LoadTrustStatsAndSkills(CTrustEntity* PTrust)
     {
+        if (settings::get<uint8>("main.ENABLE_TRUST_ALTER_EGO_EXPO") > 0) // Alter Ego Expo HPP/MPP +50%, All Status Resistance +25%
+        {
+            PTrust->addModifier(Mod::HPP, 50);
+            PTrust->addModifier(Mod::MPP, 50);
+            PTrust->addModifier(Mod::STATUSRES, 25);
+        }
+
         JOBTYPE mJob = PTrust->GetMJob();
         JOBTYPE sJob = PTrust->GetSJob();
         uint8   mLvl = PTrust->GetMLevel();
@@ -569,7 +576,7 @@ namespace trustutils
         {
             if (grade::GetJobGrade(sJob, 1) != 0 && sLvl > 0)
             {
-                raceStat = (grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * (sLvl - 1)) /  settings::get<uint8>("map.SJ_MP_DIVISOR");
+                raceStat = (grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * (sLvl - 1)) / settings::get<uint8>("map.SJ_MP_DIVISOR");
             }
         }
         else
@@ -592,7 +599,7 @@ namespace trustutils
             sJobStat = grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column);
         }
 
-        PTrust->health.maxmp = (int16)( settings::get<float>("map.ALTER_EGO_MP_MULTIPLIER") * (raceStat + jobStat + sJobStat));
+        PTrust->health.maxmp = (int16)(settings::get<float>("map.ALTER_EGO_MP_MULTIPLIER") * (raceStat + jobStat + sJobStat));
 
         PTrust->health.tp = 0;
         PTrust->UpdateHealth();
@@ -600,29 +607,29 @@ namespace trustutils
         PTrust->health.mp = PTrust->GetMaxMP();
 
         // Stats ========================
-        uint16 fSTR = mobutils::GetBaseToRank(PTrust->strRank, mLvl);
-        uint16 fDEX = mobutils::GetBaseToRank(PTrust->dexRank, mLvl);
-        uint16 fVIT = mobutils::GetBaseToRank(PTrust->vitRank, mLvl);
-        uint16 fAGI = mobutils::GetBaseToRank(PTrust->agiRank, mLvl);
-        uint16 fINT = mobutils::GetBaseToRank(PTrust->intRank, mLvl);
-        uint16 fMND = mobutils::GetBaseToRank(PTrust->mndRank, mLvl);
-        uint16 fCHR = mobutils::GetBaseToRank(PTrust->chrRank, mLvl);
+        uint16 fSTR = mobutils::GetBaseToRank(PTrust, PTrust->strRank, mLvl);
+        uint16 fDEX = mobutils::GetBaseToRank(PTrust, PTrust->dexRank, mLvl);
+        uint16 fVIT = mobutils::GetBaseToRank(PTrust, PTrust->vitRank, mLvl);
+        uint16 fAGI = mobutils::GetBaseToRank(PTrust, PTrust->agiRank, mLvl);
+        uint16 fINT = mobutils::GetBaseToRank(PTrust, PTrust->intRank, mLvl);
+        uint16 fMND = mobutils::GetBaseToRank(PTrust, PTrust->mndRank, mLvl);
+        uint16 fCHR = mobutils::GetBaseToRank(PTrust, PTrust->chrRank, mLvl);
 
-        uint16 mSTR = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 2), mLvl);
-        uint16 mDEX = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 3), mLvl);
-        uint16 mVIT = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 4), mLvl);
-        uint16 mAGI = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 5), mLvl);
-        uint16 mINT = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 6), mLvl);
-        uint16 mMND = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 7), mLvl);
-        uint16 mCHR = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 8), mLvl);
+        uint16 mSTR = mobutils::GetBaseToRank(PTrust, grade::GetJobGrade(PTrust->GetMJob(), 2), mLvl);
+        uint16 mDEX = mobutils::GetBaseToRank(PTrust, grade::GetJobGrade(PTrust->GetMJob(), 3), mLvl);
+        uint16 mVIT = mobutils::GetBaseToRank(PTrust, grade::GetJobGrade(PTrust->GetMJob(), 4), mLvl);
+        uint16 mAGI = mobutils::GetBaseToRank(PTrust, grade::GetJobGrade(PTrust->GetMJob(), 5), mLvl);
+        uint16 mINT = mobutils::GetBaseToRank(PTrust, grade::GetJobGrade(PTrust->GetMJob(), 6), mLvl);
+        uint16 mMND = mobutils::GetBaseToRank(PTrust, grade::GetJobGrade(PTrust->GetMJob(), 7), mLvl);
+        uint16 mCHR = mobutils::GetBaseToRank(PTrust, grade::GetJobGrade(PTrust->GetMJob(), 8), mLvl);
 
-        uint16 sSTR = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetSJob(), 2), sLvl);
-        uint16 sDEX = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetSJob(), 3), sLvl);
-        uint16 sVIT = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetSJob(), 4), sLvl);
-        uint16 sAGI = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetSJob(), 5), sLvl);
-        uint16 sINT = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetSJob(), 6), sLvl);
-        uint16 sMND = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetSJob(), 7), sLvl);
-        uint16 sCHR = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetSJob(), 8), sLvl);
+        uint16 sSTR = mobutils::GetBaseToRank(PTrust, grade::GetJobGrade(PTrust->GetSJob(), 2), sLvl);
+        uint16 sDEX = mobutils::GetBaseToRank(PTrust, grade::GetJobGrade(PTrust->GetSJob(), 3), sLvl);
+        uint16 sVIT = mobutils::GetBaseToRank(PTrust, grade::GetJobGrade(PTrust->GetSJob(), 4), sLvl);
+        uint16 sAGI = mobutils::GetBaseToRank(PTrust, grade::GetJobGrade(PTrust->GetSJob(), 5), sLvl);
+        uint16 sINT = mobutils::GetBaseToRank(PTrust, grade::GetJobGrade(PTrust->GetSJob(), 6), sLvl);
+        uint16 sMND = mobutils::GetBaseToRank(PTrust, grade::GetJobGrade(PTrust->GetSJob(), 7), sLvl);
+        uint16 sCHR = mobutils::GetBaseToRank(PTrust, grade::GetJobGrade(PTrust->GetSJob(), 8), sLvl);
 
         if (sLvl > 15)
         {
@@ -646,13 +653,13 @@ namespace trustutils
         }
 
         auto statMultiplier = settings::get<float>("map.ALTER_EGO_STAT_MULTIPLIER");
-        PTrust->stats.STR = static_cast<uint16>((fSTR + mSTR + sSTR) * statMultiplier);
-        PTrust->stats.DEX = static_cast<uint16>((fDEX + mDEX + sDEX) * statMultiplier);
-        PTrust->stats.VIT = static_cast<uint16>((fVIT + mVIT + sVIT) * statMultiplier);
-        PTrust->stats.AGI = static_cast<uint16>((fAGI + mAGI + sAGI) * statMultiplier);
-        PTrust->stats.INT = static_cast<uint16>((fINT + mINT + sINT) * statMultiplier);
-        PTrust->stats.MND = static_cast<uint16>((fMND + mMND + sMND) * statMultiplier);
-        PTrust->stats.CHR = static_cast<uint16>((fCHR + mCHR + sCHR) * statMultiplier);
+        PTrust->stats.STR   = static_cast<uint16>((fSTR + mSTR + sSTR) * statMultiplier);
+        PTrust->stats.DEX   = static_cast<uint16>((fDEX + mDEX + sDEX) * statMultiplier);
+        PTrust->stats.VIT   = static_cast<uint16>((fVIT + mVIT + sVIT) * statMultiplier);
+        PTrust->stats.AGI   = static_cast<uint16>((fAGI + mAGI + sAGI) * statMultiplier);
+        PTrust->stats.INT   = static_cast<uint16>((fINT + mINT + sINT) * statMultiplier);
+        PTrust->stats.MND   = static_cast<uint16>((fMND + mMND + sMND) * statMultiplier);
+        PTrust->stats.CHR   = static_cast<uint16>((fCHR + mCHR + sCHR) * statMultiplier);
 
         // Skills =======================
         for (int i = SKILL_DIVINE_MAGIC; i <= SKILL_BLUE_MAGIC; i++)

@@ -28,6 +28,7 @@
 
 #include "../campaign_system.h"
 #include "../conquest_system.h"
+#include "../entities/battleentity.h"
 #include "../entities/mobentity.h"
 #include "../entities/npcentity.h"
 #include "../items/item_weapon.h"
@@ -125,9 +126,9 @@ namespace zoneutils
 
     CBaseEntity* GetEntity(uint32 ID, uint8 filter)
     {
-        const uint16 DynamicEntityStart  = 0x700;
-        uint16 zoneID                    = (ID >> 12) & 0x0FFF;
-        CZone* PZone                     = GetZone(zoneID);
+        const uint16 DynamicEntityStart = 0x700;
+        uint16       zoneID             = (ID >> 12) & 0x0FFF;
+        CZone*       PZone              = GetZone(zoneID);
         if (PZone)
         {
             return PZone->GetEntity((uint16)(ID & 0x00000800 ? (ID & 0x7FF) + DynamicEntityStart : ID & 0xFFF), filter);
@@ -339,25 +340,31 @@ namespace zoneutils
         uint8 normalLevelRangeMin = settings::get<uint8>("main.NORMAL_MOB_MAX_LEVEL_RANGE_MIN");
         uint8 normalLevelRangeMax = settings::get<uint8>("main.NORMAL_MOB_MAX_LEVEL_RANGE_MAX");
 
-        const char* Query = "SELECT mob_groups.zoneid, mobname, mobid, pos_rot, pos_x, pos_y, pos_z, \
-            respawntime, spawntype, dropid, mob_groups.HP, mob_groups.MP, minLevel, maxLevel, \
-            modelid, mJob, sJob, cmbSkill, cmbDmgMult, cmbDelay, behavior, links, mobType, immunity, \
-            ecosystemID, mobradius, speed, \
-            STR, DEX, VIT, AGI, `INT`, MND, CHR, EVA, DEF, ATT, ACC, \
-            slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, \
-            fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, \
-            fire_meva, ice_meva, wind_meva, earth_meva, lightning_meva, water_meva, light_meva, dark_meva, \
-            Element, mob_pools.familyid, mob_family_system.superFamilyID, name_prefix, entityFlags, animationsub, \
-            (mob_family_system.HP / 100), (mob_family_system.MP / 100), hasSpellScript, spellList, mob_groups.poolid, \
-            allegiance, namevis, aggro, roamflag, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects, \
-            mob_family_system.charmable \
-            FROM mob_groups INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid \
-            INNER JOIN mob_resistances ON mob_resistances.resist_id = mob_pools.resist_id \
-            INNER JOIN mob_spawn_points ON mob_groups.groupid = mob_spawn_points.groupid \
-            INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyID \
-            INNER JOIN zone_settings ON mob_groups.zoneid = zone_settings.zoneid \
-            WHERE NOT (pos_x = 0 AND pos_y = 0 AND pos_z = 0) AND IF(%d <> 0, '%s' = zoneip AND %d = zoneport, TRUE) \
-            AND mob_groups.zoneid = ((mobid >> 12) & 0xFFF);";
+        const char* Query = "SELECT    mob_groups.zoneid, mob_spawn_points.mobname, mob_spawn_points.mobid, mob_spawn_points.pos_rot, mob_spawn_points.pos_x, \
+        mob_spawn_points.pos_y, mob_spawn_points.pos_z, mob_groups.respawntime, mob_groups.spawntype, mob_groups.dropid, mob_groups.HP, \
+        mob_groups.MP, mob_groups.minLevel, mob_groups.maxLevel, mob_pools.modelid, mob_pools.mJob, mob_pools.sJob, \
+        mob_pools.cmbSkill, mob_pools.cmbDmgMult, mob_pools.cmbDelay, mob_pools.behavior, mob_pools.links, mob_pools.mobType, \
+        mob_pools.immunity, mob_family_system.ecosystemID, mob_family_system.mobradius, mob_family_system.speed, mob_family_system.STR, \
+        mob_family_system.DEX, mob_family_system.VIT, mob_family_system.AGI, mob_family_system.`INT`, mob_family_system.MND, \
+        mob_family_system.CHR, mob_family_system.EVA, mob_family_system.DEF, mob_family_system.ATT, mob_family_system.ACC, \
+        mob_resistances.slash_sdt, mob_resistances.pierce_sdt, mob_resistances.h2h_sdt, mob_resistances.impact_sdt, mob_resistances.fire_sdt, \
+        mob_resistances.ice_sdt, mob_resistances.wind_sdt, mob_resistances.earth_sdt, mob_resistances.lightning_sdt, mob_resistances.water_sdt, \
+        mob_resistances.light_sdt, mob_resistances.dark_sdt, mob_resistances.fire_meva, mob_resistances.ice_meva, mob_resistances.wind_meva, \
+        mob_resistances.earth_meva, mob_resistances.lightning_meva, mob_resistances.water_meva, mob_resistances.light_meva, \
+        mob_resistances.dark_meva, mob_family_system.Element, mob_pools.familyid, mob_family_system.superFamilyID, mob_pools.name_prefix, \
+        mob_pools.entityFlags, mob_pools.animationsub, (mob_family_system.HP / 100) AS mobFamilyHP, (mob_family_system.MP / 100) AS mobFamilyMP, \
+        mob_pools.hasSpellScript, mob_pools.spellList, mob_groups.poolid, mob_groups.allegiance, mob_pools.namevis, mob_pools.aggro, \
+        mob_pools.roamflag, mob_pools.skill_list_id, mob_pools.true_detection, mob_family_system.detects, mob_family_system.charmable, \
+        mob_groups.content_tag, \
+        mob_resistances.fire_eem, mob_resistances.ice_eem, mob_resistances.wind_eem, mob_resistances.earth_eem, mob_resistances.lightning_eem, mob_resistances.water_eem, \
+        mob_resistances.light_eem, mob_resistances.dark_eem \
+        FROM mob_groups INNER JOIN mob_pools ON mob_groups.poolid = mob_pools.poolid \
+        INNER JOIN mob_resistances ON mob_resistances.resist_id = mob_pools.resist_id \
+        INNER JOIN mob_spawn_points ON mob_groups.groupid = mob_spawn_points.groupid \
+        INNER JOIN mob_family_system ON mob_pools.familyid = mob_family_system.familyID \
+        INNER JOIN zone_settings ON mob_groups.zoneid = zone_settings.zoneid \
+        WHERE NOT (pos_x = 0 AND pos_y = 0 AND pos_z = 0) AND IF(%d <> 0, '%s' = zoneip AND %d = zoneport, TRUE) \
+        AND mob_groups.zoneid = ((mobid >> 12) & 0xFFF);";
 
         char address[INET_ADDRSTRLEN];
         inet_ntop(AF_INET, &map_ip, address, INET_ADDRSTRLEN);
@@ -367,6 +374,13 @@ namespace zoneutils
         {
             while (sql->NextRow() == SQL_SUCCESS)
             {
+                const char* contentTag = (const char*)sql->GetData(77);
+
+                if (!luautils::IsContentEnabled(contentTag))
+                {
+                    continue;
+                }
+
                 uint16    ZoneID   = (uint16)sql->GetUIntData(0);
                 ZONE_TYPE zoneType = GetZone(ZoneID)->GetType();
 
@@ -403,6 +417,41 @@ namespace zoneutils
 
                     ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setMaxHit(1);
                     ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setSkillType(sql->GetIntData(17));
+                    DAMAGE_TYPE damageType = DAMAGE_TYPE::NONE;
+                    switch (((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->getSkillType())
+                    {
+                        // Combat Skills
+                        case SKILLTYPE::SKILL_NONE:
+                            damageType = DAMAGE_TYPE::NONE;
+                            break;
+                        case SKILLTYPE::SKILL_ARCHERY:
+                        case SKILLTYPE::SKILL_MARKSMANSHIP:
+                        case SKILLTYPE::SKILL_THROWING:
+                        case SKILLTYPE::SKILL_DAGGER:
+                        case SKILLTYPE::SKILL_POLEARM:
+                            damageType = DAMAGE_TYPE::PIERCING;
+                            break;
+                        case SKILLTYPE::SKILL_SWORD:
+                        case SKILLTYPE::SKILL_GREAT_SWORD:
+                        case SKILLTYPE::SKILL_AXE:
+                        case SKILLTYPE::SKILL_GREAT_AXE:
+                        case SKILLTYPE::SKILL_SCYTHE:
+                        case SKILLTYPE::SKILL_KATANA:
+                        case SKILLTYPE::SKILL_GREAT_KATANA:
+                            damageType = DAMAGE_TYPE::SLASHING;
+                            break;
+                        case SKILLTYPE::SKILL_CLUB:
+                        case SKILLTYPE::SKILL_STAFF:
+                            damageType = DAMAGE_TYPE::IMPACT;
+                            break;
+                        case SKILLTYPE::SKILL_HAND_TO_HAND:
+                            damageType = DAMAGE_TYPE::HTH;
+                            break;
+                        default:
+                            break;
+                    }
+                    ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDmgType(damageType);
+
                     PMob->m_dmgMult = sql->GetUIntData(18);
                     ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDelay((sql->GetIntData(19) * 1000) / 60);
                     ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setBaseDelay((sql->GetIntData(19) * 1000) / 60);
@@ -434,18 +483,27 @@ namespace zoneutils
                     PMob->setModifier(Mod::HTH_SDT, (uint16)(sql->GetFloatData(40) * 1000));
                     PMob->setModifier(Mod::IMPACT_SDT, (uint16)(sql->GetFloatData(41) * 1000));
 
-                    PMob->setModifier(Mod::FIRE_SDT, (int16)sql->GetFloatData(42));    // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
-                    PMob->setModifier(Mod::ICE_SDT, (int16)sql->GetFloatData(43));     // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
-                    PMob->setModifier(Mod::WIND_SDT, (int16)sql->GetFloatData(44));    // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
-                    PMob->setModifier(Mod::EARTH_SDT, (int16)sql->GetFloatData(45));   // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
-                    PMob->setModifier(Mod::THUNDER_SDT, (int16)sql->GetFloatData(46)); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
-                    PMob->setModifier(Mod::WATER_SDT, (int16)sql->GetFloatData(47));   // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
-                    PMob->setModifier(Mod::LIGHT_SDT, (int16)sql->GetFloatData(48));   // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
-                    PMob->setModifier(Mod::DARK_SDT, (int16)sql->GetFloatData(49));    // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
+                    PMob->setModifier(Mod::FIRE_SDT, (int16)sql->GetIntData(42));    // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
+                    PMob->setModifier(Mod::ICE_SDT, (int16)sql->GetIntData(43));     // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
+                    PMob->setModifier(Mod::WIND_SDT, (int16)sql->GetIntData(44));    // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
+                    PMob->setModifier(Mod::EARTH_SDT, (int16)sql->GetIntData(45));   // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
+                    PMob->setModifier(Mod::THUNDER_SDT, (int16)sql->GetIntData(46)); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
+                    PMob->setModifier(Mod::WATER_SDT, (int16)sql->GetIntData(47));   // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
+                    PMob->setModifier(Mod::LIGHT_SDT, (int16)sql->GetIntData(48));   // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
+                    PMob->setModifier(Mod::DARK_SDT, (int16)sql->GetIntData(49));    // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
 
-                    PMob->setModifier(Mod::FIRE_MEVA, (int16)(sql->GetIntData(50)));   // These are stored as signed integers which
-                    PMob->setModifier(Mod::ICE_MEVA, (int16)(sql->GetIntData(51)));    // is directly the modifier starting value.
-                    PMob->setModifier(Mod::WIND_MEVA, (int16)(sql->GetIntData(52)));   // Positives signify increased resist chance.
+                    PMob->setModifier(Mod::FIRE_EEM, (int16)sql->GetIntData(78));    // Modifier 1157, base 100 stored as signed integer. Positives signify modified meva for that element.
+                    PMob->setModifier(Mod::ICE_EEM, (int16)sql->GetIntData(79));     // Modifier 1158, base 100 stored as signed integer. Positives signify modified meva for that element.
+                    PMob->setModifier(Mod::WIND_EEM, (int16)sql->GetIntData(80));    // Modifier 1159, base 100 stored as signed integer. Positives signify modified meva for that element.
+                    PMob->setModifier(Mod::EARTH_EEM, (int16)sql->GetIntData(81));   // Modifier 1160, base 100 stored as signed integer. Positives signify modified meva for that element.
+                    PMob->setModifier(Mod::THUNDER_EEM, (int16)sql->GetIntData(82)); // Modifier 1161, base 100 stored as signed integer. Positives signify modified meva for that element.
+                    PMob->setModifier(Mod::WATER_EEM, (int16)sql->GetIntData(83));   // Modifier 1162, base 100 stored as signed integer. Positives signify modified meva for that element.
+                    PMob->setModifier(Mod::LIGHT_EEM, (int16)sql->GetIntData(84));   // Modifier 1163, base 100 stored as signed integer. Positives signify modified meva for that element.
+                    PMob->setModifier(Mod::DARK_EEM, (int16)sql->GetIntData(85));    // Modifier 1164, base 100 stored as signed integer. Positives signify modified meva for that element.
+
+                    PMob->setModifier(Mod::FIRE_MEVA, (int16)(sql->GetIntData(50))); // These are stored as signed integers which
+                    PMob->setModifier(Mod::ICE_MEVA, (int16)(sql->GetIntData(51)));  // is directly the modifier starting value.
+                    PMob->setModifier(Mod::WIND_MEVA, (int16)(sql->GetIntData(52))); // Positives signify increased resist chance.
                     PMob->setModifier(Mod::EARTH_MEVA, (int16)(sql->GetIntData(53)));
                     PMob->setModifier(Mod::THUNDER_MEVA, (int16)(sql->GetIntData(54)));
                     PMob->setModifier(Mod::WATER_MEVA, (int16)(sql->GetIntData(55)));
@@ -559,7 +617,7 @@ namespace zoneutils
         // clang-format on
 
         // attach pets to mobs
-        const char* PetQuery = "SELECT mob_groups.zoneid, mob_mobid, pet_offset \
+        const char* PetQuery = "SELECT mob_groups.zoneid, mob_pets.mob_mobid, mob_pets.pet_offset, mob_groups.content_tag \
         FROM mob_pets \
         LEFT JOIN mob_spawn_points ON mob_pets.mob_mobid = mob_spawn_points.mobid \
         LEFT JOIN mob_groups ON mob_spawn_points.groupid = mob_groups.groupid \
@@ -573,6 +631,13 @@ namespace zoneutils
         {
             while (sql->NextRow() == SQL_SUCCESS)
             {
+                const char* contentTag = (const char*)sql->GetData(3);
+
+                if (!luautils::IsContentEnabled(contentTag))
+                {
+                    continue;
+                }
+
                 uint16 ZoneID   = (uint16)sql->GetUIntData(0);
                 uint32 masterid = sql->GetUIntData(1);
                 uint32 petid    = masterid + sql->GetUIntData(2);
