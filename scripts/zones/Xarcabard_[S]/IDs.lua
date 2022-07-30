@@ -25,6 +25,7 @@ zones[xi.zone.XARCABARD_S] =
         FEDERATION_COMPLETE     = 8257, -- The Federation's preparations are now complete. Next, make your way to the Republic encampment.
         HELP_REPUBLIC_PREPARE   = 8258, -- You must help the Republic prepare for the operation. Head to the underground passage without delay!
         COMPLETED_TASKS         = 8259, -- You have completed your tasks with both Windurst and Bastok. Report back to the San d'Orian encampment.
+        JOIN_ALLIED_FORCE       = 8260, -- Join the Allied strike force in their storming of Castle Zvahl!
         BASTOKAN_OFFICER_GONE   = 8264, -- The Bastokan officer in charge is nowhere to be seen. Perhaps you should return later.
         VOIDWALKER_NO_MOB       = 8576, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
         VOIDWALKER_MOB_TOO_FAR  = 8577, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
