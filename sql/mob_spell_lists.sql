@@ -5041,7 +5041,12 @@ INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Dark',500,274,1,255); -- S
 INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Dark',500,360,1,255); -- Dispelga (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Dark',500,361,1,255); -- Blindga (1~255)
 
--- Next Avail 501
+-- Slendlix_Spindlethumb (501)
+INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',501,3,1,255);  -- cure_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',501,23,1,255); -- dia (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',501,33,1,255); -- diaga (1~255)
+
+-- Next Available: 500
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;

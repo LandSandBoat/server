@@ -1,9 +1,7 @@
 -----------------------------------
---
 -- Zone: Castle_Zvahl_Baileys_[S] (138)
---
 -----------------------------------
-local ID = require("scripts/zones/Castle_Zvahl_Baileys_[S]/IDs")
+local ID = require('scripts/zones/Castle_Zvahl_Baileys_[S]/IDs')
 -----------------------------------
 local zone_object = {}
 
@@ -12,9 +10,11 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        player:setPos(-181.969, -35.542, 19.995, 254)
+
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+        player:setPos(412.024, -12, -20.047, 128)
     end
+
     return cs
 end
 

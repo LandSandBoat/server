@@ -24,6 +24,7 @@ local geoSpellTable =
     [xi.magic.spell.GEO_MND       ] = { xi.items.GEO_MND        },
     [xi.magic.spell.GEO_FURY      ] = { xi.items.GEO_FURY       },
     [xi.magic.spell.GEO_INT       ] = { xi.items.GEO_INT        },
+    [xi.magic.spell.GEO_AGI       ] = { xi.items.GEO_AGI        },
     [xi.magic.spell.GEO_POISON    ] = { xi.items.GEO_POISON     },
     [xi.magic.spell.GEO_FEND      ] = { xi.items.GEO_FEND       },
     [xi.magic.spell.GEO_VIT       ] = { xi.items.GEO_VIT        },

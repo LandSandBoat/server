@@ -30,6 +30,8 @@ zones[xi.zone.MARJAMI_RAVINE] =
         SURPLUS_LOST_TO_AETHER     = 7711, -- A surplus of <number> kinetic unit[/s] has been lost to the aether.
         LEATHER_SCRAPS_STREWN      = 7733, -- Leather scraps are strewn about the ground.
         HOMEPOINT_SET              = 7876, -- Home point set!
+        LEARNS_SPELL               = 8174, -- <name> learns <spell>!
+        UNCANNY_SENSATION          = 8176, -- You are assaulted by an uncanny sensation.
     },
     mob =
     {

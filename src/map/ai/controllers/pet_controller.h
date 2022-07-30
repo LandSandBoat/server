@@ -32,6 +32,7 @@ public:
 
     static constexpr float PetRoamDistance{ 2.1f };
     virtual void           DoRoamTick(time_point tick) override;
+    bool                   PetSkill(uint16 targid, uint16 abilityid);
 
 protected:
     bool PetIsHealing();

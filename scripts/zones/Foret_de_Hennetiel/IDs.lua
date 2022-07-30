@@ -29,6 +29,8 @@ zones[xi.zone.FORET_DE_HENNETIEL] =
         ARTIFACT_HAS_BEEN_CHARGED  = 7692, -- Your artifact has been charged with <number> kinetic unit[/s]. Your current stock of kinetic units totals <number>.
         ARTIFACT_TERMINAL_VOLUME   = 7693, -- Your artifact has been charged to its terminal volume of kinetic units.
         SURPLUS_LOST_TO_AETHER     = 7694, -- A surplus of <number> kinetic unit[/s] has been lost to the aether.
+        LEARNS_SPELL               = 7928, -- <name> learns <spell>!
+        UNCANNY_SENSATION          = 7930, -- You are assaulted by an uncanny sensation.
         HOMEPOINT_SET              = 8002, -- Home point set!
     },
     mob =

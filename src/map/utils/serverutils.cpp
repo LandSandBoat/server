@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -106,8 +106,7 @@ namespace serverutils
         int32 tries  = 0;
         int32 verify = INT_MIN;
 
-        // TODO: Move into new-style settings
-        auto SETVAR_RETRY_MAX = 3;
+        auto setVarMaxRetry = settings::get<uint8>("map.SETVAR_RETRY_MAX");
 
         do
         {
@@ -123,7 +122,7 @@ namespace serverutils
                 sql->Query("INSERT INTO server_variables VALUES ('%s', %i) ON DUPLICATE KEY UPDATE value = %i;", name, value, value);
             }
 
-            if (SETVAR_RETRY_MAX > 0)
+            if (setVarMaxRetry > 0)
             {
                 // Cannot usleep(microseconds) or use std::this_thread::sleep_for(std::chrono::microseconds(usec))
                 // because, you guessed it, DSP design.  Close inspection of other DSP code shows sleeping is not
@@ -155,6 +154,6 @@ namespace serverutils
             {
                 break;
             }
-        } while (verify != value && tries < SETVAR_RETRY_MAX);
+        } while (verify != value && tries < setVarMaxRetry);
     }
 } // namespace serverutils

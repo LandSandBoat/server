@@ -74,11 +74,11 @@ local avatarsFavorEffect =
         scaling = {10, 12, 14, 16, 18, 20, 22, 24, 26, 27, 28},
         effect = xi.effect.CAIT_SITHS_FAVOR
     },
-    --[xi.pet.id.SIREN] = -- Subtle Blow
-    --{
-    --    scaling = {9, 11, 13, 15, 17, 19, 20, 21, 22, 23},
-    --    effect = xi.effect.SRIENS_FAVOR
-    --},
+    [xi.pet.id.SIREN] = -- Subtle Blow
+    {
+        scaling = {9, 11, 13, 15, 17, 19, 20, 21, 22, 23},
+        effect = xi.effect.SIRENS_FAVOR
+    },
 }
 -------------------------------------------
 -- Given a :getPetID petID (Not a getMobID)
@@ -93,7 +93,7 @@ local shouldAvatarsFavorBeApplied = function(petId)
         shouldApply = true
     end
 
-    if petId and petId == xi.pet.id.CAIT_SITH then
+    if petId and (petId == xi.pet.id.CAIT_SITH or petId == xi.pet.id.SIREN) then
         shouldApply = true
     end
 

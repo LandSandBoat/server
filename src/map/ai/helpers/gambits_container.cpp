@@ -4,6 +4,7 @@
 #include "../../ai/states/ability_state.h"
 #include "../../ai/states/magic_state.h"
 #include "../../ai/states/mobskill_state.h"
+#include "../../ai/states/petskill_state.h"
 #include "../../ai/states/range_state.h"
 #include "../../ai/states/weaponskill_state.h"
 #include "../../enmity_container.h"
@@ -58,7 +59,8 @@ namespace gambits
         // TODO: Is this necessary?
         // Not already doing something
         if (POwner->PAI->IsCurrentState<CAbilityState>() || POwner->PAI->IsCurrentState<CRangeState>() || POwner->PAI->IsCurrentState<CMagicState>() ||
-            POwner->PAI->IsCurrentState<CWeaponSkillState>() || POwner->PAI->IsCurrentState<CMobSkillState>())
+            POwner->PAI->IsCurrentState<CWeaponSkillState>() || POwner->PAI->IsCurrentState<CMobSkillState>() ||
+            POwner->PAI->IsCurrentState<CPetSkillState>())
         {
             return;
         }
@@ -816,8 +818,25 @@ namespace gambits
                     return result;
                     break;
                 }
-                case G_TP_TRIGGER::CLOSER:
+                case G_TP_TRIGGER::CLOSER: // Hold TP indefinitely to close a SC.
                 {
+                    auto* PSCEffect = target->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN);
+
+                    // TODO: ...and has a valid WS...
+
+                    return PSCEffect && PSCEffect->GetStartTime() + 3s < server_clock::now() && PSCEffect->GetTier() == 0;
+                    break;
+                }
+                case G_TP_TRIGGER::CLOSER_UNTIL_TP: // Will hold TP to close a SC, but WS immediately once specified value is reached.
+                {
+                    if (tp_value <= 1500) // If the value provided by the script is missing or too low
+                    {
+                        tp_value = 1500; // Apply the minimum TP Hold Threshold
+                    }
+                    if (POwner->health.tp >= tp_value) // tp_value reached
+                    {
+                        return true; // Time to WS!
+                    }
                     auto* PSCEffect = target->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN);
 
                     // TODO: ...and has a valid WS...

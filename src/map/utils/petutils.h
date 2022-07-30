@@ -57,7 +57,8 @@ enum PETID
     PETID_ADVENTURING_FELLOW = 73,
     PETID_CHOCOBO            = 74,
     PETID_LUOPAN             = 75,
-    MAX_PETID                = 76,
+    PETID_SIREN              = 76,
+    MAX_PETID                = 77,
 };
 
 class CBattleEntity;

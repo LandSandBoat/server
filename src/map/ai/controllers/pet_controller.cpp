@@ -132,3 +132,16 @@ bool CPetController::Ability(uint16 targid, uint16 abilityid)
     }
     return false;
 }
+
+bool CPetController::PetSkill(uint16 targid, uint16 abilityid)
+{
+    TracyZoneScoped;
+    if (POwner)
+    {
+        FaceTarget(targid);
+        PPet->PAI->EventHandler.triggerListener("WEAPONSKILL_BEFORE_USE", PPet, abilityid);
+        return POwner->PAI->Internal_PetSkill(targid, abilityid);
+    }
+
+    return false;
+}

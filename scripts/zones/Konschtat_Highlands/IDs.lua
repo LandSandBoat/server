@@ -53,9 +53,10 @@ zones[xi.zone.KONSCHTAT_HIGHLANDS] =
         VOIDWALKER_UPGRADE_KI_2      = 10978, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
         VOIDWALKER_BREAK_KI          = 10979, -- The <keyitem> shatters into tiny fragments.
         VOIDWALKER_OBTAIN_KI         = 10980, -- Obtained key item: <keyitem>!
+        LEARNS_SPELL                 = 11916, -- <name> learns <spell>!
+        UNCANNY_SENSATION            = 11918, -- You are assaulted by an uncanny sensation.
         COMMON_SENSE_SURVIVAL        = 11925, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
-
     mob =
     {
         STRAY_MARY_PH  =

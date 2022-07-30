@@ -86,10 +86,11 @@ namespace gambits
 
     enum class G_TP_TRIGGER : uint16
     {
-        ASAP   = 0,
-        RANDOM = 1,
-        OPENER = 2,
-        CLOSER = 3,
+        ASAP            = 0,
+        RANDOM          = 1,
+        OPENER          = 2,
+        CLOSER          = 3, // Will Hold TP Indefinitely to close a SC
+        CLOSER_UNTIL_TP = 4, // Will Hold TP to close a SC until a certain threshold
     };
 
     struct Predicate_t
@@ -230,6 +231,7 @@ namespace gambits
         std::vector<TrustSkill_t> tp_skills;
         G_TP_TRIGGER              tp_trigger;
         G_SELECT                  tp_select;
+        uint16                    tp_value;
 
     private:
         bool CheckTrigger(CBattleEntity* trigger_target, Predicate_t& predicate);

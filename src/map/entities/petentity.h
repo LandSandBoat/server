@@ -24,6 +24,8 @@
 
 #include "mobentity.h"
 
+class CPetSkillState;
+
 enum class PET_TYPE : uint8
 {
     AVATAR             = 0,
@@ -61,6 +63,7 @@ public:
     virtual void Spawn() override;
     virtual void OnAbility(CAbilityState&, action_t&) override;
     virtual bool ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) override;
+    void         OnPetSkillFinished(CPetSkillState& state, action_t& action);
 
 private:
     PET_TYPE m_PetType; // the type of pet e.g. avatar/wyvern/jugpet etc

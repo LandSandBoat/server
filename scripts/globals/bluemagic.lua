@@ -239,6 +239,15 @@ function BluePhysicalSpell(caster, target, spell, params)
 
     local multiplier = params.multiplier
 
+    -- Process chance for Bonus WSC from AF3 Set. BLU AF3 set triples the base
+    -- WSC when it procs and can stack with Chain Affinity. See Final bonus WSC
+    -- calculation below.
+
+    local bonusWSC = 0
+    if caster:getMod(xi.mod.AUGMENT_BLU_MAGIC) > math.random(0,99) then
+       bonusWSC = 2
+    end
+
     -- If under CA, replace multiplier with fTP(multiplier, tp150, tp300)
     local chainAffinity = caster:getStatusEffect(xi.effect.CHAIN_AFFINITY)
     if chainAffinity ~= nil then
@@ -249,7 +258,15 @@ function BluePhysicalSpell(caster, target, spell, params)
         end
 
         multiplier = BluefTP(tp, multiplier, params.tp150, params.tp300)
+        bonusWSC = bonusWSC + 1 -- Chain Affinity Doubles the Base WSC.
     end
+
+    -- Calculate final WSC bonuses
+    wsc = wsc + (wsc * bonusWSC)
+
+    -- See BG Wiki for reference. Chain Affinity will double the WSC. BLU AF3 set will
+    -- Triple the WSC when the set bonus procs. The AF3 set bonus stacks with Chain
+    -- Affinity for a maximum total of 4x WSC.
 
     -- TODO: Modify multiplier to account for family bonus/penalty
     local finalD = math.floor(D + fStr + wsc) * multiplier

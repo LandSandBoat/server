@@ -473,6 +473,13 @@ namespace trustutils
 
     void LoadTrustStatsAndSkills(CTrustEntity* PTrust)
     {
+        if (settings::get<uint8>("main.ENABLE_TRUST_ALTER_EGO_EXPO") > 0) // Alter Ego Expo HPP/MPP +50%, All Status Resistance +25%
+        {
+            PTrust->addModifier(Mod::HPP, 50);
+            PTrust->addModifier(Mod::MPP, 50);
+            PTrust->addModifier(Mod::STATUSRES, 25);
+        }
+
         JOBTYPE mJob = PTrust->GetMJob();
         JOBTYPE sJob = PTrust->GetSJob();
         uint8   mLvl = PTrust->GetMLevel();

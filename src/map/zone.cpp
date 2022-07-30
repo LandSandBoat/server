@@ -143,6 +143,8 @@ CZone::CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID)
 
 CZone::~CZone()
 {
+    delete m_TreasurePool;
+    delete m_CampaignHandler;
     delete m_zoneEntities;
 }
 

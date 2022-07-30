@@ -36,6 +36,8 @@ zones[xi.zone.DAVOI] =
         WHERE_THE_TONBERRY_TOLD_YOU = 7928, -- This is where the Tonberry from Carpenters' Landing told you to bring the <item>...
         NOTHING_TO_DO               = 7929, -- You have nothing left to do here.
         UNDER_ATTACK                = 7931, -- You are under attack!
+        LEARNS_SPELL                = 7971, -- <name> learns <spell>!
+        UNCANNY_SENSATION           = 7973, -- You are assaulted by an uncanny sensation.
         COMMON_SENSE_SURVIVAL       = 7980, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =

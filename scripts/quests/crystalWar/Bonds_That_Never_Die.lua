@@ -159,6 +159,9 @@ quest.sections =
                 [650] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         quest:setVar(player, 'Option', 1)
+
+                        xi.quest.setVar(player, xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SONGBIRDS_IN_A_SNOWSTORM, 'Timer', VanadielUniqueDay() + 1)
+                        xi.quest.setMustZone(player, xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SONGBIRDS_IN_A_SNOWSTORM)
                     end
                 end,
             },

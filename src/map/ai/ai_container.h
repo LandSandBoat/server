@@ -56,6 +56,7 @@ public:
     bool Disengage();
     bool WeaponSkill(uint16 targid, uint16 wsid);
     bool MobSkill(uint16 targid, uint16 wsid);
+    bool PetSkill(uint16 targid, uint16 wsid);
     bool Ability(uint16 targid, uint16 abilityid);
     bool RangedAttack(uint16 targid);
     bool Trigger(CCharEntity* player);
@@ -69,6 +70,7 @@ public:
     bool Internal_Disengage();
     bool Internal_WeaponSkill(uint16 targid, uint16 wsid);
     bool Internal_MobSkill(uint16 targid, uint16 wsid);
+    bool Internal_PetSkill(uint16 targid, uint16 abilityid);
     bool Internal_Ability(uint16 targetid, uint16 abilityid);
     bool Internal_RangedAttack(uint16 targetid);
     bool Internal_Die(duration);

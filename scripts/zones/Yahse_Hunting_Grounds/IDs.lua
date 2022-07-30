@@ -25,6 +25,7 @@ zones[xi.zone.YAHSE_HUNTING_GROUNDS] =
         ARTIFACT_HAS_BEEN_CHARGED  = 7627, -- Your artifact has been charged with <number> kinetic unit[/s]. Your current stock of kinetic units totals <number>.
         ARTIFACT_TERMINAL_VOLUME   = 7628, -- Your artifact has been charged to its terminal volume of kinetic units.
         SURPLUS_LOST_TO_AETHER     = 7629, -- A surplus of <number> kinetic unit[/s] has been lost to the aether.
+        LEARNS_SPELL               = 7864, -- <name> learns <spell>!
         UNCANNY_SENSATION          = 7866, -- You are assaulted by an uncanny sensation.
         ENERGIES_COURSE            = 7867, -- The arcane energies begin to course within your veins.
         MYSTICAL_WARMTH            = 7868, -- You feel a mystical warmth welling up inside you!

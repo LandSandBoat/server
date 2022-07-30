@@ -116,6 +116,15 @@ bool CWeaponSkillState::Update(time_point tick)
 
         auto* PTarget{ GetTarget() };
 
+        // Reset Restraint bonus and trackers on weaponskill use
+        if (m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_RESTRAINT))
+        {
+            uint16 WSBonus = m_PEntity->StatusEffectContainer->GetStatusEffect(EFFECT_RESTRAINT)->GetPower();
+            m_PEntity->StatusEffectContainer->GetStatusEffect(EFFECT_RESTRAINT)->SetPower(0);
+            m_PEntity->StatusEffectContainer->GetStatusEffect(EFFECT_RESTRAINT)->SetSubPower(0);
+            m_PEntity->delModifier(Mod::ALL_WSDMG_FIRST_HIT, WSBonus);
+        }
+
         if (action.actiontype == ACTION_WEAPONSKILL_FINISH) // category changes upon being out of range. This does not count for RoE and delay is not increased beyond the normal delay.
         {
             // only send lua the WS events if we are in range

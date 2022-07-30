@@ -42,6 +42,8 @@ zones[xi.zone.ROLANBERRY_FIELDS] =
         VOIDWALKER_OBTAIN_KI     = 10967, -- Obtained key item: <keyitem>!
         AWAIT_YOUR_CHALLENGE     = 12184, -- We await your challenge, traveler.
         LACK_LEGION_POINTS       = 12221, -- It would seem that you lack the necessary amount of Legion points.
+        LEARNS_SPELL             = 12269, -- <name> learns <spell>!
+        UNCANNY_SENSATION        = 12271, -- You are assaulted by an uncanny sensation.
         COMMON_SENSE_SURVIVAL    = 12278, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
 

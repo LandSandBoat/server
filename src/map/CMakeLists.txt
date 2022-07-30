@@ -92,6 +92,8 @@ set(SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/packet_system.h
     ${CMAKE_CURRENT_SOURCE_DIR}/party.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/party.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/petskill.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/petskill.h
     ${CMAKE_CURRENT_SOURCE_DIR}/recast_container.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/recast_container.h
     ${CMAKE_CURRENT_SOURCE_DIR}/region.cpp

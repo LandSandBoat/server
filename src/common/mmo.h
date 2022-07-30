@@ -242,23 +242,21 @@ struct look_t
 
     look_t(std::vector<uint16>& look)
     {
-        if (look.size() == 10)
+        if (look.size() != 10)
         {
-            size    = look[0];
-            modelid = look[1];
-            head    = look[2];
-            body    = look[3];
-            hands   = look[4];
-            legs    = look[5];
-            feet    = look[6];
-            main    = look[7];
-            sub     = look[8];
-            ranged  = look[9];
+            throw std::runtime_error(fmt::format("Bad look size passed to look_t constructor (expected 10, got: {})", look.size()));
         }
-        else // throw exception instead?
-        {
-            look_t();
-        }
+
+        size    = look[0];
+        modelid = look[1];
+        head    = look[2];
+        body    = look[3];
+        hands   = look[4];
+        legs    = look[5];
+        feet    = look[6];
+        main    = look[7];
+        sub     = look[8];
+        ranged  = look[9];
     }
 };
 

@@ -36,7 +36,7 @@ spell_object.onMobSpawn = function(mob)
     mob:addSimpleGambit(ai.t.SELF, ai.c.HAS_TOP_ENMITY, 0,
         ai.r.JA, ai.s.SPECIFIC, xi.ja.THIRD_EYE)
 
-    mob:setTrustTPSkillSettings(ai.tp.CLOSER, ai.s.HIGHEST)
+    mob:setTrustTPSkillSettings(ai.tp.CLOSER_UNTIL_TP, ai.s.HIGHEST, 1500)
 end
 
 spell_object.onMobDespawn = function(mob)

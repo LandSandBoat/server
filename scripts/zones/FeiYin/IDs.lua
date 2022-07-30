@@ -39,6 +39,8 @@ zones[xi.zone.FEIYIN] =
         ALREADY_POSSESS_TEMP               = 7518,  -- You already possess that temporary item.
         NO_COMBINATION                     = 7523,  -- You were unable to enter a combination.
         REGIME_REGISTERED                  = 9601,  -- New training regime registered!
+        LEARNS_SPELL                       = 10649, -- <name> learns <spell>!
+        UNCANNY_SENSATION                  = 10651, -- You are assaulted by an uncanny sensation.
         HOMEPOINT_SET                      = 10700, -- Home point set!
     },
     mob =

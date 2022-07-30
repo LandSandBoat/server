@@ -33,6 +33,9 @@ local absorbDamageBaseRate = 2
 local absorbDamagePieceBonus = 1
 local instantCastBaseRate = 2
 local instantCastPieceBonus = 1
+local baseRate = 2
+local pieceBonus = 1
+--TODO: Migrate remaining AF3 variables to baseRate/pieceBonus and update comment.
 
 --              {id, {item, ids, in, no, particular, order}, minimum matches required, match type, mods{id, value, modvalue for each additional match, additional whole set bonus}
 local gearSets =
@@ -177,7 +180,9 @@ local gearSets =
              {id = 214, items = {26673, 26849, 27025, 27201, 27377}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.DOUBLE_ATTACK, 4, 2, 0}} }, -- Argosy +1
              {id = 215, items = {25616, 25689, 27120, 27305, 27476}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.MATT, 20, 10, 0}} }, -- Amalric +1
              {id = 216, items = {18947, 15818}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.ACC, 5, 0, 0}, {xi.mod.SOULEATER_EFFECT, 2, 0, 0}} }, -- Moliones's Sickle/Ring
-             -- next id = 218
+             {id = 218, items = {11079, 11099, 11119, 11139, 11159}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.AUGMENT_BLU_MAGIC, baseRate, pieceBonus, 0}} }, -- Mavi +2 Set: Occasionally triples the WSC of Blue Magic Spells. Will stack with Chain Affinity.
+             {id = 219, items = {26770, 26771, 26928, 26929, 27082, 27083, 27267, 27268, 27441, 27442}, matches = 2, matchType = matchtype.any, mods = {{xi.mod.AUGMENT_BLU_MAGIC, baseRate, pieceBonus, 0}} },  -- AF3 BLU 109/119 Set: Occasionally triples the WSC of Blue Magic Spells. Will stack with Chain Affinity.
+             -- next id = 220
         }
 
              -- increment id by the number of mods in previous gearset (e.g. id 199 has 3 mods, 199 + 3 = 202)
@@ -416,16 +421,6 @@ Empyrean +2
 11147 -- Goetia Sabots+2
 -- Set Bonus: Augments "Conserve MP"
 -- Occasionally increases damage of elemental spells when Conserve MP is triggered. Increased amount is proportional to twice the ratio of MP conserved.
-
---Mavi Attire +2 Set
------------------------------------
-11079 -- Mavi Kavuk+2
-11099 -- Mavi Mintan+2
-11119 -- Mavi Bazubands+2
-11139 -- Mavi Tayt+2
-11159 -- Mavi Basmak+2
--- Set Bonus: Occ. augments blue magic spells.
--- no clue!
 
 --Bale Armor +2 Set
 -----------------------------------
