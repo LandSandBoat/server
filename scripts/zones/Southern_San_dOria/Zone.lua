@@ -44,10 +44,6 @@ zone_object.onConquestUpdate = function(zone, updatetype)
 end
 
 zone_object.onRegionEnter = function(player, region)
-    local regionID =region:GetRegionID()
-    if regionID==1 and player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and player:getCharVar("COP_louverance_story")== 2 then
-        player:startEvent(758)
-    end
     quests.ffr.onRegionEnter(player, region) -- player approaching Flyers for Regine NPCs
 end
 
@@ -60,8 +56,6 @@ end
 zone_object.onEventFinish = function(player, csid, option)
     if csid == 503 then
         player:messageSpecial(ID.text.ITEM_OBTAINED, 536)
-    elseif csid == 758 then
-        player:setCharVar("COP_louverance_story", 3)
     end
 end
 

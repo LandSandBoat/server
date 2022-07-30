@@ -30,6 +30,7 @@ zones[xi.zone.QUFIM_ISLAND] =
         NOW_THAT_NIGHT_HAS_FALLEN      = 7337,  -- Now that night has fallen, the flowers bloom with a strange glow.
         CONQUEST                       = 7385,  -- You've earned conquest points!
         AN_EMPTY_LIGHT_SWIRLS          = 7755,  -- An empty light swirls about the cave, eating away at the surroundings...
+        GARRISON_BASE                  = 7760,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
         GIGANTIC_FOOTPRINT             = 7839,  -- There is a gigantic footprint here.
         YOU_CANNOT_ENTER_DYNAMIS       = 7865,  -- You cannot enter Dynamis - [Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia] for <number> [day/days] (Vana'diel time).
         PLAYERS_HAVE_NOT_REACHED_LEVEL = 7867,  -- Players who have not reached level <number> are prohibited from entering Dynamis.
@@ -61,10 +62,13 @@ zones[xi.zone.QUFIM_ISLAND] =
             [17293535] = 17293537, -- -152.269 -20 243
             [17293536] = 17293537, -- -137.651 -23.507 231.528
         },
-        OPHIOTAURUS = 17293666
+        OPHIOTAURUS  = 17293666,
+        DOSETSU_TREE = 17293640,
     },
     npc =
     {
+        CASKET_BASE   = 17293678,
+        OVERSEER_BASE = 17293720, -- Pitoire_RK in npc_list
     },
 }
 

@@ -123,16 +123,16 @@ local pTable =
     [xi.magic.spell.PHALANX_II   ] = { 2, xi.effect.PHALANX,       75,    0,  240, true,  false, 0 },
 
     -- Protect / Protectra
-    [xi.magic.spell.PROTECT      ] = { 1, xi.effect.PROTECT,        7,   20, 1800, false, false, 0 },
-    [xi.magic.spell.PROTECT_II   ] = { 2, xi.effect.PROTECT,       27,   50, 1800, false, false, 0 },
-    [xi.magic.spell.PROTECT_III  ] = { 3, xi.effect.PROTECT,       47,   90, 1800, false, false, 0 },
-    [xi.magic.spell.PROTECT_IV   ] = { 4, xi.effect.PROTECT,       63,  140, 1800, false, false, 0 },
-    [xi.magic.spell.PROTECT_V    ] = { 5, xi.effect.PROTECT,       76,  220, 1800, false, false, 0 },
-    [xi.magic.spell.PROTECTRA    ] = { 1, xi.effect.PROTECT,        7,   20, 1800, false, false, 0 },
-    [xi.magic.spell.PROTECTRA_II ] = { 2, xi.effect.PROTECT,       27,   50, 1800, false, false, 0 },
-    [xi.magic.spell.PROTECTRA_III] = { 3, xi.effect.PROTECT,       47,   90, 1800, false, false, 0 },
-    [xi.magic.spell.PROTECTRA_IV ] = { 4, xi.effect.PROTECT,       63,  140, 1800, false, false, 0 },
-    [xi.magic.spell.PROTECTRA_V  ] = { 5, xi.effect.PROTECT,       75,  220, 1800, false, false, 0 },
+    [xi.magic.spell.PROTECT      ] = { 1, xi.effect.PROTECT,       10,   20, 1800, false, false, 0 },
+    [xi.magic.spell.PROTECT_II   ] = { 2, xi.effect.PROTECT,       25,   50, 1800, false, false, 0 },
+    [xi.magic.spell.PROTECT_III  ] = { 3, xi.effect.PROTECT,       40,   90, 1800, false, false, 0 },
+    [xi.magic.spell.PROTECT_IV   ] = { 4, xi.effect.PROTECT,       55,  140, 1800, false, false, 0 },
+    [xi.magic.spell.PROTECT_V    ] = { 5, xi.effect.PROTECT,       60,  220, 1800, false, false, 0 },
+    [xi.magic.spell.PROTECTRA    ] = { 1, xi.effect.PROTECT,       10,   20, 1800, false, false, 0 },
+    [xi.magic.spell.PROTECTRA_II ] = { 2, xi.effect.PROTECT,       25,   50, 1800, false, false, 0 },
+    [xi.magic.spell.PROTECTRA_III] = { 3, xi.effect.PROTECT,       40,   90, 1800, false, false, 0 },
+    [xi.magic.spell.PROTECTRA_IV ] = { 4, xi.effect.PROTECT,       55,  140, 1800, false, false, 0 },
+    [xi.magic.spell.PROTECTRA_V  ] = { 5, xi.effect.PROTECT,       60,  220, 1800, false, false, 0 },
 
     -- Refresh
     [xi.magic.spell.REFRESH      ] = { 1, xi.effect.REFRESH,       41,    3,  150, true,  true,  0 },
@@ -147,16 +147,16 @@ local pTable =
     [xi.magic.spell.REGEN_V      ] = { 5, xi.effect.REGEN,         99,   40,   60, true,  false, 0 },
 
     -- Shell / Shellra
-    [xi.magic.spell.SHELL        ] = { 1, xi.effect.SHELL,         18, 1055, 1800, false, false, 0 },
-    [xi.magic.spell.SHELL_II     ] = { 2, xi.effect.SHELL,         37, 1641, 1800, false, false, 0 },
-    [xi.magic.spell.SHELL_III    ] = { 3, xi.effect.SHELL,         57, 2188, 1800, false, false, 0 },
-    [xi.magic.spell.SHELL_IV     ] = { 4, xi.effect.SHELL,         68, 2617, 1800, false, false, 0 },
-    [xi.magic.spell.SHELL_V      ] = { 5, xi.effect.SHELL,         76, 2930, 1800, false, false, 0 },
-    [xi.magic.spell.SHELLRA      ] = { 1, xi.effect.SHELL,         18, 1055, 1800, false, false, 0 },
-    [xi.magic.spell.SHELLRA_II   ] = { 2, xi.effect.SHELL,         37, 1641, 1800, false, false, 0 },
-    [xi.magic.spell.SHELLRA_III  ] = { 3, xi.effect.SHELL,         57, 2188, 1800, false, false, 0 },
-    [xi.magic.spell.SHELLRA_IV   ] = { 4, xi.effect.SHELL,         68, 2617, 1800, false, false, 0 },
-    [xi.magic.spell.SHELLRA_V    ] = { 5, xi.effect.SHELL,         75, 2930, 1800, false, false, 0 },
+    [xi.magic.spell.SHELL        ] = { 1, xi.effect.SHELL,         24, 1055, 1800, false, false, 0 },
+    [xi.magic.spell.SHELL_II     ] = { 2, xi.effect.SHELL,         36, 1641, 1800, false, false, 0 },
+    [xi.magic.spell.SHELL_III    ] = { 3, xi.effect.SHELL,         48, 2188, 1800, false, false, 0 },
+    [xi.magic.spell.SHELL_IV     ] = { 4, xi.effect.SHELL,         56, 2617, 1800, false, false, 0 },
+    [xi.magic.spell.SHELL_V      ] = { 5, xi.effect.SHELL,         60, 2930, 1800, false, false, 0 },
+    [xi.magic.spell.SHELLRA      ] = { 1, xi.effect.SHELL,         24, 1055, 1800, false, false, 0 },
+    [xi.magic.spell.SHELLRA_II   ] = { 2, xi.effect.SHELL,         36, 1641, 1800, false, false, 0 },
+    [xi.magic.spell.SHELLRA_III  ] = { 3, xi.effect.SHELL,         48, 2188, 1800, false, false, 0 },
+    [xi.magic.spell.SHELLRA_IV   ] = { 4, xi.effect.SHELL,         56, 2617, 1800, false, false, 0 },
+    [xi.magic.spell.SHELLRA_V    ] = { 5, xi.effect.SHELL,         60, 2930, 1800, false, false, 0 },
 
     -- -Spikes
     [xi.magic.spell.BLAZE_SPIKES ] = { 1, xi.effect.BLAZE_SPIKES,   1,    0,  180, true,  false, 0 },
@@ -330,7 +330,8 @@ xi.spells.enhancing.calculateEnhancingDuration = function(caster, target, spell,
 
     -- Deodorize, Invisible and Sneak have a random factor to base duration.
     if spellEffect == xi.effect.DEODORIZE or spellEffect == xi.effect.INVISIBLE or spellEffect == xi.effect.SNEAK then
-        duration = duration + 60 * math.random(0, 2)
+        duration = calculateDuration(math.random(130, 310), spell:getSkillType(), spell:getSpellGroup(), caster, target)
+        duration = duration + target:getMod(xi.mod.INVISIBLE_DURATION)
     end
 
     --------------------
@@ -407,6 +408,11 @@ xi.spells.enhancing.useEnhancingSpell = function(caster, target, spell)
     ------------------------------------------------------------
     -- Handle exceptions and weird behaviour here, before calculating anything.
     ------------------------------------------------------------
+
+    if target:hasStatusEffect(xi.effect.ALL_MISS) and target:getStatusEffect(xi.effect.ALL_MISS):getPower() > 1 then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+        return 0
+    end
 
     -- TODO: Find a way to replace big if/else chain and still make it look good.
 

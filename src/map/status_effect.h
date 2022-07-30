@@ -746,7 +746,7 @@ enum EFFECT
     // EFFECT_PLACEHOLDER           = 1023 // The client dat file seems to have only this many "slots", results of exceeding that are untested.
 };
 
-#define MAX_EFFECTID 806 // 768 real + 38 custom
+#define MAX_EFFECTID 1023 // 768 real + 232 custom
 
 /************************************************************************
  *                                                                       *

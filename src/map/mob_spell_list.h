@@ -29,7 +29,7 @@
 
 #include "spell.h"
 
-#define MAX_MOBSPELLLIST_ID 5000
+#define MAX_MOBSPELLLIST_ID 10000
 
 typedef struct
 {

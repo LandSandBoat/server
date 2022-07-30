@@ -34,6 +34,12 @@ zone_object.onZoneIn = function(player, prevZone)
     return cs
 end
 
+zone_object.onZoneOut = function(player)
+    if player:hasStatusEffect(xi.effect.BATTLEFIELD) then
+        player:delStatusEffect(xi.effect.BATTLEFIELD)
+    end
+end
+
 zone_object.onRegionEnter = function(player, region)
 end
 
@@ -43,6 +49,17 @@ end
 zone_object.onEventFinish = function(player, csid, option)
     if csid == 100 then
         npcUtil.completeQuest(player, xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_TALEKEEPER_S_GIFT, {item = 12638, fame = 60, title = xi.title.PARAGON_OF_WARRIOR_EXCELLENCE, var = {"theTalekeeperGiftCS", "theTalekeepersGiftKilledNM"}})
+    end
+end
+
+zone_object.onZoneWeatherChange = function(weather)
+    local dosetsu = GetMobByID(ID.mob.DOSETSU_TREE)
+    if
+        not dosetsu:isSpawned() and os.time() > dosetsu:getLocalVar("respawn")
+        and (weather == xi.weather.THUNDER or weather == xi.weather.THUNDERSTORMS)
+    then
+        DisallowRespawn(dosetsu:getID(), false)
+        dosetsu:setRespawnTime(math.random(30, 150)) -- pop 30-150 sec after thunder weather starts
     end
 end
 

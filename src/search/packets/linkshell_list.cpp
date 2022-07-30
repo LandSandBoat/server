@@ -134,10 +134,10 @@ bool CLinkshellListPacket::AddPlayer(SearchEntity* PPlayer)
 }
 
 /************************************************************************
- *                                                                       *
- *  Set the packet as final in the results                               *
- *                                                                       *
- ************************************************************************/
+*                                                                       *
+*  Set the packet as final in the results                               *
+*                                                                       *
+************************************************************************/
 
 void CLinkshellListPacket::SetFinal()
 {

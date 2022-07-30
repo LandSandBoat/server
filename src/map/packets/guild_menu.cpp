@@ -41,7 +41,7 @@ CGuildMenuPacket::CGuildMenuPacket(GUILDSTATUS status, uint8 open, uint8 close, 
             packBitsBE(data + (0x08), 0xFFFFFF, open, close - open);
         }
         break;
-        case GUILD_HOLYDAY:
+        case GUILD_HOLIDAY:
         {
             ref<uint8>(0x08) = holiday;
         }

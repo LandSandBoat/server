@@ -1,5 +1,5 @@
 -----------------------------------
--- Horrid Roar (Fafnir, Cynoprosopi, Smok)
+-- Horrid Roar (Fafnir, Cynoprosopi, Smok, Wyrm)
 -- Dispels a single buff at random which could be food.  Lowers Enmity.
 -----------------------------------
 require("scripts/globals/mobskills")
@@ -10,7 +10,7 @@ require("scripts/globals/msg")
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)
-    if not target:isInfront(mob, 128) then
+    if target:isBehind(mob, 96) then
         return 1
     elseif mob:getAnimationSub() == 1 then
         return 1

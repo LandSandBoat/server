@@ -28,8 +28,8 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     params.acc100 = 0.0 params.acc200= 0.0 params.acc300= 0.0
     params.atk100 = 1; params.atk200 = 1; params.atk300 = 1
     params.hybridWS = true
-    params.ele = xi.magic.ele.LIGHT
-    params.skill = xi.skill.GREAT_KATANA
+    params.element = xi.magic.ele.LIGHT
+    params.skillType = xi.skill.GREAT_KATANA
     params.includemab = true
 
     if (xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then

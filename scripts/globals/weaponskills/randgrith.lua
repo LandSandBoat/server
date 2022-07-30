@@ -39,7 +39,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
 
     if damage > 0 then
         if not target:hasStatusEffect(xi.effect.EVASION_DOWN) then
-            local duration = tp / 1000 * 20 * applyResistanceAddEffect(player, target, xi.magic.ele.ICE, 0)
+            local duration = tp / 1000 * 20 * applyResistanceAddEffect(player, target, xi.magic.ele.ICE, ((player:getMainLvl() / 7.5) * (tp / 1000)))
             target:addStatusEffect(xi.effect.EVASION_DOWN, 32, 0, duration)
         end
     end

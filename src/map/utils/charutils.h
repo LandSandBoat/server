@@ -72,12 +72,13 @@ namespace charutils
     uint32 GetBaseExp(uint8 charlvl, uint8 moblvl);
     uint32 GetExpNEXTLevel(uint8 charlvl);
 
-    void DelExperiencePoints(CCharEntity* PChar, float retainpct, uint16 forcedXpLoss);
-    void DistributeExperiencePoints(CCharEntity* PChar, CMobEntity* PMob);
-    void DistributeGil(CCharEntity* PChar, CMobEntity* PMob);
-    void DistributeItem(CCharEntity* PChar, CBaseEntity* PEntity, uint16 itemid, uint16 droprate);
-    void AddExperiencePoints(bool expFromRaise, CCharEntity* PChar, CBaseEntity* PMob, uint32 exp, EMobDifficulty mobCheck = EMobDifficulty::TooWeak,
-                             bool isexpchain = false);
+    void  DelExperiencePoints(CCharEntity* PChar, float retainpct, uint16 forcedXpLoss);
+    void  DistributeExperiencePoints(CCharEntity* PChar, CMobEntity* PMob);
+    void  DistributeGil(CCharEntity* PChar, CMobEntity* PMob);
+    void  DistributeItem(CCharEntity* PChar, CBaseEntity* PEntity, uint16 itemid, uint16 droprate);
+    float ApplyTH(int16 m_THLvl, uint16 rate);
+    void  AddExperiencePoints(bool expFromRaise, CCharEntity* PChar, CBaseEntity* PMob, uint32 exp, EMobDifficulty mobCheck = EMobDifficulty::TooWeak,
+                              bool isexpchain = false);
 
     uint16 AddCapacityBonus(CCharEntity* PChar, uint16 capacityPoints);
     void   AddCapacityPoints(CCharEntity* PChar, CBaseEntity* PMob, uint32 capacityPoints, int16 levelDiff = 0, bool isCapacityChain = false);

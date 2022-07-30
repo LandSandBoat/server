@@ -39,9 +39,13 @@ spell_object.onSpellCast = function(caster, target, spell)
 
     local resist = applyResistanceEffect(caster, target, spell, params)
     if (resist == 1 or resist == 0.5) then -- effect taken
-        duration = duration * resist
+        local resduration = duration * resist
 
-        if (target:addStatusEffect(effect, power, 3, duration)) then
+        resduration = calculateBuildDuration(target, duration, params.effect)
+
+        if resduration == 0 then
+            spell:setMsg(xi.msg.basic.NONE)
+        elseif (target:addStatusEffect(effect, power, 3, resduration)) then
             spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         else
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
