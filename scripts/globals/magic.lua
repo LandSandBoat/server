@@ -170,7 +170,7 @@ local function getSpellBonusAcc(caster, target, spell, params)
     return magicAccBonus
 end
 
-local function calculateMagicHitRate(magicacc, magiceva, dLvl, element, target)
+local function calculateMagicHitRate(magicacc, magiceva)
     local p = 0
     local magicAccDiff = magicacc - magiceva
 
@@ -180,7 +180,7 @@ local function calculateMagicHitRate(magicacc, magiceva, dLvl, element, target)
         p = utils.clamp(((50 + magicAccDiff)), 5, 95)
     end
 
-    return {p, element, target}
+    return p
 end
 
 local function isHelixSpell(spell)
@@ -509,7 +509,7 @@ function applyResistanceEffect(caster, target, spell, params)
 
     local p = getMagicHitRate(caster, target, skill, element, effectRes, magicaccbonus, diff)
 
-    return getMagicResist(p)
+    return getMagicResist(p, target,params.element)
 end
 
 -- Applies resistance for things that may not be spells - ie. Quick Draw
@@ -522,7 +522,7 @@ function applyResistanceAddEffect(player, target, element, bonus)
 
     local p = getMagicHitRate(player, target, 0, element, 0, bonus)
 
-    return getMagicResist(p)
+    return getMagicResist(p, target, element)
 end
 
 function getMagicHitRate(caster, target, skillType, element, effectRes, bonusAcc, dStat)
@@ -635,16 +635,14 @@ function getMagicHitRate(caster, target, skillType, element, effectRes, bonusAcc
     local maccFood = magicacc * (caster:getMod(xi.mod.FOOD_MACCP)/100)
     magicacc = magicacc + utils.clamp(maccFood, 0, caster:getMod(xi.mod.FOOD_MACC_CAP))
 
-    return calculateMagicHitRate(magicacc, magiceva, dLvl, element, target)
+    return calculateMagicHitRate(magicacc, magiceva)
 end
 
 -- Returns resistance value from given magic hit rate (p)
-function getMagicResist(magicHitRate)
+function getMagicResist(magicHitRate, target, element)
     local evaMult = 1
-    local element = magicHitRate[2]
-    local target = magicHitRate[3]
 
-    if target:getObjType() == xi.objType.MOB then
+    if target ~= nil and target:getObjType() == xi.objType.MOB then
         evaMult = target:getMod(xi.magic.eleEvaMult[element]) / 100
         local sortEvaMult = {1.50, 1.30, 1.15, 1.00, 0.85, 0.70, 0.60, 0.50, 0.40, 0.30, 0.25, 0.20, 0.15, 0.10, 0.05}
 
@@ -656,7 +654,7 @@ function getMagicResist(magicHitRate)
         end
     end
 
-    local p = utils.clamp(((magicHitRate[1] * evaMult) / 100), 0.05, 3.00)
+    local p = utils.clamp(((magicHitRate * evaMult) / 100), 0.05, 0.95)
     local resist = 1
 
     -- Resistance thresholds based on p.  A higher p leads to lower resist rates, and a lower p leads to higher resist rates.
