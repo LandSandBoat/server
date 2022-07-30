@@ -3628,6 +3628,62 @@ namespace charutils
         }
     }
 
+    double GetPlayerShareMultiplier(uint16 membersInZone, bool regionBuff)
+    {
+        if (settings::get<bool>("main.DISABLE_PARTY_EXP_PENALTY"))
+        {
+            return 1.00;
+        }
+
+        // Alliance share
+        if (membersInZone > 6)
+        {
+            return 1.8f / membersInZone;
+        }
+
+        // Party share
+        if (regionBuff)
+        {
+            switch (membersInZone)
+            {
+                case 1:
+                    return 1.00;
+                case 2:
+                    return 0.75;
+                case 3:
+                    return 0.55;
+                case 4:
+                    return 0.45;
+                case 5:
+                    return 0.39;
+                case 6:
+                    return 0.35;
+                default:
+                    return 1.8 / membersInZone;
+            }
+        }
+        else
+        {
+            switch (membersInZone)
+            {
+                case 1:
+                    return 1.00;
+                case 2:
+                    return 0.60;
+                case 3:
+                    return 0.45;
+                case 4:
+                    return 0.40;
+                case 5:
+                    return 0.37;
+                case 6:
+                    return 0.35;
+                default:
+                    return 1.8 / membersInZone;
+            }
+        }
+    }
+
     /************************************************************************
      *                                                                       *
      *  Allocate experience points                                           *
@@ -3727,88 +3783,17 @@ namespace charutils
                         }
                     }
 
-                    if (PMember->StatusEffectContainer->HasStatusEffect(EFFECT_SIGNET) && region >= REGION_TYPE::RONFAURE && region <= REGION_TYPE::JEUNO)
-                    {
-                        switch (pcinzone)
-                        {
-                            case 1:
-                                exp *= 1.00f;
-                                break;
-                            case 2:
-                                exp *= 0.75f;
-                                break;
-                            case 3:
-                                exp *= 0.55f;
-                                break;
-                            case 4:
-                                exp *= 0.45f;
-                                break;
-                            case 5:
-                                exp *= 0.39f;
-                                break;
-                            case 6:
-                                exp *= 0.35f;
-                                break;
-                            default:
-                                exp *= (1.8f / pcinzone);
-                                break;
-                        }
-                    }
-                    else if (PMember->StatusEffectContainer->HasStatusEffect(EFFECT_SANCTION) && region >= REGION_TYPE::WEST_AHT_URHGAN &&
-                             region <= REGION_TYPE::ALZADAAL)
-                    {
-                        switch (pcinzone)
-                        {
-                            case 1:
-                                exp *= 1.00f;
-                                break;
-                            case 2:
-                                exp *= 0.75f;
-                                break;
-                            case 3:
-                                exp *= 0.55f;
-                                break;
-                            case 4:
-                                exp *= 0.45f;
-                                break;
-                            case 5:
-                                exp *= 0.39f;
-                                break;
-                            case 6:
-                                exp *= 0.35f;
-                                break;
-                            default:
-                                exp *= (1.8f / pcinzone);
-                                break;
-                        }
-                    }
-                    else
-                    {
-                        switch (pcinzone)
-                        {
-                            case 1:
-                                exp *= 1.00f;
-                                break;
-                            case 2:
-                                exp *= 0.60f;
-                                break;
-                            case 3:
-                                exp *= 0.45f;
-                                break;
-                            case 4:
-                                exp *= 0.40f;
-                                break;
-                            case 5:
-                                exp *= 0.37f;
-                                break;
-                            case 6:
-                                exp *= 0.35f;
-                                break;
-                            default:
-                                exp *= (1.8f / pcinzone);
-                                break;
-                        }
-                    }
+                    bool isInSignetZone =
+                        PMember->StatusEffectContainer->HasStatusEffect(EFFECT_SIGNET) &&
+                        region >= REGION_TYPE::RONFAURE &&
+                        region <= REGION_TYPE::JEUNO;
+
+                    bool isInSanctionZone =
+                        PMember->StatusEffectContainer->HasStatusEffect(EFFECT_SANCTION) &&
+                        region >= REGION_TYPE::WEST_AHT_URHGAN &&
+                        region <= REGION_TYPE::ALZADAAL;
+
+                    exp *= GetPlayerShareMultiplier(pcinzone, isInSignetZone || isInSanctionZone);
 
                     if (PMob->getMobMod(MOBMOD_EXP_BONUS))
                     {
