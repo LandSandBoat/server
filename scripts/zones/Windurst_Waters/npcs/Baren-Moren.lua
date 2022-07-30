@@ -95,17 +95,17 @@ entity.onEventFinish = function(player, csid, option)
         local rewards = {fame = 75, fameArea = xi.quest.fame_area.WINDURST, var = {"QuestHatInHand_var", "QuestHatInHand_count"}}
 
         if rewardTier == 5 then
-            rewards.gil = 500
+            rewards.gil = 200
             rewards.item = 12543
         elseif rewardTier == 4 then
-            rewards.gil = 400
+            rewards.gil = 175
             rewards.item = 12543
         elseif rewardTier == 3 then
-            rewards.gil = 300
-        elseif rewardTier == 2 then
             rewards.gil = 150
+        elseif rewardTier == 2 then
+            rewards.gil = 100
         elseif rewardTier == 1 then
-            rewards.gil = 300
+            rewards.gil = 50
         end
 
         if npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.HAT_IN_HAND, rewards) then

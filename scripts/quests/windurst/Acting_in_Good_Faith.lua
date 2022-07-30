@@ -25,13 +25,13 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                   player:getFameLevel(xi.quest.fame_area.WINDURST) >= 4 and
-                   player:getMainLvl() >= 10
+                player:getFameLevel(xi.quest.fame_area.WINDURST) >= 4 and
+                player:getMainLvl() >= 10
         end,
 
         [xi.zone.WINDURST_WATERS] =
         {
-            ['Gantineaux'] = quest:progressEvent(10019),
+            ['Gantineux'] = quest:progressEvent(10019),
 
             onEventFinish =
             {
@@ -50,7 +50,7 @@ quest.sections =
 
         [xi.zone.WINDURST_WATERS] =
         {
-            ['Gantineaux'] =
+            ['Gantineux'] =
             {
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.ki.SPIRIT_INCENSE) then
@@ -66,7 +66,7 @@ quest.sections =
             onEventFinish =
             {
                 [10021] = function(player, csid, option, npc)
-                    npcUtil.giveKeyIte(player, xi.ki.GANTINEUXS_LETTER)
+                    npcUtil.giveKeyItem(player, xi.ki.GANTINEUXS_LETTER)
                 end,
             },
         },
@@ -76,16 +76,16 @@ quest.sections =
             ['Eperdur'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.SPIRIT_INCENSE) then
-                        return quest:progressEvent(10020)
+                    if player:hasKeyItem(xi.ki.GANTINEUXS_LETTER) then
+                        return quest:progressEvent(680)
                     end
                 end,
             },
 
             onEventFinish =
             {
-                [10021] = function(player, csid, option, npc)
-                    npcUtil.giveKeyIte(player, xi.ki.GANTINEUXS_LETTER)
+                [680] = function(player, csid, option, npc)
+                    quest:complete(player)
                 end,
             },
         },

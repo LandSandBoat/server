@@ -33,7 +33,9 @@ quest.sections =
             onEventFinish =
             {
                 [654] = function(player, csid, option, npc)
-                    quest:begin(player)
+                    if option == 1 then
+                        quest:begin(player)
+                    end
                 end,
             },
         },
@@ -54,8 +56,10 @@ quest.sections =
                         if rand <= 2 then
                             return quest:progressEvent(659)
                         elseif rand == 3 then
+                            player:confirmTrade()
                             return quest:progressEvent(657) -- IN A PICKLE: Too Light
                         elseif rand == 4 then
+                            player:confirmTrade()
                             return quest:progressEvent(658) -- IN A PICKLE: Too Small
                         end
                     end
@@ -70,6 +74,7 @@ quest.sections =
             {
                 [659] = function(player, csid, option, npc)
                     if quest:complete(player) then
+                        player:confirmTrade()
                         player:needToZone(true)
                         npcUtil.giveItem(player, xi.items.BRASS_HAIRPIN)
                         player:addFame(xi.quest.fame_area.WINDURST, 75)
@@ -94,8 +99,10 @@ quest.sections =
                         if rand <= 2 then
                             return quest:progressEvent(662, 200)
                         elseif rand == 3 then
+                            player:confirmTrade()
                             return quest:progressEvent(657) -- IN A PICKLE: Too Light
                         elseif rand == 4 then
+                            player:confirmTrade()
                             return quest:progressEvent(658) -- IN A PICKLE: Too Small
                         end
                     end
@@ -114,11 +121,15 @@ quest.sections =
             onEventFinish =
             {
                 [661] = function(player, csid, option, npc)
-                    quest:setVar(player, 'repeat', 1)
+                    if option == 1 then
+                        quest:setVar(player, 'repeat', 1)
+                    end
                 end,
 
                 [662] = function(player, csid, option, npc)
-                    npcUtil.giveCurrency(player, 'gil', 200)
+                    player:confirmTrade()
+                    player:needToZone(true)
+                    quest:setVar(player, 'repeat', 0)
                     player:addFame(xi.quest.fame_area.WINDURST, 8)
                 end,
             },

@@ -118,6 +118,7 @@ xi.items =
     SIRENS_TEAR                     = 576,
     EAGLE_BUTTON                    = 578,
     GILT_GLASSES                    = 579,
+    BRONZE_BOX                      = 580,
     SMOOTH_STONE                    = 583,
     SUPPLIES_ORDER                  = 592,
     PARCEL_FOR_THE_MAGIC_SHOP       = 593,

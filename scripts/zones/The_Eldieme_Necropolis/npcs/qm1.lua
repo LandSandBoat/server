@@ -26,7 +26,6 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 50 and option == 0 then
-        player:messageSpecial(ID.text.SPIRIT_INCENSE_EMITS_PUTRID_ODOR, xi.ki.SPIRIT_INCENSE)
         player:delKeyItem(xi.ki.SPIRIT_INCENSE)
     end
 end

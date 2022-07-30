@@ -15058,10 +15058,9 @@ INSERT INTO `mob_droplist` VALUES (1834,0,0,1000,3090,200); -- Spheroid Plate (2
 -- ZoneID: 221 - Ocean Crab
 -- ZoneID: 227 - Ocean Crab
 -- ZoneID: 228 - Ocean Crab
-INSERT INTO `mob_droplist` VALUES (1835,0,0,1000,580,980);        -- Bronze Box (98.0%)
-INSERT INTO `mob_droplist` VALUES (1835,0,0,1000,936,110);        -- Chunk Of Rock Salt (11.0%)
+INSERT INTO `mob_droplist` VALUES (1835,0,0,1000,580,@ALWAYS);    -- Bronze Box (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (1835,0,0,1000,936,@VCOMMON);   -- Chunk Of Rock Salt (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (1835,0,0,1000,4400,@UNCOMMON); -- Slice Of Land Crab Meat (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (1835,0,0,1000,881,@VRARE);     -- Crab Shell (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (1835,2,0,1000,936,0);          -- Chunk Of Rock Salt (Steal)
 
 -- ZoneID: 176 - Ocean Sahagin
