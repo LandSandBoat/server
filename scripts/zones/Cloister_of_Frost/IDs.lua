@@ -28,6 +28,8 @@ zones[xi.zone.CLOISTER_OF_FROST] =
         ALREADY_HAVE_ALL_FRAGS           = 7672, -- You have obtained all of the fragments. You must hurry to the ruins of the ancient shrine!
         FOUND_ALL_FRAGS                  = 7673, -- You have obtained <keyitem>! You now have all 8 fragments of light!
         ZILART_MONUMENT                  = 7674, -- It is an ancient Zilart monument.
+        ATTACH_SEAL                      = 7773, -- <player> attaches <item> to the protocrystal.
+        POWER_STYMIES                    = 7774, -- An unseen power stymies your efforts to attach <item> to the protocrystal.
     },
     mob =
     {

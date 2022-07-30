@@ -697,7 +697,8 @@ std::string UnpackSoultrapperName(uint8 input[])
     uint8       remainder = 0;
     uint8       shift     = 1;
     uint8       maxSize   = 13; // capped at 13 based on examples like GoblinBountyH
-    std::string output    = "";
+    char        indexChar;
+    std::string output = "";
 
     // Unpack and shift 7-bit to 8-bit
     for (uint8 i = 0; i <= maxSize; ++i)
@@ -712,7 +713,11 @@ std::string UnpackSoultrapperName(uint8 input[])
         }
 
         // uint8 orvalue = tempLeft | remainder;
-        output = output + (char)(tempLeft | remainder);
+        indexChar = (char)(tempLeft | remainder);
+        if (indexChar >= '0' && indexChar <= 'z')
+        {
+            output = output + (char)(tempLeft | remainder);
+        }
 
         remainder = tempRight << (7 - shift);
         if (remainder & 128)
@@ -722,7 +727,10 @@ std::string UnpackSoultrapperName(uint8 input[])
 
         if (shift == 7)
         {
-            output    = output + char(remainder);
+            if (char(remainder) >= '0' && char(remainder) <= 'z')
+            {
+                output = output + char(remainder);
+            }
             remainder = 0;
             shift     = 1;
         }
