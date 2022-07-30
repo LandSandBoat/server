@@ -27,6 +27,7 @@ zones[xi.zone.CEIZAK_BATTLEGROUNDS] =
         ARTIFACT_TERMINAL_VOLUME   = 7608, -- Your artifact has been charged to its terminal volume of kinetic units.
         SURPLUS_LOST_TO_AETHER     = 7609, -- A surplus of <number> kinetic unit[/s] has been lost to the aether.
         HOMEPOINT_SET              = 7791, -- Home point set!
+        LEARNS_SPELL               = 8031, -- <name> learns <spell>!
         UNCANNY_SENSATION          = 8033, -- You are assaulted by an uncanny sensation.
         ENERGIES_COURSE            = 8034, -- The arcane energies begin to course within your veins.
         MYSTICAL_WARMTH            = 8035, -- You feel a mystical warmth welling up inside you!

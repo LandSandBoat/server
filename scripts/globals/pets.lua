@@ -50,6 +50,7 @@ xi.pet.id =
     ODIN                  = 18,
     ATOMOS                = 19,
     CAIT_SITH             = 20,
+    SIREN                 = 76,
 
     --  Beastmaster
     SHEEP_FAMILIAR        = 21,

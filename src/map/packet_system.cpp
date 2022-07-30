@@ -2198,7 +2198,16 @@ void SmallPacket0x04B(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if (msg_language == 0x02)
     {
-        PChar->pushPacket(new CServerMessagePacket(settings::get<std::string>("main.SERVER_MESSAGE"), msg_language, msg_timestamp, msg_offset));
+        std::string login_message = settings::get<std::string>("main.SERVER_MESSAGE");
+        if (settings::get<bool>("main.ENABLE_TRUST_ALTER_EGO_EXTRAVAGANZA_ANNOUNCE"))
+        {
+            login_message = login_message + (settings::get<std::string>("main.TRUST_ALTER_EGO_EXTRAVAGANZA_MESSAGE"));
+        }
+        if (settings::get<bool>("main.ENABLE_TRUST_ALTER_EGO_EXPO_ANNOUNCE"))
+        {
+            login_message = login_message + (settings::get<std::string>("main.TRUST_ALTER_EGO_EXPO_MESSAGE"));
+        }
+        PChar->pushPacket(new CServerMessagePacket(login_message, msg_language, msg_timestamp, msg_offset));
     }
 
     PChar->pushPacket(new CCharSyncPacket(PChar));

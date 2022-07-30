@@ -3536,27 +3536,27 @@ INSERT INTO `mob_skills` VALUES (3702,405,'darkest_hour',0,7.0,2000,1500,4,0,0,0
 INSERT INTO `mob_skills` VALUES (3703,406,'unceasing_dread',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3704,407,'dignified_awe',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (3705,408,'naakuals_vengeance',0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (3706,633,'cross_reaver',0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (3706,633,'cross_reaver',4,7.0,2000,1500,4,0,0,0,0,0,0);         -- AAHM
 -- INSERT INTO `mob_skills` VALUES (3707,3451,'#1915',0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (3708,641,'swift_blade',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3709,235,'chant_du_cygne',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3710,237,'arrogance_incarnate',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3711,643,'vorpal_blade',0,7.0,2000,1500,4,0,0,0,0,0,0); -- ArkEV
--- INSERT INTO `mob_skills` VALUES (3712,635,'dominion_slash',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3713,236,'chant_du_cygne',0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (3708,641,'swift_blade',0,7.0,2000,1500,4,0,0,0,9,0,0);          -- AAHM
+INSERT INTO `mob_skills` VALUES (3709,2283,'chant_du_cygne',0,7.0,2000,1500,4,0,0,0,13,10,0);    -- AAHM
+INSERT INTO `mob_skills` VALUES (3710,2285,'arrogance_incarnate',1,7.0,2000,1500,4,0,0,0,0,0,0); -- AAEV
+INSERT INTO `mob_skills` VALUES (3711,643,'vorpal_blade',0,7.0,2000,1500,4,0,0,0,4,8,0);         -- AAEV
+INSERT INTO `mob_skills` VALUES (3712,635,'dominion_slash',0,7.0,2000,1500,4,0,0,0,0,0,0);       -- AAEV
+INSERT INTO `mob_skills` VALUES (3713,2284,'chant_du_cygne',0,7.0,2000,1500,4,0,0,0,13,10,0);    -- AAEV
 INSERT INTO `mob_skills` VALUES (3714,638,'shield_strike',0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (3715,644,'rampage',0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (3716,3460,'#1924',0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (3717,3461,'#1925',0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (3718,3462,'#1926',0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (3715,644,'rampage',0,7.0,2000,1500,4,0,0,0,4,0,0);              -- AAMR
+INSERT INTO `mob_skills` VALUES (3716,3460,'calamity',0,7.0,2000,1500,4,0,0,0,4,8,0);            -- AAMR
+INSERT INTO `mob_skills` VALUES (3717,634,'havoc_spiral',1,7.0,2000,1500,4,0,0,0,0,0,0);         -- AAMR
+INSERT INTO `mob_skills` VALUES (3718,2282,'cloudsplitter',0,7.0,2000,1500,4,0,0,0,14,12,0);     -- AAMR
 -- INSERT INTO `mob_skills` VALUES (3719,3463,'#1927',0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (3720,636,'amon_drive',0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (3721,647,'guillotine',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3722,648,'tachi_yukikaze',0,7.0,2000,1500,4,0,0,0,0,0,0); -- ArkGK
-INSERT INTO `mob_skills` VALUES (3723,649,'tachi_gekko',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3724,637,'dragonfall',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3725,650,'tachi_gasha',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (3726,233,'tachi_fudo',0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (3720,636,'amon_drive',0,7.0,2000,1500,4,0,0,0,0,0,0);           -- AATT
+INSERT INTO `mob_skills` VALUES (3721,647,'guillotine',0,7.0,2000,1500,4,0,0,0,7,0,0);           -- AATT
+INSERT INTO `mob_skills` VALUES (3722,648,'tachi_yukikaze',0,7.0,2000,1500,4,0,0,0,7,6,0);       -- AAGK
+INSERT INTO `mob_skills` VALUES (3723,649,'tachi_gekko',0,7.0,2000,1500,4,0,0,0,10,5,0);         -- AAGK
+INSERT INTO `mob_skills` VALUES (3724,637,'dragonfall',1,7.0,2000,1500,4,0,0,0,0,0,0);           -- AAGK
+INSERT INTO `mob_skills` VALUES (3725,650,'tachi_kasha',0,7.0,2000,1500,4,0,0,0,11,2,0);         -- AAGK
+INSERT INTO `mob_skills` VALUES (3726,2281,'tachi_fudo',0,7.0,2000,1500,4,0,0,0,13,10,0);        -- AAGK
 -- INSERT INTO `mob_skills` VALUES (3727,3471,'#1935',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (3728,3472,'#1936',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (3729,3473,'#1937',0,7.0,2000,1500,4,0,0,0,0,0,0);
