@@ -4998,6 +4998,11 @@ INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 252, 1, 255); -- stun (1
 INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 253, 1, 255); -- sleep (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 274, 1, 255); -- sleepga ii (1~255)
 
+-- Cemetery Cherry (494)
+INSERT INTO `mob_spell_lists` VALUES ('Cemetery_Cherry',494,274,1,255); -- Sleepga II
+INSERT INTO `mob_spell_lists` VALUES ('Cemetery_Cherry',494,356,1,255); -- Paralyga
+INSERT INTO `mob_spell_lists` VALUES ('Cemetery_Cherry',494,366,1,255); -- Graviga
+
 -- Slendlix Spindlethumb (498)
 INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',499,3,1,255);  -- cure_iii (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',499,23,1,255); -- dia (1~255)

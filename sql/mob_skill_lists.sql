@@ -3817,11 +3817,13 @@ INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1169,1720);
 INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1169,1721);
 INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1169,1722);
 INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1169,1723);
-
+INSERT INTO `mob_skill_lists` VALUES ('Swamfisk',1170,452); -- Screwdriver
+INSERT INTO `mob_skill_lists` VALUES ('Swamfisk',1170,453); -- Water Wall
+INSERT INTO `mob_skill_lists` VALUES ('Barbastelle',1173,392); -- Ultrasonics
 INSERT INTO `mob_skill_lists` VALUES('Supplespine_Mujwuj', 1176, 1064);
 INSERT INTO `mob_skill_lists` VALUES('Supplespine_Mujwuj', 1176, 609);
 
--- Next available ID: 1176
+-- Next available ID: 1177
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section

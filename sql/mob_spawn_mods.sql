@@ -104,6 +104,7 @@ INSERT INTO `mob_spawn_mods` VALUES (17203216,1,15000,1);
 INSERT INTO `mob_spawn_mods` VALUES (17203216,2,20000,1);
 INSERT INTO `mob_spawn_mods` VALUES (17555863,1,20000,1);
 INSERT INTO `mob_spawn_mods` VALUES (17555863,2,30000,1);
+INSERT INTO `mob_spawn_mods` VALUES (17555863,15,10000,1);
 INSERT INTO `mob_spawn_mods` VALUES (17309954,1,18000,1);
 INSERT INTO `mob_spawn_mods` VALUES (17309954,2,29250,1);
 INSERT INTO `mob_spawn_mods` VALUES (17309954,15,3250,1);
@@ -608,6 +609,11 @@ INSERT INTO `mob_spawn_mods` VALUES (17588703,55,180,1);
 -- Values taken from wiki on 04/23/2018 (http://ffxiclopedia.wikia.com/wiki/Tonberry_Kinq)
 INSERT INTO `mob_spawn_mods` VALUES (17428677,1,18000,1); -- min gil 18000
 INSERT INTO `mob_spawn_mods` VALUES (17428677,2,30000,1); -- max gil 30000
+
+-- Sewer Syrup
+INSERT INTO `mob_spawn_mods` VALUES (17461307,1,4000,1);
+INSERT INTO `mob_spawn_mods` VALUES (17461307,2,19000,1);
+INSERT INTO `mob_spawn_mods` VALUES (17461307,15,3500,1);
 
 /*!40000 ALTER TABLE `mob_spawn_mods` ENABLE KEYS */;
 UNLOCK TABLES;
