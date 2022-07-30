@@ -276,14 +276,17 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
         char session_key[20 * 2 + 1];
         bin2hex(session_key, (uint8*)PSession->blowfish.key, 20);
 
-        uint16 destination = PChar->loc.destination;
+        uint16 destination = MAX_ZONEID + 1; // Forces the function to fail closed
 
-        if (destination >= MAX_ZONEID)
+        if (PChar != nullptr)
         {
-            // TODO: work out how to drop player in moghouse that exits them to the zone they were in before this happened, like we used to.
-            ShowWarning("packet_system::SmallPacket0x00A player tried to enter zone out of range: %d", destination);
-            ShowWarning("packet_system::SmallPacket0x00A dumping player `%s` to homepoint!", PChar->GetName());
-            charutils::HomePoint(PChar);
+            destination = PChar->loc.destination; // Only sets destination if PChar isn't nullptr
+        }
+
+        if (destination >= MAX_ZONEID) // Fails to putting player back to it's previous zone
+        {
+            ShowWarning("packet_system::SmallPacket0x00A GetZone Bad Args for IncreaseZoneCounter, MITIGATING: Sending %s to loc.prevzone.", PChar->GetName());
+            destination = PChar->loc.prevzone;
         }
 
         zoneutils::GetZone(destination)->IncreaseZoneCounter(PChar);
@@ -510,7 +513,22 @@ void SmallPacket0x00D(map_session_data_t* const PSession, CCharEntity* const PCh
 
         if (PChar->PPet != nullptr)
         {
-            PChar->setPetZoningInfo();
+            auto* PPetEntity = dynamic_cast<CPetEntity*>(PChar->PPet);
+            if (PChar->PPet->objtype != TYPE_MOB)
+            {
+                if (PPetEntity->getPetType() == PET_TYPE::WYVERN)
+                {
+                    PChar->setPetZoningInfo();
+                }
+                else
+                {
+                    PChar->resetPetZoningInfo();
+                }
+            }
+            else
+            {
+                PChar->resetPetZoningInfo();
+            }
         }
 
         PSession->shuttingDown = 1;
@@ -522,7 +540,7 @@ void SmallPacket0x00D(map_session_data_t* const PSession, CCharEntity* const PCh
         sql->Query("UPDATE char_stats SET zoning = 1 WHERE charid = %u", PChar->id);
         charutils::CheckEquipLogic(PChar, SCRIPT_CHANGEZONE, PChar->getZone());
 
-        if (PChar->CraftContainer->getItemsCount() > 0 && PChar->animation == ANIMATION_SYNTH)
+        if ((PChar->CraftContainer->getItemsCount() > 0 && PChar->animation == ANIMATION_SYNTH) || PChar->GetLocalVar("InSynth") != 0)
         {
             // NOTE:
             // Supposed non-losable items are reportely lost if this condition is met:
@@ -531,7 +549,9 @@ void SmallPacket0x00D(map_session_data_t* const PSession, CCharEntity* const PCh
             // interrupted in some way, such as by being attacked or moving to another area (e.g. ship docking).
 
             ShowWarning("SmallPacket0x00D: %s attempting to zone in the middle of a synth, failing their synth!", PChar->GetName());
+            PChar->CraftContainer->m_failType = 3;
             synthutils::doSynthFail(PChar);
+            PChar->SetLocalVar("InSynth", 0);
         }
     }
 
@@ -1019,7 +1039,7 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
                     charutils::UpdateItem(PChar, LOC_INVENTORY, slotID, -1);
 
                     PChar->pushPacket(new CInventoryFinishPacket());
-                    PChar->pushPacket(new CChocoboDiggingPacket(PChar));
+                    PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CChocoboDiggingPacket(PChar));
 
                     // dig is possible
                     luautils::OnChocoboDig(PChar, false);
@@ -3639,8 +3659,22 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
     // handle pets on zone
     if (PChar->PPet != nullptr)
     {
-        PChar->setPetZoningInfo();
-        petutils::DespawnPet(PChar);
+        auto* PPetEntity = dynamic_cast<CPetEntity*>(PChar->PPet);
+        if (PChar->PPet->objtype != TYPE_MOB)
+        {
+            if (PPetEntity->getPetType() == PET_TYPE::WYVERN)
+            {
+                PChar->setPetZoningInfo();
+            }
+            else
+            {
+                PChar->resetPetZoningInfo();
+            }
+        }
+        else
+        {
+            PChar->resetPetZoningInfo();
+        }
     }
 
     uint32 zoneLineID    = data.ref<uint32>(0x04);
@@ -5779,10 +5813,10 @@ void SmallPacket0x0DD(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_CHECKPARAM_NAME));
             PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_CHECKPARAM_ILVL));
-            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, PChar->ACC(0, 0), PChar->ATT(), MSGBASIC_CHECKPARAM_PRIMARY));
+            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, PChar->ACC(0, 0), PChar->ATT(SLOT_MAIN), MSGBASIC_CHECKPARAM_PRIMARY));
             if (PChar->getEquip(SLOT_SUB) && PChar->getEquip(SLOT_SUB)->isType(ITEM_WEAPON))
             {
-                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, PChar->ACC(1, 0), PChar->ATT(), MSGBASIC_CHECKPARAM_AUXILIARY));
+                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, PChar->ACC(1, 0), PChar->ATT(SLOT_MAIN), MSGBASIC_CHECKPARAM_AUXILIARY));
             }
             else
             {
@@ -5793,14 +5827,14 @@ void SmallPacket0x0DD(map_session_data_t* const PSession, CCharEntity* const PCh
                 int skill      = ((CItemWeapon*)PChar->getEquip(SLOT_RANGED))->getSkillType();
                 int bonusSkill = ((CItemWeapon*)PChar->getEquip(SLOT_RANGED))->getILvlSkill();
                 PChar->pushPacket(
-                    new CMessageBasicPacket(PChar, PChar, PChar->RACC(skill, bonusSkill), PChar->RATT(skill, bonusSkill), MSGBASIC_CHECKPARAM_RANGE));
+                    new CMessageBasicPacket(PChar, PChar, PChar->GetBaseRACC(skill, bonusSkill), PChar->GetBaseRATT(skill, bonusSkill), MSGBASIC_CHECKPARAM_RANGE));
             }
             else if (PChar->getEquip(SLOT_AMMO) && PChar->getEquip(SLOT_AMMO)->isType(ITEM_WEAPON))
             {
                 int skill      = ((CItemWeapon*)PChar->getEquip(SLOT_AMMO))->getSkillType();
                 int bonusSkill = ((CItemWeapon*)PChar->getEquip(SLOT_AMMO))->getILvlSkill();
                 PChar->pushPacket(
-                    new CMessageBasicPacket(PChar, PChar, PChar->RACC(skill, bonusSkill), PChar->RATT(skill, bonusSkill), MSGBASIC_CHECKPARAM_RANGE));
+                    new CMessageBasicPacket(PChar, PChar, PChar->GetBaseRACC(skill, bonusSkill), PChar->GetBaseRATT(skill, bonusSkill), MSGBASIC_CHECKPARAM_RANGE));
             }
             else
             {
@@ -5811,10 +5845,10 @@ void SmallPacket0x0DD(map_session_data_t* const PSession, CCharEntity* const PCh
         else if (PChar->PPet && PChar->PPet->id == id)
         {
             PChar->pushPacket(new CMessageBasicPacket(PChar, PChar->PPet, 0, 0, MSGBASIC_CHECKPARAM_NAME));
-            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar->PPet, PChar->PPet->ACC(0, 0), PChar->PPet->ATT(), MSGBASIC_CHECKPARAM_PRIMARY));
+            PChar->pushPacket(new CMessageBasicPacket(PChar, PChar->PPet, PChar->PPet->ACC(0, 0), PChar->PPet->ATT(SLOT_MAIN), MSGBASIC_CHECKPARAM_PRIMARY));
             if (PChar->getEquip(SLOT_SUB) && PChar->getEquip(SLOT_SUB)->isType(ITEM_WEAPON))
             {
-                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar->PPet, PChar->PPet->ACC(1, 0), PChar->PPet->ATT(), MSGBASIC_CHECKPARAM_AUXILIARY));
+                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar->PPet, PChar->PPet->ACC(1, 0), PChar->PPet->ATT(SLOT_MAIN), MSGBASIC_CHECKPARAM_AUXILIARY));
             }
             else
             {
@@ -5823,12 +5857,12 @@ void SmallPacket0x0DD(map_session_data_t* const PSession, CCharEntity* const PCh
             if (PChar->getEquip(SLOT_RANGED) && PChar->getEquip(SLOT_RANGED)->isType(ITEM_WEAPON))
             {
                 int skill = ((CItemWeapon*)PChar->getEquip(SLOT_RANGED))->getSkillType();
-                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar->PPet, PChar->PPet->RACC(skill), PChar->PPet->RATT(skill), MSGBASIC_CHECKPARAM_RANGE));
+                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar->PPet, PChar->PPet->GetBaseRACC(skill, 0), PChar->PPet->GetBaseRATT(skill, 0), MSGBASIC_CHECKPARAM_RANGE));
             }
             else if (PChar->getEquip(SLOT_AMMO) && PChar->getEquip(SLOT_AMMO)->isType(ITEM_WEAPON))
             {
                 int skill = ((CItemWeapon*)PChar->getEquip(SLOT_AMMO))->getSkillType();
-                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar->PPet, PChar->PPet->RACC(skill), PChar->PPet->RATT(skill), MSGBASIC_CHECKPARAM_RANGE));
+                PChar->pushPacket(new CMessageBasicPacket(PChar, PChar->PPet, PChar->PPet->GetBaseRACC(skill, 0), PChar->PPet->GetBaseRATT(skill, 0), MSGBASIC_CHECKPARAM_RANGE));
             }
             else
             {
@@ -5872,7 +5906,7 @@ void SmallPacket0x0DD(map_session_data_t* const PSession, CCharEntity* const PCh
 
                     // Grab mob and player stats for extra messaging
                     uint16 charAcc = PChar->ACC(SLOT_MAIN, (uint8)0);
-                    uint16 charAtt = PChar->ATT();
+                    uint16 charAtt = PChar->ATT(SLOT_MAIN);
                     uint16 mobEva  = PTarget->EVA();
                     uint16 mobDef  = PTarget->DEF();
 

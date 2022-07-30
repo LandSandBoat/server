@@ -23,6 +23,7 @@ local strongAffinityDmg      = {xi.mod.FIRE_AFFINITY_DMG,     xi.mod.ICE_AFFINIT
 local strongAffinityAcc      = {xi.mod.FIRE_AFFINITY_ACC,     xi.mod.ICE_AFFINITY_ACC,     xi.mod.WIND_AFFINITY_ACC,      xi.mod.EARTH_AFFINITY_ACC,     xi.mod.THUNDER_AFFINITY_ACC,       xi.mod.WATER_AFFINITY_ACC,      xi.mod.LIGHT_AFFINITY_ACC,  xi.mod.DARK_AFFINITY_ACC}
 xi.magic.resistMod           = {xi.mod.FIRE_MEVA,             xi.mod.ICE_MEVA,             xi.mod.WIND_MEVA,              xi.mod.EARTH_MEVA,             xi.mod.THUNDER_MEVA,               xi.mod.WATER_MEVA,              xi.mod.LIGHT_MEVA,          xi.mod.DARK_MEVA}
 xi.magic.specificDmgTakenMod = {xi.mod.FIRE_SDT,              xi.mod.ICE_SDT,              xi.mod.WIND_SDT,               xi.mod.EARTH_SDT,              xi.mod.THUNDER_SDT,                xi.mod.WATER_SDT,               xi.mod.LIGHT_SDT,           xi.mod.DARK_SDT}
+xi.magic.eleEvaMult          = {xi.mod.FIRE_EEM,              xi.mod.ICE_EEM,              xi.mod.WIND_EEM,               xi.mod.EARTH_EEM,              xi.mod.THUNDER_EEM,                xi.mod.WATER_EEM,               xi.mod.LIGHT_EEM,           xi.mod.DARK_EEM}
 xi.magic.absorbMod           = {xi.mod.FIRE_ABSORB,           xi.mod.ICE_ABSORB,           xi.mod.WIND_ABSORB,            xi.mod.EARTH_ABSORB,           xi.mod.LTNG_ABSORB,                xi.mod.WATER_ABSORB,            xi.mod.LIGHT_ABSORB,        xi.mod.DARK_ABSORB}
 local nullMod                = {xi.mod.FIRE_NULL,             xi.mod.ICE_NULL,             xi.mod.WIND_NULL,              xi.mod.EARTH_NULL,             xi.mod.LTNG_NULL,                  xi.mod.WATER_NULL,              xi.mod.LIGHT_NULL,          xi.mod.DARK_NULL}
 local blmMerit               = {xi.merit.FIRE_MAGIC_POTENCY,  xi.merit.ICE_MAGIC_POTENCY,  xi.merit.WIND_MAGIC_POTENCY,   xi.merit.EARTH_MAGIC_POTENCY,  xi.merit.LIGHTNING_MAGIC_POTENCY,  xi.merit.WATER_MAGIC_POTENCY}
@@ -53,9 +54,12 @@ local hardCap = 120 --guesstimated
 -----------------------------------
 -- affinities that strengthen/weaken the index element
 local function AffinityBonusDmg(caster, ele)
-
-    local affinity = caster:getMod(strongAffinityDmg[ele])
-    local bonus = 1.00 + affinity * 0.05 -- 5% per level of affinity
+    local affinity = 0
+    local bonus = 0
+    if strongAffinityDmg[ele] ~= nil then
+        affinity = caster:getMod(strongAffinityDmg[ele])
+        bonus = 1.00 + affinity * 0.05 -- 5% per level of affinity
+    end
     return bonus
 end
 
@@ -70,7 +74,10 @@ end
 local function getSpellBonusAcc(caster, target, spell, params)
     local magicAccBonus = 0
     local castersWeather = caster:getWeather()
-    local skill = spell:getSkillType()
+    local skill = xi.skill.NONE
+    if spell ~= nil then
+        skill = spell:getSkillType()
+    end
     local spellGroup = spell:getSpellGroup()
     local element = spell:getElement()
     local casterJob = caster:getMainJob()
@@ -87,7 +94,7 @@ local function getSpellBonusAcc(caster, target, spell, params)
 
     --add acc for skillchains
     if skillchainTier > 0 then
-        magicAccBonus = magicAccBonus + 25
+        magicAccBonus = magicAccBonus + 30
     end
 
     --Add acc for klimaform
@@ -163,14 +170,17 @@ local function getSpellBonusAcc(caster, target, spell, params)
     return magicAccBonus
 end
 
-local function calculateMagicHitRate(magicacc, magiceva, percentBonus, casterLvl, targetLvl)
+local function calculateMagicHitRate(magicacc, magiceva, dLvl, element, target)
     local p = 0
-    --add a scaling bonus or penalty based on difference of targets level from caster
-    local levelDiff = utils.clamp(casterLvl - targetLvl, -5, 5)
+    local magicAccDiff = magicacc - magiceva
 
-    p = 70 - 0.5 * (magiceva - magicacc) + levelDiff * 3 + percentBonus
+    if magicAccDiff < 0 then
+        p = utils.clamp(((50 + math.floor(magicAccDiff / 2))), 5, 95)
+    else
+        p = utils.clamp(((50 + magicAccDiff)), 5, 95)
+    end
 
-    return utils.clamp(p, 5, 95)
+    return {p, element, target}
 end
 
 local function isHelixSpell(spell)
@@ -425,11 +435,15 @@ function getCureFinal(caster, spell, basecure, minCure, isBlueMagic)
 end
 
 function isValidHealTarget(caster, target)
-    return target:getAllegiance() == caster:getAllegiance() and
-            (target:getObjType() == xi.objType.PC or
-            target:getObjType() == xi.objType.MOB or
-            target:getObjType() == xi.objType.TRUST or
-            target:getObjType() == xi.objType.FELLOW)
+    if target:hasStatusEffect(xi.effect.ALL_MISS) and target:getStatusEffect(xi.effect.ALL_MISS):getPower() > 1 then
+        return false
+    else
+        return target:getAllegiance() == caster:getAllegiance() and
+                (target:getObjType() == xi.objType.PC or
+                target:getObjType() == xi.objType.MOB or
+                target:getObjType() == xi.objType.TRUST or
+                target:getObjType() == xi.objType.FELLOW)
+    end
 end
 
 -- USED FOR DAMAGING MAGICAL SPELLS. Stage 3 of Calculating Magic Damage on wiki
@@ -453,33 +467,36 @@ params.bonus = $4
 params.effect = $5
 ]]
 function applyResistanceEffect(caster, target, spell, params)
-    local diff = params.diff or (caster:getStat(params.attribute) - target:getStat(params.attribute))
+    local diff = params.diff
     local skill = params.skillType
     local bonus = params.bonus
     local effect = params.effect
+    local element = params.element -- Will be nil if this isn't specified.
+    local magicaccbonus = 0
+    local effectRes = 0
+
+    if diff == nil and params.attribute ~= nil then
+        diff = caster:getStat(params.attribute) - target:getStat(params.attribute)
+    elseif diff == nil then
+        diff = 0
+    end
 
     -- If Stymie is active, as long as the mob is not immune then the effect is not resisted
-    if effect ~= nil then -- Dispel's script doesn't have an "effect" to send here, nor should it.
+    if effect ~= nil and skill ~= nil then -- Dispel's script doesn't have an "effect" to send here, nor should it.
         if skill == xi.skill.ENFEEBLING_MAGIC and caster:hasStatusEffect(xi.effect.STYMIE) and target:canGainStatusEffect(effect) then
             caster:delStatusEffect(xi.effect.STYMIE)
             return 1
         end
     end
 
-    if skill == xi.skill.SINGING and caster:hasStatusEffect(xi.effect.TROUBADOUR) then
-        if math.random(0, 99) < caster:getMerit(xi.merit.TROUBADOUR)-25 then
-            return 1.0
-        end
+    if element == nil and skill ~= nil and skill >= 32 and skill <= 45 then -- Covers all magic
+        element = spell:getElement()
+    elseif element == nil then -- Cover mobskills
+        element = xi.element.NONE
     end
 
-    local element = spell:getElement()
-    local percentBonus = 0
-    local magicaccbonus = getSpellBonusAcc(caster, target, spell, params)
-
-    if diff > 10 then
-        magicaccbonus = magicaccbonus + 10 + (diff - 10)/2
-    else
-        magicaccbonus = magicaccbonus + diff
+    if spell ~= nil and skill >= 32 and skill <= 45 then
+        magicaccbonus = getSpellBonusAcc(caster, target, spell, params)
     end
 
     if bonus ~= nil then
@@ -487,19 +504,17 @@ function applyResistanceEffect(caster, target, spell, params)
     end
 
     if effect ~= nil then
-        percentBonus = percentBonus - getEffectResistance(target, effect)
+        effectRes = effectRes - getEffectResistance(target, effect)
     end
 
-    local p = getMagicHitRate(caster, target, skill, element, percentBonus, magicaccbonus)
+    local p = getMagicHitRate(caster, target, skill, element, effectRes, magicaccbonus, diff)
 
     return getMagicResist(p)
 end
 
 -- Applies resistance for things that may not be spells - ie. Quick Draw
-function applyResistanceAbility(player, target, element, skill, bonus)
-    local p = getMagicHitRate(player, target, skill, element, 0, bonus)
-
-    return getMagicResist(p)
+function applyResistanceAbility(player, target, wsID, params)
+    return applyResistanceEffect(player, target, wsID, params)
 end
 
 -- Applies resistance for additional effects
@@ -510,7 +525,13 @@ function applyResistanceAddEffect(player, target, element, bonus)
     return getMagicResist(p)
 end
 
-function getMagicHitRate(caster, target, skillType, element, percentBonus, bonusAcc)
+function getMagicHitRate(caster, target, skillType, element, effectRes, bonusAcc, dStat)
+    local magicacc = 0
+    local magiceva = 0
+    local resMod = 0
+    local dLvl = target:getMainLvl() - caster:getMainLvl()
+    local dStatAcc = 0
+
     -- resist everything if real magic shield is active (see effects/magic_shield)
     if target:hasStatusEffect(xi.effect.MAGIC_SHIELD) then
         local magicshieldsub = target:getStatusEffect(xi.effect.MAGIC_SHIELD)
@@ -524,33 +545,89 @@ function getMagicHitRate(caster, target, skillType, element, percentBonus, bonus
         bonusAcc = 0
     end
 
-    local magicacc = caster:getMod(xi.mod.MACC) + caster:getILvlMacc()
-
-    -- Get the base acc (just skill + skill mod (79 + skillID = ModID) + magic acc mod)
-    if skillType ~= 0 then
-        magicacc = magicacc + caster:getSkillLevel(skillType)
-    else
-        -- for mob skills / additional effects which don't have a skill
-        magicacc = magicacc + utils.getSkillLvl(1, caster:getMainLvl())
+    if dStat == nil then
+        dStat = 0
     end
 
-    local resMod = 0 -- Some spells may possibly be non elemental, but have status effects.
+    dStat = utils.clamp(dStat, 0, 50) -- Clamp to maximum of 50 dStat
+
+    -- Redeclaring Skill Type to Apply dStat Appropriately Account for Both Mobs and Players
+    if skillType == xi.skill.ENFEEBLING_MAGIC then -- Enfeebling Magic is a special case where 15 dStat is where suqash starts.
+        if dStat > 15 then -- >15 dStat should be suashed.
+            local bonusDStat = dStat - 15
+            dStatAcc = 15 + (bonusDStat / 2)
+        else
+            dStatAcc = dStat
+        end
+    elseif -- All other magic types
+        skillType == xi.skill.ELEMENTAL_MAGIC or skillType == xi.skill.WIND_INSTRUMENT or
+        skillType == xi.skill.SINGING or skillType == xi.skill.STRING_INSTRUMENT or
+        skillType == xi.skill.HEALING_MAGIC or skillType == xi.skill.BLUE_MAGIC or
+        skillType == xi.skill.DARK_MAGIC or skillType == xi.skill.NINJUTSU
+        then -- Max 10 dStat before squash.
+        if dStat > 10 then -- >10 dStat should be suashed.
+            local bonusDStat = dStat - 10
+            dStatAcc = 10 + (bonusDStat / 2)
+        else
+            dStatAcc = dStat
+        end
+    else -- Is a skill so we shouldn't mess with this.
+        dStatAcc = dStat
+    end
+
+    if skillType ~= xi.skill.SINGING and skillType ~= nil then -- If not a bard song
+        if caster:isPC() then
+            local gearBonus = caster:getMod(xi.mod.MACC) + caster:getILvlMacc()
+            magicacc = caster:getSkillLevel(skillType) + gearBonus + dStatAcc
+        else
+            magicacc = utils.getSkillLvl(1, caster:getMainLvl()) + dStatAcc
+        end
+    elseif skillType ~= nil then -- If a bard song
+        if caster:isPC() then
+            local secondarySkill = 0
+            local gearBonus = caster:getMod(xi.mod.MACC) + caster:getILvlMacc()
+
+            if caster:getEquippedItem(xi.slot.RANGED) ~= nil then
+                secondarySkill = caster:getEquippedItem(xi.slot.RANGED):getSkillType()
+            end
+
+            if secondarySkill == xi.skill.WIND_INSTRUMENT or secondarySkill == xi.skill.STRING_INSTRUMENT then
+                magicacc = caster:getSkillLevel(skillType) + (caster:getSkillLevel(secondarySkill) / 3) + gearBonus + dStatAcc
+            else
+                magicacc = caster:getSkillLevel(skillType) + gearBonus + dStatAcc
+            end
+        else
+            magicacc = utils.getSkillLvl(1, caster:getMainLvl()) + dStatAcc
+        end
+    elseif caster:isMob() and skillType == nil then
+        magicacc = dStatAcc + utils.getMobSkillLvl(1, caster:getMainLvl())
+    elseif caster:isPet() and skillType == nil then
+        magicacc = dStatAcc + utils.getMobSkillLvl(3, caster:getMainLvl())
+    else
+        magicacc = utils.getSkillLvl(4, caster:getMainLvl()) + dStatAcc
+    end
+
     if element ~= xi.magic.ele.NONE then
+        if target:isMob() then
+            tryBuildResistance(target, xi.magic.resistMod[element], nil)
+        end
+
         resMod = target:getMod(xi.magic.resistMod[element])
 
         -- Add acc for elemental affinity accuracy and element specific accuracy
         local affinityBonus = AffinityBonusAcc(caster, element)
         local elementBonus = caster:getMod(spellAcc[element])
-
         bonusAcc = bonusAcc + affinityBonus + elementBonus
     end
 
-    magicacc = magicacc + caster:getMerit(xi.merit.MAGIC_ACCURACY)
+    if target:isPC() then
+        magiceva = target:getMod(xi.mod.MEVA) + resMod + effectRes
+    else
+        dLvl = utils.clamp(dLvl, 0, 99) -- Mobs should not have a disadvantage when targeted
+        magiceva = target:getMod(xi.mod.MEVA) + (4 * dLvl) + resMod + effectRes
+    end
 
-    magicacc = magicacc + caster:getMerit(xi.merit.NIN_MAGIC_ACCURACY)
-
-    -- Base magic evasion (base magic evasion plus resistances(players), plus elemental defense(mobs)
-    local magiceva = target:getMod(xi.mod.MEVA) + resMod
+    bonusAcc = bonusAcc + caster:getMerit(xi.merit.MAGIC_ACCURACY) + caster:getMerit(xi.merit.NIN_MAGIC_ACCURACY)
 
     magicacc = magicacc + bonusAcc
 
@@ -558,17 +635,32 @@ function getMagicHitRate(caster, target, skillType, element, percentBonus, bonus
     local maccFood = magicacc * (caster:getMod(xi.mod.FOOD_MACCP)/100)
     magicacc = magicacc + utils.clamp(maccFood, 0, caster:getMod(xi.mod.FOOD_MACC_CAP))
 
-    return calculateMagicHitRate(magicacc, magiceva, percentBonus, caster:getMainLvl(), target:getMainLvl())
+    return calculateMagicHitRate(magicacc, magiceva, dLvl, element, target)
 end
 
 -- Returns resistance value from given magic hit rate (p)
 function getMagicResist(magicHitRate)
+    local evaMult = 1
+    local element = magicHitRate[2]
+    local target = magicHitRate[3]
 
-    local p = magicHitRate / 100
+    if target:getObjType() == xi.objType.MOB then
+        evaMult = target:getMod(xi.magic.eleEvaMult[element]) / 100
+        local sortEvaMult = {1.50, 1.30, 1.15, 1.00, 0.85, 0.70, 0.60, 0.50, 0.40, 0.30, 0.25, 0.20, 0.15, 0.10, 0.05}
+
+        for _, tier in pairs(sortEvaMult) do -- Finds the highest tier for the resist.
+            if evaMult > tier then
+                evaMult = tier
+                break
+            end
+        end
+    end
+
+    local p = utils.clamp(((magicHitRate[1] * evaMult) / 100), 0.05, 3.00)
     local resist = 1
 
     -- Resistance thresholds based on p.  A higher p leads to lower resist rates, and a lower p leads to higher resist rates.
-    local half      = (1 - p)
+    local half     = (1 - p)
     local quart     = ((1 - p)^2)
     local eighth    = ((1 - p)^3)
     local sixteenth = ((1 - p)^4)
@@ -590,41 +682,88 @@ function getMagicResist(magicHitRate)
     return resist
 end
 
+function tryBuildResistance(target, resistance, isEnfeeb)
+    local isNM = target:isNM()
+    local baseRes = target:getLocalVar(string.format("[RES]Base_%s", resistance))
+    local castCool = target:getLocalVar(string.format("[RES]CastCool_%s", resistance))
+    local builtPercent = target:getLocalVar(string.format("[RES]BuiltPercent_%s", resistance))
+    local coolTime = 20
+    local buildPercent = 0
+
+    if baseRes == 0 then
+        target:setLocalVar(string.format("[RES]Base_%s", resistance), target:getMod(resistance))
+    end
+
+    if isNM == true then
+        buildPercent = 40 -- Equivalent to 4% Resistance Build (40/1000)
+    else
+        buildPercent = 20 -- Equivalent to 2% Resistance Build (20/1000)
+    end
+
+    if not isEnfeeb then
+        buildPercent = buildPercent / 2 -- Reduce Resistence Build to 2%/1% To Help With Timed Casts
+    end
+
+    if castCool <= os.time() then -- Reset Mod If 20s Since Last Spell Elapsed
+        target:setLocalVar(string.format("[RES]BuiltPercent_%s", resistance), 0) -- Reset BuiltPercent Var
+        target:setMod(resistance, baseRes) -- Reset Mod To Base
+        target:setLocalVar(string.format("[RES]CastCool_%s", resistance), os.time() + coolTime) -- Start Cool Var
+    else
+        if builtPercent + buildPercent + baseRes > 1000 then
+            buildPercent = 1000 - (builtPercent + baseRes)
+        end
+
+        target:setMod(resistance, baseRes + builtPercent + buildPercent)
+        target:setLocalVar(string.format("[RES]BuiltPercent_%s", resistance), builtPercent + buildPercent)
+        target:setLocalVar(string.format("[RES]CastCool_%s", resistance), os.time() + coolTime)
+    end
+
+end
+
 -- Returns the amount of resistance the
 -- target has to the given effect (stun, sleep, etc..)
-function getEffectResistance(target, effect)
+function getEffectResistance(target, effect, returnBuild)
     local effectres = 0
+    local buildres = 0
     local statusres = target:getMod(xi.mod.STATUSRES)
-    if effect == xi.effect.SLEEP_I or effect == xi.effect.SLEEP_II then
-        effectres = xi.mod.SLEEPRES
-    elseif effect == xi.effect.LULLABY then
-        effectres = xi.mod.LULLABYRES
-    elseif effect == xi.effect.POISON then
-        effectres = xi.mod.POISONRES
-    elseif effect == xi.effect.PARALYSIS then
-        effectres = xi.mod.PARALYZERES
-    elseif effect == xi.effect.BLINDNESS then
-        effectres = xi.mod.BLINDRES
-    elseif effect == xi.effect.SILENCE then
-        effectres = xi.mod.SILENCERES
-    elseif effect == xi.effect.PLAGUE or effect == xi.effect.DISEASE then
-        effectres = xi.mod.VIRUSRES
-    elseif effect == xi.effect.PETRIFICATION then
-        effectres = xi.mod.PETRIFYRES
-    elseif effect == xi.effect.BIND then
-        effectres = xi.mod.BINDRES
-    elseif effect == xi.effect.CURSE_I or effect == xi.effect.CURSE_II or effect == xi.effect.BANE then
-        effectres = xi.mod.CURSERES
-    elseif effect == xi.effect.WEIGHT then
-        effectres = xi.mod.GRAVITYRES
-    elseif effect == xi.effect.SLOW or effect == xi.effect.ELEGY then
-        effectres = xi.mod.SLOWRES
-    elseif effect == xi.effect.STUN then
-        effectres = xi.mod.STUNRES
-    elseif effect == xi.effect.CHARM_I or effect == xi.effect.CHARM_II then
-        effectres = xi.mod.CHARMRES
-    elseif effect == xi.effect.AMNESIA then
-        effectres = xi.mod.AMNESIARES
+    local resTable =
+    {
+        [xi.effect.SLEEP_I] = { effectres = xi.mod.SLEEPRES, buildres = xi.mod.SLEEPRESBUILD },
+        [xi.effect.SLEEP_II] = { effectres = xi.mod.SLEEPRES, buildres = xi.mod.SLEEPRESBUILD },
+        [xi.effect.LULLABY] = { effectres = xi.mod.LULLABYRES, buildres = xi.mod.LULLABYRESBUILD },
+        [xi.effect.POISON] = { effectres = xi.mod.POISONRES, buildres = xi.mod.POISONRESBUILD },
+        [xi.effect.PARALYSIS] = { effectres = xi.mod.PARALYZERES, buildres = xi.mod.PARALYZERESBUILD },
+        [xi.effect.BLINDNESS] = { effectres = xi.mod.BLINDRES, buildres = xi.mod.BLINDRESBUILD },
+        [xi.effect.SILENCE] = { effectres = xi.mod.SILENCERES, buildres = xi.mod.SILENCERESBUILD },
+        [xi.effect.PLAGUE] = { effectres = xi.mod.VIRUSRES, buildres = xi.mod.VIRUSRESBUILD },
+        [xi.effect.PETRIFICATION] = { effectres = xi.mod.PETRIFYRES, buildres = xi.mod.PETRIFYRESBUILD },
+        [xi.effect.BIND] = { effectres = xi.mod.BINDRES, buildres = xi.mod.BINDRESBUILD },
+        [xi.effect.CURSE_I] = { effectres = xi.mod.CURSERES, buildres = xi.mod.CURSERESBUILD },
+        [xi.effect.CURSE_II] = { effectres = xi.mod.CURSERES, buildres = xi.mod.CURSERESBUILD },
+        [xi.effect.BANE] = { effectres = xi.mod.CURSERES, buildres = xi.mod.CURSERESBUILD },
+        [xi.effect.WEIGHT] = { effectres = xi.mod.GRAVITYRES, buildres = xi.mod.GRAVITYRESBUILD },
+        [xi.effect.SLOW] = { effectres = xi.mod.SLOWRES, buildres = xi.mod.SLOWRESBUILD },
+        [xi.effect.ELEGY] = { effectres = xi.mod.SLOWRES, buildres = xi.mod.SLOWRESBUILD },
+        [xi.effect.STUN] = { effectres = xi.mod.STUNRES, buildres = xi.mod.STUNRESBUILD },
+        [xi.effect.CHARM_I] = { effectres = xi.mod.CHARMRES, buildres = xi.mod.CHARMRESBUILD },
+        [xi.effect.CHARM_II] = { effectres = xi.mod.CHARMRES, buildres = xi.mod.CHARMRESBUILD },
+        [xi.effect.AMNESIA] = { effectres = xi.mod.AMNESIARES, buildres = xi.mod.AMNESIARESBUILD },
+    }
+
+    for effectIndex, effectTable in pairs(resTable) do
+        if effectIndex == effect then
+            effectres = effectTable.effectres
+            buildres = effectTable.buildres
+            break
+        end
+    end
+
+    if returnBuild ~= nil then
+        return buildres
+    end
+
+    if target:isMob() and effectres ~= 0 then
+        tryBuildResistance(target, effectres, true)
     end
 
     if effectres ~= 0 then
@@ -893,7 +1032,7 @@ function addBonusesAbility(caster, ele, target, dmg, params)
     local dayWeatherBonus = 1.00
     local weather = caster:getWeather()
 
-    if math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1 then
+    if elementalObi[ele] ~= nil and (math.random() < 0.33 or caster:getMod(elementalObi[ele]) >= 1) then
         if weather == xi.magic.singleWeatherStrong[ele] then
             if caster:getMod(xi.mod.IRIDESCENCE) >= 1 then
                 dayWeatherBonus = dayWeatherBonus + 0.10
@@ -932,6 +1071,7 @@ function addBonusesAbility(caster, ele, target, dmg, params)
     local mab = 1
     local mdefBarBonus = 0
     if
+        ele ~= nil and
         ele >= xi.magic.element.FIRE and
         ele <= xi.magic.element.WATER and
         target:hasStatusEffect(xi.magic.barSpell[ele])
@@ -957,7 +1097,7 @@ end
 -- get elemental damage reduction
 function getElementalDamageReduction(target, element)
     local defense = 1
-    if element > 0 then
+    if element ~= nil and element > 0 then
         defense = 1 - (target:getMod(xi.magic.specificDmgTakenMod[element]) / 10000)
         return utils.clamp(defense, 0.0, 2.0)
     end
@@ -1289,6 +1429,26 @@ function calculateDuration(duration, magicSkill, spellGroup, caster, target, use
     end
 
     return math.floor(duration)
+end
+
+function calculateBuildDuration(target, duration, effect)
+
+    if target:isMob() then
+        local buildRes = getEffectResistance(target, effect, true)
+
+        if target:getMod(buildRes) ~= 0 then
+            local builtRes = target:getLocalVar(string.format("[RESBUILD]Base_%s", buildRes))
+
+            duration = duration - ((builtRes + target:getMod(buildRes)) / 10) -- Used to add more fidelity to the build. Adding a mod of 30 will be -3 seconds per cast.
+            target:setLocalVar(string.format("[RESBUILD]Base_%s", buildRes), builtRes + target:getMod(buildRes))
+        end
+    end
+
+    return math.floor(duration)
+end
+
+function resetBuildPercent(entity, buildRes)
+    entity:setLocalVar(string.format("[RESBUILD]Base_%s", buildRes), 0)
 end
 
 function calculatePotency(basePotency, magicSkill, caster, target)

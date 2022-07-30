@@ -3,6 +3,7 @@
 --  Mob: Swift Hunter
 -----------------------------------
 mixins = {require("scripts/mixins/families/antlion_ambush")}
+local ID = require("scripts/zones/Boneyard_Gully/IDs")
 -----------------------------------
 local entity = {}
 
@@ -14,6 +15,9 @@ end
 
 entity.onMobEngaged = function(mob, target)
     mob:setMobMod(xi.mobMod.NO_MOVE, 0)
+    for _, v in pairs(mob:getBattlefield():getPlayers()) do
+        v:messageSpecial(ID.text.SMALL_ANTLION)
+    end
 end
 
 entity.onMobDeath = function(mob, player, isKiller)

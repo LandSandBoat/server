@@ -9,6 +9,12 @@ local entity = {}
 
 local offsets = {1, 3, 5, 2, 4, 6}
 
+entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
+    mob:setMobMod(xi.mobMod.DRAW_IN_CUSTOM_RANGE, 15)
+    mob:setMobMod(xi.mobMod.DRAW_IN_FRONT, 1)
+end
+
 entity.onMobEngaged = function(mob, target)
     mob:resetLocalVars()
 end

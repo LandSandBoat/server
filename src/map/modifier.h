@@ -887,6 +887,37 @@ enum class Mod
     AUGMENT_BLU_MAGIC      = 1036, // Percent chance for BLU magic to receive 3x WSC value for spell (BLU AF3 Sets)
     GEOMANCY_MP_NO_DEPLETE = 1037, // Percent chance for Geomancy to cost 0 MP (GEO AF3 Sets)
 
+    // Permenant Resistance Build Modifiers
+    SLEEPRESBUILD          = 1138, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    POISONRESBUILD         = 1139, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    PARALYZERESBUILD       = 1140, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    BLINDRESBUILD          = 1141, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    SILENCERESBUILD        = 1142, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    VIRUSRESBUILD          = 1143, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    PETRIFYRESBUILD        = 1144, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    BINDRESBUILD           = 1145, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    CURSERESBUILD          = 1146, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    GRAVITYRESBUILD        = 1147, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    SLOWRESBUILD           = 1148, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    STUNRESBUILD           = 1149, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    CHARMRESBUILD          = 1150, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    AMNESIARESBUILD        = 1151, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    LULLABYRESBUILD        = 1152, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    DEATHRESBUILD          = 1153, // Used to create a resbuild for the appropriate effect. Will decrease overall duration of effect. (Out of 1000)
+    PET_DMG_TAKEN_PHYSICAL = 1154, // Percent increase/decrease in pet physical damage taken for the target.
+    PET_DMG_TAKEN_MAGICAL  = 1155, // Percent increase/decrease in pet physical damage taken for the target.
+    PET_DMG_TAKEN_BREATH   = 1156, // Percent increase/decrease in pet physical damage taken for the target.
+    DIG_BYPASS_FATIGUE     = 1157, // Chocobo digging modifier found in "Blue Race Silks". Modifier works as a direct percent. Used in Chocobo_Digging.lua
+
+    FIRE_EEM    = 1158, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    ICE_EEM     = 1159, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    WIND_EEM    = 1160, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    EARTH_EEM   = 1161, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    THUNDER_EEM = 1162, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    WATER_EEM   = 1163, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    LIGHT_EEM   = 1164, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+    DARK_EEM    = 1165, // Elemental Evasion Multiplier (Known as SDT in common magic accuracy formulas) (out of 100)
+
     // IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN scripts/globals/status.lua ASWELL!
 
     // The spares take care of finding the next ID to use so long as we don't forget to list IDs that have been freed up by refactoring.
@@ -903,7 +934,7 @@ enum class Mod
     // 888
     // 936
     //
-    // SPARE = 1047, and onward
+    // SPARE = 1166, and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

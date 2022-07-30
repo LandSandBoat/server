@@ -84,12 +84,15 @@ uint16 CItemShop::getInitialQuantity() const
 
 uint16 CItemShop::getSellPrice()
 {
-    if (getID() >= 0x2800 && getID() <= 0x6FFF)
-    {
-        return (uint16)((getMinPrice() + (getQuantity() / getStackSize()) * (getMinPrice() * 0.10f)) / 12);
-    }
-    else
-    {
-        return getBasePrice() / 3;
-    }
+    // Need to calculate proper resale prices. Current equation is not appropriate.
+    //
+    // if (getID() >= 0x2800 && getID() <= 0x6FFF)
+    // {
+    //     return (uint16)((getMinPrice() + (getQuantity() / getStackSize()) * (getMinPrice() * 0.10f)) / 12);
+    // }
+    // else
+    // {
+    //     return getBasePrice() / 3;
+    // }
+    return 1;
 }

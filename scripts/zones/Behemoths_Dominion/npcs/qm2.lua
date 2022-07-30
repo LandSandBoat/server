@@ -19,9 +19,9 @@ end
 
 entity.onTrade = function(player, npc, trade)
     if not GetMobByID(ID.mob.BEHEMOTH):isSpawned() and not GetMobByID(ID.mob.KING_BEHEMOTH):isSpawned() then
-        if xi.settings.main.LandKingSystem_NQ ~= 0 and npcUtil.tradeHas(trade, 3341) and npcUtil.popFromQM(player, npc, ID.mob.BEHEMOTH) then
+        if xi.settings.main.LandKingSystem_NQ ~= 0 and npcUtil.tradeHas(trade, xi.items.BEASTLY_SHANK) and npcUtil.popFromQM(player, npc, ID.mob.BEHEMOTH) then
             player:confirmTrade()
-        elseif xi.settings.main.LandKingSystem_HQ ~= 0 and npcUtil.tradeHas(trade, 3342) and npcUtil.popFromQM(player, npc, ID.mob.KING_BEHEMOTH) then
+        elseif xi.settings.main.LandKingSystem_HQ ~= 0 and npcUtil.tradeHas(trade, xi.items.SAVORY_SHANK) and npcUtil.popFromQM(player, npc, ID.mob.KING_BEHEMOTH) then
             player:confirmTrade()
         end
     end

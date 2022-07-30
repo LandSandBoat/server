@@ -68,6 +68,7 @@ struct Transport_Ship : Transport_Time
     uint8 state;
 
     CBaseEntity* npc;
+    location_t   origin;
     location_t   dock;
 
     void setVisible(bool) const;

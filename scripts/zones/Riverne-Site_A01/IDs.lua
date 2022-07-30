@@ -26,25 +26,23 @@ zones[xi.zone.RIVERNE_SITE_A01] =
         SD_HAS_GROWN              = 7596, -- The spatial displacement has grown.
         SPACE_SEEMS_DISTORTED     = 7597, -- The space around you seems oddly distorted and disrupted.
         MONUMENT                  = 7604, -- Something has been engraved on this stone, but the message is too difficult to make out.
+        INSECT_WINGS              = 7728, -- There are tiny insect wings scattered all around here.
         HOMEPOINT_SET             = 7732, -- Home point set!
     },
     mob =
     {
+        AIATAR_PH =
+        {
+            [16900305] = 16900306,
+        },
         HELIODROMOS_PH_OFFSET    = 16900107,
         HELIODROMOS_OFFSET       = 16900110,
         CARMINE_DOBSONFLY_OFFSET = 16900230,
+        SHIELDTRAP               = 16900320,
     },
     npc =
     {
         DISPLACEMENT_OFFSET = 16900334,
-    },
-    AIATAR_PH =
-    {
-        [16900301] = 16900306,
-        [16900302] = 16900306,
-        [16900303] = 16900306,
-        [16900304] = 16900306,
-        [16900305] = 16900306,
     },
 }
 

@@ -34,6 +34,7 @@ zones[xi.zone.NORTH_GUSTABERG] =
         REACH_WATER_FROM_HERE         = 7453,  -- You can reach the water from here.
         CONQUEST                      = 7489,  -- You've earned conquest points!
         ITEMS_ITEMS_LA_LA             = 7852,  -- You can hear a strange voice... Items, items, la la la la la
+        GARRISON_BASE                 = 7868,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
         GOBLIN_SLIPPED_AWAY           = 7858,  -- The Goblin slipped away when you were not looking...
         PLAYER_OBTAINS_ITEM           = 8083,  -- <name> obtains <item>!
         UNABLE_TO_OBTAIN_ITEM         = 8084,  -- You were unable to obtain the item.

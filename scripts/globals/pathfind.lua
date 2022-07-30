@@ -123,5 +123,22 @@ xi.path =
 
         npc:pathThrough(xi.path.get(points, i), flags)
         npc:setLocalVar("nextPatrolIndex", i)
-    end
+    end,
+
+    pathToNearest = function(npc, points, flags)
+        local storedCheck = 65535
+        local storedIndex = 0
+        local length = xi.path.length(points)
+        local i = 1
+        while i <= length do
+            local paths = xi.path.get(points, i)
+            local posCheck = npc:checkDistance(paths[1], paths[2], paths[3])
+            if posCheck < storedCheck then
+                storedCheck = posCheck
+                storedIndex = i
+            end
+            i = i + 1
+        end
+        npc:setLocalVar("nextPatrolIndex", storedIndex)
+    end,
 }

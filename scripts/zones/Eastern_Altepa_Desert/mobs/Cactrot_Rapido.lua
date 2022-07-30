@@ -7,6 +7,8 @@ require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 
+-- TODO: Set proper walking animation on engage
+
 local pathNodes =
 {
     -- x, y, z,
@@ -126,10 +128,23 @@ entity.onMobSpawn = function(mob)
     entity.onPath(mob)
 end
 
+entity.onMobFight = function(mob)
+    -- Speed and animsub are being ignored on engage, set here to ensure speed and animsub are set correctly
+    if mob:getSpeed() > 40 or mob:getAnimationSub() > 0 then
+        mob:setSpeed(40)
+        mob:setAnimationSub(0)
+    end
+end
+
+entity.onMobDisengage = function(mob)
+    mob:setSpeed(250)
+    mob:setAnimationSub(5)
+end
+
 entity.onMobRoam = function(mob)
-    -- move to start position if not moving
+    -- move to nearest path if not moving
     if not mob:isFollowingPath() then
-        mob:pathThrough(xi.path.first(pathNodes), xi.path.flag.RUN)
+        xi.path.pathToNearest(mob, pathNodes)
     end
 end
 
