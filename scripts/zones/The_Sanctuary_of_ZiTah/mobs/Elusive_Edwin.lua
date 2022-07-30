@@ -9,6 +9,7 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+    mob:setMod(xi.mod.REGAIN, 250)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
@@ -17,6 +18,10 @@ end
 
 entity.onMobDeath = function(mob, player, isKiller)
     xi.hunts.checkHunt(mob, player, 323)
+end
+
+entity.onMobWeaponSkill = function(target, mob, skill, action)
+    mob:resetEnmity(target)
 end
 
 entity.onMobDespawn = function(mob)

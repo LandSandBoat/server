@@ -304,8 +304,12 @@ end
 entity.onMobRoam = function(mob)
     -- move to start position if not moving
     if not mob:isFollowingPath() then
-        mob:pathThrough(xi.path.first(pathNodes))
+        xi.path.pathToNearest(mob, pathNodes)
     end
+end
+
+entity.onMobDisengage = function(mob)
+    xi.path.pathToNearest(mob, pathNodes)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)

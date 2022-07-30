@@ -11,8 +11,14 @@ require("scripts/globals/titles")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
+    mob:setMobMod(xi.mobMod.DRAW_IN_CUSTOM_RANGE, 20)
+    mob:setMobMod(xi.mobMod.DRAW_IN_FRONT, 1)
+
     if xi.settings.main.LandKingSystem_NQ > 0 or xi.settings.main.LandKingSystem_HQ > 0 then
         GetNPCByID(ID.npc.FAFNIR_QM):setStatus(xi.status.DISAPPEAR)
+        SetDropRate(1781, 1526, 150) -- 15% drop rate for wyrm beard
+        mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
     end
 
     mob:setLocalVar("[rage]timer", 3600) -- 60 minutes

@@ -17,11 +17,10 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-
-    local dmgmod = 1
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg()*6, -1, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
-    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
-    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.DARK)
+    local dmgmod = 4
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg()*6, xi.magic.ele.NONE, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.NONE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.NONE)
     return dmg
 end
 

@@ -10,6 +10,16 @@ require("scripts/globals/status")
 local zone_object = {}
 
 zone_object.onInitialize = function(zone)
+    -- Mahisha and Eba share a respawn, random to see who spawns
+    if math.random(1,2) == 1 then -- Spawn Eba
+        DisallowRespawn(ID.mob.MAHISHA, true)
+        GetMobByID(ID.mob.EBA):setRespawnTime(math.random(300, 1200)) -- 5 to 20 minutes
+    else -- Spawn Mahisha
+        DisallowRespawn(ID.mob.EBA, true)
+        GetMobByID(ID.mob.MAHISHA):setRespawnTime(math.random(300, 1200)) -- 5 to 20 minutes
+    end
+
+    GetMobByID(ID.mob.TRES_DUENDES):setLocalVar("cooldown", os.time() + math.random(900, 1800))
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)

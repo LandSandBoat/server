@@ -678,6 +678,12 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
     auto expression  = false;
     auto latentFound = true;
 
+    if (m_POwner == nullptr)
+    {
+        ShowWarning("m_POwner was a nullptr, stopping case steps");
+        return false;
+    }
+
     // find the latent type from the enum and find the expression to tests againts
     switch (latentEffect.GetConditionsID())
     {

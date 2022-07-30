@@ -20,21 +20,10 @@ end
 
 entity.onTrigger = function(player, npc)
     local cidsSecret = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.CID_S_SECRET)
-    local copMission = player:getCurrentMission(xi.mission.log_id.COP)
-    local copStatus = player:getCharVar("PromathiaStatus")
     local hasLetter = player:hasKeyItem(xi.ki.UNFINISHED_LETTER)
 
-    -- DAWN
-    if
-        copMission == xi.mission.id.cop.DAWN and
-        copStatus == 3 and
-        player:getCharVar("Promathia_kill_day") < os.time() and
-        player:getCharVar("COP_tenzen_story") == 0
-    then
-        player:startEvent(897)
-
     -- DARK PUPPET
-    elseif
+    if
         player:getMainJob() == xi.job.DRK and
         player:getMainLvl() >= xi.settings.main.AF2_QUEST_LEVEL and
         player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.DARK_LEGACY) == QUEST_COMPLETED and
@@ -55,9 +44,7 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 897 then
-        player:setCharVar("COP_tenzen_story", 1)
-    elseif csid == 760 then
+    if csid == 760 then
         player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.DARK_PUPPET)
         player:setCharVar("darkPuppetCS", 1)
     elseif (csid == 507) then

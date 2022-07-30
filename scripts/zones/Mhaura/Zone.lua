@@ -20,7 +20,7 @@ zone_object.onGameHour = function(zone)
     else
         GetNPCByID(ID.npc.LAUGHING_BISON):setAnimationSub(0)
     end
-    SetServerVariable("Mhaura_Deastination", math.random(1, 100))
+    SetServerVariable("Mhaura_Destination", math.random(1, 100))
 end
 
 zone_object.onInitialize = function(zone)
@@ -32,6 +32,9 @@ zone_object.onZoneIn = function(player, prevZone)
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         if prevZone == xi.zone.SHIP_BOUND_FOR_MHAURA or prevZone == xi.zone.OPEN_SEA_ROUTE_TO_MHAURA or prevZone == xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES then
+            local ship = GetNPCByID(ID.npc.SHIP)
+
+            ship:setAnimBegin(VanadielTime())
             cs = 202
             player:setPos(14.960, -3.430, 18.423, 192)
         else
@@ -39,8 +42,8 @@ zone_object.onZoneIn = function(player, prevZone)
         end
     end
 
-    if player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and player:getCharVar("PromathiaStatus")==3 and player:getCharVar("Promathia_kill_day") < os.time() and player:getCharVar("COP_shikarees_story")== 0 then
-        cs = 322
+    if player:getZPos() < 1.6 then -- fixing player position if logged off / crashed on ship
+        player:setPos(8.23, -1.3, 4.48)
     end
 
     return cs
@@ -70,7 +73,7 @@ zone_object.onEventFinish = function(player, csid, option)
     if csid == 200 then
         local DepartureTime = VanadielHour()
         if DepartureTime % 8 == 0 then
-            if GetServerVariable("Mhaura_Deastination") > 89 then
+            if GetServerVariable("Mhaura_Destination") >= 89 then
                 player:setPos(0, 0, 0, 0, xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES)
             else
                 player:setPos(0, 0, 0, 0, xi.zone.SHIP_BOUND_FOR_SELBINA)
@@ -80,8 +83,6 @@ zone_object.onEventFinish = function(player, csid, option)
         else
             player:setPos(8, -1, 5, 62, 249) -- Something went wrong, dump them on the dock for safety.
         end
-    elseif csid == 322 then
-        player:setCharVar("COP_shikarees_story", 1)
     end
 end
 

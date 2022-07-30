@@ -21,6 +21,9 @@ zone_object.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.FRAELISSA)
     GetMobByID(ID.mob.FRAELISSA):setRespawnTime(math.random(900, 10800))
 
+    UpdateNMSpawnPoint(ID.mob.METEORMAULER)
+    GetMobByID(ID.mob.METEORMAULER):setRespawnTime(math.random(900, 10800))
+
     xi.conq.setRegionalConquestOverseers(zone:getRegionID())
 
     xi.helm.initZone(zone, xi.helm.type.LOGGING)
@@ -52,8 +55,18 @@ zone_object.onZoneIn = function( player, prevZone)
     return cs
 end
 
+zone_object.onZoneOut = function(player)
+    if player:hasStatusEffect(xi.effect.BATTLEFIELD) then
+        player:delStatusEffect(xi.effect.BATTLEFIELD)
+    end
+end
+
 zone_object.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
+end
+
+zone_object.onGameDay = function()
+    SetServerVariable("[DIG]ZONE104_ITEMS", 0)
 end
 
 zone_object.onRegionEnter = function( player, region)

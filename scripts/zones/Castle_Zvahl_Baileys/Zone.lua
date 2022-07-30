@@ -17,8 +17,10 @@ zone_object.onInitialize = function(zone)
     zone:registerRegion(3, -34, 17, -10, -30, 18, -5)  -- map 4 SE porter
     zone:registerRegion(4, -34, 17, 45, -30, 18, 51)  -- map 4 NE porter
 
-    UpdateNMSpawnPoint(ID.mob.LIKHO)
-    GetMobByID(ID.mob.LIKHO):setRespawnTime(math.random(3600, 4200))
+    if xi.settings.main.ENABLE_WOTG == 1 then
+        UpdateNMSpawnPoint(ID.mob.LIKHO)
+        GetMobByID(ID.mob.LIKHO):setRespawnTime(math.random(3600, 4200))
+    end
 
     UpdateNMSpawnPoint(ID.mob.MARQUIS_ALLOCEN)
     GetMobByID(ID.mob.MARQUIS_ALLOCEN):setRespawnTime(math.random(900, 10800))

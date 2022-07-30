@@ -14,7 +14,9 @@ entity.onMobDeath = function(mob, player, isKiller)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, ID.mob.UNGUR_PH, 5, 7200) -- 2 hours
+    -- Ungur's PH spawns in multiple rooms
+    UpdateNMSpawnPoint(mob:getID())
+    xi.mob.phOnDespawn(mob, ID.mob.UNGUR_PH, 15, 7200) -- 2 hours
 end
 
 return entity

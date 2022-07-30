@@ -3,6 +3,7 @@
 --   NM: Goblinsavior Heronox
 -----------------------------------
 require("scripts/globals/hunts")
+mixins = {require("scripts/mixins/job_special")}
 -----------------------------------
 local entity = {}
 

@@ -43,6 +43,9 @@ end
 
 zone_object.onGameDay = function()
     xi.bmt.updatePeddlestox(xi.zone.YHOATOR_JUNGLE, ID.npc.PEDDLESTOX)
+
+    -- Chocobo Digging.
+    SetServerVariable("[DIG]ZONE124_ITEMS", 0)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
@@ -69,6 +72,12 @@ zone_object.onZoneIn = function( player, prevZone)
 end
 
 zone_object.onRegionEnter = function( player, region)
+end
+
+zone_object.onZoneOut = function(player)
+    if player:hasStatusEffect(xi.effect.BATTLEFIELD) then
+        player:delStatusEffect(xi.effect.BATTLEFIELD)
+    end
 end
 
 zone_object.onEventUpdate = function( player, csid, option)

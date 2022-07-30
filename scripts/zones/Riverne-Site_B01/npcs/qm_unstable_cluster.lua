@@ -9,7 +9,7 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, 1880) and npcUtil.popFromQM(player, npc, ID.mob.UNSTABLE_CLUSTER) then -- Clustered tar
+    if npcUtil.tradeHas(trade, xi.items.CLUSTERED_TAR) and npcUtil.popFromQM(player, npc, ID.mob.UNSTABLE_CLUSTER) then
         player:confirmTrade()
     end
 end

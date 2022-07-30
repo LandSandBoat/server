@@ -10,6 +10,7 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 6)
+    mob:SetAutoAttackEnabled(false) -- Only casts and uses TP moves, no auto attacks
 end
 
 entity.onMobFight = function(mob, target)

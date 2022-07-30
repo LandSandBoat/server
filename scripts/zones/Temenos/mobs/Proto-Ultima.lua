@@ -12,7 +12,8 @@ entity.onMobSpawn = function(mob)
     mob:SetMagicCastingEnabled(false)
     mob:SetAutoAttackEnabled(true)
     mob:SetMobAbilityEnabled(true)
-    mob:setMobMod(xi.mobMod.DRAW_IN, 0)
+    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
+    mob:setMobMod(xi.mobMod.DRAW_IN_CUSTOM_RANGE, 20)
 end
 
 entity.onMobEngaged = function(mob, target)
