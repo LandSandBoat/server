@@ -4998,10 +4998,53 @@ INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 252, 1, 255); -- stun (1
 INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 253, 1, 255); -- sleep (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 274, 1, 255); -- sleepga ii (1~255)
 
--- Slendlix Spindlethumb (498)
-INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',499,3,1,255);  -- cure_iii (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',499,23,1,255); -- dia (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',499,33,1,255); -- diaga (1~255)
+-- Jailer of Love (Light) (493)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Light',493,21,1,255); -- Holy (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Light',493,30,1,255); -- Banish III (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Light',493,35,1,255); -- Diaga III (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Light',493,40,1,255); -- Banishga III (1~255)
+
+-- Jailer of Love (Fire) (494)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Fire',494,147,1,255); -- Fire IV (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Fire',494,176,1,255); -- Firaga III (1~255)
+
+-- Jailer of Love (Ice) (495)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Ice',495,152,1,255); -- Blizzard IV (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Ice',495,181,1,255); -- Blizzaga III (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Ice',495,362,1,255); -- Bindga (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Ice',495,356,1,255); -- Paralyga (1~255)
+
+-- Jailer of Love (Wind) (496)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Wind',496,157,1,255); -- Aero IV (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Wind',496,186,1,255); -- Aeroga III (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Wind',496,359,1,255); -- Silencega (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Wind',496,366,1,255); -- Graviga (1~255)
+
+-- Jailer of Love (Earth) (497)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Earth',497,162,1,255); -- Stone IV (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Earth',497,191,1,255); -- Stonega III (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Earth',497,357,1,255); -- Slowga (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Earth',497,365,1,255); -- Breakga (1~255)
+
+-- Jailer of Love (Thunder )(498)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Lightning',498,167,1,255); -- Thunder IV (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Lightning',498,196,1,255); -- Thundaga III (1~255)
+
+-- Jailer of Love (Water) (499)
+INSERT INTO `mob_spell_lists` VALUES('Jailer_of_Love_Water',499,172,1,255); -- Water IV (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Jailer_of_Love_Water',499,201,1,255); -- Waterga III (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Jailer_of_Love_Water',499,226,1,255); -- Poisonga II (1~255)
+
+-- Jailer of Love (Dark) (500)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Dark',500,232,1,255); -- Bio III (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Dark',500,274,1,255); -- Sleepga II (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Dark',500,360,1,255); -- Dispelga (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Dark',500,361,1,255); -- Blindga (1~255)
+
+-- Slendlix_Spindlethumb (501)
+INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',501,3,1,255);  -- cure_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',501,23,1,255); -- dia (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',501,33,1,255); -- diaga (1~255)
 
 -- Next Available: 500
 
