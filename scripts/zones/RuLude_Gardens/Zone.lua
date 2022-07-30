@@ -67,13 +67,6 @@ zone_object.onRegionEnter = function(player, region)
                     player:hasKeyItem(xi.ki.PROMYVION_DEM_SLIVER)
                 then
                     player:startEvent(162)
-                elseif
-                    player:hasCompletedQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SHADOWS_OF_THE_DEPARTED) and
-                    player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH) == QUEST_AVAILABLE and
-                    player:getLocalVar('ANZONE') == 0 and
-                    player:getCharVar("ApocNighWait") <= os.time()
-                then
-                    player:startEvent(123)
                 end
             end
         end
@@ -110,12 +103,8 @@ zone_object.onEventFinish = function(player, csid, option)
         player:delKeyItem(xi.ki.PROMYVION_DEM_SLIVER)
         player:delKeyItem(xi.ki.PROMYVION_MEA_SLIVER)
         player:messageSpecial(ID.text.YOU_HAND_THE_THREE_SLIVERS)
-        player:setLocalVar('ANZONE', 1)
-        player:setCharVar("ApocNighWait", getVanaMidnight())
-    elseif csid == 123 then
-        player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH)
-        player:setCharVar('ApocalypseNigh', 1)
-        player:setCharVar("ApocNighWait", 0)
+        player:setLocalVar("Quest[3][89]mustZone", 1)
+        player:setCharVar("Quest[3][89]Wait", getVanaMidnight())
     end
 end
 
