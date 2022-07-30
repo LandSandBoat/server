@@ -5008,6 +5008,10 @@ INSERT INTO `mob_spell_lists` VALUES('Osschaart', 494, 238, 1, 255); -- rasp (1~
 INSERT INTO `mob_spell_lists` VALUES('Osschaart', 494, 240, 1, 255); -- drown (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Osschaart', 494, 254, 1, 255); -- blind (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Osschaart', 494, 258, 1, 255); -- bind (1~255)
+-- Anansi
+INSERT INTO `mob_spell_lists` VALUES('Anansi',495,226,1,255); -- poisonga ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Anansi',495,356,1,255); -- paralyga (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Anansi',495,357,1,255); -- slowga (1~255)
 
 -- Slendlix Spindlethumb (498)
 INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',498,3,1,255);  -- cure_iii (1~255)

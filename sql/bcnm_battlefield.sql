@@ -831,6 +831,33 @@ INSERT INTO `bcnm_battlefield` VALUES (512,3,17621010,0); -- Ancient Warrior
 INSERT INTO `bcnm_battlefield` VALUES (512,3,17621011,0); -- Ancient Warrior
 INSERT INTO `bcnm_battlefield` VALUES (512,3,17621012,0); -- Ancient Warrior
 INSERT INTO `bcnm_battlefield` VALUES (512,3,17621013,0); -- Ancient Warrior
+INSERT INTO `bcnm_battlefield` VALUES (513,1,17621197,3); -- Come into my Parlor: Anansi
+INSERT INTO `bcnm_battlefield` VALUES (513,1,17621199,2); -- Anansi's Son
+INSERT INTO `bcnm_battlefield` VALUES (513,1,17621200,2); -- Anansi's Son
+INSERT INTO `bcnm_battlefield` VALUES (513,1,17621201,2); -- Anansi's Son
+INSERT INTO `bcnm_battlefield` VALUES (513,1,17621202,2); -- Anansi's Son
+INSERT INTO `bcnm_battlefield` VALUES (513,1,17621203,2); -- Anansi's Son
+INSERT INTO `bcnm_battlefield` VALUES (513,1,17621204,2); -- Anansi's Son
+INSERT INTO `bcnm_battlefield` VALUES (513,1,17621205,2); -- Anansi's Son
+INSERT INTO `bcnm_battlefield` VALUES (513,1,17621206,2); -- Anansi's Son
+INSERT INTO `bcnm_battlefield` VALUES (513,2,17621207,3); -- Anansi
+INSERT INTO `bcnm_battlefield` VALUES (513,2,17621209,2); -- Anansi's Son
+INSERT INTO `bcnm_battlefield` VALUES (513,2,17621210,2); -- Anansi's Son
+INSERT INTO `bcnm_battlefield` VALUES (513,2,17621211,2); -- Anansi's Son
+INSERT INTO `bcnm_battlefield` VALUES (513,2,17621212,2); -- Anansi's Son
+INSERT INTO `bcnm_battlefield` VALUES (513,2,17621213,2); -- Anansi's Son
+INSERT INTO `bcnm_battlefield` VALUES (513,2,17621214,2); -- Anansi's Son
+INSERT INTO `bcnm_battlefield` VALUES (513,2,17621215,2); -- Anansi's Son
+INSERT INTO `bcnm_battlefield` VALUES (513,2,17621216,2); -- Anansi's Son
+INSERT INTO `bcnm_battlefield` VALUES (513,3,17621217,3); -- Anansi
+INSERT INTO `bcnm_battlefield` VALUES (513,3,17621219,2); -- Anansi's Son
+INSERT INTO `bcnm_battlefield` VALUES (513,3,17621220,2); -- Anansi's Son
+INSERT INTO `bcnm_battlefield` VALUES (513,3,17621221,2); -- Anansi's Son
+INSERT INTO `bcnm_battlefield` VALUES (513,3,17621222,2); -- Anansi's Son
+INSERT INTO `bcnm_battlefield` VALUES (513,3,17621223,2); -- Anansi's Son
+INSERT INTO `bcnm_battlefield` VALUES (513,3,17621224,2); -- Anansi's Son
+INSERT INTO `bcnm_battlefield` VALUES (513,3,17621225,2); -- Anansi's Son
+INSERT INTO `bcnm_battlefield` VALUES (513,3,17621226,2); -- Anansi's Son
 INSERT INTO `bcnm_battlefield` VALUES (516,1,17621014,2); -- heir_to_the_light
 INSERT INTO `bcnm_battlefield` VALUES (516,1,17621015,2);
 INSERT INTO `bcnm_battlefield` VALUES (516,1,17621016,2);
