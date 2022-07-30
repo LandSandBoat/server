@@ -30,18 +30,20 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
         mob:charm(target)
     end
 
-    if job == 9 then -- BST
-        GetMobByID(id+2):setSpawn(pos.x, pos.y, pos.z, pos.rot)
-        SpawnMob(id+2)
-    elseif job == 14 then -- DRG
-        GetMobByID(id+3):setSpawn(pos.x, pos.y, pos.z, pos.rot)
-        SpawnMob(id+3)
-    elseif job == 15 then -- SMN
-        GetMobByID(id+4):setSpawn(pos.x, pos.y, pos.z, pos.rot)
-        SpawnMob(id+4)
-    elseif job == 18 then -- PUP
-        GetMobByID(id+5):setSpawn(pos.x, pos.y, pos.z, pos.rot)
-        SpawnMob(id+5)
+    local jobs =
+    {
+        {xi.job.BST, 2},
+        {xi.job.DRG, 3},
+        {xi.job.SMN, 4},
+        {xi.job.PUP, 5},
+    }
+
+    for _, v in pairs(jobs) do
+        if job == v[1] then
+            GetMobByID(id+v[2]):setSpawn(pos.x, pos.y, pos.z, pos.rot)
+            SpawnMob(id+v[2])
+            break
+        end
     end
 
     skill:setMsg(msg)
