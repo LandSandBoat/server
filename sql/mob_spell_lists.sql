@@ -4931,7 +4931,6 @@ INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',486,249,1,255); -- blaze_spikes
 -- Shen (487)
 INSERT INTO `mob_spell_lists` VALUES ('Shen',487,172,1,255); -- water_iv (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Shen',487,201,1,255); -- waterga_iii (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Shen',487,214,1,255); -- flood (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Shen',487,240,1,255); -- drown (1-255)
 
 -- Shen's Filtrate (488)
@@ -4997,6 +4996,11 @@ INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 250, 1, 255); -- ice spi
 INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 252, 1, 255); -- stun (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 253, 1, 255); -- sleep (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 274, 1, 255); -- sleepga ii (1~255)
+
+-- Zoredonite (498)
+INSERT INTO `mob_spell_lists` VALUES ('Zoredonite',498,3,1,255);   -- cure_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Zoredonite',498,30,1,255);  -- banish_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Zoredonite',498,112,1,255); -- flash (1~255)
 
 -- Slendlix Spindlethumb (498)
 INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',499,3,1,255);  -- cure_iii (1~255)

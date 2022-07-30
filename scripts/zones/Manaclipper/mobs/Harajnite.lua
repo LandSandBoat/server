@@ -1,17 +1,16 @@
 -----------------------------------
--- Area: Tahrongi Canyon
---   NM: Herbage Hunter
+-- Area: Manaclipper
+--   NM: Harajnite
 -----------------------------------
-require("scripts/globals/hunts")
+mixins = {require("scripts/mixins/families/uragnite")}
 -----------------------------------
 local entity = {}
 
-entity.onMobInitialize = function(mob)
-    mob:setMod(xi.mod.DOUBLE_ATTACK, 45)
+entity.onMobEngaged = function(mob, player)
+    mob:setLocalVar("[uragnite]inShellRegen", 100)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    xi.hunts.checkHunt(mob, player, 259)
 end
 
 return entity
