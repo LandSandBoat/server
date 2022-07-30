@@ -534,6 +534,18 @@ INSERT INTO `bcnm_battlefield` VALUES (109,3,17375399,3);
 INSERT INTO `bcnm_battlefield` VALUES (110,1,17375401,3); -- wild_wild_whiskers
 INSERT INTO `bcnm_battlefield` VALUES (110,2,17375403,3);
 INSERT INTO `bcnm_battlefield` VALUES (110,3,17375405,3);
+INSERT INTO `bcnm_battlefield` VALUES (111,1,17375407,3); -- Seasons_Greetings
+INSERT INTO `bcnm_battlefield` VALUES (111,1,17375408,3);
+INSERT INTO `bcnm_battlefield` VALUES (111,1,17375409,3);
+INSERT INTO `bcnm_battlefield` VALUES (111,1,17375410,3);
+INSERT INTO `bcnm_battlefield` VALUES (111,2,17375412,3);
+INSERT INTO `bcnm_battlefield` VALUES (111,2,17375413,3);
+INSERT INTO `bcnm_battlefield` VALUES (111,2,17375414,3);
+INSERT INTO `bcnm_battlefield` VALUES (111,2,17375415,3);
+INSERT INTO `bcnm_battlefield` VALUES (111,3,17375417,3);
+INSERT INTO `bcnm_battlefield` VALUES (111,3,17375418,3);
+INSERT INTO `bcnm_battlefield` VALUES (111,3,17375419,3);
+INSERT INTO `bcnm_battlefield` VALUES (111,3,17375420,3);
 INSERT INTO `bcnm_battlefield` VALUES (116,1,17375491,3); -- beyond_infinity (Balgas Dais)
 INSERT INTO `bcnm_battlefield` VALUES (116,2,17375492,3); -- beyond_infinity (Balgas Dais)
 INSERT INTO `bcnm_battlefield` VALUES (116,3,17375493,3); -- beyond_infinity (Balgas Dais)

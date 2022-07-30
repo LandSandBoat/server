@@ -602,6 +602,61 @@ local loot =
             {itemid =  4175, droprate =   99}, -- vile_elixir_+1
         },
     },
+
+    -- Seaons Greetings
+    [111] =
+    {
+        {
+            {itemid = 17589, droprate = 200}, -- Thyrsusstab
+            {itemid = 18217, droprate = 200}, -- Rampager
+            {itemid = 17451, droprate = 200}, -- Morgenstern
+            {itemid = 18378, droprate = 200}, -- Subduer
+            {itemid = 17207, droprate = 200}, -- Expunger
+        },
+        {
+            {itemid = 17700, droprate = 250}, -- Durandal
+            {itemid = 18006, droprate = 250}, -- Hoplites Harp
+            {itemid = 17842, droprate = 250}, -- Sorrowful Harp
+            {itemid = 14762, droprate = 250}, -- Attila's Earring
+        },
+        {
+            {itemid = 655,   droprate = 333}, -- Adaman Ingot
+            {itemid = 747,   droprate = 333}, -- Orichalcum Ingot
+            {itemid = 15328, droprate = 333}, -- Root Sabots
+        },
+        {
+            {itemid = 711,   droprate = 650}, -- Divine Log
+            {itemid = 1446,  droprate =  50}, -- Lacquer Tree Log
+            {itemid = 19024, droprate = 100}, -- Sword Strap
+            {itemid = 19025, droprate = 100}, -- Pole Grip
+            {itemid = 19026, droprate = 100}, -- Spear Strap
+        },
+        {
+            {itemid = 644,  droprate = 66}, -- Mythril Ore
+            {itemid = 645,  droprate = 66}, -- Darksteel Ore
+            {itemid = 700,  droprate = 66}, -- Mahogany Log
+            {itemid = 702,  droprate = 66}, -- Ebony Log
+            {itemid = 703,  droprate = 76}, -- Petrified Log
+            {itemid = 737,  droprate = 66}, -- Gold Ore
+            {itemid = 738,  droprate = 66}, -- Platinum Ore
+            {itemid = 766,  droprate = 66}, -- Wyvern Scales
+            {itemid = 830,  droprate = 66}, -- Rainbow Cloth
+            {itemid = 887,  droprate = 66}, -- Coral Fragment
+            {itemid = 895,  droprate = 66}, -- Ram Horn
+            {itemid = 902,  droprate = 66}, -- Demon Horn
+            {itemid = 1132, droprate = 66}, -- Raxa
+            {itemid = 4174, droprate = 66}, -- Vile Elixer
+            {itemid = 4175, droprate = 66}, -- Vile Elixer +1
+        },
+        {
+            {itemid = 658,  droprate =  50}, -- Damascus Ingot
+            {itemid = 836,  droprate =  50}, -- Damascene Cloth
+            {itemid = 844,  droprate = 300}, -- Phoenix Feather
+            {itemid = 942,  droprate = 100}, -- Philosopher's Stone
+            {itemid = 1110, droprate = 150}, -- Beetle Blood
+            {itemid = 1132, droprate = 350}, -- Raxa
+        },
+    },
 }
 entity.onTrade = function(player, npc, trade)
 end
