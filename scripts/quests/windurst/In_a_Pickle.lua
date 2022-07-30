@@ -52,17 +52,17 @@ quest.sections =
                     if npcUtil.tradeHasExactly(trade, xi.items.SMOOTH_STONE) then
                         local rand = math.random(1, 4)
                         if rand <= 2 then
-                            quest:progressEvent(659)
+                            return quest:progressEvent(659)
                         elseif rand == 3 then
-                            quest:progressEvent(657) -- IN A PICKLE: Too Light
+                            return quest:progressEvent(657) -- IN A PICKLE: Too Light
                         elseif rand == 4 then
-                            quest:progressEvent(658) -- IN A PICKLE: Too Small
+                            return quest:progressEvent(658) -- IN A PICKLE: Too Small
                         end
                     end
                 end,
 
                 onTrigger = function(player, npc)
-                    quest:progressEvent(655, 0, xi.items.RARAB_TAIL) -- IN A PICKLE + RARAB TAIL: Quest Objective Reminder
+                    return quest:progressEvent(655, 0, xi.items.RARAB_TAIL) -- IN A PICKLE + RARAB TAIL: Quest Objective Reminder
                 end,
             },
 
@@ -92,11 +92,11 @@ quest.sections =
                     if npcUtil.tradeHasExactly(trade, xi.items.SMOOTH_STONE) then
                         local rand = math.random(1, 4)
                         if rand <= 2 then
-                            quest:progressEvent(662, 200)
+                            return quest:progressEvent(662, 200)
                         elseif rand == 3 then
-                            quest:progressEvent(657) -- IN A PICKLE: Too Light
+                            return quest:progressEvent(657) -- IN A PICKLE: Too Light
                         elseif rand == 4 then
-                            quest:progressEvent(658) -- IN A PICKLE: Too Small
+                            return quest:progressEvent(658) -- IN A PICKLE: Too Small
                         end
                     end
                 end,
@@ -104,9 +104,9 @@ quest.sections =
                 onTrigger = function(player, npc)
                     local needToZone = player:needToZone()
                     if needToZone then
-                        quest:progressEvent(660) -- IN A PICKLE: After Quest
+                        return quest:progressEvent(660) -- IN A PICKLE: After Quest
                     elseif not needToZone and quest:getVar(player, 'repeat') ~= 1 then
-                        player:startEvent(661) -- IN A PICKLE: Repeatable Quest Begin
+                        return quest:progressEvent(661) -- IN A PICKLE: Repeatable Quest Begin
                     end
                 end,
             },
