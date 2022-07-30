@@ -1150,7 +1150,9 @@ namespace petutils
     int16 PerpetuationCost(uint32 id, uint8 level)
     {
         int16 cost = 0;
-        if (id <= 7)
+
+        // Fire Spirit through Dark Spirit
+        if (id <= PETID_DARKSPIRIT)
         {
             if (level < 5)
             {
@@ -1221,7 +1223,7 @@ namespace petutils
                 cost = 18;
             }
         }
-        else if (id == 8)
+        else if (id == PETID_CARBUNCLE)
         {
             if (level < 10)
             {
@@ -1260,7 +1262,7 @@ namespace petutils
                 cost = 9;
             }
         }
-        else if (id == 9)
+        else if (id == PETID_FENRIR)
         {
             if (level < 8)
             {
@@ -1307,7 +1309,8 @@ namespace petutils
                 cost = 11;
             }
         }
-        else if (id <= 16)
+        // NOTE: This condition covers PETID_IFRIT through the below conditions
+        else if (id <= PETID_DIABOLOS || id == PETID_SIREN)
         {
             if (level < 10)
             {
@@ -1415,7 +1418,7 @@ namespace petutils
 
         PET_TYPE petType = PET_TYPE::JUG_PET;
 
-        if (PetID <= PETID_CAIT_SITH)
+        if (PetID <= PETID_CAIT_SITH || PetID == PETID_SIREN)
         {
             petType = PET_TYPE::AVATAR;
         }

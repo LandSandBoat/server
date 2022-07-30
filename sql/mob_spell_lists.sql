@@ -4998,6 +4998,11 @@ INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 252, 1, 255); -- stun (1
 INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 253, 1, 255); -- sleep (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 274, 1, 255); -- sleepga ii (1~255)
 
+-- Slendlix Spindlethumb (498)
+INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',498,3,1,255);  -- cure_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',498,23,1,255); -- dia (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',498,33,1,255); -- diaga (1~255)
+
 -- Bastet (499)
 INSERT INTO `mob_spell_lists` VALUES('Bastet', 499, 165, 1, 255); -- thunder ii (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Bastet', 499, 195, 1, 255); -- thundaga ii (1~255)
@@ -5134,6 +5139,8 @@ INSERT INTO `mob_spell_lists` VALUES('Silverhook', 5022, 274, 1, 255); -- sleepg
 -- Aries (5023)
 INSERT INTO `mob_spell_lists` VALUES('Kurrea', 5023, 54, 1, 255);  -- stoneskin (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Kurrea', 5023, 356, 1, 255); -- paralyga (1~255)
+
+-- Next Available: 500
 
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;

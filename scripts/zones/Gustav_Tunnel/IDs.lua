@@ -70,7 +70,6 @@ zones[xi.zone.GUSTAV_TUNNEL] =
     },
     npc =
     {
-        CASKET_BASE = 17645851,
     },
 }
 

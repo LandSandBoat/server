@@ -46,7 +46,7 @@ bool CSearchListPacket::AddPlayer(SearchEntity* PPlayer)
     uint32 size_offset = m_offset / 8;
     if ((sizeof(m_data) - size_offset) < (20 + 67))
     {
-         return false; // not enough space available, worst case.
+        return false; // not enough space available, worst case.
     }
 
     m_offset += 8;

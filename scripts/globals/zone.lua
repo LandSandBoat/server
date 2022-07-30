@@ -7,6 +7,8 @@
 
 xi = xi or {}
 
+DYNAMIC_LOOKUP = -1
+
 xi.zoneType =
 {
     NONE           = 0,

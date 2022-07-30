@@ -4,6 +4,7 @@
 #include "../../ai/states/ability_state.h"
 #include "../../ai/states/magic_state.h"
 #include "../../ai/states/mobskill_state.h"
+#include "../../ai/states/petskill_state.h"
 #include "../../ai/states/range_state.h"
 #include "../../ai/states/weaponskill_state.h"
 #include "../../enmity_container.h"
@@ -58,7 +59,8 @@ namespace gambits
         // TODO: Is this necessary?
         // Not already doing something
         if (POwner->PAI->IsCurrentState<CAbilityState>() || POwner->PAI->IsCurrentState<CRangeState>() || POwner->PAI->IsCurrentState<CMagicState>() ||
-            POwner->PAI->IsCurrentState<CWeaponSkillState>() || POwner->PAI->IsCurrentState<CMobSkillState>())
+            POwner->PAI->IsCurrentState<CWeaponSkillState>() || POwner->PAI->IsCurrentState<CMobSkillState>() ||
+            POwner->PAI->IsCurrentState<CPetSkillState>())
         {
             return;
         }

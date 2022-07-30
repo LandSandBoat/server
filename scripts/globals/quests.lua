@@ -734,7 +734,7 @@ xi.quest.id =
     -----------------------------------
     [xi.quest.area[xi.quest.log_id.CRYSTAL_WAR]] =
     {
-        LOST_IN_TRANSLOCATION            = 0,  -- +
+        LOST_IN_TRANSLOCATION            = 0,  -- + Converted
         MESSAGE_ON_THE_WINDS             = 1,  -- + Converted
         THE_WEEKLY_ADVENTURER            = 2,
         HEALING_HERBS                    = 3,
@@ -785,8 +785,8 @@ xi.quest.id =
         A_JEWELERS_LAMENT                = 48,
         BENEATH_THE_MASK                 = 49,
         WHAT_PRICE_LOYALTY               = 50,
-        SONGBIRDS_IN_A_SNOWSTORM         = 51,
-        BLOOD_OF_HEROES                  = 52,
+        SONGBIRDS_IN_A_SNOWSTORM         = 51, -- + Converted
+        BLOOD_OF_HEROES                  = 52, -- + Converted
         SINS_OF_THE_MOTHERS              = 53,
         HOWL_FROM_THE_HEAVENS            = 54,
         SUCCOR_TO_THE_SIDHE              = 55,

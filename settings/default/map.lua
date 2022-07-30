@@ -18,6 +18,14 @@ xi.settings.map =
     MAX_TIME_LASTUPDATE = 60,
 
     -- --------------------------------
+    -- SQL settings
+    -- --------------------------------
+
+    -- Used by serverutils::PersistServerVar() for the maximum attempts to retry verification
+    -- of a written Server Variable.
+    SETVAR_RETRY_MAX = 3,
+
+    -- --------------------------------
     -- Game settings
     -- --------------------------------
 

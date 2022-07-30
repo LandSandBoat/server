@@ -27,7 +27,7 @@
 #include <numeric>
 #include <string>
 
-sol::state lua;
+sol::state lua; // lgtm [cpp/short-global-name]
 
 /**
  * @brief Load the bare minimum required to use Lua.
