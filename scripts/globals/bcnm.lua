@@ -287,7 +287,7 @@ local battlefields =
         { 7,   71, 1431},   -- Shattering Stars (THF LB5)
         { 8,   72, 1434},   -- Shattering Stars (BST LB5)
         { 9,   73, 1552},   -- Birds of a Feather (BS30)
-     -- {10,   74, 1551},   -- Crustacean Conundrum (BS20) -- TODO: You can only do 0-2 damage no matter what your attack is
+        {10,   74, 1551},   -- Crustacean Conundrum (BS20)
         {11,   75, 1552},   -- Grove Guardians (BS30)
         {12,   76, 1553},   -- The Hills are Alive (KS99)
      -- {13,   77, 1131},   -- Royal Jelly (BS40) -- TODO: all combat mechanics, loot

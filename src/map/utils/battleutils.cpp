@@ -737,6 +737,12 @@ namespace battleutils
 
         damage = std::clamp(damage, -99999, 99999);
 
+        // When set mob will only take 0 or 1 damage
+        if (PDefender->GetLocalVar("DAMAGE_NULL") != 0)
+        {
+            damage %= 2;
+        }
+
         return damage;
     }
 
@@ -853,6 +859,12 @@ namespace battleutils
             else
             {
                 Action->spikesParam = static_cast<uint16>(spikesDamage);
+            }
+
+            // When set mob will only take 0 or 1 damage
+            if (PDefender->GetLocalVar("DAMAGE_NULL") != 0)
+            {
+                spikesDamage = xirand::GetRandomNumber(1);
             }
 
             switch (static_cast<SPIKES>(Action->spikesEffect))
@@ -1011,6 +1023,12 @@ namespace battleutils
                 Action->spikesParam = static_cast<uint16>(spikesDamage);
             }
 
+            // When set mob will only take 0 or 1 damage
+            if (PDefender->GetLocalVar("DAMAGE_NULL") != 0)
+            {
+                spikesDamage = xirand::GetRandomNumber(1);
+            }
+
             PAttacker->takeDamage(spikesDamage, PDefender, ATTACK_TYPE::MAGICAL, GetSpikesDamageType(Action->spikesEffect));
 
             battleutils::DirtyExp(PAttacker, PDefender);
@@ -1055,6 +1073,12 @@ namespace battleutils
                 else
                 {
                     Action->spikesParam = static_cast<uint16>(spikesDamage);
+                }
+
+                // When set mob will only take 0 or 1 damage
+                if (PDefender->GetLocalVar("DAMAGE_NULL") != 0)
+                {
+                    spikesDamage = PDefender->GetLocalVar("DAMAGE_DEALT");
                 }
 
                 PAttacker->takeDamage(spikesDamage, PDefender, ATTACK_TYPE::MAGICAL, GetSpikesDamageType(spikesType));
@@ -2123,6 +2147,12 @@ namespace battleutils
         }
         damage = std::clamp(damage, -99999, 99999);
 
+        // When set mob will only take 0 or 1 damage
+        if (PDefender->GetLocalVar("DAMAGE_NULL") != 0)
+        {
+            damage %= 2;
+        }
+
         int32 corrected = PDefender->takeDamage(damage, PAttacker, attackType, damageType);
         if (damage < 0)
         {
@@ -2416,6 +2446,12 @@ namespace battleutils
             PAttacker->StatusEffectContainer->DelStatusEffect(EFFECT_HAGAKURE);
         }
 
+        // When set mob will only take 0 or 1 damage
+        if (PDefender->GetLocalVar("DAMAGE_NULL") != 0)
+        {
+            damage %= 2;
+        }
+
         return damage;
     }
 
@@ -2427,6 +2463,12 @@ namespace battleutils
 
     int32 TakeSpellDamage(CBattleEntity* PDefender, CCharEntity* PAttacker, CSpell* PSpell, int32 damage, ATTACK_TYPE attackType, DAMAGE_TYPE damageType)
     {
+        // When set mob will only take 0 or 1 damage
+        if (PDefender->GetLocalVar("DAMAGE_NULL") != 0)
+        {
+            damage = PDefender->GetLocalVar("DAMAGE_DEALT");
+        }
+
         PDefender->takeDamage(damage, PAttacker, attackType, damageType);
 
         // Remove effects from damage
@@ -3984,6 +4026,12 @@ namespace battleutils
         }
         damage = std::clamp(damage, -99999, 99999);
 
+        // When set mob will only take 0 or 1 damage
+        if (PDefender->GetLocalVar("DAMAGE_NULL") != 0)
+        {
+            damage %= 2;
+        }
+
         uint16 elementOffset = static_cast<uint16>(DAMAGE_TYPE::ELEMENTAL) + static_cast<uint16>(appliedEle);
         PDefender->takeDamage(damage, PAttacker, ATTACK_TYPE::SPECIAL,
                               appliedEle == ELEMENT_NONE ? DAMAGE_TYPE::NONE : static_cast<DAMAGE_TYPE>(elementOffset));
@@ -5225,6 +5273,12 @@ namespace battleutils
             }
         }
 
+        // When set mob will only take 0 or 1 damage
+        if (PDefender->GetLocalVar("DAMAGE_NULL") != 0)
+        {
+            damage %= 2;
+        }
+
         return damage;
     }
 
@@ -5280,6 +5334,12 @@ namespace battleutils
             }
         }
 
+        // When set mob will only take 0 or 1 damage
+        if (PDefender->GetLocalVar("DAMAGE_NULL") != 0)
+        {
+            damage %= 2;
+        }
+
         // ShowDebug(CL_CYAN"MagicDmgTaken: Element = %d", element);
         return damage;
     }
@@ -5322,6 +5382,12 @@ namespace battleutils
             damage = HandleFanDance(PDefender, damage);
         }
 
+        // When set mob will only take 0 or 1 damage
+        if (PDefender->GetLocalVar("DAMAGE_NULL") != 0)
+        {
+            damage = PDefender->GetLocalVar("DAMAGE_DEALT");
+        }
+
         return damage;
     }
 
@@ -5360,6 +5426,12 @@ namespace battleutils
             ConvertDmgToMP(PDefender, damage, IsCovered);
 
             damage = HandleFanDance(PDefender, damage);
+        }
+
+        // When set mob will only take 0 or 1 damage
+        if (PDefender->GetLocalVar("DAMAGE_NULL") != 0)
+        {
+            damage = PDefender->GetLocalVar("DAMAGE_DEALT");
         }
 
         return damage;
