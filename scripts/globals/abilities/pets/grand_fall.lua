@@ -17,7 +17,7 @@ ability_object.onPetAbility = function(target, pet, skill)
     local tp = skill:getTP() / 10
     local master = pet:getMaster()
     local merits = 0
-    local dmgmod = (((45/256) * tp) + (1370/256))
+    local dmgmod = (((45/256) * (tp/100)) + (1370/256))
     if master ~= nil and master:isPC() then
         merits = master:getMerit(xi.merit.GRANDFALL)
     end

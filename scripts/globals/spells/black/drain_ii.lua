@@ -41,10 +41,6 @@ spell_object.onSpellCast = function(caster, target, spell)
         dmg = 0
     end
 
-    if (target:getHP() < dmg) then
-        dmg = target:getHP()
-    end
-
     if (target:isUndead()) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT) -- No effect
         return dmg
@@ -59,7 +55,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     end
 
     caster:addHP(dmg)
-    spell:setMsg(xi.msg.basic.MAGIC_DRAIN_HP) --change msg to 'xxx hp drained from the yyyy.'
+
     return dmg
 end
 

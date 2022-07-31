@@ -9,6 +9,75 @@ local entity = {}
 
 local loot =
 {
+    -- Come into my Parlor
+    [513] =
+    {
+        {
+            {itemid = 0,     droprate = 250}, -- nothing
+            {itemid = 13266, droprate = 150}, -- Ocean Rope
+            {itemid = 13269, droprate = 150}, -- Jungle Rope
+            {itemid = 13268, droprate = 150}, -- Steppe Rope
+            {itemid = 13270, droprate = 150}, -- Desert Rope
+            {itemid = 13267, droprate = 150}, -- Forest Rope
+        },
+        {
+            {itemid = 0,     droprate = 250}, -- nothing
+            {itemid = 13286, droprate =  50}, -- Soldier's Earring
+            {itemid = 13287, droprate =  50}, -- Kampfer Earring
+            {itemid = 13288, droprate =  50}, -- Medicine Earring
+            {itemid = 13289, droprate =  50}, -- Sorcerer's Earring
+            {itemid = 13290, droprate =  50}, -- Fencer's Earring
+            {itemid = 13291, droprate =  50}, -- Rogue's Earring
+            {itemid = 13292, droprate =  50}, -- Guardian Earring
+            {itemid = 13293, droprate =  50}, -- Slayer's Earring
+            {itemid = 13294, droprate =  50}, -- Tamer's Earring
+            {itemid = 13295, droprate =  50}, -- Minstrel's Earring
+            {itemid = 13296, droprate =  50}, -- Tracker's Earring
+            {itemid = 13297, droprate =  50}, -- Ronin's Earring
+            {itemid = 13298, droprate =  50}, -- Shinobi Earring
+            {itemid = 13299, droprate =  50}, -- Drake Earring
+            {itemid = 13300, droprate =  50}, -- Conjurer Earring
+        },
+        {
+            {itemid = 0,     droprate = 450}, -- nothing
+            {itemid = 19024, droprate = 250}, -- sword strap
+            {itemid = 19025, droprate =  50}, -- pole grip
+            {itemid = 19026, droprate = 250}, -- spear strap
+        },
+        {
+            {itemid = 0,    droprate = 600}, -- nothing
+            {itemid = 4613, droprate = 100}, -- Cure V
+            {itemid = 4774, droprate = 100}, -- Thunder III
+            {itemid = 4659, droprate = 100}, -- Shell IV
+            {itemid = 4902, droprate = 100}, -- Light Spirit Pact
+        },
+        {
+            {itemid = 0, droprate = 90}, -- nothing
+            {itemid = 644, droprate = 70}, -- Mythril Ore
+            {itemid = 700, droprate = 70}, -- Mahogany Log
+            {itemid = 703, droprate = 70}, -- Petrified Log
+            {itemid = 737, droprate = 70}, -- Gold Ore
+            {itemid = 738, droprate = 70}, -- Platinum Ore
+            {itemid = 823, droprate = 70}, -- Gold Thread
+            {itemid = 830, droprate = 70}, -- Rainbow Cloth
+            {itemid = 844, droprate = 70}, -- Phoenix Feather
+            {itemid = 887, droprate = 70}, -- Coral Fragment
+            {itemid = 895, droprate = 70}, -- Ram Horn
+            {itemid = 902, droprate = 70}, -- Demon Horn
+            {itemid = 4175, droprate = 70}, -- Vile Elixer +1
+            {itemid = 1132, droprate = 70}, -- Raxa
+        },
+        {
+            {itemid = 0,    droprate = 270}, -- nothing
+            {itemid = 658,  droprate =  50}, -- Damascus Ingot
+            {itemid = 836,  droprate =  50}, -- Damascene Cloth
+            {itemid = 837,  droprate =  50}, -- Malboro Fiber
+            {itemid = 942,  droprate = 250}, -- Philosopher's Stone
+            {itemid = 1110, droprate =  50}, -- Beetle Blood
+            {itemid = 1132, droprate = 350}, -- Raxa
+        },
+    },
+
     -- BCNM Demolition Squad
     [520] =
     {

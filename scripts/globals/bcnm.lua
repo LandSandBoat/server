@@ -239,12 +239,12 @@ local battlefields =
         { 1,    1, 1131},   -- Tails of Woe (BS40)
         { 2,    2, 1130},   -- Dismemberment Brigade (BS60)
         { 3,    3,    0},   -- The Secret Weapon (Sandy 7-2)
-     -- { 4,    4, 1177},   -- Hostile Herbivores (BS50) -- TODO: mobs need knockback on melee attacks
+        { 4,    4, 1177},   -- Hostile Herbivores (BS50)
         { 5,    5, 1426},   -- Shattering Stars (WAR LB5)
         { 6,    6, 1429},   -- Shattering Stars (BLM LB5)
         { 7,    7, 1436},   -- Shattering Stars (RNG LB5)
         { 8,    8, 1552},   -- Carapace Combatants (BS30)
-     -- { 9,    9, 1551},   -- Shooting Fish (BS20) -- TODO: mobs use ranged attacks with knockback
+        { 9,    9, 1551},   -- Shooting Fish (BS20)
         {10,   10, 1552},   -- Dropping Like Flies (BS30)
         {11,   11, 1553},   -- Horns of War (KS99)
         {12,   12, 1131},   -- Under Observation (BS40)
@@ -474,7 +474,7 @@ local battlefields =
     [xi.zone.QUBIA_ARENA] =
     {
         { 0,  512,    0},   -- The Rank 5 Mission (Mission 5-1)
-     -- { 1,  513, 1175},   -- Come Into My Parlor (KS30)
+        { 1,  513, 1175},   -- Come Into My Parlor (KS30)
      -- { 2,  514, 1178},   -- E-vase-ive Action (KS30)
      -- { 3,  515, 1180},   -- Infernal Swarm (KS30)
         { 4,  516,    0},   -- The Heir to the Light (Sandy 9-2)
