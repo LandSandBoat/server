@@ -22,6 +22,7 @@
 #ifndef _BATTLEENTITY_H
 #define _BATTLEENTITY_H
 
+#include <mutex>
 #include <set>
 #include <unordered_map>
 #include <vector>
@@ -562,6 +563,8 @@ public:
     uint8 GetSpeed();
 
     DAMAGE_TYPE m_dmgType;
+
+    std::mutex scMutex;
 
     bool isDead(); // проверяем, мертва ли сущность
     bool isAlive();

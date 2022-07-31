@@ -26,6 +26,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg() * 7, xi.magic.ele.FIRE, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
     local duration = 120
+    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.FIRE)
 
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.PARALYSIS, 40, 3, duration)
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 40, 3, duration)
@@ -35,7 +36,6 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SILENCE, 1, 0, duration)
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SLOW, 1250, 0, duration)
 
-    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.FIRE)
     return dmg
 end
 

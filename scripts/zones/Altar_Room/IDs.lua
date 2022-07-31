@@ -19,6 +19,7 @@ zones[xi.zone.ALTAR_ROOM] =
         LOGIN_NUMBER                 = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         THE_MAGICITE_GLOWS_OMINOUSLY = 7110, -- The magicite glows ominously.
         CONQUEST_BASE                = 7111, -- Tallying conquest results...
+        DRAWS_NEAR                   = 7355, -- You brush away all surrounding dust and place the <keyItem> on the stone lid.
     },
     mob =
     {

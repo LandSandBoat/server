@@ -20,8 +20,18 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local duration = 60
 
+    if mob:isPet() then
+        local player = mob:getMaster();
+        -- isJugPet is really hasJugPet.  Given an entity it returns true if that entity has a pet and the pet is a jug pet
+        -- TODO - Rule of 3 counter = 1 - rename isJugPet to has, add isJugPet
+        if player~=nil and player:isJugPet() then
+            local tp = skill:getTP()
+            duration = math.max(duration, duration* (tp/1000))
+        end
+    end
+
     local typeEffect = xi.effect.BERSERK
-    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, 1, 0, duration))
+    skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect, 50, 0, duration))
     return typeEffect
 end
 

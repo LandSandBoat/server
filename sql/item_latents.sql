@@ -3485,3 +3485,9 @@ INSERT INTO `item_latents` VALUES (28445,68,10,14,0);   -- Shetal Stone EVA +10 
 -- -------------------------------------------------------
 INSERT INTO `item_latents` VALUES(14465, 68, 10, 49, 4468); -- EVA +10 with Pamama Food Active
 INSERT INTO `item_latents` VALUES(14465, 25, 1, 49, 4468);  -- ACC +1 with Pamama Food Active
+
+-- -------------------------------------------------------
+-- Kyoshu Kyahan
+-- -------------------------------------------------------
+INSERT INTO `item_latents` VALUES(11405, 23, 20, 13, 406); -- ATT +20 with Footwork
+INSERT INTO `item_latents` VALUES(11405, 25, 20, 13, 406); -- ATK +20 with Footwork
