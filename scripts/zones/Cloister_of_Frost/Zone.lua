@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: Cloister_of_Frost (203)
---
 -----------------------------------
 local ID = require("scripts/zones/Cloister_of_Frost/IDs")
 require("scripts/globals/conquest")
