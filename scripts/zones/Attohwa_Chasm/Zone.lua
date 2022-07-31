@@ -85,6 +85,21 @@ zone_object.onGameHour = function(zone)
         starting at ID.npc.MIASMA_OFFSET. some are supposed to toggle open, but need retail test
         to determine which.  for now, they're just statically set per npc_list.animation
     --]]
+
+    -- Don't allow Citipati or Xolotl to spawn outside of night
+    local xolre = GetMobByID(ID.mob.XOLOTL):getLocalVar("xolotlRespawn")
+
+    if VanadielHour() >= 4 and VanadielHour() < 20 then
+        DisallowRespawn(ID.mob.CITIPATI, true)
+        DisallowRespawn(ID.mob.XOLOTL, true)
+    else
+        DisallowRespawn(ID.mob.CITIPATI, false)
+        DisallowRespawn(ID.mob.XOLOTL, false)
+        if os.time() > xolre and VanadielHour() == 20 then
+            SpawnMob(ID.mob.XOLOTL)
+            GetMobByID(ID.mob.XOLOTL):setLocalVar("xolotlDead", 0)
+        end
+    end
 end
 
 zone_object.onEventUpdate = function(player, csid, option)

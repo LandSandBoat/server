@@ -2,6 +2,7 @@
 -- Area: Attohwa Chasm
 --   NM: Alastor Antlion
 -----------------------------------
+local ID = require("scripts/zones/Attohwa_Chasm/IDs")
 mixins = {require("scripts/mixins/families/antlion_ambush_noaggro")}
 require("scripts/globals/mobs")
 -----------------------------------
@@ -21,6 +22,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
+    GetNPCByID(ID.npc.ALASTOR_QM):updateNPCHideTime(xi.settings.main.FORCE_SPAWN_QM_RESET_TIME)
 end
 
 return entity

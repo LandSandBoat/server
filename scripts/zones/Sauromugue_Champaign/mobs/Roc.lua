@@ -2,10 +2,18 @@
 -- Area: Sauromugue Champaign (120)
 --  HNM: Roc
 -----------------------------------
-mixins = {require("scripts/mixins/rage")}
+mixins =
+{
+    require("scripts/mixins/rage"),
+    require("scripts/mixins/job_special"),
+}
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
+
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
+end
 
 entity.onMobDeath = function(mob, player, isKiller)
     player:addTitle(xi.title.ROC_STAR)
