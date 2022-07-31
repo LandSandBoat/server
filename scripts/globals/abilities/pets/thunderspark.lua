@@ -28,7 +28,7 @@ ability_object.onPetAbility = function(target, pet, skill)
     --add on bonuses (staff/day/weather/jas/mab/etc all go in this function)
     damage.dmg = xi.mobskills.mobAddBonuses(pet, target, damage.dmg, 1)
 
-    local tp = skill:getTP()
+    local tp = pet:getTP()
     if tp < 1000 then
         tp = 1000
     end

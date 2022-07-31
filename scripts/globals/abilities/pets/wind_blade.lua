@@ -1,5 +1,5 @@
 -----------------------------------
--- Geocrush
+-- Wind Blade
 -----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
@@ -14,8 +14,8 @@ end
 
 ability_object.onPetAbility = function(target, pet, skill)
 
-    local dINT = math.floor(pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
-    local tp = skill:getTP() / 10
+    local dINT   = math.floor(pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
+    local tp     = pet:getTP() / 10
     local master = pet:getMaster()
     local merits = 0
     if master ~= nil and master:isPC() then
