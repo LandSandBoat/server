@@ -675,6 +675,9 @@ INSERT INTO `bcnm_battlefield` VALUES (198,3,17465403,3);
 INSERT INTO `bcnm_battlefield` VALUES (198,3,17465404,3);
 INSERT INTO `bcnm_battlefield` VALUES (198,3,17465405,3);
 INSERT INTO `bcnm_battlefield` VALUES (198,3,17465406,3);
+INSERT INTO `bcnm_battlefield` VALUES (199,1,17465408,3); -- the scarlet king
+INSERT INTO `bcnm_battlefield` VALUES (199,2,17465410,3);
+INSERT INTO `bcnm_battlefield` VALUES (199,3,17465412,3);
 INSERT INTO `bcnm_battlefield` VALUES (224,1,17473537,3); -- moonlit_path
 INSERT INTO `bcnm_battlefield` VALUES (224,2,17473538,3);
 INSERT INTO `bcnm_battlefield` VALUES (224,3,17473539,3);
