@@ -108,6 +108,19 @@ int32 zone_update_weather(time_point tick, CTaskMgr::CTask* PTask)
     return 0;
 }
 
+const uint16 CZone::ReducedVerticalAggroZones[] = {
+    ZONE_KING_RANPERRES_TOMB,
+    ZONE_BEADEAUX,
+    ZONE_CASTLE_OZTROJA,
+    ZONE_GUSGEN_MINES,
+    ZONE_SHIP_BOUND_FOR_MHAURA,
+    ZONE_SHIP_BOUND_FOR_MHAURA_PIRATES,
+    ZONE_SHIP_BOUND_FOR_SELBINA,
+    ZONE_SHIP_BOUND_FOR_SELBINA_PIRATES,
+    ZONE_SILVER_SEA_ROUTE_TO_AL_ZAHBI,
+    ZONE_SILVER_SEA_ROUTE_TO_NASHMAU
+};
+
 /************************************************************************
  *                                                                       *
  *  Class CZone                                                          *
@@ -924,6 +937,11 @@ void CZone::ForEachNpc(std::function<void(CNpcEntity*)> func)
     {
         func((CNpcEntity*)PNpc.second);
     }
+}
+
+bool CZone::HasReducedVerticalAggro()
+{
+    return std::find(std::begin(ReducedVerticalAggroZones), std::end(ReducedVerticalAggroZones), this->m_zoneID) != std::end(ReducedVerticalAggroZones);
 }
 
 void CZone::createZoneTimer()

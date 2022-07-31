@@ -300,6 +300,16 @@ void CMobEntity::TapDeaggroTime()
 bool CMobEntity::CanLink(position_t* pos, int16 superLink)
 {
     TracyZoneScoped;
+
+    if (loc.zone->HasReducedVerticalAggro())
+    {
+        float verticalDistance = abs(loc.p.y - (*pos).y);
+        if (verticalDistance > 3.5f)
+        {
+            return false;
+        }
+    }
+
     // handle super linking
     if (superLink && getMobMod(MOBMOD_SUPERLINK) == superLink)
     {
