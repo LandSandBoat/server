@@ -22,10 +22,10 @@
 #ifndef _BATTLEENTITY_H
 #define _BATTLEENTITY_H
 
+#include <mutex>
 #include <set>
 #include <unordered_map>
 #include <vector>
-#include <mutex>
 
 #include "../alliance.h"
 #include "../map.h"
