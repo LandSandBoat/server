@@ -39,6 +39,7 @@ zones[xi.zone.YUHTUNGA_JUNGLE] =
         ALREADY_HAVE_ALL_FRAGS      = 7686,  -- You have obtained all of the fragments. You must hurry to the ruins of the ancient shrine!
         FOUND_ALL_FRAGS             = 7687,  -- You have obtained <keyitem>! You now have all 8 fragments of light!
         ZILART_MONUMENT             = 7688,  -- It is an ancient Zilart monument.
+        THE_OPO_OPOS_ATTACK         = 7704,  -- The Opo-opos attack!
         LOGGING_IS_POSSIBLE_HERE    = 7705,  -- Logging is possible here if you have <item>.
         HARVESTING_IS_POSSIBLE_HERE = 7712,  -- Harvesting is possible here if you have <item>.
         SOMETHING_IS_BURIED_HERE    = 7766,  -- It looks like something is buried here. If you had <item> you could dig it up.
@@ -49,6 +50,7 @@ zones[xi.zone.YUHTUNGA_JUNGLE] =
         PLAYER_OBTAINS_TEMP_ITEM    = 7881,  -- <name> obtains the temporary item: <item>!
         ALREADY_POSSESS_TEMP        = 7882,  -- You already possess that temporary item.
         NO_COMBINATION              = 7887,  -- You were unable to enter a combination.
+        TOUCHING_RED_JEWEL          = 7690,  -- Touching the red jewel has infuriated the Opo-opos of the forest. It would be wise to leave immediately.
         REGIME_REGISTERED           = 10065, -- New training regime registered!
         COMMON_SENSE_SURVIVAL       = 12059, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
