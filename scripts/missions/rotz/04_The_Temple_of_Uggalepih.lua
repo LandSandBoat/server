@@ -31,7 +31,6 @@ mission.sections =
 
         [xi.zone.NORG] =
         {
-            ['Comitiolus'] = mission:event(6),
             ['Gilgamesh']  = mission:event(8),
         },
 

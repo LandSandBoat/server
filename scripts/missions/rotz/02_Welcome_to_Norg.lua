@@ -33,8 +33,6 @@ mission.sections =
                 end,
             },
 
-            ['Comitiolus'] = mission:event(6),
-
             onEventUpdate =
             {
                 [2] = function(player, csid, option, npc)

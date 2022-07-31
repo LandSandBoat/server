@@ -22,6 +22,7 @@ zones[xi.zone.BEHEMOTHS_DOMINION] =
         LOGIN_CAMPAIGN_UNDERWAY  = 7002,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER             = 7003,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         CONQUEST_BASE            = 7057,  -- Tallying conquest results...
+        AIR_AROUND_YOU_CHANGED   = 7322,  -- The air around you has suddenly changed!
         SOMETHING_BETTER         = 7323,  -- Don't you have something better to do right now?
         CANNOT_REMOVE_FRAG       = 7326,  -- It is an oddly shaped stone monument. A shining stone is embedded in it, but cannot be removed...
         ALREADY_OBTAINED_FRAG    = 7327,  -- You have already obtained this monument's <keyitem>. Try searching for another.

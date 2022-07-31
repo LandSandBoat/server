@@ -1,7 +1,7 @@
 local ID = require("scripts/zones/Norg/IDs")
 
 return {
-    ['_700']       = { event = 5 }, -- TODO: This might be incorrect and require ZM2 or greater
+    ['_700']       = { messageSpecial = ID.text.DOOR_IS_LOCKED },
     ['Aeka']       = { event = 120 },
     ['Comitiolus'] = { event = 72 },
     ['Heillal']    = { event = 64 },
