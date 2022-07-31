@@ -41,7 +41,7 @@ spell_object.onMobSpawn = function(mob)
 
     -- TODO: Her regular attacks have a big range (distance from mob, not AoE)
 
-    mob:setTrustTPSkillSettings(ai.tp.CLOSER, ai.s.HIGHEST)
+    mob:setTrustTPSkillSettings(ai.tp.CLOSER_UNTIL_TP, ai.s.HIGHEST, 2500)
 
     mob:addListener("WEAPONSKILL_USE", "SHANTOTTO_II_WEAPONSKILL_USE", function(mobArg, target, wsid, tp, action)
         if wsid == 3740 then -- Final Exam
