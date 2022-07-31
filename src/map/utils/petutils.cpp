@@ -481,8 +481,8 @@ namespace petutils
 
         float growth = 1.0;
         uint8 lvl    = PMob->GetMLevel();
-        uint8 lvlmax = PMob->m_maxLevel;
-        uint8 lvlmin = PMob->m_minLevel;
+        uint8 lvlmax = petStats->maxLevel;
+        uint8 lvlmin = petStats->minLevel;
 
         // give hp boost every 10 levels after 25
         // special boosts at 25 and 50
