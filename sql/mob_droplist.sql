@@ -24956,11 +24956,12 @@ INSERT INTO `mob_droplist` VALUES (3076,0,0,1000,17971,112); -- Tartaglia (11.2%
 INSERT INTO `mob_droplist` VALUES (3077,0,0,1000,1695,155); -- Bunch Of Habanero Peppers (15.5%)
 
 -- ZoneID:  11 - Moblin Ashman
-INSERT INTO `mob_droplist` VALUES (3078,0,0,1000,1729,200);    -- Moblin Hotrok (20.0%)
-INSERT INTO `mob_droplist` VALUES (3078,0,0,1000,1062,110);    -- Oldton Chest Key (11.0%)
-INSERT INTO `mob_droplist` VALUES (3078,0,0,1000,1632,80);     -- Moblin Mail (8.0%)
-INSERT INTO `mob_droplist` VALUES (3078,0,0,1000,1625,40);     -- Moblin Helm (4.0%)
-INSERT INTO `mob_droplist` VALUES (3078,0,0,1000,1631,@VRARE); -- Moblin Armor (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (3078,0,0,1000,1729,@COMMON);   -- Moblin Hotrok (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (3078,0,0,1000,1858,@UNCOMMON); -- Moblumin Ingot (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (3078,0,0,1000,1062,@RARE);     -- Oldton Chest Key (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (3078,0,0,1000,1632,@RARE);     -- Moblin Mail (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (3078,0,0,1000,1625,@VRARE);    -- Moblin Helm (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (3078,0,0,1000,1631,@VRARE);    -- Moblin Armor (Very Rare, 1%)
 
 -- ZoneID: 120 - Thunderclaw Thuban
 INSERT INTO `mob_droplist` VALUES (3079,0,0,1000,16028,136); -- Psyche Earring (13.6%)

@@ -300,6 +300,16 @@ void CMobEntity::TapDeaggroTime()
 bool CMobEntity::CanLink(position_t* pos, int16 superLink)
 {
     TracyZoneScoped;
+
+    if (loc.zone->HasReducedVerticalAggro())
+    {
+        float verticalDistance = abs(loc.p.y - (*pos).y);
+        if (verticalDistance > 3.5f)
+        {
+            return false;
+        }
+    }
+
     // handle super linking
     if (superLink && getMobMod(MOBMOD_SUPERLINK) == superLink)
     {
@@ -891,14 +901,14 @@ float CMobEntity::ApplyTH(int16 m_THLvl, int16 rate)
 {
     TracyZoneScoped;
 
-    float multi = 1.00f;
-    bool ultra_rare = (rate == 1);
-    bool super_rare = (rate == 5);
-    bool very_rare = (rate == 10);
-    bool rare = (rate == 50);
-    bool uncommon = (rate == 100);
-    bool common = (rate == 150);
-    bool very_common = (rate == 240);
+    float multi       = 1.00f;
+    bool  ultra_rare  = (rate == 1);
+    bool  super_rare  = (rate == 5);
+    bool  very_rare   = (rate == 10);
+    bool  rare        = (rate == 50);
+    bool  uncommon    = (rate == 100);
+    bool  common      = (rate == 150);
+    bool  very_common = (rate == 240);
 
     if (ultra_rare)
     {
@@ -992,30 +1002,30 @@ float CMobEntity::ApplyTH(int16 m_THLvl, int16 rate)
     else if (rare)
     {
         if (m_THLvl < 3)
-         {
-             multi = 1.00f + (0.20f * m_THLvl);
-             return multi;
-         }
-         else if (m_THLvl < 8)
-         {
-             multi = 1.40f + (0.10f * (m_THLvl - 2));
-             return multi;
-         }
-         else if (m_THLvl < 12)
-         {
-             multi = 1.90f + (0.20f * (m_THLvl - 7));
-             return multi;
-         }
-         else if (m_THLvl < 14)
-         {
-             multi = 2.70f + (0.40f * (m_THLvl - 11));
-             return multi;
-         }
-         else
-         {
-             multi = 3.50f + (0.50f * (m_THLvl - 13));
-             return multi;
-         }
+        {
+            multi = 1.00f + (0.20f * m_THLvl);
+            return multi;
+        }
+        else if (m_THLvl < 8)
+        {
+            multi = 1.40f + (0.10f * (m_THLvl - 2));
+            return multi;
+        }
+        else if (m_THLvl < 12)
+        {
+            multi = 1.90f + (0.20f * (m_THLvl - 7));
+            return multi;
+        }
+        else if (m_THLvl < 14)
+        {
+            multi = 2.70f + (0.40f * (m_THLvl - 11));
+            return multi;
+        }
+        else
+        {
+            multi = 3.50f + (0.50f * (m_THLvl - 13));
+            return multi;
+        }
     }
     else if (uncommon)
     {
