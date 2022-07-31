@@ -30,7 +30,7 @@ local fishRewards =
     [4469] = -- Giant Catfish
     {
         gil = 50,
-        title = tpz.title.CORDON_BLEU_FISHER,
+        title = xi.title.CORDON_BLEU_FISHER,
         items =
         {
             {chance = 7.2, itemId = 17076}, -- Earth Wand
@@ -39,7 +39,7 @@ local fishRewards =
     [4481] = -- Ogre Eel
     {
         gil = 16,
-        title = tpz.title.CORDON_BLEU_FISHER,
+        title = xi.title.CORDON_BLEU_FISHER,
         items =
         {
             {chance = 2.6, itemId = 13480}, -- Turquoise Ring
@@ -91,7 +91,7 @@ local fishRewards =
     [4451] = -- Silver Shark
     {
         gil = 250,
-        title = tpz.title.ACE_ANGLER,
+        title = xi.title.ACE_ANGLER,
         items =
         {
             {chance = 1.3, itemId = 16837}, -- Trident
@@ -347,8 +347,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 function onTrigger(player, npc)
-    local theRealGift    = player:getQuestStatus(OTHER_AREAS_LOG, xi.quest.id.otherAreas.THE_REAL_GIFT)
-    local insideTheBelly = player:getQuestStatus(OTHER_AREAS_LOG, xi.quest.id.otherAreas.INSIDE_THE_BELLY)
+    local theRealGift    = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_REAL_GIFT)
+    local insideTheBelly = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.INSIDE_THE_BELLY)
     local fishingSkill = player:getSkillLevel(xi.skill.FISHING)
     local fishingRank = player:getSkillRank(xi.skill.FISHING)
     local realSkill = (fishingSkill - fishingRank) / 32
