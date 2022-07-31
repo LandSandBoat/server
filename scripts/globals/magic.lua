@@ -642,7 +642,7 @@ end
 function getMagicResist(magicHitRate, target, element)
     local evaMult = 1
 
-    if target ~= nil and target:getObjType() == xi.objType.MOB then
+    if target ~= nil and element ~= nil and target:getObjType() == xi.objType.MOB then
         evaMult = target:getMod(xi.magic.eleEvaMult[element]) / 100
         local sortEvaMult = {1.50, 1.30, 1.15, 1.00, 0.85, 0.70, 0.60, 0.50, 0.40, 0.30, 0.25, 0.20, 0.15, 0.10, 0.05}
 
