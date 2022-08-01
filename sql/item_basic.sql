@@ -5344,8 +5344,8 @@ INSERT INTO `item_basic` VALUES (5649,0,'handful_of_roasted_almonds','roasted_al
 INSERT INTO `item_basic` VALUES (5650,0,'pair_of_nopales','nopales',12,1548,59,0,780);
 INSERT INTO `item_basic` VALUES (5651,0,'burdock_root','burdock',12,1548,59,0,748);
 INSERT INTO `item_basic` VALUES (5652,0,'plate_of_anchovies','anchovy',12,1548,53,0,246);
-INSERT INTO `item_basic` VALUES (5653,0,'cherry_muffin','cherry_muffin',12,1548,57,0,62);
-INSERT INTO `item_basic` VALUES (5654,0,'cherry_muffin_+1','cherry_muffin_+1',12,1548,57,0,91);
+INSERT INTO `item_basic` VALUES (5653,0,'cherry_muffin','cherry_muffin',12,1548,57,0,160);
+INSERT INTO `item_basic` VALUES (5654,0,'cherry_muffin_+1','cherry_muffin_+1',12,1548,57,0,374);
 INSERT INTO `item_basic` VALUES (5655,0,'coffeecake_muffin','coffee_muffin',12,1548,57,0,20);
 INSERT INTO `item_basic` VALUES (5656,0,'coffeecake_muffin_+1','coff._muffin_+1',12,1548,57,0,30);
 INSERT INTO `item_basic` VALUES (5657,0,'army_biscuit','army_biscuit',99,1548,56,0,30);
@@ -9756,7 +9756,7 @@ INSERT INTO `item_basic` VALUES (12423,0,'darksteel_armet_+1','dst._armet_+1',1,
 INSERT INTO `item_basic` VALUES (12424,0,'iron_mask','iron_mask',1,2084,17,0,1710);
 INSERT INTO `item_basic` VALUES (12425,0,'silver_mask','silver_mask',1,2084,17,0,2892);
 INSERT INTO `item_basic` VALUES (12426,0,'banded_helm','banded_helm',1,2084,17,0,2685);
-INSERT INTO `item_basic` VALUES (12427,0,'bascinet','bascinet',1,2084,17,0,3443);
+INSERT INTO `item_basic` VALUES (12427,0,'bascinet','bascinet',1,2084,17,0,6426);
 INSERT INTO `item_basic` VALUES (12428,0,'celata','celata',1,2084,17,0,3969);
 INSERT INTO `item_basic` VALUES (12429,0,'adaman_celata','adaman_celata',1,63572,0,1,0);
 INSERT INTO `item_basic` VALUES (12430,0,'royal_knights_bascinet','ryl.kgt._bascinet',1,2052,17,0,3210);
@@ -9768,7 +9768,7 @@ INSERT INTO `item_basic` VALUES (12435,0,'coral_visor','coral_visor',1,2084,17,0
 INSERT INTO `item_basic` VALUES (12436,0,'dragon_mask','dragon_mask',1,2084,17,0,8036);
 INSERT INTO `item_basic` VALUES (12437,0,'gavial_mask','gavial_mask',1,2084,17,0,675);
 INSERT INTO `item_basic` VALUES (12438,0,'centurions_visor','centurions_visor',1,2052,17,0,2181);
-INSERT INTO `item_basic` VALUES (12439,0,'bascinet_+1','bascinet_+1',1,2080,17,0,4303);
+INSERT INTO `item_basic` VALUES (12439,0,'bascinet_+1','bascinet_+1',1,2080,17,0,6600);
 INSERT INTO `item_basic` VALUES (12440,0,'leather_bandana','leather_bandana',1,2084,17,0,110);
 INSERT INTO `item_basic` VALUES (12441,0,'lizard_helm','lizard_helm',1,2084,17,0,178);
 INSERT INTO `item_basic` VALUES (12442,0,'studded_bandana','studded_bandana',1,2084,17,0,1100);
