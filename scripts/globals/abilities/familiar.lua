@@ -27,7 +27,7 @@ end
 ability_object.onUseAbility = function(player, target, ability)
     player:getPet():setLocalVar("ReceivedFamiliar", 1)
     player:familiar()
-
+    target:setLocalVar("ReceivedFamiliar", 1)
     -- pets powers increase!
     ability:setMsg(xi.msg.basic.FAMILIAR_PC)
 
