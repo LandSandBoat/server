@@ -14,10 +14,17 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.STR_DOWN
+    local bubbleCap = 0
 
     xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 10, 3, 120)
 
-    local dmgmod = xi.mobskills.mobBreathMove(mob, target, 0.15, 5, xi.magic.ele.WATER, 200)
+    if mob:getMaster() then
+        bubbleCap = 2000
+    else
+        bubbleCap = 200
+    end
+
+    local dmgmod = xi.mobskills.mobBreathMove(mob, target, 0.15, 5, xi.magic.ele.WATER, bubbleCap)
 
     local dmg = xi.mobskills.mobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.WATER, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
     target:takeDamage(dmg, mob, xi.attackType.BREATH, xi.damageType.WATER)
