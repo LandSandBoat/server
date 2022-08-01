@@ -1,4 +1,4 @@
------------------------------------
+ -----------------------------------
 -- Area: Eastern Altepa Desert
 --  NPC: qm2 (???)
 -- Involved In Quest: 20 in Pirate Years
@@ -18,8 +18,8 @@ entity.onTrigger = function(player, npc)
 
     if twentyInPirateYearsCS == 3 and tsuchigumoKilled <= 1 and not GetMobByID(ID.mob.TSUCHIGUMO_OFFSET):isSpawned() and not GetMobByID(ID.mob.TSUCHIGUMO_OFFSET + 1):isSpawned() then
         player:messageSpecial(ID.text.SENSE_OF_FOREBODING)
-        SpawnMob(ID.mob.TSUCHIGUMO_OFFSET):updateClaim(player)
-        SpawnMob(ID.mob.TSUCHIGUMO_OFFSET + 1):updateClaim(player)
+        SpawnMob(ID.mob.TSUCHIGUMO_OFFSET)
+        SpawnMob(ID.mob.TSUCHIGUMO_OFFSET + 1)
     elseif twentyInPirateYearsCS == 3 and tsuchigumoKilled >= 2 then
         player:addKeyItem(xi.ki.TRICK_BOX)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TRICK_BOX)

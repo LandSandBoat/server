@@ -2215,6 +2215,12 @@ namespace charutils
                 }
                 break;
             case SLOT_RANGED:
+                if (hasValidStyle(PChar, PItem, appearance))
+                    PChar->mainlook.ranged = appearanceModel;
+                else
+                    PChar->mainlook.ranged = PChar->look.ranged;
+                break;
+
             case SLOT_AMMO:
                 // Appears as though these aren't implemented by SE.
                 break;

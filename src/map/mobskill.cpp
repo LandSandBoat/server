@@ -235,6 +235,18 @@ uint16 CMobSkill::getPetAnimationID() const
         return m_AnimID - 493;
     }
 
+    // Diabolos pet animation range 141 to 149.
+    // Pet animations 142, 145, 148, 149 are directly referenced in sql
+    if (m_AnimID == 915) // Diabolos Camisado
+        return 141;
+    if (m_AnimID == 916) // Diabolos Noctoshield
+        return 143;
+    if (m_AnimID == 917) // Diabolos Ultimate Terror
+        return 144;
+    if (m_AnimID == 918) // Diabolos Nightmare
+        return 146;
+    //  return 147; pet animationID 147 is an unused Diabolos aoe move encircling him in red rings/script
+
     return m_AnimID;
 }
 

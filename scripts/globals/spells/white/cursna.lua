@@ -20,7 +20,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     local final = nil
 
     spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
-    if (target:hasStatusEffect(xi.effect.DOOM) and power > math.random(1, 100)) then
+    if (target:hasStatusEffect(xi.effect.DOOM) and target:getStatusEffect(xi.effect.DOOM):getPower()<=10  and power > math.random(1, 100)) then
         -- remove doom
         final = xi.effect.DOOM
         target:delStatusEffect(xi.effect.DOOM)

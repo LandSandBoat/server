@@ -70,16 +70,20 @@ entity.onEventFinish = function(player, csid, option)
     if csid == 110 or csid == 109 then
         local objecttrade = player:getCharVar("harithreward")
 
-        player:tradeComplete()
-        player:addItem(objecttrade)
-        player:messageSpecial(ID.text.ITEM_OBTAINED, objecttrade)
-        player:setCharVar("harithreward", 0)
-
-        if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.EMPTY_MEMORIES) == QUEST_ACCEPTED then
-            player:addFame(xi.quest.fame_area.JEUNO, 30)
-            player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.EMPTY_MEMORIES)
+        if player:hasItem(objecttrade) then
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, objecttrade)
         else
-            player:addFame(xi.quest.fame_area.JEUNO, 5)
+            player:tradeComplete()
+            player:addItem(objecttrade)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, objecttrade)
+            player:setCharVar("harithreward", 0)
+
+            if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.EMPTY_MEMORIES) == QUEST_ACCEPTED then
+                player:addFame(xi.quest.fame_area.JEUNO, 30)
+                player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.EMPTY_MEMORIES)
+            else
+                player:addFame(xi.quest.fame_area.JEUNO, 5)
+            end
         end
     end
 end

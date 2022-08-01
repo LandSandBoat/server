@@ -6,8 +6,15 @@
 local ID = require("scripts/zones/Labyrinth_of_Onzozo/IDs")
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
+mixins = {require("scripts/mixins/rage")}
 -----------------------------------
 local entity = {}
+
+entity.onMobSpawn = function(mob)
+    if mob:getID() == ID.mob.ONZOZO_PH then
+        mob:setLocalVar("[rage]timer", 600) -- 10 minutes
+    end
+end
 
 entity.onMobDeath = function(mob, player, isKiller)
     xi.regime.checkRegime(player, mob, 774, 1, xi.regime.type.GROUNDS)

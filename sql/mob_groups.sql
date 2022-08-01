@@ -13348,7 +13348,7 @@ INSERT INTO `mob_groups` VALUES (12,1677,213,'Goblin_Hunter',960,0,1095,0,0,51,5
 INSERT INTO `mob_groups` VALUES (13,2790,213,'Mysticmaker_Profblix',0,128,1763,4500,0,50,52,0);
 INSERT INTO `mob_groups` VALUES (14,1654,213,'Goblin_Enchanter',960,0,1049,0,0,51,58,0);
 INSERT INTO `mob_groups` VALUES (15,1373,213,'Flying_Manta',960,0,851,0,0,55,59,0);
-INSERT INTO `mob_groups` VALUES (16,2439,213,'Lord_of_Onzozo',0,32,1536,13000,0,74,77,0);
+INSERT INTO `mob_groups` VALUES (16,2439,213,'Lord_of_Onzozo',0,32,1536,13000,10000,74,77,0);
 INSERT INTO `mob_groups` VALUES (17,3113,213,'Peg_Powler',0,32,1985,10000,0,61,61,0);
 INSERT INTO `mob_groups` VALUES (18,4309,213,'Water_Elemental',960,4,2629,0,0,60,62,0);
 INSERT INTO `mob_groups` VALUES (19,3976,213,'Torama',960,0,2455,0,0,70,73,0);

@@ -680,6 +680,11 @@ namespace mobutils
                 {
                     PMob->defaultMobMod(MOBMOD_SPECIAL_SKILL, 1388);
                 }
+                else if (PMob->m_Family == 337) // Dyna-Quadav
+                {
+                    PMob->defaultMobMod(MOBMOD_SPECIAL_SKILL, 1123);
+                }
+
                 else
                 {
                     // All other rangers
@@ -697,6 +702,11 @@ namespace mobutils
                     PMob->defaultMobMod(MOBMOD_SPECIAL_SKILL, 1388);
                     PMob->defaultMobMod(MOBMOD_SPECIAL_COOL, 12);
                 }
+                else if (PMob->m_Family == 337) // Dyna-Quadav
+                {
+                    PMob->defaultMobMod(MOBMOD_SPECIAL_SKILL, 1123);
+                }
+
                 else if (PMob->m_Family != 335) // exclude NIN Maat
                 {
                     PMob->defaultMobMod(MOBMOD_SPECIAL_SKILL, 272);

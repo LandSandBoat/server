@@ -1,8 +1,8 @@
 -----------------------------------
---  Flame Breath
+--  Lightning Breath
 --
---  Description: Deals Flame breath damage to enemies within a fan-shaped area originating from the caster.
---  Type: Magical (Flame)
+--  Description: Deals Lightning breath damage to enemies within a fan-shaped area originating from the caster.
+--  Type: Magical (Lightning)
 -----------------------------------
 require("scripts/globals/settings")
 require("scripts/globals/status")
@@ -16,7 +16,7 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
-    local dmgmod = xi.mobskills.mobBreathMove(mob, target, 0.3, 0.75, xi.magic.ele.THUNDER, 460)
+    local dmgmod = xi.mobskills.mobBreathMove(mob, target, 0.15, 0.25, xi.magic.ele.LIGHTNING, 125)
 
     local dmg = xi.mobskills.mobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.LIGHTNING, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
     target:takeDamage(dmg, mob, xi.attackType.BREATH, xi.damageType.LIGHTNING)

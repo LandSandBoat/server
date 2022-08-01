@@ -70,11 +70,10 @@ local items =
         rank = 5,
         cost = 70000
     },
-
     [2] =
     {
-        id = 14394,
-        rank = 5,
+        id = 14394, -- Goldsmith's Apron
+        rank = 7,
         cost = 100000
     },
 

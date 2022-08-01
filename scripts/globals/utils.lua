@@ -216,6 +216,7 @@ function utils.thirdeye(target)
     --third eye doesnt care how many shadows, so attempt to anticipate, but reduce
     --chance of anticipate based on previous successful anticipates.
     local teye = target:getStatusEffect(xi.effect.THIRD_EYE)
+    local seigan = target:getStatusEffect(xi.effect.SEIGAN)
 
     if teye == nil then
         return false
@@ -225,11 +226,16 @@ function utils.thirdeye(target)
 
     if prevAnt == 0 or (math.random() * 100) < (80 - (prevAnt * 10)) then
         --anticipated!
-        target:delStatusEffect(xi.effect.THIRD_EYE)
+        if seigan == nil or prevAnt == 6 or math.random()*100 > 100-(prevAnt+1)*15 then
+            target:delStatusEffect(xi.effect.THIRD_EYE)
+        else
+            teye:setPower(prevAnt + 1)
+        end
+        return true
+    else
+        target:delStatusEffect(xi.effect.THIRD_EYE) -- how did we get here?  the previous clause checks for prevAnt == 6
         return true
     end
-
-    return false
 end
 
 -----------------------------------

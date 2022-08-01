@@ -1994,6 +1994,7 @@ namespace fishingutils
                 PChar->hookDelay = GetHookTime(PChar);
                 PChar->animation = ANIMATION_FISHING_START;
                 PChar->updatemask |= UPDATE_HP;
+                PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_INVISIBLE);
             }
             else
             {

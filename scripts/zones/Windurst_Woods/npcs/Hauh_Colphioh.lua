@@ -60,7 +60,7 @@ local items =
     [1] =
     {
         id = 13946, -- Magnifying Spectacles
-        rank = 6,
+        rank = 5,
         cost = 70000
     },
 
