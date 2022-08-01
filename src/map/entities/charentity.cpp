@@ -1882,24 +1882,25 @@ void CCharEntity::OnRaise()
 void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
 {
     TracyZoneScoped;
-    auto* PTarget = static_cast<CBattleEntity*>(state.GetTarget());
-    auto* PItem   = state.GetItem();
-
-    if (battleutils::IsParalyzed(this))
-    {
-        // display paralyzed
-        // TODO: Make paralyze eat the item or charge when proced.
-        loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(this, PTarget, 0, 0, MSGBASIC_IS_PARALYZED));
-        return;
-    }
+    auto* PTarget          = static_cast<CBattleEntity*>(state.GetTarget());
+    auto* PItem            = state.GetItem();
+    bool  isParalyzed      = battleutils::IsParalyzed(this);
+    bool  itemLoss         = lua["xi"]["settings"]["map"]["ITEM_PARALYSIS_LOSS"].get<bool>();
+    bool  scrollProtection = lua["xi"]["settings"]["map"]["ITEM_PARALYSIS_SCROLL_PROTECTION"].get<bool>();
+    // clang-format off
+    bool isScroll = (PItem->getID() >= 4606 && PItem->getID() <= 4638) || PItem->getID() == 4641 ||
+                    (PItem->getID() >= 4646 && PItem->getID() <= 4647) || (PItem->getID() >= 4651 && PItem->getID() <= 4851) ||
+                    (PItem->getID() >= 4853 && PItem->getID() <= 4863) || (PItem->getID() >= 4866 && PItem->getID() <= 4958) ||
+                    (PItem->getID() >= 4961 && PItem->getID() <= 5106) || (PItem->getID() >= 6569 && PItem->getID() <= 6571);
+    // clang-format on
 
     // TODO: I'm sure this is supposed to be in the action packet... (animation, message)
     if (PItem->getAoE())
     {
         // clang-format off
-        PTarget->ForParty([this, PItem, PTarget](CBattleEntity* PMember)
+        PTarget->ForParty([this, PItem, PTarget, isParalyzed](CBattleEntity* PMember)
         {
-            if (!PMember->isDead() && distance(PTarget->loc.p, PMember->loc.p) <= 10)
+            if (!PMember->isDead() && distance(PTarget->loc.p, PMember->loc.p) <= 10 && !isParalyzed)
             {
                 luautils::OnItemUse(this, PMember, PItem);
             }
@@ -1908,7 +1909,10 @@ void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
     }
     else
     {
-        luautils::OnItemUse(this, PTarget, PItem);
+        if (!isParalyzed)
+        {
+            luautils::OnItemUse(this, PTarget, PItem);
+        }
     }
 
     action.id         = this->id;
@@ -1920,6 +1924,22 @@ void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
 
     actionTarget_t& actionTarget = actionList.getNewActionTarget();
     actionTarget.animation       = PItem->getAnimationID();
+
+    if (isParalyzed)
+    {
+        actionTarget.reaction   = REACTION::NONE;
+        actionTarget.speceffect = SPECEFFECT::NONE;
+        //actionTarget.animation  = 54; // TODO: Fix Animation for Paralysis
+        actionTarget.param      = 0;
+        actionTarget.messageID  = 0;
+        actionTarget.knockback  = 0;
+    }
+
+    if ((isParalyzed && scrollProtection && isScroll && itemLoss) || (isParalyzed && !itemLoss)) // Become paralyzed and stop executing.
+    {
+        loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(this, PTarget, 0, 0, MSGBASIC_IS_PARALYZED));
+        return;
+    }
 
     if (PItem->isType(ITEM_EQUIPMENT))
     {
@@ -1943,10 +1963,20 @@ void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
             this->PRecastContainer->Add(RECAST_ITEM, PItem->getSlotID() << 8 | PItem->getLocationID(),
                                         PItem->getReuseTime() / 1000); // add recast timer to Recast List from any bag
         }
+
+        if (isParalyzed)
+        {
+            loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(this, PTarget, 0, 0, MSGBASIC_IS_PARALYZED));
+        }
     }
     else // разблокируем все предметы, кроме экипирвоки
     {
         PItem->setSubType(ITEM_UNLOCKED);
+
+        if (isParalyzed)
+        {
+            loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(this, PTarget, 0, 0, MSGBASIC_IS_PARALYZED));
+        }
 
         charutils::UpdateItem(this, PItem->getLocationID(), PItem->getSlotID(), -1, true);
     }
