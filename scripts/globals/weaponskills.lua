@@ -1300,7 +1300,7 @@ function handleWSGorgetBelt(attacker)
 
     if attacker:getObjType() == xi.objType.PC then
         -- TODO: Get these out of itemid checks when possible.
-        local elementalGorget = { 15495, 15498, 15500, 15497, 15496, 15499, 15501, 15502 }
+        local elementalGorget = { 15495, 15496, 15497, 15498, 15499, 15500, 15501, 15502 }
         local elementalBelt =   { 11755, 11758, 11760, 11757, 11756, 11759, 11761, 11762 }
         local neck = attacker:getEquipID(xi.slot.NECK)
         local belt = attacker:getEquipID(xi.slot.WAIST)
