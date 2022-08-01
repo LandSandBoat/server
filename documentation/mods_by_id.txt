@@ -249,8 +249,9 @@
     DUAL_WIELD                   = 259, // Percent reduction in dual wield delay.
     CURE_POTENCY_II              = 260, // % cure potency II | bonus from gear is capped at 30
 
-    // SPARE IDs 261 to 287
+    // SPARE IDs 261 to 286
 
+    NULL_BREATH_DAMAGE           = 287, // Occasionally annuls damage from breath attacks, in percents
     DOUBLE_ATTACK                = 288, // Percent chance to proc
     SUBTLE_BLOW                  = 289, // How much TP to reduce.
     ENF_MAG_POTENCY              = 290, // Increases Enfeebling magic potency %
