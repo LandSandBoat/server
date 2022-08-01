@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: Eastern_Altepa_Desert (114)
---
 -----------------------------------
 local ID = require("scripts/zones/Eastern_Altepa_Desert/IDs")
 require("scripts/quests/i_can_hear_a_rainbow")

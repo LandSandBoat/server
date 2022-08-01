@@ -186,8 +186,8 @@ xi.mission.id =
         THE_GATE_OF_THE_GODS          = 24, -- ±
         ARK_ANGELS                    = 26, -- ±
         THE_SEALED_SHRINE             = 27, -- ±
-        THE_CELESTIAL_NEXUS           = 28,
-        AWAKENING                     = 30,
+        THE_CELESTIAL_NEXUS           = 28, -- ±
+        AWAKENING                     = 30, -- ±
         THE_LAST_VERSE                = 31,
         NONE                          = 65535,
     },
