@@ -84,7 +84,7 @@ CMobSkill* CMobSkillState::GetSkill()
 
 void CMobSkillState::SpendCost()
 {
-    if (m_PSkill->isTpSkill())
+    if (!m_PSkill->isTpFreeSkill())
     {
         m_spentTP            = m_PEntity->health.tp;
         m_PEntity->health.tp = 0;
