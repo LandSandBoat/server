@@ -7,7 +7,7 @@ require("scripts/globals/zone")
 
 cmdprops =
 {
-    permission = 1,
+    permission = 2,
     parameters = ""
 }
 
