@@ -51,7 +51,7 @@ entity.onEventFinish = function(player, csid, option)
         if npcUtil.popFromQM(player, npc, mobs, {
             hide = 1
         }) then
-            player:messageSpecial(ID.text.DRAWS_NEAR)
+            player:messageSpecial(ID.text.DRAWS_NEAR,xi.ki.VAULT_QUIPUS)
         end
     elseif csid == 49 then
         player:setCharVar("moral", 7)

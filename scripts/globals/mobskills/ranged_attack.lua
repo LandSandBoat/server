@@ -21,12 +21,10 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.RANGED, xi.damageType.PIERCING, info.hitslanded)
 
-    if (dmg > 0) then
-       target:addTP(20)
-       mob:addTP(80)
+    if skill:getMsg() ~= xi.msg.basic.SHADOW_ABSORB then
+        target:takeDamage(dmg, mob, xi.attackType.RANGED, xi.damageType.PIERCING)
     end
 
-    target:takeDamage(dmg, mob, xi.attackType.RANGED, xi.damageType.PIERCING)
     return dmg
 end
 
