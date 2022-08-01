@@ -2425,10 +2425,10 @@ xi.mobMod =
     SPELL_LIST          = 27, -- set spell list
     EXP_BONUS           = 28, -- bonus exp (bonus / 100) negative values reduce exp.
     ASSIST              = 29, -- mobs will assist me
-    SPECIAL_SKILL       = 30, -- give special skill
+    SPECIAL_SKILL       = 30, -- give special skill (example: Gigas boulder ranged attack)
     ROAM_DISTANCE       = 31, -- distance allowed to roam from spawn
     -- 32 Available for use
-    SPECIAL_COOL        = 33, -- cool down for special
+    SPECIAL_COOL        = 33, -- cool down for special (example: Time between Gigas boulder ranged attacks)
     MAGIC_COOL          = 34, -- cool down for magic
     STANDBACK_COOL      = 35, -- cool down time for standing back (casting spell while not in attack range)
     ROAM_COOL           = 36, -- cool down time in seconds after roaming
