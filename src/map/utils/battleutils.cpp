@@ -5187,7 +5187,7 @@ namespace battleutils
         }
         else if (xirand::GetRandomNumber(100) < PDefender->getMod(Mod::NULL_BREATH_DAMAGE))
         {
-        damage = 0;
+            damage = 0;
         }
         else
         {
