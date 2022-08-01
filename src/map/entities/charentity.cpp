@@ -1929,10 +1929,10 @@ void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
     {
         actionTarget.reaction   = REACTION::NONE;
         actionTarget.speceffect = SPECEFFECT::NONE;
-        //actionTarget.animation  = 54; // TODO: Fix Animation for Paralysis
-        actionTarget.param      = 0;
-        actionTarget.messageID  = 0;
-        actionTarget.knockback  = 0;
+        // actionTarget.animation  = 54; // TODO: Fix Animation for Paralysis
+        actionTarget.param     = 0;
+        actionTarget.messageID = 0;
+        actionTarget.knockback = 0;
     }
 
     if ((isParalyzed && scrollProtection && isScroll && itemLoss) || (isParalyzed && !itemLoss)) // Become paralyzed and stop executing.

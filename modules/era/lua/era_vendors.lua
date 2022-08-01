@@ -5,13 +5,13 @@ require("scripts/globals/shop")
 require("modules/module_utils")
 require("scripts/globals/keyitems")
 
-local m = Module:new("75_era_vendors")
+local m = Module:new("era_vendors")
 
 xi = xi or {}
-xi.customShop = xi.customShop or {}
+xi.eraShops = xi.eraShops or {}
 
 --Bastok Markets
-xi.customShop.Mjoll =
+xi.eraShops.Mjoll =
 {
     17321,    16, 1, -- Silver Arrow
     17318,     3, 2, -- Wooden Arrow
@@ -21,7 +21,7 @@ xi.customShop.Mjoll =
 }
 
 --Kazham
-xi.customShop.Toji_Mumosulah =
+xi.eraShops.Toji_Mumosulah =
 {
     112,    456, -- Yellow Jar
     13199,   95, -- Blood Stone
@@ -35,10 +35,11 @@ xi.customShop.Toji_Mumosulah =
     1021,   450, -- Hatchet
     4987,   328, -- Scroll of Army's Paeon II
     4988,  3312, -- Scroll of Army's Paeon III
+    4964, 10549, -- Scroll of Monomi: Ichi
 }
 
 --Lower Jeuno
-xi.customShop.Amalasanda =
+xi.eraShops.Amalasanda =
 {
     704,     36, -- Bamboo Stick
     829,  35070, -- Silk Cloth
@@ -62,14 +63,14 @@ xi.customShop.Amalasanda =
     1176,    70, -- Mizu-Deppo
 }
 
-xi.customShop.Creepstix =
+xi.eraShops.Creepstix =
 {
     5023,   8160, -- Scroll of Goblin Gavotte
     4734,   7074, -- Scroll of Protectra II
     4738,   1700, -- Scroll of Shellra
 }
 
-xi.customShop.Hasim =
+xi.eraShops.Hasim =
 {
     4668,   1760, -- Scroll of Barfire
     4669,   3624, -- Scroll of Barblizzard
@@ -90,7 +91,7 @@ xi.customShop.Hasim =
     4653,  32000, -- Scroll of Protect III
 }
 
-xi.customShop.Stinknix =
+xi.eraShops.Stinknix =
 {
     943,    294, -- Poison Dust
     944,   1035, -- Venom Dust
@@ -100,7 +101,7 @@ xi.customShop.Stinknix =
     17313, 1107, -- Grenade
 }
 
-xi.customShop.Susu =
+xi.eraShops.Susu =
 {
     4647, 20000, -- Scroll of Banishga II
     4683,  2030, -- Scroll of Barblind
@@ -120,7 +121,7 @@ xi.customShop.Susu =
     4627, 13300, -- Scroll of Viruna
 }
 
-xi.customShop.Taza =
+xi.eraShops.Taza =
 {
     4881, 10304, -- Scroll of Sleepga
     4658, 26244, -- Scroll of Shell III
@@ -141,7 +142,7 @@ xi.customShop.Taza =
 }
 
 --Nashmau
-xi.customShop.Mamaroon =
+xi.eraShops.Mamaroon =
 {
     4860,  27000, -- Scroll of Stun
     4708,   5160, -- Scroll of Enfire
@@ -155,7 +156,7 @@ xi.customShop.Mamaroon =
     2501,  29950, -- Black Puppet Turban
 }
 
-xi.customShop.Yoyoroon =
+xi.eraShops.Yoyoroon =
 {
     2239,  4940, -- Tension Spring
     2243,  4940, -- Loudspeaker
@@ -176,14 +177,14 @@ xi.customShop.Yoyoroon =
 }
 
 -- Norg
-xi.customShop.SolbyMaholby =
+xi.eraShops.SolbyMaholby =
 {
     17395,     9, -- Lugworm
     4899,    450, -- Earth Spirit Pact
 }
 
 -- Port Bastok
-xi.customShop.Valeriano =
+xi.eraShops.Valeriano =
 {
     4394,     10, -- Ginger Cookie
     17345,    43, -- Flute
@@ -196,7 +197,7 @@ xi.customShop.Valeriano =
 }
 
 -- Port Jeuno
-xi.customShop.Gekko =
+xi.eraShops.Gekko =
 {
     4150,  2387, -- Eye Drops
     4148,   290, -- Antidote
@@ -209,7 +210,7 @@ xi.customShop.Gekko =
 }
 
 -- Rabao
-xi.customShop.Brave_Ox =
+xi.eraShops.Brave_Ox =
 {
     4654,  77350, -- Protect IV
     4736,  73710, -- Protectra IV
@@ -218,10 +219,14 @@ xi.customShop.Brave_Ox =
     4720,  31850, -- Flash
     4750, 546000, -- Reraise III
     4638,  78260, -- Banish III
+    4701, 20092, -- Cura
+    4702, 62192, -- Sacrifice
+    4703, 64584, -- Esuna
+    4704, 30967, -- Auspice
 }
 
 -- Tavnazian Safehold
-xi.customShop.MazuroOozuro =
+xi.eraShops.MazuroOozuro =
 {
     17005,   108, -- Lufaise Fly
     17383,  2640, -- Clothespole
@@ -230,7 +235,7 @@ xi.customShop.MazuroOozuro =
 }
 
 -- Upper Jeuno
-xi.customShop.Antonia =
+xi.eraShops.Antonia =
 {
     17061,  6256, -- Mythril Rod
     17027, 11232, -- Oak Cudgel
@@ -243,7 +248,7 @@ xi.customShop.Antonia =
 }
 
 -- Windurst Waters
-xi.customShop.OrezEbrez =
+xi.eraShops.OrezEbrez =
 {
     12466, 20000,1, --Red Cap
     12458,  8972,1, --Soil Hachimaki
@@ -266,7 +271,7 @@ xi.customShop.OrezEbrez =
 }
 
 -- Windurst Woods
-xi.customShop.Mono_Nchaa =
+xi.eraShops.Mono_Nchaa =
 {
     17318,    3, 2, -- Wooden Arrow
     17308,   55, 2, -- Hawkeye
@@ -284,49 +289,48 @@ local lookupTable =
     No Shop: {"none",Zone,NPCName}
     Standard: {"standard",Zone,NPCName,customShopTable,fameArea,DIALOG_NAME}
     Tenshodo: {"tenshodo",Zone,NPCName,customShopTable,fameArea,DIALOG_NAME}
- ]]
+--]]
 {
- -- Bastok Markets
-    {"nation", "Bastok_Markets", "Mjoll", xi.customShop.Mjoll, xi.quest.fame_area.BASTOK, "MJOLL_SHOP_DIALOG", 1},
- -- Kazham
-    {"standard", "Kazham", "Toji_Mumosulah", xi.customShop.Toji_Mumosulah, xi.quest.fame_area.Kazham, "TOJIMUMOSULAH_SHOP_DIALOG", 1},
- -- Lower Jeuno
-    {"tenshodo", "Lower_Jeuno", "Amalasanda", xi.customShop.Amalasanda, xi.quest.fame_area.NORG, "AMALASANDA_SHOP_DIALOG", 1},
-    {"standard", "Lower_Jeuno", "Creepstix", xi.customShop.Creepstix, xi.quest.fame_area.JEUNO, "JUNK_SHOP_DIALOG", 1},
-    {"standard", "Lower_Jeuno", "Hasim", xi.customShop.Hasim, xi.quest.fame_area.JEUNO, "WAAG_DEEG_SHOP_DIALOG", 1},
-    {"standard", "Lower_Jeuno", "Susu", xi.customShop.Susu, xi.quest.fame_area.JEUNO, "WAAG_DEEG_SHOP_DIALOG", 1},
-    {"standard", "Lower_Jeuno", "Stinknix", xi.customShop.Stinknix, xi.quest.fame_area.JEUNO, "JUNK_SHOP_DIALOG", 1},
-    {"standard", "Lower_Jeuno", "Taza", xi.customShop.Taza, xi.quest.fame_area.JEUNO, "WAAG_DEEG_SHOP_DIALOG", 1},
- -- Mhaura
+    -- Bastok Markets
+    {"nation", "Bastok_Markets", "Mjoll", xi.eraShops.Mjoll, xi.quest.fame_area.BASTOK, "MJOLL_SHOP_DIALOG", 1},
+    -- Kazham
+    {"standard", "Kazham", "Toji_Mumosulah", xi.eraShops.Toji_Mumosulah, xi.quest.fame_area.Kazham, "TOJIMUMOSULAH_SHOP_DIALOG", 1},
+    -- Lower Jeuno
+    {"tenshodo", "Lower_Jeuno", "Amalasanda", xi.eraShops.Amalasanda, xi.quest.fame_area.NORG, "AMALASANDA_SHOP_DIALOG", 1},
+    {"standard", "Lower_Jeuno", "Creepstix", xi.eraShops.Creepstix, xi.quest.fame_area.JEUNO, "JUNK_SHOP_DIALOG", 1},
+    {"standard", "Lower_Jeuno", "Hasim", xi.eraShops.Hasim, xi.quest.fame_area.JEUNO, "WAAG_DEEG_SHOP_DIALOG", 1},
+    {"standard", "Lower_Jeuno", "Susu", xi.eraShops.Susu, xi.quest.fame_area.JEUNO, "WAAG_DEEG_SHOP_DIALOG", 1},
+    {"standard", "Lower_Jeuno", "Stinknix", xi.eraShops.Stinknix, xi.quest.fame_area.JEUNO, "JUNK_SHOP_DIALOG", 1},
+    {"standard", "Lower_Jeuno", "Taza", xi.eraShops.Taza, xi.quest.fame_area.JEUNO, "WAAG_DEEG_SHOP_DIALOG", 1},
+    -- Mhaura
     {"none", "Mhaura", "Tya_Padolih", xi.settings.main.ENABLE_WOTG},
- -- Nashmau
+    -- Nashmau
     {"none", "Nashmau","Chichiroon"},
-    {"nofame", "Nashmau", "Mamaroon", xi.customShop.Mamaroon, "MAMAROON_SHOP_DIALOG", xi.settings.main.ENABLE_TOAU},
-    {"nofame", "Nashmau", "Yoyoroon", xi.customShop.Yoyoroon, "YOYOROON_SHOP_DIALOG", xi.settings.main.ENABLE_TOAU},
- -- Norg
-    {"standard", "Norg", "Solby-Maholby", xi.customShop.SolbyMaholby, xi.quest.fame_area.NORG, "SOLBYMAHOLBY_SHOP_DIALOG", 1},
- -- port Bastok
-    {"standard", "Port_Bastok", "Valeriano", xi.customShop.Valeriano, xi.quest.fame_area.BASTOK, "VALERIANO_SHOP_DIALOG", 1},
- -- Port Jeuno
-    {"standard", "Port_Jeuno", "Gekko", xi.customShop.Gekko, xi.quest.fame_area.JEUNO, "DUTY_FREE_SHOP_DIALOG", 1},
+    {"nofame", "Nashmau", "Mamaroon", xi.eraShops.Mamaroon, "MAMAROON_SHOP_DIALOG", xi.settings.main.ENABLE_TOAU},
+    {"nofame", "Nashmau", "Yoyoroon", xi.eraShops.Yoyoroon, "YOYOROON_SHOP_DIALOG", xi.settings.main.ENABLE_TOAU},
+    -- Norg
+    {"standard", "Norg", "Solby-Maholby", xi.eraShops.SolbyMaholby, xi.quest.fame_area.NORG, "SOLBYMAHOLBY_SHOP_DIALOG", 1},
+    -- port Bastok
+    {"standard", "Port_Bastok", "Valeriano", xi.eraShops.Valeriano, xi.quest.fame_area.BASTOK, "VALERIANO_SHOP_DIALOG", 1},
+    -- Port Jeuno
+    {"standard", "Port_Jeuno", "Gekko", xi.eraShops.Gekko, xi.quest.fame_area.JEUNO, "DUTY_FREE_SHOP_DIALOG", 1},
     {"none", "Port_Jeuno", "Kindlix", 1},
     {"none", "Port_Jeuno", "Pyropox",1},
- -- Rabao
-    {"standard", "Rabao", "Brave_Ox", xi.customShop.Brave_Ox, xi.quest.fame_area.SELBINA_RABAO, "BRAVEOX_SHOP_DIALOG", 1},
- -- Selbina
+    -- Rabao
+    {"standard", "Rabao", "Brave_Ox", xi.eraShops.Brave_Ox, xi.quest.fame_area.SELBINA_RABAO, "BRAVEOX_SHOP_DIALOG", 1},
+    -- Selbina
     {"none", "Selbina", "Falgima", xi.settings.main.ENABLE_WOTG},
- -- Southern Sandoria
-    {"standard", "Southern_San_dOria", "Valeriano", xi.customShop.Valeriano, xi.quest.fame_area.SANDORIA, "VALERIANO_SHOP_DIALOG", 1},
- -- Tavnazian Safehold
-    {"nofame", "Tavnazian_Safehold", "Mazuro-Oozuro", xi.customShop.MazuroOozuro, "MAZUROOOZURO_SHOP_DIALOG", 1},
- -- Upper Jeuno
-    {"standard", "Upper_Jeuno", "Antonia", xi.customShop.Antonia, xi.quest.fame_area.JEUNO, "VIETTES_SHOP_DIALOG", 1},
- -- Windurst Waters
-    {"nation", "Windurst_Waters", "Orez-Ebrez", xi.customShop.OrezEbrez, xi.nation.WINDURST, "OREZEBREZ_SHOP_DIALOG", 1},
- -- Windurst Woods
-    {"nation", "Windurst_Woods", "Mono_Nchaa", xi.customShop.Mono_Nchaa, xi.nation.WINDURST, "MONONCHAA_SHOP_DIALOG", 1},
-    {"standard", "Windurst_Woods", "Valeriano", xi.customShop.Valeriano, xi.quest.fame_area.WINDURST, "VALERIANO_SHOP_DIALOG", 1},
-
+    -- Southern Sandoria
+    {"standard", "Southern_San_dOria", "Valeriano", xi.eraShops.Valeriano, xi.quest.fame_area.SANDORIA, "VALERIANO_SHOP_DIALOG", 1},
+    -- Tavnazian Safehold
+    {"nofame", "Tavnazian_Safehold", "Mazuro-Oozuro", xi.eraShops.MazuroOozuro, "MAZUROOOZURO_SHOP_DIALOG", 1},
+    -- Upper Jeuno
+    {"standard", "Upper_Jeuno", "Antonia", xi.eraShops.Antonia, xi.quest.fame_area.JEUNO, "VIETTES_SHOP_DIALOG", 1},
+    -- Windurst Waters
+    {"nation", "Windurst_Waters", "Orez-Ebrez", xi.eraShops.OrezEbrez, xi.nation.WINDURST, "OREZEBREZ_SHOP_DIALOG", 1},
+    -- Windurst Woods
+    {"nation", "Windurst_Woods", "Mono_Nchaa", xi.eraShops.Mono_Nchaa, xi.nation.WINDURST, "MONONCHAA_SHOP_DIALOG", 1},
+    {"standard", "Windurst_Woods", "Valeriano", xi.eraShops.Valeriano, xi.quest.fame_area.WINDURST, "VALERIANO_SHOP_DIALOG", 1},
 }
 
 for _, shop in pairs(lookupTable) do
