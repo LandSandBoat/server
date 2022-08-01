@@ -12651,7 +12651,7 @@ INSERT INTO `item_mods` VALUES (12517,1,22);   -- DEF: 22
 INSERT INTO `item_mods` VALUES (12517,2,15);   -- HP: 15
 INSERT INTO `item_mods` VALUES (12517,12,5);   -- INT: 5
 INSERT INTO `item_mods` VALUES (12517,360,4);  -- CHARM_TIME: 4
-INSERT INTO `item_mods` VALUES (12517,1182,5); -- Enhances Tame Success Rate
+INSERT INTO `item_mods` VALUES (12517,1166,5); -- Enhances Tame Success Rate
 
 -- Hunters Beret
 INSERT INTO `item_mods` VALUES (12518,1,21);  -- DEF: 21
@@ -21162,13 +21162,13 @@ INSERT INTO `item_mods` VALUES (14318,361,25); -- JUMP_TP_BONUS: 25
 INSERT INTO `item_mods` VALUES (14319,1,29);   -- DEF: 29
 INSERT INTO `item_mods` VALUES (14319,5,15);   -- MP: 15
 INSERT INTO `item_mods` VALUES (14319,27,-2);  -- ENMITY: -2
-INSERT INTO `item_mods` VALUES (14319,1182,5); -- Enhances Tame Success Rate
+INSERT INTO `item_mods` VALUES (14319,1166,5); -- Enhances Tame Success Rate
 
 -- Braves Kecks
 INSERT INTO `item_mods` VALUES (14320,1,30);   -- DEF: 30
 INSERT INTO `item_mods` VALUES (14320,5,16);   -- MP: 16
 INSERT INTO `item_mods` VALUES (14320,27,-3);  -- ENMITY: -3
-INSERT INTO `item_mods` VALUES (14320,1182,5); -- Enhances Tame Success Rate
+INSERT INTO `item_mods` VALUES (14320,1166,5); -- Enhances Tame Success Rate
 
 -- Igqira Lappas
 INSERT INTO `item_mods` VALUES (14321,1,30);   -- DEF: 30
@@ -28110,14 +28110,14 @@ INSERT INTO `item_mods` VALUES (15645,1,30);   -- DEF: 30
 INSERT INTO `item_mods` VALUES (15645,2,15);   -- HP: 15
 INSERT INTO `item_mods` VALUES (15645,5,15);   -- MP: 15
 INSERT INTO `item_mods` VALUES (15645,27,-4);  -- ENMITY: -4
-INSERT INTO `item_mods` VALUES (15645,1182,5); -- Enhances Tame Success Rate
+INSERT INTO `item_mods` VALUES (15645,1166,5); -- Enhances Tame Success Rate
 
 -- Stout Kecks
 INSERT INTO `item_mods` VALUES (15646,1,31);   -- DEF: 31
 INSERT INTO `item_mods` VALUES (15646,2,16);   -- HP: 16
 INSERT INTO `item_mods` VALUES (15646,5,16);   -- MP: 16
 INSERT INTO `item_mods` VALUES (15646,27,-5);  -- ENMITY: -5
-INSERT INTO `item_mods` VALUES (15646,1182,5); -- Enhances Tame Success Rate
+INSERT INTO `item_mods` VALUES (15646,1166,5); -- Enhances Tame Success Rate
 
 -- Askar Dirs
 INSERT INTO `item_mods` VALUES (15647,1,32); -- DEF: 32

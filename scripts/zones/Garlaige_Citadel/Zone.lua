@@ -84,15 +84,15 @@ zone_object.onRegionEnter = function(player, region)
                 -- send gate opening text to each player in zone
                 zonePlayer:messageSpecial(ID.text.BANISHING_GATES + leverSet)
 
-                gate:timer(1000 * time, function(gate)
+                gate:timer(1000 * time, function(gateArg)
                     -- send gate closing text to each player in zone
                     zonePlayer:messageSpecial(ID.text.BANISHING_GATES_CLOSING + leverSet)
                 end)
             end
 
-            gate:timer(1000 * time, function(gate)
+            gate:timer(1000 * time, function(gateArg)
                 -- set gate closed var to allow this gate to be opened again.
-                gate:setLocalVar("isOpen", 0)
+                gateArg:setLocalVar("isOpen", 0)
             end)
         end
     end
