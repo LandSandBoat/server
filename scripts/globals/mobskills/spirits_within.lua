@@ -24,28 +24,22 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     if (mob:getPool() == 4249) then -- Volker@Throne_Room only
-        target:showText(mob, zones[xi.zone.THRONE_ROOM].text.RETURN_TO_THE_DARKNESS)
+        target:showText(mob, zones[tpz.zone.THRONE_ROOM].text.RETURN_TO_THE_DARKNESS)
     end
 
     local tp = skill:getTP()
     local hp = mob:getHP()
     local dmg = 0
 
-    -- Should produce 1000 - 3750 @ full HP using the player formula, assuming 8k HP for AA EV.
-    -- dmg * 2.5, as wiki claims ~2500 at 100% HP, until a better formula comes along.
-    if (tp <= 2000) then -- 1000 - 2000
-        dmg = math.floor(hp * (math.floor(0.016 * tp) + 16) / 256)
-    else -- 2001 - 3000
-        dmg = math.floor(hp * (math.floor(0.072 * tp) - 96) / 256)
-    end
+    -- spirits within for monsters no longer takes TP into consideration - This was causing it to WILDLY do more damage than it was sopposed to
+    -- it is now more inline with retail captures also was going 2.5x damage
 
-    dmg = dmg * 2.5
+    dmg = math.floor(hp * (math.floor(0.016 * tp) + 16) / 256)
 
-    -- Believe it or not, it's been proven to be breath damage.
     dmg = target:breathDmgTaken(dmg)
 
     -- Handling phalanx
-    dmg = dmg - target:getMod(xi.mod.PHALANX)
+    dmg = dmg - target:getMod(tpz.mod.PHALANX)
 
     if (dmg < 0) then
         return 0
@@ -58,7 +52,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
         target:updateEnmityFromDamage(mob, dmg)
     end
 
-    target:takeDamage(dmg, mob, xi.attackType.BREATH, xi.damageType.ELEMENTAL)
+    target:takeDamage(dmg, mob, tpz.attackType.BREATH, tpz.damageType.ELEMENTAL)
     return dmg
 end
 
