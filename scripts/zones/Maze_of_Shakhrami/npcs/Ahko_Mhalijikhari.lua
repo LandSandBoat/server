@@ -21,7 +21,7 @@ entity.onTrigger = function(player, npc)
             player:startEvent(64) -- Remove ointment option
         end
     elseif player:hasKeyItem(xi.ki.INDIGESTED_MEAT) then
-            player:startEvent(65) -- After receiving KI, Ahko sends the player to Lumomo
+        player:startEvent(65) -- After receiving KI, Ahko sends the player to Lumomo
     else
         player:startEvent(61) -- Default dialogue
     end
@@ -32,7 +32,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 62 and option == 1 then
-        player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, 25, 0, 0)
+        player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, 20, 0, 0)
     elseif csid == 65 then
         player:delStatusEffect(xi.effect.LEVEL_RESTRICTION)
         player:setCharVar("EcoStatus", 203)
