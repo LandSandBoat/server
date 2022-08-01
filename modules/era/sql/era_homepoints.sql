@@ -73,10 +73,10 @@ UPDATE npc_list SET status = 2 WHERE npcid = "17748183" AND polutils_name = "Hom
 
 -- Mhaura
 UPDATE npc_list SET status = 0 WHERE npcid = "17797161" AND polutils_name = "Home Point #1";
-UPDATE npc_list SET status = 0 WHERE npcid = "17797162" AND polutils_name = "Home Point #2";
-UPDATE npc_list SET status = 0 WHERE npcid = "17797163" AND polutils_name = "Home Point #3";
-UPDATE npc_list SET status = 0 WHERE npcid = "17797164" AND polutils_name = "Home Point #4";
-UPDATE npc_list SET status = 0 WHERE npcid = "17797165" AND polutils_name = "Home Point #5";
+UPDATE npc_list SET status = 2 WHERE npcid = "17797162" AND polutils_name = "Home Point #2";
+UPDATE npc_list SET status = 2 WHERE npcid = "17797163" AND polutils_name = "Home Point #3";
+UPDATE npc_list SET status = 2 WHERE npcid = "17797164" AND polutils_name = "Home Point #4";
+UPDATE npc_list SET status = 2 WHERE npcid = "17797165" AND polutils_name = "Home Point #5";
 
 -- Misareaux Coast
 UPDATE npc_list SET status = 2 WHERE npcid = "16880010" AND polutils_name = "Home Point #1";
