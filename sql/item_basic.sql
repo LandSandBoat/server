@@ -14430,7 +14430,7 @@ INSERT INTO `item_basic` VALUES (17126,0,'elm_staff_+1','elm_staff_+1',1,2080,12
 INSERT INTO `item_basic` VALUES (17127,0,'oak_staff_+1','oak_staff_+1',1,2080,12,0,1798);
 INSERT INTO `item_basic` VALUES (17128,0,'legionnaires_staff','lgn._staff',1,2052,12,0,156);
 INSERT INTO `item_basic` VALUES (17129,0,'musketeers_pole','musketeers_pole',1,2052,12,0,6800);
-INSERT INTO `item_basic` VALUES (17130,0,'freeswords_staff','freeswords_staff',1,2052,12,0,1483);
+INSERT INTO `item_basic` VALUES (17130,0,'freeswords_staff','freeswords_staff',1,2052,12,0,148);
 INSERT INTO `item_basic` VALUES (17131,0,'lituus','lituus',1,2052,12,0,0);
 INSERT INTO `item_basic` VALUES (17132,0,'monster_signa','monster_signa',1,2052,12,0,751);
 INSERT INTO `item_basic` VALUES (17133,0,'chanters_staff','chanters_staff',1,34820,12,0,5933);
