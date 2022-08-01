@@ -196,7 +196,7 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
     }
 
     std::string fmtQuery =
-        "SELECT charid, partyid, charname, pos_zone, pos_prevzone, nation, rank_sandoria, rank_bastok, rank_windurst, race, nameflags, mjob, sjob, mlvl, slvl, languages, nnameflags, seacom_type "
+        "SELECT charid, partyid, charname, pos_zone, pos_prevzone, nation, rank_sandoria, rank_bastok, rank_windurst, race, nameflags, mjob, sjob, mlvl, slvl, languages, nnameflags, seacom_type, linkshellid1, linkshellid2 "
         "FROM accounts_sessions "
         "LEFT JOIN accounts_parties USING (charid) "
         "LEFT JOIN chars USING (charid) "
@@ -231,10 +231,12 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
             PPlayer->race     = (uint8)sql->GetIntData(9);
             PPlayer->rank     = (uint8)sql->GetIntData(6 + PPlayer->nation);
 
-            PPlayer->zone        = (PPlayer->zone == 0 ? PPlayer->prevzone : PPlayer->zone);
-            PPlayer->languages   = (uint8)sql->GetUIntData(15);
-            PPlayer->mentor      = sql->GetUIntData(16) & NFLAG_MENTOR;
-            PPlayer->seacom_type = (uint8)sql->GetUIntData(17);
+            PPlayer->zone         = (PPlayer->zone == 0 ? PPlayer->prevzone : PPlayer->zone);
+            PPlayer->languages    = (uint8)sql->GetUIntData(15);
+            PPlayer->mentor       = sql->GetUIntData(16) & NFLAG_MENTOR;
+            PPlayer->seacom_type  = (uint8)sql->GetUIntData(17);
+            PPlayer->linkshellid1 = (uint16)sql->GetUIntData(18);
+            PPlayer->linkshellid2 = (uint16)sql->GetUIntData(19);
 
             uint32 partyid  = sql->GetUIntData(1);
             uint32 nameflag = sql->GetUIntData(10);
@@ -366,6 +368,17 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
                     continue;
                 }
             }
+
+            // filter by linkshell
+            if (sr.lsFilter)
+            {
+                // 0(none equipped) or id doesn't match either linkshell = skip/continue
+                if (sr.lsId == 0 || (sr.lsId != PPlayer->linkshellid1 && sr.lsId != PPlayer->linkshellid2))
+                {
+                    continue;
+                }
+            }
+
             // dont show hidden gm
             if (nameflag & FLAG_ANON && nameflag & FLAG_GM)
             {

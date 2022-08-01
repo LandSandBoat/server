@@ -36,7 +36,8 @@ class AHPaginationModule : public CPPModule
             TracyZoneScoped;
 
             // Only intercept for action 0x05: Open List Of Sales / Wait
-            auto action = data.ref<uint8>(0x04);
+            auto action   = data.ref<uint8>(0x04);
+            auto quantity = data.ref<uint8>(0x10);
             if (action == 0x05)
             {
                 uint32 curTick = gettick();
@@ -93,7 +94,7 @@ class AHPaginationModule : public CPPModule
                 }
                 else
                 {
-                    PChar->pushPacket(new CAuctionHousePacket(action, 246, 0, 0)); // try again in a little while msg
+                    PChar->pushPacket(new CAuctionHousePacket(action, 246, 0, 0, quantity)); // try again in a little while msg
                 }
             }
             else // Otherwise, call original handler

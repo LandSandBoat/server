@@ -109,7 +109,8 @@ bool CPlayerController::Disengage()
 bool CPlayerController::Ability(uint16 targid, uint16 abilityid)
 {
     auto* PChar = static_cast<CCharEntity*>(POwner);
-    if (PChar->PAI->CanChangeState())
+    // verify the ability can be used before changing state
+    if (PChar->PAI->CanChangeState() && CanUseAbility(targid, abilityid))
     {
         CAbility* PAbility = ability::GetAbility(abilityid);
         if (!PAbility)
@@ -261,4 +262,59 @@ time_point CPlayerController::getLastErrMsgTime()
 CWeaponSkill* CPlayerController::getLastWeaponSkill()
 {
     return m_lastWeaponSkill;
+}
+
+bool CPlayerController::CanUseAbility(uint16 targid, uint16 abilityid)
+{
+    auto PChar    = static_cast<CCharEntity*>(POwner);
+    auto PAbility = ability::GetAbility(abilityid);
+
+    if (PChar->PRecastContainer->HasRecast(RECAST_ABILITY, PAbility->getRecastId(), PAbility->getRecastTime()))
+    {
+        PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_WAIT_LONGER));
+        return false;
+    }
+    if (PChar->StatusEffectContainer->HasStatusEffect({ EFFECT_AMNESIA, EFFECT_IMPAIRMENT }) ||
+        (!PAbility->isPetAbility() && !charutils::hasAbility(PChar, PAbility->getID())) ||
+        (PAbility->isPetAbility() && !charutils::hasPetAbility(PChar, PAbility->getID() - ABILITY_HEALING_RUBY)))
+    {
+        PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_UNABLE_TO_USE_JA2));
+        return false;
+    }
+    std::unique_ptr<CBasicPacket> errMsg;
+
+    auto PTarget = PChar->IsValidTarget(targid, PAbility->getValidTarget(), errMsg);
+    if (PTarget)
+    {
+        if (PChar != PTarget && distance(PChar->loc.p, PTarget->loc.p) > PAbility->getRange())
+        {
+            PChar->pushPacket(new CMessageBasicPacket(PChar, PTarget, 0, 0, MSGBASIC_TOO_FAR_AWAY));
+            return false;
+        }
+        if (!PChar->PAI->TargetFind->canSee(&PTarget->loc.p))
+        {
+            errMsg = std::make_unique<CMessageBasicPacket>(PChar, PTarget, PAbility->getID(), 0, MSGBASIC_CANNOT_PERFORM_ACTION);
+            PChar->HandleErrorMessage(errMsg);
+            return false;
+        }
+        if (PAbility->getID() >= ABILITY_HEALING_RUBY)
+        {
+            // Blood pact MP costs are stored under animation ID
+            if (PChar->health.mp < PAbility->getAnimationID())
+            {
+                PChar->pushPacket(new CMessageBasicPacket(PChar, PTarget, 0, 0, MSGBASIC_UNABLE_TO_USE_JA));
+                return false;
+            }
+        }
+        CBaseEntity* PMsgTarget = PChar;
+        int32        errNo      = luautils::OnAbilityCheck(PChar, PTarget, PAbility, &PMsgTarget);
+        if (errNo != 0)
+        {
+            PChar->pushPacket(new CMessageBasicPacket(PChar, PMsgTarget, PAbility->getID(), PAbility->getID(), errNo));
+            return false;
+        }
+        return true;
+    }
+    PChar->HandleErrorMessage(errMsg);
+    return false;
 }

@@ -4714,9 +4714,35 @@ void CLuaBaseEntity::setModelId(uint16 modelId, sol::object const& slotObj)
     }
     else
     {
+        // Look "size" is look type. If the look type is one that uses pc models
+        // with equipment(equipped or chocobo), switch it to "standard" (model id-based).
+        // restoreNpcLook can be used to restore the original db look.
+        if (m_PBaseEntity->look.size == MODEL_EQUIPPED || m_PBaseEntity->look.size == MODEL_CHOCOBO)
+        {
+            m_PBaseEntity->look.size = MODEL_STANDARD;
+        }
+
         m_PBaseEntity->SetModelId(modelId);
     }
     m_PBaseEntity->updatemask |= UPDATE_LOOK;
+}
+
+/************************************************************************
+ *  Function: restoreNpcLook()
+ *  Purpose : Restores the NPC's Look back to the original
+ *  Example : npc:restoreNpcLook
+ *  Notes   : Ignored on all other entity types
+ ************************************************************************/
+
+void CLuaBaseEntity::restoreNpcLook()
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+
+    if (m_PBaseEntity->objtype == TYPE_NPC)
+    {
+        memcpy(&m_PBaseEntity->look, &m_PBaseEntity->mainlook, sizeof(m_PBaseEntity->look));
+        m_PBaseEntity->updatemask |= UPDATE_LOOK;
+    }
 }
 
 /************************************************************************
@@ -15201,6 +15227,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getHistory", CLuaBaseEntity::getHistory);
 
     SOL_REGISTER("clearSession", CLuaBaseEntity::clearSession);
+    SOL_REGISTER("restoreNpcLook", CLuaBaseEntity::restoreNpcLook);
 }
 
 std::ostream& operator<<(std::ostream& os, const CLuaBaseEntity& entity)

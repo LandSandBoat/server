@@ -263,6 +263,7 @@ public:
     bool   checkNameFlags(uint32 flags); // this is check and not get because it tests for a flag, it doesn't return all flags
     uint16 getModelId();
     void   setModelId(uint16 modelId, sol::object const& slotObj);
+    void   restoreNpcLook();
     void   setCostume(uint16 costume);
     uint16 getCostume();
     uint16 getCostume2(); // set monstrosity costume

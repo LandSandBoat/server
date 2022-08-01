@@ -32,6 +32,8 @@ struct search_req
     uint8       minRank;
     uint8       maxRank;
     uint32      flags;
+    uint16      lsId;
+    bool        lsFilter;
     std::string name;
     uint8       nameLen;
     uint8       commentType;
