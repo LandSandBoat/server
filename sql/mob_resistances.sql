@@ -365,7 +365,7 @@ INSERT INTO `mob_resistances` VALUES (333,'Greater_Bird-PetSuzaku',0.75,1.25,1,0
 INSERT INTO `mob_resistances` VALUES (334,'Orc-NM',1,1,1,1,0,0,0,0,0,-2500,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 INSERT INTO `mob_resistances` VALUES (335,'Maat',1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 INSERT INTO `mob_resistances` VALUES (336,'Tonberry-ZM4',1,1,1,1,0,-2500,0,0,0,0,5000,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
-INSERT INTO `mob_resistances` VALUES (337,'Quadav-NM',1,1.25,1,1,-1250,0,0,0,0,0,-1250,1250,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+INSERT INTO `mob_resistances` VALUES (337,'Quadav-NM',1,1,1,1,-1250,0,0,0,0,0,-1250,1250,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 INSERT INTO `mob_resistances` VALUES (338,'Twitherym',1,1.25,1,1,0,-2500,1250,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 INSERT INTO `mob_resistances` VALUES (339,'Chapuli',1,1,1,1,0,-2500,0,0,-2500,0,-1250,-2500,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 INSERT INTO `mob_resistances` VALUES (340,'Mantid',1,1,1,1,0,-2500,0,0,-2500,0,-1250,-2500,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
