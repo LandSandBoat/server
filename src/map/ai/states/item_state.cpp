@@ -230,7 +230,6 @@ bool CItemState::CanChangeState()
 void CItemState::TryInterrupt(CBattleEntity* PTarget)
 {
     // todo: interrupt on being hit
-
     if (PTarget)
     {
         UpdateTarget(m_PEntity->IsValidTarget(PTarget->targid, m_PItem->getValidTarget(), m_errorMsg));
@@ -245,11 +244,6 @@ void CItemState::TryInterrupt(CBattleEntity* PTarget)
     if (HasMoved() || m_PEntity->StatusEffectContainer->HasPreventActionEffect())
     {
         msg           = MSGBASIC_ITEM_FAILS_TO_ACTIVATE;
-        m_interrupted = true;
-    }
-    else if (battleutils::IsParalyzed(m_PEntity))
-    {
-        msg           = MSGBASIC_IS_PARALYZED;
         m_interrupted = true;
     }
     else if (!GetTarget())
