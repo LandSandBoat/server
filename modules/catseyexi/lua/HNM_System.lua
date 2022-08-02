@@ -36,10 +36,9 @@ hnmSystem:addOverride("xi.zones.Dragons_Aery.Zone.onInitialize", function(zone)
 
     -- Fallback in case of DB corruption or other fancy stuff. This var should never be 0 after the first time.
     if hnmPopTime == 0 then
-        SetServerVariable("[HNM]Fafnir", os.time() + math.random(1, 48) * 1800) -- Set a pop time.
+        hnmPopTime = os.time() + math.random(1, 48) * 1800
 
-        -- Reload variable.
-        hnmPopTime = GetServerVariable("[HNM]Fafnir")
+        SetServerVariable("[HNM]Fafnir", hnmPopTime) -- Set a pop time.
     end
 
     UpdateNMSpawnPoint(dragonsAeryID.mob.FAFNIR)
@@ -58,7 +57,7 @@ hnmSystem:addOverride("xi.zones.Dragons_Aery.Zone.onInitialize", function(zone)
     GetNPCByID(dragonsAeryID.npc.FAFNIR_QM):setStatus(xi.status.DISAPPEAR)
 end)
 
-hnmSystem:addOverride("xi.zones.Dragons_Aery.mobs.Fafnir.onMobDeath", function(mob, player, isKiller)
+hnmSystem:addOverride("xi.zones.Dragons_Aery.mobs.Fafnir.onMobDespawn", function(mob)
     -- Server Variable work.
     local deathCount = GetServerVariable("[HNM]Fafnir_C")
     local random     = 75600 + math.random(0, 6) * 1800
@@ -66,26 +65,16 @@ hnmSystem:addOverride("xi.zones.Dragons_Aery.mobs.Fafnir.onMobDeath", function(m
     SetServerVariable("[HNM]Fafnir", os.time() + random) -- Save next pop time.
     SetServerVariable("[HNM]Fafnir_C", deathCount + 1)   -- Save kill count.
 
-    -- Set respawn Time.
+    -- Set NQ respawn Time.
     GetMobByID(dragonsAeryID.mob.FAFNIR):setRespawnTime(random) -- Set next pop time.
 
-    -- Regular operations.
-    player:addTitle(xi.title.FAFNIR_SLAYER)
-end)
-
-hnmSystem:addOverride("xi.zones.Dragons_Aery.mobs.Fafnir.onMobDespawn", function(mob)
-    -- HQ pop check.
-    local deathCount = GetServerVariable("[HNM]Fafnir_C")
-    local chance     = 0
-
-    -- Increase chance.
+    -- HQ check.
     if deathCount >= 3 then
-        chance = 10 + (deathCount - 3) * 15
-    end
+        local chance = 10 + (deathCount - 3) * 15
 
-    -- Starting 3rd day.
-    if math.random(1,100) <= chance then
-        SpawnMob(dragonsAeryID.mob.NIDHOGG)
+        if math.random(1,100) <= chance then
+            SpawnMob(dragonsAeryID.mob.NIDHOGG)
+        end
     end
 end)
 
@@ -103,10 +92,9 @@ hnmSystem:addOverride("xi.zones.Valley_of_Sorrows.Zone.onInitialize", function(z
 
     -- Fallback in case of DB corruption or other fancy stuff. This var should never be 0 after the first time.
     if hnmPopTime == 0 then
-        SetServerVariable("[HNM]Adamantoise", os.time() + math.random(1, 48) * 1800) -- Set next pop time.
+        hnmPopTime = os.time() + math.random(1, 48) * 1800
 
-        -- Reload variable.
-        hnmPopTime = GetServerVariable("[HNM]Adamantoise")
+        SetServerVariable("[HNM]Adamantoise", hnmPopTime) -- Set next pop time.
     end
 
     UpdateNMSpawnPoint(valleySorrowsID.mob.ADAMANTOISE)
@@ -124,7 +112,7 @@ hnmSystem:addOverride("xi.zones.Valley_of_Sorrows.Zone.onInitialize", function(z
     GetNPCByID(valleySorrowsID.npc.ADAMANTOISE_QM):setStatus(xi.status.DISAPPEAR)
 end)
 
-hnmSystem:addOverride("xi.zones.Valley_of_Sorrows.mobs.Adamantoise.onMobDeath", function(mob, player, isKiller)
+hnmSystem:addOverride("xi.zones.Valley_of_Sorrows.mobs.Adamantoise.onMobDespawn", function(mob)
     -- Server Variable work.
     local deathCount = GetServerVariable("[HNM]Adamantoise_C")
     local random     = 75600 + math.random(0, 6) * 1800
@@ -132,26 +120,16 @@ hnmSystem:addOverride("xi.zones.Valley_of_Sorrows.mobs.Adamantoise.onMobDeath", 
     SetServerVariable("[HNM]Adamantoise", os.time() + random) -- Save next pop time.
     SetServerVariable("[HNM]Adamantoise_C", deathCount + 1)   -- Save kill count.
 
-    -- Set respawn Time.
+    -- Set NQ respawn Time.
     GetMobByID(valleySorrowsID.mob.ADAMANTOISE):setRespawnTime(75600 + random * 1800)
 
-    -- Regular operations.
-    player:addTitle(xi.title.TORTOISE_TORTURER)
-end)
-
-hnmSystem:addOverride("xi.zones.Valley_of_Sorrows.mobs.Adamantoise.onMobDespawn", function(mob)
-    -- HQ pop check.
-    local deathCount = GetServerVariable("[HNM]Adamantoise_C")
-    local chance     = 0
-
-    -- Increase chance starting 3rd day.
+    -- HQ check.
     if deathCount >= 3 then
-        chance = 10 + (deathCount - 3) * 15
-    end
+        local chance = 10 + (deathCount - 3) * 15
 
-    -- Starting 3rd day.
-    if math.random(1,100) <= chance then
-        SpawnMob(valleySorrowsID.mob.ASPIDOCHELONE)
+        if math.random(1,100) <= chance then
+            SpawnMob(valleySorrowsID.mob.ASPIDOCHELONE)
+        end
     end
 end)
 
@@ -169,10 +147,9 @@ hnmSystem:addOverride("xi.zones.Behemoths_Dominion.Zone.onInitialize", function(
 
     -- Fallback in case of DB corruption or other fancy stuff. This var should never be 0 after the first time.
     if hnmPopTime == 0 then
-        SetServerVariable("[HNM]Behemoth", os.time() + math.random(1, 48) * 1800) -- Set next pop time.
+        hnmPopTime = os.time() + math.random(1, 48) * 1800
 
-        -- Reload variable.
-        hnmPopTime = GetServerVariable("[HNM]Behemoth")
+        SetServerVariable("[HNM]Behemoth", hnmPopTime) -- Set next pop time.
     end
 
     UpdateNMSpawnPoint(behemothDomID.mob.BEHEMOTH)
@@ -190,7 +167,7 @@ hnmSystem:addOverride("xi.zones.Behemoths_Dominion.Zone.onInitialize", function(
     GetNPCByID(behemothDomID.npc.BEHEMOTH_QM):setStatus(xi.status.DISAPPEAR)
 end)
 
-hnmSystem:addOverride("xi.zones.Behemoths_Dominion.mobs.Behemoth.onMobDeath", function(mob, player, isKiller)
+hnmSystem:addOverride("xi.zones.Behemoths_Dominion.mobs.Behemoth.onMobDespawn", function(mob)
     -- Server Variable work.
     local deathCount = GetServerVariable("[HNM]Behemoth_C")
     local random     = 75600 + math.random(0, 6) * 1800
@@ -198,26 +175,16 @@ hnmSystem:addOverride("xi.zones.Behemoths_Dominion.mobs.Behemoth.onMobDeath", fu
     SetServerVariable("[HNM]Behemoth", os.time() + random) -- Save next pop time.
     SetServerVariable("[HNM]Behemoth_C", deathCount + 1)   -- Save kill count.
 
-    -- Set respawn Time.
+    -- Set NQ respawn Time.
     GetMobByID(behemothDomID.mob.BEHEMOTH):setRespawnTime(75600 + random * 1800)
 
-    -- Regular operations.
-    player:addTitle(xi.title.BEHEMOTHS_BANE)
-end)
-
-hnmSystem:addOverride("xi.zones.Behemoths_Dominion.mobs.Behemoth.onMobDespawn", function(mob)
-    -- HQ pop check.
-    local deathCount = GetServerVariable("[HNM]Behemoth_C")
-    local chance     = 0
-
-    -- Increase chance starting 3rd day.
+    -- HQ check.
     if deathCount >= 3 then
-        chance = 10 + (deathCount - 3) * 15
-    end
+        local chance = 10 + (deathCount - 3) * 15
 
-    -- Starting 3rd day.
-    if math.random(1,100) <= chance then
-        SpawnMob(behemothDomID.mob.KING_BEHEMOTH)
+        if math.random(1,100) <= chance then
+            SpawnMob(behemothDomID.mob.KING_BEHEMOTH)
+        end
     end
 end)
 
@@ -235,10 +202,9 @@ hnmSystem:addOverride("xi.zones.Jugner_Forest.Zone.onInitialize", function(zone)
 
     -- Fallback in case of DB corruption or other fancy stuff. This var should never be 0 after the first time.
     if hnmPopTime == 0 then
-        SetServerVariable("[HNM]KA", os.time() + math.random(1, 48) * 1800) -- Set next pop time.
+        hnmPopTime = os.time() + math.random(1, 48) * 1800
 
-        -- Reload variable.
-        hnmPopTime = GetServerVariable("[HNM]KA")
+        SetServerVariable("[HNM]KA", hnmPopTime) -- Set next pop time.
     end
 
     -- Spawn mob.
@@ -305,10 +271,9 @@ hnmSystem:addOverride("xi.zones.Monastic_Cavern.Zone.onInitialize", function(zon
 
     -- Fallback in case of DB corruption or other fancy stuff. This var should never be 0 after the first time.
     if hnmPopTime == 0 then
-        SetServerVariable("[HNM]Overlord", os.time() + math.random(1, 48) * 1800) -- Set a pop time.
+        hnmPopTime = os.time() + math.random(1, 48) * 1800
 
-        -- Reload variable.
-        hnmPopTime = GetServerVariable("[HNM]Overlord")
+        SetServerVariable("[HNM]Overlord", hnmPopTime) -- Set a pop time.
     end
 
     UpdateNMSpawnPoint(monasticCavernID.mob.ORCISH_OVERLORD)
@@ -326,7 +291,7 @@ hnmSystem:addOverride("xi.zones.Monastic_Cavern.Zone.onInitialize", function(zon
     xi.treasure.initZone(zone)
 end)
 
-hnmSystem:addOverride("xi.zones.Monastic_Cavern.mobs.Orcish_Overlord.onMobDeath", function(mob, player, isKiller)
+hnmSystem:addOverride("xi.zones.Monastic_Cavern.mobs.Orcish_Overlord.onMobDespawn", function(mob)
     local placeholderID = mob:getID()
 
     -- The quest version of this NM doesn't respawn or count toward hq nm.
@@ -338,33 +303,16 @@ hnmSystem:addOverride("xi.zones.Monastic_Cavern.mobs.Orcish_Overlord.onMobDeath"
         SetServerVariable("[HNM]Overlord", os.time() + random) -- Save next pop time.
         SetServerVariable("[HNM]Overlord_C", deathCount + 1)   -- Save kill count.
 
-        -- Set respawn Time.
+        -- Set NQ respawn Time.
         GetMobByID(monasticCavernID.mob.ORCISH_OVERLORD):setRespawnTime(random) -- Set next pop time.
-    end
 
-    -- Regular operations.
-    if isKiller then
-        mob:showText(mob, monasticCavernID.text.ORCISH_OVERLORD_DEATH)
-    end
-end)
-
-hnmSystem:addOverride("xi.zones.Monastic_Cavern.mobs.Orcish_Overlord.onMobDespawn", function(mob)
-    local placeholderID = mob:getID()
-
-    -- The quest version of this NM doesn't respawn or count toward hq nm.
-    if placeholderID == monasticCavernID.mob.ORCISH_OVERLORD then
-        -- HQ pop check.
-        local deathCount = GetServerVariable("[HNM]Overlord_C")
-        local chance     = 0
-
-        -- Increase chance.
+        -- HQ check.
         if deathCount >= 3 then
-            chance = 10 + (deathCount - 3) * 15
-        end
+            local chance = 10 + (deathCount - 3) * 15
 
-        -- Starting 3rd day.
-        if math.random(1,100) <= chance then
-            SpawnMob(monasticCavernID.mob.ORCISH_OVERLORD + 1)
+            if math.random(1,100) <= chance then
+                SpawnMob(monasticCavernID.mob.ORCISH_OVERLORD + 1)
+            end
         end
     end
 end)
@@ -383,10 +331,9 @@ hnmSystem:addOverride("xi.zones.Qulun_Dome.Zone.onInitialize", function(zone)
 
     -- Fallback in case of DB corruption or other fancy stuff. This var should never be 0 after the first time.
     if hnmPopTime == 0 then
-        SetServerVariable("[HNM]Diamond", os.time() + math.random(1, 48) * 1800) -- Set a pop time.
+        hnmPopTime = os.time() + math.random(1, 48) * 1800
 
-        -- Reload variable.
-        hnmPopTime = GetServerVariable("[HNM]Diamond")
+        SetServerVariable("[HNM]Diamond", hnmPopTime) -- Set a pop time.
     end
 
     UpdateNMSpawnPoint(qulunDomeID.mob.DIAMOND_QUADAV)
@@ -401,7 +348,7 @@ hnmSystem:addOverride("xi.zones.Qulun_Dome.Zone.onInitialize", function(zone)
     end
 end)
 
-hnmSystem:addOverride("xi.zones.Qulun_Dome.mobs.Diamond_Quadav.onMobDeath", function(mob, player, isKiller)
+hnmSystem:addOverride("xi.zones.Qulun_Dome.mobs.Diamond_Quadav.onMobDespawn", function(mob)
     local placeholderID = mob:getID()
 
     -- The quest version of this NM doesn't respawn or count toward hq nm.
@@ -413,33 +360,16 @@ hnmSystem:addOverride("xi.zones.Qulun_Dome.mobs.Diamond_Quadav.onMobDeath", func
         SetServerVariable("[HNM]Diamond", os.time() + random) -- Save next pop time.
         SetServerVariable("[HNM]Diamond_C", deathCount + 1)   -- Save kill count.
 
-        -- Set respawn Time.
+        -- Set NQ respawn Time.
         GetMobByID(qulunDomeID.mob.DIAMOND_QUADAV):setRespawnTime(random) -- Set next pop time.
-    end
 
-    -- Regular operations.
-    if isKiller then
-        mob:showText(mob, qulunDomeID.text.DIAMOND_QUADAV_DEATH)
-    end
-end)
-
-hnmSystem:addOverride("xi.zones.Qulun_Dome.mobs.Diamond_Quadav.onMobDespawn", function(mob)
-    local placeholderID = mob:getID()
-
-    -- The quest version of this NM doesn't respawn or count toward hq nm.
-    if placeholderID == qulunDomeID.mob.DIAMOND_QUADAV then
-        -- HQ pop check.
-        local deathCount = GetServerVariable("[HNM]Diamond_C")
-        local chance     = 0
-
-        -- Increase chance.
+        -- HQ Check.
         if deathCount >= 3 then
-            chance = 10 + (deathCount - 3) * 15
-        end
+            local chance = 10 + (deathCount - 3) * 15
 
-        -- Starting 3rd day.
-        if math.random(1,100) <= chance then
-            SpawnMob(qulunDomeID.mob.DIAMOND_QUADAV + 1)
+            if math.random(1,100) <= chance then
+                SpawnMob(qulunDomeID.mob.DIAMOND_QUADAV + 1)
+            end
         end
     end
 end)
@@ -458,10 +388,9 @@ hnmSystem:addOverride("xi.zones.Castle_Oztroja.Zone.onInitialize", function(zone
 
     -- Fallback in case of DB corruption or other fancy stuff. This var should never be 0 after the first time.
     if hnmPopTime == 0 then
-        SetServerVariable("[HNM]Avatar", os.time() + math.random(1, 48) * 1800) -- Set a pop time.
+        hnmPopTime = os.time() + math.random(1, 48) * 1800
 
-        -- Reload variable.
-        hnmPopTime = GetServerVariable("[HNM]Avatar")
+        SetServerVariable("[HNM]Avatar", hnmPopTime) -- Set a pop time.
     end
 
     UpdateNMSpawnPoint(castleOztrojaID.mob.YAGUDO_AVATAR)
@@ -482,7 +411,7 @@ hnmSystem:addOverride("xi.zones.Castle_Oztroja.Zone.onInitialize", function(zone
     xi.treasure.initZone(zone)
 end)
 
-hnmSystem:addOverride("xi.zones.Castle_Oztroja.mobs.Yagudo_Avatar.onMobDeath", function(mob, player, isKiller)
+hnmSystem:addOverride("xi.zones.Castle_Oztroja.mobs.Yagudo_Avatar.onMobDespawn", function(mob)
     local placeholderID = mob:getID()
 
     -- The quest version of this NM doesn't respawn or count toward hq nm.
@@ -494,33 +423,16 @@ hnmSystem:addOverride("xi.zones.Castle_Oztroja.mobs.Yagudo_Avatar.onMobDeath", f
         SetServerVariable("[HNM]Avatar", os.time() + random) -- Save next pop time.
         SetServerVariable("[HNM]Avatar_C", deathCount + 1)   -- Save kill count.
 
-        -- Set respawn Time.
+        -- Set NQ respawn Time.
         GetMobByID(castleOztrojaID.mob.YAGUDO_AVATAR):setRespawnTime(random) -- Set next pop time.
-    end
 
-    -- Regular operations.
-    if isKiller then
-        mob:showText(mob, castleOztrojaID.text.YAGUDO_AVATAR_DEATH)
-    end
-end)
-
-hnmSystem:addOverride("xi.zones.Castle_Oztroja.mobs.Yagudo_Avatar.onMobDespawn", function(mob)
-    local placeholderID = mob:getID()
-
-    -- The quest version of this NM doesn't respawn or count toward hq nm.
-    if placeholderID == castleOztrojaID.mob.YAGUDO_AVATAR then
-        -- HQ pop check.
-        local deathCount = GetServerVariable("[HNM]Avatar_C")
-        local chance     = 0
-
-        -- Increase chance.
+        -- HQ Check.
         if deathCount >= 3 then
-            chance = 10 + (deathCount - 3) * 15
-        end
+            local chance = 10 + (deathCount - 3) * 15
 
-        -- Starting 3rd day.
-        if math.random(1,100) <= chance then
-            SpawnMob(castleOztrojaID.mob.YAGUDO_AVATAR + 3)
+            if math.random(1,100) <= chance then
+                SpawnMob(castleOztrojaID.mob.YAGUDO_AVATAR + 3)
+            end
         end
     end
 end)

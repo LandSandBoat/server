@@ -82,13 +82,13 @@ local prizes =
 			-- 320, -- harpsichord
 			
 			-- Cycle #4
-			-- 365, -- poele classique
-			-- 366, -- kanonenofen
-			-- 367, -- pot topper
-			-- 415, -- aldebaran horn
-			-- 426, -- orchestrion
-			-- 3585, -- galley kitchen
-			-- 3652, -- memorial cake
+			365, -- poele classique
+			366, -- kanonenofen
+			367, -- pot topper
+			415, -- aldebaran horn
+			426, -- orchestrion
+			3585, -- galley kitchen
+			3652, -- memorial cake
 			
 			-- Cycle # 5
 			-- 3679, -- beastman gonfalon
@@ -160,45 +160,45 @@ local prizes =
 			-- 25850, -- Pink Subligar
 			
 			-- Cycle #3
-			25774, -- Fancy Gilet
-			25838, -- Fancy Trunks
-			25775, -- Fancy Top
-			25839, -- Fancy Shorts
-			26964, -- Pupil's Camisa 
-			26946, -- Pupil's Shirt
-			27281, -- Pupil's Trousers
-			27455, -- Pupil's Shoes 
-			25639, -- Korrigan Masque
-			25715, -- Korrigan Suit
-			25645, -- Kupo Masque
-			25726, -- Kupo Suit
-			11812, -- Charity Cap
-			26719, -- Sheep Cap
-			26717, -- Cait Sith Cap
-			26738, -- Leafkin Cap
-			26707, -- Flan Masque
-			26789, -- Shobuhouou Kabuto
+			-- 25774, -- Fancy Gilet
+			-- 25838, -- Fancy Trunks
+			-- 25775, -- Fancy Top
+			-- 25839, -- Fancy Shorts
+			-- 26964, -- Pupil's Camisa 
+			-- 26946, -- Pupil's Shirt
+			-- 27281, -- Pupil's Trousers
+			-- 27455, -- Pupil's Shoes 
+			-- 25639, -- Korrigan Masque
+			-- 25715, -- Korrigan Suit
+			-- 25645, -- Kupo Masque
+			-- 25726, -- Kupo Suit
+			-- 11812, -- Charity Cap
+			-- 26719, -- Sheep Cap
+			-- 26717, -- Cait Sith Cap
+			-- 26738, -- Leafkin Cap
+			-- 26707, -- Flan Masque
+			-- 26789, -- Shobuhouou Kabuto
 			
 			-- Cycle #4
-			-- 27899, -- Alliance Shirt
-			-- 28185, -- Alliance Pants
-			-- 28324, -- Alliance Boots 
-			-- 26967, -- Cossie Top
-			-- 27293, -- Cossie Bottom
-			-- 26965, -- Ta Moko
-			-- 27291, -- Swimming Togs
-			-- 25713, -- Track Shirt
-			-- 27325, -- Track Pants 
-			-- 25649, -- Gazer's Helmet
-			-- 26519, -- Mandragora Shirt
-			-- 26516, -- Citrullus Shirt
-			-- 25755, -- Crustacean Shirt
-			-- 26524, -- Gil Nabber Shirt
-			-- 26518, -- Jody Shirt
-			-- 25722, -- Jubilee Shirt
-			-- 26545, -- Mithkabob Shirt
-			-- 25758, -- Rhapsody Shirt
-			-- 26517, -- Shadow Lord Shirt
+			27899, -- Alliance Shirt
+			28185, -- Alliance Pants
+			28324, -- Alliance Boots 
+			26967, -- Cossie Top
+			27293, -- Cossie Bottom
+			26965, -- Ta Moko
+			27291, -- Swimming Togs
+			25713, -- Track Shirt
+			27325, -- Track Pants 
+			25649, -- Gazer's Helmet
+			26519, -- Mandragora Shirt
+			26516, -- Citrullus Shirt
+			25755, -- Crustacean Shirt
+			26524, -- Gil Nabber Shirt
+			26518, -- Jody Shirt
+			25722, -- Jubilee Shirt
+			26545, -- Mithkabob Shirt
+			25758, -- Rhapsody Shirt
+			26517, -- Shadow Lord Shirt
             
 			-- Cycle #5
 			-- 26520, -- Akitu Shirt
@@ -339,36 +339,36 @@ local prizes =
 		   -- 18563, -- Ark Scythe
 		   
 		   -- Cycle #4
-		   20571, -- Infiltrator
-		   20569, -- Esikuva
-		   20576, -- Qutrub Knife
-		   21608, -- Onion Sword II
-		   21609, -- Save The Queen II
-		   21636, -- Nihility
-		   20668, -- Firetongue
-		   20666, -- Blizzard Brand
-		   26410, -- Diamond Buckler
-		   10809, -- Moogle Guard
-		   21965, -- Zanmato
-		   21867, -- Sha Wujing's Lance
-		   20933, -- Hotengeki
-		   21086, -- Heartstopper
-		   21095, -- Heartbeater
-		   22039, -- Floral Hagoita
-		   21074, -- Kupo Rod
-		   21153, -- Malice Masher
-		   22089, -- Sophistry
+		   -- 20571, -- Infiltrator
+		   -- 20569, -- Esikuva
+		   -- 20576, -- Qutrub Knife
+		   -- 21608, -- Onion Sword II
+		   -- 21609, -- Save The Queen II
+		   -- 21636, -- Nihility
+		   -- 20668, -- Firetongue
+		   -- 20666, -- Blizzard Brand
+		   -- 26410, -- Diamond Buckler
+		   -- 10809, -- Moogle Guard
+		   -- 21965, -- Zanmato
+		   -- 21867, -- Sha Wujing's Lance
+		   -- 20933, -- Hotengeki
+		   -- 21086, -- Heartstopper
+		   -- 21095, -- Heartbeater
+		   -- 22039, -- Floral Hagoita
+		   -- 21074, -- Kupo Rod
+		   -- 21153, -- Malice Masher
+		   -- 22089, -- Sophistry
            
 		   -- Cycle #5
-		   -- 11499, -- trainees specs
-		   -- 15008, -- trainee gloves
-		   -- 19101, -- trainee knife
-		   -- 18855, -- trainee hammer
-		   -- 19110, -- trainees needle
-		   -- 18502, -- trainee axe
-		   -- 19274, -- trainee burin
-		   -- 18763, -- trainee scissors
-		   -- 17764, -- trainee sword
+		   11499, -- trainees specs
+		   15008, -- trainee gloves
+		   19101, -- trainee knife
+		   18855, -- trainee hammer
+		   19110, -- trainees needle
+		   18502, -- trainee axe
+		   19274, -- trainee burin
+		   18763, -- trainee scissors
+		   17764, -- trainee sword
         },
     },
 
@@ -434,32 +434,32 @@ local prizes =
 			
 	    -- HIGHLEVEL MATERIALS
 		    -- Cycle #1 
-			658, -- Damascus Ingot
-			747, -- Orichalcum Ingot
-			686, -- Imperial Wootz Ingot
-			1714, -- Cashmere Cloth
-			1313, -- Siren's Hair
-			1409, -- Siren's Macrame
-			831, -- Shining Cloth
-			862, -- Behemoth Leather
-			2169, -- Cerberus Hide
-			1312, -- Angel Skin
-			723, -- Divine Lumber
-			720, -- Ancient Lumber
+			-- 658, -- Damascus Ingot
+			-- 747, -- Orichalcum Ingot
+			-- 686, -- Imperial Wootz Ingot
+			-- 1714, -- Cashmere Cloth
+			-- 1313, -- Siren's Hair
+			-- 1409, -- Siren's Macrame
+			-- 831, -- Shining Cloth
+			-- 862, -- Behemoth Leather
+			-- 2169, -- Cerberus Hide
+			-- 1312, -- Angel Skin
+			-- 723, -- Divine Lumber
+			-- 720, -- Ancient Lumber
 			
 			-- Cycle #2 
-			-- 2535, -- Jacaranda Lumber
-			-- 1446, -- Lacquer Tree Log
-			-- 1133, -- Dragon Blood
-			-- 4272, -- Dragon Meat
-			-- 655, -- Adaman Ingot
-			-- 2275, -- Scintillant Ingot
-			-- 2001, -- Dark Adaman Sheet
-			-- 836, -- Damascene Cloth
-			-- 2289, -- Wamoura Cloth
-			-- 2340, -- Imperial Silk Cloth
-			-- 837, -- Malboro Fiber
-			-- 2152, -- Marid Leather
+			2535, -- Jacaranda Lumber
+			1446, -- Lacquer Tree Log
+			1133, -- Dragon Blood
+			4272, -- Dragon Meat
+			655, -- Adaman Ingot
+			2275, -- Scintillant Ingot
+			2001, -- Dark Adaman Sheet
+			836, -- Damascene Cloth
+			2289, -- Wamoura Cloth
+			2340, -- Imperial Silk Cloth
+			837, -- Malboro Fiber
+			2152, -- Marid Leather
 			
 			-- Cycle #3
 			-- 730, -- Bloodwood Lumber
@@ -504,41 +504,41 @@ local prizes =
 			-- 15735, -- Goliard Clogs
 			
 			-- Cycle #2 -- Nexus/ToAU rings/Odin Prime/Alexander Prime/CoP items
-			11538, -- Nexus Cape
-			11589, -- Aesir Torque
-			11546, -- Aesir Mantle
-			16057, -- Aesir Ear Pendant
-			11590, -- Colossus's Torque
-			11547, -- Colossus's Mantle
-			16058, -- Colossus's Earring
-			17208, -- Hamayumi
-			17466, -- Dia Wand
-			13177, -- Stone Gorget
-			18019, -- X's Knife
-			18057, -- Y's Scythe
-			18101, -- Z's Trident
-			15457, -- Swift Belt
-			14889, -- Barbarian Mittens
-			16036, -- Wilhelm's Earring
-			16035, -- Altdorf's Earring
-			11343, -- Thrakon Breastplate
+			-- 11538, -- Nexus Cape
+			-- 11589, -- Aesir Torque
+			-- 11546, -- Aesir Mantle
+			-- 16057, -- Aesir Ear Pendant
+			-- 11590, -- Colossus's Torque
+			-- 11547, -- Colossus's Mantle
+			-- 16058, -- Colossus's Earring
+			-- 17208, -- Hamayumi
+			-- 17466, -- Dia Wand
+			-- 13177, -- Stone Gorget
+			-- 18019, -- X's Knife
+			-- 18057, -- Y's Scythe
+			-- 18101, -- Z's Trident
+			-- 15457, -- Swift Belt
+			-- 14889, -- Barbarian Mittens
+			-- 16036, -- Wilhelm's Earring
+			-- 16035, -- Altdorf's Earring
+			-- 11343, -- Thrakon Breastplate
 			
 			-- Cycle #3 -- WOTG Nations
-			-- 16149, -- Cobra Cloche
-			-- 14591, -- Cobra Robe
-			-- 15012, -- Cobra Gloves
-			-- 16318, -- Cobra Trews
-			-- 15758, -- Cobra Crackows
-			-- 16148, -- Cobra Cap
-			-- 14590, -- Cobra Harness
-			-- 15011, -- Cobra Mittens
-			-- 16317, -- Cobra Subligar
-			-- 15757, -- Cobra Leggings
-			-- 16147, -- Fourth Haube
-			-- 14589, -- Fourth Brunne
-			-- 15010, -- Fourth Hentzes
-			-- 16316, -- Fourth Schoss
-			-- 15756, -- Fourth Schuhs
+			16149, -- Cobra Cloche
+			14591, -- Cobra Robe
+			15012, -- Cobra Gloves
+			16318, -- Cobra Trews
+			15758, -- Cobra Crackows
+			16148, -- Cobra Cap
+			14590, -- Cobra Harness
+			15011, -- Cobra Mittens
+			16317, -- Cobra Subligar
+			15757, -- Cobra Leggings
+			16147, -- Fourth Haube
+			14589, -- Fourth Brunne
+			15010, -- Fourth Hentzes
+			16316, -- Fourth Schoss
+			15756, -- Fourth Schuhs
 			
 			-- Cycle #4 -- TOAU NM drops/Assault gear
 			-- 11496, -- Fenrir's Crown
@@ -608,32 +608,32 @@ local prizes =
 			-- 15545, -- Tamas Ring
 			
 			-- Cycle #2 -- Divine Might/Apocalypse Nigh/Sea capes/Sea torques
-			15962, -- Static Earring
-			15963, -- Magnetic Earring
-			15964, -- Hollow Earring
-			15965, -- Ethereal Earring
-			14740, -- Knight's Earring
-			14741, -- Abyssal Earring
-			14742, -- Beastly Earring
-			14743, -- Bushinomimi	
+			-- 15962, -- Static Earring
+			-- 15963, -- Magnetic Earring
+			-- 15964, -- Hollow Earring
+			-- 15965, -- Ethereal Earring
+			-- 14740, -- Knight's Earring
+			-- 14741, -- Abyssal Earring
+			-- 14742, -- Beastly Earring
+			-- 14743, -- Bushinomimi	
 			
 			-- Cycle #3 -- Useful NM drops/MMM
-			-- 15351, -- Bounding Boots
-			-- 15224, -- Empress Hairpin
-			-- 14986, -- Ochimusha Kote
-			-- 15737, -- Sarutobi Kyahan
-			-- 15736, -- Trotter Boots
-			-- 15515, -- Peacock Amulet
-			-- 18752, -- Retaliators
-			-- 18714, -- Vali's Bow
-			-- 18852, -- Octave Club
-			-- 14469, -- Reverend Mail
-			-- 13915, -- Optical Hat
-			-- 15221, -- Patroclus's Helm
-			-- 13567, -- Bomb Queen Ring
-			-- 13303, -- Jelly Ring
-			-- 17759, -- Koggelmander
-			-- 19236, -- Hightail Bullet
+			15351, -- Bounding Boots
+			15224, -- Empress Hairpin
+			14986, -- Ochimusha Kote
+			15737, -- Sarutobi Kyahan
+			15736, -- Trotter Boots
+			15515, -- Peacock Amulet
+			18752, -- Retaliators
+			18714, -- Vali's Bow
+			18852, -- Octave Club
+			14469, -- Reverend Mail
+			13915, -- Optical Hat
+			15221, -- Patroclus's Helm
+			13567, -- Bomb Queen Ring
+			13303, -- Jelly Ring
+			17759, -- Koggelmander
+			19236, -- Hightail Bullet
 			
 			-- Cycle #4 -- HQ Kings pop items/Carbuncle Prime/WOTG Nations/Naji's/TH+1 hat
 			-- 3340,  -- Sweet Tea (Nidhogg pop)

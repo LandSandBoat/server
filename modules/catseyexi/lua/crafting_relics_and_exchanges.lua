@@ -25,6 +25,8 @@ local rTable =
     [12] = { xi.items.CLAUSTRUM     },
     [13] = { xi.items.YOICHINOYUMI  },
     [14] = { xi.items.ANNIHILATOR   },
+    [15] = { xi.items.GJALLARHORN   },	
+	[16] = { xi.items.AEGIS         },
 }
 
 relicSystem:addOverride("xi.zones.The_Sanctuary_of_ZiTah.npcs.relic_mandau.onTrigger", function(player, npc, trade)    
@@ -193,7 +195,7 @@ relicSystem:addOverride("xi.zones.The_Sanctuary_of_ZiTah.npcs.relic_mandau.onTra
     if currentRelic == xi.items.BATARDEAU and npcUtil.tradeHas(trade, {xi.items.TEN_THOUSAND_BYNE_BILL, xi.items.ORNATE_FRAGMENT, xi.items.SHARD_OF_NECROPSYCHE, xi.items.BATARDEAU}) then -- currency, shard, necropsyche, stage 4
         player:startEvent(207, xi.items.MANDAU)
     elseif trade:getGil() == 5000000 then
-        for i = 1, 14 do
+        for i = 1, 16 do
             local itemId = rTable[i][1]
 
             if npcUtil.tradeHas(trade, itemId) then
@@ -213,7 +215,7 @@ relicSystem:addOverride("xi.zones.The_Sanctuary_of_ZiTah.npcs.relic_mjollnir.onT
     if currentRelic == xi.items.GULLINTANI and npcUtil.tradeHas(trade, {xi.items.RANPERRE_GOLDPIECE, xi.items.HEAVENLY_FRAGMENT, xi.items.SHARD_OF_NECROPSYCHE, xi.items.GULLINTANI}) then -- currency, shard, necropsyche, stage 4
         player:startEvent(216, xi.items.MJOLLNIR)
     elseif trade:getGil() == 5000000 then
-        for i = 1, 14 do
+        for i = 1, 16 do
             local itemId = rTable[i][1]
 
             if npcUtil.tradeHas(trade, itemId) then
@@ -234,7 +236,7 @@ relicSystem:addOverride("xi.zones.Castle_Oztroja.npcs.relic.onTrade", function(p
     then -- currency, shard, necropsyche, stage 4
         player:startEvent(59, xi.items.SPHARAI)
     elseif trade:getGil() == 5000000 then
-        for i = 1, 14 do
+        for i = 1, 16 do
             local itemId = rTable[i][1]
 
             if npcUtil.tradeHas(trade, itemId) then
@@ -255,7 +257,7 @@ relicSystem:addOverride("xi.zones.Dragons_Aery.npcs.relic.onTrade", function(pla
     then -- currency, shard, necropsyche, stage 4
         player:startEvent(3, xi.items.EXCALIBUR)
     elseif trade:getGil() == 5000000 then
-        for i = 1, 14 do
+        for i = 1, 16 do
             local itemId = rTable[i][1]
 
             if npcUtil.tradeHas(trade, itemId) then
@@ -276,11 +278,11 @@ relicSystem:addOverride("xi.zones.Western_Altepa_Desert.npcs.relic.onTrade", fun
     then -- currency, shard, necropsyche, stage 4
         player:startEvent(205, xi.items.GUTTLER)
     elseif trade:getGil() == 5000000 then
-        for i = 1, 14 do
+        for i = 1, 16 do
             local itemId = rTable[i][1]
 
             if npcUtil.tradeHas(trade, itemId) then
-                if npcUtil.giveItem(xi.items.GUTTLER) then
+                if npcUtil.giveItem(player, xi.items.GUTTLER) then
                     player:tradeComplete()
                 end
 
@@ -297,11 +299,11 @@ relicSystem:addOverride("xi.zones.RuAun_Gardens.npcs.relic.onTrade", function(pl
     then -- currency, shard, necropsyche, stage 4
         player:startEvent(60, xi.items.GUNGNIR)
     elseif trade:getGil() == 5000000 then
-        for i = 1, 14 do
+        for i = 1, 16 do
             local itemId = rTable[i][1]
 
             if npcUtil.tradeHas(trade, itemId) then
-                if npcUtil.giveItem(xi.items.GUNGNIR) then
+                if npcUtil.giveItem(player, xi.items.GUNGNIR) then
                     player:tradeComplete()
                 end
 
@@ -319,11 +321,11 @@ relicSystem:addOverride("xi.zones.Beaucedine_Glacier.npcs.relic.onTrade", functi
     then -- currency, shard, necropsyche, stage 4
         player:startEvent(139, xi.items.RAGNAROK)
     elseif trade:getGil() == 5000000 then
-        for i = 1, 14 do
+        for i = 1, 16 do
             local itemId = rTable[i][1]
 
             if npcUtil.tradeHas(trade, itemId) then
-                if npcUtil.giveItem(xi.items.RAGNAROK) then
+                if npcUtil.giveItem(player, xi.items.RAGNAROK) then
                     player:tradeComplete()
                 end
 
@@ -337,11 +339,11 @@ relicSystem:addOverride("xi.zones.Valley_of_Sorrows.npcs.relic.onTrade", functio
     if (player:getCharVar("RELIC_IN_PROGRESS") == xi.items.MILLENNIUM_HORN and npcUtil.tradeHas(trade, {xi.items.RIMILALA_STRIPESHELL, xi.items.MYSTERIAL_FRAGMENT, xi.items.SHARD_OF_NECROPSYCHE, xi.items.MILLENNIUM_HORN})) then -- currency, shard, necropsyche, stage 4
         player:startEvent(15, xi.items.GJALLARHORN)
     elseif trade:getGil() == 5000000 then
-        for i = 1, 14 do
+        for i = 1, 16 do
             local itemId = rTable[i][1]
 
             if npcUtil.tradeHas(trade, itemId) then
-                if npcUtil.giveItem(xi.items.GJALLARHORN) then
+                if npcUtil.giveItem(player, xi.items.GJALLARHORN) then
                     player:tradeComplete()
                 end
 
@@ -357,11 +359,11 @@ relicSystem:addOverride("xi.zones.RuLude_Gardens.npcs.relic.onTrade", function(p
     then -- currency, shard, necropsyche, stage 4
         player:startEvent(10035, xi.items.BRAVURA)
     elseif trade:getGil() == 5000000 then
-        for i = 1, 14 do
+        for i = 1, 16 do
             local itemId = rTable[i][1]
 
             if npcUtil.tradeHas(trade, itemId) then
-                if npcUtil.giveItem(xi.items.BRAVURA) then
+                if npcUtil.giveItem(player, xi.items.BRAVURA) then
                     player:tradeComplete()
                 end
 
@@ -375,11 +377,11 @@ relicSystem:addOverride("xi.zones.Horlais_Peak.npcs.relic.onTrade", function(pla
     if (player:getCharVar("RELIC_IN_PROGRESS") == xi.items.TOTSUKANOTSURUGI and npcUtil.tradeHas(trade, {xi.items.RANPERRE_GOLDPIECE, xi.items.DIVINE_FRAGMENT, xi.items.SHARD_OF_NECROPSYCHE, xi.items.TOTSUKANOTSURUGI})) then -- currency, shard, necropsyche, stage 4
         player:startEvent(13, xi.items.AMANOMURAKUMO)
     elseif trade:getGil() == 5000000 then
-        for i = 1, 14 do
+        for i = 1, 16 do
             local itemId = rTable[i][1]
 
             if npcUtil.tradeHas(trade, itemId) then
-                if npcUtil.giveItem(xi.items.AMANOMURAKUMO) then
+                if npcUtil.giveItem(player, xi.items.AMANOMURAKUMO) then
                     player:tradeComplete()
                 end
 
@@ -393,11 +395,11 @@ relicSystem:addOverride("xi.zones.North_Gustaberg.npcs.relic.onTrade", function(
     if player:getCharVar("RELIC_IN_PROGRESS") == xi.items.BEC_DE_FAUCON and npcUtil.tradeHas(trade, {xi.items.RIMILALA_STRIPESHELL, xi.items.TENEBROUS_FRAGMENT, xi.items.SHARD_OF_NECROPSYCHE, xi.items.BEC_DE_FAUCON}) then -- currency, shard, necropsyche, stage 4
         player:startEvent(254, xi.items.APOCALYPSE)
     elseif trade:getGil() == 5000000 then
-        for i = 1, 14 do
+        for i = 1, 16 do
             local itemId = rTable[i][1]
 
             if npcUtil.tradeHas(trade, itemId) then
-                if npcUtil.giveItem(xi.items.APOCALYPSE) then
+                if npcUtil.giveItem(player, xi.items.APOCALYPSE) then
                     player:tradeComplete()
                 end
 
@@ -411,11 +413,11 @@ relicSystem:addOverride("xi.zones.Carpenters_Landing.npcs.relic.onTrade", functi
     if (player:getCharVar("RELIC_IN_PROGRESS") == xi.items.ANCILE and npcUtil.tradeHas(trade, {xi.items.RANPERRE_GOLDPIECE, xi.items.SUPERNAL_FRAGMENT, xi.items.SHARD_OF_NECROPSYCHE, xi.items.ANCILE})) then -- currency, shard, necropsyche, stage 4
         player:startEvent(44, xi.items.AEGIS)
     elseif trade:getGil() == 5000000 then
-        for i = 1, 14 do
+        for i = 1, 16 do
             local itemId = rTable[i][1]
 
             if npcUtil.tradeHas(trade, itemId) then
-                if npcUtil.giveItem(xi.items.AEGIS) then
+                if npcUtil.giveItem(player, xi.items.AEGIS) then
                     player:tradeComplete()
                 end
 
@@ -429,11 +431,11 @@ relicSystem:addOverride("xi.zones.Sea_Serpent_Grotto.npcs.relic.onTrade", functi
     if player:getCharVar("RELIC_IN_PROGRESS") == xi.items.YOSHIMITSU and npcUtil.tradeHas(trade, {xi.items.TEN_THOUSAND_BYNE_BILL, xi.items.DEMONIAC_FRAGMENT, xi.items.SHARD_OF_NECROPSYCHE, xi.items.YOSHIMITSU}) then -- currency, shard, necropsyche, stage 4
         player:startEvent(11, xi.items.KIKOKU)
     elseif trade:getGil() == 5000000 then
-        for i = 1, 14 do
+        for i = 1, 16 do
             local itemId = rTable[i][1]
 
             if npcUtil.tradeHas(trade, itemId) then
-                if npcUtil.giveItem(xi.items.KIKOKU) then
+                if npcUtil.giveItem(player, xi.items.KIKOKU) then
                     player:tradeComplete()
                 end
 
@@ -449,11 +451,11 @@ relicSystem:addOverride("xi.zones.Ifrits_Cauldron.npcs.relic.onTrade", function(
     then
         player:startEvent(32, xi.items.CLAUSTRUM)
     elseif trade:getGil() == 5000000 then
-        for i = 1, 14 do
+        for i = 1, 16 do
             local itemId = rTable[i][1]
 
             if npcUtil.tradeHas(trade, itemId) then
-                if npcUtil.giveItem(xi.items.CLAUSTRUM) then
+                if npcUtil.giveItem(player, xi.items.CLAUSTRUM) then
                     player:tradeComplete()
                 end
 
@@ -467,11 +469,11 @@ relicSystem:addOverride("xi.zones.Cape_Teriggan.npcs.relic.onTrade", function(pl
     if player:getCharVar("RELIC_IN_PROGRESS") == xi.items.FUTATOKOROTO and npcUtil.tradeHas(trade, {xi.items.RANPERRE_GOLDPIECE, xi.items.SNARLED_FRAGMENT, xi.items.SHARD_OF_NECROPSYCHE, xi.items.FUTATOKOROTO}) then -- currency, shard, necropsyche, stage 4
         player:startEvent(18, xi.items.YOICHINOYUMI)
     elseif trade:getGil() == 5000000 then
-        for i = 1, 14 do
+        for i = 1, 16 do
             local itemId = rTable[i][1]
 
             if npcUtil.tradeHas(trade, itemId) then
-                if npcUtil.giveItem(xi.items.YOICHINOYUMI) then
+                if npcUtil.giveItem(player, xi.items.YOICHINOYUMI) then
                     player:tradeComplete()
                 end
 
@@ -485,11 +487,11 @@ relicSystem:addOverride("xi.zones.Metalworks.npcs.relic.onTrade", function(playe
     if player:getCharVar("RELIC_IN_PROGRESS") == xi.items.FERDINAND and npcUtil.tradeHas(trade, {xi.items.TEN_THOUSAND_BYNE_BILL, xi.items.ETHEREAL_FRAGMENT, xi.items.SHARD_OF_NECROPSYCHE, xi.items.FERDINAND}) then -- currency, shard, necropsyche, stage 4
         player:startEvent(843, xi.items.ANNIHILATOR)
     elseif trade:getGil() == 5000000 then
-        for i = 1, 14 do
+        for i = 1, 16 do
             local itemId = rTable[i][1]
 
             if npcUtil.tradeHas(trade, itemId) then
-                if npcUtil.giveItem(xi.items.ANNIHILATOR) then
+                if npcUtil.giveItem(player, xi.items.ANNIHILATOR) then
                     player:tradeComplete()
                 end
 
