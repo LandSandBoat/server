@@ -14,3 +14,5 @@ item_object.onAdditionalEffect = function(player, target, damage)
         player:warp()
     end
 end
+
+return item_object

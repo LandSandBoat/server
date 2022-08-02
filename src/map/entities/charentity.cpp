@@ -1271,7 +1271,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
                 // aggressive action
                 if (PAbility->getID() != ABILITY_ASSAULT)
                     StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
-                else 
+                else
                     StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_INVISIBLE);
             }
             else if (PAbility->getID() != ABILITY_TRICK_ATTACK)
