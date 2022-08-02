@@ -365,6 +365,65 @@ local loot =
         },
     },
 
+    -- BCNM Royal Jelly
+    [77] =
+    {
+        {
+            {itemid = 637, droprate = 1000}, -- Slime oil
+        },
+        {
+            {itemid = 637, droprate = 1000}, -- Slime oil
+        },
+        {
+            {itemid = 13514, droprate = 91}, -- Archer's Ring
+        },
+        {
+            {itemid = 14651, droprate = 469}, -- Mana ring
+            {itemid = 17693, droprate = 152}, -- Grude Sword
+            {itemid = 17936, droprate = 120}, -- De Saintre's Axe
+            {itemid = 17696, droprate = 118}, -- Buzard Tuck
+            {itemid = 4947, droprate = 106},  -- Utsusemi: Ni
+        },
+        {
+            {itemid = 14650, droprate = 258}, -- Marksman's Ring
+            {itemid = 17572, droprate = 152}, -- Dusky Staff
+            {itemid = 17573, droprate = 101}, -- Himmel Stock
+            {itemid = 17463, droprate = 98},  -- Sealed Mace
+            {itemid = 19877, droprate = 98},  -- Shikar Bow
+        },
+        {
+            {itemid = 4874, droprate = 123}, -- Absorb-STR
+            {itemid = 4751, droprate = 165}, -- Erase
+            {itemid = 4714, droprate = 140}, -- Phalanx
+            {itemid = 4896, droprate = 145}, -- Fire Spirit
+            {itemid = 666, droprate = 229},  -- Steel Sheet
+            {itemid = 652, droprate = 238},  -- Steel Ingot
+        },
+        {
+            {itemid = 4717, droprate = 263}, -- Refresh
+            {itemid = 4858, droprate = 246}, -- Ice Spikies
+            {itemid = 4947, droprate = 177}, -- Utsusemi: Ni
+            {itemid = 748, droprate = 182},  -- Gold Beastcoin
+            {itemid = 749, droprate = 133},  -- Mythril Beastcoin
+            {itemid = 788, droprate = 27},   -- Peridot
+            {itemid = 798, droprate = 20},   -- Turqoise
+            {itemid = 793, droprate = 15},   -- Black Pearl
+            {itemid = 808, droprate = 15},   -- Goshenite
+            {itemid = 815, droprate = 15},   -- Sphene
+            {itemid = 811, droprate = 10},   -- Ametrine
+            {itemid = 790, droprate = 7},    -- Garnet
+            {itemid = 775, droprate = 12},   -- Black Rock
+            {itemid = 772, droprate = 7},    -- Green Rock
+            {itemid = 776, droprate = 7},    -- White Rock
+            {itemid = 770, droprate = 2},    -- Blue Rock
+            {itemid = 773, droprate = 2},    -- Transluescent Rock
+            {itemid = 699, droprate = 5},    -- Oak Log
+            {itemid = 701, droprate = 5},    -- Rosewood Log
+            {itemid = 4174, droprate = 10},  -- Vile Elixer
+            {itemid = 4172, droprate = 2},   -- Reraiser
+        },
+    },
+
     -- BCNM The Final Bout
     [78] =
     {
