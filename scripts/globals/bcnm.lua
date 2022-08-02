@@ -476,7 +476,7 @@ local battlefields =
         { 0,  512,    0},   -- The Rank 5 Mission (Mission 5-1)
         { 1,  513, 1175},   -- Come Into My Parlor (KS30)
         { 2,  514, 1178},   -- E-vase-ive Action (KS30)
-     -- { 3,  515, 1180},   -- Infernal Swarm (KS30)
+        { 3,  515, 1180},   -- Infernal Swarm (KS30)
         { 4,  516,    0},   -- The Heir to the Light (Sandy 9-2)
         { 5,  517, 1432},   -- Shattering Stars (PLD LB5)
         { 6,  518, 1433},   -- Shattering Stars (DRK LB5)

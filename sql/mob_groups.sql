@@ -13167,7 +13167,7 @@ INSERT INTO `mob_groups` VALUES (49,1163,206,'Earth_Pot',0,128,0,0,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (50,3915,206,'Thunder_Pot',0,128,0,0,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (51,4312,206,'Water_Pot',0,128,0,0,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (52,385,206,'Beelzebub',0,128,0,0,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (53,1925,206,'Hell_Fly',0,128,0,0,0,75,75,0);
+INSERT INTO `mob_groups` VALUES (53,1925,206,'Hell_Fly',0,128,0,0,0,70,70,0);
 INSERT INTO `mob_groups` VALUES (54,4205,206,'Vassago',0,128,0,0,0,50,50,0);
 INSERT INTO `mob_groups` VALUES (55,2319,206,'Laila',0,128,0,2200,1000,70,70,0);
 INSERT INTO `mob_groups` VALUES (56,42,206,'Adam',0,128,0,0,0,0,0,0);

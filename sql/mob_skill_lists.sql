@@ -3807,7 +3807,9 @@ INSERT INTO `mob_skill_lists` VALUES ('Ash_Dragon',1177,645);
 INSERT INTO `mob_skill_lists` VALUES ('Ash_Dragon',1177,642);
 INSERT INTO `mob_skill_lists` VALUES ('Ash_Dragon',1177,649);
 INSERT INTO `mob_skill_lists` VALUES ('Ash_Dragon',1177,647);
--- Next Available ID: 1178-1179
+INSERT INTO `mob_skill_lists` VALUES('Infernal_Swarm',1178,334); -- sharp_sting
+INSERT INTO `mob_skill_lists` VALUES('Infernal_Swarm',1178,335); -- pollen
+-- Next Available ID: 1179
 INSERT INTO `mob_skill_lists` VALUES ('Mind_Hoarder',1180,524);
 INSERT INTO `mob_skill_lists` VALUES ('Barbaric_Weapon',1181,514);
 INSERT INTO `mob_skill_lists` VALUES ('Marquis_Sabnock',1182,1149);
