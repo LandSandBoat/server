@@ -8,6 +8,7 @@ require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/status")
 require("scripts/globals/zone")
+require('scripts/globals/npc_util')
 -----------------------------------
 
 xi = xi or {}
@@ -117,7 +118,8 @@ xi.chocobo.renterOnTrade = function(player, npc, trade, eventSucceed, eventFail)
     local zoneId = player:getZoneID()
     local info   = chocoboInfo[zoneId]
 
-    if trade:hasItemQty(1789, 1) and zoneId == (xi.zone.WINDURST_WOODS or xi.zone.BASTOK_MINES or xi.zone.SOUTHERN_SAN_DORIA) then -- Chocopass Fails for Non-Starter Cities
+    if npcUtil.tradeHasExactly(trade, xi.items.FREE_CHOCOPASS) and
+    (zoneId == xi.zone.WINDURST_WOODS or zoneId == xi.zone.BASTOK_MINES or zoneId == xi.zone.SOUTHERN_SAN_DORIA) then -- Chocopass Fails for Non-Starter Cities
         if info.past then -- Fails for Past Zones
             player:startEvent(eventFail)
         else
@@ -129,7 +131,7 @@ xi.chocobo.renterOnTrade = function(player, npc, trade, eventSucceed, eventFail)
             player:setLocalVar("ChocopassDuration", 120)
             player:startEvent(eventSucceed, price, currency)
         end
-    elseif trade:hasItemQty(1514, 1) then -- Chocobo Ticket
+    elseif npcUtil.tradeHasExactly(trade, xi.items.CHOCOBO_TICKET) then -- Chocobo Ticket
         if info.past then -- Fails for Past Zones
             player:startEvent(eventFail)
         else

@@ -508,12 +508,9 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
         // Remove the player's pet as well
         if (PChar->PPet)
         {
-            if (auto PBattleEntityPet = dynamic_cast<CBattleEntity*>(PChar->PPet))
-            {
-                PBattleEntityPet->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
-                PBattleEntityPet->StatusEffectContainer->DelStatusEffect(EFFECT_LEVEL_RESTRICTION);
-                ClearEnmityForEntity(PBattleEntityPet);
-            }
+            PChar->PPet->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
+            PChar->PPet->StatusEffectContainer->DelStatusEffect(EFFECT_LEVEL_RESTRICTION);
+            ClearEnmityForEntity(PChar->PPet);
         }
     }
     else

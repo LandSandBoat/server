@@ -458,6 +458,7 @@ xi.items =
     CHUNK_OF_WOOTZ_ORE              = 1469,
     GARDENIA_SEED                   = 1472,
     INFINITY_CORE                   = 1474,
+    CHOCOBO_TICKET                  = 1514,
     RED_CRYPTEX                     = 1528,
     DARKSTEEL_ENGRAVING             = 1529,
     SEVEN_KNOT_QUIPU                = 1530,

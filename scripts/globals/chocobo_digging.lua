@@ -856,7 +856,7 @@ local function canDig(player)
     local zoneInTime               = player:getLocalVar('ZoneInTime')
     local currentTime     = os.time()
     local skillRank                = player:getSkillRank(xi.skill.DIG)
-     -- personal dig caps
+    -- personal dig caps
     local digCap          = DIG_FATIGUE + (skillRank * 10)
     -- base delay -5 for each rank
     local digDelay        = 16 - (skillRank * 5)
@@ -953,7 +953,7 @@ local function calculateSkillUp(player)
 
             -- Digging does not have test items, so increment rank once player hits 10.0, 20.0, .. 100.0
             if (realSkill + 1) >= (skillRank * 100) + 100 then
-               player:setSkillRank(xi.skill.DIG, skillRank + 1)
+                player:setSkillRank(xi.skill.DIG, skillRank + 1)
             end
         end
     end
@@ -994,29 +994,35 @@ local function getChocoboDiggingItem(player)
             -- skill up weight variation and ore moon variation
             itemWeight = item[2]
 
-            if DigRank > 0 then
-                if itemWeight >= 150 then
-                    itemWeight = itemWeight * (0.95^DigRank)
-                elseif itemWeight >= 125 then
-                    itemWeight = itemWeight * (0.97^DigRank)
-                elseif itemWeight >= 100 then
-                    itemWeight = itemWeight * (0.99^DigRank)
-                elseif itemWeight >= 50 then
-                    itemWeight = itemWeight * (1.03^DigRank)
-                elseif itemWeight >= 1 then
-                    itemWeight = itemWeight * (1.05^DigRank)
+            local weights =
+            {
+                {150, 0.95},
+                {125, 0.97},
+                {100, 0.99},
+                { 50, 1.03},
+                {  1, 1.05},
+            }
+
+            for _, v in pairs(weights) do
+                if DigRank > 0 then
+                    if itemWeight >= v[1] then
+                        itemWeight = itemWeight * (v[2]^DigRank)
+                    end
                 end
             end
 
-            if item[1] == 1255 then
-                if moon >= 7 and moon <= 9 then
-                    itemWeight = itemWeight * 0.7
-                elseif moon >= 10 and moon <= 14 then
-                    itemWeight = itemWeight
-                elseif moon >= 15 and moon <= 21 then
-                    itemWeight = itemWeight * 0.9
-                elseif moon >= 21 and moon <= 24 then
-                    itemWeight = itemWeight * 0.5
+            local moonPhases =
+            {
+                {7, 9, 0.7},
+                {15, 21, 0.9},
+                {21, 24, 0.5},
+            }
+
+            for _, v in pairs(moonPhases) do
+                if item[1] == 1255 then
+                    if moon >= v[1] and moon <= v[2] then
+                        itemWeight = itemWeight * v[3]
+                    end
                 end
             end
 
@@ -1033,30 +1039,36 @@ local function getChocoboDiggingItem(player)
     for i = 1, #possibleItems do
         itemWeight = possibleItems[i][2]
 
+        local weights =
+        {
+            {150, 0.95},
+            {125, 0.97},
+            {100, 0.99},
+            { 50, 1.03},
+            {  1, 1.05},
+        }
+
         -- skill up weight variation and ore moon variation
-        if DigRank > 0 then
-            if itemWeight >= 150 then
-                itemWeight = itemWeight * (0.95^DigRank)
-            elseif itemWeight >= 125 then
-                itemWeight = itemWeight * (0.97^DigRank)
-            elseif itemWeight >= 100 then
-                itemWeight = itemWeight * (0.99^DigRank)
-            elseif itemWeight >= 50 then
-                itemWeight = itemWeight * (1.03^DigRank)
-            elseif itemWeight >= 1 then
-                itemWeight = itemWeight * (1.05^DigRank)
+        for _, v in pairs(weights) do
+            if DigRank > 0 then
+                if itemWeight >= v[1] then
+                    itemWeight = itemWeight * (v[2]^DigRank)
+                end
             end
         end
 
-        if possibleItems[i][1] == 1255 then
-            if moon >= 7 and moon <= 9 then
-                itemWeight = itemWeight * 0.7
-            elseif moon >= 10 and moon <= 14 then
-                itemWeight = itemWeight
-            elseif moon >= 15 and moon <= 21 then
-                itemWeight = itemWeight * 0.9
-            elseif moon >= 21 and moon <= 24 then
-                itemWeight = itemWeight * 0.5
+        local moonPhases =
+        {
+            {7, 9, 0.7},
+            {15, 21, 0.9},
+            {21, 24, 0.5},
+        }
+
+        for _, v in pairs(moonPhases) do
+            if possibleItems[i][1] == 1255 then
+                if moon >= v[1] and moon <= v[2] then
+                    itemWeight = itemWeight * v[3]
+                end
             end
         end
 
