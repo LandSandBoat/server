@@ -588,7 +588,7 @@ local function checkReqs(player, npc, bfid, registrant)
         [ 160] = function() return ( nat == mi.nation.SHADOW_LORD and natStat == 3                                                                                         ) end, -- Mission 5-2
         [ 161] = function() return ( basty == mi.bastok.WHERE_TWO_PATHS_CONVERGE and natStat == 1                                                                          ) end, -- Basty 9-2: Where Two Paths Converge
         [ 163] = function() return ( mjob == xi.job.SCH and mlvl >= 66                                                                                                     ) end, -- Quest: Survival of the Wisest (SCH LB5)
-        [ 192] = function() return ( roz == mi.zilart.THROUGH_THE_QUICKSAND_CAVES                                                                                          ) end, -- ZM6: Through the Quicksand Caves
+        [ 192] = function() return ( roz == mi.zilart.THROUGH_THE_QUICKSAND_CAVES and roz < mi.zilart.RETURN_TO_DELKFUTTS_TOWER                                            ) end, -- ZM6: Through the Quicksand Caves
         [ 194] = function() return ( mjob == xi.job.SAM and mlvl >= 66                                                                                                     ) end, -- Quest: Shattering Stars (SAM LB5)
         [ 195] = function() return ( mjob == xi.job.NIN and mlvl >= 66                                                                                                     ) end, -- Quest: Shattering Stars (NIN LB5)
         [ 196] = function() return ( mjob == xi.job.DRG and mlvl >= 66                                                                                                     ) end, -- Quest: Shattering Stars (DRG LB5)
