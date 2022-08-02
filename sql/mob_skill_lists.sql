@@ -1397,7 +1397,10 @@ INSERT INTO `mob_skill_lists` VALUES ('Nosferatu',309,2111);
 -- INSERT INTO `mob_skill_lists` VALUES ('Nosferatu',309,2112);
 INSERT INTO `mob_skill_lists` VALUES ('ExperimentalLa',310,1753);
 INSERT INTO `mob_skill_lists` VALUES ('ExperimentalLa',310,1758);
--- 311: free
+INSERT INTO `mob_skill_lists` VALUES ('Giant_Moa',311,1335); -- toxic pick
+INSERT INTO `mob_skill_lists` VALUES ('Giant_Moa',311,1333); -- contagion transfer
+INSERT INTO `mob_skill_lists` VALUES ('Giant_Moa',311,411);  -- baleful gaze
+INSERT INTO `mob_skill_lists` VALUES ('Giant_Moa',311,406);  -- hammer beak
 -- INSERT INTO `mob_skill_lists` VALUES ('Nuhn',312,1977);
 -- INSERT INTO `mob_skill_lists` VALUES ('Nuhn',312,1978);
 -- INSERT INTO `mob_skill_lists` VALUES ('Nuhn',312,1693);
