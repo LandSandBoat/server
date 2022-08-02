@@ -9,6 +9,15 @@ xi = xi or {}
 xi.job_utils = xi.job_utils or {}
 xi.job_utils.monk = xi.job_utils.monk or {}
 
+local chakraStatusEffects =
+{
+    POISON       = 0, -- Removed by default
+    BLINDNESS    = 0, -- Removed by default
+    PARALYSIS    = 1,
+    DISEASE      = 2,
+    PLAGUE       = 4,
+}
+
 -----------------------------------
 -- Ability Check Functions
 -----------------------------------
@@ -38,15 +47,6 @@ xi.job_utils.monk.useBoost = function(player, target, ability)
 end
 
 xi.job_utils.monk.useChakra = function(player, target, ability)
-    local chakraStatusEffects =
-    {
-        POISON       = 0, -- Removed by default
-        BLINDNESS    = 0, -- Removed by default
-        PARALYSIS    = 1,
-        DISEASE      = 2,
-        PLAGUE       = 4,
-    }
-
     local chakraRemoval = player:getMod(xi.mod.CHAKRA_REMOVAL)
     for k, v in pairs(chakraStatusEffects) do
         if bit.band(chakraRemoval, v) == v then
