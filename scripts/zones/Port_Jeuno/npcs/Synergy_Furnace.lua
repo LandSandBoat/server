@@ -169,13 +169,6 @@ local craftingSmocks =
     [ 9] = { 4109,   12,   14400,    1 }, -- Water Cluster, Fishermans Apron
 }	
 
-local craftingTrackSuit =
-{
---   Index = {item name, item1, Qty1, item2, Qty2},
-    [ 1] = { "Track Pants +1", 4104,   12,   27325,    2 }, -- Fire Cluster, Track Pants 
-    [ 2] = { "Track Shirt +1", 4104,   12,   25713,    2 }, -- Fire Cluster, Track Shirt
-}	
-	
 local function handleKirinItemCreation(player, itemId, au0, po0) -- This is for Kirin Items(God). Augment 0 will carry over from our NPC trade function.
     -- NQ: ~15%, HQ1: ~60%, HQ2: ~15%, HQ3: ~10%.
     math.randomseed(os.time())
@@ -589,20 +582,20 @@ entity.onTrade = function(player, npc, trade)
 
 ----------------------------------------------------------------------------------------------
 -- Crafting Track Suit
+local fireclusters = npcUtil.tradeHas(trade, {{ 4104, 12 }})
 
-        if npcUtil.tradeHasExactly(trade, {{craftingTrackSuit[1][2], craftingTrackSuit[1][3], craftingTrackSuit[1][4], craftingTrackSuit[1][5]}}) then
+   	if npcUtil.tradeHas(trade, 27325, 27325) and fireclusters then
             player:tradeComplete()
             player:addItem(27326)
             player:messageSpecial( ID.text.ITEM_OBTAINED, 27326) -- Give Track Pants +1
-            return
+            end
 			
-        elseif npcUtil.tradeHasExactly(trade, {{craftingTrackSuit[2][2], craftingTrackSuit[2][3], craftingTrackSuit[2][4], craftingTrackSuit[2][5]}}) then
+   	if npcUtil.tradeHas(trade, 25713, 25713) and fireclusters then
             player:tradeComplete()
             player:addItem(25714)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 25714) -- Give Track Shirt +1
-            return
-        end
-		
+            end
+			
 ----------------------------------------------------------------------------------------------
 
     for i = 1, 9 do -- This variable "i" will be the index in the table.
