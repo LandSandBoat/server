@@ -8,7 +8,7 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:setMod(xi.mod.LULLABYRES, 500)
+    mob:setMod(xi.mod.LULLABYRES, 50)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
