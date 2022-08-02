@@ -561,6 +561,12 @@ INSERT INTO `bcnm_battlefield` VALUES (111,3,17375417,3);
 INSERT INTO `bcnm_battlefield` VALUES (111,3,17375418,3);
 INSERT INTO `bcnm_battlefield` VALUES (111,3,17375419,3);
 INSERT INTO `bcnm_battlefield` VALUES (111,3,17375420,3);
+INSERT INTO `bcnm_battlefield` VALUES (113,1,17375443,3); -- moa constrictors
+INSERT INTO `bcnm_battlefield` VALUES (113,1,17375444,3);
+INSERT INTO `bcnm_battlefield` VALUES (113,2,17375446,3);
+INSERT INTO `bcnm_battlefield` VALUES (113,2,17375447,3);
+INSERT INTO `bcnm_battlefield` VALUES (113,3,17375449,3);
+INSERT INTO `bcnm_battlefield` VALUES (113,3,17375450,3);
 INSERT INTO `bcnm_battlefield` VALUES (116,1,17375491,3); -- beyond_infinity (Balgas Dais)
 INSERT INTO `bcnm_battlefield` VALUES (116,2,17375492,3); -- beyond_infinity (Balgas Dais)
 INSERT INTO `bcnm_battlefield` VALUES (116,3,17375493,3); -- beyond_infinity (Balgas Dais)
