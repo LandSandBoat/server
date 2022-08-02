@@ -106,11 +106,13 @@ local function calculateMobMagicBurst(caster, ele, target)
         elseif skillchainCount == 2 then
             burst = 1.35
         elseif skillchainCount == 3 then
-             burst = 1.40
+            burst = 1.40
         elseif skillchainCount == 4 then
             burst = 1.45
         elseif skillchainCount == 5 then
             burst = 1.50
+        elseif (skillchainCount == 6) then
+            burst = 1.55
         else
             -- Something strange is going on if this occurs.
             burst = 1.0

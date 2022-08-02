@@ -169,10 +169,10 @@ INSERT INTO `mob_family_mods` VALUES (358,240,50,0);
 INSERT INTO `mob_family_mods` VALUES (359,240,100,0);
 
 -- Immunities
-INSERT INTO `mob_family_mods` VALUES (92,23,2047,1);
-INSERT INTO `mob_family_mods` VALUES (93,23,2047,1);
-INSERT INTO `mob_family_mods` VALUES (94,23,2047,1);
-INSERT INTO `mob_family_mods` VALUES (95,23,2047,1);
+INSERT INTO `mob_family_mods` VALUES (92,23,2039,1);
+INSERT INTO `mob_family_mods` VALUES (93,23,2039,1);
+INSERT INTO `mob_family_mods` VALUES (94,23,2039,1);
+INSERT INTO `mob_family_mods` VALUES (95,23,2039,1);
 
 INSERT INTO `mob_family_mods` VALUES (92,73,100,0);
 INSERT INTO `mob_family_mods` VALUES (93,73,100,0);
