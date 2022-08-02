@@ -39,11 +39,10 @@ mission.sections =
             {
                 [32001] = function(player, csid, option, npc)
                     if player:getLocalVar('battlefieldWin') == 320 then
-                        if mission:complete(player) then
-                            player:setMissionStatus(xi.mission.log_id.ZILART, 0)
-                        end
+                        mission:complete(player)
                     end
-                    player:setPos(0, -18, 137, 64, 251) -- Hall of the Gods
+
+                    player:setPos(0.003, -18.897, 137.112, 64, xi.zone.HALL_OF_THE_GODS)
                 end,
             },
         },
