@@ -16,7 +16,7 @@ local mobskill_object = {}
 mobskill_object.onMobSkillCheck = function(target, mob, skill)
     if mob:getAnimationSub() == 1 then
         return 1
-    elseif target:isBehind(mob, 48) then
+    elseif target:isBehind(mob, 96) then
         return 1
     end
 
