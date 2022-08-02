@@ -506,7 +506,11 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
 
     -- Dark Seal
     if casterJob == xi.job.DRK and skillType == xi.skill.DARK_MAGIC and caster:hasStatusEffect(xi.effect.DARK_SEAL) then
-        magicAcc = magicAcc + 256 -- Need citation. 256 seems OP
+        magicAcc = magicAcc + 75
+    end
+
+    if caster:hasStatusEffect(xi.effect.ELEMENTAL_SEAL) then
+        magicAcc = magicAcc + 75
     end
 
     -- Add acc for skillchains
