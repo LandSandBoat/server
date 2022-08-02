@@ -6249,7 +6249,7 @@ namespace charutils
                                 "WHERE charid = %u;";
 
             sql->Query(Query, PChar->loc.destination,
-                       (PChar->m_moghouseID || PChar->loc.destination == PChar->getZone()) ? PChar->loc.prevzone : PChar->getZone(), PChar->loc.p.rotation,
+                       (PChar->m_moghouseID || PChar->loc.destination == PChar->getZone()) ? PChar->getZone() : PChar->loc.prevzone, PChar->loc.p.rotation,
                        PChar->loc.p.x, PChar->loc.p.y, PChar->loc.p.z, PChar->m_moghouseID, PChar->loc.boundary, PChar->id);
         }
         else
