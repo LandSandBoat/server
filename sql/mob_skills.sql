@@ -501,7 +501,7 @@ INSERT INTO `mob_skills` VALUES (665,409,'grand_slam',1,15.0,2000,1500,4,0,0,0,0
 INSERT INTO `mob_skills` VALUES (666,410,'power_attack',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (667,411,'power_attack_weapon',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (668,412,'kick_back',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (669,413,'implosion',1,60,2000,0,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (669,413,'implosion',1,30,2000,0,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (670,414,'implosion',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (671,415,'umbra_smash',1,12.0,3000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (672,416,'giga_slash',1,12.0,3000,1500,4,0,0,0,0,0,0);
@@ -661,7 +661,7 @@ INSERT INTO `mob_skills` VALUES (825,497,'wind_blade2',0,7,2000,0,1,0,0,0,0,0,0)
 INSERT INTO `mob_skills` VALUES (826,498,'earth_blade',0,7,2000,0,1,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (827,499,'lightning_blade',0,7,2000,0,1,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (828,500,'water_blade',0,7,2000,0,1,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (829,501,'great_wheel',1,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (829,501,'great_wheel',1,7.0,2000,1500,4,0,0,1,0,0,0);
 INSERT INTO `mob_skills` VALUES (830,502,'light_blade',0,30.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (831,513,'moonlit_charge',0,10.0,512,3000,4,68,0,7,2,0,0); -- Compression (2)
 INSERT INTO `mob_skills` VALUES (832,514,'crescent_fang',0,10.0,513,3000,4,68,0,0,1,0,0); -- Transfixion (1)
@@ -770,17 +770,17 @@ INSERT INTO `mob_skills` VALUES (934,638,'shield_strike',4,7,2000,0,4,0,0,0,0,0,
 INSERT INTO `mob_skills` VALUES (935,636,'amon_drive',2,15.0,2000,500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (936,639,'ark_guardian_tarutaru',0,22.0,500,0,1,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (937,637,'dragonfall',1,7,2000,500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (938,640,'circle_blade',1,7,2000,0,4,0,0,0,5,8,0);
-INSERT INTO `mob_skills` VALUES (939,641,'swift_blade',0,7,2000,0,4,0,0,0,9,0,0);
-INSERT INTO `mob_skills` VALUES (940,644,'rampage',0,7,2000,0,4,0,0,0,4,0,0);
-INSERT INTO `mob_skills` VALUES (941,645,'calamity',0,7,2000,0,4,0,0,0,4,8,0);
-INSERT INTO `mob_skills` VALUES (942,642,'spirits_within',0,7,2000,0,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (943,643,'vorpal_blade',0,7,2000,0,4,0,0,0,4,8,0);
-INSERT INTO `mob_skills` VALUES (944,646,'spinning_scythe',1,7,2000,0,4,0,0,0,5,4,0);
-INSERT INTO `mob_skills` VALUES (945,647,'guillotine',0,7,2000,0,4,0,0,0,7,0,0);
-INSERT INTO `mob_skills` VALUES (946,648,'tachi_yukikaze',0,7,2000,0,4,0,0,0,7,6,0);
-INSERT INTO `mob_skills` VALUES (947,649,'tachi_gekko',0,7,2000,0,4,0,0,0,10,5,0);
-INSERT INTO `mob_skills` VALUES (948,650,'tachi_kasha',0,7,2000,0,4,0,0,0,11,2,0);
+INSERT INTO `mob_skills` VALUES (938,640,'circle_blade',1,7,2000,1,4,0,0,0,5,8,0);
+INSERT INTO `mob_skills` VALUES (939,641,'swift_blade',0,7,2000,1,4,0,0,0,9,0,0);
+INSERT INTO `mob_skills` VALUES (940,644,'rampage',0,7,2000,1,4,0,0,0,4,0,0);
+INSERT INTO `mob_skills` VALUES (941,645,'calamity',0,7,2000,1,4,0,0,0,4,8,0);
+INSERT INTO `mob_skills` VALUES (942,642,'spirits_within',0,7,2000,1,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (943,643,'vorpal_blade',0,7,2000,1,4,0,0,0,4,8,0);
+INSERT INTO `mob_skills` VALUES (944,646,'spinning_scythe',1,7,2000,1,4,0,0,0,5,4,0);
+INSERT INTO `mob_skills` VALUES (945,647,'guillotine',0,7,2000,1,4,0,0,0,7,0,0);
+INSERT INTO `mob_skills` VALUES (946,648,'tachi_yukikaze',0,7,2000,1,4,0,0,0,7,6,0);
+INSERT INTO `mob_skills` VALUES (947,649,'tachi_gekko',0,7,2000,1,4,0,0,0,10,5,0);
+INSERT INTO `mob_skills` VALUES (948,650,'tachi_kasha',0,7,2000,1,4,0,0,0,11,2,0);
 -- INSERT INTO `mob_skills` VALUES (949,693,'flame_blast',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (950,652,'flame_blast_alt',0,30.0,2000,0,4,16,0,0,0,0,0); -- KS99_Wyrm regular airborne attack
 INSERT INTO `mob_skills` VALUES (951,653,'hurricane_wing',1,30.0,2000,1500,4,0,0,0,0,0,0);

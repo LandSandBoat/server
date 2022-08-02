@@ -57,6 +57,7 @@ zone_object.onRegionEnter = function(player, region)
     local regionId = region:GetRegionID()
     local leverSet = math.floor(regionId / 9)                      -- The set of levers player is standing on (0, 1, 2)
     local gateId   = ID.npc.BANISHING_GATE_OFFSET + (9 * leverSet) -- The ID of the related gate
+    local gate = GetNPCByID(gateId)
 
     -- Logic when standing on the lever.
     GetNPCByID(ID.npc.BANISHING_GATE_OFFSET + regionId):setAnimation(xi.anim.OPEN_DOOR)
@@ -70,8 +71,30 @@ zone_object.onRegionEnter = function(player, region)
         GetNPCByID(gateId + 3):getAnimation() == xi.anim.OPEN_DOOR and
         GetNPCByID(gateId + 4):getAnimation() == xi.anim.OPEN_DOOR
     then
-        player:messageSpecial(ID.text.BANISHING_GATES + leverSet)
-        GetNPCByID(gateId):openDoor(30)
+        if gate:getLocalVar("isOpen") == 0 then
+
+            -- set gate opened var to prevent 'opening' an already open gate.
+            gate:setLocalVar("isOpen", 1)
+
+            -- I think different gates might have different durations.
+            local time = 60
+            local zonePlayers = player:getZone():getPlayers()
+            gate:openDoor(time)
+            for _, zonePlayer in pairs(zonePlayers) do
+                -- send gate opening text to each player in zone
+                zonePlayer:messageSpecial(ID.text.BANISHING_GATES + leverSet)
+
+                gate:timer(1000 * time, function(gateArg)
+                    -- send gate closing text to each player in zone
+                    zonePlayer:messageSpecial(ID.text.BANISHING_GATES_CLOSING + leverSet)
+                end)
+            end
+
+            gate:timer(1000 * time, function(gateArg)
+                -- set gate closed var to allow this gate to be opened again.
+                gateArg:setLocalVar("isOpen", 0)
+            end)
+        end
     end
 end
 

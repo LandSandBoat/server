@@ -275,8 +275,8 @@ INSERT INTO `mob_family_system` VALUES (220,'Seether',130,'Seether',12,'Empty',1
 INSERT INTO `mob_family_system` VALUES (221,'Shadow',68,'Shadow',19,'Undead',0,40,100,90,2,5,3,3,6,2,4,1,3,1,3,8,6,0);
 INSERT INTO `mob_family_system` VALUES (222,'Shadow',68,'Shadow',19,'Undead',0,40,100,90,2,5,3,3,6,2,4,1,3,1,3,8,6,0);
 INSERT INTO `mob_family_system` VALUES (223,'Shadow',68,'Shadow',19,'Undead',0,40,100,90,2,5,3,3,6,2,4,1,3,1,3,8,6,0);
-INSERT INTO `mob_family_system` VALUES (224,'ShadowLord',0,'undefined',0,'Unclassified',1,40,120,140,1,1,1,1,1,1,1,1,1,1,1,8,1,0);
-INSERT INTO `mob_family_system` VALUES (225,'ShadowLord',0,'undefined',0,'Unclassified',1,40,120,140,1,1,1,1,1,1,1,1,1,1,1,8,1,0);
+INSERT INTO `mob_family_system` VALUES (224,'ShadowLord',0,'Demon',0,'Unclassified',1,40,120,140,1,1,1,1,1,1,1,1,1,1,1,8,1,0);
+INSERT INTO `mob_family_system` VALUES (225,'ShadowLord',0,'Demon',0,'Unclassified',1,40,120,140,1,1,1,1,1,1,1,1,1,1,1,8,1,0);
 INSERT INTO `mob_family_system` VALUES (226,'Sheep',90,'Sheep',6,'Beast',1,40,120,110,3,4,4,4,5,4,4,1,3,1,3,4,257,1);
 INSERT INTO `mob_family_system` VALUES (227,'Skeleton',56,'Skeleton',19,'Undead',0,40,95,140,1,3,4,4,1,5,1,1,3,1,3,4,6,0);
 INSERT INTO `mob_family_system` VALUES (228,'Slime',42,'Slime',1,'Amorph',1,40,100,120,4,4,4,5,4,3,4,1,3,1,3,6,258,1);
