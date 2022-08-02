@@ -1,12 +1,12 @@
 -----------------------------------
--- ID: 15451
--- Item: Culinarian's Belt
+-- ID: 15452
+-- Item: Fisherman's Belt
 -- Enchantment: Synthesis image support
 -- 2Min, All Races
 -----------------------------------
 -- Enchantment: Synthesis image support
 -- Duration: 2Min
--- Alchemy Skill +3
+-- Fishing Skill +3
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
@@ -37,15 +37,15 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.COOKING_IMAGERY, 3, 0, 120)
+    target:addStatusEffect(xi.effect.FISHING_IMAGERY, 3, 0, 120)
 end
 
 item_object.onEffectGain = function(target, effect)
-    target:addMod(xi.mod.COOK, 1)
+    target:addMod(xi.mod.FISH, 1)
 end
 
 item_object.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.COOK, 1)
+    target:delMod(xi.mod.FISH, 1)
 end
 
 return item_object
