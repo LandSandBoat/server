@@ -18,8 +18,6 @@ require('scripts/globals/missions')
 require('scripts/globals/titles')
 require('scripts/globals/zone')
 -----------------------------------
-local laloffID = require('scripts/zones/LaLoff_Amphitheater/IDs')
------------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ZILART, xi.mission.id.zilart.ARK_ANGELS)
 
@@ -85,14 +83,12 @@ mission.sections =
 
                     -- Single Fights
                     if keyItemIndex >= 0 and keyItemIndex <= 4 then
-                        player:addKeyItem(keyItemOffset[keyItemIndex])
-                        player:messageSpecial(laloffID.text.KEYITEM_OBTAINED, keyItemOffset[keyItemIndex])
+                        npcUtil.giveKeyItem(player, keyItemOffset[keyItemIndex])
 
                     -- Divine Might
                     elseif keyItemIndex == 5 then
-                        for i = xi.ki.SHARD_OF_APATHY, xi.ki.SHARD_OF_RAGE do
-                            player:addKeyItem(i)
-                            player:messageSpecial(laloffID.text.KEYITEM_OBTAINED, i)
+                        for keyItemId = xi.ki.SHARD_OF_APATHY, xi.ki.SHARD_OF_RAGE do
+                            npcUtil.giveKeyItem(player, keyItemId)
                         end
 
                         if player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT) == QUEST_ACCEPTED then
@@ -107,9 +103,7 @@ mission.sections =
                         player:hasKeyItem(xi.ki.SHARD_OF_ENVY) and
                         player:hasKeyItem(xi.ki.SHARD_OF_RAGE)
                     then
-                        if mission:complete(player) then
-                            player:setMissionStatus(xi.mission.log_id.ZILART, 0)
-                        end
+                        mission:complete(player)
                     end
                 end,
             },
