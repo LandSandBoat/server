@@ -14,7 +14,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    xi.job_utils.monk.useChakra(player, target, ability)
+    return xi.job_utils.monk.useChakra(player, target, ability)
 end
 
 return ability_object
