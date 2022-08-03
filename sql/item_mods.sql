@@ -34215,6 +34215,7 @@ INSERT INTO `item_mods` VALUES (17565,5,1); -- MP: 1
 -- Treat Staff
 INSERT INTO `item_mods` VALUES (17566,2,5); -- HP: 5
 INSERT INTO `item_mods` VALUES (17566,5,5); -- MP: 5
+INSERT INTO `item_mods` VALUES (17566,431,1);
 
 -- Kirins Pole
 INSERT INTO `item_mods` VALUES (17567,2,20);  -- HP: 20
@@ -37157,7 +37158,7 @@ INSERT INTO `item_mods` VALUES (18606,30,3); -- MACC: 3
 
 -- Ceres Spica
 INSERT INTO `item_mods` VALUES (18607,5,8);   -- MP: 8
-INSERT INTO `item_mods` VALUES (18607,374,1); -- CURE_POTENCY: 1
+INSERT INTO `item_mods` VALUES (18607,374,6); -- CURE_POTENCY: 6
 
 -- Atesh Pole
 INSERT INTO `item_mods` VALUES (18608,2,5);   -- HP: 5

@@ -20088,7 +20088,6 @@ INSERT INTO `mob_droplist` VALUES (2513,0,0,1000,3219,@UNCOMMON); -- Coin Of Wie
 -- ZoneID:  33 - Ulaern Brd
 -- ZoneID:  33 - Ulaern Pld
 INSERT INTO `mob_droplist` VALUES (2514,0,0,1000,1786,@UNCOMMON); -- Aern Organ (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (2514,0,0,1000,1900,90);        -- High-Quality Aern Organ (9.0%)
 INSERT INTO `mob_droplist` VALUES (2514,0,0,1000,1783,60);        -- Sample Of Luminian Tissue (6.0%)
 INSERT INTO `mob_droplist` VALUES (2514,0,0,1000,4104,40);        -- Fire Cluster (4.0%)
 INSERT INTO `mob_droplist` VALUES (2514,0,0,1000,4105,40);        -- Ice Cluster (4.0%)

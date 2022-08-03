@@ -771,6 +771,10 @@ public:
     std::unique_ptr<CRecastContainer>       PRecastContainer;
     std::unique_ptr<CNotorietyContainer>    PNotorietyContainer;
 
+    int16              CalculateMSFromSources(); // Used to calculate movement speed when adding or removing items with movement speed modifiers
+    std::vector<int16> m_MSItemValues;           // Tracking movement speed items to prevent stacking values
+    std::vector<int16> m_MSNonItemValues;        // Tracking movement speed from non-item sources
+
 private:
     JOBTYPE    m_mjob; // главная профессия
     JOBTYPE    m_sjob; // дополнительная профессия

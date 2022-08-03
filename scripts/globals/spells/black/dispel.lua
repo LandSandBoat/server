@@ -29,6 +29,11 @@ spell_object.onSpellCast = function(caster, target, spell)
         spell:setMsg(xi.msg.basic.MAGIC_RESIST)
     end
 
+    if target:hasImmunity(32768) then --dispel immunity enum needed as core immunity only looks at effects and not spell land
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+        return 0
+    end
+
     return effect
 end
 

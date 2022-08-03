@@ -14,6 +14,11 @@ end
 effect_object.onEffectLose = function(target, effect)
     local destination = effect:getPower()
 
+    -- Dismount player if they are teleported
+    if target:hasStatusEffect(xi.effect.MOUNTED) then
+        target:delStatusEffect(xi.effect.MOUNTED)
+    end
+
     if (target:isMob()) then
         DespawnMob(target:getID())
     elseif (destination == xi.teleport.id.WARP) then

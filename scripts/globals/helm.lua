@@ -348,7 +348,7 @@ local helmInfo =
                     {1220, 17396}, -- Little Worm
                     { 720,   897}, -- Scorpion Claw
                     { 720,   896}, -- Scorpion Shell
-                    { 420,  2503}, -- Antlion Jaw
+                    { 420,  1616}, -- Antlion Jaw
                     { 420,  1236}, -- Cactus Stems
                     { 420,  1473}, -- High Quality Scorpion Shell
                     { 420,   769}, -- Colored Rock
@@ -356,10 +356,13 @@ local helmInfo =
                 points =
                 {
                     {-559.629, -13.114,  -88.864},
+                    {-560.463, -12.160,  -50.494},
+                    {-539.946,  -4.582,   -9.527},
                     {-328.481, -12.000,   68.200},
-                    {-343.760, -12.232,   66.061},
+                    {-351.612, -11.919,   51.848},
                     {-375.399,  -3.264,  356.472},
                     {-378.857,  -3.720,  342.842},
+                    {-400.509,  -3.356,  343.399},
                 },
             },
             [xi.zone.TAHRONGI_CANYON] =
@@ -1169,7 +1172,7 @@ local helmInfo =
                     { 900,   644}, -- Mythril Ore
                     { 900,   736}, -- Silver Ore
                     { 800,   640}, -- Copper Ore
-                    { 100,   738}, -- Platium Ore
+                    { 100,   738}, -- Platinum Ore
                 },
                 points =
                 {
@@ -1277,17 +1280,17 @@ local helmInfo =
             {
                 drops =
                 {
-                    {3260,   768}, -- Flint Stone
-                    {1520,   643}, -- Iron Ore
-                    { 430,  1108}, -- Sulfur
-                    { 650, 17316}, -- Bomb Arm
-                    { 870,   928}, -- Bomb Ash
-                    {1300,  1155}, -- Iron Sand
-                    { 250,   646}, -- Adaman Ore
-                    { 600,   645}, -- Darksteel Ore
-                    {1520,  2126}, -- Orpiment
+                    {2710,   768}, -- Flint Stone
+                    {1440,   643}, -- Iron Ore
+                    { 510,  1108}, -- Sulfur
+                    { 110, 17316}, -- Bomb Arm
+                    { 680,   928}, -- Bomb Ash
+                    { 510,  1155}, -- Iron Sand
+                    { 170,   646}, -- Adaman Ore
+                    { 250,   645}, -- Darksteel Ore
+                    {1610,  2126}, -- Orpiment
                     { 100,   739}, -- Orichalcum Ore
-                    { 220,   769}, -- Colored Rock
+                    { 340,   769}, -- Colored Rock
                 },
                 points =
                 {

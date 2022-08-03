@@ -283,7 +283,6 @@ local digInfo =
         {  880, 166, digReq.NONE    },
         {  864,  96, digReq.NONE    },
         {  893,  26, digReq.NONE    },
-        {  737,  17, digReq.NONE    },
         {  869, 110, digReq.NONE    },
         {17395, 111, digReq.NONE    },
         {  888, 215, digReq.NONE    },
@@ -312,16 +311,16 @@ local digInfo =
 
     [xi.zone.JUGNER_FOREST] = -- 104
     {
-        { 4504, 152, digReq.NONE    },
-        {  688, 182, digReq.NONE    },
-        {  697,  83, digReq.NONE    },
+        { 4504, 145, digReq.NONE    },
+        {  688, 110, digReq.NONE    },
+        {  697,  93, digReq.NONE    },
         { 4386,   3, digReq.NONE    },
-        {17396, 129, digReq.NONE    },
-        {  691, 144, digReq.NONE    },
-        {  918,   8, digReq.NONE    },
-        {  699,  76, digReq.NONE    },
-        { 4447,  38, digReq.NONE    },
-        {  695,  45, digReq.NONE    },
+        {17396, 152, digReq.NONE    },
+        {  691, 138, digReq.NONE    },
+        {  918,  17, digReq.NONE    },
+        {  699,  59, digReq.NONE    },
+        { 4447,  28, digReq.NONE    },
+        {  695,   9, digReq.NONE    },
         { 4096, 100, digReq.WEATHER }, -- all crystals
         { 1255,  10, digReq.ORE     }, -- all ores
         {  690,  15, digReq.BORE    },
@@ -366,13 +365,13 @@ local digInfo =
 
     [xi.zone.NORTH_GUSTABERG] = -- 106
     {
-        {  880, 226, digReq.NONE    },
-        {17396, 264, digReq.NONE    },
-        {17296, 176, digReq.NONE    },
+        {  880, 176, digReq.NONE    },
+        {17396, 297, digReq.NONE    },
+        {17296, 202, digReq.NONE    },
         {  847,  75, digReq.NONE    },
-        {  864,  59, digReq.NONE    },
-        {  846,  75, digReq.NONE    },
-        {  869, 170, digReq.NONE    },
+        {  864,  45, digReq.NONE    },
+        {  846, 108, digReq.NONE    },
+        {  869, 149, digReq.NONE    },
         {  868,  83, digReq.NONE    },
         {  749,  63, digReq.NONE    },
         {  644,  60, digReq.NONE    },
@@ -401,6 +400,7 @@ local digInfo =
         {  749,  32, digReq.NONE    },
         {  847,  23, digReq.NONE    },
         {  644,   5, digReq.NONE    },
+        {  776,   3, digReq.NONE    },
         { 4096, 100, digReq.WEATHER }, -- all crystals
         { 1255,  10, digReq.ORE     }, -- all ores
         { 4545,   5, digReq.BURROW  },
@@ -445,7 +445,7 @@ local digInfo =
     {
         {  846, 216, digReq.NONE    },
         {17296, 210, digReq.NONE    },
-        {  869, 198, digReq.NONE    },
+        {  869, 188, digReq.NONE    },
         {  736,  72, digReq.NONE    },
         {  695, 102, digReq.NONE    },
         { 4448,  48, digReq.NONE    },
@@ -497,7 +497,7 @@ local digInfo =
 
     [xi.zone.EASTERN_ALTEPA_DESERT] = -- 114
     {
-        {  880, 167, digReq.NONE    },
+        {  880, 176, digReq.NONE    },
         {  893,  88, digReq.NONE    },
         {17296, 135, digReq.NONE    },
         {  736,  52, digReq.NONE    },
@@ -552,16 +552,16 @@ local digInfo =
 
     [xi.zone.EAST_SARUTABARUTA] = -- 116
     {
-        {  689, 132, digReq.NONE    },
-        {  938,  79, digReq.NONE    },
-        {17296, 132, digReq.NONE    },
-        {  847, 100, digReq.NONE    },
-        {  846,  53, digReq.NONE    },
-        {  833, 100, digReq.NONE    },
-        {  841,  53, digReq.NONE    },
-        {  834,  26, digReq.NONE    },
-        {  772,  50, digReq.NONE    },
-        {  701,  50, digReq.NONE    },
+        {  689, 236, digReq.NONE    },
+        {  938, 125, digReq.NONE    },
+        {17296, 181, digReq.NONE    },
+        {  847,  14, digReq.NONE    },
+        {  846,  69, digReq.NONE    },
+        {  833,   8, digReq.NONE    },
+        {  841,  69, digReq.NONE    },
+        {  834,  14, digReq.NONE    },
+        {  772,  14, digReq.NONE    },
+        {  701,   8, digReq.NONE    },
         {  702,   3, digReq.NONE    },
         { 4096, 100, digReq.WEATHER }, -- all crystals
         { 1255,  10, digReq.ORE     }, -- all ores
@@ -589,7 +589,6 @@ local digInfo =
         {  888, 175, digReq.NONE    },
         {  641, 100, digReq.NONE    },
         {  841,  45, digReq.NONE    },
-        {  843,   4, digReq.NONE    },
         { 4096, 100, digReq.WEATHER }, -- all crystals
         { 1255,  10, digReq.ORE     }, -- all ores
         {  656, 148, digReq.BURROW  },
@@ -683,11 +682,9 @@ local digInfo =
         {  880, 126, digReq.NONE    },
         {  768, 130, digReq.NONE    },
         {  748,  55, digReq.NONE    },
-        {  737,  17, digReq.NONE    },
         {  846,  91, digReq.NONE    },
         {  643,  75, digReq.NONE    },
         {  869,  87, digReq.NONE    },
-        {  642,  58, digReq.NONE    },
         {17296, 168, digReq.NONE    },
         {  106,  32, digReq.NONE    },
         {  773,  50, digReq.NONE    },
@@ -859,7 +856,7 @@ local function canDig(player)
     local zoneInTime               = player:getLocalVar('ZoneInTime')
     local currentTime     = os.time()
     local skillRank                = player:getSkillRank(xi.skill.DIG)
-     -- personal dig caps
+    -- personal dig caps
     local digCap          = DIG_FATIGUE + (skillRank * 10)
     -- base delay -5 for each rank
     local digDelay        = 16 - (skillRank * 5)
@@ -956,7 +953,7 @@ local function calculateSkillUp(player)
 
             -- Digging does not have test items, so increment rank once player hits 10.0, 20.0, .. 100.0
             if (realSkill + 1) >= (skillRank * 100) + 100 then
-               player:setSkillRank(xi.skill.DIG, skillRank + 1)
+                player:setSkillRank(xi.skill.DIG, skillRank + 1)
             end
         end
     end
@@ -997,29 +994,35 @@ local function getChocoboDiggingItem(player)
             -- skill up weight variation and ore moon variation
             itemWeight = item[2]
 
-            if DigRank > 0 then
-                if itemWeight >= 150 then
-                    itemWeight = itemWeight * (0.95^DigRank)
-                elseif itemWeight >= 125 then
-                    itemWeight = itemWeight * (0.97^DigRank)
-                elseif itemWeight >= 100 then
-                    itemWeight = itemWeight * (0.99^DigRank)
-                elseif itemWeight >= 50 then
-                    itemWeight = itemWeight * (1.03^DigRank)
-                elseif itemWeight >= 1 then
-                    itemWeight = itemWeight * (1.05^DigRank)
+            local weights =
+            {
+                {150, 0.95},
+                {125, 0.97},
+                {100, 0.99},
+                { 50, 1.03},
+                {  1, 1.05},
+            }
+
+            for _, v in pairs(weights) do
+                if DigRank > 0 then
+                    if itemWeight >= v[1] then
+                        itemWeight = itemWeight * (v[2]^DigRank)
+                    end
                 end
             end
 
-            if item[1] == 1255 then
-                if moon >= 7 and moon <= 9 then
-                    itemWeight = itemWeight * 0.7
-                elseif moon >= 10 and moon <= 14 then
-                    itemWeight = itemWeight
-                elseif moon >= 15 and moon <= 21 then
-                    itemWeight = itemWeight * 0.9
-                elseif moon >= 21 and moon <= 24 then
-                    itemWeight = itemWeight * 0.5
+            local moonPhases =
+            {
+                {7, 9, 0.7},
+                {15, 21, 0.9},
+                {21, 24, 0.5},
+            }
+
+            for _, v in pairs(moonPhases) do
+                if item[1] == 1255 then
+                    if moon >= v[1] and moon <= v[2] then
+                        itemWeight = itemWeight * v[3]
+                    end
                 end
             end
 
@@ -1036,30 +1039,36 @@ local function getChocoboDiggingItem(player)
     for i = 1, #possibleItems do
         itemWeight = possibleItems[i][2]
 
+        local weights =
+        {
+            {150, 0.95},
+            {125, 0.97},
+            {100, 0.99},
+            { 50, 1.03},
+            {  1, 1.05},
+        }
+
         -- skill up weight variation and ore moon variation
-        if DigRank > 0 then
-            if itemWeight >= 150 then
-                itemWeight = itemWeight * (0.95^DigRank)
-            elseif itemWeight >= 125 then
-                itemWeight = itemWeight * (0.97^DigRank)
-            elseif itemWeight >= 100 then
-                itemWeight = itemWeight * (0.99^DigRank)
-            elseif itemWeight >= 50 then
-                itemWeight = itemWeight * (1.03^DigRank)
-            elseif itemWeight >= 1 then
-                itemWeight = itemWeight * (1.05^DigRank)
+        for _, v in pairs(weights) do
+            if DigRank > 0 then
+                if itemWeight >= v[1] then
+                    itemWeight = itemWeight * (v[2]^DigRank)
+                end
             end
         end
 
-        if possibleItems[i][1] == 1255 then
-            if moon >= 7 and moon <= 9 then
-                itemWeight = itemWeight * 0.7
-            elseif moon >= 10 and moon <= 14 then
-                itemWeight = itemWeight
-            elseif moon >= 15 and moon <= 21 then
-                itemWeight = itemWeight * 0.9
-            elseif moon >= 21 and moon <= 24 then
-                itemWeight = itemWeight * 0.5
+        local moonPhases =
+        {
+            {7, 9, 0.7},
+            {15, 21, 0.9},
+            {21, 24, 0.5},
+        }
+
+        for _, v in pairs(moonPhases) do
+            if possibleItems[i][1] == 1255 then
+                if moon >= v[1] and moon <= v[2] then
+                    itemWeight = itemWeight * v[3]
+                end
             end
         end
 

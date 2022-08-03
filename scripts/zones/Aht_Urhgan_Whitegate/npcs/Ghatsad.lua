@@ -45,7 +45,7 @@ local headAndFrameItems =
         xi.items.BRASS_SHEET,
         xi.items.WAMOURA_COCOON,
         xi.items.CHUNK_OF_IMPERIAL_CERMET,
-        xi.items.PATAS
+        xi.items.TIGERFANGS
     },
 
     [3] =
@@ -53,7 +53,7 @@ local headAndFrameItems =
         xi.items.ROSEWOOD_LUMBER,
         xi.items.SQUARE_OF_KARAKUL_CLOTH,
         xi.items.SQUARE_OF_KARAKUL_LEATHER,
-        xi.items.HEAVY_CROSSBOW
+        xi.items.REPEATING_CROSSBOW
     },
 
     [4] =

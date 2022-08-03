@@ -504,6 +504,14 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
             luautils::OnBattlefieldLeave(PChar, this, leavecode);
         }
         charutils::SendClearTimerPacket(PChar);
+
+        // Remove the player's pet as well
+        if (PChar->PPet)
+        {
+            PChar->PPet->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
+            PChar->PPet->StatusEffectContainer->DelStatusEffect(EFFECT_LEVEL_RESTRICTION);
+            ClearEnmityForEntity(PChar->PPet);
+        }
     }
     else
     {
