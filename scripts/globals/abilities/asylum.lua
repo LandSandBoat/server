@@ -5,18 +5,16 @@
 -- Recast Time: 01:00:00
 -- Duration: 0:00:30
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
+require("scripts/globals/job_utils/white_mage")
 -----------------------------------
 local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)
-    ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
-    return 0, 0
+    return xi.job_utils.white_mage.checkAsylum(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(xi.effect.ASYLUM, 3, 0, 30)
+    xi.job_utils.white_mage.useAsylum(player, target, ability)
 end
 
 return ability_object
