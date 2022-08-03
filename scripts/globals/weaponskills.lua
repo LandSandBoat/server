@@ -217,128 +217,21 @@ end
 
 local function cRangedRatio(attacker, defender, params, ignoredDef, tp)
     local atkmulti = fTP(tp, params.atk100, params.atk200, params.atk300)
-    local cratio = attacker:getRATT() / (defender:getStat(xi.mod.DEF) - ignoredDef)
 
-    local levelCorrection = 0
-    if attacker:getMainLvl() < defender:getMainLvl() then
-        levelCorrection = 0.025 * (defender:getMainLvl() - attacker:getMainLvl())
+    if ignoredDef == nil then
+        ignoredDef = 0
     end
 
-    cratio = cratio - levelCorrection
-    cratio = cratio * atkmulti
+    local pdif = attacker:getRangedPDIF(defender, false, atkmulti, ignoredDef)
+    local pdifcrit = attacker:getRangedPDIF(defender, true, atkmulti, ignoredDef)
 
-    if cratio > 3 - levelCorrection then
-        if attacker:hasStatusEffect(xi.effect.FLASHY_SHOT) then
-            levelCorrection = 0
-        else
-            levelCorrection = (defender:getMainLvl() - attacker:getMainLvl()) * 0.025
-        end
-    end
-
-    cratio = utils.clamp(cratio, 0, 3)
-
-    -- max
-    local pdifmax = 0
-
-    if cratio < 0.9 then
-        pdifmax = cratio * (10 / 9)
-    elseif cratio < 1.1 then
-        pdifmax = 1
-    else
-        pdifmax = cratio
-    end
-
-    -- min
-    local pdifmin = 0
-
-    if cratio < 0.9 then
-        pdifmin = cratio
-    elseif cratio < 1.1 then
-        pdifmin = 1
-    else
-        pdifmin = (cratio * (20 / 19)) - (3 / 19)
-    end
-
-    -- Bernoulli distribution, applied for cRatio < 0.5 and 0.75 < cRatio < 1.25
-    -- Other cRatio values are uniformly distributed
-    -- https://www.bluegartr.com/threads/108161-pDif-and-damage?p=5308205&viewfull=1#post5308205
-    local u = math.max(0.0, math.min(0.333, 1.3 * (2.0 - math.abs(cratio - 1)) - 1.96))
-
-    local bernoulli = false
-
-    if (math.random() < u) then
-        bernoulli = true
-    end
-
-    if (bernoulli) then
-        local roundedRatio = math.floor(cratio + 0.5) -- equivalent to rounding
-        pdifmin = roundedRatio
-        pdifmax = roundedRatio
-    end
-
-    local pdif = {}
-    pdif[1] = pdifmin
-    pdif[2] = pdifmax
-
-    local pdifcrit = {}
-
-    pdifmin = pdifmin * 1.25
-    pdifmax = pdifmax * 1.25
-
-    pdifcrit[1] = pdifmin
-    pdifcrit[2] = pdifmax
-
-    return pdif, pdifcrit
+    return {pdif, pdifcrit}
 end
 
 local function getRangedHitRate(attacker, target, capHitRate, bonus)
-    local acc = attacker:getRACC()
-    local eva = target:getEVA()
+    local hitrate = attacker:getCRangedHitRate(target) / 100
 
-    if bonus == nil then
-        bonus = 0
-    end
-
-    if (target:hasStatusEffect(xi.effect.YONIN) and target:isFacing(attacker, 23)) then -- Yonin evasion boost if defender is facing attacker
-        bonus = bonus - target:getStatusEffect(xi.effect.YONIN):getPower()
-    end
-
-    if attacker:hasTrait(76) and attacker:isBehind(target, 23) then --TRAIT_AMBUSH
-        bonus = bonus + attacker:getMerit(xi.merit.AMBUSH)
-    end
-
-    acc = acc + bonus
-
-    if attacker:getMainLvl() > target:getMainLvl() then -- acc bonus!
-        acc = acc + ((attacker:getMainLvl() - target:getMainLvl()) * 4)
-    elseif attacker:getMainLvl() < target:getMainLvl() then -- acc penalty :(
-        acc = acc - ((target:getMainLvl() - attacker:getMainLvl()) * 4)
-    end
-
-    local hitdiff = 0
-    local hitrate = 75
-
-    if acc > eva then
-        hitdiff = (acc - eva) / 2
-    end
-
-    if eva > acc then
-        hitdiff = ((-1) * (eva - acc)) / 2
-    end
-
-    hitrate = hitrate + hitdiff
-    hitrate = hitrate / 100
-
-    -- Applying hitrate caps
-    if capHitRate then -- this isn't capped for when acc varies with tp, as more penalties are due
-        if hitrate > 0.95 then
-            hitrate = 0.95
-        end
-
-        if hitrate < 0.2 then
-            hitrate = 0.2
-        end
-    end
+    hitrate = utils.clamp(hitrate, 0.2, 0.95)
 
     return hitrate
 end
@@ -347,14 +240,28 @@ end
 local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams, firstHitAccBonus)
     local criticalHit = false
     local finaldmg = 0
+    local pdif = 0
+    local pdifCrit = 0
+    local ratio = { }
     -- local pdif = 0 Reminder for Future Implementation!
 
+    if calcParams.pdif == nil or calcParams.pdifCrit == nil then
+        ratio = cMeleeRatio(attacker, target, wsParams, calcParams.ignoredDef, calcParams.tp, xi.slot.MAIN)
+        pdif = ratio[1]
+        pdifCrit =  ratio[2]
+    else
+        pdif = calcParams.pdif
+        pdifCrit = calcParams.pdifCrit
+    end
+
     if firstHitAccBonus ~= nil and firstHitAccBonus == true then
-        calcParams.hitRate = calcParams.hitRate + 50 -- First hit gets a +100 ACC bonus which translates to +50 hit
+        calcParams.hitRate = calcParams.hitRate + 0.5 -- First hit gets a +100 ACC bonus which translates to +50 hit
         utils.clamp(calcParams.hitRate, 0.20, 0.95) -- Clamping to expected values.
     end
 
     local missChance = math.random()
+
+    missChance = handleParry(attacker, target, missChance, calcParams.guaranteedHit)
 
     if (missChance <= calcParams.hitRate or-- See if we hit the target
         calcParams.guaranteedHit or
@@ -369,12 +276,14 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams, f
 
             if criticalHit then
                 calcParams.criticalHit = true
-                calcParams.pdif = generatePdif(calcParams.ccritratio[1], calcParams.ccritratio[2], true)
+                calcParams.pdif = pdifCrit
             else
-                calcParams.pdif = generatePdif(calcParams.cratio[1], calcParams.cratio[2], true)
+                calcParams.pdif = pdif
             end
 
             finaldmg = dmg * calcParams.pdif
+
+            finaldmg = handleBlock(attacker, target, finaldmg)
 
             -- Duplicate the first hit with an added magical component for hybrid WSes
             if calcParams.hybridHit then
@@ -546,15 +455,18 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
 
     -- Have to calculate added bonus for SA/TA here since it is done outside of the fTP multiplier
     if attacker:getMainJob() == xi.job.THF then
+        local ratio = cMeleeRatio(attacker, target, nil, 0, tp, xi.slot.MAIN)
+        local pdif = ratio[1]
+        local pdifCrit = ratio[2]
         -- Add DEX/AGI bonus to first hit if THF main and valid Sneak/Trick Attack
         if calcParams.sneakApplicable then
             finaldmg = finaldmg +
-                        (attacker:getStat(xi.mod.DEX) * (1 + attacker:getMod(xi.mod.SNEAK_ATK_DEX)/100) * calcParams.pdif) *
+                        (attacker:getStat(xi.mod.DEX) * (1 + attacker:getMod(xi.mod.SNEAK_ATK_DEX)/100) * pdifCrit) *
                         ((100+(attacker:getMod(xi.mod.AUGMENTS_SA)))/100)
         end
         if calcParams.trickApplicable then
             finaldmg = finaldmg +
-                        (attacker:getStat(xi.mod.AGI) * (1 + attacker:getMod(xi.mod.TRICK_ATK_AGI)/100) * calcParams.pdif) *
+                        (attacker:getStat(xi.mod.AGI) * (1 + attacker:getMod(xi.mod.TRICK_ATK_AGI)/100) * pdif) *
                         ((100+(attacker:getMod(xi.mod.AUGMENTS_TA)))/100)
         end
     end
@@ -638,7 +550,6 @@ function doPhysicalWeaponskill(attacker, target, wsID, wsParams, tp, action, pri
     if wsParams.ignoresDef ~= nil and wsParams.ignoresDef == true then
         ignoredDef = calculatedIgnoredDef(tp, target:getStat(xi.mod.DEF), wsParams.ignored100, wsParams.ignored200, wsParams.ignored300)
     end
-    local cratio, ccritratio = cMeleeRatio(attacker, target, wsParams, ignoredDef, tp)
 
     -- Set up conditions and wsParams used for calculating weaponskill damage
     local gorgetBeltFTP, gorgetBeltAcc = handleWSGorgetBelt(attacker)
@@ -655,8 +566,6 @@ function doPhysicalWeaponskill(attacker, target, wsID, wsParams, tp, action, pri
     calcParams.attackInfo = attack
     calcParams.weaponDamage = getMeleeDmg(attacker, attack.weaponType, wsParams.kick)
     calcParams.fSTR = fSTR(attacker:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), attacker:getWeaponDmgRank())
-    calcParams.cratio = cratio
-    calcParams.ccritratio = ccritratio
     calcParams.accStat = attacker:getACC()
     calcParams.melee = true
     calcParams.mustMiss = target:hasStatusEffect(xi.effect.PERFECT_DODGE) or
@@ -665,6 +574,8 @@ function doPhysicalWeaponskill(attacker, target, wsID, wsParams, tp, action, pri
                                  (attacker:isBehind(target) or attacker:hasStatusEffect(xi.effect.HIDE) or
                                  target:hasStatusEffect(xi.effect.DOUBT))
     calcParams.taChar = taChar
+    calcParams.ignoredDef = ignoredDef
+    calcParams.tp = tp
     calcParams.trickApplicable = calcParams.taChar ~= nil
     calcParams.assassinApplicable = calcParams.trickApplicable and attacker:hasTrait(68)
     calcParams.guaranteedHit = calcParams.sneakApplicable or calcParams.trickApplicable
@@ -708,7 +619,9 @@ end
         ignoredDef = calculatedIgnoredDef(tp, target:getStat(xi.mod.DEF), wsParams.ignored100, wsParams.ignored200, wsParams.ignored300)
     end
 
-    local cratio, ccritratio = cRangedRatio(attacker, target, wsParams, ignoredDef, tp)
+    local ratio = cRangedRatio(attacker, target, wsParams, ignoredDef, tp)
+    local pdif = ratio[1]
+    local pdifCrit = ratio[2]
 
     -- Set up conditions and params used for calculating weaponskill damage
     local gorgetBeltFTP, gorgetBeltAcc = handleWSGorgetBelt(attacker)
@@ -726,8 +639,8 @@ end
         weaponDamage = {attacker:getRangedDmg()},
         skillType = attacker:getWeaponSkillType(xi.slot.RANGED),
         fSTR = fSTR2(attacker:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), attacker:getRangedDmgRank()),
-        cratio = cratio,
-        ccritratio = ccritratio,
+        pdif = pdif,
+        pdifCrit = pdifCrit,
         accStat = attacker:getRACC(),
         melee = false,
         mustMiss = false,
@@ -946,63 +859,21 @@ function getHitRate(attacker, target, capHitRate, bonus)
         attacker:addMod(xi.mod.ACC, 20 + flourisheffect:getSubPower())
     end
 
-    local acc = attacker:getACC()
-    local eva = target:getEVA()
+    if bonus ~= nil or bonus == 0 then
+        attacker:addMod(xi.mod.ACC, bonus)
+    end
+
+    local hitrate = utils.clamp((attacker:getCHitRate(target) / 100), 0.2, 0.95)
 
     if flourisheffect ~= nil and flourisheffect:getPower() > 1 then
         attacker:delMod(xi.mod.ACC, 20 + flourisheffect:getSubPower())
     end
 
-    if bonus == nil then
-        bonus = 0
+    if bonus ~= nil or bonus == 0 then
+        attacker:delMod(xi.mod.ACC, bonus)
     end
 
-    if attacker:hasStatusEffect(xi.effect.INNIN) and attacker:isBehind(target, 23) then -- Innin acc boost if attacker is behind target
-        bonus = bonus + attacker:getStatusEffect(xi.effect.INNIN):getPower()
-    end
-
-    if target:hasStatusEffect(xi.effect.YONIN) and attacker:isFacing(target, 23) then -- Yonin evasion boost if attacker is facing target
-        bonus = bonus - target:getStatusEffect(xi.effect.YONIN):getPower()
-    end
-
-    if attacker:hasTrait(76) and attacker:isBehind(target, 23) then --TRAIT_AMBUSH
-        bonus = bonus + attacker:getMerit(xi.merit.AMBUSH)
-    end
-
-    acc = acc + bonus
-
-    if attacker:getMainLvl() > target:getMainLvl() then              -- Accuracy Bonus
-        acc = acc + ((attacker:getMainLvl()-target:getMainLvl())*4)
-    elseif (attacker:getMainLvl() < target:getMainLvl()) then        -- Accuracy Penalty
-        acc = acc - ((target:getMainLvl()-attacker:getMainLvl())*4)
-    end
-
-    local hitdiff = 0
-    local hitrate = 75
-
-    if acc > eva then
-        hitdiff = (acc - eva) / 2
-    end
-
-    if eva > acc then
-        hitdiff = ((-1) * (eva-acc)) / 2
-    end
-
-    hitrate = hitrate + hitdiff
-    hitrate = hitrate / 100
-
-    -- Applying hitrate caps
-    if capHitRate then -- this isn't capped for when acc varies with tp, as more penalties are due
-        if hitrate > 0.95 then
-            hitrate = 0.95
-        end
-
-        if hitrate < 0.2 then
-            hitrate = 0.2
-        end
-    end
-
-    return hitrate
+    return hitrate / 100
 end
 
 function fTP(tp, ftp1, ftp2, ftp3)
@@ -1047,8 +918,9 @@ function calculatedIgnoredDef(tp, def, ignore1, ignore2, ignore3)
 end
 
 -- Given the raw ratio value (atk/def) and levels, returns the cRatio (min then max)
-function cMeleeRatio(attacker, defender, params, ignoredDef, tp)
+function cMeleeRatio(attacker, defender, params, ignoredDef, tp, slot)
     local flourisheffect = attacker:getStatusEffect(xi.effect.BUILDING_FLOURISH)
+    local isGuarded = false
 
     if flourisheffect ~= nil and flourisheffect:getPower() > 1 then
         attacker:addMod(xi.mod.ATTP, 25 + flourisheffect:getSubPower() / 2)
@@ -1062,115 +934,51 @@ function cMeleeRatio(attacker, defender, params, ignoredDef, tp)
         atkmulti = fTP(tp, params.atk100, params.atk200, params.atk300)
     end
 
-    local cratio = (attacker:getStat(xi.mod.ATT) * atkmulti) / (defender:getStat(xi.mod.DEF) - ignoredDef)
+    if ignoredDef == nil then
+        ignoredDef = 0
+    end
 
-    cratio = utils.clamp(cratio, 0, 2.25)
+    if slot == nil then
+        slot = xi.slot.MAIN
+    end
+
+    if defender:getMainJob() == xi.job.MNK then
+        if defender:getGuardRate(attacker) > math.random(100) then
+            isGuarded = true
+        end
+    end
+
+    local pdif = attacker:getPDIF(defender, false, atkmulti, slot, ignoredDef, isGuarded)
+    local pdifcrit = attacker:getPDIF(defender, true, atkmulti, slot, ignoredDef, isGuarded)
 
     if flourisheffect ~= nil and flourisheffect:getPower() > 1 then
         attacker:delMod(xi.mod.ATTP, 25 + flourisheffect:getSubPower() / 2)
     end
 
-    local levelCorrection = 0
+    return {pdif, pdifcrit}
+end
 
-    if attacker:getMainLvl() < defender:getMainLvl() then
-        levelCorrection = 0.05 * (defender:getMainLvl() - attacker:getMainLvl())
+function handleBlock(attacker, target, finaldmg)
+    if (target:getBlockRate(attacker) > math.random(100) and target:isFacing(attacker) and target:getSystem() == xi.eco.BEASTMEN and target:getMainJob() == xi.job.PLD) then
+        finaldmg = math.floor(finaldmg * 0.5)
+    elseif (target:getBlockRate(attacker) > math.random(100) and target:isFacing(attacker) and target:isPC() and (target:getEquippedItem(xi.slot.SUB):getSkillType() == xi.skill.SHIELD)) then
+        local absorb = 100
+        absorb = utils.clamp(absorb - target:getShieldAbsorptionRate(), 0, 100)
+        absorb = absorb + target:getMod(xi.mod.SHIELD_DEF_BONUS)
+        finaldmg = math.floor(finaldmg * (absorb / 100))
     end
 
-    cratio = cratio - levelCorrection
+    return finaldmg
+end
 
-    if cratio < 0 then
-        cratio = 0
+function handleParry(attacker, target, missChance, guaranteedHit)
+    if (target:isFacing(attacker) and (target:getParryRate(attacker) >= math.random(100)) and target:getMainJob() ~= xi.job.MNK and not guaranteedHit) then -- Try parry, if so miss.
+        if (target:getSystem() == xi.eco.BEASTMEN or target:isPC()) then
+            missChance = 1
+        end
     end
 
-    local pdifmin = 0
-    local pdifmax = 0
-
-    -- max
-    if cratio < 0.5 then
-        pdifmax = cratio + 0.5
-    elseif cratio < 0.7 then
-        pdifmax = 1
-    elseif cratio < 1.2 then
-        pdifmax = cratio + 0.3
-    elseif cratio < 1.5 then
-        pdifmax = cratio * 0.25 + cratio
-    elseif cratio < 2.625 then
-        pdifmax = cratio + 0.375
-    else
-        pdifmax = 3
-    end
-
-    -- min
-    if cratio < 0.38 then
-        pdifmin = 0
-    elseif cratio < 1.25 then
-        pdifmin = cratio * 1176 / 1024 - 448 / 1024
-    elseif cratio < 1.51 then
-        pdifmin = 1
-    elseif cratio < 2.44 then
-        pdifmin = cratio * 1176 / 1024 - 775 / 1024
-    else
-        pdifmin = cratio - 0.375
-    end
-
-    local pdif = {}
-    pdif[1] = pdifmin
-    pdif[2] = pdifmax
-
-    local pdifcrit = {}
-    cratio = cratio + 1
-    cratio = utils.clamp(cratio, 0, 3)
-
-    if cratio < 0.5 then
-        pdifmax = cratio + 0.5
-    elseif cratio < 0.7 then
-        pdifmax = 1
-    elseif cratio < 1.2 then
-        pdifmax = cratio + 0.3
-    elseif cratio < 1.5 then
-        pdifmax = cratio * 0.25 + cratio
-    elseif cratio < 2.625 then
-        pdifmax = cratio + 0.375
-    else
-        pdifmax = 3
-    end
-
-    -- min
-    if cratio < 0.38 then
-        pdifmin = 0
-    elseif cratio < 1.25 then
-        pdifmin = cratio * 1176 / 1024 - 448 / 1024
-    elseif cratio < 1.51 then
-        pdifmin = 1
-    elseif cratio < 2.44 then
-        pdifmin = cratio * 1176 / 1024 - 775 / 1024
-    else
-        pdifmin = cratio - 0.375
-    end
-
-    -- Bernoulli distribution, applied for cRatio < 0.5 and 0.75 < cRatio < 1.25
-    -- Other cRatio values are uniformly distributed
-    -- https://www.bluegartr.com/threads/108161-pDif-and-damage?p=5308205&viewfull=1#post5308205
-    local u = math.max(0.0, math.min(0.333, 1.3 * (2.0 - math.abs(cratio - 1)) - 1.96))
-
-    local bernoulli = false
-
-    if (math.random() < u) then
-        bernoulli = true
-    end
-
-    if (bernoulli) then
-        local roundedRatio = math.floor(cratio + 0.5) -- equivalent to rounding
-        pdifmin = roundedRatio
-        pdifmax = roundedRatio
-    end
-
-    local critbonus = attacker:getMod(xi.mod.CRIT_DMG_INCREASE) - defender:getMod(xi.mod.CRIT_DEF_BONUS)
-    critbonus = utils.clamp(critbonus, 0, 100)
-    pdifcrit[1] = pdifmin * (100 + critbonus) / 100
-    pdifcrit[2] = pdifmax * (100 + critbonus) / 100
-
-    return pdif, pdifcrit
+    return missChance
 end
 
 -- Returns fSTR based on range and divisor
@@ -1230,16 +1038,6 @@ function fSTR2(atk_str, def_vit, weapon_rank)
     fSTR2 = utils.clamp(fSTR2, lower_cap, (weapon_rank + 8) * 2)
 
     return fSTR2
-end
-
-function generatePdif (cratiomin, cratiomax, melee)
-    local pdif = math.random(cratiomin * 1000, cratiomax * 1000) / 1000
-
-    if melee then
-        pdif = pdif * (math.random(100, 105) / 100)
-    end
-
-    return pdif
 end
 
 function getStepAnimation(skill)

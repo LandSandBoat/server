@@ -62,7 +62,7 @@ ability_object.onUseAbility = function(player, target, ability, action)
     end
 
     local base = weaponDamage + fstr
-    local cratio, _ = cMeleeRatio(player, target, params, 0, 0)
+    local cratio, _ = cMeleeRatio(player, target, params, 0, 0, xi.slot.MAIN)
     local isSneakValid = player:hasStatusEffect(xi.effect.SNEAK_ATTACK)
     if (isSneakValid and not player:isBehind(target)) then
         isSneakValid = false

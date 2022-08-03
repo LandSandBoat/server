@@ -160,21 +160,23 @@ end
 -- if xi.mobskills.physicalTpBonus.ATK_VARIES -> three values are attack multiplier (1.5x 0.5x etc)
 -- if xi.mobskills.physicalTpBonus.DMG_VARIES -> three values are
 
-xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod, dmgmod, tpeffect, mtp000, mtp150, mtp300, offcratiomod)
+xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod, dmgmod, tpeffect, mtp000, mtp150, mtp300, offcratiomod, wSC)
     local returninfo = {}
+    local fStr = 0
+
+    if wSC == nil then
+        wSC = 0
+    end
 
     --get dstr (bias to monsters, so no fSTR)
-    local dstr = mob:getStat(xi.mod.STR) - target:getStat(xi.mod.VIT)
-
-    local acc = mob:getACC()
-    local eva = target:getEVA() + target:getMod(xi.mod.SPECIAL_ATTACK_EVASION)
-
-    if target:hasStatusEffect(xi.effect.YONIN) and mob:isFacing(target, 23) then -- Yonin evasion boost if mob is facing target
-        eva = eva + target:getStatusEffect(xi.effect.YONIN):getPower()
+    if tpeffect == xi.mobskills.magicalTpBonus.RANGED then
+        fStr = fSTR2(mob:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), mob:getWeaponDmgRank())
+    else
+        fStr = fSTR(mob:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), mob:getWeaponDmgRank())
     end
 
     --apply WSC
-    local base = mob:getWeaponDmg() + dstr --todo: change to include WSC
+    local base = mob:getWeaponDmg() + fStr + wSC
     if base < 1 then
         base = 1
     end
@@ -182,9 +184,9 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
     local lvldiff = mob:getMainLvl() - target:getMainLvl()
 
     --work out hit rate for mobs
-    local hitrate = ( (acc * accmod) - eva) / 2 + (lvldiff * 2) + 75
+    local hitrate = getHitRate(mob, target, 0, 0)
 
-    hitrate = utils.clamp(hitrate, 20, 95)
+    hitrate = utils.clamp(hitrate, 0.2, 0.95)
 
     --work out the base damage for a single hit
     local hitdamage = base + lvldiff
@@ -210,7 +212,7 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
     end
 
     local params = {atk000 = mtp000, atk150 = mtp150, atk300 = mtp300,}
-    local pdifTable = cMeleeRatio(mob, target, params, 0, mob:getTP())
+    local pdifTable = cMeleeRatio(mob, target, params, 0, mob:getTP(), xi.slot.main)
     local pdif = pdifTable[1]
     local pdifcrit = pdifTable[2]
 
@@ -224,13 +226,14 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
     critRate = utils.clamp(critRate, 0, 1)
 
     local chance = math.random()
+    chance = handleParry(mob, target, chance)
 
     -- first hit has a higher chance to land
-    local firstHitChance = hitrate * 1.2
+    local firstHitChance = hitrate + 0.5
 
-    firstHitChance = utils.clamp(firstHitChance, 25, 95)
+    firstHitChance = utils.clamp(firstHitChance, 0.25, 0.95)
 
-    if (chance * 100) <= firstHitChance then -- it hit
+    if chance <= firstHitChance then -- it hit
         local isCrit = math.random() < critRate
 
         if isCrit then
@@ -238,13 +241,17 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
         end
 
         finaldmg = finaldmg + hitdamage * pdif
+        finaldmg = handleBlock(mob, target, finaldmg)
         hitslanded = hitslanded + 1
     end
 
     while hitsdone < numberofhits do
         chance = math.random()
+        pdifTable = cMeleeRatio(mob, target, params, 0, mob:getTP(), xi.slot.main)
+        pdif = pdifTable[1]
+        pdifcrit = pdifTable[2]
 
-        if (chance * 100) <= hitrate then --it hit
+        if chance <= hitrate then --it hit
             local isCrit = math.random() < critRate
 
             if isCrit then
@@ -252,7 +259,7 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
             end
 
             finaldmg = finaldmg + hitdamage * pdif
-            finaldmg = finaldmg + hitdamage * pdif
+            finaldmg = handleBlock(mob, target, finaldmg)
             hitslanded = hitslanded + 1
         end
 

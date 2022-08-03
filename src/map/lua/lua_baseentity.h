@@ -648,14 +648,22 @@ public:
     void  handleAfflatusMiseryDamage(double damage);
 
     bool   isWeaponTwoHanded();
-    int    getMeleeHitDamage(CLuaBaseEntity* PLuaBaseEntity, sol::object const& arg1); // gets the damage of a single hit vs the specified mob
-    uint16 getWeaponDmg();                                                             // gets the current equipped weapons' DMG rating
-    uint16 getWeaponDmgRank();                                                         // gets the current equipped weapons' DMG rating for Rank calc
-    uint16 getOffhandDmg();                                                            // gets the current equipped offhand's DMG rating (used in WS calcs)
-    uint16 getOffhandDmgRank();                                                        // gets the current equipped offhand's DMG rating for Rank calc
-    uint16 getRangedDmg();                                                             // Get ranged weapon DMG rating
-    uint16 getRangedDmgRank();                                                         // Get ranged weapond DMG rating used for calculating rank
-    uint16 getAmmoDmg();                                                               // Get ammo DMG rating
+    int    getMeleeHitDamage(CLuaBaseEntity* PLuaBaseEntity, sol::object const& arg1);                                                      // gets the damage of a single hit vs the specified mob
+    float  getPDIF(CLuaBaseEntity* PLuaBaseEntity, bool isCritical, float bonusAttPercent, uint16 slot, uint16 ignoredDef, bool isGuarded); // Gets PDIF for an attack.
+    float  getRangedPDIF(CLuaBaseEntity* PLuaBaseEntity, bool isCritical, uint16 ignoredDef);                                               // Gets PDIF for an attack.
+    uint8  getGuardRate(CLuaBaseEntity* PLuaBaseEntity);                                                                                    // Returns the guard rate for an attack.
+    uint8  getBlockRate(CLuaBaseEntity* PLuaBaseEntity);                                                                                    // Returns the block rate for an attack.
+    uint8  getParryRate(CLuaBaseEntity* PLuaBaseEntity);                                                                                    // Returns the parry rate for an attack.
+    uint8  getCHitRate(CLuaBaseEntity* PLuaBaseEntity);                                                                                     // Returns the hit rate for an attack.
+    uint8  getCRangedHitRate(CLuaBaseEntity* PLuaBaseEntity);                                                                               // Returns the ranged hit rate for an attack.
+    uint8  getShieldAbsorptionRate();                                                                                                       // Returns the shield absorption for an attack.
+    uint16 getWeaponDmg();                                                                                                                  // gets the current equipped weapons' DMG rating
+    uint16 getWeaponDmgRank();                                                                                                              // gets the current equipped weapons' DMG rating for Rank calc
+    uint16 getOffhandDmg();                                                                                                                 // gets the current equipped offhand's DMG rating (used in WS calcs)
+    uint16 getOffhandDmgRank();                                                                                                             // gets the current equipped offhand's DMG rating for Rank calc
+    uint16 getRangedDmg();                                                                                                                  // Get ranged weapon DMG rating
+    uint16 getRangedDmgRank();                                                                                                              // Get ranged weapond DMG rating used for calculating rank
+    uint16 getAmmoDmg();                                                                                                                    // Get ammo DMG rating
 
     void removeAmmo();
 

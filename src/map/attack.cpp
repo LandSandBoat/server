@@ -89,13 +89,13 @@ bool CAttack::IsCritical() const
  *  Sets the critical flag.                                             *
  *                                                                      *
  ************************************************************************/
-void CAttack::SetCritical(bool value, uint16 slot)
+void CAttack::SetCritical(bool value, uint16 slot, bool isGuarded)
 {
     m_isCritical = value;
 
     if (m_attackType == PHYSICAL_ATTACK_TYPE::DAKEN)
     {
-        m_damageRatio = battleutils::GetRangedDamageRatio(m_attacker, m_victim, m_isCritical);
+        m_damageRatio = battleutils::GetRangedDamageRatio(m_attacker, m_victim, m_isCritical, 0);
     }
     else
     {
@@ -108,7 +108,7 @@ void CAttack::SetCritical(bool value, uint16 slot)
             }
         }
 
-        m_damageRatio = battleutils::GetDamageRatio(m_attacker, m_victim, m_isCritical, attBonus, slot);
+        m_damageRatio = battleutils::GetDamageRatio(m_attacker, m_victim, m_isCritical, attBonus, slot, 0, isGuarded);
     }
 }
 
@@ -425,9 +425,11 @@ bool CAttack::CheckCounter()
         seiganChance = std::clamp<uint16>(seiganChance, 0, 100);
         seiganChance /= 4;
     }
-    if ((xirand::GetRandomNumber(100) < std::clamp<uint16>(m_victim->getMod(Mod::COUNTER) + meritCounter, 0, 80) ||
-         xirand::GetRandomNumber(100) < seiganChance) &&
-        facing(m_victim->loc.p, m_attacker->loc.p, 64) && xirand::GetRandomNumber(100) < battleutils::GetHitRate(m_victim, m_attacker))
+    // clang-format off
+    if (((xirand::GetRandomNumber(100) < std::clamp<uint16>(m_victim->getMod(Mod::COUNTER) + meritCounter, 0, 80)) ||
+        (xirand::GetRandomNumber(100) < std::clamp<uint16>(seiganChance, 0, 80))) &&
+            (facing(m_victim->loc.p, m_attacker->loc.p, 64) && (xirand::GetRandomNumber(100) < battleutils::GetHitRate(m_victim, m_attacker))))
+    // clang-format on
     {
         m_isCountered = true;
         m_isCritical  = (xirand::GetRandomNumber(100) < battleutils::GetCritHitRate(m_victim, m_attacker, false));
@@ -469,7 +471,7 @@ bool CAttack::CheckCover()
  *  Processes the damage for this swing.                                    *
  *                                                                      *
  ************************************************************************/
-void CAttack::ProcessDamage(bool isCritical)
+void CAttack::ProcessDamage(bool isCritical, bool isGuarded)
 {
     // Sneak attack.
     if (m_attacker->GetMJob() == JOB_THF && m_isFirstSwing && m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK_ATTACK) &&
@@ -501,19 +503,19 @@ void CAttack::ProcessDamage(bool isCritical)
     {
         m_naturalH2hDamage = (int32)(m_attacker->GetSkill(SKILL_HAND_TO_HAND) * 0.11f) + 3;
         m_baseDamage       = m_attacker->GetMainWeaponDmg();
-        m_damage           = (uint32)(((m_baseDamage + m_naturalH2hDamage + m_trickAttackDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * battleutils::GetDamageRatio(m_attacker, m_attacker->GetBattleTarget(), isCritical, 0, SLOT_MAIN)));
+        m_damage           = (uint32)(((m_baseDamage + m_naturalH2hDamage + m_trickAttackDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * battleutils::GetDamageRatio(m_attacker, m_attacker->GetBattleTarget(), isCritical, 0, SLOT_MAIN, 0, isGuarded)));
     }
     else if (slot == SLOT_MAIN)
     {
-        m_damage = (uint32)(((m_attacker->GetMainWeaponDmg() + m_trickAttackDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * battleutils::GetDamageRatio(m_attacker, m_attacker->GetBattleTarget(), isCritical, 0, SLOT_MAIN)));
+        m_damage = (uint32)(((m_attacker->GetMainWeaponDmg() + m_trickAttackDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * battleutils::GetDamageRatio(m_attacker, m_attacker->GetBattleTarget(), isCritical, 0, SLOT_MAIN, 0, isGuarded)));
     }
     else if (slot == SLOT_SUB)
     {
-        m_damage = (uint32)(((m_attacker->GetSubWeaponDmg() + m_trickAttackDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * battleutils::GetDamageRatio(m_attacker, m_attacker->GetBattleTarget(), isCritical, 0, SLOT_SUB)));
+        m_damage = (uint32)(((m_attacker->GetSubWeaponDmg() + m_trickAttackDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * battleutils::GetDamageRatio(m_attacker, m_attacker->GetBattleTarget(), isCritical, 0, SLOT_SUB, 0, isGuarded)));
     }
     else if (slot == SLOT_AMMO || slot == SLOT_RANGED)
     {
-        m_damage = (uint32)((m_attacker->GetRangedWeaponDmg() + battleutils::GetFSTR(m_attacker, m_victim, slot)) * battleutils::GetDamageRatio(m_attacker, m_attacker->GetBattleTarget(), isCritical, 0, SLOT_AMMO));
+        m_damage = (uint32)((m_attacker->GetRangedWeaponDmg() + battleutils::GetFSTR(m_attacker, m_victim, slot)) * battleutils::GetDamageRatio(m_attacker, m_attacker->GetBattleTarget(), isCritical, 0, SLOT_AMMO, 0, isGuarded));
     }
 
     // Apply "Double Attack" damage and "Triple Attack" damage mods

@@ -69,11 +69,14 @@ local function getAvatarFSTR(weaponDmg, avatarStr, targetVit)
     return math.max(-min, fSTR)
 end
 
-local function avatarHitDmg(weaponDmg, fSTR, pDif)
+local function avatarHitDmg(weaponDmg, fSTR, pDif, attacker, target)
     -- https://www.bg-wiki.com/bg/Physical_Damage
     -- Physical Damage = Base Damage * pDIF
     -- where Base Damange is defined as Weapon Damage + fSTR
-    return (weaponDmg + fSTR) * pDif
+    local dmg = (weaponDmg + fSTR) * pDif
+
+    dmg = handleBlock(attacker, target, dmg)
+    return dmg
 end
 
 xi.summon.getSummoningSkillOverCap = function(avatar)
@@ -91,23 +94,12 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
         wSC = 0
     end
 
-    -- I have never read a limit on accuracy bonus from summoning skill which can currently go far past 200 over cap
-    -- current retail is over +250 skill so I am removing the cap, my SMN is at 695 total skill
-    local acc = avatar:getACC() + xi.summon.getSummoningSkillOverCap(avatar)
-    local eva = target:getEVA()
-
-    -- Level correction does not happen in Adoulin zones, Legion, or zones in Escha/Reisenjima
-    -- https://www.bg-wiki.com/bg/PDIF#Level_Correction_Function_.28cRatio.29
-    local zoneId = avatar:getZone():getID()
-
-    local shouldApplyLevelCorrection = (zoneId < 256) and zoneId ~= 183
-
     -- https://forum.square-enix.com/ffxi/threads/45365?p=534537#post534537
     -- https://www.bg-wiki.com/bg/Hit_Rate
     -- https://www.bluegartr.com/threads/114636-Monster-Avatar-Pet-damage
     -- As of December 10th 2015 pet hit rate caps at 99% (familiars, wyverns, avatars and automatons)
     -- increased from 95%
-    local maxHitRate = 0.99
+    local maxHitRate = 0.95
     local minHitRate = 0.2
 
     -- Hit Rate (%) = 75 + floor( (Accuracy - Evasion)/2 ) + 2*(dLVL)
@@ -115,30 +107,14 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
     -- bonuses cap at level diff of 38 based on this testing:
     -- https://www.bluegartr.com/threads/114636-Monster-Avatar-Pet-damage
     -- If there are penalties they seem to be applied differently similarly to monsters.
-    local baseHitRate = 75
+    local baseHitRate = getHitRate(avatar, target, 0, xi.summon.getSummoningSkillOverCap(avatar))
     -- First hit gets a +100 ACC bonus which translates to +50 hit
-    local firstHitAccBonus = 50
-    local hitrateFirst = 0
-    local hitrateSubsequent = 0
-    -- Max level diff is 38
-    local levelDiff = math.min(avatar:getMainLvl() - target:getMainLvl(), 38)
-    -- Only bonuses are applied for avatar level correction
-    local levelCorrection = 0
-    if shouldApplyLevelCorrection then
-        if levelDiff > 0 then
-            levelCorrection = math.max((levelDiff*2), 0)
-        end
-    end
-    -- Delta acc / 2 for hit rate
-    local dAcc = math.floor((acc - eva)/2)
+    local firstHitAccBonus = 0.5
 
     -- Normal hits computed first
-    hitrateSubsequent = baseHitRate + dAcc + levelCorrection
+    local hitrateSubsequent = baseHitRate
     -- First hit gets bonus hit rate
     hitrateFirst = hitrateSubsequent + firstHitAccBonus
-
-    hitrateSubsequent = hitrateSubsequent / 100
-    hitrateFirst = hitrateFirst / 100
 
     hitrateSubsequent = utils.clamp(hitrateSubsequent, minHitRate, maxHitRate)
     hitrateFirst = utils.clamp(hitrateFirst, minHitRate, maxHitRate)
@@ -149,13 +125,20 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
     local numHitsProcessed = 1
     local finaldmg = 0
 
-    if math.random() < hitrateFirst then
+    local missChance = math.random()
+
+    missChance = handleParry(avatar, target, missChance, false)
+
+    if missChance < hitrateFirst then
         firstHitLanded = true
         numHitsLanded = numHitsLanded + 1
     end
 
     while numHitsProcessed < numberofhits do
-        if math.random() < hitrateSubsequent then
+        missChance = math.random()
+        missChance = handleParry(avatar, target, missChance, false)
+
+        if missChance < hitrateSubsequent then
             numHitsLanded = numHitsLanded + 1
         end
         numHitsProcessed = numHitsProcessed + 1
@@ -190,8 +173,10 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
             mtp200 = 1.0
             mtp300 = 1.0
         end
+
+        local tp = avatar:getTP()
         local params = {atk100 = mtp100, atk200 = mtp200, atk300 = mtp300,}
-        local pDifTable = cMeleeRatio(avatar, target, params, 0, avatar:getTP())
+        local pDifTable = cMeleeRatio(avatar, target, params, 0, tp, xi.slot.MAIN)
         local pDif = pDifTable[1]
         local pDifCrit = pDifTable[2]
 
@@ -206,18 +191,21 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
                 pDif = pDifCrit
             end
 
-            finaldmg = avatarHitDmg(weaponDmg, fSTR, pDif) * dmgmod
+            finaldmg = avatarHitDmg(weaponDmg, fSTR, pDif, avatar, target) * dmgmod
             numHitsProcessed = 1
         end
 
         while numHitsProcessed < numHitsLanded do
-        local isCrit = math.random() < critRate
+            local isCrit = math.random() < critRate
+            pDifTable = cMeleeRatio(avatar, target, params, 0, tp, xi.slot.MAIN)
+            pDif = pDifTable[1]
+            pDifCrit = pDifTable[2]
 
             if isCrit then
                 pDif = pDifCrit
             end
 
-            finaldmg = finaldmg + (avatarHitDmg(weaponDmg, fSTR, pDif) * dmgmodsubsequent)
+            finaldmg = finaldmg + (avatarHitDmg(weaponDmg, fSTR, pDif, avatar, target) * dmgmodsubsequent)
             numHitsProcessed = numHitsProcessed + 1
         end
     end

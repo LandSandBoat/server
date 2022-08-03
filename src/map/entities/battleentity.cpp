@@ -1959,7 +1959,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                             csJpAtkBonus = 1 + ((static_cast<float>(targetDex) / 100) * csJpModifier);
                         }
 
-                        float DamageRatio = battleutils::GetDamageRatio(PTarget, this, attack.IsCritical(), csJpAtkBonus, SLOT_MAIN);
+                        float DamageRatio = battleutils::GetDamageRatio(PTarget, this, attack.IsCritical(), csJpAtkBonus, SLOT_MAIN, 0, attack.IsGuarded());
                         auto  damage      = (int32)((PTarget->GetMainWeaponDmg() + naturalh2hDMG + battleutils::GetFSTR(PTarget, this, SLOT_MAIN)) * DamageRatio);
 
                         actionTarget.spikesParam =
@@ -1982,7 +1982,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
             else
             {
                 // Set this attack's critical flag.
-                attack.SetCritical(xirand::GetRandomNumber(100) < battleutils::GetCritHitRate(this, PTarget, !attack.IsFirstSwing()), SLOT_MAIN);
+                attack.SetCritical(xirand::GetRandomNumber(100) < battleutils::GetCritHitRate(this, PTarget, !attack.IsFirstSwing()), SLOT_MAIN, attack.IsGuarded());
 
                 actionTarget.reaction = REACTION::HIT;
 
@@ -2024,7 +2024,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                 }
 
                 // Process damage.
-                attack.ProcessDamage(attack.IsCritical());
+                attack.ProcessDamage(attack.IsCritical(), attack.IsGuarded());
 
                 // Try shield block
                 if (attack.IsBlocked())

@@ -513,6 +513,7 @@ namespace mobutils
         PMob->addModifier(Mod::EVA, GetEvasion(PMob));
         PMob->addModifier(Mod::ATT, GetBase(PMob, PMob->attRank));
         PMob->addModifier(Mod::ACC, GetBase(PMob, PMob->accRank));
+        PMob->addModifier(Mod::PARRY, GetBase(PMob, 3));
 
         // natural magic evasion
         PMob->addModifier(Mod::MEVA, GetMagicEvasion(PMob));

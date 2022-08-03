@@ -819,7 +819,7 @@ namespace battleutils
                 bool crit = battleutils::GetCritHitRate(PDefender, PAttacker, true) > xirand::GetRandomNumber(100);
 
                 // Dmg math.
-                float  DamageRatio = GetDamageRatio(PDefender, PAttacker, crit, 0.f, SLOT_MAIN);
+                float  DamageRatio = GetDamageRatio(PDefender, PAttacker, crit, 0.f, SLOT_MAIN, 0, false);
                 uint16 dmg         = (uint32)((PDefender->GetMainWeaponDmg() + battleutils::GetFSTR(PDefender, PAttacker, SLOT_MAIN)) * DamageRatio);
                 dmg                = attackutils::CheckForDamageMultiplier(((CCharEntity*)PDefender), dynamic_cast<CItemWeapon*>(PDefender->m_Weapons[SLOT_MAIN]), dmg,
                                                                            PHYSICAL_ATTACK_TYPE::NORMAL, SLOT_MAIN);
@@ -1576,7 +1576,7 @@ namespace battleutils
         acc += accBonus;
 
         int eva = PDefender->EVA();
-        hitrate = hitrate + (acc - eva) / 2 + (PAttacker->GetMLevel() - PDefender->GetMLevel()) * 2;
+        hitrate = hitrate + ((acc - eva) / 2) - (PDefender->GetMLevel() - PAttacker->GetMLevel()) * 2;
 
         uint8 finalhitrate = std::clamp(hitrate, 20, 95);
         return finalhitrate;
@@ -1588,7 +1588,7 @@ namespace battleutils
     }
 
     // todo: need to penalise attacker's RangedAttack depending on distance from mob. (% decrease)
-    float GetRangedDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isCritical)
+    float GetRangedDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isCritical, uint16 ignoredDef)
     {
         // get ranged attack value
         uint16 rAttack = 1;
@@ -1627,7 +1627,7 @@ namespace battleutils
         }
 
         // get ratio (not capped for RAs)
-        float ratio = (float)rAttack / (float)PDefender->DEF();
+        float ratio = (float)rAttack / ((float)PDefender->DEF() - ignoredDef);
 
         ratio        = std::clamp<float>(ratio, 0, 3);
         float cRatio = ratio;
@@ -1902,7 +1902,8 @@ namespace battleutils
     uint8 GetParryRate(CBattleEntity* PAttacker, CBattleEntity* PDefender)
     {
         CItemWeapon* PWeapon = GetEntityWeapon(PDefender, SLOT_MAIN);
-        if ((PWeapon != nullptr && PWeapon->getID() != 0 && PWeapon->getID() != 65535 && PWeapon->getSkillType() != SKILL_HAND_TO_HAND) &&
+        if (((PDefender->objtype == TYPE_PC && PWeapon != nullptr && PWeapon->getID() != 0 && PWeapon->getID() != 65535 && PWeapon->getSkillType() != SKILL_HAND_TO_HAND) ||
+             (PDefender->objtype == TYPE_MOB && PDefender->m_EcoSystem == ECOSYSTEM::BEASTMAN && PDefender->GetMJob() != JOB_MNK)) &&
             PDefender->PAI->IsEngaged())
         {
             // http://wiki.ffxiclopedia.org/wiki/Talk:Parrying_Skill
@@ -1910,27 +1911,20 @@ namespace battleutils
 
             float skill = (float)(PDefender->GetSkill(SKILL_PARRY) + PDefender->getMod(Mod::PARRY) + PWeapon->getILvlParry());
 
-            float diff = 1.0f + (((float)PDefender->GetMLevel() - PAttacker->GetMLevel()) / 15.0f);
+            float diff = 1.0f + ((PDefender->GetMLevel() - PAttacker->GetMLevel()) * 0.05f);
 
-            if (PWeapon->isTwoHanded())
+            if (PWeapon != nullptr && PWeapon->isTwoHanded())
             {
                 // two handed weapons get a bonus
                 diff += 0.1f;
             }
 
-            if (diff < 0.4f)
-            {
-                diff = 0.4f;
-            }
-            if (diff > 1.4f)
-            {
-                diff = 1.4f;
-            }
+            float diffCorrect = std::clamp<float>(diff, 0.4f, 1.4f);
 
             float dex = PAttacker->DEX();
             float agi = PDefender->AGI();
 
-            auto parryRate = std::clamp<uint8>((uint8)((skill * 0.1f + (agi - dex) * 0.125f + 10.0f) * diff), 5, 25);
+            auto parryRate = std::clamp<uint8>((uint8)(((skill * 0.125f) + ((agi - dex) * 0.125f)) * diffCorrect), 5, 25);
 
             // Issekigan grants parry rate bonus. From best available data, if you already capped out at 25% parry it grants another 25% bonus for ~50%
             // parry rate
@@ -1975,21 +1969,13 @@ namespace battleutils
                 skill += PWeapon->getILvlParry(); // no weapon will ever have ilvl guard and parry
             }
 
-            float diff = 1.0f + (((float)PDefender->GetMLevel() - PAttacker->GetMLevel()) / 15.0f);
-
-            if (diff < 0.4f)
-            {
-                diff = 0.4f;
-            }
-            if (diff > 1.4f)
-            {
-                diff = 1.4f;
-            }
+            float diff        = 1.0f + ((PDefender->GetMLevel() - PAttacker->GetMLevel()) * 0.05f);
+            float diffCorrect = std::clamp<float>(diff, 0.4f, 1.4f);
 
             float dex = PAttacker->DEX();
             float agi = PDefender->AGI();
 
-            return std::clamp<uint8>((uint8)((skill * 0.1f + (agi - dex) * 0.125f + 10.0f) * diff), 5, 25);
+            return std::clamp<uint8>((uint8)((skill * 0.125f + (agi - dex) * 0.125f) * diffCorrect), 5, 25);
         }
 
         return 0;
@@ -2590,7 +2576,7 @@ namespace battleutils
 
             if (shouldApplyLevelCorrection)
             {
-                int16 dLvl = PAttacker->GetMLevel() - PDefender->GetMLevel();
+                int16 dLvl = PDefender->GetMLevel() - PAttacker->GetMLevel();
                 // Skip penalties for avatars, this should likely be all pets and mobs but I have no proof
                 // of this for ACC, ATT level correction for Pets/Avatars is the same as mobs though.
                 bool isPet    = PAttacker->objtype == TYPE_PET;
@@ -2607,13 +2593,13 @@ namespace battleutils
                     if (dLvl > 0)
                     {
                         // Avatars have a known level difference cap of 38
-                        hitrate += static_cast<int16>(std::min(dLvl, (int16)38) * 2);
+                        hitrate -= static_cast<int16>(std::min(dLvl, (int16)38) * 2);
                     }
                 }
                 else
                 {
                     // Everything else has no known caps, though it's likely 38 like avatars
-                    hitrate += static_cast<int16>(dLvl * 2);
+                    hitrate -= static_cast<int16>(dLvl * 2);
                 }
             }
 
@@ -2629,7 +2615,7 @@ namespace battleutils
             // Grasshopper Broth / Noisy Grasshopper Broth / Mole Broth / Lively Mole Broth / Blood Broth / Clear Blood Broth / Antica Broth / Fragrant Antica
             // Broth
 
-            int32 maxHitRate  = 99;
+            int32 maxHitRate  = 95;
             auto* targ_weapon = PAttacker ? dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_MAIN]) : nullptr;
 
             // As far as I can tell kick attacks fall under Hand-to-Hand so ignoring them and letting them go to 99
@@ -2848,7 +2834,7 @@ namespace battleutils
      *                                                                       *
      ************************************************************************/
 
-    float GetDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isCritical, float bonusAttPercent, uint16 slot)
+    float GetDamageRatio(CBattleEntity* PAttacker, CBattleEntity* PDefender, bool isCritical, float bonusAttPercent, uint16 slot, uint16 ignoredDef, bool isGuarded)
     {
         uint16 attack = PAttacker->ATT(slot);
         // Bonus attack currently only from footwork
@@ -2858,7 +2844,7 @@ namespace battleutils
         }
 
         // Wholly possible for DEF to be near 0 with the amount of debuffs/effects now.
-        uint16 defense = PDefender->DEF();
+        uint16 defense = PDefender->DEF() - ignoredDef;
         if (defense == 0)
         {
             defense = 1;
@@ -3030,6 +3016,27 @@ namespace battleutils
         else
         {
             lowerLimit = std::min(wRatio - 0.375f, maxRatio);
+        }
+
+        if (isGuarded)
+        {
+            if (upperLimit > 0)
+            {
+                upperLimit -= 1.f;
+            }
+            else
+            {
+                upperLimit = 0.f;
+            }
+
+            if (lowerLimit > 0)
+            {
+                lowerLimit -= 1.f;
+            }
+            else
+            {
+                lowerLimit = 0.f;
+            }
         }
 
         float pDIF = 0.0f;
@@ -4714,7 +4721,9 @@ namespace battleutils
                         AttMultiplerPercent = PAttacker->getMod(Mod::JUMP_ATT_BONUS) / 100.f;
                     }
 
-                    float DamageRatio = battleutils::GetDamageRatio(PAttacker, PVictim, false, AttMultiplerPercent, SLOT_MAIN);
+                    bool isGuarded = attackutils::IsGuarded(PAttacker, PVictim);
+
+                    float DamageRatio = battleutils::GetDamageRatio(PAttacker, PVictim, false, AttMultiplerPercent, SLOT_MAIN, 0, isGuarded);
                     damageForRound    = (uint16)((PAttacker->GetMainWeaponDmg() + battleutils::GetFSTR(PAttacker, PVictim, SLOT_MAIN)) * DamageRatio);
 
                     // bonus applies to jump only, not high jump

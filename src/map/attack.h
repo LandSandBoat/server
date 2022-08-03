@@ -69,31 +69,31 @@ class CAttack
 public:
     CAttack(CBattleEntity* attacker, CBattleEntity* defender, PHYSICAL_ATTACK_TYPE type, PHYSICAL_ATTACK_DIRECTION direction, CAttackRound* attackRound);
 
-    uint16                    GetAnimationID();                     // Returns the animation ID.
-    PHYSICAL_ATTACK_TYPE      GetAttackType();                      // Returns the attack type (Double, Triple, Zanshin ect).
-    PHYSICAL_ATTACK_DIRECTION GetAttackDirection();                 // Returns the attack direction.
-    uint8                     GetWeaponSlot();                      // Returns the attacking slot.
-    uint8                     GetHitRate();                         // Returns the hitrate for this swing.
-    int32                     GetDamage() const;                    // Returns the damage for this attack.
-    void                      SetDamage(int32);                     // Sets the damage for this attack.
-    bool                      IsCritical() const;                   // Returns the isCritical flag.
-    void                      SetCritical(bool, uint16 slot);       // Sets the isCritical flag;
-    bool                      IsFirstSwing() const;                 // Returns the isFirstSwing flag.
-    void                      SetAsFirstSwing(bool isFirst = true); // Sets this attack as the first swing.
-    float                     GetDamageRatio() const;               // Gets the damage ratio.
-    void                      SetGuarded(bool);                     // Sets the isGuarded flag.
-    bool                      IsGuarded();                          // Sets the isGuarded flag. Also alters the damage ratio accordingly.
-    bool                      IsEvaded() const;                     // Gets the evaded flag.
-    void                      SetEvaded(bool value);                // Sets the evaded flag.
-    bool                      IsBlocked() const;                    // Returns the blocked flag.
+    uint16                    GetAnimationID();                               // Returns the animation ID.
+    PHYSICAL_ATTACK_TYPE      GetAttackType();                                // Returns the attack type (Double, Triple, Zanshin ect).
+    PHYSICAL_ATTACK_DIRECTION GetAttackDirection();                           // Returns the attack direction.
+    uint8                     GetWeaponSlot();                                // Returns the attacking slot.
+    uint8                     GetHitRate();                                   // Returns the hitrate for this swing.
+    int32                     GetDamage() const;                              // Returns the damage for this attack.
+    void                      SetDamage(int32);                               // Sets the damage for this attack.
+    bool                      IsCritical() const;                             // Returns the isCritical flag.
+    void                      SetCritical(bool, uint16 slot, bool isGuarded); // Sets the isCritical flag;
+    bool                      IsFirstSwing() const;                           // Returns the isFirstSwing flag.
+    void                      SetAsFirstSwing(bool isFirst = true);           // Sets this attack as the first swing.
+    float                     GetDamageRatio() const;                         // Gets the damage ratio.
+    void                      SetGuarded(bool);                               // Sets the isGuarded flag.
+    bool                      IsGuarded();                                    // Sets the isGuarded flag. Also alters the damage ratio accordingly.
+    bool                      IsEvaded() const;                               // Gets the evaded flag.
+    void                      SetEvaded(bool value);                          // Sets the evaded flag.
+    bool                      IsBlocked() const;                              // Returns the blocked flag.
     bool                      IsParried();
     bool                      IsAnticipated() const;
     bool                      CheckAnticipated();
     bool                      IsCountered() const;
     bool                      CheckCounter();
-    bool                      IsCovered() const;              // Returns the covered flag.
-    bool                      CheckCover();                   // Sets the covered flag and returns it.
-    void                      ProcessDamage(bool isCritical); // Processes the damage for this swing.
+    bool                      IsCovered() const;                              // Returns the covered flag.
+    bool                      CheckCover();                                   // Sets the covered flag and returns it.
+    void                      ProcessDamage(bool isCritical, bool isGuarded); // Processes the damage for this swing.
 
     void SetAttackType(PHYSICAL_ATTACK_TYPE type); // Sets the attack type.
 
