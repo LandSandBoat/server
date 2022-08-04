@@ -943,7 +943,7 @@ function cMeleeRatio(attacker, defender, params, ignoredDef, tp, slot)
     end
 
     if defender:getMainJob() == xi.job.MNK then
-        if defender:getGuardRate(attacker) > math.random(100) then
+        if defender:getGuardRate(attacker) > math.random(100) and defender:isFacing(attacker) then
             isGuarded = true
         end
     end

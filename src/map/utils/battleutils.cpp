@@ -3029,7 +3029,7 @@ namespace battleutils
                 upperLimit = 0.f;
             }
 
-            if (lowerLimit > 0)
+            if (lowerLimit > 1)
             {
                 lowerLimit -= 1.f;
             }
