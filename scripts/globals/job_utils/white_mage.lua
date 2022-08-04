@@ -40,9 +40,9 @@ xi.job_utils.white_mage.checkBenediction = function(player, target, ability)
 end
 
 xi.job_utils.white_mage.checkDevotion = function(player, target, ability)
-    if (player:getID() == target:getID()) then
+    if player:getID() == target:getID() then
         return xi.msg.basic.CANNOT_PERFORM_TARG, 0
-    elseif (player:getHP() < 4) then -- Fails if HP < 4
+    elseif player:getHP() < 4 then -- Fails if HP < 4
         return xi.msg.basic.UNABLE_TO_USE_JA, 0
     else
         return 0, 0
@@ -50,9 +50,9 @@ xi.job_utils.white_mage.checkDevotion = function(player, target, ability)
 end
 
 xi.job_utils.white_mage.checkMartyr = function(player, target, ability)
-    if (player:getID() == target:getID()) then
+    if player:getID() == target:getID() then
         return xi.msg.basic.CANNOT_PERFORM_TARG, 0
-    elseif (player:getHP() < 4) then -- Fails if HP < 4
+    elseif player:getHP() < 4 then -- Fails if HP < 4
         return xi.msg.basic.UNABLE_TO_USE_JA, 0
     else
         return 0, 0
@@ -81,7 +81,7 @@ end
 xi.job_utils.white_mage.useBenediction = function(player, target, ability)
     -- To Do: Benediction can remove Charm only while in Assault Mission Lamia No.13
     for i, effect in ipairs(removables) do
-        if (target:hasStatusEffect(effect)) then
+        if target:hasStatusEffect(effect) then
             target:delStatusEffect(effect)
         end
     end
@@ -90,7 +90,7 @@ xi.job_utils.white_mage.useBenediction = function(player, target, ability)
 
     local maxHeal = target:getMaxHP() - target:getHP()
 
-    if (heal > maxHeal) then
+    if heal > maxHeal then
         heal = maxHeal
     end
 
@@ -99,6 +99,7 @@ xi.job_utils.white_mage.useBenediction = function(player, target, ability)
     if target:hasStatusEffect(xi.effect.DOOM) and power > math.random(1, 100) then
         target:delStatusEffect(xi.effect.DOOM)
     end
+
     player:updateEnmityFromCure(target, heal)
     target:addHP(heal)
     target:wakeUp()
