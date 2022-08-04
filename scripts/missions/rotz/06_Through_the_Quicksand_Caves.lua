@@ -26,6 +26,11 @@ mission.sections =
             return currentMission == mission.missionId
         end,
 
+        [xi.zone.NORG] =
+        {
+            ['Gilgamesh']  = mission:event(12),
+        },
+
         [xi.zone.CHAMBER_OF_ORACLES] =
         {
             onEventFinish =

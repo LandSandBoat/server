@@ -99,7 +99,7 @@ map_session_list_t map_session_list = {};
 
 std::thread messageThread;
 
-std::unique_ptr<SqlConnection> sql;
+std::unique_ptr<SqlConnection> sql; // lgtm [cpp/short-global-name]
 
 extern std::map<uint16, CZone*> g_PZoneList; // Global array of pointers for zones
 
@@ -814,7 +814,7 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
             PacketList_t packetList = PChar->getPacketList();
             packets                 = 0;
 
-            while (!packetList.empty() && *buffsize + packetList.front()->getSize() < MAX_BUFFER_SIZE && packets < PacketCount)
+            while (!packetList.empty() && *buffsize + packetList.front()->getSize() < MAX_BUFFER_SIZE && static_cast<size_t>(packets) < PacketCount)
             {
                 PSmallPacket = packetList.front();
                 packetList.pop_front();

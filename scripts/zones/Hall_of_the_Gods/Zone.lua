@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: Hall_of_the_Gods (251)
---
 -----------------------------------
 local ID = require("scripts/zones/Hall_of_the_Gods/IDs")
 require("scripts/globals/conquest")

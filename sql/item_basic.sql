@@ -6143,10 +6143,10 @@ INSERT INTO `item_basic` VALUES (6489,0,'far_east_puffer','far_east_puffer',1,15
 INSERT INTO `item_basic` VALUES (6498,0,'bunch_of_fortune_fruits','fortune_fruits',12,30296,0,0,0);
 INSERT INTO `item_basic` VALUES (6499,0,'patio_design_plan_document','patio_design_plans',1,63040,0,0,0);
 INSERT INTO `item_basic` VALUES (6500,0,'abdhaljs_seal','abdhaljs_seal',99,30272,0,0,0);
-INSERT INTO `item_basic` VALUES (6501,0,'konjak_tuber','konjak_tuber',12,516,59,0,1); -- TODO: determine BaseSell from retail
-INSERT INTO `item_basic` VALUES (6502,0,'konjak','konjak',12,516,59,0,1); -- TODO: determine BaseSell from retail
-INSERT INTO `item_basic` VALUES (6503,0,'daikon','daikon',12,516,59,0,1); -- TODO: determine BaseSell from retail
-INSERT INTO `item_basic` VALUES (6505,0,'chikuwa','chikuwa',12,516,59,0,1); -- TODO: determine BaseSell from retail
+INSERT INTO `item_basic` VALUES (6501,0,'konjak_tuber','konjak_tuber',12,516,59,0,20);
+INSERT INTO `item_basic` VALUES (6502,0,'konjak','konjak',12,516,59,0,31);
+INSERT INTO `item_basic` VALUES (6503,0,'daikon','daikon',12,516,59,0,20);
+INSERT INTO `item_basic` VALUES (6505,0,'chikuwa','chikuwa',12,516,59,0,52);
 INSERT INTO `item_basic` VALUES (6506,0,'pyre_crystal','pyre_crystal',12,29248,0,0,0);
 INSERT INTO `item_basic` VALUES (6507,0,'frost_crystal','frost_crystal',12,29248,0,0,0);
 INSERT INTO `item_basic` VALUES (6508,0,'vortex_crystal','vortex_crystal',12,29248,0,0,0);

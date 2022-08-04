@@ -5,7 +5,7 @@
 -- Recast Time: 0:10:00
 -- Duration: 0:03:00
 -----------------------------------
-require("scripts/globals/status")
+require("scripts/globals/job_utils/monk")
 -----------------------------------
 local ability_object = {}
 
@@ -14,13 +14,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    player:delStatusEffect(xi.effect.MAX_HP_BOOST)
-
-    local merits = player:getMerit(xi.merit.MANTRA)
-
-    target:addStatusEffect(xi.effect.MAX_HP_BOOST, merits, 0, 180)
-
-    -- return xi.effect.MANTRA -- TODO: implement xi.effect.MANTRA
+    xi.job_utils.monk.useMantra(player, target, ability)
 end
 
 return ability_object

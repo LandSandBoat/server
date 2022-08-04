@@ -31,6 +31,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 CPetSkillState::CPetSkillState(CPetEntity* PEntity, uint16 targid, uint16 wsid)
 : CState(PEntity, targid)
 , m_PEntity(PEntity)
+, m_spentTP(0)
 {
     auto* skill = battleutils::GetPetSkill(wsid);
     if (!skill)
@@ -83,7 +84,7 @@ CPetSkill* CPetSkillState::GetPetSkill()
 
 void CPetSkillState::SpendCost()
 {
-    if (m_PSkill->isTpSkill())
+    if (!m_PSkill->isTpFreeSkill())
     {
         m_spentTP            = m_PEntity->health.tp;
         m_PEntity->health.tp = 0;

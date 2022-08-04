@@ -1,19 +1,16 @@
 -----------------------------------
--- Zone: Abyssea-Grauberg
---  NPC: qm7 (???)
--- Spawns Xiabalba
--- !pos -487 -168 211 254
------------------------------------
-require("scripts/globals/abyssea")
+-- Area: Eastern Adoulin !zone 257
+-- NPC: Inthius
+-- Type: Weather Reporter
+-- !pos -97.145 0.001 -36.710 257
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    -- xi.abyssea.qmOnTrade(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    -- xi.abyssea.qmOnTrigger(player, npc)
+    player:startEvent(4, 0, 0, 0, 0, 0, 0, 0, VanadielTime())
 end
 
 entity.onEventUpdate = function(player, csid, option)

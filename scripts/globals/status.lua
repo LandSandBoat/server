@@ -1233,6 +1233,10 @@ xi.mod =
     PERPETUATION_REDUCTION          = 346,
 
     -- Warrior
+    BERSERK_POTENCY                 = 948,  -- Augments "Berserk"/Enhances "Berserk" effect (Conqueror)
+    BERSERK_DURATION                = 954,  -- Berserk Duration
+    AGGRESSOR_DURATION              = 955,  -- Aggressor Duration
+    DEFENDER_DURATION               = 956,  -- Defender Duration
     ENHANCES_RESTRAINT              = 1045, -- Enhances "Restraint" effect/"Restraint" + (Increases the damage bonus of Restraint by XXX%)
     ENHANCES_BLOOD_RAGE             = 1046, -- Enhances "Blood Rage" effect/"Blood Rage" duration +
 
@@ -1651,10 +1655,6 @@ xi.mod =
     SHIELD_DEF_BONUS                = 905, -- Shield Defense Bonus
     SNEAK_DURATION                  = 946, -- Additional duration in seconds
     INVISIBLE_DURATION              = 947, -- Additional duration in seconds
-    BERSERK_EFFECT                  = 948, -- Conqueror Berserk Effect
-    BERSERK_DURATION                = 954, -- Berserk Duration
-    AGGRESSOR_DURATION              = 955, -- Aggressor Duration
-    DEFENDER_DURATION               = 956, -- Defender Duration
     CARDINAL_CHANT                  = 959,
     INDI_DURATION                   = 960,
     GEOMANCY_BONUS                  = 961, -- Used to increase potency of "Geomancy +" items (only the highest value is counted)
@@ -2425,10 +2425,10 @@ xi.mobMod =
     SPELL_LIST          = 27, -- set spell list
     EXP_BONUS           = 28, -- bonus exp (bonus / 100) negative values reduce exp.
     ASSIST              = 29, -- mobs will assist me
-    SPECIAL_SKILL       = 30, -- give special skill
+    SPECIAL_SKILL       = 30, -- give special skill (example: Gigas boulder ranged attack)
     ROAM_DISTANCE       = 31, -- distance allowed to roam from spawn
     -- 32 Available for use
-    SPECIAL_COOL        = 33, -- cool down for special
+    SPECIAL_COOL        = 33, -- cool down for special (example: Time between Gigas boulder ranged attacks)
     MAGIC_COOL          = 34, -- cool down for magic
     STANDBACK_COOL      = 35, -- cool down time for standing back (casting spell while not in attack range)
     ROAM_COOL           = 36, -- cool down time in seconds after roaming
