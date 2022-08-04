@@ -19,6 +19,17 @@ end
 
 entity.onTrigger = function(player, npc)
     player:PrintToPlayer("Nantoto: Got a busted white rarab cap +1? Trade it to me and I'll fix it lickity split.", 0xD)
+	player:PrintToPlayer("Nantoto: Thank you for your support! We appreciate you choosing CatsEyeXI!", 0xD)
+	local stock =
+        {
+        11853,  1,    -- coat
+        11854,  1,    -- dress
+        11956,  1,    -- hose
+        11957,  1,    -- boots
+        }
+
+        player:PrintToPlayer("Welcome to the player appreciation shop!", 0, npc:getPacketName())
+        xi.shop.general(player, stock)
 end
 
 entity.onEventUpdate = function(player, csid, option)
