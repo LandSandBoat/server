@@ -2,7 +2,7 @@
 -- Fall of the Hawk
 -- Wings of the Goddess Mission 36
 -----------------------------------
--- !addmission 5 34
+-- !addmission 5 35
 -----------------------------------
 require('scripts/globals/missions')
 require('scripts/globals/interaction/mission')
