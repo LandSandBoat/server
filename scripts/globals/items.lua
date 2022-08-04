@@ -153,6 +153,7 @@ xi.items =
     BEASTCOIN                       = 656,
     BRASS_SHEET                     = 661,
     MYTHRIL_SHEET                   = 663,
+    DARKSTEEL_SHEET                 = 664,
     CHUNK_OF_KHROMA_ORE             = 685,
     BEECH_LOG                       = 692,
     EBONY_LOG                       = 702,
