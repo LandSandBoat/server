@@ -130,7 +130,9 @@ quest.sections =
                 end,
 
                 [7] = function(player, csid, option, npc)
-                    quest:complete(player)
+                    if quest:complete(player) then
+                        xi.quest.setVar(player, xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.CHASING_SHADOWS, VanadielUniqueDay() + 1)
+                    end
                 end,
 
                 [13] = function(player, csid, option, npc)

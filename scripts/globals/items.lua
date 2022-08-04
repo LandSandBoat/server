@@ -157,6 +157,7 @@ xi.items =
     DAMASCUS_INGOT                  = 658,
     BRASS_SHEET                     = 661,
     MYTHRIL_SHEET                   = 663,
+    DARKSTEEL_SHEET                 = 664,
     CHUNK_OF_KHROMA_ORE             = 685,
     BEECH_LOG                       = 692,
     MAHOGANY_LOG                    = 700,
