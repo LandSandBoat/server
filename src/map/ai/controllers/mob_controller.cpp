@@ -617,6 +617,18 @@ void CMobController::DoCombatTick(time_point tick)
     PMob->PAI->EventHandler.triggerListener("COMBAT_TICK", CLuaBaseEntity(PMob));
     luautils::OnMobFight(PMob, PTarget);
 
+    // handle pet behaviour on the targets behalf (faster than in ai_pet_dummy)
+    // Avatars defend masters by attacking mobs if the avatar isn't attacking anything currently (bodyguard behaviour)
+    //
+    // This change allows pets to auto-engage mobs to allow summoner kiting without the mob having to swing at the player.
+    if (PTarget->PPet != nullptr && PTarget->PPet->GetBattleTargetID() == 0)
+    {
+        if (PTarget->PPet->objtype == TYPE_PET && ((CPetEntity*)PTarget->PPet)->getPetType() == PET_TYPE::AVATAR)
+        {
+            petutils::AttackTarget(PTarget, PMob);
+        }
+    }
+
     // Try to spellcast (this is done first so things like Chainspell spam is prioritised over TP moves etc.
     if (IsSpecialSkillReady(currentDistance) && TrySpecialSkill())
     {
