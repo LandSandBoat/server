@@ -5,7 +5,7 @@
 -- Recast Time: 5:00
 -- Duration: 2:00
 -----------------------------------
-require("scripts/globals/status")
+require("scripts/globals/job_utils/monk")
 -----------------------------------
 local ability_object = {}
 
@@ -14,8 +14,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    local power = 20 + player:getMod(xi.mod.DODGE_EFFECT)
-    player:addStatusEffect(xi.effect.DODGE, power, 0, 120)
+    xi.job_utils.monk.useDodge(player, target, ability)
 end
 
 return ability_object

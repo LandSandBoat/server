@@ -15,7 +15,7 @@ fi
 
 for f in "${file_list[@]}"
 do
-    BOGUS_COMMENTS=`grep -En '(--\w)' $f`
+    BOGUS_COMMENTS=`grep -En '(--\w)|^(---\s)' $f`
     if [[ -n $BOGUS_COMMENTS ]]; then
         printf "Bogus comments: $f:\n"
         printf "%s\n" "${BOGUS_COMMENTS[@]}"

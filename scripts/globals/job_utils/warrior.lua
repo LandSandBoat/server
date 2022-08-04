@@ -41,7 +41,7 @@ xi.job_utils.warrior.useAggressor = function(player, target, ability)
 end
 
 xi.job_utils.warrior.useBerserk = function(player, target, ability)
-    player:addStatusEffect(xi.effect.BERSERK, 25 + player:getMod(xi.mod.BERSERK_EFFECT), 0, 180 + player:getMod(xi.mod.BERSERK_DURATION))
+    player:addStatusEffect(xi.effect.BERSERK, 25 + player:getMod(xi.mod.BERSERK_POTENCY), 0, 180 + player:getMod(xi.mod.BERSERK_DURATION))
 end
 
 xi.job_utils.warrior.useBloodRage = function(player, target, ability)

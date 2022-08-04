@@ -1,19 +1,20 @@
 -----------------------------------
 -- Zone: Abyssea-Grauberg
---  NPC: qm15 (???)
--- Spawns Raja
--- !pos 495 56 679 254
+--  NPC: qm_azdaja_1 (???)
+-- Spawns Azdaja
+-- !pos -568 -167 138 254
 -----------------------------------
-require("scripts/globals/abyssea")
+local ID = require('scripts/zones/Abyssea-Grauberg/IDs')
+require('scripts/globals/abyssea')
+require('scripts/globals/keyitems')
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    -- xi.abyssea.qmOnTrade(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    -- xi.abyssea.qmOnTrigger(player, npc)
+    xi.abyssea.qmOnTrigger(player, npc, ID.mob.AZDAJA_1, { xi.ki.VACANT_BUGARD_EYE })
 end
 
 entity.onEventUpdate = function(player, csid, option)

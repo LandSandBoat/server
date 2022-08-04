@@ -11883,22 +11883,27 @@ void CLuaBaseEntity::addSimpleGambit(uint16 targ, uint16 cond, uint32 condition_
 }
 
 /************************************************************************
- *  Function: setTrustTPSkillSettings(trigger, select)
+ *  Function: setTrustTPSkillSettings(trigger, select, value)
  *  Purpose :
- *  Example : mob:setTrustTPSkillSettings(ai.tp.ASAP, ai.s.RANDOM)
+ *  Example : mob:setTrustTPSkillSettings(ai.tp.CLOSER_UNTIL_TP, ai.s.HIGHEST, 1500)
+ *  Notes   : value is optional TP Value
  ************************************************************************/
 
-void CLuaBaseEntity::setTrustTPSkillSettings(uint16 trigger, uint16 select)
+void CLuaBaseEntity::setTrustTPSkillSettings(uint16 trigger, uint16 select, sol::object const& value)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_TRUST);
 
     using namespace gambits;
+
+    // Optional
+    uint16 tp_value = (value != sol::lua_nil) ? value.as<uint16>() : 0;
 
     auto* trust      = static_cast<CTrustEntity*>(m_PBaseEntity);
     auto* controller = static_cast<CTrustController*>(trust->PAI->GetController());
 
     controller->m_GambitsContainer->tp_trigger = static_cast<G_TP_TRIGGER>(trigger);
     controller->m_GambitsContainer->tp_select  = static_cast<G_SELECT>(select);
+    controller->m_GambitsContainer->tp_value   = tp_value;
 }
 
 /************************************************************************
@@ -13428,11 +13433,7 @@ sol::table CLuaBaseEntity::getEnmityList()
 
 std::optional<CLuaBaseEntity> CLuaBaseEntity::getTrickAttackChar(CLuaBaseEntity* PLuaBaseEntity)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
-    CBattleEntity* PMob = static_cast<CBattleEntity*>(PLuaBaseEntity->GetBaseEntity());
-
-    if (PMob != nullptr)
+    if (CBattleEntity* PMob = dynamic_cast<CBattleEntity*>(PLuaBaseEntity->GetBaseEntity()))
     {
         CBattleEntity* taTarget = battleutils::getAvailableTrickAttackChar((CBattleEntity*)m_PBaseEntity, PMob);
         if (taTarget)

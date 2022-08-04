@@ -334,7 +334,7 @@ public:
     std::vector<CTrustEntity*> PTrusts; // Active trusts
 
     template <typename F, typename... Args>
-    void ForPartyWithTrusts(F func, Args&&... args)
+    void ForPartyWithTrusts(F const& func, Args&&... args)
     {
         if (PParty)
         {

@@ -639,12 +639,12 @@ xi.quest.id =
         AN_UNDYING_PLEDGE               = 149,
 
         -- Misc (160-165)
-        WRATH_OF_THE_OPO_OPOS           = 160,
-        WANDERING_SOULS                 = 161,
-        SOUL_SEARCHING                  = 162,
+        WRATH_OF_THE_OPO_OPOS           = 160, -- ± Converted
+        WANDERING_SOULS                 = 161, -- ± Converted
+        SOUL_SEARCHING                  = 162, -- ± Converted
         DIVINE_MIGHT                    = 163, -- ±
         DIVINE_MIGHT_REPEAT             = 164, -- ±
-        OPEN_SESAME                     = 165,
+        OPEN_SESAME                     = 165, -- ± Converted
 
         -- Rabao (192-201)
         DONT_FORGET_THE_ANTIDOTE        = 192, -- ±

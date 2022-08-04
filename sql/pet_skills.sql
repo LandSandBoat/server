@@ -9,7 +9,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- Table structure for `pet_skills`
 --
 
---- pet_skill_id is intended to map 1:1 with a real player id, i.e. "Welt" on this table would have the same id as "Welt" on abilities.sql
+-- pet_skill_id is intended to map 1:1 with a real player id, i.e. "Welt" on this table would have the same id as "Welt" on abilities.sql
 DROP TABLE IF EXISTS `pet_skills`;
 CREATE TABLE `pet_skills` (
   `pet_skill_id` smallint(4) unsigned NOT NULL,
