@@ -89,11 +89,13 @@ enum class EmoteMode : uint8
 };
 
 class CCharEntity;
+class CNpcEntity;
 
 class CCharEmotionPacket : public CBasicPacket
 {
 public:
     CCharEmotionPacket(CCharEntity* PChar, uint32 TargetID, uint16 TargetIndex, Emote EmoteID, EmoteMode emoteMode, uint16 extra);
+    CCharEmotionPacket(CNpcEntity* PNpc, uint32 TargetID, uint16 TargetIndex, Emote EmoteID, EmoteMode emoteMode, uint16 extra);
 };
 
 #endif

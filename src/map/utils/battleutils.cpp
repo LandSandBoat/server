@@ -3020,7 +3020,7 @@ namespace battleutils
 
         if (isGuarded)
         {
-            if (upperLimit > 0)
+            if (upperLimit > 1)
             {
                 upperLimit -= 1.f;
             }

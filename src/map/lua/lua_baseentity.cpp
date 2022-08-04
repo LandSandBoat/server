@@ -14596,6 +14596,48 @@ bool CLuaBaseEntity::clearSession(std::string const& playerName)
     return false;
 }
 
+/************************************************************************
+*  Function: sendNpcEmote()
+*  Purpose : Makes an NPC entity emit an emote.
+*  Example : taru:sendEmote(target, tpz.emote.PANIC, tpz.emoteMode.MOTION)
+*  Notes   : Originally added for Pirate / Brigand chart events
+             target parameter can be nil
+************************************************************************/
+
+void CLuaBaseEntity::sendNpcEmote(CLuaBaseEntity* PBaseEntity, sol::object const& p0, sol::object const& p1, sol::object const& p2)
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_NPC);
+
+    // 1st parameter is optional
+    XI_DEBUG_BREAK_IF(p0 == sol::lua_nil);
+    XI_DEBUG_BREAK_IF(p1 == sol::lua_nil);
+    // 4th parameter is optional
+
+    CNpcEntity* PNpc        = dynamic_cast<CNpcEntity*>(m_PBaseEntity);
+    uint32      EntityId    = 0;
+    uint16      EntityIndex = 0;
+
+    if (PBaseEntity != nullptr)
+    {
+        EntityId    = PBaseEntity->getID();
+        EntityIndex = PBaseEntity->getTargID();
+    }
+
+    uint16 emoteId     = (p0 != sol::lua_nil) ? p0.as<uint16>() : 0;
+    uint16 emoteModeId = (p1 != sol::lua_nil) ? p1.as<uint16>() : 0;
+    uint16 extra       = (p2 != sol::lua_nil) ? p2.as<uint32>() : 0;
+
+    if (PNpc)
+    {
+        const Emote     emoteID   = static_cast<Emote>(emoteId);
+        const EmoteMode emoteMode = static_cast<EmoteMode>(emoteModeId);
+
+        PNpc->loc.zone->PushPacket(PNpc, CHAR_INRANGE,
+                                   new CCharEmotionPacket(PNpc, EntityId, EntityIndex, emoteID, emoteMode, extra));
+    }
+}
+
 //==========================================================//
 
 void CLuaBaseEntity::Register()
@@ -15370,6 +15412,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getHistory", CLuaBaseEntity::getHistory);
 
     SOL_REGISTER("clearSession", CLuaBaseEntity::clearSession);
+    SOL_REGISTER("sendNpcEmote", CLuaBaseEntity::sendNpcEmote);
     SOL_REGISTER("restoreNpcLook", CLuaBaseEntity::restoreNpcLook);
 }
 
