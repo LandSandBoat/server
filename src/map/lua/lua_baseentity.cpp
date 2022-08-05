@@ -9922,8 +9922,8 @@ int32 CLuaBaseEntity::getVE(CLuaBaseEntity const* target)
 /************************************************************************
  *  Function: setCE()
  *  Purpose : Sets a specified amount of Cumulative Enmity against an Entity
- *  Example : target:setCE(player, petCE * petEnmityBonus)
- *  Notes   : Currently only used in scripts/globals/abilities/ventriloquy.lua
+ *  Example : target:setCE(player, newEnmity)
+ *  Notes   : See Enmity Douse and Ventriloquy
  ************************************************************************/
 
 void CLuaBaseEntity::setCE(CLuaBaseEntity* target, uint16 amount)
@@ -9936,8 +9936,8 @@ void CLuaBaseEntity::setCE(CLuaBaseEntity* target, uint16 amount)
 /************************************************************************
  *  Function: setVE()
  *  Purpose : Sets a specified amount of Volatile Enmity against an Entity
- *  Example : target:setVE(player, petVE * petEnmityBonus)
- *  Notes   : Currently only used in scripts/globals/abilities/ventriloquy.lua
+ *  Example : target:setVE(player, newEnmity)
+ *  Notes   : See Enmity Douse and Ventriloquy
  ************************************************************************/
 
 void CLuaBaseEntity::setVE(CLuaBaseEntity* target, uint16 amount)
