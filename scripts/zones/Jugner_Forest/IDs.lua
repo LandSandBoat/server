@@ -16,6 +16,7 @@ zones[xi.zone.JUGNER_FOREST] =
         GIL_OBTAINED             = 6413,  -- Obtained <number> gil.
         KEYITEM_OBTAINED         = 6415,  -- Obtained key item: <keyitem>.
         KEYITEM_LOST             = 6416,  -- Lost key item: <keyitem>.
+        NOTHING_OUT_OF_ORDINARY  = 6426,  -- There is nothing out of the ordinary here.
         FELLOW_MESSAGE_OFFSET    = 6441,  -- I'm ready. I suppose.
         CARRIED_OVER_POINTS      = 7023,  -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY  = 7024,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
