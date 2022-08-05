@@ -237,26 +237,32 @@ local function getRangedHitRate(attacker, target, capHitRate, bonus)
 end
 
 -- Function to calculate if a hit in a WS misses, criticals, and the respective damage done
-local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams, firstHitAccBonus)
+local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams, firstHitAccBonus, isRanged)
     local criticalHit = false
     local finaldmg = 0
     local pdif = 0
     local pdifCrit = 0
     local ratio = { }
-    -- local pdif = 0 Reminder for Future Implementation!
 
-    if calcParams.pdif == nil or calcParams.pdifCrit == nil then
+    if isRanged then
+        ratio = cRangedRatio(attacker, target, wsParams, calcParams.ignoredDef, calcParams.tp)
+        pdif = ratio[1]
+        pdifCrit =  ratio[2]
+        calcParams.hitRate = getRangedHitRate(attacker, target, false, 0)
+    else
         ratio = cMeleeRatio(attacker, target, wsParams, calcParams.ignoredDef, calcParams.tp, xi.slot.MAIN)
         pdif = ratio[1]
         pdifCrit =  ratio[2]
-    else
-        pdif = calcParams.pdif
-        pdifCrit = calcParams.pdifCrit
+        calcParams.hitRate = getHitRate(attacker, target, false, 0)
+    end
+
+    if wsParams.acc100 ~= 0 then
+        calcParams.hitRate = accVariesWithTP(calcParams.hitRate, calcParams.accStat, calcParams.tp, wsParams.acc100, wsParams.acc200, wsParams.acc300)
     end
 
     if firstHitAccBonus ~= nil and firstHitAccBonus == true then
         calcParams.hitRate = calcParams.hitRate + 0.5 -- First hit gets a +100 ACC bonus which translates to +50 hit
-        utils.clamp(calcParams.hitRate, 0.20, 0.95) -- Clamping to expected values.
+        calcParams.hitRate = utils.clamp(calcParams.hitRate, 0.2, 0.95)
     end
 
     local missChance = math.random()
@@ -366,14 +372,9 @@ local modParameters =
 -- acc100, acc200, acc300, ignoresDef, ignore100, ignore200, ignore300, atk100, atk200, atk300, kick, hybridWS, hitsHigh, formless
 --
 -- See doPhysicalWeaponskill or doRangedWeaponskill for how calcParams are determined.
-function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcParams)
+function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcParams, isRanged)
     local targetLvl = target:getMainLvl()
     local targetHp = target:getHP() + target:getMod(xi.mod.STONESKIN)
-
-    -- Recalculate accuracy if it varies with TP, applied to all hits
-    if wsParams.acc100 ~= 0 then
-        calcParams.hitRate = accVariesWithTP(calcParams.hitRate, calcParams.accStat, tp, wsParams.acc100, wsParams.acc200, wsParams.acc300)
-    end
 
     -- Calculate alpha, WSC, and our modifiers for our base per-hit damage
     if not calcParams.alpha then
@@ -441,7 +442,11 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
 
     -- Calculate the damage from the first hit
     local dmg = mainBase * ftp
-    hitdmg, calcParams = getSingleHitDamage(attacker, target, dmg, wsParams, calcParams, true)
+    if isRanged then
+        hitdmg, calcParams = getSingleHitDamage(attacker, target, dmg, wsParams, calcParams, false, isRanged)
+    else
+        hitdmg, calcParams = getSingleHitDamage(attacker, target, dmg, wsParams, calcParams, true, isRanged)
+    end
 
     if calcParams.melee then
         hitdmg = modifyMeleeHitDamage(attacker, target, calcParams.attackInfo, wsParams, hitdmg)
@@ -485,7 +490,7 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
     -- Do the extra hit for our offhand if applicable
     if calcParams.extraOffhandHit and finaldmg < targetHp then
         local offhandDmg = (calcParams.weaponDamage[2] + wsMods) * ftp
-        hitdmg, calcParams = getSingleHitDamage(attacker, target, offhandDmg, wsParams, calcParams, false)
+        hitdmg, calcParams = getSingleHitDamage(attacker, target, offhandDmg, wsParams, calcParams, false, isRanged)
 
         if calcParams.melee then
             hitdmg = modifyMeleeHitDamage(attacker, target, calcParams.attackInfo, wsParams, hitdmg)
@@ -508,7 +513,7 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
     local numHits = getMultiAttacks(attacker, target, wsParams.numHits)
 
     while hitsDone < numHits and finaldmg < targetHp do -- numHits is hits in the base WS _and_ DA/TA/QA procs during those hits
-        hitdmg, calcParams = getSingleHitDamage(attacker, target, dmg, wsParams, calcParams, false)
+        hitdmg, calcParams = getSingleHitDamage(attacker, target, dmg, wsParams, calcParams, false, isRanged)
 
         if calcParams.melee then
             hitdmg = modifyMeleeHitDamage(attacker, target, calcParams.attackInfo, wsParams, hitdmg)
@@ -593,7 +598,7 @@ function doPhysicalWeaponskill(attacker, target, wsID, wsParams, tp, action, pri
     calcParams.skillType = attack.weaponType
 
     -- Send our wsParams off to calculate our raw WS damage, hits landed, and shadows absorbed
-    calcParams = calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcParams)
+    calcParams = calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcParams, false)
     local finaldmg = calcParams.finalDmg
 
     -- Delete statuses that may have been spent by the WS
@@ -655,12 +660,13 @@ end
         bonusTP = wsParams.bonusTP or 0,
         bonusfTP = gorgetBeltFTP or 0,
         bonusAcc = (gorgetBeltAcc or 0) + attacker:getMod(xi.mod.WSACC),
-        bonusWSmods = wsParams.bonusWSmods or 0
+        bonusWSmods = wsParams.bonusWSmods or 0,
+        tp = tp,
     }
-    calcParams.hitRate = getRangedHitRate(attacker, target, false, calcParams.bonusAcc)
+    calcParams.hitRate = 0
 
     -- Send our params off to calculate our raw WS damage, hits landed, and shadows absorbed
-    calcParams = calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcParams)
+    calcParams = calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcParams, true)
     local finaldmg = calcParams.finalDmg
 
     -- Calculate reductions
@@ -863,7 +869,7 @@ function getHitRate(attacker, target, capHitRate, bonus)
         attacker:addMod(xi.mod.ACC, bonus)
     end
 
-    local hitrate = utils.clamp((attacker:getCHitRate(target) / 100), 0.2, 0.95)
+    local hitrate = attacker:getCHitRate(target)
 
     if flourisheffect ~= nil and flourisheffect:getPower() > 1 then
         attacker:delMod(xi.mod.ACC, 20 + flourisheffect:getSubPower())
@@ -873,7 +879,7 @@ function getHitRate(attacker, target, capHitRate, bonus)
         attacker:delMod(xi.mod.ACC, bonus)
     end
 
-    return hitrate / 100
+    return utils.clamp((hitrate / 100), 0.2, 0.95)
 end
 
 function fTP(tp, ftp1, ftp2, ftp3)

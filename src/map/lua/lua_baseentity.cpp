@@ -11610,7 +11610,7 @@ uint8 CLuaBaseEntity::getCHitRate(CLuaBaseEntity* PLuaBaseEntity)
     CBattleEntity* PAttacker = static_cast<CBattleEntity*>(m_PBaseEntity);
     CBattleEntity* PDefender = static_cast<CBattleEntity*>(PLuaBaseEntity->GetBaseEntity());
 
-    return battleutils::GetHitRate(PAttacker, PDefender, 1);
+    return battleutils::GetHitRate(PAttacker, PDefender, 0);
 }
 
 /************************************************************************
