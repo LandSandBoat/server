@@ -1162,19 +1162,23 @@ bool CLuaBaseEntity::isInEvent()
  *  Notes   :
  ************************************************************************/
 
-void CLuaBaseEntity::release()
+void CLuaBaseEntity::release(sol::object const& p0)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
 
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
     RELEASE_TYPE releaseType = RELEASE_TYPE::STANDARD;
+    uint8        stopMessage = (p0 != sol::lua_nil) ? p0.as<uint8>() : 0;
 
     if (PChar->isInEvent())
     {
         // Message: Event skipped
         releaseType = RELEASE_TYPE::SKIPPING;
-        PChar->pushPacket(new CMessageSystemPacket(0, 0, 117));
+        if (stopMessage == 0)
+        {
+            PChar->pushPacket(new CMessageSystemPacket(0, 0, 117));
+        }
     }
 
     PChar->inSequence = false;
@@ -11610,7 +11614,7 @@ uint8 CLuaBaseEntity::getCHitRate(CLuaBaseEntity* PLuaBaseEntity)
     CBattleEntity* PAttacker = static_cast<CBattleEntity*>(m_PBaseEntity);
     CBattleEntity* PDefender = static_cast<CBattleEntity*>(PLuaBaseEntity->GetBaseEntity());
 
-    return battleutils::GetHitRate(PAttacker, PDefender, 1);
+    return battleutils::GetHitRate(PAttacker, PDefender, 0);
 }
 
 /************************************************************************

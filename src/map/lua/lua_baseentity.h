@@ -92,11 +92,11 @@ public:
     void updateEvent(sol::variadic_args va);       // Updates event
     void updateEventString(sol::variadic_args va); // (string, string, string, string, uint32, ...)
     auto getEventTarget() -> std::optional<CLuaBaseEntity>;
-    bool isInEvent();       // Returns true if the player is in an event
-    void release();         // Stops event
-    bool startSequence();   // Flags the player as being in a sequence
-    bool didGetMessage();   // Used by interaction framework to determine if player triggered something else
-    void resetGotMessage(); // Used by interaction framework to reset if player triggered something else
+    bool isInEvent();                    // Returns true if the player is in an event
+    void release(sol::object const& p0); // Stops event
+    bool startSequence();                // Flags the player as being in a sequence
+    bool didGetMessage();                // Used by interaction framework to determine if player triggered something else
+    void resetGotMessage();              // Used by interaction framework to reset if player triggered something else
 
     void  setFlag(uint32 flags);
     uint8 getMoghouseFlag();

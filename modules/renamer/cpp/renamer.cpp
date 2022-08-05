@@ -70,7 +70,7 @@ class RenamerModule : public CPPModule
                 // convert entityId to targid
                 auto entityCodedName   = entryTable[1].get<std::string>();
                 auto entityDisplayName = entryTable[2].get<std::string>();
-                auto packedString = fmt::format("{},{}.", entityCodedName, entityDisplayName);
+                auto packedString = fmt::format("{}:{}|", entityCodedName, entityDisplayName);
 
                 // If the dataString gets too large, send a packet with what we've
                 // already prepared so we don't exceed the target size of 0x100.
