@@ -2922,6 +2922,7 @@ xi.items =
     PATRONUS_RING                   = 15844,
     MATRIMONY_RING                  = 15847,
     MATRIMONY_BAND                  = 15848,
+    GRIFFON_RING                    = 15856,
     GYOKUTO_OBI                     = 15860,
     WARRIORS_STONE                  = 15871,
     CLERICS_BELT                    = 15872,
