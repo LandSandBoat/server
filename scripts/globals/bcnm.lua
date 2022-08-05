@@ -379,7 +379,7 @@ local battlefields =
         { 2,  194, 1437},   -- Shattering Stars (SAM LB5)
         { 3,  195, 1438},   -- Shattering Stars (NIN LB5)
         { 4,  196, 1439},   -- Shattering Stars (DRG LB5)
-     -- { 5,  197, 1175},   -- Cactuar Suave (KS30)
+        { 5,  197, 1175},   -- Cactuar Suave (KS30)
         { 6,  198, 1178},   -- Eye of the Storm (KS30)
         { 7,  199, 1180},   -- The Scarlet King (KS30)
      -- { 8,  200,    0},   -- Roar! A Cat Burglar Bares Her Fangs (MKD10)

@@ -669,6 +669,15 @@ INSERT INTO `bcnm_battlefield` VALUES (196,2,17465362,3);
 INSERT INTO `bcnm_battlefield` VALUES (196,2,17465363,0);
 INSERT INTO `bcnm_battlefield` VALUES (196,3,17465364,3);
 INSERT INTO `bcnm_battlefield` VALUES (196,3,17465365,0);
+INSERT INTO `bcnm_battlefield` VALUES (197,1,17465381,3); -- Cactuar Suave
+INSERT INTO `bcnm_battlefield` VALUES (197,1,17465382,3);
+INSERT INTO `bcnm_battlefield` VALUES (197,1,17465383,3);
+INSERT INTO `bcnm_battlefield` VALUES (197,2,17465385,3);
+INSERT INTO `bcnm_battlefield` VALUES (197,2,17465386,3);
+INSERT INTO `bcnm_battlefield` VALUES (197,2,17465387,3);
+INSERT INTO `bcnm_battlefield` VALUES (197,3,17465389,3);
+INSERT INTO `bcnm_battlefield` VALUES (197,3,17465390,3);
+INSERT INTO `bcnm_battlefield` VALUES (197,3,17465391,3);
 INSERT INTO `bcnm_battlefield` VALUES (198,1,17465393,3); -- eye of the storm
 INSERT INTO `bcnm_battlefield` VALUES (198,1,17465394,3);
 INSERT INTO `bcnm_battlefield` VALUES (198,1,17465395,3);
