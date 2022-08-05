@@ -600,9 +600,9 @@ local loot =
     [81] =
     {
         {
-            {itemid = 1473, droprate = 813}, -- High-quality Scorpion Shell
-            {itemid = 13552, droprate = 55}, -- Serket Ring
-            {itemid = 901, droprate = 123}, -- Venomous Claw
+            {itemid = 1473,  droprate = 813}, -- High-quality Scorpion Shell
+            {itemid = 13552, droprate =  55}, -- Serket Ring
+            {itemid = 901,   droprate = 123}, -- Venomous Claw
         },
         {
             {itemid = 17207, droprate = 216}, -- Expunger
@@ -612,11 +612,10 @@ local loot =
         },
         {
             {itemid = 17624, droprate = 504}, -- Anubiss Knife
-            {itemid = 655, droprate = 4}, -- Adaman Ingot
-            {itemid = 19027, droprate = 86}, -- Claymore Grip
-            {itemid = 747, droprate = 22}, -- Orichalcum Ingot
+            {itemid = 19027, droprate =  86}, -- Claymore Grip
+            {itemid = 747,   droprate =  22}, -- Orichalcum Ingot
             {itemid = 19025, droprate = 146}, -- Pole Grip
-            {itemid = 19024, droprate = 22}, -- Sword Strap
+            {itemid = 19024, droprate = 220}, -- Sword Strap
         },
         {
             {itemid = 15295, droprate = 287}, -- Hierarch Belt
@@ -625,36 +624,35 @@ local loot =
             {itemid = 15294, droprate = 287}, -- Warwolf Belt
         },
         {
-            {itemid = 887, droprate = 52}, -- Coral Fragment
-            {itemid = 645, droprate = 56}, -- Chunk Of Darksteel Ore
-            {itemid = 902, droprate = 41}, -- Demon Horn
-            {itemid = 702, droprate = 63}, -- Ebony Log
-            {itemid = 737, droprate = 52}, -- Chunk Of Gold Ore
-            {itemid = 823, droprate = 26}, -- Spool Of Gold Thread
-            {itemid = 1465, droprate = 11}, -- Slab Of Granite
-            {itemid = 4173, droprate = 37}, -- Hi-reraiser
-            {itemid = 700, droprate = 101}, -- Mahogany Log
-            {itemid = 653, droprate = 0}, -- Mythril Ingot
-            {itemid = 644, droprate = 52}, -- Chunk Of Mythril Ore
-            {itemid = 703, droprate = 116}, -- Petrified Log
-            {itemid = 844, droprate = 15}, -- Phoenix Feather
-            {itemid = 942, droprate = 56}, -- Philosophers Stone
-            {itemid = 738, droprate = 45}, -- Chunk Of Platinum Ore
-            {itemid = 830, droprate = 22}, -- Square Of Rainbow Cloth
-            {itemid = 895, droprate = 67}, -- Ram Horn
+            {itemid = 887,  droprate =  52}, -- Coral Fragment
+            {itemid = 645,  droprate =  56}, -- Chunk Of Darksteel Ore
+            {itemid = 902,  droprate =  41}, -- Demon Horn
+            {itemid = 702,  droprate =  63}, -- Ebony Log
+            {itemid = 737,  droprate =  52}, -- Chunk Of Gold Ore
+            {itemid = 823,  droprate =  26}, -- Spool Of Gold Thread
+            {itemid = 1465, droprate =  11}, -- Slab Of Granite
+            {itemid = 4173, droprate =  37}, -- Hi-reraiser
+            {itemid = 700,  droprate = 101}, -- Mahogany Log
+            {itemid = 644,  droprate =  52}, -- Chunk Of Mythril Ore
+            {itemid = 703,  droprate = 116}, -- Petrified Log
+            {itemid = 844,  droprate =  15}, -- Phoenix Feather
+            {itemid = 942,  droprate =  56}, -- Philosophers Stone
+            {itemid = 738,  droprate =  45}, -- Chunk Of Platinum Ore
+            {itemid = 830,  droprate =  22}, -- Square Of Rainbow Cloth
+            {itemid = 895,  droprate =  67}, -- Ram Horn
             {itemid = 1132, droprate = 119}, -- Square Of Raxa
-            {itemid = 4172, droprate = 45}, -- Reraiser
-            {itemid = 4174, droprate = 19}, -- Vile Elixir
-            {itemid = 4175, droprate = 41}, -- Vile Elixir +1
-            {itemid = 866, droprate = 34}, -- Handful Of Wyvern Scales
+            {itemid = 4172, droprate =  45}, -- Reraiser
+            {itemid = 4174, droprate =  19}, -- Vile Elixir
+            {itemid = 4175, droprate =  41}, -- Vile Elixir +1
+            {itemid = 866,  droprate =  34}, -- Handful Of Wyvern Scales
         },
         {
-            {itemid = 1110, droprate = 78}, -- Vial Of Black Beetle Blood
-            {itemid = 836, droprate = 56}, -- Square Of Damascene Cloth
-            {itemid = 658, droprate = 93}, -- Damascus Ingot
-            {itemid = 837, droprate = 56}, -- Spool Of Malboro Fiber
-            {itemid = 942, droprate = 157}, -- Philosophers Stone
-            {itemid = 844, droprate = 276}, -- Phoenix Feather
+            {itemid = 1110, droprate =  78}, -- Vial Of Black Beetle Blood
+            {itemid = 836,  droprate =  56}, -- Square Of Damascene Cloth
+            {itemid = 658,  droprate =  93}, -- Damascus Ingot
+            {itemid = 837,  droprate =  56}, -- Spool Of Malboro Fiber
+            {itemid = 942,  droprate = 157}, -- Philosophers Stone
+            {itemid = 844,  droprate = 276}, -- Phoenix Feather
             {itemid = 1132, droprate = 209}, -- Square Of Raxa
         },
     },

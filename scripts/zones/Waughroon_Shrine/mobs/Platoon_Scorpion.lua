@@ -3,72 +3,71 @@
 --  Mob: Platoon Scorpion
 -- BCNM: Operation Desert Swarm
 -----------------------------------
+require("scripts/globals/status")
+local ID = require("scripts/zones/Waughroon_Shrine/IDs")
+-----------------------------------
 local entity = {}
 
-local ID = require("scripts/zones/Waughroon_Shrine/IDs")
-require("scripts/globals/status")
+entity.onMobSpawn = function(mob)
+    mob:setLocalVar("wildRagePower", 1)
 
-local mimicDistance = 15
--- 25% should cover: "sometimes after ... " - https://ffxiclopedia.fandom.com/wiki/Operation_Desert_Swarm
-local selfBindChance = 0.25  -- 25%
-local selfStunChance = 0.25  -- 25%
+    mob:addListener("WEAPONSKILL_STATE_ENTER", "SCORPION_MIMIC_START", function(mobArg, skillID)
+        local bf = mobArg:getBattlefield():getArea()
 
--- Mobs sync/mimic TP moves.
+        if mobArg:getZone():getLocalVar(string.format("mimicControl_%s",bf)) ~= 1 then
+            for _, allyID in pairs(ID.operationDesertSwarm[bf]) do
+                local mimic = GetMobByID(allyID)
+                local dist = mobArg:checkDistance(mimic)
 
-entity.onMobInitialize = function(scorpion)
-    scorpion:addListener("WEAPONSKILL_STATE_ENTER", "SCORP_MIMIC_START", function(mob, skillID)
-        -- check flag to make sure we aren't infinitely looping through scorps
-        if mob:getLocalVar('[ODS]mimic') ~= 1 then
-            local bf = mob:getBattlefield():getArea()
-            local mob_id = mob:getID() -- prevent self-triggering: eg using wild rage making the user use more wild rage
-
-            for _, allyId in ipairs(ID.operationDesertSwarm[bf]) do
-                -- prevent self-triggering
-                if mob_id ~= allyId then
-                    local potential_mimic = GetMobByID(allyId)
-                    local dist = mob:checkDistance(potential_mimic)
-
-                    if dist < mimicDistance then
-                        -- set flag so prevent infinite loops
-                        potential_mimic:setLocalVar('[ODS]mimic', 1)
-                        if skillID == 354 then
-                            potential_mimic:useMobAbility(354)
-                        elseif skillID == 355 then
-                            potential_mimic:useMobAbility(355)
-                        end
-                    end
+                if
+                    mobArg:getID() ~= allyID and
+                    mimic:isAlive() and mimic ~= nil and
+                    mimic:getLocalVar("mimicTimer") < os.time() and
+                    dist < 15
+                then
+                    mobArg:getZone():setLocalVar(string.format("mimicControl_%s",bf), 1)
+                    mimic:useMobAbility(skillID)
+                elseif mimic:getLocalVar("mimicTimer") > os.time() then
+                    mob:showText(mob,ID.text.SCORPION_NO_ENERGY)
                 end
             end
         end
     end)
 
-    scorpion:addListener("WEAPONSKILL_STATE_EXIT", "SCORP_MIMIC_STOP", function(mob, skillID)
-        -- reset infinite loop flag
-        mob:setLocalVar('[ODS]mimic', 0)
+    mob:addListener("WEAPONSKILL_STATE_EXIT", "SCORPION_MIMIC_STOP", function(mobArg, skillID)
+        local bf = mobArg:getBattlefield():getArea()
+        mobArg:getZone():setLocalVar(string.format("mimicControl_%s",bf), 0)
+        mob:setLocalVar("mimicTimer", os.time() + 7)
 
-        -- Sometimes Wild Rage self stuns and sometimes Earth Pounder self binds
-        -- https://ffxiclopedia.fandom.com/wiki/Operation_Desert_Swarm
-        --
-        if skillID == 354 and math.random() < selfStunChance then
-            -- Wild Rage
-            mob:showText(mob,ID.text.SCORPION_IS_STUNNED)
-            mob:addStatusEffect(xi.effect.STUN,0,0,10)
-            -- Earth Pounder
-        elseif skillID == 355 and math.random() < selfBindChance then
-            mob:showText(mob,ID.text.SCORPION_IS_BOUND)
-            mob:addStatusEffect(xi.effect.BIND,0,0,10)
+        if math.random() <= 0.25 then
+            mobArg:showText(mob,ID.text.SCORPION_IS_BOUND)
+            mobArg:addStatusEffect(xi.effect.BIND,1,0,10)
         end
     end)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
     if isKiller then
-        -- This is used to increase the strength of Wild Rage as scorps die
-        local bf = mob:getBattlefield()
-        -- should not have to verify because Platoon scorps are only ever in a BC
-        local num_scorps_dead = bf:getLocalVar("[ODS]NumScorpsDead")
-        bf:setLocalVar("[ODS]NumScorpsDead", num_scorps_dead + 1 )
+        if mob:getLocalVar("deathControl") == 0 then
+            mob:setLocalVar("deathControl", 1)
+            local bf = mob:getBattlefield():getArea()
+
+            for _, allyID in pairs(ID.operationDesertSwarm[bf]) do
+                local scorpion = GetMobByID(allyID)
+
+                if allyID ~= mob:getID() and scorpion:isAlive() then
+                    scorpion:setLocalVar("wildRagePower", GetMobByID(allyID):getLocalVar("wildRagePower") + 1)
+                    scorpion:addMod(xi.mod.SLEEPRESBUILD, 200)
+                    scorpion:addMod(xi.mod.LULLABYRESBUILD, 200)
+                end
+            end
+        end
     end
+end
+
+entity.onMobDespawn = function(mob)
+    mob:removeListener("SCORPION_MIMIC_START")
+    mob:removeListener("SCORPION_MIMIC_STOP")
 end
 
 return entity
