@@ -508,7 +508,7 @@ function applyResistanceEffect(caster, target, spell, params)
     end
 
     if effect ~= nil then
-        effectRes = effectRes - getEffectResistance(target, effect)
+        effectRes = effectRes - getEffectResistance(target, effect, false, caster)
     end
 
     local p = getMagicHitRate(caster, target, skill, element, effectRes, magicaccbonus, diff)
@@ -612,8 +612,8 @@ function getMagicHitRate(caster, target, skillType, element, effectRes, bonusAcc
     end
 
     if element ~= xi.magic.ele.NONE then
-        if target:isMob() then
-            tryBuildResistance(target, xi.magic.resistMod[element], nil)
+        if target:isMob() and target:isNM() then
+            tryBuildResistance(target, xi.magic.resistMod[element], nil, caster)
         end
 
         resMod = target:getMod(xi.magic.resistMod[element])
@@ -684,22 +684,15 @@ function getMagicResist(magicHitRate, target, element)
     return resist
 end
 
-function tryBuildResistance(target, resistance, isEnfeeb)
-    local isNM = target:isNM()
+function tryBuildResistance(target, resistance, isEnfeeb, caster)
     local baseRes = target:getLocalVar(string.format("[RES]Base_%s", resistance))
     local castCool = target:getLocalVar(string.format("[RES]CastCool_%s", resistance))
     local builtPercent = target:getLocalVar(string.format("[RES]BuiltPercent_%s", resistance))
     local coolTime = 20
-    local buildPercent = 0
+    local buildPercent = 40
 
     if baseRes == 0 then
         target:setLocalVar(string.format("[RES]Base_%s", resistance), target:getMod(resistance))
-    end
-
-    if isNM == true then
-        buildPercent = 40 -- Equivalent to 4% Resistance Build (40/1000)
-    else
-        buildPercent = 20 -- Equivalent to 2% Resistance Build (20/1000)
     end
 
     if not isEnfeeb then
@@ -724,7 +717,7 @@ end
 
 -- Returns the amount of resistance the
 -- target has to the given effect (stun, sleep, etc..)
-function getEffectResistance(target, effect, returnBuild)
+function getEffectResistance(target, effect, returnBuild, caster)
     local effectres = 0
     local buildres = 0
     local statusres = target:getMod(xi.mod.STATUSRES)
@@ -764,8 +757,8 @@ function getEffectResistance(target, effect, returnBuild)
         return buildres
     end
 
-    if target:isMob() and effectres ~= 0 then
-        tryBuildResistance(target, effectres, true)
+    if target:isMob() and target:isNM() and effectres ~= 0 then
+        tryBuildResistance(target, effectres, true, caster)
     end
 
     if effectres ~= 0 then
@@ -799,7 +792,7 @@ function handleAfflatusMisery(caster, spell, dmg)
     return dmg
 end
 
- function finalMagicAdjustments(caster, target, spell, dmg)
+function finalMagicAdjustments(caster, target, spell, dmg)
     --Handles target's HP adjustment and returns UNSIGNED dmg (absorb message is set in this function)
 
     -- handle multiple targets
@@ -1433,10 +1426,10 @@ function calculateDuration(duration, magicSkill, spellGroup, caster, target, use
     return math.floor(duration)
 end
 
-function calculateBuildDuration(target, duration, effect)
+function calculateBuildDuration(target, duration, effect, caster)
 
     if target:isMob() then
-        local buildRes = getEffectResistance(target, effect, true)
+        local buildRes = getEffectResistance(target, effect, true, caster)
 
         if target:getMod(buildRes) ~= 0 then
             local builtRes = target:getLocalVar(string.format("[RESBUILD]Base_%s", buildRes))

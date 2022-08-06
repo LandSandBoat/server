@@ -43,7 +43,7 @@ spell_object.onSpellCast = function(caster, target, spell)
         if (resist >= 0.5) then --there are no quarter or less hits, if target resists more than .5 spell is resisted completely
             local resduration = duration * resist
 
-            resduration = calculateBuildDuration(target, duration, params.effect)
+            resduration = calculateBuildDuration(target, duration, params.effect, caster)
 
             if resduration == 0 then
                 spell:setMsg(xi.msg.basic.NONE)
