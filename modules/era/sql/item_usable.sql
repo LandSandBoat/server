@@ -6,6 +6,7 @@
 -- 
 -- 
 -- --------------------------------------------------------
+LOCK TABLE `item_usable` WRITE;
 
 REPLACE INTO `item_usable` (`itemid`, `name`, `validTargets`, `activation`, `animation`, `animationTime`, `maxCharges`, `useDelay`, `reuseDelay`, `aoe`) VALUES
     (4255, 'pinch_of_mana_powder', 1, 3, 89, 0, 0, 0, 0, 1),
@@ -29,3 +30,4 @@ REPLACE INTO `item_usable` (`itemid`, `name`, `validTargets`, `activation`, `ani
     (18613, 'fourth_staff', 1, 2, 0, 0, 1, 30, 86400, 0),
     (18614, 'cobra_staff', 1, 2, 0, 0, 1, 30, 86400, 0);
 
+UNLOCK TABLES;
