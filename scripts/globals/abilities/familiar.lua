@@ -20,13 +20,12 @@ ability_object.onAbilityCheck = function(player, target, ability)
     elseif pet:getLocalVar("ReceivedFamiliar") == 1 then
         return xi.msg.basic.NO_EFFECT_ON_PET, 0
     else
-        pet:setLocalVar("ReceivedFamiliar", 1)
-        ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
         return 0, 0
     end
 end
 
 ability_object.onUseAbility = function(player, target, ability)
+    player:getPet():setLocalVar("ReceivedFamiliar", 1)
     player:familiar()
 
     -- pets powers increase!

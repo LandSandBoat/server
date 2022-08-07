@@ -213,7 +213,7 @@ xi.dynamis.normalDynamicSpawn = function(oMob, oMobIndex, target)
         },
         [93] = -- Orc Statue
         {
-            [1]  = {"V. Footsoldier", 57, 134, 0, 334}, -- OWAR
+            [1]  = {"V. Footsoldier", 59, 134, 0, 334}, -- OWAR
             [2]  = {"V. Grappler", 64, 134, 0, 334}, -- OMNK
             [3]  = {"V. Amputator", 67, 134, 1, 334}, -- OWHM
             [4]  = {"V. Mesmerizer", 75, 134, 5000, 334}, -- OBLM
@@ -1409,7 +1409,7 @@ xi.dynamis.spawnDynamicPet =function(target, oMob, mobJob)
             },
         },
     }
-    local petFunctions = 
+    local petFunctions =
     {
         [xi.job.SMN] =
         {
@@ -1560,6 +1560,41 @@ xi.dynamis.setSpecialSkill = function(mob)
     end
 end
 
+local familyEES =
+{
+    [  3] = xi.jsa.EES_AERN,    -- Aern
+    [ 25] = xi.jsa.EES_ANTICA,  -- Antica
+    [115] = xi.jsa.EES_SHADE,   -- Fomor
+    [126] = xi.jsa.EES_GIGA,    -- Gigas
+    [127] = xi.jsa.EES_GIGA,    -- Gigas
+    [128] = xi.jsa.EES_GIGA,    -- Gigas
+    [129] = xi.jsa.EES_GIGA,    -- Gigas
+    [130] = xi.jsa.EES_GIGA,    -- Gigas
+    [133] = xi.jsa.EES_GOBLIN,  -- Goblin
+    [169] = xi.jsa.EES_KINDRED, -- Kindred
+    [171] = xi.jsa.EES_LAMIA,   -- Lamiae
+    [182] = xi.jsa.EES_MERROW,  -- Merrow
+    [184] = xi.jsa.EES_GOBLIN,  -- Moblin
+    [189] = xi.jsa.EES_ORC,     -- Orc
+    [200] = xi.jsa.EES_QUADAV,  -- Quadav
+    [201] = xi.jsa.EES_QUADAV,  -- Quadav
+    [202] = xi.jsa.EES_QUADAV,  -- Quadav
+    [221] = xi.jsa.EES_SHADE,   -- Shadow
+    [222] = xi.jsa.EES_SHADE,   -- Shadow
+    [223] = xi.jsa.EES_SHADE,   -- Shadow
+    [246] = xi.jsa.EES_TROLL,   -- Troll
+    [270] = xi.jsa.EES_YAGUDO,  -- Yagudo
+    [327] = xi.jsa.EES_GOBLIN,  -- Goblin
+    [328] = xi.jsa.EES_GIGA,    -- Gigas
+    [334] = xi.jsa.EES_ORC,     -- OrcNM
+    [335] = xi.jsa.EES_MAAT,    -- Maat
+    [337] = xi.jsa.EES_QUADAV,  -- QuadavNM
+    [358] = xi.jsa.EES_KINDRED, -- Kindred
+    [359] = xi.jsa.EES_SHADE,   -- Fomor
+    [360] = xi.jsa.EES_YAGUDO,  -- YagudoNM
+    [373] = xi.jsa.EES_GOBLIN,  -- Goblin_Armored
+}
+
 xi.dynamis.setMobStats = function(mob)
     if mob ~= nil then
         mob:setMobType(xi.mobskills.mobType.BATTLEFIELD)
@@ -1573,52 +1608,60 @@ xi.dynamis.setMobStats = function(mob)
         mob:setMobLevel(math.random(78,80))
         mob:setTrueDetection(true)
 
-        if job == xi.job.WAR then
+        if     job == xi.job.WAR then
             local params = { }
             params.specials = { }
             params.specials.skill = { }
+            params.specials.skill.id = xi.jsa.MIGHTY_STRIKES
             params.specials.skill.hpp = math.random(55,80)
             xi.mix.jobSpecial.config(mob, params)
         elseif job == xi.job.MNK then
             local params = { }
             params.specials = { }
             params.specials.skill = { }
+            params.specials.skill.id = xi.jsa.HUNDRED_FISTS
             params.specials.skill.hpp = math.random(55,70)
             xi.mix.jobSpecial.config(mob, params)
         elseif job == xi.job.WHM then
             local params = { }
             params.specials = { }
             params.specials.skill = { }
+            params.specials.skill.id = xi.jsa.BENEDICTION
             params.specials.skill.hpp = math.random(40,60)
             xi.mix.jobSpecial.config(mob, params)
         elseif job == xi.job.BLM then
             local params = { }
             params.specials = { }
             params.specials.skill = { }
+            params.specials.skill.id = xi.jsa.MANAFONT
             params.specials.skill.hpp = math.random(55,80)
             xi.mix.jobSpecial.config(mob, params)
         elseif job == xi.job.RDM then
             local params = { }
             params.specials = { }
             params.specials.skill = { }
+            params.specials.skill.id = xi.jsa.CHAINSPELL
             params.specials.skill.hpp = math.random(55,80)
             xi.mix.jobSpecial.config(mob, params)
         elseif job == xi.job.THF then
             local params = { }
             params.specials = { }
             params.specials.skill = { }
+            params.specials.skill.id = xi.jsa.PERFECT_DODGE
             params.specials.skill.hpp = math.random(55,75)
             xi.mix.jobSpecial.config(mob, params)
         elseif job == xi.job.PLD then
             local params = { }
             params.specials = { }
             params.specials.skill = { }
+            params.specials.skill.id = xi.jsa.INVINCIBLE
             params.specials.skill.hpp = math.random(55,75)
             xi.mix.jobSpecial.config(mob, params)
         elseif job == xi.job.DRK then
             local params = { }
             params.specials = { }
             params.specials.skill = { }
+            params.specials.skill.id = xi.jsa.BLOOD_WEAPON
             params.specials.skill.hpp = math.random(55,75)
             xi.mix.jobSpecial.config(mob, params)
         elseif job == xi.job.BST then
@@ -1626,24 +1669,28 @@ xi.dynamis.setMobStats = function(mob)
             local params = { }
             params.specials = { }
             params.specials.skill = { }
+            params.specials.skill.id = xi.jsa.SOUL_VOICE
             params.specials.skill.hpp = math.random(55,80)
             xi.mix.jobSpecial.config(mob, params)
         elseif job == xi.job.RNG then
             local params = { }
             params.specials = { }
             params.specials.skill = { }
+            params.specials.skill.id = familyEES[mob:getFamily()]
             params.specials.skill.hpp = math.random(55,75)
             xi.mix.jobSpecial.config(mob, params)
         elseif job == xi.job.SAM then
             local params = { }
             params.specials = { }
             params.specials.skill = { }
+            params.specials.skill.id = xi.jsa.MEIKYO_SHISUI
             params.specials.skill.hpp = math.random(55,80)
             xi.mix.jobSpecial.config(mob, params)
         elseif job == xi.job.NIN then
             local params = { }
             params.specials = { }
             params.specials.skill = { }
+            params.specials.skill.id = xi.jsa.MIJIN_GAKURE
             params.specials.skill.hpp = math.random(25,35)
             xi.mix.jobSpecial.config(mob, params)
         elseif job == xi.job.DRG then
@@ -1671,6 +1718,7 @@ xi.dynamis.setNMStats = function(mob)
         local params = { }
         params.specials = { }
         params.specials.skill = { }
+        params.specials.skill.id = xi.jsa.MIJIN_GAKURE
         params.specials.skill.hpp = math.random(15,25)
         xi.mix.jobSpecial.config(mob, params)
     end
@@ -1684,15 +1732,14 @@ xi.dynamis.setStatueStats = function(mob, mobIndex)
     mob:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0, true)
     mob:setMobMod(xi.mobMod.CHECK_AS_NM, 2)
     mob:setMobLevel(math.random(82,84))
-    mob:setMod(xi.mod.DMGMAGIC, -50)
-    mob:setMod(xi.mod.DMGPHYS, -50)
+    mob:setMod(xi.mod.DMG, -5000)
     mob:setTrueDetection(true)
     -- Disabling WHM job trait mods because their job is set to WHM in the DB.
-    mob:setMod(xi.mod.MDEF, 0)
     mob:setMod(xi.mod.REGEN, 0)
     mob:setMod(xi.mod.MPHEAL, 0)
     mob:setMobMod(xi.mobMod.CHECK_AS_NM, 2)
     mob:setSpeed(20)
+
     if mob:getFamily() >= 92 and mob:getFamily() <= 95 then -- If statue
         if eyes ~= nil then
             mob:setLocalVar("eyeColor", eyes) -- Set Eyes if need be
@@ -1880,6 +1927,7 @@ xi.dynamis.mobOnEngaged = function(mob, target)
         end)
     elseif mob:getMainJob() == xi.job.DRG then
         mob:useMobAbility(xi.jsa.CALL_WYVERN)
+        xi.dynamis.spawnDynamicPet(target, mob, mob:getMainJob())
     end
 end
 

@@ -14,6 +14,9 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 2
+    if mob:getID() == mob:getZone():getLocalVar("Scolopendra") then
+        numhits = 3
+    end
     local accmod = 1
     local dmgmod = 1.5
     local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)

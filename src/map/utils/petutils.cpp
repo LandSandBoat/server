@@ -1605,8 +1605,12 @@ namespace petutils
         /*
             Boost HP by 10%
             Increase charm duration up to 30 mins
-            boost stats by 10%
             */
+
+        if (PPet == nullptr)
+        {
+            return;
+        }
 
         // only increase time for charmed mobs
         if (PPet->objtype == TYPE_MOB && PPet->isCharmed)
@@ -1615,7 +1619,9 @@ namespace petutils
             // set initial charm time
             PPet->charmTime = server_clock::now();
             // 30 mins - 1-5 mins
-            PPet->charmTime += 30min - std::chrono::milliseconds(xirand::GetRandomNumber(300000u));
+            uint32 baseTime = 1800000;
+            uint32 randTime = xirand::GetRandomNumber(45000, 300000);
+            PPet->charmTime += std::chrono::milliseconds(baseTime - randTime);
         }
 
         float rate = 0.10f;

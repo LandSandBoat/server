@@ -4,6 +4,7 @@
 require("scripts/globals/status")
 require("scripts/globals/msg")
 require("scripts/globals/weaponskills")
+require("scripts/globals/damage")
 -----------------------------------
 xi = xi or {}
 xi.summon = xi.summon or {}
@@ -214,6 +215,8 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
         finaldmg = finaldmg * (target:getMod(xi.mod.PET_DMG_TAKEN_PHYSICAL) / 100)
     end
 
+    finaldmg = xi.damage.applyDamageTaken(target, finaldmg, xi.attackType.PHYSICAL)
+
     returninfo.dmg = finaldmg
     returninfo.hitslanded = numHitsLanded
 
@@ -299,15 +302,6 @@ xi.summon.avatarFinalAdjustments = function(dmg, mob, skill, target, skilltype, 
     dmg = dmg + dmg * mob:getMod(xi.mod.BP_DAMAGE) / 100
 
     -- handle One For All, Liement
-    if skilltype == xi.attackType.MAGICAL then
-        local targetMagicDamageAdjustment = xi.spells.damage.calculateTMDA(mob, target, damagetype) -- Apply checks for Liement, MDT/MDTII/DT
-
-        dmg = math.floor(dmg * targetMagicDamageAdjustment)
-        if dmg < 0 then
-            return dmg
-        end
-        dmg = utils.oneforall(target, dmg)
-    end
 
     -- Handle Phalanx
     if dmg > 0 then

@@ -25,11 +25,17 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     end
 
     local maxHeal = target:getMaxHP() - target:getHP()
-
+    if mob:hasStatusEffect(xi.effect.HYSTERIA) then
+        maxHeal = 0
+    end
     target:addHP(maxHeal)
     target:wakeUp()
-
     skill:setMsg(xi.msg.basic.SELF_HEAL)
+
+    if mob:hasStatusEffect(xi.effect.HYSTERIA) then
+        skill:setMsg(xi.msg.basic.NONE)
+        mob:delStatusEffect(xi.effect.HYSTERIA)
+    end
 
     return maxHeal
 end

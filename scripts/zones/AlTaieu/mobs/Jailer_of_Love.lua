@@ -111,7 +111,7 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:addMod(xi.mod.REGEN, 260)
-    mob:setMod(xi.mod.DMGMAGIC, -50) -- starts the fight with -50% magic damage taken, reduced to 25% after regen is taken off.
+    mob:setMod(xi.mod.DMGMAGIC, -5000) -- starts the fight with -50% magic damage taken, reduced to 25% after regen is taken off.
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
@@ -140,7 +140,7 @@ entity.onMobFight = function(mob, target)
     then
         mob:setLocalVar("JoL_Regen_Reduction", 1)
         mob:delMod(xi.mod.REGEN, 260)
-        mob:setMod(xi.mod.DMGMAGIC, -25) -- magic damage taken reduced from 50% to 25% after killing nine xzomits and hpemdes
+        mob:setMod(xi.mod.DMGMAGIC, -2500) -- magic damage taken reduced from 50% to 25% after killing nine xzomits and hpemdes
     end
 
     -- every 2 minutes JoL will change the element it absorbs/casts spells this change happens after a two hour animation

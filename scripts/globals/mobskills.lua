@@ -10,6 +10,7 @@ require("scripts/globals/magic")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
 require("scripts/globals/weaponskills")
+require("scripts/globals/damage")
 -----------------------------------
 xi = xi or {}
 xi.mobskills = xi.mobskills or {}
@@ -278,8 +279,14 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
         skill:setMsg(xi.msg.basic.SKILL_MISS)
     end
 
-    if target:getMod(xi.mod.PET_DMG_TAKEN_PHYSICAL) ~= 0 then
-        finaldmg = finaldmg * (target:getMod(xi.mod.PET_DMG_TAKEN_PHYSICAL) / 100)
+    if tpeffect == xi.mobskills.magicalTpBonus.RANGED then
+        finaldmg = xi.damage.applyDamageTaken(target, finaldmg, xi.attackType.RANGED)
+    else
+        if target:getMod(xi.mod.PET_DMG_TAKEN_PHYSICAL) ~= 0 then
+            finaldmg = finaldmg * (target:getMod(xi.mod.PET_DMG_TAKEN_PHYSICAL) / 100)
+        end
+
+        finaldmg = xi.damage.applyDamageTaken(target, finaldmg, xi.attackType.PHYSICAL)
     end
 
     returninfo.dmg = finaldmg
@@ -357,6 +364,10 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgm
     if target:getMod(xi.mod.PET_DMG_TAKEN_MAGICAL) ~= 0 then
         finaldmg = finaldmg * (target:getMod(xi.mod.PET_DMG_TAKEN_MAGICAL) / 100)
     end
+
+    local targetMDTA = xi.spells.damage.calculateTMDA(mob, target, element)
+
+    finaldmg = finaldmg * targetMDTA
 
     returninfo.dmg = finaldmg
 
@@ -446,10 +457,6 @@ xi.mobskills.mobAddBonuses = function(caster, target, dmg, ele) -- used for SMN 
 
     dmg = math.floor(dmg * mab)
 
-    local magicDmgMod = (10000 + target:getMod(xi.mod.DMGMAGIC)) / 10000
-
-    dmg = math.floor(dmg * magicDmgMod)
-
     return dmg
 end
 
@@ -500,11 +507,7 @@ xi.mobskills.mobBreathMove = function(mob, target, percent, base, element, cap)
     -- 2500 would mean 25% ADDITIONAL damage taken.
     -- The effects of the "Shell" spells are also included in this step. The effect also aplies a negative value.
 
-    local globalDamageTaken   = target:getMod(xi.mod.DMG) / 10000          -- Mod is base 10000
-    local breathDamageTaken   = target:getMod(xi.mod.DMGBREATH) / 10000    -- Mod is base 10000
-    local combinedDamageTaken = 1.0 +  utils.clamp(breathDamageTaken + globalDamageTaken, -0.5, 0.5) -- The combination of regular "Damage Taken" and "Breath Damage Taken" caps at 50%. There is no BDTII known as of yet.
-
-    damage = math.floor(damage * combinedDamageTaken)
+    damage = xi.damage.applyDamageTaken(target, damage, xi.attackType.BREATH)
 
     if target:hasStatusEffect(xi.effect.ALL_MISS) and target:getStatusEffect(xi.effect.ALL_MISS):getPower() > 1 then
         return 0
@@ -600,16 +603,6 @@ xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType,
             analyzerHits = 0
         end
         target:setLocalVar("analyzer_hits", analyzerHits)
-    end
-
-    if attackType == xi.attackType.PHYSICAL then
-        dmg = target:physicalDmgTaken(dmg, damageType)
-    elseif attackType == xi.attackType.MAGICAL then
-        dmg = target:magicDmgTaken(dmg, damageType - xi.damageType.ELEMENTAL)
-    elseif attackType == xi.attackType.BREATH then
-        dmg = target:breathDmgTaken(dmg)
-    elseif attackType == xi.attackType.RANGED then
-        dmg = target:rangedDmgTaken(dmg)
     end
 
     if dmg < 0 then
