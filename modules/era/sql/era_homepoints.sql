@@ -171,7 +171,7 @@ UPDATE npc_list SET status = 2 WHERE npcid = "17772847" AND polutils_name = "Hom
 
 -- Southern San d'Oria
 UPDATE npc_list SET status = 2 WHERE npcid = "17719432" AND polutils_name = "Home Point #2";
-UPDATE npc_list SET status = 0 WHERE npcid = "17719433" AND polutils_name = "Home Point #3";
+UPDATE npc_list SET status = 2 WHERE npcid = "17719433" AND polutils_name = "Home Point #3";
 UPDATE npc_list SET status = 2 WHERE npcid = "17719434" AND polutils_name = "Home Point #4";
 
 -- Tavnazian Safehold
