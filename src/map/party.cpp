@@ -51,13 +51,13 @@
 // should have brace-or-equal initializers when MSVC supports it
 struct CParty::partyInfo_t
 {
-    uint32      id;
-    uint32      partyid;
-    uint32      allianceid;
-    std::string name;
-    uint16      flags;
-    uint16      zone;
-    uint16      prev_zone;
+    uint32      id         = {};
+    uint32      partyid    = {};
+    uint32      allianceid = {};
+    std::string name       = {};
+    uint16      flags      = {};
+    uint16      zone       = {};
+    uint16      prev_zone  = {};
 };
 
 // Constructor
@@ -165,7 +165,6 @@ void CParty::DisbandParty(bool playerInitiated)
     }
     delete this;
 }
-
 
 // Assign roles to group members (players only)
 void CParty::AssignPartyRole(int8* MemberName, uint8 role)
@@ -410,7 +409,6 @@ void CParty::DelMember(CBattleEntity* PEntity)
         }
         this->ReloadParty();
     }
-    
 }
 
 void CParty::PopMember(CBattleEntity* PEntity)
@@ -1060,7 +1058,7 @@ void CParty::SetSyncTarget(int8* MemberName, uint16 message)
 void CParty::SetQuarterMaster(const char* MemberName)
 {
     CBattleEntity* PEntity = MemberName ? GetMemberByName((const int8*)MemberName) : nullptr;
-    m_PQuarterMaster        = PEntity;
+    m_PQuarterMaster       = PEntity;
     sql->Query("UPDATE accounts_parties SET partyflag = partyflag & ~%d WHERE partyid = %u AND partyflag & %d", PARTY_QM, m_PartyID, PARTY_QM);
     if (MemberName != nullptr)
     {
@@ -1277,7 +1275,7 @@ void CParty::RefreshFlags(std::vector<partyInfo_t>& info)
                     if (member->id == memberinfo.id)
                     {
                         m_PQuarterMaster = member;
-                        found           = true;
+                        found            = true;
                     }
                 }
                 if (!found)
