@@ -1080,8 +1080,7 @@ m:addOverride("xi.dynamis.entryNpcOnTrigger", function(player, npc)
         return
     end
 
-
-    if xi.dynamis.entryInfoEra[zoneID].csSand ~= nil and player:getCharVar("HasSeenXarcabardDynamisCS") == 1 and player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) == false then -- If player does not have sand, start CS to give sand.
+    if xi.dynamis.entryInfoEra[zoneID].csSand ~= nil and player:getCharVar("Dynamis_Status") == 1 and not player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND) then -- If player does not have sand, start CS to give sand.
         player:startEvent(xi.dynamis.entryInfoEra[zoneID].csSand)
     elseif xi.dynamis.entryInfoEra[zoneID].csWin ~= nil and player:hasKeyItem(xi.dynamis.entryInfoEra[zoneID].winKI) and player:getCharVar(xi.dynamis.entryInfoEra[zoneID].hasSeenWinCSVar) == 0 then -- If player hasn't seen win CS play win CS.
         player:startEvent(xi.dynamis.entryInfoEra[zoneID].csWin)
