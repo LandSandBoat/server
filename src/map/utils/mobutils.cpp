@@ -1401,7 +1401,7 @@ Usage:
     {
         CMobEntity* PMob = new CMobEntity();
 
-        const char* Query = "SELECT mob_groups.zoneid, mob_groups.`name`, mob_groups.packet_name, \
+        const char* Query = "SELECT mob_groups.zoneid, mob_groups.`name`, mob_pools.packet_name, \
         mob_groups.respawntime, mob_groups.spawntype, mob_groups.dropid, mob_groups.HP, mob_groups.MP, mob_groups.minLevel, mob_groups.maxLevel, \
         mob_pools.modelid, mob_pools.mJob, mob_pools.sJob, mob_pools.cmbSkill, mob_pools.cmbDmgMult, mob_pools.cmbDelay, mob_pools.behavior, mob_pools.links, mob_pools.mobType, mob_pools.immunity, \
         mob_family_system.ecosystemID, mob_family_system.mobradius, mob_family_system.speed, \
