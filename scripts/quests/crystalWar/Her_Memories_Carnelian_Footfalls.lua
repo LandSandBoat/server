@@ -24,7 +24,8 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:getCurrentMission(xi.mission.log_id.WOTG) == xi.mission.id.wotg.HER_MEMORIES
+                player:getCurrentMission(xi.mission.log_id.WOTG) == xi.mission.id.wotg.HER_MEMORIES and
+                player:getCampaignAllegiance() == 1
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA_S] =
