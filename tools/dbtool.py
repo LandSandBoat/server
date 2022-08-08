@@ -600,11 +600,11 @@ def main():
     if fetch_credentials() == False:
         return
     fetch_configs()
-    fetch_versions()
     #Check MySQL path/availability
     if not os.path.exists(mysql_bin + 'mysql' + exe):
         adjust_mysql_bin()
         write_configs()
+    fetch_versions()
     #CLI args
     if len(sys.argv) > 1:
         arg1 = str(sys.argv[1])
