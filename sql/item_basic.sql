@@ -16467,7 +16467,7 @@ INSERT INTO `item_basic` VALUES (19198,0,'dweomer_bullet','dweomer_bullet',99,20
 INSERT INTO `item_basic` VALUES (19199,0,'oberons_bullet','oberons_bullet',99,2052,15,0,2);
 INSERT INTO `item_basic` VALUES (19200,0,'black_bolt','black_bolt',99,2052,15,0,10);
 INSERT INTO `item_basic` VALUES (19201,0,'electrum_bullet','electrum_bullet',99,2052,15,0,25);
-INSERT INTO `item_basic` VALUES (19202,0,'smart_grenade','smart_grenade',1,34820,15,0,9500);
+INSERT INTO `item_basic` VALUES (19202,0,'smart_grenade','smart_grenade',1,51268,0,0,9500);
 INSERT INTO `item_basic` VALUES (19203,0,'war_hoop','war_hoop',1,63552,0,1,0);
 INSERT INTO `item_basic` VALUES (19204,0,'fiendtrapper','fiendtrapper',1,64592,0,1,0);
 INSERT INTO `item_basic` VALUES (19205,0,'blank_fiend_plate','blank_f._plate',12,30800,0,1,0);

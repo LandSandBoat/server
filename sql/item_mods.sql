@@ -667,7 +667,8 @@ INSERT INTO `item_mods` VALUES (10373,115,12); -- ELEM: 12
 INSERT INTO `item_mods` VALUES (10382,1,1); -- DEF: 1
 
 -- Dream Mittens +1
-INSERT INTO `item_mods` VALUES (10383,1,2); -- DEF: 2
+INSERT INTO `item_mods` VALUES (10383,1,2);    -- DEF: 2
+INSERT INTO `item_mods` VALUES (10383,947,30); -- Dream mittens +1 invisible duration +30
 
 -- Cumulus Masque
 INSERT INTO `item_mods` VALUES (10384,1,1); -- DEF: 1
@@ -28786,7 +28787,8 @@ INSERT INTO `item_mods` VALUES (15751,16,11); -- ICE_RES: 11
 INSERT INTO `item_mods` VALUES (15752,1,1); -- DEF: 1
 
 -- Dream Boots +1
-INSERT INTO `item_mods` VALUES (15753,1,2); -- DEF: 2
+INSERT INTO `item_mods` VALUES (15753,1,2);    -- DEF: 2
+INSERT INTO `item_mods` VALUES (15753,946,30); -- dream boots +1 sneak duration +30
 
 -- Sprinters Shoes
 INSERT INTO `item_mods` VALUES (15754,1,1); -- DEF: 1
@@ -30880,7 +30882,8 @@ INSERT INTO `item_mods` VALUES (16276,71,1);  -- MPHEAL: 1
 INSERT INTO `item_mods` VALUES (16276,72,1);  -- HPHEAL: 1
 
 -- Bandolero Scarf
-INSERT INTO `item_mods` VALUES (16277,68,5); -- EVA: 5
+INSERT INTO `item_mods` VALUES (16277,68,5);   -- EVA: 5
+INSERT INTO `item_mods` VALUES (16277,897,95); -- Gilfinder + 95
 
 -- Pipers Torque
 INSERT INTO `item_mods` VALUES (16278,14,5);  -- CHR: 5
