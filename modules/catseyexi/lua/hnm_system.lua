@@ -34,11 +34,11 @@ local hnmSystem = Module:new("HNM_System")
 hnmSystem:addOverride("xi.zones.Dragons_Aery.Zone.onInitialize", function(zone)
     local hnmPopTime = GetServerVariable("[HNM]Fafnir") -- Time the NM will spawn at.
 
-    -- Fallback in case of DB corruption or other fancy stuff. This var should never be 0 after the first time.
+    -- Fallback in case of DB corruption or other fancy stuff.
     if hnmPopTime == 0 then
         hnmPopTime = os.time() + math.random(1, 48) * 1800
 
-        SetServerVariable("[HNM]Fafnir", hnmPopTime) -- Set a pop time.
+        SetServerVariable("[HNM]Fafnir", hnmPopTime) -- Save pop time.
     end
 
     UpdateNMSpawnPoint(dragonsAeryID.mob.FAFNIR)
@@ -66,7 +66,7 @@ hnmSystem:addOverride("xi.zones.Dragons_Aery.mobs.Fafnir.onMobDespawn", function
     SetServerVariable("[HNM]Fafnir_C", deathCount + 1)   -- Save kill count.
 
     -- Set NQ respawn Time.
-    GetMobByID(dragonsAeryID.mob.FAFNIR):setRespawnTime(random) -- Set next pop time.
+    GetMobByID(dragonsAeryID.mob.FAFNIR):setRespawnTime(random)
 
     -- HQ check.
     if deathCount >= 3 then
@@ -94,7 +94,7 @@ hnmSystem:addOverride("xi.zones.Valley_of_Sorrows.Zone.onInitialize", function(z
     if hnmPopTime == 0 then
         hnmPopTime = os.time() + math.random(1, 48) * 1800
 
-        SetServerVariable("[HNM]Adamantoise", hnmPopTime) -- Set next pop time.
+        SetServerVariable("[HNM]Adamantoise", hnmPopTime) -- Save pop time.
     end
 
     UpdateNMSpawnPoint(valleySorrowsID.mob.ADAMANTOISE)
@@ -149,7 +149,7 @@ hnmSystem:addOverride("xi.zones.Behemoths_Dominion.Zone.onInitialize", function(
     if hnmPopTime == 0 then
         hnmPopTime = os.time() + math.random(1, 48) * 1800
 
-        SetServerVariable("[HNM]Behemoth", hnmPopTime) -- Set next pop time.
+        SetServerVariable("[HNM]Behemoth", hnmPopTime) -- Save pop time.
     end
 
     UpdateNMSpawnPoint(behemothDomID.mob.BEHEMOTH)
@@ -204,7 +204,7 @@ hnmSystem:addOverride("xi.zones.Jugner_Forest.Zone.onInitialize", function(zone)
     if hnmPopTime == 0 then
         hnmPopTime = os.time() + math.random(1, 48) * 1800
 
-        SetServerVariable("[HNM]KA", hnmPopTime) -- Set next pop time.
+        SetServerVariable("[HNM]KA", hnmPopTime) -- Save pop time.
     end
 
     -- Spawn mob.
@@ -221,7 +221,7 @@ hnmSystem:addOverride("xi.zones.Jugner_Forest.Zone.onInitialize", function(zone)
     end
 
     -- Regular operations.
-    zone:registerRegion(1, -484, 10, 292, 0, 0, 0) -- Sets Mark for "Under Oath" Quest cutscene.
+    zone:registerRegion(1, -484, 10, 292, 0, 0, 0)
 
     UpdateNMSpawnPoint(jugnerForestID.mob.FRAELISSA)
     GetMobByID(jugnerForestID.mob.FRAELISSA):setRespawnTime(math.random(900, 10800))
