@@ -1,7 +1,8 @@
 -----------------------------------
 -- Area: Chocobo_Circuit
---  NPC: Mediverchanne
+-- NPC: Mediverchanne
 -- Standard Info NPC
+-- !pos -266.977 3.999 -524.848 70
 -----------------------------------
 local entity = {}
 

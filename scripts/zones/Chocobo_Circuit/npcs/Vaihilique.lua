@@ -1,8 +1,8 @@
 -----------------------------------
 -- Area: Chocobo_Circuit
--- NPC: Cyphaireau
+-- NPC: Vaihilique
 -- Standard Info NPC
--- !pos -369.391 -4.000 -495.073 70
+-- !pos -372.943 3.999 -524.775 70
 -----------------------------------
 local entity = {}
 
@@ -10,13 +10,13 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(240)
+    player:startEvent(243)
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinsih = function(player, csid, option)
 end
 
 return entity
