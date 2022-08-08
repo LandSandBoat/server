@@ -2,7 +2,7 @@
 -- Area: Chocobo_Circuit
 -- NPC: Maxine
 -- Standard Info NPC
--- !pos -492.890 0.000 -530.576
+-- !pos -492.890 0.000 -530.576 70
 -----------------------------------
 local entity = {}
 

@@ -2,7 +2,7 @@
 -- Area: Chocobo_Circuit
 -- NPC: Valerio
 -- Standard Info NPC
--- !pos -502.155 0.000 -360.685
+-- !pos -502.155 0.000 -360.685 70
 -----------------------------------
 local entity = {}
 

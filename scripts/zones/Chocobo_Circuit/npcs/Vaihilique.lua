@@ -2,7 +2,7 @@
 -- Area: Chocobo_Circuit
 -- NPC: Vaihilique
 -- Standard Info NPC
--- !pos -372.943 3.999 -524.775
+-- !pos -372.943 3.999 -524.775 70
 -----------------------------------
 local entity = {}
 

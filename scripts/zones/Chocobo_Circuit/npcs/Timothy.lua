@@ -2,7 +2,7 @@
 -- Area: Chocobo_Circuit
 -- NPC: Timothy
 -- Standard Info NPC
--- !pos -135.653 0.000 -538.552
+-- !pos -135.653 0.000 -538.552 70
 -----------------------------------
 local entity = {}
 

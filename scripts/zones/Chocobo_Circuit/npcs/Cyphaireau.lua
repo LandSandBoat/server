@@ -2,7 +2,7 @@
 -- Area: Chocobo_Circuit
 -- NPC: Cyphaireau
 -- Standard Info NPC
--- !pos -369.391 -4.000 -495.073
+-- !pos -369.391 -4.000 -495.073 70
 -----------------------------------
 local entity = {}
 

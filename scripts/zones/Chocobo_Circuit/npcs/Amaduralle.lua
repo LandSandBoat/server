@@ -2,7 +2,7 @@
 -- Area: Chocobo_Circuit
 -- NPC: Amaduralle
 -- Standard Info NPC
--- !pos -369.286 -4.000 -464.873
+-- !pos -369.286 -4.000 -464.873 70
 -----------------------------------
 local entity = {}
 

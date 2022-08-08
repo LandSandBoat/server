@@ -2,7 +2,7 @@
 -- Area: Chocobo_Circuit
 -- NPC: Cyril
 -- Standard Info NPC
--- !pos -331.617 0.000 -467.548
+-- !pos -331.617 0.000 -467.548 70
 -----------------------------------
 local entity = {}
 

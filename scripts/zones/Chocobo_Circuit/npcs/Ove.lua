@@ -2,7 +2,7 @@
 -- Area: Chocobo_Circuit
 -- NPC: Ove
 -- Standard Info NPC
--- !pos -160.484 0.000 -374.533
+-- !pos -160.484 0.000 -374.533 70
 -----------------------------------
 local entity = {}
 
