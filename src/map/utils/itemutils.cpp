@@ -542,7 +542,7 @@ namespace itemutils
 
     void LoadDropList()
     {
-        int32 ret = sql->Query("SELECT dropId, itemId, dropType, itemRate, groupId, groupRate FROM mob_droplist WHERE dropid < %u;", MAX_DROPID);
+        int32 ret = sql->Query("SELECT dropId, itemId, dropType, itemRate, groupId, groupRate FROM mob_droplist WHERE dropid < %u ORDER BY dropId, dropType, groupId;", MAX_DROPID);
 
         if (ret != SQL_ERROR && sql->NumRows() != 0)
         {
