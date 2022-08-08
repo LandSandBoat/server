@@ -1055,7 +1055,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Structure_Exoplate',237,998);
 INSERT INTO `mob_skill_lists` VALUES ('Structure_Exoplate',237,999);
 INSERT INTO `mob_skill_lists` VALUES ('Structure_Exoplate',237,1000);
 INSERT INTO `mob_skill_lists` VALUES ('Structure_Exoplate',237,1001);
--- 238: free
+INSERT INTO `mob_skill_lists` VALUES ('Ullikummi',238,1035);
 INSERT INTO `mob_skill_lists` VALUES ('Thunderclaw_Thuban',239,378); -- thunderbolt
 INSERT INTO `mob_skill_lists` VALUES ('Tauri',240,498);
 INSERT INTO `mob_skill_lists` VALUES ('Tauri',240,499);
@@ -3852,8 +3852,9 @@ INSERT INTO `mob_skill_lists` VALUES ('Jailer_of_Hope', 1202, 1353);
 INSERT INTO `mob_skill_lists` VALUES ('Jailer_of_Hope', 1202, 1355);
 INSERT INTO `mob_skill_lists` VALUES ('Jailer_of_Hope', 1202, 1356);
 INSERT INTO `mob_skill_lists` VALUES ('Jailer_of_Hope', 1202, 1358);
+INSERT INTO `mob_skill_lists` VALUES ('Zipacna',1203,678);
 
--- Next available ID: 1177
+-- Next available ID: 1204
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section

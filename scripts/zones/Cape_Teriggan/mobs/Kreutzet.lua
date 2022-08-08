@@ -22,15 +22,9 @@ entity.onMobWeaponSkill = function(target, mob, skill)
 
         if stormwindCounter > 2 then
             mob:setLocalVar("stormwindCounter", 0)
-        else
+        elseif mob:checkDistance(target) < 6 then
             mob:useMobAbility(926)
         end
-    end
-end
-
-entity.onMobDisengage = function(mob, weather)
-    if not (mob:getWeather() == xi.weather.WIND or mob:getWeather() == xi.weather.GALES) then
-        DespawnMob(mob:getID())
     end
 end
 

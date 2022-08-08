@@ -15,7 +15,15 @@ local path =
     -256, 4, 381,
     -261, 8, 400,
     -257, 12, 417,
-    -240, 16, 420,
+    -219, 16, 420,
+    -220, 16, 448,
+    -212, 16, 459,
+    -130, 16, 458,
+    -118, 16, 420,
+    -131, 16, 381,
+    -212, 16, 380,
+    -220, 16, 392,
+    -219, 16, 420,
     -257, 12, 417,
     -261, 8, 400,
     -256, 4, 381,
@@ -45,6 +53,15 @@ local path =
     259, 4, 383,
     258, 12, 418,
     248, 14, 420,
+    219, 16, 420,
+    219, 16, 386,
+    210, 16, 379,
+    119, 16, 380,
+    140, 16, 381,
+    140, 16, 419,
+    175, 16, 459,
+    211, 16, 459,
+    220, 16, 451,
     219, 16, 420,
     248, 14, 420,
     258, 12, 418,
@@ -77,7 +94,15 @@ local path =
     -256, 4, 381,
     -261, 8, 400,
     -257, 12, 417,
-    -240, 16, 420,
+    -219, 16, 420,
+    -220, 16, 448,
+    -212, 16, 459,
+    -130, 16, 458,
+    -118, 16, 420,
+    -131, 16, 381,
+    -212, 16, 380,
+    -220, 16, 392,
+    -219, 16, 420,
     -257, 12, 417,
     -261, 8, 400,
     -256, 4, 381,
@@ -88,18 +113,23 @@ local path =
 }
 
 entity.onMobSpawn = function(mob)
-    entity.onMobRoam(mob)
+    xi.path.patrol(mob, path)
+    mob:setMod(xi.mod.REGAIN, 200)
 end
 
 entity.onPath = function(mob)
-    xi.path.patrol(mob, path, xi.path.flag.RUN)
+    xi.path.patrol(mob, path)
 end
 
 entity.onMobRoam = function(mob)
-    -- move to start position if not moving
-    if mob:isFollowingPath() == false then
-        mob:pathThrough(xi.path.first(path), xi.path.flag.RUN)
+    -- move to nearest path if not moving
+    if not mob:isFollowingPath() then
+        xi.path.pathToNearest(mob, path)
     end
+end
+
+entity.onMobDisengage = function(mob)
+    xi.path.pathToNearest(mob, path)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)

@@ -9,6 +9,9 @@ require("scripts/globals/mobskills")
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)
+    if target:isBehind(mob, 96) then
+        return 1
+    end
     return 0
 end
 

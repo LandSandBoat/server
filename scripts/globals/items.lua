@@ -3189,6 +3189,7 @@ xi.items =
     MINSTRELS_DAGGER                = 16487,
     ASPIR_KNIFE                     = 16509,
     BRONZE_SWORD                    = 16535,
+    CURTANA                         = 16575,
     PERDU_SWORD                     = 16602,
     BRONZE_AXE                      = 16640,
     MYTHRIL_PICK                    = 16651,

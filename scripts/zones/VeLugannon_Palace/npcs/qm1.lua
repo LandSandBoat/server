@@ -4,6 +4,7 @@
 -- !pos -370.039 16.014 -274.378 177
 -----------------------------------
 local ID = require("scripts/zones/VeLugannon_Palace/IDs")
+require('scripts/globals/npc_util')
 -----------------------------------
 local entity = {}
 
@@ -13,12 +14,11 @@ end
 entity.onTrigger = function(player, npc)
     local hideTime = 0
 
-    if (player:hasItem(16575) == false and player:getFreeSlotsCount() >= 1) then
-        player:addItem(16575)
-        player:messageSpecial(ID.text.ITEM_OBTAINED, 16575) -- Curtana
+    if not player:hasItem(xi.items.CURTANA) then
+        npcUtil.giveItem(player, xi.items.CURTANA)
 
-        -- ??? dissapears for 2 hours and reappears on new position
-        hideTime = 7200
+        -- ??? dissapears for 3 hours and reappears on new position
+        hideTime = 10800
     else
         player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 16575) -- Curtana
 

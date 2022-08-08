@@ -9,28 +9,28 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    -- Based on tested stats found at https://docs.google.com/spreadsheets/d/1YBoveP-weMdidrirY-vPDzHyxbEI2ryECINlfCnFkLI/edit#gid=1789487472
+    mob:setMod(xi.mod.SILENCERES, 90)
+    mob:addMod(xi.mod.ATTP, 10)
+    mob:addMod(xi.mod.EVA, 50)
+    mob:addMod(xi.mod.VIT, 84)
+    mob:addMod(xi.mod.DOUBLE_ATTACK, 10)
+    mob:setDamage(145)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+    mob:setMobMod(xi.mobMod.MAGIC_COOL, 35)
+end
+
 entity.onMobSpawn = function(mob ,target)
     GetNPCByID(ID.npc.PORTAL_TO_SEIRYU):setAnimation(xi.anim.CLOSE_DOOR)
+    mob:SetMagicCastingEnabled(false)
 end
 
-entity.onMobInitialize = function(mob)
-    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
-end
-
-entity.onMobMagicPrepare = function(mob, target, spellId)
-    if not mob:hasStatusEffect(xi.effect.HUNDRED_FISTS, 0) then
-        local rnd = math.random()
-        if rnd < 0.5 then
-            return 186 -- aeroga 3
-        elseif rnd < 0.7 then
-            return 157 -- aero 4
-        elseif rnd < 0.9 then
-            return 208 -- tornado
-        else
-            return 237 -- choke
-        end
-    end
-    return 0 -- Still need a return, so use 0 when not casting
+entity.onMobEngaged = function(mob, target)
+    mob:messageText(mob, ID.text.SKY_GOD_OFFSET + 9)
+    mob:timer(5000, function(mobArg)
+        mobArg:SetMagicCastingEnabled(true)
+    end)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
@@ -38,8 +38,10 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    player:showText(mob, ID.text.SKY_GOD_OFFSET + 10)
-    GetNPCByID(ID.npc.PORTAL_TO_SEIRYU):setAnimation(xi.anim.OPEN_DOOR)
+    if isKiller then
+        mob:messageText(mob, ID.text.SKY_GOD_OFFSET + 10)
+        GetNPCByID(ID.npc.PORTAL_TO_SEIRYU):setAnimation(xi.anim.OPEN_DOOR)
+    end
 end
 
 entity.onMobDespawn = function(mob)

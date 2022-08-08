@@ -5221,6 +5221,11 @@ INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Dark',5031,274,1,255); -- 
 INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Dark',5031,360,1,255); -- Dispelga (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Jailer_of_Love_Dark',5031,361,1,255); -- Blindga (1~255)
 
+-- Ullikummi (5032)
+INSERT INTO `mob_spell_lists` VALUES('Ullikummi', 5032, 34, 1, 255); -- Diaga II
+INSERT INTO `mob_spell_lists` VALUES('Ullikummi', 5032, 40, 1, 255); -- Banishga III
+INSERT INTO `mob_spell_lists` VALUES('Ullikummi', 5032, 112, 1, 255); -- Flash
+
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

@@ -16,6 +16,7 @@ require("scripts/globals/status")
 require("scripts/globals/magic") -- For resist functions
 require("scripts/globals/utils") -- For clamping function
 require("scripts/globals/msg")
+require("scripts/globals/events/harvest_festivals")
 --------------------------------------
 
 xi = xi or {}
@@ -120,6 +121,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         ABSORB_STATUS = 10,
         SELF_BUFF = 11,
         DEATH = 12,
+        BRIGAND = 13,
     }
 
     -- If we're not going to proc, lets not execute all those checks!
@@ -252,6 +254,20 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
             msgID = xi.msg.basic.ADD_EFFECT_STATUS
             msgParam = xi.effect.KO
             defender:setHP(0)
+        end
+
+    elseif addType == procType.BRIGAND then
+        if defender:getPool() == 531 and
+        attacker:getEquipID(xi.slot.MAIN) == xi.items.BUCCANEERS_KNIFE then
+            defender:setMod(xi.mod.DMG, 0)
+            defender:setLocalVar("killable", 1)
+            defender:setUnkillable(false)
+            damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage)
+            msgID = xi.msg.basic.ADD_EFFECT_DMG
+            if damage < 0 then
+                msgID = xi.msg.basic.ADD_EFFECT_HEAL
+            end
+            msgParam = damage
         end
     end
 

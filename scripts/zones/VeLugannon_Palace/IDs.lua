@@ -35,21 +35,28 @@ zones[xi.zone.VELUGANNON_PALACE] =
         MIMIC                   = 17502567,
         BRIGANDISH_BLADE        = 17502568,
         STEAM_CLEANER           = 17502569,
-        STEAM_CLEANER_DETECTORS =
+        SC_DETECTORS            =
         {
-            -- E Lower Chamber
-            17502543,
-            17502545,
-            -- W Lower Chamber
-            17502547,
-            17502549,
-            -- NE Lower Chamber
-            17502551,
-            17502553,
-            -- NW Lower Chamber
-            17502555,
-            17502557,
+            DET1 = 17502545, -- Seiryu North Basement (1-2)
+            DET2 = 17502543,
+            DET3 = 17502551, -- Genbu South Basement (2-1)
+            DET4 = 17502553,
+            DET5 = 17502547, -- Suzaku North Basement (4-1)
+            DET6 = 17502549,
+            DET7 = 17502555, -- Byakko South Basement (3-2)
+            DET8 = 17502557,
         },
+        DETECTORS               =
+        {
+            DET9 = 17502559, -- Genbu North Basement (2-2)
+            DET10 = 17502561,
+            DET11 = 17502563, -- Byakko North Basement (3-1)
+            DET12 = 17502565,
+            DET13 = 17502535, -- Seiryu South Basement (0-1)
+            DET14 = 17502537,
+            DET15 = 17502541, -- Suzaku South Basement (0-2)
+            DET16 = 17502539,
+        }
     },
     npc =
     {
