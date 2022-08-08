@@ -4,6 +4,7 @@
 -- Ref: https://ffxiclopedia.fandom.com/wiki/Category:Merit_Points?oldid=1088116
 -- --------------------------------------------------------
 
+LOCK TABLE `merits` WRITE;
 
 REPLACE INTO `merits` (`meritid`, `name`, `upgrade`, `value`, `jobs`, `upgradeid`, `catagoryid`) VALUES
     -- General Merit Point Categories
@@ -187,3 +188,5 @@ REPLACE INTO `merits` (`meritid`, `name`, `upgrade`, `value`, `jobs`, `upgradeid
     (1686, 'shattersoul', 0, 3, 549455, 0, 25),
     (1688, 'apex_arrow', 0, 3, 3072, 0, 25),
     (1690, 'last_stand', 0, 3, 66592, 0, 25);
+
+UNLOCK TABLES;

@@ -7,6 +7,8 @@
 -- Add content_tag to zones
 -- ------------------------------------------------------------
 
+LOCK TABLE `mob_groups` WRITE;
+
 ALTER TABLE `mob_groups`
     ADD COLUMN IF NOT EXISTS `content_tag` varchar(14) DEFAULT NULL AFTER `allegiance`;
 
@@ -684,3 +686,5 @@ UPDATE mob_groups SET minLevel='51',maxLevel='54' WHERE name='Balayang' AND grou
 UPDATE mob_groups SET content_tag='WOTG' WHERE name='Mind_Hoarder' AND groupid='11' AND zoneid='204';
 UPDATE mob_groups SET content_tag='WOTG' WHERE name='Sluagh' AND groupid='5' AND zoneid='204';
 UPDATE mob_groups SET content_tag='SYNERGY' WHERE name='Jenglot' AND groupid='7' AND zoneid='204';
+
+UNLOCK TABLES;

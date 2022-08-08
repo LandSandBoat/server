@@ -4,6 +4,8 @@
 -- Table Structure Definition
 -- --------------------------------------------------------
 
+LOCK TABLE `item_weapon` WRITE;
+
 REPLACE INTO `item_weapon` (`itemId`, `name`, `skill`, `subskill`, `ilvl_skill`, `ilvl_parry`, `ilvl_macc`, `dmgType`, `hit`, `delay`, `dmg`, `unlock_points`) VALUES
     (17160, 'longbow', 25, 9, 0, 0, 0, 1, 1, 540, 17, 0),
     (17161, 'power_bow', 25, 9, 0, 0, 0, 1, 1, 540, 30, 0),
@@ -130,3 +132,4 @@ REPLACE INTO `item_weapon` (`itemId`, `name`, `skill`, `subskill`, `ilvl_skill`,
     (22132, 'artemiss_bow_+1', 25, 9, 0, 0, 0, 1, 1, 351, 2, 0),
     (22133, 'voluspa_bow', 25, 9, 215, 0, 0, 1, 1, 540, 204, 0);
 
+UNLOCK TABLES;

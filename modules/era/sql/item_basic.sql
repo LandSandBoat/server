@@ -7,6 +7,8 @@
 -- 
 -- --------------------------------------------------------
 
+LOCK TABLE `item_basic` WRITE;
+
 REPLACE INTO `item_basic` (`itemid`, `subid`, `name`, `sortname`, `stackSize`, `flags`, `aH`, `NoSale`, `BaseSell`) VALUES
     (4, 0, 'mahogany_bed', 'mahogany_bed', 1, 36, 34, 0, 10100),
     (5, 0, 'bronze_bed', 'bronze_bed', 1, 36, 34, 0, 1564),
@@ -3276,3 +3278,5 @@ DELETE FROM `item_basic` WHERE `itemid` IN (
     28484, -- 0, 'nourishing_earring', 'nourish._earring', 1, 63572, 0, 0, 0),
 )
 */
+
+UNLOCK TABLES;
