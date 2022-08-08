@@ -47,7 +47,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.PIERCE_SDT, 0)
     mob:setMod(xi.mod.IMPACT_SDT, 1000)
     -- Set the magic resists. It always takes no damage from direct magic
-    mob:setMod(xi.mod.DMGMAGIC, -100)
+    mob:setMod(xi.mod.DMGMAGIC, -10000)
     mob:SetAutoAttackEnabled(true)
     mob:SetMobAbilityEnabled(true)
 end

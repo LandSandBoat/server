@@ -15,6 +15,7 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
+require("scripts/globals/damage")
 
 -- Obtains alpha, used for working out WSC on legacy servers
 local function getAlpha(level)
@@ -460,7 +461,7 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
 
     -- Have to calculate added bonus for SA/TA here since it is done outside of the fTP multiplier
     if attacker:getMainJob() == xi.job.THF then
-        local ratio = cMeleeRatio(attacker, target, nil, 0, tp, xi.slot.MAIN)
+        local ratio = cMeleeRatio(attacker, target, wsParams, 0, tp, xi.slot.MAIN)
         local pdif = ratio[1]
         local pdifCrit = ratio[2]
         -- Add DEX/AGI bonus to first hit if THF main and valid Sneak/Trick Attack
@@ -820,6 +821,15 @@ function takeWeaponskillDamage(defender, attacker, wsParams, primaryMsg, attack,
             action:messageID(defender:getID(), xi.msg.basic.EVADES)
         end
         action:reaction(defender:getID(), xi.reaction.EVADE)
+    end
+
+    if attack.attackType == xi.attackType.MAGICAL then
+        local targetMDTA = xi.spells.damage.calculateTMDA(attacker, defender, attack.damageType)
+        finaldmg = finaldmg * targetMDTA
+    elseif attack.attackType == xi.attackType.RANGED then
+        finaldmg = xi.damage.applyDamageTaken(defender, finaldmg, xi.attackType.RANGED)
+    else
+        finaldmg = xi.damage.applyDamageTaken(defender, finaldmg, xi.attackType.PHYSICAL)
     end
 
     local targetTPMult = wsParams.targetTPMult or 1
