@@ -1055,7 +1055,10 @@ INSERT INTO `mob_skill_lists` VALUES ('Structure_Exoplate',237,998);
 INSERT INTO `mob_skill_lists` VALUES ('Structure_Exoplate',237,999);
 INSERT INTO `mob_skill_lists` VALUES ('Structure_Exoplate',237,1000);
 INSERT INTO `mob_skill_lists` VALUES ('Structure_Exoplate',237,1001);
-INSERT INTO `mob_skill_lists` VALUES ('Ullikummi',238,1035);
+INSERT INTO `mob_skill_lists` VALUES ('COP+_Bats',238,393); -- jetstream
+INSERT INTO `mob_skill_lists` VALUES ('COP+_Bats',238,395); -- sonic_boom
+INSERT INTO `mob_skill_lists` VALUES ('COP+_Bats',238,1157); -- slipstream
+INSERT INTO `mob_skill_lists` VALUES ('COP+_Bats',238,1158); -- turbulence
 INSERT INTO `mob_skill_lists` VALUES ('Thunderclaw_Thuban',239,378); -- thunderbolt
 INSERT INTO `mob_skill_lists` VALUES ('Tauri',240,498);
 INSERT INTO `mob_skill_lists` VALUES ('Tauri',240,499);
@@ -1104,7 +1107,8 @@ INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1746);
 -- INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1748);
 -- INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1749);
 -- 247: Tube
--- 248 to 249: free
+-- 248: free
+INSERT INTO `mob_skill_lists` VALUES ('Ullikummi',249,1035);
 INSERT INTO `mob_skill_lists` VALUES ('Uragnite_shell',250,1571); -- gas_shell
 INSERT INTO `mob_skill_lists` VALUES ('Uragnite_shell',250,1572); -- venom_shell
 INSERT INTO `mob_skill_lists` VALUES ('Uragnite',251,1573); -- palsynyxis
@@ -2296,9 +2300,9 @@ INSERT INTO `mob_skill_lists` VALUES ('Gerjis',497,270); -- roar
 INSERT INTO `mob_skill_lists` VALUES ('Gerjis',497,271); -- razor_fang
 INSERT INTO `mob_skill_lists` VALUES ('Gerjis',497,273); -- claw_cyclone
 INSERT INTO `mob_skill_lists` VALUES ('Gerjis',497,1322); -- gerjis_grip
--- INSERT INTO `mob_skill_lists` VALUES ('Gerjis',497,1681); -- crossthrash
+INSERT INTO `mob_skill_lists` VALUES ('Gerjis',497,1340); -- crossthrash
 -- 498: Cyranuce_M_Cutauleon
--- 499 to 699: free
+-- 499 to 503: free
 INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,347);
 INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,419);
 INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,422);
@@ -2693,8 +2697,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Alkonost',786,578); -- nihlity song
 -- INSERT INTO `mob_skill_lists` VALUES ('Alkonost',786,580); -- fantod
 INSERT INTO `mob_skill_lists` VALUES ('Alkonost',786,1330); -- hoof volley
 INSERT INTO `mob_skill_lists` VALUES ('Alkonost',786,2828); -- jettatura
--- 787: free
--- 788: free
+-- 787-788: free
 INSERT INTO `mob_skill_lists` VALUES ('Bakka',789,1711); -- frentic rip
 INSERT INTO `mob_skill_lists` VALUES ('Bakka',789,2003); -- grating tantra
 INSERT INTO `mob_skill_lists` VALUES ('Bakka',789,2004); -- stifling tantra
@@ -3040,7 +3043,14 @@ INSERT INTO `mob_skill_lists` VALUES ('Asanbosam',885,392); -- ultrasonics
 INSERT INTO `mob_skill_lists` VALUES ('Asanbosam',885,394); -- blood_drain
 INSERT INTO `mob_skill_lists` VALUES ('Asanbosam',885,1155); -- suibsonics
 INSERT INTO `mob_skill_lists` VALUES ('Asanbosam',885,1156); -- marrow_drain
--- 886 to 887: free
+INSERT INTO `mob_skill_lists` VALUES ('Colo-Colo',886,392); -- ultrasonics
+INSERT INTO `mob_skill_lists` VALUES ('Colo-Colo',886,394); -- blood_drain
+INSERT INTO `mob_skill_lists` VALUES ('Colo-Colo',886,1155); -- subsonics
+INSERT INTO `mob_skill_lists` VALUES ('Colo-Colo',886,1156); -- marrow_drain
+INSERT INTO `mob_skill_lists` VALUES ('Furies',887,395); -- jetstream
+INSERT INTO `mob_skill_lists` VALUES ('Furies',887,393); -- sonic_boom
+INSERT INTO `mob_skill_lists` VALUES ('Furies',887,1157); -- slipstream
+INSERT INTO `mob_skill_lists` VALUES ('Furies',887,1158); -- turbulence
 INSERT INTO `mob_skill_lists` VALUES ('Cep-Kamuy',888,1695); -- seismec_tail
 INSERT INTO `mob_skill_lists` VALUES ('Cep-Kamuy',888,1696); -- hypnic_lamp
 INSERT INTO `mob_skill_lists` VALUES ('Cep-Kamuy',888,1698); -- leeching_current
@@ -3807,9 +3817,14 @@ INSERT INTO `mob_skill_lists` VALUES ('Ash_Dragon',1177,645);
 INSERT INTO `mob_skill_lists` VALUES ('Ash_Dragon',1177,642);
 INSERT INTO `mob_skill_lists` VALUES ('Ash_Dragon',1177,649);
 INSERT INTO `mob_skill_lists` VALUES ('Ash_Dragon',1177,647);
-INSERT INTO `mob_skill_lists` VALUES('Infernal_Swarm',1178,334); -- sharp_sting
-INSERT INTO `mob_skill_lists` VALUES('Infernal_Swarm',1178,335); -- pollen
--- Next Available ID: 1179
+INSERT INTO `mob_skill_lists` VALUES ('Infernal_Swarm',1178,334); -- sharp_sting
+INSERT INTO `mob_skill_lists` VALUES ('Infernal_Swarm',1178,335); -- pollen
+INSERT INTO `mob_skill_lists` VALUES ('Celery_Ghosts',1179,472); -- grave reel
+INSERT INTO `mob_skill_lists` VALUES ('Celery_Ghosts',1179,473); -- ectosmash
+INSERT INTO `mob_skill_lists` VALUES ('Celery_Ghosts',1179,474); -- fear touch
+INSERT INTO `mob_skill_lists` VALUES ('Celery_Ghosts',1179,475); -- terror touch
+INSERT INTO `mob_skill_lists` VALUES ('Celery_Ghosts',1179,477); -- dark sphere
+-- INSERT INTO `mob_skill_lists` VALUES ('Celery_Ghosts',1179,1339); -- bane
 INSERT INTO `mob_skill_lists` VALUES ('Mind_Hoarder',1180,524);
 INSERT INTO `mob_skill_lists` VALUES ('Barbaric_Weapon',1181,514);
 INSERT INTO `mob_skill_lists` VALUES ('Marquis_Sabnock',1182,1149);

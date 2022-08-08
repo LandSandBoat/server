@@ -2,7 +2,6 @@
 -- Area: Horlais Peak
 --  Mob: Gerjis
 -- BCNM: Eye of the Tiger
--- TODO: code special attacks Crossthrash and Gerjis' Grip
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

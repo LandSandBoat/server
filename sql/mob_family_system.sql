@@ -530,6 +530,10 @@ INSERT INTO `mob_family_system` VALUES (504,'Luopan',0,'undefined',0,'Unclassifi
 INSERT INTO `mob_family_system` VALUES (505,'Fungi',0,'undefined',0,'Unclassified',0,0,130,180,1,3,4,3,6,6,5,1,3,1,3,4,2,0);
 INSERT INTO `mob_family_system` VALUES (506,'Meeble',189,'Meeble',7,'Beastmen',0,40,125,90,3,2,5,2,6,4,5,1,2,1,3,5,1,0);
 INSERT INTO `mob_family_system` VALUES (507,'MemoryReceptacleENM',0,'undefined',12,'Empty',2,40,200,0,1,3,5,4,2,2,5,1,3,1,3,0,256,0);
+INSERT INTO `mob_family_system` VALUES (508,'Annihilated_Anthony',28,'Ghost',19,'Undead',1,40,104,140,6,3,4,4,1,5,4,1,3,1,3,2,6,0);
+INSERT INTO `mob_family_system` VALUES (509,'Shredded_Samson',28,'Ghost',19,'Undead',1,40,104,140,6,3,4,4,1,5,4,1,3,1,3,2,6,0);
+INSERT INTO `mob_family_system` VALUES (510,'Punctured_Percy',28,'Ghost',19,'Undead',1,40,104,140,6,3,4,4,1,5,4,1,3,1,3,2,6,0);
+INSERT INTO `mob_family_system` VALUES (511,'Mauled_Murdock',28,'Ghost',19,'Undead',1,40,104,140,6,3,4,4,1,5,4,1,3,1,3,2,6,0);
 
 INSERT INTO `mob_family_system` VALUES (411,'Pet-Siren',16,'Siren',5,'Avatar',0,40,100,120,3,3,3,3,3,3,3,1,3,1,3,0,41,0);
 

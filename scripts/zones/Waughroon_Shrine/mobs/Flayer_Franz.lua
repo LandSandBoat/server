@@ -7,8 +7,8 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-entity.onMobSpawn = function(mob)
-    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
+entity.onMobEngaged = function(mob, target)
+    target:setPos(mob:getXPos() + 0.3, mob:getYPos(), mob:getZPos() + 0.3, mob:getRotPos())
 end
 
 entity.onMobDeath = function(mob, player, isKiller)

@@ -321,46 +321,46 @@ local loot =
     [106] =
     {
         {
-            {itemid =   857, droprate = 1000}, -- dhalmel_hide
+            {itemid = 857, droprate = 1000}, -- dhalmel_hide
         },
         {
-            {itemid =     0, droprate =  500}, -- nothing
-            {itemid =   893, droprate =  500}, -- giant_femur
+            {itemid =   0, droprate = 500}, -- nothing
+            {itemid = 893, droprate = 500}, -- giant_femur
         },
         {
-            {itemid =     0, droprate =  500}, -- nothing
-            {itemid =  4359, droprate =  500}, -- slice_of_dhalmel_meat
+            {itemid =    0, droprate = 500}, -- nothing
+            {itemid = 4359, droprate = 500}, -- slice_of_dhalmel_meat
         },
         {
-            {itemid =     0, droprate =  400}, -- nothing
-            {itemid = 13659, droprate =  150}, -- mercenary_mantle
-            {itemid = 13669, droprate =  150}, -- beaters_mantle
-            {itemid = 13665, droprate =  150}, -- esquires_mantle
-            {itemid = 13661, droprate =  150}, -- healers_mantle
+            {itemid =     0, droprate = 400}, -- nothing
+            {itemid = 13659, droprate = 150}, -- mercenary_mantle
+            {itemid = 13669, droprate = 150}, -- beaters_mantle
+            {itemid = 13665, droprate = 150}, -- esquires_mantle
+            {itemid = 13661, droprate = 150}, -- healers_mantle
         },
         {
-            {itemid =     0, droprate =  400}, -- nothing
-            {itemid = 12392, droprate =  200}, -- wizards_shield
-            {itemid = 12397, droprate =  200}, -- trimmers_aspis
-            {itemid = 12402, droprate =  200}, -- wyvern_targe
+            {itemid =     0, droprate = 400}, -- nothing
+            {itemid = 12392, droprate = 200}, -- wizards_shield
+            {itemid = 12397, droprate = 200}, -- trimmers_aspis
+            {itemid = 12402, droprate = 200}, -- wyvern_targe
         },
         {
-            {itemid =     0, droprate =  200}, -- nothing
-            {itemid =  4751, droprate =  200}, -- scroll_of_erase
-            {itemid =  4868, droprate =  200}, -- scroll_of_dispel
-            {itemid =  5070, droprate =  200}, -- scroll_of_magic_finale
-            {itemid =  4947, droprate =  200}, -- scroll_of_utsusemi_ni
+            {itemid =     0, droprate = 200}, -- nothing
+            {itemid =  4751, droprate = 200}, -- scroll_of_erase
+            {itemid =  4868, droprate = 200}, -- scroll_of_dispel
+            {itemid =  5070, droprate = 200}, -- scroll_of_magic_finale
+            {itemid =  4947, droprate = 200}, -- scroll_of_utsusemi_ni
         },
         {
-            {itemid =     0, droprate =  250}, -- nothing
-            {itemid =   828, droprate =  250}, -- square_of_velvet_cloth
-            {itemid =   826, droprate =  250}, -- square_of_linen_cloth
-            {itemid =   827, droprate =  250}, -- square_of_wool_cloth
+            {itemid =   0, droprate = 250}, -- nothing
+            {itemid = 828, droprate = 250}, -- square_of_velvet_cloth
+            {itemid = 826, droprate = 250}, -- square_of_linen_cloth
+            {itemid = 827, droprate = 250}, -- square_of_wool_cloth
         },
         {
-            {itemid =     0, droprate =  600}, -- nothing
-            {itemid =  1601, droprate =  200}, -- mannequin_head
-            {itemid =  1603, droprate =  200}, -- mannequin_hands
+            {itemid =    0, droprate = 600}, -- nothing
+            {itemid = 1601, droprate = 200}, -- mannequin_head
+            {itemid = 1603, droprate = 200}, -- mannequin_hands
         },
     },
     -- KSNM Early Bird Catches the Wyrm

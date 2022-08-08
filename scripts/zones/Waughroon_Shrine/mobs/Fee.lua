@@ -42,6 +42,7 @@ local function removeTentacle(mob, tentacles)
     mob:addMod(xi.mod.SLEEPRES, 10)
     mob:addMod(xi.mod.LULLABYRES, 10)
     mob:addMod(xi.mod.GRAVITYRES, 10)
+    mob:addMod(xi.mod.DELAY, -150)
 end
 
 entity.onMobFight = function(mob, target)
