@@ -63,6 +63,15 @@ hnmSystem:addOverride("xi.zones.Dragons_Aery.Zone.onInitialize", function(zone)
     GetNPCByID(dragonsAeryID.npc.FAFNIR_QM):setStatus(xi.status.DISAPPEAR)
 end)
 
+hnmSystem:addOverride("xi.zones.Dragons_Aery.mobs.Fafnir.onMobInitialize", function(mob)
+    SetDropRate(805, 1526, 100) -- wyrm beard 10%
+    SetDropRate(805, 3340, 0)   -- do not drop cup_of_sweet_tea
+end)
+
+hnmSystem:addOverride("xi.zones.Dragons_Aery.mobs.Nidhogg.onMobInitialize", function(mob)
+    SetDropRate(1781, 1526, 1000) -- wyrm beard 100%
+end)
+
 hnmSystem:addOverride("xi.zones.Dragons_Aery.mobs.Fafnir.onMobDespawn", function(mob)
     -- Server Variable work.
     local randomPopTime = 75600 + math.random(0, 6) * 1800
@@ -143,6 +152,15 @@ hnmSystem:addOverride("xi.zones.Valley_of_Sorrows.Zone.onInitialize", function(z
     GetNPCByID(valleySorrowsID.npc.ADAMANTOISE_QM):setStatus(xi.status.DISAPPEAR)
 end)
 
+hnmSystem:addOverride("xi.zones.Valley_of_Sorrows.mobs.Adamantoise.onMobInitialize", function(mob)
+    SetDropRate(21, 1525, 100) -- adamantoise egg 10%
+    SetDropRate(21, 3344, 0)   -- do not drop clump_of_red_pondweed
+end)
+
+hnmSystem:addOverride("xi.zones.Valley_of_Sorrows.mobs.Aspidochelone.onMobInitialize", function(mob)
+    SetDropRate(183, 1525, 1000) -- adamantoise egg 10%
+end)
+
 hnmSystem:addOverride("xi.zones.Valley_of_Sorrows.mobs.Adamantoise.onMobDespawn", function(mob)
     -- Server Variable work.
     local randomPopTime = 75600 + math.random(0, 6) * 1800
@@ -221,6 +239,17 @@ hnmSystem:addOverride("xi.zones.Behemoths_Dominion.Zone.onInitialize", function(
 
     -- Hide ??? NPC.
     GetNPCByID(behemothDomID.npc.BEHEMOTH_QM):setStatus(xi.status.DISAPPEAR)
+end)
+
+hnmSystem:addOverride("xi.zones.Behemoths_Dominion.mobs.Behemoth.onMobInitialize", function(mob)
+    SetDropRate(251, 1527, 100) -- behemoth tongue 10%
+    SetDropRate(251, 3342, 0) -- do not drop savory_shank
+end)
+
+hnmSystem:addOverride("xi.zones.Behemoths_Dominion.mobs.King_Behemoth.onMobInitialize", function(mob)
+    SetDropRate(1450, 1527, 1000) -- behemoth tongue 10%
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+    mob:setMobMod(xi.mobMod.MAGIC_COOL, 60)
 end)
 
 hnmSystem:addOverride("xi.zones.Behemoths_Dominion.mobs.Behemoth.onMobDespawn", function(mob)

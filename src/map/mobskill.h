@@ -27,10 +27,10 @@
 
 enum SKILLFLAG
 {
-    SKILLFLAG_NONE           = 0x000,
-    SKILLFLAG_ASTRAL_FLOW    = 0x002, // Player's Avatar Astral Flow blood pacts. TODO: give player pet skills their own separate enum, move avatar stuff there.
-    SKILLFLAG_NO_TP_COST     = 0x004, // Don't auto deduct TP
-    SKILLFLAG_HIT_ALL        = 0x008, // Strike players even if not in party/alliance
+    SKILLFLAG_NONE        = 0x000,
+    SKILLFLAG_ASTRAL_FLOW = 0x002, // Player's Avatar Astral Flow blood pacts. TODO: give player pet skills their own separate enum, move avatar stuff there.
+    SKILLFLAG_NO_TP_COST  = 0x004, // Don't auto deduct TP
+    SKILLFLAG_HIT_ALL     = 0x008, // Strike players even if not in party/alliance
     // unused                = 0x010,
     // unused                = 0x020,
     SKILLFLAG_BLOODPACT_RAGE = 0x040,
