@@ -26,6 +26,8 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mob.REGEN, 50)
     mob:setDamage(150)
     mob:setLocalVar("numAdds", 1)
+    mob:SetAutoAttackEnabled(true)
+    mob:SetMobAbilityEnabled(true)
     mob:SetMagicCastingEnabled(false)
 end
 
