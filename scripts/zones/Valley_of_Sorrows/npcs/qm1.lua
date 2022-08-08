@@ -17,7 +17,7 @@ entity.onTrade = function(player, npc, trade)
     if not GetMobByID(ID.mob.ADAMANTOISE):isSpawned() and not GetMobByID(ID.mob.ASPIDOCHELONE):isSpawned() then
         if npcUtil.tradeHasExactly(trade, xi.items.BLUE_PONDWEED) and npcUtil.popFromQM(player, npc, ID.mob.ADAMANTOISE) then
             player:confirmTrade()
-        elseif npcUtil.tradeHasExactly(trade, xi.items.RED_PONDWOOD) and npcUtil.popFromQM(player, npc, ID.mob.ASPIDOCHELONE) then
+        elseif npcUtil.tradeHasExactly(trade, xi.items.RED_PONDWEED) and npcUtil.popFromQM(player, npc, ID.mob.ASPIDOCHELONE) then
             player:confirmTrade()
         end
     end
