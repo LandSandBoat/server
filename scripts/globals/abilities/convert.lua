@@ -11,7 +11,11 @@ require("scripts/globals/status")
 local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)
-    return 0, 0
+    if player:getMP() > 0 then
+        return 0, 0
+    else
+        return xi.msg.basic.CANNOT_PERFORM, 0
+    end
 end
 
 ability_object.onUseAbility = function(player, target, ability)
