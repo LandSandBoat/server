@@ -118,7 +118,7 @@ mission.sections =
     -- Section: Mission Active and missionStatus == 2
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and missionStatus == 2
+            return currentMission == mission.missionId and missionStatus >= 2
         end,
 
         [xi.zone.STELLAR_FULCRUM] =
