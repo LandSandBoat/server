@@ -1,8 +1,8 @@
 -----------------------------------
 -- Area: Chocobo_Circuit
--- NPC: Pollante
+-- NPC: Vaihilique
 -- Standard Info NPC
--- !pos -325.119 -4.000 -430.698
+-- !pos -372.943 3.999 -524.775
 -----------------------------------
 local entity = {}
 
@@ -10,13 +10,13 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(237)
+    player:startEvent(243)
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
-entity.onEventFinish = function(player, csid, option)
+entity.onEventFinsih = function(player, csid, option)
 end
 
 return entity
