@@ -31,7 +31,7 @@ m:addOverride("xi.zones.Pashhow_Marshlands_[S].Zone.onInitialize", function(zone
 
     onTrigger = function(player, npc)
 		
-        if player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SEEING_BLOOD_RED) and not player:hasKeyItem(xi.ki.UNADDRESSED_SEALED_LETTER) then
+        if player:hasCompletedQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.DOWNWARD_HELIX) and not player:hasKeyItem(xi.ki.UNADDRESSED_SEALED_LETTER) then
             npcUtil.giveKeyItem(player, xi.ki.UNADDRESSED_SEALED_LETTER)
             player:setCharVar("[SCH]afstatus", 2)
         end
@@ -76,7 +76,7 @@ local sch_af3 = zone:insertDynamicEntity({ -- Sch af3 fix
                 player:messageSpecial(ID.text.ITEM_OBTAINED, 16140)
                 player:delKeyItem(xi.ki.UNADDRESSED_SEALED_LETTER)
                 player:setCharVar("[SCH]afstatus", 3)	
-                player:completeQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.DOWNWARD_HELIX)			
+                player:completeQuest(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SEEING_BLOOD_RED)			
 		    end
 		end,
     })
