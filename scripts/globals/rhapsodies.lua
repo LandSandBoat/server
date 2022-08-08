@@ -100,7 +100,7 @@ xi.rhapsodies.unavailability =
         xi.mission.id.wotg.DUNGEONS_AND_DANCERS,
         xi.mission.id.wotg.DISTORTER_OF_TIME,
         xi.mission.id.wotg.THE_WILL_OF_THE_WORLD,
-        xi.mission.id.wotg.ADIEU__LILISETTE,
+        xi.mission.id.wotg.ADIEU_LILISETTE,
         xi.mission.id.wotg.BY_THE_FADING_LIGHT,
         xi.mission.id.wotg.EDGE_OF_EXISTENCE,
         xi.mission.id.wotg.HER_MEMORIES,

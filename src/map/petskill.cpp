@@ -64,26 +64,15 @@ bool CPetSkill::isSingle() const
     return m_Aoe == 0;
 }
 
-bool CPetSkill::isTwoHour() const
+bool CPetSkill::isTpFreeSkill() const
 {
-    // flag means this skill is a real two hour
-    return m_Flag & SKILLFLAG_TWO_HOUR;
+    // Do not remove users TP when using the skill
+    return m_Flag & SKILLFLAG_NO_TP_COST;
 }
 
-bool CPetSkill::isAttackReplacement() const
+bool CPetSkill::isAstralFlow() const
 {
-    return m_Flag & SKILLFLAG_REPLACE_ATTACK;
-}
-
-bool CPetSkill::isTpSkill() const
-{
-    return !isSpecial() && !isAttackReplacement();
-}
-
-bool CPetSkill::isSpecial() const
-{
-    // means it is a ranged attack or call beast, etc..
-    return m_Flag & SKILLFLAG_SPECIAL;
+    return m_Flag & SKILLFLAG_ASTRAL_FLOW;
 }
 
 bool CPetSkill::isBloodPactRage() const

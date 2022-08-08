@@ -5,7 +5,7 @@
 -- Recast Time: 0:15
 -- Duration: 3:00
 -----------------------------------
-require("scripts/globals/status")
+require("scripts/globals/job_utils/monk")
 -----------------------------------
 local ability_object = {}
 
@@ -14,15 +14,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    local power = 12.5 + (0.10 * player:getMod(xi.mod.BOOST_EFFECT))
-
-    if player:hasStatusEffect(xi.effect.BOOST) then
-        local effect = player:getStatusEffect(xi.effect.BOOST)
-        effect:setPower(effect:getPower() + power)
-        player:addMod(xi.mod.ATTP, power)
-    else
-        player:addStatusEffect(xi.effect.BOOST, power, 0, 180)
-    end
+    xi.job_utils.monk.useBoost(player, target, ability)
 end
 
 return ability_object
