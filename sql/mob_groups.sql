@@ -4304,7 +4304,7 @@ INSERT INTO `mob_groups` VALUES (25,656,81,'Carrion_Worm',330,0,428,0,0,10,12,0)
 INSERT INTO `mob_groups` VALUES (26,4658,81,'Myradrosh',0,128,3066,4444,0,53,53,0);
 INSERT INTO `mob_groups` VALUES (27,1072,81,'Djinn',330,0,671,0,0,53,55,0);
 INSERT INTO `mob_groups` VALUES (28,1103,81,'Battrap',330,0,243,0,0,35,37,0);
-INSERT INTO `mob_groups` VALUES (29,4655,81,'Goblintrap',0,32,3021,4800,0,60,60,0);
+INSERT INTO `mob_groups` VALUES (29,4655,81,'Goblintrap',3600,32,3021,4800,0,60,60,0); 
 INSERT INTO `mob_groups` VALUES (30,6358,81,'Walking_Tree',330,0,2605,0,0,53,54,0);
 INSERT INTO `mob_groups` VALUES (31,3653,81,'Skogs_Fru',0,32,2269,4700,0,60,65,0);
 INSERT INTO `mob_groups` VALUES (32,6266,81,'Orcish_Mesmerizer',330,0,1884,0,0,62,64,0);
