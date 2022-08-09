@@ -21,7 +21,7 @@ entity.onMobFight = function(mob, target)
         mob:setLocalVar("deathID", math.random(1,5))
 
         for i = 1, 5 do
-            SpawnMob(mob:getID()+i)
+            SpawnMob(mob:getID()+i):updateEnmity(target)
         end
     end
 
