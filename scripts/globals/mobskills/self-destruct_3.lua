@@ -19,6 +19,11 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = 1
     local bombTossHPP = skill:getMobHPP() / 100
 
+    -- Razon - ENM: Fire in the Sky
+    if mob:getHPP() <= 66 and mob:getPool() == 3333 then
+        bombTossHPP = 0
+    end
+
     local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg()*18*bombTossHPP, xi.magic.ele.FIRE, dmgmod, xi.mobskills.magicalTpBonus.MAB_BONUS, 1)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 

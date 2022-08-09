@@ -5142,9 +5142,9 @@ INSERT INTO `mob_spell_lists` VALUES ('Caithleann',508,348,44,72);  -- kurayami_
 INSERT INTO `mob_spell_lists` VALUES ('Caithleann',508,351,56,74);  -- dokumori_ni (56~74)
 
 -- Indich (509)
-INSERT INTO `mob_spell_lists` VALUES('Kurrea', 509, 112, 1, 255); -- flash (1~255)
-INSERT INTO `mob_spell_lists` VALUES('Kurrea', 509, 376, 1, 255); -- horde_lullaby (1~255)
-INSERT INTO `mob_spell_lists` VALUES('Kurrea', 509, 463, 1, 255); -- foe_lullaby (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Kurrea',509,112,1,255); -- flash (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Kurrea',509,376,1,255); -- horde_lullaby (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Kurrea',509,463,1,255); -- foe_lullaby (1~255)
 
 -- Pilwiz (510)
 INSERT INTO `mob_spell_lists` VALUES('Pilwiz', 510, 190, 1, 255); -- Stonega II (1~255)
@@ -5153,6 +5153,9 @@ INSERT INTO `mob_spell_lists` VALUES('Pilwiz', 510, 190, 1, 255); -- Stonega II 
 INSERT INTO `mob_spell_lists` VALUES('Generic_Doll', 511, 194, 1, 255); -- Thundaga (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Generic_Doll', 511, 251, 1, 255); -- Shock Spikes (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Generic_Doll', 511, 356, 1, 255); -- Paralyga (1~255)
+
+-- Hamadryad (512)
+INSERT INTO `mob_spell_lists` VALUES('Hamadryad',512,145,1,255); -- fire_ii (1~255)
 
 -- AirSkyBoat Specific Starts at 5000
 -- 5000 -> 5010 is Era Dynamis

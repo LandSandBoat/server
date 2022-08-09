@@ -1382,6 +1382,12 @@ INSERT INTO `bcnm_battlefield` VALUES (960,3,16904201,3);
 INSERT INTO `bcnm_battlefield` VALUES (961,1,16904202,3); -- savage
 INSERT INTO `bcnm_battlefield` VALUES (961,2,16904203,3);
 INSERT INTO `bcnm_battlefield` VALUES (961,3,16904204,3);
+INSERT INTO `bcnm_battlefield` VALUES (962,1,16904211,3); -- Fire in the Sky
+INSERT INTO `bcnm_battlefield` VALUES (962,2,16904213,3);
+INSERT INTO `bcnm_battlefield` VALUES (962,3,16904215,3);
+INSERT INTO `bcnm_battlefield` VALUES (963,1,16904205,3); -- Bad Seed
+INSERT INTO `bcnm_battlefield` VALUES (963,2,16904207,3);
+INSERT INTO `bcnm_battlefield` VALUES (963,3,16904209,3);
 INSERT INTO `bcnm_battlefield` VALUES (966,1,16904232,0); -- uninvited guests
 INSERT INTO `bcnm_battlefield` VALUES (966,1,16904233,3);
 INSERT INTO `bcnm_battlefield` VALUES (966,1,16904234,2);

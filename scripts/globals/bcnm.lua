@@ -105,8 +105,8 @@ local battlefields =
     {
         { 0,  960,    0},   -- Ancient Vows (PM2-5)
         { 1,  961,    0},   -- The Savage (PM4-2)
-     -- { 2,  962,    0},   -- Fire in the Sky (ENM)
-     -- { 3,  963,    0},   -- Bad Seed (ENM)
+        { 2,  962,    0},   -- Fire in the Sky (ENM)
+        { 3,  963,    0},   -- Bad Seed (ENM)
      -- { 4,  964,    0},   -- Bugard in the Clouds (ENM)
      -- { 5,  965,    0},   -- Beloved of the Atlantes (ENM)
         { 6,  966,    0},   -- Uninvited Guests (Quest)

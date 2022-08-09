@@ -1107,7 +1107,10 @@ INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1746);
 -- INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1748);
 -- INSERT INTO `mob_skill_lists` VALUES ('Troll',246,1749);
 -- 247: Tube
--- 248: free
+INSERT INTO `mob_skill_lists` VALUES ('Razon',248,567);
+INSERT INTO `mob_skill_lists` VALUES ('Razon',248,568);
+INSERT INTO `mob_skill_lists` VALUES ('Razon',248,569);
+INSERT INTO `mob_skill_lists` VALUES ('Razon',248,570);
 INSERT INTO `mob_skill_lists` VALUES ('Ullikummi',249,1035);
 INSERT INTO `mob_skill_lists` VALUES ('Uragnite_shell',250,1571); -- gas_shell
 INSERT INTO `mob_skill_lists` VALUES ('Uragnite_shell',250,1572); -- venom_shell
