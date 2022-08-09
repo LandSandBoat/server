@@ -65,21 +65,21 @@ local battlefields =
     [xi.zone.SPIRE_OF_HOLLA] =
     {
         { 0,  768,    0},   -- Ancient Flames Beckon (PM1-3)
-     -- { 1,  769,    0},   -- Simulant (ENM)
+        { 1,  769,    0},   -- Simulant (ENM)
      -- { 2,  770, 3351},   -- Empty Hopes (KC30)
     },
 
     [xi.zone.SPIRE_OF_DEM] =
     {
         { 0,  800,    0},   -- Ancient Flames Beckon (PM1-3)
-     -- { 1,  801,    0},   -- You Are What You Eat (ENM)
+        { 1,  801,    0},   -- You Are What You Eat (ENM)
      -- { 2,  802, 3351},   -- Empty Dreams (KC30)
     },
 
     [xi.zone.SPIRE_OF_MEA] =
     {
         { 0,  832,    0},   -- Ancient Flames Beckon (PM1-3)
-     -- { 1,  833,    0},   -- Playing Host (ENM)
+        { 1,  833,    0},   -- Playing Host (ENM)
      -- { 2,  834, 3351},   -- Empty Desires (KC30)
     },
 

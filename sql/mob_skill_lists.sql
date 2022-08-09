@@ -1939,7 +1939,11 @@ INSERT INTO `mob_skill_lists` VALUES ('Capricious_Cassie',411,726);
 INSERT INTO `mob_skill_lists` VALUES ('Capricious_Cassie',411,727);
 INSERT INTO `mob_skill_lists` VALUES ('Capricious_Cassie',411,728);
 INSERT INTO `mob_skill_lists` VALUES ('Shooting_Fish',412,1865); -- knockback splashbreath
--- 413 to 431: free
+INSERT INTO `mob_skill_lists` VALUES ('Cogitator',413,1242); -- empty cutter
+INSERT INTO `mob_skill_lists` VALUES ('Cogitator',413,1243); -- trinary tap
+INSERT INTO `mob_skill_lists` VALUES ('Cogitator',413,1251); -- trinary tap
+INSERT INTO `mob_skill_lists` VALUES ('Cogitator',413,1252); -- shadow spread
+-- 414 to 431: free
 INSERT INTO `mob_skill_lists` VALUES ('Gilagoge_Tlugvi',432,332); -- entangle
 INSERT INTO `mob_skill_lists` VALUES ('Goga_Tlugvi',433,2162); -- leafstorm
 INSERT INTO `mob_skill_lists` VALUES ('Ulagohvsdi_Tlugvi',434,2162); -- pinecone bomb
