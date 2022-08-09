@@ -112,7 +112,6 @@ zones[xi.zone.QUICKSAND_CAVES] =
             [3] = {479.000, -14.000, -815.000},
             [4] = {814.000, -14.000, -761.000}
         },
-        CASKET_BASE            = 17629671,
         ORNATE_DOOR_OFFSET     = 17629693,
         CHAINS_THAT_BIND_US_QM = 17629746,
         TREASURE_COFFER        = 17629747,

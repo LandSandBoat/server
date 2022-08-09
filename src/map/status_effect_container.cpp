@@ -1461,7 +1461,7 @@ void CStatusEffectContainer::RemoveAllStatusEffectsInIDRange(EFFECT start, EFFEC
 
 /************************************************************************
  *                                                                       *
- *  Устанавливаем имя эффекта для работы со скриптами                    *
+ *  Install the name of the effect to work with scripts                  *
  *                                                                       *
  ************************************************************************/
 
@@ -1475,8 +1475,15 @@ void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
     EFFECT      effect = StatusEffect->GetStatusID();
 
     // Determine if this is a BRD Song or COR Effect.
-    if (StatusEffect->GetSubID() == 0 || StatusEffect->GetSubID() > 20000 || (effect >= EFFECT_REQUIEM && effect <= EFFECT_NOCTURNE) ||
-        (effect >= EFFECT_DOUBLE_UP_CHANCE && effect <= EFFECT_NATURALISTS_ROLL) || effect == EFFECT_RUNEISTS_ROLL)
+    if (StatusEffect->GetSubID() == 0 ||
+        StatusEffect->GetSubID() > 20000 ||
+        (effect >= EFFECT_REQUIEM && effect <= EFFECT_NOCTURNE) ||
+        (effect >= EFFECT_DOUBLE_UP_CHANCE && effect <= EFFECT_NATURALISTS_ROLL) ||
+        effect == EFFECT_RUNEISTS_ROLL ||
+        effect == EFFECT_DRAIN_DAZE ||
+        effect == EFFECT_ASPIR_DAZE ||
+        effect == EFFECT_HASTE_DAZE ||
+        effect == EFFECT_BATTLEFIELD)
     {
         name.insert(0, "globals/effects/");
         name.insert(name.size(), effects::EffectsParams[effect].Name);
@@ -1490,6 +1497,7 @@ void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
             name.insert(name.size(), (const char*)Ptem->getName());
         }
     }
+
     StatusEffect->SetName(name);
     StatusEffect->SetFlag(effects::EffectsParams[effect].Flag);
     StatusEffect->SetType(effects::EffectsParams[effect].Type);
@@ -1906,13 +1914,13 @@ void CStatusEffectContainer::TickRegen(time_point tick)
                         CItem*      hands = PChar->getEquip(SLOT_HANDS);
 
                         if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_AVATARS_FAVOR) &&
-                            PPet->m_PetID >= PETID_CARBUNCLE && PPet->m_PetID <= PETID_CAIT_SITH)
+                            ((PPet->m_PetID >= PETID_CARBUNCLE && PPet->m_PetID <= PETID_CAIT_SITH) || PPet->m_PetID == PETID_SIREN))
                         {
                             perpetuation = static_cast<int16>(perpetuation * 1.2);
                         }
 
                         // carbuncle mitts only work on carbuncle
-                        if (hands && hands->getID() == 14062 && PPet->name == "Carbuncle")
+                        if (hands && hands->getID() == 14062 && PPet->m_PetID == PETID_CARBUNCLE)
                         {
                             perpetuation /= 2;
                         }

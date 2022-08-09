@@ -4,13 +4,13 @@
 -- Spawns Fear Gorta
 -- !pos 630.000 33.608 410.000 15
 -----------------------------------
+local ID = require('scripts/zones/Abyssea-Konschtat/IDs')
 require('scripts/globals/abyssea')
 require('scripts/globals/items')
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local ID = zones[player:getZoneID()]
     xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.FEAR_GORTA, { xi.items.SQUARE_OF_MOONGLOW_CLOTH })
 end
 

@@ -1,6 +1,7 @@
 -----------------------------------
 -- Warrior Job Utilities
 -----------------------------------
+require('scripts/globals/items')
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
@@ -22,8 +23,13 @@ xi.job_utils.warrior.checkMightyStrikes = function(player, target, ability)
 end
 
 xi.job_utils.warrior.checkTomahawk = function(player, target, ability)
-    --Placeholder code. Needs to check for direction and equiped ammo.
-    return 0, 0
+    local ammoID = player:getEquipID(xi.slot.AMMO)
+
+    if ammoID == xi.items.THROWING_TOMAHAWK then
+        return 0, 0
+    else
+        return xi.msg.basic.CANNOT_PERFORM, 0
+    end
 end
 
 -----------------------------------
@@ -39,7 +45,10 @@ xi.job_utils.warrior.useBerserk = function(player, target, ability)
 end
 
 xi.job_utils.warrior.useBloodRage = function(player, target, ability)
-    player:addStatusEffect(xi.effect.BLOOD_RAGE, 1, 0, 30)
+    local power = 20 + player:getJobPointLevel(xi.jp.BLOOD_RAGE_EFFECT)
+    local duration = 30 + player:getMod(xi.mod.ENHANCES_BLOOD_RAGE)
+
+    player:addStatusEffect(xi.effect.BLOOD_RAGE, power, 0, duration)
 end
 
 xi.job_utils.warrior.useBrazenRush = function(player, target, ability)
@@ -55,7 +64,7 @@ xi.job_utils.warrior.useMightyStrikes = function(player, target, ability)
 end
 
 xi.job_utils.warrior.useRestraint = function(player, target, ability)
-    --placeholder
+    player:addStatusEffect(xi.effect.RESTRAINT, 0, 0, 300)
 end
 
 xi.job_utils.warrior.useRetaliation = function(player, target, ability)
@@ -63,7 +72,11 @@ xi.job_utils.warrior.useRetaliation = function(player, target, ability)
 end
 
 xi.job_utils.warrior.useTomahawk = function(player, target, ability)
-    --placeholder
+    local merits = player:getMerit(xi.merit.TOMAHAWK) - 15
+    local duration = 30 + merits
+
+    target:addStatusEffectEx(xi.effect.TOMAHAWK, 0, 25, 3, duration, 0, 0, 0)
+    player:removeAmmo()
 end
 
 xi.job_utils.warrior.useWarcry = function(player, target, ability)
