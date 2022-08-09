@@ -2280,7 +2280,8 @@ INSERT INTO `mob_droplist` VALUES (221,2,0,1000,4362,0);  -- Lizard Egg (Steal)
 INSERT INTO `mob_droplist` VALUES (222,0,0,1000,825,250);        -- Square Of Cotton Cloth (25.0%)
 INSERT INTO `mob_droplist` VALUES (222,0,0,1000,940,@UNCOMMON);  -- Revival Tree Root (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (222,0,0,1000,4871,@UNCOMMON); -- Scroll Of Escape (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (222,2,0,1000,529,20);         -- Luminicloth (Steal)
+INSERT INTO `mob_droplist` VALUES (222,0,0,1000,529,20);         -- Luminicloth (2%)
+INSERT INTO `mob_droplist` VALUES (222,2,0,1000,825,0);          -- Square Of Cotton Cloth (Steal)
 
 -- ZoneID: 157 - Banshee
 INSERT INTO `mob_droplist` VALUES (223,0,0,1000,825,200);        -- Square Of Cotton Cloth (20.0%)
