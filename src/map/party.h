@@ -107,19 +107,19 @@ public:
 
 private:
     struct partyInfo_t;
-    uint32    m_PartyID;     // уникальный ID группы
-    PARTYTYPE m_PartyType;   // тип существ, составляющих группу
+    uint32    m_PartyID;     // unique party ID
+    PARTYTYPE m_PartyType;   // the type of party (players or mobs)
     uint8     m_PartyNumber; // party number in alliance
 
-    CBattleEntity* m_PLeader;       // лидер группы
-    CBattleEntity* m_PSyncTarget;   // цель синхронизации уровней
-    CBattleEntity* m_PQuaterMaster; // владелец сокровищ
+    CBattleEntity* m_PLeader;        // party leader
+    CBattleEntity* m_PSyncTarget;    // the CBattleEntity the party is being synced to
+    CBattleEntity* m_PQuarterMaster; // the assigned Quartermaster
 
     bool m_EffectsChanged;
 
-    void                     SetLeader(const char* MemberName);         // устанавливаем лидера группы
-    void                     SetQuarterMaster(const char* MemberName);  // устанавливаем владельца сокровищ
-    void                     RemovePartyLeader(CBattleEntity* PEntity); // лидер покидает группу
+    void                     SetLeader(const char* MemberName);         // set party leader
+    void                     SetQuarterMaster(const char* MemberName);  // set Quartermaster
+    bool                     RemovePartyLeader(CBattleEntity* PEntity); // attempt to remove the leader of the party. Returns false if party is disbanded or otherwise invalid.
     std::vector<partyInfo_t> GetPartyInfo() const;
     void                     RefreshFlags(std::vector<partyInfo_t>&);
 };
