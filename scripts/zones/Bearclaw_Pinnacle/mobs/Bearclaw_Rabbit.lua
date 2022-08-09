@@ -8,7 +8,7 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:setModMod(xi.mobMod.SIGHT_RANGE, 20)
+    mob:setMobMod(xi.mobMod.SIGHT_RANGE, 20)
 end
 
 entity.onMobEngaged = function(mob)
