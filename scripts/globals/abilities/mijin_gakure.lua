@@ -25,8 +25,8 @@ ability_object.onUseAbility = function(player, target, ability)
     dmg = dmg * (1 + (player:getJobPointLevel(xi.jp.MIJIN_GAKURE_EFFECT) * 0.03))
     dmg = dmg * resist
 
-    if player:hasStatusEffect(tpz.effect.WEAKNESS) then
-        player:delStatusEffect(tpz.effect.WEAKNESS)
+    if player:hasStatusEffect(xi.effect.WEAKNESS) then
+        player:delStatusEffect(xi.effect.WEAKNESS)
     end
 
     dmg = utils.stoneskin(target, dmg)

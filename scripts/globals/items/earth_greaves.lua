@@ -29,3 +29,5 @@ item_object.onItemUse = function(target)
         wyvern:addStatusEffect(xi.effect.STONESKIN, 200, 0, 180)
     end
 end
+
+return item_object

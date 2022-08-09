@@ -1567,7 +1567,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
     // loop for barrage hits, if a miss occurs, the loop will end
     for (uint8 i = 1; i <= hitCount; ++i)
     {
-        if (tpzrand::GetRandomNumber(100) < battleutils::GetRangedHitRate(this, PTarget, isBarrage)) // hit!
+        if (xirand::GetRandomNumber(100) < battleutils::GetRangedHitRate(this, PTarget, isBarrage)) // hit!
         {
             // absorbed by shadow
             if (battleutils::IsAbsorbByShadow(PTarget))
@@ -1747,7 +1747,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
             retainChance = 100;
         }
 
-        if (tpzrand::GetRandomNumber(100) > retainChance)
+        if (xirand::GetRandomNumber(100) > retainChance)
         {
             // Camouflage was up, but is lost, so now all detectable effects must be dropped
             StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
@@ -1940,20 +1940,21 @@ void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
     if (PItem->getAoE())
     {
         // clang-format off
-        PTarget->ForParty([this, PItem, PTarget, isParalyzed](CBattleEntity* PMember)
+        if (PTarget->PParty)
         {
-            // Trigger for the item user last to prevent any teleportation miscues (Tidal Talisman)
-            if (this->id == PMember->id)
-                continue;
-
-            if (!PMember->isDead() && distance(PTarget->loc.p, PMember->loc.p) <= 10 && !isParalyzed)
+            for (CBattleEntity* PMember : PTarget->PParty->members)
             {
-                luautils::OnItemUse(this, PMember, PItem);
-            }
-        });
-
+                // Trigger for the item user last to prevent any teleportation miscues (Tidal Talisman)
+                if (this->id == PMember->id)
+                    continue;
+                if (!PMember->isDead() && distanceSquared(PTarget->loc.p, PMember->loc.p) < 10.0f * 10.0f && !isParalyzed)
+                {
+                    luautils::OnItemUse(this, PTarget, PItem);
+                }
+            };
+        }
         // Triggering for item user
-        luautils::OnItemUse(this, PItem, this);
+        luautils::OnItemUse(this, PTarget, PItem);
         // clang-format on
     }
     else
