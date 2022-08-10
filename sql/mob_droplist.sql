@@ -26790,14 +26790,14 @@ INSERT INTO `mob_droplist` VALUES (3228,0,0,1000,1181,@RARE);     -- Goobbue Hum
 INSERT INTO `mob_droplist` VALUES (3228,0,0,1000,1052,@UNCOMMON); -- Boyahda Coffer Key (Uncommon, 10%)
 
 -- ZoneID: 153 - Korrigan
-INSERT INTO `mob_droplist` VALUES (3229,0,0,1000,4368,@ALWAYS);   -- Two Leaf Mandragora Bud (Always, 100%)
-INSERT INTO `mob_droplist` VALUES (3229,0,0,1000,17868,@ALWAYS);  -- Jug of Humus (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3229,0,0,1000,4368,@VRARE);    -- Two Leaf Mandragora Bud (Very rare, 10%)
+INSERT INTO `mob_droplist` VALUES (3229,0,0,1000,17868,@VRARE);   -- Jug of Humus (Very rare, 10%)
 INSERT INTO `mob_droplist` VALUES (3229,0,0,1000,1265,@VRARE);    -- Four Leaf Korrigan Bud (Very rare, 10%)
 INSERT INTO `mob_droplist` VALUES (3229,4,0,1000,4368,0);         -- Two Leaf Mandragora Bud (Despoil)
 
 -- ZoneID: 153 - Boyahda Sapling
 INSERT INTO `mob_droplist` VALUES (3230,0,0,1000,953,@VCOMMON);   -- Treant Bulb (Very common, 24%)
-INSERT INTO `mob_droplist` VALUES (3230,0,0,1000,574,@VRARE);         -- Fruit seeds (Very rare, 10%)
+INSERT INTO `mob_droplist` VALUES (3230,0,0,1000,574,@VRARE);     -- Fruit seeds (Very rare, 10%)
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;
