@@ -4742,9 +4742,9 @@ INSERT INTO `synth_recipes` VALUES (75520,1,0,0,0,85,0,0,0,0,0,4100,4242,13414,0
 INSERT INTO `synth_recipes` VALUES (75521,1,0,0,0,85,0,0,0,0,0,4100,4242,14719,0,0,0,0,0,0,0,813,813,746,746,1,1,1,2,'Heavens_Earring_+1_Desynth');
 INSERT INTO `synth_recipes` VALUES (75522,0,0,70,0,0,0,0,0,0,0,4102,4244,9091,0,0,0,0,0,0,0,19320,19320,19320,19320,1,1,1,1,'Lu Shang\'s Fishing Rod +1'); -- BGWiki and JP Wiki
 INSERT INTO `synth_recipes` VALUES (75523,1,0,0,0,92,0,0,0,0,0,4100,4242,13185,0,0,0,0,0,0,0,650,650,1117,745,1,1,1,1,'Muscle_Belt_Desynth'); -- ffxiclopedia
-INSERT INTO `synth_recipes` VALUES (75523,1,0,0,100,0,0,0,0,0,0,4100,4242,17252,0,0,0,0,0,0,0,1231,717,654,655,1,1,1,1,'Culverin (desynth)'); -- FFXIClopedia and JP Wiki
-INSERT INTO `synth_recipes` VALUES (75524,1,0,0,0,0,0,0,96,0,0,4100,4242,15813,0,0,0,0,0,0,0,5466,5466,5466,5466,1,1,1,1,'Trumpet ring (desynth)');
-INSERT INTO `synth_recipes` VALUES (75525,1,0,0,0,0,0,0,96,0,0,4100,4242,15814,0,0,0,0,0,0,0,5466,5466,5466,5466,1,1,1,1,'Nereid ring (desynth)');
+INSERT INTO `synth_recipes` VALUES (75524,1,0,0,100,0,0,0,0,0,0,4100,4242,17252,0,0,0,0,0,0,0,1231,717,654,655,1,1,1,1,'Culverin (desynth)'); -- FFXIClopedia and JP Wiki
+INSERT INTO `synth_recipes` VALUES (75525,1,0,0,0,0,0,0,96,0,0,4100,4242,15813,0,0,0,0,0,0,0,5466,5466,5466,5466,1,1,1,1,'Trumpet ring (desynth)');
+INSERT INTO `synth_recipes` VALUES (75526,1,0,0,0,0,0,0,96,0,0,4100,4242,15814,0,0,0,0,0,0,0,5466,5466,5466,5466,1,1,1,1,'Nereid ring (desynth)');
 
 -- -----------
 -- RECIPES END
