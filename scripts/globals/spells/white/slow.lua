@@ -13,6 +13,11 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
+    if target:hasStatusEffect(xi.effect.HASTE) then
+        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
+        return xi.effect.SLOW
+    end
+
     local dMND = caster:getStat(xi.mod.MND) - target:getStat(xi.mod.MND)
 
     --Power

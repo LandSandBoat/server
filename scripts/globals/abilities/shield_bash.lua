@@ -39,11 +39,11 @@ ability_object.onUseAbility = function(player, target, ability)
     end
 
     -- Main job factors
-    if player:getMainJob() ~= xi.job.PLD then
-        damage = math.floor(damage / 2.5)
-        chance = 60
-    else
+    if player:getMainJob() == xi.job.PLD then
         damage = math.floor(damage)
+    else
+        damage = math.floor(damage / 2.2)
+        chance = 80
     end
 
     damage = damage + jpValue * 10

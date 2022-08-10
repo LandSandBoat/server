@@ -142,19 +142,16 @@ int32 time_server(time_point tick, CTaskMgr::CTask* PTask)
         TracyZoneScoped;
         zoneutils::TOTDChange(VanadielTOTD);
 
-        if ((VanadielTOTD == TIME_DAY) || (VanadielTOTD == TIME_DUSK) || (VanadielTOTD == TIME_NIGHT))
+        // clang-format off
+        zoneutils::ForEachZone([](CZone* PZone)
         {
-            // clang-format off
-            zoneutils::ForEachZone([](CZone* PZone)
+            PZone->ForEachChar([](CCharEntity* PChar)
             {
-                PZone->ForEachChar([](CCharEntity* PChar)
-                {
-                    PChar->PLatentEffectContainer->CheckLatentsDay();
-                    PChar->PLatentEffectContainer->CheckLatentsJobLevel();
-                });
+                PChar->PLatentEffectContainer->CheckLatentsDay();
+                PChar->PLatentEffectContainer->CheckLatentsJobLevel();
             });
-            // clang-format on
-        }
+        });
+        // clang-format on
 
         fishingutils::RestockFishingAreas();
     }

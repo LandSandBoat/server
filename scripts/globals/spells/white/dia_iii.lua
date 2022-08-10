@@ -40,6 +40,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     local final = finalMagicAdjustments(caster, target, spell, dmg)
 
     -- Calculate duration and bonus
+    local merits = caster:getMerit(xi.merit.DIA_III)
     local duration = calculateDuration(180, spell:getSkillType(), spell:getSpellGroup(), caster, target)
     local dotBonus = caster:getMod(xi.mod.DIA_DOT) -- Dia Wand
 
@@ -47,14 +48,22 @@ spell_object.onSpellCast = function(caster, target, spell)
     -- Check for Bio
     local bio = target:getStatusEffect(xi.effect.BIO)
 
-    if  bio == nil then -- if no bio, just add dia dot
-        target:addStatusEffect(xi.effect.DIA, 3 + dotBonus, 3, duration, 0, 20, 3)
+    if bio == nil then -- if no bio, just add dia dot
+        if caster:isPC() then
+            target:addStatusEffect(xi.effect.DIA, 3 + dotBonus, 3, merits, 0, 20, 3)
+        else
+            target:addStatusEffect(xi.effect.DIA, 3 + dotBonus, 3, duration, 0, 20, 3)
+        end
     elseif
         bio:getSubPower() <= 15 or
         (xi.settings.main.BIO_OVERWRITE == 1 and bio:getSubPower() <= 20) -- also erase same tier bio if BIO_OVERWRITE option is on (non-default)
     then -- erase lower tier bio and add dia dot
         target:delStatusEffect(xi.effect.BIO)
-        target:addStatusEffect(xi.effect.DIA, 3 + dotBonus, 3, duration, 0, 20, 3)
+        if caster:isPC() then
+            target:addStatusEffect(xi.effect.DIA, 3 + dotBonus, 3, merits, 0, 20, 3)
+        else
+            target:addStatusEffect(xi.effect.DIA, 3 + dotBonus, 3, duration, 0, 20, 3)
+        end
     end
 
     return final

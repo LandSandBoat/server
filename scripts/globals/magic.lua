@@ -318,14 +318,49 @@ function calculateMagicDamage(caster, target, spell, params)
 end
 
 function doEnspell(caster, target, spell, effect)
-    local duration = calculateDuration(180, spell:getSkillType(), spell:getSpellGroup(), caster, target)
+    -- Calculate Bonus duration
+    local baseDuration = 0
+    if caster:getEquipID(xi.slot.MAIN) == xi.items.BUZZARD_TUCK then
+        baseDuration = 210
+    else
+        baseDuration = 180
+    end
+
+    local duration = calculateDuration(baseDuration, spell:getSkillType(), spell:getSpellGroup(), caster, target)
 
     --calculate potency
     local magicskill = caster:getSkillLevel(xi.skill.ENHANCING_MAGIC)
 
-    local potency = 3 + math.floor(6 * magicskill / 100)
-    if magicskill > 200 then
-        potency = 5 + math.floor(5 * magicskill / 100)
+    -- Add effect bonuses from equipment
+    local potencybonus = 0
+    if caster:getEquipID(xi.slot.MAIN) == xi.items.BUZZARD_TUCK then
+        potencybonus = 2 + potencybonus
+    elseif caster:getEquipID(xi.slot.EAR1) == xi.items.LYCOPODIUM_EARRING or caster:getEquipID(xi.slot.EAR2) == xi.items.LYCOPODIUM_EARRING then
+        potencybonus = 2 + potencybonus
+    elseif caster:getEquipID(xi.slot.EAR1) == xi.items.HOLLOW_EARRING or caster:getEquipID(xi.slot.EAR2) == xi.items.HOLLOW_EARRING then
+        potencybonus = 3 + potencybonus
+    elseif(caster:getHPP() <= 75 and caster:getTP() <= 100) and
+    (caster:getEquipID(xi.slot.RING1) == xi.items.FENCERS_RING or caster:getEquipID(xi.slot.RING2) == xi.items.FENCERS_RING) then
+        potencybonus = 5 + potencybonus
+    elseif caster:getEquipID(xi.slot.MAIN) == xi.items.ENHANCING_SWORD then
+        potencybonus = 5 + potencybonus
+    end
+
+    -- Potency with Effect Bonus
+    local potency = 0
+    if (caster:getWeaponSkillType(xi.slot.MAIN) == xi.skill.SWORD or caster:getWeaponSkillType(xi.slot.SUB) == xi.skill.SWORD) then
+        if magicskill <= 200 then
+            potency = 3 + potencybonus + math.floor(6 * magicskill / 100)
+        elseif magicskill > 200 then
+            potency = 5 + potencybonus + math.floor(5 * magicskill / 100)
+        end
+    -- Potency without Effect Bonus
+    else
+        if magicskill <= 200 then
+            potency = 3 + math.floor(6 * magicskill / 100)
+        elseif magicskill > 200 then
+            potency = 5 + math.floor(5 * magicskill / 100)
+        end
     end
 
     if target:addStatusEffect(effect, potency, 0, duration) then

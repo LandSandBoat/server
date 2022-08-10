@@ -320,7 +320,11 @@ bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOB
                 m_EnteredPlayers.emplace(PEntity->id);
                 PChar->ClearTrusts();
                 luautils::OnBattlefieldEnter(PChar, this);
-                charutils::SendTimerPacket(PChar, GetRemainingTime());
+                // Show timer except in Temenos and Apollyon
+                if (this->GetZoneID() != 37 && this->GetZoneID() != 38)
+                {
+                    charutils::SendTimerPacket(PChar, GetRemainingTime());
+                }
             }
             else if (!IsRegistered(PChar))
             {

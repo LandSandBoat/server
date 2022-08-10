@@ -2083,6 +2083,11 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
 
             // Check & Handle Afflatus Misery Accuracy Bonus
             battleutils::HandleAfflatusMiseryAccuracyBonus(this);
+
+            if (PTarget->objtype == TYPE_PC)
+            {
+                charutils::TrySkillUP((CCharEntity*)PTarget, SKILL_EVASION, GetMLevel());
+            }
         }
 
         // If we didn't hit at all, set param to 0 if we didn't blink any shadows.
