@@ -21,8 +21,8 @@ zones[xi.zone.RALA_WATERWAYS] =
         BAYLD_OBTAINED           = 7007, -- You have obtained <number> bayld!
         NOTHING_HAPPENS          = 8072, -- Nothing happens.
         PERHAPS_THE_WISEST       = 8073, -- Perhaps the wisest approach would be to search for <keyitem> with which to open the decrepit sluice gate.
-        A_QUICK_GLANCE_REVEALS   = 8692, -- A quick glance reveals spoiled water trickling from upstream, likely caused by effluvium from the recent destruction.
-        THREE_BLOOD_SIGILS_PULSE = 8916, -- The three blood sigils begin to pulse a violent crimson!
+        A_QUICK_GLANCE_REVEALS   = 8695, -- A quick glance reveals spoiled water trickling from upstream, likely caused by effluvium from the recent destruction.
+        THREE_BLOOD_SIGILS_PULSE = 8919, -- The three blood sigils begin to pulse a violent crimson!
     },
     mob =
     {
