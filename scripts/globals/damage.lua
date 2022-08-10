@@ -28,7 +28,7 @@ local dmgMods =
         {mod = xi.mod.UDMGBREATH},
         {mod = xi.mod.DMG},
     },
-    [xi.attackType.MAGICAL] =
+    [xi.attackType.RANGED] =
     {
         {mod = xi.mod.DMGRANGE, min = -0.5, max = 1000},
         {mod = xi.mod.UDMGRANGE},
