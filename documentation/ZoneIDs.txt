@@ -283,8 +283,8 @@
   280 - 118 - Mog Garden
   281 - 119 - Leafallia
   282 - 11A - Mount Kamihr
-  283 - 11B - Silver Knife
-  284 - 11C - unimplemented in client: Celennia Memorial Library (formerly Wexworth Library)
+  283 - 11B - unimplemented in client: Silver Knife
+  284 - 11C - Celennia Memorial Library (formerly Wexworth Library)
   285 - 11D - Feretory
   286 - 11E - unimplemented in client: no zone dat as of 08-10-2022
   287 - 11F - Maquette Abdhaljs-LegionB
