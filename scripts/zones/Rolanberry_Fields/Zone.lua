@@ -48,6 +48,15 @@ zone_object.onGameHour = function(zone)
         -- Despawn set to 210 seconds (3.5 minutes, approx when the Jeuno-Bastok airship is flying back over to Bastok).
         SpawnMob(ID.mob.SILK_CATERPILLAR, 210)
     end
+
+    -- Don't allow Black Triple Stars to spawn if its daytime
+    if VanadielHour() >= 6 and VanadielHour() < 18 then
+        DisallowRespawn(ID.mob.BLACK_TRIPLE_STARS_1, true)
+        DisallowRespawn(ID.mob.BLACK_TRIPLE_STARS_2, true)
+    else
+        DisallowRespawn(ID.mob.BLACK_TRIPLE_STARS_1, false)
+        DisallowRespawn(ID.mob.BLACK_TRIPLE_STARS_2, false)
+    end
 end
 
 zone_object.onGameDay = function()
