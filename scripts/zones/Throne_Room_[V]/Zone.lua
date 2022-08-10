@@ -1,7 +1,7 @@
 -----------------------------------
--- Zone: Throne_Room_[S] (156)
+-- Zone: Throne_Room_[V] (229)
 -----------------------------------
-local ID = require("scripts/zones/Throne_Room_[S]/IDs")
+local ID = require("scripts/zones/Throne_Room_[V]/IDs")
 -----------------------------------
 local zone_object = {}
 
