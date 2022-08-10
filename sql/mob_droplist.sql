@@ -2280,7 +2280,8 @@ INSERT INTO `mob_droplist` VALUES (221,2,0,1000,4362,0);  -- Lizard Egg (Steal)
 INSERT INTO `mob_droplist` VALUES (222,0,0,1000,825,250);        -- Square Of Cotton Cloth (25.0%)
 INSERT INTO `mob_droplist` VALUES (222,0,0,1000,940,@UNCOMMON);  -- Revival Tree Root (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (222,0,0,1000,4871,@UNCOMMON); -- Scroll Of Escape (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (222,2,0,1000,529,20);         -- Luminicloth (Steal)
+INSERT INTO `mob_droplist` VALUES (222,0,0,1000,529,20);         -- Luminicloth (2%)
+INSERT INTO `mob_droplist` VALUES (222,2,0,1000,825,0);          -- Square Of Cotton Cloth (Steal)
 
 -- ZoneID: 157 - Banshee
 INSERT INTO `mob_droplist` VALUES (223,0,0,1000,825,200);        -- Square Of Cotton Cloth (20.0%)
@@ -3289,7 +3290,6 @@ INSERT INTO `mob_droplist` VALUES (341,0,0,1000,14763,270);     -- Boroka Earrin
 -- ZoneID: 153 - Bouncing Ball Fished
 INSERT INTO `mob_droplist` VALUES (342,0,0,1000,1125,20); -- Carbuncles Ruby (2.0%)
 
--- ZoneID: 153 - Korrigan
 -- ZoneID: 159 - Bouncing Ball Fished
 -- ZoneID: 173 - Thread Leech
 -- ZoneID: 173 - Spool Leech
@@ -12129,6 +12129,13 @@ INSERT INTO `mob_droplist` VALUES (1461,0,0,1000,3497,30);      -- Forgotten Ste
 INSERT INTO `mob_droplist` VALUES (1461,0,0,1000,5902,30);      -- Vial Of Cagebeast Blood (3.0%)
 INSERT INTO `mob_droplist` VALUES (1461,0,0,1000,1450,20);      -- Lungo-Nango Jadeshell (2.0%)
 INSERT INTO `mob_droplist` VALUES (1461,2,0,1000,1449,0);       -- Tukuku Whiteshell (Steal)
+
+-- ZoneID: 153 - Korrigan
+INSERT INTO `mob_droplist` VALUES (3228,0,0,1000,1265,12);   -- 4 Leaf Korrigan Bud (1.2%)
+INSERT INTO `mob_droplist` VALUES (3228,0,0,1000,17868,73);  -- Humus (7.3%)
+INSERT INTO `mob_droplist` VALUES (3228,0,0,1000,4368,220);  -- 2 Leaf Mandragora Bud (22%)
+INSERT INTO `mob_droplist` VALUES (3228,4,0,1000,834,0);     -- Saruta Cotton (Despoil)
+INSERT INTO `mob_droplist` VALUES (3228,4,0,1000,4368,0);    -- 2 Leaf Mandragora Bud (despoil)
 
 -- ZoneID:  74 - Korrigan
 INSERT INTO `mob_droplist` VALUES (1463,0,0,1000,5378,@UNCOMMON); -- Congestus Cell (Uncommon, 10%)
