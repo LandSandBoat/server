@@ -29,7 +29,7 @@ def main():
         for line in io.TextIOWrapper(proc.stdout, encoding="utf-8"):
             print(line.replace("\n", ""))
             has_seen_output = True
-            if "error" in line or "warning" in line:
+            if "error" in line.lower() or "warning" in line.lower() or "crash" in line.lower():
                 print("^^^")
                 error = True
 
