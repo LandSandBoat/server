@@ -34,7 +34,7 @@ entity.onMobFight = function(mob, target)
         if panzerfaustCounter > panzerfaustMax then
             mob:setLocalVar("panzerfaustCounter", 0)
             mob:setLocalVar("panzerfaustMax", 0)
-        else
+        elseif mob:getTarget() ~= nil then
             mob:setLocalVar("panzerfaustCounter", panzerfaustCounter + 1)
             mob:useMobAbility(536)
         end

@@ -3603,6 +3603,15 @@ namespace battleutils
                 break;
         }
 
+        if (PAttacker->objtype == TYPE_PC && PAttacker->getMod(Mod::WYRMAL_ABJ_KILLER_EFFECT) > 0)
+        {
+            // take the max of humanoid or dragon killer
+            KillerEffect = std::max<int32>(KillerEffect, PDefender->getMod(Mod::DRAGON_KILLER));
+        }
+
+        if (PDefender->objtype == TYPE_PC && PDefender->GetMLevel() > 74 && PDefender->GetMJob() == JOB_BST)
+            KillerEffect += ((CCharEntity*)PDefender)->PMeritPoints->GetMeritValue(MERIT_KILLER_EFFECTS, ((CCharEntity*)PDefender));
+
         // Add intimidation rate from Bully
         if (CStatusEffect* PDoubtEffect = PAttacker->StatusEffectContainer->GetStatusEffect(EFFECT_DOUBT))
         {

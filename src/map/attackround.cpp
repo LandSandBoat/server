@@ -411,6 +411,15 @@ void CAttackRound::CreateKickAttacks()
 {
     if (m_attacker->objtype == TYPE_PC)
     {
+        if (m_attacker->objtype == TYPE_MOB)
+        {
+            // Only allow kick attacks for Sabotender Bailarina
+            if (((CMobEntity*)m_attacker)->id != 17629587) // ToDo: If any other mobs ever require kick attacks - change id to a list and store in db
+            {
+                return;
+            }
+        }
+
         // kick attack mod (All jobs)
         uint16 kickAttack = m_attacker->getMod(Mod::KICK_ATTACK_RATE);
 

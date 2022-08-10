@@ -1269,7 +1269,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
         }
 
         // remove invisible if aggressive
-        if (PAbility->getID() != ABILITY_TAME && PAbility->getID() != ABILITY_FIGHT && PAbility->getID() != ABILITY_DEPLOY)
+        if (PAbility->getID() != ABILITY_TAME && PAbility->getID() != ABILITY_FIGHT && PAbility->getID() != ABILITY_DEPLOY && PAbility->getID() != ABILITY_GAUGE)
         {
             if (PAbility->getValidTarget() & TARGET_ENEMY)
             {
@@ -1567,14 +1567,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
     // loop for barrage hits, if a miss occurs, the loop will end
     for (uint8 i = 1; i <= hitCount; ++i)
     {
-        if (PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_PERFECT_DODGE, 0))
-        {
-            actionTarget.messageID  = 32;
-            actionTarget.reaction   = REACTION::EVADE;
-            actionTarget.speceffect = SPECEFFECT::NONE;
-            hitCount                = i; // end barrage, shot missed
-        }
-        else if (xirand::GetRandomNumber(100) < battleutils::GetRangedHitRate(this, PTarget, isBarrage)) // hit!
+        if (xirand::GetRandomNumber(100) < battleutils::GetRangedHitRate(this, PTarget, isBarrage)) // hit!
         {
             // absorbed by shadow
             if (battleutils::IsAbsorbByShadow(PTarget))
@@ -1708,6 +1701,11 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
         actionTarget.reaction  = REACTION::EVADE;
         actionTarget.param     = shadowsTaken;
     }
+    // No hit, but unlimited shot is up, so don't consume ammo
+    else if (!hitOccured && this->StatusEffectContainer->HasStatusEffect(EFFECT_UNLIMITED_SHOT))
+    {
+        ammoConsumed = 0;
+    }
 
     if (actionTarget.speceffect == SPECEFFECT::HIT && actionTarget.param > 0)
     {
@@ -1731,10 +1729,42 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
 
         StatusEffectContainer->DelStatusEffect(EFFECT_SANGE);
     }
+
     battleutils::ClaimMob(PTarget, this);
     battleutils::RemoveAmmo(this, ammoConsumed);
-    // only remove detectables
-    StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
+
+    // Handle Camouflage effects
+    if (this->StatusEffectContainer->HasStatusEffect(EFFECT_CAMOUFLAGE, 0))
+    {
+        int16 retainChance = 40; // Estimate base ~30% chance to keep Camouflage on a ranged attack
+        uint8 rotAllowance = 25; // Allow for some slight variance in direction faced to be "behind" the mob
+
+        retainChance += (1.6 * distance(this->loc.p, PTarget->loc.p)); // Further distance from target = less chance of detection
+
+        if (behind(this->loc.p, PTarget->loc.p, rotAllowance))
+        {
+            // We're behind the mob, so it's guaranteed to stay up.
+            retainChance = 100;
+        }
+
+        if (xirand::GetRandomNumber(100) > retainChance)
+        {
+            // Camouflage was up, but is lost, so now all detectable effects must be dropped
+            StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
+        }
+        else
+        {
+            // Camouflage up, and retained, but all other effects must be dropped
+            StatusEffectContainer->DelStatusEffect(EFFECT_SNEAK);
+            StatusEffectContainer->DelStatusEffect(EFFECT_INVISIBLE);
+            StatusEffectContainer->DelStatusEffect(EFFECT_DEODORIZE);
+        }
+    }
+    else
+    {
+        // Camouflage not up, so remove all detectable status effects
+        StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
+    }
 }
 
 bool CCharEntity::IsMobOwner(CBattleEntity* PBattleTarget)
@@ -1915,13 +1945,21 @@ void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
     if (PItem->getAoE())
     {
         // clang-format off
-        PTarget->ForParty([this, PItem, PTarget, isParalyzed](CBattleEntity* PMember)
+        if (PTarget->PParty)
         {
-            if (!PMember->isDead() && distance(PTarget->loc.p, PMember->loc.p) <= 10 && !isParalyzed)
+            for (CBattleEntity* PMember : PTarget->PParty->members)
             {
-                luautils::OnItemUse(this, PMember, PItem);
-            }
-        });
+                // Trigger for the item user last to prevent any teleportation miscues (Tidal Talisman)
+                if (this->id == PMember->id)
+                    continue;
+                if (!PMember->isDead() && distanceSquared(PTarget->loc.p, PMember->loc.p) < 10.0f * 10.0f && !isParalyzed)
+                {
+                    luautils::OnItemUse(this, PTarget, PItem);
+                }
+            };
+        }
+        // Triggering for item user
+        luautils::OnItemUse(this, PTarget, PItem);
         // clang-format on
     }
     else
