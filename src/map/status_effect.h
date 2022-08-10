@@ -695,6 +695,8 @@ enum EFFECT
     EFFECT_MOBILIZATION            = 627,
     EFFECT_HOVER_SHOT              = 628,
     EFFECT_MOOGLE_AMPLIFIER        = 629,
+    EFFECT_TAINT                   = 630,
+    EFFECT_HAUNT                   = 631,
 
     // Effect icons in packet can go from 0-767, so no custom effects should go in that range.
 

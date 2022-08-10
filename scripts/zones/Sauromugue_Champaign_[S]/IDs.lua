@@ -27,7 +27,7 @@ zones[xi.zone.SAUROMUGUE_CHAMPAIGN_S] =
         VOIDWALKER_UPGRADE_KI_2  = 8676,  -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
         VOIDWALKER_BREAK_KI      = 8677,  -- The <keyitem> shatters into tiny fragments.
         VOIDWALKER_OBTAIN_KI     = 8678,  -- Obtained key item: <keyitem>!
-        COMMON_SENSE_SURVIVAL    = 10063, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        COMMON_SENSE_SURVIVAL    = 10065, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

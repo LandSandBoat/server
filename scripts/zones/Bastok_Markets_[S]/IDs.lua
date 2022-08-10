@@ -31,9 +31,9 @@ zones[xi.zone.BASTOK_MARKETS_S] =
         WELDON_DELIVERY_DIALOG   = 10875, -- Do you have something you wish to send?
         ALLIED_SIGIL             = 12363, -- You have received the Allied Sigil!
         SILKE_SHOP_DIALOG        = 12815, -- You wouldn't happen to be a fellow scholar, by any chance? The contents of these pages are beyond me, but perhaps you might glean something from them. They could be yours...for a nominal fee.
-        RETRIEVE_DIALOG_ID       = 14727, -- You retrieve <item> from the porter moogle's care.
-        NOT_ENOUGH_NOTES         = 14752, -- You tryin' to cheat me? That's not nearly enough notes!
-        COMMON_SENSE_SURVIVAL    = 14796, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        RETRIEVE_DIALOG_ID       = 14731, -- You retrieve <item> from the porter moogle's care.
+        NOT_ENOUGH_NOTES         = 14756, -- You tryin' to cheat me? That's not nearly enough notes!
+        COMMON_SENSE_SURVIVAL    = 14800, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
