@@ -23456,7 +23456,6 @@ INSERT INTO `mob_droplist` VALUES (2814,0,0,1000,3541,@COMMON);   -- Seasoning S
 INSERT INTO `mob_droplist` VALUES (2814,0,0,1000,5569,@COMMON);   -- Puk Egg (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (2814,0,0,1000,2229,@UNCOMMON); -- Vial Of Chimera Blood (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (2814,0,0,1000,3542,@UNCOMMON); -- Fossilized Bone (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (2814,0,0,1000,4106,0);         -- Wind Cluster (disabled until Mog Tablets are implemented)
 INSERT INTO `mob_droplist` VALUES (2814,4,0,1000,5569,0);         -- Puk Egg (Despoil)
 
 -- ZoneID: 212 - Pygmytoise
@@ -24694,7 +24693,6 @@ INSERT INTO `mob_droplist` VALUES (3007,0,0,1000,816,@COMMON);    -- Spool Of Si
 INSERT INTO `mob_droplist` VALUES (3007,0,0,1000,3541,@COMMON);   -- Seasoning Stone (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (3007,0,0,1000,3542,@UNCOMMON); -- Fossilized Bone (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (3007,0,0,1000,3550,@UNCOMMON); -- Spool Of Wyrdstrand (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (3007,0,0,1000,4107,0);         -- Earth Cluster (disabled until Mog Tablets are implemented)
 INSERT INTO `mob_droplist` VALUES (3007,2,0,1000,839,0);          -- Piece Of Crawler Cocoon (Steal)
 
 -- ZoneID: 197 - King Crawler
@@ -26326,7 +26324,6 @@ INSERT INTO `mob_droplist` VALUES (3197,0,0,1000,881,@COMMON);    -- Crab Shell 
 INSERT INTO `mob_droplist` VALUES (3197,0,0,1000,3541,@COMMON);   -- Seasoning Stone (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (3197,0,0,1000,3542,@UNCOMMON); -- Fossilized Bone (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (3197,0,0,1000,1193,@RARE);     -- High-Quality Crab Shell (Rare, 5%)
-INSERT INTO `mob_droplist` VALUES (3197,0,0,1000,4109,0);         -- Water Cluster (disabled until Mog Tablets are implemented)
 
 -- ZoneID: 169 - Deviling Bats
 INSERT INTO `mob_droplist` VALUES (3198,0,0,1000,922,@VCOMMON);   -- Bat Wing (Very Common, 24%)
