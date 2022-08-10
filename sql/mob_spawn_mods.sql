@@ -94,6 +94,7 @@ INSERT INTO `mob_spawn_mods` VALUES (17203216,1,15000,1);
 INSERT INTO `mob_spawn_mods` VALUES (17203216,2,20000,1);
 INSERT INTO `mob_spawn_mods` VALUES (17555863,1,20000,1);
 INSERT INTO `mob_spawn_mods` VALUES (17555863,2,30000,1);
+INSERT INTO `mob_spawn_mods` VALUES (17555863,15,10000,1);
 INSERT INTO `mob_spawn_mods` VALUES (17309954,1,18000,1);
 INSERT INTO `mob_spawn_mods` VALUES (17309954,2,29250,1);
 INSERT INTO `mob_spawn_mods` VALUES (17309954,15,3250,1);
@@ -903,6 +904,11 @@ INSERT INTO `mob_spawn_mods` VALUES (17093048,15,2000,1); -- mug gil 2000
 INSERT INTO `mob_spawn_mods` VALUES (17629587,1,12000,1); -- min gil 12000
 INSERT INTO `mob_spawn_mods` VALUES (17629587,2,20000,1); -- max gil 20000
 INSERT INTO `mob_spawn_mods` VALUES (17629587,15,3000,1); -- mug gil 3000
+
+-- Sewer Syrup
+INSERT INTO `mob_spawn_mods` VALUES (17461307,1,4000,1);
+INSERT INTO `mob_spawn_mods` VALUES (17461307,2,19000,1);
+INSERT INTO `mob_spawn_mods` VALUES (17461307,15,3500,1);
 
 /*!40000 ALTER TABLE `mob_spawn_mods` ENABLE KEYS */;
 UNLOCK TABLES;
