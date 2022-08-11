@@ -4931,7 +4931,6 @@ INSERT INTO `mob_spell_lists` VALUES ('Hakutaku',486,249,1,255); -- blaze_spikes
 -- Shen (487)
 INSERT INTO `mob_spell_lists` VALUES ('Shen',487,172,1,255); -- water_iv (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Shen',487,201,1,255); -- waterga_iii (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Shen',487,214,1,255); -- flood (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Shen',487,240,1,255); -- drown (1-255)
 
 -- Shen's Filtrate (488)
@@ -5191,6 +5190,11 @@ INSERT INTO `mob_spell_lists` VALUES ('Xolotl',516,196,1,255); -- thundaga_iii (
 INSERT INTO `mob_spell_lists` VALUES ('Xolotl',516,191,1,255); -- stonega_iii (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Xolotl',516,201,1,255); -- waterga_iii (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Xolotl',516,176,1,255); -- firaga_iii (1~255)
+
+-- Zoredonite (517)
+INSERT INTO `mob_spell_lists` VALUES ('Zoredonite',517,3,1,255);   -- cure_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Zoredonite',517,30,1,255);  -- banish_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Zoredonite',517,112,1,255); -- flash (1~255)
 
 -- AirSkyBoat Specific Starts at 5000
 -- 5000 -> 5010 is Era Dynamis

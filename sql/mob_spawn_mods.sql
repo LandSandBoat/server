@@ -910,6 +910,12 @@ INSERT INTO `mob_spawn_mods` VALUES (17461307,1,4000,1);
 INSERT INTO `mob_spawn_mods` VALUES (17461307,2,19000,1);
 INSERT INTO `mob_spawn_mods` VALUES (17461307,15,3500,1);
 
+-- [Narasimha]
+-- Values taken from wiki on 04/23/2018 (http://ffxiclopedia.wikia.com/wiki/Narasimha)
+INSERT INTO `mob_spawn_mods` VALUES (17649784,1,12000,1); -- min gil 12000
+INSERT INTO `mob_spawn_mods` VALUES (17649784,2,20000,1); -- max gil 30000
+INSERT INTO `mob_spawn_mods` VALUES (17649784,15,4800,1); -- mug gil 4800
+
 /*!40000 ALTER TABLE `mob_spawn_mods` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

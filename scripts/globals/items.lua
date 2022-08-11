@@ -547,6 +547,7 @@ xi.items =
     ANCIENT_IMAGE                   = 1796,
     VIRGIN_IMAGE                    = 1797,
     SUPERNAL_FRAGMENT               = 1822,
+    SHRIMP_LANTERN                  = 1823,
     HAUNTED_MULETA                  = 1824,
     ANTLION_TRAP                    = 1825,
     PREMIUM_BAG                     = 1827,
