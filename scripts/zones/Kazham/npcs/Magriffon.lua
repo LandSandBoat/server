@@ -8,9 +8,33 @@ require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 require("scripts/globals/keyitems")
+require("scripts/globals/pathfind")
 local ID = require("scripts/zones/Kazham/IDs")
 -----------------------------------
 local entity = {}
+
+local path =
+{
+    60.600, -12.000, -33.913,
+    60.600, -12.000, -33.913,
+    60.600, -12.000, -33.913,
+    60.600, -12.000, -33.913,
+    60.600, -12.000, -33.913,
+    60.600, -12.025, -38.151,
+    60.600, -12.025, -38.151,
+    60.600, -12.025, -38.151,
+    60.600, -12.025, -38.151,
+    60.600, -12.025, -38.151,
+}
+
+entity.onSpawn = function(npc)
+    npc:initNpcAi()
+    npc:setPos(xi.path.first(path))
+end
+
+entity.onPath = function(npc)
+    xi.path.patrol(npc, path)
+end
 
 entity.onTrade = function(player, npc, trade)
     if (player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.GULLIBLES_TRAVELS) == QUEST_ACCEPTED) then
@@ -47,11 +71,9 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(147)
         end
-
     else
         player:startEvent(143)
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)

@@ -8,8 +8,47 @@ require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 require("scripts/globals/utils")
+require("scripts/globals/pathfind")
 -----------------------------------
 local entity = {}
+
+local path =
+{
+    -18.366, 1.750, -59.804,
+    -18.366, 1.750, -59.804,
+    -18.366, 1.750, -59.804,
+    -18.366, 1.750, -59.804,
+    -18.366, 1.750, -59.804,
+    -18.366, 1.750, -59.804,
+    -18.366, 1.750, -59.804,
+    -18.366, 1.750, -59.804,
+    -18.366, 1.750, -59.804,
+    -18.176, 1.750, -59.733,
+    -17.620, 1.750, -59.529,
+    -16.961, 1.750, -59.286,
+    -16.590, 1.750, -59.149,
+    -16.590, 1.750, -59.149,
+    -16.590, 1.750, -59.149,
+    -16.590, 1.750, -59.149,
+    -16.590, 1.750, -59.149,
+    -16.590, 1.750, -59.149,
+    -16.590, 1.750, -59.149,
+    -16.590, 1.750, -59.149,
+    -16.590, 1.750, -59.149,
+    -16.961, 1.750, -59.286,
+    -17.620, 1.750, -59.529,
+    -18.176, 1.750, -59.733,
+    -18.303, 1.750, -59.925,
+}
+
+entity.onSpawn = function(npc)
+    npc:initNpcAi()
+    npc:setPos(xi.path.first(path))
+end
+
+entity.onPath = function(npc)
+    xi.path.patrol(npc, path)
+end
 
 entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_AMAZIN_SCORPIO) == QUEST_ACCEPTED and npcUtil.tradeHas(trade, 1017) then
