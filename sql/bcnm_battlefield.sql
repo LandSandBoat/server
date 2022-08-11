@@ -1267,6 +1267,9 @@ INSERT INTO `bcnm_battlefield` VALUES (704,3,16818194,1);
 INSERT INTO `bcnm_battlefield` VALUES (704,3,16818195,1);
 INSERT INTO `bcnm_battlefield` VALUES (704,3,16818196,1);
 INSERT INTO `bcnm_battlefield` VALUES (704,3,16818197,1);
+INSERT INTO `bcnm_battlefield` VALUES (705,1,16818198,3); -- Test your Mite
+INSERT INTO `bcnm_battlefield` VALUES (705,2,16818200,3);
+INSERT INTO `bcnm_battlefield` VALUES (705,3,16818202,3);
 INSERT INTO `bcnm_battlefield` VALUES (706,1,16818204,3); -- waking_dreams
 INSERT INTO `bcnm_battlefield` VALUES (706,1,16818205,1);
 INSERT INTO `bcnm_battlefield` VALUES (706,1,16818206,1);

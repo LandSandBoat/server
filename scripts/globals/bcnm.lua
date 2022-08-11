@@ -47,7 +47,7 @@ local battlefields =
     [xi.zone.THE_SHROUDED_MAW] =
     {
         { 0,  704,    0},   -- Darkness Named (PM3-5)
-     -- { 1,  705,    0},   -- Test Your Mite (ENM)
+        { 1,  705,    0},   -- Test Your Mite (ENM)
         { 2,  706,    0},   -- Waking Dreams (Quest)
      -- { 3,    ?,    0},   -- *Waking Dreams (HTMBF)
     },
