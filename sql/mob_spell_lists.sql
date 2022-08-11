@@ -5044,11 +5044,6 @@ INSERT INTO `mob_spell_lists` VALUES('Osschaart', 496, 240, 1, 255); -- drown (1
 INSERT INTO `mob_spell_lists` VALUES('Osschaart', 496, 254, 1, 255); -- blind (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Osschaart', 496, 258, 1, 255); -- bind (1~255)
 
--- Cemetery Cherry (497)
-INSERT INTO `mob_spell_lists` VALUES ('Cemetery_Cherry',497,274,1,255); -- Sleepga II
-INSERT INTO `mob_spell_lists` VALUES ('Cemetery_Cherry',497,356,1,255); -- Paralyga
-INSERT INTO `mob_spell_lists` VALUES ('Cemetery_Cherry',497,366,1,255); -- Graviga
-
 -- Slendlix Spindlethumb (498)
 INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',498,3,1,255);  -- cure_iii (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',498,23,1,255); -- dia (1~255)
@@ -5167,8 +5162,35 @@ INSERT INTO `mob_spell_lists` VALUES('Generic_Doll', 511, 194, 1, 255); -- Thund
 INSERT INTO `mob_spell_lists` VALUES('Generic_Doll', 511, 251, 1, 255); -- Shock Spikes (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Generic_Doll', 511, 356, 1, 255); -- Paralyga (1~255)
 
--- Hamadryad (512)
-INSERT INTO `mob_spell_lists` VALUES('Hamadryad',512,145,1,255); -- fire_ii (1~255)
+-- Hazmat (512)
+INSERT INTO `mob_spell_lists` VALUES ('Hazmat',512,204,1,255); -- flare (1~255)
+
+-- Lii Jixa the Somnolist (513)
+INSERT INTO `mob_spell_lists` VALUES ('Lii_Jixa_the_Somnolist',513,3,1,255);  -- cure_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Lii_Jixa_the_Somnolist',513,29,1,255); -- banish_ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Lii_Jixa_the_Somnolist',513,98,1,255); -- repose (1~255)
+
+-- Slendlix Spindlethumb (514)
+INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',514,3,1,255);  -- cure_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',514,23,1,255); -- dia (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',514,33,1,255); -- diaga (1~255)
+
+-- Hamadryad (515)
+INSERT INTO `mob_spell_lists` VALUES('Hamadryad',515,145,1,255); -- fire_ii (1~255)
+
+-- Xolotl (516)
+INSERT INTO `mob_spell_lists` VALUES ('Xolotl',516,147,1,255); -- fire_iv (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Xolotl',516,152,1,255); -- blizzard_iv (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Xolotl',516,167,1,255); -- thunder_iv (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Xolotl',516,162,1,255); -- stone_iv (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Xolotl',516,172,1,255); -- water_iv (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Xolotl',516,157,1,255); -- aero_iv (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Xolotl',516,181,1,255); -- blizzaga_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Xolotl',516,186,1,255); -- aeroga_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Xolotl',516,196,1,255); -- thundaga_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Xolotl',516,191,1,255); -- stonega_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Xolotl',516,201,1,255); -- waterga_iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Xolotl',516,176,1,255); -- firaga_iii (1~255)
 
 -- AirSkyBoat Specific Starts at 5000
 -- 5000 -> 5010 is Era Dynamis

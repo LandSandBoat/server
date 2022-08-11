@@ -3881,6 +3881,7 @@ INSERT INTO `mob_skill_lists` VALUES ('DynastBeetle',1205,341);
 INSERT INTO `mob_skill_lists` VALUES ('Swamfisk',1206,452); -- Screwdriver
 INSERT INTO `mob_skill_lists` VALUES ('Swamfisk',1206,453); -- Water Wall
 INSERT INTO `mob_skill_lists` VALUES ('Barbastelle',1207,392); -- Ultrasonics
+INSERT INTO `mob_skill_lists` VALUES ('Blighting_Brand',1208,398);
 
 -- Next available ID: 1208
 

@@ -103,7 +103,7 @@ g_mixins.families.uragnite = function(uragniteMob)
         mob:setLocalVar("[uragnite]inShellSkillList", 250)
         mob:setLocalVar("[uragnite]timeInShellMin", 30)
         mob:setLocalVar("[uragnite]timeInShellMax", 45)
-        mob:setLocalVar("[uragnite]inShellRegen", 22)
+        mob:setLocalVar("[uragnite]inShellRegen", 50)
         mob:setLocalVar("[uragnite]shellChange", mob:getMaxHP() / math.random(7,10))
     end)
 

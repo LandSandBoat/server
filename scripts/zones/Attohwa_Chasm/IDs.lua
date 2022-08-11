@@ -40,14 +40,17 @@ zones[xi.zone.ATTOHWA_CHASM] =
             [16806158] = 16806162, -- -398.931 -4.536 79.640
             [16806161] = 16806162, -- -381.284 -9.233 40.054
         },
+        CITIPATI            = 16806162,
         LIOUMERE            = 16806031,
         TIAMAT              = 16806227,
         FEELER_ANTLION      = 16806242,
+        XOLOTL              = 16806215,
     },
     npc =
     {
         MIASMA_OFFSET   = 16806304, -- _071 in npc_list
         GASPONIA_OFFSET = 16806327, -- _07n in npc_list
+        ALASTOR_QM      = 16806296, -- qm_feeler_antlion in npc_list
         EXCAVATION =
         {
             16806369,

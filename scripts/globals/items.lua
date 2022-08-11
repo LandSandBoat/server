@@ -548,6 +548,7 @@ xi.items =
     VIRGIN_IMAGE                    = 1797,
     SUPERNAL_FRAGMENT               = 1822,
     HAUNTED_MULETA                  = 1824,
+    ANTLION_TRAP                    = 1825,
     PREMIUM_BAG                     = 1827,
     DEED_OF_PLACIDITY               = 1851,
     YAGUDO_HEADDRESS_CUTTING        = 1867,
