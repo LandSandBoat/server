@@ -1159,6 +1159,24 @@ INSERT INTO `bcnm_battlefield` VALUES (641,3,16801812,2);
 INSERT INTO `bcnm_battlefield` VALUES (641,3,16801813,2);
 INSERT INTO `bcnm_battlefield` VALUES (641,3,16801814,2);
 INSERT INTO `bcnm_battlefield` VALUES (641,3,16801815,2);
+INSERT INTO `bcnm_battlefield` VALUES (642,1,16801818,3); -- When hell freezes over
+INSERT INTO `bcnm_battlefield` VALUES (642,1,16801819,3);
+INSERT INTO `bcnm_battlefield` VALUES (642,1,16801820,3);
+INSERT INTO `bcnm_battlefield` VALUES (642,1,16801821,2);
+INSERT INTO `bcnm_battlefield` VALUES (642,1,16801822,2);
+INSERT INTO `bcnm_battlefield` VALUES (642,1,16801823,2);
+INSERT INTO `bcnm_battlefield` VALUES (642,2,16801826,3);
+INSERT INTO `bcnm_battlefield` VALUES (642,2,16801827,3);
+INSERT INTO `bcnm_battlefield` VALUES (642,2,16801828,3);
+INSERT INTO `bcnm_battlefield` VALUES (642,2,16801829,2);
+INSERT INTO `bcnm_battlefield` VALUES (642,2,16801830,2);
+INSERT INTO `bcnm_battlefield` VALUES (642,2,16801831,2);
+INSERT INTO `bcnm_battlefield` VALUES (642,3,16801834,3);
+INSERT INTO `bcnm_battlefield` VALUES (642,3,16801835,3);
+INSERT INTO `bcnm_battlefield` VALUES (642,3,16801836,3);
+INSERT INTO `bcnm_battlefield` VALUES (642,3,16801837,2);
+INSERT INTO `bcnm_battlefield` VALUES (642,3,16801838,2);
+INSERT INTO `bcnm_battlefield` VALUES (642,3,16801839,2);
 INSERT INTO `bcnm_battlefield` VALUES (643,1,16801841,3); -- brothers
 INSERT INTO `bcnm_battlefield` VALUES (643,1,16801842,3);
 INSERT INTO `bcnm_battlefield` VALUES (643,2,16801844,3);

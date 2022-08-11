@@ -5196,6 +5196,11 @@ INSERT INTO `mob_spell_lists` VALUES ('Zoredonite',517,3,1,255);   -- cure_iii (
 INSERT INTO `mob_spell_lists` VALUES ('Zoredonite',517,30,1,255);  -- banish_iii (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Zoredonite',517,112,1,255); -- flash (1~255)
 
+-- Snow Devil (513)
+INSERT INTO `mob_spell_lists` VALUES('Snow_Devil', 513, 152, 1, 255); -- Blizzard IV (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Snow_Devil', 513, 181, 1, 255); -- Blizzaga III (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Snow_Devil', 513, 455, 1, 255); -- Ice Threnody (1~255)
+
 -- AirSkyBoat Specific Starts at 5000
 -- 5000 -> 5010 is Era Dynamis
 

@@ -265,7 +265,7 @@ INSERT INTO `mob_groups` VALUES (55,6812,5,'Little_Wingman',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (1,3684,6,'Snoll_Tzar',0,128,0,7000,0,65,66,0);
 INSERT INTO `mob_groups` VALUES (2,384,6,'Bearclaw_Rabbit',0,128,0,0,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (3,383,6,'Bearclaw_Leveret',0,128,0,0,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (4,3687,6,'Snow_Devil',0,128,0,0,0,75,75,0);
+INSERT INTO `mob_groups` VALUES (4,3687,6,'Snow_Devil',0,128,0,1750,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (5,1190,6,'Eldertaur',0,128,0,5500,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (6,2668,6,'Mindertaur',0,128,0,5000,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (7,196,6,'Apis',0,128,0,13000,0,81,81,0);
