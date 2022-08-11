@@ -1,6 +1,6 @@
 -----------------------------------
 -- Ability: Flee
--- Increases movement speed.
+-- Increases movement speed by +60%
 -- Obtained: Thief Level 25
 -- Recast Time: 5:00
 -- Duration: 0:30
@@ -15,7 +15,7 @@ end
 
 ability_object.onUseAbility = function(player, target, ability)
     local duration = 30 + player:getMod(xi.mod.FLEE_DURATION)
-    player:addStatusEffect(xi.effect.FLEE, 60, 0, duration)
+    player:addStatusEffect(xi.effect.FLEE, 61, 0, duration)
 end
 
 return ability_object
