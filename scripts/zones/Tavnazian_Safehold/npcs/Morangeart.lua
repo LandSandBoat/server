@@ -21,6 +21,8 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(521)
         end
+    elseif player:getCurrentMission(xi.mission.log_id.COP) > xi.mission.id.cop.AN_ETERNAL_MELODY and cd > os.time() then
+        player:startEvent(522)
     else
         player:startEvent(523)
     end
