@@ -550,7 +550,7 @@ INSERT INTO `mob_groups` VALUES (5,559,13,'Bugbby',0,128,0,9000,0,63,64,0);
 INSERT INTO `mob_groups` VALUES (6,4057,13,'Twilotak',0,128,0,0,0,40,40,0);
 INSERT INTO `mob_groups` VALUES (7,2707,13,'Moblin_Wisewoman',0,128,0,0,0,40,40,0);
 INSERT INTO `mob_groups` VALUES (8,2688,13,'Moblin_Clergyman',0,128,0,0,0,40,40,0);
-INSERT INTO `mob_groups` VALUES (9,569,13,'Bugboy',0,128,0,0,0,75,75,0);
+INSERT INTO `mob_groups` VALUES (9,569,13,'Bugboy',0,128,0,10000,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (10,2693,13,'Moblin_Fantocciniman',0,128,0,0,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (11,1296,13,'Fantoccini',0,128,0,0,0,55,55,0);
 INSERT INTO `mob_groups` VALUES (12,1299,13,'Fantoccini_Monster',0,128,0,0,0,49,49,0);
