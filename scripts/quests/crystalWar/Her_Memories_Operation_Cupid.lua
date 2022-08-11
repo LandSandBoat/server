@@ -4,9 +4,11 @@
 -- !addquest 7 68
 -- Bulwark Gate : !pos -447.174 -1.831 342.417 98
 -----------------------------------
+require('scripts/globals/interaction/quest')
 require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
+require('scripts/globals/quests')
 require('scripts/globals/zone')
+require('scripts/missions/wotg/helpers')
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.HER_MEMORIES_OPERATION_CUPID)
@@ -127,6 +129,7 @@ quest.sections =
             onEventFinish =
             {
                 [24] = function(player, csid, option, npc)
+                    xi.wotg.helpers.checkMemoryFragments(player)
                     quest:complete(player)
                 end,
             },
@@ -134,4 +137,4 @@ quest.sections =
     },
 }
 
-return mission
+return quest

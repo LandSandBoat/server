@@ -8,8 +8,10 @@
 -- qm5         : !pos 380.015 -26.5 -22.525
 -----------------------------------
 require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
+require('scripts/globals/interaction/quest')
+require('scripts/globals/quests')
 require('scripts/globals/zone')
+require('scripts/missions/wotg/helpers')
 -----------------------------------
 
 local quest = Quest:new(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.HER_MEMORIES_CARNELIAN_FOOTFALLS)
@@ -85,6 +87,7 @@ quest.sections =
             onEventFinish =
             {
                 [172] = function(player, csid, option, npc)
+                    xi.wotg.helpers.checkMemoryFragments(player)
                     quest:complete(player)
                 end,
             },
@@ -159,4 +162,4 @@ quest.sections =
     },
 }
 
-return mission
+return quest

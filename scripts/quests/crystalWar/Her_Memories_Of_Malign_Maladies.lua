@@ -10,9 +10,11 @@
 -----------------------------------
 require('scripts/globals/items')
 require('scripts/globals/keyitems')
+require('scripts/globals/interaction/quest')
 require('scripts/globals/missions')
-require('scripts/globals/interaction/mission')
+require('scripts/globals/quests')
 require('scripts/globals/zone')
+require('scripts/missions/wotg/helpers')
 -----------------------------------
 local graubergID = require('scripts/zones/Grauberg_[S]/IDs')
 -----------------------------------
@@ -158,6 +160,8 @@ quest.sections =
             onEventFinish =
             {
                 [169] = function(player, csid, option, npc)
+                    xi.wotg.helpers.checkMemoryFragments(player)
+
                     if quest:complete(player) then
                         player:delKeyItem(xi.ki.FEY_STONE)
                     end
@@ -167,4 +171,4 @@ quest.sections =
     },
 }
 
-return mission
+return quest
