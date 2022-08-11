@@ -12021,8 +12021,8 @@ INSERT INTO `mob_droplist` VALUES (1450,1,2,@VCOMMON,1334,250); -- Wyrmal Abjura
 INSERT INTO `mob_droplist` VALUES (1450,1,2,@VCOMMON,1322,250); -- Earthen Abjuration Legs (Group 2 - 25%)
 INSERT INTO `mob_droplist` VALUES (1450,1,2,@VCOMMON,1332,250); -- Martial Abjuration Legs (Group 2 - 25%)
 INSERT INTO `mob_droplist` VALUES (1450,1,2,@VCOMMON,1328,250); -- Aquarian Abjuration Feet (Group 2 - 25%)
-INSERT INTO `mob_droplist` VALUES (1450,1,3,1000,13415,990);    -- Pixie Earring (Group 3 - 99.0%)
-INSERT INTO `mob_droplist` VALUES (1450,1,3,1000,13566,@VRARE); -- Defending Ring (Group 3 - Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (1450,1,3,1000,13415,950);    -- Pixie Earring (Group 3 - 95.0%)
+INSERT INTO `mob_droplist` VALUES (1450,1,3,1000,13566,50);     -- Defending Ring (Group 3 - Rare, 5%)
 
 -- ZoneID: 125 - King Vinegarroon
 INSERT INTO `mob_droplist` VALUES (1451,0,0,1000,15223,@VCOMMON);  -- Aces Helm (Very Common, 24%)
