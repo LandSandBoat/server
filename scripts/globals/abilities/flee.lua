@@ -15,7 +15,7 @@ end
 
 ability_object.onUseAbility = function(player, target, ability)
     local duration = 30 + player:getMod(xi.mod.FLEE_DURATION)
-    player:addStatusEffect(xi.effect.FLEE, 100, 0, duration)
+    player:addStatusEffect(xi.effect.FLEE, 60, 0, duration)
 end
 
 return ability_object
