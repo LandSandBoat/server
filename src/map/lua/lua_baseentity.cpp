@@ -564,8 +564,7 @@ void CLuaBaseEntity::incrementCharVar(std::string const& varName, int32 value)
 {
     if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
-        auto startingVal = charutils::FetchCharVar(PChar->id, varName);
-        charutils::IncrementCharVar(PChar, varName, startingVal + value);
+        charutils::IncrementCharVar(PChar, varName, value);
     }
 }
 
