@@ -272,7 +272,6 @@ local function tradeFish(player, fishId)
         sum = sum + rewards[i].chance
 
         if roll <= sum then
-            found = true
             player:setCharVar("insideBellyItemIdx", i)
             item = rewards[i].itemId
             break
