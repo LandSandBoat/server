@@ -165,9 +165,9 @@ xi.instance.lookup =
 
     [xi.zone.EVERBLOOM_HOLLOW] =
     {
+        { 8699, { 204, 0, 13 }, { 204, 653 }, { } }, -- A Nation on the Brink (WOTG 14)
         -- Honor Under Fire
         -- Bonds That Never Die
-        -- A Nation on the Brink
         -- Dungeons and Dancers
         -- Campaign Ops:
         -- Brave Dawn I (San d'Oria)
