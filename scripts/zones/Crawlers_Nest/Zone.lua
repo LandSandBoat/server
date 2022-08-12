@@ -10,8 +10,10 @@ require("scripts/globals/treasure")
 local zone_object = {}
 
 zone_object.onInitialize = function(zone)
-    UpdateNMSpawnPoint(ID.mob.DYNAST_BEETLE)
-    GetMobByID(ID.mob.DYNAST_BEETLE):setRespawnTime(math.random(5400, 7200))
+    if xi.settings.main.ENABLE_WOTG == 1 then
+        UpdateNMSpawnPoint(ID.mob.DYNAST_BEETLE)
+        GetMobByID(ID.mob.DYNAST_BEETLE):setRespawnTime(math.random(5400, 7200))
+    end
 
     xi.treasure.initZone(zone)
 end
