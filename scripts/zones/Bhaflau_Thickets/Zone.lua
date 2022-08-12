@@ -15,8 +15,10 @@ zone_object.onChocoboDig = function(player, precheck)
 end
 
 zone_object.onInitialize = function(zone)
-    UpdateNMSpawnPoint(ID.mob.HARVESTMAN)
-    GetMobByID(ID.mob.HARVESTMAN):setRespawnTime(math.random(900, 10800))
+    if xi.settings.main.ENABLE_TOAU == 1 then
+        UpdateNMSpawnPoint(ID.mob.HARVESTMAN)
+        GetMobByID(ID.mob.HARVESTMAN):setRespawnTime(math.random(900, 10800))
+    end
 
     xi.helm.initZone(zone, xi.helm.type.HARVESTING)
 end

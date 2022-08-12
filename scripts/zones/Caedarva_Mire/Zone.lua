@@ -10,9 +10,11 @@ require("scripts/globals/zone")
 local zone_object = {}
 
 zone_object.onInitialize = function(zone)
-    UpdateNMSpawnPoint(ID.mob.AYNU_KAYSEY)
-    GetMobByID(ID.mob.AYNU_KAYSEY):setRespawnTime(math.random(900, 10800))
-    GetMobByID(ID.mob.KHIMAIRA):setRespawnTime(math.random(12, 36)*3600) -- 12 to 36 hours after maintenance, in 1-hour increments
+    if xi.settings.main.ENABLE_TOAU == 1 then
+        UpdateNMSpawnPoint(ID.mob.AYNU_KAYSEY)
+        GetMobByID(ID.mob.AYNU_KAYSEY):setRespawnTime(math.random(900, 10800))
+        GetMobByID(ID.mob.KHIMAIRA):setRespawnTime(math.random(12, 36)*3600) -- 12 to 36 hours after maintenance, in 1-hour increments
+    end
 
     xi.helm.initZone(zone, xi.helm.type.LOGGING)
 end

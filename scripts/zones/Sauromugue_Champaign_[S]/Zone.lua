@@ -8,8 +8,10 @@ require("scripts/globals/zone")
 local zone_object = {}
 
 zone_object.onInitialize = function(zone)
-    UpdateNMSpawnPoint(ID.mob.COQUECIGRUE)
-    GetMobByID(ID.mob.COQUECIGRUE):setRespawnTime(math.random(7200, 7800))
+    if xi.settings.main.ENABLE_WOTG == 1 then
+        UpdateNMSpawnPoint(ID.mob.COQUECIGRUE)
+        GetMobByID(ID.mob.COQUECIGRUE):setRespawnTime(math.random(7200, 7800))
+    end
     xi.voidwalker.zoneOnInit(zone)
 end
 

@@ -15,8 +15,10 @@ zone_object.onChocoboDig = function(player, precheck)
 end
 
 zone_object.onInitialize = function(zone)
-    UpdateNMSpawnPoint(ID.mob.NANDI)
-    GetMobByID(ID.mob.NANDI):setRespawnTime(math.random(3600, 4200))
+    if xi.settings.main.ENABLE_WOTG == 1 then
+        UpdateNMSpawnPoint(ID.mob.NANDI)
+        GetMobByID(ID.mob.NANDI):setRespawnTime(math.random(3600, 4200))
+    end
 
     UpdateNMSpawnPoint(ID.mob.CACTROT_RAPIDO)
     GetMobByID(ID.mob.CACTROT_RAPIDO):setRespawnTime(math.random(900, 10800))
