@@ -54,6 +54,7 @@ zones[xi.zone.NORTHERN_SAN_DORIA] =
         ABEAULE_DIALOG_HOME      = 11338, -- Amaura makes her home on Watchdog Alley. If you can't find her, ask someone along the way. I'll be waiting here!
         ABEAULE_DIALOG_THANKS    = 11340, -- You've been a great help, again. I don't know how to thank you!
         GUILERME_DIALOG          = 11354, -- Behold Chateau d'Oraguille, the greatest fortress in the realm!
+        ABIOLEGET_PEAS           = 11256, -- I will provide you with <item> for a pittance of <num> gil.
         PHAVIANE_DIALOG          = 11358, -- This is Victory Arch. Beyond lies Southern San d'Oria.
         SOCHIENE_DIALOG          = 11359, -- You stand before Victory Arch. Southern San d'Oria is on the other side.
         PEPIGORT_DIALOG          = 11360, -- This gate leads to Port San d'Oria.

@@ -79,6 +79,7 @@ entity.onEventFinish = function(player, csid, option)
         player:setCharVar("ATestOfTrueLoveProgress", 0)
         player:needToZone(true)
         player:addFame(xi.quest.fame_area.BASTOK, 120)
+        npcUtil.giveCurrency(player, "gil", xi.settings.main.GIL_RATE * 10000)
         player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_TEST_OF_TRUE_LOVE)
     elseif (csid == 275) then
         player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LOVERS_IN_THE_DUSK)

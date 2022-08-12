@@ -12,9 +12,9 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if player:getCharVar("TheHolyCrest_Event") == 3 and not player:hasItem(xi.items.WYVERN_EGG) and npcUtil.tradeHas(trade, xi.items.PICKAXE) then
-        if npcUtil.giveItem(player, xi.items.WYVERN_EGG) then
-            player:confirmTrade()
-        end
+        player:confirmTrade()
+        player:startEvent(60, xi.items.WYVERN_EGG)
+        player:addItem(xi.items.WYVERN_EGG)
     else
         xi.helm.onTrade(player, npc, trade, xi.helm.type.EXCAVATION, 60)
     end

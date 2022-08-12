@@ -53,7 +53,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13571)
         else
             player:addTitle(xi.title.CONTEST_RIGGER)
-            player:addItem(13571)
+            player:addItem(xi.items.WOLF_GORGET)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13571)
             player:addFame(xi.quest.fame_area.BASTOK, 30)
             player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.RIVALS)
