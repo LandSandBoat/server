@@ -1736,10 +1736,14 @@ INSERT INTO `mob_spell_lists` VALUES ('Blighting_Brand',148,253,1,255); -- sleep
 INSERT INTO `mob_spell_lists` VALUES ('Blighting_Brand',148,254,1,255); -- blind (1~255)
 
 -- Diabolos_Waking_Dream (149)
-INSERT INTO `mob_spell_lists` VALUES ('Diabolos_Waking_Dream',149,245,1,255); -- drain (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Diabolos_Waking_Dream',149,247,1,255); -- aspir (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Diabolos_Waking_Dream',149,274,1,255); -- sleepga_ii (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Diabolos_Waking_Dream',149,360,1,255); -- dispelga (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Diabolos_Waking_Dream',149,232,1,255); -- Bio III
+INSERT INTO `mob_spell_lists` VALUES ('Diabolos_Waking_Dream',149,245,1,255); -- Drain
+INSERT INTO `mob_spell_lists` VALUES ('Diabolos_Waking_Dream',149,247,1,255); -- Aspir
+INSERT INTO `mob_spell_lists` VALUES ('Diabolos_Waking_Dream',149,254,1,255); -- Blind
+INSERT INTO `mob_spell_lists` VALUES ('Diabolos_Waking_Dream',149,260,1,255); -- Dispel
+INSERT INTO `mob_spell_lists` VALUES ('Diabolos_Waking_Dream',149,274,1,255); -- Sleepga II
+INSERT INTO `mob_spell_lists` VALUES ('Diabolos_Waking_Dream',149,360,1,255); -- Dispelga
+INSERT INTO `mob_spell_lists` VALUES ('Diabolos_Waking_Dream',149,361,1,255); -- Blindga
 
 -- Oupire (150)
 INSERT INTO `mob_spell_lists` VALUES ('Oupire',150,147,1,255); -- fire_iv (1~255)

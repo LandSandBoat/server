@@ -63,6 +63,7 @@ end
 
 entity.onMobDeath = function(mob, player, isKiller)
     player:addTitle(xi.title.DESTROYER_OF_ANTIQUITY)
+    mob:getBattlefield():win()
 end
 
 return entity

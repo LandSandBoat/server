@@ -9,7 +9,11 @@ g_mixins.families.ghrah = function(ghrahMob)
         mob:setAnimationSub(0)
         mob:setAggressive(false)
         mob:setLocalVar("roamTime", os.time())
-        mob:setLocalVar("form2", math.random(1, 3))
+        if mob:getXPos() > 0 then
+            mob:setLocalVar("form2", 2)
+        else
+            mob:setLocalVar("form2", 3)
+        end
         local skin = math.random(1161, 1168)
         mob:setModelId(skin)
 

@@ -10985,7 +10985,7 @@ INSERT INTO `mob_droplist` VALUES (1338,0,0,1000,17412,@RARE);   -- Wild Cudgel 
 INSERT INTO `mob_droplist` VALUES (1338,2,0,1000,656,0);         -- Beastcoin (Steal)
 
 -- ZoneID:   7 - Hunter Antlion
-INSERT INTO `mob_droplist` VALUES (1339,0,0,1000,1616,@COMMON); -- Antlion Jaw (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (1339,0,0,1000,1616,@RARE); -- Antlion Jaw (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (1339,0,0,1000,1649,@VRARE);  -- Scarlet Stone (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (1339,2,0,1000,846,0);        -- Insect Wing (Steal)
 

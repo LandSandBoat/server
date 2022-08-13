@@ -13,7 +13,7 @@ effect_object.onEffectGain = function(target, effect)
     target:addMod(xi.mod.ATTP, -15)
     target:addMod(xi.mod.HASTE_ABILITY, -1500)
     target:addMod(xi.mod.RATTP, 15)
-    target:addMod(xi.mod.RANGED_DELAYP, -10)
+    target:addMod(xi.mod.RANGED_DELAYP, -15)
 end
 
 effect_object.onEffectTick = function(target, effect)
@@ -26,7 +26,7 @@ effect_object.onEffectLose = function(target, effect)
     target:delMod(xi.mod.ATTP, -15)
     target:delMod(xi.mod.HASTE_ABILITY, -1500)
     target:delMod(xi.mod.RATTP, 15)
-    target:delMod(xi.mod.RANGED_DELAYP, -10)
+    target:delMod(xi.mod.RANGED_DELAYP, -15)
 end
 
 return effect_object
