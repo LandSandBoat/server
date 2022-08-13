@@ -39,7 +39,7 @@ mission.sections =
             {
                 [3] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        xi.maws.goToMaw(player, xi.zone.BATALLIA_DOWNS_S)
+                        xi.maws.goToMaw(player, xi.zone.BATALLIA_DOWNS)
                     end
                 end,
             },
@@ -53,7 +53,7 @@ mission.sections =
             {
                 [502] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        xi.maws.goToMaw(player, xi.zone.ROLANBERRY_FIELDS_S)
+                        xi.maws.goToMaw(player, xi.zone.ROLANBERRY_FIELDS)
                     end
                 end,
             },
@@ -67,7 +67,7 @@ mission.sections =
             {
                 [502] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        xi.maws.goToMaw(player, xi.zone.SAUROMUGUE_CHAMPAIGN_S)
+                        xi.maws.goToMaw(player, xi.zone.SAUROMUGUE_CHAMPAIGN)
                     end
                 end,
             },
@@ -81,7 +81,7 @@ mission.sections =
             {
                 [7] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        xi.maws.goToMaw(player, xi.zone.BATALLIA_DOWNS)
+                        xi.maws.goToMaw(player, xi.zone.BATALLIA_DOWNS_S)
                     end
                 end,
             },
@@ -95,7 +95,7 @@ mission.sections =
             {
                 [702] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        xi.maws.goToMaw(player, xi.zone.ROLANBERRY_FIELDS)
+                        xi.maws.goToMaw(player, xi.zone.ROLANBERRY_FIELDS_S)
                     end
                 end,
             },
@@ -109,7 +109,7 @@ mission.sections =
             {
                 [702] = function(player, csid, option, npc)
                     if mission:complete(player) then
-                        xi.maws.goToMaw(player, xi.zone.SAUROMUGUE_CHAMPAIGN)
+                        xi.maws.goToMaw(player, xi.zone.SAUROMUGUE_CHAMPAIGN_S)
                     end
                 end,
             },

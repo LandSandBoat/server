@@ -131,3 +131,9 @@ xi.wotg.helpers.checkMemoryFragments = function(player)
         player:addMission(xi.mission.log_id.WOTG, xi.mission.id.wotg.FORGET_ME_NOT)
     end
 end
+
+xi.wotg.helpers.removeMemoryFragments = function(player)
+    for _, keyItemId in ipairs(memoryFragments) do
+        player:delKeyItem(keyItemId)
+    end
+end
