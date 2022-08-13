@@ -53,8 +53,7 @@ spell_object.onMobSpawn = function(mob)
     mob:addSimpleGambit(ai.t.TARGET, ai.c.ALWAYS, 0, ai.r.JA, ai.s.SPECIFIC, xi.ja.HIGH_JUMP)
     mob:addSimpleGambit(ai.t.SELF, ai.c.HAS_TOP_ENMITY, 0, ai.r.JA, ai.s.SPECIFIC, xi.ja.SUPER_JUMP)
 
-    -- TODO: Hold TP to 2000 before closing SC
-    mob:setTrustTPSkillSettings(ai.tp.CLOSER, ai.s.HIGHEST)
+    mob:setTrustTPSkillSettings(ai.tp.CLOSER_UNTIL_TP, ai.s.HIGHEST, 2000)
 end
 
 spell_object.onMobDespawn = function(mob)

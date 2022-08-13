@@ -87,8 +87,8 @@ zones[xi.zone.BASTOK_MINES] =
         CHOCOBO_FEEDING_RUN_AWAY       = 12834, -- Your chocobo has run away. You cannot feed it now.
         CHOCOBO_FEEDING_STILL_EGG      = 12835, -- You cannot feed a chocobo that has not hatched yet.
         CHOCOBO_FEEDING_ITEM           = 13918, -- #: %
-        COMMON_SENSE_SURVIVAL          = 16021, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
-        TEAR_IN_FABRIC_OF_SPACE        = 16620, -- There appears to be a tear in the fabric of space...
+        COMMON_SENSE_SURVIVAL          = 16023, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        TEAR_IN_FABRIC_OF_SPACE        = 16622, -- There appears to be a tear in the fabric of space...
     },
     mob =
     {

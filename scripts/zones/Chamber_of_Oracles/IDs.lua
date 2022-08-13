@@ -25,6 +25,7 @@ zones[xi.zone.CHAMBER_OF_ORACLES] =
         YOU_PLACE_THE                    = 7627, -- You place the <item> into the pedestal.
         IS_SET_IN_THE_PEDESTAL           = 7628, -- The <item> is set in the pedestal.
         HAS_LOST_ITS_POWER               = 7629, -- The <item> has lost its power.
+        DOOR_IS_FIRMLY_SHUT              = 7630, -- The door is firmly shut.
         YOU_DECIDED_TO_SHOW_UP           = 7648, -- So, you decided to show up. Now it's time to see what you're really made of, heh heh heh.
         LOOKS_LIKE_YOU_WERENT_READY      = 7649, -- Looks like you weren't ready for me, were you? Now go home, wash your face, and come back when you think you've got what it takes.
         YOUVE_COME_A_LONG_WAY            = 7650, -- Hm. That was a mighty fine display of skill there, <name>. You've come a long way...

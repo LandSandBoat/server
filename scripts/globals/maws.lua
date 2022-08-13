@@ -64,6 +64,12 @@ xi.maws.gotoRandomMaw = function(player)
     xi.maws.addMaw(player, maw)
 end
 
+xi.maws.hasUnlockedMaw = function(player, zoneId)
+    local maw = xi.maws.pastMaws[zoneId]
+
+    return player:hasTeleport(xi.teleport.type.PAST_MAW, maw.bit)
+end
+
 xi.maws.onTrigger = function(player, npc)
     local ID = zones[player:getZoneID()]
 

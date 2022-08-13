@@ -155,11 +155,11 @@ def fetch_credentials():
                     val = parts[1].strip()
                     credentials[type] = val
 
-        database = os.getenv('XI_DB_NAME') or credentials['SQL_DATABASE']
-        host = os.getenv('XI_DB_HOST') or credentials['SQL_HOST']
-        port = os.getenv('XI_DB_PORT') or int(credentials['SQL_PORT'])
-        login = os.getenv('XI_DB_USER') or credentials['SQL_LOGIN']
-        password = os.getenv('XI_DB_USER_PASSWD') or credentials['SQL_PASSWORD']
+        database = os.getenv('XI_NETWORK_SQL_DATABASE') or credentials['SQL_DATABASE']
+        host = os.getenv('XI_NETWORK_SQL_HOST') or credentials['SQL_HOST']
+        port = os.getenv('XI_NETWORK_SQL_PORT') or int(credentials['SQL_PORT'])
+        login = os.getenv('XI_NETWORK_SQL_LOGIN') or credentials['SQL_LOGIN']
+        password = os.getenv('XI_NETWORK_SQL_PASSWORD') or credentials['SQL_PASSWORD']
     except: # lgtm [py/catch-base-exception]
         print(colorama.Fore.RED + 'Error fetching credentials.\nCheck ../settings/network.lua.')
         return False
@@ -600,11 +600,11 @@ def main():
     if fetch_credentials() == False:
         return
     fetch_configs()
-    fetch_versions()
     #Check MySQL path/availability
     if not os.path.exists(mysql_bin + 'mysql' + exe):
         adjust_mysql_bin()
         write_configs()
+    fetch_versions()
     #CLI args
     if len(sys.argv) > 1:
         arg1 = str(sys.argv[1])

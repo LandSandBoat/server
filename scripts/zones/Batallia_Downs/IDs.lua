@@ -43,13 +43,13 @@ zones[xi.zone.BATALLIA_DOWNS] =
         VOIDWALKER_UPGRADE_KI_2  = 11342, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
         VOIDWALKER_BREAK_KI      = 11343, -- The <keyitem> shatters into tiny fragments.
         VOIDWALKER_OBTAIN_KI     = 11344, -- Obtained key item: <keyitem>!
-        LEARNS_SPELL             = 12842, -- <name> learns <spell>!
-        UNCANNY_SENSATION        = 12844, -- You are assaulted by an uncanny sensation.
-        COMMON_SENSE_SURVIVAL    = 12851, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
-        RAPTOR_OVERCOME_MUNCHIES = 13004, -- The raptor has overcome the munchies! (<number>/<number>)
-        RAPTOR_SECOND_WIND       = 13005, -- The raptor has gained a second wind!
-        MEET_SYRILLIA            = 13006, -- Meet up with Syrillia.
-        RAPTOR_SPEEDS_OFF        = 13007, -- The raptor speeds off into the sunset...
+        LEARNS_SPELL             = 12844, -- <name> learns <spell>!
+        UNCANNY_SENSATION        = 12846, -- You are assaulted by an uncanny sensation.
+        COMMON_SENSE_SURVIVAL    = 12853, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        RAPTOR_OVERCOME_MUNCHIES = 13006, -- The raptor has overcome the munchies! (<number>/<number>)
+        RAPTOR_SECOND_WIND       = 13007, -- The raptor has gained a second wind!
+        MEET_SYRILLIA            = 13008, -- Meet up with Syrillia.
+        RAPTOR_SPEEDS_OFF        = 13009, -- The raptor speeds off into the sunset...
     },
     mob =
     {

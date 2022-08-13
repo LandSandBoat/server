@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Phomiuna_Aqueducts
---  NPC: Oil Lamp - Ice (West)
+--  NPC: Oil Lamp - Light (West)
 -- !pos -63 -26 73
 -----------------------------------
 local ID = require("scripts/zones/Phomiuna_Aqueducts/IDs")
@@ -12,20 +12,19 @@ end
 
 entity.onTrigger = function(player, npc)
 
-    local DoorOffset = npc:getID()
+    local doorOffset = npc:getID()
 
-    player:messageSpecial(ID.text.LAMP_OFFSET+4) -- ice lamp
-    npc:openDoor(7) -- lamp animation
+    player:messageSpecial(ID.text.LAMP_OFFSET+6) -- Light lamp
+    npc:openDoor(7) -- Lamp animation
 
     local day = VanadielDayOfTheWeek()
 
-    if (day == xi.day.FIRESDAY) then
-        if (GetNPCByID(DoorOffset+6):getAnimation() == 8) then -- lamp fire open?
-            GetNPCByID(DoorOffset-3):openDoor(15) -- Open Door _0rk
-        end
-    elseif (day == xi.day.ICEDAY) then -- iceday
-        if (GetNPCByID(DoorOffset+5):getAnimation() == 8) then -- lamp wind open?
-            GetNPCByID(DoorOffset-3):openDoor(15) -- Open Door _0rk
+    if
+        day == xi.day.LIGHTSDAY or
+        day == xi.day.DARKSDAY
+    then
+        if GetNPCByID(doorOffset-1):getAnimation() == 8 then -- Is the Dark lamp open?
+            GetNPCByID(doorOffset-3):openDoor(15) -- Open Door _0rk
         end
     end
 

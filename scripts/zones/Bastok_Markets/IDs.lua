@@ -67,13 +67,13 @@ zones[xi.zone.BASTOK_MARKETS] =
         IF_YOU_WEAR_THIS             = 8285,  -- If you put this on and walk around, something...unexpected might happen...
         THANK_YOU                    = 8286,  -- Thank you...
         RETRIEVE_DIALOG_ID           = 12892, -- You retrieve <item> from the porter moogle's care.
-        TURNING_IN_SPARKS            = 14213, -- Ohohoho... Turning in sparks, I see.
-        DO_NOT_POSSESS_ENOUGH        = 14237, -- You do not possess enough <item> to complete the transaction.
-        NOT_ENOUGH_SPARKS            = 14238, -- You do not possess enough sparks of eminence to complete the transaction.
-        MAX_SPARKS_LIMIT_REACHED     = 14239, -- You have reached the maximum number of sparks that you can exchange this week (<number>). Your ability to purchase skill books and equipment will be restricted until next week.
-        YOU_NOW_HAVE_AMT_CURRENCY    = 14249, -- You now have <number> [sparks of eminence/conquest points/points of imperial standing/Allied Notes/bayld/Fields of Valor points/assault points (Leujaoam)/assault points (Mamool Ja Training Grounds)/assault points (Lebros Cavern)/assault points (Periqia)/assault points (Ilrusi Atoll)/cruor/kinetic units/obsidian fragments/mweya plasm corpuscles/ballista points/Unity accolades/pinches of Escha silt/resistance credits].
-        YOU_HAVE_JOINED_UNITY        = 14552, -- ou have joined [Pieuje's/Ayame's/Invincible Shield's/Apururu's/Maat's/Aldo's/Jakoh Wahcondalo's/Naja Salaheem's/Flaviria's/Yoran-Oran's/Sylvie's] Unity!
-        HAVE_ALREADY_CHANGED_UNITY   = 14628, -- ou have already changed Unities. Please wait until the next tabulation period.
+        TURNING_IN_SPARKS            = 14217, -- Ohohoho... Turning in sparks, I see.
+        DO_NOT_POSSESS_ENOUGH        = 14241, -- You do not possess enough <item> to complete the transaction.
+        NOT_ENOUGH_SPARKS            = 14242, -- You do not possess enough sparks of eminence to complete the transaction.
+        MAX_SPARKS_LIMIT_REACHED     = 14243, -- You have reached the maximum number of sparks that you can exchange this week (<number>). Your ability to purchase skill books and equipment will be restricted until next week.
+        YOU_NOW_HAVE_AMT_CURRENCY    = 14253, -- You now have <number> [sparks of eminence/conquest points/points of imperial standing/Allied Notes/bayld/Fields of Valor points/assault points (Leujaoam)/assault points (Mamool Ja Training Grounds)/assault points (Lebros Cavern)/assault points (Periqia)/assault points (Ilrusi Atoll)/cruor/kinetic units/obsidian fragments/mweya plasm corpuscles/ballista points/Unity accolades/pinches of Escha silt/resistance credits].
+        YOU_HAVE_JOINED_UNITY        = 14556, -- ou have joined [Pieuje's/Ayame's/Invincible Shield's/Apururu's/Maat's/Aldo's/Jakoh Wahcondalo's/Naja Salaheem's/Flaviria's/Yoran-Oran's/Sylvie's] Unity!
+        HAVE_ALREADY_CHANGED_UNITY   = 14632, -- ou have already changed Unities. Please wait until the next tabulation period.
     },
     mob =
     {

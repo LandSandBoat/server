@@ -331,62 +331,69 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
         }
     }
 
-    if (PChar->m_moghouseID != 0)
+    // Only release client from "Downloading Data" if the packet sequence came in without a drop on 0x00D
+    // It is also possible that the client also never received our packets to release themselves from the loading screen.
+    // TODO: Need further research into the relationship between 0x00D and 0x00A, if any.
+    if (PChar->loc.zone != nullptr)
     {
-        // Update any mannequins that might be placed on zonein
-        // Build Mannequin model id list
-        auto getModelIdFromStorageSlot = [](CCharEntity* PChar, uint8 slot) -> uint16
+        if (PChar->m_moghouseID != 0)
         {
-            uint16 modelId = 0x0000;
-
-            if (slot == 0)
+            // Update any mannequins that might be placed on zonein
+            // Build Mannequin model id list
+            auto getModelIdFromStorageSlot = [](CCharEntity* PChar, uint8 slot) -> uint16
             {
-                return modelId;
-            }
+                uint16 modelId = 0x0000;
 
-            auto* PItem = PChar->getStorage(LOC_STORAGE)->GetItem(slot);
-            if (PItem == nullptr)
-            {
-                return modelId;
-            }
-
-            if (auto* PItemEquipment = dynamic_cast<CItemEquipment*>(PItem))
-            {
-                modelId = PItemEquipment->getModelId();
-            }
-
-            return modelId;
-        };
-
-        for (auto safeContainerId : { LOC_MOGSAFE, LOC_MOGSAFE2 })
-        {
-            CItemContainer* PContainer = PChar->getStorage(safeContainerId);
-            for (int slotIndex = 1; slotIndex <= PContainer->GetSize(); ++slotIndex)
-            {
-                CItem* PContainerItem = PContainer->GetItem(slotIndex);
-                if (PContainerItem != nullptr && PContainerItem->isType(ITEM_FURNISHING))
+                if (slot == 0)
                 {
-                    auto* PFurnishing = static_cast<CItemFurnishing*>(PContainerItem);
-                    if (PFurnishing->isInstalled() && PFurnishing->isMannequin())
+                    return modelId;
+                }
+
+                auto* PItem = PChar->getStorage(LOC_STORAGE)->GetItem(slot);
+                if (PItem == nullptr)
+                {
+                    return modelId;
+                }
+
+                if (auto* PItemEquipment = dynamic_cast<CItemEquipment*>(PItem))
+                {
+                    modelId = PItemEquipment->getModelId();
+                }
+
+                return modelId;
+            };
+
+            for (auto safeContainerId : { LOC_MOGSAFE, LOC_MOGSAFE2 })
+            {
+                CItemContainer* PContainer = PChar->getStorage(safeContainerId);
+                for (int slotIndex = 1; slotIndex <= PContainer->GetSize(); ++slotIndex)
+                {
+                    CItem* PContainerItem = PContainer->GetItem(slotIndex);
+                    if (PContainerItem != nullptr && PContainerItem->isType(ITEM_FURNISHING))
                     {
-                        auto*  PMannequin = PFurnishing;
-                        uint16 mainId     = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 0]);
-                        uint16 subId      = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 1]);
-                        uint16 rangeId    = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 2]);
-                        uint16 headId     = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 3]);
-                        uint16 bodyId     = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 4]);
-                        uint16 handsId    = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 5]);
-                        uint16 legId      = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 6]);
-                        uint16 feetId     = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 7]);
-                        PChar->pushPacket(new CInventoryCountPacket(safeContainerId, slotIndex, headId, bodyId, handsId, legId, feetId, mainId, subId, rangeId));
+                        auto* PFurnishing = static_cast<CItemFurnishing*>(PContainerItem);
+                        if (PFurnishing->isInstalled() && PFurnishing->isMannequin())
+                        {
+                            auto*  PMannequin = PFurnishing;
+                            uint16 mainId     = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 0]);
+                            uint16 subId      = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 1]);
+                            uint16 rangeId    = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 2]);
+                            uint16 headId     = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 3]);
+                            uint16 bodyId     = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 4]);
+                            uint16 handsId    = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 5]);
+                            uint16 legId      = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 6]);
+                            uint16 feetId     = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 7]);
+                            PChar->pushPacket(new CInventoryCountPacket(safeContainerId, slotIndex, headId, bodyId, handsId, legId, feetId, mainId, subId, rangeId));
+                        }
                     }
                 }
             }
         }
+
+        PChar->pushPacket(new CDownloadingDataPacket());
+        PChar->pushPacket(new CZoneInPacket(PChar, PChar->currentEvent->eventId));
+        PChar->pushPacket(new CZoneVisitedPacket(PChar));
     }
-    PChar->pushPacket(new CDownloadingDataPacket());
-    PChar->pushPacket(new CZoneInPacket(PChar, PChar->currentEvent->eventId));
-    PChar->pushPacket(new CZoneVisitedPacket(PChar));
 }
 
 /************************************************************************
@@ -596,7 +603,7 @@ void SmallPacket0x011(map_session_data_t* const PSession, CCharEntity* const PCh
         }
     }
 
-    luautils::AfterZoneIn(PChar);
+    PChar->PAI->QueueAction(queueAction_t(4000ms, false, luautils::AfterZoneIn));
 
     // todo: kill player til theyre dead and bsod
     const char* fmtQuery = "SELECT version_mismatch FROM accounts_sessions WHERE charid = %u";

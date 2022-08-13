@@ -63,14 +63,14 @@ zones[xi.zone.LOWER_JEUNO] =
         PARIKE_PORANKE_16            = 8994,  -- To show you my gratitude, let me try out this new spell I thought up yesterday while I was taking a nap!
         NO_KEY                       = 9916,  -- You do not have a usable key in your possession.
         RETRIEVE_DIALOG_ID           = 10196, -- You retrieve <item> from the porter moogle's care.
-        WAYPOINT_EXAMINE             = 10355, -- An enigmatic contrivance hovers in silence...
-        EXPENDED_KINETIC_UNITS       = 10358, -- You have expended <number> kinetic unit[/s] and will be transported to another locale.
-        INSUFFICIENT_UNITS           = 10359, -- Your stock of kinetic units is insufficient.
-        REACHED_KINETIC_UNIT_LIMIT   = 10360, -- You have reached your limit of kinetic units and cannot charge your artifact any further.
-        CANNOT_RECEIVE_KINETIC       = 10361, -- There is no response. You apparently cannot receive kinetic units from this item.
-        ARTIFACT_HAS_BEEN_CHARGED    = 10362, -- Your artifact has been charged with <number> kinetic unit[/s]. Your current stock of kinetic units totals <number>.
-        ARTIFACT_TERMINAL_VOLUME     = 10363, -- Your artifact has been charged to its terminal volume of kinetic units.
-        SURPLUS_LOST_TO_AETHER       = 10364, -- A surplus of <number> kinetic unit[/s] has been lost to the aether.
+        WAYPOINT_EXAMINE             = 10357, -- An enigmatic contrivance hovers in silence...
+        EXPENDED_KINETIC_UNITS       = 10360, -- You have expended <number> kinetic unit[/s] and will be transported to another locale.
+        INSUFFICIENT_UNITS           = 10361, -- Your stock of kinetic units is insufficient.
+        REACHED_KINETIC_UNIT_LIMIT   = 10362, -- You have reached your limit of kinetic units and cannot charge your artifact any further.
+        CANNOT_RECEIVE_KINETIC       = 10363, -- There is no response. You apparently cannot receive kinetic units from this item.
+        ARTIFACT_HAS_BEEN_CHARGED    = 10364, -- Your artifact has been charged with <number> kinetic unit[/s]. Your current stock of kinetic units totals <number>.
+        ARTIFACT_TERMINAL_VOLUME     = 10365, -- Your artifact has been charged to its terminal volume of kinetic units.
+        SURPLUS_LOST_TO_AETHER       = 10366, -- A surplus of <number> kinetic unit[/s] has been lost to the aether.
     },
     mob =
     {

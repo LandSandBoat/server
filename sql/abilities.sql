@@ -329,7 +329,7 @@ INSERT INTO `abilities` VALUES (321,'bully',6,93,4,180,240,127,0,248,2000,0,6,8.
 INSERT INTO `abilities` VALUES (322,'maintenance',18,30,1,90,214,0,0,83,2000,0,6,12.0,0,0,0,1474,0,'ABYSSEA'); -- ta257
 INSERT INTO `abilities` VALUES (323,'brazen_rush',1,96,1,3600,254,100,0,271,2000,0,6,0.0,0,1,300,0,0,NULL);
 INSERT INTO `abilities` VALUES (324,'inner_strength',2,96,1,3600,254,100,0,272,2000,0,6,0.0,0,0,0,0,0,NULL); -- check animation
-INSERT INTO `abilities` VALUES (325,'asylum',3,96,1,3600,254,100,0,273,2000,0,6,0.0,0,0,0,0,0,NULL);
+INSERT INTO `abilities` VALUES (325,'asylum',3,96,4,3600,254,100,0,273,2000,0,6,20.0,0,0,0,0,0,NULL);
 INSERT INTO `abilities` VALUES (326,'subtle_sorcery',4,96,1,3600,254,0,0,274,2000,0,6,0.0,0,0,0,0,0,NULL); -- check animation
 INSERT INTO `abilities` VALUES (327,'stymie',5,96,1,3600,254,100,0,275,2000,0,6,20.0,0,1,80,0,0,'SOA');
 INSERT INTO `abilities` VALUES (328,'larceny',6,96,4,3600,254,100,0,276,2000,0,6,4.0,0,0,0,0,0,NULL);
@@ -349,7 +349,7 @@ INSERT INTO `abilities` VALUES (341,'grand_pas',19,96,1,3600,254,0,0,289,2000,0,
 INSERT INTO `abilities` VALUES (342,'caper_emissarius',20,96,2,3600,254,0,0,290,2000,0,6,8.0,0,0,0,0,0,NULL); -- check animation
 INSERT INTO `abilities` VALUES (343,'bolster',21,1,1,3600,0,0,0,303,2000,0,6,0.0,0,1,300,0,0,'SOA'); -- check animation
 INSERT INTO `abilities` VALUES (344,'swipe',22,25,4,90,241,110,0,0,2000,0,15,4.5,0,80,320,0,0,'SOA');
-INSERT INTO `abilities` VALUES (345,'full_circle',21,5,256,10,243,0,0,94,2000,0,6,20.0,0,1,300,0,0,'SOA');
+INSERT INTO `abilities` VALUES (345,'full_circle',21,5,1,10,243,0,0,94,2000,0,6,20.0,0,1,300,0,0,'SOA');
 INSERT INTO `abilities` VALUES (346,'lasting_emanation',21,25,256,300,244,663,0,306,2000,0,6,10.0,0,1,300,0,0,'SOA');
 INSERT INTO `abilities` VALUES (347,'ecliptic_attrition',21,25,256,300,244,664,0,307,2000,0,6,10.0,0,1,300,0,0,'SOA');
 INSERT INTO `abilities` VALUES (348,'collimated_fervor',21,40,1,300,245,100,0,304,2000,0,6,0.0,0,1,300,0,0,'SOA');
@@ -644,4 +644,4 @@ INSERT INTO `abilities` VALUES (961,'welt',15,1,4,60,173,326,317,176,2000,0,6,30
 -- INSERT INTO `abilities` VALUES (966,'bitter_elegy',22,1,1,0,300,0,0,???,2000,0,6,20.0,0,450,900,0,0,NULL);
 -- INSERT INTO `abilities` VALUES (968,'tornado_ii',22,1,1,0,300,0,0,???,2000,0,6,20.0,0,450,900,0,0,NULL);
 -- INSERT INTO `abilities` VALUES (969,'winds_blessing,22,1,1,0,300,0,0,???,2000,0,6,20.0,0,450,900,0,0,NULL);
--- 
+--

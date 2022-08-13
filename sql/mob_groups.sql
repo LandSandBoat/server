@@ -4917,7 +4917,7 @@ INSERT INTO `mob_groups` VALUES (149,2180,84,'Kaiser_Behemoth',0,128,0,0,0,60,60
 INSERT INTO `mob_groups` VALUES (150,1324,84,'Ferreous_Coffin',0,128,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (151,2403,84,'Lewenhart',0,128,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (152,291,84,'Auroral_Alicorn',0,128,0,0,0,1,1,0);
-INSERT INTO `mob_groups` VALUES (153,6819,84,'Menechme',0,128,0,20000,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (153,6819,84,'Menechme',0,128,0,20000,0,150,150,0);
 INSERT INTO `mob_groups` VALUES (154,5786,84,'Excenmille',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (155,5184,84,'Taweret',0,128,0,0,0,93,94,0);
 
