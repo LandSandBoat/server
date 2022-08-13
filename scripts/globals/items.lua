@@ -835,6 +835,7 @@ xi.items =
     CIREIN_CROINS_LANTERN           = 2965,
     BUKHISS_WING                    = 2966,
     SEDNAS_TUSK                     = 2967,
+    PUNCH_BUG                       = 2977,
     WITHERED_COCOON                 = 3072,
     ERUCA_EGG                       = 3073,
     VIAL_OF_UNDYING_OOZE            = 3075,
