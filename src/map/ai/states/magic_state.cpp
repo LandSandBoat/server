@@ -328,6 +328,11 @@ void CMagicState::ApplyEnmity(CBattleEntity* PTarget, int ce, int ve)
     {
         m_PEntity->addModifier(Mod::ENMITY, -(m_PEntity->getMod(Mod::DIVINE_BENISON) >> 1)); // Half of divine benison mod amount = -enmity
     }
+    // Subtle Sorcery sets Cumulative Enmity of spells to 0
+    if (m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_SUBTLE_SORCERY))
+    {
+        ce = 0;
+    }
 
     if (PTarget != nullptr)
     {
