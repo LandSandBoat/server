@@ -10,6 +10,10 @@ end
 zoneObject.onInstanceZoneIn = function(player, instance)
     local cs = -1
 
+    if not player:getInstance() then
+        player:setPos(-34.2, -16, 58, 32, xi.zone.BATALLIA_DOWNS_S)
+    end
+
     local pos = player:getPos()
     if pos.x == 0 and pos.y == 0 and pos.z == 0 then
         local entrypos = instance:getEntryPos()

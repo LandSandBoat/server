@@ -4,9 +4,7 @@
 -- Type: Entryance to "A Nation on the Brink"
 -- !pos  314.083 -1.160 -181.455 84
 -----------------------------------
-local ID = require("scripts/zones/Batallia_Downs_[S]/IDs")
-require("scripts/globals/instance")
-require("scripts/globals/zone")
+local ID = zones[xi.zone.BATALLIA_DOWNS_S]
 -----------------------------------
 local entity = {}
 

@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Everbloom Hollow
---  Mob: Zazarg
+--  Mob: Rongelouts N Distaud
 -----------------------------------
 local entity = {}
 

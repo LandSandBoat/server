@@ -10786,6 +10786,7 @@ void CLuaBaseEntity::createInstance(uint16 instanceID)
         return;
     }
 
+    ShowInfo(fmt::format("Creating instance {} for {}", instanceID, m_PBaseEntity->getName()));
     instanceutils::LoadInstance(instanceID, static_cast<CCharEntity*>(m_PBaseEntity));
 }
 

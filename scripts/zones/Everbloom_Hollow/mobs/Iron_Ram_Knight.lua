@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Everbloom Hollow
---  Mob: Zazarg
+--  Mob: Iron Ram Knight
 -----------------------------------
 local entity = {}
 

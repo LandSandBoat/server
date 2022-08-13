@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Everbloom Hollow
---  Mob: Zazarg
+--  Mob: Ruby Quadav
 -----------------------------------
 local entity = {}
 

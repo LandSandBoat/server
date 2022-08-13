@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Everbloom Hollow
---  Mob: Zazarg
+--  Mob: 7th Cohors Legionnaire
 -----------------------------------
 local entity = {}
 

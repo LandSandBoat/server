@@ -1,6 +1,6 @@
 -----------------------------------
 -- Area: Everbloom Hollow
---  Mob: Zazarg
+--  Mob: One-eyed Gwajboj
 -----------------------------------
 local entity = {}
 

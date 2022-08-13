@@ -26,6 +26,7 @@
 
 #include "entities/charentity.h"
 #include "entities/npcentity.h"
+#include "instance.h"
 #include "lua_baseentity.h"
 #include "trigger_area.h"
 #include "utils/mobutils.h"
@@ -286,10 +287,10 @@ sol::table CLuaZone::queryEntitiesByName(std::string const& name, sol::optional<
     // TODO: Move this routine into CInstance and memoize
     if (maybeInstance.has_value())
     {
-        CInstance* PInstance = maybeInstance.value().GetInstance();
+        CInstance* PInstance = (*maybeInstance).GetInstance();
         for (auto [targid, PNpc] : PInstance->m_npcList)
         {
-            if (std::string((const char*)PNpc->GetName()) == name)
+            if (PNpc->getName() == name)
             {
                 table.add(CLuaBaseEntity(PNpc));
             }
@@ -297,7 +298,7 @@ sol::table CLuaZone::queryEntitiesByName(std::string const& name, sol::optional<
 
         for (auto [targid, PMob] : PInstance->m_mobList)
         {
-            if (std::string((const char*)PMob->GetName()) == name)
+            if (PMob->getName() == name)
             {
                 table.add(CLuaBaseEntity(PMob));
             }
@@ -305,7 +306,7 @@ sol::table CLuaZone::queryEntitiesByName(std::string const& name, sol::optional<
 
         if (table.empty())
         {
-            ShowWarning("Query for entity name: %s in instance zone: %s returned no results", name, m_pLuaZone->GetName());
+            ShowWarning("Query for entity name: %s in instance zone: %s returned no results", name, m_pLuaZone->getName());
         }
 
         return table;

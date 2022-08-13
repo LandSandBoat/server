@@ -143,7 +143,7 @@ INSERT INTO `instance_list` VALUES (7704,'nyzul_isle_investigation',77,72,30,-20
 -- INSERT INTO `instance_list` VALUES (7705,'nyzul_isle_uncharted_survey',77,72,30,0.000,0.000,0.000,0,-1,-1,-1,-1);
 
 -- EVERBLOOM_HOLLOW (zoneID: 86, starting id: 8600)
-INSERT INTO `instance_list` VALUES (8600,'a_nation_on_the_brink',86,83,0,382,0,-191,74,-1,-1,-1,-1);
+INSERT INTO `instance_list` VALUES (8600,'a_nation_on_the_brink',86,83,30,-158,20,-156,166,-1,-1,-1,-1);
 -- INSERT INTO `instance_list` VALUES (8601,'honor_under_fire',86,83,0,382,0,-191,74,-1,-1,-1,-1);
 -- INSERT INTO `instance_list` VALUES (8602,'what_price_loyalty',86,83,0,382,0,-191,74,-1,-1,-1,-1);
 -- INSERT INTO `instance_list` VALUES (8603,'doomvoid',86,84,0,382,0,-191,74,-1,-1,-1,-1);
