@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: Grauberg_[S] (89)
---
 -----------------------------------
 local ID = require("scripts/zones/Grauberg_[S]/IDs")
 require("scripts/globals/status")
