@@ -35,7 +35,7 @@ local function handleQuestCompletion(player, csid, option, npc)
     local ID = zones[player:getZoneID()]
     local numKeyItems = 0
 
-    for _, questData in ipairs(subQuestData) do
+    for _, questData in pairs(subQuestData) do
         if player:hasKeyItem(questData[2]) then
             numKeyItems = numKeyItems + 1
         end
@@ -44,12 +44,12 @@ local function handleQuestCompletion(player, csid, option, npc)
     player:completeQuest(xi.quest.log_id.CRYSTAL_WAR, subQuestData[csid][1])
 
     if numKeyItems < 2 then
-        player:messageSpecial(ID.text.FRAGMENT_FAR_TOO_SMALL)
+        player:messageName(ID.text.FRAGMENT_FAR_TOO_SMALL, nil, subQuestData[csid][2])
         npcUtil.giveKeyItem(player, subQuestData[csid][2])
     else
         player:messageSpecial(ID.text.FRAGMENTS_MELD, xi.ki.LARGE_MEMORY_FRAGMENT1)
 
-        for _, questData in ipairs(subQuestData) do
+        for _, questData in pairs(subQuestData) do
             player:delKeyItem(questData[2])
         end
 
@@ -141,6 +141,8 @@ quest.sections =
             onEventFinish =
             {
                 [958] = function(player, csid, option, npc)
+                    player:delKeyItem(xi.ki.THIERRIDES_BEAN_CREATION)
+
                     quest:setVar(player, 'Prog1', 1)
                 end,
             },
@@ -228,6 +230,8 @@ quest.sections =
                         npcUtil.tradeHasExactly(trade, xi.items.LILAC) and
                         quest:getVar(player, 'Prog3') == 2
                     then
+                        player:confirmTrade()
+
                         return quest:progressEvent(6, 119, 300, 200, 100, 0, 0, 558716, 0)
                     end
                 end,
