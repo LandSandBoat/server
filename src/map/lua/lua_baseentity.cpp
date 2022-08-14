@@ -8198,14 +8198,17 @@ uint16 CLuaBaseEntity::getMaxSkillLevel(uint8 level, uint8 jobId, uint8 skillId)
  *  Function: getSkillRank()
  *  Purpose : Returns the Real Rank for a particular skill
  *  Example : player:getSkillRank(craftID)
- *  Notes   : XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);?
+ *  Notes   :
  ************************************************************************/
 
 uint8 CLuaBaseEntity::getSkillRank(uint8 rankID)
 {
-    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-
-    return PChar->RealSkills.rank[rankID];
+    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    if (PChar)
+    {
+        return PChar->RealSkills.rank[rankID];
+    }
+    return 0;
 }
 
 /************************************************************************
@@ -8217,19 +8220,21 @@ uint8 CLuaBaseEntity::getSkillRank(uint8 rankID)
 
 void CLuaBaseEntity::setSkillRank(uint8 skillID, uint8 newrank)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    if (PChar)
+    {
+        auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+        PChar->WorkingSkills.rank[skillID]  = newrank;
+        PChar->WorkingSkills.skill[skillID] = (PChar->RealSkills.skill[skillID] / 10) * 0x20 + newrank;
+        PChar->RealSkills.rank[skillID]     = newrank;
+        // PChar->RealSkills.skill[skillID] += 1;
 
-    PChar->WorkingSkills.rank[skillID]  = newrank;
-    PChar->WorkingSkills.skill[skillID] = (PChar->RealSkills.skill[skillID] / 10) * 0x20 + newrank;
-    PChar->RealSkills.rank[skillID]     = newrank;
-    // PChar->RealSkills.skill[skillID] += 1;
-
-    jobpointutils::RefreshGiftMods(PChar);
-    charutils::BuildingCharSkillsTable(PChar);
-    charutils::SaveCharSkills(PChar, skillID);
-    PChar->pushPacket(new CCharSkillsPacket(PChar));
+        jobpointutils::RefreshGiftMods(PChar);
+        charutils::BuildingCharSkillsTable(PChar);
+        charutils::SaveCharSkills(PChar, skillID);
+        PChar->pushPacket(new CCharSkillsPacket(PChar));
+    }
 }
 
 /************************************************************************
@@ -9870,6 +9875,136 @@ bool CLuaBaseEntity::isDualWielding()
     }
 
     return false;
+}
+
+/************************************************************************
+ *  Function: isUsingH2H()
+ *  Purpose : Returns true if entity is using H2H
+ *  Example : if player:isDualWielding() then
+ *  Notes   :
+ ************************************************************************/
+
+bool CLuaBaseEntity::isUsingH2H()
+{
+    CCharEntity* PCharEntity   = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    CMobEntity*  PBattleEntity = dynamic_cast<CMobEntity*>(m_PBaseEntity);
+
+    if (PCharEntity)
+    {
+        CItemWeapon* PMainWeapon = dynamic_cast<CItemWeapon*>(PCharEntity->getEquip(SLOT_MAIN));
+
+        if (PMainWeapon)
+        {
+            if (PMainWeapon->getSkillType() == SKILLTYPE::SKILL_HAND_TO_HAND)
+            {
+                return true;
+            }
+        }
+        else // bare handed
+        {
+            return true;
+        }
+    }
+    else if (PBattleEntity)
+    {
+        CItemWeapon* PWeapon = dynamic_cast<CItemWeapon*>(PBattleEntity->m_Weapons[SLOT_MAIN]);
+        if (PWeapon && PWeapon->getSkillType() == SKILLTYPE::SKILL_HAND_TO_HAND)
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+/************************************************************************
+ *  Function: getBaseDelay()
+ *  Purpose : Returns the unmodified base delay of an entity's melee attack without any form of delay reduction
+ *  Example : local delay = player:getBaseDelay()
+ *  Notes   :
+ ************************************************************************/
+
+uint16 CLuaBaseEntity::getBaseDelay()
+{
+    CCharEntity*   PCharEntity   = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    CBattleEntity* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+    uint16         baseDelay     = 480; // h2h "unequipped" base delay
+
+    if (PCharEntity)
+    {
+        CItemWeapon* PMainWeapon = dynamic_cast<CItemWeapon*>(PCharEntity->getEquip(SLOT_MAIN));
+        CItemWeapon* PSubWeapon  = dynamic_cast<CItemWeapon*>(PCharEntity->getEquip(SLOT_SUB));
+
+        if (PMainWeapon)
+        {
+            if (PMainWeapon->getSkillType() == SKILLTYPE::SKILL_HAND_TO_HAND)
+            {
+                baseDelay += PMainWeapon->getBaseDelay();
+            }
+            else
+            {
+                baseDelay = PMainWeapon->getBaseDelay();
+                if (PSubWeapon)
+                {
+                    baseDelay += PSubWeapon->getBaseDelay();
+                }
+            }
+        }
+    }
+    else if (PBattleEntity)
+    {
+        CItemWeapon* PWeapon = dynamic_cast<CItemWeapon*>(PBattleEntity->m_Weapons[SLOT_MAIN]);
+        if (PWeapon)
+        {
+            baseDelay = (PWeapon->getBaseDelay() * 60 / 1000);
+        }
+    }
+
+    return baseDelay;
+}
+
+/************************************************************************
+ *  Function: getBaseRangedDelay()
+ *  Purpose : Returns the unmodified base delay of an entity's ranged attack without any form of delay reduction
+ *  Example : local delay = player:getBaseRangedDelay()
+ *  Notes   :
+ ************************************************************************/
+
+uint16 CLuaBaseEntity::getBaseRangedDelay()
+{
+    CCharEntity*   PCharEntity   = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    CBattleEntity* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+    uint16         baseDelay     = 0; // return 0 if not able to actually ranged attack
+
+    if (PCharEntity)
+    {
+        CItemWeapon* PRangedWeapon = dynamic_cast<CItemWeapon*>(PCharEntity->getEquip(SLOT_RANGED));
+        CItemWeapon* PAmmo         = dynamic_cast<CItemWeapon*>(PCharEntity->getEquip(SLOT_AMMO));
+
+        if (PRangedWeapon && PRangedWeapon->isRanged())
+        {
+            if (PRangedWeapon->isThrowing()) // Throwing, like Chakram/Boomerang in ranged slot
+            {
+                baseDelay = PRangedWeapon->getBaseDelay();
+            }
+            else if (PAmmo) // Bow/gun etc, but only valid if Ammo is equipped.
+            {
+                baseDelay = PRangedWeapon->getBaseDelay() + PAmmo->getBaseDelay();
+            }
+        }
+        else if (PAmmo && PAmmo->isRanged()) // Throwing, Pebble/Shuriken in ammo slot
+        {
+            baseDelay = PAmmo->getBaseDelay();
+        }
+    }
+    else if (PBattleEntity)
+    {
+        baseDelay = 260; // TODO: There does not seem to be a real way to get the delay of a ranged attack of a non-PC.
+                         // 260 delay is derived from a Goblin Hunter using a ranged attack, using Dark Seal Absorb TP to reverse the delay.
+                         // The cast gave back 40 TP, which is half of 80 TP due to 50% dAGI penalty being maxed out.
+    }
+
+    return baseDelay;
 }
 
 /************************************************************************
@@ -14796,6 +14931,9 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("checkImbuedItems", CLuaBaseEntity::checkImbuedItems);
 
     SOL_REGISTER("isDualWielding", CLuaBaseEntity::isDualWielding);
+    SOL_REGISTER("isUsingH2H", CLuaBaseEntity::isUsingH2H);
+    SOL_REGISTER("getBaseDelay", CLuaBaseEntity::getBaseDelay);
+    SOL_REGISTER("getBaseRangedDelay", CLuaBaseEntity::getBaseRangedDelay);
 
     SOL_REGISTER("checkLiementAbsorb", CLuaBaseEntity::checkLiementAbsorb);
 
