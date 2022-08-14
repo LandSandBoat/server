@@ -93,7 +93,7 @@ void CWeaponSkillState::SpendCost()
 
         if (m_PEntity->getMod(Mod::WS_NO_DEPLETE) <= xirand::GetRandomNumber(100))
         {
-            m_PEntity->health.tp = 0;
+            m_PEntity->addTP(-tp);
         }
     }
 
