@@ -11582,6 +11582,8 @@ INSERT INTO `item_equipment` VALUES (23793,'ziamet_peti',1,0,4194303,172,0,0,32,
 INSERT INTO `item_equipment` VALUES (23794,'ziamet_bazubands',1,0,4194303,172,0,0,64,0,0);
 INSERT INTO `item_equipment` VALUES (23795,'ziamet_salvars',1,0,4194303,172,0,0,128,0,0);
 INSERT INTO `item_equipment` VALUES (23796,'ziamet_nails',1,0,4194303,172,0,0,256,0,0);
+INSERT INTO `item_equipment` VALUES (23803,'poroggo_cassock',1,0,4194303,358,0,0,32,16,0); -- TODO: capture model from retail
+INSERT INTO `item_equipment` VALUES (23804,'poroggo_cass._+1',1,0,4194303,358,0,0,32,16,0); -- TODO: capture model from retail
 INSERT INTO `item_equipment` VALUES (25417,'warriors_beads',99,0,1,0,0,0,512,0,0);
 INSERT INTO `item_equipment` VALUES (25418,'war._beads_+1',99,0,1,0,0,0,512,0,0);
 INSERT INTO `item_equipment` VALUES (25419,'war._beads_+2',99,0,1,0,0,0,512,0,0);

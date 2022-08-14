@@ -52181,6 +52181,18 @@ INSERT INTO `item_mods` VALUES (23795,1,1); -- DEF: 1
 -- Ziamet Nails
 INSERT INTO `item_mods` VALUES (23796,1,1); -- DEF: 1
 
+-- Poroggo Cass. +1
+INSERT INTO `item_mods` VALUES (23804,15,20);   -- Fire Resistance
+INSERT INTO `item_mods` VALUES (23804,16,20);   -- Ice Resistance
+INSERT INTO `item_mods` VALUES (23804,17,20);   -- Wind Resistance
+INSERT INTO `item_mods` VALUES (23804,18,20);   -- Earth Resistance
+INSERT INTO `item_mods` VALUES (23804,19,20);   -- Thunder Resistance
+INSERT INTO `item_mods` VALUES (23804,20,20);   -- Water Resistance
+INSERT INTO `item_mods` VALUES (23804,21,20);   -- Light Resistance
+INSERT INTO `item_mods` VALUES (23804,22,20);   -- Dark Resistance
+INSERT INTO `item_mods` VALUES (23804,416,1000);   -- occasionaly nullify physical dmg
+INSERT INTO `item_mods` VALUES (23804,476,1000);   -- occasionaly nullify magic dmg
+
 -- Republic Platinum Medal
 INSERT INTO `item_mods` VALUES (25415,8,10);  -- STR: 10
 INSERT INTO `item_mods` VALUES (25415,23,30); -- ATT: 30
