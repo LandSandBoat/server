@@ -129,7 +129,7 @@ mission.sections =
 
         [xi.zone.GRAUBERG_S] =
         {
-            ['Veridical_Conflux'] = mission:event(29, 89, 12354, 59449, 120, 0, 8323089, 0, 0)
+            ['Veridical_Conflux'] = mission:event(29, 89, 12354, 59449, 120, 0, 8323089, 0, 0),
 
             onEventFinish =
             {
