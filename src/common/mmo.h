@@ -294,7 +294,7 @@ struct skills_t
         // index SkillID 0-63
         uint16 skill[64];
     };
-    // The rank is only used in crafts. A size of 64 is required for skill ID compatability.
+    // Rank is used for crafts and loads main job or sub job skill rank, prioritizing main job skill rank.
     uint8 rank[64];
 
     skills_t()
