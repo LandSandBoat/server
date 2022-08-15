@@ -51,7 +51,7 @@ function xi.damage.tp.getModifiedDelayAndCanZanshin(attacker, delay)
         canZanshin = true -- https://www.bg-wiki.com/ffxi/Zanshin
     end
 
-    modifiedDelay = modifiedDelay * math.max((100 - attacker:getMod(xi.mod.DELAYP)) / 100, 0.85) -- cap of 15% https://www.bg-wiki.com/ffxi/Attack_Speed. Undocumented if 15% + Claymore Grip goes above 15%.
+    modifiedDelay = modifiedDelay * math.max((100 + attacker:getMod(xi.mod.DELAYP)) / 100, 0.85) -- minimum cap of -15% https://www.bg-wiki.com/ffxi/Attack_Speed. Undocumented if 15% + Claymore Grip goes above 15%.
 
     return ({canZanshin = canZanshin , modifiedDelay = math.floor(modifiedDelay)})
 end

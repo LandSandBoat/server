@@ -38600,7 +38600,7 @@ INSERT INTO `item_mods` VALUES (19023,5,20);  -- MP: 20
 INSERT INTO `item_mods` VALUES (19023,27,-2); -- ENMITY: -2
 
 -- Sword Strap
-INSERT INTO `item_mods` VALUES (19024,380,3); -- DELAYP: 3
+INSERT INTO `item_mods` VALUES (19024,380,-3); -- DELAYP: -3
 
 -- Pole Grip
 INSERT INTO `item_mods` VALUES (19025,288,2); -- DOUBLE_ATTACK: 2
