@@ -3729,9 +3729,9 @@ namespace battleutils
                 PSCEffect = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN, 0);
             }
             // Previous effect exists
-            else if (PSCEffect->GetStartTime() + 3s < server_clock::now())
+            else if (PSCEffect && PSCEffect->GetStartTime() + 3s < server_clock::now())
             {
-                if (PSCEffect && PSCEffect->GetTier() == 0)
+                if (PSCEffect->GetTier() == 0)
                 {
                     XI_DEBUG_BREAK_IF(!PSCEffect->GetPower());
                     // Previous effect is an opening effect, meaning the power is
