@@ -15,7 +15,7 @@ m:addOverride("xi.zones.RuLude_Gardens.Zone.onInitialize", function(zone)
     local ID = require("scripts/zones/RuLude_Gardens/IDs")
     -- Call the zone's original function for onInitialize
     super(zone)
-	
+    
 local wsRequirements =
 {
 -- index   |      ws_name     |  |item1|    |item1Qty|    |item2|  |item2Qty|
@@ -47,12 +47,12 @@ local atoritutori = zone:insertDynamicEntity({
 
     onTrade = function(player, npc, trade)
         local pointsCost = 300000
-		
-    	if player:getCharVar("PaidForMeritWs") == 1 then
+        
+        if player:getCharVar("PaidForMeritWs") == 1 then
             -- Shijin Spiral
-    	    if npcUtil.tradeHasExactly(trade, {{wsRequirements[1][2], wsRequirements[1][3]}, {wsRequirements[1][4], wsRequirements[1][5]}}) then
+            if npcUtil.tradeHasExactly(trade, {{wsRequirements[1][2], wsRequirements[1][3]}, {wsRequirements[1][4], wsRequirements[1][5]}}) then
                 player:tradeComplete()
-    		    player:PrintToPlayer("Phase 1 Complete. You can now purchase \"Shijin Spiral\" from Nolan in Norg.")
+                player:PrintToPlayer("Phase 1 Complete. You can now purchase \"Shijin Spiral\" from Nolan in Norg.")
                 player:setCharVar("PaidForMeritWs", 2)
                 return
             elseif npcUtil.tradeHasExactly(trade, {{ 'gil', 30 }}) then
@@ -63,7 +63,7 @@ local atoritutori = zone:insertDynamicEntity({
             -- Exenterator
             elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[2][2], wsRequirements[2][3]}, {wsRequirements[2][4], wsRequirements[2][5]}}) then
                 player:tradeComplete()
-    		    player:PrintToPlayer("Phase 1 Complete. You can now purchase \"Exenterator\" from Nolan in Norg.")
+                player:PrintToPlayer("Phase 1 Complete. You can now purchase \"Exenterator\" from Nolan in Norg.")
                 player:setCharVar("PaidForMeritWs", 3)
                 return
             elseif npcUtil.tradeHasExactly(trade, {{ 'gil', 31 }}) then
@@ -72,9 +72,9 @@ local atoritutori = zone:insertDynamicEntity({
                 return
     
             -- Requiescat
-    	    elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[3][2], wsRequirements[3][3]}, {wsRequirements[3][4], wsRequirements[3][5]}}) then
+            elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[3][2], wsRequirements[3][3]}, {wsRequirements[3][4], wsRequirements[3][5]}}) then
                 player:tradeComplete()
-    		    player:PrintToPlayer("Phase 1 Complete. You can now purchase \"Requiescat\" from Nolan in Norg.")
+                player:PrintToPlayer("Phase 1 Complete. You can now purchase \"Requiescat\" from Nolan in Norg.")
                 player:setCharVar("PaidForMeritWs", 4)
                 return
             elseif npcUtil.tradeHasExactly(trade, {{ 'gil', 32 }}) then
@@ -83,9 +83,9 @@ local atoritutori = zone:insertDynamicEntity({
                 return
     
             -- Resolution
-    	    elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[4][2], wsRequirements[4][3]}, {wsRequirements[4][4], wsRequirements[4][5]}}) then
+            elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[4][2], wsRequirements[4][3]}, {wsRequirements[4][4], wsRequirements[4][5]}}) then
                 player:tradeComplete()
-    		    player:PrintToPlayer("Phase 1 Complete. You can now purchase \"Resolution\" from Nolan in Norg.")
+                player:PrintToPlayer("Phase 1 Complete. You can now purchase \"Resolution\" from Nolan in Norg.")
                 player:setCharVar("PaidForMeritWs", 5)
                 return
             elseif npcUtil.tradeHasExactly(trade, {{ 'gil', 33 }}) then
@@ -94,9 +94,9 @@ local atoritutori = zone:insertDynamicEntity({
                 return
     
             -- Ruinator
-    	    elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[5][2], wsRequirements[5][3]}, {wsRequirements[5][4], wsRequirements[5][5]}}) then
+            elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[5][2], wsRequirements[5][3]}, {wsRequirements[5][4], wsRequirements[5][5]}}) then
                 player:tradeComplete()
-    		    player:PrintToPlayer("Phase 1 Complete. You can now purchase \"Ruinator\" from Nolan in Norg.")
+                player:PrintToPlayer("Phase 1 Complete. You can now purchase \"Ruinator\" from Nolan in Norg.")
                 player:setCharVar("PaidForMeritWs", 6)
                 return
             elseif npcUtil.tradeHasExactly(trade, {{ 'gil', 34 }}) then
@@ -105,9 +105,9 @@ local atoritutori = zone:insertDynamicEntity({
                 return
     
             -- Upheaval
-    	    elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[6][2], wsRequirements[6][3]}, {wsRequirements[6][4], wsRequirements[6][5]}}) then
+            elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[6][2], wsRequirements[6][3]}, {wsRequirements[6][4], wsRequirements[6][5]}}) then
                 player:tradeComplete()
-    		    player:PrintToPlayer("Phase 1 Complete. You can now purchase \"Upheaval\" from Nolan in Norg.")
+                player:PrintToPlayer("Phase 1 Complete. You can now purchase \"Upheaval\" from Nolan in Norg.")
                 player:setCharVar("PaidForMeritWs", 7)
                 return
             elseif npcUtil.tradeHasExactly(trade, {{ 'gil', 35 }}) then
@@ -116,9 +116,9 @@ local atoritutori = zone:insertDynamicEntity({
                 return
     
             -- Entropy
-    	    elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[7][2], wsRequirements[7][3]}, {wsRequirements[7][4], wsRequirements[7][5]}}) then
+            elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[7][2], wsRequirements[7][3]}, {wsRequirements[7][4], wsRequirements[7][5]}}) then
                 player:tradeComplete()
-    		    player:PrintToPlayer("Phase 1 Complete. You can now purchase \"Entropy\" from Nolan in Norg.")
+                player:PrintToPlayer("Phase 1 Complete. You can now purchase \"Entropy\" from Nolan in Norg.")
                 player:setCharVar("PaidForMeritWs", 8)
                 return
             elseif npcUtil.tradeHasExactly(trade, {{ 'gil', 36 }}) then
@@ -127,9 +127,9 @@ local atoritutori = zone:insertDynamicEntity({
                 return
     
             -- Stardiver
-    	    elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[8][2], wsRequirements[8][3]}, {wsRequirements[8][4], wsRequirements[8][5]}}) then
+            elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[8][2], wsRequirements[8][3]}, {wsRequirements[8][4], wsRequirements[8][5]}}) then
                 player:tradeComplete()
-    		    player:PrintToPlayer("Phase 1 Complete. You can now purchase \"Stardiver\" from Nolan in Norg.")
+                player:PrintToPlayer("Phase 1 Complete. You can now purchase \"Stardiver\" from Nolan in Norg.")
                 player:setCharVar("PaidForMeritWs", 9)
                 return
             elseif npcUtil.tradeHasExactly(trade, {{ 'gil', 37 }}) then
@@ -138,9 +138,9 @@ local atoritutori = zone:insertDynamicEntity({
                 return
     
             -- Blade: Shun
-    	    elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[9][2], wsRequirements[9][3]}, {wsRequirements[9][4], wsRequirements[9][5]}}) then
+            elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[9][2], wsRequirements[9][3]}, {wsRequirements[9][4], wsRequirements[9][5]}}) then
                 player:tradeComplete()
-    		    player:PrintToPlayer("Phase 1 Complete. You can now purchase \"Blade: Shun\" from Nolan in Norg.")
+                player:PrintToPlayer("Phase 1 Complete. You can now purchase \"Blade: Shun\" from Nolan in Norg.")
                 player:setCharVar("PaidForMeritWs", 10)
                 return
             elseif npcUtil.tradeHasExactly(trade, {{ 'gil', 38 }}) then
@@ -149,9 +149,9 @@ local atoritutori = zone:insertDynamicEntity({
                 return
     
             -- Tachi: Shoha
-    	    elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[10][2], wsRequirements[10][3]}, {wsRequirements[10][4], wsRequirements[10][5]}}) then
+            elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[10][2], wsRequirements[10][3]}, {wsRequirements[10][4], wsRequirements[10][5]}}) then
                 player:tradeComplete()
-    		    player:PrintToPlayer("Phase 1 Complete. You can now purchase \"Tachi: Shoha\" from Nolan in Norg.")
+                player:PrintToPlayer("Phase 1 Complete. You can now purchase \"Tachi: Shoha\" from Nolan in Norg.")
                 player:setCharVar("PaidForMeritWs", 11)
                 return
             elseif npcUtil.tradeHasExactly(trade, {{ 'gil', 39 }}) then
@@ -160,9 +160,9 @@ local atoritutori = zone:insertDynamicEntity({
                 return
     
             -- Realmrazer
-    	    elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[11][2], wsRequirements[11][3]}, {wsRequirements[11][4], wsRequirements[11][5]}}) then
+            elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[11][2], wsRequirements[11][3]}, {wsRequirements[11][4], wsRequirements[11][5]}}) then
                 player:tradeComplete()
-    		    player:PrintToPlayer("Phase 1 Complete. You can now purchase \"Realmrazer\" from Nolan in Norg.")
+                player:PrintToPlayer("Phase 1 Complete. You can now purchase \"Realmrazer\" from Nolan in Norg.")
                 player:setCharVar("PaidForMeritWs", 12)
                 return
             elseif npcUtil.tradeHasExactly(trade, {{ 'gil', 40 }}) then
@@ -171,9 +171,9 @@ local atoritutori = zone:insertDynamicEntity({
                 return
     
             -- Shattersoul
-    	    elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[12][2], wsRequirements[12][3]}, {wsRequirements[12][4], wsRequirements[12][5]}}) then
+            elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[12][2], wsRequirements[12][3]}, {wsRequirements[12][4], wsRequirements[12][5]}}) then
                 player:tradeComplete()
-    		    player:PrintToPlayer("Phase 1 Complete. You can now purchase \"Shattersoul\" from Nolan in Norg.")
+                player:PrintToPlayer("Phase 1 Complete. You can now purchase \"Shattersoul\" from Nolan in Norg.")
                 player:setCharVar("PaidForMeritWs", 13)
                 return
             elseif npcUtil.tradeHasExactly(trade, {{ 'gil', 41 }}) then
@@ -182,9 +182,9 @@ local atoritutori = zone:insertDynamicEntity({
                 return
     
             -- Apex Arrow
-    	    elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[13][2], wsRequirements[13][3]}, {wsRequirements[13][4], wsRequirements[13][5]}}) then
+            elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[13][2], wsRequirements[13][3]}, {wsRequirements[13][4], wsRequirements[13][5]}}) then
                 player:tradeComplete()
-    		    player:PrintToPlayer("Phase 1 Complete. You can now purchase \"Apex Arrow\" from Nolan in Norg.")
+                player:PrintToPlayer("Phase 1 Complete. You can now purchase \"Apex Arrow\" from Nolan in Norg.")
                 player:setCharVar("PaidForMeritWs", 14)
                 return
             elseif npcUtil.tradeHasExactly(trade, {{ 'gil', 42 }}) then
@@ -193,9 +193,9 @@ local atoritutori = zone:insertDynamicEntity({
                 return
     
             -- Last Stand
-    	    elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[14][2], wsRequirements[14][3]}, {wsRequirements[14][4], wsRequirements[14][5]}}) then
+            elseif npcUtil.tradeHasExactly(trade, {{wsRequirements[14][2], wsRequirements[14][3]}, {wsRequirements[14][4], wsRequirements[14][5]}}) then
                 player:tradeComplete()
-    		    player:PrintToPlayer("Phase 1 Complete. You can now purchase \"Last Stand\" from Nolan in Norg.")
+                player:PrintToPlayer("Phase 1 Complete. You can now purchase \"Last Stand\" from Nolan in Norg.")
                 player:setCharVar("PaidForMeritWs", 15)
                 return
             elseif npcUtil.tradeHasExactly(trade, {{ 'gil', 43 }}) then
@@ -221,54 +221,54 @@ local atoritutori = zone:insertDynamicEntity({
             nationCp = player:getCurrency("windurst_cp")
         else
             player:PrintToPlayer("You don't have a home nation? get some help...")  -- edge case, player doesn't have a home nation
-    	end
+        end
     
         -- WINDURST
-    	if (npcUtil.tradeHasExactly(trade, {{ 'gil', 1 }}) and player:getNation() == xi.nation.WINDURST and (nationCp > pointsCost)) then
-    	        player:tradeComplete()
-    		    player:delCurrency("windurst_cp", pointsCost)
-    			player:setCharVar("PaidForMeritWs", 1)
+        if (npcUtil.tradeHasExactly(trade, {{ 'gil', 1 }}) and player:getNation() == xi.nation.WINDURST and (nationCp > pointsCost)) then
+                player:tradeComplete()
+                player:delCurrency("windurst_cp", pointsCost)
+                player:setCharVar("PaidForMeritWs", 1)
                 player:PrintToPlayer("Atori-Tutori: I've deducted your Windurst conquest points and progressed you to the next step.\nTalk to me again for next steps.", 0xD)
             elseif (npcUtil.tradeHasExactly(trade, {{ 'gil', 1 }}) and player:getNation() == xi.nation.WINDURST and (nationCp < pointsCost)) then
                 player:PrintToPlayer("Atori-Tutori: You will need more Windurst conquest points before you do that.", 0xD)
     
         -- BASTOK
-    	elseif (npcUtil.tradeHasExactly(trade, {{ 'gil', 1 }}) and player:getNation() == xi.nation.BASTOK and (nationCp > pointsCost)) then
-    		    player:tradeComplete()
-    		    player:delCurrency("bastok_cp", pointsCost)
-    			player:setCharVar("PaidForMeritWs", 1)
+        elseif (npcUtil.tradeHasExactly(trade, {{ 'gil', 1 }}) and player:getNation() == xi.nation.BASTOK and (nationCp > pointsCost)) then
+                player:tradeComplete()
+                player:delCurrency("bastok_cp", pointsCost)
+                player:setCharVar("PaidForMeritWs", 1)
                 player:PrintToPlayer("Atori-Tutori: I've deducted your Bastok conquest points and progressed you to the next step.\nTalk to me again for next steps.", 0xD)
             elseif (npcUtil.tradeHasExactly(trade, {{ 'gil', 1 }}) and player:getNation() == xi.nation.BASTOK and (nationCp < pointsCost)) then
                 player:PrintToPlayer("Atori-Tutori: You will need more Bastok conquest points before you do that.", 0xD)
     
         -- SANDORIA
-    	elseif (npcUtil.tradeHasExactly(trade, {{ 'gil', 1 }}) and player:getNation() == xi.nation.SANDORIA and (nationCp > pointsCost)) then
-    			player:tradeComplete()
-    		    player:delCurrency("sandoria_cp", pointsCost)
+        elseif (npcUtil.tradeHasExactly(trade, {{ 'gil', 1 }}) and player:getNation() == xi.nation.SANDORIA and (nationCp > pointsCost)) then
+                player:tradeComplete()
+                player:delCurrency("sandoria_cp", pointsCost)
                 player:setCharVar("PaidForMeritWs", 1)
                 player:PrintToPlayer("Atori-Tutori: I've deducted your San d'Oria conquest points and progressed you to the next step.\nTalk to me again for next steps.", 0xD)
             elseif (npcUtil.tradeHasExactly(trade, {{ 'gil', 1 }}) and player:getNation() == xi.nation.SANDORIA and (nationCp < pointsCost)) then
                 player:PrintToPlayer("Atori-Tutori: You will need more San d'Oria conquest points before you do that.", 0xD)
     
         -- player has chosen to use their imperial standing points
-    	elseif (npcUtil.tradeHasExactly(trade, {{ 'gil', 2 }}) and (player:getCurrency("imperial_standing") > pointsCost)) then
-    			player:tradeComplete()
-    		    player:delCurrency("imperial_standing", pointsCost)
+        elseif (npcUtil.tradeHasExactly(trade, {{ 'gil', 2 }}) and (player:getCurrency("imperial_standing") > pointsCost)) then
+                player:tradeComplete()
+                player:delCurrency("imperial_standing", pointsCost)
                 player:setCharVar("PaidForMeritWs", 1)
                 player:PrintToPlayer("Atori-Tutori: I've deducted your imperial standing points and progressed you to the next step.\nTalk to me again for next steps.", 0xD)
             elseif (npcUtil.tradeHasExactly(trade, {{ 'gil', 2 }}) and (player:getCurrency("imperial_standing") < pointsCost)) then
                 player:PrintToPlayer("Atori-Tutori: You will need more imperial standing before you do that.", 0xD)
     
         -- player has chosen to use allied notes
-    	elseif (npcUtil.tradeHasExactly(trade, {{ 'gil', 3 }}) and player:getCurrency("allied_notes") > pointsCost) then
-    			player:tradeComplete()
-    		    player:delCurrency("allied_notes", pointsCost)
+        elseif (npcUtil.tradeHasExactly(trade, {{ 'gil', 3 }}) and player:getCurrency("allied_notes") > pointsCost) then
+                player:tradeComplete()
+                player:delCurrency("allied_notes", pointsCost)
                 player:setCharVar("PaidForMeritWs", 1)
                 player:PrintToPlayer("Atori-Tutori: I've deducted your allied notes and progressed you to the next step.\nTalk to me again for next steps.", 0xD)
             elseif (npcUtil.tradeHasExactly(trade, {{ 'gil', 3 }}) and (player:getCurrency("allied_notes") < pointsCost)) then
                 player:PrintToPlayer("Atori-Tutori: You will need more allied notes before you do that.", 0xD)
-    	end
-    		
+        end
+            
     end,
 
     onTrigger = function(player, npc)
@@ -278,24 +278,24 @@ local atoritutori = zone:insertDynamicEntity({
         local alliedNotes = player:getCurrency("allied_notes")
         local pointsRequired = 30000
     
-		if player:getCharVar("PaidForMeritWs") > 1 then
-		    player:PrintToPlayer("Atori-Tutori: You already have a quest in progress. You must complete it before starting a new one.", 0xD)
-			return
-		end	
+        if player:getCharVar("PaidForMeritWs") > 1 then
+            player:PrintToPlayer("Atori-Tutori: You already have a quest in progress. You must complete it before starting a new one.", 0xD)
+            return
+        end    
 
         -- if we've deducted the player's points, move to phase two (trade items)
-    	if player:getCharVar("PaidForMeritWs") == 1 then
+        if player:getCharVar("PaidForMeritWs") == 1 then
             player:PrintToPlayer(string.format("Atori-Tutori: Phase two: Please bring the the requisite items for the aeonic weaponskill you'd like to unlock."), 0xD)
             player:PrintToPlayer("Atori-Tutori: Trade me the fixed amount of gil below, and I'll tell you which upgrade items are necessary...", 0xD)
             player:PrintToPlayer("Shijin Spiral: 30 gil, Exenterator: 31 gil, Requiescat: 32 gil, Resolution: 33 gil, Ruinator: 34 gil, Upheaval: 35 gil", 28)
             player:PrintToPlayer("Entropy: 36 gil, Stardiver: 37 gil, Blade Shun: 38 gil, Tachi: Shoha: 39 gil, Realmrazer: 40 gil, Shattersoul: 41 gil", 28)
             player:PrintToPlayer("Apex Arrow: 42 gil, Last Stand: 43 gil", 28)
-    		return
-    	else
-    	    -- standard dialog
+            return
+        else
+            -- standard dialog
             player:PrintToPlayer("Atori-Tutori: Up for a challenge? How about a new weaponskill?", 0xD)
             player:PrintToPlayer("Atori-Tutori: First, you'll need 300,000 conquest points, imperial standing, or allied notes.", 0xD)
-    	end
+        end
     
         -- find out which nation player belongs to and use those conquest points
         if player:getNation() == xi.nation.SANDORIA then
@@ -308,21 +308,21 @@ local atoritutori = zone:insertDynamicEntity({
             nationCp = player:getCurrency("windurst_cp")
         else
             player:PrintToPlayer("You don't have a home nation? get some help...")  -- edge case, player doesn't have a home nation
-    	end
+        end
     
         -- if player has enough points to spend, print the number of points held, and present the player with the next step.
         if (nationCp < pointsRequired and imperialStanding < pointsRequired and alliedNotes < pointsRequired) then
             player:PrintToPlayer(string.format("Atori-Tutori: Return to me when you have atleast 300,000 conquest points, imperial standing or allied notes.", nationCp, imperialStanding, alliedNotes), 0xD)
-    	else
-    	    player:PrintToPlayer(string.format("Atori-Tutori: You've got %i conquest points, %i imperial standing and %i allied notes.", nationCp, imperialStanding, alliedNotes), 0xD)
-    		player:PrintToPlayer(string.format("Atori-Tutori: Trade 1g to use your conquest points, 2g to use your imperial standing, or 3g to use your allied notes."), 0xD)
-    	end		
+        else
+            player:PrintToPlayer(string.format("Atori-Tutori: You've got %i conquest points, %i imperial standing and %i allied notes.", nationCp, imperialStanding, alliedNotes), 0xD)
+            player:PrintToPlayer(string.format("Atori-Tutori: Trade 1g to use your conquest points, 2g to use your imperial standing, or 3g to use your allied notes."), 0xD)
+        end        
     end,
     })
-	
-	utils.unused(atoritutori)
+    
+    utils.unused(atoritutori)
 end)
-	
+    
 ---------------------------------------------
 --              LOWER JEUNO                --
 ---------------------------------------------
@@ -334,58 +334,58 @@ m:addOverride("xi.zones.Lower_Jeuno.Zone.onInitialize", function(zone)
     local huntRewards =
     {
         [1] = { 1456,  2  },   -- one_hundred_byne_bill
-    	[2] = { 1712,  2  },   -- cashmere thread
-    	[3] = { 1713,  2  },   -- cashmere wool
-    	[4] = { 658,   2  },   -- damascus_ingot
+        [2] = { 1712,  2  },   -- cashmere thread
+        [3] = { 1713,  2  },   -- cashmere wool
+        [4] = { 658,   2  },   -- damascus_ingot
         [5] = { 2470,  1  },   -- nethereye_chain
-    	[6] = { 2471,  1  },   -- netherfield_chain
-    	[7] = { 2472,  1  },   -- netherspirit chain
-    	[8] = { 2473,  1  },   -- nethercant_chain
-    	[9] = { 2474,  1  },   -- netherpact_chain
-    	[10] = { 901,  2  },   -- venomous claw
-    	[11] = { 2465, 1  },   -- rubber_cap
-    	[12] = { 2466, 1  },   -- rubber_harness
-    	[13] = { 2467, 1  },   -- rubber gloves
-    	[14] = { 2468, 1  },   -- rubber chausses
-    	[15] = { 2469, 1  },   -- rubber soles
-    	[16] = { 1875, 40 },   -- Ancient Beastcoin
-    	[17] = { 3283, 10 },   -- Aquarian Tatter
-    	[18] = { 3282, 10 },   -- Dryadic Tatter
-    	[19] = { 3281, 10 },   -- Earthen Tatter
-    	[20] = { 3280, 10 },   -- Martial Tatter
-    	[21] = { 3279, 10 },   -- Neptunal Tatter
-    	[22] = { 3284, 10 },   -- Wyrmal Tatter
-    	[23] = { 3286, 10 },   -- Hadean Tatter
-    	[24] = { 3285, 10 },   -- Phantasmal Tatter
-    	[25] = { 3278, 10 },   -- Byakko Scrap
-    	[26] = { 3275, 10 },   -- Genbu Scrap
-    	[27] = { 3277, 10 },   -- Seiryu Scrap
-    	[28] = { 3276, 10 },   -- Suzaku Scrap
-    	[29] = { 1450, 2  },   -- Lungo-Nango Jadeshell
-    	[30] = { 1453, 2  },   -- Montiont Silverpiece
-    	[31] = { 747,  2  },   -- Orichalcum Ingot
-    	[32] = { 686,  2  },   -- Imperial Wootz Ingot
-    	[33] = { 1714, 2  },   -- Cashmere Cloth
-    	[34] = { 1313, 2  },   -- Siren's Hair
-    	[35] = { 1409, 2  },   -- Siren's Macrame
-    	[36] = { 831,  2  },   -- Shining Cloth
-    	[37] = { 862,  2  },   -- Behemoth Leather
-    	[38] = { 2170, 2  },   -- Cerberus Leather
-    	[39] = { 1312, 2  },   -- Angel Skin
-    	[40] = { 723,  2  },   -- Divine Lumber
-    	[41] = { 720,  2  },   -- Ancient Lumber
-    	[42] = { 2535, 2  },   -- Jacaranda Lumber
-    	[43] = { 1446, 2  },   -- Lacquer Tree Log
-    	[44] = { 1133, 2  },   -- Dragon Blood
-    	[45] = { 4272, 2  },   -- Dragon Meat	
-    	[46] = { 703,  2  },   -- Petrified Log
-    	[47] = { 2156, 10 },   -- Imperial Tea Leaves
+        [6] = { 2471,  1  },   -- netherfield_chain
+        [7] = { 2472,  1  },   -- netherspirit chain
+        [8] = { 2473,  1  },   -- nethercant_chain
+        [9] = { 2474,  1  },   -- netherpact_chain
+        [10] = { 901,  2  },   -- venomous claw
+        [11] = { 2465, 1  },   -- rubber_cap
+        [12] = { 2466, 1  },   -- rubber_harness
+        [13] = { 2467, 1  },   -- rubber gloves
+        [14] = { 2468, 1  },   -- rubber chausses
+        [15] = { 2469, 1  },   -- rubber soles
+        [16] = { 1875, 40 },   -- Ancient Beastcoin
+        [17] = { 3283, 10 },   -- Aquarian Tatter
+        [18] = { 3282, 10 },   -- Dryadic Tatter
+        [19] = { 3281, 10 },   -- Earthen Tatter
+        [20] = { 3280, 10 },   -- Martial Tatter
+        [21] = { 3279, 10 },   -- Neptunal Tatter
+        [22] = { 3284, 10 },   -- Wyrmal Tatter
+        [23] = { 3286, 10 },   -- Hadean Tatter
+        [24] = { 3285, 10 },   -- Phantasmal Tatter
+        [25] = { 3278, 10 },   -- Byakko Scrap
+        [26] = { 3275, 10 },   -- Genbu Scrap
+        [27] = { 3277, 10 },   -- Seiryu Scrap
+        [28] = { 3276, 10 },   -- Suzaku Scrap
+        [29] = { 1450, 2  },   -- Lungo-Nango Jadeshell
+        [30] = { 1453, 2  },   -- Montiont Silverpiece
+        [31] = { 747,  2  },   -- Orichalcum Ingot
+        [32] = { 686,  2  },   -- Imperial Wootz Ingot
+        [33] = { 1714, 2  },   -- Cashmere Cloth
+        [34] = { 1313, 2  },   -- Siren's Hair
+        [35] = { 1409, 2  },   -- Siren's Macrame
+        [36] = { 831,  2  },   -- Shining Cloth
+        [37] = { 862,  2  },   -- Behemoth Leather
+        [38] = { 2170, 2  },   -- Cerberus Leather
+        [39] = { 1312, 2  },   -- Angel Skin
+        [40] = { 723,  2  },   -- Divine Lumber
+        [41] = { 720,  2  },   -- Ancient Lumber
+        [42] = { 2535, 2  },   -- Jacaranda Lumber
+        [43] = { 1446, 2  },   -- Lacquer Tree Log
+        [44] = { 1133, 2  },   -- Dragon Blood
+        [45] = { 4272, 2  },   -- Dragon Meat    
+        [46] = { 703,  2  },   -- Petrified Log
+        [47] = { 2156, 10 },   -- Imperial Tea Leaves
         [48] = { 2532, 5  },   -- Teak Log
-    	[49] = { 732,  5  },   -- Kapor Log
-    	[50] = { 5736, 4  },   -- linen coin purse
+        [49] = { 732,  5  },   -- Kapor Log
+        [50] = { 5736, 4  },   -- linen coin purse
     }
-	
-	    local hunter = zone:insertDynamicEntity({
+    
+        local hunter = zone:insertDynamicEntity({
         objtype = xi.objType.NPC,
         name = "Hunter",
         look = "0x0000CA0800000000000000000000000000000000",
@@ -399,79 +399,79 @@ m:addOverride("xi.zones.Lower_Jeuno.Zone.onInitialize", function(zone)
         end,
 
         onTrigger = function(player, npc)
-		    local weeklyHunt = GetServerVariable("Weekly_Hunt_NM")
-	        local playerTitle = player:getTitle()
-	        local huntTitle = 0
-	        local huntNM = 0
-   	        local randomReward = 0
-   	        local reward = 0
-   	        local rewardQty = 0
-	        local huntCounter = 0
-			
+            local weeklyHunt = GetServerVariable("Weekly_Hunt_NM")
+            local playerTitle = player:getTitle()
+            local huntTitle = 0
+            local huntNM = 0
+               local randomReward = 0
+               local reward = 0
+               local rewardQty = 0
+            local huntCounter = 0
+            
             printf("Weekly Hunt: %s Player Title: %s ", weeklyHunt, playerTitle)
-	        
-	        if (weeklyHunt == player:getCharVar("Weekly_Hunt_Completed")) then	
-	            player:PrintToPlayer(string.format("Hunter: You've already completed this week's hunt! Come back later!"), 0xD)
-	        	return
-	        end
-	        
+            
+            if (weeklyHunt == player:getCharVar("Weekly_Hunt_Completed")) then    
+                player:PrintToPlayer(string.format("Hunter: You've already completed this week's hunt! Come back later!"), 0xD)
+                return
+            end
+            
             if (playerTitle == weeklyHunt and player:getCharVar("Weekly_Hunt_Completed") ~= 1) then
-            	local randomReward = math.random(1,50)
-            	local reward = huntRewards[randomReward][1]
-            	local rewardQty = huntRewards[randomReward][2]
-             	player:setCharVar("Weekly_Hunt_Completed", weeklyHunt)
-            	player:PrintToPlayer(string.format("Hunter: Congratulations! You've completed this week's hunt. Here's your reward!"), 0xD)
-            	npcUtil.giveItem(player, { { reward, rewardQty } })
-			    if not player:getCharVar("Weekly_Hunt_Counter") then
+                local randomReward = math.random(1,50)
+                local reward = huntRewards[randomReward][1]
+                local rewardQty = huntRewards[randomReward][2]
+                 player:setCharVar("Weekly_Hunt_Completed", weeklyHunt)
+                player:PrintToPlayer(string.format("Hunter: Congratulations! You've completed this week's hunt. Here's your reward!"), 0xD)
+                npcUtil.giveItem(player, { { reward, rewardQty } })
+                if not player:getCharVar("Weekly_Hunt_Counter") then
                     player:setCharVar("Weekly_Hunt_Counter", 1)
-				else
-				    local huntCounter = player:getCharVar("Weekly_Hunt_Counter") + 1
-					player:setCharVar("Weekly_Hunt_Counter", huntCounter)
-				end
-	        elseif weeklyHunt == 453 then -- NIDHOGG_SLAYER
-	        	player:PrintToPlayer(string.format("Hunter: This week's hunt is: Nidhogg!"), 0xD)
+                else
+                    local huntCounter = player:getCharVar("Weekly_Hunt_Counter") + 1
+                    player:setCharVar("Weekly_Hunt_Counter", huntCounter)
+                end
+            elseif weeklyHunt == 453 then -- NIDHOGG_SLAYER
+                player:PrintToPlayer(string.format("Hunter: This week's hunt is: Nidhogg!"), 0xD)
                 player:PrintToPlayer(string.format("Hunter: Title required: Nidhogg Slayer"), 0xD)
-	        elseif weeklyHunt == 464 then -- VINEGAR_EVAPORATOR
-	        	player:PrintToPlayer(string.format("Hunter: This week's hunt is: Kinger Vinegarroon!"), 0xD)
+            elseif weeklyHunt == 464 then -- VINEGAR_EVAPORATOR
+                player:PrintToPlayer(string.format("Hunter: This week's hunt is: Kinger Vinegarroon!"), 0xD)
                 player:PrintToPlayer(string.format("Hunter: Title required: Vinegar Evaporator"), 0xD)
             elseif weeklyHunt == 457 then -- LIFTER_OF_SHADOWS
- 	        	player:PrintToPlayer(string.format("Hunter: This week's hunt is: Dynamis Lord!"), 0xD)
+                 player:PrintToPlayer(string.format("Hunter: This week's hunt is: Dynamis Lord!"), 0xD)
                 player:PrintToPlayer(string.format("Hunter: Title required: Lifter of Shadows"), 0xD)
             elseif weeklyHunt == 468 then -- APOLLYON_RAVAGER
-	        	player:PrintToPlayer(string.format("Hunter: This week's hunt is: Proto-Omega!"), 0xD)
+                player:PrintToPlayer(string.format("Hunter: This week's hunt is: Proto-Omega!"), 0xD)
                 player:PrintToPlayer(string.format("Hunter: Title required: Apollyon Ravager"), 0xD)
             elseif weeklyHunt == 452 then -- ASPIDOCHELONE_SINKER
-	        	player:PrintToPlayer(string.format("Hunter: This week's hunt is: Aspidochelone!"), 0xD)
+                player:PrintToPlayer(string.format("Hunter: This week's hunt is: Aspidochelone!"), 0xD)
                 player:PrintToPlayer(string.format("Hunter: Title required: Aspidochelone Sinker"), 0xD)
             elseif weeklyHunt == 458 then -- TIAMAT_TROUNCER
-	        	player:PrintToPlayer(string.format("Hunter: This week's hunt is: Tiamat!"), 0xD)
+                player:PrintToPlayer(string.format("Hunter: This week's hunt is: Tiamat!"), 0xD)
                 player:PrintToPlayer(string.format("Hunter: Title required: Tiamat Trouncer"), 0xD)
             elseif weeklyHunt == 476 then -- KHIMAIRA_CARVER
-	        	player:PrintToPlayer(string.format("Hunter: This week's hunt is: Khimaira!"), 0xD)
+                player:PrintToPlayer(string.format("Hunter: This week's hunt is: Khimaira!"), 0xD)
                 player:PrintToPlayer(string.format("Hunter: Title required: Khimaira Carver"), 0xD)
             elseif weeklyHunt == 28 then -- BEHEMOTH_DETHRONER
-	        	player:PrintToPlayer(string.format("Hunter: This week's hunt is: King Behemoth!"), 0xD)
+                player:PrintToPlayer(string.format("Hunter: This week's hunt is: King Behemoth!"), 0xD)
                 player:PrintToPlayer(string.format("Hunter: Title required: Behemoth Dethroner"), 0xD)
             elseif weeklyHunt == 472 then -- HYDRA_HEADHUNTER
-	        	player:PrintToPlayer(string.format("Hunter: This week's hunt is: Hydra!"), 0xD)
+                player:PrintToPlayer(string.format("Hunter: This week's hunt is: Hydra!"), 0xD)
                 player:PrintToPlayer(string.format("Hunter: Title required: Hydra Headhunter"), 0xD)
             elseif weeklyHunt == 471 then -- CERBERUS_MUZZLER
-	        	player:PrintToPlayer(string.format("Hunter: This week's hunt is: Cerberus!"), 0xD)
+                player:PrintToPlayer(string.format("Hunter: This week's hunt is: Cerberus!"), 0xD)
                 player:PrintToPlayer(string.format("Hunter: Title required: Cerberus Muzzler"), 0xD)
             elseif weeklyHunt == 558 then -- OUPIRE_IMPALER
-	        	player:PrintToPlayer(string.format("Hunter: This week's hunt is: Oupire!"), 0xD)
+                player:PrintToPlayer(string.format("Hunter: This week's hunt is: Oupire!"), 0xD)
                 player:PrintToPlayer(string.format("Hunter: Title required: Oupire Impaler"), 0xD)
             elseif weeklyHunt == 460 then -- WORLD_SERPENT_SLAYER
-	        	player:PrintToPlayer(string.format("Hunter: This week's hunt is: Jormungand!"), 0xD)
+                player:PrintToPlayer(string.format("Hunter: This week's hunt is: Jormungand!"), 0xD)
                 player:PrintToPlayer(string.format("Hunter: Title required: World Serpent Slayer"), 0xD)
             elseif weeklyHunt == 459 then -- VRTRA_VANQUISHER
-	        	player:PrintToPlayer(string.format("Hunter: This week's hunt is: Vrtra!"), 0xD)
+                player:PrintToPlayer(string.format("Hunter: This week's hunt is: Vrtra!"), 0xD)
                 player:PrintToPlayer(string.format("Hunter: Title required: Vrtra Vanquisher"), 0xD)
             elseif weeklyHunt == 467 then -- TEMENOS_LIBERATOR
-	        	player:PrintToPlayer(string.format("Hunter: This week's hunt is: Proto-Ultima!"), 0xD)
+                player:PrintToPlayer(string.format("Hunter: This week's hunt is: Proto-Ultima!"), 0xD)
                 player:PrintToPlayer(string.format("Hunter: Title required: Temenos Liberator"), 0xD)
             elseif weeklyHunt == 455 then -- KIRIN_CAPTIVATOR
-	        	player:PrintToPlayer(string.format("Hunter: This week's hunt is: Kirin!"), 0xD)
+                player:PrintToPlayer(string.format("Hunter: This week's hunt is: Kirin!"), 0xD)
                 player:PrintToPlayer(string.format("Hunter: Title required: Kirin Captivator"), 0xD)
             end
 
@@ -479,7 +479,7 @@ m:addOverride("xi.zones.Lower_Jeuno.Zone.onInitialize", function(zone)
     })
 
     utils.unused(hunter)
-	
+    
     local expguide = zone:insertDynamicEntity({
 
         objtype = xi.objType.NPC,
@@ -492,65 +492,225 @@ m:addOverride("xi.zones.Lower_Jeuno.Zone.onInitialize", function(zone)
         widescan = 1,
 
         onTrade = function(player, npc, trade)
-		    local coins = trade:getGil()
-	        local hasWarpScroll = player:hasItem(4181)
-	        
-	        -- check to see if our player has a warp scroll, if not, give them one.
-	        if not hasWarpScroll then
-	            npcUtil.giveItem(player, xi.items.SCROLL_OF_INSTANT_WARP) -- scroll_of_instant_warp
-	        end
-	        
-	        if (npcUtil.tradeHasExactly(trade, {{ 'gil', 1 }})) then
-	            player:setPos(128.163, -7.320, 95.083, 0, 103) -- Valkurm Dunes
-	        elseif (npcUtil.tradeHasExactly(trade, {{ 'gil', 2 }})) then
-	            player:setPos(-54.956, -20.000, 63.757, 0, 126) -- Qufim Pond
-	        elseif (npcUtil.tradeHasExactly(trade, {{ 'gil', 3 }})) then
-	            player:setPos(-31.682, -20.026, 258.653, 0, 126) -- Qufim Pugils
-	        elseif (npcUtil.tradeHasExactly(trade, {{ 'gil', 4 }})) then
-	            player:setPos(-224.635, -0.255, 503.703, 0, 123) -- Yuhtunga Jungle
-	        elseif (npcUtil.tradeHasExactly(trade, {{ 'gil', 5 }})) then
-	            player:setPos(-278.584, 8.300, 140.543, 0, 124) -- Yhoator Jungle
-	        elseif (npcUtil.tradeHasExactly(trade, {{ 'gil', 6 }})) then
-	            player:setPos(-341.194, -3.250, 340.712, 0, 200) -- Garlaige Citadel
-	        elseif (npcUtil.tradeHasExactly(trade, {{ 'gil', 7 }})) then
-	            player:setPos(345.456, -32.374, -19.874, 0, 197) -- Crawler's Nest
-	        elseif (npcUtil.tradeHasExactly(trade, {{ 'gil', 8 }})) then
-	            player:setPos(-140.079, -13.407, 19.703, 0, 125) -- Western Altepa Desert
-	        elseif (npcUtil.tradeHasExactly(trade, {{ 'gil', 9 }})) then
-	            player:setPos(-16.756, 0.000, -181.055, 0, 213) -- Labyrinth of Onzozo
-	        elseif (npcUtil.tradeHasExactly(trade, {{ 'gil', 10 }})) then
-                player:setPos(-237.550, -15.855, 86.347, 0, 51) -- Wajaom Woodlands	
-	        elseif (npcUtil.tradeHasExactly(trade, {{ 'gil', 11 }})) then
-                player:setPos(-33.094, 4.770, 139.340, 0, 213) -- Labyrinth of Onzozo	
-	        elseif (npcUtil.tradeHasExactly(trade, {{ 'gil', 12 }})) then
-                player:setPos(17.172, -10.547, 8.043, 0, 174) -- Kuftal Tunnel
-	        elseif (npcUtil.tradeHasExactly(trade, {{ 'gil', 13 }})) then
-                player:setPos(-514.809, -12.156, -81.485, 171, 52) -- Bhaflau Thickets (Tandjana Islet)
-			end
         end,
 
         onTrigger = function(player, npc)
-		    local name = player:getName()
-            player:PrintToPlayer(string.format("EXP Guide: Greetings, %s! I am your Experience Guide. I send adventurers like yourself to various EXP camps around Vana'diel!", name), 0xD)
-	        player:PrintToPlayer("Trade me the corresponding amount of gil, and I'll get you to the hunting camp of your choice lickity split!\n", 0xD)
-	        player:PrintToPlayer("Recommended levels below are intended for EXP parties. Your mileage may vary! ^.^b\n")
-	        player:PrintToPlayer("1 gil = Valkurm Dunes (Level 12 - 18)", 28)
-	        player:PrintToPlayer("2 gil = Qufim Island (Pond) (Level 19 - 22)", 28)
-	        player:PrintToPlayer("3 gil = Qufim Island (Pugil Camp) (Level 23 - 25)", 28)
-	        player:PrintToPlayer("4 gil = Yuhutunga Jungle (Level 26 - 28)", 28)
-	        player:PrintToPlayer("5 gil = Yhoator Jungle (Level 29 - 32)", 28)
-	        player:PrintToPlayer("6 gil = Garlaige Citadel (Level 33 - 36)", 28)
-            player:PrintToPlayer("7 gil = Crawler's Nest (Level 37 - 43)", 28)
-	        player:PrintToPlayer("8 gil = Western Altepa Desert (Level 44 - 50)", 28)
-	        player:PrintToPlayer("9 gil = Labyrinth of Onzozo (51-54)", 28)
-	        player:PrintToPlayer("10 gil = Wajaom Woodlands (Level 55 - 59)", 28)
-	        player:PrintToPlayer("11 gil = Labyrinth of Onzozo (Level 60 - 69)", 28)
-	        player:PrintToPlayer("12 gil = Kuftal Tunnel (Level 70 - 75)", 28)
-		    player:PrintToPlayer("13 gil = Bhaflau Thickets (Level 72 - 75)", 28)
+            local hasWarpScroll = player:hasItem(4181)
+            
+            -- check to see if our player has a warp scroll, if not, give them one.
+            if not hasWarpScroll then
+                npcUtil.giveItem(player, xi.items.SCROLL_OF_INSTANT_WARP) -- scroll_of_instant_warp
+            end
+
+            -- Forward declarations (required)
+            local menu  = {}
+            local page1 = {}
+            local page2 = {}
+            local page3 = {}
+            local page4 = {}
+            
+            -- We need just a tiny delay to let the previous menu context be cleared out
+            -- "New pages" are actually just whole new menus!
+            local delaySendMenu = function(player)
+                player:timer(50, function(playerArg)
+                    playerArg:customMenu(menu)
+                end)
+            end
+            
+            menu =
+            {
+                title = "Choose your destination",
+                options = {},
+            }
+            
+            page1 =
+            {
+                {
+                    "Valkurm Dunes (12-18)",
+                    function(playerArg)
+                        playerArg:injectActionPacket(6, 600, 0, 0, 0)
+                        playerArg:timer(2000, function(playerArg)
+                            playerArg:setPos(128.163, -7.320, 95.083, 0, 103) -- Valkurm Dunes
+                        end)
+                    end,
+                },
+                {
+                    "Qufim Island (19-22)",
+                    function(playerArg)
+                        playerArg:injectActionPacket(6, 600, 0, 0, 0)
+                        playerArg:timer(2000, function(playerArg)
+                            playerArg:setPos(-54.956, -20.000, 63.757, 0, 126) -- Qufim Pond
+                        end)
+                    end,
+                },
+                {
+                    "Qufim Island (23-25)",
+                    function(playerArg)
+                        playerArg:injectActionPacket(6, 600, 0, 0, 0)
+                        playerArg:timer(2000, function(playerArg)
+                            playerArg:setPos(-31.682, -20.026, 258.653, 0, 126) -- Qufim Pugils
+                        end)
+                    end,
+                },
+                {
+                    "Yuh. Jungle (26-28)",
+                    function(playerArg)
+                        playerArg:injectActionPacket(6, 600, 0, 0, 0)
+                        playerArg:timer(2000, function(playerArg)
+                            playerArg:setPos(-224.635, -0.255, 503.703, 0, 123) -- Yuhtunga Jungle
+                        end)
+                    end,
+                },
+                {
+                    "Yhoator Jungle (29 - 32)",
+                    function(playerArg)
+                        playerArg:injectActionPacket(6, 600, 0, 0, 0)
+                        playerArg:timer(2000, function(playerArg)
+                            playerArg:setPos(-278.584, 8.300, 140.543, 0, 124) -- Yhoator Jungle
+                        end)
+                    end,
+                },
+                {
+                    "Next Page",
+                    function(playerArg)
+                        menu.options = page2
+                        delaySendMenu(playerArg)
+                    end,
+                },
+            }
+            
+            page2 =
+            {
+                {
+                    "Garlaige Citadel (33-36)",
+                    function(playerArg)
+                        playerArg:injectActionPacket(6, 600, 0, 0, 0)
+                        playerArg:timer(2000, function(playerArg)
+                            playerArg:setPos(-341.194, -3.250, 340.712, 0, 200) -- Garlaige Citadel
+                        end)
+                    end,
+                },
+                {
+                    "Crawler's Nest (37-43)",
+                    function(playerArg)
+                        playerArg:injectActionPacket(6, 600, 0, 0, 0)
+                        playerArg:timer(2000, function(playerArg)
+                            playerArg:setPos(345.456, -32.374, -19.874, 0, 197) -- Crawler's Nest
+                        end)
+                    end,
+                },
+                {
+                    "Western Altepa Desert (44-50)",
+                    function(playerArg)
+                        playerArg:injectActionPacket(6, 600, 0, 0, 0)
+                        playerArg:timer(2000, function(playerArg)
+                            playerArg:setPos(-140.079, -13.407, 19.703, 0, 125) -- Western Altepa Desert
+                        end)
+                    end,
+                },
+                {
+                    "Next Page",
+                    function(playerArg)
+                        menu.options = page3
+                        delaySendMenu(playerArg)
+                    end,
+                },
+                {
+                    "Previous Page",
+                    function(playerArg)
+                        menu.options = page1
+                        delaySendMenu(playerArg)
+                    end,
+                },
+            }
+            
+            page3 =
+            {
+                {
+                    "Lab. of Onzozo (51-54)",
+                    function(playerArg)
+                        playerArg:injectActionPacket(6, 600, 0, 0, 0)
+                        playerArg:timer(2000, function(playerArg)
+                            playerArg:setPos(-16.756, 0.000, -181.055, 0, 213) -- Labyrinth of Onzozo
+                        end)
+                    end,
+                },
+                {
+                    "Wajaom Woodlands (55-59)",
+                    function(playerArg)
+                        playerArg:injectActionPacket(6, 600, 0, 0, 0)
+                        playerArg:timer(2000, function(playerArg)
+                            playerArg:setPos(-237.550, -15.855, 86.347, 0, 51) -- Wajaom Woodlands    
+                        end)
+                    end,
+                },
+                {
+                    "Lab. of Onzozo (60-69)",
+                    function(playerArg)
+                        playerArg:injectActionPacket(6, 600, 0, 0, 0)
+                        playerArg:timer(2000, function(playerArg)
+                            playerArg:setPos(-33.094, 4.770, 139.340, 0, 213) -- Labyrinth of Onzozo    
+                        end)
+                    end,
+                },
+                {
+                    "Kuftal Tunnel (70-75)",
+                    function(playerArg)
+                        playerArg:injectActionPacket(6, 600, 0, 0, 0)
+                        playerArg:timer(2000, function(playerArg)
+                            playerArg:setPos(17.172, -10.547, 8.043, 0, 174) -- Kuftal Tunnel
+                        end)
+                    end,
+                },
+                {
+                    "Next Page",
+                    function(playerArg)
+                        menu.options = page4
+                        delaySendMenu(playerArg)
+                    end,
+                },
+                {
+                    "Previous Page",
+                    function(playerArg)
+                        menu.options = page2
+                        delaySendMenu(playerArg)
+                    end,
+                },
+            }
+            
+            page4 =
+            {
+                {
+                    "Bhaflau Thickets (72-75)",
+                    function(playerArg)
+                        playerArg:injectActionPacket(6, 600, 0, 0, 0)
+                        playerArg:timer(2000, function(playerArg)
+                            player:setPos(-514.809, -12.156, -81.485, 171, 52) -- Bhaflau Thickets (Tandjana Islet)
+                        end)
+                    end,
+                },
+                {
+                    "Previous Page",
+                    function(playerArg)
+                        menu.options = page3
+                        delaySendMenu(playerArg)
+                    end,
+                },
+                {
+                    "Exit",
+                    function(playerArg)
+                        return
+                    end,
+                },
+            }
+                      
+            menu.options = page1
+			delaySendMenu(player)
         end,
+    
+        utils.unused(expguide)
     })
 
-    utils.unused(expguide)
 
 end)
 
@@ -561,7 +721,7 @@ m:addOverride("xi.zones.Aht_Urhgan_Whitegate.Zone.onInitialize", function(zone)
     local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
     -- Call the zone's original function for onInitialize
     super(zone)
-	
+    
     local mnejing = zone:insertDynamicEntity({  -- sell pup attachments
     objtype  = xi.objType.NPC,
     name     = "Mnejing",
@@ -621,8 +781,8 @@ m:addOverride("xi.zones.Aht_Urhgan_Whitegate.Zone.onInitialize", function(zone)
     })
 
     utils.unused(mnejing)
-	
-	local qm_hydroguage = zone:insertDynamicEntity({  -- since fishing is disabled, allow player to pickup hydroguage from ???
+    
+    local qm_hydroguage = zone:insertDynamicEntity({  -- since fishing is disabled, allow player to pickup hydroguage from ???
         objtype = xi.objType.NPC,
         name = "???",
         look = "0x0000340000000000000000000000000000000000",
@@ -637,14 +797,14 @@ m:addOverride("xi.zones.Aht_Urhgan_Whitegate.Zone.onInitialize", function(zone)
 
         onTrigger = function(player, npc)
             if player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.NAVIGATING_THE_UNFRIENDLY_SEAS) == QUEST_ACCEPTED then
-			    player:addItem(2341)
-			    player:messageSpecial( ID.text.ITEM_OBTAINED, 2341 )
-			end
+                player:addItem(2341)
+                player:messageSpecial( ID.text.ITEM_OBTAINED, 2341 )
+            end
         end,
     })
-	
-	utils.unused(qm_hydroguage)
-	
+    
+    utils.unused(qm_hydroguage)
+    
 
 end)
 
@@ -655,7 +815,7 @@ m:addOverride("xi.zones.Throne_Room.Zone.onInitialize", function(zone)
 
     -- Call the zone's original function for onInitialize
     super(zone)
-	local teodor = zone:insertDynamicEntity({
+    local teodor = zone:insertDynamicEntity({
     objtype = xi.objType.NPC,
     name = "Teodor",
     look = 3103,
@@ -716,9 +876,9 @@ m:addOverride("xi.zones.Southern_San_dOria.Zone.onInitialize", function(zone)
             for _, validCrystal in ipairs(crystals) do
                 -- if trade has valid crystals, then set up our variables
                 if npcUtil.tradeHas(trade, validCrystal) then
-            	    crystalCount = trade:getItemQty(validCrystal)
+                    crystalCount = trade:getItemQty(validCrystal)
                     totalCrystals = totalCrystals + crystalCount
-            	end
+                end
             end
         
             -- eat everything in the trade window
@@ -731,8 +891,8 @@ m:addOverride("xi.zones.Southern_San_dOria.Zone.onInitialize", function(zone)
             local storedCrystals = player:getCharVar("CrystalCruncher")
             local eligibleCrystals = math.floor(storedCrystals / 3 )
             
-			player:PrintToPlayer("Crystal Crunch: I convert crystals ONLY at a ratio of 3 to 1. If you trade me anything else, it will be lost.", 0xD)
-			
+            player:PrintToPlayer("Crystal Crunch: I convert crystals ONLY at a ratio of 3 to 1. If you trade me anything else, it will be lost.", 0xD)
+            
             if storedCrystals > 2 then
                 player:PrintToPlayer(string.format("You can receive up to %s crystals with your current balance of %s crystals.", eligibleCrystals, storedCrystals))
                 
@@ -851,9 +1011,9 @@ m:addOverride("xi.zones.Northern_San_dOria.Zone.onInitialize", function(zone)
             for _, validCrystal in ipairs(crystals) do
                 -- if trade has valid crystals, then set up our variables
                 if npcUtil.tradeHas(trade, validCrystal) then
-            	    crystalCount = trade:getItemQty(validCrystal)
+                    crystalCount = trade:getItemQty(validCrystal)
                     totalCrystals = totalCrystals + crystalCount
-            	end
+                end
             end
         
             -- eat everything in the trade window
@@ -866,7 +1026,7 @@ m:addOverride("xi.zones.Northern_San_dOria.Zone.onInitialize", function(zone)
             local storedCrystals = player:getCharVar("CrystalCruncher")
             local eligibleCrystals = math.floor(storedCrystals / 3 )
             
-			player:PrintToPlayer("Crystal Crunch: I convert crystals ONLY at a ratio of 3 to 1. If you trade me anything else, it will be lost.", 0xD)
+            player:PrintToPlayer("Crystal Crunch: I convert crystals ONLY at a ratio of 3 to 1. If you trade me anything else, it will be lost.", 0xD)
 
             if storedCrystals > 2 then
                 player:PrintToPlayer(string.format("You can receive up to %s crystals with your current balance of %s crystals.", eligibleCrystals, storedCrystals))
@@ -986,9 +1146,9 @@ m:addOverride("xi.zones.Bastok_Mines.Zone.onInitialize", function(zone)
             for _, validCrystal in ipairs(crystals) do
                 -- if trade has valid crystals, then set up our variables
                 if npcUtil.tradeHas(trade, validCrystal) then
-            	    crystalCount = trade:getItemQty(validCrystal)
+                    crystalCount = trade:getItemQty(validCrystal)
                     totalCrystals = totalCrystals + crystalCount
-            	end
+                end
             end
         
             -- eat everything in the trade window
@@ -1001,7 +1161,7 @@ m:addOverride("xi.zones.Bastok_Mines.Zone.onInitialize", function(zone)
             local storedCrystals = player:getCharVar("CrystalCruncher")
             local eligibleCrystals = math.floor(storedCrystals / 3 )
             
-			player:PrintToPlayer("Crystal Crunch: I convert crystals ONLY at a ratio of 3 to 1. If you trade me anything else, it will be lost.", 0xD)
+            player:PrintToPlayer("Crystal Crunch: I convert crystals ONLY at a ratio of 3 to 1. If you trade me anything else, it will be lost.", 0xD)
 
             if storedCrystals > 2 then
                 player:PrintToPlayer(string.format("You can receive up to %s crystals with your current balance of %s crystals.", eligibleCrystals, storedCrystals))
@@ -1121,9 +1281,9 @@ m:addOverride("xi.zones.Bastok_Markets.Zone.onInitialize", function(zone)
             for _, validCrystal in ipairs(crystals) do
                 -- if trade has valid crystals, then set up our variables
                 if npcUtil.tradeHas(trade, validCrystal) then
-            	    crystalCount = trade:getItemQty(validCrystal)
+                    crystalCount = trade:getItemQty(validCrystal)
                     totalCrystals = totalCrystals + crystalCount
-            	end
+                end
             end
         
             -- eat everything in the trade window
@@ -1136,7 +1296,7 @@ m:addOverride("xi.zones.Bastok_Markets.Zone.onInitialize", function(zone)
             local storedCrystals = player:getCharVar("CrystalCruncher")
             local eligibleCrystals = math.floor(storedCrystals / 3 )
             
-			player:PrintToPlayer("Crystal Crunch: I convert crystals ONLY at a ratio of 3 to 1. If you trade me anything else, it will be lost.", 0xD)
+            player:PrintToPlayer("Crystal Crunch: I convert crystals ONLY at a ratio of 3 to 1. If you trade me anything else, it will be lost.", 0xD)
 
             if storedCrystals > 2 then
                 player:PrintToPlayer(string.format("You can receive up to %s crystals with your current balance of %s crystals.", eligibleCrystals, storedCrystals))
@@ -1256,9 +1416,9 @@ m:addOverride("xi.zones.Windurst_Waters.Zone.onInitialize", function(zone)
             for _, validCrystal in ipairs(crystals) do
                 -- if trade has valid crystals, then set up our variables
                 if npcUtil.tradeHas(trade, validCrystal) then
-            	    crystalCount = trade:getItemQty(validCrystal)
+                    crystalCount = trade:getItemQty(validCrystal)
                     totalCrystals = totalCrystals + crystalCount
-            	end
+                end
             end
         
             -- eat everything in the trade window
@@ -1271,7 +1431,7 @@ m:addOverride("xi.zones.Windurst_Waters.Zone.onInitialize", function(zone)
             local storedCrystals = player:getCharVar("CrystalCruncher")
             local eligibleCrystals = math.floor(storedCrystals / 3 )
             
-			player:PrintToPlayer("Crystal Crunch: I convert crystals ONLY at a ratio of 3 to 1. If you trade me anything else, it will be lost.", 0xD)
+            player:PrintToPlayer("Crystal Crunch: I convert crystals ONLY at a ratio of 3 to 1. If you trade me anything else, it will be lost.", 0xD)
 
             if storedCrystals > 2 then
                 player:PrintToPlayer(string.format("You can receive up to %s crystals with your current balance of %s crystals.", eligibleCrystals, storedCrystals))
@@ -1391,9 +1551,9 @@ m:addOverride("xi.zones.Windurst_Woods.Zone.onInitialize", function(zone)
             for _, validCrystal in ipairs(crystals) do
                 -- if trade has valid crystals, then set up our variables
                 if npcUtil.tradeHas(trade, validCrystal) then
-            	    crystalCount = trade:getItemQty(validCrystal)
+                    crystalCount = trade:getItemQty(validCrystal)
                     totalCrystals = totalCrystals + crystalCount
-            	end
+                end
             end
         
             -- eat everything in the trade window
@@ -1406,7 +1566,7 @@ m:addOverride("xi.zones.Windurst_Woods.Zone.onInitialize", function(zone)
             local storedCrystals = player:getCharVar("CrystalCruncher")
             local eligibleCrystals = math.floor(storedCrystals / 3 )
             
-			player:PrintToPlayer("Crystal Crunch: I convert crystals ONLY at a ratio of 3 to 1. If you trade me anything else, it will be lost.", 0xD)
+            player:PrintToPlayer("Crystal Crunch: I convert crystals ONLY at a ratio of 3 to 1. If you trade me anything else, it will be lost.", 0xD)
 
             if storedCrystals > 2 then
                 player:PrintToPlayer(string.format("You can receive up to %s crystals with your current balance of %s crystals.", eligibleCrystals, storedCrystals))

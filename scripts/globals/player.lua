@@ -241,7 +241,7 @@ xi.player.onGameIn = function(player, firstLogin, zoning)
     player:setLocalVar("ZoneInTime", os.time())
 
     -- Slight delay to ensure player is fully logged in
---[[ 
+ --[[
     -- add afterglow effect if player has it unlocked
     player:timer(350, function(player)
 
