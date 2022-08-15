@@ -549,7 +549,7 @@ namespace spell
         {
             while (sql->NextRow() == SQL_SUCCESS)
             {
-                char* contentTag = (char*)sql->GetData(8);
+                char* contentTag = (char*)sql->GetData(7);
                 if (!luautils::IsContentEnabled(contentTag))
                 {
                     continue;
@@ -570,7 +570,7 @@ namespace spell
                 ((CBlueSpell*)PSpellList[spellId])->setTraitWeight(sql->GetIntData(4));
                 ((CBlueSpell*)PSpellList[spellId])->setPrimarySkillchain(sql->GetIntData(5));
                 ((CBlueSpell*)PSpellList[spellId])->setSecondarySkillchain(sql->GetIntData(6));
-                ((CBlueSpell*)PSpellList[spellId])->setTertiarySkillchain(sql->GetIntData(7));
+                ((CBlueSpell*)PSpellList[spellId])->setTertiarySkillchain(sql->GetIntData(6));
                 PMobSkillToBlueSpell.insert(std::make_pair(sql->GetIntData(1), spellId));
             }
         }
