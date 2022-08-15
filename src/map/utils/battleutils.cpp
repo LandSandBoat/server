@@ -3751,7 +3751,7 @@ namespace battleutils
                     skillchain = FormSkillchain(resonanceProperties, skillProperties);
                 }
             }
-            
+
             if (skillchain != SC_NONE)
             {
                 PSCEffect->SetStartTime(server_clock::now());
