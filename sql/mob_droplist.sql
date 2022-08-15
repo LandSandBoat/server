@@ -18940,8 +18940,8 @@ INSERT INTO `mob_droplist` VALUES (2374,0,0,1000,939,170); -- Hecteyes Eye (17.0
 INSERT INTO `mob_droplist` VALUES (2375,0,0,1000,914,480);     -- Vial Of Mercury (48.0%)
 INSERT INTO `mob_droplist` VALUES (2375,0,0,1000,939,250);     -- Hecteyes Eye (25.0%)
 INSERT INTO `mob_droplist` VALUES (2375,0,0,1000,15222,@RARE); -- Spelunkers Hat (Rare, 5%)
-INSERT INTO `mob_droplist` VALUES (2375,0,1,1000,4717,950);    -- Scroll Of Refresh (Group 1 - 95.0%)
-INSERT INTO `mob_droplist` VALUES (2375,0,1,1000,4850,@RARE);  -- Scroll Of Refresh Ii (Group 1 - Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (2375,1,1,1000,4717,950);    -- Scroll Of Refresh (Group 1 - 95.0%)
+INSERT INTO `mob_droplist` VALUES (2375,1,1,1000,4850,@RARE);  -- Scroll Of Refresh Ii (Group 1 - Rare, 5%)
 
 -- ZoneID: 204 - Talos
 INSERT INTO `mob_droplist` VALUES (2376,0,0,1000,914,110); -- Vial Of Mercury (11.0%)
