@@ -2886,7 +2886,19 @@ namespace charutils
             // Add 79 to get the modifier ID
             skillBonus += PChar->getMod(static_cast<Mod>(i + 79));
 
-            PChar->WorkingSkills.rank[i] = battleutils::GetSkillRank((SKILLTYPE)i, PChar->GetMJob());
+            uint8 mainSkillRank = battleutils::GetSkillRank((SKILLTYPE)i, PChar->GetMJob());
+            uint8 subSkillRank  = battleutils::GetSkillRank((SKILLTYPE)i, PChar->GetSJob());
+
+            PChar->WorkingSkills.rank[i] = mainSkillRank;
+
+            if (mainSkillRank != 0)
+            {
+                PChar->RealSkills.rank[i] = mainSkillRank;
+            }
+            else
+            {
+                PChar->RealSkills.rank[i] = subSkillRank;
+            }
 
             if (MaxMSkill != 0)
             {

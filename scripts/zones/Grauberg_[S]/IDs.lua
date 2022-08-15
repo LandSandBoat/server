@@ -22,6 +22,8 @@ zones[xi.zone.GRAUBERG_S] =
         A_SHIVER_RUNS_DOWN          = 7427, -- A shiver runs down your spine...
         ATTEND_TO_MORE_PRESSING     = 7428, -- Perhaps you should first attend to more pressing matters...
         HARVESTING_IS_POSSIBLE_HERE = 7695, -- Harvesting is possible here if you have <item>.
+        SUITABLE_PLACE_TO_SOAK      = 8267, -- This seems to be a suitable place to soak <item>.
+        MYSTERIOUS_COLUMN_ROTATES   = 8370, -- A mysterious column of floating stones rotates hypnotically before you.
         COMMON_SENSE_SURVIVAL       = 9300, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =

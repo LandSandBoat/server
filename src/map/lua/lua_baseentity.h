@@ -561,7 +561,10 @@ public:
     void recalculateStats();
     bool checkImbuedItems();
 
-    bool isDualWielding(); // Checks if the battle entity is dual wielding
+    bool   isDualWielding();     // Checks if the battle entity is dual wielding
+    bool   isUsingH2H();         // Checks if the battle entity is using h2h
+    uint16 getBaseDelay();       // get base delay of entity, melee only
+    uint16 getBaseRangedDelay(); // get base delay of entity, ranged only
 
     float checkLiementAbsorb(uint16 damageType); // return 1.0 if did not absorb, return >= -1.0 if did absorb
 

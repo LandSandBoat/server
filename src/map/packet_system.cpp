@@ -1054,6 +1054,8 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
             PChar->animation = ANIMATION_NONE;
             PChar->updatemask |= UPDATE_HP;
             PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_MOUNTED);
+            // Workaround for a bug where dismounting out of update range would cause the character to stop rendering.
+            PChar->loc.zone->PushPacket(PChar, CHAR_INZONE, new CCharPacket(PChar, ENTITY_UPDATE, UPDATE_HP));
         }
         break;
         case 0x13: // tractor menu

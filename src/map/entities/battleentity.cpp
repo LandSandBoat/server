@@ -1919,7 +1919,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
         }
 
         // try zanshin only on single swing attack rounds - it is last priority in the multi-hit order
-        // if zanshin procs, the attack is repeated
+        // if zanshin procs, add a new zanshin based attack.
         if (attack.IsFirstSwing() && attackRound.GetAttackSwingCount() == 1)
         {
             uint16 zanshinChance = this->getMod(Mod::ZANSHIN) + battleutils::GetMeritValue(this, MERIT_ZASHIN_ATTACK_RATE);
@@ -1929,18 +1929,12 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                  xirand::GetRandomNumber(100) < zanshinChance) ||
                 (GetMJob() == JOB_SAM && this->StatusEffectContainer->HasStatusEffect(EFFECT_HASSO) && xirand::GetRandomNumber(100) < (zanshinChance / 4)))
             {
-                attack.SetAttackType(PHYSICAL_ATTACK_TYPE::ZANSHIN);
-                attack.SetAsFirstSwing(false);
-            }
-            else
-            {
-                attackRound.DeleteAttackSwing();
+                attackRound.AddAttackSwing(PHYSICAL_ATTACK_TYPE::ZANSHIN, PHYSICAL_ATTACK_DIRECTION::RIGHTATTACK, 1);
             }
         }
-        else
-        {
-            attackRound.DeleteAttackSwing();
-        }
+
+        attackRound.DeleteAttackSwing();
+
         if (list.actionTargets.size() == 8)
         {
             break;
