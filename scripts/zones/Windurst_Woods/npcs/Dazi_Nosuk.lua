@@ -2,6 +2,8 @@
 -- Area: Windurst Woods
 --  NPC: Dazi Nosuk
 -----------------------------------
+require("scripts/globals/pathfind")
+-----------------------------------
 local entity = {}
 
 local path =
