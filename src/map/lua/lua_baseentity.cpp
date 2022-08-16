@@ -2681,7 +2681,7 @@ void CLuaBaseEntity::setPos(sol::variadic_args va)
             PChar->m_moghouseID    = 0;
             PChar->clearPacketList();
             charutils::SendToZone(PChar, 2, zoneutils::GetZoneIPP(PChar->loc.destination));
-            //PChar->loc.zone->DecreaseZoneCounter(PChar);
+            // PChar->loc.zone->DecreaseZoneCounter(PChar);
         }
         else if (PChar->status != STATUS_TYPE::DISAPPEAR)
         {
