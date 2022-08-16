@@ -549,7 +549,7 @@ namespace spell
         {
             while (sql->NextRow() == SQL_SUCCESS)
             {
-                char* contentTag = (char*)sql->GetData(7);
+                char* contentTag = (char*)sql->GetData(8);
                 if (!luautils::IsContentEnabled(contentTag))
                 {
                     continue;
