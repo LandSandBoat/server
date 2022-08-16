@@ -40,7 +40,7 @@ zones[xi.zone.NASHMAU] =
         YOYOROON_SHOP_DIALOG     = 11790, -- Boooss, boooss! Yoyoroon bring yooo goood custooomer! Yoyoroon goood wooorker, nooo?
         PIPIROON_SHOP_DIALOG     = 11791, -- Yes? I'm a busy man. Make it quick.
         RETRIEVE_DIALOG_ID       = 11891, -- You retrieve <item> from the porter moogle's care.
-        COMMON_SENSE_SURVIVAL    = 11928, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        COMMON_SENSE_SURVIVAL    = 11930, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

@@ -1,12 +1,12 @@
 -----------------------------------
--- Area: Outer_RaKaznar_U
+-- Area: Throne_Room_[V]
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
 
 zones = zones or {}
 
-zones[xi.zone.OUTER_RAKAZNAR_U] =
+zones[xi.zone.THRONE_ROOM_V] =
 {
     text =
     {
@@ -26,4 +26,4 @@ zones[xi.zone.OUTER_RAKAZNAR_U] =
     },
 }
 
-return zones[xi.zone.OUTER_RAKAZNAR_U]
+return zones[xi.zone.THRONE_ROOM_V]

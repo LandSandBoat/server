@@ -12,6 +12,14 @@ xi = xi or {}
 xi.wotg = xi.wotg or {}
 xi.wotg.helpers = xi.wotg.helpers or {}
 
+local memoryFragments =
+{
+    xi.ki.LARGE_MEMORY_FRAGMENT1,
+    xi.ki.LARGE_MEMORY_FRAGMENT2,
+    xi.ki.LARGE_MEMORY_FRAGMENT3,
+    xi.ki.LARGE_MEMORY_FRAGMENT4,
+}
+
 -- NOTE: The naming convention here is: "meets requirements to complete mission X".
 --       meetsMission3Reqs = This function goes in Mission 3.
 --       I have completeted BURDEN_OF_SUSPICION or WRATH_OF_THE_GRIFFON
@@ -104,4 +112,28 @@ xi.wotg.helpers.helmTrade = function(player, helmType, broke)
     end
 
     return false
+end
+
+xi.wotg.helpers.checkMemoryFragments = function(player)
+    local ID = zones[player:getZoneID()]
+    local numFragments = 0
+
+    for _, keyItemId in ipairs(memoryFragments) do
+        if player:hasKeyItem(keyItemId) then
+            numFragments = numFragments + 1
+        end
+    end
+
+    if numFragments == 3 then
+        player:messageName(ID.text.REPORT_TO_CAIT_SITH, nil)
+
+        player:completeMission(xi.mission.log_id.WOTG, xi.mission.id.wotg.HER_MEMORIES)
+        player:addMission(xi.mission.log_id.WOTG, xi.mission.id.wotg.FORGET_ME_NOT)
+    end
+end
+
+xi.wotg.helpers.removeMemoryFragments = function(player)
+    for _, keyItemId in ipairs(memoryFragments) do
+        player:delKeyItem(keyItemId)
+    end
 end

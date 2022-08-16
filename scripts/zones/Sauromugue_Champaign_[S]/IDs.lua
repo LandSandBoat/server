@@ -17,6 +17,7 @@ zones[xi.zone.SAUROMUGUE_CHAMPAIGN_S] =
         CARRIED_OVER_POINTS      = 7001,  -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY  = 7002,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER             = 7003,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        DOOR_FIRMLY_SEALED       = 7723,  -- The door is firmly sealed.
         SURRENDER_CEREMONY_HASTE = 8471,  -- The surrender ceremony is about to commence underground. Make haste before all is lost!
         VOIDWALKER_DESPAWN       = 8483,  -- The monster fades before your eyes, a look of disappointment on its face.
         VOIDWALKER_NO_MOB        = 8670,  -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
@@ -27,7 +28,7 @@ zones[xi.zone.SAUROMUGUE_CHAMPAIGN_S] =
         VOIDWALKER_UPGRADE_KI_2  = 8676,  -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
         VOIDWALKER_BREAK_KI      = 8677,  -- The <keyitem> shatters into tiny fragments.
         VOIDWALKER_OBTAIN_KI     = 8678,  -- Obtained key item: <keyitem>!
-        COMMON_SENSE_SURVIVAL    = 10063, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        COMMON_SENSE_SURVIVAL    = 10065, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
