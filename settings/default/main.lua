@@ -112,7 +112,7 @@ xi.settings.main =
     ITEM_POWER      = 1.000, -- Multiplies the effect of items such as Potions and Ethers.
     WEAPON_SKILL_POWER  = 1.000, -- Multiplies damage dealt by Weapon Skills.
     USE_ADOULIN_WEAPON_SKILL_CHANGES = false, -- true/false. Change to toggle new Adoulin weapon skill damage calculations
-    DISABLE_PARTY_EXP_PENALTY        = false, -- true/false.
+    DISABLE_PARTY_EXP_PENALTY        = true, -- true/false.
 
     -- TRUSTS
     ENABLE_TRUST_CASTING           = 1,
