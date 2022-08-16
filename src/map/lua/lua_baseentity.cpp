@@ -2668,22 +2668,22 @@ void CLuaBaseEntity::setPos(sol::variadic_args va)
                 return;
             }
 
-            if (((CCharEntity*)m_PBaseEntity)->PPet != nullptr)
+            if (static_cast<CCharEntity*>(m_PBaseEntity)->PPet != nullptr)
             {
-                ((CCharEntity*)m_PBaseEntity)->setPetZoningInfo();
+                static_cast<CCharEntity*>(m_PBaseEntity)->setPetZoningInfo();
             }
 
-            ((CCharEntity*)m_PBaseEntity)->loc.destination = zoneid;
-            ((CCharEntity*)m_PBaseEntity)->status          = STATUS_TYPE::DISAPPEAR;
-            ((CCharEntity*)m_PBaseEntity)->loc.boundary    = 0;
-            ((CCharEntity*)m_PBaseEntity)->m_moghouseID    = 0;
-            ((CCharEntity*)m_PBaseEntity)->clearPacketList();
-            charutils::SendToZone((CCharEntity*)m_PBaseEntity, 2, zoneutils::GetZoneIPP(m_PBaseEntity->loc.destination));
-            //((CCharEntity*)m_PBaseEntity)->loc.zone->DecreaseZoneCounter(((CCharEntity*)m_PBaseEntity));
+            static_cast<CCharEntity*>(m_PBaseEntity)->loc.destination = zoneid;
+            static_cast<CCharEntity*>(m_PBaseEntity)->status          = STATUS_TYPE::DISAPPEAR;
+            static_cast<CCharEntity*>(m_PBaseEntity)->loc.boundary    = 0;
+            static_cast<CCharEntity*>(m_PBaseEntity)->m_moghouseID    = 0;
+            static_cast<CCharEntity*>(m_PBaseEntity)->clearPacketList();
+            charutils::SendToZone(static_cast<CCharEntity*>(m_PBaseEntity), 2, zoneutils::GetZoneIPP(m_PBaseEntity->loc.destination));
+            //static_cast<CCharEntity*>(m_PBaseEntity)->loc.zone->DecreaseZoneCounter(static_cast<CCharEntity*>(m_PBaseEntity));
         }
-        else if (((CCharEntity*)m_PBaseEntity)->status != STATUS_TYPE::DISAPPEAR)
+        else if (static_cast<CCharEntity*>(m_PBaseEntity)->status != STATUS_TYPE::DISAPPEAR)
         {
-            ((CCharEntity*)m_PBaseEntity)->pushPacket(new CPositionPacket((CCharEntity*)m_PBaseEntity));
+            static_cast<CCharEntity*>(m_PBaseEntity)->pushPacket(new CPositionPacket(static_cast<CCharEntity*>(m_PBaseEntity)));
         }
     }
     m_PBaseEntity->updatemask |= UPDATE_POS;
