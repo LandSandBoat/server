@@ -38,7 +38,7 @@ public:
     uint8  getTraitWeight() const;
     uint8  getPrimarySkillchain() const;
     uint8  getSecondarySkillchain() const;
-    uint8  getsetTertiarySkillchain() const;
+    uint8  getTertiarySkillchain() const;
 
     void setMonsterSkillId(uint16 skillid);
     void setSetPoints(uint8 setpoints);
