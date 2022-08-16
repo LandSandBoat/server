@@ -416,7 +416,7 @@ void CCharEntity::setPetZoningInfo()
     {
         switch (((CPetEntity*)PPet)->getPetType())
         {
-            case PET_TYPE::JUG_PET:
+            case PET_TYPE::AVATAR:
             case PET_TYPE::AUTOMATON:
             case PET_TYPE::WYVERN:
                 petZoningInfo.petHP   = PPet->health.hp;
