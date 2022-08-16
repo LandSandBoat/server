@@ -431,6 +431,12 @@ void SmallPacket0x00C(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             switch (PChar->petZoningInfo.petType)
             {
+                case PET_TYPE::JUG_PET:
+                    if (!settings::get<bool>("map.KEEP_JUGPET_THROUGH_ZONING"))
+                    {
+                        break;
+                    }
+                    [[fallthrough]];
                 case PET_TYPE::AVATAR:
                 case PET_TYPE::AUTOMATON:
                 case PET_TYPE::WYVERN:

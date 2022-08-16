@@ -416,6 +416,12 @@ void CCharEntity::setPetZoningInfo()
     {
         switch (((CPetEntity*)PPet)->getPetType())
         {
+            case PET_TYPE::JUG_PET:
+                if (!settings::get<bool>("map.KEEP_JUGPET_THROUGH_ZONING"))
+                {
+                    break;
+                }
+                [[fallthrough]];
             case PET_TYPE::AVATAR:
             case PET_TYPE::AUTOMATON:
             case PET_TYPE::WYVERN:

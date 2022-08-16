@@ -239,4 +239,7 @@ xi.settings.map =
     --  Gobbie Mystery Box settings
     DAILY_TALLY_AMOUNT = 10,
     DAILY_TALLY_LIMIT  = 50000,
+    
+    -- Enable/disable keeping jug pets through zoning
+    KEEP_JUGPET_THROUGH_ZONING = false,
 }
