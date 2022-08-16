@@ -1312,7 +1312,7 @@ void SmallPacket0x028(map_session_data_t* const PSession, CCharEntity* const PCh
 
     // Linkshells (other than Linkpearls and Pearlsacks) and temporary items cannot be stored in the Recycle Bin.
     // TODO: Are there any special messages here?
-    if (PItem->isType(ITEM_LINKSHELL) || container == CONTAINER_ID::LOC_TEMPITEMS)
+    if (!settings::get<bool>("map.ENABLE_ITEM_RECYCLE_BIN") || PItem->isType(ITEM_LINKSHELL) || container == CONTAINER_ID::LOC_TEMPITEMS)
     {
         charutils::DropItem(PChar, container, slotID, quantity, ItemID);
         return;
