@@ -2668,6 +2668,11 @@ void CLuaBaseEntity::setPos(sol::variadic_args va)
                 return;
             }
 
+            if (((CCharEntity*)m_PBaseEntity)->PPet != nullptr)
+            {
+                ((CCharEntity*)m_PBaseEntity)->setPetZoningInfo();
+            }
+
             ((CCharEntity*)m_PBaseEntity)->loc.destination = zoneid;
             ((CCharEntity*)m_PBaseEntity)->status          = STATUS_TYPE::DISAPPEAR;
             ((CCharEntity*)m_PBaseEntity)->loc.boundary    = 0;
