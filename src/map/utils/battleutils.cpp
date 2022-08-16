@@ -3729,27 +3729,27 @@ namespace battleutils
                 PSCEffect = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN, 0);
             }
             // Previous effect exists
-            else if (PSCEffect && PSCEffect->GetTier() == 0)
+            else if (PSCEffect && PSCEffect->GetStartTime() + 3s < server_clock::now())
             {
-                XI_DEBUG_BREAK_IF(!PSCEffect->GetPower());
-                // Previous effect is an opening effect, meaning the power is
-                // actually the ID of the opening weaponskill.  We need all 3
-                // of the possible skillchain properties on the initial link.
-                if (PSCEffect->GetStartTime() + 3s < server_clock::now())
+                if (PSCEffect->GetTier() == 0)
                 {
+                    XI_DEBUG_BREAK_IF(!PSCEffect->GetPower());
+                    // Previous effect is an opening effect, meaning the power is
+                    // actually the ID of the opening weaponskill.  We need all 3
+                    // of the possible skillchain properties on the initial link.
                     auto properties = PSCEffect->GetPower();
                     resonanceProperties.push_back((SKILLCHAIN_ELEMENT)(properties & 0b1111));
                     resonanceProperties.push_back((SKILLCHAIN_ELEMENT)((properties >> 4) & 0b1111));
                     resonanceProperties.push_back((SKILLCHAIN_ELEMENT)((properties >> 8) & 0b1111));
                     skillchain = FormSkillchain(resonanceProperties, skillProperties);
                 }
-            }
-            else
-            {
-                // Previous effect is not an opening effect, meaning the power is
-                // The skill chain ID resonating.
-                resonanceProperties.push_back((SKILLCHAIN_ELEMENT)PSCEffect->GetPower());
-                skillchain = FormSkillchain(resonanceProperties, skillProperties);
+                else
+                {
+                    // Previous effect is not an opening effect, meaning the power is
+                    // The skill chain ID resonating.
+                    resonanceProperties.push_back((SKILLCHAIN_ELEMENT)PSCEffect->GetPower());
+                    skillchain = FormSkillchain(resonanceProperties, skillProperties);
+                }
             }
 
             if (skillchain != SC_NONE)
