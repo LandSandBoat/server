@@ -103,12 +103,12 @@ void CBlueSpell::setSecondarySkillchain(uint8 sc)
     m_SecondarySkillchain = sc;
 }
 
-uint8 CBlueSpell::getSecondarySkillchain() const
+uint8 CBlueSpell::getTertiarySkillchain() const
 {
     return m_TertiarySkillchain;
 }
 
-void CBlueSpell::setSecondarySkillchain(uint8 sc)
+void CBlueSpell::setTertiarySkillchain(uint8 sc)
 {
     m_TertiarySkillchain = sc;
 }
