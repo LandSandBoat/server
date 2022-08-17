@@ -27,7 +27,7 @@
 -- - RALA_WATERWAYS_U                = 259,
 -- - YORCIA_WEALD_U                  = 264,
 -- - CIRDAS_CAVERNS_U                = 271,
--- - OUTER_RAKAZNAR_U                = 275,
+-- - OUTER_RAKAZNAR_U1               = 275,
 -- - MAQUETTE_ABDHALJS_LEGION_B      = 287, -- See: ambuscade.lua
 -- - DYNAMIS_SAN_DORIA_D             = 294,
 -- - DYNAMIS_BASTOK_D                = 295,
@@ -267,7 +267,7 @@ xi.instance.lookup =
 
     },
 
-    [xi.zone.OUTER_RAKAZNAR_U] =
+    [xi.zone.OUTER_RAKAZNAR_U1] =
     {
 
     },

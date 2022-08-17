@@ -143,7 +143,7 @@ quest.sections =
                         -- Excenmille assists in this fight who is currently set to level 0 and not spawned
                         -- at this time.  Menecheme by default will approach Excenmille and attack.
 
-                        return mission:progressEvent(116)
+                        return quest:progressEvent(116)
                     elseif questProgress == 8 then
                         return quest:progressEvent(117)
                     end

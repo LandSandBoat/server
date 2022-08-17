@@ -5,8 +5,7 @@
 -- Recast Time: 00:10:00 or the next spell cast
 -- Duration: 0:01:00
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
+require("scripts/globals/job_utils/black_mage")
 -----------------------------------
 local ability_object = {}
 
@@ -15,7 +14,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    target:addStatusEffect(xi.effect.MANAWELL, 4, 0, 60)
+    xi.job_utils.black_mage.useManawell(player, target, ability)
 end
 
 return ability_object

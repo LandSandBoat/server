@@ -61,6 +61,9 @@ xi.settings.main =
     -- PL EXP Nerf
     PL_PENALTY = 0,
 
+    -- Land King System
+    LandKingSystem_NQ = 1, -- Default to pop system as loading the module turns off the pop system.
+
     -- Magian Trials
     ENABLE_MAGIAN_TRIALS             = 1,
     MAGIAN_TRIALS_MOBKILL_MULTIPLIER = 1,
