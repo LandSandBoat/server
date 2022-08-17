@@ -4,6 +4,7 @@
 -- Type: Standard NPC
 -- !pos 62.482 -8.499 -139.836 241
 -----------------------------------
+require("scripts/globals/pathfind")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 require("scripts/globals/pathfind")

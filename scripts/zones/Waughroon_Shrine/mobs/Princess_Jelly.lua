@@ -27,14 +27,14 @@ local centers =
 }
 local mevaList =
 {
-    [1] = xi.mod.WATER_MEVA,
-    [2] = xi.mod.THUNDER_MEVA,
-    [3] = xi.mod.EARTH_MEVA,
-    [4] = xi.mod.WIND_MEVA,
-    [5] = xi.mod.ICE_MEVA,
-    [6] = xi.mod.FIRE_MEVA,
-    [7] = xi.mod.DARK_MEVA,
-    [8] = xi.mod.LIGHT_MEVA,
+    {xi.mod.WATER_MEVA,   xi.mod.FIRE_ABSORB},
+    {xi.mod.THUNDER_MEVA, xi.mod.WATER_ABSORB},
+    {xi.mod.EARTH_MEVA,   xi.mod.LTNG_ABSORB},
+    {xi.mod.WIND_MEVA,    xi.mod.EARTH_ABSORB},
+    {xi.mod.ICE_MEVA,     xi.mod.WIND_ABSORB},
+    {xi.mod.FIRE_MEVA,    xi.mod.ICE_ABSORB},
+    {xi.mod.DARK_MEVA,    xi.mod.LIGHT_ABSORB},
+    {xi.mod.LIGHT_MEVA,   xi.mod.DARK_ABSORB},
 }
 
 local entity = {}
@@ -45,9 +45,11 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setSpeed(2)
+    mob:setMod(xi.mod.REGEN, 3)
     mob:setUnkillable(false)
     mob:setLocalVar('mobElement', math.random(1,8))
-    mob:addMod(mevaList[mob:getLocalVar('mobElement')], -250)
+    mob:addMod(mevaList[mob:getLocalVar('mobElement')][1], -250)
+    mob:addMod(mevaList[mob:getLocalVar('mobElement')][2], 1000)
 end
 
 local function getDistanceFromCenter(bfNum,mob)

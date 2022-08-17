@@ -793,6 +793,8 @@ xi.effect =
     MOBILIZATION             = 627,
     HOVER_SHOT               = 628,
     MOOGLE_AMPLIFIER         = 629,
+    TAINT                    = 630,
+    HAUNT                    = 631,
 
     -- Effect icons in packet can go from 0-767, so no custom effects should go in that range.
 

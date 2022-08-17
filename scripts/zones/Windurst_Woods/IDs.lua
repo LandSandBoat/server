@@ -76,13 +76,13 @@ zones[xi.zone.WINDURST_WOODS] =
         CHOCOBO_FEEDING_RUN_AWAY     = 10615, -- Your chocobo has run away. You cannot feed it now.
         CHOCOBO_FEEDING_STILL_EGG    = 10616, -- You cannot feed a chocobo that has not hatched yet.
         CHOCOBO_FEEDING_ITEM         = 11699, -- #: %
-        TRRRADE_IN_SPARKS            = 13841, -- You want to trrrade in sparks, do you?
-        DO_NOT_POSSESS_ENOUGH        = 13860, -- You do not possess enough <item> to complete the transaction.
-        NOT_ENOUGH_SPARKS            = 13861, -- You do not possess enough sparks of eminence to complete the transaction.
-        MAX_SPARKS_LIMIT_REACHED     = 13862, -- You have reached the maximum number of sparks that you can exchange this week (<number>). Your ability to purchase skill books and equipment will be restricted until next week.
-        YOU_NOW_HAVE_AMT_CURRENCY    = 13872, -- You now have <number> [sparks of eminence/conquest points/points of imperial standing/Allied Notes/bayld/Fields of Valor points/assault points (Leujaoam)/assault points (Mamool Ja Training Grounds)/assault points (Lebros Cavern)/assault points (Periqia)/assault points (Ilrusi Atoll)/cruor/kinetic units/obsidian fragments/mweya plasm corpuscles/ballista points/Unity accolades/pinches of Escha silt/resistance credits].
-        YOU_HAVE_JOINED_UNITY        = 14391, -- ou have joined [Pieuje's/Ayame's/Invincible Shield's/Apururu's/Maat's/Aldo's/Jakoh Wahcondalo's/Naja Salaheem's/Flaviria's/Yoran-Oran's/Sylvie's] Unity!
-        HAVE_ALREADY_CHANGED_UNITY   = 14467, -- ou have already changed Unities. Please wait until the next tabulation period.
+        TRRRADE_IN_SPARKS            = 13843, -- You want to trrrade in sparks, do you?
+        DO_NOT_POSSESS_ENOUGH        = 13862, -- You do not possess enough <item> to complete the transaction.
+        NOT_ENOUGH_SPARKS            = 13863, -- You do not possess enough sparks of eminence to complete the transaction.
+        MAX_SPARKS_LIMIT_REACHED     = 13864, -- You have reached the maximum number of sparks that you can exchange this week (<number>). Your ability to purchase skill books and equipment will be restricted until next week.
+        YOU_NOW_HAVE_AMT_CURRENCY    = 13874, -- You now have <number> [sparks of eminence/conquest points/points of imperial standing/Allied Notes/bayld/Fields of Valor points/assault points (Leujaoam)/assault points (Mamool Ja Training Grounds)/assault points (Lebros Cavern)/assault points (Periqia)/assault points (Ilrusi Atoll)/cruor/kinetic units/obsidian fragments/mweya plasm corpuscles/ballista points/Unity accolades/pinches of Escha silt/resistance credits].
+        YOU_HAVE_JOINED_UNITY        = 14393, -- ou have joined [Pieuje's/Ayame's/Invincible Shield's/Apururu's/Maat's/Aldo's/Jakoh Wahcondalo's/Naja Salaheem's/Flaviria's/Yoran-Oran's/Sylvie's] Unity!
+        HAVE_ALREADY_CHANGED_UNITY   = 14469, -- ou have already changed Unities. Please wait until the next tabulation period.
     },
     mob =
     {

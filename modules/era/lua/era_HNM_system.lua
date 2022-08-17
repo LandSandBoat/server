@@ -4,6 +4,7 @@
 require("modules/module_utils")
 require("scripts/globals/conquest")
 require("scripts/globals/zone")
+require("settings/main")
 
 -----------------------------------
 -- ID Requires
@@ -28,6 +29,7 @@ local hnmSystem = Module:new("era_HNM_System")
 hnmSystem:addOverride("xi.zones.Dragons_Aery.Zone.onInitialize", function(zone)
     local hnmPopTime   = GetServerVariable("[HNM]Fafnir")   -- Time the NM will spawn at.
     local hnmKillCount = GetServerVariable("[HNM]Fafnir_C") -- Number of times NQ King has been slain in a row.
+    xi.settings.main.LandKingSystem_NQ = 0
 
     -- First-time setup.
     if hnmPopTime == 0 then
@@ -117,6 +119,7 @@ end)
 hnmSystem:addOverride("xi.zones.Valley_of_Sorrows.Zone.onInitialize", function(zone)
     local hnmPopTime   = GetServerVariable("[HNM]Adamantoise")   -- Time the NM will spawn at.
     local hnmKillCount = GetServerVariable("[HNM]Adamantoise_C") -- Number of times NQ King has been slain in a row.
+    xi.settings.main.LandKingSystem_NQ = 0
 
     -- First-time setup.
     if hnmPopTime == 0 then
@@ -206,6 +209,7 @@ end)
 hnmSystem:addOverride("xi.zones.Behemoths_Dominion.Zone.onInitialize", function(zone)
     local hnmPopTime   = GetServerVariable("[HNM]Behemoth")   -- Time the NM will spawn at.
     local hnmKillCount = GetServerVariable("[HNM]Behemoth_C") -- Number of times NQ King has been slain in a row.
+    xi.settings.main.LandKingSystem_NQ = 0
 
     -- First-time setup.
     if hnmPopTime == 0 then
