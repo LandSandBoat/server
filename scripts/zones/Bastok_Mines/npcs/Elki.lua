@@ -31,8 +31,7 @@ entity.onTrigger = function(player, npc)
     elseif
         hearts == QUEST_COMPLETED and
         elevenths == QUEST_AVAILABLE and
-        player:getFameLevel(xi.quest.fame_area.BASTOK) >=2 and
-        player:needToZone() == false
+        player:getFameLevel(xi.quest.fame_area.BASTOK) >=2
     then
         player:startEvent(43)
 
