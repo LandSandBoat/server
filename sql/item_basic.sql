@@ -14545,7 +14545,7 @@ INSERT INTO `item_basic` VALUES (17244,0,'othinus_bow','othinus_bow',1,63572,0,1
 INSERT INTO `item_basic` VALUES (17245,0,'grosveneurs_bow','grosveneurs_bow',1,34820,13,0,4138);
 INSERT INTO `item_basic` VALUES (17246,0,'ziskas_crossbow','ziskas_crossbow',1,34820,13,0,4197);
 INSERT INTO `item_basic` VALUES (17247,0,'rikonodo','rikonodo',1,2052,13,0,12000);
-INSERT INTO `item_basic` VALUES (17248,0,'arquebus','arquebus',1,2084,13,0,5204);``
+INSERT INTO `item_basic` VALUES (17248,0,'arquebus','arquebus',1,2084,13,0,5204);
 INSERT INTO `item_basic` VALUES (17249,0,'magoichis_gun','magoichis_gun',1,2048,13,0,3842);
 INSERT INTO `item_basic` VALUES (17250,0,'matchlock_gun','matchlock_gun',1,2084,13,0,3310);
 INSERT INTO `item_basic` VALUES (17251,0,'hellfire','hellfire',1,2084,13,0,4138);
