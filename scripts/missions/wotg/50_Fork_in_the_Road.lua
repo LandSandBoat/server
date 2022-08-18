@@ -61,6 +61,14 @@ local dawndropOnEventFinish = function(player, csid, option, npc)
         player:messageSpecial(ID.text.GATHERED_DAWNDROPS_LIGHT, xi.ki.PRIMAL_GLOW)
         player:messageName(ID.text.RETRACED_ALL_JUNCTIONS, nil)
 
+        for _, zoneInfoTable in zoneEventInfo do
+            if player:hasKeyItem(zoneInfoTable[1]) then
+                player:delKeyItem(zoneInfoTable[1])
+            end
+        end
+
+        player:delKeyItem(xi.ki.RONFAURE_DAWNDROP)
+
         mission:complete(player)
     end
 end

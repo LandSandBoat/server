@@ -374,8 +374,8 @@ xi.mission.id =
         CAIT_IN_THE_WOODS          = 48, -- ±
         FORK_IN_THE_ROAD           = 49, -- ±
         MAIDEN_OF_THE_DUSK         = 50, -- ±
-        WHERE_IT_ALL_BEGAN         = 51,
-        A_TOKEN_OF_TROTH           = 52,
+        WHERE_IT_ALL_BEGAN         = 51, -- ±
+        A_TOKEN_OF_TROTH           = 52, -- ±
         LEST_WE_FORGET             = 53,
     },
 

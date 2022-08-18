@@ -38,7 +38,8 @@ mission.sections =
                         return mission:progressEvent(38, 89, 23, 1756, 0, 0, 0, hasDeclined, 0)
                     elseif not player:hasKeyItem(xi.ki.PRIMAL_GLOW) then
                         -- The wait for reobtaining this keyitem is only triggered after the initial
-                        -- replacement.
+                        -- replacement.  It is possible that a timer is set on complete of last mission
+                        -- for this piece, but unconfirmed.
 
                         if mission:getVar(player, 'Timer') <= VanadielUniqueDay() then
                             return mission:progressEvent(44, 89, 23, 1756, 0, 68032378, 209748094, 1, 0)
