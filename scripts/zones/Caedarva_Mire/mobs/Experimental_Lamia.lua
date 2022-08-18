@@ -64,7 +64,6 @@ entity.onAdditionalEffect = function(mob, target, damage)
  return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENWATER, {chance = 100, power = math.random(15, 50)})
 end
 
- 
 entity.onMobSpawn = function(mob)
     mob:setLocalVar("[rage]timer", 1800) -- 30 minutes
     xi.mix.jobSpecial.config(mob, {

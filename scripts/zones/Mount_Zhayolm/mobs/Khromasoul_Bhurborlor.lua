@@ -7,7 +7,7 @@ mixins ={require("scripts/mixins/job_special"),
          require("scripts/mixins/rage")}
          require("scripts/globals/status")
 -----------------------------------
-local entity = {} 
+local entity = {}
 entity.onMobInitialize = function(mob)
     mob:addMod(xi.mod.ATT, 200)
     mob:addMod(xi.mod.MDEF, 150)
@@ -80,7 +80,6 @@ entity.onMobSpawn = function(mob)
         },
     })
 end
-
 
 entity.onMobDeath = function(mob, player, isKiller)
 end

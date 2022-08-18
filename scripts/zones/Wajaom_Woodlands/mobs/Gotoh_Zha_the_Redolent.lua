@@ -65,7 +65,7 @@ entity.onMobSpawn = function(mob)
     specials =
     {{id = xi.jsa.MANAFONT, hpp = math.random(66, 95)},
     {id = xi.jsa.BENEDICTION, hpp = 25},},})
-    mob:setLocalVar("[rage]timer", 1800) 
+    mob:setLocalVar("[rage]timer", 1800)
     mob:setSpellList(296) -- Set BLM spell list
 end
 

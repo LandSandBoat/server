@@ -70,7 +70,7 @@ entity.onMobSpawn = function(mob)
             {id = xi.jsa.BENEDICTION, hpp = 25},
         },
     })
-    mob:setLocalVar("[rage]timer", 1800) 
+    mob:setLocalVar("[rage]timer", 1800)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
