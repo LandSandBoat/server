@@ -22,7 +22,9 @@ entity.onMobSpawn = function(mob)
     mob:addMod(xi.mod.ATT, 150)
     mob:addMod(xi.mod.DEF, 200)
     mob:addMod(xi.mod.EVA, 110)
+    mob:addMod(xi.mod.GRAVITYRESBUILD, 30)
     mob:setMod(xi.mod.TRIPLE_ATTACK, 5)
+    mob:setLocalVar("delay", os.time())
 
     -- Despawn the ???
     GetNPCByID(ID.npc.BEHEMOTH_QM):setStatus(xi.status.DISAPPEAR)
@@ -39,7 +41,7 @@ entity.onMobFight = function(mob, target)
 
     local delay = mob:getLocalVar("delay")
     if os.time() > delay then -- Use Meteor every 40s, based on capture
-        mob:castSpell(218) -- meteor
+        mob:castSpell(218, target) -- meteor
         mob:setLocalVar("delay", os.time() + 40)
     end
 

@@ -15,7 +15,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     -- Pull base stats.
     local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
 
-    local power = calculatePotency(26, spell:getSkillType(), caster, target)
+    local power = calculatePotency(40, spell:getSkillType(), caster, target)
 
     -- Duration, including resistance.  Unconfirmed.
     local duration = calculateDuration(120, spell:getSkillType(), spell:getSpellGroup(), caster, target)
