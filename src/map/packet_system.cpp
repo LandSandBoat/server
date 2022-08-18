@@ -6783,7 +6783,7 @@ void SmallPacket0x100(map_session_data_t* const PSession, CCharEntity* const PCh
             {
                 blueutils::UnequipAllBlueSpells(PChar);
             }
-			
+            
             bool canUseMeritMode = PChar->jobs.job[PChar->GetMJob()] >= 75 && charutils::hasKeyItem(PChar, 606);
             if (!canUseMeritMode && PChar->MeritMode == true)
             {
