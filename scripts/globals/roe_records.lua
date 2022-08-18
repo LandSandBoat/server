@@ -2070,7 +2070,168 @@ function getRoeRecords(triggers)
         -- Tutorial -> Missions (Treasures of Aht Urhgan)
         -----------------------------------
 
-        -- start 1410
+        -- TODO: Needs verification for progressing "Up to" vs requiring mission to be completed.  This appears to
+        -- be the required mission, with the exception of the final in each series which is not officially completed.
+
+        [1410] =
+        { -- Treasures of Aht Urhgan 1
+            trigger = triggers.missionComplete,
+            reqs = { missionComplete = { xi.mission.log_id.TOAU, xi.mission.id.toau.A_MERCENARY_LIFE } },
+            flags = set { "retro" },
+            reward = { sparks = 300, xp = 500 },
+        },
+
+        [1411] =
+        { -- Treasures of Aht Urhgan 2
+            trigger = triggers.missionComplete,
+            reqs = { missionComplete = { xi.mission.log_id.TOAU, xi.mission.id.toau.PASSING_GLORY } },
+            flags = set { "retro" },
+            reward = { sparks = 300, xp = 500 },
+        },
+
+        [1412] =
+        { -- Treasures of Aht Urhgan 3
+            trigger = triggers.missionComplete,
+            reqs = { missionComplete = { xi.mission.log_id.TOAU, xi.mission.id.toau.PLAYING_THE_PART } },
+            flags = set { "retro" },
+            reward = { sparks = 300, xp = 500 },
+        },
+
+        [1413] =
+        { -- Treasures of Aht Urhgan 4
+            trigger = triggers.missionComplete,
+            reqs = { missionComplete = { xi.mission.log_id.TOAU, xi.mission.id.toau.SENTINELS_HONOR } },
+            flags = set { "retro" },
+            reward = { sparks = 300, xp = 500 },
+        },
+
+        [1414] =
+        { -- Treasures of Aht Urhgan 5
+            trigger = triggers.missionComplete,
+            reqs = { missionComplete = { xi.mission.log_id.TOAU, xi.mission.id.toau.STIRRINGS_OF_WAR } },
+            flags = set { "retro" },
+            reward = { sparks = 300, xp = 500 },
+        },
+
+        [1415] =
+        { -- Treasures of Aht Urhgan 6
+            trigger = triggers.missionComplete,
+            reqs = { missionComplete = { xi.mission.log_id.TOAU, xi.mission.id.toau.THE_EMPRESS_CROWNED } },
+            flags = set { "retro" },
+            reward = { sparks = 300, xp = 500 },
+        },
+
+        -----------------------------------
+        -- Tutorial -> Missions (Wings of the Goddess)
+        -----------------------------------
+
+        [1402] =
+        { -- Wings of the Goddess 1
+            trigger = triggers.missionComplete,
+            reqs = { missionComplete = { xi.mission.log_id.WOTG, xi.mission.id.wotg.BACK_TO_THE_BEGINNING } },
+            flags = set { "retro" },
+            reward = { sparks = 300, xp = 500 },
+        },
+
+        [1403] =
+        { -- Wings of the Goddess 2
+            trigger = triggers.missionComplete,
+            reqs = { missionComplete = { xi.mission.log_id.WOTG, xi.mission.id.wotg.CAIT_SITH } },
+            flags = set { "retro" },
+            reward = { sparks = 300, xp = 500 },
+        },
+
+        [1404] =
+        { -- Wings of the Goddess 3
+            trigger = triggers.missionComplete,
+            reqs = { missionComplete = { xi.mission.log_id.WOTG, xi.mission.id.wotg.IN_THE_NAME_OF_THE_FATHER } },
+            flags = set { "retro" },
+            reward = { sparks = 300, xp = 500 },
+        },
+
+        [1405] =
+        { -- Wings of the Goddess 4
+            trigger = triggers.missionComplete,
+            reqs = { missionComplete = { xi.mission.log_id.WOTG, xi.mission.id.wotg.CROSSROADS_OF_TIME } },
+            flags = set { "retro" },
+            reward = { sparks = 300, xp = 500 },
+        },
+
+        [1406] =
+        { -- Wings of the Goddess 5
+            trigger = triggers.missionComplete,
+            reqs = { missionComplete = { xi.mission.log_id.WOTG, xi.mission.id.wotg.FATE_IN_HAZE } },
+            flags = set { "retro" },
+            reward = { sparks = 300, xp = 500 },
+        },
+
+        [1407] =
+        { -- Wings of the Goddess 6
+            trigger = triggers.missionComplete,
+            reqs = { missionComplete = { xi.mission.log_id.WOTG, xi.mission.id.wotg.ADIEU_LILISETTE } },
+            flags = set { "retro" },
+            reward = { sparks = 300, xp = 500 },
+        },
+
+        [1408] =
+        { -- Wings of the Goddess 7
+            trigger = triggers.missionComplete,
+            reqs = { missionComplete = { xi.mission.log_id.WOTG, xi.mission.id.wotg.GLIMMER_OF_LIFE } },
+            flags = set { "retro" },
+            reward = { sparks = 300, xp = 500 },
+        },
+
+        [1409] =
+        { -- Wings of the Goddess 8
+            trigger = triggers.missionComplete,
+            reqs = { missionComplete = { xi.mission.log_id.WOTG, xi.mission.id.wotg.A_TOKEN_OF_TROTH } },
+            flags = set { "retro" },
+            reward = { sparks = 300, xp = 500 },
+        },
+
+        -----------------------------------
+        -- Tutorial -> Missions (Adoulin)
+        -----------------------------------
+
+        [1426] =
+        { -- Seekers of Adoulin Chapter 1
+            trigger = triggers.missionComplete,
+            reqs = { missionComplete = { xi.mission.log_id.SOA, xi.mission.id.soa.ARCIELA_APPEARS_AGAIN } },
+            flags = set { "retro" },
+            reward = { sparks = 300, xp = 500 },
+        },
+
+        [1427] =
+        { -- Seekers of Adoulin Chapter 2
+            trigger = triggers.missionComplete,
+            reqs = { missionComplete = { xi.mission.log_id.SOA, xi.mission.id.soa.YGGDRASIL } },
+            flags = set { "retro" },
+            reward = { sparks = 300, xp = 500 },
+        },
+
+        [1428] =
+        { -- Seekers of Adoulin Chapter 3
+            trigger = triggers.missionComplete,
+            reqs = { missionComplete = { xi.mission.log_id.SOA, xi.mission.id.soa.GLIMMER_OF_PORTENT } },
+            flags = set { "retro" },
+            reward = { sparks = 300, xp = 500 },
+        },
+
+        [1429] =
+        { -- Seekers of Adoulin Chapter 4
+            trigger = triggers.missionComplete,
+            reqs = { missionComplete = { xi.mission.log_id.SOA, xi.mission.id.soa.ROYAL_BLESSINGS } },
+            flags = set { "retro" },
+            reward = { sparks = 300, xp = 500 },
+        },
+
+        [1430] =
+        { -- Seekers of Adoulin Chapter 5
+            trigger = triggers.missionComplete,
+            reqs = { missionComplete = { xi.mission.log_id.SOA, xi.mission.id.soa.UNDYING_LIGHT } },
+            flags = set { "retro" },
+            reward = { sparks = 300, xp = 500 },
+        },
 
         -----------------------------------
         -- Combat (Wide Area) -> Combat (General)
