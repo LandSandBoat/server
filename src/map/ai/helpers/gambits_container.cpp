@@ -775,6 +775,11 @@ namespace gambits
                 return xirand::GetRandomNumber<uint16>(100) < (int16)predicate.condition_arg;
                 break;
             }
+            case G_CONDITION::IS_DEAD:
+            {
+                return trigger_target->isDead();
+                break;
+            }
             default:
             {
                 return false;
