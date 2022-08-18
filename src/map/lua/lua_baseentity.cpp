@@ -2660,6 +2660,8 @@ void CLuaBaseEntity::setPos(sol::variadic_args va)
 
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
+        auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+
         if (va[4].is<double>())
         {
             auto zoneid = va[4].as<uint16>();
@@ -2668,17 +2670,22 @@ void CLuaBaseEntity::setPos(sol::variadic_args va)
                 return;
             }
 
-            ((CCharEntity*)m_PBaseEntity)->loc.destination = zoneid;
-            ((CCharEntity*)m_PBaseEntity)->status          = STATUS_TYPE::DISAPPEAR;
-            ((CCharEntity*)m_PBaseEntity)->loc.boundary    = 0;
-            ((CCharEntity*)m_PBaseEntity)->m_moghouseID    = 0;
-            ((CCharEntity*)m_PBaseEntity)->clearPacketList();
-            charutils::SendToZone((CCharEntity*)m_PBaseEntity, 2, zoneutils::GetZoneIPP(m_PBaseEntity->loc.destination));
-            //((CCharEntity*)m_PBaseEntity)->loc.zone->DecreaseZoneCounter(((CCharEntity*)m_PBaseEntity));
+            if (PChar->PPet != nullptr)
+            {
+                PChar->setPetZoningInfo();
+            }
+
+            PChar->loc.destination = zoneid;
+            PChar->status          = STATUS_TYPE::DISAPPEAR;
+            PChar->loc.boundary    = 0;
+            PChar->m_moghouseID    = 0;
+            PChar->clearPacketList();
+            charutils::SendToZone(PChar, 2, zoneutils::GetZoneIPP(PChar->loc.destination));
+            // PChar->loc.zone->DecreaseZoneCounter(PChar);
         }
-        else if (((CCharEntity*)m_PBaseEntity)->status != STATUS_TYPE::DISAPPEAR)
+        else if (PChar->status != STATUS_TYPE::DISAPPEAR)
         {
-            ((CCharEntity*)m_PBaseEntity)->pushPacket(new CPositionPacket((CCharEntity*)m_PBaseEntity));
+            PChar->pushPacket(new CPositionPacket(PChar));
         }
     }
     m_PBaseEntity->updatemask |= UPDATE_POS;
