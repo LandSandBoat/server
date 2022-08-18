@@ -596,9 +596,7 @@ void CAttack::ProcessDamage()
             float boostPerRound = ((m_attacker->GetWeaponDelay(false) / 1000.0f) * 60.0f) / 385.0f;
             float remainder     = effect->GetSubPower() / 100.0f;
 
-            // Cap floor at 1 WSD per hit
             // Calculate bonuses from Enhances Restraint, Job Point upgrades, and remainder from previous hit
-            boostPerRound = std::clamp<float>(boostPerRound, 1, boostPerRound);
             boostPerRound = (boostPerRound * (1 + m_attacker->getMod(Mod::ENHANCES_RESTRAINT) / 100.0f) * (1 + jpBonus / 100.0f)) + remainder;
 
             // Calculate new remainder and multiply by 100 so significant digits aren't lost
