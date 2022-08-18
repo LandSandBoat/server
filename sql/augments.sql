@@ -17,8 +17,9 @@ CREATE TABLE `augments` (
 -- Dumping data for table `augments`
 --
 
--- WARNING: do not comment out augmentId records,zero their modId and values instead.
--- zero is MOD_NONE and should be fine.
+-- WARNING: do not comment out augmentId records, zero their modId and values instead.
+-- Zero is MOD_NONE and should be fine..
+-- The IDs follow the packet not the dat so windower resources and polutils dumps will not match
 INSERT INTO `augments` VALUES (1,0,2,1,0,0); -- HP+1
 INSERT INTO `augments` VALUES (2,0,2,33,0,0); -- HP+33
 INSERT INTO `augments` VALUES (3,0,2,65,0,0); -- HP+65
@@ -1031,7 +1032,7 @@ INSERT INTO `augments` VALUES (828,0,0,0,0,0);
 INSERT INTO `augments` VALUES (829,0,0,0,0,0);
 INSERT INTO `augments` VALUES (830,0,0,0,0,0);
 INSERT INTO `augments` VALUES (831,0,0,0,0,0);
--- NOTICE: additional effect augments will not work until we finish refactoring additional effects. See Teo in discrod for details.
+-- NOTICE: additional effect augments will not work until we finish refactoring additional effects and fill in values here.
 INSERT INTO `augments` VALUES (832,0,0,0,0,0); -- Additional Effect: Fire Dmg      (Base of 5,each additional point +1 for range of 5 to 36)
 INSERT INTO `augments` VALUES (833,0,0,0,0,0); -- Additional Effect: Ice Dmg       (Base of 5,each additional point +1 for range of 5 to 36)
 INSERT INTO `augments` VALUES (834,0,0,0,0,0); -- Additional Effect: Wind Dmg      (Base of 5,each additional point +1 for range of 5 to 36)
@@ -2348,4 +2349,4 @@ INSERT INTO `augments` VALUES (2045,0,0,0,0,0);
 INSERT INTO `augments` VALUES (2046,0,0,0,0,0);
 -- End unused block
 
-INSERT INTO `augments` VALUES (2047,0,0,0,0,0); -- ??? (it literally just says "???") - used by WotG scenario reward
+INSERT INTO `augments` VALUES (2047,0,0,0,0,0); -- ??? (it literally just says "???")
