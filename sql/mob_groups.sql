@@ -13133,7 +13133,7 @@ INSERT INTO `mob_groups` VALUES (11,938,206,'Death_Clan_Destroyer',0,128,0,0,0,7
 INSERT INTO `mob_groups` VALUES (12,5408,206,'Maat_pld',0,128,0,2300,1000,70,70,0);
 INSERT INTO `mob_groups` VALUES (13,5409,206,'Maat_drk',0,128,0,2300,1000,70,70,0);
 INSERT INTO `mob_groups` VALUES (14,5413,206,'Maat_brd',0,128,0,2300,0,70,70,0);
-INSERT INTO `mob_groups` VALUES (15,1620,206,'Gladiatorial_Weapon',0,128,0,0,0,30,30,0);
+INSERT INTO `mob_groups` VALUES (15,1620,206,'Gladiatorial_Weapon',0,128,0,900,0,28,29,0);
 INSERT INTO `mob_groups` VALUES (16,629,206,'Capelthwaite',0,128,0,0,0,31,33,0);
 INSERT INTO `mob_groups` VALUES (17,1424,206,'Freybug',0,128,0,0,0,31,33,0);
 INSERT INTO `mob_groups` VALUES (18,3390,206,'Rongeur_Dos',0,128,0,0,0,31,33,0);

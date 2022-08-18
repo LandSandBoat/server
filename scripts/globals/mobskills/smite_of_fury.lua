@@ -1,11 +1,10 @@
 -----------------------------------
--- Flurry of Rage
--- Deals multiple hits to a single target.
--- Only used by Eldritch Edge, Malefic Fencer, and Nightmare Weapon.
+-- Smite of Fury
+-- Damage varies with TP.
 -----------------------------------
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
 -----------------------------------
 local mobskill_object = {}
 
@@ -14,13 +13,14 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local numhits = 3
+    local numhits = 1
     local accmod = 1
-    local dmgmod = 1
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.ACC_VARIES, 1, 2, 3)
-    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
+    local dmgmod = 2.7
 
+    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
+
+    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
     return dmg
 end
 

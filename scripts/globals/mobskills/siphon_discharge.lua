@@ -10,7 +10,7 @@
 -----------------------------------
 local mobskill_object = {}
 
-require("settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 
