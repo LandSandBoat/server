@@ -64,7 +64,7 @@ mission.sections =
 
         [xi.zone.WALK_OF_ECHOES] =
         {
-            ['Ornate_Door'] =
+            ['_521'] =
             {
                 onTrigger = function(player, npc)
                     -- NOTE: BCNM Entry Event: 32000, Params 0, 300, 200, 1 following
