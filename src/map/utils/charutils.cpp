@@ -6316,9 +6316,18 @@ namespace charutils
                                 "boundary = %u "
                                 "WHERE charid = %u;";
 
-            sql->Query(Query, PChar->loc.destination,
-                       (PChar->m_moghouseID || PChar->loc.destination == PChar->getZone()) ? PChar->getZone() : PChar->loc.prevzone, PChar->loc.p.rotation,
-                       PChar->loc.p.x, PChar->loc.p.y, PChar->loc.p.z, PChar->m_moghouseID, PChar->loc.boundary, PChar->id);
+            // Fix so that pos_prevzone is correctly saved into the database
+
+            sql->Query(Query,
+                       PChar->loc.destination,
+                       (PChar->m_moghouseID || PChar->loc.destination != PChar->getZone()) ? PChar->getZone() : PChar->loc.prevzone,
+                       PChar->loc.p.rotation,
+                       PChar->loc.p.x,
+                       PChar->loc.p.y,
+                       PChar->loc.p.z,
+                       PChar->m_moghouseID,
+                       PChar->loc.boundary,
+                       PChar->id);
         }
         else
         {
