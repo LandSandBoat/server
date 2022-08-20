@@ -37,7 +37,7 @@ zone_object.onZoneIn = function(player, prevZone)
     elseif
         prevZone == xi.zone.QUBIA_ARENA and
         player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_FIRST_MEETING) == QUEST_ACCEPTED and
-        not player:hasKeyItem(xi.ki.LETTER_FROM_DALZAKK))
+        not player:hasKeyItem(xi.ki.LETTER_FROM_DALZAKK)
     then
         cs = 16 -- MNK AF
     elseif

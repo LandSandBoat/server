@@ -1,11 +1,9 @@
 -----------------------------------
---
 -- Zone: Upper_Delkfutts_Tower (158)
---
 -----------------------------------
-local ID = require("scripts/zones/Upper_Delkfutts_Tower/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/treasure")
+local ID = require('scripts/zones/Upper_Delkfutts_Tower/IDs')
+require('scripts/globals/conquest')
+require('scripts/globals/treasure')
 -----------------------------------
 local zone_object = {}
 
@@ -22,9 +20,11 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
+
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(12.098, -105.408, 27.683, 239)
     end
+
     return cs
 end
 
@@ -35,6 +35,7 @@ zone_object.onRegionEnter = function(player, region)
             --player:setCharVar("porter_lock", 1)
             player:startEvent(0)
         end,
+
         [2] = function (x)
             --player:setCharVar("porter_lock", 1)
             player:startEvent(1)

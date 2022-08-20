@@ -1,10 +1,8 @@
 -----------------------------------
---
 -- Zone: Windurst-Jeuno_Airship
---
 -----------------------------------
-local ID = require("scripts/zones/Windurst-Jeuno_Airship/IDs")
-require("scripts/globals/zone")
+local ID = require('scripts/zones/Windurst-Jeuno_Airship/IDs')
+require('scripts/globals/zone')
 -----------------------------------
 local zone_object = {}
 
@@ -31,6 +29,7 @@ end
 zone_object.onEventFinish = function(player, csid, option)
     if csid == 100 then
         local prevzone = player:getPreviousZone()
+
         if prevzone == xi.zone.PORT_JEUNO then
             player:setPos(0, 0, 0, 0, 240)
         elseif prevzone == xi.zone.PORT_WINDURST then
