@@ -1,9 +1,9 @@
 -----------------------------------
 -- Zone: Dynamis-San_dOria
 -----------------------------------
-local ID = require("scripts/zones/Dynamis-San_dOria/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/dynamis")
+local ID = require('scripts/zones/Dynamis-San_dOria/IDs')
+require('scripts/globals/conquest')
+require('scripts/globals/dynamis')
 -----------------------------------
 local zone_object = {}
 

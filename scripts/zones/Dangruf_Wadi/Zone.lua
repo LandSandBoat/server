@@ -1,13 +1,11 @@
 -----------------------------------
---
 -- Zone: Dangruf_Wadi (191)
---
 -----------------------------------
-local ID = require("scripts/zones/Dangruf_Wadi/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/keyitems")
-require("scripts/globals/treasure")
-require("scripts/globals/status")
+local ID = require('scripts/zones/Dangruf_Wadi/IDs')
+require('scripts/globals/conquest')
+require('scripts/globals/keyitems')
+require('scripts/globals/treasure')
+require('scripts/globals/status')
 -----------------------------------
 local zone_object = {}
 
@@ -25,9 +23,11 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
+
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(-4.025, -4.449, 0.016, 112)
     end
+
     return cs
 end
 
@@ -38,10 +38,12 @@ zone_object.onRegionEnter = function(player, region)
             player:startEvent(10)
             SendEntityVisualPacket(ID.npc.GEYSER_OFFSET, "kkj2")
         end,
+
         [2] = function (x)
             player:startEvent(11)
             SendEntityVisualPacket(ID.npc.GEYSER_OFFSET + 1, "kkj1")
         end,
+
         [3] = function (x)
             player:startEvent(12)
             SendEntityVisualPacket(ID.npc.GEYSER_OFFSET + 2, "kkj3")
@@ -61,14 +63,21 @@ end
 zone_object.onGameHour = function(zone)
     local nm = GetMobByID(ID.mob.GEYSER_LIZARD)
     local pop = nm:getLocalVar("pop")
-    if (os.time() > pop and not nm:isSpawned()) then
+
+    if
+        os.time() > pop and
+        not nm:isSpawned()
+    then
         UpdateNMSpawnPoint(ID.mob.GEYSER_LIZARD)
         nm:spawn()
     end
 end
 
 zone_object.onZoneWeatherChange = function(weather)
-    if (weather == xi.weather.NONE or weather == xi.weather.SUNSHINE) then
+    if
+        weather == xi.weather.NONE or
+        weather == xi.weather.SUNSHINE
+    then
         GetNPCByID(ID.npc.AN_EMPTY_VESSEL_QM):setStatus(xi.status.NORMAL)
     else
         GetNPCByID(ID.npc.AN_EMPTY_VESSEL_QM):setStatus(xi.status.DISAPPEAR)
