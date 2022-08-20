@@ -1,10 +1,8 @@
 -----------------------------------
---
 -- Zone: Ship_bound_for_Mhaura_Pirates (228)
---
 -----------------------------------
-local ID = require("scripts/zones/Ship_bound_for_Mhaura_Pirates/IDs")
-require("scripts/globals/zone")
+local ID = require('scripts/zones/Ship_bound_for_Mhaura_Pirates/IDs')
+require('scripts/globals/zone')
 -----------------------------------
 local zone_object = {}
 
@@ -25,6 +23,7 @@ end
 zone_object.onTransportEvent = function(player, transport)
     player:startEvent(512)
 end
+
 zone_object.onEventUpdate = function(player, csid, option)
 end
 
