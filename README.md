@@ -1,6 +1,6 @@
 # AirSkyBoat
 
-Welcome to AirSkyBoat, an open source server emulator for FFXI based off of the level 75 era. Our repository is a fork off of the parent project LandSandBoat, which you can find at https://github.com/LandSandBoat/server.
+Welcome to AirSkyBoat, an open source server emulator for FFXI based off of the level 75 era. Our repository is a fork off of the parent project LandSandBoat, which you can find at https://github.com/LandSandBoat/server. The cutoff date for ASB changes is just before the level cap raise patch in June 2010.
 
 Our main place that we discuss changes and issues is on our Discord which can be found at https://discord.gg/SM2J2z8Cz6
 
