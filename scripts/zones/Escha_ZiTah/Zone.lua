@@ -1,8 +1,8 @@
 -----------------------------------
 -- Zone: Escha - Zi'Tah (288)
 -----------------------------------
-local ID = require("scripts/zones/Escha_ZiTah/IDs")
-require("scripts/globals/missions")
+local ID = require('scripts/zones/Escha_ZiTah/IDs')
+require('scripts/globals/missions')
 -----------------------------------
 local zone_object = {}
 
@@ -12,7 +12,7 @@ end
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         -- 0, 0, 0 currently lands the player at a valid location in zone
     end
 

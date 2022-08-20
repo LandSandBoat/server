@@ -1,12 +1,10 @@
 -----------------------------------
---
 -- Zone: Kuftal_Tunnel (174)
---
 -----------------------------------
-local ID = require("scripts/zones/Kuftal_Tunnel/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/treasure")
-require("scripts/globals/status")
+local ID = require('scripts/zones/Kuftal_Tunnel/IDs')
+require('scripts/globals/conquest')
+require('scripts/globals/treasure')
+require('scripts/globals/status')
 -----------------------------------
 local zone_object = {}
 
@@ -23,9 +21,11 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
+
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(20.37, -21.104, 275.782, 46)
     end
+
     return cs
 end
 
@@ -79,6 +79,7 @@ zone_object.onGameHour = function(zone)
     if dir > 0 then
         local shouldOpen = boulderOpen[dir][VanadielHour()]
         local boulder = GetNPCByID(ID.npc.DOOR_ROCK)
+
         if shouldOpen and shouldOpen() and boulder:getAnimation() == xi.anim.CLOSE_DOOR then
             boulder:openDoor(144 * 6) -- one vanadiel hour is 144 earth seconds. lower boulder for 6 vanadiel hours.
         end
