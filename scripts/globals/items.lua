@@ -2052,6 +2052,7 @@ xi.items =
     TWILIGHT_TORQUE                 = 11625,
     ROYAL_KNIGHT_SIGIL_RING         = 11636,
     LIGHT_EARRING                   = 11684,
+    MOONSHADE_EARRING               = 11697,
     RAVAGERS_EARRING                = 11703,
     TANTRA_EARRING                  = 11704,
     ORISON_EARRING                  = 11705,

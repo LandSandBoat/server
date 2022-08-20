@@ -85,7 +85,7 @@ INSERT INTO `augments` VALUES (55,100,163,-1,0,0); -- Magic dmg. taken -1%
 INSERT INTO `augments` VALUES (56,100,162,-1,0,0); -- Breath dmg. taken -1%
 INSERT INTO `augments` VALUES (57,0,562,1,0,0); -- Magic crit. hit rate+1%
 INSERT INTO `augments` VALUES (58,0,29,-1,0,0); -- Mag.Def.Bns.-1
-INSERT INTO `augments` VALUES (59,0,0,0,0,0); -- Latent effect: Regain+1 (Do via Latent: triggered with your current weapon drawn for 1 TP/tick.)
+INSERT INTO `augments` VALUES (59,0,0,0,0,0); -- Latent effect: Regain+10 (Do via Latent: triggered with your current weapon drawn for 10 TP/tick.)
 INSERT INTO `augments` VALUES (60,0,0,0,0,0); -- Latent effect: Refresh+1 (Do via Latent: triggered with your current weapon not drawn for 1 MP/tick. Refresh is not present while resting(/heal),chocobo or /sit.)
 INSERT INTO `augments` VALUES (61,0,958,1,0,0); -- Occ. inc. resist to stat ailments+1
 INSERT INTO `augments` VALUES (62,0,25,33,0,0); -- Accuracy+33
