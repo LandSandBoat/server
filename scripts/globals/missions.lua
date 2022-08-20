@@ -376,7 +376,7 @@ xi.mission.id =
         MAIDEN_OF_THE_DUSK         = 50, -- ±
         WHERE_IT_ALL_BEGAN         = 51, -- ±
         A_TOKEN_OF_TROTH           = 52, -- ±
-        LEST_WE_FORGET             = 53,
+        LEST_WE_FORGET             = 53, -- ±
     },
 
     -----------------------------------
