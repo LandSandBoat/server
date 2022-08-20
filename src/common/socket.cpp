@@ -748,7 +748,7 @@ int connect_client(int listen_fd, sockaddr_in& client_address)
     fd = sAccept(listen_fd, (struct sockaddr*)&client_address, &len);
     if (fd == -1)
     {
-        ShowError("connect_client: accept failed (code %d)!", sErrno);
+        ShowError("connect_client: accept failed (code %d, listen_fd %d)!", sErrno, listen_fd);
         return -1;
     }
     if (fd == 0)
