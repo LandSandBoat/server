@@ -1,12 +1,10 @@
 -----------------------------------
 -- Zone: Promyvion-Dem (18)
 -----------------------------------
-local ID = require("scripts/zones/Promyvion-Dem/IDs")
-require("scripts/globals/promyvion")
-require("scripts/globals/keyitems")
-require("scripts/globals/missions")
-require("scripts/globals/settings")
-require("scripts/globals/status")
+local ID = require('scripts/zones/Promyvion-Dem/IDs')
+require('scripts/globals/promyvion')
+require('scripts/globals/settings')
+require('scripts/globals/status')
 -----------------------------------
 local zone_object = {}
 

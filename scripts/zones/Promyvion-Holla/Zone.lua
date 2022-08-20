@@ -1,12 +1,10 @@
 -----------------------------------
 -- Zone: Promyvion-Holla (16)
 -----------------------------------
-local ID = require("scripts/zones/Promyvion-Holla/IDs")
-require("scripts/globals/promyvion")
-require("scripts/globals/keyitems")
-require("scripts/globals/missions")
-require("scripts/globals/settings")
-require("scripts/globals/status")
+local ID = require('scripts/zones/Promyvion-Holla/IDs')
+require('scripts/globals/promyvion')
+require('scripts/globals/settings')
+require('scripts/globals/status')
 -----------------------------------
 local zone_object = {}
 
