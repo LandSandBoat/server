@@ -1,8 +1,8 @@
 -----------------------------------
 -- Zone: Abyssea - Tahrongi
 -----------------------------------
-local ID = require("scripts/zones/Abyssea-Tahrongi/IDs")
-require("scripts/globals/abyssea")
+local ID = require('scripts/zones/Abyssea-Tahrongi/IDs')
+require('scripts/globals/abyssea')
 -----------------------------------
 local zone_object = {}
 

@@ -1,10 +1,8 @@
 -----------------------------------
---
 -- Zone: Ship bound for Selbina Pirates (227)
---
 -----------------------------------
-local ID = require("scripts/zones/Ship_bound_for_Selbina_Pirates/IDs")
-require("scripts/globals/zone")
+local ID = require('scripts/zones/Ship_bound_for_Selbina_Pirates/IDs')
+require('scripts/globals/zone')
 -----------------------------------
 local zone_object = {}
 
@@ -20,7 +18,6 @@ zone_object.onZoneIn = function(player, prevZone)
     end
 
     return cs
-
 end
 
 zone_object.onTransportEvent = function(player, transport)

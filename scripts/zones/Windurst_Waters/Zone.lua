@@ -1,12 +1,11 @@
 -----------------------------------
 -- Zone: Windurst_Waters (238)
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Waters/IDs")
-require("scripts/globals/events/harvest_festivals")
-require("scripts/globals/conquest")
-require("scripts/globals/missions")
-require("scripts/globals/settings")
-require("scripts/globals/zone")
+local ID = require('scripts/zones/Windurst_Waters/IDs')
+require('scripts/globals/events/harvest_festivals')
+require('scripts/globals/conquest')
+require('scripts/globals/settings')
+require('scripts/globals/zone')
 -----------------------------------
 local zone_object = {}
 

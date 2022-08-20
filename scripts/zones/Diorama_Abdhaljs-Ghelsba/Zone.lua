@@ -1,9 +1,7 @@
 -----------------------------------
---
 -- Zone: Diorama_Abdhaljs-Ghelsba
---
 -----------------------------------
-local ID = require("scripts/zones/Diorama_Abdhaljs-Ghelsba/IDs")
+local ID = require('scripts/zones/Diorama_Abdhaljs-Ghelsba/IDs')
 -----------------------------------
 local zone_object = {}
 

@@ -1,11 +1,9 @@
 -----------------------------------
---
 -- Zone: Phomiuna_Aqueducts (27)
---
 -----------------------------------
-local ID = require("scripts/zones/Phomiuna_Aqueducts/IDs")
-require("scripts/globals/settings")
-require("scripts/globals/status")
+local ID = require('scripts/zones/Phomiuna_Aqueducts/IDs')
+require('scripts/globals/settings')
+require('scripts/globals/status')
 -----------------------------------
 local zone_object = {}
 
@@ -19,7 +17,7 @@ end
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(260.02, -2.12, -290.461, 192)
     end
 
@@ -27,7 +25,7 @@ zone_object.onZoneIn = function(player, prevZone)
 end
 
 zone_object.afterZoneIn = function(player)
-    if (xi.settings.main.ENABLE_COP_ZONE_CAP == 1) then -- ZONE WIDE LEVEL RESTRICTION
+    if xi.settings.main.ENABLE_COP_ZONE_CAP == 1 then -- ZONE WIDE LEVEL RESTRICTION
         player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, 40, 0, 0) -- LV40 cap
     end
 end
