@@ -53,6 +53,10 @@ INSERT INTO `mob_skills` VALUES (40,9,'vorpal_blade',0,7.0,2000,0,4,0,0,0,5,8,0)
 INSERT INTO `mob_skills` VALUES (41,10,'swift_blade',0,7.0,2000,0,4,0,0,0,9,0,0);
 INSERT INTO `mob_skills` VALUES (42,11,'savage_blade',0,7.0,2000,0,4,0,0,0,9,0,0);
 INSERT INTO `mob_skills` VALUES (49,107,'power_slash',0,10,2000,500,4,0,0,0,1,0,0);
+INSERT INTO `mob_skills` VALUES (50,108,'frostbite',0,10,2000,500,4,0,0,0,1,0,0);
+INSERT INTO `mob_skills` VALUES (51,109,'freezebite',0,10,2000,500,4,0,0,0,1,0,0);
+-- INSERT INTO `mob_skills` VALUES (52,110,'shockwave',0,10,2000,500,4,0,0,0,1,0,0);
+INSERT INTO `mob_skills` VALUES (53,111,'crescent_moon',0,10,2000,500,4,0,0,0,1,0,0);
 INSERT INTO `mob_skills` VALUES (54,112,'sickle_moon',0,10,2000,500,4,0,0,0,4,8,0);
 INSERT INTO `mob_skills` VALUES (56,114,'ground_strike',0,10,2000,500,4,0,0,0,12,10,0);
 INSERT INTO `mob_skills` VALUES (86,97,'raging_rush',0,7.0,2000,0,4,0,0,0,9,0,0);

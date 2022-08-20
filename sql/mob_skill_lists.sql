@@ -1948,7 +1948,13 @@ INSERT INTO `mob_skill_lists` VALUES ('Cogitator',413,1242); -- empty cutter
 INSERT INTO `mob_skill_lists` VALUES ('Cogitator',413,1243); -- trinary tap
 INSERT INTO `mob_skill_lists` VALUES ('Cogitator',413,1251); -- trinary tap
 INSERT INTO `mob_skill_lists` VALUES ('Cogitator',413,1252); -- shadow spread
--- 414 to 430: free
+-- 414 to 429: free
+INSERT INTO `mob_skill_lists` VALUES ('Automaton_Assault',430,49); -- Power Slash
+INSERT INTO `mob_skill_lists` VALUES ('Automaton_Assault',430,50); -- Frostbite
+INSERT INTO `mob_skill_lists` VALUES ('Automaton_Assault',430,51); -- Freezebite
+INSERT INTO `mob_skill_lists` VALUES ('Automaton_Assault',430,52); -- Shockwave
+INSERT INTO `mob_skill_lists` VALUES ('Automaton_Assault',430,53); -- Crescent Moon
+INSERT INTO `mob_skill_lists` VALUES ('Automaton_Assault',430,54); -- Sickle Moon
 INSERT INTO `mob_skill_lists` VALUES ('Gladiatorial_Weapon',431,396); -- Smite of Fury
 INSERT INTO `mob_skill_lists` VALUES ('Gladiatorial_Weapon',431,397); -- Flurry of Rage
 INSERT INTO `mob_skill_lists` VALUES ('Gladiatorial_Weapon',431,398); -- Whispers of ire

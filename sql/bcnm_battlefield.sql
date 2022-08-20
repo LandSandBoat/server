@@ -1309,6 +1309,21 @@ INSERT INTO `bcnm_battlefield` VALUES (736,3,16830479,3);
 INSERT INTO `bcnm_battlefield` VALUES (738,1,16830501,3); -- Bionic Bug
 INSERT INTO `bcnm_battlefield` VALUES (738,2,16830503,3);
 INSERT INTO `bcnm_battlefield` VALUES (738,3,16830505,3);
+INSERT INTO `bcnm_battlefield` VALUES (740,1,16830529,3); -- Automaton Assault
+INSERT INTO `bcnm_battlefield` VALUES (740,1,16830530,3);
+INSERT INTO `bcnm_battlefield` VALUES (740,1,16830531,3);
+INSERT INTO `bcnm_battlefield` VALUES (740,1,16830532,3);
+INSERT INTO `bcnm_battlefield` VALUES (740,1,16830533,3);
+INSERT INTO `bcnm_battlefield` VALUES (740,2,16830535,3);
+INSERT INTO `bcnm_battlefield` VALUES (740,2,16830536,3);
+INSERT INTO `bcnm_battlefield` VALUES (740,2,16830537,3);
+INSERT INTO `bcnm_battlefield` VALUES (740,2,16830538,3);
+INSERT INTO `bcnm_battlefield` VALUES (740,2,16830539,3);
+INSERT INTO `bcnm_battlefield` VALUES (740,3,16830541,3);
+INSERT INTO `bcnm_battlefield` VALUES (740,3,16830542,3);
+INSERT INTO `bcnm_battlefield` VALUES (740,3,16830543,3);
+INSERT INTO `bcnm_battlefield` VALUES (740,3,16830544,3);
+INSERT INTO `bcnm_battlefield` VALUES (740,3,16830545,3);
 INSERT INTO `bcnm_battlefield` VALUES (768,1,16846849,3); -- ancient_flames_beckon
 INSERT INTO `bcnm_battlefield` VALUES (768,2,16846850,3);
 INSERT INTO `bcnm_battlefield` VALUES (768,3,16846851,3);
