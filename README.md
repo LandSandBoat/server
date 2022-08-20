@@ -21,7 +21,7 @@ A [quick start guide](https://github.com/LandSandBoat/server/wiki/Quick-Start-Gu
 ### Crashes, bugs, obvious gameplay issues etc
 
 #### Is your issue related to an era inaccuracy or a bug directly related to ASB content?
-Please search our [issues tab](https://github.com/LandSandBoat/server/issues) and if you do not see a similar issue, please create a new one.
+Please search our [issues tab](https://github.com/AirSkyBoat/AirSkyBoat/issues) and if you do not see a similar issue, please create a new one.
 
 #### Is your issue related to a problem that you can find on retail today?
 Issues like this should be submitted to LandSandBoat.
