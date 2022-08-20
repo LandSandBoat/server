@@ -2468,6 +2468,7 @@ xi.mobMod =
     ALLI_HATE           = 68, -- Range around target to add alliance member to enmity list.
     NO_LINK             = 69, -- If set, mob cannot link until unset.
     NO_REST             = 70, -- Mob cannot regain hp (e.g. re-burrowing antlions during ENM).
+    LEADER              = 71, -- Indicate this mob is a leader. Used for Ul'xzomit mobs.
 }
 
 -----------------------------------

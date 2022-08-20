@@ -12884,7 +12884,7 @@ uint8 CLuaBaseEntity::getModelSize()
 
 void CLuaBaseEntity::setMobFlags(uint32 flags, uint32 mobid)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
 
     CMobEntity* PMob = (CMobEntity*)zoneutils::GetEntity(mobid, TYPE_MOB);
 
