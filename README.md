@@ -1,4 +1,8 @@
 # AirSkyBoat
+[![base build status](https://github.com/LandSandBoat/server/actions/workflows/build.yml/badge.svg)](https://github.com/LandSandBoat/server/actions/workflows/build.yml?query=base)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/LandSandBoat/server.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/LandSandBoat/server/alerts/)
+[![Language grade: C/C++](https://img.shields.io/lgtm/grade/cpp/g/LandSandBoat/server.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/LandSandBoat/server/context:cpp)
 
 Welcome to AirSkyBoat, an open source server emulator for FFXI based off of the level 75 era. Our repository is a fork off of the parent project LandSandBoat, which you can find at https://github.com/LandSandBoat/server. The cutoff date for ASB changes is just before the level cap raise patch in June 2010.
 
@@ -6,15 +10,10 @@ Our main place that we discuss changes and issues is on our Discord which can be
 
 At AirSkyBoat, we are focused on giving credit where its due when pulling in Open Source material from other repositories. If you find that we have not properly given credit for accepted code, please reach out to us on our Discord so that we can correct it.
 
-As AirSkyBoat is a derivative of LandSandBoat, please use all of their guides for how to setup a server. They have a great and consistently updated wiki for how to work with their systems.
-[![base build status](https://github.com/LandSandBoat/server/actions/workflows/build.yml/badge.svg)](https://github.com/LandSandBoat/server/actions/workflows/build.yml?query=base)
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/LandSandBoat/server.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/LandSandBoat/server/alerts/)
-[![Language grade: C/C++](https://img.shields.io/lgtm/grade/cpp/g/LandSandBoat/server.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/LandSandBoat/server/context:cpp)
-
 ## Getting Started
+As AirSkyBoat is a derivative of LandSandBoat, please use all of their guides for how to setup a server. They have a great and consistently updated wiki for how to work with their systems.
 
-A [quick start guide](https://github.com/LandSandBoat/server/wiki/Quick-Start-Guide), the [frequently asked questions](https://github.com/LandSandBoat/server/-/wikis/Frequently-Asked-Questions), and a table of "[what works](https://github.com/LandSandBoat/server/wikis/What-Works)" are all available on [our wiki](https://github.com/LandSandBoat/server/wiki).
+A [quick start guide](https://github.com/LandSandBoat/server/wiki/Quick-Start-Guide), the [frequently asked questions](https://github.com/LandSandBoat/server/-/wikis/Frequently-Asked-Questions), and a table of "[what works](https://github.com/LandSandBoat/server/wikis/What-Works)" are all available on [LSB's wiki](https://github.com/LandSandBoat/server/wiki).
 
 ## Interacting with AirSkyBoat
 
