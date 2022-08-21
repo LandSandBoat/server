@@ -1918,8 +1918,8 @@ namespace petutils
             CCharEntity* PChar = (CCharEntity*)PMaster;
             highestLvl += PChar->PMeritPoints->GetMeritValue(MERIT_BEAST_AFFINITY, PChar);
 
-            // And cap it to the master's level or weapon ilvl, whichever is greater
-            auto capLevel = std::max(PMaster->GetMLevel(), PMaster->m_Weapons[SLOT_MAIN]->getILvl());
+            // And cap it to the master's level
+            auto capLevel = PMaster->GetMLevel();
             if (highestLvl > capLevel)
             {
                 highestLvl = capLevel;
