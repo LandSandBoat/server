@@ -57,7 +57,7 @@ enum ROAMFLAG : uint16
     ROAMFLAG_NONE2   = 0x04,  //
     ROAMFLAG_NONE3   = 0x08,  //
     ROAMFLAG_NONE4   = 0x10,  //
-    ROAMFLAG_NONE5   = 0x20,  //
+    ROAMFLAG_SCRIPT  = 0x20,  // Will be implemented in a lua script (e.g. entity.onMobRoamAction())
     ROAMFLAG_WORM    = 0x40,  // pop up and down when moving
     ROAMFLAG_AMBUSH  = 0x80,  // stays hidden until someone comes close (antlion)
     ROAMFLAG_EVENT   = 0x100, // calls lua method for roaming logic

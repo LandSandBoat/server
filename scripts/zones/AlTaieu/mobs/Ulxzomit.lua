@@ -36,7 +36,6 @@ entity.onMobSpawn = function(mob)
     local r = mob:getRotPos()
 
     if mob:getMobMod(xi.mobMod.LEADER) > 0 then
-        -- mob:PrintToConsole("Leader spawned.")
         leaderToFollowerMap[mobId] = {}
         for i = 1, mob:getMobMod(xi.mobMod.LEADER) do
             local followerId = mobId + i
@@ -50,23 +49,13 @@ entity.onMobSpawn = function(mob)
                 local newY = y
                 local newZ = z + math.random(-2, 2)
 
-                if mob:getZone():isNavigablePoint({x=newX, y=newY, z=newZ}) then
-                    -- mob:PrintToConsole("Navigable point.")
-                    follower:setSpawn(newX, newY, newZ, r)
-                    -- mob:PrintToConsole(string.format("Follower spawned, follow: %d.", mob:getMobMod(xi.mobMod.FOLLOW)))
-                    follower:resetAI()
-                    follower:spawn()
-                    follower:resetAI()
-                    --follower:setMobMod(xi.mobMod.FOLLOW, mobId)
-                    follower:setMobFlags(1153, followerId)
-                    follower:setRoamFlags(xi.roamFlag.EVENT)
-                    follower:setMobMod(xi.mobMod.ROAM_COOL, 2)
-                end
+                follower:setSpawn(newX, newY, newZ, r)
+                follower:spawn()
+                follower:setMobFlags(1153, followerId)
+                follower:setRoamFlags(xi.roamFlag.SCRIPT)
+                follower:setMobMod(xi.mobMod.ROAM_COOL, 2)
             end
         end
-    else
-        -- mob:PrintToConsole(string.format("Follower spawned, follow: %d.", mob:getMobMod(xi.mobMod.FOLLOW)))
-        -- mob:setMobFlags(1153, mobId)
     end
 end
 
@@ -104,10 +93,9 @@ entity.onMobRoamAction = function(mob)
         return
     end
 
-
     -- Follow behind by 8 yalms with a 1 yalm separation.
     local distance = mob:checkDistance(leader)
-    local followDistance = 5.0
+    local followDistance = 8.0
     local warpDistance = 35.0
     local separation = 1.0
 
@@ -121,25 +109,21 @@ entity.onMobRoamAction = function(mob)
         end
     end
 
-    if distance > followDistance + 2.0 then
+    if distance > followDistance + 1.0 then
         local origin = leader:getPos()
         local x = -followDistance + (-separation * 0.25 + math.random() * separation * 0.5)
         local z = (followerIndex - 1 - followerCount / 2.0) * separation + (-separation * 0.25 + math.random() * separation * 0.5)
         local targetLocation = utils.lateralTranslateWithOriginRotation(leader:getPos(), {x=x, z=z})
         targetLocation = getNearPosition(origin, followDistance, math.pi + (followerIndex - 1 - followerCount / 2.0) * separation / followDistance)
 
-        -- mob:PrintToConsole(string.format("leader position: %f.3 %f.3 %f.3", origin.x, origin.y, origin.z))
-        -- mob:PrintToConsole(string.format("pathTo           %f.3 %f.3 %f.3", targetLocation.x, targetLocation.y, targetLocation.z))
-
         if mob:checkDistance(targetLocation) > math.max(1.0, followDistance / 2.0) then
             mob:resetAI()
             mob:pathTo(targetLocation.x, targetLocation.y, targetLocation.z)
-            -- mob:setRotation(leader:getRotPos())
         end
     elseif distance > warpDistance then
-        -- mob:setRotation(mob:getWorldAngle(leader))
+        mob:teleport(getNearPosition(leader:getPos(), 1+math.random()*(followDistance-1), math.random() * 2 * math.pi), leader)
     else
-        -- mob:setRotation(mob:getWorldAngle(leader))
+
     end
 end
 

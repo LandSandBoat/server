@@ -872,7 +872,7 @@ void CMobController::DoRoamTick(time_point tick)
                         CastSpell(spellID.value());
                     }
                 }
-                else if (PMob->m_roamFlags & ROAMFLAG_EVENT)
+                else if (PMob->m_roamFlags & ROAMFLAG_EVENT || PMob->m_roamFlags & ROAMFLAG_SCRIPT)
                 {
                     // allow custom event action
                     luautils::OnMobRoamAction(PMob);
