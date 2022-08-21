@@ -1918,8 +1918,17 @@ namespace petutils
             CCharEntity* PChar = (CCharEntity*)PMaster;
             highestLvl += PChar->PMeritPoints->GetMeritValue(MERIT_BEAST_AFFINITY, PChar);
 
-            // And cap it to the master's level
-            auto capLevel = PMaster->GetMLevel();
+            // And cap it to the master's level or their item's level if the player is level 99
+            auto capLevel = 0;
+            if ((lua["xi"]["settings"]["main"]["MAX_LEVEL"].get<uint8>() >= 99) && (PMaster->GetMLevel() >= 99))
+            {
+                capLevel = std::max(PMaster->GetMLevel(), PMaster->m_Weapons[SLOT_MAIN]->getILvl());
+            }
+            else
+            {
+                capLevel = PMaster->GetMLevel();
+            }
+
             if (highestLvl > capLevel)
             {
                 highestLvl = capLevel;
