@@ -14,6 +14,3 @@ UPDATE `mob_groups` SET `minLevel` = "90", `maxLevel` = "90" WHERE `name` = "Bya
 UPDATE `mob_groups` SET `minLevel` = "90", `maxLevel` = "90" WHERE `name` = "Suzaku" AND `zoneid` = "130";
 UPDATE `mob_groups` SET `minLevel` = "95", `maxLevel` = "95" WHERE `name` = "King_Vinegarroon" AND `zoneid` = "125";
 UPDATE `mob_groups` SET `minLevel` = "90", `maxLevel` = "90" WHERE `name` = "Cerberus" AND `zoneid` = "61";
-UPDATE `mob_groups` SET `minLevel` = "92", `maxLevel` = "92" WHERE `name` = "Sarameya" AND `zoneid` = "61";
-UPDATE `mob_groups` SET `minLevel` = "92", `maxLevel` = "92" WHERE `name` = "Tinnin" AND `zoneid` = "51";
-UPDATE `mob_groups` SET `minLevel` = "92", `maxLevel` = "92" WHERE `name` = "Tyger" AND `zoneid` = "79";
