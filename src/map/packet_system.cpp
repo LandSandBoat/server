@@ -5202,7 +5202,7 @@ void SmallPacket0x0B6(map_session_data_t* const PSession, CCharEntity* const PCh
 
     std::string RecipientName = std::string((const char*)data[6], 15);
 
-    char  message[128]    = {}; // commandline typed /t seems to cap at 101 bytes, increasing to the nearest power of 2
+    char  message[256]    = {}; // /t messages using "<t>" with a long named NPC targeted caps out at 138 bytes, increasing to the nearest power of 2
     uint8 messagePosition = 0x15;
 
     memcpy(&message, data[messagePosition], data.getSize() - messagePosition);
