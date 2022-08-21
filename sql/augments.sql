@@ -103,8 +103,8 @@ INSERT INTO `augments` VALUES (70,0,28,33,0,0); -- Cont.
 INSERT INTO `augments` VALUES (71,0,160,-100,0,0); -- Damage Taken -1%
 INSERT INTO `augments` VALUES (72,0,0,0,0,0); -- 72 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (73,0,0,0,0,0); -- 73 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
-INSERT INTO `augments` VALUES (74,0,0,0,0,0); -- Cap. Point +1%
-INSERT INTO `augments` VALUES (75,0,0,0,0,0); -- Cap. Point +33%
+INSERT INTO `augments` VALUES (74,0,915,1,0,0); -- Cap. Point +1%
+INSERT INTO `augments` VALUES (75,0,915,33,0,0); -- Cap. Point +33%
 INSERT INTO `augments` VALUES (76,0,0,0,0,0); -- DMG+33 Unsure if main hand or off hand so leaving values blank for now,goes up in increments of 1 after the initial 33.
 INSERT INTO `augments` VALUES (77,0,0,0,0,0); -- Delay -33% Unsure if main hand or off hand so leaving values blank for now,goes up in increments of 1 after the initial 33.
 INSERT INTO `augments` VALUES (78,0,2,2,0,0); -- HP+2 (count by 2)
