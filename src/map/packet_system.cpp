@@ -5208,11 +5208,15 @@ void SmallPacket0x0B6(map_session_data_t* const PSession, CCharEntity* const PCh
 
     std::string RecipientName = std::string((const char*)data[6], 15);
 
+    char  message[256]    = {}; // /t messages using "<t>" with a long named NPC targeted caps out at 138 bytes, increasing to the nearest power of 2
+    uint8 messagePosition = 0x15;
+
+    memcpy(&message, data[messagePosition], data.getSize() - messagePosition);
+
     if (strcmp(RecipientName.c_str(), "_CUSTOM_MENU") == 0 &&
         luautils::HasCustomMenuContext(PChar))
     {
-        std::string selection((const char*)data[21]);
-        luautils::HandleCustomMenu(PChar, selection);
+        luautils::HandleCustomMenu(PChar, message);
         return;
     }
 
@@ -5220,7 +5224,7 @@ void SmallPacket0x0B6(map_session_data_t* const PSession, CCharEntity* const PCh
     strncpy((char*)packetData + 4, RecipientName.c_str(), RecipientName.length() + 1);
     ref<uint32>(packetData, 0) = PChar->id;
 
-    message::send(MSG_CHAT_TELL, packetData, RecipientName.length() + 5, new CChatMessagePacket(PChar, MESSAGE_TELL, (const char*)data[21]));
+    message::send(MSG_CHAT_TELL, packetData, RecipientName.length() + 5, new CChatMessagePacket(PChar, MESSAGE_TELL, message));
 
     if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<bool>("map.AUDIT_TELL"))
     {
