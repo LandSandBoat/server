@@ -1579,7 +1579,7 @@ namespace petutils
             }
 
             ((CItemWeapon*)PPet->m_Weapons[SLOT_MAIN])->setDamage(weaponDamage);
-
+            ((CItemWeapon*)PPet->m_Weapons[SLOT_MAIN])->setBaseDelay((uint16)(floor(1000.0f * (PPetData->cmbDelay / 60.0f))));
             // Set B+ weapon skill (assumed capped for level derp)
             // attack is madly high for avatars (roughly x2)
             PPet->setModifier(Mod::ATT, 2 * battleutils::GetMaxSkill(SKILL_CLUB, JOB_WHM, mLvl > 99 ? 99 : mLvl));
