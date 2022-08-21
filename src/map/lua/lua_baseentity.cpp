@@ -9946,7 +9946,7 @@ uint16 CLuaBaseEntity::getBaseDelay()
         {
             if (PMainWeapon->getSkillType() == SKILLTYPE::SKILL_HAND_TO_HAND)
             {
-                baseDelay += PMainWeapon->getBaseDelay();
+                baseDelay = PMainWeapon->getBaseDelay(); // h2h items include 480 base delay
             }
             else
             {
