@@ -1627,7 +1627,7 @@ INSERT INTO `mob_spell_lists` VALUES ('Alastor_Antlion',132,365,1,255); -- break
 
 -- Race_Runner (133)
 INSERT INTO `mob_spell_lists` VALUES ('Race_Runner',133,53,1,255);  -- blink (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Race_Runner',133,158,1,255); -- aero_v (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Race_Runner',133,157,1,255); -- aero_iv (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Race_Runner',133,186,1,255); -- aeroga_iii (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Race_Runner',133,216,1,255); -- gravity (1~255)
 
