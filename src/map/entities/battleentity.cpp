@@ -479,7 +479,7 @@ int16 CBattleEntity::addTP(int16 tp)
         {
             TPMulti = settings::get<float>("map.PLAYER_TP_MULTIPLIER");
         }
-        else if (objtype == TYPE_PET || objtype == TYPE_MOB && this->PMaster) // normal pet or charmed pet
+        else if (objtype == TYPE_PET || (objtype == TYPE_MOB && this->PMaster)) // normal pet or charmed pet
         {
             TPMulti = settings::get<float>("map.PET_TP_MULTIPLIER");
         }

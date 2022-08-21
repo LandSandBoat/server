@@ -29,12 +29,12 @@ ability_object.onPetAbility = function(target, pet, petskill, master)
     target:takeDamage(damage, pet, xi.attackType.MAGICAL, xi.damageType.WIND)
     target:updateEnmityFromDamage(pet, damage)
 
-    pet:addStatusEffect(xi.effect.ATTACK_BOOST, 25 , 0, 180)
-    pet:addStatusEffect(xi.effect.DEFENSE_BOOST, 25 , 0, 180)
-    pet:addStatusEffect(xi.effect.MAGIC_ATTACK_BOOST, 25 , 0, 180)
-    pet:addStatusEffect(xi.effect.MAGIC_DEFENSE_BOOST, 25 , 0, 180)
-    pet:addStatusEffect(xi.effect.EVASION_BOOST, 50 , 0, 180)
-    pet:addStatusEffect(xi.effect.MAGIC_EVASION_BOOST, 50 , 0, 180)
+    pet:addStatusEffect(xi.effect.ATTACK_BOOST,        25, 0, 180)
+    pet:addStatusEffect(xi.effect.DEFENSE_BOOST,       25, 0, 180)
+    pet:addStatusEffect(xi.effect.MAGIC_ATK_BOOST,     25, 0, 180)
+    pet:addStatusEffect(xi.effect.MAGIC_DEF_BOOST,     25, 0, 180)
+    pet:addStatusEffect(xi.effect.EVASION_BOOST,       50, 0, 180)
+    pet:addStatusEffect(xi.effect.MAGIC_EVASION_BOOST, 50, 0, 180)
 
     return damage
 end

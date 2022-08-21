@@ -13,7 +13,6 @@ ability_object.onAbilityCheck = function(player, target, ability)
     return xi.job_utils.summoner.canUseBloodPact(player, player:getPet(), target, ability)
 end
 
-
 -- http://wiki.ffo.jp/html/37931.html
 ability_object.onPetAbility = function(target, pet, petskill)
     local dINT = math.floor(pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))

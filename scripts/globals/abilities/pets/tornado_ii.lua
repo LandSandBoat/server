@@ -15,7 +15,6 @@ end
 
 -- Modeling this on the known formula for magical Merit BPs of the same level with a merit level of 0
 ability_object.onPetAbility = function(target, pet, petskill)
-
     local dINT   = math.floor(pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
     local tp     = pet:getTP() / 10
     local master = pet:getMaster()
