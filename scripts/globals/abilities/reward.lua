@@ -21,6 +21,18 @@ ability_object.onAbilityCheck = function(player, target, ability)
     else
         local id = player:getEquipID(xi.slot.AMMO)
         if (id >= 17016 and id <= 17023) then
+            local playerLevel = player:getMainLvl();
+            local itemLevels = {}
+            itemLevels[17016] = 12 -- Alpha
+            itemLevels[17017] = 24 -- Beta
+            itemLevels[17018] = 36 -- Gamma
+            itemLevels[17019] = 48 -- Delta
+            itemLevels[17020] = 60 -- Epsilon
+            itemLevels[17021] = 72 -- Zeta
+            itemLevels[17022] = 84 -- Eta
+            itemLevels[17023] = 96 -- Theta
+
+            if playerLevel < itemLevels[id] then return xi.msg.basic.MUST_HAVE_FOOD, 0 end
             return 0, 0
         else
             return xi.msg.basic.MUST_HAVE_FOOD, 0
