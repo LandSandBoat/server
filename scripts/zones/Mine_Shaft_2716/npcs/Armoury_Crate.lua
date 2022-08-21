@@ -37,6 +37,91 @@ local loot =
             {itemid =  4748, droprate =  50}, -- Raise III
         },
     },
+
+    -- Automaton Assault Hume
+    [xi.race.HUME_M] =
+    {
+        {
+            {itemid = 0,    droprate = 800}, -- Nothing
+            {itemid = 1830, droprate = 200}, -- Lugworm Sand
+        },
+        {
+            {itemid = 0,     droprate = 900}, -- Nothing
+            {itemid = 14793, droprate = 100}, -- Belinky's Earring
+        },
+        {
+            {itemid = 0,     droprate = 900}, -- Nothing
+            {itemid = 14794, droprate = 100}, -- Quantz's Earring
+        },
+    },
+
+    -- Automaton Assault Elvaan
+    [xi.race.ELVAAN_M] =
+    {
+        {
+            {itemid = 0,    droprate = 800}, -- Nothing
+            {itemid = 1830, droprate = 200}, -- Lugworm Sand
+        },
+        {
+            {itemid = 0,     droprate = 900}, -- Nothing
+            {itemid = 14795, droprate = 100}, -- Desamilion's Earring
+        },
+        {
+            {itemid = 0,     droprate = 900}, -- Nothing
+            {itemid = 14796, droprate = 100}, -- Melnina's Earring
+        },
+    },
+
+    -- Automaton Assault Taru
+    [xi.race.TARU_M] =
+    {
+        {
+            {itemid = 0,    droprate = 800}, -- Nothing
+            {itemid = 1830, droprate = 200}, -- Lugworm Sand
+        },
+        {
+            {itemid = 0,     droprate = 900}, -- Nothing
+            {itemid = 14797, droprate = 100}, -- Waetoto's Earring
+        },
+        {
+            {itemid = 0,     droprate = 900}, -- Nothing
+            {itemid = 14798, droprate = 100}, -- Morukaka's Earring
+        },
+    },
+
+    -- Automaton Assault Mithra
+    [xi.race.MITHRA] =
+    {
+        {
+            {itemid = 0,    droprate = 800}, -- Nothing
+            {itemid = 1830, droprate = 200}, -- Lugworm Sand
+        },
+        {
+            {itemid = 0,     droprate = 900}, -- Nothing
+            {itemid = 14799, droprate = 100}, -- Ryakho's Earring
+        },
+        {
+            {itemid = 0,     droprate = 900}, -- Nothing
+            {itemid = 14799, droprate = 100}, -- Feyuh's Earring
+        },
+    },
+
+    -- Automaton Assault Galka
+    [xi.race.GALKA] =
+    {
+        {
+            {itemid = 0,    droprate = 800}, -- Nothing
+            {itemid = 1830, droprate = 200}, -- Lugworm Sand
+        },
+        {
+            {itemid = 0,     droprate = 900}, -- Nothing
+            {itemid = 14801, droprate = 100}, -- Zedoma's Earring
+        },
+        {
+            {itemid = 0,     droprate = 900}, -- Nothing
+            {itemid = 14802, droprate = 100}, -- Gayanj's Earring
+        },
+    },
 }
 
 entity.onTrade = function(player, npc, trade)
@@ -44,9 +129,19 @@ end
 
 entity.onTrigger = function(player, npc)
     local battlefield = player:getBattlefield()
-    if battlefield then
+
+    if battlefield and player:getBattlefieldID() ~= 740 then
         xi.battlefield.HandleLootRolls(battlefield, loot[battlefield:getID()], nil, npc)
+    else
+        local raceLoot = player:getRace()
+        if raceLoot < 7 then
+            if raceLoot % 2 == 0 then
+                raceLoot = raceLoot - 1
+            end
+        end
+        xi.battlefield.HandleLootRolls(battlefield, loot[raceLoot], nil, npc)
     end
+
 end
 
 entity.onEventUpdate = function(player, csid, option)

@@ -58,7 +58,7 @@ local battlefields =
      -- { 1,  737,    0},   -- Return to the Depths (Quest)
         { 2,  738,    0},   -- Bionic Bug (ENM)
      -- { 3,  739,    0},   -- Pulling the Strings (ENM)
-     -- { 4,  740,    0},   -- Automaton Assault (ENM)
+        { 4,  740,    0},   -- Automaton Assault (ENM)
      -- { 5,  741, 3455},   -- The Mobline Comedy (HKC50)
     },
 
@@ -324,7 +324,7 @@ local battlefields =
         {11,  107, 1553},   -- Early Bird Catches the Wyrm (KS99)
         {12,  108, 1131},   -- Royal Succession (BS40)
         {13,  109, 1177},   -- Rapid Raptors (BS50)
-        {14,  110, 1130},   -- Wild Wild Whiskers (BS60) -- TODO: should use petrifactive breath more often than other mobskill. Message before spellcasting.
+        {14,  110, 1130},   -- Wild Wild Whiskers (BS60)
         {15,  111, 1175},   -- Seasons Greetings (KS30)
      -- {16,  112, 1178},   -- Royale Ramble (KS30)
         {17,  113, 1180},   -- Moa Constrictors (KS30)
@@ -560,6 +560,15 @@ local function checkReqs(player, npc, bfid, registrant)
         return zones[player:getZoneID()].npc.ENTRANCE_OFFSET + offset
     end
 
+    local function sameRace()
+        for _, v in pairs(player:getParty()) do
+            if v:getRace() ~= player:getRace() then
+                return false
+            end
+        end
+        return true
+    end
+
     -- Requirements to register a battlefield
     local registerReqs =
     {
@@ -650,7 +659,7 @@ local function checkReqs(player, npc, bfid, registrant)
         [ 736] = function() return ( cop == mi.cop.THREE_PATHS and player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.LOUVERANCE) == 8                   ) end, -- PM5-3 L3: A Century of Hardship
         [ 738] = function() return ( player:hasKeyItem(xi.ki.SHAFT_2716_OPERATING_LEVER)                                                                                   ) end, -- ENM: Bionic Bug
         [ 739] = function() return ( player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL)                                                                                    ) end, -- ENM: Pulling Your Strings
-        [ 740] = function() return ( player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL)                                                                                    ) end, -- ENM: Automaton Assault
+        [ 740] = function() return ( player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL) and sameRace()                                                                     ) end, -- ENM: Automaton Assault
         [ 768] = function() return ( (cop == mi.cop.BELOW_THE_ARKS) or (cop == mi.cop.THE_MOTHERCRYSTALS and not player:hasKeyItem(xi.ki.LIGHT_OF_HOLLA))                  ) end, -- PM1-3: The Mothercrystals
         [ 769] = function() return ( player:hasKeyItem(xi.ki.CENSER_OF_ABANDONMENT)                                                                                        ) end, -- ENM: Simulant
         [ 800] = function() return ( (cop == mi.cop.BELOW_THE_ARKS) or (cop == mi.cop.THE_MOTHERCRYSTALS and not player:hasKeyItem(xi.ki.LIGHT_OF_DEM))                    ) end, -- PM1-3: The Mothercrystals
