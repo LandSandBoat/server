@@ -18,7 +18,27 @@ zones[xi.zone.GRAND_PALACE_OF_HUXZOI] =
         LOGIN_CAMPAIGN_UNDERWAY = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER            = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         CONQUEST_BASE           = 7079, -- Tallying conquest results...
+        DOES_NOT_RESPOND        = 7243, -- The gate does not respond...
+        DUTY_COMPLETE           = 7366, -- Transfer of final security portal access duty complete.
+        PORTAL_EAST             = 7369, -- You hear a portal open to the east...
+        PORTAL_WEST             = 7370, -- You hear a portal open to the west...
+        PORTAL_NORTH            = 7371, -- You hear a portal open to the north...
+        TIME_EXCEEDED           = 7372, -- Patrol routine time restriction exceeded. Patrol aborted.
+        RECOMMENCING_PATROL     = 7374, -- Recommencing patrol.
         HOMEPOINT_SET           = 7461, -- Home point set!
+    },
+    quasilumin_text =
+    {
+        [16916897] = 7369,
+        [16916898] = 7370,
+        [16916899] = 7371,
+        [16916900] = 7372,
+        [16916901] = 7373,
+        [16916902] = 7374,
+        [16916903] = 7375,
+        [16916904] = 7376,
+        [16916905] = 7377,
+        [16916906] = 7378,
     },
     mob =
     {
@@ -36,7 +56,8 @@ zones[xi.zone.GRAND_PALACE_OF_HUXZOI] =
     },
     npc =
     {
-        QM_IXAERN_MNK = 16916819,
+        QM_IXAERN_MNK     = 16916819,
+        QUASILUMIN_OFFSET = 16916897,
     },
 }
 
