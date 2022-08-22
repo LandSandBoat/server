@@ -20,6 +20,17 @@ zoneObject.onInitialize = function(zone)
     zone:registerRegion( 9,  340, -4,  97,  347, 4, 102)
     zone:registerRegion(10,   97, -4, 372,  103, 4, 378)
 
+    -- Escort Quasilumin Door Regions
+    zone:registerRegion(11,  695, -4, 432,  704, 4, 450) -- Escort 2 Security Door 1
+    zone:registerRegion(12,  609, -4, 455,  565, 4, 465) -- Escort 2 Security Door 2
+    zone:registerRegion(13,  494, -4, 263,  456, 4, 248) -- Escort 3 Security Door 1
+    zone:registerRegion(14,  372, -4, 256,  324, 4, 266) -- Escort 3 Security Door 2
+    zone:registerRegion(15, -504, -4, 265, -496, 4, 308) -- Escort 4 Security Door 1
+    zone:registerRegion(16, -537, -4, 428, -545, 4, 463) -- Escort 4 Security Door 2
+    zone:registerRegion(17, -544, -4, 464, -531, 4, 498) -- Escort 4 Security Door 3
+    zone:registerRegion(18, -502, -4, 508, -492, 4, 544) -- Escort 4 Security Door 4
+    zone:registerRegion(19, -453, -4, 546, -416, 4, 525) -- Escort 4 Security Door 5
+
     huxzoiGlobal.pickTemperancePH()
 end
 
@@ -45,6 +56,24 @@ zoneObject.afterZoneIn = function(player)
     player:entityVisualPacket("2dor")
     player:entityVisualPacket("cryq")
 end
+
+local doors =
+{
+    [11] = 16916872, -- Escort 2 Security Door 1
+    [12] = 16916873, -- Escort 2 Security Door 2
+    [13] = 16916877, -- Escort 3 Security Door 1
+    [14] = 16916878, -- Escort 3 Security Door 2
+    [15] = 16916882, -- Escort 4 Security Door 1
+    [16] = 16916883, -- Escort 4 Security Door 2
+    [17] = 16916884, -- Escort 4 Security Door 3
+    [18] = 16916885, -- Escort 4 Security Door 4
+    [19] = 16916886, -- Escort 4 Security Door 5
+}
+
+-- onRegionNpcLeave
+-- if npc:getID() == 16916926 then
+--   GetNPCByID(doors[region:GetRegionID()]):setAnimation(dsp.anim.OPEN_DOOR)
+-- end
 
 zoneObject.onRegionEnter = function(player, region)
     if
