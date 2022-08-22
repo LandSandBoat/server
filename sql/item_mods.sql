@@ -67267,6 +67267,10 @@ INSERT INTO `item_mods` VALUES (27600,23,20);  -- ATT: 20
 INSERT INTO `item_mods` VALUES (27600,68,-10); -- EVA: -10
 INSERT INTO `item_mods` VALUES (27600,302,2);  -- TRIPLE_ATTACK: 2
 
+-- Aptitude Mantle
+INSERT INTO `item_mods` VALUES (27603,1,13);   -- DEF: 13
+INSERT INTO `item_mods` VALUES (27603,915,25); -- CAPACITY_BONUS: 25
+
 -- Aptitude Mantle +1
 INSERT INTO `item_mods` VALUES (27604,1,14);   -- DEF: 14
 INSERT INTO `item_mods` VALUES (27604,915,30); -- CAPACITY_BONUS: 30
