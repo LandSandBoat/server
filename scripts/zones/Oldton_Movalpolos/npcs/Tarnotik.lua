@@ -33,8 +33,8 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 32 then
         player:confirmTrade()
-        player:setPos(-116, -119, -620, 253, 13)
-    elseif csid == 54 and option == 0 then
+        xi.teleport.to(player, xi.teleport.id.MINESHAFT)
+    elseif csid == 54 and option == 1 then
         player:delKeyItem(xi.item.SHAFT_2716_OPERATING_LEVER)
     end
 end
