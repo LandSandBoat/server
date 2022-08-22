@@ -397,7 +397,7 @@ void CItem::setSoulPlateData(std::string const& name, uint16 mobFamily, uint8 ze
 
 auto CItem::getSoulPlateData() -> std::tuple<std::string, uint16, uint8, uint16, uint8>
 {
-    auto   name       = "";
+    auto   name       = UnpackSoultrapperName(m_extra);
     uint16 mobFamily  = (m_extra[17] << 8) + m_extra[18];
     uint8  zeni       = m_extra[19];
     uint16 skillIndex = (m_extra[20] >> 7) + (m_extra[21] << 1) + ((m_extra[22] & 0x03) << 9);
