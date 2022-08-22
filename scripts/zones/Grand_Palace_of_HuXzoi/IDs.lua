@@ -15,11 +15,31 @@ zones[xi.zone.GRAND_PALACE_OF_HUXZOI] =
         GIL_OBTAINED                  = 6391, -- Obtained <number> gil.
         KEYITEM_OBTAINED              = 6393, -- Obtained key item: <keyitem>.
         CARRIED_OVER_POINTS           = 7001, -- You have carried over <number> login point[/s].
-        LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
+        LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                 = 7082, -- Tallying conquest results...
+        DOES_NOT_RESPOND              = 7246, -- The gate does not respond...
+        DUTY_COMPLETE                 = 7369, -- Transfer of final security portal access duty complete.
+        PORTAL_EAST                   = 7372, -- You hear a portal open to the east...
+        PORTAL_WEST                   = 7373, -- You hear a portal open to the west...
+        PORTAL_NORTH                  = 7374, -- You hear a portal open to the north...
+        TIME_EXCEEDED                 = 7375, -- Patrol routine time restriction exceeded. Patrol aborted.
+        RECOMMENCING_PATROL           = 7376, -- Recommencing patrol.
         HOMEPOINT_SET                 = 7464, -- Home point set!
+    },
+    quasilumin_text =
+    {
+        [16916897] = 7369,
+        [16916898] = 7370,
+        [16916899] = 7371,
+        [16916900] = 7372,
+        [16916901] = 7373,
+        [16916902] = 7374,
+        [16916903] = 7375,
+        [16916904] = 7376,
+        [16916905] = 7377,
+        [16916906] = 7378,
     },
     mob =
     {
@@ -37,7 +57,8 @@ zones[xi.zone.GRAND_PALACE_OF_HUXZOI] =
     },
     npc =
     {
-        QM_IXAERN_MNK = 16916819,
+        QM_IXAERN_MNK     = 16916819,
+        QUASILUMIN_OFFSET = 16916897,
     },
 }
 
