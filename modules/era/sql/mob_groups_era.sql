@@ -380,7 +380,7 @@ UPDATE mob_groups SET content_tag='VOIDWALKER' WHERE name='Raker_Bee' AND groupi
 -- ------------------------------------------------------------
 
 UPDATE mob_groups SET content_tag='WOTG' WHERE name='Bashe' AND groupid='68' AND zoneid='120';
-UPDATE mob_groups SET content_tag='WOTG' WHERE name='Thunderclaw_Thuban' AND groupid='333' AND zoneid='120';
+UPDATE mob_groups SET content_tag='WOTG' WHERE name='Thunderclaw_Thuban' AND groupid='33' AND zoneid='120';
 UPDATE mob_groups SET content_tag='WOTG' WHERE name='Blighting_Brand' AND groupid='38' AND zoneid='120';
 UPDATE mob_groups SET content_tag='VOIDWALKER' WHERE name='Yilbegan' AND groupid='46' AND zoneid='120';
 UPDATE mob_groups SET content_tag='VOIDWALKER' WHERE name='Verthandi' AND groupid='47' AND zoneid='120';

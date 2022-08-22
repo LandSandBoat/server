@@ -1627,7 +1627,7 @@ INSERT INTO `mob_spell_lists` VALUES ('Alastor_Antlion',132,365,1,255); -- break
 
 -- Race_Runner (133)
 INSERT INTO `mob_spell_lists` VALUES ('Race_Runner',133,53,1,255);  -- blink (1~255)
-INSERT INTO `mob_spell_lists` VALUES ('Race_Runner',133,158,1,255); -- aero_v (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Race_Runner',133,157,1,255); -- aero_iv (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Race_Runner',133,186,1,255); -- aeroga_iii (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Race_Runner',133,216,1,255); -- gravity (1~255)
 
@@ -5046,7 +5046,7 @@ INSERT INTO `mob_spell_lists` VALUES('Osschaart', 496, 238, 1, 255); -- rasp (1~
 INSERT INTO `mob_spell_lists` VALUES('Osschaart', 496, 240, 1, 255); -- drown (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Osschaart', 496, 254, 1, 255); -- blind (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Osschaart', 496, 258, 1, 255); -- bind (1~255)
-
+-- 497: Available
 -- Slendlix Spindlethumb (498)
 INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',498,3,1,255);  -- cure_iii (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',498,23,1,255); -- dia (1~255)
@@ -5201,9 +5201,25 @@ INSERT INTO `mob_spell_lists` VALUES ('Zoredonite',517,30,1,255);  -- banish_iii
 INSERT INTO `mob_spell_lists` VALUES ('Zoredonite',517,112,1,255); -- flash (1~255)
 
 -- Snow Devil (513)
-INSERT INTO `mob_spell_lists` VALUES('Snow_Devil', 513, 152, 1, 255); -- Blizzard IV (1~255)
-INSERT INTO `mob_spell_lists` VALUES('Snow_Devil', 513, 181, 1, 255); -- Blizzaga III (1~255)
-INSERT INTO `mob_spell_lists` VALUES('Snow_Devil', 513, 455, 1, 255); -- Ice Threnody (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Snow_Devil', 513,152,1,255); -- Blizzard IV (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Snow_Devil', 513,181,1,255); -- Blizzaga III (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Snow_Devil', 513,455,1,255); -- Ice Threnody (1~255)
+
+-- Taru Taru Automaton (514)
+INSERT INTO `mob_spell_lists` VALUES('Tarutaru_Automaton',514,204,1,255); -- Flare (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Tarutaru_Automaton',514,206,1,255); -- Freeze (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Tarutaru_Automaton',514,208,1,255); -- Tornado (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Tarutaru_Automaton',514,210,1,255); -- Quake (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Tarutaru_Automaton',514,212,1,255); -- Burst (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Tarutaru_Automaton',514,214,1,255); -- Flood (1~255)
+
+-- Hume Automaton (515)
+INSERT INTO `mob_spell_lists` VALUES('Hume_Automaton',515,175,1,255); -- Firaga II (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Hume_Automaton',515,180,1,255); -- Blizzaga II (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Hume_Automaton',515,185,1,255); -- Aeroga II (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Hume_Automaton',515,190,1,255); -- Stonega II (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Hume_Automaton',515,195,1,255); -- Thundaga II (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Hume_Automaton',515,200,1,255); -- Waterga II (1~255)
 
 -- AirSkyBoat Specific Starts at 5000
 -- 5000 -> 5010 is Era Dynamis
