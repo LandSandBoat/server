@@ -25,7 +25,7 @@ local oztrojaGlobal    = require("scripts/zones/Castle_Oztroja/globals")
 -----------------------------------
 -- Module definition
 -----------------------------------
-local hnmSystem = Module:new("HNM_System")
+local hnmSystem = Module:new("hnm_system")
 
 ----------------------------------------------------------------------------------------------------
 -- Dragon's Aery: Fafnir, Nidhogg

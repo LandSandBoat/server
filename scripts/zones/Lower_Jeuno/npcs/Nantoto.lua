@@ -7,29 +7,19 @@ require("scripts/globals/utils")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHasExactly(trade, 25679) then
-	    player:tradeComplete()
-		player:PrintToPlayer("Nantoto: What the HECK happened here? let me take care of that...", 0xD)
-		player:addItem(25679)
-		player:messageSpecial(ID.text.ITEM_OBTAINED, 25679)
-	else
-	    player:PrintToPlayer("Nantoto: I don't want this ...", 0xD)
-	end
 end
 
 entity.onTrigger = function(player, npc)
-    player:PrintToPlayer("Nantoto: Got a busted white rarab cap +1? Trade it to me and I'll fix it lickity split.", 0xD)
-	player:PrintToPlayer("Nantoto: Thank you for your support! We appreciate you choosing CatsEyeXI!", 0xD)
-	local stock =
-        {
-        11853,  1,    -- coat
-        11854,  1,    -- dress
-        11956,  1,    -- hose
-        11957,  1,    -- boots
-        }
-
-        player:PrintToPlayer("Welcome to the player appreciation shop!", 0, npc:getPacketName())
-        xi.shop.general(player, stock)
+    local playerNation = player:getNation()
+	if player:getCurrentMission(xi.mission.log_id.playerNation) == 23 and player:getNation() == 0
+	then -- Heir to the Light 9-2
+	    print("Broken Mission Detected")
+		player:setMissionStatus(0, 6)
+		player:PrintToPlayer("Sending you to King Ranperres Tomb. Click the Heavy Stone Door to progress...")
+		player:timer(3500, function(player)
+		    player:setPos(-35.699, 7.50, 19.997, 131, 190)
+		end)
+	end
 end
 
 entity.onEventUpdate = function(player, csid, option)

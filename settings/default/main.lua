@@ -54,7 +54,7 @@ xi.settings.main =
     -- Currency Caps (Change at your own risk!)
     CAP_CURRENCY_ACCOLADES = 99999,
     CAP_CURRENCY_BALLISTA  = 2000,
-    CAP_CURRENCY_SPARKS    = 99999,
+    CAP_CURRENCY_SPARKS    = 150000,
     CAP_CURRENCY_VALOR     = 50000,
 
     -- Magian Trials

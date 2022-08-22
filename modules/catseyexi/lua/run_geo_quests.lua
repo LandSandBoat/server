@@ -105,31 +105,31 @@ m:addOverride("xi.zones.RuLude_Gardens.Zone.onInitialize", function(zone)
                     6090,   24250,  -- Indi-Attunement
                     6089,   66920,  -- Indi-Focus
                     6084,  109260,  -- Indi-Barrier
-                    6075,  210000,  -- Indi-Refresh
-                    6082,  210000,  -- Indi-CHR
-                    6081,  239400,  -- Indi-MND
-                    6083,  252700,  -- Indi-Fury
-                    6080,  309120,  -- Indi-INT
-                    6079,  326400,  -- Indi-AGI
-                    6086,  340000,  -- Indi-Fend
-                    6078,  337400,  -- Indi-VIT
-                    6077,  364400,  -- Indi-DEX
-                    6085,  320800,  -- Indi-Acumen
-                    6076,  434600,  -- Indi-STR
-                    6099,  434600,  -- Indi-Slow
-                    6096,  418750,  -- Indi-Torpor
-                    6095,  531600,  -- Indi-Slip
-                    6098,  541850,  -- Indi-Languor
-                    6100,  503040,  -- Indi-Paralysis
-                    6097,  540000,  -- Indi-Vex
+                    6075,  110000,  -- Indi-Refresh
+                    6082,  110000,  -- Indi-CHR
+                    6081,  139400,  -- Indi-MND
+                    6083,  152700,  -- Indi-Fury
+                    6080,  209120,  -- Indi-INT
+                    6079,  226400,  -- Indi-AGI
+                    6086,  240000,  -- Indi-Fend
+                    6078,  237400,  -- Indi-VIT
+                    6077,  264400,  -- Indi-DEX
+                    6085,  220800,  -- Indi-Acumen
+                    6076,  334600,  -- Indi-STR
+                    6099,  334600,  -- Indi-Slow
+                    6096,  318750,  -- Indi-Torpor
+                    6095,  431600,  -- Indi-Slip
+                    6098,  441850,  -- Indi-Languor
+                    6100,  403040,  -- Indi-Paralysis
+                    6097,  440000,  -- Indi-Vex
                     4916,   34000,  -- Fira
                     4924,   54600,  -- Thundara
                     4918,   46440,  -- Blizzara
                     4920,   26600,  -- Aerora
                     4922,   22490,  -- Stonera
-                    4923,  256000,  -- Stonera_II
+                    4923,  156000,  -- Stonera_II
                     4926,   21000,  -- Watera
-                    4927,  255000,  -- Watera_II
+                    4927,  155000,  -- Watera_II
                 }
 
                 player:PrintToPlayer("Welcome to the Geomancer magic shop!", 0, npc:getPacketName())

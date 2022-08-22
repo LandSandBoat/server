@@ -705,7 +705,7 @@ m:addOverride("xi.zones.Lower_Jeuno.Zone.onInitialize", function(zone)
             }
                       
             menu.options = page1
-			delaySendMenu(player)
+            delaySendMenu(player)
         end,
     
         utils.unused(expguide)
