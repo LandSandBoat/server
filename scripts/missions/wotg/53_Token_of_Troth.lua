@@ -30,15 +30,13 @@ mission.sections =
             ['Bulwark_Gate'] =
             {
                 onTrigger = function(player, npc)
-                    if mission:getVar(player, 'Status') == 0 then
-                        if
-                            player:getEquipID(xi.slot.MAIN) ~= 0 or
-                            player:getEquipID(xi.slot.SUB) ~= 0
-                        then
-                            return mission:event(117, 0, 23, 1756, 0, 0, 0, 1, 1)
-                        else
-                            return mission:progressEvent(115, 98, 5, 1756, 0, 0, 1, 0)
-                        end
+                    if
+                        player:getEquipID(xi.slot.MAIN) ~= 0 or
+                        player:getEquipID(xi.slot.SUB) ~= 0
+                    then
+                        return mission:event(117, 0, 23, 1756, 0, 0, 0, 1, 1)
+                    elseif mission:getVar(player, 'Status') == 0 then
+                        return mission:progressEvent(115, 98, 5, 1756, 0, 0, 1, 0)
                     else
                         return mission:progressEvent(116, 98, 5, 1756, 0, 0, 0, 1, 0)
                     end
