@@ -16,16 +16,27 @@ require("scripts/globals/shop")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
+    local astralCovenantCD = player:getCharVar("[ENM]AstralCovenant")
+
     if
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.TENSHODO_MEMBERSHIP) ~= QUEST_COMPLETED and
         npcUtil.tradeHas(trade, 548)
     then
         -- Finish Quest: Tenshodo Membership (Invitation)
         player:startEvent(108)
+    elseif
+        npcUtil.tradeHas(trade, 1782) and
+        player:hasKeyItem(xi.ki.PSOXJA_PASS) and
+        player:getCharVar("[ENM]AstralCovenant") < os.time()
+    then
+        player:startEvent(10047, 1782)
+        player:confirmTrade()
     end
 end
 
 entity.onTrigger = function(player, npc)
+    local astralCovenantCD = player:getCharVar("[ENM]AstralCovenant")
+
     if
         player:getFameLevel(xi.quest.fame_area.JEUNO) >= 2 and
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.TENSHODO_MEMBERSHIP) == QUEST_AVAILABLE
@@ -35,6 +46,12 @@ entity.onTrigger = function(player, npc)
     elseif player:hasKeyItem(xi.ki.TENSHODO_APPLICATION_FORM) then
         -- Finish Quest: Tenshodo Membership
         player:startEvent(107)
+    elseif player:hasKeyItem(xi.ki.PSOXJA_PASS) and astralCovenantCD < os.time() then
+        player:startEvent(106, 0, 1, 1782, 604)
+    elseif player:hasKeyItem(xi.ki.PSOXJA_PASS) and astralCovenantCD >= os.time() then
+        player:startEvent(106, 4, 2, 675, VanadielTime() + (astralCovenantCD - os.time()))
+    elseif player:hasKeyItem(xi.ki.ASTRAL_COVENANT) then
+        player:startEvent(106, 4)
     else
         player:startEvent(106, 4)
     end
@@ -56,6 +73,11 @@ entity.onEventFinish = function(player, csid, option)
 
     elseif csid == 106 and option == 2 then
         player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.TENSHODO_MEMBERSHIP)
+
+    elseif csid == 10047 then
+        player:setCharVar("[ENM]AstralCovenant", os.time() + (xi.settings.main.ENM_COOLDOWN*3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
+        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ASTRAL_COVENANT)
+        player:addKeyItem(xi.ki.ASTRAL_COVENANT)
 
     elseif csid == 107 then
         -- Finish Quest: Tenshodo Membership (Application Form)

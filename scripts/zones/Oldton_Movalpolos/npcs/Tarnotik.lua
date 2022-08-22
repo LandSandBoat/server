@@ -11,7 +11,11 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if player:getCurrentMission(xi.mission.log_id.COP) >= xi.mission.id.cop.THREE_PATHS and npcUtil.tradeHas(trade, 1725) then
-        player:startEvent(32)
+        if player:hasKeyItem(xi.ki.SHAFT_2716_OPERATING_LEVER) then
+            player:startEvent(54)
+        else
+            player:startEvent(32)
+        end
     end
 end
 
@@ -30,6 +34,8 @@ entity.onEventFinish = function(player, csid, option)
     if csid == 32 then
         player:confirmTrade()
         player:setPos(-116, -119, -620, 253, 13)
+    elseif csid == 54 and option == 0 then
+        player:delKeyItem(xi.item.SHAFT_2716_OPERATING_LEVER)
     end
 end
 
