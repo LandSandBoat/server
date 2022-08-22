@@ -27,7 +27,7 @@ local despoilDebuffs =
     xi.effect.SLOW
 }
 
-local stealableSPEffects = 
+local stealableSPEffects =
 {
     xi.effect.MIGHTY_STRIKES,   xi.effect.HUNDRED_FISTS, xi.effect.MANAFONT,     xi.effect.CHAINSPELL,
     xi.effect.PERFECT_DODGE,    xi.effect.INVINCIBLE,    xi.effect.BLOOD_WEAPON, xi.effect.SOUL_VOICE,
