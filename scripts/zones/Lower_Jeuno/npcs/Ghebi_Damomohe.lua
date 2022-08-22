@@ -27,7 +27,7 @@ entity.onTrade = function(player, npc, trade)
     elseif
         npcUtil.tradeHas(trade, 1782) and
         player:hasKeyItem(xi.ki.PSOXJA_PASS) and
-        player:getCharVar("[ENM]AstralCovenant") < os.time()
+        astralCovenantCD < os.time()
     then
         player:startEvent(10047, 1782)
         player:confirmTrade()
