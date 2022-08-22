@@ -8014,7 +8014,7 @@ void CLuaBaseEntity::addTP(int16 amount)
 
 void CLuaBaseEntity::setTP(int16 value)
 {
-    if(auto* PBattle = dynamic_cast<CBattleEntity*>(m_PBaseEntity))
+    if (auto* PBattle = dynamic_cast<CBattleEntity*>(m_PBaseEntity))
     {
         PBattle->health.tp = value;
         PBattle->updatemask |= UPDATE_HP;
