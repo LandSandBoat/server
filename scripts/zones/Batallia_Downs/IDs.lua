@@ -21,6 +21,7 @@ zones[xi.zone.BATALLIA_DOWNS] =
         CARRIED_OVER_POINTS      = 7023,  -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY  = 7024,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER             = 7025,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        UNABLE_TO_PROGRESS       = 7069,  -- ou are unable to make further progress in Rhapsodies of Vana'diel due to an event occurring in the [Chains of Promathia/Treasures of Aht Urhgan/Wings of the Goddess/Seekers of Adoulin/Rise of the Zilart] missions.
         CONQUEST_BASE            = 7079,  -- Tallying conquest results...
         FISHING_MESSAGE_OFFSET   = 7238,  -- You can't fish here.
         DIG_THROW_AWAY           = 7251,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
