@@ -704,112 +704,33 @@ void CLuaBaseEntity::injectPacket(std::string const& filename)
 
 /************************************************************************
  *  Function: injectActionPacket()
- *  Purpose : Used for testing and finding animations, not production use
- *  Example : player:injectActionPacket(actID, animID, spEffect, react, msg);
- *  Notes   : Used only for testing through injectaction.lua command
- *            ONLY FOR DEBUGGING. Injects an action packet with the specified params.
+ *  Purpose : Used for injecting action packets
+ *  Example : "steal" a target's weapon on a target: player:injectActionPacket(target:getID(), 3, 181, 0, 24, 125, 41, 4370);
+ *  Notes   : Used for very special cases, like JoL or Plouton generating action packets that only play animations, and don't actually use abilities.
+ *            There are no safeties, You can crash a client with malformed parameters. You have been warned.
  ************************************************************************/
-
-void CLuaBaseEntity::injectActionPacket(uint16 action, uint16 anim, uint16 spec, uint16 react, uint16 message)
+void CLuaBaseEntity::injectActionPacket(uint32 inTargetID, uint16 inCategory, uint16 inAnimationID, uint16 inSpecEffect, uint16 inReaction, uint16 inMessage, uint16 inActionParam, uint16 inParam)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
-
-    SPECEFFECT speceffect = static_cast<SPECEFFECT>(spec);
-    REACTION   reaction   = static_cast<REACTION>(react);
-
-    ACTIONTYPE actiontype = ACTION_MAGIC_FINISH;
-    switch (action)
-    {
-        case 3:
-            actiontype = ACTION_WEAPONSKILL_FINISH;
-            break;
-        case 4:
-            actiontype = ACTION_MAGIC_FINISH;
-            break;
-        case 5:
-            actiontype = ACTION_ITEM_FINISH;
-            break;
-        case 6:
-            actiontype = ACTION_JOBABILITY_FINISH;
-            break;
-        case 8:
-            actiontype = ACTION_MAGIC_START;
-            break;
-        case 11:
-            actiontype = ACTION_MOBABILITY_FINISH;
-            break;
-        case 13:
-            actiontype = ACTION_PET_MOBABILITY_FINISH;
-            break;
-        case 14:
-            actiontype = ACTION_DANCE;
-            break;
-        case 15:
-            actiontype = ACTION_RUN_WARD_EFFUSION;
-            break;
-    }
+    SPECEFFECT speceffect = static_cast<SPECEFFECT>(inSpecEffect);
+    REACTION   reaction   = static_cast<REACTION>(inReaction);
+    ACTIONTYPE actiontype = static_cast<ACTIONTYPE>(inCategory);
 
     action_t Action;
 
-    Action.id       = PChar->id;
-    Action.actionid = 1;
-
-    // If you use ACTION_MOBABILITY_FINISH, the first param = anim, the second param = skill id.
-    if (actiontype == ACTION_MOBABILITY_FINISH || actiontype == ACTION_PET_MOBABILITY_FINISH)
-    {
-        CBattleEntity* PTarget = (CBattleEntity*)PChar->GetEntity(PChar->m_TargID);
-        if (PTarget == nullptr)
-        {
-            ShowError("Cannot use MOBABILITY_FINISH on a nullptr battle target! Target a mob! ");
-            return;
-        }
-        Action.id              = PTarget->id;
-        Action.actiontype      = actiontype;
-        actionList_t& list     = Action.getNewActionList();
-        list.ActionTargetID    = PChar->id;
-        actionTarget_t& target = list.getNewActionTarget();
-        target.animation       = anim;
-        target.param           = 10;
-        target.messageID       = message;
-        PTarget->loc.zone->PushPacket(PTarget, CHAR_INRANGE, new CActionPacket(Action));
-        return;
-    }
+    Action.id       = m_PBaseEntity->id;
+    Action.actionid = inActionParam;
 
     Action.actiontype      = actiontype;
     actionList_t& list     = Action.getNewActionList();
-    list.ActionTargetID    = PChar->id;
+    list.ActionTargetID    = inTargetID;
     actionTarget_t& target = list.getNewActionTarget();
-    target.animation       = anim;
-    target.param           = 10;
-    target.messageID       = message;
+    target.animation       = inAnimationID;
+    target.param           = inParam;
+    target.messageID       = inMessage;
     target.speceffect      = speceffect;
     target.reaction        = reaction;
 
-    if (actiontype == ACTION_MAGIC_START)
-    {
-        SPELLGROUP castType = static_cast<SPELLGROUP>(anim);
-        uint16     castAnim = spec;
-
-        Action.spellgroup = castType;
-        Action.actiontype = actiontype;
-        target.reaction   = REACTION::NONE;
-        target.speceffect = SPECEFFECT::NONE;
-        if (!castAnim)
-        {
-            target.animation = 0;
-        }
-        else
-        {
-            target.animation = castAnim;
-        }
-        target.param     = message;
-        target.messageID = 327; // starts casting
-        return;
-    }
-
-    PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CActionPacket(Action));
+    m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE_SELF, new CActionPacket(Action));
 }
 
 /************************************************************************
