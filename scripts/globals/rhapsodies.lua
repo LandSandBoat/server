@@ -230,7 +230,7 @@ xi.rhapsodies.requiredCharacters =
 
     [xi.mission.id.rov.GANGED_UP_ON] =
     {
-        xi.rhapsodies.character.CAIT_SITH,
+        xi.rhapsodies.character.LILLISETTE,
     },
 
     [xi.mission.id.rov.SACRIFICE] =
