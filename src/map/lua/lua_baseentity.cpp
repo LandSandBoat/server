@@ -8014,13 +8014,11 @@ void CLuaBaseEntity::addTP(int16 amount)
 
 void CLuaBaseEntity::setTP(int16 value)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
-
-    auto* PBattle = static_cast<CBattleEntity*>(m_PBaseEntity);
-
-    PBattle->health.tp    = 0;
-    int16 available_value = value - (PBattle->health.tp);
-    PBattle->addTP(available_value);
+    if (auto* PBattle = dynamic_cast<CBattleEntity*>(m_PBaseEntity))
+    {
+        PBattle->health.tp = value;
+        PBattle->updatemask |= UPDATE_HP;
+    }
 }
 
 /************************************************************************
@@ -9946,7 +9944,7 @@ uint16 CLuaBaseEntity::getBaseDelay()
         {
             if (PMainWeapon->getSkillType() == SKILLTYPE::SKILL_HAND_TO_HAND)
             {
-                baseDelay += PMainWeapon->getBaseDelay();
+                baseDelay = PMainWeapon->getBaseDelay(); // h2h items include 480 base delay
             }
             else
             {
@@ -9963,7 +9961,7 @@ uint16 CLuaBaseEntity::getBaseDelay()
         CItemWeapon* PWeapon = dynamic_cast<CItemWeapon*>(PBattleEntity->m_Weapons[SLOT_MAIN]);
         if (PWeapon)
         {
-            baseDelay = (PWeapon->getBaseDelay() * 60 / 1000);
+            baseDelay = std::round(PWeapon->getBaseDelay() * 60.0 / 1000.0); // there is some precision loss that results in delays of 319.98 instead of 320, etc, so round to nearest.
         }
     }
 
