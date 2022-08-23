@@ -43,13 +43,15 @@ entity.onMobFight = function(mob)
     local party = mob:getBattlefield():getPlayers()
     local bfNum = mob:getBattlefield():getArea()
 
-    for _, member in pairs(party) do
-        if mob:checkDistance(member) < 7.0 and mob:getLocalVar("fleeTimer") < os.time() then
-            local dest = math.random(1,5)
+    if mob:getLocalVar("fleeTimer") < os.time() then
+        for _, member in pairs(party) do
+            if mob:checkDistance(member) < 7.0 then
+                local dest = math.random(1,5)
 
-            mob:castSpell(362, member)
-            mob:pathTo(points[bfNum][dest][1], points[bfNum][dest][2], points[bfNum][dest][3], xi.path.flag.SCRIPT)
-            mob:setLocalVar("fleeTimer", os.time() + 20)
+                mob:castSpell(362, member)
+                mob:pathTo(points[bfNum][dest][1], points[bfNum][dest][2], points[bfNum][dest][3], xi.path.flag.SCRIPT)
+                mob:setLocalVar("fleeTimer", os.time() + 20)
+            end
         end
     end
 
