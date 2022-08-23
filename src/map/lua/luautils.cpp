@@ -2659,8 +2659,6 @@ namespace luautils
             return -1;
         }
 
-        PTarget->PAI->EventHandler.triggerListener("MAGIC_TAKE", CLuaBaseEntity(PTarget), CLuaBaseEntity(PCaster), CLuaSpell(PSpell));
-
         sol::function onMagicHit = getEntityCachedFunction(PTarget, "onMagicHit");
         if (!onMagicHit.valid())
         {

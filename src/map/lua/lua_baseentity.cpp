@@ -564,8 +564,7 @@ void CLuaBaseEntity::incrementCharVar(std::string const& varName, int32 value)
 {
     if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
-        auto startingVal = charutils::FetchCharVar(PChar->id, varName);
-        charutils::IncrementCharVar(PChar, varName, startingVal + value);
+        charutils::IncrementCharVar(PChar, varName, value);
     }
 }
 
@@ -2661,6 +2660,8 @@ void CLuaBaseEntity::setPos(sol::variadic_args va)
 
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
+        auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+
         if (va[4].is<double>())
         {
             auto zoneid = va[4].as<uint16>();
@@ -2669,17 +2670,22 @@ void CLuaBaseEntity::setPos(sol::variadic_args va)
                 return;
             }
 
-            ((CCharEntity*)m_PBaseEntity)->loc.destination = zoneid;
-            ((CCharEntity*)m_PBaseEntity)->status          = STATUS_TYPE::DISAPPEAR;
-            ((CCharEntity*)m_PBaseEntity)->loc.boundary    = 0;
-            ((CCharEntity*)m_PBaseEntity)->m_moghouseID    = 0;
-            ((CCharEntity*)m_PBaseEntity)->clearPacketList();
-            charutils::SendToZone((CCharEntity*)m_PBaseEntity, 2, zoneutils::GetZoneIPP(m_PBaseEntity->loc.destination));
-            //((CCharEntity*)m_PBaseEntity)->loc.zone->DecreaseZoneCounter(((CCharEntity*)m_PBaseEntity));
+            if (PChar->PPet != nullptr)
+            {
+                PChar->setPetZoningInfo();
+            }
+
+            PChar->loc.destination = zoneid;
+            PChar->status          = STATUS_TYPE::DISAPPEAR;
+            PChar->loc.boundary    = 0;
+            PChar->m_moghouseID    = 0;
+            PChar->clearPacketList();
+            charutils::SendToZone(PChar, 2, zoneutils::GetZoneIPP(PChar->loc.destination));
+            // PChar->loc.zone->DecreaseZoneCounter(PChar);
         }
-        else if (((CCharEntity*)m_PBaseEntity)->status != STATUS_TYPE::DISAPPEAR)
+        else if (PChar->status != STATUS_TYPE::DISAPPEAR)
         {
-            ((CCharEntity*)m_PBaseEntity)->pushPacket(new CPositionPacket((CCharEntity*)m_PBaseEntity));
+            PChar->pushPacket(new CPositionPacket(PChar));
         }
     }
     m_PBaseEntity->updatemask |= UPDATE_POS;
@@ -8008,13 +8014,11 @@ void CLuaBaseEntity::addTP(int16 amount)
 
 void CLuaBaseEntity::setTP(int16 value)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
-
-    auto* PBattle = static_cast<CBattleEntity*>(m_PBaseEntity);
-
-    PBattle->health.tp    = 0;
-    int16 available_value = value - (PBattle->health.tp);
-    PBattle->addTP(available_value);
+    if (auto* PBattle = dynamic_cast<CBattleEntity*>(m_PBaseEntity))
+    {
+        PBattle->health.tp = value;
+        PBattle->updatemask |= UPDATE_HP;
+    }
 }
 
 /************************************************************************
@@ -8199,14 +8203,17 @@ uint16 CLuaBaseEntity::getMaxSkillLevel(uint8 level, uint8 jobId, uint8 skillId)
  *  Function: getSkillRank()
  *  Purpose : Returns the Real Rank for a particular skill
  *  Example : player:getSkillRank(craftID)
- *  Notes   : XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);?
+ *  Notes   :
  ************************************************************************/
 
 uint8 CLuaBaseEntity::getSkillRank(uint8 rankID)
 {
-    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-
-    return PChar->RealSkills.rank[rankID];
+    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    if (PChar)
+    {
+        return PChar->RealSkills.rank[rankID];
+    }
+    return 0;
 }
 
 /************************************************************************
@@ -8218,19 +8225,21 @@ uint8 CLuaBaseEntity::getSkillRank(uint8 rankID)
 
 void CLuaBaseEntity::setSkillRank(uint8 skillID, uint8 newrank)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    if (PChar)
+    {
+        auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
 
-    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+        PChar->WorkingSkills.rank[skillID]  = newrank;
+        PChar->WorkingSkills.skill[skillID] = (PChar->RealSkills.skill[skillID] / 10) * 0x20 + newrank;
+        PChar->RealSkills.rank[skillID]     = newrank;
+        // PChar->RealSkills.skill[skillID] += 1;
 
-    PChar->WorkingSkills.rank[skillID]  = newrank;
-    PChar->WorkingSkills.skill[skillID] = (PChar->RealSkills.skill[skillID] / 10) * 0x20 + newrank;
-    PChar->RealSkills.rank[skillID]     = newrank;
-    // PChar->RealSkills.skill[skillID] += 1;
-
-    jobpointutils::RefreshGiftMods(PChar);
-    charutils::BuildingCharSkillsTable(PChar);
-    charutils::SaveCharSkills(PChar, skillID);
-    PChar->pushPacket(new CCharSkillsPacket(PChar));
+        jobpointutils::RefreshGiftMods(PChar);
+        charutils::BuildingCharSkillsTable(PChar);
+        charutils::SaveCharSkills(PChar, skillID);
+        PChar->pushPacket(new CCharSkillsPacket(PChar));
+    }
 }
 
 /************************************************************************
@@ -9874,6 +9883,136 @@ bool CLuaBaseEntity::isDualWielding()
 }
 
 /************************************************************************
+ *  Function: isUsingH2H()
+ *  Purpose : Returns true if entity is using H2H
+ *  Example : if player:isDualWielding() then
+ *  Notes   :
+ ************************************************************************/
+
+bool CLuaBaseEntity::isUsingH2H()
+{
+    CCharEntity* PCharEntity   = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    CMobEntity*  PBattleEntity = dynamic_cast<CMobEntity*>(m_PBaseEntity);
+
+    if (PCharEntity)
+    {
+        CItemWeapon* PMainWeapon = dynamic_cast<CItemWeapon*>(PCharEntity->getEquip(SLOT_MAIN));
+
+        if (PMainWeapon)
+        {
+            if (PMainWeapon->getSkillType() == SKILLTYPE::SKILL_HAND_TO_HAND)
+            {
+                return true;
+            }
+        }
+        else // bare handed
+        {
+            return true;
+        }
+    }
+    else if (PBattleEntity)
+    {
+        CItemWeapon* PWeapon = dynamic_cast<CItemWeapon*>(PBattleEntity->m_Weapons[SLOT_MAIN]);
+        if (PWeapon && PWeapon->getSkillType() == SKILLTYPE::SKILL_HAND_TO_HAND)
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+/************************************************************************
+ *  Function: getBaseDelay()
+ *  Purpose : Returns the unmodified base delay of an entity's melee attack without any form of delay reduction
+ *  Example : local delay = player:getBaseDelay()
+ *  Notes   :
+ ************************************************************************/
+
+uint16 CLuaBaseEntity::getBaseDelay()
+{
+    CCharEntity*   PCharEntity   = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    CBattleEntity* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+    uint16         baseDelay     = 480; // h2h "unequipped" base delay
+
+    if (PCharEntity)
+    {
+        CItemWeapon* PMainWeapon = dynamic_cast<CItemWeapon*>(PCharEntity->getEquip(SLOT_MAIN));
+        CItemWeapon* PSubWeapon  = dynamic_cast<CItemWeapon*>(PCharEntity->getEquip(SLOT_SUB));
+
+        if (PMainWeapon)
+        {
+            if (PMainWeapon->getSkillType() == SKILLTYPE::SKILL_HAND_TO_HAND)
+            {
+                baseDelay = PMainWeapon->getBaseDelay(); // h2h items include 480 base delay
+            }
+            else
+            {
+                baseDelay = PMainWeapon->getBaseDelay();
+                if (PSubWeapon)
+                {
+                    baseDelay += PSubWeapon->getBaseDelay();
+                }
+            }
+        }
+    }
+    else if (PBattleEntity)
+    {
+        CItemWeapon* PWeapon = dynamic_cast<CItemWeapon*>(PBattleEntity->m_Weapons[SLOT_MAIN]);
+        if (PWeapon)
+        {
+            baseDelay = std::round(PWeapon->getBaseDelay() * 60.0 / 1000.0); // there is some precision loss that results in delays of 319.98 instead of 320, etc, so round to nearest.
+        }
+    }
+
+    return baseDelay;
+}
+
+/************************************************************************
+ *  Function: getBaseRangedDelay()
+ *  Purpose : Returns the unmodified base delay of an entity's ranged attack without any form of delay reduction
+ *  Example : local delay = player:getBaseRangedDelay()
+ *  Notes   :
+ ************************************************************************/
+
+uint16 CLuaBaseEntity::getBaseRangedDelay()
+{
+    CCharEntity*   PCharEntity   = dynamic_cast<CCharEntity*>(m_PBaseEntity);
+    CBattleEntity* PBattleEntity = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+    uint16         baseDelay     = 0; // return 0 if not able to actually ranged attack
+
+    if (PCharEntity)
+    {
+        CItemWeapon* PRangedWeapon = dynamic_cast<CItemWeapon*>(PCharEntity->getEquip(SLOT_RANGED));
+        CItemWeapon* PAmmo         = dynamic_cast<CItemWeapon*>(PCharEntity->getEquip(SLOT_AMMO));
+
+        if (PRangedWeapon && PRangedWeapon->isRanged())
+        {
+            if (PRangedWeapon->isThrowing()) // Throwing, like Chakram/Boomerang in ranged slot
+            {
+                baseDelay = PRangedWeapon->getBaseDelay();
+            }
+            else if (PAmmo) // Bow/gun etc, but only valid if Ammo is equipped.
+            {
+                baseDelay = PRangedWeapon->getBaseDelay() + PAmmo->getBaseDelay();
+            }
+        }
+        else if (PAmmo && PAmmo->isRanged()) // Throwing, Pebble/Shuriken in ammo slot
+        {
+            baseDelay = PAmmo->getBaseDelay();
+        }
+    }
+    else if (PBattleEntity)
+    {
+        baseDelay = 260; // TODO: There does not seem to be a real way to get the delay of a ranged attack of a non-PC.
+                         // 260 delay is derived from a Goblin Hunter using a ranged attack, using Dark Seal Absorb TP to reverse the delay.
+                         // The cast gave back 40 TP, which is half of 80 TP due to 50% dAGI penalty being maxed out.
+    }
+
+    return baseDelay;
+}
+
+/************************************************************************
  *  Function: checkLiementAbsorb()
  *  Purpose : Returns 1.0 if Liement is not up or didn't absorb, -1.0 or less if it did
  *  Example : liementAbsorbPct = player:checkLiementAbsorb(xi.damageType.FIRE)
@@ -9922,8 +10061,8 @@ int32 CLuaBaseEntity::getVE(CLuaBaseEntity const* target)
 /************************************************************************
  *  Function: setCE()
  *  Purpose : Sets a specified amount of Cumulative Enmity against an Entity
- *  Example : target:setCE(player, petCE * petEnmityBonus)
- *  Notes   : Currently only used in scripts/globals/abilities/ventriloquy.lua
+ *  Example : target:setCE(player, newEnmity)
+ *  Notes   : See Enmity Douse and Ventriloquy
  ************************************************************************/
 
 void CLuaBaseEntity::setCE(CLuaBaseEntity* target, uint16 amount)
@@ -9936,8 +10075,8 @@ void CLuaBaseEntity::setCE(CLuaBaseEntity* target, uint16 amount)
 /************************************************************************
  *  Function: setVE()
  *  Purpose : Sets a specified amount of Volatile Enmity against an Entity
- *  Example : target:setVE(player, petVE * petEnmityBonus)
- *  Notes   : Currently only used in scripts/globals/abilities/ventriloquy.lua
+ *  Example : target:setVE(player, newEnmity)
+ *  Notes   : See Enmity Douse and Ventriloquy
  ************************************************************************/
 
 void CLuaBaseEntity::setVE(CLuaBaseEntity* target, uint16 amount)
@@ -11883,22 +12022,27 @@ void CLuaBaseEntity::addSimpleGambit(uint16 targ, uint16 cond, uint32 condition_
 }
 
 /************************************************************************
- *  Function: setTrustTPSkillSettings(trigger, select)
+ *  Function: setTrustTPSkillSettings(trigger, select, value)
  *  Purpose :
- *  Example : mob:setTrustTPSkillSettings(ai.tp.ASAP, ai.s.RANDOM)
+ *  Example : mob:setTrustTPSkillSettings(ai.tp.CLOSER_UNTIL_TP, ai.s.HIGHEST, 1500)
+ *  Notes   : value is optional TP Value
  ************************************************************************/
 
-void CLuaBaseEntity::setTrustTPSkillSettings(uint16 trigger, uint16 select)
+void CLuaBaseEntity::setTrustTPSkillSettings(uint16 trigger, uint16 select, sol::object const& value)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_TRUST);
 
     using namespace gambits;
+
+    // Optional
+    uint16 tp_value = (value != sol::lua_nil) ? value.as<uint16>() : 0;
 
     auto* trust      = static_cast<CTrustEntity*>(m_PBaseEntity);
     auto* controller = static_cast<CTrustController*>(trust->PAI->GetController());
 
     controller->m_GambitsContainer->tp_trigger = static_cast<G_TP_TRIGGER>(trigger);
     controller->m_GambitsContainer->tp_select  = static_cast<G_SELECT>(select);
+    controller->m_GambitsContainer->tp_value   = tp_value;
 }
 
 /************************************************************************
@@ -13428,11 +13572,7 @@ sol::table CLuaBaseEntity::getEnmityList()
 
 std::optional<CLuaBaseEntity> CLuaBaseEntity::getTrickAttackChar(CLuaBaseEntity* PLuaBaseEntity)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
-    CBattleEntity* PMob = static_cast<CBattleEntity*>(PLuaBaseEntity->GetBaseEntity());
-
-    if (PMob != nullptr)
+    if (CBattleEntity* PMob = dynamic_cast<CBattleEntity*>(PLuaBaseEntity->GetBaseEntity()))
     {
         CBattleEntity* taTarget = battleutils::getAvailableTrickAttackChar((CBattleEntity*)m_PBaseEntity, PMob);
         if (taTarget)
@@ -14796,6 +14936,9 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("checkImbuedItems", CLuaBaseEntity::checkImbuedItems);
 
     SOL_REGISTER("isDualWielding", CLuaBaseEntity::isDualWielding);
+    SOL_REGISTER("isUsingH2H", CLuaBaseEntity::isUsingH2H);
+    SOL_REGISTER("getBaseDelay", CLuaBaseEntity::getBaseDelay);
+    SOL_REGISTER("getBaseRangedDelay", CLuaBaseEntity::getBaseRangedDelay);
 
     SOL_REGISTER("checkLiementAbsorb", CLuaBaseEntity::checkLiementAbsorb);
 

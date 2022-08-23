@@ -663,7 +663,7 @@
     BLUE_LEARN_CHANCE            = 945, // Additional chance to learn blue magic
     SNEAK_DURATION               = 946, // Additional duration in seconds
     INVISIBLE_DURATION           = 947, // Additional duration in seconds
-    BERSERK_EFFECT               = 948, // Conqueror Berserk Effect
+    BERSERK_POTENCY              = 948, // Augments "Berserk"/Enhances "Berserk" effect (Conqueror)
     WS_NO_DEPLETE                = 949, // % chance a Weaponskill depletes no TP.
     ITEM_ADDEFFECT_ELEMENT       = 950, // Element of the Additional Effect or Spikes, for resist purposes
     ITEM_ADDEFFECT_STATUS        = 951, // Status Effect ID to try to apply via Additional Effect or Spikes

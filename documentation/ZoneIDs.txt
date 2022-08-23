@@ -133,7 +133,7 @@
   130 -  82 - Ru'Aun Gardens
   131 -  83 - Mordion Gaol
   132 -  84 - Abyssea - La Theine
-  133 -  85 - Not a real zone: Character select screen background
+  133 -  85 - Outer Ra'Kaznar [U2] (Formerly only used as character select screen background)
   134 -  86 - Dynamis - Beaucedine
   135 -  87 - Dynamis - Xarcabard
   136 -  88 - Beaucedine Glacier [S]
@@ -183,13 +183,13 @@
   180 -  B4 - La'Loff Amphitheater
   181 -  B5 - The Celestial Nexus
   182 -  B6 - Walk of Echoes
-  183 -  B7 - Maquette Abdhaljs-Legion (Formerly "The Last Stand")
+  183 -  B7 - Maquette Abdhaljs-LegionA (Formerly "The Last Stand")
   184 -  B8 - Lower Delkfutt's Tower
   185 -  B9 - Dynamis - San d'Oria
   186 -  BA - Dynamis - Bastok
   187 -  BB - Dynamis - Windurst
   188 -  BC - Dynamis - Jeuno
-  189 -  BD -
+  189 -  BD - Residential Area Alternate: San d'Orian Barracks
   190 -  BE - King Ranperre's Tomb
   191 -  BF - Dangruf Wadi
   192 -  C0 - Inner Horutoto Ruins
@@ -199,7 +199,7 @@
   196 -  C4 - Gusgen Mines
   197 -  C5 - Crawlers' Nest
   198 -  C6 - Maze of Shakhrami
-  199 -  C7 -
+  199 -  C7 - Residential Area Alternate: Bastokan Barracks
   200 -  C8 - Garlaige Citadel
   201 -  C9 - Cloister of Gales
   202 -  CA - Cloister of Storms
@@ -214,12 +214,12 @@
   211 -  D3 - Cloister of Tides
   212 -  D4 - Gustav Tunnel
   213 -  D5 - Labyrinth of Onzozo
-  214 -  D6 - Residential Area (Alt)
+  214 -  D6 - Residential Area Alternate: Aht Urgan
   215 -  D7 - Abyssea - Attohwa
   216 -  D8 - Abyssea - Misareaux
   217 -  D9 - Abyssea - Vunkerl
   218 -  DA - Abyssea - Altepa
-  219 -  DB -
+  219 -  DB - Residential Area Alternate: Windurstian Barracks
   220 -  DC - Ship bound for Selbina
   221 -  DD - Ship bound for Mhaura
   222 -  DE - Provenance
@@ -229,7 +229,7 @@
   226 -  E2 - Kazham-Jeuno Airship
   227 -  E3 - Ship bound for Selbina (with Pirates)
   228 -  E4 - Ship bound for Mhaura (with Pirates)
-  229 -  E5 -
+  229 -  E5 - Throne Room [V]
   230 -  E6 - Southern San d'Oria
   231 -  E7 - Northern San d'Oria
   232 -  E8 - Port San d'Oria
@@ -275,18 +275,18 @@
   272 - 110 - Dho Gates
   273 - 111 - Woh Gates
   274 - 112 - Outer Ra'Kaznar
-  275 - 113 - Outer Ra'Kaznar [U]
+  275 - 113 - Outer Ra'Kaznar [U1]
   276 - 114 - Ra'kaznar Inner Court
   277 - 115 - Ra'Kaznar Turris
-  278 - 116 -
+  278 - 116 - unimplemented in client: no zone dat as of 08-10-2022
   279 - 117 - Walk of Echoes [P2]
   280 - 118 - Mog Garden
   281 - 119 - Leafallia
   282 - 11A - Mount Kamihr
-  283 - 11B - Silver Knife
+  283 - 11B - unimplemented in client: Silver Knife
   284 - 11C - Celennia Memorial Library (formerly Wexworth Library)
   285 - 11D - Feretory
-  286 - 11E -
+  286 - 11E - unimplemented in client: no zone dat as of 08-10-2022
   287 - 11F - Maquette Abdhaljs-LegionB
   288 - 120 - Escha - Zi'Tah
   289 - 121 - Escha - Ru'Aun

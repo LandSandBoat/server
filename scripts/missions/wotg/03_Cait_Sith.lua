@@ -9,6 +9,7 @@
 -- EAST_RONFAURE_S      : !zone 81
 -- SOUTHERN_SAN_DORIA_S : !zone 80
 -----------------------------------
+require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/mission')
@@ -46,6 +47,10 @@ mission.sections =
             onEventFinish =
             {
                 [67] = function(player, csid, option, npc)
+                    if player:getCurrentMission(xi.mission.log_id.ROV) == xi.mission.id.rov.CAUTERIZE then
+                        npcUtil.giveKeyItem(player, xi.ki.LIGHTSWORM)
+                    end
+
                     mission:complete(player)
                 end,
             },

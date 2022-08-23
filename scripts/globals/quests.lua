@@ -639,12 +639,12 @@ xi.quest.id =
         AN_UNDYING_PLEDGE               = 149,
 
         -- Misc (160-165)
-        WRATH_OF_THE_OPO_OPOS           = 160,
-        WANDERING_SOULS                 = 161,
-        SOUL_SEARCHING                  = 162,
+        WRATH_OF_THE_OPO_OPOS           = 160, -- ± Converted
+        WANDERING_SOULS                 = 161, -- ± Converted
+        SOUL_SEARCHING                  = 162, -- ± Converted
         DIVINE_MIGHT                    = 163, -- ±
         DIVINE_MIGHT_REPEAT             = 164, -- ±
-        OPEN_SESAME                     = 165,
+        OPEN_SESAME                     = 165, -- ± Converted
 
         -- Rabao (192-201)
         DONT_FORGET_THE_ANTIDOTE        = 192, -- ±
@@ -794,19 +794,19 @@ xi.quest.id =
         SON_AND_FATHER                   = 57,
         THE_TRUTH_LIES_HID               = 58,
         BONDS_OF_MYTHRIL                 = 59,
-        CHASING_SHADOWS                  = 60,
-        FACE_OF_THE_FUTURE               = 61,
+        CHASING_SHADOWS                  = 60, -- + Converted
+        FACE_OF_THE_FUTURE               = 61, -- + Converted
         MANIFEST_DESTINY                 = 62,
         AT_JOURNEYS_END                  = 63,
-        HER_MEMORIES_HOMECOMING_QUEEN    = 64,
-        HER_MEMORIES_OLD_BEAN            = 65,
-        HER_MEMORIES_THE_FAUX_PAS        = 66,
-        HER_MEMORIES_THE_GRAVE_RESOLVE   = 67,
-        HER_MEMORIES_OPERATION_CUPID     = 68,
-        HER_MEMORIES_CARNELIAN_FOOTFALLS = 69,
+        HER_MEMORIES_HOMECOMING_QUEEN    = 64, -- + Converted
+        HER_MEMORIES_OLD_BEAN            = 65, -- + Converted
+        HER_MEMORIES_THE_FAUX_PAS        = 66, -- + Converted
+        HER_MEMORIES_THE_GRAVE_RESOLVE   = 67, -- + Converted
+        HER_MEMORIES_OPERATION_CUPID     = 68, -- + Converted
+        HER_MEMORIES_CARNELIAN_FOOTFALLS = 69, -- + Converted
         HER_MEMORIES_AZURE_FOOTFALLS     = 70,
         HER_MEMORIES_VERDURE_FOOTFALLS   = 71,
-        HER_MEMORIES_OF_MALIGN_MALADIES  = 72,
+        HER_MEMORIES_OF_MALIGN_MALADIES  = 72, -- + Converted
         GUARDIAN_OF_THE_VOID             = 80,
         DRAFTED_BY_THE_DUCHY             = 81,
         BATTLE_ON_A_NEW_FRONT            = 82,

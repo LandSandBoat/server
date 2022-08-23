@@ -6,7 +6,7 @@
 -- Duration: 2 hours
 -- Restriction: WHM main only
 -----------------------------------
-require("scripts/globals/status")
+require("scripts/globals/job_utils/white_mage")
 -----------------------------------
 local ability_object = {}
 
@@ -15,9 +15,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    target:delStatusEffect(xi.effect.AFFLATUS_SOLACE)
-    target:delStatusEffect(xi.effect.AFFLATUS_MISERY)
-    target:addStatusEffect(xi.effect.AFFLATUS_MISERY, 8, 0, 7200)
+    xi.job_utils.white_mage.useAfflatusMisery(player, target, ability)
 end
 
 return ability_object

@@ -479,20 +479,21 @@ int16 CBattleEntity::addTP(int16 tp)
         {
             TPMulti = settings::get<float>("map.PLAYER_TP_MULTIPLIER");
         }
+        else if (objtype == TYPE_PET || (objtype == TYPE_MOB && this->PMaster)) // normal pet or charmed pet
+        {
+            TPMulti = settings::get<float>("map.PET_TP_MULTIPLIER");
+        }
         else if (objtype == TYPE_MOB)
         {
             TPMulti = settings::get<float>("map.MOB_TP_MULTIPLIER");
         }
-        else if (objtype == TYPE_PET)
+        else if (objtype == TYPE_TRUST)
         {
-            if (static_cast<CPetEntity*>(this)->getPetType() != PET_TYPE::AUTOMATON || !this->PMaster)
-            {
-                TPMulti = settings::get<float>("map.MOB_TP_MULTIPLIER") * 3;
-            }
-            else
-            {
-                TPMulti = settings::get<float>("map.PLAYER_TP_MULTIPLIER");
-            }
+            TPMulti = settings::get<float>("map.TRUST_TP_MULTIPLIER");
+        }
+        else if (objtype == TYPE_FELLOW)
+        {
+            TPMulti = settings::get<float>("map.FELLOW_TP_MULTIPLIER");
         }
 
         tp = (int16)(tp * TPMulti);
@@ -1919,7 +1920,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
         }
 
         // try zanshin only on single swing attack rounds - it is last priority in the multi-hit order
-        // if zanshin procs, the attack is repeated
+        // if zanshin procs, add a new zanshin based attack.
         if (attack.IsFirstSwing() && attackRound.GetAttackSwingCount() == 1)
         {
             uint16 zanshinChance = this->getMod(Mod::ZANSHIN) + battleutils::GetMeritValue(this, MERIT_ZASHIN_ATTACK_RATE);
@@ -1929,18 +1930,12 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                  xirand::GetRandomNumber(100) < zanshinChance) ||
                 (GetMJob() == JOB_SAM && this->StatusEffectContainer->HasStatusEffect(EFFECT_HASSO) && xirand::GetRandomNumber(100) < (zanshinChance / 4)))
             {
-                attack.SetAttackType(PHYSICAL_ATTACK_TYPE::ZANSHIN);
-                attack.SetAsFirstSwing(false);
-            }
-            else
-            {
-                attackRound.DeleteAttackSwing();
+                attackRound.AddAttackSwing(PHYSICAL_ATTACK_TYPE::ZANSHIN, PHYSICAL_ATTACK_DIRECTION::RIGHTATTACK, 1);
             }
         }
-        else
-        {
-            attackRound.DeleteAttackSwing();
-        }
+
+        attackRound.DeleteAttackSwing();
+
         if (list.actionTargets.size() == 8)
         {
             break;

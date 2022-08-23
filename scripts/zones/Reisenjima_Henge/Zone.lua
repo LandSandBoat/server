@@ -1,9 +1,7 @@
 -----------------------------------
---
 -- Zone: Reisenjima_Henge (292)
---
 -----------------------------------
-local ID = require("scripts/zones/Reisenjima_Henge/IDs")
+local ID = require('scripts/zones/Reisenjima_Henge/IDs')
 -----------------------------------
 local zone_object = {}
 

@@ -34,12 +34,10 @@ public:
     bool isAoE() const;
     bool isConal() const;
     bool isSingle() const;
-    bool isTwoHour() const;
-    bool isSpecial() const;
+    bool isTpFreeSkill() const;
+    bool isAstralFlow() const;
     bool isBloodPactWard() const;
     bool isBloodPactRage() const;
-    bool isAttackReplacement() const;
-    bool isTpSkill() const;
 
     uint16 getID() const;
     uint16 getAnimationID() const;

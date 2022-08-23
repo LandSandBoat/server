@@ -1,13 +1,13 @@
 -----------------------------------
 -- Zone: Southern_San_dOria (230)
 -----------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
-require("scripts/globals/events/harvest_festivals")
-require("scripts/quests/flyers_for_regine")
-require("scripts/globals/conquest")
-require("scripts/globals/settings")
-require("scripts/globals/chocobo")
-require("scripts/globals/zone")
+local ID = require('scripts/zones/Southern_San_dOria/IDs')
+require('scripts/globals/events/harvest_festivals')
+require('scripts/quests/flyers_for_regine')
+require('scripts/globals/conquest')
+require('scripts/globals/settings')
+require('scripts/globals/chocobo')
+require('scripts/globals/zone')
 -----------------------------------
 local zone_object = {}
 
@@ -27,6 +27,7 @@ zone_object.onZoneIn = function(player, prevZone)
         if xi.settings.main.NEW_CHARACTER_CUTSCENE == 1 then
             cs = 503
         end
+
         player:setPos(-96, 1, -40, 224)
         player:setHomePoint()
     end
@@ -45,9 +46,15 @@ end
 
 zone_object.onRegionEnter = function(player, region)
     local regionID =region:GetRegionID()
-    if regionID==1 and player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and player:getCharVar("COP_louverance_story")== 2 then
+
+    if
+        regionID == 1 and
+        player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and
+        player:getCharVar("COP_louverance_story")== 2
+    then
         player:startEvent(758)
     end
+
     quests.ffr.onRegionEnter(player, region) -- player approaching Flyers for Regine NPCs
 end
 

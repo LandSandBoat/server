@@ -725,6 +725,9 @@ end
     calcParams = calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcParams)
     local finaldmg = calcParams.finalDmg
 
+    -- Delete statuses that may have been spent by the WS
+    attacker:delStatusEffectsByFlag(xi.effectFlag.DETECTABLE)
+
     -- Calculate reductions
     finaldmg = target:rangedDmgTaken(finaldmg)
     finaldmg = finaldmg * target:getMod(xi.mod.PIERCE_SDT) / 1000

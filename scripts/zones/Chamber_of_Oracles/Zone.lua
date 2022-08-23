@@ -1,11 +1,11 @@
 -----------------------------------
 -- Zone: Chamber_of_Oracles (168)
 -----------------------------------
-local ID = require("scripts/zones/Chamber_of_Oracles/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/keyitems")
-require("scripts/globals/missions")
-require("scripts/globals/zone")
+local ID = require('scripts/zones/Chamber_of_Oracles/IDs')
+require('scripts/globals/conquest')
+require('scripts/globals/keyitems')
+require('scripts/globals/missions')
+require('scripts/globals/zone')
 -----------------------------------
 local zone_object = {}
 

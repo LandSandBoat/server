@@ -1,13 +1,13 @@
 -----------------------------------
 -- Zone: Selbina (248)
 -----------------------------------
-local ID = require("scripts/zones/Selbina/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/keyitems")
-require("scripts/globals/missions")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/zone")
+local ID = require('scripts/zones/Selbina/IDs')
+require('scripts/globals/conquest')
+require('scripts/globals/keyitems')
+require('scripts/globals/missions')
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
+require('scripts/globals/zone')
 -----------------------------------
 local zone_object = {}
 

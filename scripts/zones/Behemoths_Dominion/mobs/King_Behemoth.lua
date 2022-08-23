@@ -4,7 +4,6 @@
 -----------------------------------
 local ID = require("scripts/zones/Behemoths_Dominion/IDs")
 mixins = {require("scripts/mixins/rage")}
-require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/titles")
 require("scripts/globals/magic")
@@ -18,11 +17,10 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    if xi.settings.main.LandKingSystem_NQ > 0 or xi.settings.main.LandKingSystem_HQ > 0 then
-        GetNPCByID(ID.npc.BEHEMOTH_QM):setStatus(xi.status.DISAPPEAR)
-    end
-
     mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
+
+    -- Despawn the ???
+    GetNPCByID(ID.npc.BEHEMOTH_QM):setStatus(xi.status.DISAPPEAR)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
@@ -44,26 +42,8 @@ entity.onMobDeath = function(mob, player, isKiller)
 end
 
 entity.onMobDespawn = function(mob)
-    -- Set King_Behemoth's Window Open Time
-    if xi.settings.main.LandKingSystem_HQ ~= 1 then
-        local wait = 72 * 3600
-        SetServerVariable("[POP]King_Behemoth", os.time() + wait) -- 3 days
-        if xi.settings.main.LandKingSystem_HQ == 0 then -- Is time spawn only
-            DisallowRespawn(mob:getID(), true)
-        end
-    end
-
-    -- Set Behemoth's spawnpoint and respawn time (21-24 hours)
-    if xi.settings.main.LandKingSystem_NQ ~= 1 then
-        SetServerVariable("[PH]King_Behemoth", 0)
-        DisallowRespawn(ID.mob.BEHEMOTH, false)
-        UpdateNMSpawnPoint(ID.mob.BEHEMOTH)
-        GetMobByID(ID.mob.BEHEMOTH):setRespawnTime(75600 + math.random(0, 6) * 1800) -- 21 - 24 hours with half hour windows
-    end
     -- Respawn the ???
-    if xi.settings.main.LandKingSystem_HQ == 2 or xi.settings.main.LandKingSystem_NQ == 2 then
-        GetNPCByID(ID.npc.BEHEMOTH_QM):updateNPCHideTime(xi.settings.main.FORCE_SPAWN_QM_RESET_TIME)
-    end
+    GetNPCByID(ID.npc.BEHEMOTH_QM):updateNPCHideTime(xi.settings.main.FORCE_SPAWN_QM_RESET_TIME)
 end
 
 return entity

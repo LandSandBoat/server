@@ -4,10 +4,26 @@
 -- Type: Standard NPC
 -- !pos 62.482 -8.499 -139.836 241
 -----------------------------------
+require("scripts/globals/pathfind")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
+
+local path =
+{
+    62.150, -7.500, -138.060,
+    63.388, -7.500, -144.666, -- TODO: NPC reaches this location changes rotation to 131 for 1 earth second.
+}
+
+entity.onSpawn = function(npc)
+    npc:initNpcAi()
+    npc:setPos(xi.path.first(path))
+end
+
+entity.onPath = function(npc)
+    xi.path.patrol(npc, path)
+end
 
 entity.onTrade = function(player, npc, trade)
 end

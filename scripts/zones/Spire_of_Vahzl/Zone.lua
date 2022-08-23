@@ -1,8 +1,7 @@
 -----------------------------------
 -- Zone: Spire_of_Vahzl (23)
 -----------------------------------
-local ID = require("scripts/zones/Spire_of_Vahzl/IDs")
-require("scripts/globals/missions")
+local ID = require('scripts/zones/Spire_of_Vahzl/IDs')
 -----------------------------------
 local zone_object = {}
 

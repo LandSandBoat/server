@@ -1,12 +1,10 @@
 -----------------------------------
---
 -- Zone: King Ranperres Tomb (190)
---
 -----------------------------------
-local ID = require("scripts/zones/King_Ranperres_Tomb/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/treasure")
-require("scripts/globals/zone")
+local ID = require('scripts/zones/King_Ranperres_Tomb/IDs')
+require('scripts/globals/conquest')
+require('scripts/globals/treasure')
+require('scripts/globals/zone')
 -----------------------------------
 local zone_object = {}
 
@@ -24,9 +22,11 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
+
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(242.012, 5.305, 340.059, 121)
     end
+
     return cs
 end
 

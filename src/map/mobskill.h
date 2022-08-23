@@ -28,11 +28,11 @@
 enum SKILLFLAG
 {
     SKILLFLAG_NONE           = 0x000,
-    SKILLFLAG_TWO_HOUR       = 0x002, // Special skill (ranged attack / call beast)
-    SKILLFLAG_SPECIAL        = 0x004,
-    SKILLFLAG_HIT_ALL        = 0x008,
-    SKILLFLAG_REPLACE_ATTACK = 0x010,
-    SKILLFLAG_DRAW_IN        = 0x020,
+    SKILLFLAG_ASTRAL_FLOW    = 0x002, // Player's Avatar Astral Flow blood pacts. TODO: give player pet skills their own separate enum, move avatar stuff there.
+    SKILLFLAG_NO_TP_COST     = 0x004, // Don't auto deduct TP
+    SKILLFLAG_HIT_ALL        = 0x008, // Strike players even if not in party/alliance
+    // unused                = 0x010,
+    // unused                = 0x020,
     SKILLFLAG_BLOODPACT_RAGE = 0x040,
     SKILLFLAG_BLOODPACT_WARD = 0x080,
 };
@@ -48,12 +48,10 @@ public:
     bool isAoE() const;
     bool isConal() const;
     bool isSingle() const;
-    bool isTwoHour() const;
-    bool isSpecial() const;
+    bool isTpFreeSkill() const;
+    bool isAstralFlow() const;
     bool isBloodPactWard() const;
     bool isBloodPactRage() const;
-    bool isAttackReplacement() const;
-    bool isTpSkill() const;
 
     uint16 getID() const;
     uint16 getAnimationID() const;
