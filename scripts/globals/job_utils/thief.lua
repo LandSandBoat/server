@@ -114,7 +114,7 @@ end
 -- Ability Check Functions
 -----------------------------------
 xi.job_utils.thief.checkAccomplice = function(player, target, ability)
-    if (target == nil or target:getID() == player:getID() or not target:isPC()) then
+    if target == nil or target:getID() == player:getID() or not target:isPC() then
         return xi.msg.basic.CANNOT_ON_THAT_TARG, 0
     else
         return 0, 0
@@ -122,7 +122,7 @@ xi.job_utils.thief.checkAccomplice = function(player, target, ability)
 end
 
 xi.job_utils.thief.checkCollaborator = function(player, target, ability)
-    if (target == nil or target:getID() == player:getID() or not target:isPC()) then
+    if target == nil or target:getID() == player:getID() or not target:isPC() then
         return xi.msg.basic.CANNOT_ON_THAT_TARG, 0
     else
         return 0, 0
@@ -347,7 +347,7 @@ xi.job_utils.thief.useMug = function(player, target, ability, action)
     -- TODO: Need to verify if there's a message associated with this
     local jpValue = player:getJobPointLevel(xi.jp.MUG_EFFECT)
 
-    if (player:getMainJob() == xi.job.THF) then
+    if player:getMainJob() == xi.job.THF then
         thfLevel = player:getMainLvl()
     else
         thfLevel = player:getSubLvl()
@@ -367,24 +367,24 @@ xi.job_utils.thief.useMug = function(player, target, ability, action)
 
     local mugChance = 90 + thfLevel - target:getMainLvl()
 
-    if (target:isMob() and math.random(100) < mugChance and target:getMobMod(xi.mobMod.MUG_GIL) > 0) then
+    if target:isMob() and math.random(100) < mugChance and target:getMobMod(xi.mobMod.MUG_GIL) > 0 then
         local purse = target:getMobMod(xi.mobMod.MUG_GIL)
         local fatpurse = target:getGil()
         gil = fatpurse / (8 + math.random(0, 8))
 
-        if (gil == 0) then
+        if gil == 0 then
             gil = fatpurse / 2
         end
 
-        if (gil == 0) then
+        if gil == 0 then
             gil = fatpurse
         end
 
-        if (gil > purse) then
+        if gil > purse then
             gil = purse
         end
 
-        if (gil <= 0) then
+        if gil <= 0 then
             ability:setMsg(xi.msg.basic.MUG_FAIL)
         else
             gil = gil * (1 + player:getMod(xi.mod.MUG_EFFECT))
@@ -465,9 +465,9 @@ xi.job_utils.thief.useSteal = function(player, target, ability, action)
             TODO: This implementation is currently broken and inaccurate.  20% chance of a second aura being
             stolen per merit.
 
-            if ((effect ~= xi.effect.NONE or stolen ~= 0) and player:getMod(xi.mod.AUGMENTS_AURA_STEAL) > 0) then
-                if (math.random(100) < auraStealChance) then
-                    if (stolenEffect2 ~= nil and math.random(100) < auraStealChance) then
+            if (effect ~= xi.effect.NONE or stolen ~= 0) and player:getMod(xi.mod.AUGMENTS_AURA_STEAL) > 0 then
+                if math.random(100) < auraStealChance then
+                    if stolenEffect2 ~= nil and math.random(100) < auraStealChance then
                         player:stealStatusEffect(target)
                     else
                         target:dispelStatusEffect()
