@@ -886,8 +886,13 @@ m:addOverride("xi.zones.Aht_Urhgan_Whitegate.Zone.onInitialize", function(zone)
         xi.shop.general(player, stock)
 
         if player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OPERATION_TEATIME) == QUEST_COMPLETED then
-            player:PrintToPlayer("If you're looking for artifact gear, just trade me the corresponding materials for each item!", 0, npc:getPacketName())
-        end
+		    if not player:hasItem(15602) then -- Puppetry Churidars
+			    player:npcUtil.giveItem(player, 15602)
+				return
+			else
+			    player:PrintToPlayer("If you're looking for artifact gear, just trade me the corresponding materials for each item!", 0, npc:getPacketName())
+			end
+		end
     end,
     })
 
