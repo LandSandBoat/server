@@ -18,6 +18,7 @@ entity.onMobInitialize = function(mob)
     mob:setDamage(120)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 35)
+    mob:setLocalVar('defaultATT', mob:getMod(xi.mod.ATT))
 end
 
 entity.onMobSpawn = function(mob ,target)
@@ -33,12 +34,11 @@ entity.onMobEngaged = function(mob, target)
 end
 
 entity.onMobFight = function(mob, target)
-    local attack = mob:getMod(xi.mod.ATT)
     -- Appears to gain +10 attack per 1% HP lost
     local hp = mob:getHPP()
     local power = (100 - hp) * 10
 
-    mob:setMod(xi.mod.ATT, attack + power)
+    mob:setMod(xi.mod.ATT, mob:getLocalVar('defaultATT') + power)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
