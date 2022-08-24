@@ -337,9 +337,8 @@ void CItemWeapon::setBaseDelay(uint16 delay)
 
 /************************************************************************
  *                                                                       *
- * get un-adjusted base delay of weapon.                                 *
- *                                                                       *
- * Not intended for use outside of zoneutils/mobutils                    *
+ * get un-adjusted or adjusted base delay of weapon.                     *
+ * Player weapons are unadjusted, "fake" mob/trust weapons are adjusted. *
  *                                                                       *
  ************************************************************************/
 

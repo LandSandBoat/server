@@ -17,6 +17,8 @@ zones[xi.zone.ROLANBERRY_FIELDS_S] =
         CARRIED_OVER_POINTS     = 7001, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER            = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        UNABLE_TO_PROGRESS      = 7047, -- ou are unable to make further progress in Rhapsodies of Vana'diel due to an event occurring in the [Chains of Promathia/Treasures of Aht Urhgan/Wings of the Goddess/Seekers of Adoulin/Rise of the Zilart] missions.
+        NOTHING_HAPPENS         = 7057, -- Nothing happens...
         FISHING_MESSAGE_OFFSET  = 7077, -- You can't fish here.
         VOIDWALKER_DESPAWN      = 7989, -- The monster fades before your eyes, a look of disappointment on its face.
         VOIDWALKER_NO_MOB       = 8044, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
@@ -27,7 +29,7 @@ zones[xi.zone.ROLANBERRY_FIELDS_S] =
         VOIDWALKER_UPGRADE_KI_2 = 8050, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
         VOIDWALKER_BREAK_KI     = 8051, -- The <keyitem> shatters into tiny fragments.
         VOIDWALKER_OBTAIN_KI    = 8052, -- Obtained key item: <keyitem>!
-        COMMON_SENSE_SURVIVAL   = 9257, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        COMMON_SENSE_SURVIVAL   = 9259, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

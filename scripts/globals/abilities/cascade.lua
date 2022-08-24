@@ -5,8 +5,7 @@
 -- Recast Time: 00:01:00
 -- Duration: 0:01:00 or the next spell cast
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
+require("scripts/globals/job_utils/black_mage")
 -----------------------------------
 local ability_object = {}
 
@@ -15,7 +14,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(xi.effect.CASCADE, 4, 0, 60)
+    xi.job_utils.black_mage.useCascade(player, target, ability)
 end
 
 return ability_object

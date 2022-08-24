@@ -50,6 +50,19 @@ enum class EMobDifficulty : uint8
     MAX
 };
 
+// Capacity Bonuses applied based on RoE Completion
+// TODO: Add RoV Completion and Reive bonuses once implemented
+const std::vector<std::pair<uint16, uint8>> roeCapacityBonusRecords = {
+    { 1332, 10 }, // San d'Oria Missions (10%)
+    { 1352, 10 }, // Bastok Missions (10%)
+    { 1372, 10 }, // Windurst Missions (10%)
+    { 1392, 10 }, // Zilart Missions (10%)
+    { 1400, 10 }, // Chains of Promathia Missions (10%)
+    { 1409, 10 }, // Wings of the Goddess Missions (10%)
+    { 1415, 10 }, // Treasures of Aht Urhgan Missions (10%)
+    { 1430, 10 }, // Seekers of Adoulin Missions (10%
+};
+
 namespace charutils
 {
     void LoadExpTable();

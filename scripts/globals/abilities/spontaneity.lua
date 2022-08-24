@@ -5,7 +5,7 @@
 -- Recast Time: 10:00
 -- Duration: 1:00
 -----------------------------------
-require("scripts/globals/status")
+require("scripts/globals/job_utils/red_mage")
 -----------------------------------
 local ability_object = {}
 
@@ -14,7 +14,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    target:addStatusEffect(xi.effect.SPONTANEITY, 1, 0, 60)
+    xi.job_utils.red_mage.useSpontaneity(player, target, ability)
 end
 
 return ability_object

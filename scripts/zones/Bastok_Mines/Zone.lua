@@ -1,13 +1,12 @@
 -----------------------------------
 -- Zone: Bastok_Mines (234)
 -----------------------------------
-local ID = require("scripts/zones/Bastok_Mines/IDs")
-require("scripts/globals/events/harvest_festivals")
-require("scripts/globals/conquest")
-require("scripts/globals/missions")
-require("scripts/globals/settings")
-require("scripts/globals/chocobo")
-require("scripts/globals/zone")
+local ID = require('scripts/zones/Bastok_Mines/IDs')
+require('scripts/globals/events/harvest_festivals')
+require('scripts/globals/conquest')
+require('scripts/globals/settings')
+require('scripts/globals/chocobo')
+require('scripts/globals/zone')
 -----------------------------------
 local zone_object = {}
 

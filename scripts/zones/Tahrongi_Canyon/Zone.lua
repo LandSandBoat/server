@@ -1,16 +1,16 @@
 -----------------------------------
 -- Zone: Tahrongi_Canyon (117)
 -----------------------------------
-local ID = require("scripts/zones/Tahrongi_Canyon/IDs")
-require("scripts/quests/i_can_hear_a_rainbow")
-require("scripts/globals/chocobo_digging")
-require("scripts/globals/conquest")
-require("scripts/globals/missions")
-require("scripts/globals/chocobo")
-require("scripts/globals/world")
-require("scripts/globals/helm")
-require("scripts/globals/zone")
-require("scripts/missions/amk/helpers")
+local ID = require('scripts/zones/Tahrongi_Canyon/IDs')
+require('scripts/quests/i_can_hear_a_rainbow')
+require('scripts/globals/chocobo_digging')
+require('scripts/globals/conquest')
+require('scripts/globals/missions')
+require('scripts/globals/chocobo')
+require('scripts/globals/world')
+require('scripts/globals/helm')
+require('scripts/globals/zone')
+require('scripts/missions/amk/helpers')
 -----------------------------------
 local zone_object = {}
 
@@ -60,7 +60,10 @@ zone_object.onEventFinish = function(player, csid, option)
 end
 
 local function isHabrokWeather(weather)
-    return (weather == xi.weather.DUST_STORM or weather == xi.weather.SAND_STORM or weather == xi.weather.WIND or weather == xi.weather.GALES)
+    return weather == xi.weather.DUST_STORM or
+        weather == xi.weather.SAND_STORM or
+        weather == xi.weather.WIND or
+        weather == xi.weather.GALES
 end
 
 zone_object.onZoneWeatherChange = function(weather)

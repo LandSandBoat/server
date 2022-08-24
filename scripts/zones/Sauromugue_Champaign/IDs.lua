@@ -20,6 +20,7 @@ zones[xi.zone.SAUROMUGUE_CHAMPAIGN] =
         CARRIED_OVER_POINTS      = 7023,  -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY  = 7024,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER             = 7025,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        UNABLE_TO_PROGRESS       = 7069,  -- ou are unable to make further progress in Rhapsodies of Vana'diel due to an event occurring in the [Chains of Promathia/Treasures of Aht Urhgan/Wings of the Goddess/Seekers of Adoulin/Rise of the Zilart] missions.
         CONQUEST_BASE            = 7079,  -- Tallying conquest results...
         MANY_TIGER_BONES         = 7238,  -- There are many tiger bones here...
         OLD_SABERTOOTH_DIALOG_I  = 7244,  -- You hear the distant roar of a tiger. It sounds as if the beast is approaching slowly...
@@ -44,9 +45,9 @@ zones[xi.zone.SAUROMUGUE_CHAMPAIGN] =
         VOIDWALKER_UPGRADE_KI_2  = 11004, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
         VOIDWALKER_BREAK_KI      = 11005, -- The <keyitem> shatters into tiny fragments.
         VOIDWALKER_OBTAIN_KI     = 11006, -- Obtained key item: <keyitem>!
-        LEARNS_SPELL             = 12504, -- <name> learns <spell>!
-        UNCANNY_SENSATION        = 12506, -- You are assaulted by an uncanny sensation.
-        COMMON_SENSE_SURVIVAL    = 12513, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        LEARNS_SPELL             = 12506, -- <name> learns <spell>!
+        UNCANNY_SENSATION        = 12508, -- You are assaulted by an uncanny sensation.
+        COMMON_SENSE_SURVIVAL    = 12515, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

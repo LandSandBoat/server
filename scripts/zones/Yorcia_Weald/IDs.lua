@@ -25,7 +25,7 @@ zones[xi.zone.YORCIA_WEALD] =
         ARTIFACT_HAS_BEEN_CHARGED  = 7551, -- Your artifact has been charged with <number> kinetic unit[/s]. Your current stock of kinetic units totals <number>.
         ARTIFACT_TERMINAL_VOLUME   = 7552, -- Your artifact has been charged to its terminal volume of kinetic units.
         SURPLUS_LOST_TO_AETHER     = 7553, -- A surplus of <number> kinetic unit[/s] has been lost to the aether.
-        HOMEPOINT_SET              = 8720, -- Home point set!
+        HOMEPOINT_SET              = 8723, -- Home point set!
     },
     mob =
     {

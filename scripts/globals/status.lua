@@ -774,7 +774,7 @@ xi.effect =
     NEGATE_VIRUS             = 608,
     NEGATE_CURSE             = 609,
     NEGATE_CHARM             = 610,
-    MAGIC_EVASION_BOOST_II   = 611,
+    MAGIC_EVASION_BOOST      = 611,
     COLURE_ACTIVE            = 612,
     MUMORS_RADIANCE          = 613,
     ULLEGORES_GLOOM          = 614,
@@ -793,6 +793,8 @@ xi.effect =
     MOBILIZATION             = 627,
     HOVER_SHOT               = 628,
     MOOGLE_AMPLIFIER         = 629,
+    TAINT                    = 630,
+    HAUNT                    = 631,
 
     -- Effect icons in packet can go from 0-767, so no custom effects should go in that range.
 

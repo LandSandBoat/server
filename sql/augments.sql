@@ -17,8 +17,9 @@ CREATE TABLE `augments` (
 -- Dumping data for table `augments`
 --
 
--- WARNING: do not comment out augmentId records,zero their modId and values instead.
--- zero is MOD_NONE and should be fine.
+-- WARNING: do not comment out augmentId records, zero their modId and values instead.
+-- Zero is MOD_NONE and should be fine..
+-- The IDs follow the packet not the dat so windower resources and polutils dumps will not match
 INSERT INTO `augments` VALUES (1,0,2,1,0,0); -- HP+1
 INSERT INTO `augments` VALUES (2,0,2,33,0,0); -- HP+33
 INSERT INTO `augments` VALUES (3,0,2,65,0,0); -- HP+65
@@ -84,7 +85,7 @@ INSERT INTO `augments` VALUES (55,100,163,-1,0,0); -- Magic dmg. taken -1%
 INSERT INTO `augments` VALUES (56,100,162,-1,0,0); -- Breath dmg. taken -1%
 INSERT INTO `augments` VALUES (57,0,562,1,0,0); -- Magic crit. hit rate+1%
 INSERT INTO `augments` VALUES (58,0,29,-1,0,0); -- Mag.Def.Bns.-1
-INSERT INTO `augments` VALUES (59,0,0,0,0,0); -- Latent effect: Regain+1 (Do via Latent: triggered with your current weapon drawn for 1 TP/tick.)
+INSERT INTO `augments` VALUES (59,0,0,0,0,0); -- Latent effect: Regain+10 (Do via Latent: triggered with your current weapon drawn for 10 TP/tick.)
 INSERT INTO `augments` VALUES (60,0,0,0,0,0); -- Latent effect: Refresh+1 (Do via Latent: triggered with your current weapon not drawn for 1 MP/tick. Refresh is not present while resting(/heal),chocobo or /sit.)
 INSERT INTO `augments` VALUES (61,0,958,1,0,0); -- Occ. inc. resist to stat ailments+1
 INSERT INTO `augments` VALUES (62,0,25,33,0,0); -- Accuracy+33
@@ -102,8 +103,8 @@ INSERT INTO `augments` VALUES (70,0,28,33,0,0); -- Cont.
 INSERT INTO `augments` VALUES (71,0,160,-100,0,0); -- Damage Taken -1%
 INSERT INTO `augments` VALUES (72,0,0,0,0,0); -- 72 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (73,0,0,0,0,0); -- 73 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
-INSERT INTO `augments` VALUES (74,0,0,0,0,0); -- Cap. Point +1%
-INSERT INTO `augments` VALUES (75,0,0,0,0,0); -- Cap. Point +33%
+INSERT INTO `augments` VALUES (74,0,915,1,0,0); -- Cap. Point +1%
+INSERT INTO `augments` VALUES (75,0,915,33,0,0); -- Cap. Point +33%
 INSERT INTO `augments` VALUES (76,0,0,0,0,0); -- DMG+33 Unsure if main hand or off hand so leaving values blank for now,goes up in increments of 1 after the initial 33.
 INSERT INTO `augments` VALUES (77,0,0,0,0,0); -- Delay -33% Unsure if main hand or off hand so leaving values blank for now,goes up in increments of 1 after the initial 33.
 INSERT INTO `augments` VALUES (78,0,2,2,0,0); -- HP+2 (count by 2)
@@ -1031,7 +1032,7 @@ INSERT INTO `augments` VALUES (828,0,0,0,0,0);
 INSERT INTO `augments` VALUES (829,0,0,0,0,0);
 INSERT INTO `augments` VALUES (830,0,0,0,0,0);
 INSERT INTO `augments` VALUES (831,0,0,0,0,0);
--- NOTICE: additional effect augments will not work until we finish refactoring additional effects. See Teo in discrod for details.
+-- NOTICE: additional effect augments will not work until we finish refactoring additional effects and fill in values here.
 INSERT INTO `augments` VALUES (832,0,0,0,0,0); -- Additional Effect: Fire Dmg      (Base of 5,each additional point +1 for range of 5 to 36)
 INSERT INTO `augments` VALUES (833,0,0,0,0,0); -- Additional Effect: Ice Dmg       (Base of 5,each additional point +1 for range of 5 to 36)
 INSERT INTO `augments` VALUES (834,0,0,0,0,0); -- Additional Effect: Wind Dmg      (Base of 5,each additional point +1 for range of 5 to 36)
@@ -2348,4 +2349,4 @@ INSERT INTO `augments` VALUES (2045,0,0,0,0,0);
 INSERT INTO `augments` VALUES (2046,0,0,0,0,0);
 -- End unused block
 
-INSERT INTO `augments` VALUES (2047,0,0,0,0,0); -- ??? (it literally just says "???") - used by WotG scenario reward
+INSERT INTO `augments` VALUES (2047,0,0,0,0,0); -- ??? (it literally just says "???")

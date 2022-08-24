@@ -10,6 +10,7 @@ zones[xi.zone.OUTER_RAKAZNAR] =
 {
     text =
     {
+        NOTHING_HAPPENS         = 119,  -- Nothing happens...
         ITEM_CANNOT_BE_OBTAINED = 6384, -- You cannot obtain the <item>. Come back after sorting your inventory.
         ITEM_OBTAINED           = 6390, -- Obtained: <item>.
         GIL_OBTAINED            = 6391, -- Obtained <number> gil.
@@ -21,11 +22,10 @@ zones[xi.zone.OUTER_RAKAZNAR] =
         FAINT_ENERGY_WAFTS      = 7013, -- A faint energy wafts up from the ground.
         YOU_HAVE_LEARNED        = 7015, -- You have learned <keyitem>!
         THIS_BAFFLING_GADGET    = 7738, -- This baffling gadget seems to serve as transport to the [lower/higher] floors.
-        NOTHING_HAPPENS         = 7740, -- Nothing happens...
-        HAVE_FOUND_SCALES       = 7901, -- You have found <number> scale[/s].
-        SOOTHING_SIGH_FALLS     = 7902, -- A soothing sigh falls upon your ears. Could you have found the final scale?
-        DOOR_TIGHTLY_SEALED     = 7903, -- The door is tightly sealed.
-        EERIE_GLOW_PENETRATES   = 7904, -- An eerie glow penetrates the darkness.
+        HAVE_FOUND_SCALES       = 7904, -- You have found <number> scale[/s].
+        SOOTHING_SIGH_FALLS     = 7905, -- A soothing sigh falls upon your ears. Could you have found the final scale?
+        DOOR_TIGHTLY_SEALED     = 7906, -- The door is tightly sealed.
+        EERIE_GLOW_PENETRATES   = 7907, -- An eerie glow penetrates the darkness.
     },
     mob =
     {

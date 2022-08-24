@@ -1,7 +1,8 @@
 -----------------------------------
 -- Area: Chocobo_Circuit
---  NPC: Faboise
+-- NPC: Faboise
 -- Standard Info NPC
+-- !pos -270.953 -4.000 -495.218 70
 -----------------------------------
 local entity = {}
 
