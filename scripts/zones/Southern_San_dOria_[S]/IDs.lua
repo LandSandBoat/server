@@ -11,12 +11,14 @@ zones[xi.zone.SOUTHERN_SAN_DORIA_S] =
     text =
     {
         ITEM_CANNOT_BE_OBTAINED  = 6384,  -- You cannot obtain the <item>. Come back after sorting your inventory.
+        CANNOT_OBTAIN_MYSTIC     = 6387,  -- You cannot obtain the <item>. Speak with the mystic retriever after sorting your inventory.
         ITEM_OBTAINED            = 6390,  -- Obtained: <item>.
         GIL_OBTAINED             = 6391,  -- Obtained <number> gil.
         KEYITEM_OBTAINED         = 6393,  -- Obtained key item: <keyitem>.
         CARRIED_OVER_POINTS      = 7001,  -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY  = 7002,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER             = 7003,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        BONDS_STRENGTHENED       = 7046,  -- The bonds tying you to Altana have strengthened, enabling you to experience all the memories of [Rise of the Zilart/Chains of Promathia/Treasures of Aht Urhgan/Wings of the Goddess/Seekers of Adoulin]!
         GATE_IS_LOCKED           = 7103,  -- The gate is locked.
         DONT_HURT_GELTPIX        = 7106,  -- Don't hurt poor Geltpix! Geltpix's just a merchant from Boodlix's Emporium in Jeuno. Kingdom vendors don't like gil, but Boodlix knows true value of new money.
         MOG_LOCKER_OFFSET        = 7373,  -- Your Mog Locker lease is valid until <timestamp>, kupo.
