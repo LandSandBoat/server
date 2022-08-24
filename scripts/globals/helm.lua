@@ -1010,7 +1010,7 @@ local helmInfo =
                     { 30, 1262}, -- chunk_of_dark_ore
                     { 210,  902}, -- Demon Horn
                     { 140,  646}, -- Adaman Ore
-                    {  30,  685}, -- Khroma Ore
+                    { 130,  685}, -- Khroma Ore
                 },
                 points =
                 {
