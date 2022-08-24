@@ -111,6 +111,7 @@ m:addOverride("xi.zones.Port_Jeuno.Zone.onInitialize", function(zone)
 		end,
 
         onTrigger = function(player, npc)
+		    player:PrintToPlayer("Me hungry! Me want snacks! Me eat cursed gear!", 0, npc:getPacketName())
         end,
     })
 
@@ -822,7 +823,6 @@ m:addOverride("xi.zones.Lower_Jeuno.Zone.onInitialize", function(zone)
         utils.unused(expguide)
     })
 
-
 end)
 
 ---------------------------------------------
@@ -887,7 +887,7 @@ m:addOverride("xi.zones.Aht_Urhgan_Whitegate.Zone.onInitialize", function(zone)
 
         if player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.OPERATION_TEATIME) == QUEST_COMPLETED then
 		    if not player:hasItem(15602) then -- Puppetry Churidars
-			    player:npcUtil.giveItem(player, 15602)
+			    npcUtil.giveItem(player, 15602)
 				return
 			else
 			    player:PrintToPlayer("If you're looking for artifact gear, just trade me the corresponding materials for each item!", 0, npc:getPacketName())

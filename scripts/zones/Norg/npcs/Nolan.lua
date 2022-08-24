@@ -305,6 +305,7 @@ entity.onTrade = function(player, npc, trade)
                         if apexArrowAvailable == 1 then				
 						    playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuFive)
                             playerArg:setCharVar("hasApexArrowUnlock", 1)
+							playerArg:setCharVar("Afterglow", 1)
 							playerArg:PrintToPlayer("Congratulations! You have unlocked \"Apex Arrow\"!")
 						else
 						    playerArg:PrintToPlayer("Nolan: Whoa, buddy! You still have some work to do before we can discuss this.", xi.msg.channel.NS_SAY)
@@ -317,6 +318,7 @@ entity.onTrade = function(player, npc, trade)
                         if bladeShunAvailable == 1 then				
 						    playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuFive)
                             playerArg:setCharVar("hasBladeShunUnlock", 1)
+							playerArg:setCharVar("Afterglow", 1)
 							playerArg:PrintToPlayer("Congratulations! You have unlocked \"Blade: Shun\"!")
 						else
 						    playerArg:PrintToPlayer("Nolan: Whoa, buddy! You still have some work to do before we can discuss this.", xi.msg.channel.NS_SAY)
@@ -329,6 +331,7 @@ entity.onTrade = function(player, npc, trade)
                         if entropyAvailable == 1 then				
 						    playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuFive)
                             playerArg:setCharVar("hasEntropyUnlock", 1)
+							playerArg:setCharVar("Afterglow", 1)
 							playerArg:PrintToPlayer("Congratulations! You have unlocked \"Entropy\"!")
 						else
 						    playerArg:PrintToPlayer("Nolan: Whoa, buddy! You still have some work to do before we can discuss this.", xi.msg.channel.NS_SAY)
@@ -341,6 +344,7 @@ entity.onTrade = function(player, npc, trade)
                         if exenteratorAvailable == 1 then				
 						    playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuFive)
                             playerArg:setCharVar("hasExenteratorUnlock", 1)
+							playerArg:setCharVar("Afterglow", 1)
 							playerArg:PrintToPlayer("Congratulations! You have unlocked \"Exenterator\"!")
 						else
 						    playerArg:PrintToPlayer("Nolan: Whoa, buddy! You still have some work to do before we can discuss this.", xi.msg.channel.NS_SAY)
@@ -353,6 +357,7 @@ entity.onTrade = function(player, npc, trade)
                         if lastStandAvailable == 1 then				
 						    playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuFive)
                             playerArg:setCharVar("hasLastStandUnlock", 1)
+							playerArg:setCharVar("Afterglow", 1)
 							playerArg:PrintToPlayer("Congratulations! You have unlocked \"Last Stand\"!")
 						else
 						    playerArg:PrintToPlayer("Nolan: Whoa, buddy! You still have some work to do before we can discuss this.", xi.msg.channel.NS_SAY)
@@ -365,6 +370,7 @@ entity.onTrade = function(player, npc, trade)
                         if realmrazerAvailable == 1 then				
 						    playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuFive)
                             playerArg:setCharVar("hasRealmrazerUnlock", 1)
+							playerArg:setCharVar("Afterglow", 1)
 							playerArg:PrintToPlayer("Congratulations! You have unlocked \"Realmrazer\"!")
 						else
 						    playerArg:PrintToPlayer("Nolan: Whoa, buddy! You still have some work to do before we can discuss this.", xi.msg.channel.NS_SAY)
@@ -405,6 +411,7 @@ entity.onTrade = function(player, npc, trade)
                         if requiescatAvailable == 1 then				
 						    playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuSix)
                             playerArg:setCharVar("hasRequiescatUnlock", 1)
+							playerArg:setCharVar("Afterglow", 1)
 							playerArg:PrintToPlayer("Congratulations! You have unlocked \"Requiescat\"!")
 						else
 						    playerArg:PrintToPlayer("Nolan: Whoa, buddy! You still have some work to do before we can discuss this.", xi.msg.channel.NS_SAY)
@@ -417,6 +424,7 @@ entity.onTrade = function(player, npc, trade)
                         if resolutionAvailable == 1 then				
 						    playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuSix)
                             playerArg:setCharVar("hasResolutionUnlock", 1)
+							playerArg:setCharVar("Afterglow", 1)
 							playerArg:PrintToPlayer("Congratulations! You have unlocked \"Resolution\"!")
 						else
 						    playerArg:PrintToPlayer("Nolan: Whoa, buddy! You still have some work to do before we can discuss this.", xi.msg.channel.NS_SAY)
@@ -429,6 +437,7 @@ entity.onTrade = function(player, npc, trade)
                         if ruinatorAvailable == 1 then				
 						    playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuSix)
                             playerArg:setCharVar("hasRuinatorUnlock", 1)
+							playerArg:setCharVar("Afterglow", 1)
 							playerArg:PrintToPlayer("Congratulations! You have unlocked \"Ruinator\"!")
 						else
 						    playerArg:PrintToPlayer("Nolan: Whoa, buddy! You still have some work to do before we can discuss this.", xi.msg.channel.NS_SAY)
@@ -441,6 +450,7 @@ entity.onTrade = function(player, npc, trade)
                         if shattersoulAvailable == 1 then				
 						    playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuSix)
                             playerArg:setCharVar("hasShattersoulUnlock", 1)
+							playerArg:setCharVar("Afterglow", 1)
 							playerArg:PrintToPlayer("Congratulations! You have unlocked \"Shattersoul\"!")
 						else
 						    playerArg:PrintToPlayer("Nolan: Whoa, buddy! You still have some work to do before we can discuss this.", xi.msg.channel.NS_SAY)
@@ -453,6 +463,7 @@ entity.onTrade = function(player, npc, trade)
                         if shijinSpiralAvailable == 1 then				
 						    playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuSix)
                             playerArg:setCharVar("hasShijinSpiralUnlock", 1)
+							playerArg:setCharVar("Afterglow", 1)
 							playerArg:PrintToPlayer("Congratulations! You have unlocked \"Shijin Spiral\"!")
 						else
 						    playerArg:PrintToPlayer("Nolan: Whoa, buddy! You still have some work to do before we can discuss this.", xi.msg.channel.NS_SAY)
@@ -465,6 +476,7 @@ entity.onTrade = function(player, npc, trade)
                         if stardiverAvailable == 1 then				
 						    playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuSix)
                             playerArg:setCharVar("hasStardiverUnlock", 1)
+							playerArg:setCharVar("Afterglow", 1)
 							playerArg:PrintToPlayer("Congratulations! You have unlocked \"Stardiver\"!")
 						else
 						    playerArg:PrintToPlayer("Nolan: Whoa, buddy! You still have some work to do before we can discuss this.", xi.msg.channel.NS_SAY)
@@ -505,6 +517,7 @@ entity.onTrade = function(player, npc, trade)
                         if tachiShohaAvailable == 1 then				
 						    playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuSeven)
                             playerArg:setCharVar("hasTachiShohaUnlock", 1)
+							playerArg:setCharVar("Afterglow", 1)
 							playerArg:PrintToPlayer("Congratulations! You have unlocked \"Tachi: Shoha\"!")
 						else
 						    playerArg:PrintToPlayer("Nolan: Whoa, buddy! You still have some work to do before we can discuss this.", xi.msg.channel.NS_SAY)
@@ -517,6 +530,7 @@ entity.onTrade = function(player, npc, trade)
                         if upheavalAvailable == 1 then				
 						    playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuSeven)
                             playerArg:setCharVar("hasUpheavalUnlock", 1)
+							playerArg:setCharVar("Afterglow", 1)
 							playerArg:PrintToPlayer("Congratulations! You have unlocked \"Upheaval\"!")
 						else
 						    playerArg:PrintToPlayer("Nolan: Whoa, buddy! You still have some work to do before we can discuss this.", xi.msg.channel.NS_SAY)
