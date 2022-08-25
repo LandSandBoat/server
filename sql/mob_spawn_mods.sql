@@ -626,6 +626,23 @@ INSERT INTO `mob_spawn_mods` VALUES (16912468,71,2,1);
 INSERT INTO `mob_spawn_mods` VALUES (16912545,71,2,1);
 INSERT INTO `mob_spawn_mods` VALUES (16912548,71,2,1);
 
+-- Ul'xzomit mother roam mods
+INSERT INTO `mob_spawn_mods` VALUES (16912394,31,25,1);
+INSERT INTO `mob_spawn_mods` VALUES (16912409,31,25,1);
+INSERT INTO `mob_spawn_mods` VALUES (16912422,31,25,1);
+INSERT INTO `mob_spawn_mods` VALUES (16912426,31,25,1);
+INSERT INTO `mob_spawn_mods` VALUES (16912429,31,25,1);
+INSERT INTO `mob_spawn_mods` VALUES (16912432,31,25,1);
+INSERT INTO `mob_spawn_mods` VALUES (16912435,31,25,1);
+INSERT INTO `mob_spawn_mods` VALUES (16912443,31,25,1);
+INSERT INTO `mob_spawn_mods` VALUES (16912446,31,25,1);
+INSERT INTO `mob_spawn_mods` VALUES (16912449,31,25,1);
+INSERT INTO `mob_spawn_mods` VALUES (16912452,31,25,1);
+INSERT INTO `mob_spawn_mods` VALUES (16912455,31,25,1);
+INSERT INTO `mob_spawn_mods` VALUES (16912468,31,25,1);
+INSERT INTO `mob_spawn_mods` VALUES (16912545,31,25,1);
+INSERT INTO `mob_spawn_mods` VALUES (16912548,31,25,1);
+
 /*!40000 ALTER TABLE `mob_spawn_mods` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
