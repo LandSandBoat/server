@@ -93,6 +93,7 @@ function xi.follow.clearFollowers(leader)
         end
         
         follower:removeListener("FOLLOW_ROAM_ACTION")
+        followerOptions[followerId] = nil
     end
 
     leaderToFollowersMap[leaderId] = nil
@@ -154,6 +155,7 @@ function xi.follow.onMobRoamAction(follower)
 
     if not follower:isSpawned() or not leader or not leader:isSpawned() or leader:getZoneID() ~= follower:getZoneID() then
         xi.follow.stopFollowing(follower)
+        return
     end
 
     if follower:isFollowingPath() then return end
