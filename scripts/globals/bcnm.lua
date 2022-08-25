@@ -595,7 +595,7 @@ local function checkReqs(player, npc, bfid, registrant)
         [ 196] = function() return ( mjob == xi.job.DRG and mlvl >= 66                                                                                                     ) end, -- Quest: Shattering Stars (DRG LB5)
         [ 224] = function() return ( player:hasKeyItem(xi.ki.MOON_BAUBLE)                                                                                                  ) end, -- Quest: The Moonlit Path
         [ 225] = function() return ( windy == mi.windurst.MOON_READING and natStat == 2                                                                                    ) end, -- Windy 9-2: Moon Reading
-        [ 256] = function() return ( roz == mi.zilart.RETURN_TO_DELKFUTTS_TOWER and rozStat == 3                                                                           ) end, -- ZM8: Return to Delkfutt's Tower
+        [ 256] = function() return ( roz == mi.zilart.RETURN_TO_DELKFUTTS_TOWER and rozStat == 2                                                                           ) end, -- ZM8: Return to Delkfutt's Tower
         [ 288] = function() return ( roz == mi.zilart.ARK_ANGELS and rozStat == 1 and npcid == getEntranceOffset(0) and not player:hasKeyItem(xi.ki.SHARD_OF_APATHY)       ) end, -- ZM14: Ark Angels (Hume)
         [ 289] = function() return ( roz == mi.zilart.ARK_ANGELS and rozStat == 1 and npcid == getEntranceOffset(1) and not player:hasKeyItem(xi.ki.SHARD_OF_COWARDICE)    ) end, -- ZM14: Ark Angels (Tarutaru)
         [ 290] = function() return ( roz == mi.zilart.ARK_ANGELS and rozStat == 1 and npcid == getEntranceOffset(2) and not player:hasKeyItem(xi.ki.SHARD_OF_ENVY)         ) end, -- ZM14: Ark Angels (Mithra)
