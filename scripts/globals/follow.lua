@@ -16,6 +16,7 @@ local followerOptions = {}
 
 local addFollower
 local removeFollower
+local onMobRoamAction
 
 --- Change one mob's roaming behavior to persistently follow a target.
 -- Will be reset when the mob or target despawns. A variety of options are available to configure the follow behavior.
@@ -56,7 +57,7 @@ function addFollower(leader, follower, options)
     table.insert(leaderToFollowersMap[leaderId], follower)
     followerToLeaderMap[followerId] = leader
 
-    follower:addListener("ROAM_ACTION", "FOLLOW_ROAM_ACTION", xi.follow.onMobRoamAction)
+    follower:addListener("ROAM_ACTION", "FOLLOW_ROAM_ACTION", onMobRoamAction)
     follower:setRoamFlags(xi.roamFlag.SCRIPT)
     follower:setMobMod(xi.mobMod.ROAM_COOL, options.roamCooldown)
     followerOptions[followerId] = options
@@ -149,7 +150,7 @@ local function filterFollowersToPosArray(leaderPos, followerPos, followers, with
     return filteredPos
 end
 
-function xi.follow.onMobRoamAction(follower)
+function onMobRoamAction(follower)
     local followerId = follower:getID()
     local leader = followerToLeaderMap[followerId]
 

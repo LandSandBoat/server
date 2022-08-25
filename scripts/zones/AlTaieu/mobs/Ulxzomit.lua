@@ -27,8 +27,9 @@ entity.onMobSpawn = function(mob)
                 follower:setSpawn(newX, newY, newZ, r)
                 follower:spawn()
                 follower:setMobFlags(1153, followerId)
-                xi.follow.follow(follower, mob)
             end
+            
+            xi.follow.follow(follower, mob)
         end
     end
 end
@@ -66,8 +67,6 @@ entity.onMobRoamAction = function(mob)
     if mob:isFollowingPath() then
         return
     end
-
-    xi.follow.onMobRoamAction(mob)
 end
 
 return entity
