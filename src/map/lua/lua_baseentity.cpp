@@ -1596,8 +1596,12 @@ void CLuaBaseEntity::lookAt(sol::object const& arg0, sol::object const& arg1, so
         point.z = position["z"];
     }
 
-    m_PBaseEntity->loc.p.rotation = worldAngle(m_PBaseEntity->loc.p, point);
-    m_PBaseEntity->updatemask |= UPDATE_POS;
+    // Avoid unpredictable results if we're too close.
+    if (!distanceWithin(m_PBaseEntity->loc.p, point, 0.1f, true))
+    {
+        m_PBaseEntity->loc.p.rotation = worldAngle(m_PBaseEntity->loc.p, point);
+        m_PBaseEntity->updatemask |= UPDATE_POS;
+    }
 }
 
 /************************************************************************
@@ -1625,27 +1629,25 @@ bool CLuaBaseEntity::atPoint(sol::variadic_args va)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
 
-    float posX = 0;
-    float posY = 0;
-    float posZ = 0;
+    position_t pos;
 
     if (va.get_type(0) == sol::type::number)
     {
-        posX = va.get<float>(0);
-        posY = va.get<float>(1);
-        posZ = va.get<float>(2);
+        pos.x = va.get<float>(0);
+        pos.y = va.get<float>(1);
+        pos.z = va.get<float>(2);
     }
     else if (va.get_type(0) == sol::type::table)
     {
         auto table = va.get<sol::table>(0);
         auto vec   = table.as<std::vector<float>>();
 
-        posX = vec[0];
-        posY = vec[1];
-        posZ = vec[2];
+        pos.x = vec[0];
+        pos.y = vec[1];
+        pos.z = vec[2];
     }
 
-    return m_PBaseEntity->loc.p.x == posX && m_PBaseEntity->loc.p.y == posY && m_PBaseEntity->loc.p.z == posZ;
+    return distanceWithin(m_PBaseEntity->loc.p, pos, 0.01f);
 }
 
 /************************************************************************
@@ -2229,6 +2231,7 @@ void CLuaBaseEntity::sendEmote(CLuaBaseEntity* target, uint8 emID, uint8 emMode)
  *  Example : player:worldAngle(target)
  *  Notes   : Target is... 0: east; 64: south; 128: west, 192: north
  *            Default angle is 255-based mob rotation value - NOT a 360 angle
+ *            CAREFUL! If the entities are too close, this can return unexpected results.
  ************************************************************************/
 
 int16 CLuaBaseEntity::getWorldAngle(sol::variadic_args va)
@@ -2277,6 +2280,7 @@ int16 CLuaBaseEntity::getWorldAngle(sol::variadic_args va)
  *            Returned angle is 255-based rotation value - NOT a 360 angle
  *            Return value is signed to indicate this shortest turn direction.
  *            Negative: counter-clockwise (left), Positive: clockwise (right)
+ *            CAREFUL! If the entities are too close, this can return unxpected results.
  ************************************************************************/
 
 int16 CLuaBaseEntity::getFacingAngle(CLuaBaseEntity const* target)

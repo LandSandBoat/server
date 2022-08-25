@@ -89,15 +89,15 @@ bool bin2hex(char* output, unsigned char* input, size_t count)
     return true;
 }
 
-float distance(const position_t& A, const position_t& B)
+float distance(const position_t& A, const position_t& B, bool ignoreVertical)
 {
-    return sqrt(distanceSquared(A, B));
+    return sqrt(distanceSquared(A, B, ignoreVertical));
 }
 
-float distanceSquared(const position_t& A, const position_t& B)
+float distanceSquared(const position_t& A, const position_t& B, bool ignoreVertical)
 {
     float diff_x = A.x - B.x;
-    float diff_y = A.y - B.y;
+    float diff_y = ignoreVertical ? 0 : A.y - B.y;
     float diff_z = A.z - B.z;
     return diff_x * diff_x + diff_y * diff_y + diff_z * diff_z;
 }
@@ -158,7 +158,7 @@ uint8 worldAngle(const position_t& A, const position_t& B)
 {
     uint8 angle = (uint8)(atanf((B.z - A.z) / (B.x - A.x)) * -(128.0f / M_PI));
 
-    return (A.x > B.x ? angle + 128 : angle);
+    return distanceWithin(A, B, 0.1f, true) ? A.rotation : (A.x > B.x ? angle + 128 : angle);
 }
 
 uint8 relativeAngle(uint8 world, int16 diff)
@@ -212,6 +212,11 @@ bool beside(const position_t& A, const position_t& B, uint8 coneAngle)
     uint8 facingDiff = abs(facingAngle(B, A));
     uint8 halfAngle  = static_cast<uint8>(coneAngle / 2);
     return (facingDiff > 64 - halfAngle) && (facingDiff < 64 + halfAngle);
+}
+
+bool distanceWithin(const position_t& A, const position_t& B, float within, bool ignoreVertical)
+{
+    return distanceSquared(A, B, ignoreVertical) <= within * within;
 }
 
 /**
