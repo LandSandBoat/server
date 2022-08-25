@@ -1948,7 +1948,11 @@ INSERT INTO `mob_skill_lists` VALUES ('Cogitator',413,1242); -- empty cutter
 INSERT INTO `mob_skill_lists` VALUES ('Cogitator',413,1243); -- trinary tap
 INSERT INTO `mob_skill_lists` VALUES ('Cogitator',413,1251); -- trinary tap
 INSERT INTO `mob_skill_lists` VALUES ('Cogitator',413,1252); -- shadow spread
--- 414 to 429: free
+-- 414 to 428:
+INSERT INTO `mob_skill_lists` VALUES ('Orcish_Onager',429,635); -- Burst
+INSERT INTO `mob_skill_lists` VALUES ('Orcish_Onager',429,636); -- Flame Arrow
+INSERT INTO `mob_skill_lists` VALUES ('Orcish_Onager',429,637); -- Fire bomb
+INSERT INTO `mob_skill_lists` VALUES ('Orcish_Onager',429,638); -- Blast Bomb
 INSERT INTO `mob_skill_lists` VALUES ('Automaton_Assault',430,49); -- Power Slash
 INSERT INTO `mob_skill_lists` VALUES ('Automaton_Assault',430,50); -- Frostbite
 INSERT INTO `mob_skill_lists` VALUES ('Automaton_Assault',430,51); -- Freezebite
