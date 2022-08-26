@@ -1,8 +1,7 @@
 -----------------------------------
 -- Area: Beadeaux (254)
---  Mob: Zircon Quadav
--- Notes: PH for Zo'Khu Blackcloud
---  Bowl of Quadav Stew is a guaranteed steal with
+--  Mob: Silver Quadav
+-- Notes: Bowl of Quadav Stew is a guaranteed steal with
 --  Quest THE_TENSHODO_SHOWDOWN active
 -----------------------------------
 local ID = require("scripts/zones/Beadeaux/IDs")
@@ -24,7 +23,6 @@ entity.onMobDeath = function(mob, player, isKiller)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, ID.mob.ZO_KHU_BLACKCLOUD_PH, 10, math.random(3600, 18000)) -- 1 to 5 hours
 end
 
 return entity
