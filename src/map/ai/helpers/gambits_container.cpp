@@ -280,14 +280,14 @@ namespace gambits
                     auto* mob = POwner->GetBattleTarget();
                     if (mob != nullptr)
                     {
-                        //clang-format off
+                        // clang-format off
                         static_cast<CCharEntity*>(POwner->PMaster)->ForParty([&](CBattleEntity* PMember) {
                             if (PMember->isDead())
                             {
                                 target = PMember;
                             }
                         });
-                        //clang-format on
+                        // clang-format on
                     }
                 }
                 else if (gambit.predicates[0].target == G_TARGET::TANK)
