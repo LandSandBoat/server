@@ -7,7 +7,7 @@
 
 require("scripts/globals/zone")
 
-mazeMongersLootPool = {
+local mazeMongersLootPool = {
 	-- Weapons
 	17964, -- Barkborer
 	19113, -- Ermine's Tail
@@ -28,7 +28,8 @@ mazeMongersLootPool = {
 	16250, -- Mamool Ja Mantle
 }
 
-local mazeMongersDrop = math.random(#mazeMongersLootPool)
+--local mazeMongersDrop = mazeMongersLootPool[math.random(#mazeMongersLootPool)]
+local mazeMongersDrop = utils.randomEntry(mazeMongersLootPool)
 
 xi = xi or {}
 xi.casket_loot = xi.casket_loot or {}

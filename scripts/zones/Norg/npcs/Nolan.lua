@@ -3,563 +3,463 @@
 --  NPC: Nolan
 -- Escha Beads Exchange NPC
 -----------------------------------
+require("scripts/globals/npc_util")
+require("scripts/globals/weaponskillids")
 local ID = require("scripts/zones/Norg/IDs")
 -----------------------------------
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-    -- Set item cost here.
-    local itemCostMenuOne   =    250
-	local itemCostMenuTwo   =   7500
-    local itemCostMenuThree =  15000
-    local itemCostMenuFour  =  25000
-    local itemCostMenuFive  =  50000
-    local itemCostMenuSix   =  50000
-    local itemCostMenuSeven =  50000
+local wsTable = 
+{
+-- index           varName
+    [2]  = { "hasShijinSpiralUnlock", },
+    [3]  = { "hasExenteratorUnlock",  },
+    [4]  = { "hasRequiescatUnlock",   },
+    [5]  = { "hasResolutionUnlock",   },
+    [6]  = { "hasRuinatorUnlock",     },
+    [7]  = { "hasUpheavalUnlock",     },
+    [8]  = { "hasEntropyUnlock",      },
+    [9]  = { "hasStardiverUnlock",    },
+    [10] = { "hasBladeShunUnlock",    },
+    [11] = { "hasTachiShohaUnlock",   },
+    [12] = { "hasRealmrazerUnlock",   },
+    [13] = { "hasShattersoulUnlock",  },
+    [14] = { "hasApexArrowUnlock",    },
+    [15] = { "hasLastStandUnlock",    }, 
+}
 
-    -- Player beads balance.
+local unlockWs = function(player, npc, ws)
+    local paidWs       = player:getCharVar("PaidForMeritWs")
     local beadsBalance = player:getCurrency("escha_beads")
+    local wsCost       = 50000
 
-    -- Inventory check.
-    if player:getFreeSlotsCount() == 0 then
-        player:PrintToPlayer("Please come back after sorting your inventory.")
-        return
-    end
+    local menu =
+    {
+        title = string.format("Spend %i points? (%i available)", wsCost, beadsBalance),
+        onStart = function(playerArg)
+        end,
 
-    -- Set up for weaponskill unlocks from Atori-Tutori (Ru'Lude Gardens)
-    if player:getCharVar("PaidForMeritWs") == 2 then shijinSpiralAvailable = 1
-	elseif player:getCharVar("PaidForMeritWs") == 3 then exenteratorAvailable = 1
-	elseif player:getCharVar("PaidForMeritWs") == 4 then requiescatAvailable = 1
-	elseif player:getCharVar("PaidForMeritWs") == 5 then resolutionAvailable = 1
-	elseif player:getCharVar("PaidForMeritWs") == 6 then ruinatorAvailable = 1
-	elseif player:getCharVar("PaidForMeritWs") == 7 then upheavalAvailable = 1
-	elseif player:getCharVar("PaidForMeritWs") == 8 then entropyAvailable = 1
-	elseif player:getCharVar("PaidForMeritWs") == 9 then stardiverAvailable = 1
-	elseif player:getCharVar("PaidForMeritWs") == 10 then bladeShunAvailable = 1
-	elseif player:getCharVar("PaidForMeritWs") == 11 then tachiShohaAvailable = 1
-	elseif player:getCharVar("PaidForMeritWs") == 12 then realmrazerAvailable = 1
-	elseif player:getCharVar("PaidForMeritWs") == 13 then shattersoulAvailable = 1
-	elseif player:getCharVar("PaidForMeritWs") == 14 then apexArrowAvailable = 1
-	elseif player:getCharVar("PaidForMeritWs") == 15 then lastStandAvailable = 1
-	end
-	
-    -- Print Beads balance
-    player:PrintToPlayer(string.format("You have %s escha beads available to spend. Choose wisely.", beadsBalance), 0xD)
-
-    -- Menu 1
-    if
-        npcUtil.tradeHasExactly(trade, {{ 'gil', 1 }}) and
-        beadsBalance >= itemCostMenuOne
-    then            
-        local menu =
+        options =
         {
-            title = "Consumables:",
-
-            onStart = function(playerArg)
-                -- NOTE: This could be used to lock the player in place
-                -- playerArg:PrintToPlayer("Test Menu Opening", xi.msg.channel.NS_SAY)
-            end,
-
-            options =
             {
-                {
-                    "Pearlscale (grants Elvorseal)",
-                    function(playerArg)
-                        player:setCurrency("escha_beads", beadsBalance - itemCostMenuOne)
-                        playerArg:addItem(5714)
-                        playerArg:messageSpecial(ID.text.ITEM_OBTAINED, 5714)
-                        playerArg:PrintToPlayer("Nolan: Pleasure doing business with you!", xi.msg.channel.NS_SAY)
-                    end,
-                },
+                "Yes, I'm sure!",
+                function(playerArg)
+                    player:timer(100, function(playerArg)
+                        if beadsBalance >= wsCost and ws == paidWs then
+                            player:setCurrency("escha_beads", beadsBalance - wsCost)
+                            player:setCharVar("PaidForMeritWs", 0)
+                            player:setCharVar("Afterglow", 1)
+                            player:setCharVar(wsTable[ws][1], 1)
+                            player:PrintToPlayer("\129\153\129\154 Congratulations! You've unlocked a new Weaponskill! \129\154\129\153\n", 0, npc:getPacketName())                
+                        else
+                            if ws > 15 or ws < 2 then
+                                player:PrintToPlayer("DEBUG: Incorrect value for variable `ws`. Please contact an administrator.", 0, npc:getPacketName()) -- This message should NEVER trigger.
+                            elseif beadsBalance < wsCost then
+                                player:PrintToPlayer("You do not possess enough beads to complete this transaction.", 0, npc:getPacketName())
+                            else
+                                player:PrintToPlayer("You do not meet the requirements to unlock this weaponskill.", 0, npc:getPacketName())
+                            end
+                        end
+                    end)
+                end,
             },
-
-            onCancelled = function(playerArg)
-            end,
-            
-            onEnd = function(playerArg)
-                playerArg:PrintToPlayer("Nolan: See you again!", xi.msg.channel.NS_SAY)
-            end,
-        }
-
-        player:customMenu(menu)    
-
-	-- Menu 2
-    elseif
-        npcUtil.tradeHasExactly(trade, {{ 'gil', 2 }}) and
-        beadsBalance >= itemCostMenuTwo
-    then            
-        local menu =
-        {
-            title = "Basic items:",
-
-            onStart = function(playerArg)
-                -- NOTE: This could be used to lock the player in place
-                -- playerArg:PrintToPlayer("Test Menu Opening", xi.msg.channel.NS_SAY)
-            end,
-
-            options =
             {
-                {
-                    "Teleport ring: Holla",
-                    function(playerArg)
-                        player:setCurrency("escha_beads", beadsBalance - itemCostMenuTwo)
-                        player:addItem(14661)
-                        playerArg:PrintToPlayer("Here's your Craftmaster's ring. Thanks for being a loyal player, we appreciate you!", xi.msg.channel.NS_SAY)
-                    end,
-                },
-                {
-                    "Teleport ring: Mea",
-                    function(playerArg)                         
-                        playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuTwo)
-                        playerArg:addItem(14663)
-                        playerArg:messageSpecial(ID.text.ITEM_OBTAINED, 14663)
-                        playerArg:PrintToPlayer("Nolan: Pleasure doing business with you!", xi.msg.channel.NS_SAY)
-                    end,
-                },
-                {
-                    "Teleport ring: Dem",
-                    function(playerArg)     
-                        playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuTwo)
-                        playerArg:addItem(14662)
-                        playerArg:messageSpecial(ID.text.ITEM_OBTAINED, 14662)
-                        playerArg:PrintToPlayer("Nolan: Pleasure doing business with you!", xi.msg.channel.NS_SAY)
-                    end,
-                },
+                "No, I change my mind.",
+                function(playerArg)
+                    return
+                end,
             },
-
-            onCancelled = function(playerArg)
-            end,
-            
-            onEnd = function(playerArg)
-                playerArg:PrintToPlayer("Nolan: See you again!", xi.msg.channel.NS_SAY)
-            end,
-        }
+        },
         
+        onCancelled = function(playerArg)
+        end,
+        
+        onEnd = function(playerArg)
+        end,
+    }
+    
+    player:timer(150, function(playerArg)
         player:customMenu(menu)
+    end)
+end
 
-    -- Menu 3
-    elseif
-        npcUtil.tradeHasExactly(trade, {{ 'gil', 3 }}) and
-        beadsBalance >= itemCostMenuThree
-    then
-        local menu =
+local completeTransaction = function(player, npc, item, cost)
+    local beadsBalance = player:getCurrency("escha_beads")
+    local paidForWs    = player:getCharVar("PaidForMeritWs")
+    
+    local confirmMenu  = 
+    {
+        title = string.format("Spend %i points? (%i available)", cost, beadsBalance),
+        onStart = function(playerArg)
+        end,
+
+        options =
         {
-            title = "Equipment:",
-
-            onStart = function(playerArg)
-                -- NOTE: This could be used to lock the player in place
-                -- playerArg:PrintToPlayer("Test Menu Opening", xi.msg.channel.NS_SAY)
-            end,
-
-            options =
             {
-                {
-                    "Emico mantle",
-                    function(playerArg)
-                        playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuThree)
-                        playerArg:addItem(27597)
-                        playerArg:messageSpecial(ID.text.ITEM_OBTAINED, 27597)
-                        playerArg:PrintToPlayer("Nolan: Pleasure doing business with you!", xi.msg.channel.NS_SAY)
-                    end,
-                },
-                {
-                    "Crested torque",
-                    function(playerArg)                         
-                        playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuThree)
-                        playerArg:addItem(28349)
-                        playerArg:messageSpecial(ID.text.ITEM_OBTAINED, 28349)
-                        playerArg:PrintToPlayer("Nolan: Pleasure doing business with you!", xi.msg.channel.NS_SAY)
-                    end,
-                },
-                {
-                    "Setae ring",
-                    function(playerArg)     
-                        playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuThree)
-                        playerArg:addItem(28529)
-                        playerArg:messageSpecial(ID.text.ITEM_OBTAINED, 28529)
-                        playerArg:PrintToPlayer("Nolan: Pleasure doing business with you!", xi.msg.channel.NS_SAY)
-                    end,
-                },
-                {
-                    "Megasco earring",
-                    function(playerArg)     
-                        playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuThree)
-                        playerArg:addItem(28488)
-                        playerArg:messageSpecial(ID.text.ITEM_OBTAINED, 28488)
-                        playerArg:PrintToPlayer("Nolan: Pleasure doing business with you!", xi.msg.channel.NS_SAY)
-                    end,
-                },
-                {
-                    "Salire belt",
-                    function(playerArg)     
-                        playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuThree)
-                        playerArg:addItem(28425)
-                        playerArg:messageSpecial(ID.text.ITEM_OBTAINED, 28425)
-                        playerArg:PrintToPlayer("Nolan: Pleasure doing business with you!", xi.msg.channel.NS_SAY)
-                    end,
-                },
-                {
-                    "Charitoni Sling",
-                    function(playerArg)     
-                        playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuThree)
-                        playerArg:addItem(21347)
-                        playerArg:messageSpecial(ID.text.ITEM_OBTAINED, 21347)
-                        playerArg:PrintToPlayer("Nolan: Pleasure doing business with you!", xi.msg.channel.NS_SAY)
-                    end,
-                },
-                {
-                    "Dew silk cape",
-                    function(playerArg)     
-                        playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuThree)
-                        playerArg:addItem(27598)
-                        playerArg:messageSpecial(ID.text.ITEM_OBTAINED, 27598)
-                        playerArg:PrintToPlayer("Nolan: Pleasure doing business with you!", xi.msg.channel.NS_SAY)
-                    end,
-                },
-                {
-                    "Adsilio boots",
-                    function(playerArg)     
-                        playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuThree)
-                        playerArg:addItem(28271)
-                        playerArg:messageSpecial(ID.text.ITEM_OBTAINED, 28271)
-                        playerArg:PrintToPlayer("Nolan: Pleasure doing business with you!", xi.msg.channel.NS_SAY)
-                    end,
-                },
+                "Yes, I'm sure!",
+                function(playerArg)
+                    print(item)
+                    if beadsBalance >= cost and item ~= nil then
+                        if npcUtil.giveItem(player, item) then
+                            player:setCurrency("escha_beads", beadsBalance - cost)
+                        else
+                            player:PrintToPlayer("You do not meet the requirements to obtain this item.", 0, npc:getPacketName())
+                        end
+                    end
+                end,
             },
-
-            onCancelled = function(playerArg)
-            end,
-
-            onEnd = function(playerArg)
-                playerArg:PrintToPlayer("Nolan: See you again!", xi.msg.channel.NS_SAY)
-            end,
-        }
-
-        player:customMenu(menu)
-
-    -- Menu 4
-    elseif
-        npcUtil.tradeHasExactly(trade, {{ 'gil', 4 }}) and
-        beadsBalance >= itemCostMenuFour
-    then        
-        local menu =
-        {
-            title = "Equipment +1:",
-
-            onStart = function(playerArg)
-                -- NOTE: This could be used to lock the player in place
-                -- playerArg:PrintToPlayer("Test Menu Opening", xi.msg.channel.NS_SAY)
-            end,
-
-            options =
             {
-                {
-                    "Dew Silk Cape +1",
-                    function(playerArg)
-                        playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuFour)
-                        playerArg:addItem(27599)
-                        playerArg:messageSpecial(ID.text.ITEM_OBTAINED, 27599)
-                        playerArg:PrintToPlayer("Nolan: Pleasure doing business with you!", xi.msg.channel.NS_SAY)
-                    end,
-                },
-                {
-                    "Adsilio Boots +1",
-                    function(playerArg)                         
-                        playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuFour)
-                        playerArg:addItem(28272)
-                        playerArg:messageSpecial(ID.text.ITEM_OBTAINED, 28272)
-                        playerArg:PrintToPlayer("Nolan: Pleasure doing business with you!", xi.msg.channel.NS_SAY)
-                    end,
-                },
+                "No, I change my mind.",
+                function(playerArg)
+                    return
+                end,
             },
+        },
+        
+        onCancelled = function(playerArg)
+        end,
 
-            onCancelled = function(playerArg)
-            end,
+        onEnd = function(playerArg)
+        end,
+    }
+    
+    player:customMenu(confirmMenu)            
+end
 
-            onEnd = function(playerArg)
-                playerArg:PrintToPlayer("Nolan: See you again!", xi.msg.channel.NS_SAY)
-            end,
-        }
-
-        player:customMenu(menu)
- 
-    -- Menu 5
-    elseif 
-        npcUtil.tradeHasExactly(trade, {{ 'gil', 5 }}) and
-        beadsBalance >= itemCostMenuFive
-    then
-        local menu =
-        {
-            title = "Weaponskills (pg. 1):",
-
-            onStart = function(playerArg)
-                -- NOTE: This could be used to lock the player in place
-                -- playerArg:PrintToPlayer("Test Menu Opening", xi.msg.channel.NS_SAY)
-            end,
-
-            options =
-            {
-                {
-                    "Apex Arrow (Bow)",
-                    function(playerArg)
-                        if apexArrowAvailable == 1 then				
-						    playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuFive)
-                            playerArg:setCharVar("hasApexArrowUnlock", 1)
-							playerArg:setCharVar("Afterglow", 1)
-							playerArg:PrintToPlayer("Congratulations! You have unlocked \"Apex Arrow\"!")
-						else
-						    playerArg:PrintToPlayer("Nolan: Whoa, buddy! You still have some work to do before we can discuss this.", xi.msg.channel.NS_SAY)
-						end
-                    end,
-                },
-                {
-                    "Blade: Shun (Katana)",
-                    function(playerArg)                         
-                        if bladeShunAvailable == 1 then				
-						    playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuFive)
-                            playerArg:setCharVar("hasBladeShunUnlock", 1)
-							playerArg:setCharVar("Afterglow", 1)
-							playerArg:PrintToPlayer("Congratulations! You have unlocked \"Blade: Shun\"!")
-						else
-						    playerArg:PrintToPlayer("Nolan: Whoa, buddy! You still have some work to do before we can discuss this.", xi.msg.channel.NS_SAY)
-						end
-                    end,
-                },
-                {
-                    "Entropy (Scythe)",
-                    function(playerArg)     
-                        if entropyAvailable == 1 then				
-						    playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuFive)
-                            playerArg:setCharVar("hasEntropyUnlock", 1)
-							playerArg:setCharVar("Afterglow", 1)
-							playerArg:PrintToPlayer("Congratulations! You have unlocked \"Entropy\"!")
-						else
-						    playerArg:PrintToPlayer("Nolan: Whoa, buddy! You still have some work to do before we can discuss this.", xi.msg.channel.NS_SAY)
-						end
-                    end,
-                },
-                {
-                    "Exenterator (Dagger)",
-                    function(playerArg)                         
-                        if exenteratorAvailable == 1 then				
-						    playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuFive)
-                            playerArg:setCharVar("hasExenteratorUnlock", 1)
-							playerArg:setCharVar("Afterglow", 1)
-							playerArg:PrintToPlayer("Congratulations! You have unlocked \"Exenterator\"!")
-						else
-						    playerArg:PrintToPlayer("Nolan: Whoa, buddy! You still have some work to do before we can discuss this.", xi.msg.channel.NS_SAY)
-						end
-                    end,
-                },
-                {
-                    "Last Stand (Gun)",
-                    function(playerArg)                         
-                        if lastStandAvailable == 1 then				
-						    playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuFive)
-                            playerArg:setCharVar("hasLastStandUnlock", 1)
-							playerArg:setCharVar("Afterglow", 1)
-							playerArg:PrintToPlayer("Congratulations! You have unlocked \"Last Stand\"!")
-						else
-						    playerArg:PrintToPlayer("Nolan: Whoa, buddy! You still have some work to do before we can discuss this.", xi.msg.channel.NS_SAY)
-						end
-                    end,
-                },
-                {
-                    "Realmrazer (Club)",
-                    function(playerArg)                         
-                        if realmrazerAvailable == 1 then				
-						    playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuFive)
-                            playerArg:setCharVar("hasRealmrazerUnlock", 1)
-							playerArg:setCharVar("Afterglow", 1)
-							playerArg:PrintToPlayer("Congratulations! You have unlocked \"Realmrazer\"!")
-						else
-						    playerArg:PrintToPlayer("Nolan: Whoa, buddy! You still have some work to do before we can discuss this.", xi.msg.channel.NS_SAY)
-						end
-                    end,
-                },
-            },
-
-            onCancelled = function(playerArg)
-            end,
-
-            onEnd = function(playerArg)
-                playerArg:PrintToPlayer("Nolan: See you again!", xi.msg.channel.NS_SAY)
-            end,
-        }
-
-        player:customMenu(menu)
-
-    -- Menu 6            
-    elseif
-        npcUtil.tradeHasExactly(trade, {{ 'gil', 6 }}) and
-        beadsBalance >= itemCostMenuSix
-    then
-        local menu =
-        {
-            title = "Weaponskills (pg. 2):",
-
-            onStart = function(playerArg)
-                -- NOTE: This could be used to lock the player in place
-                -- playerArg:PrintToPlayer("Test Menu Opening", xi.msg.channel.NS_SAY)
-            end,
-
-            options =
-            {
-                {
-                    "Requiescat (Sword)",
-                    function(playerArg)                         
-                        if requiescatAvailable == 1 then				
-						    playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuSix)
-                            playerArg:setCharVar("hasRequiescatUnlock", 1)
-							playerArg:setCharVar("Afterglow", 1)
-							playerArg:PrintToPlayer("Congratulations! You have unlocked \"Requiescat\"!")
-						else
-						    playerArg:PrintToPlayer("Nolan: Whoa, buddy! You still have some work to do before we can discuss this.", xi.msg.channel.NS_SAY)
-						end
-                    end,
-                },
-                {
-                    "Resolution (Great Sword)",
-                    function(playerArg)                         
-                        if resolutionAvailable == 1 then				
-						    playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuSix)
-                            playerArg:setCharVar("hasResolutionUnlock", 1)
-							playerArg:setCharVar("Afterglow", 1)
-							playerArg:PrintToPlayer("Congratulations! You have unlocked \"Resolution\"!")
-						else
-						    playerArg:PrintToPlayer("Nolan: Whoa, buddy! You still have some work to do before we can discuss this.", xi.msg.channel.NS_SAY)
-						end
-                    end,
-                },
-                {
-                    "Ruinator (Axe)",
-                    function(playerArg)                         
-                        if ruinatorAvailable == 1 then				
-						    playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuSix)
-                            playerArg:setCharVar("hasRuinatorUnlock", 1)
-							playerArg:setCharVar("Afterglow", 1)
-							playerArg:PrintToPlayer("Congratulations! You have unlocked \"Ruinator\"!")
-						else
-						    playerArg:PrintToPlayer("Nolan: Whoa, buddy! You still have some work to do before we can discuss this.", xi.msg.channel.NS_SAY)
-						end
-                    end,
-                },
-                {
-                    "Shattersoul (Staff)",
-                    function(playerArg)                         
-                        if shattersoulAvailable == 1 then				
-						    playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuSix)
-                            playerArg:setCharVar("hasShattersoulUnlock", 1)
-							playerArg:setCharVar("Afterglow", 1)
-							playerArg:PrintToPlayer("Congratulations! You have unlocked \"Shattersoul\"!")
-						else
-						    playerArg:PrintToPlayer("Nolan: Whoa, buddy! You still have some work to do before we can discuss this.", xi.msg.channel.NS_SAY)
-						end
-                    end,
-                },
-                {
-                    "Shijin Spiral: (H2H)",
-                    function(playerArg)                         
-                        if shijinSpiralAvailable == 1 then				
-						    playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuSix)
-                            playerArg:setCharVar("hasShijinSpiralUnlock", 1)
-							playerArg:setCharVar("Afterglow", 1)
-							playerArg:PrintToPlayer("Congratulations! You have unlocked \"Shijin Spiral\"!")
-						else
-						    playerArg:PrintToPlayer("Nolan: Whoa, buddy! You still have some work to do before we can discuss this.", xi.msg.channel.NS_SAY)
-						end
-                    end,
-                },
-                {
-                    "Stardiver (Polearm)",
-                    function(playerArg)                         
-                        if stardiverAvailable == 1 then				
-						    playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuSix)
-                            playerArg:setCharVar("hasStardiverUnlock", 1)
-							playerArg:setCharVar("Afterglow", 1)
-							playerArg:PrintToPlayer("Congratulations! You have unlocked \"Stardiver\"!")
-						else
-						    playerArg:PrintToPlayer("Nolan: Whoa, buddy! You still have some work to do before we can discuss this.", xi.msg.channel.NS_SAY)
-						end
-                    end,
-                },
-            },
-
-            onCancelled = function(playerArg)
-            end,
-
-            onEnd = function(playerArg)
-                playerArg:PrintToPlayer("Nolan: See you again!", xi.msg.channel.NS_SAY)
-            end,
-        }
-
-        player:customMenu(menu)         
-
-    -- Menu 7            
-    elseif
-        npcUtil.tradeHasExactly(trade, {{ 'gil', 7 }}) and
-        beadsBalance >= itemCostMenuSeven
-    then
-        local menu =
-        {
-            title = "Weaponskills (pg. 3):",
-
-            onStart = function(playerArg)
-                -- NOTE: This could be used to lock the player in place
-                -- playerArg:PrintToPlayer("Test Menu Opening", xi.msg.channel.NS_SAY)
-            end,
-
-            options =
-            {
-                {
-                    "Tachi: Shoha (Great Katana)",
-                    function(playerArg)                         
-                        if tachiShohaAvailable == 1 then				
-						    playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuSeven)
-                            playerArg:setCharVar("hasTachiShohaUnlock", 1)
-							playerArg:setCharVar("Afterglow", 1)
-							playerArg:PrintToPlayer("Congratulations! You have unlocked \"Tachi: Shoha\"!")
-						else
-						    playerArg:PrintToPlayer("Nolan: Whoa, buddy! You still have some work to do before we can discuss this.", xi.msg.channel.NS_SAY)
-						end
-                    end,
-                },
-                {
-                    "Upheaval (Great Axe)",
-                    function(playerArg)                         
-                        if upheavalAvailable == 1 then				
-						    playerArg:setCurrency("escha_beads", beadsBalance - itemCostMenuSeven)
-                            playerArg:setCharVar("hasUpheavalUnlock", 1)
-							playerArg:setCharVar("Afterglow", 1)
-							playerArg:PrintToPlayer("Congratulations! You have unlocked \"Upheaval\"!")
-						else
-						    playerArg:PrintToPlayer("Nolan: Whoa, buddy! You still have some work to do before we can discuss this.", xi.msg.channel.NS_SAY)
-						end
-                    end,
-                },
-            },
-
-            onCancelled = function(playerArg)
-            end,
-
-            onEnd = function(playerArg)
-                playerArg:PrintToPlayer("Nolan: See you again!", xi.msg.channel.NS_SAY)
-            end,
-        }
-
-        player:customMenu(menu)
-    end
+entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
     local beadsBalance = player:getCurrency("escha_beads")
+    local item         = 0
 
-    player:PrintToPlayer("Greetings adventurer! I'll be happy to exchange your escha beads for various equipment and unlocks.", 0xD)
-    player:PrintToPlayer("Trade me the requested gil amount and I will present you with the corresponding menu!", 0xD)
-    player:PrintToPlayer("1. Consumables (250), 2. Basic items (7,500), 3. Equipment (15,000), 4. Equipment +1 (25,000)", 28)
-    player:PrintToPlayer("5. Weaponskills (page. 1), 6. Weaponskills (page 2), 7. Weaponskills (page 3)", 28)
-    player:PrintToPlayer("All weaponskills cost 50,000 escha beads!", 28)
-    player:PrintToPlayer(string.format("You have %s escha beads available to spend. Choose wisely.", beadsBalance), 0xD)
+    -- Forward declarations (required)
+    local menu  = {}
+    local page1 = {}
+    local page2 = {}
+    local page3 = {}
+    local page4 = {}
+    local page5 = {}
+    local page6 = {}
+    local page7 = {}
+    
+    local delaySendMenu = function(player)
+        player:timer(100, function(playerArg)
+            playerArg:customMenu(menu)
+        end)
+    end
+
+    -- Print Beads balance
+    player:PrintToPlayer(string.format("You have %s escha beads available to spend. Choose wisely.", beadsBalance), 0, npc:getPacketName())
+    
+    menu =
+    {
+        title = "Choose a reward",
+        options = {},
+    }
+    
+    page1 =
+    {
+        {
+            "Pearlscale (grants Elvorseal)",
+            function(playerArg)
+                player:timer(50, function(playerArg)
+                    item = 5714
+                    cost = 250
+                    completeTransaction(player, npc, item, cost)
+                end)
+            end,
+        },
+        {
+            "Next Page",
+            function(playerArg)
+                menu.options = page2
+                delaySendMenu(playerArg)
+            end,
+        },        
+    }
+    
+    page2 =
+    {
+        {
+            "Teleport ring: Holla",
+            function(playerArg)
+                player:timer(50, function(playerArg)
+                    item = 14661
+                    cost = 5000
+                    completeTransaction(player, npc, item, cost)
+                end)
+            end,
+        },
+        {
+            "Teleport ring: Mea",
+            function(playerArg)
+                player:timer(50, function(playerArg)
+                    item = 14662
+                    cost = 5000
+                    completeTransaction(player, npc, item, cost)
+                end)
+            end,
+        },
+        {
+            "Teleport ring: Dem",
+            function(playerArg)
+                player:timer(50, function(playerArg)
+                    item = 14663
+                    cost = 5000
+                    completeTransaction(player, npc, item, cost)
+                end)
+            end,
+        },
+        {
+            "Next Page",
+            function(playerArg)
+                menu.options = page3
+                delaySendMenu(playerArg)
+            end,
+        },        
+    }
+    
+    page3 =
+    {
+        {
+            "Emico mantle",
+            function(playerArg)
+                player:timer(50, function(playerArg)
+                    item = 27597
+                    cost = 10000
+                    completeTransaction(player, npc, item, cost)
+                end)
+            end,
+        },
+        {
+            "Crested torque",
+            function(playerArg)
+                player:timer(50, function(playerArg)
+                    item = 28349
+                    cost = 10000
+                    completeTransaction(player, npc, item, cost)
+                end)
+            end,
+        },
+        {
+            "Setae ring",
+            function(playerArg)
+                player:timer(50, function(playerArg)
+                    item = 28529
+                    cost = 10000
+                    completeTransaction(player, npc, item, cost)
+                end)
+            end,
+        },
+        {
+            "Megasco earring",
+            function(playerArg)
+                player:timer(50, function(playerArg)
+                    item = 28488
+                    cost = 10000
+                    completeTransaction(player, npc, item, cost)
+                end)
+            end,
+        },
+        {
+            "Salire belt",
+            function(playerArg)
+                player:timer(50, function(playerArg)
+                    item = 28425
+                    cost = 10000
+                    completeTransaction(player, npc, item, cost)
+                end)
+            end,
+        },
+        {
+            "Charitoni Sling",
+            function(playerArg)
+                player:timer(50, function(playerArg)
+                    item = 21347
+                    cost = 10000
+                    completeTransaction(player, npc, item, cost)
+                end)
+            end,
+        },
+        {
+            "Next Page",
+            function(playerArg)
+                menu.options = page4
+                delaySendMenu(playerArg)
+            end,
+        },        
+    }
+    
+    page4 =
+    {
+        {
+            "Dew silk cape",
+            function(playerArg)
+                player:timer(50, function(playerArg)
+                    item = 27598
+                    cost = 10000
+                    completeTransaction(player, npc, item, cost)
+                end)
+            end,
+        },
+        {
+            "Adsilio boots",
+            function(playerArg)
+                player:timer(50, function(playerArg)
+                    item = 28271
+                    cost = 10000
+                    completeTransaction(player, npc, item, cost)
+                end)
+            end,
+        },
+        {
+            "Dew silk cape +1",
+            function(playerArg)
+                player:timer(50, function(playerArg)
+                    item = 27599
+                    cost = 15000
+                    completeTransaction(player, npc, item, cost)
+                end)
+            end,
+        },
+        {
+            "Adsilio boots +1",
+            function(playerArg)
+                player:timer(50, function(playerArg)
+                    item = 28272
+                    cost = 15000
+                    completeTransaction(player, npc, item, cost)
+                end)
+            end,
+        },
+        {
+            "Next Page",
+            function(playerArg)
+                menu.options = page5
+                delaySendMenu(playerArg)
+            end,
+        },        
+    }
+    
+    page5 =
+    {
+        {
+            "Apex Arrow (Bow)",
+            function(playerArg)
+               unlockWs(player, npc, 14)
+            end,
+        },
+        {
+            "Blade: Shun (Katana)",
+            function(playerArg)                         
+                unlockWs(player, npc, 10)
+            end,
+        },
+        {
+            "Entropy (Scythe)",
+            function(playerArg)     
+                unlockWs(player, npc, 8)
+            end,
+        },
+        {
+            "Exenterator (Dagger)",
+            function(playerArg)                         
+                unlockWs(player, npc, 3)
+            end,
+        },
+        {
+            "Last Stand (Gun)",
+            function(playerArg)                         
+                unlockWs(player, npc, 15)
+            end,
+        },
+        {
+            "Realmrazer (Club)",
+            function(playerArg)                         
+                unlockWs(player, npc, 12)
+            end,
+        },
+        {
+            "Next Page",
+            function(playerArg)
+                menu.options = page6
+                delaySendMenu(playerArg)
+            end,
+        },        
+    }
+    
+    page6 =
+    {
+        {
+            "Requiescat (Sword)",
+            function(playerArg)                         
+                unlockWs(player, npc, 4)
+            end,
+        },
+        {
+            "Resolution (Great Sword)",
+            function(playerArg)                         
+                unlockWs(player, npc, 5)
+            end,
+        },
+        {
+            "Ruinator (Axe)",
+            function(playerArg)                         
+                unlockWs(player, npc, 6)
+            end,
+        },
+        {
+            "Shattersoul (Staff)",
+            function(playerArg)                         
+                unlockWs(player, npc, 13)
+            end,
+        },
+        {
+            "Shijin Spiral (H2H)",
+            function(playerArg) 
+                unlockWs(player, npc, 2)            
+            end,
+        },
+        {
+            "Stardiver (Pole)",
+            function(playerArg)                         
+                unlockWs(player, npc, 9)
+            end,
+        },
+        {
+            "Next Page",
+            function(playerArg)
+                menu.options = page7
+                delaySendMenu(playerArg)
+            end,
+        },        
+    }
+    
+    page7 =
+    {
+        {
+            "Tachi: Shoha (Great Katana)",
+            function(playerArg)                         
+                unlockWs(player, npc, 11)
+            end,
+        },
+        {
+            "Upheaval (Great Axe)",
+            function(playerArg)                         
+                unlockWs(player, npc, 7)
+            end,
+        },
+        {
+            "Exit",
+            function(playerArg)
+                return
+            end,
+        },        
+    }
+    
+    menu.options = page1
+    delaySendMenu(player)
 end
 
 entity.onEventUpdate = function(player, csid, option)
