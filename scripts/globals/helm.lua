@@ -61,7 +61,7 @@ local helmInfo =
                     { 470, 1845}, -- Red Moko Grass
                     { 430, 1524}, -- Fresh Mugwort
                     { 240,  951}, -- Wijnruit
-                    { 120, 4273}, -- Kitron					
+                    { 120, 4273}, -- Kitron
                 },
                 points =
                 {
@@ -923,7 +923,7 @@ local helmInfo =
                     { 30, 1259}, -- chunk_of_lightning_ore
                     { 30, 1260}, -- chunk_of_water_ore
                     { 30, 1261}, -- chunk_of_light_ore
-                    { 30, 1262}, -- chunk_of_dark_ore					
+                    { 30, 1262}, -- chunk_of_dark_ore
                     {  80,  645}, -- Darksteel Ore
                     {  80,  644}, -- Mythril Ore
                     {  70,  737}, -- Gold Ore
@@ -1063,7 +1063,7 @@ local helmInfo =
                     { 30, 1259}, -- chunk_of_lightning_ore
                     { 30, 1260}, -- chunk_of_water_ore
                     { 30, 1261}, -- chunk_of_light_ore
-                    { 30, 1262}, -- chunk_of_dark_ore					
+                    { 30, 1262}, -- chunk_of_dark_ore
                 },
                 points =
                 {
