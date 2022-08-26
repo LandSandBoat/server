@@ -11,6 +11,7 @@ zone_object.onInitialize = function(zone)
 end
 
 zone_object.onConquestUpdate = function(zone, updatetype)
+    zone:registerRegion(1, -61.164, -1.725, -33.673, -55.521, -1.332, -18.122)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
@@ -25,6 +26,9 @@ zone_object.onZoneIn = function(player, prevZone)
 end
 
 zone_object.onRegionEnter = function(player, region)
+    if GetMobByID(ID.mob.FAFNIR):isEngaged() or GetMobByID(ID.mob.NIDHOGG):isEngaged() then
+        player:setPos(-60.183, -1.121, -37.731)
+    end
 end
 
 zone_object.onEventUpdate = function(player, csid, option)
