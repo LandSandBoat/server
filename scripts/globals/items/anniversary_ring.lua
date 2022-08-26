@@ -8,6 +8,7 @@
 -- Max bonus: 10000 exp
 -----------------------------------
 require("scripts/globals/status")
+require("scripts/globals/item_utils")
 -----------------------------------
 local item_object = {}
 
@@ -20,7 +21,12 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.DEDICATION, 100, 0, 43200, 0, 10000)
+    local effect    = xi.effect.DEDICATION
+    local power     = 100
+    local duration  = 43200
+    local subpower  = 10000
+
+    xi.item_utils.addItemExpEffect(target, effect, power, duration, subpower)
 end
 
 return item_object

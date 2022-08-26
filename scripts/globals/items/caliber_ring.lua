@@ -1,11 +1,11 @@
 -----------------------------------
--- ID: 28528
--- Item: Undecennial Ring
+-- ID: 26164
+-- Item: caliber ring
 -- Experience point bonus
 -----------------------------------
--- Bonus: +100%
+-- Bonus: +150%
 -- Duration: 720 min
--- Max bonus: 11111 exp
+-- Max bonus: 30000 exp
 -----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/item_utils")
@@ -22,9 +22,9 @@ end
 
 item_object.onItemUse = function(target)
     local effect    = xi.effect.DEDICATION
-    local power     = 100
+    local power     = 150
     local duration  = 43200
-    local subpower  = 11111
+    local subpower  = 30000
 
     xi.item_utils.addItemExpEffect(target, effect, power, duration, subpower)
 end

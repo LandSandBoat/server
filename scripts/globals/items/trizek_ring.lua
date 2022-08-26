@@ -1,11 +1,11 @@
 -----------------------------------
--- ID: 28528
--- Item: Undecennial Ring
--- Experience point bonus
+-- ID: 27557
+-- Item: trizek ring
+-- Capacity point bonus
 -----------------------------------
--- Bonus: +100%
+-- Bonus: +150%
 -- Duration: 720 min
--- Max bonus: 11111 exp
+-- Max bonus: 30000 exp
 -----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/item_utils")
@@ -14,17 +14,17 @@ local item_object = {}
 
 item_object.onItemCheck = function(target)
     local result = 0
-    if target:hasStatusEffect(xi.effect.DEDICATION) then
+    if target:hasStatusEffect(xi.effect.COMMITMENT) then
         result = 56
     end
     return result
 end
 
 item_object.onItemUse = function(target)
-    local effect    = xi.effect.DEDICATION
-    local power     = 100
+    local effect    = xi.effect.COMMITMENT
+    local power     = 150
     local duration  = 43200
-    local subpower  = 11111
+    local subpower  = 30000
 
     xi.item_utils.addItemExpEffect(target, effect, power, duration, subpower)
 end
