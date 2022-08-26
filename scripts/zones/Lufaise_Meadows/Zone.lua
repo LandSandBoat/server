@@ -1,14 +1,14 @@
 -----------------------------------
 -- Zone: Lufaise_Meadows (24)
 -----------------------------------
-local ID = require("scripts/zones/Lufaise_Meadows/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/items")
-require("scripts/globals/keyitems")
-require("scripts/globals/missions")
-require("scripts/globals/npc_util")
-require("scripts/globals/titles")
-require("scripts/globals/helm")
+local ID = require('scripts/zones/Lufaise_Meadows/IDs')
+require('scripts/globals/conquest')
+require('scripts/globals/items')
+require('scripts/globals/keyitems')
+require('scripts/globals/missions')
+require('scripts/globals/npc_util')
+require('scripts/globals/titles')
+require('scripts/globals/helm')
 -----------------------------------
 local zone_object = {}
 
@@ -41,6 +41,7 @@ end
 
 zone_object.onRegionEnter = function(player, region)
     local regionID = region:GetRegionID()
+
     if regionID == 1 and player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and player:getCharVar("PromathiaStatus") == 6 then
         player:startEvent(116)
     end

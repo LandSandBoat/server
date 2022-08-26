@@ -1,12 +1,12 @@
 -----------------------------------
 -- Zone: Windurst_Woods (241)
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Woods/IDs")
-require("scripts/globals/events/harvest_festivals")
-require("scripts/globals/conquest")
-require("scripts/globals/settings")
-require("scripts/globals/chocobo")
-require("scripts/globals/zone")
+local ID = require('scripts/zones/Windurst_Woods/IDs')
+require('scripts/globals/events/harvest_festivals')
+require('scripts/globals/conquest')
+require('scripts/globals/settings')
+require('scripts/globals/chocobo')
+require('scripts/globals/zone')
 -----------------------------------
 local zone_object = {}
 
@@ -24,6 +24,7 @@ zone_object.onZoneIn = function(player, prevZone)
         if xi.settings.main.NEW_CHARACTER_CUTSCENE == 1 then
             cs = 367
         end
+
         player:setPos(0, 0, -50, 0)
         player:setHomePoint()
     end

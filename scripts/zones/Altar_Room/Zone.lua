@@ -1,14 +1,12 @@
 -----------------------------------
---
 -- Zone: Altar_Room (152)
---
 -----------------------------------
-local ID = require("scripts/zones/Altar_Room/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/quests")
-require("scripts/globals/keyitems")
-require("scripts/globals/npc_util")
-require("scripts/globals/zone")
+local ID = require('scripts/zones/Altar_Room/IDs')
+require('scripts/globals/conquest')
+require('scripts/globals/quests')
+require('scripts/globals/keyitems')
+require('scripts/globals/npc_util')
+require('scripts/globals/zone')
 -----------------------------------
 local zone_object = {}
 
@@ -29,9 +27,11 @@ zone_object.onZoneIn = function(player, prevZone)
     elseif player:getCharVar("moral") == 8 and head == 15216 then -- Tsoo Headgear
         cs = 51
     end
+
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(-247.998, 12.609, -100.008, 128)
     end
+
     return cs
 end
 

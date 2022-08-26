@@ -132,9 +132,13 @@ xi.settings.map =
     -- Enable/disable skill-ups from bloodpacts
     SKILLUP_BLOODPACT = true,
 
-    -- Adjust rate of TP gain for mobs, and players. Acts as a multiplier, so default is 1.
+    -- Adjust rate of TP gain for mobs, pets (includes charmed pets), fellows, trusts and players.
+    -- Acts as a multiplier, so default is 1.
     MOB_TP_MULTIPLIER    = 1.0,
+    PET_TP_MULTIPLIER    = 1.0,
     PLAYER_TP_MULTIPLIER = 1.0,
+    TRUST_TP_MULTIPLIER  = 1.0,
+    FELLOW_TP_MULTIPLIER = 1.0,
 
     -- Adjust max HP pool for NMs, regular mobs, players, and trusts/fellows. Acts as a multiplier, so default is 1.
     NM_HP_MULTIPLIER        = 1.0,
@@ -239,4 +243,7 @@ xi.settings.map =
     --  Gobbie Mystery Box settings
     DAILY_TALLY_AMOUNT = 10,
     DAILY_TALLY_LIMIT  = 50000,
+    
+    -- Enable/disable keeping jug pets through zoning
+    KEEP_JUGPET_THROUGH_ZONING = false,
 }

@@ -2,7 +2,6 @@
 -- Welt
 -----------------------------------
 require("scripts/globals/job_utils/summoner")
-
 -----------------------------------
 local ability_object = {}
 
@@ -18,13 +17,14 @@ ability_object.onPetAbility = function(target, pet, petskill)
 
     local totaldamage = 0
 
-    xi.job_utils.onUseBloodPact(pet:getMaster(), pet, target, petskill)
+    xi.job_utils.summoner.onUseBloodPact(pet:getMaster(), pet, target, petskill)
 
-    local damage = xi.summon.avatarPhysicalMove(pet, target, petskill, numhits, accmod, dmgmod, 0, xi.mobskills.magicalTpBonus.NO_EFFECT, 1, 2, 3)
-
+    local damage = xi.summon.avatarPhysicalMove(pet, target, petskill, numhits, accmod, dmgmod, 0, xi.mobskills.physicalTpBonus.CRIT_VARIES, 1, 1, 1)
     totaldamage = xi.summon.avatarFinalAdjustments(damage.dmg, pet, petskill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, numhits)
 
-    target:takeDamage(totaldamage, pet, xi.attackType.PHYSICAL, xi.damageType.PIERCING)
+    xi.job_utils.summoner.calculateTPReturn(pet, target, totaldamage, damage.hitslanded)
+
+    target:takeDamage(totaldamage, pet, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
     target:updateEnmityFromDamage(pet, totaldamage)
 
     return totaldamage
