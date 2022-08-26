@@ -511,25 +511,25 @@ UPDATE mob_groups SET content_tag='WOTG' WHERE name='Hyakume' AND groupid='31' A
 -- Bostaunieux_Oubliette (Zone 167)
 -- ------------------------------------------------------------
 
-UPDATE mob_groups SET minLevel='55',maxLevel='59' WHERE name='Blind_Bat' AND groupid='14' AND zoneid='167';
-UPDATE mob_groups SET minLevel='60',maxLevel='68' WHERE name='Panna_Cotta' AND groupid='15' AND zoneid='167';
-UPDATE mob_groups SET minLevel='68',maxLevel='70' WHERE name='Nachtmahr' AND groupid='16' AND zoneid='167';
-UPDATE mob_groups SET minLevel='64',maxLevel='66' WHERE name='Dabilla' AND groupid='17' AND zoneid='167';
-UPDATE mob_groups SET minLevel='69',maxLevel='74' WHERE name='Wurdalak' AND groupid='18' AND zoneid='167';
+UPDATE mob_groups SET minLevel='55',maxLevel='59' WHERE name='Blind_Bat' AND groupid='15' AND zoneid='167';
+UPDATE mob_groups SET minLevel='60',maxLevel='68' WHERE name='Panna_Cotta' AND groupid='16' AND zoneid='167';
+UPDATE mob_groups SET minLevel='68',maxLevel='70' WHERE name='Nachtmahr' AND groupid='17' AND zoneid='167';
+UPDATE mob_groups SET minLevel='64',maxLevel='66' WHERE name='Dabilla' AND groupid='18' AND zoneid='167';
+UPDATE mob_groups SET minLevel='69',maxLevel='74' WHERE name='Wurdalak' AND groupid='19' AND zoneid='167';
 
 -- ------------------------------------------------------------
 -- Toraimarai_Canal (Zone 169)
 -- ------------------------------------------------------------
 
-UPDATE mob_groups SET minLevel='57',maxLevel='59' WHERE name='Blackwater_Pugil' AND groupid='21' AND zoneid='169';
-UPDATE mob_groups SET minLevel='60',maxLevel='62' WHERE name='Plunderer_Crab' AND groupid='22' AND zoneid='169';
-UPDATE mob_groups SET minLevel='58',maxLevel='60' WHERE name='Deviling_Bats' AND groupid='25' AND zoneid='169';
-UPDATE mob_groups SET minLevel='65',maxLevel='67' WHERE name='Sodden_Bones' AND groupid='26' AND zoneid='169';
-UPDATE mob_groups SET minLevel='65',maxLevel='67' WHERE name='Drowned_Bones' AND groupid='27' AND zoneid='169';
-UPDATE mob_groups SET minLevel='65',maxLevel='67' WHERE name='Starborer' AND groupid='28' AND zoneid='169';
-UPDATE mob_groups SET minLevel='65',maxLevel='67' WHERE name='Rapier_Scorpion' AND groupid='29' AND zoneid='169';
-UPDATE mob_groups SET minLevel='66',maxLevel='69' WHERE name='Poroggo_Excavator' AND groupid='32' AND zoneid='169';
-UPDATE mob_groups SET minLevel='64',maxLevel='67' WHERE name='Flume_Toad' AND groupid='33' AND zoneid='169';
+UPDATE mob_groups SET minLevel='57',maxLevel='59' WHERE name='Blackwater_Pugil' AND groupid='24' AND zoneid='169';
+UPDATE mob_groups SET minLevel='60',maxLevel='62' WHERE name='Plunderer_Crab' AND groupid='25' AND zoneid='169';
+UPDATE mob_groups SET minLevel='58',maxLevel='60' WHERE name='Deviling_Bats' AND groupid='28' AND zoneid='169';
+UPDATE mob_groups SET minLevel='65',maxLevel='67' WHERE name='Sodden_Bones' AND groupid='29' AND zoneid='169';
+UPDATE mob_groups SET minLevel='65',maxLevel='67' WHERE name='Drowned_Bones' AND groupid='30' AND zoneid='169';
+UPDATE mob_groups SET minLevel='65',maxLevel='67' WHERE name='Starborer' AND groupid='31' AND zoneid='169';
+UPDATE mob_groups SET minLevel='65',maxLevel='67' WHERE name='Rapier_Scorpion' AND groupid='32' AND zoneid='169';
+UPDATE mob_groups SET minLevel='66',maxLevel='69' WHERE name='Poroggo_Excavator' AND groupid='35' AND zoneid='169';
+UPDATE mob_groups SET minLevel='64',maxLevel='67' WHERE name='Flume_Toad' AND groupid='36' AND zoneid='169';
 UPDATE mob_groups SET content_tag='SYNERGY' WHERE name='Canal_Moocher' AND groupid='21' AND zoneid='169';
 UPDATE mob_groups SET content_tag='SYNERGY' WHERE name='Konjac' AND groupid='27' AND zoneid='169';
 
@@ -549,6 +549,13 @@ UPDATE mob_groups SET minLevel='3',maxLevel='6' WHERE name='Veindigger_Leech' AN
 UPDATE mob_groups SET minLevel='29',maxLevel='32' WHERE name='Lacerator' AND groupid='18' AND zoneid='173';
 UPDATE mob_groups SET minLevel='28',maxLevel='31' WHERE name='Spool_Leech' AND groupid='19' AND zoneid='173';
 UPDATE mob_groups SET content_tag='WOTG' WHERE name='Thoon' AND groupid='27' AND zoneid='173';
+
+-- ------------------------------------------------------------
+-- Kuftal_Tunnel (Zone 174)
+-- ------------------------------------------------------------
+
+UPDATE mob_groups SET minLevel='68',maxLevel='71' WHERE name='Kuftal_Delver' AND groupid='22' AND zoneid='174';
+UPDATE mob_groups SET minLevel='67',maxLevel='72' WHERE name='Machairodus' AND groupid='19' AND zoneid='174';
 
 -- ------------------------------------------------------------
 -- Lower_Delkfutts_Tower (Zone 184)
@@ -686,5 +693,19 @@ UPDATE mob_groups SET minLevel='51',maxLevel='54' WHERE name='Balayang' AND grou
 UPDATE mob_groups SET content_tag='WOTG' WHERE name='Mind_Hoarder' AND groupid='11' AND zoneid='204';
 UPDATE mob_groups SET content_tag='WOTG' WHERE name='Sluagh' AND groupid='5' AND zoneid='204';
 UPDATE mob_groups SET content_tag='SYNERGY' WHERE name='Jenglot' AND groupid='7' AND zoneid='204';
+
+-- ------------------------------------------------------------
+-- Gustav_Tunnel (Zone 212)
+-- ------------------------------------------------------------
+
+UPDATE mob_groups SET spawntype='128' WHERE name='Boulder_Eater' AND groupid='31' AND zoneid='212';
+UPDATE mob_groups SET spawntype='128' WHERE name='Pygmytoise' AND groupid='32' AND zoneid='212';
+
+-- ------------------------------------------------------------
+-- Labyrinth_of_Onzozo (Zone 213)
+-- ------------------------------------------------------------
+
+UPDATE mob_groups SET minLevel='65',maxLevel='69' WHERE name='Babaulas' AND groupid='31' AND zoneid='213';
+UPDATE mob_groups SET minLevel='65',maxLevel='69' WHERE name='Boribaba' AND groupid='32' AND zoneid='213';
 
 UNLOCK TABLES;
