@@ -108,6 +108,20 @@ namespace gambits
             {
                 return CheckTrigger(POwner->PMaster, predicate);
             }
+            else if (predicate.target == G_TARGET::PARTY_DEAD)
+            {
+                auto result = false;
+                // clang-format off
+                static_cast<CCharEntity*>(POwner->PMaster)->ForPartyWithTrusts([&](CBattleEntity* PMember)
+                {
+                    if (PMember->isDead())
+                    {
+                        result = true;
+                    }
+                });
+                // clang-format on
+                return result;
+            }
             else if (predicate.target == G_TARGET::TANK)
             {
                 auto result = false;
@@ -260,6 +274,21 @@ namespace gambits
                 else if (gambit.predicates[0].target == G_TARGET::MASTER)
                 {
                     target = POwner->PMaster;
+                }
+                else if (gambit.predicates[0].target == G_TARGET::PARTY_DEAD)
+                {
+                    auto* mob = POwner->GetBattleTarget();
+                    if (mob != nullptr)
+                    {
+                        //clang-format off
+                        static_cast<CCharEntity*>(POwner->PMaster)->ForParty([&](CBattleEntity* PMember) {
+                            if (PMember->isDead())
+                            {
+                                target = PMember;
+                            }
+                        });
+                        //clang-format on
+                    }
                 }
                 else if (gambit.predicates[0].target == G_TARGET::TANK)
                 {
@@ -773,11 +802,6 @@ namespace gambits
             case G_CONDITION::RANDOM:
             {
                 return xirand::GetRandomNumber<uint16>(100) < (int16)predicate.condition_arg;
-                break;
-            }
-            case G_CONDITION::IS_DEAD:
-            {
-                return trigger_target->isDead();
                 break;
             }
             default:

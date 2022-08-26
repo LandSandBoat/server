@@ -48,7 +48,7 @@ spell_object.onMobSpawn = function(mob)
     mob:addSimpleGambit(ai.t.TOP_ENMITY, ai.c.STATUS, xi.effect.BANE, ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.CURSNA)
     mob:addSimpleGambit(ai.t.TOP_ENMITY, ai.c.STATUS, xi.effect.DOOM, ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.CURSNA)
 
-    mob:addSimpleGambit(ai.t.PARTY, ai.c.IS_DEAD, 0, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.RAISE)
+    mob:addSimpleGambit(ai.t.PARTY_DEAD, ai.c.ALWAYS, 0, ai.r.MA, ai.s.HIGHEST, xi.magic.spellFamily.RAISE)
 
     mob:addListener("WEAPONSKILL_USE", "FERREOUS_COFFIN_WEAPONSKILL_USE", function(mobArg, target, wsid, tp, action)
         if wsid == 170 then -- Randgrith
