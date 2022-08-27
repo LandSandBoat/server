@@ -12910,17 +12910,17 @@ void CLuaBaseEntity::setMobFlags(uint32 flags, sol::object const& mobId)
     }
     else
     {
-        auto* PChar   = static_cast<CCharEntity*>(m_PBaseEntity);
-        auto* PTarget = static_cast<CMobEntity*>(PChar->GetEntity(PChar->m_TargID, TYPE_MOB));
+        auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+        auto* PMob  = static_cast<CMobEntity*>(PChar->GetEntity(PChar->m_TargID, TYPE_MOB));
 
-        if (PTarget == nullptr)
+        if (PMob == nullptr)
         {
             ShowError("Must target a monster to use for setMobFlags ");
             return;
         }
 
-        ((CMobEntity*)PTarget)->setEntityFlags(flags);
-        PTarget->updatemask |= UPDATE_HP;
+        PMob->setEntityFlags(flags);
+        PMob->updatemask |= UPDATE_HP;
     }
 }
 
