@@ -10,6 +10,7 @@ zones[xi.zone.SAUROMUGUE_CHAMPAIGN_S] =
 {
     text =
     {
+        NOTHING_HAPPENS          = 119,   -- Nothing happens...
         ITEM_CANNOT_BE_OBTAINED  = 6384,  -- You cannot obtain the <item>. Come back after sorting your inventory.
         ITEM_OBTAINED            = 6390,  -- Obtained: <item>.
         GIL_OBTAINED             = 6391,  -- Obtained <number> gil.
@@ -18,7 +19,6 @@ zones[xi.zone.SAUROMUGUE_CHAMPAIGN_S] =
         LOGIN_CAMPAIGN_UNDERWAY  = 7002,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER             = 7003,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         UNABLE_TO_PROGRESS       = 7047,  -- ou are unable to make further progress in Rhapsodies of Vana'diel due to an event occurring in the [Chains of Promathia/Treasures of Aht Urhgan/Wings of the Goddess/Seekers of Adoulin/Rise of the Zilart] missions.
-        NOTHING_HAPPENS          = 7057,  -- Nothing happens...
         DOOR_FIRMLY_SEALED       = 7723,  -- The door is firmly sealed.
         SURRENDER_CEREMONY_HASTE = 8471,  -- The surrender ceremony is about to commence underground. Make haste before all is lost!
         VOIDWALKER_DESPAWN       = 8483,  -- The monster fades before your eyes, a look of disappointment on its face.

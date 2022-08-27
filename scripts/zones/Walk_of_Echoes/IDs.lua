@@ -23,7 +23,7 @@ zones[xi.zone.WALK_OF_ECHOES] =
         PARTY_MEMBERS_HAVE_FALLEN = 7647, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED = 7654, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
         GATHERED_DAWNDROPS_LIGHT  = 7965, -- The gathered dawndrops unleash a brilliant light, melding together to form <keyitem>!
-        RETRACED_ALL_JUNCTIONS    = 7699, -- You have retraced all junctions of eventualities. Hasten back to where Cait Sith and Lilisette await.
+        RETRACED_ALL_JUNCTIONS    = 7966, -- You have retraced all junctions of eventualities. Hasten back to where Cait Sith and Lilisette await.
     },
     mob =
     {
