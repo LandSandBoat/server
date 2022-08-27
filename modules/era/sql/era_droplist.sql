@@ -26635,84 +26635,88 @@ INSERT INTO `mob_droplist` VALUES (3222,2,0,1000,1449,0);         -- Tukuku Whit
 INSERT INTO `mob_droplist` VALUES (3222,2,0,1000,1452,0);         -- Ordelle Bronzepiece (Steal)
 INSERT INTO `mob_droplist` VALUES (3222,2,0,1000,1455,0);         -- One Byne Bill (Steal)
 
+--------------------------------
+-- ASB Droplists Start at 6000
+--------------------------------
+
 -- ZoneID: 193 - Bombast
-INSERT INTO `mob_droplist` VALUES (3223,0,0,1000,16017,@COMMON); -- Ardent Earring (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (6000,0,0,1000,16017,@COMMON); -- Ardent Earring (Common, 15%)
 
 -- ZoneID:  12 - Sword Sorcerer Solisoq
-INSERT INTO `mob_droplist` VALUES (3224,0,0,1000,2811,@VCOMMON); -- Aptant Of Primus (Very Common, 24%)
-INSERT INTO `mob_droplist` VALUES (3224,0,0,1000,2819,@VCOMMON); -- Aptant Of Fyrst (Very Common, 24%)
-INSERT INTO `mob_droplist` VALUES (3224,0,0,1000,2815,@COMMON);  -- Aptant Of Arkhe (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (6001,0,0,1000,2811,@VCOMMON); -- Aptant Of Primus (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (6001,0,0,1000,2819,@VCOMMON); -- Aptant Of Fyrst (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (6001,0,0,1000,2815,@COMMON);  -- Aptant Of Arkhe (Common, 15%)
 
 -- ZoneID: 125 - Picolaton
-INSERT INTO `mob_droplist` VALUES (3225,0,0,1000,11343,@COMMON); -- Thrakon Breastplate (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (6002,0,0,1000,11343,@COMMON); -- Thrakon Breastplate (Common, 15%)
 
 -- ZoneID: 125 - Zmey Gorynych
-INSERT INTO `mob_droplist` VALUES (3227,0,0,1000,2811,@COMMON);   -- Aptant of Primus (Common, 15%)
-INSERT INTO `mob_droplist` VALUES (3227,0,0,1000,2813,@UNCOMMON); -- Aptant of Durus (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (6003,0,0,1000,2811,@COMMON);   -- Aptant of Primus (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (6003,0,0,1000,2813,@UNCOMMON); -- Aptant of Durus (Uncommon, 10%)
 
 -- ZoneID: 121 - Bastet
-INSERT INTO `mob_droplist` VALUES (3228,0,0,1000,2830,@UNCOMMON); -- Bastet Fang (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (6004,0,0,1000,2830,@UNCOMMON); -- Bastet Fang (Uncommon, 10%)
 
 -- ZoneID: 122 - Nargun
-INSERT INTO `mob_droplist` VALUES (3229,0,0,1000,2815,@VCOMMON); -- Aptant of Arkhe (Very Common, 24%)
-INSERT INTO `mob_droplist` VALUES (3229,0,0,1000,2817,@RARE);    -- Aptant of Pera (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (6005,0,0,1000,2815,@VCOMMON); -- Aptant of Arkhe (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (6005,0,0,1000,2817,@RARE);    -- Aptant of Pera (Rare, 5%)
 
 -- ZoneID:   5 - Snow Maiden
-INSERT INTO `mob_droplist` VALUES (3230,0,0,1000,17306,@VCOMMON);  -- Snoll Arm (Very Common, 24%)
-INSERT INTO `mob_droplist` VALUES (3230,0,0,1000,15507,@UNCOMMON); -- Purgatory Collar (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (6006,0,0,1000,17306,@VCOMMON);  -- Snoll Arm (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (6006,0,0,1000,15507,@UNCOMMON); -- Purgatory Collar (Uncommon, 10%)
 
 -- ZoneID: 125 - Dahu
-INSERT INTO `mob_droplist` VALUES (3231,0,0,1000,2835,@COMMON); -- Lock of Dahu Hair (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (6007,0,0,1000,2835,@COMMON); -- Lock of Dahu Hair (Common, 15%)
 
 -- ZoneID: 126 - Atkorkamuy
-INSERT INTO `mob_droplist` VALUES (3235,0,0,1000,2813,@UNCOMMON); -- Aptant of Durus (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (3235,0,0,1000,2816,@UNCOMMON); -- Aptant of Tachus (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (6008,0,0,1000,2813,@UNCOMMON); -- Aptant of Durus (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (6008,0,0,1000,2816,@UNCOMMON); -- Aptant of Tachus (Uncommon, 10%)
 
 -- ZoneID: 166 - Hyakume
-INSERT INTO `mob_droplist` VALUES (3236,0,0,1000,16029,@COMMON); -- Booster Earring (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (6009,0,0,1000,16029,@COMMON); -- Booster Earring (Common, 15%)
 
 -- ZoneID: 24 - Flockbock
-INSERT INTO `mob_droplist` VALUES (3237,0,0,1000,2836,@UNCOMMON); -- Woolly Pelage (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (6010,0,0,1000,2836,@UNCOMMON); -- Woolly Pelage (Uncommon, 10%)
 
 -- ZoneID: 24 - Sengann
-INSERT INTO `mob_droplist` VALUES (3238,0,0,1000,2843,@RARE); -- Square of Lindeadach (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (6011,0,0,1000,2843,@RARE); -- Square of Lindeadach (Rare, 5%)
 
 -- ZoneID: 24 - Yal-un Eke
-INSERT INTO `mob_droplist` VALUES (3239,0,0,1000,15054,@RARE); -- Beacon Cuffs (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (6012,0,0,1000,15054,@RARE); -- Beacon Cuffs (Rare, 5%)
 
 -- ZoneID: 204 - Jenglot
-INSERT INTO `mob_droplist` VALUES (3240,0,0,1000,2821,@UNCOMMON); -- Aptant of Haelan (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (3240,0,0,1000,2822,@COMMON);   -- Aptant of Secan (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (6013,0,0,1000,2821,@UNCOMMON); -- Aptant of Haelan (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (6013,0,0,1000,2822,@COMMON);   -- Aptant of Secan (Common, 15%)
 
 -- ZoneID: 204 - Sluagh
-INSERT INTO `mob_droplist` VALUES (3241,0,0,1000,2856,@COMMON); -- Square of Ensanguined Cloth (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (6014,0,0,1000,2856,@COMMON); -- Square of Ensanguined Cloth (Common, 15%)
 
 -- ZoneID: 109 - Toxic Tamlyn
-INSERT INTO `mob_droplist` VALUES (3242,0,0,1000,2855,@VCOMMON); -- Mahogany Heartwood (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (6015,0,0,1000,2855,@VCOMMON); -- Mahogany Heartwood (Very Common, 24%)
 
 -- ZoneID: 172 - Soot Crab
-INSERT INTO `mob_droplist` VALUES (3243,0,0,1000,936,@VCOMMON);  -- Chunk Of Rock Salt (Very Common, 24%)
-INSERT INTO `mob_droplist` VALUES (3243,0,0,1000,560,@UNCOMMON); -- Pinch Of Zeruhn Soot (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (3243,0,0,1000,4400,@RARE);    -- Slice Of Land Crab Meat (Rare, 5%)
-INSERT INTO `mob_droplist` VALUES (3243,0,0,1000,881,@VRARE);    -- Crab Shell (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (6016,0,0,1000,936,@VCOMMON);  -- Chunk Of Rock Salt (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (6016,0,0,1000,560,@UNCOMMON); -- Pinch Of Zeruhn Soot (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (6016,0,0,1000,4400,@RARE);    -- Slice Of Land Crab Meat (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (6016,0,0,1000,881,@VRARE);    -- Crab Shell (Very Rare, 1%)
 
 -- ZoneID: 143 - Amber Quadav
-INSERT INTO `mob_droplist` VALUES (3244,0,0,1000,4866,@VRARE); -- Scroll Of Bind (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3244,0,0,1000,4862,@VRARE); -- Scroll Of Blind (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3244,0,0,1000,606,@VRARE);  -- Quadav Fetich Head (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3244,0,0,1000,607,@VRARE);  -- Quadav Fetich Torso (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3244,0,0,1000,608,@VRARE);  -- Quadav Fetich Arms (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3244,0,0,1000,609,@VRARE);  -- Quadav Fetich Legs (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (3244,2,0,1000,656,0);       -- Beastcoin (Steal)
+INSERT INTO `mob_droplist` VALUES (6017,0,0,1000,4866,@VRARE); -- Scroll Of Bind (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (6017,0,0,1000,4862,@VRARE); -- Scroll Of Blind (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (6017,0,0,1000,606,@VRARE);  -- Quadav Fetich Head (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (6017,0,0,1000,607,@VRARE);  -- Quadav Fetich Torso (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (6017,0,0,1000,608,@VRARE);  -- Quadav Fetich Arms (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (6017,0,0,1000,609,@VRARE);  -- Quadav Fetich Legs (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (6017,2,0,1000,656,0);       -- Beastcoin (Steal)
 
 -- ZoneID: 190 - Plague Bats
-INSERT INTO `mob_droplist` VALUES (3245,0,0,1000,922,@VCOMMON);  -- Bat Wing (Very Common, 24%)
-INSERT INTO `mob_droplist` VALUES (3245,0,0,1000,1027,@RARE);    -- Ranperre Chest Key (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (6018,0,0,1000,922,@VCOMMON);  -- Bat Wing (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (6018,0,0,1000,1027,@RARE);    -- Ranperre Chest Key (Rare, 5%)
 
 -- ZoneID: 190 - Ossuary Worm
-INSERT INTO `mob_droplist` VALUES (3246,0,0,1000,768,@VCOMMON); -- Flint Stone (Very Common, 24%)
-INSERT INTO `mob_droplist` VALUES (3246,0,0,1000,640,@COMMON);  -- Chunk Of Copper Ore (Common, 15%)
-INSERT INTO `mob_droplist` VALUES (3246,0,0,1000,642,@RARE);    -- Chunk Of Zinc Ore (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (6019,0,0,1000,768,@VCOMMON); -- Flint Stone (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (6019,0,0,1000,640,@COMMON);  -- Chunk Of Copper Ore (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (6019,0,0,1000,642,@RARE);    -- Chunk Of Zinc Ore (Rare, 5%)
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;
