@@ -668,14 +668,14 @@ local loot =
         },
         {
             {itemid = 19027, droprate = 144}, -- Claymore Grip
-            {itemid = 658, droprate = 275},   -- Damascus Ingot
-            {itemid = 843, droprate = 275},   -- Giant Bird Plume
+            {itemid = 658,   droprate = 275}, -- Damascus Ingot
+            {itemid = 843,   droprate = 275}, --- Giant Bird Plume
             {itemid = 19025, droprate = 203}, -- Pole Grip
             {itemid = 19026, droprate = 116}, -- Spear Strap
         },
         {
-            {itemid = 655, droprate = 159},   -- Adaman Ingot
-            {itemid = 747, droprate = 290},   -- Orichalcum Ingot
+            {itemid = 655,   droprate = 159}, -- Adaman Ingot
+            {itemid = 747,   droprate = 290}, -- Orichalcum Ingot
             {itemid = 14765, droprate = 406}, -- Titanis Earring
         },
         {
@@ -685,27 +685,27 @@ local loot =
             {itemid = 15387, droprate = 159}, -- Trackers Kecks
         },
         {
-            {itemid = 887, droprate = 101},   -- Coral Fragment
-            {itemid = 645, droprate = 29},    -- Chunk Of Darksteel Ore
-            {itemid = 902, droprate = 29},    -- Demon Horn
-            {itemid = 702, droprate = 29},    -- Ebony Log
-            {itemid = 745, droprate = 101},   -- Gold Ingot
-            {itemid = 823, droprate = 29},    -- Spool Of Gold Thread
-            {itemid = 644, droprate = 29},    -- Chunk Of Mythril Ore
-            {itemid = 703, droprate = 58},    -- Petrified Log
-            {itemid = 738, droprate = 14},    -- Chunk Of Platinum Ore
-            {itemid = 830, droprate = 58},    -- Square Of Rainbow Cloth
-            {itemid = 895, droprate = 14},    -- Ram Horn
-            {itemid = 1132, droprate = 159},  -- Square Of Raxa
-            {itemid = 837, droprate = 72},    -- Spool Of Malboro Fiber
+            {itemid = 644,  droprate =  29}, -- Chunk Of Mythril Ore
+            {itemid = 645,  droprate =  29}, -- Chunk Of Darksteel Ore
+            {itemid = 702,  droprate =  29}, -- Ebony Log
+            {itemid = 703,  droprate =  58}, -- Petrified Log
+            {itemid = 738,  droprate =  14}, -- Chunk Of Platinum Ore
+            {itemid = 745,  droprate = 101}, -- Gold Ingot
+            {itemid = 823,  droprate =  29}, -- Spool Of Gold Thread
+            {itemid = 837,  droprate =  72}, -- Spool Of Malboro Fiber
+            {itemid = 830,  droprate =  58}, -- Square Of Rainbow Cloth
+            {itemid = 887,  droprate = 101}, -- Coral Fragment
+            {itemid = 895,  droprate =  14}, -- Ram Horn
+            {itemid = 902,  droprate =  29}, -- Demon Horn
+            {itemid = 1132, droprate = 159}, -- Square Of Raxa
         },
         {
-            {itemid = 1110, droprate = 87},   -- Vial Of Black Beetle Blood
-            {itemid = 658, droprate = 14},    -- Damascus Ingot
-            {itemid = 836, droprate = 29},    -- Square Of Damascene Cloth
-            {itemid = 942, droprate = 174},   -- Philosophers Stone
-            {itemid = 844, droprate = 246},   -- Phoenix Feather
-            {itemid = 1132, droprate = 159},  -- Square Of Raxa
+            {itemid = 658,  droprate =  14}, -- Damascus Ingot
+            {itemid = 836,  droprate =  29}, -- Square Of Damascene Cloth
+            {itemid = 844,  droprate = 246}, -- Phoenix Feather
+            {itemid = 942,  droprate = 174}, -- Philosophers Stone
+            {itemid = 1110, droprate =  87}, -- Vial Of Black Beetle Blood
+            {itemid = 1132, droprate = 159}, -- Square Of Raxa
         },
     },
 }

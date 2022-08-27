@@ -249,7 +249,7 @@ local battlefields =
         {11,   11, 1553},   -- Horns of War (KS99)
         {12,   12, 1131},   -- Under Observation (BS40)
         {13,   13, 1177},   -- Eye of the Tiger (BS50)
-     -- {14,   14, 1130},   -- Shots in the Dark (BS60) -- TODO: Warmachine combat behavior
+        {14,   14, 1130},   -- Shots in the Dark (BS60)
         {15,   15, 1175},   -- Double Dragonian (KS30) -- TODO: Chaos Blade strengthens after 2hr
         {16,   16, 1178},   -- Today's Horoscope (KS30)
         {17,   17, 1180},   -- Contaminated Colosseum (KS30)
@@ -295,7 +295,7 @@ local battlefields =
         {15,   79, 1130},   -- Up in Arms (BS60)
         {16,   80, 1175},   -- Copycat (KS30)
         {17,   81, 1178},   -- Operation Desert Swarm (KS30)
-     -- {18,   82, 1180},   -- Prehistoric Pigeons (KS30) -- TODO: Build resistance to sleep quickly. When one dies, remaining ones become more powerful.
+        {18,   82, 1180},   -- Prehistoric Pigeons (KS30)
      -- {19,   83, 3351},   -- The Palborough Project (KC30)
      -- {20,   84, 3352},   -- Shell Shocked (KC50)
         {21,   85,    0},   -- Beyond Infinity (Quest)
