@@ -25,7 +25,7 @@ entity.onMobSpawn = function(mob)
 
                 follower:setSpawn(newX, newY, newZ, r)
                 follower:spawn()
-                follower:setMobFlags(1153, followerId)
+                follower:setMobFlags(1153)
             end
 
             xi.follow.follow(follower, mob)

@@ -12883,33 +12883,39 @@ uint8 CLuaBaseEntity::getModelSize()
  *  Function: setMobFlags()
  *  Purpose : Manually set Mob flags
  *  Example : player:setMobFlags(flags, targ:getID())
- *  Notes   : Currently only used through !setmobflags command
+ *  Example : mob:setMobFlags(flags)
+ *  Notes   : Used for changing Ul'xzomit babies' size and through !setmobflags command
  ************************************************************************/
 
-void CLuaBaseEntity::setMobFlags(uint32 flags, uint32 mobid)
+void CLuaBaseEntity::setMobFlags(uint32 flags, sol::object const& mobId)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB);
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB && m_PBaseEntity->objtype != TYPE_PC);
 
-    CMobEntity* PMob = (CMobEntity*)zoneutils::GetEntity(mobid, TYPE_MOB);
-
-    if (PMob != nullptr)
+    if (mobId != sol::lua_nil)
     {
+        auto* PMob = static_cast<CMobEntity*>(zoneutils::GetEntity(mobId.as<uint32>(), TYPE_MOB));
+        if (PMob == nullptr)
+        {
+            ShowError("Could not find a monster with id %u to use for setMobFlags.", mobId.as<uint32>());
+            return;
+        }
+        PMob->setEntityFlags(flags);
+        PMob->updatemask |= UPDATE_HP;
+    }
+    else if (m_PBaseEntity->objtype == TYPE_MOB)
+    {
+        auto* PMob = static_cast<CMobEntity*>(m_PBaseEntity);
         PMob->setEntityFlags(flags);
         PMob->updatemask |= UPDATE_HP;
     }
     else
     {
-        CCharEntity*   PChar   = (CCharEntity*)m_PBaseEntity;
-        CBattleEntity* PTarget = (CBattleEntity*)PChar->GetEntity(PChar->m_TargID);
+        auto* PChar   = static_cast<CCharEntity*>(m_PBaseEntity);
+        auto* PTarget = static_cast<CMobEntity*>(PChar->GetEntity(PChar->m_TargID, TYPE_MOB));
 
         if (PTarget == nullptr)
         {
             ShowError("Must target a monster to use for setMobFlags ");
-            return;
-        }
-        else if (PTarget->objtype != TYPE_MOB)
-        {
-            ShowError("Battle target must be a monster to use setMobFlags ");
             return;
         }
 
