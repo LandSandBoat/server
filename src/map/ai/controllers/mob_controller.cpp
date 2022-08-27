@@ -872,7 +872,7 @@ void CMobController::DoRoamTick(time_point tick)
                         CastSpell(spellID.value());
                     }
                 }
-                else if (PMob->m_roamFlags & ROAMFLAG_EVENT)
+                else if (PMob->m_roamFlags & ROAMFLAG_SCRIPTED)
                 {
                     // allow custom event action
                     PMob->PAI->EventHandler.triggerListener("ROAM_ACTION", CLuaBaseEntity(PMob));

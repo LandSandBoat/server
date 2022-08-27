@@ -844,7 +844,7 @@ namespace mobutils
         // never despawn
         PMob->SetDespawnTime(0s);
         // do not roam around
-        PMob->m_roamFlags |= ROAMFLAG_EVENT;
+        PMob->m_roamFlags |= ROAMFLAG_SCRIPTED;
         PMob->m_maxRoamDistance = 0.5f;
         if ((PMob->m_bcnmID != 864) && (PMob->m_bcnmID != 704) && (PMob->m_bcnmID != 706))
         {
@@ -862,7 +862,7 @@ namespace mobutils
     void SetupEventMob(CMobEntity* PMob)
     {
         // event mob types will always have custom roaming
-        PMob->m_roamFlags |= ROAMFLAG_EVENT;
+        PMob->m_roamFlags |= ROAMFLAG_SCRIPTED;
         PMob->m_maxRoamDistance = 0.5f; // always go back to spawn
 
         PMob->setMobMod(MOBMOD_NO_DESPAWN, 1);
