@@ -756,6 +756,11 @@ namespace mobutils
             PMob->setMobMod(MOBMOD_ROAM_DISTANCE, 5);
             PMob->setMobMod(MOBMOD_ROAM_TURNS, 1);
         }
+
+        if (PMob->m_roamFlags & ROAMFLAG_SCRIPTED)
+        {
+            PMob->setMobMod(MOBMOD_ROAM_RESET_FACING, 1);
+        }
     }
 
     void SetupPetSkills(CMobEntity* PMob)
@@ -845,6 +850,7 @@ namespace mobutils
         PMob->SetDespawnTime(0s);
         // do not roam around
         PMob->m_roamFlags |= ROAMFLAG_SCRIPTED;
+        PMob->setMobMod(MOBMOD_ROAM_RESET_FACING, 1);
         PMob->m_maxRoamDistance = 0.5f;
         if ((PMob->m_bcnmID != 864) && (PMob->m_bcnmID != 704) && (PMob->m_bcnmID != 706))
         {
@@ -863,6 +869,7 @@ namespace mobutils
     {
         // event mob types will always have custom roaming
         PMob->m_roamFlags |= ROAMFLAG_SCRIPTED;
+        PMob->setMobMod(MOBMOD_ROAM_RESET_FACING, 1);
         PMob->m_maxRoamDistance = 0.5f; // always go back to spawn
 
         PMob->setMobMod(MOBMOD_NO_DESPAWN, 1);
