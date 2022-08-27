@@ -241,6 +241,28 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
     TracyZoneScoped;
     data.ref<uint32>(0x5C) = 0;
 
+    /*
+    * Packet structure, reversed by atom0s
+    */
+
+    [[maybe_unused]] uint16 syncCount = data.ref<uint16>(0x04);
+    [[maybe_unused]] uint8  byteSum   = data.ref<uint8>(0x06);
+    // 1 byte of padding
+    [[maybe_unused]] uint16 unknown00   = data.ref<uint16>(0x08);
+    [[maybe_unused]] uint32 unknown01   = data.ref<uint32>(0x0C);
+    [[maybe_unused]] uint32 characterID = data.ref<uint32>(0x10);
+    // 18 bytes of padding
+    [[maybe_unused]] char charName[15] = {};
+    std::memcpy(&charName, data[0x22], sizeof(charName));
+    [[maybe_unused]] char accountName[15] = {};
+    std::memcpy(&accountName, data[0x31], sizeof(accountName));
+    [[maybe_unused]] uint8 loginTicket[16] = {};
+    std::memcpy(&loginTicket, data[0x40], sizeof(loginTicket));
+    [[maybe_unused]] uint32 version = data.ref<uint32>(0x50);
+    [[maybe_unused]] uint32 platformTag = data.ref<uint32>(0x54);
+    [[maybe_unused]] uint16 languageID = data.ref<uint16>(0x58);
+    [[maybe_unused]] uint16 flags  = data.ref<uint16>(0x5A);
+
     if (PSession->blowfish.status == BLOWFISH_ACCEPTED && PChar->status == STATUS_TYPE::NORMAL) // Do nothing if character is zoned in
     {
         ShowWarning("packet_system::SmallPacket0x00A player '%s' attempting to send 0x00A when already logged in", PChar->GetName());
