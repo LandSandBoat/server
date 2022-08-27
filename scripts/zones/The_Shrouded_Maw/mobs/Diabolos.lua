@@ -3,6 +3,7 @@
 --  Mob: Diabolos
 -----------------------------------
 local ID = require("scripts/zones/The_Shrouded_Maw/IDs")
+mixins = {require("scripts/mixins/job_special")}
 -----------------------------------
 local entity = {}
 
@@ -16,36 +17,73 @@ local entity = {}
 -- TODO: Diabolos Prime
 -- Note: Diabolos Prime fight drops all tiles at once.
 
-entity.onMobFight = function(mob, target)
-    local mobOffset = mob:getID() - ID.mob.DIABOLOS_OFFSET
-    if (mobOffset >= 0 and mobOffset <= 14) then
-        local inst = math.floor(mobOffset/7)
+entity.onMobSpawn = function(mob)
+    local dBase = ID.mob.DIABOLOS_OFFSET
+    local dPrimeBase = dBase + 27
 
-        local tileDrops =
+    -- Only add these for the CoP Diabolos NOT Prime
+    if mob:getID() >= dBase and mob:getID() <= dBase + 14 then  -- three possible instances of Diabolos
+        mob:addMod(xi.mod.INT, -50)
+        mob:addMod(xi.mod.MND, -50)
+        mob:addMod(xi.mod.ATTP, -15)
+        mob:addMod(xi.mod.DEFP, -15)
+        mob:addMod(xi.mod.MDEF, -40)
+    end
+
+    -- Tile Drop Trigger:  Max HPP = 76%, Min HPP = 20%, Gap = 56%, Half = 28%
+    local triggerVal = math.random(1, 28) + math.random(1, 28) + 18
+
+    -- If this is prime, adjust the "base" to be the prime set
+    if mob:getID() >= dPrimeBase then dBase = dPrimeBase end  -- Prime "block" of mobs is offset 27 from CoP mobs
+
+    local area = utils.clamp((mob:getID() - dBase) / 7 + 1, 1, 3)
+
+    mob:setLocalVar("TileTriggerHPP", triggerVal) -- Starting point for tile drops
+    mob:setLocalVar("Area", area)
+    mob:setMobMod(xi.mobMod.DRAW_IN, 1)
+
+    -- Add the Ruinous Omen special ability
+    xi.mix.jobSpecial.config(mob, {
+        specials =
         {
-            {10, "byc1", "bya1", "byY1"},
-            {20, "byc2", "bya2", "byY2"},
-            {30, "byc3", "bya3", "byY3"},
-            {40, "byc4", "bya4", "byY4"},
-            {50, "byc5", "bya5", "byY5"},
-            {65, "byc6", "bya6", "byY6"},
-            {75, "byc7", "bya7", "byY7"},
-            {90, "byc8", "bya8", "byY8"},
+            {id = 1911, hpp = math.random(30,55)}, -- uses Ruinous Omen once while near 50% HPP.
+        },
+    })
+end
+
+entity.onMobFight = function(mob, target)
+    local area = mob:getLocalVar("Area") - 1
+    local trigger = mob:getLocalVar("TileTriggerHPP")
+    
+    local tileDrops =
+        {   -- {Animation Area 1, Animation Area 2, Animation Area 3}
+            {"byc8", "bya8", "byb8"},
+            {"byc7", "bya7", "byb7"},
+            {"byc6", "bya6", "byb6"},
+            {"byc5", "bya5", "byb5"},
+            {"byc4", "bya4", "byb4"},
+            {"byc3", "bya3", "byb3"},
+            {"byc2", "bya2", "byb2"},
+            {"byc1", "bya1", "byb1"},
         }
 
-        local hpp = ((mob:getHP()/mob:getMaxHP())*100)
-        for k, v in pairs(tileDrops) do
-            if (hpp < v[1]) then
-                local tileId = ID.npc.DARKNESS_NAMED_TILE_OFFSET + (inst * 8) + (k - 1)
-                local tile = GetNPCByID(tileId)
-                if (tile:getAnimation() == xi.anim.CLOSE_DOOR) then
-                    SendEntityVisualPacket(tileId, v[inst+2])  -- Animation for floor dropping
-                    SendEntityVisualPacket(tileId, "s123")     -- Tile dropping sound
-                    tile:timer(5000, function(tileArg)
-                        tileArg:setAnimation(xi.anim.OPEN_DOOR)     -- Floor opens
-                    end)
-                end
-                break
+    local hpp = math.floor(mob:getHP()*100/mob:getMaxHP())
+    if hpp < trigger then   -- Trigger the tile drop events
+        mob:setLocalVar("TileTriggerHPP", -1)            -- Prevent tiles from being dropped twice
+        local tileBase = ID.npc.DARKNESS_NAMED_TILE_OFFSET + (area) * 8
+
+        for offset, animationSet in ipairs(tileDrops) do
+            local tileId = tileBase + offset - 1
+            local tile = GetNPCByID(tileId)
+
+            if tile:getLocalVar("Dropped") ~= xi.anim.OPEN_DOOR then
+                tile:setLocalVar("Dropped", xi.anim.OPEN_DOOR)
+                SendEntityVisualPacket(tileId, animationSet[area + 1], 4)     -- Animation for floor dropping
+                SendEntityVisualPacket(tileId, "s123", 4)          -- Tile dropping sound
+
+                tile:timer(2750, function(tile)                 -- 2.7s second delay (ish)
+                    tile:updateToEntireZone(xi.status.NORMAL, xi.anim.OPEN_DOOR)       -- Floor opens
+                end)
             end
         end
     end
