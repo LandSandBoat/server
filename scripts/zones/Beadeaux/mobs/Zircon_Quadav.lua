@@ -12,8 +12,10 @@ require("scripts/globals/mobs")
 local entity = {}
 
 entity.onSteal = function(player, target, ability, action)
-    if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_TENSHODO_SHOWDOWN) == QUEST_ACCEPTED and
-       not player:hasItem(xi.items.BOWL_OF_QUADAV_STEW) then
+    if
+        player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_TENSHODO_SHOWDOWN) == QUEST_ACCEPTED and
+        not player:hasItem(xi.items.BOWL_OF_QUADAV_STEW)
+    then
         return xi.items.BOWL_OF_QUADAV_STEW
     else
         return 0
