@@ -11,7 +11,7 @@ return {
     ['Aurfet']                   = { event = 52 },
     ['Autouria']                 = { event = 611 },
     ['Berengein']                = { event = 601 },
-    ['blank']                    = { text = ID.text.NOTHING_OUT_OF_ORDINARY },
+    ['blank_fork']               = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
     ['Choh_Moui']                = { event = 506 },
     ['Corseihaut']               = { event = 610 },
     ['Contie']                   = { event = 612 },

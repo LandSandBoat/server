@@ -1,14 +1,11 @@
 -----------------------------------
---
 -- Zone: Batallia_Downs (105)
---
 -----------------------------------
-local ID = require("scripts/zones/Batallia_Downs/IDs")
-require("scripts/quests/full_speed_ahead")
-require("scripts/quests/i_can_hear_a_rainbow")
-require("scripts/globals/chocobo_digging")
-require("scripts/globals/missions")
-require("scripts/globals/zone")
+local ID = require('scripts/zones/Batallia_Downs/IDs')
+require('scripts/quests/full_speed_ahead')
+require('scripts/quests/i_can_hear_a_rainbow')
+require('scripts/globals/chocobo_digging')
+require('scripts/globals/zone')
 -----------------------------------
 local zone_object = {}
 
@@ -22,6 +19,7 @@ local function registerRegionAroundNPC(zone, NPCID, zoneID)
     local y = npc:getYPos()
     local z = npc:getZPos()
     local distance = 7
+
     zone:registerRegion(zoneID,
         x - distance, y - distance, z - distance,
         x + distance, y + distance, z + distance)
@@ -42,6 +40,7 @@ zone_object.onInitialize = function(zone)
     for i = 0, 7 do
         registerRegionAroundNPC(zone, ID.npc.RAPTOR_FOOD_BASE + i, i + 1)
     end
+
     registerRegionAroundNPC(zone, ID.npc.SYRILLIA, 9)
 
     xi.voidwalker.zoneOnInit(zone)
@@ -80,7 +79,7 @@ zone_object.onRegionEnter = function(player, region)
 end;
 
 zone_object.onEventUpdate = function(player, csid, option)
-    if (csid == 901) then
+    if csid == 901 then
         quests.rainbow.onEventUpdate(player)
     end
 end

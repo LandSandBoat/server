@@ -28,6 +28,7 @@ entity.onTrigger = function(player, npc)
         4997,    16, 3,    -- Scroll of Knight's Minne
         4998,   864, 3,    -- Scroll of Knight's Minne II
         4999,  5148, 3,    -- Scroll of Knight's Minne III
+        5001, 50692, 3,    -- Scroll of Knight's Minne V
         2343,  1984, 3,    -- La Theine Millet
     }
 

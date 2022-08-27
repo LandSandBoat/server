@@ -31,6 +31,7 @@ zones[xi.zone.QUFIM_ISLAND] =
         CONQUEST                       = 7385,  -- You've earned conquest points!
         AN_EMPTY_LIGHT_SWIRLS          = 7755,  -- An empty light swirls about the cave, eating away at the surroundings...
         GIGANTIC_FOOTPRINT             = 7839,  -- There is a gigantic footprint here.
+        ASA_SNOW                       = 7852,  -- You see the following words scrawled into the snow: Shantotto Empire Provisional Headquarters.
         YOU_CANNOT_ENTER_DYNAMIS       = 7865,  -- You cannot enter Dynamis - [Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia] for <number> [day/days] (Vana'diel time).
         PLAYERS_HAVE_NOT_REACHED_LEVEL = 7867,  -- Players who have not reached level <number> are prohibited from entering Dynamis.
         DYNA_NPC_DEFAULT_MESSAGE       = 7989,  -- There is a strange symbol drawn here. A haunting chill sweeps through you as you gaze upon it...

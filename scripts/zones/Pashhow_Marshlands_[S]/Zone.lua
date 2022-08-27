@@ -1,11 +1,9 @@
 -----------------------------------
---
 -- Zone: Pashhow_Marshlands_[S] (90)
---
 -----------------------------------
-local ID = require("scripts/zones/Pashhow_Marshlands_[S]/IDs")
-require("scripts/globals/chocobo")
-require("scripts/globals/status")
+local ID = require('scripts/zones/Pashhow_Marshlands_[S]/IDs')
+require('scripts/globals/chocobo')
+require('scripts/globals/status')
 -----------------------------------
 local zone_object = {}
 
@@ -29,6 +27,7 @@ end
 
 zone_object.onZoneWeatherChange = function(weather)
     local npc = GetNPCByID(ID.npc.INDESCRIPT_MARKINGS_OFFSET + 1) -- Indescript Markings (BOOTS)
+
     if npc then
         if weather == xi.weather.RAIN or weather == xi.weather.THUNDER then
             npc:setStatus(xi.status.DISAPPEAR)

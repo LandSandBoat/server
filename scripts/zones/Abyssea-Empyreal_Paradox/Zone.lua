@@ -1,9 +1,7 @@
 -----------------------------------
---
 -- Zone: Abyssea - Empyreal_Paradox
---
 -----------------------------------
-local ID = require("scripts/zones/Abyssea-Empyreal_Paradox/IDs")
+local ID = require('scripts/zones/Abyssea-Empyreal_Paradox/IDs')
 -----------------------------------
 local zone_object = {}
 

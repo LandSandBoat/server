@@ -19,6 +19,7 @@ zones[xi.zone.NORTHERN_SAN_DORIA] =
         KEYITEM_OBTAINED         = 6601,  -- Obtained key item: <keyitem>.
         KEYITEM_LOST             = 6602,  -- Lost key item: <keyitem>.
         NOT_HAVE_ENOUGH_GIL      = 6603,  -- You do not have enough gil.
+        REPORT_TO_CAIT_SITH      = 6628,  -- You have obtained all of Lilisette's memory fragments. Make haste and report to Cait Sith.
         CARRIED_OVER_POINTS      = 6637,  -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY  = 6638,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
         LOGIN_NUMBER             = 6639,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
@@ -117,6 +118,8 @@ zones[xi.zone.NORTHERN_SAN_DORIA] =
         IF_YOU_WEAR_THIS         = 13063, -- If you put this on and walk around, something...unexpected might happen...
         THANK_YOU                = 13064, -- Thank you...
         FFR_LOOKS_CURIOUSLY_BASE = 13388, -- Coullene looks over curiously for a moment.
+        FRAGMENT_FAR_TOO_SMALL   = 18096, -- You obtain <keyitem>. However, it is far too small to house an adequate amount of energy. Alone, it serves no purpose.
+        FRAGMENTS_MELD           = 18097, -- The tiny fragments of Lilisette's memory meld together to form <keyitem>!
         RETRIEVE_DIALOG_ID       = 18132, -- You retrieve <item> from the porter moogle's care.
         COMMON_SENSE_SURVIVAL    = 18478, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },

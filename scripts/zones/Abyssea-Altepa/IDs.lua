@@ -1,8 +1,8 @@
 -----------------------------------
 -- Area: Abyssea-Altepa
 -----------------------------------
-require("scripts/globals/keyitems")
-require("scripts/globals/zone")
+require('scripts/globals/keyitems')
+require('scripts/globals/zone')
 -----------------------------------
 
 zones = zones or {}

@@ -1,12 +1,10 @@
 -----------------------------------
---
 -- Zone: Bhaflau_Thickets (52)
---
 -----------------------------------
-local ID = require("scripts/zones/Bhaflau_Thickets/IDs")
-require("scripts/globals/chocobo_digging")
-require("scripts/globals/helm")
-require("scripts/globals/zone")
+local ID = require('scripts/zones/Bhaflau_Thickets/IDs')
+require('scripts/globals/chocobo_digging')
+require('scripts/globals/helm')
+require('scripts/globals/zone')
 -----------------------------------
 local zone_object = {}
 
@@ -23,12 +21,15 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
+
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(-100, -13.5, -479.514, 60)
     end
-    if (prevZone == xi.zone.MAMOOL_JA_TRAINING_GROUNDS) then
+
+    if prevZone == xi.zone.MAMOOL_JA_TRAINING_GROUNDS then
         player:setPos(-186, -10, -802, 80)
     end
+
     return cs
 end
 
@@ -44,7 +45,7 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    if (csid == 108) then
+    if csid == 108 then
         player:setPos(0, 0, 0, 0, 66)
     end
 end

@@ -220,7 +220,7 @@ xi.rhapsodies.requiredCharacters =
 
     [xi.mission.id.rov.CAUTERIZE] =
     {
-        xi.rhapsodies.character.APHMAU,
+        xi.rhapsodies.character.CAIT_SITH,
     },
 
     [xi.mission.id.rov.UNCERTAIN_DESTINATIONS] =

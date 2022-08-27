@@ -150,7 +150,7 @@ quest.sections =
                     -- sent once the battlefield has been cleared.  This needs to be verified upon
                     -- implementation of the instance.
 
-                    mission:setVar(player, 'Prog', 4)
+                    quest:setVar(player, 'Prog', 4)
                     player:setPos(319.8, -7.887, 153.741, 65, xi.zone.XARCABARD_S)
                 end,
             },

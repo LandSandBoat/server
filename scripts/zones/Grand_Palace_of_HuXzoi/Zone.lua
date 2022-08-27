@@ -1,12 +1,10 @@
 -----------------------------------
---
 -- Zone: Grand_Palace_of_HuXzoi (34)
---
 -----------------------------------
-local huxzoiGlobal = require("scripts/zones/Grand_Palace_of_HuXzoi/globals")
-local ID = require("scripts/zones/Grand_Palace_of_HuXzoi/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/status")
+local huxzoiGlobal = require('scripts/zones/Grand_Palace_of_HuXzoi/globals')
+local ID = require('scripts/zones/Grand_Palace_of_HuXzoi/IDs')
+require('scripts/globals/conquest')
+require('scripts/globals/status')
 -----------------------------------
 local zone_object = {}
 
@@ -32,7 +30,7 @@ end
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(-20, -1.5, -355.482, 192)
     end
 
@@ -49,7 +47,11 @@ zone_object.afterZoneIn = function(player)
 end
 
 zone_object.onRegionEnter = function(player, region)
-    if (player:getCharVar("Hu-Xzoi-TP") == 0 and player:getAnimation() == xi.anim.NONE) then -- prevent 2cs at same time
+    if
+        player:getLocalVar("Hu-Xzoi-TP") == 0 and
+        player:getAnimation() == xi.anim.NONE
+    then
+        -- prevent 2cs at same time
         player:startEvent(149 + region:GetRegionID())
     end
 end
@@ -58,14 +60,14 @@ zone_object.onRegionLeave = function(player, region)
 end
 
 zone_object.onEventUpdate = function(player, csid, option)
-    if (csid >= 150 and csid <= 159) then
-        player:setCharVar("Hu-Xzoi-TP", 1)
+    if csid >= 150 and csid <= 159 then
+        player:setLocalVar("Hu-Xzoi-TP", 1)
     end
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    if (csid >= 150 and csid <= 159) then
-        player:setCharVar("Hu-Xzoi-TP", 0)
+    if csid >= 150 and csid <= 159 then
+        player:setLocalVar("Hu-Xzoi-TP", 0)
     end
 end
 
