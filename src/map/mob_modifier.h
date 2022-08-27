@@ -60,7 +60,7 @@ enum MOBMODIFIER : int
     MOBMOD_ASSIST         = 29, // mobs will assist me
     MOBMOD_SPECIAL_SKILL  = 30, // give special skill
     MOBMOD_ROAM_DISTANCE  = 31, // distance allowed to roam from spawn
-    // 32 Available for use
+    MOBMOD_DONT_ROAM_HOME = 32, // Allow mobs to roam any distance from spawn. Useful for mobs with scripted roaming behavior.
     MOBMOD_SPECIAL_COOL   = 33, // cool down for special
     MOBMOD_MAGIC_COOL     = 34, // cool down for magic
     MOBMOD_STANDBACK_COOL = 35, // cool down time for standing back (casting spell while not in attack range)
@@ -78,7 +78,7 @@ enum MOBMODIFIER : int
     MOBMOD_SPAWN_LEASH    = 47, // forces a mob to not move farther from its spawn than its leash distance
     MOBMOD_SHARE_TARGET   = 48, // mob always targets same target as ID in this var
     MOBMOD_CHECK_AS_NM    = 49, // If set , mob will check as a NM
-    // 50 Available for use
+    MOBMOD_ROAM_RESET_FACING  = 50, // Resume facing the default spawn rotation after roaming home.
     MOBMOD_ROAM_TURNS         = 51, // Maximum amount of turns during a roam
     MOBMOD_ROAM_RATE          = 52, // Roaming frequency. roam_cool - rand(roam_cool / (roam_rate / 10))
     MOBMOD_BEHAVIOR           = 53, // Add behaviors to mob
@@ -99,7 +99,7 @@ enum MOBMODIFIER : int
     MOBMOD_ALLI_HATE          = 68, // Range around target to add alliance member to enmity list.
     MOBMOD_NO_LINK            = 69, // If set, mob cannot link until unset.
     MOBMOD_NO_REST            = 70, // Mob cannot regain hp (e.g. re-burrowing antlions during ENM).
-    MOBMOD_LEADER             = 71, // Indicate this mob is a leader. Used for Ul'xzomit mobs.
+    MOBMOD_LEADER             = 71, // Used for mobs that follow a defined "leader", such as Ul'xzomit mobs.
 };
 
 #endif

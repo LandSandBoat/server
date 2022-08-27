@@ -823,15 +823,8 @@ void CMobController::DoRoamTick(time_point tick)
                 }
             }
 
-            // Handle mobs that are pathed from lua.
-            if (PMob->m_roamFlags & ROAMFLAG_SCRIPT)
-            {
-                PMob->PAI->EventHandler.triggerListener("ROAM_ACTION", CLuaBaseEntity(PMob));
-                luautils::OnMobRoamAction(PMob);
-                m_LastActionTime = m_Tick;
-            }
             // if I just disengaged check if I should despawn
-            else if (PMob->IsFarFromHome())
+            if (!PMob->getMobMod(MOBMOD_DONT_ROAM_HOME) && PMob->IsFarFromHome())
             {
                 if (PMob->CanRoamHome() && PMob->PAI->PathFind->PathTo(PMob->m_SpawnPoint))
                 {
@@ -882,6 +875,7 @@ void CMobController::DoRoamTick(time_point tick)
                 else if (PMob->m_roamFlags & ROAMFLAG_EVENT)
                 {
                     // allow custom event action
+                    PMob->PAI->EventHandler.triggerListener("ROAM_ACTION", CLuaBaseEntity(PMob));
                     luautils::OnMobRoamAction(PMob);
                     m_LastActionTime = m_Tick;
                 }
@@ -971,7 +965,7 @@ void CMobController::FollowRoamPath()
 
             // face spawn rotation if I just moved back to spawn
             // used by dynamis mobs, bcnm mobs etc
-            if ((PMob->m_roamFlags & ROAMFLAG_EVENT) && distance(PMob->loc.p, PMob->m_SpawnPoint) <= PMob->m_maxRoamDistance)
+            if (PMob->getMobMod(MOBMOD_ROAM_RESET_FACING) && distance(PMob->loc.p, PMob->m_SpawnPoint) <= PMob->m_maxRoamDistance)
             {
                 PMob->loc.p.rotation = PMob->m_SpawnPoint.rotation;
             }

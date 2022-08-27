@@ -866,6 +866,7 @@ namespace mobutils
         PMob->m_maxRoamDistance = 0.5f; // always go back to spawn
 
         PMob->setMobMod(MOBMOD_NO_DESPAWN, 1);
+        PMob->setMobMod(MOBMOD_ROAM_RESET_FACING, 1);
     }
 
     void SetupNMMob(CMobEntity* PMob)

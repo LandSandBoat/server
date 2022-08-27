@@ -60,7 +60,8 @@ function addFollower(leader, follower, options)
     followerToLeaderMap[followerId] = leader
 
     follower:addListener("ROAM_ACTION", "FOLLOW_ROAM_ACTION", onMobRoamAction)
-    follower:setRoamFlags(xi.roamFlag.SCRIPT)
+    follower:setRoamFlags(xi.roamFlag.EVENT)
+    follower:setMobMod(xi.mobMod.DONT_ROAM_HOME, 1)
     follower:setMobMod(xi.mobMod.ROAM_COOL, options.roamCooldown)
     followerOptions[followerId] = options
 end
