@@ -1,15 +1,11 @@
 -----------------------------------
 -- Zone: Wajaom_Woodlands (51)
 -----------------------------------
-local ID = require("scripts/zones/Wajaom_Woodlands/IDs")
-require("scripts/globals/chocobo_digging")
-require("scripts/globals/settings")
-require("scripts/globals/missions")
-require("scripts/globals/chocobo")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
-require("scripts/globals/helm")
-require("scripts/globals/zone")
+local ID = require('scripts/zones/Wajaom_Woodlands/IDs')
+require('scripts/globals/chocobo_digging')
+require('scripts/globals/chocobo')
+require('scripts/globals/helm')
+require('scripts/globals/zone')
 -----------------------------------
 local zone_object = {}
 

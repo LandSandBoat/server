@@ -1,9 +1,9 @@
 -----------------------------------
 -- Zone: Behemoths_Dominion (127)
 -----------------------------------
-local ID = require("scripts/zones/Behemoths_Dominion/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/zone")
+local ID = require('scripts/zones/Behemoths_Dominion/IDs')
+require('scripts/globals/conquest')
+require('scripts/globals/zone')
 -----------------------------------
 local zone_object = {}
 

@@ -1,9 +1,9 @@
 -----------------------------------
 -- Zone: Korroloka Tunnel (173)
 -----------------------------------
-local ID = require("scripts/zones/Korroloka_Tunnel/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/helm")
+local ID = require('scripts/zones/Korroloka_Tunnel/IDs')
+require('scripts/globals/conquest')
+require('scripts/globals/helm')
 -----------------------------------
 local zone_object = {}
 
@@ -18,9 +18,11 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
+
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(-500, -21.824, 0.358, 60)
     end
+
     return cs
 end
 
@@ -36,10 +38,12 @@ zone_object.onRegionEnter = function(player, region)
                 player:messageSpecial(ID.text.ENTERED_SPRING)
                 player:setLocalVar("POOL_TIME", os.time())
             end,
+
             [2] = function (x)  -- Center Pool
                 player:messageSpecial(ID.text.ENTERED_SPRING)
                 player:setLocalVar("POOL_TIME", os.time())
             end,
+
             [3] = function (x)  -- Right pool
                 player:messageSpecial(ID.text.ENTERED_SPRING)
                 player:setLocalVar("POOL_TIME", os.time())

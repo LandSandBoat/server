@@ -5,18 +5,16 @@
 -- Recast Time: 1:00:00
 -- Duration: 0:01:00
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
+require("scripts/globals/job_utils/red_mage")
 -----------------------------------
 local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)
-    ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
-    return 0, 0
+    return xi.job_utils.red_mage.checkChainspell(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(xi.effect.CHAINSPELL, 1, 0, 60)
+    xi.job_utils.red_mage.useChainspell(player, target, ability)
 end
 
 return ability_object
