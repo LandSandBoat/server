@@ -102,6 +102,11 @@ float distanceSquared(const position_t& A, const position_t& B, bool ignoreVerti
     return diff_x * diff_x + diff_y * diff_y + diff_z * diff_z;
 }
 
+bool distanceWithin(const position_t& A, const position_t& B, float within, bool ignoreVertical)
+{
+    return distanceSquared(A, B, ignoreVertical) <= square(within);
+}
+
 int32 intpow32(int32 base, int32 exponent)
 {
     int32 power = 1;
@@ -212,11 +217,6 @@ bool beside(const position_t& A, const position_t& B, uint8 coneAngle)
     uint8 facingDiff = abs(facingAngle(B, A));
     uint8 halfAngle  = static_cast<uint8>(coneAngle / 2);
     return (facingDiff > 64 - halfAngle) && (facingDiff < 64 + halfAngle);
-}
-
-bool distanceWithin(const position_t& A, const position_t& B, float within, bool ignoreVertical)
-{
-    return distanceSquared(A, B, ignoreVertical) <= within * within;
 }
 
 /**

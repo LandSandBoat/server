@@ -8,7 +8,6 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     local mobId = mob:getID()
-    local hpp = mob:getHPP()
     local x = mob:getXPos()
     local y = mob:getYPos()
     local z = mob:getZPos()
@@ -28,7 +27,7 @@ entity.onMobSpawn = function(mob)
                 follower:spawn()
                 follower:setMobFlags(1153, followerId)
             end
-            
+
             xi.follow.follow(follower, mob)
         end
     end

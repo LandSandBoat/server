@@ -573,7 +573,8 @@ function utils.lateralTranslateWithOriginRotation(origin, translation)
 end
 
 function utils.getNearPosition(origin, offset, radians)
-    local destination = {
+    local destination =
+    {
         x = origin.x + math.cos(2 * math.pi - radians) * offset,
         y = origin.y,
         z = origin.z + math.sin(2 * math.pi - radians) * offset

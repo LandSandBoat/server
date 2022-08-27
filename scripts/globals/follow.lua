@@ -50,7 +50,9 @@ function addFollower(leader, follower, options)
     local leaderId = leader:getID()
     local followerId = follower:getID()
 
-    if followerToLeaderMap[followerId] then removeFollower(followerToLeaderMap[followerId], follower) end
+    if followerToLeaderMap[followerId] then
+        removeFollower(followerToLeaderMap[followerId], follower)
+    end
 
     leaderToFollowersMap[leaderId] = leaderToFollowersMap[leaderId] or {}
 
@@ -71,12 +73,17 @@ function removeFollower(leader, follower)
         followerToLeaderMap[followerId] = nil
     end
 
-    for i, mob in ipairs(leaderToFollowersMap[leaderId]) do
-        if mob:getID() == followerId then table.remove(leaderToFollowersMap[leaderId], i) end
-    end
+    if leaderToFollowersMap[leaderId] then
+        for i, mob in ipairs(leaderToFollowersMap[leaderId]) do
+            if mob:getID() == followerId then
+                table.remove(leaderToFollowersMap[leaderId], i)
+                break
+            end
+        end
 
-    if #leaderToFollowersMap[leaderId] == 0 then
-        leaderToFollowersMap[leaderId] = nil
+        if #leaderToFollowersMap[leaderId] == 0 then
+            leaderToFollowersMap[leaderId] = nil
+        end
     end
 
     follower:removeListener("FOLLOW_ROAM_ACTION")
@@ -89,12 +96,12 @@ function xi.follow.clearFollowers(leader)
     if not leaderToFollowersMap[leaderId] then return end
 
     for _, follower in ipairs(leaderToFollowersMap[leaderId]) do
-        if followerToLeaderMap[follower:getID()] == leaderId then
-            followerToLeaderMap[follower:getID()] = nil
+        local followerId = follower:getID()
+        if followerToLeaderMap[followerId] == leaderId then
+            followerToLeaderMap[followerId] = nil
+            follower:removeListener("FOLLOW_ROAM_ACTION")
+            followerOptions[followerId] = nil
         end
-        
-        follower:removeListener("FOLLOW_ROAM_ACTION")
-        followerOptions[followerId] = nil
     end
 
     leaderToFollowersMap[leaderId] = nil
@@ -129,19 +136,15 @@ local function getAverageWorldAngle(origin, mobsPos)
     return utils.getWorldAngle(origin, pos)
 end
 
-local function getAverageWorldRotation(origin, mobsPos)
-    return utils.angleToRotation(getAverageWorldAngle(origin, mobsPos))
-end
-
 local function filterFollowersToPosArray(leaderPos, followerPos, followers, withinDistance, withinAngle)
     local filteredPos = {}
 
     for _, mob in ipairs(followers) do
         local mobPos = mob:getPos()
         if
-            mob:isSpawned()
-            and not utils.distanceWithin(leaderPos, mobPos, withinDistance, true)
-            and utils.angleWithin(leaderPos, followerPos, mobPos, withinAngle)
+            mob:isSpawned() and
+            not utils.distanceWithin(leaderPos, mobPos, withinDistance, true) and
+            utils.angleWithin(leaderPos, followerPos, mobPos, withinAngle)
         then
             table.insert(filteredPos, mobPos)
         end

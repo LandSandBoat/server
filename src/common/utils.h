@@ -37,9 +37,10 @@ int32 checksum(uint8* buf, uint32 buflen, char checkhash[16]);
 int   config_switch(const char* str);
 bool  bin2hex(char* output, unsigned char* input, size_t count);
 
-float           distance(const position_t& A, const position_t& B, bool ignoreVertical = false);        // distance between positions. Use only horizontal plane (x and z) if ignoreVertical is set.
-float           distanceSquared(const position_t& A, const position_t& B, bool ignoreVertical = false); // squared distance between positions (use squared unless otherwise needed)
-constexpr float square(float distance)                                                                  // constexpr square (used with distanceSquared)
+float           distance(const position_t& A, const position_t& B, bool ignoreVertical = false);                     // distance between positions. Use only horizontal plane (x and z) if ignoreVertical is set.
+float           distanceSquared(const position_t& A, const position_t& B, bool ignoreVertical = false);              // squared distance between positions (use squared unless otherwise needed)
+bool            distanceWithin(const position_t& A, const position_t& B, float within, bool ignoreVertical = false); // returns true if the distance between the points is <= within.
+constexpr float square(float distance)                                                                               // constexpr square (used with distanceSquared)
 {
     return distance * distance;
 }
@@ -56,7 +57,6 @@ bool       facing(const position_t& A, const position_t& B, uint8 coneAngle);  /
 bool       infront(const position_t& A, const position_t& B, uint8 coneAngle); // true if A is infront of B within coneAngle degrees
 bool       behind(const position_t& A, const position_t& B, uint8 coneAngle);  // true if A is behind of B within coneAngle degrees
 bool       beside(const position_t& A, const position_t& B, uint8 coneAngle);  // true if A is to a side of B within coneAngle degrees
-bool       distanceWithin(const position_t& A, const position_t& B, float within, bool ignoreVertical = false);
 position_t nearPosition(const position_t& A, float offset, float radian);      // Returns a position near the given position
 
 int32 hasBit(uint16 value, const uint8* BitArray, uint32 size); // Check for the presence of a bit in the array
