@@ -1,13 +1,13 @@
 -----------------------------------
 -- Zone: Buburimu_Peninsula (118)
 -----------------------------------
-local ID = require("scripts/zones/Buburimu_Peninsula/IDs")
-require("scripts/quests/i_can_hear_a_rainbow")
-require("scripts/globals/chocobo_digging")
-require("scripts/globals/conquest")
-require("scripts/globals/helm")
-require("scripts/globals/zone")
-require("scripts/missions/amk/helpers")
+local ID = require('scripts/zones/Buburimu_Peninsula/IDs')
+require('scripts/quests/i_can_hear_a_rainbow')
+require('scripts/globals/chocobo_digging')
+require('scripts/globals/conquest')
+require('scripts/globals/helm')
+require('scripts/globals/zone')
+require('scripts/missions/amk/helpers')
 -----------------------------------
 local zone_object = {}
 

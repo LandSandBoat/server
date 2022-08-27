@@ -1,11 +1,11 @@
 -----------------------------------
 -- Zone: North_Gustaberg (106)
 -----------------------------------
-local ID = require("scripts/zones/North_Gustaberg/IDs")
-require("scripts/quests/i_can_hear_a_rainbow")
-require("scripts/globals/chocobo_digging")
-require("scripts/globals/conquest")
-require("scripts/globals/missions")
+local ID = require('scripts/zones/North_Gustaberg/IDs')
+require('scripts/quests/i_can_hear_a_rainbow')
+require('scripts/globals/chocobo_digging')
+require('scripts/globals/conquest')
+require('scripts/globals/missions')
 -----------------------------------
 local zone_object = {}
 

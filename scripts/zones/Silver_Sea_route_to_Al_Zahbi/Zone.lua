@@ -1,9 +1,7 @@
 -----------------------------------
---
 -- Zone: Silver_Sea_route_to_Al_Zahbi
---
 -----------------------------------
-local ID = require("scripts/zones/Silver_Sea_route_to_Al_Zahbi/IDs")
+local ID = require('scripts/zones/Silver_Sea_route_to_Al_Zahbi/IDs')
 -----------------------------------
 local zone_object = {}
 
@@ -27,7 +25,7 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    if (csid == 1025) then
+    if csid == 1025 then
         player:setPos(0, 0, 0, 0, 50)
     end
 end

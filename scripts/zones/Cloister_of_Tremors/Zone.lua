@@ -1,10 +1,8 @@
 -----------------------------------
---
 -- Zone: Cloister_of_Tremors (209)
---
 -----------------------------------
-local ID = require("scripts/zones/Cloister_of_Tremors/IDs")
-require("scripts/globals/conquest")
+local ID = require('scripts/zones/Cloister_of_Tremors/IDs')
+require('scripts/globals/conquest')
 -----------------------------------
 local zone_object = {}
 
@@ -17,9 +15,11 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
+
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(-636.001, -16.563, -500.023, 205)
     end
+
     return cs
 end
 

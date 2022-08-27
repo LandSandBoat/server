@@ -434,8 +434,14 @@ void SmallPacket0x00C(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             switch (PChar->petZoningInfo.petType)
             {
-                case PET_TYPE::AUTOMATON:
                 case PET_TYPE::JUG_PET:
+                    if (!settings::get<bool>("map.KEEP_JUGPET_THROUGH_ZONING"))
+                    {
+                        break;
+                    }
+                    [[fallthrough]];
+                case PET_TYPE::AVATAR:
+                case PET_TYPE::AUTOMATON:
                 case PET_TYPE::WYVERN:
                 case PET_TYPE::LUOPAN:
                     petutils::SpawnPet(PChar, PChar->petZoningInfo.petID, true);
@@ -444,10 +450,10 @@ void SmallPacket0x00C(map_session_data_t* const PSession, CCharEntity* const PCh
                 default:
                     break;
             }
+            // Reset the petZoning info
+            PChar->resetPetZoningInfo();
         }
     }
-    // Reset the petZoning info
-    PChar->resetPetZoningInfo();
 }
 
 /************************************************************************
@@ -1330,7 +1336,9 @@ void SmallPacket0x028(map_session_data_t* const PSession, CCharEntity* const PCh
         }
     }
 
-    if (charutils::UpdateItem(PChar, container, slotID, -quantity) != 0)
+    // Linkshells (other than Linkpearls and Pearlsacks) and temporary items cannot be stored in the Recycle Bin.
+    // TODO: Are there any special messages here?
+    if (!settings::get<bool>("map.ENABLE_ITEM_RECYCLE_BIN") || PItem->isType(ITEM_LINKSHELL) || container == CONTAINER_ID::LOC_TEMPITEMS)
     {
         // Todo: add item NAME to this msg before ID. Problem is it's not a string.
         PChar->pushPacket(new CMessageStandardPacket(nullptr, ItemID, quantity, MsgStd::ThrowAway));
@@ -5233,11 +5241,15 @@ void SmallPacket0x0B6(map_session_data_t* const PSession, CCharEntity* const PCh
 
     std::string RecipientName = std::string((const char*)data[6], 15);
 
+    char  message[256]    = {}; // /t messages using "<t>" with a long named NPC targeted caps out at 138 bytes, increasing to the nearest power of 2
+    uint8 messagePosition = 0x15;
+
+    memcpy(&message, data[messagePosition], data.getSize() - messagePosition);
+
     if (strcmp(RecipientName.c_str(), "_CUSTOM_MENU") == 0 &&
         luautils::HasCustomMenuContext(PChar))
     {
-        std::string selection((const char*)data[21]);
-        luautils::HandleCustomMenu(PChar, selection);
+        luautils::HandleCustomMenu(PChar, message);
         return;
     }
 
@@ -5245,7 +5257,7 @@ void SmallPacket0x0B6(map_session_data_t* const PSession, CCharEntity* const PCh
     strncpy((char*)packetData + 4, RecipientName.c_str(), RecipientName.length() + 1);
     ref<uint32>(packetData, 0) = PChar->id;
 
-    message::send(MSG_CHAT_TELL, packetData, RecipientName.length() + 5, new CChatMessagePacket(PChar, MESSAGE_TELL, (const char*)data[21]));
+    message::send(MSG_CHAT_TELL, packetData, RecipientName.length() + 5, new CChatMessagePacket(PChar, MESSAGE_TELL, message));
 
     if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<bool>("map.AUDIT_TELL"))
     {
@@ -6813,6 +6825,15 @@ void SmallPacket0x100(map_session_data_t* const PSession, CCharEntity* const PCh
             else if (prevjob == JOB_BLU)
             {
                 blueutils::UnequipAllBlueSpells(PChar);
+            }
+
+            bool canUseMeritMode = PChar->jobs.job[PChar->GetMJob()] >= 75 && charutils::hasKeyItem(PChar, 606);
+            if (!canUseMeritMode && PChar->MeritMode == true)
+            {
+                if (sql->Query("UPDATE char_exp SET mode = %u WHERE charid = %u", 0, PChar->id) != SQL_ERROR)
+                {
+                    PChar->MeritMode = false;
+                }
             }
         }
 

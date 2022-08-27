@@ -64,7 +64,7 @@ mission.sections =
 
         [xi.zone.WALK_OF_ECHOES] =
         {
-            ['Ornate_Door'] =
+            ['_521'] =
             {
                 onTrigger = function(player, npc)
                     -- NOTE: BCNM Entry Event: 32000, Params 0, 300, 200, 1 following
@@ -117,6 +117,26 @@ mission.sections =
 
                     mission:setVar(player, 'Status', 2)
                     player:setPos(-700.063, -17.6, -331.903, 64, xi.zone.WALK_OF_ECHOES)
+                end,
+            },
+        },
+    },
+
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return player:hasCompletedMission(mission.areaId, mission.missionId)
+        end,
+
+        [xi.zone.GRAUBERG_S] =
+        {
+            ['Veridical_Conflux'] = mission:event(29, 89, 12354, 59449, 120, 0, 8323089, 0, 0),
+
+            onEventFinish =
+            {
+                [29] = function(player, csid, option, npc)
+                    if option == 99 then
+                        player:setPos(-700.042, 0.4, -441.301, 192, xi.zone.WALK_OF_ECHOES)
+                    end
                 end,
             },
         },

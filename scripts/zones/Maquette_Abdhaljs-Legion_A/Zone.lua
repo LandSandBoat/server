@@ -1,9 +1,7 @@
 -----------------------------------
---
 -- Zone: Maquette Abdhaljs-Legion A
---
 -----------------------------------
-local ID = require("scripts/zones/Maquette_Abdhaljs-Legion_A/IDs")
+local ID = require('scripts/zones/Maquette_Abdhaljs-Legion_A/IDs')
 -----------------------------------
 local zone_object = {}
 
