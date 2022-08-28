@@ -6,7 +6,7 @@ require("scripts/globals/status")
 mixins = {require("scripts/mixins/rage")}
 -----------------------------------
 local entity = {}
--- TODO INITIAL COMMIT Just put here so players cannot run through the NM's 
+-- TODO INITIAL COMMIT Just put here so players cannot run through the NM's
 entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.SLEEPRES, 10000)
     mob:setMod(xi.mod.LULLABYRES, 10000)

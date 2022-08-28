@@ -5,7 +5,7 @@
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
--- TODO INITIAL COMMIT Just put here so players cannot run through the NM's 
+-- TODO INITIAL COMMIT Just put here so players cannot run through the NM's
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 300)
     mob:addMod(xi.mod.SLEEPRES, 10000)
