@@ -5089,10 +5089,11 @@ namespace battleutils
             charmChance *= 1.1f;
         }
 
-        float chrRatio = ((PCharmer->CHR() - PTarget->CHR())) / 100.f;
+        // Clamp so we can't have -charmChance
+        float chrRatio = std::clamp((PCharmer->CHR() - PTarget->CHR()) / 100.f, 0.01f, 0.95f);
 
-        chrRatio = std::clamp(chrRatio, (1 / 100.f), chrRatio); // Clamp so we can't have -charmChance
-        charmChance *= (1.f * (chrRatio * 5.83));
+        // Multiply by chrRatio to reduce initial base number
+        charmChance *= 1.f * (chrRatio * 5.83);
         charmChance *= 1 - charmres;
 
         // Retail doesn't take light/apollo into account for Gauge

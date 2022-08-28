@@ -765,7 +765,10 @@ xi.mobskills.mobDrainStatusEffectMove = function(mob, target)
 end
 
 -- Adds a status effect to a target
-xi.mobskills.mobStatusEffectMove = function(mob, target, typeEffect, power, tick, duration)
+xi.mobskills.mobStatusEffectMove = function(mob, target, typeEffect, power, tick, duration, subEffect, subPower)
+
+    subEffect = subEffect or 0
+    subPower = subPower or 0
 
     if (target:canGainStatusEffect(typeEffect, power)) then
         local statmod = xi.mod.INT
@@ -776,7 +779,7 @@ xi.mobskills.mobStatusEffectMove = function(mob, target, typeEffect, power, tick
         if (resist >= 0.25) then
 
             local totalDuration = utils.clamp(duration * resist, 1)
-            target:addStatusEffect(typeEffect, power, tick, totalDuration)
+            target:addStatusEffect(typeEffect, power, tick, totalDuration, subEffect, subPower)
 
             return xi.msg.basic.SKILL_ENFEEB_IS
         end

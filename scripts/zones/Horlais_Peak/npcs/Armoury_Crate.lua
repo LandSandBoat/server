@@ -619,18 +619,14 @@ local loot =
             {itemid =   791, droprate =  500}, -- aquamarine
         },
         {
-            {itemid =     0, droprate =  500}, -- nothing
+            {itemid =     0, droprate =  200}, -- nothing
+            {itemid = 14661, droprate =  400}, -- teleport_ring_holla
+            {itemid = 14664, droprate =  400}, -- teleport_ring_vahzl
+        },
+        {
+            {itemid = 13687, droprate =  250}, -- sapient_cape
+            {itemid = 14870, droprate =  250}, -- trainers_wristbands
             {itemid =  4224, droprate =  500}, -- demon_quiver
-        },
-        {
-            {itemid =     0, droprate =  600}, -- nothing
-            {itemid = 14661, droprate =  200}, -- teleport_ring_holla
-            {itemid = 14664, droprate =  200}, -- teleport_ring_vahzl
-        },
-        {
-            {itemid =     0, droprate =  600}, -- nothing
-            {itemid = 13687, droprate =  200}, -- sapient_cape
-            {itemid = 14870, droprate =  200}, -- trainers_wristbands
         },
     },
 

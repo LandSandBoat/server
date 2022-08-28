@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -785,6 +785,11 @@ void CStatusEffectContainer::DelStatusEffectsByFlag(uint32 flag, bool silent)
     {
         if (PStatusEffect->GetFlag() & flag)
         {
+            // If this is a Nightmare effect flag, it needs to be removed explictly by a cure
+
+            if (!(flag & EFFECTFLAG_DAMAGE
+                && PStatusEffect->GetStatusID() == EFFECT_SLEEP
+                && PStatusEffect->GetSubID() == (uint32)EFFECT_BIO))
             RemoveStatusEffect(PStatusEffect, silent);
         }
     }
@@ -1488,6 +1493,12 @@ void CStatusEffectContainer::SetEffectParams(CStatusEffect* StatusEffect)
         name.insert(0, "globals/effects/");
         name.insert(name.size(), effects::EffectsParams[effect].Name);
     }
+    // Determine if this is a Nightmare effect -- Sleep with a Bio sub id
+    else if ((effect == EFFECT_SLEEP && (StatusEffect->GetSubID() == (uint32)EFFECT_BIO)))
+    {
+        name.insert(0, "globals/effects/");
+        name.insert(name.size(), effects::EffectsParams[effect].Name);
+    }
     else
     {
         CItem* Ptem = itemutils::GetItemPointer(StatusEffect->GetSubID());
@@ -1892,7 +1903,9 @@ void CStatusEffectContainer::TickRegen(time_point tick)
             {
                 DelStatusEffectSilent(EFFECT_HEALING);
                 m_POwner->takeDamage(damage);
-                WakeUp();
+                if (!(m_POwner->StatusEffectContainer->GetStatusEffect(EFFECT_SLEEP)
+                    && m_POwner->StatusEffectContainer->GetStatusEffect(EFFECT_SLEEP)->GetSubID() == (uint32)EFFECT_BIO))
+                    WakeUp(); // dots dont wake up from nightmare
             }
         }
 
