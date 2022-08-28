@@ -13,15 +13,13 @@ on:
 
 jobs:
   Sanity_Checks:
-    runs-on: ubuntu-22.04
+    runs-on: [self-hosted, linux]
     steps:
     - uses: actions/checkout@v1
       with:
         fetch-depth: 0
     - name: Install Dependencies
       run: |
-        sudo apt-get update
-        sudo apt-get install -y software-properties-common cppcheck luajit-5.1-dev luarocks mariadb-server mariadb-client libmariadb-dev-compat
         pip install -r tools/requirements.txt
         luarocks install luacheck --local
     - id: changed-files
@@ -91,13 +89,6 @@ jobs:
           exit 1
         fi
         exit 0
-    - name: Upload CPP Formatting Diff
-      if: hashFiles('cpp_formatting_checks.txt') != ''
-      uses: actions/upload-artifact@v2
-      with:
-        name: clang_format_diff
-        path: |
-          cpp_formatting_checks.txt
     - name: Lua Checks
       if: always()
       run: |
@@ -151,15 +142,11 @@ jobs:
         exit 0
 
   Linux_Clang14_64bit:
-    runs-on: ubuntu-22.04
+    runs-on: [self-hosted, linux]
     steps:
     - uses: actions/checkout@v1
       with:
         fetch-depth: 1
-    - name: Install Dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev
     #- name: Cache 'build' folder
     #  uses: actions/cache@v3
     #  with:
@@ -174,25 +161,13 @@ jobs:
     - name: Build
       run: |
         cmake --build build -j4
-    - name: Archive Executables
-      uses: actions/upload-artifact@v2
-      with:
-        name: linux_executables
-        path: |
-          xi_connect
-          xi_map
-          xi_search
 
   Linux_GCC11_64bit:
-    runs-on: ubuntu-22.04
+    runs-on: [self-hosted, linux]
     steps:
     - uses: actions/checkout@v1
       with:
         fetch-depth: 1
-    - name: Install Dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev
     #- name: Cache 'build' folder
     #  uses: actions/cache@v3
     #  with:
@@ -208,293 +183,288 @@ jobs:
       run: |
         cmake --build build -j4
 
-  Windows_32bit:
-    runs-on: windows-latest
-    env:
-      MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
-    steps:
-      - uses: actions/checkout@v1
-        with:
-          fetch-depth: 1
-      - name: Cache 'build' folder
-        uses: actions/cache@v3
-        with:
-          path: build
-          key: ${{ runner.os }}-msvc32
-      - name: Configure CMake
-        shell: cmd
-        run: |
-          mkdir -p build
-          cmake -S . -B build -A Win32
-      - name: Build
-        shell: cmd
-        run: |
-          cmake --build build -j4
+  # Windows_32bit:
+    # runs-on: [self-hosted, windows]
+    # env:
+      # MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
+    # steps:
+      # - uses: actions/checkout@v1
+        # with:
+          # fetch-depth: 1
+      # - name: Cache 'build' folder
+        # uses: actions/cache@v3
+        # with:
+          # path: build
+          # key: ${{ runner.os }}-msvc32
+      # - name: Configure CMake
+        # shell: cmd
+        # run: |
+          # mkdir -p build
+          # cmake -S . -B build -A Win32
+      # - name: Build
+        # shell: cmd
+        # run: |
+          # cmake --build build -j4
 
-  Windows_64bit_Debug:
-    runs-on: windows-latest
-    env:
-      MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
-    steps:
-      - uses: actions/checkout@v1
-        with:
-          fetch-depth: 1
-      - name: Cache 'build' folder
-        uses: actions/cache@v3
-        with:
-          path: build
-          key: ${{ runner.os }}-msvc64d
-      - name: Configure CMake
-        shell: cmd
-        run: |
-          mkdir -p build
-          cmake -S . -B build -A x64 -DCMAKE_BUILD_TYPE=Debug
-      - name: Build
-        shell: cmd
-        run: |
-          cmake --build build -j4
-      - name: Archive Executables
-        uses: actions/upload-artifact@v2
-        with:
-          name: windows_executables
-          path: |
-            xi_connect.exe
-            xi_map.exe
-            xi_search.exe
+  # Windows_64bit_Debug:
+    # runs-on: [self-hosted, windows]
+    # env:
+      # MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
+    # steps:
+      # - uses: actions/checkout@v1
+        # with:
+          # fetch-depth: 1
+      # - name: Cache 'build' folder
+        # uses: actions/cache@v3
+        # with:
+          # path: build
+          # key: ${{ runner.os }}-msvc64d
+      # - name: Configure CMake
+        # shell: cmd
+        # run: |
+          # mkdir -p build
+          # cmake -S . -B build -A x64 -DCMAKE_BUILD_TYPE=Debug
+      # - name: Build
+        # shell: cmd
+        # run: |
+          # cmake --build build -j4
+      # - name: Archive Executables
+        # uses: actions/upload-artifact@v2
+        # with:
+          # name: windows_executables
+          # path: |
+            # xi_connect.exe
+            # xi_map.exe
+            # xi_search.exe
 
-  Windows_64bit_Release_Tracy_Modules_World:
-    runs-on: windows-latest
-    env:
-      MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
-    steps:
-      - uses: actions/checkout@v1
-        with:
-          fetch-depth: 1
-      - name: Cache 'build' folder
-        uses: actions/cache@v3
-        with:
-          path: build
-          key: ${{ runner.os }}-msvc64-t
-      - name: Enable Modules
-        shell: bash
-        run: |
-          python3 << EOF
-          with open("modules/init.txt", "w") as f:
-              f.write("custom\n")
-              f.write("era\n")
-              f.write("renamer\n")
-          EOF
-      - name: Configure CMake
-        shell: cmd
-        run: |
-          mkdir -p build
-          cmake -S . -B build -A x64 -DCMAKE_BUILD_TYPE=Release -DTRACY=ON -DBUILD_WORLD=ON
-      - name: Build
-        shell: cmd
-        run: |
-          cmake --build build -j4
+  # Windows_64bit_Release_Tracy_Modules_World:
+    # runs-on: [self-hosted, windows]
+    # env:
+      # MSBUILD_PATH: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\
+    # steps:
+      # - uses: actions/checkout@v1
+        # with:
+          # fetch-depth: 1
+      # - name: Cache 'build' folder
+        # uses: actions/cache@v3
+        # with:
+          # path: build
+          # key: ${{ runner.os }}-msvc64-t
+      # - name: Enable Modules
+        # shell: bash
+        # run: |
+          # python3 << EOF
+          # with open("modules/init.txt", "w") as f:
+              # f.write("custom\n")
+              # f.write("era\n")
+              # f.write("renamer\n")
+          # EOF
+      # - name: Configure CMake
+        # shell: cmd
+        # run: |
+          # mkdir -p build
+          # cmake -S . -B build -A x64 -DCMAKE_BUILD_TYPE=Release -DTRACY=ON -DBUILD_WORLD=ON
+      # - name: Build
+        # shell: cmd
+        # run: |
+          # cmake --build build -j4
 
-  MacOS_64bit:
+  # MacOS_64bit:
     # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-11-Readme.md
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v1
-        with:
-          fetch-depth: 1
-      - name: Install Dependencies (Brew)
-        run: |
-          brew install mariadb zeromq zmq
-      - name: Install Dependencies (LuaJIT)
-        run: |
-          git clone https://github.com/LuaJIT/LuaJIT.git
-          cd LuaJIT
-          sudo make install MACOSX_DEPLOYMENT_TARGET=$(sw_vers -productVersion) -j $(sysctl -n hw.physicalcpu)
-          sudo ln -sf luajit-2.1.0-beta3 /usr/local/bin/luajit
-      - name: Cache 'build' folder
-        uses: actions/cache@v3
-        with:
-          path: build
-          key: ${{ runner.os }}-osx
-      - name: Configure CMake
-        run: |
-          mkdir -p build
-          cmake -S . -B build
-      - name: Build
-        run: |
-          cmake --build build -j4
+    # runs-on: self-hosted
+    # steps:
+      # - uses: actions/checkout@v1
+        # with:
+          # fetch-depth: 1
+      # - name: Install Dependencies (Brew)
+        # run: |
+          # brew install mariadb zeromq zmq
+      # - name: Install Dependencies (LuaJIT)
+        # run: |
+          # git clone https://github.com/LuaJIT/LuaJIT.git
+          # cd LuaJIT
+          # sudo make install MACOSX_DEPLOYMENT_TARGET=$(sw_vers -productVersion) -j $(sysctl -n hw.physicalcpu)
+          # sudo ln -sf luajit-2.1.0-beta3 /usr/local/bin/luajit
+      # - name: Cache 'build' folder
+        # uses: actions/cache@v3
+        # with:
+          # path: build
+          # key: ${{ runner.os }}-osx
+      # - name: Configure CMake
+        # run: |
+          # mkdir -p build
+          # cmake -S . -B build
+      # - name: Build
+        # run: |
+          # cmake --build build -j4
 
-  Full_Startup_Checks_Linux:
-    runs-on: ubuntu-22.04
-    needs: Linux_Clang14_64bit
-    services:
-      mysql:
-        image: mariadb
-        env:
-          MYSQL_DATABASE: xidb
-          MYSQL_ROOT_PASSWORD: root
-        ports:
-          - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10
-    steps:
-    - uses: actions/checkout@v1
-      with:
-        fetch-depth: 1
-    - uses: actions/download-artifact@v2
-      with:
-        name: linux_executables
-        path: .
-    - name: Install Dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y software-properties-common cmake mariadb-server mariadb-client libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks
-    - name: Verify MySQL connection from container
-      run: |
-        mysql -h 127.0.0.1 -uroot -proot -e "SHOW DATABASES"
-    - name: Import SQL files
-      run: |
-        for f in sql/*.sql; do
-          echo -e "Importing $f into the database..."
-          mysql xidb -h 127.0.0.1 -uroot -proot < $f
-        done
-        mysql xidb -h 127.0.0.1 -uroot -proot -e "SHOW tables"
-    - name: Copy settings
-      run: |
-        cp settings/default/* settings/
-    - name: Enable Modules
-      shell: bash
-      run: |
-        python3 << EOF
-        with open("modules/init.txt", "w") as f:
-            f.write("custom\n")
-            f.write("era\n")
-            f.write("renamer\n")
-        EOF
-    - name: Startup and character login checks
-      uses: nick-invision/retry@v2
-      with:
-        timeout_minutes: 5
-        max_attempts: 3
-        retry_on: timeout
-        shell: bash
-        command: |
-          chmod +x xi_connect
-          chmod +x xi_map
-          chmod +x xi_search
-          ls -l
-
-          printf "\nStart server processes\n"
-          screen -d -m -S xi_connect ./xi_connect --log login-server.log
-          screen -d -m -S xi_search ./xi_search --log search-server.log
-          screen -d -m -S xi_map ./xi_map --log map-server.log
-
-          printf "\nWaiting 90s for servers to fully start up\n"
-          sleep 90s
-
-          printf "\nPopulating database\n"
-          mysql xidb -h 127.0.0.1 -uroot -proot << EOF
-          -- Clean out anything already there (just in case)
-          DELETE FROM accounts;
-          DELETE FROM chars;
-          -- Create an account
-          INSERT INTO accounts(id, login, password, timecreate, timelastmodify, status, priv)
-          VALUES(1000, 'admin', PASSWORD('admin'), NOW(), NOW(), 1, 1);
-          SELECT id, login FROM accounts;
-          -- Create a character
-          INSERT INTO chars(charid, accid, charname, pos_zone, nation, gmlevel)
-          VALUES(1, 1000, 'Test', 0, 0, 5);
-          -- Set char_look (default is 0 and trips up scripting)
-          INSERT INTO char_look (charid, face, race, size, head, body, hands, legs, feet, main, sub, ranged)
-          VALUES (1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
-          SELECT charid, face, race FROM char_look;
-          -- Update character information
-          -- Place near some Robber Crabs in Kuftal Tunnel
-          UPDATE chars
-          SET
-              pos_zone = 174,
-              pos_prevzone = 174,
-              pos_x = 55,
-              pos_y = -9,
-              pos_z = -140
-          WHERE charid = 1;
-          SELECT charid, accid, pos_zone, pos_x, pos_y, pos_z FROM chars;
-          -- Set GodMode CharVar = 1
-          INSERT INTO char_vars(charid, varname, value)
-          VALUES(1, 'GodMode', 1);
-          SELECT * FROM char_vars;
-          EOF
-
-          printf "\nRunning HeadlessXI for 60 seconds\n"
-          python3 << EOF
-          import time
-          from tools.headlessxi.hxiclient import HXIClient
-          hxi_client = HXIClient('admin', 'admin', 'localhost')
-          hxi_client.login()
-          print('Sleeping 30s')
-          time.sleep(30)
-          hxi_client.logout()
-          EOF
-
-          killall screen
-    - name: Check for errors and warnings
-      if: ${{ success() || failure() }}
-      run: |
-        cat login-server*.log
-        cat map-server*.log
-        cat search-server*.log
-
-        if grep -qi "warning\|error\|crash" login-server*.log; then
-            exit -1
-        fi
-
-        if grep -qi "warning\|error\|crash" map-server*.log; then
-            exit -1
-        fi
-
-        if grep -qi "warning\|error\|crash" search-server*.log; then
-            exit -1
-        fi
+  # Full_Startup_Checks_Linux:
+    # runs-on: [self-hosted, linux]
+    # needs: Linux_Clang14_64bit
+    # services:
+      # mysql:
+        # image: mariadb
+        # env:
+          # MYSQL_DATABASE: xidb3
+          # MYSQL_ROOT_PASSWORD: root
+        # ports:
+          # - 3308:3306
+        # options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10
+    # steps:
+    # - name: Configure CMake
+      # run: |
+        # mkdir -p build
+        # cmake -S . -B build
+    # - name: Build
+      # run: |
+        # cmake --build build
+    # - name: Verify MySQL connection from container
+      # run: |
+        # sudo mysql -h 127.0.0.1 -uroot -proot -e "SHOW DATABASES"
+    # - name: Import SQL files
+      # run: |
+        # for f in sql/*.sql; do
+          # echo -e "Importing $f into the database..."
+          # sudo mysql xidb -h 127.0.0.1 -uroot -proot < $f
+        # done
+        # for f in modules/era/sql/*.sql; do
+          # echo -e "Importing $f into the database..."
+          # sudo mysql xidb -h 127.0.0.1 -uroot -proot < $f
+        # done
+        # sudo mysql xidb -h 127.0.0.1 -uroot -proot -e "SHOW tables"
+    # - name: Copy settings
+      # run: |
+        # cp settings/default/* settings/
+    # - name: Enable Modules
+      # shell: bash
+      # run: |
+        # python3 << EOF
+        # with open("modules/init.txt", "w") as f:
+            # f.write("custom\n")
+            # f.write("era\n")
+            # f.write("renamer\n")
+        # EOF
+    # - name: Startup and character login checks
+      # uses: nick-invision/retry@v2
+      # with:
+        # timeout_minutes: 5
+        # max_attempts: 3
+        # retry_on: timeout
+        # shell: bash
+        # command: |
+          # chmod +x xi_connect
+          # chmod +x xi_map
+          # chmod +x xi_search
+          # ls -l
+#
+          # printf "\nStart server processes\n"
+          # screen -d -m -S xi_connect ./xi_connect --log login-server.log
+          # screen -d -m -S xi_search ./xi_search --log search-server.log
+          # screen -d -m -S xi_map ./xi_map --log map-server.log
+#
+          # printf "\nWaiting 90s for servers to fully start up\n"
+          # sleep 90s
+#
+          # printf "\nPopulating database\n"
+          # sudo mysql xidb -h 127.0.0.1 -uroot -proot << EOF
+          # -- Clean out anything already there (just in case)
+          # DELETE FROM accounts;
+          # DELETE FROM chars;
+          # -- Create an account
+          # INSERT INTO accounts(id, login, password, timecreate, timelastmodify, status, priv)
+          # VALUES(1000, 'admin', PASSWORD('admin'), NOW(), NOW(), 1, 1);
+          # SELECT id, login FROM accounts;
+          # -- Create a character
+          # INSERT INTO chars(charid, accid, charname, pos_zone, nation, gmlevel)
+          # VALUES(1, 1000, 'Test', 0, 0, 5);
+          # -- Set char_look (default is 0 and trips up scripting)
+          # INSERT INTO char_look (charid, face, race, size, head, body, hands, legs, feet, main, sub, ranged)
+          # VALUES (1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
+          # SELECT charid, face, race FROM char_look;
+          # -- Update character information
+          # -- Place near some Robber Crabs in Kuftal Tunnel
+          # UPDATE chars
+          # SET
+              # pos_zone = 174,
+              # pos_prevzone = 174,
+              # pos_x = 55,
+              # pos_y = -9,
+              # pos_z = -140
+          # WHERE charid = 1;
+          # SELECT charid, accid, pos_zone, pos_x, pos_y, pos_z FROM chars;
+          # -- Set GodMode CharVar = 1
+          # INSERT INTO char_vars(charid, varname, value)
+          # VALUES(1, 'GodMode', 1);
+          # SELECT * FROM char_vars;
+          # EOF
+#
+          # printf "\nRunning HeadlessXI for 60 seconds\n"
+          # python3 << EOF
+          # import time
+          # from tools.headlessxi.hxiclient import HXIClient
+          # hxi_client = HXIClient('admin', 'admin', 'localhost')
+          # hxi_client.login()
+          # print('Sleeping 30s')
+          # time.sleep(30)
+          # hxi_client.logout()
+          # EOF
+#
+          # killall screen
+    # - name: Check for errors and warnings
+      # if: ${{ success() || failure() }}
+      # run: |
+        # cat login-server*.log
+        # cat map-server*.log
+        # cat search-server*.log
+#
+        # if grep -qi "warning\|error\|crash" login-server*.log; then
+            # exit -1
+        # fi
+#
+        # if grep -qi "warning\|error\|crash" map-server*.log; then
+            # exit -1
+        # fi
+#
+        # if grep -qi "warning\|error\|crash" search-server*.log; then
+            # exit -1
+        # fi
 
   MultiInstance_Startup_Checks_Linux:
-    runs-on: ubuntu-22.04
-    needs: Linux_Clang14_64bit
+    runs-on: [self-hosted, linux]
     services:
       mysql:
         image: mariadb
         env:
-          MYSQL_DATABASE: xidb
+          MYSQL_DATABASE: xidb2
           MYSQL_ROOT_PASSWORD: root
         ports:
-          - 3306:3306
+          - 3307:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=10s --health-retries=10
     steps:
-    - uses: actions/checkout@v1
-      with:
-        fetch-depth: 1
-    - uses: actions/download-artifact@v2
-      with:
-        name: linux_executables
-        path: .
-    - name: Install Dependencies
+    - name: Configure CMake
       run: |
-        sudo apt-get update
-        sudo apt-get install -y software-properties-common cmake mariadb-server mariadb-client libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks
+        mkdir -p build
+        cmake -S . -B build
+    - name: Build
+      run: |
+        cmake --build build
     - name: Verify MySQL connection from container
       run: |
-        mysql -h 127.0.0.1 -uroot -proot -e "SHOW DATABASES"
+        sudo mysql -h 127.0.0.1 -uroot -proot -e "SHOW DATABASES"
     - name: Import SQL files
       run: |
         for f in sql/*.sql; do
           echo -e "Importing $f into the database..."
-          mysql xidb -h 127.0.0.1 -uroot -proot < $f
+          sudo mysql xidb -h 127.0.0.1 -uroot -proot < $f
         done
         for f in modules/era/sql/*.sql; do
           echo -e "Importing $f into the database..."
-          mysql xidb -h 127.0.0.1 -uroot -proot < $f
+          sudo mysql xidb -h 127.0.0.1 -uroot -proot < $f
         done
-        mysql xidb -h 127.0.0.1 -uroot -proot -e "SHOW tables"
+        sudo mysql xidb -h 127.0.0.1 -uroot -proot -e "SHOW tables"
     - name: Assign odd zones a different port
       run: |
-        mysql xidb -h 127.0.0.1 -uroot -proot -e "UPDATE xidb.zone_settings SET zoneport = 54231 WHERE zoneid % 2 = 0;"
+        sudo mysql xidb -h 127.0.0.1 -uroot -proot -e "UPDATE xidb.zone_settings SET zoneport = 54231 WHERE zoneid % 2 = 0;"
     - name: Copy settings
       run: |
         cp settings/default/* settings/
@@ -537,36 +507,40 @@ jobs:
         if grep -qi "warning\|error\|crash" map-server-1*.log; then
           exit -1
         fi
+    - name: Cleanup Docker
+      run: |
+        sudo systemctl restart docker
 
-  Full_Startup_Checks_Windows:
-    runs-on: windows-latest
-    needs: Windows_64bit_Debug
-    steps:
-    - uses: actions/checkout@v1
-      with:
-        fetch-depth: 1
-    - uses: actions/download-artifact@v2
-      with:
-        name: windows_executables
-        path: .
-    - uses: zach2good/setup-mariadb@v1
-      with:
-          database: xidb
-    - name: Copy settings
-      run: |
-        cp settings/default/* settings/
-    - name: Install Python Dependencies
-      run: |
-        pip install -r tools/requirements.txt
-    - name: Import SQL files
-      shell: bash
-      run: |
-        for f in sql/*.sql; do
-          echo -e "Importing $f into the database..."
-          mysql xidb -h 127.0.0.1 -uroot -proot < $f
-        done
-        mysql xidb -h 127.0.0.1 -uroot -proot -e "SHOW tables"
-    - name: Startup checks
-      shell: bash
-      run: |
-        python3 ./tools/ci/startup_checks.py
+
+  # Full_Startup_Checks_Windows:
+    # runs-on: [self-hosted, windows]
+    # needs: Windows_64bit_Debug
+    # steps:
+    # - uses: actions/checkout@v1
+      # with:
+        # fetch-depth: 1
+    # - uses: actions/download-artifact@v2
+      # with:
+        # name: windows_executables
+        # path: .
+    # - uses: zach2good/setup-mariadb@v1
+      # with:
+          # database: xidb
+    # - name: Copy settings
+      # run: |
+        # cp settings/default/* settings/
+    # - name: Install Python Dependencies
+      # run: |
+        # pip install -r tools/requirements.txt
+    # - name: Import SQL files
+      # shell: bash
+      # run: |
+        # for f in sql/*.sql; do
+          # echo -e "Importing $f into the database..."
+          # mysql xidb -h 127.0.0.1 -uroot -proot < $f
+        # done
+        # mysql xidb -h 127.0.0.1 -uroot -proot -e "SHOW tables"
+    # - name: Startup checks
+      # shell: bash
+      # run: |
+        # python3 ./tools/ci/startup_checks.py

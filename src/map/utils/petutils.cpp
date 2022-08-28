@@ -1853,14 +1853,23 @@ namespace petutils
                 weaponDamage = floor(weaponDamage * 0.74);
             }
 
+
             static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDamage(weaponDamage);
             static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setBaseDelay((uint16)(floor(1000.0f * (PPetData->cmbDelay / 60.0f))));
             // Set B+ weapon skill (assumed capped for level derp)
             // attack is madly high for avatars (roughly x2)
-            PPet->setModifier(Mod::ATT, 2 * battleutils::GetMaxSkill(SKILL_CLUB, JOB_WHM, mLvl > 99 ? 99 : mLvl));
-            PPet->setModifier(Mod::ACC, battleutils::GetMaxSkill(SKILL_CLUB, JOB_WHM, mLvl > 99 ? 99 : mLvl));
             // Set E evasion and def
             PPet->setModifier(Mod::EVA, battleutils::GetMaxSkill(SKILL_THROWING, JOB_WHM, PPet->GetMLevel()));
+
+            // Set B weapon skill which is consistent with every other mob
+            if (PetID == PETID_FENRIR)
+            {
+                PPet->setModifier(Mod::ATT, 1.3 * battleutils::GetMaxSkill(SKILL_SWORD, JOB_WAR, PPet->GetMLevel())); // Fenrir has been proven to have an additional 30% ATK
+            }
+            else
+            {
+                PPet->setModifier(Mod::ATT, battleutils::GetMaxSkill(SKILL_SWORD, JOB_WAR, PPet->GetMLevel()));
+            }
 
             if (PetID == PETID_DIABOLOS)
             {
