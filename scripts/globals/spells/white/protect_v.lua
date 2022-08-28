@@ -6,7 +6,11 @@ require("scripts/globals/spells/enhancing_spell")
 local spell_object = {}
 
 spell_object.onMagicCastingCheck = function(caster, target, spell)
-    return 0
+    if caster:isMob() and target:hasStatusEffect(xi.effect.PROTECT) then
+        return 1
+    else
+        return 0
+    end
 end
 
 spell_object.onSpellCast = function(caster, target, spell)

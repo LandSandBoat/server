@@ -1130,17 +1130,18 @@ INSERT INTO `mob_groups` VALUES (13,3725,29,'Spell_Spitter_Spilospok',0,128,0,0,
 INSERT INTO `mob_groups` VALUES (14,708,29,'Chemical_Cook_Chemachiq',0,128,0,0,0,55,55,0);
 INSERT INTO `mob_groups` VALUES (15,503,29,'Book_Browser_Bokabraq',0,128,0,0,0,55,55,0);
 INSERT INTO `mob_groups` VALUES (16,4102,29,'Unstable_Cluster',0,128,2523,10000,0,56,57,0);
-INSERT INTO `mob_groups` VALUES (17,325,29,'Bahamut',0,128,0,26000,15000,83,83,0);
-INSERT INTO `mob_groups` VALUES (18,3070,29,'Ouryu',0,128,0,0,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (19,3916,29,'Tiamat',0,128,0,0,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (20,2156,29,'Jormungand',0,128,0,0,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (21,4261,29,'Vrtra',0,128,0,0,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (22,4507,29,'Ziryu',0,128,2804,0,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (23,4309,29,'Water_Elemental',0,128,0,0,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (24,1160,29,'Earth_Elemental',0,128,0,0,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (25,3124,29,'Pey',0,128,0,0,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (26,2105,29,'Iruci',0,128,0,0,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (27,70,29,'Airi',0,128,0,0,0,15,17,0);
+INSERT INTO `mob_groups` VALUES (17,325,29,'Bahamut',0,128,0,26000,20000,83,83,0);
+INSERT INTO `mob_groups` VALUES (28,325,29,'Bahamutv2',0,128,6020,34000,20000,92,92,0);
+INSERT INTO `mob_groups` VALUES (18,3070,29,'Ouryu',0,128,0,6000,15000,88,88,0);
+INSERT INTO `mob_groups` VALUES (19,3916,29,'Tiamat',0,128,0,6500,15000,88,88,0);
+INSERT INTO `mob_groups` VALUES (20,2156,29,'Jormungand',0,128,0,6500,15000,88,88,0);
+INSERT INTO `mob_groups` VALUES (21,4261,29,'Vrtra',0,128,0,5500,15000,88,88,0);
+INSERT INTO `mob_groups` VALUES (22,4507,29,'Ziryu',0,128,0,5000,15000,75,75,0);
+INSERT INTO `mob_groups` VALUES (23,4309,29,'Water_Elemental',0,128,0,0,15000,75,75,0);
+INSERT INTO `mob_groups` VALUES (24,1160,29,'Earth_Elemental',0,128,0,0,15000,75,75,0);
+INSERT INTO `mob_groups` VALUES (25,3124,29,'Pey',0,128,0,0,0,78,80,0);
+INSERT INTO `mob_groups` VALUES (26,2105,29,'Iruci',0,128,0,0,15000,78,80,0);
+INSERT INTO `mob_groups` VALUES (27,70,29,'Airi',0,128,0,0,15000,78,80,0);
 
 -- ------------------------------------------------------------
 -- Riverne-Site_A01 (Zone 30)

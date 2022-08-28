@@ -24,8 +24,8 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local megaFlareQueue = mob:getLocalVar("MegaFlareQueue") - 1 -- decrement the amount of queued Megaflares.
-    mob:setLocalVar("MegaFlareQueue", megaFlareQueue)
+    local megaFlareCount = mob:getLocalVar("megaFlareCount")
+    mob:setLocalVar("megaFlareCount", megaFlareCount + 1)
     mob:setLocalVar("FlareWait", 0) -- reset the variables for Megaflare.
     mob:setLocalVar("tauntShown", 0)
     mob:SetMobAbilityEnabled(true) -- re-enable the other actions on success
@@ -36,7 +36,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     end
 
     local dmgmod = 1
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg()*10, xi.magic.ele.FIRE, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg()*6, xi.magic.ele.FIRE, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, xi.mobskills.shadowBehavior.WIPE_SHADOWS)
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.FIRE)
     return dmg
