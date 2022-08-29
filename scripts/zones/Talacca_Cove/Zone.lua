@@ -1,11 +1,7 @@
 -----------------------------------
 -- Zone: Talacca_Cove (57)
 -----------------------------------
-local ID = require("scripts/zones/Talacca_Cove/IDs")
-require("scripts/globals/keyitems")
-require("scripts/globals/missions")
-require("scripts/globals/settings")
-require("scripts/globals/titles")
+local ID = require('scripts/zones/Talacca_Cove/IDs')
 -----------------------------------
 local zone_object = {}
 
@@ -15,7 +11,7 @@ end
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(64.007, -9.281, -99.988, 88)
     end
 

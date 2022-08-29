@@ -1,9 +1,7 @@
 -----------------------------------
---
 -- Zone: Crawlers_Nest_[S] (171)
---
 -----------------------------------
-local ID = require("scripts/zones/Crawlers_Nest_[S]/IDs")
+local ID = require('scripts/zones/Crawlers_Nest_[S]/IDs')
 -----------------------------------
 local zone_object = {}
 
@@ -12,9 +10,11 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
+
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(380.617, -34.61, 4.581, 65)
     end
+
     return cs
 end
 

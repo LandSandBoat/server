@@ -1,9 +1,7 @@
 -----------------------------------
---
 -- Zone: Ship_bound_for_Mhaura (221)
---
 -----------------------------------
-local ID = require("scripts/zones/Ship_bound_for_Mhaura/IDs")
+local ID = require('scripts/zones/Ship_bound_for_Mhaura/IDs')
 require("scripts/globals/sea_creatures")
 -----------------------------------
 local zone_object = {}
@@ -31,6 +29,7 @@ zone_object.onZoneIn = function(player, prevZone, zone)
             GetZone(zoneID):setLocalVar('transportTime', os.time())
         end
     end
+
     return cs
 end
 
@@ -94,7 +93,7 @@ zone_object.onZoneTick = function(zone)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    if (csid == 512) then
+    if csid == 512 then
         player:setPos(0, 0, 0, 0, 249)
     end
 end

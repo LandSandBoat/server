@@ -18,7 +18,7 @@ zones[xi.zone.CAEDARVA_MIRE] =
         NOTHING_OUT_OF_ORDINARY  = 6404, -- There is nothing out of the ordinary here.
         FELLOW_MESSAGE_OFFSET    = 6419, -- I'm ready. I suppose.
         CARRIED_OVER_POINTS      = 7001, -- You have carried over <number> login point[/s].
-        LOGIN_CAMPAIGN_UNDERWAY  = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
+        LOGIN_CAMPAIGN_UNDERWAY  = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER             = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         FISHING_MESSAGE_OFFSET   = 7054, -- You can't fish here.
         STAGING_GATE_CLOSER      = 7314, -- You must move closer.
@@ -71,12 +71,12 @@ zones[xi.zone.CAEDARVA_MIRE] =
     {
         LOGGING =
         {
-            17101318,
-            17101319,
-            17101320,
-            17101321,
-            17101322,
-            17101323,
+            17101329,
+            17101330,
+            17101331,
+            17101332,
+            17101333,
+            17101334,
         },
         RUNIC_PORTAL_AZOUPH = 17101271,
         RUNIC_PORTAL_DVUCCA = 17101274,

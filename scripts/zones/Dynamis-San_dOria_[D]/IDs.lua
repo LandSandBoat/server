@@ -17,7 +17,7 @@ zones[xi.zone.DYNAMIS_SAN_DORIA_D] =
         ITEMS_OBTAINED          = 6399, -- You obtain <number> <item>!
         NOTHING_OUT_OF_ORDINARY = 6404, -- There is nothing out of the ordinary here.
         CARRIED_OVER_POINTS     = 7001, -- You have carried over <number> login point[/s].
-        LOGIN_CAMPAIGN_UNDERWAY = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
+        LOGIN_CAMPAIGN_UNDERWAY = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER            = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         CONQUEST_BASE           = 7054, -- Tallying conquest results...
     },

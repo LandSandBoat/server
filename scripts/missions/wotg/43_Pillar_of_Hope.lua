@@ -30,7 +30,7 @@ mission.sections =
             {
                 onTrigger = function(player, npc)
                     local hasWeapons = (player:getEquipID(xi.slot.MAIN) ~= 0 or player:getEquipID(xi.slot.SUB) ~= 0) and 1 or 0
-                    local isRepeated = mission:getVar(player, 'Option') and 1 or 0
+                    local isRepeated = mission:getVar(player, 'Option')
 
                     return quest:progressEvent(28, 89, 23, 1743, isRepeated, 0, 0, 0, hasWeapons)
                 end,
