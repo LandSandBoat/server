@@ -540,7 +540,7 @@ namespace petutils
         PMob->health.hp = PMob->GetMaxHP();
         PMob->health.mp = PMob->GetMaxMP();
 
-        ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDamage(GetJugWeaponDamage(PMob));
+        static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setDamage(GetJugWeaponDamage(PMob));
 
         // reduce weapon delay of MNK
         if (PMob->GetMJob() == JOB_MNK)
@@ -1500,14 +1500,6 @@ namespace petutils
             {
                 cost = 9;
             }
-            else if (level < 91)
-            {
-                cost = 10;
-            }
-            else
-            {
-                cost = 11;
-            }
         }
         else if (id == PETID_FENRIR)
         {
@@ -1554,14 +1546,6 @@ namespace petutils
             else
             {
                 cost = 11;
-            }
-            else if (level < 91)
-            {
-                cost = 12;
-            }
-            else
-            {
-                cost = 13;
             }
         }
         // NOTE: This condition covers PETID_IFRIT through the below conditions
@@ -1610,14 +1594,6 @@ namespace petutils
             else
             {
                 cost = 13;
-            }
-            else if (level < 91)
-            {
-                cost = 14;
-            }
-            else
-            {
-                cost = 15;
             }
         }
 
@@ -1872,7 +1848,13 @@ namespace petutils
                 weaponDamage = floor(weaponDamage * 0.74);
             }
 
-            ((CItemWeapon*)PPet->m_Weapons[SLOT_MAIN])->setDamage(weaponDamage);
+
+            static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDamage(weaponDamage);
+            static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setBaseDelay((uint16)(floor(1000.0f * (PPetData->cmbDelay / 60.0f))));
+            // Set B+ weapon skill (assumed capped for level derp)
+            // attack is madly high for avatars (roughly x2)
+            // Set E evasion and def
+            PPet->setModifier(Mod::EVA, battleutils::GetMaxSkill(SKILL_THROWING, JOB_WHM, PPet->GetMLevel()));
 
             // Set B weapon skill which is consistent with every other mob
             if (PetID == PETID_FENRIR)
@@ -1883,10 +1865,6 @@ namespace petutils
             {
                 PPet->setModifier(Mod::ATT, battleutils::GetMaxSkill(SKILL_SWORD, JOB_WAR, PPet->GetMLevel()));
             }
-
-            PPet->setModifier(Mod::ACC, battleutils::GetMaxSkill(SKILL_SWORD, JOB_WAR, PPet->GetMLevel()));
-            // Set E evasion and def
-            PPet->setModifier(Mod::EVA, battleutils::GetMaxSkill(SKILL_THROWING, JOB_WHM, PPet->GetMLevel()));
 
             if (PetID == PETID_DIABOLOS)
             {

@@ -244,10 +244,10 @@ xi.settings.map =
     DAILY_TALLY_AMOUNT = 10,
     DAILY_TALLY_LIMIT  = 50000,
 
-    -- Enable/disable keeping jug pets through zoning
-    KEEP_JUGPET_THROUGH_ZONING = false,
-
     -- Paralysis Settings
     ITEM_PARALYSIS_LOSS              = true, -- Allow items to be put on recast or deleted when used during a paralysis tick.
     ITEM_PARALYSIS_SCROLL_PROTECTION = false, -- Stops scrolls from being deleted if a paralysis tick occurs.
+    
+    -- Enable/disable keeping jug pets through zoning
+    KEEP_JUGPET_THROUGH_ZONING = false,
 }

@@ -3018,15 +3018,43 @@ namespace battleutils
             lowerLimit = std::min(wRatio - 0.375f, maxRatio);
         }
 
-        // https://www.bg-wiki.com/bg/Damage_Limit+
-        // See: "Physical damage limit +n%" is a multiplier to the total pDIF cap.
-        // There is one more step here that I am skipping for Physical Damage +% from gear and augments.
-        // I don't believe support for this modifier exists yet in the project.
-        // Physical Damage +% (PDL) is a flat % increase to the final pDIF cap value
-        // Meaning if a player has PDL+10% and an uppwerLimit of 1 then this would become 1.1
-        // upperLimit = upperLimit * 1.1
+        if (isGuarded)
+        {
+            if (upperLimit > 1)
+            {
+                upperLimit -= 1.f;
+            }
+            else
+            {
+                upperLimit = 0.f;
+            }
 
-        qRatio = xirand::GetRandomNumber(lowerLimit, upperLimit);
+            if (lowerLimit > 1)
+            {
+                lowerLimit -= 1.f;
+            }
+            else
+            {
+                lowerLimit = 0.f;
+            }
+        }
+
+        float pDIF = 0.0f;
+
+        // Bernoulli distribution, applied for cRatio < 0.5 and 0.75 < cRatio < 1.25
+        // Other cRatio values are uniformly distributed
+        // https://www.bluegartr.com/threads/108161-pDif-and-damage?p=5308205&viewfull=1#post5308205
+        float U         = std::max<float>(0.0, std::min<float>(0.333, 1.3 * (2.0 - std::abs(wRatio - 1)) - 1.96));
+        bool  bernoulli = xirand::GetRandomNumber(0.0f, 1.0f) < U ? true : false;
+
+        if (bernoulli)
+        {
+            pDIF = std::round(wRatio);
+        }
+        else
+        {
+            pDIF = xirand::GetRandomNumber(lowerLimit, upperLimit);
+        }
 
         pDIF = std::clamp<float>(pDIF, 0, 3.0);
         pDIF = pDIF * xirand::GetRandomNumber(1.0f, 1.05f);

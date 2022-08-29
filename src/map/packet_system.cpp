@@ -455,8 +455,6 @@ void SmallPacket0x00C(map_session_data_t* const PSession, CCharEntity* const PCh
     // Reset the petZoning info
     PChar->resetPetZoningInfo();
 }
-    }
-}
 
 /************************************************************************
  *                                                                       *

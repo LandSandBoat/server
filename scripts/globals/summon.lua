@@ -211,8 +211,8 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
         end
     end
 
-    if target:getMod(xi.mod.PET_DMG_TAKEN_PHYSICAL) ~= 0 then
         finaldmg = finaldmg * (target:getMod(xi.mod.PET_DMG_TAKEN_PHYSICAL) / 100)
+    if target:getMod(xi.mod.PET_DMG_TAKEN_PHYSICAL) ~= 0 then
     end
 
     finaldmg = xi.damage.applyDamageTaken(target, finaldmg, xi.attackType.PHYSICAL)

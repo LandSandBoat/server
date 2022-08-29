@@ -7112,7 +7112,6 @@ INSERT INTO `mob_pools` VALUES (7054,'Ifrit_Prime_ASA','Ifrit_Prime',322,0x00001
 INSERT INTO `mob_pools` VALUES (7055,'Leviathan_Prime_ASA','Leviathan_Prime',323,0x00001B0300000000000000000000000000000000,1,4,8,240,100,0,1,1,1,18,1,0,0,3,0,0,0,0,0,0,323);
 INSERT INTO `mob_pools` VALUES (7056,'Garuda_Prime_ASA','Garuda_Prime',324,0x00001C0300000000000000000000000000000000,1,4,6,240,100,0,1,1,1,18,1,0,0,3,0,0,0,0,0,0,324);
 INSERT INTO `mob_pools` VALUES (7057,'Shiva_Prime_ASA','Shiva_Prime',319,0x00001D0300000000000000000000000000000000,1,4,6,240,100,0,1,1,1,18,1,0,0,3,0,0,0,0,0,0,319);
-
 -- ------------------------------------------------------------
 -- Start of Ambuscade section
 -- NOTE: The mobs are changed every update in the DATs, so using out-of-date
