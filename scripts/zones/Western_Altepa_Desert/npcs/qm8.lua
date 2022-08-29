@@ -14,6 +14,10 @@ end
 
 entity.onTrade = function(player, npc, trade)
     xi.bmt.handleQmOnTrade(player, npc, trade, ID.npc.BEASTMEN_TREASURE)
+	if npcUtil.tradeHasExactly(trade, 901) then -- Venomous Claw
+	    player:tradeComplete()
+	    SpawnMob(17289575):updateClaim(player) -- King Vinegarroon
+	end
 end
 
 entity.onEventFinish = function(player, csid)

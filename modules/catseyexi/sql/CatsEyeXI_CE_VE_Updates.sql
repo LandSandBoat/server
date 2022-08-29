@@ -21,3 +21,10 @@ UPDATE `spell_list` SET  `CE` = 30, `VE` = 150 WHERE spellId = 349 AND `name` = 
 UPDATE `spell_list` SET  `CE` = 30, `VE` = 150 WHERE spellId = 350 AND `name` = 'dokumori_ichi';
 UPDATE `spell_list` SET  `CE` = 30, `VE` = 150 WHERE spellId = 351 AND `name` = 'dokumori_ni';
 UPDATE `spell_list` SET  `CE` = 30, `VE` = 150 WHERE spellId = 352 AND `name` = 'dokumori_san';
+
+## Runefencer
+UPDATE `spell_list` SET `castTime` = 2000, `CE` = 1000, `VE` = 2500 WHERE spellId = 840 AND `name` = 'foil';
+UPDATE `abilities` SET  `CE` = 500, `VE` = 2500 WHERE abilityId = 367 AND `name` = 'swordplay';
+UPDATE `abilities` SET  `CE` = 500, `VE` = 2500 WHERE abilityId = 366 AND `name` = 'vallation';
+UPDATE `abilities` SET  `CE` = 500, `VE` = 2500 WHERE abilityId = 371 AND `name` = 'valiance';
+UPDATE `abilities` SET  `CE` = 500, `VE` = 2500 WHERE abilityId = 369 AND `name` = 'pflug';

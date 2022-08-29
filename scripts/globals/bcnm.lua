@@ -418,7 +418,7 @@ local battlefields =
         { 2,  290,    0},   -- Ark Angels 3 (ZM14)
         { 3,  291,    0},   -- Ark Angels 4 (ZM14)
         { 4,  292,    0},   -- Ark Angels 5 (ZM14)
-        { 5,  293, 1550},   -- Divine Might (ZM14)
+     --   { 5,  293, 1550},   -- Divine Might (ZM14)
      -- { 6,    ?,    0},   -- *Ark Angels 1 (HTMBF)
      -- { 7,    ?,    0},   -- *Ark Angels 2 (HTMBF)
      -- { 8,    ?,    0},   -- *Ark Angels 3 (HTMBF)
