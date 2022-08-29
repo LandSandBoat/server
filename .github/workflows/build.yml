@@ -149,7 +149,6 @@ jobs:
           exit 1
         fi
         exit 0
-
   Linux_Clang14_64bit:
     runs-on: ubuntu-22.04
     steps:
@@ -182,7 +181,6 @@ jobs:
           xi_connect
           xi_map
           xi_search
-
   Linux_GCC11_64bit:
     runs-on: ubuntu-22.04
     steps:
@@ -207,7 +205,6 @@ jobs:
     - name: Build
       run: |
         cmake --build build -j4
-
   Windows_32bit:
     runs-on: windows-latest
     env:
@@ -230,7 +227,6 @@ jobs:
         shell: cmd
         run: |
           cmake --build build -j4
-
   Windows_64bit_Debug:
     runs-on: windows-latest
     env:
@@ -261,7 +257,6 @@ jobs:
             xi_connect.exe
             xi_map.exe
             xi_search.exe
-
   Windows_64bit_Release_Tracy_Modules_World:
     runs-on: windows-latest
     env:
@@ -293,7 +288,6 @@ jobs:
         shell: cmd
         run: |
           cmake --build build -j4
-
   MacOS_64bit:
     # https://github.com/actions/virtual-environments/blob/main/images/macos/macos-11-Readme.md
     runs-on: macos-latest
@@ -322,7 +316,6 @@ jobs:
       - name: Build
         run: |
           cmake --build build -j4
-
   Full_Startup_Checks_Linux:
     runs-on: ubuntu-22.04
     needs: Linux_Clang14_64bit
@@ -381,15 +374,12 @@ jobs:
           chmod +x xi_map
           chmod +x xi_search
           ls -l
-
           printf "\nStart server processes\n"
           screen -d -m -S xi_connect ./xi_connect --log login-server.log
           screen -d -m -S xi_search ./xi_search --log search-server.log
           screen -d -m -S xi_map ./xi_map --log map-server.log
-
           printf "\nWaiting 90s for servers to fully start up\n"
           sleep 90s
-
           printf "\nPopulating database\n"
           mysql xidb -h 127.0.0.1 -uroot -proot << EOF
           -- Clean out anything already there (just in case)
@@ -422,7 +412,6 @@ jobs:
           VALUES(1, 'GodMode', 1);
           SELECT * FROM char_vars;
           EOF
-
           printf "\nRunning HeadlessXI for 60 seconds\n"
           python3 << EOF
           import time
@@ -433,7 +422,6 @@ jobs:
           time.sleep(30)
           hxi_client.logout()
           EOF
-
           killall screen
     - name: Check for errors and warnings
       if: ${{ success() || failure() }}
@@ -441,19 +429,15 @@ jobs:
         cat login-server*.log
         cat map-server*.log
         cat search-server*.log
-
         if grep -qi "warning\|error\|crash" login-server*.log; then
             exit -1
         fi
-
         if grep -qi "warning\|error\|crash" map-server*.log; then
             exit -1
         fi
-
         if grep -qi "warning\|error\|crash" search-server*.log; then
             exit -1
         fi
-
   MultiInstance_Startup_Checks_Linux:
     runs-on: ubuntu-22.04
     needs: Linux_Clang14_64bit
@@ -506,7 +490,6 @@ jobs:
         chmod +x xi_map
         chmod +x xi_search
         ls -l
-
         printf "\nStart server processes\n"
         screen -d -m -S xi_connect ./xi_connect --log login-server.log
         screen -d -m -S xi_search ./xi_search --log search-server.log
@@ -521,23 +504,18 @@ jobs:
         cat search-server*.log
         cat map-server-0*.log
         cat map-server-1*.log
-
         if grep -qi "warning\|error\|crash" login-server*.log; then
             exit -1
         fi
-
         if grep -qi "warning\|error\|crash" search-server*.log; then
             exit -1
         fi
-
         if grep -qi "warning\|error\|crash" map-server-0*.log; then
             exit -1
         fi
-
         if grep -qi "warning\|error\|crash" map-server-1*.log; then
           exit -1
         fi
-
   Full_Startup_Checks_Windows:
     runs-on: windows-latest
     needs: Windows_64bit_Debug

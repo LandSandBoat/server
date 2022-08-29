@@ -1,11 +1,9 @@
 -----------------------------------
---
 -- Zone: The_Boyahda_Tree (153)
---
 -----------------------------------
-local ID = require("scripts/zones/The_Boyahda_Tree/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/treasure")
+local ID = require('scripts/zones/The_Boyahda_Tree/IDs')
+require('scripts/globals/conquest')
+require('scripts/globals/treasure')
 -----------------------------------
 local zone_object = {}
 

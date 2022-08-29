@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Garlaige_Citadel_[S] (164)
 -----------------------------------
-local ID = require("scripts/zones/Garlaige_Citadel_[S]/IDs")
+local ID = require('scripts/zones/Garlaige_Citadel_[S]/IDs')
 -----------------------------------
 local zone_object = {}
 

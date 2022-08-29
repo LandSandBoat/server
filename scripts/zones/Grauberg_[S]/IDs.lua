@@ -24,6 +24,8 @@ zones[xi.zone.GRAUBERG_S] =
         HARVESTING_IS_POSSIBLE_HERE = 7695, -- Harvesting is possible here if you have <item>.
         SUITABLE_PLACE_TO_SOAK      = 8267, -- This seems to be a suitable place to soak <item>.
         MYSTERIOUS_COLUMN_ROTATES   = 8370, -- A mysterious column of floating stones rotates hypnotically before you.
+        YOU_HAVE_RETRACED_RIVER     = 8395, -- You have retraced the river of memories back to the mission "Maiden of the Dusk".
+        AIR_WARPED_AND_DISTORTED    = 8396, -- The air before you appears warped and distorted...
         COMMON_SENSE_SURVIVAL       = 9300, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =

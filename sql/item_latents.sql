@@ -2181,6 +2181,16 @@ INSERT INTO `item_latents` VALUES (17333,369,-1,56,0);   -- Rune Arrow -1MP/tic
 INSERT INTO `item_latents` VALUES (17365,8,4,25,0);      -- Frenzy Fife,STR+4 song/roll active
 
 -- -------------------------------------------------------
+-- Titan's Cudgel
+-- -------------------------------------------------------
+INSERT INTO `item_latents` VALUES (17438,501,6,29,0);    -- Increased Add Effect rate on Earthsday (base of 10 plus 6)
+
+-- -------------------------------------------------------
+-- Leviathan's Rod
+-- -------------------------------------------------------
+INSERT INTO `item_latents` VALUES (17439,501,6,30,0);    -- Increased Add Effect rate on Watersday (base of 10 plus 6)
+
+-- -------------------------------------------------------
 -- Tactician Magician's Wand +1/+2
 -- -------------------------------------------------------
 INSERT INTO `item_latents` VALUES (17446,5,18,53,1);     -- MP +18 in areas outside own nation's control
@@ -2239,6 +2249,11 @@ INSERT INTO `item_latents` VALUES (17527,15,-10,47,0);
 INSERT INTO `item_latents` VALUES (17527,21,-10,47,0);
 
 -- -------------------------------------------------------
+-- Ramuh's Staff
+-- -------------------------------------------------------
+INSERT INTO `item_latents` VALUES (17531,501,6,35,0);    -- Increased Add Effect rate on Lightningsday (base of 10 plus 6)
+
+-- -------------------------------------------------------
 -- Musketeer's Pole +1/+2
 -- -------------------------------------------------------
 INSERT INTO `item_latents` VALUES (17539,2,10,53,1);     -- HP +10 in areas outside own nation's control
@@ -2279,6 +2294,16 @@ INSERT INTO `item_latents` VALUES (17616,18,-10,47,0);
 INSERT INTO `item_latents` VALUES (17619,25,12,26,0);    -- Daytime: ACC +12
 
 INSERT INTO `item_latents` VALUES (17624,165,7,13,3);
+
+-- -------------------------------------------------------
+-- Garudas Dagger
+-- -------------------------------------------------------
+INSERT INTO `item_latents` VALUES (17627,501, 60, 31, 0); -- Increased Add Effect rate on Windsday
+
+-- -------------------------------------------------------
+-- Dragvandil
+-- -------------------------------------------------------
+INSERT INTO `item_latents` VALUES(17648, 501, 30, 34, 0);    -- Increased Add Effect rate on Iceday
 
 -- -------------------------------------------------------
 -- Nightmare Sword
@@ -2386,6 +2411,12 @@ INSERT INTO `item_latents` VALUES (17766,10,2,16,6);     -- VIT +1~4,party size 
 INSERT INTO `item_latents` VALUES (17773,2,-20,47,0);
 INSERT INTO `item_latents` VALUES (17773,15,-10,47,0);
 INSERT INTO `item_latents` VALUES (17773,21,-10,47,0);
+
+-- -------------------------------------------------------
+-- Shiranui
+-- -------------------------------------------------------
+INSERT INTO `item_latents` VALUES (17774,501,50,26,2);    -- Add effect only procs at night
+
 INSERT INTO `item_latents` VALUES (17788,8,4,32,0);      -- Sairen STR +4 on Darksday (has 3 base STR to total +7)
 INSERT INTO `item_latents` VALUES (17788,27,1,32,0);     -- Enmity +1
 INSERT INTO `item_latents` VALUES (17791,15,15,28,0);    -- [Element: Fire]+15
@@ -2941,6 +2972,11 @@ INSERT INTO `item_latents` VALUES (18758,8,3,37,4);      -- Full moon STR+3
 INSERT INTO `item_latents` VALUES (18758,9,3,37,4);      -- Full moon DEX+3
 
 -- -------------------------------------------------------
+-- Custodes
+-- -------------------------------------------------------
+INSERT INTO `item_latents` VALUES(18762, 501, 30, 34, 0);    -- Increased Add Effect rate on Iceday
+
+-- -------------------------------------------------------
 -- Trainee Scissors
 -- -------------------------------------------------------
 INSERT INTO `item_latents` VALUES (18763,131,1,24,40);   -- Clothcraft +1 under skill 40
@@ -3014,6 +3050,11 @@ INSERT INTO `item_latents` VALUES (18865,165,7,59,20);   -- Zonure - Vs. vermin:
 INSERT INTO `item_latents` VALUES (18943,23,14,6,1000);  -- Attack+14 while TP <100%
 INSERT INTO `item_latents` VALUES (18943,25,5,6,1000);   -- Accuracy+5 while TP <100%
 INSERT INTO `item_latents` VALUES (18943,366,5,6,1000);  -- DMG+5 while TP <100%
+
+-- -------------------------------------------------------
+-- Ifrit's Blade
+-- -------------------------------------------------------
+INSERT INTO `item_latents` VALUES (18948, 501, 6, 28, 0);    -- Increased Add Effect rate on Firesday (base of 10 plus 6)
 
 -- -------------------------------------------------------
 -- Zareehkl Scythe

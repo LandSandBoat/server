@@ -1,8 +1,8 @@
 -----------------------------------
 -- Zone: Nyzul_Isle
 -----------------------------------
-local ID = require("scripts/zones/Nyzul_Isle/IDs")
-require("scripts/globals/missions")
+local ID = require('scripts/zones/Nyzul_Isle/IDs')
+require('scripts/globals/missions')
 -----------------------------------
 local zone_object = {}
 

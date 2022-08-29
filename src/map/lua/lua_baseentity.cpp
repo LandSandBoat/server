@@ -2683,6 +2683,8 @@ void CLuaBaseEntity::setPos(sol::variadic_args va)
 
     if (m_PBaseEntity->objtype == TYPE_PC)
     {
+        auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+
         if (va[4].is<double>())
         {
             auto zoneid = va[4].as<uint16>();
@@ -2691,17 +2693,22 @@ void CLuaBaseEntity::setPos(sol::variadic_args va)
                 return;
             }
 
-            ((CCharEntity*)m_PBaseEntity)->loc.destination = zoneid;
-            ((CCharEntity*)m_PBaseEntity)->status          = STATUS_TYPE::DISAPPEAR;
-            ((CCharEntity*)m_PBaseEntity)->loc.boundary    = 0;
-            ((CCharEntity*)m_PBaseEntity)->m_moghouseID    = 0;
-            ((CCharEntity*)m_PBaseEntity)->clearPacketList();
-            charutils::SendToZone((CCharEntity*)m_PBaseEntity, 2, zoneutils::GetZoneIPP(m_PBaseEntity->loc.destination));
-            //((CCharEntity*)m_PBaseEntity)->loc.zone->DecreaseZoneCounter(((CCharEntity*)m_PBaseEntity));
+            if (PChar->PPet != nullptr)
+            {
+                PChar->setPetZoningInfo();
+            }
+
+            PChar->loc.destination = zoneid;
+            PChar->status          = STATUS_TYPE::DISAPPEAR;
+            PChar->loc.boundary    = 0;
+            PChar->m_moghouseID    = 0;
+            PChar->clearPacketList();
+            charutils::SendToZone(PChar, 2, zoneutils::GetZoneIPP(PChar->loc.destination));
+            // PChar->loc.zone->DecreaseZoneCounter(PChar);
         }
-        else if (((CCharEntity*)m_PBaseEntity)->status != STATUS_TYPE::DISAPPEAR)
+        else if (PChar->status != STATUS_TYPE::DISAPPEAR)
         {
-            ((CCharEntity*)m_PBaseEntity)->pushPacket(new CPositionPacket((CCharEntity*)m_PBaseEntity));
+            PChar->pushPacket(new CPositionPacket(PChar));
         }
     }
     m_PBaseEntity->updatemask |= UPDATE_POS;
@@ -7900,6 +7907,12 @@ void CLuaBaseEntity::takeDamage(int32 damage, sol::object const& attacker, sol::
         breakBind     = flag_map["breakBind"];
     }
 
+    // Check to see if Nightmare is active on the target
+    // If so, taking damage will not wake the target up
+    if (PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_SLEEP) &&
+        PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_SLEEP)->GetSubID() == (uint32)EFFECT_BIO)
+        wakeUp = false;
+
     ATTACK_TYPE attackType = (atkType != sol::lua_nil) ? static_cast<ATTACK_TYPE>(atkType.as<uint8>()) : ATTACK_TYPE::NONE;
     DAMAGE_TYPE damageType = (dmgType != sol::lua_nil) ? static_cast<DAMAGE_TYPE>(dmgType.as<uint8>()) : DAMAGE_TYPE::NONE;
 
@@ -8108,13 +8121,11 @@ void CLuaBaseEntity::addTP(int16 amount)
 
 void CLuaBaseEntity::setTP(int16 value)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
-
-    auto* PBattle = static_cast<CBattleEntity*>(m_PBaseEntity);
-
-    PBattle->health.tp    = 0;
-    int16 available_value = value - (PBattle->health.tp);
-    PBattle->addTP(available_value);
+    if (auto* PBattle = dynamic_cast<CBattleEntity*>(m_PBaseEntity))
+    {
+        PBattle->health.tp = value;
+        PBattle->updatemask |= UPDATE_HP;
+    }
 }
 
 /************************************************************************
@@ -10040,7 +10051,7 @@ uint16 CLuaBaseEntity::getBaseDelay()
         {
             if (PMainWeapon->getSkillType() == SKILLTYPE::SKILL_HAND_TO_HAND)
             {
-                baseDelay += PMainWeapon->getBaseDelay();
+                baseDelay = PMainWeapon->getBaseDelay(); // h2h items include 480 base delay
             }
             else
             {
@@ -10057,7 +10068,7 @@ uint16 CLuaBaseEntity::getBaseDelay()
         CItemWeapon* PWeapon = dynamic_cast<CItemWeapon*>(PBattleEntity->m_Weapons[SLOT_MAIN]);
         if (PWeapon)
         {
-            baseDelay = (PWeapon->getBaseDelay() * 60 / 1000);
+            baseDelay = std::round(PWeapon->getBaseDelay() * 60.0 / 1000.0); // there is some precision loss that results in delays of 319.98 instead of 320, etc, so round to nearest.
         }
     }
 

@@ -1,7 +1,5 @@
 -----------------------------------
---
 -- Zone: Ship bound for Selbina Pirates (227)
---
 -----------------------------------
 local ID = require("scripts/zones/Ship_bound_for_Selbina_Pirates/IDs")
 require("scripts/globals/zone")

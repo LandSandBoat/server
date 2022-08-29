@@ -266,7 +266,7 @@ xi.spells.enhancing.useEnhancingSong = function(caster, target, spell)
 
     -- EXCEPTION: March Songs effect conversion.
     if songEffect == xi.effect.MARCH then
-        power = math.floor((power * 1024) / 10000)
+        power = math.floor((power / 1024) * 10000)
     end
 
     -- Handle Status Effects.

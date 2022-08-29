@@ -3,6 +3,7 @@ local ID = require('scripts/zones/Xarcabard_[S]/IDs')
 return {
     ['Animal_Spoor']      = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
     ['Backfilled_Pit']    = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
+    ['blank_fork']        = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
     ['Compact_Footprint'] = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
     ['Excavated_Snow']    = { messageSpecial = ID.text.NO_RESPONSE },
     ['Forbidden_Portal']  = { messageSpecial = ID.text.NO_RESPONSE },

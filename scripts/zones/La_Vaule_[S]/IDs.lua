@@ -22,6 +22,8 @@ zones[xi.zone.LA_VAULE_S] =
         DOOR_IS_LOCKED            = 7724, -- The door is locked.
         PARTY_MEMBERS_HAVE_FALLEN = 8029, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED = 8036, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
+        GATHERED_DAWNDROPS_LIGHT  = 8342, -- The gathered dawndrops unleash a brilliant light, melding together to form <keyitem>!
+        RETRACED_ALL_JUNCTIONS    = 8343, -- You have retraced all junctions of eventualities. Hasten back to where Cait Sith and Lilisette await.
     },
     mob =
     {

@@ -1,15 +1,15 @@
 -----------------------------------
 -- Zone: Lower_Jeuno (245)
 -----------------------------------
-local ID = require("scripts/zones/Lower_Jeuno/IDs")
-local lowerJeunoGlobal = require("scripts/zones/Lower_Jeuno/globals")
-require("scripts/globals/conquest")
-require("scripts/globals/keyitems")
-require("scripts/globals/missions")
-require("scripts/globals/pathfind")
-require("scripts/globals/settings")
-require("scripts/globals/chocobo")
-require("scripts/globals/status")
+local ID = require('scripts/zones/Lower_Jeuno/IDs')
+local lowerJeunoGlobal = require('scripts/zones/Lower_Jeuno/globals')
+require('scripts/globals/conquest')
+require('scripts/globals/keyitems')
+require('scripts/globals/missions')
+require('scripts/globals/pathfind')
+require('scripts/globals/settings')
+require('scripts/globals/chocobo')
+require('scripts/globals/status')
 -----------------------------------
 local zone_object = {}
 
@@ -23,6 +23,7 @@ zone_object.onZoneIn = function(player, prevZone)
 
     local month = tonumber(os.date("%m"))
     local day = tonumber(os.date("%d"))
+
     -- Retail start/end dates vary, I am going with Dec 5th through Jan 5th.
     if
         (month == 12 and day >= 5) or
