@@ -5105,7 +5105,7 @@ function getRoeRecords(triggers)
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6392 } },
         },
-
+        
         [911] =
         { -- Conflict: Escha - Ru'Aun IX
             trigger = triggers.mobKill,
