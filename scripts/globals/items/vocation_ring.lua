@@ -1,11 +1,11 @@
 -----------------------------------
--- ID: 15793
--- Item: Anniversary Ring
--- Experience point bonus
+-- ID: 28563
+-- Item: vocation ring
+-- Capacity point bonus
 -----------------------------------
 -- Bonus: +100%
--- Duration: 1440 min/24hr
--- Max bonus: 30000 exp
+-- Duration: 720 min
+-- Max bonus: 12000 exp
 -----------------------------------
 require("scripts/globals/msg")
 require("scripts/globals/status")
@@ -15,17 +15,17 @@ local item_object = {}
 
 item_object.onItemCheck = function(target)
     local result = 0
-    if target:hasStatusEffect(xi.effect.DEDICATION) then
+    if target:hasStatusEffect(xi.effect.COMMITMENT) then
         result = xi.msg.basic.ITEM_UNABLE_TO_USE_2
     end
     return result
 end
 
 item_object.onItemUse = function(target)
-    local effect    = xi.effect.DEDICATION
+    local effect    = xi.effect.COMMITMENT
     local power     = 100
-    local duration  = 86400
-    local subpower  = 30000
+    local duration  = 43200
+    local subpower  = 12000
 
     xi.item_utils.addItemExpEffect(target, effect, power, duration, subpower)
 end

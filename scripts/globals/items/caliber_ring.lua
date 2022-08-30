@@ -1,10 +1,10 @@
 -----------------------------------
--- ID: 15793
--- Item: Anniversary Ring
+-- ID: 26164
+-- Item: caliber ring
 -- Experience point bonus
 -----------------------------------
--- Bonus: +100%
--- Duration: 1440 min/24hr
+-- Bonus: +150%
+-- Duration: 720 min
 -- Max bonus: 30000 exp
 -----------------------------------
 require("scripts/globals/msg")
@@ -23,8 +23,8 @@ end
 
 item_object.onItemUse = function(target)
     local effect    = xi.effect.DEDICATION
-    local power     = 100
-    local duration  = 86400
+    local power     = 150
+    local duration  = 43200
     local subpower  = 30000
 
     xi.item_utils.addItemExpEffect(target, effect, power, duration, subpower)

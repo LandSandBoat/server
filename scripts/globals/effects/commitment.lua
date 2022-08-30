@@ -1,5 +1,5 @@
 -----------------------------------
--- xi.effect.DEDICATION
+-- xi.effect.COMMITMENT
 -- Handled in map/utils/charutils
 -----------------------------------
 local effect_object = {}
