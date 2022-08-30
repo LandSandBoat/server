@@ -25,7 +25,7 @@ INSERT INTO `job_point_gifts` VALUES (1, 30, 26, 5, 'WAR_Ranged Accuracy Bonus')
 INSERT INTO `job_point_gifts` VALUES (1, 45, 31, 5, 'WAR_Magic Evasion Bonus');
 INSERT INTO `job_point_gifts` VALUES (1, 50, 997, 1, 'WAR_Superior 1');
 INSERT INTO `job_point_gifts` VALUES (1, 55, 915, 9, 'WAR_Capacity Point Bonus');
-INSERT INTO `job_point_gifts` VALUES (1, 60, 31, 5, 'WAR_Magic Accuracy Bonus');
+INSERT INTO `job_point_gifts` VALUES (1, 60, 30, 5, 'WAR_Magic Accuracy Bonus');
 INSERT INTO `job_point_gifts` VALUES (1, 80, 903, 50, 'WAR_Enhances "Fencer" effect.');
 INSERT INTO `job_point_gifts` VALUES (1, 95, 915, 11, 'WAR_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` VALUES (1, 100, 165, 5, 'WAR_Critical Hit Bonus');
