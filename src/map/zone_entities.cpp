@@ -1353,8 +1353,15 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
 
         PMob->PAI->Tick(tick);
 
-        if (PMob->status == STATUS_TYPE::DISAPPEAR && PMob->m_bReleaseTargIDOnDeath)
+        auto PEntity = static_cast<CBattleEntity*>(PMob); // Battle Entity Cast for Pet Checks
+
+        if (PMob->status == STATUS_TYPE::DISAPPEAR && PMob->m_bReleaseTargIDOnDeath) // Only Affects Dynamic Mobs
         {
+            if (PEntity->PPet != nullptr) // If I have a pet when I despawn, I need to replace my entity on the pet with the pet's entity. (This pseudo-detaches the pet)
+            {
+                PEntity->PPet->PMaster = PEntity->PPet;
+            }
+
             for (auto PMobIt : m_mobList)
             {
                 CMobEntity* PCurrentMob = (CMobEntity*)PMobIt.second;
