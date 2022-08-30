@@ -29,9 +29,10 @@ end
 zone_object.onEventFinish = function(player, csid, option)
     if csid == 100 then
         local prevzone = player:getPreviousZone()
-        if (prevzone == xi.zone.PORT_JEUNO) then
+
+        if prevzone == xi.zone.PORT_JEUNO then
             player:setPos(-20, -2, 44.26, 0, 232)
-        elseif (prevzone == xi.zone.PORT_SAN_DORIA) then
+        elseif prevzone == xi.zone.PORT_SAN_DORIA then
             player:setPos(-90.63, 12, 107.17, 0, 246)
         else
             --fix for black screen if prevzone is not getting set correctly

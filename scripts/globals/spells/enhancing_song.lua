@@ -153,7 +153,7 @@ xi.spells.enhancing.calculateSongPower = function(caster, target, spell, spellId
                     power = power + 1
                 end
             -- NOTE: Aubade, Capriccio, Gavotte, Madrigal, March, Minne, Minuet, Operetta, Pastoral, Prelude, Round.
-            elseif divisor ~= 0 then
+            else
                 power = math.floor(power + (singingLvl - skillCap) / divisor)
             end
         end

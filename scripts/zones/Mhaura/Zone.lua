@@ -21,7 +21,7 @@ zone_object.onGameHour = function(zone)
         GetNPCByID(ID.npc.LAUGHING_BISON):setAnimationSub(0)
     end
 
-    SetServerVariable("Mhaura_Deastination", math.random(1, 100))
+    SetServerVariable("Mhaura_Destination", math.random(1, 100))
 end
 
 zone_object.onInitialize = function(zone)

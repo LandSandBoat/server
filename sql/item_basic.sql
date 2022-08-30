@@ -9769,8 +9769,8 @@ INSERT INTO `item_basic` VALUES (12436,0,'dragon_mask','dragon_mask',1,2084,17,0
 INSERT INTO `item_basic` VALUES (12437,0,'gavial_mask','gavial_mask',1,2084,17,0,675);
 INSERT INTO `item_basic` VALUES (12438,0,'centurions_visor','centurions_visor',1,2052,17,0,2181);
 INSERT INTO `item_basic` VALUES (12439,0,'bascinet_+1','bascinet_+1',1,2080,17,0,6600);
-INSERT INTO `item_basic` VALUES (12440,0,'leather_bandana','leather_bandana',1,2084,17,0,110);
-INSERT INTO `item_basic` VALUES (12441,0,'lizard_helm','lizard_helm',1,2084,17,0,178);
+INSERT INTO `item_basic` VALUES (12440,0,'leather_bandana','leather_bandana',1,2084,17,0,52);
+INSERT INTO `item_basic` VALUES (12441,0,'lizard_helm','lizard_helm',1,2084,17,0,177);
 INSERT INTO `item_basic` VALUES (12442,0,'studded_bandana','studded_bandana',1,2084,17,0,1100);
 INSERT INTO `item_basic` VALUES (12443,0,'cuir_bandana','cuir_bandana',1,2084,17,0,814);
 INSERT INTO `item_basic` VALUES (12444,0,'raptor_helm','raptor_helm',1,2084,17,0,2240);
@@ -9921,7 +9921,7 @@ INSERT INTO `item_basic` VALUES (12588,0,'shinobi_gi','shinobi_gi',1,2084,18,0,8
 INSERT INTO `item_basic` VALUES (12589,0,'scorpion_breastplate_+1','scp._brstplate_+1',1,2080,18,0,17325);
 INSERT INTO `item_basic` VALUES (12590,0,'power_gi','power_gi',1,2052,18,0,746);
 INSERT INTO `item_basic` VALUES (12591,0,'doublet_+1','doublet_+1',1,2080,18,0,661);
-INSERT INTO `item_basic` VALUES (12592,0,'doublet','doublet',1,2084,18,0,529);
+INSERT INTO `item_basic` VALUES (12592,0,'doublet','doublet',1,2084,18,0,119);
 INSERT INTO `item_basic` VALUES (12593,0,'cotton_doublet','cotton_doublet',1,2084,18,0,860);
 INSERT INTO `item_basic` VALUES (12594,0,'gambison','gambison',1,2084,18,0,2500);
 INSERT INTO `item_basic` VALUES (12595,0,'wool_gambison','wool_gambison',1,2084,18,0,6240);

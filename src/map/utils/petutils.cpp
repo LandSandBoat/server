@@ -540,11 +540,6 @@ namespace petutils
         PMob->health.hp = PMob->GetMaxHP();
         PMob->health.mp = PMob->GetMaxMP();
 
-        PMob->setModifier(Mod::DEF, GetJugBase(PMob, petStats->defRank));
-        PMob->setModifier(Mod::EVA, GetJugBase(PMob, petStats->evaRank));
-        PMob->setModifier(Mod::ATT, GetJugBase(PMob, petStats->attRank));
-        PMob->setModifier(Mod::ACC, GetJugBase(PMob, petStats->accRank));
-
         static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setDamage(GetJugWeaponDamage(PMob));
 
         // reduce weapon delay of MNK
