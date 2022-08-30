@@ -4971,7 +4971,7 @@ function getRoeRecords(triggers)
         -- Combat (Region) - Escha 1
         -----------------------------------
 
-        [750] =
+        [885] =
         { -- Conflict: Escha - Zi'Tah I
             trigger = triggers.mobKill,
             goal = 10,
@@ -4980,7 +4980,7 @@ function getRoeRecords(triggers)
             reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },
         },
 
-        [751] =
+        [886] =
         { -- Conflict: Escha - Zi'Tah II
             trigger = triggers.mobKill,
             goal = 10,
@@ -4989,7 +4989,7 @@ function getRoeRecords(triggers)
             reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },
         },
 
-        [752] =
+        [887] =
         { -- Conflict: Escha - Zi'Tah III
             trigger = triggers.mobKill,
             goal = 10,
@@ -4998,7 +4998,7 @@ function getRoeRecords(triggers)
             reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },
         },
 
-        [753] =
+        [888] =
         { -- Conflict: Escha - Zi'Tah IV
             trigger = triggers.mobKill,
             goal = 10,
@@ -5007,7 +5007,7 @@ function getRoeRecords(triggers)
             reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },
         },
 
-        [754] =
+        [889] =
         { -- Conflict: Escha - Zi'Tah V
             trigger = triggers.mobKill,
             goal = 10,
@@ -5016,7 +5016,7 @@ function getRoeRecords(triggers)
             reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6392 } },
         },
 
-        [755] =
+        [901] =
         { -- Conflict: Escha - Zi'Tah VI
             trigger = triggers.mobKill,
             goal = 10,
@@ -5025,7 +5025,7 @@ function getRoeRecords(triggers)
             reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6392 } },
         },
 
-        [756] =
+        [902] =
         { -- Conflict: Escha - Zi'Tah VII
             trigger = triggers.mobKill,
             goal = 10,
@@ -5034,7 +5034,7 @@ function getRoeRecords(triggers)
             reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6392 } },
         },
 
-        [757] =
+        [903] =
         { -- Conflict: Escha - Ru'Aun I
             trigger = triggers.mobKill,
             goal = 10,
@@ -5043,7 +5043,7 @@ function getRoeRecords(triggers)
             reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },
         },
 
-        [758] =
+        [904] =
         { -- Conflict: Escha - Ru'Aun II
             trigger = triggers.mobKill,
             goal = 10,
@@ -5052,7 +5052,7 @@ function getRoeRecords(triggers)
             reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6392 } },
         },
 
-        [759] =
+        [905] =
         { -- Conflict: Escha - Ru'Aun III
             trigger = triggers.mobKill,
             goal = 10,
@@ -5061,7 +5061,7 @@ function getRoeRecords(triggers)
             reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },
         },
 
-        [760] =
+        [906] =
         { -- Conflict: Escha - Ru'Aun IV
             trigger = triggers.mobKill,
             goal = 10,
@@ -5070,7 +5070,7 @@ function getRoeRecords(triggers)
             reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6392 } },
         },
 
-        [761] =
+        [907] =
         { -- Conflict: Escha - Ru'Aun V
             trigger = triggers.mobKill,
             goal = 10,
@@ -5079,7 +5079,7 @@ function getRoeRecords(triggers)
             reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },
         },
 
-        [762] =
+        [908] =
         { -- Conflict: Escha - Ru'Aun VI
             trigger = triggers.mobKill,
             goal = 10,
@@ -5088,7 +5088,7 @@ function getRoeRecords(triggers)
             reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6392 } },
         },
 
-        [763] =
+        [909] =
         { -- Conflict: Escha - Ru'Aun VII
             trigger = triggers.mobKill,
             goal = 10,
@@ -5097,7 +5097,7 @@ function getRoeRecords(triggers)
             reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },
         },
 
-        [764] =
+        [910] =
         { -- Conflict: Escha - Ru'Aun VIII
             trigger = triggers.mobKill,
             goal = 10,
@@ -5106,7 +5106,7 @@ function getRoeRecords(triggers)
             reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6392 } },
         },
 
-        [765] =
+        [911] =
         { -- Conflict: Escha - Ru'Aun IX
             trigger = triggers.mobKill,
             goal = 10,
@@ -5115,7 +5115,7 @@ function getRoeRecords(triggers)
             reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },
         },
 
-        [766] =
+        [912] =
         { -- Conflict: Escha - Ru'Aun X
             trigger = triggers.mobKill,
             goal = 10,
@@ -5128,7 +5128,7 @@ function getRoeRecords(triggers)
         -- Combat (Region) - Escha 2
         -----------------------------------
 
-        [767] =
+        [943] =
         { -- Conflict: Reisenjima I
             trigger = triggers.mobKill,
             goal = 10,
@@ -5137,7 +5137,7 @@ function getRoeRecords(triggers)
             reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6392 } },
         },
 
-        [768] =
+        [944] =
         { -- Conflict: Reisenjima II
             trigger = triggers.mobKill,
             goal = 10,
@@ -5146,7 +5146,7 @@ function getRoeRecords(triggers)
             reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },
         },
 
-        [769] =
+        [945] =
         { -- Conflict: Reisenjima III
             trigger = triggers.mobKill,
             goal = 10,
@@ -5155,7 +5155,7 @@ function getRoeRecords(triggers)
             reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6392 } },
         },
 
-        [770] =
+        [946] =
         { -- Conflict: Reisenjima IV
             trigger = triggers.mobKill,
             goal = 10,
@@ -5164,7 +5164,7 @@ function getRoeRecords(triggers)
             reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },
         },
 
-        [771] =
+        [947] =
         { -- Conflict: Reisenjima V
             trigger = triggers.mobKill,
             goal = 10,
@@ -5173,7 +5173,7 @@ function getRoeRecords(triggers)
             reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6392 } },
         },
 
-        [772] =
+        [948] =
         { -- Conflict: Reisenjima VI
             trigger = triggers.mobKill,
             goal = 10,
@@ -5182,7 +5182,7 @@ function getRoeRecords(triggers)
             reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },
         },
 
-        [773] =
+        [949] =
         { -- Conflict: Reisenjima VII
             trigger = triggers.mobKill,
             goal = 10,
@@ -5191,7 +5191,7 @@ function getRoeRecords(triggers)
             reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6392 } },
         },
 
-        [774] =
+        [950] =
         { -- Conflict: Reisenjima XIII
             trigger = triggers.mobKill,
             goal = 10,
@@ -5200,7 +5200,7 @@ function getRoeRecords(triggers)
             reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },
         },
 
-        [775] =
+        [951] =
         { -- Conflict: Reisenjima IX
             trigger = triggers.mobKill,
             goal = 10,
@@ -5209,7 +5209,7 @@ function getRoeRecords(triggers)
             reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6392 } },
         },
 
-        [776] =
+        [952] =
         { -- Conflict: Reisenjima X
             trigger = triggers.mobKill,
             goal = 10,
@@ -5218,7 +5218,7 @@ function getRoeRecords(triggers)
             reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },
         },
 
-        [777] =
+        [953] =
         { -- Conflict: Reisenjima XI
             trigger = triggers.mobKill,
             goal = 10,
