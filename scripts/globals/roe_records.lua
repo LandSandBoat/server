@@ -4971,9 +4971,261 @@ function getRoeRecords(triggers)
         -- Combat (Region) - Escha 1
         -----------------------------------
 
+        [622] =
+        { -- Conflict: Escha - Zi'Tah I
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobName = set { "Eschan Yztarg" }, zone = set { 288 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },
+        },
+
+        [623] =
+        { -- Conflict: Escha - Zi'Tah II
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobName = set { "Eschan Bugard" }, zone = set { 288 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },
+        },
+
+        [624] =
+        { -- Conflict: Escha - Zi'Tah III
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobName = set { "Eschan Tarichuck" }, zone = set { 288 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },
+        },
+
+        [625] =
+        { -- Conflict: Escha - Zi'Tah IV
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobName = set { "Eschan Dragon" }, zone = set { 288 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },
+        },
+
+        [626] =
+        { -- Conflict: Escha - Zi'Tah V
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobName = set { "Eschan Mosquito" }, zone = set { 288 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6392 } },
+        },
+
+        [627] =
+        { -- Conflict: Escha - Zi'Tah VI
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobName = set { "Eschan Puk" }, zone = set { 288 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6392 } },
+        },
+
+        [628] =
+        { -- Conflict: Escha - Zi'Tah VII
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobName = set { "Eschan Opo-opo" }, zone = set { 288 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6392 } },
+        },
+
+        [629] =
+        { -- Conflict: Escha - Ru'Aun I
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobName = set { "Eschan Li'aern" }, zone = set { 289 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },
+        },
+
+        [630] =
+        { -- Conflict: Escha - Ru'Aun II
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobName = set { "Eschan Phuabo" }, zone = set { 289 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6392 } },
+        },
+
+        [631] =
+        { -- Conflict: Escha - Ru'Aun III
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobName = set { "Eschan Euhvi" }, zone = set { 289 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },
+        },
+
+        [632] =
+        { -- Conflict: Escha - Ru'Aun IV
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobName = set { "Eschan Clionidae" }, zone = set { 289 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6392 } },
+        },
+
+        [633] =
+        { -- Conflict: Escha - Ru'Aun V
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobName = set { "Eschan Hpemde" }, zone = set { 289 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },
+        },
+
+        [634] =
+        { -- Conflict: Escha - Ru'Aun VI
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobName = set { "Eschan Amobean" }, zone = set { 289 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6392 } },
+        },
+
+        [635] =
+        { -- Conflict: Escha - Ru'Aun VII
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobName = set { "Eschan Xzomit" }, zone = set { 289 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },
+        },
+
+        [636] =
+        { -- Conflict: Escha - Ru'Aun VIII
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobName = set { "Eschan Murex" }, zone = set { 289 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6392 } },
+        },
+
+        [637] =
+        { -- Conflict: Escha - Ru'Aun IX
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobName = set { "Eschan Ghrah" }, zone = set { 289 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },
+        },
+
+        [638] =
+        { -- Conflict: Escha - Ru'Aun X
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobName = set { "Eschan Limule" }, zone = set { 289 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6392 } },
+        },
+
         -----------------------------------
         -- Combat (Region) - Escha 2
         -----------------------------------
+
+        [639] =
+        { -- Conflict: Reisenjima I
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobName = set { "Obstreperous Panopt" }, zone = set { 291 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6392 } },
+        },
+
+        [640] =
+        { -- Conflict: Reisenjima II
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobName = set { "Snaggletoothed Tiger" }, zone = set { 291 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },
+        },
+
+        [641] =
+        { -- Conflict: Reisenjima III
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobName = set { "Agitated Chapuli" }, zone = set { 291 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6392 } },
+        },
+
+        [642] =
+        { -- Conflict: Reisenjima IV
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobName = set { "Idomitable Faaz" }, zone = set { 291 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },
+        },
+
+        [643] =
+        { -- Conflict: Reisenjima V
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobName = set { "Territorial Mantise" }, zone = set { 291 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6392 } },
+        },
+
+        [644] =
+        { -- Conflict: Reisenjima VI
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobName = set { "Devouring Mosquito" }, zone = set { 291 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },
+        },
+
+        [645] =
+        { -- Conflict: Reisenjima VII
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobName = set { "Lentic Toad" }, zone = set { 291 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6392 } },
+        },
+
+        [646] =
+        { -- Conflict: Reisenjima XIII
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobName = set { "Quarrelsome Hippogryph" }, zone = set { 291 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },
+        },
+
+        [647] =
+        { -- Conflict: Reisenjima IX
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobName = set { "Rampaging Beetle" }, zone = set { 291 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6392 } },
+        },
+
+        [648] =
+        { -- Conflict: Reisenjima X
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobName = set { "Glowering Ladybug" }, zone = set { 291 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },
+        },
+
+        [649] =
+        { -- Conflict: Reisenjima XI
+            trigger = triggers.mobKill,
+            goal = 10,
+            reqs = { mobName = set { "Lucani" }, zone = set { 291 } },
+            flags = set { "repeat" },
+            reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },
+        },
 
         -----------------------------------
         -- Harvesting - Original Areas
