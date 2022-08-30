@@ -1178,6 +1178,8 @@ xi.mod =
     TRIPLE_ATTACK                   = 302,
     TRIPLE_ATTACK_DMG               = 1039, -- Increases "Triple Attack" damage/"Triple Attack" damage + (in percents, e.g. +20 = +20% damage)
     TREASURE_HUNTER                 = 303,
+    TREASURE_HUNTER_PROC            = 1048, -- TODO: Increases Treasure Hunter proc rate (percent)
+    TREASURE_HUNTER_CAP             = 1049, -- TODO: Increases the Treasure Hunter Cap (e.g. THF JP Gift)
     TAME                            = 304,
     RECYCLE                         = 305,
     ZANSHIN                         = 306,
@@ -1331,6 +1333,7 @@ xi.mod =
     CURE_POTENCY                    = 374,
     CURE_POTENCY_II                 = 260, -- % cure potency II | bonus from gear is capped at 30
     CURE_POTENCY_RCVD               = 375,
+    CURE_POTENCY_BONUS              = 1051, -- TODO: Increases amount healed by Cure spells (fixed amount)
     RANGED_DMG_RATING               = 376,
     DELAYP                          = 380,
     RANGED_DELAYP                   = 381,
@@ -1498,10 +1501,11 @@ xi.mod =
     EAT_RAW_FISH                    = 412, --
     EAT_RAW_MEAT                    = 413, --
 
-    ENHANCES_CURSNA_RCVD            = 67,  -- Potency of "Cursna" effects received
-    ENHANCES_CURSNA                 = 310, -- Raises success rate of Cursna when removing effect (like Doom) that are not 100% chance to remove
-    ENHANCES_HOLYWATER              = 495, -- Used by gear with the "Enhances Holy Water" or "Holy Water+" attribute
-    ENHANCES_PROT_SHELL_RCVD        = 977, -- Enhances Protect and Shell Effects Received (Binary MOD)
+    ENHANCES_CURSNA_RCVD            = 67,   -- Potency of "Cursna" effects received
+    ENHANCES_CURSNA                 = 310,  -- Raises success rate of Cursna when removing effect (like Doom) that are not 100% chance to remove
+    ENHANCES_HOLYWATER              = 495,  -- Used by gear with the "Enhances Holy Water" or "Holy Water+" attribute
+    ENHANCES_PROT_SHELL_RCVD        = 977,  -- Enhances Protect and Shell Effects Received (Binary MOD)
+    ENHANCES_PROT_RCVD              = 1050, -- TODO: Enhances Protect Received (Percent)
 
     RETALIATION                     = 414, -- Increases damage of Retaliation hits
     THIRD_EYE_COUNTER_RATE          = 508, -- Adds counter to 3rd eye anticipates & if using Seigan counter rate is increased by 15%
@@ -1713,6 +1717,17 @@ xi.mod =
     AUGMENT_BLOOD_BOON     = 1035, -- Percent chance to deal extra damage based on Blood Boon Amount (SMN AF3 Sets)
     AUGMENT_BLU_MAGIC      = 1036, -- Percent chance for BLU magic to receive 3x WSC value for spell (BLU AF3 Sets)
     GEOMANCY_MP_NO_DEPLETE = 1037, -- Percent chance for Geomancy to cost 0 MP (GEO AF3 Sets)
+
+    -- Job Point Gifts
+    SIC_READY_RECAST        = 1052, -- TODO: SIC/Ready recast reduction (seconds)
+    TRUE_SHOT_EFFECT        = 1053, -- TODO: True Shot Ranged Damage increase (percent)
+    DEAD_AIM_EFFECT         = 1054, -- TODO: Dead Aim Critical Damage increase (percent)
+    THIRD_EYE_BONUS         = 1055, -- TODO: Bonus Third Eye Evasions (count)
+    WYVERN_ATTRIBUTE_DA     = 1056, -- TODO: Adds an amount of Double Attack to Dragoon each time Wyverns Attributes Increase (percent)
+    DRAGOON_BREATH_RECAST   = 1057, -- TODO: Restoring/Smithing Breath Recast Reduction (seconds)
+    BLUE_JOB_TRAIT_BONUS    = 1058, -- TODO: Increases job traits gained from equipped blue magic (percent)
+    BLUE_MAGIC_EFFECT       = 1059, -- TODO: Bonus to Attribute Value of spell (percent)
+    QUICK_DRAW_RECAST       = 1060, -- TODO: Quick Draw Charge Reduction (seconds)
 
     -- IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN src/map/modifier.h ASWELL!
 
