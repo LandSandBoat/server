@@ -64,32 +64,35 @@ xi.dynamis.spawnWave = function(zone, zoneID, waveNumber)
 end
 
 xi.dynamis.parentOnEngaged = function(mob, target)
-    local zoneID = mob:getZoneID()
-    local oMobIndex = mob:getZone():getLocalVar(string.format("MobIndex_%s", mob:getID()))
-    local oMob = mob
-    local eyes = mob:getLocalVar("eyeColor")
-    if eyes ~= nil then
-        mob:setAnimationSub(eyes)
-    end
-    if xi.dynamis.mobList[zoneID][oMobIndex].nmchildren then
-        for index, MobIndex in pairs(xi.dynamis.mobList[zoneID][oMobIndex].nmchildren) do
-            if MobIndex == true or MobIndex == false then
-                index = index + 1
-            else
-                local forceLink = xi.dynamis.mobList[zoneID][oMobIndex].nmchildren[1]
-                local mobType = xi.dynamis.mobList[zoneID][MobIndex].info[1]
-                if mobType == "NM" then -- NMs
-                    xi.dynamis.nmDynamicSpawn(MobIndex, oMobIndex, forceLink, zoneID, target, oMob)
+    if mob:getLocalVar("SpawnedChildren") == 0 then
+        local zoneID = mob:getZoneID()
+        local oMobIndex = mob:getZone():getLocalVar(string.format("MobIndex_%s", mob:getID()))
+        local oMob = mob
+        local eyes = mob:getLocalVar("eyeColor")
+        if eyes ~= nil then
+            mob:setAnimationSub(eyes)
+        end
+        if xi.dynamis.mobList[zoneID][oMobIndex].nmchildren then
+            for index, MobIndex in pairs(xi.dynamis.mobList[zoneID][oMobIndex].nmchildren) do
+                if MobIndex == true or MobIndex == false then
                     index = index + 1
-                else -- Nightmare Mobs and Statues
-                    xi.dynamis.nonStandardDynamicSpawn(MobIndex, oMob, forceLink, zoneID, target, oMobIndex)
-                    index = index + 1
+                else
+                    local forceLink = xi.dynamis.mobList[zoneID][oMobIndex].nmchildren[1]
+                    local mobType = xi.dynamis.mobList[zoneID][MobIndex].info[1]
+                    if mobType == "NM" then -- NMs
+                        xi.dynamis.nmDynamicSpawn(MobIndex, oMobIndex, forceLink, zoneID, target, oMob)
+                        index = index + 1
+                    else -- Nightmare Mobs and Statues
+                        xi.dynamis.nonStandardDynamicSpawn(MobIndex, oMob, forceLink, zoneID, target, oMobIndex)
+                        index = index + 1
+                    end
                 end
             end
         end
-    end
-    if xi.dynamis.mobList[zoneID][oMobIndex].mobchildren then
-        xi.dynamis.normalDynamicSpawn(mob, oMobIndex, target) -- Normies have their own loop, so they don't need one here.
+        if xi.dynamis.mobList[zoneID][oMobIndex].mobchildren then
+            xi.dynamis.normalDynamicSpawn(mob, oMobIndex, target) -- Normies have their own loop, so they don't need one here.
+        end
+        mob:setLocalVar("SpawnedChildren", 1)
     end
 end
 
@@ -1007,15 +1010,15 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         },
         ["Nant'ina"] =
         {
-          ["onMobSpawn"] = {function(mob) xi.dynamis.onSpawnNoAuto(mob) end},
-          ["onMobEngaged"] = {function(mob, target) end},
-          ["onMobFight"] = {function(mob, target) end},
-          ["onMobRoam"] = {function(mob) end},
-          ["onMobMagicPrepare"] = {function(mob, target, spellId) end},
-          ["onMobWeaponSkillPrepare"] = {function(mob) xi.dynamis.onWeaponskillPrepNantina(mob) end},
-          ["onMobWeaponSkill"] = {function(mob) end},
-          ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.mobOnDeath(mob, player, isKiller) end},
-          ["mixins"] = { },
+            ["onMobSpawn"] = {function(mob) xi.dynamis.onSpawnNoAuto(mob) end},
+            ["onMobEngaged"] = {function(mob, target) end},
+            ["onMobFight"] = {function(mob, target) end},
+            ["onMobRoam"] = {function(mob) end},
+            ["onMobMagicPrepare"] = {function(mob, target, spellId) end},
+            ["onMobWeaponSkillPrepare"] = {function(mob) xi.dynamis.onWeaponskillPrepNantina(mob) end},
+            ["onMobWeaponSkill"] = {function(mob) end},
+            ["onMobDeath"] = {function(mob, player, isKiller) xi.dynamis.mobOnDeath(mob, player, isKiller) end},
+            ["mixins"] = { },
         },
         ["Nightmare Morbol"] =
         {
@@ -1910,24 +1913,27 @@ end
 --          Dynamis Pet Spawning          --
 --------------------------------------------
 xi.dynamis.mobOnEngaged = function(mob, target)
-    if  mob:getMainJob() == xi.job.BST or mob:getMainJob() == xi.job.SMN then
-        mob:entityAnimationPacket("casm")
-        mob:SetAutoAttackEnabled(false)
-        mob:SetMagicCastingEnabled(false)
-        mob:SetMobAbilityEnabled(false)
+    if  mob:getLocalVar("SpawnedPets") == 0 then
+        if  mob:getMainJob() == xi.job.BST or mob:getMainJob() == xi.job.SMN then
+            mob:entityAnimationPacket("casm")
+            mob:SetAutoAttackEnabled(false)
+            mob:SetMagicCastingEnabled(false)
+            mob:SetMobAbilityEnabled(false)
 
-        mob:timer(3000, function(mob)
-            if mob:isAlive() then
-                xi.dynamis.spawnDynamicPet(target, mob, mob:getMainJob())
-                mob:entityAnimationPacket("shsm")
-                mob:SetAutoAttackEnabled(true)
-                mob:SetMagicCastingEnabled(true)
-                mob:SetMobAbilityEnabled(true)
-            end
-        end)
-    elseif mob:getMainJob() == xi.job.DRG then
-        mob:useMobAbility(xi.jsa.CALL_WYVERN)
-        xi.dynamis.spawnDynamicPet(target, mob, mob:getMainJob())
+            mob:timer(3000, function(mob)
+                if mob:isAlive() then
+                    xi.dynamis.spawnDynamicPet(target, mob, mob:getMainJob())
+                    mob:entityAnimationPacket("shsm")
+                    mob:SetAutoAttackEnabled(true)
+                    mob:SetMagicCastingEnabled(true)
+                    mob:SetMobAbilityEnabled(true)
+                end
+            end)
+        elseif mob:getMainJob() == xi.job.DRG then
+            mob:useMobAbility(xi.jsa.CALL_WYVERN)
+            xi.dynamis.spawnDynamicPet(target, mob, mob:getMainJob())
+        end
+        mob:setLocalVar("SpawnedPets", 1)
     end
 end
 
