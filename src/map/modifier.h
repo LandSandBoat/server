@@ -323,6 +323,7 @@ enum class Mod
     KICK_ATTACK_RATE    = 292,  // Percent chance to kick
     PERFECT_COUNTER_ATT = 428,  // TODO: Raises weapon damage by 20 when countering while under the Perfect Counter effect. This also affects Weapon Rank (though
                                 // not if fighting barehanded).
+    COUNTER_DAMAGE       = 1047, // TODO: Increases Damage from Counter Attacks (Percent)
     FOOTWORK_ATT_BONUS   = 429, // Raises the attack bonus of Footwork. (Tantra Gaiters +2 raise 25/256 to 38/256)
     COUNTERSTANCE_EFFECT = 543, // Counterstance effect in percents
     DODGE_EFFECT         = 552, // Dodge effect in percents
@@ -903,7 +904,7 @@ enum class Mod
     // 888
     // 936
     //
-    // SPARE = 1047, and onward
+    // SPARE = 1048, and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

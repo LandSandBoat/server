@@ -119,7 +119,7 @@ INSERT INTO `job_point_gifts` VALUES (2, 450, 289, 2, 'MNK_Subtle Blow Effect');
 INSERT INTO `job_point_gifts` VALUES (2, 500, 291, 2, 'MNK_Counter Effect');
 INSERT INTO `job_point_gifts` VALUES (2, 500, 997, 1, 'MNK_Superior 3');
 INSERT INTO `job_point_gifts` VALUES (2, 545, 915, 23, 'MNK_Capacity Point Bonus');
-INSERT INTO `job_point_gifts` VALUES (2, 550, 959, 5, 'MNK_Counter Damage');
+INSERT INTO `job_point_gifts` VALUES (2, 550, 1047, 5, 'MNK_Counter Damage');
 INSERT INTO `job_point_gifts` VALUES (2, 605, 1, 10, 'MNK_Physical Defense Bonus');
 INSERT INTO `job_point_gifts` VALUES (2, 655, 915, 25, 'MNK_Capacity Point Bonus');
 INSERT INTO `job_point_gifts` VALUES (2, 660, 23, 16, 'MNK_Attack Bonus');
