@@ -7,6 +7,7 @@
 -- Duration: 1440 min/24hr
 -- Max bonus: 30000 exp
 -----------------------------------
+require("scripts/globals/msg")
 require("scripts/globals/status")
 require("scripts/globals/item_utils")
 -----------------------------------
@@ -15,7 +16,7 @@ local item_object = {}
 item_object.onItemCheck = function(target)
     local result = 0
     if target:hasStatusEffect(xi.effect.DEDICATION) then
-        result = 56
+        result = xi.msg.basic.ITEM_UNABLE_TO_USE_2
     end
     return result
 end
