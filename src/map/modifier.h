@@ -315,19 +315,19 @@ enum class Mod
     ENHANCES_BLOOD_RAGE = 1046, // Enhances "Blood Rage" effect/"Blood Rage" duration +
 
     // Monk
-    BOOST_EFFECT        = 97,   // Boost power in tenths
-    CHAKRA_MULT         = 1026, // Chakra multiplier increase (from gear)
-    CHAKRA_REMOVAL      = 1027, // Extra statuses removed by Chakra
-    SUBTLE_BLOW         = 289,  // How much TP to reduce.
-    COUNTER             = 291,  // Percent chance to counter
-    KICK_ATTACK_RATE    = 292,  // Percent chance to kick
-    PERFECT_COUNTER_ATT = 428,  // TODO: Raises weapon damage by 20 when countering while under the Perfect Counter effect. This also affects Weapon Rank (though
-                                // not if fighting barehanded).
+    BOOST_EFFECT        = 97,    // Boost power in tenths
+    CHAKRA_MULT         = 1026,  // Chakra multiplier increase (from gear)
+    CHAKRA_REMOVAL      = 1027,  // Extra statuses removed by Chakra
+    SUBTLE_BLOW         = 289,   // How much TP to reduce.
+    COUNTER             = 291,   // Percent chance to counter
+    KICK_ATTACK_RATE    = 292,   // Percent chance to kick
+    PERFECT_COUNTER_ATT = 428,   // TODO: Raises weapon damage by 20 when countering while under the Perfect Counter effect. This also affects Weapon Rank (though
+                                 // not if fighting barehanded).
     COUNTER_DAMAGE       = 1047, // TODO: Increases Damage from Counter Attacks (Percent)
-    FOOTWORK_ATT_BONUS   = 429, // Raises the attack bonus of Footwork. (Tantra Gaiters +2 raise 25/256 to 38/256)
-    COUNTERSTANCE_EFFECT = 543, // Counterstance effect in percents
-    DODGE_EFFECT         = 552, // Dodge effect in percents
-    FOCUS_EFFECT         = 561, // Focus effect in percents
+    FOOTWORK_ATT_BONUS   = 429,  // Raises the attack bonus of Footwork. (Tantra Gaiters +2 raise 25/256 to 38/256)
+    COUNTERSTANCE_EFFECT = 543,  // Counterstance effect in percents
+    DODGE_EFFECT         = 552,  // Dodge effect in percents
+    FOCUS_EFFECT         = 561,  // Focus effect in percents
 
     // White Mage
     AFFLATUS_SOLACE  = 293, // Pool of HP accumulated during Afflatus Solace
