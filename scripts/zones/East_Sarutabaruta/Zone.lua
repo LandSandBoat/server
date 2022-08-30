@@ -1,13 +1,13 @@
 -----------------------------------
 -- Zone: East_Sarutabaruta (116)
 -----------------------------------
-local ID = require("scripts/zones/East_Sarutabaruta/IDs")
-require("scripts/quests/i_can_hear_a_rainbow")
-require("scripts/globals/chocobo_digging")
-require("scripts/globals/conquest")
-require("scripts/globals/keyitems")
-require("scripts/globals/missions")
-require("scripts/globals/zone")
+local ID = require('scripts/zones/East_Sarutabaruta/IDs')
+require('scripts/quests/i_can_hear_a_rainbow')
+require('scripts/globals/chocobo_digging')
+require('scripts/globals/conquest')
+require('scripts/globals/keyitems')
+require('scripts/globals/missions')
+require('scripts/globals/zone')
 -----------------------------------
 local zone_object = {}
 
@@ -29,8 +29,11 @@ zone_object.onZoneIn = function(player, prevZone)
 
     if quests.rainbow.onZoneIn(player) then
         cs = 50;
-    elseif (player:getCurrentMission(xi.mission.log_id.ASA) == xi.mission.id.asa.BURGEONING_DREAD and prevZone == xi.zone.WINDURST_WOODS and
-        player:hasStatusEffect(xi.effect.MOUNTED) == false) then
+    elseif
+        player:getCurrentMission(xi.mission.log_id.ASA) == xi.mission.id.asa.BURGEONING_DREAD and
+        prevZone == xi.zone.WINDURST_WOODS and
+        not player:hasStatusEffect(xi.effect.MOUNTED)
+    then
         cs = 71
     end
 

@@ -1,9 +1,7 @@
 -----------------------------------
---
 -- Zone: Chocobo_Circuit
---
 -----------------------------------
-local ID = require("scripts/zones/Chocobo_Circuit/IDs")
+local ID = require('scripts/zones/Chocobo_Circuit/IDs')
 -----------------------------------
 local zone_object = {}
 

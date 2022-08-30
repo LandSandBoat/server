@@ -595,7 +595,7 @@ local function checkReqs(player, npc, bfid, registrant)
         [ 196] = function() return ( mjob == xi.job.DRG and mlvl >= 66                                                                                                     ) end, -- Quest: Shattering Stars (DRG LB5)
         [ 224] = function() return ( player:hasKeyItem(xi.ki.MOON_BAUBLE)                                                                                                  ) end, -- Quest: The Moonlit Path
         [ 225] = function() return ( windy == mi.windurst.MOON_READING and natStat == 2                                                                                    ) end, -- Windy 9-2: Moon Reading
-        [ 256] = function() return ( roz == mi.zilart.RETURN_TO_DELKFUTTS_TOWER and rozStat == 3                                                                           ) end, -- ZM8: Return to Delkfutt's Tower
+        [ 256] = function() return ( roz == mi.zilart.RETURN_TO_DELKFUTTS_TOWER and rozStat == 2                                                                           ) end, -- ZM8: Return to Delkfutt's Tower
         [ 288] = function() return ( roz == mi.zilart.ARK_ANGELS and rozStat == 1 and npcid == getEntranceOffset(0) and not player:hasKeyItem(xi.ki.SHARD_OF_APATHY)       ) end, -- ZM14: Ark Angels (Hume)
         [ 289] = function() return ( roz == mi.zilart.ARK_ANGELS and rozStat == 1 and npcid == getEntranceOffset(1) and not player:hasKeyItem(xi.ki.SHARD_OF_COWARDICE)    ) end, -- ZM14: Ark Angels (Tarutaru)
         [ 290] = function() return ( roz == mi.zilart.ARK_ANGELS and rozStat == 1 and npcid == getEntranceOffset(2) and not player:hasKeyItem(xi.ki.SHARD_OF_ENVY)         ) end, -- ZM14: Ark Angels (Mithra)
@@ -606,15 +606,15 @@ local function checkReqs(player, npc, bfid, registrant)
         [ 416] = function() return ( player:hasKeyItem(xi.ki.TUNING_FORK_OF_WIND)                                                                                          ) end, -- Quest: Trial by Wind
         [ 417] = function() return ( player:getCharVar("CarbuncleDebacleProgress") == 6                                                                                    ) end, -- Quest: Carbuncle Debacle
         [ 418] = function() return ( mjob == xi.job.SMN and mlvl >= 20                                                                                                     ) end, -- Quest: Trial-size Trial by Wind
-        [ 420] = function() return ( asa == mi.asa.SUGAR_COATED_DIRECTIVE and player:hasKeyItem(xi.ki.DOMINAS_EMERALD_SEAL)                                                ) end, -- ASA4: Sugar-coated Directive
+        [ 420] = function() return ( asa >= mi.asa.SUGAR_COATED_DIRECTIVE and player:hasKeyItem(xi.ki.DOMINAS_EMERALD_SEAL)                                                ) end, -- ASA4: Sugar-coated Directive
         [ 448] = function() return ( player:hasKeyItem(xi.ki.TUNING_FORK_OF_LIGHTNING)                                                                                     ) end, -- Quest: Trial by Lightning
         [ 449] = function() return ( player:getCharVar("CarbuncleDebacleProgress") == 3                                                                                    ) end, -- Quest: Carbuncle Debacle
         [ 450] = function() return ( mjob == xi.job.SMN and mlvl >= 20                                                                                                     ) end, -- Quest: Trial-size Trial by Lightning
-        [ 452] = function() return ( asa == mi.asa.SUGAR_COATED_DIRECTIVE and player:hasKeyItem(xi.ki.DOMINAS_VIOLET_SEAL)                                                 ) end, -- ASA4: Sugar-coated Directive
+        [ 452] = function() return ( asa >= mi.asa.SUGAR_COATED_DIRECTIVE and player:hasKeyItem(xi.ki.DOMINAS_VIOLET_SEAL)                                                 ) end, -- ASA4: Sugar-coated Directive
         [ 480] = function() return ( player:hasKeyItem(xi.ki.TUNING_FORK_OF_ICE)                                                                                           ) end, -- Quest: Trial by Ice
         [ 481] = function() return ( player:getCharVar("ClassReunionProgress") == 5                                                                                        ) end, -- Quest: Class Reunion
         [ 482] = function() return ( mjob == xi.job.SMN and mlvl >= 20                                                                                                     ) end, -- Quest: Trial-size Trial by Ice
-        [ 484] = function() return ( asa == mi.asa.SUGAR_COATED_DIRECTIVE and player:hasKeyItem(xi.ki.DOMINAS_AZURE_SEAL)                                                  ) end, -- ASA4: Sugar-coated Directive
+        [ 484] = function() return ( asa >= mi.asa.SUGAR_COATED_DIRECTIVE and player:hasKeyItem(xi.ki.DOMINAS_AZURE_SEAL)                                                  ) end, -- ASA4: Sugar-coated Directive
         [ 512] = function() return ( nat == mi.nation.ARCHLICH and natStat == 11                                                                                           ) end, -- Mission 5-1
         [ 516] = function() return ( sandy == mi.sandoria.THE_HEIR_TO_THE_LIGHT and natStat == 3                                                                           ) end, -- Sandy 9-2: The Heir to the Light
         [ 517] = function() return ( mjob == xi.job.PLD and mlvl >= 66                                                                                                     ) end, -- Quest: Shattering Stars (PLD LB5)
@@ -624,14 +624,14 @@ local function checkReqs(player, npc, bfid, registrant)
         [ 533] = function() return ( player:hasKeyItem(xi.ki.SOUL_GEM_CLASP)                                                                                               ) end, -- Quest: Beyond Infinity
         [ 544] = function() return ( player:hasKeyItem(xi.ki.TUNING_FORK_OF_FIRE)                                                                                          ) end, -- Quest: Trial by Fire
         [ 545] = function() return ( mjob == xi.job.SMN and mlvl >= 20                                                                                                     ) end, -- Quest: Trial-size Trial by Fire
-        [ 547] = function() return ( asa == mi.asa.SUGAR_COATED_DIRECTIVE and player:hasKeyItem(xi.ki.DOMINAS_SCARLET_SEAL)                                                ) end, -- ASA4: Sugar-coated Directive
+        [ 547] = function() return ( asa >= mi.asa.SUGAR_COATED_DIRECTIVE and player:hasKeyItem(xi.ki.DOMINAS_SCARLET_SEAL)                                                ) end, -- ASA4: Sugar-coated Directive
         [ 576] = function() return ( player:hasKeyItem(xi.ki.TUNING_FORK_OF_EARTH)                                                                                         ) end, -- Quest: Trial by Earth
         [ 577] = function() return ( player:getCharVar("ThePuppetMasterProgress") == 2                                                                                     ) end, -- Quest: The Puppet Master
         [ 578] = function() return ( mjob == xi.job.SMN and mlvl >= 20                                                                                                     ) end, -- Quest: Trial-size Trial by Earth
-        [ 580] = function() return ( asa == mi.asa.SUGAR_COATED_DIRECTIVE and player:hasKeyItem(xi.ki.DOMINAS_AMBER_SEAL)                                                  ) end, -- ASA4: Sugar-coated Directive
+        [ 580] = function() return ( asa >= mi.asa.SUGAR_COATED_DIRECTIVE and player:hasKeyItem(xi.ki.DOMINAS_AMBER_SEAL)                                                  ) end, -- ASA4: Sugar-coated Directive
         [ 608] = function() return ( player:hasKeyItem(xi.ki.TUNING_FORK_OF_WATER)                                                                                         ) end, -- Quest: Trial by Water
         [ 609] = function() return ( mjob == xi.job.SMN and mlvl >= 20                                                                                                     ) end, -- Quest: Trial-size Trial by Water
-        [ 611] = function() return ( asa == mi.asa.SUGAR_COATED_DIRECTIVE and player:hasKeyItem(xi.ki.DOMINAS_CERULEAN_SEAL)                                               ) end, -- ASA4: Sugar-coated Directive
+        [ 611] = function() return ( asa >= mi.asa.SUGAR_COATED_DIRECTIVE and player:hasKeyItem(xi.ki.DOMINAS_CERULEAN_SEAL)                                               ) end, -- ASA4: Sugar-coated Directive
         [ 640] = function() return ( cop == mi.cop.THREE_PATHS and player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.ULMIA) == 8 and
                                      npcid == getEntranceOffset(0)                                                                                                         ) end, -- PM5-3 U3: Flames for the Dead
         [ 641] = function() return ( player:hasKeyItem(xi.ki.ZEPHYR_FAN) and npcid == getEntranceOffset(2)                                                                 ) end, -- ENM: Follow the White Rabbit

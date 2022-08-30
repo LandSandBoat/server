@@ -680,7 +680,7 @@ INSERT INTO `mob_skills` VALUES (844,530,'crimson_howl',1,10.0,532,3000,1,128,0,
 INSERT INTO `mob_skills` VALUES (845,531,'fire_iv',0,10.0,533,3000,4,64,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (846,532,'flaming_crush',0,10.0,534,3000,4,68,0,0,11,5,0); -- Fusion (11) / Reverberation (5)
 INSERT INTO `mob_skills` VALUES (847,533,'meteor_strike',0,10.0,535,3000,4,64,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (848,534,'inferno',1,10.0,536,0,4,64,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (848,534,'inferno',1,10.0,536,3000,4,64,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (849,539,'rock_throw',0,12.0,544,3000,4,68,0,0,4,0,0); -- Scission (4)
 INSERT INTO `mob_skills` VALUES (850,540,'stone_ii',0,10.0,545,3000,4,64,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (851,541,'rock_buster',0,10.0,546,3000,4,68,0,0,5,0,0); -- Reverberation (5)
@@ -698,7 +698,7 @@ INSERT INTO `mob_skills` VALUES (862,556,'slowga',1,10.0,564,3000,4,128,0,0,0,0,
 INSERT INTO `mob_skills` VALUES (863,557,'water_iv',0,20.0,565,3000,4,64,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (864,558,'spinning_dive',0,10.0,566,3000,4,68,0,0,10,6,0); -- Distortion (10) / Detonation (6)
 INSERT INTO `mob_skills` VALUES (865,559,'grand_fall',0,10.0,567,3000,4,64,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (866,560,'tidal_wave',1,20.0,568,0,4,64,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (866,560,'tidal_wave',1,20.0,568,3000,4,64,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (867,565,'claw',0,10.0,576,3000,4,68,0,0,6,0,0); -- Detonation (6)
 INSERT INTO `mob_skills` VALUES (868,566,'aero_ii',0,10.0,577,3000,4,64,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (869,569,'whispering_wind',1,10.0,578,3000,1,128,0,0,0,0,0);

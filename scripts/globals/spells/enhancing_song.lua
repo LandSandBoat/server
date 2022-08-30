@@ -153,7 +153,7 @@ xi.spells.enhancing.calculateSongPower = function(caster, target, spell, spellId
                     power = power + 1
                 end
             -- NOTE: Aubade, Capriccio, Gavotte, Madrigal, March, Minne, Minuet, Operetta, Pastoral, Prelude, Round.
-            elseif not divisor == 0 then
+            else
                 power = math.floor(power + (singingLvl - skillCap) / divisor)
             end
         end
@@ -266,7 +266,7 @@ xi.spells.enhancing.useEnhancingSong = function(caster, target, spell)
 
     -- EXCEPTION: March Songs effect conversion.
     if songEffect == xi.effect.MARCH then
-        power = math.floor((power * 1024) / 10000)
+        power = math.floor((power / 1024) * 10000)
     end
 
     -- Handle Status Effects.

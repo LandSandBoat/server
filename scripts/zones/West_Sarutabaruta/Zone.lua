@@ -1,13 +1,13 @@
 -----------------------------------
 -- Zone: West_Sarutabaruta (115)
 -----------------------------------
-local ID = require("scripts/zones/West_Sarutabaruta/IDs")
-require("scripts/quests/i_can_hear_a_rainbow")
-require("scripts/globals/chocobo_digging")
-require("scripts/globals/conquest")
-require("scripts/globals/missions")
-require("scripts/globals/helm")
-require("scripts/globals/zone")
+local ID = require('scripts/zones/West_Sarutabaruta/IDs')
+require('scripts/quests/i_can_hear_a_rainbow')
+require('scripts/globals/chocobo_digging')
+require('scripts/globals/conquest')
+require('scripts/globals/missions')
+require('scripts/globals/helm')
+require('scripts/globals/zone')
 -----------------------------------
 local zone_object = {}
 

@@ -1,13 +1,11 @@
 -----------------------------------
---
 -- Zone: Carpenters_Landing (2)
---
 -----------------------------------
-local func = require("scripts/zones/Carpenters_Landing/globals")
-local ID = require("scripts/zones/Carpenters_Landing/IDs")
-require("scripts/globals/chocobo_digging")
-require("scripts/globals/conquest")
-require("scripts/globals/helm")
+local func = require('scripts/zones/Carpenters_Landing/globals')
+local ID = require('scripts/zones/Carpenters_Landing/IDs')
+require('scripts/globals/chocobo_digging')
+require('scripts/globals/conquest')
+require('scripts/globals/helm')
 -----------------------------------
 local zone_object = {}
 
@@ -25,9 +23,11 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
+
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(6.509, -9.163, -819.333, 239)
     end
+
     return cs
 end
 

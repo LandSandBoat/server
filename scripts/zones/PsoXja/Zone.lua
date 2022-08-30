@@ -1,12 +1,12 @@
 -----------------------------------
 -- Zone: PsoXja (9)
 -----------------------------------
-local ID = require("scripts/zones/PsoXja/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/missions")
-require("scripts/globals/settings")
-require("scripts/globals/treasure")
-require("scripts/globals/status")
+local ID = require('scripts/zones/PsoXja/IDs')
+require('scripts/globals/conquest')
+require('scripts/globals/missions')
+require('scripts/globals/settings')
+require('scripts/globals/treasure')
+require('scripts/globals/status')
 -----------------------------------
 local zone_object = {}
 
@@ -58,7 +58,7 @@ zone_object.afterZoneIn = function(player)
     if xi.settings.main.ENABLE_COP_ZONE_CAP == 1 then
         local lvlCap = player:getCharVar("PSOXJA_RESTRICTION_LVL")
 
-        if (lvlCap > 0) then -- LV cap depends on entrance
+        if lvlCap > 0 then -- LV cap depends on entrance
             player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, lvlCap, 0, 0)
         end
     end
@@ -75,17 +75,17 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    if (csid == 20 and option == 1) then
+    if csid == 20 and option == 1 then
         player:setPos(-20, -60.250, -60, 63, 111)
-    elseif (csid == 21 and option == 1) then
+    elseif csid == 21 and option == 1 then
         player:setPos(260, -0.25, -20, 254, 111)
-    elseif (csid == 22 and option == 1) then
+    elseif csid == 22 and option == 1 then
         player:setPos(60, -0.250, -340.000, 190, 111)
-    elseif (csid == 23 and option == 1) then
+    elseif csid == 23 and option == 1 then
         player:setPos(-340, -100.250, 140, 63, 111)
-    elseif (csid == 24 and option == 1) then
+    elseif csid == 24 and option == 1 then
         player:setPos(-180, -40.25 , -220, 0, 111)
-    elseif (csid == 25 and option == 1) then
+    elseif csid == 25 and option == 1 then
         player:setPos(100, -20.25, 140, 64, 111)
     end
 end
