@@ -175,24 +175,24 @@ INSERT into item_mods VALUES (27370,384,4); -- Haste +4%
 INSERT into item_mods VALUES (27370,110,15); -- Parrying skill +15
 
 -- # Allow GEO to use Indi/Geo Haste, and Indi/Geo Frailty at 74
--- DELETE FROM spell_list WHERE spellid = "771";
--- DELETE FROM spell_list WHERE spellid = "788";
--- DELETE FROM spell_list WHERE spellid = "801";
--- DELETE FROM spell_list WHERE spellid = "818";
+DELETE FROM spell_list WHERE spellid = "771";
+DELETE FROM spell_list WHERE spellid = "788";
+DELETE FROM spell_list WHERE spellid = "801";
+DELETE FROM spell_list WHERE spellid = "818";
 
--- INSERT INTO `spell_list` VALUES (771,'indi-haste',0x00000000000000000000000000000000000000004A00,7,144,7,128,512,44,100,2000,12000,0,0,864,2000,0,0,1.00,1,300,0,204,'SOA');
--- INSERT INTO `spell_list` VALUES (788,'indi-frailty',0x00000000000000000000000000000000000000004A00,7,145,3,128,512,44,147,2000,12000,0,0,881,2000,0,0,1.00,240,100,0,204,'SOA');
--- INSERT INTO `spell_list` VALUES (801,'geo-haste',0x00000000000000000000000000000000000000004A00,7,146,7,128,1,44,63,2000,12000,0,0,864,2000,0,0,1.00,1,300,0,210,'SOA');
--- INSERT INTO `spell_list` VALUES (818,'geo-frailty',0x00000000000000000000000000000000000000004A00,7,147,3,128,4,44,294,2000,24000,0,0,881,2000,0,0,1.00,240,100,0,210,'SOA');
+INSERT INTO `spell_list` VALUES (771,'indi-haste',0x00000000000000000000000000000000000000004A00,7,144,7,128,512,44,100,2000,12000,0,0,864,2000,0,0,1.00,1,300,0,204,'SOA');
+INSERT INTO `spell_list` VALUES (788,'indi-frailty',0x00000000000000000000000000000000000000004A00,7,145,3,128,512,44,147,2000,12000,0,0,881,2000,0,0,1.00,240,100,0,204,'SOA');
+INSERT INTO `spell_list` VALUES (801,'geo-haste',0x00000000000000000000000000000000000000004A00,7,146,7,128,1,44,63,2000,12000,0,0,864,2000,0,0,1.00,1,300,0,210,'SOA');
+INSERT INTO `spell_list` VALUES (818,'geo-frailty',0x00000000000000000000000000000000000000004A00,7,147,3,128,4,44,294,2000,24000,0,0,881,2000,0,0,1.00,240,100,0,210,'SOA');
 
 # Add relic armor to Dynamis
-INSERT INTO `mob_droplist` VALUES (3148,0,0,1000,27016,130); -- Bagua Mitaines   (Dynammis - San d'Oria)
-INSERT INTO `mob_droplist` VALUES (3149,0,0,1000,27018,130); -- Futhark Mitons   (Dynammis - San d'Oria)
-INSERT INTO `mob_droplist` VALUES (2558,0,0,1000,27368,130); -- Bagua Sandals    (Dynamis - Bastok)
-INSERT INTO `mob_droplist` VALUES (2558,0,0,1000,27370,130); -- Futhark Bottes   (Dynamis - Bastok)
-INSERT INTO `mob_droplist` VALUES (2553,0,0,1000,27192,130); -- Bagua Pants      (Dynamis - Windurst)
-INSERT INTO `mob_droplist` VALUES (2553,0,0,1000,27194,130); -- Futhark Trousers (Dynamis - Windurst)
-INSERT INTO `mob_droplist` VALUES (2543,0,0,1000,26664,130); -- Bagua Galero     (Dynamis - Jeuno)
-INSERT INTO `mob_droplist` VALUES (2543,0,0,1000,26666,130); -- Futhark Bandeau  (Dynamis - Jeuno)
-INSERT INTO `mob_droplist` VALUES (2552,0,0,1000,26840,130); -- Bagua Tunic      (Dynamis - Beaucedine)
-INSERT INTO `mob_droplist` VALUES (2552,0,0,1000,26842,130); -- Futhark Coat     (Dynamis - Beaucedine)
+INSERT INTO `mob_droplist` VALUES (3148,0,0,1000,27016,90); -- Bagua Mitaines   (Dynammis - San d'Oria)
+INSERT INTO `mob_droplist` VALUES (3149,0,0,1000,27018,90); -- Futhark Mitons   (Dynammis - San d'Oria)
+INSERT INTO `mob_droplist` VALUES (2558,0,0,1000,27368,90); -- Bagua Sandals    (Dynamis - Bastok)
+INSERT INTO `mob_droplist` VALUES (2558,0,0,1000,27370,90); -- Futhark Bottes   (Dynamis - Bastok)
+INSERT INTO `mob_droplist` VALUES (2553,0,0,1000,27192,90); -- Bagua Pants      (Dynamis - Windurst)
+INSERT INTO `mob_droplist` VALUES (2553,0,0,1000,27194,90); -- Futhark Trousers (Dynamis - Windurst)
+INSERT INTO `mob_droplist` VALUES (2543,0,0,1000,26664,90); -- Bagua Galero     (Dynamis - Jeuno)
+INSERT INTO `mob_droplist` VALUES (2543,0,0,1000,26666,90); -- Futhark Bandeau  (Dynamis - Jeuno)
+INSERT INTO `mob_droplist` VALUES (2552,0,0,1000,26840,90); -- Bagua Tunic      (Dynamis - Beaucedine)
+INSERT INTO `mob_droplist` VALUES (2552,0,0,1000,26842,90); -- Futhark Coat     (Dynamis - Beaucedine)

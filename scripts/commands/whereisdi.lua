@@ -11,7 +11,7 @@ cmdprops =
 
 function onTrigger(player)
     if GetServerVariable("[Domain]NM") == 0 then
-        player:PrintToPlayer("{Apururu} Unity intelligence reports indicate a domain invasion is imminent in Escha Ru'Aun.", xi.msg.channel.SYSTEM_3)
+        player:PrintToPlayer("{Apururu} Unity intelligence reports indicate a domain invasion is imminent in Kamihr Drifts.", xi.msg.channel.SYSTEM_3)
     end
 
     if GetServerVariable("[Domain]NM") == 1 then

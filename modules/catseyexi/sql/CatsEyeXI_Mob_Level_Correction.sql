@@ -498,45 +498,90 @@ UPDATE `mob_groups` SET minLevel=78,maxLevel=78 WHERE `groupid` =21 AND `zoneid`
 UPDATE `mob_groups` SET minLevel=78,maxLevel=78 WHERE `groupid` =31 AND `zoneid`=213 AND `name`='Babaulas';
 UPDATE `mob_groups` SET minLevel=78,maxLevel=78 WHERE `groupid` =32 AND `zoneid`=213 AND `name`='Boribaba';
 
-# Fix Dynamis Jeuno NM Levels (Carver 8/26/2022)
-UPDATE mob_groups SET minLevel = "78", maxLevel= "80" WHERE groupId = "1" AND name = 'Goblin_Golem';
-UPDATE mob_groups SET minLevel = "78", maxLevel= "80" WHERE groupId = "11" AND name = 'Gabblox_Magpietongue';
-UPDATE mob_groups SET minLevel = "78", maxLevel= "80" WHERE groupId = "21" AND name = 'Tufflix_Loglimbs';
-UPDATE mob_groups SET minLevel = "78", maxLevel= "80" WHERE groupId = "23" AND name = 'Smeltix_Thickhide';
-UPDATE mob_groups SET minLevel = "78", maxLevel= "80" WHERE groupId = "24" AND name = 'Jabkix_Pigeonpecs';
-UPDATE mob_groups SET minLevel = "78", maxLevel= "80" WHERE groupId = "25" AND name = 'Wasabix_Callusdigit';
-UPDATE mob_groups SET minLevel = "78", maxLevel= "80" WHERE groupId = "27" AND name = 'Hermitrix_Toothrot';
-UPDATE mob_groups SET minLevel = "78", maxLevel= "80" WHERE groupId = "28" AND name = 'Wyrmwix_Snakespecs';
-UPDATE mob_groups SET minLevel = "78", maxLevel= "80" WHERE groupId = "29" AND name = 'Morgmox_Moldnoggin';
-UPDATE mob_groups SET minLevel = "78", maxLevel= "80" WHERE groupId = "30" AND name = 'Sparkspox_Sweatbrow';
-UPDATE mob_groups SET minLevel = "78", maxLevel= "80" WHERE groupId = "31" AND name = 'Elixmix_Hooknose';
-UPDATE mob_groups SET minLevel = "78", maxLevel= "80" WHERE groupId = "32" AND name = 'Bandrix_Rockjaw';
-UPDATE mob_groups SET minLevel = "78", maxLevel= "80" WHERE groupId = "33" AND name = 'Buffrix_Eargone';
-UPDATE mob_groups SET minLevel = "78", maxLevel= "80" WHERE groupId = "34" AND name = 'Humnox_Drumbelly';
-UPDATE mob_groups SET minLevel = "78", maxLevel= "80" WHERE groupId = "35" AND name = 'Ticktox_Beadyeyes';
-UPDATE mob_groups SET minLevel = "78", maxLevel= "80" WHERE groupId = "36" AND name = 'Lurklox_Dhalmelneck';
-UPDATE mob_groups SET minLevel = "78", maxLevel= "80" WHERE groupId = "37" AND name = 'Trailblix_Goatmug';
-UPDATE mob_groups SET minLevel = "78", maxLevel= "80" WHERE groupId = "38" AND name = 'Kikklix_Longlegs';
-UPDATE mob_groups SET minLevel = "78", maxLevel= "80" WHERE groupId = "39" AND name = 'Karashix_Swollenskull';
-UPDATE mob_groups SET minLevel = "78", maxLevel= "80" WHERE groupId = "40" AND name = 'Rutrix_Hamgams';
-UPDATE mob_groups SET minLevel = "78", maxLevel= "80" WHERE groupId = "41" AND name = 'Snypestix_Eaglebeak';
-UPDATE mob_groups SET minLevel = "78", maxLevel= "80" WHERE groupId = "42" AND name = 'Anvilix_Sootwrists';
-UPDATE mob_groups SET minLevel = "78", maxLevel= "80" WHERE groupId = "43" AND name = 'Bootrix_Jaggedelbow';
-UPDATE mob_groups SET minLevel = "78", maxLevel= "80" WHERE groupId = "44" AND name = 'Mobpix_Mucousmouth';
-UPDATE mob_groups SET minLevel = "78", maxLevel= "80" WHERE groupId = "45" AND name = 'Distilix_Stickytoes';
-UPDATE mob_groups SET minLevel = "78", maxLevel= "80" WHERE groupId = "46" AND name = 'Eremix_Snottynostril';
-UPDATE mob_groups SET minLevel = "78", maxLevel= "80" WHERE groupId = "47" AND name = 'Jabbrox_Grannyguise';
-UPDATE mob_groups SET minLevel = "78", maxLevel= "80" WHERE groupId = "48" AND name = 'Scruffix_Shaggychest';
-UPDATE mob_groups SET minLevel = "78", maxLevel= "80" WHERE groupId = "49" AND name = 'Blazox_Boneybod';
-UPDATE mob_groups SET minLevel = "78", maxLevel= "80" WHERE groupId = "50" AND name = 'Prowlox_Barrelbelly';
-UPDATE mob_groups SET minLevel = "78", maxLevel= "80" WHERE groupId = "51" AND name = 'Cloktix_Longnail';
-UPDATE mob_groups SET minLevel = "78", maxLevel= "80" WHERE groupId = "52" AND name = 'Mortilox_Wartpaws';
-UPDATE mob_groups SET minLevel = "78", maxLevel= "80" WHERE groupId = "53" AND name = 'Slystix_Megapeepers';
-UPDATE mob_groups SET minLevel = "78", maxLevel= "80" WHERE groupId = "54" AND name = 'Tymexox_Ninefingers';
-UPDATE mob_groups SET minLevel = "78", maxLevel= "80" WHERE groupId = "55" AND name = 'Quicktrix_Hexhands';
-UPDATE mob_groups SET minLevel = "78", maxLevel= "80" WHERE groupId = "56" AND name = 'Feralox_Honeylips';
-UPDATE mob_groups SET minLevel = "78", maxLevel= "80" WHERE groupId = "57" AND name = 'Feraloxs_Slime';
-UPDATE mob_groups SET minLevel = "78", maxLevel= "80" WHERE groupId = "58" AND name = 'Scourquix_Scaleskin';
-UPDATE mob_groups SET minLevel = "78", maxLevel= "80" WHERE groupId = "59" AND name = 'Scourquixs_Wyvern';
-UPDATE mob_groups SET minLevel = "78", maxLevel= "80" WHERE groupId = "60" AND name = 'Wilywox_Tenderpalm';
-UPDATE mob_groups SET minLevel = "82", maxLevel= "84" WHERE groupId = "61" AND name = 'Arch_Goblin_Golem';
+-- Escha Zi'Tah EXP Camps
+UPDATE `mob_groups` SET minLevel = "70", maxLevel = "75" WHERE name = "Eschan_Vulture";
+UPDATE `mob_groups` SET minLevel = "70", maxLevel = "75" WHERE name = "Eschan_Warrior";
+UPDATE `mob_groups` SET minLevel = "70", maxLevel = "75" WHERE name = "Eschan_Corse";
+UPDATE `mob_groups` SET minLevel = "70", maxLevel = "75" WHERE name = "Eschan_Sorcerer";
+UPDATE `mob_groups` SET minLevel = "75", maxLevel = "80" WHERE name = "Eschan_Wasp";
+UPDATE `mob_groups` SET minLevel = "75", maxLevel = "80" WHERE name = "Eschan_Snapweed";
+UPDATE `mob_groups` SET minLevel = "75", maxLevel = "80" WHERE name = "Eschan_Goobbue";
+UPDATE `mob_groups` SET minLevel = "80", maxLevel = "84" WHERE name = "Eschan_Puk";
+UPDATE `mob_groups` SET minLevel = "80", maxLevel = "84" WHERE name = "Eschan_Shadow_Dragon";
+UPDATE `mob_groups` SET minLevel = "80", maxLevel = "84" WHERE name = "Eschan_Tarichuk";
+UPDATE `mob_groups` SET minLevel = "80", maxLevel = "84" WHERE name = "Eschan_Bugard";
+UPDATE `mob_groups` SET minLevel = "80", maxLevel = "84" WHERE name = "Eschan_Opo-Opo";
+UPDATE `mob_groups` SET minLevel = "80", maxLevel = "84" WHERE name = "Eschan_Yztarg";
+UPDATE `mob_groups` SET minLevel = "78", maxLevel = "80" WHERE name = "Eschan_Mosquito";
+UPDATE `mob_groups` SET minLevel = "78", maxLevel = "80" WHERE name = "Eschan_Jewelweed";
+
+-- Escha RuAun
+UPDATE `mob_groups` SET minLevel = "78", maxLevel = "80" WHERE name = "Eschan_Zdei";
+UPDATE `mob_groups` SET minLevel = "78", maxLevel = "80" WHERE name = "Eschan_Ilaern_rng";
+UPDATE `mob_groups` SET minLevel = "78", maxLevel = "80" WHERE name = "Eschan_Ilaern_thf";
+UPDATE `mob_groups` SET minLevel = "78", maxLevel = "80" WHERE name = "Eschan_Ilaern_blm";
+UPDATE `mob_groups` SET minLevel = "78", maxLevel = "80" WHERE name = "Eschan_Ilaerns_Wynav";
+UPDATE `mob_groups` SET minLevel = "78", maxLevel = "80" WHERE name = "Eschan_Ilaern_drg";
+UPDATE `mob_groups` SET minLevel = "78", maxLevel = "80" WHERE name = "Eschan_Phuabo";
+UPDATE `mob_groups` SET minLevel = "78", maxLevel = "80" WHERE name = "Eschan_Ilaern_war";
+UPDATE `mob_groups` SET minLevel = "78", maxLevel = "80" WHERE name = "Eschan_Yovra";
+UPDATE `mob_groups` SET minLevel = "78", maxLevel = "80" WHERE name = "Eschan_Ilaern_whm";
+UPDATE `mob_groups` SET minLevel = "78", maxLevel = "80" WHERE name = "Eschan_Ilaern_mnk";
+UPDATE `mob_groups` SET minLevel = "78", maxLevel = "80" WHERE name = "Eschan_Ilaern_bst";
+UPDATE `mob_groups` SET minLevel = "78", maxLevel = "80" WHERE name = "Eschan_Ilaerns_Euvhi";
+UPDATE `mob_groups` SET minLevel = "78", maxLevel = "80" WHERE name = "Eschan_Euvhi";
+UPDATE `mob_groups` SET minLevel = "78", maxLevel = "80" WHERE name = "Eschan_Clionid";
+UPDATE `mob_groups` SET minLevel = "78", maxLevel = "80" WHERE name = "Eschan_Hpemde";
+UPDATE `mob_groups` SET minLevel = "78", maxLevel = "80" WHERE name = "Eschan_Ilaern_pld";
+UPDATE `mob_groups` SET minLevel = "78", maxLevel = "80" WHERE name = "Eschan_Amoeban";
+UPDATE `mob_groups` SET minLevel = "78", maxLevel = "80" WHERE name = "Eschan_Ilaern_drk";
+UPDATE `mob_groups` SET minLevel = "78", maxLevel = "80" WHERE name = "Eschan_Xzomit";
+UPDATE `mob_groups` SET minLevel = "78", maxLevel = "80" WHERE name = "Eschan_Ilaern_rdm";
+UPDATE `mob_groups` SET minLevel = "78", maxLevel = "80" WHERE name = "Eschan_Murex";
+UPDATE `mob_groups` SET minLevel = "78", maxLevel = "80" WHERE name = "Eschan_Ilaern_sam";
+UPDATE `mob_groups` SET minLevel = "78", maxLevel = "80" WHERE name = "Eschan_Ilaern_smn";
+UPDATE `mob_groups` SET minLevel = "78", maxLevel = "80" WHERE name = "Eschan_Ilaerns_Spirit";
+UPDATE `mob_groups` SET minLevel = "78", maxLevel = "80" WHERE name = "Eschan_Ghrah";
+UPDATE `mob_groups` SET minLevel = "78", maxLevel = "80" WHERE name = "Eschan_Limule";
+UPDATE `mob_groups` SET minLevel = "78", maxLevel = "80" WHERE name = "Eschan_Gargouille";
+UPDATE `mob_groups` SET minLevel = "78", maxLevel = "80" WHERE name = "Eschan_Porxie";
+UPDATE `mob_groups` SET minLevel = "78", maxLevel = "80" WHERE name = "Eschan_Ilaern_brd";
+UPDATE `mob_groups` SET minLevel = "78", maxLevel = "80" WHERE name = "Eschan_Ilaern_nin";
+
+-- Set Escha mobs to aggro
+-- UPDATE `mob_pools` SET aggro = "1" WHERE poolid = "4652"; -- Eschan_Snapweed
+-- UPDATE `mob_pools` SET aggro = "1" WHERE poolid = "4848"; -- Eschan_Puk
+-- UPDATE `mob_pools` SET aggro = "1" WHERE poolid = "4849"; -- Eschan_Opo-Opo
+-- UPDATE `mob_pools` SET aggro = "1" WHERE poolid = "5349"; -- Eschan_Coeurl
+-- UPDATE `mob_pools` SET aggro = "1" WHERE poolid = "5350"; -- Eschan_Dhalmel
+-- UPDATE `mob_pools` SET aggro = "1" WHERE poolid = "5365"; -- Eschan_Yztarg
+-- UPDATE `mob_pools` SET aggro = "1" WHERE poolid = "5429"; -- Eschan_Jewelweed
+-- UPDATE `mob_pools` SET aggro = "1" WHERE poolid = "5538"; -- Eschan_Worm
+-- UPDATE `mob_pools` SET aggro = "1" WHERE poolid = "5539"; -- Eschan_Wasp
+-- UPDATE `mob_pools` SET aggro = "1" WHERE poolid = "5540"; -- Eschan_Goobbue
+-- UPDATE `mob_pools` SET aggro = "1" WHERE poolid = "5541"; -- Eschan_Shadow_Dragon
+-- UPDATE `mob_pools` SET aggro = "1" WHERE poolid = "5542"; -- Eschan_Tarichuk
+-- UPDATE `mob_pools` SET aggro = "1" WHERE poolid = "5543"; -- Eschan_Mosquito
+-- UPDATE `mob_pools` SET aggro = "1" WHERE poolid = "6317"; -- Eschan_Crawler
+-- UPDATE `mob_pools` SET aggro = "1" WHERE poolid = "6406"; -- Eschan_Obdella
+-- UPDATE `mob_pools` SET aggro = "1" WHERE poolid = "6446"; -- Eschan_Vulture
+-- UPDATE `mob_pools` SET aggro = "1" WHERE poolid = "6482"; -- Eschan_Corse
+-- UPDATE `mob_pools` SET aggro = "1" WHERE poolid = "6553"; -- Eschan_Warrior
+-- UPDATE `mob_pools` SET aggro = "1" WHERE poolid = "6569"; -- Eschan_Sorcerer
+-- UPDATE `mob_pools` SET aggro = "1" WHERE poolid = "6591"; -- Eschan_Weapon
+-- UPDATE `mob_pools` SET aggro = "1" WHERE poolid = "5637"; -- Eschan_Bugard
+UPDATE `mob_pools` SET aggro = "1" WHERE poolid = "5620"; -- Eschan_Limule
+UPDATE `mob_pools` SET aggro = "1" WHERE poolid = "5621"; -- Eschan_Murex
+UPDATE `mob_pools` SET aggro = "1" WHERE poolid = "5622"; -- Eschan_Amoeban
+UPDATE `mob_pools` SET aggro = "1" WHERE poolid = "5623"; -- Eschan_Clionid
+UPDATE `mob_pools` SET aggro = "1" WHERE poolid = "5625"; -- Eschan_Zdei
+UPDATE `mob_pools` SET aggro = "1" WHERE poolid = "5626"; -- Eschan_Phuabo
+UPDATE `mob_pools` SET aggro = "1" WHERE poolid = "5627"; -- Eschan_Ghrah
+UPDATE `mob_pools` SET aggro = "1" WHERE poolid = "5628"; -- Eschan_Xzomit
+UPDATE `mob_pools` SET aggro = "1" WHERE poolid = "5629"; -- Eschan_Hpemde
+UPDATE `mob_pools` SET aggro = "1" WHERE poolid = "5630"; -- Eschan_Euvhi
+UPDATE `mob_pools` SET aggro = "1" WHERE poolid = "5632"; -- Eschan_Porxie
+UPDATE `mob_pools` SET aggro = "1" WHERE poolid = "5650"; -- Eschan_Gargouille
+UPDATE `mob_pools` SET aggro = "1" WHERE poolid = "5651"; -- Eschan_Ilaerns_Wynav
+UPDATE `mob_pools` SET aggro = "1" WHERE poolid = "5652"; -- Eschan_Ilaerns_Euvhi
+UPDATE `mob_pools` SET aggro = "1" WHERE poolid = "5653"; -- Eschan_Ilaerns_Spirit

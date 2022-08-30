@@ -11,7 +11,7 @@ cmdprops =
 
 function onTrigger(player)
     if GetServerVariable("[Domain]NM") == 0 then
-        player:setPos(-0.927, -43.600, -234.829, 195, 289)
+        player:setPos(347.177, 20.616, 293.256, 36, 267)
 --        player:addStatusEffect(xi.effect.ELVORSEAL, 1, 0, 0)
     end
 

@@ -11,16 +11,17 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:startEvent(14)
+    player:PrintToPlayer("This zone is currently under construction.")
+--    player:startEvent(14)
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 14 and option == 1 then
+--[[    if csid == 14 and option == 1 then
         xi.teleport.to(player, xi.teleport.id.ESCHA_RUAUN)
-    end
+    end ]]--
 end
 
 return entity

@@ -1,14 +1,14 @@
 # Delete all mobs from Escha_RuAun
-DELETE FROM mob_groups WHERE zoneid = "289";
+# DELETE FROM mob_groups WHERE zoneid = "289";
 
 # Remove NPC's from entrance (just in case)
-DELETE FROM npc_list WHERE npcid = "17961710";
-DELETE FROM npc_list WHERE npcid = "17961711";
-DELETE FROM npc_list WHERE npcid = "17961697";
-DELETE FROM npc_list WHERE npcid = "17961712";
+# DELETE FROM npc_list WHERE npcid = "17961710";
+# DELETE FROM npc_list WHERE npcid = "17961711";
+# DELETE FROM npc_list WHERE npcid = "17961697";
+# DELETE FROM npc_list WHERE npcid = "17961712";
 
 # Allow trusts & set global treasure pool
-UPDATE zone_settings SET misc = '2520' WHERE name = 'Escha_RuAun';
+UPDATE zone_settings SET misc = '2520' WHERE name = 'Kamihr_Drifts';
 UPDATE zone_settings SET misc = '2520' WHERE name = 'Reisenjima_Henge';
 UPDATE zone_settings SET misc = '2520' WHERE name = 'Provenance';
 -- Temporarily disable global loot pool in Dyna
