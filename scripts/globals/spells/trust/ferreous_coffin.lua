@@ -25,7 +25,6 @@ spell_object.onMobSpawn = function(mob)
 
     mob:addMod(xi.mod.HPP, -10)
     mob:addMod(xi.mod.MPP, 35)
-    mob:addMod(xi.mod.HPP, -10)
     mob:addMod(xi.mod.REFRESH, 2)
     mob:addMod(xi.mod.ENHANCES_CURSNA, 20)
 
