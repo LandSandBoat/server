@@ -351,21 +351,21 @@ enum class Mod
     ENHANCES_SABOTEUR = 297, // Increases Saboteur Potency %
 
     // Thief
-    FLEE_DURATION           = 93,   // Flee duration in seconds
-    STEAL                   = 298,  // Increase/Decrease THF Steal chance
-    DESPOIL                 = 896,  // Increases THF Despoil chance
-    PERFECT_DODGE           = 883,  // Increases Perfect Dodge duration in seconds
-    TRIPLE_ATTACK           = 302,  // Percent chance
-    TRIPLE_ATTACK_DMG       = 1039, // Increases "Triple Attack" damage/"Triple Attack" damage + (in percents, e.g. +20 = +20% damage)
-    TREASURE_HUNTER         = 303,  // Percent chance
-    TREASURE_HUNTER_PROC    = 1048, // TODO: Increases Treasure Hunter proc rate (percent)
-    TREASURE_HUNTER_CAP     = 1049, // TODO: Increases the Treasure Hunter Cap (e.g. THF JP Gift)
-    SNEAK_ATK_DEX           = 830,  // % DEX boost to Sneak Attack (if gear mod, needs to be equipped on hit)
-    TRICK_ATK_AGI           = 520,  // % AGI boost to Trick Attack (if gear mod, needs to be equipped on hit)
-    MUG_EFFECT              = 835,  // Mug effect as multiplier
-    ACC_COLLAB_EFFECT       = 884,  // Increases amount of enmity transferred for Accomplice/Collaborator
-    HIDE_DURATION           = 885,  // Hide duration increase (percentage based)
-    GILFINDER               = 897,  // Gilfinder, duh
+    FLEE_DURATION        = 93,   // Flee duration in seconds
+    STEAL                = 298,  // Increase/Decrease THF Steal chance
+    DESPOIL              = 896,  // Increases THF Despoil chance
+    PERFECT_DODGE        = 883,  // Increases Perfect Dodge duration in seconds
+    TRIPLE_ATTACK        = 302,  // Percent chance
+    TRIPLE_ATTACK_DMG    = 1039, // Increases "Triple Attack" damage/"Triple Attack" damage + (in percents, e.g. +20 = +20% damage)
+    TREASURE_HUNTER      = 303,  // Percent chance
+    TREASURE_HUNTER_PROC = 1048, // TODO: Increases Treasure Hunter proc rate (percent)
+    TREASURE_HUNTER_CAP  = 1049, // TODO: Increases the Treasure Hunter Cap (e.g. THF JP Gift)
+    SNEAK_ATK_DEX        = 830,  // % DEX boost to Sneak Attack (if gear mod, needs to be equipped on hit)
+    TRICK_ATK_AGI        = 520,  // % AGI boost to Trick Attack (if gear mod, needs to be equipped on hit)
+    MUG_EFFECT           = 835,  // Mug effect as multiplier
+    ACC_COLLAB_EFFECT    = 884,  // Increases amount of enmity transferred for Accomplice/Collaborator
+    HIDE_DURATION        = 885,  // Hide duration increase (percentage based)
+    GILFINDER            = 897,  // Gilfinder, duh
 
     // Paladin
     HOLY_CIRCLE_DURATION   = 857, // Holy Circle extended duration in seconds
@@ -482,17 +482,17 @@ enum class Mod
     CAIT_SITH_LVL_BONUS       = 1042, // Cait Sith: Lv.+ (Increases Cait Sith's base level above 99)
 
     // Blue Mage
-    BLUE_POINTS             = 309,  // Tracks extra blue points
-    BLUE_LEARN_CHANCE       = 945,  // Additional chance to learn blue magic
-    BLUE_JOB_TRAIT_BONUS    = 1058, // TODO: Increases job traits gained from equipped blue magic (percent)
-    BLUE_MAGIC_EFFECT       = 1059, // TODO: Bonus to Attribute Value of spell (percent)
+    BLUE_POINTS          = 309,  // Tracks extra blue points
+    BLUE_LEARN_CHANCE    = 945,  // Additional chance to learn blue magic
+    BLUE_JOB_TRAIT_BONUS = 1058, // TODO: Increases job traits gained from equipped blue magic (percent)
+    BLUE_MAGIC_EFFECT    = 1059, // TODO: Bonus to Attribute Value of spell (percent)
 
     // Corsair
-    EXP_BONUS           = 382,  //
-    ROLL_RANGE          = 528,  // Additional range for COR roll abilities.
-    JOB_BONUS_CHANCE    = 542,  // Chance to apply job bonus to COR roll without having the job in the party.
-    TRIPLE_SHOT_RATE    = 999,  // Percent increase to Triple Shot Rate
-    QUICK_DRAW_RECAST   = 1060, // TODO: Quick Draw Charge Reduction (seconds)
+    EXP_BONUS         = 382,  //
+    ROLL_RANGE        = 528,  // Additional range for COR roll abilities.
+    JOB_BONUS_CHANCE  = 542,  // Chance to apply job bonus to COR roll without having the job in the party.
+    TRIPLE_SHOT_RATE  = 999,  // Percent increase to Triple Shot Rate
+    QUICK_DRAW_RECAST = 1060, // TODO: Quick Draw Charge Reduction (seconds)
 
     DMG_REFLECT            = 316, // Tracks totals
     ROLL_ROGUES            = 317, // Tracks totals
@@ -673,24 +673,24 @@ enum class Mod
     SNEAK_DURATION     = 946, // Additional duration in seconds
     INVISIBLE_DURATION = 947, // Additional duration in seconds
 
-    MAIN_DMG_RATING   = 366,  // adds damage rating to main hand weapon (maneater/blau dolch etc hidden effects)
-    SUB_DMG_RATING    = 367,  // adds damage rating to off hand weapon
-    REGAIN            = 368,  // auto regain TP (from items) | this is multiplied by 10 e.g. 20 is 2% TP
-    REGAIN_DOWN         = 406,  // plague, reduce tp
-    REFRESH             = 369,  // auto refresh from equipment
-    REFRESH_DOWN        = 405,  // plague, reduce mp
-    REGEN               = 370,  // auto regen from equipment
-    REGEN_DOWN          = 404,  // poison
-    CURE_POTENCY        = 374,  // % cure potency | bonus from gear is capped at 50
-    CURE_POTENCY_II     = 260,  // % cure potency II | bonus from gear is capped at 30
-    CURE_POTENCY_RCVD   = 375,  // % potency of received cure | healer's roll, some items have this
-    CURE_POTENCY_BONUS  = 1051, // TODO: Increases amount healed by Cure spells (fixed amount)
-    RANGED_DMG_RATING   = 376,  // adds damage rating to ranged weapon
-    MAIN_DMG_RANK       = 377,  // adds weapon rank to main weapon http://wiki.bluegartr.com/bg/Weapon_Rank
-    SUB_DMG_RANK        = 378,  // adds weapon rank to sub weapon
-    RANGED_DMG_RANK     = 379,  // adds weapon rank to ranged weapon
-    DELAYP              = 380,  // delay addition percent (does not affect tp gain)
-    RANGED_DELAYP       = 381,  // ranged delay addition percent (does not affect tp gain)
+    MAIN_DMG_RATING    = 366,  // adds damage rating to main hand weapon (maneater/blau dolch etc hidden effects)
+    SUB_DMG_RATING     = 367,  // adds damage rating to off hand weapon
+    REGAIN             = 368,  // auto regain TP (from items) | this is multiplied by 10 e.g. 20 is 2% TP
+    REGAIN_DOWN        = 406,  // plague, reduce tp
+    REFRESH            = 369,  // auto refresh from equipment
+    REFRESH_DOWN       = 405,  // plague, reduce mp
+    REGEN              = 370,  // auto regen from equipment
+    REGEN_DOWN         = 404,  // poison
+    CURE_POTENCY       = 374,  // % cure potency | bonus from gear is capped at 50
+    CURE_POTENCY_II    = 260,  // % cure potency II | bonus from gear is capped at 30
+    CURE_POTENCY_RCVD  = 375,  // % potency of received cure | healer's roll, some items have this
+    CURE_POTENCY_BONUS = 1051, // TODO: Increases amount healed by Cure spells (fixed amount)
+    RANGED_DMG_RATING  = 376,  // adds damage rating to ranged weapon
+    MAIN_DMG_RANK      = 377,  // adds weapon rank to main weapon http://wiki.bluegartr.com/bg/Weapon_Rank
+    SUB_DMG_RANK       = 378,  // adds weapon rank to sub weapon
+    RANGED_DMG_RANK    = 379,  // adds weapon rank to ranged weapon
+    DELAYP             = 380,  // delay addition percent (does not affect tp gain)
+    RANGED_DELAYP      = 381,  // ranged delay addition percent (does not affect tp gain)
 
     SHIELD_BASH = 385, //
     KICK_DMG    = 386, // increases kick attack damage
