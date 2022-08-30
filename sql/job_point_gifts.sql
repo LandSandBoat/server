@@ -331,7 +331,7 @@ INSERT INTO `job_point_gifts` VALUES (5, 1620, 25, 8, 'RDM_Accuracy Bonus');
 INSERT INTO `job_point_gifts` VALUES (5, 1620, 26, 8, 'RDM_Ranged Accuracy Bonus');
 INSERT INTO `job_point_gifts` VALUES (5, 1710, 114, 13, 'RDM_Enfeebling Magic Skill Bonus');
 INSERT INTO `job_point_gifts` VALUES (5, 1805, 113, 13, 'RDM_Enhancing Magic Skill Bonus');
-INSERT INTO `job_point_gifts` VALUES (5, 1900, 432, 8, 'RDM_Enspell Damage');
+INSERT INTO `job_point_gifts` VALUES (5, 1900, 432, 7, 'RDM_Enspell Damage');
 INSERT INTO `job_point_gifts` VALUES (5, 2000, 170, 2, 'RDM_Fast Cast Effect');
 INSERT INTO `job_point_gifts` VALUES (5, 2100, 997, 1, 'RDM_Superior 5');
 INSERT INTO `job_point_gifts` VALUES (5, 2100, 996, 15, 'RDM_1 Hour Delay');
