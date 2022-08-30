@@ -7,7 +7,7 @@ local ID = require("scripts/zones/Uleguerand_Range/IDs")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:SetMobSkillAttack(1183) -- replace melee attack with special auto attack
+    mob:SetMobSkillAttack(4006) -- replace melee attack with special auto attack
     mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
     mob:setMod(xi.mod.REGAIN, 400)
     mob:setMod(xi.mod.MOVE, 12)
