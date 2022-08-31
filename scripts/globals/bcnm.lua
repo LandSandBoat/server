@@ -93,7 +93,7 @@ local battlefields =
     [xi.zone.RIVERNE_SITE_B01] =
     {
         { 0,  896,    0},   -- Storms of Fate (Quest)
-     -- { 1,  897, 2108},   -- The Wyrmking Descends (BCNM)
+        { 1,  897, 2108},   -- The Wyrmking Descends (BCNM)
     },
 
     [xi.zone.RIVERNE_SITE_A01] =
@@ -669,7 +669,8 @@ local function checkReqs(player, npc, bfid, registrant)
         [ 864] = function() return ( cop == mi.cop.DESIRES_OF_EMPTINESS and player:getCharVar('Mission[6][518]Status') == 2                                                ) end, -- PM5-2: Desires of Emptiness
         [ 865] = function() return ( player:hasKeyItem(xi.ki.CENSER_OF_ACRIMONY)                                                                                           ) end, -- ENM: Pulling the Plug
         [ 896] = function() return ( player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == QUEST_ACCEPTED and
-                                     player:getCharVar('StormsOfFate') == 2                                                                                                ) end, -- Quest: Storms of Fate
+                                     player:getCharVar("Quest[3][86]Status") >= 2                                                                                          ) end, -- Quest: Storms of Fate
+        [ 897] = function() return ( player:hasKeyItem(xi.ki.WHISPER_OF_THE_WYRMKING)                                                                                      ) end, -- Quest: The Wyrmking Descends
         [ 960] = function() return ( cop == mi.cop.ANCIENT_VOWS and player:getCharVar('Mission[6][248]Status') == 2 and
                                      player:getPreviousZone() == xi.zone.RIVERNE_SITE_A01                                                                                  ) end, -- PM2-5: Ancient Vows
         [ 961] = function() return ( cop == mi.cop.THE_SAVAGE and player:getCharVar('Mission[6][418]Status') == 1 and player:getPreviousZone() == xi.zone.RIVERNE_SITE_B01 ) end, -- PM4-2: The Savage
@@ -860,7 +861,7 @@ local function checkSkip(player, bfid)
         [ 832] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.THE_MOTHERCRYSTALS) or player:hasKeyItem(xi.ki.LIGHT_OF_MEA)                                        ) end, -- PM1-3: The Mothercrystals
         [ 864] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.DESIRES_OF_EMPTINESS) or (cop == mi.cop.DESIRES_OF_EMPTINESS and
                                      player:getCharVar('Mission[6][518]Status') > 2)                                                                                                              ) end, -- PM5-2: Desires of Emptiness
-        [ 896] = function() return ( sofStat == QUEST_COMPLETED or (sofStat == QUEST_ACCEPTED and player:getCharVar("StormsOfFate") > 2)                                                          ) end, -- Quest: Storms of Fate
+        [ 896] = function() return ( sofStat == QUEST_COMPLETED or (sofStat == QUEST_ACCEPTED and player:getCharVar("Quest[3][86]Status") > 2)                                                    ) end, -- Quest: Storms of Fate
         [ 960] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.ANCIENT_VOWS)                                                                                       ) end, -- PM2-5: Ancient Vows
         [ 961] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.THE_SAVAGE) or (cop == mi.cop.THE_SAVAGE and player:getCharVar('Mission[6][418]Status') > 1)        ) end, -- PM4-2: The Savage
         [ 993] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.THE_WARRIORS_PATH)                                                                                  ) end, -- PM7-5: The Warrior's Path
