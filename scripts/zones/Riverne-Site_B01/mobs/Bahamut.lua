@@ -8,21 +8,31 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-entity.onMobInitialize = function(mob)
-    mob:setMobMod(xi.mobMod.HP_STANDBACK, -1)
-end
-
-entity.onMobSpawn = function(mob)
-    mob:addStatusEffect(xi.effect.PHALANX, 35, 0, 180)
-    mob:addStatusEffect(xi.effect.STONESKIN, 350, 0, 300)
-    mob:addStatusEffect(xi.effect.PROTECT, 175, 0, 1800)
-    mob:addStatusEffect(xi.effect.SHELL, 24, 0, 1800)
-end
-
 local megaflareHPP =
 {
     90, 80, 70, 60, 50, 40, 30, 20,
 }
+
+entity.onMobInitialize = function(mob)
+end
+
+entity.onMobSpawn = function(mob)
+    mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
+    mob:setMobMod(xi.mobMod.NO_MOVE, 1)
+    mob:setMobMod(xi.mobMod.SIGHT_RANGE, 20)
+    mob:setMobMod(xi.mobMod.MAGIC_COOL, 50)
+    mob:setMobMod(xi.mobMod.STANDBACK_COOL, 10)
+    mob:addMod(xi.mod.REGAIN, 200)
+    mob:addStatusEffect(xi.effect.PHALANX, 35, 0, 180)
+    mob:addStatusEffect(xi.effect.STONESKIN, 350, 0, 300)
+    mob:addStatusEffect(xi.effect.PROTECT, 175, 0, 1800)
+    mob:addStatusEffect(xi.effect.SHELL, 24, 0, 1800)
+    mob:setMod(xi.mod.ATT, 500)
+end
+
+entity.onMobEngaged = function(mob, target)
+    mob:setMobMod(xi.mobMod.NO_MOVE, 0)
+end
 
 entity.onMobFight = function(mob, target)
     local megaFlareQueue = mob:getLocalVar("MegaFlareQueue")

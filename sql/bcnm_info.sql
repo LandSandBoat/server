@@ -237,7 +237,7 @@ INSERT INTO `bcnm_info` VALUES (864,23,'desires_of_emptiness','nobody',0,1800,18
 INSERT INTO `bcnm_info` VALUES (865,23,'pulling_the_plug','nobody',0,1800,1800,50,18,865,15,0);
 INSERT INTO `bcnm_info` VALUES (866,23,'empty_aspirations','nobody',0,900,900,0,6,0,5,0);
 INSERT INTO `bcnm_info` VALUES (896,29,'storms_of_fate','nobody',0,1800,1800,0,18,0,7,0);
-INSERT INTO `bcnm_info` VALUES (897,29,'wyrmking_descends','nobody',0,3600,3600,0,18,897,7,0);
+INSERT INTO `bcnm_info` VALUES (897,29,'wyrmking_descends','nobody',0,3600,3600,0,18,0,7,0);
 INSERT INTO `bcnm_info` VALUES (928,30,'ouryu_cometh','nobody',0,3600,3600,0,18,928,7,0);
 INSERT INTO `bcnm_info` VALUES (960,31,'ancient_vows','nobody',0,1800,1800,40,6,0,5,1);
 INSERT INTO `bcnm_info` VALUES (961,31,'savage','nobody',0,1800,1800,50,6,0,5,1);

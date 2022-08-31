@@ -195,12 +195,6 @@ INSERT INTO `mob_pets` VALUES (16892035,1,14,'Fomor_Dragoon','Fomors_Wyvern');
 INSERT INTO `mob_pets` VALUES (16892070,1,15,'Lobais','Fomors_Elemental');
 
 -- ------------------------------------------------------------
--- Riverne-Site_B01 (Zone 29)
--- ------------------------------------------------------------
-
-INSERT INTO `mob_pets` VALUES (16896161,1,9,'Vrtra','Ziryu');
-
--- ------------------------------------------------------------
 -- AlTaieu (Zone 33)
 -- ------------------------------------------------------------
 
@@ -1631,12 +1625,6 @@ INSERT INTO `mob_pets` VALUES (17547483,1,9,'Vanguard_Pathfinder','Vanguards_Sli
 INSERT INTO `mob_pets` VALUES (17547487,1,9,'Blazox_Boneybod','Vanguards_Slime');
 INSERT INTO `mob_pets` VALUES (17547494,1,9,'Feralox_Honeylips','Feraloxs_Slime');
 INSERT INTO `mob_pets` VALUES (17547496,1,14,'Scourquix_Scaleskin','Scourquixs_Wyvern');
-
--- ------------------------------------------------------------
--- King_Ranperres_Tomb (Zone 190)
--- ------------------------------------------------------------
-
-INSERT INTO `mob_pets` VALUES (17555890,1,9,'Vrtra','Pey');
 
 -- ------------------------------------------------------------
 -- Ordelles_Caves (Zone 193)
