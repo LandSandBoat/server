@@ -15978,9 +15978,30 @@ INSERT INTO `mob_droplist` VALUES (1961,0,0,1000,19280,@UNCOMMON); -- Narigitsun
 INSERT INTO `mob_droplist` VALUES (1961,0,0,1000,739,@RARE);       -- Chunk Of Orichalcum Ore (Rare, 5%)
 INSERT INTO `mob_droplist` VALUES (1961,0,0,1000,739,@RARE);       -- Chunk Of Orichalcum Ore (Rare, 5%)
 
--- ZoneID:  30 - Ouryu
-INSERT INTO `mob_droplist` VALUES (1962,0,0,1000,1703,@UNCOMMON); -- Chunk Of Kunwu Ore (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (1962,0,0,1000,1133,@VRARE);    -- Vial Of Dragon Blood (Very Rare, 1%)
+-- Ouryu Cometh BCNM
+INSERT INTO `mob_droplist` VALUES (1962,1,1,794,1110,190);       -- Beetle Blood
+INSERT INTO `mob_droplist` VALUES (1962,1,1,794,655,90);         -- Adaman Ingot
+INSERT INTO `mob_droplist` VALUES (1962,1,1,794,860,50);         -- Behemoth Hide
+INSERT INTO `mob_droplist` VALUES (1962,1,1,794,836,140);        -- Damascene Cloth
+INSERT INTO `mob_droplist` VALUES (1962,1,1,794,658,100);        -- Damascus Ingot
+INSERT INTO `mob_droplist` VALUES (1962,1,1,794,722,95);         -- Divine Log
+INSERT INTO `mob_droplist` VALUES (1962,1,1,794,837,185);        -- Malboro Fiber
+INSERT INTO `mob_droplist` VALUES (1962,1,1,794,1313,150);       -- Siren's Hair
+INSERT INTO `mob_droplist` VALUES (1962,1,2,775,1133,250);       -- Dragon Blood
+INSERT INTO `mob_droplist` VALUES (1962,1,2,775,4272,600);       -- Dragon Meat
+INSERT INTO `mob_droplist` VALUES (1962,1,2,775,903,150);        -- Dragon Talon
+INSERT INTO `mob_droplist` VALUES (1962,0,0,1000,1703,@ALWAYS);  -- Kunwu Ore
+INSERT INTO `mob_droplist` VALUES (1962,0,0,1000,1703,@ALWAYS);  -- Kunwu Ore
+INSERT INTO `mob_droplist` VALUES (1962,0,0,1000,1703,@ALWAYS);  -- Kunwu Ore
+INSERT INTO `mob_droplist` VALUES (1962,0,0,1000,2108,@ALWAYS);  -- Monarch's Orb
+INSERT INTO `mob_droplist` VALUES (1962,0,0,1000,17658,@ALWAYS); -- Tutelary
+INSERT INTO `mob_droplist` VALUES (1962,0,0,1000,1816,@ALWAYS);  -- Wyrm Horn
+INSERT INTO `mob_droplist` VALUES (1962,1,3,361,4486,200);       -- Dragon Heart
+INSERT INTO `mob_droplist` VALUES (1962,1,3,361,836,200);        -- Damascene Cloth
+INSERT INTO `mob_droplist` VALUES (1962,1,3,361,17799,600);      -- Imanotsurugi
+INSERT INTO `mob_droplist` VALUES (1962,1,4,216,1133,600);       -- Dragon Blood
+INSERT INTO `mob_droplist` VALUES (1962,1,4,216,903,250);        -- Dragon Talon
+INSERT INTO `mob_droplist` VALUES (1962,1,4,216,1311,150);       -- Oxblood
 
 -- ZoneID: 218 - Ouzelum
 INSERT INTO `mob_droplist` VALUES (1963,0,0,1000,19292,690);      -- Kogara (69.0%)
@@ -23315,7 +23336,8 @@ INSERT INTO `mob_droplist` VALUES (2803,2,0,1000,4569,0);       -- Bowl Of Quada
 
 -- ZoneID:  29 - Ziryu
 -- ZoneID:  30 - Ziryu
-INSERT INTO `mob_droplist` VALUES (2804,0,0,1000,1830,@UNCOMMON); -- Sack Of Lugworm Sand (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (2804,0,0,1000,1830,@VCOMMON); -- Sack Of Lugworm Sand (Very Common, 24%)
+INSERT INTO `mob_droplist` VALUES (2804,0,0,1000,1831,@VCOMMON); -- Worm Mulch (Very Common, 24%)
 
 -- ZoneID:  65 - Ziz
 -- ZoneID:  77 - Ziz

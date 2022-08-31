@@ -98,7 +98,7 @@ local battlefields =
 
     [xi.zone.RIVERNE_SITE_A01] =
     {
-     -- { 0,  928, 1842},   -- Ouryu Cometh (BCNM)
+        { 0,  928, 1842},   -- Ouryu Cometh (BCNM)
     },
 
     [xi.zone.MONARCH_LINN] =

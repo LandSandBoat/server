@@ -35,6 +35,13 @@ zones[xi.zone.RIVERNE_SITE_A01] =
         {
             [16900305] = 16900306,
         },
+        ZIRYU =
+        {
+            16900315,
+            16900316,
+            16900317,
+            16900318,
+        },
         HELIODROMOS_PH_OFFSET    = 16900107,
         HELIODROMOS_OFFSET       = 16900110,
         CARMINE_DOBSONFLY_OFFSET = 16900230,
@@ -43,6 +50,7 @@ zones[xi.zone.RIVERNE_SITE_A01] =
     npc =
     {
         DISPLACEMENT_OFFSET = 16900334,
+        SPATIAL_OURYU       = 16900358,
     },
 }
 
