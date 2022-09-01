@@ -2429,7 +2429,7 @@ xi.mobMod =
     ASSIST              = 29, -- mobs will assist me
     SPECIAL_SKILL       = 30, -- give special skill (example: Gigas boulder ranged attack)
     ROAM_DISTANCE       = 31, -- distance allowed to roam from spawn
-    -- 32 Available for use
+    DONT_ROAM_HOME      = 32, -- Allow mobs to roam any distance from spawn. Useful for mobs with scripted roaming behavior.
     SPECIAL_COOL        = 33, -- cool down for special (example: Time between Gigas boulder ranged attacks)
     MAGIC_COOL          = 34, -- cool down for magic
     STANDBACK_COOL      = 35, -- cool down time for standing back (casting spell while not in attack range)
@@ -2447,7 +2447,7 @@ xi.mobMod =
     SPAWN_LEASH         = 47, -- forces a mob to not move farther from its spawn than its leash distance
     SHARE_TARGET        = 48, -- mob always targets same target as ID in this var
     CHECK_AS_NM         = 49, -- If set, a mob will check as a NM.
-    -- 50 Available for use
+    ROAM_RESET_FACING   = 50, -- Resume facing the default spawn rotation after roaming home.
     ROAM_TURNS          = 51, -- Maximum amount of turns during a roam
     ROAM_RATE           = 52, -- Roaming frequency. roam_cool - rand(roam_cool / (roam_rate / 10))
     BEHAVIOR            = 53, -- Add behaviors to mob
@@ -2468,6 +2468,7 @@ xi.mobMod =
     ALLI_HATE           = 68, -- Range around target to add alliance member to enmity list.
     NO_LINK             = 69, -- If set, mob cannot link until unset.
     NO_REST             = 70, -- Mob cannot regain hp (e.g. re-burrowing antlions during ENM).
+    LEADER              = 71, -- Used for mobs that follow a defined "leader", such as Ul'xzomit mobs.
 }
 
 -----------------------------------
@@ -2783,18 +2784,18 @@ xi.behavior =
 
 xi.roamFlag =
 {
-    NONE    = 0x000,
-    NONE0   = 0x001,
-    NONE1   = 0x002,
-    NONE2   = 0x004,
-    NONE3   = 0x008,
-    NONE4   = 0x010,
-    NONE5   = 0x020,
-    WORM    = 0x040, -- pop up and down when moving
-    AMBUSH  = 0x080, -- stays hidden until someone comes close (antlion)
-    EVENT   = 0x100, -- calls lua method for roaming logic
-    IGNORE  = 0x200, -- ignore all hate, except linking hate
-    STEALTH = 0x400, -- stays name hidden and untargetable until someone comes close (chigoe)
+    NONE     = 0x000,
+    NONE0    = 0x001,
+    NONE1    = 0x002,
+    NONE2    = 0x004,
+    NONE3    = 0x008,
+    NONE4    = 0x010,
+    NONE5    = 0x020,
+    WORM     = 0x040, -- pop up and down when moving
+    AMBUSH   = 0x080, -- stays hidden until someone comes close (antlion)
+    SCRIPTED = 0x100, -- calls lua method for roaming logic
+    IGNORE   = 0x200, -- ignore all hate, except linking hate
+    STEALTH  = 0x400, -- stays name hidden and untargetable until someone comes close (chigoe)
 }
 
 -----------------------------------

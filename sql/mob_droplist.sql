@@ -20098,25 +20098,18 @@ INSERT INTO `mob_droplist` VALUES (2516,0,0,1000,1852,60);  -- High-Quality Phua
 INSERT INTO `mob_droplist` VALUES (2516,0,0,1000,1783,20);  -- Sample Of Luminian Tissue (2.0%)
 INSERT INTO `mob_droplist` VALUES (2516,2,0,1000,1783,0);   -- Sample Of Luminian Tissue (Steal)
 
--- ZoneID:  33 - Ulxzomit
-INSERT INTO `mob_droplist` VALUES (2517,0,0,1000,1855,280);       -- High-Quality Xzomit Organ (28.0%)
-INSERT INTO `mob_droplist` VALUES (2517,0,0,1000,4104,@UNCOMMON); -- Fire Cluster (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (2517,0,0,1000,4105,@UNCOMMON); -- Ice Cluster (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (2517,0,0,1000,4106,@UNCOMMON); -- Wind Cluster (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (2517,0,0,1000,4107,@UNCOMMON); -- Earth Cluster (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (2517,0,0,1000,4108,@UNCOMMON); -- Lightning Cluster (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (2517,0,0,1000,4109,@UNCOMMON); -- Water Cluster (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (2517,0,0,1000,4110,@UNCOMMON); -- Light Cluster (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (2517,0,0,1000,4111,@UNCOMMON); -- Dark Cluster (Uncommon, 10%)
-INSERT INTO `mob_droplist` VALUES (2517,0,0,1000,1855,@VRARE);    -- High-Quality Xzomit Organ (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2517,0,0,1000,4104,@VRARE);    -- Fire Cluster (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2517,0,0,1000,4105,@VRARE);    -- Ice Cluster (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2517,0,0,1000,4106,@VRARE);    -- Wind Cluster (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2517,0,0,1000,4107,@VRARE);    -- Earth Cluster (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2517,0,0,1000,4108,@VRARE);    -- Lightning Cluster (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2517,0,0,1000,4109,@VRARE);    -- Water Cluster (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2517,0,0,1000,4110,@VRARE);    -- Light Cluster (Very Rare, 1%)
-INSERT INTO `mob_droplist` VALUES (2517,0,0,1000,4111,@VRARE);    -- Dark Cluster (Very Rare, 1%)
+-- ZoneID:  33 - Ulxzomit (mother)
+INSERT INTO `mob_droplist` VALUES (2517,0,0,1000,1785,@ALWAYS);   -- Xzomit Organ (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (2517,0,0,1000,1855,@COMMON);   -- High-Quality Xzomit Organ (Common, 30%)
+INSERT INTO `mob_droplist` VALUES (2517,0,0,1000,1783,@UNCOMMON); -- Luminian Tissue (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (2517,1,1,@UNCOMMON,4104,125); -- Fire Cluster (Group 1 - Uncommon, 10% * 12.5%)
+INSERT INTO `mob_droplist` VALUES (2517,1,1,@UNCOMMON,4105,125); -- Ice Cluster (Group 1 - Uncommon, 10% * 12.5%)
+INSERT INTO `mob_droplist` VALUES (2517,1,1,@UNCOMMON,4106,125); -- Wind Cluster (Group 1 - Uncommon, 10% * 12.5%)
+INSERT INTO `mob_droplist` VALUES (2517,1,1,@UNCOMMON,4107,125); -- Earth Cluster (Group 1 - Uncommon, 10% * 12.5%)
+INSERT INTO `mob_droplist` VALUES (2517,1,1,@UNCOMMON,4108,125); -- Lightning Cluster (Group 1 - Uncommon, 10% * 12.5%)
+INSERT INTO `mob_droplist` VALUES (2517,1,1,@UNCOMMON,4109,125); -- Water Cluster (Group 1 - Uncommon, 10% * 12.5%)
+INSERT INTO `mob_droplist` VALUES (2517,1,1,@UNCOMMON,4110,125); -- Light Cluster (Group 1 - Uncommon, 10% * 12.5%)
+INSERT INTO `mob_droplist` VALUES (2517,1,1,@UNCOMMON,4111,125); -- Dark Cluster (Group 1 - Uncommon, 10% * 12.5%)
 
 -- ZoneID:  33 - Ulyovra
 INSERT INTO `mob_droplist` VALUES (2518,0,0,1000,1788,410);   -- Yovra Organ (41.0%)
@@ -26790,6 +26783,19 @@ INSERT INTO `mob_droplist` VALUES (3229,4,0,1000,4368,0);         -- Two Leaf Ma
 -- ZoneID: 153 - Boyahda Sapling
 INSERT INTO `mob_droplist` VALUES (3230,0,0,1000,953,@VCOMMON);   -- Treant Bulb (Very common, 24%)
 INSERT INTO `mob_droplist` VALUES (3230,0,0,1000,574,@VRARE);     -- Fruit seeds (Very rare, 10%)
+
+-- ZoneID:  33 - Ulxzomit (baby)
+INSERT INTO `mob_droplist` VALUES (3231,0,0,1000,1785,@VRARE); -- Xzomit Organ (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (3231,0,0,1000,1855,@VRARE); -- High-Quality Xzomit Organ (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (3231,0,0,1000,1783,@VRARE); -- Luminian Tissue (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (3231,1,1,@VRARE,4104,125);  -- Fire Cluster (Group 1 - Very Rare, 1% * 12.5%)
+INSERT INTO `mob_droplist` VALUES (3231,1,1,@VRARE,4105,125);  -- Ice Cluster (Group 1 - Very Rare, 1% * 12.5%)
+INSERT INTO `mob_droplist` VALUES (3231,1,1,@VRARE,4106,125);  -- Wind Cluster (Group 1 - Very Rare, 1% * 12.5%)
+INSERT INTO `mob_droplist` VALUES (3231,1,1,@VRARE,4107,125);  -- Earth Cluster (Group 1 - Very Rare, 1% * 12.5%)
+INSERT INTO `mob_droplist` VALUES (3231,1,1,@VRARE,4108,125);  -- Lightning Cluster (Group 1 - Very Rare, 1% * 12.5%)
+INSERT INTO `mob_droplist` VALUES (3231,1,1,@VRARE,4109,125);  -- Water Cluster (Group 1 - Very Rare, 1% * 12.5%)
+INSERT INTO `mob_droplist` VALUES (3231,1,1,@VRARE,4110,125);  -- Light Cluster (Group 1 - Very Rare, 1% * 12.5%)
+INSERT INTO `mob_droplist` VALUES (3231,1,1,@VRARE,4111,125);  -- Dark Cluster (Group 1 - Very Rare, 1% * 12.5%)
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;
