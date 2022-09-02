@@ -1336,9 +1336,7 @@ void SmallPacket0x028(map_session_data_t* const PSession, CCharEntity* const PCh
         }
     }
 
-    // Linkshells (other than Linkpearls and Pearlsacks) and temporary items cannot be stored in the Recycle Bin.
-    // TODO: Are there any special messages here?
-    if (!settings::get<bool>("map.ENABLE_ITEM_RECYCLE_BIN") || PItem->isType(ITEM_LINKSHELL) || container == CONTAINER_ID::LOC_TEMPITEMS)
+    if (charutils::UpdateItem(PChar, container, slotID, -quantity) != 0)
     {
         // Todo: add item NAME to this msg before ID. Problem is it's not a string.
         PChar->pushPacket(new CMessageStandardPacket(nullptr, ItemID, quantity, MsgStd::ThrowAway));

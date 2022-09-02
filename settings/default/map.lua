@@ -36,9 +36,6 @@ xi.settings.map =
     -- Minimal number of 0x3A packets which uses for detect lightluggage (set 0 for disable)
     LIGHTLUGGAGE_BLOCK = 4,
 
-    -- Enable or disable Recycle Bin (Set to false for items to be dropped immediately)
-    ENABLE_ITEM_RECYCLE_BIN = true,
-
     --  AH fee structure, defaults are retail.
     AH_BASE_FEE_SINGLE = 1,
     AH_BASE_FEE_STACKS = 4,
@@ -247,7 +244,7 @@ xi.settings.map =
     -- Paralysis Settings
     ITEM_PARALYSIS_LOSS              = true, -- Allow items to be put on recast or deleted when used during a paralysis tick.
     ITEM_PARALYSIS_SCROLL_PROTECTION = false, -- Stops scrolls from being deleted if a paralysis tick occurs.
-    
+
     -- Enable/disable keeping jug pets through zoning
     KEEP_JUGPET_THROUGH_ZONING = false,
 }
