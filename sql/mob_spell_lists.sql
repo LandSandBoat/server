@@ -5046,6 +5046,26 @@ INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',498,3,1,255);  -- 
 INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',498,23,1,255); -- dia (1~255)
 INSERT INTO `mob_spell_lists` VALUES ('Slendlix_Spindlethumb',498,33,1,255); -- diaga (1~255)
 
+-- Totentaz Undead
+INSERT INTO `mob_spell_lists` VALUES('Totentanz_Undead', 499, 190, 1, 255); -- stonega ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Totentanz_Undead', 499, 200, 1, 255); -- waterga ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Totentanz_Undead', 499, 185, 1, 255); -- aeroga ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Totentanz_Undead', 499, 175, 1, 255); -- firaga ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Totentanz_Undead', 499, 180, 1, 255); -- blizzaga ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Totentanz_Undead', 499, 195, 1, 255); -- thundaga ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Totentanz_Undead', 499, 245, 1, 255); -- drain (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Totentanz_Undead', 499, 247, 1, 255); -- aspir (1~255)
+
+-- Gwyn Ap Knudd
+INSERT INTO `mob_spell_lists` VALUES('Gwyn_Ap_Knudd', 500, 191, 1, 255); -- stonega iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Gwyn_Ap_Knudd', 500, 201, 1, 255); -- waterga iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Gwyn_Ap_Knudd', 500, 186, 1, 255); -- aeroga iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Gwyn_Ap_Knudd', 500, 176, 1, 255); -- firaga iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Gwyn_Ap_Knudd', 500, 181, 1, 255); -- blizzaga iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Gwyn_Ap_Knudd', 500, 196, 1, 255); -- thundaga iii (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Gwyn_Ap_Knudd', 500, 245, 1, 255); -- drain (1~255)
+INSERT INTO `mob_spell_lists` VALUES('Gwyn_Ap_Knudd', 500, 247, 1, 255); -- aspir (1~255)
+
 -- AirSkyBoat Specific Starts at 5000
 -- 5000 -> 5010 is Era Dynamis
 

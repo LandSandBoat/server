@@ -1246,6 +1246,36 @@ INSERT INTO `bcnm_battlefield` VALUES (675,3,16810046,0);
 INSERT INTO `bcnm_battlefield` VALUES (675,3,16810047,0); -- Nepionic Bladmall
 INSERT INTO `bcnm_battlefield` VALUES (675,3,16810048,0);
 INSERT INTO `bcnm_battlefield` VALUES (675,3,16810049,0);
+INSERT INTO `bcnm_battlefield` VALUES (676,1,16810051,3); -- Totentanz (1)
+INSERT INTO `bcnm_battlefield` VALUES (676,1,16810052,3);
+INSERT INTO `bcnm_battlefield` VALUES (676,1,16810053,3);
+INSERT INTO `bcnm_battlefield` VALUES (676,1,16810054,3);
+INSERT INTO `bcnm_battlefield` VALUES (676,1,16810055,3);
+INSERT INTO `bcnm_battlefield` VALUES (676,1,16810056,3);
+INSERT INTO `bcnm_battlefield` VALUES (676,1,16810057,3);
+INSERT INTO `bcnm_battlefield` VALUES (676,1,16810058,3);
+INSERT INTO `bcnm_battlefield` VALUES (676,1,16810059,3);
+INSERT INTO `bcnm_battlefield` VALUES (676,1,16810060,3);
+INSERT INTO `bcnm_battlefield` VALUES (676,2,16810062,3); -- Totentanz (2)
+INSERT INTO `bcnm_battlefield` VALUES (676,2,16810063,3);
+INSERT INTO `bcnm_battlefield` VALUES (676,2,16810064,3);
+INSERT INTO `bcnm_battlefield` VALUES (676,2,16810065,3);
+INSERT INTO `bcnm_battlefield` VALUES (676,2,16810066,3);
+INSERT INTO `bcnm_battlefield` VALUES (676,2,16810067,3);
+INSERT INTO `bcnm_battlefield` VALUES (676,2,16810068,3);
+INSERT INTO `bcnm_battlefield` VALUES (676,2,16810069,3);
+INSERT INTO `bcnm_battlefield` VALUES (676,2,16810070,3);
+INSERT INTO `bcnm_battlefield` VALUES (676,2,16810071,3);
+INSERT INTO `bcnm_battlefield` VALUES (676,3,16810073,3); -- Totentanz (3)
+INSERT INTO `bcnm_battlefield` VALUES (676,3,16810074,3);
+INSERT INTO `bcnm_battlefield` VALUES (676,3,16810075,3);
+INSERT INTO `bcnm_battlefield` VALUES (676,3,16810076,3);
+INSERT INTO `bcnm_battlefield` VALUES (676,3,16810077,3);
+INSERT INTO `bcnm_battlefield` VALUES (676,3,16810078,3);
+INSERT INTO `bcnm_battlefield` VALUES (676,3,16810079,3);
+INSERT INTO `bcnm_battlefield` VALUES (676,3,16810080,3);
+INSERT INTO `bcnm_battlefield` VALUES (676,3,16810081,3);
+INSERT INTO `bcnm_battlefield` VALUES (676,3,16810082,3);
 INSERT INTO `bcnm_battlefield` VALUES (704,1,16818177,3); -- darkness_named
 INSERT INTO `bcnm_battlefield` VALUES (704,1,16818178,1);
 INSERT INTO `bcnm_battlefield` VALUES (704,1,16818179,1);
