@@ -1,12 +1,10 @@
------------------------------------
 -- Area: Bhaflau Thickets
 --  NPC: ??? (Spawn Lividroot Amooshah(ZNM T2))
 -- !pos 334 -10 184 52
 -----------------------------------
-require("scripts/zones/Bhaflau_Thickets/IDs")
+local ID = zones[xi.zone.BHAFLAU_THICKETS]
 require("scripts/globals/npc_util")
 -----------------------------------
-local ID = zones[xi.zone.BHAFLAU_THICKETS]
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
