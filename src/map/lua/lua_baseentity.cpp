@@ -704,112 +704,33 @@ void CLuaBaseEntity::injectPacket(std::string const& filename)
 
 /************************************************************************
  *  Function: injectActionPacket()
- *  Purpose : Used for testing and finding animations, not production use
- *  Example : player:injectActionPacket(actID, animID, spEffect, react, msg);
- *  Notes   : Used only for testing through injectaction.lua command
- *            ONLY FOR DEBUGGING. Injects an action packet with the specified params.
+ *  Purpose : Used for injecting action packets
+ *  Example : "steal" a target's weapon on a target: player:injectActionPacket(target:getID(), 3, 181, 0, 24, 125, 41, 4370);
+ *  Notes   : Used for very special cases, like JoL or Plouton generating action packets that only play animations, and don't actually use abilities.
+ *            There are no safeties, You can crash a client with malformed parameters. You have been warned.
  ************************************************************************/
-
-void CLuaBaseEntity::injectActionPacket(uint16 action, uint16 anim, uint16 spec, uint16 react, uint16 message)
+void CLuaBaseEntity::injectActionPacket(uint32 inTargetID, uint16 inCategory, uint16 inAnimationID, uint16 inSpecEffect, uint16 inReaction, uint16 inMessage, uint16 inActionParam, uint16 inParam)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
-    CCharEntity* PChar = (CCharEntity*)m_PBaseEntity;
-
-    SPECEFFECT speceffect = static_cast<SPECEFFECT>(spec);
-    REACTION   reaction   = static_cast<REACTION>(react);
-
-    ACTIONTYPE actiontype = ACTION_MAGIC_FINISH;
-    switch (action)
-    {
-        case 3:
-            actiontype = ACTION_WEAPONSKILL_FINISH;
-            break;
-        case 4:
-            actiontype = ACTION_MAGIC_FINISH;
-            break;
-        case 5:
-            actiontype = ACTION_ITEM_FINISH;
-            break;
-        case 6:
-            actiontype = ACTION_JOBABILITY_FINISH;
-            break;
-        case 8:
-            actiontype = ACTION_MAGIC_START;
-            break;
-        case 11:
-            actiontype = ACTION_MOBABILITY_FINISH;
-            break;
-        case 13:
-            actiontype = ACTION_PET_MOBABILITY_FINISH;
-            break;
-        case 14:
-            actiontype = ACTION_DANCE;
-            break;
-        case 15:
-            actiontype = ACTION_RUN_WARD_EFFUSION;
-            break;
-    }
+    SPECEFFECT speceffect = static_cast<SPECEFFECT>(inSpecEffect);
+    REACTION   reaction   = static_cast<REACTION>(inReaction);
+    ACTIONTYPE actiontype = static_cast<ACTIONTYPE>(inCategory);
 
     action_t Action;
 
-    Action.id       = PChar->id;
-    Action.actionid = 1;
-
-    // If you use ACTION_MOBABILITY_FINISH, the first param = anim, the second param = skill id.
-    if (actiontype == ACTION_MOBABILITY_FINISH || actiontype == ACTION_PET_MOBABILITY_FINISH)
-    {
-        CBattleEntity* PTarget = (CBattleEntity*)PChar->GetEntity(PChar->m_TargID);
-        if (PTarget == nullptr)
-        {
-            ShowError("Cannot use MOBABILITY_FINISH on a nullptr battle target! Target a mob! ");
-            return;
-        }
-        Action.id              = PTarget->id;
-        Action.actiontype      = actiontype;
-        actionList_t& list     = Action.getNewActionList();
-        list.ActionTargetID    = PChar->id;
-        actionTarget_t& target = list.getNewActionTarget();
-        target.animation       = anim;
-        target.param           = 10;
-        target.messageID       = message;
-        PTarget->loc.zone->PushPacket(PTarget, CHAR_INRANGE, new CActionPacket(Action));
-        return;
-    }
+    Action.id       = m_PBaseEntity->id;
+    Action.actionid = inActionParam;
 
     Action.actiontype      = actiontype;
     actionList_t& list     = Action.getNewActionList();
-    list.ActionTargetID    = PChar->id;
+    list.ActionTargetID    = inTargetID;
     actionTarget_t& target = list.getNewActionTarget();
-    target.animation       = anim;
-    target.param           = 10;
-    target.messageID       = message;
+    target.animation       = inAnimationID;
+    target.param           = inParam;
+    target.messageID       = inMessage;
     target.speceffect      = speceffect;
     target.reaction        = reaction;
 
-    if (actiontype == ACTION_MAGIC_START)
-    {
-        SPELLGROUP castType = static_cast<SPELLGROUP>(anim);
-        uint16     castAnim = spec;
-
-        Action.spellgroup = castType;
-        Action.actiontype = actiontype;
-        target.reaction   = REACTION::NONE;
-        target.speceffect = SPECEFFECT::NONE;
-        if (!castAnim)
-        {
-            target.animation = 0;
-        }
-        else
-        {
-            target.animation = castAnim;
-        }
-        target.param     = message;
-        target.messageID = 327; // starts casting
-        return;
-    }
-
-    PChar->loc.zone->PushPacket(PChar, CHAR_INRANGE_SELF, new CActionPacket(Action));
+    m_PBaseEntity->loc.zone->PushPacket(m_PBaseEntity, CHAR_INRANGE_SELF, new CActionPacket(Action));
 }
 
 /************************************************************************
@@ -1596,8 +1517,12 @@ void CLuaBaseEntity::lookAt(sol::object const& arg0, sol::object const& arg1, so
         point.z = position["z"];
     }
 
-    m_PBaseEntity->loc.p.rotation = worldAngle(m_PBaseEntity->loc.p, point);
-    m_PBaseEntity->updatemask |= UPDATE_POS;
+    // Avoid unpredictable results if we're too close.
+    if (!distanceWithin(m_PBaseEntity->loc.p, point, 0.1f, true))
+    {
+        m_PBaseEntity->loc.p.rotation = worldAngle(m_PBaseEntity->loc.p, point);
+        m_PBaseEntity->updatemask |= UPDATE_POS;
+    }
 }
 
 /************************************************************************
@@ -1625,27 +1550,25 @@ bool CLuaBaseEntity::atPoint(sol::variadic_args va)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
 
-    float posX = 0;
-    float posY = 0;
-    float posZ = 0;
+    position_t pos;
 
     if (va.get_type(0) == sol::type::number)
     {
-        posX = va.get<float>(0);
-        posY = va.get<float>(1);
-        posZ = va.get<float>(2);
+        pos.x = va.get<float>(0);
+        pos.y = va.get<float>(1);
+        pos.z = va.get<float>(2);
     }
     else if (va.get_type(0) == sol::type::table)
     {
         auto table = va.get<sol::table>(0);
         auto vec   = table.as<std::vector<float>>();
 
-        posX = vec[0];
-        posY = vec[1];
-        posZ = vec[2];
+        pos.x = vec[0];
+        pos.y = vec[1];
+        pos.z = vec[2];
     }
 
-    return m_PBaseEntity->loc.p.x == posX && m_PBaseEntity->loc.p.y == posY && m_PBaseEntity->loc.p.z == posZ;
+    return distanceWithin(m_PBaseEntity->loc.p, pos, 0.01f);
 }
 
 /************************************************************************
@@ -2229,6 +2152,7 @@ void CLuaBaseEntity::sendEmote(CLuaBaseEntity* target, uint8 emID, uint8 emMode)
  *  Example : player:worldAngle(target)
  *  Notes   : Target is... 0: east; 64: south; 128: west, 192: north
  *            Default angle is 255-based mob rotation value - NOT a 360 angle
+ *            CAREFUL! If the entities are too close, this can return unexpected results.
  ************************************************************************/
 
 int16 CLuaBaseEntity::getWorldAngle(sol::variadic_args va)
@@ -2277,6 +2201,7 @@ int16 CLuaBaseEntity::getWorldAngle(sol::variadic_args va)
  *            Returned angle is 255-based rotation value - NOT a 360 angle
  *            Return value is signed to indicate this shortest turn direction.
  *            Negative: counter-clockwise (left), Positive: clockwise (right)
+ *            CAREFUL! If the entities are too close, this can return unxpected results.
  ************************************************************************/
 
 int16 CLuaBaseEntity::getFacingAngle(CLuaBaseEntity const* target)
@@ -12877,38 +12802,44 @@ uint8 CLuaBaseEntity::getModelSize()
  *  Function: setMobFlags()
  *  Purpose : Manually set Mob flags
  *  Example : player:setMobFlags(flags, targ:getID())
- *  Notes   : Currently only used through !setmobflags command
+ *  Example : mob:setMobFlags(flags)
+ *  Notes   : Used for changing Ul'xzomit babies' size and through !setmobflags command
  ************************************************************************/
 
-void CLuaBaseEntity::setMobFlags(uint32 flags, uint32 mobid)
+void CLuaBaseEntity::setMobFlags(uint32 flags, sol::object const& mobId)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_MOB && m_PBaseEntity->objtype != TYPE_PC);
 
-    CMobEntity* PMob = (CMobEntity*)zoneutils::GetEntity(mobid, TYPE_MOB);
-
-    if (PMob != nullptr)
+    if (mobId != sol::lua_nil)
     {
+        auto* PMob = static_cast<CMobEntity*>(zoneutils::GetEntity(mobId.as<uint32>(), TYPE_MOB));
+        if (PMob == nullptr)
+        {
+            ShowError("Could not find a monster with id %u to use for setMobFlags.", mobId.as<uint32>());
+            return;
+        }
+        PMob->setEntityFlags(flags);
+        PMob->updatemask |= UPDATE_HP;
+    }
+    else if (m_PBaseEntity->objtype == TYPE_MOB)
+    {
+        auto* PMob = static_cast<CMobEntity*>(m_PBaseEntity);
         PMob->setEntityFlags(flags);
         PMob->updatemask |= UPDATE_HP;
     }
     else
     {
-        CCharEntity*   PChar   = (CCharEntity*)m_PBaseEntity;
-        CBattleEntity* PTarget = (CBattleEntity*)PChar->GetEntity(PChar->m_TargID);
+        auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+        auto* PMob  = static_cast<CMobEntity*>(PChar->GetEntity(PChar->m_TargID, TYPE_MOB));
 
-        if (PTarget == nullptr)
+        if (PMob == nullptr)
         {
             ShowError("Must target a monster to use for setMobFlags ");
             return;
         }
-        else if (PTarget->objtype != TYPE_MOB)
-        {
-            ShowError("Battle target must be a monster to use setMobFlags ");
-            return;
-        }
 
-        ((CMobEntity*)PTarget)->setEntityFlags(flags);
-        PTarget->updatemask |= UPDATE_HP;
+        PMob->setEntityFlags(flags);
+        PMob->updatemask |= UPDATE_HP;
     }
 }
 

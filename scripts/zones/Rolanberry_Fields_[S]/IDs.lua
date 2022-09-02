@@ -10,15 +10,15 @@ zones[xi.zone.ROLANBERRY_FIELDS_S] =
 {
     text =
     {
+        NOTHING_HAPPENS         = 119,  -- Nothing happens...
         ITEM_CANNOT_BE_OBTAINED = 6384, -- You cannot obtain the <item>. Come back after sorting your inventory.
         ITEM_OBTAINED           = 6390, -- Obtained: <item>.
         GIL_OBTAINED            = 6391, -- Obtained <number> gil.
         KEYITEM_OBTAINED        = 6393, -- Obtained key item: <keyitem>.
         CARRIED_OVER_POINTS     = 7001, -- You have carried over <number> login point[/s].
-        LOGIN_CAMPAIGN_UNDERWAY = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
+        LOGIN_CAMPAIGN_UNDERWAY = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER            = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         UNABLE_TO_PROGRESS      = 7047, -- ou are unable to make further progress in Rhapsodies of Vana'diel due to an event occurring in the [Chains of Promathia/Treasures of Aht Urhgan/Wings of the Goddess/Seekers of Adoulin/Rise of the Zilart] missions.
-        NOTHING_HAPPENS         = 7057, -- Nothing happens...
         FISHING_MESSAGE_OFFSET  = 7077, -- You can't fish here.
         VOIDWALKER_DESPAWN      = 7989, -- The monster fades before your eyes, a look of disappointment on its face.
         VOIDWALKER_NO_MOB       = 8044, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
