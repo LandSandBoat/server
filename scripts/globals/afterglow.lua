@@ -31,7 +31,7 @@ xi.afterglow.onTrigger = function(player)
     {
     -- [Iterator] = {varName, weaponId, animation},
         -- Mythic weapons
-        [1 ] = { "hasExenteratorUnlock",  18989, 598 }, -- terpsichore
+        [1 ] = { "hasExenteratorUnlock",  18989, 569 }, -- terpsichore
         [2 ] = { "hasShattersoulUnlock",  18990, 570 }, -- tupsimati
         [3 ] = { "hasUpheavalUnlock",     18991, 555 }, -- conquerer
         [4 ] = { "hasShijinSpiralUnlock", 18992, 496 }, -- glanzfaust

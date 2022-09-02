@@ -11,7 +11,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:PrintToPlayer("This zone is currently under construction.")
+    player:PrintToPlayer("Domain Invasion has moved to Kamihr Drifts. Enter in Xarcabard across from Telepoint.")
 --    player:startEvent(14)
 end
 

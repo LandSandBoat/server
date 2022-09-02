@@ -174,7 +174,7 @@ INSERT into item_mods VALUES (27370,9,5); -- DEX+5
 INSERT into item_mods VALUES (27370,384,4); -- Haste +4%
 INSERT into item_mods VALUES (27370,110,15); -- Parrying skill +15
 
--- # Allow GEO to use Indi/Geo Haste, and Indi/Geo Frailty at 74
+# Allow GEO to use Indi/Geo Haste, and Indi/Geo Frailty at 74
 DELETE FROM spell_list WHERE spellid = "771";
 DELETE FROM spell_list WHERE spellid = "788";
 DELETE FROM spell_list WHERE spellid = "801";
@@ -184,6 +184,10 @@ INSERT INTO `spell_list` VALUES (771,'indi-haste',0x0000000000000000000000000000
 INSERT INTO `spell_list` VALUES (788,'indi-frailty',0x00000000000000000000000000000000000000004A00,7,145,3,128,512,44,147,2000,12000,0,0,881,2000,0,0,1.00,240,100,0,204,'SOA');
 INSERT INTO `spell_list` VALUES (801,'geo-haste',0x00000000000000000000000000000000000000004A00,7,146,7,128,1,44,63,2000,12000,0,0,864,2000,0,0,1.00,1,300,0,210,'SOA');
 INSERT INTO `spell_list` VALUES (818,'geo-frailty',0x00000000000000000000000000000000000000004A00,7,147,3,128,4,44,294,2000,24000,0,0,881,2000,0,0,1.00,240,100,0,210,'SOA');
+
+# Allow RUN to use Crusade at 56
+DELETE FROM spell_list WHERE spellid = "476";
+INSERT INTO `spell_list` VALUES (476,'crusade',0x0000000000000000000000000000000000000000003A,6,4,8,0,1,34,18,3000,10000,230,0,825,2000,0,0,1.00,0,0,0,204,'SOA');
 
 # Add relic armor to Dynamis
 INSERT INTO `mob_droplist` VALUES (3148,0,0,1000,27016,90); -- Bagua Mitaines   (Dynammis - San d'Oria)

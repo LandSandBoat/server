@@ -5,57 +5,6 @@ INSERT INTO `mob_droplist` VALUES (730,0,0,1000,11578,100);  -- Dynamis Lord - t
 INSERT INTO `mob_droplist` VALUES (730,0,0,1000,11543,100);  -- Dynamis Lord - hecates_cape
 INSERT INTO `mob_droplist` VALUES (730,0,0,1000,19048,100);  -- Dynamis Lord - reign_grip
 INSERT INTO `mob_droplist` VALUES (730,0,0,1000,2466,200);   -- Dynamis Lord - rubber_harness
-INSERT INTO `mob_droplist` VALUES (2830,0,0,1000,16179,100); -- Za'Dha Adamantking - airy_buckler
-INSERT INTO `mob_droplist` VALUES (2830,0,0,1000,18498,100); -- Za'Dha Adamantking - balestarius
-INSERT INTO `mob_droplist` VALUES (2830,0,0,1000,16001,100); -- Za'Dha Adamantking - crapaud_earring
-INSERT INTO `mob_droplist` VALUES (2830,0,0,1000,13403,100); -- Za'Dha Adamantking - assault_earring
-INSERT INTO `mob_droplist` VALUES (2830,0,0,1000,13624,100); -- Za'Dha Adamantking - enhancing_mantle
-INSERT INTO `mob_droplist` VALUES (2830,0,0,1000,19030,50);  -- Za'Dha Adamantking - wise_strap
-INSERT INTO `mob_droplist` VALUES (2830,0,0,1000,19029,50);  -- Za'Dha Adamantking - brave_grip
-INSERT INTO `mob_droplist` VALUES (2830,0,0,1000,16159,50);  -- Za'Dha Adamantking - zhagos_barbut
-INSERT INTO `mob_droplist` VALUES (2830,0,0,1000,16005,100); -- Za'Dha Adamantking - paramount_earring
-INSERT INTO `mob_droplist` VALUES (2830,0,0,1000,18501,100); -- Za'Dha Adamantking - seismic_axe
-INSERT INTO `mob_droplist` VALUES (2830,0,0,1000,15832,100); -- Za'Dha Adamantking - headsmans_ring
-INSERT INTO `mob_droplist` VALUES (2830,0,0,1000,15034,100); -- Za'Dha Adamantking - stone_mufflers
-INSERT INTO `mob_droplist` VALUES (2830,0,0,1000,15712,150); -- Za'Dha Adamantking - enyos_leggings
-INSERT INTO `mob_droplist` VALUES (2830,0,0,1000,15716,150); -- Za'Dha Adamantking - njords_ledelsens
-INSERT INTO `mob_droplist` VALUES (2830,0,0,1000,15720,150); -- Za'Dha Adamantking - hoshikazu_kyahan
-INSERT INTO `mob_droplist` VALUES (2830,0,0,1000,15724,150); -- Za'Dha Adamantking - anus_gaiters
-INSERT INTO `mob_droplist` VALUES (2830,0,0,1000,15728,150); -- Za'Dha Adamantking - nemains_sabots
-INSERT INTO `mob_droplist` VALUES (1966,0,0,1000,16241,100); -- Overlord Bakgodek - cuchulains_mantle
-INSERT INTO `mob_droplist` VALUES (1966,0,0,1000,15016,100); -- Overlord Bakgodek - orcish_gauntlets
-INSERT INTO `mob_droplist` VALUES (1966,0,0,1000,15918,100); -- Overlord Bakgodek - witch_sash
-INSERT INTO `mob_droplist` VALUES (1966,0,0,1000,13555,100); -- Overlord Bakgodek - peace_ring
-INSERT INTO `mob_droplist` VALUES (1966,0,0,1000,13128,100); -- Overlord Bakgodek - spectacles
-INSERT INTO `mob_droplist` VALUES (1966,0,0,1000,19030,50);  -- Overlord Bakgodek - wise_strap
-INSERT INTO `mob_droplist` VALUES (1966,0,0,1000,19029,50);  -- Overlord Bakgodek - brave_grip
-INSERT INTO `mob_droplist` VALUES (1966,0,0,1000,16158,50);  -- Overlord Bakgodek - gnadbhods_helm
-INSERT INTO `mob_droplist` VALUES (1966,0,0,1000,15831,100); -- Overlord Bakgodek - fenian_ring
-INSERT INTO `mob_droplist` VALUES (1966,0,0,1000,17758,100); -- Overlord Bakgodek - ruler
-INSERT INTO `mob_droplist` VALUES (1966,0,0,1000,16004,100); -- Overlord Bakgodek - supremacy_earring
-INSERT INTO `mob_droplist` VALUES (1966,0,0,1000,16356,100); -- Overlord Bakgodek - nimues_tights
-INSERT INTO `mob_droplist` VALUES (1966,0,0,1000,15713,150); -- Overlord Bakgodek - phoboss_sabatons
-INSERT INTO `mob_droplist` VALUES (1966,0,0,1000,15717,150); -- Overlord Bakgodek - freyrs_ledelsens
-INSERT INTO `mob_droplist` VALUES (1966,0,0,1000,15721,150); -- Overlord Bakgodek - tsukikazu_sune-ate
-INSERT INTO `mob_droplist` VALUES (1966,0,0,1000,15725,150); -- Overlord Bakgodek - eas_crackows
-INSERT INTO `mob_droplist` VALUES (1966,0,0,1000,15729,150); -- Overlord Bakgodek - bodbs_pigaches
-INSERT INTO `mob_droplist` VALUES (2511,0,0,1000,15917,100); -- Tzee Xicu the Manifest - cuchulains_belt
-INSERT INTO `mob_droplist` VALUES (2511,0,0,1000,11365,100); -- Tzee Xicu the Manifest - karasutengu_kogake
-INSERT INTO `mob_droplist` VALUES (2511,0,0,1000,16002,100); -- Tzee Xicu the Manifest - roundel_earring
-INSERT INTO `mob_droplist` VALUES (2511,0,0,1000,13555,100); -- Tzee Xicu the Manifest - peace_ring
-INSERT INTO `mob_droplist` VALUES (2511,0,0,1000,13624,100); -- Tzee Xicu the Manifest - enhancing_mantle
-INSERT INTO `mob_droplist` VALUES (2511,0,0,1000,19030,50);  -- Tzee Xicu the Manifest - wise_strap
-INSERT INTO `mob_droplist` VALUES (2511,0,0,1000,19029,50);  -- Tzee Xicu the Manifest - brave_grip
-INSERT INTO `mob_droplist` VALUES (2511,0,0,1000,16160,50);  -- Tzee Xicu the Manifest - ree_habalos_headgear
-INSERT INTO `mob_droplist` VALUES (2511,0,0,1000,11392,100); -- Tzee Xicu the Manifest - koschei_crackows
-INSERT INTO `mob_droplist` VALUES (2511,0,0,1000,16006,100); -- Tzee Xicu the Manifest - brilliant_earring
-INSERT INTO `mob_droplist` VALUES (2511,0,0,1000,15833,100); -- Tzee Xicu the Manifest - diverters_ring
-INSERT INTO `mob_droplist` VALUES (2511,0,0,1000,18598,100); -- Tzee Xicu the Manifest - prester
-INSERT INTO `mob_droplist` VALUES (2511,0,0,1000,15714,150); -- Tzee Xicu the Manifest - deimoss_leggings
-INSERT INTO `mob_droplist` VALUES (2511,0,0,1000,15718,150); -- Tzee Xicu the Manifest - freyas_ledelsens
-INSERT INTO `mob_droplist` VALUES (2511,0,0,1000,15722,150); -- Tzee Xicu the Manifest - hikazu_sune-ate
-INSERT INTO `mob_droplist` VALUES (2511,0,0,1000,15726,150); -- Tzee Xicu the Manifest - enlils_crackows
-INSERT INTO `mob_droplist` VALUES (2511,0,0,1000,15730,150); -- Tzee Xicu the Manifest - machas_pigaches
 INSERT INTO `mob_droplist` VALUES (2416,0,0,1000,14547,150); -- Tiamat - enyos_breastplate
 INSERT INTO `mob_droplist` VALUES (2416,0,0,1000,14551,150); -- Tiamat - njords_jerkin
 INSERT INTO `mob_droplist` VALUES (2416,0,0,1000,14555,150); -- Tiamat - hoshikazu_gi
@@ -152,12 +101,6 @@ INSERT INTO `mob_droplist` VALUES (183,0,0,1000,14971,150);  -- Aspidochelone - 
 INSERT INTO `mob_droplist` VALUES (183,0,0,1000,14975,150);  -- Aspidochelone - eas_dastanas
 INSERT INTO `mob_droplist` VALUES (183,0,0,1000,14979,150);  -- Aspidochelone - bodbs_cuffs
 INSERT INTO `mob_droplist` VALUES (183,0,0,1000,16242,50);   -- Aspidochelone - ixion_cape
-INSERT INTO `mob_droplist` VALUES (1450,0,0,1000,14964,150); -- King Behemoth - deimoss_gauntlets
-INSERT INTO `mob_droplist` VALUES (1450,0,0,1000,14968,150); -- King Behemoth - freyas_gloves
-INSERT INTO `mob_droplist` VALUES (1450,0,0,1000,14972,150); -- King Behemoth - hikazu_gote
-INSERT INTO `mob_droplist` VALUES (1450,0,0,1000,14976,150); -- King Behemoth - enlils_kolluks
-INSERT INTO `mob_droplist` VALUES (1450,0,0,1000,14980,150); -- King Behemoth - machas_cuffs
-INSERT INTO `mob_droplist` VALUES (1450,0,0,1000,11289,50);  -- King Behemoth - ixion_cloak
 INSERT INTO `mob_droplist` VALUES (946,0,0,1000,2434,100);   -- Genbu - hadean_abjuration_head
 INSERT INTO `mob_droplist` VALUES (946,0,0,1000,2429,100);   -- Genbu - phantasmal_abjuration_head
 INSERT INTO `mob_droplist` VALUES (2196,0,0,1000,2436,100);  -- Seiryu - hadean_abjuration_hands
@@ -263,6 +206,55 @@ INSERT INTO `mob_droplist` VALUES (2823,0,0,1000,734,100);   -- Olla Grande
 INSERT INTO `mob_droplist` VALUES (2823,0,0,1000,740,100);   -- Olla Grande
 INSERT INTO `mob_droplist` VALUES (2823,0,0,1000,741,100);   -- Olla Grande
 INSERT INTO `mob_droplist` VALUES (2823,0,0,1000,730,100);   -- Olla Grande
+
+-- Sky 2.0 (Thanks Demetrie)
+-- Escha Byakko
+INSERT INTO `mob_droplist` VALUES (3990,0,0,1000,15714,70); -- Escha Byakko - deimoss_leggings
+INSERT INTO `mob_droplist` VALUES (3990,0,0,1000,15718,70); -- Escha Byakko - freyas_ledelsens
+INSERT INTO `mob_droplist` VALUES (3990,0,0,1000,15722,70); -- Escha Byakko - hikazu_sune-ate
+INSERT INTO `mob_droplist` VALUES (3990,0,0,1000,15726,70); -- Escha Byakko - enlils_crackows
+INSERT INTO `mob_droplist` VALUES (3990,0,0,1000,15730,70); -- Escha Byakko - machas_pigaches
+INSERT INTO `mob_droplist` VALUES (3990,0,0,1000,18498,100); -- Escha Byakko - balestarius
+INSERT INTO `mob_droplist` VALUES (3990,0,0,1000,13403,100); -- Escha Byakko - assault_earring
+
+-- Escha Genbu
+INSERT INTO `mob_droplist` VALUES (3991,0,0,1000,14964,70); -- Escha Genbu - deimoss_gauntlets
+INSERT INTO `mob_droplist` VALUES (3991,0,0,1000,14968,70); -- Escha Genbu - freyas_gloves
+INSERT INTO `mob_droplist` VALUES (3991,0,0,1000,14972,70); -- Escha Genbu - hikazu_gote
+INSERT INTO `mob_droplist` VALUES (3991,0,0,1000,14976,70); -- Escha Genbu - enlils_kolluks
+INSERT INTO `mob_droplist` VALUES (3991,0,0,1000,14980,70); -- Escha Genbu - machas_cuffs
+INSERT INTO `mob_droplist` VALUES (3991,0,0,1000,15831,100); -- Escha Genbu - fenian_ring
+INSERT INTO `mob_droplist` VALUES (3991,0,0,1000,17758,100); -- Escha Genbu - ruler
+
+-- Escha Suzaku
+INSERT INTO `mob_droplist` VALUES (3992,0,0,1000,15712,70); -- Escha Suzaku - enyos_leggings
+INSERT INTO `mob_droplist` VALUES (3992,0,0,1000,15716,70); -- Escha Suzaku - njords_ledelsens
+INSERT INTO `mob_droplist` VALUES (3992,0,0,1000,15720,70); -- Escha Suzaku - hoshikazu_kyahan
+INSERT INTO `mob_droplist` VALUES (3992,0,0,1000,15724,70); -- Escha Suzaku - anus_gaiters
+INSERT INTO `mob_droplist` VALUES (3992,0,0,1000,15728,70); -- Escha Suzaku - nemains_sabots
+INSERT INTO `mob_droplist` VALUES (3992,0,0,1000,16002,100); -- Escha Suzaku - roundel_earring
+INSERT INTO `mob_droplist` VALUES (3992,0,0,1000,13624,100); -- Escha Suzaku - enhancing_mantle
+
+-- Escha Seiryu
+INSERT INTO `mob_droplist` VALUES (3993,0,0,1000,15713,70); -- Escha Seiryu - phoboss_sabatons
+INSERT INTO `mob_droplist` VALUES (3993,0,0,1000,15717,70); -- Escha Seiryu - freyrs_ledelsens
+INSERT INTO `mob_droplist` VALUES (3993,0,0,1000,15721,70); -- Escha Seiryu - tsukikazu_sune-ate
+INSERT INTO `mob_droplist` VALUES (3993,0,0,1000,15725,70); -- Escha Seiryu - eas_crackows
+INSERT INTO `mob_droplist` VALUES (3993,0,0,1000,15729,70); -- Escha Seiryu - bodbs_pigaches
+INSERT INTO `mob_droplist` VALUES (3993,0,0,1000,11392,100); -- Escha Seiryu - koschei_crackows
+INSERT INTO `mob_droplist` VALUES (3993,0,0,1000,18598,100); -- Escha Seiryu - prester
+
+-- Escha Kirin - High Prize Items
+INSERT INTO `mob_droplist` VALUES (3989,0,0,1000,11289,50);  -- Escha Kirin - ixion_cloak
+INSERT INTO `mob_droplist` VALUES (3989,0,0,1000,16356,100); -- Escha Kirin - nimues_tights
+INSERT INTO `mob_droplist` VALUES (3989,0,0,1000,15917,100); -- Escha Kirin - cuchulains_belt
+INSERT INTO `mob_droplist` VALUES (3989,0,0,1000,11365,100); -- Escha Kirin - karasutengu_kogake
+INSERT INTO `mob_droplist` VALUES (3989,0,0,1000,16160,50);  -- Escha Kirin - ree_habalos_headgear
+INSERT INTO `mob_droplist` VALUES (3989,0,0,1000,16158,50);  -- Escha Kirin - gnadbhods_helm
+INSERT INTO `mob_droplist` VALUES (3989,0,0,1000,15918,100); -- Escha Kirin - witch_sash
+INSERT INTO `mob_droplist` VALUES (3989,0,0,1000,16241,100); -- Escha Kirin - cuchulains_mantle
+INSERT INTO `mob_droplist` VALUES (3989,0,0,1000,16159,50);  -- Escha Kirin - zhagos_barbut
+INSERT INTO `mob_droplist` VALUES (3989,0,0,1000,16001,100); -- Escha Kirin - crapaud_earring
 
 ######
 ## Update Angel skin drop-rates
