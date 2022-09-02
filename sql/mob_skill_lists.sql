@@ -3770,58 +3770,56 @@ INSERT INTO `mob_skill_lists` VALUES ('The_Briars_elv',1160,40); -- Vorpal Blade
 INSERT INTO `mob_skill_lists` VALUES ('The_Briars_elv',1160,42); -- Savage Blade
 INSERT INTO `mob_skill_lists` VALUES ('The_Briars_gal',1161,86); -- Raging Rush
 INSERT INTO `mob_skill_lists` VALUES ('The_Briars_gal',1161,91); -- Fell Cleave
-
+-- 1162 -> Wamouracampa_curl
+INSERT INTO `mob_skill_lists` VALUES ('TRUST_Shantotto_II_Melee',1163,3739); -- shantotto_ii_melee (no name)
 INSERT INTO `mob_skill_lists` VALUES ('Snoll_Tzar',1164,599); -- Arctic Impact
 INSERT INTO `mob_skill_lists` VALUES ('Snoll_Tzar',1164,600); -- Cold Wave
 INSERT INTO `mob_skill_lists` VALUES ('Snoll_Tzar',1164,601); -- Hiemal Storm
 INSERT INTO `mob_skill_lists` VALUES ('Snoll_Tzar',1164,598); -- Berserk
 
-INSERT INTO `mob_skill_lists` VALUES('Shikaree_X', 1165, 18); -- Shadowstitch
-INSERT INTO `mob_skill_lists` VALUES('Shikaree_X', 1165, 23); -- Dancing edge
-INSERT INTO `mob_skill_lists` VALUES('Shikaree_X', 1165, 25); -- Evisceration
+INSERT INTO `mob_skill_lists` VALUES ('Shikaree_X',1165,18); -- Shadowstitch
+INSERT INTO `mob_skill_lists` VALUES ('Shikaree_X',1165,23); -- Dancing edge
+INSERT INTO `mob_skill_lists` VALUES ('Shikaree_X',1165,25); -- Evisceration
 
-INSERT INTO `mob_skill_lists` VALUES('Shikaree_Y', 1166, 101); -- Vorpal Scythe
-INSERT INTO `mob_skill_lists` VALUES('Shikaree_Y', 1166, 102); -- Guillotine
-INSERT INTO `mob_skill_lists` VALUES('Shikaree_Y', 1166, 104); -- Spiral Hell
+INSERT INTO `mob_skill_lists` VALUES ('Shikaree_Y',1166,101); -- Vorpal Scythe
+INSERT INTO `mob_skill_lists` VALUES ('Shikaree_Y',1166,102); -- Guillotine
+INSERT INTO `mob_skill_lists` VALUES ('Shikaree_Y',1166,104); -- Spiral Hell
 
-INSERT INTO `mob_skill_lists` VALUES('Shikaree_Z', 1167, 116); -- Penta Thrust
-INSERT INTO `mob_skill_lists` VALUES('Shikaree_Z', 1167, 118); -- Skewer
-INSERT INTO `mob_skill_lists` VALUES('Shikaree_Z', 1167, 119); -- Wheeling Thrust
-INSERT INTO `mob_skill_lists` VALUES('Shikaree_Z', 1167, 120); -- Impulse Drive
+INSERT INTO `mob_skill_lists` VALUES ('Shikaree_Z',1167,116); -- Penta Thrust
+INSERT INTO `mob_skill_lists` VALUES ('Shikaree_Z',1167,118); -- Skewer
+INSERT INTO `mob_skill_lists` VALUES ('Shikaree_Z',1167,119); -- Wheeling Thrust
+INSERT INTO `mob_skill_lists` VALUES ('Shikaree_Z',1167,120); -- Impulse Drive
+
+INSERT INTO `mob_skill_lists` VALUES ('Teporingo',1168,258);
+INSERT INTO `mob_skill_lists` VALUES ('Bugbear_Muscleman',1169,361);
 
 INSERT INTO `mob_skill_lists` VALUES ('Cop_Wardens',1170,561); -- Electromagnetic Field
 INSERT INTO `mob_skill_lists` VALUES ('Cop_Wardens',1170,562); -- Reactive Armor
 
 INSERT INTO `mob_skill_lists` VALUES ('Tenzen_Ranged',1171,1396); -- Tenzen Ranged Attack
 
--- 1162 -> Wamouracampa_curl
+INSERT INTO `mob_skill_lists` VALUES ('Goblin_NM',1172,590);
+INSERT INTO `mob_skill_lists` VALUES ('Goblin_NM',1172,591);
+INSERT INTO `mob_skill_lists` VALUES ('Goblin_NM',1172,1081);
+INSERT INTO `mob_skill_lists` VALUES ('Goblin_NM',1172,1082);
+INSERT INTO `mob_skill_lists` VALUES ('Goblin_NM',1172,1084);
+INSERT INTO `mob_skill_lists` VALUES ('Goblin_NM',1172,1086);
+INSERT INTO `mob_skill_lists` VALUES ('Ladybug_Night',1173,2178);
+INSERT INTO `mob_skill_lists` VALUES ('Apis',1174,493);
+INSERT INTO `mob_skill_lists` VALUES ('Apis',1174,494);
+INSERT INTO `mob_skill_lists` VALUES ('Apis',1174,495);
+INSERT INTO `mob_skill_lists` VALUES ('Apis',1174,496);
+INSERT INTO `mob_skill_lists` VALUES ('Apis',1174,497);
+INSERT INTO `mob_skill_lists` VALUES ('Apis',1174,1364);
+INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1175,1718);
+INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1175,1720);
+INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1175,1721);
+INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1175,1722);
+INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1175,1723);
+INSERT INTO `mob_skill_lists` VALUES ('Supplespine_Mujwuj',1176,1064);
+INSERT INTO `mob_skill_lists` VALUES ('Supplespine_Mujwuj',1176,609);
 
-INSERT INTO `mob_skill_lists` VALUES ('TRUST_Shantotto_II_Melee',1163,3739); -- shantotto_ii_melee (no name)
-INSERT INTO `mob_skill_lists` VALUES ('Teporingo',1164,258);
-INSERT INTO `mob_skill_lists` VALUES ('Bugbear_Muscleman',1165,361);
-INSERT INTO `mob_skill_lists` VALUES ('Goblin_NM',1166,590);
-INSERT INTO `mob_skill_lists` VALUES ('Goblin_NM',1166,591);
-INSERT INTO `mob_skill_lists` VALUES ('Goblin_NM',1166,1081);
-INSERT INTO `mob_skill_lists` VALUES ('Goblin_NM',1166,1082);
-INSERT INTO `mob_skill_lists` VALUES ('Goblin_NM',1166,1084);
-INSERT INTO `mob_skill_lists` VALUES ('Goblin_NM',1166,1086);
-INSERT INTO `mob_skill_lists` VALUES ('Ladybug_Night',1167,2178);
-INSERT INTO `mob_skill_lists` VALUES ('Apis',1168,493);
-INSERT INTO `mob_skill_lists` VALUES ('Apis',1168,494);
-INSERT INTO `mob_skill_lists` VALUES ('Apis',1168,495);
-INSERT INTO `mob_skill_lists` VALUES ('Apis',1168,496);
-INSERT INTO `mob_skill_lists` VALUES ('Apis',1168,497);
-INSERT INTO `mob_skill_lists` VALUES ('Apis',1168,1364);
-INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1169,1718);
-INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1169,1720);
-INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1169,1721);
-INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1169,1722);
-INSERT INTO `mob_skill_lists` VALUES ('Puk_M',1169,1723);
-
-INSERT INTO `mob_skill_lists` VALUES('Supplespine_Mujwuj', 1176, 1064);
-INSERT INTO `mob_skill_lists` VALUES('Supplespine_Mujwuj', 1176, 609);
-
--- Next available ID: 1176
+-- Next available ID: 1177
 
 -- ------------------------------------------------------------
 -- Start of Ambuscade section
