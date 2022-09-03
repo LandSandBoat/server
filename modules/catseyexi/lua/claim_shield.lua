@@ -32,6 +32,9 @@ local nmsToShield =
     { "Sea_Serpent_Grotto", "Charybdis" },
     { "Wajaom_Woodlands", "Hydra" },
     { "Western_Altepa_Desert", "King_Vinegarroon" },
+	{ "Sea_Serpent_Grotto", "Novv_the_Whitehearted" },
+	{ "Sea_Serpent_Grotto", "Zuug_the_Shoreleaper" }
+	{ "Sea_Serpent_Grotto", "Ocean_Sahagin" },
 }
 
 -- NOTE: At the time we iterate over these entries, the Lua zone and mob objects won't be ready,

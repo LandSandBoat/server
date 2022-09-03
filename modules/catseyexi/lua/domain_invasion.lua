@@ -472,7 +472,7 @@ m:addOverride("xi.zones.Xarcabard.Zone.onInitialize", function(zone)
 
         onTrigger = function(player, npc)
             npcUtil.giveItem(player, xi.items.SCROLL_OF_INSTANT_WARP) -- scroll_of_instant_warp
-            player:injectActionPacket(6, 600, 0, 0, 0)
+            player:injectActionPacket(player:getID(), 6, 600, 0, 0, 0, 0, 0)
 		          
 		    player:timer(2000, function(playerArg)
        	    	player:setPos(347.177, 20.616, 293.256, 36, 267)

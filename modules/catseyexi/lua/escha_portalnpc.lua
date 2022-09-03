@@ -24,14 +24,14 @@ local menu =
                 "Suzaku's Nest",
                 function(playerarg)
                     player:PrintToPlayer("Electricty begins surging through your body!!", xi.msg.channel.NS_SAY)
-    			    player:injectActionPacket(6, 600, 0, 0, 0)
+    			    playerArg:injectActionPacket(playerArg:getID(), 6, 600, 0, 0, 0, 0, 0)
 
     			    player:timer(2000, function(playerArg)
                         player:setPos(-454.030, -3.626, -147.184)
 					end)
 
     		        player:timer(2750, function(playerArg)
-						player:injectActionPacket(6, 602, 0, 0, 0)
+						player:injectActionPacket(playerArg:getID(), 6, 602, 0, 0, 0, 0, 0)
 					end)
                 end,
             },
@@ -39,14 +39,14 @@ local menu =
                 "Byakko's Pride",
                 function(playerArg)
                     player:PrintToPlayer("Electricty begins surging through your body!!", xi.msg.channel.NS_SAY)
-    			    player:injectActionPacket(6, 600, 0, 0, 0)
+    			    playerArg:injectActionPacket(playerArg:getID(), 6, 600, 0, 0, 0, 0, 0)
 
     			    player:timer(2000, function(playerArg)
                         player:setPos(-280.484, -3.626, 386.104, 36)
 					end)
 
     		        player:timer(2750, function(playerArg)
-						player:injectActionPacket(6, 602, 0, 0, 0)
+						player:injectActionPacket(playerArg:getID(), 6, 602, 0, 0, 0, 0, 0)
 					end)
                 end,
             },
@@ -54,14 +54,14 @@ local menu =
                 "Genbu's Cove",
                 function(playerArg)
                     player:PrintToPlayer("Electricty begins surging through your body!!", xi.msg.channel.NS_SAY)
-    			    player:injectActionPacket(6, 600, 0, 0, 0)
+    			    playerArg:injectActionPacket(playerArg:getID(), 6, 600, 0, 0, 0, 0, 0)
 
     			    player:timer(2000, function(playerArg)
                         player:setPos(278.092, -3.998, 382.416, 88)
 					end)
 
     		        player:timer(2750, function(playerArg)
-						player:injectActionPacket(6, 602, 0, 0, 0)
+						player:injectActionPacket(playerArg:getID(), 6, 602, 0, 0, 0, 0, 0)
 					end)
                 end,
             },
@@ -69,14 +69,14 @@ local menu =
                 "Seiryu's Shadows",
                 function(playerArg)
                     player:PrintToPlayer("Electricty begins surging through your body!!", xi.msg.channel.NS_SAY)
-    			    player:injectActionPacket(6, 600, 0, 0, 0)
+    			    playerArg:injectActionPacket(playerArg:getID(), 6, 600, 0, 0, 0, 0, 0)
 
     			    player:timer(2000, function(playerArg)
                         player:setPos(451.753, -3.790, -146.248, 141)
 					end)
 
     		        player:timer(2750, function(playerArg)
-						player:injectActionPacket(6, 602, 0, 0, 0)
+						player:injectActionPacket(playerArg:getID(), 6, 602, 0, 0, 0, 0, 0)
 					end)
                 end,
             },
@@ -84,14 +84,14 @@ local menu =
                 "???",
                 function(playerArg)
                     player:PrintToPlayer("Electricty begins surging through your body!!", xi.msg.channel.NS_SAY)
-       			    player:injectActionPacket(6, 600, 0, 0, 0)
+       			    playerArg:injectActionPacket(playerArg:getID(), 6, 600, 0, 0, 0, 0, 0)
    
        			    player:timer(2000, function(playerArg)
                         player:setPos(-1.626, -52.365, -583.528, 65)
    					end)
    
        		        player:timer(2750, function(playerArg)
-   						player:injectActionPacket(6, 602, 0, 0, 0)
+   						player:injectActionPacket(playerArg:getID(), 6, 602, 0, 0, 0, 0, 0)
    					end)
 				end,
             },
@@ -117,14 +117,14 @@ local menu =
             {
                 "Yes, take me back.",
                 function(playerarg)
-                    player:injectActionPacket(6, 600, 0, 0, 0)
+                    playerArg:injectActionPacket(playerArg:getID(), 6, 600, 0, 0, 0, 0, 0)
 	    
                     player:timer(2000, function(playerArg)
                        player:setPos(-0.371, -34.278, -466.980, 192)
                     end)
 	    
                     player:timer(2750, function(playerArg)
-                        player:injectActionPacket(6, 602, 0, 0, 0)
+                        player:injectActionPacket(playerArg:getID(), 6, 602, 0, 0, 0, 0, 0)
                     end)
                 end,
             },
@@ -155,14 +155,14 @@ local menu =
             {
                 "Yes",
                 function(playerarg)
-                    player:injectActionPacket(6, 600, 0, 0, 0)
+                    playerArg:injectActionPacket(playerArg:getID(), 6, 600, 0, 0, 0, 0, 0)
 	    
                     player:timer(2000, function(playerArg)
                        player:setPos(-0.371, -34.278, -466.980, 192)
                     end)
 	    
                     player:timer(2750, function(playerArg)
-                        player:injectActionPacket(6, 602, 0, 0, 0)
+                        player:injectActionPacket(playerArg:getID(), 6, 602, 0, 0, 0, 0, 0)
                     end)
                 end,
             },
@@ -193,14 +193,14 @@ local menu =
             {
                 "Yes",
                 function(playerarg)
-                    player:injectActionPacket(6, 600, 0, 0, 0)
+                    playerArg:injectActionPacket(playerArg:getID(), 6, 600, 0, 0, 0, 0, 0)
 	    
                     player:timer(2000, function(playerArg)
                        player:setPos(-0.371, -34.278, -466.980, 192)
                     end)
 	    
                     player:timer(2750, function(playerArg)
-                        player:injectActionPacket(6, 602, 0, 0, 0)
+                        player:injectActionPacket(playerArg:getID(), 6, 602, 0, 0, 0, 0, 0)
                     end)
                 end,
             },
@@ -231,14 +231,14 @@ local menu =
             {
                 "Yes",
                 function(playerarg)
-                    player:injectActionPacket(6, 600, 0, 0, 0)
+                    playerArg:injectActionPacket(playerArg:getID(), 6, 600, 0, 0, 0, 0, 0)
 	    
                     player:timer(2000, function(playerArg)
                        player:setPos(-0.371, -34.278, -466.980, 192)
                     end)
 	    
                     player:timer(2750, function(playerArg)
-                        player:injectActionPacket(6, 602, 0, 0, 0)
+                        player:injectActionPacket(playerArg:getID(), 6, 602, 0, 0, 0, 0, 0)
                     end)
                 end,
             },
@@ -269,14 +269,14 @@ local menu =
             {
                 "Yes",
                 function(playerarg)
-                    player:injectActionPacket(6, 600, 0, 0, 0)
+                    playerArg:injectActionPacket(playerArg:getID(), 6, 600, 0, 0, 0, 0, 0)
 	    
                     player:timer(2000, function(playerArg)
                        player:setPos(-0.371, -34.278, -466.980, 192)
                     end)
 	    
                     player:timer(2750, function(playerArg)
-                        player:injectActionPacket(6, 602, 0, 0, 0)
+                        player:injectActionPacket(playerArg:getID(), 6, 602, 0, 0, 0, 0, 0)
                     end)
                 end,
             },
@@ -307,14 +307,14 @@ local menu =
             {
                 "Yes",
                 function(playerarg)
-                    player:injectActionPacket(6, 600, 0, 0, 0)
+                    playerArg:injectActionPacket(playerArg:getID(), 6, 600, 0, 0, 0, 0, 0)
 	    
                     player:timer(2000, function(playerArg)
                        player:setPos(-0.371, -34.278, -466.980, 192)
                     end)
 	    
                     player:timer(2750, function(playerArg)
-                        player:injectActionPacket(6, 602, 0, 0, 0)
+                        player:injectActionPacket(playerArg:getID(), 6, 602, 0, 0, 0, 0, 0)
                     end)
                 end,
             },
@@ -345,14 +345,14 @@ local menu =
             {
                 "Yes",
                 function(playerarg)
-                    player:injectActionPacket(6, 600, 0, 0, 0)
+                    playerArg:injectActionPacket(playerArg:getID(), 6, 600, 0, 0, 0, 0, 0)
 	    
                     player:timer(2000, function(playerArg)
                        player:setPos(-0.371, -34.278, -466.980, 192)
                     end)
 	    
                     player:timer(2750, function(playerArg)
-                        player:injectActionPacket(6, 602, 0, 0, 0)
+                        player:injectActionPacket(playerArg:getID(), 6, 602, 0, 0, 0, 0, 0)
                     end)
                 end,
             },
@@ -383,14 +383,14 @@ local menu =
             {
                 "Yes",
                 function(playerarg)
-                    player:injectActionPacket(6, 600, 0, 0, 0)
+                    playerArg:injectActionPacket(playerArg:getID(), 6, 600, 0, 0, 0, 0, 0)
 	    
                     player:timer(2000, function(playerArg)
                        player:setPos(-0.371, -34.278, -466.980, 192)
                     end)
 	    
                     player:timer(2750, function(playerArg)
-                        player:injectActionPacket(6, 602, 0, 0, 0)
+                        player:injectActionPacket(playerArg:getID(), 6, 602, 0, 0, 0, 0, 0)
                     end)
                 end,
             },
@@ -421,14 +421,14 @@ local menu =
             {
                 "Yes",
                 function(playerarg)
-                    player:injectActionPacket(6, 600, 0, 0, 0)
+                    playerArg:injectActionPacket(playerArg:getID(), 6, 600, 0, 0, 0, 0, 0)
 	    
                     player:timer(2000, function(playerArg)
                        player:setPos(-0.371, -34.278, -466.980, 192)
                     end)
 	    
                     player:timer(2750, function(playerArg)
-                        player:injectActionPacket(6, 602, 0, 0, 0)
+                        player:injectActionPacket(playerArg:getID(), 6, 602, 0, 0, 0, 0, 0)
                     end)
                 end,
             },
@@ -460,14 +460,14 @@ local menu =
             {
                 "Yes",
                 function(playerarg)
-                    player:injectActionPacket(6, 600, 0, 0, 0)
+                    playerArg:injectActionPacket(playerArg:getID(), 6, 600, 0, 0, 0, 0, 0)
 	    
                     player:timer(2000, function(playerArg)
                        player:setPos(-0.371, -34.278, -466.980, 192)
                     end)
 	    
                     player:timer(2750, function(playerArg)
-                        player:injectActionPacket(6, 602, 0, 0, 0)
+                        player:injectActionPacket(playerArg:getID(), 6, 602, 0, 0, 0, 0, 0)
                     end)
                 end,
             },
@@ -498,14 +498,14 @@ local menu =
             {
                 "Yes",
                 function(playerarg)
-                    player:injectActionPacket(6, 600, 0, 0, 0)
+                    playerArg:injectActionPacket(playerArg:getID(), 6, 600, 0, 0, 0, 0, 0)
 	    
                     player:timer(2000, function(playerArg)
                        player:setPos(-0.371, -34.278, -466.980, 192)
                     end)
 	    
                     player:timer(2750, function(playerArg)
-                        player:injectActionPacket(6, 602, 0, 0, 0)
+                        player:injectActionPacket(playerArg:getID(), 6, 602, 0, 0, 0, 0, 0)
                     end)
                 end,
             },
@@ -537,14 +537,14 @@ local menu =
             {
                 "Yes",
                 function(playerarg)
-                    player:injectActionPacket(6, 600, 0, 0, 0)
+                    playerArg:injectActionPacket(playerArg:getID(), 6, 600, 0, 0, 0, 0, 0)
 	    
                     player:timer(2000, function(playerArg)
                        player:setPos(-0.371, -34.278, -466.980, 192)
                     end)
 	    
                     player:timer(2750, function(playerArg)
-                        player:injectActionPacket(6, 602, 0, 0, 0)
+                        player:injectActionPacket(playerArg:getID(), 6, 602, 0, 0, 0, 0, 0)
                     end)
                 end,
             },
@@ -575,14 +575,14 @@ local menu =
             {
                 "Yes",
                 function(playerarg)
-                    player:injectActionPacket(6, 600, 0, 0, 0)
+                    playerArg:injectActionPacket(playerArg:getID(), 6, 600, 0, 0, 0, 0, 0)
 	    
                     player:timer(2000, function(playerArg)
                        player:setPos(-0.371, -34.278, -466.980, 192)
                     end)
 	    
                     player:timer(2750, function(playerArg)
-                        player:injectActionPacket(6, 602, 0, 0, 0)
+                        player:injectActionPacket(playerArg:getID(), 6, 602, 0, 0, 0, 0, 0)
                     end)
                 end,
             },

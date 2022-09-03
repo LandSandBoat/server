@@ -27,6 +27,9 @@ local nms_to_persist =
 	{ "Garlaige_Citadel", "Serket", function() return 75600 + math.random(0, 6) * 1800 end }, -- 21 - 24 hours with half hour windows
 	{ "Maze_of_Shakhrami", "Argus", function() return 75600 + math.random(0, 6) * 1800 end }, -- 21 - 24 hours with half hour windows
 	{ "Maze_of_Shakhrami", "Leech_King", function() return 75600 + math.random(0, 6) * 1800 end }, -- 21 - 24 hours with half hour windows
+	{ "Halvung", "Gurfurlur_the_Menacing", function() return 259200 + math.random(0, 96) * 1800 end }, -- 3 - 5 days with half hour windows
+	{ "Arrapago_Reef", "Medusa", function() return 259200 + math.random(0, 96) * 1800 end }, -- 3 - 5 days with half hour windows
+	{ "Mamook", "Gulool_Ja_Ja", function() return 259200 + math.random(0, 96) * 1800 end }, -- 3 - 5 days with half hour windows
 }
 
 -- NOTE: At the time we iterate over these entries, the Lua zone and mob objects won't be ready,

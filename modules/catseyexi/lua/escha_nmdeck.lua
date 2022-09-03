@@ -32,7 +32,7 @@ m:addOverride("xi.zones.Escha_RuAun.Zone.onInitialize", function(zone)
         widescan = 1,
 
         onTrigger = function(player, npc)
-		    player:injectActionPacket(6, 600, 0, 0, 0)
+		    player:injectActionPacket(playerArg:getID(), 6, 600, 0, 0, 0, 0, 0)
 		      
 			player:timer(2000, function(playerArg)
        			player:setPos(-453.837, -71.552, -308.441, 102)
@@ -55,7 +55,7 @@ m:addOverride("xi.zones.Escha_RuAun.Zone.onInitialize", function(zone)
         rotation = 28,
 
         onTrigger = function(player, npc)
-	        player:injectActionPacket(6, 600, 0, 0, 0)
+	        player:injectActionPacket(playerArg:getID(), 6, 600, 0, 0, 0, 0, 0)
 
 			player:timer(2000, function(playerArg)
 			    player:setPos(-432.945, -71.552, 336.247, 156)
@@ -78,14 +78,14 @@ m:addOverride("xi.zones.Escha_RuAun.Zone.onInitialize", function(zone)
         rotation = 28,
 
         onTrigger = function(player, npc)
-	        player:injectActionPacket(6, 600, 0, 0, 0)
+	        player:injectActionPacket(playerArg:getID(), 6, 600, 0, 0, 0, 0, 0)
 
 			player:timer(2000, function(playerArg)
 			    player:setPos(185.649, -71.552, 515.620, 211)
 			end)
 			
 		    player:timer(2750, function(playerArg)
-    		    player:injectActionPacket(6, 602, 0, 0, 0)
+    		    player:injectActionPacket(playerArg:getID(), 6, 602, 0, 0, 0, 0, 0)
 			end)
 		end,
     })
@@ -101,14 +101,14 @@ m:addOverride("xi.zones.Escha_RuAun.Zone.onInitialize", function(zone)
         rotation = 28,
 
         onTrigger = function(player, npc)
-	        player:injectActionPacket(6, 600, 0, 0, 0)
+	        player:injectActionPacket(playerArg:getID(), 6, 600, 0, 0, 0, 0, 0)
 			
 			player:timer(2000, function(playerArg)
 			    player:setPos(548, -71, -17, 0)
 			end)
 			
 		    player:timer(2750, function(playerArg)
-    		    player:injectActionPacket(6, 602, 0, 0, 0)
+    		    player:injectActionPacket(playerArg:getID(), 6, 602, 0, 0, 0, 0, 0)
 			end)
 		end,
     })
