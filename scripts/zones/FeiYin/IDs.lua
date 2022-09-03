@@ -21,6 +21,7 @@ zones[xi.zone.FEIYIN] =
         CARRIED_OVER_POINTS                = 7180,  -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY            = 7181,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                       = 7182,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        MEMBERS_LEVELS_ARE_RESTRICTED      = 7202,  -- Your party is unable to participate because certain members' levels are restricted.
         FISHING_MESSAGE_OFFSET             = 7236,  -- You can't fish here.
         CHEST_UNLOCKED                     = 7367,  -- You unlock the chest!
         SOFTLY_SHIMMERING_LIGHT            = 7493,  -- You see a softly shimmering light...

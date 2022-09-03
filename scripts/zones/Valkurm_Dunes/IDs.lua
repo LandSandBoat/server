@@ -22,6 +22,7 @@ zones[xi.zone.VALKURM_DUNES] =
         CARRIED_OVER_POINTS            = 7023,  -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY        = 7024,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                   = 7025,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        MEMBERS_LEVELS_ARE_RESTRICTED  = 7045,  -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                  = 7079,  -- Tallying conquest results...
         BEASTMEN_BANNER                = 7160,  -- There is a beastmen's banner.
         FISHING_MESSAGE_OFFSET         = 7238,  -- You can't fish here.

@@ -24,6 +24,7 @@ zones[xi.zone.CRAWLERS_NEST] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7192,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7193,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         GEOMAGNETRON_ATTUNED          = 7202,  -- Your <keyitem> has been attuned to a geomagnetic fount in the corresponding locale.
+        MEMBERS_LEVELS_ARE_RESTRICTED = 7213,  -- Your party is unable to participate because certain members' levels are restricted.
         CHEST_UNLOCKED                = 7260,  -- You unlock the chest!
         SOMEONE_HAS_BEEN_DIGGING_HERE = 7268,  -- Someone has been digging here.
         EQUIPMENT_NOT_PURIFIED        = 7269,  -- Your equipment has not been completely purified.

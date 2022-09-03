@@ -24,6 +24,7 @@ zones[xi.zone.SOUTHERN_SAN_DORIA] =
         CARRIED_OVER_POINTS            = 6473,  -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY        = 6474,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                   = 6475,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        MEMBERS_LEVELS_ARE_RESTRICTED  = 6495,  -- Your party is unable to participate because certain members' levels are restricted.
         YOU_LEARNED_TRUST              = 6497,  -- You learned Trust: <name>!
         CALL_MULTIPLE_ALTER_EGO        = 6498,  -- You are now able to call multiple alter egos.
         MOG_LOCKER_OFFSET              = 6686,  -- Your Mog Locker lease is valid until <timestamp>, kupo.
