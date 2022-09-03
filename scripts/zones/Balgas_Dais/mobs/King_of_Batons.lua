@@ -9,7 +9,7 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:SetMod(xi.mod.DOUBLE_ATTACK, 25)
+    mob:SetMod(xi.mod.DOUBLE_ATTACK, 50)
 end
 
 entity.onMobEngaged = function(mob, target)
