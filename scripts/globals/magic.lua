@@ -788,7 +788,7 @@ function getEffectResistance(target, effect, returnBuild, caster)
         end
     end
 
-    if returnBuild ~= nil then
+    if returnBuild ~= nil and returnBuild ~= false then
         return buildres
     end
 

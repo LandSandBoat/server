@@ -1,13 +1,13 @@
 -----------------------------------
 -- Zone: Southern_San_dOria (230)
 -----------------------------------
-local ID = require("scripts/zones/Southern_San_dOria/IDs")
-require("scripts/globals/events/harvest_festivals")
-require("scripts/quests/flyers_for_regine")
-require("scripts/globals/conquest")
-require("scripts/globals/settings")
-require("scripts/globals/chocobo")
-require("scripts/globals/zone")
+local ID = require('scripts/zones/Southern_San_dOria/IDs')
+require('scripts/globals/events/harvest_festivals')
+require('scripts/quests/flyers_for_regine')
+require('scripts/globals/conquest')
+require('scripts/globals/settings')
+require('scripts/globals/chocobo')
+require('scripts/globals/zone')
 -----------------------------------
 local zone_object = {}
 
@@ -27,6 +27,7 @@ zone_object.onZoneIn = function(player, prevZone)
         if xi.settings.main.NEW_CHARACTER_CUTSCENE == 1 then
             cs = 503
         end
+
         player:setPos(-96, 1, -40, 224)
         player:setHomePoint()
     end

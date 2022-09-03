@@ -1451,6 +1451,30 @@ INSERT INTO `bcnm_battlefield` VALUES (865,3,16871472,0);
 INSERT INTO `bcnm_battlefield` VALUES (865,3,16871473,0);
 INSERT INTO `bcnm_battlefield` VALUES (865,3,16871474,0);
 INSERT INTO `bcnm_battlefield` VALUES (896,1,16896156,3); -- storms_of_fate
+INSERT INTO `bcnm_battlefield` VALUES (897,1,16896157,3); -- wyrmking_descends
+INSERT INTO `bcnm_battlefield` VALUES (897,1,16896158,0);
+INSERT INTO `bcnm_battlefield` VALUES (897,1,16896159,0);
+INSERT INTO `bcnm_battlefield` VALUES (897,1,16896160,0);
+INSERT INTO `bcnm_battlefield` VALUES (897,1,16896161,0);
+INSERT INTO `bcnm_battlefield` VALUES (897,1,16896162,0);
+INSERT INTO `bcnm_battlefield` VALUES (897,1,16896163,0);
+INSERT INTO `bcnm_battlefield` VALUES (897,1,16896164,0);
+INSERT INTO `bcnm_battlefield` VALUES (897,1,16896165,0);
+INSERT INTO `bcnm_battlefield` VALUES (897,1,16896166,0);
+INSERT INTO `bcnm_battlefield` VALUES (897,1,16896167,0);
+INSERT INTO `bcnm_battlefield` VALUES (897,1,16896168,0);
+INSERT INTO `bcnm_battlefield` VALUES (897,1,16896169,0);
+INSERT INTO `bcnm_battlefield` VALUES (897,1,16896170,0);
+INSERT INTO `bcnm_battlefield` VALUES (897,1,16896171,0);
+INSERT INTO `bcnm_battlefield` VALUES (897,1,16896172,0);
+INSERT INTO `bcnm_battlefield` VALUES (897,1,16896173,0);
+INSERT INTO `bcnm_battlefield` VALUES (928,1,16900312,1); -- ouryu_cometh
+INSERT INTO `bcnm_battlefield` VALUES (928,1,16900313,1);
+INSERT INTO `bcnm_battlefield` VALUES (928,1,16900314,3);
+INSERT INTO `bcnm_battlefield` VALUES (928,1,16900315,1);
+INSERT INTO `bcnm_battlefield` VALUES (928,1,16900316,1);
+INSERT INTO `bcnm_battlefield` VALUES (928,1,16900317,1);
+INSERT INTO `bcnm_battlefield` VALUES (928,1,16900318,1);
 INSERT INTO `bcnm_battlefield` VALUES (960,1,16904193,3); -- ancient_vows
 INSERT INTO `bcnm_battlefield` VALUES (960,1,16904194,3);
 INSERT INTO `bcnm_battlefield` VALUES (960,1,16904195,3);

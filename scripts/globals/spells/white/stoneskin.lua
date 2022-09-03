@@ -12,7 +12,11 @@ require("scripts/globals/utils")
 local spell_object = {}
 
 spell_object.onMagicCastingCheck = function(caster, target, spell)
-    return 0
+    if caster:isMob() and target:hasStatusEffect(xi.effect.STONESKIN) then
+        return 1
+    else
+        return 0
+    end
 end
 
 spell_object.onSpellCast = function(caster, target, spell)

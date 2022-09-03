@@ -369,14 +369,14 @@ xi.mission.id =
         GLIMMER_OF_LIFE            = 43, -- ±
         TIME_SLIPS_AWAY            = 44, -- ±
         WHEN_WILLS_COLLIDE         = 45, -- ±
-        WHISPERS_OF_DAWN           = 46,
-        A_DREAMY_INTERLUDE         = 47,
-        CAIT_IN_THE_WOODS          = 48,
-        FORK_IN_THE_ROAD           = 49,
-        MAIDEN_OF_THE_DUSK         = 50,
-        WHERE_IT_ALL_BEGAN         = 51,
-        A_TOKEN_OF_TROTH           = 52,
-        LEST_WE_FORGET             = 53,
+        WHISPERS_OF_DAWN           = 46, -- ±
+        A_DREAMY_INTERLUDE         = 47, -- ±
+        CAIT_IN_THE_WOODS          = 48, -- ±
+        FORK_IN_THE_ROAD           = 49, -- ±
+        MAIDEN_OF_THE_DUSK         = 50, -- ±
+        WHERE_IT_ALL_BEGAN         = 51, -- ±
+        A_TOKEN_OF_TROTH           = 52, -- ±
+        LEST_WE_FORGET             = 53, -- ±
     },
 
     -----------------------------------
@@ -598,9 +598,9 @@ xi.mission.id =
         TAKE_WING                       = 66,  -- ±
         PRIME_NUMBER                    = 68,  -- ±
         FROM_THE_RUINS                  = 70,  -- ±
-        CAUTERIZE                       = 72,
-        UNCERTAIN_DESTINATIONS          = 78,
-        GANGED_UP_ON                    = 80,
+        CAUTERIZE                       = 72,  -- ±
+        UNCERTAIN_DESTINATIONS          = 78,  -- ±
+        GANGED_UP_ON                    = 80,  -- ±
         SACRIFICE                       = 83,
         SOMBER_DREAMS                   = 86,
         OF_LIGHT_AND_DARKNESS           = 92,

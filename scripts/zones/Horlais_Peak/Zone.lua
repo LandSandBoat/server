@@ -1,10 +1,8 @@
 -----------------------------------
---
 -- Zone: Horlais_Peak (139)
---
 -----------------------------------
-local ID = require("scripts/zones/Horlais_Peak/IDs")
-require("scripts/globals/conquest")
+local ID = require('scripts/zones/Horlais_Peak/IDs')
+require('scripts/globals/conquest')
 -----------------------------------
 local zone_object = {}
 
@@ -13,9 +11,11 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
+
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(-536.363, 157.713, -210.819, 17)
     end
+
     return cs
 end
 

@@ -1,12 +1,10 @@
 -----------------------------------
---
 -- Zone: Garlaige_Citadel (200)
---
 -----------------------------------
-local ID = require("scripts/zones/Garlaige_Citadel/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/treasure")
-require("scripts/globals/status")
+local ID = require('scripts/zones/Garlaige_Citadel/IDs')
+require('scripts/globals/conquest')
+require('scripts/globals/treasure')
+require('scripts/globals/status')
 -----------------------------------
 local zone_object = {}
 
@@ -16,11 +14,13 @@ zone_object.onInitialize = function(zone)
     zone:registerRegion(2, -208, -1, 212, -206, 1, 215)
     zone:registerRegion(3, -213, -1, 224, -211, 1, 227)
     zone:registerRegion(4, -213, -1, 212, -211, 1, 215)
+
     -- Banishing Gate #2
     zone:registerRegion(10,  -51, -1,  82,  -49, 1,  84)
     zone:registerRegion(11, -151, -1,  82, -149, 1,  84)
     zone:registerRegion(12,  -51, -1, 115,  -49, 1, 117)
     zone:registerRegion(13, -151, -1, 115, -149, 1, 117)
+
     -- Banishing Gate #3
     zone:registerRegion(19, -190, -1, 355, -188, 1, 357)
     zone:registerRegion(20, -130, -1, 355, -128, 1, 357)

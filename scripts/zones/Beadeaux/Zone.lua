@@ -1,17 +1,14 @@
 -----------------------------------
---
 -- Zone: Beadeaux (147)
---
 -----------------------------------
-local ID = require("scripts/zones/Beadeaux/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/missions")
-require("scripts/globals/npc_util")
-require("scripts/globals/treasure")
-require("scripts/globals/quests")
-require("scripts/globals/status")
-require("scripts/globals/titles")
-require("scripts/globals/zone")
+local ID = require('scripts/zones/Beadeaux/IDs')
+require('scripts/globals/conquest')
+require('scripts/globals/npc_util')
+require('scripts/globals/treasure')
+require('scripts/globals/quests')
+require('scripts/globals/status')
+require('scripts/globals/titles')
+require('scripts/globals/zone')
 -----------------------------------
 local zone_object = {}
 

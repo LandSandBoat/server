@@ -1,6 +1,7 @@
 local ID = require('scripts/zones/Beaucedine_Glacier_[S]/IDs')
 
 return {
+    ['blank_fork']         = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
     ['Charred_Firewood']   = { messageSpecial = ID.text.REMAINS_OF_COOKFIRE },
     ['Colossal_Footprint'] = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
     ['Compressed_Snow']    = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },

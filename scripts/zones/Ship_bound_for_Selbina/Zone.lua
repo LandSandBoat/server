@@ -1,11 +1,9 @@
 -----------------------------------
---
 -- Zone: Ship_bound_for_Selbina (220)
---
 -----------------------------------
-local ID = require("scripts/zones/Ship_bound_for_Selbina/IDs")
-require("scripts/globals/keyitems")
-require("scripts/globals/sea_creatures")
+local ID = require('scripts/zones/Ship_bound_for_Selbina/IDs')
+require('scripts/globals/keyitems')
+require('scripts/globals/sea_creatures')
 -----------------------------------
 local zone_object = {}
 
@@ -13,7 +11,6 @@ zone_object.onInitialize = function(zone)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
-
     local cs = -1
     local zoneID = 220
 

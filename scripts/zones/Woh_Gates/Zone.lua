@@ -1,9 +1,7 @@
 -----------------------------------
---
 -- Zone: Woh Gates
---
 -----------------------------------
-local ID = require("scripts/zones/Woh_Gates/IDs")
+local ID = require('scripts/zones/Woh_Gates/IDs')
 -----------------------------------
 local zone_object = {}
 

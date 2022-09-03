@@ -1,11 +1,11 @@
 -----------------------------------
 -- Zone: Hall_of_Transference
 -----------------------------------
-local ID = require("scripts/zones/Hall_of_Transference/IDs")
-require("scripts/globals/teleports")
-require("scripts/globals/keyitems")
-require("scripts/globals/missions")
-require("scripts/globals/zone")
+local ID = require('scripts/zones/Hall_of_Transference/IDs')
+require('scripts/globals/teleports')
+require('scripts/globals/keyitems')
+require('scripts/globals/missions')
+require('scripts/globals/zone')
 -----------------------------------
 local zone_object = {}
 
@@ -37,18 +37,22 @@ zone_object.onRegionEnter = function(player, region)
             player:setCharVar("option", 1)
             player:startEvent(103)
         end,
+
         [2] = function (x) -- Mea
             player:setCharVar("option", 1)
             player:startEvent(104)
         end,
+
         [3] = function (x) -- Dem
             player:setCharVar("option", 1)
             player:startEvent(105)
         end,
+
         [4] = function (x)
             player:setCharVar("option", 2)
             player:startEvent(103)
         end,
+
         [5] = function (x)
             if player:getCharVar("MeaChipRegistration") == 1 then
                 if math.random(1, 100) <= 95 or player:getCharVar("LastSkyWarpMea") < os.time() then -- 5% Chance chip breaks
@@ -60,6 +64,7 @@ zone_object.onRegionEnter = function(player, region)
                 player:startEvent(162) -- Please Register..
             end
         end,
+
         [6] = function (x)
             if player:getCharVar("HollaChipRegistration") == 1 then
                 if math.random(1, 100) <= 95 or player:getCharVar("LastSkyWarpHolla") < os.time() then -- 5% Chance chip breaks
@@ -71,6 +76,7 @@ zone_object.onRegionEnter = function(player, region)
                 player:startEvent(162) -- Please Register..
             end
         end,
+
         [7] = function (x)
             if player:getCharVar("DemChipRegistration") == 1 then
                 if math.random(1, 100) <= 95 or player:getCharVar("LastSkyWarpDem") < os.time() then -- 5% Chance chip breaks
