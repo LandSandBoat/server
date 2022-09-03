@@ -31,6 +31,7 @@ CREATE TABLE `mob_spawn_mods` (
 
 LOCK TABLES `mob_spawn_mods` WRITE;
 /*!40000 ALTER TABLE `mob_spawn_mods` DISABLE KEYS */;
+
 -- Overgrown Ivy
 INSERT INTO `mob_spawn_mods` VALUES (16785709,55,180,1); -- IDLE_DESPAWN: 180
 
