@@ -28,6 +28,7 @@ zones[xi.zone.ATTOHWA_CHASM] =
         GASPONIA_POISON               = 7336, -- The poison of the Gasponia has begun to spread through your body.
         OCCASIONAL_LUMPS              = 7351, -- Occasionally lumps arise in the ground here, then settle down again. It seems that there is something beneath the earth.
         HOMEPOINT_SET                 = 8238, -- Home point set!
+        UNITY_WANTED_BATTLE_INTERACT  = 8296, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
     mob =
     {

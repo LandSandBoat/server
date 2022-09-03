@@ -31,6 +31,7 @@ zones[xi.zone.LUFAISE_MEADOWS] =
         YOU_CAN_SEE_FOR_MALMS         = 7745, -- You can see for malms in every direction.
         SPINE_CHILLING_PRESENCE       = 7747, -- You sense a spine-chilling presence!
         COMMON_SENSE_SURVIVAL         = 8742, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        UNITY_WANTED_BATTLE_INTERACT  = 8806, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
     mob =
     {

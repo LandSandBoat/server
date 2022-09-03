@@ -40,6 +40,7 @@ zones[xi.zone.IFRITS_CAULDRON] =
         ALREADY_POSSESS_TEMP          = 11485, -- You already possess that temporary item.
         NO_COMBINATION                = 11490, -- You were unable to enter a combination.
         HOMEPOINT_SET                 = 11516, -- Home point set!
+        UNITY_WANTED_BATTLE_INTERACT  = 11574, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
         COMMON_SENSE_SURVIVAL         = 11596, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =

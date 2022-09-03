@@ -41,6 +41,7 @@ zones[xi.zone.QUFIM_ISLAND] =
         PLAYER_OBTAINS_TEMP_ITEM       = 8065,  -- <name> obtains the temporary item: <item>!
         ALREADY_POSSESS_TEMP           = 8066,  -- You already possess that temporary item.
         NO_COMBINATION                 = 8071,  -- You were unable to enter a combination.
+        UNITY_WANTED_BATTLE_INTERACT   = 8133,  -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
         REGIME_REGISTERED              = 10347, -- New training regime registered!
         LEARNS_SPELL                   = 12665, -- <name> learns <spell>!
         UNCANNY_SENSATION              = 12667, -- You are assaulted by an uncanny sensation.

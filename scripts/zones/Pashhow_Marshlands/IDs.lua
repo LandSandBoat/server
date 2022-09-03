@@ -35,6 +35,7 @@ zones[xi.zone.PASHHOW_MARSHLANDS] =
         ALREADY_POSSESS_TEMP          = 8479,  -- You already possess that temporary item.
         NO_COMBINATION                = 8484,  -- You were unable to enter a combination.
         VOIDWALKER_DESPAWN            = 8515,  -- The monster fades before your eyes, a look of disappointment on its face.
+        UNITY_WANTED_BATTLE_INTERACT  = 8546,  -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
         REGIME_REGISTERED             = 10725, -- New training regime registered!
         VOIDWALKER_NO_MOB             = 11844, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
         VOIDWALKER_MOB_TOO_FAR        = 11845, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.

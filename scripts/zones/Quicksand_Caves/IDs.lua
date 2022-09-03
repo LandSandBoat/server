@@ -41,6 +41,7 @@ zones[xi.zone.QUICKSAND_CAVES] =
         NO_COMBINATION                = 8292,  -- You were unable to enter a combination.
         REGIME_REGISTERED             = 10370, -- New training regime registered!
         HOMEPOINT_SET                 = 11432, -- Home point set!
+        UNITY_WANTED_BATTLE_INTERACT  = 11490, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
     mob =
     {

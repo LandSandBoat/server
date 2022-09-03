@@ -44,6 +44,7 @@ zones[xi.zone.BIBIKI_BAY] =
         LEFT_BILLET                   = 7499, -- You use your <item>. (<number> trip[/s] remaining)
         END_BILLET                    = 7500, -- You use up your <item>.
         NOTHING_LEFT_INTEREST         = 7617, -- There is nothing left of interest here.
+        UNITY_WANTED_BATTLE_INTERACT  = 8623, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
         COMMON_SENSE_SURVIVAL         = 8645, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
         NEWS_BILLET                   = 8668, -- <item> has been [added to your list of favorites/removed from your list of favorites].
     },

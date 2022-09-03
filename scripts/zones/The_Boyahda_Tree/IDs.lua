@@ -36,6 +36,7 @@ zones[xi.zone.THE_BOYAHDA_TREE] =
         ALREADY_POSSESS_TEMP          = 11399, -- You already possess that temporary item.
         NO_COMBINATION                = 11404, -- You were unable to enter a combination.
         HOMEPOINT_SET                 = 11442, -- Home point set!
+        UNITY_WANTED_BATTLE_INTERACT  = 11500, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
     mob =
     {

@@ -28,6 +28,7 @@ zones[xi.zone.RIVERNE_SITE_A01] =
         SPACE_SEEMS_DISTORTED         = 7597, -- The space around you seems oddly distorted and disrupted.
         MONUMENT                      = 7604, -- Something has been engraved on this stone, but the message is too difficult to make out.
         HOMEPOINT_SET                 = 7732, -- Home point set!
+        UNITY_WANTED_BATTLE_INTERACT  = 7790, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
     mob =
     {

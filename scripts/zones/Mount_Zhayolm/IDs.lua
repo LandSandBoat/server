@@ -40,6 +40,7 @@ zones[xi.zone.MOUNT_ZHAYOLM] =
         STIFLING_STENCH               = 7564, -- A stifling stench pervades the air...
         DRAWS_NEAR                    = 7580, -- Something draws near!
         HOMEPOINT_SET                 = 8729, -- Home point set!
+        UNITY_WANTED_BATTLE_INTERACT  = 8787, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
     mob =
     {

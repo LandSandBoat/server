@@ -37,6 +37,7 @@ zones[xi.zone.MISAREAUX_COAST] =
         DID_NOT_CATCH_ANYTHING        = 7671, -- You did not catch anything.
         PUT_IN_TRAP                   = 7672, -- You put <item> in the trap.
         COMMON_SENSE_SURVIVAL         = 8643, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        UNITY_WANTED_BATTLE_INTERACT  = 8707, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
         HOMEPOINT_SET                 = 8866, -- Home point set!
     },
     mob =

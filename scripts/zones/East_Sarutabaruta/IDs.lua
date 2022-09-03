@@ -36,6 +36,7 @@ zones[xi.zone.EAST_SARUTABARUTA] =
         PLAYER_OBTAINS_TEMP_ITEM      = 7572, -- <name> obtains the temporary item: <item>!
         ALREADY_POSSESS_TEMP          = 7573, -- You already possess that temporary item.
         NO_COMBINATION                = 7578, -- You were unable to enter a combination.
+        UNITY_WANTED_BATTLE_INTERACT  = 7640, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
         REGIME_REGISTERED             = 9938, -- New training regime registered!
     },
     mob =

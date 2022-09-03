@@ -37,6 +37,7 @@ zones[xi.zone.BOSTAUNIEUX_OUBLIETTE] =
         LEARNS_SPELL                  = 10624, -- <name> learns <spell>!
         UNCANNY_SENSATION             = 10626, -- You are assaulted by an uncanny sensation.
         COMMON_SENSE_SURVIVAL         = 10633, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        UNITY_WANTED_BATTLE_INTERACT  = 10697, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
     mob =
     {

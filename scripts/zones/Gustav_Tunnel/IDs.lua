@@ -25,6 +25,7 @@ zones[xi.zone.GUSTAV_TUNNEL] =
         FISHING_MESSAGE_OFFSET        = 7216,  -- You can't fish here.
         BAD_FEELING_ABOUT_PLACE       = 7316,  -- You have a bad feeling about this place.
         SENSE_OMINOUS_PRESENCE        = 7318,  -- You sense an ominous presence...
+        UNITY_WANTED_BATTLE_INTERACT  = 7439,  -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
         REGIME_REGISTERED             = 9586,  -- New training regime registered!
         PLAYER_OBTAINS_ITEM           = 10638, -- <name> obtains <item>!
         UNABLE_TO_OBTAIN_ITEM         = 10639, -- You were unable to obtain the item.

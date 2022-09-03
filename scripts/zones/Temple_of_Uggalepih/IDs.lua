@@ -48,6 +48,7 @@ zones[xi.zone.TEMPLE_OF_UGGALEPIH] =
         NO_COMBINATION                = 8453,  -- You were unable to enter a combination.
         REGIME_REGISTERED             = 10531, -- New training regime registered!
         COMMON_SENSE_SURVIVAL         = 11591, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        UNITY_WANTED_BATTLE_INTERACT  = 11655, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
     mob =
     {

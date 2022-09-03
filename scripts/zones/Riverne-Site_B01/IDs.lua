@@ -29,6 +29,7 @@ zones[xi.zone.RIVERNE_SITE_B01] =
         GROUND_GIVING_HEAT            = 7603, -- The ground here is giving off heat.
         BAHAMUT_TAUNT                 = 7671, -- Children of Vana'diel, what do you think to accomplish by fighting for your lives? You know your efforts are futile, yet still you resist...
         HOMEPOINT_SET                 = 7707, -- Home point set!
+        UNITY_WANTED_BATTLE_INTERACT  = 7765, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
     mob =
     {

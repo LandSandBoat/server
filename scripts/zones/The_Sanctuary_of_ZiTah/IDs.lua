@@ -52,6 +52,7 @@ zones[xi.zone.THE_SANCTUARY_OF_ZITAH] =
         PLAYER_OBTAINS_TEMP_ITEM      = 8098,  -- <name> obtains the temporary item: <item>!
         ALREADY_POSSESS_TEMP          = 8099,  -- You already possess that temporary item.
         NO_COMBINATION                = 8104,  -- You were unable to enter a combination.
+        UNITY_WANTED_BATTLE_INTERACT  = 8166,  -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
         REGIME_REGISTERED             = 10282, -- New training regime registered!
         COMMON_SENSE_SURVIVAL         = 12271, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },

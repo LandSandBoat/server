@@ -41,6 +41,7 @@ zones[xi.zone.CAPE_TERIGGAN] =
         PLAYER_OBTAINS_TEMP_ITEM      = 7930,  -- <name> obtains the temporary item: <item>!
         ALREADY_POSSESS_TEMP          = 7931,  -- You already possess that temporary item.
         NO_COMBINATION                = 7936,  -- You were unable to enter a combination.
+        UNITY_WANTED_BATTLE_INTERACT  = 7998,  -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
         REGIME_REGISTERED             = 10114, -- New training regime registered!
         COMMON_SENSE_SURVIVAL         = 11233, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
         HOMEPOINT_SET                 = 11261, -- Home point set!

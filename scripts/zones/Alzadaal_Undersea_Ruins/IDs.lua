@@ -38,6 +38,7 @@ zones[xi.zone.ALZADAAL_UNDERSEA_RUINS] =
         GLITTERING_FRAGMENTS          = 7737, -- Minute glittering fragments are scattered all over...
         SLIMY_TOUCH                   = 7755, -- The ground here is slimy to the touch...
         DRAWS_NEAR                    = 7766, -- Something draws near!
+        UNITY_WANTED_BATTLE_INTERACT  = 7931, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
     mob =
     {

@@ -37,6 +37,7 @@ zones[xi.zone.JUGNER_FOREST] =
         ALREADY_POSSESS_TEMP          = 8661,  -- You already possess that temporary item.
         NO_COMBINATION                = 8666,  -- You were unable to enter a combination.
         VOIDWALKER_DESPAWN            = 8697,  -- The monster fades before your eyes, a look of disappointment on its face.
+        UNITY_WANTED_BATTLE_INTERACT  = 8728,  -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
         REGIME_REGISTERED             = 10871, -- New training regime registered!
         DRAWN_UNWANTED_ATTENTION      = 11925, -- Your presence has drawn unwanted attention!
         SENSE_UNUSUAL_PRESENCE        = 11927, -- You sense an unusual presence in the area...

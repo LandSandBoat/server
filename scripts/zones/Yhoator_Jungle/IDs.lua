@@ -42,6 +42,7 @@ zones[xi.zone.YHOATOR_JUNGLE] =
         PLAYER_OBTAINS_TEMP_ITEM      = 7832,  -- <name> obtains the temporary item: <item>!
         ALREADY_POSSESS_TEMP          = 7833,  -- You already possess that temporary item.
         NO_COMBINATION                = 7838,  -- You were unable to enter a combination.
+        UNITY_WANTED_BATTLE_INTERACT  = 7900,  -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
         REGIME_REGISTERED             = 10016, -- New training regime registered!
         COMMON_SENSE_SURVIVAL         = 11135, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },

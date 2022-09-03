@@ -43,6 +43,7 @@ zones[xi.zone.CAEDARVA_MIRE] =
         SHREDDED_SCRAPS               = 8077, -- Shredded scraps of paper are scattered all over...
         DRAWS_NEAR                    = 8086, -- Something draws near!
         HOMEPOINT_SET                 = 8979, -- Home point set!
+        UNITY_WANTED_BATTLE_INTERACT  = 9037, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
         COMMON_SENSE_SURVIVAL         = 9059, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =

@@ -32,6 +32,7 @@ zones[xi.zone.WAJAOM_WOODLANDS] =
         PAMAMA_PEELS                  = 8494, -- Piles of pamama peels litter the ground...
         DRAWS_NEAR                    = 8520, -- Something draws near!
         COMMON_SENSE_SURVIVAL         = 9638, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        UNITY_WANTED_BATTLE_INTERACT  = 9702, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
     mob =
     {

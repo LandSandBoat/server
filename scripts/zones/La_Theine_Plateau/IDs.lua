@@ -48,6 +48,7 @@ zones[xi.zone.LA_THEINE_PLATEAU] =
         ALREADY_POSSESS_TEMP          = 7921,  -- You already possess that temporary item.
         NO_COMBINATION                = 7926,  -- You were unable to enter a combination.
         VOIDWALKER_DESPAWN            = 7957,  -- The monster fades before your eyes, a look of disappointment on its face.
+        UNITY_WANTED_BATTLE_INTERACT  = 7988,  -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
         MEMORIES_SEALED_OFF           = 8082,  -- A portion of your memories has been sealed off.
         REGIME_REGISTERED             = 10137, -- New training regime registered!
         VOIDWALKER_NO_MOB             = 11310, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.

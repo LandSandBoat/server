@@ -44,6 +44,7 @@ zones[xi.zone.WESTERN_ALTEPA_DESERT] =
         PLAYER_OBTAINS_TEMP_ITEM      = 7649,  -- <name> obtains the temporary item: <item>!
         ALREADY_POSSESS_TEMP          = 7650,  -- You already possess that temporary item.
         NO_COMBINATION                = 7655,  -- You were unable to enter a combination.
+        UNITY_WANTED_BATTLE_INTERACT  = 7717,  -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
         REGIME_REGISTERED             = 9833,  -- New training regime registered!
         COMMON_SENSE_SURVIVAL         = 11822, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },

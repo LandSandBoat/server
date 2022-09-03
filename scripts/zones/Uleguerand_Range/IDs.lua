@@ -26,6 +26,7 @@ zones[xi.zone.ULEGUERAND_RANGE] =
         WHAT_LIES_BENEATH             = 7342, -- There are many cold <item> scattered around the area. Could someone be trying to melt the ice to retrieve what lies beneath?
         SOMETHING_GLITTERING_BUT      = 7343, -- You see something glittering below the surface here, but the ice encases it completely.
         HOMEPOINT_SET                 = 8335, -- Home point set!
+        UNITY_WANTED_BATTLE_INTERACT  = 8393, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
     mob =
     {

@@ -43,6 +43,7 @@ zones[xi.zone.FEIYIN] =
         LEARNS_SPELL                       = 10649, -- <name> learns <spell>!
         UNCANNY_SENSATION                  = 10651, -- You are assaulted by an uncanny sensation.
         HOMEPOINT_SET                      = 10700, -- Home point set!
+        UNITY_WANTED_BATTLE_INTERACT       = 10758, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
     mob =
     {

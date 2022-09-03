@@ -30,6 +30,7 @@ zones[xi.zone.HALVUNG] =
         DRAWS_NEAR                    = 8042, -- Something draws near!
         DULL_PIECE                    = 8043, -- A dull piece of metal lies on the ground. It appears to be a bracelet of sorts, but the layers of grime covering its surface render it wholly unwearable.
         LIFT_LEVER                    = 8046, -- You lift the lever with all your might!
+        UNITY_WANTED_BATTLE_INTERACT  = 8085, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
         COMMON_SENSE_SURVIVAL         = 8107, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =

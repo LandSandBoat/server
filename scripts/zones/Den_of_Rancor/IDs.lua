@@ -32,6 +32,7 @@ zones[xi.zone.DEN_OF_RANCOR] =
         NO_COMBINATION                = 7417,  -- You were unable to enter a combination.
         REGIME_REGISTERED             = 9495,  -- New training regime registered!
         HOMEPOINT_SET                 = 10545, -- Home point set!
+        UNITY_WANTED_BATTLE_INTERACT  = 10603, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
     mob =
     {

@@ -36,6 +36,7 @@ zones[xi.zone.CARPENTERS_LANDING] =
         CRYPTONBERRY_EXECUTOR_2HR     = 7481, -- Through this we ssseek our just reward...
         MYCOPHILE_MUSHROOM            = 7498, -- There is a rotten mushroom here. There are 3 openings in its cap.
         HERCULES_TREE_NOTHING_YET     = 7500, -- There is nothing here yet. Check again in the morning.
+        UNITY_WANTED_BATTLE_INTERACT  = 7543, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
         COMMON_SENSE_SURVIVAL         = 7565, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =

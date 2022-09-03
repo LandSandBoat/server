@@ -36,6 +36,7 @@ zones[xi.zone.BEAUCEDINE_GLACIER] =
         ALREADY_POSSESS_TEMP           = 8580,  -- You already possess that temporary item.
         NO_COMBINATION                 = 8585,  -- You were unable to enter a combination.
         VOIDWALKER_DESPAWN             = 8616,  -- The monster fades before your eyes, a look of disappointment on its face.
+        UNITY_WANTED_BATTLE_INTERACT   = 8647,  -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
         REGIME_REGISTERED              = 10763, -- New training regime registered!
         VOIDWALKER_NO_MOB              = 11882, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
         VOIDWALKER_MOB_TOO_FAR         = 11883, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.

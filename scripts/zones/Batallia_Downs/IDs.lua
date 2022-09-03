@@ -36,6 +36,7 @@ zones[xi.zone.BATALLIA_DOWNS] =
         ALREADY_POSSESS_TEMP          = 7712,  -- You already possess that temporary item.
         NO_COMBINATION                = 7717,  -- You were unable to enter a combination.
         VOIDWALKER_DESPAWN            = 7748,  -- The monster fades before your eyes, a look of disappointment on its face.
+        UNITY_WANTED_BATTLE_INTERACT  = 7779,  -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
         REGIME_REGISTERED             = 9995,  -- New training regime registered!
         FRAGMENT_FAR_TOO_SMALL        = 11333, -- You obtain <keyitem>. However, it is far too small to house an adequate amount of energy. Alone, it serves no purpose.
         FRAGMENTS_MELD                = 11334, -- The tiny fragments of Lilisette's memory meld together to form <keyitem>!

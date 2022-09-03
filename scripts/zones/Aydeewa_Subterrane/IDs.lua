@@ -27,6 +27,7 @@ zones[xi.zone.AYDEEWA_SUBTERRANE] =
         BLOOD_STAINS                  = 8010, -- The ground is smeared with bloodstains...
         DRAWS_NEAR                    = 8035, -- Something draws near!
         COMMON_SENSE_SURVIVAL         = 8907, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        UNITY_WANTED_BATTLE_INTERACT  = 8971, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
     mob =
     {

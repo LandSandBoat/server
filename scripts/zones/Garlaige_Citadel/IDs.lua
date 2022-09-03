@@ -51,6 +51,7 @@ zones[xi.zone.GARLAIGE_CITADEL] =
         LEARNS_SPELL                  = 11531, -- <name> learns <spell>!
         UNCANNY_SENSATION             = 11533, -- You are assaulted by an uncanny sensation.
         COMMON_SENSE_SURVIVAL         = 11564, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        UNITY_WANTED_BATTLE_INTERACT  = 11628, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
     mob =
     {
