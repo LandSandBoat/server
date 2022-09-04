@@ -9,7 +9,7 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
-    mob:SetMod(xi.mod.DOUBLE_ATTACK, 50)
+    mob:setMod(xi.mod.DOUBLE_ATTACK, 50)
     mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.STANDBACK))
 end
 
