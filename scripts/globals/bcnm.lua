@@ -326,7 +326,7 @@ local battlefields =
         {13,  109, 1177},   -- Rapid Raptors (BS50)
         {14,  110, 1130},   -- Wild Wild Whiskers (BS60)
         {15,  111, 1175},   -- Seasons Greetings (KS30)
-     -- {16,  112, 1178},   -- Royale Ramble (KS30)
+        {16,  112, 1178},   -- Royale Ramble (KS30)
         {17,  113, 1180},   -- Moa Constrictors (KS30)
      -- {18,  114, 3351},   -- The V Formation (KC30)
      -- {19,  115, 3352},   -- Avian Apostates (KC50)

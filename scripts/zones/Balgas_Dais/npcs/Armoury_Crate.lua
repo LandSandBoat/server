@@ -464,6 +464,7 @@ local loot =
             {itemid = 1132, droprate = 225}, -- Square Of Raxa
         },
     },
+
     -- BCNM Royal Succession
     [108] =
     {
@@ -655,6 +656,70 @@ local loot =
             {itemid = 942,  droprate = 100}, -- Philosopher's Stone
             {itemid = 1110, droprate = 150}, -- Beetle Blood
             {itemid = 1132, droprate = 350}, -- Raxa
+        },
+    },
+
+    -- Royale Ramble
+    [112] =
+    {
+        {
+            {itemid = 747, droprate = 1000}, -- Orichalcum Ingot
+        },
+        {
+            {itemid = 17275, droprate = 200}, -- Coffinmaker
+            {itemid = 17509, droprate = 300}, -- Destroyers
+            {itemid = 17699, droprate = 250}, -- Dissector
+            {itemid = 18097, droprate = 250}, -- Gondo-Shizunori
+        },
+        {
+            {itemid = 15295, droprate = 200}, -- Hierarch Belt
+            {itemid = 12407, droprate = 250}, -- Palmerin's Shield
+            {itemid = 14871, droprate = 250}, -- Trainer's Gloves
+            {itemid = 15294, droprate = 300}, -- Warwolf Belt
+        },
+        {
+            {itemid =     0, droprate = 300}, -- Nothing
+            {itemid = 19027, droprate =  70}, -- Claymore Grip
+            {itemid = 19025, droprate = 100}, -- Pole Grip
+            {itemid = 19024, droprate = 280}, -- Sword Strap
+            {itemid = 15186, droprate = 520}, -- Trump Crown
+        },
+        {
+            {itemid =  972, droprate = 250}, -- King of Cups (Card)
+            {itemid =  985, droprate = 350}, -- King of Batons (Card)
+            {itemid =  998, droprate = 250}, -- King of Swords (Card)
+            {itemid = 1011, droprate = 250}, -- King of Coins (Card)
+        },
+        {
+            {itemid =  644, droprate =  50}, -- Mythril Ore
+            {itemid =  645, droprate =  50}, -- Darksteel Ore
+            {itemid =  700, droprate =  80}, -- Mahogany Log
+            {itemid =  702, droprate =  80}, -- Ebony Log
+            {itemid =  703, droprate = 130}, -- Petrified Log
+            {itemid =  737, droprate =  60}, -- Gold Ore
+            {itemid =  738, droprate =  60}, -- Platinum Ore
+            {itemid =  823, droprate =  60}, -- Gold Thread
+            {itemid =  830, droprate =  30}, -- Rainbow Cloth
+            {itemid =  837, droprate =  20}, -- Malboro Fiber
+            {itemid =  866, droprate =  30}, -- Wyvern Scales
+            {itemid =  887, droprate =  60}, -- Coral Fragment
+            {itemid =  895, droprate =  60}, -- Ram Horn
+            {itemid =  902, droprate =  60}, -- Demon Horn
+            {itemid =  942, droprate =  30}, -- Philosopher's Stone
+            {itemid = 1465, droprate =  20}, -- Granite
+            {itemid = 4172, droprate =  40}, -- Reraiser
+            {itemid = 4173, droprate =  30}, -- Hi-Reraiser
+            {itemid = 4174, droprate =  40}, -- Vile Elixer
+            {itemid = 4175, droprate =  10}, -- Vile Elixer +1
+        },
+        {
+            {itemid =  658, droprate =  90}, -- Damascus Ingot
+            {itemid =  836, droprate =  40}, -- Damascene Cloth
+            {itemid =  837, droprate =  50}, -- Malboro Fiber
+            {itemid =  844, droprate = 300}, -- Phoenix Feather
+            {itemid =  942, droprate = 200}, -- Philosophers Stone
+            {itemid = 1110, droprate =  60}, -- Beetle Blood
+            {itemid = 1132, droprate = 260}, -- Raxa
         },
     },
 
