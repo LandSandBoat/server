@@ -1,13 +1,9 @@
 -----------------------------------
---
 -- Zone: Norg (252)
---
 -----------------------------------
-local ID = require("scripts/zones/Norg/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/keyitems")
-require("scripts/globals/missions")
-require("scripts/globals/chocobo")
+local ID = require('scripts/zones/Norg/IDs')
+require('scripts/globals/conquest')
+require('scripts/globals/chocobo')
 -----------------------------------
 local zone_object = {}
 
@@ -23,7 +19,7 @@ end
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(-19.238, -2.163, -63.964, 187)
     end
 
@@ -48,7 +44,6 @@ zone_object.onEventFinish = function(player, csid, option)
     if csid == 226 then
         player:setCharVar("anUndyingPledgeCS", 2)
     end
-
 end
 
 return zone_object

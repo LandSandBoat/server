@@ -1,7 +1,8 @@
 -----------------------------------
 -- Area: Chocobo_Circuit
---  NPC: Pollante
+-- NPC: Pollante
 -- Standard Info NPC
+-- !pos -325.119 -4.000 -430.698 70
 -----------------------------------
 local entity = {}
 

@@ -242,23 +242,21 @@ struct look_t
 
     look_t(std::vector<uint16>& look)
     {
-        if (look.size() == 10)
+        if (look.size() != 10)
         {
-            size    = look[0];
-            modelid = look[1];
-            head    = look[2];
-            body    = look[3];
-            hands   = look[4];
-            legs    = look[5];
-            feet    = look[6];
-            main    = look[7];
-            sub     = look[8];
-            ranged  = look[9];
+            throw std::runtime_error(fmt::format("Bad look size passed to look_t constructor (expected 10, got: {})", look.size()));
         }
-        else // throw exception instead?
-        {
-            look_t();
-        }
+
+        size    = look[0];
+        modelid = look[1];
+        head    = look[2];
+        body    = look[3];
+        hands   = look[4];
+        legs    = look[5];
+        feet    = look[6];
+        main    = look[7];
+        sub     = look[8];
+        ranged  = look[9];
     }
 };
 
@@ -296,7 +294,7 @@ struct skills_t
         // index SkillID 0-63
         uint16 skill[64];
     };
-    // The rank is only used in crafts. A size of 64 is required for skill ID compatability.
+    // Rank is used for crafts and loads main job or sub job skill rank, prioritizing main job skill rank.
     uint8 rank[64];
 
     skills_t()

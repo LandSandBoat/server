@@ -1,10 +1,8 @@
 -----------------------------------
---
 -- Zone: Windurst_Waters_[S] (94)
---
 -----------------------------------
-local ID = require("scripts/zones/Windurst_Waters_[S]/IDs")
-require("scripts/globals/chocobo")
+local ID = require('scripts/zones/Windurst_Waters_[S]/IDs')
+require('scripts/globals/chocobo')
 -----------------------------------
 local zone_object = {}
 

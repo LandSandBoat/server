@@ -22,44 +22,43 @@ mission.reward =
 
 mission.sections =
 {
-    -- Section: Mission Active
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId
         end,
 
+        [xi.zone.LOWER_JEUNO] =
+        {
+            ['Aldo'] =
+            {
+                onTrigger = function(player, npc)
+                    if mission:getVar(player, 'Option') == 0 then
+                        return mission:progressEvent(84)
+                    else
+                        return mission:event(24)
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [84] = function(player, csid, option, npc)
+                    mission:setVar(player, 'Option', 1)
+                end,
+            },
+        },
+
         [xi.zone.NORG] =
         {
-            ['_700']  = mission:progressEvent(3),
+            ['_700'] = mission:progressEvent(3),
 
             onEventFinish =
             {
                 [3] = function(player, csid, option, npc)
                     if option == 0 then
-                        if mission:complete(player) then
-                            player:setMissionStatus(xi.mission.log_id.ZILART, 0)
-                        end
+                        -- NOTE: Event should move player to 99.789, -7.086, -11.999, 126 (Norg)
+                        mission:complete(player)
                     end
-                end,
-            },
-        },
-    },
-
-    -- Section: Mission Active and missionStatus == 0, Rank >= 5 (For current nation)
-    {
-        check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and missionStatus == 0 and
-                player:getRank(player:getNation()) >= 5
-        end,
-
-        [xi.zone.LOWER_JEUNO] =
-        {
-            ['Aldo'] = mission:event(84),
-
-            onEventFinish =
-            {
-                [84] = function(player, csid, option, npc)
-                    player:setMissionStatus(xi.mission.log_id.ZILART, 1)
                 end,
             },
         },

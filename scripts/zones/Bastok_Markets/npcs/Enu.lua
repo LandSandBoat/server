@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Bastok Markets
 --  NPC: Enu
--- Type: Quest NPC
 -- !pos -253.673 -13 -92.326 235
 -----------------------------------
 local ID = require("scripts/zones/Bastok_Markets/IDs")
@@ -29,8 +28,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(332)
     elseif (player:getCharVar("WishUponAStar_Status") == 3) then -- Quest: Wish Upon a Star - Enu has asked player to give her a fallen star
         player:startEvent(333)
-    else -- Standard dialog
-        player:startEvent(327)
     end
 end
 

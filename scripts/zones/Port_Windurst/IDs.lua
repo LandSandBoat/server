@@ -44,8 +44,9 @@ zones[xi.zone.PORT_WINDURST] =
         KEYITEM_LOST                    = 10977, -- Lost key item: <keyitem>.
         NOT_HAVE_ENOUGH_GIL             = 10978, -- You do not have enough gil.
         CARRIED_OVER_POINTS             = 11012, -- You have carried over <number> login point[/s].
-        LOGIN_CAMPAIGN_UNDERWAY         = 11013, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
+        LOGIN_CAMPAIGN_UNDERWAY         = 11013, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                    = 11014, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        MEMBERS_LEVELS_ARE_RESTRICTED   = 11034, -- Your party is unable to participate because certain members' levels are restricted.
         HOMEPOINT_SET                   = 11070, -- Home point set!
         YOU_ACCEPT_THE_MISSION          = 11163, -- You have accepted the mission.
         KHEL_PAHLHAMA_SHOP_DIALOG       = 11209, -- These magic shells are full of mysteries...
@@ -73,7 +74,7 @@ zones[xi.zone.PORT_WINDURST] =
         RETRIEVE_DIALOG_ID              = 15898, -- You retrieve <item> from the porter moogle's care.
         OBTAINED_NUM_KEYITEMS           = 15940, -- Obtained key item: <number> <keyitem>!
         NOT_ACQUAINTED                  = 15942, -- I'm sorry, but I don't believe we're acquainted. Please leave me be.
-        COMMON_SENSE_SURVIVAL           = 16310, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        COMMON_SENSE_SURVIVAL           = 16312, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

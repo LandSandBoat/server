@@ -55,6 +55,7 @@ public:
     bool HasBuffSpells() const;
     bool HasHealSpells() const;
     bool HasNaSpells() const;
+    bool HasRaiseSpells() const;
     bool HasDebuffSpells() const;
     bool HasSevereSpells() const;
 
@@ -76,6 +77,7 @@ public:
     std::vector<SpellID> m_debuffList;
     std::vector<SpellID> m_healList;
     std::vector<SpellID> m_naList;
+    std::vector<SpellID> m_raiseList;
     std::vector<SpellID> m_severeList;
 
 private:

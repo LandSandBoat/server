@@ -1,10 +1,8 @@
 -----------------------------------
---
 -- Zone: Balgas_Dais (146)
---
 -----------------------------------
-local ID = require("scripts/zones/Balgas_Dais/IDs")
-require("scripts/globals/settings")
+local ID = require('scripts/zones/Balgas_Dais/IDs')
+require('scripts/globals/conquest')
 -----------------------------------
 local zone_object = {}
 
@@ -13,9 +11,11 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
+
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(317.842, -126.158, 380.143, 127)
     end
+
     return cs
 end
 

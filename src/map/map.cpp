@@ -99,7 +99,7 @@ map_session_list_t map_session_list = {};
 
 std::thread messageThread;
 
-std::unique_ptr<SqlConnection> sql;
+std::unique_ptr<SqlConnection> sql; // lgtm [cpp/short-global-name]
 
 extern std::map<uint16, CZone*> g_PZoneList; // Global array of pointers for zones
 

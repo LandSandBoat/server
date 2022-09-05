@@ -38,13 +38,13 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if player:getCampaignAllegiance() > 0 then
-                        return mission:event(12)
+                        return quest:event(12)
                     elseif not player:hasKeyItem(xi.ki.RED_RECOMMENDATION_LETTER) then
                         local hasDeclined = quest:getVar(player, 'Option')
 
-                        return mission:progressEvent(1, { [7] = hasDeclined })
+                        return quest:progressEvent(1, { [7] = hasDeclined })
                     else
-                        return mission:progressEvent(2)
+                        return quest:progressEvent(2)
                     end
                 end,
             },
@@ -69,7 +69,7 @@ quest.sections =
                         player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.THE_FIGHTING_FOURTH) == QUEST_ACCEPTED or
                         player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.SNAKE_ON_THE_PLAINS) == QUEST_ACCEPTED
                     then
-                        return mission:event(9)
+                        return quest:event(9)
                     elseif
                         player:hasKeyItem(xi.ki.RED_RECOMMENDATION_LETTER) or
                         player:getCampaignAllegiance() > 0
@@ -77,9 +77,9 @@ quest.sections =
                         local hasDeclined = quest:getVar(player, 'Option')
                         local isPledged   = player:getCampaignAllegiance() > 0 and 3 or 0
 
-                        return mission:progressEvent(7 + isPledged + hasDeclined)
+                        return quest:progressEvent(7 + isPledged + hasDeclined)
                     else
-                        return mission:event(15)
+                        return quest:event(15)
                     end
                 end,
             },
@@ -135,14 +135,14 @@ quest.sections =
                         player:hasKeyItem(xi.ki.PIECE_OF_SHATTERED_LUMBER)
                     then
                         if player:getCampaignAllegiance() == 0 then
-                            return mission:progressEvent(12)
+                            return quest:progressEvent(12)
                         else
-                            return mission:progressEvent(624)
+                            return quest:progressEvent(624)
                         end
                     else
                         local isPledged = player:getCampaignAllegiance() > 0 and 1 or 0
 
-                        return mission:progressEvent(13 + isPledged)
+                        return quest:progressEvent(13 + isPledged)
                     end
                 end,
             },
@@ -199,7 +199,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if not player:hasKeyItem(xi.ki.CHARRED_PROPELLER) then
-                        return mission:progressEvent(1)
+                        return quest:progressEvent(1)
                     end
                 end,
             },
@@ -208,7 +208,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if not player:hasKeyItem(xi.ki.PIECE_OF_SHATTERED_LUMBER) then
-                        return mission:progressEvent(2)
+                        return quest:progressEvent(2)
                     end
                 end,
             },
@@ -217,7 +217,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if not player:hasKeyItem(xi.ki.OXIDIZED_PLATE) then
-                        return mission:progressEvent(3)
+                        return quest:progressEvent(3)
                     end
                 end,
             },

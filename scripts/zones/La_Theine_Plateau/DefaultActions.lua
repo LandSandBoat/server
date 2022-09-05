@@ -2,6 +2,7 @@ local ID = require("scripts/zones/La_Theine_Plateau/IDs")
 
 return {
     ['Augevinne']           = { text = ID.text.RESCUE_DRILL + 33 },
+    ['Cermet_Headstone']    = { messageSpecial = ID.text.CANNOT_REMOVE_FRAG },
     ['Chocobo_Tracks']      = { messageSpecial = ID.text.CHOCOBO_TRACKS },
     ['Deaufrain']           = { text = ID.text.RESCUE_DRILL + 32 },
     ['Equesobillot']        = { text = ID.text.RESCUE_DRILL + 31 },

@@ -331,62 +331,69 @@ void SmallPacket0x00A(map_session_data_t* const PSession, CCharEntity* const PCh
         }
     }
 
-    if (PChar->m_moghouseID != 0)
+    // Only release client from "Downloading Data" if the packet sequence came in without a drop on 0x00D
+    // It is also possible that the client also never received our packets to release themselves from the loading screen.
+    // TODO: Need further research into the relationship between 0x00D and 0x00A, if any.
+    if (PChar->loc.zone != nullptr)
     {
-        // Update any mannequins that might be placed on zonein
-        // Build Mannequin model id list
-        auto getModelIdFromStorageSlot = [](CCharEntity* PChar, uint8 slot) -> uint16
+        if (PChar->m_moghouseID != 0)
         {
-            uint16 modelId = 0x0000;
-
-            if (slot == 0)
+            // Update any mannequins that might be placed on zonein
+            // Build Mannequin model id list
+            auto getModelIdFromStorageSlot = [](CCharEntity* PChar, uint8 slot) -> uint16
             {
-                return modelId;
-            }
+                uint16 modelId = 0x0000;
 
-            auto* PItem = PChar->getStorage(LOC_STORAGE)->GetItem(slot);
-            if (PItem == nullptr)
-            {
-                return modelId;
-            }
-
-            if (auto* PItemEquipment = dynamic_cast<CItemEquipment*>(PItem))
-            {
-                modelId = PItemEquipment->getModelId();
-            }
-
-            return modelId;
-        };
-
-        for (auto safeContainerId : { LOC_MOGSAFE, LOC_MOGSAFE2 })
-        {
-            CItemContainer* PContainer = PChar->getStorage(safeContainerId);
-            for (int slotIndex = 1; slotIndex <= PContainer->GetSize(); ++slotIndex)
-            {
-                CItem* PContainerItem = PContainer->GetItem(slotIndex);
-                if (PContainerItem != nullptr && PContainerItem->isType(ITEM_FURNISHING))
+                if (slot == 0)
                 {
-                    auto* PFurnishing = static_cast<CItemFurnishing*>(PContainerItem);
-                    if (PFurnishing->isInstalled() && PFurnishing->isMannequin())
+                    return modelId;
+                }
+
+                auto* PItem = PChar->getStorage(LOC_STORAGE)->GetItem(slot);
+                if (PItem == nullptr)
+                {
+                    return modelId;
+                }
+
+                if (auto* PItemEquipment = dynamic_cast<CItemEquipment*>(PItem))
+                {
+                    modelId = PItemEquipment->getModelId();
+                }
+
+                return modelId;
+            };
+
+            for (auto safeContainerId : { LOC_MOGSAFE, LOC_MOGSAFE2 })
+            {
+                CItemContainer* PContainer = PChar->getStorage(safeContainerId);
+                for (int slotIndex = 1; slotIndex <= PContainer->GetSize(); ++slotIndex)
+                {
+                    CItem* PContainerItem = PContainer->GetItem(slotIndex);
+                    if (PContainerItem != nullptr && PContainerItem->isType(ITEM_FURNISHING))
                     {
-                        auto*  PMannequin = PFurnishing;
-                        uint16 mainId     = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 0]);
-                        uint16 subId      = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 1]);
-                        uint16 rangeId    = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 2]);
-                        uint16 headId     = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 3]);
-                        uint16 bodyId     = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 4]);
-                        uint16 handsId    = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 5]);
-                        uint16 legId      = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 6]);
-                        uint16 feetId     = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 7]);
-                        PChar->pushPacket(new CInventoryCountPacket(safeContainerId, slotIndex, headId, bodyId, handsId, legId, feetId, mainId, subId, rangeId));
+                        auto* PFurnishing = static_cast<CItemFurnishing*>(PContainerItem);
+                        if (PFurnishing->isInstalled() && PFurnishing->isMannequin())
+                        {
+                            auto*  PMannequin = PFurnishing;
+                            uint16 mainId     = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 0]);
+                            uint16 subId      = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 1]);
+                            uint16 rangeId    = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 2]);
+                            uint16 headId     = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 3]);
+                            uint16 bodyId     = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 4]);
+                            uint16 handsId    = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 5]);
+                            uint16 legId      = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 6]);
+                            uint16 feetId     = getModelIdFromStorageSlot(PChar, PMannequin->m_extra[10 + 7]);
+                            PChar->pushPacket(new CInventoryCountPacket(safeContainerId, slotIndex, headId, bodyId, handsId, legId, feetId, mainId, subId, rangeId));
+                        }
                     }
                 }
             }
         }
+
+        PChar->pushPacket(new CDownloadingDataPacket());
+        PChar->pushPacket(new CZoneInPacket(PChar, PChar->currentEvent->eventId));
+        PChar->pushPacket(new CZoneVisitedPacket(PChar));
     }
-    PChar->pushPacket(new CDownloadingDataPacket());
-    PChar->pushPacket(new CZoneInPacket(PChar, PChar->currentEvent->eventId));
-    PChar->pushPacket(new CZoneVisitedPacket(PChar));
 }
 
 /************************************************************************
@@ -424,8 +431,14 @@ void SmallPacket0x00C(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             switch (PChar->petZoningInfo.petType)
             {
-                case PET_TYPE::AUTOMATON:
                 case PET_TYPE::JUG_PET:
+                    if (!settings::get<bool>("map.KEEP_JUGPET_THROUGH_ZONING"))
+                    {
+                        break;
+                    }
+                    [[fallthrough]];
+                case PET_TYPE::AVATAR:
+                case PET_TYPE::AUTOMATON:
                 case PET_TYPE::WYVERN:
                 case PET_TYPE::LUOPAN:
                     petutils::SpawnPet(PChar, PChar->petZoningInfo.petID, true);
@@ -434,10 +447,10 @@ void SmallPacket0x00C(map_session_data_t* const PSession, CCharEntity* const PCh
                 default:
                     break;
             }
+            // Reset the petZoning info
+            PChar->resetPetZoningInfo();
         }
     }
-    // Reset the petZoning info
-    PChar->resetPetZoningInfo();
 }
 
 /************************************************************************
@@ -596,7 +609,7 @@ void SmallPacket0x011(map_session_data_t* const PSession, CCharEntity* const PCh
         }
     }
 
-    luautils::AfterZoneIn(PChar);
+    PChar->PAI->QueueAction(queueAction_t(4000ms, false, luautils::AfterZoneIn));
 
     // todo: kill player til theyre dead and bsod
     const char* fmtQuery = "SELECT version_mismatch FROM accounts_sessions WHERE charid = %u";
@@ -1047,6 +1060,8 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
             PChar->animation = ANIMATION_NONE;
             PChar->updatemask |= UPDATE_HP;
             PChar->StatusEffectContainer->DelStatusEffectSilent(EFFECT_MOUNTED);
+            // Workaround for a bug where dismounting out of update range would cause the character to stop rendering.
+            PChar->loc.zone->PushPacket(PChar, CHAR_INZONE, new CCharPacket(PChar, ENTITY_UPDATE, UPDATE_HP));
         }
         break;
         case 0x13: // tractor menu
@@ -1303,7 +1318,7 @@ void SmallPacket0x028(map_session_data_t* const PSession, CCharEntity* const PCh
 
     // Linkshells (other than Linkpearls and Pearlsacks) and temporary items cannot be stored in the Recycle Bin.
     // TODO: Are there any special messages here?
-    if (PItem->isType(ITEM_LINKSHELL) || container == CONTAINER_ID::LOC_TEMPITEMS)
+    if (!settings::get<bool>("map.ENABLE_ITEM_RECYCLE_BIN") || PItem->isType(ITEM_LINKSHELL) || container == CONTAINER_ID::LOC_TEMPITEMS)
     {
         charutils::DropItem(PChar, container, slotID, quantity, ItemID);
         return;
@@ -3399,19 +3414,33 @@ void SmallPacket0x053(map_session_data_t* const PSession, CCharEntity* const PCh
     }
 }
 
-/************************************************************************
- *                                                                        *
- *  Request synthesis suggestion                                            *
- *                                                                        *
+/*************************************************************************
+ *                                                                       *
+ *  Request synthesis suggestion                                         *
+ *                                                                       *
  ************************************************************************/
 
 void SmallPacket0x058(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    uint16 skillID    = data.ref<uint16>(0x04);
-    uint16 skillLevel = data.ref<uint16>(0x06);
+    uint16 skillID     = data.ref<uint16>(0x04);
+    uint16 skillLevel  = data.ref<uint16>(0x06); // Player's current skill level (whole number only)
+    uint8  requestType = data.ref<uint8>(0x0A);  // 02 is list view, 03 is recipe
+    uint8  skillRank   = data.ref<uint8>(0x12);  // Requested Rank for item suggestions
 
-    PChar->pushPacket(new CSynthSuggestionPacket(skillID, skillLevel));
+    if (requestType == 2)
+    {
+        // For pagination, the client sends the range in increments of 16. (0..0x10, 0x10..0x20, etc)
+        // uint16 resultMax  = data.ref<uint16>(0x0E); // Unused, maximum in range is always 16 greater
+        uint16 resultMin = data.ref<uint16>(0x0C);
+
+        PChar->pushPacket(new CSynthSuggestionListPacket(skillID, skillLevel, skillRank, resultMin));
+    }
+    else
+    {
+        uint16 selectedRecipeOffset = data.ref<uint16>(0x10);
+        PChar->pushPacket(new CSynthSuggestionRecipePacket(skillID, skillLevel, skillRank, selectedRecipeOffset));
+    }
 }
 
 /************************************************************************
@@ -5193,11 +5222,15 @@ void SmallPacket0x0B6(map_session_data_t* const PSession, CCharEntity* const PCh
 
     std::string RecipientName = std::string((const char*)data[6], 15);
 
+    char  message[256]    = {}; // /t messages using "<t>" with a long named NPC targeted caps out at 138 bytes, increasing to the nearest power of 2
+    uint8 messagePosition = 0x15;
+
+    memcpy(&message, data[messagePosition], data.getSize() - messagePosition);
+
     if (strcmp(RecipientName.c_str(), "_CUSTOM_MENU") == 0 &&
         luautils::HasCustomMenuContext(PChar))
     {
-        std::string selection((const char*)data[21]);
-        luautils::HandleCustomMenu(PChar, selection);
+        luautils::HandleCustomMenu(PChar, message);
         return;
     }
 
@@ -5205,7 +5238,7 @@ void SmallPacket0x0B6(map_session_data_t* const PSession, CCharEntity* const PCh
     strncpy((char*)packetData + 4, RecipientName.c_str(), RecipientName.length() + 1);
     ref<uint32>(packetData, 0) = PChar->id;
 
-    message::send(MSG_CHAT_TELL, packetData, RecipientName.length() + 5, new CChatMessagePacket(PChar, MESSAGE_TELL, (const char*)data[21]));
+    message::send(MSG_CHAT_TELL, packetData, RecipientName.length() + 5, new CChatMessagePacket(PChar, MESSAGE_TELL, message));
 
     if (settings::get<bool>("map.AUDIT_CHAT") && settings::get<bool>("map.AUDIT_TELL"))
     {
@@ -6137,6 +6170,11 @@ void SmallPacket0x0E8(map_session_data_t* const PSession, CCharEntity* const PCh
         break;
         case ANIMATION_HEALING:
         {
+            if (data.ref<uint8>(0x04) == 0x01)
+            {
+                return;
+            }
+
             PChar->StatusEffectContainer->DelStatusEffect(EFFECT_HEALING);
         }
         break;
@@ -6773,6 +6811,15 @@ void SmallPacket0x100(map_session_data_t* const PSession, CCharEntity* const PCh
             else if (prevjob == JOB_BLU)
             {
                 blueutils::UnequipAllBlueSpells(PChar);
+            }
+
+            bool canUseMeritMode = PChar->jobs.job[PChar->GetMJob()] >= 75 && charutils::hasKeyItem(PChar, 606);
+            if (!canUseMeritMode && PChar->MeritMode == true)
+            {
+                if (sql->Query("UPDATE char_exp SET mode = %u WHERE charid = %u", 0, PChar->id) != SQL_ERROR)
+                {
+                    PChar->MeritMode = false;
+                }
             }
         }
 

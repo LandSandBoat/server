@@ -450,8 +450,8 @@ bool CPathFind::FindClosestPath(const position_t& start, const position_t& end)
 
 void CPathFind::LookAt(const position_t& point)
 {
-    // don't look if i'm at that point
-    if (!AtPoint(point))
+    // Avoid unpredictable results if we're too close.
+    if (!distanceWithin(m_POwner->loc.p, point, 0.1f, true))
     {
         m_POwner->loc.p.rotation = worldAngle(m_POwner->loc.p, point);
         m_POwner->updatemask |= UPDATE_POS;
@@ -503,11 +503,11 @@ bool CPathFind::AtPoint(const position_t& pos)
 {
     if (m_distanceFromPoint == 0)
     {
-        return m_POwner->loc.p.x == pos.x && m_POwner->loc.p.z == pos.z;
+        return distanceWithin(m_POwner->loc.p, pos, 0.1f);
     }
     else
     {
-        return distance(m_POwner->loc.p, pos) <= (m_distanceFromPoint + .2f);
+        return distanceWithin(m_POwner->loc.p, pos, m_distanceFromPoint + 0.2f);
     }
 }
 

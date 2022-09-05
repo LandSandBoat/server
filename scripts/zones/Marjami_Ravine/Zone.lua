@@ -1,9 +1,7 @@
 -----------------------------------
---
 -- Zone: Marjami Ravine
---
 -----------------------------------
-local ID = require("scripts/zones/Marjami_Ravine/IDs")
+local ID = require('scripts/zones/Marjami_Ravine/IDs')
 -----------------------------------
 local zone_object = {}
 
@@ -12,9 +10,11 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
+
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(429, -60, 298, 99)
     end
+
     return cs
 end
 

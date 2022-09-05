@@ -1,9 +1,7 @@
 -----------------------------------
---
 -- Zone: Jade_Sepulcher (67)
---
 -----------------------------------
-local ID = require("scripts/zones/Jade_Sepulcher/IDs")
+local ID = require('scripts/zones/Jade_Sepulcher/IDs')
 -----------------------------------
 local zone_object = {}
 

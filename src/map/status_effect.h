@@ -676,7 +676,7 @@ enum EFFECT
     EFFECT_NEGATE_VIRUS            = 608,
     EFFECT_NEGATE_CURSE            = 609,
     EFFECT_NEGATE_CHARM            = 610,
-    EFFECT_MAGIC_EVASION_BOOST_II  = 611,
+    EFFECT_MAGIC_EVASION_BOOST     = 611,
     EFFECT_COLURE_ACTIVE           = 612,
     EFFECT_MUMORS_RADIANCE         = 613,
     EFFECT_ULLEGORES_GLOOM         = 614,
@@ -695,6 +695,8 @@ enum EFFECT
     EFFECT_MOBILIZATION            = 627,
     EFFECT_HOVER_SHOT              = 628,
     EFFECT_MOOGLE_AMPLIFIER        = 629,
+    EFFECT_TAINT                   = 630,
+    EFFECT_HAUNT                   = 631,
 
     // Effect icons in packet can go from 0-767, so no custom effects should go in that range.
 
