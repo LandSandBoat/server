@@ -18,6 +18,7 @@ zones[xi.zone.TAVNAZIAN_SAFEHOLD] =
         CARRIED_OVER_POINTS            = 6429,  -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY        = 6430,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                   = 6431,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        MEMBERS_LEVELS_ARE_RESTRICTED  = 6451,  -- Your party is unable to participate because certain members' levels are restricted.
         YOU_LEARNED_TRUST              = 6453,  -- You learned Trust: <name>!
         CONQUEST_BASE                  = 6544,  -- Tallying conquest results...
         REGIME_CANCELED                = 6710,  -- Current training regime canceled.

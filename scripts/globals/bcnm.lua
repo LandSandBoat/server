@@ -945,11 +945,27 @@ local function getItemById(player, bfid)
     return 0
 end
 
+local function rejectLevelSyncedParty(player, npc)
+    for _, member in pairs(player:getAlliance()) do
+        if member:isLevelSync() then
+            local zoneId = player:getZoneID()
+            local ID = zones[zoneId]
+            -- Your party is unable to participate because certain members' levels are restricted
+            player:messageText(npc, ID.text.MEMBERS_LEVELS_ARE_RESTRICTED, false)
+            return true
+        end
+    end
+    return false
+end
 -----------------------------------
 -- onTrade Action
 -----------------------------------
 
 xi.bcnm.onTrade = function(player, npc, trade, onUpdate)
+    if rejectLevelSyncedParty(player, npc) then -- player's party has level sync, abort.
+        return false
+    end
+
     -- Validate trade
     local itemId
 
@@ -1019,6 +1035,11 @@ end
 -- onTrigger Action
 -----------------------------------
 xi.bcnm.onTrigger = function(player, npc)
+    -- Cannot enter if anyone in party is level/master sync'd
+    if rejectLevelSyncedParty(player, npc) then
+        return false
+    end
+
     -- Player has battlefield status effect. That means a battlefield is open OR the player is inside a battlefield.
     if player:hasStatusEffect(xi.effect.BATTLEFIELD) then
         -- Player is inside battlefield. Attempting to leave.

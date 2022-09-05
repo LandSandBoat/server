@@ -46,6 +46,7 @@ zones[xi.zone.PORT_WINDURST] =
         CARRIED_OVER_POINTS             = 11012, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY         = 11013, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                    = 11014, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        MEMBERS_LEVELS_ARE_RESTRICTED   = 11034, -- Your party is unable to participate because certain members' levels are restricted.
         HOMEPOINT_SET                   = 11070, -- Home point set!
         YOU_ACCEPT_THE_MISSION          = 11163, -- You have accepted the mission.
         KHEL_PAHLHAMA_SHOP_DIALOG       = 11209, -- These magic shells are full of mysteries...
