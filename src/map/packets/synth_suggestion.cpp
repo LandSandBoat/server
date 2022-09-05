@@ -25,62 +25,71 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "synth_suggestion.h"
 #include <map>
 
-CSynthSuggestionPacket::CSynthSuggestionPacket(uint16 skillID, uint16 skillLevel)
+CSynthSuggestionListPacket::CSynthSuggestionListPacket(uint16 skillID, uint16 skillLevel, uint8 skillRank, uint16 resultOffset)
 {
     this->setType(0x31);
     this->setSize(0x34);
 
-    char craftname[8];
-    memset(craftname, 0, 8);
+    ref<uint8>(0x0A) = skillLevel;
 
-    switch (skillID)
+    const char* craftName = craftSkillDbNames[skillID - 1].c_str();
+    uint8       minSkill  = skillRank * 10;
+    uint8       maxSkill  = (skillRank + 1) * 10;
+
+    if (skillLevel < maxSkill)
     {
-        // TODO: There might be a better way than this
-        // TODO: Also confirm that this order is consistent, else
-        //      we might get recipes for the wrong guild
-        case (1):
-            strncpy(craftname, "Wood", 8);
-            break;
-        case (2):
-            strncpy(craftname, "Smith", 8);
-            break;
-        case (3):
-            strncpy(craftname, "Gold", 8);
-            break;
-        case (4):
-            strncpy(craftname, "Cloth", 8);
-            break;
-        case (5):
-            strncpy(craftname, "Leather", 8);
-            break;
-        case (6):
-            strncpy(craftname, "Bone", 8);
-            break;
-        case (7):
-            strncpy(craftname, "Alchemy", 8);
-            break;
-        case (8):
-            strncpy(craftname, "Cook", 8);
-            break;
+        maxSkill = skillLevel;
     }
 
-    const char* fmtQuery = "SELECT KeyItem, Wood, Smith, Gold, Cloth, Leather, Bone, \
-          Alchemy, Cook, Crystal, Result, Ingredient1, Ingredient2, \
-          Ingredient3, Ingredient4, Ingredient5, Ingredient6, \
-          Ingredient7, Ingredient8 \
-        FROM synth_recipes \
-        WHERE `%s` >= GREATEST(`Wood`,`Smith`,`Gold`,`Cloth`, \
-              `Bone`,`Alchemy`,`Cook`) AND \
-          %s BETWEEN %u AND %u \
-        ORDER BY RAND ( ) \
-        LIMIT 1;";
+    const char* fmtQuery = "SELECT Result FROM synth_recipes INNER JOIN item_basic ON Result = item_basic.itemid \
+        WHERE `%s` >= GREATEST(`Wood`, `Smith`, `Gold`, `Cloth`, `Leather`, `Bone`, `Alchemy`, `Cook`) AND \
+        `%s` BETWEEN %u AND %u AND Desynth = 0 ORDER BY `%s`, item_basic.name LIMIT %d, 17;";
 
-    // TODO: Confirm the conditions under which a recipe can be selected
-    // TODO: Is there a better way to run this query than comparing the
-    //      craft level of the "main" craft against the craft level of
-    //      each craft one at a time to ensure we are only getting
-    //      recipes intended for the craft we are seeking to improve?
-    int32 ret = sql->Query(fmtQuery, craftname, craftname, skillLevel + 5, skillLevel + 10);
+    int32 ret = sql->Query(fmtQuery, craftName, craftName, minSkill, maxSkill, craftName, resultOffset);
+
+    if (ret != SQL_ERROR && sql->NumRows() != 0)
+    {
+        uint8 itemIdOffset = 0x10;
+        while (sql->NextRow() == SQL_SUCCESS)
+        {
+            ref<uint16>(itemIdOffset) = sql->GetUIntData(0);
+
+            itemIdOffset += 2;
+            if (itemIdOffset == 0x30)
+            {
+                // The 17th result of a query is not displayed in the menu, but instead is used to signal
+                // to the client that another page is available.  This item ID is stored at 0x32.
+                itemIdOffset += 2;
+            }
+        }
+    }
+
+    ref<uint16>(0x30) = 0x02;
+}
+
+CSynthSuggestionRecipePacket::CSynthSuggestionRecipePacket(uint16 skillID, uint16 skillLevel, uint8 skillRank, uint16 selectedRecipeOffset)
+{
+    this->setType(0x31);
+    this->setSize(0x34);
+
+    const char* craftName = craftSkillDbNames[skillID - 1].c_str();
+    uint8       minSkill  = skillRank * 10;
+    uint8       maxSkill  = (skillRank + 1) * 10;
+
+    if (skillLevel < maxSkill)
+    {
+        maxSkill = skillLevel;
+    }
+
+    ShowDebug("%d", selectedRecipeOffset);
+
+    const char* fmtQuery = "SELECT KeyItem, Wood, Smith, Gold, Cloth, Leather, Bone, Alchemy, Cook, Crystal, Result, \
+        Ingredient1, Ingredient2, Ingredient3, Ingredient4, Ingredient5, Ingredient6, Ingredient7, Ingredient8 \
+        FROM synth_recipes INNER JOIN item_basic ON Result = item_basic.itemid \
+        WHERE `%s` >= GREATEST(`Wood`, `Smith`, `Gold`, `Cloth`, `Leather`, `Bone`, `Alchemy`, `Cook`) AND \
+        `%s` BETWEEN %u AND %u AND Desynth = 0 ORDER BY `%s`, item_basic.name LIMIT %d, 1;";
+
+    int32 ret = sql->Query(fmtQuery, craftName, craftName, minSkill, maxSkill, craftName, selectedRecipeOffset);
 
     if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
     {
