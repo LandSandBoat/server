@@ -772,6 +772,7 @@ namespace luautils
                             {
                                 auto name = innerKey.as<std::string>();
                                 auto num  = innerValue.as<int32>();
+
                                 if (num == -1)
                                 {
                                     bool found = false;
@@ -794,7 +795,6 @@ namespace luautils
                                     }
                                     else if (outerName == "npc")
                                     {
-                                        bool found = false;
                                         PZone->ForEachNpc([&](CNpcEntity* PNpc)
                                         {
                                             if (!found)
@@ -810,6 +810,7 @@ namespace luautils
                                             }
                                         });
                                     }
+
                                     if (!found)
                                     {
                                         ShowError(fmt::format("Could not complete id lookup for {}.ID.{}.{}", zoneName, outerName, name))
