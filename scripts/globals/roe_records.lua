@@ -5036,7 +5036,7 @@ function getRoeRecords(triggers)
         { -- Conflict: Escha - Ru'Aun I
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobName = set { "Eschan_Il'Aern" }, zone = set { 289 } },
+            reqs = { mobName = set { "Eschan_Ilaern" }, zone = set { 289 } },
             flags = set { "repeat" },
             reward = { sparks = 300, xp = 900, capacity = 150, accolades = 30, item = { 6391 } },
         },
