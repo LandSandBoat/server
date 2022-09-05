@@ -571,3 +571,81 @@ function utils.lateralTranslateWithOriginRotation(origin, translation)
 
     return new_coords
 end
+
+function utils.getNearPosition(origin, offset, radians)
+    local destination =
+    {
+        x = origin.x + math.cos(2 * math.pi - radians) * offset,
+        y = origin.y,
+        z = origin.z + math.sin(2 * math.pi - radians) * offset
+    }
+
+    return destination
+end
+
+function utils.distance(A, B, ignoreVertical)
+    return math.sqrt(utils.distanceSquared(A, B, ignoreVertical))
+end
+
+function utils.distanceSquared(A, B, ignoreVertical)
+    local dX = B.x - A.x
+    local dY = (ignoreVertical and 0.0) or B.y - A.y
+    local dZ = B.z - A.z
+
+    return dX * dX + dY * dY + dZ * dZ
+end
+
+function utils.distanceWithin(A, B, within, ignoreVertical)
+    return utils.distanceSquared(A, B, ignoreVertical) <= within * within
+end
+
+function utils.getWorldAngle(A, B)
+    -- lua math.atan functions like cpp atan2. On top of this, all ffxi world angles are positive.
+    -- So we have to adjust the range of lua's math.atan from [-pi, pi] to [0, 2pi]
+    -- Similarly, cpp's atanf gets its range adjusted from [-pi/2, pi/2] to [0, 2pi]
+    -- It does this by checking the quadrant, which math.atan does automatically.
+    -- Finally, ffxi rotations go in the opposite direction from standard rotations.
+    local radians = math.atan((B.z - A.z) / (B.x - A.x)) * -1.0
+
+    if B.x > A.x and B.z > A.z then
+        -- Quadrant 1
+        radians = radians + 2 * math.pi
+    elseif B.x > A.x then
+        -- Quadrant 4
+        radians = radians + 0
+    elseif B.z > A.z then
+        -- Quadrant 2
+        radians = radians + math.pi
+    else
+        -- Quadrant 3
+        radians = radians + math.pi
+    end
+
+    return radians
+end
+
+function utils.getWorldRotation(A, B)
+    return utils.angleToRotation(utils.getWorldAngle(A, B))
+end
+
+function utils.getAngleDifference(a, b)
+    local diff = math.abs(b - a)
+    if diff > math.pi then diff = 2 * math.pi - diff end
+    return diff
+end
+
+-- Returns whether the angle formed between A and B with origin is <= within radians.
+function utils.angleWithin(origin, A, B, within)
+    return utils.getAngleDifference(utils.getWorldAngle(origin, A), utils.getWorldAngle(origin, B)) <= within
+end
+
+local ffxiRotationToAngleFactor = 2.0 * math.pi / 256.0
+local ffxiAngleToRotationFactor  = 256.0 / (2.0 * math.pi)
+
+function utils.rotationToAngle(ffxiRotation)
+    return ffxiRotation * ffxiRotationToAngleFactor
+end
+
+function utils.angleToRotation(radians)
+    return radians * ffxiAngleToRotationFactor
+end

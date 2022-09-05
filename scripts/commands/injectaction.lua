@@ -21,6 +21,18 @@ function onTrigger(player, actionId, animationId, speceffect, reaction, message)
         return
     end
 
+    if actionId == 0 or actionId > 15 then
+        error(player, "<action ID> is out of range. Current valid and tested action IDs are 1-15.")
+        return
+    end
+
+    local target = player:getCursorTarget()
+
+    if not target then
+        error(player, "No valid target found")
+        return
+    end
+
     -- validate animationId
     if animationId == nil then
         error(player, "You must provide an animation ID.")
@@ -41,5 +53,5 @@ function onTrigger(player, actionId, animationId, speceffect, reaction, message)
     end
 
     -- inject action packet
-    player:injectActionPacket(actionId, animationId, speceffect, reaction, message)
+    player:injectActionPacket(target:getID(), actionId, animationId, speceffect, reaction, message, 10, 1)
 end

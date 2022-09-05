@@ -3414,19 +3414,33 @@ void SmallPacket0x053(map_session_data_t* const PSession, CCharEntity* const PCh
     }
 }
 
-/************************************************************************
- *                                                                        *
- *  Request synthesis suggestion                                            *
- *                                                                        *
+/*************************************************************************
+ *                                                                       *
+ *  Request synthesis suggestion                                         *
+ *                                                                       *
  ************************************************************************/
 
 void SmallPacket0x058(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    uint16 skillID    = data.ref<uint16>(0x04);
-    uint16 skillLevel = data.ref<uint16>(0x06);
+    uint16 skillID     = data.ref<uint16>(0x04);
+    uint16 skillLevel  = data.ref<uint16>(0x06); // Player's current skill level (whole number only)
+    uint8  requestType = data.ref<uint8>(0x0A);  // 02 is list view, 03 is recipe
+    uint8  skillRank   = data.ref<uint8>(0x12);  // Requested Rank for item suggestions
 
-    PChar->pushPacket(new CSynthSuggestionPacket(skillID, skillLevel));
+    if (requestType == 2)
+    {
+        // For pagination, the client sends the range in increments of 16. (0..0x10, 0x10..0x20, etc)
+        // uint16 resultMax  = data.ref<uint16>(0x0E); // Unused, maximum in range is always 16 greater
+        uint16 resultMin = data.ref<uint16>(0x0C);
+
+        PChar->pushPacket(new CSynthSuggestionListPacket(skillID, skillLevel, skillRank, resultMin));
+    }
+    else
+    {
+        uint16 selectedRecipeOffset = data.ref<uint16>(0x10);
+        PChar->pushPacket(new CSynthSuggestionRecipePacket(skillID, skillLevel, skillRank, selectedRecipeOffset));
+    }
 }
 
 /************************************************************************
@@ -6156,6 +6170,11 @@ void SmallPacket0x0E8(map_session_data_t* const PSession, CCharEntity* const PCh
         break;
         case ANIMATION_HEALING:
         {
+            if (data.ref<uint8>(0x04) == 0x01)
+            {
+                return;
+            }
+
             PChar->StatusEffectContainer->DelStatusEffect(EFFECT_HEALING);
         }
         break;
