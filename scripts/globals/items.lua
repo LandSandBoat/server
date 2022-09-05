@@ -3078,6 +3078,7 @@ xi.items =
     ARGUTE_PANTS                    = 16362,
     ARGUTE_PANTS_P1                 = 16363,
     BENEDIGHT_HOSE                  = 16364,
+    POISON_CESTI                    = 16387,
     LYNX_BAGHNAKHS                  = 16409,
     PATAS                           = 16419,
     RUSTY_DAGGER                    = 16447,
