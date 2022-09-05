@@ -4630,7 +4630,7 @@ INSERT INTO `mob_groups` VALUES (23,1085,83,'Doom_Soldier',330,1,677,0,0,69,71,0
 INSERT INTO `mob_groups` VALUES (24,1083,83,'Doom_Mage',330,1,677,0,0,69,71,0);
 INSERT INTO `mob_groups` VALUES (25,557,83,'Bugard',330,0,372,0,0,66,68,0);
 INSERT INTO `mob_groups` VALUES (26,5172,83,'Warabouc',7200,0,3075,8500,0,72,73,0);
-INSERT INTO `mob_groups` VALUES (27,3375,83,'Robber_Crab',330,0,2107,0,0,62,64,0);
+INSERT INTO `mob_groups` VALUES (27,7048,83,'Robber_Crab',330,0,2107,0,0,62,64,0);
 INSERT INTO `mob_groups` VALUES (28,6375,83,'Stygian_Pugil',330,0,2354,0,0,64,66,0);
 INSERT INTO `mob_groups` VALUES (29,4285,83,'Wandering_Sapling',330,0,2323,0,0,35,36,0);
 INSERT INTO `mob_groups` VALUES (30,1900,83,'Haunt',330,1,1280,0,0,65,69,0);
