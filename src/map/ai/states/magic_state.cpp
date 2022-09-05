@@ -110,6 +110,15 @@ bool CMagicState::Update(time_point tick)
             {
                 m_interrupted = true;
             }
+
+            if (m_PSpell.get()->getSpellGroup() == SPELLGROUP_TRUST)
+            {
+                if (!luautils::OnTrustSpellCastCheckBattlefieldTrusts(PChar))
+                {
+                    msg           = MSGBASIC_TRUST_NO_CAST_TRUST;
+                    m_interrupted = true;
+                }
+            }
         }
         else if (PTarget->objtype == TYPE_PET)
         {
