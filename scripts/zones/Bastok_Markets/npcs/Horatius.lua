@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Bastok Markets
 --  NPC: Horatius
--- Type: Quest Giver
 -- Starts and Finishes: Breaking Stones
 -- !pos -158 -6 -117 235
 -----------------------------------
@@ -18,11 +17,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local wildcatBastok = player:getCharVar("WildcatBastok")
-
-    if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(wildcatBastok, 12) then
-        player:startEvent(428)
-    elseif player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BREAKING_STONES) == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.BASTOK) >= 2 then
+    if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BREAKING_STONES) == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.BASTOK) >= 2 then
         player:startEvent(100)
     end
 end
@@ -37,8 +32,6 @@ entity.onEventFinish = function(player, csid, option)
         if (npcUtil.completeQuest(player, xi.quest.log_id.BASTOK, xi.quest.id.bastok.BREAKING_STONES, {gil=400})) then
             player:confirmTrade()
         end
-    elseif csid == 428 then
-        player:setCharVar("WildcatBastok", utils.mask.setBit(player:getCharVar("WildcatBastok"), 12, true))
     end
 end
 
