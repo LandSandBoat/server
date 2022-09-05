@@ -1,9 +1,6 @@
 -----------------------------------
 -- Area: Bastok Markets
 --  NPC: Porter Moogle
--- Type:   Storage Moogle
--- !zone 235
--- !pos TODO
 -----------------------------------
 local ID = require("scripts/zones/Bastok_Markets/IDs")
 require("scripts/globals/porter_moogle")
@@ -12,11 +9,11 @@ local entity = {}
 
 local e =
 {
-    TALK_EVENT_ID       =   545,
-    STORE_EVENT_ID      =   546,
-    RETRIEVE_EVENT_ID   =   547,
-    ALREADY_STORED_ID   =   548,
-    MAGIAN_TRIAL_ID     =   549
+    TALK_EVENT_ID     = 545,
+    STORE_EVENT_ID    = 546,
+    RETRIEVE_EVENT_ID = 547,
+    ALREADY_STORED_ID = 548,
+    MAGIAN_TRIAL_ID   = 549
 }
 
 entity.onTrade = function(player, npc, trade)
