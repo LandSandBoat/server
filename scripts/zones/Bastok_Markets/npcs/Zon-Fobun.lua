@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Bastok Markets
 --  NPC: Zon-Fobun
--- Type: Quest Giver
 -- !pos -241.293 -3 63.406 235
 -----------------------------------
 require("scripts/globals/keyitems")
@@ -20,8 +19,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(251) -- Quest Start Dialogue
     elseif cCollector == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.CURSEPAPER) and player:getCharVar("cCollectSilence") == 1 and player:getCharVar("cCollectCurse") == 1 then
         player:startEvent(252) -- Quest Completion Dialogue
-    else
-        player:startEvent(250)
     end
 end
 

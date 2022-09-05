@@ -24,8 +24,6 @@ end
 entity.onTrigger = function(player, npc)
     if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_FLASH_IN_THE_PAN) == QUEST_AVAILABLE then
         player:startEvent(217)
-    else
-        player:startEvent(116)
     end
 end
 
@@ -43,4 +41,5 @@ entity.onEventFinish = function(player, csid, option)
         end
     end
 end
+
 return entity
