@@ -7,7 +7,10 @@ return {
     ['Corann']       = { event = 38 },
     ['Ehrhard']      = { event = 47 },
     ['Latifah']      = { event = 13 },
+    ['Mine_Konte']   = { event = 42 },
     ['Otto']         = { event = 20 },
+    ['Panana']       = { event = 43 },
     ['Powhatan']     = { text = ID.text.POWHATAN_DIALOG_1 },
+    ['Ronan']        = { event = 37 },
     ['Steel_Bones']  = { event = 29 },
 }
