@@ -4,6 +4,7 @@ return {
     ['Bartolomeo']   = { text = ID.text.ARRIVING_PASSENGER_DIALOG },
     ['Carmelo']      = { event = 182 },
     ['Clarion_Star'] = { event = 442 },
+    ['Corann']       = { event = 38 },
     ['Ehrhard']      = { event = 47 },
     ['Latifah']      = { event = 13 },
     ['Otto']         = { event = 20 },
