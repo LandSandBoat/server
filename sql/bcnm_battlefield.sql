@@ -906,21 +906,21 @@ INSERT INTO `bcnm_battlefield` VALUES (481,3,17608725,3);
 INSERT INTO `bcnm_battlefield` VALUES (482,1,17608726,3); -- trial-size_trial_by_ice
 INSERT INTO `bcnm_battlefield` VALUES (482,2,17608727,3);
 INSERT INTO `bcnm_battlefield` VALUES (482,3,17608728,3);
-INSERT INTO `bcnm_battlefield` VALUES (451,1,17608729,3); -- Waking the Beast (Shiva)
-INSERT INTO `bcnm_battlefield` VALUES (451,1,17608730,3);
-INSERT INTO `bcnm_battlefield` VALUES (451,1,17608731,3);
-INSERT INTO `bcnm_battlefield` VALUES (451,1,17608732,3);
-INSERT INTO `bcnm_battlefield` VALUES (451,1,17608733,3);
-INSERT INTO `bcnm_battlefield` VALUES (451,2,17608734,3);
-INSERT INTO `bcnm_battlefield` VALUES (451,2,17608735,3);
-INSERT INTO `bcnm_battlefield` VALUES (451,2,17608736,3);
-INSERT INTO `bcnm_battlefield` VALUES (451,2,17608737,3);
-INSERT INTO `bcnm_battlefield` VALUES (451,2,17608738,3);
-INSERT INTO `bcnm_battlefield` VALUES (451,3,17608739,3);
-INSERT INTO `bcnm_battlefield` VALUES (451,3,17608740,3);
-INSERT INTO `bcnm_battlefield` VALUES (451,3,17608741,3);
-INSERT INTO `bcnm_battlefield` VALUES (451,3,17608742,3);
-INSERT INTO `bcnm_battlefield` VALUES (451,3,17608743,3);
+INSERT INTO `bcnm_battlefield` VALUES (483,1,17608729,3); -- Waking the Beast (Shiva)
+INSERT INTO `bcnm_battlefield` VALUES (483,1,17608730,3);
+INSERT INTO `bcnm_battlefield` VALUES (483,1,17608731,3);
+INSERT INTO `bcnm_battlefield` VALUES (483,1,17608732,3);
+INSERT INTO `bcnm_battlefield` VALUES (483,1,17608733,3);
+INSERT INTO `bcnm_battlefield` VALUES (483,2,17608734,3);
+INSERT INTO `bcnm_battlefield` VALUES (483,2,17608735,3);
+INSERT INTO `bcnm_battlefield` VALUES (483,2,17608736,3);
+INSERT INTO `bcnm_battlefield` VALUES (483,2,17608737,3);
+INSERT INTO `bcnm_battlefield` VALUES (483,2,17608738,3);
+INSERT INTO `bcnm_battlefield` VALUES (483,3,17608739,3);
+INSERT INTO `bcnm_battlefield` VALUES (483,3,17608740,3);
+INSERT INTO `bcnm_battlefield` VALUES (483,3,17608741,3);
+INSERT INTO `bcnm_battlefield` VALUES (483,3,17608742,3);
+INSERT INTO `bcnm_battlefield` VALUES (483,3,17608743,3);
 INSERT INTO `bcnm_battlefield` VALUES (484,1,17608744,3); -- sugar-coated_directive
 INSERT INTO `bcnm_battlefield` VALUES (484,2,17608745,3);
 INSERT INTO `bcnm_battlefield` VALUES (484,3,17608746,3);

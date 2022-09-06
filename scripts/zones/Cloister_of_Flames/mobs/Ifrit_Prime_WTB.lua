@@ -12,11 +12,11 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
     mob:setMobMod(xi.mobMod.SIGHT_RANGE, 21)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
-    mob:setMod(xi.mod.FIRE_ABSORB, 1000)
 end
 
 entity.onMobSpawn = function(mob)
     mob:setLocalVar("HPThreshold", math.random(10, 90))
+    mob:setMod(xi.mod.FIRE_ABSORB, 1000)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
@@ -40,7 +40,8 @@ entity.onMobWeaponSkill = function(target, mob, skill)
 end
 
 entity.onMobEngaged = function(mob, target)
-    mob:setLocalVar("timer", os.time() + math.random(30,90))
+    mob:setLocalVar("timer", os.time() + math.random(30,60))
+    mob:setLocalVar("hateTimer", os.time() + math.random(10,20))
 end
 
 entity.onMobFight = function(mob, target)
@@ -51,10 +52,23 @@ entity.onMobFight = function(mob, target)
 
     if mob:getLocalVar("timer") < os.time() then
         for i = 1, 4 do
-            if GetMobByID(mob:getID()+i):isAlive() then
-                GetMobByID(mob:getID()+i):castSpell(xi.magic.spell.FIRE_IV, mob)
-                mob:setLocalVar("timer", os.time() + math.random(30,90))
+            local elemental = GetMobByID(mob:getID()+i)
+
+            if elemental:isAlive() then
+                elemental:castSpell(xi.magic.spell.FIRE_IV, mob)
+                mob:setLocalVar("timer", os.time() + math.random(30,60))
                 break
+            end
+        end
+    end
+
+    if mob:getLocalVar("hateTimer") < os.time() then
+        for i = 1, 4 do
+            local elemental = GetMobByID(mob:getID()+i)
+
+            if elemental:isAlive() then
+                elemental:updateEnmity(target)
+                mob:setLocalVar("hateTimer", os.time() + math.random(10,20))
             end
         end
     end

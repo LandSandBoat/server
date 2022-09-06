@@ -59,8 +59,8 @@ xi.battlefield.leaveCode =
 
 function xi.battlefield.onBattlefieldTick(battlefield, timeinside)
     local killedallmobs = true
+    local canLeave      = false
     local leavecode     = -1
-    local canLeave      = 0
 
     local mobs          = battlefield:getMobs(true, false)
     local status        = battlefield:getStatus()

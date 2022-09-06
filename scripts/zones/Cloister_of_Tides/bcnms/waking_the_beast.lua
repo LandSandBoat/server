@@ -2,7 +2,7 @@
 -- Area: Cloister of Tides
 -- BCNM: Waking the Beast
 -----------------------------------
-local ID = require("scripts/zones/Cloister_of_Frost/IDs")
+local ID = require("scripts/zones/Cloister_of_Tides/IDs")
 require("scripts/globals/battlefield")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")

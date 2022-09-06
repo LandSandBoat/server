@@ -20,6 +20,10 @@ entity.onTrigger = function(player, npc)
         player:getCharVar("ASA4_Amber") == 1
     then
         player:startEvent(2)
+
+    elseif player:hasKeyItem(xi.ki.RAINBOW_RESONATOR) and not player:hasKeyItem(xi.ki.EYE_OF_TREMORS) then
+        xi.bcnm.onTrigger(player, npc)
+
     elseif not xi.bcnm.onTrigger(player, npc) then
         player:messageSpecial(ID.text.PROTOCRYSTAL)
     end
