@@ -887,7 +887,6 @@ local function canDig(player)
                 player:setCharVar('[DIG]LastDigX', currX)
                 player:setCharVar('[DIG]LastDigY', currY)
                 player:setCharVar('[DIG]LastDigZ', currZ)
-                player:delItem(4545, 1)
 
                 return true
             end
