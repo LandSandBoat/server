@@ -58,8 +58,6 @@ battlefield_object.onEventFinish = function(player, csid, option)
             player:setCharVar("WTB_TITLE", 0)
         end
     end
-
-
 end
 
 return battlefield_object
