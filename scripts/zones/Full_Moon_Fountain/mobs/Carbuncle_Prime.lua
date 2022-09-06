@@ -36,7 +36,7 @@ local spawnPrime = function(mob, target)
 
             if bf:getLocalVar(avatars[random]) == 0 then
                 bf:setLocalVar(avatars[random], 1)
-                prime = ID.primes[random][bf:getArea()]
+                local prime = ID.primes[random][bf:getArea()]
 
                 SpawnMob(prime):updateEnmity(target)
                 GetMobByID(prime):setPos(pos.x + math.random(-3,3), pos.y, pos.z + math.random(-3, 3), pos.rot)
