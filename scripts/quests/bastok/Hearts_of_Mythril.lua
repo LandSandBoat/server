@@ -2,7 +2,7 @@
 -- Hearts of Mythril
 -----------------------------------
 -- Log ID: 1, Quest ID: 6
--- Elki     : !pos
+-- Elki     : !pos -17.087 -0.05 52.745 234
 -- Monument : !pos 300 -62.803 498.2 106
 -----------------------------------
 require('scripts/globals/items')

@@ -3092,6 +3092,7 @@ xi.items =
     BRONZE_SWORD                    = 16535,
     SPATHA                          = 16565,
     PERDU_SWORD                     = 16602,
+    SMALL_SWORD                     = 16629,
     BRONZE_AXE                      = 16640,
     MYTHRIL_PICK                    = 16651,
     ORCISH_AXE                      = 16656,
