@@ -168,7 +168,7 @@ xi.quest.id =
     {
         THE_SIRENS_TEAR                 = 0,  -- ± Converted
         BEAUTY_AND_THE_GALKA            = 1,  -- ±
-        WELCOME_TO_BASTOK               = 2,  -- +
+        WELCOME_TO_BASTOK               = 2,  -- + Converted
         GUEST_OF_HAUTEUR                = 3,
         THE_QUADAV_S_CURSE              = 4,  -- ±
         OUT_OF_ONE_S_SHELL              = 5,  -- ±
