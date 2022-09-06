@@ -8,4 +8,5 @@ return {
     ['Latifah']      = { event = 13 },
     ['Otto']         = { event = 20 },
     ['Powhatan']     = { text = ID.text.POWHATAN_DIALOG_1 },
+    ['Steel_Bones']  = { event = 29 },
 }
