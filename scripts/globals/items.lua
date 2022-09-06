@@ -2273,6 +2273,7 @@ xi.items =
     ADAMAN_BREECHES                 = 12813,
     BYAKKOS_HAIDATE                 = 12818,
     BRONZE_SUBLIGAR                 = 12832,
+    SITABAKI                        = 12840,
     KOENIG_SCHUHS                   = 12933,
     ADAMAN_SOLLERETS                = 12941,
     SUZAKUS_SUNE_ATE                = 12946,
