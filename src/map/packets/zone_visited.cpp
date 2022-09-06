@@ -31,5 +31,5 @@ CZoneVisitedPacket::CZoneVisitedPacket(CCharEntity* PChar)
     this->setType(0x08);
     this->setSize(0x34);
 
-    memcpy(data + 4, PChar->m_ZonesList, 36);
+    memcpy(data + 4, PChar->m_ZonesList, 38);
 }

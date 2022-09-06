@@ -1,12 +1,13 @@
 -----------------------------------
 -- Trust
 -----------------------------------
+require("scripts/globals/bcnm")
 require("scripts/globals/keyitems")
-require("scripts/globals/settings")
-require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/roe")
+require("scripts/globals/settings")
+require("scripts/globals/status")
 -----------------------------------
 
 xi = xi or {}
@@ -179,6 +180,28 @@ local poolIDToMessagePageOffset =
     [6019] = 112, -- Shantotto II
 }
 
+-- TODO: handle Dynamis Divergence, Omen, etc that are not "battlefields" but have a trust upper limit.
+xi.trust.checkBattlefieldTrustCount = function (caster)
+    local battlefield = caster:getBattlefield()
+    if battlefield then
+        local participants     = battlefield:getPlayersAndTrusts()
+        local maxParticipants  = battlefield:getMaxParticipants()
+        local numPlayers       = battlefield:getPlayerCount()
+        local numTrusts        = 0
+
+        for _, entity in ipairs(participants) do
+            local objType = entity:getObjType()
+
+            if objType == xi.objType.TRUST then
+               numTrusts = numTrusts + 1
+            end
+        end
+
+        return (numPlayers + numTrusts) < maxParticipants
+    end
+    return true
+end
+
 xi.trust.hasPermit = function(player)
     return player:hasKeyItem(xi.ki.WINDURST_TRUST_PERMIT) or
            player:hasKeyItem(xi.ki.BASTOK_TRUST_PERMIT) or
@@ -329,6 +352,10 @@ xi.trust.canCast = function(caster, spell, not_allowed_trust_ids)
     elseif num_trusts >= 4 and not caster:hasKeyItem(xi.ki.RHAPSODY_IN_CRIMSON) then
         caster:messageSystem(xi.msg.system.TRUST_MAXIMUM_NUMBER)
         return -1
+    end
+
+    if not xi.trust.checkBattlefieldTrustCount(caster) then
+        return xi.msg.basic.TRUST_NO_CAST_TRUST
     end
 
     return 0

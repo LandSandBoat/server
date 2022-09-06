@@ -32,6 +32,7 @@ zones[xi.zone.CASTLE_OZTROJA] =
         CARRIED_OVER_POINTS                = 7186, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY            = 7187, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                       = 7188, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        MEMBERS_LEVELS_ARE_RESTRICTED      = 7208, -- Your party is unable to participate because certain members' levels are restricted.
         FISHING_MESSAGE_OFFSET             = 7261, -- You can't fish here.
         CHEST_UNLOCKED                     = 7432, -- You unlock the chest!
         YAGUDO_AVATAR_ENGAGE               = 7453, -- Kahk-ka-ka... You filthy, dim-witted heretics! You have damned yourselves by coming here.

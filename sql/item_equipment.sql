@@ -14131,6 +14131,7 @@ INSERT INTO `item_equipment` VALUES (28465,'pyaekue_belt_+1',99,0,2473969,0,0,0,
 INSERT INTO `item_equipment` VALUES (28466,'dynamic_belt',99,0,2473969,0,0,0,1024,0,0);
 INSERT INTO `item_equipment` VALUES (28467,'dynamic_belt_+1',99,0,2473969,0,0,0,1024,0,0);
 INSERT INTO `item_equipment` VALUES (28468,'matanki_earring',99,0,4194303,0,0,0,6144,0,0);
+INSERT INTO `item_equipment` VALUES (28469,'endorsement_ring',99,0,4194303,0,0,0,24576,0,0);
 INSERT INTO `item_equipment` VALUES (28470,'emporoxs_ring',99,0,4194303,0,0,0,24576,0,0);
 INSERT INTO `item_equipment` VALUES (28471,'gere_ring',99,0,2494754,0,0,0,24576,0,0);
 INSERT INTO `item_equipment` VALUES (28472,'freke_ring',99,0,1589276,0,0,0,24576,0,0);

@@ -270,17 +270,6 @@ void CBattlefield::ApplyLevelRestrictions(CCharEntity* PChar) const
         PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_SYNTH_SUPPORT, true);
         PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_BLOODPACT, true);
 
-        if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_LEVEL_SYNC))
-        {
-            PChar->StatusEffectContainer->DelStatusEffect(EFFECT_LEVEL_SYNC);
-            PChar->m_LevelRestriction = 0;
-        }
-
-        if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_LEVEL_RESTRICTION))
-        {
-            PChar->StatusEffectContainer->DelStatusEffect(EFFECT_LEVEL_RESTRICTION);
-        }
-
         PChar->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_LEVEL_RESTRICTION, EFFECT_LEVEL_RESTRICTION, cap, 0, 0));
     }
 

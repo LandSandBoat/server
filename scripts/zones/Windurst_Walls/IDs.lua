@@ -23,6 +23,7 @@ zones[xi.zone.WINDURST_WALLS] =
         CARRIED_OVER_POINTS            = 6588,  -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY        = 6589,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                   = 6590,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        MEMBERS_LEVELS_ARE_RESTRICTED  = 6610,  -- Your party is unable to participate because certain members' levels are restricted.
         YOU_LEARNED_TRUST              = 6612,  -- You learned Trust: <name>!
         HOMEPOINT_SET                  = 6646,  -- Home point set!
         YOU_ACCEPT_THE_MISSION         = 6739,  -- You have accepted the mission.
