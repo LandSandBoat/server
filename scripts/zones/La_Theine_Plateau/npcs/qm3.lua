@@ -39,7 +39,10 @@ entity.onTrigger = function(player, npc)
         player:startEvent(207)
     end
 
-    if player:hasKeyItem(xi.ki.FADED_RUBY) then
+    if
+        player:hasKeyItem(xi.ki.FADED_RUBY) and
+        player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.WAKING_THE_BEAST) == QUEST_ACCEPTED
+    then
         player:startEvent(208)
     end
 end
