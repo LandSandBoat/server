@@ -32,15 +32,16 @@ zones[xi.zone.FULL_MOON_FOUNTAIN] =
     npc =
     {
     },
+    -- Prime avatars in "Waking the Beast" battlefield along with their respective 2hr ability
     primes =
     {
-        {17473558, 17473569, 17473580}, -- Carbuncle
-        {17473563, 17473574, 17473585}, -- Ifrit
-        {17473564, 17473575, 17473586}, -- Shiva
-        {17473565, 17473576, 17473587}, -- Garuda
-        {17473566, 17473577, 17473588}, -- Titan
-        {17473567, 17473578, 17473589}, -- Ramuh
-        {17473568, 17473579, 17473590}, -- Leviathan
+        {17473558, 17473569, 17473580,   0}, -- Carbuncle (Unused)
+        {17473563, 17473574, 17473585, 848}, -- Ifrit (Inferno)
+        {17473564, 17473575, 17473586, 884}, -- Shiva (Diamond Dust)
+        {17473565, 17473576, 17473587, 875}, -- Garuda (Aerial Blast)
+        {17473566, 17473577, 17473588, 857}, -- Titan (Earthen Fury)
+        {17473567, 17473578, 17473589, 893}, -- Ramuh (Judgement Bolt)
+        {17473568, 17473579, 17473590, 866}, -- Leviathan (Tidal Wave)
     },
 }
 

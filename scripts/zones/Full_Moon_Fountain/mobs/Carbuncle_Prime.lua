@@ -56,7 +56,7 @@ entity.onMobSpawn = function(mob)
         local bf = mobArg:getBattlefield()
 
         mobArg:setHP(bf:getLocalVar("carbuncleHP"))
-        bf:setLocalVar("abilityControl", 1)
+        bf:setLocalVar("abilityControl", 0)
         bf:setLocalVar("primesDead", 0)
     end)
 end
