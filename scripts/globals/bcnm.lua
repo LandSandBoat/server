@@ -37,7 +37,7 @@ local battlefields =
         { 1,  673,    0},   -- Like the Wind (ENM)
         { 2,  674,    0},   -- Sheep in Antlion's Clothing (ENM)
         { 3,  675,    0},   -- Shell We Dance? (ENM)
-     -- { 4,  676,    0},   -- Totentanz (ENM)
+        { 4,  676,    0},   -- Totentanz (ENM)
      -- { 5,  677,    0},   -- Tango with a Tracker (Quest)
      -- { 6,  678,    0},   -- Requiem of Sin (Quest)
      -- { 7,  679, 3454},   -- Antagonistic Ambuscade (HKC30)
@@ -93,12 +93,12 @@ local battlefields =
     [xi.zone.RIVERNE_SITE_B01] =
     {
         { 0,  896,    0},   -- Storms of Fate (Quest)
-     -- { 1,  897, 2108},   -- The Wyrmking Descends (BCNM)
+        { 1,  897, 2108},   -- The Wyrmking Descends (BCNM)
     },
 
     [xi.zone.RIVERNE_SITE_A01] =
     {
-     -- { 0,  928, 1842},   -- Ouryu Cometh (BCNM)
+        { 0,  928, 1842},   -- Ouryu Cometh (BCNM)
     },
 
     [xi.zone.MONARCH_LINN] =
@@ -249,7 +249,7 @@ local battlefields =
         {11,   11, 1553},   -- Horns of War (KS99)
         {12,   12, 1131},   -- Under Observation (BS40)
         {13,   13, 1177},   -- Eye of the Tiger (BS50)
-     -- {14,   14, 1130},   -- Shots in the Dark (BS60) -- TODO: Warmachine combat behavior
+        {14,   14, 1130},   -- Shots in the Dark (BS60)
         {15,   15, 1175},   -- Double Dragonian (KS30) -- TODO: Chaos Blade strengthens after 2hr
         {16,   16, 1178},   -- Today's Horoscope (KS30)
         {17,   17, 1180},   -- Contaminated Colosseum (KS30)
@@ -295,7 +295,7 @@ local battlefields =
         {15,   79, 1130},   -- Up in Arms (BS60)
         {16,   80, 1175},   -- Copycat (KS30)
         {17,   81, 1178},   -- Operation Desert Swarm (KS30)
-     -- {18,   82, 1180},   -- Prehistoric Pigeons (KS30) -- TODO: Build resistance to sleep quickly. When one dies, remaining ones become more powerful.
+        {18,   82, 1180},   -- Prehistoric Pigeons (KS30)
      -- {19,   83, 3351},   -- The Palborough Project (KC30)
      -- {20,   84, 3352},   -- Shell Shocked (KC50)
         {21,   85,    0},   -- Beyond Infinity (Quest)
@@ -326,7 +326,7 @@ local battlefields =
         {13,  109, 1177},   -- Rapid Raptors (BS50)
         {14,  110, 1130},   -- Wild Wild Whiskers (BS60)
         {15,  111, 1175},   -- Seasons Greetings (KS30)
-     -- {16,  112, 1178},   -- Royale Ramble (KS30)
+        {16,  112, 1178},   -- Royale Ramble (KS30)
         {17,  113, 1180},   -- Moa Constrictors (KS30)
      -- {18,  114, 3351},   -- The V Formation (KC30)
      -- {19,  115, 3352},   -- Avian Apostates (KC50)
@@ -605,7 +605,7 @@ local function checkReqs(player, npc, bfid, registrant)
         [ 225] = function() return ( windy == mi.windurst.MOON_READING and natStat == 2                                                                                    ) end, -- Windy 9-2: Moon Reading
         [ 226] = function() return ( player:hasKeyItem(xi.ki.EYE_OF_GALES) and player:hasKeyItem(xi.ki.EYE_OF_FLAMES) and player:hasKeyItem(xi.ki.EYE_OF_FROST) and
                                      player:hasKeyItem(xi.ki.EYE_OF_STORMS) and player:hasKeyItem(xi.ki.EYE_OF_TIDES) and player:hasKeyItem(xi.ki.EYE_OF_TREMORS)          ) end, -- Quest: Waking the Beast
-        [ 256] = function() return ( roz == mi.zilart.RETURN_TO_DELKFUTTS_TOWER and rozStat == 3                                                                           ) end, -- ZM8: Return to Delkfutt's Tower
+        [ 256] = function() return ( roz == mi.zilart.RETURN_TO_DELKFUTTS_TOWER and rozStat == 2                                                                           ) end, -- ZM8: Return to Delkfutt's Tower
         [ 288] = function() return ( roz == mi.zilart.ARK_ANGELS and rozStat == 1 and npcid == getEntranceOffset(0) and not player:hasKeyItem(xi.ki.SHARD_OF_APATHY)       ) end, -- ZM14: Ark Angels (Hume)
         [ 289] = function() return ( roz == mi.zilart.ARK_ANGELS and rozStat == 1 and npcid == getEntranceOffset(1) and not player:hasKeyItem(xi.ki.SHARD_OF_COWARDICE)    ) end, -- ZM14: Ark Angels (Tarutaru)
         [ 290] = function() return ( roz == mi.zilart.ARK_ANGELS and rozStat == 1 and npcid == getEntranceOffset(2) and not player:hasKeyItem(xi.ki.SHARD_OF_ENVY)         ) end, -- ZM14: Ark Angels (Mithra)
@@ -677,7 +677,8 @@ local function checkReqs(player, npc, bfid, registrant)
         [ 864] = function() return ( cop == mi.cop.DESIRES_OF_EMPTINESS and player:getCharVar('Mission[6][518]Status') == 2                                                ) end, -- PM5-2: Desires of Emptiness
         [ 865] = function() return ( player:hasKeyItem(xi.ki.CENSER_OF_ACRIMONY)                                                                                           ) end, -- ENM: Pulling the Plug
         [ 896] = function() return ( player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == QUEST_ACCEPTED and
-                                     player:getCharVar('StormsOfFate') == 2                                                                                                ) end, -- Quest: Storms of Fate
+                                     player:getCharVar("Quest[3][86]Status") >= 2                                                                                          ) end, -- Quest: Storms of Fate
+        [ 897] = function() return ( player:hasKeyItem(xi.ki.WHISPER_OF_THE_WYRMKING)                                                                                      ) end, -- Quest: The Wyrmking Descends
         [ 960] = function() return ( cop == mi.cop.ANCIENT_VOWS and player:getCharVar('Mission[6][248]Status') == 2 and
                                      player:getPreviousZone() == xi.zone.RIVERNE_SITE_A01                                                                                  ) end, -- PM2-5: Ancient Vows
         [ 961] = function() return ( cop == mi.cop.THE_SAVAGE and player:getCharVar('Mission[6][418]Status') == 1 and player:getPreviousZone() == xi.zone.RIVERNE_SITE_B01 ) end, -- PM4-2: The Savage
@@ -868,7 +869,7 @@ local function checkSkip(player, bfid)
         [ 832] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.THE_MOTHERCRYSTALS) or player:hasKeyItem(xi.ki.LIGHT_OF_MEA)                                        ) end, -- PM1-3: The Mothercrystals
         [ 864] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.DESIRES_OF_EMPTINESS) or (cop == mi.cop.DESIRES_OF_EMPTINESS and
                                      player:getCharVar('Mission[6][518]Status') > 2)                                                                                                              ) end, -- PM5-2: Desires of Emptiness
-        [ 896] = function() return ( sofStat == QUEST_COMPLETED or (sofStat == QUEST_ACCEPTED and player:getCharVar("StormsOfFate") > 2)                                                          ) end, -- Quest: Storms of Fate
+        [ 896] = function() return ( sofStat == QUEST_COMPLETED or (sofStat == QUEST_ACCEPTED and player:getCharVar("Quest[3][86]Status") > 2)                                                    ) end, -- Quest: Storms of Fate
         [ 960] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.ANCIENT_VOWS)                                                                                       ) end, -- PM2-5: Ancient Vows
         [ 961] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.THE_SAVAGE) or (cop == mi.cop.THE_SAVAGE and player:getCharVar('Mission[6][418]Status') > 1)        ) end, -- PM4-2: The Savage
         [ 993] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.THE_WARRIORS_PATH)                                                                                  ) end, -- PM7-5: The Warrior's Path

@@ -48,6 +48,7 @@ local tpMoves =
 
 entity.onMobSpawn = function(mob)
     mob:SetMagicCastingEnabled(false)
+    mob:setMod(xi.mod.SLEEPRES, 50)
 end
 
 entity.onMobFight = function(mob, target)

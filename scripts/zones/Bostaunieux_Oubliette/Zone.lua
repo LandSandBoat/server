@@ -1,10 +1,8 @@
 -----------------------------------
---
 -- Zone: Bostaunieux_Oubliette (167)
---
 -----------------------------------
-local ID = require("scripts/zones/Bostaunieux_Oubliette/IDs")
-require("scripts/globals/conquest")
+local ID = require('scripts/zones/Bostaunieux_Oubliette/IDs')
+require('scripts/globals/conquest')
 -----------------------------------
 local zone_object = {}
 
@@ -21,9 +19,11 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
+
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(99.978, -25.647, 72.867, 61)
     end
+
     return cs
 end
 

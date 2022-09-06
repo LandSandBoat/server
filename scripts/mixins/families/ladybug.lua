@@ -45,7 +45,7 @@ end
 g_mixins.families.ladybug = function(mob)
     mob:addListener("SPAWN", "LADYBUG_SPAWN", function(ladybug)
         ladybug:setLocalVar("[ladybug]daySkillList", 170)
-        ladybug:setLocalVar("[ladybug]nightSkillList", 1167)
+        ladybug:setLocalVar("[ladybug]nightSkillList", 1173)
     end)
 
     mob:addListener("ROAM_TICK", "LADYBUG_ROAM_TICK", function(ladybug)

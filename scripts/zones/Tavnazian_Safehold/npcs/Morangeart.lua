@@ -35,7 +35,7 @@ entity.onEventFinish = function(player, csid, option)
     if csid == 521 then
         player:addKeyItem(xi.ki.MONARCH_BEARD)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.MONARCH_BEARD)
-        player:setCharVar("[ENM]MonarchBeard", os.time()+(xi.settings.main.ENM_COOLDOWN*3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
+        player:setCharVar("[ENM]MonarchBeard", os.time() + (xi.settings.main.ENM_COOLDOWN*3600)) -- Current time + (ENM_COOLDOWN*1hr in seconds)
     end
 end
 

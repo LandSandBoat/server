@@ -103,6 +103,16 @@ void CBlueSpell::setSecondarySkillchain(uint8 sc)
     m_SecondarySkillchain = sc;
 }
 
+uint8 CBlueSpell::getTertiarySkillchain() const
+{
+    return m_TertiarySkillchain;
+}
+
+void CBlueSpell::setTertiarySkillchain(uint8 sc)
+{
+    m_TertiarySkillchain = sc;
+}
+
 void CBlueSpell::addModifier(CModifier modifier)
 {
     modList.push_back(modifier);

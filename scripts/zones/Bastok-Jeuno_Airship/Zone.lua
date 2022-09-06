@@ -1,10 +1,8 @@
 -----------------------------------
---
 -- Zone: Bastok-Jeuno_Airship
---
 -----------------------------------
-local ID = require("scripts/zones/Bastok-Jeuno_Airship/IDs")
-require("scripts/globals/zone")
+local ID = require('scripts/zones/Bastok-Jeuno_Airship/IDs')
+require('scripts/globals/zone')
 -----------------------------------
 local zone_object = {}
 
@@ -14,7 +12,7 @@ end
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if (player:getXPos() == 0 or player:getYPos() == 0 or player:getZPos() == 0) then
+    if player:getXPos() == 0 or player:getYPos() == 0 or player:getZPos() == 0 then
         player:setPos(math.random(-4, 4), 1, math.random(-23, -12))
     end
 
@@ -29,11 +27,11 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    if (csid == 100) then
+    if csid == 100 then
         local prevzone = player:getPreviousZone()
-        if (prevzone == xi.zone.PORT_JEUNO) then
+        if prevzone == xi.zone.PORT_JEUNO then
             player:setPos(-75, 2.39, -34.83, 0, 236)
-        elseif (prevzone == xi.zone.PORT_BASTOK) then
+        elseif prevzone == xi.zone.PORT_BASTOK then
             player:setPos(-47.69, 12, -109.88, 0, 246)
         else
             --fix for black screen if prevzone is not getting set correctly

@@ -10,6 +10,8 @@ mixins = {require("scripts/mixins/job_special")}
 local entity = {}
 
 entity.onMobSpawn = function(mob)
+    mob:setLocalVar("chaosBladeLevel", 50)
+
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
@@ -17,6 +19,7 @@ entity.onMobSpawn = function(mob)
                 id = xi.jsa.SOUL_VOICE,
                 endCode = function(mobArg)
                     mobArg:addMod(xi.mod.ATT, 200)
+                    mobArg:setLocalVar("chaosBladeLevel", 75)
                 end,
             },
         },

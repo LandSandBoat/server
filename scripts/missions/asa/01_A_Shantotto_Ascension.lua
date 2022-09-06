@@ -35,7 +35,7 @@ mission.sections =
                         prevZone == xi.zone.WINDURST_WATERS or
                         prevZone == xi.zone.WINDURST_WOODS
                     then
-                        return mission:event(510)
+                        return 510
                     end
                 end,
             },
@@ -47,9 +47,7 @@ mission.sections =
                 end,
 
                 [514] = function(player, csid, option, npc)
-                    if mission:complete(player) then
-                        player:setCharVar('ASA_Status', 0) -- Brought from original script
-                    end
+                    mission:complete(player)
                 end,
             },
         },

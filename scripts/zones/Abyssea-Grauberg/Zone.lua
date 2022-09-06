@@ -1,9 +1,9 @@
 -----------------------------------
 -- Zone: Abyssea - Grauberg
 -----------------------------------
-local ID = require("scripts/zones/Abyssea-Grauberg/IDs")
-require("scripts/globals/quests")
-require("scripts/globals/helm")
+local ID = require('scripts/zones/Abyssea-Grauberg/IDs')
+require('scripts/globals/abyssea')
+require('scripts/globals/helm')
 -----------------------------------
 local zone_object = {}
 

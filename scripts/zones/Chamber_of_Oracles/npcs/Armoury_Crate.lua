@@ -138,58 +138,60 @@ local loot =
 
         },
         {
-            {itemid = 836, droprate = 216}, -- Damascene Cloth
-            {itemid = 658, droprate = 295}, -- Damascus Ingot
-            {itemid = 17938, droprate = 239}, -- Woodville's Axe
-            {itemid = 17998, droprate = 231}, -- Thanatos Baselard
-            {itemid = 17579, droprate = 231}, -- Wyvern Perch
-            {itemid = 18373, droprate = 231}, -- Balin's Sword
-            {itemid = 1110, droprate = 231}, -- Beetle Blood
+            {itemid = 17938, droprate = 150}, -- Woodville's Axe
+            {itemid = 17998, droprate = 150}, -- Thanatos Baselard
+            {itemid = 17579, droprate = 200}, -- Wyvern Perch
+            {itemid = 18373, droprate = 300}, -- Balin's Sword
         },
         {
-            {itemid = 18092, droprate = 104}, -- Bourdonasse
-            {itemid = 4175, droprate = 86}, -- Vile Elixir +1
-            {itemid = 4174, droprate = 22}, -- Vile Elixir
-            {itemid = 19025, droprate = 146}, -- Pole Grip
-            {itemid = 19024, droprate = 240}, -- Sword Strap
+            {itemid =     0, droprate = 300}, -- Nothing
+            {itemid = 18092, droprate = 150}, -- Bourdonasse
+            {itemid = 19025, droprate = 150}, -- Pole Grip
+            {itemid = 19024, droprate = 350}, -- Sword Strap
+            {itemid = 19027, droprate =  50}, -- Claymore Grip
         },
         {
-            {itemid = 17246, droprate = 287}, -- Ziska's Crossbow
-            {itemid = 17790, droprate = 216}, -- Unji
-            {itemid = 17999, droprate = 198}, -- Taillifer's Dagger
-            {itemid = 18089, droprate = 287}, -- Schiltron Spear
-            {itemid = 4774, droprate = 287}, -- Thunder III
+            {itemid =     0, droprate = 100}, -- Nothing
+            {itemid = 17246, droprate = 200}, -- Ziska's Crossbow
+            {itemid = 17790, droprate = 150}, -- Unji
+            {itemid = 17999, droprate = 200}, -- Taillifer's Dagger
+            {itemid = 18089, droprate = 350}, -- Schiltron Spear
         },
         {
-            {itemid = 887, droprate = 52}, -- Coral Fragment
-            {itemid = 645, droprate = 56}, -- Chunk Of Darksteel Ore
-            {itemid = 902, droprate = 41}, -- Demon Horn
-            {itemid = 702, droprate = 63}, -- Ebony Log
-            {itemid = 737, droprate = 52}, -- Chunk Of Gold Ore
-            {itemid = 823, droprate = 26}, -- Spool Of Gold Thread
-            {itemid = 1465, droprate = 11}, -- Slab Of Granite
-            {itemid = 4173, droprate = 37}, -- Hi-reraiser
-            {itemid = 700, droprate = 101}, -- Mahogany Log
-            {itemid = 653, droprate = 30}, -- Mythril Ingot
-            {itemid = 644, droprate = 52}, -- Chunk Of Mythril Ore
-            {itemid = 703, droprate = 116}, -- Petrified Log
-            {itemid = 844, droprate = 15}, -- Phoenix Feather
-            {itemid = 942, droprate = 56}, -- Philosophers Stone
-            {itemid = 738, droprate = 45}, -- Chunk Of Platinum Ore
-            {itemid = 830, droprate = 22}, -- Square Of Rainbow Cloth
-            {itemid = 895, droprate = 67}, -- Ram Horn
-            {itemid = 1132, droprate = 119}, -- Square Of Raxa
-            {itemid = 4172, droprate = 45}, -- Reraiser
-            {itemid = 0, droprate = 400} -- Nothing
+            {itemid =     0, droprate =  780}, -- Nothing
+            {itemid =  4774, droprate =  85}, -- Thunder III
+            {itemid =  4774, droprate =  50}, -- Cure V
+            {itemid =  4774, droprate =  85}, -- Shell IV
         },
         {
-            {itemid = 836, droprate = 56}, -- Square Of Damascene Cloth
-            {itemid = 658, droprate = 93}, -- Damascus Ingot
-            {itemid = 837, droprate = 56}, -- Spool Of Malboro Fiber
-            {itemid = 942, droprate = 157}, -- Philosophers Stone
-            {itemid = 844, droprate = 176}, -- Phoenix Feather
-            {itemid = 1132, droprate = 109}, -- Square Of Raxa
-            {itemid = 0, droprate = 500}, -- Nothing
+            {itemid =  644, droprate =  50}, -- Chunk Of Mythril Ore
+            {itemid =  645, droprate =  50}, -- Chunk Of Darksteel Ore
+            {itemid =  653, droprate =  50}, -- Mythril Ingot
+            {itemid =  700, droprate =  75}, -- Mahogany Log
+            {itemid =  702, droprate =  60}, -- Ebony Log
+            {itemid =  703, droprate =  75}, -- Petrified Log
+            {itemid =  737, droprate =  50}, -- Chunk Of Gold Ore
+            {itemid =  738, droprate =  50}, -- Chunk Of Platinum Ore
+            {itemid =  823, droprate =  50}, -- Spool Of Gold Thread
+            {itemid =  830, droprate =  50}, -- Square Of Rainbow Cloth
+            {itemid =  844, droprate =  20}, -- Phoenix Feather
+            {itemid =  887, droprate =  50}, -- Coral Fragment
+            {itemid =  895, droprate =  50}, -- Ram Horn
+            {itemid =  902, droprate =  50}, -- Demon Horn
+            {itemid =  942, droprate =  50}, -- Philosophers Stone
+            {itemid = 1132, droprate = 120}, -- Square Of Raxa
+            {itemid = 1465, droprate =  25}, -- Slab Of Granite
+            {itemid = 4172, droprate =  50}, -- Reraiser
+            {itemid = 4173, droprate =  25}, -- Hi-reraiser
+        },
+        {
+            {itemid =    0, droprate = 575}, -- Nothing
+            {itemid =  658, droprate =  85}, -- Damascus Ingot
+            {itemid =  836, droprate =  65}, -- Square Of Damascene Cloth
+            {itemid =  837, droprate =  45}, -- Spool Of Malboro Fiber
+            {itemid =  844, droprate = 100}, -- Phoenix Feather
+            {itemid =  942, droprate =  65}, -- Philosophers Stone
+            {itemid = 1132, droprate =  65}, -- Square Of Raxa
         }
     },
     -- The Scarlet King

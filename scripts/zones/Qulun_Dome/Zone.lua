@@ -1,10 +1,8 @@
 -----------------------------------
---
 -- Zone: Qulun_Dome (148)
---
 -----------------------------------
-local ID = require("scripts/zones/Qulun_Dome/IDs")
-require("scripts/globals/conquest")
+local ID = require('scripts/zones/Qulun_Dome/IDs')
+require('scripts/globals/conquest')
 -----------------------------------
 local zone_object = {}
 
@@ -15,9 +13,11 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
+
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(337.901, 38.091, 20.087, 129)
     end
+
     return cs
 end
 

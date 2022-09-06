@@ -1,9 +1,7 @@
 -----------------------------------
---
 -- Zone: Dho Gates
---
 -----------------------------------
-local ID = require("scripts/zones/Dho_Gates/IDs")
+local ID = require('scripts/zones/Dho_Gates/IDs')
 -----------------------------------
 local zone_object = {}
 
@@ -12,9 +10,11 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
+
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(62, -10, 83, 84)
     end
+
     return cs
 end
 

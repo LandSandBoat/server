@@ -1,9 +1,7 @@
 -----------------------------------
---
 -- Zone: Spire_of_Mea (21)
---
 -----------------------------------
-local ID = require("scripts/zones/Spire_of_Mea/IDs")
+local ID = require('scripts/zones/Spire_of_Mea/IDs')
 -----------------------------------
 local zone_object = {}
 
@@ -12,9 +10,11 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
+
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(-1.539, -2.049, 293.640, 64) -- {R}
     end
+
     return cs
 end
 

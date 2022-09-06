@@ -88,20 +88,28 @@ local loot =
     [676] =
     {
         {
-            {itemid = 16976, droprate = 82},  -- Onimaru
-            {itemid = 18015, droprate = 238}, -- Blau Dolch
+            {itemid = 1842, droprate = 200},  -- Cloud Evoker
+        },
+        {
+            {itemid = 16976, droprate = 100},  -- Onimaru
+            {itemid = 18015, droprate = 250}, -- Blau Dolch
             {itemid = 18099, droprate = 150}, -- Stone-splitter
-            {itemid = 17946, droprate = 92},  -- Maneater
-            {itemid = 18358, droprate = 63},  -- Wagh Baghnakhs
-            {itemid = 17469, droprate = 65},  -- Raise II Rod
             {itemid = 17365, droprate = 175}, -- Frenzy Fife
-            {itemid = 15464, droprate = 83},  -- Corse Cape
-            {itemid = 1842, droprate = 188},  -- Cloud Evoker
-            {itemid = 1763, droprate = 342},  -- Viridian Urushi
-            {itemid = 1767, droprate = 328},  -- Eltoro Leather
-            {itemid = 1841, droprate = 238},  -- Unicorn Horn
+        },
+        {
+            {itemid = 17946, droprate = 100},  -- Maneater
+            {itemid = 18358, droprate =  65},  -- Wagh Baghnakhs
+            {itemid = 17469, droprate =  65},  -- Raise II Rod
+            {itemid = 15464, droprate = 100},  -- Corse Cape
+        },
+        {
+            {itemid = 1763, droprate = 350},  -- Viridian Urushi
+            {itemid = 1767, droprate = 325},  -- Eltoro Leather
+        },
+        {
+            {itemid = 1841, droprate = 225},  -- Unicorn Horn
             {itemid = 1762, droprate = 375},  -- Cassia Lumber
-            {itemid = 1771, droprate = 263},  -- Dragon Bone
+            {itemid = 1771, droprate = 250},  -- Dragon Bone
         },
     }
 }

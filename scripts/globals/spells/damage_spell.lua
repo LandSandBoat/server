@@ -674,7 +674,7 @@ xi.spells.damage.calculateIfMagicBurst = function(caster, target, spell, spellEl
     local magicBurst         = 1 -- The variable we want to calculate
     local _, skillchainCount = FormMagicBurst(spellElement, target) -- External function. Not present in magic.lua.
 
-    if skillchainCount > 0 then
+    if skillchainCount > 0 and target:hasStatusEffect(xi.effect.SKILLCHAIN) then
         magicBurst = 1.25 + (0.1 * skillchainCount) -- Here we add SDT DAMAGE bonus for magic bursts aswell, once SDT is implemented. https://www.bg-wiki.com/ffxi/Resist#SDT_and_Magic_Bursting
     end
 
@@ -682,7 +682,8 @@ xi.spells.damage.calculateIfMagicBurst = function(caster, target, spell, spellEl
 end
 
 xi.spells.damage.calculateIfMagicBurstBonus = function(caster, target, spell, spellId, spellElement) -- Calculates the bonus damage applied to the spell.
-    local magicBurstBonus        = 1.0 -- The variable we want to calculate
+    local magicBurstBonus        = 1.0
+    local resTierBonus           = 0.0
     local modBurst               = 1.0
     local ancientMagicBurstBonus = 0
     local _, skillchainCount     = FormMagicBurst(spellElement, target) -- External function. Not present in magic.lua.
@@ -720,7 +721,6 @@ xi.spells.damage.calculateIfMagicBurstBonus = function(caster, target, spell, sp
     -- Magic Burst Damage II is found in other gear and BLM job traits pertain to this one OR to a third, separate one. neither has known cap
 
     if skillchainCount > 0 then
-        magicBurstBonus = modBurst -- + modBurstTrait once investigated. Probably needs to be divided by 100
         if target:getObjType() == xi.objType.MOB then
             local resTier = target:getLocalVar("[MagicBurst]Resist_Tier")
             local resTierBonusLookup =
@@ -735,9 +735,11 @@ xi.spells.damage.calculateIfMagicBurstBonus = function(caster, target, spell, sp
                 [0.50] = 0.05,
             }
             if resTierBonusLookup[resTier] ~= nil then
-                magicBurstBonus = magicBurstBonus + (magicBurstBonus * resTierBonusLookup[resTier])
+                resTierBonus = resTierBonusLookup[resTier]
             end
         end
+
+        magicBurstBonus = resTierBonus + modBurst
     end
 
     return magicBurstBonus
@@ -1017,8 +1019,12 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     finalDamage = math.floor(finalDamage * magianAffinity)
     finalDamage = math.floor(finalDamage * sdt)
     finalDamage = math.floor(finalDamage * resist)
-    finalDamage = math.floor(finalDamage * magicBurst)
-    finalDamage = math.floor(finalDamage * magicBurstBonus)
+
+    if target:hasStatusEffect(xi.effect.SKILLCHAIN) then -- Gated since this is recalculated for each target.
+        finalDamage = math.floor(finalDamage * magicBurst)
+        finalDamage = math.floor(finalDamage * magicBurstBonus)
+    end
+
     finalDamage = math.floor(finalDamage * dayAndWeather)
     finalDamage = math.floor(finalDamage * magicBonusDiff)
     finalDamage = math.floor(finalDamage * targetMagicDamageAdjustment)
@@ -1066,7 +1072,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
         end
 
         -- Add "Magic Burst!" message
-        if magicBurst > 1 then
+        if target:hasStatusEffect(xi.effect.SKILLCHAIN) then -- Gated as this is run per target.
             spell:setMsg(spell:getMagicBurstMessage())
             caster:triggerRoeEvent(xi.roe.triggers.magicBurst)
         end
