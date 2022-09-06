@@ -286,7 +286,7 @@ INSERT INTO `abilities` VALUES (269,'impetus',2,88,1,360,31,100,0,240,2000,0,6,2
 INSERT INTO `abilities` VALUES (270,'divine_caress',3,83,1,60,32,100,0,254,2000,0,6,20.0,0,0,0,0,0,NULL);
 INSERT INTO `abilities` VALUES (271,'sacrosanctity',3,95,1,600,33,100,0,268,2000,0,6,13.9,1,0,0,0,0,NULL);
 INSERT INTO `abilities` VALUES (272,'enmity_douse',4,87,4,600,34,100,0,257,2000,0,6,18.0,0,1,0,0,0,NULL); -- check animation
-INSERT INTO `abilities` VALUES (273,'manawell',4,95,1,600,35,100,0,252,2000,0,6,20.0,0,1,80,0,0,NULL);
+INSERT INTO `abilities` VALUES (273,'manawell',4,95,3,600,35,100,0,252,2000,0,6,20.0,0,1,80,0,0,NULL);
 INSERT INTO `abilities` VALUES (274,'saboteur',5,83,1,300,36,0,0,258,2000,0,6,20.0,0,1,80,0,0,'ABYSSEA');
 INSERT INTO `abilities` VALUES (275,'spontaneity',5,95,3,600,37,0,0,259,2000,0,6,20.0,0,1,80,0,0,'ABYSSEA');
 INSERT INTO `abilities` VALUES (276,'conspirator',6,87,1,300,40,0,0,237,2000,0,6,14.0,1,1,80,0,4,'ABYSSEA');
@@ -329,7 +329,7 @@ INSERT INTO `abilities` VALUES (321,'bully',6,93,4,180,240,127,0,248,2000,0,6,8.
 INSERT INTO `abilities` VALUES (322,'maintenance',18,30,1,90,214,0,0,83,2000,0,6,12.0,0,0,0,1474,0,'ABYSSEA'); -- ta257
 INSERT INTO `abilities` VALUES (323,'brazen_rush',1,96,1,3600,254,100,0,271,2000,0,6,0.0,0,1,300,0,0,NULL);
 INSERT INTO `abilities` VALUES (324,'inner_strength',2,96,1,3600,254,100,0,272,2000,0,6,0.0,0,0,0,0,0,NULL); -- check animation
-INSERT INTO `abilities` VALUES (325,'asylum',3,96,1,3600,254,100,0,273,2000,0,6,0.0,0,0,0,0,0,NULL);
+INSERT INTO `abilities` VALUES (325,'asylum',3,96,4,3600,254,100,0,273,2000,0,6,20.0,0,0,0,0,0,NULL);
 INSERT INTO `abilities` VALUES (326,'subtle_sorcery',4,96,1,3600,254,0,0,274,2000,0,6,0.0,0,0,0,0,0,NULL); -- check animation
 INSERT INTO `abilities` VALUES (327,'stymie',5,96,1,3600,254,100,0,275,2000,0,6,20.0,0,1,80,0,0,'SOA');
 INSERT INTO `abilities` VALUES (328,'larceny',6,96,4,3600,254,100,0,276,2000,0,6,4.0,0,0,0,0,0,NULL);
@@ -349,7 +349,7 @@ INSERT INTO `abilities` VALUES (341,'grand_pas',19,96,1,3600,254,0,0,289,2000,0,
 INSERT INTO `abilities` VALUES (342,'caper_emissarius',20,96,2,3600,254,0,0,290,2000,0,6,8.0,0,0,0,0,0,NULL); -- check animation
 INSERT INTO `abilities` VALUES (343,'bolster',21,1,1,3600,0,0,0,303,2000,0,6,0.0,0,1,300,0,0,'SOA'); -- check animation
 INSERT INTO `abilities` VALUES (344,'swipe',22,25,4,90,241,110,0,0,2000,0,15,4.5,0,80,320,0,0,'SOA');
-INSERT INTO `abilities` VALUES (345,'full_circle',21,5,256,10,243,0,0,94,2000,0,6,20.0,0,1,300,0,0,'SOA');
+INSERT INTO `abilities` VALUES (345,'full_circle',21,5,1,10,243,0,0,94,2000,0,6,20.0,0,1,300,0,0,'SOA');
 INSERT INTO `abilities` VALUES (346,'lasting_emanation',21,25,256,300,244,663,0,306,2000,0,6,10.0,0,1,300,0,0,'SOA');
 INSERT INTO `abilities` VALUES (347,'ecliptic_attrition',21,25,256,300,244,664,0,307,2000,0,6,10.0,0,1,300,0,0,'SOA');
 INSERT INTO `abilities` VALUES (348,'collimated_fervor',21,40,1,300,245,100,0,304,2000,0,6,0.0,0,1,300,0,0,'SOA');
@@ -385,7 +385,7 @@ INSERT INTO `abilities` VALUES (377,'widened_compass',21,96,1,3600,130,100,0,276
 INSERT INTO `abilities` VALUES (378,'odyllic_subterfuge',22,96,4,3600,131,0,0,277,2000,0,6,8.0,6,1,318,0,0,'SOA');
 INSERT INTO `abilities` VALUES (379,'ward',22,1,1,0,142,0,0,0,2000,0,6,0.0,0,0,0,0,0,'SOA');
 INSERT INTO `abilities` VALUES (380,'effusion',22,1,1,0,143,0,0,0,2000,0,6,0.0,0,0,0,0,0,'SOA');
-INSERT INTO `abilities` VALUES (381,'chocobo_jig_ii',19,70,1,60,218,126,0,13,2000,0,14,0.0,1,1,300,0,0,'SOA');
+INSERT INTO `abilities` VALUES (381,'chocobo_jig_ii',19,70,1,60,218,126,0,13,2000,0,14,10.0,1,1,300,0,0,'SOA');
 -- INSERT INTO `abilities` VALUES (382,'relinquish',23,1,1,60,253,0,0,0,0,0,6,0.0,0,0,0,0,0,NULL);
 INSERT INTO `abilities` VALUES (383,'vivacious_pulse',22,65,1,60,242,102,0,327,2000,0,6,0.0,0,0,0,0,0,'SOA');
 INSERT INTO `abilities` VALUES (384,'contradance',19,50,1,300,229,0,0,329,2000,0,6,0.0,0,0,0,0,0,NULL); -- check animation
@@ -635,13 +635,14 @@ INSERT INTO `abilities` VALUES (779,'spider_web',9,25,257,255,102,0,0,0,2000,0,6
 -- INSERT INTO `abilities` VALUES (782,'gloom_spray',9,25,257,rec,102,0,0,0,2000,0,6,18.0,0,2,60,0,0,NULL); -- ROTZ
 -- INSERT INTO `abilities` VALUES (786,'disembowel',22,1,1,0,300,0,0,???,2000,0,6,20.0,0,450,900,0,0,NULL);
 -- INSERT INTO `abilities` VALUES (787,'extirpating_salvo',22,1,1,0,300,0,0,???,2000,0,6,20.0,0,450,900,0,0,NULL);
--- INSERT INTO `abilities` VALUES (960,'clarsach_call',22,1,1,0,300,0,0,???,2000,0,6,20.0,0,450,900,0,0,NULL);
+INSERT INTO `abilities` VALUES (960,'clarsach_call',15,1,4,60,173,0,0,175,2000,0,6,30.0,1,1,60,0,2,NULL);
 INSERT INTO `abilities` VALUES (961,'welt',15,1,4,60,173,326,317,176,2000,0,6,30.0,0,0,60,0,0,NULL);
--- INSERT INTO `abilities` VALUES (962,'katabatic_blades',22,1,1,0,300,0,0,???,2000,0,6,20.0,0,450,900,0,0,NULL);
--- INSERT INTO `abilities` VALUES (963,'lunatic_voice',22,1,1,0,300,0,0,???,2000,0,6,20.0,0,450,900,0,0,NULL);
--- INSERT INTO `abilities` VALUES (964,'roundhouse',22,1,1,0,300,0,0,???,2000,0,6,20.0,0,450,900,0,0,NULL);
--- INSERT INTO `abilities` VALUES (965,'chinook',22,1,1,0,300,0,0,???,2000,0,6,20.0,0,450,900,0,0,NULL);
--- INSERT INTO `abilities` VALUES (966,'bitter_elegy',22,1,1,0,300,0,0,???,2000,0,6,20.0,0,450,900,0,0,NULL);
--- INSERT INTO `abilities` VALUES (968,'tornado_ii',22,1,1,0,300,0,0,???,2000,0,6,20.0,0,450,900,0,0,NULL);
--- INSERT INTO `abilities` VALUES (969,'winds_blessing,22,1,1,0,300,0,0,???,2000,0,6,20.0,0,450,900,0,0,NULL);
--- 
+-- INSERT INTO `abilities` VALUES (962,'katabatic_blades',15,1,1,0,300,0,0,???,2000,0,6,30.0,0,0,60,0,0,NULL);
+-- INSERT INTO `abilities` VALUES (963,'lunatic_voice',15,1,1,0,300,0,0,???,2000,0,6,30.0,0,0,60,0,0,NULL);
+INSERT INTO `abilities` VALUES (964,'roundhouse',15,25,4,60,173,0,0,179,2000,0,6,30.0,0,0,60,0,0,NULL);
+-- INSERT INTO `abilities` VALUES (965,'chinook',15,1,1,0,300,0,0,???,2000,0,6,30.0,0,0,60,0,0,NULL);
+-- INSERT INTO `abilities` VALUES (966,'bitter_elegy',15,1,1,0,300,0,0,???,2000,0,6,30.0,0,0,60,0,0,NULL);
+INSERT INTO `abilities` VALUES (967,'sonic_buffet',15,65,4,60,173,0,0,182,2000,0,6,30.0,0,0,60,0,0,NULL);
+INSERT INTO `abilities` VALUES (968,'tornado_ii',15,75,4,60,173,0,0,183,2000,0,6,30.0,0,0,60,0,0,NULL);
+INSERT INTO `abilities` VALUES (970,'hysteric_assault',15,99,4,60,173,0,0,185,2000,0,6,30.0,0,0,60,0,0,NULL);
+--

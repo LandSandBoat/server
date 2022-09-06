@@ -18,9 +18,11 @@ zones[xi.zone.AHT_URHGAN_WHITEGATE] =
         NOT_HAVE_ENOUGH_GIL           = 232,   -- You do not have enough gil.
         YOU_MUST_WAIT_ANOTHER_N_DAYS  = 835,   -- You must wait another <number> [day/days] to perform that action.
         CARRIED_OVER_POINTS           = 838,   -- You have carried over <number> login point[/s].
-        LOGIN_CAMPAIGN_UNDERWAY       = 839,   -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
+        LOGIN_CAMPAIGN_UNDERWAY       = 839,   -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 840,   -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
-        UNABLE_TO_PROGRESS_ROV        = 884,   -- You are unable to make further progress in Rhapsodies of Vana'diel due to an event occurring in the [Chains of Promathia/Treasures of Aht Urhgan/Wings of the Goddess/Seekers of Adoulin/Rise of the Zilart] missions.
+        MEMBERS_LEVELS_ARE_RESTRICTED = 860,   -- Your party is unable to participate because certain members' levels are restricted.
+        UNABLE_TO_PROGRESS_ROV        = 884,   -- ou are unable to make further progress in Rhapsodies of Vana'diel due to an event occurring in the [Chains of Promathia/Treasures of Aht Urhgan/Wings of the Goddess/Seekers of Adoulin/Rise of the Zilart] missions.
+        UNABLE_TO_PROGRESS_ROV2       = 885,   -- ou are unable to make further progress in Rhapsodies of Vana'diel due to an event occurring in the quest [Champion of the Dawn/A Forbidden Reunion].
         FISHING_MESSAGE_OFFSET        = 891,   -- You can't fish here.
         MOG_LOCKER_OFFSET             = 1235,  -- Your Mog Locker lease is valid until <timestamp>, kupo.
         HOMEPOINT_SET                 = 1376,  -- Home point set!
@@ -74,7 +76,7 @@ zones[xi.zone.AHT_URHGAN_WHITEGATE] =
         SANCTION                      = 9814,  -- You have received the Empire's Sanction.
         ZASSHAL_DIALOG                = 11008, -- 'ang about. Looks like the permit you got was the last one I 'ad, so it might take me a bit o' time to scrounge up some more. 'ere, don't gimme that look. I'll be restocked before you know it.
         RETRIEVE_DIALOG_ID            = 13527, -- You retrieve <item> from the porter moogle's care.
-        COMMON_SENSE_SURVIVAL         = 14316, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        COMMON_SENSE_SURVIVAL         = 14318, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {

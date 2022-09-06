@@ -1,11 +1,11 @@
 -----------------------------------
 -- Zone: Lower_Delkfutts_Tower (184)
 -----------------------------------
-local ID = require("scripts/zones/Lower_Delkfutts_Tower/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/missions")
-require("scripts/globals/settings")
-require("scripts/globals/zone")
+local ID = require('scripts/zones/Lower_Delkfutts_Tower/IDs')
+require('scripts/globals/conquest')
+require('scripts/globals/missions')
+require('scripts/globals/settings')
+require('scripts/globals/zone')
 -----------------------------------
 local zone_object = {}
 
@@ -43,6 +43,7 @@ zone_object.onRegionEnter = function(player, region)
             player:setCharVar("option", 1)
             player:startEvent(4)
         end,
+
         [2] = function (x)
             player:setCharVar("option", 2)
             player:startEvent(4)

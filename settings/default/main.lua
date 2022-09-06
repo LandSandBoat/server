@@ -111,26 +111,27 @@ xi.settings.main =
     DARK_POWER      = 1.000, -- Multiplies amount drained by Dark Magic.
     ITEM_POWER      = 1.000, -- Multiplies the effect of items such as Potions and Ethers.
     WEAPON_SKILL_POWER  = 1.000, -- Multiplies damage dealt by Weapon Skills.
+
     USE_ADOULIN_WEAPON_SKILL_CHANGES = true, -- true/false. Change to toggle new Adoulin weapon skill damage calculations
+    DISABLE_PARTY_EXP_PENALTY        = false, -- true/false.
 
     -- TRUSTS
     ENABLE_TRUST_CASTING           = 1,
     ENABLE_TRUST_QUESTS            = 1,
     ENABLE_TRUST_CUSTOM_ENGAGEMENT = 0,
-    ENABLE_TRUST_CASTING = 1,
-    ENABLE_TRUST_QUESTS  = 1,
-    ENABLE_TRUST_ALTER_EGO_EXTRAVAGANZA = 0, -- 0 = disabled, 1 = summer/ny, 2 = spring/autumn, 3 = both
+
+    ENABLE_TRUST_ALTER_EGO_EXTRAVAGANZA          = 0, -- 0 = disabled, 1 = summer/ny, 2 = spring/autumn, 3 = both
     ENABLE_TRUST_ALTER_EGO_EXTRAVAGANZA_ANNOUNCE = 0, -- 0 = disabled, 1 = add announcement to player login
-    ENABLE_TRUST_ALTER_EGO_EXPO = 0, -- 0 = disabled, 1 = expo - HPP/MPP/Status Resistance, 2 = expo plus (not implemented)
-    ENABLE_TRUST_ALTER_EGO_EXPO_ANNOUNCE = 0, -- 0 = disabled, 1 = add announcement to player login
+    ENABLE_TRUST_ALTER_EGO_EXPO                  = 0, -- 0 = disabled, 1 = expo - HPP/MPP/Status Resistance, 2 = expo plus (not implemented)
+    ENABLE_TRUST_ALTER_EGO_EXPO_ANNOUNCE         = 0, -- 0 = disabled, 1 = add announcement to player login
 
     TRUST_ALTER_EGO_EXTRAVAGANZA_MESSAGE =
-        "\n \n" ..
+        "\n \n" .. -- The space between these newlines is intentional
         "\129\153\129\154 The Alter Ego Extravaganza Campaign is active! \129\154\129\153\n" ..
         "This is an excellent time to fill out your roster of Trusts!",
 
     TRUST_ALTER_EGO_EXPO_MESSAGE =
-        "\n \n" ..
+        "\n \n" .. -- The space between these newlines is intentional
         "\129\153\129\154 The Alter Ego Expo Campaign is active! \129\154\129\153\n" ..
         "Trusts gain the benefits of Increased HP, MP, and Status Resistances!",
 
@@ -152,11 +153,6 @@ xi.settings.main =
     COFFER_MIN_ILLUSION_TIME = 1800,  -- 30 minutes
     CHEST_MAX_ILLUSION_TIME  = 3600,  -- 1 hour
     CHEST_MIN_ILLUSION_TIME  = 1800,  -- 30 minutes
-
-    -- Sets spawn type for: Behemoth, Fafnir, Adamantoise, King Behemoth, Nidhog, Aspidochelone.
-    -- Use 0 for timed spawns, 1 for force pop only, 2 for both
-    LandKingSystem_NQ = 1,
-    LandKingSystem_HQ = 1,
 
     -- Multiplier to NM lottery spawn chance. (Default 1.0) eg. 0 = disable lottery spawns. -1 for always 100% chance.
     NM_LOTTERY_CHANCE = 1.0,

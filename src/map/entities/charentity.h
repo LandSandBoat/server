@@ -306,14 +306,14 @@ public:
     uint8           equipLoc[18];        // ContainerID where equipment is
     uint16          styleItems[16];      // Item IDs for items that are style locked.
 
-    uint8             m_ZonesList[36];        // List of visited zone character
+    uint8             m_ZonesList[38];        // List of visited zone character
     std::bitset<1024> m_SpellList;            // List of studied spells
     uint8             m_TitleList[143];       // List of obtained titles
     uint8             m_Abilities[64];        // List of current abilities
     uint8             m_LearnedAbilities[49]; // LearnableAbilities (corsairRolls)
     std::bitset<50>   m_LearnedWeaponskills;  // LearnableWeaponskills
     uint8             m_TraitList[16];        // List of advance active abilities in the form of a bit mask
-    uint8             m_PetCommands[57];      // List of available pet commands
+    uint8             m_PetCommands[64];      // List of available pet commands
     uint8             m_WeaponSkills[32];
     questlog_t        m_questLog[MAX_QUESTAREA];     // список всех квестов
     missionlog_t      m_missionLog[MAX_MISSIONAREA]; // список миссий
@@ -334,7 +334,7 @@ public:
     std::vector<CTrustEntity*> PTrusts; // Active trusts
 
     template <typename F, typename... Args>
-    void ForPartyWithTrusts(F func, Args&&... args)
+    void ForPartyWithTrusts(F const& func, Args&&... args)
     {
         if (PParty)
         {

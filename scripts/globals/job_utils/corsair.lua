@@ -44,7 +44,7 @@ local corsairRollMods =
     [xi.jobAbility.BOLTERS_ROLL     ] = { {6, 6, 16, 8, 8, 10, 10, 12, 4, 14, 20, 0},              4,     0, xi.effect.BOLTERS_ROLL,     xi.mod.MOVE,               xi.job.NONE },
     [xi.jobAbility.CASTERS_ROLL     ] = { {6, 15, 7, 8, 9, 10, 5, 11, 12, 13, 20, -10},            3,    10, xi.effect.CASTERS_ROLL,     xi.mod.FASTCAST,           xi.job.NONE },
     [xi.jobAbility.COURSERS_ROLL    ] = { {2, 3, 11, 4, 5, 6, 7, 8, 1, 10, 12, -5},                1,     3, xi.effect.COURSERS_ROLL,    nil,                       xi.job.NONE },
-    [xi.jobAbility.BLITZERS_ROLL    ] = { {2, 3, 4, 11, 5, 6, 7, 8, 1, 10, 12, -5},                1,     3, xi.effect.BLITZERS_ROLL,    xi.mod.DELAY,              xi.job.NONE },
+    [xi.jobAbility.BLITZERS_ROLL    ] = { {-2, -3, -4, -11, -5, -6, -7, -8, -1, -10, -12, 3},     -1,    -3, xi.effect.BLITZERS_ROLL,    xi.mod.DELAYP,             xi.job.NONE },
     [xi.jobAbility.TACTICIANS_ROLL  ] = { {10, 10, 10, 10, 30, 10, 10, 0, 20, 20, 40, -10},        2,    10, xi.effect.TACTICIANS_ROLL,  xi.mod.REGAIN,             xi.job.NONE },
     [xi.jobAbility.ALLIES_ROLL      ] = { {2, 3, 20, 5, 7, 9, 11, 13, 15, 1, 25, -5},              1,     5, xi.effect.ALLIES_ROLL,      xi.mod.SKILLCHAINBONUS,    xi.job.NONE },
     [xi.jobAbility.MISERS_ROLL      ] = { {30, 50, 70, 90, 200, 110, 20, 130, 150, 170, 250, 0},  15,     0, xi.effect.MISERS_ROLL,      xi.mod.SAVETP,             xi.job.NONE },
@@ -141,9 +141,9 @@ local function corsairSetup(caster, ability, action, effect, job)
     action:speceffect(caster:getID(), roll)
 
     if checkForElevenRoll(caster) then
-        ability:setRecast(ability:getRecast() / 2) -- halves phantom roll recast timer for all rolls while under the effects of an 11 (upon first hitting 11, phantom roll cooldown is reset in double-up.lua)
+        action:setRecast(ability:getRecast() / 2) -- halves phantom roll recast timer for all rolls while under the effects of an 11 (upon first hitting 11, phantom roll cooldown is reset in double-up.lua)
     else
-        ability:setRecast(ability:getRecast() - caster:getMerit(xi.merit.PHANTOM_ROLL_RECAST)) -- Recast merits have value of 2 from DB
+        action:setRecast(ability:getRecast() - caster:getMerit(xi.merit.PHANTOM_ROLL_RECAST)) -- Recast merits have value of 2 from DB
     end
 
     checkForJobBonus(caster, job)

@@ -1,11 +1,10 @@
 -----------------------------------
 -- Zone: Port_Bastok (236)
 -----------------------------------
-local ID = require("scripts/zones/Port_Bastok/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/missions")
-require("scripts/globals/settings")
-require("scripts/globals/zone")
+local ID = require('scripts/zones/Port_Bastok/IDs')
+require('scripts/globals/conquest')
+require('scripts/globals/settings')
+require('scripts/globals/zone')
 -----------------------------------
 local zone_object = {}
 
@@ -27,12 +26,13 @@ zone_object.onZoneIn = function(player, prevZone)
         if xi.settings.main.NEW_CHARACTER_CUTSCENE == 1 then
             cs = 1
         end
+
         player:setPos(132, -8.5, -13, 179)
         player:setHomePoint()
     end
 
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
-        if (prevZone == xi.zone.BASTOK_JEUNO_AIRSHIP) then
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+        if prevZone == xi.zone.BASTOK_JEUNO_AIRSHIP then
             cs = 73
             player:setPos(-36.000, 7.000, -58.000, 194)
         else
@@ -58,7 +58,7 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    if (csid == 1) then
+    if csid == 1 then
         player:messageSpecial(ID.text.ITEM_OBTAINED, 536)
     elseif (csid == 71) then
         player:setPos(0, 0, 0, 0, 224)

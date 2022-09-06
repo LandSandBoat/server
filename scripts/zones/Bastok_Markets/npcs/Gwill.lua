@@ -29,8 +29,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(242)
     elseif player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_COLD_LIGHT_OF_DAY) == QUEST_ACCEPTED then
         player:startEvent(103)
-    else
-        player:startEvent(113)
     end
 end
 

@@ -1,10 +1,8 @@
 -----------------------------------
---
 -- Zone: Leujaoam_Sanctum
---
 -----------------------------------
-require("scripts/zones/Leujaoam_Sanctum/IDs")
-require("scripts/globals/zone")
+require('scripts/zones/Leujaoam_Sanctum/IDs')
+require('scripts/globals/zone')
 -----------------------------------
 local zone_object = {}
 
@@ -38,6 +36,7 @@ zone_object.onEventFinish = function(player, csid, option)
     if csid == 102 then
         local instance = player:getInstance()
         local chars = instance:getChars()
+
         for _, entity in pairs(chars) do
             entity:setPos(0, 0, 0, 0, xi.zone.CAEDARVA_MIRE)
         end

@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Bastok Markets
 --  NPC: Malene
--- Type: Quest NPC
 -- !pos -173 -5 64 235
 -----------------------------------
 require("scripts/globals/npc_util")

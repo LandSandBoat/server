@@ -19,8 +19,9 @@ zones[xi.zone.FEIYIN] =
         SENSE_OF_FOREBODING                = 6584,  -- You are suddenly overcome with a sense of foreboding...
         FELLOW_MESSAGE_OFFSET              = 6598,  -- I'm ready. I suppose.
         CARRIED_OVER_POINTS                = 7180,  -- You have carried over <number> login point[/s].
-        LOGIN_CAMPAIGN_UNDERWAY            = 7181,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
+        LOGIN_CAMPAIGN_UNDERWAY            = 7181,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                       = 7182,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        MEMBERS_LEVELS_ARE_RESTRICTED      = 7202,  -- Your party is unable to participate because certain members' levels are restricted.
         FISHING_MESSAGE_OFFSET             = 7236,  -- You can't fish here.
         CHEST_UNLOCKED                     = 7367,  -- You unlock the chest!
         SOFTLY_SHIMMERING_LIGHT            = 7493,  -- You see a softly shimmering light...
@@ -42,6 +43,7 @@ zones[xi.zone.FEIYIN] =
         LEARNS_SPELL                       = 10649, -- <name> learns <spell>!
         UNCANNY_SENSATION                  = 10651, -- You are assaulted by an uncanny sensation.
         HOMEPOINT_SET                      = 10700, -- Home point set!
+        UNITY_WANTED_BATTLE_INTERACT       = 10758, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
     mob =
     {

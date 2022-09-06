@@ -5,6 +5,7 @@ require("scripts/globals/ability")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 require("scripts/globals/jobpoints")
+require("scripts/globals/damage/tp")
 -----------------------------------
 xi = xi or {}
 xi.job_utils = xi.job_utils or {}
@@ -12,16 +13,27 @@ xi.job_utils.summoner = xi.job_utils.summoner or {}
 -----------------------------------
 
 -- sort of a misnomer, as if Apogee is up, the "base" mp cost rises.
-local function getBaseMPCost(player, abilityId)
+local function getBaseMPCost(player, ability)
+
     local baseMPCostMap =
     {
         -- Siren
-        [xi.jobAbility.WELT] = 9,
+        [xi.jobAbility.WELT]             = 9,
+        [xi.jobAbility.ROUNDHOUSE]       = 52,
+        [xi.jobAbility.SONIC_BUFFET]     = 164,
+        [xi.jobAbility.TORNADO_II]       = 182,
+        [xi.jobAbility.HYSTERIC_ASSAULT] = 222,
     }
-    local baseMPCost = baseMPCostMap[abilityId]
+    local baseMPCost = nil
+
+    if ability:getAddType() == xi.addType.ADDTYPE_ASTRAL_FLOW then
+        baseMPCost = player:getMainLvl() * 2
+    elseif ability ~= nil then
+        baseMPCost = baseMPCostMap[ability:getID()]
+    end
 
     if baseMPCost == nil then
-        printf("[warning] scripts/globals/job_utils/summoner.lua::getBaseMPCost(): MP cost for xi.jobAbility with id %d not implemented.", abilityId)
+        printf("[warning] scripts/globals/job_utils/summoner.lua::getBaseMPCost(): MP cost for xi.jobAbility with id %d not implemented.", ability:getID())
         return 9999
     end
 
@@ -50,7 +62,8 @@ local function getMPCost(baseMPCost, player, petskill)
     return mpCost
 end
 
-xi.job_utils.summoner.canUseBloodPact = function(player, pet, target, ability)
+-- Bloodpact Delay is handled in charentity.cpp
+xi.job_utils.summoner.canUseBloodPact = function(player, pet, target, petAbility)
 
     -- TODO: verify order of out of MP/range/etc checks.
     if pet ~= nil then
@@ -65,7 +78,7 @@ xi.job_utils.summoner.canUseBloodPact = function(player, pet, target, ability)
         -- TODO: verify who/what is "out of range" for out of range messages
 
         -- check if target is too far from pet for ability
-        if pet:checkDistance(target) >= ability:getRange() then
+        if pet:checkDistance(target) >= petAbility:getRange() then
             return xi.msg.basic.TARG_OUT_OF_RANGE, 0
         end
 
@@ -79,7 +92,7 @@ xi.job_utils.summoner.canUseBloodPact = function(player, pet, target, ability)
             return xi.msg.basic.TARG_OUT_OF_RANGE, 0
         end
 
-        local baseMPCost = getBaseMPCost(player, ability:getID())
+        local baseMPCost = getBaseMPCost(player, petAbility)
 
         if player:getMP() < baseMPCost then
             return xi.msg.basic.UNABLE_TO_USE_JA2, 0 -- TODO: verify exact message in packet.
@@ -91,12 +104,11 @@ xi.job_utils.summoner.canUseBloodPact = function(player, pet, target, ability)
     return xi.msg.basic.UNABLE_TO_USE_JA2, 0 -- TODO: verify exact message in packet.
 end
 
-xi.job_utils.onUseBloodPact = function(player, pet, target, petskill)
+xi.job_utils.summoner.onUseBloodPact = function(player, pet, target, petskill)
 
     local bloodPactAbility = GetAbility(petskill:getID()) -- Player abilities and Avatar abilities are mapped 1:1
-
-    local baseMPCost = getBaseMPCost(player, bloodPactAbility:getID())
-    local mpCost = getMPCost(baseMPCost, player, bloodPactAbility)
+    local baseMPCost       = getBaseMPCost(player, bloodPactAbility)
+    local mpCost           = getMPCost(baseMPCost, player, bloodPactAbility)
 
     if player:hasStatusEffect(xi.effect.APOGEE) then
         player:resetRecast(xi.recast.ABILITY, bloodPactAbility:getRecastID())
@@ -104,4 +116,15 @@ xi.job_utils.onUseBloodPact = function(player, pet, target, petskill)
     end
 
     player:delMP(mpCost)
+end
+
+-- to be removed once damage is overhauled
+xi.job_utils.summoner.calculateTPReturn = function (avatar, target, damage, numHits)
+    if damage ~= 0 and numHits > 0 then -- absorbed hits still give TP, though we can't know how many hits actually connected in the current avatar damage formulas
+        local tpReturn = xi.damage.tp.getSingleMeleeHitTPReturn(avatar, target)
+        tpReturn = tpReturn + 10 * (numHits - 1) -- extra hits give 10 TP each
+        avatar:setTP(tpReturn)
+    else
+        avatar:setTP(0)
+    end
 end

@@ -227,7 +227,10 @@ mission.sections =
             ['qm11'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.PIECE_OF_A_BROKEN_KEY1) then
+                    if
+                        not player:hasKeyItem(xi.ki.PIECE_OF_A_BROKEN_KEY1) and
+                        player:getMissionStatus(mission.areaId) >= 2
+                    then
                         player:setMissionStatus(mission.areaId, player:getMissionStatus(mission.areaId) + 1)
                         return mission:keyItem(xi.ki.PIECE_OF_A_BROKEN_KEY1)
                     end
@@ -237,7 +240,10 @@ mission.sections =
             ['qm12'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.PIECE_OF_A_BROKEN_KEY2) then
+                    if
+                        not player:hasKeyItem(xi.ki.PIECE_OF_A_BROKEN_KEY2) and
+                        player:getMissionStatus(mission.areaId) >= 2
+                    then
                         player:setMissionStatus(mission.areaId, player:getMissionStatus(mission.areaId) + 1)
                         return mission:keyItem(xi.ki.PIECE_OF_A_BROKEN_KEY2)
                     end
@@ -247,7 +253,10 @@ mission.sections =
             ['qm13'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.PIECE_OF_A_BROKEN_KEY3) then
+                    if
+                        not player:hasKeyItem(xi.ki.PIECE_OF_A_BROKEN_KEY3) and
+                        player:getMissionStatus(mission.areaId) >= 2
+                    then
                         player:setMissionStatus(mission.areaId, player:getMissionStatus(mission.areaId) + 1)
                         return mission:keyItem(xi.ki.PIECE_OF_A_BROKEN_KEY3)
                     end

@@ -1,7 +1,8 @@
 -----------------------------------
 -- Area: Chocobo_Circuit
---  NPC: Gustavo
+-- NPC: Synergy_Enthusiast
 -- Standard Info NPC
+-- !pos -324.546 0.000 -524.753 70
 -----------------------------------
 local entity = {}
 

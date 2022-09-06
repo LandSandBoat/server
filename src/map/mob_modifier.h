@@ -48,37 +48,37 @@ enum MOBMODIFIER : int
     MOBMOD_NO_DESPAWN = 17, // do not despawn when too far from spawn. Gob Diggers have this.
     MOBMOD_VAR        = 18, // temp var for whatever. Gets cleared on spawn
     // 19 Available for use
-    MOBMOD_TP_USE_CHANCE  = 20, // % chance to use tp
-    MOBMOD_PET_SPELL_LIST = 21, // set pet spell list
-    MOBMOD_NA_CHANCE      = 22, // % chance to cast -na
-    MOBMOD_IMMUNITY       = 23, // immune to set status effects. This only works from the db, not scripts
-    MOBMOD_GRADUAL_RAGE   = 24, // (!) TODO: NOT YET IMPLEMENTED -- gradually rages
-    MOBMOD_BUILD_RESIST   = 25, // (!) TODO: NOT YET IMPLEMENTED -- builds resistance to given effects
-    MOBMOD_SUPERLINK      = 26, // super link group. Only use this in mob_spawn_mods / scripts!
-    MOBMOD_SPELL_LIST     = 27, // set spell list
-    MOBMOD_EXP_BONUS      = 28, // bonus exp (bonus / 100) negative values reduce exp.
-    MOBMOD_ASSIST         = 29, // mobs will assist me
-    MOBMOD_SPECIAL_SKILL  = 30, // give special skill
-    MOBMOD_ROAM_DISTANCE  = 31, // distance allowed to roam from spawn
-    // 32 Available for use
-    MOBMOD_SPECIAL_COOL   = 33, // cool down for special
-    MOBMOD_MAGIC_COOL     = 34, // cool down for magic
-    MOBMOD_STANDBACK_COOL = 35, // cool down time for standing back (casting spell while not in attack range)
-    MOBMOD_ROAM_COOL      = 36, // cool down time in seconds after roaming
-    MOBMOD_ALWAYS_AGGRO   = 37, // aggro regardless of level. Spheroids
-    MOBMOD_NO_DROPS       = 38, // If set monster cannot drop any items, not even seals.
-    MOBMOD_SHARE_POS      = 39, // share a pos with another mob (eald'narche exoplates)
-    MOBMOD_TELEPORT_CD    = 40, // cooldown for teleport abilities (tarutaru AA, angra mainyu, eald'narche)
-    MOBMOD_TELEPORT_START = 41, // mobskill ID to begin teleport
-    MOBMOD_TELEPORT_END   = 42, // mobskill ID to end teleport
-    MOBMOD_TELEPORT_TYPE  = 43, // teleport type - 1: on cooldown, 2 - to close distance
-    MOBMOD_DUAL_WIELD     = 44, // enables a mob to use their offhand in attacks
-    MOBMOD_ADD_EFFECT     = 45, // enables additional effect script to process on mobs attacks
-    MOBMOD_AUTO_SPIKES    = 46, // enables additional effect script to process when mob is attacked
-    MOBMOD_SPAWN_LEASH    = 47, // forces a mob to not move farther from its spawn than its leash distance
-    MOBMOD_SHARE_TARGET   = 48, // mob always targets same target as ID in this var
-    MOBMOD_CHECK_AS_NM    = 49, // If set , mob will check as a NM
-    // 50 Available for use
+    MOBMOD_TP_USE_CHANCE      = 20, // % chance to use tp
+    MOBMOD_PET_SPELL_LIST     = 21, // set pet spell list
+    MOBMOD_NA_CHANCE          = 22, // % chance to cast -na
+    MOBMOD_IMMUNITY           = 23, // immune to set status effects. This only works from the db, not scripts
+    MOBMOD_GRADUAL_RAGE       = 24, // (!) TODO: NOT YET IMPLEMENTED -- gradually rages
+    MOBMOD_BUILD_RESIST       = 25, // (!) TODO: NOT YET IMPLEMENTED -- builds resistance to given effects
+    MOBMOD_SUPERLINK          = 26, // super link group. Only use this in mob_spawn_mods / scripts!
+    MOBMOD_SPELL_LIST         = 27, // set spell list
+    MOBMOD_EXP_BONUS          = 28, // bonus exp (bonus / 100) negative values reduce exp.
+    MOBMOD_ASSIST             = 29, // mobs will assist me
+    MOBMOD_SPECIAL_SKILL      = 30, // give special skill
+    MOBMOD_ROAM_DISTANCE      = 31, // distance allowed to roam from spawn
+    MOBMOD_DONT_ROAM_HOME     = 32, // Allow mobs to roam any distance from spawn. Useful for mobs with scripted roaming behavior.
+    MOBMOD_SPECIAL_COOL       = 33, // cool down for special
+    MOBMOD_MAGIC_COOL         = 34, // cool down for magic
+    MOBMOD_STANDBACK_COOL     = 35, // cool down time for standing back (casting spell while not in attack range)
+    MOBMOD_ROAM_COOL          = 36, // cool down time in seconds after roaming
+    MOBMOD_ALWAYS_AGGRO       = 37, // aggro regardless of level. Spheroids
+    MOBMOD_NO_DROPS           = 38, // If set monster cannot drop any items, not even seals.
+    MOBMOD_SHARE_POS          = 39, // share a pos with another mob (eald'narche exoplates)
+    MOBMOD_TELEPORT_CD        = 40, // cooldown for teleport abilities (tarutaru AA, angra mainyu, eald'narche)
+    MOBMOD_TELEPORT_START     = 41, // mobskill ID to begin teleport
+    MOBMOD_TELEPORT_END       = 42, // mobskill ID to end teleport
+    MOBMOD_TELEPORT_TYPE      = 43, // teleport type - 1: on cooldown, 2 - to close distance
+    MOBMOD_DUAL_WIELD         = 44, // enables a mob to use their offhand in attacks
+    MOBMOD_ADD_EFFECT         = 45, // enables additional effect script to process on mobs attacks
+    MOBMOD_AUTO_SPIKES        = 46, // enables additional effect script to process when mob is attacked
+    MOBMOD_SPAWN_LEASH        = 47, // forces a mob to not move farther from its spawn than its leash distance
+    MOBMOD_SHARE_TARGET       = 48, // mob always targets same target as ID in this var
+    MOBMOD_CHECK_AS_NM        = 49, // If set , mob will check as a NM
+    MOBMOD_ROAM_RESET_FACING  = 50, // Resume facing the default spawn rotation after roaming home.
     MOBMOD_ROAM_TURNS         = 51, // Maximum amount of turns during a roam
     MOBMOD_ROAM_RATE          = 52, // Roaming frequency. roam_cool - rand(roam_cool / (roam_rate / 10))
     MOBMOD_BEHAVIOR           = 53, // Add behaviors to mob
@@ -99,6 +99,7 @@ enum MOBMODIFIER : int
     MOBMOD_ALLI_HATE          = 68, // Range around target to add alliance member to enmity list.
     MOBMOD_NO_LINK            = 69, // If set, mob cannot link until unset.
     MOBMOD_NO_REST            = 70, // Mob cannot regain hp (e.g. re-burrowing antlions during ENM).
+    MOBMOD_LEADER             = 71, // Used for mobs that follow a defined "leader", such as Ul'xzomit mobs.
 };
 
 #endif

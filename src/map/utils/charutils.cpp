@@ -2886,7 +2886,19 @@ namespace charutils
             // Add 79 to get the modifier ID
             skillBonus += PChar->getMod(static_cast<Mod>(i + 79));
 
-            PChar->WorkingSkills.rank[i] = battleutils::GetSkillRank((SKILLTYPE)i, PChar->GetMJob());
+            uint8 mainSkillRank = battleutils::GetSkillRank((SKILLTYPE)i, PChar->GetMJob());
+            uint8 subSkillRank  = battleutils::GetSkillRank((SKILLTYPE)i, PChar->GetSJob());
+
+            PChar->WorkingSkills.rank[i] = mainSkillRank;
+
+            if (mainSkillRank != 0)
+            {
+                PChar->RealSkills.rank[i] = mainSkillRank;
+            }
+            else
+            {
+                PChar->RealSkills.rank[i] = subSkillRank;
+            }
 
             if (MaxMSkill != 0)
             {
@@ -3628,6 +3640,62 @@ namespace charutils
         }
     }
 
+    double GetPlayerShareMultiplier(uint16 membersInZone, bool regionBuff)
+    {
+        if (settings::get<bool>("main.DISABLE_PARTY_EXP_PENALTY"))
+        {
+            return 1.00;
+        }
+
+        // Alliance share
+        if (membersInZone > 6)
+        {
+            return 1.8f / membersInZone;
+        }
+
+        // Party share
+        if (regionBuff)
+        {
+            switch (membersInZone)
+            {
+                case 1:
+                    return 1.00;
+                case 2:
+                    return 0.75;
+                case 3:
+                    return 0.55;
+                case 4:
+                    return 0.45;
+                case 5:
+                    return 0.39;
+                case 6:
+                    return 0.35;
+                default:
+                    return 1.8 / membersInZone;
+            }
+        }
+        else
+        {
+            switch (membersInZone)
+            {
+                case 1:
+                    return 1.00;
+                case 2:
+                    return 0.60;
+                case 3:
+                    return 0.45;
+                case 4:
+                    return 0.40;
+                case 5:
+                    return 0.37;
+                case 6:
+                    return 0.35;
+                default:
+                    return 1.8 / membersInZone;
+            }
+        }
+    }
+
     /************************************************************************
      *                                                                       *
      *  Allocate experience points                                           *
@@ -3727,88 +3795,17 @@ namespace charutils
                         }
                     }
 
-                    if (PMember->StatusEffectContainer->HasStatusEffect(EFFECT_SIGNET) && region >= REGION_TYPE::RONFAURE && region <= REGION_TYPE::JEUNO)
-                    {
-                        switch (pcinzone)
-                        {
-                            case 1:
-                                exp *= 1.00f;
-                                break;
-                            case 2:
-                                exp *= 0.75f;
-                                break;
-                            case 3:
-                                exp *= 0.55f;
-                                break;
-                            case 4:
-                                exp *= 0.45f;
-                                break;
-                            case 5:
-                                exp *= 0.39f;
-                                break;
-                            case 6:
-                                exp *= 0.35f;
-                                break;
-                            default:
-                                exp *= (1.8f / pcinzone);
-                                break;
-                        }
-                    }
-                    else if (PMember->StatusEffectContainer->HasStatusEffect(EFFECT_SANCTION) && region >= REGION_TYPE::WEST_AHT_URHGAN &&
-                             region <= REGION_TYPE::ALZADAAL)
-                    {
-                        switch (pcinzone)
-                        {
-                            case 1:
-                                exp *= 1.00f;
-                                break;
-                            case 2:
-                                exp *= 0.75f;
-                                break;
-                            case 3:
-                                exp *= 0.55f;
-                                break;
-                            case 4:
-                                exp *= 0.45f;
-                                break;
-                            case 5:
-                                exp *= 0.39f;
-                                break;
-                            case 6:
-                                exp *= 0.35f;
-                                break;
-                            default:
-                                exp *= (1.8f / pcinzone);
-                                break;
-                        }
-                    }
-                    else
-                    {
-                        switch (pcinzone)
-                        {
-                            case 1:
-                                exp *= 1.00f;
-                                break;
-                            case 2:
-                                exp *= 0.60f;
-                                break;
-                            case 3:
-                                exp *= 0.45f;
-                                break;
-                            case 4:
-                                exp *= 0.40f;
-                                break;
-                            case 5:
-                                exp *= 0.37f;
-                                break;
-                            case 6:
-                                exp *= 0.35f;
-                                break;
-                            default:
-                                exp *= (1.8f / pcinzone);
-                                break;
-                        }
-                    }
+                    bool isInSignetZone =
+                        PMember->StatusEffectContainer->HasStatusEffect(EFFECT_SIGNET) &&
+                        region >= REGION_TYPE::RONFAURE &&
+                        region <= REGION_TYPE::JEUNO;
+
+                    bool isInSanctionZone =
+                        PMember->StatusEffectContainer->HasStatusEffect(EFFECT_SANCTION) &&
+                        region >= REGION_TYPE::WEST_AHT_URHGAN &&
+                        region <= REGION_TYPE::ALZADAAL;
+
+                    exp *= GetPlayerShareMultiplier(pcinzone, isInSignetZone || isInSanctionZone);
 
                     if (PMob->getMobMod(MOBMOD_EXP_BONUS))
                     {
@@ -4182,6 +4179,22 @@ namespace charutils
 
         float rawBonus = 0;
 
+        // COMMITMENT from Capacity Bands
+
+        if (PChar->StatusEffectContainer->GetStatusEffect(EFFECT_COMMITMENT) && PChar->loc.zone->GetRegionID() != REGION_TYPE::ABYSSEA)
+        {
+            CStatusEffect* commitment = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_COMMITMENT);
+            int16          percentage = commitment->GetPower();
+            int16          cap        = commitment->GetSubPower();
+            rawBonus += std::clamp<int32>(((capacityPoints * percentage) / 100), 0, cap);
+            commitment->SetSubPower(cap -= rawBonus);
+
+            if (cap <= 0)
+            {
+                PChar->StatusEffectContainer->DelStatusEffect(EFFECT_COMMITMENT);
+            }
+        }
+
         // Mod::CAPACITY_BONUS is currently used for JP Gifts, and can easily be used elsewhere
         // This value is stored as uint, as a whole number percentage value
         rawBonus += PChar->getMod(Mod::CAPACITY_BONUS);
@@ -4193,13 +4206,12 @@ namespace charutils
             rawBonus += 2 * (roeutils::RoeSystem.unityLeaderRank[unity - 1] - 1);
         }
 
-        // RoE Objectives (There might be a formulaic way to do some of these)
-        // Nation Mission Completion (10%)
-        for (uint16 nationRecord = 1332; nationRecord <= 1372; nationRecord += 20)
+        // RoE Objectives
+        for (auto const& recordValue : roeCapacityBonusRecords)
         {
-            if (roeutils::GetEminenceRecordCompletion(PChar, nationRecord))
+            if (roeutils::GetEminenceRecordCompletion(PChar, recordValue.first))
             {
-                rawBonus += 10;
+                rawBonus += recordValue.second;
             }
         }
 

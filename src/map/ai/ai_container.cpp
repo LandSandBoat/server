@@ -392,6 +392,7 @@ void CAIContainer::Tick(time_point _tick)
         PathFind->FollowPath();
         if (PathFind->OnPoint())
         {
+            EventHandler.triggerListener("PATH", CLuaBaseEntity(PEntity));
             luautils::OnPath(PEntity);
         }
     }

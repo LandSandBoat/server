@@ -36,6 +36,9 @@ xi.settings.map =
     -- Minimal number of 0x3A packets which uses for detect lightluggage (set 0 for disable)
     LIGHTLUGGAGE_BLOCK = 4,
 
+    -- Enable or disable Recycle Bin (Set to false for items to be dropped immediately)
+    ENABLE_ITEM_RECYCLE_BIN = true,
+
     --  AH fee structure, defaults are retail.
     AH_BASE_FEE_SINGLE = 1,
     AH_BASE_FEE_STACKS = 4,
@@ -129,9 +132,13 @@ xi.settings.map =
     -- Enable/disable skill-ups from bloodpacts
     SKILLUP_BLOODPACT = true,
 
-    -- Adjust rate of TP gain for mobs, and players. Acts as a multiplier, so default is 1.
+    -- Adjust rate of TP gain for mobs, pets (includes charmed pets), fellows, trusts and players.
+    -- Acts as a multiplier, so default is 1.
     MOB_TP_MULTIPLIER    = 1.0,
+    PET_TP_MULTIPLIER    = 1.0,
     PLAYER_TP_MULTIPLIER = 1.0,
+    TRUST_TP_MULTIPLIER  = 1.0,
+    FELLOW_TP_MULTIPLIER = 1.0,
 
     -- Adjust max HP pool for NMs, regular mobs, players, and trusts/fellows. Acts as a multiplier, so default is 1.
     NM_HP_MULTIPLIER        = 1.0,
@@ -236,4 +243,7 @@ xi.settings.map =
     --  Gobbie Mystery Box settings
     DAILY_TALLY_AMOUNT = 10,
     DAILY_TALLY_LIMIT  = 50000,
+    
+    -- Enable/disable keeping jug pets through zoning
+    KEEP_JUGPET_THROUGH_ZONING = false,
 }

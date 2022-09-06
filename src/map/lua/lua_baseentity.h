@@ -78,7 +78,7 @@ public:
 
     // Packets, Events, and Flags
     void injectPacket(std::string const& filename); // Send the character a packet kept in a file
-    void injectActionPacket(uint16 action, uint16 anim, uint16 spec, uint16 react, uint16 message);
+    void injectActionPacket(uint32 inTargetID, uint16 inCategory, uint16 inAnimationID, uint16 inSpecEffect, uint16 inReaction, uint16 inMessage, uint16 inActionParam, uint16 inParam);
     void entityVisualPacket(std::string const& command, sol::object const& entity);
     void entityAnimationPacket(const char* command, sol::object const& target);
 
@@ -561,7 +561,10 @@ public:
     void recalculateStats();
     bool checkImbuedItems();
 
-    bool isDualWielding(); // Checks if the battle entity is dual wielding
+    bool   isDualWielding();     // Checks if the battle entity is dual wielding
+    bool   isUsingH2H();         // Checks if the battle entity is using h2h
+    uint16 getBaseDelay();       // get base delay of entity, melee only
+    uint16 getBaseRangedDelay(); // get base delay of entity, ranged only
 
     float checkLiementAbsorb(uint16 damageType); // return 1.0 if did not absorb, return >= -1.0 if did absorb
 
@@ -680,7 +683,7 @@ public:
     void   trustPartyMessage(uint32 message_id);
     void   addSimpleGambit(uint16 targ, uint16 cond, uint32 condition_arg, uint16 react, uint16 select, uint32 selector_arg, sol::object const& retry);
     int32  addFullGambit(lua_State*);
-    void   setTrustTPSkillSettings(uint16 trigger, uint16 select);
+    void   setTrustTPSkillSettings(uint16 trigger, uint16 select, sol::object const& value);
 
     bool isJugPet(); // If the entity has a pet, test if it is a jug pet.
     bool hasValidJugPetItem();
@@ -737,7 +740,7 @@ public:
     bool   isNM();
 
     uint8  getModelSize();
-    void   setMobFlags(uint32 flags, uint32 mobid); // Used to manipulate the mob's flags for testing.
+    void   setMobFlags(uint32 flags, sol::object const& mobId); // Used to manipulate the mob's flags, such as changing size.
     uint32 getMobFlags();
 
     void setNpcFlags(uint32 flags);

@@ -1,15 +1,13 @@
 -----------------------------------
---
 -- Zone: Middle_Delkfutts_Tower
---
 -----------------------------------
-local ID = require("scripts/zones/Middle_Delkfutts_Tower/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/npc_util")
-require("scripts/globals/settings")
-require("scripts/globals/treasure")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
+local ID = require('scripts/zones/Middle_Delkfutts_Tower/IDs')
+require('scripts/globals/conquest')
+require('scripts/globals/npc_util')
+require('scripts/globals/settings')
+require('scripts/globals/treasure')
+require('scripts/globals/quests')
+require('scripts/globals/titles')
 -----------------------------------
 local zone_object = {}
 
@@ -35,14 +33,17 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
+
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(-43.0914, -47.4255, 77.5126, 120)
     end
+
     return cs
 end
 
 zone_object.onRegionEnter = function(player, region)
     local regionId = region:GetRegionID()
+
     if regionId == 8 and player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_EVIL) == QUEST_ACCEPTED and player:getCharVar("bladeOfEvilCS") == 1 then
         player:startEvent(14)
     else
@@ -57,7 +58,7 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    -- teleporters
+    -- Teleporters
     if csid <= 11 and option == 1 then
         if csid == 0 then
             player:setPos(412, -32, 80, 100, 184)
@@ -68,7 +69,6 @@ zone_object.onEventFinish = function(player, csid, option)
         elseif csid == 10 then
             player:setPos(-355, -144, 91, 64, 158)
         end
-
     -- BLADE OF EVIL
     elseif csid == 14 and option == 0 and npcUtil.completeQuest(player, xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_EVIL, {item=12516, title=xi.title.PARAGON_OF_DARK_KNIGHT_EXCELLENCE, fame=60}) then
         player:setCharVar("bladeOfEvilCS", 0)

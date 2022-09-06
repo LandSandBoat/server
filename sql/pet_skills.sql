@@ -9,7 +9,14 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- Table structure for `pet_skills`
 --
 
---- pet_skill_id is intended to map 1:1 with a real player id, i.e. "Welt" on this table would have the same id as "Welt" on abilities.sql
+-- Skillflag Variables
+SET @SKILLFLAG_NONE           = 0;   -- no skill flag
+SET @SKILLFLAG_ASTRAL_FLOW    = 2;   -- Used to identify 2hrs (such as avatar 2hrs like Searing Light, Clarsach Call, etc.)
+SET @SKILLFLAG_SPECIAL        = 4;   -- Used to identify abilities
+SET @SKILLFLAG_BLOODPACT_RAGE = 64;  -- Used for identifying Bloodpact Rage abilities
+SET @SKILLFLAG_BLOODPACT_WARD = 128; -- Used for identifying Bloodpact Ward abilities
+
+-- pet_skill_id is intended to map 1:1 with a real player id, i.e. "Welt" on this table would have the same id as "Welt" on abilities.sql
 DROP TABLE IF EXISTS `pet_skills`;
 CREATE TABLE `pet_skills` (
   `pet_skill_id` smallint(4) unsigned NOT NULL,
@@ -36,4 +43,9 @@ CREATE TABLE `pet_skills` (
 --
 
 -- Siren
-INSERT INTO `pet_skills` VALUES (961,176,'welt',0,6.0,2000,1000,4,317,68,0,13,0,0,0,0);
+INSERT INTO `pet_skills` VALUES (960,175,'clarsach_call',1,7.0,2000,1000,4,317,@SKILLFLAG_SPECIAL | @SKILLFLAG_ASTRAL_FLOW | @SKILLFLAG_BLOODPACT_RAGE,0,13,0,0,0,0);
+INSERT INTO `pet_skills` VALUES (961,176,'welt',0,7.0,2000,1000,4,317,@SKILLFLAG_SPECIAL | @SKILLFLAG_BLOODPACT_RAGE,0,13,0,0,0,0);
+INSERT INTO `pet_skills` VALUES (964,179,'roundhouse',0,7.0,2000,1000,4,317,@SKILLFLAG_SPECIAL | @SKILLFLAG_BLOODPACT_RAGE,0,13,0,0,0,0);
+INSERT INTO `pet_skills` VALUES (967,182,'sonic_buffet',0,18.0,2000,1000,4,317,@SKILLFLAG_SPECIAL | @SKILLFLAG_BLOODPACT_RAGE,0,13,0,0,0,0);
+INSERT INTO `pet_skills` VALUES (968,183,'tornado_ii',0,14.0,2000,1000,4,317,@SKILLFLAG_SPECIAL | @SKILLFLAG_BLOODPACT_RAGE,0,13,0,0,0,0);
+INSERT INTO `pet_skills` VALUES (970,185,'hysteric_assault',0,7.0,2000,1000,4,802,@SKILLFLAG_SPECIAL | @SKILLFLAG_BLOODPACT_RAGE,0,13,0,0,0,0);
