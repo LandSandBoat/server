@@ -22,6 +22,7 @@
 #include <cstring>
 
 #include "entities/charentity.h"
+#include "lua/luautils.h"
 #include "map.h"
 #include "merit.h"
 #include "packets/char_spells.h"
@@ -35,9 +36,10 @@
 
 // массив больше на одно значение, заполняемое нулем
 
+/*
 static uint8 upgrade[10][45] = {
     { 1, 2, 3, 4, 5, 5, 5, 5, 5, 7, 7, 7, 9, 9, 9 },           // HP-MP
-    { 3, 6, 9, 9, 9, 12, 12, 12, 12, 15, 15, 15, 15, 18, 18 }, // Attributes
+    { 3, 6, 9, 9, 9 } //, 12, 12, 12, 12, 15, 15, 15, 15, 18, 18 }, // Attributes
     { 1, 2, 3, 3, 3, 3, 3, 3 },                                // Combat Skills
     { 1, 2, 3, 3, 3, 3, 3, 3 },                                // Defensive Skills
     { 1, 2, 3, 3, 3, 3, 3, 3 },                                // Magic Skills
@@ -51,6 +53,22 @@ static uint8 upgrade[10][45] = {
       51, 51 } // Max merits
 };
 
+*/
+
+// Mirrored struct for era values
+
+static uint8 upgrade[10][45] = {
+    { 1, 2, 3, 4, 5, 5, 5, 5 }, // HP-MP
+    { 3, 6, 9, 9, 9 },          // Attributes
+    { 1, 2, 3, 3, 3, 3, 3, 3 }, // Combat Skills
+    { 1, 2, 3, 3 },             // Defensive Skills
+    { 1, 2, 3, 3, 3, 3, 3, 3 }, // Magic Skills
+    { 1, 2, 3, 4 },             // Others
+    { 1, 2, 3, 4, 5 },          // Job Group 1
+    { 3, 4, 5, 5, 5 },          // Job Group 2
+    { 99 },                     // Weapon Skills
+    { 99 }                      // Max merits
+};
 #define MAX_LIMIT_POINTS 10000 // количество опыта для получения одного merit
 
 // TODO: скорее всего придется все это перенести в базу
@@ -91,11 +109,18 @@ struct MeritCategoryInfo_t
 };
 
 static const MeritCategoryInfo_t meritCatInfo[] = {
+    /*
     { 3, 45, 0 },   // MCATEGORY_HP_MP       catNumber 00
     { 7, 105, 1 },  // MCATEGORY_ATTRIBUTES  catNumber 01
     { 19, 152, 2 }, // MCATEGORY_COMBAT      catNumber 02
     { 14, 112, 4 }, // MCATEGORY_MAGIC       catNumber 03
     { 5, 10, 5 },   // MCATEGORY_OTHERS      catNumber 04
+    */
+    { 2, 8, 0 },   // MCATEGORY_HP_MP       catNumber 00
+    { 7, 5, 1 },   // MCATEGORY_ATTRIBUTES  catNumber 01
+    { 19, 20, 2 }, // MCATEGORY_COMBAT      catNumber 02
+    { 14, 16, 4 }, // MCATEGORY_MAGIC       catNumber 03
+    { 5, 8, 5 },   // MCATEGORY_OTHERS      catNumber 04
 
     { 5, 10, 6 }, // MCATEGORY_WAR_1       catNumber 05
     { 5, 10, 6 }, // MCATEGORY_MNK_1       catNumber 06
@@ -367,7 +392,14 @@ bool CMeritPoints::IsMeritExist(MERIT_TYPE merit)
     {
         return false;
     }
+    // Block Group 2 Job Merits if TOAU is not enabled
+    std::string toau = "TOAU";
 
+    if (!luautils::IsContentEnabled(toau.c_str()) &&
+        (meritCatInfo[GetMeritCategory(merit)].UpgradeID == 7))
+    {
+        return false;
+    }
     return true;
 }
 
@@ -418,9 +450,22 @@ Merit_t* CMeritPoints::GetMeritPointer(MERIT_TYPE merit)
 
 void CMeritPoints::RaiseMerit(MERIT_TYPE merit)
 {
-    Merit_t* PMerit = GetMeritPointer(merit);
+    Merit_t* PMerit     = GetMeritPointer(merit);
+    auto     maxUpgrade = meritCatInfo[GetMeritCategory(merit)].MaxPoints;
 
-    if (m_MeritPoints >= PMerit->next)
+    // Make sure we don't exceed the maximum for the category
+    // Check all other merits in this player's category to make sure the category maximum is not exceeded
+    uint8 totalMeritsInCat = 0;
+
+    for (auto& playerMerits : merits)
+    {
+        if (playerMerits.catid == PMerit->catid)
+        {
+            totalMeritsInCat += playerMerits.count;
+        }
+    }
+
+    if (m_MeritPoints >= PMerit->next && totalMeritsInCat < maxUpgrade)
     {
         m_MeritPoints -= PMerit->next;
 
