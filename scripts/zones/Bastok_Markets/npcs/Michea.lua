@@ -12,16 +12,11 @@ require("scripts/globals/quests")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local theElvaanGoldsmith = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_ELVAAN_GOLDSMITH)
     local distantLoyalties = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.DISTANT_LOYALTIES)
     local fatherFigure = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FATHER_FIGURE)
 
-    -- THE ELVAAN GOLDSMITH
-    if theElvaanGoldsmith >= QUEST_ACCEPTED and npcUtil.tradeHas(trade, 648) then
-        player:startEvent(216)
-
     -- DISTANT LOYALTIES
-    elseif (distantLoyalties == QUEST_ACCEPTED and player:getCharVar("DistantLoyaltiesProgress") == 2 and npcUtil.tradeHas(trade, 653)) then
+    if (distantLoyalties == QUEST_ACCEPTED and player:getCharVar("DistantLoyaltiesProgress") == 2 and npcUtil.tradeHas(trade, 653)) then
         player:startEvent(317)
 
     -- FATHER FIGURE
@@ -36,12 +31,8 @@ entity.onTrigger = function(player, npc)
     local distantLoyaltiesProgress = player:getCharVar("DistantLoyaltiesProgress")
     local fatherFigure = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FATHER_FIGURE)
 
-    -- THE ELVAAN GOLDSMITH
-    if theElvaanGoldsmith == QUEST_AVAILABLE then
-        player:startEvent(215)
-
     -- DISTANT LOYALTIES
-    elseif distantLoyalties == QUEST_ACCEPTED and distantLoyaltiesProgress >= 1 and distantLoyaltiesProgress <= 3 then
+    if distantLoyalties == QUEST_ACCEPTED and distantLoyaltiesProgress >= 1 and distantLoyaltiesProgress <= 3 then
         if distantLoyaltiesProgress == 1 and player:hasKeyItem(xi.ki.GOLDSMITHING_ORDER) then
             player:startEvent(315)
         elseif distantLoyaltiesProgress == 2 then
@@ -62,17 +53,8 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    -- THE ELVAAN GOLDSMITH
-    if csid == 215 then
-        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_ELVAAN_GOLDSMITH)
-    elseif csid == 216 then
-        local fame = player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_ELVAAN_GOLDSMITH) and 8 or 100
-        if (npcUtil.completeQuest(player, xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_ELVAAN_GOLDSMITH, {gil=180, fame=fame})) then
-            player:confirmTrade()
-        end
-
     -- DISTANT LOYALTIES
-    elseif csid == 315 then
+    if csid == 315 then
         player:delKeyItem(xi.ki.GOLDSMITHING_ORDER)
         player:setCharVar("DistantLoyaltiesProgress", 2)
     elseif csid == 317 then
