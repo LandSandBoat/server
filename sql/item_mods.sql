@@ -56179,7 +56179,7 @@ INSERT INTO `item_mods` VALUES (26406,135,3); -- COOK: 3
 INSERT INTO `item_mods` VALUES (26410,1,1);   -- DEF: 1
 
 -- Kam'lanaut's Shield
-NSERT INTO `item_mods` VALUES (26412,1,1);   -- DEF: 1
+INSERT INTO `item_mods` VALUES (26412,1,1);   -- DEF: 1
 
 -- Ammurapi Shield
 INSERT INTO `item_mods` VALUES (26419,1,47);   -- DEF: 47
