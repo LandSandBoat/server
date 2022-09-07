@@ -101,6 +101,7 @@ xi.items =
     STARFALL_TEAR                   = 546,
     TOMB_GUARDS_WATERSKIN           = 547,
     DELKFUTT_KEY                    = 549,
+    STEAM_CLOCK                     = 550,
     LOCK_OF_HIWONS_HAIR             = 552,
     DANGRUF_STONE                   = 553,
     GOLD_ORCMASK                    = 554,
