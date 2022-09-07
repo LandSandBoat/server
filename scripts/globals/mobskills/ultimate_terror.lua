@@ -14,7 +14,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)  
+mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     local drained = 0
     local threshold = 3/7
@@ -23,7 +23,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
         skill:setMsg(xi.mobskills.mobDrainAttribute(mob, target, xi.effect.STR_DOWN, 10, 3, 60))
         drained = drained + 1
     end
-    
+
     if math.random() < threshold then
         skill:setMsg(xi.mobskills.mobDrainAttribute(mob, target, xi.effect.DEX_DOWN, 10, 3, 60))
         drained = drained + 1
@@ -55,7 +55,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     end
 
     return drained
-    
+
 end
 
 return mobskill_object
