@@ -36,6 +36,7 @@ zones[xi.zone.NORTH_GUSTABERG] =
         CONQUEST                      = 7489,  -- You've earned conquest points!
         ITEMS_ITEMS_LA_LA             = 7852,  -- You can hear a strange voice... Items, items, la la la la la
         GOBLIN_SLIPPED_AWAY           = 7858,  -- The Goblin slipped away when you were not looking...
+        GARRISON_BASE                 = 7868,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
         PLAYER_OBTAINS_ITEM           = 8083,  -- <name> obtains <item>!
         UNABLE_TO_OBTAIN_ITEM         = 8084,  -- You were unable to obtain the item.
         PLAYER_OBTAINS_TEMP_ITEM      = 8085,  -- <name> obtains the temporary item: <item>!

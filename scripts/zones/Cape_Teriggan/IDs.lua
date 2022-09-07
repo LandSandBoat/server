@@ -36,6 +36,7 @@ zones[xi.zone.CAPE_TERIGGAN] =
         MUST_BE_A_WAY_TO_SOOTHE       = 7685,  -- There must be a way to soothe the weary soul who once guarded this monument...
         COLD_WIND_CHILLS_YOU          = 7692,  -- A cold wind chills you to the bone.
         SENSE_OMINOUS_PRESENCE        = 7694,  -- You sense an ominous presence...
+        GARRISON_BASE                 = 7881,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
         PLAYER_OBTAINS_ITEM           = 7928,  -- <name> obtains <item>!
         UNABLE_TO_OBTAIN_ITEM         = 7929,  -- You were unable to obtain the item.
         PLAYER_OBTAINS_TEMP_ITEM      = 7930,  -- <name> obtains the temporary item: <item>!
