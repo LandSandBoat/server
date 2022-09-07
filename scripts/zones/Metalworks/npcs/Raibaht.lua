@@ -22,11 +22,7 @@ entity.onTrigger = function(player, npc)
     local mLvl = player:getMainLvl()
     local mJob = player:getMainJob()
 
-    local wildcatBastok = player:getCharVar("WildcatBastok")
-
-    if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(wildcatBastok, 5)) then
-        player:startEvent(933)
-    elseif (darkLegacy == QUEST_AVAILABLE and mJob == xi.job.DRK and mLvl >= xi.settings.main.AF1_QUEST_LEVEL) then
+    if (darkLegacy == QUEST_AVAILABLE and mJob == xi.job.DRK and mLvl >= xi.settings.main.AF1_QUEST_LEVEL) then
         player:startEvent(751) -- Start Quest "Dark Legacy"
     elseif (player:hasKeyItem(xi.ki.DARKSTEEL_FORMULA)) then
         player:startEvent(755) -- Finish Quest "Dark Legacy"
@@ -57,8 +53,6 @@ entity.onEventFinish = function(player, csid, option)
             player:addFame(xi.quest.fame_area.BASTOK, 20)
             player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.DARK_LEGACY)
         end
-    elseif (csid == 933) then
-        player:setCharVar("WildcatBastok", utils.mask.setBit(player:getCharVar("WildcatBastok"), 5, true))
     end
 end
 

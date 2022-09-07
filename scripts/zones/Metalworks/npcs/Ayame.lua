@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Metalworks
 --  NPC: Ayame
--- Involved in Missions
 -- Starts and Finishes Quest: True Strength
 -- !pos 133 -19 34 237
 -----------------------------------
@@ -27,11 +26,8 @@ end
 
 entity.onTrigger = function(player, npc)
     local trueStrength = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRUE_STRENGTH)
-    local wildcatBastok = player:getCharVar("WildcatBastok")
 
-    if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(wildcatBastok, 9)) then
-        player:startEvent(935)
-    elseif (trueStrength == QUEST_AVAILABLE and player:getMainJob() == xi.job.MNK and player:getMainLvl() >= 50) then
+    if (trueStrength == QUEST_AVAILABLE and player:getMainJob() == xi.job.MNK and player:getMainLvl() >= 50) then
         player:startEvent(748) -- Start Quest "True Strength"
     elseif (player:getCharVar("FadedPromises") == 1) then
         player:startEvent(803)
@@ -57,8 +53,6 @@ entity.onEventFinish = function(player, csid, option)
             player:addFame(xi.quest.fame_area.BASTOK, 60)
             player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRUE_STRENGTH)
         end
-    elseif (csid == 935) then
-        player:setCharVar("WildcatBastok", utils.mask.setBit(player:getCharVar("WildcatBastok"), 9, true))
     elseif (csid == 803 and option == 1) then
         player:setCharVar("FadedPromises", 2)
     elseif (csid == 804) then

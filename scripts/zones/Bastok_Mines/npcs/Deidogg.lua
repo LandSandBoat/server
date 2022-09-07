@@ -33,15 +33,8 @@ entity.onTrigger = function(player, npc)
     local theTalekeeperTruth   = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_TALEKEEPER_S_TRUTH)
     local theTalekeeperTruthCS = player:getCharVar("theTalekeeperTruthCS")
     local wait1DayForAF3       = player:getCharVar("DeidoggWait1DayForAF3")
-    local wildcatBastok        = player:getCharVar("WildcatBastok")
 
     if
-        player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
-        not utils.mask.getBit(wildcatBastok, 18)
-    then
-        player:startEvent(504)
-
-    elseif
         player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_DOORMAN) == QUEST_COMPLETED and
         theTalekeeperTruth == QUEST_AVAILABLE and
         player:getMainJob() == xi.job.WAR and
@@ -119,8 +112,6 @@ entity.onEventFinish = function(player, csid, option)
         player:tradeComplete()
         player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_TALEKEEPER_S_GIFT)
         player:setCharVar("theTalekeeperGiftCS", 3)
-    elseif csid == 504 then
-        player:setCharVar("WildcatBastok", utils.mask.setBit(player:getCharVar("WildcatBastok"), 18, true))
     end
 end
 
