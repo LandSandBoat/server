@@ -147,6 +147,7 @@ xi.items =
     CHUNK_OF_ZINC_ORE               = 642,
     CHUNK_OF_DARKSTEEL_ORE          = 645,
     CHUNK_OF_ADAMAN_ORE             = 646,
+    COPPER_INGOT                    = 648,
     STEEL_INGOT                     = 652,
     MYTHRIL_INGOT                   = 653,
     DARKSTEEL_INGOT                 = 654,

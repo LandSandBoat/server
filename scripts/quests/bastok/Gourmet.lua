@@ -82,7 +82,7 @@ quest.sections =
                                 timeOffset >= itemData[2] and
                                 timeOffset < itemData[3]
                             then
-                                return quest:progressEvent(tradeItemData[itemId], itemId)
+                                return quest:progressEvent(itemData[1], itemId)
                             else
                                 return quest:progressEvent(203, itemId)
                             end
