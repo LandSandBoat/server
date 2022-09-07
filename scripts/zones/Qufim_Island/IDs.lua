@@ -31,6 +31,7 @@ zones[xi.zone.QUFIM_ISLAND] =
         NOW_THAT_NIGHT_HAS_FALLEN      = 7337,  -- Now that night has fallen, the flowers bloom with a strange glow.
         CONQUEST                       = 7385,  -- You've earned conquest points!
         AN_EMPTY_LIGHT_SWIRLS          = 7755,  -- An empty light swirls about the cave, eating away at the surroundings...
+        GARRISON_BASE                  = 7760,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
         GIGANTIC_FOOTPRINT             = 7839,  -- There is a gigantic footprint here.
         ASA_SNOW                       = 7852,  -- You see the following words scrawled into the snow: Shantotto Empire Provisional Headquarters.
         YOU_CANNOT_ENTER_DYNAMIS       = 7865,  -- You cannot enter Dynamis - [Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia] for <number> [day/days] (Vana'diel time).

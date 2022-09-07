@@ -12,6 +12,7 @@ require("scripts/globals/status")
 require("scripts/globals/zone")
 require("scripts/globals/items")
 require("scripts/globals/extravaganza")
+require("scripts/globals/garrison")
 -----------------------------------
 
 xi = xi or {}
@@ -994,6 +995,11 @@ end
 -----------------------------------
 
 xi.conquest.overseerOnTrade = function(player, npc, trade, guardNation, guardType)
+
+    if xi.garrison.onTrade(player, npc, trade, guardNation) then
+        return
+    end
+
     if player:getNation() == guardNation or guardNation == xi.nation.OTHER then
         local item = trade:getItemId()
         local tradeConfirmed = false
@@ -1061,6 +1067,10 @@ end
 
 xi.conquest.overseerOnTrigger = function(player, npc, guardNation, guardType, guardEvent, guardRegion)
     local pNation = player:getNation()
+
+    if xi.garrison.onTrigger(player, npc) then
+        return
+    end
 
     -- SUPPLY RUNS
     if pNation == guardNation and areSuppliesRotten(player, npc, guardType) then
