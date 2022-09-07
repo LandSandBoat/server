@@ -18,8 +18,6 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local numhits = 1
-    local accmod = 1
     local dmg_v = mob:getMainLvl() * 5 + 10 or 50 -- http://wiki.ffo.jp/html/4045.html
     -- int (( Diabolos ' LV x 5 + 10) x Diabolos ' magic attack power / Opponent's magic defense power )
     local dmgmod = 1
