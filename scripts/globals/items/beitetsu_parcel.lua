@@ -20,4 +20,3 @@ item_object.onItemUse = function(target)
 end
 
 return item_object
-
