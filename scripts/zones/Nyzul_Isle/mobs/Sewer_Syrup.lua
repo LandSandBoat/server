@@ -1,6 +1,7 @@
 -----------------------------------
+--  MOB: Sewer Syrup
 -- Area: Nyzul Isle
--- NM: Steelfleece Baldarich
+-- Info: NM
 -----------------------------------
 require('scripts/globals/nyzul')
 -----------------------------------

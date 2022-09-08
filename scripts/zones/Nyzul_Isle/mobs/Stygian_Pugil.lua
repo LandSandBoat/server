@@ -1,15 +1,19 @@
 -----------------------------------
+--  MOB: Stygian Pugil
 -- Area: Nyzul Isle
--- NM: Steelfleece Baldarich
 -----------------------------------
 require('scripts/globals/nyzul')
 -----------------------------------
 local entity = {}
 
+entity.onMobSpawn = function(mob)
+    xi.nyzul.specifiedEnemySet(mob)
+end
+
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
         xi.nyzul.spawnChest(mob, player)
-        xi.nyzul.eliminateAllKill(mob)
+        xi.nyzul.specifiedEnemyKill(mob)
     end
 end
 

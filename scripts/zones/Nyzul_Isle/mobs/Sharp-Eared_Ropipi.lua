@@ -1,6 +1,7 @@
 -----------------------------------
+--  MOB: Sharp-Eared Ropipi
 -- Area: Nyzul Isle
--- NM: Steelfleece Baldarich
+-- Info: NM
 -----------------------------------
 require('scripts/globals/nyzul')
 -----------------------------------
