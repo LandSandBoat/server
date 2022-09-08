@@ -11,7 +11,7 @@ xi = xi or {}
 xi.appraisalUtil = xi.appraisalUtil or {}
 -----------------------------------
 
-xi.appraisalUtil.Origin =
+xi.appraisalUtil.origin =
 {
     NYZUL_BASIC                 = 100,
     NYZUL_BAT_EYE               = 101,
@@ -206,7 +206,7 @@ xi.appraisalUtil.appraisalItems =
                 {100,17660}, -- Kilij
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_FROSTMANE] =
+        [xi.appraisalUtil.origin.NYZUL_FROSTMANE] =
         {
             items =
             {
@@ -215,7 +215,7 @@ xi.appraisalUtil.appraisalItems =
                 { 5, 16944}, -- Lockheart
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_CARNERO] =
+        [xi.appraisalUtil.origin.NYZUL_CARNERO] =
         {
             items =
             {
@@ -223,7 +223,7 @@ xi.appraisalUtil.appraisalItems =
                 {25, 17811}, -- Katayama
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_EMERGENT_ELM] =
+        [xi.appraisalUtil.origin.NYZUL_EMERGENT_ELM] =
         {
             items =
             {
@@ -232,7 +232,7 @@ xi.appraisalUtil.appraisalItems =
                 { 5, 18386}, -- Gloom Claymore
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_ZIZZY_ZILLAH] =
+        [xi.appraisalUtil.origin.NYZUL_ZIZZY_ZILLAH] =
         {
             items =
             {
@@ -241,7 +241,7 @@ xi.appraisalUtil.appraisalItems =
                 { 5, 18437}, -- Namikirimaru
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_KEEPER_OF_HALIDOM] =
+        [xi.appraisalUtil.origin.NYZUL_KEEPER_OF_HALIDOM] =
         {
             items =
             {
@@ -250,7 +250,7 @@ xi.appraisalUtil.appraisalItems =
                 { 3, 16990}, -- Daihannya
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_AMIKIRI] =
+        [xi.appraisalUtil.origin.NYZUL_AMIKIRI] =
         {
             items =
             {
@@ -258,7 +258,7 @@ xi.appraisalUtil.appraisalItems =
                 {25, 16968}, -- Kamewari
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_CARGO_CRAB_COLIN] =
+        [xi.appraisalUtil.origin.NYZUL_CARGO_CRAB_COLIN] =
         {
             items =
             {
@@ -269,7 +269,7 @@ xi.appraisalUtil.appraisalItems =
     },
     [xi.items.UNAPPRAISED_DAGGER] =
     {
-        [xi.appraisalUtil.Origin.NYZUL_TOM_TIT_TAT] =
+        [xi.appraisalUtil.origin.NYZUL_TOM_TIT_TAT] =
         {
             items =
             {
@@ -278,7 +278,7 @@ xi.appraisalUtil.appraisalItems =
                 { 5, 16443}, -- Fruit Punches
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_ORCTRAP] =
+        [xi.appraisalUtil.origin.NYZUL_ORCTRAP] =
         {
             items =
             {
@@ -286,7 +286,7 @@ xi.appraisalUtil.appraisalItems =
                 { 5, 17792}, -- Nikkariaoe
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_STINGING_SOPHIE] =
+        [xi.appraisalUtil.origin.NYZUL_STINGING_SOPHIE] =
         {
             items =
             {
@@ -294,7 +294,7 @@ xi.appraisalUtil.appraisalItems =
                 { 5, 16486}, -- Beestinger
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_WESTERN_SHADOW] =
+        [xi.appraisalUtil.origin.NYZUL_WESTERN_SHADOW] =
         {
             items =
             {
@@ -302,7 +302,7 @@ xi.appraisalUtil.appraisalItems =
                 { 5, 18752}, -- Retaliators
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_MISCHIEVOUS_MICHOLAS] =
+        [xi.appraisalUtil.origin.NYZUL_MISCHIEVOUS_MICHOLAS] =
         {
             items =
             {
@@ -310,7 +310,7 @@ xi.appraisalUtil.appraisalItems =
                 { 5, 17610}, -- Kidney Dagger
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_NIGHTMARE_VASE] =
+        [xi.appraisalUtil.origin.NYZUL_NIGHTMARE_VASE] =
         {
             items =
             {
@@ -318,7 +318,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 16913}, -- Shinogi
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_DAGGERCLAW_DRACOS] =
+        [xi.appraisalUtil.origin.NYZUL_DAGGERCLAW_DRACOS] =
         {
             items =
             {
@@ -326,7 +326,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 16434}, -- Sonic Knuckles
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_SABOTENDER_MARIACHI] =
+        [xi.appraisalUtil.origin.NYZUL_SABOTENDER_MARIACHI] =
         {
             items =
             {
@@ -373,7 +373,7 @@ xi.appraisalUtil.appraisalItems =
                 {100, xi.items.SICKLE}
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_JUGGLER_HECATOMB] =
+        [xi.appraisalUtil.origin.NYZUL_JUGGLER_HECATOMB] =
         {
             items =
             {
@@ -381,7 +381,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 16868}, -- Heavy Halberd
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_HELLION] =
+        [xi.appraisalUtil.origin.NYZUL_HELLION] =
         {
             items =
             {
@@ -389,7 +389,7 @@ xi.appraisalUtil.appraisalItems =
                 {30, 16868}, -- A I'Outrance
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_FALCATUS_ARANEI] =
+        [xi.appraisalUtil.origin.NYZUL_FALCATUS_ARANEI] =
         {
             items =
             {
@@ -398,7 +398,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 18040}, -- Webcutter
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_NUNYENUNC] =
+        [xi.appraisalUtil.origin.NYZUL_NUNYENUNC] =
         {
             items =
             {
@@ -406,7 +406,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 18394}, -- Pilgrams Wand
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_ROC] =
+        [xi.appraisalUtil.origin.NYZUL_ROC] =
         {
             items =
             {
@@ -414,7 +414,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 18587}, -- Dryad Staff
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_SWAMFISK] =
+        [xi.appraisalUtil.origin.NYZUL_SWAMFISK] =
         {
             items =
             {
@@ -422,7 +422,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 17594}, -- Gelong Staff
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_VOUIVRE] =
+        [xi.appraisalUtil.origin.NYZUL_VOUIVRE] =
         {
             items =
             {
@@ -457,7 +457,7 @@ xi.appraisalUtil.appraisalItems =
                 {15, xi.items.PROMINENCE_AXE},
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_BAT_EYE] =
+        [xi.appraisalUtil.origin.NYZUL_BAT_EYE] =
         {
             items =
             {
@@ -465,7 +465,7 @@ xi.appraisalUtil.appraisalItems =
                 { 5, 16675}, -- Storm Axe
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_NORTHERN_SHADOW] =
+        [xi.appraisalUtil.origin.NYZUL_NORTHERN_SHADOW] =
         {
             items =
             {
@@ -473,7 +473,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 16723}, -- Executioner
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_AQUARIUS] =
+        [xi.appraisalUtil.origin.NYZUL_AQUARIUS] =
         {
             items =
             {
@@ -481,7 +481,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 17925}, -- Fransisca
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_TRICKSTER_KINETIX] =
+        [xi.appraisalUtil.origin.NYZUL_TRICKSTER_KINETIX] =
         {
             items =
             {
@@ -489,7 +489,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 16657}, -- Tabar
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_TYRANNIC_TUNNOK] =
+        [xi.appraisalUtil.origin.NYZUL_TYRANNIC_TUNNOK] =
         {
             items =
             {
@@ -497,7 +497,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 17927}, -- Lohar
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_PANZER_PERCIVAL] =
+        [xi.appraisalUtil.origin.NYZUL_PANZER_PERCIVAL] =
         {
             items =
             {
@@ -505,7 +505,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 16714}, -- Neckchopper
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_PEG_POWLER] =
+        [xi.appraisalUtil.origin.NYZUL_PEG_POWLER] =
         {
             items =
             {
@@ -525,7 +525,7 @@ xi.appraisalUtil.appraisalItems =
                 {14, 18683}, -- Imperial Bow
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_GYRE_CARLIN] =
+        [xi.appraisalUtil.origin.NYZUL_GYRE_CARLIN] =
         {
             items =
             {
@@ -533,7 +533,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 17247}, -- Rikonodo
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_EASTERN_SHADOW] =
+        [xi.appraisalUtil.origin.NYZUL_EASTERN_SHADOW] =
         {
             items =
             {
@@ -541,7 +541,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 18714}, -- Valis Bow
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_HELLDIVER] =
+        [xi.appraisalUtil.origin.NYZUL_HELLDIVER] =
         {
             items =
             {
@@ -549,7 +549,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 17281}, -- Wingedge
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_UNGUR] =
+        [xi.appraisalUtil.origin.NYZUL_UNGUR] =
         {
             items =
             {
@@ -557,7 +557,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 18141}, -- Ungar Boomerang
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_FRAELISSA] =
+        [xi.appraisalUtil.origin.NYZUL_FRAELISSA] =
         {
             items =
             {
@@ -597,7 +597,7 @@ xi.appraisalUtil.appraisalItems =
                 { 5, 14937}, -- Storm Gages
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_PEALLAIDH] =
+        [xi.appraisalUtil.origin.NYZUL_PEALLAIDH] =
         {
             items =
             {
@@ -605,7 +605,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 14946}, -- Nightmare Gloves
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_ENERGETIC_ERUCA] =
+        [xi.appraisalUtil.origin.NYZUL_ENERGETIC_ERUCA] =
         {
             items =
             {
@@ -637,7 +637,7 @@ xi.appraisalUtil.appraisalItems =
                 {35, xi.items.LEATHER_HIGHBOOTS},
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_LEAPING_LIZZY] =
+        [xi.appraisalUtil.origin.NYZUL_LEAPING_LIZZY] =
         {
             items =
             {
@@ -645,7 +645,7 @@ xi.appraisalUtil.appraisalItems =
                 { 5, 13014}, -- Leaping boots
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_CACTUAR_CANTAUTOR] =
+        [xi.appraisalUtil.origin.NYZUL_CACTUAR_CANTAUTOR] =
         {
             items =
             {
@@ -653,7 +653,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 14128}, -- Kung Fu Shoes
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_BONNACON] =
+        [xi.appraisalUtil.origin.NYZUL_BONNACON] =
         {
             items =
             {
@@ -661,7 +661,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 18052}, -- Tredecim Scythe or Cure Clogs
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_TOTTERING_TOBY] =
+        [xi.appraisalUtil.origin.NYZUL_TOTTERING_TOBY] =
         {
             items =
             {
@@ -669,7 +669,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 13013}, -- Stumbling Sandles
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_SIMURGH] =
+        [xi.appraisalUtil.origin.NYZUL_SIMURGH] =
         {
             items =
             {
@@ -691,7 +691,7 @@ xi.appraisalUtil.appraisalItems =
                 {30, xi.items.CIRCLET},
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_VALKURM_EMPEROR] =
+        [xi.appraisalUtil.origin.NYZUL_VALKURM_EMPEROR] =
         {
             items =
             {
@@ -699,7 +699,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 15224}, -- Empress Hairpin
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_ELLYLLON] =
+        [xi.appraisalUtil.origin.NYZUL_ELLYLLON] =
         {
             items =
             {
@@ -707,7 +707,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 13913}, -- Mushroom Helm
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_TAISAIJIN] =
+        [xi.appraisalUtil.origin.NYZUL_TAISAIJIN] =
         {
             items =
             {
@@ -715,7 +715,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 15222}, -- Spelunker's Hat
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_DROOLING_DAISY] =
+        [xi.appraisalUtil.origin.NYZUL_DROOLING_DAISY] =
         {
             items =
             {
@@ -723,7 +723,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 13838}, -- Dodge Headband
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_SHARP_EARED_ROPIPI] =
+        [xi.appraisalUtil.origin.NYZUL_SHARP_EARED_ROPIPI] =
         {
             items =
             {
@@ -731,7 +731,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 15218}, -- Entrancing Ribbon
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_TUMBLING_TRUFFLE] =
+        [xi.appraisalUtil.origin.NYZUL_TUMBLING_TRUFFLE] =
         {
             items =
             {
@@ -766,7 +766,7 @@ xi.appraisalUtil.appraisalItems =
                 { 4, 15969}, -- Storm Earring
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_LEECH_KING] =
+        [xi.appraisalUtil.origin.NYZUL_LEECH_KING] =
         {
             items =
             {
@@ -774,7 +774,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 13359}, -- Bloodbead Earring
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_CAPRICIOUS_CASSIE] =
+        [xi.appraisalUtil.origin.NYZUL_CAPRICIOUS_CASSIE] =
         {
             items =
             {
@@ -782,7 +782,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 13402}, -- Cassie Earring
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_MAIGHDEAN_UAINE] =
+        [xi.appraisalUtil.origin.NYZUL_MAIGHDEAN_UAINE] =
         {
             items =
             {
@@ -813,7 +813,7 @@ xi.appraisalUtil.appraisalItems =
                 { 5, 15774}, -- Storm Ring
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_BOMB_KING] =
+        [xi.appraisalUtil.origin.NYZUL_BOMB_KING] =
         {
             items =
             {
@@ -822,7 +822,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 13506}, -- Bomb Ring
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_SMOTHERING_SCHMIDT] =
+        [xi.appraisalUtil.origin.NYZUL_SMOTHERING_SCHMIDT] =
         {
             items =
             {
@@ -831,7 +831,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 13507}, -- Malflood Ring
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_ASPHYXIATED_AMSEL] =
+        [xi.appraisalUtil.origin.NYZUL_ASPHYXIATED_AMSEL] =
         {
             items =
             {
@@ -839,7 +839,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 13512}, -- Malgust Ring
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_CRUSHED_KRAUSE] =
+        [xi.appraisalUtil.origin.NYZUL_CRUSHED_KRAUSE] =
         {
             items =
             {
@@ -847,7 +847,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 13508}, -- Maldust Ring
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_PULVERIZED_PFEFFER] =
+        [xi.appraisalUtil.origin.NYZUL_PULVERIZED_PFEFFER] =
         {
             items =
             {
@@ -855,7 +855,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 13509}, -- Malfrost Ring
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_SERKET] =
+        [xi.appraisalUtil.origin.NYZUL_SERKET] =
         {
             items =
             {
@@ -863,7 +863,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 13552}, -- Serket Ring
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_BURNED_BERGMANN] =
+        [xi.appraisalUtil.origin.NYZUL_BURNED_BERGMANN] =
         {
             items =
             {
@@ -871,7 +871,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 13510}, -- Malflame Ring
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_BLOODSUCKER] =
+        [xi.appraisalUtil.origin.NYZUL_BLOODSUCKER] =
         {
             items =
             {
@@ -879,7 +879,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 13302}, -- Bloodbead Ring
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_SEWER_SYRUP] =
+        [xi.appraisalUtil.origin.NYZUL_SEWER_SYRUP] =
         {
             items =
             {
@@ -887,7 +887,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 13303}, -- Jelly Ring
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_WOUNDED_WURFEL] =
+        [xi.appraisalUtil.origin.NYZUL_WOUNDED_WURFEL] =
         {
             items =
             {
@@ -909,7 +909,7 @@ xi.appraisalUtil.appraisalItems =
                 {15, xi.items.ENHANCING_MANTLE},
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_OLD_TWO_WINGS] =
+        [xi.appraisalUtil.origin.NYZUL_OLD_TWO_WINGS] =
         {
             items =
             {
@@ -917,7 +917,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 13598}, -- Bat Cape
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_FRAELISSA] =
+        [xi.appraisalUtil.origin.NYZUL_FRAELISSA] =
         {
             items =
             {
@@ -925,7 +925,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 15469}, -- Bellicose Cape
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_SPINY_SPIPI] =
+        [xi.appraisalUtil.origin.NYZUL_SPINY_SPIPI] =
         {
             items =
             {
@@ -933,7 +933,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 13607}, -- Mist Silk Cape
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_GOLDEN_BAT] =
+        [xi.appraisalUtil.origin.NYZUL_GOLDEN_BAT] =
         {
             items =
             {
@@ -948,7 +948,7 @@ xi.appraisalUtil.appraisalItems =
     },
     [xi.items.UNAPPRAISED_SHIELD] =
     {
-        [xi.appraisalUtil.Origin.NYZUL_BLOODTEAR_BALDURF] =
+        [xi.appraisalUtil.origin.NYZUL_BLOODTEAR_BALDURF] =
         {
             items =
             {
@@ -956,7 +956,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 12356}, -- Viking Shield
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_FUNGUS_BEETLE] =
+        [xi.appraisalUtil.origin.NYZUL_FUNGUS_BEETLE] =
         {
             items =
             {
@@ -964,7 +964,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 12371}, -- Clipeus
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_STEELFLEECE_BALDARICH] =
+        [xi.appraisalUtil.origin.NYZUL_STEELFLEECE_BALDARICH] =
         {
             items =
             {
@@ -972,7 +972,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 12356}, -- Viking Shield
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_SOUTHERN_SHADOW] =
+        [xi.appraisalUtil.origin.NYZUL_SOUTHERN_SHADOW] =
         {
             items =
             {
@@ -980,7 +980,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 12344}, -- Master Shield
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_PELICAN] =
+        [xi.appraisalUtil.origin.NYZUL_PELICAN] =
         {
             items =
             {
@@ -1011,7 +1011,7 @@ xi.appraisalUtil.appraisalItems =
                 { 5, 15520}, -- Storm Torqe
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_SHADOW_EYE] =
+        [xi.appraisalUtil.origin.NYZUL_SHADOW_EYE] =
         {
             items =
             {
@@ -1019,7 +1019,7 @@ xi.appraisalUtil.appraisalItems =
                 { 5, 13114}, -- Moon Amulet
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_JAGGEDY_EARED_JACK] =
+        [xi.appraisalUtil.origin.NYZUL_JAGGEDY_EARED_JACK] =
         {
             items =
             {
@@ -1027,7 +1027,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 13112}, -- Rabbit Charm
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_GARGANTUA] =
+        [xi.appraisalUtil.origin.NYZUL_GARGANTUA] =
         {
             items =
             {
@@ -1035,7 +1035,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 13115}, -- Elementl Charm
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_SERPOPARD_ISHTAR] =
+        [xi.appraisalUtil.origin.NYZUL_SERPOPARD_ISHTAR] =
         {
             items =
             {
@@ -1043,7 +1043,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 13086}, -- Cerulean Pendant
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_ARGUS] =
+        [xi.appraisalUtil.origin.NYZUL_ARGUS] =
         {
             items =
             {
@@ -1051,7 +1051,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 13056}, -- Peacok Charm
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_BLOODPOOL_VORAX] =
+        [xi.appraisalUtil.origin.NYZUL_BLOODPOOL_VORAX] =
         {
             items =
             {
@@ -1059,7 +1059,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 13058}, -- Bloodbead Amulet
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_BUBURIMBOO] =
+        [xi.appraisalUtil.origin.NYZUL_BUBURIMBOO] =
         {
             items =
             {
@@ -1067,7 +1067,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 13057}, -- Buburimu Gorget
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_DUNE_WIDOW] =
+        [xi.appraisalUtil.origin.NYZUL_DUNE_WIDOW] =
         {
             items =
             {
@@ -1306,7 +1306,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, xi.items.TROLL_PAULDRON},
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_AIATAR] =
+        [xi.appraisalUtil.origin.NYZUL_AIATAR] =
         {
             items =
             {
@@ -1315,7 +1315,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 15370}, -- Sable Cuisses
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_INTULO] =
+        [xi.appraisalUtil.origin.NYZUL_INTULO] =
         {
             items =
             {
@@ -1323,7 +1323,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 15372}, -- Magic Slacks
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_FRIAR_RUSH] =
+        [xi.appraisalUtil.origin.NYZUL_FRIAR_RUSH] =
         {
             items =
             {
@@ -1331,7 +1331,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 18139}, -- Bomb Core
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_SABOTENDER_BAILARIN] =
+        [xi.appraisalUtil.origin.NYZUL_SABOTENDER_BAILARIN] =
         {
             items =
             {
@@ -1339,7 +1339,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 18138}, -- Bailathorn
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_ODQAN] =
+        [xi.appraisalUtil.origin.NYZUL_ODQAN] =
         {
             items =
             {
@@ -1347,7 +1347,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 15373}, -- Bravo's Subligar
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_STRAY_MARY] =
+        [xi.appraisalUtil.origin.NYZUL_STRAY_MARY] =
         {
             items =
             {
@@ -1355,7 +1355,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 17366}, -- Mary's Horn
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_UNUT] =
+        [xi.appraisalUtil.origin.NYZUL_UNUT] =
         {
             items =
             {
@@ -1363,7 +1363,7 @@ xi.appraisalUtil.appraisalItems =
                 {10, 14287}, -- Luna Subligar
             },
         },
-        [xi.appraisalUtil.Origin.NYZUL_JADED_JODY] =
+        [xi.appraisalUtil.origin.NYZUL_JADED_JODY] =
         {
             items =
             {
