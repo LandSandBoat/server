@@ -1,20 +1,16 @@
 -----------------------------------
+--  MOB: Heraldic Imp
 -- Area: Nyzul Isle
---  MOB: Imp
+-- Info: Specified Mob Group
 -----------------------------------
-mixins = { require('scripts/mixins/families/imp') }
 require('scripts/globals/nyzul')
 -----------------------------------
 local entity = {}
 
-entity.onMobSpawn = function(mob)
-    xi.nyzul.specifiedEnemySet(mob)
-end
-
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
         xi.nyzul.spawnChest(mob, player)
-        xi.nyzul.specifiedEnemyKill(mob)
+        xi.nyzul.specifiedGroupKill(mob)
     end
 end
 

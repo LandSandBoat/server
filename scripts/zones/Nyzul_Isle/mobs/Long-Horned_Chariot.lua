@@ -1,20 +1,17 @@
 -----------------------------------
+--  MOB: Long Horned Chariot
 -- Area: Nyzul Isle
---  MOB: Imp
+-- Info: Enemy Leader, Uses Brainjack
 -----------------------------------
-mixins = { require('scripts/mixins/families/imp') }
+mixins = { require('scripts/mixins/families/chariot') }
 require('scripts/globals/nyzul')
 -----------------------------------
 local entity = {}
 
-entity.onMobSpawn = function(mob)
-    xi.nyzul.specifiedEnemySet(mob)
-end
-
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
         xi.nyzul.spawnChest(mob, player)
-        xi.nyzul.specifiedEnemyKill(mob)
+        xi.nyzul.enemyLeaderKill(mob)
     end
 end
 
