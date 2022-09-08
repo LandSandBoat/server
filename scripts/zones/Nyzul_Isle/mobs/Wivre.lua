@@ -1,22 +1,19 @@
 -----------------------------------
---  MOB: Caraway Custard
+--  MOB: Wivre
 -- Area: Nyzul Isle
--- Info: Enemy Leader, Absorbs Light elemental damage
 -----------------------------------
-mixins = { require('scripts/mixins/families/flan') }
-require('scripts/globals/status')
 require('scripts/globals/nyzul')
 -----------------------------------
 local entity = {}
 
-entity.onMobInitialize = function(mob)
-    mob:setMod(xi.mod.LIGHT_ABSORB, 100)
+entity.onMobSpawn = function(mob)
+    xi.nyzul.specifiedEnemySet(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
         xi.nyzul.spawnChest(mob, player)
-        xi.nyzul.enemyLeaderKill(mob)
+        xi.nyzul.specifiedEnemyKill(mob)
     end
 end
 

@@ -1,22 +1,25 @@
 -----------------------------------
---  MOB: Caraway Custard
+--  MOB: Uriri Samariri
 -- Area: Nyzul Isle
--- Info: Enemy Leader, Absorbs Light elemental damage
+-- Info: Enemy Leader, Spams Water Bomb
 -----------------------------------
-mixins = { require('scripts/mixins/families/flan') }
 require('scripts/globals/status')
 require('scripts/globals/nyzul')
 -----------------------------------
 local entity = {}
 
-entity.onMobInitialize = function(mob)
-    mob:setMod(xi.mod.LIGHT_ABSORB, 100)
-end
-
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
         xi.nyzul.spawnChest(mob, player)
         xi.nyzul.enemyLeaderKill(mob)
+        local instance = mob:getInstance()
+        local chars    = instance:getChars()
+
+        for _, entities in ipairs(chars) do
+            if player:hasStatusEffect(xi.effect.COSTUME) then
+                player:delStatusEffect(xi.effect.COSTUME)
+            end
+        end
     end
 end
 

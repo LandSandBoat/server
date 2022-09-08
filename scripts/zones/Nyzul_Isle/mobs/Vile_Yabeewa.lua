@@ -1,17 +1,11 @@
 -----------------------------------
---  MOB: Caraway Custard
+--  MOB: Vile Yabeewa
 -- Area: Nyzul Isle
--- Info: Enemy Leader, Absorbs Light elemental damage
+-- Info: Enemy Leader
 -----------------------------------
-mixins = { require('scripts/mixins/families/flan') }
-require('scripts/globals/status')
 require('scripts/globals/nyzul')
 -----------------------------------
 local entity = {}
-
-entity.onMobInitialize = function(mob)
-    mob:setMod(xi.mod.LIGHT_ABSORB, 100)
-end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then

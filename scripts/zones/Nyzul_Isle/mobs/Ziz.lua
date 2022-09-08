@@ -1,22 +1,21 @@
 -----------------------------------
---  MOB: Caraway Custard
+--  MOB: Ziz
 -- Area: Nyzul Isle
--- Info: Enemy Leader, Absorbs Light elemental damage
 -----------------------------------
-mixins = { require('scripts/mixins/families/flan') }
-require('scripts/globals/status')
 require('scripts/globals/nyzul')
+mixins = { require('scripts/mixins/families/ziz') }
 -----------------------------------
 local entity = {}
 
-entity.onMobInitialize = function(mob)
-    mob:setMod(xi.mod.LIGHT_ABSORB, 100)
+entity.onMobSpawn = function(mob)
+    xi.nyzul.specifiedEnemySet(mob)
+    mob:setAnimationSub(13)
 end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
         xi.nyzul.spawnChest(mob, player)
-        xi.nyzul.enemyLeaderKill(mob)
+        xi.nyzul.specifiedEnemyKill(mob)
     end
 end
 

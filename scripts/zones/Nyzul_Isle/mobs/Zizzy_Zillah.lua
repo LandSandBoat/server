@@ -1,19 +1,15 @@
 -----------------------------------
---  MOB: Bloodsucker
+--  MOB: Zizzy Zillah
 -- Area: Nyzul Isle
 -- Info: NM
 -----------------------------------
 require('scripts/globals/nyzul')
-require('scripts/globals/additional_effects')
+mixins = { require('scripts/mixins/families/ziz') }
 -----------------------------------
 local entity = {}
 
-entity.onMobInitialize = function(mob)
-    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
-end
-
-entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.HP_DRAIN, {power = math.random(40,180), chance = 20})
+entity.onMobSpawn = function(mob)
+    mob:setAnimationSub(13)
 end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)

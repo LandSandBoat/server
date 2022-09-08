@@ -11,10 +11,10 @@ entity.onMobEngaged= function(mob, target)
     local instance = mob:getInstance()
 
     if instance:getLocalVar("gearObjective") == xi.nyzul.gearObjective.AVOID_AGRO then
-        local CE = mob:getCE(target
-        local VE = mob:getVE(target)
+        local ce = mob:getCE(target)
+        local ve = mob:getVE(target)
 
-        if CE == 0 and VE == 0 and mob:getLocalVar("initialAgro") == 0 then
+        if ce == 0 and ve == 0 and mob:getLocalVar("initialAgro") == 0 then
             mob:setLocalVar("initialAgro", 1)
             xi.nyzul.addPenalty(mob)
         end
