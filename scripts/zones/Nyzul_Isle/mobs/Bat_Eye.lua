@@ -1,11 +1,16 @@
 -----------------------------------
+--  MOB: Bat Eye
 -- Area: Nyzul Isle
---  NM:  Bloodtear_Baldurf
+-- Info: NM
 -----------------------------------
-mixins = { require('scripts/mixins/job_special') }
+require('scripts/globals/status')
 require('scripts/globals/nyzul')
 -----------------------------------
 local entity = {}
+
+entity.onMobSpawn = function(mob)
+    mob:addMobMod(xi.mobMod.CHECK_AS_NM, 1)
+end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)
     if isKiller or noKiller then
