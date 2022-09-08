@@ -19,7 +19,8 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local drained = 0
     local threshold = 3/7
 
-    local effects = {
+    local effects = 
+    {
         {xi.effect.STR_DOWN, 10, 3, 60},
         {xi.effect.DEX_DOWN, 10, 3, 60},
         {xi.effect.VIT_DOWN, 10, 3, 60},
