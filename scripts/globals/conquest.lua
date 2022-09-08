@@ -1,7 +1,5 @@
 -----------------------------------
---
---     Functions for Conquest system
---
+-- Functions for Conquest system
 -----------------------------------
 require("scripts/globals/teleports")
 require("scripts/globals/keyitems")
@@ -14,7 +12,6 @@ require("scripts/globals/items")
 require("scripts/globals/extravaganza")
 require("scripts/globals/garrison")
 -----------------------------------
-
 xi = xi or {}
 xi.conquest = xi.conquest or {}
 
@@ -995,7 +992,6 @@ end
 -----------------------------------
 
 xi.conquest.overseerOnTrade = function(player, npc, trade, guardNation, guardType)
-
     if xi.garrison.onTrade(player, npc, trade, guardNation) then
         return
     end
@@ -1196,6 +1192,10 @@ xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, 
     local sRegion  = player:getCharVar("supplyQuest_region")
     local sOutpost = outposts[sRegion]
     local mOffset  = zones[player:getZoneID()].text.CONQUEST
+
+    if xi.garrison.onEventFinish(player, csid, option, guardNation, guardType, guardRegion) then
+        return
+    end
 
     -- SIGNET
     if option == 1 then

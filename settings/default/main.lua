@@ -203,12 +203,12 @@ xi.settings.main =
     ENABLE_LOGIN_CAMPAIGN = 0,
 
     -- GARRISON
-    GARRISON_LOCKOUT             = 1800, -- Time in seconds before a new garrison can be started (default: 1800)
-    GARRISON_TIME_LIMIT          = 1800, -- Time in seconds before lose ongoing garrison (default: 1800)
-    GARRISON_ONCE_PER_WEEK       = 0,    -- Set to 1 to bypass the limit of one garrison per Conquest Tally Week.
-    GARRISON_PARTY_LIMIT         = 18,   -- Set to max party members you want to do garrison (default: 18).
-    GARRISON_NATION_BYPASS       = 0,    -- Set to 1 to bypass the nation requirement.
-    GARRISON_RANK                = 2,    -- Set to minumum Nation Rank to start Garrison (default: 2).
+    GARRISON_LOCKOUT             = 1800,  -- Time in seconds before a new garrison can be started (default: 1800)
+    GARRISON_TIME_LIMIT          = 1800,  -- Time in seconds before lose ongoing garrison (default: 1800)
+    GARRISON_ONCE_PER_WEEK       = 0,     -- Set to 1 to bypass the limit of one garrison per Conquest Tally Week.
+    GARRISON_PARTY_LIMIT         = 18,    -- Set to max party members you want to do garrison (default: 18).
+    GARRISON_NATION_BYPASS       = 0,     -- Set to 1 to bypass the nation requirement.
+    GARRISON_RANK                = 2,     -- Set to minumum Nation Rank to start Garrison (default: 2).
 
     -- MISC
     RIVERNE_PORTERS              = 120,  -- Time in seconds that Unstable Displacements in Cape Riverne stay open after trading a scale.
