@@ -5017,6 +5017,7 @@ function getRoeRecords(triggers)
 
         [901] =
         { -- Conflict: Escha - Zi'Tah VI
+            trigger = triggers.mobKill,
             goal = 10,
             reqs = { mobName = set { "Eschan_Puk" }, zone = set { 288 } },
             flags = set { "repeat" },
