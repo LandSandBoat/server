@@ -24,6 +24,7 @@ zones[xi.zone.MANACLIPPER] =
     },
     mob =
     {
+        ZOREDONITE = 16789518,
     },
     npc =
     {

@@ -523,6 +523,7 @@ xi.items =
     SQUARE_OF_GALATEIA              = 1769,
     FREE_CHOCOPASS                  = 1789,
     SUPERNAL_FRAGMENT               = 1822,
+    SHRIMP_LANTERN                  = 1823,
     PREMIUM_BAG                     = 1827,
     YAGUDO_HEADDRESS_CUTTING        = 1867,
     SQUARE_OF_SILVER_BROCADE        = 1991,
