@@ -62,7 +62,6 @@ end
 entity.onMobFight = function(mob, target)
     local hp = mob:getHPP()
     local bf = mob:getBattlefield()
-    local phase = bf:getLocalVar("phase")
 
     if hp <= 75 and bf:getLocalVar("hpControl1") == 0 then
         bf:setLocalVar("hpControl1", 1)
