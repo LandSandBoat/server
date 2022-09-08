@@ -51,6 +51,13 @@ zones[xi.zone.ATTOHWA_CHASM] =
         MIASMA_OFFSET   = 16806304, -- _071 in npc_list
         GASPONIA_OFFSET = 16806327, -- _07n in npc_list
         ALASTOR_QM      = 16806296, -- qm_feeler_antlion in npc_list
+        PARRA_MIASMA    =
+        {
+            16806320,
+            16806321,
+            16806322,
+            16806323,
+        },
         EXCAVATION =
         {
             16806369,
