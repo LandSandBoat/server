@@ -40,6 +40,12 @@ zone_object.onInitialize = function(zone)
     zone:registerRegion(29, -238, 5, -118, 0, 0, 0)
     zone:registerRegion(30, -385.349, 5, -173.973, 0, 0, 0)
 
+    -- Parradamo Tor miasma walls
+    GetNPCByID(ID.npc.PARRA_MIASMA[1]):addPeriodicTrigger(0, 3, 0)
+    GetNPCByID(ID.npc.PARRA_MIASMA[2]):addPeriodicTrigger(0, 3, 0)
+    GetNPCByID(ID.npc.PARRA_MIASMA[3]):addPeriodicTrigger(0, 3, 0)
+    GetNPCByID(ID.npc.PARRA_MIASMA[4]):addPeriodicTrigger(0, 3, 0)
+
     UpdateNMSpawnPoint(ID.mob.TIAMAT)
     GetMobByID(ID.mob.TIAMAT):setRespawnTime(math.random(86400, 259200))
 
