@@ -10,7 +10,7 @@ require("scripts/globals/appraisal")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    xi.appraisalUtil.appraiseItem(player, npc, trade, 50, 261)
+    xi.appraisal.appraiseItem(player, npc, trade, 50, 261)
 end
 
 entity.onTrigger = function(player, npc)
@@ -21,7 +21,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    xi.appraisalUtil.appraisalOnEventFinish(player, csid, option, 50, 261, npc)
+    xi.appraisal.appraisalOnEventFinish(player, csid, option, 50, 261, npc)
 end
 
 return entity
