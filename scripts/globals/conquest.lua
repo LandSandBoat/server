@@ -1471,8 +1471,6 @@ xi.conquest.onConquestUpdate = function(zone, updatetype)
             end
         end
     end
-
-    xi.garrison.buildNpcTable(zone)
 end
 
 xi.conq = xi.conquest
