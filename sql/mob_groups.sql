@@ -11455,7 +11455,7 @@ INSERT INTO `mob_groups` VALUES (4,33,170,'Ace_of_Swords',0,128,13,0,0,73,75,0);
 INSERT INTO `mob_groups` VALUES (5,31,170,'Ace_of_Coins',0,128,11,0,0,73,75,0);
 INSERT INTO `mob_groups` VALUES (6,3851,170,'Tatzlwurm',0,128,0,0,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (7,4462,170,'Yali',0,128,0,0,0,75,75,0);
-INSERT INTO `mob_groups` VALUES (8,636,170,'Carbuncle_Prime',0,128,414,20000,0,80,80,0);
+INSERT INTO `mob_groups` VALUES (8,636,170,'Carbuncle_Prime',0,128,0,20000,0,80,80,0);
 INSERT INTO `mob_groups` VALUES (9,2050,170,'Ifrit_Prime',0,128,0,5000,0,80,80,0);
 INSERT INTO `mob_groups` VALUES (10,3607,170,'Shiva_Prime',0,128,0,5000,0,80,80,0);
 INSERT INTO `mob_groups` VALUES (11,1473,170,'Garuda_Prime',0,128,0,5000,0,80,80,0);

@@ -50,8 +50,6 @@ local spawnPrime = function(mob, target)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setMobMod(xi.mobMod.NO_DROPS, 1)
-
     mob:timer(1, function(mobArg)
         local bf = mobArg:getBattlefield()
 
@@ -85,24 +83,6 @@ entity.onMobFight = function(mob, target)
             if carby:isAlive() then
                 carby:useMobAbility(912)
             end
-        end
-    end
-
-    -- Turn on drops if last carby alive
-    if phase == 4 and mob:getLocalVar("dropControl") == 0 then
-        local carbyCount = 0
-
-        for i = 0, 4 do
-            local carby = GetMobByID(ID.primes[1][bf:getArea()]+i)
-
-            if carby:isAlive() then
-                carbyCount = carbyCount + 1
-            end
-        end
-
-        if carbyCount == 1 then
-            mob:setMobMod(xi.mobMod.NO_DROPS, 0)
-            mob:setLocalVar("dropControl", 1)
         end
     end
 end

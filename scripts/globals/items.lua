@@ -2705,6 +2705,7 @@ xi.items =
     MAGUS_BAZUBANDS                 = 14928,
     CORSAIRS_GANTS                  = 14929,
     PUPPETRY_DASTANAS               = 14930,
+    CARBUNCLES_CUFFS                = 14931,
     AMIR_KOLLUKS                    = 14933,
     YIGIT_GAGES                     = 14935,
     STORM_GAGES                     = 14937,
