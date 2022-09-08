@@ -8,7 +8,7 @@ require("scripts/globals/msg")
 local item_object = {}
 
 item_object.onItemCheck = function(target)
-    local result = 0
+    local result = xi.items.BEITETSU
     if target:getFreeSlotsCount() == 0 then
         result = xi.msg.basic.ITEM_NO_USE_INVENTORY
     end
