@@ -42,7 +42,8 @@ quest.sections =
                 onTrigger = quest:event(207)
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [207] = function(player, csid, option, npc)
                     npcUtil.giveKeyItem(player, xi.ki.RAINBOW_RESONATOR)
                     quest:begin(player)
@@ -97,7 +98,8 @@ quest.sections =
                 end,
             },
 
-            onEventFinish = {
+            onEventFinish =
+            {
                 [207] = function(player, csid, option, npc)
                     npcUtil.giveKeyItem(player, xi.ki.RAINBOW_RESONATOR)
                     quest:begin(player)
