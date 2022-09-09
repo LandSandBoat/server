@@ -24,11 +24,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local wildcatBastok = player:getCharVar("WildcatBastok")
-
-    if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(wildcatBastok, 3) then
-        player:startEvent(356)
-    elseif player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_USUAL) ~= QUEST_COMPLETED then
+    if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_USUAL) ~= QUEST_COMPLETED then
         if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.CID_S_SECRET) == QUEST_ACCEPTED then
             player:startEvent(132)
             if player:getCharVar("CidsSecret_Event") ~= 1 then
@@ -80,8 +76,6 @@ entity.onEventFinish = function(player, csid, option)
             player:addFame(xi.quest.fame_area.BASTOK, 30)
             player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_USUAL)
         end
-    elseif csid == 356 then
-        player:setCharVar("WildcatBastok", utils.mask.setBit(player:getCharVar("WildcatBastok"), 3, true))
     end
 end
 

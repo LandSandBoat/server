@@ -5,18 +5,16 @@
 -- Recast Time: 1:00:00
 -- Duration: 0:00:45
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
+require("scripts/globals/job_utils/monk")
 -----------------------------------
 local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)
-    ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
-    return 0, 0
+    return xi.job_utils.monk.checkHundredFists(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(xi.effect.HUNDRED_FISTS, 1, 0, 45)
+    xi.job_utils.monk.useHundredFists(player, target, ability)
 end
 
 return ability_object

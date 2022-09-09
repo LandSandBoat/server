@@ -46,7 +46,7 @@ except Exception as e:
 
 def populate_migrations():
     migration_list = []
-    for file in os.scandir("migrations"):
+    for file in sorted(os.scandir("migrations"), key=lambda e: e.name):
         if file.name.endswith(".py") and file.name != "utils.py":
             name = file.name.replace(".py", "")
             module = importlib.import_module("migrations." + name)
@@ -600,11 +600,11 @@ def main():
     if fetch_credentials() == False:
         return
     fetch_configs()
-    fetch_versions()
     #Check MySQL path/availability
     if not os.path.exists(mysql_bin + 'mysql' + exe):
         adjust_mysql_bin()
         write_configs()
+    fetch_versions()
     #CLI args
     if len(sys.argv) > 1:
         arg1 = str(sys.argv[1])

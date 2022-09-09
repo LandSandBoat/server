@@ -22,9 +22,10 @@ zones[xi.zone.RULUDE_GARDENS] =
         RETURN_ITEM                      = 6542,  -- The <item> is returned to you.
         NOTHING_OUT_OF_ORDINARY          = 6544,  -- There is nothing out of the ordinary here.
         CARRIED_OVER_POINTS              = 6569,  -- You have carried over <number> login point[/s].
-        LOGIN_CAMPAIGN_UNDERWAY          = 6570,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
+        LOGIN_CAMPAIGN_UNDERWAY          = 6570,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                     = 6571,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         YOUR_MAXIMUM_LEVEL               = 6586,  -- Your maximum level has been raised to [50/55/60/65/70/75/80/85/90/95/99]!
+        MEMBERS_LEVELS_ARE_RESTRICTED    = 6591,  -- Your party is unable to participate because certain members' levels are restricted.
         YOU_LEARNED_TRUST                = 6593,  -- You learned Trust: <name>!
         MOG_LOCKER_OFFSET                = 6705,  -- Your Mog Locker lease is valid until <timestamp>, kupo.
         REGIME_CANCELED                  = 6864,  -- Current training regime canceled.
@@ -69,9 +70,9 @@ zones[xi.zone.RULUDE_GARDENS] =
         ITEM_NOT_ARMOR_MAGIAN            = 14642, -- Uh, sorry, I'm only in charge of armor. Nande, for that item, you'll have to talk to the other dude.
         OBTAINED_NUM_KEYITEMS            = 14869, -- Obtained key item: <number> <keyitem>!
         NOT_ACQUAINTED                   = 14871, -- I'm sorry, but I don't believe we're acquainted. Please leave me be.
-        LEARNED_SECRET_TECHNIQUE         = 15095, -- You learned the secret technique of the bushin!
-        COMMON_SENSE_SURVIVAL            = 15721, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
-        TEAR_IN_FABRIC_OF_SPACE          = 15904, -- There appears to be a tear in the fabric of space...
+        LEARNED_SECRET_TECHNIQUE         = 15097, -- You learned the secret technique of the bushin!
+        COMMON_SENSE_SURVIVAL            = 15723, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        TEAR_IN_FABRIC_OF_SPACE          = 15906, -- There appears to be a tear in the fabric of space...
     },
     mob =
     {

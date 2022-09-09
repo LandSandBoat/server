@@ -110,6 +110,15 @@ bool CMagicState::Update(time_point tick)
             {
                 m_interrupted = true;
             }
+
+            if (m_PSpell.get()->getSpellGroup() == SPELLGROUP_TRUST)
+            {
+                if (!luautils::OnTrustSpellCastCheckBattlefieldTrusts(PChar))
+                {
+                    msg           = MSGBASIC_TRUST_NO_CAST_TRUST;
+                    m_interrupted = true;
+                }
+            }
         }
         else if (PTarget->objtype == TYPE_PET)
         {
@@ -327,6 +336,11 @@ void CMagicState::ApplyEnmity(CBattleEntity* PTarget, int ce, int ve)
     if (m_PSpell->isNa())
     {
         m_PEntity->addModifier(Mod::ENMITY, -(m_PEntity->getMod(Mod::DIVINE_BENISON) >> 1)); // Half of divine benison mod amount = -enmity
+    }
+    // Subtle Sorcery sets Cumulative Enmity of spells to 0
+    if (m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_SUBTLE_SORCERY))
+    {
+        ce = 0;
     }
 
     if (PTarget != nullptr)

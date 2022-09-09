@@ -1,13 +1,10 @@
 -----------------------------------
---
 -- Zone: Davoi (149)
---
 -----------------------------------
-local ID = require("scripts/zones/Davoi/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/missions")
-require("scripts/globals/treasure")
-require("scripts/globals/quests")
+local ID = require('scripts/zones/Davoi/IDs')
+require('scripts/globals/conquest')
+require('scripts/globals/treasure')
+require('scripts/globals/quests')
 -----------------------------------
 local zone_object = {}
 
@@ -17,12 +14,15 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
+
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(282.292, 2.498, -17.908, 247)
     end
+
     if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_CRIMSON_TRIAL) == QUEST_ACCEPTED and not GetMobByID(ID.mob.PURPLEFLASH_BRUKDOK):isSpawned() then
         SpawnMob(ID.mob.PURPLEFLASH_BRUKDOK) -- Spawned by Quest: The Crimson Trial upon entering the zone
     end
+
     return cs
 end
 

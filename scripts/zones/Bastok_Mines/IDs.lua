@@ -19,8 +19,9 @@ zones[xi.zone.BASTOK_MINES] =
         NOT_HAVE_ENOUGH_GIL            = 6395,  -- You do not have enough gil.
         YOU_MUST_WAIT_ANOTHER_N_DAYS   = 6426,  -- You must wait another <number> [day/days] to perform that action.
         CARRIED_OVER_POINTS            = 6429,  -- You have carried over <number> login point[/s].
-        LOGIN_CAMPAIGN_UNDERWAY        = 6430,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
+        LOGIN_CAMPAIGN_UNDERWAY        = 6430,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                   = 6431,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        MEMBERS_LEVELS_ARE_RESTRICTED  = 6451,  -- Your party is unable to participate because certain members' levels are restricted.
         HOMEPOINT_SET                  = 6487,  -- Home point set!
         YOU_ACCEPT_THE_MISSION         = 6516,  -- You have accepted the mission.
         ORIGINAL_MISSION_OFFSET        = 6521,  -- You can consult the Mission section of the main menu to review your objectives. Speed and efficiency are your priorities. Dismissed.
@@ -87,8 +88,8 @@ zones[xi.zone.BASTOK_MINES] =
         CHOCOBO_FEEDING_RUN_AWAY       = 12834, -- Your chocobo has run away. You cannot feed it now.
         CHOCOBO_FEEDING_STILL_EGG      = 12835, -- You cannot feed a chocobo that has not hatched yet.
         CHOCOBO_FEEDING_ITEM           = 13918, -- #: %
-        COMMON_SENSE_SURVIVAL          = 16021, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
-        TEAR_IN_FABRIC_OF_SPACE        = 16620, -- There appears to be a tear in the fabric of space...
+        COMMON_SENSE_SURVIVAL          = 16023, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        TEAR_IN_FABRIC_OF_SPACE        = 16622, -- There appears to be a tear in the fabric of space...
     },
     mob =
     {

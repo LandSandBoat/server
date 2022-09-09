@@ -154,11 +154,6 @@ xi.settings.main =
     CHEST_MAX_ILLUSION_TIME  = 3600,  -- 1 hour
     CHEST_MIN_ILLUSION_TIME  = 1800,  -- 30 minutes
 
-    -- Sets spawn type for: Behemoth, Fafnir, Adamantoise, King Behemoth, Nidhog, Aspidochelone.
-    -- Use 0 for timed spawns, 1 for force pop only, 2 for both
-    LandKingSystem_NQ = 1,
-    LandKingSystem_HQ = 1,
-
     -- Multiplier to NM lottery spawn chance. (Default 1.0) eg. 0 = disable lottery spawns. -1 for always 100% chance.
     NM_LOTTERY_CHANCE = 1.0,
     -- Multiplier to NM lottery cooldown time (Default 1.0) eg. 2.0 = twice as long. 0 = no cooldowns.
@@ -206,6 +201,14 @@ xi.settings.main =
     -- Login Campaign (Set to 0 if you don't want to run a Login Campaign)
     -- Please visit scripts/globals/events/login_campaign.lua for assigning the correct campaign dates.
     ENABLE_LOGIN_CAMPAIGN = 0,
+
+    -- GARRISON
+    GARRISON_LOCKOUT             = 1800,  -- Time in seconds before a new garrison can be started (default: 1800)
+    GARRISON_TIME_LIMIT          = 1800,  -- Time in seconds before lose ongoing garrison (default: 1800)
+    GARRISON_ONCE_PER_WEEK       = 0,     -- Set to 1 to bypass the limit of one garrison per Conquest Tally Week.
+    GARRISON_PARTY_LIMIT         = 18,    -- Set to max party members you want to do garrison (default: 18).
+    GARRISON_NATION_BYPASS       = 0,     -- Set to 1 to bypass the nation requirement.
+    GARRISON_RANK                = 2,     -- Set to minumum Nation Rank to start Garrison (default: 2).
 
     -- MISC
     RIVERNE_PORTERS              = 120,  -- Time in seconds that Unstable Displacements in Cape Riverne stay open after trading a scale.

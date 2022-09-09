@@ -2886,7 +2886,19 @@ namespace charutils
             // Add 79 to get the modifier ID
             skillBonus += PChar->getMod(static_cast<Mod>(i + 79));
 
-            PChar->WorkingSkills.rank[i] = battleutils::GetSkillRank((SKILLTYPE)i, PChar->GetMJob());
+            uint8 mainSkillRank = battleutils::GetSkillRank((SKILLTYPE)i, PChar->GetMJob());
+            uint8 subSkillRank  = battleutils::GetSkillRank((SKILLTYPE)i, PChar->GetSJob());
+
+            PChar->WorkingSkills.rank[i] = mainSkillRank;
+
+            if (mainSkillRank != 0)
+            {
+                PChar->RealSkills.rank[i] = mainSkillRank;
+            }
+            else
+            {
+                PChar->RealSkills.rank[i] = subSkillRank;
+            }
 
             if (MaxMSkill != 0)
             {
@@ -4167,6 +4179,22 @@ namespace charutils
 
         float rawBonus = 0;
 
+        // COMMITMENT from Capacity Bands
+
+        if (PChar->StatusEffectContainer->GetStatusEffect(EFFECT_COMMITMENT) && PChar->loc.zone->GetRegionID() != REGION_TYPE::ABYSSEA)
+        {
+            CStatusEffect* commitment = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_COMMITMENT);
+            int16          percentage = commitment->GetPower();
+            int16          cap        = commitment->GetSubPower();
+            rawBonus += std::clamp<int32>(((capacityPoints * percentage) / 100), 0, cap);
+            commitment->SetSubPower(cap -= rawBonus);
+
+            if (cap <= 0)
+            {
+                PChar->StatusEffectContainer->DelStatusEffect(EFFECT_COMMITMENT);
+            }
+        }
+
         // Mod::CAPACITY_BONUS is currently used for JP Gifts, and can easily be used elsewhere
         // This value is stored as uint, as a whole number percentage value
         rawBonus += PChar->getMod(Mod::CAPACITY_BONUS);
@@ -4178,13 +4206,12 @@ namespace charutils
             rawBonus += 2 * (roeutils::RoeSystem.unityLeaderRank[unity - 1] - 1);
         }
 
-        // RoE Objectives (There might be a formulaic way to do some of these)
-        // Nation Mission Completion (10%)
-        for (uint16 nationRecord = 1332; nationRecord <= 1372; nationRecord += 20)
+        // RoE Objectives
+        for (auto const& recordValue : roeCapacityBonusRecords)
         {
-            if (roeutils::GetEminenceRecordCompletion(PChar, nationRecord))
+            if (roeutils::GetEminenceRecordCompletion(PChar, recordValue.first))
             {
-                rawBonus += 10;
+                rawBonus += recordValue.second;
             }
         }
 

@@ -81,6 +81,7 @@
 #include "../utils/charutils.h"
 #include "../utils/gardenutils.h"
 #include "../utils/moduleutils.h"
+#include "../utils/petutils.h"
 #include "../weapon_skill.h"
 #include "automatonentity.h"
 #include "charentity.h"
@@ -417,6 +418,12 @@ void CCharEntity::setPetZoningInfo()
         switch (((CPetEntity*)PPet)->getPetType())
         {
             case PET_TYPE::JUG_PET:
+                if (!settings::get<bool>("map.KEEP_JUGPET_THROUGH_ZONING"))
+                {
+                    break;
+                }
+                [[fallthrough]];
+            case PET_TYPE::AVATAR:
             case PET_TYPE::AUTOMATON:
             case PET_TYPE::WYVERN:
                 petZoningInfo.petHP   = PPet->health.hp;
@@ -1261,16 +1268,28 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
                 PRecastContainer->Del(RECAST_ABILITY, PAbility->getRecastId());
             }
         }
-        else if (PAbility->getID() >= ABILITY_HEALING_RUBY && PAbility->getID() <= ABILITY_PERFECT_DEFENSE)
+        else if (PAbility->getRecastId() == 173 || PAbility->getRecastId() == 174) // BP rage, BP ward
         {
-            if (this->StatusEffectContainer->HasStatusEffect(EFFECT_APOGEE))
+            uint16 favorReduction          = 0;
+            uint16 bloodPact_I_Reduction   = std::min<int16>(getMod(Mod::BP_DELAY), 15);
+            uint16 bloodPact_II_Reduction  = std::min<int16>(getMod(Mod::BP_DELAY_II), 15);
+            uint16 bloodPact_III_Reduction = 0; // std::min<int16>(getMod(Mod::BP_DELAY_III, 10); TODO: BP Delay III (SMN JP gift) not implemented
+
+            CStatusEffect* avatarsFavor = this->StatusEffectContainer->GetStatusEffect(EFFECT_AVATARS_FAVOR);
+            if (avatarsFavor)
             {
-                action.recast = 0;
+                favorReduction = std::min<int16>(avatarsFavor->GetPower(), 10);
             }
-            else
+
+            int16 bloodPactDelayReduction = favorReduction + std::min<int16>(bloodPact_I_Reduction + bloodPact_II_Reduction + bloodPact_III_Reduction, 30);
+            action.recast                 = static_cast<uint16>(std::max<int16>(0, action.recast - bloodPactDelayReduction));
+
+            if (PAbility->getID() >= ABILITY_HEALING_RUBY && PAbility->getID() <= ABILITY_PERFECT_DEFENSE) // old mobskill impl of Apogee. As things move to petskill this will need to be obsoleted. scripts/job_utils/summoner.lua handles apogee retail-like.
             {
-                action.recast -= std::min<int16>(getMod(Mod::BP_DELAY), 15);
-                action.recast -= std::min<int16>(getMod(Mod::BP_DELAY_II), 15);
+                if (this->StatusEffectContainer->HasStatusEffect(EFFECT_APOGEE))
+                {
+                    action.recast = 0;
+                }
             }
         }
 
@@ -1444,7 +1463,15 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             actionTarget.param           = 0;
             auto prevMsg                 = actionTarget.messageID;
 
+            // Check for special situations from Steal (The Tenshodo Showdown quest)
+            if (PAbility->getID() == ABILITY_STEAL)
+            {
+                // Force a specific result to be stolen based on the mob LUA
+                actionTarget.param = luautils::OnSteal(this, PTarget, PAbility, &action);
+            }
+
             int32 value = luautils::OnUseAbility(this, PTarget, PAbility, &action);
+
             if (prevMsg == actionTarget.messageID)
             {
                 actionTarget.messageID = PAbility->getMessage();
@@ -1465,7 +1492,15 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
 
             state.ApplyEnmity();
         }
-        PRecastContainer->Add(RECAST_ABILITY, PAbility->getRecastId(), action.recast);
+
+        if (charge)
+        {
+            PRecastContainer->Add(RECAST_ABILITY, PAbility->getRecastId(), action.recast, charge->chargeTime, charge->maxCharges);
+        }
+        else
+        {
+            PRecastContainer->Add(RECAST_ABILITY, PAbility->getRecastId(), action.recast);
+        }
 
         uint16 recastID = PAbility->getRecastId();
         if (settings::get<bool>("map.BLOOD_PACT_SHARED_TIMER") && (recastID == 173 || recastID == 174))
@@ -1989,6 +2024,12 @@ void CCharEntity::Die()
     }
 
     battleutils::RelinquishClaim(this);
+
+    if (this->PPet)
+    {
+        petutils::DespawnPet(this);
+    }
+
     Die(death_duration);
     SetDeathTimestamp((uint32)time(nullptr));
 

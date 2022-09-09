@@ -1,13 +1,13 @@
 -----------------------------------
 -- Zone: Pashhow_Marshlands (109)
 -----------------------------------
-local ID = require("scripts/zones/Pashhow_Marshlands/IDs")
-require("scripts/quests/i_can_hear_a_rainbow")
-require("scripts/globals/chocobo_digging")
-require("scripts/globals/conquest")
-require("scripts/globals/missions")
-require("scripts/globals/zone")
-require("scripts/missions/amk/helpers")
+local ID = require('scripts/zones/Pashhow_Marshlands/IDs')
+require('scripts/quests/i_can_hear_a_rainbow')
+require('scripts/globals/chocobo_digging')
+require('scripts/globals/conquest')
+require('scripts/globals/missions')
+require('scripts/globals/zone')
+require('scripts/missions/amk/helpers')
 -----------------------------------
 local zone_object = {}
 

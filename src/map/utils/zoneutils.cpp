@@ -280,8 +280,8 @@ namespace zoneutils
                     PNpc->targid     = NpcID & 0xFFF;
                     PNpc->id         = NpcID;
 
-                    PNpc->name.insert(0, (const char*)sql->GetData(2));       // Internal name
-                    PNpc->packetName.insert(0, (const char*)sql->GetData(3)); // Name sent to the client (when applicable)
+                    PNpc->name       = sql->GetStringData(2); // Internal name
+                    PNpc->packetName = sql->GetStringData(3); // Name sent to the client (when applicable)
 
                     PNpc->loc.p.rotation = (uint8)sql->GetIntData(4);
                     PNpc->loc.p.x        = sql->GetFloatData(5);

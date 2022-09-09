@@ -1,13 +1,11 @@
 -----------------------------------
---
 -- Zone: Uleguerand_Range (5)
---
 -----------------------------------
-local ID = require("scripts/zones/Uleguerand_Range/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/missions")
-require("scripts/globals/status")
-require("scripts/globals/zone")
+local ID = require('scripts/zones/Uleguerand_Range/IDs')
+require('scripts/globals/conquest')
+require('scripts/globals/missions')
+require('scripts/globals/status')
+require('scripts/globals/zone')
 -----------------------------------
 local zone_object = {}
 
@@ -28,12 +26,15 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
+
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(363.025, 16, -60, 12)
     end
-    if (player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and player:getCharVar("COP_louverance_story")== 1 ) then
+
+    if player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and player:getCharVar("COP_louverance_story")== 1 then
         cs=17
     end
+
     return cs
 end
 
@@ -44,19 +45,20 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    if (csid == 17) then
+    if csid == 17 then
         player:setCharVar("COP_louverance_story", 2)
     end
 end
 
 zone_object.onZoneWeatherChange = function(weather)
     local waterfall = GetNPCByID(ID.npc.WATERFALL)
-    if (weather == xi.weather.SNOW or weather == xi.weather.BLIZZARDS) then
-        if (waterfall:getAnimation() ~= xi.anim.CLOSE_DOOR) then
+
+    if weather == xi.weather.SNOW or weather == xi.weather.BLIZZARDS then
+        if waterfall:getAnimation() ~= xi.anim.CLOSE_DOOR then
             waterfall:setAnimation(xi.anim.CLOSE_DOOR)
         end
     else
-        if (waterfall:getAnimation() ~= xi.anim.OPEN_DOOR) then
+        if waterfall:getAnimation() ~= xi.anim.OPEN_DOOR then
             waterfall:setAnimation(xi.anim.OPEN_DOOR)
         end
     end

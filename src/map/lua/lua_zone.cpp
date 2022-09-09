@@ -184,7 +184,10 @@ WEATHER CLuaZone::getWeather()
 
 void CLuaZone::reloadNavmesh()
 {
-    m_pLuaZone->m_navMesh->reload();
+    if (m_pLuaZone->m_navMesh)
+    {
+        m_pLuaZone->m_navMesh->reload();
+    }
 }
 
 bool CLuaZone::isNavigablePoint(const sol::table& point)
@@ -200,7 +203,14 @@ bool CLuaZone::isNavigablePoint(const sol::table& point)
     };
     // clang-format on
 
-    return m_pLuaZone->m_navMesh->validPosition(position);
+    if (m_pLuaZone->m_navMesh)
+    {
+        return m_pLuaZone->m_navMesh->validPosition(position);
+    }
+    else // No navmesh, just nod and smile
+    {
+        return true;
+    }
 }
 
 std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
@@ -320,7 +330,7 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
         PMob->spawnAnimation = static_cast<SPAWN_ANIMATION>(table["specialSpawnAnimation"].get_or(false) ? 1 : 0);
 
         // Ensure mobs get a function for onMobDeath
-        auto onMobDeath = table["onMobDeath"].get_or<sol::function>(sol::lua_nil);
+        auto onMobDeath = table["onMobDeath"].get<sol::function>();
         if (!onMobDeath.valid())
         {
             cacheEntry["onMobDeath"] = []() {}; // Empty func

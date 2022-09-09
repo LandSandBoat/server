@@ -12,7 +12,7 @@ require("scripts/globals/utils")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    xi.assaultUtil.adjustMobLevel(mob)
+    xi.assault.adjustMobLevel(mob)
 
     if mob:getMainJob() == xi.job.NIN then
         mob:setLocalVar("BreakChance", 0) -- Nin mobs dont have a weapon to break
@@ -38,7 +38,7 @@ entity.onMobSkillTarget = function(target, mob, skill)
     if utils.contains(skillID, triggerSkills) then
         if math.random(0, 100) > 50 then
             local instance = mob:getInstance()
-            for _, gateid in ipairs(ID.mob[xi.assaultUtil.mission.IMPERIAL_AGENT_RESCUE].GATES) do
+            for _, gateid in ipairs(ID.mob[xi.assault.mission.IMPERIAL_AGENT_RESCUE].GATES) do
                 local gate = GetMobByID(gateid, instance)
                 if gate and gate:isAlive() and mob:checkDistance(gate) <= 10 and mob:isFacing(gate) then
                     return gate

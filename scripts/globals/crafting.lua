@@ -204,6 +204,10 @@ xi.crafting.getCraftSkillCap = function(player, craftID)
     return (rank + 1) * 10
 end
 
+xi.crafting.getRealSkill = function(player, craftID)
+    return math.floor(player:getCharSkillLevel(craftID) / 10)
+end
+
 -----------------------------------
 -- getAdvImageSupportCost
 -----------------------------------

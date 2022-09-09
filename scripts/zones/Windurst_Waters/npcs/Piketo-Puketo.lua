@@ -54,25 +54,13 @@ entity.onTrigger = function(player, npc)
 
     if player:getCharVar("CookingExpertQuest") == 1 then
         if player:hasKeyItem(xi.keyItem.WAY_OF_THE_CULINARIAN) then
-            expertQuestStatus = 550
+            expertQuestStatus = 768
         else
-            expertQuestStatus = 600
+            expertQuestStatus = 512
         end
     end
 
-    if expertQuestStatus == 550 then
-        --[[
-        Feeding the proper parameter currently hangs the client in cutscene. This may
-        possibly be due to an unimplemented packet or function (display recipe?) Work
-        around to present dialog to player to let them know the trade is ready to be
-        received by triggering with lower rank up parameters.
-        --]]
-        player:showText(npc, 7260)
-        player:showText(npc, 7262)
-        player:startEvent(10013, testItem, realSkill, 44, guildMember, 0, 0, 0, 0)
-    else
-        player:startEvent(10013, testItem, realSkill, rankCap, guildMember, expertQuestStatus, 0, 0, 0)
-    end
+    player:startEvent(10013, testItem, realSkill, rankCap, guildMember, expertQuestStatus, 0, 0, 0)
 end
 
 -- 978  983  980  981  10013  10014

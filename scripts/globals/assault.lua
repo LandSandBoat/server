@@ -10,10 +10,10 @@ require("scripts/globals/status")
 require("scripts/globals/zone")
 -----------------------------------
 xi = xi or {}
-xi.assaultUtil = xi.assaultUtil or {}
+xi.assault = xi.assault or {}
 -----------------------------------
 
-xi.assaultUtil.assaultArea =
+xi.assault.assaultArea =
 {
     LEUJAOAM_SANCTUM           = 0,
     MAMOOL_JA_TRAINING_GROUNDS = 1,
@@ -23,18 +23,18 @@ xi.assaultUtil.assaultArea =
     NYZUL_ISLE                 = 5,
 }
 
-xi.assaultUtil.getAssaultArea = function(player)
+xi.assault.getAssaultArea = function(player)
     return math.floor((player:getCurrentAssault() - 1) / 10)
 end
 
-xi.assaultUtil.assaultOrders =
+xi.assault.assaultOrders =
 {
     xi.ki.LEUJAOAM_ASSAULT_ORDERS, xi.ki.MAMOOL_JA_ASSAULT_ORDERS, xi.ki.LEBROS_ASSAULT_ORDERS,
     xi.ki.PERIQIA_ASSAULT_ORDERS,  xi.ki.ILRUSI_ASSAULT_ORDERS, xi.ki.NYZUL_ISLE_ASSAULT_ORDERS,
 }
 
-xi.assaultUtil.hasOrders = function(player)
-    for _, assaultOrders in pairs(xi.assaultUtil.assaultOrders) do
+xi.assault.hasOrders = function(player)
+    for _, assaultOrders in pairs(xi.assault.assaultOrders) do
         if player:hasKeyItem(assaultOrders) then
             return true
         end
@@ -42,7 +42,7 @@ xi.assaultUtil.hasOrders = function(player)
     return false
 end
 
-xi.assaultUtil.onAssaultUpdate = function(player, csid, option)
+xi.assault.onAssaultUpdate = function(player, csid, option)
     local ID = zones[player:getZoneID()]
     local npc = player:getEventTarget()
 
@@ -70,7 +70,7 @@ xi.assaultUtil.onAssaultUpdate = function(player, csid, option)
     end
 end
 
-xi.assaultUtil.onInstanceCreatedCallback = function(player, instance)
+xi.assault.onInstanceCreatedCallback = function(player, instance)
     if instance then
         instance:setLevelCap(player:getLocalVar("AssaultCap"))
         player:setLocalVar("AssaultCap", 0)
@@ -83,7 +83,7 @@ xi.assaultUtil.onInstanceCreatedCallback = function(player, instance)
     end
 end
 
-xi.assaultUtil.afterInstanceRegister = function(player, fireFlies)
+xi.assault.afterInstanceRegister = function(player, fireFlies)
     local instance = player:getInstance()
     local assaultID = player:getCurrentAssault()
     local levelCap = instance:getLevelCap()
@@ -103,7 +103,7 @@ xi.assaultUtil.afterInstanceRegister = function(player, fireFlies)
     end
 end
 
-xi.assaultUtil.onInstanceFailure = function(instance)
+xi.assault.onInstanceFailure = function(instance)
     local chars = instance:getChars()
     local mobs = instance:getMobs()
 
@@ -118,7 +118,7 @@ xi.assaultUtil.onInstanceFailure = function(instance)
     end
 end
 
-xi.assaultUtil.onInstanceComplete = function(instance, posX, posZ)
+xi.assault.onInstanceComplete = function(instance, posX, posZ)
     local chars = instance:getChars()
     local ID = zones[instance:getZone():getID()]
 
@@ -130,7 +130,7 @@ xi.assaultUtil.onInstanceComplete = function(instance, posX, posZ)
     end
 end
 
-xi.assaultUtil.instanceOnEventFinish = function(player, csid, zone)
+xi.assault.instanceOnEventFinish = function(player, csid, zone)
     if csid == 102 then
         local instance = player:getInstance()
         local chars = instance:getChars()
@@ -140,7 +140,7 @@ xi.assaultUtil.instanceOnEventFinish = function(player, csid, zone)
     end
 end
 
-xi.assaultUtil.runeReleaseFinish = function(player)
+xi.assault.runeReleaseFinish = function(player)
     local instance = player:getInstance()
     local chars = instance:getChars()
     local zone = player:getZoneID()
@@ -149,7 +149,7 @@ xi.assaultUtil.runeReleaseFinish = function(player)
     local points = 0
     local assaultID = player:getCurrentAssault()
     local mobs = instance:getMobs()
-    local pointsArea = xi.assaultUtil.getAssaultArea(player)
+    local pointsArea = xi.assault.getAssaultArea(player)
 
     for _, entity in pairs(mobs) do
         local mobID = entity:getID()
@@ -160,7 +160,7 @@ xi.assaultUtil.runeReleaseFinish = function(player)
         if entity:getLocalVar("AssaultPointsAwarded") == 0 then
             entity:setLocalVar("AssaultPointsAwarded", 1)
 
-            local pointModifier = xi.assaultUtil.missionInfo[assaultID].minimumPoints
+            local pointModifier = xi.assault.missionInfo[assaultID].minimumPoints
             points = pointModifier - (pointModifier * playerpoints)
             if entity:getCharVar("Assault_Armband") == 1 then
                 points = points*(1.1)
@@ -182,7 +182,7 @@ xi.assaultUtil.runeReleaseFinish = function(player)
     end
 end
 
-xi.assaultUtil.adjustMobLevel = function(mob)
+xi.assault.adjustMobLevel = function(mob)
     local instance = mob:getInstance()
     local levelCap = instance:getLevelCap()
     local reducedLevel = 0
@@ -200,7 +200,7 @@ xi.assaultUtil.adjustMobLevel = function(mob)
     end
 end
 
-xi.assaultUtil.mission =
+xi.assault.mission =
 {
     LEUJAOAM_CLEANSING                = 1,
     ORICHALCUM_SURVEY                 = 2,
@@ -256,58 +256,58 @@ xi.assaultUtil.mission =
     NYZUL_ISLE_UNCHARTED_AREA_SURVEY  = 52,
 }
 
-xi.assaultUtil.missionInfo =
+xi.assault.missionInfo =
 {
-    [xi.assaultUtil.mission.LEUJAOAM_CLEANSING]               = {suggestedLevel = 50, minimumPoints = 1000},
-    [xi.assaultUtil.mission.ORICHALCUM_SURVEY]                = {suggestedLevel = 50, minimumPoints = 1200},
-    [xi.assaultUtil.mission.ESCORT_PROFESSOR_CHANOIX]         = {suggestedLevel = 60, minimumPoints = 1100},
-    [xi.assaultUtil.mission.SHANARHA_GRASS_CONSERVATION]      = {suggestedLevel = 50, minimumPoints = 1333},
-    [xi.assaultUtil.mission.COUNTING_SHEEP]                   = {suggestedLevel = 60, minimumPoints = 1166},
-    [xi.assaultUtil.mission.SUPPLIES_RECOVERY]                = {suggestedLevel = 70, minimumPoints = 1000},
-    [xi.assaultUtil.mission.AZURE_EXPERIMENTS]                = {suggestedLevel = 70, minimumPoints = 1000},
-    [xi.assaultUtil.mission.IMPERIAL_CODE]                    = {suggestedLevel = 70, minimumPoints = 1333},
-    [xi.assaultUtil.mission.RED_VERSUS_BLUE]                  = {suggestedLevel = 70, minimumPoints = 1666},
-    [xi.assaultUtil.mission.BLOODY_RONDO]                     = {suggestedLevel = 70, minimumPoints = 1500},
-    [xi.assaultUtil.mission.IMPERIAL_AGENT_RESCUE]            = {suggestedLevel = 60, minimumPoints = 1100},
-    [xi.assaultUtil.mission.PREEMPTIVE_STRIKE]                = {suggestedLevel = 60, minimumPoints = 1000},
-    [xi.assaultUtil.mission.SAGELORD_ELIMINATION]             = {suggestedLevel = 70, minimumPoints = 1200},
-    [xi.assaultUtil.mission.BREAKING_MORALE]                  = {suggestedLevel = 60, minimumPoints = 1333},
-    [xi.assaultUtil.mission.THE_DOUBLE_AGENT]                 = {suggestedLevel = 70, minimumPoints = 1200},
-    [xi.assaultUtil.mission.IMPERIAL_TREASURE_RETRIEVAL]      = {suggestedLevel = 50, minimumPoints = 1200},
-    [xi.assaultUtil.mission.BLITZKRIEG]                       = {suggestedLevel = 70, minimumPoints = 1533},
-    [xi.assaultUtil.mission.MARIDS_IN_THE_MIST]               = {suggestedLevel = 70, minimumPoints = 1333},
-    [xi.assaultUtil.mission.AZURE_EXPERIMENTS]                = {suggestedLevel = 70, minimumPoints = 1000},
-    [xi.assaultUtil.mission.THE_SUSANOO_SHUFFLE]              = {suggestedLevel = 70, minimumPoints = 1500},
-    [xi.assaultUtil.mission.EXCAVATION_DUTY]                  = {suggestedLevel = 50, minimumPoints = 1100},
-    [xi.assaultUtil.mission.LEBROS_SUPPLIES]                  = {suggestedLevel = 60, minimumPoints = 1200},
-    [xi.assaultUtil.mission.TROLL_FUGITIVES]                  = {suggestedLevel = 70, minimumPoints = 1000},
-    [xi.assaultUtil.mission.EVADE_AND_ESCAPE]                 = {suggestedLevel = 70, minimumPoints = 1000},
-    [xi.assaultUtil.mission.SIEGEMASTER_ASSASSINATION]        = {suggestedLevel = 70, minimumPoints = 1100},
-    [xi.assaultUtil.mission.APKALLU_BREEDING]                 = {suggestedLevel = 60, minimumPoints = 1300},
-    [xi.assaultUtil.mission.WAMOURA_FARM_RAID]                = {suggestedLevel = 70, minimumPoints = 1166},
-    [xi.assaultUtil.mission.EGG_CONSERVATION]                 = {suggestedLevel = 70, minimumPoints = 1333},
-    [xi.assaultUtil.mission.OPERATION__BLACK_PEARL]           = {suggestedLevel = 70, minimumPoints = 1400},
-    [xi.assaultUtil.mission.BETTER_THAN_ONE]                  = {suggestedLevel = 70, minimumPoints = 1500},
-    [xi.assaultUtil.mission.SEAGULL_GROUNDED]                 = {suggestedLevel = 70, minimumPoints = 1100},
-    [xi.assaultUtil.mission.REQUIEM]                          = {suggestedLevel = 70, minimumPoints = 1000},
-    [xi.assaultUtil.mission.SAVING_PRIVATE_RYAAF]             = {suggestedLevel = 70, minimumPoints = 1100},
-    [xi.assaultUtil.mission.SHOOTING_DOWN_THE_BARON]          = {suggestedLevel = 60, minimumPoints = 1100},
-    [xi.assaultUtil.mission.BUILDING_BRIDGES]                 = {suggestedLevel = 70, minimumPoints = 1200},
-    [xi.assaultUtil.mission.STOP_THE_BLOODSHED]               = {suggestedLevel = 50, minimumPoints = 1000},
-    [xi.assaultUtil.mission.DEFUSE_THE_THREAT]                = {suggestedLevel = 60, minimumPoints = 1600},
-    [xi.assaultUtil.mission.OPERATION__SNAKE_EYES]            = {suggestedLevel = 70, minimumPoints = 1333},
-    [xi.assaultUtil.mission.WAKE_THE_PUPPET]                  = {suggestedLevel = 70, minimumPoints = 1200},
-    [xi.assaultUtil.mission.THE_PRICE_IS_RIGHT]               = {suggestedLevel = 70, minimumPoints = 1500},
-    [xi.assaultUtil.mission.GOLDEN_SALVAGE]                   = {suggestedLevel = 60, minimumPoints = 1100},
-    [xi.assaultUtil.mission.LAMIA_NO_13]                      = {suggestedLevel = 70, minimumPoints = 1200},
-    [xi.assaultUtil.mission.EXTERMINATION]                    = {suggestedLevel = 70, minimumPoints = 1100},
-    [xi.assaultUtil.mission.DEMOLITION_DUTY]                  = {suggestedLevel = 50, minimumPoints = 1000},
-    [xi.assaultUtil.mission.SEARAT_SALVATION]                 = {suggestedLevel = 60, minimumPoints = 1166},
-    [xi.assaultUtil.mission.APKALLU_SEIZURE]                  = {suggestedLevel = 70, minimumPoints = 1000},
-    [xi.assaultUtil.mission.LOST_AND_FOUND]                   = {suggestedLevel = 60, minimumPoints = 1000},
-    [xi.assaultUtil.mission.DESERTER]                         = {suggestedLevel = 70, minimumPoints = 1000},
-    [xi.assaultUtil.mission.DESPERATELY_SEEKING_CEPHALOPODS]  = {suggestedLevel = 70, minimumPoints = 1000},
-    [xi.assaultUtil.mission.BELLEROPHON_S_BLISS]              = {suggestedLevel = 70, minimumPoints = 1500},
-    [xi.assaultUtil.mission.NYZUL_ISLE_INVESTIGATION]         = {suggestedLevel = 75, minimumPoints = nil},
-    [xi.assaultUtil.mission.NYZUL_ISLE_UNCHARTED_AREA_SURVEY] = {suggestedLevel = 99, minimumPoints = nil},
+    [xi.assault.mission.LEUJAOAM_CLEANSING]               = {suggestedLevel = 50, minimumPoints = 1000},
+    [xi.assault.mission.ORICHALCUM_SURVEY]                = {suggestedLevel = 50, minimumPoints = 1200},
+    [xi.assault.mission.ESCORT_PROFESSOR_CHANOIX]         = {suggestedLevel = 60, minimumPoints = 1100},
+    [xi.assault.mission.SHANARHA_GRASS_CONSERVATION]      = {suggestedLevel = 50, minimumPoints = 1333},
+    [xi.assault.mission.COUNTING_SHEEP]                   = {suggestedLevel = 60, minimumPoints = 1166},
+    [xi.assault.mission.SUPPLIES_RECOVERY]                = {suggestedLevel = 70, minimumPoints = 1000},
+    [xi.assault.mission.AZURE_EXPERIMENTS]                = {suggestedLevel = 70, minimumPoints = 1000},
+    [xi.assault.mission.IMPERIAL_CODE]                    = {suggestedLevel = 70, minimumPoints = 1333},
+    [xi.assault.mission.RED_VERSUS_BLUE]                  = {suggestedLevel = 70, minimumPoints = 1666},
+    [xi.assault.mission.BLOODY_RONDO]                     = {suggestedLevel = 70, minimumPoints = 1500},
+    [xi.assault.mission.IMPERIAL_AGENT_RESCUE]            = {suggestedLevel = 60, minimumPoints = 1100},
+    [xi.assault.mission.PREEMPTIVE_STRIKE]                = {suggestedLevel = 60, minimumPoints = 1000},
+    [xi.assault.mission.SAGELORD_ELIMINATION]             = {suggestedLevel = 70, minimumPoints = 1200},
+    [xi.assault.mission.BREAKING_MORALE]                  = {suggestedLevel = 60, minimumPoints = 1333},
+    [xi.assault.mission.THE_DOUBLE_AGENT]                 = {suggestedLevel = 70, minimumPoints = 1200},
+    [xi.assault.mission.IMPERIAL_TREASURE_RETRIEVAL]      = {suggestedLevel = 50, minimumPoints = 1200},
+    [xi.assault.mission.BLITZKRIEG]                       = {suggestedLevel = 70, minimumPoints = 1533},
+    [xi.assault.mission.MARIDS_IN_THE_MIST]               = {suggestedLevel = 70, minimumPoints = 1333},
+    [xi.assault.mission.AZURE_EXPERIMENTS]                = {suggestedLevel = 70, minimumPoints = 1000},
+    [xi.assault.mission.THE_SUSANOO_SHUFFLE]              = {suggestedLevel = 70, minimumPoints = 1500},
+    [xi.assault.mission.EXCAVATION_DUTY]                  = {suggestedLevel = 50, minimumPoints = 1100},
+    [xi.assault.mission.LEBROS_SUPPLIES]                  = {suggestedLevel = 60, minimumPoints = 1200},
+    [xi.assault.mission.TROLL_FUGITIVES]                  = {suggestedLevel = 70, minimumPoints = 1000},
+    [xi.assault.mission.EVADE_AND_ESCAPE]                 = {suggestedLevel = 70, minimumPoints = 1000},
+    [xi.assault.mission.SIEGEMASTER_ASSASSINATION]        = {suggestedLevel = 70, minimumPoints = 1100},
+    [xi.assault.mission.APKALLU_BREEDING]                 = {suggestedLevel = 60, minimumPoints = 1300},
+    [xi.assault.mission.WAMOURA_FARM_RAID]                = {suggestedLevel = 70, minimumPoints = 1166},
+    [xi.assault.mission.EGG_CONSERVATION]                 = {suggestedLevel = 70, minimumPoints = 1333},
+    [xi.assault.mission.OPERATION__BLACK_PEARL]           = {suggestedLevel = 70, minimumPoints = 1400},
+    [xi.assault.mission.BETTER_THAN_ONE]                  = {suggestedLevel = 70, minimumPoints = 1500},
+    [xi.assault.mission.SEAGULL_GROUNDED]                 = {suggestedLevel = 70, minimumPoints = 1100},
+    [xi.assault.mission.REQUIEM]                          = {suggestedLevel = 70, minimumPoints = 1000},
+    [xi.assault.mission.SAVING_PRIVATE_RYAAF]             = {suggestedLevel = 70, minimumPoints = 1100},
+    [xi.assault.mission.SHOOTING_DOWN_THE_BARON]          = {suggestedLevel = 60, minimumPoints = 1100},
+    [xi.assault.mission.BUILDING_BRIDGES]                 = {suggestedLevel = 70, minimumPoints = 1200},
+    [xi.assault.mission.STOP_THE_BLOODSHED]               = {suggestedLevel = 50, minimumPoints = 1000},
+    [xi.assault.mission.DEFUSE_THE_THREAT]                = {suggestedLevel = 60, minimumPoints = 1600},
+    [xi.assault.mission.OPERATION__SNAKE_EYES]            = {suggestedLevel = 70, minimumPoints = 1333},
+    [xi.assault.mission.WAKE_THE_PUPPET]                  = {suggestedLevel = 70, minimumPoints = 1200},
+    [xi.assault.mission.THE_PRICE_IS_RIGHT]               = {suggestedLevel = 70, minimumPoints = 1500},
+    [xi.assault.mission.GOLDEN_SALVAGE]                   = {suggestedLevel = 60, minimumPoints = 1100},
+    [xi.assault.mission.LAMIA_NO_13]                      = {suggestedLevel = 70, minimumPoints = 1200},
+    [xi.assault.mission.EXTERMINATION]                    = {suggestedLevel = 70, minimumPoints = 1100},
+    [xi.assault.mission.DEMOLITION_DUTY]                  = {suggestedLevel = 50, minimumPoints = 1000},
+    [xi.assault.mission.SEARAT_SALVATION]                 = {suggestedLevel = 60, minimumPoints = 1166},
+    [xi.assault.mission.APKALLU_SEIZURE]                  = {suggestedLevel = 70, minimumPoints = 1000},
+    [xi.assault.mission.LOST_AND_FOUND]                   = {suggestedLevel = 60, minimumPoints = 1000},
+    [xi.assault.mission.DESERTER]                         = {suggestedLevel = 70, minimumPoints = 1000},
+    [xi.assault.mission.DESPERATELY_SEEKING_CEPHALOPODS]  = {suggestedLevel = 70, minimumPoints = 1000},
+    [xi.assault.mission.BELLEROPHON_S_BLISS]              = {suggestedLevel = 70, minimumPoints = 1500},
+    [xi.assault.mission.NYZUL_ISLE_INVESTIGATION]         = {suggestedLevel = 75, minimumPoints = nil},
+    [xi.assault.mission.NYZUL_ISLE_UNCHARTED_AREA_SURVEY] = {suggestedLevel = 99, minimumPoints = nil},
 }

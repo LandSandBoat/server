@@ -442,27 +442,15 @@ jobs:
         cat map-server*.log
         cat search-server*.log
 
-        if grep -qi "error" login-server*.log; then
+        if grep -qi "warning\|error\|crash" login-server*.log; then
             exit -1
         fi
 
-        if grep -qi "error" map-server*.log; then
+        if grep -qi "warning\|error\|crash" map-server*.log; then
             exit -1
         fi
 
-        if grep -qi "error" search-server*.log; then
-            exit -1
-        fi
-
-        if grep -qi "warning" login-server*.log; then
-            exit -1
-        fi
-
-        if grep -qi "warning" map-server*.log; then
-            exit -1
-        fi
-
-        if grep -qi "warning" search-server*.log; then
+        if grep -qi "warning\|error\|crash" search-server*.log; then
             exit -1
         fi
 
@@ -530,35 +518,19 @@ jobs:
         cat map-server-0*.log
         cat map-server-1*.log
 
-        if grep -qi "error" login-server*.log; then
+        if grep -qi "warning\|error\|crash" login-server*.log; then
             exit -1
         fi
 
-        if grep -qi "error" search-server*.log; then
+        if grep -qi "warning\|error\|crash" search-server*.log; then
             exit -1
         fi
 
-        if grep -qi "error" map-server-0*.log; then
+        if grep -qi "warning\|error\|crash" map-server-0*.log; then
             exit -1
         fi
 
-        if grep -qi "error" map-server-1*.log; then
-          exit -1
-        fi
-
-        if grep -qi "warning" login-server*.log; then
-            exit -1
-        fi
-
-        if grep -qi "warning" search-server*.log; then
-            exit -1
-        fi
-
-        if grep -qi "warning" map-server-0*.log; then
-            exit -1
-        fi
-
-        if grep -qi "warning" map-server-1*.log; then
+        if grep -qi "warning\|error\|crash" map-server-1*.log; then
           exit -1
         fi
 

@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Morimar Basalt Fields
 -----------------------------------
-local ID = require("scripts/zones/Morimar_Basalt_Fields/IDs")
+local ID = require('scripts/zones/Morimar_Basalt_Fields/IDs')
 -----------------------------------
 local zone_object = {}
 
