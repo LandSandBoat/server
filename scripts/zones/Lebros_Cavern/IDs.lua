@@ -38,7 +38,7 @@ zones[xi.zone.LEBROS_CAVERN] =
 
     mob =
     {
-        [xi.assaultUtil.mission.EXCAVATION_DUTY] =
+        [xi.assault.mission.EXCAVATION_DUTY] =
         {
             MOBS_START =
             {
@@ -47,7 +47,7 @@ zones[xi.zone.LEBROS_CAVERN] =
                 BRITTLE_ROCK1 = 17035283, BRITTLE_ROCK2 = 17035285, BRITTLE_ROCK3 = 17035287, BRITTLE_ROCK4 = 17035289, BRITTLE_ROCK5 = 17035291,
             },
         },
-        [xi.assaultUtil.mission.LEBROS_SUPPLIES] =
+        [xi.assault.mission.LEBROS_SUPPLIES] =
         {
             MOBS_START =
             {
@@ -55,7 +55,7 @@ zones[xi.zone.LEBROS_CAVERN] =
                 17035302, 17035303, 17035304, 17035305, 17035306, 17035307, 17035308, 17035309,
             }
         },
-        [xi.assaultUtil.mission.TROLL_FUGITIVES] =
+        [xi.assault.mission.TROLL_FUGITIVES] =
         {
             MOBS_START =
             {
@@ -63,7 +63,7 @@ zones[xi.zone.LEBROS_CAVERN] =
                 17035318, 17035319, 17035320, 17035321, 17035322, 17035323, 17035324,
             },
         },
-        [xi.assaultUtil.mission.WAMOURA_FARM_RAID] =
+        [xi.assault.mission.WAMOURA_FARM_RAID] =
         {
             MOBS_START =
             {

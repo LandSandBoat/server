@@ -32,7 +32,7 @@ zones[xi.zone.MAMOOL_JA_TRAINING_GROUNDS] =
 
     mob =
     {
-        [xi.assaultUtil.mission.IMPERIAL_AGENT_RESCUE] =
+        [xi.assault.mission.IMPERIAL_AGENT_RESCUE] =
         {
             MOBS_START =
             {
@@ -46,7 +46,7 @@ zones[xi.zone.MAMOOL_JA_TRAINING_GROUNDS] =
             },
         },
 
-        [xi.assaultUtil.mission.PREEMPTIVE_STRIKE] =
+        [xi.assault.mission.PREEMPTIVE_STRIKE] =
         {
             MOBS_START =
             {

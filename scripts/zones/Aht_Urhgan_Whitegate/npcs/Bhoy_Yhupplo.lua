@@ -37,7 +37,7 @@ end
 entity.onTrigger = function(player, npc)
     local rank = xi.besieged.getMercenaryRank(player)
     local haveimperialIDtag = player:hasKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG) and 1 or 0
-    local assaultPoints = player:getAssaultPoint(xi.assaultUtil.assaultArea.ILRUSI_ATOLL)
+    local assaultPoints = player:getAssaultPoint(xi.assault.assaultArea.ILRUSI_ATOLL)
     local cipher = 0
     local active = xi.extravaganza.campaignActive()
 
@@ -77,7 +77,7 @@ entity.onEventFinish = function(player, csid, option)
             local item = bit.rshift(option, 14)
             local choice = items[item]
             if choice and npcUtil.giveItem(player, choice.itemid) then
-                player:delAssaultPoint(xi.assaultUtil.assaultArea.ILRUSI_ATOLL, choice.price)
+                player:delAssaultPoint(xi.assault.assaultArea.ILRUSI_ATOLL, choice.price)
             end
         end
     end
