@@ -166,6 +166,11 @@ zone_object.onRegionLeave = function(player, region)
 end
 
 zone_object.onEventUpdate = function(player,csid,option)
+    if csid >= 200 and csid <= 219 then
+        for _, entry in pairs(player:getNotorietyList()) do
+            entry:clearEnmity(player) -- reset hate on player after teleporting
+        end
+    end
 end
 
 zone_object.onEventFinish = function(player,csid,option)
@@ -187,13 +192,6 @@ zone_object.onEventFinish = function(player,csid,option)
     then
         player:setPos(-646.000, 0.000, -616.000) -- West
     end
-
-    if csid >= 200 and csid <= 219 then
-        for _, entry in pairs(player:getNotorietyList()) do
-            entry:clearEnmity(player) -- reset hate on player after teleporting
-        end
-    end
-
 end
 
 return zone_object
