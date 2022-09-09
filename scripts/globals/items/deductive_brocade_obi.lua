@@ -17,7 +17,7 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 180, 15861)
+    target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 60, 15861)
 end
 
 item_object.onEffectGain = function(target, effect)
