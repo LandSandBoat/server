@@ -55,7 +55,7 @@ zones[xi.zone.PERIQIA] =
 
     mob =
     {
-        [xi.assaultUtil.mission.SEAGULL_GROUNDED] =
+        [xi.assault.mission.SEAGULL_GROUNDED] =
         {
             MOBS_START =
             {
@@ -63,7 +63,7 @@ zones[xi.zone.PERIQIA] =
                 17006602, 17006603, 17006604, 17006605, 17006606, 17006607, 17006608, 17006610, 17006611,
             },
         },
-        [xi.assaultUtil.mission.REQUIEM] =
+        [xi.assault.mission.REQUIEM] =
         {
             MOBS_START =
             {

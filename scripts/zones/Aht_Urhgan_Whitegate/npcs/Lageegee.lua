@@ -37,7 +37,7 @@ end
 entity.onTrigger = function(player, npc)
     local rank = xi.besieged.getMercenaryRank(player)
     local haveimperialIDtag = player:hasKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG) and 1 or 0
-    local assaultPoints = player:getAssaultPoint(xi.assaultUtil.assaultArea.PERIQIA)
+    local assaultPoints = player:getAssaultPoint(xi.assault.assaultArea.PERIQIA)
     local cipher = 0
     local active = xi.extravaganza.campaignActive()
 
@@ -57,7 +57,7 @@ entity.onEventUpdate = function(player, csid, option)
     if csid == 276 and selectiontype == 2 then
         local item = bit.rshift(option,14)
         local choice = items[item]
-        local assaultPoints = player:getAssaultPoint(xi.assaultUtil.assaultArea.PERIQIA)
+        local assaultPoints = player:getAssaultPoint(xi.assault.assaultArea.PERIQIA)
         local canEquip = player:canEquipItem(choice.itemid) and 2 or 0
 
         player:updateEvent(0, 0, assaultPoints, 0, canEquip)
@@ -77,7 +77,7 @@ entity.onEventFinish = function(player, csid, option)
             local item = bit.rshift(option, 14)
             local choice = items[item]
             if choice and npcUtil.giveItem(player, choice.itemid) then
-                player:delAssaultPoint(xi.assaultUtil.assaultArea.PERIQIA, choice.price)
+                player:delAssaultPoint(xi.assault.assaultArea.PERIQIA, choice.price)
             end
         end
     end
