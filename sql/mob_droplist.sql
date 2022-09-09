@@ -6999,8 +6999,8 @@ INSERT INTO `mob_droplist` VALUES (833,0,0,1000,2375,@UNCOMMON); -- Zhayolm Card
 
 -- ZoneID:   1 - Fishtrap
 -- ZoneID:   2 - Fishtrap
-INSERT INTO `mob_droplist` VALUES (834,0,0,1000,1727,80); -- Piece Of Garhada Teak Lumber (8.0%)
-INSERT INTO `mob_droplist` VALUES (834,0,0,1000,1617,60); -- Flytrap Leaf (6.0%)
+INSERT INTO `mob_droplist` VALUES (834,0,0,1000,1727,@UNCOMMON); -- Piece Of Garhada Teak Lumber (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (834,0,0,1000,1617,@VRARE);    -- Flytrap Leaf (Very Rare, 1%)
 
 -- ZoneID:  15 - Fistule
 INSERT INTO `mob_droplist` VALUES (835,0,0,1000,11518,@ALWAYS);   -- Rokugo Hachimaki (Always, 100%)

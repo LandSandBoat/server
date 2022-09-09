@@ -3886,6 +3886,38 @@ namespace luautils
         return result.get_type(0) == sol::type::number ? result.get<int32>(0) : 0;
     }
 
+    int32 OnSteal(CBattleEntity* PChar, CBattleEntity* PMob, CAbility* PAbility, action_t* action)
+    {
+        TracyZoneScoped;
+
+        if (PChar == nullptr || PMob == nullptr)
+        {
+            return 0;
+        }
+
+        sol::function onSteal = getEntityCachedFunction(PMob, "onSteal");
+        if (!onSteal.valid())
+        {
+            return 0;
+        }
+
+        auto result = onSteal(CLuaBaseEntity(PChar), CLuaBaseEntity(PMob), CLuaAbility(PAbility), CLuaAction(action));
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onSteal %s", err.what());
+            return 0;
+        }
+
+        uint16 retVal = result.get_type(0) == sol::type::number ? result.get<uint16>(0) : 0;
+        if (retVal > 0)
+        {
+            return retVal;
+        }
+
+        return 0;
+    }
+
     void Terminate()
     {
         TracyZoneScoped;
