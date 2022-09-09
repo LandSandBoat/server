@@ -1064,16 +1064,7 @@ namespace petutils
         PPet->health.maxmp = (int16)(raceStat + jobStat + sJobStat);
         PPet->health.mp    = PPet->health.maxmp;
 
-        // add in evasion from skill
-        int16 evaskill = PPet->GetSkill(SKILL_EVASION);
-        int16 eva      = evaskill;
-        if (evaskill > 200)
-        { // Evasion skill is 0.9 evasion post-200
-            eva = (int16)(200 + (evaskill - 200) * 0.9);
-        }
-        PPet->setModifier(Mod::EVA, eva);
-
-        // Start of calculation of characteristics
+        // Start of calculation of characteristics (STR to CHR)
         uint8 counter = 0;
         for (uint8 StatIndex = 2; StatIndex <= 8; ++StatIndex)
         {
@@ -1781,6 +1772,21 @@ namespace petutils
         PPet->m_Element = PPetData->m_Element;
         PPet->m_PetID   = PPetData->PetID;
 
+        // Set base stat ranks - likely overridden, but prefer to default to DB values if not
+        PPet->strRank = PPetData->strRank;
+        PPet->dexRank = PPetData->dexRank;
+        PPet->vitRank = PPetData->vitRank;
+        PPet->agiRank = PPetData->agiRank;
+        PPet->intRank = PPetData->intRank;
+        PPet->mndRank = PPetData->mndRank;
+        PPet->chrRank = PPetData->chrRank;
+
+        // Set baseline battle stats
+        PPet->defRank = PPetData->defRank;
+        PPet->attRank = PPetData->attRank;
+        PPet->accRank = PPetData->accRank;
+        PPet->evaRank = PPetData->evaRank;
+
         if (PPet->getPetType() == PET_TYPE::AVATAR)
         {
             uint8 mLvl = PMaster->GetMLevel();
@@ -1809,7 +1815,22 @@ namespace petutils
                 ShowDebug("%s summoned an avatar but is not SMN main or SMN sub! Please report. ", PMaster->GetName());
                 PPet->SetMLevel(1);
             }
+
+            // Load avatar stats
             LoadAvatarStats(PMaster, PPet); // follows PC calcs (w/o SJ)
+
+            // Add stat modifiers
+            // add in evasion from skill
+            int16 evaskill = battleutils::GetMaxSkill(PPet->evaRank, PPet->GetMLevel());
+            int16 eva      = evaskill;
+            if (evaskill > 200)
+            { // Evasion skill is 0.9 evasion post-200
+                eva = (int16)(200 + (evaskill - 200) * 0.9);
+            }
+            PPet->setModifier(Mod::EVA, eva);
+            PPet->setModifier(Mod::ATT, battleutils::GetMaxSkill(PPet->attRank, PPet->GetMLevel()));
+            PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(PPet->defRank, PPet->GetMLevel()));
+            PPet->setModifier(Mod::ACC, battleutils::GetMaxSkill(PPet->accRank, PPet->GetMLevel()));
 
             PPet->m_SpellListContainer = mobSpellList::GetMobSpellList(PPetData->spellList);
 
@@ -1848,31 +1869,19 @@ namespace petutils
                 weaponDamage = floor(weaponDamage * 0.74);
             }
 
-
             static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDamage(weaponDamage);
             static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setBaseDelay((uint16)(floor(1000.0f * (PPetData->cmbDelay / 60.0f))));
-            // Set B+ weapon skill (assumed capped for level derp)
-            // attack is madly high for avatars (roughly x2)
-            // Set E evasion and def
-            PPet->setModifier(Mod::EVA, battleutils::GetMaxSkill(SKILL_THROWING, JOB_WHM, PPet->GetMLevel()));
 
-            // Set B weapon skill which is consistent with every other mob
+            // Fenrir has been proven to have an additional 30% ATK
             if (PetID == PETID_FENRIR)
             {
-                PPet->setModifier(Mod::ATT, 1.3 * battleutils::GetMaxSkill(SKILL_SWORD, JOB_WAR, PPet->GetMLevel())); // Fenrir has been proven to have an additional 30% ATK
-            }
-            else
-            {
-                PPet->setModifier(Mod::ATT, battleutils::GetMaxSkill(SKILL_SWORD, JOB_WAR, PPet->GetMLevel()));
+                PPet->addModifier(Mod::ATT, 0.3 * battleutils::GetMaxSkill(PPet->attRank, PPet->GetMLevel()));
             }
 
+            // Diabolos has been proven to have an additional 30% DEF
             if (PetID == PETID_DIABOLOS)
             {
-                PPet->setModifier(Mod::DEF, 1.3 * battleutils::GetMaxSkill(SKILL_THROWING, JOB_WHM, PPet->GetMLevel())); // Diabolos has been proven to have an additional 30% DEF
-            }
-            else
-            {
-                PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(SKILL_THROWING, JOB_WHM, PPet->GetMLevel()));
+                PPet->addModifier(Mod::DEF, 0.3 * battleutils::GetMaxSkill(PPet->defRank, PPet->GetMLevel()));
             }
 
             // cap all magic skills so they play nice with spell scripts
