@@ -1,5 +1,5 @@
 -----------------------------------
--- Sheep Charge
+-- Sheep Charge Melee
 -- Deals damage to a single target. Additional effect: Knockback
 -- Used in BCNM: Hostile Herbivores
 -----------------------------------

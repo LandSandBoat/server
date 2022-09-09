@@ -2,7 +2,7 @@
 -- Area: Horlais Peak
 --  Mob: Fighting Sheep
 -- BCNM: Hostile Herbivores
--- TODO: melee attacks cause knockback.
+-- Note: melee attacks cause knockback. This is handled as a mobskill substitution.
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
@@ -14,17 +14,6 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:SetMobSkillAttack(701)
-end
-
-entity.onMobWeaponSkillPrepare = function(mob, target)
-    mob:setLocalVar("skill_tp", mob:getTP())
-end
-
-entity.onMobWeaponSkill = function(target, mob, skill)
-    if skill:getID() == 274 then
-        mob:addTP(mob:getLocalVar("skill_tp"))
-        mob:setLocalVar("skill_tp", 0)
-    end
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
