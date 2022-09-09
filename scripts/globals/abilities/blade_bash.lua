@@ -12,6 +12,14 @@ require("scripts/globals/msg")
 local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)
+    if player:getWeaponSkillType(xi.slot.MAIN) == xi.skill.GREAT_KATANA then
+        ability:setAnimation(201)
+    elseif player:getWeaponSkillType(xi.slot.MAIN) == xi.skill.POLEARM then
+        ability:setAnimation(203)
+    elseif player:getWeaponSkillType(xi.slot.MAIN) == xi.skill.STAFF then
+        ability:setAnimation(202)
+    end
+
     if (not player:isWeaponTwoHanded()) then
         return xi.msg.basic.NEEDS_2H_WEAPON, 0
     else
