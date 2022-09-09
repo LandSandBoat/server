@@ -609,10 +609,10 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
     -----------------------------------
     local magiceva = target:getMod(xi.mod.MEVA)
     if target:isPC() then
-        magiceva = magiceva + resMod
+        magiceva = magiceva * ((100 + resMod) / 100)
     else
-        levelDiff = utils.clamp(levelDiff, 0, 99) -- Mobs should not have a disadvantage when targeted
-        magiceva =  magiceva + (4 * levelDiff) + resMod
+        levelDiff = utils.clamp(levelDiff, 0, 200) -- Mobs should not have a disadvantage when targeted
+        magiceva =  (magiceva + (4 * levelDiff)) * ((100 + resMod) / 100)
     end
 
     -----------------------------------
