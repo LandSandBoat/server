@@ -39,6 +39,7 @@ void CMobSpellContainer::ClearSpells()
     m_debuffList.clear();
     m_healList.clear();
     m_naList.clear();
+    m_raiseList.clear();
     m_hasSpells = false;
 }
 
@@ -81,6 +82,11 @@ void CMobSpellContainer::AddSpell(SpellID spellId)
         // na spell and erase
         m_naList.push_back(spellId);
     }
+    else if (spell->isRaise())
+    {
+        // raise family
+        m_raiseList.push_back(spellId);
+    }
     else if (spell->isHeal())
     { // includes blue mage healing spells, wild carrot etc
         // add to healing
@@ -108,8 +114,9 @@ void CMobSpellContainer::RemoveSpell(SpellID spellId)
     findAndRemove(m_debuffList, spellId);
     findAndRemove(m_healList, spellId);
     findAndRemove(m_naList, spellId);
+    findAndRemove(m_raiseList, spellId);
 
-    m_hasSpells = !(m_gaList.empty() && m_damageList.empty() && m_buffList.empty() && m_debuffList.empty() && m_healList.empty() && m_naList.empty());
+    m_hasSpells = !(m_gaList.empty() && m_damageList.empty() && m_buffList.empty() && m_debuffList.empty() && m_healList.empty() && m_naList.empty() && m_raiseList.empty());
 }
 
 // Used in Gambits to see if the Trust can cast the spell
@@ -164,6 +171,7 @@ std::optional<SpellID> CMobSpellContainer::GetBestAvailable(SPELLFAMILY family)
         searchInList(m_debuffList);
         searchInList(m_healList);
         searchInList(m_naList);
+        searchInList(m_raiseList);
     }
 
     // Assume the highest ID is the best (back of the vector)
@@ -723,6 +731,11 @@ bool CMobSpellContainer::HasHealSpells() const
 bool CMobSpellContainer::HasNaSpells() const
 {
     return !m_naList.empty();
+}
+
+bool CMobSpellContainer::HasRaiseSpells() const
+{
+    return !m_raiseList.empty();
 }
 
 bool CMobSpellContainer::HasDebuffSpells() const

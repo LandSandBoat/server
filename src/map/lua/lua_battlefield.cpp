@@ -26,6 +26,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../entities/charentity.h"
 #include "../entities/mobentity.h"
 #include "../entities/npcentity.h"
+#include "../entities/trustentity.h"
 #include "../status_effect_container.h"
 #include "../utils/mobutils.h"
 #include "../utils/zoneutils.h"
@@ -81,6 +82,16 @@ uint32 CLuaBattlefield::getFightTime()
     return std::chrono::duration_cast<std::chrono::seconds>(get_server_start_time() - m_PLuaBattlefield->GetFightTime()).count();
 }
 
+uint32 CLuaBattlefield::getMaxParticipants()
+{
+    return static_cast<uint32>(m_PLuaBattlefield->GetMaxParticipants());
+}
+
+uint32 CLuaBattlefield::getPlayerCount()
+{
+    return static_cast<uint32>(m_PLuaBattlefield->GetPlayerCount());
+}
+
 sol::table CLuaBattlefield::getPlayers()
 {
     auto table = lua.create_table();
@@ -90,6 +101,25 @@ sol::table CLuaBattlefield::getPlayers()
         if (PChar)
         {
             table.add(CLuaBaseEntity(PChar));
+        }
+    });
+    // clang-format on
+    return table;
+}
+
+sol::table CLuaBattlefield::getPlayersAndTrusts()
+{
+    auto table = lua.create_table();
+    // clang-format off
+    m_PLuaBattlefield->ForEachPlayer([&](CCharEntity* PChar)
+    {
+        if (PChar)
+        {
+            table.add(CLuaBaseEntity(PChar));
+            for (auto PTrust : PChar->PTrusts)
+            {
+                table.add(CLuaBaseEntity(PTrust));
+            }
         }
     });
     // clang-format on
@@ -274,7 +304,10 @@ void CLuaBattlefield::Register()
     SOL_REGISTER("getFightTick", CLuaBattlefield::getFightTick);
     SOL_REGISTER("getWipeTime", CLuaBattlefield::getWipeTime);
     SOL_REGISTER("getFightTime", CLuaBattlefield::getFightTime);
+    SOL_REGISTER("getMaxParticipants", CLuaBattlefield::getMaxParticipants);
+    SOL_REGISTER("getPlayerCount", CLuaBattlefield::getPlayerCount);
     SOL_REGISTER("getPlayers", CLuaBattlefield::getPlayers);
+    SOL_REGISTER("getPlayersAndTrusts", CLuaBattlefield::getPlayersAndTrusts);
     SOL_REGISTER("getMobs", CLuaBattlefield::getMobs);
     SOL_REGISTER("getNPCs", CLuaBattlefield::getNPCs);
     SOL_REGISTER("getAllies", CLuaBattlefield::getAllies);

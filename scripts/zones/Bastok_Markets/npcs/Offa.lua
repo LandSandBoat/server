@@ -1,10 +1,7 @@
 -----------------------------------
 -- Area: Bastok Markets
 --  NPC: Offa
--- Type: Quest NPC
 -- !pos -281.628 -16.971 -140.607 235
------------------------------------
--- Auto-Script: Requires Verification. Verified standard dialog - thrydwolf 12/18/2011
 -----------------------------------
 require("scripts/globals/quests")
 -----------------------------------
@@ -15,10 +12,8 @@ end
 
 entity.onTrigger = function(player, npc)
     local smokeOnTheMountain = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SMOKE_ON_THE_MOUNTAIN)
-    if (smokeOnTheMountain == QUEST_ACCEPTED) then
+    if smokeOnTheMountain == QUEST_ACCEPTED then
         player:startEvent(222)
-    else
-        player:startEvent(124)
     end
 end
 

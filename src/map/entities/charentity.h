@@ -306,7 +306,7 @@ public:
     uint8           equipLoc[18];        // ContainerID where equipment is
     uint16          styleItems[16];      // Item IDs for items that are style locked.
 
-    uint8             m_ZonesList[36];        // List of visited zone character
+    uint8             m_ZonesList[38];        // List of visited zone character
     std::bitset<1024> m_SpellList;            // List of studied spells
     uint8             m_TitleList[143];       // List of obtained titles
     uint8             m_Abilities[64];        // List of current abilities

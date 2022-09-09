@@ -22,6 +22,7 @@ zones[xi.zone.THE_ELDIEME_NECROPOLIS] =
         LOGIN_CAMPAIGN_UNDERWAY          = 7161,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                     = 7162,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         GEOMAGNETRON_ATTUNED             = 7171,  -- Your <keyitem> has been attuned to a geomagnetic fount in the corresponding locale.
+        MEMBERS_LEVELS_ARE_RESTRICTED    = 7182,  -- Your party is unable to participate because certain members' levels are restricted.
         DEVICE_NOT_WORKING               = 7326,  -- The device is not working.
         SYS_OVERLOAD                     = 7335,  -- Warning! Sys...verload! Enterin...fety mode. ID eras...d.
         YOU_LOST_THE                     = 7340,  -- You lost the <item>.
