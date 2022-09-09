@@ -622,6 +622,15 @@ INSERT INTO `mob_family_mods` VALUES (194,3,50,1); -- MP_BASE: 50
 -- Qiqirn
 INSERT INTO `mob_family_mods` VALUES (199,10,12,1); -- SUBLINK: 12
 
+-- Quadav
+INSERT INTO `mob_family_mods` VALUES (200,10,15,1); -- SUBLINK: 15
+
+-- Quadav
+INSERT INTO `mob_family_mods` VALUES (201,10,15,1); -- SUBLINK: 15
+
+-- Quadav
+INSERT INTO `mob_family_mods` VALUES (202,10,15,1); -- SUBLINK: 15
+
 -- Qutrub
 INSERT INTO `mob_family_mods` VALUES (203,36,50,1);   -- ROAM_COOL: 50
 INSERT INTO `mob_family_mods` VALUES (203,51,3,1);    -- ROAM_TURNS: 3
