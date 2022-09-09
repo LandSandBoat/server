@@ -41,15 +41,17 @@ battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
     if leavecode == xi.battlefield.leaveCode.WON then
         local _, clearTime, partySize = battlefield:getRecord()
         local arg8 = (player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.WAKING_THE_BEAST)) and 1 or 0
-        local lootChance = 25
 
         if battlefield:getLocalVar("loot") == 0 then
             battlefield:setLocalVar("loot", 1)
+            local lootChance = 40
+
+            -- Loot has 3 chances to drop. The droprates are as follows: 40% -> 20% -> 10%
             for i = 1, 3 do
                 if math.random(1,100) < lootChance then
                     player:addTreasure(loot[math.random(1,7)])
-                    lootChance = lootChance - 10
                 end
+                lootChance = lootChance / 2
             end
         end
         player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), arg8)
