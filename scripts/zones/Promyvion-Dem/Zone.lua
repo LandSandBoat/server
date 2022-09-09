@@ -43,6 +43,10 @@ end
 zone_object.onEventFinish = function(player, csid, option)
     if csid == 46 and option == 1 then
         player:setPos(-226.193, -46.459, -280.046, 127, 14) -- To Hall of Transference {R}
+    elseif csid >= 30 and csid <= 45 then
+        for _, entry in pairs(player:getNotorietyList()) do
+            entry:clearEnmity(player) -- reset hate on player after teleporting
+        end
     end
 end
 

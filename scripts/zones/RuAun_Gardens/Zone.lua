@@ -93,6 +93,10 @@ end
 zone_object.onEventFinish = function(player, csid, option)
     if csid == 41 and option ~= 0 then
         player:setCharVar("skyShortcut", 1)
+    elseif csid >= 1 and csid <= 40 then
+        for _, entry in pairs(player:getNotorietyList()) do
+            entry:clearEnmity(player) -- reset hate on player after teleporting
+        end
     end
 end
 
