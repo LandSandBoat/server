@@ -3,6 +3,7 @@
 -- Beitetsu Parcel
 -- Breaks up a Beitetsu Parcel
 -----------------------------------
+require('scripts/globals/items')
 require("scripts/globals/msg")
 -----------------------------------
 local item_object = {}
