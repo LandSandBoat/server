@@ -6403,11 +6403,11 @@ namespace battleutils
             return 0;
         }
 
-        uint32 base      = PSpell->getRecastTime();
-        int32  recast    = base;
+        uint32 base   = PSpell->getRecastTime();
+        int32  recast = base;
 
         // get Fast Cast reduction, caps at 80%/2 = 40% reduction in recast -- https://www.bg-wiki.com/ffxi/Fast_Cast
-        float fastCastReduction          = std::clamp(static_cast<float>(PEntity->getMod(Mod::FASTCAST)) / 2.0f, 0.0f, 40.0f);
+        float fastCastReduction = std::clamp(static_cast<float>(PEntity->getMod(Mod::FASTCAST)) / 2.0f, 0.0f, 40.0f);
         // no known cap (limited by Inspiration merits + Futhark Trousers augment for a total retail cap value of 60%/2 = 30%)
         float inspirationRecastReduction = static_cast<float>(PEntity->getMod(Mod::INSPIRATION_FAST_CAST)) / 2.0f;
 
@@ -6416,7 +6416,7 @@ namespace battleutils
 
         // Apply Haste (Magic and Gear)
         int32 haste = PEntity->getMod(Mod::HASTE_MAGIC) + PEntity->getMod(Mod::HASTE_GEAR);
-        recast = static_cast<int32>(recast * ((10000.0f - haste) / 10000.0f));
+        recast      = static_cast<int32>(recast * ((10000.0f - haste) / 10000.0f));
 
         if (PSpell->getSpellGroup() == SPELLGROUP_SONG)
         {
@@ -6483,8 +6483,8 @@ namespace battleutils
             // https://www.bg-wiki.com/ffxi/Alacrity
             if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_ALACRITY))
             {
-                recast       = static_cast<int32>(recast * 0.60); // 40% reduction from Alacrity alone
-                recast       = std::max<int32>(recast, static_cast<int32>(base * 0.2f)); // recap to 80%
+                recast = static_cast<int32>(recast * 0.60);                        // 40% reduction from Alacrity alone
+                recast = std::max<int32>(recast, static_cast<int32>(base * 0.2f)); // recap to 80%
 
                 // Only apply bonus mod if the spell element matches the weather, this is allowed to go over the 80% cap to a 90% cap.
                 if (battleutils::WeatherMatchesElement(battleutils::GetWeather(PEntity, false), static_cast<uint8>(PSpell->getElement())))
