@@ -638,7 +638,6 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
         for _, tier in pairs(sortEvaMult) do -- Finds the highest tier for the resist. We sort just to be safe.
             if evaMult >= tier then
                 evaMult = tier
-                target:setLocalVar("[MagicBurst]Resist_Tier", tier)
                 break
             end
         end
@@ -683,7 +682,6 @@ end
 
 xi.spells.damage.calculateIfMagicBurstBonus = function(caster, target, spell, spellId, spellElement) -- Calculates the bonus damage applied to the spell.
     local magicBurstBonus        = 1.0
-    local resTierBonus           = 0.0
     local modBurst               = 1.0
     local ancientMagicBurstBonus = 0
     local _, skillchainCount     = FormMagicBurst(spellElement, target) -- External function. Not present in magic.lua.
@@ -720,29 +718,7 @@ xi.spells.damage.calculateIfMagicBurstBonus = function(caster, target, spell, sp
     -- Magic Burst Damage I is found in gear. caps at 40% with innin, AM2 and such
     -- Magic Burst Damage II is found in other gear and BLM job traits pertain to this one OR to a third, separate one. neither has known cap
 
-    if skillchainCount > 0 then
-        if target:getObjType() == xi.objType.MOB then
-            local resTier = target:getLocalVar("[MagicBurst]Resist_Tier")
-            local resTierBonusLookup =
-            {
-                [1.50] = 1.50,
-                [1.30] = 1.15,
-                [1.15] = 0.85,
-                [1.00] = 0.60,
-                [0.85] = 0.50,
-                [0.70] = 0.40,
-                [0.60] = 0.15,
-                [0.50] = 0.05,
-            }
-            if resTierBonusLookup[resTier] ~= nil then
-                resTierBonus = resTierBonusLookup[resTier]
-            end
-        end
-
-        magicBurstBonus = resTierBonus + modBurst
-    end
-
-    return magicBurstBonus
+    return modBurst
 end
 
 xi.spells.damage.calculateDayAndWeather = function(caster, target, spell, spellId, spellElement)
@@ -977,7 +953,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     local multipleTargetReduction     = xi.spells.damage.calculateMTDR(caster, target, spell)
     local eleStaffBonus               = xi.spells.damage.calculateEleStaffBonus(caster, spell, spellElement)
     local magianAffinity              = xi.spells.damage.calculateMagianAffinity(caster, spell)
-    local sdt                         = xi.spells.damage.calculateSDT(caster, target, spell, spellElement)
+    -- local sdt                         = xi.spells.damage.calculateSDT(caster, target, spell, spellElement)
     local resist                      = xi.spells.damage.calculateResist(caster, target,  spell, skillType, spellElement, statDiff, 0, spellElement)
     local magicBurst                  = xi.spells.damage.calculateIfMagicBurst(caster, target,  spell, spellElement)
     local magicBurstBonus             = xi.spells.damage.calculateIfMagicBurstBonus(caster, target, spell, spellId, spellElement)
@@ -1017,10 +993,10 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
     finalDamage = math.floor(spellDamage * multipleTargetReduction)
     finalDamage = math.floor(finalDamage * eleStaffBonus)
     finalDamage = math.floor(finalDamage * magianAffinity)
-    finalDamage = math.floor(finalDamage * sdt)
+    --finalDamage = math.floor(finalDamage * sdt)
     finalDamage = math.floor(finalDamage * resist)
 
-    if target:hasStatusEffect(xi.effect.SKILLCHAIN) then -- Gated since this is recalculated for each target.
+    if target:hasStatusEffect(xi.effect.SKILLCHAIN) and (target:getStatusEffect(xi.effect.SKILLCHAIN):getTier() > 0) then -- Gated since this is recalculated for each target.
         finalDamage = math.floor(finalDamage * magicBurst)
         finalDamage = math.floor(finalDamage * magicBurstBonus)
     end
@@ -1072,7 +1048,7 @@ xi.spells.damage.useDamageSpell = function(caster, target, spell)
         end
 
         -- Add "Magic Burst!" message
-        if target:hasStatusEffect(xi.effect.SKILLCHAIN) then -- Gated as this is run per target.
+        if target:hasStatusEffect(xi.effect.SKILLCHAIN) and (target:getStatusEffect(xi.effect.SKILLCHAIN):getTier() > 0) then -- Gated as this is run per target.
             spell:setMsg(spell:getMagicBurstMessage())
             caster:triggerRoeEvent(xi.roe.triggers.magicBurst)
         end
