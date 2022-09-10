@@ -81,7 +81,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED
+            return status == QUEST_COMPLETED and
             player:getCharVar("WTB_CONQUEST") < os.time()
         end,
 
