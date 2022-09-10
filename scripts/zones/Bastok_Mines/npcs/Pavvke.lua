@@ -33,11 +33,6 @@ entity.onTrigger = function(player, npc)
         player:getFameLevel(xi.quest.fame_area.BASTOK) >= 2
     then
         player:startEvent(90)
-
-    elseif player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_ELEVENTH_S_HOUR) == QUEST_ACCEPTED then
-        player:startEvent(48)
-    else
-        player:startEvent(75)
     end
 end
 

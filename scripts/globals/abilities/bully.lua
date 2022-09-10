@@ -6,9 +6,7 @@
 -- Recast Time: 3:00
 -- Duration: 0:30
 -----------------------------------
-require("scripts/globals/jobpoints")
-require("scripts/globals/settings")
-require("scripts/globals/status")
+require("scripts/globals/job_utils/thief")
 -----------------------------------
 local ability_object = {}
 
@@ -17,10 +15,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    local jpValue = player:getJobPointLevel(xi.jp.BULLY_EFFECT)
-
-    target:addStatusEffectEx(xi.effect.DOUBT, xi.effect.INTIMIDATE, 15 + jpValue, 0, 30)
-    return xi.effect.INTIMIDATE
+    return xi.job_utils.thief.useBully(player, target, ability)
 end
 
 return ability_object

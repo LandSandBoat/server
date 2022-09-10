@@ -5,19 +5,16 @@
 -- Recast Time: 1:00:00
 -- Duration: 0:00:30
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
+require("scripts/globals/job_utils/thief")
 -----------------------------------
 local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)
-    ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
-    return 0, 0
+    return xi.job_utils.thief.checkPerfectDodge(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    local duration = 30 + player:getMod(xi.mod.PERFECT_DODGE)
-    player:addStatusEffect(xi.effect.PERFECT_DODGE, 1, 0, duration)
+    xi.job_utils.thief.usePerfectDodge(player, target, ability)
 end
 
 return ability_object

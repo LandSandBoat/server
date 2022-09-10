@@ -1382,8 +1382,6 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
     {
         auto* PMob = m_mobList[targid];
 
-        ShowInfo(fmt::format("Releasing {} ({})", PMob->name, PMob->targid).c_str());
-
         for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
         {
             CCharEntity* PChar = (CCharEntity*)it->second;

@@ -1,7 +1,5 @@
 -----------------------------------
---
---     Functions for Conquest system
---
+-- Functions for Conquest system
 -----------------------------------
 require("scripts/globals/teleports")
 require("scripts/globals/keyitems")
@@ -13,8 +11,8 @@ require("scripts/globals/status")
 require("scripts/globals/zone")
 require("scripts/globals/items")
 require("scripts/globals/extravaganza")
+require("scripts/globals/garrison")
 -----------------------------------
-
 xi = xi or {}
 xi.conquest = xi.conquest or {}
 
@@ -995,12 +993,8 @@ end
 -----------------------------------
 
 xi.conquest.overseerOnTrade = function(player, npc, trade, guardNation, guardType)
-    -- Garrison Trade
-    if
-        guardType == xi.conq.guard.OUTPOST and
-        (trade:getItemId() >= 1528 and trade:getItemId() <= 1543)
-    then
-        xi.garrison.onTrade(player, npc, trade, guardNation)
+    if xi.garrison.onTrade(player, npc, trade, guardNation) then
+        return
     end
 
     if player:getNation() == guardNation or guardNation == xi.nation.OTHER then
@@ -1059,7 +1053,7 @@ xi.conquest.overseerOnTrade = function(player, npc, trade, guardNation, guardTyp
                 else
                     player:showText(npc, mOffset + 55, item, ring.cp) -- "You do not have the required conquest points to recharge."
                 end
-             else
+            else
                 -- TODO: Verify that message is retail correct.
                 -- This gives feedback on a failure at least, and is grouped with the recharge messages.  Confident enough for a commit.
                 player:showText(npc, mOffset + 56, item) -- "Please be aware that you can only purchase or recharge <item> once during the period between each conquest results tally.
@@ -1070,13 +1064,13 @@ end
 
 xi.conquest.overseerOnTrigger = function(player, npc, guardNation, guardType, guardEvent, guardRegion)
     local pNation = player:getNation()
-    local zoneId = npc:getZoneID()
-    local status = player:getCharVar(string.format("[GARRISON]Status_%s", zoneId))
-    -- GARRISON
-    if status > 0 then
-        xi.garrison.onTrigger(player, npc)
+
+    if xi.garrison.onTrigger(player, npc) then
+        return
+    end
+
     -- SUPPLY RUNS
-    elseif pNation == guardNation and areSuppliesRotten(player, npc, guardType) then
+    if pNation == guardNation and areSuppliesRotten(player, npc, guardType) then
         -- do nothing else
     elseif pNation == guardNation and guardType >= xi.conquest.guard.OUTPOST and canDeliverSupplies(player, guardNation, guardEvent, guardRegion) then
         -- do nothing else
@@ -1199,6 +1193,10 @@ xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, 
     local sRegion  = player:getCharVar("supplyQuest_region")
     local sOutpost = outposts[sRegion]
     local mOffset  = zones[player:getZoneID()].text.CONQUEST
+
+    if xi.garrison.onEventFinish(player, csid, option, guardNation, guardType, guardRegion) then
+        return
+    end
 
     -- SIGNET
     if option == 1 then

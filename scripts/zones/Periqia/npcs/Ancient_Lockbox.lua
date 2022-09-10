@@ -67,7 +67,7 @@ entity.onTrigger = function(player, npc)
     }
 
     local area = player:getCurrentAssault()
-    xi.appraisalUtil.assaultChestTrigger(player, npc, qItem[area], regItem[area])
+    xi.appraisal.assaultChestTrigger(player, npc, qItem[area], regItem[area])
 end
 
 return entity
