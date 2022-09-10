@@ -481,7 +481,6 @@ UPDATE mob_groups SET minLevel='72',maxLevel='74' WHERE name='Viseclaw' AND grou
 -- Upper_Delkfutts_Tower (Zone 158)
 -- ------------------------------------------------------------
 
-UPDATE mob_groups SET content_tag='WOTG' WHERE name='Mimas' AND groupid='9' AND zoneid='158';
 UPDATE mob_groups SET content_tag='WOTG' WHERE name='Autarch' AND groupid='25' AND zoneid='158';
 
 -- ------------------------------------------------------------

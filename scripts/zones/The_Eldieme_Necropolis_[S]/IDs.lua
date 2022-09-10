@@ -17,6 +17,7 @@ zones[xi.zone.THE_ELDIEME_NECROPOLIS_S] =
         CARRIED_OVER_POINTS           = 7001, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
         LAYTON_SHOP_DIALOG            = 7111, -- Might you be a student of the same field as I? If that is the case, I might be able to provide you with the proper grimoires...at a price, of course.
         SARCOPHAGUS_SEALED            = 7605, -- It is a stone sarcophagus with the lid sealed tight. It cannot be opened.
         NAMES_CARVED_ON_STONE         = 7606, -- The names of the deceased in this area are carved upon the stone.

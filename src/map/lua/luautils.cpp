@@ -772,6 +772,7 @@ namespace luautils
                             {
                                 auto name = innerKey.as<std::string>();
                                 auto num  = innerValue.as<int32>();
+
                                 if (num == -1)
                                 {
                                     bool found = false;
@@ -794,7 +795,6 @@ namespace luautils
                                     }
                                     else if (outerName == "npc")
                                     {
-                                        bool found = false;
                                         PZone->ForEachNpc([&](CNpcEntity* PNpc)
                                         {
                                             if (!found)
@@ -810,6 +810,7 @@ namespace luautils
                                             }
                                         });
                                     }
+
                                     if (!found)
                                     {
                                         ShowError(fmt::format("Could not complete id lookup for {}.ID.{}.{}", zoneName, outerName, name))
@@ -2705,6 +2706,28 @@ namespace luautils
         }
 
         return result.get_type(0) == sol::type::number ? result.get<int32>(0) : 0;
+    }
+
+    bool OnTrustSpellCastCheckBattlefieldTrusts(CBattleEntity* PCaster) // Check if trust count would go over the limit when cast finishes (for simultaneous multi-party casts
+    {
+        TracyZoneScoped;
+
+        sol::function checkBattlefieldTrustCount = lua["xi"]["trust"]["checkBattlefieldTrustCount"];
+
+        if (!checkBattlefieldTrustCount.valid())
+        {
+            return false;
+        }
+
+        auto result = checkBattlefieldTrustCount(CLuaBaseEntity(PCaster));
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::OnTrustSpellCastCheckBattlefieldTrusts: %s", err.what());
+            return 0;
+        }
+
+        return result.get_type(0) == sol::type::boolean ? result.get<bool>(0) : true;
     }
 
     int32 OnMobInitialize(CBaseEntity* PMob)

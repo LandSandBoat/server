@@ -242,6 +242,7 @@ namespace luautils
     auto  OnMobMagicPrepare(CBattleEntity* PCaster, CBattleEntity* PTarget, std::optional<SpellID> startingSpellId) -> std::optional<SpellID>; // triggered when monster wants to use a spell on target
     int32 OnMagicHit(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell);                                                          // triggered when spell cast on monster
     int32 OnWeaponskillHit(CBattleEntity* PMob, CBaseEntity* PAttacker, uint16 PWeaponskill);                                                  // Triggered when Weaponskill strikes monster
+    bool  OnTrustSpellCastCheckBattlefieldTrusts(CBattleEntity* PCaster);                                                                      // Triggered if spell is a trust spell during onCast to determine to interrupt spell or not
 
     int32 OnMobInitialize(CBaseEntity* PMob); // Used for passive trait
     int32 ApplyMixins(CBaseEntity* PMob);
