@@ -693,7 +693,7 @@ namespace spell
                 {
                     return true; // every PC can use trusts
                 }
-                else if (luautils::OnCanUseSpell(PCaster,spell))
+                else if (luautils::OnCanUseSpell(PCaster, spell))
                 {
                     return true;
                 }
