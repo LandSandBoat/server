@@ -31,8 +31,7 @@ quest.sections =
             player:hasSpell(xi.magic.spell.SHIVA) and
             player:hasSpell(xi.magic.spell.RAMUH) and
             player:hasSpell(xi.magic.spell.LEVIATHAN) and
-            player:hasSpell(xi.magic.spell.TITAN) and
-            player:getCharVar("WTB_CONQUEST") < os.time()
+            player:hasSpell(xi.magic.spell.TITAN)
         end,
 
         [xi.zone.LA_THEINE_PLATEAU] =
@@ -83,6 +82,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_COMPLETED
+            player:getCharVar("WTB_CONQUEST") < os.time()
         end,
 
         [xi.zone.LA_THEINE_PLATEAU] =
