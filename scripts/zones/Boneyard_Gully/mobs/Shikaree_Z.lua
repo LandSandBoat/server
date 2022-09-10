@@ -87,7 +87,6 @@ entity.onMobFight = function(mob, target)
                 mob:setLocalVar("control", 1)
             end
 
-
         -- Only Shik X is alive and has TP
         elseif shikX:isAlive() and not shikY:isAlive() then
             if shikXTP == 1 then
@@ -115,4 +114,3 @@ entity.onMobDeath = function(mob, player, isKiller)
 end
 
 return entity
-
