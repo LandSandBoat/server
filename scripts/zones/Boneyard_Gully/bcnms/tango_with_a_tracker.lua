@@ -5,11 +5,11 @@
 -----------------------------------
 require("scripts/globals/battlefield")
 require("scripts/globals/keyitems")
+require('scripts/globals/quests')
 -----------------------------------
 local battlefield_object = {}
 
 battlefield_object.onBattlefieldInitialise = function(battlefield)
-    battlefield:setLocalVar("loot", 1)
 end
 
 battlefield_object.onBattlefieldTick = function(battlefield, tick)
@@ -40,6 +40,8 @@ end
 battlefield_object.onEventFinish = function(player, csid, option)
     if csid == 32001 then
         player:addGil(10000)
+        player:addTitle(xi.title.SIN_HUNTER_HUNTER)
+        player:completeQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TANGO_WITH_A_TRACKER)
     end
 end
 

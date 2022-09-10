@@ -19,12 +19,26 @@ zones[xi.zone.BONEYARD_GULLY] =
         LOGIN_NUMBER              = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         PARTY_MEMBERS_HAVE_FALLEN = 7407, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED = 7414, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
+        I_LOST                    = 7724, -- I...I can't have lost...
+        READY_TO_REAP             = 7725, -- Ready to rrrreap!
+        MASSACRE_BEGIN            = 7726, -- Let the massacrrrre begin!
+        SUGARPLUM                 = 7727, -- Just for you, sugarplum!
+        HONEYCAKES                = 7728, -- In your eye, honeycakes!
+        READY_TO_RUMBLE           = 7736, -- Ready to rrrumble!
+        MITHRAN_TRACKERS          = 7737, -- Mithran Trackers! Time to hunt!
+        MY_TURN                   = 7738, -- My turn! My Turn!
+        YOURE_MINE                = 7739, -- You're mine!
         CONQUEST_BASE             = 7429, -- Tallying conquest results...
         TUCHULCHA_SANDPIT         = 7748, -- Tuchulcha retreats beneath the soil!
         GIANT_ANTLION             = 7749, -- A giant antlion appears! This one may be carrying an armoury crate!
         ANTLION_ESCAPED           = 7750, -- It's the antlion that escaped earlier!
         SMALL_ANTLION             = 7751, -- A small antlion appears! It doesn't seem large enough to carry an armoury crate.
         TUCHCULA_CRATE            = 7752, -- Tuchulcha drops an armoury crate!
+        BLOOD_RACING              = 7803, -- I'll get your blood rrracing!
+        SCENT_OF_BLOOD            = 7805, -- Ah, the scent of frrrresh blood!
+        AT_MY_BEST                = 7807, -- Even at my best...
+        END_THE_HUNT              = 7808, -- Time to end the hunt! Go for the jugular!
+        ADVENTURER_STEAK          = 7809, -- Dinner time! Tonight we're having "Adventurer Steak"!
     },
     mob =
     {
