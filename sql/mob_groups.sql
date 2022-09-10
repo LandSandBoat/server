@@ -359,11 +359,11 @@ INSERT INTO `mob_groups` VALUES (17,599,8,'Cadaver_Witch',0,128,0,800,0,70,71,0)
 INSERT INTO `mob_groups` VALUES (18,1250,8,'Erdgeist',0,128,0,750,0,70,71,0);
 INSERT INTO `mob_groups` VALUES (19,0,8,'Antiphus',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (20,0,8,'Antiphuss_Spawn',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (21,3601,8,'Shikaree_Z',0,128,0,4000,0,74,75,0);
-INSERT INTO `mob_groups` VALUES (22,3600,8,'Shikaree_Y',0,128,0,4000,0,74,75,0);
-INSERT INTO `mob_groups` VALUES (23,3598,8,'Shikaree_X',0,128,0,4000,0,74,75,0);
-INSERT INTO `mob_groups` VALUES (24,3602,8,'Shikaree_Zs_Wyvern',0,128,0,4650,0,74,75,0);
-INSERT INTO `mob_groups` VALUES (25,3599,8,'Shikaree_Xs_Rabbit',0,128,0,4650,0,74,75,0);
+INSERT INTO `mob_groups` VALUES (21,3601,8,'Shikaree_Z',0,128,0,3500,0,74,75,0);
+INSERT INTO `mob_groups` VALUES (22,3600,8,'Shikaree_Y',0,128,0,3750,0,74,75,0);
+INSERT INTO `mob_groups` VALUES (23,3598,8,'Shikaree_X',0,128,0,3300,0,74,75,0);
+INSERT INTO `mob_groups` VALUES (24,3602,8,'Shikaree_Zs_Wyvern',0,128,0,3500,0,74,75,0);
+INSERT INTO `mob_groups` VALUES (25,3599,8,'Shikaree_Xs_Rabbit',0,128,0,3500,0,74,75,0);
 
 -- ------------------------------------------------------------
 -- PsoXja (Zone 9)

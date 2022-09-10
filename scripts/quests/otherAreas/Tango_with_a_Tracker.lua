@@ -32,10 +32,8 @@ quest.sections =
             onEventFinish =
             {
                 [576] = function(player, csid, option, npc)
-                    if option == 1 then
                         npcUtil.giveKeyItem(player, xi.ki.LETTER_FROM_SHIKAREE_X)
                         quest:begin(player)
-                    end
                 end,
             },
         }
@@ -55,9 +53,7 @@ quest.sections =
             onEventFinish =
             {
                 [576] = function(player, csid, option, npc)
-                    if option == 1 then
                         npcUtil.giveKeyItem(player, xi.ki.LETTER_FROM_SHIKAREE_X)
-                    end
                 end,
             },
         }
