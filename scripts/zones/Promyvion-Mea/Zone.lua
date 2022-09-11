@@ -37,7 +37,12 @@ end
 zone_object.onRegionLeave = function(player, region)
 end
 
-zone_object.onEventUpdate = function(player, region)
+zone_object.onEventUpdate = function(player, csid, option)
+    if csid >= 30 and csid <= 45 then
+        for _, entry in pairs(player:getNotorietyList()) do
+            entry:clearEnmity(player) -- reset hate on player after teleporting
+        end
+    end
 end
 
 zone_object.onEventFinish = function(player, csid, option)

@@ -817,7 +817,7 @@ INSERT INTO `item_basic` VALUES (901,0,'venomous_claw','venomous_claw',12,4,42,0
 INSERT INTO `item_basic` VALUES (902,0,'demon_horn','demon_horn',12,4,42,0,666);
 INSERT INTO `item_basic` VALUES (903,0,'dragon_talon','dragon_talon',12,4,42,0,1900);
 INSERT INTO `item_basic` VALUES (904,0,'set_of_giant_fish_bones','giant_fish_bones',1,57428,0,0,312);
-INSERT INTO `item_basic` VALUES (905,0,'wyvern_skull','wyvern_skull',12,4,42,0,731);
+INSERT INTO `item_basic` VALUES (905,0,'wyvern_skull','wyvern_skull',12,57396,42,0,731);
 INSERT INTO `item_basic` VALUES (906,0,'starmite_shell','starmite_shell',12,24660,0,0,489);
 INSERT INTO `item_basic` VALUES (907,0,'cold_bone','cold_bone',1,32772,42,0,724);
 INSERT INTO `item_basic` VALUES (908,0,'adamantoise_shell','adamantoise_shell',12,4,42,0,14790);

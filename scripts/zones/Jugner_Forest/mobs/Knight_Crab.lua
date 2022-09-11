@@ -8,6 +8,11 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    -- King Arthro PHs are not charmable
+    mob:setMobMod(xi.mobMod.CHARMABLE, 0)
+end
+
 entity.onMobSpawn = function(mob)
     -- If respawn and variable is not 0, then it respawned before someone killed all 10 crabs
     local kingArthro = GetMobByID(ID.mob.KING_ARTHRO)

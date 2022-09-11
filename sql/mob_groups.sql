@@ -359,11 +359,11 @@ INSERT INTO `mob_groups` VALUES (17,599,8,'Cadaver_Witch',0,128,0,800,0,70,71,0)
 INSERT INTO `mob_groups` VALUES (18,1250,8,'Erdgeist',0,128,0,750,0,70,71,0);
 INSERT INTO `mob_groups` VALUES (19,0,8,'Antiphus',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (20,0,8,'Antiphuss_Spawn',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (21,3601,8,'Shikaree_Z',0,128,0,2000,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (22,3600,8,'Shikaree_Y',0,128,0,2000,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (23,3598,8,'Shikaree_X',0,128,0,2000,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (24,3602,8,'Shikaree_Zs_Wyvern',0,128,0,0,0,0,0,0);
-INSERT INTO `mob_groups` VALUES (25,3599,8,'Shikaree_Xs_Rabbit',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (21,3601,8,'Shikaree_Z',0,128,0,3500,0,74,75,0);
+INSERT INTO `mob_groups` VALUES (22,3600,8,'Shikaree_Y',0,128,0,3750,0,74,75,0);
+INSERT INTO `mob_groups` VALUES (23,3598,8,'Shikaree_X',0,128,0,3300,0,74,75,0);
+INSERT INTO `mob_groups` VALUES (24,3602,8,'Shikaree_Zs_Wyvern',0,128,0,3500,0,74,75,0);
+INSERT INTO `mob_groups` VALUES (25,3599,8,'Shikaree_Xs_Rabbit',0,128,0,3500,0,74,75,0);
 
 -- ------------------------------------------------------------
 -- PsoXja (Zone 9)
@@ -11696,7 +11696,7 @@ INSERT INTO `mob_groups` VALUES (15,3342,174,'Recluse_Spider',300,0,2084,0,0,63,
 INSERT INTO `mob_groups` VALUES (16,105,174,'Amemet',0,32,62,15000,0,66,66,0);
 INSERT INTO `mob_groups` VALUES (17,1039,174,'Diplopod',960,0,656,0,0,68,71,0);
 INSERT INTO `mob_groups` VALUES (18,3079,174,'Ovinnik',300,0,1969,0,0,77,79,0);
-INSERT INTO `mob_groups` VALUES (19,1801,174,'Greater_Cockatrice',300,0,201,0,0,78,80,0);
+INSERT INTO `mob_groups` VALUES (19,1801,174,'Greater_Cockatrice',960,0,201,0,0,78,80,0);
 INSERT INTO `mob_groups` VALUES (20,2314,174,'Ladon',300,0,1477,0,0,80,82,0);
 INSERT INTO `mob_groups` VALUES (21,3115,174,'Pelican',0,32,1988,0,0,80,81,0);
 INSERT INTO `mob_groups` VALUES (22,6417,174,'Kuftal_Delver',300,0,3192,0,0,99,102,0);
@@ -12499,7 +12499,7 @@ INSERT INTO `mob_groups` VALUES (25,1666,190,'Goblin_Gambler',660,0,1080,0,0,21,
 INSERT INTO `mob_groups` VALUES (26,3946,190,'Ossuary_Worm',330,0,6019,0,0,78,80,0);
 INSERT INTO `mob_groups` VALUES (27,6460,190,'Ogre_Bat',330,0,19,0,0,80,83,0);
 INSERT INTO `mob_groups` VALUES (28,6801,190,'Barrow_Scorpion',330,0,629,0,0,82,84,0);
-INSERT INTO `mob_groups` VALUES (29,6391,190,'Thousand_Eyes',300,0,2402,0,0,60,62,0);
+INSERT INTO `mob_groups` VALUES (29,6391,190,'Thousand_Eyes',960,0,2402,0,0,60,62,0);
 INSERT INTO `mob_groups` VALUES (30,1898,190,'Hati',960,0,1278,0,0,77,79,0);
 INSERT INTO `mob_groups` VALUES (31,3720,190,'Spartoi_Warrior',960,0,2125,0,0,78,80,0);
 INSERT INTO `mob_groups` VALUES (32,3719,190,'Spartoi_Sorcerer',960,0,2301,0,0,80,82,0);

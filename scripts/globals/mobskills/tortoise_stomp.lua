@@ -25,7 +25,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, info.hitslanded)
 
     local typeEffect = xi.effect.DEFENSE_DOWN
-    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 30, 0, 180)
+    xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 30, 0, 300)
 
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
     return dmg

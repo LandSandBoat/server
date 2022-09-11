@@ -687,8 +687,12 @@ INSERT INTO `mob_spawn_mods` VALUES (17289655,55,168,1); -- IDLE_DESPAWN: 168
 INSERT INTO `mob_spawn_mods` VALUES (17293486,31,5,1); -- ROAM_DISTANCE: 5
 INSERT INTO `mob_spawn_mods` VALUES (17293486,51,1,1); -- ROAM_TURNS: 1
 
+-- Behemoth
+INSERT INTO `mob_spawn_mods` VALUES (17297440,55,180,1); -- IDLE_DESPAWN: 180
+
 -- King Behemoth
 INSERT INTO `mob_spawn_mods` VALUES (17297441,12,25,1); -- DRAW_IN: 25
+INSERT INTO `mob_spawn_mods` VALUES (17297441,55,180,1); -- IDLE_DESPAWN: 180
 
 -- Picklix Longindex
 INSERT INTO `mob_spawn_mods` VALUES (17297446,55,180,1); -- IDLE_DESPAWN: 180
@@ -704,6 +708,12 @@ INSERT INTO `mob_spawn_mods` VALUES (17297449,55,300,1); -- IDLE_DESPAWN: 300
 
 -- Legendary Weapon
 INSERT INTO `mob_spawn_mods` VALUES (17297450,55,300,1); -- IDLE_DESPAWN: 300
+
+-- Adamantoise
+INSERT INTO `mob_spawn_mods` VALUES (17301537,55,180,1); -- IDLE_DESPAWN: 180
+
+-- Aspidochelone
+INSERT INTO `mob_spawn_mods` VALUES (17301538,55,180,1); -- IDLE_DESPAWN: 180
 
 -- Despot
 INSERT INTO `mob_spawn_mods` VALUES (17309954,1,18000,1); -- GIL_MIN: 18000
@@ -1104,7 +1114,10 @@ INSERT INTO `mob_spawn_mods` VALUES (17404337,55,288,1); -- IDLE_DESPAWN: 288
 INSERT INTO `mob_spawn_mods` VALUES (17404338,55,120,1); -- IDLE_DESPAWN: 120
 
 -- Fafnir
-INSERT INTO `mob_spawn_mods` VALUES (17408018,12,20,1); -- DRAW_IN: 20
+INSERT INTO `mob_spawn_mods` VALUES (17408018,55,180,1); -- IDLE_DESPAWN: 180
+
+-- Nidhogg
+INSERT INTO `mob_spawn_mods` VALUES (17408019,55,180,1); -- IDLE_DESPAWN: 180
 
 -- Gerwitz'S Scythe
 INSERT INTO `mob_spawn_mods` VALUES (17420629,55,300,1); -- IDLE_DESPAWN: 300
