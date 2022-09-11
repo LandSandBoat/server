@@ -3,6 +3,7 @@
 --   NM: Stray
 -----------------------------------
 require("scripts/globals/promyvion")
+mixins = {require("scripts/mixins/families/empty")}
 -----------------------------------
 local entity = {}
 
