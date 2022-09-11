@@ -19,6 +19,10 @@ require("scripts/globals/weaponskills")
 local weaponskill_object = {}
 
 weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
+    if player:isPC() then
+	    hasMeritWsUnlock = player:getCharVar("hasRuinatorUnlock")
+	end
+
     if hasMeritWsUnlock ~= 1 then
         player:PrintToPlayer("You don't have this WS unlocked.")
         return
