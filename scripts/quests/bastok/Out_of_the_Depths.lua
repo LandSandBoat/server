@@ -87,18 +87,22 @@ quest.sections =
                     print(option)
                     if option == 1 then
                         player:addGil(100)
+                        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*100)
                         player:delKeyItem(xi.ki.DUSTY_TOME)
                         quest:setVar(player,'Prog', quest:getVar(player, 'Prog') + 1)
                     elseif option == 2 then
                         player:addGil(200)
+                        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*200)
                         player:delKeyItem(xi.ki.POINTED_JUG)
                         quest:setVar(player,'Prog', quest:getVar(player, 'Prog') + 1)
                     elseif option == 3 then
                         player:addGil(300)
+                        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*300)
                         player:delKeyItem(xi.ki.CRACKED_CLUB)
                         quest:setVar(player,'Prog', quest:getVar(player, 'Prog') + 1)
                     elseif option == 4 then
                         player:addGil(400)
+                        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*400)
                         player:delKeyItem(xi.ki.PEELING_HAIRPIN)
                         quest:setVar(player,'Prog', quest:getVar(player, 'Prog') + 1)
                     elseif option == 5 then
