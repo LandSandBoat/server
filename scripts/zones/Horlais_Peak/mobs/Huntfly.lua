@@ -25,7 +25,12 @@ entity.onMobFight = function(mob, target)
         if fly:isAlive() then
             fly:updateEnmity(target)
         end
-        mob:setLocalVar("fly", fly + 1)
+
+        if fly == 8 then
+            mob:setLocalVar("fly", 1)
+        else
+            mob:setLocalVar("fly", fly + 1)
+        end
     end
 end
 
