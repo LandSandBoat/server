@@ -14,12 +14,14 @@ require('scripts/globals/titles')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
+ID = require('scripts/zones/Bastok_Markets/IDs')
+-----------------------------------
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.OUT_OF_THE_DEPTHS)
 
 quest.reward =
 {
     title = xi.title.TRASH_COLLECTOR,
-    gil            = 1200,
+    gil = 1200,
 }
 
 quest.sections =
@@ -84,7 +86,6 @@ quest.sections =
                 end,
 
                 [309] = function(player, csid, option, npc)
-                    print(option)
                     if option == 1 then
                         player:addGil(100)
                         player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*100)
