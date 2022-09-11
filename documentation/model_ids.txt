@@ -1103,40 +1103,40 @@ ID Number    Costume Name
 1103    Memory Recepticle (yellow)
 1104    Memory Recepticle (blue)
 1105    Memory Recepticle (red)
-1106    Wanderer (Dark)
-1107    Wanderer (Lightning)
-1108    Wanderer (Fire)
+1106    Wanderer Animation Sub 1: Dark, Sub 2: Water
+1107    Wanderer Animation Sub 1: Lightning, Sub 2: Earth
+1108    Wanderer Animation Sub 1: Light, Sub 2: Fire
 1109    Skeleton
-1110    Wanderer (Wind)
-1111    Wanderer (Light)
-1112    Weeper (Dark)
-1113    Weeper (No Core)
-1114    Weeper (No Core)
-1115    Weeper (No Core)
-1116    Weeper (No Core)
-1117    Seether (No Elem)
+1110    Wanderer Animation Sub 1: Ice, Sub 2: Wind
+1111    Wanderer (No element)
+1112    Weeper Animation Sub 1: Dark, Sub 2: Water
+1113    Weeper Animation Sub 1: Lightning, Sub 2: Earth
+1114    Weeper Animation Sub 1: Light, Sub 2: Fire
+1115    Weeper Animation Sub 1: Ice, Sub 2: Wind
+1116    Weeper (No element)
+1117    Seether Animation Sub 1: Dark, Sub 2: Water
 1118    Skeleton 3
-1119    Seether (No Elem)
-1120    Seether (No Elem)
-1121    Seether (No Elem)
-1122    Seether (No Elem)
-1123    Thinker (No Elem)
-1124    Thinker (No Elem)
+1119    Seether Animation Sub 1: Lightning, Sub 2: Earth
+1120    Seether Animation Sub 1: Light, Sub 2: Fire
+1121    Seether Animation Sub 1: Ice, Sub 2: Wind
+1122    Seether (No element)
+1123    Thinker Animation Sub 1: Dark, Sub 2: Water
+1124    Thinker Animation Sub 1: Lightning, Sub 2: Earth
 1125    Skeleton 4
-1126    Thinker (No Elem)
-1127    Thinker (No Elem)
-1128    Thinker (No Elem)
-1129    Gorger (No Elem)
-1130    Gorger (No Elem)
-1131    Gorger (No Elem)
-1132    Gorger (No Elem)
-1133    Gorger (No Elem)
-1134    Craver (No Elem)
-1135    Craver (No Elem)
+1126    Thinker Animation Sub 1: Light, Sub 2: Fire
+1127    Thinker Animation Sub 1: Ice, Sub 2: Wind
+1128    Thinker (No element)
+1129    Gorger Animation Sub 1: Dark, Sub 2: Water
+1130    Gorger Animation Sub 1: Lightning, Sub 2: Earth
+1131    Gorger Animation Sub 1: Light, Sub 2: Fire
+1132    Gorger Animation Sub 1: Ice, Sub 2: Wind
+1133    Gorger (No element)
+1134    Craver Animation Sub 1: Dark, Sub 2: Water
+1135    Craver Animation Sub 1: Lightning, Sub 2: Earth
 1136    Skeleton 5
-1137    Craver (No Elem)
-1138    Craver (No Elem)
-1139    Craver (No Elem)
+1137    Craver Animation Sub 1: Light, Sub 2: Fire
+1138    Craver Animation Sub 1: Ice, Sub 2: Wind
+1139    Craver (No element)
 1140    Baby Gorger
 1141    Baby Gorger
 1142    Thinker (No Elem)
