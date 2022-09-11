@@ -117,6 +117,8 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, xi.items.EARTH_CRYSTAL)
             xi.crafting.signupGuild(player, xi.crafting.guild.clothcraft)
         end
+    elseif (csid == 10011 and option > 900) then
+        player:resetLocalVars()
     else
         if player:getLocalVar("ClothcraftTraded") == 1 then
             player:tradeComplete()

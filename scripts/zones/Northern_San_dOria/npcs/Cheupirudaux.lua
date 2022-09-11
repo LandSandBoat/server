@@ -90,6 +90,8 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 4098) -- Wind Crystal
             xi.crafting.signupGuild(player, xi.crafting.guild.woodworking)
         end
+    elseif (csid == 621 and option > 900) then
+        player:resetLocalVars()
     else
         if player:getLocalVar("WoodworkingTraded") == 1 then
             player:tradeComplete()
