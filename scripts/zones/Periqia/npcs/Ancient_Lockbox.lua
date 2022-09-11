@@ -12,7 +12,7 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     local qItem =
     {
-        [xi.assaultUtil.mission.SEAGULL_GROUNDED] =
+        [xi.assault.mission.SEAGULL_GROUNDED] =
         {
             {
                 {itemid = xi.items.APPRAISAL_BOX,     droprate = 400},
@@ -21,7 +21,7 @@ entity.onTrigger = function(player, npc)
                 {itemid = xi.items.APPRAISAL_GLOVES,  droprate = 200},
             },
         },
-        [xi.assaultUtil.mission.REQUIEM] =
+        [xi.assault.mission.REQUIEM] =
         {
             {
                 {itemid = xi.items.APPRAISAL_BOX,     droprate = 400},
@@ -33,7 +33,7 @@ entity.onTrigger = function(player, npc)
     }
     local regItem =
     {
-        [xi.assaultUtil.mission.SEAGULL_GROUNDED] =
+        [xi.assault.mission.SEAGULL_GROUNDED] =
         {
             {
                 {itemid = xi.items.HI_RERAISER, droprate = 700},
@@ -49,7 +49,7 @@ entity.onTrigger = function(player, npc)
                 {itemid = 0, droprate = 470},
             },
         },
-        [xi.assaultUtil.mission.REQUIEM] =
+        [xi.assault.mission.REQUIEM] =
         {
             {
                 {itemid = xi.items.HI_POTION_III, droprate = 500},

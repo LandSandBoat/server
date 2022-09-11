@@ -7844,7 +7844,6 @@ INSERT INTO `mob_droplist` VALUES (946,1,2,200,1331,@VCOMMON);   -- Martial Abju
 INSERT INTO `mob_droplist` VALUES (947,0,0,1000,16681,@ALWAYS); -- Gerwitzs Axe (Always, 100%)
 
 -- ZoneID: 193 - Gerwitzs Sword
--- ZoneID: 193 - Gerwitzs Soul
 INSERT INTO `mob_droplist` VALUES (948,0,0,1000,16940,@ALWAYS); -- Gerwitzs Sword (Always, 100%)
 
 -- ZoneID:  74 - Gespenst
