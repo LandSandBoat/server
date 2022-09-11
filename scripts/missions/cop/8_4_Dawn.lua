@@ -225,6 +225,8 @@ mission.sections =
             {
                 [322] = function(player, csid, option)
                     mission:setVar(player, 'ShikareesCS', 1)
+                    -- Used for Requiem of Sin Quest
+                    player:setCharVar("Quest[4][83]conquestRequiem", getConquestTally())
                 end,
             },
         },

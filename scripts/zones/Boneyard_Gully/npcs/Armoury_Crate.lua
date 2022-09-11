@@ -111,7 +111,49 @@ local loot =
             {itemid = 1762, droprate = 375},  -- Cassia Lumber
             {itemid = 1771, droprate = 250},  -- Dragon Bone
         },
-    }
+    },
+
+    -- Requiem of Sin
+    [678] =
+    {
+        {
+            {itemid = 1762, droprate = 150}, -- Cassia Lumber
+            {itemid = 1767, droprate = 120}, -- Eltoro Leather
+            {itemid = 1771, droprate =  75}, -- Dragon Bone
+        },
+        {
+            {itemid = 1762, droprate = 150}, -- Cassia Lumber
+            {itemid = 1767, droprate = 120}, -- Eltoro Leather
+            {itemid = 1771, droprate =  75}, -- Dragon Bone
+        },
+        {
+            {itemid = 1763, droprate = 110}, -- Viridian Urushi
+            {itemid = 1764, droprate = 120}, -- Kejusu Satin
+            {itemid = 1769, droprate = 110}, -- Galateia
+        },
+        {
+            {itemid = 1763, droprate = 110}, -- Viridian Urushi
+            {itemid = 1764, droprate = 120}, -- Kejusu Satin
+            {itemid = 1769, droprate = 110}, -- Galateia
+        },
+        {
+            {itemid = 18019, droprate = 75}, -- X's Knife
+            {itemid = 18057, droprate = 90}, -- Y's Scythe
+            {itemid = 18101, droprate = 90}, -- Z's Trident
+        },
+        {
+            {itemid =  844, droprate = 110}, -- Phoenix Feather
+            {itemid =  942, droprate =  45}, -- Philosopher's Stone
+            {itemid = 1446, droprate =  10}, -- Lacquer Tree Log
+        },
+        {
+            {itemid =  703, droprate = 50}, -- Petrified Log
+            {itemid =  722, droprate = 10}, -- Divine Log
+            {itemid =  831, droprate = 10}, -- Shining Cloth
+            {itemid = 1132, droprate = 75}, -- Raxa
+            {itemid = 1465, droprate = 50}, -- Granite
+        },
+    },
 }
 
 entity.onTrade = function(player, npc, trade)

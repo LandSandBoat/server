@@ -1417,6 +1417,30 @@ INSERT INTO `bcnm_battlefield` VALUES (676,3,16810079,3);
 INSERT INTO `bcnm_battlefield` VALUES (676,3,16810080,3);
 INSERT INTO `bcnm_battlefield` VALUES (676,3,16810081,3);
 INSERT INTO `bcnm_battlefield` VALUES (676,3,16810082,3);
+INSERT INTO `bcnm_battlefield` VALUES (677,1,16810085,3); -- Tango with a Tracker
+INSERT INTO `bcnm_battlefield` VALUES (677,1,16810086,3);
+INSERT INTO `bcnm_battlefield` VALUES (677,1,16810088,3);
+INSERT INTO `bcnm_battlefield` VALUES (677,2,16810091,3);
+INSERT INTO `bcnm_battlefield` VALUES (677,2,16810092,3);
+INSERT INTO `bcnm_battlefield` VALUES (677,2,16810094,3);
+INSERT INTO `bcnm_battlefield` VALUES (677,3,16810097,3);
+INSERT INTO `bcnm_battlefield` VALUES (677,3,16810098,3);
+INSERT INTO `bcnm_battlefield` VALUES (677,3,16810100,3);
+INSERT INTO `bcnm_battlefield` VALUES (678,1,16810084,3); -- Requiem of Sin
+INSERT INTO `bcnm_battlefield` VALUES (678,1,16810085,3);
+INSERT INTO `bcnm_battlefield` VALUES (678,1,16810086,3);
+INSERT INTO `bcnm_battlefield` VALUES (678,1,16810087,3);
+INSERT INTO `bcnm_battlefield` VALUES (678,1,16810088,3);
+INSERT INTO `bcnm_battlefield` VALUES (678,2,16810090,3);
+INSERT INTO `bcnm_battlefield` VALUES (678,2,16810091,3);
+INSERT INTO `bcnm_battlefield` VALUES (678,2,16810092,3);
+INSERT INTO `bcnm_battlefield` VALUES (678,2,16810093,3);
+INSERT INTO `bcnm_battlefield` VALUES (678,2,16810094,3);
+INSERT INTO `bcnm_battlefield` VALUES (678,3,16810096,3);
+INSERT INTO `bcnm_battlefield` VALUES (678,3,16810097,3);
+INSERT INTO `bcnm_battlefield` VALUES (678,3,16810098,3);
+INSERT INTO `bcnm_battlefield` VALUES (678,3,16810099,3);
+INSERT INTO `bcnm_battlefield` VALUES (678,3,16810100,3);
 INSERT INTO `bcnm_battlefield` VALUES (704,1,16818177,3); -- darkness_named
 INSERT INTO `bcnm_battlefield` VALUES (704,1,16818178,1);
 INSERT INTO `bcnm_battlefield` VALUES (704,1,16818179,1);

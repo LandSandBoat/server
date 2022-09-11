@@ -47,7 +47,7 @@ end
 --Despachiaire     505 CS
 --Despachiaire     517 CS (despachiaire's wife)
 --Despachiaire     518 CS (ulmia mother)
---Despachiaire     576 CS
+--Despachiaire     576 CS (tango with a tracker)
 --Despachiaire     577 chat
 --Despachiaire     578 chat
 --Despachiaire     579 chat
