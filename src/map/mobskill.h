@@ -98,12 +98,13 @@ public:
     const int8* getName() const;
     void        setName(int8* name);
 
+    uint8 m_Aoe; // не используется
+
 private:
     uint16 m_ID;
     uint16 m_TotalTargets;
     int16  m_Param;
     uint16 m_AnimID;            // animation id
-    uint8  m_Aoe;               // не используется
     float  m_Distance;          // не используется
     uint8  m_Flag;              // не используется
     uint16 m_ValidTarget;       // same as

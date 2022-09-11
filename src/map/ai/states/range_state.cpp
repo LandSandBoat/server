@@ -51,7 +51,10 @@ CRangeState::CRangeState(CBattleEntity* PEntity, uint16 targid)
     }
 
     auto delay = m_PEntity->GetRangedWeaponDelay(false);
-    delay      = battleutils::GetSnapshotReduction(m_PEntity, delay);
+
+    m_initialDamage = PEntity->GetRangedWeaponDmg();
+    m_initialDelay  = delay;
+    delay           = battleutils::GetSnapshotReduction(m_PEntity, delay);
 
     // TODO: Allow trusts to use this
     if (auto* PChar = dynamic_cast<CCharEntity*>(m_PEntity))
@@ -100,6 +103,17 @@ bool CRangeState::Update(time_point tick)
     if (tick > GetEntryTime() + m_aimTime && !IsCompleted())
     {
         auto* PTarget = m_PEntity->IsValidTarget(m_targid, TARGET_ENEMY, m_errorMsg);
+
+        if (tick > GetEntryTime())
+        {
+            if (m_initialDamage != m_PEntity->GetRangedWeaponDmg() || m_initialDelay != m_PEntity->GetRangedWeaponDelay(false))
+            {
+                if (auto PChar = dynamic_cast<CCharEntity*>(m_PEntity))
+                {
+                    m_errorMsg = std::make_unique<CMessageBasicPacket>(PChar, PChar, 0, 0, MSGBASIC_NO_RANGED_WEAPON);
+                }
+            }
+        }
 
         CanUseRangedAttack(PTarget);
         if (m_startPos.x != m_PEntity->loc.p.x || m_startPos.y != m_PEntity->loc.p.y)
