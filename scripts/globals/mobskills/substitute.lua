@@ -35,12 +35,14 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
         if i == newAnim then
             mob:setMod(resistances[i], 1000)
         else
-            mob:setMod(resistances[i], 0)
+            mob:setMod(resistances[i], -5000)
         end
     end
 
     if newAnim == 3 then
-        mob:setMod(xi.mod.HTH_SDT, 1000)
+        mob:setMod(resistances[4], 1000)
+    else
+        mob:setMod(resistances[4], -5000)
     end
 
     skill:setMsg(xi.msg.basic.NONE)
