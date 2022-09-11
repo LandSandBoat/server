@@ -1,8 +1,6 @@
 -----------------------------------
 -- Area: Port Bastok
 --  NPC: Romilda
--- Involved in Quest: Forever to Hold
--- Starts & Ends Quest: Till Death Do Us Part
 -----------------------------------
 require("scripts/globals/titles")
 require("scripts/globals/quests")
@@ -11,13 +9,7 @@ local ID = require("scripts/zones/Port_Bastok/IDs")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if (trade:hasItemQty(12497, 1) and trade:getItemCount() == 1) then -- Trade Brass Hairpin
-        if (player:getCharVar("ForevertoHold_Event") == 2) then
-            player:tradeComplete()
-            player:startEvent(125)
-            player:setCharVar("ForevertoHold_Event", 3)
-        end
-    elseif (trade:hasItemQty(12721, 1) and trade:getItemCount() == 1) then -- Trade Cotton Gloves
+    if (trade:hasItemQty(12721, 1) and trade:getItemCount() == 1) then -- Trade Cotton Gloves
         if (player:getCharVar("ForevertoHold_Event") == 3) then
             player:tradeComplete()
             player:startEvent(129)
@@ -33,8 +25,6 @@ entity.onTrigger = function(player, npc)
 
     if (pFame >= 3 and forevertoHold == QUEST_COMPLETED and tilldeathdousPart == QUEST_AVAILABLE and player:getCharVar("ForevertoHold_Event") == 3) then
         player:startEvent(128)
-    else
-        player:startEvent(34)
     end
 end
 

@@ -2249,6 +2249,7 @@ xi.items =
     ADAMAN_CELATA                   = 12429,
     GENBUS_KABUTO                   = 12434,
     WOOL_HAT                        = 12474,
+    BRASS_HAIRPIN                   = 12497,
     MONKS_HEADGEAR                  = 12501,
     FIGHTERS_MASK                   = 12511,
     TEMPLE_CROWN                    = 12512,
