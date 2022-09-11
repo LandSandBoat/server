@@ -1979,6 +1979,18 @@ bool CStatusEffectContainer::HasPreventActionEffect()
         { EFFECT_SLEEP, EFFECT_SLEEP_II, EFFECT_PETRIFICATION, EFFECT_LULLABY, EFFECT_CHARM, EFFECT_CHARM_II, EFFECT_PENALTY, EFFECT_STUN, EFFECT_TERROR });
 }
 
+uint16 CStatusEffectContainer::GetLevelRestrictionEffect()
+{
+    for (auto PEffect : m_StatusEffectSet)
+    {
+        if (PEffect->GetFlag() & EFFECTFLAG_LEVEL_RESTRICTION)
+        {
+            return PEffect->GetPower();
+        }
+    }
+    return 0;
+}
+
 uint16 CStatusEffectContainer::GetConfrontationEffect()
 {
     for (auto* PEffect : m_StatusEffectSet)
