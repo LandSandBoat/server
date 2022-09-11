@@ -678,11 +678,11 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
         else if (PSkill->isConal())
         {
             float angle = 0.0f;
-            if (this->m_Family == 62 || this->m_Family == 164)  // Cerb and Hydra families have wide Conals
+            if (this->m_Family == 62 || this->m_Family == 164) // Cerb and Hydra families have wide Conals
             {
                 angle = 90.0f;
             }
-            else if (this->m_Family >= 259 && this->m_Family <= 264 || this->m_Family >= 391 && this->m_Family <= 393) // Wyrms have slightly wider than normal
+            else if (this->m_Family >= 259 && (this->m_Family <= 264 || (this->m_Family >= 391 && this->m_Family <= 393))) // Wyrms have slightly wider than normal
             {
                 angle = 60.0f;
             }
@@ -694,7 +694,7 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
             {
                 angle = 45.0f;
             }
-            if(PSkill->m_Aoe == 6) // Conal from center of mob
+            if (PSkill->m_Aoe == 6) // Conal from center of mob
             {
                 PAI->TargetFind->findWithinCone(PTarget, AOE_RADIUS::ATTACKER, distance, angle, findFlags, 0);
             }
@@ -705,7 +705,7 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
             }
             else // Conal in front centered on target, m_AoE 5 sets conal to rear
             {
-                PAI->TargetFind->findWithinCone(PTarget, AOE_RADIUS::TARGET, distance, angle, findFlags, (PSkill->m_Aoe == 5)*128);
+                PAI->TargetFind->findWithinCone(PTarget, AOE_RADIUS::TARGET, distance, angle, findFlags, (PSkill->m_Aoe == 5) * 128);
             }
         }
         else

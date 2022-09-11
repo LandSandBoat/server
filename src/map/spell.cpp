@@ -431,7 +431,6 @@ void CSpell::setConeAngle(uint16 angle)
     m_coneAngle = angle;
 }
 
-
 // Implement namespace to work with spells
 namespace spell
 {

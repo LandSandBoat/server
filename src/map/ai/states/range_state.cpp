@@ -50,7 +50,7 @@ CRangeState::CRangeState(CBattleEntity* PEntity, uint16 targid)
         throw CStateInitException(std::move(m_errorMsg));
     }
 
-    auto delay      = m_PEntity->GetRangedWeaponDelay(false);
+    auto delay = m_PEntity->GetRangedWeaponDelay(false);
 
     m_initialDamage = PEntity->GetRangedWeaponDmg();
     m_initialDelay  = delay;
@@ -104,12 +104,8 @@ bool CRangeState::Update(time_point tick)
     {
         auto* PTarget = m_PEntity->IsValidTarget(m_targid, TARGET_ENEMY, m_errorMsg);
 
-        uint8 range = 25;
-
         if (tick > GetEntryTime())
         {
-            range = 40;
-
             if (m_initialDamage != m_PEntity->GetRangedWeaponDmg() || m_initialDelay != m_PEntity->GetRangedWeaponDelay(false))
             {
                 if (auto PChar = dynamic_cast<CCharEntity*>(m_PEntity))

@@ -98,7 +98,7 @@ public:
     const int8* getName() const;
     void        setName(int8* name);
 
-    uint8  m_Aoe;               // не используется
+    uint8 m_Aoe; // не используется
 
 private:
     uint16 m_ID;

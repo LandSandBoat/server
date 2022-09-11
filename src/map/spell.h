@@ -230,7 +230,7 @@ enum SPELLFLAG
     SPELLFLAG_NONE            = 0x00,
     SPELLFLAG_HIT_ALL         = 0x01, // Hit all targets in range regardless of party
     SPELLFLAG_WIPE_SHADOWS    = 0x02, // Wipe shadows even if single target and miss/resist (example: "Maiden's Virelai")
-    SPELLFLAG_IGNORE_SHADOWS  = 0x04,  // Ignore shadows and hit player anyways (example: Mobs "Death" spell)
+    SPELLFLAG_IGNORE_SHADOWS  = 0x04, // Ignore shadows and hit player anyways (example: Mobs "Death" spell)
     SPELLFLAG_ATTACKER_RADIUS = 0x08, // Center the AoE around the attacker; the default is the target.
 };
 
@@ -1138,7 +1138,7 @@ private:
     uint8       m_skillType{};
     float       m_range{};
     float       m_radius{};
-    uint16      m_coneAngle {};
+    uint16      m_coneAngle{};
     uint16      m_totalTargets{};
     uint16      m_mpCost{};                        // mpCost/itemId for ninjitsu tool
     uint8       m_job[MAX_JOBTYPE]{};              // job

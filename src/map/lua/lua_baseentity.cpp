@@ -8862,6 +8862,7 @@ void CLuaBaseEntity::addPartyEffect(sol::variadic_args va)
             PMember->StatusEffectContainer->AddStatusEffect(PEffect);
         }
     });
+
     // clang-format on
 }
 
@@ -8883,6 +8884,7 @@ bool CLuaBaseEntity::hasPartyEffect(uint16 effectid)
     CCharEntity* PEntity   = ((CCharEntity*)m_PBaseEntity);
     bool         hasEffect = true;
 
+    // clang-format off
     PEntity->ForParty([&](CBattleEntity* PMember)
     {
         if (PMember != nullptr && PEntity->loc.zone->GetID() == PMember->loc.zone->GetID())
@@ -8894,6 +8896,7 @@ bool CLuaBaseEntity::hasPartyEffect(uint16 effectid)
         }
     });
 
+    // clang-format on
     return hasEffect;
 }
 
@@ -8914,6 +8917,7 @@ void CLuaBaseEntity::removePartyEffect(uint16 effectid)
 
     CBattleEntity* PEntity = ((CBattleEntity*)m_PBaseEntity);
 
+    // clang-format off
     PEntity->ForParty([&](CBattleEntity* PMember)
     {
         if (PMember != nullptr && PEntity->loc.zone->GetID() == PMember->loc.zone->GetID())
@@ -8921,6 +8925,8 @@ void CLuaBaseEntity::removePartyEffect(uint16 effectid)
             PMember->StatusEffectContainer->DelStatusEffect(static_cast<EFFECT>(effectid));
         }
     });
+
+    // clang-format on
 }
 
 /************************************************************************
