@@ -24,5 +24,5 @@ function onTrigger(player)
         return
     end
 
-    player:PrintToPlayer(string.format("Your enmity against %s is ... CE = %u ... VE = %u", targ:getName(), targ:getCE(player), targ:getVE(player)))
+    player:PrintToPlayer(string.format("your enmity against %s is ... CE = %u ... VE = %u ... TH = %u", targ:getName(), targ:getCE(player), targ:getVE(player), targ:getTHlevel()))
 end
