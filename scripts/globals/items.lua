@@ -2308,6 +2308,7 @@ xi.items =
     JUSTICE_BADGE                   = 13093,
     FLOWER_NECKLACE                 = 13094,
     DOG_COLLAR                      = 13096,
+    SILVER_NAME_TAG                 = 13116,
     TIGER_STOLE                     = 13119,
     BEAST_COLLAR                    = 13121,
     SPECTACLES                      = 13128,
