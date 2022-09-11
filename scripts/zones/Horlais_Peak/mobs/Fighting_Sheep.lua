@@ -2,7 +2,7 @@
 -- Area: Horlais Peak
 --  Mob: Fighting Sheep
 -- BCNM: Hostile Herbivores
--- TODO: melee attacks cause knockback.
+-- Note: melee attacks cause knockback. This is handled as a mobskill substitution.
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------

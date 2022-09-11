@@ -13,21 +13,21 @@ local entity = {}
 entity.onTrigger = function(player, npc)
     local qItem =
     {
-        [xi.assaultUtil.mission.EXCAVATION_DUTY] =
+        [xi.assault.mission.EXCAVATION_DUTY] =
         {
             {
                 {itemid = xi.items.APPRAISAL_BOX,     droprate = 300},
                 {itemid = xi.items.APPRAISAL_EARRING, droprate = 700},
             },
         },
-        [xi.assaultUtil.mission.LEBROS_SUPPLIES] =
+        [xi.assault.mission.LEBROS_SUPPLIES] =
         {
             {
                 {itemid = xi.items.APPRAISAL_BOX,  droprate = 300},
                 {itemid = xi.items.APPRAISAL_CAPE, droprate = 700},
             },
         },
-        [xi.assaultUtil.mission.TROLL_FUGITIVES] =
+        [xi.assault.mission.TROLL_FUGITIVES] =
         {
             {
                 {itemid = xi.items.APPRAISAL_AXE, droprate = 300},
@@ -39,7 +39,7 @@ entity.onTrigger = function(player, npc)
     }
     local regItem =
     {
-        [xi.assaultUtil.mission.EXCAVATION_DUTY] =
+        [xi.assault.mission.EXCAVATION_DUTY] =
         {
             {
                 {itemid = xi.items.REMEDY, droprate = 900},
@@ -58,7 +58,7 @@ entity.onTrigger = function(player, npc)
                 {itemid = 0, droprate = 800},
             },
         },
-        [xi.assaultUtil.mission.LEBROS_SUPPLIES] =
+        [xi.assault.mission.LEBROS_SUPPLIES] =
         {
             {
                 {itemid = xi.items.REMEDY, droprate = 800},
@@ -73,7 +73,7 @@ entity.onTrigger = function(player, npc)
                 {itemid = 0, droprate = 900},
             },
         },
-        [xi.assaultUtil.mission.TROLL_FUGITIVES] =
+        [xi.assault.mission.TROLL_FUGITIVES] =
         {
             {
                 {itemid = xi.items.HI_POTION_III, droprate = 800},

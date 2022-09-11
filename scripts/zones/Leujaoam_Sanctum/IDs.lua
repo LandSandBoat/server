@@ -36,7 +36,7 @@ zones[xi.zone.LEUJAOAM_SANCTUM] =
 
     mob =
     {
-        [xi.assaultUtil.mission.LEUJAOAM_CLEANSING] =
+        [xi.assault.mission.LEUJAOAM_CLEANSING] =
         {
             MOBS_START =
             {
@@ -44,7 +44,7 @@ zones[xi.zone.LEUJAOAM_SANCTUM] =
                 17059849, 17059850, 17059851, 17059852, 17059853, 17059854, 17059855,
             },
         },
-        [xi.assaultUtil.mission.ORICHALCUM_SURVEY] =
+        [xi.assault.mission.ORICHALCUM_SURVEY] =
         {
             MOBS_START =
             {
