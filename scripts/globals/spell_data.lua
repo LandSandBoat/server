@@ -9,10 +9,11 @@ xi.magic = xi.magic or {}
 
 xi.magic.spellFlag =
 {
-    NONE           = 0x00,
-    HIT_ALL        = 0x01, -- Hit all targets in range regardless of party
-    WIPE_SHADOWS   = 0x02, -- Wipe shadows even if single target and miss/resist (example: "Maiden's Virelai")
-    IGNORE_SHADOWS = 0x04  -- Ignore shadows and hit player anyways (example: Mobs "Death" spell)
+    NONE            = 0x00,
+    HIT_ALL         = 0x01, -- Hit all targets in range regardless of party
+    WIPE_SHADOWS    = 0x02, -- Wipe shadows even if single target and miss/resist (example: "Maiden's Virelai")
+    IGNORE_SHADOWS  = 0x04, -- Ignore shadows and hit player anyways (example: Mobs "Death" spell)
+    ATTACKER_RADIUS = 0x08, -- Center the AoE around the attacker; the default is the target.
 }
 
 -----------------------------------

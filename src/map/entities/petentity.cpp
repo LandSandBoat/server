@@ -291,7 +291,7 @@ void CPetEntity::OnPetSkillFinished(CPetSkillState& state, action_t& action)
         else if (PSkill->isConal())
         {
             float angle = 45.0f;
-            PAI->TargetFind->findWithinCone(PTarget, distance, angle, findFlags);
+            PAI->TargetFind->findWithinCone(PTarget, AOE_RADIUS::ATTACKER, distance, angle, findFlags);
         }
         else
         {
