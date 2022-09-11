@@ -107,7 +107,6 @@ INSERT INTO `mob_skill_lists` VALUES ('Avatar-Fenrir',36,834);
 INSERT INTO `mob_skill_lists` VALUES ('Avatar-Fenrir',36,835);
 INSERT INTO `mob_skill_lists` VALUES ('Avatar-Fenrir',36,836);
 INSERT INTO `mob_skill_lists` VALUES ('Avatar-Fenrir',36,837);
-INSERT INTO `mob_skill_lists` VALUES ('Avatar-Fenrir',36,838);
 INSERT INTO `mob_skill_lists` VALUES ('Avatar-Garuda',37,867);
 INSERT INTO `mob_skill_lists` VALUES ('Avatar-Garuda',37,868);
 INSERT INTO `mob_skill_lists` VALUES ('Avatar-Garuda',37,869);
