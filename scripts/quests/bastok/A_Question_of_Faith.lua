@@ -37,7 +37,7 @@ quest.sections =
             onEventFinish =
             {
                 [875] = function(player, csid, option, npc)
-                        quest:begin(player)
+                    quest:begin(player)
                 end,
             },
         },
@@ -54,10 +54,10 @@ quest.sections =
             ['Virnage'] =
             {
                 onTrigger = function(player, npc)
-                    if not player:hasKeyItem(xi.ki.DAWN_TALISMAN) and quest.getVar(player, 'Prog') == 0 then
-                        quest.progressEvent(239)
-                    elseif quest.getVar(player, 'Prog') == 1 then
-                        quest.progressEvent(241)
+                    if not player:hasKeyItem(xi.ki.DAWN_TALISMAN) and quest:getVar(player, 'Prog') == 0 then
+                        return quest:progressEvent(239)
+                    elseif quest:getVar(player, 'Prog') == 1 then
+                        return quest:progressEvent(241)
                     end
                 end,
             },
@@ -72,7 +72,8 @@ quest.sections =
 
                 [241] = function(player, csid, option, npc)
                     if option == 0 then
-                        quest.complete(player)
+                        player:addFame(xi.quest.fame_area.BASTOK, 50)
+                        quest:complete(player)
                     end
                 end,
             },
@@ -88,7 +89,7 @@ quest.sections =
                         npc:messageText(npc, 7746)
                         SpawnMob(16822456):updateClaim(player)
                     elseif not GetMobByID(16822456):isAlive() then
-                        quest.progressEvent(6, 1)
+                        return quest:progressEvent(6, 1)
                     end
                 end,
             },
@@ -98,7 +99,7 @@ quest.sections =
                 [6] = function(player, csid, option, npc)
                     if option == 1 then
                         player:delKeyItem(xi.ki.DAWN_TALISMAN)
-                        quest.setVar(player, 'Prog', 1)
+                        quest:setVar(player, 'Prog', 1)
                     end
                 end,
             },

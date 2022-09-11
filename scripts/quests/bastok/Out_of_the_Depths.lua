@@ -203,6 +203,7 @@ quest.sections =
             onEventFinish =
             {
                 [238] = function(player, csid, option, npc)
+                    player:addFame(xi.quest.fame_area.BASTOK, 80)
                     quest:complete(player)
                 end,
             },
