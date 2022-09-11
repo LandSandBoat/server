@@ -83,6 +83,7 @@ public:
     void checkAction(time_point tick);
 
     void handleAction(queueAction_t& action);
+    void clearQueue();
 
     bool isEmpty();
 

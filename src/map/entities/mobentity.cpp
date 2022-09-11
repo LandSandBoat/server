@@ -1642,6 +1642,7 @@ void CMobEntity::OnDespawn(CDespawnState& /*unused*/)
     FadeOut();
     PAI->Internal_Respawn(std::chrono::milliseconds(m_RespawnTime));
     luautils::OnMobDespawn(this);
+    PAI->ClearActionQueue();
     //#event despawn
     PAI->EventHandler.triggerListener("DESPAWN", CLuaBaseEntity(this));
 }
