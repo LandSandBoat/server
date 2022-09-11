@@ -31,56 +31,62 @@ quest.sections =
                 player:getFameLevel(xi.quest.fame_area.BASTOK) >= 2
         end,
 
-        ['Qiji'] = quest:progressEvent(123),
-
-        onEventFinish =
+        [xi.zone.PORT_BASTOK] =
         {
-            [123] = function(player, csid, option, npc)
-                quest:begin(player)
-            end,
+            ['Qiji'] = quest:progressEvent(123),
+
+            onEventFinish =
+            {
+                [123] = function(player, csid, option, npc)
+                    quest:begin(player)
+                end,
+            },
         },
     },
 
     {
         check = function(player, status, vars)
-            return status >= QUEST_ACCEPTED
+            return status == QUEST_ACCEPTED
         end,
 
-        ['Qiji'] =
+        [xi.zone.PORT_BASTOK] =
         {
-            onTrade = function(player, npc, trade)
-                if npcUtil.tradeHasExactly(trade, xi.items.BRASS_HAIRPIN) then
-                    return quest:event(124)
-                end
-            end,
+            ['Qiji'] =
+            {
+                onTrade = function(player, npc, trade)
+                    if npcUtil.tradeHasExactly(trade, xi.items.BRASS_HAIRPIN) then
+                        return quest:event(124)
+                    end
+                end,
 
-            onTrigger = function(player, npc)
-                if quest:getVar(player, 'Prog') == 1 then
-                    return quest:progressEvent(126)
-                end
-            end,
-        },
+                onTrigger = function(player, npc)
+                    if quest:getVar(player, 'Prog') == 1 then
+                        return quest:progressEvent(126)
+                    end
+                end,
+            },
 
-        ['Romilda'] =
-        {
-            onTrade = function(player, npc, trade)
-                if npcUtil.tradeHasExactly(trade, xi.items.BRASS_HAIRPIN) then
-                    return quest:progressEvent(125)
-                end
-            end,
-        },
+            ['Romilda'] =
+            {
+                onTrade = function(player, npc, trade)
+                    if npcUtil.tradeHasExactly(trade, xi.items.BRASS_HAIRPIN) then
+                        return quest:progressEvent(125)
+                    end
+                end,
+            },
 
-        onEventFinish =
-        {
-            [125] = function(player, csid, option, npc)
-                player:confirmTrade()
+            onEventFinish =
+            {
+                [125] = function(player, csid, option, npc)
+                    player:confirmTrade()
 
-                quest:setVar(player, 'Prog', 1)
-            end,
+                    quest:setVar(player, 'Prog', 1)
+                end,
 
-            [126] = function(player, csid, option, npc)
-                quest:complete(player)
-            end,
+                [126] = function(player, csid, option, npc)
+                    quest:complete(player)
+                end,
+            },
         },
     },
 }

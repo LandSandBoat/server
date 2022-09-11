@@ -2288,6 +2288,7 @@ xi.items =
     SEIRYUS_KOTE                    = 12690,
     LEATHER_GLOVES                  = 12696,
     LIZARD_GLOVES                   = 12697,
+    COTTON_GLOVES                   = 12721,
     PERLE_MOUFLES                   = 12745,
     AURORE_GLOVES                   = 12746,
     TEAL_CUFFS                      = 12747,
