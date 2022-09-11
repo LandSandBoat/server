@@ -66,11 +66,13 @@ hnmSystem:addOverride("xi.zones.Dragons_Aery.Zone.onInitialize", function(zone)
 end)
 
 hnmSystem:addOverride("xi.zones.Dragons_Aery.mobs.Fafnir.onMobInitialize", function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 0)
     SetDropRate(805, 1526, 100) -- wyrm beard 10%
     SetDropRate(805, 3340, 0)   -- do not drop cup_of_sweet_tea
 end)
 
 hnmSystem:addOverride("xi.zones.Dragons_Aery.mobs.Nidhogg.onMobInitialize", function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 0)
     SetDropRate(1781, 1526, 1000) -- wyrm beard 100%
 end)
 
@@ -156,11 +158,13 @@ hnmSystem:addOverride("xi.zones.Valley_of_Sorrows.Zone.onInitialize", function(z
 end)
 
 hnmSystem:addOverride("xi.zones.Valley_of_Sorrows.mobs.Adamantoise.onMobInitialize", function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 0)
     SetDropRate(21, 1525, 100) -- adamantoise egg 10%
     SetDropRate(21, 3344, 0)   -- do not drop clump_of_red_pondweed
 end)
 
 hnmSystem:addOverride("xi.zones.Valley_of_Sorrows.mobs.Aspidochelone.onMobInitialize", function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 0)
     SetDropRate(183, 1525, 1000) -- adamantoise egg 10%
 end)
 
@@ -246,11 +250,13 @@ hnmSystem:addOverride("xi.zones.Behemoths_Dominion.Zone.onInitialize", function(
 end)
 
 hnmSystem:addOverride("xi.zones.Behemoths_Dominion.mobs.Behemoth.onMobInitialize", function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 0)
     SetDropRate(251, 1527, 100) -- behemoth tongue 10%
     SetDropRate(251, 3342, 0) -- do not drop savory_shank
 end)
 
 hnmSystem:addOverride("xi.zones.Behemoths_Dominion.mobs.King_Behemoth.onMobInitialize", function(mob)
+    mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 0)
     SetDropRate(1450, 1527, 1000) -- behemoth tongue 10%
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:setMobMod(xi.mobMod.MAGIC_COOL, 60)

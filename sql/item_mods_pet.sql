@@ -362,6 +362,9 @@ INSERT INTO `item_mods_pet` VALUES (17961,1,10,0); -- All Pets - DEF: 10
 -- Ravanas Axe
 INSERT INTO `item_mods_pet` VALUES (18547,370,3,0); -- All Pets - REGEN: 3
 
+-- Astral Staff
+INSERT INTO `item_mods_pet` VALUES (18584,1,10,1); -- Avatar - DEF: 10
+
 -- Adaman Sainti
 INSERT INTO `item_mods_pet` VALUES (18745,3,1,3); -- Automaton - HPP: 1
 
