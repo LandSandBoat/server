@@ -34,6 +34,7 @@
 #include "../ai/states/weaponskill_state.h"
 #include "../attack.h"
 #include "../attackround.h"
+#include "../enmity_container.h"
 #include "../items/item_weapon.h"
 #include "../job_points.h"
 #include "../lua/luautils.h"
@@ -2085,9 +2086,16 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                         charutils::TrySkillUP((CCharEntity*)PTarget, SKILL_PARRY, GetMLevel());
                     }
                 }
+
                 if (!attack.IsCountered() && !attack.IsParried())
                 {
                     charutils::TrySkillUP((CCharEntity*)PTarget, SKILL_EVASION, GetMLevel());
+                }
+
+                if (PTarget->objtype == TYPE_MOB && this->objtype == TYPE_PC)
+                {
+                    // 1 ce for a missed attack for TH application
+                    ((CMobEntity*)PTarget)->PEnmityContainer->UpdateEnmity(this, 1, 0);
                 }
             }
         }

@@ -61,6 +61,7 @@
 #include "../battlefield.h"
 #include "../char_recast_container.h"
 #include "../conquest_system.h"
+#include "../enmity_container.h"
 #include "../item_container.h"
 #include "../items/item_furnishing.h"
 #include "../items/item_usable.h"
@@ -86,6 +87,7 @@
 #include "../weapon_skill.h"
 #include "automatonentity.h"
 #include "charentity.h"
+#include "mobentity.h"
 #include "trustentity.h"
 
 CCharEntity::CCharEntity()
@@ -1763,6 +1765,11 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
         }
 
         StatusEffectContainer->DelStatusEffect(EFFECT_SANGE);
+    }
+    else if (!hitOccured && PTarget->objtype == TYPE_MOB)
+    {
+        // 1 ce for a missed attack for TH application
+        ((CMobEntity*)PTarget)->PEnmityContainer->UpdateEnmity((CBattleEntity*)this, 1, 0);
     }
 
     battleutils::ClaimMob(PTarget, this);
