@@ -5330,6 +5330,9 @@ INSERT INTO `mob_spell_lists` VALUES ('Ziryu',5056,191,1,255);-- stonega_iii
 INSERT INTO `mob_spell_lists` VALUES ('Ziryu',5056,210,1,255); -- Quake
 INSERT INTO `mob_spell_lists` VALUES ('Ziryu',5056,54,1,255); -- Stoneskin
 
+-- Koenigstiger (5057)
+INSERT INTO `mob_spell_lists` VALUES ('Koenigstiger',5057,366,1,255);-- graviga
+
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

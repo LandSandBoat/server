@@ -12,6 +12,7 @@ require("scripts/globals/titles")
 require("scripts/globals/keyitems")
 require("scripts/globals/shop")
 require("scripts/globals/quests")
+require("scripts/globals/npc_util")
 -----------------------------------
 local entity = {}
 
@@ -47,12 +48,12 @@ entity.onTrigger = function(player, npc)
         rubbishDay == QUEST_AVAILABLE and
         player:getCharVar("RubbishDay_day") ~= VanadielDayOfTheYear()
     then
-        -- prog = player:getCharVar("RubbishDay_prog")
-        -- if prog <= 2 then
-        --     player:startEvent(199) -- Required to get compatibility 3x on 3 diff game days before quest is kicked off
-        -- elseif prog == 3 then
-        player:startEvent(198) -- Start quest "Rubbish Day" with option
-        -- end
+        local prog = player:getCharVar("RubbishDay_prog")
+        if prog <= 2 then
+            player:startEvent(199) -- Required to get compatibility 3x on 3 diff game days before quest is kicked off
+        elseif prog == 3 then
+            player:startEvent(198) -- Start quest "Rubbish Day" with option
+        end
 
     elseif
         collectTarutCards == QUEST_COMPLETED and
@@ -107,6 +108,39 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)
+    if csid == 199 then
+        if option == "Chululu" then
+            player:updateEvent(0, 0, 1)
+        elseif option == "Kurou-Morou" then
+            player:updateEvent(0, 0, 2)
+        elseif option == player:getName() then
+            player:updateEvent(1, 1)
+        elseif option == 42 then
+            local rand = math.random(1, 6)
+            player:setLocalVar("validFortune", 1)
+            if rand == 1 then -- perfect fit
+                player:updateEvent(4, 3, 5, 8, 2, 2, 0, 0)
+            elseif rand == 2 then -- highly compatible
+                player:updateEvent(4, 3, 5, 8, 1, 2, 0, 0)
+            elseif rand == 3 then -- compatible
+                player:updateEvent(2, 1, 0, 0, 0, 1)
+            elseif rand == 4 then -- not bad
+                player:updateEvent(3, 1, 0, 0, 0, 1)
+            elseif rand == 5 then -- zero compatible
+                player:updateEvent(8, 3, 1, 1, 1, 2, 1, 0)
+            else -- not very compatible
+                player:updateEvent(8, 3, 5, 8, 2, 1, 1, 0)
+            end
+        elseif GetPlayerByName(option) and type(option) == "string" then
+            if GetNPCByID(ID.npc.CHULULU):checkDistance(GetPlayerByName(option)) >= 20 then
+                player:updateEvent(1, 0, 0)
+            else
+                player:updateEvent(16, 42, 0)
+            end
+        else
+            player:updateEvent(1, 0, 0)
+        end
+    end
 end
 
 entity.onEventFinish = function(player, csid, option)
@@ -128,7 +162,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, card)
         else
             player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COLLECT_TARUT_CARDS)
-            player:addItem(card, 5)
+            npcUtil.giveItem(player, {{card, 5}})
             player:messageSpecial(ID.text.ITEM_OBTAINED, card)
         end
 
@@ -139,8 +173,12 @@ entity.onEventFinish = function(player, csid, option)
         player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COLLECT_TARUT_CARDS)
 
     elseif csid == 199 and option == 0 then
-        player:incrementCharVar("RubbishDay_prog", 1)
-        player:setCharVar("RubbishDay_day", VanadielDayOfTheYear()) -- new vanadiel day
+        local valid = player:getLocalVar("validFortune")
+        if valid == 1 then
+            player:setLocalVar("validFortune", 0)
+            player:incrementCharVar("RubbishDay_prog", 1)
+            player:setCharVar("RubbishDay_day", VanadielDayOfTheYear()) -- new vanadiel day
+        end
 
     elseif csid == 198 and option == 0 then
         player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RUBBISH_DAY)

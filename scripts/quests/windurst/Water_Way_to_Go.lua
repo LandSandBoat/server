@@ -107,6 +107,7 @@ quest.sections =
                 [355] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         -- Note: Message display for gil reward is handled by the event
+                        player:confirmTrade()
                         player:addGil(900)
                         player:setLocalVar('Quest[2][17]mustZone', 1)
                         quest:setMustZone(player)
@@ -119,12 +120,87 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_COMPLETED and
-                quest:getMustZone(player)
+            not quest:getMustZone(player)
         end,
 
         [xi.zone.WINDURST_WATERS] =
         {
-            ['Ohbiru-Dohbiru'] = quest:progressEvent(356, 0, xi.items.CANTEEN_OF_GIDDEUS_WATER)
+            ['Ohbiru-Dohbiru'] =
+            {
+                onTrade = function(player, npc, trade)
+                    if npcUtil.tradeHasExactly(trade, xi.items.CANTEEN_OF_GIDDEUS_WATER) and quest:getVar(player, "waterRepeat") == 1 then
+                        return quest:progressEvent(355, 900)
+                    end
+                end,
+
+                onTrigger = function(player, npc)
+                    print(quest:getVar(player, "waterRepeat"))
+                    if
+                        not player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_A_GOLEM) ~= QUEST_ACCEPTED and
+                        quest:getVar(player, "waterRepeat") == 0
+                    then
+                        return quest:progressEvent(352, 0, xi.items.CANTEEN_OF_GIDDEUS_WATER)
+                    elseif
+                        quest:getVar(player, "waterRepeat") == 1
+                    then
+                        if
+                            not player:findItem(xi.items.RHINOSTERY_CANTEEN) and
+                            not player:findItem(xi.items.CANTEEN_OF_GIDDEUS_WATER)
+                        then
+                            return quest:progressEvent(354)
+                        else
+                            return quest:progressEvent(353)
+                        end
+                    else
+                        return quest:progressEvent(356, 0, xi.items.CANTEEN_OF_GIDDEUS_WATER)
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [352] = function(player, csid, option, npc)
+                    if
+                        option == 0 and
+                        npcUtil.giveItem(player, xi.items.RHINOSTERY_CANTEEN)
+                    then
+                        quest:setVar(player, "waterRepeat", 1)
+                    end
+                end,
+
+                [354] = function(player, csid, option, npc)
+                    npcUtil.giveItem(player, xi.items.RHINOSTERY_CANTEEN)
+                end,
+
+                [355] = function(player, csid, option, npc)
+                    -- Note: Message display for gil reward is handled by the event
+                    player:confirmTrade()
+                    player:addGil(900)
+                    quest:setMustZone(player)
+                    quest:setVar(player, "waterRepeat", 0)
+                end,
+            },
+        },
+
+        [xi.zone.GIDDEUS] =
+        {
+            ['Giddeus_Spring'] =
+            {
+                onTrade = function(player, npc, trade)
+                    if npcUtil.tradeHasExactly(trade, xi.items.RHINOSTERY_CANTEEN) and quest:getVar(player, "waterRepeat") == 1 then
+                        return quest:progressEvent(55)
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [55] = function(player, csid, option, npc)
+                    if npcUtil.giveItem(player, xi.items.CANTEEN_OF_GIDDEUS_WATER) then
+                        player:confirmTrade()
+                    end
+                end,
+            },
         },
     },
 }

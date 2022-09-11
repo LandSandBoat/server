@@ -2322,6 +2322,7 @@ xi.items =
     WOOL_HAT                        = 12474,
     BRASS_HAIRPIN                   = 12497,
     MONKS_HEADGEAR                  = 12501,
+    BONE_HAIRPIN                    = 12505,
     FIGHTERS_MASK                   = 12511,
     TEMPLE_CROWN                    = 12512,
     WARLOCKS_CHAPEAU                = 12513,

@@ -66,6 +66,7 @@ entity.onTrigger = function(player, npc)
     local moonlitPath = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_MOONLIT_PATH)
     local tuningIn = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TUNING_IN)
     local tuningOut = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TUNING_OUT)
+    local tuningOutWait = player:getCharVar("tuningIn_date")
     local turmoil = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
 
     -- Tuning In
@@ -76,7 +77,7 @@ entity.onTrigger = function(player, npc)
         player:startEvent(884, 0, 1696, 1697, 1698) -- Magicked Steel Ingot, Spruce Lumber, Extra-fine File
 
     -- Tuning Out
-    elseif tuningIn == QUEST_COMPLETED and tuningOut == QUEST_AVAILABLE then
+    elseif tuningIn == QUEST_COMPLETED and tuningOut == QUEST_AVAILABLE and os.time() > tuningOutWait then
         player:startEvent(888) -- Starting dialogue
 
     elseif tuningOut == QUEST_ACCEPTED and player:getCharVar("TuningOut_Progress") == 8 then
@@ -196,6 +197,7 @@ entity.onEventFinish = function(player, csid, option)
         title = xi.title.FINE_TUNER,
     }) then
         player:tradeComplete()
+        player:setCharVar("tuningIn_date", getMidnight())
 
     -- Tuning Out
     elseif csid == 888 then
