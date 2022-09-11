@@ -1,9 +1,11 @@
 -----------------------------------
 -- Area: La Theine Plateau
 --  NPC:??? (qm3)
--- Involved in Quest: I Can Hear A Rainbow
+-- Involved in Quest: I Can Hear A Rainbow, Waking the Beast
 -----------------------------------
 local ID = require("scripts/zones/La_Theine_Plateau/IDs")
+require("scripts/globals/spell_data")
+require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/status")
@@ -29,7 +31,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 124) then
+    if csid == 124 then
         player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.I_CAN_HEAR_A_RAINBOW)
         player:addTitle(xi.title.RAINBOW_WEAVER)
         player:unlockJob(xi.job.SMN)
