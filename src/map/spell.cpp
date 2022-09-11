@@ -29,6 +29,7 @@
 #include "map.h"
 #include "spell.h"
 #include "status_effect_container.h"
+#include "utils/battleutils.h"
 #include "utils/blueutils.h"
 
 CSpell::CSpell(SpellID id)
