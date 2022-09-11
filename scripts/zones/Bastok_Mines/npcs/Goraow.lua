@@ -24,20 +24,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local wildcatBastok = player:getCharVar("WildcatBastok")
-
     if
-        player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
-        not utils.mask.getBit(wildcatBastok, 16)
-    then
-        player:startEvent(506)
-
-    elseif
         player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.VENGEFUL_WRATH) == QUEST_AVAILABLE and
         player:getFameLevel(xi.quest.fame_area.BASTOK) >= 3
     then
         player:startEvent(106)
-
     else
         player:startEvent(105)
     end
@@ -49,7 +40,6 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 106 then
         player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.VENGEFUL_WRATH)
-
     elseif csid == 107 then
         if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.VENGEFUL_WRATH) == QUEST_ACCEPTED then
             player:addTitle(xi.title.AVENGER)
@@ -62,9 +52,6 @@ entity.onEventFinish = function(player, csid, option)
         player:addGil(xi.settings.main.GIL_RATE * 900)
         player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 900)
         player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.VENGEFUL_WRATH) -- for save fame
-
-    elseif csid == 506 then
-        player:setCharVar("WildcatBastok", utils.mask.setBit(player:getCharVar("WildcatBastok"), 16, true))
     end
 end
 

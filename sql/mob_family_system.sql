@@ -159,6 +159,7 @@ INSERT INTO `mob_family_system` VALUES (107,'Eruca',63,'Crawler',20,'Vermin',1,4
 INSERT INTO `mob_family_system` VALUES (108,'Eruca',63,'Crawler',20,'Vermin',1,40,92,120,1,3,4,3,3,6,5,1,5,1,3,1,258,1);
 INSERT INTO `mob_family_system` VALUES (109,'Euvhi',64,'Euvhi',15,'Luminian',0,40,100,140,1,3,4,4,1,5,4,1,3,1,3,0,2,0);
 INSERT INTO `mob_family_system` VALUES (110,'Evil_Weapon',6,'Evil_Weapon',3,'Arcana',0,40,105,120,1,3,4,3,3,3,4,1,5,1,3,3,34,0);
+
 INSERT INTO `mob_family_system` VALUES (112,'Flan',65,'Flan',1,'Amorph',1,40,70,140,5,4,4,4,3,5,3,1,3,1,3,6,129,0);
 INSERT INTO `mob_family_system` VALUES (113,'Fly',66,'Fly',20,'Vermin',0,40,92,90,5,4,4,3,4,4,4,1,3,1,3,3,2,1);
 INSERT INTO `mob_family_system` VALUES (114,'Flytrap',67,'Flytrap',17,'Plantoid',0,40,90,90,4,4,4,4,4,4,4,1,3,1,3,3,2,1);

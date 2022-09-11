@@ -687,9 +687,16 @@ namespace spell
                 return true;
             }
 
-            if (PCaster->objtype == TYPE_PC && spell->getSpellGroup() == SPELLGROUP_TRUST)
+            if (PCaster->objtype == TYPE_PC)
             {
-                return true; // every PC can use trusts
+                if (spell->getSpellGroup() == SPELLGROUP_TRUST)
+                {
+                    return true; // every PC can use trusts
+                }
+                else if (luautils::OnCanUseSpell(PCaster, spell))
+                {
+                    return true;
+                }
             }
 
             if (PCaster->GetMLevel() >= JobMLVL)

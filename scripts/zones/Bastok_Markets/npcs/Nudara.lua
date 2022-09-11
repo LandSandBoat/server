@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Bastok Markets
 --  NPC: Nudara
--- Standard Info NPC
 -----------------------------------
 local entity = {}
 
