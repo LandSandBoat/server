@@ -110,7 +110,6 @@ local function spawnQueenJelly(bfNum,target)
         end)
 
         for i = 1, 8 do
-            local princess = GetMobByID(ID.royalJellyQueens[bfNum]+i)
             DespawnMob(ID.royalJellyQueens[bfNum]+i)
         end
     end
