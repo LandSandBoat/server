@@ -46,7 +46,6 @@ end
 entity.onMobSpawn = function(mob)
     mob:setSpeed(2)
     mob:setMod(xi.mod.REGEN, 3)
-    mob:setUnkillable(false)
     mob:setLocalVar('mobElement', math.random(1,8))
     mob:addMod(mevaList[mob:getLocalVar('mobElement')][1], -250)
     mob:addMod(mevaList[mob:getLocalVar('mobElement')][2], 1000)
@@ -112,7 +111,6 @@ local function spawnQueenJelly(bfNum,target)
 
         for i = 1, 8 do
             local princess = GetMobByID(ID.royalJellyQueens[bfNum]+i)
-            princess:setUnkillable(false)
             DespawnMob(ID.royalJellyQueens[bfNum]+i)
         end
     end
@@ -139,7 +137,6 @@ entity.onMobFight = function(mob, target)
     mob:pathThrough(center, xi.path.flag.SCRIPT)
 
     if getDistanceFromCenter(bfNum,mob) <= 0.5 then
-        mob:setUnkillable(true)
         if not queen:isSpawned() and allJellysInCenter(bfNum) then
             spawnQueenJelly(bfNum, target)
         end
