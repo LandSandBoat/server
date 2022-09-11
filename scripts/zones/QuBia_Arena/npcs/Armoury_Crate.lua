@@ -350,10 +350,9 @@ local loot =
         },
         {
             {itemid =  4751, droprate =  200}, -- scroll_of_erase
-            {itemid =  4715, droprate =  200}, -- scroll_of_reprisal
             {itemid =  4868, droprate =  200}, -- scroll_of_dispel
             {itemid =  5070, droprate =  200}, -- scroll_of_magic_finale
-            {itemid =  4947, droprate =  200}, -- gscroll_of_utsusemi_nin_belt
+            {itemid =  4947, droprate =  200}, -- scroll_of_utsusemi_nin
         },
         {
             {itemid =     0, droprate =  775}, -- nothing

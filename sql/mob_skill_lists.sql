@@ -1762,7 +1762,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Goblin',373,1106);
 INSERT INTO `mob_skill_lists` VALUES ('Goblin',373,1107);
 INSERT INTO `mob_skill_lists` VALUES ('Goblin',373,1108);
 INSERT INTO `mob_skill_lists` VALUES ('Goblin',373,1109);
-INSERT INTO `mob_skill_lists` VALUES ('Fly',374,660);
+INSERT INTO `mob_skill_lists` VALUES ('Fly_VenomOnly',374,660); -- Venom
 INSERT INTO `mob_skill_lists` VALUES ('FlyDark',375,318);
 INSERT INTO `mob_skill_lists` VALUES ('FlyDark',375,659);
 INSERT INTO `mob_skill_lists` VALUES ('FlyDark',375,660);
@@ -1941,7 +1941,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Capricious_Cassie',411,725);
 INSERT INTO `mob_skill_lists` VALUES ('Capricious_Cassie',411,726);
 INSERT INTO `mob_skill_lists` VALUES ('Capricious_Cassie',411,727);
 INSERT INTO `mob_skill_lists` VALUES ('Capricious_Cassie',411,728);
-INSERT INTO `mob_skill_lists` VALUES ('Shooting_Fish',412,1865); -- knockback splashbreath
+INSERT INTO `mob_skill_lists` VALUES ('Shooting_Fish',412,313); -- knockback splashbreath
 INSERT INTO `mob_skill_lists` VALUES ('Cogitator',413,1242); -- empty cutter
 INSERT INTO `mob_skill_lists` VALUES ('Cogitator',413,1243); -- trinary tap
 INSERT INTO `mob_skill_lists` VALUES ('Cogitator',413,1251); -- trinary tap
