@@ -28,7 +28,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
             player:hasCompletedQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.TANGO_WITH_A_TRACKER) and
-            player:getCharVar("CONQUEST_REQUIEM") <= os.time()
+            quest:getVar(player, 'conquestRequiem') <= os.time()
         end,
 
         [xi.zone.TAVNAZIAN_SAFEHOLD] =
@@ -69,7 +69,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == QUEST_COMPLETED and
             not player:hasKeyItem(xi.ki.LETTER_FROM_THE_MITHRAN_TRACKERS) and
-            player:getCharVar("CONQUEST_REQUIEM") <= os.time()
+            quest:getVar(player, 'conquestRequiem') <= os.time()
         end,
 
         [xi.zone.TAVNAZIAN_SAFEHOLD] =
@@ -80,7 +80,7 @@ quest.sections =
             {
                 [579] = function(player, csid, option, npc)
                         -- "CONQUEST_REQUIEM" is reset if players lose battlefield
-                        player:setCharVar("CONQUEST_REQUIEM", getConquestTally())
+                        quest:setVar(player, 'conquestRequiem', getConquestTally())
                         npcUtil.giveKeyItem(player, xi.ki.LETTER_FROM_THE_MITHRAN_TRACKERS)
                 end,
             },
