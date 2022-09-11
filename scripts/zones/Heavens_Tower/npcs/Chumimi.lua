@@ -45,7 +45,7 @@ entity.onTrigger = function(player, npc)
     local mJob = player:getMainJob()
 
     if theThreeMagi == QUEST_AVAILABLE and mJob == xi.job.BLM and mLvl >= xi.settings.main.AF1_QUEST_LEVEL then
-        player:startEvent(260, 0, 613, 0, 0, 0, 1104) -- Start Quest "The Three Magi" --- NOTE: 5th parameter is "Meteorites" but he doesn't exist ---
+        player:startEvent(260, 0, 613, 0, 0, 582, 1104) -- Start Quest "The Three Magi"
     elseif theThreeMagi == QUEST_ACCEPTED then
         player:startEvent(261, 0, 0, 0, 0, 0, 1104) -- During Quest "The Three Magi"
     elseif
@@ -80,7 +80,7 @@ entity.onTrigger = function(player, npc)
         elseif rootProblemCS == 2 then
             player:startEvent(279)
         elseif rootProblemCS == 3 then
-            player:startEvent(281)
+            player:startEvent(281, 0, 182)
         end
     else
         player:startEvent(259) -- Standard dialog
