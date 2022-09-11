@@ -7024,6 +7024,28 @@ void CLuaBaseEntity::setMerits(uint8 numPoints)
 }
 
 /************************************************************************
+ *  Function: getSpentJobPoints()
+ *  Purpose : Returns the total value of all job points spent
+ *  Example : player:getSpentJobPoints()
+ *  Notes   :
+ ************************************************************************/
+uint16 CLuaBaseEntity::getSpentJobPoints()
+{
+    if (m_PBaseEntity->objtype == TYPE_PC)
+    {
+        CCharEntity* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+
+        if (PChar->GetMLevel() < 99) // account for Level Sync
+        {
+            return 0;
+        }
+        return PChar->PJobPoints->GetJobPointsSpent();
+    }
+
+    return 0;
+}
+
+/************************************************************************
  *  Function: getJobPointLevel()
  *  Purpose : Returns the current value a specific job point
  *  Example : player:getJobPointLevel(JP_MIGHTY_STRIKES_EFFECT)
@@ -14698,6 +14720,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getMeritCount", CLuaBaseEntity::getMeritCount);
     SOL_REGISTER("setMerits", CLuaBaseEntity::setMerits);
 
+    SOL_REGISTER("getSpentJobPoints", CLuaBaseEntity::getSpentJobPoints);
     SOL_REGISTER("getJobPointLevel", CLuaBaseEntity::getJobPointLevel);
     SOL_REGISTER("addCapacityPoints", CLuaBaseEntity::addCapacityPoints);
     SOL_REGISTER("setCapacityPoints", CLuaBaseEntity::setCapacityPoints);

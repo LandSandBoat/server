@@ -285,6 +285,8 @@ namespace luautils
     int32 OnUseAbility(CBattleEntity* PUser, CBattleEntity* PTarget, CAbility* PAbility, action_t* action);                                                                                     // triggers when job ability is used
     int32 OnSteal(CBattleEntity* PChar, CBattleEntity* PTarget, CAbility* PAbility, action_t* action);
 
+    bool OnCanUseSpell(CBattleEntity* PChar, CSpell* Spell); // triggers when CanUseSpell is invoked on spell.cpp for PCs only
+
     auto GetCachedInstanceScript(uint16 instanceId) -> sol::table;
 
     int32 OnInstanceZoneIn(CCharEntity* PChar, CInstance* PInstance);            // triggered on zone in to instance
