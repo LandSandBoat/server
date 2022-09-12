@@ -22,6 +22,17 @@ mission.reward =
 
 mission.sections =
 {
+   {
+        check = function(player, currentMission, missionStatus, vars)
+            return currentMission == mission.missionId and missionStatus == 0
+        end,
+
+        [xi.zone.HALL_OF_THE_GODS] =
+        {
+            ['Shimmering_Circle'] = mission:progressEvent(3),
+        },
+    },
+
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId
