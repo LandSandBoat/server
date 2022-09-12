@@ -8,7 +8,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    xi.tutorial.onAuctionTrigger(player)
     player:sendMenu(3)
 end
 
