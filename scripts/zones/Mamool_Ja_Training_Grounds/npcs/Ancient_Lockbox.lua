@@ -32,7 +32,7 @@ entity.onTrigger = function(player,npc)
         [xi.assault.mission.IMPERIAL_AGENT_RESCUE] =
         {
             {
-                {itemid = xi.items.HI_POTION_II, droprate = 900},
+                {itemid = xi.items.HI_POTION_P2, droprate = 900},
                 {itemid =    0, droprate = 100},
             },
             {
