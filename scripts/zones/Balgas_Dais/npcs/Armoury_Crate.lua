@@ -178,11 +178,11 @@ local loot =
         },
         {
             {itemid = 0, droprate =  700}, -- nothing
-            {itemid = xi.iems.SPOOL_OF_SILK_THREAD, droprate =  300},
+            {itemid = xi.items.SPOOL_OF_SILK_THREAD, droprate =  300},
         },
         {
             {itemid = 0, droprate =  900}, -- nothing
-            {itemid = xi.iems.SPOOL_OF_SILK_THREAD, droprate =  100},
+            {itemid = xi.items.SPOOL_OF_SILK_THREAD, droprate =  100},
         },
         {
             {itemid = 0, droprate = 300}, -- nothing

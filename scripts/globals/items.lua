@@ -217,6 +217,7 @@ xi.items =
     DEATHSTONE                      = 812,
     ANGELSTONE                      = 813,
     SPHENE                          = 815,
+    SPOOL_OF_SILK_THREAD            = 816,
     SPOOL_OF_GOLD_THREAD            = 823,
     SQUARE_OF_LINEN_CLOTH           = 826,
     SQUARE_OF_WOOL_CLOTH            = 827,
