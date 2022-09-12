@@ -2,8 +2,6 @@
 -- Area: Eastern Adoulin
 --  NPC: Auction Counter
 -----------------------------------
-require("scripts/quests/tutorial")
------------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
