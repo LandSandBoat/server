@@ -9,7 +9,7 @@ require("scripts/globals/items")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    xi.assaultUtil.adjustMobLevel(mob)
+    xi.assault.adjustMobLevel(mob)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)

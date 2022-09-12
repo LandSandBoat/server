@@ -78,6 +78,7 @@ zones[xi.zone.LOWER_JEUNO] =
     },
     npc =
     {
+        CHULULU           = 17780771,
         VHANA_EHGAKLYWHA  = 17780880,
         STREETLAMP_OFFSET = 17780881,
     },

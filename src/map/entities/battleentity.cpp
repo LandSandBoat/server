@@ -34,6 +34,7 @@
 #include "../ai/states/weaponskill_state.h"
 #include "../attack.h"
 #include "../attackround.h"
+#include "../enmity_container.h"
 #include "../items/item_weapon.h"
 #include "../job_points.h"
 #include "../lua/luautils.h"
@@ -1595,20 +1596,22 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
     {
         flags |= FINDFLAGS_HIT_ALL;
     }
-    uint8 aoeType = battleutils::GetSpellAoEType(this, PSpell);
+    uint8      aoeType    = battleutils::GetSpellAoEType(this, PSpell);
+    AOE_RADIUS radiusType = (PSpell->getFlag() & SPELLFLAG_ATTACKER_RADIUS) != 0 ? AOE_RADIUS::ATTACKER : AOE_RADIUS::TARGET;
 
     if (aoeType == SPELLAOE_RADIAL)
     {
         float distance = spell::GetSpellRadius(PSpell, this);
 
-        PAI->TargetFind->findWithinArea(PActionTarget, AOE_RADIUS::TARGET, distance, flags);
+        PAI->TargetFind->findWithinArea(PActionTarget, radiusType, distance, flags);
     }
     else if (aoeType == SPELLAOE_CONAL)
     {
         // TODO: actual radius calculation
         float radius = spell::GetSpellRadius(PSpell, this);
+        float angle  = spell::GetSpellConeAngle(PSpell, this);
 
-        PAI->TargetFind->findWithinCone(PActionTarget, radius, 45, flags);
+        PAI->TargetFind->findWithinCone(PActionTarget, radiusType, radius, angle, flags);
     }
     else
     {
@@ -2085,9 +2088,16 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                         charutils::TrySkillUP((CCharEntity*)PTarget, SKILL_PARRY, GetMLevel());
                     }
                 }
+
                 if (!attack.IsCountered() && !attack.IsParried())
                 {
                     charutils::TrySkillUP((CCharEntity*)PTarget, SKILL_EVASION, GetMLevel());
+                }
+
+                if (PTarget->objtype == TYPE_MOB && this->objtype == TYPE_PC)
+                {
+                    // 1 ce for a missed attack for TH application
+                    ((CMobEntity*)PTarget)->PEnmityContainer->UpdateEnmity(this, 1, 0);
                 }
             }
         }

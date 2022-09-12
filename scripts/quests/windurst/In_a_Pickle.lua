@@ -76,7 +76,7 @@ quest.sections =
                     if quest:complete(player) then
                         player:confirmTrade()
                         player:needToZone(true)
-                        npcUtil.giveItem(player, xi.items.BRASS_HAIRPIN)
+                        npcUtil.giveItem(player, xi.items.BONE_HAIRPIN)
                         player:addFame(xi.quest.fame_area.WINDURST, 75)
                     end
                 end,

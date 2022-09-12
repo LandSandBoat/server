@@ -1,10 +1,11 @@
-local ID = require("scripts/zones/Bastok_Mines/IDs")
+local ID = require('scripts/zones/Bastok_Mines/IDs')
 
 return {
     ['Babenn']         = { event = 40 },
     ['Black_Mud']      = { event = 100 },
     ['Davyad']         = { event = 53 },
     ['Deadly_Spider']  = { event = 17 },
+    ['Detzo']          = { event = 30 },
     ['Echo_Hawk']      = { event = 13 },
     ['Elki']           = { event = 31 },
     ['Gumbah']         = { event = 52 },

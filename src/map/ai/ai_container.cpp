@@ -495,6 +495,11 @@ bool CAIContainer::QueueEmpty()
     return ActionQueue.isEmpty();
 }
 
+void CAIContainer::ClearActionQueue()
+{
+    ActionQueue.clearQueue();
+}
+
 bool CAIContainer::Internal_Despawn()
 {
     if (!IsCurrentState<CDespawnState>() && !IsCurrentState<CRespawnState>())

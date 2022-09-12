@@ -38,7 +38,7 @@ entity.onTrigger = function(player, npc)
     local astralCovenantCD = player:getCharVar("[ENM]AstralCovenant")
 
     if
-        player:getFameLevel(xi.quest.fame_area.JEUNO) >= 2 and
+        player:getFameLevel(xi.quest.fame_area.JEUNO) >= 3 and
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.TENSHODO_MEMBERSHIP) == QUEST_AVAILABLE
     then
         -- Start Quest: Tenshodo Membership

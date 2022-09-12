@@ -10,7 +10,10 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCharVar("sinHunting") == 4 then
+    local phase = VanadielMoonPhase()
+    local direction = VanadielMoonDirection()
+    if player:getCharVar("sinHunting") == 4 and
+    ((phase <= 90 and direction == 2) or (phase <= 95 and direction == 1)) then
         player:startEvent(13, 0, 1107)
     end
 end

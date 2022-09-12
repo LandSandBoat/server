@@ -787,10 +787,8 @@ void CStatusEffectContainer::DelStatusEffectsByFlag(uint32 flag, bool silent)
         {
             // If this is a Nightmare effect flag, it needs to be removed explictly by a cure
 
-            if (!(flag & EFFECTFLAG_DAMAGE
-                && PStatusEffect->GetStatusID() == EFFECT_SLEEP
-                && PStatusEffect->GetSubID() == (uint32)EFFECT_BIO))
-            RemoveStatusEffect(PStatusEffect, silent);
+            if (!(flag & EFFECTFLAG_DAMAGE && PStatusEffect->GetStatusID() == EFFECT_SLEEP && PStatusEffect->GetSubID() == (uint32)EFFECT_BIO))
+                RemoveStatusEffect(PStatusEffect, silent);
         }
     }
 }
@@ -1903,8 +1901,7 @@ void CStatusEffectContainer::TickRegen(time_point tick)
             {
                 DelStatusEffectSilent(EFFECT_HEALING);
                 m_POwner->takeDamage(damage);
-                if (!(m_POwner->StatusEffectContainer->GetStatusEffect(EFFECT_SLEEP)
-                    && m_POwner->StatusEffectContainer->GetStatusEffect(EFFECT_SLEEP)->GetSubID() == (uint32)EFFECT_BIO))
+                if (!(m_POwner->StatusEffectContainer->GetStatusEffect(EFFECT_SLEEP) && m_POwner->StatusEffectContainer->GetStatusEffect(EFFECT_SLEEP)->GetSubID() == (uint32)EFFECT_BIO))
                     WakeUp(); // dots dont wake up from nightmare
             }
         }
@@ -1977,6 +1974,18 @@ bool CStatusEffectContainer::HasPreventActionEffect()
 {
     return HasStatusEffect(
         { EFFECT_SLEEP, EFFECT_SLEEP_II, EFFECT_PETRIFICATION, EFFECT_LULLABY, EFFECT_CHARM, EFFECT_CHARM_II, EFFECT_PENALTY, EFFECT_STUN, EFFECT_TERROR });
+}
+
+uint16 CStatusEffectContainer::GetLevelRestrictionEffect()
+{
+    for (auto PEffect : m_StatusEffectSet)
+    {
+        if (PEffect->GetFlag() & EFFECTFLAG_LEVEL_RESTRICTION)
+        {
+            return PEffect->GetPower();
+        }
+    }
+    return 0;
 }
 
 uint16 CStatusEffectContainer::GetConfrontationEffect()

@@ -28,7 +28,7 @@ entity.onTrigger = function(player, npc)
         [5] = {KI = xi.ki.NYZUL_ISLE_ASSAULT_ORDERS, tele = 0x40, valid = 64, event = 125},
     }
 
-    if xi.assaultUtil.hasOrders(player) then
+    if xi.assault.hasOrders(player) then
         for k, v in pairs(assaultOrders) do
             if player:hasKeyItem(v.KI) then
                 validTeleport = bit.band(runicPortals, v.tele)
