@@ -45,15 +45,15 @@ zones[xi.zone.KING_RANPERRES_TOMB] =
             [17555667] = 17555668,
         },
         BARBASTELLE           = 17555721,
-        CHERRY_SAPLING_OFFSET = 17555853,
-        VRTRA                 = 17555890,
-        CORRUPTED_YORGOS      = 17555898,
-        CORRUPTED_SOFFEIL     = 17555899,
-        CORRUPTED_ULBRIG      = 17555900,
+        CHERRY_SAPLING_OFFSET = 17555748,
+        VRTRA                 = 17555763,
+        CORRUPTED_YORGOS      = 17555770,
+        CORRUPTED_SOFFEIL     = 17555771,
+        CORRUPTED_ULBRIG      = 17555772,
     },
     npc =
     {
-        TREASURE_CHEST = 17555955,
+        TREASURE_CHEST = 17555966,
     },
 }
 
