@@ -346,7 +346,7 @@ xi.garrison.data =
     {
         itemReq = xi.items.BUNNY_FANG_SACK,
         textRegion = 13,
-        levelCap = 99, -- Level_Restriction 99
+        levelCap = 99,
         mobBoss = "Goblin_Boss",
         xPos = -174,
         yPos = 8,
@@ -364,58 +364,230 @@ xi.garrison.data =
 -- Helpers
 -----------------------------------
 
-xi.garrison.onWin = function(player, npc)
+-- Add level restriction effect
+-- If a party member is KO'd during the Garrison, they're out.
+-- Any players that are KO'd lose their level restriction and will be unable to help afterward.
+-- Giving this the CONFRONTATION flag hooks into the target validation systme and stops outsiders
+-- participating, for mobs, allies, and players.
+local addLevelCap = function(entity, cap)
+    entity:addStatusEffectEx(
+        xi.effect.LEVEL_RESTRICTION,
+        xi.effect.LEVEL_RESTRICTION,
+        cap,
+        0,
+        0,
+        0,
+        0,
+        0,
+        xi.effectFlag.DEATH + xi.effectFlag.ON_ZONE + xi.effectFlag.CONFRONTATION)
 end
 
-xi.garrison.onLose = function(player, npc)
+local aggroGroups = function(group1, group2)
+    for _, id1 in pairs(group1) do
+        for _, id2 in pairs(group2) do
+            GetMobByID(id1):addEnmity(GetMobByID(id2), math.random(1, 5), math.random(1, 5))
+            GetMobByID(id2):addEnmity(GetMobByID(id1), math.random(1, 5), math.random(1, 5))
+        end
+    end
 end
 
-xi.garrison.onStatusRemove = function(player, npc)
+local spawnNPC = function(zone, x, y, z, rot, name, look)
+    local mob = zone:insertDynamicEntity({
+        objtype = xi.objType.MOB,
+        allegiance = xi.allegiance.PLAYER,
+        name = name,
+        x = x,
+        y = y,
+        z = z,
+        rotation = rot,
+        look = look,
+
+        -- TODO: Make relevant group and pool entries for NPCs
+        groupId = 35,
+        groupZoneId = xi.zone.NORTH_GUSTABERG,
+
+        releaseIdOnDeath = true,
+        specialSpawnAnimation = true,
+    })
+
+    -- Use the mob object as you normally would
+    mob:setSpawn(x, y, z, rot)
+    mob:setDropID(0)
+    mob:setRoamFlags(xi.roamFlag.SCRIPTED)
+
+    mob:spawn()
+
+    DisallowRespawn(mob:getID(), true)
+    mob:setSpeed(25)
+    mob:setAllegiance(1)
+
+    return mob
 end
 
-xi.garrison.mobsAlive = function(player)
-end
+local spawnNPCs = function(npc)
+    local zone     = npc:getZone()
+    local zoneData = xi.garrison.data[zone:getID()]
+    local xPos     = zoneData.xPos
+    local yPos     = zoneData.yPos
+    local zPos     = zoneData.zPos
+    local rot      = zoneData.rot
 
-xi.garrison.npcAlive = function(player)
-end
+    for i = 0, math.random(2, 6) do
+        local mob = spawnNPC(zone, xPos, yPos, zPos, rot, "Trader", "0x010006030010762076303A400650736000700000")
+        mob:setMobLevel(zoneData.levelCap - math.floor(zoneData.levelCap / 5))
+        addLevelCap(mob, zoneData.levelCap)
+        table.insert(zoneData.npcs, mob:getID())
 
-xi.garrison.despawnNPCs = function(npc)
-end
-
-xi.garrison.clearNPCs = function(zone)
-end
-
-xi.garrison.returnHome = function(mob)
-end
-
-xi.garrison.npcTableEmpty = function(zone)
+        if i == 6 then
+            xPos = zoneData.xPos - zoneData.xSecondLine
+            zPos = zoneData.zPos - zoneData.zSecondLine
+        elseif i == 12 then
+            xPos = zoneData.xPos - zoneData.xThirdLine
+            zPos = zoneData.zPos - zoneData.zThirdLine
+        else
+            xPos = xPos - zoneData.xChange
+            zPos = zPos - zoneData.zChange
+        end
+    end
 end
 
 -----------------------------------
 -- Main Functions
 -----------------------------------
 
-xi.garrison.tick = function(player, npc, wave, party)
+xi.garrison.tick = nil -- Prototype
+xi.garrison.tick = function(npc)
+    local zone     = npc:getZone()
+    local zoneData = xi.garrison.data[zone:getID()]
+
+    local allNPCsDead = true
+    for _, entityId in pairs(zoneData.npcs) do
+        local entity = GetMobByID(entityId)
+        if entity:isAlive() then
+            allNPCsDead = false
+        end
+    end
+
+    local allPlayersDead = true
+    for _, entityId in pairs(zoneData.players) do
+        local entity = GetPlayerByID(entityId)
+        -- TODO: Only check valid players
+        if entity:isAlive() then
+            allPlayersDead = false
+        end
+    end
+
+    local allMobsDead = true
+    for _, entityId in pairs(zoneData.mobs) do
+        local entity = GetMobByID(entityId)
+        if entity:isAlive() then
+            allMobsDead = false
+        end
+    end
+
+    -- TODO: Check to see if current wave is complete
+
+    -- TODO: Check to if all waves are completed
+
+    -- Repeatedly call
+    if
+        allNPCsDead or
+        allPlayersDead or
+        allMobsDead
+    then
+        -- TODO: Only check valid players
+        for _, entityId in pairs(zoneData.players) do
+            local entity = GetPlayerByID(entityId)
+            entity:delStatusEffect(xi.effect.LEVEL_RESTRICTION)
+        end
+
+        for _, entityId in pairs(zoneData.npcs) do
+            DespawnMob(entityId)
+        end
+
+        for _, entityId in pairs(zoneData.mobs) do
+            DespawnMob(entityId)
+        end
+    else
+        npc:timer(2000, function(npcArg)
+            xi.garrison.tick(npcArg)
+        end)
+    end
 end
 
-xi.garrison.spawnNPCs = function(npc, party)
-end
+xi.garrison.start = function(player, npc)
+    -- TODO: Write lockout information to player
 
-xi.garrison.spawnWave = function(player, npc, wave, party)
-end
+    local zone       = player:getZone()
+    local zoneData   = xi.garrison.data[zone:getID()]
+    zoneData.players = {}
+    zoneData.npcs    = {}
+    zoneData.mobs    = {}
 
-xi.garrison.start = function(player, npc, party)
+    for _, member in pairs(player:getAlliance()) do
+        addLevelCap(member, zoneData.levelCap)
+        table.insert(zoneData.players, member:getID())
+    end
+
+    spawnNPCs(npc)
+
+    -- TODO: There is a delay before the mobs spawn
+    -- There are always 8 mobs + 1 boss for Garrison, so we will look up the
+    -- boss's ID using their name and then subtract 8 to get the starting mob ID.
+    local firstMobID = zone:queryEntitiesByName(zoneData.mobBoss)[1]:getID() - 8
+    for id = firstMobID, firstMobID + math.random(1, 8) do
+        local mob = SpawnMob(id)
+        addLevelCap(mob, zoneData.levelCap)
+        mob:setRoamFlags(xi.roamFlag.SCRIPTED)
+        table.insert(zoneData.mobs, mob:getID())
+    end
+
+    -- Once the mobs are spawned, make them aggro whatever NPCs are already up
+    aggroGroups(zoneData.mobs, zoneData.npcs)
+
+    -- The starting NPC is the 'anchor' for all timers and logic for this Garrison. Even though they
+    xi.garrison.tick(npc)
 end
 
 xi.garrison.onTrade = function(player, npc, trade, guardNation)
+    if not xi.settings.main.ENABLE_GARRISON then
+        return false
+    end
+
+    -- TODO: If there is currently an active Garrison, bail out now
+
+    local zoneData = xi.garrison.data[player:getZoneID()]
+    if npcUtil.tradeHasExactly(trade, zoneData.itemReq) then
+        -- TODO: Check lockout
+
+        -- Start CS
+        player:startEvent(32753 + player:getNation())
+        player:setLocalVar("GARRISON_NPC", npc:getID())
+        return true
+    end
+
     return false
 end
 
--- Get dialog fron guard after winning or losing
 xi.garrison.onTrigger = function(player, npc)
+    if not xi.settings.main.ENABLE_GARRISON then
+        return false
+    end
+
     return false
 end
 
--- Zone tick Create NPC Tables if empty
-xi.garrison.buildNpcTable = function(zone)
+xi.garrison.onEventFinish = function(player, csid, option, guardNation, guardType, guardRegion)
+    if not xi.settings.main.ENABLE_GARRISON then
+        return false
+    end
+
+    if csid == 32753 + player:getNation() and option == 0 then
+        player:confirmTrade()
+        local npc = GetNPCByID(player:getLocalVar("GARRISON_NPC"))
+        xi.garrison.start(player, npc)
+        return true
+    end
+
+    return false
 end

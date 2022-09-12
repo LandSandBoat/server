@@ -13,6 +13,8 @@ return {
     ['Otto']         = { event = 20 },
     ['Panana']       = { event = 43 },
     ['Powhatan']     = { text = ID.text.POWHATAN_DIALOG_1 },
+    ['Qiji']         = { event = 33 },
+    ['Romilda']      = { event = 34 },
     ['Ronan']        = { event = 37 },
     ['Steel_Bones']  = { event = 29 },
 }

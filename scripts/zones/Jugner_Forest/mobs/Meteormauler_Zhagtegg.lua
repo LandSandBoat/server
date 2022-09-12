@@ -10,15 +10,16 @@ local entity = {}
 -- TODO: Implement better pathing systems for guards to follow master
 
 entity.onMobSpawn = function(mob)
+    local meteormauler = mob:getID()
     -- Takes half damage from all attacks
     mob:addMod(xi.mod.DMG,-5000)
 
     -- May spawn in a party with two other Orcs
-    if math.random(1,2) == 1 then
-        GetMobByID(ID.mob.METEORMAULER + 1):setSpawn(mob:getXPos()+2, mob:getYPos(), mob:getZPos())
-        GetMobByID(ID.mob.METEORMAULER + 2):setSpawn(mob:getXPos()+4, mob:getYPos(), mob:getZPos())
-        SpawnMob(ID.mob.METEORMAULER + 1)
-        SpawnMob(ID.mob.METEORMAULER + 2)
+    if math.random(3) == 2 then
+        GetMobByID(meteormauler + 1):setSpawn(mob:getXPos()+2, mob:getYPos(), mob:getZPos())
+        GetMobByID(meteormauler + 2):setSpawn(mob:getXPos()+4, mob:getYPos(), mob:getZPos())
+        SpawnMob(meteormauler + 1)
+        SpawnMob(meteormauler + 2)
     end
 end
 
@@ -46,10 +47,11 @@ entity.onMobDeath = function(mob, player, isKiller)
 end
 
 entity.onMobDespawn = function(mob)
-    UpdateNMSpawnPoint(mob:getID())
+    local meteormauler = mob:getID()
+    UpdateNMSpawnPoint(meteormauler)
     mob:setRespawnTime(75600 + math.random(0, 600)) -- 21 hours, 10 minute window
-    DespawnMob(ID.mob.METEORMAULER + 1)
-    DespawnMob(ID.mob.METEORMAULER + 2)
+    DespawnMob(meteormauler + 1)
+    DespawnMob(meteormauler + 2)
 end
 
 return entity
