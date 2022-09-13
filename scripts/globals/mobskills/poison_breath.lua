@@ -19,6 +19,7 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.POISON
     local power = math.ceil(mob:getMainLvl() / 5)
+    mob:lookAt(target:getPos())
 
     xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, power, 3, 60)
 
