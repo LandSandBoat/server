@@ -3,7 +3,11 @@
 -- Mob: Ingester
 -- ENM: You Are What You Eat
 -----------------------------------
-require("scripts/globals/status")
+mixins =
+{
+    require("scripts/mixins/families/empty_terroanima"),
+    require("scripts/mixins/families/empty")
+}
 -----------------------------------
 local entity = {}
 

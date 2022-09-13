@@ -2325,16 +2325,16 @@ INSERT INTO `mob_skill_lists` VALUES ('Gerjis',497,1322); -- gerjis_grip
 INSERT INTO `mob_skill_lists` VALUES ('Gerjis',497,1340); -- crossthrash
 -- 498: Cyranuce_M_Cutauleon
 -- 499 to 503: free
-INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,347);
-INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,419);
-INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,422);
-INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,441);
-INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,447);
-INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,457);
-INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,464);
-INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,471);
-INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,487);
-INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,540);
+INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,347); -- velocious blade
+INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,419); -- scission thrust
+INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,422); -- sonic blade
+INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,441); -- microquake
+INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,447); -- percussive foin
+INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,457); -- gravity wheel
+INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,464); -- psychomancy
+INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,471); -- mind wall
+INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,487); -- transmorgification
+INSERT INTO `mob_skill_lists` VALUES ('Mammet',503,540); -- tremorous tread
 INSERT INTO `mob_skill_lists` VALUES ('Demonic_Tiphia',700,334);
 INSERT INTO `mob_skill_lists` VALUES ('Demonic_Tiphia',700,335);
 INSERT INTO `mob_skill_lists` VALUES ('Demonic_Tiphia',700,336);

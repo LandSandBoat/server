@@ -3,6 +3,12 @@
 -- Mob: Cojitator
 -- ENM: Simulant
 -----------------------------------
+mixins =
+{
+    require("scripts/mixins/families/empty_terroanima"),
+    require("scripts/mixins/families/empty")
+}
+-----------------------------------
 local entity = {}
 
 entity.onMobEngaged = function(mob)
