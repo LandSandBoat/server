@@ -547,7 +547,6 @@ local function checkReqs(player, npc, bfid, registrant)
     local cop      = player:getCurrentMission(xi.mission.log_id.COP)
     local toau     = player:getCurrentMission(xi.mission.log_id.TOAU)
     local wotg     = player:getCurrentMission(xi.mission.log_id.WOTG)
-    local acp      = player:getCurrentMission(xi.mission.log_id.ACP)
     local asa      = player:getCurrentMission(xi.mission.log_id.ASA)
     local natStat  = player:getMissionStatus(player:getNation())
     local rozStat  = player:getMissionStatus(xi.mission.log_id.ZILART)
@@ -1139,7 +1138,6 @@ xi.bcnm.onEventUpdate = function(player, csid, option, extras)
         local battlefieldId    = getBattlefieldIdByBit(player, battlefieldIndex)
         local id               = battlefieldId or player:getBattlefieldID()
         local skip             = checkSkip(player, id)
-        local pet = player:getPet()
 
         local clearTime = 1
         local name      = "Meme"
