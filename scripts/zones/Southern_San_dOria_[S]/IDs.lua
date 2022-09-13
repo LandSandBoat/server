@@ -63,6 +63,7 @@ zones[xi.zone.SOUTHERN_SAN_DORIA_S] =
     },
     npc =
     {
+        SHIXO = 17105699,
     },
 }
 
