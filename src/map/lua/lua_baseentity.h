@@ -326,6 +326,8 @@ public:
     uint8 levelRestriction(sol::object const& level); // Establish/return current level restriction
     void  addJobTraits(uint8 jobID, uint8 level);     // Add job traits
 
+    auto getTraits() -> sol::table;
+
     // Player Titles and Fame
     uint16 getTitle();
     bool   hasTitle(uint16 titleID);

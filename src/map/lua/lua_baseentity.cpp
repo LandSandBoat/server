@@ -5743,6 +5743,36 @@ void CLuaBaseEntity::addJobTraits(uint8 jobID, uint8 level)
 }
 
 /************************************************************************
+ *  Function: getTraits
+ *  Purpose : Return list of active traits
+ *  Example : player:getTraits()
+ ************************************************************************/
+
+sol::table CLuaBaseEntity::getTraits()
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
+    CBattleEntity* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
+
+    if (PEntity != nullptr)
+    {
+        auto table = lua.create_table();
+        for (std::size_t i = 0; i < PEntity->TraitList.size(); ++i)
+        {
+            auto subTable = lua.create_table();
+
+            subTable["id"]    = PEntity->TraitList.at(i)->getID();
+            subTable["value"] = PEntity->TraitList.at(i)->getValue();
+
+            table.add(subTable);
+        }
+
+        return table;
+    }
+
+    return {};
+}
+
+/************************************************************************
  *  Function: getTitle()
  *  Purpose : Returns the integer value of the player's current title
  *  Example : if player:getTitle()) == xi.title.FAKE_MOUSTACHED_INVESTIGATOR then
@@ -15549,6 +15579,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("clearSession", CLuaBaseEntity::clearSession);
     SOL_REGISTER("sendNpcEmote", CLuaBaseEntity::sendNpcEmote);
     SOL_REGISTER("restoreNpcLook", CLuaBaseEntity::restoreNpcLook);
+    SOL_REGISTER("getTraits", CLuaBaseEntity::getTraits);
 }
 
 std::ostream& operator<<(std::ostream& os, const CLuaBaseEntity& entity)
