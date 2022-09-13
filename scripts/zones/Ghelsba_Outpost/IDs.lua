@@ -25,10 +25,10 @@ zones[xi.zone.GHELSBA_OUTPOST] =
         LOGIN_CAMPAIGN_UNDERWAY          = 7532, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                     = 7533, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED    = 7553, -- Your party is unable to participate because certain members' levels are restricted.
-        FISHING_MESSAGE_OFFSET           = 7587, -- You can't fish here.
-        HUT_DOOR                         = 7721, -- This looks like an Orcish dwelling. The door is firmly shut.
-        LOGGING_IS_POSSIBLE_HERE         = 7748, -- Logging is possible here if you have <item>.
-        YOU_CAN_NOW_BECOME_A_DRAGOON     = 7788, -- You can now become a dragoon!
+        FISHING_MESSAGE_OFFSET           = 7590, -- You can't fish here.
+        HUT_DOOR                         = 7724, -- This looks like an Orcish dwelling. The door is firmly shut.
+        LOGGING_IS_POSSIBLE_HERE         = 7751, -- Logging is possible here if you have <item>.
+        YOU_CAN_NOW_BECOME_A_DRAGOON     = 7791, -- You can now become a dragoon!
     },
     mob =
     {

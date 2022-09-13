@@ -21,16 +21,16 @@ zones[xi.zone.KING_RANPERRES_TOMB] =
         LOGIN_NUMBER                  = 7162,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         GEOMAGNETRON_ATTUNED          = 7171,  -- Your <keyitem> has been attuned to a geomagnetic fount in the corresponding locale.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7182,  -- Your party is unable to participate because certain members' levels are restricted.
-        CHEST_UNLOCKED                = 7287,  -- You unlock the chest!
-        SENSE_SOMETHING_EVIL          = 7314,  -- You sense something evil.
-        HEAVY_DOOR                    = 7315,  -- It is a solid stone door.
-        PLAYER_OBTAINS_ITEM           = 8253,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM         = 8254,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM      = 8255,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP          = 8256,  -- You already possess that temporary item.
-        NO_COMBINATION                = 8261,  -- You were unable to enter a combination.
-        REGIME_REGISTERED             = 10339, -- New training regime registered!
-        COMMON_SENSE_SURVIVAL         = 11426, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        CHEST_UNLOCKED                = 7290,  -- You unlock the chest!
+        SENSE_SOMETHING_EVIL          = 7317,  -- You sense something evil.
+        HEAVY_DOOR                    = 7318,  -- It is a solid stone door.
+        PLAYER_OBTAINS_ITEM           = 8256,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM         = 8257,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM      = 8258,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP          = 8259,  -- You already possess that temporary item.
+        NO_COMBINATION                = 8264,  -- You were unable to enter a combination.
+        REGIME_REGISTERED             = 10342, -- New training regime registered!
+        COMMON_SENSE_SURVIVAL         = 11429, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
     mob =
     {
@@ -45,15 +45,15 @@ zones[xi.zone.KING_RANPERRES_TOMB] =
             [17555667] = 17555668,
         },
         BARBASTELLE           = 17555721,
-        CHERRY_SAPLING_OFFSET = 17555853,
-        VRTRA                 = 17555890,
-        CORRUPTED_YORGOS      = 17555898,
-        CORRUPTED_SOFFEIL     = 17555899,
-        CORRUPTED_ULBRIG      = 17555900,
+        CHERRY_SAPLING_OFFSET = 17555748,
+        VRTRA                 = 17555763,
+        CORRUPTED_YORGOS      = 17555770,
+        CORRUPTED_SOFFEIL     = 17555771,
+        CORRUPTED_ULBRIG      = 17555772,
     },
     npc =
     {
-        TREASURE_CHEST = 17555955,
+        TREASURE_CHEST = 17555966,
     },
 }
 
