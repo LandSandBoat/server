@@ -36,6 +36,7 @@ namespace
 CPathFind::CPathFind(CBaseEntity* PTarget)
 : m_POwner(PTarget)
 , m_pathFlags(0)
+, m_patrolFlags(0)
 , m_carefulPathing(false)
 {
     m_originalPoint.x        = 0.f;
@@ -81,7 +82,7 @@ bool CPathFind::RoamAround(const position_t& point, float maxRadius, uint8 maxTu
             return false;
         }
 
-        m_points.push_back({ point.x - 1 + rand() % 2, point.y, point.z - 1 + rand() % 2, 0, 0 });
+        m_points.push_back({{ point.x - 1 + rand() % 2, point.y, point.z - 1 + rand() % 2, 0, 0 }, 0});
     }
 
     return true;
@@ -130,7 +131,7 @@ bool CPathFind::PathTo(const position_t& point, uint8 pathFlags, bool clear)
             Clear();
         }
 
-        m_points.push_back(point);
+        m_points.push_back({point, 0});
     }
 
     return true;
@@ -171,7 +172,7 @@ bool CPathFind::PathAround(const position_t& point, float distanceFromPoint, uin
     return PathTo(point, pathFlags, false);
 }
 
-bool CPathFind::PathThrough(std::vector<position_t>&& points, uint8 pathFlags)
+bool CPathFind::PathThrough(std::vector<pathpoint_t>&& points, uint8 pathFlags)
 {
     TracyZoneScoped;
     Clear();
@@ -199,6 +200,26 @@ bool CPathFind::WarpTo(const position_t& point, float maxDistance)
     m_POwner->updatemask |= UPDATE_POS;
 
     return true;
+}
+
+void CPathFind::ResumePatrol()
+{
+    if (m_pathFlags & PATHFLAG_PATROL)
+    {
+        m_pathFlags        = m_patrolFlags;
+        m_points           = m_patrol;
+        m_currentPoint     = 0;
+        float closestPoint = FLT_MAX;
+        for (size_t i = 0; i < m_points.size(); ++i)
+        {
+            float distance = distanceSquared(m_POwner->loc.p, m_points[i].position);
+            if (distance < closestPoint)
+            {
+                m_currentPoint = (int16)i;
+                closestPoint   = distance;
+            }
+        }
+    }
 }
 
 bool CPathFind::isNavMeshEnabled()
@@ -233,12 +254,12 @@ void CPathFind::PrunePathWithin(float within)
         return;
     }
 
-    position_t* targetPoint     = &m_points.back();
+    position_t* targetPoint     = &m_points.back().position;
     position_t* secondLastPoint = nullptr;
 
     while (m_points.size() > 1)
     {
-        secondLastPoint = &m_points.end()[-2];
+        secondLastPoint = &m_points.end()[-2].position;
 
         if (distance(*targetPoint, *secondLastPoint) > within)
         {
@@ -248,7 +269,7 @@ void CPathFind::PrunePathWithin(float within)
     }
 }
 
-void CPathFind::FollowPath()
+void CPathFind::FollowPath(time_point tick)
 {
     TracyZoneScoped;
     if (!IsFollowingPath())
@@ -256,9 +277,24 @@ void CPathFind::FollowPath()
         return;
     }
 
+    if (m_timeAtPoint.time_since_epoch().count() != 0)
+    {
+        // Continue to wait until full wait time has elapsed
+        if (tick >= m_timeAtPoint)
+        {
+            m_timeAtPoint = {};
+            ++m_currentPoint;
+            if (m_currentPoint >= (int16)m_points.size())
+            {
+                FinishedPath();
+            }
+        }
+        return;
+    }
+
     m_onPoint = false;
 
-    position_t& targetPoint = m_points[m_currentPoint];
+    pathpoint_t& targetPoint = m_points[m_currentPoint];
 
     if (isNavMeshEnabled() && m_carefulPathing)
     {
@@ -279,8 +315,14 @@ void CPathFind::FollowPath()
     {
         targetPoint = m_points[m_currentPoint];
 
-        if (AtPoint(targetPoint))
+        if (AtPoint(targetPoint.position))
         {
+            m_onPoint = true;
+            if (targetPoint.wait != 0 && m_timeAtPoint.time_since_epoch().count() == 0)
+            {
+                m_timeAtPoint = tick + std::chrono::milliseconds(targetPoint.wait);
+                return;
+            }
             m_currentPoint++;
         }
         else
@@ -288,10 +330,9 @@ void CPathFind::FollowPath()
             break;
         }
 
-        m_onPoint = true;
     }
 
-    StepTo(targetPoint, m_pathFlags & PATHFLAG_RUN);
+    StepTo(targetPoint.position, m_pathFlags & PATHFLAG_RUN);
 
     if (m_currentPoint >= (int16)m_points.size())
     {
@@ -435,7 +476,7 @@ bool CPathFind::FindClosestPath(const position_t& start, const position_t& end)
 
     m_points       = m_POwner->loc.zone->m_navMesh->findPath(start, end);
     m_currentPoint = 0;
-    m_points.push_back(end); // this prevents exploits with navmesh / impassible terrain
+    m_points.push_back({end, 0}); // this prevents exploits with navmesh / impassible terrain
 
     /* this check requirement is never met as intended since m_points are never empty when mob has a path
     if (m_points.empty())
@@ -499,6 +540,11 @@ bool CPathFind::IsFollowingScriptedPath()
     return IsFollowingPath() && m_pathFlags & PATHFLAG_SCRIPT;
 }
 
+bool CPathFind::IsPatrolling()
+{
+    return m_patrolFlags & PATHFLAG_PATROL;
+}
+
 bool CPathFind::AtPoint(const position_t& pos)
 {
     if (m_distanceFromPoint == 0)
@@ -533,7 +579,7 @@ bool CPathFind::CanSeePoint(const position_t& point, bool lookOffMesh)
 
 const position_t& CPathFind::GetDestination() const
 {
-    return m_points.back();
+    return m_points.back().position;
 }
 
 void CPathFind::SetCarefulPathing(bool careful)
@@ -547,6 +593,7 @@ void CPathFind::Clear()
     m_pathFlags         = 0;
     m_roamFlags         = 0;
     m_points.clear();
+    m_timeAtPoint = {};
 
     m_currentPoint  = 0;
     m_maxDistance   = 0;
@@ -558,7 +605,7 @@ void CPathFind::Clear()
     m_turnPoints.clear();
 }
 
-void CPathFind::AddPoints(std::vector<position_t>&& points, bool reverse)
+void CPathFind::AddPoints(std::vector<pathpoint_t>&& points, bool reverse)
 {
     if (points.size() > MAX_PATH_POINTS)
     {
@@ -571,6 +618,12 @@ void CPathFind::AddPoints(std::vector<position_t>&& points, bool reverse)
     if (reverse)
     {
         std::reverse(m_points.begin(), m_points.end());
+    }
+
+    if (m_pathFlags & PATHFLAG_PATROL)
+    {
+        m_patrol = m_points;
+        m_patrolFlags = m_pathFlags;
     }
 }
 
@@ -590,6 +643,11 @@ void CPathFind::FinishedPath()
         {
             Clear();
         }
+    }
+    else if (m_pathFlags & PATHFLAG_PATROL)
+    {
+        m_currentPoint = 0;
+        m_currentTurn  = 0;
     }
     else
     {

@@ -494,6 +494,12 @@ struct bazaar_t
     }
 };
 
+struct pathpoint_t
+{
+    position_t position;
+    uint32     wait;
+};
+
 // A comment on the packets below, defined as macros.
 //   byte 0 - packet size
 //   bytes 4-7 are the packet header "IXFF" (0x49, 0x58, 0x46, 0x46)

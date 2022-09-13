@@ -1606,19 +1606,30 @@ bool CLuaBaseEntity::pathThrough(sol::table const& pointsTable, sol::object cons
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
 
-    std::vector<position_t> points;
-
-    // Grab points from array and store in points array
-    for (std::size_t i = 1; i < pointsTable.size(); i += 3)
-    {
-        points.push_back({ (float)pointsTable[i], (float)pointsTable[i + 1], (float)pointsTable[i + 2], 0, 0 });
-    }
-
     uint8 flags = 0;
 
     if (flagsObj.is<uint8>())
     {
         flags = flagsObj.as<uint8>();
+    }
+
+    std::vector<pathpoint_t> points;
+
+    if (flags & PATHFLAG_PATROL)
+    {
+        // Grab points from array and store in points array
+        for (std::size_t i = 1; i < pointsTable.size(); i += 4)
+        {
+            points.push_back({ { (float)pointsTable[i], (float)pointsTable[i + 1], (float)pointsTable[i + 2], 0, 0 }, (uint32)pointsTable[i + 3] });
+        }
+    }
+    else
+    {
+        // Grab points from array and store in points array
+        for (std::size_t i = 1; i < pointsTable.size(); i += 3)
+        {
+            points.push_back({ { (float)pointsTable[i], (float)pointsTable[i + 1], (float)pointsTable[i + 2], 0, 0 }, 0 });
+        }
     }
 
     CBattleEntity* PBattle = (CBattleEntity*)m_PBaseEntity;
