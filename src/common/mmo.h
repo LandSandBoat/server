@@ -498,6 +498,7 @@ struct pathpoint_t
 {
     position_t position;
     uint32     wait;
+    bool       setRotation = false;
 };
 
 // A comment on the packets below, defined as macros.

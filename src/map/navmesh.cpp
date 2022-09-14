@@ -236,7 +236,7 @@ std::vector<pathpoint_t> CNavMesh::findPath(const position_t& start, const posit
     }
 
     std::vector<pathpoint_t> ret;
-    dtStatus                status;
+    dtStatus                 status;
 
     float spos[3];
     CNavMesh::ToDetourPos(&start, spos);
@@ -321,7 +321,7 @@ std::vector<pathpoint_t> CNavMesh::findPath(const position_t& start, const posit
 
             CNavMesh::ToFFXIPos(pathPos);
 
-            ret.push_back({ {pathPos[0], pathPos[1], pathPos[2], 0, 0}, 0 });
+            ret.push_back({ { pathPos[0], pathPos[1], pathPos[2], 0, 0 }, 0 });
         }
     }
 
