@@ -1945,7 +1945,14 @@ INSERT INTO `mob_skill_lists` VALUES ('Cogitator',413,1242); -- empty cutter
 INSERT INTO `mob_skill_lists` VALUES ('Cogitator',413,1243); -- trinary tap
 INSERT INTO `mob_skill_lists` VALUES ('Cogitator',413,1251); -- trinary tap
 INSERT INTO `mob_skill_lists` VALUES ('Cogitator',413,1252); -- shadow spread
--- 414 to 427:
+-- 414 to 425:
+INSERT INTO `mob_skill_lists` VALUES ('Dragonian_Berzerker',426,645); -- Body Slam
+INSERT INTO `mob_skill_lists` VALUES ('Dragonian_Berzerker',426,646); -- Heavy Stomp
+INSERT INTO `mob_skill_lists` VALUES ('Dragonian_Berzerker',426,647); -- Chaos Blade
+INSERT INTO `mob_skill_lists` VALUES ('Dragonian_Minstrel',427,647); -- Chaos Blade
+INSERT INTO `mob_skill_lists` VALUES ('Dragonian_Minstrel',427,649); -- Voidsong
+INSERT INTO `mob_skill_lists` VALUES ('Dragonian_Minstrel',427,650); -- Thornsong
+INSERT INTO `mob_skill_lists` VALUES ('Dragonian_Minstrel',427,651); -- Lodesong
 INSERT INTO `mob_skill_lists` VALUES ('Gigas_Ice',428,663); -- Ice roar
 INSERT INTO `mob_skill_lists` VALUES ('Gigas_Ice',428,664); -- Impact Roar
 INSERT INTO `mob_skill_lists` VALUES ('Gigas_Ice',428,665); -- Grand Slam
@@ -1967,9 +1974,9 @@ INSERT INTO `mob_skill_lists` VALUES ('Gladiatorial_Weapon',431,398); -- Whisper
 INSERT INTO `mob_skill_lists` VALUES ('Gladiatorial_Weapon',431,513); -- Smite of Rage
 INSERT INTO `mob_skill_lists` VALUES ('Gladiatorial_Weapon',431,514); -- Whirl of Rage
 INSERT INTO `mob_skill_lists` VALUES ('Gilagoge_Tlugvi',432,332); -- entangle
-INSERT INTO `mob_skill_lists` VALUES ('Goga_Tlugvi',433,2162); -- leafstorm
-INSERT INTO `mob_skill_lists` VALUES ('Ulagohvsdi_Tlugvi',434,2162); -- pinecone bomb
-INSERT INTO `mob_skill_lists` VALUES ('Gola_Tlugvi',435,2162); -- drill branch
+INSERT INTO `mob_skill_lists` VALUES ('Goga_Tlugvi',433,331); -- leafstorm
+INSERT INTO `mob_skill_lists` VALUES ('Ulagohvsdi_Tlugvi',434,329); -- pinecone bomb
+INSERT INTO `mob_skill_lists` VALUES ('Gola_Tlugvi',435,328); -- drill branch
 INSERT INTO `mob_skill_lists` VALUES ('Bloodlapper',436,2162);
 INSERT INTO `mob_skill_lists` VALUES ('Ghillie_Dhu',437,685);
 INSERT INTO `mob_skill_lists` VALUES ('Highlander_Lizard',438,371);

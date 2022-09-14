@@ -5045,8 +5045,12 @@ INSERT INTO `mob_spell_lists` VALUES('Anansi',495,356,1,255); -- paralyga (1~255
 INSERT INTO `mob_spell_lists` VALUES('Anansi',495,357,1,255); -- slowga (1~255)
 
 -- Osschaart (496)
-INSERT INTO `mob_spell_lists` VALUES('Osschaart', 496, 181, 1, 255); -- blizzaga iii(1~255)
 INSERT INTO `mob_spell_lists` VALUES('Osschaart', 496, 191, 1, 255); -- stonega iii(1~255)
+INSERT INTO `mob_spell_lists` VALUES('Osschaart', 496, 201, 1, 255); -- waterga iii(1~255)
+INSERT INTO `mob_spell_lists` VALUES('Osschaart', 496, 176, 1, 255); -- firaga iii(1~255)
+INSERT INTO `mob_spell_lists` VALUES('Osschaart', 496, 186, 1, 255); -- aeroga iii(1~255)
+INSERT INTO `mob_spell_lists` VALUES('Osschaart', 496, 181, 1, 255); -- blizzaga iii(1~255)
+INSERT INTO `mob_spell_lists` VALUES('Osschaart', 496, 196, 1, 255); -- thundaga iii(1~255)
 INSERT INTO `mob_spell_lists` VALUES('Osschaart', 496, 212, 1, 255); -- burst (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Osschaart', 496, 226, 1, 255); -- poisonga ii(1~255)
 INSERT INTO `mob_spell_lists` VALUES('Osschaart', 496, 232, 1, 255); -- bio iii(1~255)

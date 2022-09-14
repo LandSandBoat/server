@@ -1174,7 +1174,7 @@ INSERT INTO `mob_skills` VALUES (1333,152,'contagion_transfer',0,7.0,2000,1500,4
 INSERT INTO `mob_skills` VALUES (1334,154,'contamination',1,12.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1335,151,'toxic_pick',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1336,289,'frenzied_rage',0,7.0,2000,1500,1,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1337,437,'charm_copycat',0,7.0,2000,0,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1337,437,'charm_copycat',0,100.0,2000,0,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1338,234,'infernal_pestilence',4,10.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1339,220,'bane',1,12.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1340,17,'crossthrash',1,5.0,2000,1500,4,0,0,1,0,0,0);
