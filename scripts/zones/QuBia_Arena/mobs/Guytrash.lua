@@ -8,7 +8,7 @@ local ID = require("scripts/zones/QuBia_Arena/IDs")
 local entity = {}
 
 local checkHounds = function(mob)
-    for i = 0, 4 do
+    for i = 0, 3 do
         if GetMobByID(ID.hounds[mob:getBattlefield():getArea()]+i):isAlive() then
             return true
         end
@@ -27,7 +27,7 @@ entity.onMobSpawn = function(houndMob)
                 mobArg:updateEnmity(killer)
             end)
         else
-            for i = 0, 4 do
+            for i = 0, 3 do
                 GetMobByID(ID.hounds[mob:getBattlefield():getArea()]+i):setBehaviour(0)
             end
         end
