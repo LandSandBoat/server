@@ -504,12 +504,12 @@ INSERT INTO `mob_skill_lists` VALUES ('GiantBird',125,400); -- Triple Attack
 INSERT INTO `mob_skill_lists` VALUES ('GiantBird',125,401); -- Gliding Spike
 INSERT INTO `mob_skill_lists` VALUES ('GiantBird',125,402); -- Feather Barrier
 INSERT INTO `mob_skill_lists` VALUES ('GiantBird',125,403); -- Stormwind
-INSERT INTO `mob_skill_lists` VALUES ('Gigas',126,662);
-INSERT INTO `mob_skill_lists` VALUES ('Gigas',126,663);
-INSERT INTO `mob_skill_lists` VALUES ('Gigas',126,664);
-INSERT INTO `mob_skill_lists` VALUES ('Gigas',126,665);
-INSERT INTO `mob_skill_lists` VALUES ('Gigas',126,666);
-INSERT INTO `mob_skill_lists` VALUES ('Gigas',126,667);
+INSERT INTO `mob_skill_lists` VALUES ('Gigas',126,662); -- Lightning Roar
+INSERT INTO `mob_skill_lists` VALUES ('Gigas',126,663); -- Ice roar
+INSERT INTO `mob_skill_lists` VALUES ('Gigas',126,664); -- Impact Roar
+INSERT INTO `mob_skill_lists` VALUES ('Gigas',126,665); -- Grand Slam
+INSERT INTO `mob_skill_lists` VALUES ('Gigas',126,666); -- Power Attack
+INSERT INTO `mob_skill_lists` VALUES ('Gigas',126,667); -- Power Attack Weapon
 INSERT INTO `mob_skill_lists` VALUES ('Gigas',127,662);
 INSERT INTO `mob_skill_lists` VALUES ('Gigas',127,663);
 INSERT INTO `mob_skill_lists` VALUES ('Gigas',127,664);
@@ -707,10 +707,9 @@ INSERT INTO `mob_skill_lists` VALUES ('Khimaira',168,2026);
 INSERT INTO `mob_skill_lists` VALUES ('Khimaira',168,2027);
 INSERT INTO `mob_skill_lists` VALUES ('Khimaira',168,2028);
 -- INSERT INTO `mob_skill_lists` VALUES ('Khimaira',168,2698);
-INSERT INTO `mob_skill_lists` VALUES ('Kindred',169,559);
-INSERT INTO `mob_skill_lists` VALUES ('Kindred',169,560);
-INSERT INTO `mob_skill_lists` VALUES ('Kindred',169,563);
-INSERT INTO `mob_skill_lists` VALUES ('Kindred',169,1148);
+INSERT INTO `mob_skill_lists` VALUES ('Kindred_ROZ',169,559); -- Demonic Howl
+INSERT INTO `mob_skill_lists` VALUES ('Kindred_ROZ',169,560); -- Soul Drain
+INSERT INTO `mob_skill_lists` VALUES ('Kindred_ROZ',169,563); -- Hecatomb Wave
 INSERT INTO `mob_skill_lists` VALUES ('Ladybug_Day',170,2178);
 INSERT INTO `mob_skill_lists` VALUES ('Ladybug_Day',170,2179);
 INSERT INTO `mob_skill_lists` VALUES ('Ladybug_Day',170,2180);
@@ -1622,11 +1621,11 @@ INSERT INTO `mob_skill_lists` VALUES ('Ambush_Antlion',357,275);
 INSERT INTO `mob_skill_lists` VALUES ('Ambush_Antlion',357,276);
 INSERT INTO `mob_skill_lists` VALUES ('Ambush_Antlion',357,277);
 INSERT INTO `mob_skill_lists` VALUES ('Ambush_Antlion',357,279);
-INSERT INTO `mob_skill_lists` VALUES ('Kindred',358,559);
-INSERT INTO `mob_skill_lists` VALUES ('Kindred',358,560);
-INSERT INTO `mob_skill_lists` VALUES ('Kindred',358,563);
-INSERT INTO `mob_skill_lists` VALUES ('Kindred',358,1148);
-INSERT INTO `mob_skill_lists` VALUES ('Kindred',358,1149);
+INSERT INTO `mob_skill_lists` VALUES ('Kindred_COP',358,559);
+INSERT INTO `mob_skill_lists` VALUES ('Kindred_COP',358,560);
+INSERT INTO `mob_skill_lists` VALUES ('Kindred_COP',358,563);
+INSERT INTO `mob_skill_lists` VALUES ('Kindred_COP',358,1148);
+INSERT INTO `mob_skill_lists` VALUES ('Kindred_COP',358,1149);
 INSERT INTO `mob_skill_lists` VALUES ('Fomor',359,246);
 INSERT INTO `mob_skill_lists` VALUES ('Fomor',359,247);
 INSERT INTO `mob_skill_lists` VALUES ('Fomor',359,248);
@@ -1946,7 +1945,12 @@ INSERT INTO `mob_skill_lists` VALUES ('Cogitator',413,1242); -- empty cutter
 INSERT INTO `mob_skill_lists` VALUES ('Cogitator',413,1243); -- trinary tap
 INSERT INTO `mob_skill_lists` VALUES ('Cogitator',413,1251); -- trinary tap
 INSERT INTO `mob_skill_lists` VALUES ('Cogitator',413,1252); -- shadow spread
--- 414 to 428:
+-- 414 to 427:
+INSERT INTO `mob_skill_lists` VALUES ('Gigas_Ice',428,663); -- Ice roar
+INSERT INTO `mob_skill_lists` VALUES ('Gigas_Ice',428,664); -- Impact Roar
+INSERT INTO `mob_skill_lists` VALUES ('Gigas_Ice',428,665); -- Grand Slam
+INSERT INTO `mob_skill_lists` VALUES ('Gigas_Ice',428,666); -- Power Attack
+INSERT INTO `mob_skill_lists` VALUES ('Gigas_Ice',428,667); -- Power Attack Weapon
 INSERT INTO `mob_skill_lists` VALUES ('Orcish_Onager',429,635); -- Burst
 INSERT INTO `mob_skill_lists` VALUES ('Orcish_Onager',429,636); -- Flame Arrow
 INSERT INTO `mob_skill_lists` VALUES ('Orcish_Onager',429,637); -- Fire bomb
