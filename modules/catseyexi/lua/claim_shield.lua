@@ -33,7 +33,7 @@ local nmsToShield =
     { "Wajaom_Woodlands", "Hydra" },
     { "Western_Altepa_Desert", "King_Vinegarroon" },
 	{ "Sea_Serpent_Grotto", "Novv_the_Whitehearted" },
-	{ "Sea_Serpent_Grotto", "Zuug_the_Shoreleaper" }
+	{ "Sea_Serpent_Grotto", "Zuug_the_Shoreleaper" },
 	{ "Sea_Serpent_Grotto", "Ocean_Sahagin" },
 }
 
