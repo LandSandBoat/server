@@ -55,6 +55,12 @@ zones[xi.zone.QUBIA_ARENA] =
     npc =
     {
     },
+    hounds =
+    {
+        17621077,
+        17621082,
+        17621087,
+    },
 }
 
 return zones[xi.zone.QUBIA_ARENA]
