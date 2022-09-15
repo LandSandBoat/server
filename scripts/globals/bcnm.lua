@@ -547,7 +547,6 @@ local function checkReqs(player, npc, bfid, registrant)
     local cop      = player:getCurrentMission(xi.mission.log_id.COP)
     local toau     = player:getCurrentMission(xi.mission.log_id.TOAU)
     local wotg     = player:getCurrentMission(xi.mission.log_id.WOTG)
-    local acp      = player:getCurrentMission(xi.mission.log_id.ACP)
     local asa      = player:getCurrentMission(xi.mission.log_id.ASA)
     local natStat  = player:getMissionStatus(player:getNation())
     local rozStat  = player:getMissionStatus(xi.mission.log_id.ZILART)
@@ -665,7 +664,7 @@ local function checkReqs(player, npc, bfid, registrant)
         [ 675] = function() return ( player:hasKeyItem(xi.ki.MIASMA_FILTER)                                                                                                ) end, -- ENM: Shell We Dance?
         [ 676] = function() return ( player:hasKeyItem(xi.ki.MIASMA_FILTER)                                                                                                ) end, -- ENM: Totentanz
         [ 677] = function() return ( player:hasKeyItem(xi.ki.LETTER_FROM_SHIKAREE_X)                                                                                       ) end, -- Quest: Tango with a Tracker
-        [ 678] = function() return ( player:hasKeyItem(xi.ki.LETTER_FROM_SHIKAREE_Y)                                                                                       ) end, -- Quest: Requiem of Sin
+        [ 678] = function() return ( player:hasKeyItem(xi.ki.LETTER_FROM_SHIKAREE_Y) or player:hasKeyItem(xi.ki.LETTER_FROM_THE_MITHRAN_TRACKERS)                          ) end, -- Quest: Requiem of Sin
         [ 704] = function() return ( cop == mi.cop.DARKNESS_NAMED and player:getCharVar('Mission[6][358]Status') == 4                                                      ) end, -- PM3-5: Darkness Named
         [ 705] = function() return ( player:hasKeyItem(xi.ki.ASTRAL_COVENANT)                                                                                              ) end, -- ENM: Test Your Mite
         [ 706] = function() return ( player:hasKeyItem(xi.ki.VIAL_OF_DREAM_INCENSE)                                                                                        ) end, -- Quest: Waking Dreams
@@ -690,7 +689,7 @@ local function checkReqs(player, npc, bfid, registrant)
         [ 962] = function() return ( player:hasKeyItem(xi.ki.MONARCH_BEARD)                                                                                                ) end, -- ENM: Fire in the Sky
         [ 963] = function() return ( player:hasKeyItem(xi.ki.MONARCH_BEARD)                                                                                                ) end, -- ENM: Bad Seed
         [ 964] = function() return ( player:hasKeyItem(xi.ki.MONARCH_BEARD)                                                                                                ) end, -- ENM: Bugard in the Clouds
-        [ 965] = function() return ( player:hasKeyItem(xi.ki.MONARCH_BEARD)                                                                                                ) end, -- ENM: Beloved of Atlantes
+        [ 965] = function() return ( player:hasKeyItem(xi.ki.MONARCH_BEARD)                                                                                                ) end, -- ENM: Beloved of the Atlantes
         [ 966] = function() return ( player:hasKeyItem(xi.ki.MONARCH_LINN_PATROL_PERMIT)                                                                                   ) end, -- Quest: Uninvited Guest
         [ 992] = function() return ( cop == mi.cop.ONE_TO_BE_FEARED and player:getCharVar('Mission[6][638]Status') == 3                                                    ) end, -- PM6-4: One to be Feared
         [ 993] = function() return ( cop == mi.cop.THE_WARRIORS_PATH and player:getCharVar('Mission[6][748]Status') == 1                                                   ) end, -- PM7-5: The Warrior's Path
@@ -739,7 +738,6 @@ local function checkReqs(player, npc, bfid, registrant)
         [ 676] = function() return ( player:hasKeyItem(xi.ki.MIASMA_FILTER)                                                                                ) end, -- ENM: Totentanz
         [ 705] = function() return ( player:hasKeyItem(xi.ki.ASTRAL_COVENANT)                                                                              ) end, -- ENM: Test Your Mite
         [ 738] = function() return ( player:hasKeyItem(xi.ki.SHAFT_2716_OPERATING_LEVER)                                                                   ) end, -- ENM: Bionic Bug
-        [ 739] = function() return ( player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL)                                                                    ) end, -- ENM: Pulling Your Strings
         [ 740] = function() return ( player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL)                                                                    ) end, -- ENM: Automaton Assault
         [ 769] = function() return ( player:hasKeyItem(xi.ki.CENSER_OF_ABANDONMENT)                                                                        ) end, -- ENM: Simulant
         [ 801] = function() return ( player:hasKeyItem(xi.ki.CENSER_OF_ANTIPATHY)                                                                          ) end, -- ENM: You Are What You Eat
@@ -865,6 +863,8 @@ local function checkSkip(player, bfid)
                                      (cop == mi.cop.THREE_PATHS and player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.ULMIA) > 8)                                              ) end, -- PM5-3 U3: Flames for the Dead
         [ 672] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.THREE_PATHS) or
                                      (cop == mi.cop.THREE_PATHS and player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.ULMIA) > 7)                                              ) end, -- PM5-3 U2: Head Wind
+        [ 677] = function() return ( player:hasKeyItem(xi.ki.LETTER_FROM_SHIKAREE_X)                                                                                                              ) end, -- Quest: Tango with a Tracker
+        [ 678] = function() return ( player:hasKeyItem(xi.ki.LETTER_FROM_SHIKAREE_Y) or player:hasKeyItem(xi.ki.LETTER_FROM_MITHRAN_TRACKERS)                                                     ) end, -- Quest: Requiem of Sin
         [ 704] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.DARKNESS_NAMED) or (cop == mi.cop.DARKNESS_NAMED and copStat > 2)                                   ) end, -- PM3-5: Darkness Named
         [ 706] = function() return ( player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WAKING_DREAMS) or player:hasKeyItem(xi.ki.WHISPER_OF_DREAMS)                         ) end, -- Quest: Waking Dreams
         [ 736] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.THREE_PATHS) or (cop == mi.cop.THREE_PATHS and
@@ -1177,7 +1177,7 @@ xi.bcnm.onEventUpdate = function(player, csid, option, extras)
 
             return false
         else
-            -- Only allow entrance if battlefield is open and playerhas battlefield effect, witch can be lost mid battlefield selection.
+            -- Only allow entrance if battlefield is open and player has battlefield effect, which can be lost mid battlefield selection.
             if
                 not player:getBattlefield() and
                 player:hasStatusEffect(xi.effect.BATTLEFIELD)

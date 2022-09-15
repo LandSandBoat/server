@@ -21,7 +21,7 @@ local twoHourAbility =
     xi.jsa.CALL_WYVERN,
     xi.jsa.ASTRAL_FLOW,
     xi.jsa.AZURE_LORE,
-    0, -- WILD_CARD
+    0, -- WILD_CARD,
     0, -- OVERDRIVE,
     0, -- TRANCE,
     0, -- TABULA_RASA,
@@ -30,35 +30,29 @@ local twoHourAbility =
 }
 local entity = {}
 
-entity.onMobSpawn = function(mob)
-    mob:setLocalVar("twoHour", 0)
-end
-
-entity.onMobEngaged = function(mob)
-    mob:setLocalVar("charmTimer", os.time() + 30)
-end
-
 local function charm(mob)
     local battlefieldPlayers = mob:getBattlefield():getPlayers()
     local players = battlefieldPlayers[1]:getParty()
 
     for _, v in pairs(players) do
-        if v ~= nil and v:getLocalVar("playerCharmed") ~= 1 then
+        if
+            v ~= nil and
+            v:getLocalVar("playerCharmed") ~= 1 and
+            not (mob:hasStatusEffect(xi.effect.SLEEP_I) or mob:hasStatusEffect(xi.effect.SLEEP_II))
+        then
             v:setPos(mob:getXPos() + 0.3, mob:getYPos(), mob:getZPos() + 0.3, mob:getRotPos())
             mob:useMobAbility(1337, v)
             v:setLocalVar("playerCharmed", 1)
-            mob:setLocalVar("charmTimer", os.time() + 30)
             mob:setLocalVar("charmedJob", v:getMainJob())
 
             if players[#players] == v then
                 mob:setLocalVar("charmReset", 1)
             end
-
             break
         end
     end
 
-    if mob:getLocalVar("charmReset") ~= 0 then
+    if mob:getLocalVar("charmReset") == 1 then
         for _, v in pairs(players) do
             v:setLocalVar("playerCharmed", 0)
         end
@@ -66,9 +60,19 @@ local function charm(mob)
     end
 end
 
+entity.onMobSpawn = function(mob)
+    mob:setLocalVar("twoHour", 0)
+    mob:setMod(xi.mod.SILENCERES, 70)
+end
+
+entity.onMobEngaged = function(mob)
+    mob:setLocalVar("charmTimer", os.time() + 30)
+end
+
 entity.onMobFight = function(mob, target)
     local job = mob:getLocalVar("charmedJob")
     if mob:getLocalVar("charmTimer") < os.time() then
+        mob:setLocalVar("charmTimer", os.time() + 30)
         charm(mob)
     end
 
