@@ -141,7 +141,7 @@ end
 entity.onMobInitialize = function(mob)
     mob:setMod(xi.mod.MOVE, 150)
     mob:setMobMod(xi.mobMod.SIGHT_RANGE, 30)
-    mob:setMod(xi.mod.DOUBLE_ATTACK, 35)
+    mob:setMod(xi.mod.DOUBLE_ATTACK, 25)
     mob:setMod(xi.mod.TRIPLE_ATTACK, 15)
 end
 
@@ -154,7 +154,6 @@ entity.onMobSpawn = function(mob)
     --Path choice can be A, or B.
     --1: Path A
     --2: Path B
-    mob:setMod(xi.mod.MOVE, 150)
     mob:setLocalVar("pauseTime", math.random(8,20) + os.time())
     mob:setLocalVar("mobPath", math.random(1,2))
     mob:setLocalVar("pathReverse", math.random(0,1))
