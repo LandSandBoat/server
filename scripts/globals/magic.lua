@@ -846,7 +846,7 @@ function finalMagicAdjustments(caster, target, spell, dmg)
         -- target:delStatusEffect(xi.effect.BLINK)
     else
         -- this logic will eventually be moved here
-        -- dmg = utils.takeShadows(target, dmg, 1)
+        -- dmg = utils.takeShadows(target, mob, dmg, 1)
 
         -- if (dmg == 0) then
             -- spell:setMsg(xi.msg.basic.SHADOW_ABSORB)
