@@ -132,7 +132,7 @@ quest.sections =
             ['Chomoro-Kyotoro'] =
             {
                 onTrigger = function(player, npc)
-                    if not (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.HAT_IN_HAND) == QUEST_ACCEPTED) then
+                    if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.HAT_IN_HAND) ~= QUEST_ACCEPTED then
                         quest:progressEvent(498)
                     end
                 end,
