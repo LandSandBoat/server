@@ -249,7 +249,7 @@ bool CMobController::CanDetectTarget(CBattleEntity* PTarget, bool forceSight)
 
     float verticalDistance = abs(PMob->loc.p.y - PTarget->loc.p.y);
 
-    if (PMob->m_Family != 6 && verticalDistance > 8.0f)
+    if ((PMob->m_Family != 6 || PMob->getMobMod(LEDGE_AGGRO) != 0) && verticalDistance > 8.0f)
     {
         return false;
     }
@@ -274,6 +274,10 @@ bool CMobController::CanDetectTarget(CBattleEntity* PTarget, bool forceSight)
 
     if (detectSight && !hasInvisible && currentDistance < PMob->getMobMod(MOBMOD_SIGHT_RANGE) && facing(PMob->loc.p, PTarget->loc.p, 64))
     {
+        if (PMob->getMobMod(LEDGE_AGGRO) != 0)
+        {
+            return true;
+        }
         return CanSeePoint(PTarget->loc.p);
     }
 
