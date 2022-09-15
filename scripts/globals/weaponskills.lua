@@ -991,7 +991,8 @@ function handleBlock(attacker, target, finaldmg)
 end
 
 function handleParry(attacker, target, missChance, guaranteedHit)
-    if (target:isFacing(attacker) and (target:getParryRate(attacker) >= math.random(100)) and target:getMainJob() ~= xi.job.MNK and not guaranteedHit) then -- Try parry, if so miss.
+    local gHit = guaranteedHit or false
+    if (target:isFacing(attacker) and (target:getParryRate(attacker) >= math.random(100)) and target:getMainJob() ~= xi.job.MNK and not gHit) then -- Try parry, if so miss.
         if (target:getSystem() == xi.eco.BEASTMEN or target:isPC()) then
             missChance = 1
         end

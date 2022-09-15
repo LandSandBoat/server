@@ -18,13 +18,13 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local dmg_v = mob:getMainLvl() * 5 + 10 or 50 -- http://wiki.ffo.jp/html/4045.html
-    -- int (( Diabolos ' LV x 5 + 10) x Diabolos ' magic attack power / Opponent's magic defense power )
+    local dmg = mob:getMainLvl() * 5 + 10 -- http://wiki.ffo.jp/html/4045.html
     local dmgmod = 1
+    local ignoreres = true
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, dmg_v, xi.magic.element.DARK, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, dmg, xi.magic.element.DARK, dmgmod, xi.mobskills.magicalTpBonus.NO_EFFECT, ignoreres)
 
-    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
+    dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.DARK, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.DARK)
     return dmg
