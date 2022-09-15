@@ -1,8 +1,7 @@
 -----------------------------------
 -- Area: Maze of Shakhrami
--- Quest: Corsair Af1 "Equipped for All Occasions" Heaven Sent
---  NPC: Iron Door (Spawn Lost Soul) (Enter chest room)
--- !pos 247.735 18.499 -142.267 198
+-- Quest: Heaven Cent
+--  NPC: Chest
 -----------------------------------
 ID = require('scripts/zones/Maze_of_Shakhrami/IDs')
 -----------------------------------
@@ -12,7 +11,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:messageSpecial(ID.text.IRON_DOOR)
+    player:messageSpecial(ID.text.CHEST_EMPTY)
 end
 
 entity.onEventUpdate = function(player, csid, option)
