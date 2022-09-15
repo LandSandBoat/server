@@ -9,6 +9,8 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.SIGHT_RANGE, 17)
+    mob:setMod(xi.mod.LULLABYRES, 80)
+    mob:setMod(xi.mod.SLEEPRES, 80)
 end
 
 entity.onMobEngaged = function(mob, target)
