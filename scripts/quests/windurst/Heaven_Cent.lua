@@ -34,7 +34,7 @@ quest.reward =
 {
     gil = 4800,
     title = xi.title.NIGHT_SKY_NAVIGATOR,
-    fame = 75,
+    fame = 100,
     fameArea = xi.quest.fame_area.WINDURST,
 }
 
@@ -111,7 +111,10 @@ quest.sections =
                     quest:complete(player)
                 end,
                 [296] = function(player, csid, option, npc)
-                    quest:setVar(player, 'count', 0)
+                    -- Reset vars to allow players to search for another coin
+                    quest:setVar(player, 'firstCoin', 0)
+                    quest:setVar(player, 'secondCoin', 0)
+                    quest:setVar(player, 'thirdCoin', 0)
                     player:tradeComplete()
                 end,
             },
@@ -132,13 +135,21 @@ quest.sections =
                 onTrigger = function(player, npc)
                     local rand = math.random()
 
-                    if rand > 0.2 then
-                        player:messageSpecial(incorrect[math.random(1,4)])
-                        quest:setVar(player, 'count', quest:getVar(player, 'count') + 1)
-                        return quest:progressEvent(47)
-                    elseif quest:getVar(player, 'count') < 5 then
-                        player:messageSpecial(correct[math.random(1,4)])
-                        return quest:progressEvent(46)
+                    -- Only allow if player doesn't have coin
+                    if not player:hasItem(545) then
+                        if rand > 0.2 then
+                            player:messageSpecial(incorrect[math.random(1,4)])
+                            return quest:progressEvent(47)
+
+                        -- Do not reveal correct coin if player has seen correct coin from this chest.
+                        elseif quest:getVar(player, 'firstCoin') == 0
+                        then
+                            player:messageSpecial(correct[math.random(1,4)])
+                            quest:setVar(player, 'firstCoin', 1)
+                            return quest:progressEvent(46)
+                        end
+                    else
+                        player:messageSpecial(ID.text.CHEST_EMPTY)
                     end
                 end,
             },
@@ -147,13 +158,20 @@ quest.sections =
                 onTrigger = function(player, npc)
                     local rand = math.random()
 
-                    if rand > 0.2 then
-                        player:messageSpecial(incorrect[math.random(1,4)])
-                        quest:setVar(player, 'count', quest:getVar(player, 'count') + 1)
-                        return quest:progressEvent(49)
-                    elseif quest:getVar(player, 'count') < 5 then
-                        player:messageSpecial(correct[math.random(1,4)])
-                        return quest:progressEvent(48)
+                    -- Only allow if player doesn't have coin
+                    if not player:hasItem(545) then
+                        if rand > 0.2 then
+                            player:messageSpecial(incorrect[math.random(1,4)])
+                            return quest:progressEvent(49)
+
+                        -- Do not reveal correct coin if player has seen correct coin from this chest.
+                        elseif quest:getVar(player, 'secondCoin') == 0 then
+                            player:messageSpecial(correct[math.random(1,4)])
+                            quest:setVar(player, 'secondCoin', 1)
+                            return quest:progressEvent(48)
+                        end
+                    else
+                        player:messageSpecial(ID.text.CHEST_EMPTY)
                     end
                 end,
             },
@@ -162,65 +180,90 @@ quest.sections =
                 onTrigger = function(player, npc)
                     local rand = math.random()
 
-                    if rand > 0.2 then
-                        player:messageSpecial(incorrect[math.random(1,4)])
-                        quest:setVar(player, 'count', quest:getVar(player, 'count') + 1)
-                        return quest:progressEvent(51)
-                    elseif quest:getVar(player, 'count') < 5 then
-                        player:messageSpecial(correct[math.random(1,4)])
-                        return quest:progressEvent(50)
+                    -- Only allow if player doesn't have coin
+                    if not player:hasItem(545) then
+                        if rand > 0.2 then
+                            player:messageSpecial(incorrect[math.random(1,4)])
+                            return quest:progressEvent(51)
+
+                        -- Do not reveal correct coin if player has seen correct coin from this chest.
+                        elseif quest:getVar(player, 'thirdCoin') == 0 then
+                            player:messageSpecial(correct[math.random(1,4)])
+                            quest:setVar(player, 'thirdCoin', 1)
+                            return quest:progressEvent(50)
+                        end
+                    else
+                        player:messageSpecial(ID.text.CHEST_EMPTY)
                     end
                 end,
             },
 
             onEventFinish =
             {
+                -- Correct coin
                 [46] = function(player, csid, option, npc)
-                    if player:getFreeSlotsCount() == 0 then
-                        player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.CARBUNCLES_POLE)
-                    else
-                        quest:setVar(player, 'Coin', 1)
-                        player:addItem(545)
+                    if option == 2 then
+                        if player:getFreeSlotsCount() == 0 then
+                            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.CARBUNCLES_POLE)
+                        else
+                            quest:setVar(player, 'Coin', 1)
+                            player:addItem(545)
+                        end
                     end
                 end,
+                -- Incorrect coin
                 [47] = function(player, csid, option, npc)
-                    if player:getFreeSlotsCount() == 0 then
-                        player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.CARBUNCLES_POLE)
-                    else
-                        quest:setVar(player, 'Coin', 0)
-                        player:addItem(545)
+                    if option == 2 then
+                        if player:getFreeSlotsCount() == 0 then
+                            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.CARBUNCLES_POLE)
+                        else
+                            quest:setVar(player, 'Coin', 0)
+                            player:addItem(545)
+                        end
                     end
                 end,
+                -- Correct coin
                 [48] = function(player, csid, option, npc)
-                    if player:getFreeSlotsCount() == 0 then
-                        player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.CARBUNCLES_POLE)
-                    else
-                        quest:setVar(player, 'Coin', 1)
-                        player:addItem(545)
+                    if option == 2 then
+                        if player:getFreeSlotsCount() == 0 then
+                            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.CARBUNCLES_POLE)
+                        else
+                            quest:setVar(player, 'Coin', 1)
+                            player:addItem(545)
+                        end
                     end
                 end,
+                -- Inorrect coin
                 [49] = function(player, csid, option, npc)
-                    if player:getFreeSlotsCount() == 0 then
-                        player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.CARBUNCLES_POLE)
-                    else
-                        quest:setVar(player, 'Coin', 0)
-                        player:addItem(545)
+                    if option == 2 then
+                        if player:getFreeSlotsCount() == 0 then
+                            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.CARBUNCLES_POLE)
+                        else
+                            quest:setVar(player, 'Coin', 0)
+                            player:addItem(545)
+                        end
                     end
                 end,
+                -- Correct coin
                 [50] = function(player, csid, option, npc)
-                    if player:getFreeSlotsCount() == 0 then
-                        player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.CARBUNCLES_POLE)
-                    else
-                        quest:setVar(player, 'Coin', 1)
-                        player:addItem(545)
+                    if option == 2 then
+                        if player:getFreeSlotsCount() == 0 then
+                            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.CARBUNCLES_POLE)
+                        else
+                            quest:setVar(player, 'Coin', 1)
+                            player:addItem(545)
+                        end
                     end
                 end,
+                -- Incorrect coin
                 [51] = function(player, csid, option, npc)
-                    if player:getFreeSlotsCount() == 0 then
-                        player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.CARBUNCLES_POLE)
-                    else
-                        quest:setVar(player, 'Coin', 0)
-                        player:addItem(545)
+                    if option == 2 then
+                        if player:getFreeSlotsCount() == 0 then
+                            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.CARBUNCLES_POLE)
+                        else
+                            quest:setVar(player, 'Coin', 0)
+                            player:addItem(545)
+                        end
                     end
                 end,
             },
