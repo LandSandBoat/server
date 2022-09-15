@@ -181,7 +181,7 @@ local function getMultiAttacks(attacker, target, numHits)
     end
 
     -- QA/TA/DA can only proc on the first hit of each weapon or each fist
-    if attacker:getOffhandDmg() > 0 or attacker:getWeaponSkillType(xi.slot.MAIN) == xi.skill.HAND_TO_HAND then
+    if attacker:getWeaponSkillType(xi.slot.MAIN) == xi.skill.HAND_TO_HAND then
         multiChances = 2
     end
 
@@ -272,7 +272,7 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams, f
 
     if (missChance <= calcParams.hitRate or-- See if we hit the target
         calcParams.guaranteedHit or
-        calcParams.melee and math.random() < attacker:getMod(xi.mod.ZANSHIN)/100) and
+        (calcParams.melee and (math.random() < attacker:getMod(xi.mod.ZANSHIN)/100))) and
         not calcParams.mustMiss
     then
         if not shadowAbsorb(target) then
@@ -282,7 +282,7 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams, f
                           calcParams.mightyStrikesApplicable
 
             if criticalHit then
-                calcParams.criticalHit = true
+                criticalHit = true
                 calcParams.pdif = pdifCrit
             else
                 calcParams.pdif = pdif
@@ -396,15 +396,35 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
         end
     end
 
-    local wsMods = calcParams.fSTR +
-        (attacker:getStat(xi.mod.STR) * wsParams.str_wsc + attacker:getStat(xi.mod.DEX) * wsParams.dex_wsc +
-         attacker:getStat(xi.mod.VIT) * wsParams.vit_wsc + attacker:getStat(xi.mod.AGI) * wsParams.agi_wsc +
-         attacker:getStat(xi.mod.INT) * wsParams.int_wsc + attacker:getStat(xi.mod.MND) * wsParams.mnd_wsc +
-         attacker:getStat(xi.mod.CHR) * wsParams.chr_wsc) * calcParams.alpha
-    local mainBase = calcParams.weaponDamage[1] + wsMods + calcParams.bonusWSmods
+    local str = attacker:getStat(xi.mod.STR) + attacker:getMod(xi.mod.STR)
+    local dex = attacker:getStat(xi.mod.DEX) + attacker:getMod(xi.mod.DEX)
+    local vit = attacker:getStat(xi.mod.VIT) + attacker:getMod(xi.mod.VIT)
+    local agi = attacker:getStat(xi.mod.AGI) + attacker:getMod(xi.mod.AGI)
+    local int = attacker:getStat(xi.mod.INT) + attacker:getMod(xi.mod.INT)
+    local mnd = attacker:getStat(xi.mod.MND) + attacker:getMod(xi.mod.MND)
+    local chr = attacker:getStat(xi.mod.CHR) + attacker:getMod(xi.mod.CHR)
 
-    -- Calculate fTP multiplier
+    local wsMods = calcParams.fSTR +
+        math.floor((math.floor(str * wsParams.str_wsc) + math.floor(dex * wsParams.dex_wsc) + math.floor(vit * wsParams.vit_wsc) + math.floor(agi * wsParams.agi_wsc) +
+                    math.floor(int * wsParams.int_wsc) + math.floor(mnd * wsParams.mnd_wsc) + math.floor(chr * wsParams.chr_wsc)) * calcParams.alpha)
     local ftp = fTP(tp, wsParams.ftp100, wsParams.ftp200, wsParams.ftp300) + calcParams.bonusfTP
+    local dmg = 0
+
+    if not isRanged then
+        dmg = (calcParams.weaponDamage[1] + calcParams.fSTR + wsMods) * ftp
+    else
+        dmg = (calcParams.weaponDamage[1] + calcParams.weaponDamage[2] + calcParams.fSTR + wsMods) * ftp
+    end
+
+    if attacker:getMainJob() == xi.job.THF and not isRanged then
+        -- Add DEX/AGI bonus to first hit if THF main and valid Sneak/Trick Attack
+        if calcParams.sneakApplicable then
+            dmg = dmg + dex
+        end
+        if calcParams.trickApplicable then
+            dmg = dmg + agi
+        end
+    end
 
     -- Calculate critrates
     local critrate = 0
@@ -442,7 +462,6 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
     calcParams.shadowsAbsorbed = 0
 
     -- Calculate the damage from the first hit
-    local dmg = mainBase * ftp
     if isRanged then
         hitdmg, calcParams = getSingleHitDamage(attacker, target, dmg, wsParams, calcParams, false, isRanged)
     else
@@ -460,22 +479,6 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
     finaldmg = finaldmg + hitdmg
 
     -- Have to calculate added bonus for SA/TA here since it is done outside of the fTP multiplier
-    if attacker:getMainJob() == xi.job.THF then
-        local ratio = cMeleeRatio(attacker, target, wsParams, 0, tp, xi.slot.MAIN)
-        local pdif = ratio[1]
-        local pdifCrit = ratio[2]
-        -- Add DEX/AGI bonus to first hit if THF main and valid Sneak/Trick Attack
-        if calcParams.sneakApplicable then
-            finaldmg = finaldmg +
-                        (attacker:getStat(xi.mod.DEX) * (1 + attacker:getMod(xi.mod.SNEAK_ATK_DEX)/100) * pdifCrit) *
-                        ((100+(attacker:getMod(xi.mod.AUGMENTS_SA)))/100)
-        end
-        if calcParams.trickApplicable then
-            finaldmg = finaldmg +
-                        (attacker:getStat(xi.mod.AGI) * (1 + attacker:getMod(xi.mod.TRICK_ATK_AGI)/100) * pdif) *
-                        ((100+(attacker:getMod(xi.mod.AUGMENTS_TA)))/100)
-        end
-    end
 
     -- We've now accounted for any crit from SA/TA, or damage bonus for a Hybrid WS, so nullify them
     calcParams.forcedFirstCrit = false
@@ -509,7 +512,7 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
     calcParams.hitsLanded = 0 -- Reset counter to start tracking additional hits (from WS or Multi-Attacks)
 
     -- Calculate additional hits if a multiHit WS (or we're supposed to get a DA/TA/QA proc from main hit)
-    dmg = mainBase * ftp
+    dmg = dmg * ftp
     local hitsDone = 1
     local numHits = getMultiAttacks(attacker, target, wsParams.numHits)
 
@@ -642,7 +645,7 @@ end
     local calcParams =
     {
         wsID = wsID,
-        weaponDamage = {attacker:getRangedDmg()},
+        weaponDamage = {attacker:getRangedDamage()},
         skillType = attacker:getWeaponSkillType(xi.slot.RANGED),
         fSTR = fSTR2(attacker:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), attacker:getRangedDmgRank()),
         pdif = pdif,
@@ -869,6 +872,10 @@ function getMeleeDmg(attacker, weaponType, kick)
     end
 
     return {mainhandDamage, offhandDamage}
+end
+
+function getRangedDamage(attacker)
+    return {attacker:getRangedDmg(), attacker:getAmmoDmg()}
 end
 
 function getHitRate(attacker, target, capHitRate, bonus)
