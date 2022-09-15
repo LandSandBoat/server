@@ -232,82 +232,67 @@ namespace synthutils
 
     uint8 calcSynthResult(CCharEntity* PChar)
     {
-        uint8 result      = SYNTHESIS_SUCCESS; // We assume by default that we succed
-        uint8 hqtier      = 0;
-        uint8 finalhqtier = 4;
-        bool  canHQ       = true; // We assume by default that we can HQ
-
-        double chance    = 0;
-        double chanceHQ2 = 0;
-        double chanceHQ3 = 0;
-        double random    = 0;
-        double success   = 0;
-        double synthDiff = 0;
+        uint8  result          = SYNTHESIS_SUCCESS; // We assume by default that we succed
+        int8   hqtier          = 3;
+        bool   canHQ           = true; // We assume by default that we can HQ
+        double success         = 0;
+        double chance          = 0;
+        double random          = xirand::GetRandomNumber(1.);
+        uint8  checkSkill      = 0;
+        double synthDiff       = 0.;
+        int16  modSynthSuccess = 0;
+        int16  modSynthHqRate  = PChar->getMod(Mod::SYNTH_HQ_RATE);
 
         // Section 1: Break handling
         for (uint8 skillID = SKILL_WOODWORKING; skillID <= SKILL_COOKING; ++skillID)
         {
-            uint8 checkSkill = PChar->CraftContainer->getQuantity(skillID - 40);
+            checkSkill = PChar->CraftContainer->getQuantity(skillID - 40);
             if (checkSkill != 0)
             {
-                random    = xirand::GetRandomNumber(1.);        // Random call must be called for each involved skill.
-                hqtier    = 0;                                  // Set HQ Tier to 0 AGAIN. Or else bad things happen.
+                synthDiff = getSynthDifficulty(PChar, skillID);
+
+                if (synthDiff > 0)
+                {
+                    hqtier = -1;
+                    break;
+                }
+                else if (synthDiff > -11 && hqtier > 0) // 0-10 levels over recipe
+                {
+                    hqtier = 0;
+                }
+                else if (synthDiff > -31 && hqtier > 1) // 11-30 levels over recipe
+                {
+                    hqtier = 1;
+                }
+                else if (synthDiff > -51 && hqtier > 2) // 31-50 levels over recipe
+                {
+                    hqtier = 2;
+                }
+            }
+        }
+
+        for (uint8 skillID = SKILL_WOODWORKING; skillID <= SKILL_COOKING; ++skillID)
+        {
+            checkSkill = PChar->CraftContainer->getQuantity(skillID - 40);
+            if (checkSkill != 0)
+            {
                 synthDiff = getSynthDifficulty(PChar, skillID); // Get synth difficulty again, for each skill involved.
+                success   = 0.95;
 
-                if (synthDiff <= 0)
+                if (PChar->CraftContainer->getCraftType() == 1) // if it's a desynth lower success rate
                 {
-                    if (PChar->CraftContainer->getCraftType() == 1) // if it's a desynth lower success rate
-                    {
-                        success = 0.45;
-                    }
-                    else
-                    {
-                        success = 0.95;
-                    }
-
-                    if (synthDiff > -11) // 0-10 levels over recipe
-                    {
-                        hqtier = 1;
-                    }
-                    else if (synthDiff > -31) // 11-30 levels over recipe
-                    {
-                        hqtier = 2;
-                    }
-                    else if (synthDiff > -51) // 31-50 levels over recipe
-                    {
-                        hqtier = 3;
-                    }
-                    else // 51+ levels over recipe
-                    {
-                        hqtier = 4;
-                    }
-
-                    if (hqtier < finalhqtier)
-                    {
-                        finalhqtier = hqtier; // set var to limit possible hq if needed
-                    }
+                    success -= 0.50; // Result 0.45/1
                 }
-                else
+
+                if (synthDiff > 0)
                 {
-                    canHQ = false; // Player skill level is lower than recipe skill level. Cannot HQ.
-
-                    if (PChar->CraftContainer->getCraftType() == 1) // if it's a desynth lower success rate
-                    {
-                        success = 0.45 - (synthDiff / 10);
-                    }
-                    else
-                    {
-                        success = 0.95 - (synthDiff / 10);
-                    }
-
-                    if (success < 0.05)
-                    {
-                        success = 0.05;
-                    }
+                    success -= (synthDiff / 10);
                 }
+
+                success = std::clamp(success, 0.05, 0.95);
 
                 // Apply synthesis success rate modifier
-                int16 modSynthSuccess = PChar->CraftContainer->getCraftType() == CRAFT_SYNTHESIS ? PChar->getMod(Mod::SYNTH_SUCCESS) : PChar->getMod(Mod::DESYNTH_SUCCESS);
+                modSynthSuccess = PChar->CraftContainer->getCraftType() == CRAFT_SYNTHESIS ? PChar->getMod(Mod::SYNTH_SUCCESS) : PChar->getMod(Mod::DESYNTH_SUCCESS);
                 success += (double)modSynthSuccess * 0.01;
 
                 if (!canSynthesizeHQ(PChar, skillID))
@@ -316,16 +301,13 @@ namespace synthutils
                     canHQ = false;   // assuming here that if a crafting ring is used matching a recipe's subsynth, overall HQ will still be blocked
                 }
 
-                if (success > 0.99)
-                {
-                    // Clamp success rate to 0.99
-                    // Even if using kitron macaron, breaks can still happen
-                    // https://www.bluegartr.com/threads/120352-CraftyMath
-                    //   "I get a 99% success rate, so Kitron is doing something and it's not small."
-                    // http://www.ffxiah.com/item/5781/kitron-macaron
-                    //   "According to one of the Japanese wikis, it is said to decrease the minimum break rate from ~5% to 0.5%-2%."
-                    success = 0.99;
-                }
+                // Clamp success rate to 0.99
+                // Even if using kitron macaron, breaks can still happen
+                // https://www.bluegartr.com/threads/120352-CraftyMath
+                //   "I get a 99% success rate, so Kitron is doing something and it's not small."
+                // http://www.ffxiah.com/item/5781/kitron-macaron
+                //   "According to one of the Japanese wikis, it is said to decrease the minimum break rate from ~5% to 0.5%-2%."
+                success = std::clamp(success, 0.05, 0.99);
 
                 if (random >= success) // Synthesis broke
                 {
@@ -341,41 +323,32 @@ namespace synthutils
         // Section 2: HQ handling
         if (result != SYNTHESIS_FAIL && canHQ) // It hasn't broken, so lets continue.
         {
-            switch (finalhqtier)
+            switch (hqtier)
             {
-                case 4: // 1 in 2
-                    chance    = 0.500;
-                    chanceHQ2 = 9.360;
-                    chanceHQ3 = 3.300;
+                case 3:
+                    chance = 0.500;
                     break;
-                case 3: // 1 in 4
-                    chance    = 0.250;
-                    chanceHQ2 = 5.310;
-                    chanceHQ3 = 2.020;
+                case 2:
+                    chance = 0.250;
                     break;
-                case 2: // 1 in 9
-                    chance    = 0.066;
-                    chanceHQ2 = 2.720;
-                    chanceHQ3 = 1.200;
+                case 1:
+                    chance = 0.066;
                     break;
-                case 1: // 1 in 100
-                    chance    = 0.010;
-                    chanceHQ2 = 1.760;
-                    chanceHQ3 = 1.000;
+                case 0:
+                    chance = 0.018;
                     break;
-                default: // No chance
-                    chance    = 0;
-                    chanceHQ2 = 0;
-                    chanceHQ3 = 0;
+                case -1:
+                    chance = 0.0006;
+                    break;
+                default:
+                    chance = 0.000;
                     break;
             }
 
             if (PChar->CraftContainer->getCraftType() == 1) // if it's a desynth raise HQ chance
             {
-                chance *= 0.4 + (finalhqtier * 0.03);
+                chance *= 0.4 + (hqtier * 0.03);
             }
-
-            int16 modSynthHqRate = PChar->getMod(Mod::SYNTH_HQ_RATE);
 
             // Using x/512 calculation for HQ success rate modifier
             // see: https://www.bluegartr.com/threads/130586-CraftyMath-v2-Post-September-2017-Update
@@ -394,17 +367,40 @@ namespace synthutils
                 }
             }
 
-            if (random < chance) // We HQ. Proceed to selct HQ Tier
+            random = xirand::GetRandomNumber(1.);
+
+            if (random < chance && canHQ) // We HQ. Proceed to selct HQ Tier
             {
-                result = SYNTHESIS_HQ;
-                random = xirand::GetRandomNumber(100.);
-
-                if (random < chanceHQ2) // Upgrade to HQ2
+                if (PChar->CraftContainer->getCraftType() != 1)
                 {
-                    result = SYNTHESIS_HQ2;
-                    random = xirand::GetRandomNumber(100.);
+                    random = xirand::GetRandomNumber(0, 16);
 
-                    if (random < chanceHQ3) // Upgrade to HQ3
+                    if (random == 0)
+                    {
+                        result = SYNTHESIS_HQ3;
+                    }
+                    else if (random < 4)
+                    {
+                        result = SYNTHESIS_HQ2;
+                    }
+                    else
+                    {
+                        result = SYNTHESIS_HQ;
+                    }
+                }
+                else
+                {
+                    random = xirand::GetRandomNumber(1.);
+
+                    if (random < 0.375)
+                    {
+                        result = SYNTHESIS_HQ;
+                    }
+                    else if (random < 0.75)
+                    {
+                        result = SYNTHESIS_HQ2;
+                    }
+                    else
                     {
                         result = SYNTHESIS_HQ3;
                     }
