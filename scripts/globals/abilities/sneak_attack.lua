@@ -5,8 +5,7 @@
 -- Recast Time: 1:00
 -- Duration: 1:00
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
+require("scripts/globals/job_utils/thief")
 -----------------------------------
 local ability_object = {}
 
@@ -15,7 +14,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-   player:addStatusEffect(xi.effect.SNEAK_ATTACK, 1, 0, 60)
+   xi.job_utils.thief.useSneakAttack(player, target, ability)
 end
 
 return ability_object

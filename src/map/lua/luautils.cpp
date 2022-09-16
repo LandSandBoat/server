@@ -3702,7 +3702,7 @@ namespace luautils
         auto onMagicCastingCheck = getSpellCachedFunction(PSpell, "onMagicCastingCheck");
         if (!onMagicCastingCheck.valid())
         {
-            ShowWarning("luautils::onMagicCastingCheck");
+            ShowWarning("luautils::onMagicCastingCheck, spell (%s) has no lua file, it cannot be cast.", PSpell->getName());
             return 47;
         }
 
@@ -3875,6 +3875,60 @@ namespace luautils
         }
 
         return result.get_type(0) == sol::type::number ? result.get<int32>(0) : 0;
+    }
+
+    int32 OnSteal(CBattleEntity* PChar, CBattleEntity* PMob, CAbility* PAbility, action_t* action)
+    {
+        TracyZoneScoped;
+
+        if (PChar == nullptr || PMob == nullptr)
+        {
+            return 0;
+        }
+
+        sol::function onSteal = getEntityCachedFunction(PMob, "onSteal");
+        if (!onSteal.valid())
+        {
+            return 0;
+        }
+
+        auto result = onSteal(CLuaBaseEntity(PChar), CLuaBaseEntity(PMob), CLuaAbility(PAbility), CLuaAction(action));
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onSteal %s", err.what());
+            return 0;
+        }
+
+        uint16 retVal = result.get_type(0) == sol::type::number ? result.get<uint16>(0) : 0;
+        if (retVal > 0)
+        {
+            return retVal;
+        }
+
+        return 0;
+    }
+
+    bool OnCanUseSpell(CBattleEntity* PChar, CSpell* Spell) // triggers when CanUseSpell is invoked on spell.cpp for PCs only
+    {
+        TracyZoneScoped;
+
+        sol::function canUseSpellOverride = lua["xi"]["spells"]["canUseSpellOverride"];
+
+        if (!canUseSpellOverride.valid())
+        {
+            return false;
+        }
+
+        auto result = canUseSpellOverride(CLuaBaseEntity(PChar), CLuaSpell(Spell));
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::OnCanUseSpell: %s", err.what());
+            return 0;
+        }
+
+        return result.get_type(0) == sol::type::boolean ? result.get<bool>(0) : true;
     }
 
     void Terminate()

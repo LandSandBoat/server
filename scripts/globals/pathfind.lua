@@ -13,6 +13,9 @@ xi.path =
         RUN      = 1,
         WALLHACK = 2,
         REVERSE  = 4,
+        SCRIPT   = 8,
+        SLIDE    = 16,
+        PATROL   = 32,
     },
 
     -- returns the point at the given index
@@ -38,6 +41,12 @@ xi.path =
     -- returns first point in given path
     first = function(points)
         return xi.path.get(points, 1)
+    end,
+
+    -- temporary and will replace original
+    first_patrol = function(points)
+        local first = points[1]
+        return { first.x, first.y, first.z }
     end,
 
     -- are two points the same?

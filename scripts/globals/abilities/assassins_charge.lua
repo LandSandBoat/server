@@ -5,8 +5,7 @@
 -- Recast Time: 5:00
 -- Duration: 1:00 minute
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
+require("scripts/globals/job_utils/thief")
 -----------------------------------
 local ability_object = {}
 
@@ -15,13 +14,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    local merits = player:getMerit(xi.merit.ASSASSINS_CHARGE)
-    local crit = 0
-    if player:getMod(xi.mod.AUGMENTS_ASSASSINS_CHARGE) > 0 then
-        crit = merits / 5
-    end
-
-    player:addStatusEffect(xi.effect.ASSASSINS_CHARGE, merits - 5, 0, 60, 0, crit)
+    xi.job_utils.thief.useAssassinsCharge(player, target, ability)
 end
 
 return ability_object

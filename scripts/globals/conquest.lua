@@ -1,7 +1,5 @@
 -----------------------------------
---
---     Functions for Conquest system
---
+-- Functions for Conquest system
 -----------------------------------
 require("scripts/globals/teleports")
 require("scripts/globals/keyitems")
@@ -12,8 +10,8 @@ require("scripts/globals/status")
 require("scripts/globals/zone")
 require("scripts/globals/items")
 require("scripts/globals/extravaganza")
+require("scripts/globals/garrison")
 -----------------------------------
-
 xi = xi or {}
 xi.conquest = xi.conquest or {}
 
@@ -994,6 +992,10 @@ end
 -----------------------------------
 
 xi.conquest.overseerOnTrade = function(player, npc, trade, guardNation, guardType)
+    if xi.garrison.onTrade(player, npc, trade, guardNation) then
+        return
+    end
+
     if player:getNation() == guardNation or guardNation == xi.nation.OTHER then
         local item = trade:getItemId()
         local tradeConfirmed = false
@@ -1062,6 +1064,10 @@ end
 xi.conquest.overseerOnTrigger = function(player, npc, guardNation, guardType, guardEvent, guardRegion)
     local pNation = player:getNation()
 
+    if xi.garrison.onTrigger(player, npc) then
+        return
+    end
+
     -- SUPPLY RUNS
     if pNation == guardNation and areSuppliesRotten(player, npc, guardType) then
         -- do nothing else
@@ -1102,10 +1108,13 @@ xi.conquest.overseerOnTrigger = function(player, npc, guardNation, guardType, gu
 end
 
 xi.conquest.overseerOnEventUpdate = function(player, csid, option, guardNation)
+    local pNation = player:getNation()
+    if guardNation == xi.nation.OTHER then
+        guardNation = pNation
+    end
     local stock = getStock(player, guardNation, option)
 
     if stock ~= nil then
-        local pNation = player:getNation()
         local pRank   = GetNationRank(pNation)
         local u1 = 2 -- default: player is correct job and level to equip item
         local u2 = 0 -- default: player has enough CP for item
@@ -1186,6 +1195,10 @@ xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, 
     local sRegion  = player:getCharVar("supplyQuest_region")
     local sOutpost = outposts[sRegion]
     local mOffset  = zones[player:getZoneID()].text.CONQUEST
+
+    if xi.garrison.onEventFinish(player, csid, option, guardNation, guardType, guardRegion) then
+        return
+    end
 
     -- SIGNET
     if option == 1 then
