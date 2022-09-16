@@ -9,24 +9,15 @@ local entity = {}
 
 local path =
 {
-    -209.084, -3.250, -100.559,
-    -209.084, -3.250, -100.559,
-    -209.084, -3.250, -100.559,
-    -209.084, -3.250, -100.559,
-    -205.729, -3.108, -98.984,
-    -205.729, -3.108, -98.984,
-    -205.729, -3.108, -98.984,
-    -205.729, -3.108, -98.984,
-    -208.634, -3.250, -96.121,
+    {x = -209.084, y = -3.250, z = -100.559, wait = 3000},
+    {x = -205.729, y = -3.108, z = -98.984, wait = 3000},
+    {x = -208.634, y = -3.250, z = -96.121},
 }
 
 entity.onSpawn = function(npc)
     npc:initNpcAi()
     npc:setPos(xi.path.first(path))
-end
-
-entity.onPath = function(npc)
-    xi.path.patrol(npc, path, xi.path.flag.RUN)
+    npc:pathThrough(path, bit.bor(xi.path.flag.PATROL, xi.path.flag.RUN))
 end
 
 return entity
