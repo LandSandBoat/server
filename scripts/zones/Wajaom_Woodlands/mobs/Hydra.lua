@@ -9,7 +9,7 @@ require("scripts/globals/titles")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("[rage]timer", 1800) -- 20 minutes
+    mob:setLocalVar("[rage]timer", 1800) -- 30 minutes
 end
 
 entity.onMobFight = function(mob, target)

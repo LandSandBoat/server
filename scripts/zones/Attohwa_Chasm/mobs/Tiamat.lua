@@ -2,6 +2,7 @@
 -- Area: Attohwa Chasm
 --  Mob: Tiamat
 -----------------------------------
+mixins = {require("scripts/mixins/rage")}
 require("scripts/globals/titles")
 require("scripts/globals/status")
 -----------------------------------
@@ -14,6 +15,7 @@ end
 entity.onMobSpawn = function(mob)
     mob:SetMobSkillAttack(0) -- resetting so it doesn't respawn in flight mode.
     mob:setAnimationSub(0) -- subanim 0 is only used when it spawns until first flight.
+	mob:setLocalVar("[rage]timer", 1800) -- 30 minutes
 end
 
 entity.onMobFight = function(mob, target)
