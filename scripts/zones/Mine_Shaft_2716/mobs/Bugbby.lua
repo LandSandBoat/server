@@ -6,7 +6,7 @@
 local ID = require("scripts/zones/Mine_Shaft_2716/IDs")
 require("scripts/globals/status")
 require("scripts/globals/status")
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}
 

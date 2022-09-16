@@ -4,7 +4,7 @@
 -- TODO: messages should be zone-wide
 -----------------------------------
 local ID = require("scripts/zones/Castle_Oztroja/IDs")
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/titles")
 require("scripts/globals/mobs")
 -----------------------------------

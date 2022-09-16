@@ -2,7 +2,7 @@
 -- Area: Al'Taieu
 --   NM: Jailer of Hope
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

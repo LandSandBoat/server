@@ -5,7 +5,7 @@
 -----------------------------------
 local global = require("scripts/zones/QuBia_Arena/Globals")
 local ID = require("scripts/zones/QuBia_Arena/IDs")
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}
 

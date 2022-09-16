@@ -2,7 +2,7 @@
 -- Area: La Theine Plateau
 --   NM: Bloodtear Baldurf
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/status")
 require("scripts/globals/titles")
 require("scripts/quests/tutorial")

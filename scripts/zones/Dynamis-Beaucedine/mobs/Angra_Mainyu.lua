@@ -3,7 +3,7 @@
 --  Mob: Angra Mainyu
 -- Note: Mega Boss
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/dynamis")
 require("scripts/globals/status")
 -----------------------------------
