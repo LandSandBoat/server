@@ -43,6 +43,12 @@ xi.path =
         return xi.path.get(points, 1)
     end,
 
+    -- temporary and will replace original
+    first_patrol = function(points)
+        local first = points[1]
+        return { first.x, first.y, first.z };
+    end,
+
     -- are two points the same?
     equal = function(point1, point2)
         return point1[1] == point2[1] and point1[2] == point2[2] and point1[3] == point2[3]
