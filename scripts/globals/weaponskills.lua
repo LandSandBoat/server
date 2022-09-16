@@ -396,33 +396,32 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
         end
     end
 
-    local str = attacker:getStat(xi.mod.STR) + attacker:getMod(xi.mod.STR)
-    local dex = attacker:getStat(xi.mod.DEX) + attacker:getMod(xi.mod.DEX)
-    local vit = attacker:getStat(xi.mod.VIT) + attacker:getMod(xi.mod.VIT)
-    local agi = attacker:getStat(xi.mod.AGI) + attacker:getMod(xi.mod.AGI)
-    local int = attacker:getStat(xi.mod.INT) + attacker:getMod(xi.mod.INT)
-    local mnd = attacker:getStat(xi.mod.MND) + attacker:getMod(xi.mod.MND)
-    local chr = attacker:getStat(xi.mod.CHR) + attacker:getMod(xi.mod.CHR)
+    local str = math.floor(attacker:getStat(xi.mod.STR) * wsParams.str_wsc)
+    local dex = math.floor(attacker:getStat(xi.mod.DEX) * wsParams.dex_wsc)
+    local vit = math.floor(attacker:getStat(xi.mod.VIT) * wsParams.vit_wsc)
+    local agi = math.floor(attacker:getStat(xi.mod.AGI) * wsParams.agi_wsc)
+    local int = math.floor(attacker:getStat(xi.mod.INT) * wsParams.int_wsc)
+    local mnd = math.floor(attacker:getStat(xi.mod.MND) * wsParams.mnd_wsc)
+    local chr = math.floor(attacker:getStat(xi.mod.CHR) * wsParams.chr_wsc)
 
-    local wsMods = calcParams.fSTR +
-        math.floor((math.floor(str * wsParams.str_wsc) + math.floor(dex * wsParams.dex_wsc) + math.floor(vit * wsParams.vit_wsc) + math.floor(agi * wsParams.agi_wsc) +
-                    math.floor(int * wsParams.int_wsc) + math.floor(mnd * wsParams.mnd_wsc) + math.floor(chr * wsParams.chr_wsc)) * calcParams.alpha)
+    local wsMods = calcParams.fSTR + (math.floor(str + dex + vit + agi + int + mnd + chr) * calcParams.alpha)
     local ftp = fTP(tp, wsParams.ftp100, wsParams.ftp200, wsParams.ftp300) + calcParams.bonusfTP
-    local dmg = 0
 
     if not isRanged then
-        dmg = (calcParams.weaponDamage[1] + calcParams.fSTR + wsMods) * ftp
+        base = (calcParams.weaponDamage[1] + calcParams.fSTR + wsMods) * ftp
     else
-        dmg = (calcParams.weaponDamage[1] + calcParams.weaponDamage[2] + calcParams.fSTR + wsMods) * ftp
+        base = (calcParams.weaponDamage[1] + calcParams.weaponDamage[2] + calcParams.fSTR + wsMods) * ftp
     end
+
+    local dmg = base
 
     if attacker:getMainJob() == xi.job.THF and not isRanged then
         -- Add DEX/AGI bonus to first hit if THF main and valid Sneak/Trick Attack
         if calcParams.sneakApplicable then
-            dmg = dmg + dex
+            dmg = dmg + attacker:getStat(xi.mod.DEX)
         end
         if calcParams.trickApplicable then
-            dmg = dmg + agi
+            dmg = dmg + attacker:getStat(xi.mod.AGI)
         end
     end
 
@@ -483,6 +482,9 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
     -- We've now accounted for any crit from SA/TA, or damage bonus for a Hybrid WS, so nullify them
     calcParams.forcedFirstCrit = false
     calcParams.hybridHit = false
+    calcParams.sneakApplicable = false
+    calcParams.trickApplicable = false
+    dmg = base
 
     -- For items that apply bonus damage to the first hit of a weaponskill (but not later hits),
     -- store bonus damage for first hit, for use after other calculations are done
@@ -512,7 +514,6 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
     calcParams.hitsLanded = 0 -- Reset counter to start tracking additional hits (from WS or Multi-Attacks)
 
     -- Calculate additional hits if a multiHit WS (or we're supposed to get a DA/TA/QA proc from main hit)
-    dmg = dmg * ftp
     local hitsDone = 1
     local numHits = getMultiAttacks(attacker, target, wsParams.numHits)
 
@@ -552,7 +553,6 @@ end
 -- Sets up the necessary calcParams for a melee WS before passing it to calculateRawWSDmg. When the raw
 -- damage is returned, handles reductions based on target resistances and passes off to takeWeaponskillDamage.
 function doPhysicalWeaponskill(attacker, target, wsID, wsParams, tp, action, primaryMsg, taChar)
-
     -- Determine cratio and ccritratio
     local ignoredDef = 0
 
@@ -619,7 +619,7 @@ end
 
 -- Sets up the necessary calcParams for a ranged WS before passing it to calculateRawWSDmg. When the raw
 -- damage is returned, handles reductions based on target resistances and passes off to takeWeaponskillDamage.
- function doRangedWeaponskill(attacker, target, wsID, wsParams, tp, action, primaryMsg)
+function doRangedWeaponskill(attacker, target, wsID, wsParams, tp, action, primaryMsg)
 
     -- Determine cratio and ccritratio
     local ignoredDef = 0
