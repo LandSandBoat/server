@@ -36,6 +36,7 @@
 #include "../packets/event.h"
 #include "../packets/event_string.h"
 #include "../packets/inventory_finish.h"
+#include "../packets/inventory_item.h"
 #include "../packets/key_items.h"
 #include "../packets/lock_on.h"
 #include "../packets/menu_raisetractor.h"
@@ -2038,7 +2039,10 @@ void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
 
     if ((isParalyzed && scrollProtection && isScroll && itemLoss) || (isParalyzed && !itemLoss)) // Become paralyzed and stop executing.
     {
-        loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(this, PTarget, 0, 0, MSGBASIC_IS_PARALYZED));
+        this->loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(this, PTarget, 0, 0, MSGBASIC_IS_PARALYZED));
+        PItem->setSubType(ITEM_UNLOCKED);
+        this->pushPacket(new CInventoryItemPacket(PItem, PItem->getLocationID(), PItem->getSlotID()));
+        this->pushPacket(new CInventoryFinishPacket());
         return;
     }
 
