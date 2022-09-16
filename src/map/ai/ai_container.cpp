@@ -154,7 +154,7 @@ bool CAIContainer::Trigger(CCharEntity* player)
         auto ret = ChangeState<CTriggerState>(PEntity, player->targid, isDoor);
         if (PathFind)
         {
-            PathFind->Clear(); //#TODO: pause/resume after?
+            PEntity->SetLocalVar("pauseNPCPathing", 1);
         }
         return ret;
     }
@@ -389,7 +389,7 @@ void CAIContainer::Tick(time_point _tick)
     bool isPathingPaused = PEntity->GetLocalVar("pauseNPCPathing");
     if (!Controller && CanFollowPath() && !isPathingPaused)
     {
-        PathFind->FollowPath();
+        PathFind->FollowPath(_tick);
         if (PathFind->OnPoint())
         {
             EventHandler.triggerListener("PATH", CLuaBaseEntity(PEntity));

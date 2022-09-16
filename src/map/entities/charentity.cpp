@@ -2566,14 +2566,9 @@ void CCharEntity::tryStartNextEvent()
     if (PNpc && PNpc->objtype == TYPE_NPC)
     {
         PNpc->SetLocalVar("pauseNPCPathing", 1);
-
-        if (PNpc->PAI->PathFind != nullptr)
-        {
-            PNpc->PAI->PathFind->Clear();
-        }
     }
 
-    // If it's a cutsene, we lock the player immediately
+    // If it's a cutscene, we lock the player immediately
     setLocked(currentEvent->type == CUTSCENE);
 
     if (currentEvent->strings.empty())

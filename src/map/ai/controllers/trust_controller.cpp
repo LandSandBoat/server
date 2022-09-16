@@ -169,7 +169,7 @@ void CTrustController::DoCombatTick(time_point tick)
                             if (currentDistanceToTarget < RoamDistance * 3.0f &&
                                 POwner->PAI->PathFind->PathAround(PTarget->loc.p, RoamDistance, PATHFLAG_RUN | PATHFLAG_WALLHACK))
                             {
-                                POwner->PAI->PathFind->FollowPath();
+                                POwner->PAI->PathFind->FollowPath(m_Tick);
                             }
                             else if (POwner->GetSpeed() > 0)
                             {
@@ -189,7 +189,7 @@ void CTrustController::DoCombatTick(time_point tick)
 
         if (!m_InTransit)
         {
-            POwner->PAI->PathFind->FollowPath();
+            POwner->PAI->PathFind->FollowPath(m_Tick);
         }
 
         m_GambitsContainer->Tick(tick);
@@ -254,7 +254,7 @@ void CTrustController::DoRoamTick(time_point tick)
 
             if (POwner->PAI->PathFind->ValidPosition(new_pos) && POwner->PAI->PathFind->PathAround(new_pos, RoamDistance, PATHFLAG_RUN | PATHFLAG_WALLHACK))
             {
-                POwner->PAI->PathFind->FollowPath();
+                POwner->PAI->PathFind->FollowPath(m_Tick);
             }
             break;
         }
@@ -268,7 +268,7 @@ void CTrustController::DoRoamTick(time_point tick)
     {
         if (currentDistance < RoamDistance * 3.0f && POwner->PAI->PathFind->PathAround(PFollowTarget->loc.p, RoamDistance, PATHFLAG_RUN | PATHFLAG_WALLHACK))
         {
-            POwner->PAI->PathFind->FollowPath();
+            POwner->PAI->PathFind->FollowPath(m_Tick);
         }
         else if (POwner->GetSpeed() > 0)
         {
