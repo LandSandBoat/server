@@ -13634,7 +13634,7 @@ INSERT INTO `mob_droplist` VALUES (1712,0,0,1000,1631,@VRARE);    -- Moblin Armo
 
 -- ZoneID:  11 - Moblin Pickman
 INSERT INTO `mob_droplist` VALUES (1713,0,0,1000,1631,@RARE);  -- Moblin Armor (Rare, 5%)
-INSERT INTO `mob_droplist` VALUES (1713,0,0,1000,1638,@RVARE); -- Moblin Mask (Very Rare, 1%)
+INSERT INTO `mob_droplist` VALUES (1713,0,0,1000,1638,@VRARE); -- Moblin Mask (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (1713,2,0,1000,750,0);       -- Silver Beastcoin (Steal)
 
 -- ZoneID:  11 - Moblin Pikeman
