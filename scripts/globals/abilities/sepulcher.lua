@@ -5,17 +5,16 @@
 -- Recast Time: 00:05:00
 -- Duration: 00:03:00
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
+require("scripts/globals/job_utils/paladin")
 -----------------------------------
 local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)
-    return 0, 0
+    return xi.job_utils.paladin.checkSepulcher(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    target:addStatusEffect(xi.effect.SEPULCHER, 7, 0, 180)
+    xi.job_utils.paladin.useSepulcher(player, target, ability)
 end
 
 return ability_object

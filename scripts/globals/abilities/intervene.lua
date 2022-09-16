@@ -5,18 +5,16 @@
 -- Recast Time: 01:00:00
 -- Duration: 00:00:30
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
+require("scripts/globals/job_utils/paladin")
 -----------------------------------
 local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)
-    ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
-    return 0, 0
+    return xi.job_utils.paladin.checkIntervene(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    target:addStatusEffect(xi.effect.INTERVENE, 7, 0, 30)
+    return xi.job_utils.paladin.useIntervene(player, target, ability)
 end
 
 return ability_object
