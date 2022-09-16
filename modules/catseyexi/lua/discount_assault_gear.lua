@@ -31,7 +31,7 @@ m:addOverride("xi.zones.Aht_Urhgan_Whitegate.npcs.Bhoy_Yhupplo.onEventFinish", f
             local item = bit.rshift(option, 14)
             local choice = items[item]
             if choice and npcUtil.giveItem(player, choice.itemid) then
-                player:delAssaultPoint(xi.assaultUtil.assaultArea.ILRUSI_ATOLL, choice.price)
+                player:delAssaultPoint(xi.assault.assaultArea.ILRUSI_ATOLL, choice.price)
             end
         end
     end
@@ -65,7 +65,7 @@ m:addOverride("xi.zones.Aht_Urhgan_Whitegate.npcs.Isdebaaq.onEventFinish", funct
             local item = bit.rshift(option, 14)
             local choice = items[item]
             if choice and npcUtil.giveItem(player, choice.itemid) then
-                player:delAssaultPoint(xi.assaultUtil.assaultArea.MAMOOL_JA_TRAINING_GROUNDS, choice.price)
+                player:delAssaultPoint(xi.assault.assaultArea.MAMOOL_JA_TRAINING_GROUNDS, choice.price)
             end
         end
     end
@@ -99,7 +99,7 @@ m:addOverride("xi.zones.Aht_Urhgan_Whitegate.npcs.Lageegee.onEventFinish", funct
             local item = bit.rshift(option, 14)
             local choice = items[item]
             if choice and npcUtil.giveItem(player, choice.itemid) then
-                player:delAssaultPoint(xi.assaultUtil.assaultArea.PERIQIA, choice.price)
+                player:delAssaultPoint(xi.assault.assaultArea.PERIQIA, choice.price)
             end
         end
     end
@@ -133,7 +133,7 @@ m:addOverride("xi.zones.Aht_Urhgan_Whitegate.npcs.Yahsra.onEventFinish", functio
             local item = bit.rshift(option, 14)
             local choice = items[item]
             if choice and npcUtil.giveItem(player, choice.itemid) then
-                player:delAssaultPoint(xi.assaultUtil.assaultArea.LEUJAOAM_SANCTUM, choice.price)
+                player:delAssaultPoint(xi.assault.assaultArea.LEUJAOAM_SANCTUM, choice.price)
             end
         end
     end
@@ -167,7 +167,7 @@ m:addOverride("xi.zones.Aht_Urhgan_Whitegate.npcs.Famad.onEventFinish", function
             local item = bit.rshift(option, 14)
             local choice = items[item]
             if choice and npcUtil.giveItem(player, choice.itemid) then
-                player:delAssaultPoint(xi.assaultUtil.assaultArea.LEBROS_CAVERN, choice.price)
+                player:delAssaultPoint(xi.assault.assaultArea.LEBROS_CAVERN, choice.price)
             end
         end
     end
