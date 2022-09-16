@@ -10,39 +10,46 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     mob:setLocalVar("wildRagePower", 1)
-
-    mob:addListener("WEAPONSKILL_STATE_ENTER", "SCORPION_MIMIC_START", function(mobArg, skillID)
-        local bf = mobArg:getBattlefield():getArea()
-
-        if mobArg:getZone():getLocalVar(string.format("mimicControl_%s",bf)) ~= 1 then
-            for _, allyID in pairs(ID.operationDesertSwarm[bf]) do
-                local mimic = GetMobByID(allyID)
-                local dist = mobArg:checkDistance(mimic)
-
-                if
-                    mobArg:getID() ~= allyID and
-                    mimic:isAlive() and mimic ~= nil and
-                    mimic:getLocalVar("mimicTimer") < os.time() and
-                    dist < 15
-                then
-                    mobArg:getZone():setLocalVar(string.format("mimicControl_%s",bf), 1)
-                    mimic:useMobAbility(skillID)
-                elseif mimic:getLocalVar("mimicTimer") > os.time() then
-                    mob:showText(mob,ID.text.SCORPION_NO_ENERGY)
-                end
-            end
-        end
-    end)
+    mob:setMod(xi.mod.SLEEPRESBUILD, 10)
 
     mob:addListener("WEAPONSKILL_STATE_EXIT", "SCORPION_MIMIC_STOP", function(mobArg, skillID)
         local bf = mobArg:getBattlefield():getArea()
         mobArg:getZone():setLocalVar(string.format("mimicControl_%s",bf), 0)
         mob:setLocalVar("mimicTimer", os.time() + 7)
 
-        if math.random() <= 0.25 then
+        if mobArg:getZone():getLocalVar(string.format("mimicControl_%s",bf)) ~= 1 then
+            for _, allyID in pairs(ID.operationDesertSwarm[bf]) do
+                local mimic = GetMobByID(allyID)
+
+                if
+                    mobArg:getID() ~= allyID and
+                    mimic:isAlive() and mimic ~= nil and
+                    mimic:getLocalVar("mimicTimer") < os.time() and
+                    mobArg:checkDistance(mimic) < 15 and not
+                    (mimic:hasStatusEffect(xi.effect.SLEEP_I) or mimic:hasStatusEffect(xi.effect.SLEEP_II))
+                then
+                    mobArg:getZone():setLocalVar(string.format("mimicControl_%s",bf), 1)
+                    mobArg:timer(5000, function(mimicArg)
+                        mimic:addTP(1000)
+                    end)
+                end
+            end
+        end
+
+        -- Scorpions are bound for 10 secounds
+        if math.random() <= 0.25 and skillID == 355 then
             mobArg:showText(mob,ID.text.SCORPION_IS_BOUND)
             mobArg:addStatusEffect(xi.effect.BIND,1,0,10)
+
+        -- Scorpions can still move around, but will not auto attack
+        elseif math.random() <= 0.25 and skillID == 355 then
+            mobArg:showText(mob,ID.text.SCORPION_NO_ENERGY)
+            mobArg:SetAutoAttackEnabled(false)
+            mobArg:timer(1000 * math.random(25, 30), function(mobArg1)
+                mobArg1:SetAutoAttackEnabled(true)
+            end)
         end
+
     end)
 end
 
