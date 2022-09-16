@@ -26,6 +26,7 @@ namespace gambits
         CASTER     = 7,
         TOP_ENMITY = 8,
         CURILLA    = 9, // Special case for Rainemard
+        PARTY_DEAD = 10,
     };
 
     enum class G_CONDITION : uint16
@@ -53,6 +54,7 @@ namespace gambits
         NO_STORM           = 20,
         PT_HAS_TANK        = 21,
         NOT_PT_HAS_TANK    = 22,
+        IS_ECOSYSTEM       = 23,
     };
 
     enum class G_REACTION : uint16
@@ -85,10 +87,11 @@ namespace gambits
 
     enum class G_TP_TRIGGER : uint16
     {
-        ASAP   = 0,
-        RANDOM = 1,
-        OPENER = 2,
-        CLOSER = 3,
+        ASAP            = 0,
+        RANDOM          = 1,
+        OPENER          = 2,
+        CLOSER          = 3, // Will Hold TP Indefinitely to close a SC
+        CLOSER_UNTIL_TP = 4, // Will Hold TP to close a SC until a certain threshold
     };
 
     struct Predicate_t
@@ -229,6 +232,7 @@ namespace gambits
         std::vector<TrustSkill_t> tp_skills;
         G_TP_TRIGGER              tp_trigger;
         G_SELECT                  tp_select;
+        uint16                    tp_value;
 
     private:
         bool CheckTrigger(CBattleEntity* trigger_target, Predicate_t& predicate);
@@ -240,13 +244,37 @@ namespace gambits
         time_point            m_lastAction;
         std::vector<Gambit_t> gambits;
 
-        std::set<JOBTYPE> melee_jobs = {
-            JOB_WAR, JOB_MNK, JOB_THF, JOB_PLD, JOB_DRK, JOB_BST, JOB_SAM, JOB_NIN, JOB_DRG, JOB_BLU, JOB_PUP, JOB_DNC, JOB_RUN,
+        // clang-format off
+        std::set<JOBTYPE> melee_jobs =
+        {
+            JOB_WAR,
+            JOB_MNK,
+            JOB_THF,
+            JOB_PLD,
+            JOB_DRK,
+            JOB_BST,
+            JOB_SAM,
+            JOB_NIN,
+            JOB_DRG,
+            JOB_BLU,
+            JOB_PUP,
+            JOB_DNC,
+            JOB_RUN,
         };
 
-        std::set<JOBTYPE> caster_jobs = {
-            JOB_WHM, JOB_BLM, JOB_RDM, JOB_BRD, JOB_SMN, JOB_BLU, JOB_SCH, JOB_GEO, JOB_RUN,
+        std::set<JOBTYPE> caster_jobs =
+        {
+            JOB_WHM,
+            JOB_BLM,
+            JOB_RDM,
+            JOB_BRD,
+            JOB_SMN,
+            JOB_BLU,
+            JOB_SCH,
+            JOB_GEO,
+            JOB_RUN,
         };
+        // clang-format on
     };
 
 } // namespace gambits

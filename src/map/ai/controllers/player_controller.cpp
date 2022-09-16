@@ -202,8 +202,8 @@ bool CPlayerController::WeaponSkill(uint16 targid, uint16 wsid)
         }
 
         std::unique_ptr<CBasicPacket> errMsg;
-        auto* PTarget = PChar->IsValidTarget(targid, battleutils::isValidSelfTargetWeaponskill(wsid) ? TARGET_SELF : TARGET_ENEMY, errMsg);
 
+        auto* PTarget = PChar->IsValidTarget(targid, battleutils::isValidSelfTargetWeaponskill(wsid) ? TARGET_SELF : TARGET_ENEMY, errMsg);
         if (PTarget)
         {
             if (!facing(PChar->loc.p, PTarget->loc.p, 64) && PTarget != PChar)

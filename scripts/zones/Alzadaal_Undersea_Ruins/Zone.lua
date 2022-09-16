@@ -1,12 +1,8 @@
 -----------------------------------
 -- Zone: Alzadaal_Undersea_Ruins (72)
 -----------------------------------
-local ID = require("scripts/zones/Alzadaal_Undersea_Ruins/IDs")
-require("scripts/globals/missions")
-require("scripts/globals/besieged")
-require("scripts/globals/settings")
-require("scripts/globals/titles")
-require("scripts/globals/zone")
+local ID = require('scripts/zones/Alzadaal_Undersea_Ruins/IDs')
+require('scripts/globals/zone')
 -----------------------------------
 local zone_object = {}
 

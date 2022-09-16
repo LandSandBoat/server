@@ -38,7 +38,8 @@ mission.sections[1] = {}
 mission.sections[1].check = function(player, currentMission, missionStatus, vars)
     return currentMission == mission.missionId and
         xi.settings.main.ENABLE_ROV == 1 and
-        player:getMainLvl() >= 3
+        player:getMainLvl() >= 3 and
+        not player:isInMogHouse()
 end
 
 local rovZoneInEvent =

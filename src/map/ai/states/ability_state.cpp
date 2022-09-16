@@ -141,7 +141,7 @@ bool CAbilityState::CanUseAbility()
         }
         if (PChar->StatusEffectContainer->HasStatusEffect({ EFFECT_AMNESIA, EFFECT_IMPAIRMENT }) ||
             (PAbility->getID() >= ABILITY_CONCENTRIC_PULSE && PAbility->getID() <= ABILITY_RADIAL_ARCANA &&
-            PAbility->isPetAbility() && !charutils::hasAbility(PChar, PAbility->getID())) ||
+             PAbility->isPetAbility() && !charutils::hasAbility(PChar, PAbility->getID())) ||
             (!PAbility->isPetAbility() && !charutils::hasAbility(PChar, PAbility->getID())) ||
             (PAbility->isPetAbility() && PAbility->getID() >= ABILITY_HEALING_RUBY && !charutils::hasPetAbility(PChar, PAbility->getID() - ABILITY_HEALING_RUBY)))
         {

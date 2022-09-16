@@ -64,6 +64,7 @@
 #include "../packets/pet_sync.h"
 #include "../packets/position.h"
 #include "../party.h"
+#include "../petskill.h"
 #include "../recast_container.h"
 #include "../spell.h"
 #include "../status_effect_container.h"
@@ -85,6 +86,7 @@ std::array<std::array<uint16, MAX_SKILLCHAIN_COUNT + 1>, MAX_SKILLCHAIN_LEVEL + 
 
 std::array<CWeaponSkill*, MAX_WEAPONSKILL_ID> g_PWeaponSkillList; // Holds all Weapon skills
 std::array<CMobSkill*, MAX_MOBSKILL_ID>       g_PMobSkillList;    // List of mob skills
+std::unordered_map<uint8, CPetSkill*>         g_PPetSkillList;    // List of pet skills
 
 std::array<std::list<CWeaponSkill*>, MAX_SKILLTYPE> g_PWeaponSkillsList;
 std::unordered_map<uint16, std::vector<uint16>>     g_PMobSkillLists; // List of mob skills defined from mob_skill_lists.sql
@@ -245,6 +247,50 @@ namespace battleutils
         }
     }
 
+    /************************************************************************
+     *                                                                       *
+     *  Load Pet Skills from database                                        *
+     *                                                                       *
+     ************************************************************************/
+
+    void LoadPetSkillsList()
+    {
+        // Load all pet skills
+        const char* specialQuery = "SELECT pet_skill_id, pet_anim_id, pet_skill_name, \
+        pet_skill_aoe, pet_skill_distance, pet_anim_time, pet_prepare_time, \
+        pet_valid_targets, pet_message, pet_skill_flag, pet_skill_param, pet_skill_finish_category, knockback, primary_sc, secondary_sc, tertiary_sc \
+        FROM pet_skills;";
+
+        int32 ret = sql->Query(specialQuery);
+
+        if (ret != SQL_ERROR && sql->NumRows() != 0)
+        {
+            while (sql->NextRow() == SQL_SUCCESS)
+            {
+                CPetSkill* PPetSkill = new CPetSkill(sql->GetIntData(0));
+                PPetSkill->setAnimationID(sql->GetIntData(1));
+                PPetSkill->setName(sql->GetStringData(2));
+                PPetSkill->setAoe(sql->GetIntData(3));
+                PPetSkill->setDistance(sql->GetFloatData(4));
+                PPetSkill->setAnimationTime(sql->GetIntData(5));
+                PPetSkill->setActivationTime(sql->GetIntData(6));
+                PPetSkill->setValidTargets(sql->GetIntData(7));
+                PPetSkill->setMsg(sql->GetIntData(8));
+                PPetSkill->setFlag(sql->GetIntData(9));
+                PPetSkill->setParam(sql->GetIntData(10));
+                PPetSkill->setSkillFinishCategory(sql->GetIntData(11));
+                PPetSkill->setKnockback(sql->GetUIntData(12));
+                PPetSkill->setPrimarySkillchain(sql->GetUIntData(13));
+                PPetSkill->setSecondarySkillchain(sql->GetUIntData(14));
+                PPetSkill->setTertiarySkillchain(sql->GetUIntData(15));
+                g_PPetSkillList[PPetSkill->getID()] = PPetSkill;
+
+                auto filename = fmt::format("./scripts/globals/abilities/pet/{}.lua", PPetSkill->getName());
+                luautils::CacheLuaObjectFromFile(filename);
+            }
+        }
+    }
+
     void LoadSkillChainDamageModifiers()
     {
         const char* fmtQuery = "SELECT chain_level, chain_count, initial_modifier, magic_burst_modifier \
@@ -287,6 +333,17 @@ namespace battleutils
         {
             delete mobskill;
             mobskill = nullptr;
+        }
+    }
+
+    /************************************************************************
+     *  Clear Pet Skills List                                                *
+     ************************************************************************/
+    void FreePetSkillList()
+    {
+        for (auto iter = g_PPetSkillList.begin(); iter != g_PPetSkillList.end();)
+        {
+            g_PPetSkillList.erase(iter);
         }
     }
 
@@ -420,6 +477,24 @@ namespace battleutils
             // False positive: this is CMobSkill*, so it's OK
             // cppcheck-suppress CastIntegerToAddressAtReturn
             return g_PMobSkillList[SkillID];
+        }
+        else
+        {
+            return nullptr;
+        }
+    }
+
+    /************************************************************************
+     *                                                                       *
+     *  Get Pet Skill by Id                                                  *
+     *                                                                       *
+     ************************************************************************/
+
+    CPetSkill* GetPetSkill(uint16 SkillID)
+    {
+        if (g_PPetSkillList.find(SkillID) != g_PPetSkillList.end())
+        {
+            return g_PPetSkillList[SkillID];
         }
         else
         {
@@ -673,7 +748,6 @@ namespace battleutils
 
     int32 CalculateSpikeDamage(CBattleEntity* PAttacker, CBattleEntity* PDefender, actionTarget_t* Action, uint16 damageTaken)
     {
-
         ELEMENT spikeElement = (ELEMENT)((uint8)GetSpikesDamageType(Action->spikesEffect) - (uint8)DAMAGE_TYPE::ELEMENTAL);
 
         int32 damage = Action->spikesParam;
@@ -818,7 +892,7 @@ namespace battleutils
                             }
                             if (spikesDamage > 0) // do not add HP if spikes damage was absorbed.
                             {
-                                Action->spikesMessage  = MSGBASIC_SPIKES_EFFECT_HP_DRAIN;
+                                Action->spikesMessage = MSGBASIC_SPIKES_EFFECT_HP_DRAIN;
                                 PDefender->addHP(spikesDamage);
                             }
                         }
@@ -871,10 +945,8 @@ namespace battleutils
         // Deal with spikesEffect effect gear
         else if (PDefender->getMod(Mod::ITEM_SUBEFFECT) > 0)
         {
-            if (PDefender->objtype == TYPE_PC)
+            if (CCharEntity* PCharDef = dynamic_cast<CCharEntity*>(PDefender))
             {
-                CCharEntity* PCharDef = (CCharEntity*)PDefender;
-
                 for (auto&& slot : { SLOT_SUB, SLOT_BODY, SLOT_LEGS, SLOT_HEAD, SLOT_HANDS, SLOT_FEET })
                 {
                     CItemEquipment* PItem = PCharDef->getEquip(slot);
@@ -892,10 +964,11 @@ namespace battleutils
                         Action->spikesParam = battleutils::GetScaledItemModifier(PDefender, PItem, Mod::ITEM_ADDEFFECT_DMG);
                         chance              = battleutils::GetScaledItemModifier(PDefender, PItem, Mod::ITEM_ADDEFFECT_CHANCE);
 
-                        if (((CMobEntity*)PDefender)->m_HiPCLvl < PAttacker->GetMLevel())
+                        if (CMobEntity* PMobAtt = dynamic_cast<CMobEntity*>(PDefender))
                         {
-                            ((CMobEntity*)PDefender)->m_HiPCLvl = PAttacker->GetMLevel();
+                            PMobAtt->m_HiPCLvl = std::max(PMobAtt->m_HiPCLvl, PDefender->GetMLevel());
                         }
+
                         if (Action->spikesEffect && HandleSpikesEquip(PAttacker, PDefender, Action, (uint8)Action->spikesParam, Action->spikesEffect, chance))
                         {
                             return true;
@@ -1781,7 +1854,7 @@ namespace battleutils
                 base = 55;
                 break;
             case 2: // round
-            case 5: // aegis
+            case 5: // aegis and srivatsa
                 base = 50;
                 break;
             case 3: // kite
@@ -3656,27 +3729,27 @@ namespace battleutils
                 PSCEffect = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN, 0);
             }
             // Previous effect exists
-            else if (PSCEffect && PSCEffect->GetTier() == 0)
+            else if (PSCEffect && PSCEffect->GetStartTime() + 3s < server_clock::now())
             {
-                XI_DEBUG_BREAK_IF(!PSCEffect->GetPower());
-                // Previous effect is an opening effect, meaning the power is
-                // actually the ID of the opening weaponskill.  We need all 3
-                // of the possible skillchain properties on the initial link.
-                if (PSCEffect->GetStartTime() + 3s < server_clock::now())
+                if (PSCEffect->GetTier() == 0)
                 {
+                    XI_DEBUG_BREAK_IF(!PSCEffect->GetPower());
+                    // Previous effect is an opening effect, meaning the power is
+                    // actually the ID of the opening weaponskill.  We need all 3
+                    // of the possible skillchain properties on the initial link.
                     auto properties = PSCEffect->GetPower();
                     resonanceProperties.push_back((SKILLCHAIN_ELEMENT)(properties & 0b1111));
                     resonanceProperties.push_back((SKILLCHAIN_ELEMENT)((properties >> 4) & 0b1111));
                     resonanceProperties.push_back((SKILLCHAIN_ELEMENT)((properties >> 8) & 0b1111));
                     skillchain = FormSkillchain(resonanceProperties, skillProperties);
                 }
-            }
-            else
-            {
-                // Previous effect is not an opening effect, meaning the power is
-                // The skill chain ID resonating.
-                resonanceProperties.push_back((SKILLCHAIN_ELEMENT)PSCEffect->GetPower());
-                skillchain = FormSkillchain(resonanceProperties, skillProperties);
+                else
+                {
+                    // Previous effect is not an opening effect, meaning the power is
+                    // The skill chain ID resonating.
+                    resonanceProperties.push_back((SKILLCHAIN_ELEMENT)PSCEffect->GetPower());
+                    skillchain = FormSkillchain(resonanceProperties, skillProperties);
+                }
             }
 
             if (skillchain != SC_NONE)
@@ -4238,7 +4311,7 @@ namespace battleutils
     {
         if (!PSource || !PTarget)
         {
-            ShowWarning("battleutils::GenerateCureEnmity - PSource or PTarget was null.")
+            ShowWarning("battleutils::GenerateCureEnmity - PSource or PTarget was null.");
             return;
         }
 
@@ -4908,7 +4981,7 @@ namespace battleutils
             charmerBSTlevel = charmerLvl;
         }
 
-        // FIXME: Level and CHR ratios are complete guesses
+        // TODO: Obtain and adjust with accurate Level and CHR data.
         const float levelRatio = (charmerBSTlevel - targetLvl) / 100.f;
         charmChance *= (1.f + levelRatio);
 
@@ -4943,6 +5016,12 @@ namespace battleutils
     void ClaimMob(CBattleEntity* PDefender, CBattleEntity* PAttacker, bool passing)
     {
         TracyZoneScoped;
+
+        if (PDefender == nullptr || (PDefender && PDefender->objtype != ENTITYTYPE::TYPE_MOB)) // Do not try to claim anything but mobs (trusts, pets, players don't count)
+        {
+            return;
+        }
+
         if (auto* mob = dynamic_cast<CMobEntity*>(PDefender))
         {
             CBattleEntity* original = PAttacker;
@@ -6316,6 +6395,7 @@ namespace battleutils
         }
         return std::clamp<int16>(cost, 0, 9999);
     }
+
     uint32 CalculateSpellRecastTime(CBattleEntity* PEntity, CSpell* PSpell)
     {
         if (PSpell == nullptr)
@@ -6323,22 +6403,26 @@ namespace battleutils
             return 0;
         }
 
-        bool   applyArts = true;
-        uint32 base      = PSpell->getRecastTime();
-        int32  recast    = base;
+        uint32 base   = PSpell->getRecastTime();
+        int32  recast = base;
 
-        // Apply Fast Cast
-        recast = (int32)(recast * ((100.0f - std::clamp((float)PEntity->getMod(Mod::FASTCAST) / 2.0f, 0.0f, 25.0f)) / 100.0f));
+        // get Fast Cast reduction, caps at 80%/2 = 40% reduction in recast -- https://www.bg-wiki.com/ffxi/Fast_Cast
+        float fastCastReduction = std::clamp(static_cast<float>(PEntity->getMod(Mod::FASTCAST)) / 2.0f, 0.0f, 40.0f);
+        // no known cap (limited by Inspiration merits + Futhark Trousers augment for a total retail cap value of 60%/2 = 30%)
+        float inspirationRecastReduction = static_cast<float>(PEntity->getMod(Mod::INSPIRATION_FAST_CAST)) / 2.0f;
+
+        // Apply Fast Cast & Inspiration
+        recast = static_cast<int32>(recast * ((100.0f - (fastCastReduction + inspirationRecastReduction)) / 100.0f));
 
         // Apply Haste (Magic and Gear)
-        int16 haste = PEntity->getMod(Mod::HASTE_MAGIC) + PEntity->getMod(Mod::HASTE_GEAR);
-        recast -= (int32)(recast * haste / 10000.f);
+        int32 haste = PEntity->getMod(Mod::HASTE_MAGIC) + PEntity->getMod(Mod::HASTE_GEAR);
+        recast      = static_cast<int32>(recast * ((10000.0f - haste) / 10000.0f));
 
         if (PSpell->getSpellGroup() == SPELLGROUP_SONG)
         {
             if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_NIGHTINGALE))
             {
-                recast = (int32)(recast * 0.5f);
+                recast = static_cast<int32>(recast * 0.5f);
             }
             // The following modifiers are not multiplicative - as such they must be applied last.
             // ShowDebug("Recast before reduction: %u", recast);
@@ -6360,17 +6444,17 @@ namespace battleutils
 
         if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_COMPOSURE))
         {
-            recast = (int32)(recast * 1.25f);
+            recast = static_cast<int32>(recast * 1.25f);
         }
 
         if (PEntity->StatusEffectContainer->HasStatusEffect({ EFFECT_HASSO, EFFECT_SEIGAN }))
         {
-            recast = (int32)(recast * 1.5f);
+            recast = static_cast<int32>(recast * 1.5f);
         }
 
-        recast = std::max<int32>(recast, (int32)(base * 0.2f));
+        recast = std::max<int32>(recast, static_cast<int32>(base * 0.2f));
 
-        // Light/Dark arts recast bonus/penalties applies after the 80% cap
+        // Light/Dark arts recast bonus/penalties applies after other bonuses
         if (PSpell->getSpellGroup() == SPELLGROUP_BLACK)
         {
             if (PSpell->getAOE() == SPELLAOE_RADIAL_MANI && PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_MANIFESTATION))
@@ -6383,30 +6467,32 @@ namespace battleutils
                 {
                     recast *= 3;
                 }
-                applyArts = false;
             }
+            else if (PEntity->StatusEffectContainer->HasStatusEffect({ EFFECT_DARK_ARTS, EFFECT_ADDENDUM_BLACK }))
+            {
+                // Add any "Grimoire: Reduces spellcasting time" bonuses + Dark Arts bonus
+                recast = static_cast<int32>(recast * ((100.0f + PEntity->getMod(Mod::BLACK_MAGIC_RECAST) + PEntity->getMod(Mod::GRIMOIRE_SPELLCASTING)) / 100.0f));
+            }
+            else
+            {
+                recast = static_cast<int32>(recast * ((100.0f + PEntity->getMod(Mod::BLACK_MAGIC_RECAST)) / 100.0f));
+            }
+
+            recast = std::max<int32>(recast, static_cast<int32>(base * 0.2f)); // recap to 80%
+
+            // https://www.bg-wiki.com/ffxi/Alacrity
             if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_ALACRITY))
             {
-                uint16 bonus = 0;
-                // Only apply Alacrity/celerity mod if the spell element matches the weather.
-                if (battleutils::WeatherMatchesElement(battleutils::GetWeather(PEntity, false), (uint8)PSpell->getElement()))
-                {
-                    bonus = PEntity->getMod(Mod::ALACRITY_CELERITY_EFFECT);
-                }
-                recast = (int32)(recast * ((50 - bonus) / 100.0f));
+                recast = static_cast<int32>(recast * 0.60);                        // 40% reduction from Alacrity alone
+                recast = std::max<int32>(recast, static_cast<int32>(base * 0.2f)); // recap to 80%
 
-                applyArts = false;
-            }
-            if (applyArts)
-            {
-                if (PEntity->StatusEffectContainer->HasStatusEffect({ EFFECT_DARK_ARTS, EFFECT_ADDENDUM_BLACK }))
+                // Only apply bonus mod if the spell element matches the weather, this is allowed to go over the 80% cap to a 90% cap.
+                if (battleutils::WeatherMatchesElement(battleutils::GetWeather(PEntity, false), static_cast<uint8>(PSpell->getElement())))
                 {
-                    // Add any "Grimoire: Reduces spellcasting time" bonuses
-                    recast = (int32)(recast * (1.0f + (PEntity->getMod(Mod::BLACK_MAGIC_RECAST) + PEntity->getMod(Mod::GRIMOIRE_SPELLCASTING)) / 100.0f));
-                }
-                else
-                {
-                    recast = (int32)(recast * (1.0f + PEntity->getMod(Mod::BLACK_MAGIC_RECAST) / 100.0f));
+                    uint16 bonus = PEntity->getMod(Mod::ALACRITY_CELERITY_EFFECT);
+
+                    recast = static_cast<int32>(recast * ((100 - bonus) / 100.0f));
+                    recast = std::max<int32>(recast, static_cast<int32>(base * 0.1f)); // cap to 90% reduction
                 }
             }
         }
@@ -6422,35 +6508,38 @@ namespace battleutils
                 {
                     recast *= 3;
                 }
-                applyArts = false;
             }
+
+            if (PEntity->StatusEffectContainer->HasStatusEffect({ EFFECT_LIGHT_ARTS, EFFECT_ADDENDUM_WHITE }))
+            {
+                // Add any "Grimoire: Reduces spellcasting time" bonuses + Light Arts bonus
+                recast = static_cast<int32>(recast * ((100.f + PEntity->getMod(Mod::WHITE_MAGIC_RECAST) + PEntity->getMod(Mod::GRIMOIRE_SPELLCASTING)) / 100.0f));
+            }
+            else
+            {
+                recast = static_cast<int32>(recast * ((100.0f + PEntity->getMod(Mod::WHITE_MAGIC_RECAST)) / 100.0f));
+            }
+
+            recast = std::max<int32>(recast, static_cast<int32>(base * 0.2f)); // recap to 80%
+
+            // https://www.bg-wiki.com/ffxi/Celerity
             if (PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_CELERITY))
             {
-                uint16 bonus = 0;
-                // Only apply Alacrity/celerity mod if the spell element matches the weather.
-                if (battleutils::WeatherMatchesElement(battleutils::GetWeather(PEntity, true), (uint8)PSpell->getElement()))
-                {
-                    bonus = PEntity->getMod(Mod::ALACRITY_CELERITY_EFFECT);
-                }
-                recast = (int32)(recast * ((50 - bonus) / 100.0f));
+                recast = static_cast<int32>(recast * 0.60);                        // 40% reduction from Celerity alone
+                recast = std::max<int32>(recast, static_cast<int32>(base * 0.2f)); // recap to 80%
 
-                applyArts = false;
-            }
-            if (applyArts)
-            {
-                if (PEntity->StatusEffectContainer->HasStatusEffect({ EFFECT_LIGHT_ARTS, EFFECT_ADDENDUM_WHITE }))
+                // Only apply bonus mod if the spell element matches the weather, this is allowed to go over the 80% cap to a 90% cap.
+                if (battleutils::WeatherMatchesElement(battleutils::GetWeather(PEntity, false), static_cast<uint8>(PSpell->getElement())))
                 {
-                    // Add any "Grimoire: Reduces spellcasting time" bonuses
-                    recast = (int32)(recast * (1.0f + (PEntity->getMod(Mod::WHITE_MAGIC_RECAST) + PEntity->getMod(Mod::GRIMOIRE_SPELLCASTING)) / 100.0f));
-                }
-                else
-                {
-                    recast = (int32)(recast * (1.0f + PEntity->getMod(Mod::WHITE_MAGIC_RECAST) / 100.0f));
+                    uint16 bonus = PEntity->getMod(Mod::ALACRITY_CELERITY_EFFECT);
+
+                    recast = static_cast<int32>(recast * ((100 - bonus) / 100.0f));
+                    recast = std::max<int32>(recast, static_cast<int32>(base * 0.1f)); // cap to 90% reduction
                 }
             }
         }
 
-        recast = std::max(recast, 0);
+        recast = std::max<int32>(recast, 0);
 
         return recast / 1000;
     }
@@ -6860,9 +6949,9 @@ namespace battleutils
 
                 uint8 runeAbsorbCount = 0;
 
-                for (int i = 0; i < numBits/4; i++) // unpacking is limited to the size of the return value of GetPower/GetSubPower. If this ever expands more Runes can be packed.
+                for (int i = 0; i < numBits / 4; i++) // unpacking is limited to the size of the return value of GetPower/GetSubPower. If this ever expands more Runes can be packed.
                 {
-                    DAMAGE_TYPE packedDamageType = (DAMAGE_TYPE) ( (absorbTypeBits >> i * 4) & 0xF ); //unpack damage type 4 bits at a time
+                    DAMAGE_TYPE packedDamageType = (DAMAGE_TYPE)((absorbTypeBits >> i * 4) & 0xF); // unpack damage type 4 bits at a time
 
                     if (packedDamageType == DamageType)
                     {

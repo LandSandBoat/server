@@ -324,7 +324,7 @@ namespace jobpointutils
                 break;
 
             case JOB_GEO:
-                if (totalJpSpent >= 100 && !charutils::hasSpell(PChar, (uint16)SpellID::Fire_V))
+                if (totalJpSpent >= 100)
                 {
                     for (const SpellID elementalSpell : { SpellID::Fire_V,
                                                           SpellID::Blizzard_V,
@@ -333,8 +333,13 @@ namespace jobpointutils
                                                           SpellID::Thunder_V,
                                                           SpellID::Water_V })
                     {
-                        charutils::addSpell(PChar, (uint16)elementalSpell);
-                        charutils::SaveSpell(PChar, (uint16)elementalSpell);
+                        uint16 spellIdNum = static_cast<uint16>(elementalSpell);
+
+                        if (!charutils::hasSpell(PChar, spellIdNum))
+                        {
+                            charutils::addSpell(PChar, spellIdNum);
+                            charutils::SaveSpell(PChar, spellIdNum);
+                        }
                     }
 
                     sendUpdate = true;
@@ -386,7 +391,7 @@ namespace jobpointutils
                 break;
 
             case JOB_RDM:
-                if (totalJpSpent >= 100 && !charutils::hasSpell(PChar, (uint16)SpellID::Fire_V))
+                if (totalJpSpent >= 100)
                 {
                     for (const SpellID elementalSpell : { SpellID::Fire_V,
                                                           SpellID::Blizzard_V,
@@ -395,8 +400,13 @@ namespace jobpointutils
                                                           SpellID::Thunder_V,
                                                           SpellID::Water_V })
                     {
-                        charutils::addSpell(PChar, (uint16)elementalSpell);
-                        charutils::SaveSpell(PChar, (uint16)elementalSpell);
+                        uint16 spellIdNum = static_cast<uint16>(elementalSpell);
+
+                        if (!charutils::hasSpell(PChar, spellIdNum))
+                        {
+                            charutils::addSpell(PChar, spellIdNum);
+                            charutils::SaveSpell(PChar, spellIdNum);
+                        }
                     }
 
                     sendUpdate = true;

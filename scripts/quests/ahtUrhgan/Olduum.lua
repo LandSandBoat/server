@@ -46,7 +46,7 @@ quest.sections =
             ['Dkhaaya'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:checkStartEvent(player, 4)
+                    return quest:progressEvent(4)
                 end
             },
 
@@ -176,7 +176,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if npcUtil.tradeHasExactly(trade, xi.items.LIGHTNING_BAND) then
                         if player:getFreeSlotsCount() == 0 then
-                            return quest:messageSpecial(zones[player:getZoneID()].ITEM_CANNOT_BE_OBTAINED)
+                            return quest:messageSpecial(zones[player:getZoneID()].text.ITEM_CANNOT_BE_OBTAINED)
                         else
                             return quest:progressEvent(2)
                         end

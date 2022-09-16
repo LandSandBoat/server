@@ -21,6 +21,7 @@ ai.target =
     CASTER     = 7,
     TOP_ENMITY = 8,
     CURILLA    = 9, -- Special case for Rainemard
+    PARTY_DEAD = 10,
 }
 ai.t = ai.target
 
@@ -50,6 +51,7 @@ ai.condition =
     NO_STORM           = 20,
     PT_HAS_TANK        = 21,
     NOT_PT_HAS_TANK    = 22,
+    IS_ECOSYSTEM       = 23,
 }
 ai.c = ai.condition
 
@@ -88,8 +90,9 @@ ai.s = ai.select
 -- TP Move Trigger
 ai.tp =
 {
-    ASAP   = 0,
-    RANDOM = 1,
-    OPENER = 2,
-    CLOSER = 3,
+    ASAP            = 0,
+    RANDOM          = 1,
+    OPENER          = 2,
+    CLOSER          = 3,    -- Will Hold TP Indefinitely to close a SC
+    CLOSER_UNTIL_TP = 4,    -- Will Hold TP to close a SC until a certain threshold
 }

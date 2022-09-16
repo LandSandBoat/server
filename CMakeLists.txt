@@ -60,7 +60,7 @@ set_project_warnings(project_warnings)
 add_definitions(
     -DSOL_ALL_SAFETIES_ON=1
     -DSOL_NO_CHECK_NUMBER_PRECISION=1
-    -DSOL_NO_EXCEPTIONS=1
+    -DSOL_DEFAULT_PASS_ON_ERROR=1
     -DSOL_PRINT_ERRORS=0
 )
 

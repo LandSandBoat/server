@@ -111,11 +111,29 @@ xi.settings.main =
     DARK_POWER      = 1.000, -- Multiplies amount drained by Dark Magic.
     ITEM_POWER      = 1.000, -- Multiplies the effect of items such as Potions and Ethers.
     WEAPON_SKILL_POWER  = 1.000, -- Multiplies damage dealt by Weapon Skills.
+
     USE_ADOULIN_WEAPON_SKILL_CHANGES = true, -- true/false. Change to toggle new Adoulin weapon skill damage calculations
+    DISABLE_PARTY_EXP_PENALTY        = false, -- true/false.
 
     -- TRUSTS
-    ENABLE_TRUST_CASTING = 1,
-    ENABLE_TRUST_QUESTS  = 1,
+    ENABLE_TRUST_CASTING           = 1,
+    ENABLE_TRUST_QUESTS            = 1,
+    ENABLE_TRUST_CUSTOM_ENGAGEMENT = 0,
+
+    ENABLE_TRUST_ALTER_EGO_EXTRAVAGANZA          = 0, -- 0 = disabled, 1 = summer/ny, 2 = spring/autumn, 3 = both
+    ENABLE_TRUST_ALTER_EGO_EXTRAVAGANZA_ANNOUNCE = 0, -- 0 = disabled, 1 = add announcement to player login
+    ENABLE_TRUST_ALTER_EGO_EXPO                  = 0, -- 0 = disabled, 1 = expo - HPP/MPP/Status Resistance, 2 = expo plus (not implemented)
+    ENABLE_TRUST_ALTER_EGO_EXPO_ANNOUNCE         = 0, -- 0 = disabled, 1 = add announcement to player login
+
+    TRUST_ALTER_EGO_EXTRAVAGANZA_MESSAGE =
+        "\n \n" .. -- The space between these newlines is intentional
+        "\129\153\129\154 The Alter Ego Extravaganza Campaign is active! \129\154\129\153\n" ..
+        "This is an excellent time to fill out your roster of Trusts!",
+
+    TRUST_ALTER_EGO_EXPO_MESSAGE =
+        "\n \n" .. -- The space between these newlines is intentional
+        "\129\153\129\154 The Alter Ego Expo Campaign is active! \129\154\129\153\n" ..
+        "Trusts gain the benefits of Increased HP, MP, and Status Resistances!",
 
     HARVESTING_BREAK_CHANCE = 33, -- % chance for the sickle to break during harvesting.  Set between 0 and 100.
     EXCAVATION_BREAK_CHANCE = 33, -- % chance for the pickaxe to break during excavation.  Set between 0 and 100.
@@ -135,11 +153,6 @@ xi.settings.main =
     COFFER_MIN_ILLUSION_TIME = 1800,  -- 30 minutes
     CHEST_MAX_ILLUSION_TIME  = 3600,  -- 1 hour
     CHEST_MIN_ILLUSION_TIME  = 1800,  -- 30 minutes
-
-    -- Sets spawn type for: Behemoth, Fafnir, Adamantoise, King Behemoth, Nidhog, Aspidochelone.
-    -- Use 0 for timed spawns, 1 for force pop only, 2 for both
-    LandKingSystem_NQ = 1,
-    LandKingSystem_HQ = 1,
 
     -- Multiplier to NM lottery spawn chance. (Default 1.0) eg. 0 = disable lottery spawns. -1 for always 100% chance.
     NM_LOTTERY_CHANCE = 1.0,
@@ -188,6 +201,14 @@ xi.settings.main =
     -- Login Campaign (Set to 0 if you don't want to run a Login Campaign)
     -- Please visit scripts/globals/events/login_campaign.lua for assigning the correct campaign dates.
     ENABLE_LOGIN_CAMPAIGN = 0,
+
+    -- GARRISON
+    GARRISON_LOCKOUT             = 1800,  -- Time in seconds before a new garrison can be started (default: 1800)
+    GARRISON_TIME_LIMIT          = 1800,  -- Time in seconds before lose ongoing garrison (default: 1800)
+    GARRISON_ONCE_PER_WEEK       = 0,     -- Set to 1 to bypass the limit of one garrison per Conquest Tally Week.
+    GARRISON_PARTY_LIMIT         = 18,    -- Set to max party members you want to do garrison (default: 18).
+    GARRISON_NATION_BYPASS       = 0,     -- Set to 1 to bypass the nation requirement.
+    GARRISON_RANK                = 2,     -- Set to minumum Nation Rank to start Garrison (default: 2).
 
     -- MISC
     RIVERNE_PORTERS              = 120,  -- Time in seconds that Unstable Displacements in Cape Riverne stay open after trading a scale.

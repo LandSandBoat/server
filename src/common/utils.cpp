@@ -89,17 +89,22 @@ bool bin2hex(char* output, unsigned char* input, size_t count)
     return true;
 }
 
-float distance(const position_t& A, const position_t& B)
+float distance(const position_t& A, const position_t& B, bool ignoreVertical)
 {
-    return sqrt(distanceSquared(A, B));
+    return sqrt(distanceSquared(A, B, ignoreVertical));
 }
 
-float distanceSquared(const position_t& A, const position_t& B)
+float distanceSquared(const position_t& A, const position_t& B, bool ignoreVertical)
 {
     float diff_x = A.x - B.x;
-    float diff_y = A.y - B.y;
+    float diff_y = ignoreVertical ? 0 : A.y - B.y;
     float diff_z = A.z - B.z;
     return diff_x * diff_x + diff_y * diff_y + diff_z * diff_z;
+}
+
+bool distanceWithin(const position_t& A, const position_t& B, float within, bool ignoreVertical)
+{
+    return distanceSquared(A, B, ignoreVertical) <= square(within);
 }
 
 int32 intpow32(int32 base, int32 exponent)
@@ -158,7 +163,7 @@ uint8 worldAngle(const position_t& A, const position_t& B)
 {
     uint8 angle = (uint8)(atanf((B.z - A.z) / (B.x - A.x)) * -(128.0f / M_PI));
 
-    return (A.x > B.x ? angle + 128 : angle);
+    return distanceWithin(A, B, 0.1f, true) ? A.rotation : (A.x > B.x ? angle + 128 : angle);
 }
 
 uint8 relativeAngle(uint8 world, int16 diff)
@@ -697,7 +702,8 @@ std::string UnpackSoultrapperName(uint8 input[])
     uint8       remainder = 0;
     uint8       shift     = 1;
     uint8       maxSize   = 13; // capped at 13 based on examples like GoblinBountyH
-    std::string output    = "";
+    char        indexChar;
+    std::string output = "";
 
     // Unpack and shift 7-bit to 8-bit
     for (uint8 i = 0; i <= maxSize; ++i)
@@ -712,7 +718,11 @@ std::string UnpackSoultrapperName(uint8 input[])
         }
 
         // uint8 orvalue = tempLeft | remainder;
-        output = output + (char)(tempLeft | remainder);
+        indexChar = (char)(tempLeft | remainder);
+        if (indexChar >= '0' && indexChar <= 'z')
+        {
+            output = output + (char)(tempLeft | remainder);
+        }
 
         remainder = tempRight << (7 - shift);
         if (remainder & 128)
@@ -722,7 +732,10 @@ std::string UnpackSoultrapperName(uint8 input[])
 
         if (shift == 7)
         {
-            output    = output + char(remainder);
+            if (char(remainder) >= '0' && char(remainder) <= 'z')
+            {
+                output = output + char(remainder);
+            }
             remainder = 0;
             shift     = 1;
         }
@@ -797,7 +810,7 @@ std::string to_upper(std::string const& s)
 }
 
 // https://stackoverflow.com/questions/313970/how-to-convert-an-instance-of-stdstring-to-lower-case
-std::string trim(const std::string& str, const std::string& whitespace)
+std::string trim(std::string const& str, std::string const& whitespace)
 {
     const auto strBegin = str.find_first_not_of(whitespace);
     if (strBegin == std::string::npos)

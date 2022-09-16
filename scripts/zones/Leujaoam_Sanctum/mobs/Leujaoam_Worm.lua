@@ -9,7 +9,7 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    xi.assaultUtil.adjustMobLevel(mob)
+    xi.assault.adjustMobLevel(mob)
     mob:setMod(xi.mod.UDMGMAGIC, -50)
     mob:addMod(xi.mod.DEF, 100)
 end

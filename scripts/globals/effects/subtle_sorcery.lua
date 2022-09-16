@@ -6,6 +6,7 @@ require("scripts/globals/status")
 -----------------------------------
 local effect_object = {}
 
+-- Spell Cumulative Enmity reduction handled in magic_state.cpp
 effect_object.onEffectGain = function(target, effect)
     local jpValue = target:getJobPointLevel(xi.jp.SUBTLE_SORCERY_EFFECT)
 
@@ -14,14 +15,12 @@ effect_object.onEffectGain = function(target, effect)
 end
 
 effect_object.onEffectTick = function(target, effect)
-    target:addMod(xi.mod.ENMITY, -20)
 end
 
 effect_object.onEffectLose = function(target, effect)
     local jpValue = target:getJobPointLevel(xi.jp.SUBTLE_SORCERY_EFFECT)
 
     target:delMod(xi.mod.MACC, 100)
-    target:delMod(xi.mod.ENMITY)
     target:delMod(xi.mod.UFASTCAST, jpValue)
 end
 

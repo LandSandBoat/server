@@ -49,7 +49,7 @@
 
 std::thread messageThread;
 
-std::unique_ptr<SqlConnection> sql;
+std::unique_ptr<SqlConnection> sql; // lgtm [cpp/short-global-name]
 
 uint8 ver_lock   = 0;
 uint8 maint_mode = 0;

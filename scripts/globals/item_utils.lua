@@ -172,6 +172,28 @@ xi.item_utils.addTwoItemEffects = function(target, effect1, effect2, power1, pow
     end
 end
 
+xi.item_utils.addItemExpEffect = function(target, effect, power, duration, subpower)
+    local deleffect = xi.effect.COMMITMENT
+
+    if effect == deleffect then
+        deleffect = xi.effect.DEDICATION
+    end
+
+    if target:hasStatusEffect(effect) then
+        local buff = target:getStatusEffect(effect)
+        local effectpower = buff:getPower()
+        if effectpower > power then
+            target:messageBasic(xi.msg.basic.NO_EFFECT)
+        else
+            target:delStatusEffectSilent(deleffect)
+            target:addStatusEffect(effect, power, 0, duration, 0, subpower)
+        end
+    else
+        target:delStatusEffectSilent(deleffect)
+        target:addStatusEffect(effect, power, 0, duration, 0, subpower)
+    end
+end
+
 xi.item_utils.removeStatus = function(target, effects)
     for _, effect in ipairs(effects) do
         if target:delStatusEffect(effect) then

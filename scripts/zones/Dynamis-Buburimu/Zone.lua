@@ -1,9 +1,9 @@
 -----------------------------------
 -- Zone: Dynamis-Buburimu
 -----------------------------------
-local ID = require("scripts/zones/Dynamis-Buburimu/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/dynamis")
+local ID = require('scripts/zones/Dynamis-Buburimu/IDs')
+require('scripts/globals/conquest')
+require('scripts/globals/dynamis')
 -----------------------------------
 local zone_object = {}
 

@@ -1,17 +1,14 @@
 -----------------------------------
---
 -- Zone: Beadeaux (147)
---
 -----------------------------------
-local ID = require("scripts/zones/Beadeaux/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/missions")
-require("scripts/globals/npc_util")
-require("scripts/globals/treasure")
-require("scripts/globals/quests")
-require("scripts/globals/status")
-require("scripts/globals/titles")
-require("scripts/globals/zone")
+local ID = require('scripts/zones/Beadeaux/IDs')
+require('scripts/globals/conquest')
+require('scripts/globals/npc_util')
+require('scripts/globals/treasure')
+require('scripts/globals/quests')
+require('scripts/globals/status')
+require('scripts/globals/titles')
+require('scripts/globals/zone')
 -----------------------------------
 local zone_object = {}
 
@@ -79,11 +76,6 @@ zone_object.onRegionEnter = function(player, region)
                 player:setLocalVar("inRegion", time + 11) -- Start timer. We set it here to prevent double message.
                 player:addStatusEffect(xi.effect.CURSE_I, 75, 0, 120)
                 player:messageSpecial(ID.text.FEEL_NUMB)
-
-                -- TODO: Convert to interaction
-                if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_CURSE_COLLECTOR) == QUEST_ACCEPTED and player:getCharVar("cCollectCurse") == 0 then
-                    player:setCharVar("cCollectCurse", 1)
-                end
             elseif player:getLocalVar("inRegion1") <= time then
                 player:messageSpecial(ID.text.LIGHT_HEADED)
                 player:setLocalVar("inRegion1", time + 11) -- Display message and set timer.

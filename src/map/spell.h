@@ -726,6 +726,7 @@ enum class SpellID : uint16
     Gain_MND             = 491,
     Gain_CHR             = 492,
     Temper               = 493,
+    Arise                = 494,
     Adloquium            = 495,
     Firaja               = 496,
     Blizzaja             = 497,
@@ -1086,6 +1087,7 @@ public:
     bool        isCure();           // is a Cure spell
     bool        isDebuff();         // is a debuff spell
     bool        isNa();             // is a -na spell
+    bool        isRaise();          // is a raise spell (e.g. Trust: Ferreous Coffin)
     bool        canHitShadow();     // check if spell ignores shadows
 
     void setRadius(float radius);
@@ -1148,7 +1150,7 @@ private:
     uint16      m_MagicBurstMessage{};             // Message used for magic bursts.
     uint16      m_CE{};                            // cumulative enmity of spell
     uint16      m_VE{};                            // volatile enmity of spell
-    string_t    m_name;                            // spell name
+    std::string m_name;                            // spell name
     uint32      m_modifiedRecastTime{};            // recast time after modifications
     uint8       m_requirements{};                  // requirements before being able to cast spell
     uint16      m_meritId{};                       // associated merit (if applicable)

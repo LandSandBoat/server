@@ -3,7 +3,6 @@
 --  NPC: Ardea
 -- !pos -198 -6 -69 235
 -- Involved in quests: Chasing Quotas, Rock Racketeer
--- Standard Info NPC
 -----------------------------------
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
@@ -25,9 +24,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(264) -- Someone was just asking about that earring.
     elseif chasingQuotasStatus == 4 then
         player:startEvent(265) -- They'll be happy if you return it.
-    -- Standard dialog
-    else
-        player:startEvent(260)
     end
 end
 

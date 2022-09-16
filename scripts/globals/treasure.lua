@@ -324,7 +324,7 @@ xi.treasure.treasureInfo =
                         test = function(player) return player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_TEST_OF_TRUE_LOVE) == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.UN_MOMENT) end,
                         code = function(player)
                             npcUtil.giveKeyItem(player, xi.ki.UN_MOMENT)
-                            player:addCharVar("ATestOfTrueLoveProgress", 1)
+                            player:incrementCharVar("ATestOfTrueLoveProgress", 1)
                         end,
                     },
                 },
@@ -360,7 +360,7 @@ xi.treasure.treasureInfo =
                         test = function(player) return player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_TEST_OF_TRUE_LOVE) == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.UN_MOMENT) end,
                         code = function(player)
                             npcUtil.giveKeyItem(player, xi.ki.UN_MOMENT)
-                            player:addCharVar("ATestOfTrueLoveProgress", 1)
+                            player:incrementCharVar("ATestOfTrueLoveProgress", 1)
                         end,
                     },
                 },
@@ -383,7 +383,7 @@ xi.treasure.treasureInfo =
                         test = function(player) return player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_TEST_OF_TRUE_LOVE) == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.LEPHEMERE) end,
                         code = function(player)
                             npcUtil.giveKeyItem(player, xi.ki.LEPHEMERE)
-                            player:addCharVar("ATestOfTrueLoveProgress", 1)
+                            player:incrementCharVar("ATestOfTrueLoveProgress", 1)
                         end,
                     },
                 },
@@ -707,7 +707,7 @@ xi.treasure.treasureInfo =
                         test = function(player) return player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_TEST_OF_TRUE_LOVE) == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.LANCIENNE) end,
                         code = function(player)
                             npcUtil.giveKeyItem(player, xi.ki.LANCIENNE)
-                            player:addCharVar("ATestOfTrueLoveProgress", 1)
+                            player:incrementCharVar("ATestOfTrueLoveProgress", 1)
                         end,
                     },
                 },

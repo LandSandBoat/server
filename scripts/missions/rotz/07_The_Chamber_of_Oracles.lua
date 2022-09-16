@@ -18,9 +18,9 @@ local mission = Mission:new(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_C
 
 mission.reward =
 {
-    keyItem = xi.ki.PRISMATIC_FRAGMENT,
+    keyItem     = xi.ki.PRISMATIC_FRAGMENT,
+    title       = xi.title.LIGHTWEAVER,
     nextMission = { xi.mission.log_id.ZILART, xi.mission.id.zilart.RETURN_TO_DELKFUTTS_TOWER },
-    title = xi.title.LIGHTWEAVER,
 }
 
 local function handleActiveOnTrigger(player, keyItemId, statusIncrease)
@@ -130,9 +130,7 @@ mission.sections =
             onEventFinish =
             {
                 [1] = function(player, csid, option, npc)
-                    if mission:complete(player) then
-                        player:setMissionStatus(xi.mission.log_id.ZILART, 0)
-                    end
+                    mission:complete(player)
                 end,
             },
         },

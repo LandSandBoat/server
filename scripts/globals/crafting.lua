@@ -111,7 +111,7 @@ end
 -----------------------------------
 
 xi.crafting.signupGuild = function(player, nbr)
-    player:addCharVar("Guild_Member", nbr)
+    player:incrementCharVar("Guild_Member", nbr)
 end
 
 -----------------------------------
@@ -202,6 +202,10 @@ end
 xi.crafting.getCraftSkillCap = function(player, craftID)
     local rank = player:getSkillRank(craftID)
     return (rank + 1) * 10
+end
+
+xi.crafting.getRealSkill = function(player, craftID)
+    return math.floor(player:getCharSkillLevel(craftID) / 10)
 end
 
 -----------------------------------

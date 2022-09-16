@@ -251,10 +251,10 @@ namespace gardenutils
                 CItemContainer* PContainer = PChar->getStorage(containerID);
                 for (int slotID = 0; slotID < PContainer->GetSize(); ++slotID)
                 {
-                    CItem* PItem = PContainer->GetItem(slotID);
-                    if (PItem != nullptr && PItem->isType(ITEM_FURNISHING))
+                    CItem* PItemContained = PContainer->GetItem(slotID);
+                    if (PItemContained != nullptr && PItemContained->isType(ITEM_FURNISHING))
                     {
-                        CItemFurnishing* PFurniture = static_cast<CItemFurnishing*>(PItem);
+                        CItemFurnishing* PFurniture = static_cast<CItemFurnishing*>(PItemContained);
                         if (PFurniture->isInstalled())
                         {
                             auras[PFurniture->getElement()] += PFurniture->getAura();

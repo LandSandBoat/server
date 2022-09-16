@@ -36,6 +36,7 @@ CREATE TABLE `mob_resistances` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=128;
 
 /*!40101 SET character_set_client = @saved_cs_client */;
+
 INSERT INTO `mob_resistances` VALUES (1,'Acrolith',1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 INSERT INTO `mob_resistances` VALUES (2,'Adamantoise',1,1,1,1,5000,2000,5000,7500,7500,5000,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 INSERT INTO `mob_resistances` VALUES (3,'Aern',1,1,1,1,0,0,0,0,0,0,5000,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
@@ -436,6 +437,7 @@ INSERT INTO `mob_resistances` VALUES (407,'Orc-Seed',1,1,1,1,0,0,0,0,0,-2500,0,0
 INSERT INTO `mob_resistances` VALUES (408,'Quadav-Seed',1,1.25,1,1,-1250,0,0,0,0,0,-1250,1250,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 INSERT INTO `mob_resistances` VALUES (409,'Yagudo-Seed',1,1,1,1,0,-2500,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 INSERT INTO `mob_resistances` VALUES (410,'Goblin-Seed',1,1,1,1,0,0,0,0,0,0,-2500,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+
 INSERT INTO `mob_resistances` VALUES (435,'Giant_Gnat',1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 INSERT INTO `mob_resistances` VALUES (436,'Gnat-Bloodlapper',1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 INSERT INTO `mob_resistances` VALUES (437,'Sapling-Ghillie_Dhu',1,1,1,1,-2500,0,0,0,0,0,1250,-2500,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
@@ -502,3 +504,5 @@ INSERT INTO `mob_resistances` VALUES (503,'Mammet',1,1,1,1,0,0,0,0,0,0,0,0,0,0,0
 INSERT INTO `mob_resistances` VALUES (504,'Luopan',1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 INSERT INTO `mob_resistances` VALUES (505,'Fungi',1,1,1,1,0,0,-2500,1250,0,0,-2500,1250,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 INSERT INTO `mob_resistances` VALUES (506,'Meeble',1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+
+INSERT INTO `mob_resistances` VALUES (411,'Pet-Siren',1,1,1,1,1250,0,1250,1250,1250,1250,1250,1250,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);

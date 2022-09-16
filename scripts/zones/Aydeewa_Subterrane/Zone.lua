@@ -1,7 +1,7 @@
 -----------------------------------
 -- Zone: Aydeewa_Subterrane (68)
 -----------------------------------
-local ID = require("scripts/zones/Aydeewa_Subterrane/IDs")
+local ID = require('scripts/zones/Aydeewa_Subterrane/IDs')
 -----------------------------------
 local zone_object = {}
 

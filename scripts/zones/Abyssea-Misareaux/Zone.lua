@@ -1,8 +1,8 @@
 -----------------------------------
 -- Zone: Abyssea - Misareaux
 -----------------------------------
-local ID = require("scripts/zones/Abyssea-Misareaux/IDs")
-require("scripts/globals/abyssea")
+local ID = require('scripts/zones/Abyssea-Misareaux/IDs')
+require('scripts/globals/abyssea')
 -----------------------------------
 local zone_object = {}
 

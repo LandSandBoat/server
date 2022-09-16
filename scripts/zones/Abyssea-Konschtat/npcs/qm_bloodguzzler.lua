@@ -4,13 +4,13 @@
 -- Spawns Bloodguzzler
 -- !pos -155.000 64.117 590.000 15
 -----------------------------------
+local ID = require('scripts/zones/Abyssea-Konschtat/IDs')
 require('scripts/globals/abyssea')
 require('scripts/globals/items')
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local ID = zones[player:getZoneID()]
     xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.BLOODGUZZLER, { xi.items.VIAL_OF_EFT_BLOOD })
 end
 
