@@ -2,10 +2,15 @@
 -- Area: Mount Zhayolm
 --   NM: Cerberus
 -----------------------------------
+mixins = {require("scripts/mixins/rage")}
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
+
+entity.onMobSpawn = function(mob)
+    mob:setLocalVar("[rage]timer", 1800) -- 20 minutes
+end
 
 entity.onMobFight = function(mob, target)
     if mob:getHPP() > 25 then

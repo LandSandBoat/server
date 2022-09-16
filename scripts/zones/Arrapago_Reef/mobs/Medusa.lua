@@ -6,6 +6,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Arrapago_Reef/IDs")
 mixins = {require("scripts/mixins/job_special")}
+mixins = {require("scripts/mixins/rage")}
 require("scripts/globals/titles")
 require("scripts/globals/status")
 -----------------------------------
@@ -19,6 +20,8 @@ entity.onMobSpawn = function(mob)
             {id = xi.jsa.EES_LAMIA, hpp = math.random(5, 99)},
         },
     })
+	
+    mob:setLocalVar("[rage]timer", 1800) -- 20 minutes
 end
 
 entity.onMobEngaged = function(mob, target)

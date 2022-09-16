@@ -4,11 +4,16 @@
 -- !pos -59.000 -23.000 3.000 62
 -----------------------------------
 mixins = {require("scripts/mixins/job_special")}
+mixins = {require("scripts/mixins/rage")}
 local ID = require("scripts/zones/Halvung/IDs")
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
+
+entity.onMobSpawn = function(mob)
+    mob:setLocalVar("[rage]timer", 1800) -- 20 minutes
+end
 
 entity.onMobEngaged = function(mob, target)
     for i = ID.mob.GURFURLUR_THE_MENACING + 1, ID.mob.GURFURLUR_THE_MENACING + 4 do

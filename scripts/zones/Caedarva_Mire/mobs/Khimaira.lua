@@ -2,9 +2,14 @@
 -- Area: Caedarva Mire
 --   NM: Khimaira
 -----------------------------------
+mixins = {require("scripts/mixins/rage")}
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
+
+entity.onMobSpawn = function(mob)
+    mob:setLocalVar("[rage]timer", 1800) -- 20 minutes
+end
 
 entity.onMobDeath = function(mob, player, isKiller)
     player:addTitle(xi.title.KHIMAIRA_CARVER)

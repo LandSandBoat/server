@@ -3,9 +3,14 @@
 --  Mob: Hydra
 -- !pos -282 -24 -1 51
 -----------------------------------
+mixins = {require("scripts/mixins/rage")}
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
+
+entity.onMobSpawn = function(mob)
+    mob:setLocalVar("[rage]timer", 1800) -- 20 minutes
+end
 
 entity.onMobFight = function(mob, target)
     local battletime = mob:getBattleTime()

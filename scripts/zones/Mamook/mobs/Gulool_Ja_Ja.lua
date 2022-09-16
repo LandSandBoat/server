@@ -5,6 +5,7 @@
 require("scripts/globals/titles")
 require("scripts/globals/status")
 local ID = require("scripts/zones/Mamook/IDs")
+mixins = {require("scripts/mixins/rage")}
 mixins = {require("scripts/mixins/job_special")}
 
 -----------------------------------
@@ -13,6 +14,7 @@ local entity = {}
 entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 20)
     mob:setMobMod(xi.mobMod.DRAW_IN, 2)
+	mob:setLocalVar("[rage]timer", 1800) -- 20 minutes
 end
 
 entity.onMobEngaged = function(mob, target)
