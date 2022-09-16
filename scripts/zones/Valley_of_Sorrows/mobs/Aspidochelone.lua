@@ -10,7 +10,7 @@ require("scripts/globals/titles")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
+    mob:setLocalVar("[rage]timer", 1800) -- 30 minutes
 
     -- Despawn the ???
     GetNPCByID(ID.npc.ADAMANTOISE_QM):setStatus(xi.status.DISAPPEAR)

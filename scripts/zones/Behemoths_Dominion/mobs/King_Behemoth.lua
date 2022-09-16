@@ -17,8 +17,13 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
-
+    mob:setLocalVar("[rage]timer", 1800) -- 30 minutes
+    mob:setMod(xi.mod.MDEF, 20)
+    mob:addMod(xi.mod.ATT, 150)
+    mob:addMod(xi.mod.DEF, 200)
+    mob:addMod(xi.mod.EVA, 110)
+    mob:setMod(xi.mod.TRIPLE_ATTACK, 5)
+	
     -- Despawn the ???
     GetNPCByID(ID.npc.BEHEMOTH_QM):setStatus(xi.status.DISAPPEAR)
 end
