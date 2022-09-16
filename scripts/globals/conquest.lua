@@ -1108,10 +1108,13 @@ xi.conquest.overseerOnTrigger = function(player, npc, guardNation, guardType, gu
 end
 
 xi.conquest.overseerOnEventUpdate = function(player, csid, option, guardNation)
+    local pNation = player:getNation()
+    if guardNation == xi.nation.OTHER then
+        guardNation = pNation
+    end
     local stock = getStock(player, guardNation, option)
 
     if stock ~= nil then
-        local pNation = player:getNation()
         local pRank   = GetNationRank(pNation)
         local u1 = 2 -- default: player is correct job and level to equip item
         local u2 = 0 -- default: player has enough CP for item
