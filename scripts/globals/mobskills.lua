@@ -317,11 +317,14 @@ end
 -- xi.mobskills.magicalTpBonus.DMG_BONUS and TP=100, tpvalue = 2, assume V=150  --> damage is now 150*(TP*2)/100 = 300
 -- xi.mobskills.magicalTpBonus.DMG_BONUS and TP=200, tpvalue = 2, assume V=150  --> damage is now 150*(TP*2)/100 = 600
 
-xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgmod, tpeffect, tpvalue)
+xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgmod, tpeffect, tpvalue, ignoreresist)
     local returninfo = {}
+    local ignoreres = ignoreresist or false
+
     --get all the stuff we need
     local resist = 1
     local barspellDef = 0
+    local magicDefense = 1
 
     if
         element >= xi.magic.element.FIRE and
@@ -342,7 +345,7 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgm
     -- resistence is added last
     local finaldmg = damage * mab * dmgmod
 
-    local magicDefense = getElementalDamageReduction(target, element)
+    magicDefense = getElementalDamageReduction(target, element)
 
     finaldmg = finaldmg * magicDefense
 
@@ -353,11 +356,11 @@ xi.mobskills.mobMagicalMove = function(mob, target, skill, damage, element, dmgm
         end
     end
 
-    if skill:getID() ~= 1910 then -- Nether Blast Should Ignore Resist
-        -- get resistence
-        local params = {diff = (mob:getStat(xi.mod.INT)-target:getStat(xi.mod.INT)), skillType = nil, bonus = bonusMacc, element = element, effect = nil}
-        resist = applyResistanceEffect(mob, target, nil, params) -- Uses magic.lua resistance calcs as this moves to a global use case.
+    -- get resistence
+    local params = {diff = (mob:getStat(xi.mod.INT)-target:getStat(xi.mod.INT)), skillType = nil, bonus = bonusMacc, element = element, effect = nil}
+    resist = applyResistanceEffect(mob, target, nil, params) -- Uses magic.lua resistance calcs as this moves to a global use case.
 
+    if not ignoreres then
         finaldmg = finaldmg * resist
     end
 
@@ -401,10 +404,12 @@ xi.mobskills.applyPlayerResistance = function(mob, effect, target, diff, bonus, 
     return getMagicResist(p)
 end
 
-xi.mobskills.mobAddBonuses = function(caster, target, dmg, ele) -- used for SMN magical bloodpacts, despite the name.
+xi.mobskills.mobAddBonuses = function(caster, target, dmg, ele, ignoreres) -- used for SMN magical bloodpacts, despite the name.
 
+    local ignore = ignoreres or false
     local magicDefense = getElementalDamageReduction(target, ele)
-    dmg = math.floor(dmg * magicDefense)
+
+    if not ignore then dmg = math.floor(dmg * magicDefense) end
 
     dayWeatherBonus = 1.00
 
@@ -566,7 +571,7 @@ xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType,
             shadowbehav = MobTakeAoEShadow(mob, target, shadowbehav)
         end
 
-        dmg = utils.takeShadows(target, dmg, shadowbehav)
+        dmg = utils.takeShadows(target, mob, dmg, shadowbehav)
 
         -- dealt zero damage, so shadows took hit
         if dmg == 0 then

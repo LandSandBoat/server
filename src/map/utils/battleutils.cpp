@@ -798,7 +798,7 @@ namespace battleutils
             Action->reaction     = REACTION::HIT;
             Action->spikesEffect = SUBEFFECT_COUNTER;
 
-            if (battleutils::IsAbsorbByShadow(PAttacker)) // Struck a shadow
+            if (battleutils::IsAbsorbByShadow(PAttacker, PDefender)) // Struck a shadow
             {
                 Action->spikesMessage = 535;
             }
@@ -3056,7 +3056,7 @@ namespace battleutils
             pDIF = xirand::GetRandomNumber(lowerLimit, upperLimit);
         }
 
-        pDIF = std::clamp<float>(pDIF, 0, 3.0);
+        // pDIF = std::clamp<float>(pDIF, 0, 3.0);
         pDIF = pDIF * xirand::GetRandomNumber(1.0f, 1.05f);
 
         if (isCritical)
@@ -3069,6 +3069,7 @@ namespace battleutils
             pDIF *= ((100 + criticaldamage) / 100.0f);
         }
 
+        pDIF = std::clamp<float>(pDIF, 0, maxRatio);
         return pDIF;
     }
 
@@ -3473,7 +3474,7 @@ namespace battleutils
      *                                                                       *
      ************************************************************************/
 
-    bool IsAbsorbByShadow(CBattleEntity* PDefender)
+    bool IsAbsorbByShadow(CBattleEntity* PDefender, CBattleEntity* PAttacker)
     {
         // utsus always overwrites blink, so if utsus>0 then we know theres no blink.
         uint16 Shadow    = PDefender->getMod(Mod::UTSUSEMI);
@@ -3525,6 +3526,13 @@ namespace battleutils
                                 icon = EFFECT_COPY_IMAGE_2;
                                 break;
                         }
+
+                        if (PAttacker != nullptr && PAttacker->objtype == TYPE_MOB)
+                        {
+                            auto* PMob = static_cast<CMobEntity*>(PAttacker);
+                            PMob->PEnmityContainer->UpdateEnmity(PDefender, -25, 0);
+                        }
+
                         PStatusEffect->SetIcon(icon);
                         PDefender->StatusEffectContainer->UpdateStatusIcons();
                     }
@@ -4722,7 +4730,7 @@ namespace battleutils
             if (xirand::GetRandomNumber(100) < hitrate)
             {
                 // attack hit, try to be absorbed by shadow
-                if (!battleutils::IsAbsorbByShadow(PVictim))
+                if (!battleutils::IsAbsorbByShadow(PVictim, PAttacker))
                 {
                     // successful hit, add damage
                     float AttMultiplerPercent = 0.f;

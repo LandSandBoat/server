@@ -44,11 +44,6 @@ CRangeState::CRangeState(CBattleEntity* PEntity, uint16 targid)
     {
         throw CStateInitException(std::move(m_errorMsg));
     }
-    if (distance(m_PEntity->loc.p, PTarget->loc.p) > 25)
-    {
-        m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, PTarget, 0, 0, MSGBASIC_TOO_FAR_AWAY);
-        throw CStateInitException(std::move(m_errorMsg));
-    }
 
     auto delay = m_PEntity->GetRangedWeaponDelay(false);
 
@@ -116,6 +111,7 @@ bool CRangeState::Update(time_point tick)
         }
 
         CanUseRangedAttack(PTarget);
+
         if (m_startPos.x != m_PEntity->loc.p.x || m_startPos.y != m_PEntity->loc.p.y)
         {
             m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, m_PEntity, 0, 0, MSGBASIC_MOVE_AND_INTERRUPT);
@@ -242,6 +238,11 @@ bool CRangeState::CanUseRangedAttack(CBattleEntity* PTarget)
     if (m_PEntity->PAI->getTick() - ((CCharEntity*)m_PEntity)->m_LastRangedAttackTime < m_freePhaseTime)
     {
         m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, PTarget, 0, 0, MSGBASIC_WAIT_LONGER);
+        return false;
+    }
+    if (distance(m_PEntity->loc.p, PTarget->loc.p) > 25)
+    {
+        m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, PTarget, 0, 0, MSGBASIC_TOO_FAR_AWAY);
         return false;
     }
 
