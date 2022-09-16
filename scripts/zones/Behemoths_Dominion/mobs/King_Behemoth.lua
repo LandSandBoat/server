@@ -46,4 +46,7 @@ entity.onMobDespawn = function(mob)
     GetNPCByID(ID.npc.BEHEMOTH_QM):updateNPCHideTime(xi.settings.main.FORCE_SPAWN_QM_RESET_TIME)
 end
 
+entity.onMobFight = function(mob, target)
+end
+
 return entity

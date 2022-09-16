@@ -38,4 +38,5 @@
 
 catseyexi/lua
 catseyexi/sql
+catseyexi/cpp
 custom/cpp
