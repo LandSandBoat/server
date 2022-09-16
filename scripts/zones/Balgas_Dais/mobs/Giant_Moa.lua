@@ -30,7 +30,7 @@ end
 entity.onMobWeaponSkill = function(target, mob, skill)
     if skill:getID() == 1333 then
         mob:queue(0, function(mobArg)
-            if target:isAlive() and target:checkDistance() < 10 then
+            if target:isAlive() and mob:checkDistance(target) < 10 then
                 mobArg:useMobAbility(1334)
             end
         end)
