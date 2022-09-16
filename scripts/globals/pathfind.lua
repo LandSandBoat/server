@@ -46,7 +46,7 @@ xi.path =
     -- temporary and will replace original
     first_patrol = function(points)
         local first = points[1]
-        return { first.x, first.y, first.z };
+        return { first.x, first.y, first.z }
     end,
 
     -- are two points the same?
