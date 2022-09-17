@@ -45,7 +45,6 @@ end
 entity.onMobSpawn = function(mob)
     mob:setLocalVar("target", math.random(1,5))
     mob:setMod(xi.mod.REGEN, 50)
-    mob:setMod(xi.mod.SLEEPRES, 100)
     mob:setSpeed(60)
 end
 

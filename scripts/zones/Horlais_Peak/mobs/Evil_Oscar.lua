@@ -26,8 +26,6 @@ local ID = require("scripts/zones/Horlais_Peak/IDs")
 -----------------------------------
 local entity = {}
 
-local extremelyBadBreathID = 1332
-
 local sendMessage = function(players)
     for _, member in pairs(players) do
         member:messageSpecial(ID.text.EVIL_OSCAR_BEGINS_FILLING)
@@ -58,7 +56,7 @@ evilOscarFillsHisLungs = function(mob)
         else -- On the third breath, fire straight away!
             sendMessage(players)
             mob:setLocalVar("EBB_BREATH_COUNTER", 0)
-            mob:useMobAbility(extremelyBadBreathID)
+            mob:useMobAbility(1332)
         end
 
         -- Every 10-20 seconds

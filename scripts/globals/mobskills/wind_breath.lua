@@ -15,7 +15,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-
+    mob:lookAt(target:getPos())
     local dmgmod = xi.mobskills.mobBreathMove(mob, target, 0.3, 0.75, xi.magic.ele.WIND, 460)
 
     local dmg = xi.mobskills.mobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.WIND, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)

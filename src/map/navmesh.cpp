@@ -226,7 +226,7 @@ void CNavMesh::outputError(uint32 status)
     }
 }
 
-std::vector<position_t> CNavMesh::findPath(const position_t& start, const position_t& end)
+std::vector<pathpoint_t> CNavMesh::findPath(const position_t& start, const position_t& end)
 {
     TracyZoneScoped;
 
@@ -235,8 +235,8 @@ std::vector<position_t> CNavMesh::findPath(const position_t& start, const positi
         return {};
     }
 
-    std::vector<position_t> ret;
-    dtStatus                status;
+    std::vector<pathpoint_t> ret;
+    dtStatus                 status;
 
     float spos[3];
     CNavMesh::ToDetourPos(&start, spos);
@@ -321,7 +321,7 @@ std::vector<position_t> CNavMesh::findPath(const position_t& start, const positi
 
             CNavMesh::ToFFXIPos(pathPos);
 
-            ret.push_back({ pathPos[0], pathPos[1], pathPos[2], 0, 0 });
+            ret.push_back({ { pathPos[0], pathPos[1], pathPos[2], 0, 0 }, 0 });
         }
     }
 

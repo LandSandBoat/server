@@ -52,15 +52,21 @@ public:
     CPetEntity(PET_TYPE petType); // конструктор
     ~CPetEntity();                // деструктор
 
-    PET_TYPE     getPetType();
-    bool         isBstPet();
-    uint32       m_PetID;
+    PET_TYPE getPetType();
+    bool     isBstPet();
+    uint32   m_PetID;
+    uint8    m_TraitList[16];
+
     std::string  GetScriptName();
     WYVERN_TYPE  getWyvernType();
     virtual void PostTick() override;
     virtual void FadeOut() override;
     virtual void Die() override;
     virtual void Spawn() override;
+
+    virtual void addTrait(CTrait*) override;
+    virtual void delTrait(CTrait*) override;
+
     virtual void OnAbility(CAbilityState&, action_t&) override;
     virtual bool ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) override;
     void         OnPetSkillFinished(CPetSkillState& state, action_t& action);

@@ -249,7 +249,7 @@ bool CMobController::CanDetectTarget(CBattleEntity* PTarget, bool forceSight)
 
     float verticalDistance = abs(PMob->loc.p.y - PTarget->loc.p.y);
 
-    if (PMob->m_Family != 6 && verticalDistance > 8.0f)
+    if ((PMob->m_Family != 6 || PMob->getMobMod(LEDGE_AGGRO) != 0) && verticalDistance > 8.0f)
     {
         return false;
     }
@@ -274,6 +274,10 @@ bool CMobController::CanDetectTarget(CBattleEntity* PTarget, bool forceSight)
 
     if (detectSight && !hasInvisible && currentDistance < PMob->getMobMod(MOBMOD_SIGHT_RANGE) && facing(PMob->loc.p, PTarget->loc.p, 64))
     {
+        if (PMob->getMobMod(LEDGE_AGGRO) != 0)
+        {
+            return true;
+        }
         return CanSeePoint(PTarget->loc.p);
     }
 
@@ -679,7 +683,7 @@ void CMobController::Move()
     }
     if (PMob->PAI->PathFind->IsFollowingScriptedPath() && PMob->PAI->CanFollowPath())
     {
-        PMob->PAI->PathFind->FollowPath();
+        PMob->PAI->PathFind->FollowPath(m_Tick);
         return;
     }
 
@@ -765,7 +769,7 @@ void CMobController::Move()
                     // path to the target if we don't have a path already
                     PMob->PAI->PathFind->PathInRange(PTarget->loc.p, attack_range - 0.2f, PATHFLAG_WALLHACK | PATHFLAG_RUN);
                 }
-                PMob->PAI->PathFind->FollowPath();
+                PMob->PAI->PathFind->FollowPath(m_Tick);
                 if (!PMob->PAI->PathFind->IsFollowingPath())
                 {
                     bool needToMove = false;
@@ -885,6 +889,11 @@ void CMobController::DoRoamTick(time_point tick)
 
         if (PMob->PAI->PathFind->IsFollowingPath())
         {
+            FollowRoamPath();
+        }
+        else if (PMob->PAI->PathFind->IsPatrolling())
+        {
+            PMob->PAI->PathFind->ResumePatrol();
             FollowRoamPath();
         }
         else if (m_Tick >= m_LastActionTime + std::chrono::milliseconds(PMob->getBigMobMod(MOBMOD_ROAM_COOL)))
@@ -1030,7 +1039,7 @@ void CMobController::FollowRoamPath()
     TracyZoneScoped;
     if (PMob->PAI->CanFollowPath())
     {
-        PMob->PAI->PathFind->FollowPath();
+        PMob->PAI->PathFind->FollowPath(m_Tick);
 
         CBattleEntity* PPet = PMob->PPet;
         if (PPet != nullptr && PPet->PAI->IsSpawned() && !PPet->PAI->IsEngaged())

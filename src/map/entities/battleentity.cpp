@@ -1667,7 +1667,7 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
         }
 
         // TODO: this is really hacky and should eventually be moved into lua, and spellFlags should probably be in the spells table..
-        if (PSpell->canHitShadow() && aoeType == SPELLAOE_NONE && battleutils::IsAbsorbByShadow(PTarget) && !(PSpell->getFlag() & SPELLFLAG_IGNORE_SHADOWS))
+        if (PSpell->canHitShadow() && aoeType == SPELLAOE_NONE && battleutils::IsAbsorbByShadow(PTarget, this) && !(PSpell->getFlag() & SPELLFLAG_IGNORE_SHADOWS))
         {
             // take shadow
             msg                = MSGBASIC_SHADOW_ABSORB;
@@ -1799,6 +1799,7 @@ void CBattleEntity::OnCastInterrupted(CMagicState& state, action_t& action, MSGB
         actionTarget.messageID       = 0;
         actionTarget.animation       = PSpell->getAnimationID();
 
+        this->PAI->EventHandler.triggerListener("MAGIC_INTERRUPTED", CLuaBaseEntity(this));
         loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(this, state.GetTarget() ? state.GetTarget() : this, 0, 0, msg));
     }
 }
@@ -1920,7 +1921,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                  !PTarget->StatusEffectContainer->HasStatusEffect(EFFECT_ALL_MISS))
         {
             // attack hit, try to be absorbed by shadow unless it is a SATA attack round
-            if (!(attackRound.GetSATAOccured()) && battleutils::IsAbsorbByShadow(PTarget))
+            if (!(attackRound.GetSATAOccured()) && battleutils::IsAbsorbByShadow(PTarget, this))
             {
                 actionTarget.messageID = MSGBASIC_SHADOW_ABSORB;
                 actionTarget.param     = 1;
@@ -1950,7 +1951,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                     actionTarget.param        = 0;
                     actionTarget.messageID    = 0;
                     actionTarget.spikesEffect = SUBEFFECT_COUNTER;
-                    if (battleutils::IsAbsorbByShadow(this))
+                    if (battleutils::IsAbsorbByShadow(this, PTarget))
                     {
                         actionTarget.spikesParam   = 1;
                         actionTarget.spikesMessage = MSGBASIC_COUNTER_ABS_BY_SHADOW;

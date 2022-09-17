@@ -6,6 +6,7 @@
 require("scripts/globals/battlefield")
 require("scripts/globals/titles")
 require("scripts/globals/quests")
+require("scripts/globals/items")
 -----------------------------------
 local entity = {}
 
@@ -15,453 +16,453 @@ local loot =
     [97] =
     {
         {
-            {itemid =   748, droprate =  500}, -- gold_beastcoin
-            {itemid =   749, droprate =  500}, -- mythril_beastcoin
+            {itemid = xi.items.GOLD_BEASTCOIN,    droprate = 500},
+            {itemid = xi.items.MYTHRIL_BEASTCOIN, droprate = 500},
         },
         {
-            {itemid =     0, droprate =  750}, -- nothing
-            {itemid =  4174, droprate =  250}, -- vile_elixir
+            {itemid = 0, droprate =  750}, -- nothing
+            {itemid = xi.items.VILE_ELIXIR, droprate =  250},
         },
         {
             {itemid =     0, droprate =  600}, -- nothing
-            {itemid = 13237, droprate =  100}, -- survival_belt
-            {itemid = 13127, droprate =  100}, -- guarding_gorget
-            {itemid = 13405, droprate =  100}, -- enhancing_earring
-            {itemid = 12349, droprate =  100}, -- balance_buckler
+            {itemid = xi.items.SURVIVAL_BELT,     droprate = 100},
+            {itemid = xi.items.GUARDING_GORGET,   droprate = 100},
+            {itemid = xi.items.ENHANCING_EARRING, droprate = 100},
+            {itemid = xi.items.BALANCE_BUCKLER,   droprate = 100},
         },
         {
-            {itemid =   776, droprate =  125}, -- white_rock
-            {itemid =   773, droprate =  125}, -- translucent_rock
-            {itemid =   774, droprate =  125}, -- purple_rock
-            {itemid =   769, droprate =  125}, -- red_rock
-            {itemid =   770, droprate =  125}, -- blue_rock
-            {itemid =   771, droprate =  125}, -- yellow_rock
-            {itemid =   772, droprate =  125}, -- green_rock
-            {itemid =   775, droprate =  125}, -- black_rock
+            {itemid = xi.items.WHITE_ROCK,       droprate = 125},
+            {itemid = xi.items.TRANSLUCENT_ROCK, droprate = 125},
+            {itemid = xi.items.PURPLE_ROCK,      droprate = 125},
+            {itemid = xi.items.RED_ROCK,         droprate = 125},
+            {itemid = xi.items.BLUE_ROCK,        droprate = 125},
+            {itemid = xi.items.YELLOW_ROCK,      droprate = 125},
+            {itemid = xi.items.GREEN_ROCK,       droprate = 125},
+            {itemid = xi.items.BLACK_ROCK,       droprate = 125},
         },
         {
-            {itemid =   790, droprate =   50}, -- garnet
-            {itemid =   793, droprate =   50}, -- black_pearl
-            {itemid =   811, droprate =   50}, -- ametrine
-            {itemid =   797, droprate =   50}, -- painite
-            {itemid =   792, droprate =   50}, -- pearl
-            {itemid =   699, droprate =  100}, -- oak_log
-            {itemid =   808, droprate =  100}, -- goshenite
-            {itemid =   815, droprate =  100}, -- sphene
-            {itemid =   701, droprate =  100}, -- rosewood_log
-            {itemid =   798, droprate =  100}, -- turquoise
-            {itemid =   794, droprate =  100}, -- sapphire
-            {itemid =   788, droprate =  150}, -- peridot
+            {itemid = xi.items.GARNET,       droprate =  50},
+            {itemid = xi.items.BLACK_PEARL,  droprate =  50},
+            {itemid = xi.items.AMETRINE,     droprate =  50},
+            {itemid = xi.items.PAINITE,      droprate =  50},
+            {itemid = xi.items.PEARL,        droprate =  50},
+            {itemid = xi.items.OAK_LOG,      droprate = 100},
+            {itemid = xi.items.GOSHENITE,    droprate = 100},
+            {itemid = xi.items.SPHENE,       droprate = 100},
+            {itemid = xi.items.ROSEWOOD_LOG, droprate = 100},
+            {itemid = xi.items.TURQUOISE,    droprate = 100},
+            {itemid = xi.items.SAPPHIRE,     droprate = 100},
+            {itemid = xi.items.PERIDOT,      droprate = 150},
         },
         {
             {itemid =     0, droprate =  125}, -- nothing
-            {itemid =  4717, droprate =  125}, -- scroll_of_refresh
-            {itemid =  4896, droprate =  125}, -- fire_spirit_pact
-            {itemid =  4751, droprate =  125}, -- scroll_of_erase
-            {itemid =  4874, droprate =  125}, -- scroll_of_absorb-str
-            {itemid =  4714, droprate =  125}, -- scroll_of_phalanx
-            {itemid =  4858, droprate =  125}, -- scroll_of_ice_spikes
-            {itemid =  4947, droprate =  125}, -- scroll_of_utsusemi_ni
+            {itemid = xi.items.SCROLL_OF_REFRESH,     droprate = 125},
+            {itemid = xi.items.SCROLL_OF_ERASE,       droprate = 125},
+            {itemid = xi.items.SCROLL_OF_ABSORB_INT,  droprate = 125},
+            {itemid = xi.items.SCROLL_OF_PHALANX,     droprate = 125},
+            {itemid = xi.items.SCROLL_OF_ICE_SPIKES,  droprate = 125},
+            {itemid = xi.items.SCROLL_OF_UTSUSEMI_NI, droprate = 125},
+            {itemid = xi.items.FIRE_SPIRIT_PACT,      droprate = 125},
         },
     },
     -- BCNM Divine Punishers
     [98] =
     {
         {
-            {itemid = 16726, droprate =  250}, -- forsetis_axe
-            {itemid = 17647, droprate =  250}, -- aramiss_rapier
-            {itemid = 17491, droprate =  250}, -- spartan_cesti
-            {itemid = 17429, droprate =  250}, -- dominion_mace
+            {itemid = xi.items.FORSETIS_AXE,   droprate = 250},
+            {itemid = xi.items.ARAMISS_RAPIER, droprate = 250},
+            {itemid = xi.items.SPARTAN_CESTI,  droprate = 250},
+            {itemid = xi.items.DOMINION_MACE,  droprate = 250},
         },
         {
-            {itemid =     0, droprate =  250}, -- nothing
-            {itemid = 13054, droprate =  100}, -- fuma_kyahan
-            {itemid = 13555, droprate =  200}, -- peace_ring
-            {itemid = 13624, droprate =  200}, -- enhancing_mantle
-            {itemid = 13236, droprate =  150}, -- master_belt
-            {itemid = 13952, droprate =  100}, -- ochiudos_kote
+            {itemid = 0, droprate = 250}, -- nothing
+            {itemid = xi.items.FUMA_KYAHAN,      droprate = 100},
+            {itemid = xi.items.PEACE_RING,       droprate = 200},
+            {itemid = xi.items.ENHANCING_MANTLE, droprate = 200},
+            {itemid = xi.items.MASTER_BELT,      droprate = 150},
+            {itemid = xi.items.OCHIUDOS_KOTE,    droprate = 100},
         },
         {
-            {itemid =     0, droprate =  850}, -- nothing
-            {itemid =  4173, droprate =  100}, -- hi-reraiser
-            {itemid =  4175, droprate =   50}, -- vile_elixir_+1
+            {itemid = 0, droprate = 850}, -- nothing
+            {itemid = xi.items.HI_RERAISER,    droprate = 100},
+            {itemid = xi.items.VILE_ELIXIR_P1, droprate =  50},
         },
         {
-            {itemid =   774, droprate =  166}, -- purple_rock
-            {itemid =   773, droprate =  166}, -- translucent_rock
-            {itemid =   769, droprate =  167}, -- red_rock
-            {itemid =   775, droprate =  167}, -- black_rock
-            {itemid =   771, droprate =  167}, -- yellow_rock
-            {itemid =   776, droprate =  167}, -- white_rock
+            {itemid = xi.items.PURPLE_ROCK,      droprate = 166},
+            {itemid = xi.items.TRANSLUCENT_ROCK, droprate = 166},
+            {itemid = xi.items.RED_ROCK,         droprate = 167},
+            {itemid = xi.items.BLACK_ROCK,       droprate = 167},
+            {itemid = xi.items.YELLOW_ROCK,      droprate = 167},
+            {itemid = xi.items.WHITE_ROCK,       droprate = 167},
         },
         {
-            {itemid =   797, droprate =  125}, -- painite
-            {itemid =   791, droprate =  125}, -- aquamarine
-            {itemid =   810, droprate =  125}, -- fluorite
-            {itemid =   805, droprate =  125}, -- zircon
-            {itemid =   803, droprate =  125}, -- sunstone
-            {itemid =   801, droprate =  125}, -- chrysoberyl
-            {itemid =   802, droprate =  125}, -- moonstone
-            {itemid =   784, droprate =  125}, -- jadeite
+            {itemid = xi.items.PAINITE,     droprate = 125},
+            {itemid = xi.items.AQUAMARINE,  droprate = 125},
+            {itemid = xi.items.FLUORITE,    droprate = 125},
+            {itemid = xi.items.ZIRCON,      droprate = 125},
+            {itemid = xi.items.SUNSTONE,    droprate = 125},
+            {itemid = xi.items.CHRYSOBERYL, droprate = 125},
+            {itemid = xi.items.MOONSTONE,   droprate = 125},
+            {itemid = xi.items.JADEITE,     droprate = 125},
         },
         {
-            {itemid =     0, droprate =  517}, -- nothing
-            {itemid =   700, droprate =  333}, -- mahogany_log
-            {itemid =   702, droprate =  150}, -- ebony_log
+            {itemid = 0, droprate = 517}, -- nothing
+            {itemid = xi.items.MAHOGANY_LOG, droprate = 333},
+            {itemid = xi.items.EBONY_LOG,    droprate = 150},
         },
         {
-            {itemid =   652, droprate =  350}, -- steel_ingot
-            {itemid =   653, droprate =  150}, -- mythril_ingot
-            {itemid =   654, droprate =  150}, -- darksteel_ingot
-            {itemid =   745, droprate =  350}, -- gold_ingot
+            {itemid = xi.items.STEEL_INGOT,     droprate = 350},
+            {itemid = xi.items.MYTHRIL_INGOT,   droprate = 150},
+            {itemid = xi.items.DARKSTEEL_INGOT, droprate = 150},
+            {itemid = xi.items.GOLD_INGOT,      droprate = 350},
         },
     },
     -- BCNM Treasure and Tribulations
     [100] =
     {
         {
-            {itemid = 13292, droprate =   75}, -- Guardians Ring
-            {itemid = 13287, droprate =   32}, -- Kampfer Ring
-            {itemid = 13300, droprate =   54}, -- Conjurers Ring
-            {itemid = 13298, droprate =   32}, -- Shinobi Ring
-            {itemid = 13293, droprate =   97}, -- Slayers Ring
-            {itemid = 13289, droprate =   75}, -- Sorcerers Ring
-            {itemid = 13286, droprate =  108}, -- Soldiers Ring
-            {itemid = 13294, droprate =   22}, -- Tamers Ring
-            {itemid = 13296, droprate =   65}, -- Trackers Ring
-            {itemid = 13299, droprate =   32}, -- Drake Ring
-            {itemid = 13290, droprate =   32}, -- Fencers Ring
-            {itemid = 13295, droprate =   86}, -- Minstrels Ring
-            {itemid = 13288, droprate =   86}, -- Medicine Ring
-            {itemid = 13291, droprate =   75}, -- Rogues Ring
-            {itemid = 13297, droprate =   11}, -- Ronin Ring
-            {itemid = 13447, droprate =   32}, -- Platinum Ring
+            {itemid = xi.items.GUARDIANS_RING, droprate =  75},
+            {itemid = xi.items.KAMPFER_RING,   droprate =  32},
+            {itemid = xi.items.CONJURERS_RING, droprate =  54},
+            {itemid = xi.items.SHINOBI_RING,   droprate =  32},
+            {itemid = xi.items.SLAYERS_RING,   droprate =  97},
+            {itemid = xi.items.SORCERERS_RING, droprate =  75},
+            {itemid = xi.items.SOLDIERS_RING,  droprate = 108},
+            {itemid = xi.items.TAMERS_RING,    droprate =  22},
+            {itemid = xi.items.TRACKERS_RING,  droprate =  65},
+            {itemid = xi.items.DRAKE_RING,     droprate =  32},
+            {itemid = xi.items.FENCERS_RING,   droprate =  32},
+            {itemid = xi.items.MINSTRELS_RING, droprate =  86},
+            {itemid = xi.items.MEDICINE_RING,  droprate =  86},
+            {itemid = xi.items.ROGUES_RING,    droprate =  75},
+            {itemid = xi.items.RONIN_RING,     droprate =  11},
+            {itemid = xi.items.PLATINUM_RING,   droprate = 32},
         },
         {
-            {itemid = 13548, droprate =  376}, -- Astral Ring
-            {itemid = 13447, droprate =   22}, -- Platinum Ring
-            {itemid =  4818, droprate =   65}, -- Scroll Of Quake
-            {itemid =   859, droprate =   10}, -- Ram Skin
-            {itemid =  4172, droprate =   11}, -- Reraiser
-            {itemid =   653, droprate =   22}, -- Mythril Ingot
-            {itemid =  4902, droprate =   10}, -- Light Spirit Pact
-            {itemid =  4814, droprate =   32}, -- Scroll Of Freeze
-            {itemid =  4719, droprate =   43}, -- Scroll Of Regen Iii
-            {itemid =  4621, droprate =   32}, -- Scroll Of Raise Ii
-            {itemid =   703, droprate =   11}, -- Petrified Log
-            {itemid =   887, droprate =   11}, -- Coral Fragment
-            {itemid =   700, droprate =   11}, -- Mahogany Log
-            {itemid =   738, droprate =   43}, -- Chunk Of Platinum Ore
-            {itemid =   737, droprate =  108}, -- Chunk Of Gold Ore
-            {itemid =   645, droprate =   32}, -- Chunk Of Darksteel Ore
-            {itemid =   644, droprate =   65}, -- Chunk Of Mythril Ore
-            {itemid =   745, droprate =   10}, -- Gold Ingot
-            {itemid =   654, droprate =   11}, -- Darksteel Ingot
-            {itemid =   746, droprate =   11}, -- Platinum Ingot
-            {itemid =   702, droprate =   11}, -- Ebony Log
-            {itemid =   895, droprate =   11}, -- Ram Horn
-            {itemid =   902, droprate =   11}, -- Demon Horn
-            {itemid =  1116, droprate =    9}, -- Manticore Hide
-            {itemid =  1122, droprate =   11}, -- Wyvern Skin
-            {itemid =   866, droprate =   11}, -- Handful Of Wyvern Scales
+            {itemid = xi.items.ASTRAL_RING,              droprate = 376},
+            {itemid = xi.items.PLATINUM_RING,            droprate =  22},
+            {itemid = xi.items.SCROLL_OF_QUAKE,          droprate =  65},
+            {itemid = xi.items.RAM_SKIN,                 droprate =  10},
+            {itemid = xi.items.RERAISER,                 droprate =  11},
+            {itemid = xi.items.MYTHRIL_INGOT,            droprate =  22},
+            {itemid = xi.items.LIGHT_SPIRIT_PACT,        droprate =  10},
+            {itemid = xi.items.SCROLL_OF_FREEZE,         droprate =  32},
+            {itemid = xi.items.SCROLL_OF_REGEN_II,       droprate =  43},
+            {itemid = xi.items.SCROLL_OF_RAISE_II,       droprate =  32},
+            {itemid = xi.items.PETRIFIED_LOG,            droprate =  11},
+            {itemid = xi.items.CORAL_FRAGMENT,           droprate =  11},
+            {itemid = xi.items.MAHOGANY_LOG,             droprate =  11},
+            {itemid = xi.items.CHUNK_OF_PLATINUM_ORE,    droprate =  43},
+            {itemid = xi.items.CHUNK_OF_GOLD_ORE,        droprate = 108},
+            {itemid = xi.items.CHUNK_OF_DARKSTEEL_ORE,   droprate =  32},
+            {itemid = xi.items.CHUNK_OF_MYTHRIL_ORE,     droprate =  65},
+            {itemid = xi.items.GOLD_INGOT,               droprate =  10},
+            {itemid = xi.items.DARKSTEEL_INGOT,          droprate =  11},
+            {itemid = xi.items.PLATINUM_INGOT,           droprate =  11},
+            {itemid = xi.items.EBONY_LOG,                droprate =  11},
+            {itemid = xi.items.RAM_HORN,                 droprate =  11},
+            {itemid = xi.items.DEMON_HORN,               droprate =  11},
+            {itemid = xi.items.MANTICORE_HIDE,           droprate =   9},
+            {itemid = xi.items.WYVERN_SKIN,              droprate =  11},
+            {itemid = xi.items.HANDFUL_OF_WYVERN_SCALES, droprate =  11},
         },
     },
     -- BCNM Creeping Doom
     [104] =
     {
         {
-            {itemid =   816, droprate = 1000}, -- spool_of_silk_thread
+            {itemid = xi.items.SPOOL_OF_SILK_THREAD, droprate = 1000},
         },
         {
             {itemid = 65535, droprate = 1000, amount = 3000}, -- gil
         },
         {
+            {itemid = 0, droprate =  700}, -- nothing
+            {itemid = xi.items.SPOOL_OF_SILK_THREAD, droprate =  300},
+        },
+        {
+            {itemid = 0, droprate =  900}, -- nothing
+            {itemid = xi.items.SPOOL_OF_SILK_THREAD, droprate =  100},
+        },
+        {
+            {itemid = 0, droprate = 300}, -- nothing
+            {itemid = xi.items.SINGERS_EARRING,    droprate = 40},
+            {itemid = xi.items.ASHIGARU_EARRING,   droprate = 50},
+            {itemid = xi.items.MAGICIANS_EARRING,  droprate = 50},
+            {itemid = xi.items.WARLOCKS_EARRING,   droprate = 50},
+            {itemid = xi.items.HEALERS_EARRING,    droprate = 40},
+            {itemid = xi.items.ESQUIRES_EARRING,   droprate = 45},
+            {itemid = xi.items.WIZARDS_EARRING,    droprate = 50},
+            {itemid = xi.items.WYVERN_EARRING,     droprate = 40},
+            {itemid = xi.items.MERCENARYS_EARRING, droprate = 50},
+            {itemid = xi.items.KILLER_EARRING,     droprate = 45},
+            {itemid = xi.items.WRESTLERS_EARRING,  droprate = 45},
+            {itemid = xi.items.GENIN_EARRING,      droprate = 50},
+            {itemid = xi.items.BEATERS_EARRING,    droprate = 50},
+            {itemid = xi.items.PILFERERS_EARRING,  droprate = 45},
+            {itemid = xi.items.TRIMMERS_EARRING,   droprate = 50},
+        },
+        {
             {itemid =     0, droprate =  700}, -- nothing
-            {itemid =   816, droprate =  300}, -- spool_of_silk_thread
+            {itemid = xi.items.SINGERS_EARRING,    droprate = 20},
+            {itemid = xi.items.ASHIGARU_EARRING,   droprate = 20},
+            {itemid = xi.items.MAGICIANS_EARRING,  droprate = 20},
+            {itemid = xi.items.WARLOCKS_EARRING,   droprate = 20},
+            {itemid = xi.items.HEALERS_EARRING,    droprate = 20},
+            {itemid = xi.items.ESQUIRES_EARRING,   droprate = 20},
+            {itemid = xi.items.WIZARDS_EARRING,    droprate = 20},
+            {itemid = xi.items.WYVERN_EARRING,     droprate = 20},
+            {itemid = xi.items.MERCENARYS_EARRING, droprate = 20},
+            {itemid = xi.items.KILLER_EARRING,     droprate = 20},
+            {itemid = xi.items.WRESTLERS_EARRING,  droprate = 20},
+            {itemid = xi.items.GENIN_EARRING,      droprate = 20},
+            {itemid = xi.items.BEATERS_EARRING,    droprate = 20},
+            {itemid = xi.items.PILFERERS_EARRING,  droprate = 20},
+            {itemid = xi.items.TRIMMERS_EARRING,   droprate = 20},
         },
         {
-            {itemid =     0, droprate =  900}, -- nothing
-            {itemid =   816, droprate =  100}, -- spool_of_silk_thread
+            {itemid = 0, droprate = 500}, -- nothing
+            {itemid = xi.items.SHEET_OF_BAST_PARCHMENT, droprate =  400},
+            {itemid = xi.items.HI_POTION,               droprate =  100},
         },
         {
-            {itemid =     0, droprate =  300}, -- nothing
-            {itemid = 14733, droprate =   40}, -- singers_earring
-            {itemid = 14735, droprate =   50}, -- ashigaru_earring
-            {itemid = 14738, droprate =   50}, -- magicians_earring
-            {itemid = 13439, droprate =   50}, -- warlocks_earring
-            {itemid = 13437, droprate =   40}, -- healers_earring
-            {itemid = 14730, droprate =   45}, -- esquires_earring
-            {itemid = 13438, droprate =   50}, -- wizards_earring
-            {itemid = 14737, droprate =   40}, -- wyvern_earring
-            {itemid = 13435, droprate =   50}, -- mercenarys_earring
-            {itemid = 14731, droprate =   45}, -- killer_earring
-            {itemid = 13436, droprate =   45}, -- wrestlers_earring
-            {itemid = 14736, droprate =   50}, -- genin_earring
-            {itemid = 14734, droprate =   50}, -- beaters_earring
-            {itemid = 14729, droprate =   45}, -- pilferers_earring
-            {itemid = 14732, droprate =   50}, -- trimmers_earring
+            {itemid = 0, droprate = 500}, -- nothing
+            {itemid = xi.items.CHESTNUT_LOG, droprate =  250},
+            {itemid = xi.items.HI_ETHER,     droprate =  250},
         },
         {
-            {itemid =     0, droprate =  700}, -- nothing
-            {itemid = 14733, droprate =   20}, -- singers_earring
-            {itemid = 14735, droprate =   20}, -- ashigaru_earring
-            {itemid = 14738, droprate =   20}, -- magicians_earring
-            {itemid = 13439, droprate =   20}, -- warlocks_earring
-            {itemid = 13437, droprate =   20}, -- healers_earring
-            {itemid = 14730, droprate =   20}, -- esquires_earring
-            {itemid = 13438, droprate =   20}, -- wizards_earring
-            {itemid = 14737, droprate =   20}, -- wyvern_earring
-            {itemid = 13435, droprate =   20}, -- mercenarys_earring
-            {itemid = 14731, droprate =   20}, -- killer_earring
-            {itemid = 13436, droprate =   20}, -- wrestlers_earring
-            {itemid = 14736, droprate =   20}, -- genin_earring
-            {itemid = 14734, droprate =   20}, -- beaters_earring
-            {itemid = 14729, droprate =   20}, -- pilferers_earring
-            {itemid = 14732, droprate =   20}, -- trimmers_earring
+            {itemid = 0, droprate = 250}, -- nothing
+            {itemid = xi.items.SCROLL_OF_ERASE,        droprate =  150},
+            {itemid = xi.items.SCROLL_OF_DISPEL,       droprate =  200},
+            {itemid = xi.items.SCROLL_OF_MAGIC_FINALE, droprate =  250},
+            {itemid = xi.items.SCROLL_OF_UTSUSEMI_NI,  droprate =  150},
         },
         {
-            {itemid =     0, droprate =  500}, -- nothing
-            {itemid =  1134, droprate =  400}, -- sheet_of_bast_parchment
-            {itemid =  4116, droprate =  100}, -- hi-potion
+            {itemid = 0, droprate = 300}, -- nothing
+            {itemid = xi.items.AMBER_STONE,            droprate =   50},
+            {itemid = xi.items.CHUNK_OF_DARKSTEEL_ORE, droprate =   50},
+            {itemid = xi.items.ELM_LOG,                droprate =   50},
+            {itemid = xi.items.IRON_INGOT,             droprate =   50},
+            {itemid = xi.items.CHUNK_OF_IRON_ORE,      droprate =   50},
+            {itemid = xi.items.LAPIS_LAZULI,           droprate =   50},
+            {itemid = xi.items.MYTHRIL_INGOT,          droprate =   50},
+            {itemid = xi.items.CHUNK_OF_MYTHRIL_ORE,   droprate =   50},
+            {itemid = xi.items.ONYX,                   droprate =   50},
+            {itemid = xi.items.SARDONYX,               droprate =   50},
+            {itemid = xi.items.SILVER_INGOT,           droprate =   50},
+            {itemid = xi.items.CHUNK_OF_SILVER_ORE,    droprate =   50},
+            {itemid = xi.items.STEEL_INGOT,            droprate =   50},
+            {itemid = xi.items.TOURMALINE,             droprate =   50},
+            {itemid = xi.items.LIGHT_OPAL,             droprate =   50},
         },
         {
-            {itemid =     0, droprate =  500}, -- nothing
-            {itemid =   694, droprate =  250}, -- chestnut_log
-            {itemid =  4132, droprate =  250}, -- hi-ether
-        },
-        {
-            {itemid =     0, droprate =  250}, -- nothing
-            {itemid =  4751, droprate =  150}, -- scroll_of_erase
-            {itemid =  4868, droprate =  200}, -- scroll_of_dispel
-            {itemid =  5070, droprate =  250}, -- scroll_of_magic_finale
-            {itemid =  4947, droprate =  150}, -- scroll_of_utsusemi_ni
-        },
-        {
-            {itemid =     0, droprate =  300}, -- nothing
-            {itemid =   814, droprate =   50}, -- amber_stone
-            {itemid =   645, droprate =   50}, -- chunk_of_darksteel_ore
-            {itemid =   690, droprate =   50}, -- elm_log
-            {itemid =   651, droprate =   50}, -- iron_ingot
-            {itemid =   643, droprate =   50}, -- chunk_of_iron_ore
-            {itemid =   795, droprate =   50}, -- lapis_lazuli
-            {itemid =   653, droprate =   50}, -- mythril_ingot
-            {itemid =   644, droprate =   50}, -- chunk_of_mythril_ore
-            {itemid =   799, droprate =   50}, -- onyx
-            {itemid =   807, droprate =   50}, -- sardonyx
-            {itemid =   744, droprate =   50}, -- silver_ingot
-            {itemid =   736, droprate =   50}, -- chunk_of_silver_ore
-            {itemid =   652, droprate =   50}, -- steel_ingot
-            {itemid =   806, droprate =   50}, -- tourmaline
-            {itemid =   796, droprate =   50}, -- light opal
-        },
-        {
-            {itemid =     0, droprate =  500}, -- nothing
-            {itemid =   814, droprate =   30}, -- amber_stone
-            {itemid =   645, droprate =   40}, -- chunk_of_darksteel_ore
-            {itemid =   690, droprate =   30}, -- elm_log
-            {itemid =   651, droprate =   30}, -- iron_ingot
-            {itemid =   643, droprate =   40}, -- chunk_of_iron_ore
-            {itemid =   795, droprate =   30}, -- lapis_lazuli
-            {itemid =   653, droprate =   40}, -- mythril_ingot
-            {itemid =   644, droprate =   40}, -- chunk_of_mythril_ore
-            {itemid =   799, droprate =   30}, -- onyx
-            {itemid =   807, droprate =   30}, -- sardonyx
-            {itemid =   744, droprate =   40}, -- silver_ingot
-            {itemid =   736, droprate =   30}, -- chunk_of_silver_ore
-            {itemid =   652, droprate =   30}, -- steel_ingot
-            {itemid =   806, droprate =   30}, -- tourmaline
-            {itemid =   796, droprate =   30}, -- light opal
+            {itemid = 0, droprate =  300}, -- nothing
+            {itemid = xi.items.AMBER_STONE,            droprate = 50},
+            {itemid = xi.items.CHUNK_OF_DARKSTEEL_ORE, droprate = 50},
+            {itemid = xi.items.ELM_LOG,                droprate = 50},
+            {itemid = xi.items.IRON_INGOT,             droprate = 50},
+            {itemid = xi.items.CHUNK_OF_IRON_ORE,      droprate = 50},
+            {itemid = xi.items.LAPIS_LAZULI,           droprate = 50},
+            {itemid = xi.items.MYTHRIL_INGOT,          droprate = 50},
+            {itemid = xi.items.CHUNK_OF_MYTHRIL_ORE,   droprate = 50},
+            {itemid = xi.items.ONYX,                   droprate = 50},
+            {itemid = xi.items.SARDONYX,               droprate = 50},
+            {itemid = xi.items.SILVER_INGOT,           droprate = 50},
+            {itemid = xi.items.CHUNK_OF_SILVER_ORE,    droprate = 50},
+            {itemid = xi.items.STEEL_INGOT,            droprate = 50},
+            {itemid = xi.items.TOURMALINE,             droprate = 50},
+            {itemid = xi.items.LIGHT_OPAL,             droprate = 50},
         },
     },
     -- BCNM Charming Trio
     [105] =
     {
         {
-            {itemid = 1603, droprate = 1000}, -- Mannequin Hands
+            {itemid = xi.items.MANNEQUIN_HANDS, droprate = 1000},
         },
         {
-            {itemid = 915, droprate = 250},  -- Jar Of Toad Oil
-            {itemid = 4112, droprate = 300}, -- Potion
-            {itemid = 4113, droprate = 180}, -- Potion +1
-            {itemid = 4898, droprate = 130}, -- Air Spirit Pact
-            {itemid = 825, droprate = 280},  -- Square Of Cotton Cloth
+            {itemid = xi.items.JAR_OF_TOAD_OIL,        droprate = 250},
+            {itemid = xi.items.POTION,                 droprate = 300},
+            {itemid = xi.items.POTION_P1,              droprate = 180},
+            {itemid = xi.items.AIR_SPIRIT_PACT,        droprate = 130},
+            {itemid = xi.items.SQUARE_OF_COTTON_CLOTH, droprate = 280},
         },
         {
-            {itemid = 749, droprate = 250},  -- Mythril Beastcoin
-            {itemid = 17786, droprate = 190}, -- Ganko
-            {itemid = 827, droprate = 270},  -- Square Of Wool Cloth
-            {itemid = 18171, droprate = 145}, -- Platoon Disc
-            {itemid = 824, droprate = 295},  -- Square Of Grass Cloth
-            {itemid = 826, droprate = 260},  -- Square Of Linen Cloth
+            {itemid = xi.items.MYTHRIL_BEASTCOIN,     droprate = 250},
+            {itemid = xi.items.GANKO,                 droprate = 190},
+            {itemid = xi.items.SQUARE_OF_WOOL_CLOTH,  droprate = 270},
+            {itemid = xi.items.PLATOON_DISC,          droprate = 145},
+            {itemid = xi.items.SQUARE_OF_GRASS_CLOTH, droprate = 295},
+            {itemid = xi.items.SQUARE_OF_LINEN_CLOTH, droprate = 260},
         },
         {
             {itemid = 0, droprate = 800},    -- Nothing
-            {itemid = 18209, droprate = 167}, -- Platoon Cutter
+            {itemid = xi.items.PLATOON_CUTTER, droprate = 167},
         },
         {
             {itemid = 0, droprate = 500},    -- Nothing
-            {itemid = 924, droprate = 500},  -- Vial Of Fiend Blood
+            {itemid = xi.items.VIAL_OF_FIEND_BLOOD, droprate = 500},
         },
         {
             {itemid = 0, droprate = 500},    -- Nothing
-            {itemid = 924, droprate = 500},  -- Vial Of Fiend Blood
+            {itemid = xi.items.VIAL_OF_FIEND_BLOOD, droprate = 500},
         },
         {
-            {itemid = 18170, droprate = 235}, -- Platoon Edge
-            {itemid = 17271, droprate = 235}, -- Platoon Gun
-            {itemid = 17692, droprate = 235}, -- Platoon Spatha
-            {itemid = 17571, droprate = 235}, -- Platoon Pole
-            {itemid = 17820, droprate = 255}, -- Gunromaru
-            {itemid = 1601, droprate = 260}, -- Mannequin Head
-            {itemid = 4853, droprate = 250}, -- Scroll Of Drain
-            {itemid = 930, droprate = 190},  -- Vial Of Beastman Blood
+            {itemid = xi.items.PLATOON_EDGE,           droprate = 235},
+            {itemid = xi.items.PLATOON_GUN,            droprate = 235},
+            {itemid = xi.items.PLATOON_SPATHA,         droprate = 235},
+            {itemid = xi.items.PLATOON_POLE,           droprate = 235},
+            {itemid = xi.items.GUNROMARU,              droprate = 255},
+            {itemid = xi.items.MANNEQUIN_HEAD,         droprate = 260},
+            {itemid = xi.items.SCROLL_OF_DRAIN,        droprate = 250},
+            {itemid = xi.items.VIAL_OF_BEASTMAN_BLOOD, droprate = 190},
         },
     },
     -- BCNM Harem Scarem
     [106] =
     {
         {
-            {itemid = 857, droprate = 1000}, -- dhalmel_hide
+            {itemid = xi.items.DHALMEL_HIDE, droprate = 1000},
         },
         {
-            {itemid =   0, droprate = 500}, -- nothing
-            {itemid = 893, droprate = 500}, -- giant_femur
+            {itemid = 0, droprate = 500}, -- nothing
+            {itemid = xi.items.GIANT_FEMUR, droprate = 500},
         },
         {
-            {itemid =    0, droprate = 500}, -- nothing
-            {itemid = 4359, droprate = 500}, -- slice_of_dhalmel_meat
+            {itemid = 0, droprate = 500}, -- nothing
+            {itemid = xi.items.SLICE_OF_DHALMEL_MEAT, droprate = 500},
         },
         {
-            {itemid =     0, droprate = 400}, -- nothing
-            {itemid = 13659, droprate = 150}, -- mercenary_mantle
-            {itemid = 13669, droprate = 150}, -- beaters_mantle
-            {itemid = 13665, droprate = 150}, -- esquires_mantle
-            {itemid = 13661, droprate = 150}, -- healers_mantle
+            {itemid = 0, droprate = 400}, -- nothing
+            {itemid = xi.items.MERCENARY_MANTLE, droprate = 150},
+            {itemid = xi.items.BEATERS_MANTLE,   droprate = 150},
+            {itemid = xi.items.ESQUIRES_MANTLE,  droprate = 150},
+            {itemid = xi.items.HEALERS_MANTLE,   droprate = 150},
         },
         {
-            {itemid =     0, droprate = 400}, -- nothing
-            {itemid = 12392, droprate = 200}, -- wizards_shield
-            {itemid = 12397, droprate = 200}, -- trimmers_aspis
-            {itemid = 12402, droprate = 200}, -- wyvern_targe
+            {itemid = 0, droprate = 400}, -- nothing
+            {itemid = xi.items.WIZARDS_SHIELD, droprate = 200},
+            {itemid = xi.items.TRIMMERS_ASPIS, droprate = 200},
+            {itemid = xi.items.WYVERNS_TARGE,  droprate = 200},
         },
         {
-            {itemid =     0, droprate = 200}, -- nothing
-            {itemid =  4751, droprate = 200}, -- scroll_of_erase
-            {itemid =  4868, droprate = 200}, -- scroll_of_dispel
-            {itemid =  5070, droprate = 200}, -- scroll_of_magic_finale
-            {itemid =  4947, droprate = 200}, -- scroll_of_utsusemi_ni
+            {itemid = 0, droprate = 200}, -- nothing
+            {itemid = xi.items.SCROLL_OF_ERASE,        droprate = 200},
+            {itemid = xi.items.SCROLL_OF_DISPEL,       droprate = 200},
+            {itemid = xi.items.SCROLL_OF_MAGIC_FINALE, droprate = 200},
+            {itemid = xi.items.SCROLL_OF_UTSUSEMI_NI,  droprate = 200},
         },
         {
-            {itemid =   0, droprate = 250}, -- nothing
-            {itemid = 828, droprate = 250}, -- square_of_velvet_cloth
-            {itemid = 826, droprate = 250}, -- square_of_linen_cloth
-            {itemid = 827, droprate = 250}, -- square_of_wool_cloth
+            {itemid = 0, droprate = 250}, -- nothing
+            {itemid = xi.items.SQUARE_OF_VELVET_CLOTH, droprate = 250},
+            {itemid = xi.items.SQUARE_OF_LINEN_CLOTH,  droprate = 250},
+            {itemid = xi.items.SQUARE_OF_WOOL_CLOTH,   droprate = 250},
         },
         {
-            {itemid =    0, droprate = 600}, -- nothing
-            {itemid = 1601, droprate = 200}, -- mannequin_head
-            {itemid = 1603, droprate = 200}, -- mannequin_hands
+            {itemid = 0, droprate = 600}, -- nothing
+            {itemid = xi.items.MANNEQUIN_HEAD,  droprate = 200},
+            {itemid = xi.items.MANNEQUIN_HANDS, droprate = 200},
         },
     },
     -- KSNM Early Bird Catches the Wyrm
     [107] =
     {
         {
-            {itemid = 1441, droprate = 312}, -- Libation Abjuration
-            {itemid = 17694, droprate = 182}, -- Guespiere
-            {itemid = 18047, droprate = 65}, -- Havoc Scythe
-            {itemid = 17937, droprate = 43}, -- Leopard Axe
-            {itemid = 18173, droprate = 181}, -- Nokizaru Shuriken
-            {itemid = 17823, droprate = 217}, -- Shinsoku
-            {itemid = 17575, droprate = 43}, -- Somnus Signa
+            {itemid = xi.items.LIBATION_ABJURATION, droprate = 312},
+            {itemid = xi.items.GUESPIERE,           droprate = 182},
+            {itemid = xi.items.HAVOC_SCYTHE,        droprate =  65},
+            {itemid = xi.items.LEOPARD_AXE,         droprate =  43},
+            {itemid = xi.items.NOKIZARU_SHURIKEN,   droprate = 181},
+            {itemid = xi.items.SHINSOKU,            droprate = 217},
+            {itemid = xi.items.SOMNUS_SIGNA,        droprate =  43},
         },
         {
-            {itemid = 722, droprate = 94},   -- Divine Log
-            {itemid = 1446, droprate = 196}, -- Lacquer Tree Log
-            {itemid = 703, droprate = 572},  -- Petrified Log
-            {itemid = 831, droprate = 43},   -- Square Of Shining Cloth
+            {itemid = xi.items.DIVINE_LOG,              droprate =  94},
+            {itemid = xi.items.LACQUER_TREE_LOG,        droprate = 196},
+            {itemid = xi.items.PETRIFIED_LOG,           droprate = 572},
+            {itemid = xi.items.SQUARE_OF_SHINING_CLOTH, droprate =  43},
         },
         {
-            {itemid = 1442, droprate = 159}, -- Oblation Abjuration
-            {itemid = 17695, droprate = 151}, -- Bayards Sword
-            {itemid = 18088, droprate = 167}, -- Dreizack
-            {itemid = 17576, droprate = 95}, -- Grim Staff
-            {itemid = 17245, droprate = 95}, -- Grosveneurs Bow
-            {itemid = 17996, droprate = 56}, -- Stylet
-            {itemid = 17789, droprate = 341}, -- Unsho
+            {itemid = xi.items.OBLATION_ABJURATION, droprate = 159},
+            {itemid = xi.items.BAYARDS_SWORD,       droprate = 151},
+            {itemid = xi.items.DREIZACK,            droprate = 167},
+            {itemid = xi.items.GRIM_STAFF,          droprate =  95},
+            {itemid = xi.items.GROSVENEURS_BOW,     droprate =  95},
+            {itemid = xi.items.STYLET,              droprate =  56},
+            {itemid = xi.items.UNSHO,               droprate = 341},
         },
         {
-            {itemid = 4486, droprate = 522}, -- Dragon Heart
-            {itemid = 4272, droprate = 346}, -- Slice Of Dragon Meat
-            {itemid = 17928, droprate = 82}, -- Juggernaut
-            {itemid = 13189, droprate = 59}, -- Speed Belt
+            {itemid = xi.items.DRAGON_HEART,         droprate = 522},
+            {itemid = xi.items.SLICE_OF_DRAGON_MEAT, droprate = 346},
+            {itemid = xi.items.JUGGERNAUT,           droprate =  82},
+            {itemid = xi.items.SPEED_BELT,           droprate =  59},
         },
         {
-            {itemid = 887, droprate = 32},   -- Coral Fragment
-            {itemid = 645, droprate = 71},   -- Chunk Of Darksteel Ore
-            {itemid = 902, droprate = 79},   -- Demon Horn
-            {itemid = 702, droprate = 56},   -- Ebony Log
-            {itemid = 737, droprate = 71},   -- Chunk Of Gold Ore
-            {itemid = 823, droprate = 32},   -- Spool Of Gold Thread
-            {itemid = 4173, droprate = 48},  -- Hi-reraiser
-            {itemid = 700, droprate = 127},  -- Mahogany Log
-            {itemid = 644, droprate = 111},  -- Chunk Of Mythril Ore
-            {itemid = 703, droprate = 183},  -- Petrified Log
-            {itemid = 942, droprate = 40},   -- Philosophers Stone
-            {itemid = 738, droprate = 56},   -- Chunk Of Platinum Ore
-            {itemid = 895, droprate = 24},   -- Ram Horn
-            {itemid = 1132, droprate = 119}, -- Square Of Raxa
-            {itemid = 4172, droprate = 56},  -- Reraiser
-            {itemid = 4175, droprate = 40},  -- Vile Elixir +1
-            {itemid = 866, droprate = 24},   -- Handful Of Wyvern Scales
+            {itemid = xi.items.CORAL_FRAGMENT,           droprate =  32},
+            {itemid = xi.items.CHUNK_OF_DARKSTEEL_ORE,   droprate =  71},
+            {itemid = xi.items.DEMON_HORN,               droprate =  79},
+            {itemid = xi.items.EBONY_LOG,                droprate =  56},
+            {itemid = xi.items.CHUNK_OF_GOLD_ORE,        droprate =  71},
+            {itemid = xi.items.SPOOL_OF_GOLD_THREAD,     droprate =  32},
+            {itemid = xi.items.HI_RERAISER,              droprate =  48},
+            {itemid = xi.items.MAHOGANY_LOG,             droprate = 127},
+            {itemid = xi.items.CHUNK_OF_MYTHRIL_ORE,     droprate = 111},
+            {itemid = xi.items.PETRIFIED_LOG,            droprate = 183},
+            {itemid = xi.items.PHILOSOPHERS_STONE,       droprate =  40},
+            {itemid = xi.items.CHUNK_OF_PLATINUM_ORE,    droprate =  56},
+            {itemid = xi.items.RAM_HORN,                 droprate =  24},
+            {itemid = xi.items.SQUARE_OF_RAXA,           droprate = 119},
+            {itemid = xi.items.RERAISER,                 droprate =  56},
+            {itemid = xi.items.VILE_ELIXIR_P1,           droprate =  40},
+            {itemid = xi.items.HANDFUL_OF_WYVERN_SCALES, droprate =  24},
         },
         {
-            {itemid = 1526, droprate = 210}, -- Wyrm Beard
-            {itemid = 1313, droprate = 775}, -- Lock Of Sirens Hair
+            {itemid = xi.items.WYRM_BEARD,          droprate = 210},
+            {itemid = xi.items.LOCK_OF_SIRENS_HAIR, droprate = 775},
         },
         {
-            {itemid = 4209, droprate = 94},  -- Mind Potion
-            {itemid = 4207, droprate = 130}, -- Intelligence Potion
-            {itemid = 4211, droprate = 116}, -- Charisma Potion
-            {itemid = 4213, droprate = 51},  -- Icarus Wing
-            {itemid = 1132, droprate = 246}, -- Square Of Raxa
-            {itemid = 17582, droprate = 246}, -- Prelatic Pole
+            {itemid = xi.items.MIND_POTION,         droprate =  94},
+            {itemid = xi.items.INTELLIGENCE_POTION, droprate = 130},
+            {itemid = xi.items.CHARISMA_POTION,     droprate = 116},
+            {itemid = xi.items.ICARUS_WING,         droprate =  51},
+            {itemid = xi.items.SQUARE_OF_RAXA,      droprate = 246},
+            {itemid = xi.items.PRELATIC_POLE,       droprate = 246},
         },
         {
-            {itemid = 4135, droprate = 290}, -- Hi-ether +3
-            {itemid = 4119, droprate = 225}, -- Hi-potion +3
-            {itemid = 4173, droprate = 210}, -- Hi-reraiser
-            {itemid = 4175, droprate = 217}, -- Vile Elixir +1
+            {itemid = xi.items.HI_ETHER_III,   droprate = 290},
+            {itemid = xi.items.HI_POTION_P3,   droprate = 225},
+            {itemid = xi.items.HI_RERAISER,    droprate = 210},
+            {itemid = xi.items.VILE_ELIXIR_P1, droprate = 217},
         },
         {
-            {itemid = 887, droprate = 87},   -- Coral Fragment
-            {itemid = 645, droprate = 80},   -- Chunk Of Darksteel Ore
-            {itemid = 902, droprate = 58},   -- Demon Horn
-            {itemid = 702, droprate = 72},   -- Ebony Log
-            {itemid = 737, droprate = 87},   -- Chunk Of Gold Ore
-            {itemid = 823, droprate = 14},   -- Spool Of Gold Thread
-            {itemid = 4173, droprate = 22},  -- Hi-reraiser
-            {itemid = 700, droprate = 80},   -- Mahogany Log
-            {itemid = 644, droprate = 36},   -- Chunk Of Mythril Ore
-            {itemid = 703, droprate = 145},  -- Petrified Log
-            {itemid = 844, droprate = 7},    -- Phoenix Feather
-            {itemid = 738, droprate = 51},   -- Chunk Of Platinum Ore
-            {itemid = 830, droprate = 29},   -- Square Of Rainbow Cloth
-            {itemid = 895, droprate = 36},   -- Ram Horn
-            {itemid = 1132, droprate = 72},  -- Square Of Raxa
-            {itemid = 4172, droprate = 29},  -- Reraiser
-            {itemid = 4174, droprate = 29},  -- Vile Elixir
-            {itemid = 4175, droprate = 7},   -- Vile Elixir +1
-            {itemid = 866, droprate = 22},   -- Handful Of Wyvern Scales
+            {itemid = xi.items.CORAL_FRAGMENT,           droprate =  87},
+            {itemid = xi.items.CHUNK_OF_DARKSTEEL_ORE,   droprate =  80},
+            {itemid = xi.items.DEMON_HORN,               droprate =  58},
+            {itemid = xi.items.EBONY_LOG,                droprate =  72},
+            {itemid = xi.items.CHUNK_OF_GOLD_ORE,        droprate =  87},
+            {itemid = xi.items.SPOOL_OF_GOLD_THREAD,     droprate =  14},
+            {itemid = xi.items.HI_RERAISER,              droprate =  22},
+            {itemid = xi.items.MAHOGANY_LOG,             droprate =  80},
+            {itemid = xi.items.CHUNK_OF_MYTHRIL_ORE,     droprate =  36},
+            {itemid = xi.items.PETRIFIED_LOG,            droprate = 145},
+            {itemid = xi.items.PHOENIX_FEATHER,          droprate =   7},
+            {itemid = xi.items.CHUNK_OF_PLATINUM_ORE,    droprate =  51},
+            {itemid = xi.items.SQUARE_OF_RAINBOW_CLOTH,  droprate =  29},
+            {itemid = xi.items.RAM_HORN,                 droprate =  36},
+            {itemid = xi.items.SQUARE_OF_RAXA,           droprate =  72},
+            {itemid = xi.items.RERAISER,                 droprate =  29},
+            {itemid = xi.items.VILE_ELIXIR,              droprate =  29},
+            {itemid = xi.items.VILE_ELIXIR_P1,           droprate =   7},
+            {itemid = xi.items.HANDFUL_OF_WYVERN_SCALES, droprate =  22},
         },
         {
-            {itemid = 1110, droprate = 58},  -- Vial Of Black Beetle Blood
-            {itemid = 836, droprate = 36},   -- Square Of Damascene Cloth
-            {itemid = 658, droprate = 72},   -- Damascus Ingot
-            {itemid = 837, droprate = 22},   -- Spool Of Malboro Fiber
-            {itemid = 942, droprate = 275},  -- Philosophers Stone
-            {itemid = 844, droprate = 196},  -- Phoenix Feather
-            {itemid = 1132, droprate = 225}, -- Square Of Raxa
+            {itemid = xi.items.VIAL_OF_BLACK_BEETLE_BLOOD, droprate =  58},
+            {itemid = xi.items.SQUARE_OF_DAMASCENE_CLOTH,  droprate =  36},
+            {itemid = xi.items.DAMASCUS_INGOT,             droprate =  72},
+            {itemid = xi.items.SPOOL_OF_MALBORO_FIBER,     droprate =  22},
+            {itemid = xi.items.PHILOSOPHERS_STONE,         droprate = 275},
+            {itemid = xi.items.PHOENIX_FEATHER,            droprate = 196},
+            {itemid = xi.items.SQUARE_OF_RAXA,             droprate = 225},
         },
     },
 
@@ -469,138 +470,138 @@ local loot =
     [108] =
     {
         {
-            {itemid =  4596, droprate = 1000}, -- bunch_of_wild_pamamas
+            {itemid = xi.items.BUNCH_OF_WILD_PAMAMAS, droprate = 1000},
         },
         {
-            {itemid =     0, droprate =  300}, -- nothing
-            {itemid = 17572, droprate =  100}, -- dusky_staff
-            {itemid = 17995, droprate =  100}, -- jongleurs_dagger
-            {itemid = 17994, droprate =  100}, -- calveleys_dagger
-            {itemid = 17463, droprate =  100}, -- sealed_mace
-            {itemid = 17821, droprate =  100}, -- himmel_stock
-            {itemid = 17787, droprate =  100}, -- kagehide
-            {itemid = 17787, droprate =  100}, -- ohaguro
+            {itemid = 0, droprate =  300}, -- nothing
+            {itemid = xi.items.DUSKY_STAFF,      droprate =  100},
+            {itemid = xi.items.JONGLEURS_DAGGER, droprate =  100},
+            {itemid = xi.items.CALVELEYS_DAGGER, droprate =  100},
+            {itemid = xi.items.SEALED_MACE,      droprate =  100},
+            {itemid = xi.items.HIMMEL_STOCK,     droprate =  100},
+            {itemid = xi.items.KAGEHIDE,         droprate =  100},
+            {itemid = xi.items.OHAGURO,          droprate =  100},
         },
         {
-            {itemid =     0, droprate =  100}, -- nothing
-            {itemid = 14736, droprate =  300}, -- genin_earring
-            {itemid = 13164, droprate =  300}, -- agile_gorget
-            {itemid = 13165, droprate =  300}, -- jagd_gorget
+            {itemid = 0, droprate =  100}, -- nothing
+            {itemid = xi.items.GENIN_EARRING, droprate =  300},
+            {itemid = xi.items.AGILE_GORGET,  droprate =  300},
+            {itemid = xi.items.JAGD_GORGET,   droprate =  300},
         },
         {
-            {itemid =     0, droprate =  370}, -- nothing
-            {itemid =   798, droprate =  100}, -- turquoise
-            {itemid =  4468, droprate =  100}, -- bunch_of_pamamas
-            {itemid =   829, droprate =  110}, -- square_of_silk_cloth
-            {itemid =   701, droprate =  140}, -- rosewood_log
-            {itemid =   792, droprate =  180}, -- pearl
+            {itemid = 0, droprate =  370}, -- nothing
+            {itemid = xi.items.TURQUOISE,            droprate =  100},
+            {itemid = xi.items.BUNCH_OF_PAMAMAS,     droprate =  100},
+            {itemid = xi.items.SQUARE_OF_SILK_CLOTH, droprate =  110},
+            {itemid = xi.items.ROSEWOOD_LOG,         droprate =  140},
+            {itemid = xi.items.PEARL,                droprate =  180},
         },
         {
-            {itemid =  4714, droprate =  250}, -- scroll_of_phalanx
-            {itemid =  4874, droprate =  250}, -- scroll_of_absorb
-            {itemid =  4717, droprate =  250}, -- scroll_of_refresh
-            {itemid =  4751, droprate =  250}, -- scroll_of_erase
+            {itemid = xi.items.SCROLL_OF_PHALANX,    droprate =  250},
+            {itemid = xi.items.SCROLL_OF_ABSORB_INT, droprate =  250},
+            {itemid = xi.items.SCROLL_OF_REFRESH,    droprate =  250},
+            {itemid = xi.items.SCROLL_OF_ERASE,      droprate =  250},
         },
         {
-            {itemid =     0, droprate =  600}, -- nothing
-            {itemid =   748, droprate =  400}, -- gold_beastcoin
+            {itemid = 0, droprate =  600}, -- nothing
+            {itemid = xi.items.GOLD_BEASTCOIN, droprate =  400},
         },
     },
     -- BCNM Rapid Raptors
     [109] =
     {
         {
-            {itemid =   853, droprate = 1000}, -- raptor_skin
+            {itemid = xi.items.RAPTOR_SKIN, droprate = 1000},
         },
         {
-            {itemid =   655, droprate = 1000}, -- adaman_ingot
+            {itemid = xi.items.ADAMAN_INGOT, droprate = 1000},
         },
         {
-            {itemid =     0, droprate =  190}, -- nothing
-            {itemid = 14845, droprate =  110}, -- sly_gauntlets
-            {itemid = 14843, droprate =  120}, -- spiked_finger_gauntlets
-            {itemid = 14844, droprate =  140}, -- rush_gloves
-            {itemid = 15149, droprate =  140}, -- rival_ribbon
-            {itemid = 15148, droprate =  150}, -- mana_circlet
-            {itemid = 14842, droprate =  150}, -- ivory_mitts
+            {itemid = 0, droprate =  190}, -- nothing
+            {itemid = xi.items.SLY_GAUNTLES,           droprate =  10},
+            {itemid = xi.items.SPIKED_FINGER_GAUNTLES, droprate = 120},
+            {itemid = xi.items.RUSH_GLOVES,            droprate = 140},
+            {itemid = xi.items.RIVAL_RIBBON,           droprate = 140},
+            {itemid = xi.items.MANA_CIRCLET,           droprate = 150},
+            {itemid = xi.items.IVORY_MITTS,            droprate = 150},
         },
         {
-            {itemid =     0, droprate =   30}, -- nothing
-            {itemid = 13167, droprate =  100}, -- storm_gorget
-            {itemid = 13168, droprate =  100}, -- intellect_torque
-            {itemid = 13169, droprate =  120}, -- benign_necklace
-            {itemid = 13676, droprate =  130}, -- heavy_mantle
-            {itemid = 13166, droprate =  170}, -- hateful_collar
-            {itemid = 13677, droprate =  170}, -- esoteric_mantle
-            {itemid = 13679, droprate =  180}, -- templars_mantle
+            {itemid = 0, droprate =   30}, -- nothing
+            {itemid = xi.items.STORM_GORGET,     droprate = 100},
+            {itemid = xi.items.INTELLECT_TORQUE, droprate = 100},
+            {itemid = xi.items.BENIGN_NECKLACE,  droprate = 120},
+            {itemid = xi.items.HEAVY_MANTLE,     droprate = 130},
+            {itemid = xi.items.HATEFUL_COLLAR,   droprate = 170},
+            {itemid = xi.items.ESOTERIC_MANTLE,  droprate = 170},
+            {itemid = xi.items.TEMPLARS_MANTLE,  droprate = 180},
         },
         {
-            {itemid =     0, droprate =  230}, -- nothing
-            {itemid =   653, droprate =  200}, -- mythril_ingot
-            {itemid =   643, droprate =  200}, -- chunk_of_iron_ore
-            {itemid =   703, droprate =  370}, -- petrified_log
+            {itemid = 0, droprate =  230}, -- nothing
+            {itemid = xi.items.MYTHRIL_INGOT,     droprate =  200},
+            {itemid = xi.items.CHUNK_OF_IRON_ORE, droprate =  200},
+            {itemid = xi.items.PETRIFIED_LOG,     droprate =  370},
         },
         {
-            {itemid =     0, droprate =  560}, -- nothing
-            {itemid =  4172, droprate =  440}, -- reraiser
+            {itemid = 0, droprate =  560}, -- nothing
+            {itemid = xi.items.RERAISER, droprate =  440},
         },
     },
     -- BCNM Wild Wild Whiskers
     [110] =
     {
         {
-            {itemid =  1591, droprate = 1000}, -- high-quality_coeurl_hide
+            {itemid = xi.items.HIGH_QUALITY_COEURL_HIDE, droprate = 1000},
         },
         {
-            {itemid =  1591, droprate = 1000}, -- high-quality_coeurl_hide
+            {itemid = xi.items.HIGH_QUALITY_COEURL_HIDE, droprate = 1000},
         },
         {
-            {itemid =  1591, droprate = 1000}, -- high-quality_coeurl_hide
+            {itemid = xi.items.HIGH_QUALITY_COEURL_HIDE, droprate = 1000},
         },
         {
-            {itemid =   646, droprate = 1000}, -- chunk_of_adaman_ore
+            {itemid = xi.items.CHUNK_OF_ADAMAN_ORE, droprate = 1000},
         },
         {
-            {itemid =  5253, droprate = 1000}, -- hermes_quencher
+            {itemid = xi.items.HERMES_QUENCHER, droprate = 1000},
         },
         {
-            {itemid =  4213, droprate = 1000}, -- icarus_wing
+            {itemid = xi.items.ICARUS_WING, droprate = 1000},
         },
         {
-            {itemid = 15293, droprate =  365}, -- gleemans_belt
-            {itemid = 15292, droprate =  635}, -- penitents_rope
+            {itemid = xi.items.GLEEMANS_BELT,  droprate = 365},
+            {itemid = xi.items.PENITENTS_ROPE, droprate = 635},
         },
         {
-            {itemid = 14663, droprate =  426}, -- teleport_ring_mea
-            {itemid = 14665, droprate =  574}, -- teleport_ring_yhoat
+            {itemid = xi.items.TELEPORT_RING_MEA,   droprate = 426},
+            {itemid = xi.items.TELEPORT_RING_YHOAT, droprate = 574},
         },
         {
-            {itemid =     0, droprate =  848}, -- nothing
-            {itemid = 15185, droprate =   58}, -- walkure_mask
-            {itemid =  4173, droprate =   78}, -- hi-reraiser
-            {itemid =   702, droprate =   16}, -- ebony_log
+            {itemid = 0, droprate =  848}, -- nothing
+            {itemid = xi.items.WALKURE_MASK, droprate = 58},
+            {itemid = xi.items.HI_RERAISER,  droprate = 78},
+            {itemid = xi.items.EBONY_LOG,    droprate = 16},
         },
         {
-            {itemid =   771, droprate =    9}, -- yellow_rock
-            {itemid =   775, droprate =    9}, -- black_rock
-            {itemid =   791, droprate =   16}, -- aquamarine
-            {itemid =   769, droprate =   16}, -- red_rock
-            {itemid =   770, droprate =   16}, -- blue_rock
-            {itemid =   774, droprate =   16}, -- purple_rock
-            {itemid =   700, droprate =   33}, -- mahogany_log
-            {itemid =   801, droprate =   33}, -- chrysoberyl
-            {itemid =   805, droprate =   33}, -- zircon
-            {itemid =   652, droprate =   49}, -- steel_ingot
-            {itemid =   654, droprate =   49}, -- darksteel_ingot
-            {itemid =   773, droprate =   49}, -- translucent_rock
-            {itemid =   803, droprate =   49}, -- sunstone
-            {itemid =   802, droprate =   66}, -- moonstone
-            {itemid =   653, droprate =   82}, -- mythril_ingot
-            {itemid =   810, droprate =   82}, -- fluorite
-            {itemid =   745, droprate =   98}, -- gold_ingot
-            {itemid =   784, droprate =   98}, -- jadeite
-            {itemid =   797, droprate =   98}, -- painite
-            {itemid =  4175, droprate =   99}, -- vile_elixir_+1
+            {itemid = xi.items.YELLOW_ROCK,      droprate =  9},
+            {itemid = xi.items.BLACK_ROCK,       droprate =  9},
+            {itemid = xi.items.AQUAMARINE,       droprate = 16},
+            {itemid = xi.items.RED_ROCK,         droprate = 16},
+            {itemid = xi.items.BLUE_ROCK,        droprate = 16},
+            {itemid = xi.items.PURPLE_ROCK,      droprate = 16},
+            {itemid = xi.items.MAHOGANY_LOG,     droprate = 33},
+            {itemid = xi.items.CHRYSOBERYL,      droprate = 33},
+            {itemid = xi.items.ZIRCON,           droprate = 33},
+            {itemid = xi.items.STEEL_INGOT,      droprate = 49},
+            {itemid = xi.items.DARKSTEEL_INGOT,  droprate = 49},
+            {itemid = xi.items.TRANSLUCENT_ROCK, droprate = 49},
+            {itemid = xi.items.SUNSTONE,         droprate = 49},
+            {itemid = xi.items.MOONSTONE,        droprate = 66},
+            {itemid = xi.items.MYTHRIL_INGOT,    droprate = 82},
+            {itemid = xi.items.FLUORITE,         droprate = 82},
+            {itemid = xi.items.GOLD_INGOT,       droprate = 98},
+            {itemid = xi.items.JADEITE,          droprate = 98},
+            {itemid = xi.items.PAINITE,          droprate = 98},
+            {itemid = xi.items.VILE_ELIXIR_P1,   droprate = 99},
         },
     },
 
@@ -608,54 +609,54 @@ local loot =
     [111] =
     {
         {
-            {itemid = 17589, droprate = 200}, -- Thyrsusstab
-            {itemid = 18217, droprate = 200}, -- Rampager
-            {itemid = 17451, droprate = 200}, -- Morgenstern
-            {itemid = 18378, droprate = 200}, -- Subduer
-            {itemid = 17207, droprate = 200}, -- Expunger
+            {itemid = xi.items.THURSUSSTAB, droprate = 200},
+            {itemid = xi.items.RAMPAGER,    droprate = 200},
+            {itemid = xi.items.MORGENSTERN, droprate = 200},
+            {itemid = xi.items.SUBDUER,     droprate = 200},
+            {itemid = xi.items.EXPUNGER,    droprate = 200},
         },
         {
-            {itemid = 17700, droprate = 250}, -- Durandal
-            {itemid = 18006, droprate = 250}, -- Hoplites Harp
-            {itemid = 17842, droprate = 250}, -- Sorrowful Harp
-            {itemid = 14762, droprate = 250}, -- Attila's Earring
+            {itemid = xi.items.DURANDAL,        droprate = 250},
+            {itemid = xi.items.HOPLITES_HARP,   droprate = 250},
+            {itemid = xi.items.SORROWFUL_HARP,  droprate = 250},
+            {itemid = xi.items.ATTILAS_EARRING, droprate = 250},
         },
         {
-            {itemid = 655,   droprate = 333}, -- Adaman Ingot
-            {itemid = 747,   droprate = 333}, -- Orichalcum Ingot
-            {itemid = 15328, droprate = 333}, -- Root Sabots
+            {itemid = xi.items.ADAMAN_INGOT,     droprate = 333},
+            {itemid = xi.items.ORICHALCUM_INGOT, droprate = 333},
+            {itemid = xi.items.ROOT_SABOTS,      droprate = 333},
         },
         {
-            {itemid = 711,   droprate = 650}, -- Divine Log
-            {itemid = 1446,  droprate =  50}, -- Lacquer Tree Log
-            {itemid = 19024, droprate = 100}, -- Sword Strap
-            {itemid = 19025, droprate = 100}, -- Pole Grip
-            {itemid = 19026, droprate = 100}, -- Spear Strap
+            {itemid = xi.items.DIVINE_LOG,       droprate = 650},
+            {itemid = xi.items.LACQUER_TREE_LOG, droprate =  50},
+            {itemid = xi.items.SWORD_STRAP,      droprate = 100},
+            {itemid = xi.items.POLE_GRIP,        droprate = 100},
+            {itemid = xi.items.SPEAR_STRAP,      droprate = 100},
         },
         {
-            {itemid = 644,  droprate = 66}, -- Mythril Ore
-            {itemid = 645,  droprate = 66}, -- Darksteel Ore
-            {itemid = 700,  droprate = 66}, -- Mahogany Log
-            {itemid = 702,  droprate = 66}, -- Ebony Log
-            {itemid = 703,  droprate = 76}, -- Petrified Log
-            {itemid = 737,  droprate = 66}, -- Gold Ore
-            {itemid = 738,  droprate = 66}, -- Platinum Ore
-            {itemid = 766,  droprate = 66}, -- Wyvern Scales
-            {itemid = 830,  droprate = 66}, -- Rainbow Cloth
-            {itemid = 887,  droprate = 66}, -- Coral Fragment
-            {itemid = 895,  droprate = 66}, -- Ram Horn
-            {itemid = 902,  droprate = 66}, -- Demon Horn
-            {itemid = 1132, droprate = 66}, -- Raxa
-            {itemid = 4174, droprate = 66}, -- Vile Elixer
-            {itemid = 4175, droprate = 66}, -- Vile Elixer +1
+            {itemid = xi.items.CHUNK_OF_MYTHRIL_ORE,     droprate = 66},
+            {itemid = xi.items.CHUNK_OF_DARKSTEEL_ORE,   droprate = 66},
+            {itemid = xi.items.MAHOGANY_LOG,             droprate = 66},
+            {itemid = xi.items.EBONY_LOG,                droprate = 66},
+            {itemid = xi.items.PETRIFIED_LOG,            droprate = 76},
+            {itemid = xi.items.CHUNK_OF_GOLD_ORE,        droprate = 66},
+            {itemid = xi.items.CHUNK_OF_PLATINUM_ORE,    droprate = 66},
+            {itemid = xi.items.HANDFUL_OF_WYVERN_SCALES, droprate = 66},
+            {itemid = xi.items.SQUARE_OF_RAINBOW_CLOTH,  droprate = 66},
+            {itemid = xi.items.CORAL_FRAGMENT,           droprate = 66},
+            {itemid = xi.items.RAM_HORN,                 droprate = 66},
+            {itemid = xi.items.DEMON_HORN,               droprate = 66},
+            {itemid = xi.items.SQUARE_OF_RAXA,           droprate = 66},
+            {itemid = xi.items.VILE_ELIXIR,              droprate = 66},
+            {itemid = xi.items.VILE_ELIXIR_P1,           droprate = 66},
         },
         {
-            {itemid = 658,  droprate =  50}, -- Damascus Ingot
-            {itemid = 836,  droprate =  50}, -- Damascene Cloth
-            {itemid = 844,  droprate = 300}, -- Phoenix Feather
-            {itemid = 942,  droprate = 100}, -- Philosopher's Stone
-            {itemid = 1110, droprate = 150}, -- Beetle Blood
-            {itemid = 1132, droprate = 350}, -- Raxa
+            {itemid = xi.items.DAMASCUS_INGOT,             droprate =  50},
+            {itemid = xi.items.SQUARE_OF_DAMASCENE_CLOTH,  droprate =  50},
+            {itemid = xi.items.PHOENIX_FEATHER,            droprate = 300},
+            {itemid = xi.items.PHILOSOPHERS_STONE,         droprate = 100},
+            {itemid = xi.items.VIAL_OF_BLACK_BEETLE_BLOOD, droprate = 150},
+            {itemid = xi.items.SQUARE_OF_RAXA,             droprate = 350},
         },
     },
 
@@ -663,63 +664,63 @@ local loot =
     [112] =
     {
         {
-            {itemid = 747, droprate = 1000}, -- Orichalcum Ingot
+            {itemid = xi.items.ORICHALCUM_INGOT, droprate = 1000},
         },
         {
-            {itemid = 17275, droprate = 200}, -- Coffinmaker
-            {itemid = 17509, droprate = 300}, -- Destroyers
-            {itemid = 17699, droprate = 250}, -- Dissector
-            {itemid = 18097, droprate = 250}, -- Gondo-Shizunori
+            {itemid = xi.items.COFFINMAKER,     droprate = 200},
+            {itemid = xi.items.DESTROYERS,      droprate = 300},
+            {itemid = xi.items.DISSECTOR,       droprate = 250},
+            {itemid = xi.items.GONDO_SHIZUNORI, droprate = 250},
         },
         {
-            {itemid = 15295, droprate = 200}, -- Hierarch Belt
-            {itemid = 12407, droprate = 250}, -- Palmerin's Shield
-            {itemid = 14871, droprate = 250}, -- Trainer's Gloves
-            {itemid = 15294, droprate = 300}, -- Warwolf Belt
+            {itemid = xi.items.HIERARCH_BELT,    droprate = 200},
+            {itemid = xi.items.PALMERINS_SHIELD, droprate = 250},
+            {itemid = xi.items.TRAINERS_GLOVES,  droprate = 250},
+            {itemid = xi.items.WARWOLF_BELT,     droprate = 300},
         },
         {
-            {itemid =     0, droprate = 300}, -- Nothing
-            {itemid = 19027, droprate =  70}, -- Claymore Grip
-            {itemid = 19025, droprate = 100}, -- Pole Grip
-            {itemid = 19024, droprate = 280}, -- Sword Strap
-            {itemid = 15186, droprate = 520}, -- Trump Crown
+            {itemid = 0, droprate = 300}, -- Nothing
+            {itemid = xi.items.CLAYMORE_GRIP, droprate =  70},
+            {itemid = xi.items.POLE_GRIP,     droprate = 100},
+            {itemid = xi.items.SWORD_STRAP,   droprate = 280},
+            {itemid = xi.items.TRUMP_CROWN,   droprate = 520},
         },
         {
-            {itemid =  972, droprate = 250}, -- King of Cups (Card)
-            {itemid =  985, droprate = 350}, -- King of Batons (Card)
-            {itemid =  998, droprate = 250}, -- King of Swords (Card)
-            {itemid = 1011, droprate = 250}, -- King of Coins (Card)
+            {itemid = xi.items.KING_OF_CUPS_CARD,   droprate = 250},
+            {itemid = xi.items.KING_OF_BATONS_CARD, droprate = 350},
+            {itemid = xi.items.KING_OF_SWORDS_CARD, droprate = 250},
+            {itemid = xi.items.KING_OF_COINS_CARD,  droprate = 250},
         },
         {
-            {itemid =  644, droprate =  50}, -- Mythril Ore
-            {itemid =  645, droprate =  50}, -- Darksteel Ore
-            {itemid =  700, droprate =  80}, -- Mahogany Log
-            {itemid =  702, droprate =  80}, -- Ebony Log
-            {itemid =  703, droprate = 130}, -- Petrified Log
-            {itemid =  737, droprate =  60}, -- Gold Ore
-            {itemid =  738, droprate =  60}, -- Platinum Ore
-            {itemid =  823, droprate =  60}, -- Gold Thread
-            {itemid =  830, droprate =  30}, -- Rainbow Cloth
-            {itemid =  837, droprate =  20}, -- Malboro Fiber
-            {itemid =  866, droprate =  30}, -- Wyvern Scales
-            {itemid =  887, droprate =  60}, -- Coral Fragment
-            {itemid =  895, droprate =  60}, -- Ram Horn
-            {itemid =  902, droprate =  60}, -- Demon Horn
-            {itemid =  942, droprate =  30}, -- Philosopher's Stone
-            {itemid = 1465, droprate =  20}, -- Granite
-            {itemid = 4172, droprate =  40}, -- Reraiser
-            {itemid = 4173, droprate =  30}, -- Hi-Reraiser
-            {itemid = 4174, droprate =  40}, -- Vile Elixer
-            {itemid = 4175, droprate =  10}, -- Vile Elixer +1
+            {itemid = xi.items.CHUNK_OF_MYTHRIL_ORE,     droprate =  50},
+            {itemid = xi.items.CHUNK_OF_DARKSTEEL_ORE,   droprate =  50},
+            {itemid = xi.items.MAHOGANY_LOG,             droprate =  80},
+            {itemid = xi.items.EBONY_LOG,                droprate =  80},
+            {itemid = xi.items.PETRIFIED_LOG,            droprate = 130},
+            {itemid = xi.items.CHUNK_OF_GOLD_ORE,        droprate =  60},
+            {itemid = xi.items.CHUNK_OF_PLATINUM_ORE,    droprate =  60},
+            {itemid = xi.items.SPOOL_OF_GOLD_THREAD,     droprate =  60},
+            {itemid = xi.items.SQUARE_OF_RAINBOW_CLOTH,  droprate =  30},
+            {itemid = xi.items.SPOOL_OF_MALBORO_FIBER,   droprate =  20},
+            {itemid = xi.items.HANDFUL_OF_WYVERN_SCALES, droprate =  30},
+            {itemid = xi.items.CORAL_FRAGMENT,           droprate =  60},
+            {itemid = xi.items.RAM_HORN,                 droprate =  60},
+            {itemid = xi.items.DEMON_HORN,               droprate =  60},
+            {itemid = xi.items.PHILOSOPHERS_STONE,       droprate =  30},
+            {itemid = xi.items.SLAB_OF_GRANITE,          droprate =  20},
+            {itemid = xi.items.RERAISER,                 droprate =  40},
+            {itemid = xi.items.HI_RERAISER,              droprate =  30},
+            {itemid = xi.items.VILE_ELIXIR,              droprate =  40},
+            {itemid = xi.items.VILE_ELIXIR_P1,           droprate =  10},
         },
         {
-            {itemid =  658, droprate =  90}, -- Damascus Ingot
-            {itemid =  836, droprate =  40}, -- Damascene Cloth
-            {itemid =  837, droprate =  50}, -- Malboro Fiber
-            {itemid =  844, droprate = 300}, -- Phoenix Feather
-            {itemid =  942, droprate = 200}, -- Philosophers Stone
-            {itemid = 1110, droprate =  60}, -- Beetle Blood
-            {itemid = 1132, droprate = 260}, -- Raxa
+            {itemid = xi.items.DAMASCUS_INGOT,             droprate =  90},
+            {itemid = xi.items.SQUARE_OF_DAMASCENE_CLOTH,  droprate =  40},
+            {itemid = xi.items.SPOOL_OF_MALBORO_FIBER,     droprate =  50},
+            {itemid = xi.items.PHOENIX_FEATHER,            droprate = 300},
+            {itemid = xi.items.PHILOSOPHERS_STONE,         droprate = 200},
+            {itemid = xi.items.VIAL_OF_BLACK_BEETLE_BLOOD, droprate =  60},
+            {itemid = xi.items.SQUARE_OF_RAXA,             droprate = 260},
         },
     },
 
@@ -727,62 +728,62 @@ local loot =
      [113] =
      {
          {
-             {itemid = 854, droprate = 1000}, -- Cockatrice Skin
+             {itemid = xi.items.COCKATRICE_SKIN, droprate = 1000},
          },
          {
-             {itemid = 854, droprate = 1000}, -- Cockatrice Skin
+             {itemid = xi.items.COCKATRICE_SKIN, droprate = 1000},
          },
          {
-             {itemid = 0,    droprate = 800}, -- Nothing
-             {itemid = 1014, droprate = 200}, -- Dodo Skin
+             {itemid = 0, droprate = 800}, -- Nothing
+             {itemid = xi.items.DODO_SKIN, droprate = 200},
          },
          {
-             {itemid = 17207, droprate = 250}, -- Expunger
-             {itemid = 17451, droprate = 250}, -- Morgenstern
-             {itemid = 18005, droprate = 250}, -- Heart Snatcher
-             {itemid = 18053, droprate = 250}, -- Gravedigger
+             {itemid = xi.items.EXPUNGER,       droprate = 250},
+             {itemid = xi.items.MORGENSTERN,    droprate = 250},
+             {itemid = xi.items.HEART_SNATCHER, droprate = 250},
+             {itemid = xi.items.GRAVEDIGGER,    droprate = 250},
          },
          {
-             {itemid = 14872, droprate = 250}, -- Ostreger Mitts
-             {itemid = 15181, droprate = 250}, -- Pineal Hat
-             {itemid = 15325, droprate = 250}, -- Evoker's Boots
-             {itemid = 15387, droprate = 250}, -- Tracker's Kecks
+             {itemid = xi.items.OSTREGER_MITTS, droprate = 250},
+             {itemid = xi.items.PINEAL_HAT,     droprate = 250},
+             {itemid = xi.items.EVOKERS_BOOTS,  droprate = 250},
+             {itemid = xi.items.TRACKERS_KECKS, droprate = 250},
          },
          {
-             {itemid = 655,   droprate = 250}, -- Adaman Ingot
-             {itemid = 747,   droprate = 350}, -- Orichalcum
-             {itemid = 12408, droprate = 350}, -- Absorbing Shield
+             {itemid = xi.items.ADAMAN_INGOT,     droprate = 250},
+             {itemid = xi.items.ORICHALCUM_INGOT, droprate = 350},
+             {itemid = xi.items.ABSORBING_SHIELD, droprate = 350},
          },
          {
-             {itemid = 0,     droprate = 300}, -- Nothing
-             {itemid = 19025, droprate = 500}, -- Pole Grip
-             {itemid = 19026, droprate = 100}, -- Spear Strap
-             {itemid = 19027, droprate = 100}, -- Claymore Grip
+             {itemid = 0, droprate = 300}, -- Nothing
+             {itemid = xi.items.POLE_GRIP,     droprate = 500},
+             {itemid = xi.items.SPEAR_STRAP,   droprate = 100},
+             {itemid = xi.items.CLAYMORE_GRIP, droprate = 100},
          },
          {
-             {itemid = 644,  droprate =  60}, -- Mythril Ore
-             {itemid = 645,  droprate =  60}, -- Darksteel ore
-             {itemid = 700,  droprate =  60}, -- Mahogany Log
-             {itemid = 702,  droprate =  60}, -- Ebony Log
-             {itemid = 703,  droprate =  60}, -- Petrified Log
-             {itemid = 737,  droprate =  60}, -- Gold ore
-             {itemid = 738,  droprate =  60}, -- Platinum ore
-             {itemid = 823,  droprate =  60}, -- Gold Thread
-             {itemid = 830,  droprate = 110}, -- Rainbow Cloth
-             {itemid = 866,  droprate =  60}, -- Wyvern Scales
-             {itemid = 887,  droprate =  60}, -- Coral Fragment
-             {itemid = 895,  droprate =  60}, -- Ram Horn
-             {itemid = 902,  droprate = 110}, -- Demon Horn
-             {itemid = 4173, droprate =  60}, -- Hi-Reraiser
-             {itemid = 4174, droprate =  60}, -- Vile Elixer
+             {itemid = xi.items.CHUNK_OF_MYTHRIL_ORE,     droprate =  60},
+             {itemid = xi.items.CHUNK_OF_DARKSTEEL_ORE,   droprate =  60},
+             {itemid = xi.items.MAHOGANY_LOG,             droprate =  60},
+             {itemid = xi.items.EBONY_LOG,                droprate =  60},
+             {itemid = xi.items.PETRIFIED_LOG,            droprate =  60},
+             {itemid = xi.items.CHUNK_OF_GOLD_ORE,        droprate =  60},
+             {itemid = xi.items.CHUNK_OF_PLATINUM_ORE,    droprate =  60},
+             {itemid = xi.items.CHUNK_OF_GOLD_ORE,        droprate =  60},
+             {itemid = xi.items.SQUARE_OF_RAINBOW_CLOTH,  droprate = 110},
+             {itemid = xi.items.HANDFUL_OF_WYVERN_SCALES, droprate =  60},
+             {itemid = xi.items.CORAL_FRAGMENT,           droprate =  60},
+             {itemid = xi.items.RAM_HORN,                 droprate =  60},
+             {itemid = xi.items.DEMON_HORN,               droprate = 110},
+             {itemid = xi.items.HI_RERAISER,              droprate =  60},
+             {itemid = xi.items.VILE_ELIXIR,              droprate =  60},
          },
          {
-             {itemid = 658,  droprate =  50}, -- Damascus Ingot
-             {itemid = 836,  droprate =  50}, -- Damascene Cloth
-             {itemid = 844,  droprate = 300}, -- Phoenix Feather
-             {itemid = 942,  droprate = 350}, -- Philosopher's Stone
-             {itemid = 1110, droprate =  50}, -- Beetle Blood
-             {itemid = 1132, droprate = 200}, -- Raxa
+             {itemid = xi.items.DAMASCUS_INGOT,             droprate =  50},
+             {itemid = xi.items.SQUARE_OF_DAMASCENE_CLOTH,  droprate =  50},
+             {itemid = xi.items.PHOENIX_FEATHER,            droprate = 300},
+             {itemid = xi.items.PHILOSOPHERS_STONE,         droprate = 350},
+             {itemid = xi.items.VIAL_OF_BLACK_BEETLE_BLOOD, droprate =  50},
+             {itemid = xi.items.SQUARE_OF_RAXA,             droprate = 200},
          },
      },
 }
