@@ -7667,6 +7667,22 @@ int32 CLuaBaseEntity::addHP(int32 hpAdd)
 }
 
 /************************************************************************
+ *  Function: addHPLeaveSleeping()
+ *  Purpose : Adds to the Hit Points of an Entity but does not wake it up
+ *  Example : player:addHPLeaveSleeping(500)
+ *  Notes   :
+ ************************************************************************/
+
+int32 CLuaBaseEntity::addHPLeaveSleeping(int32 hpAdd)
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
+
+    auto* PBattle = static_cast<CBattleEntity*>(m_PBaseEntity);
+
+    return PBattle->addHP(hpAdd);
+}
+
+/************************************************************************
  *  Function: setHP()
  *  Purpose : Sets the Hit Points of an Entity
  *  Example : player:setHP(player:getMaxHP())
@@ -14777,6 +14793,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getMaxHP", CLuaBaseEntity::getMaxHP);
     SOL_REGISTER("getBaseHP", CLuaBaseEntity::getBaseHP);
     SOL_REGISTER("addHP", CLuaBaseEntity::addHP);
+    SOL_REGISTER("addHPLeaveSleeping", CLuaBaseEntity::addHPLeaveSleeping);
+
     SOL_REGISTER("setHP", CLuaBaseEntity::setHP);
     SOL_REGISTER("restoreHP", CLuaBaseEntity::restoreHP);
     SOL_REGISTER("delHP", CLuaBaseEntity::delHP);
