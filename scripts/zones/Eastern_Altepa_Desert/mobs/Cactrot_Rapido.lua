@@ -121,7 +121,6 @@ entity.onMobSpawn = function(mob)
     mob:pathThrough(path, bit.bor(xi.path.flag.PATROL, xi.path.flag.RUN))
 end
 
-
 entity.onMobDeath = function(mob, player, isKiller)
     player:addTitle(xi.title.CACTROT_DESACELERADOR)
 end

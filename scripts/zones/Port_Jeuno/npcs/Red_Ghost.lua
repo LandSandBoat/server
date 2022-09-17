@@ -22,7 +22,6 @@ entity.onSpawn = function(npc)
     npc:pathThrough(path, xi.path.flag.PATROL)
 end
 
-
 entity.onTrade = function(player, npc, trade)
 end
 
