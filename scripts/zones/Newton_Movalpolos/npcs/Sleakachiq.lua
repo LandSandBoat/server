@@ -36,10 +36,10 @@ entity.onEventFinish = function(player, csid, option)
     if csid == 28 then
         if option == 1 then
             player:confirmTrade()
-            player:setPos(447.99, -4.092, 729.791, 96, 106) -- To North Gustaberg {R}
+            player:setPos(447.99, -4.092, 729.791, 96, 106) -- To North Gustaberg (R)
         elseif option == 2 then
             player:confirmTrade()
-            player:setPos(-93.657, -119.999, -583.561, 232, 13) -- To Mine Shaft Entrance {R}
+            player:setPos(-93.657, -119.999, -583.561, 232, 13) -- To Mine Shaft Entrance (R)
         end
     end
 end

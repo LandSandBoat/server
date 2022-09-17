@@ -828,13 +828,13 @@ local loot =
         },
 
         {
-            { itemid = 1110, droprate =  87}, -- Vial Of Black Beetle Blood
-            { itemid =  658, droprate =  14}, -- Damascus Ingot
-            { itemid =  836, droprate =  29}, -- Square Of Damascene Cloth
-            { itemid =  837, droprate =  43}, -- Spool Of Malboro Fiber
-            { itemid =  942, droprate = 174}, -- Philosophers Stone
-            { itemid =  844, droprate = 246}, -- Phoenix Feather
-            { itemid = 1132, droprate = 159}, -- Square Of Raxa
+            { itemid = 1110, droprate =  87 }, -- Vial Of Black Beetle Blood
+            { itemid =  658, droprate =  14 }, -- Damascus Ingot
+            { itemid =  836, droprate =  29 }, -- Square Of Damascene Cloth
+            { itemid =  837, droprate =  43 }, -- Spool Of Malboro Fiber
+            { itemid =  942, droprate = 174 }, -- Philosophers Stone
+            { itemid =  844, droprate = 246 }, -- Phoenix Feather
+            { itemid = 1132, droprate = 159 }, -- Square Of Raxa
         },
     },
 }

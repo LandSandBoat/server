@@ -76,7 +76,7 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.POISON, {chance = 40, power = 50})
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.POISON, { chance = 40, power = 50 })
 end
 
 entity.onMobDeath = function(mob, player, isKiller)

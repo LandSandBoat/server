@@ -116,7 +116,7 @@ entity.onEventFinish = function(player, csid, option)
     -- THE ALL NEW C-3000
     elseif csid == 655 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ALL_NEW_C_3000)
-    elseif csid == 657 and npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ALL_NEW_C_3000, {fame=10, gil=600}) then
+    elseif csid == 657 and npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ALL_NEW_C_3000, { fame=10, gil=600 }) then
         player:confirmTrade()
     end
 end

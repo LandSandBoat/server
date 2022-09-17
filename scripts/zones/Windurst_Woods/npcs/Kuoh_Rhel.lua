@@ -61,14 +61,14 @@ entity.onEventFinish = function(player, csid, option)
     -- CHOCOBILIOUS
     if csid == 224 and option == 1 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CHOCOBILIOUS)
-    elseif csid == 231 and npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.CHOCOBILIOUS, {fame=220, gil=1500, var="ChocobiliousQuest"}) then
+    elseif csid == 231 and npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.CHOCOBILIOUS, { fame=220, gil=1500, var="ChocobiliousQuest" }) then
         player:needToZone(true)
 
     -- IN A STEW
     elseif csid == 235 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.IN_A_STEW)
         player:setCharVar("IASvar", 1)
-    elseif csid == 239 and npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.IN_A_STEW, {fame=50, gil=900, var="IASvar"}) then
+    elseif csid == 239 and npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.IN_A_STEW, { fame=50, gil=900, var="IASvar" }) then
         player:delKeyItem(xi.ki.RANPI_MONPIS_SPECIAL_STEW)
     elseif csid == 234 and option == 1 then -- start repeat
         player:setCharVar("IASvar", 3)

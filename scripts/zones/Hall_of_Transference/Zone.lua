@@ -99,11 +99,11 @@ end
 
 zone_object.onEventFinish = function(player, csid, option)
     if csid == 103 and option == 1 then
-        player:setPos(340.082, 19.103, -59.979, 127, 102)     -- To La Theine Plateau {R}
+        player:setPos(340.082, 19.103, -59.979, 127, 102)     -- To La Theine Plateau (R)
     elseif csid == 104 and option == 1 then
-        player:setPos(179.92, 35.15, 260.137, 64, 117)        -- To Tahrongi Canyon {R}
+        player:setPos(179.92, 35.15, 260.137, 64, 117)        -- To Tahrongi Canyon (R)
     elseif csid == 105 and option == 1 then
-        player:setPos(139.974, 19.103, 219.989, 128, 108)     -- To Konschtat Highlands {R}
+        player:setPos(139.974, 19.103, 219.989, 128, 108)     -- To Konschtat Highlands (R)
     elseif csid == 161 and option == 1 then
         local prevZone = player:getPreviousZone()
 

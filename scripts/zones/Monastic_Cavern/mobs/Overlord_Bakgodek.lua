@@ -21,7 +21,7 @@ entity.onMobEngaged = function(mob, target)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.TP_DRAIN, {chance = 35, power = math.random(95, 135)})
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.TP_DRAIN, { chance = 35, power = math.random(95, 135) })
 end
 
 entity.onMobDeath = function(mob, player, isKiller)

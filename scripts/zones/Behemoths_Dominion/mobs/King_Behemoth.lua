@@ -24,7 +24,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.STUN, {chance = 20, duration = math.random(5, 10)})
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.STUN, { chance = 20, duration = math.random(5, 10) })
 end
 
 entity.onSpellPrecast = function(mob, spell)

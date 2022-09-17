@@ -18,7 +18,7 @@ zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
-        player:setPos(92.033, 0, 80.380, 255) -- To Floor 1 {R}
+        player:setPos(92.033, 0, 80.380, 255) -- To Floor 1 (R)
     end
 
     return cs
@@ -42,7 +42,7 @@ end
 
 zone_object.onEventFinish = function(player, csid, option)
     if csid == 46 and option == 1 then
-        player:setPos(-225.682, -6.459, 280.002, 128, 14) -- To Hall of Transference {R}
+        player:setPos(-225.682, -6.459, 280.002, 128, 14) -- To Hall of Transference (R)
     end
 end
 

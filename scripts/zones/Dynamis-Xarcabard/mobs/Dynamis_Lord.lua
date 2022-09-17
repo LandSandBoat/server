@@ -16,10 +16,10 @@ entity.onMobSpawn = function(mob)
         between = 60,
         specials =
         {
-            {id = xi.jsa.HUNDRED_FISTS, hpp = 95},
-            {id = xi.jsa.MIGHTY_STRIKES, hpp = 95},
-            {id = xi.jsa.BLOOD_WEAPON, hpp = 95},
-            {id = xi.jsa.CHAINSPELL, hpp = 95},
+            { id = xi.jsa.HUNDRED_FISTS,  hpp = 95 },
+            { id = xi.jsa.MIGHTY_STRIKES, hpp = 95 },
+            { id = xi.jsa.BLOOD_WEAPON,   hpp = 95 },
+            { id = xi.jsa.CHAINSPELL,     hpp = 95 },
         },
     })
 end
