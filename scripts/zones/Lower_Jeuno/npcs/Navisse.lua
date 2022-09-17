@@ -20,7 +20,7 @@ local path =
 
 entity.onSpawn = function(npc)
     npc:initNpcAi()
-    npc:setPos(xi.path.first_patrol(path))
+    npc:setPos(xi.path.first(path))
     npc:pathThrough(path, xi.path.flag.PATROL)
 end
 

@@ -12,17 +12,16 @@ local entity = {}
 
 local path =
 {
-    62.150, -7.500, -138.060,
-    63.388, -7.500, -144.666, -- TODO: NPC reaches this location changes rotation to 131 for 1 earth second.
+    { x = 62.150, y = -7.500, z = -138.060 },
+    { x = 62.843, z = -141.761 },
+    { x = 63.382, z = -144.635 },
+    { x = 62.843, z = -141.761 },
 }
 
 entity.onSpawn = function(npc)
     npc:initNpcAi()
     npc:setPos(xi.path.first(path))
-end
-
-entity.onPath = function(npc)
-    xi.path.patrol(npc, path)
+    npc:pathThrough(path, xi.path.flag.PATROL)
 end
 
 entity.onTrade = function(player, npc, trade)
