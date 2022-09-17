@@ -9,7 +9,7 @@ xi = xi or {}
 xi.dynamis = xi.dynamis or {}
 
 xi.dynamis.onSpawnAntaeus = function(mob)
-    mob:setRoamFlags(xi.roamFlag.EVENT)
+    mob:setRoamFlags(xi.roamFlag.SCRIPTED)
     xi.dynamis.setMegaBossStats(mob)
     -- Set Removable Mods
     xi.dynamis.buffsAntaeus =

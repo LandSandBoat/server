@@ -1511,7 +1511,7 @@ end
 --------------------------------------------
 
 xi.dynamis.mobOnRoam = function(mob) -- Handle pathing.
-    if mob:getRoamFlags() == xi.roamFlag.EVENT then
+    if mob:getRoamFlags() == xi.roamFlag.SCRIPTED then
         local zoneID = mob:getZoneID()
         local mobIndex = mob:getLocalVar(string.format("MobIndex_%s", mob:getID()))
         for _, index in pairs(xi.dynamis.mobList[zoneID].patrolPaths) do
@@ -1730,7 +1730,7 @@ end
 xi.dynamis.setStatueStats = function(mob, mobIndex)
     local zoneID = mob:getZoneID()
     local eyes = xi.dynamis.mobList[zoneID][mobIndex].eyes
-    mob:setRoamFlags(xi.roamFlag.EVENT)
+    mob:setRoamFlags(xi.roamFlag.SCRIPTED)
     mob:setMobType(xi.mobskills.mobType.BATTLEFIELD)
     mob:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0, true)
     mob:setMobMod(xi.mobMod.CHECK_AS_NM, 2)
