@@ -11,8 +11,8 @@ local entity = {}
 local flags = xi.path.flag.WALLHACK
 local path =
 {
-    {149.587, -0.293, -526.395},
-    {145.010, 0.000, -438.159}
+    { 149.587, -0.293, -526.395 },
+    { 145.010,  0.000, -438.159 },
 }
 
 entity.onMobRoam = function(mob)

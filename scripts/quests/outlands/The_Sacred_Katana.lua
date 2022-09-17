@@ -80,7 +80,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         not player:findItem(xi.items.MUMEITO) and
-                        npcUtil.tradeHasExactly(trade, {{ "gil", 30000 }})
+                        npcUtil.tradeHasExactly(trade, { { "gil", 30000 } })
                     then
                         return quest:progressEvent(145)
                     end

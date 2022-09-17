@@ -50,7 +50,7 @@ entity.onEventFinish = function(player, csid, option)
         if reward ~= 0 then
             if npcUtil.completeQuest(player, xi.quest.log_id.JEUNO, xi.quest.id.jeuno.APOCALYPSE_NIGH, {
                 item = reward,
-                var = {"ApocalypseNigh", "Apoc_Nigh_Reward", "Apoc_Nigh_RewardCS1"}
+                var = { "ApocalypseNigh", "Apoc_Nigh_Reward", "Apoc_Nigh_RewardCS1" }
             }) then
                 player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.DAWN)
                 player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_LAST_VERSE)

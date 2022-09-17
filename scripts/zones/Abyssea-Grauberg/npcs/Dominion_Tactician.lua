@@ -17,7 +17,8 @@ local itemType =
 local tacticianItems =
 {
     [itemType.ITEM] =
-    {-- Sel      Item                       Cost
+    {
+    --  Sel      Item                       Cost
         [ 1] = { xi.items.UNKAI_DOMARU,     1500 },
         [ 2] = { xi.items.IGA_NINGI,        1500 },
         [ 3] = { xi.items.LANCERS_PLACKART, 1500 },
@@ -32,7 +33,8 @@ local tacticianItems =
     },
 
     [itemType.TEMP] =
-    {-- Sel      Item                    Cost
+    {
+    --  Sel      Item                    Cost
         [1] = { xi.items.PETRIFY_SCREEN, 300 },
         [2] = { xi.items.TERROR_SCREEN,  300 },
         [3] = { xi.items.AMNESIA_SCREEN, 300 },
@@ -41,7 +43,8 @@ local tacticianItems =
     },
 
     [itemType.AUGMENTED] =
-    {-- Sel     Item                 Cost  Possible Augments { Augment ID, Minimum, Maximum }
+    {
+    --  Sel     Item                 Cost  Possible Augments { Augment ID, Minimum, Maximum }
         [1] = { xi.items.YATAGHAN,   2500, { { 45, 1,  8 }, { 328, 2, 6 }, { 187, 2, 6 }, { 787, 3, 8 }, { 1028, 2, 6 } } }, -- TODO: Should Aug 45 (DMG+) also apply Sub DMG?
         [2] = { xi.items.DOOM_TABAR, 2500, { { 45, 4, 12 }, { 786, 3, 7 }, { 512, 3, 8 }, { 250, 3, 6 }, { 1040, 2, 8 } } },
         [3] = { xi.items.YUKITSUGU,  2500, { { 45, 5, 14 }, { 177, 3, 6 }, { 332, 2, 6 }, { 788, 3, 7 }, { 1060, 2, 8 } } },
@@ -125,11 +128,11 @@ entity.onEventFinish = function(player, csid, option)
         local itemData = tacticianItems[itemCategory][itemSelected]
 
         if itemCategory == itemType.ITEM then
-            if npcUtil.giveItem(player, {{ itemData[1], 1 }}) then
+            if npcUtil.giveItem(player, { { itemData[1], 1 } }) then
                 player:delCurrency("dominion_note", itemData[2])
             end
         elseif itemCategory == itemType.TEMP then
-            if npcUtil.giveTempItem(player, {{ itemData[1], 1 }}) then
+            if npcUtil.giveTempItem(player, { { itemData[1], 1 } }) then
                 player:delCurrency("dominion_note", itemData[2])
             end
         elseif itemCategory == itemType.AUGMENTED then

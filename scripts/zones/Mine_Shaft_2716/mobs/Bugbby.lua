@@ -17,7 +17,7 @@ entity.onMobSpawn = function(mob)
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            {id = xi.jsa.MIGHTY_STRIKES, cooldown = 300, hpp = math.random(85, 95)}, -- 5min cooldown
+            { id = xi.jsa.MIGHTY_STRIKES, cooldown = 300, hpp = math.random(85, 95) }, -- 5min cooldown
         },
     })
 end

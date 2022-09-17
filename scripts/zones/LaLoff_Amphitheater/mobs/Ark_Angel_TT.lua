@@ -16,7 +16,7 @@ entity.onMobSpawn = function(mob)
         between = 30,
         specials =
         {
-            {id = xi.jsa.BLOOD_WEAPON},
+            { id = xi.jsa.BLOOD_WEAPON },
             {
                 id = xi.jsa.MANAFONT,
                 endCode = function(mobArg) -- "Uses Manafont and ... Will cast Sleepga followed by Meteor."

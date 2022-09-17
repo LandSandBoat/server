@@ -19,7 +19,7 @@ entity.onMobEngaged = function(mob, target)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.PARALYZE, {duration = 60})
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.PARALYZE, { duration = 60 })
 end
 
 entity.onMobDeath = function(mob, player, isKiller)

@@ -19,7 +19,7 @@ entity.onTrade = function(player, npc, trade)
         lampCost = 1000
     end
 
-    if npcUtil.tradeHasExactly(trade, {{"gil", lampCost}}) and player:getCharVar("EinherjarIntro") ~= 1 then
+    if npcUtil.tradeHasExactly(trade, { { "gil", lampCost } }) and player:getCharVar("EinherjarIntro") ~= 1 then
         if npcUtil.giveItem(player, xi.items.SMOLDERING_LAMP) then
             player:tradeComplete()
             player:startEvent(25)

@@ -16,8 +16,8 @@ entity.onMobSpawn = function(mob)
         between = 30,
         specials =
         {
-            {id = xi.jsa.MIGHTY_STRIKES},
-            {id = xi.jsa.MIJIN_GAKURE},
+            { id = xi.jsa.MIGHTY_STRIKES },
+            { id = xi.jsa.MIJIN_GAKURE },
         },
     })
 end

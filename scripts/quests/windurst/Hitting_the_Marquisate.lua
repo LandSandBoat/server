@@ -202,7 +202,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, {{ xi.items.QUAKE_GRENADE, 4 }})
+                        npcUtil.tradeHasExactly(trade, { { xi.items.QUAKE_GRENADE, 4 } })
                     then
                         return quest:progressEvent(10031)
                     end
