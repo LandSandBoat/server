@@ -3,6 +3,8 @@
 --  Mob: Giant Moa
 -- KSNM: Moa Constrictors
 -----------------------------------
+require("scripts/globals/status")
+-----------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(mob)
@@ -28,7 +30,8 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
-    if skill:getID() == 1333 then
+    -- Zone crashes if they try to use contamination while petrified
+    if skill:getID() == 1333 and not mob:hasStatusEffect(xi.effect.PETRIFICATION) then
         mob:queue(0, function(mobArg)
             if target:isAlive() and mob:checkDistance(target) < 10 then
                 mobArg:useMobAbility(1334)

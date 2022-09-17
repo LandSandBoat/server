@@ -47,7 +47,7 @@ end
 entity.onMobFight = function(mob, target)
     if mob:getLocalVar("control") == 0 and mob:getHPP() < mob:getLocalVar("HPThreshold") then
         mob:setLocalVar("control", 1)
-        mob:useMobAbility(848)
+        mob:useMobAbility(866)
     end
 
     if mob:getLocalVar("timer") < os.time() then
