@@ -27,7 +27,7 @@ entity.onMobFight = function(mob, target)
         local mobId = mob:getID()
         local canSpawnPet = false
         for id = mobId + 1, mobId + 5 do
-            if GetMobByID(id):getCurrentAction() == 0 then
+            if GetMobByID(id):getCurrentAction() == xi.action.NONE then
                 canSpawnPet = true
                 break
             end
