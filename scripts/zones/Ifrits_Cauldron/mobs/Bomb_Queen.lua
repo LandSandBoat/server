@@ -20,6 +20,8 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobFight = function(mob, target)
+    -- Every 30 seconds spawn a random Prince or Princess. If none remain then summon the Bastard.
+    -- Retail confirmed
     if os.time() >= mob:getLocalVar("spawn_time") then
         mob:setLocalVar("spawn_time", os.time() + 30)
         local mobId = mob:getID()
@@ -32,19 +34,19 @@ entity.onMobFight = function(mob, target)
         end
         if canSpawnPet then
             mob:entityAnimationPacket("casm")
-            mob:timer(5000, function(mob)
-                if mob:isDead() then
+            mob:timer(5000, function(bombQueen)
+                if bombQueen:isDead() then
                     return
                 end
-                mob:entityAnimationPacket("shsm")
-                local mobId = mob:getID()
+                bombQueen:entityAnimationPacket("shsm")
+                local bombQueenId = mob:getID()
 
                 -- Pick a random Prince or Princess
-                petId = 0
-                offset = math.random(4)
+                local petId = 0
+                local offset = math.random(4)
                 for i = 0, 3 do
-                    id = mobId + 1 + (offset + i) % 4
-                    if GetMobByID(id):getCurrentAction() == 0 then
+                    local id = bombQueenId + 1 + (offset + i) % 4
+                    if GetMobByID(id):getCurrentAction() == xi.action.NONE then
                         petId = id
                         break
                     end
@@ -52,8 +54,8 @@ entity.onMobFight = function(mob, target)
 
                 -- If no Princes or Princesses remain then try the Bastard
                 if petId == 0 then
-                    petId = mobId + 5
-                    if GetMobByID(petId):getCurrentAction() ~= 0 then
+                    petId = bombQueenId + 5
+                    if GetMobByID(petId):getCurrentAction() ~= xi.action.NONE then
                         return
                     end
                 end
