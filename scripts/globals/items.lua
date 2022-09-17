@@ -99,6 +99,7 @@ xi.items =
     BLOODY_ROBE                     = 540,
     CUP_OF_DHALMEL_SALIVA           = 541,
     WILD_RABBIT_TAIL                = 542,
+    SHELLING_PIECE                  = 545,
     STARFALL_TEAR                   = 546,
     TOMB_GUARDS_WATERSKIN           = 547,
     DELKFUTT_KEY                    = 549,

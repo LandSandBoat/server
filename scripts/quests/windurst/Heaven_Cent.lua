@@ -70,7 +70,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if quest:getVar(player, 'Prog') == 1 then
-                        return quest:progressEvent(289, 0, 557, 545, 0, 0, 4095, 4)
+                        return quest:progressEvent(289, 0, 557, xi.items.SHELLING_PIECE, 0, 0, 4095, 4)
                     else
                         return quest:progressEvent(296)
                     end
@@ -78,25 +78,25 @@ quest.sections =
 
                 onTrade = function(player, npc, trade)
                     if trade:hasItemQty(557, 1) and trade:getItemCount() == 1 and quest:getVar(player, 'Prog') == 0 then
-                        return quest:progressEvent(288, 0, 557, 545, 0, 0, 0, 0, 4)
+                        return quest:progressEvent(288, 0, 557, xi.items.SHELLING_PIECE, 0, 0, 0, 0, 4)
 
                     -- Fake Shelling Piece
                     elseif
-                        trade:hasItemQty(545, 1) and
+                        trade:hasItemQty(xi.items.SHELLING_PIECE, 1) and
                         trade:getItemCount() == 1 and
                         quest:getVar(player, 'Prog') == 1 and
                         quest:getVar(player, 'Coin') == 0
                     then
-                        return quest:progressEvent(296, 0, 0, 545, 0, 0, 0, 4095, 4)
+                        return quest:progressEvent(296, 0, 0, xi.items.SHELLING_PIECE, 0, 0, 0, 4095, 4)
 
                     -- Real Shelling Piece
                     elseif
-                        trade:hasItemQty(545, 1) and
+                        trade:hasItemQty(xi.items.SHELLING_PIECE, 1) and
                         trade:getItemCount() == 1 and
                         quest:getVar(player, 'Prog') == 1 and
                         quest:getVar(player, 'Coin') == 1
                     then
-                        return quest:progressEvent(292, 0, 0, 545, 0, 0, 0, 4095, 4)
+                        return quest:progressEvent(292, 0, 0, xi.items.SHELLING_PIECE, 0, 0, 0, 4095, 4)
                     end
                 end,
             },
@@ -104,7 +104,7 @@ quest.sections =
             onEventFinish =
             {
                 [288] = function(player, csid, option, npc)
-                    quest:setvar(player, 'Prog', 1)
+                    quest:setVar(player, 'Prog', 1)
                 end,
                 [292] = function(player, csid, option, npc)
                     player:tradeComplete()
@@ -136,7 +136,7 @@ quest.sections =
                     local rand = math.random()
 
                     -- Only allow if player doesn't have coin
-                    if not player:hasItem(545) then
+                    if not player:hasItem(xi.items.SHELLING_PIECE) then
                         if rand > 0.2 then
                             player:messageSpecial(incorrect[math.random(1,4)])
                             return quest:progressEvent(47)
@@ -159,7 +159,7 @@ quest.sections =
                     local rand = math.random()
 
                     -- Only allow if player doesn't have coin
-                    if not player:hasItem(545) then
+                    if not player:hasItem(xi.items.SHELLING_PIECE) then
                         if rand > 0.2 then
                             player:messageSpecial(incorrect[math.random(1,4)])
                             return quest:progressEvent(49)
@@ -181,7 +181,7 @@ quest.sections =
                     local rand = math.random()
 
                     -- Only allow if player doesn't have coin
-                    if not player:hasItem(545) then
+                    if not player:hasItem(xi.items.SHELLING_PIECE) then
                         if rand > 0.2 then
                             player:messageSpecial(incorrect[math.random(1,4)])
                             return quest:progressEvent(51)
@@ -204,10 +204,10 @@ quest.sections =
                 [46] = function(player, csid, option, npc)
                     if option == 2 then
                         if player:getFreeSlotsCount() == 0 then
-                            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.CARBUNCLES_POLE)
+                            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.SHELLING_PIECE)
                         else
                             quest:setVar(player, 'Coin', 1)
-                            player:addItem(545)
+                            player:addItem(xi.items.SHELLING_PIECE)
                         end
                     end
                 end,
@@ -215,10 +215,10 @@ quest.sections =
                 [47] = function(player, csid, option, npc)
                     if option == 2 then
                         if player:getFreeSlotsCount() == 0 then
-                            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.CARBUNCLES_POLE)
+                            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.SHELLING_PIECE)
                         else
                             quest:setVar(player, 'Coin', 0)
-                            player:addItem(545)
+                            player:addItem(xi.items.SHELLING_PIECE)
                         end
                     end
                 end,
@@ -226,10 +226,10 @@ quest.sections =
                 [48] = function(player, csid, option, npc)
                     if option == 2 then
                         if player:getFreeSlotsCount() == 0 then
-                            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.CARBUNCLES_POLE)
+                            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.SHELLING_PIECE)
                         else
                             quest:setVar(player, 'Coin', 1)
-                            player:addItem(545)
+                            player:addItem(xi.items.SHELLING_PIECE)
                         end
                     end
                 end,
@@ -237,10 +237,10 @@ quest.sections =
                 [49] = function(player, csid, option, npc)
                     if option == 2 then
                         if player:getFreeSlotsCount() == 0 then
-                            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.CARBUNCLES_POLE)
+                            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.SHELLING_PIECE)
                         else
                             quest:setVar(player, 'Coin', 0)
-                            player:addItem(545)
+                            player:addItem(xi.items.SHELLING_PIECE)
                         end
                     end
                 end,
@@ -248,10 +248,10 @@ quest.sections =
                 [50] = function(player, csid, option, npc)
                     if option == 2 then
                         if player:getFreeSlotsCount() == 0 then
-                            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.CARBUNCLES_POLE)
+                            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.SHELLING_PIECE)
                         else
                             quest:setVar(player, 'Coin', 1)
-                            player:addItem(545)
+                            player:addItem(xi.items.SHELLING_PIECE)
                         end
                     end
                 end,
@@ -259,10 +259,10 @@ quest.sections =
                 [51] = function(player, csid, option, npc)
                     if option == 2 then
                         if player:getFreeSlotsCount() == 0 then
-                            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.CARBUNCLES_POLE)
+                            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.SHELLING_PIECE)
                         else
                             quest:setVar(player, 'Coin', 0)
-                            player:addItem(545)
+                            player:addItem(xi.items.SHELLING_PIECE)
                         end
                     end
                 end,
