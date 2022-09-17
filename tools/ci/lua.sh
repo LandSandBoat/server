@@ -292,7 +292,7 @@ def check_tables_in_file(name):
                 errcount += 1
 
         # If you want to modify the files during the checks, write your changed lines to the appropriate
-        # place in `lines` (usually with `lines[counter - 1]`) and uncomment these two lines.
+        # place in 'lines' (usually with 'lines[counter - 1]') and uncomment these two lines.
         #
         # f.seek(0)
         # f.writelines(lines)

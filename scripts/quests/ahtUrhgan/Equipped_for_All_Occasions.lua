@@ -66,7 +66,7 @@ quest.sections =
                     local questProgress = quest:getVar(player, 'Prog')
 
                     if questProgress == 1 then
-                        npcUtil.popFromQM(player, npc, mazeID.mob.LOST_SOUL, {hide = 0})
+                        npcUtil.popFromQM(player, npc, mazeID.mob.LOST_SOUL, { hide = 0 })
                     elseif questProgress == 2 then
                         return quest:progressEvent(66)
                     end

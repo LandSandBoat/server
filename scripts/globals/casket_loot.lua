@@ -3933,63 +3933,63 @@ xi.casket_loot.casketItems =
         -----------------------------------
         -- { weight, itemId }
         -----------------------------------
-            { 900, 4202 }, -- Daedalus Wing
-            { 500, 4206 }, -- Catholicon
-            { 300, 4255 }, -- Mana Powder
-            { 450, 5322 }, -- Healing Powder
-            { 320, 5393 }, -- Monarch's Drink
-            { 650, 5394 }, -- Gnostic's Drink
-            { 430, 5395 }, -- Cleric's Drink
-            {1000, 5433 }, -- Dusty Elixir
-            { 690, 5439 }, -- Vicar's Drink
-            { 250, 5440 }, -- Dusty Wing
-            {2000, 5824 }, -- Lucid Potion I
-            {1900, 5825 }, -- Lucid Potion II
-            {1200, 5826 }, -- Lucid Potion III
-            { 730, 5832 }, -- Healing Mist
-            { 420, 5833 }, -- Mana Mist
-            {1010, 5834 }, -- Lucid Wings I
-            { 875, 5835 }, -- Healing Salve I
-            { 210, 5836 }, -- Healing Salve II
-            { 920, 5837 }, -- Clear Salve I
-            { 190, 5838 }, -- Clear Salve II
-            { 310, 5839 }, -- Stalwart's Tonic
-            { 205, 5840 }, -- Stalwart's Gambir
-            { 410, 5841 }, -- Ascetic's Tonic
-            { 305, 5842 }, -- Ascetic's Gambir
-            { 310, 5843 }, -- Champion's Tonic
-            { 200, 5845 }, -- Fanatic's Tonic
+            {  900, 4202 }, -- Daedalus Wing
+            {  500, 4206 }, -- Catholicon
+            {  300, 4255 }, -- Mana Powder
+            {  450, 5322 }, -- Healing Powder
+            {  320, 5393 }, -- Monarch's Drink
+            {  650, 5394 }, -- Gnostic's Drink
+            {  430, 5395 }, -- Cleric's Drink
+            { 1000, 5433 }, -- Dusty Elixir
+            {  690, 5439 }, -- Vicar's Drink
+            {  250, 5440 }, -- Dusty Wing
+            { 2000, 5824 }, -- Lucid Potion I
+            { 1900, 5825 }, -- Lucid Potion II
+            { 1200, 5826 }, -- Lucid Potion III
+            {  730, 5832 }, -- Healing Mist
+            {  420, 5833 }, -- Mana Mist
+            { 1010, 5834 }, -- Lucid Wings I
+            {  875, 5835 }, -- Healing Salve I
+            {  210, 5836 }, -- Healing Salve II
+            {  920, 5837 }, -- Clear Salve I
+            {  190, 5838 }, -- Clear Salve II
+            {  310, 5839 }, -- Stalwart's Tonic
+            {  205, 5840 }, -- Stalwart's Gambir
+            {  410, 5841 }, -- Ascetic's Tonic
+            {  305, 5842 }, -- Ascetic's Gambir
+            {  310, 5843 }, -- Champion's Tonic
+            {  200, 5845 }, -- Fanatic's Tonic
         },
         items =
         {
         -----------------------------------
         -- { weight, itemId }
         -----------------------------------
-            {3000,   574 }, -- Fruit Seeds
-            {1760,   633 }, -- Olive Oil
-            { 390,   646 }, -- Adaman Ore
-            {2650,   694 }, -- Chestnut Log
-            {3150,   749 }, -- Mtl. Beastcoin
-            {3200,   859 }, -- Ram Skin
-            {2570,   895 }, -- Ram Horn
-            { 765,   943 }, -- Poison Dust
-            { 235,  3309 }, -- Barrage Turbine
-            { 490,  3434 }, -- Cobalt Cell
-            { 655,  3436 }, -- Xanthous Cell
-            {1490,  3437 }, -- Jade Cell
-            {1760,  3450 }, -- Voiddust
-            {5000,  4117 }, -- Hi-Potion +1
-            {2700,  4119 }, -- Hi-Potion +3
-            {1050,  4121 }, -- X-Potion +1
-            { 450,  4123 }, -- X-Potion +3
-            {4900,  4143 }, -- Pro-Ether +3
-            { 650,  4144 }, -- Hi-Elixir
-            { 230, 12437 }, -- Gavial Mask
-            { 210, 12693 }, -- Gavial Fng. Gnt.
-            { 110, 16396 }, -- Koenigs Knuckles
-            {  90, 17364 }, -- Cythara Anglica
-            {2570, 17898 }, -- C. Grass. Broth
-            {3100, 18259 }, -- Angon
+            { 3000,   574 }, -- Fruit Seeds
+            { 1760,   633 }, -- Olive Oil
+            {  390,   646 }, -- Adaman Ore
+            { 2650,   694 }, -- Chestnut Log
+            { 3150,   749 }, -- Mtl. Beastcoin
+            { 3200,   859 }, -- Ram Skin
+            { 2570,   895 }, -- Ram Horn
+            {  765,   943 }, -- Poison Dust
+            {  235,  3309 }, -- Barrage Turbine
+            {  490,  3434 }, -- Cobalt Cell
+            {  655,  3436 }, -- Xanthous Cell
+            { 1490,  3437 }, -- Jade Cell
+            { 1760,  3450 }, -- Voiddust
+            { 5000,  4117 }, -- Hi-Potion +1
+            { 2700,  4119 }, -- Hi-Potion +3
+            { 1050,  4121 }, -- X-Potion +1
+            {  450,  4123 }, -- X-Potion +3
+            { 4900,  4143 }, -- Pro-Ether +3
+            {  650,  4144 }, -- Hi-Elixir
+            {  230, 12437 }, -- Gavial Mask
+            {  210, 12693 }, -- Gavial Fng. Gnt.
+            {  110, 16396 }, -- Koenigs Knuckles
+            {   90, 17364 }, -- Cythara Anglica
+            { 2570, 17898 }, -- C. Grass. Broth
+            { 3100, 18259 }, -- Angon
         }
     },
     [xi.zone.MAZE_OF_SHAKHRAMI] =
@@ -4000,121 +4000,121 @@ xi.casket_loot.casketItems =
         -----------------------------------
         -- { weight, itemId }
         -----------------------------------
-            {1060, 4112 }, -- Potion
-            { 740, 4113 }, -- Potion +1
-            { 700, 4114 }, -- Potion +2
-            { 800, 4128 }, -- Ether
-            { 430, 4129 }, -- Ether +1
-            {  50, 4130 }, -- Ether +2
-            { 900, 4145 }, -- Elixer
-            { 820, 4148 }, -- Antidote
-            { 730, 4150 }, -- Eye Drops
-            { 850, 4151 }, -- Echo Drops
-            { 650, 4155 }, -- Remedy
-            {1020, 4164 }, -- Prism Powder
-            { 940, 4165 }, -- Silent Oil
-            { 420, 4202 }, -- Daedalus Wing
-            { 250, 4300 }, -- Apple Au Lait
-            { 660, 4423 }, -- Apple Juice
+            { 1060, 4112 }, -- Potion
+            {  740, 4113 }, -- Potion +1
+            {  700, 4114 }, -- Potion +2
+            {  800, 4128 }, -- Ether
+            {  430, 4129 }, -- Ether +1
+            {   50, 4130 }, -- Ether +2
+            {  900, 4145 }, -- Elixer
+            {  820, 4148 }, -- Antidote
+            {  730, 4150 }, -- Eye Drops
+            {  850, 4151 }, -- Echo Drops
+            {  650, 4155 }, -- Remedy
+            { 1020, 4164 }, -- Prism Powder
+            {  940, 4165 }, -- Silent Oil
+            {  420, 4202 }, -- Daedalus Wing
+            {  250, 4300 }, -- Apple Au Lait
+            {  660, 4423 }, -- Apple Juice
         },
         tempsHi =
         {
         -----------------------------------
         -- { weight, itemId }
         -----------------------------------
-            { 900, 4202 }, -- Daedalus Wing
-            { 500, 4206 }, -- Catholicon
-            { 300, 4255 }, -- Mana Powder
-            { 450, 5322 }, -- Healing Powder
-            { 320, 5393 }, -- Monarch's Drink
-            { 650, 5394 }, -- Gnostic's Drink
-            { 430, 5395 }, -- Cleric's Drink
-            {1000, 5433 }, -- Dusty Elixir
-            { 690, 5439 }, -- Vicar's Drink
-            { 250, 5440 }, -- Dusty Wing
-            {2000, 5824 }, -- Lucid Potion I
-            {1900, 5825 }, -- Lucid Potion II
-            {1200, 5826 }, -- Lucid Potion III
-            { 730, 5832 }, -- Healing Mist
-            { 420, 5833 }, -- Mana Mist
-            {1010, 5834 }, -- Lucid Wings I
-            { 875, 5835 }, -- Healing Salve I
-            { 210, 5836 }, -- Healing Salve II
-            { 920, 5837 }, -- Clear Salve I
-            { 190, 5838 }, -- Clear Salve II
-            { 310, 5839 }, -- Stalwart's Tonic
-            { 205, 5840 }, -- Stalwart's Gambir
-            { 410, 5841 }, -- Ascetic's Tonic
-            { 305, 5842 }, -- Ascetic's Gambir
-            { 310, 5843 }, -- Champion's Tonic
-            { 200, 5845 }, -- Fanatic's Tonic
+            {  900, 4202 }, -- Daedalus Wing
+            {  500, 4206 }, -- Catholicon
+            {  300, 4255 }, -- Mana Powder
+            {  450, 5322 }, -- Healing Powder
+            {  320, 5393 }, -- Monarch's Drink
+            {  650, 5394 }, -- Gnostic's Drink
+            {  430, 5395 }, -- Cleric's Drink
+            { 1000, 5433 }, -- Dusty Elixir
+            {  690, 5439 }, -- Vicar's Drink
+            {  250, 5440 }, -- Dusty Wing
+            { 2000, 5824 }, -- Lucid Potion I
+            { 1900, 5825 }, -- Lucid Potion II
+            { 1200, 5826 }, -- Lucid Potion III
+            {  730, 5832 }, -- Healing Mist
+            {  420, 5833 }, -- Mana Mist
+            { 1010, 5834 }, -- Lucid Wings I
+            {  875, 5835 }, -- Healing Salve I
+            {  210, 5836 }, -- Healing Salve II
+            {  920, 5837 }, -- Clear Salve I
+            {  190, 5838 }, -- Clear Salve II
+            {  310, 5839 }, -- Stalwart's Tonic
+            {  205, 5840 }, -- Stalwart's Gambir
+            {  410, 5841 }, -- Ascetic's Tonic
+            {  305, 5842 }, -- Ascetic's Gambir
+            {  310, 5843 }, -- Champion's Tonic
+            {  200, 5845 }, -- Fanatic's Tonic
         },
         itemsLow =
         {
         -----------------------------------
         -- { weight, itemId }
         -----------------------------------
-            {1450,   835 }, -- Flax Flower
-            { 800,   898 }, -- Chicken Bone
-            {2630,  1155 }, -- Iron Sand
-            {4790,   656 }, -- Beastcoin
-            {4600,   818 }, -- Cotton Thread
-            {5000,   852 }, -- Lizard Skin
-            {4990,   880 }, -- Bone Chip
-            {2650,   893 }, -- Giant Femur
-            {1730,   912 }, -- Beehive Chip
-            {1450,   925 }, -- Giant Stinger
-            {1060,  1225 }, -- Gold Nugget
-            {3610,  1845 }, -- Red Moko Grass
-            {4820,  4114 }, -- Potion +2
-            {4650,  4115 }, -- Potion +3
-            {4840,  4129 }, -- Ether +1
-            {4320,  4130 }, -- Ether +2
-            { 510,  4145 }, -- Elixir
-            {2430,  4370 }, -- Honey
+            { 1450,   835 }, -- Flax Flower
+            {  800,   898 }, -- Chicken Bone
+            { 2630,  1155 }, -- Iron Sand
+            { 4790,   656 }, -- Beastcoin
+            { 4600,   818 }, -- Cotton Thread
+            { 5000,   852 }, -- Lizard Skin
+            { 4990,   880 }, -- Bone Chip
+            { 2650,   893 }, -- Giant Femur
+            { 1730,   912 }, -- Beehive Chip
+            { 1450,   925 }, -- Giant Stinger
+            { 1060,  1225 }, -- Gold Nugget
+            { 3610,  1845 }, -- Red Moko Grass
+            { 4820,  4114 }, -- Potion +2
+            { 4650,  4115 }, -- Potion +3
+            { 4840,  4129 }, -- Ether +1
+            { 4320,  4130 }, -- Ether +2
+            {  510,  4145 }, -- Elixir
+            { 2430,  4370 }, -- Honey
         },
         itemsHi =
         {
         -----------------------------------
         -- { weight, itemId }
         -----------------------------------
-            { 425,   702 }, -- Ebony Log
-            { 870,   746 }, -- Platinum Ingot
-            { 430,   835 }, -- Flax Flower
-            { 790,   898 }, -- Chicken Bone
-            {2400,   857 }, -- Dhalmel Hide
-            {2750,   750 }, -- Silver Beastcoin
-            {4600,   818 }, -- Cotton Thread
-            { 390,   838 }, -- Spider Web
-            {3500,   852 }, -- Lizard Skin
-            {4990,   880 }, -- Bone Chip
-            {2650,   893 }, -- Giant Femur
-            {1730,   912 }, -- Beehive Chip
-            { 365,   913 }, -- Beeswax
-            {1450,   925 }, -- Giant Stinger
-            {1060,  1225 }, -- Gold Nugget
-            { 210,  1229 }, -- Adaman Nugget
-            {3610,  1845 }, -- Red Moko Grass
-            { 205,  3311 }, -- Galvanizer
-            { 725,  3313 }, -- Vivi-Valve
-            { 610,  3435 }, -- Rubicund Cell
-            { 930,  3436 }, -- Xanthous Cell
-            {2950,  3437 }, -- Jade Cell
-            {2105,  3450 }, -- Voiddust
-            {5000,  4119 }, -- Hi-Potion +3
-            {4700,  4121 }, -- X-Potion +1
-            { 600,  4123 }, -- X-Potion +3
-            {4900,  4141 }, -- Pro-Ether +1
-            {2700,  4145 }, -- Elixir
-            {1650,  4155 }, -- Remedy
-            {1450,  4449 }, -- Reishi Mushroom
-            { 795,  5416 }, -- Stl. Bull. Pouch
-            { 235, 12821 }, -- Gavial Cuisses
-            { 120, 12880 }, -- Ogre Trousers
-            { 425, 13587 }, -- Rainbow Cape
-            { 110, 13704 }, -- Ogre Mask
-            { 215, 13706 }, -- Ogre Gloves
-            { 150, 13708 }, -- Ogre Ledelsens
+            {  425,   702 }, -- Ebony Log
+            {  870,   746 }, -- Platinum Ingot
+            {  430,   835 }, -- Flax Flower
+            {  790,   898 }, -- Chicken Bone
+            { 2400,   857 }, -- Dhalmel Hide
+            { 2750,   750 }, -- Silver Beastcoin
+            { 4600,   818 }, -- Cotton Thread
+            {  390,   838 }, -- Spider Web
+            { 3500,   852 }, -- Lizard Skin
+            { 4990,   880 }, -- Bone Chip
+            { 2650,   893 }, -- Giant Femur
+            { 1730,   912 }, -- Beehive Chip
+            {  365,   913 }, -- Beeswax
+            { 1450,   925 }, -- Giant Stinger
+            { 1060,  1225 }, -- Gold Nugget
+            {  210,  1229 }, -- Adaman Nugget
+            { 3610,  1845 }, -- Red Moko Grass
+            {  205,  3311 }, -- Galvanizer
+            {  725,  3313 }, -- Vivi-Valve
+            {  610,  3435 }, -- Rubicund Cell
+            {  930,  3436 }, -- Xanthous Cell
+            { 2950,  3437 }, -- Jade Cell
+            { 2105,  3450 }, -- Voiddust
+            { 5000,  4119 }, -- Hi-Potion +3
+            { 4700,  4121 }, -- X-Potion +1
+            {  600,  4123 }, -- X-Potion +3
+            { 4900,  4141 }, -- Pro-Ether +1
+            { 2700,  4145 }, -- Elixir
+            { 1650,  4155 }, -- Remedy
+            { 1450,  4449 }, -- Reishi Mushroom
+            {  795,  5416 }, -- Stl. Bull. Pouch
+            {  235, 12821 }, -- Gavial Cuisses
+            {  120, 12880 }, -- Ogre Trousers
+            {  425, 13587 }, -- Rainbow Cape
+            {  110, 13704 }, -- Ogre Mask
+            {  215, 13706 }, -- Ogre Gloves
+            {  150, 13708 }, -- Ogre Ledelsens
         }
     },
     [xi.zone.GARLAIGE_CITADEL] =
@@ -4125,66 +4125,66 @@ xi.casket_loot.casketItems =
         -----------------------------------
         -- { weight, itemId }
         -----------------------------------
-            { 900, 4202 }, -- Daedalus Wing
-            { 500, 4206 }, -- Catholicon
-            { 300, 4255 }, -- Mana Powder
-            { 450, 5322 }, -- Healing Powder
-            { 320, 5393 }, -- Monarch's Drink
-            { 650, 5394 }, -- Gnostic's Drink
-            { 430, 5395 }, -- Cleric's Drink
-            {1000, 5433 }, -- Dusty Elixir
-            { 690, 5439 }, -- Vicar's Drink
-            { 250, 5440 }, -- Dusty Wing
-            {2000, 5824 }, -- Lucid Potion I
-            {1900, 5825 }, -- Lucid Potion II
-            {1200, 5826 }, -- Lucid Potion III
-            { 730, 5832 }, -- Healing Mist
-            { 420, 5833 }, -- Mana Mist
-            {1010, 5834 }, -- Lucid Wings I
-            { 875, 5835 }, -- Healing Salve I
-            { 210, 5836 }, -- Healing Salve II
-            { 920, 5837 }, -- Clear Salve I
-            { 190, 5838 }, -- Clear Salve II
-            { 310, 5839 }, -- Stalwart's Tonic
-            { 205, 5840 }, -- Stalwart's Gambir
-            { 410, 5841 }, -- Ascetic's Tonic
-            { 305, 5842 }, -- Ascetic's Gambir
-            { 310, 5843 }, -- Champion's Tonic
-            { 200, 5845 }, -- Fanatic's Tonic
+            {  900, 4202 }, -- Daedalus Wing
+            {  500, 4206 }, -- Catholicon
+            {  300, 4255 }, -- Mana Powder
+            {  450, 5322 }, -- Healing Powder
+            {  320, 5393 }, -- Monarch's Drink
+            {  650, 5394 }, -- Gnostic's Drink
+            {  430, 5395 }, -- Cleric's Drink
+            { 1000, 5433 }, -- Dusty Elixir
+            {  690, 5439 }, -- Vicar's Drink
+            {  250, 5440 }, -- Dusty Wing
+            { 2000, 5824 }, -- Lucid Potion I
+            { 1900, 5825 }, -- Lucid Potion II
+            { 1200, 5826 }, -- Lucid Potion III
+            {  730, 5832 }, -- Healing Mist
+            {  420, 5833 }, -- Mana Mist
+            { 1010, 5834 }, -- Lucid Wings I
+            {  875, 5835 }, -- Healing Salve I
+            {  210, 5836 }, -- Healing Salve II
+            {  920, 5837 }, -- Clear Salve I
+            {  190, 5838 }, -- Clear Salve II
+            {  310, 5839 }, -- Stalwart's Tonic
+            {  205, 5840 }, -- Stalwart's Gambir
+            {  410, 5841 }, -- Ascetic's Tonic
+            {  305, 5842 }, -- Ascetic's Gambir
+            {  310, 5843 }, -- Champion's Tonic
+            {  200, 5845 }, -- Fanatic's Tonic
         },
         items =
         {
         -----------------------------------
         -- { weight, itemId }
         -----------------------------------
-            { 640,   633 }, -- Olive Oil
-            { 510,   646 }, -- Adaman Ore
-            { 410,   653 }, -- Mythril Ingot
-            { 670,   690 }, -- Elm Log
-            { 325,   691 }, -- Maple Log
-            {2980,   749 }, -- Mtl. Beastcoin
-            {3650,   750 }, -- Silver Beastcoin
-            {2430,   820 }, -- Wool Thread
-            {3200,   859 }, -- Ram Skin
-            {2570,   895 }, -- Ram Horn
-            { 765,   943 }, -- Poison Dust
-            { 325,  3312 }, -- Percolator
-            { 490,  3434 }, -- Cobalt Cell
-            { 655,  3436 }, -- Xanthous Cell
-            {1490,  3437 }, -- Jade Cell
-            {1760,  3450 }, -- Voiddust
-            {5000,  4117 }, -- Hi-Potion +1
-            {2700,  4119 }, -- Hi-Potion +3
-            {1050,  4121 }, -- X-Potion +1
-            { 450,  4123 }, -- X-Potion +3
-            {4900,  4143 }, -- Pro-Ether +3
-            { 650,  4144 }, -- Hi-Elixir
-            { 230, 12437 }, -- Gavial Mask
-            { 210, 12693 }, -- Gavial Fng. Gnt.
-            { 110, 16396 }, -- Koenigs Knuckles
-            {  90, 17364 }, -- Cythara Anglica
-            {2570, 17898 }, -- C. Grass. Broth
-            {3100, 18259 }, -- Angon
+            {  640,   633 }, -- Olive Oil
+            {  510,   646 }, -- Adaman Ore
+            {  410,   653 }, -- Mythril Ingot
+            {  670,   690 }, -- Elm Log
+            {  325,   691 }, -- Maple Log
+            { 2980,   749 }, -- Mtl. Beastcoin
+            { 3650,   750 }, -- Silver Beastcoin
+            { 2430,   820 }, -- Wool Thread
+            { 3200,   859 }, -- Ram Skin
+            { 2570,   895 }, -- Ram Horn
+            {  765,   943 }, -- Poison Dust
+            {  325,  3312 }, -- Percolator
+            {  490,  3434 }, -- Cobalt Cell
+            {  655,  3436 }, -- Xanthous Cell
+            { 1490,  3437 }, -- Jade Cell
+            { 1760,  3450 }, -- Voiddust
+            { 5000,  4117 }, -- Hi-Potion +1
+            { 2700,  4119 }, -- Hi-Potion +3
+            { 1050,  4121 }, -- X-Potion +1
+            {  450,  4123 }, -- X-Potion +3
+            { 4900,  4143 }, -- Pro-Ether +3
+            {  650,  4144 }, -- Hi-Elixir
+            {  230, 12437 }, -- Gavial Mask
+            {  210, 12693 }, -- Gavial Fng. Gnt.
+            {  110, 16396 }, -- Koenigs Knuckles
+            {   90, 17364 }, -- Cythara Anglica
+            { 2570, 17898 }, -- C. Grass. Broth
+            { 3100, 18259 }, -- Angon
         }
     },
     [xi.zone.FEIYIN] =
@@ -4195,72 +4195,72 @@ xi.casket_loot.casketItems =
         -----------------------------------
         -- { weight, itemId }
         -----------------------------------
-            { 900, 4202 }, -- Daedalus Wing
-            { 500, 4206 }, -- Catholicon
-            { 300, 4255 }, -- Mana Powder
-            { 450, 5322 }, -- Healing Powder
-            { 320, 5393 }, -- Monarch's Drink
-            { 650, 5394 }, -- Gnostic's Drink
-            { 430, 5395 }, -- Cleric's Drink
-            {1000, 5433 }, -- Dusty Elixir
-            { 690, 5439 }, -- Vicar's Drink
-            { 250, 5440 }, -- Dusty Wing
-            {2000, 5824 }, -- Lucid Potion I
-            {1900, 5825 }, -- Lucid Potion II
-            {1200, 5826 }, -- Lucid Potion III
-            { 730, 5832 }, -- Healing Mist
-            { 420, 5833 }, -- Mana Mist
-            {1010, 5834 }, -- Lucid Wings I
-            { 875, 5835 }, -- Healing Salve I
-            { 210, 5836 }, -- Healing Salve II
-            { 920, 5837 }, -- Clear Salve I
-            { 190, 5838 }, -- Clear Salve II
-            { 310, 5839 }, -- Stalwart's Tonic
-            { 205, 5840 }, -- Stalwart's Gambir
-            { 410, 5841 }, -- Ascetic's Tonic
-            { 305, 5842 }, -- Ascetic's Gambir
-            { 310, 5843 }, -- Champion's Tonic
-            { 200, 5845 }, -- Fanatic's Tonic
+            {  900, 4202 }, -- Daedalus Wing
+            {  500, 4206 }, -- Catholicon
+            {  300, 4255 }, -- Mana Powder
+            {  450, 5322 }, -- Healing Powder
+            {  320, 5393 }, -- Monarch's Drink
+            {  650, 5394 }, -- Gnostic's Drink
+            {  430, 5395 }, -- Cleric's Drink
+            { 1000, 5433 }, -- Dusty Elixir
+            {  690, 5439 }, -- Vicar's Drink
+            {  250, 5440 }, -- Dusty Wing
+            { 2000, 5824 }, -- Lucid Potion I
+            { 1900, 5825 }, -- Lucid Potion II
+            { 1200, 5826 }, -- Lucid Potion III
+            {  730, 5832 }, -- Healing Mist
+            {  420, 5833 }, -- Mana Mist
+            { 1010, 5834 }, -- Lucid Wings I
+            {  875, 5835 }, -- Healing Salve I
+            {  210, 5836 }, -- Healing Salve II
+            {  920, 5837 }, -- Clear Salve I
+            {  190, 5838 }, -- Clear Salve II
+            {  310, 5839 }, -- Stalwart's Tonic
+            {  205, 5840 }, -- Stalwart's Gambir
+            {  410, 5841 }, -- Ascetic's Tonic
+            {  305, 5842 }, -- Ascetic's Gambir
+            {  310, 5843 }, -- Champion's Tonic
+            {  200, 5845 }, -- Fanatic's Tonic
         },
         items =
         {
         -----------------------------------
         -- { weight, itemId }
         -----------------------------------
-            { 760,   645 }, -- Darksteel Ore
-            { 365,   646 }, -- Adaman Ore
-            { 490,   739 }, -- Orichalcum Ore
-            {2680,   748 }, -- Gold Beastcoin
-            { 230,   773 }, -- Translucent Rock
-            { 570,   775 }, -- Black Rock
-            { 600,   776 }, -- White Rock
-            { 780,   821 }, -- Rainbow Thread
-            {1480,   823 }, -- Gold Thread
-            {3600,  1222 }, -- Yagudo Fltchg.
-            {1460,  1962 }, -- Plt. Arrowheads
-            { 430,  2459 }, -- Minium
-            {0000,  2761 }, -- Feyweald Log
-            { 360,  3312 }, -- Percolator
-            { 900,  3434 }, -- Cobalt Cell
-            {1050,  3435 }, -- Rubicund Cell
-            {1240,  3436 }, -- Xanthous Cell
-            {1465,  3437 }, -- Jade Cell
-            {2675,  3450 }, -- Voiddust
-            {5000,  4119 }, -- Hi-Potion +3
-            {4750,  4123 }, -- X-Potion +3
-            {4900,  4135 }, -- Hi-Ether +3
-            {4250,  4143 }, -- Pro-Ether +3
-            {2500,  4144 }, -- Hi-Elixir
-            {1500,  4155 }, -- Remedy
-            { 700,  4173 }, -- Hi-Reraiser
-            { 845,  5821 }, -- Fsn. Bolt Quiver
-            { 120, 13929 }, -- Errant Hat
-            {  90, 14078 }, -- Errant Cuffs
-            {  85, 14182 }, -- Errant Pigaches
-            {  75, 14301 }, -- Errant Slops
-            { 230, 16520 }, -- Verdun
-            {1000, 17896 }, -- Gob. Bug Broth
-            {2150, 18258 }, -- Thr. Tomahawk
+            {  760,   645 }, -- Darksteel Ore
+            {  365,   646 }, -- Adaman Ore
+            {  490,   739 }, -- Orichalcum Ore
+            { 2680,   748 }, -- Gold Beastcoin
+            {  230,   773 }, -- Translucent Rock
+            {  570,   775 }, -- Black Rock
+            {  600,   776 }, -- White Rock
+            {  780,   821 }, -- Rainbow Thread
+            { 1480,   823 }, -- Gold Thread
+            { 3600,  1222 }, -- Yagudo Fltchg.
+            { 1460,  1962 }, -- Plt. Arrowheads
+            {  430,  2459 }, -- Minium
+            { 0000,  2761 }, -- Feyweald Log
+            {  360,  3312 }, -- Percolator
+            {  900,  3434 }, -- Cobalt Cell
+            { 1050,  3435 }, -- Rubicund Cell
+            { 1240,  3436 }, -- Xanthous Cell
+            { 1465,  3437 }, -- Jade Cell
+            { 2675,  3450 }, -- Voiddust
+            { 5000,  4119 }, -- Hi-Potion +3
+            { 4750,  4123 }, -- X-Potion +3
+            { 4900,  4135 }, -- Hi-Ether +3
+            { 4250,  4143 }, -- Pro-Ether +3
+            { 2500,  4144 }, -- Hi-Elixir
+            { 1500,  4155 }, -- Remedy
+            {  700,  4173 }, -- Hi-Reraiser
+            {  845,  5821 }, -- Fsn. Bolt Quiver
+            {  120, 13929 }, -- Errant Hat
+            {   90, 14078 }, -- Errant Cuffs
+            {   85, 14182 }, -- Errant Pigaches
+            {   75, 14301 }, -- Errant Slops
+            {  230, 16520 }, -- Verdun
+            { 1000, 17896 }, -- Gob. Bug Broth
+            { 2150, 18258 }, -- Thr. Tomahawk
         }
     },
     [xi.zone.IFRITS_CAULDRON] =
@@ -4271,68 +4271,68 @@ xi.casket_loot.casketItems =
         -----------------------------------
         -- { weight, itemId }
         -----------------------------------
-            { 900, 4202 }, -- Daedalus Wing
-            { 500, 4206 }, -- Catholicon
-            { 300, 4255 }, -- Mana Powder
-            { 450, 5322 }, -- Healing Powder
-            { 320, 5393 }, -- Monarch's Drink
-            { 650, 5394 }, -- Gnostic's Drink
-            { 430, 5395 }, -- Cleric's Drink
-            {1000, 5433 }, -- Dusty Elixir
-            { 690, 5439 }, -- Vicar's Drink
-            { 250, 5440 }, -- Dusty Wing
-            {2000, 5824 }, -- Lucid Potion I
-            {1900, 5825 }, -- Lucid Potion II
-            {1200, 5826 }, -- Lucid Potion III
-            { 730, 5832 }, -- Healing Mist
-            { 420, 5833 }, -- Mana Mist
-            {1010, 5834 }, -- Lucid Wings I
-            { 875, 5835 }, -- Healing Salve I
-            { 210, 5836 }, -- Healing Salve II
-            { 920, 5837 }, -- Clear Salve I
-            { 190, 5838 }, -- Clear Salve II
-            { 310, 5839 }, -- Stalwart's Tonic
-            { 205, 5840 }, -- Stalwart's Gambir
-            { 410, 5841 }, -- Ascetic's Tonic
-            { 305, 5842 }, -- Ascetic's Gambir
-            { 310, 5843 }, -- Champion's Tonic
-            { 200, 5845 }, -- Fanatic's Tonic
+            {  900, 4202 }, -- Daedalus Wing
+            {  500, 4206 }, -- Catholicon
+            {  300, 4255 }, -- Mana Powder
+            {  450, 5322 }, -- Healing Powder
+            {  320, 5393 }, -- Monarch's Drink
+            {  650, 5394 }, -- Gnostic's Drink
+            {  430, 5395 }, -- Cleric's Drink
+            { 1000, 5433 }, -- Dusty Elixir
+            {  690, 5439 }, -- Vicar's Drink
+            {  250, 5440 }, -- Dusty Wing
+            { 2000, 5824 }, -- Lucid Potion I
+            { 1900, 5825 }, -- Lucid Potion II
+            { 1200, 5826 }, -- Lucid Potion III
+            {  730, 5832 }, -- Healing Mist
+            {  420, 5833 }, -- Mana Mist
+            { 1010, 5834 }, -- Lucid Wings I
+            {  875, 5835 }, -- Healing Salve I
+            {  210, 5836 }, -- Healing Salve II
+            {  920, 5837 }, -- Clear Salve I
+            {  190, 5838 }, -- Clear Salve II
+            {  310, 5839 }, -- Stalwart's Tonic
+            {  205, 5840 }, -- Stalwart's Gambir
+            {  410, 5841 }, -- Ascetic's Tonic
+            {  305, 5842 }, -- Ascetic's Gambir
+            {  310, 5843 }, -- Champion's Tonic
+            {  200, 5845 }, -- Fanatic's Tonic
         },
         items =
         {
         -----------------------------------
         -- { weight, itemId }
         -----------------------------------
-            {2700,   646 }, -- Adaman Ore
-            { 310,   739 }, -- Orichalcum Ore
-            { 580,   821 }, -- Rainbow Thread
-            {4700,  1222 }, -- Yagudo Fltchg.
-            {1540,   838 }, -- Spider Web
-            {1700,   843 }, -- G. Bird Plume
-            {2050,  1155 }, -- Iron Sand
-            {3670,  1222 }, -- Yagudo Fltchg.
-            {3100,  1962 }, -- Plt. Arrowheads
-            {1050,  2459 }, -- Minium
-            {2100,  2532 }, -- Teak Log
-            { 340,  3309 }, -- Barrage Turbine
-            {1650,  3434 }, -- Cobalt Cell
-            {1430,  3435 }, -- Rubicund Cell
-            {1625,  3436 }, -- Xanthous Cell
-            {1725,  3437 }, -- Jade Cell
-            {2635,  3450 }, -- Voiddust
-            {5000,  4119 }, -- Hi-Potion +3
-            {2500,  4123 }, -- X-Potion +3
-            {4900,  4135 }, -- Hi-Ether +3
-            {2200,  4143 }, -- Pro-Ether +3
-            {2400,  5662 }, -- Dragon Fruit
-            { 410,  8555 }, -- Barrier Module
-            {1250, 12309 }, -- Ritter Shield
-            { 320, 13212 }, -- Tarutaru Sash
-            { 680, 13587 }, -- Rainbow Cape
-            { 780, 13595 }, -- Coeurl Mantle
-            { 220, 15890 }, -- Marid Belt
-            { 695, 16128 }, -- Wivre Hairpin
-            { 725, 16265 }, -- Wivre Gorget
+            { 2700,   646 }, -- Adaman Ore
+            {  310,   739 }, -- Orichalcum Ore
+            {  580,   821 }, -- Rainbow Thread
+            { 4700,  1222 }, -- Yagudo Fltchg.
+            { 1540,   838 }, -- Spider Web
+            { 1700,   843 }, -- G. Bird Plume
+            { 2050,  1155 }, -- Iron Sand
+            { 3670,  1222 }, -- Yagudo Fltchg.
+            { 3100,  1962 }, -- Plt. Arrowheads
+            { 1050,  2459 }, -- Minium
+            { 2100,  2532 }, -- Teak Log
+            {  340,  3309 }, -- Barrage Turbine
+            { 1650,  3434 }, -- Cobalt Cell
+            { 1430,  3435 }, -- Rubicund Cell
+            { 1625,  3436 }, -- Xanthous Cell
+            { 1725,  3437 }, -- Jade Cell
+            { 2635,  3450 }, -- Voiddust
+            { 5000,  4119 }, -- Hi-Potion +3
+            { 2500,  4123 }, -- X-Potion +3
+            { 4900,  4135 }, -- Hi-Ether +3
+            { 2200,  4143 }, -- Pro-Ether +3
+            { 2400,  5662 }, -- Dragon Fruit
+            {  410,  8555 }, -- Barrier Module
+            { 1250, 12309 }, -- Ritter Shield
+            {  320, 13212 }, -- Tarutaru Sash
+            {  680, 13587 }, -- Rainbow Cape
+            {  780, 13595 }, -- Coeurl Mantle
+            {  220, 15890 }, -- Marid Belt
+            {  695, 16128 }, -- Wivre Hairpin
+            {  725, 16265 }, -- Wivre Gorget
         }
     },
     [xi.zone.GUSTAV_TUNNEL] =
@@ -4343,68 +4343,68 @@ xi.casket_loot.casketItems =
         -----------------------------------
         -- { weight, itemId }
         -----------------------------------
-            { 900, 4202 }, -- Daedalus Wing
-            { 500, 4206 }, -- Catholicon
-            { 300, 4255 }, -- Mana Powder
-            { 450, 5322 }, -- Healing Powder
-            { 320, 5393 }, -- Monarch's Drink
-            { 650, 5394 }, -- Gnostic's Drink
-            { 430, 5395 }, -- Cleric's Drink
-            {1000, 5433 }, -- Dusty Elixir
-            { 690, 5439 }, -- Vicar's Drink
-            { 250, 5440 }, -- Dusty Wing
-            {2000, 5824 }, -- Lucid Potion I
-            {1900, 5825 }, -- Lucid Potion II
-            {1200, 5826 }, -- Lucid Potion III
-            { 730, 5832 }, -- Healing Mist
-            { 420, 5833 }, -- Mana Mist
-            {1010, 5834 }, -- Lucid Wings I
-            { 875, 5835 }, -- Healing Salve I
-            { 210, 5836 }, -- Healing Salve II
-            { 920, 5837 }, -- Clear Salve I
-            { 190, 5838 }, -- Clear Salve II
-            { 310, 5839 }, -- Stalwart's Tonic
-            { 205, 5840 }, -- Stalwart's Gambir
-            { 410, 5841 }, -- Ascetic's Tonic
-            { 305, 5842 }, -- Ascetic's Gambir
-            { 310, 5843 }, -- Champion's Tonic
-            { 200, 5845 }, -- Fanatic's Tonic
+            {  900, 4202 }, -- Daedalus Wing
+            {  500, 4206 }, -- Catholicon
+            {  300, 4255 }, -- Mana Powder
+            {  450, 5322 }, -- Healing Powder
+            {  320, 5393 }, -- Monarch's Drink
+            {  650, 5394 }, -- Gnostic's Drink
+            {  430, 5395 }, -- Cleric's Drink
+            { 1000, 5433 }, -- Dusty Elixir
+            {  690, 5439 }, -- Vicar's Drink
+            {  250, 5440 }, -- Dusty Wing
+            { 2000, 5824 }, -- Lucid Potion I
+            { 1900, 5825 }, -- Lucid Potion II
+            { 1200, 5826 }, -- Lucid Potion III
+            {  730, 5832 }, -- Healing Mist
+            {  420, 5833 }, -- Mana Mist
+            { 1010, 5834 }, -- Lucid Wings I
+            {  875, 5835 }, -- Healing Salve I
+            {  210, 5836 }, -- Healing Salve II
+            {  920, 5837 }, -- Clear Salve I
+            {  190, 5838 }, -- Clear Salve II
+            {  310, 5839 }, -- Stalwart's Tonic
+            {  205, 5840 }, -- Stalwart's Gambir
+            {  410, 5841 }, -- Ascetic's Tonic
+            {  305, 5842 }, -- Ascetic's Gambir
+            {  310, 5843 }, -- Champion's Tonic
+            {  200, 5845 }, -- Fanatic's Tonic
         },
         items =
         {
         -----------------------------------
         -- { weight, itemId }
         -----------------------------------
-            { 390,   657 }, -- Tama-Hagane
-            { 745,   876 }, -- Manta Skin
-            { 250,   887 }, -- Coral Fragment
-            {4500,  1163 }, -- Manticore Hair
-            {1025,  1446 }, -- Lacquer Tree Log
-            { 255,  3307 }, -- Heat Capacitor
-            { 245,  3312 }, -- Percolator
-            { 450,  3313 }, -- Vivi-Valve
-            { 700,  3434 }, -- Cobalt Cell
-            {1600,  3435 }, -- Rubicund Cell
-            {2060,  3436 }, -- Xanthous Cell
-            {2050,  3437 }, -- Jade Cell
-            {1500,  3450 }, -- Voiddust
-            {5000,  4119 }, -- Hi-Potion +3
-            {4200,  4120 }, -- X-Potion
-            {3500,  4121 }, -- X-Potion +1
-            {3000,  4122 }, -- X-Potion +2
-            {4900,  4135 }, -- Hi-Ether +3
-            {2700,  4143 }, -- Pro-Ether +3
-            { 600,  4155 }, -- Remedy
-            {1200,  4173 }, -- Hi-Reraiser
-            { 900,  4174 }, -- Vile Elixir
-            {1200,  4291 }, -- Sandfish
-            {1700,  4447 }, -- Scream Fungus
-            { 650,  5866 }, -- Toolbag (Moku)
-            {1050,  5871 }, -- Ruszor Quiver
-            {2050, 17881 }, -- Deepbed Soil
-            {1020, 17884 }, -- Sun Water
-            { 500, 17898 }, -- C. Grass. Broth
-            { 400, 17899 }, -- Svg. Mole Broth
+            {  390,   657 }, -- Tama-Hagane
+            {  745,   876 }, -- Manta Skin
+            {  250,   887 }, -- Coral Fragment
+            { 4500,  1163 }, -- Manticore Hair
+            { 1025,  1446 }, -- Lacquer Tree Log
+            {  255,  3307 }, -- Heat Capacitor
+            {  245,  3312 }, -- Percolator
+            {  450,  3313 }, -- Vivi-Valve
+            {  700,  3434 }, -- Cobalt Cell
+            { 1600,  3435 }, -- Rubicund Cell
+            { 2060,  3436 }, -- Xanthous Cell
+            { 2050,  3437 }, -- Jade Cell
+            { 1500,  3450 }, -- Voiddust
+            { 5000,  4119 }, -- Hi-Potion +3
+            { 4200,  4120 }, -- X-Potion
+            { 3500,  4121 }, -- X-Potion +1
+            { 3000,  4122 }, -- X-Potion +2
+            { 4900,  4135 }, -- Hi-Ether +3
+            { 2700,  4143 }, -- Pro-Ether +3
+            {  600,  4155 }, -- Remedy
+            { 1200,  4173 }, -- Hi-Reraiser
+            {  900,  4174 }, -- Vile Elixir
+            { 1200,  4291 }, -- Sandfish
+            { 1700,  4447 }, -- Scream Fungus
+            {  650,  5866 }, -- Toolbag (Moku)
+            { 1050,  5871 }, -- Ruszor Quiver
+            { 2050, 17881 }, -- Deepbed Soil
+            { 1020, 17884 }, -- Sun Water
+            {  500, 17898 }, -- C. Grass. Broth
+            {  400, 17899 }, -- Svg. Mole Broth
         }
     },
     [xi.zone.LABYRINTH_OF_ONZOZO] =
@@ -4415,57 +4415,57 @@ xi.casket_loot.casketItems =
         -----------------------------------
         -- { weight, itemId }
         -----------------------------------
-            { 900, 4202 }, -- Daedalus Wing
-            { 500, 4206 }, -- Catholicon
-            { 300, 4255 }, -- Mana Powder
-            { 450, 5322 }, -- Healing Powder
-            { 320, 5393 }, -- Monarch's Drink
-            { 650, 5394 }, -- Gnostic's Drink
-            { 430, 5395 }, -- Cleric's Drink
-            {1000, 5433 }, -- Dusty Elixir
-            { 690, 5439 }, -- Vicar's Drink
-            { 250, 5440 }, -- Dusty Wing
-            {2000, 5824 }, -- Lucid Potion I
-            {1900, 5825 }, -- Lucid Potion II
-            {1200, 5826 }, -- Lucid Potion III
-            { 730, 5832 }, -- Healing Mist
-            { 420, 5833 }, -- Mana Mist
-            {1010, 5834 }, -- Lucid Wings I
-            { 875, 5835 }, -- Healing Salve I
-            { 210, 5836 }, -- Healing Salve II
-            { 920, 5837 }, -- Clear Salve I
-            { 190, 5838 }, -- Clear Salve II
-            { 310, 5839 }, -- Stalwart's Tonic
-            { 205, 5840 }, -- Stalwart's Gambir
-            { 410, 5841 }, -- Ascetic's Tonic
-            { 305, 5842 }, -- Ascetic's Gambir
-            { 310, 5843 }, -- Champion's Tonic
-            { 200, 5845 }, -- Fanatic's Tonic
+            {  900, 4202 }, -- Daedalus Wing
+            {  500, 4206 }, -- Catholicon
+            {  300, 4255 }, -- Mana Powder
+            {  450, 5322 }, -- Healing Powder
+            {  320, 5393 }, -- Monarch's Drink
+            {  650, 5394 }, -- Gnostic's Drink
+            {  430, 5395 }, -- Cleric's Drink
+            { 1000, 5433 }, -- Dusty Elixir
+            {  690, 5439 }, -- Vicar's Drink
+            {  250, 5440 }, -- Dusty Wing
+            { 2000, 5824 }, -- Lucid Potion I
+            { 1900, 5825 }, -- Lucid Potion II
+            { 1200, 5826 }, -- Lucid Potion III
+            {  730, 5832 }, -- Healing Mist
+            {  420, 5833 }, -- Mana Mist
+            { 1010, 5834 }, -- Lucid Wings I
+            {  875, 5835 }, -- Healing Salve I
+            {  210, 5836 }, -- Healing Salve II
+            {  920, 5837 }, -- Clear Salve I
+            {  190, 5838 }, -- Clear Salve II
+            {  310, 5839 }, -- Stalwart's Tonic
+            {  205, 5840 }, -- Stalwart's Gambir
+            {  410, 5841 }, -- Ascetic's Tonic
+            {  305, 5842 }, -- Ascetic's Gambir
+            {  310, 5843 }, -- Champion's Tonic
+            {  200, 5845 }, -- Fanatic's Tonic
         },
         items =
         {
         -----------------------------------
         -- { weight, itemId }
         -----------------------------------
-            { 720,  1213 }, -- Dst. Bolt Heads
-            {1020,  1443 }, -- Dried Mugwort
-            { 430,  2459 }, -- Minium
-            {2200,  2761 }, -- Feyweald Log
-            { 360,  3312 }, -- Percolator
-            { 900,  3434 }, -- Cobalt Cell
-            {1050,  3435 }, -- Rubicund Cell
-            {1240,  3436 }, -- Xanthous Cell
-            {1465,  3437 }, -- Jade Cell
-            {2675,  3450 }, -- Voiddust
-            {5000,  4119 }, -- Hi-Potion +3
-            {4750,  4123 }, -- X-Potion +3
-            {4900,  4135 }, -- Hi-Ether +3
-            {4250,  4143 }, -- Pro-Ether +3
-            {2500,  4144 }, -- Hi-Elixir
-            {1500,  4155 }, -- Remedy
-            { 700,  4173 }, -- Hi-Reraiser
-            { 640,  4449 }, -- Reishi Mushroom
-            { 340,  9068 }, -- Barrier Module
+            {  720,  1213 }, -- Dst. Bolt Heads
+            { 1020,  1443 }, -- Dried Mugwort
+            {  430,  2459 }, -- Minium
+            { 2200,  2761 }, -- Feyweald Log
+            {  360,  3312 }, -- Percolator
+            {  900,  3434 }, -- Cobalt Cell
+            { 1050,  3435 }, -- Rubicund Cell
+            { 1240,  3436 }, -- Xanthous Cell
+            { 1465,  3437 }, -- Jade Cell
+            { 2675,  3450 }, -- Voiddust
+            { 5000,  4119 }, -- Hi-Potion +3
+            { 4750,  4123 }, -- X-Potion +3
+            { 4900,  4135 }, -- Hi-Ether +3
+            { 4250,  4143 }, -- Pro-Ether +3
+            { 2500,  4144 }, -- Hi-Elixir
+            { 1500,  4155 }, -- Remedy
+            {  700,  4173 }, -- Hi-Reraiser
+            {  640,  4449 }, -- Reishi Mushroom
+            {  340,  9068 }, -- Barrier Module
         },
     },
 }

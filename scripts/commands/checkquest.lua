@@ -1,5 +1,5 @@
 -----------------------------------
--- func: !checkquest <logID> <questID> {player}
+-- func: !checkquest <logID> <questID> (player)
 -- desc: Prints status of the quest to the in game chatlog
 -----------------------------------
 require("scripts/globals/quests")
@@ -14,7 +14,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!checkquest <logID> <questID> {player}")
+    player:PrintToPlayer("!checkquest <logID> <questID> (player)")
 end
 
 function onTrigger(player, logId, questId, target)

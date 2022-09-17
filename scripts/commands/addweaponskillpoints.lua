@@ -1,5 +1,5 @@
 -----------------------------------
--- func: addWeaponSkillPoints <slot> <points> {player}
+-- func: addWeaponSkillPoints <slot> <points> (player)
 -- desc: Adds weapon skill points to an equipped item.
 -----------------------------------
 require("scripts/globals/status")

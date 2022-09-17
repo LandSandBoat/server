@@ -11,7 +11,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!wallhack {player}")
+    player:PrintToPlayer("!wallhack (player)")
 end
 
 function onTrigger(player, target)

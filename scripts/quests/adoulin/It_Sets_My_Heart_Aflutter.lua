@@ -101,7 +101,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, {{xi.items.TWITHERYM_WING, 2}}) then
+                    if npcUtil.tradeHasExactly(trade, { { xi.items.TWITHERYM_WING, 2 } }) then
                         return quest:progressEvent(331)
                     end
                 end,

@@ -33,7 +33,7 @@ local chocoboInfo =
     [xi.zone.JUGNER_FOREST_S]         = { levelReq = 20, basePrice = 200, addedPrice = 25, decayPrice = 5, decayTime = 90, questChance = 0.00, past = true , pos = nil },
     [xi.zone.BASTOK_MARKETS_S]        = { levelReq = 15, basePrice = 150, addedPrice = 20, decayPrice = 5, decayTime = 90, questChance = 0.00, past = true , pos = { 380, 0, 147, 192, 88 } },
     [xi.zone.PASHHOW_MARSHLANDS_S]    = { levelReq = 20, basePrice = 200, addedPrice = 25, decayPrice = 5, decayTime = 90, questChance = 0.00, past = true , pos = nil },
-    [xi.zone.WINDURST_WATERS_S]       = { levelReq = 15, basePrice = 150, addedPrice = 20, decayPrice = 5, decayTime = 90, questChance = 0.00, past = true , pos = {320, -4, -46, 192, 95 } },
+    [xi.zone.WINDURST_WATERS_S]       = { levelReq = 15, basePrice = 150, addedPrice = 20, decayPrice = 5, decayTime = 90, questChance = 0.00, past = true , pos = { 320, -4, -46, 192, 95 } },
     [xi.zone.MERIPHATAUD_MOUNTAINS_S] = { levelReq = 20, basePrice = 200, addedPrice = 25, decayPrice = 5, decayTime = 90, questChance = 0.00, past = true , pos = nil },
     [xi.zone.LA_THEINE_PLATEAU]       = { levelReq = 20, basePrice = 200, addedPrice = 25, decayPrice = 5, decayTime = 90, questChance = 0.00, past = false, pos = nil },
     [xi.zone.KONSCHTAT_HIGHLANDS]     = { levelReq = 20, basePrice = 200, addedPrice = 25, decayPrice = 5, decayTime = 90, questChance = 0.00, past = false, pos = nil },
