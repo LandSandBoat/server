@@ -65,45 +65,10 @@ local route =
     {x = -219.6814, y = 0.000000, z = 139.8317}, -- Destination
 }
 
--- Reset Wazon to spawn point and reset AI
-local resetWazon = function(npc)
-    npc:setStatus(xi.status.DISAPPEAR)
-    npc:setPos(-379.9708, -9.5, 382.1751, 195)
-    npc:resetAI()
-end
-
-entity.onSpawn = function(npc)
-end
-
 entity.onTrigger = function(player, npc)
 end
 
-entity.onFight = function(npc, target)
-    npc:setLocalVar("run", 0)
-end
-
-entity.onPath = function(npc)
-    if npc:atPoint(xi.path.last(route)) and npc:getLocalVar("win") == 0 then
-        npc:setLocalVar("run", 3)
-        npc:setLocalVar("win", 1)
-        npc:timer(30000, function(npcArg)
-            npc:messageText(npc, ID.text.BYE_BYE)
-            resetWazon(npc)
-        end)
-
-    -- Run case
-    elseif npc:getLocalVar("run") == 1 then
-        npc:pathThrough(route, xi.path.flag.PATROL)
-
-    -- Time up case
-    elseif npc:getZone():getLocalVar("timer") < os.time() then
-        -- resetWazon(npc)
-    end
-end
-
 entity.onDeath = function(npc)
-    npc:messageText(npc, ID.text.LOST_SIGHT)
-    resetWazon(npc)
 end
 
 return entity

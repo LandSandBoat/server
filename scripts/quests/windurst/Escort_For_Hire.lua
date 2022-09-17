@@ -1,6 +1,8 @@
 -----------------------------------
 -- Escort for Hire (Windurst)
 -----------------------------------
+-- This quest doesn't function as of now.
+-- TODO: Wanzo-Unzozo (The mob/npc to be escorted must) must agro mobs.
 -- !addquest 2 88
 -- Dehn Harzhapan !pos -7, -6, 152
 -----------------------------------
@@ -30,7 +32,7 @@ quest.sections =
             player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.windurst.ESCORT_FOR_HIRE) ~= QUEST_ACCEPTED and
             player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.windurst.ESCORT_FOR_HIRE) ~= QUEST_ACCEPTED and
             player:getFameLevel(xi.quest.fame_area.WINDURST) >= 6 and
-            player:getCharVar("ESCORT_CONQUEST") < getConquestTally()
+            player:getCharVar("ESCORT_CONQUEST") < getConquestTally() and false -- Disables the quest
         end,
 
         [xi.zone.PORT_WINDURST] =
@@ -57,7 +59,7 @@ quest.sections =
             {
                 function(player, prevZone)
                     -- If a party is already running quest, do not start event.
-                    if GetNPCByID(17596834):getStatus() ~= xi.status.NORMAL  then
+                    if not GetMobByID(17596834):isSpawned() then
                         if quest:getVar(player, 'Prog') == 0 then
                             for _, v in ipairs(player:getParty()) do
                                 quest:setVar(v, 'Prog', 1)
@@ -65,7 +67,7 @@ quest.sections =
                             return 60
 
                         -- Players are trying to redo escort
-                        elseif quest:getVar(player, 'Prog') == 2 then
+                        elseif quest:getVar(player, 'Prog') == 2 and not GetMobByID(17596834):isSpawned() then
                             for _, v in ipairs(player:getParty()) do
                                 quest:setVar(v, 'Prog', 1)
                             end
@@ -78,10 +80,6 @@ quest.sections =
             onEventFinish =
             {
                 [60] = function(player, csid, option, npc)
-                    -- Spawn Wanzo-Unzozo
-                    local wanzo = GetMobByID(17596834)
-
-                    wanzo:setPos(-381.100, -12.000, 398.000, 1)
                     SpawnMob(17596834)
                     player:getZone():setLocalVar("timer", os.time() + 1800)
                 end,
@@ -141,7 +139,6 @@ quest.sections =
             {
                 [10014] = function(player, csid, option, npc)
                     player:delQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ESCORT_FOR_HIRE)
-
                     quest:begin(player)
                 end,
             },

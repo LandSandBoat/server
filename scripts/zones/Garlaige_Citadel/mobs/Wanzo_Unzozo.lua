@@ -76,23 +76,22 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobTrigger = function(player, mob)
-    if player:getCharVar("quest[2][88]Prog") >= 1 then
-        -- Begin, Wazon!
-        if mob:getLocalVar("begin") == 0 then
-            local party = player:getParty()
-            mob:setLocalVar("begin", 1)
-            mob:setAllegiance(xi.allegiance.PLAYER)
+    -- Begin, Wazon!
+    if player:getCharVar("quest[2][88]Prog") == 1 then
+        local party = player:getParty()
 
-            for _, v in ipairs(party) do
-                if v:getZone() == player:getZone() then
-                    v:setCharVar("quest[2][88]Prog", 2)
-                end
+        for _, v in ipairs(party) do
+            if v:getZone() == player:getZone() then
+                v:setCharVar("quest[2][88]Prog", 2)
             end
-            mob:messageText(mob, ID.text.TIME_LIMIT)
-            mob:setLocalVar("run", 1)
+        end
+        mob:messageText(mob, ID.text.TIME_LIMIT, 30)
+        mob:setLocalVar("run", 1)
+    end
 
+    if player:getCharVar("quest[2][88]Prog") == 2 then
         -- Stop, Wazon!
-        elseif mob:getLocalVar("run") == 1 then
+        if mob:getLocalVar("run") == 1 then
             mob:setLocalVar("run", 0)
             mob:messageText(mob, ID.text.WHATS_WRONG)
 
@@ -117,7 +116,7 @@ entity.onMobFight = function(mob, target)
     mob:setLocalVar("run", 0)
 end
 
-entity.onMobPath = function(mob)
+entity.onMobRoam = function(mob)
     if mob:atPoint(xi.path.last(route)) and mob:getLocalVar("win") == 0 then
         mob:setLocalVar("run", 3)
         mob:setLocalVar("win", 1)
@@ -126,14 +125,14 @@ entity.onMobPath = function(mob)
             resetWazon(mob)
         end)
 
-    -- Run case
-    elseif mob:getLocalVar("run") == 1 then
-        mob:pathThrough(route, xi.path.flag.PATROL)
+        -- Time up case
+        elseif mob:getZone():getLocalVar("timer") < os.time() then
+            -- resetWazon(mob)
 
-    -- Time up case
-    elseif mob:getZone():getLocalVar("timer") < os.time() then
-        -- resetWazon(mob)
-    end
+        -- Run case
+        elseif mob:getLocalVar("run") == 1 then
+            mob:pathThrough(route, xi.path.flag.PATROL)
+        end
 end
 
 entity.onMobDeath = function(mob)
