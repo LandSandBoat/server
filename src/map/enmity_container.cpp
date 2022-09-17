@@ -255,8 +255,8 @@ void CEnmityContainer::UpdateEnmityFromCure(CBattleEntity* PEntity, uint8 level,
 
     if (isCureV)
     {
-        CE = (int32)(400.f * bonus * tranquilHeartReduction);
-        VE = (int32)(800.f * bonus * tranquilHeartReduction);
+        CE = (int32)(300.f * bonus * tranquilHeartReduction);
+        VE = (int32)(600.f * bonus * tranquilHeartReduction);
     }
     else
     {
