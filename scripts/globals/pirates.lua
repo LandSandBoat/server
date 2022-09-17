@@ -195,12 +195,14 @@ xi.pirates.update = function(ID, zone, tripTime)
                         npc:hideName(true)
                         npc:setPos(xi.path.first(pirate.enter_path))
                         npc:setStatus(xi.status.NORMAL)
-                        npc:pathTo(xi.path.last(pirate.enter_path)[1], xi.path.last(pirate.enter_path)[2], xi.path.last(pirate.enter_path)[3])
+                        local point = xi.path.last(pirate.enter_path)
+                        npc:pathTo(point.x, point.y, point.z)
                         npc:sendUpdateToZoneCharsInRange(2000)
                     elseif ship:getLocalVar('HQ') == 0 and piratePos ~=4 then
                         npc:setPos(xi.path.first(pirate.enter_path))
                         npc:setStatus(xi.status.NORMAL)
-                        npc:pathTo(xi.path.last(pirate.enter_path)[1], xi.path.last(pirate.enter_path)[2], xi.path.last(pirate.enter_path)[3])
+                        local point = xi.path.last(pirate.enter_path)
+                        npc:pathTo(point.x, point.y, point.z)
                         npc:sendUpdateToZoneCharsInRange(2000)
                     end
                 end

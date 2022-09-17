@@ -72,7 +72,7 @@ public:
     void reload();
     void unload();
 
-    std::vector<position_t>      findPath(const position_t& start, const position_t& end);
+    std::vector<pathpoint_t>     findPath(const position_t& start, const position_t& end);
     std::pair<int16, position_t> findRandomPosition(const position_t& start, float maxRadius);
 
     // Returns true if the point is in water

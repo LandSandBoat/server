@@ -22,11 +22,11 @@ zones[xi.zone.OUTER_RAKAZNAR] =
         FAINT_ENERGY_WAFTS            = 7013, -- A faint energy wafts up from the ground.
         YOU_HAVE_LEARNED              = 7015, -- You have learned <keyitem>!
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
-        THIS_BAFFLING_GADGET          = 7738, -- This baffling gadget seems to serve as transport to the [lower/higher] floors.
-        HAVE_FOUND_SCALES             = 7904, -- You have found <number> scale[/s].
-        SOOTHING_SIGH_FALLS           = 7905, -- A soothing sigh falls upon your ears. Could you have found the final scale?
-        DOOR_TIGHTLY_SEALED           = 7906, -- The door is tightly sealed.
-        EERIE_GLOW_PENETRATES         = 7907, -- An eerie glow penetrates the darkness.
+        THIS_BAFFLING_GADGET          = 7741, -- This baffling gadget seems to serve as transport to the [lower/higher] floors.
+        HAVE_FOUND_SCALES             = 7907, -- You have found <number> scale[/s].
+        SOOTHING_SIGH_FALLS           = 7908, -- A soothing sigh falls upon your ears. Could you have found the final scale?
+        DOOR_TIGHTLY_SEALED           = 7909, -- The door is tightly sealed.
+        EERIE_GLOW_PENETRATES         = 7910, -- An eerie glow penetrates the darkness.
     },
     mob =
     {
