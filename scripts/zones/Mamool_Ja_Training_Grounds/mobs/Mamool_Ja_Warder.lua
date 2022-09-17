@@ -33,7 +33,7 @@ entity.onMobDeath = function(mob, player, isKiller)
 end
 
 entity.onMobSkillTarget = function(target, mob, skill)
-    local triggerSkills = {1733, 1736, 1923, 1925}
+    local triggerSkills = { 1733, 1736, 1923, 1925 }
     local skillID = skill:getID()
     if utils.contains(skillID, triggerSkills) then
         if math.random(0, 100) > 50 then

@@ -38,12 +38,12 @@ local prizes =
 {
     [xi.ki.CRIMSON_KEY] =
     {
-        { cutoff =   70, itemId = 13206, augments = {{ 9, 0,  5 }, { 516, 0, 1 }, { 517, 0, 1 }, { 518, 0, 1 }, {  32, 0, 1 }, {  96, 0, 1 }}}, -- Gold Obi
-        { cutoff =   80, itemId = 13445, augments = {{ 9, 0,  8 }, { 516, 0, 1 }, { 517, 0, 1 }, { 518, 0, 2 }, {  39, 0, 1 }, {  35, 0, 2 }}}, -- Gold Ring
-        { cutoff =  186, itemId = 13446, augments = {{ 1, 0, 15 }, {  13, 0, 2 }, {  25, 0, 5 }, {  31, 0, 2 }, { 195, 0, 1 }, {  35, 0, 2 }}}, -- Mythril Ring
-        { cutoff =  276, itemId = 13643, augments = {{ 9, 0,  5 }, { 516, 0, 1 }, { 517, 0, 1 }, { 518, 0, 1 }, { 100, 0, 1 }, {  39, 0, 1 }}}, -- Sarcenet Cape
-        { cutoff =  351, itemId = 13196, augments = {{ 1, 0,  5 }, {  23, 0, 1 }, {  27, 0, 1 }, { 512, 0, 1 }, { 520, 0, 1 }, { 515, 0, 1 }}}, -- Silver Belt
-        { cutoff =  460, itemId = 13571, augments = {{ 1, 0,  5 }, {  25, 0, 3 }, {  29, 0, 3 }, { 512, 0, 0 }, { 769, 0, 1 }, {  32, 0, 1 }}}, -- Wolf Mantle
+        { cutoff =   70, itemId = 13206, augments = { { 9, 0,  5 }, { 516, 0, 1 }, { 517, 0, 1 }, { 518, 0, 1 }, {  32, 0, 1 }, {  96, 0, 1 } } }, -- Gold Obi
+        { cutoff =   80, itemId = 13445, augments = { { 9, 0,  8 }, { 516, 0, 1 }, { 517, 0, 1 }, { 518, 0, 2 }, {  39, 0, 1 }, {  35, 0, 2 } } }, -- Gold Ring
+        { cutoff =  186, itemId = 13446, augments = { { 1, 0, 15 }, {  13, 0, 2 }, {  25, 0, 5 }, {  31, 0, 2 }, { 195, 0, 1 }, {  35, 0, 2 } } }, -- Mythril Ring
+        { cutoff =  276, itemId = 13643, augments = { { 9, 0,  5 }, { 516, 0, 1 }, { 517, 0, 1 }, { 518, 0, 1 }, { 100, 0, 1 }, {  39, 0, 1 } } }, -- Sarcenet Cape
+        { cutoff =  351, itemId = 13196, augments = { { 1, 0,  5 }, {  23, 0, 1 }, {  27, 0, 1 }, { 512, 0, 1 }, { 520, 0, 1 }, { 515, 0, 1 } } }, -- Silver Belt
+        { cutoff =  460, itemId = 13571, augments = { { 1, 0,  5 }, {  25, 0, 3 }, {  29, 0, 3 }, { 512, 0, 0 }, { 769, 0, 1 }, {  32, 0, 1 } } }, -- Wolf Mantle
         { cutoff =  468, itemId =   694 }, -- Chestnut Log
         { cutoff =  471, itemId =   887 }, -- Coral Fragment
         { cutoff =  476, itemId =  4903 }, -- Dark Spirit Pact

@@ -16,7 +16,7 @@ entity.onMobSpawn = function(mob)
         chance = 75, -- "Is possible that she will not use Eagle Eye Shot at all." (guessing 75 percent)
         specials =
         {
-            {id = xi.jsa.EES_LAMIA, hpp = math.random(5, 99)},
+            { id = xi.jsa.EES_LAMIA, hpp = math.random(5, 99) },
         },
     })
 end

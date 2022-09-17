@@ -194,12 +194,12 @@ local augs =
     {
         augments =
         {
-            {aug = 1,   min = 1, max = 15 },
-            {aug = 516, min = 1, max = 5  },
-            {aug = 517, min = 1, max = 5  },
-            {aug = 518, min = 1, max = 5  },
-            {aug = 148, min = 1, max = 3  },
-            {aug = 147, min = 1, max = 1  },
+            { aug = 1,   min = 1, max = 15 },
+            { aug = 516, min = 1, max = 5  },
+            { aug = 517, min = 1, max = 5  },
+            { aug = 518, min = 1, max = 5  },
+            { aug = 148, min = 1, max = 3  },
+            { aug = 147, min = 1, max = 1  },
         },
     },
 
@@ -426,11 +426,11 @@ local augs =
     {
         augments =
         {
-            {aug = 788,  min = 2, max = 5 },
-            {aug = 177,  min = 3, max = 6 },
-            {aug = 1080, min = 1, max = 3 },
-            {aug = 45,   min = 5, max = 8 },
-            {aug = 1060, min = 2, max = 4 },
+            { aug = 788,  min = 2, max = 5 },
+            { aug = 177,  min = 3, max = 6 },
+            { aug = 1080, min = 1, max = 3 },
+            { aug = 45,   min = 5, max = 8 },
+            { aug = 1060, min = 2, max = 4 },
         },
     },
 }
@@ -438,7 +438,7 @@ local augs =
 -------------------------------------------------------------------------------
 -- This table reduces the total number of augments available by chest tier.
 -- removes total from right to left
--- so {5,4,3,2,0},
+-- so { 5,4,3,2,0 },
 -- will decrease the total augments available for tier 1 chest by 5,
 -- tier 2 by 4, tier 3 by 3 and tier 4 by 2, leaving the full total for tier 5
 -------------------------------------------------------------------------------

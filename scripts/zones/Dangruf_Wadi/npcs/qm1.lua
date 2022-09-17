@@ -15,9 +15,9 @@ entity.onTrade = function(player, npc, trade)
 
         local positions =
         {
-            {-430.330, 4.400, 115.100},
-            {-492.926, 4.337,  -7.936},
-            { -75.392, 2.531, 293.357},
+            { -430.330, 4.400, 115.100 },
+            { -492.926, 4.337,  -7.936 },
+            {  -75.392, 2.531, 293.357 },
         }
         local newPosition = npcUtil.pickNewPosition(npc:getID(), positions, true)
         npcUtil.queueMove(npc, newPosition)

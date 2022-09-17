@@ -563,7 +563,7 @@ xi.voidwalker.pos =
         [2] = { mobId=nil, pos={ 188, 22, 276 } },
         [3] = { mobId=nil, pos={ 567, 24, -6 } },
         [4] = { mobId=nil, pos={ 195, 31, -508 } },
-        [5] = { mobId=nil, pos={ -135, -4, -146} },
+        [5] = { mobId=nil, pos={ -135, -4, -146 } },
         [6] = { mobId=nil, pos={ -480, 0, -202 } },
         [7] = { mobId=nil, pos={ -690, -3, 183 } },
         [8] = { mobId=nil, pos={ -498, -4, 438 } },
