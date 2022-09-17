@@ -57,7 +57,7 @@ quest.sections =
             {
                 function(player, prevZone)
                     -- If a party is already running quest, do not start event.
-                    if GetNPCByID(17596834):getStatus() == xi.status.NORMAL  then
+                    if GetNPCByID(17596834):getStatus() ~= xi.status.NORMAL  then
                         if quest:getVar(player, 'Prog') == 0 then
                             for _, v in ipairs(player:getParty()) do
                                 quest:setVar(v, 'Prog', 1)
@@ -78,12 +78,12 @@ quest.sections =
             onEventFinish =
             {
                 [60] = function(player, csid, option, npc)
-                    local wanzo = GetNPCByID(17596834)
-
                     -- Spawn Wanzo-Unzozo
-                    wanzo:initNpcAi()
-                    wanzo:setPos(-381.0000, -12.0000, 398.0000, 1)
-                    wanzo:setStatus(xi.status.NORMAL)
+                    local wanzo = GetMobByID(17596834)
+
+                    wanzo:setPos(-381.100, -12.000, 398.000, 1)
+                    SpawnMob(17596834)
+                    player:getZone():setLocalVar("timer", os.time() + 1800)
                 end,
             },
         },
@@ -140,45 +140,9 @@ quest.sections =
             onEventFinish =
             {
                 [10014] = function(player, csid, option, npc)
-                    quest:setVar(player, 'Prog', 0)
+                    player:delQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ESCORT_FOR_HIRE)
+
                     quest:begin(player)
-                end,
-            },
-        },
-
-        [xi.zone.GARLAIGE_CITADEL] =
-        {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    -- If a party is already running quest, do not start event.
-                    if GetNPCByID(17596834):getStatus() == xi.status.NORMAL  then
-                        if quest:getVar(player, 'Prog') == 0 then
-                            for _, v in ipairs(player:getParty()) do
-                                quest:setVar(v, 'Prog', 1)
-                            end
-                            return 60
-
-                        -- Players are trying to redo escort
-                        elseif quest:getVar(player, 'Prog') == 2 then
-                            for _, v in ipairs(player:getParty()) do
-                                quest:setVar(v, 'Prog', 1)
-                            end
-                            return 60
-                        end
-                    end
-                end,
-            },
-
-            onEventFinish =
-            {
-                [60] = function(player, csid, option, npc)
-                    local wanzo = GetNPCByID(17596834)
-
-                    -- Spawn Wanzo-Unzozo
-                    wanzo:initNpcAi()
-                    wanzo:setPos(-381.0000, -12.0000, 398.0000, 1)
-                    wanzo:setStatus(xi.status.NORMAL)
                 end,
             },
         },
