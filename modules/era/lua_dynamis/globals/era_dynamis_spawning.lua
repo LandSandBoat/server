@@ -502,7 +502,7 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
         {
             ["onMobSpawn"] = {function(mob) xi.dynamis.setStatueStats(mob, mobIndex) end},
             ["onMobEngaged"] = {function(mob, target) xi.dynamis.parentOnEngaged(mob, target) end},
-            ["onMobFight"] = {function(mob) xi.dynamis.statueOnFight(mob) end},
+            ["onMobFight"] = {function(mob, target) xi.dynamis.statueOnFight(mob, target) end},
             ["onMobRoam"] = {function(mob) xi.dynamis.mobOnRoam(mob) end},
             ["mixins"] = { }
         },
@@ -1886,25 +1886,25 @@ xi.dynamis.statueOnFight = function(mob, target)
                 mob:delStatusEffect(xi.effect.REGEN)
                 mob:setHP(1)
             end
-            mob:setUntargetable(true)
-            mob:SetMagicCastingEnabled(false)
-            mob:SetAutoAttackEnabled(false)
-            mob:SetMobAbilityEnabled(false)
-            mob:addStatusEffect(xi.effect.STUN, 1, 0, 5)
-            mob:timer(1000, function(mob) -- Allows stun to tick
-                if mob:hasStatusEffect(xi.effect.STUN) then
+            if mob:getLocalVar("reset") ~= 1 then
+                mob:setLocalVar("reset", 1)
+                mob:addStatusEffect(xi.effect.STUN, 1, 0, 5)
+                mob:setUntargetable(true)
+                mob:SetMagicCastingEnabled(false)
+                mob:SetAutoAttackEnabled(false)
+                mob:SetMobAbilityEnabled(false)
+
+                mob:timer(1000, function(mob) -- Allows stun to tick
+                    mob:setTP(0)
+                    mob:SetMobAbilityEnabled(true)
                     mob:delStatusEffectSilent(xi.effect.STUN) -- Remove stun so we can do skill.
-                end
-                if mob:getAnimationSub() == 2 then
-                    mob:setTP(0)
-                    mob:SetMobAbilityEnabled(true)
-                    mob:useMobAbility(1124) -- Use Recover HP
-                elseif mob:getAnimationSub() == 3 then
-                    mob:setTP(0)
-                    mob:SetMobAbilityEnabled(true)
-                    mob:useMobAbility(1125) -- Use Recover MP
-                end
-            end)
+                    if mob:getAnimationSub() == 2 then
+                        mob:useMobAbility(1124) -- Use Recover HP
+                    elseif mob:getAnimationSub() == 3 then
+                        mob:useMobAbility(1125) -- Use Recover MP
+                    end
+                end)
+            end
         end
     end
 end
