@@ -12,7 +12,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CREEPY_CRAWLIES) ~= QUEST_AVAILABLE then
-        if npcUtil.tradeHas(trade, {{816, 3}}) then -- silk thread x3
+        if npcUtil.tradeHas(trade, { { 816, 3 } }) then -- silk thread x3
             player:addFame(xi.quest.fame_area.WINDURST, 15)
             player:startEvent(335, 600 * xi.settings.main.GIL_RATE, 816, 938, 1156)
         elseif npcUtil.tradeHas(trade, {{1156, 3}}) then -- crawler calculus x3

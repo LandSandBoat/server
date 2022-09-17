@@ -11,7 +11,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!addabytime <minutes> {player}")
+    player:PrintToPlayer("!addabytime <minutes> (player)")
 end
 
 function onTrigger(player, minutes, target)
