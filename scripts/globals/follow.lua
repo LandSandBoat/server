@@ -24,7 +24,7 @@ local onMobRoamAction
 --
 -- @param mob the mob that will be doing the following.
 -- @param leader the target to follow.
--- @param @{followOptions} options[opt] a table of configuration settings for the follow behavior.
+-- @param @{ followOptions } options[opt] a table of configuration settings for the follow behavior.
 --
 -- @field followDistance[opt=8.0] in yalms, the preferred distance to the target to stay within.
 -- @field separationAngle[opt=0.125] in radians, separation to keep from other followers. 0.125 is roughly 1 yalm separation at 8 yalms distance.
@@ -129,7 +129,7 @@ local function getAveragePos(mobsPos)
         z = z + mobPos.z
     end
 
-    return {x = x / count, y = y / count, z = z / count}
+    return { x = x / count, y = y / count, z = z / count }
 end
 
 local function getAverageWorldAngle(origin, mobsPos)

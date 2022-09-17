@@ -15,7 +15,7 @@ xi.maws = xi.maws or {}
 
 local pastMaws =
 {
---  [ZONE ID]                    = { Bit Slot in Array, Cutscenes{new to WoTg or add new, mission, warp }, Destination { Coordinates } }
+--  [ZONE ID]                    = { Bit Slot in Array, Cutscenes { new to WoTg or add new, mission, warp }, Destination { Coordinates } }
     [xi.zone.BATALLIA_DOWNS]          = { bit = 0, cs = { new = 500, warp = 910 }, dest = {  -51.486,   0.371,  436.972, 128,  84 } },
     [xi.zone.ROLANBERRY_FIELDS]       = { bit = 1, cs = { new = 500, warp = 904 }, dest = { -196.500,   7.999,  361.192, 225,  91 } },
     [xi.zone.SAUROMUGUE_CHAMPAIGN]    = { bit = 2, cs = { new = 500, warp = 904 }, dest = {  366.858,   8.545, -228.861,  95,  98 } },
@@ -90,7 +90,7 @@ xi.maws.onTrigger = function(player, npc)
         local hasFeather = player:hasKeyItem(xi.ki.PURE_WHITE_FEATHER)
         if maw.cs.new and not hasFeather then
             event = maw.cs.new
-            event_params = {maw.bit}
+            event_params = { maw.bit }
         elseif maw.cs.add then
             event = maw.cs.add
         end

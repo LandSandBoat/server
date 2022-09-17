@@ -30,7 +30,8 @@ local keyType =
 }
 
 local thiefKeyInfo =
-{--  Key                       Item ID                       Success Modifier
+{
+--   Key                       Item ID                       Success Modifier
     [keyType.THIEF_TOOLS ] = { xi.items.SET_OF_THIEFS_TOOLS, 0.1  },
     [keyType.SKELETON_KEY] = { xi.items.SKELETON_KEY,        0.2  },
     [keyType.LIVING_KEY  ] = { xi.items.LIVING_KEY,          0.15 },
@@ -1340,7 +1341,7 @@ local function spawnMimic(player, npc)
 
     if mimicId then
         GetMobByID(mimicId):setSpawn(npc:getXPos(), npc:getYPos(), npc:getZPos(), npc:getRotPos())
-        npcUtil.popFromQM(player, npc, mimicId, {claim=true, hide=5})
+        npcUtil.popFromQM(player, npc, mimicId, { claim=true, hide=5 })
         moveChest(npc, zoneId, xi.treasure.type.COFFER, true)
     else
         printf("treasure.lua MIMIC id missing in zoneId %i", zoneId)

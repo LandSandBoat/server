@@ -7,7 +7,7 @@ xi.homepoint = xi.homepoint or {}
 
 local homepointData =
 {
-    -- [Index]= [1]group(if to/from both same group, then no cost) [2]fee multiplier [3]dest{x, y, z, rot, zone}
+    -- [Index]= [1]group(if to/from both same group, then no cost) [2]fee multiplier [3]dest { x, y, z, rot, zone }
     [  0] = { group = 1, fee = 1, dest = {  -85.554,       1, -64.554,  45, 230 } }, -- Southern San d'Oria #1
     [  1] = { group = 1, fee = 1, dest = {     44.1,       2,   -34.5, 170, 230 } }, -- Southern San d'Oria #2
     [  2] = { group = 1, fee = 1, dest = {    140.5,      -2,     121,   0, 230 } }, -- Southern San d'Oria #3

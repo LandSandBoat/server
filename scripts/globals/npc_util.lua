@@ -126,10 +126,10 @@ end
     on the players' screens.
 
     point may be any of the following formats:
-    {x, y, z}
-    {x, y, z, rot}
-    {x = x, y = y, z = z}
-    {x = x, y = y, z = z, rot = r}
+    { x, y, z }
+    { x, y, z, rot }
+    { x = x, y = y, z = z }
+    { x = x, y = y, z = z, rot = r }
 ******************************************************************************* --]]
 local function doMove(x, y, z, r)
     if not r then
@@ -145,15 +145,15 @@ function npcUtil.queueMove(npc, point, delay)
         delay = 3000
     end
     if point.rot then
-        point = {point.x, point.y, point.z, point.rot}
+        point = { point.x, point.y, point.z, point.rot }
     elseif point.x then
-        point = {point.x, point.y, point.z}
+        point = { point.x, point.y, point.z }
     end
     npc:queue(delay, doMove(unpack(point)))
 end
 
 -- Picks a new position for an NPC and excluding the current position.
--- INPUT: npc = npcID, position = 2D table with coords: index, {x, y, z}
+-- INPUT: npc = npcID, position = 2D table with coords: index, { x, y, z }
 -- RETURN: table index
 function npcUtil.pickNewPosition(npcID, positionTable, allowCurrentPosition)
     local npc = GetNPCByID(npcID)
