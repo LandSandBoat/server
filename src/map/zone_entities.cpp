@@ -1362,6 +1362,11 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
                 PEntity->PPet->PMaster = PEntity->PPet;
             }
 
+            if (PEntity->PMaster != nullptr)
+            {
+                PEntity->PMaster->PPet = PEntity->PMaster;
+            }
+
             for (auto PMobIt : m_mobList)
             {
                 CMobEntity* PCurrentMob = (CMobEntity*)PMobIt.second;

@@ -54,7 +54,7 @@ end
 
 xi.dynamis.onSpawnDynaLord = function(mob)
     local zone = mob:getZone()
-    mob:setRoamFlags(xi.roamFlag.EVENT)
+    mob:setRoamFlags(xi.roamFlag.SCRIPTED)
     xi.dynamis.setMegaBossStats(mob)
     mob:setMod(xi.mod.SLEEPRES, 100)
     mob:setMod(xi.mod.BINDRES, 100)
@@ -85,7 +85,7 @@ end
 xi.dynamis.onSpawnYing = function(mob)
     local zone = mob:getZone()
     local mainLord = zone:getLocalVar("179")
-    mob:setRoamFlags(xi.roamFlag.EVENT)
+    mob:setRoamFlags(xi.roamFlag.SCRIPTED)
     xi.dynamis.setNMStats(mob)
     if mainLord ~= 0 then
         local dynaLord = GetMobByID(mainLord)
@@ -100,7 +100,7 @@ end
 xi.dynamis.onSpawnYang = function(mob)
     local zone = mob:getZone()
     local mainLord = zone:getLocalVar("179")
-    mob:setRoamFlags(xi.roamFlag.EVENT)
+    mob:setRoamFlags(xi.roamFlag.SCRIPTED)
     xi.dynamis.setNMStats(mob)
     if mainLord ~= 0 then
         local dynaLord = GetMobByID(mainLord)
@@ -370,7 +370,7 @@ xi.dynamis.animatedInfo =
     --     ["Spells"] =
     --     {
     --         [spell1] = {chance, xi.effect.EFFECT},
-    --         [spell2] = {chance, xi.effect.EFFECT}, 
+    --         [spell2] = {chance, xi.effect.EFFECT},
     --     },
     -- },
     -- xi.effect.KO is used for if the spell is not enhancing.
@@ -535,7 +535,7 @@ xi.dynamis.animatedInfo =
 }
 
 xi.dynamis.onSpawnAnimated = function(mob)
-    mob:setRoamFlags(xi.roamFlag.EVENT)
+    mob:setRoamFlags(xi.roamFlag.SCRIPTED)
     xi.dynamis.setAnimatedWeaponStats(mob)
 end
 
@@ -572,7 +572,7 @@ xi.dynamis.onFightAnimated = function(mob, target)
 end
 
 xi.dynamis.onSpawnSatellite = function(mob)
-    mob:setRoamFlags(xi.roamFlag.EVENT)
+    mob:setRoamFlags(xi.roamFlag.SCRIPTED)
     xi.dynamis.setNMStats(mob)
     mob:setAnimationSub(math.random(5,6))
 end

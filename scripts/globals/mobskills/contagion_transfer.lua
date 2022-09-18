@@ -23,7 +23,7 @@ local badEffects =
     xi.effect.PARALYSIS,
     xi.effect.BLINDNESS,
     xi.effect.SILENCE,
-    -- xi.effect.PETRIFICATION, -- Causes crash when absorbed
+    xi.effect.PETRIFICATION,
     xi.effect.DISEASE,
     xi.effect.CURSE_I,
     xi.effect.STUN,
@@ -201,14 +201,22 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
             if count < 8 and v ~= nil then
                 for y = 1, #badEffects do
                     if target:hasStatusEffect(badEffects[y]) then
-                        mob:addStatusEffect(badEffects[y], power, 0, 60)
-                        target:delStatusEffect(badEffects[y])
-                        count = count + 1
+                        if badEffects[y] == xi.effect.PETRIFICATION then
+                            mob:timer(2000, function(mobArg)
+                                mob:addStatusEffect(badEffects[y], power, 3, 60)
+                                target:delStatusEffect(badEffects[y])
+                                count = count + 1
+                            end)
+                        else
+                            mob:addStatusEffect(badEffects[y], power, 3, 60)
+                            target:delStatusEffect(badEffects[y])
+                            count = count + 1
+                        end
                     end
                 end
                 for y = 1, #goodEffects do
                     if target:hasStatusEffect(goodEffects[y]) then
-                        mob:addStatusEffect(goodEffects[y], power, 0, 60)
+                        mob:addStatusEffect(goodEffects[y], power, 3, 60)
                         target:delStatusEffect(goodEffects[y])
                         count = count + 1
                     end

@@ -10302,12 +10302,12 @@ INSERT INTO `mob_groups` VALUES (38,1602,146,'Gilagoge_Tlugvi',0,128,0,11500,0,7
 INSERT INTO `mob_groups` VALUES (39,1747,146,'Goga_Tlugvi',0,128,0,9000,0,75,76,0);
 INSERT INTO `mob_groups` VALUES (40,4077,146,'Ulagohvsdi_Tlugvi',0,128,0,7500,0,75,76,0);
 INSERT INTO `mob_groups` VALUES (41,1748,146,'Gola_Tlugvi',0,128,0,8500,0,75,76,0);
-INSERT INTO `mob_groups` VALUES (42,2260,146,'King_of_Cups',0,128,0,17500,3000,79,79,0);
-INSERT INTO `mob_groups` VALUES (43,2258,146,'King_of_Batons',0,128,0,17500,3000,79,79,0);
-INSERT INTO `mob_groups` VALUES (44,2261,146,'King_of_Swords',0,128,0,17500,3000,79,79,0);
-INSERT INTO `mob_groups` VALUES (45,2259,146,'King_of_Coins',0,128,0,17500,3000,79,79,0);
-INSERT INTO `mob_groups` VALUES (46,3285,146,'Queen_of_Cups',0,128,2064,12000,3000,75,75,0);
-INSERT INTO `mob_groups` VALUES (47,3283,146,'Queen_of_Batons',0,128,0,8900,3000,75,75,0);
+INSERT INTO `mob_groups` VALUES (42,2260,146,'King_of_Cups',0,128,0,9000,3000,79,79,0);
+INSERT INTO `mob_groups` VALUES (43,2258,146,'King_of_Batons',0,128,0,9000,3000,79,79,0);
+INSERT INTO `mob_groups` VALUES (44,2261,146,'King_of_Swords',0,128,0,9000,3000,79,79,0);
+INSERT INTO `mob_groups` VALUES (45,2259,146,'King_of_Coins',0,128,0,9000,3000,79,79,0);
+INSERT INTO `mob_groups` VALUES (46,3285,146,'Queen_of_Cups',0,128,2064,5000,3000,75,75,0);
+INSERT INTO `mob_groups` VALUES (47,3283,146,'Queen_of_Batons',0,128,0,5000,3000,75,75,0);
 INSERT INTO `mob_groups` VALUES (48,1532,146,'Giant_Moa',0,128,0,0,0,78,79,0);
 INSERT INTO `mob_groups` VALUES (49,6870,146,'Kutkha',0,128,0,0,0,0,0,0);
 INSERT INTO `mob_groups` VALUES (50,6871,146,'Kutkhas_Get',0,128,0,0,0,0,0,0);
@@ -12991,6 +12991,7 @@ INSERT INTO `mob_groups` VALUES (45,6544,200,'Fallen_Evacuee_war',300,0,809,0,0,
 INSERT INTO `mob_groups` VALUES (46,6547,200,'Fallen_Officer_war',300,0,814,0,0,52,55,0);
 INSERT INTO `mob_groups` VALUES (47,6548,200,'Fallen_Soldier_war',300,0,815,0,0,47,49,0);
 INSERT INTO `mob_groups` VALUES (48,6891,200,'Mephitas',0,128,0,0,0,99,99,0);
+INSERT INTO `mob_groups` VALUES (49,7058,200,'Wanzo-Unzozo',0,128,0,0,0,45,45,0);
 
 -- ------------------------------------------------------------
 -- Cloister_of_Gales (Zone 201)
