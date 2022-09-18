@@ -17,7 +17,7 @@ xi.jeuno.helpers = xi.jeuno.helpers or {}
 -- The params parameter stores the tunable information needed to perform the proper quest in the chain.
 xi.jeuno.helpers.GobbiebagQuest = {}
 
-setmetatable(xi.jeuno.helpers.GobbiebagQuest, {__index = Quest} )
+setmetatable(xi.jeuno.helpers.GobbiebagQuest, { __index = Quest } )
 xi.jeuno.helpers.GobbiebagQuest.__index = xi.jeuno.helpers.GobbiebagQuest
 
 function xi.jeuno.helpers.GobbiebagQuest:new(params)

@@ -51,7 +51,7 @@ mission.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, {{ xi.items.CLUMP_OF_BEE_POLLEN, 3 }}) and
+                        npcUtil.tradeHasExactly(trade, { { xi.items.CLUMP_OF_BEE_POLLEN, 3 } }) and
                         player:getMissionStatus(mission.areaId) == 1
                     then
                         return mission:progressEvent(178, 0, 0, 0, 0, 0, 0, player:hasJob(0) and 1 or 0)
@@ -75,7 +75,7 @@ mission.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, {{ xi.items.MANDRAGORA_DEWDROP, 3 }}) and
+                        npcUtil.tradeHasExactly(trade, { { xi.items.MANDRAGORA_DEWDROP, 3 } }) and
                         player:getMissionStatus(mission.areaId) == 2
                     then
                         return mission:progressEvent(370, 0, 0, 0, 0, 0, 0, player:hasJob(0) and 1 or 0)

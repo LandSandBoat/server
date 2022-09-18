@@ -69,7 +69,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 240 then
         player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.FATHER_FIGURE)
     elseif csid == 241 then
-        if npcUtil.completeQuest(player, xi.quest.log_id.BASTOK, xi.quest.id.bastok.FATHER_FIGURE, {gil=2200, fame=120}) then
+        if npcUtil.completeQuest(player, xi.quest.log_id.BASTOK, xi.quest.id.bastok.FATHER_FIGURE, { gil=2200, fame=120 }) then
             player:confirmTrade()
         end
     end

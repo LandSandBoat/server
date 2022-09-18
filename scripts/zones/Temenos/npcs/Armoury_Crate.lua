@@ -11,1247 +11,1487 @@ local entity = {}
 
 local loot =
 {
-    -- northern tower floor 1
     [1299] =
     {
+        -- northern tower floor 1
         [1] =
         {
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 1000},
-                {itemid = 1875, droprate = 1000},
+                { itemid =    0, droprate = 1000 },
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 1000},
-                {itemid = 1875, droprate = 1000},
+                { itemid =    0, droprate = 1000 },
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 250},
-                {itemid = 1954, droprate = 159},
-                {itemid = 1940, droprate = 146},
-                {itemid = 1932, droprate =  85},
-                {itemid = 1956, droprate = 171},
-                {itemid = 1934, droprate = 110},
-                {itemid = 2658, droprate = 220},
-                {itemid = 2716, droprate =  98},
+                { itemid =    0, droprate = 250 },
+                { itemid = 1954, droprate = 159 },
+                { itemid = 1940, droprate = 146 },
+                { itemid = 1932, droprate =  85 },
+                { itemid = 1956, droprate = 171 },
+                { itemid = 1934, droprate = 110 },
+                { itemid = 2658, droprate = 220 },
+                { itemid = 2716, droprate =  98 },
             },
+
             {
-                {itemid =    0, droprate = 250},
-                {itemid = 1954, droprate = 159},
-                {itemid = 1940, droprate = 146},
-                {itemid = 1932, droprate =  85},
-                {itemid = 1956, droprate = 171},
-                {itemid = 1934, droprate = 110},
-                {itemid = 2658, droprate = 220},
-                {itemid = 2716, droprate =  98},
+                { itemid =    0, droprate = 250 },
+                { itemid = 1954, droprate = 159 },
+                { itemid = 1940, droprate = 146 },
+                { itemid = 1932, droprate =  85 },
+                { itemid = 1956, droprate = 171 },
+                { itemid = 1934, droprate = 110 },
+                { itemid = 2658, droprate = 220 },
+                { itemid = 2716, droprate =  98 },
             },
         },
-    -- northern tower floor 2
+
+        -- northern tower floor 2
         [2] =
         {
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 1000},
-                {itemid = 1875, droprate = 1000},
+                { itemid =    0, droprate = 1000 },
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 1000},
-                {itemid = 1875, droprate = 1000},
+                { itemid =    0, droprate = 1000 },
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 400},
-                {itemid = 1932, droprate = 333},
-                {itemid = 1954, droprate = 200},
-                {itemid = 1950, droprate = 100},
-                {itemid = 1940, droprate =  90},
-                {itemid = 1942, droprate =  70},
-                {itemid = 1934, droprate =  90},
-                {itemid = 1936, droprate = 100},
-                {itemid = 1958, droprate =  90},
-                {itemid = 2656, droprate =  67},
-                {itemid = 1956, droprate = 167},
+                { itemid =    0, droprate = 400 },
+                { itemid = 1932, droprate = 333 },
+                { itemid = 1954, droprate = 200 },
+                { itemid = 1950, droprate = 100 },
+                { itemid = 1940, droprate =  90 },
+                { itemid = 1942, droprate =  70 },
+                { itemid = 1934, droprate =  90 },
+                { itemid = 1936, droprate = 100 },
+                { itemid = 1958, droprate =  90 },
+                { itemid = 2656, droprate =  67 },
+                { itemid = 1956, droprate = 167 },
             },
+
             {
-                {itemid =    0, droprate = 400},
-                {itemid = 1932, droprate = 333},
-                {itemid = 1954, droprate = 200},
-                {itemid = 1950, droprate = 100},
-                {itemid = 1940, droprate =  90},
-                {itemid = 1942, droprate =  70},
-                {itemid = 1934, droprate =  90},
-                {itemid = 1936, droprate = 100},
-                {itemid = 1958, droprate =  90},
-                {itemid = 2656, droprate =  67},
-                {itemid = 1956, droprate = 167},
+                { itemid =    0, droprate = 400 },
+                { itemid = 1932, droprate = 333 },
+                { itemid = 1954, droprate = 200 },
+                { itemid = 1950, droprate = 100 },
+                { itemid = 1940, droprate =  90 },
+                { itemid = 1942, droprate =  70 },
+                { itemid = 1934, droprate =  90 },
+                { itemid = 1936, droprate = 100 },
+                { itemid = 1958, droprate =  90 },
+                { itemid = 2656, droprate =  67 },
+                { itemid = 1956, droprate = 167 },
             },
         },
-    -- northern tower floor 3
+
+        -- northern tower floor 3
         [3] =
         {
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 1000},
-                {itemid = 1875, droprate = 1000},
+                { itemid =    0, droprate = 1000 },
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 1000},
-                {itemid = 1875, droprate = 1000},
+                { itemid =    0, droprate = 1000 },
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1956, droprate =  27},
-                {itemid = 1932, droprate = 324},
-                {itemid = 1950, droprate =  80},
-                {itemid = 1934, droprate = 189},
-                {itemid = 1930, droprate =  50},
-                {itemid = 1940, droprate =  27},
-                {itemid = 1936, droprate =  81},
-                {itemid = 1944, droprate =  80},
-                {itemid = 1958, droprate =  81},
-                {itemid = 2658, droprate = 270},
-                {itemid = 2714, droprate = 108},
+                { itemid = 1956, droprate =  27 },
+                { itemid = 1932, droprate = 324 },
+                { itemid = 1950, droprate =  80 },
+                { itemid = 1934, droprate = 189 },
+                { itemid = 1930, droprate =  50 },
+                { itemid = 1940, droprate =  27 },
+                { itemid = 1936, droprate =  81 },
+                { itemid = 1944, droprate =  80 },
+                { itemid = 1958, droprate =  81 },
+                { itemid = 2658, droprate = 270 },
+                { itemid = 2714, droprate = 108 },
             },
+
             {
-                {itemid =    0, droprate = 300},
-                {itemid = 1956, droprate =  27},
-                {itemid = 1932, droprate = 324},
-                {itemid = 1950, droprate =  80},
-                {itemid = 1934, droprate = 189},
-                {itemid = 1930, droprate =  50},
-                {itemid = 1940, droprate =  27},
-                {itemid = 1936, droprate =  81},
-                {itemid = 1944, droprate =  80},
-                {itemid = 1958, droprate =  81},
-                {itemid = 2658, droprate = 270},
-                {itemid = 2714, droprate = 108},
+                { itemid =    0, droprate = 300 },
+                { itemid = 1956, droprate =  27 },
+                { itemid = 1932, droprate = 324 },
+                { itemid = 1950, droprate =  80 },
+                { itemid = 1934, droprate = 189 },
+                { itemid = 1930, droprate =  50 },
+                { itemid = 1940, droprate =  27 },
+                { itemid = 1936, droprate =  81 },
+                { itemid = 1944, droprate =  80 },
+                { itemid = 1958, droprate =  81 },
+                { itemid = 2658, droprate = 270 },
+                { itemid = 2714, droprate = 108 },
             },
         },
-    -- northern tower floor 4
+
+        -- northern tower floor 4
         [4] =
         {
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 1000},
-                {itemid = 1875, droprate = 1000},
+                { itemid =    0, droprate = 1000 },
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 1000},
-                {itemid = 1875, droprate = 1000},
+                { itemid =    0, droprate = 1000 },
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 300},
-                {itemid = 1942, droprate =  90},
-                {itemid = 1934, droprate = 435},
-                {itemid = 1956, droprate =  80},
-                {itemid = 1940, droprate = 174},
-                {itemid = 1958, droprate =  87},
-                {itemid = 1954, droprate =  90},
-                {itemid = 1936, droprate =  87},
-                {itemid = 1930, droprate =  43},
-                {itemid = 2656, droprate =  27},
-                {itemid = 2658, droprate = 261},
+                { itemid =    0, droprate = 300 },
+                { itemid = 1942, droprate =  90 },
+                { itemid = 1934, droprate = 435 },
+                { itemid = 1956, droprate =  80 },
+                { itemid = 1940, droprate = 174 },
+                { itemid = 1958, droprate =  87 },
+                { itemid = 1954, droprate =  90 },
+                { itemid = 1936, droprate =  87 },
+                { itemid = 1930, droprate =  43 },
+                { itemid = 2656, droprate =  27 },
+                { itemid = 2658, droprate = 261 },
             },
+
             {
-                {itemid =    0, droprate = 300},
-                {itemid = 1942, droprate =  90},
-                {itemid = 1934, droprate = 435},
-                {itemid = 1956, droprate =  80},
-                {itemid = 1940, droprate = 174},
-                {itemid = 1958, droprate =  87},
-                {itemid = 1954, droprate =  90},
-                {itemid = 1936, droprate =  87},
-                {itemid = 1930, droprate =  43},
-                {itemid = 2656, droprate =  27},
-                {itemid = 2658, droprate = 261},
+                { itemid =    0, droprate = 300 },
+                { itemid = 1942, droprate =  90 },
+                { itemid = 1934, droprate = 435 },
+                { itemid = 1956, droprate =  80 },
+                { itemid = 1940, droprate = 174 },
+                { itemid = 1958, droprate =  87 },
+                { itemid = 1954, droprate =  90 },
+                { itemid = 1936, droprate =  87 },
+                { itemid = 1930, droprate =  43 },
+                { itemid = 2656, droprate =  27 },
+                { itemid = 2658, droprate = 261 },
             },
         },
-    -- northern tower floor 5
+
+        -- northern tower floor 5
         [5] =
         {
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 1000},
-                {itemid = 1875, droprate = 1000},
+                { itemid =    0, droprate = 1000 },
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 1000},
-                {itemid = 1875, droprate = 1000},
+                { itemid =    0, droprate = 1000 },
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 200},
-                {itemid = 1954, droprate =  67},
-                {itemid = 1940, droprate = 353},
-                {itemid = 1936, droprate =  87},
-                {itemid = 1956, droprate = 110},
-                {itemid = 1958, droprate =  87},
-                {itemid = 1942, droprate =  50},
-                {itemid = 1950, droprate =  60},
-                {itemid = 1932, droprate =  59},
-                {itemid = 2716, droprate = 100},
-                {itemid = 2714, droprate = 110},
+                { itemid =    0, droprate = 200 },
+                { itemid = 1954, droprate =  67 },
+                { itemid = 1940, droprate = 353 },
+                { itemid = 1936, droprate =  87 },
+                { itemid = 1956, droprate = 110 },
+                { itemid = 1958, droprate =  87 },
+                { itemid = 1942, droprate =  50 },
+                { itemid = 1950, droprate =  60 },
+                { itemid = 1932, droprate =  59 },
+                { itemid = 2716, droprate = 100 },
+                { itemid = 2714, droprate = 110 },
             },
+
             {
-                {itemid =    0, droprate = 200},
-                {itemid = 1954, droprate =  67},
-                {itemid = 1940, droprate = 353},
-                {itemid = 1936, droprate =  87},
-                {itemid = 1956, droprate = 110},
-                {itemid = 1958, droprate =  87},
-                {itemid = 1942, droprate =  50},
-                {itemid = 1950, droprate =  60},
-                {itemid = 1932, droprate =  59},
-                {itemid = 2716, droprate = 100},
-                {itemid = 2714, droprate = 110},
+                { itemid =    0, droprate = 200 },
+                { itemid = 1954, droprate =  67 },
+                { itemid = 1940, droprate = 353 },
+                { itemid = 1936, droprate =  87 },
+                { itemid = 1956, droprate = 110 },
+                { itemid = 1958, droprate =  87 },
+                { itemid = 1942, droprate =  50 },
+                { itemid = 1950, droprate =  60 },
+                { itemid = 1932, droprate =  59 },
+                { itemid = 2716, droprate = 100 },
+                { itemid = 2714, droprate = 110 },
             },
         },
     -- northern tower floor 6
         [6] =
         {
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 1000},
-                {itemid = 1875, droprate = 1000},
+                { itemid =    0, droprate = 1000 },
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 1000},
-                {itemid = 1875, droprate = 1000},
+                { itemid =    0, droprate = 1000 },
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1954, droprate = 263},
-                {itemid = 1932, droprate =  59},
-                {itemid = 1942, droprate =  53},
-                {itemid = 1934, droprate =  60},
-                {itemid = 1956, droprate = 526},
-                {itemid = 1930, droprate =  60},
-                {itemid = 1936, droprate =  53},
-                {itemid = 1950, droprate = 158},
-                {itemid = 2716, droprate = 105},
+                { itemid = 1954, droprate = 263 },
+                { itemid = 1932, droprate =  59 },
+                { itemid = 1942, droprate =  53 },
+                { itemid = 1934, droprate =  60 },
+                { itemid = 1956, droprate = 526 },
+                { itemid = 1930, droprate =  60 },
+                { itemid = 1936, droprate =  53 },
+                { itemid = 1950, droprate = 158 },
+                { itemid = 2716, droprate = 105 },
             },
+
             {
-                {itemid =    0, droprate = 300},
-                {itemid = 1954, droprate = 263},
-                {itemid = 1932, droprate =  59},
-                {itemid = 1942, droprate =  53},
-                {itemid = 1934, droprate =  60},
-                {itemid = 1956, droprate = 526},
-                {itemid = 1930, droprate =  60},
-                {itemid = 1936, droprate =  53},
-                {itemid = 1950, droprate = 158},
-                {itemid = 2716, droprate = 105},
+                { itemid =    0, droprate = 300 },
+                { itemid = 1954, droprate = 263 },
+                { itemid = 1932, droprate =  59 },
+                { itemid = 1942, droprate =  53 },
+                { itemid = 1934, droprate =  60 },
+                { itemid = 1956, droprate = 526 },
+                { itemid = 1930, droprate =  60 },
+                { itemid = 1936, droprate =  53 },
+                { itemid = 1950, droprate = 158 },
+                { itemid = 2716, droprate = 105 },
             },
         },
-    -- northern tower floor 7
+
+        -- northern tower floor 7
         [7] =
         {
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1956, droprate = 240},
-                {itemid = 1932, droprate = 120},
-                {itemid = 1940, droprate = 200},
-                {itemid = 1934, droprate =  40},
-                {itemid = 1954, droprate = 120},
-                {itemid = 2658, droprate = 200},
-                {itemid = 2716, droprate =  80},
+                { itemid = 1956, droprate = 240 },
+                { itemid = 1932, droprate = 120 },
+                { itemid = 1940, droprate = 200 },
+                { itemid = 1934, droprate =  40 },
+                { itemid = 1954, droprate = 120 },
+                { itemid = 2658, droprate = 200 },
+                { itemid = 2716, droprate =  80 },
             },
+
             {
-                {itemid = 1904, droprate = 1000},
+                { itemid = 1904, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 100},
-                {itemid = 2127, droprate =  55},
+                { itemid =    0, droprate = 100 },
+                { itemid = 2127, droprate =  55 },
             },
         },
     },
-    -- western tower floor 1
+
     [1298] =
     {
+        -- western tower floor 1
         [1] =
         {
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 1000},
-                {itemid = 1875, droprate = 1000},
+                { itemid =    0, droprate = 1000 },
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 1000},
-                {itemid = 1875, droprate = 1000},
+                { itemid =    0, droprate = 1000 },
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 1000},
-                {itemid = 1875, droprate = 1000},
+                { itemid =    0, droprate = 1000 },
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 100},
-                {itemid = 1948, droprate = 172},
-                {itemid = 1938, droprate = 138},
-                {itemid = 1952, droprate = 138},
-                {itemid = 1958, droprate = 207},
-                {itemid = 1930, droprate = 241},
-                {itemid = 2656, droprate = 172},
+                { itemid =    0, droprate = 100 },
+                { itemid = 1948, droprate = 172 },
+                { itemid = 1938, droprate = 138 },
+                { itemid = 1952, droprate = 138 },
+                { itemid = 1958, droprate = 207 },
+                { itemid = 1930, droprate = 241 },
+                { itemid = 2656, droprate = 172 },
             },
         },
-    -- western tower floor 2
+
+        -- western tower floor 2
         [2] =
         {
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 1000},
-                {itemid = 1875, droprate = 1000},
+                { itemid =    0, droprate = 1000 },
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1948, droprate = 179},
-                {itemid = 1938, droprate = 571},
-                {itemid = 1944, droprate =  71},
-                {itemid = 1952, droprate = 179},
-                {itemid = 1946, droprate = 120},
-                {itemid = 1934, droprate =  71},
-                {itemid = 1930, droprate = 143},
-                {itemid = 2660, droprate = 143},
+                { itemid = 1948, droprate = 179 },
+                { itemid = 1938, droprate = 571 },
+                { itemid = 1944, droprate =  71 },
+                { itemid = 1952, droprate = 179 },
+                { itemid = 1946, droprate = 120 },
+                { itemid = 1934, droprate =  71 },
+                { itemid = 1930, droprate = 143 },
+                { itemid = 2660, droprate = 143 },
             },
+
             {
-                {itemid =    0, droprate = 200},
-                {itemid = 1948, droprate = 179},
-                {itemid = 1938, droprate = 571},
-                {itemid = 1944, droprate =  71},
-                {itemid = 1952, droprate = 179},
-                {itemid = 1946, droprate = 120},
-                {itemid = 1934, droprate =  71},
-                {itemid = 1930, droprate = 143},
-                {itemid = 2660, droprate = 143},
+                { itemid =    0, droprate = 200 },
+                { itemid = 1948, droprate = 179 },
+                { itemid = 1938, droprate = 571 },
+                { itemid = 1944, droprate =  71 },
+                { itemid = 1952, droprate = 179 },
+                { itemid = 1946, droprate = 120 },
+                { itemid = 1934, droprate =  71 },
+                { itemid = 1930, droprate = 143 },
+                { itemid = 2660, droprate = 143 },
             },
         },
-    -- western tower floor 3
+
+        -- western tower floor 3
         [3] =
         {
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 1000},
-                {itemid = 1875, droprate = 1000},
+                { itemid =    0, droprate = 1000 },
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 1000},
-                {itemid = 1875, droprate = 1000},
+                { itemid =    0, droprate = 1000 },
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 1000},
-                {itemid = 1875, droprate = 1000},
+                { itemid =    0, droprate = 1000 },
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1948, droprate = 536},
-                {itemid = 1952, droprate = 107},
-                {itemid = 1938, droprate =  60},
-                {itemid = 1934, droprate = 110},
-                {itemid = 1930, droprate =  80},
-                {itemid = 2660, droprate =  90},
-                {itemid = 1946, droprate =  71},
-                {itemid = 1944, droprate = 103},
-                {itemid = 1958, droprate = 160},
-                {itemid = 1954, droprate =  36},
-                {itemid = 2656, droprate = 250},
-                {itemid = 2716, droprate = 350},
+                { itemid = 1948, droprate = 536 },
+                { itemid = 1952, droprate = 107 },
+                { itemid = 1938, droprate =  60 },
+                { itemid = 1934, droprate = 110 },
+                { itemid = 1930, droprate =  80 },
+                { itemid = 2660, droprate =  90 },
+                { itemid = 1946, droprate =  71 },
+                { itemid = 1944, droprate = 103 },
+                { itemid = 1958, droprate = 160 },
+                { itemid = 1954, droprate =  36 },
+                { itemid = 2656, droprate = 250 },
+                { itemid = 2716, droprate = 350 },
             },
+
             {
-                {itemid =    0, droprate = 750},
-                {itemid = 1948, droprate = 536},
-                {itemid = 1952, droprate = 107},
-                {itemid = 1938, droprate =  60},
-                {itemid = 1934, droprate = 110},
-                {itemid = 1930, droprate =  80},
-                {itemid = 2660, droprate =  90},
-                {itemid = 1946, droprate =  71},
-                {itemid = 1944, droprate = 103},
-                {itemid = 1958, droprate = 160},
-                {itemid = 1954, droprate =  36},
-                {itemid = 2656, droprate = 250},
-                {itemid = 2716, droprate = 350},
+                { itemid =    0, droprate = 750 },
+                { itemid = 1948, droprate = 536 },
+                { itemid = 1952, droprate = 107 },
+                { itemid = 1938, droprate =  60 },
+                { itemid = 1934, droprate = 110 },
+                { itemid = 1930, droprate =  80 },
+                { itemid = 2660, droprate =  90 },
+                { itemid = 1946, droprate =  71 },
+                { itemid = 1944, droprate = 103 },
+                { itemid = 1958, droprate = 160 },
+                { itemid = 1954, droprate =  36 },
+                { itemid = 2656, droprate = 250 },
+                { itemid = 2716, droprate = 350 },
             },
         },
-    -- western tower floor 4
+
+        -- western tower floor 4
         [4] =
         {
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 1000},
-                {itemid = 1875, droprate = 1000},
+                { itemid =    0, droprate = 1000 },
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 1000},
-                {itemid = 1875, droprate = 1000},
+                { itemid =    0, droprate = 1000 },
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1952, droprate = 533},
-                {itemid = 1946, droprate =  90},
-                {itemid = 1938, droprate = 133},
-                {itemid = 1932, droprate =  90},
-                {itemid = 1958, droprate =  10},
-                {itemid = 1954, droprate = 133},
-                {itemid = 1944, droprate = 133},
-                {itemid = 1930, droprate = 133},
-                {itemid = 2660, droprate =  33},
+                { itemid = 1952, droprate = 533 },
+                { itemid = 1946, droprate =  90 },
+                { itemid = 1938, droprate = 133 },
+                { itemid = 1932, droprate =  90 },
+                { itemid = 1958, droprate =  10 },
+                { itemid = 1954, droprate = 133 },
+                { itemid = 1944, droprate = 133 },
+                { itemid = 1930, droprate = 133 },
+                { itemid = 2660, droprate =  33 },
             },
+
             {
-                {itemid =    0, droprate = 500},
-                {itemid = 1952, droprate = 533},
-                {itemid = 1946, droprate =  90},
-                {itemid = 1938, droprate = 133},
-                {itemid = 1932, droprate =  90},
-                {itemid = 1958, droprate =  10},
-                {itemid = 1954, droprate = 133},
-                {itemid = 1944, droprate = 133},
-                {itemid = 1930, droprate = 133},
-                {itemid = 2660, droprate =  33},
+                { itemid =    0, droprate = 500 },
+                { itemid = 1952, droprate = 533 },
+                { itemid = 1946, droprate =  90 },
+                { itemid = 1938, droprate = 133 },
+                { itemid = 1932, droprate =  90 },
+                { itemid = 1958, droprate =  10 },
+                { itemid = 1954, droprate = 133 },
+                { itemid = 1944, droprate = 133 },
+                { itemid = 1930, droprate = 133 },
+                { itemid = 2660, droprate =  33 },
             },
         },
-    -- western tower floor 5
+
+        -- western tower floor 5
         [5] =
         {
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 1000},
-                {itemid = 1875, droprate = 1000},
+                { itemid =    0, droprate = 1000 },
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 1000},
-                {itemid = 1875, droprate = 1000},
+                { itemid =    0, droprate = 1000 },
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1954, droprate =  59},
-                {itemid = 1930, droprate = 294},
-                {itemid = 1946, droprate =  59},
-                {itemid = 1934, droprate =  78},
-                {itemid = 1958, droprate = 176},
-                {itemid = 1938, droprate =  59},
-                {itemid = 1948, droprate =  25},
-                {itemid = 1932, droprate = 118},
-                {itemid = 2656, droprate = 294},
+                { itemid = 1954, droprate =  59 },
+                { itemid = 1930, droprate = 294 },
+                { itemid = 1946, droprate =  59 },
+                { itemid = 1934, droprate =  78 },
+                { itemid = 1958, droprate = 176 },
+                { itemid = 1938, droprate =  59 },
+                { itemid = 1948, droprate =  25 },
+                { itemid = 1932, droprate = 118 },
+                { itemid = 2656, droprate = 294 },
             },
+
             {
-                {itemid =    0, droprate = 200},
-                {itemid = 1954, droprate =  59},
-                {itemid = 1930, droprate = 294},
-                {itemid = 1946, droprate =  59},
-                {itemid = 1934, droprate =  78},
-                {itemid = 1958, droprate = 176},
-                {itemid = 1938, droprate =  59},
-                {itemid = 1948, droprate =  25},
-                {itemid = 1932, droprate = 118},
-                {itemid = 2656, droprate = 294},
+                { itemid =    0, droprate = 200 },
+                { itemid = 1954, droprate =  59 },
+                { itemid = 1930, droprate = 294 },
+                { itemid = 1946, droprate =  59 },
+                { itemid = 1934, droprate =  78 },
+                { itemid = 1958, droprate = 176 },
+                { itemid = 1938, droprate =  59 },
+                { itemid = 1948, droprate =  25 },
+                { itemid = 1932, droprate = 118 },
+                { itemid = 2656, droprate = 294 },
             },
         },
-    -- western tower floor 6
+
+        -- western tower floor 6
         [6] =
         {
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 1000},
-                {itemid = 1875, droprate = 1000},
+                { itemid =    0, droprate = 1000 },
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1954, droprate = 200},
-                {itemid = 1958, droprate = 400},
-                {itemid = 1948, droprate = 100},
-                {itemid = 1934, droprate = 150},
-                {itemid = 1932, droprate =  50},
-                {itemid = 1930, droprate =  60},
-                {itemid = 1938, droprate = 200},
-                {itemid = 1944, droprate =  60},
-                {itemid = 1952, droprate = 200},
+                { itemid = 1954, droprate = 200 },
+                { itemid = 1958, droprate = 400 },
+                { itemid = 1948, droprate = 100 },
+                { itemid = 1934, droprate = 150 },
+                { itemid = 1932, droprate =  50 },
+                { itemid = 1930, droprate =  60 },
+                { itemid = 1938, droprate = 200 },
+                { itemid = 1944, droprate =  60 },
+                { itemid = 1952, droprate = 200 },
             },
+
             {
-                {itemid =    0, droprate = 400},
-                {itemid = 1954, droprate = 200},
-                {itemid = 1958, droprate = 400},
-                {itemid = 1948, droprate = 100},
-                {itemid = 1934, droprate = 150},
-                {itemid = 1932, droprate =  50},
-                {itemid = 1930, droprate =  60},
-                {itemid = 1938, droprate = 200},
-                {itemid = 1944, droprate =  60},
-                {itemid = 1952, droprate = 200},
+                { itemid =    0, droprate = 400 },
+                { itemid = 1954, droprate = 200 },
+                { itemid = 1958, droprate = 400 },
+                { itemid = 1948, droprate = 100 },
+                { itemid = 1934, droprate = 150 },
+                { itemid = 1932, droprate =  50 },
+                { itemid = 1930, droprate =  60 },
+                { itemid = 1938, droprate = 200 },
+                { itemid = 1944, droprate =  60 },
+                { itemid = 1952, droprate = 200 },
             },
         },
-    -- western tower floor 7
+
+        -- western tower floor 7
         [7] =
         {
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 1000},
-                {itemid = 1875, droprate = 1000},
+                { itemid =    0, droprate = 1000 },
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1948, droprate =  36},
-                {itemid = 1952, droprate = 143},
-                {itemid = 1930, droprate = 143},
-                {itemid = 1958, droprate = 214},
-                {itemid = 1938, droprate =  71},
-                {itemid = 2656, droprate = 321},
+                { itemid = 1948, droprate =  36 },
+                { itemid = 1952, droprate = 143 },
+                { itemid = 1930, droprate = 143 },
+                { itemid = 1958, droprate = 214 },
+                { itemid = 1938, droprate =  71 },
+                { itemid = 2656, droprate = 321 },
             },
+
             {
-                {itemid = 1906, droprate = 1000},
+                { itemid = 1906, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 100},
-                {itemid = 2127, droprate =  55},
+                { itemid =    0, droprate = 100 },
+                { itemid = 2127, droprate =  55 },
             },
         },
     },
+
     -- eastern tower floor 1
     [1300] =
     {
         [1] =
         {
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 1000},
-                {itemid = 1875, droprate = 1000},
+                { itemid =    0, droprate = 1000 },
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 1000},
-                {itemid = 1875, droprate = 1000},
+                { itemid =    0, droprate = 1000 },
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1944, droprate =  65},
-                {itemid = 1936, droprate =  97},
-                {itemid = 1946, droprate =  40},
-                {itemid = 1942, droprate =  95},
-                {itemid = 2660, droprate = 194},
-                {itemid = 2714, droprate =  32},
-                {itemid = 1950, droprate = 161},
+                { itemid = 1944, droprate =  65 },
+                { itemid = 1936, droprate =  97 },
+                { itemid = 1946, droprate =  40 },
+                { itemid = 1942, droprate =  95 },
+                { itemid = 2660, droprate = 194 },
+                { itemid = 2714, droprate =  32 },
+                { itemid = 1950, droprate = 161 },
             },
         },
-    -- eastern tower floor 2
+
+        -- eastern tower floor 2
         [2] =
         {
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 1000},
-                {itemid = 1875, droprate = 1000},
+                { itemid =    0, droprate = 1000 },
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 1000},
-                {itemid = 1875, droprate = 1000},
+                { itemid =    0, droprate = 1000 },
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 1000},
-                {itemid = 1875, droprate = 1000},
+                { itemid =    0, droprate = 1000 },
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1936, droprate = 367},
-                {itemid = 1952, droprate =  70},
-                {itemid = 1950, droprate =  40},
-                {itemid = 1942, droprate = 333},
-                {itemid = 1958, droprate =  20},
-                {itemid = 1956, droprate = 106},
-                {itemid = 1938, droprate =  33},
-                {itemid = 1944, droprate =  76},
-                {itemid = 1948, droprate =  95},
-                {itemid = 2658, droprate =  67},
-                {itemid = 1946, droprate = 133},
+                { itemid = 1936, droprate = 367 },
+                { itemid = 1952, droprate =  70 },
+                { itemid = 1950, droprate =  40 },
+                { itemid = 1942, droprate = 333 },
+                { itemid = 1958, droprate =  20 },
+                { itemid = 1956, droprate = 106 },
+                { itemid = 1938, droprate =  33 },
+                { itemid = 1944, droprate =  76 },
+                { itemid = 1948, droprate =  95 },
+                { itemid = 2658, droprate =  67 },
+                { itemid = 1946, droprate = 133 },
             },
+
             {
-                {itemid =    0, droprate = 350},
-                {itemid = 1936, droprate = 367},
-                {itemid = 1952, droprate =  70},
-                {itemid = 1950, droprate =  40},
-                {itemid = 1942, droprate = 333},
-                {itemid = 1958, droprate =  20},
-                {itemid = 1956, droprate = 106},
-                {itemid = 1938, droprate =  33},
-                {itemid = 1944, droprate =  76},
-                {itemid = 1948, droprate =  95},
-                {itemid = 2658, droprate =  67},
-                {itemid = 1946, droprate = 133},
+                { itemid =    0, droprate = 350 },
+                { itemid = 1936, droprate = 367 },
+                { itemid = 1952, droprate =  70 },
+                { itemid = 1950, droprate =  40 },
+                { itemid = 1942, droprate = 333 },
+                { itemid = 1958, droprate =  20 },
+                { itemid = 1956, droprate = 106 },
+                { itemid = 1938, droprate =  33 },
+                { itemid = 1944, droprate =  76 },
+                { itemid = 1948, droprate =  95 },
+                { itemid = 2658, droprate =  67 },
+                { itemid = 1946, droprate = 133 },
             },
         },
-    -- eastern tower floor 3
+
+        -- eastern tower floor 3
         [3] =
         {
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 1000},
-                {itemid = 1875, droprate = 1000},
+                { itemid =    0, droprate = 1000 },
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 1000},
-                {itemid = 1875, droprate = 1000},
+                { itemid =    0, droprate = 1000 },
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 1000},
-                {itemid = 1875, droprate = 1000},
+                { itemid =    0, droprate = 1000 },
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1942, droprate = 625},
-                {itemid = 1944, droprate = 102},
-                {itemid = 1950, droprate =  42},
-                {itemid = 1952, droprate =  83},
-                {itemid = 1946, droprate =  50},
-                {itemid = 1940, droprate =  83},
-                {itemid = 1936, droprate =  70},
-                {itemid = 1938, droprate =  42},
-                {itemid = 1948, droprate =  42},
-                {itemid = 2660, droprate = 292},
+                { itemid = 1942, droprate = 625 },
+                { itemid = 1944, droprate = 102 },
+                { itemid = 1950, droprate =  42 },
+                { itemid = 1952, droprate =  83 },
+                { itemid = 1946, droprate =  50 },
+                { itemid = 1940, droprate =  83 },
+                { itemid = 1936, droprate =  70 },
+                { itemid = 1938, droprate =  42 },
+                { itemid = 1948, droprate =  42 },
+                { itemid = 2660, droprate = 292 },
             },
+
             {
-                {itemid =    0, droprate = 300},
-                {itemid = 1942, droprate = 625},
-                {itemid = 1944, droprate = 102},
-                {itemid = 1950, droprate =  42},
-                {itemid = 1952, droprate =  83},
-                {itemid = 1946, droprate =  50},
-                {itemid = 1940, droprate =  83},
-                {itemid = 1936, droprate =  70},
-                {itemid = 1938, droprate =  42},
-                {itemid = 1948, droprate =  42},
-                {itemid = 2660, droprate = 292},
+                { itemid =    0, droprate = 300 },
+                { itemid = 1942, droprate = 625 },
+                { itemid = 1944, droprate = 102 },
+                { itemid = 1950, droprate =  42 },
+                { itemid = 1952, droprate =  83 },
+                { itemid = 1946, droprate =  50 },
+                { itemid = 1940, droprate =  83 },
+                { itemid = 1936, droprate =  70 },
+                { itemid = 1938, droprate =  42 },
+                { itemid = 1948, droprate =  42 },
+                { itemid = 2660, droprate = 292 },
             },
         },
-    -- eastern tower floor 4
+
+        -- eastern tower floor 4
         [4] =
         {
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 1000},
-                {itemid = 1875, droprate = 1000},
+                { itemid =    0, droprate = 1000 },
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 1000},
-                {itemid = 1875, droprate = 1000},
+                { itemid =    0, droprate = 1000 },
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1950, droprate = 417},
-                {itemid = 1956, droprate =  75},
-                {itemid = 1944, droprate = 208},
-                {itemid = 1940, droprate = 167},
-                {itemid = 1946, droprate =  62},
-                {itemid = 1936, droprate =  69},
-                {itemid = 2660, droprate = 208},
-                {itemid = 1952, droprate =  42},
-                {itemid = 2658, droprate =  83},
+                { itemid = 1950, droprate = 417 },
+                { itemid = 1956, droprate =  75 },
+                { itemid = 1944, droprate = 208 },
+                { itemid = 1940, droprate = 167 },
+                { itemid = 1946, droprate =  62 },
+                { itemid = 1936, droprate =  69 },
+                { itemid = 2660, droprate = 208 },
+                { itemid = 1952, droprate =  42 },
+                { itemid = 2658, droprate =  83 },
             },
+
             {
-                {itemid =    0, droprate = 400},
-                {itemid = 1950, droprate = 417},
-                {itemid = 1956, droprate =  75},
-                {itemid = 1944, droprate = 208},
-                {itemid = 1940, droprate = 167},
-                {itemid = 1946, droprate =  62},
-                {itemid = 1936, droprate =  69},
-                {itemid = 2660, droprate = 208},
-                {itemid = 1952, droprate =  42},
-                {itemid = 2658, droprate =  83},
+                { itemid =    0, droprate = 400 },
+                { itemid = 1950, droprate = 417 },
+                { itemid = 1956, droprate =  75 },
+                { itemid = 1944, droprate = 208 },
+                { itemid = 1940, droprate = 167 },
+                { itemid = 1946, droprate =  62 },
+                { itemid = 1936, droprate =  69 },
+                { itemid = 2660, droprate = 208 },
+                { itemid = 1952, droprate =  42 },
+                { itemid = 2658, droprate =  83 },
             },
         },
-    -- eastern tower floor 5
+
+        -- eastern tower floor 5
         [5] =
         {
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 1000},
-                {itemid = 1875, droprate = 1000},
+                { itemid =    0, droprate = 1000 },
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1944, droprate = 208},
-                {itemid = 1938, droprate =  42},
-                {itemid = 1946, droprate =  36},
-                {itemid = 1940, droprate =  83},
-                {itemid = 1942, droprate =  20},
-                {itemid = 1952, droprate =  94},
-                {itemid = 1956, droprate =  42},
-                {itemid = 1936, droprate =  49},
-                {itemid = 1950, droprate = 167},
-                {itemid = 2714, droprate = 458},
+                { itemid = 1944, droprate = 208 },
+                { itemid = 1938, droprate =  42 },
+                { itemid = 1946, droprate =  36 },
+                { itemid = 1940, droprate =  83 },
+                { itemid = 1942, droprate =  20 },
+                { itemid = 1952, droprate =  94 },
+                { itemid = 1956, droprate =  42 },
+                { itemid = 1936, droprate =  49 },
+                { itemid = 1950, droprate = 167 },
+                { itemid = 2714, droprate = 458 },
             },
+
             {
-                {itemid =    0, droprate = 200},
-                {itemid = 1944, droprate = 208},
-                {itemid = 1938, droprate =  42},
-                {itemid = 1946, droprate =  36},
-                {itemid = 1940, droprate =  83},
-                {itemid = 1942, droprate =  20},
-                {itemid = 1952, droprate =  94},
-                {itemid = 1956, droprate =  42},
-                {itemid = 1936, droprate =  49},
-                {itemid = 1950, droprate = 167},
-                {itemid = 2714, droprate = 458},
+                { itemid =    0, droprate = 200 },
+                { itemid = 1944, droprate = 208 },
+                { itemid = 1938, droprate =  42 },
+                { itemid = 1946, droprate =  36 },
+                { itemid = 1940, droprate =  83 },
+                { itemid = 1942, droprate =  20 },
+                { itemid = 1952, droprate =  94 },
+                { itemid = 1956, droprate =  42 },
+                { itemid = 1936, droprate =  49 },
+                { itemid = 1950, droprate = 167 },
+                { itemid = 2714, droprate = 458 },
             },
         },
-    -- eastern tower floor 6
+
+        -- eastern tower floor 6
         [6] =
         {
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 1000},
-                {itemid = 1875, droprate = 1000},
+                { itemid =    0, droprate = 1000 },
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1942, droprate =  68},
-                {itemid = 1948, droprate =  74},
-                {itemid = 1936, droprate = 259},
-                {itemid = 1940, droprate =  74},
-                {itemid = 1956, droprate =  74},
-                {itemid = 1950, droprate =  62},
-                {itemid = 2656, droprate = 150},
-                {itemid = 1938, droprate =  76},
-                {itemid = 1952, droprate =  53},
-                {itemid = 2658, droprate = 111},
-                {itemid = 2714, droprate = 370},
-                {itemid = 1946, droprate = 333},
+                { itemid = 1942, droprate =  68 },
+                { itemid = 1948, droprate =  74 },
+                { itemid = 1936, droprate = 259 },
+                { itemid = 1940, droprate =  74 },
+                { itemid = 1956, droprate =  74 },
+                { itemid = 1950, droprate =  62 },
+                { itemid = 2656, droprate = 150 },
+                { itemid = 1938, droprate =  76 },
+                { itemid = 1952, droprate =  53 },
+                { itemid = 2658, droprate = 111 },
+                { itemid = 2714, droprate = 370 },
+                { itemid = 1946, droprate = 333 },
             },
+
             {
-                {itemid =    0, droprate = 300},
-                {itemid = 1942, droprate =  68},
-                {itemid = 1948, droprate =  74},
-                {itemid = 1936, droprate = 259},
-                {itemid = 1940, droprate =  74},
-                {itemid = 1956, droprate =  74},
-                {itemid = 1950, droprate =  62},
-                {itemid = 2656, droprate = 150},
-                {itemid = 1938, droprate =  76},
-                {itemid = 1952, droprate =  53},
-                {itemid = 2658, droprate = 111},
-                {itemid = 2714, droprate = 370},
-                {itemid = 1946, droprate = 333},
+                { itemid =    0, droprate = 300 },
+                { itemid = 1942, droprate =  68 },
+                { itemid = 1948, droprate =  74 },
+                { itemid = 1936, droprate = 259 },
+                { itemid = 1940, droprate =  74 },
+                { itemid = 1956, droprate =  74 },
+                { itemid = 1950, droprate =  62 },
+                { itemid = 2656, droprate = 150 },
+                { itemid = 1938, droprate =  76 },
+                { itemid = 1952, droprate =  53 },
+                { itemid = 2658, droprate = 111 },
+                { itemid = 2714, droprate = 370 },
+                { itemid = 1946, droprate = 333 },
             },
         },
-    -- eastern tower floor 7
+
+        -- eastern tower floor 7
         [7] =
         {
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1942, droprate =  38},
-                {itemid = 1950, droprate =  67},
-                {itemid = 1944, droprate = 100},
-                {itemid = 1936, droprate = 233},
-                {itemid = 1946, droprate =  80},
-                {itemid = 2660, droprate = 333},
-                {itemid = 2714, droprate =  67},
+                { itemid = 1942, droprate =  38 },
+                { itemid = 1950, droprate =  67 },
+                { itemid = 1944, droprate = 100 },
+                { itemid = 1936, droprate = 233 },
+                { itemid = 1946, droprate =  80 },
+                { itemid = 2660, droprate = 333 },
+                { itemid = 2714, droprate =  67 },
             },
+
             {
-                {itemid = 1905, droprate = 1000},
+                { itemid = 1905, droprate = 1000 },
             },
+
             {
-                {itemid =    0, droprate = 100},
-                {itemid = 2127, droprate =  55},
+                { itemid =    0, droprate = 100 },
+                { itemid = 2127, droprate =  55 },
             },
         },
     },
+
     -- central temenos basement
     [1301] =
     {
         {
-            {itemid = 1875, droprate = 1000},
+            { itemid = 1875, droprate = 1000 },
         },
+
         {
-            {itemid = 1875, droprate = 1000},
+            { itemid = 1875, droprate = 1000 },
         },
+
         {
-            {itemid = 1875, droprate = 1000},
+            { itemid = 1875, droprate = 1000 },
         },
+
         {
-            {itemid = 1875, droprate = 1000},
+            { itemid = 1875, droprate = 1000 },
         },
+
         {
-            {itemid = 1875, droprate = 1000},
+            { itemid = 1875, droprate = 1000 },
         },
+
         {
-            {itemid = 1875, droprate = 1000},
+            { itemid = 1875, droprate = 1000 },
         },
+
         {
-            {itemid = 1875, droprate = 1000},
+            { itemid = 1875, droprate = 1000 },
         },
     },
+
     -- central temenos floor 1
     [1303] =
     {
         {
-            {itemid = 1875, droprate = 1000},
+            { itemid = 1875, droprate = 1000 },
         },
+
         {
-            {itemid = 1875, droprate = 1000},
+            { itemid = 1875, droprate = 1000 },
         },
+
         {
-            {itemid = 1875, droprate = 1000},
+            { itemid = 1875, droprate = 1000 },
         },
+
         {
-            {itemid = 1875, droprate = 1000},
+            { itemid = 1875, droprate = 1000 },
         },
+
         {
-            {itemid = 1875, droprate = 1000},
+            { itemid = 1875, droprate = 1000 },
         },
+
         {
-            {itemid = 1875, droprate = 1000},
+            { itemid = 1875, droprate = 1000 },
         },
+
         {
-            {itemid = 1875, droprate = 1000},
+            { itemid = 1875, droprate = 1000 },
         },
+
         {
-            {itemid = 1930, droprate = 265},
-            {itemid = 1938, droprate = 118},
-            {itemid = 1948, droprate = 147},
-            {itemid = 1958, droprate = 147},
-            {itemid = 1952, droprate = 118},
-            {itemid = 2656, droprate = 235},
+            { itemid = 1930, droprate = 265 },
+            { itemid = 1938, droprate = 118 },
+            { itemid = 1948, droprate = 147 },
+            { itemid = 1958, droprate = 147 },
+            { itemid = 1952, droprate = 118 },
+            { itemid = 2656, droprate = 235 },
         },
+
         {
-            {itemid = 1986, droprate = 1000},
+            { itemid = 1986, droprate = 1000 },
         },
     },
+
     -- central temenos floor 2
     [1304] =
     {
         {
-            {itemid = 1875, droprate = 1000},
+            { itemid = 1875, droprate = 1000 },
         },
+
         {
-            {itemid = 1875, droprate = 1000},
+            { itemid = 1875, droprate = 1000 },
         },
+
         {
-            {itemid = 1875, droprate = 1000},
+            { itemid = 1875, droprate = 1000 },
         },
+
         {
-            {itemid = 1875, droprate = 1000},
+            { itemid = 1875, droprate = 1000 },
         },
+
         {
-            {itemid = 1875, droprate = 1000},
+            { itemid = 1875, droprate = 1000 },
         },
+
         {
-            {itemid = 1875, droprate = 1000},
+            { itemid = 1875, droprate = 1000 },
         },
+
         {
-            {itemid = 1875, droprate = 1000},
+            { itemid = 1875, droprate = 1000 },
         },
+
         {
-            {itemid = 1944, droprate = 250},
-            {itemid = 1936, droprate =  94},
-            {itemid = 1950, droprate =  63},
-            {itemid = 1942, droprate = 125},
-            {itemid = 1946, droprate =  63},
-            {itemid = 2660, droprate = 281},
-            {itemid = 2714, droprate = 125},
+            { itemid = 1944, droprate = 250 },
+            { itemid = 1936, droprate =  94 },
+            { itemid = 1950, droprate =  63 },
+            { itemid = 1942, droprate = 125 },
+            { itemid = 1946, droprate =  63 },
+            { itemid = 2660, droprate = 281 },
+            { itemid = 2714, droprate = 125 },
         },
+
         {
-            {itemid = 1908, droprate = 1000},
+            { itemid = 1908, droprate = 1000 },
         },
     },
+
     -- central temenos floor 3
     [1305]=
     {
         {
-            {itemid = 1875, droprate = 1000},
+            { itemid = 1875, droprate = 1000 },
         },
+
         {
-            {itemid = 1875, droprate = 1000},
+            { itemid = 1875, droprate = 1000 },
         },
+
         {
-            {itemid = 1875, droprate = 1000},
+            { itemid = 1875, droprate = 1000 },
         },
+
         {
-            {itemid = 1875, droprate = 1000},
+            { itemid = 1875, droprate = 1000 },
         },
+
         {
-            {itemid = 1875, droprate = 1000},
+            { itemid = 1875, droprate = 1000 },
         },
+
         {
-            {itemid = 1875, droprate = 1000},
+            { itemid = 1875, droprate = 1000 },
         },
+
         {
-            {itemid = 1875, droprate = 1000},
+            { itemid = 1875, droprate = 1000 },
         },
+
         {
-            {itemid = 1934, droprate =  53},
-            {itemid = 1940, droprate = 132},
-            {itemid = 1954, droprate = 105},
-            {itemid = 1932, droprate = 211},
-            {itemid = 1956, droprate = 211},
-            {itemid = 1930, droprate = 100},
-            {itemid = 2658, droprate = 211},
-            {itemid = 2716, droprate = 105},
+            { itemid = 1934, droprate =  53 },
+            { itemid = 1940, droprate = 132 },
+            { itemid = 1954, droprate = 105 },
+            { itemid = 1932, droprate = 211 },
+            { itemid = 1956, droprate = 211 },
+            { itemid = 1930, droprate = 100 },
+            { itemid = 2658, droprate = 211 },
+            { itemid = 2716, droprate = 105 },
         },
+
         {
-            {itemid = 1907, droprate = 1000},
+            { itemid = 1907, droprate = 1000 },
         },
     },
+
     -- central temenos floor 4
     [1306] =
     {
         [1] =
         {
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1920, droprate = 659},
-                {itemid = 1924, droprate = 394},
-                {itemid = 1923, droprate = 388},
-                {itemid = 1922, droprate = 404},
+                { itemid = 1920, droprate = 659 },
+                { itemid = 1924, droprate = 394 },
+                { itemid = 1923, droprate = 388 },
+                { itemid = 1922, droprate = 404 },
             },
+
             {
-                {itemid = 1924, droprate = 394},
-                {itemid = 1922, droprate = 402},
-                {itemid = 1920, droprate = 659},
-                {itemid = 1923, droprate = 383},
+                { itemid = 1924, droprate = 394 },
+                { itemid = 1922, droprate = 402 },
+                { itemid = 1920, droprate = 659 },
+                { itemid = 1923, droprate = 383 },
             },
+
             {
-                {itemid = 1921, droprate = 265},
-                {itemid =    0, droprate = 735},
+                { itemid = 1921, droprate = 265 },
+                { itemid =    0, droprate = 735 },
             },
         },
-    -- central temenos floor 4 side loot
+
+        -- central temenos floor 4 side loot
         [2] =
         {
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1875, droprate = 1000},
+                { itemid = 1875, droprate = 1000 },
             },
+
             {
-                {itemid = 1934, droprate = 200},
-                {itemid = 1930, droprate = 200},
-                {itemid = 1958, droprate = 200},
-                {itemid = 2658, droprate = 400},
-                {itemid = 1940, droprate = 200},
+                { itemid = 1934, droprate = 200 },
+                { itemid = 1930, droprate = 200 },
+                { itemid = 1958, droprate = 200 },
+                { itemid = 2658, droprate = 400 },
+                { itemid = 1940, droprate = 200 },
             },
         },
     },

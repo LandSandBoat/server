@@ -3,7 +3,7 @@
 --   NM: Sabotender Corrido
 -----------------------------------
 require("scripts/globals/hunts")
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
@@ -18,7 +18,7 @@ entity.onMobSpawn = function(mob)
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            {id = xi.jsa.HUNDRED_FISTS, hpp = 25},
+            { id = xi.jsa.HUNDRED_FISTS, hpp = 25 },
         },
     })
 end

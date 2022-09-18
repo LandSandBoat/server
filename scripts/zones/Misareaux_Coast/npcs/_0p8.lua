@@ -24,7 +24,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 502 and option == 1 then
-        player:setPos(-220.075, -15.999, 79.634, 62, 28) -- To Sacrarium {R}
+        player:setPos(-220.075, -15.999, 79.634, 62, 28) -- To Sacrarium (R)
     end
 end
 

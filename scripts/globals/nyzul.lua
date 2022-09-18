@@ -525,7 +525,7 @@ xi.nyzul.handleAppraisalItem = function(player, npc)
                 return
             end
 
-            player:addItem({id = itemID, appraisal = mobOffset})
+            player:addItem({ id = itemID, appraisal = mobOffset })
 
             for _, players in pairs(chars) do
                 players:messageName(ID.text.PLAYER_OBTAINS_ITEM, player, itemID)

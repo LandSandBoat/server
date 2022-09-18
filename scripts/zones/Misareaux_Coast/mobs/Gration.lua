@@ -2,7 +2,7 @@
 -- Area: Misareaux Coast
 --   NM: Gration
 -----------------------------------
-mixins = {require("scripts/mixins/fomor_hate")}
+mixins = { require("scripts/mixins/fomor_hate") }
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}

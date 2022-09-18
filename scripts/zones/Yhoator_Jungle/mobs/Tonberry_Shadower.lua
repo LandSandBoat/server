@@ -4,7 +4,7 @@
 -- Note: PH for Hoar-knuckled Rimberry
 -----------------------------------
 local ID = require("scripts/zones/Yhoator_Jungle/IDs")
-mixins = {require("scripts/mixins/families/tonberry")}
+mixins = { require("scripts/mixins/families/tonberry") }
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
 -----------------------------------

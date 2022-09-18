@@ -17,11 +17,11 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COLLECT_TARUT_CARDS) == QUEST_ACCEPTED then
-        if npcUtil.tradeHas(trade, {xi.items.TARUT_CARD_THE_FOOL, xi.items.TARUT_CARD_DEATH, xi.items.TARUT_CARD_THE_KING, xi.items.TARUT_CARD_THE_HERMIT}, true) then
+        if npcUtil.tradeHas(trade, { xi.items.TARUT_CARD_THE_FOOL, xi.items.TARUT_CARD_DEATH, xi.items.TARUT_CARD_THE_KING, xi.items.TARUT_CARD_THE_HERMIT }, true) then
             player:startEvent(200) -- Finish quest "Collect Tarut Cards"
         end
     elseif player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.ALL_IN_THE_CARDS) >= QUEST_ACCEPTED then
-        if npcUtil.tradeHas(trade, {xi.items.TARUT_CARD_THE_FOOL, xi.items.TARUT_CARD_DEATH, xi.items.TARUT_CARD_THE_KING, xi.items.TARUT_CARD_THE_HERMIT}, true) then
+        if npcUtil.tradeHas(trade, { xi.items.TARUT_CARD_THE_FOOL, xi.items.TARUT_CARD_DEATH, xi.items.TARUT_CARD_THE_KING, xi.items.TARUT_CARD_THE_HERMIT }, true) then
             player:startEvent(10114) -- Finish quest "All in the Cards"
         end
     end
@@ -166,7 +166,7 @@ entity.onEventFinish = function(player, csid, option)
             card = xi.items.TARUT_CARD_THE_FOOL
         end
 
-        if npcUtil.giveItem(player, {{card, 5}}) then
+        if npcUtil.giveItem(player, { { card, 5 } }) then
             player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.ALL_IN_THE_CARDS)
             player:setCharVar("AllInTheCards_date", getMidnight())
             player:setLocalVar("Cardstemp", 1)
@@ -179,7 +179,7 @@ entity.onEventFinish = function(player, csid, option)
         if npcUtil.completeQuest(player, xi.quest.log_id.JEUNO, xi.quest.id.jeuno.ALL_IN_THE_CARDS, {
             gil = 600,
             title = xi.title.CARD_COLLECTOR,
-            var = {"AllInTheCards_date"}
+            var = { "AllInTheCards_date" }
         }) then
             player:confirmTrade()
         end
@@ -188,7 +188,7 @@ entity.onEventFinish = function(player, csid, option)
         npcUtil.completeQuest(player, xi.quest.log_id.JEUNO, xi.quest.id.jeuno.RUBBISH_DAY, {
             gil = 6000,
             item = xi.items.CHAIN_CHOKER,
-            var = {"RubbishDayVar"}
+            var = { "RubbishDayVar" }
         })
     end
 end

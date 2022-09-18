@@ -19,9 +19,9 @@ entity.onTrade = function(player, npc, trade)
 
     -- PAYING LIP SERVICE
     elseif player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.PAYING_LIP_SERVICE) >= QUEST_ACCEPTED then
-        if npcUtil.tradeHas(trade, {{912, 3}}) then -- beehive_chip
+        if npcUtil.tradeHas(trade, { { 912, 3 } }) then -- beehive_chip
             player:startEvent(479, 0, 912, 1016, 0, 0)
-        elseif npcUtil.tradeHas(trade, {{1016, 2}}) then -- remi_shell
+        elseif npcUtil.tradeHas(trade, { { 1016, 2 } }) then -- remi_shell
             player:startEvent(479, 0, 912, 1016, 0, 1)
         end
     end
@@ -67,7 +67,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.PAYING_LIP_SERVICE)
     elseif csid == 479 then
         if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.PAYING_LIP_SERVICE) == QUEST_ACCEPTED then
-            npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.PAYING_LIP_SERVICE, {fame=60, title=xi.title.KISSER_MAKE_UPPER})
+            npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.PAYING_LIP_SERVICE, { fame=60, title=xi.title.KISSER_MAKE_UPPER })
         else
             player:addFame(xi.quest.fame_area.WINDURST, 8)
         end

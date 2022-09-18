@@ -3,7 +3,7 @@
 -----------------------------------
 require("scripts/globals/keyitems")
 require("scripts/globals/voidwalker")
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/hunts")
 -----------------------------------
 

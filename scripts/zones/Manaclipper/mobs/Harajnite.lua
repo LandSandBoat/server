@@ -2,7 +2,7 @@
 -- Area: Manaclipper
 --   NM: Harajnite
 -----------------------------------
-mixins = {require("scripts/mixins/families/uragnite")}
+mixins = { require("scripts/mixins/families/uragnite") }
 -----------------------------------
 local entity = {}
 

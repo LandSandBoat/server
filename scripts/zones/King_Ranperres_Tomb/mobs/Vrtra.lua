@@ -7,7 +7,7 @@ require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 
-local offsets = {1, 3, 5, 2, 4, 6}
+local offsets = { 1, 3, 5, 2, 4, 6 }
 
 entity.onMobEngaged = function(mob, target)
     mob:resetLocalVars()

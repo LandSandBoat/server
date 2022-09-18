@@ -11,11 +11,11 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if player:getCharVar("SahaginKeyItems") == 1 then -- If player was told to use 3 Mythril Beastcoins
-        if npcUtil.tradeHas(trade, {{xi.items.MYTHRIL_BEASTCOIN, 3}, {xi.items.NORG_SHELL, 1}}) then
+        if npcUtil.tradeHas(trade, { { xi.items.MYTHRIL_BEASTCOIN, 3 }, { xi.items.NORG_SHELL, 1 } }) then
             player:startEvent(107)
         end
     elseif (player:getCharVar("SahaginKeyItems") == 2) then -- If player was told to use a Gold Beastcoin
-        if npcUtil.tradeHas(trade, {xi.items.GOLD_BEASTCOIN, xi.items.NORG_SHELL}) then
+        if npcUtil.tradeHas(trade, { xi.items.GOLD_BEASTCOIN, xi.items.NORG_SHELL }) then
             player:startEvent(107)
         end
     end

@@ -3,7 +3,7 @@
 --  Mob: Trench Antlion
 -- Note: PH for Ambusher Antlion
 -----------------------------------
-mixins = {require("scripts/mixins/families/antlion_ambush")}
+mixins = { require("scripts/mixins/families/antlion_ambush") }
 local ID = require("scripts/zones/Attohwa_Chasm/IDs")
 require("scripts/globals/mobs")
 -----------------------------------

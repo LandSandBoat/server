@@ -58,11 +58,11 @@ end
 xi.additionalEffect.statusAttack = function(addStatus, defender)
     local effectList =
     {
-        [xi.effect.DEFENSE_DOWN] = {tick = 0, strip = xi.effect.DEFENSE_BOOST},
-        [xi.effect.EVASION_DOWN] = {tick = 0, strip = xi.effect.EVASION_BOOST},
-        [xi.effect.ATTACK_DOWN]  = {tick = 0, strip = xi.effect.ATTACK_BOOST},
-        [xi.effect.POISON]       = {tick = 3, strip = nil},
-        [xi.effect.CHOKE]        = {tick = 3, strip = nil},
+        [xi.effect.DEFENSE_DOWN] = { tick = 0, strip = xi.effect.DEFENSE_BOOST },
+        [xi.effect.EVASION_DOWN] = { tick = 0, strip = xi.effect.EVASION_BOOST },
+        [xi.effect.ATTACK_DOWN]  = { tick = 0, strip = xi.effect.ATTACK_BOOST },
+        [xi.effect.POISON]       = { tick = 3, strip = nil },
+        [xi.effect.CHOKE]        = { tick = 3, strip = nil },
     }
     local effect = effectList[addStatus]
     if effect then

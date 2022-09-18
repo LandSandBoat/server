@@ -4,7 +4,7 @@
 -- Mission 9-2 BASTOK BCNM Fight
 -----------------------------------
 local ID = require("scripts/zones/Throne_Room/IDs")
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/mobskills")
 require("scripts/globals/settings")
 require("scripts/globals/titles")
@@ -16,7 +16,7 @@ entity.onMobSpawn = function(mob)
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            {id = xi.jsa.BLOOD_WEAPON, hpp = math.random(20, 50)},
+            { id = xi.jsa.BLOOD_WEAPON, hpp = math.random(20, 50) },
         },
     })
     local battlefield = mob:getBattlefield()

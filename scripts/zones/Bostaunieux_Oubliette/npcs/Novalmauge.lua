@@ -72,7 +72,7 @@ entity.onEventFinish = function(player, csid, option, npc)
         player:setCharVar("TheHolyCrest_Event", 2)
     elseif csid == 7 then
         player:setCharVar("theHolyCrestCheck", 1)
-    elseif csid == 12 and npcUtil.completeQuest(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_RUMOR, {item = 4853}) then
+    elseif csid == 12 and npcUtil.completeQuest(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_RUMOR, { item = 4853 }) then
         player:confirmTrade()
     elseif csid == 13 and option == 1 then
         player:addQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_RUMOR)

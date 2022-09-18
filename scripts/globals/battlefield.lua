@@ -5,13 +5,13 @@ xi = xi or {}
 local maxAreas =
 {
     -- Temenos
-    { Max = 8, Zones = {37} },
+    { Max = 8, Zones = { 37 } },
 
     -- Apollyon
-    { Max = 6, Zones = {38} },
+    { Max = 6, Zones = { 38 } },
 
     -- Dynamis
-    { Max = 1, Zones = {39, 40, 41, 42, 134, 135, 185, 186, 187, 188, 29, 140} }, -- riverneb, ghelsba
+    { Max = 1, Zones = { 39, 40, 41, 42, 134, 135, 185, 186, 187, 188, 29, 140 } }, -- riverneb, ghelsba
 }
 
 function onBattlefieldHandlerInitialise(zone)

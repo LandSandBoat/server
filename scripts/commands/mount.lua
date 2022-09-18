@@ -8,7 +8,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!mount <mount ID> {player}")
+    player:PrintToPlayer("!mount <mount ID> (player)")
 end
 
 function onTrigger(player, mount, target)

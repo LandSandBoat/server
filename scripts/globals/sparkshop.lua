@@ -663,7 +663,7 @@ function xi.sparkshop.onEventUpdate(player,csid,option)
         if cost > remainingLimit and xi.settings.main.ENABLE_EXCHANGE_LIMIT == 1 then
             player:messageSpecial(zones[player:getZoneID()].text.MAX_SPARKS_LIMIT_REACHED, xi.settings.main.WEEKLY_EXCHANGE_LIMIT)
         elseif sparks >= cost then
-            if npcUtil.giveItem(player, { {item.id, qty} }) then
+            if npcUtil.giveItem(player, { { item.id, qty } }) then
                 sparks = sparks - cost
                 player:delCurrency("spark_of_eminence", cost)
                 if xi.settings.main.ENABLE_EXCHANGE_LIMIT == 1 then

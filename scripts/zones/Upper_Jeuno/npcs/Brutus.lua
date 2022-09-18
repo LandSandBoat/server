@@ -81,7 +81,7 @@ entity.onEventFinish = function(player, csid, option)
     -- PATH OF THE BEASTMASTER
     if csid == 70 then
         player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PATH_OF_THE_BEASTMASTER)
-        npcUtil.completeQuest(player, xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PATH_OF_THE_BEASTMASTER, {title = xi.title.ANIMAL_TRAINER})
+        npcUtil.completeQuest(player, xi.quest.log_id.JEUNO, xi.quest.id.jeuno.PATH_OF_THE_BEASTMASTER, { title = xi.title.ANIMAL_TRAINER })
         player:unlockJob(xi.job.BST)
         player:messageSpecial(ID.text.YOU_CAN_NOW_BECOME_A_BEASTMASTER)
 
@@ -89,18 +89,18 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 137 or csid == 139) and option == 1 then
         player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.WINGS_OF_GOLD)
         player:setCharVar("wingsOfGold_shortCS", 0)
-    elseif csid == 138 and npcUtil.completeQuest(player, xi.quest.log_id.JEUNO, xi.quest.id.jeuno.WINGS_OF_GOLD, {item = 16680, fame = 20}) then
+    elseif csid == 138 and npcUtil.completeQuest(player, xi.quest.log_id.JEUNO, xi.quest.id.jeuno.WINGS_OF_GOLD, { item = 16680, fame = 20 }) then
         player:delKeyItem(xi.ki.GUIDING_BELL)
 
     -- SCATTERED INTO SHADOW
     elseif (csid == 141 or csid == 143) and option == 1 then
         player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SCATTERED_INTO_SHADOW)
         player:setCharVar("scatIntoShadow_shortCS", 0)
-        npcUtil.giveKeyItem(player, {xi.ki.AQUAFLORA1, xi.ki.AQUAFLORA2, xi.ki.AQUAFLORA3})
+        npcUtil.giveKeyItem(player, { xi.ki.AQUAFLORA1, xi.ki.AQUAFLORA2, xi.ki.AQUAFLORA3 })
     elseif csid == 144 then
         player:setCharVar("scatIntoShadowCS", 1)
     elseif csid == 135 then
-        npcUtil.completeQuest(player, xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SCATTERED_INTO_SHADOW, {item = 14097, fame = 40, var = "scatIntoShadowCS"})
+        npcUtil.completeQuest(player, xi.quest.log_id.JEUNO, xi.quest.id.jeuno.SCATTERED_INTO_SHADOW, { item = 14097, fame = 40, var = "scatIntoShadowCS" })
     end
 end
 

@@ -14,7 +14,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.STUN, {chance = 50, duration = math.random(4, 8)})
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.STUN, { chance = 50, duration = math.random(4, 8) })
 end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)

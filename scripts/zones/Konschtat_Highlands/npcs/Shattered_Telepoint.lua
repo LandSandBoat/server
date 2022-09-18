@@ -21,7 +21,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 913 and option == 0 then
-        player:setPos(-267.194, -40.634, -280.019, 0, 14) -- To Hall of Transference {R}
+        player:setPos(-267.194, -40.634, -280.019, 0, 14) -- To Hall of Transference (R)
     end
 end
 

@@ -3,7 +3,7 @@
 --  Mob: Makki-Chebukki
 -----------------------------------
 local ID = require("scripts/zones/Sealions_Den/IDs")
-mixins = {require("scripts/mixins/warriors_path_taru")}
+mixins = { require("scripts/mixins/warriors_path_taru") }
 -----------------------------------
 local entity = {}
 
