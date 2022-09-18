@@ -13,7 +13,7 @@ entity.onMobSpawn = function(mob)
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            {id = xi.jsa.EES_AERN, hpp = math.random(90, 95), cooldown = 120}
+            { id = xi.jsa.EES_AERN, hpp = math.random(90, 95), cooldown = 120 }
         }
     })
 end

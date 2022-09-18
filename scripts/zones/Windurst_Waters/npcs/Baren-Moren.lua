@@ -22,7 +22,7 @@ entity.onTrade = function(player, npc, trade)
             aFeatherInOnesCap == QUEST_ACCEPTED or
             player:getCharVar("QuestFeatherInOnesCap_var") == 1
         ) and
-        npcUtil.tradeHas(trade, {{842, 3}})
+        npcUtil.tradeHas(trade, { { 842, 3 } })
     then
         player:startEvent(79, 1500) -- Quest Turn In
     end

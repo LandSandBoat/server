@@ -12,7 +12,7 @@ entity.onMobSpawn = function(mob)
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            {id = xi.jsa.SOUL_VOICE, cooldown = 200, hpp = 95},
+            { id = xi.jsa.SOUL_VOICE, cooldown = 200, hpp = 95 },
         },
     })
 end

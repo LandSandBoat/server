@@ -12,8 +12,8 @@ local entity = {}
 local flags = xi.path.flag.NONE
 local path =
 {
-    {50.000, 80.000, 419.500},
-    {30.000, 80.000, 419.500}
+    { 50.000, 80.000, 419.500 },
+    { 30.000, 80.000, 419.500 },
 }
 
 entity.onMobRoam = function(mob)

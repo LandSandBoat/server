@@ -14,7 +14,7 @@ local entity = {}
 
 -----------------------------------
 -- artifact armor upgrade data
--- [combinationId] = { trade = { afBase, temenosItem, apollyonItem, craftedItem }, abc = ABCsRequired, reward = afPlusOne},
+-- [combinationId] = { trade = { afBase, temenosItem, apollyonItem, craftedItem }, abc = ABCsRequired, reward = afPlusOne },
 -----------------------------------
 local afArmorPlusOne =
 {
@@ -127,7 +127,7 @@ local afArmorPlusOne =
 
 -----------------------------------
 -- relic armor upgrade data
--- [combinationId] = { trade = { relicBase, relicMinusOne, ingredient, {currencyId, currencyAmt } }, reward = relicPlusOne},
+-- [combinationId] = { trade = { relicBase, relicMinusOne, ingredient, { currencyId, currencyAmt } }, reward = relicPlusOne },
 -----------------------------------
 local relicArmorPlusOne =
 {
@@ -235,7 +235,7 @@ local relicArmorPlusOne =
 
 -----------------------------------
 -- ancient beastcoin purchases
--- [menu option] = {item = itemId, abc = costInABCs}
+-- [menu option] = { item = itemId, abc = costInABCs }
 -----------------------------------
 local abcShop =
 {

@@ -21,7 +21,7 @@ local prospectorItems =
 {
     [itemType.ITEM] =
     {
-    --  Sel      Item                         Cost
+    --  Sel      Item                        Cost
         [1] = { xi.items.CREED_ARMET,        5000 },
         [2] = { xi.items.BALE_BURGEONET,     5000 },
         [3] = { xi.items.FERINE_CABASSET,    5000 },

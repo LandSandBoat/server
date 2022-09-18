@@ -19,7 +19,7 @@ entity.onMobEngaged = function(mob, target)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.SLOW, {power = 3000})
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.SLOW, { power = 3000 })
 end
 
 entity.onMobDeath = function(mob, player, isKiller)

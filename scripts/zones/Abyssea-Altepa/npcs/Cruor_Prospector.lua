@@ -21,7 +21,7 @@ local prospectorItems =
 {
     [itemType.ITEM] =
     {
-    --  Sel      Item                            Cost,  Qty
+    --  Sel      Item                            Cost
         [ 1] = { xi.items.RAVAGERS_MUFFLERS,     5000 },
         [ 2] = { xi.items.TANTRA_GLOVES,         5000 },
         [ 3] = { xi.items.ORISON_MITTS,          5000 },
@@ -36,7 +36,7 @@ local prospectorItems =
 
     [itemType.TEMP] =
     {
-    --  Sel      Item                          Cost, Qty
+    --  Sel      Item                               Cost
         [ 1] = { xi.items.LUCID_POTION_I,             80 },
         [ 2] = { xi.items.LUCID_ETHER_I,              80 },
         [ 3] = { xi.items.BOTTLE_OF_CATHOLICON,       80 },

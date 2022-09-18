@@ -434,7 +434,7 @@ local fishRewards =
         gil = 1512,
         items =
         {
-            { chance = 46.8, itemId = 9099}, -- Soryu's Liver
+            { chance = 46.8, itemId = 9099 }, -- Soryu's Liver
         }
     },
 
@@ -542,7 +542,7 @@ local function giveReward(player, csid)
                 itemQt = math.random(r.min, r.max)
             end
 
-            if not npcUtil.giveItem(player, {{itemId, itemQt}}) then
+            if not npcUtil.giveItem(player, { { itemId, itemQt } }) then
                 traded = false
             end
         end
