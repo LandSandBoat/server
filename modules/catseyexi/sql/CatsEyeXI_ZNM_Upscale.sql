@@ -11,9 +11,9 @@ UPDATE `mob_groups` SET `minLevel` = "90", `maxLevel` = "90" WHERE `name` = "Mah
 UPDATE `mob_groups` SET `minLevel` = "90", `maxLevel` = "90" WHERE `name` = "Experimental_Lamia" AND `zoneid` = "79";
 UPDATE `mob_groups` SET `minLevel` = "90", `maxLevel` = "90" WHERE `name` = "Nuhn" AND `zoneid` = "54";
 
-UPDATE mob_groups SET HP=90000 WHERE groupid = 6 AND `name` = 'Sarameya';
-UPDATE mob_groups SET HP=90000 WHERE groupid = 7 AND `name` = 'Tinnin';
-UPDATE mob_groups SET HP=90000 WHERE groupid = 10 AND `name` = 'Tyger';
+UPDATE mob_groups SET HP=90000 WHERE groupid = 54 AND `name` = 'Sarameya';
+UPDATE mob_groups SET HP=90000 WHERE groupid = 53 AND `name` = 'Tinnin';
+UPDATE mob_groups SET HP=90000 WHERE groupid = 61 AND `name` = 'Tyger';
 UPDATE mob_groups SET HP=60000 WHERE groupid = 10 AND `name` = 'Armed_Gears';
 UPDATE mob_groups SET HP=60000 WHERE groupid = 52 AND `name` = 'Gotoh_Zha_The_Redolent';
 UPDATE mob_groups SET HP=60000 WHERE groupid = 55 AND `name` = 'Dea';
