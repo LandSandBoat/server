@@ -2,8 +2,8 @@
 -- All at Sea
 -----------------------------------
 -- !addquest 2 23
--- Paytah !pos
--- Baren-Moren !pos
+-- Paytah !pos 77 -5 117
+-- Baren-Moren !pos -66 -2 -145
 -----------------------------------
 require('scripts/globals/interaction/quest')
 require('scripts/globals/keyitems')
