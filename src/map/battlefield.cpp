@@ -302,6 +302,12 @@ bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOB
                 PChar->ClearTrusts();
                 luautils::OnBattlefieldEnter(PChar, this);
                 charutils::SendTimerPacket(PChar, GetRemainingTime());
+
+                // Try to add the player's pet in case they have one that can
+                if (PChar->PPet != nullptr)
+                {
+                    InsertEntity(PChar->PPet, true);
+                }
             }
             else if (!IsRegistered(PChar))
             {
@@ -330,7 +336,9 @@ bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOB
 
             if (pet && pet->PMaster && pet->PMaster->objtype == TYPE_PC)
             {
-                // dont enter player pet
+                // Properly set the existing pet to exist within this battlefield
+                pet->m_bcnmID        = GetID();
+                pet->m_battlefieldID = GetArea();
             }
             else
             {
