@@ -336,12 +336,9 @@ bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOB
 
             if (pet && pet->PMaster && pet->PMaster->objtype == TYPE_PC)
             {
-                // Only allow Wyvern pets to enter
-                if (pet->getPetType() == PET_TYPE::WYVERN)
-                {
-                    pet->m_bcnmID        = GetID();
-                    pet->m_battlefieldID = GetArea();
-                }
+                // Properly set the existing pet to exist within this battlefield
+                pet->m_bcnmID        = GetID();
+                pet->m_battlefieldID = GetArea();
             }
             else
             {
