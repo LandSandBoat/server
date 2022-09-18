@@ -88,10 +88,10 @@ xi.dynamis.dynaIDLookup = -- Used to check for different IDs based on zoneID. Re
     {
         text = -- text for table lookup
         {
-            INFORMATION_RECORDED = 11734, -- The time and destination for your foray into Dynamis has been recorded on your <itemID>.
-            ANOTHER_GROUP = 11733, -- Another group of player characters is currently occupying Dynamis - ≺Multiple Choice (Parameter 0)≻[Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia].≺Prompt≻
-            UNABLE_TO_CONNECT = 11731, -- Unable to connect.≺Prompt≻
-            CONNECTING_WITH_THE_SERVER = 11730, -- Connecting with server. Please wait.≺Possible Special Code: 00≻
+            INFORMATION_RECORDED = 11731, -- The time and destination for your foray into Dynamis has been recorded on your <itemID>.
+            ANOTHER_GROUP = 11736, -- Another group of player characters is currently occupying Dynamis - ≺Multiple Choice (Parameter 0)≻[Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia].≺Prompt≻
+            UNABLE_TO_CONNECT = 11734, -- Unable to connect.≺Prompt≻
+            CONNECTING_WITH_THE_SERVER = 11733, -- Connecting with server. Please wait.≺Possible Special Code: 00≻
         },
     },
 
@@ -99,10 +99,10 @@ xi.dynamis.dynaIDLookup = -- Used to check for different IDs based on zoneID. Re
     {
         text = -- text for table lookup
         {
-            INFORMATION_RECORDED = 7878, -- The time and destination for your foray into Dynamis has been recorded on your <itemID>.
-            ANOTHER_GROUP = 7877, -- Another group of player characters is currently occupying Dynamis - ≺Multiple Choice (Parameter 0)≻[Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia].≺Prompt≻
-            UNABLE_TO_CONNECT = 7876, -- Unable to connect.≺Prompt≻
-            CONNECTING_WITH_THE_SERVER = 7874, -- Connecting with server. Please wait.≺Possible Special Code: 00≻
+            INFORMATION_RECORDED = 7881, -- The time and destination for your foray into Dynamis has been recorded on your <itemID>.
+            ANOTHER_GROUP = 7880, -- Another group of player characters is currently occupying Dynamis - ≺Multiple Choice (Parameter 0)≻[Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia].≺Prompt≻
+            UNABLE_TO_CONNECT = 7878, -- Unable to connect.≺Prompt≻
+            CONNECTING_WITH_THE_SERVER = 7877, -- Connecting with server. Please wait.≺Possible Special Code: 00≻
         },
     },
 
@@ -110,10 +110,10 @@ xi.dynamis.dynaIDLookup = -- Used to check for different IDs based on zoneID. Re
     {
         text = -- text for table lookup
         {
-            INFORMATION_RECORDED = 7903, -- The time and destination for your foray into Dynamis has been recorded on your <itemID>.
-            ANOTHER_GROUP = 7902, -- Another group of player characters is currently occupying Dynamis - ≺Multiple Choice (Parameter 0)≻[Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia].≺Prompt≻
-            UNABLE_TO_CONNECT = 7900, -- Unable to connect.≺Prompt≻
-            CONNECTING_WITH_THE_SERVER = 7899, -- Connecting with server. Please wait.≺Possible Special Code: 00≻
+            INFORMATION_RECORDED = 7906, -- The time and destination for your foray into Dynamis has been recorded on your <itemID>.
+            ANOTHER_GROUP = 7905, -- Another group of player characters is currently occupying Dynamis - ≺Multiple Choice (Parameter 0)≻[Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia].≺Prompt≻
+            UNABLE_TO_CONNECT = 7903, -- Unable to connect.≺Prompt≻
+            CONNECTING_WITH_THE_SERVER = 7902, -- Connecting with server. Please wait.≺Possible Special Code: 00≻
         },
     },
 
@@ -121,10 +121,10 @@ xi.dynamis.dynaIDLookup = -- Used to check for different IDs based on zoneID. Re
     {
         text = -- text for table lookup
         {
-            INFORMATION_RECORDED = 7861, -- The time and destination for your foray into Dynamis has been recorded on your <itemID>.
-            ANOTHER_GROUP = 7860, -- Another group of player characters is currently occupying Dynamis - ≺Multiple Choice (Parameter 0)≻[Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia].≺Prompt≻
-            UNABLE_TO_CONNECT = 7858, -- Unable to connect.≺Prompt≻
-            CONNECTING_WITH_THE_SERVER = 7867, -- Connecting with server. Please wait.≺Possible Special Code: 00≻
+            INFORMATION_RECORDED = 7864, -- The time and destination for your foray into Dynamis has been recorded on your <itemID>.
+            ANOTHER_GROUP = 7863, -- Another group of player characters is currently occupying Dynamis - ≺Multiple Choice (Parameter 0)≻[Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia].≺Prompt≻
+            UNABLE_TO_CONNECT = 7861, -- Unable to connect.≺Prompt≻
+            CONNECTING_WITH_THE_SERVER = 7860, -- Connecting with server. Please wait.≺Possible Special Code: 00≻
         },
     },
 
@@ -132,10 +132,10 @@ xi.dynamis.dynaIDLookup = -- Used to check for different IDs based on zoneID. Re
     {
         text = -- text for table lookup
         {
-            INFORMATION_RECORDED = 11232, -- The time and destination for your foray into Dynamis has been recorded on your <itemID>.
-            ANOTHER_GROUP = 11231, -- Another group of player characters is currently occupying Dynamis - ≺Multiple Choice (Parameter 0)≻[Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia].≺Prompt≻
-            UNABLE_TO_CONNECT = 11229, -- Unable to connect.≺Prompt≻
-            CONNECTING_WITH_THE_SERVER = 11228, -- Connecting with server. Please wait.≺Possible Special Code: 00≻
+            INFORMATION_RECORDED = 11235, -- The time and destination for your foray into Dynamis has been recorded on your <itemID>.
+            ANOTHER_GROUP = 11234, -- Another group of player characters is currently occupying Dynamis - ≺Multiple Choice (Parameter 0)≻[Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia].≺Prompt≻
+            UNABLE_TO_CONNECT = 11232, -- Unable to connect.≺Prompt≻
+            CONNECTING_WITH_THE_SERVER = 11231, -- Connecting with server. Please wait.≺Possible Special Code: 00≻
         },
     },
 
@@ -143,50 +143,50 @@ xi.dynamis.dynaIDLookup = -- Used to check for different IDs based on zoneID. Re
     {
         text = -- text for table lookup
         {
-            INFORMATION_RECORDED = 7423, -- The time and destination for your foray into Dynamis has been recorded on your <itemID>.
-            ANOTHER_GROUP = 7422, -- Another group of player characters is currently occupying Dynamis - ≺Multiple Choice (Parameter 0)≻[Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia].≺Prompt≻
-            UNABLE_TO_CONNECT = 7420, -- Unable to connect.≺Prompt≻
-            CONNECTING_WITH_THE_SERVER = 7419, -- Connecting with server. Please wait.≺Possible Special Code: 00≻
+            INFORMATION_RECORDED = 7426, -- The time and destination for your foray into Dynamis has been recorded on your <itemID>.
+            ANOTHER_GROUP = 7425, -- Another group of player characters is currently occupying Dynamis - ≺Multiple Choice (Parameter 0)≻[Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia].≺Prompt≻
+            UNABLE_TO_CONNECT = 7423, -- Unable to connect.≺Prompt≻
+            CONNECTING_WITH_THE_SERVER = 7422, -- Connecting with server. Please wait.≺Possible Special Code: 00≻
         },
     },
     [xi.zone.TAVNAZIAN_SAFEHOLD] = -- zoneID for array lookup
     {
         text = -- text for table lookup
         {
-            INFORMATION_RECORDED = 11832, -- The time and destination for your foray into Dynamis has been recorded on your <itemID>.
-            ANOTHER_GROUP = 11831, -- Another group of player characters is currently occupying Dynamis - ≺Multiple Choice (Parameter 0)≻[Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia].≺Prompt≻
-            UNABLE_TO_CONNECT = 11829, -- Unable to connect.≺Prompt≻
-            CONNECTING_WITH_THE_SERVER = 11828, -- Connecting with server. Please wait.≺Possible Special Code: 00≻
+            INFORMATION_RECORDED = 11835, -- The time and destination for your foray into Dynamis has been recorded on your <itemID>.
+            ANOTHER_GROUP = 11834, -- Another group of player characters is currently occupying Dynamis - ≺Multiple Choice (Parameter 0)≻[Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia].≺Prompt≻
+            UNABLE_TO_CONNECT = 11832, -- Unable to connect.≺Prompt≻
+            CONNECTING_WITH_THE_SERVER = 11831, -- Connecting with server. Please wait.≺Possible Special Code: 00≻
         },
     },
     [xi.zone.VALKURM_DUNES] = -- zoneID for array lookup
     {
         text = -- text for table lookup
         {
-            INFORMATION_RECORDED = 7877, -- The time and destination for your foray into Dynamis has been recorded on your <itemID>.
-            ANOTHER_GROUP = 7876, -- Another group of player characters is currently occupying Dynamis - ≺Multiple Choice (Parameter 0)≻[Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia].≺Prompt≻
-            UNABLE_TO_CONNECT = 7874, -- Unable to connect.≺Prompt≻
-            CONNECTING_WITH_THE_SERVER = 7873, -- Connecting with server. Please wait.≺Possible Special Code: 00≻
+            INFORMATION_RECORDED = 7880, -- The time and destination for your foray into Dynamis has been recorded on your <itemID>.
+            ANOTHER_GROUP = 7879, -- Another group of player characters is currently occupying Dynamis - ≺Multiple Choice (Parameter 0)≻[Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia].≺Prompt≻
+            UNABLE_TO_CONNECT = 7877, -- Unable to connect.≺Prompt≻
+            CONNECTING_WITH_THE_SERVER = 7876, -- Connecting with server. Please wait.≺Possible Special Code: 00≻
         },
     },
     [xi.zone.WINDURST_WALLS] = -- zoneID for array lookup
     {
         text = -- text for table lookup
         {
-            INFORMATION_RECORDED = 9092, -- The time and destination for your foray into Dynamis has been recorded on your <itemID>.
-            ANOTHER_GROUP = 9091, -- Another group of player characters is currently occupying Dynamis - ≺Multiple Choice (Parameter 0)≻[Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia].≺Prompt≻
-            UNABLE_TO_CONNECT = 9089, -- Unable to connect.≺Prompt≻
-            CONNECTING_WITH_THE_SERVER = 9088, -- Connecting with server. Please wait.≺Possible Special Code: 00≻
+            INFORMATION_RECORDED = 9095, -- The time and destination for your foray into Dynamis has been recorded on your <itemID>.
+            ANOTHER_GROUP = 9094, -- Another group of player characters is currently occupying Dynamis - ≺Multiple Choice (Parameter 0)≻[Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia].≺Prompt≻
+            UNABLE_TO_CONNECT = 9092, -- Unable to connect.≺Prompt≻
+            CONNECTING_WITH_THE_SERVER = 9091, -- Connecting with server. Please wait.≺Possible Special Code: 00≻
         },
     },
     [xi.zone.XARCABARD] = -- zoneID for array lookup
     {
         text = -- text for table lookup
         {
-            INFORMATION_RECORDED = 7858, -- The time and destination for your foray into Dynamis has been recorded on your <itemID>.
-            ANOTHER_GROUP = 7857, -- Another group of player characters is currently occupying Dynamis - ≺Multiple Choice (Parameter 0)≻[Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia].≺Prompt≻
-            UNABLE_TO_CONNECT = 7855, -- Unable to connect.≺Prompt≻
-            CONNECTING_WITH_THE_SERVER = 7854, -- Connecting with server. Please wait.≺Possible Special Code: 00≻
+            INFORMATION_RECORDED = 7861, -- The time and destination for your foray into Dynamis has been recorded on your <itemID>.
+            ANOTHER_GROUP = 7860, -- Another group of player characters is currently occupying Dynamis - ≺Multiple Choice (Parameter 0)≻[Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia].≺Prompt≻
+            UNABLE_TO_CONNECT = 7858, -- Unable to connect.≺Prompt≻
+            CONNECTING_WITH_THE_SERVER = 7857, -- Connecting with server. Please wait.≺Possible Special Code: 00≻
         },
     },
     --------------------------------------------

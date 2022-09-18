@@ -50,10 +50,17 @@ xi.dynamis.onSpawnAntaeus = function(mob)
     mob:addMod(xi.mod.GRAVITYRES, 40)
     mob:addMod(xi.mod.BINDRES, 40)
     mob:addMod(xi.mod.REGAIN, 50)
+
+    mob:addListener('TAKE_DAMAGE', 'DYNA_DMG_TAKE', function(mobArg, amount, attacker, attackType, damageType)
+        xi.dynamis.parentOnEngaged(mobArg, attacker)
+    end)
+
+    mob:addListener('ENGAGE', 'DYNA_ENGAGE', function(mobArg, target)
+        xi.dynamis.parentOnEngaged(mobArg, target)
+    end)
 end
 
 xi.dynamis.onEngagedAntaeus = function(mob, target)
-    xi.dynamis.parentOnEngaged(mob, target)
 end
 
 xi.dynamis.onFightAntaeus = function(mob, target)
