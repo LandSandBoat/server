@@ -196,7 +196,7 @@ INSERT INTO `fishing_fish` VALUES (4385,'Zafmlug Bass',43,27,6,7,1,1,15,0,0,255,
 INSERT INTO `fishing_fish` VALUES (4288,'Zebra Eel',71,32,10,10,1,1,23,0,0,255,255,0,0,3,1,8,0,0,0,1,800,0,'',0,0,0,0);
 INSERT INTO `fishing_fish` VALUES (1624,'Bugbear Mask',54,42,13,2,1,1,5,0,0,255,255,0,0,2,1,0,0,0,1,1,700,0,'',0,0,0,0);
 INSERT INTO `fishing_fish` VALUES (3965,'Adoulinian Kelp',6,18,13,2,1,1,13,0,0,255,255,0,0,0,4,0,0,0,1,1,1000,0,'',0,0,0,0);
-INSERT INTO `fishing_fish` VALUES (591,'Ripped cap',20,36,13,2,1,1,13,0,0,2,23,1,0,1,3,0,0,0,1,1,400,0,'',0,0,0,0);
+INSERT INTO `fishing_fish` VALUES (591,'Ripped cap',20,36,13,2,1,1,13,0,0,2,23,0,0,1,3,0,0,0,1,1,400,0,'',0,0,0,0);
 INSERT INTO `fishing_fish` VALUES (65535,'Gil',1,22,13,2,1,1,1,0,0,255,255,0,0,0,0,0,0,0,1,1,100,0,'',0,0,0,0);
 INSERT INTO `fishing_fish` VALUES (5329,'Tarutaru Snare',30,22,13,2,1,1,1,0,0,255,255,0,0,0,0,0,0,0,1,1,1000,0,'',0,1,0,0);
 INSERT INTO `fishing_fish` VALUES (5330,'Mithra Snare',30,22,13,2,1,1,1,0,0,255,255,0,0,0,0,0,0,0,1,1,1000,0,'',0,1,0,0);

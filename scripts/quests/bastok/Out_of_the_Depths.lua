@@ -20,6 +20,8 @@ local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.OUT_OF_THE_DE
 
 quest.reward =
 {
+    fame = 80,
+    fameArea = xi.quest.fame_area.BASTOK,
     title = xi.title.TRASH_COLLECTOR,
     gil = 1200,
 }

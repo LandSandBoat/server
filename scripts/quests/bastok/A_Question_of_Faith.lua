@@ -20,6 +20,8 @@ local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_QUESTION_OF
 
 quest.reward =
 {
+    fame = 50,
+    fameArea = xi.quest.fame_area.BASTOK,
     gil = 3000,
 }
 
@@ -73,7 +75,6 @@ quest.sections =
                 end,
 
                 [241] = function(player, csid, option, npc)
-                        player:addFame(xi.quest.fame_area.BASTOK, 50)
                         quest:complete(player)
                 end,
             },
