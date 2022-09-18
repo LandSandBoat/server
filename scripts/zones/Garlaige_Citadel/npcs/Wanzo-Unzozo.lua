@@ -1,22 +1,21 @@
 -----------------------------------
 -- Area: Garlaige Citadel
 --  NPC: Wanzo-Unzozo
--- Type: Quest NPC
--- !pos -379.420 -10.749 383.312 200
+-- Type: Quest NPC (Escort for Hire - Windurst)
+-- !pos -381 -12 398
+-----------------------------------
+require("scripts/globals/keyitems")
+require("scripts/globals/pathfind")
+require("scripts/globals/quests")
+-----------------------------------
+ID = require('scripts/zones/Garlaige_Citadel/IDs')
 -----------------------------------
 local entity = {}
 
-entity.onTrade = function(player, npc, trade)
-end
-
 entity.onTrigger = function(player, npc)
-    player:startEvent(60)
 end
 
-entity.onEventUpdate = function(player, csid, option)
-end
-
-entity.onEventFinish = function(player, csid, option)
+entity.onDeath = function(npc)
 end
 
 return entity

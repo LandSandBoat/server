@@ -36,6 +36,7 @@
 #include "../packets/event.h"
 #include "../packets/event_string.h"
 #include "../packets/inventory_finish.h"
+#include "../packets/inventory_item.h"
 #include "../packets/key_items.h"
 #include "../packets/lock_on.h"
 #include "../packets/menu_raisetractor.h"
@@ -1611,7 +1612,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
         if (xirand::GetRandomNumber(100) < battleutils::GetRangedHitRate(this, PTarget, isBarrage)) // hit!
         {
             // absorbed by shadow
-            if (battleutils::IsAbsorbByShadow(PTarget))
+            if (battleutils::IsAbsorbByShadow(PTarget, this))
             {
                 shadowsTaken++;
             }
@@ -1763,7 +1764,7 @@ void CCharEntity::OnRangedAttack(CRangeState& state, action_t& action)
         uint16 power = StatusEffectContainer->GetStatusEffect(EFFECT_SANGE)->GetPower();
 
         // remove shadows
-        while (realHits-- && xirand::GetRandomNumber(100) <= power && battleutils::IsAbsorbByShadow(this))
+        while (realHits-- && xirand::GetRandomNumber(100) <= power && battleutils::IsAbsorbByShadow(PTarget, this))
         {
             ;
         }
@@ -2038,7 +2039,10 @@ void CCharEntity::OnItemFinish(CItemState& state, action_t& action)
 
     if ((isParalyzed && scrollProtection && isScroll && itemLoss) || (isParalyzed && !itemLoss)) // Become paralyzed and stop executing.
     {
-        loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(this, PTarget, 0, 0, MSGBASIC_IS_PARALYZED));
+        this->loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(this, PTarget, 0, 0, MSGBASIC_IS_PARALYZED));
+        PItem->setSubType(ITEM_UNLOCKED);
+        this->pushPacket(new CInventoryItemPacket(PItem, PItem->getLocationID(), PItem->getSlotID()));
+        this->pushPacket(new CInventoryFinishPacket());
         return;
     }
 
@@ -2688,14 +2692,9 @@ void CCharEntity::tryStartNextEvent()
     if (PNpc && PNpc->objtype == TYPE_NPC)
     {
         PNpc->SetLocalVar("pauseNPCPathing", 1);
-
-        if (PNpc->PAI->PathFind != nullptr)
-        {
-            PNpc->PAI->PathFind->Clear();
-        }
     }
 
-    // If it's a cutsene, we lock the player immediately
+    // If it's a cutscene, we lock the player immediately
     setLocked(currentEvent->type == CUTSCENE);
 
     if (currentEvent->strings.empty())

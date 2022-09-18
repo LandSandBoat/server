@@ -1613,19 +1613,47 @@ bool CLuaBaseEntity::pathThrough(sol::table const& pointsTable, sol::object cons
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
 
-    std::vector<position_t> points;
-
-    // Grab points from array and store in points array
-    for (std::size_t i = 1; i < pointsTable.size(); i += 3)
-    {
-        points.push_back({ (float)pointsTable[i], (float)pointsTable[i + 1], (float)pointsTable[i + 2], 0, 0 });
-    }
-
     uint8 flags = 0;
 
     if (flagsObj.is<uint8>())
     {
         flags = flagsObj.as<uint8>();
+    }
+
+    std::vector<pathpoint_t> points;
+
+    if (flags & PATHFLAG_PATROL)
+    {
+        // Grab points from array and store in points array
+        float x, y, z = -1;
+        for (std::size_t i = 1; i <= pointsTable.size(); ++i)
+        {
+            sol::table  pointData = pointsTable[i];
+            pathpoint_t point;
+            x              = pointData.get_or("x", x);
+            y              = pointData.get_or("y", y);
+            z              = pointData.get_or("z", z);
+            point.position = { x, y, z, 0, 0 };
+
+            auto rotation     = pointData["rotation"];
+            point.setRotation = rotation.valid();
+            if (point.setRotation)
+            {
+                point.position.rotation = rotation.get<uint8>();
+            }
+
+            auto wait  = pointData["wait"];
+            point.wait = wait.valid() ? wait.get<uint32>() : 0;
+            points.push_back(std::move(point));
+        }
+    }
+    else
+    {
+        // Grab points from array and store in points array
+        for (std::size_t i = 1; i < pointsTable.size(); i += 3)
+        {
+            points.push_back({ { (float)pointsTable[i], (float)pointsTable[i + 1], (float)pointsTable[i + 2], 0, 0 }, 0 });
+        }
     }
 
     CBattleEntity* PBattle = (CBattleEntity*)m_PBaseEntity;
@@ -1664,8 +1692,7 @@ void CLuaBaseEntity::clearPath(sol::object const& pauseObj)
     {
         m_PBaseEntity->SetLocalVar("pauseNPCPathing", 1);
     }
-
-    if (PBattle->PAI->PathFind != nullptr)
+    else if (PBattle->PAI->PathFind != nullptr)
     {
         PBattle->PAI->PathFind->Clear();
     }

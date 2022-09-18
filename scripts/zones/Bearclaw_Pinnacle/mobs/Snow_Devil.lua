@@ -7,55 +7,47 @@ mixins = {require("scripts/mixins/job_special")}
 -----------------------------------
 local entity = {}
 
-local controlBombs =
+local controlDevils =
 {
     {16801818, 16801821},
     {16801826, 16801829},
-    {16801832, 16801835},
+    {16801834, 16801837},
 }
 
-entity.onMobSpawn = function(mob)
+entity.onMobInitialize = function(mob)
     mob:setMod(xi.mod.SLEEPRES, 75)
     mob:setMod(xi.mod.LULLABYRES, 75)
+end
 
-    mob:timer(1, function(mobArg)
-        local bfNum = mobArg:getBattlefield():getArea()
-        local bf = mobArg:getBattlefield()
+entity.onMobSpawn = function(mob)
+    mob:addListener("DEATH", "DEVIL_DEATH", function(bomb, killer)
+        local bf = mob:getBattlefield()
+        local bfNum = bf:getArea()
+        bf:setLocalVar("mobsDead", bf:getLocalVar("mobsDead") + 1)
 
-        for i = 1, 2 do
-            if mobArg:getID() == controlBombs[bfNum][i] then
+        if bf:getLocalVar("mobsDead") >= bf:getLocalVar("adds") + 1 then
+            bf:setLocalVar("wave", bf:getLocalVar("wave") + 1)
+
+            if bf:getLocalVar("wave") >= 4 then
+                bf:setLocalVar("lootSpawned", 0)
+            else
+                bf:setLocalVar("adds", math.random(0, 2))
                 bf:setLocalVar("mobsDead", 0)
-                bf:setLocalVar("controlBombID", controlBombs[bfNum][i])
-                bf:setLocalVar("adds", math.random(0,2))
 
-                if bf:getLocalVar("wave") == 0 then
-                    bf:setLocalVar("adds", 2)
-                else
-                    for y = 1, bf:getLocalVar("adds") do
-                        SpawnMob(mobArg:getID() + y)
+                for i = 0, bf:getLocalVar("adds") do
+                    if bf:getLocalVar("wave") % 2 == 1 then
+                        SpawnMob(controlDevils[bfNum][2]+i)
+                    else
+                        SpawnMob(controlDevils[bfNum][1]+i)
                     end
                 end
             end
         end
-    end)
 
-    mob:addListener("TAKE_DAMAGE", "DEVIL_TAKE_DAMAGE", function(mobArg, amount, attacker, attackType, damageType)
-        if amount > mobArg:getHP() then
-            local bfNum = mob:getBattlefield():getArea()
-            local bf = mob:getBattlefield()
-            bf:setLocalVar("mobsDead", bf:getLocalVar("mobsDead") + 1)
-            if
-                bf:getLocalVar("mobsDead") >= bf:getLocalVar("adds") + 1 and
-                bf:getLocalVar("wave") < 3
-            then
-                bf:setLocalVar("wave", bf:getLocalVar("wave") + 1)
-                if bf:getLocalVar("controlBombID") == controlBombs[bfNum][1] then
-                    SpawnMob(controlBombs[bfNum][2])
-                else
-                    SpawnMob(controlBombs[bfNum][1])
-                end
-            end
-        end
+        -- Despawn bombs quicker than normal to prevent deadlock where bombs don't respawn
+        bomb:timer(5000, function(mobArg)
+            DespawnMob(mobArg:getID())
+        end)
     end)
 end
 

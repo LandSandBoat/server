@@ -18,11 +18,11 @@ zones[xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES] =
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
-        FISHING_MESSAGE_OFFSET        = 7238, -- You can't fish here.
-        ON_WAY_TO_SELBINA             = 7339, -- We're on our way to Selbina. We should be there in [less than an hour/about 1 hour/about 2 hours/about 3 hours/about 4 hours/about 5 hours/about 6 hours/about 7 hours] (<number> [minute/minutes] in Earth time).
-        RAJMONDA_SHOP_DIALOG          = 7344, -- There's nothing like fishing to pass the time!
-        MAERA_SHOP_DIALOG             = 7345, -- May I offer you items to help you on your journey?
-        ARRIVING_SOON_SELBINA         = 7346, -- We are on our way to Selbina. We will be arriving soon.
+        FISHING_MESSAGE_OFFSET        = 7241, -- You can't fish here.
+        ON_WAY_TO_SELBINA             = 7342, -- We're on our way to Selbina. We should be there in [less than an hour/about 1 hour/about 2 hours/about 3 hours/about 4 hours/about 5 hours/about 6 hours/about 7 hours] (<number> [minute/minutes] in Earth time).
+        RAJMONDA_SHOP_DIALOG          = 7347, -- There's nothing like fishing to pass the time!
+        MAERA_SHOP_DIALOG             = 7348, -- May I offer you items to help you on your journey?
+        ARRIVING_SOON_SELBINA         = 7349, -- We are on our way to Selbina. We will be arriving soon.
     },
     mob =
     {
@@ -46,9 +46,9 @@ zones[xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES] =
                 },
                 enter_path =
                 {
-                    -28.75, -7.163, 10.60,
-                    -22.00, -7.163, 10.46,
-                    -21.90, -7.163, 10.46
+                    {x = -28.75, y = -7.163, z = 10.60},
+                    {x = -22.00, y = -7.163, z = 10.46},
+                    {x = -21.90, y = -7.163, z = 10.46},
                 },
                 look_at =
                 {
@@ -58,9 +58,9 @@ zones[xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES] =
                 },
                 exit_path =
                 {
-                    -29.79, -7.163, 10.63,
-                    -33.57, -7.163, 13.14,
-                    -33.601, -7.163, 13.377
+                    {x = -29.79, y = -7.163, z = 10.63},
+                    {x = -33.57, y = -7.163, z = 13.14},
+                    {x = -33.601, y = -7.163, z = 13.377},
                 },
                 position = 1,
             },
@@ -75,9 +75,9 @@ zones[xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES] =
                 },
                 enter_path =
                 {
-                    -24.87, -7.163, 2.77,
-                    -22.00, -7.163, 6.59,
-                    -21.90, -7.163, 6.59
+                    {x = -24.87, y = -7.163, z = 2.77},
+                    {x = -22.00, y = -7.163, z = 6.59},
+                    {x = -21.90, y = -7.163, z = 6.59},
                 },
                 look_at =
                 {
@@ -87,9 +87,9 @@ zones[xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES] =
                 },
                 exit_path =
                 {
-                    -25.91, -7.163, 2.77,
-                    -29.71, -7.163, 1.54,
-                    -29.728, -7.163, 1.303
+                    {x = -25.91, y = -7.163, z = 2.77},
+                    {x = -29.71, y = -7.163, z = 1.54},
+                    {x = -29.728, y = -7.163, z = 1.303},
                 },
                 position = 2,
             },
@@ -104,9 +104,9 @@ zones[xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES] =
                 },
                 enter_path =
                 {
-                    -24.93, -7.163, -4.02,
-                    -22.00, -7.163, 2.10,
-                    -21.90, -7.163, 2.10
+                    {x = -24.93, y = -7.163, z = -4.02},
+                    {x = -22.00, y = -7.163, z = 2.10},
+                    {x = -21.90, y = -7.163, z = 2.10},
                 },
                 look_at =
                 {
@@ -116,9 +116,9 @@ zones[xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES] =
                 },
                 exit_path =
                 {
-                    -25.97, -7.163, -4.02,
-                    -29.61, -7.163, -2.71,
-                    -29.602, -7.163, -2.475
+                    {x = -25.97, y = -7.163, z = -4.02},
+                    {x = -29.61, y = -7.163, z = -2.71},
+                    {x = -29.602, y = -7.163, z = -2.475},
                 },
                 position = 3,
             },
@@ -133,9 +133,9 @@ zones[xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES] =
                 },
                 enter_path =
                 {
-                    -24.87, -7.163, 2.77,
-                    -22.00, -7.163, 6.59,
-                    -21.90, -7.163, 6.59
+                    {x = -24.87, y = -7.163, z = 2.77},
+                    {x = -22.00, y = -7.163, z = 6.59},
+                    {x = -21.90, y = -7.163, z = 6.59},
                 },
                 look_at =
                 {
@@ -145,9 +145,9 @@ zones[xi.zone.SHIP_BOUND_FOR_SELBINA_PIRATES] =
                 },
                 exit_path =
                 {
-                    -25.91, -7.163, 2.77,
-                    -29.71, -7.163, 1.54,
-                    -29.728, -7.163, 1.303
+                    {x = -25.91, y = -7.163, z = 2.77},
+                    {x = -29.71, y = -7.163, z = 1.54},
+                    {x = -29.728, y = -7.163, z = 1.303},
                 },
                 position = 4,
             },

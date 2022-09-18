@@ -10,11 +10,11 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.MULTI_HIT, 6)
-    mob:setMod(xi.mod.BINDRES, 20)
-    mob:setMod(xi.mod.BLINDRES, 20)
-    mob:setMod(xi.mod.SLEEPRES, 20)
-    mob:setMod(xi.mod.LULLABYRES, 20)
-    mob:setMod(xi.mod.GRAVITYRES, 20)
+    mob:setMod(xi.mod.BINDRESBUILD, 20)
+    mob:setMod(xi.mod.BLINDRESBUILD, 20)
+    mob:setMod(xi.mod.SLEEPRESBUILD, 20)
+    mob:setMod(xi.mod.LULLABYRESBUILD, 20)
+    mob:setMod(xi.mod.GRAVITYRESBUILD, 20)
 end
 
 entity.onMobSpawn = function(mob)

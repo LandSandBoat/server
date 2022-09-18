@@ -3,6 +3,11 @@
 -- Mob: Envier
 -- ENM: Playing Host
 -----------------------------------
+mixins =
+{
+    require("scripts/mixins/families/empty_terroanima"),
+}
+-----------------------------------
 local entity = {}
 
 entity.onMobEngaged = function(mob)

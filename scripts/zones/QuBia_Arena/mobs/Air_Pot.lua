@@ -10,7 +10,6 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:setMod(xi.mod.WIND_ABSORB, 1000)
-    mob:setMod(xi.mod.SILENCERES, 95)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
 end
 

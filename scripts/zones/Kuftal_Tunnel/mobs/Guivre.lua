@@ -68,7 +68,6 @@ local pathNodesB =
     102, -0.191, 3
 }
 
-
 entity.onPath = function(mob)
     --Mob is on path node, let's check which path we need to route them to
     local currentPath = mob:getLocalVar("mobPath")

@@ -8,19 +8,16 @@ local entity = {}
 
 local path =
 {
-    18.947, 0.000, 86.480,
-    16.665, 0.000, 78.920,
-    12.472, 0.000, 70.061,
-    16.665, 0.000, 78.920,
+    {x = 18.947, y = 0.000, z = 86.480},
+    {x = 16.665, z = 78.920},
+    {x = 12.472, z = 70.061},
+    {x = 16.665, z = 78.920},
 }
 
 entity.onSpawn = function(npc)
     npc:initNpcAi()
     npc:setPos(xi.path.first(path))
-end
-
-entity.onPath = function(npc)
-    xi.path.patrol(npc, path)
+    npc:pathThrough(path, xi.path.flag.PATROL)
 end
 
 entity.onTrade = function(player, npc, trade)

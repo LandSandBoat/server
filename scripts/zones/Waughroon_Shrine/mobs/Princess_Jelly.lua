@@ -66,7 +66,6 @@ local function allJellysInCenter(bfNum)
     local totalInCenter = 0
     for i = 1, 8 do
         local princess = GetMobByID(ID.royalJellyQueens[bfNum]+i)
-        print(ID.royalJellyQueens[bfNum]+i)
         if getDistanceFromCenter(bfNum,princess) <= 0.5 then
             totalInCenter = totalInCenter + 1
         end

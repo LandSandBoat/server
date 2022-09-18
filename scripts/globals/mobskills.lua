@@ -571,7 +571,7 @@ xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType,
             shadowbehav = MobTakeAoEShadow(mob, target, shadowbehav)
         end
 
-        dmg = utils.takeShadows(target, dmg, shadowbehav)
+        dmg = utils.takeShadows(target, mob, dmg, shadowbehav)
 
         -- dealt zero damage, so shadows took hit
         if dmg == 0 then

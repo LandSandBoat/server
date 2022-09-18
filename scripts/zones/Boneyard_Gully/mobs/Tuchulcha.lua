@@ -15,7 +15,7 @@ entity.onMobSpawn = function(mob)
 
     -- Used with HPP to keep track of the number of Sandpits
     mob:setLocalVar("Sandpits", 0)
-    mob:setRoamFlags(xi.roamFlag.EVENT)
+    mob:setRoamFlags(xi.roamFlag.SCRIPTED)
 end
 
 -- Reset restHP when re-engaging after a sandpit

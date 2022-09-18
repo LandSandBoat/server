@@ -565,7 +565,7 @@ xi.job_utils.rune_fencer.useSwipeLunge = function(player, target, ability, actio
         player:removeNewestRune() --rune is always consumed if target is still alive
         runesUsed = runesUsed + 1 -- keep track of runes used to change effect later
 
-        local shadows = utils.takeShadows(target, 1, 1)
+        local shadows = utils.takeShadows(target, nil, 1, 1)
 
         if shadows == 0 then -- we hit a shadow, increment shadow counter and do nothing else.
             shadowsHit = shadowsHit + 1
