@@ -815,5 +815,10 @@ local list =
     { "H. Avatar", "Hydra's Avatar"},
     { "D. Avatar", "Dagourmarche's Avatar" },
     },
+    [xi.zone.CRAWLERS_NEST] =
+    {
+        { "Soldier Crawler", "King Crawler" },
+        { "Hornly", "Dancing Jewel" },
+    },
 }
 return list
