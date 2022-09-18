@@ -2581,7 +2581,6 @@ xi.items =
     BEETLE_RING                     = 13457,
     DEMONS_RING                     = 13464,
     BRASS_RING                      = 13465,
-    LEATHER_RING                    = 13469,
     ASTRAL_RING                     = 13548,
     LEATHER_RING                    = 13469,
     PEACE_RING                      = 13555,
