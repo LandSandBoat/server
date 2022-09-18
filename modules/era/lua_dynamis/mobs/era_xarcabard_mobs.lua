@@ -15,9 +15,9 @@ xi.dynamis = xi.dynamis or {}
 -----------------------------------
 --    Dynamis Lord, Ying, Yang   --
 -----------------------------------
-local lordText = 7281
-local yingText = 7289
-local yangText = 7290
+local lordText = 7284
+local yingText = 7301
+local yangText = 7302
 local busy = {xi.act.MOBABILITY_FINISH, xi.act.MOBABILITY_START, xi.act.MOBABILITY_USING, xi.act.MAGIC_CASTING, xi.act.MAGIC_START, xi.act.MAGIC_FINISH}
 local specials =
 {
@@ -540,7 +540,6 @@ xi.dynamis.onSpawnAnimated = function(mob)
 end
 
 xi.dynamis.onEngagedAnimated = function(mob, target)
-    xi.dynamis.parentOnEngaged(mob, target)
     mob:setLocalVar("castTime", os.time() + math.random(0, 3))
     mob:setLocalVar("changeTime", os.time() + math.random(20, 30))
 end

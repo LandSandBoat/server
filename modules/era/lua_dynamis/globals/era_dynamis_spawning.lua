@@ -501,7 +501,7 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
         ["Statue"] =
         {
             ["onMobSpawn"] = {function(mob) xi.dynamis.setStatueStats(mob, mobIndex) end},
-            ["onMobEngaged"] = {function(mob, target) xi.dynamis.parentOnEngaged(mob, target) end},
+            ["onMobEngaged"] = {function(mob, target) end},
             ["onMobFight"] = {function(mob, target) xi.dynamis.statueOnFight(mob, target) end},
             ["onMobRoam"] = {function(mob) xi.dynamis.mobOnRoam(mob) end},
             ["mixins"] = { }
@@ -509,7 +509,7 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
         ["Nightmare"] =
         {
             ["onMobSpawn"] = {function(mob) xi.dynamis.setMobStats(mob) mob:setRoamFlags(xi.roamFlag.NONE) end},
-            ["onMobEngaged"] = {function(mob, target) xi.dynamis.parentOnEngaged(mob, target) end},
+            ["onMobEngaged"] = {function(mob, target) end},
             ["onMobFight"] = {function(mob) end},
             ["onMobRoam"] = {function(mob) end},
             ["mixins"] = { }
@@ -620,45 +620,45 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Slinkix Trufflesniff"] = {"S.Trufflesniff", 155, 134, 176, 0, 5013, "Beastmen"}, -- Slin (RNG)
         ["Swypestix Tigershins"] = {"S.Tigershins", 145, 134, 176, 7, 5013, "Beastmen"}, -- Swyp (NIN)
         ["Tocktix Thinlids"] = {"T.Thinlids", 150, 134, 176, 5, 5013, "Beastmen"}, -- Tock (DRK)
-        ["Whistix Toadthroat"] = {"W.Toadthroat", 34, 188, 176, 6, 5013, "Beastmen"}, -- Whis (BRD)
+        ["Whistix Toadthroat"] = {"W.Toadthroat", 154, 134, 176, 6, 5013, "Beastmen"}, -- Whis (BRD)
         -- Dynamis - Buburimu
-        ["Gosspix Blabberlips"] = {"G.Blabberlips", 144, 134,2667, 5013, "Beastmen"}, -- Goss (RDM)
-        ["Shamblix Rottenheart"] = {"S.Rottenheart", 150, 134,2667, 5, 5013, "Beastmen"}, -- Sham (DRK)
-        ["Woodnix Shrillwhistle"] = {"W.Shrillwhistle", 151, 134, 2667, 0, 5013, "Beastmen"}, -- Wood (BST)
+        ["Gosspix Blabberlips"] = {"G.Blabberlips", 24, 40,2667, 5013, "Beastmen"}, -- Goss (RDM)
+        ["Shamblix Rottenheart"] = {"S.Rottenheart", 16, 40,2667, 5, 5013, "Beastmen"}, -- Sham (DRK)
+        ["Woodnix Shrillwhistle"] = {"W.Shrillwhistle", 6, 40, 2667, 0, 5013, "Beastmen"}, -- Wood (BST)
         -- Dynamis - Jeuno
-        ["Bandrix Rockjaw"] = {"B.Rockjaw", 146, 134, 143, 0, 5013, "Beastmen"}, -- Band (THF)
-        ["Buffrix Eargone"] = {"B.Eargone", 148, 134, 143, 4, 5013, "Beastmen"}, -- Buff (PLD)
-        ["Clocktix Longnail"] = {"C.Longnail", 150, 134, 143, 5, 5013, "Beastmen"}, -- Cloc (DRK)
-        ["Elixmix Hooknose"] = {"E.Hooknose", 142, 134, 143, 1, 5013, "Beastmen"}, -- Elix (WHM)
-        ["Gabblox Magpietongue"] = {"G.Magpietongue", 144, 134, 143, 3, 5013, "Beastmen"}, -- Gabb (RDM)
-        ["Hermitrix Toothrot"] = {"H.Toothrot", 143, 134, 143, 5000, 5013, "Beastmen"}, -- Herm (BLM)
+        ["Bandrix Rockjaw"] = {"B.Rockjaw", 32, 188, 143, 0, 5013, "Beastmen"}, -- Band (THF)
+        ["Buffrix Eargone"] = {"B.Eargone", 33, 188, 143, 4, 5013, "Beastmen"}, -- Buff (PLD)
+        ["Clocktix Longnail"] = {"C.Longnail", 51, 188, 143, 5, 5013, "Beastmen"}, -- Cloc (DRK)
+        ["Elixmix Hooknose"] = {"E.Hooknose", 31, 188, 143, 1, 5013, "Beastmen"}, -- Elix (WHM)
+        ["Gabblox Magpietongue"] = {"G.Magpietongue", 11, 188, 143, 3, 5013, "Beastmen"}, -- Gabb (RDM)
+        ["Hermitrix Toothrot"] = {"H.Toothrot", 27, 188, 143, 5000, 5013, "Beastmen"}, -- Herm (BLM)
         ["Humnox Drumbelly"] = {"H.Drumbelly", 34, 188, 143, 6, 5013, "Beastmen"}, -- Humn (BRD)
-        ["Lurklox Dhalmelneck"] = {"L.Dhalmelneck", 155, 134, 143, 0, 5013, "Beastmen"}, -- Lurk (RNG)
-        ["Morgmox Moldnoggin"] = {"M.Moldnoggin", 153, 134, 143, 0, 5013, "Beastmen"}, -- Morg (SMN)
-        ["Sparkspox Sweatbrow"] = {"S.Sweatbrow", 136, 134, 143, 0, 5013, "Beastmen"}, -- Spar (WAR)
-        ["Ticktox Beadeyes"] = {"T.Beadeyes", 150, 134, 143, 5, 5013, "Beastmen"}, -- Tick (DRK)
-        ["Trailblix Goatmug"] = {"T.Goatmug", 151, 134, 143, 0, 5013, "Beastmen"}, -- Trai (BST)
-        ["Tufflix Loglimbs"] = {"T.Loglimbs", 148, 134, 143, 4, 5013, "Beastmen"}, -- Tuff (PLD)
-        ["Wyrmwix Snakespecs"] = {"W.Snakespecs", 149, 134, 143, 0, 5013, "Beastmen"}, -- Snak (DRG)
-        ["Karashix Swollenskull"] = {"K.Swollenskull", 156, 134, 143, 0, 5013, "Beastmen"}, -- Kara (SAM)
-        ["Kikklix Longlegs"] = {"K.Longlegs", 139, 134, 143, 0, 5013, "Beastmen"}, -- Kikk (MNK)
-        ["Rutrix Hamgams"] = {"R.Hamgams", 151, 134, 143, 0, 5013, "Beastmen"}, -- Rutr (BST)
-        ["Snypestix Eaglebeak"] = {"S.Eaglebeak", 145, 134, 143, 7, 5013, "Beastmen"}, -- Snyp (NIN)
-        ["Mortilox Wartpaws"] = {"M.Wartpaws", 153, 134, 143, 0, 5013, "Beastmen"}, -- Mort (SMN)
-        ["Jabkix Pigeonpecs"] = {"J.Pigeonpecs", 139, 134, 143, 0, 5013, "Beastmen"}, -- Jabk (MNK)
-        ["Smeltix Thickhide"] = {"S.Thickhide", 136, 134, 143, 0, 5013, "Beastmen"}, -- Smel (WAR)
-        ["Wasabix Callusdigit"] = {"W.Callusdigit", 156, 134, 143, 0, 5013, "Beastmen"}, -- Wasa (SAM)
-        ["Anvilix Sootwrists"] = {"A.Sootwrists", 136, 134, 143, 0, 5013, "Beastmen"}, -- Anvi (WAR)
-        ["Blazox Boneybod"] = {"B.Boneybod", 151, 134, 143, 0, 5013, "Beastmen"}, -- Blaz (BST)
-        ["Bootrix Jaggedelbow"] = {"B.Jaggedelbow", 139, 134, 143, 0, 5013, "Beastmen"}, -- Boot (MNK)
-        ["Distilix Stickytoes"] = {"D.Stickytoes", 142, 134, 143, 1, 5013, "Beastmen"}, -- Dist (WHM)
-        ["Eremix Snottynostril"] = {"E.Snottynostril", 143, 134, 143, 5000, 5013, "Beastmen"}, -- Erem (BLM)
-        ["Jabbrox Grannyguise"] = {"J.Grannyguise", 144, 134, 143, 3, 5013, "Beastmen"}, -- Jabb (RDM)
-        ["Mobpix Mucousmouth"] = {"M.Mucousmouth", 146, 134, 143, 0, 5013, "Beastmen"}, -- Mobp (THF)
-        ["Prowlox Barrelbelly"] = {"P.Barrelbelly", 155, 134, 143, 0, 5013, "Beastmen"}, -- Prow (RNG)
-        ["Scruffix Shaggychest"] = {"S.Shaggychest", 148, 134, 143, 4, 5013, "Beastmen"}, -- Scru (PLD)
-        ["Slystix Megapeepers"] = {"S.Megapeepers", 145, 134, 143, 7, 5013, "Beastmen"}, -- Slys (NIN)
-        ["Tymexox Ninefingers"] = {"T.Ninefingers", 150, 134, 143, 5, 5013, "Beastmen"}, -- Tyme (DRK)
+        ["Lurklox Dhalmelneck"] = {"L.Dhalmelneck", 36, 188, 143, 0, 5013, "Beastmen"}, -- Lurk (RNG)
+        ["Morgmox Moldnoggin"] = {"M.Moldnoggin", 29, 188, 143, 0, 5013, "Beastmen"}, -- Morg (SMN)
+        ["Sparkspox Sweatbrow"] = {"S.Sweatbrow", 30, 188, 143, 0, 5013, "Beastmen"}, -- Spar (WAR)
+        ["Ticktox Beadeyes"] = {"T.Beadeyes", 35, 188, 143, 5, 5013, "Beastmen"}, -- Tick (DRK)
+        ["Trailblix Goatmug"] = {"T.Goatmug", 37, 188, 143, 0, 5013, "Beastmen"}, -- Trai (BST)
+        ["Tufflix Loglimbs"] = {"T.Loglimbs", 21, 188, 143, 4, 5013, "Beastmen"}, -- Tuff (PLD)
+        ["Wyrmwix Snakespecs"] = {"W.Snakespecs", 28, 188, 143, 0, 5013, "Beastmen"}, -- Snak (DRG)
+        ["Karashix Swollenskull"] = {"K.Swollenskull", 39, 188, 143, 0, 5013, "Beastmen"}, -- Kara (SAM)
+        ["Kikklix Longlegs"] = {"K.Longlegs", 38, 188, 143, 0, 5013, "Beastmen"}, -- Kikk (MNK)
+        ["Rutrix Hamgams"] = {"R.Hamgams", 40, 188, 143, 0, 5013, "Beastmen"}, -- Rutr (BST)
+        ["Snypestix Eaglebeak"] = {"S.Eaglebeak", 41, 188, 143, 7, 5013, "Beastmen"}, -- Snyp (NIN)
+        ["Mortilox Wartpaws"] = {"M.Wartpaws", 52, 188, 143, 0, 5013, "Beastmen"}, -- Mort (SMN)
+        ["Jabkix Pigeonpecs"] = {"J.Pigeonpecs", 24, 188, 143, 0, 5013, "Beastmen"}, -- Jabk (MNK)
+        ["Smeltix Thickhide"] = {"S.Thickhide", 23, 188, 143, 0, 5013, "Beastmen"}, -- Smel (WAR)
+        ["Wasabix Callusdigit"] = {"W.Callusdigit", 25, 188, 143, 0, 5013, "Beastmen"}, -- Wasa (SAM)
+        ["Anvilix Sootwrists"] = {"A.Sootwrists", 42, 188, 143, 0, 5013, "Beastmen"}, -- Anvi (WAR)
+        ["Blazox Boneybod"] = {"B.Boneybod", 49, 188, 143, 0, 5013, "Beastmen"}, -- Blaz (BST)
+        ["Bootrix Jaggedelbow"] = {"B.Jaggedelbow", 43, 188, 143, 0, 5013, "Beastmen"}, -- Boot (MNK)
+        ["Distilix Stickytoes"] = {"D.Stickytoes", 45, 188, 143, 1, 5013, "Beastmen"}, -- Dist (WHM)
+        ["Eremix Snottynostril"] = {"E.Snottynostril", 46, 188, 143, 5000, 5013, "Beastmen"}, -- Erem (BLM)
+        ["Jabbrox Grannyguise"] = {"J.Grannyguise", 47, 188, 143, 3, 5013, "Beastmen"}, -- Jabb (RDM)
+        ["Mobpix Mucousmouth"] = {"M.Mucousmouth", 44, 188, 143, 0, 5013, "Beastmen"}, -- Mobp (THF)
+        ["Prowlox Barrelbelly"] = {"P.Barrelbelly", 50, 188, 143, 0, 5013, "Beastmen"}, -- Prow (RNG)
+        ["Scruffix Shaggychest"] = {"S.Shaggychest", 48, 188, 143, 4, 5013, "Beastmen"}, -- Scru (PLD)
+        ["Slystix Megapeepers"] = {"S.Megapeepers", 53, 188, 143, 7, 5013, "Beastmen"}, -- Slys (NIN)
+        ["Tymexox Ninefingers"] = {"T.Ninefingers", 54, 188, 143, 5, 5013, "Beastmen"}, -- Tyme (DRK)
         -- Orc
         -- Dynamis - Beaucedine
         ["Cobraclaw Buchzvotch"] = {"C.Buchzvotch", 65, 134, 493, 0, 5012, "Beastmen"}, -- CBuc (MNK)
@@ -677,16 +677,16 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Ultrasonic Zeknajak"] = {"U.Zeknajak", 87, 134, 493, 6, 5012, "Beastmen"}, -- UZek (BRD)
         ["Wraithdancer Gidbnod"] = {"W.Gidbnod", 63, 134, 493, 1, 5012, "Beastmen"}, -- WGid (WHM)
         -- Dynamis Buburimu
-        ["Elvaansticker Bxafraff"] = {"E.Bxafraff", 88, 134, 760, 0, 5012, "Beastmen"}, -- Elva (DRG)
-        ["Flamecaller Zoeqdoq"] = {"F.Zoeqdoq", 84, 134, 760, 5000, 5012, "Beastmen"}, -- Flam (BLM)
-        ["Hamfist Gukhbuk"] = {"H.Gukhbuk", 65, 134, 760, 0, 5012, "Beastmen"}, -- Hamf (MNK)
-        ["Lyncean Juvgneg"] = {"L.Juvgneg", 82, 134, 760, 0, 5012, "Beastmen"}, -- Lync (RNG)
+        ["Elvaansticker Bxafraff"] = {"E.Bxafraff", 35, 40, 760, 0, 5012, "Beastmen"}, -- Elva (DRG)
+        ["Flamecaller Zoeqdoq"] = {"F.Zoeqdoq", 34, 40, 760, 5000, 5012, "Beastmen"}, -- Flam (BLM)
+        ["Hamfist Gukhbuk"] = {"H.Gukhbuk", 46, 40, 760, 0, 5012, "Beastmen"}, -- Hamf (MNK)
+        ["Lyncean Juwgneg"] = {"L.Juvgneg", 47, 40, 760, 0, 5012, "Beastmen"}, -- Lync (RNG)
         -- Dynamis - San d'Oria
-        ["Wyrmgnasher Bjakdek"] = {"W.Bjakdek", 88, 134, 237, 0, 5012, "Beastmen"}, -- WyrB (DRG)
-        ["Reapertongue Gadgquok"] = {"R.Gadgquok", 73, 134, 237, 0, 5012, "Beastmen"}, -- ReaG (SMN)
-        ["Voidstreaker Butchnotch"] = {"V.Butchnotch", 63, 134, 237, 7, 5012, "Beastmen"}, -- VoiB (NIN)
-        ["Battlechoir Gitchfotch"] = {"B.Gitchfotch", 87, 134, 237, 6, 5012, "Beastmen"}, -- BatG (BRD)
-        ["Soulsender Fugbrag"] = {"S.Fugbrag", 87, 134, 237, 6, 5012, "Beastmen"}, -- SouF (BRD)
+        ["Wyrmgnasher Bjakdek"] = {"W.Bjakdek", 25, 185, 237, 0, 5012, "Beastmen"}, -- WyrB (DRG)
+        ["Reapertongue Gadgquok"] = {"R.Gadgquok", 23, 185, 237, 0, 5012, "Beastmen"}, -- ReaG (SMN)
+        ["Voidstreaker Butchnotch"] = {"V.Butchnotch", 26, 185, 237, 7, 5012, "Beastmen"}, -- VoiB (NIN)
+        ["Battlechoir Gitchfotch"] = {"B.Gitchfotch", 2, 185, 237, 6, 5012, "Beastmen"}, -- BatG (BRD)
+        ["Soulsender Fugbrag"] = {"S.Fugbrag", 3, 185, 237, 6, 5012, "Beastmen"}, -- SouF (BRD)
         -- Quadav
         -- Dynamis - Beaucedine
         ["Be'Zhe Keeprazer"] = {"B.Keeprazer", 53, 134, 261, 0, 5011, "Beastmen"}, -- BeZh (SMN)
@@ -705,10 +705,10 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["So'Zho Metalbender"] = {"S.Metalbender", 46, 134, 261, 0, 5011, "Beastmen"}, -- SoZh (MNK)
         ["Ta'Hyu Gallanthunter"] = {"T.Gallanthunter", 40, 134, 261, 5, 5011, "Beastmen"}, -- TaHy (DRK)
         -- Dynamis Buburimu
-        ["Gi'Bhe Flesheater"] = {"G.Flesheater", 39, 134, 2901, 1, 5011, "Beastmen"}, -- GiBh (WHM)
-        ["Qu'Pho Bloodspiller"] = {"Q.Bloodspiller", 24, 134, 2901, 0, 5011, "Beastmen"}, -- QuPh (WAR)
-        ["Te'Zha Ironclad"] = {"T.Ironclad", 47, 134, 2901, 4, 5011, "Beastmen"}, -- TeZh (PLD)
-        ["Va'Rhu Bodysnatcher"] = {"V.Bodysnatcher", 37, 134, 2901, 0, 5011, "Beastmen"}, -- VaRh (THF)
+        ["Gi'Bhe Flesheater"] = {"G.Flesheater", 57, 40, 2901, 1, 5011, "Beastmen"}, -- GiBh (WHM)
+        ["Qu'Pho Bloodspiller"] = {"Q.Bloodspiller", 56, 40, 2901, 0, 5011, "Beastmen"}, -- QuPh (WAR)
+        ["Te'Zha Ironclad"] = {"T.Ironclad", 69, 40, 2901, 4, 5011, "Beastmen"}, -- TeZh (PLD)
+        ["Va'Rhu Bodysnatcher"] = {"V.Bodysnatcher", 68, 40, 2901, 0, 5011, "Beastmen"}, -- VaRh (THF)
         -- Dynamis - Bastok (Done)
         ["Aa'Nyu Dismantler"] = {"A.Dismantler", 40, 134, 2907, 5, 5011, "Beastmen"}, -- AaNy (DRK)
         ["Gu'Nhi Noondozer"] = {"G.Noondozer", 53, 134, 2907, 0, 5011, "Beastmen"}, -- GuNh (SMN)
@@ -739,17 +739,17 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Xaa Chau the Roctalon"] = {"X.Roctalon", 97, 134, 265, 0, 5014, "Beastmen"}, -- XaaC (MNK)
         ["Xhoo Fuza the Sublime"] = {"X.Sublime", 119, 134, 265, 6, 5014, "Beastmen"}, -- Xhoo (BRD)
         -- Dynamis - Buburimu
-        ["Baa Dava the Bibliopage"] = {"B.Bibliopage", 91, 317, 2085, 0, 5014, "Beastmen"}, -- BaaD (SMN)
+        ["Baa Dava the Bibliopage"] = {"B.Bibliopage", 24, 187, 2085, 0, 5014, "Beastmen"}, -- BaaD (SMN)
         ["Doo Peku the Fleetfoot"] = {"D.Fleetfoot", 115, 134, 2085, 7, 5014, "Beastmen"}, -- DooP (NIN)
         ["Koo Rahi the Levinblade"] = {"K.Levinblade", 121, 134, 2085, 0, 5014, "Beastmen"}, -- KooR (SAM)
         ["Ree Nata the Melomanic"] = {"R.Melomanic", 119, 134, 2085, 6, 5014, "Beastmen"}, -- ReeN (BRD)
         -- Dynamis - Windurst
-        ["Xoo Kaza the Solemn"] = {"X.Solemn", 106, 134, 1560, 5000, 5014, "Beastmen"}, -- XooK (BLM)
-        ["Haa Pevi the Stentorian"] = {"H.Stentorian", 91, 317, 1560, 0, 5014, "Beastmen"}, -- HaaP (SMN)
-        ["Wuu Qoho the Razorclaw"] = {"W.Razorclaw", 97, 134, 1560, 0, 5014, "Beastmen"}, -- WuuQ (MNK)
-        ["Loo Hepe the Eyepiercer"] = {"L.Eyepiercer", 107, 134, 1560, 3, 5014, "Beastmen"}, -- LooH (RDM)
-        ["Muu Febi the Steadfast"] = {"Muu.Steadfast", 113, 134, 1560, 4, 5014, "Beastmen"}, -- MuuF (PLD)
-        ["Maa Febi the Steadfast"] = {"Maa.Steadfast", 113, 134, 1560, 4, 5014, "Beastmen"}, -- MaaF (PLD)
+        ["Xoo Kaza the Solemn"] = {"X.Solemn", 27, 187, 1560, 5000, 5014, "Beastmen"}, -- XooK (BLM)
+        ["Haa Pevi the Stentorian"] = {"H.Stentorian", 24, 187, 1560, 0, 5014, "Beastmen"}, -- HaaP (SMN)
+        ["Wuu Qoho the Razorclaw"] = {"W.Razorclaw", 26, 187, 1560, 0, 5014, "Beastmen"}, -- WuuQ (MNK)
+        ["Loo Hepe the Eyepiercer"] = {"L.Eyepiercer", 25, 187, 1560, 3, 5014, "Beastmen"}, -- LooH (RDM)
+        ["Muu Febi the Steadfast"] = {"Muu.Steadfast", 3, 187, 1560, 4, 5014, "Beastmen"}, -- MuuF (PLD)
+        ["Maa Febi the Steadfast"] = {"Maa.Steadfast", 2, 187, 1560, 4, 5014, "Beastmen"}, -- MaaF (PLD)
         -- Kindred
         -- Dynamis - Xarcabard
         ["Count Zaebos"] = {"C.Zaebos", 51, 135, 521, 0, 358, "Beastmen"}, -- Zaeb (WAR)
@@ -866,7 +866,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Beastmen"] =
         {
             ["onMobSpawn"] = {function(mob) xi.dynamis.setNMStats(mob) end},
-            ["onMobEngaged"] = {function(mob, target) xi.dynamis.parentOnEngaged(mob, target) xi.dynamis.mobOnEngaged(mob, target) end},
+            ["onMobEngaged"] = {function(mob, target) xi.dynamis.mobOnEngaged(mob, target) end},
             ["onMobFight"] = {function(mob) end},
             ["onMobRoam"] = {function(mob) end},
             ["onMobMagicPrepare"] = {function(mob, target, spellId) end},
@@ -878,7 +878,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Statue Megaboss"] =
         {
             ["onMobSpawn"] = {function(mob) xi.dynamis.setMegaBossStats(mob) end},
-            ["onMobEngaged"] = {function(mob, target)  xi.dynamis.parentOnEngaged(mob, target) end},
+            ["onMobEngaged"] = {function(mob, target)  end},
             ["onMobFight"] = {function(mob) end},
             ["onMobRoam"] = {function(mob) end},
             ["onMobMagicPrepare"] = {function(mob, target, spellId) end},
@@ -890,7 +890,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Angra Mainyu"] =
         {
             ["onMobSpawn"] = {function(mob) xi.dynamis.onSpawnAngra(mob) end},
-            ["onMobEngaged"] = {function(mob, target)  xi.dynamis.parentOnEngaged(mob, target) end},
+            ["onMobEngaged"] = {function(mob, target) end},
             ["onMobFight"] = {function(mob, target) xi.dynamis.onFightAngra(mob, target) end},
             ["onMobRoam"] = {function(mob) xi.dynamis.onRoamAngra(mob) end},
             ["onMobMagicPrepare"] = {function(mob, target, spellId) xi.dynamis.onMagicPrepAngra(mob) end},
@@ -914,7 +914,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Goublefaupe"] =
         {
             ["onMobSpawn"] = {function(mob) xi.dynamis.onSpawnGouble(mob) end},
-            ["onMobEngaged"] = {function(mob, target)  xi.dynamis.parentOnEngaged(mob, target) end},
+            ["onMobEngaged"] = {function(mob, target) end},
             ["onMobFight"] = {function(mob, target) end},
             ["onMobRoam"] = {function(mob) end},
             ["onMobMagicPrepare"] = {function(mob, target, spellId) end},
@@ -926,7 +926,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Mildaunegeux"] =
         {
             ["onMobSpawn"] = {function(mob) xi.dynamis.onSpawnMildaun(mob) end},
-            ["onMobEngaged"] = {function(mob, target)  xi.dynamis.parentOnEngaged(mob, target) end},
+            ["onMobEngaged"] = {function(mob, target) end},
             ["onMobFight"] = {function(mob, target) end},
             ["onMobRoam"] = {function(mob) end},
             ["onMobMagicPrepare"] = {function(mob, target, spellId) end},
@@ -938,7 +938,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Quiebitiel"] =
         {
             ["onMobSpawn"] = {function(mob) xi.dynamis.onSpawnQuieb(mob) end},
-            ["onMobEngaged"] = {function(mob, target)  xi.dynamis.parentOnEngaged(mob, target) end},
+            ["onMobEngaged"] = {function(mob, target) end},
             ["onMobFight"] = {function(mob, target) end},
             ["onMobRoam"] = {function(mob) end},
             ["onMobMagicPrepare"] = {function(mob, target, spellId) end},
@@ -950,7 +950,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Velosareon"] =
         {
             ["onMobSpawn"] = {function(mob) xi.dynamis.onSpawnVelosar(mob) end},
-            ["onMobEngaged"] = {function(mob, target)  xi.dynamis.parentOnEngaged(mob, target) end},
+            ["onMobEngaged"] = {function(mob, target) end},
             ["onMobFight"] = {function(mob, target) end},
             ["onMobRoam"] = {function(mob) end},
             ["onMobMagicPrepare"] = {function(mob, target, spellId) end},
@@ -1279,10 +1279,10 @@ xi.dynamis.spawnDynamicPet =function(target, oMob, mobJob)
             },
             [360] = -- Yagudo Family
             {
-                [false] = {"V. Crow", 117, 135, 0, 52, 55}, -- Normal Yagudo BST (VCro)
+                [false] = {"V. Crow", 100, 134, 0, 52, 55}, -- Normal Yagudo BST (VCro)
                 [true] = -- Yagudo NM
                 {
-                    ["Soo Jopo the Fiendking"] = {"V. Crow", 117, 135, 0, 52, 55}, -- NM Yagudo BST (VCro)
+                    ["Soo Jopo the Fiendking"] = {"V. Crow", 100, 134, 0, 52, 55}, -- NM Yagudo BST (VCro)
                 },
             },
         },
@@ -1717,6 +1717,14 @@ xi.dynamis.setNMStats = function(mob)
     mob:setTrueDetection(true)
     mob:setMobMod(xi.mobMod.CHECK_AS_NM, 2)
 
+    mob:addListener('TAKE_DAMAGE', 'DYNA_DMG_TAKE', function(mobArg, amount, attacker, attackType, damageType)
+        xi.dynamis.parentOnEngaged(mobArg, attacker)
+    end)
+
+    mob:addListener('ENGAGE', 'DYNA_ENGAGE', function(mobArg, target)
+        xi.dynamis.parentOnEngaged(mobArg, target)
+    end)
+
     if job == xi.job.NIN then
         local params = { }
         params.specials = { }
@@ -1743,6 +1751,14 @@ xi.dynamis.setStatueStats = function(mob, mobIndex)
     mob:setMobMod(xi.mobMod.CHECK_AS_NM, 2)
     mob:setSpeed(20)
 
+    mob:addListener('TAKE_DAMAGE', 'DYNA_DMG_TAKE', function(mobArg, amount, attacker, attackType, damageType)
+        xi.dynamis.parentOnEngaged(mobArg, attacker)
+    end)
+
+    mob:addListener('ENGAGE', 'DYNA_ENGAGE', function(mobArg, target)
+        xi.dynamis.parentOnEngaged(mobArg, target)
+    end)
+
     if mob:getFamily() >= 92 and mob:getFamily() <= 95 then -- If statue
         if eyes ~= nil then
             mob:setLocalVar("eyeColor", eyes) -- Set Eyes if need be
@@ -1764,6 +1780,14 @@ xi.dynamis.setMegaBossStats = function(mob)
     mob:setMobLevel(88)
     mob:setMod(xi.mod.STR, -10)
     mob:setTrueDetection(true)
+
+    mob:addListener('TAKE_DAMAGE', 'DYNA_DMG_TAKE', function(mobArg, amount, attacker, attackType, damageType)
+        xi.dynamis.parentOnEngaged(mobArg, attacker)
+    end)
+
+    mob:addListener('ENGAGE', 'DYNA_ENGAGE', function(mobArg, target)
+        xi.dynamis.parentOnEngaged(mobArg, target)
+    end)
 end
 
 xi.dynamis.setPetStats = function(mob)
@@ -1792,6 +1816,14 @@ xi.dynamis.setAnimatedWeaponStats = function(mob)
     mob:setMod(xi.mod.LULLABYRES, 100)
     mob:setMod(xi.mod.SLEEPRES, 100)
     mob:setMobMod(xi.mobMod.CHECK_AS_NM, 2)
+
+    mob:addListener('TAKE_DAMAGE', 'DYNA_DMG_TAKE', function(mobArg, amount, attacker, attackType, damageType)
+        xi.dynamis.parentOnEngaged(mobArg, attacker)
+    end)
+
+    mob:addListener('ENGAGE', 'DYNA_ENGAGE', function(mobArg, target)
+        xi.dynamis.parentOnEngaged(mobArg, target)
+    end)
 end
 
 xi.dynamis.teleport = function(mob, hideDuration)
