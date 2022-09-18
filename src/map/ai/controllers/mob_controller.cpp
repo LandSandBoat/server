@@ -555,6 +555,10 @@ void CMobController::CastSpell(SpellID spellid)
             // only buff other targets if i'm roaming
             if ((PSpell->getValidTarget() & TARGET_PLAYER_PARTY))
             {
+                // find the valid targets and build the target list
+                PMob->PAI->TargetFind->reset();
+                PMob->PAI->TargetFind->findWithinArea(PMob, AOE_RADIUS::ATTACKER, PSpell->getRange());
+
                 // chance to target my master
                 if (PMob->PMaster != nullptr && xirand::GetRandomNumber(2) == 0)
                 {
@@ -564,9 +568,6 @@ void CMobController::CastSpell(SpellID spellid)
                 else if (xirand::GetRandomNumber(2) == 0)
                 {
                     // chance to target party
-                    PMob->PAI->TargetFind->reset();
-                    PMob->PAI->TargetFind->findWithinArea(PMob, AOE_RADIUS::ATTACKER, PSpell->getRange());
-
                     if (!PMob->PAI->TargetFind->m_targets.empty())
                     {
                         // randomly select a target
@@ -577,6 +578,15 @@ void CMobController::CastSpell(SpellID spellid)
                         {
                             PCastTarget = PMob;
                         }
+                    }
+                }
+
+                // if any mobs are flagged with MOBMOD_ASSIST, override the target randomizer and assist them
+                for (auto* PAssistTarget : PMob->PAI->TargetFind->m_targets)
+                {
+                    if (static_cast<CMobEntity*>(PAssistTarget)->getMobMod(MOBMOD_ASSIST))
+                    {
+                        PCastTarget = PAssistTarget;
                     }
                 }
             }

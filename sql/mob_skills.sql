@@ -1180,9 +1180,9 @@ INSERT INTO `mob_skills` VALUES (1339,220,'bane',1,12.0,2000,1500,4,0,0,0,0,0,0)
 INSERT INTO `mob_skills` VALUES (1340,17,'crossthrash',1,5.0,2000,1500,4,0,0,1,0,0,0);
 INSERT INTO `mob_skills` VALUES (1341,993,'knife_edge_circle',4,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1342,992,'train_fall',0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1343,1087,'.',0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1344,1088,'.',0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1345,1089,'.',0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1343,994,'moblin_1343',0,50.0,2000,0,4,4,0,0,0,0,0); -- Moblin animation
+INSERT INTO `mob_skills` VALUES (1344,995,'moblin_1344',0,50.0,2000,0,4,4,0,0,0,0,0); -- Moblin animation
+INSERT INTO `mob_skills` VALUES (1345,996,'moblin_1345',0,50.0,2000,0,4,4,0,0,0,0,0); -- Moblin animation
 -- INSERT INTO `mob_skills` VALUES (1346,1090,'.',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1347,998,'dual_strike',0,7.0,2000,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1348,999,'siphon_discharge',1,15.0,2000,1000,4,0,0,1,0,0,0);
