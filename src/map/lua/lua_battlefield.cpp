@@ -297,10 +297,22 @@ void CLuaBattlefield::addGroups(sol::table groups)
     for (auto entry : groups)
     {
         sol::table groupData = entry.second.as<sol::table>();
-        sol::table mobs      = groupData.get<sol::table>("mobs");
+        auto       mobNames  = groupData.get<std::vector<std::string>>("mobs");
+
+        // Lookup mob ids given the provided names
+        QueryByNameResult_t entities;
+        for (const std::string& name : mobNames)
+        {
+            const QueryByNameResult_t result = m_PLuaBattlefield->GetZone()->queryEntitiesByName(name);
+            entities.insert(entities.end(), result.begin(), result.end());
+        }
 
         BattlefieldGroup group;
-        group.mobIds              = mobs.as<std::vector<uint32>>();
+        for (CBaseEntity* entity : entities)
+        {
+            group.mobIds.push_back(entity->id);
+        }
+
         group.deathCallback       = groupData.get<sol::function>("death");
         group.allDeathCallback    = groupData.get<sol::function>("allDeath");
         group.randomDeathCallback = groupData.get<sol::function>("randomDeath");
@@ -308,6 +320,11 @@ void CLuaBattlefield::addGroups(sol::table groups)
         auto setup = groupData.get<sol::function>("setup");
         if (setup.valid())
         {
+            auto mobs = lua.create_table();
+            for (CBaseEntity* entity : entities)
+            {
+                mobs.add(CLuaBaseEntity(entity));
+            }
             setup(mobs);
         }
 
