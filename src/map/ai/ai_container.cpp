@@ -149,6 +149,7 @@ bool CAIContainer::Trigger(CCharEntity* player)
 {
     // TODO: ensure idempotency of all onTrigger lua calls (i.e. chests can only be opened once)
     bool isDoor = luautils::OnTrigger(player, PEntity) == -1;
+    PEntity->PAI->EventHandler.triggerListener("ON_TRIGGER", CLuaBaseEntity(player), CLuaBaseEntity(PEntity));
     if (CanChangeState())
     {
         auto ret = ChangeState<CTriggerState>(PEntity, player->targid, isDoor);
