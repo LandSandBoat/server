@@ -3913,7 +3913,7 @@ namespace luautils
     {
         TracyZoneScoped;
 
-        sol::function canUseSpellOverride = lua["xi"]["spells"]["canUseSpellOverride"];
+        sol::function canUseSpellOverride = lua["xi"]["spells"]["canusespell_override"]["checkCanUseSpellOverride"];
 
         if (!canUseSpellOverride.valid())
         {
