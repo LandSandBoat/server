@@ -303,7 +303,7 @@ void CLuaBattlefield::addGroups(sol::table groups)
         QueryByNameResult_t entities;
         for (const std::string& name : mobNames)
         {
-            const QueryByNameResult_t result = m_PLuaBattlefield->GetZone()->queryEntitiesByName(name);
+            const QueryByNameResult_t& result = m_PLuaBattlefield->GetZone()->queryEntitiesByName(name);
             entities.insert(entities.end(), result.begin(), result.end());
         }
 
