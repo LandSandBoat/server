@@ -820,5 +820,9 @@ local list =
         { "Soldier Crawler", "King Crawler" },
         { "Hornly", "Dancing Jewel" },
     },
+    [xi.zone.DEN_OF_RANCOR] =
+    {
+        { "Stygian Pugil", "Demonic Pugil" },
+    },
 }
 return list
