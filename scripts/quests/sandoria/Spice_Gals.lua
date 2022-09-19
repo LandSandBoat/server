@@ -69,7 +69,7 @@ quest.sections =
                 [725] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:delKeyItem(xi.ki.RIVERNEWORT)
-                        player:setCharVar("SPICE_GALS_CONQUEST", getConquestTally())
+                        quest:setVar(player, 'conquest', getConquestTally())
                     end
                 end,
             },
@@ -103,7 +103,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_COMPLETED and
-            player:getCharVar("SPICE_GALS_CONQUEST") < getConquestTally()
+                quest:getVar(player, 'conquest') < getConquestTally()
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =
@@ -124,7 +124,7 @@ quest.sections =
                 [725] = function(player, csid, option, npc)
                     player:delKeyItem(xi.ki.RIVERNEWORT)
                     npcUtil.giveItem(player, xi.items.MIRATETES_MEMOIRS)
-                    player:setCharVar("SPICE_GALS_CONQUEST", getConquestTally())
+                    quest:setVar(player, 'conquest', getConquestTally())
                 end,
             },
         },
