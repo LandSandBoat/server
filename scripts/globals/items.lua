@@ -2521,6 +2521,7 @@ xi.items =
     NINJUTSU_TORQUE                 = 13159,
     STRING_TORQUE                   = 13160,
     WIND_TORQUE                     = 13161,
+    MEDIEVAL_COLLAR                 = 13163,
     AGILE_GORGET                    = 13164,
     JAGD_GORGET                     = 13165,
     WILLPOWER_TORQUE                = 13174,
