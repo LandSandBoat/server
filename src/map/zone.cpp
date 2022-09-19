@@ -258,6 +258,7 @@ const QueryByNameResult_t& CZone::queryEntitiesByName(std::string const& name)
     std::vector<CBaseEntity*> entities;
 
     // TODO: Make work for instances
+    // clang-format off
     ForEachNpc([&](CNpcEntity* PNpc)
     {
         if (std::string((const char*)PNpc->GetName()) == name)
@@ -273,6 +274,7 @@ const QueryByNameResult_t& CZone::queryEntitiesByName(std::string const& name)
             entities.push_back(PMob);
         }
      });
+    // clang-format on
 
     m_queryByNameResults[name] = std::move(entities);
     return m_queryByNameResults[name];
