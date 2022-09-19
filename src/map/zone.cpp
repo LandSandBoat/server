@@ -259,18 +259,20 @@ const QueryByNameResult_t& CZone::queryEntitiesByName(std::string const& name)
 
     // TODO: Make work for instances
     ForEachNpc([&](CNpcEntity* PNpc)
-               {
-                   if (std::string((const char*)PNpc->GetName()) == name)
-                   {
-                       entities.push_back(PNpc);
-                   } });
+    {
+        if (std::string((const char*)PNpc->GetName()) == name)
+        {
+            entities.push_back(PNpc);
+        }
+    });
 
     ForEachMob([&](CMobEntity* PMob)
-               {
-                   if (std::string((const char*)PMob->GetName()) == name)
-                   {
-                       entities.push_back(PMob);
-                   } });
+    {
+        if (std::string((const char*)PMob->GetName()) == name)
+        {
+            entities.push_back(PMob);
+        }
+     });
 
     m_queryByNameResults[name] = std::move(entities);
     return m_queryByNameResults[name];
