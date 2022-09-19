@@ -29,8 +29,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "../common/cbasetypes.h"
 #include "../common/mmo.h"
-#include <unordered_map>
 #include "sol/sol.hpp"
+#include <unordered_map>
 
 enum BCRULES : uint8
 {
