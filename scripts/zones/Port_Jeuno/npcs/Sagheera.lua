@@ -407,7 +407,6 @@ entity.onTrigger = function(player, npc)
             menu = utils.mask.setBit(menu, 13, true)
         end
 
-
         local arg3 = 0
         local arg4 = 0
         local afUpgrade = player:getCharVar("AFupgrade")
