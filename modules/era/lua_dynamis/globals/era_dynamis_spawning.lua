@@ -508,7 +508,7 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
         },
         ["Nightmare"] =
         {
-            ["onMobSpawn"] = {function(mob) xi.dynamis.setMobStats(mob) mob:setRoamFlags(xi.roamFlag.NONE) end},
+            ["onMobSpawn"] = {function(mob) xi.dynamis.setNightmareStats(mob) mob:setRoamFlags(xi.roamFlag.NONE) end},
             ["onMobEngaged"] = {function(mob, target) end},
             ["onMobFight"] = {function(mob) end},
             ["onMobRoam"] = {function(mob) end},
@@ -524,8 +524,8 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
         },
         ["Elemental"] =
         {
-            ["onMobSpawn"] = {function(mob) xi.dynamis.setMobStats(mob) end},
-            ["onMobEngaged"] = {function(mob, target) xi.dynamis.mobOnEngaged(mob, target) end},
+            ["onMobSpawn"] = {function(mob) xi.dynamis.setNightmareStats(mob) end},
+            ["onMobEngaged"] = {function(mob, target) end},
             ["onMobFight"] = {function(mob) end},
             ["onMobRoam"] = {function(mob) end},
             ["mixins"] = { }
@@ -784,38 +784,38 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         -- Dynamis - Windurst
         ["Tzee Xicu Idol"] = {"Tzee Xicu Idol", 1, 187, 2510, 50, 95, "Statue Megaboss"}, -- WMb
         -- Dynamis - Xarcabard Non-Beastmen
-        ["Animated Hammer"] = {"A. Hammer", 81, 135, 99, 0, 9, "Animated Weapon"}, -- AHam
-        ["Animated Staff"] = {"A. Staff", 87, 135, 108, 0, 23, "Animated Weapon"}, -- ASta
-        ["Animated Longsword"] = {"A.  Longsword", 84, 135, 104, 0, 24, "Animated Weapon"}, -- ALon
-        ["Animated Tabar"] = {"A. Tabar", 88, 135, 109, 0, 8, "Animated Weapon"}, -- ATab
-        ["Animated Great Axe"] = {"A. Great Axe", 80, 135, 97, 0, 12, "Animated Weapon"}, -- AGre
-        ["Animated Claymore"] = {"A. Claymore", 78, 135, 95, 0, 14, "Animated Weapon"}, -- ACla
-        ["Animated Spear"] = {"A. Spear", 86, 135, 107, 0, 19, "Animated Weapon"}, -- ASpe
-        ["Animated Scythe"] = {"A. Scythe", 85, 135, 105, 0, 20, "Animated Weapon"}, -- AScy
-        ["Animated Kunai"] = {"A. Kunai", 83, 135, 102, 0, 17, "Animated Weapon"}, -- AKun
-        ["Animated Tachi"] = {"A. Tachi", 89, 135, 110, 0, 13, "Animated Weapon"}, -- ATac
-        ["Animated Dagger"] = {"A. Dagger", 79, 135, 96, 0, 11, "Animated Weapon"}, -- ADag
-        ["Animated Knuckles"] = {"A. Knuckles", 82, 135, 101, 0,15, "Animated Weapon"}, -- AKnu
-        ["Animated Longbow"] = {"A. Longbow", 11, 135, 103, 0, 7, "Animated Weapon"}, -- Alon
-        ["Animated Gun"] = {"A. Gun", 12, 135, 98, 0, 18, "Animated Weapon"}, -- AGun
-        ["Animated Horn"] = {"A. Horn", 13, 135, 100, 0, 16, "Animated Weapon"}, -- AHor
-        ["Animated Shield"] = {"A. Shield", 14, 135, 106, 0, 21, "Animated Weapon"}, -- AShi
-        ["Satellite Hammer"] = {"S. Hammer", 81, 135, 0, 0, 9, "Satellite Weapon"}, -- SHam
-        ["Satellite Staff"] = {"S. Staff", 87, 135, 0, 0, 23, "Satellite Weapon"}, -- SSta
-        ["Satellite Longsword"] = {"S. Longsword", 84, 135, 0, 0, 24, "Satellite Weapon"}, -- SLon
-        ["Satellite Tabar"] = {"S. Tabar", 88, 135, 0, 0, 8, "Satellite Weapon"}, -- STab
-        ["Satellite Great Axe"] = {"S. Great Axe", 80, 135, 0, 0, 12, "Satellite Weapon"}, -- SGre
-        ["Satellite Claymore"] = {"S. Claymore", 78, 135, 0, 0, 14, "Satellite Weapon"}, -- SCla
-        ["Satellite Spear"] = {"S. Spear", 86, 135, 0, 0, 19, "Satellite Weapon"}, -- SSpe
-        ["Satellite Scythe"] = {"S. Scythe", 85, 135, 0, 0, 20, "Satellite Weapon"}, -- SScy
-        ["Satellite Kunai"] = {"S. Kunai", 83, 135, 0, 0, 17, "Satellite Weapon"}, -- SKun
-        ["Satellite Tachi"] = {"S. Tachi", 89, 135, 0, 0, 13, "Satellite Weapon"}, -- STac
-        ["Satellite Dagger"] = {"S. Dagger", 79, 135, 0, 0, 11, "Satellite Weapon"}, -- SDag
-        ["Satellite Knuckles"] = {"S. Knuckles", 82, 135, 0, 0, 15, "Satellite Weapon"}, -- SKnu
-        ["Satellite Longbow"] = {"S. Longbow", 11, 135, 0, 0, 7, "Satellite Weapon"}, -- Slon
-        ["Satellite Gun"] = {"S. Gun", 12, 135, 0, 0, 18, "Satellite Weapon"}, -- SGun
-        ["Satellite Horn"] = {"S. Horn", 13, 135, 0, 0, 16, "Satellite Weapon"}, -- SHor
-        ["Satellite Shield"] = {"S. Shield", 14, 135, 0, 0, 21, "Satellite Weapon"}, -- SShi
+        ["Animated Hammer"] = {"A.Hammer", 81, 135, 99, 0, 9, "Animated Weapon"}, -- AHam
+        ["Animated Staff"] = {"A.Staff", 87, 135, 108, 0, 23, "Animated Weapon"}, -- ASta
+        ["Animated Longsword"] = {"A.Longsword", 84, 135, 104, 0, 24, "Animated Weapon"}, -- ALon
+        ["Animated Tabar"] = {"A.Tabar", 88, 135, 109, 0, 8, "Animated Weapon"}, -- ATab
+        ["Animated Great Axe"] = {"A.Great Axe", 80, 135, 97, 0, 12, "Animated Weapon"}, -- AGre
+        ["Animated Claymore"] = {"A.Claymore", 78, 135, 95, 0, 14, "Animated Weapon"}, -- ACla
+        ["Animated Spear"] = {"A.Spear", 86, 135, 107, 0, 19, "Animated Weapon"}, -- ASpe
+        ["Animated Scythe"] = {"A.Scythe", 85, 135, 105, 0, 20, "Animated Weapon"}, -- AScy
+        ["Animated Kunai"] = {"A.Kunai", 83, 135, 102, 0, 17, "Animated Weapon"}, -- AKun
+        ["Animated Tachi"] = {"A.Tachi", 89, 135, 110, 0, 13, "Animated Weapon"}, -- ATac
+        ["Animated Dagger"] = {"A.Dagger", 79, 135, 96, 0, 11, "Animated Weapon"}, -- ADag
+        ["Animated Knuckles"] = {"A.Knuckles", 82, 135, 101, 0,15, "Animated Weapon"}, -- AKnu
+        ["Animated Longbow"] = {"A.Longbow", 11, 135, 103, 0, 7, "Animated Weapon"}, -- Alon
+        ["Animated Gun"] = {"A.Gun", 12, 135, 98, 0, 18, "Animated Weapon"}, -- AGun
+        ["Animated Horn"] = {"A.Horn", 13, 135, 100, 0, 16, "Animated Weapon"}, -- AHor
+        ["Animated Shield"] = {"A.Shield", 14, 135, 106, 0, 21, "Animated Weapon"}, -- AShi
+        ["Satellite Hammer"] = {"S.Hammer", 81, 135, 0, 0, 9, "Satellite Weapon"}, -- SHam
+        ["Satellite Staff"] = {"S.Staff", 87, 135, 0, 0, 23, "Satellite Weapon"}, -- SSta
+        ["Satellite Longsword"] = {"S.Longsword", 84, 135, 0, 0, 24, "Satellite Weapon"}, -- SLon
+        ["Satellite Tabar"] = {"S.Tabar", 88, 135, 0, 0, 8, "Satellite Weapon"}, -- STab
+        ["Satellite Great Axe"] = {"S.Great Axe", 80, 135, 0, 0, 12, "Satellite Weapon"}, -- SGre
+        ["Satellite Claymore"] = {"S.Claymore", 78, 135, 0, 0, 14, "Satellite Weapon"}, -- SCla
+        ["Satellite Spear"] = {"S.Spear", 86, 135, 0, 0, 19, "Satellite Weapon"}, -- SSpe
+        ["Satellite Scythe"] = {"S.Scythe", 85, 135, 0, 0, 20, "Satellite Weapon"}, -- SScy
+        ["Satellite Kunai"] = {"S.Kunai", 83, 135, 0, 0, 17, "Satellite Weapon"}, -- SKun
+        ["Satellite Tachi"] = {"S.Tachi", 89, 135, 0, 0, 13, "Satellite Weapon"}, -- STac
+        ["Satellite Dagger"] = {"S.Dagger", 79, 135, 0, 0, 11, "Satellite Weapon"}, -- SDag
+        ["Satellite Knuckles"] = {"S.Knuckles", 82, 135, 0, 0, 15, "Satellite Weapon"}, -- SKnu
+        ["Satellite Longbow"] = {"S.Longbow", 11, 135, 0, 0, 7, "Satellite Weapon"}, -- Slon
+        ["Satellite Gun"] = {"S.Gun", 12, 135, 0, 0, 18, "Satellite Weapon"}, -- SGun
+        ["Satellite Horn"] = {"S.Horn", 13, 135, 0, 0, 16, "Satellite Weapon"}, -- SHor
+        ["Satellite Shield"] = {"S.Shield", 14, 135, 0, 0, 21, "Satellite Weapon"}, -- SShi
         ["Ying"] = {"Ying", 2, 135, 0, 0, 87, "Ying"}, -- Ying
         ["Yang"] = {"Yang", 3, 135, 0, 0, 87, "Yang"}, -- Yang
         ["Dynamis Lord"] = {"Dynamis Lord", 1, 135, 730, 86, 361, "Dynamis Lord"}, -- DL
@@ -1699,6 +1699,39 @@ xi.dynamis.setMobStats = function(mob)
         elseif job == xi.job.DRG then
         elseif job == xi.job.SMN then
         end
+
+        mob:addListener('TAKE_DAMAGE', 'DYNA_DMG_TAKE', function(mobArg, amount, attacker, attackType, damageType)
+            xi.dynamis.parentOnEngaged(mobArg, attacker)
+        end)
+
+        mob:addListener('ENGAGE', 'DYNA_ENGAGE', function(mobArg, target)
+            xi.dynamis.parentOnEngaged(mobArg, target)
+        end)
+
+        -- Add Check After Calcs
+        mob:setMobMod(xi.mobMod.CHECK_AS_NM, 2)
+    end
+end
+
+xi.dynamis.setNightmareStats = function(mob)
+    if mob then
+        mob:setMobType(xi.mobskills.mobType.BATTLEFIELD)
+        mob:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0, true)
+        xi.dynamis.setSpecialSkill(mob)
+        mob:setMobMod(xi.mobMod.CHECK_AS_NM, 1)
+        local job = mob:getMainJob()
+        mob:setMobMod(xi.mobMod.HP_SCALE, 132)
+        mob:setHP(mob:getMaxHP())
+        mob:setMobLevel(math.random(78,80))
+        mob:setTrueDetection(true)
+
+        mob:addListener('TAKE_DAMAGE', 'DYNA_DMG_TAKE', function(mobArg, amount, attacker, attackType, damageType)
+            xi.dynamis.parentOnEngaged(mobArg, attacker)
+        end)
+
+        mob:addListener('ENGAGE', 'DYNA_ENGAGE', function(mobArg, target)
+            xi.dynamis.parentOnEngaged(mobArg, target)
+        end)
 
         -- Add Check After Calcs
         mob:setMobMod(xi.mobMod.CHECK_AS_NM, 2)

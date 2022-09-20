@@ -19,8 +19,12 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local cap = mob:getLocalVar("putridbreathcap")
-    local dmgmod = xi.mobskills.MobBreathMove(mob, target, 0.15, 3, xi.magic.ele.EARTH, cap)
-    local dmg = xi.mobskills.MobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.EARTH)
+    local dmgmod = xi.mobskills.mobBreathMove(mob, target, 0.15, 3, xi.magic.ele.EARTH, cap)
+    local dmg = xi.mobskills.mobFinalAdjustments(dmgmod, mob, skill, target, xi.attackType.BREATH, xi.damageType.EARTH)
+
+    if dmg == nil then
+        dmg = 0
+    end
 
     target:takeDamage(dmg, mob, xi.attackType.BREATH, xi.damageType.EARTH)
 
