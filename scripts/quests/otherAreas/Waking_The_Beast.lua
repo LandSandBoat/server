@@ -106,13 +106,9 @@ quest.sections =
                 end,
 
                 [208] = function(player, csid, option, npc)
-                    if player:getFreeSlotsCount() == 0 then
-                        player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.CARBUNCLES_POLE)
-                    else
+                    if quest:complete(player) then
                         player:setCharVar("WTB_CONQUEST", getConquestTally())
                         player:delKeyItem(xi.ki.FADED_RUBY)
-
-                        quest:complete(player)
 
                         if player:getCharVar("WTB_TITLE") == 0 then
                             player:addTitle(xi.title.DISTURBER_OF_SLUMBER)
