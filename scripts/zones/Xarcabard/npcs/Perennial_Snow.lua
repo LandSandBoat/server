@@ -36,7 +36,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 3 then
-        player:setCharVar("star_ringburied", os.time() + 60) -- wait 1 minute
+        player:setCharVar("star_ringburied", getMidnight()) -- wait 1 minute
     elseif csid == 2 then
         player:setCharVar("star_ringburied", 0)
         player:setCharVar("circleTime", 4)
