@@ -254,7 +254,8 @@ local abcShop =
 -----------------------------------
 -- trades chips for ancient beastcoins
 -----------------------------------
-local tier1Chips = {
+local tier1Chips =
+{
     xi.items.IVORY_CHIP,
     xi.items.SCARLET_CHIP,
     xi.items.EMERALD_CHIP,
@@ -263,11 +264,14 @@ local tier1Chips = {
     xi.items.SMALT_CHIP,
     xi.items.SMOKY_CHIP,
 }
-local tier2Chips = {
+
+local tier2Chips =
+{
     xi.items.ORCHID_CHIP,
     xi.items.CHARCOAL_CHIP,
     xi.items.MAGENTA_CHIP,
 }
+
 local tier1ChipValue = 5
 local tier2ChipValue = 10
 
@@ -446,20 +450,13 @@ entity.onEventUpdate = function(player, csid, option)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
-    local coinAmount = bit.rshift(option, 16)
-    option = bit.band(option, 65535) -- Only use the first 16 bits
-
-    -- LURE OF THE WILDCAT
-    if csid == 313 then
-        player:setCharVar("WildcatJeuno", utils.mask.setBit(player:getCharVar("WildcatJeuno"), 19, true))
-
+local handleMainEvent = function(player, option, coinAmount)
     -- "Just wanted to chat" for the first time
-    elseif csid == 310 and option == 1 then
+    if option == 1 then
         player:setCharVar("Sagheera", utils.mask.setBit(player:getCharVar("Sagheera"), 1, true));
 
     -- purchase COSMO_CLEANSE
-    elseif csid == 310 and option == 3 then
+    elseif option == 3 then
         local cosmoTime = getCosmoCleanseTime(player)
         local cost = player:hasKeyItem(xi.ki.RHAPSODY_IN_MAUVE) and 1000 or xi.settings.main.COSMO_CLEANSE_BASE_COST
         if cosmoTime == cosmoReady and player:delGil(cost) then
@@ -468,17 +465,17 @@ entity.onEventFinish = function(player, csid, option)
         end
 
     -- retrieve stored ABCs
-    elseif csid == 310 and option == 4 then
+    elseif option == 4 then
         if player:getCurrency("ancient_beastcoin") >= coinAmount and npcUtil.giveItem(player, { { xi.items.ANCIENT_BEASTCOIN, coinAmount } }) then
             player:delCurrency("ancient_beastcoin", coinAmount)
         end
 
     -- Relic restoration exited
-    elseif csid == 310 and option == 5 then
+    elseif option == 5 then
         player:setCharVar("Sagheera", utils.mask.setBit(player:getCharVar("Sagheera"), 2, true));
 
     -- purchase item using ancient beastcoins
-    elseif csid == 310 and abcShop[option] then
+    elseif abcShop[option] then
         local purchase = abcShop[option]
 
         if player:getCurrency("ancient_beastcoin") >= purchase.abc and npcUtil.giveItem(player, purchase.item) then
@@ -486,7 +483,7 @@ entity.onEventFinish = function(player, csid, option)
         end
 
     -- get upgrade
-    elseif csid == 310 and option == 100 then
+    elseif option == 100 then
         local afUpgrade = player:getCharVar("AFupgrade")
         local info = afArmorPlusOne[afUpgrade]
         if info == nil then
@@ -498,15 +495,32 @@ entity.onEventFinish = function(player, csid, option)
             player:setCharVar("AFupgrade", 0)
             player:setCharVar("AFupgradeDay", 0)
         end
+    end
+end
+
+local handleTradeChipEvent = function(player, option)
+    local trade = player:getTrade()
+    if (npcUtil.tradeSetInList(trade, tier1Chips) and npcUtil.giveItem(player, { { xi.items.ANCIENT_BEASTCOIN, tier1ChipValue } })) then
+        player:confirmTrade()
+    elseif npcUtil.tradeSetInList(trade, tier2Chips) and npcUtil.giveItem(player, { { xi.items.ANCIENT_BEASTCOIN, tier2ChipValue } }) then
+        player:confirmTrade()
+    end
+end
+
+entity.onEventFinish = function(player, csid, option)
+    local coinAmount = bit.rshift(option, 16)
+    option = bit.band(option, 65535) -- Only use the first 16 bits
+
+    -- LURE OF THE WILDCAT
+    if csid == 313 then
+        player:setCharVar("WildcatJeuno", utils.mask.setBit(player:getCharVar("WildcatJeuno"), 19, true))
+
+    elseif csid == 310 then
+        handleMainEvent(player, option, coinAmount)
 
     -- Trading chips for ancient beastcoins
     elseif csid == 361 and coinAmount > 0 then
-        local trade = player:getTrade()
-        if (npcUtil.tradeSetInList(trade, tier1Chips) and npcUtil.giveItem(player, { { xi.items.ANCIENT_BEASTCOIN, tier1ChipValue } })) then
-            player:confirmTrade()
-        elseif npcUtil.tradeSetInList(trade, tier2Chips) and npcUtil.giveItem(player, { { xi.items.ANCIENT_BEASTCOIN, tier2ChipValue } }) then
-            player:confirmTrade()
-        end
+        handleTradeChipEvent(player, option)
     end
 end
 
