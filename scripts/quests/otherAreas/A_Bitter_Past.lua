@@ -19,7 +19,7 @@ local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_BI
 
 quest.reward =
 {
-    item = xi.item.YINYANG_LORGNETTE,
+    item = xi.items.YINYANG_LORGNETTE,
 }
 
 quest.sections =
