@@ -15,7 +15,7 @@ require('scripts/globals/titles')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_BITTER_PAST)
+local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.A_BITTER_DAY)
 
 quest.reward =
 {
@@ -31,7 +31,7 @@ quest.sections =
 
         [xi.zone.TAVNAZIAN_SAFEHOLD] =
         {
-            ['Fresheque'] = quest:progressEvent(151),
+            ['Frescheque'] = quest:progressEvent(151),
 
             onEventFinish =
             {
@@ -49,7 +49,7 @@ quest.sections =
 
         [xi.zone.TAVNAZIAN_SAFEHOLD] =
         {
-            ['Fresheque'] =
+            ['Frescheque'] =
             {
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.ki.TINY_WRISTLET) then
@@ -113,7 +113,7 @@ quest.sections =
 
             ['Splinterspine_Grukjuk'] =
             {
-                onMobDeath = function(mob, player, isKiller, firstCall)
+                onMobDeath = function(mob, player)
                     local party = player:getParty()
 
                     for _, v in ipairs(party) do
@@ -150,3 +150,5 @@ quest.sections =
         },
     },
 }
+
+return quest
