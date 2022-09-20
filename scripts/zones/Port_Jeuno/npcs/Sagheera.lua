@@ -375,17 +375,24 @@ entity.onTrigger = function(player, npc)
         -- event parameters
 
         local storedABCs = player:getCurrency("ancient_beastcoin")
-        -- bitfield of menu options
         local playerSagheera = player:getCharVar("SagheeraInteractions")
-        local menu = bit.bxor(playerSagheera, 11)
-        -- Use the inverse of playerSagheera following bits
+        -- bitfield of menu options
+        local menu = 0
         -- bit 0 - has boughten a cosmo cleanse before
-        -- bit 1 - show "ask about ancient beastcoins" option. Is shown once the player selects "Just wanted to chat".
-        -- bit 3 - do not give lengthy explaination on relic restoration. Set the first time the player encounters option 5.
-
+        if not utils.mask.getBit(playerSagheera, 0) then
+            menu = utils.mask.setBit(menu, 0, true)
+        end
+        -- bit 1 - show "ask about ancient beastcoins" option
+        -- Is shown once the player selects "Just wanted to chat"
+        if not utils.mask.getBit(playerSagheera, 1) then
+            menu = utils.mask.setBit(menu, 1, true)
+        end
         -- bit 2 - display stored ABCs on "ask about ancient beastcoins"
-        if storedABCs > 0 then
-            menu = utils.mask.setBit(menu, 2, true)
+        menu = utils.mask.setBit(menu, 2, true)
+        -- bit 3 - do not give lengthy explaination on relic restoration
+        -- Set the first time the player encounters option 5
+        if not utils.mask.getBit(playerSagheera, 2) then
+            menu = utils.mask.setBit(menu, 3, true)
         end
         -- bit 10 - ??? (this bit was set in some captures)
         menu = utils.mask.setBit(menu, 10, true)
