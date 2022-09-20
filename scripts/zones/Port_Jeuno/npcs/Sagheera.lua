@@ -499,7 +499,7 @@ end
 
 local handleTradeChipEvent = function(player, option)
     local trade = player:getTrade()
-    if (npcUtil.tradeSetInList(trade, tier1Chips) and npcUtil.giveItem(player, { { xi.items.ANCIENT_BEASTCOIN, tier1ChipValue } })) then
+    if npcUtil.tradeSetInList(trade, tier1Chips) and npcUtil.giveItem(player, { { xi.items.ANCIENT_BEASTCOIN, tier1ChipValue } }) then
         player:confirmTrade()
     elseif npcUtil.tradeSetInList(trade, tier2Chips) and npcUtil.giveItem(player, { { xi.items.ANCIENT_BEASTCOIN, tier2ChipValue } }) then
         player:confirmTrade()
