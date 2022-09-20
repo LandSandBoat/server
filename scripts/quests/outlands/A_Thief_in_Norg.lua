@@ -133,8 +133,8 @@ quest.sections =
                         return quest:progressEvent(160)
                     elseif questProgress == 8 then
                         return quest:progressEvent(161)
-                    elseif questProgress == 9 then
-                        return quest:progressEvent(quest:getMustZone(player) and 163 or 164)
+                    elseif questProgress == 9 and quest:getVar(player, 'Wait') < os.time() then
+                        return quest:progressEvent(164)
                     end
                 end,
             },
@@ -149,7 +149,7 @@ quest.sections =
                     player:confirmTrade()
                     player:delKeyItem(xi.ki.CHARRED_HELM)
                     quest:setVar(player, 'Prog', 9)
-                    quest:setMustZone(player)
+                    quest:setVar(player, 'Wait', getMidnight())
                 end,
 
                 [164] = function(player, csid, option, npc)

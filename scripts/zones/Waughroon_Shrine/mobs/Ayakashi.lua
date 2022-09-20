@@ -1,9 +1,9 @@
 -----------------------------------
 -- Area: Waughroon Shrine
---  Mob: Onki
--- a Thief in Norg BCNM Fight
+--  Mob: Ayakashi - Onki's Avatar
+--  Quest: A Thief in Norg BCNM Fight
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
+mixins = {require("scripts/mixins/families/avatar")}
 -----------------------------------
 local entity = {}
 
