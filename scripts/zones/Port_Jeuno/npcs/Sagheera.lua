@@ -464,7 +464,7 @@ local handleMainEvent = function(player, option, coinAmount)
 
     -- Relic restoration exited
     elseif option == 5 then
-        player:setCharVar("SagheeraInteractions", utils.mask.setBit(player:getCharVar("SagheeraInteractions"), 2, false));
+        player:setCharVar("SagheeraInteractions", utils.mask.setBit(player:getCharVar("SagheeraInteractions"), 3, false));
 
     -- purchase item using ancient beastcoins
     elseif abcShop[option] then
