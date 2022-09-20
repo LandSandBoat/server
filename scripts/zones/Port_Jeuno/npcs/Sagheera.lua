@@ -251,9 +251,33 @@ local abcShop =
     [20] = { item =  2127, abc =  75 }, -- metal_chip
 }
 
+-----------------------------------
+-- trades chips for ancient beastcoins
+-----------------------------------
+local tier1Chips =
+{
+    xi.items.IVORY_CHIP,
+    xi.items.SCARLET_CHIP,
+    xi.items.EMERALD_CHIP,
+    xi.items.SILVER_CHIP,
+    xi.items.CERULEAN_CHIP,
+    xi.items.SMALT_CHIP,
+    xi.items.SMOKY_CHIP,
+}
+
+local tier2Chips =
+{
+    xi.items.ORCHID_CHIP,
+    xi.items.CHARCOAL_CHIP,
+    xi.items.MAGENTA_CHIP,
+}
+
+local tier1ChipValue = 5
+local tier2ChipValue = 10
+
 local cosmoReady = 2147483649 -- BITMASK for the purchase
 
-local function getCOSMO_CLEANSETime(player)
+local function getCosmoCleanseTime(player)
     local cosmoWaitTime = player:hasKeyItem(xi.ki.RHAPSODY_IN_MAUVE) and 3600 or 72000
     local lastCosmoTime = player:getCharVar("Cosmo_Cleanse_TIME")
 
@@ -269,11 +293,15 @@ local function getCOSMO_CLEANSETime(player)
 end
 
 entity.onTrade = function(player, npc, trade)
+    if player:getCurrentMission(xi.mission.log_id.COP) < xi.mission.id.cop.GARDEN_OF_ANTIQUITY then
+        return
+    end
+
     local count = trade:getItemCount()
     local afUpgrade = player:getCharVar("AFupgrade")
 
     -- store ancient beastcoins
-    if trade:hasItemQty(1875, count) then
+    if trade:hasItemQty(xi.items.ANCIENT_BEASTCOIN, count) then
         local total = player:getCurrency("ancient_beastcoin") + count
 
         if total < 9999 then -- store max 9999 ancient beastcoins
@@ -283,6 +311,12 @@ entity.onTrade = function(player, npc, trade)
         else
             player:messageSpecial(ID.text.SAGHEERA_MAX_ABCS)
         end
+
+    -- Trade chips for ancient beastcoins
+    elseif npcUtil.tradeSetInList(trade, tier1Chips) then
+        player:startEvent(361, xi.items.ANCIENT_BEASTCOIN, tier1ChipValue)
+    elseif npcUtil.tradeSetInList(trade, tier2Chips) then
+        player:startEvent(361, xi.items.ANCIENT_BEASTCOIN, tier2ChipValue)
 
     -- af and relic upgrade trades
     elseif afUpgrade == 0 then
@@ -332,15 +366,54 @@ entity.onTrigger = function(player, npc)
     then
         player:startEvent(313)
 
-    -- DEFAULT DIALOG (menu)
+    -- Prevent interaction until player has progressed through COP enough
+    elseif player:getCurrentMission(xi.mission.log_id.COP) < xi.mission.id.cop.GARDEN_OF_ANTIQUITY then
+        player:showText(npc, ID.text.SAGHEERA_NO_LIMBUS_ACCESS)
+
+        -- DEFAULT DIALOG (menu)
     else
         -- event parameters
+
+        local storedABCs = player:getCurrency("ancient_beastcoin")
+        local playerSagheera = player:getCharVar("SagheeraInteractions")
+        -- bitfield of menu options
+        local menu = 0
+        -- bit 0 - has boughten a cosmo cleanse before
+        if not utils.mask.getBit(playerSagheera, 0) then
+            menu = utils.mask.setBit(menu, 0, true)
+        end
+        -- bit 1 - show "ask about ancient beastcoins" option
+        -- Is shown once the player selects "Just wanted to chat"
+        if not utils.mask.getBit(playerSagheera, 1) then
+            menu = utils.mask.setBit(menu, 1, true)
+        end
+        -- bit 2 - display stored ABCs on "ask about ancient beastcoins"
+        if storedABCs > 0 then
+            menu = utils.mask.setBit(menu, 2, true)
+        end
+        -- bit 3 - do not give lengthy explaination on relic restoration
+        -- Set the first time the player encounters option 5
+        if not utils.mask.getBit(playerSagheera, 2) then
+            menu = utils.mask.setBit(menu, 3, true)
+        end
+        -- bit 10 - ??? (this bit was set in some captures)
+        menu = utils.mask.setBit(menu, 10, true)
+        -- bit 11 - ??? (this bit was set in some captures)
+        menu = utils.mask.setBit(menu, 11, true)
+        -- bit 12 - show "Retrieve ancient beastcoins" option
+        if storedABCs > 0 then
+            menu = utils.mask.setBit(menu, 12, true)
+        end
+        -- bit 13 - player has RHAPSODY_IN_MAUVE (lowers Cosmo Cleanse cost)
+        if player:hasKeyItem(xi.ki.RHAPSODY_IN_MAUVE) then
+            menu = utils.mask.setBit(menu, 13, true)
+        end
+
         local arg3 = 0
         local arg4 = 0
         local afUpgrade = player:getCharVar("AFupgrade")
         local gil = player:getGil()
-        local hasCOSMO_CLEANSE = 0
-        local storedABCs = player:getCurrency("ancient_beastcoin")
+        local hasCosmoCleanse = 0
 
         -- if player is waiting for an upgraded af or relic
         if afUpgrade > 0 then
@@ -354,12 +427,12 @@ entity.onTrigger = function(player, npc)
         local cosmoTime = 0
 
         if player:hasKeyItem(xi.ki.COSMO_CLEANSE) then
-            hasCOSMO_CLEANSE = 1
+            hasCosmoCleanse = 1
         else
-            cosmoTime = getCOSMO_CLEANSETime(player)
+            cosmoTime = getCosmoCleanseTime(player)
         end
 
-        player:startEvent(310, 3, arg3, arg4, gil, cosmoTime, 1, hasCOSMO_CLEANSE, storedABCs)
+        player:startEvent(310, menu, arg3, arg4, gil, cosmoTime, 1, hasCosmoCleanse, storedABCs)
     end
 end
 
@@ -378,20 +451,32 @@ entity.onEventUpdate = function(player, csid, option)
     end
 end
 
-entity.onEventFinish = function(player, csid, option)
-    -- LURE OF THE WILDCAT
-    if csid == 313 then
-        player:setCharVar("WildcatJeuno", utils.mask.setBit(player:getCharVar("WildcatJeuno"), 19, true))
+local handleMainEvent = function(player, option, coinAmount)
+    -- "Just wanted to chat" for the first time
+    if option == 1 then
+        player:setCharVar("SagheeraInteractions", utils.mask.setBit(player:getCharVar("SagheeraInteractions"), 1, false));
 
     -- purchase COSMO_CLEANSE
-    elseif csid == 310 and option == 3 then
-        local cosmoTime = getCOSMO_CLEANSETime(player)
-        if cosmoTime == cosmoReady and player:delGil(15000) then
+    elseif option == 3 then
+        local cosmoTime = getCosmoCleanseTime(player)
+        local cost = player:hasKeyItem(xi.ki.RHAPSODY_IN_MAUVE) and 1000 or xi.settings.main.COSMO_CLEANSE_BASE_COST
+        if cosmoTime == cosmoReady and player:delGil(cost) then
+            player:setCharVar("SagheeraInteractions", utils.mask.setBit(player:getCharVar("SagheeraInteractions"), 0, false));
             npcUtil.giveKeyItem(player, xi.ki.COSMO_CLEANSE)
         end
 
+    -- retrieve stored ABCs
+    elseif option == 4 then
+        if player:getCurrency("ancient_beastcoin") >= coinAmount and npcUtil.giveItem(player, { { xi.items.ANCIENT_BEASTCOIN, coinAmount } }) then
+            player:delCurrency("ancient_beastcoin", coinAmount)
+        end
+
+    -- Relic restoration exited
+    elseif option == 5 then
+        player:setCharVar("SagheeraInteractions", utils.mask.setBit(player:getCharVar("SagheeraInteractions"), 2, false));
+
     -- purchase item using ancient beastcoins
-    elseif csid == 310 and abcShop[option] then
+    elseif abcShop[option] then
         local purchase = abcShop[option]
 
         if player:getCurrency("ancient_beastcoin") >= purchase.abc and npcUtil.giveItem(player, purchase.item) then
@@ -399,7 +484,7 @@ entity.onEventFinish = function(player, csid, option)
         end
 
     -- get upgrade
-    elseif csid == 310 and option == 100 then
+    elseif option == 100 then
         local afUpgrade = player:getCharVar("AFupgrade")
         local info = afArmorPlusOne[afUpgrade]
         if info == nil then
@@ -411,6 +496,32 @@ entity.onEventFinish = function(player, csid, option)
             player:setCharVar("AFupgrade", 0)
             player:setCharVar("AFupgradeDay", 0)
         end
+    end
+end
+
+local handleTradeChipEvent = function(player, option)
+    local trade = player:getTrade()
+    if npcUtil.tradeSetInList(trade, tier1Chips) and npcUtil.giveItem(player, { { xi.items.ANCIENT_BEASTCOIN, tier1ChipValue } }) then
+        player:confirmTrade()
+    elseif npcUtil.tradeSetInList(trade, tier2Chips) and npcUtil.giveItem(player, { { xi.items.ANCIENT_BEASTCOIN, tier2ChipValue } }) then
+        player:confirmTrade()
+    end
+end
+
+entity.onEventFinish = function(player, csid, option)
+    local coinAmount = bit.rshift(option, 16)
+    option = bit.band(option, 65535) -- Only use the first 16 bits
+
+    -- LURE OF THE WILDCAT
+    if csid == 313 then
+        player:setCharVar("WildcatJeuno", utils.mask.setBit(player:getCharVar("WildcatJeuno"), 19, true))
+
+    elseif csid == 310 then
+        handleMainEvent(player, option, coinAmount)
+
+    -- Trading chips for ancient beastcoins
+    elseif csid == 361 and coinAmount > 0 then
+        handleTradeChipEvent(player, option)
     end
 end
 

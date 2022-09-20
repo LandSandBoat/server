@@ -170,6 +170,9 @@ xi.settings.main =
     RELIC_3RD_UPGRADE_WAIT_TIME = 3600,     -- Wait time for 3rd relic upgrade (stage 3 -> stage 4) in seconds. 3600s = 1 hour.
     FREE_COP_DYNAMIS            = 0,        -- Authorize player to entering inside COP Dynamis without completing COP mission (1 = enable 0 = disable)
 
+    -- LIMBUS SETTINGS
+    COSMO_CLEANSE_BASE_COST     = 15000,    -- Base gil cost for a Cosmo Cleanse from Sagheera
+
     -- QUEST/MISSION SPECIFIC SETTINGS
     AF1_QUEST_LEVEL = 40,    -- Minimum level to start AF1 quest
     AF2_QUEST_LEVEL = 50,    -- Minimum level to start AF2 quest

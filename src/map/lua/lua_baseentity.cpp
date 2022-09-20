@@ -4064,6 +4064,13 @@ void CLuaBaseEntity::tradeComplete()
     PChar->pushPacket(new CInventoryFinishPacket());
 }
 
+std::optional<CLuaTradeContainer> CLuaBaseEntity::getTrade()
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    return std::optional<CLuaTradeContainer>(PChar->TradeContainer);
+}
+
 /************************************************************************
  *  Function: canEquipItem()
  *  Purpose : Returns true if a player can equip the item
@@ -14567,6 +14574,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getFreeSlotsCount", CLuaBaseEntity::getFreeSlotsCount);
     SOL_REGISTER("confirmTrade", CLuaBaseEntity::confirmTrade);
     SOL_REGISTER("tradeComplete", CLuaBaseEntity::tradeComplete);
+    SOL_REGISTER("getTrade", CLuaBaseEntity::getTrade);
 
     // Equipping
     SOL_REGISTER("canEquipItem", CLuaBaseEntity::canEquipItem);
