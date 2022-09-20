@@ -114,7 +114,13 @@ quest.sections =
             ['Splinterspine_Grukjuk'] =
             {
                 onMobDeath = function(mob, player, isKiller, firstCall)
-                    quest:setVar(player, 'Prog', 3)
+                    local party = player:getParty()
+
+                    for _, v in ipairs(party) do
+                        if v:getZone() == player:getZone() and quest:getVar(v, 'Prog') == 2 then
+                            quest:setVar(v, 'Prog', 3)
+                        end
+                    end
                 end,
             },
         },
