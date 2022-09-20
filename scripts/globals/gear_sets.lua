@@ -8,6 +8,7 @@ require('scripts/globals/status')
 
 xi = xi or {}
 xi.gear_sets = xi.gear_sets or {}
+xi.gear_sets.itemToSetId = xi.gear_sets.createItemToSetId()
 
 local gearSets =
 {
@@ -21,7 +22,7 @@ local gearSets =
             xi.items.USUKANE_HIZAYOROI,
             xi.items.USUKANE_SUNE_ATE,
         },
-        minMatches = 5,
+        minEquipped = 5,
         mods =
         {
             { xi.mod.HASTE_GEAR, 500, 0, 0 },
@@ -38,7 +39,7 @@ local gearSets =
             xi.items.SKADIS_CHAUSSES,
             xi.items.SKADIS_JAMBEAUX,
         },
-        minMatches = 5,
+        minEquipped = 5,
         mods =
         {
             { xi.mod.CRITHITRATE, 5, 0, 0 },
@@ -55,7 +56,7 @@ local gearSets =
             xi.items.ARES_FLANCHARD,
             xi.items.ARES_SOLLERETS,
         },
-        minMatches = 5,
+        minEquipped = 5,
         mods =
         {
             { xi.mod.DOUBLE_ATTACK, 5, 0, 0 },
@@ -72,7 +73,7 @@ local gearSets =
             xi.items.DENALI_KECKS,
             xi.items.DENALI_GAMASHES,
         },
-        minMatches = 5,
+        minEquipped = 5,
         mods =
         {
             { xi.mod.ACC, 20, 0, 0 },
@@ -89,7 +90,7 @@ local gearSets =
             xi.items.ASKAR_DIRS,
             xi.items.ASKAR_GAMBIERAS,
         },
-        minMatches = 5,
+        minEquipped = 5,
         mods =
         {
             { xi.mod.HPP, 10, 0, 0 },
@@ -106,7 +107,7 @@ local gearSets =
             xi.items.PAHLUWAN_SERAWEELS,
             xi.items.PAHLUWAN_CRACKOWS,
         },
-        minMatches = 5,
+        minEquipped = 5,
         mods =
         {
             { xi.mod.SUBTLE_BLOW, 8, 0, 0 },
@@ -123,7 +124,7 @@ local gearSets =
             xi.items.MORRIGANS_SLOPS,
             xi.items.MORRIGANS_PIGACHES,
         },
-        minMatches = 5,
+        minEquipped = 5,
         mods =
         {
             { xi.mod.MATT, 5, 0, 0 },
@@ -140,7 +141,7 @@ local gearSets =
             xi.items.MARDUKS_SHALWAR,
             xi.items.MARDUKS_CRACKOWS,
         },
-        minMatches = 5,
+        minEquipped = 5,
         mods =
         {
             { xi.mod.FASTCAST, 5, 0, 0 },
@@ -157,7 +158,7 @@ local gearSets =
             xi.items.GOLIARD_TREWS,
             xi.items.GOLIARD_CLOGS,
         },
-        minMatches = 5,
+        minEquipped = 5,
         mods =
         {
             { xi.mod.MDEF, 10, 0, 0 },
@@ -174,7 +175,7 @@ local gearSets =
             xi.items.YIGIT_SERAWEELS,
             xi.items.YIGIT_CRACKOWS,
         },
-        minMatches = 5,
+        minEquipped = 5,
         mods =
         {
             { xi.mod.REFRESH, 1, 0, 0 },
@@ -191,7 +192,7 @@ local gearSets =
             xi.items.PERLE_BRAYETTES,
             xi.items.PERLE_SOLLERETS,
         },
-        minMatches = 5,
+        minEquipped = 5,
         mods =
         {
             { xi.mod.HASTE_GEAR, 500, 0, 0 },
@@ -208,7 +209,7 @@ local gearSets =
             xi.items.AURORE_BRAIS,
             xi.items.AURORE_GAITERS,
         },
-        minMatches = 5,
+        minEquipped = 5,
         mods =
         {
             { xi.mod.STORETP, 8, 0, 0 }
@@ -225,7 +226,7 @@ local gearSets =
             xi.items.TEAL_SLOPS,
             xi.items.TEAL_PIGACHES,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.FASTCAST, 4, 2, 0 },
@@ -242,7 +243,7 @@ local gearSets =
             xi.items.CALMA_HOSE,
             xi.items.CALMA_LEGGINGS,
         },
-        minMatches = 5,
+        minEquipped = 5,
         mods =
         {
             { xi.mod.HASTE_GEAR, 600, 0, 0 },
@@ -259,7 +260,7 @@ local gearSets =
             xi.items.MAGAVAN_SLOPS,
             xi.items.MAGAVAN_CLOGS,
         },
-        minMatches = 5,
+        minEquipped = 5,
         mods =
         {
             { xi.mod.MACC, 5, 0, 0 },
@@ -276,7 +277,7 @@ local gearSets =
             xi.items.MUSTELA_BRAIS,
             xi.items.MUSTELA_BOOTS,
         },
-        minMatches = 5,
+        minEquipped = 5,
         mods =
         {
             { xi.mod.CRITHITRATE, 5, 0, 0 },
@@ -290,7 +291,7 @@ local gearSets =
             xi.items.BOWMANS_MASK,
             xi.items.BOWMANS_LEDELSENS,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.RATT, 15, 0, 0 },
@@ -307,7 +308,7 @@ local gearSets =
             xi.items.FOURTH_DIVISION_SCHOSS,
             xi.items.FOURTH_DIVISION_SCHUHS,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.ATT, 1, 4.7, 0 },
@@ -324,7 +325,7 @@ local gearSets =
             xi.items.COBRA_UNIT_SUBLIGAR,
             xi.items.COBRA_UNIT_LEGGINGS,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.COUNTER, 1, 1, 0 },
@@ -341,7 +342,7 @@ local gearSets =
             xi.items.COBRA_UNIT_TREWS,
             xi.items.COBRA_UNIT_CRACKOWS,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.MACC, 1, 1, 0 },
@@ -358,7 +359,7 @@ local gearSets =
             xi.items.IRON_RAM_BREECHES,
             xi.items.IRON_RAM_SOLLERETS,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.ACC, 1, 1, 0 },
@@ -376,7 +377,7 @@ local gearSets =
             xi.items.FOURTH_DIVISION_CUISSES,
             xi.items.FOURTH_DIVISION_SABATONS,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.HP, 10, 10, 0 },
@@ -393,7 +394,7 @@ local gearSets =
             xi.items.COBRA_UNIT_SLOPS,
             xi.items.COBRA_UNIT_PIGACHES,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.MP, 10, 10, 0 },
@@ -410,7 +411,7 @@ local gearSets =
             xi.items.AMIR_DIRS,
             xi.items.AMIR_BOOTS,
         },
-        minMatches = 5,
+        minEquipped = 5,
         mods =
         {
             { xi.mod.UDMGBREATH, -800, 0, 0 },
@@ -427,7 +428,7 @@ local gearSets =
             xi.items.HACHIRYU_HAIDATE,
             xi.items.HACHIRYU_SUNE_ATE,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.STORETP, 5, 5, 5 },
@@ -444,7 +445,7 @@ local gearSets =
             xi.items.RAVAGERS_CUISSES_P2,
             xi.items.RAVAGERS_CALLIGAE_P2,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.DA_DOUBLE_DMG_RATE, 2, 1, 0 },
@@ -461,7 +462,7 @@ local gearSets =
             xi.items.FAZHELUO_RADIANT_MAIL,
             xi.items.FAZHELUO_MAIL_P1,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.DOUBLE_ATTACK, 5, 0, 0 },
@@ -478,7 +479,7 @@ local gearSets =
             xi.items.MEXTLI_HARNESS,
             xi.items.CUAUHTLI_HARNESS_P1,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.HASTE_GEAR, 800, 0, 0 },
@@ -495,7 +496,7 @@ local gearSets =
             xi.items.ANHUR_ROBE,
             xi.items.HYKSOS_ROBE_P1,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.MACC, 5, 0, 0 },
@@ -512,7 +513,7 @@ local gearSets =
             xi.items.OGIERS_BREECHES,
             xi.items.OGIERS_LEGGINGS,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.REFRESH, 1, 0.4, 0 },
@@ -529,7 +530,7 @@ local gearSets =
             xi.items.ATHOSS_TIGHTS,
             xi.items.ATHOSS_BOOTS,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.CRITHITRATE, 1, 1, 0 },
@@ -546,8 +547,8 @@ local gearSets =
             xi.items.RUBEUS_SPATS,
             xi.items.RUBEUS_BOOTS,
         },
-        minMatches = 2,
-        maxMatches = 4, -- Special Case
+        minEquipped = 2,
+        maxEquipped = 4, -- Special Case
         mods =
         {
             { xi.mod.FASTCAST, 10, 0, 0 },
@@ -564,7 +565,7 @@ local gearSets =
             xi.items.NAVARCHS_CULOTTES_P2,
             xi.items.NAVARCHS_BOTTES_P2,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.QUICK_DRAW_TRIPLE_DAMAGE, 2, 1, 0 },
@@ -581,7 +582,7 @@ local gearSets =
             xi.items.CHARIS_TIGHTS_P2,
             xi.items.CHARIS_TOE_SHOES_P2,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.SAMBA_DOUBLE_DAMAGE, 1, 1.8, 0 },
@@ -598,7 +599,7 @@ local gearSets =
             xi.items.IGA_HAKAMA_P2,
             xi.items.IGA_KYAHAN_P2,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.EXTRA_DUAL_WIELD_ATTACK, 4, 2, 0 },
@@ -615,7 +616,7 @@ local gearSets =
             xi.items.SYLVAN_BRAGUES_P2,
             xi.items.SYLVAN_BOTTILLONS_P2,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.RAPID_SHOT_DOUBLE_DAMAGE, 2, 1, 0 },
@@ -632,7 +633,7 @@ local gearSets =
             xi.items.CREED_CUISSES_P2,
             xi.items.CREED_SABATONS_P2,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.ABSORB_DMG_CHANCE, 2, 1, 0 },
@@ -649,7 +650,7 @@ local gearSets =
             xi.items.UNKAI_HAIDATE_P2,
             xi.items.UNKAI_SUNE_ATE_P2,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.ZANSHIN_DOUBLE_DAMAGE, 2, 1, 0 },
@@ -666,7 +667,7 @@ local gearSets =
             xi.items.TANTRA_HOSE_P2,
             xi.items.TANTRA_GAITERS_P2,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.EXTRA_KICK_ATTACK, 2, 1, 0 },
@@ -683,7 +684,7 @@ local gearSets =
             xi.items.RAIDERS_CULOTTES_P2,
             xi.items.RAIDERS_POULAINES_P2,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.TA_TRIPLE_DMG_RATE, 2, 1, 0 },
@@ -700,7 +701,7 @@ local gearSets =
             xi.items.ORISON_PANTALOONS_P2,
             xi.items.ORISON_DUCKBILLS_P2,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.BAR_ELEMENT_NULL_CHANCE, 4, 2, 0 },
@@ -717,7 +718,7 @@ local gearSets =
             xi.items.SAVANTS_PANTS_P2,
             xi.items.SAVANTS_LOAFERS_P2,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.GRIMOIRE_INSTANT_CAST, 2, 1, 0 },
@@ -738,7 +739,7 @@ local gearSets =
             xi.items.OSORAKU,
             xi.items.BALISARDE,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.HP,  30, 0, 0 },
@@ -761,7 +762,7 @@ local gearSets =
             xi.items.SPARTH,
             xi.items.VENDETTA,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.STR,  6, 0, 0 },
@@ -785,7 +786,7 @@ local gearSets =
             xi.items.BASILISK,
             xi.items.YAGENTOSHIRO,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.EVA,    10, 0, 0 },
@@ -801,7 +802,7 @@ local gearSets =
             xi.items.TWILIGHT_HELM,
             xi.items.TWILIGHT_MAIL,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.RERAISE_III, 1, 0, 0 },
@@ -815,7 +816,7 @@ local gearSets =
             xi.items.VIRTUE_STONE,
             xi.items.HOPE_STAFF,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.AMMO_SWING, 50, 0, 0 },
@@ -829,7 +830,7 @@ local gearSets =
             xi.items.VIRTUE_STONE,
             xi.items.JUSTICE_SWORD,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.AMMO_SWING, 50, 0, 0 },
@@ -843,7 +844,7 @@ local gearSets =
             xi.items.VIRTUE_STONE,
             xi.items.TEMPERANCE_AXE,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.AMMO_SWING, 50, 0, 0 },
@@ -857,7 +858,7 @@ local gearSets =
             xi.items.VIRTUE_STONE,
             xi.items.LOVE_HALBERD,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.AMMO_SWING, 50, 0, 0 },
@@ -871,7 +872,7 @@ local gearSets =
             xi.items.VIRTUE_STONE,
             xi.items.FORTITUDE_AXE,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.AMMO_SWING, 50, 0, 0 },
@@ -885,7 +886,7 @@ local gearSets =
             xi.items.VIRTUE_STONE,
             xi.items.FAITH_BAGHNAKHS,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.AMMO_SWING, 50, 0, 0 },
@@ -899,7 +900,7 @@ local gearSets =
             xi.items.VIRTUE_STONE,
             xi.items.PRUDENCE_ROD,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.AMMO_SWING, 50, 0, 0 },
@@ -913,7 +914,7 @@ local gearSets =
             xi.items.STEELFLASH_EARRING,
             xi.items.BLADEBORN_EARRING,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.DOUBLE_ATTACK, 7, 0, 0 },
@@ -927,7 +928,7 @@ local gearSets =
             xi.items.DUDGEON_EARRING,
             xi.items.HEARTSEEKER_EARRING,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.DUAL_WIELD, 7, 0, 0 },
@@ -941,7 +942,7 @@ local gearSets =
             xi.items.LIFESTORM_EARRING,
             xi.items.PSYSTORM_EARRING,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.MACC, 12, 0, 0 },
@@ -963,7 +964,7 @@ local gearSets =
             xi.items.KASUGA_KOTE_P1,
             xi.items.KASUGA_SUNE_ATE,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.ZANSHIN_DOUBLE_DAMAGE, 2, 1, 0 },
@@ -985,7 +986,7 @@ local gearSets =
             xi.items.BHIKKU_CROWN_P1,
             xi.items.BHIKKU_CROWN,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.EXTRA_KICK_ATTACK, 2, 1, 0 },
@@ -1007,7 +1008,7 @@ local gearSets =
             xi.items.BOII_LORICA_P1,
             xi.items.BOII_LORICA,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.DA_DOUBLE_DMG_RATE, 2, 1, 0 },
@@ -1029,7 +1030,7 @@ local gearSets =
             xi.items.SKULKERS_VEST,
             xi.items.SKULKERS_VEST_P1,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.TA_TRIPLE_DMG_RATE, 2, 1, 0 },
@@ -1051,7 +1052,7 @@ local gearSets =
             xi.items.AMINI_GLOVELETTES,
             xi.items.AMINI_GLOVELETTES_P1,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.RAPID_SHOT_DOUBLE_DAMAGE, 2, 1, 0 },
@@ -1073,7 +1074,7 @@ local gearSets =
             xi.items.CHEVALIERS_CUISSES,
             xi.items.CHEVALIERS_CUISSES_P1,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.ABSORB_DMG_CHANCE, 2, 1, 0 },
@@ -1095,7 +1096,7 @@ local gearSets =
             xi.items.HATTORI_KYAHAN,
             xi.items.HATTORI_KYAHAN_P1,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.EXTRA_DUAL_WIELD_ATTACK, 4, 2, 0 },
@@ -1117,7 +1118,7 @@ local gearSets =
             xi.items.CHASSEURS_CULOTTES,
             xi.items.CHASSEURS_CULOTTES_P1,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.QUICK_DRAW_TRIPLE_DAMAGE, 2, 1, 0 },
@@ -1139,7 +1140,7 @@ local gearSets =
             xi.items.ARBATEL_BRACERS,
             xi.items.ARBATEL_BRACERS_P1,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.GRIMOIRE_INSTANT_CAST, 2, 1, 0 },
@@ -1161,52 +1162,38 @@ local gearSets =
             xi.items.EBERS_MITTS,
             xi.items.EBERS_MITTS_P1,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.BAR_ELEMENT_NULL_CHANCE, 4, 2, 0 },
         },
     },
 
-    [67] = -- Heka's body + NQ or HQ Khat = 3 tick refresh
+    [67] = -- Heka/Nefer body + NQ or HQ Khat = 2 tick refresh
     {
         items =
         {
             xi.items.HEKAS_KALASIRIS,
-            xi.items.NEFER_KHAT_P1,
             xi.items.NEFER_KHAT,
+            xi.items.NEFER_KHAT_P1,
+            xi.items.NEFER_KALASIRIS,
+            xi.items.NEFER_KALASIRIS_P1,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.REFRESH, 3, 0, 0 },
         },
     },
 
-    [68] = -- Nefer body/head NQ/HQ combo gives Refresh +2
-    {
-        items =
-        {
-            xi.items.NEFER_KHAT_P1,
-            xi.items.NEFER_KALASIRIS_P1,
-            xi.items.NEFER_KALASIRIS,
-            xi.items.NEFER_KHAT,
-        },
-        minMatches = 2,
-        mods =
-        {
-            { xi.mod.REFRESH, 2, 0, 0 },
-        },
-    },
-
-    [69] = -- Dasra's/Nasatya's Ring set gives HP/MP +50
+    [68] = -- Dasra's/Nasatya's Ring set gives HP/MP +50
     {
         items =
         {
             xi.items.NASATYAS_RING,
             xi.items.DASRAS_RING,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.HP, 50, 0, 0 },
@@ -1214,14 +1201,14 @@ local gearSets =
         },
     },
 
-    [70] = -- Helenus's/Cassandra's earring set: Mag atk bonus+5 and Mag acc +5
+    [69] = -- Helenus's/Cassandra's earring set: Mag atk bonus+5 and Mag acc +5
     {
         items =
         {
             xi.items.HELENUSS_EARRING,
             xi.items.CASSANDRAS_EARRING,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.MATT, 5, 0, 0 },
@@ -1229,14 +1216,14 @@ local gearSets =
         },
     },
 
-    [71] = -- Lava's/Kusha's earring set: Atk+6/Acc+12
+    [70] = -- Lava's/Kusha's earring set: Atk+6/Acc+12
     {
         items =
         {
             xi.items.LAVAS_RING,
             xi.items.KUSHAS_RING,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.ATT,  6, 0, 0 },
@@ -1245,7 +1232,7 @@ local gearSets =
         },
     },
 
-    [72] = -- Iron Ram Haubert Set
+    [71] = -- Iron Ram Haubert Set
     {
         items =
         {
@@ -1255,7 +1242,7 @@ local gearSets =
             xi.items.IRON_RAM_HOSE,
             xi.items.IRON_RAM_GREAVES,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.FIRE_MEVA,    5, 5, 10 },
@@ -1269,28 +1256,28 @@ local gearSets =
         },
     },
 
-    [73] = -- Altdorf's/Wilhelm's earring: AGI+8
+    [72] = -- Altdorf's/Wilhelm's earring: AGI+8
     {
         items =
         {
             xi.items.ALTDORFS_EARRING,
             xi.items.WILHELMS_EARRING,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.AGI, 8, 0, 0 },
         },
     },
 
-    [74] = -- Gothic Gauntlets/Sabatons: Atk/RAtk +5
+    [73] = -- Gothic Gauntlets/Sabatons: Atk/RAtk +5
     {
         items =
         {
             xi.items.GOTHIC_GAUNTLETS,
             xi.items.GOTHIC_SABATONS,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.ATT,  5, 0, 0 },
@@ -1298,7 +1285,7 @@ local gearSets =
         },
     },
 
-    [75] = -- Teal Set +1: Fast Cast +4-10%
+    [74] = -- Teal Set +1: Fast Cast +4-10%
     {
         items =
         {
@@ -1308,14 +1295,14 @@ local gearSets =
             xi.items.TEAL_SLOPS_P1,
             xi.items.TEAL_PIGACHES_P1,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.FASTCAST, 4, 2, 0 },
         },
     },
 
-    [76] = -- Aurore Set +1: Store TP +2-8
+    [75] = -- Aurore Set +1: Store TP +2-8
     {
         items =
         {
@@ -1325,14 +1312,14 @@ local gearSets =
             xi.items.AURORE_BRAIS_P1,
             xi.items.AURORE_GAITERS_P1,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.STORETP, 2, 2, 0 },
         },
     },
 
-    [77] = -- Perle Set +1: Haste +2-5%
+    [76] = -- Perle Set +1: Haste +2-5%
     {
         items =
         {
@@ -1342,14 +1329,14 @@ local gearSets =
             xi.items.PERLE_BRAYETTES_P1,
             xi.items.PERLE_SOLLERETS_P1,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.HASTE_GEAR, 200, 100, 0 },
         },
     },
 
-    [78] = -- Morrigan's Attire Set +1: Magic Atk. Bonus +3-9%
+    [77] = -- Morrigan's Attire Set +1: Magic Atk. Bonus +3-9%
     {
         items =
         {
@@ -1359,14 +1346,14 @@ local gearSets =
             xi.items.MORRIGANS_SLOPS_P1,
             xi.items.MORRIGANS_PIGACHES_P1,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.MATT, 3, 2, 0 },
         },
     },
 
-    [79] = -- Marduk's Attire Set +1: Fast Cast +3-9%
+    [78] = -- Marduk's Attire Set +1: Fast Cast +3-9%
     {
         items =
         {
@@ -1376,14 +1363,14 @@ local gearSets =
             xi.items.MARDUKS_SHALWAR_P1,
             xi.items.MARDUKS_CRACKOWS_P1,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.FASTCAST, 3, 2, 0 },
         },
     },
 
-    [80] = -- Usukane Armor Set +1: Haste +3-9%
+    [79] = -- Usukane Armor Set +1: Haste +3-9%
     {
         items =
         {
@@ -1393,14 +1380,14 @@ local gearSets =
             xi.items.USUKANE_HIZAYOROI_P1,
             xi.items.USUKANE_SUNE_ATE_P1,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.HASTE_GEAR, 300, 200, 0 },
         },
     },
 
-    [81] = -- Skadi's Attire Set +1: Critical hit rate +3-9%
+    [80] = -- Skadi's Attire Set +1: Critical hit rate +3-9%
     {
         items =
         {
@@ -1410,14 +1397,14 @@ local gearSets =
             xi.items.SKADIS_CHAUSSES_P1,
             xi.items.SKADIS_JAMBEAUX_P1,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.CRITHITRATE, 3, 2, 0 },
         },
     },
 
-    [82] = -- Ares' Armor Set +1: Double Attack +3-9%
+    [81] = -- Ares' Armor Set +1: Double Attack +3-9%
     {
         items =
         {
@@ -1427,28 +1414,28 @@ local gearSets =
             xi.items.ARES_FLANCHARD_P1,
             xi.items.ARES_SOLLERETS_P1,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.DOUBLE_ATTACK, 3, 2, 0 },
         },
     },
 
-    [83] = -- Alcedo Cuisses and Gauntlets: Magic damage taken -5%
+    [82] = -- Alcedo Cuisses and Gauntlets: Magic damage taken -5%
     {
         items =
         {
             xi.items.ALCEDO_GAUNTLETS,
             xi.items.ALCEDO_CUISSES,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.DMGMAGIC, -500, 0, 0 },
         },
     },
 
-    [84] = -- Sulevia's Armor Set +2: Subtle Blow +5-20
+    [83] = -- Sulevia's Armor Set +2: Subtle Blow +5-20
     {
         items =
         {
@@ -1459,15 +1446,15 @@ local gearSets =
             xi.items.SULEVIAS_CUISSES_P2,
             xi.items.SULEVIAS_LEGGINGS_P2,
         },
-        minMatches = 2,
-        maxMatches = 5,
+        minEquipped = 2,
+        maxEquipped = 5,
         mods =
         {
             { xi.mod.SUBTLE_BLOW, 5, 5, 0 },
         },
     },
 
-    [85] = -- Hizamaru Armor Set +2: Counter +4-16%
+    [84] = -- Hizamaru Armor Set +2: Counter +4-16%
     {
         items =
         {
@@ -1478,15 +1465,15 @@ local gearSets =
             xi.items.HIZAMARU_HIZAYOROI_P2,
             xi.items.HIZAMARU_SUNE_ATE_P2,
         },
-        minMatches = 2,
-        maxMatches = 5,
+        minEquipped = 2,
+        maxEquipped = 5,
         mods =
         {
             { xi.mod.COUNTER, 4, 4, 0 },
         },
     },
 
-    [86] = -- Inyanga Armor Set +2: Refresh +1-4
+    [85] = -- Inyanga Armor Set +2: Refresh +1-4
     {
         items =
         {
@@ -1497,15 +1484,15 @@ local gearSets =
             xi.items.INYANGA_SHALWAR_P2,
             xi.items.INYANGA_CRACKOWS_P2,
         },
-        minMatches = 2,
-        maxMatches = 5,
+        minEquipped = 2,
+        maxEquipped = 5,
         mods =
         {
             { xi.mod.REFRESH, 1, 1, 0 },
         },
     },
 
-    [87] = -- Meghanada Armor Set +2: Regen +3-12
+    [86] = -- Meghanada Armor Set +2: Regen +3-12
     {
         items =
         {
@@ -1516,15 +1503,15 @@ local gearSets =
             xi.items.MEGHANADA_CHAUSSES_P2,
             xi.items.MEGHANADA_JAMBEAUX_P2,
         },
-        minMatches = 2,
-        maxMatches = 5,
+        minEquipped = 2,
+        maxEquipped = 5,
         mods =
         {
             { xi.mod.REGEN, 3, 3, 0 },
         },
     },
 
-    [88] = -- Jhakri Armor Set +2: Fast Cast +1-4%
+    [87] = -- Jhakri Armor Set +2: Fast Cast +1-4%
     {
         items =
         {
@@ -1535,15 +1522,15 @@ local gearSets =
             xi.items.JHAKRI_SLOPS_P2,
             xi.items.JHAKRI_PIGACHES_P2,
         },
-        minMatches = 2,
-        maxMatches = 5,
+        minEquipped = 2,
+        maxEquipped = 5,
         mods =
         {
             { xi.mod.FAST_CAST, 1, 1, 0 },
         },
     },
 
-    [89] = -- Flamma Armor Set +2 STR/DEX/VIT +8-32
+    [88] = -- Flamma Armor Set +2 STR/DEX/VIT +8-32
     {
         items =
         {
@@ -1554,8 +1541,8 @@ local gearSets =
             xi.items.FLAMMA_DIRS_P2,
             xi.items.FLAMMA_GAMBIERAS_P2,
         },
-        minMatches = 2,
-        maxMatches = 5,
+        minEquipped = 2,
+        maxEquipped = 5,
         mods =
         {
             { xi.mod.STR, 8, 8, 0 },
@@ -1564,7 +1551,7 @@ local gearSets =
         },
     },
 
-    [90] = -- Tali'ah Armor Set +2 DEX/VIT/CHR +8-32
+    [89] = -- Tali'ah Armor Set +2 DEX/VIT/CHR +8-32
     {
         items =
         {
@@ -1575,8 +1562,8 @@ local gearSets =
             xi.items.TALIAH_SERAWEELS_P2,
             xi.items.TALIAH_CRACKOWS_P2,
         },
-        minMatches = 2,
-        maxMatches = 5,
+        minEquipped = 2,
+        maxEquipped = 5,
         mods =
         {
             { xi.mod.DEX, 8, 8, 0 },
@@ -1585,7 +1572,7 @@ local gearSets =
         }
     },
 
-    [91] = -- Mummu Armor Set +2 DEX/AGI/CHR +8-32
+    [90] = -- Mummu Armor Set +2 DEX/AGI/CHR +8-32
     {
         items =
         {
@@ -1596,8 +1583,8 @@ local gearSets =
             xi.items.MUMMU_KECKS_P2,
             xi.items.MUMMU_GAMASHES_P2,
         },
-        minMatches = 2,
-        maxMatches = 5,
+        minEquipped = 2,
+        maxEquipped = 5,
         mods =
         {
             { xi.mod.DEX, 8, 8, 0 },
@@ -1606,7 +1593,7 @@ local gearSets =
         },
     },
 
-    [92] = -- Ayanmo Armor Set +2 STR/VIT/MND +8-32
+    [91] = -- Ayanmo Armor Set +2 STR/VIT/MND +8-32
     {
         items =
         {
@@ -1617,8 +1604,8 @@ local gearSets =
             xi.items.AYANMO_COSCIALES_P2,
             xi.items.AYANMO_GAMBIERAS_P2,
         },
-        minMatches = 2,
-        maxMatches = 5,
+        minEquipped = 2,
+        maxEquipped = 5,
         mods =
         {
             { xi.mod.STR, 8, 8, 0 },
@@ -1627,7 +1614,7 @@ local gearSets =
         }
     },
 
-    [93] = -- Mallquis Armor Set +2 VIT/INT/MND +8-32
+    [92] = -- Mallquis Armor Set +2 VIT/INT/MND +8-32
     {
         items =
         {
@@ -1638,8 +1625,8 @@ local gearSets =
             xi.items.MALLQUIS_TREWS_P2,
             xi.items.MALLQUIS_CLOGS_P2,
         },
-        minMatches = 2,
-        maxMatches = 5,
+        minEquipped = 2,
+        maxEquipped = 5,
         mods =
         {
             { xi.mod.VIT, 8, 8, 0 },
@@ -1648,7 +1635,7 @@ local gearSets =
         }
     },
 
-    [94] = -- AF1 119 +2/3 WAR
+    [93] = -- AF1 119 +2/3 WAR
     {
         items =
         {
@@ -1664,8 +1651,8 @@ local gearSets =
             xi.items.PUMMELERS_MASK_P2,
             xi.items.PUMMELERS_MASK_P3,
         },
-        minMatches = 2,
-        maxMatches = 5,
+        minEquipped = 2,
+        maxEquipped = 5,
         mods =
         {
             { xi.mod.ACC,  15, 0, 0 },
@@ -1674,7 +1661,7 @@ local gearSets =
         },
     },
 
-    [95] = -- AF1 119 +2/3 MNK
+    [94] = -- AF1 119 +2/3 MNK
     {
         items =
         {
@@ -1690,8 +1677,8 @@ local gearSets =
             xi.items.ANCHORITES_CROWN_P2,
             xi.items.ANCHORITES_CROWN_P3,
         },
-        minMatches = 2,
-        maxMatches = 5,
+        minEquipped = 2,
+        maxEquipped = 5,
         mods =
         {
             { xi.mod.ACC,  15, 0, 0 },
@@ -1700,7 +1687,7 @@ local gearSets =
         },
     },
 
-    [96] = -- AF1 119 +2/3 WHM
+    [95] = -- AF1 119 +2/3 WHM
     {
         items =
         {
@@ -1716,8 +1703,8 @@ local gearSets =
             xi.items.THEOPHANY_CAP_P2,
             xi.items.THEOPHANY_CAP_P3,
         },
-        minMatches = 2,
-        maxMatches = 5,
+        minEquipped = 2,
+        maxEquipped = 5,
         mods =
         {
             { xi.mod.ACC,  15, 0, 0 },
@@ -1726,7 +1713,7 @@ local gearSets =
         },
     },
 
-    [97] = -- AF1 119 +2/3 BLM
+    [96] = -- AF1 119 +2/3 BLM
     {
         items =
         {
@@ -1742,8 +1729,8 @@ local gearSets =
             xi.items.SPAEKONAS_PETASOS_P2,
             xi.items.SPAEKONAS_PETASOS_P3,
         },
-        minMatches = 2,
-        maxMatches = 5,
+        minEquipped = 2,
+        maxEquipped = 5,
         mods =
         {
             { xi.mod.ACC,  15, 0, 0 },
@@ -1752,7 +1739,7 @@ local gearSets =
         },
     },
 
-    [98] = -- AF1 119 +2/3 RDM
+    [97] = -- AF1 119 +2/3 RDM
     {
         items =
         {
@@ -1768,8 +1755,8 @@ local gearSets =
             xi.items.ATROPHY_CHAPEAU_P2,
             xi.items.ATROPHY_CHAPEAU_P3,
         },
-        minMatches = 2,
-        maxMatches = 5,
+        minEquipped = 2,
+        maxEquipped = 5,
         mods =
         {
             { xi.mod.ACC,  15, 0, 0 },
@@ -1778,7 +1765,7 @@ local gearSets =
         },
     },
 
-    [99] = -- AF1 119 +2/3 THF
+    [98] = -- AF1 119 +2/3 THF
     {
         items =
         {
@@ -1794,8 +1781,8 @@ local gearSets =
             xi.items.PILLAGERS_BONNET_P2,
             xi.items.PILLAGERS_BONNET_P3,
         },
-        minMatches = 2,
-        maxMatches = 5,
+        minEquipped = 2,
+        maxEquipped = 5,
         mods =
         {
             { xi.mod.ACC,  15, 0, 0 },
@@ -1804,7 +1791,7 @@ local gearSets =
         },
     },
 
-    [100] = -- AF1 119 +2/3 PLD
+    [99] = -- AF1 119 +2/3 PLD
     {
         items =
         {
@@ -1820,8 +1807,8 @@ local gearSets =
             xi.items.REVERENCE_CORONET_P2,
             xi.items.REVERENCE_CORONET_P3,
         },
-        minMatches = 2,
-        maxMatches = 5,
+        minEquipped = 2,
+        maxEquipped = 5,
         mods =
         {
             { xi.mod.ACC,  15, 0, 0 },
@@ -1830,7 +1817,7 @@ local gearSets =
         },
     },
 
-    [101] = -- AF1 119 +2/3 DRK
+    [100] = -- AF1 119 +2/3 DRK
     {
         items =
         {
@@ -1846,8 +1833,8 @@ local gearSets =
             xi.items.IGNOMINY_BURGONET_P2,
             xi.items.IGNOMINY_BURGONET_P3,
         },
-        minMatches = 2,
-        maxMatches = 5,
+        minEquipped = 2,
+        maxEquipped = 5,
         mods =
         {
             { xi.mod.ACC,  15, 0, 0 },
@@ -1856,7 +1843,7 @@ local gearSets =
         },
     },
 
-    [102] = -- AF1 119 +2/3 BST
+    [101] = -- AF1 119 +2/3 BST
     {
         items =
         {
@@ -1872,8 +1859,8 @@ local gearSets =
             xi.items.TOTEMIC_HELM_P2,
             xi.items.TOTEMIC_HELM_P3,
         },
-        minMatches = 2,
-        maxMatches = 5,
+        minEquipped = 2,
+        maxEquipped = 5,
         mods =
         {
             { xi.mod.ACC,  15, 0, 0 },
@@ -1882,7 +1869,7 @@ local gearSets =
         },
     },
 
-    [103] = -- AF1 119 +2/3 BRD
+    [102] = -- AF1 119 +2/3 BRD
     {
         items =
         {
@@ -1898,8 +1885,8 @@ local gearSets =
             xi.items.BRIOSO_ROUNDLET_P2,
             xi.items.BRIOSO_ROUNDLET_P3,
         },
-        minMatches = 2,
-        maxMatches = 5,
+        minEquipped = 2,
+        maxEquipped = 5,
         mods =
         {
             { xi.mod.ACC,  15, 0, 0 },
@@ -1908,7 +1895,7 @@ local gearSets =
         },
     },
 
-    [104] = -- AF1 119 +2/3 RNG
+    [103] = -- AF1 119 +2/3 RNG
     {
         items =
         {
@@ -1924,8 +1911,8 @@ local gearSets =
             xi.items.ORION_BERET_P2,
             xi.items.ORION_BERET_P3,
         },
-        minMatches = 2,
-        maxMatches = 5,
+        minEquipped = 2,
+        maxEquipped = 5,
         mods =
         {
             { xi.mod.ACC,  15, 0, 0 },
@@ -1934,7 +1921,7 @@ local gearSets =
         },
     },
 
-    [105] = -- AF1 119 +2/3 SAM
+    [104] = -- AF1 119 +2/3 SAM
     {
         items =
         {
@@ -1950,8 +1937,8 @@ local gearSets =
             xi.items.WAKIDO_KABUTO_P2,
             xi.items.WAKIDO_KABUTO_P3,
         },
-        minMatches = 2,
-        maxMatches = 5,
+        minEquipped = 2,
+        maxEquipped = 5,
         mods =
         {
             { xi.mod.ACC,  15, 0, 0 },
@@ -1960,7 +1947,7 @@ local gearSets =
         },
     },
 
-    [106] = -- AF1 119 +2/3 NIN
+    [105] = -- AF1 119 +2/3 NIN
     {
         items =
         {
@@ -1976,8 +1963,8 @@ local gearSets =
             xi.items.HACHIYA_HATSUBURI_P2,
             xi.items.HACHIYA_HATSUBURI_P3,
         },
-        minMatches = 2,
-        maxMatches = 5,
+        minEquipped = 2,
+        maxEquipped = 5,
         mods =
         {
             { xi.mod.ACC,  15, 0, 0 },
@@ -1986,7 +1973,7 @@ local gearSets =
         }
     },
 
-    [107] = -- AF1 119 +2/3 DRG
+    [106] = -- AF1 119 +2/3 DRG
     {
         items =
         {
@@ -2002,8 +1989,8 @@ local gearSets =
             xi.items.VISHAP_ARMET_P2,
             xi.items.VISHAP_ARMET_P3,
         },
-        minMatches = 2,
-        maxMatches = 5,
+        minEquipped = 2,
+        maxEquipped = 5,
         mods =
         {
             { xi.mod.ACC,  15, 0, 0 },
@@ -2012,7 +1999,7 @@ local gearSets =
         },
     },
 
-    [108] = -- AF1 119 +2/3 SMN
+    [107] = -- AF1 119 +2/3 SMN
     {
         items =
         {
@@ -2028,8 +2015,8 @@ local gearSets =
             xi.items.CONVOKERS_HORN_P2,
             xi.items.CONVOKERS_HORN_P3,
         },
-        minMatches = 2,
-        maxMatches = 5,
+        minEquipped = 2,
+        maxEquipped = 5,
         mods =
         {
             { xi.mod.ACC,  15, 0, 0 },
@@ -2038,7 +2025,7 @@ local gearSets =
         }
     },
 
-    [109] = -- AF1 119 +2/3 BLU
+    [108] = -- AF1 119 +2/3 BLU
     {
         items =
         {
@@ -2054,8 +2041,8 @@ local gearSets =
             xi.items.ASSIMILATORS_KEFFIYEH_P2,
             xi.items.ASSIMILATORS_KEFFIYEH_P3,
         },
-        minMatches = 2,
-        maxMatches = 5,
+        minEquipped = 2,
+        maxEquipped = 5,
         mods =
         {
             { xi.mod.ACC,  15, 0, 0 },
@@ -2064,7 +2051,7 @@ local gearSets =
         },
     },
 
-    [110] = -- AF1 119 +2/3 COR
+    [109] = -- AF1 119 +2/3 COR
     {
         items =
         {
@@ -2080,8 +2067,8 @@ local gearSets =
             xi.items.LAKSAMANAS_TRICORNE_P2,
             xi.items.LAKSAMANAS_TRICORNE_P3,
         },
-        minMatches = 2,
-        maxMatches = 5,
+        minEquipped = 2,
+        maxEquipped = 5,
         mods =
         {
             { xi.mod.ACC,  15, 0, 0 },
@@ -2090,7 +2077,7 @@ local gearSets =
         },
     },
 
-    [111] = -- AF1 119 +2/3 PUP
+    [110] = -- AF1 119 +2/3 PUP
     {
         items =
         {
@@ -2106,8 +2093,8 @@ local gearSets =
             xi.items.FOIRE_TAJ_P2,
             xi.items.FOIRE_TAJ_P3,
         },
-        minMatches = 2,
-        maxMatches = 5,
+        minEquipped = 2,
+        maxEquipped = 5,
         mods =
         {
             { xi.mod.ACC,  15, 0, 0 },
@@ -2116,7 +2103,7 @@ local gearSets =
         },
     },
 
-    [112] = -- AF1 119 +2/3 DNC (M)
+    [111] = -- AF1 119 +2/3 DNC (M)
     {
         items =
         {
@@ -2132,8 +2119,8 @@ local gearSets =
             xi.items.MAXIXI_TIGHTS_M_P3,
             xi.items.MAXIXI_TOE_SHOES_M_P3,
         },
-        minMatches = 2,
-        maxMatches = 5,
+        minEquipped = 2,
+        maxEquipped = 5,
         mods =
         {
             { xi.mod.ACC,  15, 0, 0 },
@@ -2142,7 +2129,7 @@ local gearSets =
         },
     },
 
-    [113] = -- AF1 119 +2/3 DNC (F)
+    [112] = -- AF1 119 +2/3 DNC (F)
     {
         items =
         {
@@ -2158,8 +2145,8 @@ local gearSets =
             xi.items.MAXIXI_TIGHTS_F_P3,
             xi.items.MAXIXI_TOE_SHOES_F_P3,
         },
-        minMatches = 2,
-        maxMatches = 5,
+        minEquipped = 2,
+        maxEquipped = 5,
         mods =
         {
             { xi.mod.ACC,  15, 0, 0 },
@@ -2168,7 +2155,7 @@ local gearSets =
         },
     },
 
-    [114] = -- AF1 119 +2/3 SCH
+    [113] = -- AF1 119 +2/3 SCH
     {
         items =
         {
@@ -2184,8 +2171,8 @@ local gearSets =
             xi.items.ACADEMICS_MORTARBOARD_P2,
             xi.items.ACADEMICS_MORTARBOARD_P3,
         },
-        minMatches = 2,
-        maxMatches = 5,
+        minEquipped = 2,
+        maxEquipped = 5,
         mods =
         {
             { xi.mod.ACC,  15, 0, 0 },
@@ -2194,7 +2181,7 @@ local gearSets =
         },
     },
 
-    [115] = -- AF1 119 +2/3 GEO
+    [114] = -- AF1 119 +2/3 GEO
     {
         items =
         {
@@ -2210,8 +2197,8 @@ local gearSets =
             xi.items.GEOMANCY_GALERO_P2,
             xi.items.GEOMANCY_GALERO_P3,
         },
-        minMatches = 2,
-        maxMatches = 5,
+        minEquipped = 2,
+        maxEquipped = 5,
         mods =
         {
             { xi.mod.ACC,  15, 0, 0 },
@@ -2220,7 +2207,7 @@ local gearSets =
         },
     },
 
-    [116] = -- AF1 119 +2/3 RUN
+    [115] = -- AF1 119 +2/3 RUN
     {
         items =
         {
@@ -2236,8 +2223,8 @@ local gearSets =
             xi.items.RUNEISTS_BANDEAU_P2,
             xi.items.RUNEISTS_BANDEAU_P3,
         },
-        minMatches = 2,
-        maxMatches = 5,
+        minEquipped = 2,
+        maxEquipped = 5,
         mods =
         {
             { xi.mod.ACC,  15, 0, 0 },
@@ -2246,7 +2233,7 @@ local gearSets =
         },
     },
 
-    [117] = -- Outrider set (Phys damage taken -10%)
+    [116] = -- Outrider set (Phys damage taken -10%)
     {
         items =
         {
@@ -2256,14 +2243,14 @@ local gearSets =
             xi.items.OUTRIDER_HOSE,
             xi.items.OUTRIDER_GREAVES,
         },
-        minMatches = 5,
+        minEquipped = 5,
         mods =
         {
             { xi.mod.DMGPHYS, -1000, 0, 0 },
         },
     },
 
-    [118] = -- Espial set (Crit damage +10%)
+    [117] = -- Espial set (Crit damage +10%)
     {
         items =
         {
@@ -2273,14 +2260,14 @@ local gearSets =
             xi.items.ESPIAL_HOSE,
             xi.items.ESPIAL_SOCKS,
         },
-        minMatches = 5,
+        minEquipped = 5,
         mods =
         {
             { xi.mod.CRIT_DMG_INCREASE, 10, 0, 0 },
         },
     },
 
-    [119] = -- Wayfarer set (Refresh+3)
+    [118] = -- Wayfarer set (Refresh+3)
     {
         items =
         {
@@ -2290,14 +2277,14 @@ local gearSets =
             xi.items.WAYFARER_SLOPS,
             xi.items.WAYFARER_CLOGS,
         },
-        minMatches = 5,
+        minEquipped = 5,
         mods =
         {
             { xi.mod.REFRESH, 3, 0, 0 },
         },
     },
 
-    [120] = -- Apogee +1
+    [119] = -- Apogee +1
     {
         items =
         {
@@ -2307,14 +2294,14 @@ local gearSets =
             xi.items.APOGEE_SLACKS_P1,
             xi.items.APOGEE_PUMPS_P1,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.BP_DAMAGE, 4, 2, 0 },
         },
     },
 
-    [121] = -- Ryuo +1
+    [120] = -- Ryuo +1
     {
         items =
         {
@@ -2324,14 +2311,14 @@ local gearSets =
             xi.items.RYUO_HAKAMA_P1,
             xi.items.RYUO_SUNE_ATE_P1,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.ATT, 20, 10, 0 },
         },
     },
 
-    [122] = -- Souveran +1
+    [121] = -- Souveran +1
     {
         items =
         {
@@ -2341,14 +2328,14 @@ local gearSets =
             xi.items.SOUVERAN_DIECHLINGS_P1,
             xi.items.SOUVERAN_SCHUHS_P1,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.DMG, -4, -2, 0 },
         },
     },
 
-    [123] = -- Emicho +1
+    [122] = -- Emicho +1
     {
         items =
         {
@@ -2358,14 +2345,14 @@ local gearSets =
             xi.items.EMICHO_HOSE_P1,
             xi.items.EMICHO_GAMBIERAS_P1,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.DOUBLE_ATTACK, 4, 2, 0 },
         },
     },
 
-    [124] = -- Kaykaus +1
+    [123] = -- Kaykaus +1
     {
         items =
         {
@@ -2375,14 +2362,14 @@ local gearSets =
             xi.items.KAYKAUS_TIGHTS_P1,
             xi.items.KAYKAUS_BOOTS_P1,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.CURE_POTENCY_II, 4, 2, 0 },
         },
     },
 
-    [125] = -- Rao +1
+    [124] = -- Rao +1
     {
         items =
         {
@@ -2392,14 +2379,14 @@ local gearSets =
             xi.items.RAO_HAIDATE_P1,
             xi.items.RAO_SUNE_ATE_P1,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.MARTIAL_ARTS, 8, 4, 0 },
         },
     },
 
-    [126] = -- Adhemar +1
+    [125] = -- Adhemar +1
     {
         items =
         {
@@ -2409,14 +2396,14 @@ local gearSets =
             xi.items.ADHEMAR_KECKS_P1,
             xi.items.ADHEMAR_GAMASHES_P1,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.CRITHITRATE, 4, 2, 0 },
         },
     },
 
-    [127] = -- Carmine +1
+    [126] = -- Carmine +1
     {
         items =
         {
@@ -2426,14 +2413,14 @@ local gearSets =
             xi.items.CARMINE_CUISSES_P1,
             xi.items.CARMINE_GREAVES_P1,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.ACC, 20, 10, 0 },
         },
     },
 
-    [128] = -- Lustratio +1
+    [127] = -- Lustratio +1
     {
         items =
         {
@@ -2443,14 +2430,14 @@ local gearSets =
             xi.items.LUSTRATIO_SUBLIGAR_P1,
             xi.items.LUSTRATIO_LEGGINGS_P1,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.ALL_WSDMG_FIRST_HIT, 4, 2, 0 },
         },
     },
 
-    [129] = -- Argosy +1
+    [128] = -- Argosy +1
     {
         items =
         {
@@ -2460,14 +2447,14 @@ local gearSets =
             xi.items.ARGOSY_BREECHES_P1,
             xi.items.ARGOSY_SOLLERETS_P1,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.DOUBLE_ATTACK, 4, 2, 0 },
         },
     },
 
-    [130] = -- Amalric +1
+    [129] = -- Amalric +1
     {
         items =
         {
@@ -2477,21 +2464,21 @@ local gearSets =
             xi.items.AMALRIC_SLOPS_P1,
             xi.items.AMALRIC_NAILS_P1,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.MATT, 20, 10, 0 },
         },
     },
 
-    [131] = -- Moliones's Sickle/Ring
+    [130] = -- Moliones's Sickle/Ring
     {
         items =
         {
             xi.items.MOLIONESS_SICKLE,
             xi.items.MOLIONESS_RING,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.ACC,              5, 0, 0 },
@@ -2499,7 +2486,7 @@ local gearSets =
         },
     },
 
-    [132] = -- Mavi +2 Set: Occasionally triples the WSC of Blue Magic Spells. Will stack with Chain Affinity.
+    [131] = -- Mavi +2 Set: Occasionally triples the WSC of Blue Magic Spells. Will stack with Chain Affinity.
     {
         items =
         {
@@ -2509,14 +2496,14 @@ local gearSets =
             xi.items.MAVI_TAYT_P2,
             xi.items.MAVI_BASMAK_P2,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.AUGMENT_BLU_MAGIC, 2, 1, 0 },
         },
     },
 
-    [133] = -- AF3 BLU 109/119 Set: Occasionally triples the WSC of Blue Magic Spells. Will stack with Chain Affinity.
+    [132] = -- AF3 BLU 109/119 Set: Occasionally triples the WSC of Blue Magic Spells. Will stack with Chain Affinity.
     {
         items =
         {
@@ -2531,7 +2518,7 @@ local gearSets =
             xi.items.HASHISHIN_BASMAK,
             xi.items.HASHISHIN_BASMAK_P1,
         },
-        minMatches = 2,
+        minEquipped = 2,
         mods =
         {
             { xi.mod.AUGMENT_BLU_MAGIC, 2, 1, 0 },
@@ -2539,110 +2526,47 @@ local gearSets =
     }
 }
 
-local function handleCappedTierSet(player, gearset, minMatches)
-    -- Rubeus Armor Set
-    if (gearset.id == 32) then
-        local modValue = 0
+-- Build Table to lookup Set ID based on Item ID.  This is cached in xi.gear_sets.itemToSetId table,
+-- and only rebuilt on loading the gear_sets global into cache.
 
-        if (minMatches > 1 and minMatches < 4) then
-            modValue = 4 -- 2 or 3 pieces
-        elseif (minMatches > 3) then
-            modValue = 10 -- 4 or 5 pieces
+xi.gear_sets.createItemToSetId = function()
+    local itemTable = {}
+
+    for setId, setData in pairs(gearSets) do
+        for _, itemId in ipairs(setData.items) do
+            itemTable[itemId] = setId
         end
-
-        player:addGearSetMod(gearset.id, xi.mod.FASTCAST, modValue)
-        -- AF1 119+2/+3 ACC/RACC/MACC Sets EXCEPT SMN
-    elseif (gearset.id >= 133 and gearset.id <= 199 and gearset.id ~= 175) then
-        local modValue = 0
-
-        if (minMatches == 2) then
-            modValue = 15 -- 2 minMatches
-        elseif (minMatches == 3) then
-            modValue = 30 -- 3 minMatches
-        elseif (minMatches == 4) then
-            modValue = 45 -- 4 minMatches
-        elseif (minMatches >= 5) then
-            modValue = 60 -- 5 or more minMatches
-        end
-        player:addGearSetMod(gearset.id, xi.mod.ACC, modValue)
-        player:addGearSetMod(gearset.id + 1, xi.mod.RACC, modValue)
-        player:addGearSetMod(gearset.id + 2, xi.mod.MACC, modValue)
     end
+
+    return itemTable
 end
 
------------------------------------
--- Applys a gear set mod
------------------------------------
-local function ApplyMod(player, gearset, minMatches)
-
-    for _, set in pairs(cappedTierSets) do
-        if (set.id == gearset.id) then
-            handleCappedTierSet(player, gearset, minMatches)
-            return
-        end
-    end
-
-    -- find any additional minMatches
-    local addMatches = minMatches - gearset.minMatches
-
-    -- just in case someone decides to customize things
-    if (addMatches < 0) then return end
-
-    local i = 0
-    for _, mod in pairs(gearset.mods) do
-        local modId = mod[1]
-        local modValue = mod[2]
-
-        -- value/multiplier for additional pieces
-        local addMatchValue = mod[3]
-
-        -- additional bonus for complete set
-        local addSetBonus = 0
-
-        -- cause we need all pieces to form a complete set
-        if (minMatches == #gearset.items) then
-            addSetBonus = mod[4]
-        end
-
-        -- add bonus mods per piece
-        if (addMatches ~= 0 and addMatchValue ~= 0) then
-            modValue = modValue + (addMatchValue * addMatches)
-        end
-
-        player:addGearSetMod(gearset.id + i, modId, modValue + addSetBonus)
-        i = i + 1
-    end
-end
-
------------------------------------
--- Checks for gear sets present on a player
------------------------------------
+-- Global function to check for equipped sets and apply mods.  This is called by
+-- core on equip and unequip of an item.
 xi.gear_sets.checkForGearSet = function(player)
     player:clearGearSetMods()
 
-    -- Cache current equipped items
-    local equippedItems = {}
+    -- Build a table containing equipped Set IDs, and the count for each one.
+    local equippedSets = {}
     for equipmentSlot = 0, xi.MAX_SLOTID do
-        equippedItems[equipmentSlot + 1] = player:getEquipID(equipmentSlot)
+        local equipId = player:getEquipID(equipmentSlot)
+        local setId   = xi.gear_sets.itemToSetId[equipId]
+
+        if setId then
+            equippedSets[setId] = equippedSets[setId] and (equippedSets[setId] + 1) or 1
+        end
     end
 
-    for setId, setData in pairs(gearSets) do
-        local numMatches = 0
+    -- Apply Mods for each set after boundary checking the counts.
+    for setId, setCount in pairs(equippedSets) do
+        local minEquippedReq = gearSets[setId].minEquipped and gearSets[setId].minEquipped or 2
+        local maxEquippedReq = gearSets[setId].maxEquipped and gearSets[setId].maxEquipped or 0
 
-        if not player:hasGearSetMod(setId) then
-            for _, itemId in ipairs(setData.items) do
-                for slot = 1, xi.MAX_SLOTID do
-                    local equipId = equippedItems[slot]
+        if setCount >= minEquipped then
+            local modTierIndex = math.min(setCount, maxEquippedReq) - minEquippedReq
 
-                    if equipId == itemId then
-                        numMatches = numMatches + 1
-                        break
-                    end
-                end
-            end
-
-            if numMatches >= setData.minMatches then
-                ApplyMod(player, setData, numMatches)
+            for _, modData in gearSets[setId].mods do
+                player:addGearSetMod(setId, modData[1], modData[modTierIndex + 2])
             end
         end
     end
