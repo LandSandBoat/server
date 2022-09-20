@@ -851,3 +851,61 @@ void CBattlefield::ForEachAlly(const std::function<void(CMobEntity*)>& func)
         func(ally);
     }
 }
+
+void CBattlefield::addGroup(BattlefieldGroup group)
+{
+    if (group.randomDeathCallback.valid())
+    {
+        group.randomMobId = xirand::GetRandomElement(group.mobIds);
+    }
+    m_groups.push_back(group);
+}
+
+void CBattlefield::handleDeath(CBaseEntity* PEntity)
+{
+    if (PEntity->objtype != TYPE_MOB || m_groups.empty())
+    {
+        return;
+    }
+
+    for (auto& group : m_groups)
+    {
+        for (uint32 mobId : group.mobIds)
+        {
+            if (mobId == PEntity->id)
+            {
+                ++group.deathCount;
+
+                if (group.deathCallback.valid())
+                {
+                    group.deathCallback(CLuaBaseEntity(PEntity), group.deathCount);
+                }
+
+                if (group.allDeathCallback.valid() && group.deathCount >= group.mobIds.size())
+                {
+                    // Validate all mobs in the group are dead since they may have been revived
+                    uint16 deathCount = 0;
+                    for (auto& deathMobId : group.mobIds)
+                    {
+                        CMobEntity* PMob = (CMobEntity*)zoneutils::GetEntity(deathMobId, TYPE_MOB | TYPE_PET);
+                        if (PMob->isDead())
+                        {
+                            ++deathCount;
+                        }
+                    }
+
+                    if (deathCount == group.mobIds.size())
+                    {
+                        group.allDeathCallback(CLuaBaseEntity(PEntity));
+                    }
+                }
+
+                if (group.randomDeathCallback.valid() && mobId == group.randomMobId)
+                {
+                    group.randomDeathCallback(CLuaBaseEntity(PEntity));
+                }
+                break;
+            }
+        }
+    }
+}
