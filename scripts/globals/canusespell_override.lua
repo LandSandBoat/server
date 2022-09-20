@@ -15,6 +15,7 @@ local jobPointSpellGiftMap =
         [xi.magic.spell.RERAISE_IV] = 100,
         [xi.magic.spell.FULL_CURE]  = 1200,
     },
+
     [xi.job.BLM] =
     {
         [xi.magic.spell.FIRE_VI]     = 100,
@@ -28,6 +29,7 @@ local jobPointSpellGiftMap =
 
         [xi.magic.spell.DEATH]       = 1200,
     },
+
     [xi.job.RDM] =
     {
         [xi.magic.spell.FIRE_V]       = 100,
@@ -44,15 +46,18 @@ local jobPointSpellGiftMap =
         [xi.magic.spell.REFRESH_III]  = 1200,
         [xi.magic.spell.TEMPER_II]    = 1200,
     },
+
     [xi.job.PLD] =
     {
         [xi.magic.spell.ENLIGHT_II] = 100,
     },
+
     [xi.job.DRK] =
     {
         [xi.magic.spell.ENDARK_II] = 100,
         [xi.magic.spell.DRAIN_III] = 100,
     },
+
     [xi.job.BRD] =
     {
         [xi.magic.spell.FIRE_THRENODY_II]      = 100,
@@ -64,10 +69,12 @@ local jobPointSpellGiftMap =
         [xi.magic.spell.LIGHT_THRENODY_II]     = 100,
         [xi.magic.spell.DARK_THRENODY_II]      = 100,
     },
+
     [xi.job.NIN] =
     {
         [xi.magic.spell.UTSUSEMI_SAN] = 100,
     },
+
     [xi.job.SCH] =
     {
         [xi.magic.spell.FIRESTORM_II]    = 100,
@@ -86,6 +93,7 @@ local jobPointSpellGiftMap =
         [xi.magic.spell.LUMINOHELIX_II]  = 1200,
         [xi.magic.spell.NOCTOHELIX_II]   = 1200,
     },
+
     [xi.job.GEO] =
     {
         [xi.magic.spell.FIRE_V]       = 100,
@@ -102,6 +110,7 @@ local jobPointSpellGiftMap =
         [xi.magic.spell.THUNDARA_III] = 1200,
         [xi.magic.spell.WATERA_III]   = 1200,
     },
+
     [xi.job.RUN] =
     {
         [xi.magic.spell.TEMPER] = 550,
@@ -110,12 +119,14 @@ local jobPointSpellGiftMap =
 
 local function getSpellJobPointCostForJob(job, spellID)
 
-    local jobPointCost = jobPointSpellGiftMap[job][spellID]
+    local jobGiftMap = jobPointSpellGiftMap[job]
+    if jobGiftMap then
+        local jobPointCost = jobGiftMap[spellID]
 
-    if jobPointCost then
-        return jobPointCost
+        if jobPointCost then
+            return jobPointCost
+        end
     end
-
     return -1
 end
 
@@ -134,7 +145,6 @@ xi.spells.canUseSpellOverride = function(player, spell)
         return false
     end
 
-    print(jobPointsSpent > jobPointCostForSpell)
     if jobPointsSpent >= jobPointCostForSpell then
         return true
     end
