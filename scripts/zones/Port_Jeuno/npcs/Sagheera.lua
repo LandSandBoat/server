@@ -375,23 +375,23 @@ entity.onTrigger = function(player, npc)
         -- event parameters
 
         local storedABCs = player:getCurrency("ancient_beastcoin")
-        local playerSagheera = player:getCharVar("Sagheera")
+        local playerSagheera = player:getCharVar("SagheeraInteractions")
         -- bitfield of menu options
         local menu = 0
         -- bit 0 - has boughten a cosmo cleanse before
-        if utils.mask.getBit(playerSagheera, 0) then
+        if not utils.mask.getBit(playerSagheera, 0) then
             menu = utils.mask.setBit(menu, 0, true)
         end
         -- bit 1 - show "ask about ancient beastcoins" option
         -- Is shown once the player selects "Just wanted to chat"
-        if utils.mask.getBit(playerSagheera, 1) then
+        if not utils.mask.getBit(playerSagheera, 1) then
             menu = utils.mask.setBit(menu, 1, true)
         end
         -- bit 2 - display stored ABCs on "ask about ancient beastcoins"
         menu = utils.mask.setBit(menu, 2, true)
         -- bit 3 - do not give lengthy explaination on relic restoration
         -- Set the first time the player encounters option 5
-        if utils.mask.getBit(playerSagheera, 2) then
+        if not utils.mask.getBit(playerSagheera, 2) then
             menu = utils.mask.setBit(menu, 3, true)
         end
         -- bit 10 - ??? (this bit was set in some captures)
@@ -452,14 +452,14 @@ end
 local handleMainEvent = function(player, option, coinAmount)
     -- "Just wanted to chat" for the first time
     if option == 1 then
-        player:setCharVar("Sagheera", utils.mask.setBit(player:getCharVar("Sagheera"), 1, true));
+        player:setCharVar("SagheeraInteractions", utils.mask.setBit(player:getCharVar("SagheeraInteractions"), 1, false));
 
     -- purchase COSMO_CLEANSE
     elseif option == 3 then
         local cosmoTime = getCosmoCleanseTime(player)
         local cost = player:hasKeyItem(xi.ki.RHAPSODY_IN_MAUVE) and 1000 or xi.settings.main.COSMO_CLEANSE_BASE_COST
         if cosmoTime == cosmoReady and player:delGil(cost) then
-            player:setCharVar("Sagheera", utils.mask.setBit(player:getCharVar("Sagheera"), 0, true));
+            player:setCharVar("SagheeraInteractions", utils.mask.setBit(player:getCharVar("SagheeraInteractions"), 0, false));
             npcUtil.giveKeyItem(player, xi.ki.COSMO_CLEANSE)
         end
 
@@ -471,7 +471,7 @@ local handleMainEvent = function(player, option, coinAmount)
 
     -- Relic restoration exited
     elseif option == 5 then
-        player:setCharVar("Sagheera", utils.mask.setBit(player:getCharVar("Sagheera"), 2, true));
+        player:setCharVar("SagheeraInteractions", utils.mask.setBit(player:getCharVar("SagheeraInteractions"), 2, false));
 
     -- purchase item using ancient beastcoins
     elseif abcShop[option] then
