@@ -332,7 +332,6 @@ local function giveReward(player, csid)
 end
 
 entity.onTrade = function(player, npc, trade)
-    local underTheSea    = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.UNDER_THE_SEA)
     local insideTheBelly = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.INSIDE_THE_BELLY)
 
     -- A BOY'S DREAM

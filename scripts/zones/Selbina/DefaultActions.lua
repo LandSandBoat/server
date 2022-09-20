@@ -8,5 +8,6 @@ return {
     ['Thunder_Hawk'] = { event = 84 },
     ['Valgeir']      = { event = 140 },
     ['Yaya']         = { event = 153 },
-    ['Jimaida']      = { event = 152},
+    ['Jimaida']      = { event = 152 },
+    ['Oswald']       = { event = 30 },
 }

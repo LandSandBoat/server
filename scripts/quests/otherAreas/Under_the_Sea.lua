@@ -2,7 +2,10 @@
 -- Under the Sea
 -----------------------------------
 -- Log ID: 4, Quest ID: 17
--- Yaya :
+-- Yaya    : !pos -18.770 -2.597 -14.929 248
+-- Oswald  : !pos 47.119 -15.273 7.989 248
+-- Jimaida : !pos -17.342 -2.597 -18.766 248
+-- Zaldon  : !pos -11.810 -7.287 -6.742
 -----------------------------------
 require('scripts/globals/items')
 require('scripts/globals/quests')
@@ -53,7 +56,6 @@ quest.sections =
             ['Oswald'] =
             {
                 onTrigger = function(player, npc)
-                    print(quest:getVar(player, "status"))
                     if player:hasKeyItem(xi.ki.ETCHED_RING) then
                         return quest:event(37)
                     elseif quest:getVar(player, "status") == 0 then
