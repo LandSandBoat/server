@@ -388,7 +388,9 @@ entity.onTrigger = function(player, npc)
             menu = utils.mask.setBit(menu, 1, true)
         end
         -- bit 2 - display stored ABCs on "ask about ancient beastcoins"
-        menu = utils.mask.setBit(menu, 2, true)
+        if storedABCs > 0 then
+            menu = utils.mask.setBit(menu, 2, true)
+        end
         -- bit 3 - do not give lengthy explaination on relic restoration
         -- Set the first time the player encounters option 5
         if not utils.mask.getBit(playerSagheera, 2) then
