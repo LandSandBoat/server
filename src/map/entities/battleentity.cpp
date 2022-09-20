@@ -1012,6 +1012,11 @@ void CBattleEntity::addModifier(Mod type, int16 amount)
         m_MSNonItemValues.push_back(amount);
         m_modStat[type] = CalculateMSFromSources();
     }
+    else if (type == Mod::DEF || (type >= Mod::STR && type <= Mod::CHR) ||
+             (type >= Mod::ATT && type <= Mod::RACC) || (type >= Mod::MATT && type <= Mod::MEVA))
+    {
+        m_modStat[type] = std::clamp(m_modStat[type] + amount, 0, 65535); // These are all treated as uint16 values.
+    }
     else
     {
         m_modStat[type] += amount;
@@ -1077,7 +1082,7 @@ int16 CBattleEntity::CalculateMSFromSources()
         }
     }
 
-    return (highestItemPositiveValue + totalItemReducedValue) + (highestNonItemPositve + totalNonItemReducedValue);
+    return std::clamp((highestItemPositiveValue + totalItemReducedValue) + (highestNonItemPositve + totalNonItemReducedValue), 0, 255);
 }
 
 void CBattleEntity::addEquipModifiers(std::vector<CModifier>* modList, uint8 itemLevel, uint8 slotid)
