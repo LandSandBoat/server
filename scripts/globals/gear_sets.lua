@@ -8,7 +8,12 @@ require('scripts/globals/status')
 
 xi = xi or {}
 xi.gear_sets = xi.gear_sets or {}
-xi.gear_sets.itemToSetId = xi.gear_sets.createItemToSetId()
+
+-- Table Notes:
+-- minEquipped and maxEquipped are optional parameters.  If not set, minEquipped will be set to
+-- a value of 2, and maxEquipped will be set to 0 (not limited).  Mod parameters are the total value
+-- of currently equipped pieces from minEquipped..N (Where N is maxEquipped or the maximum number)
+-- of matches defined within the items table.
 
 local gearSets =
 {
@@ -25,7 +30,7 @@ local gearSets =
         minEquipped = 5,
         mods =
         {
-            { xi.mod.HASTE_GEAR, 500, 0, 0 },
+            { xi.mod.HASTE_GEAR, 500 },
         },
     },
 
@@ -42,7 +47,7 @@ local gearSets =
         minEquipped = 5,
         mods =
         {
-            { xi.mod.CRITHITRATE, 5, 0, 0 },
+            { xi.mod.CRITHITRATE, 5 },
         },
     },
 
@@ -59,7 +64,7 @@ local gearSets =
         minEquipped = 5,
         mods =
         {
-            { xi.mod.DOUBLE_ATTACK, 5, 0, 0 },
+            { xi.mod.DOUBLE_ATTACK, 5 },
         },
     },
 
@@ -76,7 +81,7 @@ local gearSets =
         minEquipped = 5,
         mods =
         {
-            { xi.mod.ACC, 20, 0, 0 },
+            { xi.mod.ACC, 20 },
         },
     },
 
@@ -93,7 +98,7 @@ local gearSets =
         minEquipped = 5,
         mods =
         {
-            { xi.mod.HPP, 10, 0, 0 },
+            { xi.mod.HPP, 10 },
         },
     },
 
@@ -110,7 +115,7 @@ local gearSets =
         minEquipped = 5,
         mods =
         {
-            { xi.mod.SUBTLE_BLOW, 8, 0, 0 },
+            { xi.mod.SUBTLE_BLOW, 8 },
         },
     },
 
@@ -127,7 +132,7 @@ local gearSets =
         minEquipped = 5,
         mods =
         {
-            { xi.mod.MATT, 5, 0, 0 },
+            { xi.mod.MATT, 5 },
         },
     },
 
@@ -144,7 +149,7 @@ local gearSets =
         minEquipped = 5,
         mods =
         {
-            { xi.mod.FASTCAST, 5, 0, 0 },
+            { xi.mod.FASTCAST, 5 },
         },
     },
 
@@ -161,7 +166,7 @@ local gearSets =
         minEquipped = 5,
         mods =
         {
-            { xi.mod.MDEF, 10, 0, 0 },
+            { xi.mod.MDEF, 10 },
         },
     },
 
@@ -178,7 +183,7 @@ local gearSets =
         minEquipped = 5,
         mods =
         {
-            { xi.mod.REFRESH, 1, 0, 0 },
+            { xi.mod.REFRESH, 1 },
         },
     },
 
@@ -195,7 +200,7 @@ local gearSets =
         minEquipped = 5,
         mods =
         {
-            { xi.mod.HASTE_GEAR, 500, 0, 0 },
+            { xi.mod.HASTE_GEAR, 500 },
         },
     },
 
@@ -212,7 +217,7 @@ local gearSets =
         minEquipped = 5,
         mods =
         {
-            { xi.mod.STORETP, 8, 0, 0 }
+            { xi.mod.STORETP, 8 }
         },
     },
 
@@ -229,7 +234,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.FASTCAST, 4, 2, 0 },
+            { xi.mod.FASTCAST, 4, 6, 8, 10 },
         },
     },
 
@@ -246,7 +251,7 @@ local gearSets =
         minEquipped = 5,
         mods =
         {
-            { xi.mod.HASTE_GEAR, 600, 0, 0 },
+            { xi.mod.HASTE_GEAR, 600 },
         },
     },
 
@@ -263,7 +268,7 @@ local gearSets =
         minEquipped = 5,
         mods =
         {
-            { xi.mod.MACC, 5, 0, 0 },
+            { xi.mod.MACC, 5 },
         },
     },
 
@@ -280,7 +285,7 @@ local gearSets =
         minEquipped = 5,
         mods =
         {
-            { xi.mod.CRITHITRATE, 5, 0, 0 },
+            { xi.mod.CRITHITRATE, 5 },
         },
     },
 
@@ -294,7 +299,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.RATT, 15, 0, 0 },
+            { xi.mod.RATT, 15 },
         },
     },
 
@@ -311,11 +316,11 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.ATT, 1, 4.7, 0 },
+            { xi.mod.ATT, 1, 5, 10, 15 },
         },
     },
 
-    [19] = -- Cobra Unit Harness Set
+    [19] = -- Cobra Unit Harness Set (Needs Verification)
     {
         items =
         {
@@ -328,11 +333,11 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.COUNTER, 1, 1, 0 },
+            { xi.mod.COUNTER, 1, 2, 3, 4 },
         },
     },
 
-    [20] = -- Cobra Unit Robe Set
+    [20] = -- Cobra Unit Robe Set (Needs Verification)
     {
         items =
         {
@@ -345,7 +350,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.MACC, 1, 1, 0 },
+            { xi.mod.MACC, 1, 2, 3, 4 },
         },
     },
 
@@ -362,8 +367,8 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.ACC, 1, 1, 0 },
-            { xi.mod.ATT, 1, 1, 0 },
+            { xi.mod.ACC, 1, 2, 3, 4 },
+            { xi.mod.ATT, 1, 2, 3, 4 },
         },
     },
 
@@ -380,7 +385,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.HP, 10, 10, 0 },
+            { xi.mod.HP, 10, 20, 30, 40 },
         },
     },
 
@@ -397,11 +402,11 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.MP, 10, 10, 0 },
+            { xi.mod.MP, 10, 20, 30, 40 },
         },
     },
 
-    [24] = -- Amir Korazin Set - Double mod here! It is why it has 2 IDs.
+    [24] = -- Amir Korazin Set
     {
         items =
         {
@@ -414,12 +419,12 @@ local gearSets =
         minEquipped = 5,
         mods =
         {
-            { xi.mod.UDMGBREATH, -800, 0, 0 },
-            { xi.mod.UDMGMAGIC,  -800, 0, 0 },
+            { xi.mod.UDMGBREATH, -800 },
+            { xi.mod.UDMGMAGIC,  -800 },
         },
     },
 
-    [25] = -- Hachiryu Haramaki Set - Store tp (5, 10, 20)
+    [25] = -- Hachiryu Haramaki Set - Store TP
     {
         items =
         {
@@ -431,7 +436,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.STORETP, 5, 5, 5 },
+            { xi.mod.STORETP, 5, 10, 20 },
         },
     },
 
@@ -448,7 +453,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.DA_DOUBLE_DMG_RATE, 2, 1, 0 },
+            { xi.mod.DA_DOUBLE_DMG_RATE, 2, 3, 4, 5 },
         },
     },
 
@@ -465,7 +470,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.DOUBLE_ATTACK, 5, 0, 0 },
+            { xi.mod.DOUBLE_ATTACK, 5 },
         },
     },
 
@@ -482,7 +487,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.HASTE_GEAR, 800, 0, 0 },
+            { xi.mod.HASTE_GEAR, 800 },
         },
     },
 
@@ -499,7 +504,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.MACC, 5, 0, 0 },
+            { xi.mod.MACC, 5 },
         },
     },
 
@@ -516,7 +521,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.REFRESH, 1, 0.4, 0 },
+            { xi.mod.REFRESH, 1, 1, 2, 2 },
         },
     },
 
@@ -533,7 +538,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.CRITHITRATE, 1, 1, 0 },
+            { xi.mod.CRITHITRATE, 3, 4, 5, 6 },
         },
     },
 
@@ -548,10 +553,9 @@ local gearSets =
             xi.items.RUBEUS_BOOTS,
         },
         minEquipped = 2,
-        maxEquipped = 4, -- Special Case
         mods =
         {
-            { xi.mod.FASTCAST, 10, 0, 0 },
+            { xi.mod.FASTCAST, 4, 4, 10, 10 },
         },
     },
 
@@ -568,7 +572,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.QUICK_DRAW_TRIPLE_DAMAGE, 2, 1, 0 },
+            { xi.mod.QUICK_DRAW_TRIPLE_DAMAGE, 2, 3, 4, 5 },
         },
     },
 
@@ -585,7 +589,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.SAMBA_DOUBLE_DAMAGE, 1, 1.8, 0 },
+            { xi.mod.SAMBA_DOUBLE_DAMAGE, 2, 3, 4, 5 },
         },
     },
 
@@ -602,7 +606,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.EXTRA_DUAL_WIELD_ATTACK, 4, 2, 0 },
+            { xi.mod.EXTRA_DUAL_WIELD_ATTACK, 2, 3, 4, 5 },
         }
     },
 
@@ -619,7 +623,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.RAPID_SHOT_DOUBLE_DAMAGE, 2, 1, 0 },
+            { xi.mod.RAPID_SHOT_DOUBLE_DAMAGE, 2, 3, 4, 5 },
         },
     },
 
@@ -636,7 +640,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.ABSORB_DMG_CHANCE, 2, 1, 0 },
+            { xi.mod.ABSORB_DMG_CHANCE, 2, 3, 4, 5 },
         },
     },
 
@@ -653,7 +657,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.ZANSHIN_DOUBLE_DAMAGE, 2, 1, 0 },
+            { xi.mod.ZANSHIN_DOUBLE_DAMAGE, 2, 3, 4, 5 },
         },
     },
 
@@ -670,7 +674,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.EXTRA_KICK_ATTACK, 2, 1, 0 },
+            { xi.mod.EXTRA_KICK_ATTACK, 2, 3, 4, 5 },
         },
     },
 
@@ -687,7 +691,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.TA_TRIPLE_DMG_RATE, 2, 1, 0 },
+            { xi.mod.TA_TRIPLE_DMG_RATE, 2, 3, 4, 5 },
         },
     },
 
@@ -704,7 +708,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.BAR_ELEMENT_NULL_CHANCE, 4, 2, 0 },
+            { xi.mod.BAR_ELEMENT_NULL_CHANCE, 2, 3, 4, 5 },
         },
     },
 
@@ -721,7 +725,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.GRIMOIRE_INSTANT_CAST, 2, 1, 0 },
+            { xi.mod.GRIMOIRE_INSTANT_CAST, 2, 3, 4, 5 },
         },
     },
 
@@ -740,12 +744,13 @@ local gearSets =
             xi.items.BALISARDE,
         },
         minEquipped = 2,
+        maxEquipped = 2,
         mods =
         {
-            { xi.mod.HP,  30, 0, 0 },
-            { xi.mod.VIT,  6, 0, 0 },
-            { xi.mod.ACC,  6, 0, 0 },
-            { xi.mod.RACC, 6, 0, 0 },
+            { xi.mod.HP,  30 },
+            { xi.mod.VIT,  6 },
+            { xi.mod.ACC,  6 },
+            { xi.mod.RACC, 6 },
         },
     },
 
@@ -763,12 +768,13 @@ local gearSets =
             xi.items.VENDETTA,
         },
         minEquipped = 2,
+        maxEquipped = 2,
         mods =
         {
-            { xi.mod.STR,  6, 0, 0 },
-            { xi.mod.ATT,  4, 0, 0 },
-            { xi.mod.RATT, 4, 0, 0 },
-            { xi.mod.MATT, 2, 0, 0 },
+            { xi.mod.STR,  6 },
+            { xi.mod.ATT,  4 },
+            { xi.mod.RATT, 4 },
+            { xi.mod.MATT, 2 },
         },
     },
 
@@ -787,11 +793,12 @@ local gearSets =
             xi.items.YAGENTOSHIRO,
         },
         minEquipped = 2,
+        maxEquipped = 2,
         mods =
         {
-            { xi.mod.EVA,    10, 0, 0 },
-            { xi.mod.HPHEAL, 10, 0, 0 },
-            { xi.mod.ENMITY, -5, 0, 0 },
+            { xi.mod.EVA,    10 },
+            { xi.mod.HPHEAL, 10 },
+            { xi.mod.ENMITY, -5 },
         }
     },
 
@@ -805,7 +812,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.RERAISE_III, 1, 0, 0 },
+            { xi.mod.RERAISE_III, 1 },
         },
     },
 
@@ -819,7 +826,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.AMMO_SWING, 50, 0, 0 },
+            { xi.mod.AMMO_SWING, 50 },
         },
     },
 
@@ -833,7 +840,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.AMMO_SWING, 50, 0, 0 },
+            { xi.mod.AMMO_SWING, 50 },
         },
     },
 
@@ -847,7 +854,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.AMMO_SWING, 50, 0, 0 },
+            { xi.mod.AMMO_SWING, 50 },
         },
     },
 
@@ -861,7 +868,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.AMMO_SWING, 50, 0, 0 },
+            { xi.mod.AMMO_SWING, 50 },
         },
     },
 
@@ -875,7 +882,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.AMMO_SWING, 50, 0, 0 },
+            { xi.mod.AMMO_SWING, 50 },
         },
     },
 
@@ -889,7 +896,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.AMMO_SWING, 50, 0, 0 },
+            { xi.mod.AMMO_SWING, 50 },
         },
     },
 
@@ -903,7 +910,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.AMMO_SWING, 50, 0, 0 },
+            { xi.mod.AMMO_SWING, 50 },
         },
     },
 
@@ -917,7 +924,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.DOUBLE_ATTACK, 7, 0, 0 },
+            { xi.mod.DOUBLE_ATTACK, 7 },
         },
     },
 
@@ -931,7 +938,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.DUAL_WIELD, 7, 0, 0 },
+            { xi.mod.DUAL_WIELD, 7 },
         },
     },
 
@@ -945,7 +952,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.MACC, 12, 0, 0 },
+            { xi.mod.MACC, 12 },
         },
     },
 
@@ -967,7 +974,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.ZANSHIN_DOUBLE_DAMAGE, 2, 1, 0 },
+            { xi.mod.ZANSHIN_DOUBLE_DAMAGE, 2, 3, 4, 5 },
         },
     },
 
@@ -989,7 +996,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.EXTRA_KICK_ATTACK, 2, 1, 0 },
+            { xi.mod.EXTRA_KICK_ATTACK, 2, 3, 4, 5 },
         },
     },
 
@@ -1011,7 +1018,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.DA_DOUBLE_DMG_RATE, 2, 1, 0 },
+            { xi.mod.DA_DOUBLE_DMG_RATE, 2, 3, 4, 5 },
         },
     },
 
@@ -1033,7 +1040,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.TA_TRIPLE_DMG_RATE, 2, 1, 0 },
+            { xi.mod.TA_TRIPLE_DMG_RATE, 2, 3, 4, 5 },
         },
     },
 
@@ -1055,7 +1062,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.RAPID_SHOT_DOUBLE_DAMAGE, 2, 1, 0 },
+            { xi.mod.RAPID_SHOT_DOUBLE_DAMAGE, 2, 3, 4, 5 },
         },
     },
 
@@ -1077,7 +1084,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.ABSORB_DMG_CHANCE, 2, 1, 0 },
+            { xi.mod.ABSORB_DMG_CHANCE, 2, 3, 4, 5 },
         },
     },
 
@@ -1099,7 +1106,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.EXTRA_DUAL_WIELD_ATTACK, 4, 2, 0 },
+            { xi.mod.EXTRA_DUAL_WIELD_ATTACK, 2, 3, 4, 5 },
         },
     },
 
@@ -1121,7 +1128,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.QUICK_DRAW_TRIPLE_DAMAGE, 2, 1, 0 },
+            { xi.mod.QUICK_DRAW_TRIPLE_DAMAGE, 2, 3, 4, 5 },
         },
     },
 
@@ -1143,7 +1150,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.GRIMOIRE_INSTANT_CAST, 2, 1, 0 },
+            { xi.mod.GRIMOIRE_INSTANT_CAST, 2, 3, 4, 5 },
         },
     },
 
@@ -1165,7 +1172,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.BAR_ELEMENT_NULL_CHANCE, 4, 2, 0 },
+            { xi.mod.BAR_ELEMENT_NULL_CHANCE, 2, 3, 4, 5 },
         },
     },
 
@@ -1180,9 +1187,10 @@ local gearSets =
             xi.items.NEFER_KALASIRIS_P1,
         },
         minEquipped = 2,
+        maxEquipped = 2,
         mods =
         {
-            { xi.mod.REFRESH, 3, 0, 0 },
+            { xi.mod.REFRESH, 3 },
         },
     },
 
@@ -1196,8 +1204,8 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.HP, 50, 0, 0 },
-            { xi.mod.MP, 50, 0, 0 },
+            { xi.mod.HP, 50 },
+            { xi.mod.MP, 50 },
         },
     },
 
@@ -1211,8 +1219,8 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.MATT, 5, 0, 0 },
-            { xi.mod.MACC, 5, 0, 0 },
+            { xi.mod.MATT, 5 },
+            { xi.mod.MACC, 5 },
         },
     },
 
@@ -1226,9 +1234,9 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.ATT,  6, 0, 0 },
-            { xi.mod.ACC, 12, 0, 0 },
-            { xi.mod.DEF,  6, 0, 0 },
+            { xi.mod.ATT,  6 },
+            { xi.mod.ACC, 12 },
+            { xi.mod.DEF,  6 },
         },
     },
 
@@ -1245,14 +1253,14 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.FIRE_MEVA,    5, 5, 10 },
-            { xi.mod.ICE_MEVA,     5, 5, 10 },
-            { xi.mod.WIND_MEVA,    5, 5, 10 },
-            { xi.mod.EARTH_MEVA,   5, 5, 10 },
-            { xi.mod.THUNDER_MEVA, 5, 5, 10 },
-            { xi.mod.WATER_MEVA,   5, 5, 10 },
-            { xi.mod.LIGHT_MEVA,   5, 5, 10 },
-            { xi.mod.DARK_MEVA,    5, 5, 10 },
+            { xi.mod.FIRE_MEVA,    5, 10, 15, 30 },
+            { xi.mod.ICE_MEVA,     5, 10, 15, 30 },
+            { xi.mod.WIND_MEVA,    5, 10, 15, 30 },
+            { xi.mod.EARTH_MEVA,   5, 10, 15, 30 },
+            { xi.mod.THUNDER_MEVA, 5, 10, 15, 30 },
+            { xi.mod.WATER_MEVA,   5, 10, 15, 30 },
+            { xi.mod.LIGHT_MEVA,   5, 10, 15, 30 },
+            { xi.mod.DARK_MEVA,    5, 10, 15, 30 },
         },
     },
 
@@ -1266,7 +1274,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.AGI, 8, 0, 0 },
+            { xi.mod.AGI, 8 },
         },
     },
 
@@ -1280,8 +1288,8 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.ATT,  5, 0, 0 },
-            { xi.mod.RATT, 5, 0, 0 },
+            { xi.mod.ATT,  5 },
+            { xi.mod.RATT, 5 },
         },
     },
 
@@ -1298,7 +1306,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.FASTCAST, 4, 2, 0 },
+            { xi.mod.FASTCAST, 4, 6, 8, 10 },
         },
     },
 
@@ -1315,7 +1323,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.STORETP, 2, 2, 0 },
+            { xi.mod.STORETP, 2, 4, 6, 8 },
         },
     },
 
@@ -1332,7 +1340,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.HASTE_GEAR, 200, 100, 0 },
+            { xi.mod.HASTE_GEAR, 2, 3, 4, 5 },
         },
     },
 
@@ -1349,7 +1357,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.MATT, 3, 2, 0 },
+            { xi.mod.MATT, 3, 5, 7, 9 },
         },
     },
 
@@ -1366,7 +1374,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.FASTCAST, 3, 2, 0 },
+            { xi.mod.FASTCAST, 3, 5, 7, 9 },
         },
     },
 
@@ -1383,7 +1391,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.HASTE_GEAR, 300, 200, 0 },
+            { xi.mod.HASTE_GEAR, 300, 500, 700, 900 },
         },
     },
 
@@ -1400,7 +1408,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.CRITHITRATE, 3, 2, 0 },
+            { xi.mod.CRITHITRATE, 3, 5, 7, 9 },
         },
     },
 
@@ -1417,7 +1425,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.DOUBLE_ATTACK, 3, 2, 0 },
+            { xi.mod.DOUBLE_ATTACK, 3, 5, 7, 9 },
         },
     },
 
@@ -1431,7 +1439,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.DMGMAGIC, -500, 0, 0 },
+            { xi.mod.DMGMAGIC, -500 },
         },
     },
 
@@ -1450,7 +1458,7 @@ local gearSets =
         maxEquipped = 5,
         mods =
         {
-            { xi.mod.SUBTLE_BLOW, 5, 5, 0 },
+            { xi.mod.SUBTLE_BLOW, 5, 10, 15, 20 },
         },
     },
 
@@ -1469,7 +1477,7 @@ local gearSets =
         maxEquipped = 5,
         mods =
         {
-            { xi.mod.COUNTER, 4, 4, 0 },
+            { xi.mod.COUNTER, 4, 8, 12, 16 },
         },
     },
 
@@ -1488,7 +1496,7 @@ local gearSets =
         maxEquipped = 5,
         mods =
         {
-            { xi.mod.REFRESH, 1, 1, 0 },
+            { xi.mod.REFRESH, 1, 2, 3, 4 },
         },
     },
 
@@ -1507,7 +1515,7 @@ local gearSets =
         maxEquipped = 5,
         mods =
         {
-            { xi.mod.REGEN, 3, 3, 0 },
+            { xi.mod.REGEN, 3, 6, 9, 12 },
         },
     },
 
@@ -1526,7 +1534,7 @@ local gearSets =
         maxEquipped = 5,
         mods =
         {
-            { xi.mod.FAST_CAST, 1, 1, 0 },
+            { xi.mod.FAST_CAST, 1, 2, 3, 4 },
         },
     },
 
@@ -1545,9 +1553,9 @@ local gearSets =
         maxEquipped = 5,
         mods =
         {
-            { xi.mod.STR, 8, 8, 0 },
-            { xi.mod.DEX, 8, 8, 0 },
-            { xi.mod.VIT, 8, 8, 0 },
+            { xi.mod.STR, 8, 16, 24, 32 },
+            { xi.mod.DEX, 8, 16, 24, 32 },
+            { xi.mod.VIT, 8, 16, 24, 32 },
         },
     },
 
@@ -1566,9 +1574,9 @@ local gearSets =
         maxEquipped = 5,
         mods =
         {
-            { xi.mod.DEX, 8, 8, 0 },
-            { xi.mod.VIT, 8, 8, 0 },
-            { xi.mod.CHR, 8, 8, 0 },
+            { xi.mod.DEX, 8, 16, 24, 32 },
+            { xi.mod.VIT, 8, 16, 24, 32 },
+            { xi.mod.CHR, 8, 16, 24, 32 },
         }
     },
 
@@ -1587,9 +1595,9 @@ local gearSets =
         maxEquipped = 5,
         mods =
         {
-            { xi.mod.DEX, 8, 8, 0 },
-            { xi.mod.AGI, 8, 8, 0 },
-            { xi.mod.CHR, 8, 8, 0 },
+            { xi.mod.DEX, 8, 16, 24, 32 },
+            { xi.mod.AGI, 8, 16, 24, 32 },
+            { xi.mod.CHR, 8, 16, 24, 32 },
         },
     },
 
@@ -1608,9 +1616,9 @@ local gearSets =
         maxEquipped = 5,
         mods =
         {
-            { xi.mod.STR, 8, 8, 0 },
-            { xi.mod.VIT, 8, 8, 0 },
-            { xi.mod.MND, 8, 8, 0 },
+            { xi.mod.STR, 8, 16, 24, 32 },
+            { xi.mod.VIT, 8, 16, 24, 32 },
+            { xi.mod.MND, 8, 16, 24, 32 },
         }
     },
 
@@ -1629,9 +1637,9 @@ local gearSets =
         maxEquipped = 5,
         mods =
         {
-            { xi.mod.VIT, 8, 8, 0 },
-            { xi.mod.INT, 8, 8, 0 },
-            { xi.mod.MND, 8, 8, 0 },
+            { xi.mod.VIT, 8, 16, 24, 32 },
+            { xi.mod.INT, 8, 16, 24, 32 },
+            { xi.mod.MND, 8, 16, 24, 32 },
         }
     },
 
@@ -1655,9 +1663,9 @@ local gearSets =
         maxEquipped = 5,
         mods =
         {
-            { xi.mod.ACC,  15, 0, 0 },
-            { xi.mod.RACC, 15, 0, 0 },
-            { xi.mod.MACC, 15, 0, 0 },
+            { xi.mod.ACC,  15, 30, 45, 60 },
+            { xi.mod.RACC, 15, 30, 45, 60 },
+            { xi.mod.MACC, 15, 30, 45, 60 },
         },
     },
 
@@ -1681,9 +1689,9 @@ local gearSets =
         maxEquipped = 5,
         mods =
         {
-            { xi.mod.ACC,  15, 0, 0 },
-            { xi.mod.RACC, 15, 0, 0 },
-            { xi.mod.MACC, 15, 0, 0 },
+            { xi.mod.ACC,  15, 30, 45, 60 },
+            { xi.mod.RACC, 15, 30, 45, 60 },
+            { xi.mod.MACC, 15, 30, 45, 60 },
         },
     },
 
@@ -1707,9 +1715,9 @@ local gearSets =
         maxEquipped = 5,
         mods =
         {
-            { xi.mod.ACC,  15, 0, 0 },
-            { xi.mod.RACC, 15, 0, 0 },
-            { xi.mod.MACC, 15, 0, 0 },
+            { xi.mod.ACC,  15, 30, 45, 60 },
+            { xi.mod.RACC, 15, 30, 45, 60 },
+            { xi.mod.MACC, 15, 30, 45, 60 },
         },
     },
 
@@ -1733,9 +1741,9 @@ local gearSets =
         maxEquipped = 5,
         mods =
         {
-            { xi.mod.ACC,  15, 0, 0 },
-            { xi.mod.RACC, 15, 0, 0 },
-            { xi.mod.MACC, 15, 0, 0 },
+            { xi.mod.ACC,  15, 30, 45, 60 },
+            { xi.mod.RACC, 15, 30, 45, 60 },
+            { xi.mod.MACC, 15, 30, 45, 60 },
         },
     },
 
@@ -1759,9 +1767,9 @@ local gearSets =
         maxEquipped = 5,
         mods =
         {
-            { xi.mod.ACC,  15, 0, 0 },
-            { xi.mod.RACC, 15, 0, 0 },
-            { xi.mod.MACC, 15, 0, 0 },
+            { xi.mod.ACC,  15, 30, 45, 60 },
+            { xi.mod.RACC, 15, 30, 45, 60 },
+            { xi.mod.MACC, 15, 30, 45, 60 },
         },
     },
 
@@ -1785,9 +1793,9 @@ local gearSets =
         maxEquipped = 5,
         mods =
         {
-            { xi.mod.ACC,  15, 0, 0 },
-            { xi.mod.RACC, 15, 0, 0 },
-            { xi.mod.MACC, 15, 0, 0 },
+            { xi.mod.ACC,  15, 30, 45, 60 },
+            { xi.mod.RACC, 15, 30, 45, 60 },
+            { xi.mod.MACC, 15, 30, 45, 60 },
         },
     },
 
@@ -1811,9 +1819,9 @@ local gearSets =
         maxEquipped = 5,
         mods =
         {
-            { xi.mod.ACC,  15, 0, 0 },
-            { xi.mod.RACC, 15, 0, 0 },
-            { xi.mod.MACC, 15, 0, 0 },
+            { xi.mod.ACC,  15, 30, 45, 60 },
+            { xi.mod.RACC, 15, 30, 45, 60 },
+            { xi.mod.MACC, 15, 30, 45, 60 },
         },
     },
 
@@ -1837,9 +1845,9 @@ local gearSets =
         maxEquipped = 5,
         mods =
         {
-            { xi.mod.ACC,  15, 0, 0 },
-            { xi.mod.RACC, 15, 0, 0 },
-            { xi.mod.MACC, 15, 0, 0 },
+            { xi.mod.ACC,  15, 30, 45, 60 },
+            { xi.mod.RACC, 15, 30, 45, 60 },
+            { xi.mod.MACC, 15, 30, 45, 60 },
         },
     },
 
@@ -1863,9 +1871,9 @@ local gearSets =
         maxEquipped = 5,
         mods =
         {
-            { xi.mod.ACC,  15, 0, 0 },
-            { xi.mod.RACC, 15, 0, 0 },
-            { xi.mod.MACC, 15, 0, 0 },
+            { xi.mod.ACC,  15, 30, 45, 60 },
+            { xi.mod.RACC, 15, 30, 45, 60 },
+            { xi.mod.MACC, 15, 30, 45, 60 },
         },
     },
 
@@ -1889,9 +1897,9 @@ local gearSets =
         maxEquipped = 5,
         mods =
         {
-            { xi.mod.ACC,  15, 0, 0 },
-            { xi.mod.RACC, 15, 0, 0 },
-            { xi.mod.MACC, 15, 0, 0 },
+            { xi.mod.ACC,  15, 30, 45, 60 },
+            { xi.mod.RACC, 15, 30, 45, 60 },
+            { xi.mod.MACC, 15, 30, 45, 60 },
         },
     },
 
@@ -1915,9 +1923,9 @@ local gearSets =
         maxEquipped = 5,
         mods =
         {
-            { xi.mod.ACC,  15, 0, 0 },
-            { xi.mod.RACC, 15, 0, 0 },
-            { xi.mod.MACC, 15, 0, 0 },
+            { xi.mod.ACC,  15, 30, 45, 60 },
+            { xi.mod.RACC, 15, 30, 45, 60 },
+            { xi.mod.MACC, 15, 30, 45, 60 },
         },
     },
 
@@ -1941,9 +1949,9 @@ local gearSets =
         maxEquipped = 5,
         mods =
         {
-            { xi.mod.ACC,  15, 0, 0 },
-            { xi.mod.RACC, 15, 0, 0 },
-            { xi.mod.MACC, 15, 0, 0 },
+            { xi.mod.ACC,  15, 30, 45, 60 },
+            { xi.mod.RACC, 15, 30, 45, 60 },
+            { xi.mod.MACC, 15, 30, 45, 60 },
         },
     },
 
@@ -1967,9 +1975,9 @@ local gearSets =
         maxEquipped = 5,
         mods =
         {
-            { xi.mod.ACC,  15, 0, 0 },
-            { xi.mod.RACC, 15, 0, 0 },
-            { xi.mod.MACC, 15, 0, 0 },
+            { xi.mod.ACC,  15, 30, 45, 60 },
+            { xi.mod.RACC, 15, 30, 45, 60 },
+            { xi.mod.MACC, 15, 30, 45, 60 },
         }
     },
 
@@ -1993,9 +2001,9 @@ local gearSets =
         maxEquipped = 5,
         mods =
         {
-            { xi.mod.ACC,  15, 0, 0 },
-            { xi.mod.RACC, 15, 0, 0 },
-            { xi.mod.MACC, 15, 0, 0 },
+            { xi.mod.ACC,  15, 30, 45, 60 },
+            { xi.mod.RACC, 15, 30, 45, 60 },
+            { xi.mod.MACC, 15, 30, 45, 60 },
         },
     },
 
@@ -2019,9 +2027,9 @@ local gearSets =
         maxEquipped = 5,
         mods =
         {
-            { xi.mod.ACC,  15, 0, 0 },
-            { xi.mod.RACC, 15, 0, 0 },
-            { xi.mod.MACC, 15, 0, 0 },
+            { xi.mod.ACC,  15, 30, 45, 60 },
+            { xi.mod.RACC, 15, 30, 45, 60 },
+            { xi.mod.MACC, 15, 30, 45, 60 },
         }
     },
 
@@ -2045,9 +2053,9 @@ local gearSets =
         maxEquipped = 5,
         mods =
         {
-            { xi.mod.ACC,  15, 0, 0 },
-            { xi.mod.RACC, 15, 0, 0 },
-            { xi.mod.MACC, 15, 0, 0 },
+            { xi.mod.ACC,  15, 30, 45, 60 },
+            { xi.mod.RACC, 15, 30, 45, 60 },
+            { xi.mod.MACC, 15, 30, 45, 60 },
         },
     },
 
@@ -2071,9 +2079,9 @@ local gearSets =
         maxEquipped = 5,
         mods =
         {
-            { xi.mod.ACC,  15, 0, 0 },
-            { xi.mod.RACC, 15, 0, 0 },
-            { xi.mod.MACC, 15, 0, 0 },
+            { xi.mod.ACC,  15, 30, 45, 60 },
+            { xi.mod.RACC, 15, 30, 45, 60 },
+            { xi.mod.MACC, 15, 30, 45, 60 },
         },
     },
 
@@ -2097,9 +2105,9 @@ local gearSets =
         maxEquipped = 5,
         mods =
         {
-            { xi.mod.ACC,  15, 0, 0 },
-            { xi.mod.RACC, 15, 0, 0 },
-            { xi.mod.MACC, 15, 0, 0 },
+            { xi.mod.ACC,  15, 30, 45, 60 },
+            { xi.mod.RACC, 15, 30, 45, 60 },
+            { xi.mod.MACC, 15, 30, 45, 60 },
         },
     },
 
@@ -2123,9 +2131,9 @@ local gearSets =
         maxEquipped = 5,
         mods =
         {
-            { xi.mod.ACC,  15, 0, 0 },
-            { xi.mod.RACC, 15, 0, 0 },
-            { xi.mod.MACC, 15, 0, 0 },
+            { xi.mod.ACC,  15, 30, 45, 60 },
+            { xi.mod.RACC, 15, 30, 45, 60 },
+            { xi.mod.MACC, 15, 30, 45, 60 },
         },
     },
 
@@ -2149,9 +2157,9 @@ local gearSets =
         maxEquipped = 5,
         mods =
         {
-            { xi.mod.ACC,  15, 0, 0 },
-            { xi.mod.RACC, 15, 0, 0 },
-            { xi.mod.MACC, 15, 0, 0 },
+            { xi.mod.ACC,  15, 30, 45, 60 },
+            { xi.mod.RACC, 15, 30, 45, 60 },
+            { xi.mod.MACC, 15, 30, 45, 60 },
         },
     },
 
@@ -2175,9 +2183,9 @@ local gearSets =
         maxEquipped = 5,
         mods =
         {
-            { xi.mod.ACC,  15, 0, 0 },
-            { xi.mod.RACC, 15, 0, 0 },
-            { xi.mod.MACC, 15, 0, 0 },
+            { xi.mod.ACC,  15, 30, 45, 60 },
+            { xi.mod.RACC, 15, 30, 45, 60 },
+            { xi.mod.MACC, 15, 30, 45, 60 },
         },
     },
 
@@ -2201,9 +2209,9 @@ local gearSets =
         maxEquipped = 5,
         mods =
         {
-            { xi.mod.ACC,  15, 0, 0 },
-            { xi.mod.RACC, 15, 0, 0 },
-            { xi.mod.MACC, 15, 0, 0 },
+            { xi.mod.ACC,  15, 30, 45, 60 },
+            { xi.mod.RACC, 15, 30, 45, 60 },
+            { xi.mod.MACC, 15, 30, 45, 60 },
         },
     },
 
@@ -2227,9 +2235,9 @@ local gearSets =
         maxEquipped = 5,
         mods =
         {
-            { xi.mod.ACC,  15, 0, 0 },
-            { xi.mod.RACC, 15, 0, 0 },
-            { xi.mod.MACC, 15, 0, 0 },
+            { xi.mod.ACC,  15, 30, 45, 60 },
+            { xi.mod.RACC, 15, 30, 45, 60 },
+            { xi.mod.MACC, 15, 30, 45, 60 },
         },
     },
 
@@ -2246,7 +2254,7 @@ local gearSets =
         minEquipped = 5,
         mods =
         {
-            { xi.mod.DMGPHYS, -1000, 0, 0 },
+            { xi.mod.DMGPHYS, -1000 },
         },
     },
 
@@ -2263,7 +2271,7 @@ local gearSets =
         minEquipped = 5,
         mods =
         {
-            { xi.mod.CRIT_DMG_INCREASE, 10, 0, 0 },
+            { xi.mod.CRIT_DMG_INCREASE, 10 },
         },
     },
 
@@ -2280,7 +2288,7 @@ local gearSets =
         minEquipped = 5,
         mods =
         {
-            { xi.mod.REFRESH, 3, 0, 0 },
+            { xi.mod.REFRESH, 3 },
         },
     },
 
@@ -2297,7 +2305,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.BP_DAMAGE, 4, 2, 0 },
+            { xi.mod.BP_DAMAGE, 4, 6, 8, 10 },
         },
     },
 
@@ -2314,7 +2322,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.ATT, 20, 10, 0 },
+            { xi.mod.ATT, 20, 30, 40, 50 },
         },
     },
 
@@ -2331,7 +2339,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.DMG, -4, -2, 0 },
+            { xi.mod.DMG, -4, -6, -8, -10 },
         },
     },
 
@@ -2348,7 +2356,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.DOUBLE_ATTACK, 4, 2, 0 },
+            { xi.mod.DOUBLE_ATTACK, 4, 6, 8, 10 },
         },
     },
 
@@ -2365,7 +2373,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.CURE_POTENCY_II, 4, 2, 0 },
+            { xi.mod.CURE_POTENCY_II, 4, 6, 8, 10 },
         },
     },
 
@@ -2382,7 +2390,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.MARTIAL_ARTS, 8, 4, 0 },
+            { xi.mod.MARTIAL_ARTS, 8, 12, 16, 20 },
         },
     },
 
@@ -2399,7 +2407,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.CRITHITRATE, 4, 2, 0 },
+            { xi.mod.CRITHITRATE, 4, 6, 8, 10 },
         },
     },
 
@@ -2416,7 +2424,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.ACC, 20, 10, 0 },
+            { xi.mod.ACC, 20, 30, 40, 50 },
         },
     },
 
@@ -2433,7 +2441,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.ALL_WSDMG_FIRST_HIT, 4, 2, 0 },
+            { xi.mod.ALL_WSDMG_FIRST_HIT, 4, 6, 8, 10 },
         },
     },
 
@@ -2450,7 +2458,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.DOUBLE_ATTACK, 4, 2, 0 },
+            { xi.mod.DOUBLE_ATTACK, 4, 6, 8, 10 },
         },
     },
 
@@ -2467,7 +2475,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.MATT, 20, 10, 0 },
+            { xi.mod.MATT, 20, 30, 40, 50 },
         },
     },
 
@@ -2481,8 +2489,8 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.ACC,              5, 0, 0 },
-            { xi.mod.SOULEATER_EFFECT, 2, 0, 0 },
+            { xi.mod.ACC,              5 },
+            { xi.mod.SOULEATER_EFFECT, 2 },
         },
     },
 
@@ -2499,7 +2507,7 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.AUGMENT_BLU_MAGIC, 2, 1, 0 },
+            { xi.mod.AUGMENT_BLU_MAGIC, 2, 3, 4, 5 },
         },
     },
 
@@ -2521,14 +2529,13 @@ local gearSets =
         minEquipped = 2,
         mods =
         {
-            { xi.mod.AUGMENT_BLU_MAGIC, 2, 1, 0 },
+            { xi.mod.AUGMENT_BLU_MAGIC, 2, 3, 4, 5 },
         },
     }
 }
 
 -- Build Table to lookup Set ID based on Item ID.  This is cached in xi.gear_sets.itemToSetId table,
 -- and only rebuilt on loading the gear_sets global into cache.
-
 xi.gear_sets.createItemToSetId = function()
     local itemTable = {}
 
@@ -2540,6 +2547,8 @@ xi.gear_sets.createItemToSetId = function()
 
     return itemTable
 end
+
+xi.gear_sets.itemToSetId = xi.gear_sets.createItemToSetId()
 
 -- Global function to check for equipped sets and apply mods.  This is called by
 -- core on equip and unequip of an item.
@@ -2562,10 +2571,10 @@ xi.gear_sets.checkForGearSet = function(player)
         local minEquippedReq = gearSets[setId].minEquipped and gearSets[setId].minEquipped or 2
         local maxEquippedReq = gearSets[setId].maxEquipped and gearSets[setId].maxEquipped or 0
 
-        if setCount >= minEquipped then
+        if setCount >= minEquippedReq then
             local modTierIndex = math.min(setCount, maxEquippedReq) - minEquippedReq
 
-            for _, modData in gearSets[setId].mods do
+            for _, modData in ipairs(gearSets[setId].mods) do
                 player:addGearSetMod(setId, modData[1], modData[modTierIndex + 2])
             end
         end
