@@ -32,6 +32,7 @@ class CLuaInstance;
 class CLuaItem;
 class CLuaSpell;
 class CLuaStatusEffect;
+class CLuaTradeContainer;
 class CLuaZone;
 
 class CLuaBaseEntity
@@ -231,6 +232,7 @@ public:
     uint8 getFreeSlotsCount(sol::object const& locID);         // Gets value of free slots in Entity inventory
     void  confirmTrade();                                      // Complete trade with an npc, only removing confirmed items
     void  tradeComplete();                                     // Complete trade with an npc
+    auto  getTrade() -> std::optional<CLuaTradeContainer>;
 
     // Equipping
     bool canEquipItem(uint16 itemID, sol::object const& chkLevel); // returns true if the player is able to equip the item
