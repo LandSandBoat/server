@@ -52,12 +52,7 @@ void lua_init()
     lua.set_function("print", &lua_print);
 
     // Attempt to startup lldebugger
-    std::string packagePath = lua["package"]["path"];
-    lua["package"]["path"]  = "data/scripts/?.lua;data/scripts/?/init.lua;" + packagePath;
-    lua["_require"]         = lua["require"];
-    sol::protected_function protectedRequire = lua["_require"];
-    auto                    result           = protectedRequire("lldebugger");
-
+    auto result = lua["require"]("lldebugger");
     if (result.valid())
     {
         result.get<sol::table>()["start"];
