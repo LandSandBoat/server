@@ -52,6 +52,7 @@ zones[xi.zone.WAJAOM_WOODLANDS] =
         },
         ZORAAL_JA_S_PKUUCHA    = 16986197,
         PERCIPIENT_ZORAAL_JA   = 16986198,
+        HYDRA                  = 16986355,
         VULPANGUE              = 16986428,
         IRIZ_IMA               = 16986429,
         GOTOH_ZHA_THE_REDOLENT = 16986430,

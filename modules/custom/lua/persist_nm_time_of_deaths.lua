@@ -16,6 +16,7 @@ local m = Module:new("persist_nm_time_of_deaths")
 local nms_to_persist =
 {
     { "Behemoths_Dominion", "Behemoth", function() return 75600 + math.random(0, 6) * 1800 end }, -- 21 - 24 hours with half hour windows
+    { "Wajaom_Woodlands", "Hydra", function() return 172800 + math.random(0, 24) * 3600 end }, -- 2 - 3 days with 1-hour windows
 }
 
 -- NOTE: At the time we iterate over these entries, the Lua zone and mob objects won't be ready,
