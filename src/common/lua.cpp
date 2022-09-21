@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2022 LandSandBoat Dev Teams
@@ -50,6 +50,18 @@ void lua_init()
 
     // Bind print(...) globally
     lua.set_function("print", &lua_print);
+
+    // Attempt to startup lldebugger
+    auto result = lua["require"]("lldebugger");
+    if (result.valid())
+    {
+        result.get<sol::table>()["start"];
+        ShowInfo("Started script debugger");
+    }
+    else
+    {
+        ShowInfo("Failed to start script debugger");
+    }
 }
 
 /**
