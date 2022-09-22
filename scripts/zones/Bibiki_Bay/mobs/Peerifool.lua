@@ -16,17 +16,6 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    local party = player:getParty()
-
-    for _, v in ipairs(party) do
-        if
-            player:getZone() == v:getZone() and
-            v:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ONE_GOOD_DEED) == QUEST_ACCEPTED and
-            v:getCharVar("Quest[2][92]Prog") == 0
-        then
-            v:setCharVar("Quest[2][92]Prog", 1)
-        end
-    end
 end
 
 return entity
