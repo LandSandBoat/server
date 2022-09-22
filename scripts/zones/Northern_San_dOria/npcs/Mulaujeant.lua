@@ -37,7 +37,7 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 698 then
         player:setCharVar("MissionaryManVar", 3)
-        player:setCharVar("MissionaryMan_date", os.time() + 60)
+        player:setCharVar("MissionaryMan_date", getMidnight())
         player:delKeyItem(xi.ki.RAUTEINOTS_PARCEL)
         player:needToZone(true)
 

@@ -8,6 +8,8 @@ mixins = {require("scripts/mixins/job_special")}
 local entity = {}
 
 entity.onMobSpawn = function(mob)
+    mob:addMod(xi.mod.REGAIN, 50)
+
     xi.mix.jobSpecial.config(mob, {
         specials =
         {

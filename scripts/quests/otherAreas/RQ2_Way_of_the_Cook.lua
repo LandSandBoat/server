@@ -41,7 +41,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         player:getCharVar("Quest[4][0]DayCompleted") + 7 < VanadielUniqueDay() and
-                        player:getFameLevel(xi.quest.fame_area.WINDURST) > 2
+                        player:getFameLevel(xi.quest.fame_area.WINDURST) >= 2
                     then
                         return quest:progressEvent(76, xi.items.BEEHIVE_CHIP, xi.items.DHALMEL_MEAT) -- Way of the Cook starting event.
                     else
