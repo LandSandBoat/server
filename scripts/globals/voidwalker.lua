@@ -470,7 +470,7 @@ xi.voidwalker.onHealing = function(player)
         end
         mob:hideName(false)
         mob:setUntargetable(false)
-        mob:setStatus(xi.status.UPDATE)
+        mob:setStatus(xi.status.MOB)
         mob:updateClaim(player)
     elseif mobNearest.distance >= 300 then
         player:messageSpecial(zoneTextTable.VOIDWALKER_MOB_TOO_FAR, mobNearest.keyItem)

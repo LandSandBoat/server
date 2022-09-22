@@ -53,7 +53,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobEngaged = function(mob, target)
-    mob:setStatus(xi.status.UPDATE)
+    mob:setStatus(xi.status.MOB)
 end
 
 entity.onMobDisengage = function(mob)
