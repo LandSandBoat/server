@@ -81,7 +81,8 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if not player:hasKeyItem(xi.ki.RIVERNEWORT) then
-                        return npcUtil.giveKeyItem(player, xi.ki.RIVERNEWORT)
+                        npcUtil.giveKeyItem(player, xi.ki.RIVERNEWORT)
+                        return quest:messageText(ID.text.KEYITEM_OBTAINED)
                     end
                 end,
             },
@@ -93,7 +94,8 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if not player:hasKeyItem(xi.ki.RIVERNEWORT) then
-                        return npcUtil.giveKeyItem(player, xi.ki.RIVERNEWORT)
+                        npcUtil.giveKeyItem(player, xi.ki.RIVERNEWORT)
+                        return quest:messageText(ID.text.KEYITEM_OBTAINED)
                     end
                 end,
             },
@@ -135,7 +137,8 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if not player:hasKeyItem(xi.ki.RIVERNEWORT) then
-                        return npcUtil.giveKeyItem(player, xi.ki.RIVERNEWORT)
+                        npcUtil.giveKeyItem(player, xi.ki.RIVERNEWORT)
+                        return quest:messageText(ID.text.KEYITEM_OBTAINED)
                     end
                 end,
             },
@@ -147,7 +150,8 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if not player:hasKeyItem(xi.ki.RIVERNEWORT) then
-                        return npcUtil.giveKeyItem(player, xi.ki.RIVERNEWORT)
+                        npcUtil.giveKeyItem(player, xi.ki.RIVERNEWORT)
+                        return quest:messageText(ID.text.KEYITEM_OBTAINED)
                     end
                 end,
             },
