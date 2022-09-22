@@ -77,9 +77,9 @@ battlefield_object.onEventFinish = function(player, csid, option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.FADED_RUBY)
 
         if option == 0 then
-            player:setCharVar("Quest[4][32]title", 1)
+            player:setCharVar("Quest[4][32]stage", 1)
         else
-            player:setCharVar("Quest[4][32]title", 0)
+            player:setCharVar("Quest[4][32]stage", 0)
         end
     end
 end

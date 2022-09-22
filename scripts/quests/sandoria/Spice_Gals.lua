@@ -59,7 +59,7 @@ quest.sections =
                     if player:hasKeyItem(xi.ki.RIVERNEWORT) then
                         return quest:progressEvent(725)
                     else
-                        return quest:progressEvent(728) -- Additional Dialogue
+                        return quest:event(728) -- Additional Dialogue
                     end
                 end,
             },
@@ -69,7 +69,7 @@ quest.sections =
                 [725] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:delKeyItem(xi.ki.RIVERNEWORT)
-                        quest:setVar(player, 'conquest', getConquestTally())
+                        quest:setVar(player, 'Option', getConquestTally())
                     end
                 end,
             },
@@ -81,7 +81,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if not player:hasKeyItem(xi.ki.RIVERNEWORT) then
-                        npcUtil.giveKeyItem(player, xi.ki.RIVERNEWORT)
+                        return npcUtil.giveKeyItem(player, xi.ki.RIVERNEWORT)
                     end
                 end,
             },
@@ -93,7 +93,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if not player:hasKeyItem(xi.ki.RIVERNEWORT) then
-                        npcUtil.giveKeyItem(player, xi.ki.RIVERNEWORT)
+                        return npcUtil.giveKeyItem(player, xi.ki.RIVERNEWORT)
                     end
                 end,
             },
@@ -103,7 +103,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_COMPLETED and
-                quest:getVar(player, 'conquest') < getConquestTally()
+                quest:getVar(player, 'Option') < getConquestTally()
         end,
 
         [xi.zone.SOUTHERN_SAN_DORIA] =
@@ -114,7 +114,7 @@ quest.sections =
                     if player:hasKeyItem(xi.ki.RIVERNEWORT) then
                         return quest:progressEvent(725)
                     else
-                        return quest:progressEvent(724)
+                        return quest:event(724)
                     end
                 end,
             },
@@ -124,7 +124,7 @@ quest.sections =
                 [725] = function(player, csid, option, npc)
                     player:delKeyItem(xi.ki.RIVERNEWORT)
                     npcUtil.giveItem(player, xi.items.MIRATETES_MEMOIRS)
-                    quest:setVar(player, 'conquest', getConquestTally())
+                    quest:setVar(player, 'Option', getConquestTally())
                 end,
             },
         },
@@ -135,7 +135,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if not player:hasKeyItem(xi.ki.RIVERNEWORT) then
-                        npcUtil.giveKeyItem(player, xi.ki.RIVERNEWORT)
+                        return npcUtil.giveKeyItem(player, xi.ki.RIVERNEWORT)
                     end
                 end,
             },
@@ -147,7 +147,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if not player:hasKeyItem(xi.ki.RIVERNEWORT) then
-                        npcUtil.giveKeyItem(player, xi.ki.RIVERNEWORT)
+                        return npcUtil.giveKeyItem(player, xi.ki.RIVERNEWORT)
                     end
                 end,
             },
