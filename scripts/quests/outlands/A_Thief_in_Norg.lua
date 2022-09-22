@@ -133,7 +133,7 @@ quest.sections =
                         return quest:progressEvent(160)
                     elseif questProgress == 8 then
                         return quest:progressEvent(161)
-                    elseif questProgress == 9 and quest:getVar(player, 'Wait') < os.time() then
+                    elseif questProgress == 9 and quest:getVar(player, 'Option') < os.time() then
                         return quest:progressEvent(164)
                     end
                 end,
@@ -149,7 +149,7 @@ quest.sections =
                     player:confirmTrade()
                     player:delKeyItem(xi.ki.CHARRED_HELM)
                     quest:setVar(player, 'Prog', 9)
-                    quest:setVar(player, 'Wait', getMidnight())
+                    quest:setVar(player, 'Option', getMidnight())
                 end,
 
                 [164] = function(player, csid, option, npc)
