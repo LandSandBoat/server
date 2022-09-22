@@ -54,7 +54,7 @@ local function dropBomb(mob)
     local pos      = mob:getPos()
 
     bombMob:setPos(pos.x, pos.y, pos.z, pos.rot)
-    bombMob:setStatus(xi.status.UPDATE)
+    bombMob:setStatus(xi.status.MOB)
 
     if target ~= nil then
         bombMob:updateEnmity(target)

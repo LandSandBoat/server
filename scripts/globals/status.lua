@@ -84,7 +84,7 @@ xi.race =
 xi.status =
 {
     NORMAL          =  0,
-    UPDATE          =  1,
+    MOB             =  1,
     DISAPPEAR       =  2,
     INVISIBLE       =  3,
     STATUS_4        =  4,
