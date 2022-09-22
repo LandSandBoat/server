@@ -162,9 +162,9 @@ quest.sections =
                             (VanadielHour() <= 6 or VanadielHour() >= 18) and
                             npcUtil.popFromQM(player, npc, ID.mob.TIMELY_VISIT, {claim = true, hide = 0})
                         then
-                            return quest:messageText(ID.text.FOREBODING)
+                            return quest:message(ID.text.FOREBODING)
                         else
-                            return quest:messageText(ID.text.PRETERNATURAL_FORCES)
+                            return quest:message(ID.text.PRETERNATURAL_FORCES)
                         end
 
                     elseif quest:getVar(player, 'Prog') == 7 then
