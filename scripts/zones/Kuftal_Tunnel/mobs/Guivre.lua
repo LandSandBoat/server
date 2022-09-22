@@ -6,127 +6,59 @@ require("scripts/globals/pathfind")
 -----------------------------------
 local entity = {}
 
-local pathNodesA =
-
+local pathStart =
 {
-    102, -0.191, 3,
-    90.06, -0.28, 12.24,
-    67.60, -0.34, 12.42,
-    54.61, -4.11, 16.89,
-    25.03, -9.28, 23.12,
-    19.43, -7.95, 44.37,
-    18.80, -6.63, 47.77,
-    17.72, -5.14, 51.88,
-    16.93, -3.95, 55.33,
-    16.33, -3.09, 57.46,
-    14.76, -1.78, 60.84,
-    11.86, -0.60, 65.58,
-    -0.52, 0.00, 82.02,
-    3.06, 0.15, 125.56,
-    40.12, 0.000, 158.89,
-    60.35, -4.24, 143.23,
-    79.86, -8.75, 139.89,
-    85.86, -8.82, 138.11,
-    91.87, -8.83, 142.52,
-    101.60, -8.71, 143.17,
-    100.62, -8.75, 78.86,
-    108.29, -4.60, 54.26,
-    118.98, 0.00, 38.12,
-    102.61, 0.92, 1.60,
-    102, -0.191, 3,
-    102, -0.191, 3
+    {x = 102.00, y = -0.19, z = 3.00}
 }
 
-local pathNodesB =
+local pathBranch1 =
 {
-    102, -0.191, 3,
-    109.49, 0.59, -0.07,
-    124.47, 0.00, -42.08,
-    91.93, -5.15, -58.24,
-    66.46, -8.81, -62.91,
-    60.86, -9.02, -73.80,
-    57.09, -9.37, -96.88,
-    38.39, -8.62, -98.74,
-    15.73, -1.02, -94.88,
-    -0.65, 0.00, -84.13,
-    -40.24, 0.00, -38.35,
-    -44.36, 0.68, 13.98,
-    -31.28, -0.23, 48.64,
-    -0.52, 0.00, 82.02,
-    3.06, 0.15, 125.56,
-    40.12, 0.000, 158.89,
-    60.35, -4.24, 143.23,
-    79.86, -8.75, 139.89,
-    85.86, -8.82, 138.11,
-    91.87, -8.83, 142.52,
-    101.60, -8.71, 143.17,
-    100.62, -8.75, 78.86,
-    108.29, -4.60, 54.26,
-    118.98, 0.00, 38.12,
-    102.61, 0.92, 1.60,
-    102, -0.191, 3,
-    102, -0.191, 3
+    {x = 102.00, y = -0.19, z = 3.00},
+    {x = 109.49, y = 0.59, z = -0.07},
+    {x = 124.47, y = 0.00, z = -42.08},
+    {x = 91.93, y = -5.15, z = -58.24},
+    {x = 66.46, y = -8.81, z = -62.91},
+    {x = 60.86, y = -9.02, z = -73.80},
+    {x = 57.09, y = -9.37, z = -96.88},
+    {x = 38.39, y = -8.62, z = -98.74},
+    {x = 15.73, y = -1.02, z = -94.88},
+    {x = -0.65, y = 0.00, z = -84.13}
 }
 
-entity.onPath = function(mob)
-    --Mob is on path node, let's check which path we need to route them to
-    local currentPath = mob:getLocalVar("mobPath")
-    local nextIndex = mob:getLocalVar("nextPatrolIndex")
-    local reverseCheck = mob:getLocalVar("pathReverse")
-    local pauseTime = mob:getLocalVar("pauseTime")
-    if pauseTime < os.time() then
-        if currentPath == 1 and reverseCheck == 0 then
-            --Let's check if the mob is at one of the pre-determined pause points.
-            if mob:atPoint({25.03, -9.28, 23.12}) or mob:atPoint({-0.52, 0.00, 82.02})
-            or mob:atPoint({40.12, 0.000, 158.89}) or mob:atPoint({101.60, -8.71, 143.17}) then
-                local newPauseTime = math.random(8, 20) + os.time()
-                mob:setLocalVar("pauseTime", newPauseTime)
-                mob:setLocalVar("nextPatrolIndex", nextIndex + 1)
-                mob:setMobMod(xi.mobMod.NO_MOVE, 1)
-                return
-            end
-            xi.path.patrol(mob, pathNodesA)
-        elseif currentPath == 2 and reverseCheck == 0 then
-            if mob:atPoint({57.09, -9.37, -96.88}) or mob:atPoint({-0.65, 0.00, -84.13})
-            or mob:atPoint({-40.24, 0.00, -38.35}) or mob:atPoint({-44.36, 0.68, 13.98})
-            or mob:atPoint({-0.52, 0.00, 82.02}) or mob:atPoint({40.12, 0.000, 158.89})
-            or mob:atPoint({101.60, -8.71, 143.17}) then
-                local newPauseTime = math.random(8, 20) + os.time()
-                mob:setLocalVar("pauseTime", newPauseTime)
-                mob:setLocalVar("nextPatrolIndex", nextIndex + 1)
-                mob:setMobMod(xi.mobMod.NO_MOVE, 1)
-                return
-            end
-            xi.path.patrol(mob, pathNodesB)
-        elseif currentPath == 1 and reverseCheck == 1 then
-            if mob:atPoint({25.03, -9.28, 23.12}) or mob:atPoint({-0.52, 0.00, 82.02})
-            or mob:atPoint({40.12, 0.000, 158.89}) or mob:atPoint({101.60, -8.71, 143.17}) then
-                local newPauseTime = math.random(8, 20) + os.time()
-                mob:setLocalVar("pauseTime", newPauseTime)
-                mob:setLocalVar("nextPatrolIndex", nextIndex + 1)
-                mob:setMobMod(xi.mobMod.NO_MOVE, 1)
-                return
-            end
-            xi.path.patrol(mob, xi.path.fromEnd(pathNodesA, 1))
-        elseif currentPath == 2 and reverseCheck == 1 then
-            if mob:atPoint({57.09, -9.37, -96.88}) or mob:atPoint({-0.65, 0.00, -84.13})
-            or mob:atPoint({-40.24, 0.00, -38.35}) or mob:atPoint({-44.36, 0.68, 13.98})
-            or mob:atPoint({-0.52, 0.00, 82.02}) or mob:atPoint({40.12, 0.000, 158.89})
-            or mob:atPoint({101.60, -8.71, 143.17}) then
-                local newPauseTime = math.random(8, 20) + os.time()
-                mob:setLocalVar("pauseTime", newPauseTime)
-                mob:setLocalVar("nextPatrolIndex", nextIndex + 1)
-                mob:setMobMod(xi.mobMod.NO_MOVE, 1)
-                return
-            end
-            xi.path.patrol(mob, xi.path.fromEnd(pathNodesB, 1))
-        end
-    else
-        xi.path.pathToNearest(mob, pathNodesB)
-    end
-end
+local pathBranch2 =
+{
+    {x = -40.24, y = 0.00, z = -38.35},
+    {x = -44.36, y = 0.68, z = 13.98}
+}
+
+local pathBranch3 =
+{
+    {x = -31.28, y = -0.23, z = 48.64},
+    {x = -0.52, y = 0.00, z = 82.02}
+}
+
+local pathBranch4 =
+{
+    {x = 3.06, y = 0.15, z = 125.56},
+    {x = 40.12, y = 0.000, z = 158.89},
+    {x = 60.35, y = -4.24, z = 143.23},
+    {x = 79.86, y = -8.75, z = 139.89},
+    {x = 85.86, y = -8.82, z = 138.11},
+    {x = 91.87, y = -8.83, z = 142.52},
+    {x = 101.60, y = -8.71, z = 143.17}
+}
+
+local pathBranch5 =
+{
+    {x = 100.62, y = -8.75, z = 78.86},
+    {x = 108.29, y = -4.60, z = 54.26},
+    {x = 118.98, y = 0.00, z = 38.12},
+    {x = 102.00, y = -0.19, z = 3.00}
+}
 
 entity.onMobInitialize = function(mob)
+    --Guivre has increased movespeed, sight range with
+    --natural double/triple attack.
     mob:setMod(xi.mod.MOVE, 150)
     mob:setMobMod(xi.mobMod.SIGHT_RANGE, 30)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 25)
@@ -134,99 +66,155 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    --Let's set a pauseTime for when/if mob pauses at a point.
-    --Next, set a path to memory as well as if that path is to be
-    --traversed in reverse or not.
-    --Path choice can be A, or B.
-    --1: Path A
-    --2: Path B
-    mob:setLocalVar("pauseTime", math.random(8,20) + os.time())
-    mob:setLocalVar("mobPath", math.random(1,2))
-    mob:setLocalVar("pathReverse", math.random(0,1))
-    --onMobRoam will fire next.
+    --Guivre will despawn if not claimed within a 5 hours.
+    local rndTime = math.random(3600, 18000)
+    mob:setLocalVar("despawnTime", rndTime + os.time())
+    mob:setLocalVar("isPaused", 0)
+    mob:setLocalVar("mobPath", 0)
+    mob:pathThrough(pathStart, xi.path.flag.COORDS)
+end
+
+entity.onPath = function(mob)
+    if not mob:isFollowingPath() then
+        if mob:getLocalVar("isPaused") ~= 0 then
+            local currentPath = mob:getLocalVar("mobPath")
+            local reversePath = mob:getLocalVar("reversePath")
+            local path = {}
+            mob:setLocalVar("isPaused", 0)
+            mob:clearPath()
+            if reversePath == 0 then --forward path logic begin
+                switch (currentPath): caseof
+                {
+                    [0] = function()
+                        local reverseCheck = math.random(0,2)
+                        if reverseCheck == 0 then
+                            mob:setLocalVar("reversePath", 0)
+                            mob:setLocalVar("mobPath", 1)
+                            path = pathBranch1
+                            mob:pathThrough(path, xi.path.flag.COORDS)
+                        else
+                            mob:setLocalVar("reversePath", 1)
+                            mob:setLocalVar("mobPath", 5)
+                            path = pathBranch5
+                            mob:pathThrough(path, bit.bor(xi.path.flag.COORDS, xi.path.flag.REVERSE))
+                        end
+                    end;
+                    [1] = function()
+                        mob:setLocalVar("mobPath", 2)
+                        path = pathBranch2
+                        mob:pathThrough(path, xi.path.flag.COORDS)
+                    end;
+                    [2] = function()
+                        mob:setLocalVar("mobPath", 3)
+                        path = pathBranch3
+                        mob:pathThrough(path, xi.path.flag.COORDS)
+                    end;
+                    [3] = function()
+                        mob:setLocalVar("mobPath", 4)
+                        path = pathBranch4
+                        mob:pathThrough(path, xi.path.flag.COORDS)
+                    end;
+                    [4] = function()
+                        local reverseCheck = math.random(0,2)
+                        if reverseCheck == 0 then
+                            mob:setLocalVar("reversePath", 0)
+                            mob:setLocalVar("mobPath", 5)
+                            path = pathBranch5
+                            mob:pathThrough(path, xi.path.flag.COORDS)
+                        else
+                            mob:setLocalVar("reversePath", 1)
+                            mob:setLocalVar("mobPath", 4)
+                            path = pathBranch4
+                            mob:pathThrough(path, bit.bor(xi.path.flag.COORDS, xi.path.flag.REVERSE))
+                        end
+                    end;
+                    [5] = function()
+                        mob:setLocalVar("mobPath", 0)
+                        path = pathStart
+                        mob:pathThrough(path, xi.path.flag.COORDS)
+                    end;
+                }
+            else --reverse path logic begin
+                switch (currentPath): caseof
+                {
+                    [0] = function()
+                        local reverseCheck = math.random(0,2)
+                        if reverseCheck == 0 then
+                            mob:setLocalVar("reversePath", 0)
+                            mob:setLocalVar("mobPath", 1)
+                            path = pathBranch1
+                            mob:pathThrough(path, xi.path.flag.COORDS)
+                        else
+                            mob:setLocalVar("reversePath", 1)
+                            mob:setLocalVar("mobPath", 5)
+                            path = pathBranch5
+                            mob:pathThrough(path, bit.bor(xi.path.flag.COORDS, xi.path.flag.REVERSE))
+                        end
+                    end;
+                    [5] = function()
+                        mob:setLocalVar("mobPath", 4)
+                        path = pathBranch4
+                        mob:pathThrough(path, bit.bor(xi.path.flag.COORDS, xi.path.flag.REVERSE))
+                    end;
+                    [4] = function()
+                        mob:setLocalVar("mobPath", 3)
+                        path = pathBranch3
+                        mob:pathThrough(path, bit.bor(xi.path.flag.COORDS, xi.path.flag.REVERSE))
+                    end;
+                    [3] = function()
+                        local reverseCheck = math.random(0,2)
+                        if reverseCheck == 0 then
+                            mob:setLocalVar("reversePath", 0)
+                            mob:setLocalVar("mobPath", 3)
+                            path = pathBranch3
+                            mob:pathThrough(path, xi.path.flag.COORDS)
+                        else
+                            mob:setLocalVar("reversePath", 1)
+                            mob:setLocalVar("mobPath", 2)
+                            path = pathBranch2
+                            mob:pathThrough(path, bit.bor(xi.path.flag.COORDS, xi.path.flag.REVERSE))
+                        end
+                    end;
+                    [2] = function()
+                        mob:setLocalVar("mobPath", 1)
+                        path = pathBranch1
+                        mob:pathThrough(path, bit.bor(xi.path.flag.COORDS, xi.path.flag.REVERSE))
+                    end;
+                    [1] = function()
+                        mob:setLocalVar("mobPath", 0)
+                        path = pathStart
+                        mob:pathThrough(path, bit.bor(xi.path.flag.COORDS, xi.path.flag.REVERSE))
+                    end;
+                }
+            end
+        else
+            --Guivre is paused, he will wait and rotate
+            --a random amount of times before resuming his path
+            mob:clearPath()
+            local x = mob:getXPos()
+            local y = mob:getYPos()
+            local z = mob:getZPos()
+            local rotations = {}
+            local count = math.random(0,6)
+            for i = 0, count do
+                local wait = math.random(1500,3000)
+                rotations[i+1] = {
+                x = x, y = y, z = z, rotation = math.random(0,255),
+                wait = wait }
+            end
+            mob:timer(math.random(1500, 3000), function(mob)
+                mob:pathThrough(rotations, xi.path.flag.COORDS)
+                mob:setLocalVar("isPaused", 1)
+            end)
+        end
+    end
 end
 
 entity.onMobRoam = function(mob)
-    -- First, let's check if mob is at spawn and needs a new path.
-    local nextIndex = mob:getLocalVar("nextPatrolIndex")
-    local distance = mob:checkDistance(102, -0.191, 3)
-    if nextIndex >= 24 and distance < 3 then
-        mob:setLocalVar("nextPatrolIndex", 2)
-        entity.onMobSpawn(mob)
-        return
+    local despawnCheck = mob:getLocalVar("despawnTime")
+    if despawnCheck <= os.time() then
+        DespawnMob(mob:getID())
     end
-    --Next, let's check if mob is currently set to pause.
-    local pauseCheck = mob:getLocalVar("pauseTime")
-    if pauseCheck > os.time() then
-        --Mob is currently set to pause and not move for the amount of pauseTime
-        mob:setMobMod(xi.mobMod.NO_MOVE, 1)
-        --Guivre rotates while paused
-        local angleCheck = math.random(0,2)
-        if angleCheck == 0 then
-            mob:setRotation(math.random(45, 180))
-        elseif angleCheck == 1 then
-            mob:setRotation(math.random(135, 180))
-        elseif angleCheck == 2 then
-            mob:setRotation(180)
-        end
-        return
-    else
-        --Mob is not set to pause.
-        mob:setMobMod(xi.mobMod.NO_MOVE, 0)
-        local currentPath = mob:getLocalVar("mobPath")
-        local reverseCheck = mob:getLocalVar("pathReverse")
-        if currentPath == 1 and reverseCheck == 0 then
-            xi.path.patrol(mob, pathNodesA)
-            return
-        elseif currentPath == 2 and reverseCheck == 0 then
-            xi.path.patrol(mob, pathNodesB)
-            return
-        elseif currentPath == 1 and reverseCheck == 1 then
-            xi.path.patrol(mob,xi.path.fromEnd(pathNodesA, 1))
-            return
-        elseif currentPath == 2 and reverseCheck == 1 then
-            xi.path.patrol(mob,xi.path.fromEnd(pathNodesB, 1))
-            return
-        end
-    end
-    --Next, let's check if a mob is currently on a path.
-    if mob:isFollowingPath() then
-        xi.path.pathToNearest(mob, pathNodesB)
-        entity.onPath(mob)
-    else
-        --if not on pause or on a path, let's check if around path starting point
-        local distance = mob:checkDistance(102, -0.191, 3)
-        if distance < 3 then
-            local currentPath = mob:getLocalVar("mobPath")
-            if currentPath == 1 then
-                --mob is set to patrol Path A
-                xi.path.pathToNearest(mob, pathNodesB)
-                entity.onPath(mob)
-            elseif currentPath == 2 then
-                --mob is set to patrol Path B
-                xi.path.pathToNearest(mob, pathNodesB)
-                entity.onPath(mob)
-            end
-        end
-    end
-end
-
-entity.onMobEngage = function(mob)
-    mob:setMobMod(xi.mobMod.NO_MOVE, 0)
-end
-
-entity.onMobDisengage = function(mob)
-    local pathCheck = mob:getLocalVar("mobPath")
-    if pathCheck == 1 then
-        xi.path.pathToNearest(mob, pathNodesA)
-        entity.onPath(mob)
-    elseif pathCheck == 2 then
-        xi.path.pathToNearest(mob, pathNodesB)
-        entity.onPath(mob)
-    end
-end
-
-entity.onMobDeath = function(mob, player, isKiller)
 end
 
 entity.onMobDespawn = function(mob)
