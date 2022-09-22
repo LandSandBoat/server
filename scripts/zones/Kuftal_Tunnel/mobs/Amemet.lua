@@ -200,14 +200,12 @@ entity.onPath = function(mob)
         else
             --Amemet has a chance to pause, if successful he will wait
             --a random amount of time before resuming his path
-            print("here")
             mob:clearPath()
             local x = mob:getXPos()
             local y = mob:getYPos()
             local z = mob:getZPos()
             local pauses = {}
             local pauseRnd = math.random(0,2)
-            print(pauseRnd)
             if pauseRnd == 2 then
                 local count = math.random(0,6)
                 for i = 0, count do
