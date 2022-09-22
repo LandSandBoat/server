@@ -16,8 +16,6 @@ end
 zone_object.onInitialize = function(zone)
     xi.helm.initZone(zone, xi.helm.type.HARVESTING)
     xi.chocobo.initZone(zone)
-    UpdateNMSpawnPoint(ID.mob.HYDRA)
-    GetMobByID(ID.mob.HYDRA):setRespawnTime(math.random(48, 72) * 3600)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
