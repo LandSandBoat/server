@@ -996,7 +996,7 @@ xi.appraisal.appraisalItems =
             items =
             {
                 { 55, xi.items.FEATHER_COLLAR },
-                { 30, xi.items.GORGET_1       },
+                { 30, xi.items.GORGET_P1       },
                 { 10, xi.items.JAGD_GORGET    },
                 {  5, xi.items.STORM_MUFFLER  },
             },
