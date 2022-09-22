@@ -121,19 +121,6 @@ local function calculateMobMagicBurst(caster, ele, target)
     return burst
 end
 
-local function MobTakeAoEShadow(mob, target, max)
-    -- this should be using actual nin skill
-    -- TODO fix this
-    if target:getMainJob() == xi.job.NIN and math.random() < 0.6 then
-        max = max - 1
-        if max < 1 then
-            max = 1
-        end
-    end
-
-    return math.random(1, max)
-end
-
 local function getBarSpellDefBonus(mob, target, spellElement)
     if spellElement >= xi.magic.element.FIRE and spellElement <= xi.magic.element.WATER then
         if target:hasStatusEffect(xi.magic.barSpell[spellElement]) then -- bar- spell magic defense bonus
@@ -567,10 +554,6 @@ xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType,
     --Handle shadows depending on shadow behaviour / attackType
     if shadowbehav ~= xi.mobskills.shadowBehavior.WIPE_SHADOWS and shadowbehav ~= xi.mobskills.shadowBehavior.IGNORE_SHADOWS then --remove 'shadowbehav' shadows.
 
-        if skill:isAoE() or skill:isConal() then
-            shadowbehav = MobTakeAoEShadow(mob, target, shadowbehav)
-        end
-
         dmg = utils.takeShadows(target, mob, dmg, shadowbehav)
 
         -- dealt zero damage, so shadows took hit
@@ -772,6 +755,10 @@ end
 -- Adds a status effect to a target
 xi.mobskills.mobStatusEffectMove = function(mob, target, typeEffect, power, tick, duration, subEffect, subPower)
 
+    if mob:hasStatusEffect(xi.effect.HYSTERIA) then
+        return xi.msg.basic.NONE
+    end
+
     subEffect = subEffect or 0
     subPower = subPower or 0
 
@@ -813,10 +800,14 @@ xi.mobskills.mobGazeMove = function(mob, target, typeEffect, power, tick, durati
 end
 
 xi.mobskills.mobBuffMove = function(mob, typeEffect, power, tick, duration)
+    if mob:hasStatusEffect(xi.effect.HYSTERIA) then
+        return xi.msg.basic.NONE
+    end
 
-    if (mob:addStatusEffect(typeEffect, power, tick, duration)) then
+    if mob:addStatusEffect(typeEffect, power, tick, duration) then
         return xi.msg.basic.SKILL_GAIN_EFFECT
     end
+
     return xi.msg.basic.SKILL_NO_EFFECT
 end
 

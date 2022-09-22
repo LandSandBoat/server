@@ -3,10 +3,37 @@
 -----------------------------------
 require("scripts/globals/dynamis")
 require("scripts/globals/zone")
+require("scripts/globals/status")
 -----------------------------------
 
 xi = xi or {}
 xi.dynamis = xi.dynamis or {}
+
+local function apocRemoveAdditionalEffects(mob)
+    local statusEffects =
+    {
+        xi.effect.MIGHTY_STRIKES,
+        xi.effect.HUNDRED_FISTS,
+        xi.effect.MANAFONT,
+        xi.effect.CHAINSPELL,
+        xi.effect.PERFECT_DODGE,
+        xi.effect.INVINCIBLE,
+        xi.effect.BLOOD_WEAPON,
+        xi.effect.SOUL_VOICE,
+        xi.effect.MEIKYO_SHISUI,
+        xi.effect.ASTRAL_FLOW,
+    }
+
+    for _, effect in pairs(statusEffects) do
+        if mob:hasStatusEffect(effect) then
+            mob:delStatusEffect(effect)
+        end
+    end
+
+    mob:SetAutoAttackEnabled(true)
+    mob:SetMobAbilityEnabled(true)
+    mob:clearActionQueue()
+end
 
 xi.dynamis.onSpawnApoc = function(mob)
     local zone = mob:getZone()
@@ -15,7 +42,6 @@ xi.dynamis.onSpawnApoc = function(mob)
     mob:setMod(xi.mod.GRAVITYRES, 100)
     mob:setMod(xi.mod.BINDRES, 50)
     mob:setMod(xi.mod.STUNRES, 99)
-    mob:setMod(xi.mod.REGAIN, 500)
     mob:setMod(xi.mod.REFRESH, 500)
     mob:setMod(xi.mod.SILENCERES, 100)
     mob:setMod(xi.mod.BLINDRES, 100)
@@ -23,7 +49,9 @@ xi.dynamis.onSpawnApoc = function(mob)
     mob:setMod(xi.mod.SLOWRES, 50)
     mob:setMod(xi.mod.SLEEPRES, 100)
     mob:setMod(xi.mod.LULLABYRES, 100)
-    mob:setMod(xi.mod.REGAIN, 0)
+    mob:setMod(xi.mod.MACC, 200)
+    mob:setMod(xi.mod.MAB, 50)
+    mob:setMod(xi.mod.FASTCAST, 5)
     mob:setRoamFlags(xi.roamFlag.NONE)
     mob:setMobMod(xi.mobMod.ROAM_DISTANCE, 1000) -- See you in Narnia!
     mob:setMobMod(xi.mobMod.ROAM_COOL, 1)
@@ -33,21 +61,21 @@ xi.dynamis.onSpawnApoc = function(mob)
     mob:setLocalVar("Apoc_Beast", 1)
     xi.dynamis.apoc2hrlist = -- Setup fresh 2hr list each time
     {
-        {xi.jsa.MIGHTY_STRIKES, "MIGHTY_STRIKES"},
-        {xi.jsa.HUNDRED_FISTS, "HUNDRED_FISTS"},
-        {xi.jsa.BENEDICTION, "BENEDICTION"},
-        {xi.jsa.MANAFONT, "MANAFONT"},
-        {xi.jsa.CHAINSPELL, "CHAINSPELL"},
-        {xi.jsa.PERFECT_DODGE, "PERFECT_DODGE"},
-        {xi.jsa.INVINCIBLE, "INVINCIBLE"},
-        {xi.jsa.BLOOD_WEAPON, "BLOOD_WEAPON"},
-        {xi.ja.CHARM, "CHARM"},
-        {xi.jsa.SOUL_VOICE, "SOUL_VOICE"},
-        {xi.jsa.EES_DRAGON, "EAGLE_EYE_SHOT"},
-        {xi.jsa.MEIKYO_SHISUI, "MEIKYO_SHISUI"},
-        {xi.jsa.MIJIN_GAKURE, "MIJIN_GAKURE"},
-        {xi.jsa.CALL_WYVERN, "CALL_WYVERN"},
-        {xi.jsa.ASTRAL_FLOW, "ASTRAL_FLOW "},
+        {xi.jsa.MIGHTY_STRIKES, "MIGHTY_STRIKES", "self"},
+        {xi.jsa.HUNDRED_FISTS, "HUNDRED_FISTS", "self"},
+        {xi.jsa.BENEDICTION, "BENEDICTION", "self"},
+        {xi.jsa.MANAFONT, "MANAFONT", "self"},
+        {xi.jsa.CHAINSPELL, "CHAINSPELL", "self"},
+        {xi.jsa.PERFECT_DODGE, "PERFECT_DODGE", "self"},
+        {xi.jsa.INVINCIBLE, "INVINCIBLE", "self"},
+        {xi.jsa.BLOOD_WEAPON, "BLOOD_WEAPON", "self"},
+        {710, "CHARM", "target"},
+        {xi.jsa.SOUL_VOICE, "SOUL_VOICE", "self"},
+        {xi.jsa.EES_GOBLIN, "EAGLE_EYE_SHOT", "target"},
+        {xi.jsa.MEIKYO_SHISUI, "MEIKYO_SHISUI", "self"},
+        {xi.jsa.MIJIN_GAKURE, "MIJIN_GAKURE", "self"},
+        {xi.jsa.CALL_WYVERN, "CALL_WYVERN", "self"},
+        {xi.jsa.ASTRAL_FLOW, "ASTRAL_FLOW", "self"},
     }
 
     xi.dynamis.apocLockouts2hr = -- Setup 2hr Lockouts
@@ -106,7 +134,7 @@ end
 
 xi.dynamis.onEngagedApoc = function(mob, target)
     local next2hr = os.time() + math.random(45, 75)
-    mob:setLocalVar("next2hrTime", next2hr)     
+    mob:setLocalVar("next2hrTime", next2hr)
 end
 
 xi.dynamis.onFightApoc = function(mob, target)
@@ -122,57 +150,72 @@ xi.dynamis.onFightApoc = function(mob, target)
         end
     end
 
-    while mob:getLocalVar("next2hrTime") <= os.time() do
-        if #xi.dynamis.apoc2hrlist > 0 then
-            local abilityChoice = math.random(1, #xi.dynamis.apoc2hrlist)
-            local next2hr = os.time() + math.random(45, 75)
-            if mob:getLocalVar(xi.dynamis.apoc2hrlist[abilityChoice][2]) == 0 then
-                mob:addStatusEffect(xi.effect.HYSTERIA)
-            end
-            mob:useMobAbility(xi.dynamis.apoc2hrlist[abilityChoice][1])
-            table.remove(xi.dynamis.apoc2hrlist, abilityChoice)
-            mob:setLocalVar("next2hrTime", next2hr)
+    if mob:getLocalVar("next2hrTime") <= os.time() and #xi.dynamis.apoc2hrlist > 0 then
+        local abilityChoice = math.random(1, #xi.dynamis.apoc2hrlist)
+        local next2hr = os.time() + math.random(45, 75)
+        local target2 = mob
+
+        if mob:getLocalVar(xi.dynamis.apoc2hrlist[abilityChoice][2]) == 1 then
+            mob:addStatusEffect(xi.effect.HYSTERIA, 1, 3, 5)
         end
+
+        if xi.dynamis.apoc2hrlist[abilityChoice][3] and xi.dynamis.apoc2hrlist[abilityChoice][3] == "target" then
+            target2 = target
+        end
+
+        apocRemoveAdditionalEffects(mob)
+        mob:useMobAbility(xi.dynamis.apoc2hrlist[abilityChoice][1], target2)
+        table.remove(xi.dynamis.apoc2hrlist, abilityChoice)
+
+        mob:setLocalVar("next2hrTime", next2hr)
     end
 
-    if mob:hasStatusEffect(xi.effect.MANAFONT) and mob:getLocalVar("nextCast") <= os.time() then
-        mob:setLocalVar("nextCast", os.time() + 5)
+    if
+        (mob:hasStatusEffect(xi.effect.MANAFONT) or
+        mob:hasStatusEffect(xi.effect.CHAINSPELL) or
+        mob:hasStatusEffect(xi.effect.SOUL_VOICE)) and
+        mob:getLocalVar("nextCast") <= os.time()
+    then
+        mob:setLocalVar("nextCast", os.time() + 4)
         mob:SetAutoAttackEnabled(false)
         mob:SetMobAbilityEnabled(false)
+        local spell = nil
+
         if mob:getStatus() ~= xi.action.MAGIC_CASTING then
-            local manafontspells = {xi.magic.spell.FIRAGA_III, xi.magic.spell.BLIZZAGA_III, xi.magic.spell.AEROGA_III, xi.magic.spell.STONEGA_III, xi.magic.spell.THUNDAGA_III, xi.magic.spell.WATERA_III}
-            local spell = manafontspells[math.random(1, #manafontspells)]
+            if mob:hasStatusEffect(xi.effect.MANAFONT) then
+                if mob:hasStatusEffect(xi.effect.CHAINSPELL) then
+                    mob:delStatusEffectSilent(xi.effect.CHAINSPELL)
+                end
+
+                if mob:hasStatusEffect(xi.effect.SOUL_VOICE) then
+                    mob:delStatusEffect(xi.effect.SOUL_VOICE)
+                end
+
+                local manafontspells = {xi.magic.spell.FIRAGA_III, xi.magic.spell.BLIZZAGA_III, xi.magic.spell.AEROGA_III, xi.magic.spell.STONEGA_III, xi.magic.spell.THUNDAGA_III, xi.magic.spell.WATERA_III}
+                spell = manafontspells[math.random(1, #manafontspells)]
+            elseif mob:hasStatusEffect(xi.effect.CHAINSPELL) then
+                local chainspellspells = {xi.magic.spell.BLINDGA, xi.magic.spell.PARALYGA,xi.magic.spell.BINDGA, xi.magic.spell.BREAKGA, xi.magic.spell.SLEEPGA_II, xi.magic.spell.DEATH}
+                spell = chainspellspells[math.random(1,#chainspellspells)]
+            elseif mob:hasStatusEffect(xi.effect.SOUL_VOICE) then
+                local buffsongs = {{xi.magic.spell.VALOR_MINUET_IV, mob}, {xi.magic.spell.VICTORY_MARCH}}
+                local soulvoicesongs = {{xi.magic.spell.HORDE_LULLABY, target}, {xi.magic.spell.FOE_REQUIEM_IV, target}, {xi.magic.spell.CARNAGE_ELEGY, target}, {xi.magic.spell.FOE_LULLABY, target}}
+                local buffEnfeeb = math.random(1, 4)
+                local choice = 0
+                if buffEnfeeb == 1 then
+                    choice = math.random(1, #buffsongs)
+                    spell = buffsongs[choice][1]
+                    target = buffsongs[choice][2]
+                else
+                    choice = math.random(1, #soulvoicesongs)
+                    spell = soulvoicesongs[choice][1]
+                    target = soulvoicesongs[choice][2]
+                end
+            end
+
             if spell then
                 mob:castSpell(spell, target)
             end
         end
-    elseif mob:hasStatusEffect(xi.effect.CHAINSPELL) and mob:getLocalVar("nextCast") <= os.time() then
-        mob:setLocalVar("nextCast", os.time() + 3)
-        mob:SetAutoAttackEnabled(false)
-        mob:SetMobAbilityEnabled(false)
-        if mob:getStatus() ~= xi.action.MAGIC_CASTING then
-            local chainspellspells = {xi.magic.spell.BLINDGA, xi.magic.spell.PARALYGA,xi.magic.spell.BINDGA, xi.magic.spell.BREAKGA, xi.magic.spell.SLEEPGA_II, xi.magic.spell.DEATH}
-            local spell = chainspellspells[math.random(1,#chainspellspells)]
-            if spell then
-                mob:castSpell(spell, target)
-            end
-        end
-    elseif mob:hasStatusEffect(xi.effect.SOUL_VOICE) and mob:getLocalVar("nextCast") <= os.time() then
-        mob:setLocalVar("nextCast", os.time() + 5)
-        mob:SetAutoAttackEnabled(false)
-        mob:SetMobAbilityEnabled(false)
-        if mob:getStatus() ~= xi.action.MAGIC_CASTING then
-            local soulvoicesongs = {{xi.magic.spell.HORDE_LULLABY, target},{xi.magic.spell.FOE_REQUIEM_IV, target},{xi.magic.spell.VALOR_MINUET_IV, mob},{xi.magic.spell.VICTORY_MARCH, mob},{xi.magic.spell.CARNAGE_ELEGY, target},{xi.magic.spell.FOE_LULLABY, target}}
-            local choice = math.random(1, #soulvoicesongs)
-            local song = soulvoicesongs[choice][1]
-            local songTarget = soulvoicesongs[choice][2]
-            if song then
-                mob:castSpell(song, songTarget)
-            end
-        end
-    else
-        mob:SetAutoAttackEnabled(true)
-        mob:SetMobAbilityEnabled(true)
     end
 
     if mob:getTP() >= 1000 then
@@ -192,13 +235,13 @@ end
 xi.dynamis.onFightDwagon = function(mob, target)
     if mob:getZone():getLocalVar("MegaBoss_Killed") == 1 then
         mob:setMobMod(xi.mobMod.NO_DROPS, 1)
-        mob:setHP(0)
+        DespawnMob(mob:getID())
     end
 end
 
 xi.dynamis.onRoamDwagon = function(mob)
     if mob:getZone():getLocalVar("MegaBoss_Killed") == 1 then
         mob:setMobMod(xi.mobMod.NO_DROPS, 1)
-        mob:setHP(0)
+        DespawnMob(mob:getID())
     end
 end

@@ -26,7 +26,7 @@ end
 
 quest.reward =
 {
-    fame     = 10,
+    fame     = 40,
     fameArea = xi.quest.fame_area.WINDURST,
     title    = xi.title.STAR_ONION_BRIGADIER,
 }
@@ -41,7 +41,8 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.INSPECTORS_GADGET)
+                player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.INSPECTORS_GADGET) and
+                player:getFameLevel(xi.quest.fame_area.WINDURST) >= 3
         end,
 
         [xi.zone.PORT_WINDURST] =

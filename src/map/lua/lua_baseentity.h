@@ -845,6 +845,7 @@ public:
 
     bool clearSession(std::string const& playerName);
     void sendNpcEmote(CLuaBaseEntity* PBaseEntity, sol::object const& p0, sol::object const& p1, sol::object const& p2);
+    void clearActionQueue();
 
     static void Register();
 };
