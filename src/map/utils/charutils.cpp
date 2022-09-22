@@ -2310,6 +2310,109 @@ namespace charutils
         }
     }
 
+    void SaveJobChangeGear(CCharEntity* PChar)
+    {
+        if (PChar == nullptr)
+        {
+            return;
+        }
+
+        const char* Query = "REPLACE INTO char_equip_saved SET \
+                                    charid = %u, \
+                                    jobid = %u, \
+                                    main = %u, \
+                                    sub = %u, \
+                                    ranged = %u, \
+                                    ammo = %u, \
+                                    head = %u, \
+                                    body = %u, \
+                                    hands = %u, \
+                                    legs = %u, \
+                                    feet = %u, \
+                                    neck = %u, \
+                                    waist = %u, \
+                                    ear1 = %u, \
+                                    ear2 = %u, \
+                                    ring1 = %u, \
+                                    ring2 = %u, \
+                                    back = %u;";
+
+        auto getEquipIdFromSlot = [](CCharEntity* PChar, SLOTTYPE slot) -> uint16
+        {
+            return (PChar->getEquip(slot) != nullptr) ? PChar->getEquip(slot)->getID() : 0;
+        };
+
+        uint16 main   = getEquipIdFromSlot(PChar, SLOT_MAIN);
+        uint16 sub    = getEquipIdFromSlot(PChar, SLOT_SUB);
+        uint16 ranged = getEquipIdFromSlot(PChar, SLOT_RANGED);
+        uint16 ammo   = getEquipIdFromSlot(PChar, SLOT_AMMO);
+        uint16 head   = getEquipIdFromSlot(PChar, SLOT_HEAD);
+        uint16 body   = getEquipIdFromSlot(PChar, SLOT_BODY);
+        uint16 hands  = getEquipIdFromSlot(PChar, SLOT_HANDS);
+        uint16 legs   = getEquipIdFromSlot(PChar, SLOT_LEGS);
+        uint16 feet   = getEquipIdFromSlot(PChar, SLOT_FEET);
+        uint16 neck   = getEquipIdFromSlot(PChar, SLOT_NECK);
+        uint16 waist  = getEquipIdFromSlot(PChar, SLOT_WAIST);
+        uint16 ear1   = getEquipIdFromSlot(PChar, SLOT_EAR1);
+        uint16 ear2   = getEquipIdFromSlot(PChar, SLOT_EAR2);
+        uint16 ring1  = getEquipIdFromSlot(PChar, SLOT_RING1);
+        uint16 ring2  = getEquipIdFromSlot(PChar, SLOT_RING2);
+        uint16 back   = getEquipIdFromSlot(PChar, SLOT_BACK);
+
+        sql->Query(Query, PChar->id, PChar->GetMJob(), main, sub, ranged, ammo,
+                   head, body, hands, legs, feet, neck, waist, ear1, ear2, ring1,
+                   ring2, back);
+    }
+
+    void LoadJobChangeGear(CCharEntity* PChar)
+    {
+        if (PChar == nullptr)
+        {
+            return;
+        }
+
+        const char* Query = "SELECT main, sub, ranged, ammo, head, body, hands, legs, feet, neck, waist, ear1, ear2, ring1, ring2, back FROM char_equip_saved AS equip WHERE charid = %u AND jobid = %u;";
+
+        if (sql->Query(Query, PChar->id, PChar->GetMJob()) == SQL_SUCCESS && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+        {
+            for (uint8 equipSlot = SLOT_MAIN; equipSlot <= SLOT_BACK; equipSlot++)
+            {
+                uint16 itemId = sql->GetUIntData(equipSlot);
+
+                if (itemId > 0)
+                {
+                    for (int container = LOC_INVENTORY; container <= LOC_WARDROBE8; container++)
+                    {
+                        bool found = false;
+
+                        if (container == LOC_INVENTORY || (container >= LOC_WARDROBE && container <= LOC_WARDROBE8))
+                        {
+                            for (uint8 slot = 0; slot < PChar->getStorage(container)->GetSize(); slot++)
+                            {
+                                CItem* PItem  = PChar->getStorage(container)->GetItem(slot);
+                                auto*  PEquip = dynamic_cast<CItemEquipment*>(PItem);
+
+                                if ((PItem != nullptr && PItem->getID() == itemId && PEquip != nullptr) &&
+                                    (PEquip != PChar->getEquip(static_cast<SLOTTYPE>(equipSlot - 1)) &&
+                                     PEquip != PChar->getEquip(static_cast<SLOTTYPE>(equipSlot + 1))))
+                                {
+                                    found = true;
+                                    charutils::EquipItem(PChar, PItem->getSlotID(), equipSlot, static_cast<CONTAINER_ID>(container));
+                                    break;
+                                }
+                            }
+
+                            if (found)
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     void EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 containerID)
     {
         if (PChar == nullptr || PChar->getStorage(containerID) == nullptr)
