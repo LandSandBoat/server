@@ -19,7 +19,7 @@ cmdprops =
 
 function onTrigger(player, globalLua, other)
     if globalLua ~= nil and other == nil then
-        local pathString = table.concat({"scripts/globals/", globalLua})
+        local pathString = table.concat({ "scripts/globals/", globalLua })
         package.loaded[pathString] = nil
         require(pathString)
         player:PrintToPlayer(string.format("Lua file '%s' has been reloaded.", pathString))

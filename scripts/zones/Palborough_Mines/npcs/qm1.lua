@@ -13,7 +13,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCharVar("theTalekeeperTruthCS") == 3 and npcUtil.popFromQM(player, npc, ID.mob.NI_GHU_NESTFENDER, {hide = 0}) then
+    if player:getCharVar("theTalekeeperTruthCS") == 3 and npcUtil.popFromQM(player, npc, ID.mob.NI_GHU_NESTFENDER, { hide = 0 }) then
         player:messageSpecial(ID.text.SENSE_OF_FOREBODING)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)

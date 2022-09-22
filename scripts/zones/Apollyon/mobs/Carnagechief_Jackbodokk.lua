@@ -3,7 +3,7 @@
 --  Mob: Carnagechief Jackbodokk
 -----------------------------------
 local ID = require("scripts/zones/Apollyon/IDs")
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}
 

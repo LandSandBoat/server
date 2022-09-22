@@ -97,7 +97,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         quest:getVar(player, 'Prog') == 2 and
-                        npcUtil.tradeHasExactly(trade, {xi.items.CHUNK_OF_TIN_ORE, xi.items.COBALT_JELLYFISH})
+                        npcUtil.tradeHasExactly(trade, { xi.items.CHUNK_OF_TIN_ORE, xi.items.COBALT_JELLYFISH })
                     then
                         return quest:progressEvent(18)
                     end

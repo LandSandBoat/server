@@ -18,7 +18,7 @@ local battlefields =
 --[[
     [zoneId] =
     {
-        {bit, battlefieldIdInDatabase, requiredItemToTrade}
+        { bit, battlefieldIdInDatabase, requiredItemToTrade }
     },
 --]]
     [xi.zone.BEARCLAW_PINNACLE] =
@@ -116,121 +116,121 @@ local battlefields =
 
     [xi.zone.SEALIONS_DEN] =
     {
-        { 0,  992,    0},   -- One to Be Feared (PM6-4)
-        { 1,  993,    0},   -- The Warrior's Path (PM7-5)
-     -- { 2,    ?,    0},   -- *The Warrior's Path (HTMBF)
-     -- { 3,    ?,    0},   -- *One to Be Feared (HTMBF)
+        { 0,  992,    0 },   -- One to Be Feared (PM6-4)
+        { 1,  993,    0 },   -- The Warrior's Path (PM7-5)
+     -- { 2,    ?,    0 },   -- *The Warrior's Path (HTMBF)
+     -- { 3,    ?,    0 },   -- *One to Be Feared (HTMBF)
     },
 
     [xi.zone.THE_GARDEN_OF_RUHMET] =
     {
-        { 0, 1024,    0},   -- When Angels Fall (PM8-3)
+        { 0, 1024,    0 },   -- When Angels Fall (PM8-3)
     },
 
     [xi.zone.EMPYREAL_PARADOX] =
     {
-        { 0, 1056,    0},   -- Dawn (PM8-4)
-        { 1, 1057,    0},   -- Apocalypse Nigh (Quest)
-     -- { 2,    ?,    0},   -- Both Paths Taken (ROVM2-9-2)
-     -- { 3,    ?,    0},   -- *Dawn (HTMBF)
-     -- { 4,    ?,    0},   -- The Winds of Time (ROVM3-1-26)
-     -- { 5,    ?,    0},   -- Sealed Fate (Master Trial)
+        { 0, 1056,    0 },   -- Dawn (PM8-4)
+        { 1, 1057,    0 },   -- Apocalypse Nigh (Quest)
+     -- { 2,    ?,    0 },   -- Both Paths Taken (ROVM2-9-2)
+     -- { 3,    ?,    0 },   -- *Dawn (HTMBF)
+     -- { 4,    ?,    0 },   -- The Winds of Time (ROVM3-1-26)
+     -- { 5,    ?,    0 },   -- Sealed Fate (Master Trial)
     },
 
     [xi.zone.TEMENOS] =
     {
-     -- { 0, 1299,    0},   -- Northern Tower
-     -- { 1, 1300,    0},   -- Eastern Tower
-     -- { 2, 1298,    0},   -- Western Tower
-     -- { 3, 1306,   -1},   -- Central 4th Floor (multiple items needed: 1907, 1908, 1986)
-     -- { 4, 1305, 1904},   -- Central 3rd Floor
-     -- { 5, 1304, 1905},   -- Central 2nd Floor
-     -- { 6, 1303, 1906},   -- Central 1st Floor
-     -- { 7, 1301, 2127},   -- Central Basement
-     -- { 8, 1302,    0},   -- Central Basement II
-     -- { 9, 1307,    0},   -- Central 4th Floor II
+     -- { 0, 1299,    0 },   -- Northern Tower
+     -- { 1, 1300,    0 },   -- Eastern Tower
+     -- { 2, 1298,    0 },   -- Western Tower
+     -- { 3, 1306,   -1 },   -- Central 4th Floor (multiple items needed: 1907, 1908, 1986)
+     -- { 4, 1305, 1904 },   -- Central 3rd Floor
+     -- { 5, 1304, 1905 },   -- Central 2nd Floor
+     -- { 6, 1303, 1906 },   -- Central 1st Floor
+     -- { 7, 1301, 2127 },   -- Central Basement
+     -- { 8, 1302,    0 },   -- Central Basement II
+     -- { 9, 1307,    0 },   -- Central 4th Floor II
     },
 
     [xi.zone.APOLLYON] =
     {
-        { 0, 1291,    0},   -- SW Apollyon
-        { 1, 1290,    0},   -- NW Apollyon
-        { 2, 1293,    0},   -- SE Apollyon
-        { 3, 1292,    0},   -- NE Apollyon
-     -- { 4, 1296,   -2},   -- Central Apollyon (multiple items needed: 1909 1910 1987 1988)
-     -- { 5, 1294, 2127},   -- CS Apollyon
-     -- { 6, 1295,    0},   -- CS Apollyon II
-     -- { 7, 1297,    0},   -- Central Apollyon II
+        { 0, 1291,    0 },   -- SW Apollyon
+        { 1, 1290,    0 },   -- NW Apollyon
+        { 2, 1293,    0 },   -- SE Apollyon
+        { 3, 1292,    0 },   -- NE Apollyon
+     -- { 4, 1296,   -2 },   -- Central Apollyon (multiple items needed: 1909 1910 1987 1988)
+     -- { 5, 1294, 2127 },   -- CS Apollyon
+     -- { 6, 1295,    0 },   -- CS Apollyon II
+     -- { 7, 1297,    0 },   -- Central Apollyon II
     },
 
     [xi.zone.ARRAPAGO_REEF] =
     {
-     -- { 0,    ?,    0},   -- Lamia Reprisal
+     -- { 0,    ?,    0 },   -- Lamia Reprisal
     },
 
     [xi.zone.TALACCA_COVE] =
     {
-     -- { 0, 1088,    0},   -- Call to Arms (ISNM)
-     -- { 1, 1089,    0},   -- Compliments to the Chef (ISNM)
-     -- { 2, 1090,    0},   -- Puppetmaster Blues (Quest)
-        { 3, 1091, 2332},   -- Breaking the Bonds of Fate (COR LB5)
-        { 4, 1092,    0},   -- Legacy of the Lost (TOAU35)
-     -- { 5,    ?,    0},   -- *Legacy of the Lost (HTMBF)
+     -- { 0, 1088,    0 },   -- Call to Arms (ISNM)
+     -- { 1, 1089,    0 },   -- Compliments to the Chef (ISNM)
+     -- { 2, 1090,    0 },   -- Puppetmaster Blues (Quest)
+        { 3, 1091, 2332 },   -- Breaking the Bonds of Fate (COR LB5)
+        { 4, 1092,    0 },   -- Legacy of the Lost (TOAU35)
+     -- { 5,    ?,    0 },   -- *Legacy of the Lost (HTMBF)
     },
 
     [xi.zone.HALVUNG] =
     {
-     -- { 0,    ?,    0},   -- Halvung Invasion
+     -- { 0,    ?,    0 },   -- Halvung Invasion
     },
 
     [xi.zone.NAVUKGO_EXECUTION_CHAMBER] =
     {
-     -- { 0, 1120,    0},   -- Tough Nut to Crack (ISNM)
-     -- { 1, 1121,    0},   -- Happy Caster (ISNM)
-        { 2, 1122,    0},   -- Omens (BLU AF2)
-        { 3, 1123, 2333},   -- Achieving True Power (PUP LB5)
-        { 4, 1124,    0},   -- Shield of Diplomacy (TOAU22)
+     -- { 0, 1120,    0 },   -- Tough Nut to Crack (ISNM)
+     -- { 1, 1121,    0 },   -- Happy Caster (ISNM)
+        { 2, 1122,    0 },   -- Omens (BLU AF2)
+        { 3, 1123, 2333 },   -- Achieving True Power (PUP LB5)
+        { 4, 1124,    0 },   -- Shield of Diplomacy (TOAU22)
     },
 
     [xi.zone.MAMOOK] =
     {
-     -- { 0,    ?,    0},   -- Mamook Incursion
+     -- { 0,    ?,    0 },   -- Mamook Incursion
     },
 
     [xi.zone.JADE_SEPULCHER] =
     {
-     -- { 0, 1152,    0},   -- Making a Mockery (ISNM)
-     -- { 1, 1153,    0},   -- Shadows of the Mind (ISNM)
-        { 2, 1154, 2331},   -- The Beast Within (BLU LB5)
-     -- { 3, 1155,    0},   -- Moment of Truth (Quest)
-        { 4, 1156,    0},   -- Puppet in Peril (TOAU29)
-     -- { 5,    ?,    0},   -- *Puppet in Peril (HTMBF)
+     -- { 0, 1152,    0 },   -- Making a Mockery (ISNM)
+     -- { 1, 1153,    0 },   -- Shadows of the Mind (ISNM)
+        { 2, 1154, 2331 },   -- The Beast Within (BLU LB5)
+     -- { 3, 1155,    0 },   -- Moment of Truth (Quest)
+        { 4, 1156,    0 },   -- Puppet in Peril (TOAU29)
+     -- { 5,    ?,    0 },   -- *Puppet in Peril (HTMBF)
     },
 
     [xi.zone.HAZHALM_TESTING_GROUNDS] =
     {
-     -- { 0, 1184,    0},   -- The Rider Cometh (Quest)
+     -- { 0, 1184,    0 },   -- The Rider Cometh (Quest)
     },
 
     [xi.zone.LA_VAULE_S] =
     {
-     -- { 0,    ?,    0},   -- Splitting Heirs (S)
-        { 1, 2721,    0},   -- Purple, The New Black
-     -- { 2,    ?,    0},   -- The Blood-bathed Crown
+     -- { 0,    ?,    0 },   -- Splitting Heirs (S)
+        { 1, 2721,    0 },   -- Purple, The New Black
+     -- { 2,    ?,    0 },   -- The Blood-bathed Crown
     },
 
     [xi.zone.BEADEAUX_S] =
     {
-     -- { 0,    ?,    0},   -- Cracking Shells (B)
-     -- { 1,    ?,    0},   -- The Buried God
+     -- { 0,    ?,    0 },   -- Cracking Shells (B)
+     -- { 1,    ?,    0 },   -- The Buried God
     },
 
     [xi.zone.CASTLE_OZTROJA_S] =
     {
-     -- { 0,    ?,    0},   -- Plucking Wings (W)
-     -- { 1,    ?,    0},   -- A Malicious Manifest
-     -- { 2,    ?,    0},   -- Manifest Destiny
-     -- { 3,    ?,    0},   -- At Journey's End
+     -- { 0,    ?,    0 },   -- Plucking Wings (W)
+     -- { 1,    ?,    0 },   -- A Malicious Manifest
+     -- { 2,    ?,    0 },   -- Manifest Destiny
+     -- { 3,    ?,    0 },   -- At Journey's End
     },
 
     [xi.zone.HORLAIS_PEAK] =
@@ -342,21 +342,21 @@ local battlefields =
 
     [xi.zone.THRONE_ROOM_S] =
     {
-     -- { 0,  352,    0},   -- Fiat Lux (Campaign)
-     -- { 1,  353,    0},   -- Darkness Descends (WOTG37)
-     -- { 2,  354,    0},   -- Bonds of Mythril (Quest)
-     -- { 3,    ?,    0},   -- Unafraid of the Dark (Merit Battlefield)
+     -- { 0,  352,    0 },   -- Fiat Lux (Campaign)
+     -- { 1,  353,    0 },   -- Darkness Descends (WOTG37)
+     -- { 2,  354,    0 },   -- Bonds of Mythril (Quest)
+     -- { 3,    ?,    0 },   -- Unafraid of the Dark (Merit Battlefield)
     },
 
     [xi.zone.SACRIFICIAL_CHAMBER] =
     {
-        { 0,  128,    0},   -- The Temple of Uggalepih (ZM4)
-        { 1,  129, 1130},   -- Jungle Boogymen (BS60)
-        { 2,  130, 1130},   -- Amphibian Assault (BS60)
-     -- { 3,  131,    0},   -- Project: Shantottofication (ASA13)
-     -- { 4,  132, 3352},   -- Whom Wilt Thou Call (KC50)
-     -- { 5,    ?, 4063},   -- *Jungle Boogymen (SKC20)
-     -- { 6,    ?, 4063},   -- *Amphibian Assault (SKC20)
+        { 0,  128,    0 },   -- The Temple of Uggalepih (ZM4)
+        { 1,  129, 1130 },   -- Jungle Boogymen (BS60)
+        { 2,  130, 1130 },   -- Amphibian Assault (BS60)
+     -- { 3,  131,    0 },   -- Project: Shantottofication (ASA13)
+     -- { 4,  132, 3352 },   -- Whom Wilt Thou Call (KC50)
+     -- { 5,    ?, 4063 },   -- *Jungle Boogymen (SKC20)
+     -- { 6,    ?, 4063 },   -- *Amphibian Assault (SKC20)
     },
 
     [xi.zone.THRONE_ROOM] =
@@ -399,46 +399,46 @@ local battlefields =
 
     [xi.zone.STELLAR_FULCRUM] =
     {
-        { 0,  256,    0},   -- Return to Delkfutt's Tower (ZM8)
-     -- { 1,  257,    0},   -- The Indomitable Triumvirate (Mog Bonanza)
-     -- { 2,  258,    0},   -- The Dauntless Duo (Mog Bonanza)
-     -- { 3,  259,    0},   -- The Solitary Demolisher (Mog Bonanza)
-     -- { 4,  260,    0},   -- Heroine's Combat (Mog Bonanza)
-     -- { 5,  261,    0},   -- Mercenary Camp (Mog Bonanza)
-     -- { 6,  262,    0},   -- Ode of Life Bestowing (ACP11)
-     -- { 7,    ?,    0},   -- *Return to Delkfutt's Tower (HTMBF)
-     -- { 8,    ?,    0},   -- True Love
-     -- { 9,    ?,    0},   -- A Fond Farewell
+        { 0,  256,    0 },   -- Return to Delkfutt's Tower (ZM8)
+     -- { 1,  257,    0 },   -- The Indomitable Triumvirate (Mog Bonanza)
+     -- { 2,  258,    0 },   -- The Dauntless Duo (Mog Bonanza)
+     -- { 3,  259,    0 },   -- The Solitary Demolisher (Mog Bonanza)
+     -- { 4,  260,    0 },   -- Heroine's Combat (Mog Bonanza)
+     -- { 5,  261,    0 },   -- Mercenary Camp (Mog Bonanza)
+     -- { 6,  262,    0 },   -- Ode of Life Bestowing (ACP11)
+     -- { 7,    ?,    0 },   -- *Return to Delkfutt's Tower (HTMBF)
+     -- { 8,    ?,    0 },   -- True Love
+     -- { 9,    ?,    0 },   -- A Fond Farewell
     },
 
     [xi.zone.LALOFF_AMPHITHEATER] =
     {
-        { 0,  288,    0},   -- Ark Angels 1 (ZM14)
-        { 1,  289,    0},   -- Ark Angels 2 (ZM14)
-        { 2,  290,    0},   -- Ark Angels 3 (ZM14)
-        { 3,  291,    0},   -- Ark Angels 4 (ZM14)
-        { 4,  292,    0},   -- Ark Angels 5 (ZM14)
-        { 5,  293, 1550},   -- Divine Might (ZM14)
-     -- { 6,    ?,    0},   -- *Ark Angels 1 (HTMBF)
-     -- { 7,    ?,    0},   -- *Ark Angels 2 (HTMBF)
-     -- { 8,    ?,    0},   -- *Ark Angels 3 (HTMBF)
-     -- { 9,    ?,    0},   -- *Ark Angels 4 (HTMBF)
-     -- {10,    ?,    0},   -- *Ark Angels 5 (HTMBF)
-     -- {11,    ?,    0},   -- *Divine Might (HTMBF)
+        {  0,  288,    0 },   -- Ark Angels 1 (ZM14)
+        {  1,  289,    0 },   -- Ark Angels 2 (ZM14)
+        {  2,  290,    0 },   -- Ark Angels 3 (ZM14)
+        {  3,  291,    0 },   -- Ark Angels 4 (ZM14)
+        {  4,  292,    0 },   -- Ark Angels 5 (ZM14)
+        {  5,  293, 1550 },   -- Divine Might (ZM14)
+     -- {  6,    ?,    0 },   -- *Ark Angels 1 (HTMBF)
+     -- {  7,    ?,    0 },   -- *Ark Angels 2 (HTMBF)
+     -- {  8,    ?,    0 },   -- *Ark Angels 3 (HTMBF)
+     -- {  9,    ?,    0 },   -- *Ark Angels 4 (HTMBF)
+     -- { 10,    ?,    0 },   -- *Ark Angels 5 (HTMBF)
+     -- { 11,    ?,    0 },   -- *Divine Might (HTMBF)
     },
 
     [xi.zone.THE_CELESTIAL_NEXUS] =
     {
-        { 0,  320,    0},   -- The Celestial Nexus (ZM16)
-     -- { 1,    ?,    0},   -- *The Celestial Nexus (HTMBF)
+        { 0,  320,    0 },   -- The Celestial Nexus (ZM16)
+     -- { 1,    ?,    0 },   -- *The Celestial Nexus (HTMBF)
     },
 
     [xi.zone.WALK_OF_ECHOES] =
     {
-     -- { 0,    ?,    0},   -- When Wills Collide (WOTG46)
-     -- { 1,  385,    0},   -- Maiden of the Dusk (WOTG51)
-     -- { 2,    ?,    0},   -- Champion of the Dawn (Quest)
-     -- { 3,    ?,    0},   -- A Forbidden Reunion (Quest)
+     -- { 0,    ?,    0 },   -- When Wills Collide (WOTG46)
+     -- { 1,  385,    0 },   -- Maiden of the Dusk (WOTG51)
+     -- { 2,    ?,    0 },   -- Champion of the Dawn (Quest)
+     -- { 3,    ?,    0 },   -- A Forbidden Reunion (Quest)
     },
 
     [xi.zone.CLOISTER_OF_GALES] =

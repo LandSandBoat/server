@@ -65,7 +65,7 @@ local oreMap =
 }
 
 -----------------------------------
--- {itemId, weight, dig requirements}
+-- { itemId, weight, dig requirements }
 -----------------------------------
 local digInfo =
 {

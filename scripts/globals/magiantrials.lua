@@ -340,7 +340,7 @@ end
 
 -- increments progress if conditions are met
 xi.magian.checkMagianTrial = function(player, conditions)
-    for _, slot in pairs( {xi.slot.MAIN, xi.slot.SUB, xi.slot.RANGED} ) do
+    for _, slot in pairs( { xi.slot.MAIN, xi.slot.SUB, xi.slot.RANGED } ) do
         local trialIdOnItem = player:getEquippedItem(slot) and player:getEquippedItem(slot):getTrialNumber()
         if trialIdOnItem ~= 0 then
             checkAndSetProgression(player, trialIdOnItem, conditions, xi.settings.main.MAGIAN_TRIALS_MOBKILL_MULTIPLIER)

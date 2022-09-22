@@ -27,8 +27,8 @@ local zoneData =
         },
         loot =
         {
-            unique = {[14626] = 5}, -- Mermaid's Ring
-            racial = {[887] = 3}    -- Coral Fragment
+            unique = { [14626] = 5 }, -- Mermaid's Ring
+            racial = { [887]   = 3 }  -- Coral Fragment
         }
     },
     [xi.zone.YHOATOR_JUNGLE] =
@@ -46,8 +46,8 @@ local zoneData =
         },
         loot =
         {
-            unique = {[13400] = 5}, -- Bitter Earring
-            racial = {[4158] = 3}   -- Venom Potion
+            unique = { [13400] = 5 }, -- Bitter Earring
+            racial = { [4158]  = 3 }  -- Venom Potion
         }
     },
     [xi.zone.WESTERN_ALTEPA_DESERT] =
@@ -65,8 +65,8 @@ local zoneData =
         },
         loot =
         {
-            unique = {[13655] = 5}, -- Sand Mantle
-            racial = {[645] = 3}    -- Darksteel Ore
+            unique = { [13655] = 5 }, -- Sand Mantle
+            racial = { [645]   = 3 }  -- Darksteel Ore
         }
     }
 }

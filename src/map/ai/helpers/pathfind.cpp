@@ -293,7 +293,7 @@ void CPathFind::FollowPath(time_point tick)
 
     m_onPoint = false;
 
-    pathpoint_t& targetPoint = m_points[m_currentPoint];
+    pathpoint_t targetPoint = m_points[m_currentPoint];
 
     if (isNavMeshEnabled() && m_carefulPathing)
     {

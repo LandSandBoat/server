@@ -3,7 +3,7 @@
 --  Mob: Siren NM for ROV
 -- !pos -406.471 16.683 -378.071 123
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}
 

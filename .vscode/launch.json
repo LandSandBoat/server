@@ -59,5 +59,13 @@
                 "exceptions": false,
             },
         },
+        {
+            "name": "(Windows) xi_map Scripts",
+            "type": "lua-local",
+            "request": "launch",
+            "program": {
+                "command": "${workspaceFolder}/xi_map.exe",
+            },
+        },
     ],
 }

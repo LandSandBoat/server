@@ -27,6 +27,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../entities/mobentity.h"
 #include "../entities/npcentity.h"
 #include "../entities/trustentity.h"
+#include "../mob_modifier.h"
 #include "../status_effect_container.h"
 #include "../utils/mobutils.h"
 #include "../utils/zoneutils.h"
@@ -291,6 +292,71 @@ void CLuaBattlefield::lose()
     m_PLuaBattlefield->CanCleanup(true);
 }
 
+void CLuaBattlefield::addGroups(sol::table groups)
+{
+    for (auto entry : groups)
+    {
+        sol::table groupData = entry.second.as<sol::table>();
+        auto       mobNames  = groupData.get<std::vector<std::string>>("mobs");
+
+        // Lookup mob ids given the provided names
+        QueryByNameResult_t entities;
+        for (const std::string& name : mobNames)
+        {
+            const QueryByNameResult_t& result = m_PLuaBattlefield->GetZone()->queryEntitiesByName(name);
+            entities.insert(entities.end(), result.begin(), result.end());
+        }
+
+        BattlefieldGroup group;
+        for (CBaseEntity* entity : entities)
+        {
+            group.mobIds.push_back(entity->id);
+        }
+
+        group.deathCallback       = groupData.get<sol::function>("death");
+        group.allDeathCallback    = groupData.get<sol::function>("allDeath");
+        group.randomDeathCallback = groupData.get<sol::function>("randomDeath");
+
+        auto setup = groupData.get<sol::function>("setup");
+        if (setup.valid())
+        {
+            auto mobs = lua.create_table();
+            for (CBaseEntity* entity : entities)
+            {
+                mobs.add(CLuaBaseEntity(entity));
+            }
+            setup(mobs);
+        }
+
+        bool stationary = groupData.get_or("stationary", false);
+        auto mods       = groupData["mods"];
+        if (stationary || mods.valid())
+        {
+            for (uint32 mobId : group.mobIds)
+            {
+                auto PMob = dynamic_cast<CMobEntity*>(zoneutils::GetEntity(mobId, TYPE_MOB | TYPE_PET));
+                XI_DEBUG_BREAK_IF(PMob == nullptr);
+
+                if (stationary)
+                {
+                    PMob->setMobMod(MOBMOD_ROAM_RESET_FACING, 1);
+                    PMob->m_maxRoamDistance = 0.5f;
+                }
+
+                if (mods.valid())
+                {
+                    for (auto modifier : mods.get<sol::table>())
+                    {
+                        PMob->setModifier(modifier.first.as<Mod>(), modifier.second.as<uint16>());
+                    }
+                }
+            }
+        }
+
+        m_PLuaBattlefield->addGroup(std::move(group));
+    }
+}
+
 //==========================================================//
 
 void CLuaBattlefield::Register()
@@ -328,6 +394,7 @@ void CLuaBattlefield::Register()
     SOL_REGISTER("cleanup", CLuaBattlefield::cleanup);
     SOL_REGISTER("win", CLuaBattlefield::win);
     SOL_REGISTER("lose", CLuaBattlefield::lose);
+    SOL_REGISTER("addGroups", CLuaBattlefield::addGroups);
 };
 
 std::ostream& operator<<(std::ostream& os, const CLuaBattlefield& battlefield)

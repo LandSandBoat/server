@@ -11,7 +11,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!setplayernation {player} <nation>")
+    player:PrintToPlayer("!setplayernation (player) <nation>")
     player:PrintToPlayer("Nations: 0=San d'Oria 1=Bastok 2=Windurst")
 end
 

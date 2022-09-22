@@ -2,7 +2,7 @@
 -- Area: Manaclipper
 --   NM: Cyclopean Conch
 -----------------------------------
-mixins = {require("scripts/mixins/families/uragnite")}
+mixins = { require("scripts/mixins/families/uragnite") }
 -----------------------------------
 local entity = {}
 

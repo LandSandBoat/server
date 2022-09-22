@@ -3,7 +3,7 @@
 --  Mob: Snaggletooth Peapuk
 -----------------------------------
 require("scripts/globals/regimes")
-mixins = {require("scripts/mixins/families/puk")}
+mixins = { require("scripts/mixins/families/puk") }
 -----------------------------------
 
 local entity = {}

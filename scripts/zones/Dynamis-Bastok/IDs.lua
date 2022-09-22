@@ -33,74 +33,84 @@ zones[xi.zone.DYNAMIS_BASTOK] =
     {
         TIME_EXTENSION =
         {
-            {minutes = 10, ki = xi.ki.CRIMSON_GRANULES_OF_TIME,   mob = 17539142},
-            {minutes = 10, ki = xi.ki.AZURE_GRANULES_OF_TIME,     mob = 17539148},
-            {minutes = 10, ki = xi.ki.AMBER_GRANULES_OF_TIME,     mob = 17539149},
-            {minutes = 15, ki = xi.ki.ALABASTER_GRANULES_OF_TIME, mob = 17539253},
-            {minutes = 15, ki = xi.ki.OBSIDIAN_GRANULES_OF_TIME,  mob = 17539306},
+            { minutes = 10, ki = xi.ki.CRIMSON_GRANULES_OF_TIME,   mob = 17539142 },
+            { minutes = 10, ki = xi.ki.AZURE_GRANULES_OF_TIME,     mob = 17539148 },
+            { minutes = 10, ki = xi.ki.AMBER_GRANULES_OF_TIME,     mob = 17539149 },
+            { minutes = 15, ki = xi.ki.ALABASTER_GRANULES_OF_TIME, mob = 17539253 },
+            { minutes = 15, ki = xi.ki.OBSIDIAN_GRANULES_OF_TIME,  mob = 17539306 },
         },
+
         REFILL_STATUE =
         {
             {
-                {mob = 17539118, eye = xi.dynamis.eye.RED  }, -- Adamantking_Effigy
-                {mob = 17539119, eye = xi.dynamis.eye.BLUE },
-                {mob = 17539120, eye = xi.dynamis.eye.GREEN},
+                { mob = 17539118, eye = xi.dynamis.eye.RED   }, -- Adamantking_Effigy
+                { mob = 17539119, eye = xi.dynamis.eye.BLUE  },
+                { mob = 17539120, eye = xi.dynamis.eye.GREEN },
             },
+
             {
-                {mob = 17539161, eye = xi.dynamis.eye.RED  }, -- Adamantking_Effigy
-                {mob = 17539162, eye = xi.dynamis.eye.BLUE },
-                {mob = 17539163, eye = xi.dynamis.eye.GREEN},
+                { mob = 17539161, eye = xi.dynamis.eye.RED   }, -- Adamantking_Effigy
+                { mob = 17539162, eye = xi.dynamis.eye.BLUE  },
+                { mob = 17539163, eye = xi.dynamis.eye.GREEN },
             },
+
             {
-                {mob = 17539171, eye = xi.dynamis.eye.RED  }, -- Adamantking_Effigy
-                {mob = 17539172, eye = xi.dynamis.eye.BLUE },
-                {mob = 17539173, eye = xi.dynamis.eye.GREEN},
+                { mob = 17539171, eye = xi.dynamis.eye.RED   }, -- Adamantking_Effigy
+                { mob = 17539172, eye = xi.dynamis.eye.BLUE  },
+                { mob = 17539173, eye = xi.dynamis.eye.GREEN },
             },
+
             {
-                {mob = 17539227, eye = xi.dynamis.eye.RED  }, -- Adamantking_Effigy
-                {mob = 17539228, eye = xi.dynamis.eye.BLUE },
-                {mob = 17539229, eye = xi.dynamis.eye.GREEN},
+                { mob = 17539227, eye = xi.dynamis.eye.RED   }, -- Adamantking_Effigy
+                { mob = 17539228, eye = xi.dynamis.eye.BLUE  },
+                { mob = 17539229, eye = xi.dynamis.eye.GREEN },
             },
+
             {
-                {mob = 17539234, eye = xi.dynamis.eye.RED  }, -- Adamantking_Effigy
-                {mob = 17539235, eye = xi.dynamis.eye.BLUE },
-                {mob = 17539236, eye = xi.dynamis.eye.GREEN},
+                { mob = 17539234, eye = xi.dynamis.eye.RED   }, -- Adamantking_Effigy
+                { mob = 17539235, eye = xi.dynamis.eye.BLUE  },
+                { mob = 17539236, eye = xi.dynamis.eye.GREEN },
             },
+
             {
-                {mob = 17539266, eye = xi.dynamis.eye.RED  }, -- Adamantking_Effigy
-                {mob = 17539267, eye = xi.dynamis.eye.BLUE },
+                { mob = 17539266, eye = xi.dynamis.eye.RED  }, -- Adamantking_Effigy
+                { mob = 17539267, eye = xi.dynamis.eye.BLUE },
             },
+
             {
-                {mob = 17539274, eye = xi.dynamis.eye.RED  }, -- Adamantking_Effigy
-                {mob = 17539275, eye = xi.dynamis.eye.GREEN},
+                { mob = 17539274, eye = xi.dynamis.eye.RED   }, -- Adamantking_Effigy
+                { mob = 17539275, eye = xi.dynamis.eye.GREEN },
             },
+
             {
-                {mob = 17539286, eye = xi.dynamis.eye.RED  }, -- Adamantking_Effigy
-                {mob = 17539287, eye = xi.dynamis.eye.BLUE },
+                { mob = 17539286, eye = xi.dynamis.eye.RED  }, -- Adamantking_Effigy
+                { mob = 17539287, eye = xi.dynamis.eye.BLUE },
             },
+
             {
-                {mob = 17539293, eye = xi.dynamis.eye.RED  }, -- Adamantking_Effigy
-                {mob = 17539294, eye = xi.dynamis.eye.GREEN},
+                { mob = 17539293, eye = xi.dynamis.eye.RED   }, -- Adamantking_Effigy
+                { mob = 17539294, eye = xi.dynamis.eye.GREEN },
             },
         },
     },
+
     npc =
     {
         QM =
         {
             [17539322] =
             {
-                param = {3354, 3409, 3410, 3411, 3412, 3413},
+                param = { 3354, 3409, 3410, 3411, 3412, 3413 },
                 trade =
                 {
-                    {item = 3354,                           mob = 17539073}, -- Gu'Dha Effigy
-                    {item = {3409, 3410, 3411, 3412, 3413}, mob = 17539312}, -- Arch Gu'Dha Effigy
+                    { item = 3354,                             mob = 17539073 }, -- Gu'Dha Effigy
+                    { item = { 3409, 3410, 3411, 3412, 3413 }, mob = 17539312 }, -- Arch Gu'Dha Effigy
                 }
             },
-            [17539323] = {trade = {{item = 3384, mob = 17539307}}}, -- Zo'Pha Forgesoul
-            [17539324] = {trade = {{item = 3385, mob = 17539308}}}, -- Ra'Gho Darkfount
-            [17539325] = {trade = {{item = 3386, mob = 17539310}}}, -- Va'Zhe Pummelsong
-            [17539326] = {trade = {{item = 3387, mob = 17539311}}}, -- Bu'Bho Truesteel
+            [17539323] = { trade = { { item = 3384, mob = 17539307 } } }, -- Zo'Pha Forgesoul
+            [17539324] = { trade = { { item = 3385, mob = 17539308 } } }, -- Ra'Gho Darkfount
+            [17539325] = { trade = { { item = 3386, mob = 17539310 } } }, -- Va'Zhe Pummelsong
+            [17539326] = { trade = { { item = 3387, mob = 17539311 } } }, -- Bu'Bho Truesteel
         },
     },
 }

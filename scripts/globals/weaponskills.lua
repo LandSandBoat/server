@@ -645,7 +645,7 @@ function doRangedWeaponskill(attacker, target, wsID, wsParams, tp, action, prima
     local calcParams =
     {
         wsID = wsID,
-        weaponDamage = {attacker:getRangedDamage()},
+        weaponDamage = { attacker:getRangedDmg() },
         skillType = attacker:getWeaponSkillType(xi.slot.RANGED),
         fSTR = fSTR2(attacker:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), attacker:getRangedDmgRank()),
         pdif = pdif,
@@ -846,7 +846,7 @@ function takeWeaponskillDamage(defender, attacker, wsParams, primaryMsg, attack,
         defender:updateEnmityFromDamage(enmityEntity, finaldmg * enmityMult)
     end
 
-    xi.magian.checkMagianTrial(attacker, {['mob'] = defender, ['triggerWs'] = true,  ['wSkillId'] = wsResults.wsID})
+    xi.magian.checkMagianTrial(attacker, { ['mob'] = defender, ['triggerWs'] = true,  ['wSkillId'] = wsResults.wsID })
 
     if finaldmg > 0 then
         defender:setLocalVar("weaponskillHit", 1)
@@ -871,7 +871,7 @@ function getMeleeDmg(attacker, weaponType, kick)
         offhandDamage = mainhandDamage
     end
 
-    return {mainhandDamage, offhandDamage}
+    return { mainhandDamage, offhandDamage }
 end
 
 function getRangedDamage(attacker)

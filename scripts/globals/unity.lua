@@ -163,7 +163,7 @@ function xi.unity.onEventUpdate(player, csid, option)
             local itemId = unityOptions[category][selection][1]
             local cost = unityOptions[category][selection][4] * qty
 
-            if npcUtil.giveItem(player, { {itemId, qty} }) then
+            if npcUtil.giveItem(player, { { itemId, qty } }) then
                 accolades = accolades - cost
                 player:delCurrency("unity_accolades", cost)
                 if xi.settings.main.ENABLE_EXCHANGE_LIMIT == 1 then

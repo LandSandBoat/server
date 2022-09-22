@@ -41,7 +41,7 @@ local entryInfo =
         csMenu = 961,
         beatVar = "DynaSandoria_Win",
         beatKI = xi.ki.HYDRA_CORPS_COMMAND_SCEPTER,
-        enterPos = {161.838, -2.000, 161.673, 93, 185},
+        enterPos = { 161.838, -2.000, 161.673, 93, 185 },
     },
 
     [xi.zone.BASTOK_MINES] =
@@ -53,7 +53,7 @@ local entryInfo =
         csMenu = 597,
         beatVar = "DynaBastok_Win",
         beatKI = xi.ki.HYDRA_CORPS_EYEGLASS,
-        enterPos = {116.482, 0.994, -72.121, 128, 186},
+        enterPos = { 116.482, 0.994, -72.121, 128, 186 },
     },
 
     [xi.zone.WINDURST_WALLS] =
@@ -65,7 +65,7 @@ local entryInfo =
         csMenu = 513,
         beatVar = "DynaWindurst_Win",
         beatKI = xi.ki.HYDRA_CORPS_LANTERN,
-        enterPos = {-221.988, 1.000, -120.184, 0, 187},
+        enterPos = { -221.988, 1.000, -120.184, 0, 187 },
     },
 
     [xi.zone.RULUDE_GARDENS] =
@@ -77,7 +77,7 @@ local entryInfo =
         csMenu = 10176,
         beatVar = "DynaJeuno_Win",
         beatKI = xi.ki.HYDRA_CORPS_TACTICAL_MAP,
-        enterPos = {48.930, 10.002, -71.032, 195, 188},
+        enterPos = { 48.930, 10.002, -71.032, 195, 188 },
     },
 
     [xi.zone.BEAUCEDINE_GLACIER] =
@@ -88,7 +88,7 @@ local entryInfo =
         csMenu = 229,
         beatVar = "DynaBeaucedine_Win",
         beatKI = xi.ki.HYDRA_CORPS_INSIGNIA,
-        enterPos = {-284.751, -39.923, -422.948, 235, 134},
+        enterPos = { -284.751, -39.923, -422.948, 235, 134 },
         reqs = function(player)
             return player:hasKeyItem(xi.ki.HYDRA_CORPS_COMMAND_SCEPTER) and
                    player:hasKeyItem(xi.ki.HYDRA_CORPS_EYEGLASS) and
@@ -105,7 +105,7 @@ local entryInfo =
         csMenu = 205,
         beatVar = "DynaXarcabard_Win",
         beatKI = xi.ki.HYDRA_CORPS_BATTLE_STANDARD,
-        enterPos = {569.312, -0.098, -270.158, 90, 135},
+        enterPos = { 569.312, -0.098, -270.158, 90, 135 },
         reqs = function(player) return player:hasKeyItem(xi.ki.HYDRA_CORPS_INSIGNIA) end,
     },
 
@@ -118,7 +118,7 @@ local entryInfo =
         csMenu = 58,
         beatVar = "DynaValkurm_Win",
         beatKI = xi.ki.DYNAMIS_VALKURM_SLIVER,
-        enterPos = {100, -8, 131, 47, 39},
+        enterPos = { 100, -8, 131, 47, 39 },
         reqs = function(player)
             return (
                 player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or
@@ -135,7 +135,7 @@ local entryInfo =
         csMenu = 64,
         beatVar = "DynaBuburimu_Win",
         beatKI = xi.ki.DYNAMIS_BUBURIMU_SLIVER,
-        enterPos = {155, -1, -169, 170, 40},
+        enterPos = { 155, -1, -169, 170, 40 },
         reqs = function(player)
             return (
                 player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or
@@ -152,7 +152,7 @@ local entryInfo =
         csMenu = 48,
         beatVar = "DynaQufim_Win",
         beatKI = xi.ki.DYNAMIS_QUFIM_SLIVER,
-        enterPos = {-19, -17, 104, 253, 41},
+        enterPos = { -19, -17, 104, 253, 41 },
         reqs = function(player)
             return (
                 player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED) or
@@ -171,7 +171,7 @@ local entryInfo =
         csMenu = 624,
         beatVar = "DynaTavnazia_Win",
         beatKI = xi.ki.DYNAMIS_TAVNAZIA_SLIVER,
-        enterPos = {0.1, -7, -21, 190, 42},
+        enterPos = { 0.1, -7, -21, 190, 42 },
         reqs = function(player)
             return player:hasKeyItem(xi.ki.DYNAMIS_BUBURIMU_SLIVER) and
                    player:hasKeyItem(xi.ki.DYNAMIS_QUFIM_SLIVER) and
@@ -195,8 +195,8 @@ local dynaInfo =
         beatVar = "DynaSandoria_Win",
         beatKI = xi.ki.HYDRA_CORPS_COMMAND_SCEPTER,
         beatTitle = xi.title.DYNAMIS_SAN_DORIA_INTERLOPER,
-        entryPos = {161.838, -2.000, 161.673, 93},
-        ejectPos = {161.000, -2.000, 161.000, 94, 230},
+        entryPos = { 161.838, -2.000, 161.673, 93 },
+        ejectPos = { 161.000, -2.000, 161.000, 94, 230 },
     },
 
     [xi.zone.DYNAMIS_BASTOK] =
@@ -204,8 +204,8 @@ local dynaInfo =
         beatVar = "DynaBastok_Win",
         beatKI = xi.ki.HYDRA_CORPS_EYEGLASS,
         beatTitle = xi.title.DYNAMIS_BASTOK_INTERLOPER,
-        entryPos = {116.482, 0.994, -72.121, 128},
-        ejectPos = {112.000, 0.994, -72.000, 127, 234},
+        entryPos = { 116.482, 0.994, -72.121, 128 },
+        ejectPos = { 112.000, 0.994, -72.000, 127, 234 },
     },
 
     [xi.zone.DYNAMIS_WINDURST] =
@@ -213,8 +213,8 @@ local dynaInfo =
         beatVar = "DynaWindurst_Win",
         beatKI = xi.ki.HYDRA_CORPS_LANTERN,
         beatTitle = xi.title.DYNAMIS_WINDURST_INTERLOPER,
-        entryPos = {-221.988, 1.000, -120.184, 0},
-        ejectPos = {-217.000, 1.000, -119.000, 94, 239},
+        entryPos = { -221.988, 1.000, -120.184, 0 },
+        ejectPos = { -217.000, 1.000, -119.000, 94, 239 },
     },
 
     [xi.zone.DYNAMIS_JEUNO] =
@@ -222,8 +222,8 @@ local dynaInfo =
         beatVar = "DynaJeuno_Win",
         beatKI = xi.ki.HYDRA_CORPS_TACTICAL_MAP,
         beatTitle = xi.title.DYNAMIS_JEUNO_INTERLOPER,
-        entryPos = {48.930, 10.002, -71.032, 195},
-        ejectPos = {48.930, 10.002, -71.032, 195, 243},
+        entryPos = { 48.930, 10.002, -71.032, 195 },
+        ejectPos = { 48.930, 10.002, -71.032, 195, 243 },
     },
 
     [xi.zone.DYNAMIS_BEAUCEDINE] =
@@ -231,8 +231,8 @@ local dynaInfo =
         beatVar = "DynaBeaucedine_Win",
         beatKI = xi.ki.HYDRA_CORPS_INSIGNIA,
         beatTitle = xi.title.DYNAMIS_BEAUCEDINE_INTERLOPER,
-        entryPos = {-284.751, -39.923, -422.948, 235},
-        ejectPos = {-284.751, -39.923, -422.948, 235, 111},
+        entryPos = { -284.751, -39.923, -422.948, 235 },
+        ejectPos = { -284.751, -39.923, -422.948, 235, 111 },
     },
 
     [xi.zone.DYNAMIS_XARCABARD] =
@@ -240,8 +240,8 @@ local dynaInfo =
         beatVar = "DynaXarcabard_Win",
         beatKI = xi.ki.HYDRA_CORPS_BATTLE_STANDARD,
         beatTitle = xi.title.DYNAMIS_XARCABARD_INTERLOPER,
-        entryPos = {569.312, -0.098, -270.158, 90},
-        ejectPos = {569.312, -0.098, -270.158, 90, 112},
+        entryPos = { 569.312, -0.098, -270.158, 90 },
+        ejectPos = { 569.312, -0.098, -270.158, 90, 112 },
     },
 
     [xi.zone.DYNAMIS_VALKURM] =
@@ -249,8 +249,8 @@ local dynaInfo =
         beatVar = "DynaValkurm_Win",
         beatKI = xi.ki.DYNAMIS_VALKURM_SLIVER,
         beatTitle = xi.title.DYNAMIS_VALKURM_INTERLOPER,
-        entryPos = {100, -8, 131, 47},
-        ejectPos = {119, -9, 131, 52, 103},
+        entryPos = { 100, -8, 131, 47 },
+        ejectPos = { 119, -9, 131, 52, 103 },
     },
 
     [xi.zone.DYNAMIS_BUBURIMU] =
@@ -258,8 +258,8 @@ local dynaInfo =
         beatVar = "DynaBuburimu_Win",
         beatKI = xi.ki.DYNAMIS_BUBURIMU_SLIVER,
         beatTitle = xi.title.DYNAMIS_BUBURIMU_INTERLOPER,
-        entryPos = {155, -1, -169, 170},
-        ejectPos = {154, -1, -170, 190, 118},
+        entryPos = { 155, -1, -169, 170 },
+        ejectPos = { 154, -1, -170, 190, 118 },
     },
 
     [xi.zone.DYNAMIS_QUFIM] =
@@ -267,8 +267,8 @@ local dynaInfo =
         beatVar = "DynaQufim_Win",
         beatKI = xi.ki.DYNAMIS_QUFIM_SLIVER,
         beatTitle = xi.title.DYNAMIS_QUFIM_INTERLOPER,
-        entryPos = {-19, -17, 104, 253},
-        ejectPos = {18, -19, 162, 240, 126},
+        entryPos = { -19, -17, 104, 253 },
+        ejectPos = { 18, -19, 162, 240, 126 },
     },
 
     [xi.zone.DYNAMIS_TAVNAZIA] =
@@ -276,8 +276,8 @@ local dynaInfo =
         beatVar = "DynaTavnazia_Win",
         beatKI = xi.ki.DYNAMIS_TAVNAZIA_SLIVER,
         beatTitle = xi.title.DYNAMIS_TAVNAZIA_INTERLOPER,
-        entryPos = {0.1, -7, -21, 190},
-        ejectPos = {0, -7, -23, 195, 26},
+        entryPos = { 0.1, -7, -21, 190 },
+        ejectPos = { 0, -7, -23, 195, 26 },
     },
 }
 
@@ -416,9 +416,9 @@ xi.dynamis.zoneOnInitialize = function(zone)
         for _, v in pairs(timeExtensionMobs) do
             local group = {}
             if type(v.mob) == "number" then
-                group = {v.mob}
+                group = { v.mob }
             elseif type(v.mob) == "table" then
-                group = {unpack(v.mob)}
+                group = { unpack(v.mob) }
             end
             local teId = group[math.random(#group)]
             DisallowRespawn(teId, false)
@@ -531,9 +531,9 @@ xi.dynamis.timeExtensionOnDeath = function(mob, player, isKiller)
         -- find this TE's group
         for _, t in pairs(timeExtensionMobs) do
             if type(t.mob) == "number" then
-                group = {t.mob}
+                group = { t.mob }
             elseif type(t.mob) == "table" then
-                group = {unpack(t.mob)}
+                group = { unpack(t.mob) }
             end
             for _, g in pairs(group) do
                 if g == mobId then
@@ -688,7 +688,7 @@ xi.dynamis.qmOnTrade = function(player, npc, trade)
                     else
                         mobId = v.mob
                     end
-                    if mobId and npcUtil.popFromQM(player, npc, mobId, {hide = 0, radius = 2}) then
+                    if mobId and npcUtil.popFromQM(player, npc, mobId, { hide = 0, radius = 2 }) then
                         player:confirmTrade()
                     end
                     break

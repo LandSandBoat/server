@@ -5,7 +5,7 @@
 -- Spawned by trading a Shrouded Bijou to the ??? in front of Castle Zvahl.
 -----------------------------------
 local ID = require("scripts/zones/Dynamis-Xarcabard/IDs")
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
@@ -16,10 +16,10 @@ entity.onMobSpawn = function(mob)
         between = 60,
         specials =
         {
-            {id = xi.jsa.HUNDRED_FISTS, hpp = 95},
-            {id = xi.jsa.MIGHTY_STRIKES, hpp = 95},
-            {id = xi.jsa.BLOOD_WEAPON, hpp = 95},
-            {id = xi.jsa.CHAINSPELL, hpp = 95},
+            { id = xi.jsa.HUNDRED_FISTS,  hpp = 95 },
+            { id = xi.jsa.MIGHTY_STRIKES, hpp = 95 },
+            { id = xi.jsa.BLOOD_WEAPON,   hpp = 95 },
+            { id = xi.jsa.CHAINSPELL,     hpp = 95 },
         },
     })
 end

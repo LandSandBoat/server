@@ -1,5 +1,5 @@
 -----------------------------------
--- func: addWeaponSkillPoints <slot> <points> {player}
+-- func: addWeaponSkillPoints <slot> <points> (player)
 -- desc: Adds weapon skill points to an equipped item.
 -----------------------------------
 require("scripts/globals/status")
@@ -12,7 +12,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!addweaponskillpoints <slot> <points> {player} (main=0, sub=1, ranged=2)")
+    player:PrintToPlayer("!addweaponskillpoints <slot main=0, sub=1, ranged=2> <points> (player)")
 end
 
 function onTrigger(player, slot, points, target)

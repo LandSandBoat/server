@@ -2,7 +2,7 @@
 -- Area: LaLoff Amphitheater
 --  Mob: Ark Angel TT
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
@@ -16,7 +16,7 @@ entity.onMobSpawn = function(mob)
         between = 30,
         specials =
         {
-            {id = xi.jsa.BLOOD_WEAPON},
+            { id = xi.jsa.BLOOD_WEAPON },
             {
                 id = xi.jsa.MANAFONT,
                 endCode = function(mobArg) -- "Uses Manafont and ... Will cast Sleepga followed by Meteor."

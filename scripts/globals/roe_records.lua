@@ -8360,8 +8360,8 @@ function getRoeRecords(triggers)
         { -- Vanquish Acuex (UC)
             trigger = triggers.mobKill,
             goal = 10,
-            reqs = { mobFamily = set{???}, mobXP = true, unityLeader = xi.roe.leaders.SYLVIE },
-            flags = set{"unity"},
+            reqs = { mobFamily = set{ ??? }, mobXP = true, unityLeader = xi.roe.leaders.SYLVIE },
+            flags = set{ "unity" },
             reward = { sparks = 100, xp = 500, accolades = 500 },
         },
 --]]

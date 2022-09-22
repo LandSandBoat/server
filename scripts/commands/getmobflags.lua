@@ -12,7 +12,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!getmobflags {mob ID}")
+    player:PrintToPlayer("!getmobflags (mob ID)")
 end
 
 function onTrigger(player, target)

@@ -4802,10 +4802,10 @@ void SmallPacket0x096(map_session_data_t* const PSession, CCharEntity* const PCh
 
     uint8 numItems = data.ref<uint8>(0x09);
 
-    std::vector<uint8> slotQty(MAX_CONTAINER_SIZE);
-
-    if (numItems > 8)
+    auto PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(invSlotID);
+    if (!PItem || ItemID != PItem->getID() || PItem->getQuantity() == 0 || numItems > 8)
     {
+        // Detect invalid crystal usage
         // Prevent crafting exploit to crash on container size > 8
         PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 316));
         return;
@@ -4813,6 +4813,7 @@ void SmallPacket0x096(map_session_data_t* const PSession, CCharEntity* const PCh
 
     PChar->CraftContainer->setItem(0, ItemID, invSlotID, 0);
 
+    std::vector<uint8> slotQty(MAX_CONTAINER_SIZE);
     for (int32 SlotID = 0; SlotID < numItems; ++SlotID)
     {
         ItemID    = data.ref<uint16>(0x0A + SlotID * 2);

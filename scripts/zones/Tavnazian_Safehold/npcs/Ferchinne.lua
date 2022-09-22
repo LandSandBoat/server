@@ -13,9 +13,9 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     local flyHigh = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.FLY_HIGH)
 
-    if flyHigh == QUEST_ACCEPTED and npcUtil.tradeHas(trade, {{xi.items.HIPPOGRYPH_TAILFEATHER, 2}}) then -- 2x Hippogryph Tailfeather
+    if flyHigh == QUEST_ACCEPTED and npcUtil.tradeHas(trade, { { xi.items.HIPPOGRYPH_TAILFEATHER, 2 } }) then -- 2x Hippogryph Tailfeather
         player:startEvent(243)
-    elseif flyHigh == QUEST_COMPLETED and npcUtil.tradeHas(trade, {{xi.items.HIPPOGRYPH_TAILFEATHER, 2}}) then -- 2x Hippogryph Tailfeather
+    elseif flyHigh == QUEST_COMPLETED and npcUtil.tradeHas(trade, { { xi.items.HIPPOGRYPH_TAILFEATHER, 2 } }) then -- 2x Hippogryph Tailfeather
         player:startEvent(245)
     end
 end

@@ -138,7 +138,7 @@ quest.sections =
             ['Jaucribaix'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, {xi.items.LUMP_OF_BOMB_STEEL, xi.items.SACRED_BRANCH}) then
+                    if npcUtil.tradeHasExactly(trade, { xi.items.LUMP_OF_BOMB_STEEL, xi.items.SACRED_BRANCH }) then
                         return quest:progressEvent(27)
                     end
                 end,
@@ -162,7 +162,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, {{xi.items.CHUNK_OF_GOLD_ORE, 2}, xi.items.CHUNK_OF_PLATINUM_ORE}) and
+                        npcUtil.tradeHasExactly(trade, { { xi.items.CHUNK_OF_GOLD_ORE, 2 }, xi.items.CHUNK_OF_PLATINUM_ORE }) and
                         quest:isVarBitsSet(player, 'Option', 1)
                     then
                         return quest:progressEvent(43, 0, 0, xi.items.CHUNK_OF_PLATINUM_ORE, xi.items.CHUNK_OF_GOLD_ORE)

@@ -56,7 +56,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, {{ xi.items.SHELL_BUG, 3 }}) and
+                        npcUtil.tradeHasExactly(trade, { { xi.items.SHELL_BUG, 3 } }) and
                         quest:getVar(player, 'Prog') == 0
                     then
                         return quest:progressEvent(84)

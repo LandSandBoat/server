@@ -4,7 +4,7 @@
 -----------------------------------
 require("scripts/globals/limbus")
 require("scripts/globals/pathfind")
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 local ID = require("scripts/zones/Temenos/IDs")
 -----------------------------------
 local entity = {}
@@ -12,10 +12,10 @@ local entity = {}
 local flags = xi.path.flag.WALLHACK
 local path =
 {
-    {185.000, -82.000, 465.000},
-    {215.000, -82.000, 465.000},
-    {215.000, -82.000, 495.500},
-    {185.000, -82.000, 495.000}
+    { 185.000, -82.000, 465.000 },
+    { 215.000, -82.000, 465.000 },
+    { 215.000, -82.000, 495.500 },
+    { 185.000, -82.000, 495.000 },
 }
 
 entity.onMobRoam = function(mob)

@@ -19,7 +19,7 @@ quest.reward =
     fame = 30,
     fameArea = xi.quest.fame_area.SANDORIA,
     item = xi.items.WING_PENDANT,
-    itemParams = {fromTrade = true},
+    itemParams = { fromTrade = true },
     title = xi.title.THE_PURE_ONE,
 }
 
@@ -79,7 +79,7 @@ quest.sections =
             ['Nouveil'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHas(trade, {{"gil", 10}}) then
+                    if npcUtil.tradeHas(trade, { { "gil", 10 } }) then
                         return quest:progressEvent(571)
                     end
                 end,
@@ -104,7 +104,7 @@ quest.sections =
                 end,
 
                 [571] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.items.BLESSED_WATERSKIN, {fromTrade = true}) then
+                    if npcUtil.giveItem(player, xi.items.BLESSED_WATERSKIN, { fromTrade = true }) then
                         player:confirmTrade()
                     end
                 end,
@@ -117,7 +117,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         npcUtil.tradeHas(trade, xi.items.BLESSED_WATERSKIN) and
-                        npcUtil.giveItem(player, xi.items.SKIN_OF_CHEVAL_RIVER_WATER, {silent = true, fromTrade = true})
+                        npcUtil.giveItem(player, xi.items.SKIN_OF_CHEVAL_RIVER_WATER, { silent = true, fromTrade = true })
                     then
                         player:confirmTrade()
                         return quest:messageSpecial(eastRonfaureID.text.CHEVAL_RIVER_WATER, xi.items.SKIN_OF_CHEVAL_RIVER_WATER)

@@ -38,11 +38,11 @@ g_mixins.dynamis_beastmen = function(dynamisBeastmenMob)
     -- "Without a proc, the coin drop rate is very low (~10%)"
     local thCurrency =
     {
-        [0] = {single = 100, hundo =  5},
-        [1] = {single = 115, hundo = 10},
-        [2] = {single = 145, hundo = 20},
-        [3] = {single = 190, hundo = 35},
-        [4] = {single = 250, hundo = 50},
+        [0] = { single = 100, hundo =  5 },
+        [1] = { single = 115, hundo = 10 },
+        [2] = { single = 145, hundo = 20 },
+        [3] = { single = 190, hundo = 35 },
+        [4] = { single = 250, hundo = 50 },
     }
 
     dynamisBeastmenMob:addListener("MAGIC_TAKE", "DYNAMIS_MAGIC_PROC_CHECK", function(target, caster, spell)

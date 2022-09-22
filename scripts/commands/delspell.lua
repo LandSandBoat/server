@@ -11,7 +11,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!delspell <spellID> {player}")
+    player:PrintToPlayer("!delspell <spellID> (player)")
 end
 
 function onTrigger(player, spellId, target)

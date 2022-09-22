@@ -127,7 +127,7 @@ quest.sections =
                     elseif
                         player:hasKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH) and
                         not player:hasKeyItem(xi.keyItem.ANNALS_OF_TRUTH) and
-                        npcUtil.popFromQM(player, npc, quicksandCavesID.mob.GIRTABLULU, {hide = 0})
+                        npcUtil.popFromQM(player, npc, quicksandCavesID.mob.GIRTABLULU, { hide = 0 })
                     then
                         return quest:messageSpecial(quicksandCavesID.text.SENSE_OMINOUS_PRESENCE)
                     end
