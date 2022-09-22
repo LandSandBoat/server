@@ -18,7 +18,6 @@ xi.dynamis = xi.dynamis or {}
 local lordText = 7284
 local yingText = 7301
 local yangText = 7302
-local busy = {xi.act.MOBABILITY_FINISH, xi.act.MOBABILITY_START, xi.act.MOBABILITY_USING, xi.act.MAGIC_CASTING, xi.act.MAGIC_START, xi.act.MAGIC_FINISH}
 local specials =
 {
     {xi.jsa.HUNDRED_FISTS, 95, "DL_Hundred_Fists"},
@@ -26,6 +25,7 @@ local specials =
     {xi.jsa.BLOOD_WEAPON, 95, "DL_Blood_Weapon"},
     {xi.jsa.CHAINSPELL, 50, "DL_Chainspell"},
 }
+
 local function spawnDwagons(oMob, target)
     local zoneID = oMob:getZoneID()
     local zone = oMob:getZone()
@@ -61,22 +61,69 @@ xi.dynamis.onSpawnDynaLord = function(mob)
     mob:setMod(xi.mod.GRAVITYRES, 100)
     mob:setMod(xi.mod.BINDRES, 100)
     mob:setMod(xi.mod.UFASTCAST, 100)
-    mob:addListener("WEAPONSKILL_STATE_ENTER", "DL_WEAPONSKILL_STATE_ENTER", function(mob, skillid)
+
+    mob:addListener("WEAPONSKILL_STATE_ENTER", "DL_WEAPONSKILL_STATE_ENTER", function(mobArg, skillid)
         if skillid == xi.jsa.HUNDRED_FISTS then
-            mob:messageText(mob, lordText + 11)
+            mobArg:messageText(mobArg, lordText + 11)
         elseif skillid == xi.jsa.MIGHTY_STRIKES then
-            mob:messageText(mob, lordText + 14)
+            mobArg:messageText(mobArg, lordText + 14)
         elseif skillid == xi.jsa.BLOOD_WEAPON then
-            mob:messageText(mob, lordText + 12)
+            mobArg:messageText(mobArg, lordText + 12)
         elseif skillid == xi.jsa.CHAINSPELL then
-            mob:messageText(mob, lordText + 13)
+            mobArg:messageText(mobArg, lordText + 13)
         end
     end)
-    mob:addListener("WEAPONSKILL_STATE_EXIT", "DL_WEAPONSKILL_STATE_EXIT", function(mobEntity, skillid)
-        local zone = mobEntity:getZone()
-        if mobEntity:getID() ~= zone:getLocalVar("179") then
+
+    mob:addListener("WEAPONSKILL_STATE_EXIT", "DL_WEAPONSKILL_STATE_EXIT", function(mobArg, skillid)
+        local zone = mobArg:getZone()
+        if mobArg:getID() ~= zone:getLocalVar("179") then
             if skillid == zone:getLocalVar("CloneMove") then
-                DespawnMob(mobEntity:getID())
+                mobArg:timer(1000, function(mobAr)
+                    DespawnMob(mobAr:getID())
+                end)
+            end
+        end
+    end)
+
+    mob:addListener("COMBAT_TICK", "DL_JSA_TICK", function(mobAr)
+        -- Handle Clone Moves
+        if mobAr:getLocalVar("ws") == 1 then
+            local move = mobAr:getZone():getLocalVar("CloneMove")
+            local target = mobAr:getTarget()
+            if move >= 1131 and move < 1134 then
+                mobAr:queue(0, function(mobArg)
+                    mobArg:setLocalVar("ws", 0)
+                    mobArg:SetMobAbilityEnabled(true)
+                    mobArg:useMobAbility(move)
+                end)
+            else
+                mobAr:queue(0, function(mobArg)
+                    mobArg:setLocalVar("ws", 0)
+                    mobArg:SetMobAbilityEnabled(true)
+                    mobArg:useMobAbility(move, mobArg:getTarget())
+                end)
+            end
+        else
+            if mobAr:getID() == mobAr:getZone():getLocalVar("179") then
+                mobAr:getZone():setLocalVar("DL_HP", mobAr:getHP())
+                mobAr:SetMagicCastingEnabled(true)
+                mobAr:SetMobAbilityEnabled(true)
+                mobAr:SetAutoAttackEnabled(true)
+            end
+        end
+
+        -- Handle JSAs
+        if mobAr:getID() == mobAr:getZone():getLocalVar("179") and mobAr:getZone():getLocalVar("2hrCool") <= os.time() then
+            for _, table in pairs(specials) do
+                if mobAr:getZone():getLocalVar(table[3]) ~= 1 and mob:getHPP() <= table[2] then
+                    mobAr:queue(0, function(mobArg)
+                        mobArg:useMobAbility(table[1])
+                        mobArg:setLocalVar("ws", 0)
+                    end)
+                    mobAr:getZone():setLocalVar(table[3], 1)
+                    mobAr:getZone():setLocalVar("2hrCool", os.time() + 30)
+                    break
+                end
             end
         end
     end)
@@ -123,74 +170,37 @@ xi.dynamis.onEngagedDynaLord = function(mob, target)
     else
         mob:showText(mob, lordText + 8) -- Immortal Drakes, deafeated
         zone:setLocalVar("teraTime", os.time() + math.random(90,120))
+        zone:setLocalVar("dwagonLastPop", os.time() + 30)
     end
 end
 
 xi.dynamis.onFightDynaLord = function(mob, target)
     local zone = mob:getZone()
     local mainLord = zone:getLocalVar("179")
-    local cloneMove = zone:getLocalVar("CloneMove")
     local teraTime = zone:getLocalVar("teraTime")
-    local ws = mob:getLocalVar("ws")
-    local dwagonVars =
-    {
-        ["ying_killed"] = {zone:getLocalVar("178"),178, 179, "Ying"},
-        ["yang_killed"] = {zone:getLocalVar("177"), 177, 179, "Yang"},
-    }
 
     if mob:getID() ~= mainLord then
         mob:SetMagicCastingEnabled(false)
         mob:SetAutoAttackEnabled(false)
         mob:SetMobAbilityEnabled(false)
+        mob:setDropID(0)
     end
 
-    if zone:getLocalVar("dwagonSpawn") == 0 then
-        zone:setLocalVar("dwagonSpawn", os.time() + 30)
-    end
-
-    if ws == 1 then
-        mob:queue(10, function(mob) mob:useMobAbility(cloneMove) mob:setLocalVar("ws", 0) end)
-    end
-
-    if mob:getLocalVar("ws") == 0 and mob:getID() == mainLord then
-        zone:setLocalVar("DL_HP", mob:getHP())
-        mob:SetMagicCastingEnabled(true)
-        mob:SetMobAbilityEnabled(true)
-        mob:SetAutoAttackEnabled(true)
-
-        if mob:getID() == mainLord and zone:getLocalVar("2hrCool") <= os.time() then
-            for _, table in pairs(specials) do
-                if zone:getLocalVar(table[3]) ~= 1 and mob:getHPP() <= table[2] then
-                    mob:useMobAbility(table[1])
-                    zone:setLocalVar(table[3], 1)
-                    zone:setLocalVar("2hrCool", os.time() + 30)
-                    break
-                end
-            end
-        end
-
-        for key, var in pairs(dwagonVars) do -- Update Ying and Yang to Attack Current Target
-            if zone:getLocalVar(key) == 0 then
-                local dwagon = GetMobByID(var[1])
-                if not dwagon:isEngaged() then
-                    dwagon:updateEnmity(target)
-                end
-            end
-        end
-
+    if mob:getLocalVar("ws") == 0 then
         if os.time() > teraTime and mob:getID() == mainLord and mob:getLocalVar("cloneSpawn") <= os.time() then
             mob:setLocalVar("cloneSpawn", os.time() + 5)
             mob:entityAnimationPacket("casm")
             mob:SetAutoAttackEnabled(false)
             mob:SetMagicCastingEnabled(false)
             mob:SetMobAbilityEnabled(false)
-            mob:timer(3000, function(mob, target)
-                spawnClones(mob, target)
-                zone:setLocalVar("CloneMove", math.random(1131,1135))
-                mob:setLocalVar("ws", 1)
+            mob:timer(3000, function(mobArg, targetArg)
+                spawnClones(mobArg, targetArg)
+                local cloneMoves = {1131, 1133, 1134}
+                zone:setLocalVar("CloneMove", cloneMoves[math.random(1, #cloneMoves)])
+                mobArg:setLocalVar("ws", 1)
                 zone:setLocalVar("teraTime", os.time() + math.random(90,120))
-                mob:entityAnimationPacket("shsm")
-                mob:SetMobAbilityEnabled(true)
+                mobArg:entityAnimationPacket("shsm")
+                mobArg:SetMobAbilityEnabled(true)
             end)
         end
 
@@ -201,18 +211,34 @@ xi.dynamis.onFightDynaLord = function(mob, target)
                 mob:SetMagicCastingEnabled(false)
                 mob:SetMobAbilityEnabled(false)
                 mob:entityAnimationPacket("casm")
-                mob:timer(3000, function (mob, target)
-                    spawnDwagons(mob, target)
-                    mob:entityAnimationPacket("shsm")
-                    mob:SetAutoAttackEnabled(true)
-                    mob:SetMagicCastingEnabled(true)
-                    mob:SetMobAbilityEnabled(true)
-                    if mob:getLocalVar("initialSpawnDialog") ~= 1 and mob:getID() == mainLord then
-                        mob:showText(mob, lordText + 7)
-                        mob:setLocalVar("initialSpawnDialog", 1)
+                mob:timer(3000, function (mobArg, targetArg)
+                    spawnDwagons(mobArg, targetArg)
+                    mobArg:entityAnimationPacket("shsm")
+                    mobArg:SetAutoAttackEnabled(true)
+                    mobArg:SetMagicCastingEnabled(true)
+                    mobArg:SetMobAbilityEnabled(true)
+                    if mobArg:getLocalVar("initialSpawnDialog") ~= 1 and mobArg:getID() == mainLord then
+                        mobArg:showText(mob, lordText + 7)
+                        mobArg:setLocalVar("initialSpawnDialog", 1)
                     end
-                    zone:setLocalVar("dwagonLastPop", os.time() + 30)
                 end)
+            end
+        end
+
+        local dwagonVars =
+        {
+            ["ying_killed"] = {zone:getLocalVar("178"),178, 179, "Ying"},
+            ["yang_killed"] = {zone:getLocalVar("177"), 177, 179, "Yang"},
+        }
+
+        if mob:getID() == mob:getZone():getLocalVar("179") then
+            for key, var in pairs(dwagonVars) do -- Update Ying and Yang to Attack Current Target
+                if mob:getZone():getLocalVar(key) == 0 then
+                    local dwagon = GetMobByID(var[1])
+                    if not dwagon:isEngaged() then
+                        dwagon:updateEnmity(target)
+                    end
+                end
             end
         end
     end
@@ -301,6 +327,7 @@ xi.dynamis.onDeathYing = function(mob, player, isKiller)
     if isKiller then
         if zone:getLocalVar("yang_killed") == 0 then
             mob:showText(mob, yingText + 2)
+            zone:setLocalVar("dwagonLastPop", os.time() + 30)
         else
             mob:showText(mob, yingText)
         end
@@ -329,6 +356,7 @@ xi.dynamis.onDeathYang = function(mob, player, isKiller)
     if isKiller then
         if zone:getLocalVar("ying_killed") == 0 then
             mob:showText(mob, yangText + 2)
+            zone:setLocalVar("dwagonLastPop", os.time() + 30)
         else
             mob:showText(mob, yangText)
         end

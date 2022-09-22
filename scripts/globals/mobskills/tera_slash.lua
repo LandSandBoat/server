@@ -19,11 +19,12 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local dmg = 0
-    if mob:getHPP() <= 25 then
+    if mob:getHPP() <= 25 and math.random() > 0.50 then
         dmg = target:getHP()
         target:setHP(0)
         return dmg
     end
+
     local numhits = 1
     local accmod = 2
     local dmgmod = 5

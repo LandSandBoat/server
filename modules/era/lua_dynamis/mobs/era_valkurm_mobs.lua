@@ -74,7 +74,7 @@ xi.dynamis.onSpawnCirrate = function(mob)
         mob:getZone():setLocalVar("cirrate_tp", 0)
         mob:setTP(0)
     end)
-    mob:setRoamFlags(xi.roamFlag.EVENT)
+    mob:setRoamFlags(xi.roamFlag.SCRIPTED)
     xi.dynamis.setMegaBossStats(mob)
     -- Set Mods
     mob:setSpeed(140)
@@ -89,14 +89,15 @@ end
 
 xi.dynamis.onFightMorbol = function(mob, target)
     local cirrateID = mob:getLocalVar("ParentID")
-    mob:speed(GetMobByID(cirrateID):getSpeed())
+    mob:setSpeed(GetMobByID(cirrateID):getSpeed())
 end
 
 xi.dynamis.onEngagedCirrate = function(mob, target)
     local zoneID = mob:getZoneID()
     local flytrapKills = checkFlytrapKills(mob)
     local morbolKills = checkMorbolKills(mob)
-    if flytrapKills < 3 and morbolKills == 0 then
+    if flytrapKills < 3 and morbolKills == 0 and mob:getLocalVar("spawnedPets") == 0 then
+        mob:setLocalVar("spawnedPets", 1)
         xi.dynamis.nmDynamicSpawn(289, 24, true, zoneID, target, mob)
         xi.dynamis.nmDynamicSpawn(290, 24, true, zoneID, target, mob)
     end

@@ -14,7 +14,7 @@ local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CRYING_OV
 
 quest.reward =
 {
-    fame     = 120,
+    fame     = 80,
     fameArea = xi.quest.fame_area.WINDURST,
 }
 
@@ -24,7 +24,8 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ONION_RINGS)
+                player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.ONION_RINGS) and
+                player:getFameLevel(xi.quest.fame_area.WINDURST) >= 5
         end,
 
         [xi.zone.PORT_WINDURST] =
