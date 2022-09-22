@@ -74,6 +74,12 @@ zones[xi.zone.JUGNER_FOREST] =
             [17203447] = 17203448,
         },
 
+        TIMELY_VISIT =
+        {
+            17203666,
+            17203667,
+        },
+
         KING_ARTHRO          = 17203216,
         FRAELISSA            = 17203447,
         FRADUBIO             = 17203448,

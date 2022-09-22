@@ -12,9 +12,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCharVar("Quest[0][105]Prog") ~= 6 then
-        player:messageSpecial(ID.text.DUG_UP)
-    end
+    player:messageSpecial(ID.text.DUG_UP)
 end
 
 entity.onEventUpdate = function(player, csid, option)

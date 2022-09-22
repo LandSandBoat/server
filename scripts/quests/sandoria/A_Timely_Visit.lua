@@ -62,7 +62,7 @@ quest.sections =
                     if quest:getVar(player, 'Prog') == 1 then
                         return quest:progressEvent(80)
                     elseif quest:getVar(player, 'Prog') == 2 then
-                        return quest:progressEvent(20) -- Additional Dialogue
+                        return quest:event(20) -- Additional Dialogue
                     elseif quest:getVar(player, 'Prog') == 3 then
                         return quest:progressEvent(87)
                     elseif quest:getVar(player, 'Prog') == 5 then
@@ -134,7 +134,7 @@ quest.sections =
                     if quest:getVar(player, 'Prog') == 0 then
                         return quest:progressEvent(0)
                     elseif quest:getVar(player, 'Prog') == 1 then
-                        return quest:progressEvent(6) -- Additional Dialogue
+                        return quest:event(6) -- Additional Dialogue
                     elseif quest:getVar(player, 'Prog') == 9 then
                         return quest:progressEvent(1)
                     end
@@ -157,34 +157,27 @@ quest.sections =
             ['qm1'] =
             {
                 onTrigger = function(player, npc)
-                    local mobID = GetMobByID(17203666)
-                    local time = false
-                    local check = false
-
-                    -- Check time
-                    if VanadielHour() <= 6 or VanadielHour() >= 18 then
-                        time = true
-                    end
-
-                    -- Check if mobs alive
-                    for i = 0, 1 do
-                        if mobID:isAlive() then
-                            check = false
-                        end
-                    end
-
                     if quest:getVar(player, 'Prog') == 6 then
-                        if check and time then
-                            player:messageSpecial(ID.text.FOREBODING)
-                            for i = 0, 1 do
-                                SpawnMob(mobID:getID()+i):updateClaim(player)
-                            end
+                        if
+                            (VanadielHour() <= 6 or VanadielHour() >= 18) and
+                            npcUtil.popFromQM(player, npc, ID.mob.TIMELY_VISIT, {claim = true, hide = 0})
+                        then
+                            return quest:messageText(ID.text.FOREBODING)
                         else
-                            player:messageSpecial(ID.text.PRETERNATURAL_FORCES)
+                            return quest:messageText(ID.text.PRETERNATURAL_FORCES)
                         end
 
                     elseif quest:getVar(player, 'Prog') == 7 then
                         return quest:progressEvent(18)
+                    end
+                end,
+            },
+
+            ['Giollemitte_B_Feuron'] =
+            {
+                onMobDeath = function(mob, player, isKiller, firstCall)
+                    if quest:getVar(player, 'Prog') == 6 then
+                        quest:setVar(player, 'Prog', 7)
                     end
                 end,
             },
