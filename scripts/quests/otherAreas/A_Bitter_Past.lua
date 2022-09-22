@@ -53,8 +53,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.ki.TINY_WRISTLET) then
-                    else
-                        return quest:event(158)
+                        return quest:progressEvent(158)
                     end
                 end,
             },
@@ -62,7 +61,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if quest:getVar(player, 'Prog') == 0 then
-                    return quest:event(152)
+                        return quest:progressEvent(152)
                     end
                 end,
             },
@@ -70,7 +69,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if quest:getVar(player, 'Prog') == 1 then
-                        return quest:event(153)
+                        return quest:progressEvent(153)
                     end
                 end,
             },
@@ -98,15 +97,11 @@ quest.sections =
             ['qm_bitter_past'] =
             {
                 onTrigger = function(player, npc)
-                    local mobIDs =
-                    {
-                        16875775,
-                        16875776,
-                    }
                     if quest:getVar(player, 'Prog') == 2 then
-                        npcUtil.popFromQM(player, npc, mobIDs, {claim = true})
+                        return npcUtil.popFromQM(player, npc, ID.mob.BITTER_PAST_MOBS, {claim = true, hide = 0})
+
                     elseif not player:hasKeyItem(xi.ki.TINY_WRISTLET) then
-                        npcUtil.giveKeyItem(player, xi.ki.TINY_WRISTLET)
+                        return npcUtil.giveKeyItem(player, xi.ki.TINY_WRISTLET)
                     end
                 end,
             },
@@ -114,12 +109,8 @@ quest.sections =
             ['Splinterspine_Grukjuk'] =
             {
                 onMobDeath = function(mob, player)
-                    local party = player:getParty()
-
-                    for _, v in ipairs(party) do
-                        if v:getZone() == player:getZone() and quest:getVar(v, 'Prog') == 2 then
-                            quest:setVar(v, 'Prog', 3)
-                        end
+                    if quest:getVar(player, 'Prog') == 2 then
+                        quest:setVar(player, 'Prog', 3)
                     end
                 end,
             },
@@ -137,7 +128,7 @@ quest.sections =
             ['Equette'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:event(155)
+                    return quest:progressEvent(155)
                 end,
             },
 
