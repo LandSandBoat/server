@@ -294,6 +294,8 @@ void CLuaBattlefield::lose()
 
 void CLuaBattlefield::addGroups(sol::table groups)
 {
+    int16 superlinkId = 1;
+
     for (auto entry : groups)
     {
         sol::table groupData = entry.second.as<sol::table>();
@@ -328,6 +330,12 @@ void CLuaBattlefield::addGroups(sol::table groups)
             setup(mobs);
         }
 
+        bool superlink = groupData.get_or("superlink", false);
+        if (superlink)
+        {
+            ++superlinkId;
+        }
+
         bool stationary = groupData.get_or("stationary", false);
         auto mods       = groupData["mods"];
         if (stationary || mods.valid())
@@ -336,6 +344,11 @@ void CLuaBattlefield::addGroups(sol::table groups)
             {
                 auto PMob = dynamic_cast<CMobEntity*>(zoneutils::GetEntity(mobId, TYPE_MOB | TYPE_PET));
                 XI_DEBUG_BREAK_IF(PMob == nullptr);
+
+                if (superlink)
+                {
+                    PMob->setMobMod(MOBMOD_SUPERLINK, superlinkId);
+                }
 
                 if (stationary)
                 {
