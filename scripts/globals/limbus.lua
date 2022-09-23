@@ -522,6 +522,7 @@ function xi.limbus.openDoor(battlefield, doorID)
     local door = GetNPCByID(doorID)
     local ID = zones[door:getZoneID()]
     local remaining = battlefield:getRemainingTime() / 60
+
     for i, player in pairs(battlefield:getPlayers()) do
         player:messageSpecial(ID.text.GATE_OPEN)
         player:messageSpecial(ID.text.TIME_LEFT, remaining)
@@ -533,6 +534,7 @@ function xi.limbus.extendTimeLimit(ID, battlefield, amount)
     local timeLimit = battlefield:getTimeLimit()
     battlefield:setTimeLimit(timeLimit + amount * 60)
     local remaining = battlefield:getRemainingTime() / 60
+
     for _, player in pairs(battlefield:getPlayers()) do
         player:messageSpecial(ID.text.TIME_EXTENDED, amount)
         player:messageSpecial(ID.text.TIME_LEFT, remaining)
@@ -564,8 +566,6 @@ end
 function LimbusArea:createBattlefield()
     local battlefield_object = {}
 
-    print("Creating Limbus Battlefield for " .. self.name)
-
     battlefield_object.onBattlefieldInitialise = function(battlefield)
         battlefield:setLocalVar("loot", 1)
         SetServerVariable(self.serverVar, battlefield:getTimeLimit() / 60)
@@ -588,10 +588,6 @@ function LimbusArea:createBattlefield()
             crate:addListener("ON_TRIGGER", "TRIGGER_ITEM_CRATE", function(player, npc)
                 npcUtil.openCrate(npc, function()
                     xi.limbus.handleLootRolls(battlefield, self.loot[crateID], nil, npc)
-                    if (npc:getLocalVar("win") == 1) then
-                        battlefield:setLocalVar("cutsceneTimer", 10)
-                        battlefield:setLocalVar("lootSeen", 1)
-                    end
                 end)
             end)
         end
@@ -609,6 +605,7 @@ function LimbusArea:createBattlefield()
         end
 
         -- Setup Recover Crates
+        -- Recover crates are special in that they are mobs that perform a skill on the player when triggered
         for i, crateID in ipairs(ID.npc.RECOVER_CRATES) do
             local crate = GetMobByID(crateID)
             xi.limbus.hideCrate(crate)
@@ -622,6 +619,7 @@ function LimbusArea:createBattlefield()
         end
 
         -- Setup Winning Loot Crate
+        -- Winning crate is mostly setup through bcnm_treasure and is spawned automatically when boss is killed
         local crate = GetNPCByID(ID.npc.LOOT_CRATE)
         crate:resetLocalVars()
         crate:removeListener("TRIGGER_LOOT_CRATE")

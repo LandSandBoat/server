@@ -202,6 +202,7 @@ area.groups =
         setup = function(mobs)
             local battlefield = mobs[1]:getBattlefield()
             local timeCrateIndex, recoverCrateIndex, itemCrateIndex = unpack(utils.uniqueRandomTable(1, 6, 3))
+
             battlefield:setLocalVar("timeCrateIndex", timeCrateIndex)
             battlefield:setLocalVar("recoverCrateIndex", recoverCrateIndex)
             battlefield:setLocalVar("itemCrateIndex", itemCrateIndex)
@@ -212,10 +213,12 @@ area.groups =
                 local crate = GetNPCByID(ID.SE_APOLLYON.npc.TIME_CRATES[3])
                 crate:setPos(floorThreeCratePositions[battlefield:getLocalVar("timeCrateIndex")])
                 xi.limbus.showCrate(ID.SE_APOLLYON.npc.TIME_CRATES[3])
+
             elseif count == 4 then
                 local crate = GetMobByID(ID.SE_APOLLYON.npc.RECOVER_CRATES[3])
                 crate:setPos(floorThreeCratePositions[battlefield:getLocalVar("recoverCrateIndex")])
                 xi.limbus.showRecoverCrate(ID.SE_APOLLYON.npc.RECOVER_CRATES[3])
+
             elseif count == 8 then
                 local crate = GetNPCByID(ID.SE_APOLLYON.npc.ITEM_CRATES[3])
                 crate:setPos(floorThreeCratePositions[battlefield:getLocalVar("itemCrateIndex")])

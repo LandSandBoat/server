@@ -899,6 +899,7 @@ function npcUtil.disappearCrate(crate)
             npc:setStatus(xi.status.DISAPPEAR)
         end)
     else
+        -- Some crates, such as Recover Crates in Limbus, are actually mobs that look like NPCs
         DespawnMob(crate:getID())
     end
 end
@@ -908,6 +909,7 @@ function npcUtil.openCrate(crate, callback)
         crate:setLocalVar("opened", 1)
         callback()
         crate:entityAnimationPacket("openH")
+
         crate:timer(7000, function(npc)
             npcUtil.disappearCrate(npc)
         end)
