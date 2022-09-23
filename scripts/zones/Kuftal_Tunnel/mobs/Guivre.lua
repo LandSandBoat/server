@@ -202,10 +202,8 @@ entity.onPath = function(mob)
                 x = x, y = y, z = z, rotation = math.random(0,255),
                 wait = wait }
             end
-            mob:timer(math.random(1500, 3000), function(mob)
-                mob:pathThrough(rotations, xi.path.flag.COORDS)
-                mob:setLocalVar("isPaused", 1)
-            end)
+            mob:pathThrough(rotations, xi.path.flag.COORDS)
+            mob:setLocalVar("isPaused", 1)
         end
     end
 end
