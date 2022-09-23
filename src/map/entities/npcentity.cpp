@@ -78,17 +78,17 @@ void CNpcEntity::SetUntargetable(bool untargetable)
 {
     if (untargetable)
     {
-        m_flags |= 0x800;
+        m_flags |= FLAG_UNTARGETABLE;
     }
     else
     {
-        m_flags &= ~0x800;
+        m_flags &= ~FLAG_UNTARGETABLE;
     }
 }
 
 bool CNpcEntity::GetUntargetable() const
 {
-    return (m_flags & 0x800) == 0x800;
+    return (m_flags & FLAG_UNTARGETABLE) == FLAG_UNTARGETABLE;
 }
 
 bool CNpcEntity::IsTriggerable() const

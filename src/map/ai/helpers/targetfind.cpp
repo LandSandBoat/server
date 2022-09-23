@@ -429,7 +429,7 @@ bool CTargetFind::validEntity(CBattleEntity* PTarget)
         return false;
     }
 
-    if (m_PTarget == PTarget || PTarget->getZone() != m_zone || !PTarget->IsTargetable() || PTarget->status == STATUS_TYPE::INVISIBLE)
+    if (m_PTarget == PTarget || PTarget->getZone() != m_zone || PTarget->GetUntargetable() || PTarget->status == STATUS_TYPE::INVISIBLE)
     {
         return false;
     }
