@@ -31,7 +31,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if (csid == 703) then
-        player:setCharVar("TheMissingPiece_date", os.time() + 60)
+        player:setCharVar("TheMissingPiece_date", getMidnight())
         player:addTitle(xi.title.ACQUIRER_OF_ANCIENT_ARCANUM)
         player:delKeyItem(xi.ki.TABLET_OF_ANCIENT_MAGIC)
         player:delKeyItem(xi.ki.LETTER_FROM_ALFESAR)

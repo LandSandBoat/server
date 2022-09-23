@@ -60,6 +60,7 @@ entity.onEventFinish = function(player, csid, option)
     if csid == 227 then
         player:setCharVar("ChocobiliousQuest", 1)
     elseif csid == 229 then
+        player:tradeComplete()
         player:setCharVar("ChocobiliousQuest", 2)
 
     -- PAYING LIP SERVICE

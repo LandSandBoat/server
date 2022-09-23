@@ -440,9 +440,9 @@ xi.dynamis.mobList[zoneID].waveDefeatRequirements =
 
 xi.dynamis.mobList[zoneID][1].wave =
 {
-    21 , -- ( 021 ) Recover subjobs
-    22 , -- ( 022 ) Recover subjobs
-    23 , -- ( 023 ) Recover subjobs
+    21 , -- ( 021 ) Nightmare Flys - Recover subjobs
+    22 , -- ( 022 ) Nightmare Flys - Recover subjobs
+    23 , -- ( 023 ) Nightmare Flys - Recover subjobs
     5  , -- ( 005 ) Fairy Ring
     10 , -- ( 010 ) Flytrap NMs
     15 , -- ( 015 ) Stcemqestcint
@@ -463,7 +463,31 @@ xi.dynamis.mobList[zoneID][1].wave =
     16 , -- (016-Q) Adamantking Effigy
     17 , -- (017-Q) Adamantking Effigy
     18 , -- (018-Q) Adamantking Effigy
-    19 , -- (019-Q) Adamantking Effigy
+    19   -- (019-Q) Adamantking Effigy
+}
+
+xi.dynamis.mobList[zoneID][2].wave =
+{
+    33 , -- (033-Y) Manifest Icon
+    34 , -- (034-Y) Manifest Icon
+    35 , -- (035-Y) Manifest Icon
+    36 , -- (036-Y) Manifest Icon
+    37 , -- (037-Y) Manifest Icon
+    38 , -- (038-G) Goblin Replica
+    39 , -- (039-G) Goblin Replica
+    40 , -- (040-G) Goblin Replica
+    41 , -- (041-G) Goblin Replica
+    42 , -- (042-G) Goblin Replica
+    43 , -- (043-O) Serjeant Tombstone
+    44 , -- (044-O) Serjeant Tombstone
+    45 , -- (045-O) Serjeant Tombstone
+    46 , -- (046-O) Serjeant Tombstone
+    47 , -- (047-O) Serjeant Tombstone
+    48 , -- (048-Q) Adamantking Effigy
+    49 , -- (049-Q) Adamantking Effigy
+    50 , -- (050-Q) Adamantking Effigy
+    51 , -- (051-Q) Adamantking Effigy
+    52 , -- (052-Q) Adamantking Effigy
     110, -- ( 110 ) Nightmare Manticore (×3)
     111, -- ( 111 ) Nightmare Manticore (×3)
     112, -- ( 112 ) Nightmare Manticore (×3)
@@ -541,30 +565,6 @@ xi.dynamis.mobList[zoneID][1].wave =
     84 , -- ( 084 ) Nightmare Hippogryph (×3)
     85 , -- ( 085 ) Nightmare Hippogryph (×3)
     86   -- ( 086 ) Nightmare Hippogryph (×3)
-}
-
-xi.dynamis.mobList[zoneID][2].wave =
-{
-    33 , -- (033-Y) Manifest Icon
-    34 , -- (034-Y) Manifest Icon
-    35 , -- (035-Y) Manifest Icon
-    36 , -- (036-Y) Manifest Icon
-    37 , -- (037-Y) Manifest Icon
-    38 , -- (038-G) Goblin Replica
-    39 , -- (039-G) Goblin Replica
-    40 , -- (040-G) Goblin Replica
-    41 , -- (041-G) Goblin Replica
-    42 , -- (042-G) Goblin Replica
-    43 , -- (043-O) Serjeant Tombstone
-    44 , -- (044-O) Serjeant Tombstone
-    45 , -- (045-O) Serjeant Tombstone
-    46 , -- (046-O) Serjeant Tombstone
-    47 , -- (047-O) Serjeant Tombstone
-    48 , -- (048-Q) Adamantking Effigy
-    49 , -- (049-Q) Adamantking Effigy
-    50 , -- (050-Q) Adamantking Effigy
-    51 , -- (051-Q) Adamantking Effigy
-    52   -- (052-Q) Adamantking Effigy
 }
 
 ----------------------------------------------------------------------------------------------------
