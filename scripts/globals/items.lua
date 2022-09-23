@@ -1145,6 +1145,7 @@ xi.items =
     DAEDALUS_WING                   = 4202,
     BOTTLE_OF_CATHOLICON            = 4206,
     ICARUS_WING                     = 4213,
+    STONE_QUIVER                    = 4219,
     BONE_QUIVER                     = 4220,
     BEETLE_QUIVER                   = 4221,
     HORN_QUIVER                     = 4222,
