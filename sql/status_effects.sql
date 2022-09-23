@@ -599,7 +599,7 @@ INSERT INTO `status_effects` VALUES (575,'gestation',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (576,'doubt',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (577,'cait_siths_favor',32,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (578,'fishy_intuition',32,0,0,0,0,0,0,0,0);
-INSERT INTO `status_effects` VALUES (579,'commitment',32,0,0,0,0,0,0,0,0);
+INSERT INTO `status_effects` VALUES (579,'commitment',0,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (580,'geo_haste',8388640,0,0,0,0,0,3,0,0);
 INSERT INTO `status_effects` VALUES (581,'flurry_ii',4194336,0,0,0,0,0,0,0,0);
 INSERT INTO `status_effects` VALUES (583,'apogee',2097185,0,0,0,0,0,0,0,0);
