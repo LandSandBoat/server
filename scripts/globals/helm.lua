@@ -1229,14 +1229,14 @@ local helmInfo =
             {
                 drops =
                 {
-                    {1130,   642 }, -- Zinc Ore
-                    { 940,   643 }, -- Iron Ore
-                    {1040, 17296 }, -- Pebble
-                    { 970,   641 }, -- Tin Ore
-                    { 900,   644 }, -- Mythril Ore
-                    { 900,   736 }, -- Silver Ore
-                    { 800,   640 }, -- Copper Ore
-                    { 100,   738 }, -- Platinum Ore
+                    { 1130,   642 }, -- Zinc Ore
+                    {  940,   643 }, -- Iron Ore
+                    { 1040, 17296 }, -- Pebble
+                    {  970,   641 }, -- Tin Ore
+                    {  900,   644 }, -- Mythril Ore
+                    {  900,   736 }, -- Silver Ore
+                    {  800,   640 }, -- Copper Ore
+                    {  100,   738 }, -- Platinum Ore
                 },
 
                 points =
