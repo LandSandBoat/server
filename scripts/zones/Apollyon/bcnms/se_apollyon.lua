@@ -271,69 +271,180 @@ area.loot =
 {
     [ID.SE_APOLLYON.npc.ITEM_CRATES[1]] =
     {
-        { { itemid = xi.items.ANCIENT_BEASTCOIN, droprate = xi.battlefield.dropChance.NORMAL } },
-        { { itemid = xi.items.ANCIENT_BEASTCOIN, droprate = xi.battlefield.dropChance.NORMAL } },
-        { { itemid = xi.items.ANCIENT_BEASTCOIN, droprate = xi.battlefield.dropChance.NORMAL } },
-        { { itemid = xi.items.ANCIENT_BEASTCOIN, droprate = xi.battlefield.dropChance.NORMAL } },
         {
-            { itemid = xi.items.NONE, droprate = xi.battlefield.dropChance.NORMAL },
-            { itemid = xi.items.SQUARE_OF_CARDINAL_CLOTH, droprate = xi.battlefield.dropChance.NORMAL },
+            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
         },
+
         {
-            { itemid = xi.items.NONE, droprate = xi.battlefield.dropChance.NORMAL },
-            { itemid = xi.items.SPOOL_OF_LIGHT_FILAMENT, droprate = xi.battlefield.dropChance.NORMAL },
+            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
+        },
+
+        {
+            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
+        },
+
+        {
+            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
+        },
+
+        {
+            { itemid =    0, droprate = 1000 }, -- Nothing
+            { itemid = 1939, droprate =  350 }, -- RDM
+            { itemid = 1941, droprate =  278 }, -- THF
+            { itemid = 1959, droprate =  174 }, -- SMN
+            { itemid = 1949, droprate =  200 }, -- BRD
+            { itemid = 1945, droprate =   47 }, -- DRK
+            { itemid = 1951, droprate =   49 }, -- RNG
+            { itemid = 1955, droprate =  200 }, -- NIN
+            { itemid = 2659, droprate =   62 }, -- COR
+            { itemid = 2715, droprate =  407 }, -- DNC
+        },
+
+        {
+            { itemid =    0, droprate = 1000 }, -- Nothing
+            { itemid = 1939, droprate =  350 }, -- RDM
+            { itemid = 1941, droprate =  278 }, -- THF
+            { itemid = 1959, droprate =  174 }, -- SMN
+            { itemid = 1949, droprate =  200 }, -- BRD
+            { itemid = 1945, droprate =   47 }, -- DRK
+            { itemid = 1951, droprate =   49 }, -- RNG
+            { itemid = 1955, droprate =  200 }, -- NIN
+            { itemid = 2659, droprate =   62 }, -- COR
+            { itemid = 2715, droprate =  407 }, -- DNC
         },
     },
     [ID.SE_APOLLYON.npc.ITEM_CRATES[2]] =
     {
-        { { itemid = xi.items.ANCIENT_BEASTCOIN, droprate = xi.battlefield.dropChance.NORMAL } },
-        { { itemid = xi.items.ANCIENT_BEASTCOIN, droprate = xi.battlefield.dropChance.NORMAL } },
-        { { itemid = xi.items.ANCIENT_BEASTCOIN, droprate = xi.battlefield.dropChance.NORMAL } },
-        { { itemid = xi.items.ANCIENT_BEASTCOIN, droprate = xi.battlefield.dropChance.NORMAL } },
         {
-            { itemid = xi.items.NONE, droprate = xi.battlefield.dropChance.NORMAL },
-            { itemid = xi.items.SQUARE_OF_CHARCOAL_COTTON, droprate = xi.battlefield.dropChance.NORMAL },
-            { itemid = xi.items.SPOOL_OF_DIABOLIC_YARN, droprate = xi.battlefield.dropChance.NORMAL },
-            { itemid = xi.items.FETID_LANOLIN_CUBE, droprate = xi.battlefield.dropChance.NORMAL },
+            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
         },
+
         {
-            { itemid = xi.items.NONE, droprate = xi.battlefield.dropChance.NORMAL },
-            { itemid = xi.items.ANCIENT_BRASS_INGOT, droprate = xi.battlefield.dropChance.NORMAL },
+            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
+        },
+
+        {
+            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
+        },
+
+        {
+            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
+        },
+
+        {
+            { itemid = 1959, droprate =  47 }, -- SMN
+            { itemid = 1949, droprate =  30 }, -- BRD
+            { itemid = 1943, droprate = 200 }, -- PLD
+            { itemid = 1947, droprate = 460 }, -- BST
+            { itemid = 2661, droprate = 400 }, -- PUP
+            { itemid = 1951, droprate =  20 }, -- RNG
+            { itemid = 1955, droprate =  80 }, -- NIN
+            { itemid = 1945, droprate =  90 }, -- DRK
+            { itemid = 2659, droprate = 100 }, -- COR
+            { itemid = 2715, droprate = 120 }, -- DNC
+        },
+
+        {
+            { itemid =    0, droprate = 999 }, -- Nothing
+            { itemid = 1959, droprate =  47 }, -- SMN
+            { itemid = 1949, droprate =  30 }, -- BRD
+            { itemid = 1943, droprate = 200 }, -- PLD
+            { itemid = 1947, droprate = 460 }, -- BST
+            { itemid = 2661, droprate = 400 }, -- PUP
+            { itemid = 1951, droprate =  20 }, -- RNG
+            { itemid = 1955, droprate =  80 }, -- NIN
+            { itemid = 1945, droprate =  90 }, -- DRK
+            { itemid = 2659, droprate = 100 }, -- COR
+            { itemid = 2715, droprate = 120 }, -- DNC
         },
     },
     [ID.SE_APOLLYON.npc.ITEM_CRATES[3]] =
     {
-        { { itemid = xi.items.ANCIENT_BEASTCOIN, droprate = xi.battlefield.dropChance.NORMAL } },
-        { { itemid = xi.items.ANCIENT_BEASTCOIN, droprate = xi.battlefield.dropChance.NORMAL } },
-        { { itemid = xi.items.ANCIENT_BEASTCOIN, droprate = xi.battlefield.dropChance.NORMAL } },
-        { { itemid = xi.items.ANCIENT_BEASTCOIN, droprate = xi.battlefield.dropChance.NORMAL } },
         {
-            { itemid = xi.items.SQUARE_OF_FLAMESHUN_CLOTH, droprate = xi.battlefield.dropChance.NORMAL },
-            { itemid = xi.items.BLACK_RIVET, droprate = xi.battlefield.dropChance.NORMAL },
-            { itemid = xi.items.SQUARE_OF_BROWN_DOESKIN, droprate = xi.battlefield.dropChance.NORMAL },
-            { itemid = xi.items.SQUARE_OF_CANVAS_TOILE, droprate = xi.battlefield.dropChance.NORMAL },
+            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
         },
+
         {
-            { itemid = xi.items.NONE, droprate = xi.battlefield.dropChance.EXTREMELY_HIGH },
-            { itemid = xi.items.SHEET_OF_KUROGANE, droprate = xi.battlefield.dropChance.NORMAL },
+            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
+        },
+
+        {
+            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
+        },
+
+        {
+            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
+        },
+
+        {
+            { itemid =    0, droprate = 999 }, -- Nothing
+            { itemid = 1955, droprate =  59 }, -- NIN
+            { itemid = 1959, droprate = 139 }, -- SMN
+            { itemid = 1949, droprate =  39 }, -- BRD
+            { itemid = 1681, droprate =  39 }, -- Light Steel
+            { itemid =  645, droprate =  39 }, -- Darksteel Ore
+            { itemid = 1933, droprate = 627 }, -- MNK
+        },
+
+        {
+            { itemid =    0, droprate = 500 }, -- Nothing
+            { itemid = 1945, droprate = 159 }, -- DRK
+            { itemid = 1951, droprate = 139 }, -- RNG
+            { itemid = 2659, droprate =  39 }, -- COR
+            { itemid =  664, droprate =  20 }, -- Darksteel Sheet
+            { itemid =  646, droprate =  20 }, -- Adaman Ore
+            { itemid = 1931, droprate = 200 }, -- WAR
         },
     },
     [ID.SE_APOLLYON.npc.LOOT_CRATE] =
     {
-        { { itemid = xi.items.ANCIENT_BEASTCOIN, droprate = xi.battlefield.dropChance.NORMAL } },
-        { { itemid = xi.items.ANCIENT_BEASTCOIN, droprate = xi.battlefield.dropChance.NORMAL } },
-        { { itemid = xi.items.ANCIENT_BEASTCOIN, droprate = xi.battlefield.dropChance.NORMAL } },
-        { { itemid = xi.items.ANCIENT_BEASTCOIN, droprate = xi.battlefield.dropChance.NORMAL } },
-        { { itemid = xi.items.ANCIENT_BEASTCOIN, droprate = xi.battlefield.dropChance.NORMAL } },
         {
-            { itemid = xi.items.ARGYRO_RIVET, droprate = xi.battlefield.dropChance.NORMAL },
-            { itemid = xi.items.BLUE_RIVET, droprate = xi.battlefield.dropChance.NORMAL },
-            { itemid = xi.items.SQUARE_OF_CORDUROY_CLOTH, droprate = xi.battlefield.dropChance.NORMAL },
-            { itemid = xi.items.WHITE_RIVET, droprate = xi.battlefield.dropChance.NORMAL },
+            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
         },
+
         {
-            { itemid = xi.items.SPOOL_OF_BENEDICT_YARN, droprate = xi.battlefield.dropChance.NORMAL },
-            { itemid = xi.items.POT_OF_EBONY_LACQUER, droprate = xi.battlefield.dropChance.NORMAL },
+            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
+        },
+
+        {
+            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
+        },
+
+        {
+            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
+        },
+
+        {
+            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
+        },
+
+        {
+            { itemid = 1935, droprate = 220 }, -- WHM
+            { itemid = 1937, droprate = 300 }, -- BLM
+            { itemid = 1957, droprate = 260 }, -- DRG
+            { itemid = 1953, droprate = 340 }, -- SAM
+            { itemid = 2657, droprate = 220 }, -- BLU
+            { itemid = 2717, droprate = 180 }, -- SCH
+            { itemid = 1931, droprate = 300 }, -- WAR
+        },
+
+        {
+            { itemid = 1935, droprate = 220 }, -- WHM
+            { itemid = 1937, droprate = 300 }, -- BLM
+            { itemid = 1957, droprate = 260 }, -- DRG
+            { itemid = 1953, droprate = 340 }, -- SAM
+            { itemid = 2657, droprate = 220 }, -- BLU
+            { itemid = 2717, droprate = 180 }, -- SCH
+            { itemid = 1931, droprate = 300 }, -- WAR
+        },
+
+        {
+            { itemid = 1909, droprate = 1000 }, -- Smalt Chip
+        },
+
+        {
+            { itemid = 2127, droprate =  59 }, -- Metal Chip
+            { itemid =    0, droprate = 100 }, -- Nothing
         },
     },
 }
