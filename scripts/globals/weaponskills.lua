@@ -226,7 +226,7 @@ local function cRangedRatio(attacker, defender, params, ignoredDef, tp)
     local pdif = attacker:getRangedPDIF(defender, false, atkmulti, ignoredDef)
     local pdifcrit = attacker:getRangedPDIF(defender, true, atkmulti, ignoredDef)
 
-    return {pdif, pdifcrit}
+    return { pdif, pdifcrit }
 end
 
 local function getRangedHitRate(attacker, target, capHitRate, bonus)
@@ -875,7 +875,7 @@ function getMeleeDmg(attacker, weaponType, kick)
 end
 
 function getRangedDamage(attacker)
-    return {attacker:getRangedDmg(), attacker:getAmmoDmg()}
+    return { attacker:getRangedDmg(), attacker:getAmmoDmg() }
 end
 
 function getHitRate(attacker, target, capHitRate, bonus)
@@ -981,7 +981,7 @@ function cMeleeRatio(attacker, defender, params, ignoredDef, tp, slot)
         attacker:delMod(xi.mod.ATTP, 25 + flourisheffect:getSubPower() / 2)
     end
 
-    return {pdif, pdifcrit}
+    return { pdif, pdifcrit }
 end
 
 function handleBlock(attacker, target, finaldmg)
