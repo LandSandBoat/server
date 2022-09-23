@@ -2309,7 +2309,7 @@ namespace charutils
             return;
         }
 
-        const char* Query  = "REPLACE INTO char_equip_saved SET \
+        const char* Query = "REPLACE INTO char_equip_saved SET \
                                     charid = %u, \
                                     jobid = %u, \
                                     main = %u, \
@@ -2329,26 +2329,26 @@ namespace charutils
                                     ring2 = %u, \
                                     back = %u;";
 
-        uint16      main   = (PChar->getEquip(SLOT_MAIN) != nullptr) ? PChar->getEquip(SLOT_MAIN)->getID() : 0;
-        uint16      sub    = (PChar->getEquip(SLOT_SUB) != nullptr) ? PChar->getEquip(SLOT_SUB)->getID() : 0;
-        uint16      ranged = (PChar->getEquip(SLOT_RANGED) != nullptr) ? PChar->getEquip(SLOT_RANGED)->getID() : 0;
-        uint16      ammo   = (PChar->getEquip(SLOT_AMMO) != nullptr) ? PChar->getEquip(SLOT_AMMO)->getID() : 0;
-        uint16      head   = (PChar->getEquip(SLOT_HEAD) != nullptr) ? PChar->getEquip(SLOT_HEAD)->getID() : 0;
-        uint16      body   = (PChar->getEquip(SLOT_BODY) != nullptr) ? PChar->getEquip(SLOT_BODY)->getID() : 0;
-        uint16      hands  = (PChar->getEquip(SLOT_HANDS) != nullptr) ? PChar->getEquip(SLOT_HANDS)->getID() : 0;
-        uint16      legs   = (PChar->getEquip(SLOT_LEGS) != nullptr) ? PChar->getEquip(SLOT_LEGS)->getID() : 0;
-        uint16      feet   = (PChar->getEquip(SLOT_FEET) != nullptr) ? PChar->getEquip(SLOT_FEET)->getID() : 0;
-        uint16      neck   = (PChar->getEquip(SLOT_NECK) != nullptr) ? PChar->getEquip(SLOT_NECK)->getID() : 0;
-        uint16      waist  = (PChar->getEquip(SLOT_WAIST) != nullptr) ? PChar->getEquip(SLOT_WAIST)->getID() : 0;
-        uint16      ear1   = (PChar->getEquip(SLOT_EAR1) != nullptr) ? PChar->getEquip(SLOT_EAR1)->getID() : 0;
-        uint16      ear2   = (PChar->getEquip(SLOT_EAR2) != nullptr) ? PChar->getEquip(SLOT_EAR2)->getID() : 0;
-        uint16      ring1  = (PChar->getEquip(SLOT_RING1) != nullptr) ? PChar->getEquip(SLOT_RING1)->getID() : 0;
-        uint16      ring2  = (PChar->getEquip(SLOT_RING2) != nullptr) ? PChar->getEquip(SLOT_RING2)->getID() : 0;
-        uint16      back   = (PChar->getEquip(SLOT_BACK) != nullptr) ? PChar->getEquip(SLOT_BACK)->getID() : 0;
+        uint16 main   = (PChar->getEquip(SLOT_MAIN) != nullptr) ? PChar->getEquip(SLOT_MAIN)->getID() : 0;
+        uint16 sub    = (PChar->getEquip(SLOT_SUB) != nullptr) ? PChar->getEquip(SLOT_SUB)->getID() : 0;
+        uint16 ranged = (PChar->getEquip(SLOT_RANGED) != nullptr) ? PChar->getEquip(SLOT_RANGED)->getID() : 0;
+        uint16 ammo   = (PChar->getEquip(SLOT_AMMO) != nullptr) ? PChar->getEquip(SLOT_AMMO)->getID() : 0;
+        uint16 head   = (PChar->getEquip(SLOT_HEAD) != nullptr) ? PChar->getEquip(SLOT_HEAD)->getID() : 0;
+        uint16 body   = (PChar->getEquip(SLOT_BODY) != nullptr) ? PChar->getEquip(SLOT_BODY)->getID() : 0;
+        uint16 hands  = (PChar->getEquip(SLOT_HANDS) != nullptr) ? PChar->getEquip(SLOT_HANDS)->getID() : 0;
+        uint16 legs   = (PChar->getEquip(SLOT_LEGS) != nullptr) ? PChar->getEquip(SLOT_LEGS)->getID() : 0;
+        uint16 feet   = (PChar->getEquip(SLOT_FEET) != nullptr) ? PChar->getEquip(SLOT_FEET)->getID() : 0;
+        uint16 neck   = (PChar->getEquip(SLOT_NECK) != nullptr) ? PChar->getEquip(SLOT_NECK)->getID() : 0;
+        uint16 waist  = (PChar->getEquip(SLOT_WAIST) != nullptr) ? PChar->getEquip(SLOT_WAIST)->getID() : 0;
+        uint16 ear1   = (PChar->getEquip(SLOT_EAR1) != nullptr) ? PChar->getEquip(SLOT_EAR1)->getID() : 0;
+        uint16 ear2   = (PChar->getEquip(SLOT_EAR2) != nullptr) ? PChar->getEquip(SLOT_EAR2)->getID() : 0;
+        uint16 ring1  = (PChar->getEquip(SLOT_RING1) != nullptr) ? PChar->getEquip(SLOT_RING1)->getID() : 0;
+        uint16 ring2  = (PChar->getEquip(SLOT_RING2) != nullptr) ? PChar->getEquip(SLOT_RING2)->getID() : 0;
+        uint16 back   = (PChar->getEquip(SLOT_BACK) != nullptr) ? PChar->getEquip(SLOT_BACK)->getID() : 0;
 
         sql->Query(Query, PChar->id, PChar->GetMJob(), main, sub, ranged, ammo,
                    head, body, hands, legs, feet, neck, waist, ear1, ear2, ring1,
-                   ring2, back);
+                   +ring2, back);
 
         return;
     }
@@ -2403,6 +2403,12 @@ namespace charutils
 
         return;
     }
+
+    /************************************************************************
+     *                                                                       *
+     *                                                                       *
+     *                                                                       *
+     ************************************************************************/
 
     void EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 containerID)
     {

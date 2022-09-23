@@ -4,7 +4,7 @@
 -- Zones out to Kamihr Drifts (zone 267)
 -- !pos -34.549 -181.334 -20.031 274
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 

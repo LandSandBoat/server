@@ -18,23 +18,23 @@ g_mixins.dynamis_dreamland = function(dynamisDreamlandMob)
     {
         WS =
         {
-            [1449] = {0, 8},
-            [1452] = {16, 24},
-            [1455] = {8, 16},
+            [1449] = {  0,  8 },
+            [1452] = { 16, 24 },
+            [1455] = {  8, 16 },
         },
 
         Magic =
         {
-            [1449] = {8, 16},
-            [1452] = {0, 8},
-            [1455] = {16, 24},
+            [1449] = {  8, 16 },
+            [1452] = {  0,  8 },
+            [1455] = { 16, 24 },
         },
 
         JA =
         {
-            [1449] = {16, 24},
-            [1452] = {8, 16},
-            [1455] = {0, 8},
+            [1449] = { 16, 24 },
+            [1452] = {  8, 16 },
+            [1455] = {  0,  8 },
         },
     }
 
@@ -43,11 +43,11 @@ g_mixins.dynamis_dreamland = function(dynamisDreamlandMob)
     -- "Without a proc, the coin drop rate is very low (~10%)"
     local thCurrency =
     {
-        [0] = {single = 100, hundo =  5},
-        [1] = {single = 115, hundo = 10},
-        [2] = {single = 145, hundo = 20},
-        [3] = {single = 190, hundo = 35},
-        [4] = {single = 250, hundo = 50},
+        [0] = { single = 100, hundo =  5 },
+        [1] = { single = 115, hundo = 10 },
+        [2] = { single = 145, hundo = 20 },
+        [3] = { single = 190, hundo = 35 },
+        [4] = { single = 250, hundo = 50 },
     }
 
     dynamisDreamlandMob:addListener("MAGIC_TAKE", "DYNAMIS_MAGIC_PROC_CHECK", function(target, caster, spell)

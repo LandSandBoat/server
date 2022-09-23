@@ -10,8 +10,6 @@
 -- Apururu           : !pos -11 -2 13 241
 -- Yoran-Oran        : !pos -109.987 -14 203.338 239
 -- Mandragora Warden : !pos 81.981 7.593 139.556 153
------------------------------------
-require('scripts/settings/main')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/items')
 require('scripts/globals/keyitems')

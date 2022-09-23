@@ -1,11 +1,11 @@
 -----------------------------------
 -- Zone: Caedarva_Mire (79)
 -----------------------------------
-local ID = require("scripts/zones/Caedarva_Mire/IDs")
-require("scripts/globals/missions")
-require("scripts/globals/titles")
-require("scripts/globals/helm")
-require("scripts/globals/zone")
+local ID = require('scripts/zones/Caedarva_Mire/IDs')
+require('scripts/globals/missions')
+require('scripts/globals/titles')
+require('scripts/globals/helm')
+require('scripts/globals/zone')
 -----------------------------------
 local zone_object = {}
 
@@ -20,7 +20,7 @@ end
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(339.996, 2.5, -721.286, 200)
     end
 

@@ -1,9 +1,7 @@
 -----------------------------------
---
 -- Zone: Walk_of_Echoes_P2
---
 -----------------------------------
-local ID = require("scripts/zones/Walk_of_Echoes_P2/IDs")
+local ID = require('scripts/zones/Walk_of_Echoes_P2/IDs')
 -----------------------------------
 local zone_object = {}
 

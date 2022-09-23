@@ -13,7 +13,7 @@
 -----------------------------------
 require("scripts/globals/magic")
 require("scripts/globals/status")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/weaponskills")
 -----------------------------------
 local weaponskill_object = {}
@@ -27,7 +27,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     params.skill = xi.skill.SWORD
     params.includemab = true
 
-    if (xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
+    if (xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
         params.ftp100 = 1.125 params.ftp200 = 2.625 params.ftp300 = 4.125
         params.str_wsc = 0.4 params.mnd_wsc = 0.4
     end

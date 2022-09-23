@@ -9,7 +9,7 @@
 -- !pos -20.000 -55.000 -41.000 111   : H-8
 -- !pos -340.000 -95.000 159.000 111  : F-7
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 
@@ -59,7 +59,7 @@ entity.onEventFinish = function(player, csid, option)
             player:setPos(-300, -8, 203, 191, 9)
         end
 
-        if (xi.settings.ENABLE_COP_ZONE_CAP == 1 ) then
+        if (xi.settings.main.ENABLE_COP_ZONE_CAP == 1 ) then
             player:setCharVar("PSOXJA_RESTRICTION_LVL", lvlCap)
         end
     end

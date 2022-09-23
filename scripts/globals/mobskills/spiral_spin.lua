@@ -4,7 +4,7 @@
 --  Description: Chance of effect varies with TP. Additional Effect: Accuracy Down.
 --  Type: Physical (Slashing)
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------

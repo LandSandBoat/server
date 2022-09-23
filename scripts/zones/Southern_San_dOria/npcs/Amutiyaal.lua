@@ -8,7 +8,7 @@ local ID = require("scripts/zones/Southern_San_dOria/IDs")
 require("scripts/globals/teleports")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------
@@ -56,7 +56,7 @@ entity.onTrigger = function(player, npc)
     local lureSandy = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT)
     local wildcatSandy = player:getCharVar("WildcatSandy")
 
-    if (lureSandy ~= QUEST_COMPLETED and xi.settings.ENABLE_TOAU == 1) then
+    if (lureSandy ~= QUEST_COMPLETED and xi.settings.main.ENABLE_TOAU == 1) then
         if (lureSandy == QUEST_AVAILABLE) then
             player:startEvent(812)
         else

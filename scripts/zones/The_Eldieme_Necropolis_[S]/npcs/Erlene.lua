@@ -8,7 +8,7 @@ local ID = require("scripts/zones/The_Eldieme_Necropolis_[S]/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
@@ -41,7 +41,7 @@ entity.onTrigger = function(player, npc)
     local downwardHelix = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.DOWNWARD_HELIX)
 
     if (aLittleKnowledge == QUEST_AVAILABLE) then
-        if (mLvl >= xi.settings.ADVANCED_JOB_LEVEL) then
+        if (mLvl >= xi.settings.main.ADVANCED_JOB_LEVEL) then
             player:startEvent(10, 1)
         else
             player:startEvent(10)
@@ -59,7 +59,7 @@ entity.onTrigger = function(player, npc)
         end
     elseif (aLittleKnowledge == QUEST_COMPLETED and mJob == xi.job.SCH and mLvl >= 5 and not (player:hasSpell(478) and player:hasSpell(502))) then
             player:startEvent(47)
-    elseif (onSabbatical == QUEST_AVAILABLE and mJob == xi.job.SCH and mLvl >= xi.settings.AF1_QUEST_LEVEL) then
+    elseif (onSabbatical == QUEST_AVAILABLE and mJob == xi.job.SCH and mLvl >= xi.settings.main.AF1_QUEST_LEVEL) then
             player:startEvent(18)
     elseif (onSabbatical == QUEST_ACCEPTED) then
         if (onSabbaticalProgress < 3) then
@@ -67,7 +67,7 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(20)
         end
-    elseif (onSabbatical == QUEST_COMPLETED and player:getCharVar("Erlene_Sabbatical_Timer")~=VanadielDayOfTheYear() and mJob == xi.job.SCH and mLvl >= xi.settings.AF2_QUEST_LEVEL and downwardHelix == QUEST_AVAILABLE) then
+    elseif (onSabbatical == QUEST_COMPLETED and player:getCharVar("Erlene_Sabbatical_Timer")~=VanadielDayOfTheYear() and mJob == xi.job.SCH and mLvl >= xi.settings.main.AF2_QUEST_LEVEL and downwardHelix == QUEST_AVAILABLE) then
         player:startEvent(23)
     elseif (downwardHelix == QUEST_ACCEPTED) then
         if (player:getCharVar("DownwardHelix") == 0) then

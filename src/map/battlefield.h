@@ -29,6 +29,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "../common/cbasetypes.h"
 #include "../common/mmo.h"
+#include "sol/sol.hpp"
 #include <unordered_map>
 
 enum BCRULES : uint8
@@ -81,24 +82,51 @@ class CBattleEntity;
 class CBattlefieldHandler;
 class CZone;
 
-typedef struct
+struct BattlefieldMob_t
 {
     CMobEntity*             PMob;
     BATTLEFIELDMOBCONDITION condition; // whether it has died or not
-} BattlefieldMob_t;
 
-typedef struct
+    BattlefieldMob_t()
+    : condition(CONDITION_NONE)
+    {
+        PMob = nullptr;
+    }
+};
+
+struct BattlefieldRecord_t
 {
     std::string name;
     size_t      partySize;
     duration    time;
-} BattlefieldRecord_t;
 
-typedef struct
+    BattlefieldRecord_t()
+    : partySize(0)
+    , time(std::chrono::minutes(30))
+    {
+    }
+};
+
+struct BattlefieldInitiator_t
 {
     std::string name;
     uint32      id;
-} BattlefieldInitiator_t;
+
+    BattlefieldInitiator_t()
+    {
+        id = 0;
+    }
+};
+
+struct BattlefieldGroup
+{
+    std::vector<uint32> mobIds;
+    sol::function       deathCallback;
+    sol::function       randomDeathCallback;
+    sol::function       allDeathCallback;
+    uint8               deathCount  = 0;
+    uint32              randomMobId = 0;
+};
 
 class CBattlefield : public std::enable_shared_from_this<CBattlefield>
 {
@@ -109,7 +137,7 @@ public:
     uint16                        GetID() const;
     CZone*                        GetZone() const;
     uint16                        GetZoneID() const;
-    const std::string&            GetName() const;
+    std::string const&            GetName() const;
     const BattlefieldInitiator_t& GetInitiator() const;
     uint8                         GetArea() const;
     const BattlefieldRecord_t&    GetRecord() const;
@@ -126,7 +154,7 @@ public:
     duration                      GetFinishTime() const;
     duration                      GetRemainingTime() const;
     duration                      GetLastTimeUpdate() const;
-    uint64_t                      GetLocalVar(const std::string& name) const;
+    uint64_t                      GetLocalVar(std::string const& name) const;
 
     bool CheckInProgress();
     bool IsOccupied() const;
@@ -139,10 +167,10 @@ public:
     void ForEachAlly(const std::function<void(CMobEntity*)>& func);
 
     void SetID(uint16 id);
-    void SetName(const std::string& name);
-    void SetInitiator(const std::string& name);
+    void SetName(std::string const& name);
+    void SetInitiator(std::string const& name);
     void SetArea(uint8 area);
-    void SetRecord(const std::string& name, duration time, size_t partySize);
+    void SetRecord(std::string const& name, duration time, size_t partySize);
     void SetStatus(uint8 status);
     void SetRuleMask(uint16 rulemask);
     void SetStartTime(time_point time);
@@ -151,7 +179,7 @@ public:
     void SetWipeTime(time_point time);
     void SetMaxParticipants(uint8 max);
     void SetLevelCap(uint8 cap);
-    void SetLocalVar(const std::string& name, uint64_t value);
+    void SetLocalVar(std::string const& name, uint64_t value);
     void SetLastTimeUpdate(duration time);
 
     void         ApplyLevelRestrictions(CCharEntity* PChar) const;
@@ -165,8 +193,12 @@ public:
     void         Cleanup();
     bool         LoadMobs();
     bool         SpawnLoot(CBaseEntity* PEntity = nullptr);
-    uint8        m_isMission;
 
+    // Groups
+    void addGroup(BattlefieldGroup group);
+    void handleDeath(CBaseEntity* PEntity);
+
+    uint8                         m_isMission;
     std::set<uint32>              m_RegisteredPlayers;
     std::set<uint32>              m_EnteredPlayers;
     std::vector<CNpcEntity*>      m_NpcList;
@@ -197,6 +229,7 @@ private:
     bool m_Attacked{ false };
 
     std::unordered_map<std::string, uint64_t> m_LocalVars;
+    std::vector<BattlefieldGroup>             m_groups;
 };
 
 #endif

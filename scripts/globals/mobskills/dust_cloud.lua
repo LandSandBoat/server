@@ -3,7 +3,7 @@
 -- Deals Earth damage to targets in a fan-shaped area of effect. Additional effect: Blind
 -- Range: 10' cone
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------

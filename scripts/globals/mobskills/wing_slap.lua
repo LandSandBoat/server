@@ -7,7 +7,7 @@
 --  Range: Melee
 --  Notes:
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
@@ -27,7 +27,6 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.STUN
 
     xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, typeEffect, 1, 0, 4)
-
 
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
     return dmg

@@ -25,7 +25,7 @@
     }
 #else
 #include "assert.h"
-#define XI_DEBUG_BREAK_IF(_CONDITION_) \
+#define XI_DEBUG_BREAK_IF(_CONDITION_)                      \
     if (_CONDITION_)                                        \
     {                                                       \
         ShowError("HIT DEBUG CONDITION: %s", #_CONDITION_); \
@@ -33,7 +33,7 @@
     }
 #endif
 #else
-#define XI_DEBUG_BREAK_IF(_CONDITION_) \
+#define XI_DEBUG_BREAK_IF(_CONDITION_)                      \
     if (_CONDITION_)                                        \
     {                                                       \
         ShowError("HIT DEBUG CONDITION: %s", #_CONDITION_); \

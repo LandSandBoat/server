@@ -3,7 +3,7 @@
 --  Mob: Tonberry Beleaguerer
 -- Note: PH for Bistre-hearted Malberry
 -----------------------------------
-mixins = {require("scripts/mixins/families/tonberry")}
+mixins = { require("scripts/mixins/families/tonberry") }
 local ID = require("scripts/zones/Den_of_Rancor/IDs")
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")

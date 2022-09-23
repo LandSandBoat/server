@@ -6,24 +6,22 @@
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Woods/IDs")
 require("scripts/globals/crafting")
+require("scripts/globals/pathfind")
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
 local path =
 {
-    -5.057, -5.250, -136.979,   -- TODO: wait at location for 6 seconds
-    -9.271, -5.250, -139.831,   -- TODO: wait at location for 10 seconds
-    -4.695, -5.250, -141.494    -- TODO: wait at location for 10 seconds
+    { x = -5.057, y = -5.250, z = -136.979, wait = 6000 },
+    { x = -9.271, y = -5.250, z = -139.831, wait = 10000 },
+    { x = -4.695, y = -5.250, z = -141.494, wait = 10000 },
 }
 
 entity.onSpawn = function(npc)
     npc:initNpcAi()
     npc:setPos(xi.path.first(path))
-end
-
-entity.onPath = function(npc)
-    xi.path.patrol(npc, path)
+    npc:pathThrough(path, xi.path.flag.PATROL)
 end
 
 entity.onTrade = function(player, npc, trade)

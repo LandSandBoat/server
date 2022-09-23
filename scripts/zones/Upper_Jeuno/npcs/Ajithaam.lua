@@ -7,7 +7,7 @@ local ID = require("scripts/zones/Upper_Jeuno/IDs")
 require("scripts/globals/teleports")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------
@@ -60,7 +60,7 @@ entity.onTrigger = function(player, npc)
     local lureJeuno = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LURE_OF_THE_WILDCAT)
     local wildcatJeuno = player:getCharVar("WildcatJeuno")
 
-    if lureJeuno ~= 2 and xi.settings.ENABLE_TOAU == 1 then
+    if lureJeuno ~= 2 and xi.settings.main.ENABLE_TOAU == 1 then
         if lureJeuno == 0 then
             player:startEvent(10088)
         else

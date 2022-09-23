@@ -5,7 +5,7 @@
 -- !pos -169.127 2.999 158.677 231
 -----------------------------------
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/status")
@@ -19,7 +19,7 @@ entity.onTrigger = function(player, npc)
     local aCraftsmansWork = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.A_CRAFTSMAN_S_WORK)
     local quotasStatus    = player:getCharVar("ChasingQuotas_Progress")
 
-    if (player:getMainJob() == xi.job.DRG and player:getMainLvl() >= xi.settings.AF1_QUEST_LEVEL and aCraftsmansWork == QUEST_AVAILABLE) then
+    if (player:getMainJob() == xi.job.DRG and player:getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL and aCraftsmansWork == QUEST_AVAILABLE) then
         if (player:getCharVar("has_seen_drgaf1_quest_already") == 0) then
             player:startEvent(73)
         else -- If player has seen the big cut scene, give them a smaller one.

@@ -20,18 +20,20 @@ local itemType =
 local prospectorItems =
 {
     [itemType.ITEM] =
-    {-- Sel      Item                         Cost
-        [ 1] = { xi.items.CREED_ARMET,        5000 },
-        [ 2] = { xi.items.BALE_BURGEONET,     5000 },
-        [ 3] = { xi.items.FERINE_CABASSET,    5000 },
-        [ 4] = { xi.items.AOIDOS_CALOT,       5000 },
-        [ 5] = { xi.items.SYLVAN_GAPETTE,     5000 },
-        [ 6] = { xi.items.FORBIDDEN_KEY,       500 },
-        [ 7] = { xi.items.SHADOW_THRONE,   2000000 },
+    {
+    --  Sel      Item                        Cost
+        [1] = { xi.items.CREED_ARMET,        5000 },
+        [2] = { xi.items.BALE_BURGEONET,     5000 },
+        [3] = { xi.items.FERINE_CABASSET,    5000 },
+        [4] = { xi.items.AOIDOS_CALOT,       5000 },
+        [5] = { xi.items.SYLVAN_GAPETTE,     5000 },
+        [6] = { xi.items.FORBIDDEN_KEY,       500 },
+        [7] = { xi.items.SHADOW_THRONE,   2000000 },
     },
 
     [itemType.TEMP] =
-    {-- Sel      Item                               Cost
+    {
+    --  Sel      Item                               Cost
         [ 1] = { xi.items.LUCID_POTION_I,             80 },
         [ 2] = { xi.items.LUCID_ETHER_I,              80 },
         [ 3] = { xi.items.BOTTLE_OF_CATHOLICON,       80 },
@@ -52,7 +54,8 @@ local prospectorItems =
     },
 
     [itemType.KEYITEM] =
-    {-- Sel     Item                                 Cost
+    {
+    --  Sel     Item                                 Cost
         [1] = { xi.ki.MAP_OF_ABYSSEA_MISAREAUX,      4500 },
         [2] = { xi.ki.IVORY_ABYSSITE_OF_AVARICE,     8000 },
         [3] = { xi.ki.IVORY_ABYSSITE_OF_KISMET,      5000 },
@@ -61,7 +64,8 @@ local prospectorItems =
     },
 
     [itemType.ENHANCEMENT] =
-    {-- Sel          Effect (Abyssea)       Actual Effect          Amt, KeyItem for Bonus,           Bonus Mult      Cost
+    {
+    --  Sel          Effect (Abyssea)       Actual Effect          Amt, KeyItem for Bonus,           Bonus Mult      Cost
         [ 6] = { { { xi.effect.ABYSSEA_HP,  xi.effect.MAX_HP_BOOST, 20, xi.abyssea.abyssiteType.MERIT,       10 }, },  50 },
         [ 7] = { { { xi.effect.ABYSSEA_MP,  xi.effect.MAX_MP_BOOST, 10, xi.abyssea.abyssiteType.MERIT,        5 }, }, 120 },
         [ 8] = { { { xi.effect.ABYSSEA_STR, xi.effect.STR_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
@@ -108,7 +112,7 @@ entity.onEventFinish = function(player, csid, option)
 
         if
             itemCost <= cruorTotal and
-            npcUtil.giveItem(player, {{ itemData[1], itemQty }})
+            npcUtil.giveItem(player, { { itemData[1], itemQty } })
         then
             player:delCurrency("cruor", itemCost)
         end
@@ -118,7 +122,7 @@ entity.onEventFinish = function(player, csid, option)
 
         if
             itemCost <= cruorTotal and
-            npcUtil.giveTempItem(player, {{ itemData[1], 1 }})
+            npcUtil.giveTempItem(player, { { itemData[1], 1 } })
         then
             player:delCurrency("cruor", itemCost)
         end

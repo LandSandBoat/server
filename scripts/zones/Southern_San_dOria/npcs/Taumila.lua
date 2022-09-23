@@ -4,7 +4,7 @@
 -- Starts and Finishes Quest: Tiger's Teeth (R)
 -- !pos -140 -5 -8 230
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/titles")
 require("scripts/globals/shop")
 require("scripts/globals/quests")
@@ -48,8 +48,8 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 572) then
         player:tradeComplete()
         player:addTitle(xi.title.FANG_FINDER)
-        player:addGil(xi.settings.GIL_RATE*2100)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*2100)
+        player:addGil(xi.settings.main.GIL_RATE*2100)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*2100)
         if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TIGER_S_TEETH) == QUEST_ACCEPTED) then
             player:addFame(xi.quest.fame_area.SANDORIA, 30)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.TIGER_S_TEETH)

@@ -32,7 +32,6 @@
 #define INV_LINKSHELL 0x13 // название под большим вопросом
 #define INV_MANNEQUIN 0x1B // Equipped to the mannequin
 
-
 class CItem;
 
 class CInventoryAssignPacket : public CBasicPacket

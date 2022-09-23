@@ -11,14 +11,14 @@ require("scripts/globals/status")
 local spell_object = {}
 
 spell_object.onMagicCastingCheck = function(caster, target, spell)
-    if (not caster:canUseMisc(xi.zoneMisc.PET)) then
+    if not caster:canUseMisc(xi.zoneMisc.PET) then
         return xi.msg.basic.CANT_BE_USED_IN_AREA
-    elseif (not caster:hasStatusEffect(xi.effect.ASTRAL_FLOW)) then
+    elseif not caster:hasStatusEffect(xi.effect.ASTRAL_FLOW) then
         return 581
-    elseif (caster:hasPet()) then
+    elseif caster:hasPet() then
         return xi.msg.basic.ALREADY_HAS_A_PET
-    elseif (caster:getObjType() == xi.objType.PC) then
-        return avatarMiniFightCheck(caster)
+    elseif caster:getObjType() == xi.objType.PC then
+        return xi.summon.avatarMiniFightCheck(caster)
     end
     return 0
 end

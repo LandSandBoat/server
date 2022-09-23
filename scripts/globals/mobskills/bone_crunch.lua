@@ -2,7 +2,7 @@
 -- Bone Crunch
 -- Deals damage to a single target. Additional effect: Plague
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------

@@ -10,8 +10,6 @@
 -- Moreno-Toeno     : !pos 169 -1.25 159 238
 -- Qu'Hau Spring    : !pos 0 -29 64 122
 -- Sedal-Godjal     : !pos 185 -3 -116 149
------------------------------------
-require('scripts/settings/main')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/items')
 require('scripts/globals/keyitems')

@@ -12,15 +12,15 @@ xi.pyxis.popitem = {}
 ---------------------------------
 local popitemDrops =
 {
-    [xi.zone.ABYSSEA_KONSCHTAT ] = {2903,2904,2906,2907,2908,2909,2910,2911,2912,2913,2914},
-    [xi.zone.ABYSSEA_TAHRONGI  ] = {},
-    [xi.zone.ABYSSEA_LA_THEINE ] = {},
-    [xi.zone.ABYSSEA_ATTOHWA   ] = {},
-    [xi.zone.ABYSSEA_MISAREAUX ] = {},
-    [xi.zone.ABYSSEA_VUNKERL   ] = {},
-    [xi.zone.ABYSSEA_ALTEPA    ] = {},
-    [xi.zone.ABYSSEA_ULEGUERAND] = {},
-    [xi.zone.ABYSSEA_GRAUBERG  ] = {},
+    [xi.zone.ABYSSEA_KONSCHTAT ] = { 2903, 2904, 2906, 2907, 2908, 2909, 2910, 2911, 2912, 2913, 2914 },
+    [xi.zone.ABYSSEA_TAHRONGI  ] = { },
+    [xi.zone.ABYSSEA_LA_THEINE ] = { },
+    [xi.zone.ABYSSEA_ATTOHWA   ] = { },
+    [xi.zone.ABYSSEA_MISAREAUX ] = { },
+    [xi.zone.ABYSSEA_VUNKERL   ] = { },
+    [xi.zone.ABYSSEA_ALTEPA    ] = { },
+    [xi.zone.ABYSSEA_ULEGUERAND] = { },
+    [xi.zone.ABYSSEA_GRAUBERG  ] = { },
 }
 
 local function GetChestItemTable(npc)

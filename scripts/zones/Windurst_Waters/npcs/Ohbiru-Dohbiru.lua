@@ -7,7 +7,7 @@
 -----------------------------------
 require("scripts/globals/quests")
 require("scripts/globals/titles")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Windurst_Waters/IDs")
 -----------------------------------
@@ -81,15 +81,15 @@ entity.onEventFinish = function(player, csid, option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.RHINOSTERY_CERTIFICATE)
         player:addKeyItem(xi.ki.RHINOSTERY_CERTIFICATE) -- Rhinostery Certificate
     elseif (csid == 791 and turmoil == QUEST_ACCEPTED) then -- Completes Toraimarai turmoil - first time
-        player:addGil(xi.settings.GIL_RATE*4500)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*4500)
+        player:addGil(xi.settings.main.GIL_RATE*4500)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*4500)
         player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
         player:addFame(xi.quest.fame_area.WINDURST, 100)
         player:addTitle(xi.title.CERTIFIED_RHINOSTERY_VENTURER)
         player:tradeComplete()
     elseif (csid == 791 and turmoil == 2) then -- Completes Toraimarai turmoil - repeats
-        player:addGil(xi.settings.GIL_RATE*4500)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*4500)
+        player:addGil(xi.settings.main.GIL_RATE*4500)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*4500)
         player:addFame(xi.quest.fame_area.WINDURST, 50)
         player:tradeComplete()
     elseif (csid == 516) then

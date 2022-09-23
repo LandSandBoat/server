@@ -4,7 +4,7 @@
 -- Type: Magian Trials NPC (Weapon/Empyrean Armor)
 -- !pos -11 2.453 118 64
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/magiantrials")
 require("scripts/globals/status")
 -----------------------------------
@@ -21,7 +21,7 @@ local eventIds =
 }
 
 entity.onTrade = function(player, npc, trade)
-    if xi.settings.ENABLE_MAGIAN_TRIALS ~= 1 then
+    if xi.settings.main.ENABLE_MAGIAN_TRIALS ~= 1 then
         return
     end
 
@@ -29,7 +29,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if xi.settings.ENABLE_MAGIAN_TRIALS ~= 1 then
+    if xi.settings.main.ENABLE_MAGIAN_TRIALS ~= 1 then
         return
     end
 

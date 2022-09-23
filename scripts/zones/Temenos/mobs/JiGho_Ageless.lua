@@ -2,7 +2,7 @@
 -- Area: Temenos
 --  Mob: JiGho_Ageless
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}
 

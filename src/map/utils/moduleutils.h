@@ -22,8 +22,8 @@
 #ifndef _MODULEUTILS_H
 #define _MODULEUTILS_H
 
-#include "common/logging.h"
 #include "../lua/luautils.h"
+#include "common/logging.h"
 
 #include <memory>
 
@@ -40,7 +40,7 @@ class CPPModule
 {
 public:
     CPPModule()
-    : lua(luautils::lua)
+    : lua(::lua)
     , sql(::sql)
     {
         moduleutils::RegisterCPPModule(this);

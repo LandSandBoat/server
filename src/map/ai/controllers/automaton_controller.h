@@ -43,7 +43,7 @@ struct CurrentManeuvers
 struct AutomatonAbility
 {
     uint8  requiredFrame = 0;
-    uint16 skillLevel = 0;
+    uint16 skillLevel    = 0;
 };
 
 struct AutomatonSpell

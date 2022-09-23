@@ -7,7 +7,7 @@
 --  Range: Unknown
 --  Notes: Used by Limules affiliated with light element.
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------

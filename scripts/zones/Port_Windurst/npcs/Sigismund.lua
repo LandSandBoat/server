@@ -5,7 +5,7 @@
 -- !pos -110 -10 82 240
 -----------------------------------
 local ID = require("scripts/zones/Port_Windurst/IDs")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 require("scripts/globals/status")

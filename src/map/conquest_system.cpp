@@ -32,7 +32,7 @@
 
 /************************************************************************
  *                                                                       *
- *	Реализация namespace conquest                                       *
+ *  Реализация namespace conquest                                       *
  *                                                                       *
  ************************************************************************/
 
@@ -40,14 +40,16 @@ namespace conquest
 {
     /************************************************************************
      *                                                                       *
-     *	UpdateConquestSystem		                                        *
+     *  UpdateConquestSystem                                                *
      *                                                                       *
      ************************************************************************/
 
     void UpdateConquestSystem()
     {
         TracyZoneScoped;
-        zoneutils::ForEachZone([](CZone* PZone) {
+        // clang-format off
+        zoneutils::ForEachZone([](CZone* PZone)
+        {
             // only find chars for zones that have had conquest updated
             if (PZone->GetRegionID() <= REGION_TYPE::TAVNAZIA)
             {
@@ -55,6 +57,7 @@ namespace conquest
                 PZone->ForEachChar([](CCharEntity* PChar) { PChar->PLatentEffectContainer->CheckLatentsZone(); });
             }
         });
+        // clang-format on
     }
 
     void UpdateInfluencePoints(int points, unsigned int nation, REGION_TYPE region)
@@ -108,8 +111,8 @@ namespace conquest
 
     /************************************************************************
      *    GainInfluencePoints                                                *
-     *    +1 point for nation							                    *
-     *						                                                *
+     *    +1 point for nation                                               *
+     *                                                                      *
      ************************************************************************/
 
     void GainInfluencePoints(CCharEntity* PChar, uint32 points)
@@ -120,14 +123,14 @@ namespace conquest
 
     /************************************************************************
      *    LoseInfluencePoints                                                *
-     *    -x point for nation							                    *
+     *    -x point for nation                                               *
      *    +x point for beastmen                                              *
      ************************************************************************/
 
     void LoseInfluencePoints(CCharEntity* PChar)
     {
         REGION_TYPE region = PChar->loc.zone->GetRegionID();
-        int        points = 0;
+        int         points = 0;
 
         switch (region)
         {
@@ -181,8 +184,8 @@ namespace conquest
 
     /************************************************************************
      *                                                                       *
-     *	GetInfluenceGraphics		                                        *
-     *												                        *
+     *  GetInfluenceGraphics                                                *
+     *                                                                      *
      ************************************************************************/
 
     uint8 GetInfluenceGraphics(int32 san_inf, int32 bas_inf, int32 win_inf, int32 bst_inf)
@@ -330,8 +333,8 @@ namespace conquest
 
     /************************************************************************
      *   UpdateConquestGM                                                    *
-     *	Update region control		                                        *
-     *   just used by GM command			                                    *
+     *  Update region control                                               *
+     *   just used by GM command                                                *
      ************************************************************************/
 
     void UpdateConquestGM(ConquestUpdate type)
@@ -348,8 +351,8 @@ namespace conquest
 
     /************************************************************************
      *   UpdateWeekConquest                                                  *
-     *	Update region control		                                        *
-     *   update 1 time per week			                                    *
+     *  Update region control                                               *
+     *   update 1 time per week                                             *
      ************************************************************************/
 
     void UpdateWeekConquest()
@@ -358,13 +361,16 @@ namespace conquest
         // TODO: move to lobby server
         // launch conquest message in all zone (monday server midnight)
 
-        zoneutils::ForEachZone([](CZone* PZone) {
+        // clang-format off
+        zoneutils::ForEachZone([](CZone* PZone)
+        {
             // only find chars for zones that have had conquest updated
             if (PZone->GetRegionID() <= REGION_TYPE::TAVNAZIA)
             {
                 luautils::OnConquestUpdate(PZone, Conquest_Tally_Start);
             }
         });
+        // clang-format on
 
         const char* Query = "UPDATE conquest_system SET region_control = \
                             IF(sandoria_influence > bastok_influence AND sandoria_influence > windurst_influence AND \
@@ -403,7 +409,7 @@ namespace conquest
 
     /************************************************************************
      *                                                                       *
-     *	GetBalance					                                        *
+     *  GetBalance                                                          *
      *   Ranking for the 3 nations                                           *
      ************************************************************************/
 

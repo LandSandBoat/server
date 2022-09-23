@@ -3,7 +3,7 @@
 -----------------------------------
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/titles")
 require("scripts/globals/zone")
@@ -163,7 +163,6 @@ xi.moghouse.addMogLockerExpiryTime = function(player, numBronze)
 
     local currentTs = xi.moghouse.getMogLockerExpiryTimestamp(player)
     if currentTs == nil then
-        -- print("Unable to add time: player hasn't unlocked mog locker.")
         return false
     end
 

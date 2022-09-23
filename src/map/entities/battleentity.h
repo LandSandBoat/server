@@ -271,16 +271,45 @@ enum class DAMAGE_TYPE : uint16
     DARK      = 13
 };
 
-enum class REACTION
+// This enum class is a set of bitfields that modify messages sent to the client.
+// There are helpers (PARRY/EVADE) because it is not inuitive
+// These flag names may not match SE's intent perfectly, but seem to work well.
+
+// For example
+// A guard is HIT + GUARDED
+// A parry is HIT + MISS + GUARDED
+// A block is HIT + BLOCK
+// It also seems weaponskills and job abilities set ABILITY in addition to these flags.
+// All of these flags are also seen in weaponskills.
+enum class REACTION : uint8
 {
-    NONE  = 0x00, // No Reaction
-    MISS  = 0x01, // Miss
-    PARRY = 0x03, // Block with weapons (MISS + PARRY)
-    BLOCK = 0x04, // Block with shield
-    HIT   = 0x08, // Hit
-    EVADE = 0x09, // Evasion (MISS + HIT)
-    GUARD = 0x14  // mnk guard (20 dec)
+    NONE    = 0x00, // No Reaction
+    MISS    = 0x01, // Miss
+    GUARDED = 0x02, // Bit to indicate guard, used individually to indicate guard during WS packet as well
+    PARRY   = 0x03, // Block with weapons (MISS + GUARDED)
+    BLOCK   = 0x04, // Block with shield, bit to indicate blocked during WS packet as well
+    HIT     = 0x08, // Hit
+    EVADE   = 0x09, // Evasion (MISS + HIT)
+    ABILITY = 0x10, // Observed on JA and WS
 };
+
+// These operators are used to combine bits that may not have a discrete value upon combining.
+inline REACTION operator|(REACTION a, REACTION b)
+{
+    return (REACTION)((uint8)a | (uint8)b);
+}
+
+inline REACTION operator&(REACTION a, REACTION b)
+{
+    return (REACTION)((uint8)a & (uint8)b);
+}
+
+inline REACTION operator|=(REACTION& a, REACTION b)
+{
+    a = a | b;
+
+    return a;
+}
 
 enum class SPECEFFECT
 {
@@ -290,6 +319,15 @@ enum class SPECEFFECT
     RAISE        = 0x11,
     RECOIL       = 0x20,
     CRITICAL_HIT = 0x22
+};
+
+enum class MODIFIER
+{
+    NONE        = 0x00,
+    COVER       = 0x01,
+    RESIST      = 0x02,
+    MAGIC_BURST = 0x04, // Currently known to be used for Swipe/Lunge only
+    IMMUNOBREAK = 0x08,
 };
 
 enum SUBEFFECT
@@ -445,17 +483,17 @@ struct apAction_t
     uint16         spikesMessage;    // 10 bits
 
     apAction_t()
+    : reaction(REACTION::NONE)
+    , speceffect(SPECEFFECT::NONE)
+    , additionalEffect(SUBEFFECT_NONE)
+    , spikesEffect(SUBEFFECT_NONE)
     {
         ActionTarget     = nullptr;
-        reaction         = REACTION::NONE;
         animation        = 0;
-        speceffect       = SPECEFFECT::NONE;
         param            = 0;
         messageID        = 0;
-        additionalEffect = SUBEFFECT_NONE;
         addEffectParam   = 0;
         addEffectMessage = 0;
-        spikesEffect     = SUBEFFECT_NONE;
         spikesParam      = 0;
         spikesMessage    = 0;
         knockback        = 0;

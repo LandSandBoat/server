@@ -4,7 +4,7 @@
 -----------------------------------
 require("scripts/globals/limbus")
 require("scripts/globals/pathfind")
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 local ID = require("scripts/zones/Temenos/IDs")
 -----------------------------------
 local entity = {}
@@ -14,13 +14,14 @@ local path =
 {
     [4] =
     {
-        {30.000, 80.000, 420.500},
-        {10.000, 80.000, 420.500}
+        { 30.000, 80.000, 420.500 },
+        { 10.000, 80.000, 420.500 },
     },
+
     [5] =
     {
-        {70.000, 80.000, 420.500},
-        {50.000, 80.000, 420.500}
+        { 70.000, 80.000, 420.500 },
+        { 50.000, 80.000, 420.500 },
     },
 }
 

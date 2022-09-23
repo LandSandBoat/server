@@ -13,7 +13,7 @@ require('scripts/globals/quests')
 require('scripts/globals/status')
 require('scripts/globals/titles')
 require('scripts/globals/zone')
-require('scripts/settings/main')
+require('scripts/globals/settings')
 -----------------------------------
 local graubergID = require("scripts/zones/Grauberg_[S]/IDs")
 -----------------------------------
@@ -32,7 +32,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
                 player:getMainJob() == xi.job.DNC and
-                player:getMainLvl() >= xi.settings.AF1_QUEST_LEVEL
+                player:getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL
         end,
 
         [xi.zone.UPPER_JEUNO] =

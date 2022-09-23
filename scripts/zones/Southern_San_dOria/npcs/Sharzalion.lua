@@ -6,7 +6,7 @@
 -- !pos 95 0 111 230
 -----------------------------------
 require("scripts/globals/status")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/titles")
 require("scripts/globals/keyitems")
 require("scripts/globals/shop")
@@ -25,7 +25,7 @@ entity.onTrigger = function(player, npc)
     local peaceForTheSpiritCS = player:getCharVar("peaceForTheSpiritCS")
     local orcishDriedFood = player:hasKeyItem(xi.ki.ORCISH_DRIED_FOOD)
 
-    if (player:getMainJob() == xi.job.RDM and player:getMainLvl() >= xi.settings.AF1_QUEST_LEVEL and theCrimsonTrial == QUEST_AVAILABLE) then
+    if (player:getMainJob() == xi.job.RDM and player:getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL and theCrimsonTrial == QUEST_AVAILABLE) then
         if (player:getCharVar("has_seen_rdmaf1_quest_already") == 0) then
             player:startEvent(70)
         else

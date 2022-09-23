@@ -59,10 +59,10 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 struct Pet_t
 {
-    uint16    PetID;     // ID in pet_list.sql
-    look_t    look;      // внешний вид
-    string_t  name;      // имя
-    ECOSYSTEM EcoSystem; // эко-система
+    uint16      PetID;     // ID in pet_list.sql
+    look_t      look;      // внешний вид
+    std::string name;      // имя
+    ECOSYSTEM   EcoSystem; // эко-система
 
     uint8 minLevel; // минимально-возможный  уровень
     uint8 maxLevel; // максимально-возможный уровень
@@ -114,14 +114,77 @@ struct Pet_t
     int16 light_sdt;
     int16 dark_sdt;
 
-    int16 fire_res;
-    int16 ice_res;
-    int16 wind_res;
-    int16 earth_res;
-    int16 thunder_res;
-    int16 water_res;
-    int16 light_res;
-    int16 dark_res;
+    int16 fire_meva;
+    int16 ice_meva;
+    int16 wind_meva;
+    int16 earth_meva;
+    int16 thunder_meva;
+    int16 water_meva;
+    int16 light_meva;
+    int16 dark_meva;
+
+    Pet_t()
+    : EcoSystem(ECOSYSTEM::ECO_ERROR)
+    {
+        PetID = 0;
+
+        minLevel = -1;
+        maxLevel = 99;
+
+        name_prefix = 0;
+        radius      = 0;
+        m_Family    = 0;
+        time        = 0;
+
+        mJob      = 0;
+        sJob      = 0;
+        m_Element = 0;
+        HPscale   = 0.f;
+        MPscale   = 0.f;
+
+        cmbDelay = 0;
+        speed    = 0;
+
+        strRank = 0;
+        dexRank = 0;
+        vitRank = 0;
+        agiRank = 0;
+        intRank = 0;
+        mndRank = 0;
+        chrRank = 0;
+        attRank = 0;
+        defRank = 0;
+        evaRank = 0;
+        accRank = 0;
+
+        m_MobSkillList = 0;
+
+        hasSpellScript = false;
+        spellList      = 0;
+
+        slash_sdt  = 0;
+        pierce_sdt = 0;
+        hth_sdt    = 0;
+        impact_sdt = 0;
+
+        fire_sdt    = 0;
+        ice_sdt     = 0;
+        wind_sdt    = 0;
+        earth_sdt   = 0;
+        thunder_sdt = 0;
+        water_sdt   = 0;
+        light_sdt   = 0;
+        dark_sdt    = 0;
+
+        fire_meva    = 0;
+        ice_meva     = 0;
+        wind_meva    = 0;
+        earth_meva   = 0;
+        thunder_meva = 0;
+        water_meva   = 0;
+        light_meva   = 0;
+        dark_meva    = 0;
+    }
 };
 
 std::vector<Pet_t*> g_PPetList;
@@ -129,9 +192,9 @@ std::vector<Pet_t*> g_PPetList;
 namespace petutils
 {
     /************************************************************************
-     *																		*
-     *  Загружаем список прототипов питомцев									*
-     *																		*
+     *                                                                      *
+     *  Загружаем список прототипов питомцев                                    *
+     *                                                                      *
      ************************************************************************/
 
     void LoadPetList()
@@ -168,7 +231,7 @@ namespace petutils
                 hasSpellScript, spellList, \
                 slash_sdt, pierce_sdt, h2h_sdt, impact_sdt, \
                 fire_sdt, ice_sdt, wind_sdt, earth_sdt, lightning_sdt, water_sdt, light_sdt, dark_sdt, \
-                fire_res, ice_res, wind_res, earth_res, lightning_res, water_res, light_res, dark_res, \
+                fire_meva, ice_meva, wind_meva, earth_meva, lightning_meva, water_meva, light_meva, dark_meva, \
                 cmbDelay, name_prefix, mob_pools.skill_list_id \
                 FROM pet_list, mob_pools, mob_resistances, mob_family_system \
                 WHERE pet_list.poolid = mob_pools.poolid AND mob_resistances.resist_id = mob_pools.resist_id AND mob_pools.familyid = mob_family_system.familyID";
@@ -182,7 +245,10 @@ namespace petutils
                 Pet->PetID = (uint16)sql->GetIntData(0);
                 Pet->name.insert(0, (const char*)sql->GetData(1));
 
-                memcpy(&Pet->look, sql->GetData(2), 20);
+                uint16 sqlModelID[10];
+                memcpy(&sqlModelID, sql->GetData(2), 20);
+                Pet->look = look_t(sqlModelID);
+
                 Pet->minLevel  = (uint8)sql->GetIntData(3);
                 Pet->maxLevel  = (uint8)sql->GetIntData(4);
                 Pet->time      = sql->GetUIntData(5);
@@ -220,24 +286,34 @@ namespace petutils
                 Pet->hth_sdt    = (uint16)(sql->GetFloatData(30) * 1000);
                 Pet->impact_sdt = (uint16)(sql->GetFloatData(31) * 1000);
 
-                Pet->fire_sdt    = (int16)sql->GetFloatData(32); // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
-                Pet->ice_sdt     = (int16)sql->GetFloatData(33); // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
-                Pet->wind_sdt    = (int16)sql->GetFloatData(34); // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
-                Pet->earth_sdt   = (int16)sql->GetFloatData(35); // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
-                Pet->thunder_sdt = (int16)sql->GetFloatData(36); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
-                Pet->water_sdt   = (int16)sql->GetFloatData(37); // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
-                Pet->light_sdt   = (int16)sql->GetFloatData(38); // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
-                Pet->dark_sdt    = (int16)sql->GetFloatData(39); // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->fire_sdt    = (int16)sql->GetIntData(32); // Modifier 54, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->ice_sdt     = (int16)sql->GetIntData(33); // Modifier 55, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->wind_sdt    = (int16)sql->GetIntData(34); // Modifier 56, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->earth_sdt   = (int16)sql->GetIntData(35); // Modifier 57, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->thunder_sdt = (int16)sql->GetIntData(36); // Modifier 58, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->water_sdt   = (int16)sql->GetIntData(37); // Modifier 59, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->light_sdt   = (int16)sql->GetIntData(38); // Modifier 60, base 10000 stored as signed integer. Positives signify less damage.
+                Pet->dark_sdt    = (int16)sql->GetIntData(39); // Modifier 61, base 10000 stored as signed integer. Positives signify less damage.
 
                 // resistances
-                Pet->fire_res    = (int16)sql->GetIntData(40);
-                Pet->ice_res     = (int16)sql->GetIntData(41);
-                Pet->wind_res    = (int16)sql->GetIntData(42);
-                Pet->earth_res   = (int16)sql->GetIntData(43);
-                Pet->thunder_res = (int16)sql->GetIntData(44);
-                Pet->water_res   = (int16)sql->GetIntData(45);
-                Pet->light_res   = (int16)sql->GetIntData(46);
-                Pet->dark_res    = (int16)sql->GetIntData(47);
+                Pet->fire_meva    = (int16)sql->GetIntData(40);
+                Pet->ice_meva     = (int16)sql->GetIntData(41);
+                Pet->wind_meva    = (int16)sql->GetIntData(42);
+                Pet->earth_meva   = (int16)sql->GetIntData(43);
+                Pet->thunder_meva = (int16)sql->GetIntData(44);
+                Pet->water_meva   = (int16)sql->GetIntData(45);
+                Pet->light_meva   = (int16)sql->GetIntData(46);
+                Pet->dark_meva    = (int16)sql->GetIntData(47);
+                /* Todo
+                Pet->fire_res_rank    = (int16)sql->GetIntData(??);
+                Pet->ice_res_rank     = (int16)sql->GetIntData(??);
+                Pet->wind_res_rank    = (int16)sql->GetIntData(??);
+                Pet->earth_res_rank   = (int16)sql->GetIntData(??);
+                Pet->thunder_res_rank = (int16)sql->GetIntData(??);
+                Pet->water_res_rank   = (int16)sql->GetIntData(??);
+                Pet->light_res_rank   = (int16)sql->GetIntData(??);
+                Pet->dark_res_rank    = (int16)sql->GetIntData(??);
+                */
 
                 Pet->cmbDelay       = (uint16)sql->GetIntData(48);
                 Pet->name_prefix    = (uint8)sql->GetUIntData(49);
@@ -249,9 +325,9 @@ namespace petutils
     }
 
     /************************************************************************
-     *																		*
-     *  Освобождаем список прототипов питомцев								*
-     *																		*
+     *                                                                      *
+     *  Освобождаем список прототипов питомцев                              *
+     *                                                                      *
      ************************************************************************/
 
     void FreePetList()
@@ -265,7 +341,11 @@ namespace petutils
 
     void AttackTarget(CBattleEntity* PMaster, CBattleEntity* PTarget)
     {
-        XI_DEBUG_BREAK_IF(PMaster->PPet == nullptr);
+        if (PMaster == nullptr || PMaster->PPet == nullptr || PTarget == nullptr)
+        {
+            ShowWarning("petutils::AttackTarget() - Null master, pet, or target passed to function.");
+            return;
+        }
 
         CBattleEntity* PPet = PMaster->PPet;
 
@@ -277,7 +357,11 @@ namespace petutils
 
     void RetreatToMaster(CBattleEntity* PMaster)
     {
-        XI_DEBUG_BREAK_IF(PMaster->PPet == nullptr);
+        if (PMaster == nullptr || PMaster->PPet == nullptr)
+        {
+            ShowWarning("petutils::RetreatToMaster() - Null master or pet passed to function.");
+            return;
+        }
 
         CBattleEntity* PPet = PMaster->PPet;
 
@@ -427,12 +511,12 @@ namespace petutils
         PMob->setModifier(Mod::ATT, GetJugBase(PMob, petStats->attRank));
         PMob->setModifier(Mod::ACC, GetJugBase(PMob, petStats->accRank));
 
-        ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->setDamage(GetJugWeaponDamage(PMob));
+        static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->setDamage(GetJugWeaponDamage(PMob));
 
         // reduce weapon delay of MNK
         if (PMob->GetMJob() == JOB_MNK)
         {
-            ((CItemWeapon*)PMob->m_Weapons[SLOT_MAIN])->resetDelay();
+            static_cast<CItemWeapon*>(PMob->m_Weapons[SLOT_MAIN])->resetDelay();
         }
 
         uint16 fSTR = GetBaseToRank(petStats->strRank, PMob->GetMLevel());
@@ -512,7 +596,7 @@ namespace petutils
         int32 mainLevelOver60To75 = std::clamp(mlvl - 60, 0, 15); // Second calculation mode after level 60
         int32 mainLevelOver75     = (mlvl < 75 ? 0 : mlvl - 75);  // Third calculation mode after level 75
 
-        //Calculate the bonus amount of HP
+        // Calculate the bonus amount of HP
         int32 mainLevelOver10           = (mlvl < 10 ? 0 : mlvl - 10);  // +2HP on every level after 10
         int32 mainLevelOver50andUnder60 = std::clamp(mlvl - 50, 0, 10); // +2HP at each level between level 50 and 60
         int32 mainLevelOver60           = (mlvl < 60 ? 0 : mlvl - 60);
@@ -540,8 +624,8 @@ namespace petutils
         PPet->health.maxhp = (int32)((raceStat + jobStat + bonusStat + sJobStat) * petStats->HPscale);
         PPet->health.hp    = PPet->health.maxhp;
 
-        //Start MP calculation
-        raceStat =0;
+        // Start MP calculation
+        raceStat = 0;
         jobStat  = 0;
         sJobStat = 0;
 
@@ -551,12 +635,12 @@ namespace petutils
         // If the main job doesn't have an MP rating, calculate the racial bonus based on the level of the subjob's level (assuming it has an MP rating)
         if (!(grade::GetJobGrade(mjob, 1) == 0 && grade::GetJobGrade(sjob, 1) == 0))
         {
-            //calculate normal racial bonus
+            // calculate normal racial bonus
             raceStat = grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column) * mainLevelUpTo60 +
                        grade::GetMPScale(grade, scaleOver60) * mainLevelOver60;
         }
 
-        //For the main profession
+        // For the main profession
         grade = grade::GetJobGrade(mjob, 1);
         if (grade > 0)
         {
@@ -606,14 +690,15 @@ namespace petutils
         PPet->stats.MND = fMND + mMND + sMND;
         PPet->stats.CHR = fCHR + mCHR + sCHR;
 
-        ((CItemWeapon*)PPet->m_Weapons[SLOT_MAIN])->setSkillType(SKILL_AUTOMATON_MELEE);
-        ((CItemWeapon*)PPet->m_Weapons[SLOT_MAIN])->setDelay((uint16)(floor(1000.0f * (petStats->cmbDelay / 60.0f)))); // every pet should use this eventually
-        ((CItemWeapon*)PPet->m_Weapons[SLOT_MAIN])->setDamage((PPet->GetSkill(SKILL_AUTOMATON_MELEE) / 9) * 2 + 3);
+        static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setSkillType(SKILL_AUTOMATON_MELEE);
+        static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDelay((uint16)(floor(1000.0f * (petStats->cmbDelay / 60.0f)))); // every pet should use this eventually
+        static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setBaseDelay((uint16)(floor(1000.0f * (petStats->cmbDelay / 60.0f))));
+        static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDamage((PPet->GetSkill(SKILL_AUTOMATON_MELEE) / 9) * 2 + 3);
 
-        ((CItemWeapon*)PPet->m_Weapons[SLOT_RANGED])->setSkillType(SKILL_AUTOMATON_RANGED);
-        ((CItemWeapon*)PPet->m_Weapons[SLOT_RANGED])->setDamage((PPet->GetSkill(SKILL_AUTOMATON_RANGED) / 9) * 2 + 3);
+        static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_RANGED])->setSkillType(SKILL_AUTOMATON_RANGED);
+        static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_RANGED])->setDamage((PPet->GetSkill(SKILL_AUTOMATON_RANGED) / 9) * 2 + 3);
 
-        CAutomatonEntity* PAutomaton = (CAutomatonEntity*)PPet;
+        CAutomatonEntity* PAutomaton = static_cast<CAutomatonEntity*>(PPet);
 
         // Automatons are hard to interrupt
         PPet->addModifier(Mod::SPELLINTERRUPT, 85);
@@ -621,21 +706,21 @@ namespace petutils
         switch (PAutomaton->getFrame())
         {
             default: // case FRAME_HARLEQUIN:
-                PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(2, PPet->GetMLevel());
-                PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(10, PPet->GetMLevel()));
+                PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(2, mlvl > 99 ? 99 : mlvl);
+                PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(10, mlvl > 99 ? 99 : mlvl));
                 break;
             case FRAME_VALOREDGE:
                 PPet->m_Weapons[SLOT_SUB]->setShieldSize(3);
-                PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(5, PPet->GetMLevel());
-                PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(5, PPet->GetMLevel()));
+                PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(5, mlvl > 99 ? 99 : mlvl);
+                PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(5, mlvl > 99 ? 99 : mlvl));
                 break;
             case FRAME_SHARPSHOT:
-                PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(1, PPet->GetMLevel());
-                PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(11, PPet->GetMLevel()));
+                PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(1, mlvl > 99 ? 99 : mlvl);
+                PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(11, mlvl > 99 ? 99 : mlvl));
                 break;
             case FRAME_STORMWAKER:
-                PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(10, PPet->GetMLevel());
-                PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(12, PPet->GetMLevel()));
+                PPet->WorkingSkills.evasion = battleutils::GetMaxSkill(10, mlvl > 99 ? 99 : mlvl);
+                PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(12, mlvl > 99 ? 99 : mlvl));
                 break;
         }
 
@@ -670,17 +755,17 @@ namespace petutils
 
         uint8 grade;
 
-        uint8 mlvl   = PPet->GetMLevel();
+        uint8   mlvl = PPet->GetMLevel();
         JOBTYPE mjob = PPet->GetMJob();
-        uint8 race   = 3; // Tarutaru - wait what??
+        uint8   race = 3; // Tarutaru - wait what??
 
         // Calculate HP gain from main job
-        int32 mainLevelOver30           = std::clamp(mlvl - 30, 0, 30); // Calculate condition +1HP every lvl after level 30
-        int32 mainLevelUpTo60           = (mlvl < 60 ? mlvl - 1 : 59);  // First calculation mode up to level 60 (Used the same for MP)
-        int32 mainLevelOver60To75       = std::clamp(mlvl - 60, 0, 15); // Second calculation mode after level 60
-        int32 mainLevelOver75           = (mlvl < 75 ? 0 : mlvl - 75);  // Third calculation mode after level 75
+        int32 mainLevelOver30     = std::clamp(mlvl - 30, 0, 30); // Calculate condition +1HP every lvl after level 30
+        int32 mainLevelUpTo60     = (mlvl < 60 ? mlvl - 1 : 59);  // First calculation mode up to level 60 (Used the same for MP)
+        int32 mainLevelOver60To75 = std::clamp(mlvl - 60, 0, 15); // Second calculation mode after level 60
+        int32 mainLevelOver75     = (mlvl < 75 ? 0 : mlvl - 75);  // Third calculation mode after level 75
 
-        //Calculate the bonus amount of HP
+        // Calculate the bonus amount of HP
         int32 mainLevelOver10           = (mlvl < 10 ? 0 : mlvl - 10);  // +2HP on every level after 10
         int32 mainLevelOver50andUnder60 = std::clamp(mlvl - 50, 0, 10); // +2HP at each level between level 50 and 60
         int32 mainLevelOver60           = (mlvl < 60 ? 0 : mlvl - 60);
@@ -716,7 +801,7 @@ namespace petutils
         raceStat = 0;
         jobStat  = 0;
         sJobStat = 0;
-        grade = grade::GetRaceGrades(race, 1);
+        grade    = grade::GetRaceGrades(race, 1);
 
         // If the main job does not have an MP rating, calculate the racial bonus based on the level of the subjob's level (assuming it has an MP rating)
         if (grade::GetJobGrade(mjob, 1) != 0)
@@ -798,9 +883,9 @@ namespace petutils
     }
 
     /************************************************************************
-     *																		*
-     *																		*
-     *																		*
+     *                                                                      *
+     *                                                                      *
+     *                                                                      *
      ************************************************************************/
 
     void SpawnPet(CBattleEntity* PMaster, uint32 PetID, bool spawningFromZone)
@@ -817,7 +902,7 @@ namespace petutils
             LoadPet(PMaster, PetID, spawningFromZone);
         }
 
-        CPetEntity* PPet = (CPetEntity*)PMaster->PPet;
+        CPetEntity* PPet = dynamic_cast<CPetEntity*>(PMaster->PPet);
         if (PPet)
         {
             PPet->allegiance = PMaster->allegiance;
@@ -847,21 +932,27 @@ namespace petutils
                     battleutils::AddTraits(PPet, traits::GetTraits(PPet->GetSJob()), PPet->GetSLevel());
                 }
 
-                charutils::BuildingCharAbilityTable((CCharEntity*)PMaster);
-                charutils::BuildingCharPetAbilityTable((CCharEntity*)PMaster, PPet, PetID);
-                ((CCharEntity*)PMaster)->pushPacket(new CCharUpdatePacket((CCharEntity*)PMaster));
-                ((CCharEntity*)PMaster)->pushPacket(new CPetSyncPacket((CCharEntity*)PMaster));
+                charutils::BuildingCharAbilityTable(static_cast<CCharEntity*>(PMaster));
+                charutils::BuildingCharPetAbilityTable(static_cast<CCharEntity*>(PMaster), PPet, PetID);
+                static_cast<CCharEntity*>(PMaster)->pushPacket(new CCharUpdatePacket(static_cast<CCharEntity*>(PMaster)));
+                static_cast<CCharEntity*>(PMaster)->pushPacket(new CPetSyncPacket(static_cast<CCharEntity*>(PMaster)));
 
                 // check latents affected by pets
-                ((CCharEntity*)PMaster)->PLatentEffectContainer->CheckLatentsPetType();
-                PMaster->ForParty([](CBattleEntity* PMember) { ((CCharEntity*)PMember)->PLatentEffectContainer->CheckLatentsPartyAvatar(); });
+                static_cast<CCharEntity*>(PMaster)->PLatentEffectContainer->CheckLatentsPetType();
+
+                // clang-format off
+                PMaster->ForParty([](CBattleEntity* PMember)
+                {
+                    static_cast<CCharEntity*>(PMember)->PLatentEffectContainer->CheckLatentsPartyAvatar();
+                });
+                // clang-format on
             }
             // apply stats from previous zone if this pet is being transferred
             if (spawningFromZone)
             {
-                PPet->health.tp = (int16)((CCharEntity*)PMaster)->petZoningInfo.petTP;
-                PPet->health.hp = ((CCharEntity*)PMaster)->petZoningInfo.petHP;
-                PPet->health.mp = ((CCharEntity*)PMaster)->petZoningInfo.petMP;
+                PPet->health.tp = (int16) static_cast<CCharEntity*>(PMaster)->petZoningInfo.petTP;
+                PPet->health.hp = static_cast<CCharEntity*>(PMaster)->petZoningInfo.petHP;
+                PPet->health.mp = static_cast<CCharEntity*>(PMaster)->petZoningInfo.petMP;
             }
         }
         else if (PMaster->objtype == TYPE_PC)
@@ -881,51 +972,63 @@ namespace petutils
 
         // grab pet info
         Pet_t*      petData = g_PPetList.at(PetID);
-        CMobEntity* PPet    = (CMobEntity*)PMaster->PPet;
-
-        PPet->look = petData->look;
-        PPet->name = petData->name;
-        PPet->SetMJob(petData->mJob);
-        PPet->m_EcoSystem      = petData->EcoSystem;
-        PPet->m_Family         = petData->m_Family;
-        PPet->m_Element        = petData->m_Element;
-        PPet->HPscale          = petData->HPscale;
-        PPet->MPscale          = petData->MPscale;
-
-        PPet->allegiance = PMaster->allegiance;
-        PMaster->StatusEffectContainer->CopyConfrontationEffect(PPet);
-
-        // TODO: Lets not do this here.
-        if (PPet->m_EcoSystem == ECOSYSTEM::AVATAR || PPet->m_EcoSystem == ECOSYSTEM::ELEMENTAL)
+        CMobEntity* PPet    = dynamic_cast<CMobEntity*>(PMaster->PPet);
+        if (PPet)
         {
-            // assuming elemental spawn
-            PPet->setModifier(Mod::DMGPHYS, -5000); //-50% PDT
+            PPet->look = petData->look;
+            PPet->name = petData->name;
+            PPet->SetMJob(petData->mJob);
+            PPet->m_EcoSystem = petData->EcoSystem;
+            PPet->m_Family    = petData->m_Family;
+            PPet->m_Element   = petData->m_Element;
+            PPet->HPscale     = petData->HPscale;
+            PPet->MPscale     = petData->MPscale;
+
+            PPet->allegiance = PMaster->allegiance;
+            PMaster->StatusEffectContainer->CopyConfrontationEffect(PPet);
+
+            // TODO: Lets not do this here.
+            if (PPet->m_EcoSystem == ECOSYSTEM::AVATAR || PPet->m_EcoSystem == ECOSYSTEM::ELEMENTAL)
+            {
+                // assuming elemental spawn
+                PPet->setModifier(Mod::DMGPHYS, -5000); //-50% PDT
+            }
+
+            PPet->m_SpellListContainer = mobSpellList::GetMobSpellList(petData->spellList);
+
+            PPet->setModifier(Mod::SLASH_SDT, petData->slash_sdt);
+            PPet->setModifier(Mod::PIERCE_SDT, petData->pierce_sdt);
+            PPet->setModifier(Mod::HTH_SDT, petData->hth_sdt);
+            PPet->setModifier(Mod::IMPACT_SDT, petData->impact_sdt);
+
+            PPet->setModifier(Mod::FIRE_SDT, petData->fire_sdt);
+            PPet->setModifier(Mod::ICE_SDT, petData->ice_sdt);
+            PPet->setModifier(Mod::WIND_SDT, petData->wind_sdt);
+            PPet->setModifier(Mod::EARTH_SDT, petData->earth_sdt);
+            PPet->setModifier(Mod::THUNDER_SDT, petData->thunder_sdt);
+            PPet->setModifier(Mod::WATER_SDT, petData->water_sdt);
+            PPet->setModifier(Mod::LIGHT_SDT, petData->light_sdt);
+            PPet->setModifier(Mod::DARK_SDT, petData->dark_sdt);
+
+            PPet->setModifier(Mod::FIRE_MEVA, petData->fire_meva); // These are stored as signed integers which
+            PPet->setModifier(Mod::ICE_MEVA, petData->ice_meva);   // is directly the modifier starting value.
+            PPet->setModifier(Mod::WIND_MEVA, petData->wind_meva); // Positives signify increased resist chance.
+            PPet->setModifier(Mod::EARTH_MEVA, petData->earth_meva);
+            PPet->setModifier(Mod::THUNDER_MEVA, petData->thunder_meva);
+            PPet->setModifier(Mod::WATER_MEVA, petData->water_meva);
+            PPet->setModifier(Mod::LIGHT_MEVA, petData->light_meva);
+            PPet->setModifier(Mod::DARK_MEVA, petData->dark_meva);
+            /* Todo
+            fire_res_rank
+            ice_res_rank
+            wind_res_rank
+            earth_res_rank
+            thunder_res_rank
+            water_res_rank
+            light_res_rank
+            dark_res_rank
+            */
         }
-
-        PPet->m_SpellListContainer = mobSpellList::GetMobSpellList(petData->spellList);
-
-        PPet->setModifier(Mod::SLASH_SDT, petData->slash_sdt);
-        PPet->setModifier(Mod::PIERCE_SDT, petData->pierce_sdt);
-        PPet->setModifier(Mod::HTH_SDT, petData->hth_sdt);
-        PPet->setModifier(Mod::IMPACT_SDT, petData->impact_sdt);
-
-        PPet->setModifier(Mod::FIRE_SDT, petData->fire_sdt);
-        PPet->setModifier(Mod::ICE_SDT, petData->ice_sdt);
-        PPet->setModifier(Mod::WIND_SDT, petData->wind_sdt);
-        PPet->setModifier(Mod::EARTH_SDT, petData->earth_sdt);
-        PPet->setModifier(Mod::THUNDER_SDT, petData->thunder_sdt);
-        PPet->setModifier(Mod::WATER_SDT, petData->water_sdt);
-        PPet->setModifier(Mod::LIGHT_SDT, petData->light_sdt);
-        PPet->setModifier(Mod::DARK_SDT, petData->dark_sdt);
-
-        PPet->setModifier(Mod::FIRE_RES, petData->fire_res);       // These are stored as signed integers which
-        PPet->setModifier(Mod::ICE_RES, petData->ice_res);         // is directly the modifier starting value.
-        PPet->setModifier(Mod::WIND_RES, petData->wind_res);       // Positives signify increased resist chance.
-        PPet->setModifier(Mod::EARTH_RES, petData->earth_res);
-        PPet->setModifier(Mod::THUNDER_RES, petData->thunder_res);
-        PPet->setModifier(Mod::WATER_RES, petData->water_res);
-        PPet->setModifier(Mod::LIGHT_RES, petData->light_res);
-        PPet->setModifier(Mod::DARK_RES, petData->dark_res);
     }
 
     void DetachPet(CBattleEntity* PMaster)
@@ -934,11 +1037,11 @@ namespace petutils
         XI_DEBUG_BREAK_IF(PMaster->objtype != TYPE_PC);
 
         CBattleEntity* PPet  = PMaster->PPet;
-        CCharEntity*   PChar = (CCharEntity*)PMaster;
+        CCharEntity*   PChar = static_cast<CCharEntity*>(PMaster);
 
         if (PPet->objtype == TYPE_MOB)
         {
-            CMobEntity* PMob = (CMobEntity*)PPet;
+            CMobEntity* PMob = static_cast<CMobEntity*>(PPet);
 
             if (!PMob->isDead())
             {
@@ -986,15 +1089,21 @@ namespace petutils
             {
                 PPet->Die();
             }
-            CPetEntity* PPetEnt = (CPetEntity*)PPet;
+            CPetEntity* PPetEnt = static_cast<CPetEntity*>(PPet);
 
             if (PPetEnt->getPetType() == PET_TYPE::AVATAR)
             {
                 PMaster->setModifier(Mod::AVATAR_PERPETUATION, 0);
             }
 
-            ((CCharEntity*)PMaster)->PLatentEffectContainer->CheckLatentsPetType();
-            PMaster->ForParty([](CBattleEntity* PMember) { ((CCharEntity*)PMember)->PLatentEffectContainer->CheckLatentsPartyAvatar(); });
+            static_cast<CCharEntity*>(PMaster)->PLatentEffectContainer->CheckLatentsPetType();
+
+            // clang-format off
+            PMaster->ForParty([](CBattleEntity* PMember)
+            {
+                static_cast<CCharEntity*>(PMember)->PLatentEffectContainer->CheckLatentsPartyAvatar();
+            });
+            // clang-format on
 
             if (PPetEnt->getPetType() != PET_TYPE::AUTOMATON)
             {
@@ -1016,9 +1125,9 @@ namespace petutils
     }
 
     /************************************************************************
-     *																		*
-     *																		*
-     *																		*
+     *                                                                      *
+     *                                                                      *
+     *                                                                      *
      ************************************************************************/
 
     void DespawnPet(CBattleEntity* PMaster)
@@ -1031,7 +1140,9 @@ namespace petutils
     int16 PerpetuationCost(uint32 id, uint8 level)
     {
         int16 cost = 0;
-        if (id <= 7)
+
+        // Fire Spirit through Dark Spirit
+        if (id <= PETID_DARKSPIRIT)
         {
             if (level < 19)
             {
@@ -1062,7 +1173,7 @@ namespace petutils
                 cost = 7;
             }
         }
-        else if (id == 8)
+        else if (id == PETID_CARBUNCLE)
         {
             if (level < 10)
             {
@@ -1109,7 +1220,7 @@ namespace petutils
                 cost = 11;
             }
         }
-        else if (id == 9)
+        else if (id == PETID_FENRIR)
         {
             if (level < 8)
             {
@@ -1164,7 +1275,8 @@ namespace petutils
                 cost = 13;
             }
         }
-        else if (id <= 16)
+        // NOTE: This condition covers PETID_IFRIT through the below conditions
+        else if (id <= PETID_DIABOLOS || id == PETID_SIREN)
         {
             if (level < 10)
             {
@@ -1265,7 +1377,8 @@ namespace petutils
 
         Pet_t* PPetData = new Pet_t();
 
-        PPetData = *std::find_if(g_PPetList.begin(), g_PPetList.end(), [PetID](Pet_t* t) { return t->PetID == PetID; });
+        PPetData = *std::find_if(g_PPetList.begin(), g_PPetList.end(), [PetID](Pet_t* t)
+                                 { return t->PetID == PetID; });
 
         if (PMaster->GetMJob() != JOB_DRG && PetID == PETID_WYVERN)
         {
@@ -1274,12 +1387,12 @@ namespace petutils
 
         if (PMaster->objtype == TYPE_PC)
         {
-            ((CCharEntity*)PMaster)->petZoningInfo.petID = PetID;
+            static_cast<CCharEntity*>(PMaster)->petZoningInfo.petID = PetID;
         }
 
         PET_TYPE petType = PET_TYPE::JUG_PET;
 
-        if (PetID <= PETID_CAIT_SITH)
+        if (PetID <= PETID_CAIT_SITH || PetID == PETID_SIREN)
         {
             petType = PET_TYPE::AVATAR;
         }
@@ -1362,7 +1475,7 @@ namespace petutils
         CPetEntity* PPet = nullptr;
         if (petType == PET_TYPE::AUTOMATON && PMaster->objtype == TYPE_PC)
         {
-            PPet = ((CCharEntity*)PMaster)->PAutomaton;
+            PPet = static_cast<CCharEntity*>(PMaster)->PAutomaton;
             PPet->PAI->SetController(std::make_unique<CAutomatonController>(static_cast<CAutomatonEntity*>(PPet)));
         }
         else
@@ -1403,9 +1516,22 @@ namespace petutils
 
         if (PPet->getPetType() == PET_TYPE::AVATAR)
         {
+            uint8 mLvl = PMaster->GetMLevel();
+
             if (PMaster->GetMJob() == JOB_SMN)
             {
-                PPet->SetMLevel(PMaster->GetMLevel());
+                mLvl += PMaster->getMod(Mod::AVATAR_LVL_BONUS);
+
+                if (PetID == PETID_CARBUNCLE)
+                {
+                    mLvl += PMaster->getMod(Mod::CARBUNCLE_LVL_BONUS);
+                }
+                else if (PetID == PETID_CAIT_SITH)
+                {
+                    mLvl += PMaster->getMod(Mod::CAIT_SITH_LVL_BONUS);
+                }
+
+                PPet->SetMLevel(mLvl);
             }
             else if (PMaster->GetSJob() == JOB_SMN)
             {
@@ -1424,50 +1550,50 @@ namespace petutils
 
             PPet->setModifier(Mod::CRIT_DMG_INCREASE, 8); // Avatars have Crit Att Bonus II for +8 crit dmg
 
-            if (PPet->GetMLevel() >= 70)
+            if (mLvl >= 70)
             {
                 PPet->setModifier(Mod::MATT, 32);
             }
-            else if (PPet->GetMLevel() >= 50)
+            else if (mLvl >= 50)
             {
                 PPet->setModifier(Mod::MATT, 28);
             }
-            else if (PPet->GetMLevel() >= 30)
+            else if (mLvl >= 30)
             {
                 PPet->setModifier(Mod::MATT, 24);
             }
-            else if (PPet->GetMLevel() >= 10)
+            else if (mLvl >= 10)
             {
                 PPet->setModifier(Mod::MATT, 20);
             }
-            ((CItemWeapon*)PPet->m_Weapons[SLOT_MAIN])->setDelay((uint16)(floor(1000.0f * (320.0f / 60.0f))));
+            static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDelay((uint16)(floor(1000.0f * (320.0f / 60.0f))));
 
             if (PetID == PETID_FENRIR)
             {
-                ((CItemWeapon*)PPet->m_Weapons[SLOT_MAIN])->setDelay((uint16)(floor(1000.0 * (280.0f / 60.0f))));
+                static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDelay((uint16)(floor(1000.0 * (280.0f / 60.0f))));
             }
 
             // In a 2014 update SE updated Avatar base damage
             // Based on testing this value appears to be Level now instead of Level * 0.74f
-            uint16 weaponDamage = 1 + PPet->GetMLevel();
+            uint16 weaponDamage = 1 + mLvl;
             if (PetID == PETID_CARBUNCLE || PetID == PETID_CAIT_SITH)
             {
-                weaponDamage = static_cast<uint16>(floor(PPet->GetMLevel() * 0.9f));
+                weaponDamage = static_cast<uint16>(floor(mLvl * 0.9f));
             }
 
-            ((CItemWeapon*)PPet->m_Weapons[SLOT_MAIN])->setDamage(weaponDamage);
-
+            static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDamage(weaponDamage);
+            static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setBaseDelay((uint16)(floor(1000.0f * (PPetData->cmbDelay / 60.0f))));
             // Set B+ weapon skill (assumed capped for level derp)
             // attack is madly high for avatars (roughly x2)
-            PPet->setModifier(Mod::ATT, 2 * battleutils::GetMaxSkill(SKILL_CLUB, JOB_WHM, PPet->GetMLevel()));
-            PPet->setModifier(Mod::ACC, battleutils::GetMaxSkill(SKILL_CLUB, JOB_WHM, PPet->GetMLevel()));
+            PPet->setModifier(Mod::ATT, 2 * battleutils::GetMaxSkill(SKILL_CLUB, JOB_WHM, mLvl > 99 ? 99 : mLvl));
+            PPet->setModifier(Mod::ACC, battleutils::GetMaxSkill(SKILL_CLUB, JOB_WHM, mLvl > 99 ? 99 : mLvl));
             // Set E evasion and def
-            PPet->setModifier(Mod::EVA, battleutils::GetMaxSkill(SKILL_THROWING, JOB_WHM, PPet->GetMLevel()));
-            PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(SKILL_THROWING, JOB_WHM, PPet->GetMLevel()));
+            PPet->setModifier(Mod::EVA, battleutils::GetMaxSkill(SKILL_THROWING, JOB_WHM, mLvl > 99 ? 99 : mLvl));
+            PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(SKILL_THROWING, JOB_WHM, mLvl > 99 ? 99 : mLvl));
             // cap all magic skills so they play nice with spell scripts
             for (int i = SKILL_DIVINE_MAGIC; i <= SKILL_BLUE_MAGIC; i++)
             {
-                uint16 maxSkill = battleutils::GetMaxSkill((SKILLTYPE)i, PPet->GetMJob(), PPet->GetMLevel());
+                uint16 maxSkill = battleutils::GetMaxSkill((SKILLTYPE)i, PPet->GetMJob(), mLvl > 99 ? 99 : mLvl);
                 if (maxSkill != 0)
                 {
                     PPet->WorkingSkills.skill[i] = maxSkill;
@@ -1475,7 +1601,7 @@ namespace petutils
                 else // if the mob is WAR/BLM and can cast spell
                 {
                     // set skill as high as main level, so their spells won't get resisted
-                    uint16 maxSubSkill = battleutils::GetMaxSkill((SKILLTYPE)i, PPet->GetSJob(), PPet->GetMLevel());
+                    uint16 maxSubSkill = battleutils::GetMaxSkill((SKILLTYPE)i, PPet->GetSJob(), mLvl > 99 ? 99 : mLvl);
 
                     if (maxSubSkill != 0)
                     {
@@ -1486,7 +1612,7 @@ namespace petutils
 
             if (PMaster->objtype == TYPE_PC)
             {
-                CCharEntity* PChar = (CCharEntity*)PMaster;
+                CCharEntity* PChar = static_cast<CCharEntity*>(PMaster);
                 PPet->addModifier(Mod::MATT, PChar->PMeritPoints->GetMeritValue(MERIT_AVATAR_MAGICAL_ATTACK, PChar));
                 PPet->addModifier(Mod::ATT, PChar->PMeritPoints->GetMeritValue(MERIT_AVATAR_PHYSICAL_ATTACK, PChar));
                 PPet->addModifier(Mod::MACC, PChar->PMeritPoints->GetMeritValue(MERIT_AVATAR_MAGICAL_ACCURACY, PChar));
@@ -1499,17 +1625,17 @@ namespace petutils
                 PPet->addModifier(Mod::BP_DAMAGE, PChar->PJobPoints->GetJobPointValue(JP_BLOOD_PACT_DMG_BONUS) * 3);
             }
 
-            PMaster->addModifier(Mod::AVATAR_PERPETUATION, PerpetuationCost(PetID, PPet->GetMLevel()));
+            PMaster->addModifier(Mod::AVATAR_PERPETUATION, PerpetuationCost(PetID, mLvl));
         }
         else if (PPet->getPetType() == PET_TYPE::JUG_PET)
         {
-            ((CItemWeapon*)PPet->m_Weapons[SLOT_MAIN])->setDelay((uint16)(floor(1000.0f * (240.0f / 60.0f))));
-
+            static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDelay((uint16)(floor(1000.0f * (240.0f / 60.0f))));
+            static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setBaseDelay((uint16)(floor(1000.0f * (240.0f / 60.0f))));
             // Get the Jug pet cap level
             uint8 highestLvl = PPetData->maxLevel;
 
             // Increase the pet's level cal by the bonus given by BEAST AFFINITY merits.
-            CCharEntity* PChar = (CCharEntity*)PMaster;
+            CCharEntity* PChar = static_cast<CCharEntity*>(PMaster);
             highestLvl += PChar->PMeritPoints->GetMeritValue(MERIT_BEAST_AFFINITY, PChar);
 
             // And cap it to the master's level or weapon ilvl, whichever is greater
@@ -1531,7 +1657,7 @@ namespace petutils
         }
         else if (PPet->getPetType() == PET_TYPE::AUTOMATON && PMaster->objtype == TYPE_PC)
         {
-            CAutomatonEntity* PAutomaton = (CAutomatonEntity*)PPet;
+            CAutomatonEntity* PAutomaton = static_cast<CAutomatonEntity*>(PPet);
             switch (PAutomaton->getFrame())
             {
                 default: // case FRAME_HARLEQUIN:
@@ -1554,7 +1680,7 @@ namespace petutils
             // TEMP: should be MLevel when unsummoned, and PUP level when summoned
             if (PMaster->GetMJob() == JOB_PUP)
             {
-                PPet->SetMLevel(PMaster->GetMLevel());
+                PPet->SetMLevel(PMaster->GetMLevel() + PMaster->getMod(Mod::AUTOMATON_LVL_BONUS));
                 PPet->SetSLevel(PMaster->GetMLevel() / 2); // Todo: SetSLevel() already reduces the level?
             }
             else
@@ -1562,10 +1688,10 @@ namespace petutils
                 PPet->SetMLevel(PMaster->GetSLevel());
                 PPet->SetSLevel(PMaster->GetSLevel() / 2); // Todo: SetSLevel() already reduces the level?
             }
-            LoadAutomatonStats((CCharEntity*)PMaster, PPet, g_PPetList.at(PetID)); // temp
+            LoadAutomatonStats(static_cast<CCharEntity*>(PMaster), PPet, g_PPetList.at(PetID)); // temp
             if (PMaster->objtype == TYPE_PC)
             {
-                CCharEntity* PChar = (CCharEntity*)PMaster;
+                CCharEntity* PChar = static_cast<CCharEntity*>(PMaster);
                 PPet->addModifier(Mod::ATTP, PChar->PMeritPoints->GetMeritValue(MERIT_OPTIMIZATION, PChar));
                 PPet->addModifier(Mod::DEFP, PChar->PMeritPoints->GetMeritValue(MERIT_OPTIMIZATION, PChar));
                 PPet->addModifier(Mod::MATT, PChar->PMeritPoints->GetMeritValue(MERIT_OPTIMIZATION, PChar));
@@ -1613,17 +1739,22 @@ namespace petutils
         }
 
         PPet->SetMJob(JOB_DRG);
-        PPet->SetMLevel(PMaster->GetMLevel());
+        // https://www.bg-wiki.com/ffxi/Wyvern_(Dragoon_Pet)#About_the_Wyvern
+        uint8 mLvl = PMaster->GetMLevel();
+        uint8 iLvl = std::clamp(charutils::getMainhandItemLevel(static_cast<CCharEntity*>(PMaster)) - 99, 0, 20);
 
-        LoadAvatarStats(PMaster, PPet);                                                                    // follows PC calcs (w/o SJ)
-        ((CItemWeapon*)PPet->m_Weapons[SLOT_MAIN])->setDelay((uint16)(floor(1000.0f * (320.0f / 60.0f)))); // 320 delay
-        ((CItemWeapon*)PPet->m_Weapons[SLOT_MAIN])->setDamage((uint16)(1 + floor(PPet->GetMLevel() * 0.9f)));
+        PPet->SetMLevel(mLvl + iLvl + PMaster->getMod(Mod::WYVERN_LVL_BONUS));
+
+        LoadAvatarStats(PMaster, PPet);                                                                               // follows PC calcs (w/o SJ)
+        static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDelay((uint16)(floor(1000.0f * (320.0f / 60.0f)))); // 320 delay
+        static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setBaseDelay((uint16)(floor(1000.0f * (320.0f / 60.0f))));
+        static_cast<CItemWeapon*>(PPet->m_Weapons[SLOT_MAIN])->setDamage((uint16)(1 + floor(mLvl * 0.9f)));
         // Set A+ weapon skill
-        PPet->setModifier(Mod::ATT, battleutils::GetMaxSkill(SKILL_GREAT_AXE, JOB_WAR, PPet->GetMLevel()));
-        PPet->setModifier(Mod::ACC, battleutils::GetMaxSkill(SKILL_GREAT_AXE, JOB_WAR, PPet->GetMLevel()));
+        PPet->setModifier(Mod::ATT, battleutils::GetMaxSkill(SKILL_GREAT_AXE, JOB_WAR, mLvl > 99 ? 99 : mLvl));
+        PPet->setModifier(Mod::ACC, battleutils::GetMaxSkill(SKILL_GREAT_AXE, JOB_WAR, mLvl > 99 ? 99 : mLvl));
         // Set D evasion and def
-        PPet->setModifier(Mod::EVA, battleutils::GetMaxSkill(SKILL_HAND_TO_HAND, JOB_WAR, PPet->GetMLevel()));
-        PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(SKILL_HAND_TO_HAND, JOB_WAR, PPet->GetMLevel()));
+        PPet->setModifier(Mod::EVA, battleutils::GetMaxSkill(SKILL_HAND_TO_HAND, JOB_WAR, mLvl > 99 ? 99 : mLvl));
+        PPet->setModifier(Mod::DEF, battleutils::GetMaxSkill(SKILL_HAND_TO_HAND, JOB_WAR, mLvl > 99 ? 99 : mLvl));
 
         // Job Point: Wyvern Max HP
         if (PMaster->objtype == TYPE_PC)
@@ -1652,7 +1783,7 @@ namespace petutils
     void FinalizePetStatistics(CBattleEntity* PMaster, CPetEntity* PPet)
     {
         // set C magic evasion
-        PPet->setModifier(Mod::MEVA, battleutils::GetMaxSkill(SKILL_ELEMENTAL_MAGIC, JOB_RDM, PPet->GetMLevel()));
+        PPet->setModifier(Mod::MEVA, battleutils::GetMaxSkill(SKILL_ELEMENTAL_MAGIC, JOB_RDM, PPet->GetMLevel() > 99 ? 99 : PPet->GetMLevel()));
         PPet->health.tp = 0;
         PMaster->applyPetModifiers(PPet);
         PPet->UpdateHealth();
@@ -1668,7 +1799,7 @@ namespace petutils
                 {
                     if (trait->getID() == TRAIT_STOUT_SERVANT)
                     {
-                        PPet->addModifier(Mod::DMG, -(trait->getValue()*100));
+                        PPet->addModifier(Mod::DMG, -(trait->getValue() * 100));
                         break;
                     }
                 }

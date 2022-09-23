@@ -40,7 +40,11 @@ CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(CCharEntity* PChar, uint8 Mem
     // Modify with caution for the below functions!
     this->setSize(0x40);
 
-    XI_DEBUG_BREAK_IF(PChar == nullptr);
+    if (PChar == nullptr)
+    {
+        ShowError("CPartyMemberUpdatePacket::CPartyMemberUpdatePacket() - PChar was null.");
+        return;
+    }
 
     ref<uint32>(0x04) = PChar->id;
 
@@ -77,7 +81,11 @@ CPartyMemberUpdatePacket::CPartyMemberUpdatePacket(CTrustEntity* PTrust, uint8 M
     this->setType(0xDD);
     this->setSize(0x40);
 
-    XI_DEBUG_BREAK_IF(PTrust == nullptr);
+    if (PTrust == nullptr)
+    {
+        ShowError("CPartyMemberUpdatePacket::CPartyMemberUpdatePacket() - PTrust was null.");
+        return;
+    }
 
     ref<uint32>(0x04) = PTrust->id;
 

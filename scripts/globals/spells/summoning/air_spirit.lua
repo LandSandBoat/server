@@ -12,12 +12,12 @@ local spell_object = {}
 
 spell_object.onMagicCastingCheck = function(caster, target, spell)
     local result = 0
-    if (caster:hasPet()) then
+    if caster:hasPet() then
         result = xi.msg.basic.ALREADY_HAS_A_PET
-    elseif (not caster:canUseMisc(xi.zoneMisc.PET)) then
+    elseif not caster:canUseMisc(xi.zoneMisc.PET) then
         result = xi.msg.basic.CANT_BE_USED_IN_AREA
-    elseif (caster:getObjType() == xi.objType.PC) then
-        result = avatarMiniFightCheck(caster)
+    elseif caster:getObjType() == xi.objType.PC then
+        result = xi.summon.avatarMiniFightCheck(caster)
     end
     return result
 end

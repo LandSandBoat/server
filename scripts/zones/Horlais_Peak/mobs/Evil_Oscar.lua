@@ -52,7 +52,7 @@ evilOscarFillsHisLungs = function(mob)
 
     if someoneIsAlive then
         local ebbBreathCounter = mob:getLocalVar("EBB_BREATH_COUNTER")
-        if ebbBreathCounter < 2 then -- Charge two breaths...
+        if ebbBreathCounter < 2 then -- Charge two breaths
             sendMessage(players)
             mob:setLocalVar("EBB_BREATH_COUNTER", ebbBreathCounter + 1)
         else -- On the third breath, fire straight away!

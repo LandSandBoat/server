@@ -3,7 +3,7 @@
 --  NPC: Chipmy-Popmy
 -- Working 100%
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/missions")
 -----------------------------------
 local entity = {}

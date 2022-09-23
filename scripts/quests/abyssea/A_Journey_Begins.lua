@@ -26,44 +26,44 @@ quest.sections =
         check = function(player, status, vars)
             return status == QUEST_ACCEPTED and player:getMainLvl() >= 30
         end,
-    },
 
-    [xi.zone.PORT_JEUNO] =
-    {
-        ['Joachim'] =
+        [xi.zone.PORT_JEUNO] =
         {
-            onTrigger = function(player, npc)
-                if quest:getVar(player, 'Prog') == 1 then
-                    return quest:progressEvent(325)
-                end
-            end,
-        },
+            ['Joachim'] =
+            {
+                onTrigger = function(player, npc)
+                    if quest:getVar(player, 'Prog') == 1 then
+                        return quest:progressEvent(325)
+                    end
+                end,
+            },
 
-        onZoneIn =
-        {
-            function(player, prevZone)
-                if quest:getVar(player, 'Prog') == 0 then
-                    return 324
-                end
-            end,
-        },
+            onZoneIn =
+            {
+                function(player, prevZone)
+                    if quest:getVar(player, 'Prog') == 0 then
+                        return 324
+                    end
+                end,
+            },
 
-        onEventFinish =
-        {
-            [324] = function(player, csid, option, npc)
-                quest:setVar(player, 'Prog', 1)
-            end,
+            onEventFinish =
+            {
+                [324] = function(player, csid, option, npc)
+                    quest:setVar(player, 'Prog', 1)
+                end,
 
-            [325] = function(player, csid, option, npc)
-                if quest:complete(player) then
+                [325] = function(player, csid, option, npc)
+                    if quest:complete(player) then
 
-                    -- Traverser Stone epoch begins when 'The Truth Beckons' is flagged, and is
-                    -- retail behavior.  This can be confirmed by checking the currency tab on
-                    -- retail servers.
-                    player:setTraverserEpoch()
-                    player:addQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.THE_TRUTH_BECKONS)
-                end
-            end,
+                        -- Traverser Stone epoch begins when 'The Truth Beckons' is flagged, and is
+                        -- retail behavior.  This can be confirmed by checking the currency tab on
+                        -- retail servers.
+                        player:setTraverserEpoch()
+                        player:addQuest(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.THE_TRUTH_BECKONS)
+                    end
+                end,
+            },
         },
     },
 }

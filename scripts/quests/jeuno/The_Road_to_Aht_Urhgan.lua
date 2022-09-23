@@ -8,7 +8,7 @@ require('scripts/globals/items')
 require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/settings/main')
+require('scripts/globals/settings')
 require('scripts/globals/teleports')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
@@ -119,7 +119,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                xi.settings.ENABLE_TOAU == 1
+                xi.settings.main.ENABLE_TOAU == 1
         end,
 
         [xi.zone.LOWER_JEUNO] =

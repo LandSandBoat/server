@@ -9,7 +9,7 @@ require('scripts/globals/npc_util')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/quest')
-require("scripts/settings/main")
+require("scripts/globals/settings")
 
 local quest = Quest:new(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WILD_CARD)
 
@@ -105,7 +105,7 @@ quest.sections =
 
                 [387] = function(player, csid, option, npc)
                     player:delKeyItem(xi.ki.JOKER_CARD)
-                    npcUtil.giveCurrency(player, 'gil', 8000 * xi.settings.GIL_RATE)
+                    npcUtil.giveCurrency(player, 'gil', 8000 * xi.settings.main.GIL_RATE)
                     quest:setVar(player, 'Prog', 5)
                 end,
 
@@ -115,7 +115,7 @@ quest.sections =
 
                 [389] = function(player, csid, option, npc)
                     player:delKeyItem(xi.ki.JOKER_CARD)
-                    npcUtil.giveCurrency(player, 'gil', 8000 * xi.settings.GIL_RATE)
+                    npcUtil.giveCurrency(player, 'gil', 8000 * xi.settings.main.GIL_RATE)
                     quest:setVar(player, 'Prog', 5)
                 end,
             },
@@ -159,7 +159,7 @@ quest.sections =
             {
                 [600] = function(player, csid, option, npc)
                     player:delKeyItem(xi.ki.JOKER_CARD)
-                    npcUtil.giveCurrency(player, 'gil', 8000 * xi.settings.GIL_RATE)
+                    npcUtil.giveCurrency(player, 'gil', 8000 * xi.settings.main.GIL_RATE)
                     quest:setVar(player, 'Prog', 5)
                 end,
             },

@@ -5,7 +5,7 @@
 -- TODO: messages should be zone-wide
 -----------------------------------
 local ID = require("scripts/zones/Monastic_Cavern/IDs")
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
@@ -14,6 +14,10 @@ entity.onMobInitialize = function(mob)
     -- the quest version of this NM doesn't drop gil
     if mob:getID() >= ID.mob.UNDERSTANDING_OVERLORD_OFFSET then
         mob:setMobMod(xi.mobMod.GIL_MAX, -1)
+    end
+
+    if mob:getID() == ID.mob.ORCISH_OVERLORD then
+        mob:addMod(xi.mod.DOUBLE_ATTACK, 20)
     end
 end
 

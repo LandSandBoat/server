@@ -4,7 +4,7 @@
 -- Starts and Finishes Quest: Trial by Wind
 -- !pos -17 7 -10 247
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/shop")
 require("scripts/globals/quests")
@@ -81,8 +81,8 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, item)
         else
             if (option == 5) then
-                player:addGil(xi.settings.GIL_RATE*10000)
-                player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*10000) -- Gil
+                player:addGil(xi.settings.main.GIL_RATE*10000)
+                player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*10000) -- Gil
             elseif (option == 6) then
                 player:addSpell(301) -- Garuda Spell
                 player:messageSpecial(ID.text.GARUDA_UNLOCKED, 0, 0, 3)

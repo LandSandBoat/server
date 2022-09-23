@@ -1,18 +1,18 @@
 -----------------------------------
 -- Zone: La_Theine_Plateau (102)
 -----------------------------------
-local ID = require("scripts/zones/La_Theine_Plateau/IDs")
-local laTheineGlobal = require("scripts/zones/La_Theine_Plateau/globals")
-require("scripts/quests/i_can_hear_a_rainbow")
-require("scripts/globals/chocobo_digging")
-require("scripts/globals/conquest")
-require("scripts/globals/missions")
-require("scripts/globals/npc_util")
-require("scripts/settings/main")
-require("scripts/globals/chocobo")
-require("scripts/globals/quests")
-require("scripts/globals/status")
-require("scripts/globals/zone")
+local ID = require('scripts/zones/La_Theine_Plateau/IDs')
+local laTheineGlobal = require('scripts/zones/La_Theine_Plateau/globals')
+require('scripts/quests/i_can_hear_a_rainbow')
+require('scripts/globals/chocobo_digging')
+require('scripts/globals/conquest')
+require('scripts/globals/missions')
+require('scripts/globals/npc_util')
+require('scripts/globals/settings')
+require('scripts/globals/chocobo')
+require('scripts/globals/quests')
+require('scripts/globals/status')
+require('scripts/globals/zone')
 -----------------------------------
 local zone_object = {}
 
@@ -57,7 +57,7 @@ end
 
 zone_object.onEventFinish = function(player, csid, option)
     if csid == 122 then
-        npcUtil.completeQuest(player, xi.quest.log_id.BASTOK, xi.quest.id.bastok.DARK_PUPPET, {item=14096, fame=40, var="darkPuppetCS"}) -- Chaos Sollerets
+        npcUtil.completeQuest(player, xi.quest.log_id.BASTOK, xi.quest.id.bastok.DARK_PUPPET, { item=14096, fame=40, var="darkPuppetCS" }) -- Chaos Sollerets
     end
 end
 

@@ -116,7 +116,7 @@ quest.sections =
                             npcUtil.tradeHasExactly(trade, xi.items.CORAL_CREST_KEY)
                         then
                             return quest:progressEvent(631, trade:getItemId())
-                        elseif npcUtil.tradeHasExactly(trade, {xi.items.SEALION_CREST_KEY, xi.items.CORAL_CREST_KEY}) then
+                        elseif npcUtil.tradeHasExactly(trade, { xi.items.SEALION_CREST_KEY, xi.items.CORAL_CREST_KEY }) then
                             quest:setVar(player, 'Prog', 2)
                             return quest:progressEvent(631, xi.items.SEALION_CREST_KEY, xi.items.CORAL_CREST_KEY)
                         end

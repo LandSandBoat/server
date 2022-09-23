@@ -5,7 +5,7 @@
 -- !pos -120.342 -19.471 306.661 126
 -----------------------------------
 local ID = require("scripts/zones/Qufim_Island/IDs")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 -----------------------------------
@@ -13,7 +13,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     -- Trade Seedspall's Lux, Luna, Astrum
-    if player:getCurrentMission(xi.mission.log_id.ACP) == xi.mission.id.acp.THE_ECHO_AWAKENS and npcUtil.tradeHas(trade, {2740, 2741, 2742}) then
+    if player:getCurrentMission(xi.mission.log_id.ACP) == xi.mission.id.acp.THE_ECHO_AWAKENS and npcUtil.tradeHas(trade, { 2740, 2741, 2742 }) then
         player:startEvent(31)
     end
 end
@@ -27,7 +27,7 @@ entity.onTrigger = function(player, npc)
     -- local lastAmber = player:getCharVar("LastAmberKey") -- When last Amber key was obtained
     local lastViridian = player:getCharVar("LastViridianKey") -- When last Viridian key was obtained
 
-    if xi.settings.ENABLE_ACP == 1 and not player:hasKeyItem(xi.ki.AMBER_KEY) then
+    if xi.settings.main.ENABLE_ACP == 1 and not player:hasKeyItem(xi.ki.AMBER_KEY) then
         if missionACP == xi.mission.id.acp.GATHERER_OF_LIGHT_I and seedspallRosem and seedspallCaerulum and seedspallViridis and os.time() > lastViridian then
             player:startEvent(32)
         elseif missionACP == xi.mission.id.acp.GATHERER_OF_LIGHT_II and player:getCharVar("SEED_MANDY") == 0 then

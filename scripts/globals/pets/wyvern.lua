@@ -137,12 +137,12 @@ entity.onMobSpawn = function(mob)
                 }
                 local resistances =
                 {
-                    target:getMod(xi.mod.FIRE_RES),
-                    target:getMod(xi.mod.ICE_RES),
-                    target:getMod(xi.mod.WIND_RES),
-                    target:getMod(xi.mod.EARTH_RES),
-                    target:getMod(xi.mod.THUNDER_RES),
-                    target:getMod(xi.mod.WATER_RES),
+                    target:getMod(xi.mod.FIRE_MEVA),
+                    target:getMod(xi.mod.ICE_MEVA),
+                    target:getMod(xi.mod.WIND_MEVA),
+                    target:getMod(xi.mod.EARTH_MEVA),
+                    target:getMod(xi.mod.THUNDER_MEVA),
+                    target:getMod(xi.mod.WATER_MEVA),
                 }
                 local lowest = resistances[1]
                 local breath = breathList[1]

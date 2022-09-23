@@ -3,7 +3,7 @@
 --   NM: Ancient Weapon
 -----------------------------------
 local ID = require("scripts/zones/Behemoths_Dominion/IDs")
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}

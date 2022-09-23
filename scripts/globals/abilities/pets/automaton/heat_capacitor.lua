@@ -2,7 +2,7 @@
 -- Heat Capacitor
 -----------------------------------
 require("scripts/globals/automatonweaponskills")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
@@ -20,7 +20,6 @@ ability_object.onAutomatonAbility = function(target, automaton, skill, master, a
     for i = 1, maneuvers do
         master:delStatusEffectSilent(xi.effect.FIRE_MANEUVER)
     end
-
 
     if automaton:getLocalVar("heat_capacitor") >= 3 then -- Heat Capacitor & Heat Capacitor II
         target:addTP(1000 * maneuvers)

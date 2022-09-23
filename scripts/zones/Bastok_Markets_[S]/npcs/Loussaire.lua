@@ -7,7 +7,7 @@ local ID = require("scripts/zones/Bastok_Markets_[S]/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
@@ -59,7 +59,7 @@ entity.onTrigger = function(player, npc)
             player:startEvent(50, itemid, firstKI, secondKI)
 
         -- Nothing in progress and meet the starting requirements.
-        elseif (downwardHelix == QUEST_COMPLETED and mJob == xi.job.SCH and mLvl >= xi.settings.AF2_QUEST_LEVEL) then
+        elseif (downwardHelix == QUEST_COMPLETED and mJob == xi.job.SCH and mLvl >= xi.settings.main.AF2_QUEST_LEVEL) then
 
             -- If a player has completed any of the paths, it will be a different cutscene.
             local counter = 0

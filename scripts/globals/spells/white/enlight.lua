@@ -11,7 +11,6 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-
 spell_object.onSpellCast = function(caster, target, spell)
     local effect = xi.effect.ENLIGHT
     local magicskill = target:getSkillLevel(xi.skill.DIVINE_MAGIC)

@@ -13,7 +13,7 @@
 local mobskill_object = {}
 
 require("scripts/globals/status")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/weaponskills")
 require("scripts/globals/mobskills")
 -----------------------------------

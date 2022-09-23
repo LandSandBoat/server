@@ -2,7 +2,7 @@
 -- Spring Water
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
@@ -14,7 +14,8 @@ end
 
 ability_object.onPetAbility = function(target, pet, skill)
     local base = 47 + pet:getMainLvl()*3
-    local tp = skill:getTP()
+    local tp   = pet:getTP()
+
     if tp < 1000 then
         tp = 1000
     end

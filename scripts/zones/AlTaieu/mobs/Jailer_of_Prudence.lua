@@ -4,7 +4,7 @@
 -- AnimationSubs: 0 - Normal, 3 - Mouth Open
 -----------------------------------
 local ID = require("scripts/zones/AlTaieu/IDs")
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}

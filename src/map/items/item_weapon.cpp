@@ -136,7 +136,6 @@ bool CItemWeapon::isUnlockable() const
     return (m_wsunlockpoints > 0);
 }
 
-
 /************************************************************************
  *                                                                       *
  * returns true if weapon is unlocked                                    *
@@ -147,7 +146,6 @@ bool CItemWeapon::isUnlocked()
 {
     return isUnlockable() && getCurrentUnlockPoints() == m_wsunlockpoints;
 }
-
 
 /************************************************************************
  *                                                                       *
@@ -254,7 +252,6 @@ void CItemWeapon::setILvlMacc(uint16 macc)
     m_iLvlMacc = macc;
 }
 
-
 /************************************************************************
  *                                                                      *
  * Get sub Skill Type, e.g. Gun vs Crossbow                              *
@@ -340,9 +337,8 @@ void CItemWeapon::setBaseDelay(uint16 delay)
 
 /************************************************************************
  *                                                                       *
- * get un-adjusted base delay of weapon.                                 *
- *                                                                       *
- * Not intended for use outside of zoneutils/mobutils                    *
+ * get un-adjusted or adjusted base delay of weapon.                     *
+ * Player weapons are unadjusted, "fake" mob/trust weapons are adjusted. *
  *                                                                       *
  ************************************************************************/
 

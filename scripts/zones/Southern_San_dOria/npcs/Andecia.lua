@@ -5,7 +5,7 @@
 -- !pos 167 0 45 230
 -----------------------------------
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
@@ -54,8 +54,8 @@ entity.onEventFinish = function(player, csid, option)
         player:tradeComplete()
         player:setCharVar("OfferingWaterOK", 0)
         player:addTitle(xi.title.ROYAL_GRAVE_KEEPER)
-        player:addGil(xi.settings.GIL_RATE*560)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*560)
+        player:addGil(xi.settings.main.GIL_RATE*560)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*560)
         player:addFame(xi.quest.fame_area.SANDORIA, 30)
         player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRAVE_CONCERNS)
     end

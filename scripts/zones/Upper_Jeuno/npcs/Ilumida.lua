@@ -5,7 +5,7 @@
 -- !pos -75 -1 58 244
 -----------------------------------
 local ID = require("scripts/zones/Upper_Jeuno/IDs")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/titles")
 require("scripts/globals/quests")
@@ -64,7 +64,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 4882)
         else
             player:delKeyItem(xi.ki.MOONDROP)
-            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*3000)
+            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*3000)
             -- TODO: Actually add Gil?
             player:addItem(4882)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 4882)

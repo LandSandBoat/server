@@ -4,7 +4,7 @@
 -- Start & Finishes Quest: The Stars of Ifrit
 -- !pos -72.093 -3.097 9.309 236
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/titles")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
@@ -34,8 +34,8 @@ entity.onEventFinish = function(player, csid, option)
     if (csid == 180) then
         player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_STARS_OF_IFRIT)
     elseif (csid == 181) then
-        player:addGil(xi.settings.GIL_RATE * 2100)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 2100)
+        player:addGil(xi.settings.main.GIL_RATE * 2100)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 2100)
         player:addFame(xi.quest.fame_area.BASTOK, 100)
         player:addTitle(xi.title.STAR_OF_IFRIT)
         player:completeQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_STARS_OF_IFRIT)

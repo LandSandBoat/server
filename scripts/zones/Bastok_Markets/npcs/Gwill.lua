@@ -6,7 +6,7 @@
 -- !pos ? ? ? 235
 -----------------------------------
 local ID = require("scripts/zones/Bastok_Markets/IDs")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
@@ -27,10 +27,6 @@ entity.onTrigger = function(player, npc)
 
     if fatherFigure == QUEST_COMPLETED and theReturn == QUEST_AVAILABLE and pFame >= 3 then
         player:startEvent(242)
-    elseif player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_COLD_LIGHT_OF_DAY) == QUEST_ACCEPTED then
-        player:startEvent(103)
-    else
-        player:startEvent(113)
     end
 end
 

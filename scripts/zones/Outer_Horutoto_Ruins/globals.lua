@@ -48,14 +48,12 @@ local outerHorutotoGlobal =
             local pop = nm:getLocalVar("pop")
 
             if os.time() > pop then
-                -- print(string.format("ph %i winner! nm %i will pop in place", phId, nmId))
                 DisallowRespawn(phId, true)
                 DisallowRespawn(nmId, false)
                 UpdateNMSpawnPoint(nmId)
                 nm:setRespawnTime(GetMobRespawnTime(phId))
 
                 nm:addListener("DESPAWN", "DESPAWN_"..nmId, function(m)
-                    -- print(string.format("nm %i died. ph %i will pop in place", nmId, phId))
                     DisallowRespawn(nmId, true)
                     DisallowRespawn(phId, false)
                     GetMobByID(phId):setRespawnTime(GetMobRespawnTime(phId))

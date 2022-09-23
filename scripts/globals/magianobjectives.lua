@@ -49,7 +49,7 @@ xi.magian.trials =
 [   5] = { check = checks.checkTrials, reqs = { mobid = set{ 16822423, 16822427 } } }, -- Bugbear Strongman
 [   6] = { check = checks.checkTrials, reqs = { mobid = set{ 17121576 } } }, -- La Velue
 [   7] = { check = checks.checkTrials, reqs = { mobid = set{ 17596628 } } }, -- Hovering Hotpot
-[   8] = { check = checks.checkTrials, reqs = { mobid = set{ 17109384, 17113491} } }, -- Yacumama
+[   8] = { check = checks.checkTrials, reqs = { mobid = set{ 17109384, 17113491 } } }, -- Yacumama
 [   9] = { check = checks.checkTrials, reqs = { mobid = set{ 17334552, 17338598 } } }, -- Feuerunke
 [1092] = { check = checks.checkTrials, reqs = { mobid = set{ 17195484 } } }, -- Tammuz
 [  68] = { check = checks.checkTrials, reqs = { mobid = set{ 17195259 } } }, -- Tumbling Truffle
@@ -681,9 +681,6 @@ xi.magian.trials =
 --- Feet
 [4682] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3497 } } }, -- NQ Forgotten Steps x50
 [4683] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3497 } } }, -- HQ Forgotten Steps x30
-
-
-
 
 -- Abyssean Armor
 -- Unkai Kote

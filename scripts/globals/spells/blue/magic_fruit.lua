@@ -12,7 +12,7 @@
 -----------------------------------
 -- Combos: Resist Sleep
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
@@ -42,8 +42,8 @@ spell_object.onSpellCast = function(caster, target, spell)
     final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD)/100))
 
     if (target:getAllegiance() == caster:getAllegiance() and (target:getObjType() == xi.objType.PC or target:getObjType() == xi.objType.MOB)) then
-        --Applying server mods....
-        final = final * xi.settings.CURE_POWER
+        --Applying server mods
+        final = final * xi.settings.main.CURE_POWER
     end
 
     if (final > diff) then

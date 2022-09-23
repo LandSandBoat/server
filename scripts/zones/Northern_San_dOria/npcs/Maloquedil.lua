@@ -6,7 +6,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Northern_San_dOria/IDs")
 require("scripts/globals/keyitems")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 require("scripts/globals/utils")
@@ -47,8 +47,8 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 23 then
         player:tradeComplete()
         player:addTitle(xi.title.VAMPIRE_HUNTER_D_MINUS)
-        player:addGil(xi.settings.GIL_RATE * 900)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 900)
+        player:addGil(xi.settings.main.GIL_RATE * 900)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 900)
         if player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.WARDING_VAMPIRES) == QUEST_ACCEPTED then
             player:addFame(xi.quest.fame_area.SANDORIA, 30)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.WARDING_VAMPIRES)

@@ -5,7 +5,7 @@
 -- Finishing Moves Used: 1-5
 -- Recast Time: 00:30
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------

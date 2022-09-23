@@ -11,7 +11,7 @@
 require('scripts/globals/keyitems')
 require('scripts/globals/maws')
 require('scripts/globals/missions')
-require('scripts/settings/main')
+require('scripts/globals/settings')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
@@ -29,7 +29,7 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and
-                xi.settings.ENABLE_WOTG == 1
+                xi.settings.main.ENABLE_WOTG == 1
         end,
 
         [xi.zone.BATALLIA_DOWNS] =

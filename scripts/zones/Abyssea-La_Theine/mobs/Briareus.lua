@@ -5,7 +5,7 @@
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
-mixins = {require("scripts/mixins/rage")}
+mixins = { require("scripts/mixins/rage") }
 -----------------------------------
 local entity = {}
 

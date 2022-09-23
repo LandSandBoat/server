@@ -54,7 +54,6 @@ function InteractionLookup:new(original)
     return obj
 end
 
-
 -----------------------------------
 -- Add/Remove helpers
 -----------------------------------
@@ -229,7 +228,6 @@ local function runHandler(handler, args)
     end
 end
 
-
 -- Use preprocessed lookup to run relevant handlers
 local function runHandlersInData(data, player, secondLevelKey, thirdLevelKey, args)
     if not data then
@@ -275,7 +273,6 @@ local function runHandlersInData(data, player, secondLevelKey, thirdLevelKey, ar
 
     return actions
 end
-
 
 -- Find the current highest priority actions
 local function getHighestPriorityActions(data, player, secondLevelKey, thirdLevelKey, args)
@@ -356,8 +353,6 @@ local function performNextAction(player, containerId, handlerId, actions, target
     return didPerformAction and returnValue
 end
 
-
-
 -----------------------------------
 -- Handlers
 -----------------------------------
@@ -389,11 +384,10 @@ local function onHandler(data, secondLevelKey, thirdLevelKey, args, fallbackHand
                 or player:getLocalVar(fallbackVar) == 0) -- alternate between trying handler system and fallback handler
             )
     then
-        player:setLocalVar(fallbackVar, 1)
+        player:setLocalVar(fallbackVar, priority <= Action.Priority.Event and 1 or 0)
         local result = performNextAction(player, secondLevelKey, thirdLevelKey, actions, targetId) or defaultReturn
         return result
     end
-
 
     -- Else we try to fallback to Lua files for the entity/zone
     player:setLocalVar(fallbackVar, 0)
@@ -413,7 +407,6 @@ local function onHandler(data, secondLevelKey, thirdLevelKey, args, fallbackHand
     result = performNextAction(player, secondLevelKey, thirdLevelKey, actions, targetId)
     return result
 end
-
 
 function InteractionLookup:afterZoneIn(player, fallbackFn)
     return onHandler(self.data, 'afterZoneIn', 1, { player }, fallbackFn)

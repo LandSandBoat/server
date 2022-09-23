@@ -2,7 +2,7 @@
 -- Bubble Shower
 -- Deals Water damage in an area of effect. Additional effect: STR Down
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------

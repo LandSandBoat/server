@@ -659,22 +659,21 @@ enum ABILITY
 
     ABILITY_DISEMBOWEL        = 786,
     ABILITY_EXTIRPATING_SALVO = 787,
-
-    ABILITY_CLARSACH_CALL    = 960,
-    ABILITY_WELT             = 961,
-    ABILITY_KATABATIC_BLADES = 962,
-    ABILITY_LUNATIC_VOICE    = 963,
-    ABILITY_ROUNDHOUSE       = 964,
-    ABILITY_CHINOOK          = 965,
-    ABILITY_BITTER_ELEGY     = 966,
-    ABILITY_SONIC_BUFFET     = 967,
-    ABILITY_TORNADO_II       = 968,
-    ABILITY_WINDS_BLESSING   = 969,
-    ABILITY_HYSTERIC_ASSAULT = 970
+    ABILITY_CLARSACH_CALL     = 960,
+    ABILITY_WELT              = 961,
+    ABILITY_KATABATIC_BLADES  = 962,
+    ABILITY_LUNATIC_VOICE     = 963,
+    ABILITY_ROUNDHOUSE        = 964,
+    ABILITY_CHINOOK           = 965,
+    ABILITY_BITTER_ELEGY      = 966,
+    ABILITY_SONIC_BUFFET      = 967,
+    ABILITY_TORNADO_II        = 968,
+    ABILITY_WINDS_BLESSING    = 969,
+    ABILITY_HYSTERIC_ASSAULT  = 970
 
 };
 
-#define MAX_ABILITY_ID 970
+#define MAX_ABILITY_ID 971
 
 struct Charge_t
 {
@@ -744,25 +743,25 @@ public:
     void        setName(int8* name);
 
 private:
-    uint16     m_ID;
-    JOBTYPE    m_Job;
-    uint8      m_level;
-    uint16     m_animationID;
-    duration   m_animationTime;
-    duration   m_castTime;
-    float      m_range;
-    uint8      m_aoe;
-    uint16     m_validTarget;
-    uint16     m_addType;
-    uint16     m_message;
-    uint16     m_recastTime;
-    uint16     m_recastId;
-    uint16     m_CE;
-    uint16     m_VE;
-    uint16     m_meritModID;
-    string_t   m_name;
-    uint16     m_mobskillId;
-    ACTIONTYPE m_actionType;
+    uint16      m_ID;
+    JOBTYPE     m_Job;
+    uint8       m_level;
+    uint16      m_animationID;
+    duration    m_animationTime;
+    duration    m_castTime;
+    float       m_range;
+    uint8       m_aoe;
+    uint16      m_validTarget;
+    uint16      m_addType;
+    uint16      m_message;
+    uint16      m_recastTime;
+    uint16      m_recastId;
+    uint16      m_CE;
+    uint16      m_VE;
+    uint16      m_meritModID;
+    std::string m_name;
+    uint16      m_mobskillId;
+    ACTIONTYPE  m_actionType;
 };
 
 /************************************************************************

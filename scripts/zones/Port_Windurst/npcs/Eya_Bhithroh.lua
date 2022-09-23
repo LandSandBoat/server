@@ -3,7 +3,7 @@
 --  NPC: Eya Bhithroh
 -- Type: Weather Reporter
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 

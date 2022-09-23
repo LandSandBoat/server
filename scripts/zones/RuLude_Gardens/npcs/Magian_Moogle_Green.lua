@@ -5,14 +5,14 @@
 -- !pos -4.558 2.451 111.305 64
 -----------------------------------
 local ID = require("scripts/zones/RuLude_Gardens/IDs")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/magiantrials")
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if xi.settings.ENABLE_MAGIAN_TRIALS ~= 1 then
+    if xi.settings.main.ENABLE_MAGIAN_TRIALS ~= 1 then
         return
     end
 
@@ -32,7 +32,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if xi.settings.ENABLE_MAGIAN_TRIALS ~= 1 then
+    if xi.settings.main.ENABLE_MAGIAN_TRIALS ~= 1 then
         return
     end
 

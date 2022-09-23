@@ -52,8 +52,8 @@ public:
     uint8  getSlotID();     // get the slot id
     uint16 getTrialNumber();
     auto   getMatchingTrials() -> sol::table; // returns a table of trial #'s which match this item precisely
-    uint8  getWornItem();  // check if the item has been used
-    uint32 getBasePrice(); // get the base sell price
+    uint8  getWornItem();                     // check if the item has been used
+    uint32 getBasePrice();                    // get the base sell price
 
     bool isType(uint8 type);       // check the item type
     bool isSubType(uint8 subtype); // check the item's sub type
@@ -69,8 +69,8 @@ public:
     auto getAugment(uint8 slot) -> std::tuple<uint16, uint8>; // get the augment id and power in slot
     // int32 setAugment(lua_State*);           // set the augment id and power in slot
 
-    uint8  getSkillType(); // get skill type
-    uint16 getWeaponskillPoints();   // get current ws points
+    uint8  getSkillType();         // get skill type
+    uint16 getWeaponskillPoints(); // get current ws points
 
     bool isTwoHanded();  // is a two handed weapon
     bool isHandToHand(); // is a hand to hand weapon (or unarmed H2H)

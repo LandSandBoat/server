@@ -6,17 +6,14 @@ local entity = {}
 
 local path =
 {
-    3.596, 0.000, 78.553,   -- TODO: wait at location for 10 seconds
-    -4.010, 0.000, 79.261   -- TODO: wait at location for 18 seconds
+    { x = -4.010, y = 0.000, z = 79.261, wait = 20000 },
+    { x = 3.596, y = 0.000, z = 78.553, wait = 20000 },
 }
 
 entity.onSpawn = function(npc)
     npc:initNpcAi()
     npc:setPos(xi.path.first(path))
-end
-
-entity.onPath = function(npc)
-    xi.path.patrol(npc, path)
+    npc:pathThrough(path, bit.bor(xi.path.flag.PATROL, xi.path.flag.RUN))
 end
 
 entity.onTrade = function(player, npc, trade)

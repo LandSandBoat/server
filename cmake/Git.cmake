@@ -2,7 +2,7 @@
 find_package(Git)
 
 execute_process(COMMAND
-    "${GIT_EXECUTABLE}" describe --match=NeVeRmAtCh --always --abbrev=40 --dirty
+    "${GIT_EXECUTABLE}" describe --match=NeVeRmAtCh --always --dirty
     WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
     OUTPUT_VARIABLE GIT_SHA1
     ERROR_QUIET OUTPUT_STRIP_TRAILING_WHITESPACE)

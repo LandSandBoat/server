@@ -1,4 +1,4 @@
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/teleports")
 require("scripts/globals/utils")
 
@@ -14,7 +14,7 @@ local baseTeleportCostTabs = 50
 -- This is used for the NationTeleport save/get
 local travelType = xi.teleport.type.SURVIVAL
 local cutsceneID = 8500
-xi.survivalGuide.expansions = 3 + (4 * xi.settings.ENABLE_COP) + (8 * xi.settings.ENABLE_TOAU) + (16 * xi.settings.ENABLE_WOTG) + (2048 * xi.settings.ENABLE_SOA)
+xi.survivalGuide.expansions = 3 + (4 * xi.settings.main.ENABLE_COP) + (8 * xi.settings.main.ENABLE_TOAU) + (16 * xi.settings.main.ENABLE_WOTG) + (2048 * xi.settings.main.ENABLE_SOA)
 
 local optionMap =
 {

@@ -3,7 +3,7 @@
 --   NM: Sarcopsylla
 -----------------------------------
 require("scripts/globals/hunts")
-mixins = {require("scripts/mixins/families/chigoe")}
+mixins = { require("scripts/mixins/families/chigoe") }
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}

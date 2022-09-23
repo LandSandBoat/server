@@ -5,7 +5,7 @@
 -- Involved in Quest: Dark Legacy
 -- !pos -47 2 -30 237
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/shop")
 require("scripts/globals/quests")
@@ -49,8 +49,8 @@ entity.onEventFinish = function(player, csid, option)
         local theDarksmith = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_DARKSMITH)
 
         player:tradeComplete()
-        player:addGil(xi.settings.GIL_RATE * 8000)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 8000)
+        player:addGil(xi.settings.main.GIL_RATE * 8000)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 8000)
 
         if (theDarksmith == QUEST_ACCEPTED) then
             player:addFame(xi.quest.fame_area.BASTOK, 30)

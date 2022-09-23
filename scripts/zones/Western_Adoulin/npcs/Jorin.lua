@@ -45,9 +45,9 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 2542) then
         -- Finishing Quest: 'The Old Man and the Harpoon'
         player:completeQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.THE_OLD_MAN_AND_THE_HARPOON)
-        player:addExp(500 * xi.settings.EXP_RATE)
-        player:addCurrency('bayld', 300 * xi.settings.BAYLD_RATE)
-        player:messageSpecial(ID.text.BAYLD_OBTAINED, 300 * xi.settings.BAYLD_RATE)
+        player:addExp(500 * xi.settings.main.EXP_RATE)
+        player:addCurrency('bayld', 300 * xi.settings.main.BAYLD_RATE)
+        player:messageSpecial(ID.text.BAYLD_OBTAINED, 300 * xi.settings.main.BAYLD_RATE)
         player:delKeyItem(xi.ki.EXTRAVAGANT_HARPOON)
         player:addFame(xi.quest.fame_area.ADOULIN)
     end

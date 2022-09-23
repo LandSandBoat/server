@@ -7,7 +7,7 @@
 -- !pos -8 1 1 230
 -----------------------------------
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 
@@ -27,9 +27,9 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if (csid == 655) then
-        player:addGil(xi.settings.GIL_RATE*50)
+        player:addGil(xi.settings.main.GIL_RATE*50)
         player:tradeComplete()
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*50)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*50)
     end
 end
 

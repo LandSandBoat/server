@@ -6,7 +6,7 @@
 local ID = require("scripts/zones/Bastok_Mines/IDs")
 require("scripts/globals/titles")
 require("scripts/globals/quests")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 
@@ -51,8 +51,8 @@ entity.onEventFinish = function(player, csid, option)
         else
             player:addFame(xi.quest.fame_area.BASTOK, 8)
         end
-        player:addGil(xi.settings.GIL_RATE * 150)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 150)
+        player:addGil(xi.settings.main.GIL_RATE * 150)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 150)
     end
 end
 

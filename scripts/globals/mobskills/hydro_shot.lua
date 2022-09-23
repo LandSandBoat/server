@@ -2,7 +2,7 @@
 -- Hydro Shot
 -- Additional effect: Enmity Down. Chance of effect varies with TP.
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
@@ -13,8 +13,6 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-
-
     local numhits = 1
     local accmod = 1
     local dmgmod = 2.8

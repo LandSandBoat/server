@@ -11,7 +11,6 @@ require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 -----------------------------------
 
-
 local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.CONFESSIONS_OF_A_BELLMAKER)
 
 quest.reward =
@@ -58,7 +57,7 @@ quest.sections =
                     if quest:getVar(player, 'Prog') == 2 then
                         return quest:progressCutscene(102)
                     elseif quest:getVar(player, 'Prog') == 3 then
-                        return npcUtil.popFromQM(player, GetNPCByID(zones[player:getZoneID()].npc.STONE_MONUMENT), zones[player:getZoneID()].mob.ARCANE_PHANTASM, {hide = 0})
+                        return npcUtil.popFromQM(player, GetNPCByID(zones[player:getZoneID()].npc.STONE_MONUMENT), zones[player:getZoneID()].mob.ARCANE_PHANTASM, { hide = 0 })
                     elseif quest:getVar(player, 'Prog') == 4 then
                         return quest:progressCutscene(103)
                     end

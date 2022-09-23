@@ -79,6 +79,7 @@ public:
     /// Establishes a connection.
     ///
     /// @return SQL_SUCCESS or SQL_ERROR
+    SqlConnection();
     SqlConnection(const char* user, const char* passwd, const char* host, uint16 port, const char* db);
     ~SqlConnection();
 
@@ -208,6 +209,7 @@ private:
     bool   m_LatencyWarning;
 
     void InitPreparedStatements();
+
     std::unordered_map<std::string, std::shared_ptr<SqlPreparedStatement>> m_PreparedStatements;
 };
 #endif // _COMMON_SQL_H

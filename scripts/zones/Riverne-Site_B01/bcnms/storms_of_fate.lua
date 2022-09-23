@@ -6,7 +6,7 @@
 local ID = require("scripts/zones/Riverne-Site_B01/IDs")
 require("scripts/globals/battlefield")
 require("scripts/globals/keyitems")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/titles")
@@ -45,7 +45,7 @@ battlefield_object.onEventFinish = function(player, csid, option)
             player:setCharVar('StormsOfFate', 3)
             player:addTitle(xi.title.CONQUEROR_OF_FATE)
         end
-        if xi.settings.ENABLE_COP_ZONE_CAP == 1 then
+        if xi.settings.main.ENABLE_COP_ZONE_CAP == 1 then
             player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, 50, 0, 0)
         end
     end

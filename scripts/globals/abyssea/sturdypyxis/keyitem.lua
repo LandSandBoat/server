@@ -85,9 +85,9 @@ local drops =
     },
 
     -- TODO: Populate KI Values for these Zones
-    [xi.zone.ABYSSEA_ALTEPA]     = {0, 0, 0},
-    [xi.zone.ABYSSEA_ULEGUERAND] = {0, 0, 0},
-    [xi.zone.ABYSSEA_GRAUBERG]   = {0, 0, 0},
+    [xi.zone.ABYSSEA_ALTEPA]     = { 0, 0, 0 },
+    [xi.zone.ABYSSEA_ULEGUERAND] = { 0, 0, 0 },
+    [xi.zone.ABYSSEA_GRAUBERG]   = { 0, 0, 0 },
 }
 
 xi.pyxis.ki.setKeyItems = function(npc)

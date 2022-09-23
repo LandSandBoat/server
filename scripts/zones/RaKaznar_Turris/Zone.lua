@@ -1,9 +1,7 @@
 -----------------------------------
---
--- Zone: Ra’Kanzar Turris (277)
---
+-- Zone: Ra'Kaznar Turris (277)
 -----------------------------------
-local ID = require("scripts/zones/RaKaznar_Turris/IDs")
+local ID = require('scripts/zones/RaKaznar_Turris/IDs')
 -----------------------------------
 local zone_object = {}
 
@@ -13,7 +11,7 @@ end
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(58, 30, 20, 0)
     end
 

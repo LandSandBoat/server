@@ -3,7 +3,7 @@
 -- Item: Ether
 -- Item Effect: Restores 20 MP
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/msg")
 -----------------------------------
 local item_object = {}
@@ -16,7 +16,7 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    target:messageBasic(xi.msg.basic.RECOVERS_MP, 0, target:addMP(20*xi.settings.ITEM_POWER))
+    target:messageBasic(xi.msg.basic.RECOVERS_MP, 0, target:addMP(20*xi.settings.main.ITEM_POWER))
 end
 
 return item_object

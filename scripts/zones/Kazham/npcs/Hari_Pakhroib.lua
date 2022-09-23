@@ -3,7 +3,7 @@
 --  NPC: Hari Pakhroib
 -- Starts and Finishes Quest: Greetings to the Guardian
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 local ID = require("scripts/zones/Kazham/IDs")
@@ -50,16 +50,16 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 71) then
         local pamamas = player:getCharVar("PamamaVar")
         if (pamamas == 1) then --First completion of quest; set title, complete quest, and give higher fame
-            player:addGil(xi.settings.GIL_RATE * 5000)
-            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 5000)
+            player:addGil(xi.settings.main.GIL_RATE * 5000)
+            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 5000)
             player:completeQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.GREETINGS_TO_THE_GUARDIAN)
             player:addFame(xi.quest.fame_area.WINDURST, 100)
             player:addTitle(xi.title.KAZHAM_CALLER)
             player:setCharVar("PamamaVar", 0)
             player:needToZone(true)
         elseif (pamamas == 2) then --Repeats of quest; give only gil and less fame
-            player:addGil(xi.settings.GIL_RATE * 5000)
-            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 5000)
+            player:addGil(xi.settings.main.GIL_RATE * 5000)
+            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 5000)
             player:addFame(xi.quest.fame_area.WINDURST, 30)
             player:setCharVar("PamamaVar", 0)
             player:needToZone(true)

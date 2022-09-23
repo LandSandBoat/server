@@ -1,7 +1,7 @@
 -----------------------------------
 -- Tables and Functions Used at Multiple Places within Aht Urgan Whitegate
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 -----------------------------------
 
 local sharedObj = {}
@@ -83,10 +83,7 @@ sharedObj.doRoyalPalaceArmorCheck = function(player)
 
     if (hasHandArmor == 0 or hasLegArmor == 0 or hasFeetArmor == 0) then
         check = false
-        -- printf("Royal Palace Armor Check for Player <%s> -> Missing Required Hand/Leg/Feet Armor", player:getName())
     end
-
-    -- printf("Royal Palace Armor Check for Player <%s> with Body Armor <%u>, allowed = %s", player:getName(), bodyArmor, check)
 
     return check
 end

@@ -8,17 +8,12 @@ mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}
 
-local pathNodes =
+local path =
 {
-    -- x, y, z
-    -1.388, 1.0, 34.81,
-    -30.27, 0.437, 55.10,
-    -38.11, 0.980, 36.33,
+    { x = -1.388, y = 1.0, z = 34.81 },
+    { x = -30.27, y = 0.437, z = 55.10 },
+    { x = -38.11, y = 0.980, z = 36.33 },
 }
-
-entity.onPath = function(mob)
-    xi.path.patrol(mob, pathNodes)
-end
 
 entity.onMobSpawn = function(mob)
     xi.mix.jobSpecial.config(mob, {
@@ -28,14 +23,7 @@ entity.onMobSpawn = function(mob)
         },
     })
 
-    entity.onPath(mob)
-end
-
-entity.onMobRoam = function(mob)
-    -- move to start position if not moving
-    if not mob:isFollowingPath() then
-        mob:pathThrough(xi.path.first(pathNodes))
-    end
+    mob:pathThrough(path, xi.path.flag.PATROL)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)

@@ -5,7 +5,7 @@
 -- TP Required: 65%
 -- Recast Time: 00:17
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
@@ -64,8 +64,8 @@ ability_object.onUseAbility = function(player, target, ability)
 
     --Reducing TP.
 
-    --Applying server mods....
-    cure = cure * xi.settings.CURE_POWER
+    --Applying server mods
+    cure = cure * xi.settings.main.CURE_POWER
 
     --Cap the final amount to max HP.
     if ((target:getMaxHP() - target:getHP()) < cure) then

@@ -36,7 +36,7 @@ entity.onTrigger = function(player, npc)
     -- DARK PUPPET
     elseif
         player:getMainJob() == xi.job.DRK and
-        player:getMainLvl() >= xi.settings.AF2_QUEST_LEVEL and
+        player:getMainLvl() >= xi.settings.main.AF2_QUEST_LEVEL and
         player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.DARK_LEGACY) == QUEST_COMPLETED and
         player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.DARK_PUPPET) == QUEST_AVAILABLE
     then

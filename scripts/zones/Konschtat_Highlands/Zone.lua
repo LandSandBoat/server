@@ -1,13 +1,13 @@
 -----------------------------------
 -- Zone: Konschtat_Highlands (108)
 -----------------------------------
-local ID = require("scripts/zones/Konschtat_Highlands/IDs")
-require("scripts/quests/i_can_hear_a_rainbow")
-require("scripts/globals/chocobo_digging")
-require("scripts/globals/conquest")
-require("scripts/globals/missions")
-require("scripts/globals/chocobo")
-require("scripts/missions/amk/helpers")
+local ID = require('scripts/zones/Konschtat_Highlands/IDs')
+require('scripts/quests/i_can_hear_a_rainbow')
+require('scripts/globals/chocobo_digging')
+require('scripts/globals/conquest')
+require('scripts/globals/missions')
+require('scripts/globals/chocobo')
+require('scripts/missions/amk/helpers')
 -----------------------------------
 local zone_object = {}
 
@@ -32,7 +32,7 @@ zone_object.onZoneIn = function( player, prevZone)
     end
 
     -- AMK06/AMK07
-    if xi.settings.ENABLE_AMK == 1 then
+    if xi.settings.main.ENABLE_AMK == 1 then
         xi.amk.helpers.tryRandomlyPlaceDiggingLocation(player)
     end
 

@@ -5,7 +5,7 @@
 -- !addmission 11 0
 -----------------------------------
 require('scripts/globals/missions')
-require('scripts/settings/main')
+require('scripts/globals/settings')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
@@ -22,7 +22,7 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and
-                xi.settings.ENABLE_ASA == 1 and
+                xi.settings.main.ENABLE_ASA == 1 and
                 player:getMainLvl() >= 10
         end,
 
@@ -35,7 +35,7 @@ mission.sections =
                         prevZone == xi.zone.WINDURST_WATERS or
                         prevZone == xi.zone.WINDURST_WOODS
                     then
-                        return mission:event(510)
+                        return 510
                     end
                 end,
             },
@@ -47,9 +47,7 @@ mission.sections =
                 end,
 
                 [514] = function(player, csid, option, npc)
-                    if mission:complete(player) then
-                        player:setCharVar('ASA_Status', 0) -- Brought from original script
-                    end
+                    mission:complete(player)
                 end,
             },
         },

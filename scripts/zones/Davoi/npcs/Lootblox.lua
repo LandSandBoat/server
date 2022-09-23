@@ -6,7 +6,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Davoi/IDs")
 require("scripts/globals/keyitems")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/dynamis")
 -----------------------------------
 local entity = {}
@@ -51,7 +51,7 @@ entity.onTrade = function(player, npc, trade)
     if (player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND)) then
 
         -- buy prismatic hourglass
-        if (gil == xi.settings.PRISMATIC_HOURGLASS_COST and count == 1 and not player:hasKeyItem(xi.ki.PRISMATIC_HOURGLASS)) then
+        if (gil == xi.settings.main.PRISMATIC_HOURGLASS_COST and count == 1 and not player:hasKeyItem(xi.ki.PRISMATIC_HOURGLASS)) then
             player:startEvent(134)
 
         -- return timeless hourglass for refund
@@ -59,12 +59,12 @@ entity.onTrade = function(player, npc, trade)
             player:startEvent(153)
 
         -- currency exchanges
-        elseif (count == xi.settings.CURRENCY_EXCHANGE_RATE and trade:hasItemQty(currency[1], xi.settings.CURRENCY_EXCHANGE_RATE)) then
-            player:startEvent(135, xi.settings.CURRENCY_EXCHANGE_RATE)
-        elseif (count == xi.settings.CURRENCY_EXCHANGE_RATE and trade:hasItemQty(currency[2], xi.settings.CURRENCY_EXCHANGE_RATE)) then
-            player:startEvent(136, xi.settings.CURRENCY_EXCHANGE_RATE)
+        elseif (count == xi.settings.main.CURRENCY_EXCHANGE_RATE and trade:hasItemQty(currency[1], xi.settings.main.CURRENCY_EXCHANGE_RATE)) then
+            player:startEvent(135, xi.settings.main.CURRENCY_EXCHANGE_RATE)
+        elseif (count == xi.settings.main.CURRENCY_EXCHANGE_RATE and trade:hasItemQty(currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE)) then
+            player:startEvent(136, xi.settings.main.CURRENCY_EXCHANGE_RATE)
         elseif (count == 1 and trade:hasItemQty(currency[3], 1)) then
-            player:startEvent(138, currency[3], currency[2], xi.settings.CURRENCY_EXCHANGE_RATE)
+            player:startEvent(138, currency[3], currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE)
 
         -- shop
         else
@@ -86,7 +86,7 @@ end
 
 entity.onTrigger = function(player, npc)
     if (player:hasKeyItem(xi.ki.VIAL_OF_SHROUDED_SAND)) then
-        player:startEvent(133, currency[1], xi.settings.CURRENCY_EXCHANGE_RATE, currency[2], xi.settings.CURRENCY_EXCHANGE_RATE, currency[3], xi.settings.PRISMATIC_HOURGLASS_COST, timelessHourglassID, xi.settings.TIMELESS_HOURGLASS_COST)
+        player:startEvent(133, currency[1], xi.settings.main.CURRENCY_EXCHANGE_RATE, currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE, currency[3], xi.settings.main.PRISMATIC_HOURGLASS_COST, timelessHourglassID, xi.settings.main.TIMELESS_HOURGLASS_COST)
     else
         player:startEvent(130)
     end
@@ -110,7 +110,7 @@ entity.onEventUpdate = function(player, csid, option)
 
         -- offer to trade down from a 10k
         elseif (option == 10) then
-            player:updateEvent(currency[3], currency[2], xi.settings.CURRENCY_EXCHANGE_RATE)
+            player:updateEvent(currency[3], currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE)
 
         -- main menu (param1 = dynamis map bitmask, param2 = gil)
         elseif (option == 11) then
@@ -143,8 +143,8 @@ entity.onEventFinish = function(player, csid, option)
     -- refund timeless hourglass
     elseif (csid == 153) then
         player:tradeComplete()
-        player:addGil(xi.settings.TIMELESS_HOURGLASS_COST)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.TIMELESS_HOURGLASS_COST)
+        player:addGil(xi.settings.main.TIMELESS_HOURGLASS_COST)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.TIMELESS_HOURGLASS_COST)
 
     -- singles to hundos
     elseif (csid == 135) then
@@ -168,19 +168,19 @@ entity.onEventFinish = function(player, csid, option)
 
     -- 10k pieces to hundos
     elseif (csid == 138) then
-        local slotsReq = math.ceil(xi.settings.CURRENCY_EXCHANGE_RATE / 99)
+        local slotsReq = math.ceil(xi.settings.main.CURRENCY_EXCHANGE_RATE / 99)
         if (player:getFreeSlotsCount() < slotsReq) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, currency[2])
         else
             player:tradeComplete()
             for i=1, slotsReq do
-                if (i < slotsReq or (xi.settings.CURRENCY_EXCHANGE_RATE % 99) == 0) then
-                    player:addItem(currency[2], xi.settings.CURRENCY_EXCHANGE_RATE)
+                if (i < slotsReq or (xi.settings.main.CURRENCY_EXCHANGE_RATE % 99) == 0) then
+                    player:addItem(currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE)
                 else
-                    player:addItem(currency[2], xi.settings.CURRENCY_EXCHANGE_RATE % 99)
+                    player:addItem(currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE % 99)
                 end
             end
-            player:messageSpecial(ID.text.ITEMS_OBTAINED, currency[2], xi.settings.CURRENCY_EXCHANGE_RATE)
+            player:messageSpecial(ID.text.ITEMS_OBTAINED, currency[2], xi.settings.main.CURRENCY_EXCHANGE_RATE)
         end
 
     -- bought item from shop

@@ -29,7 +29,8 @@ class CCharEntity;
 
 class CCaughtMonsterPacket : public CBasicPacket
 {
-    public: CCaughtMonsterPacket(CCharEntity* PChar, uint16 messageID);
+public:
+    CCaughtMonsterPacket(CCharEntity* PChar, uint16 messageID);
 };
 
 #endif

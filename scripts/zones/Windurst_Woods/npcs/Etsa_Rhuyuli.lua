@@ -4,10 +4,25 @@
 -- Type: Standard NPC
 -- !pos 62.482 -8.499 -139.836 241
 -----------------------------------
+require("scripts/globals/pathfind")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
+
+local path =
+{
+    { x = 62.150, y = -7.500, z = -138.060 },
+    { x = 62.843, z = -141.761 },
+    { x = 63.382, z = -144.635 },
+    { x = 62.843, z = -141.761 },
+}
+
+entity.onSpawn = function(npc)
+    npc:initNpcAi()
+    npc:setPos(xi.path.first(path))
+    npc:pathThrough(path, xi.path.flag.PATROL)
+end
 
 entity.onTrade = function(player, npc, trade)
 end

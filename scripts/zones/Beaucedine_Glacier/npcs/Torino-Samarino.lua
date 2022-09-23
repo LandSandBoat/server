@@ -6,7 +6,7 @@
 -- !pos 105 -20 140 111
 -----------------------------------
 require("scripts/globals/quests")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 local ID = require("scripts/zones/Beaucedine_Glacier/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/npc_util")

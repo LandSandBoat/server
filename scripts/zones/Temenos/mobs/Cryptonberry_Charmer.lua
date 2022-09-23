@@ -2,7 +2,7 @@
 -- Area: Temenos N T
 --  Mob: Cryptonberry Charmer
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 local ID = require("scripts/zones/Temenos/IDs")
 -----------------------------------
 local entity = {}

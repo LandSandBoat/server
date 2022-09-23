@@ -4,7 +4,7 @@
 --  Spell Type: Magical (Dark)
 --  Range: Casting range 13'
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------

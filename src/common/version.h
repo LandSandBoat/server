@@ -24,9 +24,9 @@
 
 #include <string>
 
-#define XI_SERVER_NONE   0 // not defined
-#define XI_SERVER_LOGIN  1 // login server
-#define XI_SERVER_MAP    2 // map server
+#define XI_SERVER_NONE  0 // not defined
+#define XI_SERVER_LOGIN 1 // login server
+#define XI_SERVER_MAP   2 // map server
 
 namespace version
 {
@@ -34,6 +34,6 @@ namespace version
     const char* GetGitBranch();
     const char* GetGitDate();
     const char* GetGitCommitSubject();
-}
+} // namespace version
 
 #endif /* _VERSION_H_ */

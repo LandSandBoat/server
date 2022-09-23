@@ -4,7 +4,7 @@
 -- !pos -557.9 0.001 637.846 102
 -- Teleports Players to Abyssea - La Theine
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/abyssea")
@@ -16,7 +16,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (xi.settings.ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 30) then
+    if (xi.settings.main.ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 30) then
         local hasStone = xi.abyssea.getHeldTraverserStones(player)
         if (hasStone >= 1 and player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.DAWN_OF_DEATH) == QUEST_ACCEPTED
         and player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_GOLDSTRUCK_GIGAS) == QUEST_AVAILABLE) then

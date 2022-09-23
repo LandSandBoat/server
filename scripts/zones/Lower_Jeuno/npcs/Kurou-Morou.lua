@@ -4,7 +4,7 @@
 -- !pos -4 -6 -28 245
 -----------------------------------
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/titles")
 require("scripts/globals/quests")
 -----------------------------------
@@ -102,7 +102,7 @@ entity.onEventFinish = function(player, csid, option)
         player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.YOUR_CRYSTAL_BALL)
 
     elseif csid == 204 and option == 0 then
-        player:addCharVar("QuestNeverToReturn_prog", 1)  -- Keep track of how many times the players fortune has been read
+        player:incrementCharVar("QuestNeverToReturn_prog", 1)  -- Keep track of how many times the players fortune has been read
         player:setCharVar("QuestNeverToReturn_day", VanadielDayOfTheYear()) -- new vanadiel day
 
     elseif csid == 202 and option == 0 then
@@ -114,8 +114,8 @@ entity.onEventFinish = function(player, csid, option)
         if player:getFreeSlotsCount() == 0 then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 13477)
         else
-            player:addGil(xi.settings.GIL_RATE * 1200)
-            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 1200)
+            player:addGil(xi.settings.main.GIL_RATE * 1200)
+            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 1200)
             player:addItem(13477)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 13477)
             player:addFame(xi.quest.fame_area.JEUNO, 30)
