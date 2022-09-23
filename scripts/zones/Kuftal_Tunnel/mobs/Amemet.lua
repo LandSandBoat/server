@@ -90,13 +90,15 @@ entity.onPath = function(mob)
             local path = {}
             mob:setLocalVar("isPaused", 0)
             mob:clearPath()
-            if reversePath == 0 then --forward path logic begin
+            if reversePath == 0 then
+                -- forward path logic begin
                 switch (currentPath): caseof
                 {
-                    [0] = function() --Path A
-                        local pathRnd = math.random(1,2)
+                    [0] = function()
+                        local pathRnd = math.random(0,1)
                         local reverseCheck = math.random(0,2)
                         if pathRnd == 1 then
+                            -- Path A
                             if reverseCheck ~= 2 then
                                 mob:setLocalVar("mobPath", 1)
                                 mob:setLocalVar("reversePath", 0)
@@ -109,6 +111,7 @@ entity.onPath = function(mob)
                                 mob:pathThrough(path, bit.bor(xi.path.flag.REVERSE, xi.path.flag.COORDS))
                             end
                         else
+                            -- Path B
                             if reverseCheck ~= 2 then
                                 mob:setLocalVar("mobPath", 3)
                                 mob:setLocalVar("reversePath", 0)
@@ -122,32 +125,37 @@ entity.onPath = function(mob)
                             end
                         end
                     end;
-                    [1] = function() --Path Ab
+                    [1] = function()
+                        -- Amemet as at end of Path A, continue to second leg
                         mob:setLocalVar("mobPath", 2)
                         path = pathAb
                         mob:pathThrough(path, xi.path.flag.COORDS)
                     end;
-                    [2] = function() -- Path Start
+                    [2] = function()
+                        -- Amemet as at end of Path Ab, return home
                         mob:setLocalVar("mobPath", 0)
                         path = pathStart
                         mob:pathThrough(path, xi.path.flag.COORDS)
                     end;
-                    [3] = function() -- Path B
+                    [3] = function()
+                        -- Amemet as at end of Path B, continue to second leg
                         mob:setLocalVar("mobPath", 4)
                         path = pathBb
                         mob:pathThrough(path, xi.path.flag.COORDS)
                     end;
                     [4] = function()
+                        -- Amemet as at end of Path Bb, return home
                         mob:setLocalVar("mobPath", 0)
                         path = pathStart
                         mob:pathThrough(path, xi.path.flag.COORDS)
                     end;
                 }
-            else --reverse path logic begin
+            else
+                -- reverse path logic begin
                 switch (currentPath): caseof
                 {
-                    [0] = function() --Path A
-                        local pathRnd = math.random(1,2)
+                    [0] = function()
+                        local pathRnd = math.random(0,1)
                         local reverseCheck = math.random(0,2)
                         if pathRnd == 1 then
                             if reverseCheck ~= 2 then
@@ -163,7 +171,7 @@ entity.onPath = function(mob)
                             end
                         else
                             if reverseCheck ~= 2 then
-                                mob:setLocalVar("mobPath", 2)
+                                mob:setLocalVar("mobPath", 3)
                                 mob:setLocalVar("reversePath", 0)
                                 path = pathB
                                 mob:pathThrough(path, xi.path.flag.COORDS)
@@ -175,17 +183,17 @@ entity.onPath = function(mob)
                             end
                         end
                     end;
-                    [1] = function() --Path A
+                    [1] = function()
                         mob:setLocalVar("mobPath", 2)
                         path = pathA
                         mob:pathThrough(path, bit.bor(xi.path.flag.REVERSE, xi.path.flag.COORDS))
                     end;
-                    [2] = function() -- Path Start
+                    [2] = function()
                         mob:setLocalVar("mobPath", 0)
                         path = pathStart
                         mob:pathThrough(path, xi.path.flag.COORDS)
                     end;
-                    [3] = function() -- Path B
+                    [3] = function()
                         mob:setLocalVar("mobPath", 4)
                         path = pathB
                         mob:pathThrough(path, bit.bor(xi.path.flag.REVERSE, xi.path.flag.COORDS))
@@ -198,8 +206,8 @@ entity.onPath = function(mob)
                 }
             end
         else
-            --Amemet has a chance to pause, if successful he will wait
-            --a random amount of time before resuming his path
+            -- Amemet has a chance to pause, if successful he will wait
+            -- a random amount of time before resuming his path
             mob:clearPath()
             local x = mob:getXPos()
             local y = mob:getYPos()
@@ -227,7 +235,7 @@ entity.onPath = function(mob)
 end
 
 entity.onMobFight = function(mob)
-    --At 25% or less, Amemet receives regain.
+    -- At 25% HP or less, Amemet receives regain.
     if mob:getHPP() <= 25 then
         mob:setMod(xi.mod.REGAIN, 10)
     end
