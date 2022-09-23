@@ -24,8 +24,7 @@ entity.onTrigger = function(player, npc)
     local theSettingSun = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_SETTING_SUN)
 
     if theSettingSun == QUEST_AVAILABLE  and
-        player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 5 and
-        player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.BLACKMAIL) == QUEST_COMPLETED
+        player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 5
     then
         player:startEvent(654, 0, 535, 535) --The quest is offered to the player.
     elseif theSettingSun == QUEST_ACCEPTED then

@@ -30,6 +30,9 @@ zones[xi.zone.JUGNER_FOREST] =
         AMK_DIGGING_OFFSET            = 7796,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
         LOGGING_IS_POSSIBLE_HERE      = 7908,  -- Logging is possible here if you have <item>.
         VOIDWALKER_OBTAIN_KI          = 7915,  -- Obtained key item: <keyitem>!
+        DUG_UP                        = 8019,  -- Something was dug up here...
+        PRETERNATURAL_FORCES          = 8020,  -- For some reason, you are unable to investigate this spot. There is a preternatural force at work here...
+        FOREBODING                    = 8021,  -- A sense of foreboding fills the air...
         CONQUEST                      = 8059,  -- You've earned conquest points!
         GARRISON_BASE                 = 8438,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
         PLAYER_OBTAINS_ITEM           = 8661,  -- <name> obtains <item>!
@@ -69,6 +72,12 @@ zones[xi.zone.JUGNER_FOREST] =
         FRADUBIO_PH =
         {
             [17203447] = 17203448,
+        },
+
+        TIMELY_VISIT =
+        {
+            17203666,
+            17203667,
         },
 
         KING_ARTHRO          = 17203216,
