@@ -103,7 +103,7 @@ quest.sections =
                         return quest:messageText(ID.text.SENSE_OF_FOREBODING)
 
                     elseif not player:hasKeyItem(xi.ki.TINY_WRISTLET) then
-                        npcUtil.giveKeyItem(player, xi.ki.TINY_WRISTLET)
+                        player:addKeyItem(xi.ki.TINY_WRISTLET)
                         return quest:messageText(ID.text.KEYITEM_OBTAINED)
                     end
                 end,
