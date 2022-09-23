@@ -483,12 +483,6 @@ function xi.limbus.spawnRandomCrate(npc, battlefield, var, mask, canMimic)
     end
 end
 
--- TODO(jmcmorris)
--- onTriggerEntryNpc
--- onTradeEntryNpc
--- onEventUpdateEntryNpc
--- alreadyEngaged
-
 function xi.limbus.showCrate(crateID)
     local crate = GetNPCByID(crateID)
     crate:setStatus(xi.status.NORMAL)
@@ -652,10 +646,9 @@ function LimbusArea:createBattlefield()
     end
 
     battlefield_object.onBattlefieldEnter = function(player, battlefield)
-        -- TODO(jmcmorris)
-        -- player:delKeyItem(xi.ki.COSMO_CLEANSE)
-        -- player:delKeyItem(self.requiredCard)
-        -- player:setCharVar("Cosmo_Cleanse_TIME", os.time())
+        player:delKeyItem(xi.ki.COSMO_CLEANSE)
+        player:delKeyItem(self.requiredCard)
+        player:setCharVar("Cosmo_Cleanse_TIME", os.time())
     end
 
     battlefield_object.onBattlefieldDestroy = function(battlefield)
