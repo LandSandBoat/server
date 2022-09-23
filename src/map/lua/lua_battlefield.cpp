@@ -48,6 +48,11 @@ uint16 CLuaBattlefield::getID()
     return m_PLuaBattlefield->GetID();
 }
 
+uint16 CLuaBattlefield::getZoneID()
+{
+    return m_PLuaBattlefield->GetZoneID();
+}
+
 uint8 CLuaBattlefield::getArea()
 {
     return m_PLuaBattlefield->GetArea();
@@ -376,6 +381,7 @@ void CLuaBattlefield::Register()
 {
     SOL_USERTYPE("CBattlefield", CLuaBattlefield);
     SOL_REGISTER("getID", CLuaBattlefield::getID);
+    SOL_REGISTER("getZoneID", CLuaBattlefield::getZoneID);
     SOL_REGISTER("getArea", CLuaBattlefield::getArea);
     SOL_REGISTER("getTimeLimit", CLuaBattlefield::getTimeLimit);
     SOL_REGISTER("getRemainingTime", CLuaBattlefield::getRemainingTime);
