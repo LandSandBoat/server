@@ -31,30 +31,10 @@ mission.sections =
             return currentMission == mission.missionId
         end,
 
-        [xi.zone.LOWER_JEUNO] =
-        {
-            ['Aldo'] =
-            {
-                onTrigger = function(player, npc)
-                    if mission:getVar(player, 'Option') == 0 then
-                        return mission:progressEvent(104, 0, 1, 255, 0, 12590582, 95569, 4095, 1)
-                    else
-                        return mission:event(68)
-                    end
-                end,
-            },
-
-            onEventFinish =
-            {
-                [104] = function(player, csid, option, npc)
-                    mission:setVar(player, 'Option', 1)
-                end,
-            },
-        },
-
         [xi.zone.NORG] =
         {
-            ['Gilgamesh'] = mission:event(13),
+            -- Reminder text
+            ['Gilgamesh'] = mission:event(13)
         },
     },
 
@@ -62,6 +42,25 @@ mission.sections =
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId and missionStatus == 0
+        end,
+
+        [xi.zone.LOWER_JEUNO] =
+        {
+            ['Aldo'] = mission:event(104),
+
+            onEventFinish =
+            {
+                [104] = function(player, csid, option, npc)
+                    player:setMissionStatus(xi.mission.log_id.ZILART, 1)
+                end,
+            },
+        },
+    },
+
+    -- Section: Mission Active and missionStatus <= 1
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return currentMission == mission.missionId and missionStatus <= 1
         end,
 
         [xi.zone.LOWER_DELKFUTTS_TOWER] =
@@ -76,40 +75,7 @@ mission.sections =
             onEventFinish =
             {
                 [15] = function(player, csid, option, npc)
-                    player:setMissionStatus(mission.areaId, 1)
-                end,
-            },
-        },
-    },
-
-    -- Section: Mission Active and missionStatus == 1
-    {
-        check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and missionStatus == 1
-        end,
-
-        [xi.zone.STELLAR_FULCRUM] =
-        {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    return 0
-                end,
-            },
-
-            onEventUpdate =
-            {
-                [0] = function(player, csid, option, npc)
-                    if option == 0 then
-                        player:updateEvent(1, 23, 1756, 488, 179, 7, 0, 0)
-                    end
-                end,
-            },
-
-            onEventFinish =
-            {
-                [0] = function(player, csid, option, npc)
-                    player:setMissionStatus(mission.areaId, 2)
+                    player:setMissionStatus(xi.mission.log_id.ZILART, 2)
                 end,
             },
         },
@@ -118,7 +84,7 @@ mission.sections =
     -- Section: Mission Active and missionStatus == 2
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and missionStatus >= 2
+            return currentMission == mission.missionId and missionStatus == 2
         end,
 
         [xi.zone.STELLAR_FULCRUM] =
@@ -126,22 +92,38 @@ mission.sections =
             onZoneIn =
             {
                 function(player, prevZone)
-                    if player:getMissionStatus(mission.areaId) == 3 then
-                        return 17
-                    end
+                    player:setMissionStatus(xi.mission.log_id.ZILART, 3)
+                    return 0
                 end,
             },
+        },
+    },
 
+    -- Section: Mission Active and missionStatus == 3
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return currentMission == mission.missionId and missionStatus == 3
+        end,
+
+        [xi.zone.STELLAR_FULCRUM] =
+        {
             onEventFinish =
             {
                 [17] = function(player, csid, option, npc)
-                    mission:complete(player)
+                    if mission:complete(player) then
+                        player:setMissionStatus(xi.mission.log_id.ZILART, 0)
+                    end
                 end,
 
                 [32001] = function(player, csid, option, npc)
+                    -- Play last CS if not skipped.
                     if player:getLocalVar('battlefieldWin') == 256 then
-                        player:setMissionStatus(mission.areaId, 3)
-                        player:setPos(-519.99, 1.076, -19.943, 64, xi.zone.STELLAR_FULCRUM)
+                        if option == 1 then
+                            return mission:event(17)
+                        else
+                            player:setMissionStatus(xi.mission.log_id.ZILART, 0)
+                            mission:complete(player)
+                        end
                     end
                 end,
             },

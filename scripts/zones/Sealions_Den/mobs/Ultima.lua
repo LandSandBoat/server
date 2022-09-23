@@ -2,7 +2,7 @@
 -- Area: Sealions Den
 --   NM: Ultima
 -----------------------------------
-local oneToBeFeared = require("scripts/zones/Sealions_Den/bcnms/one_to_be_feared_helper")
+local oneToBeFeared = require("scripts/zones/Sealions_Den/helpers/One_to_be_Feared")
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
@@ -64,7 +64,7 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.PARALYZE, { duration = 60 })
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.PARALYZE, {duration = 60})
 end
 
 entity.onMobDeath = function(mob, player, isKiller)

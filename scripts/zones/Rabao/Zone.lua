@@ -1,9 +1,11 @@
 -----------------------------------
+--
 -- Zone: Rabao (247)
+--
 -----------------------------------
-local ID = require('scripts/zones/Rabao/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/chocobo')
+local ID = require("scripts/zones/Rabao/IDs")
+require("scripts/globals/conquest")
+require("scripts/globals/chocobo")
 -----------------------------------
 local zone_object = {}
 
@@ -13,11 +15,9 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
-
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
         player:setPos(-20.052, 6.074, -122.408, 193)
     end
-
     return cs
 end
 

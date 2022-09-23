@@ -5,7 +5,8 @@
 -- Recast Time: 2:00 minutes
 -- Duration: 1:00 minutes
 -----------------------------------
-require("scripts/globals/job_utils/thief")
+require("scripts/settings/main")
+require("scripts/globals/status")
 -----------------------------------
 local ability_object = {}
 
@@ -14,7 +15,8 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    xi.job_utils.thief.useFeint(player, target, ability)
+    local augment = player:getMod(xi.mod.AUGMENTS_FEINT) * player:getMerit(xi.merit.FEINT) / 25 -- Divide by the merit value (feint is 25) to get the number of merit points
+    player:addStatusEffect(xi.effect.FEINT, 150 + augment, 0, 60) -- -150 Evasion base
 end
 
 return ability_object

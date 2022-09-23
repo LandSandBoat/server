@@ -51,7 +51,7 @@ local patrolOnEventFinish = function(player, csid, option, npc)
     local npcOffset = patrolData[npc:getName()]
 
     if quest:getVar(player, 'Prog') == npcOffset then
-        quest:incrementVar(player, 'Prog', 1)
+        quest:addVar(player, 'Prog', 1)
     end
 end
 

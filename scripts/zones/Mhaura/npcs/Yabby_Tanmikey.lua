@@ -4,7 +4,7 @@
 --  Guild Merchant NPC: Goldsmithing Guild
 -- !pos -36.459 -16.000 76.840 249
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/shop")
 local ID = require("scripts/zones/Mhaura/IDs")
 -----------------------------------

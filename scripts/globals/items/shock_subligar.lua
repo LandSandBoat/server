@@ -3,7 +3,7 @@
 -- Item: shock subligar
 -- Item Effect: Shock Spikes
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local item_object = {}

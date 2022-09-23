@@ -1,9 +1,11 @@
 -----------------------------------
+--
 -- Zone: Castle_Zvahl_Keep (162)
+--
 -----------------------------------
-local ID = require('scripts/zones/Castle_Zvahl_Keep/IDs')
-require('scripts/globals/conquest')
-require('scripts/globals/treasure')
+local ID = require("scripts/zones/Castle_Zvahl_Keep/IDs")
+require("scripts/globals/conquest")
+require("scripts/globals/treasure")
 -----------------------------------
 local zone_object = {}
 
@@ -26,7 +28,6 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
-
     if
         player:getXPos() == 0 and
         player:getYPos() == 0 and
@@ -34,11 +35,11 @@ zone_object.onZoneIn = function(player, prevZone)
     then
         player:setPos(-555.996, -71.691, 59.989, 254)
     end
-
     return cs
 end
 
 zone_object.onRegionEnter = function(player, region)
+
     switch (region:GetRegionID()): caseof
     {
         [1] = function (x)
@@ -68,7 +69,12 @@ zone_object.onRegionEnter = function(player, region)
         [7] = function (x)
             player:startCutscene(7) -- ports player to position G-8 on map 2
         end,
+
+        default = function (x)
+            -- print("default")
+        end,
     }
+
 end
 
 zone_object.onRegionLeave = function(player, region)

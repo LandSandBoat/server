@@ -10,7 +10,7 @@
 require('scripts/globals/items')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/globals/settings')
+require('scripts/settings/main')
 require('scripts/globals/interaction/quest')
 -----------------------------------
 local mazeID = require('scripts/zones/Maze_of_Shakhrami/IDs')
@@ -30,7 +30,7 @@ quest.sections =
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
                 player:getMainJob() == xi.job.COR and
-                player:getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL
+                player:getMainLvl() >= xi.settings.AF1_QUEST_LEVEL
         end,
 
         [xi.zone.ARRAPAGO_REEF] =
@@ -66,7 +66,7 @@ quest.sections =
                     local questProgress = quest:getVar(player, 'Prog')
 
                     if questProgress == 1 then
-                        npcUtil.popFromQM(player, npc, mazeID.mob.LOST_SOUL, { hide = 0 })
+                        npcUtil.popFromQM(player, npc, mazeID.mob.LOST_SOUL, {hide = 0})
                     elseif questProgress == 2 then
                         return quest:progressEvent(66)
                     end

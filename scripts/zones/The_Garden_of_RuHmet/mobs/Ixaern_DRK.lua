@@ -7,24 +7,22 @@
 -- !pos -600 5.00 440 35
 -----------------------------------
 local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs")
-mixins = { require("scripts/mixins/job_special") }
+mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
 entity.onMobInitialize = function(IxAernDrkMob)
-    IxAernDrkMob:addListener("DEATH", "AERN_DEATH", function(mob, killer)
+    IxAernDrkMob:addListener("DEATH", "AERN_DEATH", function(mob)
         local timesReraised = mob:getLocalVar("AERN_RERAISES")
         if(math.random (1, 10) < 10) then
             -- reraise
             local target = mob:getTarget()
-            if
-                target:isPet() and
-                not target:isAlive()
-            then
-                target = target:getMaster()
+            local targetid = 0
+            if target then
+                targetid = target:getTargID()
             end
             mob:setMobMod(xi.mobMod.NO_DROPS, 1)
             mob:timer(9000, function(mobArg)
@@ -32,29 +30,10 @@ entity.onMobInitialize = function(IxAernDrkMob)
                 mobArg:setAnimationSub(3)
                 mobArg:resetAI()
                 mobArg:stun(3000)
-                if
-                    mobArg:checkDistance(target) < 25 and
-                    target:isAlive()
-                then
-                    mobArg:updateClaim(target)
-                    mobArg:updateEnmity(target)
-                else
-                    local partySize = killer:getPartySize() -- Check for other available valid aggro targets
-                    local i = 1
-                    if killer ~= nil then
-                        for _, partyMember in pairs(killer:getAlliance()) do --TODO add enmity list check when binding avail
-                            if partyMember:isAlive() and mobArg:checkDistance(partyMember) < 25 then
-                                mobArg:updateClaim(partyMember)
-                                mobArg:updateEnmity(partyMember)
-                                break
-                            elseif i == partySize then --if all checks fail just disengage
-                                mobArg:disengage()
-                            end
-                            i = i + 1
-                        end
-                    else
-                        mobArg:disengage()
-                    end
+                local new_target = mobArg:getEntity(targetid)
+                if new_target and mobArg:checkDistance(new_target) < 40 then
+                    mobArg:updateClaim(new_target)
+                    mobArg:updateEnmity(new_target)
                 end
                 mobArg:triggerListener("AERN_RERAISE", mobArg, timesReraised)
             end)

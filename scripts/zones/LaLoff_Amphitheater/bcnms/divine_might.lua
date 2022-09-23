@@ -25,6 +25,9 @@ battlefield_object.onBattlefieldRegister = function(player, battlefield)
 end
 
 battlefield_object.onBattlefieldEnter = function(player, battlefield)
+    local _, clearTime, partySize = battlefield:getRecord()
+
+    player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), 1)
 end
 
 battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)

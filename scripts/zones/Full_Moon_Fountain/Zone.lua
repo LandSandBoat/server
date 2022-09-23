@@ -1,8 +1,11 @@
 -----------------------------------
 -- Zone: Full_Moon_Fountain (170)
 -----------------------------------
-local ID = require('scripts/zones/Full_Moon_Fountain/IDs')
-require('scripts/globals/conquest')
+local ID = require("scripts/zones/Full_Moon_Fountain/IDs")
+require("scripts/globals/conquest")
+require("scripts/globals/missions")
+require("scripts/settings/main")
+require("scripts/globals/titles")
 -----------------------------------
 local zone_object = {}
 

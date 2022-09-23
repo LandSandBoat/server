@@ -63,27 +63,26 @@ bool CMobSkill::isSingle() const
     return m_Aoe == 0;
 }
 
-bool CMobSkill::isTpFreeSkill() const
+bool CMobSkill::isTwoHour() const
 {
-    // Do not remove users TP when using the skill
-    return m_Flag & SKILLFLAG_NO_TP_COST;
+    // flag means this skill is a real two hour
+    return m_Flag & SKILLFLAG_TWO_HOUR;
 }
 
-bool CMobSkill::isAstralFlow() const
+bool CMobSkill::isAttackReplacement() const
 {
-    return m_Flag & SKILLFLAG_ASTRAL_FLOW;
+    return m_Flag & SKILLFLAG_REPLACE_ATTACK;
 }
 
-bool CMobSkill::isBloodPactRage() const
+bool CMobSkill::isTpSkill() const
 {
-    // means it is a BP Rage
-    return m_Flag & SKILLFLAG_BLOODPACT_RAGE;
+    return !isSpecial() && !isAttackReplacement();
 }
 
-bool CMobSkill::isBloodPactWard() const
+bool CMobSkill::isSpecial() const
 {
-    // means it is a BP Ward
-    return m_Flag & SKILLFLAG_BLOODPACT_WARD;
+    // means it is a ranged attack or call beast, etc..
+    return m_Flag & SKILLFLAG_SPECIAL;
 }
 
 void CMobSkill::setID(uint16 id)

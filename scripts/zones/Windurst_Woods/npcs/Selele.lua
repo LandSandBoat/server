@@ -7,11 +7,12 @@
 local ID = require("scripts/zones/Windurst_Woods/IDs")
 require("scripts/globals/status")
 require("scripts/globals/keyitems")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/npc_util")
 require("scripts/quests/tutorial")
 -----------------------------------
 local entity = {}
+
 
 entity.onTrade = function(player, npc, trade)
 end

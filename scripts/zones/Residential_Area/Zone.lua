@@ -1,7 +1,9 @@
 -----------------------------------
+--
 -- Zone: Residential_Area
+--
 -----------------------------------
-local ID = require('scripts/zones/Residential_Area/IDs')
+local ID = require("scripts/zones/Residential_Area/IDs")
 -----------------------------------
 local zone_object = {}
 

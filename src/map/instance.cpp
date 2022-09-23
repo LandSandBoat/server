@@ -125,7 +125,7 @@ void CInstance::LoadInstance()
     }
     else
     {
-        ShowCritical("CZone::LoadInstance: Cannot load instance %u", m_instanceid);
+        ShowFatalError("CZone::LoadInstance: Cannot load instance %u", m_instanceid);
         Fail();
     }
 }
@@ -165,11 +165,6 @@ duration CInstance::GetTimeLimit()
     return m_timeLimit;
 }
 
-void CInstance::SetTimeLimit(duration time)
-{
-    m_timeLimit = time;
-}
-
 duration CInstance::GetLastTimeUpdate()
 {
     return m_lastTimeUpdate;
@@ -185,7 +180,7 @@ duration CInstance::GetElapsedTime(time_point tick)
     return tick - m_startTime;
 }
 
-uint64_t CInstance::GetLocalVar(std::string const& name) const
+uint64_t CInstance::GetLocalVar(const std::string& name) const
 {
     auto var = m_LocalVars.find(name);
     return var != m_LocalVars.end() ? var->second : 0;
@@ -225,7 +220,7 @@ void CInstance::SetWipeTime(duration time)
     m_wipeTimer = time + m_startTime;
 }
 
-void CInstance::SetLocalVar(std::string const& name, uint64_t value)
+void CInstance::SetLocalVar(const std::string& name, uint64_t value)
 {
     m_LocalVars[name] = value;
 }
@@ -259,8 +254,7 @@ bool CInstance::CharRegistered(CCharEntity* PChar)
 
 void CInstance::ClearEntities()
 {
-    auto clearStates = [](auto& entity)
-    {
+    auto clearStates = [](auto& entity) {
         if (static_cast<CBattleEntity*>(entity.second)->isAlive())
         {
             entity.second->PAI->ClearStateStack();

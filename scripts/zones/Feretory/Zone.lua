@@ -1,7 +1,9 @@
 -----------------------------------
+--
 -- Zone: Feretory
+--
 -----------------------------------
-local ID = require('scripts/zones/Feretory/IDs')
+local ID = require("scripts/zones/Feretory/IDs")
 -----------------------------------
 local zone_object = {}
 

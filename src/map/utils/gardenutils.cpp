@@ -168,14 +168,14 @@ namespace gardenutils
                 elements[FLOWERPOT_ELEMENT_NONE] += 10;
         }
 
-        if (settings::get<bool>("map.GARDEN_DAY_MATTERS"))
+        if (map_config.garden_day_matters)
         {
             uint32 vanaDate   = PItem->getPlantTimestamp();
             uint32 dayElement = ((vanaDate % VTIME_WEEK) / VTIME_DAY) + 1;
             elements[dayElement] += 10;
         }
 
-        if (settings::get<bool>("map.GARDEN_POT_MATTERS"))
+        if (map_config.garden_pot_matters)
         {
             switch (PItem->getID())
             {
@@ -237,12 +237,12 @@ namespace gardenutils
             }
         }
 
-        if (settings::get<bool>("map.GARDEN_MOONPHASE_MATTERS"))
+        if (map_config.garden_moonphase_matters)
         {
             strength += (int16)std::ceil(CVanaTime::getInstance()->getMoonPhase() / 10.0f);
         }
 
-        if (settings::get<bool>("map.GARDEN_MH_AURA_MATTERS"))
+        if (map_config.garden_mh_aura_matters)
         {
             // Add up all of the installed furniture auras
             std::array<uint16, 8> auras = { 0 };
@@ -251,10 +251,10 @@ namespace gardenutils
                 CItemContainer* PContainer = PChar->getStorage(containerID);
                 for (int slotID = 0; slotID < PContainer->GetSize(); ++slotID)
                 {
-                    CItem* PItemContained = PContainer->GetItem(slotID);
-                    if (PItemContained != nullptr && PItemContained->isType(ITEM_FURNISHING))
+                    CItem* PItem = PContainer->GetItem(slotID);
+                    if (PItem != nullptr && PItem->isType(ITEM_FURNISHING))
                     {
-                        CItemFurnishing* PFurniture = static_cast<CItemFurnishing*>(PItemContained);
+                        CItemFurnishing* PFurniture = static_cast<CItemFurnishing*>(PItem);
                         if (PFurniture->isInstalled())
                         {
                             auras[PFurniture->getElement()] += PFurniture->getAura();

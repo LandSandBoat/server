@@ -15,4 +15,5 @@ item_object.onItemUse = function(target)
     target:addStatusEffect(xi.effect.SLEEP_I, 1, 0, 30)
 end
 
+
 return item_object

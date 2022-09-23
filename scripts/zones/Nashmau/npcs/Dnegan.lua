@@ -2,7 +2,7 @@
 -- Area: Nashmau
 --  NPC: Dnegan
 -- Standard Info NPC
--- Involved in quest: Wayward Automaton
+-- Involved in quest: Wayward Automation
 -- !pos 29.89 -6 55.83 53
 -----------------------------------
 require("scripts/globals/quests")
@@ -13,14 +13,14 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local theWaywardAutomaton = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATON)
-    local theWaywardAutomatonProgress = player:getCharVar("TheWaywardAutomatonProgress")
+    local theWaywardAutomation = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATON)
+    local theWaywardAutomationProgress = player:getCharVar("TheWaywardAutomationProgress")
     local operationTeatimeProgress = player:getCharVar("OperationTeatimeProgress")
 
-    -- Quest: The WayWard Automaton
-    if (theWaywardAutomaton == QUEST_ACCEPTED and theWaywardAutomatonProgress == 1) then
+    -- Quest: The WayWard Automation
+    if (theWaywardAutomation == QUEST_ACCEPTED and theWaywardAutomationProgress == 1) then
         player:startEvent(289) -- he tells u to go Caedarva Mire
-    elseif (theWaywardAutomatonProgress == 2) then
+    elseif (theWaywardAutomationProgress == 2) then
         player:startEvent(289) -- Hint to go to Caedarva Mire
 
     -- Quest: Operation Teatime
@@ -31,12 +31,13 @@ entity.onTrigger = function(player, npc)
     end
 end
 
+
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
     if (csid == 289) then
-        player:setCharVar("TheWaywardAutomatonProgress", 2)
+        player:setCharVar("TheWaywardAutomationProgress", 2)
     elseif (csid == 290 and option == 0) then
         player:setCharVar("OTT_DayWait", VanadielDayOfTheYear())
     elseif (csid == 290 and option == 1) then

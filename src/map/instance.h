@@ -52,16 +52,15 @@ public:
     uint32      GetStage() const;                // Tracks the progress through the instance (eg. floor #)
     duration    GetWipeTime();                   // Get time wipe happened (elapsed since start)
     duration    GetElapsedTime(time_point tick); // Get elapsed time so far
-    uint64_t    GetLocalVar(std::string const& name) const;
+    uint64_t    GetLocalVar(const std::string& name) const;
 
     void SetLevelCap(uint8 cap);
     void SetEntryLoc(float x, float y, float z, float rot); // Set entry location
     void SetLastTimeUpdate(duration time);                  // Set last time a "Time Remaining:" message was displayed
-    void SetTimeLimit(duration time);                       // Set instance time limit
     void SetProgress(uint32 progress);                      // Set progress through current stage
     void SetStage(uint32 stage);                            // Set current stage (eg. floor #)
     void SetWipeTime(duration time);                        // Set elapsed time when a wipe is detected
-    void SetLocalVar(std::string const& name, uint64_t value);
+    void SetLocalVar(const std::string& name, uint64_t value);
 
     void CheckTime(time_point tick);         // Check time limit (run instance time script)
     bool CharRegistered(CCharEntity* PChar); // Check if PChar is registered to this instance
@@ -83,7 +82,7 @@ private:
 
     uint16              m_instanceid{ 0 };
     uint16              m_entrance{ 0 };
-    std::string         m_instanceName;
+    string_t            m_instanceName;
     CZone*              m_zone;
     uint32              m_commander{ 0 };
     uint8               m_levelcap{ 0 };

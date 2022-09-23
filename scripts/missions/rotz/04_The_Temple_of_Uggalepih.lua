@@ -18,8 +18,8 @@ local mission = Mission:new(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_T
 mission.reward =
 {
     keyItem     = xi.ki.DARK_FRAGMENT,
-    title       = xi.title.BEARER_OF_THE_WISEWOMANS_HOPE,
     nextMission = { xi.mission.log_id.ZILART, xi.mission.id.zilart.HEADSTONE_PILGRIMAGE },
+    title       = xi.title.BEARER_OF_THE_WISEWOMANS_HOPE,
 }
 
 mission.sections =
@@ -31,61 +31,42 @@ mission.sections =
 
         [xi.zone.NORG] =
         {
-            ['Gilgamesh']  = mission:event(8),
+            ['Gilgamesh'] =
+            {
+                onTrigger = function(player, npc)
+                    -- Reminder text
+                    return mission:event(8)
+                end,
+            },
         },
 
         [xi.zone.KAZHAM] =
         {
-            -- NOTE: This CS is blocked by Evisceration quest if it is active, and will not
-            -- be displayed.
-            ['Jakoh_Wahcondalo'] = mission:event(115),
+            ['Jakoh_Wahcondalo'] =
+            {
+                onTrigger = function(player, npc)
+                    -- Reminder text
+                    return mission:event(115)
+                end,
+            },
         },
 
         [xi.zone.SACRIFICIAL_CHAMBER] =
         {
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    local missionStatus = player:getMissionStatus(mission.areaId)
-
-                    if missionStatus == 1 then
-                        return 7
-                    elseif missionStatus == 2 then
-                        return 8
-                    end
-                end,
-            },
-
-            onEventUpdate =
-            {
-                [7] = function(player, csid, option, npc)
-                    if option == 0 then
-                        player:updateEvent(0, 23, 1756, 0, 163, 0, 0, 0)
-                    end
-                end,
-
-                [8] = function(player, csid, option, npc)
-                    if option == 0 then
-                        player:updateEvent(0, 23, 1756, 0, 163, 0, 0, 0)
-                    end
-                end,
-            },
-
             onEventFinish =
             {
                 [32001] = function(player, csid, option, npc)
                     if player:getLocalVar('battlefieldWin') == 128 then
-                        player:setMissionStatus(mission.areaId, 1)
-                        player:setPos(-329.762, -0.015, -300.172, 127, xi.zone.SACRIFICIAL_CHAMBER)
+                        return mission:event(7)
                     end
                 end,
 
                 [7] = function(player, csid, option, npc)
-                    player:setMissionStatus(mission.areaId, 2)
-                    player:setPos(-329.762, -0.015, -300.172, 127, xi.zone.SACRIFICIAL_CHAMBER)
+                    return mission:event(8)
                 end,
 
                 [8] = function(player, csid, option, npc)
+                    -- TODO: npcUtil and message about removing the KI?
                     if mission:complete(player) then
                         player:delKeyItem(xi.ki.SACRIFICIAL_CHAMBER_KEY)
                     end

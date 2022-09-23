@@ -4,9 +4,8 @@
 -- Obtained: White Mage Level 40
 -- Recast Time: 1:00
 -- Duration: 2 hours
--- Restriction: WHM main only
 -----------------------------------
-require("scripts/globals/job_utils/white_mage")
+require("scripts/globals/status")
 -----------------------------------
 local ability_object = {}
 
@@ -15,7 +14,9 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    xi.job_utils.white_mage.useAfflatusSolace(player, target, ability)
+    target:delStatusEffect(xi.effect.AFFLATUS_SOLACE)
+    target:delStatusEffect(xi.effect.AFFLATUS_MISERY)
+    target:addStatusEffect(xi.effect.AFFLATUS_SOLACE, 8, 0, 7200)
 end
 
 return ability_object

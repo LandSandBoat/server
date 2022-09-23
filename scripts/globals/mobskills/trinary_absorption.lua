@@ -6,16 +6,13 @@
 -- Range: Melee
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)
-    if
-        mob:isMobType(xi.mobskills.mobType.NOTORIOUS) or
-        target:hasStatusEffect(xi.effect.BATTLEFIELD)
-    then
+    if mob:isMobType(xi.mobskills.mobType.NOTORIOUS) then
         return 0
     end
     return 1

@@ -24,13 +24,13 @@
 #include "../campaign_system.h"
 #include "../entities/charentity.h"
 #include "../entities/npcentity.h"
-#include "../mob_modifier.h"
 #include "../region.h"
-#include "../utils/mobutils.h"
 #include "../zone.h"
 #include "../zone_entities.h"
 #include "lua_baseentity.h"
 #include "lua_zone.h"
+#include "../utils/mobutils.h"
+#include "../mob_modifier.h"
 
 CLuaZone::CLuaZone(CZone* PZone)
 : m_pLuaZone(PZone)
@@ -40,6 +40,7 @@ CLuaZone::CLuaZone(CZone* PZone)
         ShowError("CLuaZone created with nullptr instead of valid CZone*!");
     }
 }
+
 
 /************************************************************************
  *  Function: getLocalVar()
@@ -109,37 +110,22 @@ sol::object CLuaZone::levelRestriction()
 
 sol::table CLuaZone::getPlayers()
 {
-    auto table = lua.create_table();
-    // clang-format off
-    m_pLuaZone->ForEachChar([&table](CCharEntity* PChar)
-    {
-        table.add(CLuaBaseEntity(PChar));
-    });
-    // clang-format on
+    auto table = luautils::lua.create_table();
+    m_pLuaZone->ForEachChar([&table](CCharEntity* PChar) { table.add(CLuaBaseEntity(PChar)); });
     return table;
 }
 
 sol::table CLuaZone::getNPCs()
 {
-    auto table = lua.create_table();
-    // clang-format off
-    m_pLuaZone->ForEachNpc([&table](CNpcEntity* PNpc)
-    {
-        table.add(CLuaBaseEntity(PNpc));
-    });
-    // clang-format on
+    auto table = luautils::lua.create_table();
+    m_pLuaZone->ForEachNpc([&table](CNpcEntity* PNpc) { table.add(CLuaBaseEntity(PNpc)); });
     return table;
 }
 
 sol::table CLuaZone::getMobs()
 {
-    auto table = lua.create_table();
-    // clang-format off
-    m_pLuaZone->ForEachMob([&table](CMobEntity* PMob)
-    {
-        table.add(CLuaBaseEntity(PMob));
-    });
-    // clang-format on
+    auto table = luautils::lua.create_table();
+    m_pLuaZone->ForEachMob([&table](CMobEntity* PMob) { table.add(CLuaBaseEntity(PMob)); });
     return table;
 }
 
@@ -184,37 +170,13 @@ WEATHER CLuaZone::getWeather()
 
 void CLuaZone::reloadNavmesh()
 {
-    if (m_pLuaZone->m_navMesh)
-    {
-        m_pLuaZone->m_navMesh->reload();
-    }
-}
-
-bool CLuaZone::isNavigablePoint(const sol::table& point)
-{
-    // clang-format off
-    position_t position
-    {
-        point["x"].get_or<float>(0),
-        point["y"].get_or<float>(0),
-        point["z"].get_or<float>(0),
-        point["moving"].get_or<uint16>(0),
-        point["rot"].get_or<uint8>(0)
-    };
-    // clang-format on
-
-    if (m_pLuaZone->m_navMesh)
-    {
-        return m_pLuaZone->m_navMesh->validPosition(position);
-    }
-    else // No navmesh, just nod and smile
-    {
-        return true;
-    }
+    m_pLuaZone->m_navMesh->reload();
 }
 
 std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
 {
+    auto& lua = luautils::lua;
+
     CBaseEntity* PEntity = nullptr;
     if (table.get_or<uint8>("objtype", TYPE_NPC) == TYPE_NPC)
     {
@@ -245,7 +207,7 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
 
     m_pLuaZone->GetZoneEntities()->dynamicTargIds.insert(PEntity->targid);
 
-    PEntity->id = 0x1000100 + (ZoneID << 12) + PEntity->targid;
+    PEntity->id = 0x1000000 + (ZoneID << 12) + PEntity->targid;
 
     PEntity->loc.zone       = m_pLuaZone;
     PEntity->loc.p.rotation = table.get_or<uint8>("rotation", 0);
@@ -327,10 +289,8 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
 
         PMob->m_bReleaseTargIDOnDeath = table["releaseIdOnDeath"].get_or(false);
 
-        PMob->spawnAnimation = static_cast<SPAWN_ANIMATION>(table["specialSpawnAnimation"].get_or(false) ? 1 : 0);
-
         // Ensure mobs get a function for onMobDeath
-        auto onMobDeath = table["onMobDeath"].get<sol::function>();
+        auto onMobDeath = table["onMobDeath"].get_or<sol::function>(sol::lua_nil);
         if (!onMobDeath.valid())
         {
             cacheEntry["onMobDeath"] = []() {}; // Empty func
@@ -345,12 +305,7 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
     }
     else if (table["look"].get_type() == sol::type::string)
     {
-        auto lookStr = table.get<std::string>("look");
-        if (lookStr.size() >= 4 && ((lookStr[1] == 'x' && lookStr[3] == '1') || lookStr[1] == '1'))
-        {
-            PEntity->look.size = MODEL_EQUIPPED;
-        }
-        auto look = stringToLook(lookStr);
+        auto look = stringToLook(table.get<std::string>("look"));
         std::memcpy(&PEntity->look, &look, sizeof(PEntity->look));
     }
 
@@ -421,13 +376,27 @@ auto CLuaZone::getBackgroundMusicNight()
 
 sol::table CLuaZone::queryEntitiesByName(std::string const& name)
 {
-    const QueryByNameResult_t& entities = m_pLuaZone->queryEntitiesByName(name);
+    TracyZoneScoped;
 
-    auto table = lua.create_table();
-    for (CBaseEntity* entity : entities)
+    auto table = luautils::lua.create_table();
+
+    // TODO: Make work for instances
+    // TODO: Replace with a constant-time lookup
+    m_pLuaZone->ForEachNpc([&](CNpcEntity* PNpc)
     {
-        table.add(CLuaBaseEntity(entity));
-    }
+        if (std::string((const char*)PNpc->GetName()) == name)
+        {
+            table.add(CLuaBaseEntity(PNpc));
+        }
+    });
+
+    m_pLuaZone->ForEachMob([&](CMobEntity* PMob)
+    {
+        if (std::string((const char*)PMob->GetName()) == name)
+        {
+            table.add(CLuaBaseEntity(PMob));
+        }
+    });
 
     if (table.empty())
     {
@@ -460,7 +429,6 @@ void CLuaZone::Register()
     SOL_REGISTER("battlefieldsFull", CLuaZone::battlefieldsFull);
     SOL_REGISTER("getWeather", CLuaZone::getWeather);
     SOL_REGISTER("reloadNavmesh", CLuaZone::reloadNavmesh);
-    SOL_REGISTER("isNavigablePoint", CLuaZone::isNavigablePoint);
     SOL_REGISTER("insertDynamicEntity", CLuaZone::insertDynamicEntity);
 
     SOL_REGISTER("getSoloBattleMusic", CLuaZone::getSoloBattleMusic);

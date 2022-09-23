@@ -1,8 +1,10 @@
 -----------------------------------
+--
 -- Zone: Lebros_Cavern
+--
 -----------------------------------
-require('scripts/zones/Lebros_Cavern/IDs')
-require('scripts/globals/zone')
+require("scripts/zones/Lebros_Cavern/IDs")
+require("scripts/globals/zone")
 -----------------------------------
 local zone_object = {}
 
@@ -36,7 +38,6 @@ zone_object.onEventFinish = function(player, csid, option)
     if csid == 102 then
         local instance = player:getInstance()
         local chars = instance:getChars()
-
         for _, entity in pairs(chars) do
             entity:setPos(0, 0, 0, 0, xi.zone.MOUNT_ZHAYOLM)
         end

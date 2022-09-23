@@ -48,6 +48,7 @@ quest.sections =
                 [889] = function(player, csid, option, npc)
                     if option == 2 then
                         quest:begin(player)
+                        quest:setVar(player, 'Prog', 1)
                     end
                 end,
             },
@@ -65,33 +66,20 @@ quest.sections =
             onZoneIn =
             {
                 function(player, prevZone)
-                    if quest:getVar(player, 'Prog') == 0 then
-                        local xPos = player:getXPos()
-                        local yPos = player:getYPos()
-                        local zPos = player:getZPos()
-
-                        if
-                            xPos >= 680.0 and yPos >= -19.0 and zPos >= 218.0 and
-                            xPos <= 691.0 and yPos <= -14.0 and zPos <= 221.0
-                        then
+                    if quest:getVar(player, 'Prog') == 1 then
+                        -- This event should only fire when zoning into Wajaoam Woodlands
+                        -- through the secret exit, as the player was instructed.
+                        if prevZone == xi.zone.AHT_URHGAN_WHITEGATE then
                             return 513
                         end
-                    elseif quest:getVar(player, 'Prog') == 2 then
-                        return 20
                     end
                 end,
             },
 
             onEventFinish =
             {
-                [20] = function(player, csid, option, npc) -- end of zone in cutscene
-                    quest:setVar(player, 'Prog', 3)
-                    -- zone the person back to mamook
-                    player:setPos(216.100, -23.818, -102.464, 0, 65)
-                end,
-
-                [513] = function(player, csid, option, npc) -- end of zone in cutscene
-                    quest:setVar(player, 'Prog', 1)
+                [513] = function(player, csid, option, npc)
+                    quest:setVar(player, 'Prog', 2)
                 end,
             },
         },
@@ -101,7 +89,7 @@ quest.sections =
             ['Toads_Footprint2'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 1 then
+                    if quest:getVar(player, 'Prog') == 2 then
                         return quest:progressEvent(222)
                     end
                 end,
@@ -112,14 +100,13 @@ quest.sections =
                 onTrigger = function(player, npc)
                     local questProgress = quest:getVar(player, 'Prog')
 
-                    if questProgress == 4 then
+                    if questProgress == 3 then
                         return quest:progressEvent(223)
-                    elseif questProgress == 5 then
-                        -- missing special spawn animation, cannot find in packet capture.
-                        if npcUtil.popFromQM(player, npc, spawnedMobs, { hide = 1 }) then
+                    elseif questProgress == 4 then
+                        if npcUtil.popFromQM(player, npc, spawnedMobs, {hide = 1}) then
                             player:messageSpecial(mamookID.text.IMPENDING_BATTLE)
                         end
-                    elseif questProgress == 6 then
+                    elseif questProgress == 5 then
                         return quest:progressEvent(225)
                     end
                 end,
@@ -128,8 +115,8 @@ quest.sections =
             ['Poroggo_Casanova'] =
             {
                 onMobDeath = function(mob, player, isKiller, noKiller)
-                    if quest:getVar(player, 'Prog') == 5 then
-                        quest:setVar(player, 'Prog', 6)
+                    if quest:getVar(player, 'Prog') == 4 then
+                        quest:setVar(player, 'Prog', 5)
                     end
 
                     for i = mamookID.mob.POROGGO_CASANOVA + 1, mamookID.mob.POROGGO_CASANOVA + 5 do
@@ -138,33 +125,19 @@ quest.sections =
                 end,
             },
 
-            onZoneIn =
-            {
-                function(player, prevZone)
-                    if quest:getVar(player, 'Prog') == 3 then
-                        return 227
-                    end
-                end,
-            },
-
             onEventFinish =
             {
                 [222] = function(player, csid, option, npc)
-                    quest:setVar(player, 'Prog', 2)
-                    -- Zone the person to Wajaom for second part of cs
-                    player:setPos(610.542, -28.547, 356.247, 0, xi.zone.WAJAOM_WOODLANDS)
+                    quest:setVar(player, 'Prog', 3)
+                    return quest:event(227)
                 end,
 
                 [223] = function(player, csid, option, npc)
-                    quest:setVar(player, 'Prog', 5)
+                    quest:setVar(player, 'Prog', 4)
                 end,
 
                 [225] = function(player, csid, option, npc)
-                    quest:setVar(player, 'Prog', 7)
-                end,
-
-                [227] = function(player, csid, option, npc) -- end of 2nd zone in cutscene
-                    quest:setVar(player, 'Prog', 4)
+                    quest:setVar(player, 'Prog', 6)
                 end,
             },
         },
@@ -174,7 +147,7 @@ quest.sections =
             ['Maudaal'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 7 then
+                    if quest:getVar(player, 'Prog') == 6 then
                         return quest:progressEvent(890)
                     end
                 end,

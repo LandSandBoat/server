@@ -51,8 +51,7 @@ class CSearchListPacket
 public:
     CSearchListPacket(uint32 Total);
 
-    bool AddPlayer(SearchEntity* PPlayer);
-    void SetFinal();
+    void AddPlayer(SearchEntity* PPlayer);
 
     uint8* GetData();
     uint16 GetSize() const;

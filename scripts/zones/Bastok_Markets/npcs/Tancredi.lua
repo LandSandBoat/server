@@ -1,6 +1,7 @@
 -----------------------------------
 -- Area: Bastok Markets
 --  NPC: Tancredi
+-- Standard Info NPC
 -----------------------------------
 local entity = {}
 
@@ -8,6 +9,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
+    player:startEvent(132)
 end
 
 entity.onEventUpdate = function(player, csid, option)

@@ -2,22 +2,12 @@
 -- Area: Lower Jeuno
 --  NPC: Omer
 -----------------------------------
-require("scripts/globals/pathfind")
------------------------------------
 local entity = {}
 
-local path =
-{
-    { x = -90, y = 0, z = -127, rotation = 150, wait = 4000 },
-    { rotation = 214, wait = 1000 },
-    { x = -86, z = -120, rotation = 150, wait = 4000 },
-    { rotation = 86, wait = 1000 },
-}
+entity.onTrade = function(player, npc, trade)
+end
 
-entity.onSpawn = function(npc)
-    npc:initNpcAi()
-    npc:setPos(xi.path.first(path))
-    npc:pathThrough(path, xi.path.flag.PATROL)
+entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)

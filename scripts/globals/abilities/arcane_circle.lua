@@ -15,13 +15,7 @@ end
 
 ability_object.onUseAbility = function(player, target, ability)
     local duration = 180 + player:getMod(xi.mod.ARCANE_CIRCLE_DURATION)
-    local power = 5
-
-    if player:getMainJob() == xi.job.DRK then
-        power = 15
-    end
-
-    target:addStatusEffect(xi.effect.ARCANE_CIRCLE, power, 0, duration)
+    target:addStatusEffect(xi.effect.ARCANE_CIRCLE, 15, 0, duration)
 end
 
 return ability_object

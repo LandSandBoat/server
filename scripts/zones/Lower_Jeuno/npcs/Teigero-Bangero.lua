@@ -4,7 +4,7 @@
 -- Involved in Quests: Save the Clock Tower, The Lost Cardian
 -- !pos -58 0 -143 245
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
@@ -51,7 +51,7 @@ entity.onTrigger = function(player, npc)
         if rand == 1 then
             player:startEvent(75) -- During Panta and Naruru Quests
         else
-            player:startEvent(32) -- Same
+            player:startEvent(32) -- Same...
         end
     elseif player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_LOST_CARDIAN) == QUEST_AVAILABLE then
         if player:getCharVar("theLostCardianVar") == 0 then
@@ -73,8 +73,8 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 74 then
-        player:incrementCharVar("saveTheClockTowerVar", 1)
-        player:incrementCharVar("saveTheClockTowerNPCz2", 128)
+        player:addCharVar("saveTheClockTowerVar", 1)
+        player:addCharVar("saveTheClockTowerNPCz2", 128)
     elseif csid == 29 then
         player:setCharVar("theLostCardianVar", 1)
     end

@@ -29,12 +29,23 @@ mission.sections =
 
         [xi.zone.NORG] =
         {
-            ['Gilgamesh']  = mission:event(7),
+            ['Gilgamesh'] =
+            {
+                onTrigger = function(player, npc)
+                    -- Reminder text
+                    return mission:event(7)
+                end,
+            },
         },
 
         [xi.zone.KAZHAM] =
         {
-            ['Jakoh_Wahcondalo'] = mission:progressEvent(114),
+            ['Jakoh_Wahcondalo'] =
+            {
+                onTrigger = function(player, npc)
+                    return mission:event(114)
+                end,
+            },
 
             onEventFinish =
             {

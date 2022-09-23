@@ -1,7 +1,9 @@
 -----------------------------------
+--
 -- Zone: Arrapago Remnants
+--
 -----------------------------------
-local ID = require('scripts/zones/Arrapago_Remnants/IDs')
+local ID = require("scripts/zones/Arrapago_Remnants/IDs")
 -----------------------------------
 local zone_object = {}
 

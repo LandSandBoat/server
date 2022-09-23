@@ -20,6 +20,7 @@ local bagparam =
     { bagsize = 80, questid = nil                                       },
 }
 
+
 cmdprops =
 {
     permission = 1,

@@ -17,10 +17,8 @@ xi.reives = xi.reives or {}
 xi.reives.setupZone = function(zone)
     local ID = zones[zone:getID()]
 
-    if xi.settings.main.ENABLE_SOA == 1 then
-        for idx, _ in ipairs(ID.reive) do
-            xi.reives.enableReive(ID, idx)
-        end
+    for idx, _ in ipairs(ID.reive) do
+        xi.reives.enableReive(ID, idx)
     end
 end
 

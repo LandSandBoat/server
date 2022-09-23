@@ -24,10 +24,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "../battlefield.h"
 #include "../entities/charentity.h"
-#include "../entities/mobentity.h"
 #include "../entities/npcentity.h"
-#include "../entities/trustentity.h"
-#include "../mob_modifier.h"
+#include "../entities/mobentity.h"
 #include "../status_effect_container.h"
 #include "../utils/mobutils.h"
 #include "../utils/zoneutils.h"
@@ -83,74 +81,34 @@ uint32 CLuaBattlefield::getFightTime()
     return std::chrono::duration_cast<std::chrono::seconds>(get_server_start_time() - m_PLuaBattlefield->GetFightTime()).count();
 }
 
-uint32 CLuaBattlefield::getMaxParticipants()
-{
-    return static_cast<uint32>(m_PLuaBattlefield->GetMaxParticipants());
-}
-
-uint32 CLuaBattlefield::getPlayerCount()
-{
-    return static_cast<uint32>(m_PLuaBattlefield->GetPlayerCount());
-}
-
 sol::table CLuaBattlefield::getPlayers()
 {
-    auto table = lua.create_table();
-    // clang-format off
-    m_PLuaBattlefield->ForEachPlayer([&](CCharEntity* PChar)
-    {
+    auto table = luautils::lua.create_table();
+    m_PLuaBattlefield->ForEachPlayer([&](CCharEntity* PChar) {
         if (PChar)
         {
             table.add(CLuaBaseEntity(PChar));
         }
     });
-    // clang-format on
-    return table;
-}
-
-sol::table CLuaBattlefield::getPlayersAndTrusts()
-{
-    auto table = lua.create_table();
-    // clang-format off
-    m_PLuaBattlefield->ForEachPlayer([&](CCharEntity* PChar)
-    {
-        if (PChar)
-        {
-            table.add(CLuaBaseEntity(PChar));
-            for (auto PTrust : PChar->PTrusts)
-            {
-                table.add(CLuaBaseEntity(PTrust));
-            }
-        }
-    });
-    // clang-format on
     return table;
 }
 
 sol::table CLuaBattlefield::getMobs(bool required, bool adds)
 {
-    auto table = lua.create_table();
+    auto table = luautils::lua.create_table();
 
     if (required && !m_PLuaBattlefield->m_RequiredEnemyList.empty())
     {
-        // clang-format off
-        m_PLuaBattlefield->ForEachRequiredEnemy(
-        [&](CMobEntity* PMob)
-        {
+        m_PLuaBattlefield->ForEachRequiredEnemy([&](CMobEntity* PMob) {
             table.add(CLuaBaseEntity(PMob));
         });
-        // clang-format on
     }
 
     if (adds && !m_PLuaBattlefield->m_AdditionalEnemyList.empty())
     {
-        // clang-format off
-        m_PLuaBattlefield->ForEachAdditionalEnemy(
-        [&](CMobEntity* PMob)
-        {
+        m_PLuaBattlefield->ForEachAdditionalEnemy([&](CMobEntity* PMob) {
             table.add(CLuaBaseEntity(PMob));
         });
-        // clang-format on
     }
 
     return table;
@@ -158,27 +116,19 @@ sol::table CLuaBattlefield::getMobs(bool required, bool adds)
 
 sol::table CLuaBattlefield::getNPCs()
 {
-    auto table = lua.create_table();
-    // clang-format off
-    m_PLuaBattlefield->ForEachNpc(
-    [&](CNpcEntity* PNpc)
-    {
+    auto table = luautils::lua.create_table();
+    m_PLuaBattlefield->ForEachNpc([&](CNpcEntity* PNpc) {
         table.add(CLuaBaseEntity(PNpc));
     });
-    // clang-format on
     return table;
 }
 
 sol::table CLuaBattlefield::getAllies()
 {
-    auto table = lua.create_table();
-    // clang-format off
-    m_PLuaBattlefield->ForEachAlly(
-    [&](CMobEntity* PAlly)
-    {
+    auto table = luautils::lua.create_table();
+    m_PLuaBattlefield->ForEachAlly([&](CMobEntity* PAlly) {
         table.add(CLuaBaseEntity(PAlly));
     });
-    // clang-format on
     return table;
 }
 
@@ -292,71 +242,6 @@ void CLuaBattlefield::lose()
     m_PLuaBattlefield->CanCleanup(true);
 }
 
-void CLuaBattlefield::addGroups(sol::table groups)
-{
-    for (auto entry : groups)
-    {
-        sol::table groupData = entry.second.as<sol::table>();
-        auto       mobNames  = groupData.get<std::vector<std::string>>("mobs");
-
-        // Lookup mob ids given the provided names
-        QueryByNameResult_t entities;
-        for (const std::string& name : mobNames)
-        {
-            const QueryByNameResult_t& result = m_PLuaBattlefield->GetZone()->queryEntitiesByName(name);
-            entities.insert(entities.end(), result.begin(), result.end());
-        }
-
-        BattlefieldGroup group;
-        for (CBaseEntity* entity : entities)
-        {
-            group.mobIds.push_back(entity->id);
-        }
-
-        group.deathCallback       = groupData.get<sol::function>("death");
-        group.allDeathCallback    = groupData.get<sol::function>("allDeath");
-        group.randomDeathCallback = groupData.get<sol::function>("randomDeath");
-
-        auto setup = groupData.get<sol::function>("setup");
-        if (setup.valid())
-        {
-            auto mobs = lua.create_table();
-            for (CBaseEntity* entity : entities)
-            {
-                mobs.add(CLuaBaseEntity(entity));
-            }
-            setup(mobs);
-        }
-
-        bool stationary = groupData.get_or("stationary", false);
-        auto mods       = groupData["mods"];
-        if (stationary || mods.valid())
-        {
-            for (uint32 mobId : group.mobIds)
-            {
-                auto PMob = dynamic_cast<CMobEntity*>(zoneutils::GetEntity(mobId, TYPE_MOB | TYPE_PET));
-                XI_DEBUG_BREAK_IF(PMob == nullptr);
-
-                if (stationary)
-                {
-                    PMob->setMobMod(MOBMOD_ROAM_RESET_FACING, 1);
-                    PMob->m_maxRoamDistance = 0.5f;
-                }
-
-                if (mods.valid())
-                {
-                    for (auto modifier : mods.get<sol::table>())
-                    {
-                        PMob->setModifier(modifier.first.as<Mod>(), modifier.second.as<uint16>());
-                    }
-                }
-            }
-        }
-
-        m_PLuaBattlefield->addGroup(std::move(group));
-    }
-}
-
 //==========================================================//
 
 void CLuaBattlefield::Register()
@@ -370,10 +255,7 @@ void CLuaBattlefield::Register()
     SOL_REGISTER("getFightTick", CLuaBattlefield::getFightTick);
     SOL_REGISTER("getWipeTime", CLuaBattlefield::getWipeTime);
     SOL_REGISTER("getFightTime", CLuaBattlefield::getFightTime);
-    SOL_REGISTER("getMaxParticipants", CLuaBattlefield::getMaxParticipants);
-    SOL_REGISTER("getPlayerCount", CLuaBattlefield::getPlayerCount);
     SOL_REGISTER("getPlayers", CLuaBattlefield::getPlayers);
-    SOL_REGISTER("getPlayersAndTrusts", CLuaBattlefield::getPlayersAndTrusts);
     SOL_REGISTER("getMobs", CLuaBattlefield::getMobs);
     SOL_REGISTER("getNPCs", CLuaBattlefield::getNPCs);
     SOL_REGISTER("getAllies", CLuaBattlefield::getAllies);
@@ -394,7 +276,6 @@ void CLuaBattlefield::Register()
     SOL_REGISTER("cleanup", CLuaBattlefield::cleanup);
     SOL_REGISTER("win", CLuaBattlefield::win);
     SOL_REGISTER("lose", CLuaBattlefield::lose);
-    SOL_REGISTER("addGroups", CLuaBattlefield::addGroups);
 };
 
 std::ostream& operator<<(std::ostream& os, const CLuaBattlefield& battlefield)

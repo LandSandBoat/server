@@ -73,12 +73,25 @@
 #include "utils/petutils.h"
 #include "utils/zoneutils.h"
 
+/************************************************************************
+ *                                                                       *
+ *  Cервер для обработки активности сущностей (по серверу на зону) без   *
+ *  активных областей                                                    *
+ *                                                                       *
+ ************************************************************************/
+
 int32 zone_server(time_point tick, CTaskMgr::CTask* PTask)
 {
-    CZone* PZone = std::any_cast<CZone*>(PTask->m_data);
-    PZone->ZoneServer(tick, false);
+    std::any_cast<CZone*>(PTask->m_data)->ZoneServer(tick, false);
     return 0;
 }
+
+/************************************************************************
+ *                                                                       *
+ *  Cервер для обработки активности сущностей (по серверу на зону) c     *
+ *  активными областями                                                  *
+ *                                                                       *
+ ************************************************************************/
 
 int32 zone_server_region(time_point tick, CTaskMgr::CTask* PTask)
 {
@@ -95,6 +108,12 @@ int32 zone_server_region(time_point tick, CTaskMgr::CTask* PTask)
     }
     return 0;
 }
+
+/************************************************************************
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
 int32 zone_update_weather(time_point tick, CTaskMgr::CTask* PTask)
 {
@@ -121,9 +140,8 @@ CZone::CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID)
 , m_continentID(ContinentID)
 {
     TracyZoneScoped;
-    m_useNavMesh = false;
-    std::ignore  = m_useNavMesh;
-    ZoneTimer    = nullptr;
+    std::ignore = m_useNavMesh;
+    ZoneTimer   = nullptr;
 
     m_TreasurePool       = nullptr;
     m_BattlefieldHandler = nullptr;
@@ -143,8 +161,6 @@ CZone::CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID)
 
 CZone::~CZone()
 {
-    delete m_TreasurePool;
-    delete m_CampaignHandler;
     delete m_zoneEntities;
 }
 
@@ -242,42 +258,6 @@ void CZone::SetBackgroundMusicDay(uint8 music)
 void CZone::SetBackgroundMusicNight(uint8 music)
 {
     m_zoneMusic.m_songNight = music;
-}
-
-const QueryByNameResult_t& CZone::queryEntitiesByName(std::string const& name)
-{
-    TracyZoneScoped;
-
-    // Use memoization since lookups are typically for the same mob names
-    auto result = m_queryByNameResults.find(name);
-    if (result != m_queryByNameResults.end())
-    {
-        return result->second;
-    }
-
-    std::vector<CBaseEntity*> entities;
-
-    // TODO: Make work for instances
-    // clang-format off
-    ForEachNpc([&](CNpcEntity* PNpc)
-    {
-        if (std::string((const char*)PNpc->GetName()) == name)
-        {
-            entities.push_back(PNpc);
-        }
-    });
-
-    ForEachMob([&](CMobEntity* PMob)
-    {
-        if (std::string((const char*)PMob->GetName()) == name)
-        {
-            entities.push_back(PMob);
-        }
-     });
-    // clang-format on
-
-    m_queryByNameResults[name] = std::move(entities);
-    return m_queryByNameResults[name];
 }
 
 uint32 CZone::GetLocalVar(const char* var)
@@ -386,7 +366,7 @@ void CZone::LoadZoneWeather()
     }
     else
     {
-        ShowCritical("CZone::LoadZoneWeather: Cannot load zone weather (%u). Ensure zone_weather.sql has been imported!", m_zoneID);
+        ShowFatalError("CZone::LoadZoneWeather: Cannot load zone weather (%u). Ensure zone_weather.sql has been imported!", m_zoneID);
     }
 }
 
@@ -447,7 +427,7 @@ void CZone::LoadZoneSettings()
     }
     else
     {
-        ShowCritical("CZone::LoadZoneSettings: Cannot load zone settings (%u)", m_zoneID);
+        ShowFatalError("CZone::LoadZoneSettings: Cannot load zone settings (%u)", m_zoneID);
     }
 }
 
@@ -465,7 +445,6 @@ void CZone::LoadNavMesh()
 
     if (!m_navMesh->load(file))
     {
-        DebugNavmesh("CZone::LoadNavMesh: Cannot load navmesh file (%s)", file);
         delete m_navMesh;
         m_navMesh = nullptr;
     }
@@ -562,6 +541,12 @@ void CZone::TransportDepart(uint16 boundary, uint16 zone)
 {
     m_zoneEntities->TransportDepart(boundary, zone);
 }
+
+/************************************************************************
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
 
 void CZone::SetWeather(WEATHER weather)
 {
@@ -689,12 +674,9 @@ void CZone::DecreaseZoneCounter(CCharEntity* PChar)
 void CZone::IncreaseZoneCounter(CCharEntity* PChar)
 {
     TracyZoneScoped;
-
-    if (PChar == nullptr || PChar->loc.zone != nullptr || PChar->PTreasurePool != nullptr)
-    {
-        ShowWarning("CZone::IncreaseZoneCounter() - PChar is null, or Player zone or Treasure Pools is not null.");
-        return;
-    }
+    XI_DEBUG_BREAK_IF(PChar == nullptr);
+    XI_DEBUG_BREAK_IF(PChar->loc.zone != nullptr);
+    XI_DEBUG_BREAK_IF(PChar->PTreasurePool != nullptr);
 
     PChar->targid = m_zoneEntities->GetNewCharTargID();
 
@@ -822,6 +804,12 @@ void CZone::SavePlayTime()
     m_zoneEntities->SavePlayTime();
 }
 
+/************************************************************************
+ *                                                                       *
+ *                                                                       *
+ *                                                                       *
+ ************************************************************************/
+
 CCharEntity* CZone::GetCharByName(int8* name)
 {
     return m_zoneEntities->GetCharByName(name);
@@ -846,13 +834,13 @@ void CZone::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message_type, C
 
 void CZone::UpdateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask)
 {
-    TracyZoneScoped;
+    TracyZoneScoped
     m_zoneEntities->UpdateCharPacket(PChar, type, updatemask);
 }
 
 void CZone::UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask, bool alwaysInclude)
 {
-    TracyZoneScoped;
+    TracyZoneScoped
     m_zoneEntities->UpdateEntityPacket(PEntity, type, updatemask, alwaysInclude);
 }
 
@@ -962,8 +950,7 @@ void CZone::createZoneTimer()
     TracyZoneScoped;
     ZoneTimer =
         CTaskMgr::getInstance()->AddTask(m_zoneName, server_clock::now(), this, CTaskMgr::TASK_INTERVAL,
-                                         m_regionList.empty() ? zone_server : zone_server_region,
-                                         std::chrono::milliseconds(static_cast<uint32>(server_tick_interval)));
+                                         m_regionList.empty() ? zone_server : zone_server_region, std::chrono::milliseconds((int)(1000 / server_tick_rate)));
 }
 
 void CZone::CharZoneIn(CCharEntity* PChar)
@@ -1175,7 +1162,7 @@ void CZone::CheckRegions(CCharEntity* PChar)
     PChar->m_InsideRegionID = RegionID;
 }
 
-//===========================================================
+//====================================1=======================
 
 /*
 id              CBaseEntity

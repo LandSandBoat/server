@@ -1,7 +1,9 @@
 -----------------------------------
+--
 -- Zone: Bearclaw_Pinnacle (6)
+--
 -----------------------------------
-local ID = require('scripts/zones/Bearclaw_Pinnacle/IDs')
+local ID = require("scripts/zones/Bearclaw_Pinnacle/IDs")
 -----------------------------------
 local zone_object = {}
 
@@ -14,11 +16,9 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
-
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
         player:setPos(-680, 16, -540, 129)
     end
-
     return cs
 end
 

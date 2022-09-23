@@ -5,7 +5,8 @@
 -- Recast Time: 00:10:00
 -- Duration: 00:05:00
 -----------------------------------
-require("scripts/globals/job_utils/black_mage")
+require("scripts/settings/main")
+require("scripts/globals/status")
 -----------------------------------
 local ability_object = {}
 
@@ -14,7 +15,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    xi.job_utils.black_mage.useManaWall(player, target, ability)
+    player:addStatusEffect(xi.effect.MANA_WALL, 4, 0, 300)
 end
 
 return ability_object

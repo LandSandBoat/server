@@ -18,8 +18,4 @@ entity.onMobDeath = function(mob, player, isKiller)
     xi.promyvion.receptacleOnDeath(mob, isKiller)
 end
 
-entity.onMobSpawn = function(mob)
-    mob:addMod(xi.mod.DEF, 55)
-end
-
 return entity

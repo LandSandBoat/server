@@ -1,4 +1,5 @@
 -----------------------------------
+--
 -- Zone: GM Home (210)
 --
 -- Some cs event info:
@@ -9,8 +10,9 @@
 -- ...
 -- 140 = Camera test.
 -- 141 = "Press confirm button to proceed" nonworking test.
+--
 -----------------------------------
-local ID = require('scripts/zones/GM_Home/IDs')
+local ID = require("scripts/zones/GM_Home/IDs")
 -----------------------------------
 local zone_object = {}
 

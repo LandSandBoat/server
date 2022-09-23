@@ -1,7 +1,7 @@
 -----------------------------------
 -- ID: 4202
 -- Daedalus Wing
--- Increases TP of the user by 1000
+-- Increases TP of the user by 100
 -----------------------------------
 local item_object = {}
 

@@ -4,7 +4,7 @@
 -- Obtained: SCH Level 76
 -- Recast Time: 00:01:00
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local ability_object = {}

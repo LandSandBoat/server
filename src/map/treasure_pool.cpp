@@ -73,11 +73,8 @@ TREASUREPOOLTYPE CTreasurePool::GetPoolType()
 
 void CTreasurePool::AddMember(CCharEntity* PChar)
 {
-    if (PChar == nullptr || PChar->PTreasurePool != this)
-    {
-        ShowWarning("CTreasurePool::AddMember() - PChar was null, or PTreasurePool mismatched.");
-        return;
-    }
+    XI_DEBUG_BREAK_IF(PChar == nullptr);
+    XI_DEBUG_BREAK_IF(PChar->PTreasurePool != this);
 
     members.push_back(PChar);
 
@@ -99,11 +96,8 @@ void CTreasurePool::AddMember(CCharEntity* PChar)
 
 void CTreasurePool::DelMember(CCharEntity* PChar)
 {
-    if (PChar == nullptr || PChar->PTreasurePool != this)
-    {
-        ShowWarning("CTreasurePool::DelMember() - PChar was null, or PTreasurePool mismatched.");
-        return;
-    }
+    XI_DEBUG_BREAK_IF(PChar == nullptr);
+    XI_DEBUG_BREAK_IF(PChar->PTreasurePool != this);
 
     // if(m_TreasurePoolType != TREASUREPOOL_ZONE){
     // Zone drops e.g. Dynamis DO NOT remove previous lot info. Everything else does.
@@ -251,11 +245,8 @@ uint8 CTreasurePool::AddItem(uint16 ItemID, CBaseEntity* PEntity)
 
 void CTreasurePool::UpdatePool(CCharEntity* PChar)
 {
-    if (PChar == nullptr || PChar->PTreasurePool != this)
-    {
-        ShowWarning("CTreasurePool::UpdatePool() - PChar was null, or PTreasurePool mismatched.");
-        return;
-    }
+    XI_DEBUG_BREAK_IF(PChar == nullptr);
+    XI_DEBUG_BREAK_IF(PChar->PTreasurePool != this);
 
     if (PChar->status != STATUS_TYPE::DISAPPEAR)
     {
@@ -274,11 +265,8 @@ void CTreasurePool::UpdatePool(CCharEntity* PChar)
 
 void CTreasurePool::LotItem(CCharEntity* PChar, uint8 SlotID, uint16 Lot)
 {
-    if (PChar == nullptr || PChar->PTreasurePool != this)
-    {
-        ShowWarning("CTreasurePool::LotItem() - PChar was null, or PTreasurePool mismatched.");
-        return;
-    }
+    XI_DEBUG_BREAK_IF(PChar == nullptr);
+    XI_DEBUG_BREAK_IF(PChar->PTreasurePool != this);
 
     if (SlotID >= TREASUREPOOL_SIZE)
     {
@@ -318,11 +306,8 @@ void CTreasurePool::LotItem(CCharEntity* PChar, uint8 SlotID, uint16 Lot)
 
 void CTreasurePool::PassItem(CCharEntity* PChar, uint8 SlotID)
 {
-    if (PChar == nullptr || PChar->PTreasurePool != this)
-    {
-        ShowWarning("CTreasurePool::PassItem() - PChar was null, or PTreasurePool mismatched.");
-        return;
-    }
+    XI_DEBUG_BREAK_IF(PChar == nullptr);
+    XI_DEBUG_BREAK_IF(PChar->PTreasurePool != this);
 
     if (SlotID >= TREASUREPOOL_SIZE)
     {
@@ -455,7 +440,7 @@ void CTreasurePool::CheckTreasureItem(time_point tick, uint8 SlotID)
         m_PoolItems[SlotID].Lotters.size() == members.size())
     {
         // Find item's highest lotter
-        LotInfo highestInfo;
+        LotInfo highestInfo = { 0, nullptr };
 
         for (auto curInfo : m_PoolItems[SlotID].Lotters)
         {
@@ -532,11 +517,9 @@ void CTreasurePool::CheckTreasureItem(time_point tick, uint8 SlotID)
 
 void CTreasurePool::TreasureWon(CCharEntity* winner, uint8 SlotID)
 {
-    if (winner == nullptr || winner->PTreasurePool != this || m_PoolItems[SlotID].ID == 0)
-    {
-        ShowWarning("CTreasurePool::TreasureError() - Winner, or Winner Treasure Pool mismatch, or Pool ID = 0.");
-        return;
-    }
+    XI_DEBUG_BREAK_IF(winner == nullptr);
+    XI_DEBUG_BREAK_IF(winner->PTreasurePool != this);
+    XI_DEBUG_BREAK_IF(m_PoolItems[SlotID].ID == 0);
 
     m_PoolItems[SlotID].TimeStamp = get_server_start_time();
 
@@ -560,11 +543,9 @@ void CTreasurePool::TreasureWon(CCharEntity* winner, uint8 SlotID)
 
 void CTreasurePool::TreasureError(CCharEntity* winner, uint8 SlotID)
 {
-    if (winner == nullptr || winner->PTreasurePool != this || m_PoolItems[SlotID].ID == 0)
-    {
-        ShowWarning("CTreasurePool::TreasureError() - Winner, or Winner Treasure Pool mismatch, or Pool ID = 0.");
-        return;
-    }
+    XI_DEBUG_BREAK_IF(winner == nullptr);
+    XI_DEBUG_BREAK_IF(winner->PTreasurePool != this);
+    XI_DEBUG_BREAK_IF(m_PoolItems[SlotID].ID == 0);
 
     m_PoolItems[SlotID].TimeStamp = get_server_start_time();
 

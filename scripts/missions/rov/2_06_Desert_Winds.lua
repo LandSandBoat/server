@@ -4,7 +4,9 @@
 -----------------------------------
 -- !addmission 13 54
 -----------------------------------
+require('scripts/globals/items')
 require('scripts/globals/missions')
+require('scripts/globals/rhapsodies')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/mission')
 -----------------------------------
@@ -20,7 +22,8 @@ mission.sections =
 {
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId
+            return currentMission == mission.missionId and
+                xi.rhapsodies.charactersAvailable(player)
         end,
 
         -- We should be guaranteed that the player has not been to TOAU areas if this

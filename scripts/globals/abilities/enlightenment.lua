@@ -5,7 +5,7 @@
 -- Recast Time: 0:05:00
 -- Duration: 0:01:00 or 1 Spell, whichever occurs first
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------

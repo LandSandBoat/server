@@ -5,7 +5,8 @@
 -- Recast Time: 5:00
 -- Duration: 5:00
 -----------------------------------
-require("scripts/globals/job_utils/monk")
+require("scripts/settings/main")
+require("scripts/globals/status")
 -----------------------------------
 local ability_object = {}
 
@@ -14,7 +15,10 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    xi.job_utils.monk.useCounterstance(player, target, ability)
+    local power = 45 + player:getMod(xi.mod.COUNTERSTANCE_EFFECT)
+
+    target:delStatusEffect(xi.effect.COUNTERSTANCE) --if not found this will do nothing
+    target:addStatusEffect(xi.effect.COUNTERSTANCE, power, 0, 300)
 end
 
 return ability_object

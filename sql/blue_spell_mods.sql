@@ -753,6 +753,7 @@ INSERT INTO `blue_spell_mods` VALUES ('680', '12', '2'); -- INT+2
 INSERT INTO `blue_spell_mods` VALUES ('681', '13', '3'); -- MND+3
 INSERT INTO `blue_spell_mods` VALUES ('681', '14', '-2'); -- CHR-2
 
+
 -- ----------------------------
 -- Delta Thrust
 -- ----------------------------
@@ -865,6 +866,7 @@ INSERT INTO `blue_spell_mods` VALUES ('698', '11', '2'); -- AGI+2
 -- ----------------------------
 INSERT INTO `blue_spell_mods` VALUES ('699', '8', '-3'); -- STR-3 
 INSERT INTO `blue_spell_mods` VALUES ('699', '9', '4'); -- DEX+4
+
 
 -- ----------------------------
 -- Nature's Meditation
@@ -1002,3 +1004,4 @@ INSERT INTO `blue_spell_mods` VALUES ('745', '0', '0'); --
 -- Blistering Roar
 -- ----------------------------
 INSERT INTO `blue_spell_mods` VALUES ('746', '0', '0'); -- 
+

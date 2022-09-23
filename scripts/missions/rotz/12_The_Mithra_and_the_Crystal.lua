@@ -15,6 +15,7 @@ require('scripts/globals/titles')
 require('scripts/globals/zone')
 -----------------------------------
 local quicksandCavesID = require('scripts/zones/Quicksand_Caves/IDs')
+local rabaoID          = require('scripts/zones/Rabao/IDs')
 -----------------------------------
 
 local mission = Mission:new(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_MITHRA_AND_THE_CRYSTAL)
@@ -51,22 +52,13 @@ mission.sections =
 
         [xi.zone.RABAO] =
         {
-            ['Maryoh_Comyujah'] =
-            {
-                onTrigger = function(player, npc)
-                    local hasDeclined = mission:getVar(player, 'Option')
-
-                    return mission:progressEvent(81, 247, 1, 0, 708, 5, 1, 279, hasDeclined)
-                end,
-            },
+            ['Maryoh_Comyujah'] = mission:progressEvent(81),
 
             onEventFinish =
             {
                 [81] = function(player, csid, option, npc)
                     if option == 1 then
                         player:setMissionStatus(xi.mission.log_id.ZILART, 1)
-                    else
-                        mission:setVar(player, 'Option', 1)
                     end
                 end,
             },
@@ -84,18 +76,16 @@ mission.sections =
             ['qm7'] =
             {
                 onTrigger = function(player, npc)
-                    if mission:getLocalVar(player, 'nmDefeated') == 1 then
-                        return mission:progressEvent(13)
+                    if
+                        player:needToZone() and
+                        player:getCharVar('AncientVesselKilled') == 1
+                    then
+                        player:setCharVar('AncientVesselKilled', 0)
+                        player:addKeyItem(xi.ki.SCRAP_OF_PAPYRUS)
+                        return mission:messageSpecial(quicksandCavesID.text.KEYITEM_OBTAINED, xi.ki.SCRAP_OF_PAPYRUS)
                     else
-                        return mission:progressEvent(12)
+                        return mission:event(12)
                     end
-                end,
-            },
-
-            ['Ancient_Vessel'] =
-            {
-                onMobDeath = function(mob, player, isKiller, noKiller)
-                    mission:setLocalVar(player, 'nmDefeated', 1)
                 end,
             },
 
@@ -103,15 +93,7 @@ mission.sections =
             {
                 [12] = function(player, csid, option, npc)
                     if option == 1 then
-                        player:messageSpecial(quicksandCavesID.text.SOMETHING_ATTACKING_YOU)
-
                         SpawnMob(quicksandCavesID.mob.ANCIENT_VESSEL):updateClaim(player)
-                    end
-                end,
-
-                [13] = function(player, csid, option, npc)
-                    if option == 1 then
-                        npcUtil.giveKeyItem(player, xi.ki.SCRAP_OF_PAPYRUS)
                     end
                 end,
             },
@@ -132,9 +114,10 @@ mission.sections =
             onEventFinish =
             {
                 [83] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.SCRAP_OF_PAPYRUS)
-                    npcUtil.giveKeyItem(player, xi.ki.CERULEAN_CRYSTAL)
                     player:setMissionStatus(xi.mission.log_id.ZILART, 2)
+                    player:delKeyItem(xi.ki.SCRAP_OF_PAPYRUS)
+                    player:addKeyItem(xi.ki.CERULEAN_CRYSTAL)
+                    return mission:messageSpecial(rabaoID.text.KEYITEM_OBTAINED, xi.ki.CERULEAN_CRYSTAL)
                 end,
             },
         },
@@ -160,13 +143,14 @@ mission.sections =
 
         [xi.zone.HALL_OF_THE_GODS] =
         {
-            ['_6z0']              = mission:progressEvent(4),
-            ['Shimmering_Circle'] = mission:progressEvent(3),
+            ['_6z0'] = mission:progressEvent(4),
 
             onEventFinish =
             {
-                [3] = function(player, csid, option, npc)
-                    mission:complete(player)
+                [4] = function(player, csid, option, npc)
+                    if mission:complete(player) then
+                        player:setMissionStatus(xi.mission.log_id.ZILART, 0)
+                    end
                 end,
             },
         },

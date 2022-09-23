@@ -800,6 +800,7 @@ class context_t
             throw error_t();
     }
 
+
     explicit context_t(int io_threads_, int max_sockets_ = ZMQ_MAX_SOCKETS_DFLT)
     {
         ptr = zmq_ctx_new();

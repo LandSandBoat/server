@@ -6,6 +6,7 @@
 -- BEAUCEDINE_GLACIER_S : !zone 136
 -----------------------------------
 require('scripts/globals/missions')
+require('scripts/settings/main')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
@@ -14,7 +15,6 @@ local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.NORTHLAND
 
 mission.reward =
 {
-    keyItem     = xi.ki.SHADOW_BUG,
     nextMission = { xi.mission.log_id.WOTG, xi.mission.id.wotg.TRAITOR_IN_THE_MIDST },
 }
 

@@ -27,8 +27,7 @@
 #include "common/cbasetypes.h"
 #include "common/taskmgr.h"
 
-#include "common/lua.h"
-extern sol::state lua;
+#include "lua.hpp"
 
 #ifdef TRACY_ENABLE
 #include "TracyLua.hpp"
@@ -46,8 +45,8 @@ extern sol::state lua;
 
 #define SOL_USERTYPE(TypeName, BindingTypeName) \
     std::string className = TypeName;           \
-    lua.new_usertype<BindingTypeName>(className)
-#define SOL_REGISTER(FuncName, Func) lua[className][FuncName] = &Func
+    luautils::lua.new_usertype<BindingTypeName>(className)
+#define SOL_REGISTER(FuncName, Func) luautils::lua[className][FuncName] = &Func
 
 #include "../items/item_equipment.h"
 #include "../spell.h"
@@ -59,7 +58,6 @@ extern sol::state lua;
 #include "lua_instance.h"
 #include "lua_item.h"
 #include "lua_mobskill.h"
-#include "lua_petskill.h"
 #include "lua_region.h"
 #include "lua_spell.h"
 #include "lua_statuseffect.h"
@@ -67,22 +65,20 @@ extern sol::state lua;
 #include "lua_zone.h"
 
 /************************************************************************
- *                                                                       *
- *                                                                       *
- *                                                                       *
- ************************************************************************/
+*                                                                       *
+*                                                                       *
+*                                                                       *
+************************************************************************/
 
 class CAbility;
 class CSpell;
 class CBaseEntity;
 class CBattleEntity;
 class CAutomatonEntity;
-class CPetEntity;
 class CCharEntity;
 class CBattlefield;
 class CItem;
 class CMobSkill;
-class CPetSkill;
 class CRegion;
 class CStatusEffect;
 class CTradeContainer;
@@ -101,7 +97,6 @@ class CLuaBattlefield;
 class CLuaInstance;
 class CLuaItem;
 class CLuaMobSkill;
-class CLuaPetSkill;
 class CLuaRegion;
 class CLuaSpell;
 class CLuaStatusEffect;
@@ -117,6 +112,8 @@ enum class Emote : uint8;
 
 namespace luautils
 {
+    extern sol::state lua;
+
     void SafeApplyFunc_ReloadList(std::function<void(std::map<std::string, uint64>&)> func);
 
     int32 init();
@@ -127,13 +124,13 @@ namespace luautils
 
     std::vector<std::string> GetQuestAndMissionFilenamesList();
 
+    void print(sol::variadic_args va);
+
     // Cache helpers
     auto getEntityCachedFunction(CBaseEntity* PEntity, std::string funcName) -> sol::function;
     void CacheLuaObjectFromFile(std::string filename, bool printOutput = false);
     auto GetCacheEntryFromFilename(std::string filename) -> sol::table;
     void OnEntityLoad(CBaseEntity* PEntity);
-
-    void PopulateIDLookups(std::optional<uint16> maybeZoneId = std::nullopt);
 
     void  SendEntityVisualPacket(uint32 npcid, const char* command);
     void  InitInteractionGlobal();
@@ -147,18 +144,19 @@ namespace luautils
     uint8 GetConquestBalance();
     bool  IsConquestAlliance();
     int32 SetRegionalConquestOverseers(uint8 regionID); // Update NPC Conquest Guard
-    void  SendLuaFuncStringToZone(uint16 zoneId, std::string const& str);
+
+    uint8 GetHealingTickDelay(); // Returns the configured healing tick delay
 
     auto GetReadOnlyItem(uint32 id) -> std::optional<CLuaItem>; // Returns a read only lookup item object of the specified ID
     auto GetAbility(uint16 id) -> std::optional<CLuaAbility>;
     auto GetSpell(uint16 id) -> std::optional<CLuaSpell>;
 
-    auto SpawnMob(uint32 mobid, sol::object const& arg2, sol::object const& arg3) -> std::optional<CLuaBaseEntity>; // Spawn Mob By Mob Id - NMs, BCNM...
-    void DespawnMob(uint32 mobid, sol::object const& arg2);                                                         // Despawn (Fade Out) Mob By Id
-    auto GetPlayerByName(std::string const& name) -> std::optional<CLuaBaseEntity>;
-    auto GetPlayerByID(uint32 pid) -> std::optional<CLuaBaseEntity>;
-    auto GetMagianTrial(sol::variadic_args va) -> sol::table;
-    auto GetMagianTrialsWithParent(int32 parentTrial) -> sol::table;
+    auto   SpawnMob(uint32 mobid, sol::object const& arg2, sol::object const& arg3) -> std::optional<CLuaBaseEntity>; // Spawn Mob By Mob Id - NMs, BCNM...
+    void   DespawnMob(uint32 mobid, sol::object const& arg2);                                                           // Despawn (Fade Out) Mob By Id
+    auto   GetPlayerByName(std::string const& name) -> std::optional<CLuaBaseEntity>;
+    auto   GetPlayerByID(uint32 pid) -> std::optional<CLuaBaseEntity>;
+    auto   GetMagianTrial(sol::variadic_args va) -> sol::table;
+    auto   GetMagianTrialsWithParent(int32 parentTrial) -> sol::table;
 
     uint32 JstMidnight();
     uint32 JstWeekday();
@@ -182,16 +180,13 @@ namespace luautils
     bool   IsMoonFull(); // Returns true if the moon is full
     void   StartElevator(uint32 ElevatorID);
 
-    int32 GetServerVariable(std::string const& name);
+    int32 GetServerVariable(std::string const& varName);
     void  SetServerVariable(std::string const& name, int32 value);
-    int32 GetVolatileServerVariable(std::string const& varName);
-    void  SetVolatileServerVariable(std::string const& varName, int32 value);
-    int32 GetCharVar(uint32 charId, std::string const& varName);              // Get player var directly from SQL DB
-    void  SetCharVar(uint32 charId, std::string const& varName, int32 value); // Set player var in SQL DB using charId
-    void  ClearCharVarFromAll(std::string const& varName);                    // Deletes a specific player variable from all players
-    void  Terminate();                                                        // Logs off all characters and terminates the server
+    void  ClearVarFromAll(std::string const& varName); // Deletes a specific player variable from all players
+    void  Terminate();                          // Logs off all characters and terminates the server
 
     int32 GetTextIDVariable(uint16 ZoneID, const char* variable); // загружаем значение переменной TextID указанной зоны
+    uint8 GetSettingsVariable(const char* variable);              // Gets a Variable Value from Settings.lua
     bool  IsContentEnabled(const char* content);                  // Check if the content is enabled in settings.lua
 
     int32 OnGameDay(CZone* PZone);  // Automatic action of NPC every game day
@@ -236,13 +231,12 @@ namespace luautils
     auto  OnItemCheck(CBaseEntity* PTarget, CItem* PItem, ITEMCHECK param = ITEMCHECK::NONE, CBaseEntity* PCaster = nullptr) -> std::tuple<int32, int32, int32>; // check to see if item can be used
     int32 CheckForGearSet(CBaseEntity* PTarget);                                                                                                                 // check for gear sets
 
-    int32 OnMagicCastingCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CSpell* PSpell);                                                       // triggers when a player attempts to cast a spell
-    int32 OnSpellCast(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell);                                                         // triggered when casting a spell
-    int32 OnSpellPrecast(CBattleEntity* PCaster, CSpell* PSpell);                                                                              // triggered just before casting a spell
-    auto  OnMobMagicPrepare(CBattleEntity* PCaster, CBattleEntity* PTarget, std::optional<SpellID> startingSpellId) -> std::optional<SpellID>; // triggered when monster wants to use a spell on target
-    int32 OnMagicHit(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell);                                                          // triggered when spell cast on monster
-    int32 OnWeaponskillHit(CBattleEntity* PMob, CBaseEntity* PAttacker, uint16 PWeaponskill);                                                  // Triggered when Weaponskill strikes monster
-    bool  OnTrustSpellCastCheckBattlefieldTrusts(CBattleEntity* PCaster);                                                                      // Triggered if spell is a trust spell during onCast to determine to interrupt spell or not
+    int32  OnMagicCastingCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CSpell* PSpell);                   // triggers when a player attempts to cast a spell
+    int32  OnSpellCast(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell);                     // triggered when casting a spell
+    int32  OnSpellPrecast(CBattleEntity* PCaster, CSpell* PSpell);                                          // triggered just before casting a spell
+    auto   OnMobMagicPrepare(CBattleEntity* PCaster, CBattleEntity* PTarget, std::optional<SpellID> startingSpellId) -> std::optional<SpellID>; // triggered when monster wants to use a spell on target
+    int32  OnMagicHit(CBattleEntity* PCaster, CBattleEntity* PTarget, CSpell* PSpell);                      // triggered when spell cast on monster
+    int32  OnWeaponskillHit(CBattleEntity* PMob, CBaseEntity* PAttacker, uint16 PWeaponskill);              // Triggered when Weaponskill strikes monster
 
     int32 OnMobInitialize(CBaseEntity* PMob); // Used for passive trait
     int32 ApplyMixins(CBaseEntity* PMob);
@@ -279,13 +273,9 @@ namespace luautils
     int32  OnAutomatonAbility(CBaseEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMobSkill, CBaseEntity* PMobMaster, action_t* action);
 
     int32 OnAbilityCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CAbility* PAbility, CBaseEntity** PMsgTarget);                                                                               // triggers when a player attempts to use a job ability or roll
-    int32 OnPetAbility(CBaseEntity* PTarget, CBaseEntity* PMob, CMobSkill* PMobSkill, CBaseEntity* PPetMaster, action_t* action);                                                               // triggers when pet uses an ability
-    int32 OnPetAbility(CBaseEntity* PTarget, CPetEntity* PPet, CPetSkill* PMobSkill, CBaseEntity* PPetMaster, action_t* action);                                                                // triggers when pet uses an ability, specialized for pets
+    int32 OnPetAbility(CBaseEntity* PPet, CBaseEntity* PMob, CMobSkill* PMobSkill, CBaseEntity* PPetMaster, action_t* action);                                                                  // triggers when pet uses an ability
     auto  OnUseWeaponSkill(CBattleEntity* PUser, CBaseEntity* PMob, CWeaponSkill* wskill, uint16 tp, bool primary, action_t& action, CBattleEntity* taChar) -> std::tuple<int32, uint8, uint8>; // returns: damage, tphits landed, extra hits landed
     int32 OnUseAbility(CBattleEntity* PUser, CBattleEntity* PTarget, CAbility* PAbility, action_t* action);                                                                                     // triggers when job ability is used
-    int32 OnSteal(CBattleEntity* PChar, CBattleEntity* PTarget, CAbility* PAbility, action_t* action);
-
-    bool OnCanUseSpell(CBattleEntity* PChar, CSpell* Spell); // triggers when CanUseSpell is invoked on spell.cpp for PCs only
 
     auto GetCachedInstanceScript(uint16 instanceId) -> sol::table;
 
@@ -320,7 +310,7 @@ namespace luautils
     void OnPlayerEmote(CCharEntity* PChar, Emote EmoteID);
     void OnPlayerVolunteer(CCharEntity* PChar, std::string text);
 
-    bool OnChocoboDig(CCharEntity* PChar, bool pre); // chocobo digging, pre = check
+    bool OnChocoboDig(CCharEntity* PChar, bool pre);                    // chocobo digging, pre = check
 
     // Utility method: checks for and loads a lua function for events
     auto LoadEventScript(CCharEntity* PChar, const char* functionName) -> sol::function;
@@ -335,9 +325,6 @@ namespace luautils
     auto SetCustomMenuContext(CCharEntity* PChar, sol::table table) -> std::string;
     bool HasCustomMenuContext(CCharEntity* PChar);
     void HandleCustomMenu(CCharEntity* PChar, std::string selection);
-
-    // Retrive the first itemId that matches a name
-    uint16 GetItemIDByName(std::string const& name);
 }; // namespace luautils
 
 #endif // _LUAUTILS_H -

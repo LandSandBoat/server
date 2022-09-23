@@ -1,7 +1,9 @@
 -----------------------------------
+--
 -- Zone: Everbloom_Hollow
+--
 -----------------------------------
-local ID = require('scripts/zones/Everbloom_Hollow/IDs')
+local ID = require("scripts/zones/Everbloom_Hollow/IDs")
 -----------------------------------
 local zone_object = {}
 

@@ -1,9 +1,5 @@
 -----------------------------------
 -- Trust: Volker
--- If there is a NIN, PLD, or RUN in the party, behaves as a damage dealer: Uses Aggressor, Berserk.
--- If there are no other tanks in the party, behaves as a tank: Uses Defender, Retaliation.
--- Uses Provoke in either role to maintain enmity as a tank or off-tank.
--- Uses weapon skills at 2000 TP with Warrior's Charge if it's available; does not try to skillchain. (TODO)
 -----------------------------------
 require("scripts/globals/ability")
 require("scripts/globals/gambits")
@@ -29,19 +25,8 @@ spell_object.onMobSpawn = function(mob)
         [xi.magic.spell.KLARA] = xi.trust.message_offset.TEAMWORK_3,
     })
 
-    -- DD Mode
-    mob:addSimpleGambit(ai.t.SELF, ai.c.PT_HAS_TANK, 0, ai.r.JA, ai.s.SPECIFIC, xi.ja.BERSERK)
-    mob:addSimpleGambit(ai.t.SELF, ai.c.PT_HAS_TANK, 0, ai.r.JA, ai.s.SPECIFIC, xi.ja.AGGRESSOR)
-    mob:addSimpleGambit(ai.t.TANK, ai.c.HPP_LT, 50, ai.r.JA, ai.s.SPECIFIC, xi.ja.PROVOKE)
-
-    -- Tank Mode
-    mob:addSimpleGambit(ai.t.TARGET, ai.c.NOT_PT_HAS_TANK, 0, ai.r.JA, ai.s.SPECIFIC, xi.ja.PROVOKE)
-    mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_PT_HAS_TANK, 0, ai.r.JA, ai.s.SPECIFIC, xi.ja.DEFENDER)
-    mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_PT_HAS_TANK, 0, ai.r.JA, ai.s.SPECIFIC, xi.ja.RETALIATION)
-
-    mob:addSimpleGambit(ai.t.MASTER, ai.c.HPP_LT, 50, ai.r.JA, ai.s.SPECIFIC, xi.ja.PROVOKE)
-
-    -- TODO: Add Warriors Charge + WS Logic
+    mob:addSimpleGambit(ai.t.MASTER, ai.c.HPP_LT, 50,
+                        ai.r.JA, ai.s.SPECIFIC, xi.ja.PROVOKE)
 end
 
 spell_object.onMobDespawn = function(mob)

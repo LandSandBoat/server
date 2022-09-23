@@ -1,8 +1,7 @@
 -----------------------------------
 -- Warrior Job Utilities
 -----------------------------------
-require('scripts/globals/items')
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 xi = xi or {}
@@ -23,13 +22,8 @@ xi.job_utils.warrior.checkMightyStrikes = function(player, target, ability)
 end
 
 xi.job_utils.warrior.checkTomahawk = function(player, target, ability)
-    local ammoID = player:getEquipID(xi.slot.AMMO)
-
-    if ammoID == xi.items.THROWING_TOMAHAWK then
-        return 0, 0
-    else
-        return xi.msg.basic.CANNOT_PERFORM, 0
-    end
+    --Placeholder code. Needs to check for direction and equiped ammo.
+    return 0, 0
 end
 
 -----------------------------------
@@ -41,14 +35,11 @@ xi.job_utils.warrior.useAggressor = function(player, target, ability)
 end
 
 xi.job_utils.warrior.useBerserk = function(player, target, ability)
-    player:addStatusEffect(xi.effect.BERSERK, 25 + player:getMod(xi.mod.BERSERK_POTENCY), 0, 180 + player:getMod(xi.mod.BERSERK_DURATION))
+    player:addStatusEffect(xi.effect.BERSERK, 25 + player:getMod(xi.mod.BERSERK_EFFECT), 0, 180 + player:getMod(xi.mod.BERSERK_DURATION))
 end
 
 xi.job_utils.warrior.useBloodRage = function(player, target, ability)
-    local power = 20 + player:getJobPointLevel(xi.jp.BLOOD_RAGE_EFFECT)
-    local duration = 30 + player:getMod(xi.mod.ENHANCES_BLOOD_RAGE)
-
-    player:addStatusEffect(xi.effect.BLOOD_RAGE, power, 0, duration)
+    player:addStatusEffect(xi.effect.BLOOD_RAGE, 1, 0, 30)
 end
 
 xi.job_utils.warrior.useBrazenRush = function(player, target, ability)
@@ -64,7 +55,7 @@ xi.job_utils.warrior.useMightyStrikes = function(player, target, ability)
 end
 
 xi.job_utils.warrior.useRestraint = function(player, target, ability)
-    player:addStatusEffect(xi.effect.RESTRAINT, 0, 0, 300)
+    --placeholder
 end
 
 xi.job_utils.warrior.useRetaliation = function(player, target, ability)
@@ -72,11 +63,7 @@ xi.job_utils.warrior.useRetaliation = function(player, target, ability)
 end
 
 xi.job_utils.warrior.useTomahawk = function(player, target, ability)
-    local merits = player:getMerit(xi.merit.TOMAHAWK) - 15
-    local duration = 30 + merits
-
-    target:addStatusEffectEx(xi.effect.TOMAHAWK, 0, 25, 3, duration, 0, 0, 0)
-    player:removeAmmo()
+    --placeholder
 end
 
 xi.job_utils.warrior.useWarcry = function(player, target, ability)

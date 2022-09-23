@@ -1,8 +1,10 @@
 -----------------------------------
+--
 -- Zone: Al_Zahbi (48)
+--
 -----------------------------------
-local ID = require('scripts/zones/Al_Zahbi/IDs')
-require('scripts/globals/chocobo')
+local ID = require("scripts/zones/Al_Zahbi/IDs")
+require("scripts/globals/chocobo")
 -----------------------------------
 local zone_object = {}
 
@@ -17,7 +19,6 @@ zone_object.onZoneIn = function(player, prevZone)
         local position = math.random(1, 5) + 37
         player:setPos(position, 0, -62, 192)
     end
-
     return cs
 end
 

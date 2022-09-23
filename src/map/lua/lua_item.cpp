@@ -21,13 +21,13 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "lua_item.h"
 
+#include "common/logging.h"
 #include "../items/item.h"
 #include "../items/item_equipment.h"
 #include "../items/item_general.h"
 #include "../items/item_weapon.h"
 #include "../map.h"
 #include "../utils/itemutils.h"
-#include "common/logging.h"
 
 CLuaItem::CLuaItem(CItem* PItem)
 : m_PLuaItem(PItem)
@@ -85,11 +85,7 @@ uint16 CLuaItem::getTrialNumber()
 
 auto CLuaItem::getMatchingTrials() -> sol::table
 {
-    if (m_PLuaItem == nullptr)
-    {
-        ShowWarning("CLuaItem::getMatchingTrials() - m_PLuaItem is null.");
-        return lua.create_table();
-    }
+    XI_DEBUG_BREAK_IF(m_PLuaItem == nullptr);
 
     auto PItem = static_cast<CItemEquipment*>(m_PLuaItem);
 
@@ -117,10 +113,10 @@ auto CLuaItem::getMatchingTrials() -> sol::table
     }
 
     int32 ret = sql->Query(Query, PItem->getID(),
-                           augs[0][0], augs[1][0], augs[2][0], augs[3][0],
-                           augs[0][1], augs[1][1], augs[2][1], augs[3][1]);
+                          augs[0][0], augs[1][0], augs[2][0], augs[3][0],
+                          augs[0][1], augs[1][1], augs[2][1], augs[3][1]);
 
-    sol::table table = lua.create_table();
+    sol::table table = luautils::lua.create_table();
     if (ret != SQL_ERROR && sql->NumRows() != 0)
     {
         int32 trialCount = 0;
@@ -272,7 +268,7 @@ auto CLuaItem::getSignature() -> std::string
 {
     int8 signature[DecodeStringLength];
 
-    memset(&signature, 0, sizeof(signature));
+    memset(signature, 0, sizeof(signature));
     if (m_PLuaItem->isType(ITEM_LINKSHELL))
     {
         DecodeStringLinkshell((int8*)m_PLuaItem->getSignature(), signature);
@@ -313,8 +309,8 @@ void CLuaItem::setSoulPlateData(std::string const& name, uint16 mobFamily, uint8
 
 auto CLuaItem::getSoulPlateData() -> sol::table
 {
-    auto       data  = m_PLuaItem->getSoulPlateData();
-    sol::table table = lua.create_table();
+    auto data        = m_PLuaItem->getSoulPlateData();
+    sol::table table = luautils::lua.create_table();
 
     table["name"]       = std::get<0>(data);
     table["mobFamily"]  = std::get<1>(data);

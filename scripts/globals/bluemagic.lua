@@ -72,7 +72,7 @@ end
 
 -- Given the raw ratio value (atk/def) and levels, returns the cRatio (min then max)
 local function BluecRatio(ratio, atk_lvl, def_lvl)
-    -- Level penalty
+    -- Level penalty...
     local levelcor = 0
     if atk_lvl < def_lvl then
         levelcor = 0.05 * (def_lvl - atk_lvl)
@@ -176,6 +176,7 @@ local function BlueGetHitRate(attacker, target, capHitRate)
     hitrate = hitrate + hitdiff
     hitrate = hitrate / 100
 
+
     -- Applying hitrate caps
     if capHitRate then -- this isn't capped for when acc varies with tp, as more penalties are due
         if hitrate > 0.95 then
@@ -230,23 +231,20 @@ function BluePhysicalSpell(caster, target, spell, params)
         D = params.duppercap
     end
 
+    -- print("D val is ".. D)
+
     local fStr = BluefSTR(caster:getStat(xi.mod.STR) - target:getStat(xi.mod.VIT))
     if fStr > 22 then
         fStr = 22 -- TODO: Smite of Rage doesn't have this cap applied.
     end
 
+    -- print("fStr val is ".. fStr)
+
     local wsc = BlueGetWsc(caster, params)
 
+    -- print("wsc val is ".. wsc)
+
     local multiplier = params.multiplier
-
-    -- Process chance for Bonus WSC from AF3 Set. BLU AF3 set triples the base
-    -- WSC when it procs and can stack with Chain Affinity. See Final bonus WSC
-    -- calculation below.
-
-    local bonusWSC = 0
-    if caster:getMod(xi.mod.AUGMENT_BLU_MAGIC) > math.random(0,99) then
-       bonusWSC = 2
-    end
 
     -- If under CA, replace multiplier with fTP(multiplier, tp150, tp300)
     local chainAffinity = caster:getStatusEffect(xi.effect.CHAIN_AFFINITY)
@@ -258,18 +256,12 @@ function BluePhysicalSpell(caster, target, spell, params)
         end
 
         multiplier = BluefTP(tp, multiplier, params.tp150, params.tp300)
-        bonusWSC = bonusWSC + 1 -- Chain Affinity Doubles the Base WSC.
     end
-
-    -- Calculate final WSC bonuses
-    wsc = wsc + (wsc * bonusWSC)
-
-    -- See BG Wiki for reference. Chain Affinity will double the WSC. BLU AF3 set will
-    -- Triple the WSC when the set bonus procs. The AF3 set bonus stacks with Chain
-    -- Affinity for a maximum total of 4x WSC.
 
     -- TODO: Modify multiplier to account for family bonus/penalty
     local finalD = math.floor(D + fStr + wsc) * multiplier
+
+    -- print("Final D is ".. finalD)
 
     -----------------------------------
     -- Get the possible pDIF range and hit rate
@@ -277,9 +269,12 @@ function BluePhysicalSpell(caster, target, spell, params)
     if params.offcratiomod == nil then -- default to attack. Pretty much every physical spell will use this, Cannonball being the exception.
         params.offcratiomod = caster:getStat(xi.mod.ATT)
     end
-
+    -- print(params.offcratiomod)
     local cratio = BluecRatio(params.offcratiomod / target:getStat(xi.mod.DEF), caster:getMainLvl(), target:getMainLvl())
     local hitrate = BlueGetHitRate(caster, target, true)
+
+    -- print("Hit rate "..hitrate)
+    -- print("pdifmin "..cratio[1].." pdifmax "..cratio[2])
 
     -----------------------------------
     -- Perform the attacks
@@ -314,6 +309,8 @@ function BluePhysicalSpell(caster, target, spell, params)
 
         hitsdone = hitsdone + 1
     end
+
+    -- print("Hits landed "..hitslanded.."/"..hitsdone.." for total damage: "..finaldmg)
 
     return finaldmg
 end
@@ -384,7 +381,7 @@ function BlueFinalAdjustments(caster, target, spell, dmg, params)
         dmg = 0
     end
 
-    dmg = dmg * xi.settings.main.BLUE_POWER
+    dmg = dmg * xi.settings.BLUE_POWER
 
     local attackType = params.attackType or xi.attackType.NONE
     local damageType = params.damageType or xi.damageType.NONE
@@ -400,7 +397,7 @@ function BlueFinalAdjustments(caster, target, spell, dmg, params)
     -- handle One For All, Liement
     if attackType == xi.attackType.MAGICAL then
 
-        local targetMagicDamageAdjustment = xi.spells.damage.calculateTMDA(caster, target, damageType) -- Apply checks for Liement, MDT/MDTII/DT
+        local targetMagicDamageAdjustment = xi.spells.spell_damage.calculateTMDA(caster, target, damageType) -- Apply checks for Liement, MDT/MDTII/DT
         dmg = math.floor(dmg * targetMagicDamageAdjustment)
         if dmg < 0 then
             target:takeSpellDamage(caster, spell, dmg, attackType, damageType)
@@ -443,6 +440,7 @@ function getBlueEffectDuration(caster, resist, effect)
         duration = math.random(0, 5) + resist * 5
     elseif effect == xi.effect.STUN then
         duration = math.random(2, 3) + resist
+        -- printf("Duration of stun is %i", duration)
     elseif effect == xi.effect.WEIGHT then
         duration = math.random(20, 24) + resist * 9 -- 20-24
     elseif effect == xi.effect.PARALYSIS then

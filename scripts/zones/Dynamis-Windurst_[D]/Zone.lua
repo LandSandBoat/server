@@ -1,7 +1,9 @@
 -----------------------------------
+--
 -- Zone: Dynamis-Windurst [D]
+--
 -----------------------------------
-local ID = require('scripts/zones/Dynamis-Windurst_[D]/IDs')
+local ID = require("scripts/zones/Dynamis-Windurst_[D]/IDs")
 -----------------------------------
 local zone_object = {}
 

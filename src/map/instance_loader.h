@@ -36,11 +36,10 @@ public:
     ~CInstanceLoader();
 
     CInstance* LoadInstance();
-
 private:
-    CInstance*   instance;
-    CZone*       zone;
-    CCharEntity* requester;
+    CInstance*              instance;
+    CZone*                  zone;
+    CCharEntity*            requester;
 };
 
 #endif

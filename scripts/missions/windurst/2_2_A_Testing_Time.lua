@@ -10,6 +10,8 @@
 -- Zokima-Rokima    - !pos 0 -16 124 239
 --
 -- Moreno-Toeno - !pos 169 -1.25 159 238
+-----------------------------------
+require('scripts/settings/main')
 require('scripts/globals/items')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')

@@ -4,7 +4,7 @@
 -- Guild Merchant NPC: Blacksmithing Guild
 -- !pos -64.302 -16.000 35.261 249
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/shop")
 local ID = require("scripts/zones/Mhaura/IDs")
 -----------------------------------

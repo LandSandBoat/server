@@ -45,6 +45,7 @@ mission.sections =
                 end,
             },
 
+
             onEventFinish =
             {
                 [3111] = function(player, csid, option, npc)

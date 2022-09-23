@@ -24,7 +24,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 100 and option == 1 then
-        xi.assault.runeReleaseFinish(player)
+        xi.assaultUtil.runeReleaseFinish(player)
     end
 end
 

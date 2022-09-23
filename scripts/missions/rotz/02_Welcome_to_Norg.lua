@@ -33,15 +33,6 @@ mission.sections =
                 end,
             },
 
-            onEventUpdate =
-            {
-                [2] = function(player, csid, option, npc)
-                    if option == 0 then
-                        player:updateEvent(252, 0, 1, utils.MAX_UINT32 - 72454152, 66977791, 222376875, 4031, 4)
-                    end
-                end,
-            },
-
             onEventFinish =
             {
                 [2] = function(player, csid, option, npc)

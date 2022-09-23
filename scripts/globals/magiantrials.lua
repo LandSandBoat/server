@@ -125,6 +125,7 @@ local function rewardAugmentParams(t)
     return augBits1, augBits2
 end
 
+
 local function checkAndSetProgression(player, trialId, conditions, multiplier)
     local trials = xi.magian.trials
     local cachePosition, cacheData = hasTrial(player, trialId)
@@ -146,6 +147,8 @@ local function checkAndSetProgression(player, trialId, conditions, multiplier)
         end
     end
 end
+
+
 
 local function checkItemIdExistsInTable(table, itemId)
     local exists = false
@@ -203,6 +206,8 @@ local function getItemIdByTrials(trialId)
     return itemId
 end
 
+
+
 local function returnUselessItems(player, items, itemIdException)
     for i,item in ipairs(items) do
         if item.id ~= itemIdException and item.quantity then
@@ -213,6 +218,7 @@ local function returnUselessItems(player, items, itemIdException)
         end
     end
 end
+
 
 -----------------------------------
 -- Delivery Crate
@@ -322,7 +328,7 @@ xi.magian.deliveryCrateOnEventFinish = function(player, csid, option)
         player:messageSpecial(msg.RETURN_ITEM, itemTrialId)
 
     elseif csid == 10134 and optionMod == 102 then
-        checkAndSetProgression(player, trialId, { itemId = itemTrialId, quantity = itemTrialQuantity }, xi.settings.main.MAGIAN_TRIALS_TRADE_MULTIPLIER)
+        checkAndSetProgression(player, trialId, { itemId = itemTrialId, quantity = itemTrialQuantity }, xi.settings.MAGIAN_TRIALS_TRADE_MULTIPLIER)
     end
 
     if  csid == 10134 and (optionMod == 0 or optionMod == 102) then
@@ -340,10 +346,10 @@ end
 
 -- increments progress if conditions are met
 xi.magian.checkMagianTrial = function(player, conditions)
-    for _, slot in pairs( { xi.slot.MAIN, xi.slot.SUB, xi.slot.RANGED } ) do
+    for _, slot in pairs( {xi.slot.MAIN, xi.slot.SUB, xi.slot.RANGED} ) do
         local trialIdOnItem = player:getEquippedItem(slot) and player:getEquippedItem(slot):getTrialNumber()
         if trialIdOnItem ~= 0 then
-            checkAndSetProgression(player, trialIdOnItem, conditions, xi.settings.main.MAGIAN_TRIALS_MOBKILL_MULTIPLIER)
+            checkAndSetProgression(player, trialIdOnItem, conditions, xi.settings.MAGIAN_TRIALS_MOBKILL_MULTIPLIER)
         end
     end
 end
@@ -602,6 +608,7 @@ xi.magian.magianOnEventFinish = function(player, csid, option, EVENT_IDS)
         player:setLocalVar("invalidItem", 0)
         player:setLocalVar("storeTrialId", 0)
         player:setLocalVar("storeItemId", 0)
+
 
     -- gives back item after removing trial id
     elseif csid == EVENT_IDS[5] and (optionMod == 8 or optionMod == 11) then

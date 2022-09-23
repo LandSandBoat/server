@@ -35,11 +35,8 @@ CGuildMenuBuyPacket::CGuildMenuBuyPacket(CCharEntity* PChar, CItemContainer* PGu
     this->setType(0x83);
     this->setSize(0xF8);
 
-    if (PChar == nullptr || PGuild == nullptr)
-    {
-        ShowError("CGuildMenuBuyPacket::CGuildMenuBuyPacket() - PChar or PGuild was null.");
-        return;
-    }
+    XI_DEBUG_BREAK_IF(PChar == nullptr);
+    XI_DEBUG_BREAK_IF(PGuild == nullptr);
 
     uint8 ItemCount   = 0;
     uint8 PacketCount = 0;

@@ -3,7 +3,7 @@
 -- Knockback damage and Stun effect. Ignores Utsusemi, reduces Ladybug's HP by 5%-15% whether it hits or not.
 ---------------------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 ---------------------------------------------------
 local mobskill_object = {}

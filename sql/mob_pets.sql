@@ -33,6 +33,7 @@ CREATE TABLE `mob_pets` (
 LOCK TABLES `mob_pets` WRITE;
 /*!40000 ALTER TABLE `mob_pets` DISABLE KEYS */;
 
+
 -- ------------------------------------------------------------
 -- Phanauet_Channel (Zone 1)
 -- ------------------------------------------------------------

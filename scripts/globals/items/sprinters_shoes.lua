@@ -3,7 +3,7 @@
 -- Item: Sprinter's Shoes
 -- Item Effect: Quickening for 60 minutes
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/msg")
 -----------------------------------
 local item_object = {}

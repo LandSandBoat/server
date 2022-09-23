@@ -1,13 +1,13 @@
 -----------------------------------
 -- Magic Barrier
 --
--- Description: Magic shield
+-- Description: Ranged shield
 -- Type: Enhancing
 -- Utsusemi/Blink absorb: N/A
 -- Range: Self
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}

@@ -124,8 +124,7 @@ xi.equipment.relicIDs =
 -----------------------------------
 -- TODO: Should Adoulin exist here as well?
 local artifactArmorRanges =
-{
---      Min,   Max
+{--     Min,   Max
     { 12511, 12520 }, -- Original Head
     { 13855, 13857 },
     { 13868, 13869 },
@@ -195,5 +194,6 @@ xi.equipment.hasRelic = function(player, relic, tier)
 
     return false
 end
+
 
 xi.equip = xi.equipment

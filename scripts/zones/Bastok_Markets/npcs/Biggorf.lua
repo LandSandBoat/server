@@ -1,6 +1,7 @@
 -----------------------------------
 -- Area: Bastok Markets
 --  NPC: Biggorf
+-- Standard Info NPC
 -- Involved in Quest: The Bare Bones
 -----------------------------------
 local entity = {}

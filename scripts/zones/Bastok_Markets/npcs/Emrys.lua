@@ -1,6 +1,7 @@
 -----------------------------------
 -- Area: Bastok Markets
 --  NPC: Emrys
+-- Standard Info NPC
 -----------------------------------
 local entity = {}
 

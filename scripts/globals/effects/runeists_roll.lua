@@ -16,4 +16,5 @@ effect_object.onEffectLose = function(target, effect)
     target:delMod(xi.mod.MEVA, effect:getPower())
 end
 
+
 return effect_object

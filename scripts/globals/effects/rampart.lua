@@ -7,9 +7,6 @@ local effect_object = {}
 
 effect_object.onEffectGain = function(target, effect)
     local power = effect:getPower()
-    if target:isPC() and target:hasTrait(77) then -- Iron Will
-        target:addMod(xi.mod.SPELLINTERRUPT, target:getMerit(xi.merit.IRON_WILL))
-    end
     target:addMod(xi.mod.UDMGPHYS, -power)
     target:addMod(xi.mod.UDMGBREATH, -power)
     target:addMod(xi.mod.UDMGMAGIC, -power)
@@ -25,9 +22,6 @@ end
 
 effect_object.onEffectLose = function(target, effect)
     local power = effect:getPower()
-    if target:isPC() and target:hasTrait(77) then -- Iron Will
-        target:delMod(xi.mod.SPELLINTERRUPT, target:getMerit(xi.merit.IRON_WILL))
-    end
     target:delMod(xi.mod.UDMGPHYS, -power)
     target:delMod(xi.mod.UDMGBREATH, -power)
     target:delMod(xi.mod.UDMGMAGIC, -power)

@@ -31,7 +31,7 @@ local tpMoves =
     [2] = { 441, 447, 457 },
     -- Psychomancy: AoE Aspir, drains 80+ MP.
     -- Mind Wall: Gives the Mammet a special Magic Shield effect causing it to absorb offensive magic used against it for ~30 seconds.
-    [3] = { 464, 471 },
+    [3] = { 464, 471},
 }
 
 entity.onMobSpawn = function(mob)
@@ -67,7 +67,7 @@ entity.onMobFight = function(mob, target)
                 mob:setDamage(75)
             end,
             [forms.STAFF] = function()
-                mob:setMobMod(xi.mobMod.MAGIC_COOL, 20)
+                mob:setMobMod(xi.mobMod.MAGIC_COOL, 10)
                 mob:SetMagicCastingEnabled(true)
                 mob:setDelay(3700)
                 mob:setDamage(40)

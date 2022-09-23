@@ -31,8 +31,7 @@ public:
     CLinkshellListPacket(uint32 linkshellid, uint32 Total);
     ~CLinkshellListPacket() = default;
 
-    bool AddPlayer(SearchEntity* PPlayer);
-    void SetFinal();
+    void AddPlayer(SearchEntity* PPlayer);
 
     uint8* GetData();
     uint16 GetSize() const;

@@ -1,7 +1,8 @@
 -----------------------------------
 -- Zone: Navukgo_Execution_Chamber (64)
 -----------------------------------
-local ID = require('scripts/zones/Navukgo_Execution_Chamber/IDs')
+local ID = require("scripts/zones/Navukgo_Execution_Chamber/IDs")
+require("scripts/globals/missions")
 -----------------------------------
 local zone_object = {}
 

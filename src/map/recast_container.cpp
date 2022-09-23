@@ -177,15 +177,13 @@ void CRecastContainer::Del(RECASTTYPE type, uint16 id)
     }
     else
     {
-        PRecastList->erase(std::remove_if(PRecastList->begin(), PRecastList->end(), [&id](auto& recast)
-                                          { return recast.ID == id; }),
-                           PRecastList->end());
+        PRecastList->erase(std::remove_if(PRecastList->begin(), PRecastList->end(), [&id](auto& recast) { return recast.ID == id; }), PRecastList->end());
     }
 }
 
 /************************************************************************
  *                                                                       *
- *  Deletes a recast by index                                           *
+ *  Deletes a recast by index				                            *
  *                                                                       *
  ************************************************************************/
 
@@ -212,8 +210,7 @@ bool CRecastContainer::Has(RECASTTYPE type, uint16 id)
 {
     RecastList_t* PRecastList = GetRecastList(type);
 
-    return std::find_if(PRecastList->begin(), PRecastList->end(), [&id](auto& recast)
-                        { return recast.ID == id; }) != PRecastList->end();
+    return std::find_if(PRecastList->begin(), PRecastList->end(), [&id](auto& recast) { return recast.ID == id; }) != PRecastList->end();
 }
 
 /************************************************************************

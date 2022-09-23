@@ -23,7 +23,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #define _EVENT_HANDLER
 
 #include <functional>
-#include <unordered_map>
+#include <map>
 #include <vector>
 
 #include "../../../common/cbasetypes.h"
@@ -53,22 +53,22 @@ public:
     {
         TracyZoneScoped;
         TracyZoneString(eventname);
-        if (eventListeners.count(eventname))
+        if (auto eventListener = eventListeners.find(eventname); eventListener != eventListeners.end())
         {
-            for (auto&& event : eventListeners.at(eventname))
+            for (auto&& event : eventListener->second)
             {
                 auto result = event.lua_func(std::forward<Args&&>(args)...);
                 if (!result.valid())
                 {
                     sol::error err = result;
-                    ShowError("Error in listener event %s: %s", eventname, err.what());
+                    ShowScript("Error in listener event %s: %s", eventname, err.what());
                 }
             }
         }
     }
 
 private:
-    std::unordered_map<std::string, std::vector<ai_event_t>> eventListeners;
+    std::map<std::string, std::vector<ai_event_t>> eventListeners;
 };
 
 #endif

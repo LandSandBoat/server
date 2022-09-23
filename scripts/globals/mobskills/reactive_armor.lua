@@ -24,3 +24,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 end
 
 return mobskill_object
+

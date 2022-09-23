@@ -39,6 +39,7 @@ local function isFirstHandsQuest(player)
     return true
 end
 
+
 entity.onTrade = function(player, npc, trade)
 end
 

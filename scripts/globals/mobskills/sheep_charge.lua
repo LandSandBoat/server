@@ -2,7 +2,7 @@
 -- Sheep Charge
 -- Deals damage to a single target. Additional effect: Knockback
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
@@ -13,6 +13,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+    -- Needs Knockback added
     local numhits = 1
     local accmod = 1
     local dmgmod = 2.2

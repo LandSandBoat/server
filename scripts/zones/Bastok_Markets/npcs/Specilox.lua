@@ -4,7 +4,7 @@
 -- Gobbie Mystery Box
 -----------------------------------
 local ID = require("scripts/zones/Bastok_Markets/IDs")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/gobbiemysterybox")
 -----------------------------------
 local entity = {}

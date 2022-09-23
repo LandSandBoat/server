@@ -32,6 +32,7 @@ enum BAZAARCHECK
     BAZAAR_LEAVE = 1
 };
 
+
 class CCharEntity;
 
 class CBazaarCheckPacket : public CBasicPacket

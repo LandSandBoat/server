@@ -37,19 +37,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 CTargetFind::CTargetFind(CBattleEntity* PBattleEntity)
 {
-    isPlayer          = false;
-    m_scalar          = 0.f;
-    m_BPoint.x        = 0.f;
-    m_BPoint.y        = 0.f;
-    m_BPoint.z        = 0.f;
-    m_BPoint.moving   = 0;
-    m_BPoint.rotation = 0;
-    m_CPoint.x        = 0.f;
-    m_CPoint.y        = 0.f;
-    m_CPoint.z        = 0.f;
-    m_CPoint.moving   = 0;
-    m_CPoint.rotation = 0;
-
     m_PBattleEntity = PBattleEntity;
 
     reset();
@@ -246,59 +233,41 @@ void CTargetFind::addAllInMobList(CBattleEntity* PTarget, bool withPet)
 void CTargetFind::addAllInZone(CBattleEntity* PTarget, bool withPet)
 {
     TracyZoneScoped;
-    // clang-format off
-    zoneutils::GetZone(PTarget->getZone())->ForEachCharInstance(PTarget, [&](CCharEntity* PChar)
-    {
+    zoneutils::GetZone(PTarget->getZone())->ForEachCharInstance(PTarget, [&](CCharEntity* PChar) {
         if (PChar)
         {
             addEntity(PChar, withPet);
         }
     });
-    zoneutils::GetZone(PTarget->getZone())->ForEachMobInstance(PTarget, [&](CMobEntity* PMob)
-    {
+    zoneutils::GetZone(PTarget->getZone())->ForEachMobInstance(PTarget, [&](CMobEntity* PMob) {
         if (PMob)
         {
             addEntity(PMob, withPet);
         }
     });
-    zoneutils::GetZone(PTarget->getZone())->ForEachTrustInstance(PTarget, [&](CTrustEntity* PTrust)
-    {
+    zoneutils::GetZone(PTarget->getZone())->ForEachTrustInstance(PTarget, [&](CTrustEntity* PTrust) {
         if (PTrust)
         {
             addEntity(PTrust, withPet);
         }
     });
-    // clang-format on
 }
 
 void CTargetFind::addAllInAlliance(CBattleEntity* PTarget, bool withPet)
 {
-    // clang-format off
-    PTarget->ForAlliance([this, withPet](CBattleEntity* PMember)
-    {
-        addEntity(PMember, withPet);
-    });
-    // clang-format on
+    PTarget->ForAlliance([this, withPet](CBattleEntity* PMember) { addEntity(PMember, withPet); });
 }
 
 void CTargetFind::addAllInParty(CBattleEntity* PTarget, bool withPet)
 {
-    // clang-format off
     if (PTarget->objtype == TYPE_PC)
     {
-        static_cast<CCharEntity*>(PTarget)->ForPartyWithTrusts([this, withPet](CBattleEntity* PMember)
-        {
-            addEntity(PMember, withPet);
-        });
+        static_cast<CCharEntity*>(PTarget)->ForPartyWithTrusts([this, withPet](CBattleEntity* PMember) { addEntity(PMember, withPet); });
     }
     else
     {
-        PTarget->ForParty([this, withPet](CBattleEntity* PMember)
-        {
-            addEntity(PMember, withPet);
-        });
+        PTarget->ForParty([this, withPet](CBattleEntity* PMember) { addEntity(PMember, withPet); });
     }
-    // clang-format on
 }
 
 void CTargetFind::addAllInEnmityList()
@@ -324,9 +293,9 @@ void CTargetFind::addAllInRange(CBattleEntity* PTarget, float radius, ALLEGIANCE
     m_radius        = radius;
     m_PRadiusAround = &(m_PBattleEntity->loc.p);
 
-    if (PTarget && allegiance == ALLEGIANCE_TYPE::PLAYER)
+    if (allegiance == ALLEGIANCE_TYPE::PLAYER)
     {
-        if (PTarget->objtype == TYPE_PC)
+        if (PTarget && PTarget->objtype == TYPE_PC)
         {
             CCharEntity* PChar = static_cast<CCharEntity*>(PTarget);
             for (const auto& list : { PChar->SpawnPCList, PChar->SpawnPETList })
@@ -344,15 +313,12 @@ void CTargetFind::addAllInRange(CBattleEntity* PTarget, float radius, ALLEGIANCE
         }
         else
         {
-            // clang-format off
-            zoneutils::GetZone(PTarget->getZone())->ForEachCharInstance(PTarget, [&](CCharEntity* PChar)
-            {
+            zoneutils::GetZone(PTarget->getZone())->ForEachCharInstance(PTarget, [&](CCharEntity* PChar) {
                 if (PChar && isWithinArea(&(PChar->loc.p)) && !PChar->isDead())
                 {
                     m_targets.push_back(PChar);
                 }
             });
-            // clang-format on
         }
     }
 }
@@ -395,15 +361,12 @@ bool CTargetFind::isMobOwner(CBattleEntity* PTarget)
 
     bool found = false;
 
-    // clang-format off
-    m_PBattleEntity->ForAlliance([&found, &PTarget](CBattleEntity* PMember)
-    {
+    m_PBattleEntity->ForAlliance([&found, &PTarget](CBattleEntity* PMember) {
         if (PMember->id == PTarget->m_OwnerID.id)
         {
             found = true;
         }
     });
-    // clang-format on
 
     return found;
 }

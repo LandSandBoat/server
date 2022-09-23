@@ -5,7 +5,8 @@
 -- Recast Time: 00:01:00
 -- Duration: 0:01:00
 -----------------------------------
-require("scripts/globals/job_utils/white_mage")
+require("scripts/settings/main")
+require("scripts/globals/status")
 -----------------------------------
 local ability_object = {}
 
@@ -14,7 +15,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    xi.job_utils.white_mage.useDivineCaress(player, target, ability)
+    player:addStatusEffect(xi.effect.DIVINE_CARESS_I, 3, 0, 60)
 end
 
 return ability_object

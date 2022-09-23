@@ -3,7 +3,7 @@
 --  NPC: Six of Hearts
 -- Working 100%
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 -----------------------------------
 local entity = {}
 

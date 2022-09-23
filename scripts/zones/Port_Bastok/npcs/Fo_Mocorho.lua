@@ -3,7 +3,7 @@
 --  NPC: Fo Mocorho
 -- Type: Weather Reporter
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 -----------------------------------
 local entity = {}
 

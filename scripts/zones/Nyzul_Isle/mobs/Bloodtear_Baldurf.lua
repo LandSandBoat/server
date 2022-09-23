@@ -1,17 +1,13 @@
 -----------------------------------
 -- Area: Nyzul Isle
---  NM:  Bloodtear_Baldurf
+--   NM: Bloodtear Baldurf
 -----------------------------------
-mixins = { require('scripts/mixins/job_special') }
-require('scripts/globals/nyzul')
+require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
-        xi.nyzul.spawnChest(mob, player)
-        xi.nyzul.eliminateAllKill(mob)
-    end
+entity.onMobDeath = function(mob, player, isKiller)
+    player:addTitle(xi.title.THE_HORNSPLITTER)
 end
 
 return entity

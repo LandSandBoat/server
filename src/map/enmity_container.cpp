@@ -148,12 +148,6 @@ float CEnmityContainer::CalculateEnmityBonus(CBattleEntity* PEntity)
 void CEnmityContainer::UpdateEnmity(CBattleEntity* PEntity, int32 CE, int32 VE, bool withMaster, bool tameable)
 {
     TracyZoneScoped;
-
-    if (m_EnmityHolder->objtype != ENTITYTYPE::TYPE_MOB) // pets and trusts dont have enmity.
-    {
-        return;
-    }
-
     // you're too far away so i'm ignoring you
     if (!IsWithinEnmityRange(PEntity))
     {
@@ -229,8 +223,7 @@ void CEnmityContainer::UpdateEnmity(CBattleEntity* PEntity, int32 CE, int32 VE, 
 
 bool CEnmityContainer::HasID(uint32 TargetID)
 {
-    return std::find_if(m_EnmityList.begin(), m_EnmityList.end(), [TargetID](auto elem)
-                        { return elem.first == TargetID && elem.second.active; }) !=
+    return std::find_if(m_EnmityList.begin(), m_EnmityList.end(), [TargetID](auto elem) { return elem.first == TargetID && elem.second.active; }) !=
            m_EnmityList.end();
 }
 
@@ -255,8 +248,8 @@ void CEnmityContainer::UpdateEnmityFromCure(CBattleEntity* PEntity, uint8 level,
 
     if (isCureV)
     {
-        CE = (int32)(300.f * bonus * tranquilHeartReduction);
-        VE = (int32)(600.f * bonus * tranquilHeartReduction);
+        CE = (int32)(400.f * bonus * tranquilHeartReduction);
+        VE = (int32)(800.f * bonus * tranquilHeartReduction);
     }
     else
     {

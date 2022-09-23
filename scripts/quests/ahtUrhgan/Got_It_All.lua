@@ -47,6 +47,7 @@ quest.sections =
             return status == QUEST_ACCEPTED
         end,
 
+
         [xi.zone.AHT_URHGAN_WHITEGATE] =
         {
             ['Tehf_Kimasnahya'] =

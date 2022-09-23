@@ -1,7 +1,9 @@
 -----------------------------------
+--
 -- Zone: The_Colosseum
+--
 -----------------------------------
-local ID = require('scripts/zones/The_Colosseum/IDs')
+local ID = require("scripts/zones/The_Colosseum/IDs")
 -----------------------------------
 local zone_object = {}
 

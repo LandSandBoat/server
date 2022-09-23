@@ -19,7 +19,7 @@ require("scripts/globals/msg")
 -- Obtains alpha, used for working out WSC on legacy servers
 local function getAlpha(level)
     -- Retail has no alpha anymore as of 2014. Weaponskill functions
-    -- should be checking for xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES and
+    -- should be checking for xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES and
     -- overwriting the results of this function if the server has it set
     local alpha = 1.00
 
@@ -260,7 +260,7 @@ local function cRangedRatio(attacker, defender, params, ignoredDef, tp)
     local pdif = {}
     pdif[1] = pdifmin
     pdif[2] = pdifmax
-
+    -- printf("ratio: %f min: %f max %f\n", cratio, pdifmin, pdifmax)
     local pdifcrit = {}
 
     pdifmin = pdifmin * 1.25
@@ -443,7 +443,7 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
 
     -- Calculate alpha, WSC, and our modifiers for our base per-hit damage
     if not calcParams.alpha then
-        if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+        if xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES then
             calcParams.alpha = 1
         else
             calcParams.alpha = getAlpha(attacker:getMainLvl())
@@ -665,12 +665,13 @@ function doPhysicalWeaponskill(attacker, target, wsID, wsParams, tp, action, pri
     attacker:delStatusEffect(xi.effect.SNEAK_ATTACK)
     attacker:delStatusEffectSilent(xi.effect.BUILDING_FLOURISH)
 
-    finaldmg = finaldmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
+    finaldmg = finaldmg * xi.settings.WEAPON_SKILL_POWER -- Add server bonus
     calcParams.finalDmg = finaldmg
     finaldmg = takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action)
 
     return finaldmg, calcParams.criticalHit, calcParams.tpHitsLanded, calcParams.extraHitsLanded, calcParams.shadowsAbsorbed
 end
+
 
 -- Sets up the necessary calcParams for a ranged WS before passing it to calculateRawWSDmg. When the raw
 -- damage is returned, handles reductions based on target resistances and passes off to takeWeaponskillDamage.
@@ -698,7 +699,7 @@ end
     local calcParams =
     {
         wsID = wsID,
-        weaponDamage = { attacker:getRangedDmg() },
+        weaponDamage = {attacker:getRangedDmg()},
         skillType = attacker:getWeaponSkillType(xi.slot.RANGED),
         fSTR = fSTR2(attacker:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), attacker:getRangedDmgRank()),
         cratio = cratio,
@@ -725,14 +726,11 @@ end
     calcParams = calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcParams)
     local finaldmg = calcParams.finalDmg
 
-    -- Delete statuses that may have been spent by the WS
-    attacker:delStatusEffectsByFlag(xi.effectFlag.DETECTABLE)
-
     -- Calculate reductions
     finaldmg = target:rangedDmgTaken(finaldmg)
     finaldmg = finaldmg * target:getMod(xi.mod.PIERCE_SDT) / 1000
 
-    finaldmg = finaldmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
+    finaldmg = finaldmg * xi.settings.WEAPON_SKILL_POWER -- Add server bonus
     calcParams.finalDmg = finaldmg
 
     finaldmg = takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action)
@@ -824,7 +822,7 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
         dmg = utils.oneforall(target, dmg)
         dmg = utils.stoneskin(target, dmg)
 
-        dmg = dmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
+        dmg = dmg * xi.settings.WEAPON_SKILL_POWER -- Add server bonus
     else
         calcParams.shadowsAbsorbed = 1
     end
@@ -889,7 +887,8 @@ function takeWeaponskillDamage(defender, attacker, wsParams, primaryMsg, attack,
         defender:updateEnmityFromDamage(enmityEntity, finaldmg * enmityMult)
     end
 
-    xi.magian.checkMagianTrial(attacker, { ['mob'] = defender, ['triggerWs'] = true,  ['wSkillId'] = wsResults.wsID })
+    xi.magian.checkMagianTrial(attacker, {['mob'] = defender, ['triggerWs'] = true,  ['wSkillId'] = wsResults.wsID})
+
 
     if finaldmg > 0 then
         defender:setLocalVar("weaponskillHit", 1)
@@ -914,7 +913,7 @@ function getMeleeDmg(attacker, weaponType, kick)
         offhandDamage = mainhandDamage
     end
 
-    return { mainhandDamage, offhandDamage }
+    return {mainhandDamage, offhandDamage}
 end
 
 function getHitRate(attacker, target, capHitRate, bonus)
@@ -968,6 +967,7 @@ function getHitRate(attacker, target, capHitRate, bonus)
 
     hitrate = hitrate + hitdiff
     hitrate = hitrate / 100
+
 
     -- Applying hitrate caps
     if capHitRate then -- this isn't capped for when acc varies with tp, as more penalties are due
@@ -1073,6 +1073,8 @@ function cMeleeRatio(attacker, defender, params, ignoredDef, tp)
     local pdifcrit = {}
     cratio = cratio + 1
     cratio = utils.clamp(cratio, 0, 3)
+
+    -- printf("ratio: %f min: %f max %f\n", cratio, pdifmin, pdifmax)
 
     if cratio < 0.5 then
         pdifmax = cratio + 0.5

@@ -11,4 +11,6 @@ entity.onMobDeath = function(mob, player, isKiller)
     xi.regime.checkRegime(player, mob, 143, 1, xi.regime.type.FIELDS)
 end
 
+
+
 return entity

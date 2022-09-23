@@ -43,7 +43,7 @@ public:
 
     friend std::ostream& operator<<(std::ostream& out, const CLuaInstance& instance);
 
-    uint16 getID();
+    uint16  getID();
     auto   getName() -> std::string;
     auto   getZone() -> CLuaZone;
     uint32 getEntranceZoneID();
@@ -64,7 +64,6 @@ public:
 
     void setLevelCap(uint8 cap);
     void setLastTimeUpdate(uint32 ms);
-    void setTimeLimit(uint32 seconds);
     void setProgress(uint32 progress);
     void setWipeTime(uint32 ms);
     void setStage(uint32 stage);

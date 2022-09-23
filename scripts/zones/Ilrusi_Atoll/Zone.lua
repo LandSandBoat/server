@@ -1,7 +1,8 @@
 -----------------------------------
--- Zone: Ilrusi_Atoll (55)
+-- Zone: Ilrusi_Atoll
+--  zone 55
 -----------------------------------
-local ID = require('scripts/zones/Ilrusi_Atoll/IDs')
+local ID = require("scripts/zones/Ilrusi_Atoll/IDs")
 -----------------------------------
 local zone_object = {}
 

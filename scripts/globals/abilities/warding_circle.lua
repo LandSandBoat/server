@@ -2,10 +2,10 @@
 -- Ability: Warding Circle
 -- Grants resistance, defense, and attack against Demons to party members within the area of effect.
 -- Obtained: Samurai Level 5
--- Recast Time: 5:00 minutes
--- Duration: 3:00 minutes
+-- Recast Time: 5:00
+-- Duration: 3:00
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 -----------------------------------
 local ability_object = {}

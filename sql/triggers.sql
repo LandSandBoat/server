@@ -22,6 +22,7 @@ BEGIN
     END IF;
 END $$
 
+
 DROP TRIGGER IF EXISTS account_delete $$
 CREATE TRIGGER account_delete
     BEFORE DELETE ON accounts

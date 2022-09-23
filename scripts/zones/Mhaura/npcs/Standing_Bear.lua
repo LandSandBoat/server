@@ -2,7 +2,7 @@
 -- Area: Mhaura
 --  NPC: Standing Bear
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 -----------------------------------
 local entity = {}
 

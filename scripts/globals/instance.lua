@@ -27,7 +27,7 @@
 -- - RALA_WATERWAYS_U                = 259,
 -- - YORCIA_WEALD_U                  = 264,
 -- - CIRDAS_CAVERNS_U                = 271,
--- - OUTER_RAKAZNAR_U1               = 275,
+-- - OUTER_RAKAZNAR_U                = 275,
 -- - MAQUETTE_ABDHALJS_LEGION_B      = 287, -- See: ambuscade.lua
 -- - DYNAMIS_SAN_DORIA_D             = 294,
 -- - DYNAMIS_BASTOK_D                = 295,
@@ -109,7 +109,7 @@ xi.instance.lookup =
 
     [xi.zone.MAMOOL_JA_TRAINING_GROUNDS] =
     {
-        { 6600, { 505, 11, -4, 0, 60, 0, 1 }, { 505, 4 }, { 511, 0 } }, -- Assault: Imperial Agent Rescue
+        {6600, { 505, 11, -4, 0, 60, 0, 1 }, { 505, 4}, { 511, 0 } }, -- Assault: Imperial Agent Rescue
         -- Assault: Preemptive Strike
         -- Assault: Sagelord Elimination
         -- Assault: Breaking Morale
@@ -123,7 +123,7 @@ xi.instance.lookup =
 
     [xi.zone.LEUJAOAM_SANCTUM] =
     {
-        { 6900, { 140, 1, -4, 0, 50, 0, 1 }, { 140, 4 }, { 147, 0 } }, -- Assault: Leujaoam Cleansing
+        {6900, { 140, 1, -4, 0, 50, 0, 1 }, { 140, 4}, { 147, 0 } }, -- Assault: Leujaoam Cleansing
         -- Assault: Orichalcum Survey
         -- Assault: Escort Professor Chanoix
         -- Assault: Shanarha Grass Conservation
@@ -161,7 +161,6 @@ xi.instance.lookup =
         { 7701, { 405, 59, -10, 0, 99, 5, 0 }, { 116, 1 }, { 411, 5 } }, -- Nashmeira's Plea
         -- Waking the Colossus / Divine Interference
         -- Forging a New Myth
-        { 7704, { 405, 51, -4, 0, 75, 5, 1 }, { 116, 2 }, { 405, 4 } }, -- TODO: Nyzul Isle Investigation
     },
 
     [xi.zone.EVERBLOOM_HOLLOW] =
@@ -268,7 +267,7 @@ xi.instance.lookup =
 
     },
 
-    [xi.zone.OUTER_RAKAZNAR_U1] =
+    [xi.zone.OUTER_RAKAZNAR_U] =
     {
 
     },

@@ -1,8 +1,10 @@
 -----------------------------------
+--
 -- Zone: Cloister_of_Gales (201)
+--
 -----------------------------------
-local ID = require('scripts/zones/Cloister_of_Gales/IDs')
-require('scripts/globals/conquest')
+local ID = require("scripts/zones/Cloister_of_Gales/IDs")
+require("scripts/globals/conquest")
 -----------------------------------
 local zone_object = {}
 
@@ -11,11 +13,9 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
-
-    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
+    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
         player:setPos(-399.541, -1.697, -420, 252)
     end
-
     return cs
 end
 

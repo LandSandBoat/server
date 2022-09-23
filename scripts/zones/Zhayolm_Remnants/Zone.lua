@@ -1,7 +1,9 @@
 -----------------------------------
+--
 -- Zone: Zhayolm_Remnants
+--
 -----------------------------------
-local ID = require('scripts/zones/Zhayolm_Remnants/IDs')
+local ID = require("scripts/zones/Zhayolm_Remnants/IDs")
 -----------------------------------
 local zone_object = {}
 

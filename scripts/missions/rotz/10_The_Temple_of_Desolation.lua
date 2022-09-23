@@ -17,12 +17,13 @@ local mission = Mission:new(xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_T
 
 mission.reward =
 {
-    title       = xi.title.SEALER_OF_THE_PORTAL_OF_THE_GODS,
     nextMission = { xi.mission.log_id.ZILART, xi.mission.id.zilart.THE_HALL_OF_THE_GODS },
+    title = xi.title.SEALER_OF_THE_PORTAL_OF_THE_GODS,
 }
 
 mission.sections =
 {
+    -- Section: Mission Active
     {
         check = function(player, currentMission, missionStatus, vars)
             return currentMission == mission.missionId
@@ -30,8 +31,7 @@ mission.sections =
 
         [xi.zone.NORG] =
         {
-            ['Gilgamesh'] = mission:event(10),
-            ['Kamui']     = mission:event(11),
+            ['Kamui'] = mission:progressEvent(11),
         },
 
         [xi.zone.HALL_OF_THE_GODS] =

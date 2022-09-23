@@ -5,7 +5,8 @@
 -- Recast Time: 10:00
 -- Duration: 1 Spell or 60 seconds, whichever occurs first.
 -----------------------------------
-require("scripts/globals/job_utils/white_mage")
+require("scripts/settings/main")
+require("scripts/globals/status")
 -----------------------------------
 local ability_object = {}
 
@@ -14,7 +15,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    xi.job_utils.white_mage.useDivineSeal(player, target, ability)
+    player:addStatusEffect(xi.effect.DIVINE_SEAL, 1, 0, 60)
 end
 
 return ability_object

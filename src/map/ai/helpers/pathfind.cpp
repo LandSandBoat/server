@@ -25,26 +25,11 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../../entities/mobentity.h"
 #include "../../zone.h"
 
-namespace
-{
-    bool arePositionsClose(const position_t& a, const position_t& b)
-    {
-        return distance(a, b) < 1.0f;
-    }
-} // namespace
-
 CPathFind::CPathFind(CBaseEntity* PTarget)
 : m_POwner(PTarget)
 , m_pathFlags(0)
-, m_patrolFlags(0)
 , m_carefulPathing(false)
 {
-    m_originalPoint.x        = 0.f;
-    m_originalPoint.y        = 0.f;
-    m_originalPoint.z        = 0.f;
-    m_originalPoint.moving   = 0;
-    m_originalPoint.rotation = 0;
-
     Clear();
 }
 
@@ -82,7 +67,7 @@ bool CPathFind::RoamAround(const position_t& point, float maxRadius, uint8 maxTu
             return false;
         }
 
-        m_points.push_back({ { point.x - 1 + rand() % 2, point.y, point.z - 1 + rand() % 2, 0, 0 }, 0 });
+        m_points.push_back({ point.x - 1 + rand() % 2, point.y, point.z - 1 + rand() % 2, 0, 0 });
     }
 
     return true;
@@ -131,7 +116,7 @@ bool CPathFind::PathTo(const position_t& point, uint8 pathFlags, bool clear)
             Clear();
         }
 
-        m_points.push_back({ point, 0 });
+        m_points.push_back(point);
     }
 
     return true;
@@ -144,11 +129,8 @@ bool CPathFind::PathInRange(const position_t& point, float range, uint8 pathFlag
     {
         Clear();
     }
-
     m_distanceFromPoint = range;
-
     bool result = PathTo(point, pathFlags, false);
-
     PrunePathWithin(range);
     return result;
 }
@@ -172,7 +154,7 @@ bool CPathFind::PathAround(const position_t& point, float distanceFromPoint, uin
     return PathTo(point, pathFlags, false);
 }
 
-bool CPathFind::PathThrough(std::vector<pathpoint_t>&& points, uint8 pathFlags)
+bool CPathFind::PathThrough(std::vector<position_t>&& points, uint8 pathFlags)
 {
     TracyZoneScoped;
     Clear();
@@ -200,26 +182,6 @@ bool CPathFind::WarpTo(const position_t& point, float maxDistance)
     m_POwner->updatemask |= UPDATE_POS;
 
     return true;
-}
-
-void CPathFind::ResumePatrol()
-{
-    if (m_patrolFlags & PATHFLAG_PATROL)
-    {
-        m_pathFlags        = m_patrolFlags;
-        m_points           = m_patrol;
-        m_currentPoint     = 0;
-        float closestPoint = FLT_MAX;
-        for (size_t i = 0; i < m_points.size(); ++i)
-        {
-            float distance = distanceSquared(m_POwner->loc.p, m_points[i].position);
-            if (distance < closestPoint)
-            {
-                m_currentPoint = (int16)i;
-                closestPoint   = distance;
-            }
-        }
-    }
 }
 
 bool CPathFind::isNavMeshEnabled()
@@ -250,17 +212,16 @@ void CPathFind::PrunePathWithin(float within)
     TracyZoneScoped;
 
     if (!IsFollowingPath())
-    {
         return;
-    }
 
-    position_t targetPoint = m_points.back().position;
+    position_t* targetPoint     = &m_points.back();
+    position_t* secondLastPoint = nullptr;
 
     while (m_points.size() > 1)
     {
-        position_t secondLastPoint = m_points[m_points.size() - 2].position;
+        secondLastPoint = &m_points.end()[-2];
 
-        if (distance(targetPoint, secondLastPoint) > within)
+        if (distance(*targetPoint, *secondLastPoint) > within)
         {
             break;
         }
@@ -268,7 +229,7 @@ void CPathFind::PrunePathWithin(float within)
     }
 }
 
-void CPathFind::FollowPath(time_point tick)
+void CPathFind::FollowPath()
 {
     TracyZoneScoped;
     if (!IsFollowingPath())
@@ -276,24 +237,8 @@ void CPathFind::FollowPath(time_point tick)
         return;
     }
 
-    if (m_timeAtPoint.time_since_epoch().count() != 0)
-    {
-        // Continue to wait until full wait time has elapsed
-        if (tick >= m_timeAtPoint)
-        {
-            m_timeAtPoint = {};
-            ++m_currentPoint;
-            if (m_currentPoint >= (int16)m_points.size())
-            {
-                FinishedPath();
-            }
-        }
-        return;
-    }
-
     m_onPoint = false;
-
-    pathpoint_t targetPoint = m_points[m_currentPoint];
+    position_t& targetPoint = m_points[m_currentPoint];
 
     if (isNavMeshEnabled() && m_carefulPathing)
     {
@@ -314,28 +259,19 @@ void CPathFind::FollowPath(time_point tick)
     {
         targetPoint = m_points[m_currentPoint];
 
-        if (AtPoint(targetPoint.position))
+        if (AtPoint(targetPoint))
         {
-            m_onPoint = true;
-            if (targetPoint.setRotation)
-            {
-                m_POwner->loc.p.rotation = targetPoint.position.rotation;
-                m_POwner->updatemask |= UPDATE_POS;
-            }
-            if (targetPoint.wait != 0 && m_timeAtPoint.time_since_epoch().count() == 0)
-            {
-                m_timeAtPoint = tick + std::chrono::milliseconds(targetPoint.wait);
-                return;
-            }
             m_currentPoint++;
         }
         else
         {
             break;
         }
+
+        m_onPoint = true;
     }
 
-    StepTo(targetPoint.position, m_pathFlags & PATHFLAG_RUN);
+    StepTo(targetPoint, m_pathFlags & PATHFLAG_RUN);
 
     if (m_currentPoint >= (int16)m_points.size())
     {
@@ -407,11 +343,6 @@ bool CPathFind::FindPath(const position_t& start, const position_t& end)
 {
     TracyZoneScoped;
 
-    if (arePositionsClose(start, end))
-    {
-        return false;
-    }
-
     if (!isNavMeshEnabled())
     {
         return false;
@@ -422,7 +353,7 @@ bool CPathFind::FindPath(const position_t& start, const position_t& end)
 
     if (m_points.empty())
     {
-        DebugNavmesh("CPathFind::FindPath Entity (%s - %d) could not find path", m_POwner->GetName(), m_POwner->id);
+        ShowNavError("CPathFind::FindPath Entity (%s - %d) could not find path", m_POwner->GetName(), m_POwner->id);
         return false;
     }
 
@@ -467,11 +398,6 @@ bool CPathFind::FindClosestPath(const position_t& start, const position_t& end)
 {
     TracyZoneScoped;
 
-    if (arePositionsClose(start, end))
-    {
-        return false;
-    }
-
     if (!isNavMeshEnabled())
     {
         return false;
@@ -479,7 +405,7 @@ bool CPathFind::FindClosestPath(const position_t& start, const position_t& end)
 
     m_points       = m_POwner->loc.zone->m_navMesh->findPath(start, end);
     m_currentPoint = 0;
-    m_points.push_back({ end, 0 }); // this prevents exploits with navmesh / impassible terrain
+    m_points.push_back(end); // this prevents exploits with navmesh / impassible terrain
 
     /* this check requirement is never met as intended since m_points are never empty when mob has a path
     if (m_points.empty())
@@ -494,8 +420,8 @@ bool CPathFind::FindClosestPath(const position_t& start, const position_t& end)
 
 void CPathFind::LookAt(const position_t& point)
 {
-    // Avoid unpredictable results if we're too close.
-    if (!distanceWithin(m_POwner->loc.p, point, 0.1f, true))
+    // don't look if i'm at that point
+    if (!AtPoint(point))
     {
         m_POwner->loc.p.rotation = worldAngle(m_POwner->loc.p, point);
         m_POwner->updatemask |= UPDATE_POS;
@@ -526,7 +452,7 @@ float CPathFind::GetRealSpeed()
         }
         else if (m_POwner->animation == ANIMATION_ATTACK)
         {
-            realSpeed = realSpeed + settings::get<int8>("map.MOB_SPEED_MOD");
+            realSpeed = realSpeed + map_config.mob_speed_mod;
         }
     }
 
@@ -543,20 +469,15 @@ bool CPathFind::IsFollowingScriptedPath()
     return IsFollowingPath() && m_pathFlags & PATHFLAG_SCRIPT;
 }
 
-bool CPathFind::IsPatrolling()
-{
-    return m_patrolFlags & PATHFLAG_PATROL;
-}
-
 bool CPathFind::AtPoint(const position_t& pos)
 {
     if (m_distanceFromPoint == 0)
     {
-        return distanceWithin(m_POwner->loc.p, pos, 0.1f);
+        return m_POwner->loc.p.x == pos.x && m_POwner->loc.p.z == pos.z;
     }
     else
     {
-        return distanceWithin(m_POwner->loc.p, pos, m_distanceFromPoint + 0.2f);
+        return distance(m_POwner->loc.p, pos) <= (m_distanceFromPoint + .2f);
     }
 }
 
@@ -582,7 +503,7 @@ bool CPathFind::CanSeePoint(const position_t& point, bool lookOffMesh)
 
 const position_t& CPathFind::GetDestination() const
 {
-    return m_points.back().position;
+    return m_points.back();
 }
 
 void CPathFind::SetCarefulPathing(bool careful)
@@ -596,7 +517,6 @@ void CPathFind::Clear()
     m_pathFlags         = 0;
     m_roamFlags         = 0;
     m_points.clear();
-    m_timeAtPoint = {};
 
     m_currentPoint  = 0;
     m_maxDistance   = 0;
@@ -608,9 +528,9 @@ void CPathFind::Clear()
     m_turnPoints.clear();
 }
 
-void CPathFind::AddPoints(std::vector<pathpoint_t>&& points, bool reverse)
+void CPathFind::AddPoints(std::vector<position_t>&& points, bool reverse)
 {
-    if (points.size() > MAX_PATH_POINTS && (m_pathFlags & PATHFLAG_PATROL) == 0)
+    if (points.size() > MAX_PATH_POINTS)
     {
         ShowWarning("CPathFind::AddPoints Given too many points (%d). Limiting to max (%d)", points.size(), MAX_PATH_POINTS);
         points.resize(MAX_PATH_POINTS);
@@ -621,17 +541,6 @@ void CPathFind::AddPoints(std::vector<pathpoint_t>&& points, bool reverse)
     if (reverse)
     {
         std::reverse(m_points.begin(), m_points.end());
-    }
-
-    if (m_pathFlags & PATHFLAG_PATROL)
-    {
-        m_patrol      = m_points;
-        m_patrolFlags = m_pathFlags;
-    }
-    else
-    {
-        m_patrol.clear();
-        m_patrolFlags = 0;
     }
 }
 
@@ -651,11 +560,6 @@ void CPathFind::FinishedPath()
         {
             Clear();
         }
-    }
-    else if (IsPatrolling())
-    {
-        m_currentPoint = 0;
-        m_currentTurn  = 0;
     }
     else
     {

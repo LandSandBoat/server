@@ -5,7 +5,8 @@
 -- Recast Time: 1:00
 -- Duration: 1:00
 -----------------------------------
-require("scripts/globals/job_utils/thief")
+require("scripts/settings/main")
+require("scripts/globals/status")
 -----------------------------------
 local ability_object = {}
 
@@ -14,7 +15,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-   xi.job_utils.thief.useTrickAttack(player, target, ability)
+   player:addStatusEffect(xi.effect.TRICK_ATTACK, 1, 0, 60)
 end
 
 return ability_object

@@ -29,8 +29,15 @@ entity.onTrigger = function(player, npc)
     elseif player:getCharVar("BeautyAndTheGalkaDenied") == 1 then
         player:startEvent(7)
 
+    -- The eleventh's hour
     elseif beautyAndTheGalka == QUEST_COMPLETED then
-        player:startEvent(12)
+        if player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_ELEVENTH_S_HOUR) == QUEST_ACCEPTED then
+            player:startEvent(46)
+        else
+            player:startEvent(12)
+        end
+    else
+        player:startEvent(11)
     end
 end
 

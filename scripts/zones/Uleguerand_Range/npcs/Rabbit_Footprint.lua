@@ -59,6 +59,7 @@ end
 entity.onEventFinish = function(player, csid, option)
 end
 
+
 local function moveFootprint(npc)
     -- ffxiclopedia's pages for Black Coney and White Coney say 7 and 5 Earth seconds respectively, in game it is very fast
     -- https://ffxiclopedia.fandom.com/wiki/Black_Coney
@@ -90,6 +91,7 @@ entity.onTimeTrigger = function(npc, triggerID)
             if activeTime == 0 then
                 npc:setLocalVar("activeTime", os.time()+math.random(60*9, 60*15)) -- moon phase just changed, i'm active in 9 to 15 mins from now
             elseif os.time() > activeTime then
+                --print("MOVING!")
                 moveFootprint(npc)
             end
         else

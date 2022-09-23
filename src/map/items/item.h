@@ -154,9 +154,9 @@ private:
 
     bool m_sent;
 
-    std::string m_name;
-    std::string m_send;
-    std::string m_recv;
+    string_t m_name;
+    string_t m_send;
+    string_t m_recv;
 };
 
 #endif

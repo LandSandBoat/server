@@ -14,6 +14,8 @@ import sys
 import zmq
 import struct
 
+from zmq.sugar.constants import NOBLOCK
+
 # ENUM: Send to every character, in every zone, on every map process
 MSG_CHAT_SERVMES = 6
 
@@ -58,7 +60,7 @@ def send_server_message(msg):
         struct.pack("!B", MSG_CHAT_SERVMES),
         b"\0",
         buffer
-    ], zmq.NOBLOCK)
+    ], NOBLOCK)
 
 def main():
     if len(sys.argv) < 2:

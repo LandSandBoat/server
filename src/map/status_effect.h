@@ -31,12 +31,12 @@
 
 enum class EFFECTOVERWRITE : uint8
 {
-    EQUAL_HIGHER     = 0, // only overwrite if equal or higher (tier, power)
-    HIGHER           = 1, // only overwrite if higher (tier, power)
-    NEVER            = 2, // never overwrite
-    ALWAYS           = 3, // always overwrite no matter
-    IGNORE_DUPLICATE = 4, // ignore dupes
-    TIER_HIGHER      = 5  // only overwrite if tier is higher (regardless of power)
+    EQUAL_HIGHER      = 0, // only overwrite if equal or higher (tier, power)
+    HIGHER            = 1, // only overwrite if higher (tier, power)
+    NEVER             = 2, // never overwrite
+    ALWAYS            = 3, // always overwrite no matter
+    IGNORE_DUPLICATE  = 4, // ignore dupes
+    TIER_HIGHER       = 5  // only overwrite if tier is higher (regardless of power)
 };
 
 enum EFFECTFLAG
@@ -44,12 +44,12 @@ enum EFFECTFLAG
     EFFECTFLAG_NONE            = 0x0000000,
     EFFECTFLAG_DISPELABLE      = 0x0000001,
     EFFECTFLAG_ERASABLE        = 0x0000002,
-    EFFECTFLAG_ATTACK          = 0x0000004, // disappears upon attacking
+    EFFECTFLAG_ATTACK          = 0x0000004, // исчезает при нанесении урона
     EFFECTFLAG_EMPATHY         = 0X0000008, // effect can be copied to wyvern by use of merited Spirit Link
-    EFFECTFLAG_DAMAGE          = 0x0000010, // disappears upon being attacked
-    EFFECTFLAG_DEATH           = 0x0000020, // disappears upon death/ko
-    EFFECTFLAG_MAGIC_BEGIN     = 0x0000040, // disappears upon spellcasting start
-    EFFECTFLAG_MAGIC_END       = 0x0000080, // disappears upon spellcasting complete
+    EFFECTFLAG_DAMAGE          = 0x0000010, // исчезает при получении урона
+    EFFECTFLAG_DEATH           = 0x0000020, // исчезает при смерти
+    EFFECTFLAG_MAGIC_BEGIN     = 0x0000040, // исчезает перед началом чтения заклинания
+    EFFECTFLAG_MAGIC_END       = 0x0000080, // исчезает после прочтения заклинания
     EFFECTFLAG_ON_ZONE         = 0x0000100,
     EFFECTFLAG_NO_LOSS_MESSAGE = 0x0000200, // Suppress effect worn off message.
     EFFECTFLAG_INVISIBLE       = 0x0000400, // invisible effect
@@ -547,19 +547,19 @@ enum EFFECT
     EFFECT_SCARLET_DELIRIUM      = 479, // DRK 95
     EFFECT_SCARLET_DELIRIUM_1    = 480, // DRK 95
     EFFECT_ABDHALJS_SEAL         = 481,
-    EFFECT_DECOY_SHOT            = 482, // RNG 95
-    EFFECT_HAGAKURE              = 483, // SAM 95
-    EFFECT_ISSEKIGAN             = 484, // NIN 95
-    EFFECT_UNBRIDLED_LEARNING    = 485, // BLU 95
-    EFFECT_COUNTER_BOOST         = 486, //
-    EFFECT_ENDRAIN               = 487, // FENRIR 96
-    EFFECT_ENASPIR               = 488, // FENRIR 96
-    EFFECT_AFTERGLOW             = 489, // WS AFTEREFFECT
-    EFFECT_BRAZEN_RUSH           = 490, //
-    EFFECT_INNER_STRENGTH        = 491,
-    EFFECT_ASYLUM                = 492,
-    EFFECT_SUBTLE_SORCERY        = 493,
-    EFFECT_STYMIE                = 494,
+    EFFECT_DECOY_SHOT         = 482, // RNG 95
+    EFFECT_HAGAKURE           = 483, // SAM 95
+    EFFECT_ISSEKIGAN          = 484, // NIN 95
+    EFFECT_UNBRIDLED_LEARNING = 485, // BLU 95
+    EFFECT_COUNTER_BOOST      = 486, //
+    EFFECT_ENDRAIN            = 487, // FENRIR 96
+    EFFECT_ENASPIR            = 488, // FENRIR 96
+    EFFECT_AFTERGLOW          = 489, // WS AFTEREFFECT
+    EFFECT_BRAZEN_RUSH        = 490, //
+    EFFECT_INNER_STRENGTH     = 491,
+    EFFECT_ASYLUM             = 492,
+    EFFECT_SUBTLE_SORCERY     = 493,
+    EFFECT_STYMIE             = 494,
     // EFFECT_NONE                     = 495,
     EFFECT_INTERVENE        = 496,
     EFFECT_SOUL_ENSLAVEMENT = 497,
@@ -676,7 +676,7 @@ enum EFFECT
     EFFECT_NEGATE_VIRUS            = 608,
     EFFECT_NEGATE_CURSE            = 609,
     EFFECT_NEGATE_CHARM            = 610,
-    EFFECT_MAGIC_EVASION_BOOST     = 611,
+    EFFECT_MAGIC_EVASION_BOOST_II  = 611,
     EFFECT_COLURE_ACTIVE           = 612,
     EFFECT_MUMORS_RADIANCE         = 613,
     EFFECT_ULLEGORES_GLOOM         = 614,
@@ -695,8 +695,6 @@ enum EFFECT
     EFFECT_MOBILIZATION            = 627,
     EFFECT_HOVER_SHOT              = 628,
     EFFECT_MOOGLE_AMPLIFIER        = 629,
-    EFFECT_TAINT                   = 630,
-    EFFECT_HAUNT                   = 631,
 
     // Effect icons in packet can go from 0-767, so no custom effects should go in that range.
 
@@ -741,14 +739,12 @@ enum EFFECT
     EFFECT_MEDITATE            = 801, // Dummy effect for SAM Meditate JA
     EFFECT_ELEMENTALRES_DOWN   = 802, // Elemental resistance down
     EFFECT_FULL_SPEED_AHEAD    = 803, // Used to track Full Speed Ahead quest minigame
-    EFFECT_HYSTERIA            = 804, // Used for Hysteroanima to stop after readying a weaponskill with no msg.
-    EFFECT_TOMAHAWK            = 805, // Silent status effect inflicted by a Warrior using the "Tomahawk" job ability
-    // EFFECT_PLACEHOLDER           = 806  // Description
-    // 806-1022
+    // EFFECT_PLACEHOLDER           = 804  // Description
+    // 804-1022
     // EFFECT_PLACEHOLDER           = 1023 // The client dat file seems to have only this many "slots", results of exceeding that are untested.
 };
 
-#define MAX_EFFECTID 806 // 768 real + 38 custom
+#define MAX_EFFECTID 804 // 768 real + 32 custom
 
 /************************************************************************
  *                                                                       *
@@ -797,7 +793,7 @@ public:
 
     void addMod(Mod modType, int16 amount);
 
-    void SetName(std::string name);
+    void SetName(string_t name);
     void SetName(const int8* name);
 
     const int8* GetName();
@@ -827,7 +823,7 @@ private:
     time_point m_StartTime;      // время получения эффекта (млс)
     int        m_tickCount{ 0 }; // премя последнего выполнения эффекта (млс)
 
-    std::string m_Name; // имя эффекта для скриптов
+    string_t m_Name; // имя эффекта для скриптов
 };
 
 #endif

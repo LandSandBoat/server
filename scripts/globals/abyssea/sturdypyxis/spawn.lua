@@ -13,6 +13,7 @@ xi.pyxis = xi.pyxis or {}
 
 xi.pyxis.spawn = {}
 
+
 xi.pyxis.spawn.chestLightValues =
 {
     [1] =
@@ -162,9 +163,8 @@ end
 -- Desc: This method allow you to get next chest available
 ---------------------------------------------------------------------------------------------
 local function GetPyxisID(player)
-    local zone        = player:getZone()
-    local pyxii       = zone:queryEntitiesByName('Sturdy_Pyxis') -- Get the ID of the first entry and use that as our base ID to offset against
-    local baseChestId = pyxii[1]:getID()
+    local ID          = zones[player:getZoneID()]
+    local baseChestId = ID.npc.STURDY_PYXIS_BASE
     local chestId     = 0
 
     -- Get next chest ID available
@@ -226,6 +226,7 @@ local function determineChestType(lightValues)
         return xi.pyxis.chestType.BLUE
     end
 end
+
 
 local function GetBlueChestInfos(player, lightValues)
     -- Lowers the required amount of correct guesses for blue pyxides by 1

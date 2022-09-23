@@ -93,8 +93,7 @@ public:
     std::list<SearchEntity*> GetPlayersList(search_req sr, int* count);
     std::string              GetSearchComment(uint32 playerId);
     std::vector<ahItem*>     GetAHItemsToCategory(uint8 AHCategoryID, int8* OrderByString);
-    void                     ExpireAHItems(uint16 expireAgeInDays);
-
+    void                     ExpireAHItems();
 private:
     std::unique_ptr<SqlConnection> sql;
 };

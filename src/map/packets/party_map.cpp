@@ -30,11 +30,7 @@ CPartyMapPacket::CPartyMapPacket(CCharEntity* PChar)
     this->setType(0xA0);
     this->setSize(0x18);
 
-    if (PChar == nullptr)
-    {
-        ShowError("CPartyMapPacket::CPartyMapPacket() - PChar was null.");
-        return;
-    }
+    XI_DEBUG_BREAK_IF(PChar == nullptr);
 
     ref<uint32>(0x04) = PChar->id;
     ref<uint16>(0x08) = PChar->getZone();

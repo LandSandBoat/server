@@ -6,7 +6,7 @@
 ---------------------------------------------
 require("scripts/globals/mobskills")
 require("scripts/globals/status")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 ---------------------------------------------
 local mobskill_object = {}
 
@@ -46,3 +46,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 end
 
 return mobskill_object
+

@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Bastok Markets
 --  NPC: Ephemeral Moogle
--- Type: Crystal Storage NPC
+-- Type: Crystal Strage NPC
 -- !pos -185.750 -2.000 -3.860 230
 -----------------------------------
 require("scripts/globals/ephemeral")

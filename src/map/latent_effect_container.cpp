@@ -35,8 +35,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "time_server.h"
 
-// clang-format off
-
 CLatentEffectContainer::CLatentEffectContainer(CCharEntity* PEntity)
 : m_POwner(PEntity)
 {
@@ -1169,5 +1167,3 @@ bool CLatentEffectContainer::ApplyLatentEffect(CLatentEffect& effect, bool expre
         return effect.Deactivate();
     }
 }
-
-// clang-format on

@@ -22,9 +22,29 @@ mission.reward =
 
 mission.sections =
 {
+    -- Section: Mission Active, missionStatus == 0
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId
+            return currentMission == mission.missionId and missionStatus == 0
+        end,
+
+        [xi.zone.HALL_OF_THE_GODS] =
+        {
+            ['Shimmering_Circle'] = mission:progressEvent(3),
+
+            onEventFinish =
+            {
+                [3] = function(player, csid, option, npc)
+                    player:setMissionStatus(xi.mission.log_id.ZILART, 1)
+                end,
+            },
+        },
+    },
+
+    -- Section: Mission Active, missionStatus == 1
+    {
+        check = function(player, currentMission, missionStatus, vars)
+            return currentMission == mission.missionId and missionStatus == 1
         end,
 
         [xi.zone.RUAUN_GARDENS] =
@@ -39,7 +59,9 @@ mission.sections =
             onEventFinish =
             {
                 [51] = function(player, csid, option, npc)
-                    mission:complete(player)
+                    if mission:complete(player) then
+                        player:setMissionStatus(xi.mission.log_id.ZILART, 0)
+                    end
                 end,
             },
         },

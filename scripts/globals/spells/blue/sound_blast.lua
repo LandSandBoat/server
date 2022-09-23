@@ -45,4 +45,5 @@ spell_object.onSpellCast = function(caster, target, spell)
     return params.effect
 end
 
+
 return spell_object

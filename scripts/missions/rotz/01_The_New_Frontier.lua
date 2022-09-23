@@ -46,18 +46,6 @@ mission.sections =
             },
         },
     },
-
-    {
-        check = function(player, currentMission, missionStatus, vars)
-            return player:hasCompletedMission(mission.areaId, mission.missionId)
-        end,
-
-        [xi.zone.NORG] =
-        {
-            ['_700']       = mission:event(5):replaceDefault(),
-            ['Comitiolus'] = mission:event(6):replaceDefault(),
-        },
-    },
 }
 
 return mission

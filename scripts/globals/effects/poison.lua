@@ -12,6 +12,7 @@ end
 effect_object.onEffectTick = function(target, effect)
 end
 
+
 effect_object.onEffectLose = function(target, effect)
     target:delMod(xi.mod.REGEN_DOWN, effect:getPower())
 end

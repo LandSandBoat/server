@@ -6,7 +6,7 @@
 -- !pos -90 -4 -108 235
 -----------------------------------
 local ID = require("scripts/zones/Bastok_Markets/IDs")
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 require("scripts/globals/equipment")
 require("scripts/globals/status")
@@ -15,8 +15,8 @@ require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 
-local body_list = { 12554, 13712, 12594, 13723, 12603, 13699, 12610, 13783, 12572, 12611, 13796, 12571, 13750, 12604, 13752, 12544, 13730, 12578, 12553, 12595 }
-local legs_list = { 12829, 12800, 12866, 12809, 12810, 12850, 12828, 12859, 12837, 14243, 12838, 12867, 12827, 12836, 12860, 12851 }
+local body_list = {12554, 13712, 12594, 13723, 12603, 13699, 12610, 13783, 12572, 12611, 13796, 12571, 13750, 12604, 13752, 12544, 13730, 12578, 12553, 12595}
+local legs_list = {12829, 12800, 12866, 12809, 12810, 12850, 12828, 12859, 12837, 14243, 12838, 12867, 12827, 12836, 12860, 12851}
 
 entity.onTrade = function(player, npc, trade)
     local brygidReturns = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BRYGID_THE_STYLIST_RETURNS)
@@ -81,7 +81,7 @@ entity.onTrigger = function(player, npc)
 
         player:setCharVar("BrygidGetBody", getBody)
         player:setCharVar("BrygidGetLegs", getLegs)
-
+        -- printf("Body %u Legs %u\n", getBody, getLegs)
         player:startEvent(380, brygidSet, getBody, getLegs, player:getMainJob())
 
     elseif brygidReturns == QUEST_ACCEPTED and body == getBody and legs == getLegs and wantsSubligar == 0 then

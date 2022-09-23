@@ -33,13 +33,10 @@ public:
     {
         // World server should _mostly_ be comprised of ZMQ handlers and timed tasks.
 
-        // clang-format off
-        gConsoleService->RegisterCommand("stats", "Print server runtime statistics",
-        [](std::vector<std::string> inputs)
+        gConsoleService->RegisterCommand("stats", "Print server runtime statistics", [&]()
         {
             fmt::print("TODO: Some stats!\n");
         });
-        // clang-format on
     }
 
     ~WorldServer() override

@@ -4,7 +4,7 @@
 -- Involved in Quests: Rubbish day, Making Amens!
 -- !pos 141 -6 138 200
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Garlaige_Citadel/IDs")

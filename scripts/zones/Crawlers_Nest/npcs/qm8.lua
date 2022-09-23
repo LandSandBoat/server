@@ -4,7 +4,7 @@
 -- Finishes Quest: Enveloped in Darkness
 -- !pos 59 0.1 66 197
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/npc_util")
@@ -47,7 +47,7 @@ entity.onEventFinish = function(player, csid, option)
         npcUtil.completeQuest(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ENVELOPED_IN_DARKNESS, {
             item = 14093, -- Warlock's Boots
             fame = 40,
-            var = { "envelopedInDarkness_timer", "needs_crawler_blood" }
+            var = {"envelopedInDarkness_timer", "needs_crawler_blood"}
         })
     end
 end

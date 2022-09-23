@@ -75,7 +75,7 @@ void CPetController::DoRoamTick(time_point tick)
     {
         if (currentDistance < 35.0f && PPet->PAI->PathFind->PathAround(PPet->PMaster->loc.p, 2.0f, PATHFLAG_RUN | PATHFLAG_WALLHACK))
         {
-            PPet->PAI->PathFind->FollowPath(m_Tick);
+            PPet->PAI->PathFind->FollowPath();
         }
         else if (PPet->GetSpeed() > 0)
         {
@@ -93,7 +93,7 @@ bool CPetController::PetIsHealing()
     {
         // animation down
         PPet->animation = ANIMATION_HEALING;
-        PPet->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_HEALING, 0, 0, settings::get<uint8>("map.HEALING_TICK_DELAY"), 0));
+        PPet->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_HEALING, 0, 0, map_config.healing_tick_delay, 0));
         PPet->updatemask |= UPDATE_HP;
         return true;
     }
@@ -130,18 +130,5 @@ bool CPetController::Ability(uint16 targid, uint16 abilityid)
     {
         return PPet->PAI->Internal_Ability(targid, abilityid);
     }
-    return false;
-}
-
-bool CPetController::PetSkill(uint16 targid, uint16 abilityid)
-{
-    TracyZoneScoped;
-    if (POwner)
-    {
-        FaceTarget(targid);
-        PPet->PAI->EventHandler.triggerListener("WEAPONSKILL_BEFORE_USE", PPet, abilityid);
-        return POwner->PAI->Internal_PetSkill(targid, abilityid);
-    }
-
     return false;
 }

@@ -3,7 +3,7 @@
 --  NPC: Curio Vendor Moogle
 --  Shop NPC
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/keyitems")
 require("scripts/globals/shop")
 -----------------------------------

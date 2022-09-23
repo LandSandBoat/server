@@ -51,18 +51,18 @@ enum SPECIALFLAG
 
 enum ROAMFLAG : uint16
 {
-    ROAMFLAG_NONE     = 0x00,
-    ROAMFLAG_NONE0    = 0x01,  //
-    ROAMFLAG_NONE1    = 0x02,  //
-    ROAMFLAG_NONE2    = 0x04,  //
-    ROAMFLAG_NONE3    = 0x08,  //
-    ROAMFLAG_NONE4    = 0x10,  //
-    ROAMFLAG_NONE5    = 0x20,  //
-    ROAMFLAG_WORM     = 0x40,  // pop up and down when moving
-    ROAMFLAG_AMBUSH   = 0x80,  // stays hidden until someone comes close (antlion)
-    ROAMFLAG_SCRIPTED = 0x100, // calls lua method for roaming logic
-    ROAMFLAG_IGNORE   = 0x200, // ignore all hate, except linking hate
-    ROAMFLAG_STEALTH  = 0x400  // stays name hidden and untargetable until someone comes close (chigoe)
+    ROAMFLAG_NONE    = 0x00,
+    ROAMFLAG_NONE0   = 0x01,  //
+    ROAMFLAG_NONE1   = 0x02,  //
+    ROAMFLAG_NONE2   = 0x04,  //
+    ROAMFLAG_NONE3   = 0x08,  //
+    ROAMFLAG_NONE4   = 0x10,  //
+    ROAMFLAG_NONE5   = 0x20,  //
+    ROAMFLAG_WORM    = 0x40,  // pop up and down when moving
+    ROAMFLAG_AMBUSH  = 0x80,  // stays hidden until someone comes close (antlion)
+    ROAMFLAG_EVENT   = 0x100, // calls lua method for roaming logic
+    ROAMFLAG_IGNORE  = 0x200, // ignore all hate, except linking hate
+    ROAMFLAG_STEALTH = 0x400  // stays name hidden and untargetable until someone comes close (chigoe)
 };
 
 enum MOBTYPE
@@ -126,10 +126,9 @@ public:
     bool       CanDeaggro() const;
     time_point GetDespawnTime();
     void       SetDespawnTime(duration _duration);
-    uint32     GetRandomGil();   // returns a random amount of gil
-    bool       CanRoamHome();    // is it possible for me to walk back?
-    bool       CanRoam();        // check if mob can walk around
-    void       TapDeaggroTime(); // call CMobController->TapDeaggroTime if PAI->GetController() is a CMobController, otherwise do nothing.
+    uint32     GetRandomGil(); // returns a random amount of gil
+    bool       CanRoamHome();  // is it possible for me to walk back?
+    bool       CanRoam();      // check if mob can walk around
 
     bool CanLink(position_t* pos, int16 superLink = 0);
 
@@ -247,8 +246,8 @@ public:
     CMobSpellList*           m_SpellListContainer; // The spells list container for this mob
     std::map<uint16, uint16> m_UsedSkillIds;       // mob skill ids used (key) along with mob level (value)
 
-    uint32 m_flags;       // includes the CFH flag and whether the HP bar should be shown or not (e.g. Yilgeban doesnt)
-    uint8  m_name_prefix; // The ding bats VS Ding bats
+    uint32   m_flags;       // includes the CFH flag and whether the HP bar should be shown or not (e.g. Yilgeban doesnt)
+    uint8    m_name_prefix; // The ding bats VS Ding bats
 
     uint8 m_unk0; // possibly campaign related (entity 0x24)
     uint8 m_unk1; // (entity_update 0x25)
@@ -258,7 +257,7 @@ public:
 
     CEnmityContainer* PEnmityContainer; // система ненависти монстров
 
-    CMobSpellContainer* SpellContainer; // retrieves spells for the mob
+    CMobSpellContainer* SpellContainer;   // retrieves spells for the mob
 
     bool m_IsClaimable;
 

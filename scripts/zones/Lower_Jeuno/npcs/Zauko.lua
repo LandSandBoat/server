@@ -125,12 +125,12 @@ end
 entity.onEventFinish = function(player, csid, option)
     -- SAVE THE CLOCKTOWER
     if csid == 50 then
-        player:incrementCharVar("saveTheClockTowerVar", 1)
-        player:incrementCharVar("saveTheClockTowerNPCz2", 256)
+        player:addCharVar("saveTheClockTowerVar", 1)
+        player:addCharVar("saveTheClockTowerNPCz2", 256)
 
     -- COMMUNITY SERVICE
     elseif csid == 117 then
-        local params = { title = xi.title.TORCHBEARER, var = "currCommService" }
+        local params = {title = xi.title.TORCHBEARER, var = "currCommService"}
         if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COMMUNITY_SERVICE) ~= QUEST_COMPLETED then
             -- first victory
             params.fame = 30

@@ -21,8 +21,8 @@
 
 #include "puppetutils.h"
 #include "../entities/automatonentity.h"
-#include "../job_points.h"
 #include "../lua/luautils.h"
+#include "../job_points.h"
 #include "../packets/char_job_extra.h"
 #include "../packets/message_basic.h"
 #include "../status_effect_container.h"
@@ -544,17 +544,11 @@ namespace puppetutils
             rank = 13 + rank;
         }
 
-        return battleutils::GetMaxSkill(rank, level > 99 ? 99 : level);
+        return battleutils::GetMaxSkill(rank, level);
     }
 
     uint16 getSkillCap(CCharEntity* PChar, SKILLTYPE skill)
     {
-        if (PChar == nullptr)
-        {
-            ShowWarning("puppetutils::getSkillCap() - Null PChar passed to function.");
-            return 0;
-        }
-
         return getSkillCap(PChar, skill, PChar->PAutomaton->GetMLevel());
     }
 
@@ -583,11 +577,7 @@ namespace puppetutils
 
     void TrySkillUP(CAutomatonEntity* PAutomaton, SKILLTYPE SkillID, uint8 lvl)
     {
-        if (!PAutomaton->PMaster || PAutomaton->PMaster->objtype != TYPE_PC)
-        {
-            ShowWarning("puppetutils::TrySkillUP() - PMaster was null, or was not a player.");
-            return;
-        }
+        XI_DEBUG_BREAK_IF(!PAutomaton->PMaster || PAutomaton->PMaster->objtype != TYPE_PC);
 
         CCharEntity* PChar = (CCharEntity*)PAutomaton->PMaster;
         if (getSkillCap(PChar, SkillID) != 0 && !(PAutomaton->WorkingSkills.skill[SkillID] & 0x8000))
@@ -596,7 +586,7 @@ namespace puppetutils
             uint16 MaxSkill = getSkillCap(PChar, SkillID, std::min(PAutomaton->GetMLevel(), lvl));
 
             int16  Diff          = MaxSkill - CurSkill / 10;
-            double SkillUpChance = Diff / 5.0 + settings::get<double>("map.SKILLUP_CHANCE_MULTIPLIER") * (2.0 - log10(1.0 + CurSkill / 100));
+            double SkillUpChance = Diff / 5.0 + map_config.skillup_chance_multiplier * (2.0 - log10(1.0 + CurSkill / 100));
 
             double random = xirand::GetRandomNumber(1.);
 
@@ -650,9 +640,9 @@ namespace puppetutils
                 MaxSkill = MaxSkill * 10;
 
                 // Do skill amount multiplier (Will only be applied if default setting is changed)
-                if (settings::get<uint8>("map.SKILLUP_AMOUNT_MULTIPLIER") > 1)
+                if (map_config.skillup_amount_multiplier > 1)
                 {
-                    SkillAmount += (uint8)(SkillAmount * settings::get<uint8>("map.SKILLUP_AMOUNT_MULTIPLIER"));
+                    SkillAmount += (uint8)(SkillAmount * map_config.skillup_amount_multiplier);
                     if (SkillAmount > 9)
                     {
                         SkillAmount = 9;

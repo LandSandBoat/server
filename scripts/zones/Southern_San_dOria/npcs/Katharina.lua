@@ -3,7 +3,7 @@
 --  NPC: Katharina
 --  General Info NPC
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 -----------------------------------
 local entity = {}
 

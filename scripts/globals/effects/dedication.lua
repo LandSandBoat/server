@@ -1,6 +1,5 @@
 -----------------------------------
 -- xi.effect.DEDICATION
--- Handled in map/utils/charutils
 -----------------------------------
 local effect_object = {}
 

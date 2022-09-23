@@ -1,7 +1,7 @@
 -----------------------------------
 -- Harvest Festivals
 -----------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 -----------------------------------
@@ -11,8 +11,8 @@ function isHalloweenEnabled()
     local month = tonumber(os.date("%m"))
     local day = tonumber(os.date("%d"))
 
-    if (month == 10 and day >= 20 or month == 11 and day == 1 or xi.settings.main.HALLOWEEN_YEAR_ROUND ~= 0) then -- According to wiki Harvest Fest is Oct 20 - Nov 1.
-        if (xi.settings.main.HALLOWEEN_2005 == 1) then
+    if (month == 10 and day >= 20 or month == 11 and day == 1 or xi.settings.HALLOWEEN_YEAR_ROUND ~= 0) then -- According to wiki Harvest Fest is Oct 20 - Nov 1.
+        if (xi.settings.HALLOWEEN_2005 == 1) then
             option = 1
         elseif (HALLOWEEN_2008 == 1) then
             option = 2
@@ -25,6 +25,7 @@ function isHalloweenEnabled()
     return option
 end
 
+
 local function halloweenItemsCheck(player)
     local headSlot = player:getEquipID(xi.slot.HEAD)
     local mainHand = player:getEquipID(xi.slot.MAIN)
@@ -36,7 +37,7 @@ local function halloweenItemsCheck(player)
     local trickStaff = 17565
     local trickStaff2 = 17587
 
-    local reward_list = { pumpkinHead, pumpkinHead2, trickStaff, trickStaff2 }
+    local reward_list = {pumpkinHead, pumpkinHead2, trickStaff, trickStaff2}
 
     -- Checks for HQ Upgrade
     for ri = 1, #reward_list do

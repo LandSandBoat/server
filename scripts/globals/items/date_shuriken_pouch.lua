@@ -20,4 +20,5 @@ item_object.onItemUse = function(target)
     target:addItem(xi.items.DATE_SHURIKEN, 99)
 end
 
+
 return item_object

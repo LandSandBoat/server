@@ -2,22 +2,21 @@
 
 #include <filesystem>
 #include <functional>
-#include <memory>
 #include <string>
-#include <vector>
+#include <memory>
 
-#include <concurrentqueue.h>
 #include <efsw/efsw.hpp>
+#include <concurrentqueue.h>
 
 class Filewatcher : public efsw::FileWatchListener
 {
 public:
-    Filewatcher(std::vector<std::string> paths);
-    void handleFileAction(efsw::WatchID watchid, std::string const& dir, std::string const& filename, efsw::Action action, std::string oldFilename) override;
+    Filewatcher(std::string const& path);
+    void handleFileAction(efsw::WatchID watchid, const std::string& dir, const std::string& filename, efsw::Action action, std::string oldFilename) override;
 
     moodycamel::ConcurrentQueue<std::filesystem::path> modifiedQueue;
 
 private:
     std::unique_ptr<efsw::FileWatcher> fileWatcher;
-    std::vector<std::string>           basePaths;
+    std::string basePath;
 };

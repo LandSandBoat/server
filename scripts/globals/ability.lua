@@ -677,21 +677,11 @@ xi.reaction =
 {
     NONE     = 0x00,
     MISS     = 0x01,
-    GUARDED  = 0x02,
     PARRY    = 0x03,
     BLOCK    = 0x04,
     HIT      = 0x08,
     EVADE    = 0x09,
-    ABILITY  = 0x10,
-}
-
-xi.actionModifier =
-{
-    NONE        = 0x00,
-    COVER       = 0x01,
-    RESIST      = 0x02,
-    MAGIC_BURST = 0x04, -- Currently known to be used for Swipe/Lunge only
-    IMMUNOBREAK = 0x08,
+    GUARD    = 0x14,
 }
 
 xi.specEffect =
@@ -702,22 +692,6 @@ xi.specEffect =
     RAISE          = 0x11,
     RECOIL         = 0x20,
     CRITICAL_HIT   = 0x22,
-}
-
--- addType, used in ability:getAddType(). the addType of an ability is defined in sql.
-xi.addType =
-{
-    ADDTYPE_NORMAL      = 0,
-    ADDTYPE_MERIT       = 1,
-    ADDTYPE_ASTRAL_FLOW = 2,
-    ADDTYPE_MAIN_ONLY   = 4,
-    ADDTYPE_LEARNED     = 8,
-    ADDTYPE_LIGHT_ARTS  = 16,
-    ADDTYPE_DARK_ARTS   = 32,
-    ADDTYPE_JUGPET      = 64,
-    ADDTYPE_CHARMPET    = 128,
-    ADDTYPE_AVATAR      = 256,
-    ADDTYPE_AUTOMATON   = 512,
 }
 
 function AbilityFinalAdjustments(dmg,mob,skill,target,skilltype,skillparam,shadowbehav) -- seems to only be used for Wyvern breaths

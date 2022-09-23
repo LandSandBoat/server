@@ -17,7 +17,7 @@ local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.CHOCOBO_ON_THE_
 quest.reward =
 {
     -- TODO: Verify this is the correct egg for Quest Reward
-    item = xi.items.CHOCOBO_EGG_FAINTLY_WARM,
+    item = xi.items.CHOCOBO_EGG,
 }
 
 quest.sections =

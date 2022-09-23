@@ -5,7 +5,7 @@
 -- Recast Time: 5:00
 -- Duration: 2:00
 -----------------------------------
-require("scripts/globals/job_utils/monk")
+require("scripts/globals/status")
 -----------------------------------
 local ability_object = {}
 
@@ -14,7 +14,8 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    xi.job_utils.monk.useFocus(player, target, ability)
+    local power = 20 + player:getMod(xi.mod.FOCUS_EFFECT)
+    player:addStatusEffect(xi.effect.FOCUS, power, 0, 120)
 end
 
 return ability_object

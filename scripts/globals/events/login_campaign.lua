@@ -2,7 +2,7 @@
 -- Login Campaign
 -- https://www.bg-wiki.com/ffxi/Repeat_Login_Campaign
 ------------------------------------
-require("scripts/globals/settings")
+require("scripts/settings/main")
 require("scripts/globals/npc_util")
 local prizes = require("scripts/globals/events/login_campaign_data")
 ------------------------------------
@@ -20,7 +20,7 @@ local loginCampaignDuration = 23 -- Duration is set in Earth days (Average is 23
 
 -- Checks if a Login Campaign is active.
 xi.events.loginCampaign.isCampaignActive = function()
-    if xi.settings.main.ENABLE_LOGIN_CAMPAIGN == 1 then
+    if xi.settings.ENABLE_LOGIN_CAMPAIGN == 1 then
         local localUtcOffset = os.time() - os.time(os.date('!*t'))
         local jstUtcOffset = 9 * 60 * 60
         local campaignStartDate = os.time({
@@ -208,7 +208,7 @@ xi.events.loginCampaign.onEventUpdate = function(player, csid, option)
             price,
             loginPoints)
     else
-        if npcUtil.giveItem(player, { { currentLoginCampaign[showItems - 2]["items"][itemSelected + 1], itemQuantity } }) then
+        if npcUtil.giveItem(player, { {currentLoginCampaign[showItems - 2]["items"][itemSelected + 1], itemQuantity} }) then
             player:delCurrency("login_points", currentLoginCampaign[showItems - 2]["price"] * itemQuantity)
             player:updateEvent(
                 currentLoginCampaign[showItems - 2]["items"][itemSelected + 1],

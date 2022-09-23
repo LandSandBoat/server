@@ -62,6 +62,7 @@ local function getRangedCRatio(attacker, defender, params, ignoredDef)
 
     pdif[1] = pdifmin
     pdif[2] = pdifmax
+    -- printf("ratio: %f min: %f max %f\n", cratio, pdifmin, pdifmax)
 
     pdifmin = pdifmin * 1.25
     pdifmax = pdifmax * 1.25
@@ -73,6 +74,7 @@ local function getRangedCRatio(attacker, defender, params, ignoredDef)
 
     return pdif, pdifcrit
 end
+
 
 -- Given the raw ratio value (atk/def) and levels, returns the cRatio (min then max)
 local function getMeleeCRatio(attacker, defender, params, ignoredDef)
@@ -125,6 +127,8 @@ local function getMeleeCRatio(attacker, defender, params, ignoredDef)
 
     cratio = cratio + 1
     cratio = utils.clamp(cratio, 0, 4.0)
+
+    -- printf("ratio: %f min: %f max %f\n", cratio, pdifmin, pdifmax)
 
     if cratio < 0.5 then
         pdifmax = cratio + 0.5
@@ -236,7 +240,7 @@ function doAutoPhysicalWeaponskill(attacker, target, wsID, tp, primaryMsg, actio
         end
     end
 
-    finaldmg = finaldmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
+    finaldmg = finaldmg * xi.settings.WEAPON_SKILL_POWER -- Add server bonus
     calcParams.finalDmg = finaldmg
 
     if calcParams.tpHitsLanded + calcParams.extraHitsLanded > 0 then
@@ -275,7 +279,7 @@ function doAutoRangedWeaponskill(attacker, target, wsID, wsParams, tp, primaryMs
 
     local calcParams =
     {
-        weaponDamage = { wsParams.weaponDamage or rangedDamage },
+        weaponDamage = {wsParams.weaponDamage or rangedDamage},
         attackInfo = attack,
         fSTR = utils.clamp(attacker:getStat(xi.mod.STR) - target:getStat(xi.mod.VIT), -10, 10),
         cratio = cratio,
@@ -307,7 +311,7 @@ function doAutoRangedWeaponskill(attacker, target, wsID, wsParams, tp, primaryMs
     finaldmg = target:rangedDmgTaken(finaldmg)
     finaldmg = finaldmg * target:getMod(xi.mod.PIERCE_SDT) / 1000
 
-    finaldmg = finaldmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
+    finaldmg = finaldmg * xi.settings.WEAPON_SKILL_POWER -- Add server bonus
     calcParams.finalDmg = finaldmg
 
     if calcParams.tpHitsLanded + calcParams.extraHitsLanded > 0 then

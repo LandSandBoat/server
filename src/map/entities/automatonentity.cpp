@@ -20,6 +20,7 @@
 */
 
 #include "automatonentity.h"
+#include "common/utils.h"
 #include "../ai/ai_container.h"
 #include "../ai/controllers/automaton_controller.h"
 #include "../ai/states/magic_state.h"
@@ -33,7 +34,6 @@
 #include "../status_effect_container.h"
 #include "../utils/mobutils.h"
 #include "../utils/puppetutils.h"
-#include "common/utils.h"
 
 CAutomatonEntity::CAutomatonEntity()
 : CPetEntity(PET_TYPE::AUTOMATON)

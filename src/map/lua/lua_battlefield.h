@@ -50,10 +50,7 @@ public:
     uint32   getFightTick();
     uint32   getWipeTime();
     uint32   getFightTime();
-    uint32   getMaxParticipants();
-    uint32   getPlayerCount();
     auto     getPlayers() -> sol::table;
-    auto     getPlayersAndTrusts() -> sol::table;
     auto     getMobs(bool required, bool adds) -> sol::table;
     auto     getNPCs() -> sol::table;
     auto     getAllies() -> sol::table;
@@ -63,19 +60,18 @@ public:
     uint32   getLastTimeUpdate();
     auto     getInitiator() -> std::pair<uint32, std::string>;
 
-    void setLastTimeUpdate(uint32 seconds);
-    void setTimeLimit(uint32 seconds);
-    void setWipeTime(uint32 seconds);
-    void setRecord(std::string const& name, uint32 seconds);
-    void setStatus(uint8 status);
-    void setLocalVar(std::string const& name, uint64_t value);
-    bool loadMobs();
-    bool spawnLoot(sol::object const& PEntityObj);
-    auto insertEntity(uint16 targid, bool ally, bool inBattlefield) -> std::optional<CLuaBaseEntity>;
-    bool cleanup(bool cleanup);
-    void win();
-    void lose();
-    void addGroups(sol::table groups);
+    void  setLastTimeUpdate(uint32 seconds);
+    void  setTimeLimit(uint32 seconds);
+    void  setWipeTime(uint32 seconds);
+    void  setRecord(std::string const& name, uint32 seconds);
+    void  setStatus(uint8 status);
+    void  setLocalVar(std::string const& name, uint64_t value);
+    bool  loadMobs();
+    bool  spawnLoot(sol::object const& PEntityObj);
+    auto  insertEntity(uint16 targid, bool ally, bool inBattlefield) -> std::optional<CLuaBaseEntity>;
+    bool  cleanup(bool cleanup);
+    void  win();
+    void  lose();
 
     static void Register();
 };

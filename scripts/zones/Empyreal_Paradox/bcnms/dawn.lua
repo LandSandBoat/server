@@ -15,7 +15,6 @@ local battlefield_object = {}
 
 battlefield_object.onBattlefieldInitialise = function(battlefield)
     battlefield:setLocalVar("phaseChange", 1)
-    battlefield:setLocalVar("instantKick", 1)
     local baseID = ID.mob.PROMATHIA_OFFSET + (battlefield:getArea() - 1) * 2
     local pos = GetMobByID(baseID):getSpawnPos()
 

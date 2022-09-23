@@ -30,17 +30,12 @@
 #include "../entities/mobentity.h"
 #include "../modifier.h"
 
-struct ModsList_t
+typedef struct
 {
     uint32                  id;
     std::vector<CModifier*> mods;
     std::vector<CModifier*> mobMods;
-
-    ModsList_t()
-    {
-        id = 0;
-    }
-};
+} ModsList_t;
 
 enum class WeaknessType
 {

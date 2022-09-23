@@ -20,9 +20,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "status_effects.h"
+#include "common/timer.h"
 #include "../entities/charentity.h"
 #include "../status_effect_container.h"
-#include "common/timer.h"
 
 CStatusEffectPacket::CStatusEffectPacket(CCharEntity* PChar)
 {
@@ -36,9 +36,7 @@ CStatusEffectPacket::CStatusEffectPacket(CCharEntity* PChar)
     ref<uint8>(0x04) = 0x09;
     ref<uint8>(0x06) = 0xC4;
 
-    // clang-format off
-    PChar->StatusEffectContainer->ForEachEffect([this, &i](CStatusEffect* PEffect)
-    {
+    PChar->StatusEffectContainer->ForEachEffect([this, &i](CStatusEffect* PEffect) {
         if (PEffect->GetIcon() != 0)
         {
             ref<uint16>(0x08 + (i * 0x02)) = PEffect->GetIcon();
@@ -54,5 +52,4 @@ CStatusEffectPacket::CStatusEffectPacket(CCharEntity* PChar)
             ++i;
         }
     });
-    // clang-format on
 }

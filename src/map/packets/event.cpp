@@ -31,24 +31,19 @@ CEventPacket::CEventPacket(CCharEntity* PChar, EventInfo* eventInfo)
     this->setType(0x32);
     this->setSize(0x14);
 
-    uint32       npcServerID = 0;
-    uint32       npcLocalID  = 0;
-    CBaseEntity* PNpc        = eventInfo->targetEntity;
-
+    uint32 npcID = 0;
+    auto*  PNpc  = eventInfo->targetEntity;
     if (PNpc)
     {
-        npcServerID = PNpc->id;
-        npcLocalID  = PNpc->targid;
+        npcID = PNpc->id;
     }
     else
     {
         // Fallback to our own CharID because giving a value
         // of zero makes the game hang.
-        npcServerID = PChar->id;
-        npcLocalID  = PChar->targid;
+        npcID = PChar->id;
     }
-
-    ref<uint32>(0x04) = npcServerID;
+    ref<uint32>(0x04) = npcID;
 
     if (eventInfo->params.size() > 0 || eventInfo->textTable != -1)
     {
@@ -64,7 +59,7 @@ CEventPacket::CEventPacket(CCharEntity* PChar, EventInfo* eventInfo)
             }
         }
 
-        ref<uint16>(0x28) = npcLocalID;
+        ref<uint16>(0x28) = PChar->m_TargID;
 
         ref<uint16>(0x2A) = PChar->getZone();
         if (eventInfo->textTable != -1)
@@ -77,11 +72,11 @@ CEventPacket::CEventPacket(CCharEntity* PChar, EventInfo* eventInfo)
         }
 
         ref<uint16>(0x2C) = eventInfo->eventId;
-        ref<uint8>(0x2E)  = 8; // if the parameter is less than 8, then after the event is over the camera will "jump" behind the character
+        ref<uint8>(0x2E)  = 8; // если патаметров меньше, чем 8, то после завершения события камера "прыгнет" за спину персонажу
     }
     else
     {
-        ref<uint16>(0x08) = npcLocalID;
+        ref<uint16>(0x08) = PChar->targid;
         ref<uint16>(0x0C) = eventInfo->eventId;
 
         ref<uint16>(0x0A) = PChar->getZone();

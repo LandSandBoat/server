@@ -36,7 +36,13 @@ enum TREASUREPOOLTYPE
 
 #define TREASUREPOOL_SIZE 10
 
-// characters get a new TreasurePool when moving between zones
+/************************************************************************
+ *																		*
+ *  Для совместимости с кластерной системой, персонаж получает новый		*
+ *  TreasurePool при переходе между зонами								*
+ *																		*
+ ************************************************************************/
+
 class CCharEntity;
 class CMobEntity;
 
@@ -44,12 +50,6 @@ struct LotInfo
 {
     uint16       lot;
     CCharEntity* member;
-
-    LotInfo()
-    {
-        lot    = 0;
-        member = nullptr;
-    }
 };
 
 struct TreasurePoolItem
@@ -59,12 +59,6 @@ struct TreasurePoolItem
     time_point TimeStamp;
 
     std::vector<LotInfo> Lotters;
-
-    TreasurePoolItem()
-    {
-        ID     = 0;
-        SlotID = 0;
-    }
 };
 
 class CTreasurePool

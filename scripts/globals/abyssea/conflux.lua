@@ -28,8 +28,7 @@ local zoneMaskID =
 local confluxData =
 {
     [xi.zone.ABYSSEA_KONSCHTAT] =
-    {
-    --   NPC Name                   Bit, CSID,   Cruor Costs
+    {--  NPC Name                   Bit, CSID,   Cruor Costs
         ['Veridical_Conflux_#01'] = { 0, 2132, { 50, 100, 150, 200, 250, 300, 350, 400 } },
         ['Veridical_Conflux_#02'] = { 1, 2133, { 50, 100, 150, 200, 250, 300, 350, 400 } },
         ['Veridical_Conflux_#03'] = { 2, 2134, { 50, 100, 150, 200, 250, 300, 350, 400 } },
@@ -41,8 +40,7 @@ local confluxData =
     },
 
     [xi.zone.ABYSSEA_TAHRONGI] =
-    {
-    --   NPC Name                   Bit, CSID,   Cruor Costs
+    {--  NPC Name                   Bit, CSID,   Cruor Costs
         ['Veridical_Conflux_#01'] = { 0, 2132, { 50, 100, 150, 200, 250, 300, 350, 400 } },
         ['Veridical_Conflux_#02'] = { 1, 2133, { 50, 100, 150, 200, 250, 300, 350, 400 } },
         ['Veridical_Conflux_#03'] = { 2, 2134, { 50, 100, 150, 200, 250, 300, 350, 400 } },
@@ -54,8 +52,7 @@ local confluxData =
     },
 
     [xi.zone.ABYSSEA_LA_THEINE] =
-    {
-    --   NPC Name                   Bit, CSID,   Cruor Costs
+    {--  NPC Name                   Bit, CSID,   Cruor Costs
         ['Veridical_Conflux_#01'] = { 0, 2132, { 50, 100, 150, 200, 250, 300, 350, 400 } },
         ['Veridical_Conflux_#02'] = { 1, 2133, { 50, 100, 150, 200, 250, 300, 350, 400 } },
         ['Veridical_Conflux_#03'] = { 2, 2134, { 50, 100, 150, 200, 250, 300, 350, 400 } },
@@ -67,8 +64,7 @@ local confluxData =
     },
 
     [xi.zone.ABYSSEA_ATTOHWA] =
-    {
-    --   NPC Name                   Bit, CSID,   Cruor Costs
+    {--  NPC Name                   Bit, CSID,   Cruor Costs
         ['Veridical_Conflux_#01'] = { 0, 2132, { 200, 400, 600, 800, 1000, 1200, 1400, 1600 } },
         ['Veridical_Conflux_#02'] = { 1, 2133, { 200, 400, 600, 800, 1000, 1200, 1400, 1600 } },
         ['Veridical_Conflux_#03'] = { 2, 2134, { 200, 400, 600, 800, 1000, 1200, 1400, 1600 } },
@@ -81,8 +77,7 @@ local confluxData =
     },
 
     [xi.zone.ABYSSEA_MISAREAUX] =
-    {
-    --   NPC Name                   Bit, CSID,   Cruor Costs
+    {--  NPC Name                   Bit, CSID,   Cruor Costs
         ['Veridical_Conflux_#01'] = { 0, 2132, { 200, 400, 600, 800, 1000, 1200, 1400, 1600 } },
         ['Veridical_Conflux_#02'] = { 1, 2133, { 200, 400, 600, 800, 1000, 1200, 1400, 1600 } },
         ['Veridical_Conflux_#03'] = { 2, 2134, { 200, 400, 600, 800, 1000, 1200, 1400, 1600 } },
@@ -95,8 +90,7 @@ local confluxData =
     },
 
     [xi.zone.ABYSSEA_VUNKERL] =
-    {
-    --   NPC Name                   Bit, CSID,   Cruor Costs
+    {--  NPC Name                   Bit, CSID,   Cruor Costs
         ['Veridical_Conflux_#01'] = { 0, 2132, { 200, 400, 600, 800, 1000, 1200, 1400, 1600 } },
         ['Veridical_Conflux_#02'] = { 1, 2133, { 200, 400, 600, 800, 1000, 1200, 1400, 1600 } },
         ['Veridical_Conflux_#03'] = { 2, 2134, { 200, 400, 600, 800, 1000, 1200, 1400, 1600 } },
@@ -109,8 +103,7 @@ local confluxData =
     },
 
     [xi.zone.ABYSSEA_ALTEPA] =
-    {
-    --   NPC Name                   Bit, CSID,   Cruor Costs
+    {--  NPC Name                   Bit, CSID,   Cruor Costs
         ['Veridical_Conflux_#01'] = { 0, 2132, { 600, 800, 1000, 1200, 1400, 1600, 1800, 2000 } },
         ['Veridical_Conflux_#02'] = { 1, 2133, { 600, 800, 1000, 1200, 1400, 1600, 1800, 2000 } },
         ['Veridical_Conflux_#03'] = { 2, 2134, { 600, 800, 1000, 1200, 1400, 1600, 1800, 2000 } },
@@ -122,8 +115,7 @@ local confluxData =
     },
 
     [xi.zone.ABYSSEA_ULEGUERAND] =
-    {
-    --   NPC Name                   Bit, CSID,   Cruor Costs
+    {--  NPC Name                   Bit, CSID,   Cruor Costs
         ['Veridical_Conflux_#01'] = { 0, 2132, { 600, 800, 1000, 1200, 1400, 1600, 1800, 2000 } },
         ['Veridical_Conflux_#02'] = { 1, 2133, { 600, 800, 1000, 1200, 1400, 1600, 1800, 2000 } },
         ['Veridical_Conflux_#03'] = { 2, 2134, { 600, 800, 1000, 1200, 1400, 1600, 1800, 2000 } },
@@ -135,8 +127,7 @@ local confluxData =
     },
 
     [xi.zone.ABYSSEA_GRAUBERG] =
-    {
-    --   NPC Name                   Bit, CSID,   Cruor Costs
+    {--  NPC Name                   Bit, CSID,   Cruor Costs
         ['Veridical_Conflux_#01'] = { 0, 2132, { 600, 800, 1000, 1200, 1400, 1600, 1800, 2000 } },
         ['Veridical_Conflux_#02'] = { 1, 2133, { 600, 800, 1000, 1200, 1400, 1600, 1800, 2000 } },
         ['Veridical_Conflux_#03'] = { 2, 2134, { 600, 800, 1000, 1200, 1400, 1600, 1800, 2000 } },
@@ -199,7 +190,7 @@ xi.conflux.confluxOnTrigger = function(player, npc)
         maskOffset >= 3 and
         maskOffset <= 5
     then
-        activatedMask = utils.mask.setBit(activatedMask, 8, true)
+		activatedMask = utils.mask.setBit(activatedMask, 8, true)
     end
 
     local p2, p3, p4, p5 = unpack(packCostParameters(confluxInfo[3]))

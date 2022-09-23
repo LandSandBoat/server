@@ -61,7 +61,6 @@ if(MSVC)
         # /Ob2 # Inline Function Expansion
         /Oy- # Frame-Pointer Omission
         /MP # Build with Multiple Processes
-        /bigobj # Allow bigger .obj files, which we have from mainly the sol templating
     )
 
     if(CMAKE_CONFIGURATION_TYPES STREQUAL Debug)

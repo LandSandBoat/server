@@ -4,24 +4,13 @@
 -- TODO: messages should be zone-wide
 -----------------------------------
 local ID = require("scripts/zones/Monastic_Cavern/IDs")
-mixins = { require("scripts/mixins/job_special") }
+mixins = {require("scripts/mixins/job_special")}
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 
-entity.onMobInitialize = function(mob)
-    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
-    mob:setMod(xi.mod.SLEEPRES, 90)
-    mob:setMod(xi.mod.PARALYZERES, 75)
-    mob:setMod(xi.mod.SILENCERES, 75)
-end
-
 entity.onMobEngaged = function(mob, target)
     mob:showText(mob, ID.text.ORC_KING_ENGAGE)
-end
-
-entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.TP_DRAIN, { chance = 35, power = math.random(95, 135) })
 end
 
 entity.onMobDeath = function(mob, player, isKiller)

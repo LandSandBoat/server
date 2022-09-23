@@ -21,7 +21,7 @@
 time_point start_time;
 
 /*----------------------------
- *  Get tick time
+ * 	Get tick time
  *----------------------------*/
 
 #if defined(ENABLE_RDTSC)
@@ -29,7 +29,6 @@ static uint64 RDTSC_BEGINTICK = 0, RDTSC_CLOCK = 0;
 
 static __inline uint64 _rdtsc()
 {
-    // clang-format off
     register union
     {
         uint64 qw;
@@ -37,7 +36,6 @@ static __inline uint64 _rdtsc()
     } t;
 
     asm volatile("rdtsc" : "=a"(t.dw[0]), "=d"(t.dw[1]));
-    // clang-format on
 
     return t.qw;
 }
@@ -47,7 +45,7 @@ static void rdtsc_calibrate()
     uint64 t1, t2;
     int32  i;
 
-    ShowInfo("Calibrating Timer Source, please wait... ");
+    ShowStatus("Calibrating Timer Source, please wait... ");
 
     RDTSC_CLOCK = 0;
 
@@ -62,7 +60,7 @@ static void rdtsc_calibrate()
 
     RDTSC_BEGINTICK = _rdtsc();
 
-    ShowInfo(" done. (Frequency: %u Mhz)", (uint32)(RDTSC_CLOCK / 1000));
+    ShowMessage(" done. (Frequency: %u Mhz)", (uint32)(RDTSC_CLOCK / 1000));
 }
 #endif
 
@@ -75,7 +73,7 @@ static uint32 tick()
     //
     return (uint32)((_rdtsc() - RDTSC_BEGINTICK) / RDTSC_CLOCK);
     //
-#elif (defined(_POSIX_TIMERS) && _POSIX_TIMERS > 0 && defined(_POSIX_MONOTONIC_CLOCK) /* posix compliant */) || \
+#elif (defined(_POSIX_TIMERS) && _POSIX_TIMERS > 0 && defined(_POSIX_MONOTONIC_CLOCK) /* posix compliant */) ||                                                \
     (defined(__FreeBSD_cc_version) && __FreeBSD_cc_version >= 500005 /* FreeBSD >= 5.1.0 */)
     struct timespec tval;
     clock_gettime(CLOCK_MONOTONIC, &tval);

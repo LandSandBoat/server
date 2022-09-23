@@ -7,27 +7,20 @@
 -- Duration: 720 min
 -- Max bonus: 15000 exp
 -----------------------------------
-require("scripts/globals/msg")
 require("scripts/globals/status")
-require("scripts/globals/item_utils")
 -----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)
     local result = 0
     if target:hasStatusEffect(xi.effect.DEDICATION) then
-        result = xi.msg.basic.ITEM_UNABLE_TO_USE_2
+        result = 56
     end
     return result
 end
 
 item_object.onItemUse = function(target)
-    local effect    = xi.effect.DEDICATION
-    local power     = 50
-    local duration  = 43200
-    local subpower  = 15000
-
-    xi.item_utils.addItemExpEffect(target, effect, power, duration, subpower)
+    target:addStatusEffect(xi.effect.DEDICATION, 50, 0, 43200, 0, 15000)
 end
 
 return item_object

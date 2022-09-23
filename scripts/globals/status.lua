@@ -84,7 +84,7 @@ xi.race =
 xi.status =
 {
     NORMAL          =  0,
-    MOB             =  1,
+    UPDATE          =  1,
     DISAPPEAR       =  2,
     INVISIBLE       =  3,
     STATUS_4        =  4,
@@ -774,7 +774,7 @@ xi.effect =
     NEGATE_VIRUS             = 608,
     NEGATE_CURSE             = 609,
     NEGATE_CHARM             = 610,
-    MAGIC_EVASION_BOOST      = 611,
+    MAGIC_EVASION_BOOST_II   = 611,
     COLURE_ACTIVE            = 612,
     MUMORS_RADIANCE          = 613,
     ULLEGORES_GLOOM          = 614,
@@ -793,8 +793,6 @@ xi.effect =
     MOBILIZATION             = 627,
     HOVER_SHOT               = 628,
     MOOGLE_AMPLIFIER         = 629,
-    TAINT                    = 630,
-    HAUNT                    = 631,
 
     -- Effect icons in packet can go from 0-767, so no custom effects should go in that range.
 
@@ -839,11 +837,9 @@ xi.effect =
     MEDITATE                 = 801, -- Dummy effect for SAM Meditate JA
     ELEMENTALRES_DOWN        = 802, -- Elemental resistance down
     FULL_SPEED_AHEAD         = 803, -- Helper for quest: Full Speed Ahead!
-    HYSTERIA                 = 804, -- Used for Hysteroanima to stop after readying a weaponskill with no msg.
-    TOMAHAWK                 = 805, -- Silent status effect inflicted by a Warrior using the "Tomahawk" job ability
-    -- PLACEHOLDER           = 806, -- Description
-    -- 806-1022
-    -- PLACEHOLDER           = 1023 -- The client dat file seems to have only this many "slots", results of exceeding that are untested.
+    -- PLACEHOLDER           = 804, -- Description
+    -- 804-1022
+    -- PLACEHOLDER             = 1023 -- The client dat file seems to have only this many "slots", results of exceeding that are untested.
 }
 
 -----------------------------------
@@ -937,14 +933,14 @@ xi.mod =
     INT                             = 12,
     MND                             = 13,
     CHR                             = 14,
-    FIRE_MEVA                       = 15,
-    ICE_MEVA                        = 16,
-    WIND_MEVA                       = 17,
-    EARTH_MEVA                      = 18,
-    THUNDER_MEVA                    = 19,
-    WATER_MEVA                      = 20,
-    LIGHT_MEVA                      = 21,
-    DARK_MEVA                       = 22,
+    FIRE_RES                        = 15,
+    ICE_RES                         = 16,
+    WIND_RES                        = 17,
+    EARTH_RES                       = 18,
+    THUNDER_RES                     = 19,
+    WATER_RES                       = 20,
+    LIGHT_RES                       = 21,
+    DARK_RES                        = 22,
     ATT                             = 23,
     RATT                            = 24,
     ACC                             = 25,
@@ -953,7 +949,7 @@ xi.mod =
     ENMITY_LOSS_REDUCTION           = 427,
     MATT                            = 28,
     MDEF                            = 29,
-    MACC                            = 30, -- This is NOT item level "magic accuracy skill" ! That happens in item_weapon.sql instead
+    MACC                            = 30,
     MEVA                            = 31,
     FIREATT                         = 32,
     ICEATT                          = 33,
@@ -995,8 +991,6 @@ xi.mod =
     MPHEAL                          = 71,
     HPHEAL                          = 72,
     STORETP                         = 73,
-
-    -- These are NOT item Level skill, they are skill in your status menu. iLvl "skill" happens in item_weapon.sql
     HTH                             = 80,
     DAGGER                          = 81,
     SWORD                           = 82,
@@ -1009,7 +1003,6 @@ xi.mod =
     GKATANA                         = 89,
     CLUB                            = 90,
     STAFF                           = 91,
-
     RAMPART_DURATION                = 92,  -- Rampart duration in seconds
     FLEE_DURATION                   = 93,  -- Flee duration in seconds
     MEDITATE_DURATION               = 94,  -- Meditate duration in seconds
@@ -1019,8 +1012,6 @@ xi.mod =
     STALWART_SOUL                   = 907, -- Reduces damage taken from Souleater
     BOOST_EFFECT                    = 97,  -- Boost power in tenths
     CAMOUFLAGE_DURATION             = 98,  -- Camouflage duration in percents
-
-    -- These are NOT item Level skill, they are skill in your status menu. iLvl "skill" happens in item_weapon.sql
     AUTO_MELEE_SKILL                = 101,
     AUTO_RANGED_SKILL               = 102,
     AUTO_MAGIC_SKILL                = 103,
@@ -1158,7 +1149,6 @@ xi.mod =
     MIJIN_RERAISE                   = 258,
     DUAL_WIELD                      = 259,
     DOUBLE_ATTACK                   = 288,
-    DOUBLE_ATTACK_DMG               = 1038, -- Increases "Double Attack" damage/"Double Attack" damage + (in percents, e.g. +20 = +20% damage)
     SUBTLE_BLOW                     = 289,
     SUBTLE_BLOW_II                  = 973, -- Subtle Blow II Effect (Cap 50%) Total Effect (SB + SB_II cap 75%)
     ENF_MAG_POTENCY                 = 290, -- Increases Enfeebling magic potency %
@@ -1176,10 +1166,7 @@ xi.mod =
     STONESKIN                       = 300,
     PHALANX                         = 301,
     TRIPLE_ATTACK                   = 302,
-    TRIPLE_ATTACK_DMG               = 1039, -- Increases "Triple Attack" damage/"Triple Attack" damage + (in percents, e.g. +20 = +20% damage)
     TREASURE_HUNTER                 = 303,
-    TREASURE_HUNTER_PROC            = 1048, -- TODO: Increases Treasure Hunter proc rate (percent)
-    TREASURE_HUNTER_CAP             = 1049, -- TODO: Increases the Treasure Hunter Cap (e.g. THF JP Gift)
     TAME                            = 304,
     RECYCLE                         = 305,
     ZANSHIN                         = 306,
@@ -1235,25 +1222,6 @@ xi.mod =
     SPIKES_DMG                      = 344,
     TP_BONUS                        = 345,
     PERPETUATION_REDUCTION          = 346,
-
-    -- Warrior
-    BERSERK_POTENCY                 = 948,  -- Augments "Berserk"/Enhances "Berserk" effect (Conqueror)
-    BERSERK_DURATION                = 954,  -- Berserk Duration
-    AGGRESSOR_DURATION              = 955,  -- Aggressor Duration
-    DEFENDER_DURATION               = 956,  -- Defender Duration
-    ENHANCES_RESTRAINT              = 1045, -- Enhances "Restraint" effect/"Restraint" + (Increases the damage bonus of Restraint by XXX%)
-    ENHANCES_BLOOD_RAGE             = 1046, -- Enhances "Blood Rage" effect/"Blood Rage" duration +
-
-    -- Dragoon
-    WYVERN_LVL_BONUS                = 1043, -- Wyvern: Lv.+ (Increases wyvern's base level above 99)
-
-    -- Summoner
-    AVATAR_LVL_BONUS                = 1040, -- Avatar: Lv. ###/+ (Increases all avatar's base level above 99)
-    CARBUNCLE_LVL_BONUS             = 1041, -- Carbuncle: Lv.+ (Increases Carbuncle's base level above 99)
-    CAIT_SITH_LVL_BONUS             = 1042, -- Cait Sith: Lv.+ (Increases Cait Sith's base level above 99)
-
-    -- Puppetmaster
-    AUTOMATON_LVL_BONUS             = 1044, -- Automaton: Lv. (Increases automaton's base level above 99)
 
     -- Geomancer
     FULL_CIRCLE                     = 1025, -- Increases the initial multiplier on MP returned via Full Circle
@@ -1333,7 +1301,6 @@ xi.mod =
     CURE_POTENCY                    = 374,
     CURE_POTENCY_II                 = 260, -- % cure potency II | bonus from gear is capped at 30
     CURE_POTENCY_RCVD               = 375,
-    CURE_POTENCY_BONUS              = 1051, -- TODO: Increases amount healed by Cure spells (fixed amount)
     RANGED_DMG_RATING               = 376,
     DELAYP                          = 380,
     RANGED_DELAYP                   = 381,
@@ -1369,8 +1336,8 @@ xi.mod =
     MAGIC_DAMAGE                    = 311, --  Magic damage added directly to the spell's base damage
 
     -- Gear set modifiers
-    DA_DOUBLE_DMG_RATE              = 408,  -- Double attack's double damage chance %.
-    TA_TRIPLE_DMG_RATE              = 409,  -- Triple attack's triple damage chance %.
+    DA_DOUBLE_DAMAGE                = 408,  -- Double attack's double damage chance %.
+    TA_TRIPLE_DAMAGE                = 409,  -- Triple attack's triple damage chance %.
     ZANSHIN_DOUBLE_DAMAGE           = 410,  -- Zanshin's double damage chance %.
     RAPID_SHOT_DOUBLE_DAMAGE        = 479,  -- Rapid shot's double damage chance %.
     ABSORB_DMG_CHANCE               = 480,  -- Chance to absorb damage %
@@ -1425,8 +1392,6 @@ xi.mod =
     MAXIMUM_SONGS_BONUS             = 453, --
     SONG_DURATION_BONUS             = 454, --
     SONG_SPELLCASTING_TIME          = 455, --
-
-    AVATARS_FAVOR_ENHANCE           = 630, -- Adds 1 rank to avatars favor
 
     QUICK_DRAW_DMG                  = 411, --
     QUICK_DRAW_MACC                 = 191, -- Quick draw magic accuracy
@@ -1501,11 +1466,10 @@ xi.mod =
     EAT_RAW_FISH                    = 412, --
     EAT_RAW_MEAT                    = 413, --
 
-    ENHANCES_CURSNA_RCVD            = 67,   -- Potency of "Cursna" effects received
-    ENHANCES_CURSNA                 = 310,  -- Raises success rate of Cursna when removing effect (like Doom) that are not 100% chance to remove
-    ENHANCES_HOLYWATER              = 495,  -- Used by gear with the "Enhances Holy Water" or "Holy Water+" attribute
-    ENHANCES_PROT_SHELL_RCVD        = 977,  -- Enhances Protect and Shell Effects Received (Binary MOD)
-    ENHANCES_PROT_RCVD              = 1050, -- TODO: Enhances Protect Received (Percent)
+    ENHANCES_CURSNA_RCVD            = 67,  -- Potency of "Cursna" effects received
+    ENHANCES_CURSNA                 = 310, -- Raises success rate of Cursna when removing effect (like Doom) that are not 100% chance to remove
+    ENHANCES_HOLYWATER              = 495, -- Used by gear with the "Enhances Holy Water" or "Holy Water+" attribute
+    ENHANCES_PROT_SHELL_RCVD        = 977, -- Enhances Protect and Shell Effects Received (Binary MOD)
 
     RETALIATION                     = 414, -- Increases damage of Retaliation hits
     THIRD_EYE_COUNTER_RATE          = 508, -- Adds counter to 3rd eye anticipates & if using Seigan counter rate is increased by 15%
@@ -1656,12 +1620,15 @@ xi.mod =
     SMITE                           = 898, -- Att increase with H2H or 2H weapons
     TACTICAL_GUARD                  = 899, -- Tp gain increase when guarding
     GUARD_PERCENT                   = 976, -- Guard Percent
-    COUNTER_DAMAGE                  = 1047, -- TODO: Increases Damage from Counter Attacks (Percent)
     FENCER_TP_BONUS                 = 903, -- TP Bonus to weapon skills from Fencer Trait
     FENCER_CRITHITRATE              = 904, -- Increased Crit chance from Fencer Trait
     SHIELD_DEF_BONUS                = 905, -- Shield Defense Bonus
     SNEAK_DURATION                  = 946, -- Additional duration in seconds
     INVISIBLE_DURATION              = 947, -- Additional duration in seconds
+    BERSERK_EFFECT                  = 948, -- Conqueror Berserk Effect
+    BERSERK_DURATION                = 954, -- Berserk Duration
+    AGGRESSOR_DURATION              = 955, -- Aggressor Duration
+    DEFENDER_DURATION               = 956, -- Defender Duration
     CARDINAL_CHANT                  = 959,
     INDI_DURATION                   = 960,
     GEOMANCY_BONUS                  = 961, -- Used to increase potency of "Geomancy +" items (only the highest value is counted)
@@ -1687,7 +1654,6 @@ xi.mod =
     PENGUIN_RING_EFFECT   = 152, -- +2 on fishing arrow delay / fish movement for mini - game
     ALBATROSS_RING_EFFECT = 153, -- adds 30 seconds to mini - game time
     PELICAN_RING_EFFECT   = 154, -- adds extra skillup roll for fishing
-    FISHING_SKILL_GAIN    = 155, -- food increase for fishing skill ups
 
     MAIN_DMG_RANK                = 377, -- adds weapon rank to main weapon http://wiki.bluegartr.com/bg/Weapon_Rank
     SUB_DMG_RANK                 = 378, -- adds weapon rank to sub weapon
@@ -1717,17 +1683,6 @@ xi.mod =
     AUGMENT_BLOOD_BOON     = 1035, -- Percent chance to deal extra damage based on Blood Boon Amount (SMN AF3 Sets)
     AUGMENT_BLU_MAGIC      = 1036, -- Percent chance for BLU magic to receive 3x WSC value for spell (BLU AF3 Sets)
     GEOMANCY_MP_NO_DEPLETE = 1037, -- Percent chance for Geomancy to cost 0 MP (GEO AF3 Sets)
-
-    -- Job Point Gifts
-    SIC_READY_RECAST        = 1052, -- TODO: SIC/Ready recast reduction (seconds)
-    TRUE_SHOT_EFFECT        = 1053, -- TODO: True Shot Ranged Damage increase (percent)
-    DEAD_AIM_EFFECT         = 1054, -- TODO: Dead Aim Critical Damage increase (percent)
-    THIRD_EYE_BONUS         = 1055, -- TODO: Bonus Third Eye Evasions (count)
-    WYVERN_ATTRIBUTE_DA     = 1056, -- TODO: Adds an amount of Double Attack to Dragoon each time Wyverns Attributes Increase (percent)
-    DRAGOON_BREATH_RECAST   = 1057, -- TODO: Restoring/Smithing Breath Recast Reduction (seconds)
-    BLUE_JOB_TRAIT_BONUS    = 1058, -- TODO: Increases job traits gained from equipped blue magic (percent)
-    BLUE_MAGIC_EFFECT       = 1059, -- TODO: Bonus to Attribute Value of spell (percent)
-    QUICK_DRAW_RECAST       = 1060, -- TODO: Quick Draw Charge Reduction (seconds)
 
     -- IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN src/map/modifier.h ASWELL!
 
@@ -2443,10 +2398,10 @@ xi.mobMod =
     SPELL_LIST          = 27, -- set spell list
     EXP_BONUS           = 28, -- bonus exp (bonus / 100) negative values reduce exp.
     ASSIST              = 29, -- mobs will assist me
-    SPECIAL_SKILL       = 30, -- give special skill (example: Gigas boulder ranged attack)
+    SPECIAL_SKILL       = 30, -- give special skill
     ROAM_DISTANCE       = 31, -- distance allowed to roam from spawn
-    DONT_ROAM_HOME      = 32, -- Allow mobs to roam any distance from spawn. Useful for mobs with scripted roaming behavior.
-    SPECIAL_COOL        = 33, -- cool down for special (example: Time between Gigas boulder ranged attacks)
+    -- 32 Available for use
+    SPECIAL_COOL        = 33, -- cool down for special
     MAGIC_COOL          = 34, -- cool down for magic
     STANDBACK_COOL      = 35, -- cool down time for standing back (casting spell while not in attack range)
     ROAM_COOL           = 36, -- cool down time in seconds after roaming
@@ -2463,7 +2418,7 @@ xi.mobMod =
     SPAWN_LEASH         = 47, -- forces a mob to not move farther from its spawn than its leash distance
     SHARE_TARGET        = 48, -- mob always targets same target as ID in this var
     CHECK_AS_NM         = 49, -- If set, a mob will check as a NM.
-    ROAM_RESET_FACING   = 50, -- Resume facing the default spawn rotation after roaming home.
+    -- 50 Available for use
     ROAM_TURNS          = 51, -- Maximum amount of turns during a roam
     ROAM_RATE           = 52, -- Roaming frequency. roam_cool - rand(roam_cool / (roam_rate / 10))
     BEHAVIOR            = 53, -- Add behaviors to mob
@@ -2484,7 +2439,6 @@ xi.mobMod =
     ALLI_HATE           = 68, -- Range around target to add alliance member to enmity list.
     NO_LINK             = 69, -- If set, mob cannot link until unset.
     NO_REST             = 70, -- Mob cannot regain hp (e.g. re-burrowing antlions during ENM).
-    LEADER              = 71, -- Used for mobs that follow a defined "leader", such as Ul'xzomit mobs.
 }
 
 -----------------------------------
@@ -2708,44 +2662,43 @@ xi.recast =
 
 xi.action =
 {
-    NONE                  = 0,
-    ATTACK                = 1,
-    RANGED_FINISH         = 2,
-    WEAPONSKILL_FINISH    = 3,
-    MAGIC_FINISH          = 4,
-    ITEM_FINISH           = 5,
-    JOBABILITY_FINISH     = 6,
-    WEAPONSKILL_START     = 7,
-    MAGIC_START           = 8,
-    ITEM_START            = 9,
-    JOBABILITY_START      = 10,
-    MOBABILITY_FINISH     = 11,
-    RANGED_START          = 12,
-    PET_MOBABILITY_FINISH = 13,
-    DANCE                 = 14,
-    RUN_WARD_EFFUSION     = 15,
-    ROAMING               = 16,
-    ENGAGE                = 17,
-    DISENGAGE             = 18,
-    CHANGE_TARGET         = 19,
-    FALL                  = 20,
-    DROPITEMS             = 21,
-    DEATH                 = 22,
-    FADE_OUT              = 23,
-    DESPAWN               = 24,
-    SPAWN                 = 25,
-    STUN                  = 26,
-    SLEEP                 = 27,
-    ITEM_USING            = 28,
-    ITEM_INTERRUPT        = 29,
-    MAGIC_CASTING         = 30,
-    MAGIC_INTERRUPT       = 31,
-    RANGED_INTERRUPT      = 32,
-    MOBABILITY_START      = 33,
-    MOBABILITY_USING      = 34,
-    MOBABILITY_INTERRUPT  = 35,
-    LEAVE                 = 36,
-    RAISE_MENU_SELECTION  = 37,
+    NONE                 = 0,
+    ATTACK               = 1,
+    RANGED_FINISH        = 2,
+    WEAPONSKILL_FINISH   = 3,
+    MAGIC_FINISH         = 4,
+    ITEM_FINISH          = 5,
+    JOBABILITY_FINISH    = 6,
+    WEAPONSKILL_START    = 7,
+    MAGIC_START          = 8,
+    ITEM_START           = 9,
+    JOBABILITY_START     = 10,
+    MOBABILITY_FINISH    = 11,
+    RANGED_START         = 12,
+    RAISE_MENU_SELECTION = 13,
+    DANCE                = 14,
+    UNKNOWN_15           = 15,
+    ROAMING              = 16,
+    ENGAGE               = 17,
+    DISENGAGE            = 18,
+    CHANGE_TARGET        = 19,
+    FALL                 = 20,
+    DROPITEMS            = 21,
+    DEATH                = 22,
+    FADE_OUT             = 23,
+    DESPAWN              = 24,
+    SPAWN                = 25,
+    STUN                 = 26,
+    SLEEP                = 27,
+    ITEM_USING           = 28,
+    ITEM_INTERRUPT       = 29,
+    MAGIC_CASTING        = 30,
+    MAGIC_INTERRUPT      = 31,
+    RANGED_INTERRUPT     = 32,
+    MOBABILITY_START     = 33,
+    MOBABILITY_USING     = 34,
+    MOBABILITY_INTERRUPT = 35,
+    LEAVE                = 36,
 }
 xi.act = xi.action
 
@@ -2800,18 +2753,18 @@ xi.behavior =
 
 xi.roamFlag =
 {
-    NONE     = 0x000,
-    NONE0    = 0x001,
-    NONE1    = 0x002,
-    NONE2    = 0x004,
-    NONE3    = 0x008,
-    NONE4    = 0x010,
-    NONE5    = 0x020,
-    WORM     = 0x040, -- pop up and down when moving
-    AMBUSH   = 0x080, -- stays hidden until someone comes close (antlion)
-    SCRIPTED = 0x100, -- calls lua method for roaming logic
-    IGNORE   = 0x200, -- ignore all hate, except linking hate
-    STEALTH  = 0x400, -- stays name hidden and untargetable until someone comes close (chigoe)
+    NONE    = 0x000,
+    NONE0   = 0x001,
+    NONE1   = 0x002,
+    NONE2   = 0x004,
+    NONE3   = 0x008,
+    NONE4   = 0x010,
+    NONE5   = 0x020,
+    WORM    = 0x040, -- pop up and down when moving
+    AMBUSH  = 0x080, -- stays hidden until someone comes close (antlion)
+    EVENT   = 0x100, -- calls lua method for roaming logic
+    IGNORE  = 0x200, -- ignore all hate, except linking hate
+    STEALTH = 0x400, -- stays name hidden and untargetable until someone comes close (chigoe)
 }
 
 -----------------------------------
