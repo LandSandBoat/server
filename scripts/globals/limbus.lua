@@ -493,3 +493,143 @@ function xi.limbus.spawnRandomCrate(npc, battlefield, var, mask, canMimic)
         return
     end
 end
+
+-- TODO(jmcmorris)
+-- onTriggerEntryNpc
+-- onTradeEntryNpc
+-- onEventUpdateEntryNpc
+-- alreadyEngaged
+
+function xi.limbus.enterBattlefield(player)
+
+    player:delKeyItem(xi.ki.COSMO_CLEANSE)
+    player:delKeyItem(xi.ki.BLACK_CARD)
+    player:setCharVar("Cosmo_Cleanse_TIME", os.time())
+end
+
+
+function xi.limbus.setupPaths(paths)
+    for mobId, path in pairs(paths) do
+        GetMobByID(mobId):pathThrough(path, xi.path.flag.PATROL)
+    end
+end
+
+function xi.limbus.showCrate(crateID)
+    local crate = GetNPCByID(crateID)
+    crate:setStatus(xi.status.NORMAL)
+    crate:setUntargetable(false)
+    crate:resetLocalVars()
+end
+
+function xi.limbus.showRecoverCrate(crateID)
+    local crate = GetMobByID(crateID)
+    crate:setAnimationSub(8)
+    crate:setStatus(xi.status.NORMAL)
+    crate:setUntargetable(false)
+    crate:resetLocalVars()
+end
+
+function xi.limbus.hideCrate(crate)
+    crate:setStatus(xi.status.DISAPPEAR)
+    crate:setUntargetable(true)
+    crate:resetLocalVars()
+end
+
+function xi.limbus.setupItemCrates(battlefield, crates, getLoot)
+    for i, crateID in ipairs(crates) do
+        local crate = GetNPCByID(crateID)
+        xi.limbus.hideCrate(crate)
+        crate:removeListener("TRIGGER_ITEM_CRATE")
+        crate:addListener("ON_TRIGGER", "TRIGGER_ITEM_CRATE", function(player, npc)
+            npcUtil.openCrate(npc, function()
+                xi.limbus.handleLootRolls(battlefield, getLoot(crateID), nil, npc)
+                if (npc:getLocalVar("win") == 1) then
+                    battlefield:setLocalVar("cutsceneTimer", 10)
+                    battlefield:setLocalVar("lootSeen", 1)
+                end
+            end)
+        end)
+    end
+end
+
+function xi.limbus.setupTimeCrates(crates)
+    for i, crateID in ipairs(crates) do
+        local crate = GetNPCByID(crateID)
+        xi.limbus.hideCrate(crate)
+        crate:removeListener("TRIGGER_TIME_CRATE")
+        crate:addListener("ON_TRIGGER", "TRIGGER_TIME_CRATE", function(player, npc)
+            if npc:getLocalVar("locked") == 1 then return end
+            npcUtil.openCrate(npc, function()
+                local ID = zones[npc:getZoneID()]
+                xi.limbus.extendTimeLimit(ID, player:getBattlefield(), ID.time_extensions[npc:getID()])
+            end)
+        end)
+    end
+end
+
+function xi.limbus.setupRecoverCrates(crates)
+    for i, crateID in ipairs(crates) do
+        local crate = GetMobByID(crateID)
+        xi.limbus.hideCrate(crate)
+        crate:removeListener("TRIGGER_RECOVER_CRATE")
+        crate:addListener("ON_TRIGGER", "TRIGGER_RECOVER_CRATE", function(player, npc)
+            npcUtil.openCrate(npc, function()
+                npc:useMobAbility(1531, player)
+            end)
+        end)
+    end
+end
+
+function xi.limbus.setupLootCrates(battlefield, crateID, getLoot)
+    local crate = GetNPCByID(crateID)
+    crate:removeListener("TRIGGER_LOOT_CRATE")
+    crate:addListener("ON_TRIGGER", "TRIGGER_LOOT_CRATE", function(player, npc)
+        npcUtil.openCrate(npc, function()
+            xi.limbus.handleLootRolls(battlefield, getLoot(crateID), nil, npc)
+            battlefield:setLocalVar("cutsceneTimer", 10)
+            battlefield:setLocalVar("lootSeen", 1)
+        end)
+    end)
+end
+
+function xi.limbus.setupCrates(battlefield, itemCrates, getLoot, timeCrates, recoverCrates, lootCrate)
+    xi.limbus.setupItemCrates(battlefield, itemCrates, getLoot)
+    xi.limbus.setupTimeCrates(timeCrates)
+    xi.limbus.setupRecoverCrates(recoverCrates)
+    xi.limbus.setupLootCrates(battlefield, lootCrate, getLoot)
+end
+
+function xi.limbus.spawnFrom(mob, crateID)
+    local crate = GetNPCByID(crateID)
+    crate:setPos(mob:getXPos(), mob:getYPos(), mob:getZPos(), mob:getRotPos())
+    crate:setStatus(xi.status.NORMAL)
+    crate:setUntargetable(false)
+    crate:AnimationSub(8)
+end
+
+function xi.limbus.spawnRecoverFrom(mob, crateID)
+    local crate = GetMobByID(crateID)
+    crate:setPos(mob:getXPos(), mob:getYPos(), mob:getZPos(), mob:getRotPos())
+    xi.limbus.showRecoverCrate(crateID)
+end
+
+function xi.limbus.openDoor(battlefield, doorID)
+    local door = GetNPCByID(doorID)
+    local ID = zones[door:getZoneID()]
+    local remaining = battlefield:getRemainingTime() / 60
+    for i, player in pairs(battlefield:getPlayers()) do
+        player:messageSpecial(ID.text.GATE_OPEN)
+        player:messageSpecial(ID.text.TIME_LEFT, remaining)
+    end
+    door:setAnimation(xi.animation.OPEN_DOOR)
+end
+
+function xi.limbus.extendTimeLimit(ID, battlefield, amount)
+    local timeLimit = battlefield:getTimeLimit()
+    battlefield:setTimeLimit(timeLimit + amount * 60)
+    local remaining = battlefield:getRemainingTime() / 60
+    for _, player in pairs(battlefield:getPlayers()) do
+        player:messageSpecial(ID.text.TIME_EXTENDED, amount)
+        player:messageSpecial(ID.text.TIME_LEFT, remaining)
+    end
+end

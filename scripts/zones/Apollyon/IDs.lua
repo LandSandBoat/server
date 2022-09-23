@@ -22,8 +22,8 @@ zones[xi.zone.APOLLYON] =
         CONDITION_FOR_LIMBUS          = 7066, -- You have clearance to enter Limbus, but cannot enter while you or a party member is engaged in battle.
         HUM                           = 7078, -- You hear a faint hum.
         NO_KEY                        = 7083, -- There are several six-sided indentations and a thin slot in the center of the circular dais here.
-        WIPE_KICK                     = 7358, -- All party members in Limbus have fallen in battle. Exiting now.
-        WIPE                          = 7366, -- All party members in Limbus have fallen in battle. Exiting in <number> [minute/minutes].
+        PARTY_WILL_BE_REMOVED_KICK    = 7358, -- All party members in Limbus have fallen in battle. Exiting now.
+        THE_PARTY_WILL_BE_REMOVED     = 7366, -- All party members in Limbus have fallen in battle. Exiting in <number> [minute/minutes].
         CHIP_TRADE                    = 7372, -- The light in the <item> has grown dim.
         TIME_EXTENDED                 = 7374, -- our time in Limbus has been extended <number> [minute/minutes].
         TIME_LEFT                     = 7375, -- ou have <number> [minute/minutes] left in Limbus.
@@ -142,13 +142,25 @@ zones[xi.zone.APOLLYON] =
             },
             [5] = 16932984,
         },
-        APOLLYON_SE_CRATE =
+        APOLLYON_SE_ITEM_CRATES =
+        {
+            16932991,
+            16933005,
+            16933019,
+        },
+        APOLLYON_SE_RECOVER_CRATES =
+        {
+            16932990,
+            16933004,
+            16933018,
+        },
+        APOLLYON_SE_TIME_CRATES =
         {
             16932989,
             16933003,
             16933017,
-            16933031,
         },
+        APOLLYON_SE_LOOT_CRATE = 16933031,
         APOLLYON_NE_CRATE =
         {
             [1] =
@@ -187,6 +199,39 @@ zones[xi.zone.APOLLYON] =
         },
         APOLLYON_CS_CRATE = 16933126,
         APOLLYON_CENTRAL_CRATE = 16933123,
+    },
+    time_extensions =
+    {
+        [16932866] = 10,
+        [16932879] = 10,
+        [16932897] = 10,
+        [16932935] = 5,
+        [16932945] = 5,
+        [16932946] = 5,
+        [16932948] = 5,
+        [16932958] = 5,
+        [16932959] = 5,
+        [16932961] = 5,
+        [16932971] = 5,
+        [16932972] = 5,
+        [16932974] = 5,
+        [16932975] = 5,
+        [16932982] = 5,
+        [16932989] = 10,
+        [16933003] = 10,
+        [16933017] = 10,
+        [16933042] = 5,
+        [16933043] = 5,
+        [16933054] = 5,
+        [16933060] = 5,
+        [16933074] = 5,
+        [16933075] = 5,
+        [16933077] = 5,
+        [16933079] = 5,
+        [16933080] = 5,
+        [16933097] = 5,
+        [16933110] = 5,
+        [16933111] = 5,
     },
 }
 

@@ -890,3 +890,26 @@ function npcUtil.castingAnimation(npc, magicType, phaseDuration, func)
         npcUtil.castingAnimation(npcArg, magicType, phaseDuration, func)
     end)
 end
+
+function npcUtil.disappearCrate(npc)
+    if npc:isNPC() then
+        npc:entityAnimationPacket("kesu")
+        npc:timer(3000, function(npc)
+            npc:untargetable(true)
+            npc:setStatus(xi.status.DISAPPEAR)
+        end)
+    else
+        DespawnMob(npc:getID())
+    end
+end
+
+function npcUtil.openCrate(npc, callback)
+    if npc:getLocalVar("opened") == 0 then
+        npc:setLocalVar("opened", 1)
+        callback()
+        npc:entityAnimationPacket("openH")
+        npc:timer(7000, function(npc)
+            npcUtil.disappearCrate(npc)
+        end)
+    end
+end
