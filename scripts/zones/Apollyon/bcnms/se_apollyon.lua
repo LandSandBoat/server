@@ -13,87 +13,87 @@ local area = LimbusArea:new("SE_APOLLYON", xi.ki.BLACK_CARD)
 
 area.paths =
 {
-    [16933006] =
+    [ID.SE_APOLLYON.mob.TIEHOLTSODI] =
     {
         { x = 151.0, y = 0.0, z = -528.0, wait = 10000 },
         { x = 147.0, y = 0.0, z = -468.05, wait = 10000 },
     },
-    [16933007] =
+    [ID.SE_APOLLYON.mob.ADAMANTSHELL[1]] =
     {
         { x = 138.0, y = -2.0, z = -496.0, wait = 2500 },
         { x = 142.0, y = -1.11, z = -500.0, wait = 2500 },
     },
-    [16933008] =
+    [ID.SE_APOLLYON.mob.ADAMANTSHELL[2]] =
     {
         { x = 139.0, y = -2.0, z = -496.0, wait = 2500 },
         { x = 138.0, y = 0.0, z = -485.0, wait = 2500 },
     },
-    [16933009] =
+    [ID.SE_APOLLYON.mob.ADAMANTSHELL[3]] =
     {
         { x = 129.0, y = 0.0, z = -504.0, wait = 2500 },
         { x = 138.0, y = -2.0, z = -497.0, wait = 2500 },
     },
-    [16933010] =
+    [ID.SE_APOLLYON.mob.ADAMANTSHELL[4]] =
     {
         { x = 183.0, y = 0.0, z = -554.0, wait = 2500 },
         { x = 185.0, y = 0.0, z = -535.0, wait = 2500 },
     },
-    [16933011] =
+    [ID.SE_APOLLYON.mob.ADAMANTSHELL[5]] =
     {
         { x = 185.0, y = 0.0, z = -535.0, wait = 2500 },
         { x = 183.0, y = 0.0, z = -554.0, wait = 2500 },
     },
-    [16933012] =
+    [ID.SE_APOLLYON.mob.ADAMANTSHELL[6]] =
     {
         { x = 195.0, y = 0.0, z = -446.0, wait = 2500 },
         { x = 215.0, y = 0.0, z = -436.0, wait = 2500 },
     },
-    [16933013] =
+    [ID.SE_APOLLYON.mob.ADAMANTSHELL[7]] =
     {
         { x = 212.0, y = 0.0, z = -441.0, wait = 2500 },
         { x = 192.0, y = 0.0, z = -441.0, wait = 2500 },
     },
-    [16933014] =
+    [ID.SE_APOLLYON.mob.ADAMANTSHELL[8]] =
     {
         { x = 190.0, y = 0.0, z = -436.0, wait = 2500 },
         { x = 208.0, y = 0.0, z = -448.0, wait = 2500 },
     },
-    [16933033] =
+    [ID.SE_APOLLYON.mob.FLYING_SPEAR[1]] =
     {
         { x = 505.0, y = 0.0, z = -305.0, wait = 10000 },
         { x = 490.0, y = 0.0, z = -287.0, wait = 10000 },
     },
-    [16933034] =
+    [ID.SE_APOLLYON.mob.FLYING_SPEAR[2]] =
     {
         { x = 558.0, y = 0.0, z = -348.0, wait = 10000 },
         { x = 540.0, y = 0.0, z = -347.0, wait = 10000 },
     },
-    [16933035] =
+    [ID.SE_APOLLYON.mob.FLYING_SPEAR[3]] =
     {
         { x = 619.0, y = 0.0, z = -337.0, wait = 10000 },
         { x = 633.0, y = 0.0, z = -332.0, wait = 10000 },
     },
-    [16933036] =
+    [ID.SE_APOLLYON.mob.FLYING_SPEAR[4]] =
     {
         { x = 600.0, y = 0.0, z = -381.0, wait = 10000 },
         { x = 599.0, y = 0.0, z = -365.0, wait = 10000 },
     },
-    [16933037] =
+    [ID.SE_APOLLYON.mob.FLYING_SPEAR[5]] =
     {
         { x = 541.0, y = 0.0, z = -368.0, wait = 10000 },
         { x = 530.0, y = 0.0, z = -353.0, wait = 10000 },
     },
-    [16933038] =
+    [ID.SE_APOLLYON.mob.FLYING_SPEAR[6]] =
     {
         { x = 560.0, y = 0.0, z = -346.0, wait = 10000 },
         { x = 538.0, y = 0.0, z = -353.0, wait = 10000 },
     },
-    [16933039] =
+    [ID.SE_APOLLYON.mob.FLYING_SPEAR[7]] =
     {
         { x = 616.0, y = 0.0, z = -380.0, wait = 10000 },
         { x = 610.0, y = 0.0, z = -364.0, wait = 10000 },
     },
-    [16933040] =
+    [ID.SE_APOLLYON.mob.FLYING_SPEAR[8]] =
     {
         { x = 577.0, y = 0.0, z = -367.0, wait = 10000 },
         { x = 560.0, y = 0.0, z = -314.0, wait = 10000 },
