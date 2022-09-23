@@ -595,7 +595,7 @@ xi.dynamis.mobList[zoneID][69 ].nmchildren = { true, 70, 71 }
 xi.dynamis.mobList[zoneID][72 ].nmchildren = { false, 73 }
 xi.dynamis.mobList[zoneID][74 ].nmchildren = { false, 75, 76 }
 xi.dynamis.mobList[zoneID][77 ].nmchildren = { false, 78, 79 }
-xi.dynamis.mobList[zoneID][116].nmchildren = { true, 117, 118 }
+xi.dynamis.mobList[zoneID][116].nmchildren = { true, 117, 118, 154 }
 xi.dynamis.mobList[zoneID][117].nmchildren = { false, 119, 120 }
 xi.dynamis.mobList[zoneID][121].nmchildren = { true, 122, 123, 124, 125, 151, 152 }
 
