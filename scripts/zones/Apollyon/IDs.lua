@@ -168,8 +168,10 @@ zones[xi.zone.APOLLYON] =
         APOLLYON_CS_CRATE = 16933126,
         APOLLYON_CENTRAL_CRATE = 16933123,
     },
-    SE_APOLLYON = {
-        npc = {
+    SE_APOLLYON =
+    {
+        npc =
+        {
             PORTAL =
             {
                 16933239, -- se 1>2
@@ -196,7 +198,8 @@ zones[xi.zone.APOLLYON] =
             },
             LOOT_CRATE = 16933031,
         },
-        TIME_EXTENSIONS = {
+        TIME_EXTENSIONS =
+        {
             [16932989] = 10,
             [16933003] = 10,
             [16933017] = 10,

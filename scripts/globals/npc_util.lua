@@ -891,24 +891,24 @@ function npcUtil.castingAnimation(npc, magicType, phaseDuration, func)
     end)
 end
 
-function npcUtil.disappearCrate(npc)
-    if npc:isNPC() then
-        npc:entityAnimationPacket("kesu")
-        npc:timer(3000, function(npc)
+function npcUtil.disappearCrate(crate)
+    if crate:isNPC() then
+        crate:entityAnimationPacket("kesu")
+        crate:timer(3000, function(npc)
             npc:untargetable(true)
             npc:setStatus(xi.status.DISAPPEAR)
         end)
     else
-        DespawnMob(npc:getID())
+        DespawnMob(crate:getID())
     end
 end
 
-function npcUtil.openCrate(npc, callback)
-    if npc:getLocalVar("opened") == 0 then
-        npc:setLocalVar("opened", 1)
+function npcUtil.openCrate(crate, callback)
+    if crate:getLocalVar("opened") == 0 then
+        crate:setLocalVar("opened", 1)
         callback()
-        npc:entityAnimationPacket("openH")
-        npc:timer(7000, function(npc)
+        crate:entityAnimationPacket("openH")
+        crate:timer(7000, function(npc)
             npcUtil.disappearCrate(npc)
         end)
     end
