@@ -2,7 +2,7 @@
 -- Area: LaLoff Amphitheater
 --  Mob: Ark Angel GK
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
@@ -14,8 +14,8 @@ entity.onMobSpawn = function(mob)
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            {id = xi.jsa.CALL_WYVERN, hpp = 100, cooldown = 60}, -- "Call Wyvern is used at the time of monster engage. Call Wyvern is used ~1 minute subsequent to Wyvern's death."
-            {id = xi.jsa.MEIKYO_SHISUI, begCode = function(mobArg) mobArg:setLocalVar('order', 0) end, hpp = math.random(90, 95), cooldown = 90}, -- "Meikyo Shisui is used very frequently."
+            { id = xi.jsa.CALL_WYVERN, hpp = 100, cooldown = 60 }, -- "Call Wyvern is used at the time of monster engage. Call Wyvern is used ~1 minute subsequent to Wyvern's death."
+            { id = xi.jsa.MEIKYO_SHISUI, begCode = function(mobArg) mobArg:setLocalVar('order', 0) end, hpp = math.random(90, 95), cooldown = 90 }, -- "Meikyo Shisui is used very frequently."
         },
     })
 end

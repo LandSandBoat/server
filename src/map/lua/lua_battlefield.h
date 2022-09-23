@@ -75,6 +75,7 @@ public:
     bool cleanup(bool cleanup);
     void win();
     void lose();
+    void addGroups(sol::table groups);
 
     static void Register();
 };

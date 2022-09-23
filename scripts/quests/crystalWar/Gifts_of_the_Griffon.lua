@@ -105,7 +105,7 @@ quest.sections =
 
                 [23] = function(player, csid, option, npc)
                     quest:begin(player)
-                    npcUtil.giveItem(player, {{ xi.items.PLUME_DOR, 7 }})
+                    npcUtil.giveItem(player, { { xi.items.PLUME_DOR, 7 } })
                 end,
             },
         },
@@ -176,7 +176,7 @@ quest.sections =
                     local numPlumes = 7 - utils.mask.countBits(quest:getVar(player, 'Option'), 7)
 
                     quest:setVar(player, 'Timer', 0)
-                    npcUtil.giveItem(player, {{ xi.items.PLUME_DOR, numPlumes }})
+                    npcUtil.giveItem(player, { { xi.items.PLUME_DOR, numPlumes } })
                 end,
             },
         },

@@ -2,7 +2,7 @@
 -- Area: Temenos
 --  Mob: Yagudo Kapellmeister
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}
 

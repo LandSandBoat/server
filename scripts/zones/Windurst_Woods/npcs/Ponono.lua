@@ -38,7 +38,7 @@ entity.onTrade = function(player, npc, trade)
         player:startEvent(10012, 0, 0, 0, 0, newRank)
         player:setLocalVar("ClothcraftTraded", 1)
     elseif moralManifest == QUEST_ACCEPTED and player:getCharVar("moral") == 2 then
-        if npcUtil.tradeHas(trade, {828, 830, {"gil", 10000}}) then -- Trade Velvet Cloth, Rainbow Cloth and 10k
+        if npcUtil.tradeHas(trade, { 828, 830, { "gil", 10000 } }) then -- Trade Velvet Cloth, Rainbow Cloth and 10k
             player:setCharVar("moral", 3)
             player:setLocalVar('moralZone', 1)
             player:setCharVar("moralWait", getVanaMidnight())

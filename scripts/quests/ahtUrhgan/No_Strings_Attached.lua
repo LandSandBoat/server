@@ -179,7 +179,7 @@ quest.sections =
                 onTrade = function(player, npc, trade)
                     if
                         not player:findItem(xi.items.ANIMATOR) and
-                        npcUtil.tradeHasExactly(trade, {{ "gil", 10000 }})
+                        npcUtil.tradeHasExactly(trade, { { "gil", 10000 } })
                     then
                         player:confirmTrade()
                         npcUtil.giveItem(player, xi.items.ANIMATOR)

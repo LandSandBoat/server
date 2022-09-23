@@ -3,7 +3,7 @@
 --   NM: Centurio X-I
 -----------------------------------
 require("scripts/globals/hunts")
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}

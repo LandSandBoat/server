@@ -2,7 +2,7 @@
 -- Area: Dynamis - Tavnazia
 --  Mob: Nightmare Hornet
 -----------------------------------
-mixins = {require("scripts/mixins/dynamis_dreamland")}
+mixins = { require("scripts/mixins/dynamis_dreamland") }
 -----------------------------------
 local entity = {}
 

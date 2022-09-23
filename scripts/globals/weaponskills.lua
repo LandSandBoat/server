@@ -226,7 +226,7 @@ local function cRangedRatio(attacker, defender, params, ignoredDef, tp)
     local pdif = attacker:getRangedPDIF(defender, false, atkmulti, ignoredDef)
     local pdifcrit = attacker:getRangedPDIF(defender, true, atkmulti, ignoredDef)
 
-    return {pdif, pdifcrit}
+    return { pdif, pdifcrit }
 end
 
 local function getRangedHitRate(attacker, target, capHitRate, bonus)
@@ -645,7 +645,7 @@ function doRangedWeaponskill(attacker, target, wsID, wsParams, tp, action, prima
     local calcParams =
     {
         wsID = wsID,
-        weaponDamage = {attacker:getRangedDamage()},
+        weaponDamage = { attacker:getRangedDmg() },
         skillType = attacker:getWeaponSkillType(xi.slot.RANGED),
         fSTR = fSTR2(attacker:getStat(xi.mod.STR), target:getStat(xi.mod.VIT), attacker:getRangedDmgRank()),
         pdif = pdif,
@@ -846,7 +846,7 @@ function takeWeaponskillDamage(defender, attacker, wsParams, primaryMsg, attack,
         defender:updateEnmityFromDamage(enmityEntity, finaldmg * enmityMult)
     end
 
-    xi.magian.checkMagianTrial(attacker, {['mob'] = defender, ['triggerWs'] = true,  ['wSkillId'] = wsResults.wsID})
+    xi.magian.checkMagianTrial(attacker, { ['mob'] = defender, ['triggerWs'] = true,  ['wSkillId'] = wsResults.wsID })
 
     if finaldmg > 0 then
         defender:setLocalVar("weaponskillHit", 1)
@@ -871,11 +871,11 @@ function getMeleeDmg(attacker, weaponType, kick)
         offhandDamage = mainhandDamage
     end
 
-    return {mainhandDamage, offhandDamage}
+    return { mainhandDamage, offhandDamage }
 end
 
 function getRangedDamage(attacker)
-    return {attacker:getRangedDmg(), attacker:getAmmoDmg()}
+    return { attacker:getRangedDmg(), attacker:getAmmoDmg() }
 end
 
 function getHitRate(attacker, target, capHitRate, bonus)
@@ -981,7 +981,7 @@ function cMeleeRatio(attacker, defender, params, ignoredDef, tp, slot)
         attacker:delMod(xi.mod.ATTP, 25 + flourisheffect:getSubPower() / 2)
     end
 
-    return {pdif, pdifcrit}
+    return { pdif, pdifcrit }
 end
 
 function handleBlock(attacker, target, finaldmg)

@@ -49,65 +49,74 @@ zones[xi.zone.DYNAMIS_XARCABARD] =
     {
         TIME_EXTENSION =
         {
-            {minutes = 10, ki = xi.ki.CRIMSON_GRANULES_OF_TIME,   mob = 17330531},
-            {minutes = 10, ki = xi.ki.AZURE_GRANULES_OF_TIME,     mob = 17330532},
-            {minutes = 10, ki = xi.ki.AMBER_GRANULES_OF_TIME,     mob = 17330533},
-            {minutes = 10, ki = xi.ki.ALABASTER_GRANULES_OF_TIME, mob = 17330534},
-            {minutes = 20, ki = xi.ki.OBSIDIAN_GRANULES_OF_TIME,  mob = 17330535},
+            { minutes = 10, ki = xi.ki.CRIMSON_GRANULES_OF_TIME,   mob = 17330531 },
+            { minutes = 10, ki = xi.ki.AZURE_GRANULES_OF_TIME,     mob = 17330532 },
+            { minutes = 10, ki = xi.ki.AMBER_GRANULES_OF_TIME,     mob = 17330533 },
+            { minutes = 10, ki = xi.ki.ALABASTER_GRANULES_OF_TIME, mob = 17330534 },
+            { minutes = 20, ki = xi.ki.OBSIDIAN_GRANULES_OF_TIME,  mob = 17330535 },
         },
+
         REFILL_STATUE =
         {
             {
-                {mob = 17330230, eye = xi.dynamis.eye.RED  }, -- Adamantking_Effigy
-                {mob = 17330231, eye = xi.dynamis.eye.GREEN},
+                { mob = 17330230, eye = xi.dynamis.eye.RED   }, -- Adamantking_Effigy
+                { mob = 17330231, eye = xi.dynamis.eye.GREEN },
             },
+
             {
-                {mob = 17330240, eye = xi.dynamis.eye.RED  }, -- Adamantking_Effigy
-                {mob = 17330241, eye = xi.dynamis.eye.BLUE },
+                { mob = 17330240, eye = xi.dynamis.eye.RED  }, -- Adamantking_Effigy
+                { mob = 17330241, eye = xi.dynamis.eye.BLUE },
             },
+
             {
-                {mob = 17330248, eye = xi.dynamis.eye.RED  }, -- Serjeant_Tombstone
-                {mob = 17330249, eye = xi.dynamis.eye.GREEN},
+                { mob = 17330248, eye = xi.dynamis.eye.RED   }, -- Serjeant_Tombstone
+                { mob = 17330249, eye = xi.dynamis.eye.GREEN },
             },
+
             {
-                {mob = 17330256, eye = xi.dynamis.eye.RED  }, -- Serjeant_Tombstone
-                {mob = 17330257, eye = xi.dynamis.eye.BLUE },
+                { mob = 17330256, eye = xi.dynamis.eye.RED  }, -- Serjeant_Tombstone
+                { mob = 17330257, eye = xi.dynamis.eye.BLUE },
             },
+
             {
-                {mob = 17330273, eye = xi.dynamis.eye.RED  }, -- Avatar_Icon
-                {mob = 17330274, eye = xi.dynamis.eye.GREEN},
+                { mob = 17330273, eye = xi.dynamis.eye.RED   }, -- Avatar_Icon
+                { mob = 17330274, eye = xi.dynamis.eye.GREEN },
             },
+
             {
-                {mob = 17330285, eye = xi.dynamis.eye.RED  }, -- Avatar_Icon
-                {mob = 17330286, eye = xi.dynamis.eye.BLUE },
+                { mob = 17330285, eye = xi.dynamis.eye.RED  }, -- Avatar_Icon
+                { mob = 17330286, eye = xi.dynamis.eye.BLUE },
             },
+
             {
-                {mob = 17330471, eye = xi.dynamis.eye.RED  }, -- Goblin_Replica
-                {mob = 17330472, eye = xi.dynamis.eye.GREEN},
+                { mob = 17330471, eye = xi.dynamis.eye.RED   }, -- Goblin_Replica
+                { mob = 17330472, eye = xi.dynamis.eye.GREEN },
             },
+
             {
-                {mob = 17330483, eye = xi.dynamis.eye.RED  }, -- Goblin_Replica
-                {mob = 17330484, eye = xi.dynamis.eye.BLUE },
+                { mob = 17330483, eye = xi.dynamis.eye.RED  }, -- Goblin_Replica
+                { mob = 17330484, eye = xi.dynamis.eye.BLUE },
             },
         },
+
         DYNAMIS_LORD         = 17330177,
         YING                 = 17330183,
         YANG                 = 17330184,
-        COUNT_ZAEBOS_PH      = {[17330376] = 17330377}, -- Kindred_Warrior
-        DUKE_GOMORY_PH       = {[17330303] = 17330304}, -- Kindred_Monk
-        PRINCE_SEERE_PH      = {[17330331] = 17330332}, -- Kindred_White_Mage
-        MARQUIS_ORIAS_PH     = {[17330333] = 17330343}, -- Kindred_Black_Mage
-        DUKE_BERITH_PH       = {[17330352] = 17330353}, -- Kindred_Red_Mage
-        COUNT_RAUM_PH        = {[17330314] = 17330315}, -- Kindred_Thief
-        MARQUIS_SABNAK_PH    = {[17330359] = 17330360}, -- Kindred_Paladin
-        DUKE_SCOX_PH         = {[17330427] = 17330417}, -- Kindred_Dark_Knight
-        MARQUIS_ANDRAS_PH    = {[17330388] = 17330390}, -- Kindred_Beastmaster
-        MARQUIS_DECARABIA_PH = {[17330222] = 17330223}, -- Kindred_Bard
-        MARQUIS_CIMERIES_PH  = {[17330414] = 17330415}, -- Kindred_Ranger
-        COUNT_VINE_PH        = {[17330439] = 17330440}, -- Kindred_Samurai
-        MARQUIS_GAMYGYN_PH   = {[17330450] = 17330451}, -- Kindred_Ninja
-        KING_ZAGAN_PH        = {[17330418] = 17330430}, -- Kindred_Dragoon
-        MARQUIS_NEBIROS_PH   = {[17330479] = 17330481}, -- Kindred_Summoner
+        COUNT_ZAEBOS_PH      = { [17330376] = 17330377 }, -- Kindred_Warrior
+        DUKE_GOMORY_PH       = { [17330303] = 17330304 }, -- Kindred_Monk
+        PRINCE_SEERE_PH      = { [17330331] = 17330332 }, -- Kindred_White_Mage
+        MARQUIS_ORIAS_PH     = { [17330333] = 17330343 }, -- Kindred_Black_Mage
+        DUKE_BERITH_PH       = { [17330352] = 17330353 }, -- Kindred_Red_Mage
+        COUNT_RAUM_PH        = { [17330314] = 17330315 }, -- Kindred_Thief
+        MARQUIS_SABNAK_PH    = { [17330359] = 17330360 }, -- Kindred_Paladin
+        DUKE_SCOX_PH         = { [17330427] = 17330417 }, -- Kindred_Dark_Knight
+        MARQUIS_ANDRAS_PH    = { [17330388] = 17330390 }, -- Kindred_Beastmaster
+        MARQUIS_DECARABIA_PH = { [17330222] = 17330223 }, -- Kindred_Bard
+        MARQUIS_CIMERIES_PH  = { [17330414] = 17330415 }, -- Kindred_Ranger
+        COUNT_VINE_PH        = { [17330439] = 17330440 }, -- Kindred_Samurai
+        MARQUIS_GAMYGYN_PH   = { [17330450] = 17330451 }, -- Kindred_Ninja
+        KING_ZAGAN_PH        = { [17330418] = 17330430 }, -- Kindred_Dragoon
+        MARQUIS_NEBIROS_PH   = { [17330479] = 17330481 }, -- Kindred_Summoner
     },
     npc =
     {
@@ -115,33 +124,34 @@ zones[xi.zone.DYNAMIS_XARCABARD] =
         {
             [17330780] =
             {
-                param = {3358, 3429, 3430, 3431, 3432, 3433},
+                param = { 3358, 3429, 3430, 3431, 3432, 3433 },
                 trade =
                 {
-                    {item = 3358,                           mob = 17330177}, -- Dynamis Lord
-                    {item = {3429, 3430, 3431, 3432, 3433}, mob = 17330191}, -- Arch Dynamis Lord
+                    { item = 3358,                             mob = 17330177 }, -- Dynamis Lord
+                    { item = { 3429, 3430, 3431, 3432, 3433 }, mob = 17330191 }, -- Arch Dynamis Lord
                 }
             },
-            [17330781] = {trade = {{item = 3400, mob = 17330185}}}, -- Duke Haures
-            [17330782] = {trade = {{item = 3401, mob = 17330186}}}, -- Marquis Caim
-            [17330783] = {trade = {{item = 3402, mob = 17330188}}}, -- Baron Avnas
-            [17330784] = {trade = {{item = 3403, mob = 17330189}}}, -- Count Haagenti
-            [17330785] = {trade = {{item = 3364, mob = 17330199}}}, -- Animated Knuckles
-            [17330786] = {trade = {{item = 3365, mob = 17330200}}}, -- Animated Dagger
-            [17330787] = {trade = {{item = 3366, mob = 17330201}}}, -- Animated Longsword
-            [17330788] = {trade = {{item = 3367, mob = 17330202}}}, -- Animated Claymore
-            [17330789] = {trade = {{item = 3368, mob = 17330203}}}, -- Animated Tabar
-            [17330790] = {trade = {{item = 3369, mob = 17330204}}}, -- Animated Great Axe
-            [17330791] = {trade = {{item = 3371, mob = 17330205}}}, -- Animated Spear
-            [17330792] = {trade = {{item = 3370, mob = 17330206}}}, -- Animated Scythe
-            [17330793] = {trade = {{item = 3372, mob = 17330207}}}, -- Animated Kunai
-            [17330794] = {trade = {{item = 3373, mob = 17330208}}}, -- Animated Tachi
-            [17330795] = {trade = {{item = 3374, mob = 17330209}}}, -- Animated Hammer
-            [17330796] = {trade = {{item = 3375, mob = 17330210}}}, -- Animated Staff
-            [17330797] = {trade = {{item = 3376, mob = 17330211}}}, -- Animated Longbow
-            [17330798] = {trade = {{item = 3377, mob = 17330212}}}, -- Animated Gun
-            [17330799] = {trade = {{item = 3378, mob = 17330213}}}, -- Animated Horn
-            [17330800] = {trade = {{item = 3379, mob = 17330214}}}, -- Animated Shield
+
+            [17330781] = { trade = { { item = 3400, mob = 17330185 } } }, -- Duke Haures
+            [17330782] = { trade = { { item = 3401, mob = 17330186 } } }, -- Marquis Caim
+            [17330783] = { trade = { { item = 3402, mob = 17330188 } } }, -- Baron Avnas
+            [17330784] = { trade = { { item = 3403, mob = 17330189 } } }, -- Count Haagenti
+            [17330785] = { trade = { { item = 3364, mob = 17330199 } } }, -- Animated Knuckles
+            [17330786] = { trade = { { item = 3365, mob = 17330200 } } }, -- Animated Dagger
+            [17330787] = { trade = { { item = 3366, mob = 17330201 } } }, -- Animated Longsword
+            [17330788] = { trade = { { item = 3367, mob = 17330202 } } }, -- Animated Claymore
+            [17330789] = { trade = { { item = 3368, mob = 17330203 } } }, -- Animated Tabar
+            [17330790] = { trade = { { item = 3369, mob = 17330204 } } }, -- Animated Great Axe
+            [17330791] = { trade = { { item = 3371, mob = 17330205 } } }, -- Animated Spear
+            [17330792] = { trade = { { item = 3370, mob = 17330206 } } }, -- Animated Scythe
+            [17330793] = { trade = { { item = 3372, mob = 17330207 } } }, -- Animated Kunai
+            [17330794] = { trade = { { item = 3373, mob = 17330208 } } }, -- Animated Tachi
+            [17330795] = { trade = { { item = 3374, mob = 17330209 } } }, -- Animated Hammer
+            [17330796] = { trade = { { item = 3375, mob = 17330210 } } }, -- Animated Staff
+            [17330797] = { trade = { { item = 3376, mob = 17330211 } } }, -- Animated Longbow
+            [17330798] = { trade = { { item = 3377, mob = 17330212 } } }, -- Animated Gun
+            [17330799] = { trade = { { item = 3378, mob = 17330213 } } }, -- Animated Horn
+            [17330800] = { trade = { { item = 3379, mob = 17330214 } } }, -- Animated Shield
         },
     },
 }

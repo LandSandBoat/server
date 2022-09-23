@@ -14,7 +14,7 @@ local taruAnimitions =
     [3] = { 'awat', 'guts', 'kuya', 'nagu', 'yoro', 'ffr1' },
 }
 
-local randChance = { 0.166, 0.333, 0.500, 0.666, 0.833, 1}
+local randChance = { 0.166, 0.333, 0.500, 0.666, 0.833, 1 }
 
 g_mixins.warriors_path_taru = function(mob)
     mob:addListener("COMBAT_TICK", "TARU_CTICK", function(mobArg)

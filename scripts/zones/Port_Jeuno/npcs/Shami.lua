@@ -13,7 +13,8 @@ require("scripts/globals/utils")
 local entity = {}
 
 local shamiSealItems =
-{-- Trade Item                     Seal ID, Retrieve Option,
+{
+--  Trade Item                     Seal ID, Retrieve Option,
     [xi.items.BEASTMENS_SEAL       ] = { 0, 2 },
     [xi.items.KINDREDS_SEAL        ] = { 1, 1 },
     [xi.items.KINDREDS_CREST       ] = { 2, 3 },
@@ -22,7 +23,8 @@ local shamiSealItems =
 }
 
 local shamiOrbItems =
-{-- Item ID                        CS, PO, SealID, Cost,
+{
+--  Item ID                        CS, PO, SealID, Cost,
     [xi.items.CLOUDY_ORB     ] = {  5,  1,      0,   20, },
     [xi.items.SKY_ORB        ] = {  9,  2,      0,   30, },
     [xi.items.STAR_ORB       ] = {  9,  3,      0,   40, },
@@ -142,7 +144,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif option >= 508 and option ~= 1073741824 then
         local itemID, sealID, retrievedSealCount = convertSealRetrieveOption(option)
 
-        if npcUtil.giveItem(player, {{itemID, retrievedSealCount}}) then
+        if npcUtil.giveItem(player, { { itemID, retrievedSealCount } }) then
             player:delSeals(retrievedSealCount, sealID)
         end
 

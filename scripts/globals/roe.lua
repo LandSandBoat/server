@@ -105,10 +105,10 @@ local checks =
     jobLvl = function(self, player, params)  -- Player has job at minimum level X
         return player:getJobLevel(self.reqs.jobLvl[1]) >= self.reqs.jobLvl[2] and true or false
     end,
-    questComplete = function(self, player, params) -- Player has {KINGDOM, QUEST} marked complete
+    questComplete = function(self, player, params) -- Player has { KINGDOM, QUEST } marked complete
         return player:getQuestStatus(self.reqs.questComplete[1], self.reqs.questComplete[2]) == QUEST_COMPLETED
     end,
-    missionComplete = function(self, player, params) -- Player has {NATION, MISSION} marked complete
+    missionComplete = function(self, player, params) -- Player has { NATION, MISSION } marked complete
         return player:hasCompletedMission(self.reqs.missionComplete[1], self.reqs.missionComplete[2])
     end,
     unityLeader = function(self, player, params) -- Player is a member of the specified Unity (1..11)
@@ -139,13 +139,13 @@ local timedSchedule =
 {
 -- 4-hour timeslots (6 per day) all days/times are in JST
 --    00-04  04-08  08-12  12-16  16-20  20-00
-    {  4021,  4010,  4016,  4012,  4018,  4013}, -- Sunday
-    {  4015,  4011,  4017,  4014,  4019,  4008}, -- Monday
-    {  4016,  4012,  4018,  4013,  4020,  4009}, -- Tuesday
-    {  4017,  4014,  4019,  4008,  4021,  4010}, -- Wednesday
-    {  4018,  4013,  4020,  4009,  4015,  4011}, -- Thursdsay
-    {  4019,  4008,  4021,  4010,  4016,  4012}, -- Friday
-    {  4020,  4009,  4015,  4011,  4017,  4014}, -- Saturday
+    {  4021,  4010,  4016,  4012,  4018,  4013 }, -- Sunday
+    {  4015,  4011,  4017,  4014,  4019,  4008 }, -- Monday
+    {  4016,  4012,  4018,  4013,  4020,  4009 }, -- Tuesday
+    {  4017,  4014,  4019,  4008,  4021,  4010 }, -- Wednesday
+    {  4018,  4013,  4020,  4009,  4015,  4011 }, -- Thursdsay
+    {  4019,  4008,  4021,  4010,  4016,  4012 }, -- Friday
+    {  4020,  4009,  4015,  4011,  4017,  4014 }, -- Saturday
 }
 -- Load timetable for timed records
 if xi.settings.main.ENABLE_ROE and xi.settings.main.ENABLE_ROE_TIMED > 0 then
@@ -193,7 +193,7 @@ RoeParseRecords(records)
     completeRecord(player, record#)
     reward =
     {
-        item = { {640,2}, 641 },          -- see npcUtil.giveItem for formats (Only given on first completion)
+        item = { { 640,2 }, 641 },       -- see npcUtil.giveItem for formats (Only given on first completion)
         keyItem = xi.ki.ZERUHN_REPORT,   -- see npcUtil.giveKeyItem for formats
         sparks = 500,
         xp = 1000,

@@ -12,7 +12,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!getskill <skill name or ID> {player}")
+    player:PrintToPlayer("!getskill <skill name or ID> (player)")
 end
 
 function onTrigger(player, skillName, target)

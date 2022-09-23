@@ -2,7 +2,7 @@
 -- Area: Misareaux_Coast
 --  Mob: Orcish Trooper
 -----------------------------------
-mixins = {require("scripts/mixins/fomor_hate")}
+mixins = { require("scripts/mixins/fomor_hate") }
 -----------------------------------
 local entity = {}
 

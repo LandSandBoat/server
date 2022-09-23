@@ -63,25 +63,25 @@ end
 
 local outposts =
 {
-    [xi.region.RONFAURE]        = {zone = 100, ki = xi.ki.RONFAURE_SUPPLIES,              cp = 10, lvl = 10, fee = 100},
-    [xi.region.ZULKHEIM]        = {zone = 103, ki = xi.ki.ZULKHEIM_SUPPLIES,              cp = 30, lvl = 10, fee = 100},
-    [xi.region.NORVALLEN]       = {zone = 104, ki = xi.ki.NORVALLEN_SUPPLIES,             cp = 40, lvl = 15, fee = 150},
-    [xi.region.GUSTABERG]       = {zone = 106, ki = xi.ki.GUSTABERG_SUPPLIES,             cp = 10, lvl = 10, fee = 100},
-    [xi.region.DERFLAND]        = {zone = 109, ki = xi.ki.DERFLAND_SUPPLIES,              cp = 40, lvl = 15, fee = 150},
-    [xi.region.SARUTABARUTA]    = {zone = 115, ki = xi.ki.SARUTABARUTA_SUPPLIES,          cp = 10, lvl = 10, fee = 100},
-    [xi.region.KOLSHUSHU]       = {zone = 118, ki = xi.ki.KOLSHUSHU_SUPPLIES,             cp = 40, lvl = 10, fee = 100},
-    [xi.region.ARAGONEU]        = {zone = 119, ki = xi.ki.ARAGONEU_SUPPLIES,              cp = 40, lvl = 15, fee = 150},
-    [xi.region.FAUREGANDI]      = {zone = 111, ki = xi.ki.FAUREGANDI_SUPPLIES,            cp = 70, lvl = 35, fee = 350},
-    [xi.region.VALDEAUNIA]      = {zone = 112, ki = xi.ki.VALDEAUNIA_SUPPLIES,            cp = 50, lvl = 40, fee = 400},
-    [xi.region.QUFIMISLAND]     = {zone = 126, ki = xi.ki.QUFIM_SUPPLIES,                 cp = 60, lvl = 15, fee = 150},
-    [xi.region.LITELOR]         = {zone = 121, ki = xi.ki.LITELOR_SUPPLIES,               cp = 40, lvl = 25, fee = 250},
-    [xi.region.KUZOTZ]          = {zone = 114, ki = xi.ki.KUZOTZ_SUPPLIES,                cp = 70, lvl = 30, fee = 300},
-    [xi.region.VOLLBOW]         = {zone = 113, ki = xi.ki.VOLLBOW_SUPPLIES,               cp = 70, lvl = 50, fee = 500},
-    [xi.region.ELSHIMOLOWLANDS] = {zone = 123, ki = xi.ki.ELSHIMO_LOWLANDS_SUPPLIES,      cp = 70, lvl = 25, fee = 250},
-    [xi.region.ELSHIMOUPLANDS]  = {zone = 124, ki = xi.ki.ELSHIMO_UPLANDS_SUPPLIES,       cp = 70, lvl = 35, fee = 350},
-    [xi.region.TULIA]           = {zone = 130,                                             cp = 0,  lvl = 70, fee = 500},
-    [xi.region.MOVALPOLOS]      = {zone =  11,                                             cp = 40, lvl = 25, fee = 250},
-    [xi.region.TAVNAZIANARCH]   = {zone =  24, ki = xi.ki.TAVNAZIAN_ARCHIPELAGO_SUPPLIES, cp = 70, lvl = 30, fee = 300},
+    [xi.region.RONFAURE]        = { zone = 100, ki = xi.ki.RONFAURE_SUPPLIES,              cp = 10, lvl = 10, fee = 100 },
+    [xi.region.ZULKHEIM]        = { zone = 103, ki = xi.ki.ZULKHEIM_SUPPLIES,              cp = 30, lvl = 10, fee = 100 },
+    [xi.region.NORVALLEN]       = { zone = 104, ki = xi.ki.NORVALLEN_SUPPLIES,             cp = 40, lvl = 15, fee = 150 },
+    [xi.region.GUSTABERG]       = { zone = 106, ki = xi.ki.GUSTABERG_SUPPLIES,             cp = 10, lvl = 10, fee = 100 },
+    [xi.region.DERFLAND]        = { zone = 109, ki = xi.ki.DERFLAND_SUPPLIES,              cp = 40, lvl = 15, fee = 150 },
+    [xi.region.SARUTABARUTA]    = { zone = 115, ki = xi.ki.SARUTABARUTA_SUPPLIES,          cp = 10, lvl = 10, fee = 100 },
+    [xi.region.KOLSHUSHU]       = { zone = 118, ki = xi.ki.KOLSHUSHU_SUPPLIES,             cp = 40, lvl = 10, fee = 100 },
+    [xi.region.ARAGONEU]        = { zone = 119, ki = xi.ki.ARAGONEU_SUPPLIES,              cp = 40, lvl = 15, fee = 150 },
+    [xi.region.FAUREGANDI]      = { zone = 111, ki = xi.ki.FAUREGANDI_SUPPLIES,            cp = 70, lvl = 35, fee = 350 },
+    [xi.region.VALDEAUNIA]      = { zone = 112, ki = xi.ki.VALDEAUNIA_SUPPLIES,            cp = 50, lvl = 40, fee = 400 },
+    [xi.region.QUFIMISLAND]     = { zone = 126, ki = xi.ki.QUFIM_SUPPLIES,                 cp = 60, lvl = 15, fee = 150 },
+    [xi.region.LITELOR]         = { zone = 121, ki = xi.ki.LITELOR_SUPPLIES,               cp = 40, lvl = 25, fee = 250 },
+    [xi.region.KUZOTZ]          = { zone = 114, ki = xi.ki.KUZOTZ_SUPPLIES,                cp = 70, lvl = 30, fee = 300 },
+    [xi.region.VOLLBOW]         = { zone = 113, ki = xi.ki.VOLLBOW_SUPPLIES,               cp = 70, lvl = 50, fee = 500 },
+    [xi.region.ELSHIMOLOWLANDS] = { zone = 123, ki = xi.ki.ELSHIMO_LOWLANDS_SUPPLIES,      cp = 70, lvl = 25, fee = 250 },
+    [xi.region.ELSHIMOUPLANDS]  = { zone = 124, ki = xi.ki.ELSHIMO_UPLANDS_SUPPLIES,       cp = 70, lvl = 35, fee = 350 },
+    [xi.region.TULIA]           = { zone = 130,                                            cp = 0,  lvl = 70, fee = 500 },
+    [xi.region.MOVALPOLOS]      = { zone =  11,                                            cp = 40, lvl = 25, fee = 250 },
+    [xi.region.TAVNAZIANARCH]   = { zone =  24, ki = xi.ki.TAVNAZIAN_ARCHIPELAGO_SUPPLIES, cp = 70, lvl = 30, fee = 300 },
 }
 
 local function hasOutpost(player, region)
@@ -218,323 +218,323 @@ local overseerOffsets =
 {
     [xi.region.RONFAURE] =
     {
-        {offset =  0, nation = xi.nation.SANDORIA}, -- Doladepaiton, R.K.
-        {offset =  7, nation = xi.nation.SANDORIA}, -- Ballie, R.K.
-        {offset =  3, nation = xi.nation.SANDORIA}, -- Flag
-        {offset = 11, nation = xi.nation.SANDORIA}, -- Flag
-        {offset =  1, nation = xi.nation.BASTOK},   -- Yoshihiro, I.M.
-        {offset =  8, nation = xi.nation.BASTOK},   -- Molting Moth, I.M.
-        {offset =  4, nation = xi.nation.BASTOK},   -- Flag
-        {offset = 12, nation = xi.nation.BASTOK},   -- Flag
-        {offset =  2, nation = xi.nation.WINDURST}, -- Kyanta-Pakyanta, W.W.
-        {offset =  9, nation = xi.nation.WINDURST}, -- Tottoto, W.W.
-        {offset =  5, nation = xi.nation.WINDURST}, -- Flag
-        {offset = 13, nation = xi.nation.WINDURST}, -- Flag
-        {offset =  6, nation = xi.nation.BEASTMEN}, -- Flag
-        {offset = 14, nation = xi.nation.BEASTMEN}, -- Flag
-        {offset = 10, nation = xi.nation.OTHER},    -- Harvetour
+        { offset =  0, nation = xi.nation.SANDORIA }, -- Doladepaiton, R.K.
+        { offset =  7, nation = xi.nation.SANDORIA }, -- Ballie, R.K.
+        { offset =  3, nation = xi.nation.SANDORIA }, -- Flag
+        { offset = 11, nation = xi.nation.SANDORIA }, -- Flag
+        { offset =  1, nation = xi.nation.BASTOK },   -- Yoshihiro, I.M.
+        { offset =  8, nation = xi.nation.BASTOK },   -- Molting Moth, I.M.
+        { offset =  4, nation = xi.nation.BASTOK },   -- Flag
+        { offset = 12, nation = xi.nation.BASTOK },   -- Flag
+        { offset =  2, nation = xi.nation.WINDURST }, -- Kyanta-Pakyanta, W.W.
+        { offset =  9, nation = xi.nation.WINDURST }, -- Tottoto, W.W.
+        { offset =  5, nation = xi.nation.WINDURST }, -- Flag
+        { offset = 13, nation = xi.nation.WINDURST }, -- Flag
+        { offset =  6, nation = xi.nation.BEASTMEN }, -- Flag
+        { offset = 14, nation = xi.nation.BEASTMEN }, -- Flag
+        { offset = 10, nation = xi.nation.OTHER },    -- Harvetour
     },
     [xi.region.ZULKHEIM] =
     {
-        {offset =  0, nation = xi.nation.SANDORIA}, -- Quanteilleron, R.K.
-        {offset =  7, nation = xi.nation.SANDORIA}, -- Prunilla, R.K.
-        {offset =  3, nation = xi.nation.SANDORIA}, -- flag
-        {offset = 11, nation = xi.nation.SANDORIA}, -- flag
-        {offset =  1, nation = xi.nation.BASTOK},   -- Tsunashige, I.M.
-        {offset =  8, nation = xi.nation.BASTOK},   -- Fighting Ant, I.M.
-        {offset =  4, nation = xi.nation.BASTOK},   -- flag
-        {offset = 13, nation = xi.nation.BASTOK},   -- flag
-        {offset =  2, nation = xi.nation.WINDURST}, -- Nyata-Mobuta, W.W.
-        {offset =  9, nation = xi.nation.WINDURST}, -- Tebubu, W.W.
-        {offset =  5, nation = xi.nation.WINDURST}, -- flag
-        {offset = 14, nation = xi.nation.WINDURST}, -- flag
-        {offset =  6, nation = xi.nation.BEASTMEN}, -- flag
-        {offset = 15, nation = xi.nation.BEASTMEN}, -- flag
-        {offset = 10, nation = xi.nation.OTHER},    -- Medicine Axe
+        { offset =  0, nation = xi.nation.SANDORIA }, -- Quanteilleron, R.K.
+        { offset =  7, nation = xi.nation.SANDORIA }, -- Prunilla, R.K.
+        { offset =  3, nation = xi.nation.SANDORIA }, -- flag
+        { offset = 11, nation = xi.nation.SANDORIA }, -- flag
+        { offset =  1, nation = xi.nation.BASTOK },   -- Tsunashige, I.M.
+        { offset =  8, nation = xi.nation.BASTOK },   -- Fighting Ant, I.M.
+        { offset =  4, nation = xi.nation.BASTOK },   -- flag
+        { offset = 13, nation = xi.nation.BASTOK },   -- flag
+        { offset =  2, nation = xi.nation.WINDURST }, -- Nyata-Mobuta, W.W.
+        { offset =  9, nation = xi.nation.WINDURST }, -- Tebubu, W.W.
+        { offset =  5, nation = xi.nation.WINDURST }, -- flag
+        { offset = 14, nation = xi.nation.WINDURST }, -- flag
+        { offset =  6, nation = xi.nation.BEASTMEN }, -- flag
+        { offset = 15, nation = xi.nation.BEASTMEN }, -- flag
+        { offset = 10, nation = xi.nation.OTHER },    -- Medicine Axe
     },
     [xi.region.NORVALLEN] =
     {
-        {offset =  0, nation = xi.nation.SANDORIA}, -- Chaplion, R.K.
-        {offset =  7, nation = xi.nation.SANDORIA}, -- Taumiale, R.K.
-        {offset =  3, nation = xi.nation.SANDORIA}, -- flag
-        {offset = 11, nation = xi.nation.SANDORIA}, -- flag
-        {offset =  1, nation = xi.nation.BASTOK},   -- Takamoto, I.M.
-        {offset =  8, nation = xi.nation.BASTOK},   -- Pure Heart, I.M.
-        {offset =  4, nation = xi.nation.BASTOK},   -- flag
-        {offset = 12, nation = xi.nation.BASTOK},   -- flag
-        {offset =  2, nation = xi.nation.WINDURST}, -- Bubchu-Bibinchu, W.W.
-        {offset =  9, nation = xi.nation.WINDURST}, -- Geruru, W.W.
-        {offset =  5, nation = xi.nation.WINDURST}, -- flag
-        {offset = 13, nation = xi.nation.WINDURST}, -- flag
-        {offset =  6, nation = xi.nation.BEASTMEN}, -- flag
-        {offset = 14, nation = xi.nation.BEASTMEN}, -- flag
-        {offset = 10, nation = xi.nation.OTHER},    -- Mionie
+        { offset =  0, nation = xi.nation.SANDORIA }, -- Chaplion, R.K.
+        { offset =  7, nation = xi.nation.SANDORIA }, -- Taumiale, R.K.
+        { offset =  3, nation = xi.nation.SANDORIA }, -- flag
+        { offset = 11, nation = xi.nation.SANDORIA }, -- flag
+        { offset =  1, nation = xi.nation.BASTOK },   -- Takamoto, I.M.
+        { offset =  8, nation = xi.nation.BASTOK },   -- Pure Heart, I.M.
+        { offset =  4, nation = xi.nation.BASTOK },   -- flag
+        { offset = 12, nation = xi.nation.BASTOK },   -- flag
+        { offset =  2, nation = xi.nation.WINDURST }, -- Bubchu-Bibinchu, W.W.
+        { offset =  9, nation = xi.nation.WINDURST }, -- Geruru, W.W.
+        { offset =  5, nation = xi.nation.WINDURST }, -- flag
+        { offset = 13, nation = xi.nation.WINDURST }, -- flag
+        { offset =  6, nation = xi.nation.BEASTMEN }, -- flag
+        { offset = 14, nation = xi.nation.BEASTMEN }, -- flag
+        { offset = 10, nation = xi.nation.OTHER },    -- Mionie
     },
     [xi.region.GUSTABERG] =
     {
-        {offset =  0, nation = xi.nation.SANDORIA}, -- Ennigreaud, R.K.
-        {offset =  7, nation = xi.nation.SANDORIA}, -- Quellebie, R.K.
-        {offset =  3, nation = xi.nation.SANDORIA}, -- flag
-        {offset = 11, nation = xi.nation.SANDORIA}, -- flag
-        {offset =  1, nation = xi.nation.BASTOK},   -- Shigezane, I.M.
-        {offset =  8, nation = xi.nation.BASTOK},   -- Heavy Fog, I.M.
-        {offset =  4, nation = xi.nation.BASTOK},   -- flag
-        {offset = 12, nation = xi.nation.BASTOK},   -- flag
-        {offset =  2, nation = xi.nation.WINDURST}, -- Kuuwari-Aori, W.W.
-        {offset =  9, nation = xi.nation.WINDURST}, -- Butsutsu, W.W.
-        {offset =  5, nation = xi.nation.WINDURST}, -- flag
-        {offset = 13, nation = xi.nation.WINDURST}, -- flag
-        {offset =  6, nation = xi.nation.BEASTMEN}, -- flag
-        {offset = 14, nation = xi.nation.BEASTMEN}, -- flag
-        {offset = 10, nation = xi.nation.OTHER},    -- Kuleo
+        { offset =  0, nation = xi.nation.SANDORIA }, -- Ennigreaud, R.K.
+        { offset =  7, nation = xi.nation.SANDORIA }, -- Quellebie, R.K.
+        { offset =  3, nation = xi.nation.SANDORIA }, -- flag
+        { offset = 11, nation = xi.nation.SANDORIA }, -- flag
+        { offset =  1, nation = xi.nation.BASTOK },   -- Shigezane, I.M.
+        { offset =  8, nation = xi.nation.BASTOK },   -- Heavy Fog, I.M.
+        { offset =  4, nation = xi.nation.BASTOK },   -- flag
+        { offset = 12, nation = xi.nation.BASTOK },   -- flag
+        { offset =  2, nation = xi.nation.WINDURST }, -- Kuuwari-Aori, W.W.
+        { offset =  9, nation = xi.nation.WINDURST }, -- Butsutsu, W.W.
+        { offset =  5, nation = xi.nation.WINDURST }, -- flag
+        { offset = 13, nation = xi.nation.WINDURST }, -- flag
+        { offset =  6, nation = xi.nation.BEASTMEN }, -- flag
+        { offset = 14, nation = xi.nation.BEASTMEN }, -- flag
+        { offset = 10, nation = xi.nation.OTHER },    -- Kuleo
     },
     [xi.region.DERFLAND] =
     {
-        {offset =  0, nation = xi.nation.SANDORIA}, -- Mesachedeau, R.K.
-        {offset =  7, nation = xi.nation.SANDORIA}, -- Ioupie, R.K.
-        {offset =  3, nation = xi.nation.SANDORIA}, -- flag
-        {offset = 11, nation = xi.nation.SANDORIA}, -- flag
-        {offset =  1, nation = xi.nation.BASTOK},   -- Souun, I.M.
-        {offset =  8, nation = xi.nation.BASTOK},   -- Sharp Tooth, I.M.
-        {offset =  4, nation = xi.nation.BASTOK},   -- flag
-        {offset = 12, nation = xi.nation.BASTOK},   -- flag
-        {offset =  2, nation = xi.nation.WINDURST}, -- Mokto-Lankto, W.W.
-        {offset =  9, nation = xi.nation.WINDURST}, -- Shikoko, W.W.
-        {offset =  5, nation = xi.nation.WINDURST}, -- flag
-        {offset = 13, nation = xi.nation.WINDURST}, -- flag
-        {offset =  6, nation = xi.nation.BEASTMEN}, -- flag
-        {offset = 14, nation = xi.nation.BEASTMEN}, -- flag
-        {offset = 10, nation = xi.nation.OTHER},    -- Tahmasp
+        { offset =  0, nation = xi.nation.SANDORIA }, -- Mesachedeau, R.K.
+        { offset =  7, nation = xi.nation.SANDORIA }, -- Ioupie, R.K.
+        { offset =  3, nation = xi.nation.SANDORIA }, -- flag
+        { offset = 11, nation = xi.nation.SANDORIA }, -- flag
+        { offset =  1, nation = xi.nation.BASTOK },   -- Souun, I.M.
+        { offset =  8, nation = xi.nation.BASTOK },   -- Sharp Tooth, I.M.
+        { offset =  4, nation = xi.nation.BASTOK },   -- flag
+        { offset = 12, nation = xi.nation.BASTOK },   -- flag
+        { offset =  2, nation = xi.nation.WINDURST }, -- Mokto-Lankto, W.W.
+        { offset =  9, nation = xi.nation.WINDURST }, -- Shikoko, W.W.
+        { offset =  5, nation = xi.nation.WINDURST }, -- flag
+        { offset = 13, nation = xi.nation.WINDURST }, -- flag
+        { offset =  6, nation = xi.nation.BEASTMEN }, -- flag
+        { offset = 14, nation = xi.nation.BEASTMEN }, -- flag
+        { offset = 10, nation = xi.nation.OTHER },    -- Tahmasp
     },
     [xi.region.SARUTABARUTA] =
     {
-        {offset =  0, nation = xi.nation.SANDORIA}, -- Naguipeillont, R.K.
-        {offset =  7, nation = xi.nation.SANDORIA}, -- Banege, R.K.
-        {offset =  3, nation = xi.nation.SANDORIA}, -- flag
-        {offset = 11, nation = xi.nation.SANDORIA}, -- flag
-        {offset =  1, nation = xi.nation.BASTOK},   -- Ryokei, I.M.
-        {offset =  8, nation = xi.nation.BASTOK},   -- Slow Axe, I.M.
-        {offset =  4, nation = xi.nation.BASTOK},   -- flag
-        {offset = 12, nation = xi.nation.BASTOK},   -- flag
-        {offset =  2, nation = xi.nation.WINDURST}, -- Roshina-Kuleshuna, W.W.
-        {offset =  9, nation = xi.nation.WINDURST}, -- Darumomo, W.W.
-        {offset =  5, nation = xi.nation.WINDURST}, -- flag
-        {offset = 13, nation = xi.nation.WINDURST}, -- flag
-        {offset =  6, nation = xi.nation.BEASTMEN}, -- flag
-        {offset = 14, nation = xi.nation.BEASTMEN}, -- flag
-        {offset = 10, nation = xi.nation.OTHER},    -- Mahien-Uhien
+        { offset =  0, nation = xi.nation.SANDORIA }, -- Naguipeillont, R.K.
+        { offset =  7, nation = xi.nation.SANDORIA }, -- Banege, R.K.
+        { offset =  3, nation = xi.nation.SANDORIA }, -- flag
+        { offset = 11, nation = xi.nation.SANDORIA }, -- flag
+        { offset =  1, nation = xi.nation.BASTOK },   -- Ryokei, I.M.
+        { offset =  8, nation = xi.nation.BASTOK },   -- Slow Axe, I.M.
+        { offset =  4, nation = xi.nation.BASTOK },   -- flag
+        { offset = 12, nation = xi.nation.BASTOK },   -- flag
+        { offset =  2, nation = xi.nation.WINDURST }, -- Roshina-Kuleshuna, W.W.
+        { offset =  9, nation = xi.nation.WINDURST }, -- Darumomo, W.W.
+        { offset =  5, nation = xi.nation.WINDURST }, -- flag
+        { offset = 13, nation = xi.nation.WINDURST }, -- flag
+        { offset =  6, nation = xi.nation.BEASTMEN }, -- flag
+        { offset = 14, nation = xi.nation.BEASTMEN }, -- flag
+        { offset = 10, nation = xi.nation.OTHER },    -- Mahien-Uhien
     },
     [xi.region.KOLSHUSHU] =
     {
-        {offset =  0, nation = xi.nation.SANDORIA}, -- Bonbavour, R.K.
-        {offset =  7, nation = xi.nation.SANDORIA}, -- Craigine, R.K.
-        {offset =  3, nation = xi.nation.SANDORIA}, -- flag
-        {offset = 11, nation = xi.nation.SANDORIA}, -- flag
-        {offset =  1, nation = xi.nation.BASTOK},   -- Ishin, I.M.
-        {offset =  8, nation = xi.nation.BASTOK},   -- Wise Turtle, I.M.
-        {offset =  4, nation = xi.nation.BASTOK},   -- flag
-        {offset = 12, nation = xi.nation.BASTOK},   -- flag
-        {offset =  2, nation = xi.nation.WINDURST}, -- Ganemu-Punnemu, W.W.
-        {offset =  9, nation = xi.nation.WINDURST}, -- Mashasha, W.W.
-        {offset =  5, nation = xi.nation.WINDURST}, -- flag
-        {offset = 13, nation = xi.nation.WINDURST}, -- flag
-        {offset =  6, nation = xi.nation.BEASTMEN}, -- flag
-        {offset = 14, nation = xi.nation.BEASTMEN}, -- flag
-        {offset = 10, nation = xi.nation.OTHER},    -- Lobho Ukipturi
+        { offset =  0, nation = xi.nation.SANDORIA }, -- Bonbavour, R.K.
+        { offset =  7, nation = xi.nation.SANDORIA }, -- Craigine, R.K.
+        { offset =  3, nation = xi.nation.SANDORIA }, -- flag
+        { offset = 11, nation = xi.nation.SANDORIA }, -- flag
+        { offset =  1, nation = xi.nation.BASTOK },   -- Ishin, I.M.
+        { offset =  8, nation = xi.nation.BASTOK },   -- Wise Turtle, I.M.
+        { offset =  4, nation = xi.nation.BASTOK },   -- flag
+        { offset = 12, nation = xi.nation.BASTOK },   -- flag
+        { offset =  2, nation = xi.nation.WINDURST }, -- Ganemu-Punnemu, W.W.
+        { offset =  9, nation = xi.nation.WINDURST }, -- Mashasha, W.W.
+        { offset =  5, nation = xi.nation.WINDURST }, -- flag
+        { offset = 13, nation = xi.nation.WINDURST }, -- flag
+        { offset =  6, nation = xi.nation.BEASTMEN }, -- flag
+        { offset = 14, nation = xi.nation.BEASTMEN }, -- flag
+        { offset = 10, nation = xi.nation.OTHER },    -- Lobho Ukipturi
     },
     [xi.region.ARAGONEU] =
     {
-        {offset =  0, nation = xi.nation.SANDORIA}, -- Chegourt, R.K.
-        {offset =  7, nation = xi.nation.SANDORIA}, -- Buliame, R.K.
-        {offset =  3, nation = xi.nation.SANDORIA}, -- flag
-        {offset = 11, nation = xi.nation.SANDORIA}, -- flag
-        {offset =  1, nation = xi.nation.BASTOK},   -- Akane, I.M.
-        {offset =  8, nation = xi.nation.BASTOK},   -- Three Steps, I.M.
-        {offset =  4, nation = xi.nation.BASTOK},   -- flag
-        {offset = 12, nation = xi.nation.BASTOK},   -- flag
-        {offset =  2, nation = xi.nation.WINDURST}, -- Donmo-Boronmo, W.W.
-        {offset =  9, nation = xi.nation.WINDURST}, -- Daruru, W.W.
-        {offset =  5, nation = xi.nation.WINDURST}, -- flag
-        {offset = 13, nation = xi.nation.WINDURST}, -- flag
-        {offset =  6, nation = xi.nation.BEASTMEN}, -- flag
-        {offset = 14, nation = xi.nation.BEASTMEN}, -- flag
-        {offset = 10, nation = xi.nation.OTHER},    -- Mushosho
+        { offset =  0, nation = xi.nation.SANDORIA }, -- Chegourt, R.K.
+        { offset =  7, nation = xi.nation.SANDORIA }, -- Buliame, R.K.
+        { offset =  3, nation = xi.nation.SANDORIA }, -- flag
+        { offset = 11, nation = xi.nation.SANDORIA }, -- flag
+        { offset =  1, nation = xi.nation.BASTOK },   -- Akane, I.M.
+        { offset =  8, nation = xi.nation.BASTOK },   -- Three Steps, I.M.
+        { offset =  4, nation = xi.nation.BASTOK },   -- flag
+        { offset = 12, nation = xi.nation.BASTOK },   -- flag
+        { offset =  2, nation = xi.nation.WINDURST }, -- Donmo-Boronmo, W.W.
+        { offset =  9, nation = xi.nation.WINDURST }, -- Daruru, W.W.
+        { offset =  5, nation = xi.nation.WINDURST }, -- flag
+        { offset = 13, nation = xi.nation.WINDURST }, -- flag
+        { offset =  6, nation = xi.nation.BEASTMEN }, -- flag
+        { offset = 14, nation = xi.nation.BEASTMEN }, -- flag
+        { offset = 10, nation = xi.nation.OTHER },    -- Mushosho
     },
     [xi.region.FAUREGANDI] =
     {
-        {offset =  0, nation = xi.nation.SANDORIA}, -- Parledaire, R.K.
-        {offset =  7, nation = xi.nation.SANDORIA}, -- Leaufetie, R.K.
-        {offset =  3, nation = xi.nation.SANDORIA}, -- flag
-        {offset = 11, nation = xi.nation.SANDORIA}, -- flag
-        {offset =  1, nation = xi.nation.BASTOK},   -- Akane, I.M.
-        {offset =  8, nation = xi.nation.BASTOK},   -- Rattling Rain, I.M.
-        {offset =  4, nation = xi.nation.BASTOK},   -- flag
-        {offset = 12, nation = xi.nation.BASTOK},   -- flag
-        {offset =  2, nation = xi.nation.WINDURST}, -- Ryunchi-Pauchi, W.W.
-        {offset =  9, nation = xi.nation.WINDURST}, -- Chopapa, W.W.
-        {offset =  5, nation = xi.nation.WINDURST}, -- flag
-        {offset = 13, nation = xi.nation.WINDURST}, -- flag
-        {offset =  6, nation = xi.nation.BEASTMEN}, -- flag
-        {offset = 14, nation = xi.nation.BEASTMEN}, -- flag
-        {offset = 10, nation = xi.nation.OTHER},    -- Gueriette
+        { offset =  0, nation = xi.nation.SANDORIA }, -- Parledaire, R.K.
+        { offset =  7, nation = xi.nation.SANDORIA }, -- Leaufetie, R.K.
+        { offset =  3, nation = xi.nation.SANDORIA }, -- flag
+        { offset = 11, nation = xi.nation.SANDORIA }, -- flag
+        { offset =  1, nation = xi.nation.BASTOK },   -- Akane, I.M.
+        { offset =  8, nation = xi.nation.BASTOK },   -- Rattling Rain, I.M.
+        { offset =  4, nation = xi.nation.BASTOK },   -- flag
+        { offset = 12, nation = xi.nation.BASTOK },   -- flag
+        { offset =  2, nation = xi.nation.WINDURST }, -- Ryunchi-Pauchi, W.W.
+        { offset =  9, nation = xi.nation.WINDURST }, -- Chopapa, W.W.
+        { offset =  5, nation = xi.nation.WINDURST }, -- flag
+        { offset = 13, nation = xi.nation.WINDURST }, -- flag
+        { offset =  6, nation = xi.nation.BEASTMEN }, -- flag
+        { offset = 14, nation = xi.nation.BEASTMEN }, -- flag
+        { offset = 10, nation = xi.nation.OTHER },    -- Gueriette
     },
     [xi.region.VALDEAUNIA] =
     {
-        {offset =  0, nation = xi.nation.SANDORIA}, -- Jeantelas, R.K.
-        {offset =  7, nation = xi.nation.SANDORIA}, -- Pilcha, R.K.
-        {offset =  3, nation = xi.nation.SANDORIA}, -- flag
-        {offset = 11, nation = xi.nation.SANDORIA}, -- flag
-        {offset =  1, nation = xi.nation.BASTOK},   -- Kaya, I.M.
-        {offset =  8, nation = xi.nation.BASTOK},   -- Heavy Bear, I.M.
-        {offset =  4, nation = xi.nation.BASTOK},   -- flag
-        {offset = 12, nation = xi.nation.BASTOK},   -- flag
-        {offset =  2, nation = xi.nation.WINDURST}, -- Magumo-Yagimo, W.W.
-        {offset =  9, nation = xi.nation.WINDURST}, -- Tememe, W.W.
-        {offset =  5, nation = xi.nation.WINDURST}, -- flag
-        {offset = 13, nation = xi.nation.WINDURST}, -- flag
-        {offset =  6, nation = xi.nation.BEASTMEN}, -- flag
-        {offset = 14, nation = xi.nation.BEASTMEN}, -- flag
-        {offset = 10, nation = xi.nation.OTHER},    -- Pelogrant
+        { offset =  0, nation = xi.nation.SANDORIA }, -- Jeantelas, R.K.
+        { offset =  7, nation = xi.nation.SANDORIA }, -- Pilcha, R.K.
+        { offset =  3, nation = xi.nation.SANDORIA }, -- flag
+        { offset = 11, nation = xi.nation.SANDORIA }, -- flag
+        { offset =  1, nation = xi.nation.BASTOK },   -- Kaya, I.M.
+        { offset =  8, nation = xi.nation.BASTOK },   -- Heavy Bear, I.M.
+        { offset =  4, nation = xi.nation.BASTOK },   -- flag
+        { offset = 12, nation = xi.nation.BASTOK },   -- flag
+        { offset =  2, nation = xi.nation.WINDURST }, -- Magumo-Yagimo, W.W.
+        { offset =  9, nation = xi.nation.WINDURST }, -- Tememe, W.W.
+        { offset =  5, nation = xi.nation.WINDURST }, -- flag
+        { offset = 13, nation = xi.nation.WINDURST }, -- flag
+        { offset =  6, nation = xi.nation.BEASTMEN }, -- flag
+        { offset = 14, nation = xi.nation.BEASTMEN }, -- flag
+        { offset = 10, nation = xi.nation.OTHER },    -- Pelogrant
     },
     [xi.region.QUFIMISLAND] =
     {
-        {offset =  0, nation = xi.nation.SANDORIA}, -- Pitoire, R.K.
-        {offset =  7, nation = xi.nation.SANDORIA}, -- Matica, R.K.
-        {offset =  3, nation = xi.nation.SANDORIA}, -- flag
-        {offset = 11, nation = xi.nation.SANDORIA}, -- flag
-        {offset =  1, nation = xi.nation.BASTOK},   -- Sasa, I.M.
-        {offset =  8, nation = xi.nation.BASTOK},   -- Singing Blade, I.M.
-        {offset =  4, nation = xi.nation.BASTOK},   -- flag
-        {offset = 12, nation = xi.nation.BASTOK},   -- flag
-        {offset =  2, nation = xi.nation.WINDURST}, -- Tsonga-Hoponga, W.W.
-        {offset =  9, nation = xi.nation.WINDURST}, -- Numumu, W.W.
-        {offset =  5, nation = xi.nation.WINDURST}, -- flag
-        {offset = 13, nation = xi.nation.WINDURST}, -- flag
-        {offset =  6, nation = xi.nation.BEASTMEN}, -- flag
-        {offset = 14, nation = xi.nation.BEASTMEN}, -- flag
-        {offset = 10, nation = xi.nation.OTHER},    -- Jiwon
+        { offset =  0, nation = xi.nation.SANDORIA }, -- Pitoire, R.K.
+        { offset =  7, nation = xi.nation.SANDORIA }, -- Matica, R.K.
+        { offset =  3, nation = xi.nation.SANDORIA }, -- flag
+        { offset = 11, nation = xi.nation.SANDORIA }, -- flag
+        { offset =  1, nation = xi.nation.BASTOK },   -- Sasa, I.M.
+        { offset =  8, nation = xi.nation.BASTOK },   -- Singing Blade, I.M.
+        { offset =  4, nation = xi.nation.BASTOK },   -- flag
+        { offset = 12, nation = xi.nation.BASTOK },   -- flag
+        { offset =  2, nation = xi.nation.WINDURST }, -- Tsonga-Hoponga, W.W.
+        { offset =  9, nation = xi.nation.WINDURST }, -- Numumu, W.W.
+        { offset =  5, nation = xi.nation.WINDURST }, -- flag
+        { offset = 13, nation = xi.nation.WINDURST }, -- flag
+        { offset =  6, nation = xi.nation.BEASTMEN }, -- flag
+        { offset = 14, nation = xi.nation.BEASTMEN }, -- flag
+        { offset = 10, nation = xi.nation.OTHER },    -- Jiwon
     },
     [xi.region.LITELOR] =
     {
-        {offset =  0, nation = xi.nation.SANDORIA}, -- Credaurion, R.K.
-        {offset =  7, nation = xi.nation.SANDORIA}, -- Limion, R.K.
-        {offset =  3, nation = xi.nation.SANDORIA}, -- flag
-        {offset = 11, nation = xi.nation.SANDORIA}, -- flag
-        {offset =  1, nation = xi.nation.BASTOK},   -- Calliope, I.M.
-        {offset =  8, nation = xi.nation.BASTOK},   -- Dedden, I.M.
-        {offset =  4, nation = xi.nation.BASTOK},   -- flag
-        {offset = 12, nation = xi.nation.BASTOK},   -- flag
-        {offset =  2, nation = xi.nation.WINDURST}, -- Ajimo-Majimo, W.W.
-        {offset =  9, nation = xi.nation.WINDURST}, -- Ochocho, W.W.
-        {offset =  5, nation = xi.nation.WINDURST}, -- flag
-        {offset = 13, nation = xi.nation.WINDURST}, -- flag
-        {offset =  6, nation = xi.nation.BEASTMEN}, -- flag
-        {offset = 14, nation = xi.nation.BEASTMEN}, -- flag
-        {offset = 10, nation = xi.nation.OTHER},    -- Kasim
+        { offset =  0, nation = xi.nation.SANDORIA }, -- Credaurion, R.K.
+        { offset =  7, nation = xi.nation.SANDORIA }, -- Limion, R.K.
+        { offset =  3, nation = xi.nation.SANDORIA }, -- flag
+        { offset = 11, nation = xi.nation.SANDORIA }, -- flag
+        { offset =  1, nation = xi.nation.BASTOK },   -- Calliope, I.M.
+        { offset =  8, nation = xi.nation.BASTOK },   -- Dedden, I.M.
+        { offset =  4, nation = xi.nation.BASTOK },   -- flag
+        { offset = 12, nation = xi.nation.BASTOK },   -- flag
+        { offset =  2, nation = xi.nation.WINDURST }, -- Ajimo-Majimo, W.W.
+        { offset =  9, nation = xi.nation.WINDURST }, -- Ochocho, W.W.
+        { offset =  5, nation = xi.nation.WINDURST }, -- flag
+        { offset = 13, nation = xi.nation.WINDURST }, -- flag
+        { offset =  6, nation = xi.nation.BEASTMEN }, -- flag
+        { offset = 14, nation = xi.nation.BEASTMEN }, -- flag
+        { offset = 10, nation = xi.nation.OTHER },    -- Kasim
     },
     [xi.region.KUZOTZ] =
     {
-        {offset =  0, nation = xi.nation.SANDORIA}, -- Eaulevisat, R.K.
-        {offset =  7, nation = xi.nation.SANDORIA}, -- Laimeve, R.K.
-        {offset =  3, nation = xi.nation.SANDORIA}, -- flag
-        {offset = 11, nation = xi.nation.SANDORIA}, -- flag
-        {offset =  1, nation = xi.nation.BASTOK},   -- Lindgard, I.M.
-        {offset =  8, nation = xi.nation.BASTOK},   -- Daborn, I.M.
-        {offset =  4, nation = xi.nation.BASTOK},   -- flag
-        {offset = 12, nation = xi.nation.BASTOK},   -- flag
-        {offset =  2, nation = xi.nation.WINDURST}, -- Variko-Njariko, W.W.
-        {offset =  9, nation = xi.nation.WINDURST}, -- Sahgygy, W.W.
-        {offset =  5, nation = xi.nation.WINDURST}, -- flag
-        {offset = 13, nation = xi.nation.WINDURST}, -- flag
-        {offset =  6, nation = xi.nation.BEASTMEN}, -- flag
-        {offset = 14, nation = xi.nation.BEASTMEN}, -- flag
-        {offset = 10, nation = xi.nation.OTHER},    -- Sowande
+        { offset =  0, nation = xi.nation.SANDORIA }, -- Eaulevisat, R.K.
+        { offset =  7, nation = xi.nation.SANDORIA }, -- Laimeve, R.K.
+        { offset =  3, nation = xi.nation.SANDORIA }, -- flag
+        { offset = 11, nation = xi.nation.SANDORIA }, -- flag
+        { offset =  1, nation = xi.nation.BASTOK },   -- Lindgard, I.M.
+        { offset =  8, nation = xi.nation.BASTOK },   -- Daborn, I.M.
+        { offset =  4, nation = xi.nation.BASTOK },   -- flag
+        { offset = 12, nation = xi.nation.BASTOK },   -- flag
+        { offset =  2, nation = xi.nation.WINDURST }, -- Variko-Njariko, W.W.
+        { offset =  9, nation = xi.nation.WINDURST }, -- Sahgygy, W.W.
+        { offset =  5, nation = xi.nation.WINDURST }, -- flag
+        { offset = 13, nation = xi.nation.WINDURST }, -- flag
+        { offset =  6, nation = xi.nation.BEASTMEN }, -- flag
+        { offset = 14, nation = xi.nation.BEASTMEN }, -- flag
+        { offset = 10, nation = xi.nation.OTHER },    -- Sowande
     },
     [xi.region.VOLLBOW] =
     {
-        {offset =  0, nation = xi.nation.SANDORIA}, -- Salimardi, R.K.
-        {offset =  7, nation = xi.nation.SANDORIA}, -- Paise, R.K.
-        {offset =  3, nation = xi.nation.SANDORIA}, -- flag
-        {offset = 11, nation = xi.nation.SANDORIA}, -- flag
-        {offset =  1, nation = xi.nation.BASTOK},   -- Sarmistha, I.M.
-        {offset =  8, nation = xi.nation.BASTOK},   -- Dultwa, I.M.
-        {offset =  4, nation = xi.nation.BASTOK},   -- flag
-        {offset = 12, nation = xi.nation.BASTOK},   -- flag
-        {offset =  2, nation = xi.nation.WINDURST}, -- Voranbo-Natanbo, W.W.
-        {offset =  9, nation = xi.nation.WINDURST}, -- Orukeke, W.W.
-        {offset =  5, nation = xi.nation.WINDURST}, -- flag
-        {offset = 13, nation = xi.nation.WINDURST}, -- flag
-        {offset =  6, nation = xi.nation.BEASTMEN}, -- flag
-        {offset = 14, nation = xi.nation.BEASTMEN}, -- flag
-        {offset = 10, nation = xi.nation.OTHER},    -- Bright Moon
+        { offset =  0, nation = xi.nation.SANDORIA }, -- Salimardi, R.K.
+        { offset =  7, nation = xi.nation.SANDORIA }, -- Paise, R.K.
+        { offset =  3, nation = xi.nation.SANDORIA }, -- flag
+        { offset = 11, nation = xi.nation.SANDORIA }, -- flag
+        { offset =  1, nation = xi.nation.BASTOK },   -- Sarmistha, I.M.
+        { offset =  8, nation = xi.nation.BASTOK },   -- Dultwa, I.M.
+        { offset =  4, nation = xi.nation.BASTOK },   -- flag
+        { offset = 12, nation = xi.nation.BASTOK },   -- flag
+        { offset =  2, nation = xi.nation.WINDURST }, -- Voranbo-Natanbo, W.W.
+        { offset =  9, nation = xi.nation.WINDURST }, -- Orukeke, W.W.
+        { offset =  5, nation = xi.nation.WINDURST }, -- flag
+        { offset = 13, nation = xi.nation.WINDURST }, -- flag
+        { offset =  6, nation = xi.nation.BEASTMEN }, -- flag
+        { offset = 14, nation = xi.nation.BEASTMEN }, -- flag
+        { offset = 10, nation = xi.nation.OTHER },    -- Bright Moon
     },
     [xi.region.ELSHIMOLOWLANDS] =
     {
-        {offset =  0, nation = xi.nation.SANDORIA}, -- Zorchorevi, R.K.
-        {offset =  7, nation = xi.nation.SANDORIA}, -- Mupia, R.K.
-        {offset =  3, nation = xi.nation.SANDORIA}, -- flag
-        {offset = 11, nation = xi.nation.SANDORIA}, -- flag
-        {offset =  1, nation = xi.nation.BASTOK},   -- Mahol, I.M.
-        {offset =  8, nation = xi.nation.BASTOK},   -- Bammiro, I.M.
-        {offset =  4, nation = xi.nation.BASTOK},   -- flag
-        {offset = 12, nation = xi.nation.BASTOK},   -- flag
-        {offset =  2, nation = xi.nation.WINDURST}, -- Uphra-Kophra, W.W.
-        {offset =  9, nation = xi.nation.WINDURST}, -- Richacha, W.W.
-        {offset =  5, nation = xi.nation.WINDURST}, -- flag
-        {offset = 13, nation = xi.nation.WINDURST}, -- flag
-        {offset =  6, nation = xi.nation.BEASTMEN}, -- flag
-        {offset = 14, nation = xi.nation.BEASTMEN}, -- flag
-        {offset = 10, nation = xi.nation.OTHER},    -- Robino-Mobino
+        { offset =  0, nation = xi.nation.SANDORIA }, -- Zorchorevi, R.K.
+        { offset =  7, nation = xi.nation.SANDORIA }, -- Mupia, R.K.
+        { offset =  3, nation = xi.nation.SANDORIA }, -- flag
+        { offset = 11, nation = xi.nation.SANDORIA }, -- flag
+        { offset =  1, nation = xi.nation.BASTOK },   -- Mahol, I.M.
+        { offset =  8, nation = xi.nation.BASTOK },   -- Bammiro, I.M.
+        { offset =  4, nation = xi.nation.BASTOK },   -- flag
+        { offset = 12, nation = xi.nation.BASTOK },   -- flag
+        { offset =  2, nation = xi.nation.WINDURST }, -- Uphra-Kophra, W.W.
+        { offset =  9, nation = xi.nation.WINDURST }, -- Richacha, W.W.
+        { offset =  5, nation = xi.nation.WINDURST }, -- flag
+        { offset = 13, nation = xi.nation.WINDURST }, -- flag
+        { offset =  6, nation = xi.nation.BEASTMEN }, -- flag
+        { offset = 14, nation = xi.nation.BEASTMEN }, -- flag
+        { offset = 10, nation = xi.nation.OTHER },    -- Robino-Mobino
     },
     [xi.region.ELSHIMOUPLANDS] =
     {
-        {offset =  0, nation = xi.nation.SANDORIA}, -- Ilieumort, R.K.
-        {offset =  7, nation = xi.nation.SANDORIA}, -- Emila, R.K.
-        {offset =  3, nation = xi.nation.SANDORIA}, -- flag
-        {offset = 11, nation = xi.nation.SANDORIA}, -- flag
-        {offset =  1, nation = xi.nation.BASTOK},   -- Mintoo, I.M.
-        {offset =  8, nation = xi.nation.BASTOK},   -- Guddal, I.M.
-        {offset =  4, nation = xi.nation.BASTOK},   -- flag
-        {offset = 12, nation = xi.nation.BASTOK},   -- flag
-        {offset =  2, nation = xi.nation.WINDURST}, -- Etaj-Pohtaj, W.W.
-        {offset =  9, nation = xi.nation.WINDURST}, -- Ghantata, W.W.
-        {offset =  5, nation = xi.nation.WINDURST}, -- flag
-        {offset = 13, nation = xi.nation.WINDURST}, -- flag
-        {offset =  6, nation = xi.nation.BEASTMEN}, -- flag
-        {offset = 14, nation = xi.nation.BEASTMEN}, -- flag
-        {offset = 10, nation = xi.nation.OTHER},    -- Mugha Dovajaiho
+        { offset =  0, nation = xi.nation.SANDORIA }, -- Ilieumort, R.K.
+        { offset =  7, nation = xi.nation.SANDORIA }, -- Emila, R.K.
+        { offset =  3, nation = xi.nation.SANDORIA }, -- flag
+        { offset = 11, nation = xi.nation.SANDORIA }, -- flag
+        { offset =  1, nation = xi.nation.BASTOK },   -- Mintoo, I.M.
+        { offset =  8, nation = xi.nation.BASTOK },   -- Guddal, I.M.
+        { offset =  4, nation = xi.nation.BASTOK },   -- flag
+        { offset = 12, nation = xi.nation.BASTOK },   -- flag
+        { offset =  2, nation = xi.nation.WINDURST }, -- Etaj-Pohtaj, W.W.
+        { offset =  9, nation = xi.nation.WINDURST }, -- Ghantata, W.W.
+        { offset =  5, nation = xi.nation.WINDURST }, -- flag
+        { offset = 13, nation = xi.nation.WINDURST }, -- flag
+        { offset =  6, nation = xi.nation.BEASTMEN }, -- flag
+        { offset = 14, nation = xi.nation.BEASTMEN }, -- flag
+        { offset = 10, nation = xi.nation.OTHER },    -- Mugha Dovajaiho
     },
     [xi.region.TULIA] =
     {
-        {offset =  0, nation = xi.nation.SANDORIA}, -- flag
-        {offset =  1, nation = xi.nation.BASTOK},   -- flag
-        {offset =  2, nation = xi.nation.WINDURST}, -- flag
-        {offset =  3, nation = xi.nation.BEASTMEN}, -- flag
+        { offset =  0, nation = xi.nation.SANDORIA }, -- flag
+        { offset =  1, nation = xi.nation.BASTOK },   -- flag
+        { offset =  2, nation = xi.nation.WINDURST }, -- flag
+        { offset =  3, nation = xi.nation.BEASTMEN }, -- flag
     },
     [xi.region.MOVALPOLOS] =
     {
-        {offset =  0, nation = xi.nation.SANDORIA}, -- flag
-        {offset =  1, nation = xi.nation.BASTOK},   -- flag
-        {offset =  2, nation = xi.nation.WINDURST}, -- flag
-        {offset =  3, nation = xi.nation.BEASTMEN}, -- flag
+        { offset =  0, nation = xi.nation.SANDORIA }, -- flag
+        { offset =  1, nation = xi.nation.BASTOK },   -- flag
+        { offset =  2, nation = xi.nation.WINDURST }, -- flag
+        { offset =  3, nation = xi.nation.BEASTMEN }, -- flag
     },
     [xi.region.TAVNAZIANARCH] =
     {
-        {offset =  0, nation = xi.nation.SANDORIA}, -- Jemmoquel, R.K.
-        {offset =  7, nation = xi.nation.SANDORIA}, -- Chilaumme, R.K.
-        {offset =  3, nation = xi.nation.SANDORIA}, -- flag
-        {offset = 11, nation = xi.nation.SANDORIA}, -- flag
-        {offset =  1, nation = xi.nation.BASTOK},   -- Yoram, I.M.
-        {offset =  8, nation = xi.nation.BASTOK},   -- Ghost Talker, I.M.
-        {offset =  4, nation = xi.nation.BASTOK},   -- flag
-        {offset = 12, nation = xi.nation.BASTOK},   -- flag
-        {offset =  2, nation = xi.nation.WINDURST}, -- Teldo-Moroldo, W.W.
-        {offset =  9, nation = xi.nation.WINDURST}, -- Cotete, W.W.
-        {offset =  5, nation = xi.nation.WINDURST}, -- flag
-        {offset = 13, nation = xi.nation.WINDURST}, -- flag
-        {offset =  6, nation = xi.nation.BEASTMEN}, -- flag
-        {offset = 14, nation = xi.nation.BEASTMEN}, -- flag
-        {offset = 10, nation = xi.nation.OTHER},    -- Jersey
+        { offset =  0, nation = xi.nation.SANDORIA }, -- Jemmoquel, R.K.
+        { offset =  7, nation = xi.nation.SANDORIA }, -- Chilaumme, R.K.
+        { offset =  3, nation = xi.nation.SANDORIA }, -- flag
+        { offset = 11, nation = xi.nation.SANDORIA }, -- flag
+        { offset =  1, nation = xi.nation.BASTOK },   -- Yoram, I.M.
+        { offset =  8, nation = xi.nation.BASTOK },   -- Ghost Talker, I.M.
+        { offset =  4, nation = xi.nation.BASTOK },   -- flag
+        { offset = 12, nation = xi.nation.BASTOK },   -- flag
+        { offset =  2, nation = xi.nation.WINDURST }, -- Teldo-Moroldo, W.W.
+        { offset =  9, nation = xi.nation.WINDURST }, -- Cotete, W.W.
+        { offset =  5, nation = xi.nation.WINDURST }, -- flag
+        { offset = 13, nation = xi.nation.WINDURST }, -- flag
+        { offset =  6, nation = xi.nation.BEASTMEN }, -- flag
+        { offset = 14, nation = xi.nation.BEASTMEN }, -- flag
+        { offset = 10, nation = xi.nation.OTHER },    -- Jersey
     },
 }
 
@@ -560,9 +560,9 @@ local crystals =
 
 local expRings =
 {
-    [15761] = {cp=350, charges=7},
-    [15762] = {cp=700, charges=7},
-    [15763] = {cp=600, charges=3},
+    [15761] = { cp=350, charges=7 },
+    [15762] = { cp=700, charges=7 },
+    [15763] = { cp=600, charges=3 },
 }
 
 local function conquestRanking()
@@ -679,201 +679,201 @@ end
 
 local overseerInvCommon =
 {
-    [32928] = {cp =     7, lvl =  1, item =  4182},             -- scroll_of_instant_reraise
-    [32929] = {cp =    10, lvl =  1, item =  4181},             -- scroll_of_instant_warp
-    [32930] = {cp =  2500, lvl =  1, item = 15542},             -- return_ring
-    [32931] = {cp =  9000, lvl =  1, item = 15541},             -- homing_ring
-    [32933] = {cp =   500, lvl =  1, item = 15761},             -- chariot_band
-    [32934] = {cp =  1000, lvl =  1, item = 15762},             -- empress_band
-    [32935] = {cp =  2000, lvl =  1, item = 15763},             -- emperor_band
-    [32936] = {cp =  5000, lvl =  1, item = 28540},             -- warp_ring
-    [32937] = {cp =  1000, lvl =  1, item = xi.items.CIPHER_OF_TENZENS_ALTER_EGO},
-    [32938] = {cp =  1000, lvl =  1, item = xi.items.CIPHER_OF_RAHALS_ALTER_EGO},
-    [32939] = {cp =  1000, lvl =  1, item = xi.items.CIPHER_OF_KUKKIS_ALTER_EGO},
-    [32941] = {cp = 20000, lvl =  1, item = xi.items.REFINED_CHAIR_SET, rank = 10},
-    [32942] = {cp =  1000, lvl =  1, item = xi.items.CIPHER_OF_MAKKIS_ALTER_EGO},
+    [32928] = { cp =     7, lvl =  1, item =  4182 },             -- scroll_of_instant_reraise
+    [32929] = { cp =    10, lvl =  1, item =  4181 },             -- scroll_of_instant_warp
+    [32930] = { cp =  2500, lvl =  1, item = 15542 },             -- return_ring
+    [32931] = { cp =  9000, lvl =  1, item = 15541 },             -- homing_ring
+    [32933] = { cp =   500, lvl =  1, item = 15761 },             -- chariot_band
+    [32934] = { cp =  1000, lvl =  1, item = 15762 },             -- empress_band
+    [32935] = { cp =  2000, lvl =  1, item = 15763 },             -- emperor_band
+    [32936] = { cp =  5000, lvl =  1, item = 28540 },             -- warp_ring
+    [32937] = { cp =  1000, lvl =  1, item = xi.items.CIPHER_OF_TENZENS_ALTER_EGO },
+    [32938] = { cp =  1000, lvl =  1, item = xi.items.CIPHER_OF_RAHALS_ALTER_EGO },
+    [32939] = { cp =  1000, lvl =  1, item = xi.items.CIPHER_OF_KUKKIS_ALTER_EGO },
+    [32941] = { cp = 20000, lvl =  1, item = xi.items.REFINED_CHAIR_SET, rank = 10 },
+    [32942] = { cp =  1000, lvl =  1, item = xi.items.CIPHER_OF_MAKKIS_ALTER_EGO },
 }
 
 local overseerInvNation =
 {
     [0] = -- San d'Oria
     {
-        [32768] = {rank =  1, cp =  1000, lvl = 10, item = 17167},                -- royal_archers_longbow
-        [32769] = {rank =  1, cp =  1000, lvl = 10, item = 16544},                -- royal_archers_sword
-        [32770] = {rank =  1, cp =  1000, lvl = 10, item = 12510},                -- royal_footmans_bandana
-        [32771] = {rank =  1, cp =  1000, lvl = 10, item = 12753},                -- royal_footmans_gloves
-        [32772] = {rank =  1, cp =  1000, lvl = 10, item = 13004},                -- royal_footmans_boots
-        [32773] = {rank =  1, cp =  1000, lvl = 10, item = 16691, place = 2},     -- royal_archers_cesti
-        [32774] = {rank =  1, cp =  1000, lvl = 10, item = 13718, place = 1},     -- royal_footmans_tunic
-        [32784] = {rank =  2, cp =  2000, lvl = 18, item = 16852},                -- royal_spearmans_spear
-        [32785] = {rank =  2, cp =  2000, lvl = 10, item = 12630},                -- royal_footmans_vest
-        [32786] = {rank =  2, cp =  2000, lvl = 20, item = 12882},                -- royal_footmans_trousers
-        [32787] = {rank =  2, cp =  2000, lvl = 20, item = 17367, place = 2},     -- royal_spearmans_horn
-        [32788] = {rank =  2, cp =  2000, lvl = 20, item = 13045, place = 1},     -- royal_footmans_clogs
-        [32800] = {rank =  3, cp =  4000, lvl = 30, item = 16844},                -- royal_squires_halberd
-        [32801] = {rank =  3, cp =  4000, lvl = 30, item = 13104},                -- royal_squires_collar
-        [32802] = {rank =  3, cp =  4000, lvl = 30, item = 12431},                -- royal_squires_helm
-        [32803] = {rank =  3, cp =  4000, lvl = 30, item = 12687},                -- royal_squires_mufflers
-        [32804] = {rank =  3, cp =  4000, lvl = 30, item = 12943},                -- royal_squires_sollerets
-        [32805] = {rank =  3, cp =  4000, lvl = 30, item = 16744, place = 2},     -- royal_squires_dagger
-        [32806] = {rank =  3, cp =  4000, lvl = 30, item = 17150, place = 1},     -- royal_squires_mace
-        [32807] = {rank =  3, cp =  4000, lvl =  1, item = 13495, place = 1},     -- san_dorian_ring
-        [32816] = {rank =  4, cp =  8000, lvl = 40, item = 16601},                -- royal_swordsmans_blade
-        [32817] = {rank =  4, cp =  8000, lvl = 40, item = 12559},                -- royal_squires_chainmail
-        [32818] = {rank =  4, cp =  8000, lvl = 40, item = 12815},                -- royal_squires_breeches
-        [32819] = {rank =  4, cp =  8000, lvl = 40, item = 13719, place = 2},     -- royal_squires_robe
-        [32820] = {rank =  4, cp =  8000, lvl = 40, item = 12336, place = 1},     -- royal_squires_shield
-        [32832] = {rank =  5, cp = 16000, lvl = 50, item = 16851},                -- royal_knight_army_lance
-        [32833] = {rank =  5, cp = 16000, lvl = 50, item = 16571},                -- temple_knight_army_sword
-        [32834] = {rank =  5, cp = 16000, lvl = 50, item = 12312},                -- royal_knight_army_shield
-        [32835] = {rank =  5, cp = 16000, lvl = 50, item = 12313},                -- temple_knight_army_shield
-        [32836] = {rank =  5, cp = 16000, lvl = 50, item = 13107},                -- royal_knight_army_collar
-        [32837] = {rank =  5, cp = 16000, lvl = 50, item = 13105},                -- temple_knight_army_collar
-        [32838] = {rank =  5, cp = 16000, lvl = 50, item = 12686},                -- royal_knights_mufflers
-        [32839] = {rank =  5, cp = 16000, lvl = 50, item = 12942},                -- royal_knights_sollerets
-        [32840] = {rank =  5, cp = 16000, lvl = 50, item = 13220, place = 2},     -- royal_knights_belt
-        [32841] = {rank =  5, cp = 16000, lvl = 50, item = 13720, place = 1},     -- royal_knights_cloak
-        [32848] = {rank =  6, cp = 24000, lvl = 55, item = 13580},                -- royal_army_mantle
-        [32849] = {rank =  6, cp = 24000, lvl = 55, item = 13106},                -- royal_guards_collar
-        [32850] = {rank =  6, cp = 24000, lvl = 55, item = 12430},                -- royal_knights_bascinet
-        [32851] = {rank =  6, cp = 24000, lvl = 55, item = 13722},                -- royal_knights_aketon
-        [32852] = {rank =  6, cp = 24000, lvl = 55, item = 12558, place = 1},     -- royal_knights_chainmail
-        [32853] = {rank =  6, cp = 24000, lvl = 55, item = 12814, place = 1},     -- royal_knights_breeches
-        [32854] = {rank =  6, cp = 24000, lvl = 55, item = 12321, place = 2},     -- royal_guards_shield
-        [32855] = {rank =  6, cp = 24000, lvl = 55, item = 17067, place = 1},     -- royal_guards_rod
-        [32856] = {rank =  6, cp = 24000, lvl = 55, item = 16599, place = 1},     -- royal_guards_sword
-        [32857] = {rank =  6, cp = 24000, lvl = 55, item = 16805, place = 1},     -- royal_guards_fleuret
-        [32864] = {rank =  7, cp = 32000, lvl = 60, item = 15956},                -- temple_knights_quiver
-        [32865] = {rank =  7, cp = 32000, lvl = 60, item = 16886, place = 2},     -- grand_knights_lance
-        [32866] = {rank =  7, cp = 32000, lvl = 60, item = 13557, place = 1},     -- grand_knights_ring
-        [32880] = {rank =  8, cp = 40000, lvl = 65, item = 14013},                -- grand_temple_knights_gauntlets
-        [32881] = {rank =  8, cp = 40000, lvl = 65, item = 14014, place = 2},     -- grand_temple_knights_bangles
-        [32882] = {rank =  8, cp = 40000, lvl = 65, item = 13140, place = 1},     -- grand_temple_knights_collar
-        [32896] = {rank =  9, cp = 48000, lvl = 71, item = 16953},                -- reserve_captains_greatsword
-        [32897] = {rank =  9, cp = 48000, lvl = 71, item = 17934},                -- reserve_captains_pick
-        [32898] = {rank =  9, cp = 48000, lvl = 71, item = 17458, place = 2},     -- reserve_captains_mace
-        [32899] = {rank =  9, cp = 48000, lvl = 71, item = 16893, place = 1},     -- reserve_captains_lance
-        [32912] = {rank = 10, cp = 56000, lvl =  1, item = 14428, place = 1},     -- kingdom_aketon
-        [32932] = {           cp =  5000, lvl =  1, item = 17583},                -- kingdom_signet_staff
-        [32940] = {rank = 10, cp = 10000, lvl =  1, item =  6377},                -- imperial_chair_set
+        [32768] = { rank =  1, cp =  1000, lvl = 10, item = 17167 },                -- royal_archers_longbow
+        [32769] = { rank =  1, cp =  1000, lvl = 10, item = 16544 },                -- royal_archers_sword
+        [32770] = { rank =  1, cp =  1000, lvl = 10, item = 12510 },                -- royal_footmans_bandana
+        [32771] = { rank =  1, cp =  1000, lvl = 10, item = 12753 },                -- royal_footmans_gloves
+        [32772] = { rank =  1, cp =  1000, lvl = 10, item = 13004 },                -- royal_footmans_boots
+        [32773] = { rank =  1, cp =  1000, lvl = 10, item = 16691, place = 2 },     -- royal_archers_cesti
+        [32774] = { rank =  1, cp =  1000, lvl = 10, item = 13718, place = 1 },     -- royal_footmans_tunic
+        [32784] = { rank =  2, cp =  2000, lvl = 18, item = 16852 },                -- royal_spearmans_spear
+        [32785] = { rank =  2, cp =  2000, lvl = 10, item = 12630 },                -- royal_footmans_vest
+        [32786] = { rank =  2, cp =  2000, lvl = 20, item = 12882 },                -- royal_footmans_trousers
+        [32787] = { rank =  2, cp =  2000, lvl = 20, item = 17367, place = 2 },     -- royal_spearmans_horn
+        [32788] = { rank =  2, cp =  2000, lvl = 20, item = 13045, place = 1 },     -- royal_footmans_clogs
+        [32800] = { rank =  3, cp =  4000, lvl = 30, item = 16844 },                -- royal_squires_halberd
+        [32801] = { rank =  3, cp =  4000, lvl = 30, item = 13104 },                -- royal_squires_collar
+        [32802] = { rank =  3, cp =  4000, lvl = 30, item = 12431 },                -- royal_squires_helm
+        [32803] = { rank =  3, cp =  4000, lvl = 30, item = 12687 },                -- royal_squires_mufflers
+        [32804] = { rank =  3, cp =  4000, lvl = 30, item = 12943 },                -- royal_squires_sollerets
+        [32805] = { rank =  3, cp =  4000, lvl = 30, item = 16744, place = 2 },     -- royal_squires_dagger
+        [32806] = { rank =  3, cp =  4000, lvl = 30, item = 17150, place = 1 },     -- royal_squires_mace
+        [32807] = { rank =  3, cp =  4000, lvl =  1, item = 13495, place = 1 },     -- san_dorian_ring
+        [32816] = { rank =  4, cp =  8000, lvl = 40, item = 16601 },                -- royal_swordsmans_blade
+        [32817] = { rank =  4, cp =  8000, lvl = 40, item = 12559 },                -- royal_squires_chainmail
+        [32818] = { rank =  4, cp =  8000, lvl = 40, item = 12815 },                -- royal_squires_breeches
+        [32819] = { rank =  4, cp =  8000, lvl = 40, item = 13719, place = 2 },     -- royal_squires_robe
+        [32820] = { rank =  4, cp =  8000, lvl = 40, item = 12336, place = 1 },     -- royal_squires_shield
+        [32832] = { rank =  5, cp = 16000, lvl = 50, item = 16851 },                -- royal_knight_army_lance
+        [32833] = { rank =  5, cp = 16000, lvl = 50, item = 16571 },                -- temple_knight_army_sword
+        [32834] = { rank =  5, cp = 16000, lvl = 50, item = 12312 },                -- royal_knight_army_shield
+        [32835] = { rank =  5, cp = 16000, lvl = 50, item = 12313 },                -- temple_knight_army_shield
+        [32836] = { rank =  5, cp = 16000, lvl = 50, item = 13107 },                -- royal_knight_army_collar
+        [32837] = { rank =  5, cp = 16000, lvl = 50, item = 13105 },                -- temple_knight_army_collar
+        [32838] = { rank =  5, cp = 16000, lvl = 50, item = 12686 },                -- royal_knights_mufflers
+        [32839] = { rank =  5, cp = 16000, lvl = 50, item = 12942 },                -- royal_knights_sollerets
+        [32840] = { rank =  5, cp = 16000, lvl = 50, item = 13220, place = 2 },     -- royal_knights_belt
+        [32841] = { rank =  5, cp = 16000, lvl = 50, item = 13720, place = 1 },     -- royal_knights_cloak
+        [32848] = { rank =  6, cp = 24000, lvl = 55, item = 13580 },                -- royal_army_mantle
+        [32849] = { rank =  6, cp = 24000, lvl = 55, item = 13106 },                -- royal_guards_collar
+        [32850] = { rank =  6, cp = 24000, lvl = 55, item = 12430 },                -- royal_knights_bascinet
+        [32851] = { rank =  6, cp = 24000, lvl = 55, item = 13722 },                -- royal_knights_aketon
+        [32852] = { rank =  6, cp = 24000, lvl = 55, item = 12558, place = 1 },     -- royal_knights_chainmail
+        [32853] = { rank =  6, cp = 24000, lvl = 55, item = 12814, place = 1 },     -- royal_knights_breeches
+        [32854] = { rank =  6, cp = 24000, lvl = 55, item = 12321, place = 2 },     -- royal_guards_shield
+        [32855] = { rank =  6, cp = 24000, lvl = 55, item = 17067, place = 1 },     -- royal_guards_rod
+        [32856] = { rank =  6, cp = 24000, lvl = 55, item = 16599, place = 1 },     -- royal_guards_sword
+        [32857] = { rank =  6, cp = 24000, lvl = 55, item = 16805, place = 1 },     -- royal_guards_fleuret
+        [32864] = { rank =  7, cp = 32000, lvl = 60, item = 15956 },                -- temple_knights_quiver
+        [32865] = { rank =  7, cp = 32000, lvl = 60, item = 16886, place = 2 },     -- grand_knights_lance
+        [32866] = { rank =  7, cp = 32000, lvl = 60, item = 13557, place = 1 },     -- grand_knights_ring
+        [32880] = { rank =  8, cp = 40000, lvl = 65, item = 14013 },                -- grand_temple_knights_gauntlets
+        [32881] = { rank =  8, cp = 40000, lvl = 65, item = 14014, place = 2 },     -- grand_temple_knights_bangles
+        [32882] = { rank =  8, cp = 40000, lvl = 65, item = 13140, place = 1 },     -- grand_temple_knights_collar
+        [32896] = { rank =  9, cp = 48000, lvl = 71, item = 16953 },                -- reserve_captains_greatsword
+        [32897] = { rank =  9, cp = 48000, lvl = 71, item = 17934 },                -- reserve_captains_pick
+        [32898] = { rank =  9, cp = 48000, lvl = 71, item = 17458, place = 2 },     -- reserve_captains_mace
+        [32899] = { rank =  9, cp = 48000, lvl = 71, item = 16893, place = 1 },     -- reserve_captains_lance
+        [32912] = { rank = 10, cp = 56000, lvl =  1, item = 14428, place = 1 },     -- kingdom_aketon
+        [32932] = {            cp =  5000, lvl =  1, item = 17583 },                -- kingdom_signet_staff
+        [32940] = { rank = 10, cp = 10000, lvl =  1, item =  6377 },                -- imperial_chair_set
     },
     [1] = -- Bastok
     {
-        [32768] = {rank =  1, cp =  1000, lvl = 10, item = 16433},                -- legionnaires_knuckles
-        [32769] = {rank =  1, cp =  1000, lvl = 10, item = 17223},                -- legionnaires_crossbow
-        [32770] = {rank =  1, cp =  1000, lvl = 10, item = 16648},                -- legionnaires_axe
-        [32771] = {rank =  1, cp =  1000, lvl = 10, item = 12509},                -- legionnaires_cap
-        [32772] = {rank =  1, cp =  1000, lvl = 10, item = 12752},                -- legionnaires_mittens
-        [32773] = {rank =  1, cp =  1000, lvl = 10, item = 13003},                -- legionnaires_leggings
-        [32774] = {rank =  1, cp =  1000, lvl = 10, item = 17128, place = 2},     -- legionnaires_staff
-        [32775] = {rank =  1, cp =  1000, lvl = 10, item = 16780, place = 1},     -- legionnaires_scythe
-        [32784] = {rank =  2, cp =  2000, lvl = 18, item = 17048},                -- decurions_hammer
-        [32785] = {rank =  2, cp =  2000, lvl = 10, item = 12629},                -- legionnaires_harness
-        [32786] = {rank =  2, cp =  2000, lvl = 20, item = 12881},                -- legionnaires_subligar
-        [32787] = {rank =  2, cp =  2000, lvl = 20, item = 16745, place = 2},     -- decurions_dagger
-        [32788] = {rank =  2, cp =  2000, lvl = 20, item = 12337, place = 1},     -- decurions_shield
-        [32800] = {rank =  3, cp =  4000, lvl = 30, item = 16712},                -- centurions_axe
-        [32801] = {rank =  3, cp =  4000, lvl = 10, item = 13098},                -- republican_bronze_medal
-        [32802] = {rank =  3, cp =  4000, lvl = 30, item = 12438},                -- centurions_visor
-        [32803] = {rank =  3, cp =  4000, lvl = 30, item = 12566},                -- centurions_scale_mail
-        [32804] = {rank =  3, cp =  4000, lvl = 30, item = 12694},                -- centurions_finger_gauntlets
-        [32805] = {rank =  3, cp =  4000, lvl = 30, item = 12822},                -- centurions_cuisses
-        [32806] = {rank =  3, cp =  4000, lvl = 30, item = 12950},                -- centurions_greaves
-        [32807] = {rank =  3, cp =  4000, lvl = 30, item = 16806, place = 2},     -- centurions_sword
-        [32808] = {rank =  3, cp =  4000, lvl = 30, item = 13830, place = 1},     -- legionnaires_circlet
-        [32809] = {rank =  3, cp =  4000, lvl =  1, item = 13497, place = 1},     -- bastokan_ring
-        [32816] = {rank =  4, cp =  8000, lvl = 40, item = 16516},                -- junior_musketeers_tuck
-        [32817] = {rank =  4, cp =  8000, lvl = 40, item = 12422},                -- iron_musketeers_armet
-        [32818] = {rank =  4, cp =  8000, lvl = 40, item = 12678},                -- iron_musketeers_gauntlets
-        [32819] = {rank =  4, cp =  8000, lvl = 40, item = 12934},                -- iron_musketeers_sabatons
-        [32820] = {rank =  4, cp =  8000, lvl = 40, item = 13721, place = 2},     -- iron_musketeers_gambison
-        [32821] = {rank =  4, cp =  8000, lvl = 40, item = 17283, place = 1},     -- junior_musketeers_chakram
-        [32832] = {rank =  5, cp = 16000, lvl = 50, item = 16529},                -- musketeers_sword
-        [32833] = {rank =  5, cp = 16000, lvl = 30, item = 13099},                -- republican_iron_medal
-        [32834] = {rank =  5, cp = 16000, lvl = 50, item = 12550},                -- iron_musketeers_cuirass
-        [32835] = {rank =  5, cp = 16000, lvl = 50, item = 12806},                -- iron_musketeers_cuisses
-        [32836] = {rank =  5, cp = 16000, lvl = 50, item = 17129, place = 2},     -- musketeers_pole
-        [32837] = {rank =  5, cp = 16000, lvl = 50, item = 17253, place = 1},     -- musketeer_gun
-        [32848] = {rank =  6, cp = 24000, lvl = 55, item = 13100},                -- republican_mythril_medal
-        [32849] = {rank =  6, cp = 24000, lvl = 55, item = 13582},                -- republican_army_mantle
-        [32850] = {rank =  6, cp = 24000, lvl = 55, item = 16557, place = 2},     -- musketeer_commanders_falchion
-        [32851] = {rank =  6, cp = 24000, lvl = 55, item = 12304, place = 2},     -- musketeer_commanders_shield
-        [32852] = {rank =  6, cp = 24000, lvl = 55, item = 17151, place = 1},     -- musketeer_commanders_rod
-        [32853] = {rank =  6, cp = 24000, lvl = 55, item = 13064, place = 1},     -- iron_musketeers_gorget
-        [32864] = {rank =  7, cp = 32000, lvl = 60, item = 15957},                -- iron_musketeers_quiver
-        [32865] = {rank =  7, cp = 32000, lvl = 60, item = 17807, place = 2},     -- gold_musketeers_uchigatana
-        [32866] = {rank =  7, cp = 32000, lvl = 60, item = 13558, place = 1},     -- gold_musketeers_ring
-        [32880] = {rank =  8, cp = 40000, lvl = 65, item = 14015},                -- praefectuss_gloves
-        [32881] = {rank =  8, cp = 40000, lvl = 65, item = 13880, place = 2},     -- presidential_hairpin
-        [32882] = {rank =  8, cp = 40000, lvl = 65, item = 13141, place = 1},     -- republican_gold_medal
-        [32896] = {rank =  9, cp = 48000, lvl = 71, item = 16799},                -- senior_gold_musketeers_scythe
-        [32897] = {rank =  9, cp = 48000, lvl = 71, item = 17457},                -- senior_gold_musketeers_rod
-        [32898] = {rank =  9, cp = 48000, lvl = 71, item = 18196, place = 2},     -- senior_gold_musketeers_axe
-        [32899] = {rank =  9, cp = 48000, lvl = 71, item = 17655, place = 1},     -- senior_gold_musketeers_scimitar
-        [32912] = {rank = 10, cp = 56000, lvl =  1, item = 14429, place = 1},     -- republic_aketon
-        [32932] = {           cp =  5000, lvl =  1, item = 17584},                -- republic_signet_staff
-        [32940] = {rank = 10, cp = 10000, lvl =  1, item =  6378},                -- decorative_chair_set
+        [32768] = { rank =  1, cp =  1000, lvl = 10, item = 16433 },                -- legionnaires_knuckles
+        [32769] = { rank =  1, cp =  1000, lvl = 10, item = 17223 },                -- legionnaires_crossbow
+        [32770] = { rank =  1, cp =  1000, lvl = 10, item = 16648 },                -- legionnaires_axe
+        [32771] = { rank =  1, cp =  1000, lvl = 10, item = 12509 },                -- legionnaires_cap
+        [32772] = { rank =  1, cp =  1000, lvl = 10, item = 12752 },                -- legionnaires_mittens
+        [32773] = { rank =  1, cp =  1000, lvl = 10, item = 13003 },                -- legionnaires_leggings
+        [32774] = { rank =  1, cp =  1000, lvl = 10, item = 17128, place = 2 },     -- legionnaires_staff
+        [32775] = { rank =  1, cp =  1000, lvl = 10, item = 16780, place = 1 },     -- legionnaires_scythe
+        [32784] = { rank =  2, cp =  2000, lvl = 18, item = 17048 },                -- decurions_hammer
+        [32785] = { rank =  2, cp =  2000, lvl = 10, item = 12629 },                -- legionnaires_harness
+        [32786] = { rank =  2, cp =  2000, lvl = 20, item = 12881 },                -- legionnaires_subligar
+        [32787] = { rank =  2, cp =  2000, lvl = 20, item = 16745, place = 2 },     -- decurions_dagger
+        [32788] = { rank =  2, cp =  2000, lvl = 20, item = 12337, place = 1 },     -- decurions_shield
+        [32800] = { rank =  3, cp =  4000, lvl = 30, item = 16712 },                -- centurions_axe
+        [32801] = { rank =  3, cp =  4000, lvl = 10, item = 13098 },                -- republican_bronze_medal
+        [32802] = { rank =  3, cp =  4000, lvl = 30, item = 12438 },                -- centurions_visor
+        [32803] = { rank =  3, cp =  4000, lvl = 30, item = 12566 },                -- centurions_scale_mail
+        [32804] = { rank =  3, cp =  4000, lvl = 30, item = 12694 },                -- centurions_finger_gauntlets
+        [32805] = { rank =  3, cp =  4000, lvl = 30, item = 12822 },                -- centurions_cuisses
+        [32806] = { rank =  3, cp =  4000, lvl = 30, item = 12950 },                -- centurions_greaves
+        [32807] = { rank =  3, cp =  4000, lvl = 30, item = 16806, place = 2 },     -- centurions_sword
+        [32808] = { rank =  3, cp =  4000, lvl = 30, item = 13830, place = 1 },     -- legionnaires_circlet
+        [32809] = { rank =  3, cp =  4000, lvl =  1, item = 13497, place = 1 },     -- bastokan_ring
+        [32816] = { rank =  4, cp =  8000, lvl = 40, item = 16516 },                -- junior_musketeers_tuck
+        [32817] = { rank =  4, cp =  8000, lvl = 40, item = 12422 },                -- iron_musketeers_armet
+        [32818] = { rank =  4, cp =  8000, lvl = 40, item = 12678 },                -- iron_musketeers_gauntlets
+        [32819] = { rank =  4, cp =  8000, lvl = 40, item = 12934 },                -- iron_musketeers_sabatons
+        [32820] = { rank =  4, cp =  8000, lvl = 40, item = 13721, place = 2 },     -- iron_musketeers_gambison
+        [32821] = { rank =  4, cp =  8000, lvl = 40, item = 17283, place = 1 },     -- junior_musketeers_chakram
+        [32832] = { rank =  5, cp = 16000, lvl = 50, item = 16529 },                -- musketeers_sword
+        [32833] = { rank =  5, cp = 16000, lvl = 30, item = 13099 },                -- republican_iron_medal
+        [32834] = { rank =  5, cp = 16000, lvl = 50, item = 12550 },                -- iron_musketeers_cuirass
+        [32835] = { rank =  5, cp = 16000, lvl = 50, item = 12806 },                -- iron_musketeers_cuisses
+        [32836] = { rank =  5, cp = 16000, lvl = 50, item = 17129, place = 2 },     -- musketeers_pole
+        [32837] = { rank =  5, cp = 16000, lvl = 50, item = 17253, place = 1 },     -- musketeer_gun
+        [32848] = { rank =  6, cp = 24000, lvl = 55, item = 13100 },                -- republican_mythril_medal
+        [32849] = { rank =  6, cp = 24000, lvl = 55, item = 13582 },                -- republican_army_mantle
+        [32850] = { rank =  6, cp = 24000, lvl = 55, item = 16557, place = 2 },     -- musketeer_commanders_falchion
+        [32851] = { rank =  6, cp = 24000, lvl = 55, item = 12304, place = 2 },     -- musketeer_commanders_shield
+        [32852] = { rank =  6, cp = 24000, lvl = 55, item = 17151, place = 1 },     -- musketeer_commanders_rod
+        [32853] = { rank =  6, cp = 24000, lvl = 55, item = 13064, place = 1 },     -- iron_musketeers_gorget
+        [32864] = { rank =  7, cp = 32000, lvl = 60, item = 15957 },                -- iron_musketeers_quiver
+        [32865] = { rank =  7, cp = 32000, lvl = 60, item = 17807, place = 2 },     -- gold_musketeers_uchigatana
+        [32866] = { rank =  7, cp = 32000, lvl = 60, item = 13558, place = 1 },     -- gold_musketeers_ring
+        [32880] = { rank =  8, cp = 40000, lvl = 65, item = 14015 },                -- praefectuss_gloves
+        [32881] = { rank =  8, cp = 40000, lvl = 65, item = 13880, place = 2 },     -- presidential_hairpin
+        [32882] = { rank =  8, cp = 40000, lvl = 65, item = 13141, place = 1 },     -- republican_gold_medal
+        [32896] = { rank =  9, cp = 48000, lvl = 71, item = 16799 },                -- senior_gold_musketeers_scythe
+        [32897] = { rank =  9, cp = 48000, lvl = 71, item = 17457 },                -- senior_gold_musketeers_rod
+        [32898] = { rank =  9, cp = 48000, lvl = 71, item = 18196, place = 2 },     -- senior_gold_musketeers_axe
+        [32899] = { rank =  9, cp = 48000, lvl = 71, item = 17655, place = 1 },     -- senior_gold_musketeers_scimitar
+        [32912] = { rank = 10, cp = 56000, lvl =  1, item = 14429, place = 1 },     -- republic_aketon
+        [32932] = {            cp =  5000, lvl =  1, item = 17584 },                -- republic_signet_staff
+        [32940] = { rank = 10, cp = 10000, lvl =  1, item =  6378 },                -- decorative_chair_set
     },
     [2] = -- Windurst
     {
-        [32768] = {rank =  1, cp =  1000, lvl = 10, item = 17159},                -- freeswords_bow
-        [32769] = {rank =  1, cp =  1000, lvl = 10, item = 17028},                -- freeswords_club
-        [32770] = {rank =  1, cp =  1000, lvl = 10, item = 16442},                -- freeswords_baghnakhs
-        [32771] = {rank =  1, cp =  1000, lvl = 10, item = 12915, place = 2},     -- freeswords_slops
-        [32772] = {rank =  1, cp =  1000, lvl = 10, item = 17130, place = 1},     -- freeswords_staff
-        [32784] = {rank =  2, cp =  2000, lvl = 18, item = 17103},                -- mercenarys_pole
-        [32785] = {rank =  2, cp =  2000, lvl = 20, item = 12484},                -- mercenarys_hachimaki
-        [32786] = {rank =  2, cp =  2000, lvl = 20, item = 12653},                -- mercenarys_gi
-        [32787] = {rank =  2, cp =  2000, lvl = 20, item = 12719},                -- mercenarys_tekko
-        [32788] = {rank =  2, cp =  2000, lvl = 20, item = 12855},                -- mercenarys_sitabaki
-        [32789] = {rank =  2, cp =  2000, lvl = 20, item = 12975},                -- mercenarys_kyahan
-        [32790] = {rank =  2, cp =  2000, lvl = 20, item = 16746, place = 2},     -- mercenarys_knife
-        [32791] = {rank =  2, cp =  2000, lvl = 20, item = 16930, place = 1},     -- mercenarys_greatsword
-        [32800] = {rank =  3, cp =  4000, lvl = 30, item = 16776},                -- mercenary_captains_scythe
-        [32801] = {rank =  3, cp =  4000, lvl = 30, item = 12470},                -- mercenary_captains_headgear
-        [32802] = {rank =  3, cp =  4000, lvl = 30, item = 12598},                -- mercenary_captains_doublet
-        [32803] = {rank =  3, cp =  4000, lvl = 30, item = 12726},                -- mercenary_captains_gloves
-        [32804] = {rank =  3, cp =  4000, lvl = 30, item = 12854},                -- mercenary_captains_hose
-        [32805] = {rank =  3, cp =  4000, lvl = 30, item = 12982},                -- mercenary_captains_gaiters
-        [32806] = {rank =  3, cp =  4000, lvl = 30, item = 16747, place = 2},     -- mercenary_captains_kukri
-        [32807] = {rank =  3, cp =  4000, lvl = 30, item = 13221, place = 1},     -- mercenary_captains_belt
-        [32808] = {rank =  3, cp =  4000, lvl =  1, item = 13496, place = 1},     -- windurstian_ring
-        [32816] = {rank =  4, cp =  8000, lvl = 40, item = 16463},                -- combat_casters_dagger
-        [32817] = {rank =  4, cp =  8000, lvl = 40, item = 17282},                -- combat_casters_boomerang
-        [32818] = {rank =  4, cp =  8000, lvl = 10, item = 13101},                -- green_scarf
-        [32819] = {rank =  4, cp =  8000, lvl = 40, item = 12614},                -- combat_casters_cloak
-        [32820] = {rank =  4, cp =  8000, lvl = 40, item = 12743},                -- combat_casters_mitts
-        [32821] = {rank =  4, cp =  8000, lvl = 40, item = 12870},                -- combat_casters_slacks
-        [32822] = {rank =  4, cp =  8000, lvl = 40, item = 12998},                -- combat_casters_shoes
-        [32823] = {rank =  4, cp =  8000, lvl = 40, item = 16807, place = 2},     -- combat_casters_scimitar
-        [32824] = {rank =  4, cp =  8000, lvl = 40, item = 16669, place = 1},     -- combat_casters_axe
-        [32832] = {rank =  5, cp = 16000, lvl = 50, item = 17082, place = 2},     -- tactician_magicians_wand
-        [32833] = {rank =  5, cp = 16000, lvl = 30, item = 13102},                -- paisley_scarf
-        [32834] = {rank =  5, cp = 16000, lvl = 50, item = 12478, place = 2},     -- tactician_magicians_hat
-        [32835] = {rank =  5, cp = 16000, lvl = 50, item = 12606},                -- tactician_magicians_coat
-        [32836] = {rank =  5, cp = 16000, lvl = 50, item = 12734},                -- tactician_magicians_cuffs
-        [32837] = {rank =  5, cp = 16000, lvl = 50, item = 12862},                -- tactician_magicians_slops
-        [32838] = {rank =  5, cp = 16000, lvl = 50, item = 12990},                -- tactician_magicians_pigaches
-        [32839] = {rank =  5, cp = 16000, lvl = 50, item = 16810},                -- tactician_magicians_espadon
-        [32840] = {rank =  5, cp = 16000, lvl = 50, item = 16694, place = 1},     -- tactician_magicians_hooks
-        [32848] = {rank =  6, cp = 24000, lvl = 55, item = 13103},                -- checkered_scarf
-        [32849] = {rank =  6, cp = 24000, lvl = 55, item = 13581},                -- federal_army_mantle
-        [32850] = {rank =  6, cp = 24000, lvl = 55, item = 17094, place = 2},     -- wise_wizards_staff
-        [32851] = {rank =  6, cp = 24000, lvl = 55, item = 16808, place = 2},     -- wise_wizards_bilbo
-        [32852] = {rank =  6, cp = 24000, lvl = 55, item = 16809, place = 1},     -- wise_wizards_anelace
-        [32864] = {rank =  7, cp = 32000, lvl = 60, item = 15958},                -- combat_casters_quiver
-        [32865] = {rank =  7, cp = 32000, lvl = 60, item = 12363, place = 2},     -- patriarch_protectors_shield
-        [32866] = {rank =  7, cp = 32000, lvl = 60, item = 13559, place = 1},     -- patriarch_protectors_ring
-        [32880] = {rank =  8, cp = 40000, lvl = 65, item = 14016},                -- master_casters_mitts
-        [32881] = {rank =  8, cp = 40000, lvl = 65, item = 14017, place = 2},     -- master_casters_bracelets
-        [32882] = {rank =  8, cp = 40000, lvl = 65, item = 13142, place = 1},     -- windurstian_scarf
-        [32896] = {rank =  9, cp = 48000, lvl = 71, item = 18145},                -- master_casters_bow
-        [32897] = {rank =  9, cp = 48000, lvl = 71, item = 17530},                -- master_casters_pole
-        [32898] = {rank =  9, cp = 48000, lvl = 71, item = 17508, place = 2},     -- master_casters_baghnakhs
-        [32899] = {rank =  9, cp = 48000, lvl = 71, item = 17617, place = 1},     -- master_casters_knife
-        [32912] = {rank = 10, cp = 56000, lvl =  1, item = 14430, place = 1},     -- federation_aketon
-        [32932] = {           cp =  5000, lvl =  1, item = 17585},                -- federation_signet_staff
-        [32940] = {rank = 10, cp = 10000, lvl =  1, item =  6379},                -- ornate_stool_set
+        [32768] = { rank =  1, cp =  1000, lvl = 10, item = 17159 },                -- freeswords_bow
+        [32769] = { rank =  1, cp =  1000, lvl = 10, item = 17028 },                -- freeswords_club
+        [32770] = { rank =  1, cp =  1000, lvl = 10, item = 16442 },                -- freeswords_baghnakhs
+        [32771] = { rank =  1, cp =  1000, lvl = 10, item = 12915, place = 2 },     -- freeswords_slops
+        [32772] = { rank =  1, cp =  1000, lvl = 10, item = 17130, place = 1 },     -- freeswords_staff
+        [32784] = { rank =  2, cp =  2000, lvl = 18, item = 17103 },                -- mercenarys_pole
+        [32785] = { rank =  2, cp =  2000, lvl = 20, item = 12484 },                -- mercenarys_hachimaki
+        [32786] = { rank =  2, cp =  2000, lvl = 20, item = 12653 },                -- mercenarys_gi
+        [32787] = { rank =  2, cp =  2000, lvl = 20, item = 12719 },                -- mercenarys_tekko
+        [32788] = { rank =  2, cp =  2000, lvl = 20, item = 12855 },                -- mercenarys_sitabaki
+        [32789] = { rank =  2, cp =  2000, lvl = 20, item = 12975 },                -- mercenarys_kyahan
+        [32790] = { rank =  2, cp =  2000, lvl = 20, item = 16746, place = 2 },     -- mercenarys_knife
+        [32791] = { rank =  2, cp =  2000, lvl = 20, item = 16930, place = 1 },     -- mercenarys_greatsword
+        [32800] = { rank =  3, cp =  4000, lvl = 30, item = 16776 },                -- mercenary_captains_scythe
+        [32801] = { rank =  3, cp =  4000, lvl = 30, item = 12470 },                -- mercenary_captains_headgear
+        [32802] = { rank =  3, cp =  4000, lvl = 30, item = 12598 },                -- mercenary_captains_doublet
+        [32803] = { rank =  3, cp =  4000, lvl = 30, item = 12726 },                -- mercenary_captains_gloves
+        [32804] = { rank =  3, cp =  4000, lvl = 30, item = 12854 },                -- mercenary_captains_hose
+        [32805] = { rank =  3, cp =  4000, lvl = 30, item = 12982 },                -- mercenary_captains_gaiters
+        [32806] = { rank =  3, cp =  4000, lvl = 30, item = 16747, place = 2 },     -- mercenary_captains_kukri
+        [32807] = { rank =  3, cp =  4000, lvl = 30, item = 13221, place = 1 },     -- mercenary_captains_belt
+        [32808] = { rank =  3, cp =  4000, lvl =  1, item = 13496, place = 1 },     -- windurstian_ring
+        [32816] = { rank =  4, cp =  8000, lvl = 40, item = 16463 },                -- combat_casters_dagger
+        [32817] = { rank =  4, cp =  8000, lvl = 40, item = 17282 },                -- combat_casters_boomerang
+        [32818] = { rank =  4, cp =  8000, lvl = 10, item = 13101 },                -- green_scarf
+        [32819] = { rank =  4, cp =  8000, lvl = 40, item = 12614 },                -- combat_casters_cloak
+        [32820] = { rank =  4, cp =  8000, lvl = 40, item = 12743 },                -- combat_casters_mitts
+        [32821] = { rank =  4, cp =  8000, lvl = 40, item = 12870 },                -- combat_casters_slacks
+        [32822] = { rank =  4, cp =  8000, lvl = 40, item = 12998 },                -- combat_casters_shoes
+        [32823] = { rank =  4, cp =  8000, lvl = 40, item = 16807, place = 2 },     -- combat_casters_scimitar
+        [32824] = { rank =  4, cp =  8000, lvl = 40, item = 16669, place = 1 },     -- combat_casters_axe
+        [32832] = { rank =  5, cp = 16000, lvl = 50, item = 17082, place = 2 },     -- tactician_magicians_wand
+        [32833] = { rank =  5, cp = 16000, lvl = 30, item = 13102 },                -- paisley_scarf
+        [32834] = { rank =  5, cp = 16000, lvl = 50, item = 12478, place = 2 },     -- tactician_magicians_hat
+        [32835] = { rank =  5, cp = 16000, lvl = 50, item = 12606 },                -- tactician_magicians_coat
+        [32836] = { rank =  5, cp = 16000, lvl = 50, item = 12734 },                -- tactician_magicians_cuffs
+        [32837] = { rank =  5, cp = 16000, lvl = 50, item = 12862 },                -- tactician_magicians_slops
+        [32838] = { rank =  5, cp = 16000, lvl = 50, item = 12990 },                -- tactician_magicians_pigaches
+        [32839] = { rank =  5, cp = 16000, lvl = 50, item = 16810 },                -- tactician_magicians_espadon
+        [32840] = { rank =  5, cp = 16000, lvl = 50, item = 16694, place = 1 },     -- tactician_magicians_hooks
+        [32848] = { rank =  6, cp = 24000, lvl = 55, item = 13103 },                -- checkered_scarf
+        [32849] = { rank =  6, cp = 24000, lvl = 55, item = 13581 },                -- federal_army_mantle
+        [32850] = { rank =  6, cp = 24000, lvl = 55, item = 17094, place = 2 },     -- wise_wizards_staff
+        [32851] = { rank =  6, cp = 24000, lvl = 55, item = 16808, place = 2 },     -- wise_wizards_bilbo
+        [32852] = { rank =  6, cp = 24000, lvl = 55, item = 16809, place = 1 },     -- wise_wizards_anelace
+        [32864] = { rank =  7, cp = 32000, lvl = 60, item = 15958 },                -- combat_casters_quiver
+        [32865] = { rank =  7, cp = 32000, lvl = 60, item = 12363, place = 2 },     -- patriarch_protectors_shield
+        [32866] = { rank =  7, cp = 32000, lvl = 60, item = 13559, place = 1 },     -- patriarch_protectors_ring
+        [32880] = { rank =  8, cp = 40000, lvl = 65, item = 14016 },                -- master_casters_mitts
+        [32881] = { rank =  8, cp = 40000, lvl = 65, item = 14017, place = 2 },     -- master_casters_bracelets
+        [32882] = { rank =  8, cp = 40000, lvl = 65, item = 13142, place = 1 },     -- windurstian_scarf
+        [32896] = { rank =  9, cp = 48000, lvl = 71, item = 18145 },                -- master_casters_bow
+        [32897] = { rank =  9, cp = 48000, lvl = 71, item = 17530 },                -- master_casters_pole
+        [32898] = { rank =  9, cp = 48000, lvl = 71, item = 17508, place = 2 },     -- master_casters_baghnakhs
+        [32899] = { rank =  9, cp = 48000, lvl = 71, item = 17617, place = 1 },     -- master_casters_knife
+        [32912] = { rank = 10, cp = 56000, lvl =  1, item = 14430, place = 1 },     -- federation_aketon
+        [32932] = {            cp =  5000, lvl =  1, item = 17585 },                -- federation_signet_staff
+        [32940] = { rank = 10, cp = 10000, lvl =  1, item =  6379 },                -- ornate_stool_set
     },
 }
 
@@ -1109,10 +1109,13 @@ xi.conquest.overseerOnTrigger = function(player, npc, guardNation, guardType, gu
 end
 
 xi.conquest.overseerOnEventUpdate = function(player, csid, option, guardNation)
+    local pNation = player:getNation()
+    if guardNation == xi.nation.OTHER then
+        guardNation = pNation
+    end
     local stock = getStock(player, guardNation, option)
 
     if stock ~= nil then
-        local pNation = player:getNation()
         local pRank   = GetNationRank(pNation)
         local u1 = 2 -- default: player is correct job and level to equip item
         local u2 = 0 -- default: player has enough CP for item
@@ -1382,7 +1385,7 @@ xi.conquest.onConquestUpdate = function(zone, updatetype)
             player:messageText(player, messageBase + 1, 5) -- Tallying conquest results...
 
             if owner <= 3 then
-                player:messageText(player, messageBase + 2 + owner, 5) -- This region is currently under {NATION} control.
+                player:messageText(player, messageBase + 2 + owner, 5) -- This region is currently under <nation> control.
             else
                 player:messageText(player, messageBase + 6, 5) -- This region is currently under beastman control.
             end
@@ -1442,7 +1445,7 @@ xi.conquest.onConquestUpdate = function(zone, updatetype)
             local influence = GetRegionInfluence(region)
 
             if owner <= 3 then
-                player:messageText(player, messageBase + 32 + owner, 5) -- This region is currently under {NATION} control.
+                player:messageText(player, messageBase + 32 + owner, 5) -- This region is currently under <nation> control.
             else
                 player:messageText(player, messageBase + 31, 5) -- This region is currently under beastman control.
             end

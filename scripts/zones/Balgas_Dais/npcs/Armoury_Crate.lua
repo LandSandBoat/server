@@ -19,10 +19,12 @@ local loot =
             {itemid = xi.items.GOLD_BEASTCOIN,    droprate = 500},
             {itemid = xi.items.MYTHRIL_BEASTCOIN, droprate = 500},
         },
+
         {
             {itemid = 0, droprate =  750}, -- nothing
             {itemid = xi.items.VILE_ELIXIR, droprate =  250},
         },
+
         {
             {itemid =     0, droprate =  600}, -- nothing
             {itemid = xi.items.SURVIVAL_BELT,     droprate = 100},
@@ -30,6 +32,7 @@ local loot =
             {itemid = xi.items.ENHANCING_EARRING, droprate = 100},
             {itemid = xi.items.BALANCE_BUCKLER,   droprate = 100},
         },
+
         {
             {itemid = xi.items.WHITE_ROCK,       droprate = 125},
             {itemid = xi.items.TRANSLUCENT_ROCK, droprate = 125},
@@ -40,6 +43,7 @@ local loot =
             {itemid = xi.items.GREEN_ROCK,       droprate = 125},
             {itemid = xi.items.BLACK_ROCK,       droprate = 125},
         },
+
         {
             {itemid = xi.items.GARNET,       droprate =  50},
             {itemid = xi.items.BLACK_PEARL,  droprate =  50},
@@ -54,6 +58,7 @@ local loot =
             {itemid = xi.items.SAPPHIRE,     droprate = 100},
             {itemid = xi.items.PERIDOT,      droprate = 150},
         },
+
         {
             {itemid =     0, droprate =  125}, -- nothing
             {itemid = xi.items.SCROLL_OF_REFRESH,     droprate = 125},
@@ -65,6 +70,7 @@ local loot =
             {itemid = xi.items.FIRE_SPIRIT_PACT,      droprate = 125},
         },
     },
+
     -- BCNM Divine Punishers
     [98] =
     {
@@ -74,6 +80,7 @@ local loot =
             {itemid = xi.items.SPARTAN_CESTI,  droprate = 250},
             {itemid = xi.items.DOMINION_MACE,  droprate = 250},
         },
+
         {
             {itemid = 0, droprate = 250}, -- nothing
             {itemid = xi.items.FUMA_KYAHAN,      droprate = 100},
@@ -82,11 +89,13 @@ local loot =
             {itemid = xi.items.MASTER_BELT,      droprate = 150},
             {itemid = xi.items.OCHIUDOS_KOTE,    droprate = 100},
         },
+
         {
             {itemid = 0, droprate = 850}, -- nothing
             {itemid = xi.items.HI_RERAISER,    droprate = 100},
             {itemid = xi.items.VILE_ELIXIR_P1, droprate =  50},
         },
+
         {
             {itemid = xi.items.PURPLE_ROCK,      droprate = 166},
             {itemid = xi.items.TRANSLUCENT_ROCK, droprate = 166},
@@ -95,6 +104,7 @@ local loot =
             {itemid = xi.items.YELLOW_ROCK,      droprate = 167},
             {itemid = xi.items.WHITE_ROCK,       droprate = 167},
         },
+
         {
             {itemid = xi.items.PAINITE,     droprate = 125},
             {itemid = xi.items.AQUAMARINE,  droprate = 125},
@@ -105,11 +115,13 @@ local loot =
             {itemid = xi.items.MOONSTONE,   droprate = 125},
             {itemid = xi.items.JADEITE,     droprate = 125},
         },
+
         {
             {itemid = 0, droprate = 517}, -- nothing
             {itemid = xi.items.MAHOGANY_LOG, droprate = 333},
             {itemid = xi.items.EBONY_LOG,    droprate = 150},
         },
+
         {
             {itemid = xi.items.STEEL_INGOT,     droprate = 350},
             {itemid = xi.items.MYTHRIL_INGOT,   droprate = 150},
@@ -117,6 +129,7 @@ local loot =
             {itemid = xi.items.GOLD_INGOT,      droprate = 350},
         },
     },
+
     -- BCNM Treasure and Tribulations
     [100] =
     {
@@ -138,6 +151,7 @@ local loot =
             {itemid = xi.items.RONIN_RING,     droprate =  11},
             {itemid = xi.items.PLATINUM_RING,   droprate = 32},
         },
+
         {
             {itemid = xi.items.ASTRAL_RING,              droprate = 376},
             {itemid = xi.items.PLATINUM_RING,            droprate =  22},
@@ -167,23 +181,28 @@ local loot =
             {itemid = xi.items.HANDFUL_OF_WYVERN_SCALES, droprate =  11},
         },
     },
+
     -- BCNM Creeping Doom
     [104] =
     {
         {
             {itemid = xi.items.SPOOL_OF_SILK_THREAD, droprate = 1000},
         },
+
         {
-            {itemid = 65535, droprate = 1000, amount = 3000}, -- gil
+            { itemid = 65535, droprate = 1000, amount = 3000 }, -- gil
         },
+
         {
             {itemid = 0, droprate =  700}, -- nothing
             {itemid = xi.items.SPOOL_OF_SILK_THREAD, droprate =  300},
         },
+
         {
             {itemid = 0, droprate =  900}, -- nothing
             {itemid = xi.items.SPOOL_OF_SILK_THREAD, droprate =  100},
         },
+
         {
             {itemid = 0, droprate = 300}, -- nothing
             {itemid = xi.items.SINGERS_EARRING,    droprate = 40},
@@ -202,6 +221,7 @@ local loot =
             {itemid = xi.items.PILFERERS_EARRING,  droprate = 45},
             {itemid = xi.items.TRIMMERS_EARRING,   droprate = 50},
         },
+
         {
             {itemid =     0, droprate =  700}, -- nothing
             {itemid = xi.items.SINGERS_EARRING,    droprate = 20},
@@ -220,16 +240,19 @@ local loot =
             {itemid = xi.items.PILFERERS_EARRING,  droprate = 20},
             {itemid = xi.items.TRIMMERS_EARRING,   droprate = 20},
         },
+
         {
             {itemid = 0, droprate = 500}, -- nothing
             {itemid = xi.items.SHEET_OF_BAST_PARCHMENT, droprate =  400},
             {itemid = xi.items.HI_POTION,               droprate =  100},
         },
+
         {
             {itemid = 0, droprate = 500}, -- nothing
             {itemid = xi.items.CHESTNUT_LOG, droprate =  250},
             {itemid = xi.items.HI_ETHER,     droprate =  250},
         },
+
         {
             {itemid = 0, droprate = 250}, -- nothing
             {itemid = xi.items.SCROLL_OF_ERASE,        droprate =  150},
@@ -237,6 +260,7 @@ local loot =
             {itemid = xi.items.SCROLL_OF_MAGIC_FINALE, droprate =  250},
             {itemid = xi.items.SCROLL_OF_UTSUSEMI_NI,  droprate =  150},
         },
+
         {
             {itemid = 0, droprate = 300}, -- nothing
             {itemid = xi.items.AMBER_STONE,            droprate =   50},
@@ -255,6 +279,7 @@ local loot =
             {itemid = xi.items.TOURMALINE,             droprate =   50},
             {itemid = xi.items.LIGHT_OPAL,             droprate =   50},
         },
+
         {
             {itemid = 0, droprate =  300}, -- nothing
             {itemid = xi.items.AMBER_STONE,            droprate = 50},
@@ -274,12 +299,14 @@ local loot =
             {itemid = xi.items.LIGHT_OPAL,             droprate = 50},
         },
     },
+
     -- BCNM Charming Trio
     [105] =
     {
         {
             {itemid = xi.items.MANNEQUIN_HANDS, droprate = 1000},
         },
+
         {
             {itemid = xi.items.JAR_OF_TOAD_OIL,        droprate = 250},
             {itemid = xi.items.POTION,                 droprate = 300},
@@ -287,6 +314,7 @@ local loot =
             {itemid = xi.items.AIR_SPIRIT_PACT,        droprate = 130},
             {itemid = xi.items.SQUARE_OF_COTTON_CLOTH, droprate = 280},
         },
+
         {
             {itemid = xi.items.MYTHRIL_BEASTCOIN,     droprate = 250},
             {itemid = xi.items.GANKO,                 droprate = 190},
@@ -295,18 +323,22 @@ local loot =
             {itemid = xi.items.SQUARE_OF_GRASS_CLOTH, droprate = 295},
             {itemid = xi.items.SQUARE_OF_LINEN_CLOTH, droprate = 260},
         },
+
         {
             {itemid = 0, droprate = 800},    -- Nothing
             {itemid = xi.items.PLATOON_CUTTER, droprate = 167},
         },
+
         {
             {itemid = 0, droprate = 500},    -- Nothing
             {itemid = xi.items.VIAL_OF_FIEND_BLOOD, droprate = 500},
         },
+
         {
             {itemid = 0, droprate = 500},    -- Nothing
             {itemid = xi.items.VIAL_OF_FIEND_BLOOD, droprate = 500},
         },
+
         {
             {itemid = xi.items.PLATOON_EDGE,           droprate = 235},
             {itemid = xi.items.PLATOON_GUN,            droprate = 235},
@@ -318,20 +350,24 @@ local loot =
             {itemid = xi.items.VIAL_OF_BEASTMAN_BLOOD, droprate = 190},
         },
     },
+
     -- BCNM Harem Scarem
     [106] =
     {
         {
             {itemid = xi.items.DHALMEL_HIDE, droprate = 1000},
         },
+
         {
             {itemid = 0, droprate = 500}, -- nothing
             {itemid = xi.items.GIANT_FEMUR, droprate = 500},
         },
+
         {
             {itemid = 0, droprate = 500}, -- nothing
             {itemid = xi.items.SLICE_OF_DHALMEL_MEAT, droprate = 500},
         },
+
         {
             {itemid = 0, droprate = 400}, -- nothing
             {itemid = xi.items.MERCENARY_MANTLE, droprate = 150},
@@ -339,12 +375,14 @@ local loot =
             {itemid = xi.items.ESQUIRES_MANTLE,  droprate = 150},
             {itemid = xi.items.HEALERS_MANTLE,   droprate = 150},
         },
+
         {
             {itemid = 0, droprate = 400}, -- nothing
             {itemid = xi.items.WIZARDS_SHIELD, droprate = 200},
             {itemid = xi.items.TRIMMERS_ASPIS, droprate = 200},
             {itemid = xi.items.WYVERNS_TARGE,  droprate = 200},
         },
+
         {
             {itemid = 0, droprate = 200}, -- nothing
             {itemid = xi.items.SCROLL_OF_ERASE,        droprate = 200},
@@ -352,18 +390,21 @@ local loot =
             {itemid = xi.items.SCROLL_OF_MAGIC_FINALE, droprate = 200},
             {itemid = xi.items.SCROLL_OF_UTSUSEMI_NI,  droprate = 200},
         },
+
         {
             {itemid = 0, droprate = 250}, -- nothing
             {itemid = xi.items.SQUARE_OF_VELVET_CLOTH, droprate = 250},
             {itemid = xi.items.SQUARE_OF_LINEN_CLOTH,  droprate = 250},
             {itemid = xi.items.SQUARE_OF_WOOL_CLOTH,   droprate = 250},
         },
+
         {
             {itemid = 0, droprate = 600}, -- nothing
             {itemid = xi.items.MANNEQUIN_HEAD,  droprate = 200},
             {itemid = xi.items.MANNEQUIN_HANDS, droprate = 200},
         },
     },
+
     -- KSNM Early Bird Catches the Wyrm
     [107] =
     {
@@ -376,12 +417,14 @@ local loot =
             {itemid = xi.items.SHINSOKU,            droprate = 217},
             {itemid = xi.items.SOMNUS_SIGNA,        droprate =  43},
         },
+
         {
             {itemid = xi.items.DIVINE_LOG,              droprate =  94},
             {itemid = xi.items.LACQUER_TREE_LOG,        droprate = 196},
             {itemid = xi.items.PETRIFIED_LOG,           droprate = 572},
             {itemid = xi.items.SQUARE_OF_SHINING_CLOTH, droprate =  43},
         },
+
         {
             {itemid = xi.items.OBLATION_ABJURATION, droprate = 159},
             {itemid = xi.items.BAYARDS_SWORD,       droprate = 151},
@@ -391,12 +434,14 @@ local loot =
             {itemid = xi.items.STYLET,              droprate =  56},
             {itemid = xi.items.UNSHO,               droprate = 341},
         },
+
         {
             {itemid = xi.items.DRAGON_HEART,         droprate = 522},
             {itemid = xi.items.SLICE_OF_DRAGON_MEAT, droprate = 346},
             {itemid = xi.items.JUGGERNAUT,           droprate =  82},
             {itemid = xi.items.SPEED_BELT,           droprate =  59},
         },
+
         {
             {itemid = xi.items.CORAL_FRAGMENT,           droprate =  32},
             {itemid = xi.items.CHUNK_OF_DARKSTEEL_ORE,   droprate =  71},
@@ -416,10 +461,12 @@ local loot =
             {itemid = xi.items.VILE_ELIXIR_P1,           droprate =  40},
             {itemid = xi.items.HANDFUL_OF_WYVERN_SCALES, droprate =  24},
         },
+
         {
             {itemid = xi.items.WYRM_BEARD,          droprate = 210},
             {itemid = xi.items.LOCK_OF_SIRENS_HAIR, droprate = 775},
         },
+
         {
             {itemid = xi.items.MIND_POTION,         droprate =  94},
             {itemid = xi.items.INTELLIGENCE_POTION, droprate = 130},
@@ -428,12 +475,14 @@ local loot =
             {itemid = xi.items.SQUARE_OF_RAXA,      droprate = 246},
             {itemid = xi.items.PRELATIC_POLE,       droprate = 246},
         },
+
         {
             {itemid = xi.items.HI_ETHER_III,   droprate = 290},
             {itemid = xi.items.HI_POTION_P3,   droprate = 225},
             {itemid = xi.items.HI_RERAISER,    droprate = 210},
             {itemid = xi.items.VILE_ELIXIR_P1, droprate = 217},
         },
+
         {
             {itemid = xi.items.CORAL_FRAGMENT,           droprate =  87},
             {itemid = xi.items.CHUNK_OF_DARKSTEEL_ORE,   droprate =  80},
@@ -455,6 +504,7 @@ local loot =
             {itemid = xi.items.VILE_ELIXIR_P1,           droprate =   7},
             {itemid = xi.items.HANDFUL_OF_WYVERN_SCALES, droprate =  22},
         },
+
         {
             {itemid = xi.items.VIAL_OF_BLACK_BEETLE_BLOOD, droprate =  58},
             {itemid = xi.items.SQUARE_OF_DAMASCENE_CLOTH,  droprate =  36},
@@ -472,6 +522,7 @@ local loot =
         {
             {itemid = xi.items.BUNCH_OF_WILD_PAMAMAS, droprate = 1000},
         },
+
         {
             {itemid = 0, droprate =  300}, -- nothing
             {itemid = xi.items.DUSKY_STAFF,      droprate =  100},
@@ -482,12 +533,14 @@ local loot =
             {itemid = xi.items.KAGEHIDE,         droprate =  100},
             {itemid = xi.items.OHAGURO,          droprate =  100},
         },
+
         {
             {itemid = 0, droprate =  100}, -- nothing
             {itemid = xi.items.GENIN_EARRING, droprate =  300},
             {itemid = xi.items.AGILE_GORGET,  droprate =  300},
             {itemid = xi.items.JAGD_GORGET,   droprate =  300},
         },
+
         {
             {itemid = 0, droprate =  370}, -- nothing
             {itemid = xi.items.TURQUOISE,            droprate =  100},
@@ -496,26 +549,31 @@ local loot =
             {itemid = xi.items.ROSEWOOD_LOG,         droprate =  140},
             {itemid = xi.items.PEARL,                droprate =  180},
         },
+
         {
             {itemid = xi.items.SCROLL_OF_PHALANX,    droprate =  250},
             {itemid = xi.items.SCROLL_OF_ABSORB_INT, droprate =  250},
             {itemid = xi.items.SCROLL_OF_REFRESH,    droprate =  250},
             {itemid = xi.items.SCROLL_OF_ERASE,      droprate =  250},
         },
+
         {
             {itemid = 0, droprate =  600}, -- nothing
             {itemid = xi.items.GOLD_BEASTCOIN, droprate =  400},
         },
     },
+
     -- BCNM Rapid Raptors
     [109] =
     {
         {
             {itemid = xi.items.RAPTOR_SKIN, droprate = 1000},
         },
+
         {
             {itemid = xi.items.ADAMAN_INGOT, droprate = 1000},
         },
+
         {
             {itemid = 0, droprate =  190}, -- nothing
             {itemid = xi.items.SLY_GAUNTLES,           droprate =  10},
@@ -525,6 +583,7 @@ local loot =
             {itemid = xi.items.MANA_CIRCLET,           droprate = 150},
             {itemid = xi.items.IVORY_MITTS,            droprate = 150},
         },
+
         {
             {itemid = 0, droprate =   30}, -- nothing
             {itemid = xi.items.STORM_GORGET,     droprate = 100},
@@ -535,52 +594,64 @@ local loot =
             {itemid = xi.items.ESOTERIC_MANTLE,  droprate = 170},
             {itemid = xi.items.TEMPLARS_MANTLE,  droprate = 180},
         },
+
         {
             {itemid = 0, droprate =  230}, -- nothing
             {itemid = xi.items.MYTHRIL_INGOT,     droprate =  200},
             {itemid = xi.items.CHUNK_OF_IRON_ORE, droprate =  200},
             {itemid = xi.items.PETRIFIED_LOG,     droprate =  370},
         },
+
         {
             {itemid = 0, droprate =  560}, -- nothing
             {itemid = xi.items.RERAISER, droprate =  440},
         },
     },
+
     -- BCNM Wild Wild Whiskers
     [110] =
     {
         {
             {itemid = xi.items.HIGH_QUALITY_COEURL_HIDE, droprate = 1000},
         },
+
         {
             {itemid = xi.items.HIGH_QUALITY_COEURL_HIDE, droprate = 1000},
         },
+
         {
             {itemid = xi.items.HIGH_QUALITY_COEURL_HIDE, droprate = 1000},
         },
+
         {
             {itemid = xi.items.CHUNK_OF_ADAMAN_ORE, droprate = 1000},
         },
+
         {
             {itemid = xi.items.HERMES_QUENCHER, droprate = 1000},
         },
+
         {
             {itemid = xi.items.ICARUS_WING, droprate = 1000},
         },
+
         {
             {itemid = xi.items.GLEEMANS_BELT,  droprate = 365},
             {itemid = xi.items.PENITENTS_ROPE, droprate = 635},
         },
+
         {
             {itemid = xi.items.TELEPORT_RING_MEA,   droprate = 426},
             {itemid = xi.items.TELEPORT_RING_YHOAT, droprate = 574},
         },
+
         {
             {itemid = 0, droprate =  848}, -- nothing
             {itemid = xi.items.WALKURE_MASK, droprate = 58},
             {itemid = xi.items.HI_RERAISER,  droprate = 78},
             {itemid = xi.items.EBONY_LOG,    droprate = 16},
         },
+
         {
             {itemid = xi.items.YELLOW_ROCK,      droprate =  9},
             {itemid = xi.items.BLACK_ROCK,       droprate =  9},
@@ -787,6 +858,7 @@ local loot =
          },
      },
 }
+
 entity.onTrade = function(player, npc, trade)
 end
 

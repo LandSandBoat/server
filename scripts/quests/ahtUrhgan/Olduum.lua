@@ -103,10 +103,10 @@ quest.sections =
                         if math.random(1,10) > 5 then
                             quest:setVar(player, 'Prog', math.random(1,3))
 
-                            return quest:progressEvent(0, {[0] = keyItems[quest:getVar(player, 'Prog')]})
+                            return quest:progressEvent(0, { [0] = keyItems[quest:getVar(player, 'Prog')] })
                         else
                             player:setLocalVar("mineFail", 1)
-                            return quest:progressEvent(0, {[1] = 1})
+                            return quest:progressEvent(0, { [1] = 1 })
                         end
                     end
                 end,
@@ -148,7 +148,7 @@ quest.sections =
                         if newRingCS > 1 then
                             newRingCS = 1
                         end
-                        return quest:event(7, {[7] = newRingCS + 1})
+                        return quest:event(7, { [7] = newRingCS + 1 })
                     end
                 end,
             },
@@ -207,10 +207,10 @@ quest.sections =
                         if math.random(1,10) > 5 then
                             quest:setVar(player, 'Prog', math.random(1,3))
 
-                            return quest:progressEvent(0, {[0] = keyItems[quest:getVar(player, 'Prog')]})
+                            return quest:progressEvent(0, { [0] = keyItems[quest:getVar(player, 'Prog')] })
                         else
                             player:setLocalVar("mineFail", 1)
-                            return quest:progressEvent(0, {[1] = 1})
+                            return quest:progressEvent(0, { [1] = 1 })
                         end
                     end
                 end,

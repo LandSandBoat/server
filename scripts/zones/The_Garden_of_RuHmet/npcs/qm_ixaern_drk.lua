@@ -38,7 +38,7 @@ entity.onTrigger = function(player, npc)
         -- this player has animosity
         -- spawn Ix'Aern DRK and its two minions near the QM
         player:messageSpecial(ID.text.MENACING_CREATURES)
-        npcUtil.popFromQM(player, npc, {ID.mob.IXAERN_DRK, ID.mob.IXAERN_DRK + 1, ID.mob.IXAERN_DRK + 2}, {radius = 3})
+        npcUtil.popFromQM(player, npc, { ID.mob.IXAERN_DRK, ID.mob.IXAERN_DRK + 1, ID.mob.IXAERN_DRK + 2 }, { radius = 3 })
 
         -- move QM to random location, and reset animosity
         local pos = math.random(1, 4)

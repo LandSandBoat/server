@@ -50,7 +50,7 @@ local trustMemory = function(player)
 end
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, {{498, 4}}) then -- Yagudo Necklace x4
+    if npcUtil.tradeHas(trade, { { 498, 4 } }) then -- Yagudo Necklace x4
         local mihgosAmigo = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MIHGO_S_AMIGO)
 
         if mihgosAmigo == QUEST_ACCEPTED then

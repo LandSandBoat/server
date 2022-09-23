@@ -35,7 +35,7 @@ function onTrigger(player, allegiance, target)
         return
     end
 
-    local toString = {"Mob", "Player", "San d'Oria", "Bastok", "Windurst", "Wyverns", "Griffons"}
+    local toString = { "Mob", "Player", "San d'Oria", "Bastok", "Windurst", "Wyverns", "Griffons" }
 
     player:PrintToPlayer(string.format("You set %s's allegiance to %s", targ:getName(), toString[allegiance + 1]))
     targ:setAllegiance(allegiance)

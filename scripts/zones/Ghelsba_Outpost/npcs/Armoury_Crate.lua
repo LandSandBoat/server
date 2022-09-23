@@ -3,25 +3,27 @@
 --  NPC: Armoury Crate
 -- Ghelsba_Outpost Armoury_Crate
 -----------------------------------
-local entity = {}
-
 require("scripts/globals/bcnm")
 require("scripts/globals/battlefield")
 -----------------------------------
+local entity = {}
+
 local loot =
 {
     -- BCNM Wings of Fury
     [34] =
     {
         {
-            {itemid = 891, droprate = 1000}, -- Bat Fang
+            { itemid = 891, droprate = 1000 }, -- Bat Fang
         },
+
         {
             {itemid = 4744, droprate = 319}, -- Scroll Of Invisible
             {itemid = 4745, droprate = 125}, -- Scroll Of Sneak
             {itemid = 4746, droprate = 222}, -- Scroll Of Deodorize
             {itemid = 4900, droprate = 306}, -- Thunder Spirit Pact
         },
+
         {
             {itemid =   749, droprate = 444}, -- Mythril Beastcoin
             {itemid =   773, droprate =  56}, -- Translucent Rock
@@ -31,6 +33,7 @@ local loot =
             {itemid = 17993, droprate = 125}, -- Platoon Dagger
             {itemid = 18170, droprate = 139}, -- Platoon Edge
         },
+
         {
             {itemid =   770, droprate =  69}, -- Blue Rock
             {itemid =   771, droprate =  14}, -- Yellow Rock
@@ -45,6 +48,7 @@ local loot =
             {itemid = 18085, droprate =  42}, -- Platoon Lance
             {itemid = 18170, droprate = 139}, -- Platoon Edge
         },
+
         {
             {itemid =     0, droprate = 389}, -- nothing
             {itemid =   922, droprate = 444}, -- bat_wing
@@ -56,12 +60,14 @@ local loot =
     [35] =
     {
         {
-            {itemid = 852, droprate = 1000}, -- Lizard Skin
+            { itemid = 852, droprate = 1000 }, -- Lizard Skin
         },
+
         {
-            {itemid =     0, droprate =  900}, -- nothing
-            {itemid = 13014, droprate =  100}, -- leaping_boots
+            { itemid =     0, droprate = 900 }, -- nothing
+            { itemid = 13014, droprate = 100 }, -- leaping_boots
         },
+
         {
             {itemid =     0, droprate = 100}, -- nothing
             {itemid =   652, droprate = 100}, -- Steel Ingot
@@ -71,6 +77,7 @@ local loot =
             {itemid = 15278, droprate = 175}, -- Scythe Belt
             {itemid = 15282, droprate =  50}, -- Katana Obi
         },
+
         {
             {itemid =     0, droprate = 100}, -- nothing
             {itemid =   652, droprate = 100}, -- Steel Ingot
@@ -80,6 +87,7 @@ local loot =
             {itemid = 15278, droprate = 175}, -- Scythe Belt
             {itemid = 15282, droprate =  50}, -- Katana Obi
         },
+
         {
             {itemid =   643, droprate = 131}, -- Chunk Of Iron Ore
             {itemid =   644, droprate =  79}, -- Chunk Of Mythril Ore
@@ -89,6 +97,7 @@ local loot =
             {itemid = 15279, droprate = 105}, -- Pick Belt
             {itemid = 15285, droprate = 105}, -- Avatar Belt
         },
+
         {
             {itemid =  4751, droprate =  79}, -- Scroll Of Erase
             {itemid =  4868, droprate = 105}, -- Scroll Of Dispel
@@ -99,6 +108,7 @@ local loot =
             {itemid =  5070, droprate = 421}, -- Scroll Of Magic Finale
             {itemid = 17867, droprate = 552}, -- Jug Of Cold Carrion Broth
         },
+
         {
             {itemid =     0, droprate =  736}, -- nothing (25%)
             {itemid =   653, droprate =  200}, -- Mythril Ingot
@@ -146,11 +156,13 @@ local loot =
     [36] =
     {
         {
-            {itemid =  4386, droprate = 1000}, -- king_truffle
+            { itemid = 4386, droprate = 1000 }, -- king_truffle
         },
+
         {
-            {itemid = 17880, droprate = 1000}, -- jug_of_seedbed_soil
+            { itemid = 17880, droprate = 1000 }, -- jug_of_seedbed_soil
         },
+
         {
             {itemid =     0, droprate = 200}, -- nothing
             {itemid = 12403, droprate = 200}, -- magicians_shield
@@ -158,18 +170,21 @@ local loot =
             {itemid = 12399, droprate = 200}, -- beaters_aspis
             {itemid = 12394, droprate = 200}, -- pilferers_aspis
         },
+
         {
             {itemid =     0, droprate = 250}, -- nothing
             {itemid = 13667, droprate = 250}, -- trimmers_mantle
             {itemid = 13671, droprate = 250}, -- genin_mantle
             {itemid = 13663, droprate = 250}, -- warlocks_mantle
         },
+
         {
             {itemid =    0, droprate = 625}, -- nothing
             {itemid = 4947, droprate = 125}, -- scroll_of_utsusemi_ni
             {itemid = 4714, droprate = 125}, -- scroll_of_phalanx
             {itemid = 4751, droprate = 125}, -- scroll_of_erase
         },
+
         {
             {itemid =    0, droprate = 250}, -- nothing
             {itemid = 1601, droprate = 250}, -- mannequin_head

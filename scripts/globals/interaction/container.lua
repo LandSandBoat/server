@@ -85,7 +85,7 @@ function Container:sequence(...)
     if type(...) == 'number' then
         return Message:new(...)
     else
-        return Sequence:new({...})
+        return Sequence:new({ ... })
     end
 end
 
@@ -111,7 +111,7 @@ end
 
 function Container:isVarBitsSet(player, name, ...)
     local sum = 0
-    for _, bitNum in ipairs({...}) do
+    for _, bitNum in ipairs({ ... }) do
         sum = sum + bit.lshift(1, bitNum)
     end
     return bit.band(player:getVar(self.varPrefix .. name), sum) ~= 0

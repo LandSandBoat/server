@@ -128,7 +128,7 @@ quest.sections =
                     elseif
                         player:hasKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH) and
                         not player:hasKeyItem(xi.keyItem.ANNALS_OF_TRUTH) and
-                        npcUtil.popFromQM(player, npc, bostaunieuxID.mob.BODACH, {hide = 0})
+                        npcUtil.popFromQM(player, npc, bostaunieuxID.mob.BODACH, { hide = 0 })
                     then
                         return quest:messageSpecial(bostaunieuxID.text.SENSE_OMINOUS_PRESENCE)
                     end

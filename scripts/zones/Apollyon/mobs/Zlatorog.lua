@@ -4,7 +4,7 @@
 -----------------------------------
 require("scripts/zones/Apollyon/bcnms/nw_apollyon_helper")
 require("scripts/globals/pathfind")
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}
 

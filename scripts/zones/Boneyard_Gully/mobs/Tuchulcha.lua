@@ -3,7 +3,7 @@
 --  Mob: Tuchulcha
 --  ENM: Sheep in Antlion's Clothing
 -----------------------------------
-mixins = {require("scripts/mixins/families/antlion_ambush")}
+mixins = { require("scripts/mixins/families/antlion_ambush") }
 local ID = require("scripts/zones/Boneyard_Gully/IDs")
 require("scripts/globals/status")
 -----------------------------------

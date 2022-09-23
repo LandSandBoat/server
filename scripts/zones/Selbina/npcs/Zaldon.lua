@@ -60,7 +60,7 @@ local fishRewards =
         gil = 15,
         items =
         {
-            {chance = 1.4, itemId = 770}, -- Blue Rock
+            { chance = 1.4, itemId = 770 }, -- Blue Rock
         }
     },
     [4306] = -- Giant Donko
@@ -85,7 +85,7 @@ local fishRewards =
         gil = 200,
         items =
         {
-            {chance = 11.7, itemId = 17002}, -- Robber Rig
+            { chance = 11.7, itemId = 17002 }, -- Robber Rig
         }
     },
     [4451] = -- Silver Shark
@@ -190,6 +190,7 @@ local fishRewards =
             {chance = 1.4, itemId = 16533}, -- Ancient Sword
         }
     },
+
     [5137] = -- Turnabaligi
     {
         gil = 340,
@@ -254,7 +255,7 @@ local fishRewards =
         gil = 423,
         items =
         {
-            {chance = 1.2, itemId = 11492}, -- Risky Patch
+            { chance = 1.2, itemId = 11492 }, -- Risky Patch
         }
     },
 }

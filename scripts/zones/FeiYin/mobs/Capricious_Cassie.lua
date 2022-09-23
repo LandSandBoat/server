@@ -2,7 +2,7 @@
 -- Area: Fei'Yin
 --   NM: Capricious Cassie
 -----------------------------------
-mixins = {require("scripts/mixins/rage")}
+mixins = { require("scripts/mixins/rage") }
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------

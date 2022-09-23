@@ -13,9 +13,9 @@ local global = {}
 local phaseInfo =
 {
           -- Ajido Spawn                                              -- Player Position
-    [1] = { ajidoPos = {340.117,   48.752, -383.747, 64}, playerPos = { 340.220,  48.557, -386.114, 190} },
-    [2] = { ajidoPos = { -59.98,   10.752,    16.22, 64}, playerPos = { -59.877,  10.577,   13.853, 190} },
-    [3] = { ajidoPos = {-379.826, -51.248,  376.227, 64}, playerPos = {-459.974, -51.423,   373.86, 190} },
+    [1] = { ajidoPos = { 340.117,   48.752, -383.747, 64 }, playerPos = {  340.220,  48.557, -386.114, 190 } },
+    [2] = { ajidoPos = {  -59.98,   10.752,    16.22, 64 }, playerPos = {  -59.877,  10.577,   13.853, 190 } },
+    [3] = { ajidoPos = { -379.826, -51.248,  376.227, 64 }, playerPos = { -459.974, -51.423,   373.86, 190 } },
 }
 
 global.tryPhaseChange = function(player)

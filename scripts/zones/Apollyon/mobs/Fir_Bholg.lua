@@ -3,7 +3,7 @@
 --  Mob: Fir Bholg
 -----------------------------------
 require("scripts/zones/Apollyon/bcnms/sw_apollyon_helper")
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}
 

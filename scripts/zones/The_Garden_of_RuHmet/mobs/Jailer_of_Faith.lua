@@ -3,7 +3,7 @@
 --   NM: Jailer of Faith
 -----------------------------------
 local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs")
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}
 

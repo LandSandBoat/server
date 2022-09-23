@@ -2,7 +2,7 @@
 -- Area: Labyrinth of Onzozo
 --   NM: Lord of Onzozo
 -----------------------------------
-mixins = {require("scripts/mixins/rage")}
+mixins = { require("scripts/mixins/rage") }
 require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}

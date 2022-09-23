@@ -12,9 +12,9 @@ end
 
 entity.onAdditionalEffect = function(mob, target, damage)
     if math.random() > .5 then
-        return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENAERO, {chance = 50})
+        return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENAERO, { chance = 50 })
     else
-        return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENWATER, {chance = 50})
+        return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENWATER, { chance = 50 })
     end
 end
 

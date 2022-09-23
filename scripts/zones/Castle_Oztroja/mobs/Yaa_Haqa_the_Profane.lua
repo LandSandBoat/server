@@ -3,7 +3,7 @@
 --   NM: Yaa Haqa the Profane
 -----------------------------------
 require("scripts/globals/hunts")
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}
 

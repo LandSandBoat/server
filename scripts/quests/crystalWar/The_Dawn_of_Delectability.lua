@@ -82,9 +82,10 @@ quest.sections =
             ['Ranpi-Monpi'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, {xi.items.PEPPERONI, xi.items.WALNUT,
-                        xi.items.DRAGON_FRUIT, xi.items.BASTORE_SWEEPER}) then
-                            return quest:progressEvent(983)
+                    if
+                        npcUtil.tradeHasExactly(trade, { xi.items.PEPPERONI, xi.items.WALNUT, xi.items.DRAGON_FRUIT, xi.items.BASTORE_SWEEPER })
+                    then
+                        return quest:progressEvent(983)
                     end
                 end,
 

@@ -43,7 +43,7 @@ entity.onEventFinish = function(player, csid, option)
         if
             npcUtil.completeQuest(player, xi.quest.log_id.JEUNO, quest, {
                 item = reward,
-                var = {"BorghertzCS", "BorghertzAlreadyActiveWithJob"},
+                var = { "BorghertzCS", "BorghertzAlreadyActiveWithJob" },
             })
         then
             player:delKeyItem(xi.ki.OLD_GAUNTLETS)

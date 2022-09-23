@@ -2,7 +2,7 @@
 -- Area: Dynamis - Valkurm
 --  Mob: Nightmare Goobbue
 -----------------------------------
-mixins = {require("scripts/mixins/dynamis_dreamland")}
+mixins = { require("scripts/mixins/dynamis_dreamland") }
 -----------------------------------
 local entity = {}
 
