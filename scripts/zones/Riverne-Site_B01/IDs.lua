@@ -43,7 +43,6 @@ zones[xi.zone.RIVERNE_SITE_B01] =
             [16896106] = 16896107, -- 666.737 20.012 652.352
         },
         UNSTABLE_CLUSTER = 16896155,
-        BAHAMUT_V2 = 16896157,
     },
     npc =
     {

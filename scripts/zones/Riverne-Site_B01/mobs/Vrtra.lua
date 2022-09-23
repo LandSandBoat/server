@@ -13,7 +13,6 @@ entity.onMobSpawn = function(mob)
     mob:addMod(xi.mod.SLEEPRES, 100)
     mob:addMod(xi.mod.LULLABYRES, 100)
     mob:setMobMod(xi.mobMod.SIGHT_RANGE, 30)
-    mob:setMobMod(xi.mobMod.SIGHT_ANGLE, 90)
     mob:setMobMod(xi.mobMod.GA_CHANCE, 75)
     mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
     mob:setMod(xi.mod.DMGMAGIC, -50)
@@ -40,7 +39,7 @@ entity.onMobFight = function(mob, target)
         mob:setLocalVar("spawnTime", spawnTime)
     end
 
-    if fifteenBlock > twohourTime and target:getDistance() < 17 then -- Spams Charm in bv2 version every 5s
+    if fifteenBlock > twohourTime and mob:checkDistance(target) < 17 then -- Spams Charm in bv2 version every 5s
         mob:setLocalVar("twohour_tp", mob:getTP())
         mob:useMobAbility(710)
         mob:setLocalVar("twohourTime", fifteenBlock + math.random(1, 2))
