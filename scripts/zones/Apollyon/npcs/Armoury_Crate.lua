@@ -1184,32 +1184,6 @@ entity.onTrigger = function(player, npc)
                 end
             end,
 
-            -- SE Apollyon Crate Handling
-            [1293] = function()
-                if crateID ~= ID.npc.APOLLYON_SE_CRATE[4] then
-                    for i = 1, 3 do
-                        for j = 0, 2 do
-                            if crateID == ID.npc.APOLLYON_SE_CRATE[i]+j then
-                                if model == 960 then
-                                    xi.battlefield.HealPlayers(battlefield) -- HP/MP Chest.
-                                elseif model == 961 then
-                                    xi.limbus.handleLootRolls(battlefield, loot[bfid][i], nil, npc) -- Item Chest.
-                                elseif model == 962 then
-                                    xi.limbus.extendTimeLimit(battlefield, 10, xi.zone.APOLLYON) -- Time chest.
-                                end
-                            end
-                        end
-                    end
-                else
-                    for i = 1, 8 do
-                        GetMobByID(ID.mob.APOLLYON_SE_MOB[4]+i):setStatus(xi.status.DISAPPEAR)
-                    end
-                    xi.limbus.handleLootRolls(battlefield, loot[bfid][4], nil, npc)
-                    battlefield:setLocalVar("cutsceneTimer", 10)
-                    battlefield:setLocalVar("lootSeen", 1)
-                end
-            end,
-
             -- CS Apollyon Crate Handling
             [1294] = function()
                 if crateID ~= ID.npc.APOLLYON_CS_CRATE then
