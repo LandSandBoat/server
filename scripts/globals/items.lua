@@ -2558,6 +2558,7 @@ xi.items =
     ASHURA_NECKLACE                 = 13134,
     PROMISE_BADGE                   = 13135,
     STAR_NECKLACE                   = 13136,
+    YINYANG_LORGNETTE               = 13139,
     OPO_OPO_NECKLACE                = 13143,
     EVASION_TORQUE                  = 13148,
     PARRYING_TORQUE                 = 13149,
