@@ -53,6 +53,7 @@ function onTrigger(player, target)
         xi.effect.CHARM_I,
         xi.effect.CHARM_II,
         xi.effect.POISON,
+        xi.effect.PETRIFICATION,
     }
 
     for _, v in pairs(effects) do
