@@ -206,24 +206,14 @@ entity.onMobSpawn = function(mob)
                 pet:addMod(xi.mod.ATTP, 5 * diff)
                 pet:setHP(pet:getMaxHP())
                 player:messageBasic(xi.msg.basic.STATUS_INCREASED, 0, 0, pet)
-                master:addMod(xi.mod.ATTP, 4 * diff)
-                master:addMod(xi.mod.DEFP, 4 * diff)
-                master:addMod(xi.mod.HASTE_ABILITY, 200 * diff)
             end
             pet:setLocalVar("wyvern_exp", prev_exp + exp)
-            pet:setLocalVar("level_Ups", pet:getLocalVar("level_Ups") + diff)
         end
     end)
 end
 
 entity.onMobDeath = function(mob, player)
     local master = mob:getMaster()
-    local numLvls = mob:getLocalVar("level_Ups")
-    if numLvls ~= 0 then
-        master:delMod(xi.mod.ATTP, 4 * numLvls)
-        master:delMod(xi.mod.DEFP, 4 * numLvls)
-        master:delMod(xi.mod.HASTE_ABILITY, 200 * numLvls)
-    end
     master:removeListener("PET_WYVERN_WS")
     master:removeListener("PET_WYVERN_MAGIC")
     master:removeListener("PET_WYVERN_ENGAGE")
