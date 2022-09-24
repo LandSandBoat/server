@@ -2432,6 +2432,7 @@ xi.items =
     KENPOGI                         = 12584,
     POWER_GI                        = 12590,
     ROBE                            = 12600,
+    LINEN_ROBE                      = 12601,
     TUNIC                           = 12608,
     FIGHTERS_LORICA                 = 12638,
     TEMPLE_CYCLAS                   = 12639,
