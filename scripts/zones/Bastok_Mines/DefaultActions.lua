@@ -6,6 +6,7 @@ return {
     ['Davyad']         = { event = 53 },
     ['Deadly_Spider']  = { event = 17 },
     ['Detzo']          = { event = 30 },
+    ['Drangord']       = { event = 21 },
     ['Echo_Hawk']      = { event = 13 },
     ['Elki']           = { event = 31 },
     ['Gumbah']         = { event = 52 },
