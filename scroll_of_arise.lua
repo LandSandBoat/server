@@ -10,7 +10,7 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    target:addSpell(494)
+    target:addSpell(xi.magic.spell.ARISE)
 end
 
 return item_object
