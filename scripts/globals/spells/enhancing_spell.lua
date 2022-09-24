@@ -29,36 +29,36 @@ local pTable =
     [xi.magic.spell.AUSPICE      ] = { 1, xi.effect.AUSPICE,       55,    0,  180, true,  false, 0 },
 
     -- Bar-Element
-    [xi.magic.spell.BARAERO      ] = { 1, xi.effect.BARAERO,        1,    0,  480, true,  true,  0 },
-    [xi.magic.spell.BARBLIZZARD  ] = { 1, xi.effect.BARBLIZZARD,    1,    0,  480, true,  true,  0 },
-    [xi.magic.spell.BARFIRE      ] = { 1, xi.effect.BARFIRE,        1,    0,  480, true,  true,  0 },
-    [xi.magic.spell.BARSTONE     ] = { 1, xi.effect.BARSTONE,       1,    0,  480, true,  true,  0 },
-    [xi.magic.spell.BARTHUNDER   ] = { 1, xi.effect.BARTHUNDER,     1,    0,  480, true,  true,  0 },
-    [xi.magic.spell.BARWATER     ] = { 1, xi.effect.BARWATER,       1,    0,  480, true,  true,  0 },
-    [xi.magic.spell.BARAERA      ] = { 2, xi.effect.BARAERO,        1,    0,  480, true,  true,  0 },
-    [xi.magic.spell.BARBLIZZARA  ] = { 2, xi.effect.BARBLIZZARD,    1,    0,  480, true,  true,  0 },
-    [xi.magic.spell.BARFIRA      ] = { 2, xi.effect.BARFIRE,        1,    0,  480, true,  true,  0 },
-    [xi.magic.spell.BARSTONRA    ] = { 2, xi.effect.BARSTONE,       1,    0,  480, true,  true,  0 },
-    [xi.magic.spell.BARTHUNDRA   ] = { 2, xi.effect.BARTHUNDER,     1,    0,  480, true,  true,  0 },
-    [xi.magic.spell.BARWATERA    ] = { 2, xi.effect.BARWATER,       1,    0,  480, true,  true,  0 },
+    [xi.magic.spell.BARAERO      ] = { 1, xi.effect.BARAERO,        1,    0,  150, true,  true,  0 },
+    [xi.magic.spell.BARBLIZZARD  ] = { 1, xi.effect.BARBLIZZARD,    1,    0,  150, true,  true,  0 },
+    [xi.magic.spell.BARFIRE      ] = { 1, xi.effect.BARFIRE,        1,    0,  150, true,  true,  0 },
+    [xi.magic.spell.BARSTONE     ] = { 1, xi.effect.BARSTONE,       1,    0,  150, true,  true,  0 },
+    [xi.magic.spell.BARTHUNDER   ] = { 1, xi.effect.BARTHUNDER,     1,    0,  150, true,  true,  0 },
+    [xi.magic.spell.BARWATER     ] = { 1, xi.effect.BARWATER,       1,    0,  150, true,  true,  0 },
+    [xi.magic.spell.BARAERA      ] = { 2, xi.effect.BARAERO,        1,    0,  150, true,  true,  0 },
+    [xi.magic.spell.BARBLIZZARA  ] = { 2, xi.effect.BARBLIZZARD,    1,    0,  150, true,  true,  0 },
+    [xi.magic.spell.BARFIRA      ] = { 2, xi.effect.BARFIRE,        1,    0,  150, true,  true,  0 },
+    [xi.magic.spell.BARSTONRA    ] = { 2, xi.effect.BARSTONE,       1,    0,  150, true,  true,  0 },
+    [xi.magic.spell.BARTHUNDRA   ] = { 2, xi.effect.BARTHUNDER,     1,    0,  150, true,  true,  0 },
+    [xi.magic.spell.BARWATERA    ] = { 2, xi.effect.BARWATER,       1,    0,  150, true,  true,  0 },
 
-    -- Bar-Element
-    [xi.magic.spell.BARAMNESIA   ] = { 1, xi.effect.BARAMNESIA,     1,    1,  480, true,  true,  0 },
-    [xi.magic.spell.BARBLIND     ] = { 1, xi.effect.BARBLIND,       1,    1,  480, true,  true,  0 },
-    [xi.magic.spell.BARPARALYZE  ] = { 1, xi.effect.BARPARALYZE,    1,    1,  480, true,  true,  0 },
-    [xi.magic.spell.BARPETRIFY   ] = { 1, xi.effect.BARPETRIFY,     1,    1,  480, true,  true,  0 },
-    [xi.magic.spell.BARPOISON    ] = { 1, xi.effect.BARPOISON,      1,    1,  480, true,  true,  0 },
-    [xi.magic.spell.BARSILENCE   ] = { 1, xi.effect.BARSILENCE,     1,    1,  480, true,  true,  0 },
-    [xi.magic.spell.BARSLEEP     ] = { 1, xi.effect.BARSLEEP,       1,    1,  480, true,  true,  0 },
-    [xi.magic.spell.BARVIRUS     ] = { 1, xi.effect.BARVIRUS,       1,    1,  480, true,  true,  0 },
-    [xi.magic.spell.BARAMNESRA   ] = { 2, xi.effect.BARAMNESIA,     1,    1,  480, true,  true,  0 },
-    [xi.magic.spell.BARBLINDRA   ] = { 2, xi.effect.BARBLIND,       1,    1,  480, true,  true,  0 },
-    [xi.magic.spell.BARPARALYZRA ] = { 2, xi.effect.BARPARALYZE,    1,    1,  480, true,  true,  0 },
-    [xi.magic.spell.BARPETRA     ] = { 2, xi.effect.BARPETRIFY,     1,    1,  480, true,  true,  0 },
-    [xi.magic.spell.BARPOISONRA  ] = { 2, xi.effect.BARPOISON,      1,    1,  480, true,  true,  0 },
-    [xi.magic.spell.BARSILENCERA ] = { 2, xi.effect.BARSILENCE,     1,    1,  480, true,  true,  0 },
-    [xi.magic.spell.BARSLEEPRA   ] = { 2, xi.effect.BARSLEEP,       1,    1,  480, true,  true,  0 },
-    [xi.magic.spell.BARVIRA      ] = { 2, xi.effect.BARVIRUS,       1,    1,  480, true,  true,  0 },
+    -- Bar-Status
+    [xi.magic.spell.BARAMNESIA   ] = { 1, xi.effect.BARAMNESIA,     1,    1,  150, true,  true,  0 },
+    [xi.magic.spell.BARBLIND     ] = { 1, xi.effect.BARBLIND,       1,    1,  150, true,  true,  0 },
+    [xi.magic.spell.BARPARALYZE  ] = { 1, xi.effect.BARPARALYZE,    1,    1,  150, true,  true,  0 },
+    [xi.magic.spell.BARPETRIFY   ] = { 1, xi.effect.BARPETRIFY,     1,    1,  150, true,  true,  0 },
+    [xi.magic.spell.BARPOISON    ] = { 1, xi.effect.BARPOISON,      1,    1,  150, true,  true,  0 },
+    [xi.magic.spell.BARSILENCE   ] = { 1, xi.effect.BARSILENCE,     1,    1,  150, true,  true,  0 },
+    [xi.magic.spell.BARSLEEP     ] = { 1, xi.effect.BARSLEEP,       1,    1,  150, true,  true,  0 },
+    [xi.magic.spell.BARVIRUS     ] = { 1, xi.effect.BARVIRUS,       1,    1,  150, true,  true,  0 },
+    [xi.magic.spell.BARAMNESRA   ] = { 2, xi.effect.BARAMNESIA,     1,    1,  150, true,  true,  0 },
+    [xi.magic.spell.BARBLINDRA   ] = { 2, xi.effect.BARBLIND,       1,    1,  150, true,  true,  0 },
+    [xi.magic.spell.BARPARALYZRA ] = { 2, xi.effect.BARPARALYZE,    1,    1,  150, true,  true,  0 },
+    [xi.magic.spell.BARPETRA     ] = { 2, xi.effect.BARPETRIFY,     1,    1,  150, true,  true,  0 },
+    [xi.magic.spell.BARPOISONRA  ] = { 2, xi.effect.BARPOISON,      1,    1,  150, true,  true,  0 },
+    [xi.magic.spell.BARSILENCERA ] = { 2, xi.effect.BARSILENCE,     1,    1,  150, true,  true,  0 },
+    [xi.magic.spell.BARSLEEPRA   ] = { 2, xi.effect.BARSLEEP,       1,    1,  150, true,  true,  0 },
+    [xi.magic.spell.BARVIRA      ] = { 2, xi.effect.BARVIRUS,       1,    1,  150, true,  true,  0 },
 
     -- Blink
     [xi.magic.spell.BLINK        ] = { 1, xi.effect.BLINK,          1,    2,  300, true,  false, 0 },
@@ -113,9 +113,9 @@ local pTable =
     [xi.magic.spell.GAIN_CHR     ] = { 1, xi.effect.CHR_BOOST,      1,    5,  300, true,  false, 0 },
 
     -- Haste
-    [xi.magic.spell.HASTE        ] = { 1, xi.effect.HASTE,         48, 1465,  180, true,  false, 0 },
-    [xi.magic.spell.HASTE_II     ] = { 2, xi.effect.HASTE,         96, 2998,  180, true,  false, 0 },
-    [xi.magic.spell.HASTEGA      ] = { 1, xi.effect.HASTE,         48, 1494,  180, false, false, 0 },
+    [xi.magic.spell.HASTE        ] = { 1, xi.effect.HASTE,         48, 1500,  180, true,  false, 0 },
+    [xi.magic.spell.HASTE_II     ] = { 2, xi.effect.HASTE,         96, 3000,  180, true,  false, 0 },
+    [xi.magic.spell.HASTEGA      ] = { 1, xi.effect.HASTE,         48, 1530,  180, false, false, 0 },
     -- [xi.magic.spell.HASTEGA_II   ] = { 2, xi.effect.HASTE,         99, 2998,  180, false, false, 0 },
 
     -- Phalanx
@@ -123,16 +123,16 @@ local pTable =
     [xi.magic.spell.PHALANX_II   ] = { 2, xi.effect.PHALANX,       75,    0,  240, true,  false, 0 },
 
     -- Protect / Protectra
-    [xi.magic.spell.PROTECT      ] = { 1, xi.effect.PROTECT,       10,   20, 1800, false, false, 0 },
-    [xi.magic.spell.PROTECT_II   ] = { 2, xi.effect.PROTECT,       25,   50, 1800, false, false, 0 },
-    [xi.magic.spell.PROTECT_III  ] = { 3, xi.effect.PROTECT,       40,   90, 1800, false, false, 0 },
-    [xi.magic.spell.PROTECT_IV   ] = { 4, xi.effect.PROTECT,       55,  140, 1800, false, false, 0 },
-    [xi.magic.spell.PROTECT_V    ] = { 5, xi.effect.PROTECT,       60,  220, 1800, false, false, 0 },
-    [xi.magic.spell.PROTECTRA    ] = { 1, xi.effect.PROTECT,       10,   20, 1800, false, false, 0 },
-    [xi.magic.spell.PROTECTRA_II ] = { 2, xi.effect.PROTECT,       25,   50, 1800, false, false, 0 },
-    [xi.magic.spell.PROTECTRA_III] = { 3, xi.effect.PROTECT,       40,   90, 1800, false, false, 0 },
-    [xi.magic.spell.PROTECTRA_IV ] = { 4, xi.effect.PROTECT,       55,  140, 1800, false, false, 0 },
-    [xi.magic.spell.PROTECTRA_V  ] = { 5, xi.effect.PROTECT,       60,  220, 1800, false, false, 0 },
+    [xi.magic.spell.PROTECT      ] = { 1, xi.effect.PROTECT,        7,   10, 1800, false, false, 0 },
+    [xi.magic.spell.PROTECT_II   ] = { 2, xi.effect.PROTECT,       27,   25, 1800, false, false, 0 },
+    [xi.magic.spell.PROTECT_III  ] = { 3, xi.effect.PROTECT,       47,   40, 1800, false, false, 0 },
+    [xi.magic.spell.PROTECT_IV   ] = { 4, xi.effect.PROTECT,       63,   55, 1800, false, false, 0 },
+    [xi.magic.spell.PROTECT_V    ] = { 5, xi.effect.PROTECT,       76,   60, 1800, false, false, 0 },
+    [xi.magic.spell.PROTECTRA    ] = { 1, xi.effect.PROTECT,        7,   10, 1800, false, false, 0 },
+    [xi.magic.spell.PROTECTRA_II ] = { 2, xi.effect.PROTECT,       27,   25, 1800, false, false, 0 },
+    [xi.magic.spell.PROTECTRA_III] = { 3, xi.effect.PROTECT,       47,   40, 1800, false, false, 0 },
+    [xi.magic.spell.PROTECTRA_IV ] = { 4, xi.effect.PROTECT,       63,   55, 1800, false, false, 0 },
+    [xi.magic.spell.PROTECTRA_V  ] = { 5, xi.effect.PROTECT,       75,   60, 1800, false, false, 0 },
 
     -- Refresh
     [xi.magic.spell.REFRESH      ] = { 1, xi.effect.REFRESH,       41,    3,  150, true,  true,  0 },
@@ -147,16 +147,16 @@ local pTable =
     [xi.magic.spell.REGEN_V      ] = { 5, xi.effect.REGEN,         99,   40,   60, true,  false, 0 },
 
     -- Shell / Shellra
-    [xi.magic.spell.SHELL        ] = { 1, xi.effect.SHELL,         24, 1055, 1800, false, false, 0 },
-    [xi.magic.spell.SHELL_II     ] = { 2, xi.effect.SHELL,         36, 1641, 1800, false, false, 0 },
-    [xi.magic.spell.SHELL_III    ] = { 3, xi.effect.SHELL,         48, 2188, 1800, false, false, 0 },
-    [xi.magic.spell.SHELL_IV     ] = { 4, xi.effect.SHELL,         56, 2617, 1800, false, false, 0 },
-    [xi.magic.spell.SHELL_V      ] = { 5, xi.effect.SHELL,         60, 2930, 1800, false, false, 0 },
-    [xi.magic.spell.SHELLRA      ] = { 1, xi.effect.SHELL,         24, 1055, 1800, false, false, 0 },
-    [xi.magic.spell.SHELLRA_II   ] = { 2, xi.effect.SHELL,         36, 1641, 1800, false, false, 0 },
-    [xi.magic.spell.SHELLRA_III  ] = { 3, xi.effect.SHELL,         48, 2188, 1800, false, false, 0 },
-    [xi.magic.spell.SHELLRA_IV   ] = { 4, xi.effect.SHELL,         56, 2617, 1800, false, false, 0 },
-    [xi.magic.spell.SHELLRA_V    ] = { 5, xi.effect.SHELL,         60, 2930, 1800, false, false, 0 },
+    [xi.magic.spell.SHELL        ] = { 1, xi.effect.SHELL,         18,  980, 1800, false, false, 0 },
+    [xi.magic.spell.SHELL_II     ] = { 2, xi.effect.SHELL,         37, 1480, 1800, false, false, 0 },
+    [xi.magic.spell.SHELL_III    ] = { 3, xi.effect.SHELL,         57, 1990, 1800, false, false, 0 },
+    [xi.magic.spell.SHELL_IV     ] = { 4, xi.effect.SHELL,         68, 2340, 1800, false, false, 0 },
+    [xi.magic.spell.SHELL_V      ] = { 5, xi.effect.SHELL,         76, 2930, 1800, false, false, 0 },
+    [xi.magic.spell.SHELLRA      ] = { 1, xi.effect.SHELL,         18,  980, 1800, false, false, 0 },
+    [xi.magic.spell.SHELLRA_II   ] = { 2, xi.effect.SHELL,         37, 1480, 1800, false, false, 0 },
+    [xi.magic.spell.SHELLRA_III  ] = { 3, xi.effect.SHELL,         57, 1990, 1800, false, false, 0 },
+    [xi.magic.spell.SHELLRA_IV   ] = { 4, xi.effect.SHELL,         68, 2340, 1800, false, false, 0 },
+    [xi.magic.spell.SHELLRA_V    ] = { 5, xi.effect.SHELL,         75, 2930, 1800, false, false, 0 },
 
     -- -Spikes
     [xi.magic.spell.BLAZE_SPIKES ] = { 1, xi.effect.BLAZE_SPIKES,   1,    0,  180, true,  false, 0 },
@@ -205,7 +205,14 @@ xi.spells.enhancing.calculateEnhancingBasePower = function(caster, target, spell
         basePower = utils.clamp(basePower, 40, 150) -- Max is 150 and min is 40 at skill 0.
     -- Bar-Status
     elseif spellEffect == xi.effect.BARAMNESIA or (spellEffect >= xi.effect.BARSLEEP and spellEffect <= xi.effect.BARVIRUS) then
-        basePower = basePower + skillLevel / 50 -- This is WRONG. SO SO WRONG.
+        -- Works the same as Bar-Element spells. This is only out of 100
+        if skillLevel > 300 then
+            basePower = (25 + math.floor(skillLevel / 4)) / 10 -- 15 at 500
+        else
+            basePower = (40 + math.floor(skillLevel / 5)) / 10 -- 10 at 300
+        end
+
+        basePower = utils.clamp(basePower, 4, 15) -- Max is 15 and min is 4 a skill 0.
 
     -- Boost-Stat / Gain-Stat
     elseif spellEffect >= xi.effect.STR_BOOST and spellEffect <= xi.effect.CHR_BOOST then
@@ -327,6 +334,7 @@ xi.spells.enhancing.calculateEnhancingDuration = function(caster, target, spell,
     local duration     = pTable[spellId][5]
     local useComposure = pTable[spellId][6]
     local targetLevel  = target:getMainLvl()
+    local skillLevel   = caster:getSkillLevel(spell:getSkillType())
 
     -- Deodorize, Invisible and Sneak have a random factor to base duration.
     if spellEffect == xi.effect.DEODORIZE or spellEffect == xi.effect.INVISIBLE or spellEffect == xi.effect.SNEAK then
@@ -369,6 +377,11 @@ xi.spells.enhancing.calculateEnhancingDuration = function(caster, target, spell,
     -- Sneak
     elseif spellEffect == xi.effect.SNEAK then
         duration = duration + target:getMod(xi.mod.SNEAK_DURATION)
+
+    -- Bar-Element
+    elseif (spellEffect >= xi.effect.BARFIRE and spellEffect <= xi.effect.BARWATER) or spellEffect == xi.effect.BARAMNESIA or (spellEffect >= xi.effect.BARSLEEP and spellEffect <= xi.effect.BARVIRUS) then
+        duration = utils.clamp(duration + 0.8 * (skillLevel - 180), 150, 240) -- Min duration is 2.5 minutes, Max duration is 4 minutes
+
     end
 
     --------------------

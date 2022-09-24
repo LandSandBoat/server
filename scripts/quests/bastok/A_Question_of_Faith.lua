@@ -14,7 +14,7 @@ require('scripts/globals/titles')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-ID = require('scripts/zones/Bastok_Markets/IDs')
+local ID = require('scripts/zones/Oldton_Movalpolos/IDs')
 -----------------------------------
 local quest = Quest:new(xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_QUESTION_OF_FAITH)
 
@@ -85,14 +85,26 @@ quest.sections =
             ['Rakorok'] =
             {
                 onTrigger = function(player, npc)
-                    if player:hasKeyItem(xi.ki.DAWN_TALISMAN) and quest:getVar(player, 'Prog') == 0 then
-                        npc:messageText(npc, 7733)
-                        npc:messageText(npc, 7746)
-                        SpawnMob(16822456):updateClaim(player)
-                        quest:setVar(player, 'Prog', 1)
+                    if
+                        player:hasKeyItem(xi.ki.DAWN_TALISMAN) and
+                        quest:getVar(player, 'Prog') == 0
+                    then
+                        if npcUtil.popFromQM(player, npc, ID.mob.BUGALLUG, { claim = true, hide = 0 }) then
+                            quest:message(ID.text.ALTANA_DIE)
+                            return quest:message(ID.text.MONSTER_APPEARED)
+                        end
 
                     elseif quest:getVar(player, 'Prog') == 1 and player:hasKeyItem(xi.ki.DAWN_TALISMAN) then
                         return quest:progressEvent(6)
+                    end
+                end,
+            },
+
+            ['Bugallug'] =
+            {
+                onMobDeath = function(mob, player, isKiller, firstCall)
+                    if quest:getVar(player, 'Prog') == 0 then
+                        quest:setVar(player, 'Prog', 1)
                     end
                 end,
             },

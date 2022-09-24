@@ -23,6 +23,8 @@ zones[xi.zone.OLDTON_MOVALPOLOS] =
         FISHING_MESSAGE_OFFSET        = 7579, -- You can't fish here.
         MINING_IS_POSSIBLE_HERE       = 7710, -- Mining is possible here if you have <item>.
         RAKOROK_DIALOGUE              = 7734, -- Nsy pipul. Gattohre! I bisynw!
+        ALTANA_DIE                    = 7736, -- Aaaltaaanaaa...Diiieee!!!
+        MONSTER_APPEARED              = 7749, -- A monster has appeared!
         CHEST_UNLOCKED                = 7758, -- You unlock the chest!
         COMMON_SENSE_SURVIVAL         = 8116, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
@@ -34,6 +36,7 @@ zones[xi.zone.OLDTON_MOVALPOLOS] =
             [16822426] = 16822427, -- 58.013, 15.5, -121.928 (east)
         },
         GOBLIN_WOLFMAN        = 16822459,
+        BUGALLUG              = 16822456,
     },
     npc =
     {
