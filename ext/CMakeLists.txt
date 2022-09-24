@@ -35,5 +35,17 @@ set(EXTERNAL_LIBS
     sol2_single
     argparse
     efsw
+)
+
+if(UNIX) #backwards needs these to add to linker
+    list(APPEND EXTERNAL_LIBS
+        bfd
+        dl
+    )
+endif()
+
+# copy external libs to parent scope
+set(EXTERNAL_LIBS
+    ${EXTERNAL_LIBS}
     PARENT_SCOPE
 )

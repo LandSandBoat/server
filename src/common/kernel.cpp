@@ -30,6 +30,11 @@
 #include "common/timer.h"
 #include "common/version.h"
 
+#if defined(__linux__) || defined(__APPLE__)
+#define BACKWARD_HAS_BFD 1
+#include "../../ext/backward/backward.hpp"
+#endif
+
 #include <csignal>
 #include <cstdio>
 #include <cstdlib>
@@ -101,6 +106,18 @@ sigfunc* compat_signal(int signo, sigfunc* func)
 
 static void dump_backtrace()
 {
+#if defined(__linux__) || defined(__APPLE__)
+    backward::StackTrace trace;
+    backward::Printer    printer;
+
+    trace.load_here(32);
+
+    printer.object     = true;
+    printer.color_mode = backward::ColorMode::always;
+    printer.address    = true;
+
+    printer.print(trace, stderr);
+#endif
     // gdb
 #if defined(__linux__)
     int fd[2]  = {};
