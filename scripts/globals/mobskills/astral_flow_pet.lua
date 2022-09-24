@@ -49,21 +49,21 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local modelId   = pet:getModelId()
     local skillId = 0
 
-    if     petFamily == 45 or petFamily == 388 or modelId == 798 then
+    if     petFamily == 45 or petFamily == 388 or modelId == 794 then -- 794
         skillId = 914 -- titan     earthen fury
-    elseif petFamily == 44 or petFamily == 387 or modelId == 797 then
+    elseif petFamily == 44 or petFamily == 387 or modelId == 797 then -- 797
         skillId = 917 -- shiva     diamond dust
-    elseif petFamily == 43 or petFamily == 386 or modelId == 796 then
+    elseif petFamily == 43 or petFamily == 386 or modelId == 798 then -- 798
         skillId = 918 -- ramuh     judgment bolt
-    elseif petFamily == 40 or petFamily == 384 or modelId == 795 then
+    elseif petFamily == 40 or petFamily == 384 or modelId == 795 then -- 795
         skillId = 915 -- leviathan tidal wave
-    elseif petFamily == 38 or petFamily == 383 or modelId == 794 then
+    elseif petFamily == 38 or petFamily == 383 or modelId == 793 then -- 793
         skillId = 913 -- ifrit     inferno
-    elseif petFamily == 37 or petFamily == 382 or modelId == 793 then
+    elseif petFamily == 37 or petFamily == 382 or modelId == 796 then -- 796
         skillId = 916 -- garuda    aerial blast
-    elseif petFamily == 36 or petFamily == 381 or modelId == 792 then
+    elseif petFamily == 36 or petFamily == 381 or modelId == 792 then -- 792
         skillId = 839 -- fenrir    howling moon
-    elseif petFamily == 34 or petFamily == 379 or modelId == 791 then
+    elseif petFamily == 34 or petFamily == 379 or modelId == 791 then -- 791
         skillId = 919 -- carbuncle searing light
     else
         printf("[astral_flow_pet] received unexpected pet family %i. Defaulted skill to Searing Light.", petFamily)
