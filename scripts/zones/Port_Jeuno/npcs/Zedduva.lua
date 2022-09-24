@@ -11,13 +11,17 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if
-        player:hasKeyItem(xi.ki.AIRSHIP_PASS) and
-        player:getGil() >= 200
-    then
-        player:startEvent(36)
+    if player:getCharVar("Quest[0][67]Stage") > os.time() then
+        player:startEvent(40)
     else
-        player:startEvent(44)
+        if
+            player:hasKeyItem(xi.ki.AIRSHIP_PASS) and
+            player:getGil() >= 200
+        then
+            player:startEvent(36)
+        else
+            player:startEvent(44)
+        end
     end
 end
 
