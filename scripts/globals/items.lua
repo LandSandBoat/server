@@ -2427,6 +2427,7 @@ xi.items =
     BLUE_RIBBON                     = 12521,
     KOENIG_CUIRASS                  = 12549,
     ADAMAN_HAUBERK                  = 12557,
+    SCALE_MAIL                      = 12560,
     LEATHER_VEST                    = 12568,
     BRONZE_HARNESS                  = 12576,
     KENPOGI                         = 12584,
