@@ -587,6 +587,7 @@ xi.items =
     CORAL_CREST_KEY                 = 1659,
     BRONZE_KEY                      = 1660,
     CATHEDRAL_TAPESTRY              = 1662,
+    CHAMELEON_DIAMOND               = 1666,
     CLEAN_SNAP_ROD                  = 1668,
     INGOT_OF_ROYAL_TREASURY_GOLD    = 1682,
     PIECE_OF_ATTOHWA_GINSENG        = 1683,
