@@ -12,7 +12,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.SLEEP, {chance = 100})
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.SLEEP, { chance = 100 })
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
