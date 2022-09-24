@@ -6,7 +6,7 @@
 local item_object = {}
 
 item_object.onItemCheck = function(target)
-    return target:canLearnSpell(494)
+    return target:canLearnSpell(xi.magic.spell.ARISE)
 end
 
 item_object.onItemUse = function(target)
