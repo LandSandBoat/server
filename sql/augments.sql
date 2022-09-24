@@ -75,8 +75,8 @@ INSERT INTO `augments` VALUES (45,0,366,1,0,0); -- DMG:+1 (melee,not ranged...Ma
 INSERT INTO `augments` VALUES (46,0,366,-1,0,0); -- DMG:-1 (melee,not ranged...Mainhand only?)
 INSERT INTO `augments` VALUES (47,0,380,1,0,0); -- Delay:+1% (melee,not ranged)
 INSERT INTO `augments` VALUES (48,0,380,-1,0,0); -- Delay:-1% (melee,not ranged)
-INSERT INTO `augments` VALUES (49,0,384,100,0,0); -- Haste+1
-INSERT INTO `augments` VALUES (50,0,384,-100,0,0); -- Slow+1
+INSERT INTO `augments` VALUES (49,100,384,1,0,0); -- Haste+1
+INSERT INTO `augments` VALUES (50,100,384,-1,0,0); -- Slow+1
 INSERT INTO `augments` VALUES (51,0,72,1,0,0); -- HP recovered while healing+1
 INSERT INTO `augments` VALUES (52,0,71,1,0,0); -- MP recovered while healing+1
 INSERT INTO `augments` VALUES (53,0,168,-1,0,0); -- Spell interruption rate down 1%

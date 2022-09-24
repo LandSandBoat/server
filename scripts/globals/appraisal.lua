@@ -136,205 +136,227 @@ xi.appraisal.appraisalItems =
         {
             items =
             {
-                { 65, 18366 }, -- Gust Claymore
-                { 30, 16978 }, -- Uchigatana+1
-                {  5, 18434 }, -- Kosetsusamonji
+                { 65, xi.items.GUST_CLAYMORE  },
+                { 30, xi.items.UCHIGATANA_P1  },
+                {  5, xi.items.KOSETSUSAMONJI },
             },
         },
+
         [xi.assault.mission.SAGELORD_ELIMINATION] =
         {
             items =
             {
-                { 55, 18366 }, -- Gust Claymore
-                { 40, 16978 }, -- Uchigatana+1
-                {  5, 18387 }, -- Djinnbringer
+                { 55, xi.items.GUST_CLAYMORE },
+                { 40, xi.items.UCHIGATANA_P1 },
+                {  5, xi.items.DJINNBRINGER  },
             },
         },
+
         [xi.assault.mission.BREAKING_MORALE] =
         {
             items =
             {
-                { 45, 18366 }, -- Gust Claymore
-                { 30, 16978 }, -- Uchigatana+1
-                { 20, 17703 }, -- Pealing Anelace
-                { 10, 18433 }, -- Kagiroi
-                {  5, 17661 }, -- Storm Schimitar
+                { 45, xi.items.GUST_CLAYMORE   },
+                { 30, xi.items.UCHIGATANA_P1   },
+                { 20, xi.items.PEALING_ANELACE },
+                { 10, xi.items.KAGIROI         },
+                {  5, xi.items.STORM_SCIMITAR  },
             },
         },
+
         [xi.assault.mission.THE_DOUBLE_AGENT] =
         {
             items =
             {
-                { 45, 18336 }, -- Gust Claymore
-                { 10, 18387 }, -- Djinnbringer
-                { 38, 16978 }, -- Uchigatana+1
-                {  4, 17703 }, -- Pealing Anelace
-                {  3, 18433 }, -- Kagiroi
+                { 45, xi.items.GUST_CLAYMORE   },
+                { 10, xi.items.DJINNBRINGER    },
+                { 38, xi.items.UCHIGATANA_P1   },
+                {  4, xi.items.PEALING_ANELACE },
+                {  3, xi.items.KAGIROI         },
             },
         },
         [xi.assault.mission.AZURE_EXPERIMENTS] =
         {
             items =
             {
-                { 100, 17716 }, -- Macuahuitl-1
+                { 100, xi.items.MACUAHUITL_M1 },
             },
         },
+
         [xi.assault.mission.BLITZKRIEG] =
         {
             items =
             {
-                { 45, 18366 }, -- Gust Claymore
-                { 30, 16978 }, -- Uchigatana+1
-                { 20, 17700 }, -- Durandal
-                {  5, 17721 }, -- Sanguine Sword
+                { 45, xi.items.GUST_CLAYMORE  },
+                { 30, xi.items.UCHIGATANA_P1  },
+                { 20, xi.items.DURANDAL       },
+                {  5, xi.items.SANGUINE_SWORD },
             },
         },
+
         [xi.assault.mission.WAMOURA_FARM_RAID] =
         {
             items =
             {
-                { 45, 18366 }, -- Gust Claymore
-                { 30 ,16978 }, -- Uchigatana+1
-                { 20, 18435 }, -- Hotarumaru
-                {  5, 18438 }, -- Kumokirimaru
+                { 45, xi.items.GUST_CLAYMORE },
+                { 30, xi.items.UCHIGATANA_P1 },
+                { 20, xi.items.HOTARUMARU    },
+                {  5, xi.items.KUMOKIRIMARU  },
             },
         },
+
         [xi.assault.mission.RED_VERSUS_BLUE] =
         {
             items =
             {
-                { 100, 17660 }, -- Kilij
+                { 100, xi.items.KILIJ },
             },
         },
+
         [xi.appraisal.origin.NYZUL_FROSTMANE] =
         {
             items =
             {
-                { 60, 16583 }, -- Claymore
-                { 35, 18366 }, -- Gust Claymore
-                {  5, 16944 }, -- Lockheart
+                { 60, xi.items.CLAYMORE      },
+                { 35, xi.items.GUST_CLAYMORE },
+                {  5, xi.items.LOCKHEART     },
             },
         },
+
         [xi.appraisal.origin.NYZUL_CARNERO] =
         {
             items =
             {
-                { 75, 16535 }, -- Bronze Sword
-                { 25, 17811 }, -- Katayama
+                { 75, xi.items.BRONZE_SWORD       },
+                { 25, xi.items.KATAYAMA_ICHIMONJI },
             },
         },
+
         [xi.appraisal.origin.NYZUL_EMERGENT_ELM] =
         {
             items =
             {
-                { 60, 16535 }, -- Bronze Sword
-                { 35, 16530 }, -- Xiphos
-                {  5, 18386 }, -- Gloom Claymore
+                { 60, xi.items.BRONZE_SWORD   },
+                { 35, xi.items.XIPHOS         },
+                {  5, xi.items.GLOOM_CLAYMORE },
             },
         },
+
         [xi.appraisal.origin.NYZUL_ZIZZY_ZILLAH] =
         {
             items =
             {
-                { 60, 16535 }, -- Bronze Sword
-                { 35, 16978 }, -- Uchigatana+1
-                {  5, 18437 }, -- Namikirimaru
+                { 60, xi.items.BRONZE_SWORD  },
+                { 35, xi.items.UCHIGATANA_P1 },
+                {  5, xi.items.NAMIKIRIMARU  },
             },
         },
+
         [xi.appraisal.origin.NYZUL_KEEPER_OF_HALIDOM] =
         {
             items =
             {
-                { 65, 16535 }, -- Bronze Sword
-                { 32, 16978 }, -- Uchigatana+1
-                {  3, 16990 }, -- Daihannya
+                { 65, xi.items.BRONZE_SWORD  },
+                { 32, xi.items.UCHIGATANA_P1 },
+                {  3, xi.items.DAIHANNYA     },
             },
         },
+
         [xi.appraisal.origin.NYZUL_AMIKIRI] =
         {
             items =
             {
-                { 75, 16535 }, -- Bronze Sword
-                { 25, 16968 }, -- Kamewari
+                { 75, xi.items.BRONZE_SWORD },
+                { 25, xi.items.KAMEWARI     },
             },
         },
+
         [xi.appraisal.origin.NYZUL_CARGO_CRAB_COLIN] =
         {
             items =
             {
-                { 85, 16535 }, -- Bronze Sword
-                { 15, 17650 }, -- Nadris
+                { 85, xi.items.BRONZE_SWORD },
+                { 15, xi.items.NADRS        },
             },
         },
     },
+
     [xi.items.UNAPPRAISED_DAGGER] =
     {
         [xi.appraisal.origin.NYZUL_TOM_TIT_TAT] =
         {
             items =
             {
-                { 70, 16465 }, -- Bronze Knife
-                { 25, 16896 }, -- Kunai
-                {  5, 16443 }, -- Fruit Punches
+                { 70, xi.items.BRONZE_KNIFE  },
+                { 25, xi.items.KUNAI         },
+                {  5, xi.items.FRUIT_PUNCHES },
             },
         },
+
         [xi.appraisal.origin.NYZUL_ORCTRAP] =
         {
             items =
             {
-                { 95, 16465 }, -- Bronze Knife
-                {  5, 17792 }, -- Nikkariaoe
+                { 95, xi.items.BRONZE_KNIFE },
+                {  5, xi.items.NIKKARIAOE   },
             },
         },
+
         [xi.appraisal.origin.NYZUL_STINGING_SOPHIE] =
         {
             items =
             {
-                { 95, 16465 }, -- Bronze Knife
-                {  5, 16486 }, -- Beestinger
+                { 95, xi.items.BRONZE_KNIFE },
+                {  5, xi.items.BEESTINGER   },
             },
         },
+
         [xi.appraisal.origin.NYZUL_WESTERN_SHADOW] =
         {
             items =
             {
-                { 95, 16896 }, -- Kunai
-                {  5, 18752 }, -- Retaliators
+                { 95, xi.items.KUNAI       },
+                {  5, xi.items.RETALIATORS },
             },
         },
+
         [xi.appraisal.origin.NYZUL_MISCHIEVOUS_MICHOLAS] =
         {
             items =
             {
-                { 95, 16465 }, -- Bronze Knife
-                {  5, 17610 }, -- Kidney Dagger
+                { 95, xi.items.BRONZE_KNIFE  },
+                {  5, xi.items.KIDNEY_DAGGER },
             },
         },
+
         [xi.appraisal.origin.NYZUL_NIGHTMARE_VASE] =
         {
             items =
             {
-                { 90, 16896 }, -- Kunai
-                { 10, 16913 }, -- Shinogi
+                { 90, xi.items.KUNAI   },
+                { 10, xi.items.SHINOGI },
             },
         },
+
         [xi.appraisal.origin.NYZUL_DAGGERCLAW_DRACOS] =
         {
             items =
             {
-                { 90, 16390 }, -- Bronze Knuckels
-                { 10, 16434 }, -- Sonic Knuckles
+                { 90, xi.items.BRONZE_KNUCKLES },
+                { 10, xi.items.SONIC_KNUCKLES  },
             },
         },
+
         [xi.appraisal.origin.NYZUL_SABOTENDER_MARIACHI] =
         {
             items =
             {
-                { 90, 16465 }, -- Bonze Knife
-                { 10, 17981 }, -- Bano Del Sol
+                { 90, xi.items.BRONZE_KNIFE },
+                { 10, xi.items.BANO_DEL_SOL },
             },
         },
     },
+
     [xi.items.UNAPPRAISED_POLEARM] =
     {
         [xi.assault.mission.SEAGULL_GROUNDED] =
@@ -344,6 +366,7 @@ xi.appraisal.appraisalItems =
                 { 100, xi.items.SPARK_SPEAR },
             },
         },
+
         [xi.assault.mission.REQUIEM] =
         {
             items =
@@ -355,6 +378,7 @@ xi.appraisal.appraisalItems =
                 { 15, xi.items.SPARK_SPEAR    },
             },
         },
+
         [xi.assault.mission.EXTERMINATION] =
         {
             items =
@@ -366,6 +390,7 @@ xi.appraisal.appraisalItems =
                 { 10, xi.items.VOLUNTEERS_SCYTHE },
             },
         },
+
         [xi.assault.mission.TROLL_FUGITIVES] =
         {
             items =
@@ -373,64 +398,72 @@ xi.appraisal.appraisalItems =
                 { 100, xi.items.SICKLE }
             },
         },
+
         [xi.appraisal.origin.NYZUL_JUGGLER_HECATOMB] =
         {
             items =
             {
-                { 90, 17024 }, -- Ash Club
-                { 10, 16868 }, -- Heavy Halberd
+                { 90, xi.items.ASH_CLUB      },
+                { 10, xi.items.HEAVY_HALBERD },
             },
         },
+
         [xi.appraisal.origin.NYZUL_HELLION] =
         {
             items =
             {
-                { 70, 17049 }, -- Maple Wand
-                { 30, 16868 }, -- A I'Outrance
+                { 70, xi.items.MAPLE_WAND  },
+                { 30, xi.items.A_LOUTRANCE },
             },
         },
+
         [xi.appraisal.origin.NYZUL_FALCATUS_ARANEI] =
         {
             items =
             {
-                { 70, 17049 }, -- Maple Wand
-                { 20, 16768 }, -- Bronze Zaghnal
-                { 10, 18040 }, -- Webcutter
+                { 70, xi.items.MAPLE_WAND     },
+                { 20, xi.items.BRONZE_ZAGHNAL },
+                { 10, xi.items.WEBCUTTER      },
             },
         },
+
         [xi.appraisal.origin.NYZUL_NUNYENUNC] =
         {
             items =
             {
-                { 90, 17024 }, -- Ash Club
-                { 10, 18394 }, -- Pilgrams Wand
+                { 90, xi.items.ASH_CLUB      },
+                { 10, xi.items.PILGRIMS_WAND },
             },
         },
+
         [xi.appraisal.origin.NYZUL_ROC] =
         {
             items =
             {
-                { 90, 17049 }, -- Maple Wand
-                { 10, 18587 }, -- Dryad Staff
+                { 90, xi.items.MAPLE_WAND  },
+                { 10, xi.items.DRYAD_STAFF },
             },
         },
+
         [xi.appraisal.origin.NYZUL_SWAMFISK] =
         {
             items =
             {
-                { 90, 17049 }, -- Maple Wand
-                { 10, 17594 }, -- Gelong Staff
+                { 90, xi.items.MAPLE_WAND   },
+                { 10, xi.items.GELONG_STAFF },
             },
         },
+
         [xi.appraisal.origin.NYZUL_VOUIVRE] =
         {
             items =
             {
-                { 90, 17024 }, -- Ash Club
-                { 10, 16885 }, -- Gae Blog
+                { 90, xi.items.ASH_CLUB },
+                { 10, xi.items.GAE_BOLG },
             },
         },
     },
+
     [xi.items.UNAPPRAISED_AXE] =
     {
         [xi.assault.mission.REQUIEM] =
@@ -440,6 +473,7 @@ xi.appraisal.appraisalItems =
                 { 100, xi.items.PICKAXE },
             },
         },
+
         [xi.assault.mission.EXTERMINATION] =
         {
             items =
@@ -447,6 +481,7 @@ xi.appraisal.appraisalItems =
                 { 100, xi.items.PICKAXE },
             },
         },
+
         [xi.assault.mission.TROLL_FUGITIVES] =
         {
             items =
@@ -457,106 +492,119 @@ xi.appraisal.appraisalItems =
                 { 15, xi.items.PROMINENCE_AXE },
             },
         },
+
         [xi.appraisal.origin.NYZUL_BAT_EYE] =
         {
             items =
             {
-                { 95, 16642 }, -- Bone Axe
-                {  5, 16675 }, -- Storm Axe
+                { 95, xi.items.BONE_AXE  },
+                {  5, xi.items.STORM_AXE },
             },
         },
+
         [xi.appraisal.origin.NYZUL_NORTHERN_SHADOW] =
         {
             items =
             {
-                { 90, 16704 }, -- Butterfly Axe
-                { 10, 16723 }, -- Executioner
+                { 90, xi.items.BUTTERFLY_AXE },
+                { 10, xi.items.EXECUTIONER   },
             },
         },
+
         [xi.appraisal.origin.NYZUL_AQUARIUS] =
         {
             items =
             {
-                { 90, 16642 }, -- Bone Axe
-                { 10, 17925 }, -- Fransisca
+                { 90, xi.items.BONE_AXE  },
+                { 10, xi.items.FRANSISCA },
             },
         },
+
         [xi.appraisal.origin.NYZUL_TRICKSTER_KINETIX] =
         {
             items =
             {
-                { 90, 16642 }, -- Bone Axe
-                { 10, 16657 }, -- Tabar
+                { 90, xi.items.BONE_AXE },
+                { 10, xi.items.TABAR    },
             },
         },
+
         [xi.appraisal.origin.NYZUL_TYRANNIC_TUNNOK] =
         {
             items =
             {
-                { 90, 16642 }, -- Bone Axe
-                { 10, 17927 }, -- Lohar
+                { 90, xi.items.BONE_AXE },
+                { 10, xi.items.LOHAR    },
             },
         },
+
         [xi.appraisal.origin.NYZUL_PANZER_PERCIVAL] =
         {
             items =
             {
-                { 90, 16704 }, -- Butterfly Axe
-                { 10, 16714 }, -- Neckchopper
+                { 90, xi.items.BUTTERFLY_AXE },
+                { 10, xi.items.NECKCHOPPER   },
             },
         },
+
         [xi.appraisal.origin.NYZUL_PEG_POWLER] =
         {
             items =
             {
-                { 90, 16704 }, -- Butterfly Axe
-                { 10, 16728 }, -- Schwarz Axe
+                { 90, xi.items.BUTTERFLY_AXE },
+                { 10, xi.items.SCHWARZ_AXT   },
             },
         },
     },
+
     [xi.items.UNAPPRAISED_BOW] =
     {
         [xi.assault.mission.LAMIA_NO_13] =
         {
             items =
             {
-                { 43, 17177 }, -- Longbow +1
-                { 43, 17225 }, -- Crossbow +1
-                { 14, 18683 }, -- Imperial Bow
+                { 43, xi.items.LONGBOW_P1   },
+                { 43, xi.items.CROSSBOW_P1  },
+                { 14, xi.items.IMPERIAL_BOW },
             },
         },
+
         [xi.appraisal.origin.NYZUL_GYRE_CARLIN] =
         {
             items =
             {
-                { 90, 17152 }, -- Shortbow
-                { 10, 17247 }, -- Rikonodo
+                { 90, xi.items.SHORTBOW },
+                { 10, xi.items.RIKONODO },
             },
         },
+
         [xi.appraisal.origin.NYZUL_EASTERN_SHADOW] =
         {
             items =
             {
-                { 90, 17160 }, -- Longbow
-                { 10, 18714 }, -- Valis Bow
+                { 90, xi.items.LONGBOW   },
+                { 10, xi.items.VALIS_BOW },
             },
         },
+
         [xi.appraisal.origin.NYZUL_HELLDIVER] =
         {
             items =
             {
-                { 90, 17153 }, -- Self Bow
-                { 10, 17281 }, -- Wingedge
+                { 90, xi.items.SELF_BOW },
+                { 10, xi.items.WINGEDGE },
             },
         },
+
         [xi.appraisal.origin.NYZUL_UNGUR] =
         {
             items =
             {
-                { 90, 17217 }, -- Crossbow
-                { 10, 18141 }, -- Ungar Boomerang
+                { 90, xi.items.CROSSBOW        },
+                { 10, xi.items.UNGUR_BOOMERANG },
             },
         },
+
         [xi.appraisal.origin.NYZUL_FRAELISSA] =
         {
             items =
@@ -566,6 +614,7 @@ xi.appraisal.appraisalItems =
             },
         },
     },
+
     [xi.items.UNAPPRAISED_GLOVES] =
     {
         [xi.assault.mission.ORICHALCUM_SURVEY] =
@@ -575,58 +624,64 @@ xi.appraisal.appraisalItems =
                 { 100, xi.items.STORM_GAGES },
             },
         },
+
         [xi.assault.mission.SEAGULL_GROUNDED] =
         {
             items =
             {
-                { 28, 12695 }, -- Bronze Mittens + 1
-                { 30, 12696 }, -- Leather Gloves
-                { 20, 12721 }, -- Cotton Gloves
-                { 18, 12728 }, -- Cuffs
-                {  5, 14936 }, -- Storm Manopolas
+                { 28, xi.items.BRONZE_MITTENS_P1 },
+                { 30, xi.items.LEATHER_GLOVES    },
+                { 20, xi.items.COTTON_GLOVES     },
+                { 18, xi.items.CUFFS             },
+                {  5, xi.items.STORM_MANOPOLAS   },
             },
         },
+
         [xi.assault.mission.REQUIEM] =
         {
             items =
             {
-                { 30, 12696 }, -- Leather Gloves
-                { 28, 12695 }, -- Bronze Mittens + 1
-                { 20, 12721 }, -- Cotton Gloves
-                { 18, 12728 }, -- Cuffs
-                {  5, 14937 }, -- Storm Gages
+                { 30, xi.items.LEATHER_GLOVES    },
+                { 28, xi.items.BRONZE_MITTENS_P1 },
+                { 20, xi.items.COTTON_GLOVES     },
+                { 18, xi.items.CUFFS             },
+                {  5, xi.items.STORM_GAGES       },
             },
         },
+
         [xi.appraisal.origin.NYZUL_PEALLAIDH] =
         {
             items =
             {
-                { 90, 12696 }, -- Leather Gloves
-                { 10, 14946 }, -- Nightmare Gloves
+                { 90, xi.items.LEATHER_GLOVES   },
+                { 10, xi.items.NIGHTMARE_GLOVES },
             },
         },
+
         [xi.appraisal.origin.NYZUL_ENERGETIC_ERUCA] =
         {
             items =
             {
-                { 90, 12721 }, -- Cotton Cloves
-                { 10, 14947 }, -- Hanzo Tekko
+                { 90, xi.items.COTTON_GLOVES },
+                { 10, xi.items.HANZO_TEKKO   },
             },
         },
     },
+
     [xi.items.UNAPPRAISED_FOOTWEAR] =
     {
         [xi.assault.mission.LAMIA_NO_13] =
         {
             items =
             {
-                { 20, 12984 }, -- Ash Clogs
-                { 38, 12951 }, -- Bronze Leggings +1
-                { 18, 12952 }, -- Leather Highboots
-                {  6, 12992 }, -- Solea
-                { 18, 15691 }, -- Storm Gambieras
+                { 20, xi.items.ASH_CLOGS          },
+                { 38, xi.items.BRONZE_LEGGINGS_P1 },
+                { 18, xi.items.LEATHER_HIGHBOOTS  },
+                {  6, xi.items.SOLEA              },
+                { 18, xi.items.STORM_GAMBIERAS    },
             },
         },
+
         [xi.assault.mission.EXTERMINATION] =
         {
             items =
@@ -637,47 +692,53 @@ xi.appraisal.appraisalItems =
                 { 35, xi.items.LEATHER_HIGHBOOTS  },
             },
         },
+
         [xi.appraisal.origin.NYZUL_LEAPING_LIZZY] =
         {
             items =
             {
-                { 95, 12952 }, -- Leather Highboots
-                {  5, 13014 }, -- Leaping boots
+                { 95, xi.items.LEATHER_HIGHBOOTS },
+                {  5, xi.items.LEAPING_BOOTS     },
             },
         },
+
         [xi.appraisal.origin.NYZUL_CACTUAR_CANTAUTOR] =
         {
             items =
             {
-                { 90, 12952 }, -- Leather Highboots
-                { 10, 14128 }, -- Kung Fu Shoes
+                { 90, xi.items.LEATHER_HIGHBOOTS },
+                { 10, xi.items.KUNG_FU_SHOES     },
             },
         },
+
         [xi.appraisal.origin.NYZUL_BONNACON] =
         {
             items =
             {
-                { 90, 12984 }, -- Ash Clogs
-                { 10, 18052 }, -- Tredecim Scythe or Cure Clogs
+                { 90, xi.items.ASH_CLOGS       },
+                { 10, xi.items.TREDECIM_SCYTHE }, -- Tredecim Scythe or Cure Clogs
             },
         },
+
         [xi.appraisal.origin.NYZUL_TOTTERING_TOBY] =
         {
             items =
             {
-                { 90, 12984 }, -- Ash Clogs
-                { 10, 13013 }, -- Stumbling Sandles
+                { 90, xi.items.ASH_CLOGS         },
+                { 10, xi.items.STUMBLING_SANDALS },
             },
         },
+
         [xi.appraisal.origin.NYZUL_SIMURGH] =
         {
             items =
             {
-                { 90, 12952 }, -- Leather Highboots
-                { 10, 15736 }, -- Trotter Boots
+                { 90, xi.items.LEATHER_HIGHBOOTS },
+                { 10, xi.items.TROTTER_BOOTS     },
             },
         },
     },
+
     [xi.items.UNAPPRAISED_HEADPIECE] =
     {
         [xi.assault.mission.TROLL_FUGITIVES] =
@@ -691,304 +752,339 @@ xi.appraisal.appraisalItems =
                 { 30, xi.items.CIRCLET         },
             },
         },
+
         [xi.appraisal.origin.NYZUL_VALKURM_EMPEROR] =
         {
             items =
             {
-                { 90, 12496 }, -- Copper Hairpin
-                { 10, 15224 }, -- Empress Hairpin
+                { 90, xi.items.COPPER_HAIRPIN  },
+                { 10, xi.items.EMPRESS_HAIRPIN },
             },
         },
+
         [xi.appraisal.origin.NYZUL_ELLYLLON] =
         {
             items =
             {
-                { 90, 12440 }, -- Leather Bandana
-                { 10, 13913 }, -- Mushroom Helm
+                { 90, xi.items.LEATHER_BANDANA },
+                { 10, xi.items.MUSHROOM_HELM   },
             },
         },
+
         [xi.appraisal.origin.NYZUL_TAISAIJIN] =
         {
             items =
             {
-                { 90, 12440 }, -- Leather Bandana
-                { 10, 15222 }, -- Spelunker's Hat
+                { 90, xi.items.LEATHER_BANDANA },
+                { 10, xi.items.SPELUNKERS_HAT  },
             },
         },
+
         [xi.appraisal.origin.NYZUL_DROOLING_DAISY] =
         {
             items =
             {
-                { 90, 12505 }, -- Bone Hairpin
-                { 10, 13838 }, -- Dodge Headband
+                { 90, xi.items.BONE_HAIRPIN   },
+                { 10, xi.items.DODGE_HEADBAND },
             },
         },
+
         [xi.appraisal.origin.NYZUL_SHARP_EARED_ROPIPI] =
         {
             items =
             {
-                { 90, 12496 }, -- Copper Hairpin
-                { 10, 15218 }, -- Entrancing Ribbon
+                { 90, xi.items.COPPER_HAIRPIN    },
+                { 10, xi.items.ENTRANCING_RIBBON },
             },
         },
+
         [xi.appraisal.origin.NYZUL_TUMBLING_TRUFFLE] =
         {
             items =
             {
-                { 90, 12440 }, -- Leather Bandana
-                { 10, 12485 }, -- Fungus Hat
+                { 90, xi.items.LEATHER_BANDANA },
+                { 10, xi.items.FUNGUS_HAT      },
             },
         },
     },
+
     [xi.items.UNAPPRAISED_EARRING] =
     {
         [xi.assault.mission.EXCAVATION_DUTY] =
         {
             items =
             {
-                { 25, 13313 }, -- Shell Earring
-                { 21, 13321 }, -- Bone Earring
-                { 25, 13323 }, -- Beetle Earring
-                { 20, 13327 }, -- Silver Earring
-                {  6, 14790 }, -- Reraise Earring
-                {  3, 15968 }, -- Storm Loop
+                { 25, xi.items.SHELL_EARRING   },
+                { 21, xi.items.BONE_EARRING    },
+                { 25, xi.items.BEETLE_EARRING  },
+                { 20, xi.items.SILVER_EARRING  },
+                {  6, xi.items.RERAISE_EARRING },
+                {  3, xi.items.STORM_LOOP      },
             },
         },
+
         [xi.assault.mission.GOLDEN_SALVAGE] =
         {
             items =
             {
-                { 22, 13313 }, -- Shell Earring
-                { 20, 13321 }, -- Bone Earring
-                { 21, 13323 }, -- Beetle Earring
-                { 27, 13327 }, -- Silver Earring
-                {  6, 14805 }, -- Heims Earring
-                {  4, 15969 }, -- Storm Earring
+                { 22, xi.items.SHELL_EARRING  },
+                { 20, xi.items.BONE_EARRING   },
+                { 21, xi.items.BEETLE_EARRING },
+                { 27, xi.items.SILVER_EARRING },
+                {  6, xi.items.HEIMS_EARRING  },
+                {  4, xi.items.STORM_EARRING  },
             },
         },
+
         [xi.appraisal.origin.NYZUL_LEECH_KING] =
         {
             items =
             {
-                { 90, 13313 }, -- Shell Earring
-                { 10, 13359 }, -- Bloodbead Earring
+                { 90, xi.items.SHELL_EARRING     },
+                { 10, xi.items.BLOODBEAD_EARRING },
             },
         },
+
         [xi.appraisal.origin.NYZUL_CAPRICIOUS_CASSIE] =
         {
             items =
             {
-                { 90, 13321 }, -- Bone Earring
-                { 10, 13402 }, -- Cassie Earring
+                { 90, xi.items.BONE_EARRING   },
+                { 10, xi.items.CASSIE_EARRING },
             },
         },
+
         [xi.appraisal.origin.NYZUL_MAIGHDEAN_UAINE] =
         {
             items =
             {
-                { 90, 13323 }, -- Beetle Earring
-                { 10, 14803 }, -- Optical Earring
+                { 90, xi.items.BEETLE_EARRING  },
+                { 10, xi.items.OPTICAL_EARRING },
             },
         },
     },
+
     [xi.items.UNAPPRAISED_RING] =
     {
         [xi.assault.mission.LEUJAOAM_CLEANSING] =
         {
             items =
             {
-                { 50, 13454 }, -- Copper Ring
-                { 30, 13465 }, -- Brass Ring
-                { 15, 13514 }, -- Archer Ring
-                {  5, 15773 }, -- Imperial Ring
+                { 50, xi.items.COPPER_RING   },
+                { 30, xi.items.BRASS_RING    },
+                { 15, xi.items.ARCHERS_RING  },
+                {  5, xi.items.IMPERIAL_RING },
             },
         },
+
         [xi.assault.mission.IMPERIAL_AGENT_RESCUE] =
         {
             items =
             {
-                { 50, 13454 }, -- Copper Ring
-                { 30, 13465 }, -- Brass Ring
-                { 15, 13549 }, -- Ether Ring
-                {  5, 15774 }, -- Storm Ring
+                { 50, xi.items.COPPER_RING },
+                { 30, xi.items.BRASS_RING  },
+                { 15, xi.items.ETHER_RING  },
+                {  5, xi.items.STORM_RING  },
             },
         },
+
         [xi.appraisal.origin.NYZUL_BOMB_KING] =
         {
             items =
             {
-                { 60, 13454 }, -- Copper Ring
-                { 30, 13465 }, -- Brass Ring
-                { 10, 13506 }, -- Bomb Ring
+                { 60, xi.items.COPPER_RING },
+                { 30, xi.items.BRASS_RING  },
+                { 10, xi.items.BOMB_RING   },
             },
         },
+
         [xi.appraisal.origin.NYZUL_SMOTHERING_SCHMIDT] =
         {
             items =
             {
-                { 60, 13454 }, -- Copper Ring
-                { 30, 13465 }, -- Brass Ring
-                { 10, 13507 }, -- Malflood Ring
+                { 60, xi.items.COPPER_RING   },
+                { 30, xi.items.BRASS_RING    },
+                { 10, xi.items.MALFLOOD_RING },
             },
         },
+
         [xi.appraisal.origin.NYZUL_ASPHYXIATED_AMSEL] =
         {
             items =
             {
-                { 90, 13465 }, -- Brass Ring
-                { 10, 13512 }, -- Malgust Ring
+                { 90, xi.items.BRASS_RING   },
+                { 10, xi.items.MALGUST_RING },
             },
         },
+
         [xi.appraisal.origin.NYZUL_CRUSHED_KRAUSE] =
         {
             items =
             {
-                { 90, 13454 }, -- Copper Ring
-                { 10, 13508 }, -- Maldust Ring
+                { 90, xi.items.COPPER_RING  },
+                { 10, xi.items.MALDUST_RING },
             },
         },
+
         [xi.appraisal.origin.NYZUL_PULVERIZED_PFEFFER] =
         {
             items =
             {
-                { 90, 13454 }, -- Copper Ring
-                { 10, 13509 }, -- Malfrost Ring
+                { 90, xi.items.COPPER_RING   },
+                { 10, xi.items.MALFROST_RING },
             },
         },
+
         [xi.appraisal.origin.NYZUL_SERKET] =
         {
             items =
             {
-                { 90, 13465 }, -- Brass Ring
-                { 10, 13552 }, -- Serket Ring
+                { 90, xi.items.BRASS_RING  },
+                { 10, xi.items.SERKET_RING },
             },
         },
+
         [xi.appraisal.origin.NYZUL_BURNED_BERGMANN] =
         {
             items =
             {
-                { 90, 13454 }, -- Copper Ring
-                { 10, 13510 }, -- Malflame Ring
+                { 90, xi.items.COPPER_RING   },
+                { 10, xi.items.MALFLAME_RING },
             },
         },
+
         [xi.appraisal.origin.NYZUL_BLOODSUCKER] =
         {
             items =
             {
-                { 90, 13454 }, -- Copper Ring
-                { 10, 13302 }, -- Bloodbead Ring
+                { 90, xi.items.COPPER_RING    },
+                { 10, xi.items.BLOODBEAD_RING },
             },
         },
+
         [xi.appraisal.origin.NYZUL_SEWER_SYRUP] =
         {
             items =
             {
-                { 90, 13465 }, -- Brass Ring
-                { 10, 13303 }, -- Jelly Ring
+                { 90, xi.items.BRASS_RING },
+                { 10, xi.items.JELLY_RING },
             },
         },
+
         [xi.appraisal.origin.NYZUL_WOUNDED_WURFEL] =
         {
             items =
             {
-                { 90, 13454 }, -- Copper Ring
-                { 10, 13511 }, -- Malflash Ring
+                { 90, xi.items.COPPER_RING   },
+                { 10, xi.items.MALFLASH_RING },
             },
         },
     },
+
     [xi.items.UNAPPRAISED_CAPE] =
     {
         [xi.assault.mission.LEBROS_SUPPLIES] =
         {
             items =
             {
-                { 30, 13600 }, -- dhmamal mantle +1
-                { 25, 13601 }, -- cotton cape +1
-                { 25, 13608 }, -- lizard mantle +1
-                {  5, xi.items.STORM_CAPE       },
-                { 15, xi.items.ENHANCING_MANTLE },
+                { 30, xi.items.DHALMEL_MANTLE_P1 },
+                { 25, xi.items.COTTON_CAPE_P1    },
+                { 25, xi.items.LIZARD_MANTLE_P1  },
+                {  5, xi.items.STORM_CAPE        },
+                { 15, xi.items.ENHANCING_MANTLE  },
             },
         },
+
         [xi.appraisal.origin.NYZUL_OLD_TWO_WINGS] =
         {
             items =
             {
-                { 90, 13608 }, -- Lizard Mantle +1
-                { 10, 13598 }, -- Bat Cape
+                { 90, xi.items.LIZARD_MANTLE_P1 },
+                { 10, xi.items.BAT_CAPE         },
             },
         },
+
         [xi.appraisal.origin.NYZUL_FRAELISSA] =
         {
             items =
             {
-                { 90, 13601 }, -- Cotton Cape +1
-                { 10, 15469 }, -- Bellicose Cape
+                { 90, xi.items.COTTON_CAPE_P1   },
+                { 10, xi.items.BELLICOSE_MANTLE },
             },
         },
+
         [xi.appraisal.origin.NYZUL_SPINY_SPIPI] =
         {
             items =
             {
-                { 90, 13594 }, -- Rabbit Mantle
-                { 10, 13607 }, -- Mist Silk Cape
+                { 90, xi.items.RABBIT_MANTLE  },
+                { 10, xi.items.MIST_SILK_CAPE },
             },
         },
+
         [xi.appraisal.origin.NYZUL_GOLDEN_BAT] =
         {
             items =
             {
-                { 90, 13601 }, -- Cotton Cape +1
-                { 10, 13576 }, -- Night Cape
+                { 90, xi.items.COTTON_CAPE_P1 },
+                { 10, xi.items.NIGHT_CAPE     },
             },
         },
     },
+
     [xi.items.UNAPPRAISED_SASH] =
     {
 
     },
+
     [xi.items.UNAPPRAISED_SHIELD] =
     {
         [xi.appraisal.origin.NYZUL_BLOODTEAR_BALDURF] =
         {
             items =
             {
-                { 90, 12293 }, -- Oak Shield
-                { 10, 12356 }, -- Viking Shield
+                { 90, xi.items.OAK_SHIELD    },
+                { 10, xi.items.VIKING_SHIELD },
             },
         },
+
         [xi.appraisal.origin.NYZUL_FUNGUS_BEETLE] =
         {
             items =
             {
-                { 90, 12289 }, -- Lauan Shield
-                { 10, 12371 }, -- Clipeus
+                { 90, xi.items.LAUAN_SHIELD },
+                { 10, xi.items.CLIPEUS      },
             },
         },
+
         [xi.appraisal.origin.NYZUL_STEELFLEECE_BALDARICH] =
         {
             items =
             {
-                { 90, 12293 }, -- Oak Shield
-                { 10, 12356 }, -- Viking Shield
+                { 90, xi.items.OAK_SHIELD    },
+                { 10, xi.items.VIKING_SHIELD },
             },
         },
+
         [xi.appraisal.origin.NYZUL_SOUTHERN_SHADOW] =
         {
             items =
             {
-                { 90, 12291 }, -- Elm Shield
-                { 10, 12344 }, -- Master Shield
+                { 90, xi.items.ELM_SHIELD    },
+                { 10, xi.items.MASTER_SHIELD },
             },
         },
+
         [xi.appraisal.origin.NYZUL_PELICAN] =
         {
             items =
             {
-                { 90, 12299 }, -- Aspis
-                { 10, 12382 }, -- Astral Aspis
+                { 90, xi.items.ASPIS        },
+                { 10, xi.items.ASTRAL_ASPIS },
             },
         },
     },
+
     [xi.items.UNAPPRAISED_NECKLACE] =
     {
         [xi.assault.mission.ORICHALCUM_SURVEY] =
@@ -996,117 +1092,131 @@ xi.appraisal.appraisalItems =
             items =
             {
                 { 55, xi.items.FEATHER_COLLAR },
-                { 30, xi.items.GORGET_1       },
+                { 30, xi.items.GORGET_P1      },
                 { 10, xi.items.JAGD_GORGET    },
                 {  5, xi.items.STORM_MUFFLER  },
             },
         },
+
         [xi.assault.mission.PREEMPTIVE_STRIKE] =
         {
             items =
             {
-                { 55, 13075 }, -- Feather Collar
-                { 30, 13065 }, -- Gorget +1
-                { 10, 13128 }, -- Spectacles
-                {  5, 15520 }, -- Storm Torqe
+                { 55, xi.items.FEATHER_COLLAR },
+                { 30, xi.items.GORGET_P1      },
+                { 10, xi.items.SPECTACLES     },
+                {  5, xi.items.STORM_TORQUE   },
             },
         },
+
         [xi.appraisal.origin.NYZUL_SHADOW_EYE] =
         {
             items =
             {
-                { 95, 15526 }, -- Regen Collar
-                {  5, 13114 }, -- Moon Amulet
+                { 95, xi.items.REGEN_COLLAR },
+                {  5, xi.items.MOON_AMULET  },
             },
         },
+
         [xi.appraisal.origin.NYZUL_JAGGEDY_EARED_JACK] =
         {
             items =
             {
-                { 90, 13081 }, -- Leather Gorget
-                { 10, 13112 }, -- Rabbit Charm
+                { 90, xi.items.LEATHER_GORGET },
+                { 10, xi.items.RABBIT_CHARM   },
             },
         },
+
         [xi.appraisal.origin.NYZUL_GARGANTUA] =
         {
             items =
             {
-                { 90, 13075 }, -- Feather Collar
-                { 10, 13115 }, -- Elementl Charm
+                { 90, xi.items.FEATHER_COLLAR  },
+                { 10, xi.items.ELEMENTAL_CHARM },
             },
         },
+
         [xi.appraisal.origin.NYZUL_SERPOPARD_ISHTAR] =
         {
             items =
             {
-                { 90, 13075 }, -- Feather Collar
-                { 10, 13086 }, -- Cerulean Pendant
+                { 90, xi.items.FEATHER_COLLAR   },
+                { 10, xi.items.CERULEAN_PENDANT },
             },
         },
+
         [xi.appraisal.origin.NYZUL_ARGUS] =
         {
             items =
             {
-                { 90, 15526 }, -- Regen Collar
-                { 10, 13056 }, -- Peacok Charm
+                { 90, xi.items.REGEN_COLLAR  },
+                { 10, xi.items.PEACOCK_CHARM },
             },
         },
+
         [xi.appraisal.origin.NYZUL_BLOODPOOL_VORAX] =
         {
             items =
             {
-                { 90, 13065 }, -- Gorget +1
-                { 10, 13058 }, -- Bloodbead Amulet
+                { 90, xi.items.GORGET_P1        },
+                { 10, xi.items.BLOODBEAD_AMULET },
             },
         },
+
         [xi.appraisal.origin.NYZUL_BUBURIMBOO] =
         {
             items =
             {
-                { 90, 13065 }, -- Gorget +1
-                { 10, 13057 }, -- Buburimu Gorget
+                { 90, xi.items.GORGET_P1       },
+                { 10, xi.items.BUBURIMU_GORGET },
             },
         },
+
         [xi.appraisal.origin.NYZUL_DUNE_WIDOW] =
         {
             items =
             {
-                { 90, 15526 }, -- Regen Collar
-                { 10, 13137 }, -- Spider Torque
+                { 90, xi.items.REGEN_COLLAR  },
+                { 10, xi.items.SPIDER_TORQUE },
             },
         },
     },
+
     [xi.items.UNAPPRAISED_INGOT] =
     {
 
     },
+
     [xi.items.UNAPPRAISED_POTION] =
     {
 
     },
+
     [xi.items.UNAPPRAISED_CLOTH] =
     {
 
     },
+
     [xi.items.UNAPPRAISED_BOX] =
     {
         [xi.assault.mission.LEUJAOAM_CLEANSING] =
         {
             items =
             {
-                { 10,  776 }, -- White Rock
-                { 20, 1164 }, -- Tsurara
-                {  2, 1411 }, -- Phalaenopsis
-                {  5, 1472 }, -- Gardenia Seed
-                {  8, 1887 }, -- Glass Sheet
-                { 20, 2146 }, -- Merrow Scale
-                { 15, 2336 }, -- Soulflayer Staff
-                { 10, 4097 }, -- Ice Crystal
-                {  1, 5315 }, -- Toolbag: Jusa
-                {  3, 5353 }, -- Iron Bullet Pouch
-                {  6, 5450 }, -- Lakerda
+                { 10, xi.items.WHITE_ROCK        },
+                { 20, xi.items.TSURARA           },
+                {  2, xi.items.PHALAENOPSIS      },
+                {  5, xi.items.GARDENIA_SEED     },
+                {  8, xi.items.GLASS_SHEET       },
+                { 20, xi.items.MERROW_SCALE      },
+                { 15, xi.items.SOULFLAYER_STAFF  },
+                { 10, xi.items.ICE_CRYSTAL       },
+                {  1, xi.items.TOOLBAG_JUSATSU   },
+                {  3, xi.items.IRON_BULLET_POUCH },
+                {  6, xi.items.LAKERDA           },
             },
         },
+
         [xi.assault.mission.ORICHALCUM_SURVEY] =
         {
             items =
@@ -1124,26 +1234,28 @@ xi.appraisal.appraisalItems =
                 {  7, xi.items.WHITE_ROCK            },
             },
         },
+
         [xi.assault.mission.IMPERIAL_AGENT_RESCUE] =
         {
             items =
             {
-                {  7, 5566 }, -- Date
-                {  5, 4388 }, -- Eggplant
-                { 10, 2156 }, -- Imperial Tea Leaves
-                {  4, 2475 }, -- Kaolin
-                { 20, 2227 }, -- Mamool Ja Collar
-                { 15, 2334 }, -- Poroggo Hat
-                {  6,  638 }, -- Sage
-                {  5,  829 }, -- Silk Cloth
-                {  1, 5310 }, -- Tollbag Kawa
-                {  1, 5314 }, -- Tollbag Shihei
-                {  1, 5309 }, -- Toolbag Tsura
-                { 10, 4387 }, -- Wild Onion
-                {  1, 5308 }, -- Tollbag Uchi
-                { 14, 5453 }, -- Istakoz
+                {  7, xi.items.DATE                         },
+                {  5, xi.items.EGGPLANT                     },
+                { 10, xi.items.CLUMP_OF_IMPERIAL_TEA_LEAVES },
+                {  4, xi.items.CHUNK_OF_KAOLIN              },
+                { 20, xi.items.MAMOOL_JA_COLLAR             },
+                { 15, xi.items.POROGGO_HAT                  },
+                {  6, xi.items.SPRIG_OF_SAGE                },
+                {  5, xi.items.SQUARE_OF_SILK_CLOTH         },
+                {  1, xi.items.TOOLBAG_KAWAHORI_OGI         },
+                {  1, xi.items.TOOLBAG_SHIHEI               },
+                {  1, xi.items.TOOLBAG_TSURARA              },
+                { 10, xi.items.WILD_ONION                   },
+                {  1, xi.items.TOOLBAG_UCHITAKE             },
+                { 14, xi.items.ISTAKOZ                      },
             },
         },
+
         [xi.assault.mission.LEBROS_SUPPLIES] =
         {
             items =
@@ -1156,102 +1268,108 @@ xi.appraisal.appraisalItems =
                 { 25, xi.items.SPRIG_OF_HOLY_BASIL },
             },
         },
+
         [xi.assault.mission.PREEMPTIVE_STRIKE] =
         {
             items =
             {
-                { 17, 4388 }, -- Eggplant
-                { 15,  638 }, -- Sage
-                { 15, 2156 }, -- Imp. Tea Leaves
-                {  7, 4387 }, -- Wild Onion
-                { 10, 1828 }, -- Red Grass Thread
-                {  7, 2227 }, -- Mamool Ja Collar
-                {  4, 5317 }, -- Toolbag (Sairui-ran)
-                {  3, 5314 }, -- Toolbag (Shihei)
-                {  4, 5315 }, -- Toolbag (Jusa)
-                { 10, 2475 }, -- Kaolin
-                {  8, 2334 }, -- Poroggo Hat
+                { 17, xi.items.EGGPLANT                     },
+                { 15, xi.items.SPRIG_OF_SAGE                },
+                { 15, xi.items.CLUMP_OF_IMPERIAL_TEA_LEAVES },
+                {  7, xi.items.WILD_ONION                   },
+                { 10, xi.items.SPOOL_OF_RED_GRASS_THREAD    },
+                {  7, xi.items.MAMOOL_JA_COLLAR             },
+                {  4, xi.items.TOOLBAG_SAIRUI_RAN           },
+                {  3, xi.items.TOOLBAG_SHIHEI               },
+                {  4, xi.items.TOOLBAG_JUSATSU              },
+                { 10, xi.items.CHUNK_OF_KAOLIN              },
+                {  8, xi.items.POROGGO_HAT                  },
             },
         },
+
         [xi.assault.mission.REQUIEM] =
         {
             items =
             {
-                {  4,  1654 }, -- Igneous Rock
-                {  5,  4196 }, -- Rotten Quiver
-                {  5,  5336 }, -- Holy Bolt Quiver
-                { 20,   880 }, -- Bone Chip
-                {  5,   113 }, -- Cleaning Tool Set
-                {  2,   867 }, -- Dragon Scales
-                {  9,  2153 }, -- Qiqirn Sandbag
-                { 15,  2163 }, -- Imp Wing
-                { 20, 17339 }, -- Bronze Bolt
-                { 15,  1523 }, -- Apple Mint
+                {  4, xi.items.IGNEOUS_ROCK             },
+                {  5, xi.items.ROTTEN_QUIVER            },
+                {  5, xi.items.HOLY_BOLT_QUIVER         },
+                { 20, xi.items.BONE_CHIP                },
+                {  5, xi.items.CLEANING_TOOL_SET        },
+                {  2, xi.items.HANDFUL_OF_DRAGON_SCALES },
+                {  9, xi.items.QIQIRN_SANDBAG           },
+                { 15, xi.items.IMP_WING                 },
+                { 20, xi.items.BRONZE_BOLT              },
+                { 15, xi.items.SPRIG_OF_APPLE_MINT      },
             },
         },
+
         [xi.assault.mission.EXCAVATION_DUTY] =
         {
             items =
             {
-                { 15,  640 }, -- Copper Ore
-                { 10,  769 }, -- Red Rock
-                {  5,  828 }, -- Velvet Cloth
-                {  8,  928 }, -- Bomb Ash
-                {  8, 1108 }, -- Sulfur
-                {  5, 1590 }, -- Holy Basil
-                { 20, 2160 }, -- Troll Pauldron
-                { 15, 2175 }, -- Flan Meat
-                {  1, 2302 }, -- Troll Bronze Ingot
-                {  2, 5340 }, -- Silver Bullet Pouch
-                {  1, 5341 }, -- Spartan Bullet Pouch
-                {  2, 5353 }, -- Iron Bullet Pouch
-                {  4, 5359 }, -- Bronze Bullet Pouch
-                {  3, 5363 }, -- Bullet Pouch
+                { 15, xi.items.CHUNK_OF_COPPER_ORE    },
+                { 10, xi.items.RED_ROCK               },
+                {  5, xi.items.SQUARE_OF_VELVET_CLOTH },
+                {  8, xi.items.PINCH_OF_BOMB_ASH      },
+                {  8, xi.items.PINCH_OF_SULFUR        },
+                {  5, xi.items.SPRIG_OF_HOLY_BASIL    },
+                { 20, xi.items.TROLL_PAULDRON         },
+                { 15, xi.items.CHUNK_OF_FLAN_MEAT     },
+                {  1, xi.items.TROLL_BRONZE_INGOT     },
+                {  2, xi.items.SILVER_BULLET_POUCH    },
+                {  1, xi.items.SPARTAN_BULLET_POUCH   },
+                {  2, xi.items.IRON_BULLET_POUCH      },
+                {  4, xi.items.BRONZE_BULLET_POUCH    },
+                {  3, xi.items.BULLET_POUCH           },
             },
         },
+
         [xi.assault.mission.SEAGULL_GROUNDED] =
         {
             items =
             {
-                {  1,  113 }, -- Cleaning Tool Set
-                {  2,  821 }, -- Rainbow Thread
-                { 25,  880 }, -- Bone Chip
-                {  5, 1523 }, -- Apple Mint
-                {  3, 1654 }, -- Igneous Rock
-                { 20, 2153 }, -- Qiqirn Sandbag
-                {  5, 2163 }, -- Imp Wing
-                { 10, 4196 }, -- Rotton Quiver
-                {  6, 4227 }, -- Bronze Bolt Quiver
-                { 10, 4387 }, -- Wild Onion
-                {  5, 5336 }, -- Holy Bolt Quiver
-                {  3, 5337 }, -- Sleep Bolt Quiver
+                {  1, xi.items.CLEANING_TOOL_SET       },
+                {  2, xi.items.SPOOL_OF_RAINBOW_THREAD },
+                { 25, xi.items.BONE_CHIP               },
+                {  5, xi.items.SPRIG_OF_APPLE_MINT     },
+                {  3, xi.items.IGNEOUS_ROCK            },
+                { 20, xi.items.QIQIRN_SANDBAG          },
+                {  5, xi.items.IMP_WING                },
+                { 10, xi.items.ROTTEN_QUIVER           },
+                {  6, xi.items.BRONZE_BOLT_QUIVER      },
+                { 10, xi.items.WILD_ONION              },
+                {  5, xi.items.HOLY_BOLT_QUIVER        },
+                {  3, xi.items.SLEEP_BOLT_QUIVER       },
             },
         },
+
         [xi.assault.mission.GOLDEN_SALVAGE] =
         {
             items =
             {
-                {  1,    90 }, -- Rusty Bucket
-                { 24,  2165 }, -- Qutrub Gorget
-                { 20,  2167 }, -- Lamian Armlet
-                {  6,  2418 }, -- Aht Urhgan Brass Ingot
-                {  2,  4129 }, -- Stone Quiver
-                {  6,  4220 }, -- Bone Quiver
-                {  2,  4221 }, -- Beetle Quiver
-                {  1,  4222 }, -- Horn Quiver
-                {  5,  4223 }, -- Scorpion Quiver
-                {  5,  4224 }, -- Demon Quiver
-                {  3,  4225 }, -- Iron Quiver
-                {  4,  4226 }, -- Silver Quiver
-                {  1,  4509 }, -- Distilled Water
-                {  5,  5018 }, -- Puppet's Operetta
-                {  5,  5332 }, -- Kabura Quiver
-                {  1,  5333 }, -- Sleep Quiver
-                { 14,  5453 }, -- Istakoz
-                {  1, 17391 }, -- Willow Fishing Rod
-                {  1, 17396 }, -- Little Worm
+                {  1, xi.items.RUSTY_BUCKET               },
+                { 24, xi.items.QUTRUB_GORGET              },
+                { 20, xi.items.LAMIAN_ARMLET              },
+                {  6, xi.items.AHT_URHGAN_BRASS_INGOT     },
+                {  2, xi.items.STONE_QUIVER               },
+                {  6, xi.items.BONE_QUIVER                },
+                {  2, xi.items.BEETLE_QUIVER              },
+                {  1, xi.items.HORN_QUIVER                },
+                {  5, xi.items.SCORPION_QUIVER            },
+                {  5, xi.items.DEMON_QUIVER               },
+                {  3, xi.items.IRON_QUIVER                },
+                {  4, xi.items.SILVER_QUIVER              },
+                {  1, xi.items.FLASK_OF_DISTILLED_WATER   },
+                {  5, xi.items.SCROLL_OF_PUPPETS_OPERETTA },
+                {  5, xi.items.KABURA_QUIVER              },
+                {  1, xi.items.SLEEP_QUIVER               },
+                { 14, xi.items.ISTAKOZ                    },
+                {  1, xi.items.WILLOW_FISHING_ROD         },
+                {  1, xi.items.LITTLE_WORM                },
             },
         },
+
         [xi.assault.mission.LAMIA_NO_13] =
         {
             items =
@@ -1272,6 +1390,7 @@ xi.appraisal.appraisalItems =
                 {  1, xi.items.RUSTY_BUCKET           },
             },
         },
+
         [xi.assault.mission.EXTERMINATION] =
         {
             items =
@@ -1289,6 +1408,7 @@ xi.appraisal.appraisalItems =
                 {  4, xi.items.BEETLE_QUIVER            },
             },
         },
+
         [xi.assault.mission.TROLL_FUGITIVES] =
         {
             items =
@@ -1306,69 +1426,77 @@ xi.appraisal.appraisalItems =
                 { 10, xi.items.TROLL_PAULDRON      },
             },
         },
+
         [xi.appraisal.origin.NYZUL_AIATAR] =
         {
             items =
             {
-                { 80, 12824 }, -- Leather Trousers
-                { 10, 15367 }, -- Falconer's Hose
-                { 10, 15370 }, -- Sable Cuisses
+                { 80, xi.items.LEATHER_TROUSERS },
+                { 10, xi.items.FALCONERS_HOSE   },
+                { 10, xi.items.SABLE_CUISSES    },
             },
         },
+
         [xi.appraisal.origin.NYZUL_INTULO] =
         {
             items =
             {
-                { 90, 12864 }, -- Slacks
-                { 10, 15372 }, -- Magic Slacks
+                { 90, xi.items.SLACKS       },
+                { 10, xi.items.MAGIC_SLACKS },
             },
         },
+
         [xi.appraisal.origin.NYZUL_FRIAR_RUSH] =
         {
             items =
             {
-                { 90, 17316 }, -- Bomb Arm
-                { 10, 18139 }, -- Bomb Core
+                { 90, xi.items.BOMB_ARM  },
+                { 10, xi.items.BOMB_CORE },
             },
         },
+
         [xi.appraisal.origin.NYZUL_SABOTENDER_BAILARIN] =
         {
             items =
             {
-                { 90, 17307 }, -- Dart
-                { 10, 18138 }, -- Bailathorn
+                { 90, xi.items.DART       },
+                { 10, xi.items.BAILATHORN },
             },
         },
+
         [xi.appraisal.origin.NYZUL_ODQAN] =
         {
             items =
             {
-                { 90, 12824 }, -- Leather Trousers
-                { 10, 15373 }, -- Bravo's Subligar
+                { 90, xi.items.LEATHER_TROUSERS },
+                { 10, xi.items.BRAVOS_SUBLIGAR  },
             },
         },
+
         [xi.appraisal.origin.NYZUL_STRAY_MARY] =
         {
             items =
             {
-                { 90, 17344 }, -- Cornette
-                { 10, 17366 }, -- Mary's Horn
+                { 90, xi.items.CORNETTE   },
+                { 10, xi.items.MARYS_HORN },
             },
         },
+
         [xi.appraisal.origin.NYZUL_UNUT] =
         {
             items =
             {
-                { 90, 12857 }, -- Linen Slops
-                { 10, 14287 }, -- Luna Subligar
+                { 90, xi.items.LINEN_SLOPS   },
+                { 10, xi.items.LUNA_SUBLIGAR },
             },
         },
+
         [xi.appraisal.origin.NYZUL_JADED_JODY] =
         {
             items =
             {
-                { 90, 12864 }, -- Slacks
-                { 10, 15613 }, -- Jet Seraweels
+                { 90, xi.items.SLACKS        },
+                { 10, xi.items.JET_SERAWEELS },
             },
         },
     },
