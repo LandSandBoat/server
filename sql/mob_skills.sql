@@ -958,8 +958,8 @@ INSERT INTO `mob_skills` VALUES (1117,768,'lead_breath',6,15.0,2000,1500,4,0,0,0
 INSERT INTO `mob_skills` VALUES (1118,769,'lead_breath',6,15.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1119,863,'frag_bomb',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1120,69,'10000_needles',1,10.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1121,771,'eagle_eye_shot',0,25.0,2000,0,4,2,0,0,0,0,0); -- yagudo move
-INSERT INTO `mob_skills` VALUES (1122,770,'eagle_eye_shot',0,25.0,2000,0,4,2,0,0,0,0,0); -- quadav move
+INSERT INTO `mob_skills` VALUES (1121,770,'eagle_eye_shot',0,25.0,2000,0,4,2,0,0,0,0,0); -- yagudo move
+INSERT INTO `mob_skills` VALUES (1122,771,'eagle_eye_shot',0,25.0,2000,0,4,2,0,0,0,0,0); -- quadav move
 INSERT INTO `mob_skills` VALUES (1123,355,'ore_toss',0,25.0,2000,0,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1124,772,'regain_hp',1,25.0,2000,0,4,0,0,0,0,0,0); -- Dyna Statues
 INSERT INTO `mob_skills` VALUES (1125,773,'regain_mp',1,25.0,2000,0,4,0,0,0,0,0,0); -- Dyna Statues
