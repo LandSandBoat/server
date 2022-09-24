@@ -1036,7 +1036,7 @@ UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Goblin_Bushwhacker' AND 
 UPDATE mob_groups SET content_tag='WOTG' WHERE name='Teporingo' AND groupid='10' AND zoneid='191';
 
 INSERT INTO `mob_groups` (`groupid`, `poolid`, `zoneid`, `name`, `respawntime`, `spawntype`, `dropid`, `HP`, `MP`, `minLevel`, `maxLevel`, `allegiance`) VALUES
-(40,3772,191,'Stickpin',330,0,963,0,0,7,9,0),           -- These are in prep for complete zone revamps
+(40,3772,191,'Stickpin',330,0,6043,0,0,7,9,0),           -- These are in prep for complete zone revamps
 (41,1527,191,'Giant_Grub',330,0,2341,0,0,9,12,0),       -- These are in prep for complete zone revamps
 (42,1666,191,'Goblin_Gambler',330,0,1119,0,0,21,23,0),  -- These are in prep for complete zone revamps
 (43,1683,191,'Goblin_Leecher',330,0,1107,0,0,21,23,0),  -- These are in prep for complete zone revamps

@@ -4894,7 +4894,7 @@ INSERT INTO `mob_droplist` VALUES (551,0,0,1000,1057,@VRARE);  -- Toraimarai Cof
 -- ZoneID: 151 - Cutter
 INSERT INTO `mob_droplist` VALUES (552,0,0,1000,936,@ALWAYS);    -- Chunk Of Rock Salt (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (552,0,0,1000,881,@VCOMMON);   -- Crab Shell (Very Common, 24%)
-INSERT INTO `mob_droplist` VALUES (552,0,0,1000,4400,@UNCOMMON); -- Slice Of Land Crab Meat (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (552,0,0,1000,4400,@VCOMMON);  -- Slice Of Land Crab Meat (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (552,0,0,1000,4400,@UNCOMMON); -- Slice Of Land Crab Meat (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (552,0,0,1000,4400,@UNCOMMON); -- Slice Of Land Crab Meat (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (552,2,0,1000,936,0);          -- Chunk Of Rock Salt (Steal)
