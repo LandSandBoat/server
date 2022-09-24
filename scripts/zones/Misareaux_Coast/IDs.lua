@@ -28,6 +28,7 @@ zones[xi.zone.MISAREAUX_COAST] =
         BEEP_BEEP                     = 7583, -- Beep...beep...beep...beep...
         BEEP_CLICK_WHIR               = 7584, -- Beeeep. Click, whirrr...
         BUZZ_BEEP_BEEP                = 7585, -- Buzz... Beep beep!
+        FOUL_STENCH                   = 7586, -- You sense the foul stench of death...
         CREATURE_HAS_APPEARED         = 7610, -- A creature has appeared out of nowhere!
         NOTHING_ELSE_OF_INTEREST      = 7611, -- There is nothing else of interest here.
         LOGGING_IS_POSSIBLE_HERE      = 7612, -- Logging is possible here if you have <item>.
@@ -58,6 +59,7 @@ zones[xi.zone.MISAREAUX_COAST] =
         GRATION          = 16879899,
         ZIPHIUS          = 16879900,
         ODQAN            = 16879737,
+        BLOODY_COFFIN    = 16879896,
     },
     npc =
     {

@@ -78,7 +78,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if quest:getVar(player, 'Prog') == 0 and npcUtil.popFromQM(player, npc, bibikiID.mob.PERIFOOLS, { claim = true, hide = 0 }) then
-                        return quest:messageText(bibikiID.text.YOU_ARE_NOT_ALONE)
+                        return quest:message(bibikiID.text.YOU_ARE_NOT_ALONE)
                     elseif quest:getVar(player, 'Prog') == 1 then
                         return quest:progressEvent(34)
                     end

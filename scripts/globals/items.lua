@@ -2654,6 +2654,7 @@ xi.items =
     MEDIEVAL_COLLAR                 = 13163,
     AGILE_GORGET                    = 13164,
     JAGD_GORGET                     = 13165,
+    MEMENTO_MUFFLER                 = 13173,
     WILLPOWER_TORQUE                = 13174,
     WING_PENDANT                    = 13183,
     SPEED_BELT                      = 13189,
