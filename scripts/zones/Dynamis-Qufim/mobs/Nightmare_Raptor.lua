@@ -2,7 +2,7 @@
 -- Area: Dynamis - Qufim
 --  Mob: Nightmare Raptor
 -----------------------------------
-mixins = {require("scripts/mixins/dynamis_dreamland")}
+mixins = { require("scripts/mixins/dynamis_dreamland") }
 -----------------------------------
 local entity = {}
 

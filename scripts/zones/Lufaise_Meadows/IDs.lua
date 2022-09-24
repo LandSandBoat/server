@@ -16,6 +16,7 @@ zones[xi.zone.LUFAISE_MEADOWS] =
         KEYITEM_OBTAINED              = 6393, -- Obtained key item: <keyitem>.
         KEYITEM_LOST                  = 6394, -- Lost key item: <keyitem>.
         NOTHING_OUT_OF_ORDINARY       = 6404, -- There is nothing out of the ordinary here.
+        SENSE_OF_FOREBODING           = 6405, -- You are suddenly overcome with a sense of foreboding...
         FELLOW_MESSAGE_OFFSET         = 6419, -- I'm ready. I suppose.
         CARRIED_OVER_POINTS           = 7001, -- You have carried over <number> login point[/s].
         LOGIN_CAMPAIGN_UNDERWAY       = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
@@ -52,7 +53,7 @@ zones[xi.zone.LUFAISE_MEADOWS] =
     },
     mob =
     {
-        PADFOOT               =
+        PADFOOT =
         {
             16875552, -- !pos -43.689 0.487 -328.028
             16875578, -- !pos 260.445 -1.761 -27.862
@@ -60,14 +61,19 @@ zones[xi.zone.LUFAISE_MEADOWS] =
             16875703, -- !pos -378.950 -15.742 144.215
             16875748, -- !pos -141.523 -15.529 91.709
         },
-        MEGALOBUGARD_PH       =
+        MEGALOBUGARD_PH =
         {
             [16875720] = 16875741, -- -137.168 -15.390 91.016
         },
-        YALUN_EKE_PH          =
+        YALUN_EKE_PH =
         {
             [16875593] = 16875600, -- 236.418, -0.573, -118.742
             [16875604] = 16875600, -- 387.196, 0.060, -115.952
+        },
+        BITTER_PAST_MOBS =
+        {
+            16875775,
+            16875776,
         },
         LESHY_OFFSET          = 16875754,
         COLORFUL_LESHY        = 16875762,

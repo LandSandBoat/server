@@ -19,7 +19,7 @@ entity.onMobSpawn = function(mob)
     -- mods put fight in line with retail difficulty
     mob:addMod(xi.mod.SLEEPRES, 100)
     mob:addMod(xi.mod.LULLABYRES, 100)
-    mob:addMod(xi.mod.EARTHRES, 1000)
+    mob:addMod(xi.mod.EARTH_NULL, 1)
     mob:addMod(xi.mod.BLINDRESTRAIT, 25)
     mob:addMod(xi.mod.PARALYZERESTRAIT, 25)
     mob:addMod(xi.mod.STUNRES, 100)

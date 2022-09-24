@@ -13,7 +13,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!setmod {modifier} {amount} {optional target}")
+    player:PrintToPlayer("!setmod <modifier> <amount> (optional target)")
 end
 
 function onTrigger(player, modifier, amount, target)

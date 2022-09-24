@@ -13,7 +13,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!animatesubnpc {npcID} <animationID>")
+    player:PrintToPlayer("!animatesubnpc (npcID) <animationID>")
 end
 
 function onTrigger(player, arg1, arg2)

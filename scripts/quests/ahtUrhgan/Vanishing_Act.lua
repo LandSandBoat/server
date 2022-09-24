@@ -147,7 +147,7 @@ quest.sections =
                         not player:hasKeyItem(xi.ki.RAINBOW_BERRY)
                     then
                         player:setLocalVar("questItem", 1)
-                        return quest:progressEvent(507, {[0] = 4294966520})
+                        return quest:progressEvent(507, { [0] = 4294966520 })
                     end
                 end,
             },

@@ -10,8 +10,9 @@ require("scripts/globals/zone")
 xi = xi or {}
 xi.geomanticReservoir = xi.geomanticReservoir or {}
 
+-- This table was necessary in order for us to be able to print the name of the newly learned spell.
 local geoSpellTable =
-{-- This table was necessary in order for us to be able to print the name of the newly learned spell.
+{
     [xi.magic.spell.GEO_POISON    ] = { xi.items.GEO_POISON     },
     [xi.magic.spell.GEO_VOIDANCE  ] = { xi.items.GEO_VOIDANCE   },
     [xi.magic.spell.GEO_PRECISION ] = { xi.items.GEO_PRECISION  },

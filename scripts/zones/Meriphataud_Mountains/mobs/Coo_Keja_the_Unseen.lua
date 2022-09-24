@@ -13,7 +13,7 @@ entity.onMobSpawn = function(mob)
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            {id = xi.jsa.MIJIN_GAKURE, hpp = math.random(10, 15)},
+            { id = xi.jsa.MIJIN_GAKURE, hpp = math.random(10, 15) },
         },
     })
 

@@ -2,7 +2,7 @@
 -- Area: Dynamis - Buburimu
 --  Mob: Nightmare Bunny
 -----------------------------------
-mixins = {require("scripts/mixins/dynamis_dreamland")}
+mixins = { require("scripts/mixins/dynamis_dreamland") }
 -----------------------------------
 local entity = {}
 

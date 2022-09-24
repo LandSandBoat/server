@@ -2,7 +2,7 @@
 -- Area: Misareaux_Coast
 --  Mob: Gigas Martialist
 -----------------------------------
-mixins = {require("scripts/mixins/fomor_hate")}
+mixins = { require("scripts/mixins/fomor_hate") }
 -----------------------------------
 local entity = {}
 

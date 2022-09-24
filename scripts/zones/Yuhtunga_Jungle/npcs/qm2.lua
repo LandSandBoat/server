@@ -29,7 +29,7 @@ local function spawnNMs(player)
             ID.mob.NASUS_OFFSET + 2,
             ID.mob.NASUS_OFFSET + 3,
             ID.mob.NASUS_OFFSET + 4
-        }, {claim = true, hide = 0})
+        }, { claim = true, hide = 0 })
 
         player:messageText(qm, ID.text.SWARM_APPEARED, false)
     end

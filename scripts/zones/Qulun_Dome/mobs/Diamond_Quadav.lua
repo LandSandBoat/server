@@ -4,7 +4,7 @@
 -- Note: PH for Za Dha Adamantking PH
 -- TODO: messages should be zone-wide
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 local ID = require("scripts/zones/Qulun_Dome/IDs")
 require("scripts/globals/status")
 -----------------------------------

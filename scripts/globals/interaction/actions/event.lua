@@ -10,7 +10,7 @@ function Event:new(eventId, ...)
     setmetatable(obj, self)
     self.__index = self
     obj.id = eventId
-    obj.options = {...}
+    obj.options = { ... }
     obj.priority = Action.Priority.Event -- default priority to 10
     obj.isCutscene = false
     return obj

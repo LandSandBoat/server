@@ -66,7 +66,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    --Guivre will despawn if not claimed within a 5 hours.
+    --Guivre will despawn if not claimed within 5 hours.
     local rndTime = math.random(3600, 18000)
     mob:setLocalVar("despawnTime", rndTime + os.time())
     mob:setLocalVar("isPaused", 0)

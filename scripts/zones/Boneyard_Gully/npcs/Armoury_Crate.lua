@@ -14,28 +14,31 @@ local loot =
     [673] =
     {
         {
-            {itemid =     0, droprate =  140}, -- nothing
-            {itemid =  1763, droprate =  310}, -- Viridian Urushi
-            {itemid =  1769, droprate =  241}, -- Square of Galateia
-            {itemid =  1764, droprate =  310}, -- Kejusu Satin
+            { itemid =    0, droprate = 140 }, -- nothing
+            { itemid = 1763, droprate = 310 }, -- Viridian Urushi
+            { itemid = 1769, droprate = 241 }, -- Square of Galateia
+            { itemid = 1764, droprate = 310 }, -- Kejusu Satin
         },
+
         {
-            {itemid =     0, droprate =  862}, -- nothing
-            {itemid =  1842, droprate =  138}, -- Cloud Evoker
+            { itemid =    0, droprate = 862 }, -- nothing
+            { itemid = 1842, droprate = 138 }, -- Cloud Evoker
         },
+
         {
-            {itemid =     0, droprate =  380}, -- nothing
-            {itemid = 17946, droprate =  138}, -- Maneater
-            {itemid = 18358, droprate =  172}, -- Wagh Baghnakhs
-            {itemid = 16976, droprate =  138}, -- Onimaru
-            {itemid =  4990, droprate =  172}, -- Army's Paeon V
+            { itemid =     0, droprate = 380 }, -- nothing
+            { itemid = 17946, droprate = 138 }, -- Maneater
+            { itemid = 18358, droprate = 172 }, -- Wagh Baghnakhs
+            { itemid = 16976, droprate = 138 }, -- Onimaru
+            { itemid =  4990, droprate = 172 }, -- Army's Paeon V
         },
+
         {
-            {itemid =     0, droprate =  380}, -- nothing
-            {itemid = 17946, droprate =  138}, -- Maneater
-            {itemid = 18358, droprate =  172}, -- Wagh Baghnakhs
-            {itemid = 16976, droprate =  138}, -- Onimaru
-            {itemid =  4990, droprate =  172}, -- Army's Paeon V
+            { itemid =     0, droprate = 380 }, -- nothing
+            { itemid = 17946, droprate = 138 }, -- Maneater
+            { itemid = 18358, droprate = 172 }, -- Wagh Baghnakhs
+            { itemid = 16976, droprate = 138 }, -- Onimaru
+            { itemid =  4990, droprate = 172 }, -- Army's Paeon V
         },
     },
 
@@ -48,10 +51,12 @@ local loot =
             {itemid = 1764, droprate = 266}, -- Kejusu Satin
             {itemid = 1763, droprate = 342}, -- Viridian Urushi
         },
+
         {
             {itemid =    0, droprate = 944}, -- Nothing
             {itemid = 1842, droprate =  56}, -- Cloud Evoker (5.6% Drop Rate)
         },
+
         {
             {itemid = 17829, droprate =  82}, -- Hagun
             {itemid = 17945, droprate =  92}, -- Martial Axe
@@ -70,10 +75,12 @@ local loot =
             {itemid = 1767, droprate = 325}, -- Eltoro Leather
             {itemid = 1771, droprate = 250}, -- Dragon Bone
         },
+
         {
             {itemid =    0, droprate = 812}, -- Nothing
             {itemid = 1842, droprate = 188}, -- Cloud Evoker
         },
+
         {
             {itemid =     0, droprate = 200}, -- Nothing
             {itemid = 18099, droprate = 150}, -- Stone-splitter
@@ -81,6 +88,7 @@ local loot =
             {itemid = 18015, droprate = 238}, -- Blau Dolch
             {itemid =  4990, droprate = 237},  -- Scroll of Army's Paeon V
         },
+
         {
             {itemid =     0, droprate = 200}, -- Nothing
             {itemid = 18099, droprate = 150}, -- Stone-splitter

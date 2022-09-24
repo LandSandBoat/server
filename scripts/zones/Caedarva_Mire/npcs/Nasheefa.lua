@@ -33,7 +33,7 @@ end
 entity.onEventFinish = function(player, csid, option)
 
     if (csid == 183) then
-        player:setPos(-219.977, -4, 474.522, 64, 72) -- To Alzadaal Undersea Ruins {R}
+        player:setPos(-219.977, -4, 474.522, 64, 72) -- To Alzadaal Undersea Ruins (R)
     end
 
 end

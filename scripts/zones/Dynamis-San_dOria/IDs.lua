@@ -33,59 +33,66 @@ zones[xi.zone.DYNAMIS_SAN_DORIA] =
     {
         TIME_EXTENSION =
         {
-            {minutes = 10, ki = xi.ki.CRIMSON_GRANULES_OF_TIME,   mob = 17535026},
-            {minutes = 10, ki = xi.ki.AZURE_GRANULES_OF_TIME,     mob = 17535057},
-            {minutes = 10, ki = xi.ki.AMBER_GRANULES_OF_TIME,     mob = 17535139},
-            {minutes = 15, ki = xi.ki.ALABASTER_GRANULES_OF_TIME, mob = 17535131},
-            {minutes = 15, ki = xi.ki.OBSIDIAN_GRANULES_OF_TIME,  mob = 17535128},
+            { minutes = 10, ki = xi.ki.CRIMSON_GRANULES_OF_TIME,   mob = 17535026 },
+            { minutes = 10, ki = xi.ki.AZURE_GRANULES_OF_TIME,     mob = 17535057 },
+            { minutes = 10, ki = xi.ki.AMBER_GRANULES_OF_TIME,     mob = 17535139 },
+            { minutes = 15, ki = xi.ki.ALABASTER_GRANULES_OF_TIME, mob = 17535131 },
+            { minutes = 15, ki = xi.ki.OBSIDIAN_GRANULES_OF_TIME,  mob = 17535128 },
         },
+
         REFILL_STATUE =
         {
             {
-                {mob = 17535003, eye = xi.dynamis.eye.RED  }, -- Serjeant_Tombstone
-                {mob = 17535004, eye = xi.dynamis.eye.BLUE },
-                {mob = 17535005, eye = xi.dynamis.eye.GREEN},
+                { mob = 17535003, eye = xi.dynamis.eye.RED   }, -- Serjeant_Tombstone
+                { mob = 17535004, eye = xi.dynamis.eye.BLUE  },
+                { mob = 17535005, eye = xi.dynamis.eye.GREEN },
             },
+
             {
-                {mob = 17535113, eye = xi.dynamis.eye.RED  }, -- Serjeant_Tombstone
-                {mob = 17535114, eye = xi.dynamis.eye.BLUE },
-                {mob = 17535115, eye = xi.dynamis.eye.GREEN},
+                { mob = 17535113, eye = xi.dynamis.eye.RED   }, -- Serjeant_Tombstone
+                { mob = 17535114, eye = xi.dynamis.eye.BLUE  },
+                { mob = 17535115, eye = xi.dynamis.eye.GREEN },
             },
+
             {
-                {mob = 17535154, eye = xi.dynamis.eye.RED  }, -- Serjeant_Tombstone
-                {mob = 17535155, eye = xi.dynamis.eye.GREEN},
+                { mob = 17535154, eye = xi.dynamis.eye.RED   }, -- Serjeant_Tombstone
+                { mob = 17535155, eye = xi.dynamis.eye.GREEN },
             },
+
             {
-                {mob = 17535166, eye = xi.dynamis.eye.RED  }, -- Serjeant_Tombstone
-                {mob = 17535167, eye = xi.dynamis.eye.BLUE },
+                { mob = 17535166, eye = xi.dynamis.eye.RED  }, -- Serjeant_Tombstone
+                { mob = 17535167, eye = xi.dynamis.eye.BLUE },
             },
+
             {
-                {mob = 17535193, eye = xi.dynamis.eye.RED  }, -- Serjeant_Tombstone
-                {mob = 17535194, eye = xi.dynamis.eye.GREEN},
+                { mob = 17535193, eye = xi.dynamis.eye.RED   }, -- Serjeant_Tombstone
+                { mob = 17535194, eye = xi.dynamis.eye.GREEN },
             },
+
             {
-                {mob = 17535205, eye = xi.dynamis.eye.RED  }, -- Serjeant_Tombstone
-                {mob = 17535206, eye = xi.dynamis.eye.BLUE },
+                { mob = 17535205, eye = xi.dynamis.eye.RED  }, -- Serjeant_Tombstone
+                { mob = 17535206, eye = xi.dynamis.eye.BLUE },
             },
         },
     },
+
     npc =
     {
         QM =
         {
             [17535223] =
             {
-                param = {3353, 3404, 3405, 3406, 3407, 3408},
+                param = { 3353, 3404, 3405, 3406, 3407, 3408 },
                 trade =
                 {
-                    {item = 3353,                           mob = 17534977}, -- Overlord's Tombstone
-                    {item = {3404, 3405, 3406, 3407, 3408}, mob = 17535213}, -- Arch Overlord Tombstone
+                    { item = 3353,                             mob = 17534977 }, -- Overlord's Tombstone
+                    { item = { 3404, 3405, 3406, 3407, 3408 }, mob = 17535213 }, -- Arch Overlord Tombstone
                 }
             },
-            [17535224] = {trade = {{item = 3380, mob = 17535207}}}, -- Bladeburner Rokgevok
-            [17535225] = {trade = {{item = 3381, mob = 17535208}}}, -- Steelshank Kratzvatz
-            [17535226] = {trade = {{item = 3382, mob = 17535210}}}, -- Bloodfist Voshgrosh
-            [17535227] = {trade = {{item = 3383, mob = 17535211}}}, -- Spellspear Djokvukk
+            [17535224] = { trade = { { item = 3380, mob = 17535207 } } }, -- Bladeburner Rokgevok
+            [17535225] = { trade = { { item = 3381, mob = 17535208 } } }, -- Steelshank Kratzvatz
+            [17535226] = { trade = { { item = 3382, mob = 17535210 } } }, -- Bloodfist Voshgrosh
+            [17535227] = { trade = { { item = 3383, mob = 17535211 } } }, -- Spellspear Djokvukk
         },
     },
 }

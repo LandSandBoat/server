@@ -652,14 +652,14 @@ end
 local function addPflugResistType(type, effect, power)
     local pflugResistTypes =
     {
-        [xi.effect.IGNIS]    = {xi.mod.PARALYZERES, xi.mod.BINDRES},
-        [xi.effect.GELUS]    = {xi.mod.SILENCERES, xi.mod.GRAVITYRES},
-        [xi.effect.FLABRA]   = {xi.mod.PETRIFYRES, xi.mod.SLOWRES},
-        [xi.effect.TELLUS]   = {xi.mod.STUNRES},
-        [xi.effect.SULPOR]   = {xi.mod.POISONRES},
-        [xi.effect.UNDA]     = {xi.mod.AMNESIARES, xi.mod.PLAGUERES},
-        [xi.effect.LUX]      = {xi.mod.SLEEPRES, xi.mod.BLINDRES, xi.mod.CURSERES},
-        [xi.effect.TENEBRAE] = {xi.mod.CHARMRES},
+        [xi.effect.IGNIS]    = { xi.mod.PARALYZERES, xi.mod.BINDRES },
+        [xi.effect.GELUS]    = { xi.mod.SILENCERES, xi.mod.GRAVITYRES },
+        [xi.effect.FLABRA]   = { xi.mod.PETRIFYRES, xi.mod.SLOWRES },
+        [xi.effect.TELLUS]   = { xi.mod.STUNRES },
+        [xi.effect.SULPOR]   = { xi.mod.POISONRES },
+        [xi.effect.UNDA]     = { xi.mod.AMNESIARES, xi.mod.PLAGUERES },
+        [xi.effect.LUX]      = { xi.mod.SLEEPRES, xi.mod.BLINDRES, xi.mod.CURSERES },
+        [xi.effect.TENEBRAE] = { xi.mod.CHARMRES },
     }
 
     local resistTypes = pflugResistTypes[type]

@@ -18,7 +18,7 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local randWyrm = mob:getLocalVar("randWyrm")
-    local pet = GetMobByID(ID.mob.BAHAMUT_V2 + randWyrm)
+    local pet = GetMobByID(randWyrm)
 
     pet:spawn()
     pet:updateEnmity(target)

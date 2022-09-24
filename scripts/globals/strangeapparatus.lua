@@ -19,7 +19,7 @@ xi = xi or {}
 --     uid     = unique identifier from the 0x60 packet
 --     chip    = correct colored chip to trade to avoid spawning elemental
 --     cluster = elemental cluster that can possibly be rewarded
---     drop    = {itemid, cumulative drop rate, drop quantity, itemid, cumulative drop rate, drop quantity, ...} in ascending order by drop rate
+--     drop    = { itemid, cumulative drop rate, drop quantity, itemid, cumulative drop rate, drop quantity, ... } in ascending order by drop rate
 -- }
 -----------------------------------
 
@@ -278,7 +278,7 @@ xi.strangeApparatus =
         local foundChip = false
 
         for chipTraded = xi.items.RED_CHIP, xi.items.BLACK_CHIP do
-            if npcUtil.tradeHasExactly(trade, {xi.items.INFINITY_CORE, chipTraded}) then
+            if npcUtil.tradeHasExactly(trade, { xi.items.INFINITY_CORE, chipTraded }) then
                 player:confirmTrade()
                 foundChip = true
 
@@ -367,7 +367,7 @@ xi.strangeApparatus =
                 qty = 1
             end
 
-            if npcUtil.giveItem(player, {{item, qty}}) then
+            if npcUtil.giveItem(player, { { item, qty } }) then
                 player:setLocalVar("strAppDrop", 0)
                 player:setLocalVar("strAppDropQty", 0)
             end

@@ -36,7 +36,7 @@ local function halloweenItemsCheck(player)
     local trickStaff = 17565
     local trickStaff2 = 17587
 
-    local reward_list = {pumpkinHead, pumpkinHead2, trickStaff, trickStaff2}
+    local reward_list = { pumpkinHead, pumpkinHead2, trickStaff, trickStaff2 }
 
     -- Checks for HQ Upgrade
     for ri = 1, #reward_list do

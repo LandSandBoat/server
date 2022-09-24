@@ -64,7 +64,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, {xi.items.HEAVY_QUADAV_CHESTPLATE, xi.items.HEAVY_QUADAV_BACKPLATE}) then
+                    if npcUtil.tradeHasExactly(trade, { xi.items.HEAVY_QUADAV_CHESTPLATE, xi.items.HEAVY_QUADAV_BACKPLATE }) then
                         return quest:progressEvent(41)
                     end
                 end,

@@ -174,8 +174,8 @@ local pTable =
     [xi.magic.spell.WINDSTORM    ] = { 1, xi.effect.WINDSTORM,     43,    2,  180, true,  true, 0 },
 
     -- Temper
-    [xi.magic.spell.TEMPER       ] = { 1, xi.effect.MULTI_STRIKES, 95,    5,  180, true,  false, 0},
-    -- [xi.magic.spell.TEMPER_II    ] = { 2, 0                      , 99,    5,  180, true,  false, 0},
+    [xi.magic.spell.TEMPER       ] = { 1, xi.effect.MULTI_STRIKES, 95,    5,  180, true,  false, 0 },
+    -- [xi.magic.spell.TEMPER_II    ] = { 2, 0                      , 99,    5,  180, true,  false, 0 },
 }
 
 -- Enhancing Spell Base Potency function.

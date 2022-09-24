@@ -99,7 +99,7 @@ quest.sections =
                     local itemToTrade = itemWantedTable[itemWanted][1]
 
                     if
-                        npcUtil.tradeHasExactly(trade, {{xi.items.KINDREDS_CREST, 1}, {itemToTrade, 1}}) and
+                        npcUtil.tradeHasExactly(trade, { { xi.items.KINDREDS_CREST, 1 }, { itemToTrade, 1 } }) and
                         player:getMeritCount() > 9
                     then
                         return quest:progressEvent(10191)

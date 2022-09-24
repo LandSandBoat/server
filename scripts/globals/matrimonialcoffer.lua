@@ -36,7 +36,7 @@ function xi.matrimonialcoffer.finishEvent(player, csid, option)
                 end
             elseif option == 2 then
                 if player:getGil() >= 100000 then
-                    if npcUtil.giveItem(player, {xi.items.MATRIMONY_BAND}) then
+                    if npcUtil.giveItem(player, { xi.items.MATRIMONY_BAND }) then
                         player:delGil(100000)
                     end
                 else

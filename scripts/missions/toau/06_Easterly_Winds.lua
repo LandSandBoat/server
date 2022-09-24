@@ -53,7 +53,7 @@ mission.sections =
                     -- This is the reasoning for the two different mission:complete() calls.
 
                     if option == 1 then
-                        if npcUtil.giveItem(player, {{ xi.items.IMPERIAL_BRONZE_PIECE, 10 }}) then
+                        if npcUtil.giveItem(player, { { xi.items.IMPERIAL_BRONZE_PIECE, 10 } }) then
                             mission:complete(player)
                         end
                     else

@@ -5,7 +5,7 @@
 --  Summoning of pets should be tied to Soul Voice usage.
 --  Gains a hidden regen from Army's Paeon V. Even if it is dispelled, it will gain several HP%.
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}
 

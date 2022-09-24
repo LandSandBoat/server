@@ -29,6 +29,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "../common/cbasetypes.h"
 #include "../common/mmo.h"
+#include "sol/sol.hpp"
 #include <unordered_map>
 
 enum BCRULES : uint8
@@ -117,6 +118,16 @@ struct BattlefieldInitiator_t
     }
 };
 
+struct BattlefieldGroup
+{
+    std::vector<uint32> mobIds;
+    sol::function       deathCallback;
+    sol::function       randomDeathCallback;
+    sol::function       allDeathCallback;
+    uint8               deathCount  = 0;
+    uint32              randomMobId = 0;
+};
+
 class CBattlefield : public std::enable_shared_from_this<CBattlefield>
 {
 public:
@@ -182,8 +193,12 @@ public:
     void         Cleanup();
     bool         LoadMobs();
     bool         SpawnLoot(CBaseEntity* PEntity = nullptr);
-    uint8        m_isMission;
 
+    // Groups
+    void addGroup(BattlefieldGroup group);
+    void handleDeath(CBaseEntity* PEntity);
+
+    uint8                         m_isMission;
     std::set<uint32>              m_RegisteredPlayers;
     std::set<uint32>              m_EnteredPlayers;
     std::vector<CNpcEntity*>      m_NpcList;
@@ -214,6 +229,7 @@ private:
     bool m_Attacked{ false };
 
     std::unordered_map<std::string, uint64_t> m_LocalVars;
+    std::vector<BattlefieldGroup>             m_groups;
 };
 
 #endif

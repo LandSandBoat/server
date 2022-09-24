@@ -140,9 +140,7 @@ namespace charutils
         int32 scaleTo60Column   = 1; // Column number with modifier up to 60 levels
         int32 scaleOver30Column = 2; // Column number with modifier after level 30
         int32 scaleOver60Column = 3; // Column number with modifier after level 60
-        int32 scaleOver75Column = 4; // Column number with modifier after level 75
         int32 scaleOver60       = 2; // Column number with modifier for MP calculation after level 60
-        int32 scaleOver75       = 3; // The speaker number with the modifier to calculate the stats after the 75th level
 
         uint8 grade;
 
@@ -177,7 +175,6 @@ namespace charutils
         int32 mainLevelOver30     = std::clamp(mlvl - 30, 0, 30); // Calculation of the condition + 1HP each LVL after level 30
         int32 mainLevelUpTo60     = (mlvl < 60 ? mlvl - 1 : 59);  // The first time spent up to level 60 (is also used for MP)
         int32 mainLevelOver60To75 = std::clamp(mlvl - 60, 0, 15); // The second calculation mode after level 60
-        int32 mainLevelOver75     = (mlvl < 75 ? 0 : mlvl - 75);  // Third Calculation Mode after level 75
 
         // Calculation of the bonus amount of HP
 
@@ -196,8 +193,7 @@ namespace charutils
         grade = grade::GetRaceGrades(race, 0);
 
         raceStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * mainLevelUpTo60) +
-                   (grade::GetHPScale(grade, scaleOver30Column) * mainLevelOver30) + (grade::GetHPScale(grade, scaleOver60Column) * mainLevelOver60To75) +
-                   (grade::GetHPScale(grade, scaleOver75Column) * mainLevelOver75);
+                   (grade::GetHPScale(grade, scaleOver30Column) * mainLevelOver30) + (grade::GetHPScale(grade, scaleOver60Column) * mainLevelOver60To75);
 
         // raceStat = (int32)(statScale[grade][baseValueColumn] + statScale[grade][scaleTo60Column] * (mlvl - 1));
 
@@ -205,8 +201,7 @@ namespace charutils
         grade = grade::GetJobGrade(mjob, 0);
 
         jobStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * mainLevelUpTo60) +
-                  (grade::GetHPScale(grade, scaleOver30Column) * mainLevelOver30) + (grade::GetHPScale(grade, scaleOver60Column) * mainLevelOver60To75) +
-                  (grade::GetHPScale(grade, scaleOver75Column) * mainLevelOver75);
+                  (grade::GetHPScale(grade, scaleOver30Column) * mainLevelOver30) + (grade::GetHPScale(grade, scaleOver60Column) * mainLevelOver60To75);
 
         // Calculation of bonus HP.
         bonusStat = (mainLevelOver10 + mainLevelOver50andUnder60) * 2;
@@ -275,37 +270,27 @@ namespace charutils
         {
             // Calculation of race
             grade    = grade::GetRaceGrades(race, StatIndex);
-            raceStat = grade::GetStatScale(grade, 0) + grade::GetStatScale(grade, scaleTo60Column) * mainLevelUpTo60;
+            raceStat = floor(grade::GetStatScale(grade, 0) + grade::GetStatScale(grade, scaleTo60Column) * mainLevelUpTo60);
 
             if (mainLevelOver60 > 0)
             {
-                raceStat += grade::GetStatScale(grade, scaleOver60) * mainLevelOver60;
-
-                if (mainLevelOver75 > 0)
-                {
-                    raceStat += grade::GetStatScale(grade, scaleOver75) * mainLevelOver75 - (mlvl >= 75 ? 0.01f : 0);
-                }
+                raceStat += floor(grade::GetStatScale(grade, scaleOver60) * mainLevelOver60);
             }
 
             // Calculation by profession
             grade   = grade::GetJobGrade(mjob, StatIndex);
-            jobStat = grade::GetStatScale(grade, 0) + grade::GetStatScale(grade, scaleTo60Column) * mainLevelUpTo60;
+            jobStat = floor(grade::GetStatScale(grade, 0) + grade::GetStatScale(grade, scaleTo60Column) * mainLevelUpTo60);
 
             if (mainLevelOver60 > 0)
             {
-                jobStat += grade::GetStatScale(grade, scaleOver60) * mainLevelOver60;
-
-                if (mainLevelOver75 > 0)
-                {
-                    jobStat += grade::GetStatScale(grade, scaleOver75) * mainLevelOver75 - (mlvl >= 75 ? 0.01f : 0);
-                }
+                jobStat += floor(grade::GetStatScale(grade, scaleOver60) * mainLevelOver60);
             }
 
             // Calculation for an additional profession
             if (slvl > 0)
             {
                 grade    = grade::GetJobGrade(sjob, StatIndex);
-                sJobStat = (grade::GetStatScale(grade, 0) + grade::GetStatScale(grade, scaleTo60Column) * (slvl - 1)) / 2;
+                sJobStat = floor((grade::GetStatScale(grade, 0) / 2) + grade::GetStatScale(grade, scaleTo60Column) * (slvl - 1) / 2);
             }
             else
             {
@@ -316,7 +301,7 @@ namespace charutils
             MeritBonus = PChar->PMeritPoints->GetMeritValue(statMerit[StatIndex - 2], PChar);
 
             // Value output
-            ref<uint16>(&PChar->stats, counter) = (uint16)(settings::get<float>("map.PLAYER_STAT_MULTIPLIER") * (raceStat + jobStat + sJobStat) + MeritBonus);
+            ref<uint16>(&PChar->stats, counter) = floor((uint16)(settings::get<float>("map.PLAYER_STAT_MULTIPLIER") * (raceStat + jobStat + sJobStat) + MeritBonus));
             counter += 2;
         }
     }
@@ -2338,6 +2323,108 @@ namespace charutils
         {
             recycleBin->Clear();
         }
+    }
+
+    void SaveJobChangeGear(CCharEntity* PChar)
+    {
+        if (PChar == nullptr)
+        {
+            return;
+        }
+
+        const char* Query = "REPLACE INTO char_equip_saved SET \
+                                    charid = %u, \
+                                    jobid = %u, \
+                                    main = %u, \
+                                    sub = %u, \
+                                    ranged = %u, \
+                                    ammo = %u, \
+                                    head = %u, \
+                                    body = %u, \
+                                    hands = %u, \
+                                    legs = %u, \
+                                    feet = %u, \
+                                    neck = %u, \
+                                    waist = %u, \
+                                    ear1 = %u, \
+                                    ear2 = %u, \
+                                    ring1 = %u, \
+                                    ring2 = %u, \
+                                    back = %u;";
+
+        uint16 main   = (PChar->getEquip(SLOT_MAIN) != nullptr) ? PChar->getEquip(SLOT_MAIN)->getID() : 0;
+        uint16 sub    = (PChar->getEquip(SLOT_SUB) != nullptr) ? PChar->getEquip(SLOT_SUB)->getID() : 0;
+        uint16 ranged = (PChar->getEquip(SLOT_RANGED) != nullptr) ? PChar->getEquip(SLOT_RANGED)->getID() : 0;
+        uint16 ammo   = (PChar->getEquip(SLOT_AMMO) != nullptr) ? PChar->getEquip(SLOT_AMMO)->getID() : 0;
+        uint16 head   = (PChar->getEquip(SLOT_HEAD) != nullptr) ? PChar->getEquip(SLOT_HEAD)->getID() : 0;
+        uint16 body   = (PChar->getEquip(SLOT_BODY) != nullptr) ? PChar->getEquip(SLOT_BODY)->getID() : 0;
+        uint16 hands  = (PChar->getEquip(SLOT_HANDS) != nullptr) ? PChar->getEquip(SLOT_HANDS)->getID() : 0;
+        uint16 legs   = (PChar->getEquip(SLOT_LEGS) != nullptr) ? PChar->getEquip(SLOT_LEGS)->getID() : 0;
+        uint16 feet   = (PChar->getEquip(SLOT_FEET) != nullptr) ? PChar->getEquip(SLOT_FEET)->getID() : 0;
+        uint16 neck   = (PChar->getEquip(SLOT_NECK) != nullptr) ? PChar->getEquip(SLOT_NECK)->getID() : 0;
+        uint16 waist  = (PChar->getEquip(SLOT_WAIST) != nullptr) ? PChar->getEquip(SLOT_WAIST)->getID() : 0;
+        uint16 ear1   = (PChar->getEquip(SLOT_EAR1) != nullptr) ? PChar->getEquip(SLOT_EAR1)->getID() : 0;
+        uint16 ear2   = (PChar->getEquip(SLOT_EAR2) != nullptr) ? PChar->getEquip(SLOT_EAR2)->getID() : 0;
+        uint16 ring1  = (PChar->getEquip(SLOT_RING1) != nullptr) ? PChar->getEquip(SLOT_RING1)->getID() : 0;
+        uint16 ring2  = (PChar->getEquip(SLOT_RING2) != nullptr) ? PChar->getEquip(SLOT_RING2)->getID() : 0;
+        uint16 back   = (PChar->getEquip(SLOT_BACK) != nullptr) ? PChar->getEquip(SLOT_BACK)->getID() : 0;
+
+        sql->Query(Query, PChar->id, PChar->GetMJob(), main, sub, ranged, ammo,
+                   head, body, hands, legs, feet, neck, waist, ear1, ear2, ring1,
+                   +ring2, back);
+
+        return;
+    }
+
+    void LoadJobChangeGear(CCharEntity* PChar)
+    {
+        if (PChar == nullptr)
+        {
+            return;
+        }
+
+        const char* Query = "SELECT main, sub, ranged, ammo, head, body, hands, legs, feet, neck, waist, ear1, ear2, ring1, ring2, back FROM char_equip_saved AS equip WHERE charid = %u AND jobid = %u;";
+
+        if (sql->Query(Query, PChar->id, PChar->GetMJob()) == SQL_SUCCESS && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
+        {
+            for (uint8 i = 0; i < SLOT_LINK1; i++)
+            {
+                if (sql->GetUIntData(i) > 0)
+                {
+                    for (int x = 0; x < CONTAINER_ID::MAX_CONTAINER_ID; x++)
+                    {
+                        bool found = false;
+                        if (x == LOC_INVENTORY || (x > LOC_MOGLOCKER && x < LOC_RECYCLEBIN))
+                        {
+                            for (uint8 slot = 0; slot < PChar->getStorage(x)->GetSize(); slot++)
+                            {
+                                CItem* PItem = PChar->getStorage(x)->GetItem(slot);
+                                if (PItem != nullptr && PItem->getID() == sql->GetUIntData(i))
+                                {
+                                    auto* PEquip   = static_cast<CItemEquipment*>(PItem);
+                                    auto  prevSlot = static_cast<SLOTTYPE>(std::clamp(i - 1, 0, MAX_SLOTTYPE - 1));
+                                    auto  nextSlot = static_cast<SLOTTYPE>(std::clamp(i - 1, 0, MAX_SLOTTYPE - 1));
+
+                                    if (PEquip != nullptr && PEquip != PChar->getEquip(static_cast<SLOTTYPE>(i)) && PEquip != PChar->getEquip(prevSlot) && PEquip != PChar->getEquip(nextSlot))
+                                    {
+                                        found = true;
+                                        charutils::EquipItem(PChar, PItem->getSlotID(), i, static_cast<CONTAINER_ID>(x));
+                                        break;
+                                    }
+                                }
+                            }
+
+                            if (found)
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return;
     }
 
     void EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 containerID)

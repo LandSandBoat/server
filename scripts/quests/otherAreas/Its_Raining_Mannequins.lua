@@ -128,6 +128,8 @@ quest.sections =
             onEventFinish =
             {
                 [309] = function(player, csid, option, npc)
+                    player:confirmTrade()
+
                     quest:setVar(player, 'Prog', 3)
                     quest:setVar(player, 'Wait', os.time())
                 end,
