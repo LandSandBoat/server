@@ -6,6 +6,8 @@
 require('scripts/globals/items')
 require('scripts/globals/npc_util')
 -----------------------------------
+local ID = require('scripts/zones/Valkurm_Dunes/IDs')
+-----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
@@ -13,7 +15,11 @@ end
 
 entity.onTrigger = function(player, npc)
     -- NOTE: The NPC is despawned when weather is not up, we do NOT need to check weather.
-    npcUtil.giveItem(player, xi.items.PINCH_OF_VALKURM_SUNSAND)
+    if player:getLocalVar('[qm1]mustZone') == 1 then
+        player:messageSpecial(ID.text.JUST_A_PILE_OF_SAND)
+    elseif npcUtil.giveItem(player, xi.items.PINCH_OF_VALKURM_SUNSAND) then
+        player:setLocalVar('[qm1]mustZone', 1)
+    end
 end
 
 entity.onEventUpdate = function(player, csid, option)

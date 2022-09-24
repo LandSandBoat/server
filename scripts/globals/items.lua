@@ -1280,6 +1280,7 @@ xi.items =
     SCROLL_OF_ASPIR_II              = 4856,
     SCROLL_OF_BLAZE_SPIKES          = 4857,
     SCROLL_OF_BREAK                 = 4863,
+    SCROLL_OF_WARP                  = 4869,
     SCROLL_OF_RETRACE               = 4873,
     SCROLL_OF_ABSORB_INT            = 4878,
     SCROLL_OF_STONEJA               = 4893,
