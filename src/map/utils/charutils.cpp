@@ -2352,28 +2352,31 @@ namespace charutils
                                     ring2 = %u, \
                                     back = %u;";
 
-        uint16 main   = (PChar->getEquip(SLOT_MAIN) != nullptr) ? PChar->getEquip(SLOT_MAIN)->getID() : 0;
-        uint16 sub    = (PChar->getEquip(SLOT_SUB) != nullptr) ? PChar->getEquip(SLOT_SUB)->getID() : 0;
-        uint16 ranged = (PChar->getEquip(SLOT_RANGED) != nullptr) ? PChar->getEquip(SLOT_RANGED)->getID() : 0;
-        uint16 ammo   = (PChar->getEquip(SLOT_AMMO) != nullptr) ? PChar->getEquip(SLOT_AMMO)->getID() : 0;
-        uint16 head   = (PChar->getEquip(SLOT_HEAD) != nullptr) ? PChar->getEquip(SLOT_HEAD)->getID() : 0;
-        uint16 body   = (PChar->getEquip(SLOT_BODY) != nullptr) ? PChar->getEquip(SLOT_BODY)->getID() : 0;
-        uint16 hands  = (PChar->getEquip(SLOT_HANDS) != nullptr) ? PChar->getEquip(SLOT_HANDS)->getID() : 0;
-        uint16 legs   = (PChar->getEquip(SLOT_LEGS) != nullptr) ? PChar->getEquip(SLOT_LEGS)->getID() : 0;
-        uint16 feet   = (PChar->getEquip(SLOT_FEET) != nullptr) ? PChar->getEquip(SLOT_FEET)->getID() : 0;
-        uint16 neck   = (PChar->getEquip(SLOT_NECK) != nullptr) ? PChar->getEquip(SLOT_NECK)->getID() : 0;
-        uint16 waist  = (PChar->getEquip(SLOT_WAIST) != nullptr) ? PChar->getEquip(SLOT_WAIST)->getID() : 0;
-        uint16 ear1   = (PChar->getEquip(SLOT_EAR1) != nullptr) ? PChar->getEquip(SLOT_EAR1)->getID() : 0;
-        uint16 ear2   = (PChar->getEquip(SLOT_EAR2) != nullptr) ? PChar->getEquip(SLOT_EAR2)->getID() : 0;
-        uint16 ring1  = (PChar->getEquip(SLOT_RING1) != nullptr) ? PChar->getEquip(SLOT_RING1)->getID() : 0;
-        uint16 ring2  = (PChar->getEquip(SLOT_RING2) != nullptr) ? PChar->getEquip(SLOT_RING2)->getID() : 0;
-        uint16 back   = (PChar->getEquip(SLOT_BACK) != nullptr) ? PChar->getEquip(SLOT_BACK)->getID() : 0;
+        auto getEquipIdFromSlot = [](CCharEntity* PChar, SLOTTYPE slot) -> uint16
+        {
+            return (PChar->getEquip(slot) != nullptr) ? PChar->getEquip(slot)->getID() : 0;
+        };
+
+        uint16 main   = getEquipIdFromSlot(PChar, SLOT_MAIN);
+        uint16 sub    = getEquipIdFromSlot(PChar, SLOT_SUB);
+        uint16 ranged = getEquipIdFromSlot(PChar, SLOT_RANGED);
+        uint16 ammo   = getEquipIdFromSlot(PChar, SLOT_AMMO);
+        uint16 head   = getEquipIdFromSlot(PChar, SLOT_HEAD);
+        uint16 body   = getEquipIdFromSlot(PChar, SLOT_BODY);
+        uint16 hands  = getEquipIdFromSlot(PChar, SLOT_HANDS);
+        uint16 legs   = getEquipIdFromSlot(PChar, SLOT_LEGS);
+        uint16 feet   = getEquipIdFromSlot(PChar, SLOT_FEET);
+        uint16 neck   = getEquipIdFromSlot(PChar, SLOT_NECK);
+        uint16 waist  = getEquipIdFromSlot(PChar, SLOT_WAIST);
+        uint16 ear1   = getEquipIdFromSlot(PChar, SLOT_EAR1);
+        uint16 ear2   = getEquipIdFromSlot(PChar, SLOT_EAR2);
+        uint16 ring1  = getEquipIdFromSlot(PChar, SLOT_RING1);
+        uint16 ring2  = getEquipIdFromSlot(PChar, SLOT_RING2);
+        uint16 back   = getEquipIdFromSlot(PChar, SLOT_BACK);
 
         sql->Query(Query, PChar->id, PChar->GetMJob(), main, sub, ranged, ammo,
                    head, body, hands, legs, feet, neck, waist, ear1, ear2, ring1,
-                   +ring2, back);
-
-        return;
+                   ring2, back);
     }
 
     void LoadJobChangeGear(CCharEntity* PChar)
@@ -2387,30 +2390,30 @@ namespace charutils
 
         if (sql->Query(Query, PChar->id, PChar->GetMJob()) == SQL_SUCCESS && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
         {
-            for (uint8 i = 0; i < SLOT_LINK1; i++)
+            for (uint8 equipSlot = SLOT_MAIN; equipSlot <= SLOT_BACK; equipSlot++)
             {
-                if (sql->GetUIntData(i) > 0)
+                uint16 itemId = sql->GetUIntData(equipSlot);
+
+                if (itemId > 0)
                 {
-                    for (int x = 0; x < CONTAINER_ID::MAX_CONTAINER_ID; x++)
+                    for (int container = LOC_INVENTORY; container <= LOC_WARDROBE8; container++)
                     {
                         bool found = false;
-                        if (x == LOC_INVENTORY || (x > LOC_MOGLOCKER && x < LOC_RECYCLEBIN))
-                        {
-                            for (uint8 slot = 0; slot < PChar->getStorage(x)->GetSize(); slot++)
-                            {
-                                CItem* PItem = PChar->getStorage(x)->GetItem(slot);
-                                if (PItem != nullptr && PItem->getID() == sql->GetUIntData(i))
-                                {
-                                    auto* PEquip   = static_cast<CItemEquipment*>(PItem);
-                                    auto  prevSlot = static_cast<SLOTTYPE>(std::clamp(i - 1, 0, MAX_SLOTTYPE - 1));
-                                    auto  nextSlot = static_cast<SLOTTYPE>(std::clamp(i - 1, 0, MAX_SLOTTYPE - 1));
 
-                                    if (PEquip != nullptr && PEquip != PChar->getEquip(static_cast<SLOTTYPE>(i)) && PEquip != PChar->getEquip(prevSlot) && PEquip != PChar->getEquip(nextSlot))
-                                    {
-                                        found = true;
-                                        charutils::EquipItem(PChar, PItem->getSlotID(), i, static_cast<CONTAINER_ID>(x));
-                                        break;
-                                    }
+                        if (container == LOC_INVENTORY || (container >= LOC_WARDROBE && container <= LOC_WARDROBE8))
+                        {
+                            for (uint8 slot = 0; slot < PChar->getStorage(container)->GetSize(); slot++)
+                            {
+                                CItem* PItem  = PChar->getStorage(container)->GetItem(slot);
+                                auto*  PEquip = dynamic_cast<CItemEquipment*>(PItem);
+
+                                if ((PItem != nullptr && PItem->getID() == itemId && PEquip != nullptr) &&
+                                    (PEquip != PChar->getEquip(static_cast<SLOTTYPE>(equipSlot - 1)) &&
+                                     PEquip != PChar->getEquip(static_cast<SLOTTYPE>(equipSlot + 1))))
+                                {
+                                    found = true;
+                                    charutils::EquipItem(PChar, PItem->getSlotID(), equipSlot, static_cast<CONTAINER_ID>(container));
+                                    break;
                                 }
                             }
 
@@ -2423,8 +2426,6 @@ namespace charutils
                 }
             }
         }
-
-        return;
     }
 
     void EquipItem(CCharEntity* PChar, uint8 slotID, uint8 equipSlotID, uint8 containerID)
