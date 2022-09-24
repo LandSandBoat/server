@@ -22,8 +22,8 @@ zones[xi.zone.APOLLYON] =
         CONDITION_FOR_LIMBUS          = 7066, -- You have clearance to enter Limbus, but cannot enter while you or a party member is engaged in battle.
         HUM                           = 7078, -- You hear a faint hum.
         NO_KEY                        = 7083, -- There are several six-sided indentations and a thin slot in the center of the circular dais here.
-        WIPE_KICK                     = 7358, -- All party members in Limbus have fallen in battle. Exiting now.
-        WIPE                          = 7366, -- All party members in Limbus have fallen in battle. Exiting in <number> [minute/minutes].
+        PARTY_WILL_BE_REMOVED_KICK    = 7358, -- All party members in Limbus have fallen in battle. Exiting now.
+        THE_PARTY_WILL_BE_REMOVED     = 7366, -- All party members in Limbus have fallen in battle. Exiting in <number> [minute/minutes].
         CHIP_TRADE                    = 7372, -- The light in the <item> has grown dim.
         TIME_EXTENDED                 = 7374, -- our time in Limbus has been extended <number> [minute/minutes].
         TIME_LEFT                     = 7375, -- ou have <number> [minute/minutes] left in Limbus.
@@ -46,13 +46,6 @@ zones[xi.zone.APOLLYON] =
             16932963,
             16932976,
             16932985,
-        },
-        APOLLYON_SE_MOB =
-        {
-            16932992,
-            16933006,
-            16933020,
-            16933032,
         },
         APOLLYON_NE_MOB =
         {
@@ -92,12 +85,6 @@ zones[xi.zone.APOLLYON] =
             16933234, -- ne 2>3
             16933233, -- ne 3>4
             16933237, -- ne 4>5
-        },
-        APOLLYON_SE_PORTAL =
-        {
-            16933239, -- se 1>2
-            16933238, -- se 2>3
-            16933241, -- se 3>4
         },
         APOLLYON_SW_CRATE =
         {
@@ -142,13 +129,6 @@ zones[xi.zone.APOLLYON] =
             },
             [5] = 16932984,
         },
-        APOLLYON_SE_CRATE =
-        {
-            16932989,
-            16933003,
-            16933017,
-            16933031,
-        },
         APOLLYON_NE_CRATE =
         {
             [1] =
@@ -188,6 +168,69 @@ zones[xi.zone.APOLLYON] =
         APOLLYON_CS_CRATE = 16933126,
         APOLLYON_CENTRAL_CRATE = 16933123,
     },
+    SE_APOLLYON =
+    {
+        mob =
+        {
+            TIEHOLTSODI = 16933006,
+            ADAMANTSHELL =
+            {
+                16933007,
+                16933008,
+                16933009,
+                16933010,
+                16933011,
+                16933012,
+                16933013,
+                16933014,
+            },
+            FLYING_SPEAR =
+            {
+                16933033,
+                16933034,
+                16933035,
+                16933036,
+                16933037,
+                16933038,
+                16933039,
+                16933040,
+            }
+        },
+        npc =
+        {
+            PORTAL =
+            {
+                16933239, -- Floor 1 -> 2
+                16933238, -- Floor 2 -> 3
+                16933241, -- Floor 3 -> 4
+            },
+            ITEM_CRATES =
+            {
+                16932991,
+                16933005,
+                16933019,
+            },
+            RECOVER_CRATES =
+            {
+                16932990,
+                16933004,
+                16933018,
+            },
+            TIME_CRATES =
+            {
+                16932989,
+                16933003,
+                16933017,
+            },
+            LOOT_CRATE = 16933031,
+        },
+        TIME_EXTENSIONS =
+        {
+            [16932989] = 10,
+            [16933003] = 10,
+            [16933017] = 10,
+        }
+    }
 }
 
 return zones[xi.zone.APOLLYON]
