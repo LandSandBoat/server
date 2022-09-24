@@ -12,6 +12,7 @@ return {
     ['Medicine_Eagle'] = { event = 25 },
     ['Parraggoh']      = { event = 11 },
     ['Pavvke']         = { event = 75 },
+    ['Roh_Latteh']     = { event = 29 },
     ['Tall_Mountain']  = { event = 55 },
     ['Wahid']          = { event = 28 },
 }
