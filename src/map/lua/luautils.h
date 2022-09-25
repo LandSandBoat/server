@@ -122,6 +122,7 @@ namespace luautils
     int32 init();
     int32 garbageCollectStep();
     int32 garbageCollectFull();
+    void  cleanup();
 
     void ReloadFilewatchList();
 
