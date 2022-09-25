@@ -1,16 +1,16 @@
 -----------------------------------
 -- Functions for Conquest system
 -----------------------------------
-require("scripts/globals/teleports")
+require("scripts/globals/extravaganza")
+require("scripts/globals/garrison")
+require("scripts/globals/items")
 require("scripts/globals/keyitems")
+require("scripts/globals/teleports")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/zone")
-require("scripts/globals/items")
-require("scripts/globals/extravaganza")
-require("scripts/globals/garrison")
 -----------------------------------
 xi = xi or {}
 xi.conquest = xi.conquest or {}
@@ -145,10 +145,10 @@ end
 
 -- produce supply quest mask for the nation based on current conquest standings
 local function suppliesAvailableBitmask(player, nation)
-    local mask = 2130706463
+    local mask = 0x7F00001F
 
     if player:getCharVar("supplyQuest_started") == vanaDay() then
-        mask = 4294967295 -- Need to wait 1 vanadiel day
+        mask = 0xFFFFFFFF -- Need to wait 1 vanadiel day
     end
 
     for k, v in pairs(outposts) do
@@ -158,7 +158,7 @@ local function suppliesAvailableBitmask(player, nation)
         end
     end
 
-    if mask ~= -1 and mask ~= 4294967295 then
+    if mask ~= -1 and mask ~= 0xFFFFFFFF then
         for i = 0, 18 do
             if GetRegionOwner(i) ~= nation or i == 16 or i == 17 or (i == 18 and not player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.DARKNESS_NAMED)) then
                 mask = mask + 2^(i + 5)
@@ -539,29 +539,29 @@ local overseerOffsets =
 
 local crystals =
 {
-    [4096] = 12,
-    [4097] = 12,
-    [4098] = 12,
-    [4099] = 12,
-    [4100] = 12,
-    [4101] = 12,
-    [4102] = 16,
-    [4103] = 16,
-    [4238] = 12,
-    [4239] = 12,
-    [4240] = 12,
-    [4241] = 12,
-    [4242] = 12,
-    [4243] = 12,
-    [4244] = 16,
-    [4245] = 16,
+    [xi.items.FIRE_CRYSTAL]      = 12,
+    [xi.items.ICE_CRYSTAL]       = 12,
+    [xi.items.WIND_CRYSTAL]      = 12,
+    [xi.items.EARTH_CRYSTAL]     = 12,
+    [xi.items.LIGHTNING_CRYSTAL] = 12,
+    [xi.items.WATER_CRYSTAL]     = 12,
+    [xi.items.LIGHT_CRYSTAL]     = 16,
+    [xi.items.DARK_CRYSTAL]      = 16,
+    [xi.items.INFERNO_CRYSTAL]   = 12,
+    [xi.items.GLACIER_CRYSTAL]   = 12,
+    [xi.items.CYCLONE_CRYSTAL]   = 12,
+    [xi.items.TERRA_CRYSTAL]     = 12,
+    [xi.items.PLASMA_CRYSTAL]    = 12,
+    [xi.items.TORRENT_CRYSTAL]   = 12,
+    [xi.items.AURORA_CRYSTAL]    = 16,
+    [xi.items.TWILIGHT_CRYSTAL]  = 16,
 }
 
 local expRings =
 {
-    [15761] = { cp=350, charges=7 },
-    [15762] = { cp=700, charges=7 },
-    [15763] = { cp=600, charges=3 },
+    [xi.items.CHARIOT_BAND] = { cp = 350, charges = 7 },
+    [xi.items.EMPRESS_BAND] = { cp = 700, charges = 7 },
+    [xi.items.EMPEROR_BAND] = { cp = 600, charges = 3 },
 }
 
 local function conquestRanking()
@@ -629,6 +629,7 @@ local function getArg1(player, guardNation, guardType)
     local output = 0
     local signet = 0
     local cipher = xi.extravaganza.campaignActive() * 20 * 65536
+    local voucher = player:hasKeyItem(xi.ki.CONQUEST_PROMOTION_VOUCHER) and 0x20000 or 0
 
     if guardNation == xi.nation.WINDURST then
         output = 33
@@ -651,6 +652,10 @@ local function getArg1(player, guardNation, guardType)
         output = (pNation * 16) + (3 * 256) + 65537
     else
         output = output + 256 * signet
+    end
+
+    if guardType == xi.conquest.guard.CITY then
+        output = output + voucher
     end
 
     if guardType >= xi.conquest.guard.OUTPOST then
@@ -1120,16 +1125,18 @@ xi.conquest.overseerOnEventUpdate = function(player, csid, option, guardNation)
         local u2 = 0 -- default: player has enough CP for item
         local u3 = stock.item -- default: the item ID we're purchasing
 
-        --[[
-        if false then -- TODO: if player is a job that cannot equip selected item, set u1 to 0 here
-            u1 = 0
+        if not player:canEquipItem(stock.item, false) then -- can't equip
+            u1 = 0 -- can't equip due to job
         elseif stock.lvl > player:getMainLvl() then
-            u1 = 1
+            u1 = 1 -- can't equip due to level
         end
-        ]]--
 
         if stock.cp > player:getCP() then
             u2 = 1
+        end
+
+        if option >= 32933 and option <= 32935 and player:hasKeyItem(xi.ki.CONQUEST_PROMOTION_VOUCHER) then
+            u2 = 0
         end
 
         local rankCheck = true
@@ -1151,7 +1158,7 @@ end
 
 -- Additional checks to ensure that the player can actually purchase the item requested from the overseer.
 -- Returns price of the item if valid, -1 if invalid.
-local function canPurchaseItem(player, stock, pRank, guardNation, mOffset)
+local function canPurchaseItem(player, stock, pRank, guardNation, mOffset, option)
     -- Validate stock
     if stock == nil then
         return -1
@@ -1182,8 +1189,10 @@ local function canPurchaseItem(player, stock, pRank, guardNation, mOffset)
     end
 
     if player:getCP() < price then
-        player:messageSpecial(mOffset + 62, 0, 0, stock.item) -- "You do not have enough conquest points to purchase the <item>."
-        return -1
+        if option <= 32933 and option >= 32935 and not player:hasKeyItem(xi.ki.CONQUEST_PROMOTION_VOUCHER) then
+            player:messageSpecial(mOffset + 62, 0, 0, stock.item) -- "You do not have enough conquest points to purchase the <item>."
+            return -1
+        end
     end
 
     return price
@@ -1254,7 +1263,7 @@ xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, 
     -- PURCHASE CP ITEM
     elseif option >= 32768 and option <= 32944 then
         local stock = getStock(player, guardNation, option)
-        local price = canPurchaseItem(player, stock, pRank, guardNation, mOffset)
+        local price = canPurchaseItem(player, stock, pRank, guardNation, mOffset, option)
 
         if price < 0 then
             return
@@ -1267,10 +1276,14 @@ xi.conquest.overseerOnEventFinish = function(player, csid, option, guardNation, 
 
         -- make sale
         if npcUtil.giveItem(player, stock.item) then
-            player:delCP(price)
             if option >= 32933 and option <= 32935 then
                 player:setCharVar("CONQUEST_RING_RECHARGE", getConquestTally())
+                if player:hasKeyItem(xi.ki.CONQUEST_PROMOTION_VOUCHER) then
+                    player:delKeyItem(xi.ki.CONQUEST_PROMOTION_VOUCHER)
+                    return
+                end
             end
+            player:delCP(price)
         end
     end
 end
