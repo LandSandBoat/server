@@ -84,6 +84,7 @@ xi.items =
     QUADAV_AUGURY_SHELL             = 494,
     QUADAV_CHARM                    = 495,
     YAGUDO_BEAD_NECKLACE            = 498,
+    QUADAV_HELM                     = 501,
     PINCH_OF_VALKURM_SUNSAND        = 503,
     RHINOSTERY_CANTEEN              = 504,
     SHEEPSKIN                       = 505,
