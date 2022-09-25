@@ -9,6 +9,7 @@ return {
     ['Ehrhard']      = { event = 47 },
     ['Evi']          = { event = 21 },
     ['Gudav']        = { event = 31 },
+    ['Hilda']        = { event = 48 },
     ['Latifah']      = { event = 13 },
     ['Mine_Konte']   = { event = 42 },
     ['Otto']         = { event = 20 },

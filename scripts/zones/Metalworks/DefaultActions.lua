@@ -18,6 +18,7 @@ return {
     ['Naji']        = { event = 700 },
     ['Patt-Pott']   = { event = 250 },
     ['Pius']        = { event = 350 },
+    ['Raibaht']     = { event = 501 },
     ['Romualdo']    = { event = 705 },
     ['Unlucky_Rat'] = { event = 550 },
 }

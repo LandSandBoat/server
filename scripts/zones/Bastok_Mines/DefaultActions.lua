@@ -9,6 +9,7 @@ return {
     ['Drangord']       = { event = 21 },
     ['Echo_Hawk']      = { event = 13 },
     ['Elki']           = { event = 31 },
+    ['Goraow']         = { event = 105 },
     ['Gumbah']         = { event = 52 },
     ['Medicine_Eagle'] = { event = 25 },
     ['Parraggoh']      = { event = 11 },
