@@ -173,6 +173,7 @@ xi.items =
     CHUNK_OF_PLATINUM_ORE           = 738,
     CHUNK_OF_ORICHALCUM_ORE         = 739,
     CHUNK_OF_PHRYGIAN_ORE           = 740,
+    SILVER_INGOT                    = 744,
     GOLD_INGOT                      = 745,
     ORICHALCUM_INGOT                = 747,
     GOLD_BEASTCOIN                  = 748,
