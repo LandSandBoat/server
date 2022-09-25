@@ -205,6 +205,11 @@ namespace moduleutils
         }
     }
 
+    void CleanupLuaModules()
+    {
+        overrides.clear();
+    }
+
     void TryApplyLuaModules()
     {
         for (auto& override : overrides)

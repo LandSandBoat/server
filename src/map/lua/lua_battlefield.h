@@ -43,6 +43,7 @@ public:
     friend std::ostream& operator<<(std::ostream& out, const CLuaBattlefield& battlefield);
 
     uint16   getID();
+    uint16   getZoneID();
     uint8    getArea();
     uint32   getTimeLimit();
     uint32   getTimeInside();
