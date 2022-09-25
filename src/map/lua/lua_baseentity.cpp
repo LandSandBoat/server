@@ -1095,6 +1095,37 @@ void CLuaBaseEntity::release()
 }
 
 /************************************************************************
+ *  Function: skipEvent()
+ *  Purpose : Functions the same as `release()`, but also sends the packet that
+--          : triggers the onEventFinish logic for a cutscene.
+ *  Example : player:skipEvent()
+ *  Notes   : You can optionally pass in the option for the cs.
+ ************************************************************************/
+
+void CLuaBaseEntity::skipEvent(sol::variadic_args va)
+{
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity); PChar->isInEvent())
+    {
+        int32 option = 0;
+        if (va.size() && va.get_type(0) == sol::type::number)
+        {
+            option = va.get<int32>(0);
+        }
+
+        luautils::OnEventFinish(PChar, PChar->currentEvent->eventId, option);
+
+        PChar->updatemask |= UPDATE_HP;
+        PChar->inSequence = false;
+        PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::SKIPPING));
+        PChar->pushPacket(new CReleasePacket(PChar, RELEASE_TYPE::EVENT));
+        PChar->endCurrentEvent();
+
+        // Message: Event skipped
+        PChar->pushPacket(new CMessageSystemPacket(0, 0, 117));
+    }
+}
+
+/************************************************************************
  *  Function: startSequence()
  *  Purpose : Sets the player to be flagged as being in a sequence, which
  *            means that it should not be released immediately from the NPC.
@@ -14445,6 +14476,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getEventTarget", CLuaBaseEntity::getEventTarget);
     SOL_REGISTER("isInEvent", CLuaBaseEntity::isInEvent);
     SOL_REGISTER("release", CLuaBaseEntity::release);
+    SOL_REGISTER("skipEvent", CLuaBaseEntity::skipEvent);
     SOL_REGISTER("startSequence", CLuaBaseEntity::startSequence);
     SOL_REGISTER("didGetMessage", CLuaBaseEntity::didGetMessage);
     SOL_REGISTER("resetGotMessage", CLuaBaseEntity::resetGotMessage);
