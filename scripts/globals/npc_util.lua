@@ -32,6 +32,8 @@ npcUtil = {}
         do spawned mobs automatically aggro the player
     hide (number, default xi.settings.main.FORCE_SPAWN_QM_RESET_TIME)
         how long to hide the QM for after mobs die
+    message (number)
+        if set a message will play if a entity spawns
 
 ******************************************************************************* --]]
 function npcUtil.popFromQM(player, qm, mobId, params)
@@ -114,6 +116,10 @@ function npcUtil.popFromQM(player, qm, mobId, params)
 
                 GetNPCByID(m:getLocalVar("qm")):updateNPCHideTime(params.hide)
             end)
+        end
+        -- add in a spawn message if has one
+        if params.message then
+            player:messageSpecial(params.message)
         end
     end
 
