@@ -5395,6 +5395,38 @@ INSERT INTO `mob_spell_lists` VALUES ('Ziryu',5056,54,1,255); -- Stoneskin
 -- Koenigstiger (5057)
 INSERT INTO `mob_spell_lists` VALUES ('Koenigstiger',5057,366,1,255);-- graviga
 
+-- Moblin Wisewoman (5058)
+INSERT INTO `mob_spell_lists` VALUES ('Moblin_Wisewoman',5058,57,1,255); -- Haste
+INSERT INTO `mob_spell_lists` VALUES ('Moblin_Wisewoman',5058,108,1,255); -- Regen
+INSERT INTO `mob_spell_lists` VALUES ('Moblin_Wisewoman',5058,259,1,255); -- Sleep II
+INSERT INTO `mob_spell_lists` VALUES ('Moblin_Wisewoman',5058,260,1,255); -- Dispel
+
+-- Moblin Clergyman (5059)
+INSERT INTO `mob_spell_lists` VALUES ('Moblin_Clergyman',5059,4,1,255); -- Cure IV
+INSERT INTO `mob_spell_lists` VALUES ('Moblin_Clergyman',5059,21,1,255); -- Holy
+INSERT INTO `mob_spell_lists` VALUES ('Moblin_Clergyman',5059,45,1,255); -- Protect III
+INSERT INTO `mob_spell_lists` VALUES ('Moblin_Clergyman',5059,143,1,255); -- Erase
+
+-- Twilotak (5060)
+INSERT INTO `mob_spell_lists` VALUES ('Twilotak',5060,144,1,255); -- Fire
+INSERT INTO `mob_spell_lists` VALUES ('Twilotak',5060,149,1,255); -- Blizzard
+INSERT INTO `mob_spell_lists` VALUES ('Twilotak',5060,154,1,255); -- Aero
+INSERT INTO `mob_spell_lists` VALUES ('Twilotak',5060,160,1,255); -- Stone II
+INSERT INTO `mob_spell_lists` VALUES ('Twilotak',5060,164,1,255); -- Thunder
+INSERT INTO `mob_spell_lists` VALUES ('Twilotak',5060,169,1,255); -- Water
+INSERT INTO `mob_spell_lists` VALUES ('Twilotak',5060,220,1,255); -- Poison
+INSERT INTO `mob_spell_lists` VALUES ('Twilotak',5060,231,1,255); -- Bio II
+INSERT INTO `mob_spell_lists` VALUES ('Twilotak',5060,245,1,255); -- Drain
+INSERT INTO `mob_spell_lists` VALUES ('Twilotak',5060,247,1,255); -- Aspir
+INSERT INTO `mob_spell_lists` VALUES ('Twilotak',5060,252,1,255); -- Stun
+INSERT INTO `mob_spell_lists` VALUES ('Twilotak',5060,266,1,255); -- Absorb-STR
+INSERT INTO `mob_spell_lists` VALUES ('Twilotak',5060,267,1,255); -- Absorb-DEX
+INSERT INTO `mob_spell_lists` VALUES ('Twilotak',5060,268,1,255); -- Absorb-VIT
+INSERT INTO `mob_spell_lists` VALUES ('Twilotak',5060,269,1,255); -- Absorb-AGI
+INSERT INTO `mob_spell_lists` VALUES ('Twilotak',5060,270,1,255); -- Absorb-INT
+INSERT INTO `mob_spell_lists` VALUES ('Twilotak',5060,271,1,255); -- Absorb-MND
+INSERT INTO `mob_spell_lists` VALUES ('Twilotak',5060,272,1,255); -- Absorb-CHR
+
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

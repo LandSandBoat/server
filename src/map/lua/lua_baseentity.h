@@ -779,14 +779,17 @@ public:
     void setUntargetable(bool untargetable);
     bool getUntargetable();
 
-    void setDelay(uint16 delay);   // sets a mobs weapon delay
-    void setDamage(uint16 damage); // sets a mobs weapon damage
-    bool hasSpellList();
-    void setSpellList(uint16 spellList);
-    void SetAutoAttackEnabled(bool state);   // halts/resumes auto attack of entity
-    void SetMagicCastingEnabled(bool state); // halt/resumes casting magic
-    void SetMobAbilityEnabled(bool state);   // halt/resumes mob skills
-    void SetMobSkillAttack(int16 listId);    // enable/disable using mobskills as regular attacks
+    void  setDelay(uint16 delay);             // sets a mobs weapon delay
+    int16 getDelay();                         // return the delay value
+    void  setDamage(uint16 damage);           // sets a mobs weapon damage
+    bool  hasSpellList();                     // true if a spell list is assigned to the mob
+    void  setSpellList(uint16 spellList);     // sets the spell list value
+    void  SetAutoAttackEnabled(bool state);   // halts/resumes auto attack of entity
+    void  SetMagicCastingEnabled(bool state); // halt/resumes casting magic
+    void  SetMobAbilityEnabled(bool state);   // halt/resumes mob skills
+    void  SetMobSkillAttack(int16 listId);    // enable/disable using mobskills as regular attacks
+    bool  isMagicCastingEnabled();            // return a true/false value if mob is able to auto-cast
+    bool  isAutoAttackEnabled();              // returns true if the mob can auto-attack
 
     int16 getMobMod(uint16 mobModID);
     void  setMobMod(uint16 mobModID, int16 value);

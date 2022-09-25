@@ -55,7 +55,7 @@ local battlefields =
     [xi.zone.MINE_SHAFT_2716] =
     {
         { 0,  736,    0 },   -- A Century of Hardship (PM5-3 L3)
-     -- { 1,  737,    0 },   -- Return to the Depths (Quest)
+        { 1,  737,    0 },   -- Return to the Depths (Quest)
         { 2,  738,    0 },   -- Bionic Bug (ENM)
      -- { 3,  739,    0 },   -- Pulling the Strings (ENM)
         { 4,  740,    0 },   -- Automaton Assault (ENM)
@@ -669,6 +669,7 @@ local function checkReqs(player, npc, bfid, registrant)
         [ 705] = function() return ( player:hasKeyItem(xi.ki.ASTRAL_COVENANT)                                                                                              ) end, -- ENM: Test Your Mite
         [ 706] = function() return ( player:hasKeyItem(xi.ki.VIAL_OF_DREAM_INCENSE)                                                                                        ) end, -- Quest: Waking Dreams
         [ 736] = function() return ( cop == mi.cop.THREE_PATHS and player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.LOUVERANCE) == 8                   ) end, -- PM5-3 L3: A Century of Hardship
+        [ 737] = function() return ( player:getCharVar("Quest[1][78]prog") == 9                                                                                            ) end, -- Quest: Return to the Depths
         [ 738] = function() return ( player:hasKeyItem(xi.ki.SHAFT_2716_OPERATING_LEVER)                                                                                   ) end, -- ENM: Bionic Bug
         [ 739] = function() return ( player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL)                                                                                    ) end, -- ENM: Pulling Your Strings
         [ 740] = function() return ( player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL) and sameRace()                                                                     ) end, -- ENM: Automaton Assault
@@ -738,6 +739,8 @@ local function checkReqs(player, npc, bfid, registrant)
         [ 676] = function() return ( player:hasKeyItem(xi.ki.MIASMA_FILTER)                                                                                ) end, -- ENM: Totentanz
         [ 705] = function() return ( player:hasKeyItem(xi.ki.ASTRAL_COVENANT)                                                                              ) end, -- ENM: Test Your Mite
         [ 738] = function() return ( player:hasKeyItem(xi.ki.SHAFT_2716_OPERATING_LEVER)                                                                   ) end, -- ENM: Bionic Bug
+        [ 737] = function() return ( player:getCharVar("Quest[1][78]prog") >= 9 or
+                                     player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.RETURN_TO_THE_DEPTHS)                             ) end, -- Quest: Return to the Depths
         [ 740] = function() return ( player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL)                                                                    ) end, -- ENM: Automaton Assault
         [ 769] = function() return ( player:hasKeyItem(xi.ki.CENSER_OF_ABANDONMENT)                                                                        ) end, -- ENM: Simulant
         [ 801] = function() return ( player:hasKeyItem(xi.ki.CENSER_OF_ANTIPATHY)                                                                          ) end, -- ENM: You Are What You Eat
