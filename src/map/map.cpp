@@ -366,7 +366,7 @@ void do_final(int code)
 
     timer_final();
     socket_final();
-
+    luautils::cleanup();
     logging::ShutDown();
 
     if (code != EXIT_SUCCESS)
