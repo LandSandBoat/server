@@ -37,7 +37,15 @@ set(EXTERNAL_LIBS
     efsw
 )
 
-if(UNIX) #backwards needs these to add to linker
+ #backwards needs these to add to linker
+
+if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    # MacOS has bfd built in clang
+    list(APPEND EXTERNAL_LIBS
+        dl
+    )
+elseif(UNIX)
+    # Linux needs bfd as it's not native like MacOS
     list(APPEND EXTERNAL_LIBS
         bfd
         dl
