@@ -29,7 +29,7 @@
 #include "common/taskmgr.h"
 #include "common/timer.h"
 #include "common/version.h"
-
+#include <sstream>
 #if defined(__linux__) || defined(__APPLE__)
 #define BACKWARD_HAS_BFD 1
 #include "../../ext/backward/backward.hpp"
@@ -116,56 +116,9 @@ static void dump_backtrace()
     printer.color_mode = backward::ColorMode::always;
     printer.address    = true;
 
-    printer.print(trace, stderr);
-#endif
-    // gdb
-#if defined(__linux__)
-    int fd[2]  = {};
-    int status = pipe(fd);
-    if (status == -1)
-    {
-        ShowError("pipe failed for gdb backtrace: %s", strerror(errno));
-        _exit(EXIT_FAILURE);
-    }
-    pid_t child_pid = fork();
-
-#ifdef HAS_YAMA_PRCTL
-    // Tell yama that we allow our child_pid to trace our process
-    if (child_pid > 0)
-    {
-        prctl(PR_SET_DUMPABLE, 1);
-        prctl(PR_SET_PTRACER, child_pid);
-    }
-#endif
-
-    if (child_pid < 0)
-    {
-        ShowError("Fork failed for gdb backtrace");
-    }
-    else if (child_pid == 0)
-    {
-        // NOTE: gdb-7.8 has regression, either update or downgrade.
-        close(fd[0]);
-        char buf[255];
-        snprintf(buf, sizeof(buf), "gdb -p %d -n -batch -ex generate-core-file -ex bt 2>/dev/null 1>&%d", getppid(), fd[1]);
-        execl("/bin/sh", "/bin/sh", "-c", buf, NULL);
-        ShowError("Failed to launch gdb for backtrace");
-        _exit(EXIT_FAILURE);
-    }
-    else
-    {
-        close(fd[1]);
-        waitpid(child_pid, nullptr, 0);
-        char buf[4096] = { 0 };
-        status         = read(fd[0], buf, sizeof(buf) - 1);
-        if (status == -1)
-        {
-            ShowError("read failed for gdb backtrace: %s", strerror(errno));
-            _exit(EXIT_FAILURE);
-        }
-        ShowCritical("--- gdb backtrace ---");
-        ShowCritical("%s", buf);
-    }
+    std::ostringstream traceStream;
+    printer.print(trace, traceStream);
+    spdlog::get("critical")->critical(traceStream.str());
 #endif
 }
 
