@@ -56,6 +56,85 @@ local pathBranch5 =
     {x = 102.00, y = -0.19, z = 3.00}
 }
 
+local pathFind =
+{
+    function(mob, reversePath)
+        if reversePath == 0 or reversePath == 1 then
+            mob:setLocalVar("mobPath", 2)
+            local reverseCheck = math.random(0,2)
+            if reverseCheck == 0 then
+                mob:setLocalVar("reversePath", 0)
+                path = pathBranch1
+            else
+                mob:setLocalVar("reversePath", 1)
+                path = pathBranch5
+            end
+            return path
+        end
+    end,
+    function(mob, reversePath)
+        mob:setLocalVar("mobPath", 3)
+        if reversePath == 0 then
+            path = pathBranch2
+        else
+            path = pathBranch4
+        end
+        return path
+    end,
+    function(mob, reversePath)
+        mob:setLocalVar("mobPath", 4)
+        if reversePath == 0 then
+            path = pathBranch3
+        else
+            path = pathBranch3
+        end
+        return path
+    end,
+    function(mob, reversePath)
+        if reversePath == 0 then
+            mob:setLocalVar("mobPath", 5)
+            path = pathBranch4
+        else
+            local reverseCheck = math.random(0,2)
+            if reverseCheck == 0 then
+                mob:setLocalVar("mobPath", 4)
+                mob:setLocalVar("reversePath", 0)
+                path = pathBranch3
+            else
+                mob:setLocalVar("mobPath", 5)
+                mob:setLocalVar("reversePath", 1)
+                path = pathBranch2
+            end
+        end
+        return path
+    end,
+    function(mob, reversePath)
+        if reversePath == 0 then
+            local reverseCheck = math.random(0,2)
+            if reverseCheck == 0 then
+                mob:setLocalVar("mobPath", 6)
+                mob:setLocalVar("reversePath", 0)
+                path = pathBranch5
+            else
+                mob:setLocalVar("mobPath", 3)
+                mob:setLocalVar("reversePath", 1)
+                path = pathBranch4
+            end
+        else
+            mob:setLocalVar("mobPath", 6)
+            path = pathBranch1
+        end
+        return path
+    end,
+    function(mob, reversePath)
+        if reversePath == 0 or reversePath == 1 then
+            mob:setLocalVar("mobPath", 1)
+            path = pathStart
+        end
+        return path
+    end
+}
+
 entity.onMobInitialize = function(mob)
     --Guivre has increased movespeed, sight range with
     --natural double/triple attack.
@@ -66,11 +145,10 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobSpawn = function(mob)
-    --Guivre will despawn if not claimed within 5 hours.
-    local rndTime = math.random(3600, 18000)
-    mob:setLocalVar("despawnTime", rndTime + os.time())
+    --Guivre will despawn if not claimed within 3-5 hours.
+    mob:setLocalVar("despawnTime", math.random(10800, 18000) + os.time())
     mob:setLocalVar("isPaused", 0)
-    mob:setLocalVar("mobPath", 0)
+    mob:setLocalVar("mobPath", 1)
     mob:pathThrough(pathStart, xi.path.flag.COORDS)
 end
 
@@ -82,120 +160,22 @@ entity.onPath = function(mob)
             local path = {}
             mob:setLocalVar("isPaused", 0)
             mob:clearPath()
-            if reversePath == 0 then --forward path logic begin
-                switch (currentPath): caseof
-                {
-                    [0] = function()
-                        local reverseCheck = math.random(0,2)
-                        if reverseCheck == 0 then
-                            mob:setLocalVar("reversePath", 0)
-                            mob:setLocalVar("mobPath", 1)
-                            path = pathBranch1
-                            mob:pathThrough(path, xi.path.flag.COORDS)
-                        else
-                            mob:setLocalVar("reversePath", 1)
-                            mob:setLocalVar("mobPath", 5)
-                            path = pathBranch5
-                            mob:pathThrough(path, bit.bor(xi.path.flag.COORDS, xi.path.flag.REVERSE))
-                        end
-                    end;
-                    [1] = function()
-                        mob:setLocalVar("mobPath", 2)
-                        path = pathBranch2
-                        mob:pathThrough(path, xi.path.flag.COORDS)
-                    end;
-                    [2] = function()
-                        mob:setLocalVar("mobPath", 3)
-                        path = pathBranch3
-                        mob:pathThrough(path, xi.path.flag.COORDS)
-                    end;
-                    [3] = function()
-                        mob:setLocalVar("mobPath", 4)
-                        path = pathBranch4
-                        mob:pathThrough(path, xi.path.flag.COORDS)
-                    end;
-                    [4] = function()
-                        local reverseCheck = math.random(0,2)
-                        if reverseCheck == 0 then
-                            mob:setLocalVar("reversePath", 0)
-                            mob:setLocalVar("mobPath", 5)
-                            path = pathBranch5
-                            mob:pathThrough(path, xi.path.flag.COORDS)
-                        else
-                            mob:setLocalVar("reversePath", 1)
-                            mob:setLocalVar("mobPath", 4)
-                            path = pathBranch4
-                            mob:pathThrough(path, bit.bor(xi.path.flag.COORDS, xi.path.flag.REVERSE))
-                        end
-                    end;
-                    [5] = function()
-                        mob:setLocalVar("mobPath", 0)
-                        path = pathStart
-                        mob:pathThrough(path, xi.path.flag.COORDS)
-                    end;
-                }
-            else --reverse path logic begin
-                switch (currentPath): caseof
-                {
-                    [0] = function()
-                        local reverseCheck = math.random(0,2)
-                        if reverseCheck == 0 then
-                            mob:setLocalVar("reversePath", 0)
-                            mob:setLocalVar("mobPath", 1)
-                            path = pathBranch1
-                            mob:pathThrough(path, xi.path.flag.COORDS)
-                        else
-                            mob:setLocalVar("reversePath", 1)
-                            mob:setLocalVar("mobPath", 5)
-                            path = pathBranch5
-                            mob:pathThrough(path, bit.bor(xi.path.flag.COORDS, xi.path.flag.REVERSE))
-                        end
-                    end;
-                    [5] = function()
-                        mob:setLocalVar("mobPath", 4)
-                        path = pathBranch4
-                        mob:pathThrough(path, bit.bor(xi.path.flag.COORDS, xi.path.flag.REVERSE))
-                    end;
-                    [4] = function()
-                        mob:setLocalVar("mobPath", 3)
-                        path = pathBranch3
-                        mob:pathThrough(path, bit.bor(xi.path.flag.COORDS, xi.path.flag.REVERSE))
-                    end;
-                    [3] = function()
-                        local reverseCheck = math.random(0,2)
-                        if reverseCheck == 0 then
-                            mob:setLocalVar("reversePath", 0)
-                            mob:setLocalVar("mobPath", 3)
-                            path = pathBranch3
-                            mob:pathThrough(path, xi.path.flag.COORDS)
-                        else
-                            mob:setLocalVar("reversePath", 1)
-                            mob:setLocalVar("mobPath", 2)
-                            path = pathBranch2
-                            mob:pathThrough(path, bit.bor(xi.path.flag.COORDS, xi.path.flag.REVERSE))
-                        end
-                    end;
-                    [2] = function()
-                        mob:setLocalVar("mobPath", 1)
-                        path = pathBranch1
-                        mob:pathThrough(path, bit.bor(xi.path.flag.COORDS, xi.path.flag.REVERSE))
-                    end;
-                    [1] = function()
-                        mob:setLocalVar("mobPath", 0)
-                        path = pathStart
-                        mob:pathThrough(path, bit.bor(xi.path.flag.COORDS, xi.path.flag.REVERSE))
-                    end;
-                }
+            path = pathFind[currentPath](mob, reversePath)
+            local newReverse = mob:getLocalVar("reversePath")
+            if newReverse == 0 then
+                mob:pathThrough(path, xi.path.flag.COORDS)
+            else
+                mob:pathThrough(path, bit.bor(xi.path.flag.COORDS, xi.path.flag.REVERSE))
             end
         else
-            --Guivre is paused, he will wait and rotate
-            --a random amount of times before resuming his path
+            -- Guivre is paused, he will wait and rotate
+            -- a random amount of times before resuming his path
             mob:clearPath()
             local x = mob:getXPos()
             local y = mob:getYPos()
             local z = mob:getZPos()
             local rotations = {}
-            local count = math.random(0,6)
+            local count = math.random(2,6)
             for i = 0, count do
                 local wait = math.random(1500,3000)
                 rotations[i+1] = {

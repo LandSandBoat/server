@@ -76,9 +76,64 @@ local pathBb =
     {x = 102.61, y = 0.92, z = 1.60}
 }
 
+local pathFind =
+{
+    function(mob, reversePath)
+        if reversePath == 0 or reversePath == 1 then
+            local pathRnd = math.random(0,1)
+            local reverseCheck = math.random(0,2)
+            if pathRnd == 1 then
+                mob:setLocalVar("mobPath", 2)
+                if reverseCheck ~= 2 then
+                    mob:setLocalVar("reversePath", 0)
+                    path = pathA
+                else
+                    mob:setLocalVar("reversePath", 1)
+                    path = pathAb
+                end
+            else
+                mob:setLocalVar("mobPath", 4)
+                if reverseCheck ~= 2 then
+                    mob:setLocalVar("reversePath", 0)
+                    path = pathB
+                else
+                    mob:setLocalVar("reversePath", 1)
+                    path = pathBb
+                end
+            end
+        end
+        return path
+    end,
+    function(mob, reversePath)
+        mob:setLocalVar("mobPath", 3)
+        if reversePath == 0 then
+            path = pathAb
+        else
+            path = pathA
+        end
+        return path
+    end,
+    function(mob, reversePath)
+        if reversePath == 0 or reversePath == 1 then
+            mob:setLocalVar("mobPath", 1)
+            path = pathStart
+        end
+        return path
+    end,
+    function(mob, reversePath)
+        mob:setLocalVar("mobPath", 3)
+        if reversePath == 0 then
+            path = pathBb
+        else
+            path = pathB
+        end
+        return path
+    end
+}
+
 entity.onMobSpawn = function(mob)
     mob:setLocalVar("isPaused", 0)
-    mob:setLocalVar("mobPath", 0)
+    mob:setLocalVar("mobPath", 1)
     mob:pathThrough(pathStart, xi.path.flag.COORDS)
 end
 
@@ -90,120 +145,12 @@ entity.onPath = function(mob)
             local path = {}
             mob:setLocalVar("isPaused", 0)
             mob:clearPath()
-            if reversePath == 0 then
-                -- forward path logic begin
-                switch (currentPath): caseof
-                {
-                    [0] = function()
-                        local pathRnd = math.random(0,1)
-                        local reverseCheck = math.random(0,2)
-                        if pathRnd == 1 then
-                            -- Path A
-                            if reverseCheck ~= 2 then
-                                mob:setLocalVar("mobPath", 1)
-                                mob:setLocalVar("reversePath", 0)
-                                path = pathA
-                                mob:pathThrough(path, xi.path.flag.COORDS)
-                            else
-                                mob:setLocalVar("mobPath", 1)
-                                mob:setLocalVar("reversePath", 1)
-                                path = pathAb
-                                mob:pathThrough(path, bit.bor(xi.path.flag.REVERSE, xi.path.flag.COORDS))
-                            end
-                        else
-                            -- Path B
-                            if reverseCheck ~= 2 then
-                                mob:setLocalVar("mobPath", 3)
-                                mob:setLocalVar("reversePath", 0)
-                                path = pathB
-                                mob:pathThrough(path, xi.path.flag.COORDS)
-                            else
-                                mob:setLocalVar("mobPath", 3)
-                                mob:setLocalVar("reversePath", 1)
-                                path = pathBb
-                                mob:pathThrough(path, bit.bor(xi.path.flag.REVERSE, xi.path.flag.COORDS))
-                            end
-                        end
-                    end;
-                    [1] = function()
-                        -- Amemet as at end of Path A, continue to second leg
-                        mob:setLocalVar("mobPath", 2)
-                        path = pathAb
-                        mob:pathThrough(path, xi.path.flag.COORDS)
-                    end;
-                    [2] = function()
-                        -- Amemet as at end of Path Ab, return home
-                        mob:setLocalVar("mobPath", 0)
-                        path = pathStart
-                        mob:pathThrough(path, xi.path.flag.COORDS)
-                    end;
-                    [3] = function()
-                        -- Amemet as at end of Path B, continue to second leg
-                        mob:setLocalVar("mobPath", 4)
-                        path = pathBb
-                        mob:pathThrough(path, xi.path.flag.COORDS)
-                    end;
-                    [4] = function()
-                        -- Amemet as at end of Path Bb, return home
-                        mob:setLocalVar("mobPath", 0)
-                        path = pathStart
-                        mob:pathThrough(path, xi.path.flag.COORDS)
-                    end;
-                }
+            path = pathFind[currentPath](mob, reversePath)
+            local newReverse = mob:getLocalVar("reversePath")
+            if newReverse == 0 then
+                mob:pathThrough(path, xi.path.flag.COORDS)
             else
-                -- reverse path logic begin
-                switch (currentPath): caseof
-                {
-                    [0] = function()
-                        local pathRnd = math.random(0,1)
-                        local reverseCheck = math.random(0,2)
-                        if pathRnd == 1 then
-                            if reverseCheck ~= 2 then
-                                mob:setLocalVar("mobPath", 1)
-                                mob:setLocalVar("reversePath", 0)
-                                path = pathA
-                                mob:pathThrough(path, xi.path.flag.COORDS)
-                            else
-                                mob:setLocalVar("mobPath", 1)
-                                mob:setLocalVar("reversePath", 1)
-                                path = pathAb
-                                mob:pathThrough(path, bit.bor(xi.path.flag.REVERSE, xi.path.flag.COORDS))
-                            end
-                        else
-                            if reverseCheck ~= 2 then
-                                mob:setLocalVar("mobPath", 3)
-                                mob:setLocalVar("reversePath", 0)
-                                path = pathB
-                                mob:pathThrough(path, xi.path.flag.COORDS)
-                            else
-                                mob:setLocalVar("mobPath", 3)
-                                mob:setLocalVar("reversePath", 1)
-                                path = pathBb
-                                mob:pathThrough(path, bit.bor(xi.path.flag.REVERSE, xi.path.flag.COORDS))
-                            end
-                        end
-                    end;
-                    [1] = function()
-                        mob:setLocalVar("mobPath", 2)
-                        path = pathA
-                        mob:pathThrough(path, bit.bor(xi.path.flag.REVERSE, xi.path.flag.COORDS))
-                    end;
-                    [2] = function()
-                        mob:setLocalVar("mobPath", 0)
-                        path = pathStart
-                        mob:pathThrough(path, xi.path.flag.COORDS)
-                    end;
-                    [3] = function()
-                        mob:setLocalVar("mobPath", 4)
-                        path = pathB
-                        mob:pathThrough(path, bit.bor(xi.path.flag.REVERSE, xi.path.flag.COORDS))
-                    end;
-                    [4] = function()
-                        mob:setLocalVar("mobPath", 0)
-                        path = pathStart
-                        mob:pathThrough(path, xi.path.flag.COORDS)
-                    end;
-                }
+                mob:pathThrough(path, bit.bor(xi.path.flag.REVERSE, xi.path.flag.COORDS))
             end
         else
             -- Amemet has a chance to pause, if successful he will wait
