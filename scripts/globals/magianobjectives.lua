@@ -845,7 +845,7 @@ xi.magian.trials =
 [4329] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3163 } } }, -- 0 -> +1 (Lancer's Seal: Hn.)
 [4189] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3183 } } }, -- 0 -> +1 (Lancer's Seal: Lg.)
 [4209] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3203 } } }, -- 0 -> +1 (Lancer's Seal: Ft.)
-[4229] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3211 } } }, -- +1 -> +2 (Coin of Vision)
+[4229] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3213 } } }, -- +1 -> +2 (Card of Vision)
 [4389] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3217 } } }, -- +1 -> +2 (Card of Ardor)
 [4369] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3221 } } }, -- +1 -> +2 (Card of Wieldance)
 [4249] = { check = checks.checkTradeTrials, reqs = { itemId = set{ 3225 } } }, -- +1 -> +2 (Card of Balance)
