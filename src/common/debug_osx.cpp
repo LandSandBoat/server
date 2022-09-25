@@ -8,6 +8,8 @@
 
 void dumpBacktrace(int signal)
 {
+    ShowCritical("Crash detected, generating traceback (this may take a while)");
+
     backward::StackTrace trace;
     backward::Printer    printer;
 
