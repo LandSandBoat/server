@@ -57,6 +57,17 @@ xi.battlefield.leaveCode =
     LOST   = 4
 }
 
+xi.battlefield.dropChance =
+{
+    EXTREMELY_LOW  = 2,
+    VERY_LOW       = 10,
+    LOW            = 30,
+    NORMAL         = 50,
+    HIGH           = 70,
+    VERY_HIGH      = 100,
+    EXTREMELY_HIGH = 140,
+}
+
 function xi.battlefield.onBattlefieldTick(battlefield, timeinside)
     local killedallmobs = true
     local leavecode     = -1
