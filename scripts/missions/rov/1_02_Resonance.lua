@@ -20,7 +20,7 @@ mission.sections =
 {
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and missionStatus == 0
+            return currentMission == mission.missionId and xi.settings.main.ENABLE_ROV == 1 and missionStatus == 0
         end,
 
         [xi.zone.MHAURA] =
