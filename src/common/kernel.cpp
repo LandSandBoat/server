@@ -104,22 +104,8 @@ sigfunc* compat_signal(int signo, sigfunc* func)
  *                                                                       *
  ************************************************************************/
 
-static void dump_backtrace()
+static void dump_backtrace() // handled in debug_osx.cpp and debug_linux.cpp
 {
-#if defined(__linux__) || defined(__APPLE__)
-    backward::StackTrace trace;
-    backward::Printer    printer;
-
-    trace.load_here(32);
-
-    printer.object     = true;
-    printer.color_mode = backward::ColorMode::always;
-    printer.address    = true;
-
-    std::ostringstream traceStream;
-    printer.print(trace, traceStream);
-    spdlog::get("critical")->critical(traceStream.str());
-#endif
 }
 
 /************************************************************************
@@ -167,17 +153,10 @@ void signals_init()
 {
     compat_signal(SIGTERM, sig_proc);
     compat_signal(SIGINT, sig_proc);
-#ifndef _DEBUG // need unhandled exceptions to debug on Windows
+#if !defined(_DEBUG) && defined(_WIN32) // need unhandled exceptions to debug on Windows
     compat_signal(SIGABRT, sig_proc);
     compat_signal(SIGSEGV, sig_proc);
     compat_signal(SIGFPE, sig_proc);
-#endif
-#ifndef _WIN32
-    compat_signal(SIGILL, SIG_DFL);
-    compat_signal(SIGXFSZ, sig_proc);
-    compat_signal(SIGPIPE, sig_proc);
-    compat_signal(SIGBUS, SIG_DFL);
-    compat_signal(SIGTRAP, SIG_DFL);
 #endif
 }
 
