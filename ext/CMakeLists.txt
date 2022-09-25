@@ -37,9 +37,8 @@ set(EXTERNAL_LIBS
     efsw
 )
 
- #backwards needs these to add to linker
-
-if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+# backwards needs these to add to linker
+if (APPLE)
     # MacOS has bfd built in clang
     list(APPEND EXTERNAL_LIBS
         dl
