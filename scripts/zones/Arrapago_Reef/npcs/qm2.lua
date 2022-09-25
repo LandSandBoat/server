@@ -11,15 +11,11 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, xi.items.GOLDEN_TEETH) and
+        npcUtil.tradeHasExactly(trade, xi.items.GOLDEN_TEETH) and
         npcUtil.popFromQM(player, npc, ID.mob.VELIONIS, { message = ID.text.DRAWS_NEAR })
     then
         player:confirmTrade()
     end
-end
-
-entity.onTrigger = function(player, npc)
-    player:messageSpecial(ID.text.GLITTERING_FRAGMENTS)
 end
 
 return entity

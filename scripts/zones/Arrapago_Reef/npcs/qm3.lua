@@ -11,15 +11,11 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if
-        npcUtil.tradeHas(trade, xi.items.MERROW_NO_11_MOLTING) and
+        npcUtil.tradeHasExactly(trade, xi.items.MERROW_NO_11_MOLTING) and
         npcUtil.popFromQM(player, npc, ID.mob.ZAREEHKL_THE_JUBILANT, { message = ID.text.DRAWS_NEAR })
-    then -- Trade Merrow No. 11 Molting
+    then
         player:confirmTrade()
     end
-end
-
-entity.onTrigger = function(player, npc)
-    player:messageSpecial(ID.text.FLUTTERY_OBJECTS)
 end
 
 return entity

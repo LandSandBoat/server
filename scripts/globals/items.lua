@@ -529,6 +529,7 @@ xi.items =
     SQUARE_OF_BALLON_CLOTH          = 1739,
     IOLITE                          = 1740,
     HIGH_QUALITY_EFT_SKIN           = 1741,
+    SATIATOR_REMNANT                = 1758,
     SQUARE_OF_GALATEIA              = 1769,
     FREE_CHOCOPASS                  = 1789,
     SUPERNAL_FRAGMENT               = 1822,
