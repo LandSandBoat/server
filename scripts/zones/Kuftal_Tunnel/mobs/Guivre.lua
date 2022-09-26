@@ -58,7 +58,7 @@ local pathBranch5 =
 
 local pathFind =
 {
-    function(mob, reversePath)
+    ['pathFind1'] = function(mob, reversePath)
         if reversePath == 0 or reversePath == 1 then
             mob:setLocalVar("mobPath", 2)
             local reverseCheck = math.random(0,2)
@@ -72,7 +72,7 @@ local pathFind =
             return path
         end
     end,
-    function(mob, reversePath)
+    ['pathfind2'] = function(mob, reversePath)
         mob:setLocalVar("mobPath", 3)
         if reversePath == 0 then
             path = pathBranch2
@@ -81,7 +81,7 @@ local pathFind =
         end
         return path
     end,
-    function(mob, reversePath)
+    ['pathFind3'] = function(mob, reversePath)
         mob:setLocalVar("mobPath", 4)
         if reversePath == 0 then
             path = pathBranch3
@@ -90,7 +90,7 @@ local pathFind =
         end
         return path
     end,
-    function(mob, reversePath)
+    ['pathFind4'] = function(mob, reversePath)
         if reversePath == 0 then
             mob:setLocalVar("mobPath", 5)
             path = pathBranch4
@@ -108,7 +108,7 @@ local pathFind =
         end
         return path
     end,
-    function(mob, reversePath)
+    ['pathFind5'] = function(mob, reversePath)
         if reversePath == 0 then
             local reverseCheck = math.random(0,2)
             if reverseCheck == 0 then
@@ -126,7 +126,7 @@ local pathFind =
         end
         return path
     end,
-    function(mob, reversePath)
+    ['pathFind6'] = function(mob, reversePath)
         if reversePath == 0 or reversePath == 1 then
             mob:setLocalVar("mobPath", 1)
             path = pathStart
@@ -155,7 +155,7 @@ end
 entity.onPath = function(mob)
     if not mob:isFollowingPath() then
         if mob:getLocalVar("isPaused") ~= 0 then
-            local currentPath = mob:getLocalVar("mobPath")
+            local currentPath = "pathFind" .. mob:getLocalVar("mobPath")
             local reversePath = mob:getLocalVar("reversePath")
             local path = {}
             mob:setLocalVar("isPaused", 0)
