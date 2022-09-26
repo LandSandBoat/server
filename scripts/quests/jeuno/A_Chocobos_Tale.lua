@@ -167,17 +167,6 @@ quest.sections =
             },
         },
     },
-
-    {
-        check = function(player, status, vars)
-            return status == QUEST_COMPLETED
-        end,
-
-        [xi.zone.UPPER_JEUNO] =
-        {
-            ['Nevela'] = quest:event(10018):replaceDefault(),
-        },
-    },
 }
 
 return quest
