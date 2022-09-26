@@ -2540,6 +2540,30 @@ namespace luautils
         return 0;
     }
 
+    // Trigger Code on an item when it has been dropped
+    int32 OnItemDrop(CBaseEntity* PUser, CItem* PItem)
+    {
+        TracyZoneScoped;
+
+        auto filename = fmt::format("./scripts/globals/items/{}.lua", PItem->getName());
+
+        sol::function onItemDrop = GetCacheEntryFromFilename(filename)["onItemDrop"].get<sol::function>();
+        if (!onItemDrop.valid())
+        {
+            return -1;
+        }
+
+        auto result = onItemDrop(CLuaBaseEntity(PUser), CLuaItem(PItem));
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onItemDrop: %s", err.what());
+            return -1;
+        }
+
+        return 0;
+    }
+
     // Check for gear sets  (e.g Set: enhances haste effect)
     int32 CheckForGearSet(CBaseEntity* PTarget)
     {
