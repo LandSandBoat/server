@@ -57,6 +57,7 @@ public:
     uint16 getMPCost();
     uint8  getSkillType();
     uint8  getSpellGroup();
+    uint8  getSpellFamily();
     uint8  getFlag();
     uint32 getCastTime();
 
