@@ -39,6 +39,10 @@ zones[xi.zone.TAVNAZIAN_SAFEHOLD] =
         ITEM_DELIVERY_DIALOG           = 10926, -- I can send your items to anywhere in Vana'diel!
         HOMEPOINT_SET                  = 10929, -- Home point set!
         DOOR_IS_LOCKED_TIGHT           = 11026, -- The door is locked tight.
+
+        CRUSE_ON_THE_GROUND            = 11755, -- There is a Shaded Cruse lying on the ground here!
+        TRAIL_OF_WATER                 = 11756, -- There is a trail of water here. It is still fresh
+
         YOU_CANNOT_ENTER_DYNAMIS       = 11839, -- You cannot enter Dynamis - [Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia] for <number> [day/days] (Vana'diel time).
         PLAYERS_HAVE_NOT_REACHED_LEVEL = 11841, -- Players who have not reached level <number> are prohibited from entering Dynamis.
         DYNA_NPC_DEFAULT_MESSAGE       = 11963, -- There is a strange symbol drawn here. A haunting chill sweeps through you as you gaze upon it...
