@@ -70,7 +70,6 @@ quest.sections =
                 [10017] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:delKeyItem(xi.ki.SILVER_COMETS_COLLAR)
-                        quest:event(10018):replaceDefault()
                     end
                 end,
             },
@@ -165,6 +164,17 @@ quest.sections =
                     npcUtil.giveKeyItem(player, xi.ki.SILVER_COMETS_COLLAR)
                 end,
             },
+        },
+    },
+    
+     {
+        check = function(player, status, vars)
+            return status == QUEST_COMPLETED
+        end,
+
+        [xi.zone.UPPER_JEUNO] =
+        {
+            ['Nevela'] = quest:event(10018):replaceDefault(),
         },
     },
 }
