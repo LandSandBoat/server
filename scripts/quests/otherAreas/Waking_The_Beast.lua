@@ -36,10 +36,7 @@ quest.sections =
 
         [xi.zone.LA_THEINE_PLATEAU] =
         {
-            ['qm3'] =
-            {
-                onTrigger = quest:progressEvent(207)
-            },
+            ['qm3'] = quest:progressEvent(207),
 
             onEventFinish =
             {
