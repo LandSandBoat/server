@@ -166,7 +166,6 @@ quest.sections =
             },
         },
     },
-    
      {
         check = function(player, status, vars)
             return status == QUEST_COMPLETED
