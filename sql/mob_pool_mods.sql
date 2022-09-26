@@ -32,7 +32,6 @@ CREATE TABLE `mob_pool_mods` (
 LOCK TABLES `mob_pool_mods` WRITE;
 /*!40000 ALTER TABLE `mob_pool_mods` DISABLE KEYS */;
 
-<<<<<<< HEAD
 -- Absolute Virtue
 INSERT INTO `mob_pool_mods` VALUES (21,29,100,0); -- MDEF: 100
 
@@ -523,13 +522,17 @@ INSERT INTO `mob_pool_mods` VALUES (5409,33,50,1);   -- SPECIAL_COOL: 50
 INSERT INTO `mob_pool_mods` VALUES (5409,58,40,1);   -- SPECIAL_DELAY: 40
 
 -- Trust: Shikaree Z
-INSERT INTO `mob_pool_mods` VALUES (5915,6,100,0);      -- Trust Shikaree Z MPP 100
+INSERT INTO `mob_pool_mods` VALUES (5915,6,100,0);      -- MPP: 100
 
 -- Trust: Lehko
-INSERT INTO `mob_pool_mods` VALUES (5922,6,150,0);      -- Trust Lehko MPP 150
+INSERT INTO `mob_pool_mods` VALUES (5922,6,150,0);      -- MPP: 150
+
+-- Trust: Ferreous Coffin
+INSERT INTO `mob_pool_mods` VALUES (5944,3,-10,0);      -- HPP: -10
+INSERT INTO `mob_pool_mods` VALUES (5944,6,35,0);       -- MPP: 35
 
 -- Trust: Shantotto II
-INSERT INTO `mob_pool_mods` VALUES (6019,3,-10,0);      -- Trust Shantotto II HPP -10%
+INSERT INTO `mob_pool_mods` VALUES (6019,3,-10,0);      -- HPP: -10
 
 -- Ixzdei Rdm
 INSERT INTO `mob_pool_mods` VALUES (7039,34,60,1); -- MAGIC_COOL: 60
