@@ -332,19 +332,10 @@ local function giveReward(player, csid)
 end
 
 entity.onTrade = function(player, npc, trade)
-    local underTheSea    = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.UNDER_THE_SEA)
     local insideTheBelly = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.INSIDE_THE_BELLY)
 
-    -- UNDER THE SEA
-    if underTheSea == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.ETCHED_RING) and npcUtil.tradeHas(trade, 4501) then
-        if math.random(100) <= 20 then
-            player:startEvent(35) -- Ring found !
-        else
-            player:startEvent(36) -- Ring not found
-        end
-
     -- A BOY'S DREAM
-    elseif player:getCharVar("aBoysDreamCS") >= 4 and npcUtil.tradeHas(trade, 4562) then
+    if player:getCharVar("aBoysDreamCS") >= 4 and npcUtil.tradeHas(trade, 4562) then
         player:startEvent(85)
 
     -- INSIDE THE BELLY
@@ -358,19 +349,15 @@ entity.onTrade = function(player, npc, trade)
     end
 end
 
-function onTrigger(player, npc)
+entity.onTrigger = function(player, npc, trade)
     local theRealGift    = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_REAL_GIFT)
     local insideTheBelly = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.INSIDE_THE_BELLY)
     local fishingSkill = player:getSkillLevel(xi.skill.FISHING)
     local fishingRank = player:getSkillRank(xi.skill.FISHING)
     local realSkill = (fishingSkill - fishingRank) / 32
 
-    -- UNDER THE SEA
-    if player:getCharVar("underTheSeaVar") == 3 then
-        player:startEvent(34, 4501) -- During quest "Under the sea" - 3rd dialog
-
     -- INSIDE THE BELLY
-    elseif realSkill >= 30 and theRealGift == QUEST_COMPLETED and insideTheBelly == QUEST_AVAILABLE then
+    if realSkill >= 30 and theRealGift == QUEST_COMPLETED and insideTheBelly == QUEST_AVAILABLE then
         player:startEvent(161)
     elseif realSkill >= 30 and realSkill < 39 and (insideTheBelly == QUEST_ACCEPTED or insideTheBelly == QUEST_COMPLETED) then
         player:startEvent(162, 4428, 4469, 4481, 5141)
@@ -391,17 +378,8 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    -- UNDER THE SEA
-    if csid == 34 then
-        player:setCharVar("underTheSeaVar", 4)
-    elseif csid == 35 then
-        npcUtil.giveKeyItem(player, xi.ki.ETCHED_RING)
-        player:confirmTrade()
-    elseif csid == 36 then
-        player:confirmTrade()
-
     -- A BOY'S DREAM
-    elseif csid == 85 then
+    if csid == 85 then
         npcUtil.giveKeyItem(player, xi.ki.KNIGHTS_BOOTS)
         player:setCharVar("aBoysDreamCS", 6)
         player:confirmTrade()

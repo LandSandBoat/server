@@ -958,8 +958,8 @@ INSERT INTO `mob_skills` VALUES (1117,768,'lead_breath',6,15.0,2000,1500,4,0,0,0
 INSERT INTO `mob_skills` VALUES (1118,769,'lead_breath',6,15.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1119,863,'frag_bomb',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1120,69,'10000_needles',1,10.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1121,771,'eagle_eye_shot',0,25.0,2000,0,4,2,0,0,0,0,0); -- yagudo move
-INSERT INTO `mob_skills` VALUES (1122,770,'eagle_eye_shot',0,25.0,2000,0,4,2,0,0,0,0,0); -- quadav move
+INSERT INTO `mob_skills` VALUES (1121,770,'eagle_eye_shot',0,25.0,2000,0,4,2,0,0,0,0,0); -- yagudo move
+INSERT INTO `mob_skills` VALUES (1122,771,'eagle_eye_shot',0,25.0,2000,0,4,2,0,0,0,0,0); -- quadav move
 INSERT INTO `mob_skills` VALUES (1123,355,'ore_toss',0,25.0,2000,0,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1124,772,'regain_hp',1,25.0,2000,0,4,0,0,0,0,0,0); -- Dyna Statues
 INSERT INTO `mob_skills` VALUES (1125,773,'regain_mp',1,25.0,2000,0,4,0,0,0,0,0,0); -- Dyna Statues
@@ -1180,9 +1180,9 @@ INSERT INTO `mob_skills` VALUES (1339,220,'bane',1,12.0,2000,1500,4,0,0,0,0,0,0)
 INSERT INTO `mob_skills` VALUES (1340,17,'crossthrash',1,5.0,2000,1500,4,0,0,1,0,0,0);
 INSERT INTO `mob_skills` VALUES (1341,993,'knife_edge_circle',4,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1342,992,'train_fall',0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1343,1087,'.',0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1344,1088,'.',0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1345,1089,'.',0,7.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1343,994,'moblin_1343',0,50.0,2000,0,4,4,0,0,0,0,0); -- Moblin animation
+INSERT INTO `mob_skills` VALUES (1344,995,'moblin_1344',0,50.0,2000,0,4,4,0,0,0,0,0); -- Moblin animation
+INSERT INTO `mob_skills` VALUES (1345,996,'moblin_1345',0,50.0,2000,0,4,4,0,0,0,0,0); -- Moblin animation
 -- INSERT INTO `mob_skills` VALUES (1346,1090,'.',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1347,998,'dual_strike',0,7.0,2000,1000,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1348,999,'siphon_discharge',1,15.0,2000,1000,4,0,0,1,0,0,0);

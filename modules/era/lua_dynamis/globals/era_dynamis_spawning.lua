@@ -161,11 +161,11 @@ xi.dynamis.normalDynamicSpawn = function(oMob, oMobIndex, target)
                 [2] = -- Floor 2 Spawn Hydras (Done)
                 {
                     [1]  = { "H. Warrior", 159, 134, 0, 359 }, -- HWAR
-                    [2]  = { "H. Monk", 163, 134, 0, 359 }, -- HMNK
+                    [2]  = { "H. Monk", 160, 134, 0, 359 }, -- HMNK
                     [3]  = { "H. White Mage", 161, 134, 1, 359 }, -- HWHM
                     [4]  = { "H. Black Mage", 164, 134, 5000, 359 }, -- HBLM
                     [5]  = { "H. Red Mage", 162, 134, 3, 359 }, -- HRDM
-                    [6]  = { "H. Thief", 160, 134, 0, 359 }, -- HTHF
+                    [6]  = { "H. Thief", 165, 134, 0, 359 }, -- HTHF
                     [7]  = { "H. Paladin", 166, 134, 4, 359 }, -- HPLD
                     [8]  = { "H. Dark Knight", 167, 134, 5, 359 }, -- HDRK
                     [9]  = { "H. Beastmaster", 168, 134, 0, 359 }, -- HBST
@@ -890,7 +890,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Angra Mainyu"] =
         {
             ["onMobSpawn"] = { function(mob) xi.dynamis.onSpawnAngra(mob) end },
-            ["onMobEngaged"] = { function(mob, target) end },
+            ["onMobEngaged"] = { function(mob, target) xi.dynamis.onEngagedAngra(mob, target) end },
             ["onMobFight"] = { function(mob, target) xi.dynamis.onFightAngra(mob, target) end },
             ["onMobRoam"] = { function(mob) xi.dynamis.onRoamAngra(mob) end },
             ["onMobMagicPrepare"] = { function(mob, target, spellId) xi.dynamis.onMagicPrepAngra(mob) end },
@@ -1181,7 +1181,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
     end
     if oMobIndex ~= nil then
         mob:setLocalVar("Parent", oMobIndex)
-        mob:setLocalVar("ParentID", mob:getID())
+        mob:setLocalVar("ParentID", oMob:getID())
         oMob:setLocalVar(string.format("ChildID_%s", mobIndex), mob:getID())
     end
     if xi.dynamis.mobList[zoneID][mobIndex].info[5] ~= nil then
@@ -1425,12 +1425,12 @@ xi.dynamis.spawnDynamicPet =function(target, oMob, mobJob)
             ["Dagourmarche"] =
             {
                 ["onMobFight"] = { function(mob, target) end },
-                ["mixins"] = {  require("scripts/mixins/families/avatar"),  },
+                ["mixins"] = {  require("scripts/mixins/families/avatar"), },
             },
             ["Normal"] =
             {
                 ["onMobFight"] = { function(mob, target) end },
-                ["mixins"] = {   },
+                ["mixins"] = { require("scripts/mixins/families/avatar_persist"), },
             },
         },
         [xi.job.BST] =
@@ -1555,7 +1555,7 @@ xi.dynamis.setSpecialSkill = function(mob)
     local specialSkills =
     {
         [337] = 1123, -- Quadav
-        [358] = 1146-- Kindred
+        [358] = 1146, -- Kindred
     }
     for family, skill in pairs(specialSkills) do
         if mob:getFamily() == family and (mob:getMainJob() == xi.job.NIN or mob:getMainJob() == xi.job.RNG) then
@@ -1611,6 +1611,10 @@ xi.dynamis.setMobStats = function(mob)
         mob:setHP(mob:getMaxHP())
         mob:setMobLevel(math.random(78,80))
         mob:setTrueDetection(true)
+
+        if familyEES[mob:getFamily()] then
+            print(familyEES[mob:getFamily()])
+        end
 
         if     job == xi.job.WAR then
             local params = {  }
@@ -1854,6 +1858,7 @@ xi.dynamis.teleport = function(mob, hideDuration)
         end
 
         mob:entityAnimationPacket("deru")
+        mob:setLocalVar("teleTime", os.time())
     end)
 end
 
@@ -1964,6 +1969,7 @@ xi.dynamis.mobOnEngaged = function(mob, target)
             mob:SetMagicCastingEnabled(false)
             mob:SetMobAbilityEnabled(false)
 
+            mob:addStatusEffectEx(xi.effect.BIND, xi.effect.BIND, 1, 3, 3, 0, 0, 0, xi.effectFlag.NO_LOSS_MESSAGE)
             mob:timer(3000, function(mobArg)
                 if mob:isAlive() then
                     xi.dynamis.spawnDynamicPet(target, mob, mobArg:getMainJob())

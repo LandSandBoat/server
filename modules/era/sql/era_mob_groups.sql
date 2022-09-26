@@ -31,7 +31,7 @@ UPDATE mob_groups SET content_tag='WOTG' WHERE zoneid='80' OR zoneid='81' OR zon
                   OR zoneid='138' OR zoneid='155' OR zoneid='156' OR zoneid='164' OR zoneid='171' OR zoneid='175' OR zoneid='182';
 
 UPDATE mob_groups SET content_tag='ABYSSEA' WHERE zoneid='15' OR zoneid='45' OR zoneid='132' OR zoneid='215' OR zoneid='216'
-                  OR zoneid='217' OR zoneid='218' OR zoneid='253' OR zoneid='254' OR zoneid='255' OR zoneid='13' OR zoneid='44'
+                  OR zoneid='217' OR zoneid='218' OR zoneid='253' OR zoneid='254' OR zoneid='255' OR zoneid='44'
                   OR zoneid='183' OR zoneid='287';
 
 UPDATE mob_groups SET content_tag='SOA' WHERE zoneid='258' OR zoneid='259' OR zoneid='260' OR zoneid='261' OR zoneid='262' OR zoneid='263'
@@ -152,6 +152,14 @@ UPDATE mob_groups set minLevel = 76, maxLevel = 78 WHERE name = "Goblin_Headman"
 UPDATE mob_groups set minLevel = 76, maxLevel = 78 WHERE name = "Goblin_Marksman" and zoneid = 12;
 UPDATE mob_groups set minLevel = 76, maxLevel = 79 WHERE name = "Moblin_Engineman" and zoneid = 12;
 UPDATE mob_groups set minLevel = 76, maxLevel = 79 WHERE name = "Moblin_Topsman" and zoneid = 12;
+
+-- ------------------------------------------------------------
+-- Mine_Shaft_2716 (Zone 13)
+-- ------------------------------------------------------------
+
+UPDATE mob_groups SET minlevel='45',maxlevel='45', HP='5800' WHERE name='Twilotak' AND groupid='6' AND zoneid='13';
+UPDATE mob_groups SET minlevel='39',maxlevel='41' WHERE name='Moblin_Wisewoman' AND groupid='7' AND zoneid='13';
+UPDATE mob_groups SET minlevel='39',maxlevel='41' WHERE name='Moblin_Clergyman' AND groupid='8' AND zoneid='13';
 
 -- ------------------------------------------------------------
 -- Promyvion-Holla (Zone 16)
@@ -1036,7 +1044,7 @@ UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Goblin_Bushwhacker' AND 
 UPDATE mob_groups SET content_tag='WOTG' WHERE name='Teporingo' AND groupid='10' AND zoneid='191';
 
 INSERT INTO `mob_groups` (`groupid`, `poolid`, `zoneid`, `name`, `respawntime`, `spawntype`, `dropid`, `HP`, `MP`, `minLevel`, `maxLevel`, `allegiance`) VALUES
-(40,3772,191,'Stickpin',330,0,963,0,0,7,9,0),           -- These are in prep for complete zone revamps
+(40,3772,191,'Stickpin',330,0,6043,0,0,7,9,0),           -- These are in prep for complete zone revamps
 (41,1527,191,'Giant_Grub',330,0,2341,0,0,9,12,0),       -- These are in prep for complete zone revamps
 (42,1666,191,'Goblin_Gambler',330,0,1119,0,0,21,23,0),  -- These are in prep for complete zone revamps
 (43,1683,191,'Goblin_Leecher',330,0,1107,0,0,21,23,0),  -- These are in prep for complete zone revamps

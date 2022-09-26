@@ -4788,9 +4788,9 @@ INSERT INTO `mob_droplist` VALUES (536,2,0,1000,936,0);          -- Chunk Of Roc
 -- ZoneID: 227 - Crossbones War
 -- ZoneID: 228 - Crossbones Blm
 -- ZoneID: 228 - Crossbones War
-INSERT INTO `mob_droplist` VALUES (537,0,0,1000,880,180);  -- Bone Chip (18.0%)
-INSERT INTO `mob_droplist` VALUES (537,0,0,1000,13095,90); -- Sand Charm (9.0%)
-INSERT INTO `mob_droplist` VALUES (537,2,0,1000,880,0);    -- Bone Chip (Steal)
+INSERT INTO `mob_droplist` VALUES (537,0,0,1000,880,@COMMON); -- Bone Chip (Common, 15%)
+INSERT INTO `mob_droplist` VALUES (537,0,0,1000,13095,@RARE); -- Sand Charm (Rare, 5%)
+INSERT INTO `mob_droplist` VALUES (537,2,0,1000,880,0);       -- Bone Chip (Steal)
 
 -- ZoneID: 196 - Crushed Krause
 INSERT INTO `mob_droplist` VALUES (538,0,0,1000,825,@ALWAYS);     -- Square Of Cotton Cloth (Always, 100%)
@@ -4894,7 +4894,7 @@ INSERT INTO `mob_droplist` VALUES (551,0,0,1000,1057,@VRARE);  -- Toraimarai Cof
 -- ZoneID: 151 - Cutter
 INSERT INTO `mob_droplist` VALUES (552,0,0,1000,936,@ALWAYS);    -- Chunk Of Rock Salt (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (552,0,0,1000,881,@VCOMMON);   -- Crab Shell (Very Common, 24%)
-INSERT INTO `mob_droplist` VALUES (552,0,0,1000,4400,@UNCOMMON); -- Slice Of Land Crab Meat (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (552,0,0,1000,4400,@VCOMMON);  -- Slice Of Land Crab Meat (Very Common, 24%)
 INSERT INTO `mob_droplist` VALUES (552,0,0,1000,4400,@UNCOMMON); -- Slice Of Land Crab Meat (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (552,0,0,1000,4400,@UNCOMMON); -- Slice Of Land Crab Meat (Uncommon, 10%)
 INSERT INTO `mob_droplist` VALUES (552,2,0,1000,936,0);          -- Chunk Of Rock Salt (Steal)
