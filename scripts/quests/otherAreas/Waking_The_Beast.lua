@@ -38,7 +38,7 @@ quest.sections =
         {
             ['qm3'] =
             {
-                onTrigger = quest:event(207)
+                onTrigger = quest:progressEvent(207)
             },
 
             onEventFinish =
@@ -64,15 +64,15 @@ quest.sections =
             onEventFinish =
             {
                 [208] = function(player, csid, option, npc)
-                    quest:setVar(player, 'Option', getConquestTally())
-                    player:delKeyItem(xi.ki.FADED_RUBY)
+                    if quest:complete(player) then
+                        quest:setVar(player, 'State', getConquestTally())
+                        player:delKeyItem(xi.ki.FADED_RUBY)
 
-                    quest:complete(player)
-
-                    if quest:getVar(player, 'Option') < getConquestTally() then
-                        player:addTitle(xi.title.DISTURBER_OF_SLUMBER)
-                    else
-                        player:addTitle(quest.reward.INTERRUPTOR_OF_DREAMS)
+                        if quest:getVar(player, 'Option') == 0 then
+                            player:addTitle(xi.title.DISTURBER_OF_SLUMBER)
+                        else
+                            player:addTitle(quest.reward.INTERRUPTOR_OF_DREAMS)
+                        end
                     end
                 end,
             },
@@ -82,7 +82,7 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_COMPLETED and
-            quest:getVar(player, 'Option') < getConquestTally
+            quest:getVar(player, 'Stage') < getConquestTally
         end,
 
         [xi.zone.LA_THEINE_PLATEAU] =
@@ -92,7 +92,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.ki.FADED_RUBY) then
                         return quest:progressEvent(208)
-                    elseif quest:getVar(player, 'Option') < getConquestTally then
+                    elseif not player:hasKeyItem(xi.ki.RAINBOW_RESONATOR) then
                         return quest:progressEvent(207)
                     end
                 end,
@@ -102,19 +102,14 @@ quest.sections =
             {
                 [207] = function(player, csid, option, npc)
                     npcUtil.giveKeyItem(player, xi.ki.RAINBOW_RESONATOR)
-                    quest:begin(player)
                 end,
 
                 [208] = function(player, csid, option, npc)
-                    if player:getFreeSlotsCount() == 0 then
-                        player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, xi.items.CARBUNCLES_POLE)
-                    else
-                        quest:setVar(player, 'Option', getConquestTally())
+                    if quest:complete(player) then
+                        quest:setVar(player, 'Stage', getConquestTally())
                         player:delKeyItem(xi.ki.FADED_RUBY)
 
-                        quest:complete(player)
-
-                        if quest:getVar(player, 'Stage') == 0 then
+                        if quest:getVar(player, 'Option') == 0 then
                             player:addTitle(xi.title.DISTURBER_OF_SLUMBER)
                         else
                             player:addTitle(quest.reward.INTERRUPTOR_OF_DREAMS)

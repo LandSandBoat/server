@@ -12997,9 +12997,9 @@ INSERT INTO `mob_groups` VALUES (49,7058,200,'Wanzo-Unzozo',0,128,0,0,0,45,45,0)
 -- Cloister_of_Gales (Zone 201)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,4647,201,'Garuda_Prime_TBW',0,128,0,9500,0,60,60,0);
+INSERT INTO `mob_groups` VALUES (1,1473,201,'Garuda_Prime_TBW',0,128,0,9500,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (2,2951,201,'Ogmios',0,128,0,10000,0,65,65,0);
-INSERT INTO `mob_groups` VALUES (3,1473,201,'Garuda_Prime_TSTBW',0,128,0,700,0,20,20,0);
+INSERT INTO `mob_groups` VALUES (3,4647,201,'Garuda_Prime_TSTBW',0,128,0,700,0,20,20,0);
 INSERT INTO `mob_groups` VALUES (4,1473,201,'Garuda_Prime_WTB',0,128,0,28000,0,80,80,0);
 INSERT INTO `mob_groups` VALUES (5,71,201,'Air_Elemental',0,128,0,3000,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (6,7056,201,'Garuda_Prime_ASA',0,128,0,4000,0,40,40,0);
@@ -13009,10 +13009,10 @@ INSERT INTO `mob_groups` VALUES (7,4647,201,'Garuda_Prime_HTBF',0,128,0,0,0,99,9
 -- Cloister_of_Storms (Zone 202)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,4643,202,'Ramuh_Prime_TBL',0,128,0,8000,0,60,60,0);
+INSERT INTO `mob_groups` VALUES (1,3317,202,'Ramuh_Prime_TBL',0,128,0,8000,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (2,2410,202,'Lightning_Gremlin',0,128,0,6300,0,65,65,0);
 INSERT INTO `mob_groups` VALUES (3,3914,202,'Thunder_Gremlin',0,128,0,2525,0,62,62,0);
-INSERT INTO `mob_groups` VALUES (4,3317,202,'Ramuh_Prime_TSTBL',0,128,0,700,0,20,20,0);
+INSERT INTO `mob_groups` VALUES (4,4643,202,'Ramuh_Prime_TSTBL',0,128,0,700,0,20,20,0);
 INSERT INTO `mob_groups` VALUES (5,3317,202,'Ramuh_Prime_WTB',0,128,0,27000,0,85,85,0);
 INSERT INTO `mob_groups` VALUES (6,3912,202,'Thunder_Elemental',0,128,0,3000,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (7,7052,202,'Ramuh_Prime_ASA',0,128,0,4000,0,40,40,0);
@@ -13022,9 +13022,9 @@ INSERT INTO `mob_groups` VALUES (8,4643,202,'Ramuh_Prime_HTBF',0,128,0,0,0,99,99
 -- Cloister_of_Frost (Zone 203)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,4642,203,'Shiva_Prime_TBI',0,128,0,9500,0,60,60,0);
+INSERT INTO `mob_groups` VALUES (1,3607,203,'Shiva_Prime_TBI',0,128,0,9500,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (2,1126,203,'Dryad',0,128,0,1960,0,50,50,0);
-INSERT INTO `mob_groups` VALUES (3,3607,203,'Shiva_Prime_TSTBI',0,128,0,700,0,20,20,0);
+INSERT INTO `mob_groups` VALUES (3,4642,203,'Shiva_Prime_TSTBI',0,128,0,700,0,20,20,0);
 INSERT INTO `mob_groups` VALUES (4,3607,203,'Shiva_Prime_WTB',0,128,0,18000,0,85,85,0);
 INSERT INTO `mob_groups` VALUES (5,2043,203,'Ice_Elemental',0,128,0,3000,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (6,7057,203,'Shiva_Prime_ASA',0,128,0,4000,0,40,40,0);
@@ -13202,8 +13202,8 @@ INSERT INTO `mob_groups` VALUES (75,4006,206,'Trion',0,128,0,0,0,75,75,1); -- al
 -- Cloister_of_Flames (Zone 207)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,4645,207,'Ifrit_Prime_TBF',0,128,0,7650,0,60,60,0);
-INSERT INTO `mob_groups` VALUES (2,2050,207,'Ifrit_Prime_TSTBF',0,128,0,700,0,20,20,0);
+INSERT INTO `mob_groups` VALUES (1,2050,207,'Ifrit_Prime_TBF',0,128,0,7650,0,60,60,0);
+INSERT INTO `mob_groups` VALUES (2,4645,207,'Ifrit_Prime_TSTBF',0,128,0,700,0,20,20,0);
 INSERT INTO `mob_groups` VALUES (3,2050,207,'Ifrit_Prime_WTB',0,128,0,27000,0,85,85,0);
 INSERT INTO `mob_groups` VALUES (4,1341,207,'Fire_Elemental',0,128,0,3000,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (5,7054,207,'Ifrit_Prime_ASA',0,128,0,4000,0,40,40,0);
@@ -13262,9 +13262,9 @@ INSERT INTO `mob_groups` VALUES (44,6902,208,'Centurio_XX-I',0,128,0,0,0,99,99,0
 -- Cloister_of_Tremors (Zone 209)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,4644,209,'Titan_Prime_TBE',0,128,0,9500,0,60,60,0);
+INSERT INTO `mob_groups` VALUES (1,3931,209,'Titan_Prime_TBE',0,128,0,9500,0,60,60,0);
 INSERT INTO `mob_groups` VALUES (2,1451,209,'Galgalim',0,128,0,6000,0,56,56,0);
-INSERT INTO `mob_groups` VALUES (3,3931,209,'Titan_Prime_TSTBE',0,128,0,700,0,20,20,0);
+INSERT INTO `mob_groups` VALUES (3,4644,209,'Titan_Prime_TSTBE',0,128,0,700,0,20,20,0);
 INSERT INTO `mob_groups` VALUES (4,3931,209,'Titan_Prime_WTB',0,128,0,24000,0,85,85,0);
 INSERT INTO `mob_groups` VALUES (5,6140,209,'Earth_Elemental',0,128,0,3000,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (6,7053,209,'Titan_Prime_ASA',0,128,0,4000,0,40,40,0);
@@ -13281,8 +13281,8 @@ INSERT INTO `mob_groups` VALUES (1,7041,210,'Garrison',0,129,0,0,0,30,35,1); -- 
 -- Cloister_of_Tides (Zone 211)
 -- ------------------------------------------------------------
 
-INSERT INTO `mob_groups` VALUES (1,4646,211,'Leviathan_Prime_TBW',0,128,0,9500,0,60,60,0);
-INSERT INTO `mob_groups` VALUES (2,2402,211,'Leviathan_Prime_TSTBW',0,128,0,700,0,20,20,0);
+INSERT INTO `mob_groups` VALUES (1,2402,211,'Leviathan_Prime_TBW',0,128,0,9500,0,60,60,0);
+INSERT INTO `mob_groups` VALUES (2,4646,211,'Leviathan_Prime_TSTBW',0,128,0,700,0,20,20,0);
 INSERT INTO `mob_groups` VALUES (3,2402,211,'Leviathan_Prime_WTB',0,128,0,27000,0,85,85,0);
 INSERT INTO `mob_groups` VALUES (4,4309,211,'Water_Elemental',0,128,0,3000,0,75,75,0);
 INSERT INTO `mob_groups` VALUES (5,7055,211,'Leviathan_Prime_ASA',0,128,0,4000,0,40,40,0);

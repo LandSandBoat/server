@@ -6,6 +6,7 @@ local ID = require("scripts/zones/Full_Moon_Fountain/IDs")
 require("scripts/globals/battlefield")
 require("scripts/globals/keyitems")
 require("scripts/globals/items")
+require('scripts/globals/npc_util')
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
@@ -64,22 +65,38 @@ battlefield_object.onEventUpdate = function(player, csid, option)
 end
 
 battlefield_object.onEventFinish = function(player, csid, option)
+    -- Only award players with faded ruby if they have appropriately
+    -- progressed through all battlefields.
     if csid == 32001 then
-        player:delKeyItem(xi.ki.EYE_OF_FLAMES)
-        player:delKeyItem(xi.ki.EYE_OF_FROST)
-        player:delKeyItem(xi.ki.EYE_OF_GALES)
-        player:delKeyItem(xi.ki.EYE_OF_STORMS)
-        player:delKeyItem(xi.ki.EYE_OF_TIDES)
-        player:delKeyItem(xi.ki.EYE_OF_TREMORS)
-        player:delKeyItem(xi.ki.RAINBOW_RESONATOR)
+        local key =
+        {
+            xi.ki.EYE_OF_FLAMES,
+            xi.ki.EYE_OF_FROST,
+            xi.ki.EYE_OF_GALES,
+            xi.ki.EYE_OF_STORMS,
+            xi.ki.EYE_OF_TIDES,
+            xi.ki.EYE_OF_TREMORS,
+            xi.ki.RAINBOW_RESONATOR,
+        }
+        local check = true
 
-        player:addKeyItem(xi.ki.FADED_RUBY)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.FADED_RUBY)
+        for i = 0, 7 do
+            if not player:hasKeyItem(key[i]) then
+                check = false
+                return
+            end
+        end
 
-        if option == 0 then
-            player:setCharVar("Quest[4][32]stage", 1)
-        else
-            player:setCharVar("Quest[4][32]stage", 0)
+        if check then
+            for i = 0, 7 do
+                player:delKeyItem(xi.ki.key[i])
+            end
+            npcUtil.giveKeyItem(player, xi.ki.FADED_RUBY)
+            if option == 0 then
+                player:setCharVar("Quest[4][32]Option", 1)
+            else
+                player:setCharVar("Quest[4][32]Option", 0)
+            end
         end
     end
 end
