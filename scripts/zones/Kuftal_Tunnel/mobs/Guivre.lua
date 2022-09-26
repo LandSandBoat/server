@@ -59,6 +59,7 @@ local pathBranch5 =
 local pathFind =
 {
     ['pathFind1'] = function(mob, reversePath)
+        local path = {}
         if reversePath == 0 or reversePath == 1 then
             mob:setLocalVar("mobPath", 2)
             local reverseCheck = math.random(0,2)
@@ -73,6 +74,7 @@ local pathFind =
         end
     end,
     ['pathFind2'] = function(mob, reversePath)
+        local path = {}
         mob:setLocalVar("mobPath", 3)
         if reversePath == 0 then
             path = pathBranch2
@@ -82,15 +84,15 @@ local pathFind =
         return path
     end,
     ['pathFind3'] = function(mob, reversePath)
+        local path = {}
         mob:setLocalVar("mobPath", 4)
-        if reversePath == 0 then
-            path = pathBranch3
-        else
+        if reversePath == 0 or reversePath == 1 then
             path = pathBranch3
         end
         return path
     end,
     ['pathFind4'] = function(mob, reversePath)
+        local path = {}
         if reversePath == 0 then
             mob:setLocalVar("mobPath", 5)
             path = pathBranch4
@@ -109,6 +111,7 @@ local pathFind =
         return path
     end,
     ['pathFind5'] = function(mob, reversePath)
+        local path = {}
         if reversePath == 0 then
             local reverseCheck = math.random(0,2)
             if reverseCheck == 0 then
@@ -127,6 +130,7 @@ local pathFind =
         return path
     end,
     ['pathFind6'] = function(mob, reversePath)
+        local path = {}
         if reversePath == 0 or reversePath == 1 then
             mob:setLocalVar("mobPath", 1)
             path = pathStart
