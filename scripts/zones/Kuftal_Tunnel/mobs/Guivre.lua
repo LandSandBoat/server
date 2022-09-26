@@ -22,19 +22,19 @@ local pathBranch1 =
     { x = 57.09, y = -9.37, z = -96.88 },
     { x = 38.39, y = -8.62, z = -98.74 },
     { x = 15.73, y = -1.02, z = -94.88 },
-    { x = -0.65, y = 0.00, z = -84.13 }
+    { x = -0.65, y = 0.00, z = -84.13 },
 }
 
 local pathBranch2 =
 {
     { x = -40.24, y = 0.00, z = -38.35 },
-    { x = -44.36, y = 0.68, z = 13.98 }
+    { x = -44.36, y = 0.68, z = 13.98 },
 }
 
 local pathBranch3 =
 {
     { x = -31.28, y = -0.23, z = 48.64 },
-    { x = -0.52, y = 0.00, z = 82.02 }
+    { x = -0.52, y = 0.00, z = 82.02 },
 }
 
 local pathBranch4 =
@@ -45,7 +45,7 @@ local pathBranch4 =
     { x = 79.86, y = -8.75, z = 139.89 },
     { x = 85.86, y = -8.82, z = 138.11 },
     { x = 91.87, y = -8.83, z = 142.52 },
-    { x = 101.60, y = -8.71, z = 143.17 }
+    { x = 101.60, y = -8.71, z = 143.17 },
 }
 
 local pathBranch5 =
@@ -53,7 +53,7 @@ local pathBranch5 =
     { x = 100.62, y = -8.75, z = 78.86 },
     { x = 108.29, y = -4.60, z = 54.26 },
     { x = 118.98, y = 0.00, z = 38.12 },
-    { x = 102.00, y = -0.19, z = 3.00 }
+    { x = 102.00, y = -0.19, z = 3.00 },
 }
 
 local pathFind =
@@ -132,7 +132,7 @@ local pathFind =
             path = pathStart
         end
         return path
-    end
+    end,
 }
 
 entity.onMobInitialize = function(mob)
