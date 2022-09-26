@@ -8,7 +8,7 @@ local entity = {}
 
 local pathStart =
 {
-    {x = 102.61, y = 0.92, z = 1.60 }
+    { x = 102.61, y = 0.92, z = 1.60 }
 }
 
 local pathA =
