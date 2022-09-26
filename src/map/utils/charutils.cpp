@@ -1532,7 +1532,7 @@ namespace charutils
                         }
                     }
                 }
-
+                luautils::OnItemDrop(PChar, PItem);
                 delete PItem;
             }
         }
