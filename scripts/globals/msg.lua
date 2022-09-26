@@ -188,7 +188,7 @@ xi.msg.basic =
     TOO_FAR_AWAY           = 78,  -- <target> is too far away.
 
     -- Weaponskills
-    READIES_WS             = 43,  -- ${actor} readies ${weapon_skill}.
+    READIES_WS             = 43,  -- <actor> readies <weapon_skill>.
     CANNOT_USE_WS          = 190, -- The <player> cannot use that weapon ability.
     NOT_ENOUGH_TP          = 192, -- The <player> does not have enough TP.
 
@@ -199,32 +199,32 @@ xi.msg.basic =
     NO_EFFECT_ON_PET       = 336, -- No effect on that pet.
     NO_JUG_PET_ITEM        = 337, -- You do not have the necessary item equipped to call a beast.
     MUST_HAVE_FOOD         = 347, -- You must have pet food equipped to use that command.
-    STATUS_INCREASED       = 562, -- The status parameters of ${target} have increased.
+    STATUS_INCREASED       = 562, -- The status parameters of <target> have increased.
     PET_CANNOT_DO_ACTION   = 574, -- <player>'s pet is currently unable to perform that action.
     PET_NOT_ENOUGH_TP      = 575, -- <player>'s pet does not have enough TP to perform that action.
 
     -- Food
-    IS_FULL                 = 246,  -- ${target} is full.
-    CANNOT_EAT              = 247,  -- ${actor} can't eat the ${item}.
-    EATS_FINDS_ITEM         = 600,  -- ${actor} eats a ${item}.${lb}${actor} finds a ${item2} inside!
-    EATS_FINDS_NOTHING      = 604,  -- ${actor} eats a ${item}, but finds nothing inside...
+    IS_FULL                 = 246,  -- <target> is full.
+    CANNOT_EAT              = 247,  -- <actor> can't eat the <item>.
+    EATS_FINDS_ITEM         = 600,  -- <actor> eats a <item>.<br><actor> finds a <item2> inside!
+    EATS_FINDS_NOTHING      = 604,  -- <actor> eats a <item>, but finds nothing inside...
 
     -- Items
-    ITEM_USES               = 28,   -- ${actor} uses a ${item}.
+    ITEM_USES               = 28,   -- <actor> uses a <item>.
     ITEM_UNABLE_TO_USE      = 55,   -- Unable to use item.
     ITEM_UNABLE_TO_USE_2    = 56,   -- Unable to use item.
-    ITEM_FAILS_TO_ACTIVATE  = 62,   -- The ${item} fails to activate.
-    ITEM_NO_PETRAS          = 65,   -- You are not carrying any Petras.${lb}You cannot use the ${item}.
-    ITEM_DOES_NOT_HAVE      = 91,   -- ${actor} does not have any ${item}.
-    ITEM_CANNOT_USE_ON      = 92,   -- Cannot use the ${item} on ${target}.
-    ITEM_YOU_OBTAIN_FROM    = 98,   -- You obtain a ${item} from ${target}.
-    ITEM_NO_USE_LEVEL       = 104,  -- Unable to use item.${lb}You do not meet the level requirement.
-    ITEM_NO_USE_MEDICATED   = 111,  -- You cannot use ${item} while medicated.
-    ITEM_NO_USE_INVENTORY   = 308,  -- Unable to use the ${item}.${lb}${target}'s inventory is full.
-    ITEM_RECEIVES_EFFECT    = 375,  -- ${actor} uses a ${item}.${lb}${target} receives the effect of ${status}.
-    ITEM_OBTAINS_A          = 376,  -- ${actor} uses a ${item}.${lb}${target} obtains a ${item2}.
-    ITEM_OBTAINS            = 377,  -- ${actor} uses a ${item}.${lb}${target} obtains ${item2}.
-    ITEM_EFFECT_DISAPPEARS  = 378,  -- ${actor} uses a ${item}.${lb}${target}'s ${status} effect disappears!
+    ITEM_FAILS_TO_ACTIVATE  = 62,   -- The <item> fails to activate.
+    ITEM_NO_PETRAS          = 65,   -- You are not carrying any Petras.<br>You cannot use the <item>.
+    ITEM_DOES_NOT_HAVE      = 91,   -- <actor> does not have any <item>.
+    ITEM_CANNOT_USE_ON      = 92,   -- Cannot use the <item> on <target>.
+    ITEM_YOU_OBTAIN_FROM    = 98,   -- You obtain a <item> from <target>.
+    ITEM_NO_USE_LEVEL       = 104,  -- Unable to use item.<br>You do not meet the level requirement.
+    ITEM_NO_USE_MEDICATED   = 111,  -- You cannot use <item> while medicated.
+    ITEM_NO_USE_INVENTORY   = 308,  -- Unable to use the <item>.<br><target>'s inventory is full.
+    ITEM_RECEIVES_EFFECT    = 375,  -- <actor> uses a <item>.<br><target> receives the effect of <status>.
+    ITEM_OBTAINS_A          = 376,  -- <actor> uses a <item>.<br><target> obtains a <item2>.
+    ITEM_OBTAINS            = 377,  -- <actor> uses a <item>.<br><target> obtains <item2>.
+    ITEM_EFFECT_DISAPPEARS  = 378,  -- <actor> uses a <item>.<br><target>'s <status> effect disappears!
 
     -- Ranged
     NO_RANGED_WEAPON       = 216, -- You do not have an appropriate ranged weapon equipped.
@@ -251,15 +251,15 @@ xi.msg.basic =
     ADD_EFFECT_HEAL        = 384, -- Additional effect: <target> recovers <number> HP.
 
     -- Status
-    RECOVERS_HP             = 24,   -- ${target} recovers ${number} HP.
-    RECOVERS_MP             = 25,   -- ${target} recovers ${number} MP.
-    RECOVERS_HP_AND_MP      = 26,   -- ${target} recovers ${number} HP and MP.
-    IS_STATUS               = 203,  -- ${target} is ${status}.
-    IS_NO_LONGER_STATUS     = 204,  -- ${target} is no longer ${status}.
-    GAINS_EFFECT_OF_STATUS  = 205,  -- ${target} gains the effect of ${status}.
-    STATUS_WEARS_OFF        = 206,  -- ${target}'s ${status} effect wears off.
-    ABOUT_TO_WEAR_OFF       = 251,  -- The effect of ${status} is about to wear off.
-    ALL_ABILITIES_RECHARGED = 361,  -- All of ${target}'s abilities are recharged.
+    RECOVERS_HP             = 24,   -- <target> recovers <number> HP.
+    RECOVERS_MP             = 25,   -- <target> recovers <number> MP.
+    RECOVERS_HP_AND_MP      = 26,   -- <target> recovers <number> HP and MP.
+    IS_STATUS               = 203,  -- <target> is <status>.
+    IS_NO_LONGER_STATUS     = 204,  -- <target> is no longer <status>.
+    GAINS_EFFECT_OF_STATUS  = 205,  -- <target> gains the effect of <status>.
+    STATUS_WEARS_OFF        = 206,  -- <target>'s <status> effect wears off.
+    ABOUT_TO_WEAR_OFF       = 251,  -- The effect of <status> is about to wear off.
+    ALL_ABILITIES_RECHARGED = 361,  -- All of <target>'s abilities are recharged.
 
     -- Battlefield
     UNABLE_TO_ACCESS_SJ     = 107, -- <player> is temporarily unable to access support job abilities
@@ -299,6 +299,7 @@ xi.msg.basic =
     -- PUP
     AUTO_OVERLOAD_CHANCE   = 798, -- The <pet>'s overload chance is <number>%.
     AUTO_OVERLOADED        = 799, -- The <pet>'s overload chance is <number>%. The <pet> is overloaded!
+    PROVOKE_SWITCH         = 418, -- The <actor> uses <action> on <target>. The <target> switches to <actor>!
 
     -- DNC
     NO_FINISHINGMOVES      = 524, -- You have not earned enough finishing moves to perform that action.
@@ -322,23 +323,23 @@ xi.msg.basic =
     GAMBIT_GAIN            = 672, -- <Player> uses <Ability>. <Target> receives the effect of Gambit, reducing magic defense against magic of a certain element.
 
     -- Fields / Grounds of Valor
-    FOV_DEFEATED_TARGET     = 558,  -- You defeated a designated target.${lb}(Progress: ${number}/${number2})
+    FOV_DEFEATED_TARGET     = 558,  -- You defeated a designated target.<br>(Progress: <number>/<number2>)
     FOV_COMPLETED_REGIME    = 559,  -- You have successfully completed the training regime.
-    FOV_OBTAINS_GIL         = 565,  -- ${target} obtains ${gil}.
-    FOV_OBTAINS_TABS        = 566,  -- ${target} obtains ${number} tab.${lb}(Total: ${number})
+    FOV_OBTAINS_GIL         = 565,  -- <target> obtains <gil>.
+    FOV_OBTAINS_TABS        = 566,  -- <target> obtains <number> tab.<br>(Total: <number>)
     FOV_REGIME_BEGINS_ANEW  = 643,  -- Your current training regime will begin anew!
 
     -- Magian Trials
     MAGIAN_TRIAL_COMPLETE   = 584,  -- You have completed Trial <trialID>. Report your success to a Magian Moogle.
 
     -- Depoil Statuses
-    DESPOIL_ATT_DOWN        = 593,  -- ${actor} uses ${ability}.${lb}${actor} steals a ${item} from ${target}.${lb}Additional effect: ${target} is afflicted with Attack Down.
-    DESPOIL_DEF_DOWN        = 594,  -- ${actor} uses ${ability}.${lb}${actor} steals a ${item} from ${target}.${lb}Additional effect: ${target} is afflicted with Defense Down.
-    DESPOIL_MATT_DOWN       = 595,  -- ${actor} uses ${ability}.${lb}${actor} steals a ${item} from ${target}.${lb}Additional effect: ${target} is afflicted with Magic Atk. Down.
-    DESPOIL_MDEF_DOWN       = 596,  -- ${actor} uses ${ability}.${lb}${actor} steals a ${item} from ${target}.${lb}Additional effect: ${target} is afflicted with Magic Def. Down.
-    DESPOIL_EVA_DOWN        = 597,  -- ${actor} uses ${ability}.${lb}${actor} steals a ${item} from ${target}.${lb}Additional effect: ${target} is afflicted with Evasion Down.
-    DESPOIL_ACC_DOWN        = 598,  -- ${actor} uses ${ability}.${lb}${actor} steals a ${item} from ${target}.${lb}Additional effect: ${target} is afflicted with Accuracy Down.
-    DESPOIL_SLOW            = 599,  -- ${actor} uses ${ability}.${lb}${actor} steals a ${item} from ${target}.${lb}Additional effect: ${target} is afflicted with Slow.
+    DESPOIL_ATT_DOWN        = 593,  -- <actor> uses <ability>.<br><actor> steals a <item> from <target>.<br>Additional effect: <target> is afflicted with Attack Down.
+    DESPOIL_DEF_DOWN        = 594,  -- <actor> uses <ability>.<br><actor> steals a <item> from <target>.<br>Additional effect: <target> is afflicted with Defense Down.
+    DESPOIL_MATT_DOWN       = 595,  -- <actor> uses <ability>.<br><actor> steals a <item> from <target>.<br>Additional effect: <target> is afflicted with Magic Atk. Down.
+    DESPOIL_MDEF_DOWN       = 596,  -- <actor> uses <ability>.<br><actor> steals a <item> from <target>.<br>Additional effect: <target> is afflicted with Magic Def. Down.
+    DESPOIL_EVA_DOWN        = 597,  -- <actor> uses <ability>.<br><actor> steals a <item> from <target>.<br>Additional effect: <target> is afflicted with Evasion Down.
+    DESPOIL_ACC_DOWN        = 598,  -- <actor> uses <ability>.<br><actor> steals a <item> from <target>.<br>Additional effect: <target> is afflicted with Accuracy Down.
+    DESPOIL_SLOW            = 599,  -- <actor> uses <ability>.<br><actor> steals a <item> from <target>.<br>Additional effect: <target> is afflicted with Slow.
 
     -- Records of Eminence
     ROE_COMPLETE            = 690,  -- You have completed the following Records of Eminence objective: <record>.

@@ -1329,7 +1329,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             CPetEntity* PPetEntity = dynamic_cast<CPetEntity*>(PPet);
             CPetSkill*  PPetSkill  = battleutils::GetPetSkill(PAbility->getID());
 
-            if (PPetEntity && PPetSkill) // is a real pet (not charmed) and has pet ability  - don't display msg and notify pet
+            if (PPetEntity && PPetEntity->getPetType() != PET_TYPE::JUG_PET && PPetSkill) // is a real pet (not charmed or a jugpet which is mob-like) and has pet ability - don't display msg and notify pet
             {
                 actionList_t& actionList     = action.getNewActionList();
                 actionList.ActionTargetID    = PTarget->id;
@@ -2566,14 +2566,9 @@ void CCharEntity::tryStartNextEvent()
     if (PNpc && PNpc->objtype == TYPE_NPC)
     {
         PNpc->SetLocalVar("pauseNPCPathing", 1);
-
-        if (PNpc->PAI->PathFind != nullptr)
-        {
-            PNpc->PAI->PathFind->Clear();
-        }
     }
 
-    // If it's a cutsene, we lock the player immediately
+    // If it's a cutscene, we lock the player immediately
     setLocked(currentEvent->type == CUTSCENE);
 
     if (currentEvent->strings.empty())

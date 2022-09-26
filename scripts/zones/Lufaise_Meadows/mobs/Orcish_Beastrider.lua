@@ -2,7 +2,7 @@
 -- Area: Lufaise_Meadows
 --  Mob: Orcish Beastrider
 -----------------------------------
-mixins = {require("scripts/mixins/fomor_hate")}
+mixins = { require("scripts/mixins/fomor_hate") }
 -----------------------------------
 local entity = {}
 

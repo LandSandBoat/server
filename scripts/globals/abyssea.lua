@@ -38,7 +38,8 @@ xi.abyssea.lightType =
 }
 
 local lightData =
-{-- Light Type                         Cap  Maximum Tier
+{
+--  Light Type                         Cap  Maximum Tier
     [xi.abyssea.lightType.PEARL  ] = { 230, 2 },
     [xi.abyssea.lightType.GOLDEN ] = { 200, 2 },
     [xi.abyssea.lightType.SILVERY] = { 200, 2 },
@@ -82,8 +83,9 @@ xi.abyssea.itemType =
 
 local itemType = xi.abyssea.itemType
 
-xi.abyssea.visionsCruorProspectorItems=
-{-- Sel      Item                                       Cost,  Qty
+xi.abyssea.visionsCruorProspectorItems =
+{
+--  Sel      Item                                       Cost,  Qty
     [ 1] = { xi.items.PERLE_SALADE,                     4000 },
     [ 2] = { xi.items.PERLE_HAUBERK,                    5000 },
     [ 3] = { xi.items.PERLE_MOUFLES,                    3000 },
@@ -104,8 +106,9 @@ xi.abyssea.visionsCruorProspectorItems=
     [18] = { xi.items.SHADOW_THRONE,                 2000000 },
 }
 
-xi.abyssea.visionsCruorProspectorTemps=
-{-- Sel      Item                          Cost, Qty
+xi.abyssea.visionsCruorProspectorTemps =
+{
+--  Sel      Item                          Cost, Qty
     [ 1] = { xi.items.LUCID_POTION_I,             80 },
     [ 2] = { xi.items.LUCID_ETHER_I,              80 },
     [ 3] = { xi.items.BOTTLE_OF_CATHOLICON,       80 },
@@ -126,7 +129,8 @@ xi.abyssea.visionsCruorProspectorTemps=
 }
 
 xi.abyssea.visionsCruorProspectorBuffs=
-{-- Sel          Effect (Abyssea)       Actual Effect          Amt, KeyItem for Bonus,           Bonus Mult      Cost
+{
+--  Sel          Effect (Abyssea)       Actual Effect          Amt, KeyItem for Bonus,           Bonus Mult      Cost
     [ 6] = { { { xi.effect.ABYSSEA_HP,  xi.effect.MAX_HP_BOOST, 20, xi.abyssea.abyssiteType.MERIT,       10 }, },  50 },
     [ 7] = { { { xi.effect.ABYSSEA_MP,  xi.effect.MAX_MP_BOOST, 10, xi.abyssea.abyssiteType.MERIT,        5 }, }, 120 },
     [ 8] = { { { xi.effect.ABYSSEA_STR, xi.effect.STR_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
@@ -150,7 +154,8 @@ xi.abyssea.visionsCruorProspectorBuffs=
 -- Sequential Abyssite Key Items.
 -- NOTE: Demilune is not sequential, and handled in a separate table
 local abyssiteKeyItems =
-{--  Type                                      Beginning KI                            Ending KI
+{
+--   Type                                      Beginning KI                            Ending KI
     [xi.abyssea.abyssiteType.SOJOURN     ] = { xi.ki.IVORY_ABYSSITE_OF_SOJOURN,        xi.ki.EMERALD_ABYSSITE_OF_SOJOURN    },
     [xi.abyssea.abyssiteType.CELERITY    ] = { xi.ki.AZURE_ABYSSITE_OF_CELERITY,       xi.ki.IVORY_ABYSSITE_OF_CELERITY     },
     [xi.abyssea.abyssiteType.AVARICE     ] = { xi.ki.VIRIDIAN_ABYSSITE_OF_AVARICE,     xi.ki.VERMILLION_ABYSSITE_OF_AVARICE },
@@ -548,7 +553,7 @@ xi.abyssea.visionsCruorProspectorOnEventFinish = function (player, csid, option,
 
         if
             itemCost <= cruorTotal and
-            npcUtil.giveItem(player, {{ itemData[1], itemQty }})
+            npcUtil.giveItem(player, { { itemData[1], itemQty } })
         then
             player:delCurrency("cruor", itemCost)
         end
@@ -558,7 +563,7 @@ xi.abyssea.visionsCruorProspectorOnEventFinish = function (player, csid, option,
 
         if
             itemCost <= cruorTotal and
-            npcUtil.giveTempItem(player, {{ itemData[1], 1 }})
+            npcUtil.giveTempItem(player, { { itemData[1], 1 } })
         then
             player:delCurrency("cruor", itemCost)
         end
@@ -1104,7 +1109,8 @@ end
 -- Traverser Stone, Abyssea Warp
 -----------------------------------
 local supportNPCData =
-{--                          Traverser,  Warp
+{
+--                           Traverser,  Warp
     [xi.zone.HEAVENS_TOWER]  = {   434,   433 },
     [xi.zone.RULUDE_GARDENS] = { 10186, 10185 },
     [xi.zone.PORT_BASTOK]    = {   405,   404 },

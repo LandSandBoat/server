@@ -41,7 +41,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 111 then -- Finish "Redeeming Rocks" quest
         npcUtil.completeQuest(player, xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.REDEEMING_ROCKS, {
             item = 15998,
-            var = {"RedeemingDay"}
+            var = { "RedeemingDay" }
         })
     end
 end

@@ -5,7 +5,7 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
 local effect_object = {}
-local physSDT = {xi.mod.SLASH_SDT, xi.mod.PIERCE_SDT, xi.mod.IMPACT_SDT, xi.mod.HTH_SDT}
+local physSDT = { xi.mod.SLASH_SDT, xi.mod.PIERCE_SDT, xi.mod.IMPACT_SDT, xi.mod.HTH_SDT }
 
 effect_object.onEffectGain = function(target, effect)
     for i = 1, #physSDT do

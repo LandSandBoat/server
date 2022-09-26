@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
     if
         player:getCharVar("darkPuppetCS") >= 4 and
         npcUtil.tradeHas(trade, 16940) and
-        npcUtil.popFromQM(player, npc, ID.mob.DARK_PUPPET_OFFSET + 2, {hide = 0})
+        npcUtil.popFromQM(player, npc, ID.mob.DARK_PUPPET_OFFSET + 2, { hide = 0 })
     then
         player:messageSpecial(ID.text.GERWITZS_SOUL_DIALOG)
         player:confirmTrade()

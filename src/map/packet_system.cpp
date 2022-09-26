@@ -842,7 +842,7 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
             }
 
             CBaseEntity* PNpc = nullptr;
-            PNpc              = PChar->GetEntity(TargID, TYPE_NPC);
+            PNpc              = PChar->GetEntity(TargID, TYPE_NPC | TYPE_MOB);
 
             if (PNpc != nullptr && distance(PNpc->loc.p, PChar->loc.p) <= 10 && (PNpc->PAI->IsSpawned() || PChar->m_moghouseID != 0))
             {
@@ -4771,10 +4771,10 @@ void SmallPacket0x096(map_session_data_t* const PSession, CCharEntity* const PCh
 
     uint8 numItems = data.ref<uint8>(0x09);
 
-    std::vector<uint8> slotQty(MAX_CONTAINER_SIZE);
-
-    if (numItems > 8)
+    auto PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(invSlotID);
+    if (!PItem || ItemID != PItem->getID() || PItem->getQuantity() == 0 || numItems > 8)
     {
+        // Detect invalid crystal usage
         // Prevent crafting exploit to crash on container size > 8
         PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, 316));
         return;
@@ -4782,6 +4782,7 @@ void SmallPacket0x096(map_session_data_t* const PSession, CCharEntity* const PCh
 
     PChar->CraftContainer->setItem(0, ItemID, invSlotID, 0);
 
+    std::vector<uint8> slotQty(MAX_CONTAINER_SIZE);
     for (int32 SlotID = 0; SlotID < numItems; ++SlotID)
     {
         ItemID    = data.ref<uint16>(0x0A + SlotID * 2);
@@ -6797,6 +6798,7 @@ void SmallPacket0x100(map_session_data_t* const PSession, CCharEntity* const PCh
             JOBTYPE prevjob = PChar->GetMJob();
             PChar->resetPetZoningInfo();
 
+            charutils::SaveJobChangeGear(PChar);
             charutils::RemoveAllEquipment(PChar);
             PChar->SetMJob(mjob);
             PChar->SetMLevel(PChar->jobs.job[PChar->GetMJob()]);
@@ -6864,8 +6866,9 @@ void SmallPacket0x100(map_session_data_t* const PSession, CCharEntity* const PCh
         PChar->PRecastContainer->ChangeJob();
         charutils::BuildingCharAbilityTable(PChar);
         charutils::BuildingCharWeaponSkills(PChar);
+        charutils::LoadJobChangeGear(PChar);
 
-        PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DISPELABLE | EFFECTFLAG_ON_JOBCHANGE);
+        PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DISPELABLE | EFFECTFLAG_ROLL | EFFECTFLAG_ON_JOBCHANGE);
 
         PChar->ForParty([](CBattleEntity* PMember)
                         { ((CCharEntity*)PMember)->PLatentEffectContainer->CheckLatentsPartyJobs(); });

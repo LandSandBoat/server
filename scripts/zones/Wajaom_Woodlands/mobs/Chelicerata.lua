@@ -3,7 +3,7 @@
 --   NM: Chelicerata
 -----------------------------------
 require("scripts/globals/hunts")
-mixins = {require("scripts/mixins/families/chigoe")}
+mixins = { require("scripts/mixins/families/chigoe") }
 -----------------------------------
 local entity = {}
 

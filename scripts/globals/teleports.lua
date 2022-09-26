@@ -89,67 +89,67 @@ xi.teleport.id = ids
 
 local destinations =
 {
-    [ids.DEM]                   = { 220.000,   19.104,  300.000,   0, 108}, -- {R}
-    [ids.HOLLA]                 = { 420.000,   19.104,   20.000,   0, 102}, -- {R}
-    [ids.YHOAT]                 = {-280.942,    0.596, -144.156,   0, 124}, -- {R}
-    [ids.VAHZL]                 = { 150.258,  -21.048,  -37.256,  94, 112}, -- {R}
-    [ids.MEA]                   = { 100.000,   35.151,  340.000,   0, 117}, -- {R}
-    [ids.ALTEP]                 = { -61.942,    3.949,  224.900,   0, 114}, -- {R}
-    [ids.JUGNER]                = {-122.862,    0.000, -163.154, 192,  82}, -- {R}
-    [ids.PASHH]                 = { 345.472,   24.280, -114.731,  99,  90}, -- {R}
-    [ids.MERIPH]                = { 305.989,  -14.978,   18.960, 192,  97}, -- {R}
-    [ids.AZOUPH]                = { 495.450,  -28.250, -478.430,  32,  79}, -- {R}
-    [ids.BHAFLAU]               = {-172.863,  -12.250, -801.021, 128,  52}, -- {R}
-    [ids.ZHAYOLM]               = { 681.950,  -24.000,  369.936,  64,  61}, -- {R}
-    [ids.DVUCCA]                = {-252.715,   -7.666,  -30.640, 128,  79}, -- {R}
-    [ids.REEF]                  = {   9.304,   -7.376,  620.133,   0,  54}, -- {R}
-    [ids.ALZADAAL]              = { 180.000,    0.000,   20.000,   0,  72}, -- {R}
-    [ids.CUTTER]                = {-456.000,   -3.000, -405.000, -405, 54},
-    [ids.A_REM]                 = {-579.000,   -0.050, -100.000, 192,  72},
-    [ids.B_REM]                 = { 620.000,    0.000, -260.640,  72,  72}, -- {R}
-    [ids.S_REM]                 = { 580.000,    0.000,  500.000, 192,  72}, -- {R}
---  [ids.Z_REM]                 = { 000.000,    0.000,  000.000, 000,  72},
-    [ids.MAAT]                  = {  11.000,    3.000,  117.000,   0, 243},
-    [ids.EXITPROMMEA]           = { 179.000,   35.000,  256.000,  63, 117},
-    [ids.EXITPROMHOLLA]         = { 337.000,   19.000,  -60.000, 125, 102},
-    [ids.EXITPROMDEM]           = { 136.000,   19.000,  220.000, 130, 108},
-    [ids.LUFAISE]               = { 438.000,    0.000,  -18.000,  11,  24},
-    [ids.CHOCO_SANDORIA]        = {  -8.557,    1.999,  -80.093,  64, 230}, -- {R}
-    [ids.CHOCO_BASTOK]          = {  40.164,    0.000,  -83.578,  64, 234}, -- {R}
-    [ids.CHOCO_WINDURST]        = { 113.355,   -5.000, -133.118,   0, 241}, -- {R}
-    [ids.CHOCO_UPPER_JEUNO]     = { -44.000,    7.900,   98.000, 170, 244},
-    [ids.DUCALGUARD]            = {  48.930,   10.002,  -71.032, 195, 243},
-    [ids.PURGONORGO]            = {-398.689,   -3.038, -415.835,   0,   4}, -- {R}
-    [ids.AZOUPH_SP]             = { 522.730,  -28.009, -502.621, 161,  79}, -- {R}
-    [ids.MAMOOL_SP]             = {-210.291,  -11.500, -818.056, 255,  52}, -- {R}
-    [ids.HALVUNG_SP]            = { 688.994,  -23.960,  351.496, 191,  61}, -- {R}
-    [ids.DVUCCA_SP]             = {-265.632,   -6.000,  -29.472,  94,  79}, -- {R}
-    [ids.ILRUSI_SP]             = {  17.540,   -7.250,  627.968, 254,  54}, -- {R}
-    [ids.NYZUL_SP]              = { 222.798,   -0.500,   19.872,   0,  72}, -- {R}
-    [ids.SKY]                   = {-134.145,  -32.328, -205.947, 215, 130}, -- {R}
-    [ids.CLOISTER_OF_FLAMES]    = {-716.461,    0.407, -606.661, 168, 207}, -- {R}
-    [ids.CLOISTER_OF_FROST]     = { 550.403,    0.006,  584.820, 217, 203}, -- {R}
-    [ids.CLOISTER_OF_GALES]     = {-374.919,    0.628, -386.774, 226, 201}, -- {R}
-    [ids.CLOISTER_OF_STORMS]    = { 540.853,  -13.329,  511.298,  82, 202}, -- {R}
-    [ids.CLOISTER_OF_TIDES]     = { 570.294,   36.757,  546.895, 167, 211}, -- {R}
-    [ids.CLOISTER_OF_TREMORS]   = {-540.269,    1.396, -509.800, 192, 209}, -- {R}
-    [ids.GHELSBA_HUT]           = {-156.000,  -10.000,   80.000, 119, 140},
-    [ids.WAJAOM_LEYPOINT]       = {-200.116,  -10.000,   79.879, 213,  51}, -- {R}
-    [ids.VALKURM_VORTEX]        = { 420.062,    0.000, -199.904,  87, 103}, -- {R}
-    [ids.QUFIM_VORTEX]          = {-436.000,  -13.499,  340.117, 107, 126}, -- {R}
-    [ids.LUFAISE_VORTEX]        = { 458.847,    7.999,    5.519,  72,  24}, -- {R}
-    [ids.MISAREAUX_VORTEX]      = {-118.000,  -32.000,  219.000,   3,  25}, -- {R}
-    [ids.MINESHAFT]             = { -93.657, -120.000, -583.561,   0,  13}, -- (R)
-    [ids.WHITEGATE]             = {  27.424,   -6.000, -123.792, 192,  50}, -- {R}
-    [ids.SEA]                   = { -31.800,    0.000, -618.700, 190,  33}, -- {R}
-    [ids.ZVAHL_KEEP]            = {-555.996,  -70.100,   59.989,   0, 162},
-    [ids.SOUTHERN_SAN_DORIA_S]  = { -98.000,    1.000,  -41.000, 224,  80},
-    [ids.BASTOK_MARKETS_S]      = {-291.000,  -10.000, -107.000, 212,  87},
-    [ids.WINDURST_WATERS_S]     = { -31.442,   -5.000,  129.202, 128,  94},
-    [ids.ESCHA_ZITAH]           = {    -338,        6,     -225, 172, 288},
-    [ids.QUFIM_CONFLUENCE]      = {    -203,      -20,       81,  76, 126},
-    [ids.ESCHA_RUAUN]           = {  -0.371,  -34.279, -466.980, 192, 289},
-    [ids.MISAREAUX_CONFLUENCE]  = { -57.385,  -21.460,  568.941, 160,  25}
+    [ids.DEM]                   = {  220.000,   19.104,  300.000,   0, 108 }, -- (R)
+    [ids.HOLLA]                 = {  420.000,   19.104,   20.000,   0, 102 }, -- (R)
+    [ids.YHOAT]                 = { -280.942,    0.596, -144.156,   0, 124 }, -- (R)
+    [ids.VAHZL]                 = {  150.258,  -21.048,  -37.256,  94, 112 }, -- (R)
+    [ids.MEA]                   = {  100.000,   35.151,  340.000,   0, 117 }, -- (R)
+    [ids.ALTEP]                 = {  -61.942,    3.949,  224.900,   0, 114 }, -- (R)
+    [ids.JUGNER]                = { -122.862,    0.000, -163.154, 192,  82 }, -- (R)
+    [ids.PASHH]                 = {  345.472,   24.280, -114.731,  99,  90 }, -- (R)
+    [ids.MERIPH]                = {  305.989,  -14.978,   18.960, 192,  97 }, -- (R)
+    [ids.AZOUPH]                = {  495.450,  -28.250, -478.430,  32,  79 }, -- (R)
+    [ids.BHAFLAU]               = { -172.863,  -12.250, -801.021, 128,  52 }, -- (R)
+    [ids.ZHAYOLM]               = {  681.950,  -24.000,  369.936,  64,  61 }, -- (R)
+    [ids.DVUCCA]                = { -252.715,   -7.666,  -30.640, 128,  79 }, -- (R)
+    [ids.REEF]                  = {    9.304,   -7.376,  620.133,   0,  54 }, -- (R)
+    [ids.ALZADAAL]              = {  180.000,    0.000,   20.000,   0,  72 }, -- (R)
+    [ids.CUTTER]                = { -456.000,   -3.000, -405.000, -405, 54 },
+    [ids.A_REM]                 = { -579.000,   -0.050, -100.000, 192,  72 },
+    [ids.B_REM]                 = {  620.000,    0.000, -260.640,  72,  72 }, -- (R)
+    [ids.S_REM]                 = {  580.000,    0.000,  500.000, 192,  72 }, -- (R)
+--  [ids.Z_REM]                 = {  000.000,    0.000,  000.000, 000,  72 },
+    [ids.MAAT]                  = {   11.000,    3.000,  117.000,   0, 243 },
+    [ids.EXITPROMMEA]           = {  179.000,   35.000,  256.000,  63, 117 },
+    [ids.EXITPROMHOLLA]         = {  337.000,   19.000,  -60.000, 125, 102 },
+    [ids.EXITPROMDEM]           = {  136.000,   19.000,  220.000, 130, 108 },
+    [ids.LUFAISE]               = {  438.000,    0.000,  -18.000,  11,  24 },
+    [ids.CHOCO_SANDORIA]        = {   -8.557,    1.999,  -80.093,  64, 230 }, -- (R)
+    [ids.CHOCO_BASTOK]          = {   40.164,    0.000,  -83.578,  64, 234 }, -- (R)
+    [ids.CHOCO_WINDURST]        = {  113.355,   -5.000, -133.118,   0, 241 }, -- (R)
+    [ids.CHOCO_UPPER_JEUNO]     = {  -44.000,    7.900,   98.000, 170, 244 },
+    [ids.DUCALGUARD]            = {   48.930,   10.002,  -71.032, 195, 243 },
+    [ids.PURGONORGO]            = { -398.689,   -3.038, -415.835,   0,   4 }, -- (R)
+    [ids.AZOUPH_SP]             = {  522.730,  -28.009, -502.621, 161,  79 }, -- (R)
+    [ids.MAMOOL_SP]             = { -210.291,  -11.500, -818.056, 255,  52 }, -- (R)
+    [ids.HALVUNG_SP]            = {  688.994,  -23.960,  351.496, 191,  61 }, -- (R)
+    [ids.DVUCCA_SP]             = { -265.632,   -6.000,  -29.472,  94,  79 }, -- (R)
+    [ids.ILRUSI_SP]             = {   17.540,   -7.250,  627.968, 254,  54 }, -- (R)
+    [ids.NYZUL_SP]              = {  222.798,   -0.500,   19.872,   0,  72 }, -- (R)
+    [ids.SKY]                   = { -134.145,  -32.328, -205.947, 215, 130 }, -- (R)
+    [ids.CLOISTER_OF_FLAMES]    = { -716.461,    0.407, -606.661, 168, 207 }, -- (R)
+    [ids.CLOISTER_OF_FROST]     = {  550.403,    0.006,  584.820, 217, 203 }, -- (R)
+    [ids.CLOISTER_OF_GALES]     = { -374.919,    0.628, -386.774, 226, 201 }, -- (R)
+    [ids.CLOISTER_OF_STORMS]    = {  540.853,  -13.329,  511.298,  82, 202 }, -- (R)
+    [ids.CLOISTER_OF_TIDES]     = {  570.294,   36.757,  546.895, 167, 211 }, -- (R)
+    [ids.CLOISTER_OF_TREMORS]   = { -540.269,    1.396, -509.800, 192, 209 }, -- (R)
+    [ids.GHELSBA_HUT]           = { -156.000,  -10.000,   80.000, 119, 140 },
+    [ids.WAJAOM_LEYPOINT]       = { -200.116,  -10.000,   79.879, 213,  51 }, -- (R)
+    [ids.VALKURM_VORTEX]        = {  420.062,    0.000, -199.904,  87, 103 }, -- (R)
+    [ids.QUFIM_VORTEX]          = { -436.000,  -13.499,  340.117, 107, 126 }, -- (R)
+    [ids.LUFAISE_VORTEX]        = {  458.847,    7.999,    5.519,  72,  24 }, -- (R)
+    [ids.MISAREAUX_VORTEX]      = { -118.000,  -32.000,  219.000,   3,  25 }, -- (R)
+    [ids.MINESHAFT]             = {  -93.657, -120.000, -583.561,   0,  13 }, -- (R)
+    [ids.WHITEGATE]             = {   27.424,   -6.000, -123.792, 192,  50 }, -- (R)
+    [ids.SEA]                   = {  -31.800,    0.000, -618.700, 190,  33 }, -- (R)
+    [ids.ZVAHL_KEEP]            = { -555.996,  -70.100,   59.989,   0, 162 },
+    [ids.SOUTHERN_SAN_DORIA_S]  = {  -98.000,    1.000,  -41.000, 224,  80 },
+    [ids.BASTOK_MARKETS_S]      = { -291.000,  -10.000, -107.000, 212,  87 },
+    [ids.WINDURST_WATERS_S]     = {  -31.442,   -5.000,  129.202, 128,  94 },
+    [ids.ESCHA_ZITAH]           = {     -338,        6,     -225, 172, 288 },
+    [ids.QUFIM_CONFLUENCE]      = {     -203,      -20,       81,  76, 126 },
+    [ids.ESCHA_RUAUN]           = {   -0.371,  -34.279, -466.980, 192, 289 },
+    [ids.MISAREAUX_CONFLUENCE]  = {  -57.385,  -21.460,  568.941, 160,  25 }
 }
 
 xi.teleport.type =
@@ -202,26 +202,26 @@ end
 
 local campaignDestinations =
 {
-    [ 1] = { 205.973, -23.587, -206.606, 167, 137}, -- {R} {R} Xarcabard [S]
-    [ 2] = { -46.172, -60.109,  -38.487,  16, 136}, -- {R} Beaucedine Glacier [S]
-    [ 3] = { 306.939,  -1.000, -141.567, 173,  84}, -- {R} Batallia Downs [S]
-    [ 4] = {  -4.701,  15.982,  235.996, 160,  91}, -- {R} Rolanberry Fields [S]
-    [ 5] = { -64.212,   7.625,  -51.292, 192,  98}, -- {R} Sauromugue Champaign [S]
-    [ 6] = {  60.617,  -3.949,   56.658,  64,  82}, -- {R} Jugner Forest [S]
-    [ 7] = { 504.088,  24.511,  628.360,  69,  90}, -- {R} Pashhow Marshlands [S]
-    [ 8] = {-447.084,  23.433,  586.847,  31,  97}, -- {R} Meriphataud Mountains [S]
-    [ 9] = { -77.817, -47.234, -302.732, 135,  83}, -- {R} Vunkerl Inlet [S]
-    [10] = { 314.335, -36.368,  -12.200, 192,  89}, -- {R} Grauberg [S]
-    [11] = { 141.021, -45.000,   19.543,   0,  96}, -- {R} Fort Karugo-Narugo [S]
-    [12] = { 183.297, -19.971, -240.895,   2,  81}, -- {R} East Ronfaure [S]
-    [13] = {-441.332,  40.000,  -77.986, 164,  88}, -- {R} North Gustaberg [S]
-    [14] = {-104.707, -21.838,  258.043, 237,  95}, -- {R} West Sarutabaruta [S]
-    [15] = { -98.000,   1.000,  -41.000, 224,  80}, --     Southern San d'Oria [S]
-    [16] = {-291.000, -10.000, -107.000, 212,  87}, --     Bastok Markets [S]
-    [17] = { -31.442,  -5.000,  129.202, 128,  94}, -- {R} Windurst Waters [S}
-    [18] = {-194.095,   0.000,   30.009,   0, 164}, -- {R} Garlaige Citdadel [S]
-    [19] = {  59.213, -32.158,  -38.022,  64, 171}, -- {R} Crawlers' Nest [S]
-    [20] = { 294.350, -27.500,   19.947,   0, 175}, -- {R} The Eldieme Necropolis [S]
+    [ 1] = {  205.973, -23.587, -206.606, 167, 137 }, -- (R) Xarcabard [S]
+    [ 2] = {  -46.172, -60.109,  -38.487,  16, 136 }, -- (R) Beaucedine Glacier [S]
+    [ 3] = {  306.939,  -1.000, -141.567, 173,  84 }, -- (R) Batallia Downs [S]
+    [ 4] = {   -4.701,  15.982,  235.996, 160,  91 }, -- (R) Rolanberry Fields [S]
+    [ 5] = {  -64.212,   7.625,  -51.292, 192,  98 }, -- (R) Sauromugue Champaign [S]
+    [ 6] = {   60.617,  -3.949,   56.658,  64,  82 }, -- (R) Jugner Forest [S]
+    [ 7] = {  504.088,  24.511,  628.360,  69,  90 }, -- (R) Pashhow Marshlands [S]
+    [ 8] = { -447.084,  23.433,  586.847,  31,  97 }, -- (R) Meriphataud Mountains [S]
+    [ 9] = {  -77.817, -47.234, -302.732, 135,  83 }, -- (R) Vunkerl Inlet [S]
+    [10] = {  314.335, -36.368,  -12.200, 192,  89 }, -- (R) Grauberg [S]
+    [11] = {  141.021, -45.000,   19.543,   0,  96 }, -- (R) Fort Karugo-Narugo [S]
+    [12] = {  183.297, -19.971, -240.895,   2,  81 }, -- (R) East Ronfaure [S]
+    [13] = { -441.332,  40.000,  -77.986, 164,  88 }, -- (R) North Gustaberg [S]
+    [14] = { -104.707, -21.838,  258.043, 237,  95 }, -- (R) West Sarutabaruta [S]
+    [15] = {  -98.000,   1.000,  -41.000, 224,  80 }, --     Southern San d'Oria [S]
+    [16] = { -291.000, -10.000, -107.000, 212,  87 }, --     Bastok Markets [S]
+    [17] = {  -31.442,  -5.000,  129.202, 128,  94 }, -- (R) Windurst Waters [S]
+    [18] = { -194.095,   0.000,   30.009,   0, 164 }, -- (R) Garlaige Citdadel [S]
+    [19] = {   59.213, -32.158,  -38.022,  64, 171 }, -- (R) Crawlers' Nest [S]
+    [20] = {  294.350, -27.500,   19.947,   0, 175 }, -- (R) The Eldieme Necropolis [S]
 }
 
 xi.teleport.toCampaign = function(player, option)
@@ -248,24 +248,24 @@ end
 
 local outpostDestinations =
 {
-    [xi.region.RONFAURE]        = {-437.688, -20.255, -219.227, 124, 100}, -- Ronfaure {R}
-    [xi.region.ZULKHEIM]        = { 148.231,  -7.975,   93.479, 154, 103}, -- Zulkheim {R}
-    [xi.region.NORVALLEN]       = {  62.030,   0.463,   -2.025,  67, 104}, -- Norvallen {R}
-    [xi.region.GUSTABERG]       = {-580.161,  39.578,   62.680,  89, 106}, -- Gustaberg {R}
-    [xi.region.DERFLAND]        = { 465.820,  23.625,  423.164,  29, 109}, -- Derfland {R}
-    [xi.region.SARUTABARUTA]    = { -17.921, -13.335,  318.156, 254, 115}, -- Sarutabaruta {R}
-    [xi.region.KOLSHUSHU]       = {-480.237, -30.943,   58.079,  62, 118}, -- Kolshushu {R}
-    [xi.region.ARAGONEU]        = {-297.047,  16.988,  418.026, 225, 119}, -- Aragoneu {R}
-    [xi.region.FAUREGANDI]      = { -18.690, -60.048, -109.243, 100, 111}, -- Fauregandi {R}
-    [xi.region.VALDEAUNIA]      = { 211.210, -24.016, -207.338, 160, 112}, -- Valdeaunia {R}
-    [xi.region.QUFIMISLAND]     = {-243.049, -19.983,  306.712,  71, 126}, -- Qufim Island {R}
-    [xi.region.LITELOR]         = { -37.669,   0.419, -141.216,  69, 121}, -- Li'Telor {R}
-    [xi.region.KUZOTZ]          = {-249.983,   7.965, -252.976, 122, 114}, -- Kuzotz {R}
-    [xi.region.VOLLBOW]         = {-176.360,   7.624,  -63.580, 122, 113}, -- Vollbow {R}
-    [xi.region.ELSHIMOLOWLANDS] = {-240.860,  -0.031, -388.434,  64, 123}, -- Elshimo Lowlands {R}
-    [xi.region.ELSHIMOUPLANDS]  = { 207.821,  -0.128,  -86.623, 159, 124}, -- Elshimo Uplands {R}
-    [xi.region.TULIA]           = {   4.000, -54.000, -600.000, 192, 130}, -- Tu'Lia (can't acquire on retail, but exists in NCP event menu)
-    [xi.region.TAVNAZIANARCH]   = {-535.861,  -7.149,  -53.628, 122,  24}, -- Tavnazia {R}
+    [xi.region.RONFAURE]        = { -437.688, -20.255, -219.227, 124, 100 }, -- Ronfaure (R)
+    [xi.region.ZULKHEIM]        = {  148.231,  -7.975,   93.479, 154, 103 }, -- Zulkheim (R)
+    [xi.region.NORVALLEN]       = {   62.030,   0.463,   -2.025,  67, 104 }, -- Norvallen (R)
+    [xi.region.GUSTABERG]       = { -580.161,  39.578,   62.680,  89, 106 }, -- Gustaberg (R)
+    [xi.region.DERFLAND]        = {  465.820,  23.625,  423.164,  29, 109 }, -- Derfland (R)
+    [xi.region.SARUTABARUTA]    = {  -17.921, -13.335,  318.156, 254, 115 }, -- Sarutabaruta (R)
+    [xi.region.KOLSHUSHU]       = { -480.237, -30.943,   58.079,  62, 118 }, -- Kolshushu (R)
+    [xi.region.ARAGONEU]        = { -297.047,  16.988,  418.026, 225, 119 }, -- Aragoneu (R)
+    [xi.region.FAUREGANDI]      = {  -18.690, -60.048, -109.243, 100, 111 }, -- Fauregandi (R)
+    [xi.region.VALDEAUNIA]      = {  211.210, -24.016, -207.338, 160, 112 }, -- Valdeaunia (R)
+    [xi.region.QUFIMISLAND]     = { -243.049, -19.983,  306.712,  71, 126 }, -- Qufim Island (R)
+    [xi.region.LITELOR]         = {  -37.669,   0.419, -141.216,  69, 121 }, -- Li'Telor (R)
+    [xi.region.KUZOTZ]          = { -249.983,   7.965, -252.976, 122, 114 }, -- Kuzotz (R)
+    [xi.region.VOLLBOW]         = { -176.360,   7.624,  -63.580, 122, 113 }, -- Vollbow (R)
+    [xi.region.ELSHIMOLOWLANDS] = { -240.860,  -0.031, -388.434,  64, 123 }, -- Elshimo Lowlands (R)
+    [xi.region.ELSHIMOUPLANDS]  = {  207.821,  -0.128,  -86.623, 159, 124 }, -- Elshimo Uplands (R)
+    [xi.region.TULIA]           = {    4.000, -54.000, -600.000, 192, 130 }, -- Tu'Lia (can't acquire on retail, but exists in NCP event menu)
+    [xi.region.TAVNAZIANARCH]   = { -535.861,  -7.149,  -53.628, 122,  24 }, -- Tavnazia (R)
 }
 
 xi.teleport.toOutpost = function(player, region)
@@ -313,9 +313,9 @@ end
 
 xi.teleport.toChamberOfPassage = function(player)
     if math.random(1, 2) == 1 then
-        player:setPos(133.400, 1.485, 47.427, 96, 50) -- {R} Aht Urhgan Whitegate Chamber of Passage Left
+        player:setPos(133.400, 1.485, 47.427, 96, 50) -- (R) Aht Urhgan Whitegate Chamber of Passage Left
     else
-        player:setPos(116.670, 1.485, 47.427, 32, 50) -- {R} Aht Urhgan Whitegate Chamber of Passage Right
+        player:setPos(116.670, 1.485, 47.427, 32, 50) -- (R) Aht Urhgan Whitegate Chamber of Passage Right
     end
 end
 

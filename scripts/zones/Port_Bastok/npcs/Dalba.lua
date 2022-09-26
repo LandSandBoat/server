@@ -33,7 +33,7 @@ entity.onTrigger = function(player, npc)
     if (player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.GUEST_OF_HAUTEUR)) then
         bastokQuests = bastokQuests - 8         -- Guest of Hauteur.
     end
-    if (player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.CID_S_SECRET)) then
+    if (player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.CIDS_SECRET)) then
         bastokQuests = bastokQuests - 16        -- Cid's Secret.
     end
     if (player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_USUAL)) then

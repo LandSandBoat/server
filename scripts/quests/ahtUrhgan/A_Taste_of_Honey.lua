@@ -69,7 +69,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, {{xi.items.POT_OF_WHITE_HONEY, 3}}) then
+                    if npcUtil.tradeHasExactly(trade, { { xi.items.POT_OF_WHITE_HONEY, 3 } }) then
                         return quest:progressEvent(580)
                     end
                 end,
@@ -97,7 +97,7 @@ quest.sections =
             ['Qutiba'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, {xi.items.POT_OF_WHITE_HONEY}) then
+                    if npcUtil.tradeHasExactly(trade, { xi.items.POT_OF_WHITE_HONEY }) then
                         return quest:progressEvent(581)
                     end
                 end,

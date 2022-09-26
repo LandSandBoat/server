@@ -51,7 +51,7 @@ quest.sections =
             ['Talib'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, {{ xi.items.ZINC_ORE, 4 }}) then
+                    if npcUtil.tradeHasExactly(trade, { { xi.items.ZINC_ORE, 4 } }) then
                         return quest:progressEvent(91)
                     end
                 end,

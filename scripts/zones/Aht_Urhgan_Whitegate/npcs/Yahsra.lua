@@ -16,19 +16,19 @@ local entity = {}
 
 local items =
 {
-    [1]  = {itemid = xi.items.STOIC_EARRING,                price = 3000},
-    [2]  = {itemid = xi.items.UNFETTERED_RING,              price = 5000},
-    [3]  = {itemid = xi.items.TEMPERED_CHAIN,               price = 8000},
-    [4]  = {itemid = xi.items.POTENT_BELT,                  price = 10000},
-    [5]  = {itemid = xi.items.MIRACULOUS_CAPE,              price = 10000},
-    [6]  = {itemid = xi.items.YIGIT_BULAWA,                 price = 10000},
-    [7]  = {itemid = xi.items.IMPERIAL_BHUJ,                price = 15000},
-    [8]  = {itemid = xi.items.PAHLUWAN_PATAS,               price = 15000},
-    [9]  = {itemid = xi.items.AMIR_KOLLUKS,                 price = 15000},
-    [10] = {itemid = xi.items.PAHLUWAN_QALANSUWA,           price = 20000},
-    [11] = {itemid = xi.items.YIGIT_SERAWEELS,              price = 20000},
-    [12] = {itemid = xi.items.CIPHER_OF_OVJANGS_ALTER_EGO,  price = 3000},
-    [13] = {itemid = xi.items.CIPHER_OF_MNEJINGS_ALTER_EGO, price = 3000},
+    [1]  = { itemid = xi.items.STOIC_EARRING,                price =  3000 },
+    [2]  = { itemid = xi.items.UNFETTERED_RING,              price =  5000 },
+    [3]  = { itemid = xi.items.TEMPERED_CHAIN,               price =  8000 },
+    [4]  = { itemid = xi.items.POTENT_BELT,                  price = 10000 },
+    [5]  = { itemid = xi.items.MIRACULOUS_CAPE,              price = 10000 },
+    [6]  = { itemid = xi.items.YIGIT_BULAWA,                 price = 10000 },
+    [7]  = { itemid = xi.items.IMPERIAL_BHUJ,                price = 15000 },
+    [8]  = { itemid = xi.items.PAHLUWAN_PATAS,               price = 15000 },
+    [9]  = { itemid = xi.items.AMIR_KOLLUKS,                 price = 15000 },
+    [10] = { itemid = xi.items.PAHLUWAN_QALANSUWA,           price = 20000 },
+    [11] = { itemid = xi.items.YIGIT_SERAWEELS,              price = 20000 },
+    [12] = { itemid = xi.items.CIPHER_OF_OVJANGS_ALTER_EGO,  price  = 3000 },
+    [13] = { itemid = xi.items.CIPHER_OF_MNEJINGS_ALTER_EGO, price =  3000 },
 }
 
 entity.onTrade = function(player, npc, trade)

@@ -13,7 +13,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!getwspoints {main/sub/ranged} <optional target>")
+    player:PrintToPlayer("!getwspoints (main/sub/ranged) (optional target)")
 end
 
 function onTrigger(player, equipSlot, name)

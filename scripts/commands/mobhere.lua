@@ -14,7 +14,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!mobhere {mobID} {noDepop}")
+    player:PrintToPlayer("!mobhere (mobID) (noDepop)")
 end
 
 function onTrigger(player, mobId, noDepop)

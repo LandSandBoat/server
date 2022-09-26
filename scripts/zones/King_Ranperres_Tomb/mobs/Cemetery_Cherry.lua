@@ -4,6 +4,7 @@
 -- !pos 33.000 0.500 -287.000 190
 -----------------------------------
 local ID = require("scripts/zones/King_Ranperres_Tomb/IDs")
+mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/titles")
 -----------------------------------
 local entity = {}

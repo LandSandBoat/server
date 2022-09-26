@@ -3,7 +3,7 @@
 --   NM: Sagittarius X-XIII
 -----------------------------------
 require("scripts/globals/hunts")
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}

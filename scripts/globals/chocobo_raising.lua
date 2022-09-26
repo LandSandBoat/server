@@ -654,7 +654,7 @@ xi.chocoboRaising.initChocoboData = function(player)
     -- thing, they will be condensed down to a single Day1-Day3 update.
 
     local cutEvent = function(t, eStart, eEnd, csList)
-        table.insert(t, { eStart, eEnd, csList})
+        table.insert(t, { eStart, eEnd, csList })
     end
 
     local condensed_events = {}

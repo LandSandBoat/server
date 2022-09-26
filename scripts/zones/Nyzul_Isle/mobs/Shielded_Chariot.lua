@@ -15,7 +15,7 @@ entity.onMonsterAbilityPrepare = function(mob)
         return 2057 -- Mortal Revolution
     end
 
-    return ({2055, 2056})[math.random(1, 2)]
+    return ({ 2055, 2056 })[math.random(1, 2)]
 end
 
 entity.onMobDeath = function(mob, player, isKiller, noKiller)

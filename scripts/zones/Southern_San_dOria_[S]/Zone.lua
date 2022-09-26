@@ -5,11 +5,13 @@ local ID = require('scripts/zones/Southern_San_dOria_[S]/IDs')
 require('scripts/globals/chocobo')
 require('scripts/globals/quests')
 require('scripts/globals/zone')
+require('scripts/globals/extravaganza')
 -----------------------------------
 local zone_object = {}
 
 zone_object.onInitialize = function(zone)
     xi.chocobo.initZone(zone)
+    xi.extravaganza.shadowEraHide(ID.npc.SHIXO)
 end
 
 zone_object.onZoneIn = function(player, prevZone)

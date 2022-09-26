@@ -35,6 +35,18 @@ xi.extravaganza.getShadowEraCiphers = function(npc)
     return cipherNpcs[npc:getName()]
 end
 
+----------------------------------------------------------------
+-- Check if Extravaganza is active, hide [S] vendors if inactive
+----------------------------------------------------------------
+
+xi.extravaganza.shadowEraHide = function(npc)
+    local active = xi.extravaganza.campaignActive()
+
+    if active == xi.extravaganza.campaign.NONE or active == xi.extravaganza.campaign.SPRING_FALL then
+        GetNPCByID(npc):setStatus(xi.status.DISAPPEAR)
+    end
+end
+
 ----------------------------------------------------------
 -- Check if Extravaganza is Active, set Ciphers, Launch CS
 ----------------------------------------------------------
@@ -46,9 +58,6 @@ xi.extravaganza.shadowEraTrigger = function(player, npc, notes)
         player:setLocalVar("ShadowCipher1", cipherids[1])
         player:setLocalVar("ShadowCipher2", cipherids[2])
         player:startEvent(7300, 0, notes, 6)
-    else
-        -- TODO: Need Cap of CS with params when event not active
-        -- for now have NPC stare blankly
     end
 end
 
@@ -60,7 +69,7 @@ end
 xi.extravaganza.shadowEraFinish = function(player, csid, option)
     local ID = zones[player:getZoneID()]
     local notes = player:getCurrency("allied_notes")
-    local cipherid = {player:getLocalVar("ShadowCipher1"), player:getLocalVar("ShadowCipher2")}
+    local cipherid = { player:getLocalVar("ShadowCipher1"), player:getLocalVar("ShadowCipher2") }
     local choice = 0
 
     if csid == 7300 then -- All 3 Shadow Era Cipher vendors share the same CSID and options

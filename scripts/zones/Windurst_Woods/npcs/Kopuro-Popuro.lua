@@ -20,7 +20,7 @@ entity.onTrade = function(player, npc, trade)
 
     -- THE ALL NEW C-2000
     if allNewC2000 == QUEST_ACCEPTED then
-        if npcUtil.tradeHas(trade, {846, 856, 4368}) then
+        if npcUtil.tradeHas(trade, { 846, 856, 4368 }) then
             player:startEvent(292, xi.settings.main.GIL_RATE * 200) -- Correct items given, complete quest.
         else
             player:startEvent(288, 0, 856, 846, 4368) -- Incorrect or not enough items.
@@ -28,7 +28,7 @@ entity.onTrade = function(player, npc, trade)
 
     -- LEGENDARY PLAN B
     elseif legendaryPlanB == QUEST_ACCEPTED then
-        if npcUtil.tradeHas(trade, {529, 858, 940}) then
+        if npcUtil.tradeHas(trade, { 529, 858, 940 }) then
             player:startEvent(314, 0, 529, 940, 858) -- Correct items given, complete quest in onEventUpdate
         else
             player:startEvent(309, 0, 529, 940, 858) -- Incorrect or not enough items
@@ -36,7 +36,7 @@ entity.onTrade = function(player, npc, trade)
 
     -- THE ALL NEW C-3000
     elseif allNewC3000 == QUEST_ACCEPTED or allNewC3000 == QUEST_COMPLETED then
-        if npcUtil.tradeHas(trade, {889, 939}) then
+        if npcUtil.tradeHas(trade, { 889, 939 }) then
             player:startEvent(657, 0, 889, 939) -- Correct items given, complete quest in onEventUpdate
         else
             player:startEvent(656, 0, 889, 939) -- Incorrect or not enough items
@@ -109,14 +109,14 @@ entity.onEventFinish = function(player, csid, option)
     -- LEGENDARY PLAN B
     elseif csid == 308 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LEGENDARY_PLAN_B)
-    elseif csid == 314 and npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.LEGENDARY_PLAN_B, {item=12749, gil=700}) then
+    elseif csid == 314 and npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.LEGENDARY_PLAN_B, { item=12749, gil=700 }) then
         player:confirmTrade()
         player:needToZone(true)
 
     -- THE ALL NEW C-3000
     elseif csid == 655 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ALL_NEW_C_3000)
-    elseif csid == 657 and npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ALL_NEW_C_3000, {fame=10, gil=600}) then
+    elseif csid == 657 and npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ALL_NEW_C_3000, { fame=10, gil=600 }) then
         player:confirmTrade()
     end
 end

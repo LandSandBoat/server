@@ -10,37 +10,37 @@ local entity = {}
 
 local path =
 {
-    -47, -4, -37,
-    -49, -4, -37,
-    -54, -4, -37,
-    -59, -4, -43,
-    -67, -3.7, -50.6,
-    -76, -1.4, -60,
-    -87, -1, -69,
-    -104, -3, -58,
-    -118, -3, -46,
-    -112, -3.5, -28,
-    -98, -6, -16,
-    -84, -6, -9,
-    -64, -6, 1.1,
-    -40, -6, 9.6,
-    -20, -6, 12,
-    -10, -6.2, 11,
-    31, -6, 11,
-    52, -6, 5,
-    75, -6, -4,
-    94, -6, -14,
-    110, -4.2, -25,
-    118, -3, -34,
-    109, -3.25, -55,
-    87, -1, -70,
-    68, -3.3, -53,
-    57, -4, -41,
-    28, -4, -37,
-    6, -4, -35,
-    -15, -4, -36,
-    -23, -4, -36,
-    -35, -4, -36,
+    { x = -47, y = -4, z = -37 },
+    { x = -49 },
+    { x = -54 },
+    { x = -59, z = -43 },
+    { x = -67, y = -3.7, z = -50.6 },
+    { x = -76, y = -1.4, z = -60 },
+    { x = -87, y = -1, z = -69 },
+    { x = -104, y = -3, z = -58 },
+    { x = -118, y = -3, z = -46 },
+    { x = -112, y = -3.5, z = -28 },
+    { x = -98, y = -6, z = -16 },
+    { x = -84, z = -9 },
+    { x = -64, z = 1.1 },
+    { x = -40, z = 9.6 },
+    { x = -20, z = 12 },
+    { x = -10, y = -6.2, z = 11 },
+    { x = 31, y = -6, z = 11 },
+    { x = 52, z = 5 },
+    { x = 75, z = -4 },
+    { x = 94, z = -14 },
+    { x = 110, y = -4.2, z = -25 },
+    { x = 118, y = -3, z = -34 },
+    { x = 109, y = -3.25, z = -55 },
+    { x = 87, y = -1, z = -70 },
+    { x = 68, y = -3.3, z = -53 },
+    { x = 57, y = -4, z = -41 },
+    { x = 28, z = -37 },
+    { x = 6, z = -35 },
+    { x = -15, z = -36 },
+    { x = -23 },
+    { x = -35 },
 }
 
 entity.onMobInitialize = function(mob)
@@ -49,22 +49,11 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setStatus(xi.status.INVISIBLE)
-    entity.onMobRoam(mob)
-end
-
-entity.onPath = function(mob)
-    xi.path.patrol(mob, path, xi.path.flag.RUN)
-end
-
-entity.onMobRoam = function(mob)
-    -- move to start position if not moving
-    if not mob:isFollowingPath() then
-        mob:pathThrough(xi.path.first(path), xi.path.flag.RUN)
-    end
+    mob:pathThrough(path, bit.bor(xi.path.flag.PATROL, xi.path.flag.RUN))
 end
 
 entity.onMobEngaged = function(mob, target)
-    mob:setStatus(xi.status.UPDATE)
+    mob:setStatus(xi.status.MOB)
 end
 
 entity.onMobDisengage = function(mob)

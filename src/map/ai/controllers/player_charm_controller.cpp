@@ -84,7 +84,7 @@ void CPlayerCharmController::DoCombatTick(time_point tick)
                 if (POwner->speed > 0)
                 {
                     POwner->PAI->PathFind->PathAround(PTarget->loc.p, 2.0f, PATHFLAG_WALLHACK | PATHFLAG_RUN);
-                    POwner->PAI->PathFind->FollowPath();
+                    POwner->PAI->PathFind->FollowPath(m_Tick);
                 }
             }
         }
@@ -104,7 +104,7 @@ void CPlayerCharmController::DoRoamTick(time_point tick)
     {
         if (currentDistance < 35.0f && POwner->PAI->PathFind->PathAround(POwner->PMaster->loc.p, 2.0f, PATHFLAG_RUN | PATHFLAG_WALLHACK))
         {
-            POwner->PAI->PathFind->FollowPath();
+            POwner->PAI->PathFind->FollowPath(m_Tick);
         }
         else if (POwner->GetSpeed() > 0)
         {

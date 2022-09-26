@@ -35,5 +35,24 @@ set(EXTERNAL_LIBS
     sol2_single
     argparse
     efsw
+)
+
+# backwards needs these to add to linker
+if (APPLE)
+    # MacOS has bfd built in clang
+    list(APPEND EXTERNAL_LIBS
+        dl
+    )
+elseif(UNIX)
+    # Linux needs bfd as it's not native like MacOS
+    list(APPEND EXTERNAL_LIBS
+        bfd
+        dl
+    )
+endif()
+
+# copy external libs to parent scope
+set(EXTERNAL_LIBS
+    ${EXTERNAL_LIBS}
     PARENT_SCOPE
 )

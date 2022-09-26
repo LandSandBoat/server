@@ -365,12 +365,6 @@ void CLuaBaseEntity::PrintToArea(std::string const& message, sol::object const& 
 
 void CLuaBaseEntity::messageBasic(uint16 messageID, sol::object const& p0, sol::object const& p1, sol::object const& target)
 {
-    if (m_PBaseEntity->objtype != TYPE_PC)
-    {
-        ShowError("Function called on non-PC entity (%s)", m_PBaseEntity->name.c_str());
-        return;
-    }
-
     uint32 param0 = (p0 != sol::lua_nil) ? p0.as<uint32>() : 0;
     uint32 param1 = (p1 != sol::lua_nil) ? p1.as<uint32>() : 0;
 
@@ -1606,19 +1600,47 @@ bool CLuaBaseEntity::pathThrough(sol::table const& pointsTable, sol::object cons
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
 
-    std::vector<position_t> points;
-
-    // Grab points from array and store in points array
-    for (std::size_t i = 1; i < pointsTable.size(); i += 3)
-    {
-        points.push_back({ (float)pointsTable[i], (float)pointsTable[i + 1], (float)pointsTable[i + 2], 0, 0 });
-    }
-
     uint8 flags = 0;
 
     if (flagsObj.is<uint8>())
     {
         flags = flagsObj.as<uint8>();
+    }
+
+    std::vector<pathpoint_t> points;
+
+    if (flags & PATHFLAG_PATROL)
+    {
+        // Grab points from array and store in points array
+        float x, y, z = -1;
+        for (std::size_t i = 1; i <= pointsTable.size(); ++i)
+        {
+            sol::table  pointData = pointsTable[i];
+            pathpoint_t point;
+            x              = pointData.get_or("x", x);
+            y              = pointData.get_or("y", y);
+            z              = pointData.get_or("z", z);
+            point.position = { x, y, z, 0, 0 };
+
+            auto rotation     = pointData["rotation"];
+            point.setRotation = rotation.valid();
+            if (point.setRotation)
+            {
+                point.position.rotation = rotation.get<uint8>();
+            }
+
+            auto wait  = pointData["wait"];
+            point.wait = wait.valid() ? wait.get<uint32>() : 0;
+            points.push_back(std::move(point));
+        }
+    }
+    else
+    {
+        // Grab points from array and store in points array
+        for (std::size_t i = 1; i < pointsTable.size(); i += 3)
+        {
+            points.push_back({ { (float)pointsTable[i], (float)pointsTable[i + 1], (float)pointsTable[i + 2], 0, 0 }, 0 });
+        }
     }
 
     CBattleEntity* PBattle = (CBattleEntity*)m_PBaseEntity;
@@ -1657,8 +1679,7 @@ void CLuaBaseEntity::clearPath(sol::object const& pauseObj)
     {
         m_PBaseEntity->SetLocalVar("pauseNPCPathing", 1);
     }
-
-    if (PBattle->PAI->PathFind != nullptr)
+    else if (PBattle->PAI->PathFind != nullptr)
     {
         PBattle->PAI->PathFind->Clear();
     }
@@ -4043,6 +4064,13 @@ void CLuaBaseEntity::tradeComplete()
     PChar->pushPacket(new CInventoryFinishPacket());
 }
 
+std::optional<CLuaTradeContainer> CLuaBaseEntity::getTrade()
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+    auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
+    return std::optional<CLuaTradeContainer>(PChar->TradeContainer);
+}
+
 /************************************************************************
  *  Function: canEquipItem()
  *  Purpose : Returns true if a player can equip the item
@@ -4193,46 +4221,14 @@ int8 CLuaBaseEntity::getShieldSize()
 }
 
 /************************************************************************
- *  Function: hasGearSetMod()
- *  Purpose : Need to research functionality more to provide description
- *  Example :  if not player:hasGearSetMod(gearset.id) then
- *  Notes   : Used exclusively in scripts/globals/gear_sets.lua
- ************************************************************************/
-
-bool CLuaBaseEntity::hasGearSetMod(uint8 modNameId)
-{
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
-    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
-    {
-        for (auto exsistingMod : PChar->m_GearSetMods)
-        {
-            if (modNameId == exsistingMod.modNameId)
-            {
-                return true;
-            }
-        }
-    }
-
-    return false;
-}
-
-/************************************************************************
  *  Function: addGearSetMod()
  *  Purpose : Need to research functionality more to provide description
- *  Example : player:addGearSetMod(gearset.id + i, modId, modValue + addSetBonus)
+ *  Example : player:addGearSetMod(setId, modId, modValue)
  *  Notes   : Used exclusively in scripts/globals/gear_sets.lua
  ************************************************************************/
 
-void CLuaBaseEntity::addGearSetMod(uint8 modNameId, Mod modId, uint16 modValue)
+void CLuaBaseEntity::addGearSetMod(uint8 setId, Mod modId, uint16 modValue)
 {
-    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
-
-    GearSetMod_t gearSetMod = {};
-    gearSetMod.modNameId    = modNameId;
-    gearSetMod.modId        = modId;
-    gearSetMod.modValue     = modValue;
-
     CCharEntity* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
 
     if (!PChar)
@@ -4241,13 +4237,10 @@ void CLuaBaseEntity::addGearSetMod(uint8 modNameId, Mod modId, uint16 modValue)
         return;
     }
 
-    for (auto& exsistingMod : PChar->m_GearSetMods)
-    {
-        if (gearSetMod.modNameId == exsistingMod.modNameId)
-        {
-            return;
-        }
-    }
+    GearSetMod_t gearSetMod = {};
+    gearSetMod.setId        = setId;
+    gearSetMod.modId        = modId;
+    gearSetMod.modValue     = modValue;
 
     PChar->m_GearSetMods.push_back(gearSetMod);
     PChar->addModifier(gearSetMod.modId, gearSetMod.modValue);
@@ -7643,6 +7636,22 @@ int32 CLuaBaseEntity::addHP(int32 hpAdd)
     PBattle->StatusEffectContainer->DelStatusEffect(EFFECT_LULLABY);
 
     return result;
+}
+
+/************************************************************************
+ *  Function: addHPLeaveSleeping()
+ *  Purpose : Adds to the Hit Points of an Entity but does not wake it up
+ *  Example : player:addHPLeaveSleeping(500)
+ *  Notes   :
+ ************************************************************************/
+
+int32 CLuaBaseEntity::addHPLeaveSleeping(int32 hpAdd)
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
+
+    auto* PBattle = static_cast<CBattleEntity*>(m_PBaseEntity);
+
+    return PBattle->addHP(hpAdd);
 }
 
 /************************************************************************
@@ -14565,6 +14574,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getFreeSlotsCount", CLuaBaseEntity::getFreeSlotsCount);
     SOL_REGISTER("confirmTrade", CLuaBaseEntity::confirmTrade);
     SOL_REGISTER("tradeComplete", CLuaBaseEntity::tradeComplete);
+    SOL_REGISTER("getTrade", CLuaBaseEntity::getTrade);
 
     // Equipping
     SOL_REGISTER("canEquipItem", CLuaBaseEntity::canEquipItem);
@@ -14577,7 +14587,6 @@ void CLuaBaseEntity::Register()
 
     SOL_REGISTER("getShieldSize", CLuaBaseEntity::getShieldSize);
 
-    SOL_REGISTER("hasGearSetMod", CLuaBaseEntity::hasGearSetMod);
     SOL_REGISTER("addGearSetMod", CLuaBaseEntity::addGearSetMod);
     SOL_REGISTER("clearGearSetMods", CLuaBaseEntity::clearGearSetMods);
 
@@ -14756,6 +14765,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getMaxHP", CLuaBaseEntity::getMaxHP);
     SOL_REGISTER("getBaseHP", CLuaBaseEntity::getBaseHP);
     SOL_REGISTER("addHP", CLuaBaseEntity::addHP);
+    SOL_REGISTER("addHPLeaveSleeping", CLuaBaseEntity::addHPLeaveSleeping);
+
     SOL_REGISTER("setHP", CLuaBaseEntity::setHP);
     SOL_REGISTER("restoreHP", CLuaBaseEntity::restoreHP);
     SOL_REGISTER("delHP", CLuaBaseEntity::delHP);

@@ -32,6 +32,7 @@ class CLuaInstance;
 class CLuaItem;
 class CLuaSpell;
 class CLuaStatusEffect;
+class CLuaTradeContainer;
 class CLuaZone;
 
 class CLuaBaseEntity
@@ -231,6 +232,7 @@ public:
     uint8 getFreeSlotsCount(sol::object const& locID);         // Gets value of free slots in Entity inventory
     void  confirmTrade();                                      // Complete trade with an npc, only removing confirmed items
     void  tradeComplete();                                     // Complete trade with an npc
+    auto  getTrade() -> std::optional<CLuaTradeContainer>;
 
     // Equipping
     bool canEquipItem(uint16 itemID, sol::object const& chkLevel); // returns true if the player is able to equip the item
@@ -419,14 +421,15 @@ public:
     auto addGuildPoints(uint8 guildID, uint8 slotID) -> std::tuple<uint8, int16>;
 
     // Health and Status
-    int32 getHP();                     // Returns Entity Health
-    uint8 getHPP();                    // Returns Entity Health %
-    int32 getMaxHP();                  // Get max hp of entity
-    int32 getBaseHP();                 // Returns Entity base Health before modifiers
-    int32 addHP(int32 hpAdd);          // Modify hp of Entity +/-
-    void  setHP(int32 value);          // Set hp of Entity to value
-    int32 restoreHP(int32 restoreAmt); // Modify hp of Entity, but check if alive first
-    void  delHP(int32 delAmt);         // Subtract hp of Entity
+    int32 getHP();                         // Returns Entity Health
+    uint8 getHPP();                        // Returns Entity Health %
+    int32 getMaxHP();                      // Get max hp of entity
+    int32 getBaseHP();                     // Returns Entity base Health before modifiers
+    int32 addHP(int32 hpAdd);              // Modify hp of Entity +/-
+    int32 addHPLeaveSleeping(int32 hpAdd); // Modify hp of Entity +/- but do not awaken the Entity
+    void  setHP(int32 value);              // Set hp of Entity to value
+    int32 restoreHP(int32 restoreAmt);     // Modify hp of Entity, but check if alive first
+    void  delHP(int32 delAmt);             // Subtract hp of Entity
     void  takeDamage(int32 damage, sol::object const& attacker, sol::object const& atkType,
                      sol::object const& dmgType, sol::object const& flags); // Takes damage from the provided attacker
     void  hideHP(bool value);

@@ -10,7 +10,7 @@
 -- may (but not reliably so) prevent Warbles from summoning Urchins or
 -- activating the Housemaker.[3].
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}
 

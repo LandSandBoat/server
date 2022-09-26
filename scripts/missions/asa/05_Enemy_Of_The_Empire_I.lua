@@ -23,29 +23,29 @@ mission.reward =
 
 local mobList =
 {
-    {'Bigclaw',           'Bigclaw'},
-    {'Brook Sahagin',     'BrookSahagin'},
-    {'Riparian Sahagin',  'RiparianSahagin'},
-    {'Rivulet Sahagin',   'RivuletSahagin'},
-    {'Royal Leech',       'RoyalLeech'},
-    {'Undead Bats',       'UndeadBats'},
-    {'Grotto Pugil',      'GrottoPugil'},
-    {'Sea Bonze',         'SeaBonze'},
-    {'Blubber Eyes',      'BlubberEyes'},
-    {'Bog Sahagin',      'BogSahagin'},
-    {'Marsh Sahagin',    'MarshSahagin'},
-    {'Rock Crab',        'RockCrab'},
-    {'Razorjaw Pugil',   'RazorjawPugil'},
-    {'Sahagin Parasite', 'SahaginParasitd'},
-    {'Swamp Sahagin',    'SwampSahagin'},
-    {'Devil Manta',      'DevilManta'},
-    {'Dire Bat',         'DireBat'},
-    {'Lagoon Sahagin',   'LagoonSahagin'},
-    {'Delta Sahagin',    'DeltaSahagin'},
-    {'Coastal Sahagin',  'CoastalSahagin'},
-    {'Mousse',           'Mousse'},
-    {'Robber Crab',      'RobberCrab'},
-    {'Shore Sahagin',    'ShoreSahagin'},
+    { 'Bigclaw',          'Bigclaw'         },
+    { 'Brook Sahagin',    'BrookSahagin'    },
+    { 'Riparian Sahagin', 'RiparianSahagin' },
+    { 'Rivulet Sahagin',  'RivuletSahagin'  },
+    { 'Royal Leech',      'RoyalLeech'      },
+    { 'Undead Bats',      'UndeadBats'      },
+    { 'Grotto Pugil',     'GrottoPugil'     },
+    { 'Sea Bonze',        'SeaBonze'        },
+    { 'Blubber Eyes',     'BlubberEyes'     },
+    { 'Bog Sahagin',      'BogSahagin'      },
+    { 'Marsh Sahagin',    'MarshSahagin'    },
+    { 'Rock Crab',        'RockCrab'        },
+    { 'Razorjaw Pugil',   'RazorjawPugil'   },
+    { 'Sahagin Parasite', 'SahaginParasitd' },
+    { 'Swamp Sahagin',    'SwampSahagin'    },
+    { 'Devil Manta',      'DevilManta'      },
+    { 'Dire Bat',         'DireBat'         },
+    { 'Lagoon Sahagin',   'LagoonSahagin'   },
+    { 'Delta Sahagin',    'DeltaSahagin'    },
+    { 'Coastal Sahagin',  'CoastalSahagin'  },
+    { 'Mousse',           'Mousse'          },
+    { 'Robber Crab',      'RobberCrab'      },
+    { 'Shore Sahagin',    'ShoreSahagin'    },
 }
 
 local function handleTradeEvent(player, trade)
@@ -237,7 +237,7 @@ mission.sections =
                         if not player:hasItem(18721) then
                             npcUtil.giveItem(player, 18721)
                         end
-                        npcUtil.giveItem(player, {18721, 12})
+                        npcUtil.giveItem(player, { 18721, 12 })
                         mission:setVar(player, 'AndrauseBuy', 0)
                         mission:setVar(player, 'Soulplate', getMidnight())
                     elseif mission:getVar(player, 'AndrauseBuy') == 1 and player:getGil() < 800 then

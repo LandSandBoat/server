@@ -2,7 +2,7 @@
 -- Area: Arrapago Remnants
 --  Mob: Archaic Rampart
 -----------------------------------
-mixins = {require("scripts/mixins/families/rampart")}
+mixins = { require("scripts/mixins/families/rampart") }
 local ID = require("scripts/zones/Arrapago_Remnants/IDs")
 require("scripts/globals/status")
 -----------------------------------

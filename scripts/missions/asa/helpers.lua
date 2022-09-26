@@ -8,7 +8,7 @@ xi = xi or {}
 xi.asa = xi.asa or {}
 xi.asa.helpers = xi.asa.helpers or {}
 
-local hp = {80, 60, 40, 20, 1}
+local hp = { 80, 60, 40, 20, 1 }
 
 local abilities =
 {

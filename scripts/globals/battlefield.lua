@@ -5,13 +5,13 @@ xi = xi or {}
 local maxAreas =
 {
     -- Temenos
-    { Max = 8, Zones = {37} },
+    { Max = 8, Zones = { 37 } },
 
     -- Apollyon
-    { Max = 6, Zones = {38} },
+    { Max = 6, Zones = { 38 } },
 
     -- Dynamis
-    { Max = 1, Zones = {39, 40, 41, 42, 134, 135, 185, 186, 187, 188, 29, 140} }, -- riverneb, ghelsba
+    { Max = 1, Zones = { 39, 40, 41, 42, 134, 135, 185, 186, 187, 188, 29, 140 } }, -- riverneb, ghelsba
 }
 
 function onBattlefieldHandlerInitialise(zone)
@@ -55,6 +55,17 @@ xi.battlefield.leaveCode =
     WON    = 2,
     WARPDC = 3,
     LOST   = 4
+}
+
+xi.battlefield.dropChance =
+{
+    EXTREMELY_LOW  = 2,
+    VERY_LOW       = 10,
+    LOW            = 30,
+    NORMAL         = 50,
+    HIGH           = 70,
+    VERY_HIGH      = 100,
+    EXTREMELY_HIGH = 140,
 }
 
 function xi.battlefield.onBattlefieldTick(battlefield, timeinside)

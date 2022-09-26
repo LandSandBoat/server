@@ -8,7 +8,8 @@ xi = xi or {}
 xi.abyssea = xi.abyssea or {}
 
 local sergeantData =
-{-- NPC Name                Zone                        CSID OpMask
+{
+--  NPC Name                Zone                        CSID OpMask
     ['DSgt_Excenmille'] = { xi.zone.ABYSSEA_ALTEPA,     500, 30846 },
     ['DSgt_Nanaa']      = { xi.zone.ABYSSEA_ALTEPA,     501,  8176 },
     ['DSgt_Volker']     = { xi.zone.ABYSSEA_ALTEPA,     502, 26510 },

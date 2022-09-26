@@ -67,6 +67,7 @@ global_objects=(
     Sequence
     Container
     Event
+    LimbusArea
 
     removeSleepEffects
 
@@ -238,7 +239,8 @@ import glob
 import re
 
 def check_tables_in_file(name):
-    with open(name) as f:
+    errcount = 0
+    with open(name, 'r+') as f:
         counter = 0
         lines = f.readlines()
         for line in lines:
@@ -272,11 +274,40 @@ def check_tables_in_file(name):
                 print(lines[counter].strip())
                 print("")
 
+            # \{         : Opening curly brace
+            # [^ ^\n^\}] : Match single characters in list: NOT space or NOT newline or NOT closing curly brace
+
+            for match in re.finditer("\{[^ ^\n^\}]", line):
+                print(f"Table opened without an appropriate following space or newline: {name}:{counter}:{match.start() + 2}")
+                print(f"{lines[counter - 1].strip()}                              <-- HERE")
+                print("")
+                errcount += 1
+
+            # [^ ^\n^\{] : Match single characters in list: NOT space or NOT newline or NOT opening curly brace
+            # \}         : Closing curly brace
+
+            for match in re.finditer("[^ ^\n^\{]\}", line):
+                print(f"Table closed without an appropriate preceding space or newline: {name}:{counter}:{match.start() + 2}")
+                print(f"{lines[counter - 1].strip()}                              <-- HERE")
+                print("")
+                errcount += 1
+
+        # If you want to modify the files during the checks, write your changed lines to the appropriate
+        # place in 'lines' (usually with 'lines[counter - 1]') and uncomment these two lines.
+        #
+        # f.seek(0)
+        # f.writelines(lines)
+
+        return errcount
+
 target = '${target}'
 
 if target == 'scripts':
+    totalErrors = 0
     for filename in glob.iglob('scripts/**/*.lua', recursive=True):
-        check_tables_in_file(filename)
+        totalErrors += check_tables_in_file(filename)
+
+    print(totalErrors)
 else:
     check_tables_in_file(target)
 EOF

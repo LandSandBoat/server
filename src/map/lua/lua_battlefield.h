@@ -43,6 +43,7 @@ public:
     friend std::ostream& operator<<(std::ostream& out, const CLuaBattlefield& battlefield);
 
     uint16   getID();
+    uint16   getZoneID();
     uint8    getArea();
     uint32   getTimeLimit();
     uint32   getTimeInside();
@@ -75,6 +76,7 @@ public:
     bool cleanup(bool cleanup);
     void win();
     void lose();
+    void addGroups(sol::table groups);
 
     static void Register();
 };

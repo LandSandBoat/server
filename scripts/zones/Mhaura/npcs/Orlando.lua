@@ -16,17 +16,17 @@ entity.onTrade = function(player, npc, trade)
     local itemID = trade:getItemId()
     local itemList =
     {
-        {564, 200},   -- Fingernail Sack
-        {565, 250},   -- Teeth Sack
-        {566, 200},   -- Goblin Cup
-        {568, 120},   -- Goblin Die
-        {656, 600},   -- Beastcoin
-        {748, 900},   -- Gold Beastcoin
-        {749, 800},   -- Mythril Beastcoin
-        {750, 750},   -- Silver Beastcoin
-        {898, 120},   -- Chicken Bone
-        {900, 100},   -- Fish Bone
-        {16995, 150}, -- Rotten Meat
+        {   564, 200 }, -- Fingernail Sack
+        {   565, 250 }, -- Teeth Sack
+        {   566, 200 }, -- Goblin Cup
+        {   568, 120 }, -- Goblin Die
+        {   656, 600 }, -- Beastcoin
+        {   748, 900 }, -- Gold Beastcoin
+        {   749, 800 }, -- Mythril Beastcoin
+        {   750, 750 }, -- Silver Beastcoin
+        {   898, 120 }, -- Chicken Bone
+        {   900, 100 }, -- Fish Bone
+        { 16995, 150 }, -- Rotten Meat
     }
 
     for x, item in pairs(itemList) do

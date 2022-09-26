@@ -270,6 +270,11 @@ namespace luautils
         return 0;
     }
 
+    void cleanup()
+    {
+        moduleutils::CleanupLuaModules();
+    }
+
     /************************************************************************
      *                                                                       *
      *  Освобождение lua                                                     *
