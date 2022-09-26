@@ -72,7 +72,7 @@ local pathFind =
             return path
         end
     end,
-    ['pathfind2'] = function(mob, reversePath)
+    ['pathFind2'] = function(mob, reversePath)
         mob:setLocalVar("mobPath", 3)
         if reversePath == 0 then
             path = pathBranch2
