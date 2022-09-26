@@ -1023,7 +1023,7 @@ INSERT INTO `mob_groups` (`groupid`, `poolid`, `zoneid`, `name`, `respawntime`, 
 (50,3946,190,'Tomb_Worm',660,0,429,0,0,60,62,0),        -- These are in prep for complete zone revamps
 (51,6456,190,'Dire_Bat',660,0,6041,0, 0,62,64,0),       -- These are in prep for complete zone revamps
 (52,871,190,'Cutlass_Scorpion',660,0,6042,0,0,63,65,0), -- These are in prep for complete zone revamps
-(53,244,190,'Bonnet_Beetle',660,0,169,0,0,64,66,0);     -- These are in prep for complete zone revamps
+(53,244,190,'Armet_Beetle',660,0,169,0,0,64,66,0);      -- These are in prep for complete zone revamps
 
 -- ------------------------------------------------------------
 -- Dangruf_Wadi (Zone 191)
