@@ -2431,6 +2431,7 @@ xi.items =
     COPPER_HAIRPIN                  = 12496,
     BRASS_HAIRPIN                   = 12497,
     COTTON_HEADBAND                 = 12498,
+    TRAVELERS_HAT                   = 12500,
     MONKS_HEADGEAR                  = 12501,
     BONE_HAIRPIN                    = 12505,
     FIGHTERS_MASK                   = 12511,
