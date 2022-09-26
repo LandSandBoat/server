@@ -480,6 +480,9 @@ namespace trustutils
             PTrust->addModifier(Mod::STATUSRES, 25);
         }
 
+        // add mob pool mods ahead of applying stats
+        mobutils::AddCustomMods(PTrust);
+
         JOBTYPE mJob = PTrust->GetMJob();
         JOBTYPE sJob = PTrust->GetSJob();
         uint8   mLvl = PTrust->GetMLevel();

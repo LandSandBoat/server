@@ -36,11 +36,8 @@ spell_object.onMobSpawn = function(mob)
         end
     end)
 
-    -- TODO: Maximum MP has been increased.
-    -- In lieu of being able to boost his MP, we can
-    -- load him up with CONSERVE_MP
-    mob:addMod(xi.mod.CONSERVE_MP, 10)
-
+    -- MPP 150 migrated to mob_pool_mods
+    -- https://forum.square-enix.com/ffxi/threads/49425-Dec-10-2015-%28JST%29-Version-Update?p=567979&viewfull=1#post567979
     -- The attribute "Enhanced Magic Accuracy" has been added.
     local power = mob:getMainLvl() / 10
     mob:addMod(xi.mod.MACC, power)
