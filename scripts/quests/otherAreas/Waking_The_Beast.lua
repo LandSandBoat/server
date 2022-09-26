@@ -62,7 +62,7 @@ quest.sections =
             {
                 [208] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        quest:setVar(player, 'State', getConquestTally())
+                        quest:setVar(player, 'Stage', getConquestTally())
                         player:delKeyItem(xi.ki.FADED_RUBY)
 
                         if quest:getVar(player, 'Option') == 0 then
