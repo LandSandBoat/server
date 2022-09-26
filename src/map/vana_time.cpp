@@ -89,99 +89,125 @@ uint32 CVanaTime::getWeekday() const
 uint32 CVanaTime::getSysHour()
 {
     time_t now = time(nullptr);
-    tm*    ltm = localtime(&now);
+    tm     ltm;
 
-    return ltm->tm_hour;
+    _localtime_s(&ltm, &now);
+
+    return ltm.tm_hour;
 }
 
 uint32 CVanaTime::getSysMinute()
 {
     time_t now = time(nullptr);
-    tm*    ltm = localtime(&now);
+    tm     ltm;
 
-    return ltm->tm_min;
+    _localtime_s(&ltm, &now);
+
+    return ltm.tm_min;
 }
 
 uint32 CVanaTime::getSysSecond()
 {
     time_t now = time(nullptr);
-    tm*    ltm = localtime(&now);
+    tm     ltm;
 
-    return ltm->tm_sec;
+    _localtime_s(&ltm, &now);
+
+    return ltm.tm_sec;
 }
 
 uint32 CVanaTime::getSysWeekDay()
 {
     time_t now = time(nullptr);
-    tm*    ltm = localtime(&now);
+    tm     ltm;
 
-    return ltm->tm_wday;
+    _localtime_s(&ltm, &now);
+
+    return ltm.tm_wday;
 }
 
 uint32 CVanaTime::getSysYearDay()
 {
     time_t now = time(nullptr);
-    tm*    ltm = localtime(&now);
+    tm     ltm;
 
-    return ltm->tm_yday;
+    _localtime_s(&ltm, &now);
+
+    return ltm.tm_yday;
 }
 
 uint32 CVanaTime::getJstHour()
 {
     auto now = time(nullptr) + JST_OFFSET;
-    tm*  jtm = gmtime(&now);
+    tm   jtm;
 
-    return jtm->tm_hour;
+    _gmtime_s(&jtm, &now);
+
+    return jtm.tm_hour;
 }
 
 uint32 CVanaTime::getJstMinute()
 {
     auto now = time(nullptr) + JST_OFFSET;
-    tm*  jtm = gmtime(&now);
+    tm   jtm;
 
-    return jtm->tm_min;
+    _gmtime_s(&jtm, &now);
+
+    return jtm.tm_min;
 }
 
 uint32 CVanaTime::getJstSecond()
 {
     auto now = time(nullptr) + JST_OFFSET;
-    tm*  jtm = gmtime(&now);
+    tm   jtm;
 
-    return jtm->tm_sec;
+    _gmtime_s(&jtm, &now);
+
+    return jtm.tm_sec;
 }
 
 uint32 CVanaTime::getJstWeekDay()
 {
     auto now = time(nullptr) + JST_OFFSET;
-    tm*  jtm = gmtime(&now);
+    tm   jtm;
 
-    return jtm->tm_wday;
+    _gmtime_s(&jtm, &now);
+
+    return jtm.tm_wday;
 }
 
 uint32 CVanaTime::getJstDayOfMonth()
 {
     auto now = time(nullptr) + JST_OFFSET;
-    tm*  jtm = gmtime(&now);
+    tm   jtm;
 
-    return jtm->tm_mday;
+    _gmtime_s(&jtm, &now);
+
+    return jtm.tm_mday;
 }
 
 uint32 CVanaTime::getJstYearDay()
 {
     auto now = time(nullptr) + JST_OFFSET;
-    tm*  jtm = gmtime(&now);
+    tm   jtm;
 
-    return jtm->tm_yday;
+    _gmtime_s(&jtm, &now);
+
+    return jtm.tm_yday;
 }
 
 uint32 CVanaTime::getJstMidnight()
 {
-    auto now     = time(nullptr) + JST_OFFSET;
-    tm*  jst     = gmtime(&now);
-    jst->tm_hour = 0;
-    jst->tm_min  = 0;
-    jst->tm_sec  = 0;
-    return static_cast<uint32>(timegm(jst) - JST_OFFSET + (60 * 60 * 24)); // Unix timestamp of the upcoming JST midnight
+    auto now = time(nullptr) + JST_OFFSET;
+    tm   jst;
+
+    _gmtime_s(&jst, &now);
+
+    jst.tm_hour = 0;
+    jst.tm_min  = 0;
+    jst.tm_sec  = 0;
+
+    return static_cast<uint32>(timegm(&jst) - JST_OFFSET + (60 * 60 * 24)); // Unix timestamp of the upcoming JST midnight
 }
 
 uint32 CVanaTime::getVanaTime() const
