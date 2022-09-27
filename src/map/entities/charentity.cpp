@@ -1422,7 +1422,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
 
             PAI->TargetFind->findWithinArea(this, AOE_RADIUS::ATTACKER, distance);
 
-            uint16 msg = 0;
+            uint16 prevMsg = 0;
             for (auto&& PTarget : PAI->TargetFind->m_targets)
             {
                 actionList_t& actionList     = action.getNewActionList();
@@ -1432,24 +1432,28 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
                 actionTarget.speceffect      = SPECEFFECT::NONE;
                 actionTarget.animation       = PAbility->getAnimationID();
                 actionTarget.messageID       = PAbility->getMessage();
+                actionTarget.param           = 0;
 
-                if (msg == 0)
-                {
-                    msg = PAbility->getMessage();
-                }
-                else
-                {
-                    msg = PAbility->getAoEMsg();
-                }
+                int32 value = luautils::OnUseAbility(this, PTarget, PAbility, &action);
 
-                if (actionTarget.param < 0)
+                if (prevMsg == 0) // get default message for the first target
                 {
-                    msg                = ability::GetAbsorbMessage(msg);
-                    actionTarget.param = -actionTarget.param;
+                    actionTarget.messageID = PAbility->getMessage();
+                }
+                else // get AoE message for second, if there's a manual override, otherwise return message from PAbility->getMessage().
+                {
+                    actionTarget.messageID = PAbility->getAoEMsg();
                 }
 
-                actionTarget.messageID = msg;
-                actionTarget.param     = luautils::OnUseAbility(this, PTarget, PAbility, &action);
+                actionTarget.param = value;
+
+                if (value < 0)
+                {
+                    actionTarget.messageID = ability::GetAbsorbMessage(prevMsg);
+                    actionTarget.param     = -actionTarget.param;
+                }
+
+                state.ApplyEnmity();
             }
         }
         else
@@ -1461,7 +1465,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             actionTarget.speceffect      = SPECEFFECT::RECOIL;
             actionTarget.animation       = PAbility->getAnimationID();
             actionTarget.param           = 0;
-            auto prevMsg                 = actionTarget.messageID;
+            uint16 prevMsg               = actionTarget.messageID;
 
             // Check for special situations from Steal (The Tenshodo Showdown quest)
             if (PAbility->getID() == ABILITY_STEAL)
