@@ -584,7 +584,7 @@ void CMobController::CastSpell(SpellID spellid)
                 // if any mobs are flagged with MOBMOD_ASSIST, override the target randomizer and assist them
                 for (auto* PAssistTarget : PMob->PAI->TargetFind->m_targets)
                 {
-                    if (static_cast<CMobEntity*>(PAssistTarget)->getMobMod(MOBMOD_ASSIST))
+                    if (PAssistTarget->objtype == TYPE_MOB && static_cast<CMobEntity*>(PAssistTarget)->getMobMod(MOBMOD_ASSIST))
                     {
                         PCastTarget = PAssistTarget;
                     }
@@ -645,6 +645,74 @@ void CMobController::DoCombatTick(time_point tick)
         if (PTarget->PPet->objtype == TYPE_PET && ((CPetEntity*)PTarget->PPet)->getPetType() == PET_TYPE::AVATAR)
         {
             petutils::AttackTarget(PTarget, PMob);
+        }
+    }
+
+    if (PMob && PMob->PMaster && PMob->PMaster->objtype == TYPE_PC)
+    {
+        auto* PPet = static_cast<CPetEntity*>(PMob);
+        if (m_Tick <= PPet->m_lastCast + PPet->m_castCool ||
+            PPet->StatusEffectContainer->HasPreventActionEffect() ||
+            PPet->StatusEffectContainer->HasStatusEffect(EFFECT_SILENCE))
+        {
+            Move();
+            return;
+        }
+        else
+        {
+            if ((PPet->m_PetID < PETID_LIGHTSPIRIT || PPet->m_PetID == PETID_DARKSPIRIT) && TryCastSpell())
+            {
+                PPet->m_lastCast = m_Tick;
+                return;
+            }
+            else if (PPet->m_PetID == PETID_LIGHTSPIRIT)
+            {
+                CBattleEntity* PLowest       = nullptr;
+                float          lowestPercent = 100.f;
+                uint8          choice        = xirand::GetRandomNumber(2, 4);
+
+                // clang-format off
+                PPet->PMaster->ForParty([&](CBattleEntity* PMember)
+                {
+                    if (PMember != nullptr && PPet->PMaster->loc.zone->GetID() == PMember->loc.zone->GetID() && distance(PPet->loc.p, PMember->loc.p) <= 20 &&
+                        !PMember->isDead())
+                    {
+                        float memberPercent = PMember->health.hp / PMember->health.maxhp;
+                        if (PLowest == nullptr ||
+                            (lowestPercent >= memberPercent))
+                        {
+                            PLowest = PMember;
+                            lowestPercent = memberPercent;
+                        }
+                    }
+                });
+                // clang-format on
+
+                if (lowestPercent < 0.5f) // 50% HP
+                {
+                    choice = xirand::GetRandomNumber(1, 4);
+                }
+
+                switch (choice)
+                {
+                    case 1:
+                        CastSpell(static_cast<SpellID>(xirand::GetRandomElement(PPet->m_healSpells)));
+                        break;
+                    case 2:
+                        CastSpell(static_cast<SpellID>(xirand::GetRandomElement(PPet->m_buffSpells)));
+                        break;
+                    case 3:
+                        CastSpell(static_cast<SpellID>(xirand::GetRandomElement(PPet->m_offensiveSpells)));
+                        break;
+                }
+
+                if (PPet)
+                {
+                    PPet->m_lastCast = m_Tick;
+                }
+
+                return;
+            }
         }
     }
 
