@@ -16418,8 +16418,8 @@ INSERT INTO `mob_droplist` VALUES (2031,0,0,1000,17868,@RARE); -- Jug Of Humus (
 INSERT INTO `mob_droplist` VALUES (2032,0,0,1000,868,120); -- Handful Of Pugil Scales (12.0%)
 INSERT INTO `mob_droplist` VALUES (2032,0,0,1000,4484,60); -- Shall Shell (6.0%)
 
--- ZoneID: Unknown - Unknown
-INSERT INTO `mob_droplist` VALUES (2033,0,0,1000,868,120); -- Handful Of Pugil Scales (12.0%)
+-- ZoneID: 169 - Canal Pugil
+INSERT INTO `mob_droplist` VALUES (2033,0,0,1000,868,@UNCOMMON); -- Handful Of Pugil Scales (Uncommon, 10%)
 
 -- ZoneID: 101 - Pugil Fished
 -- ZoneID: 101 - Pugil
