@@ -104,7 +104,16 @@ SqlConnection::SqlConnection(const char* user, const char* passwd, const char* h
 : m_LatencyWarning(false)
 {
     TracyZoneScoped;
-    self = new Sql_t{};
+
+    try
+    {
+        self = new Sql_t();
+    }
+    catch (const std::exception& e)
+    {
+        ShowCritical("Sql_t allocation failed!: %s", e.what());
+    }
+
     mysql_init(&self->handle);
     if (self == nullptr)
     {
