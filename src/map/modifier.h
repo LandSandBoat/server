@@ -384,6 +384,7 @@ enum class Mod
     ENHANCES_GUARDIAN      = 1065, // Enhances "Guardian" effect (increases Sentinel's duration by 2 seconds per Guardian merit)
     PALISADE_BLOCK_BONUS   = 1066, // Increases base block rate while under the effects of Palisade (additive, not multiplicative)
     REPRISAL_BLOCK_BONUS   = 1067, // Increases block rate while under the effects of Reprisal (multiplicative, not additive)
+    REPRISAL_SPIKES_BONUS  = 1068, // Increases Reprisal spikes damage by percentage (e.g. mod value 50 = +50% spikes damage)
 
     // Dark Knight
     ARCANE_CIRCLE_DURATION = 858, // Arcane Circle extended duration in seconds
@@ -924,7 +925,7 @@ enum class Mod
     // 888
     // 936
     //
-    // SPARE = 1068, and onward
+    // SPARE = 1069, and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

@@ -143,8 +143,6 @@ xi.job_utils.paladin.useMajesty = function(player, target, ability)
 end
 
 xi.job_utils.paladin.usePalisade = function(player, target, ability)
-    -- TODO: Set up xi.mod.PALISADE_BLOCK_BONUS and add handling to the core
-    -- TODO: Implement new mod in effects/palisade.lua
     local jpValue = player:getJobPointLevel(xi.jp.PALISADE_EFFECT)
     local power   = 30 + jpValue
 
