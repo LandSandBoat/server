@@ -145,10 +145,10 @@ void CTrustEntity::OnAbility(CAbilityState& state, action_t& action)
             PAI->TargetFind->findWithinArea(this, AOE_RADIUS::ATTACKER, distance);
 
             uint16 prevMsg = 0;
-            for (auto&& PTarget : PAI->TargetFind->m_targets)
+            for (auto&& PTargetFound : PAI->TargetFind->m_targets)
             {
                 actionList_t& actionList     = action.getNewActionList();
-                actionList.ActionTargetID    = PTarget->id;
+                actionList.ActionTargetID    = PTargetFound->id;
                 actionTarget_t& actionTarget = actionList.getNewActionTarget();
                 actionTarget.reaction        = REACTION::NONE;
                 actionTarget.speceffect      = SPECEFFECT::NONE;

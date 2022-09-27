@@ -1262,10 +1262,10 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
         }
         else if (PAbility->getID() == ABILITY_DEACTIVATE && PAutomaton && PAutomaton->health.hp == PAutomaton->GetMaxHP())
         {
-            CAbility* PAbility = ability::GetAbility(ABILITY_ACTIVATE);
-            if (PAbility)
+            CAbility* PActivateAbility = ability::GetAbility(ABILITY_ACTIVATE);
+            if (PActivateAbility)
             {
-                PRecastContainer->Del(RECAST_ABILITY, PAbility->getRecastId());
+                PRecastContainer->Del(RECAST_ABILITY, PActivateAbility->getRecastId());
             }
         }
         else if (PAbility->getRecastId() == 173 || PAbility->getRecastId() == 174) // BP rage, BP ward
@@ -1423,10 +1423,10 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
             PAI->TargetFind->findWithinArea(this, AOE_RADIUS::ATTACKER, distance);
 
             uint16 prevMsg = 0;
-            for (auto&& PTarget : PAI->TargetFind->m_targets)
+            for (auto&& PTargetFound : PAI->TargetFind->m_targets)
             {
                 actionList_t& actionList     = action.getNewActionList();
-                actionList.ActionTargetID    = PTarget->id;
+                actionList.ActionTargetID    = PTargetFound->id;
                 actionTarget_t& actionTarget = actionList.getNewActionTarget();
                 actionTarget.reaction        = REACTION::NONE;
                 actionTarget.speceffect      = SPECEFFECT::NONE;
@@ -1434,7 +1434,7 @@ void CCharEntity::OnAbility(CAbilityState& state, action_t& action)
                 actionTarget.messageID       = PAbility->getMessage();
                 actionTarget.param           = 0;
 
-                int32 value = luautils::OnUseAbility(this, PTarget, PAbility, &action);
+                int32 value = luautils::OnUseAbility(this, PTargetFound, PAbility, &action);
 
                 if (prevMsg == 0) // get default message for the first target
                 {
