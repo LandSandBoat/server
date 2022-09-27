@@ -3,6 +3,7 @@
 --  PETS ID
 --
 -----------------------------------
+require("scripts/globals/nyzul")
 require("scripts/globals/zone")
 
 xi = xi or {}
@@ -1238,7 +1239,7 @@ function xi.pet.spawnPet(player, petID)
 
         for i = 1, 29 do
             if utils.mask.getBit(floorPathos, i) then
-                local pathos = nyzul.pathos[i]
+                local pathos = xi.nyzul.pathos[i]
                 local effect = pathos.effect
                 local power = pathos.power
 
