@@ -68,12 +68,12 @@ end
 
 -- Returns the bonus magic accuracy for any spell
 local function getSpellBonusAcc(caster, target, spell, params)
-    local magicAccBonus = 0
+    local magicAccBonus  = 0
     local castersWeather = caster:getWeather()
-    local skill = spell:getSkillType()
-    local spellGroup = spell:getSpellGroup()
-    local element = spell:getElement()
-    local casterJob = caster:getMainJob()
+    local skill          = spell:getSkillType()
+    local spellGroup     = spell:getSpellGroup()
+    local element        = spell:getElement()
+    local casterJob      = caster:getMainJob()
 
     if caster:hasStatusEffect(xi.effect.ALTRUISM) and spellGroup == xi.magic.spellGroup.WHITE then
         magicAccBonus = magicAccBonus + caster:getStatusEffect(xi.effect.ALTRUISM):getPower()
@@ -81,6 +81,11 @@ local function getSpellBonusAcc(caster, target, spell, params)
 
     if caster:hasStatusEffect(xi.effect.FOCALIZATION) and spellGroup == xi.magic.spellGroup.BLACK then
         magicAccBonus = magicAccBonus + caster:getStatusEffect(xi.effect.FOCALIZATION):getPower()
+    end
+
+    -- Apply Divine Emblem to Flash
+    if caster:hasStatusEffect(xi.effect.DIVINE_EMBLEM) and skill == xi.skill.DIVINE_MAGIC then
+        magicAccBonus = magicAccBonus + 100 -- TODO: Confirm this with retail
     end
 
     local skillchainTier, _ = FormMagicBurst(element, target)
