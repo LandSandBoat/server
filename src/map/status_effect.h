@@ -64,12 +64,13 @@ enum EFFECTFLAG
     EFFECTFLAG_CONFRONTATION   = 0x0080000,
     EFFECTFLAG_LOGOUT          = 0x0100000,
     EFFECTFLAG_BLOODPACT       = 0x0200000,
-    EFFECTFLAG_ON_JOBCHANGE    = 0x0400000, // Removes effect when you change jobs
-    EFFECTFLAG_NO_CANCEL       = 0x0800000, // CAN NOT CLICK IT OFF IN CLIENT
-    EFFECTFLAG_INFLUENCE       = 0x1000000, // Influence effects - e.g. Signet, Sanction, Sigil, Ionis
-    EFFECTFLAG_OFFLINE_TICK    = 0x2000000, // Duration elapses while offline
-    EFFECTFLAG_AURA            = 0x4000000, // Is an aura type effect
-    EFFECTFLAG_HIDE_TIMER      = 0x8000000, // Sends "Always" in the packet, even though timer is tracked
+    EFFECTFLAG_ON_JOBCHANGE    = 0x0400000,  // Removes effect when you change jobs
+    EFFECTFLAG_NO_CANCEL       = 0x0800000,  // CAN NOT CLICK IT OFF IN CLIENT
+    EFFECTFLAG_INFLUENCE       = 0x1000000,  // Influence effects - e.g. Signet, Sanction, Sigil, Ionis
+    EFFECTFLAG_OFFLINE_TICK    = 0x2000000,  // Duration elapses while offline
+    EFFECTFLAG_AURA            = 0x4000000,  // Is an aura type effect
+    EFFECTFLAG_HIDE_TIMER      = 0x8000000,  // Sends "Always" in the packet, even though timer is tracked
+    EFFECTFLAG_ON_ZONE_PATHOS  = 0x10000000, // removes the effect zoning into a non instanced zone
 };
 
 enum EFFECT

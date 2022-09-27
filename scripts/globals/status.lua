@@ -893,6 +893,7 @@ xi.effectFlag =
     OFFLINE_TICK    = 0x2000000,
     AURA            = 0x4000000,
     HIDE_TIMER      = 0x8000000,
+    ON_ZONE_PATHOS  = 0x10000000,
 }
 
 -----------------------------------
