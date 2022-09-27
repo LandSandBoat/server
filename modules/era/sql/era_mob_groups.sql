@@ -956,6 +956,7 @@ UPDATE mob_groups SET content_tag='SYNERGY' WHERE name='Canal_Moocher' AND group
 UPDATE mob_groups SET content_tag='SYNERGY' WHERE name='Konjac' AND groupid='27' AND zoneid='169';
 
 INSERT INTO `mob_groups` (`groupid`, `poolid`, `zoneid`, `name`, `respawntime`, `spawntype`, `dropid`, `HP`, `MP`, `minLevel`, `maxLevel`, `allegiance`) VALUES (50,871,169,'Cutlass_Scorpion',960,0,551,0,0,64,66,0); -- These are in prep for complete zone revamps
+INSERT INTO `mob_groups` (`groupid`, `poolid`, `zoneid`, `name`, `respawntime`, `spawntype`, `dropid`, `HP`, `MP`, `minLevel`, `maxLevel`, `allegiance`) VALUES (51,3803,169,'Canal_Pugil',960,0,2033,0,0,57,59,0); -- These are in prep for complete zone revamps
 UPDATE mob_groups SET minLevel = 45, maxLevel = 47 WHERE name = "Bigclaw_fished"  and zoneid = 169;
 UPDATE mob_groups SET minLevel = 59, maxLevel = 61 WHERE name = "Bloodsucker_fished"  and zoneid = 169;
 UPDATE mob_groups SET minLevel = 65, maxLevel = 67 WHERE name = "Mousse_fished"  and zoneid = 169;
