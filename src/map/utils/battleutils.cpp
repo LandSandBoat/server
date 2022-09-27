@@ -5595,11 +5595,53 @@ namespace battleutils
 
     uint8 GetSpellAoEType(CBattleEntity* PCaster, CSpell* PSpell)
     {
+        bool casterInParty = false;
+
+        // Check if the caster is in the same party as the target
+        if (PCaster->objtype == TYPE_PC && PCaster->PParty != nullptr)
+        {
+            // Target is pulled from the caster's magic state
+            auto           MState  = static_cast<CMagicState*>(PCaster->PAI->GetCurrentState());
+            CBattleEntity* MTarget = static_cast<CBattleEntity*>(MState->GetTarget());
+
+            // Target exists, is a player, and is in a party
+            if (MTarget != nullptr && MTarget->objtype == TYPE_PC && MTarget->PParty != nullptr)
+            {
+                // Search the target's party for the caster
+                for (auto member : MTarget->PParty->members)
+                {
+                    // Caster is in the party with the target
+                    if (PCaster == member)
+                    {
+                        casterInParty = true;
+                        break;
+                    }
+                }
+            }
+            // Assumes trusts being cast on are in the caster's party because
+            // casting on other player's trusts is blocked
+            else if (MTarget != nullptr && MTarget->objtype == TYPE_TRUST)
+            {
+                casterInParty = true;
+            }
+        }
+
+        // Majesty turns the Cure and Protect spell families into AoE when active
+        // Players must be in the same party as their targets to apply the AoE
+        // Trusts do not cast buffs outside of their party and will always apply the AoE on Cures and Protects
+        if (PCaster->StatusEffectContainer->HasStatusEffect(EFFECT_MAJESTY) &&
+            ((PCaster->objtype == TYPE_PC && casterInParty == true) || PCaster->objtype == TYPE_TRUST) &&
+            (PSpell->getSpellFamily() == SPELLFAMILY_CURE || PSpell->getSpellFamily() == SPELLFAMILY_PROTECT))
+        {
+            return SPELLAOE_RADIAL;
+        }
+
         if (PSpell->getAOE() == SPELLAOE_RADIAL_ACCE) // Divine Veil goes here because -na spells have AoE w/ Accession
         {
-            if (PCaster->StatusEffectContainer->HasStatusEffect(EFFECT_ACCESSION) ||
-                (PCaster->objtype == TYPE_PC && charutils::hasTrait((CCharEntity*)PCaster, TRAIT_DIVINE_VEIL) && PSpell->isNa() &&
-                 (PCaster->StatusEffectContainer->HasStatusEffect(EFFECT_DIVINE_SEAL) || PCaster->getMod(Mod::AOE_NA) == 1)))
+            if (casterInParty == true &&
+                (PCaster->StatusEffectContainer->HasStatusEffect(EFFECT_ACCESSION) ||
+                 (PCaster->objtype == TYPE_PC && charutils::hasTrait((CCharEntity*)PCaster, TRAIT_DIVINE_VEIL) && PSpell->isNa() &&
+                  (PCaster->StatusEffectContainer->HasStatusEffect(EFFECT_DIVINE_SEAL) || PCaster->getMod(Mod::AOE_NA) == 1))))
             {
                 return SPELLAOE_RADIAL;
             }
@@ -5608,6 +5650,7 @@ namespace battleutils
                 return SPELLAOE_NONE;
             }
         }
+
         if (PSpell->getAOE() == SPELLAOE_RADIAL_MANI)
         {
             if (PCaster->StatusEffectContainer->HasStatusEffect(EFFECT_MANIFESTATION))
@@ -5619,6 +5662,7 @@ namespace battleutils
                 return SPELLAOE_NONE;
             }
         }
+
         if (PSpell->getAOE() == SPELLAOE_PIANISSIMO)
         {
             if (PCaster->StatusEffectContainer->HasStatusEffect(EFFECT_PIANISSIMO))
@@ -5631,6 +5675,7 @@ namespace battleutils
                 return SPELLAOE_RADIAL;
             }
         }
+
         if (PSpell->getAOE() == SPELLAOE_DIFFUSION)
         {
             if (PCaster->StatusEffectContainer->HasStatusEffect(EFFECT_DIFFUSION))
