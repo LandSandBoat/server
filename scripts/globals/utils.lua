@@ -24,6 +24,30 @@ function utils.shuffle(inputTable)
 
     return shuffledTable
 end
+utils.append = nil
+
+-- Recursively appends the input table into the provided base table.
+-- Non-table keys are overwritten by input.
+function utils.append(base, input)
+    for k, v in pairs(input) do
+        local baseValue = base[k]
+        if baseValue ~= nil and type(baseValue) == 'table' and type(v) == 'table' then
+            utils.append(baseValue, v)
+        else
+            base[k] = v
+        end
+    end
+    return base
+end
+
+-- Returns a new table with the two input tables joined together.
+-- Values from second input have higher priority.
+function utils.join(input1, input2)
+    local result = {}
+    utils.append(result, input1)
+    utils.append(result, input2)
+    return result
+end
 
 -- Generates a random permutation of integers >= min_val and <= max_val
 -- If a min_val isn't given, 1 is used (assumes permutation of lua indices)
