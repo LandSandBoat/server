@@ -70,6 +70,379 @@ xi.battlefield.dropChance =
     EXTREMELY_HIGH = 140,
 }
 
+xi.battlefield.id =
+{
+    SE_APOLLYON = 1293,
+}
+
+Battlefield = setmetatable({}, { __index = Container })
+Battlefield.__index = Battlefield
+Battlefield.__eq = function(m1, m2)
+    return m1.id == m2.id
+end
+
+function Battlefield:new(zoneId, battlefieldId, menuBit, entryNpc)
+    local obj = Container:new(Battlefield.getVarPrefix(battlefieldId))
+    setmetatable(obj, self)
+    -- Which zone this battlefield exists within
+    obj.zoneId = zoneId
+    -- Battlefield ID used in the database
+    obj.battlefieldId = battlefieldId
+    -- The bit used to communicate with the client on which menu item this battlefield is
+    obj.menuBit = menuBit
+    -- Some battlefields has multiple areas (Burning Circles) while others have fixed areas (Apollyon). Set to have a fixed area.
+    obj.area = nil
+    -- Monster battlefield groups added with battlefield:addGroups()
+    obj.groups = {}
+    -- Pathing for monsters and npcs within the battlefield
+    obj.paths = {}
+    -- Loot spawned in the Armoury Crate(s)
+    obj.loot = {}
+    -- Items required to be traded to enter the battlefield
+    obj.requiredItems = {}
+    -- Key items required to be able to enter the battlefield - these are removed upon entry
+    obj.requiredKeyItems = {}
+    obj.createWornItem = true
+    obj.sections = { { [zoneId] = {} } }
+
+    -- If being called from a derived class then this should be handled there as obj wont have the metatable setup properly yet
+    lldebugger.requestBreak()
+    if entryNpc then
+        obj:setEntryNpc(entryNpc)
+    end
+
+    return obj
+end
+
+function Battlefield:register()
+    xi.battlefield.contents[self.battlefieldId] = self
+    if utils.hasKey(self.zoneId, xi.battlefield.contentsByZone) then
+        table.insert(xi.battlefield.contentsByZone[self.zoneId], self)
+    else
+        xi.battlefield.contentsByZone[self.zoneId] = { self }
+    end
+    return self
+end
+
+function Battlefield:checkRequirements(player, npc, registrant, trade)
+    if npc:getName() ~= self.entryNpc then
+        return false
+    end
+
+    for _, keyItem in ipairs(self.requiredKeyItems) do
+        if not player:hasKeyItem(keyItem) then
+            return false
+        end
+    end
+
+    if trade and self.requiredItems then
+        if not npcUtil.tradeHasExactly(trade, self.requiredItems) then
+            return false
+        end
+    end
+
+    return true
+end
+
+function Battlefield:checkSkipCutscene(player)
+    return false
+end
+
+function Battlefield:setEntryNpc(entryNpc)
+    local entry = {
+        [entryNpc] =
+        {
+            onTrade = utils.bind(self.onEntryTrade, self),
+            onTrigger = utils.bind(self.onEntryTrigger, self),
+        },
+        onEventUpdate =
+        {
+            [32000] = utils.bind(self.onEntryEventUpdate, self),
+            [32003] = utils.bind(self.onEntryEventUpdateLeave, self),
+        },
+        onEventFinish =
+        {
+            [32000] = utils.bind(self.onEntryEventFinish, self),
+            [32002] = utils.bind(self.onEntryEventFinish, self),
+            [32003] = utils.bind(self.onEntryEventFinish, self),
+        }
+    }
+
+    utils.append(self.sections[1][self.zoneId], entry)
+    self.entryNpc = entryNpc
+end
+
+function Battlefield.getVarPrefix(battlefieldID)
+    return string.format("Battlefield[%d]", battlefieldID)
+end
+
+function Battlefield:onEntryTrade(player, npc, trade, onUpdate)
+    -- Check if player's party has level sync
+    if xi.battlefield.rejectLevelSyncedParty(player, npc) then
+        return false
+    end
+
+    -- Validate trade
+    if not trade then
+        return false
+    end
+
+    if not npcUtil.tradeHasExactly(trade, self.requiredItems) then
+        return false
+    end
+
+    -- Check if the player is trading exactly one item but it is worn
+    if #self.requiredItems == 1 and self.createWornItem and player:hasWornItem(self.requiredItems[1]) then
+        player:messageBasic(xi.msg.basic.ITEM_UNABLE_TO_USE_2, 0, 0)
+        return false
+    end
+
+    -- Validate battlefield status
+    if player:hasStatusEffect(xi.effect.BATTLEFIELD) and not onUpdate then
+        player:messageBasic(xi.msg.basic.WAIT_LONGER, 0, 0)
+        return false
+    end
+
+    -- Check if another party member has battlefield status effect. If so, don't allow trade.
+    local alliance = player:getAlliance()
+    for _, member in pairs(alliance) do
+        if member:hasStatusEffect(xi.effect.BATTLEFIELD) then
+            player:messageBasic(xi.msg.basic.WAIT_LONGER, 0, 0)
+
+            return false
+        end
+    end
+
+    -- Open menu of valid battlefields
+    local options = xi.battlefield.getBattlefieldOptions(player, npc, trade)
+    if options ~= 0 then
+        if not onUpdate then
+            player:startEvent(32000, 0, 0, 0, options, 0, 0, 0, 0)
+        end
+
+        return true
+    end
+
+    return false
+end
+
+function Battlefield:onEntryTrigger(player, npc)
+    lldebugger.requestBreak()
+    -- Cannot enter if anyone in party is level/master sync'd
+    if xi.battlefield.rejectLevelSyncedParty(player, npc) then
+        return false
+    end
+
+    -- Player has battlefield status effect. That means a battlefield is open OR the player is inside a battlefield.
+    if player:hasStatusEffect(xi.effect.BATTLEFIELD) then
+        -- Player is inside battlefield. Attempting to leave.
+        -- TODO(jmcmorris): We might be able to move this to its own onExitTrigger?
+        if player:getBattlefield() then
+            player:startOptionalCutscene(32003)
+            return true
+        end
+
+        -- Player is outside battlefield. Attempting to enter.
+        -- TODO(jmcmorris): Is this going to be triggered for each battlefield in the zone?
+        local status = player:getStatusEffect(xi.effect.BATTLEFIELD)
+        local bfid = status:getPower()
+        if self.battlefieldId ~= bfid then
+            return false
+        end
+
+        if not self.checkRequirements(player, npc, bfid, false) then
+            return false
+        end
+
+        player:startEvent(32000, 0, 0, 0, self.menuBit, 0, 0, 0, 0)
+        return true
+    end
+
+    -- Player doesn't have battlefield status effect. That means player wants to register a new battlefield OR is attempting to enter a closed one.
+    -- Check if another party member has battlefield status effect. If so, that means the player is trying to enter a closed battlefield.
+    local alliance = player:getAlliance()
+    for _, member in pairs(alliance) do
+        if member:hasStatusEffect(xi.effect.BATTLEFIELD) then
+            -- player:messageSpecial() -- You are eligible but cannot enter.
+            return false
+        end
+    end
+
+    -- No one in party/alliance has battlefield status effect. We want to register a new battlefield.
+    local options = xi.battlefield.getBattlefieldOptions(player, npc)
+
+    -- GMs get access to all BCNMs (FLAG_GM = 0x04000000)
+    if player:getGMLevel() > 0 and player:checkNameFlags(0x04000000) then
+        options = 268435455
+    end
+
+    -- options = 268435455 -- uncomment to open menu with all possible battlefields
+    if options == 0 then
+        return false
+    end
+
+    player:startEvent(32000, 0, 0, 0, options, 0, 0, 0, 0)
+    return true
+end
+
+function Battlefield:onEntryEventUpdate(player, csid, option, extras)
+    if option == 0 or option == 255 then
+        -- todo: check if battlefields full, check party member requiremenst
+        return false
+    end
+
+    local battlefieldIndex = bit.rshift(option, 4)
+    if battlefieldIndex ~= self.menuBit then
+        return false
+    end
+
+    local clearTime = 1
+    local name      = "Meme"
+    local partySize = 1
+
+    local area = self.area or (player:getLocalVar("[battlefield]area") + 1)
+    if self.area ~= 0 then
+        area = self.area
+    end
+
+    local result = player:registerBattlefield(self.battlefieldId, area)
+    local status = xi.battlefield.status.OPEN
+
+    if result ~= xi.battlefield.returnCode.CUTSCENE then
+        if result == xi.battlefield.returnCode.INCREMENT_REQUEST then
+            if area < 3 then
+                player:setLocalVar("[battlefield]area", area)
+            else
+                result = xi.battlefield.returnCode.WAIT
+                player:updateEvent(result)
+            end
+        end
+
+        return false
+    end
+
+    -- Only allow entrance if battlefield is open and player has battlefield effect, witch can be lost mid battlefield selection.
+    if
+        not player:getBattlefield() and
+        player:hasStatusEffect(xi.effect.BATTLEFIELD)
+        -- and id:getStatus() == xi.battlefield.status.OPEN -- TODO: Uncomment only once that can-of-worms is dealt with.
+    then
+        player:enterBattlefield()
+    end
+
+    -- Handle record
+    local initiatorId = 0
+    local battlefield = player:getBattlefield()
+
+    if battlefield then
+        battlefield:setLocalVar("[cs]bit", battlefieldIndex)
+        name, clearTime, partySize = battlefield:getRecord()
+        initiatorId, _ = battlefield:getInitiator()
+    end
+
+    -- Register party members
+    if initiatorId == player:getID() then
+        local effect = player:getStatusEffect(xi.effect.BATTLEFIELD)
+        local zone   = player:getZoneID()
+
+        -- Handle traded items
+        if self.requiredItems then
+            if self.createWornItem and player:hasItem(self.requiredItems[1]) then
+                player:createWornItem(self.requiredItems[1])
+            else
+                player:tradeComplete()
+            end
+        end
+
+        -- Handle party/alliance members
+        local alliance = player:getAlliance()
+        for _, member in pairs(alliance) do
+            if
+                member:getZoneID() == zone and
+                not member:hasStatusEffect(xi.effect.BATTLEFIELD) and
+                not member:getBattlefield()
+            then
+                member:addStatusEffect(effect)
+                member:registerBattlefield(self.battlefieldId, area, player:getID())
+            end
+        end
+    end
+
+    player:updateEvent(result, self.menuBit, 0, clearTime, partySize, self:checkSkipCutscene(player))
+    player:updateEventString(name)
+    return status < xi.battlefield.status.LOCKED and result < xi.battlefield.returnCode.LOCKED
+end
+
+function Battlefield:onEntryEventUpdateLeave(player, csid, option, extras)
+    if option == 2 then
+        player:updateEvent(3)
+        return true
+    elseif option == 3 then
+        player:updateEvent(0)
+        return true
+    end
+    return false
+end
+
+function Battlefield:onEntryEventFinish(player, csid, option)
+    player:setLocalVar("[battlefield]area", 0)
+
+    if player:hasStatusEffect(xi.effect.BATTLEFIELD) then
+        if csid == 32003 and option == 4 then
+            if player:getBattlefield() then
+                player:leaveBattlefield(1)
+            end
+        end
+
+        return true
+    end
+
+    return false
+end
+
+function Battlefield:onBattlefieldInitialise(battlefield)
+    battlefield:setLocalVar("loot", 1)
+end
+
+function Battlefield:onBattlefieldTick(battlefield, tick)
+    print("Battlefield:onBattlefieldTick")
+    xi.battlefield.onBattlefieldTick(battlefield, tick)
+end
+
+function Battlefield:onBattlefieldRegister(player, battlefield)
+end
+
+function Battlefield:onBattlefieldEnter(player, battlefield)
+end
+
+function Battlefield:onBattlefieldDestroy(battlefield)
+end
+
+function Battlefield:onBattlefieldLeave(player, battlefield, leavecode)
+    if leavecode == xi.battlefield.leaveCode.WON then
+        local _, clearTime, partySize = battlefield:getRecord()
+        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), 0)
+    elseif leavecode == xi.battlefield.leaveCode.LOST then
+        player:startEvent(32002)
+    end
+end
+
+function xi.battlefield.getBattlefieldOptions(player, npc, trade)
+    local result = 0
+    local contents = xi.battlefield.contentsByZone[player:getZoneID()]
+
+    if contents == nil then
+        return result
+    end
+
+    for _, content in ipairs(contents) do
+        if content:checkRequirements(player, npc, true, trade) and not player:battlefieldAtCapacity(content.battlefieldId) then
+            result = utils.mask.setBit(result, content.menuBit, true)
+        end
+    end
+
+    return result
+end
 
 xi.battlefield.rejectLevelSyncedParty = function(player, npc)
     for _, member in pairs(player:getAlliance()) do
