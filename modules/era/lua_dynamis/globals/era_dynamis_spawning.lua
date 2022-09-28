@@ -622,8 +622,8 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Tocktix Thinlids"] = { "T.Thinlids", 150, 134, 176, 5, 5013, "Beastmen" }, -- Tock (DRK)
         ["Whistix Toadthroat"] = { "W.Toadthroat", 154, 134, 176, 6, 5013, "Beastmen" }, -- Whis (BRD)
         -- Dynamis - Buburimu
-        ["Gosspix Blabberlips"] = { "G.Blabberlips", 24, 40,2667, 5013, "Beastmen" }, -- Goss (RDM)
-        ["Shamblix Rottenheart"] = { "S.Rottenheart", 16, 40,2667, 5, 5013, "Beastmen" }, -- Sham (DRK)
+        ["Gosspix Blabberlips"] = { "G.Blabberlips", 24, 40, 2667, 3, 5013, "Beastmen" }, -- Goss (RDM)
+        ["Shamblix Rottenheart"] = { "S.Rottenheart", 16, 40, 2667, 5, 5013, "Beastmen" }, -- Sham (DRK)
         ["Woodnix Shrillwhistle"] = { "W.Shrillwhistle", 6, 40, 2667, 0, 5013, "Beastmen" }, -- Wood (BST)
         -- Dynamis - Jeuno
         ["Bandrix Rockjaw"] = { "B.Rockjaw", 32, 188, 143, 0, 5013, "Beastmen" }, -- Band (THF)
