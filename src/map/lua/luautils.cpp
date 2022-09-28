@@ -173,6 +173,7 @@ namespace luautils
         lua.set_function("UpdateNMSpawnPoint", &luautils::UpdateNMSpawnPoint);
         lua.set_function("SetDropRate", &luautils::SetDropRate);
         lua.set_function("NearLocation", &luautils::NearLocation);
+        lua.set_function("GetFurthestValidPosition", &luautils::GetFurthestValidPosition);
         lua.set_function("Terminate", &luautils::Terminate);
         lua.set_function("GetReadOnlyItem", &luautils::GetReadOnlyItem);
         lua.set_function("GetAbility", &luautils::GetAbility);
@@ -4663,6 +4664,26 @@ namespace luautils
         nearPos["z"]       = pos.z;
 
         return nearPos;
+    }
+
+    sol::table GetFurthestValidPosition(CLuaBaseEntity* fromTarget, float distance, float theta)
+    {
+        CBaseEntity* entity = fromTarget->GetBaseEntity();
+        position_t   pos    = nearPosition(entity->loc.p, distance, theta);
+
+        float validPos[3];
+        bool  success = entity->loc.zone->m_navMesh->findFurthestValidPoint(entity->loc.p, pos, validPos);
+        if (!success)
+        {
+            return sol::lua_nil;
+        }
+
+        sol::table outPos = lua.create_table();
+        outPos["x"]       = validPos[0];
+        outPos["y"]       = validPos[1];
+        outPos["z"]       = validPos[2];
+
+        return outPos;
     }
 
     void OnPlayerDeath(CCharEntity* PChar)
