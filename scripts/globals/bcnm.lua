@@ -1,6 +1,7 @@
 -----------------------------------
 -- BCNM Functions
 -----------------------------------
+require("scripts/globals/battlefield")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
@@ -535,6 +536,11 @@ local battlefields =
 -- Check requirements for registrant and allies
 -----------------------------------
 local function checkReqs(player, npc, bfid, registrant)
+    local battlefield = xi.battlefield.contents[bfid]
+    if battlefield then
+        return battlefield:checkRequirements(player, npc, registrant)
+    end
+
     local mi       = xi.mission.id
     local npcid    = npc:getID()
     local mjob     = player:getMainJob()
@@ -771,6 +777,11 @@ end
 -- check ability to skip a cutscene
 -----------------------------------
 local function checkSkip(player, bfid)
+    local battlefield = xi.battlefield.contents[bfid]
+    if battlefield then
+        return battlefield:checkSkipCutscene(player)
+    end
+
     local mi        = xi.mission.id
     local nat       = player:getCurrentMission(player:getNation())
     local sandy     = player:getCurrentMission(xi.mission.log_id.SANDORIA)
@@ -950,24 +961,12 @@ local function getItemById(player, bfid)
     return 0
 end
 
-local function rejectLevelSyncedParty(player, npc)
-    for _, member in pairs(player:getAlliance()) do
-        if member:isLevelSync() then
-            local zoneId = player:getZoneID()
-            local ID = zones[zoneId]
-            -- Your party is unable to participate because certain members' levels are restricted
-            player:messageText(npc, ID.text.MEMBERS_LEVELS_ARE_RESTRICTED, false)
-            return true
-        end
-    end
-    return false
-end
 -----------------------------------
 -- onTrade Action
 -----------------------------------
 
 xi.bcnm.onTrade = function(player, npc, trade, onUpdate)
-    if rejectLevelSyncedParty(player, npc) then -- player's party has level sync, abort.
+    if xi.battlefield.rejectLevelSyncedParty(player, npc) then -- player's party has level sync, abort.
         return false
     end
 
@@ -1041,7 +1040,7 @@ end
 -----------------------------------
 xi.bcnm.onTrigger = function(player, npc)
     -- Cannot enter if anyone in party is level/master sync'd
-    if rejectLevelSyncedParty(player, npc) then
+    if xi.battlefield.rejectLevelSyncedParty(player, npc) then
         return false
     end
 

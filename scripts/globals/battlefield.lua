@@ -30,6 +30,8 @@ function onBattlefieldHandlerInitialise(zone)
 end
 
 xi.battlefield = {}
+xi.battlefield.contents = {}
+xi.battlefield.contentsByZone = {}
 
 xi.battlefield.status =
 {
@@ -67,6 +69,20 @@ xi.battlefield.dropChance =
     VERY_HIGH      = 100,
     EXTREMELY_HIGH = 140,
 }
+
+
+xi.battlefield.rejectLevelSyncedParty = function(player, npc)
+    for _, member in pairs(player:getAlliance()) do
+        if member:isLevelSync() then
+            local zoneId = player:getZoneID()
+            local ID = zones[zoneId]
+            -- Your party is unable to participate because certain members' levels are restricted
+            player:messageText(npc, ID.text.MEMBERS_LEVELS_ARE_RESTRICTED, false)
+            return true
+        end
+    end
+    return false
+end
 
 function xi.battlefield.onBattlefieldTick(battlefield, timeinside)
     local killedallmobs = true
