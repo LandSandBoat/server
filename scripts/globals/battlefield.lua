@@ -148,7 +148,8 @@ function Battlefield:checkSkipCutscene(player)
 end
 
 function Battlefield:setEntryNpc(entryNpc)
-    local entry = {
+    local entry =
+    {
         [entryNpc] =
         {
             onTrade = utils.bind(self.onEntryTrade, self),
@@ -330,12 +331,13 @@ function Battlefield:onEntryEventUpdate(player, csid, option, extras)
 
     -- Handle record
     local initiatorId = 0
+    local initiatorName = ""
     local battlefield = player:getBattlefield()
 
     if battlefield then
         battlefield:setLocalVar("[cs]bit", battlefieldIndex)
         name, clearTime, partySize = battlefield:getRecord()
-        initiatorId, _ = battlefield:getInitiator()
+        initiatorId, initiatorName = battlefield:getInitiator()
     end
 
     -- Register party members

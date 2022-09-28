@@ -365,7 +365,6 @@ namespace luautils
         return -1;
     }
 
-
 }; // namespace luautils
 
 #endif // _LUAUTILS_H -

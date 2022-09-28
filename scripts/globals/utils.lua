@@ -17,7 +17,7 @@ end
 local unpack = unpack or table.unpack
 
 local function packn(...)
-    return {n = select('#', ...), ...}
+    return { n = select('#', ...), ... }
 end
 
 local function unpackn(t)
@@ -25,7 +25,7 @@ local function unpackn(t)
 end
 
 local function mergen(...)
-    local res = {n=0}
+    local res = { n = 0 }
     for i = 1, select('#', ...) do
         local t = select(i, ...)
         for j = 1, t.n do

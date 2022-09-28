@@ -3011,8 +3011,7 @@ namespace luautils
             return -1;
         }
 
-        
-        auto result  = onBattlefieldTick(CLuaBattlefield(PBattlefield), seconds);
+        auto result = onBattlefieldTick(CLuaBattlefield(PBattlefield), seconds);
         if (!result.valid())
         {
             sol::error err = result;
