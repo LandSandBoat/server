@@ -653,10 +653,8 @@ function Limbus:onBattlefieldRegister(player, battlefield)
 end
 
 function Limbus:onBattlefieldEnter(player, battlefield)
-    -- TODO(jmcmorris)
-    -- player:delKeyItem(xi.ki.COSMO_CLEANSE)
-    -- player:delKeyItem(self.requiredCard)
-    -- player:setCharVar("Cosmo_Cleanse_TIME", os.time())
+    Battlefield.onBattlefieldEnter(self, player, battlefield)
+    player:setCharVar("Cosmo_Cleanse_TIME", os.time())
 end
 
 function Limbus:onBattlefieldDestroy(battlefield)
