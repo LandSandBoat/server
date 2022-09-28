@@ -126,7 +126,7 @@ namespace luautils
 
     void ReloadFilewatchList();
 
-    std::vector<std::string> GetQuestAndMissionFilenamesList();
+    std::vector<std::string> GetContainerFilenamesList();
 
     // Cache helpers
     auto getEntityCachedFunction(CBaseEntity* PEntity, std::string funcName) -> sol::function;
@@ -341,6 +341,31 @@ namespace luautils
 
     // Retrive the first itemId that matches a name
     uint16 GetItemIDByName(std::string const& name);
+
+    template <typename... Targs>
+    int32 invokeBattlefieldEvent(const std::string& fileName, const std::string& eventName, Targs... args)
+    {
+        // Calls the Battlefield event through the interaction object if it can find it
+        auto battlefield = GetCacheEntryFromFilename(fileName);
+        if (battlefield.valid())
+        {
+            auto onBattlefieldInitialise = battlefield.get<sol::protected_function>(eventName);
+            if (onBattlefieldInitialise.valid())
+            {
+                auto result = onBattlefieldInitialise(battlefield, args...);
+                if (!result.valid())
+                {
+                    sol::error err = result;
+                    ShowError("luautils::%s: %s", eventName, err.what());
+                    return -1;
+                }
+                return 0;
+            }
+        }
+        return -1;
+    }
+
+
 }; // namespace luautils
 
 #endif // _LUAUTILS_H -

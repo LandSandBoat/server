@@ -179,7 +179,7 @@ namespace luautils
         lua.set_function("GetAbility", &luautils::GetAbility);
         lua.set_function("GetSpell", &luautils::GetSpell);
         lua.set_function("SelectDailyItem", &luautils::SelectDailyItem);
-        lua.set_function("GetQuestAndMissionFilenamesList", &luautils::GetQuestAndMissionFilenamesList);
+        lua.set_function("GetContainerFilenamesList", &luautils::GetContainerFilenamesList);
         lua.set_function("GetCachedInstanceScript", &luautils::GetCachedInstanceScript);
         lua.set_function("GetItemIDByName", &luautils::GetItemIDByName);
         lua.set_function("SendLuaFuncStringToZone", &luautils::SendLuaFuncStringToZone);
@@ -339,12 +339,15 @@ namespace luautils
         }
     }
 
-    std::vector<std::string> GetQuestAndMissionFilenamesList()
+    std::vector<std::string> GetContainerFilenamesList()
     {
         TracyZoneScoped;
         std::vector<std::string> outVec;
 
-        // Scrape for files of the form: "scripts/(quests|missions)/(area|expansion)/(filename).lua"
+        // Scrape for files of the form:
+        // "scripts/quests/(area|expansion)/(filename).lua"
+        // "scripts/missions/(area|expansion)/(filename).lua"
+        // "scripts/battlefields/(zone)/(filename).lua"
         auto scrapeSubdir = [&](std::string subFolder) -> void
         {
             for (auto const& entry : std::filesystem::recursive_directory_iterator(subFolder))
@@ -367,6 +370,7 @@ namespace luautils
             }
         };
 
+        scrapeSubdir("scripts/battlefields");
         scrapeSubdir("scripts/missions");
         scrapeSubdir("scripts/quests");
 
@@ -587,7 +591,7 @@ namespace luautils
 
         // Handle Quests and Missions then return
         if (parts.size() == 3 &&
-            (parts[0] == "quests" || parts[0] == "missions"))
+            (parts[0] == "quests" || parts[0] == "missions" || parts[0] == "battlefields"))
         {
             if (parts[2] == "helpers")
             {
@@ -636,7 +640,11 @@ namespace luautils
                 ShowInfo("[FileWatcher] INTERACTION %s -> %s", requireName, parts[2]);
             }
 
-            return;
+            // We want to continue with battlefields since they are used as cached objects
+            if (parts[0] != "battlefields")
+            {
+                return;
+            }
         }
 
         if (!std::filesystem::exists(filename))
@@ -2961,7 +2969,9 @@ namespace luautils
         auto onBattlefieldInitialise = lua["xi"]["zones"][zone]["bcnms"][name]["onBattlefieldInitialise"];
         if (!onBattlefieldInitialise.valid())
         {
-            return -1;
+            auto filename = fmt::format("./scripts/battlefields/{}/{}.lua", zone, name);
+            CacheLuaObjectFromFile(filename);
+            return invokeBattlefieldEvent(filename, "onBattlefieldInitialise", CLuaBattlefield(PBattlefield));
         }
 
         auto result = onBattlefieldInitialise(CLuaBattlefield(PBattlefield));
@@ -2984,17 +2994,24 @@ namespace luautils
             return -1;
         }
 
-        auto zone = (const char*)PBattlefield->GetZone()->GetName();
-        auto name = PBattlefield->GetName();
+        auto zone    = (const char*)PBattlefield->GetZone()->GetName();
+        auto name    = PBattlefield->GetName();
+        auto seconds = std::chrono::duration_cast<std::chrono::seconds>(PBattlefield->GetTimeInside()).count();
 
         auto onBattlefieldTick = lua["xi"]["zones"][zone]["bcnms"][name]["onBattlefieldTick"];
         if (!onBattlefieldTick.valid())
         {
+            auto filename = fmt::format("./scripts/battlefields/{}/{}.lua", zone, name);
+            if (invokeBattlefieldEvent(filename, "onBattlefieldTick", CLuaBattlefield(PBattlefield), seconds) == 0)
+            {
+                return 0;
+            }
+
             ShowError("luautils::onBattlefieldTick: Unable to find onBattlefieldTick function for %s", name);
             return -1;
         }
 
-        auto seconds = std::chrono::duration_cast<std::chrono::seconds>(PBattlefield->GetTimeInside()).count();
+        
         auto result  = onBattlefieldTick(CLuaBattlefield(PBattlefield), seconds);
         if (!result.valid())
         {
@@ -3021,7 +3038,8 @@ namespace luautils
         auto onBattlefieldStatusChange = lua["xi"]["zones"][zone]["bcnms"][name]["onBattlefieldStatusChange"];
         if (!onBattlefieldStatusChange.valid())
         {
-            return -1;
+            auto filename = fmt::format("./scripts/battlefields/{}/{}.lua", zone, name);
+            return invokeBattlefieldEvent(filename, "onBattlefieldStatusChange", CLuaBattlefield(PBattlefield), PBattlefield->GetStatus());
         }
 
         auto result = onBattlefieldStatusChange(CLuaBattlefield(PBattlefield), PBattlefield->GetStatus());
@@ -4414,6 +4432,8 @@ namespace luautils
         auto onBattlefieldEnter = lua["xi"]["zones"][zone]["bcnms"][name]["onBattlefieldEnter"];
         if (!onBattlefieldEnter.valid())
         {
+            auto filename = fmt::format("./scripts/battlefields/{}/{}.lua", zone, name);
+            invokeBattlefieldEvent(filename, "onBattlefieldEnter", CLuaBaseEntity(PChar), CLuaBattlefield(PBattlefield));
             return;
         }
 
@@ -4449,6 +4469,8 @@ namespace luautils
         auto onBattlefieldLeave = lua["xi"]["zones"][zone]["bcnms"][name]["onBattlefieldLeave"];
         if (!onBattlefieldLeave.valid())
         {
+            auto filename = fmt::format("./scripts/battlefields/{}/{}.lua", zone, name);
+            invokeBattlefieldEvent(filename, "onBattlefieldLeave", CLuaBaseEntity(PChar), CLuaBattlefield(PBattlefield), LeaveCode);
             return;
         }
 
@@ -4482,6 +4504,8 @@ namespace luautils
         auto onBattlefieldRegister = lua["xi"]["zones"][zone]["bcnms"][name]["onBattlefieldRegister"];
         if (!onBattlefieldRegister.valid())
         {
+            auto filename = fmt::format("./scripts/battlefields/{}/{}.lua", zone, name);
+            invokeBattlefieldEvent(filename, "onBattlefieldRegister", CLuaBaseEntity(PChar), CLuaBattlefield(PBattlefield));
             return;
         }
 
@@ -4506,6 +4530,8 @@ namespace luautils
         auto onBattlefieldDestroy = lua["xi"]["zones"][zone]["bcnms"][name]["onBattlefieldDestroy"];
         if (!onBattlefieldDestroy.valid())
         {
+            auto filename = fmt::format("./scripts/battlefields/{}/{}.lua", zone, name);
+            invokeBattlefieldEvent(filename, "onBattlefieldDestroy", CLuaBattlefield(PBattlefield));
             return;
         }
 
