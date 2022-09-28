@@ -13,6 +13,36 @@ utils.MAX_INT32  = 2147483647
 function utils.unused(...)
 end
 
+-- bind and related functions are from https://stackoverflow.com/a/18229720
+local unpack = unpack or table.unpack
+
+local function packn(...)
+    return {n = select('#', ...), ...}
+end
+
+local function unpackn(t)
+    return unpack(t, 1, t.n)
+end
+
+local function mergen(...)
+    local res = {n=0}
+    for i = 1, select('#', ...) do
+        local t = select(i, ...)
+        for j = 1, t.n do
+            res.n = res.n + 1
+            res[res.n] = t[j]
+        end
+    end
+    return res
+end
+
+function utils.bind(func, ...)
+    local args = packn(...)
+    return function(...)
+        return func(unpackn(mergen(args, packn(...))))
+    end
+end
+
 -- Shuffles a table and returns a new table containing the randomized result.
 function utils.shuffle(inputTable)
     local shuffledTable = {}
