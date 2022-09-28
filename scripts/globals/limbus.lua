@@ -595,15 +595,8 @@ function Limbus:onEntryTrigger(player, npc)
 end
 
 function Limbus:onBattlefieldInitialise(battlefield)
-    battlefield:setLocalVar("loot", 1)
+    Battlefield.onBattlefieldInitialise(self, battlefield)
     SetServerVariable(self.serverVar, battlefield:getTimeLimit() / 60)
-
-    battlefield:addGroups(self.groups)
-
-    -- Setup Paths
-    for mobId, path in pairs(self.paths) do
-        GetMobByID(mobId):pathThrough(path, xi.path.flag.PATROL)
-    end
 
     xi.limbus.handleDoors(battlefield)
 

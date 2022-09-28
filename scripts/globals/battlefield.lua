@@ -400,6 +400,11 @@ end
 
 function Battlefield:onBattlefieldInitialise(battlefield)
     battlefield:setLocalVar("loot", 1)
+    battlefield:addGroups(self.groups)
+
+    for mobId, path in pairs(self.paths) do
+        GetMobByID(mobId):pathThrough(path, xi.path.flag.PATROL)
+    end
 end
 
 function Battlefield:onBattlefieldTick(battlefield, tick)
