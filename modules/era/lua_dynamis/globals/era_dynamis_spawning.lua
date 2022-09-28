@@ -1612,10 +1612,6 @@ xi.dynamis.setMobStats = function(mob)
         mob:setMobLevel(math.random(78,80))
         mob:setTrueDetection(true)
 
-        if familyEES[mob:getFamily()] then
-            print(familyEES[mob:getFamily()])
-        end
-
         if     job == xi.job.WAR then
             local params = {  }
             params.specials = {  }
@@ -1702,6 +1698,12 @@ xi.dynamis.setMobStats = function(mob)
             params.specials.skill.hpp = math.random(25,35)
             xi.mix.jobSpecial.config(mob, params)
         elseif job == xi.job.DRG then
+            local params = {  }
+            params.specials = {  }
+            params.specials.skill = {  }
+            params.specials.skill.id = xi.jsa.CALL_WYVERN
+            params.specials.skill.hpp = 100
+            xi.mix.jobSpecial.config(mob, params)
         elseif job == xi.job.SMN then
         end
 
@@ -1969,7 +1971,7 @@ xi.dynamis.mobOnEngaged = function(mob, target)
             mob:SetMagicCastingEnabled(false)
             mob:SetMobAbilityEnabled(false)
 
-            mob:addStatusEffectEx(xi.effect.BIND, xi.effect.BIND, 1, 3, 3, 0, 0, 0, xi.effectFlag.NO_LOSS_MESSAGE)
+            mob:addStatusEffectEx(xi.effect.BIND, xi.effect.BIND, 1, 3, 6, 0, 0, 0, xi.effectFlag.NO_LOSS_MESSAGE)
             mob:timer(3000, function(mobArg)
                 if mob:isAlive() then
                     xi.dynamis.spawnDynamicPet(target, mob, mobArg:getMainJob())
@@ -1977,10 +1979,14 @@ xi.dynamis.mobOnEngaged = function(mob, target)
                     mobArg:SetAutoAttackEnabled(true)
                     mobArg:SetMagicCastingEnabled(true)
                     mobArg:SetMobAbilityEnabled(true)
+
+                    if mobArg:hasStatusEffect(xi.effect.BIND) then
+                        mobArg:delStatusEffectSilent(xi.effect.BIND)
+                    end
                 end
             end)
-        elseif mob:getMainJob() == xi.job.DRG then
-            mob:useMobAbility(xi.jsa.CALL_WYVERN)
+        -- elseif mob:getMainJob() == xi.job.DRG then
+            -- mob:useMobAbility(xi.jsa.CALL_WYVERN)
         end
     end
 end
