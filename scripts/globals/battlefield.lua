@@ -106,7 +106,6 @@ function Battlefield:new(zoneId, battlefieldId, menuBit, entryNpc)
     obj.sections = { { [zoneId] = {} } }
 
     -- If being called from a derived class then this should be handled there as obj wont have the metatable setup properly yet
-    lldebugger.requestBreak()
     if entryNpc then
         obj:setEntryNpc(entryNpc)
     end
@@ -227,7 +226,6 @@ function Battlefield:onEntryTrade(player, npc, trade, onUpdate)
 end
 
 function Battlefield:onEntryTrigger(player, npc)
-    lldebugger.requestBreak()
     -- Cannot enter if anyone in party is level/master sync'd
     if xi.battlefield.rejectLevelSyncedParty(player, npc) then
         return false
