@@ -542,7 +542,7 @@ function xi.limbus.extendTimeLimit(ID, battlefield, amount)
     end
 end
 
-Limbus = setmetatable({ Battlefield = Battlefield }, { __index = Battlefield })
+Limbus = setmetatable({ }, { __index = Battlefield })
 Limbus.__index = Limbus
 Limbus.__eq = function(m1, m2)
     return m1.name == m2.name
@@ -566,7 +566,7 @@ end
 
 function Limbus:onEntryEventUpdate(player, csid, option, extras)
     print("Limbus:onEntryEventUpdate")
-    if self.Battlefield:onEntryEventUpdate(player, csid, option, extras) then
+    if Battlefield.onEntryEventUpdate(self, player, csid, option, extras) then
         local alliance = player:getAlliance()
 
         for _, member in pairs(alliance) do
@@ -582,7 +582,7 @@ function Limbus:onEntryEventUpdate(player, csid, option, extras)
 end
 
 function Limbus:onEntryEventFinish(player, csid, option)
-    if not self.Battlefield:onEntryEventFinish(player, csid, option) then
+    if not Battlefield.onEntryEventFinish(self, player, csid, option) then
         player:setCharVar("ApollyonEntrance", 0)
     end
 end
@@ -590,17 +590,17 @@ end
 function Limbus:onEntryTrade(player, npc, trade)
     if self:checkRequirements(player, npc, true) then
         player:setCharVar("ApollyonEntrance", 1)
-        self.Battlefield:onEntryTrade(player, npc, trade)
+        Battlefield.onEntryTrade(self, player, npc, trade)
     else
         player:messageSpecial(self.ID.text.NO_KEY)
     end
 end
 
 function Limbus:onEntryTrigger(player, npc)
-    if self:checkRequirements(player, npc, true) then
+    if Battlefield.onEntryTrigger(self, player, npc) then
         player:setCharVar("ApollyonEntrance", 1)
-        self.Battlefield:onEntryTrigger(player, npc)
     else
+        -- TODO(jmcmorris): Perhaps we need a result value from onEntryTrigger? Refactor?
         player:messageSpecial(self.ID.text.NO_KEY)
     end
 end
