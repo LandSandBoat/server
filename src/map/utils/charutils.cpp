@@ -2511,7 +2511,7 @@ namespace charutils
         }
         if (equipSlotID == SLOT_MAIN || equipSlotID == SLOT_RANGED || equipSlotID == SLOT_SUB)
         {
-            if (!PItem || !PItem->isType(ITEM_EQUIPMENT) ||
+            if (!PItem || (!PItem->isType(ITEM_EQUIPMENT) && PItem->getID() != 0) ||
                 (((CItemWeapon*)PItem)->getSkillType() != SKILL_STRING_INSTRUMENT && ((CItemWeapon*)PItem)->getSkillType() != SKILL_WIND_INSTRUMENT))
             {
                 // If the weapon ISN'T a wind based instrument or a string based instrument

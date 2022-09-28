@@ -366,7 +366,7 @@ int16 CPetController::GetSMNSkillReduction()
         uint16 skill    = PPet->PMaster->GetSkill(SKILL_SUMMONING_MAGIC);
         uint16 maxSkill = battleutils::GetMaxSkill(SKILL_SUMMONING_MAGIC, JOB_SMN, masterLvl);
 
-        return (1000 * floor(skill - maxSkill));
+        return (1000 * floor(maxSkill - skill));
     }
 
     return 0;
