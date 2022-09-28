@@ -3,6 +3,7 @@
 -----------------------------------
 require("scripts/globals/battlefield")
 require("scripts/globals/keyitems")
+require('scripts/globals/interaction/container')
 require("scripts/globals/status")
 require("scripts/globals/zone")
 -----------------------------------
@@ -541,130 +542,166 @@ function xi.limbus.extendTimeLimit(ID, battlefield, amount)
     end
 end
 
-LimbusArea = {}
-LimbusArea.__index = LimbusArea
-LimbusArea.__eq = function(m1, m2)
+Limbus = setmetatable({ Battlefield = Battlefield }, { __index = Battlefield })
+Limbus.__index = Limbus
+Limbus.__eq = function(m1, m2)
     return m1.name == m2.name
 end
 
-LimbusArea.name = ""
-LimbusArea.serverVar = ""
-LimbusArea.requiredCard = 0
-LimbusArea.groups = {}
-LimbusArea.paths = {}
-LimbusArea.loot = {}
+Limbus.name = ""
+Limbus.serverVar = ""
+Limbus.requiredCard = 0
 
-function LimbusArea:new(name, requiredCard)
-    local obj = {}
+function Limbus:new(zoneId, battlefieldId, menuBit, entryNpc, name)
+    local obj = Battlefield:new(zoneId, battlefieldId, menuBit)
     setmetatable(obj, self)
     obj.name = name
+    obj.ID = zones[obj.zoneId][obj.name]
     obj.serverVar = "[" .. name .. "]Time"
-    obj.requiredCard = requiredCard
+    table.insert(obj.requiredKeyItems, xi.ki.COSMO_CLEANSE)
+    obj:setEntryNpc(entryNpc)
+    obj.createWornItem = false
     return obj
 end
 
-function LimbusArea:createBattlefield()
-    local battlefieldObject = {}
+function Limbus:onEntryEventUpdate(player, csid, option, extras)
+    print("Limbus:onEntryEventUpdate")
+    if self.Battlefield:onEntryEventUpdate(player, csid, option, extras) then
+        local alliance = player:getAlliance()
 
-    battlefieldObject.onBattlefieldInitialise = function(battlefield)
-        battlefield:setLocalVar("loot", 1)
-        SetServerVariable(self.serverVar, battlefield:getTimeLimit() / 60)
-
-        battlefield:addGroups(self.groups)
-
-        -- Setup Paths
-        for mobId, path in pairs(self.paths) do
-            GetMobByID(mobId):pathThrough(path, xi.path.flag.PATROL)
+        for _, member in pairs(alliance) do
+            if
+                member:getZoneID() == player:getZoneID() and
+                not member:hasStatusEffect(xi.effect.BATTLEFIELD) and
+                not member:getBattlefield()
+            then
+                member:messageSpecial(self.ID.text.HUM)
+            end
         end
+    end
+end
 
-        xi.limbus.handleDoors(battlefield)
+function Limbus:onEntryEventFinish(player, csid, option)
+    if not self.Battlefield:onEntryEventFinish(player, csid, option) then
+        player:setCharVar("ApollyonEntrance", 0)
+    end
+end
 
-        local ID = zones[battlefield:getZoneID()][self.name]
-        -- Setup Item Crates
-        for i, crateID in ipairs(ID.npc.ITEM_CRATES) do
-            local crate = GetNPCByID(crateID)
-            xi.limbus.hideCrate(crate)
-            crate:removeListener("TRIGGER_ITEM_CRATE")
-            crate:addListener("ON_TRIGGER", "TRIGGER_ITEM_CRATE", function(player, npc)
-                npcUtil.openCrate(npc, function()
-                    xi.limbus.handleLootRolls(battlefield, self.loot[crateID], nil, npc)
-                end)
-            end)
-        end
+function Limbus:onEntryTrade(player, npc, trade)
+    if self:checkRequirements(player, npc, true) then
+        player:setCharVar("ApollyonEntrance", 1)
+        self.Battlefield:onEntryTrade(player, npc, trade)
+    else
+        player:messageSpecial(self.ID.text.NO_KEY)
+    end
+end
 
-        -- Setup Time Crates
-        for i, crateID in ipairs(ID.npc.TIME_CRATES) do
-            local crate = GetNPCByID(crateID)
-            xi.limbus.hideCrate(crate)
-            crate:removeListener("TRIGGER_TIME_CRATE")
-            crate:addListener("ON_TRIGGER", "TRIGGER_TIME_CRATE", function(player, npc)
-                npcUtil.openCrate(npc, function()
-                    xi.limbus.extendTimeLimit(zones[battlefield:getZoneID()], player:getBattlefield(), ID.TIME_EXTENSIONS[npc:getID()])
-                end)
-            end)
-        end
+function Limbus:onEntryTrigger(player, npc)
+    if self:checkRequirements(player, npc, true) then
+        player:setCharVar("ApollyonEntrance", 1)
+        self.Battlefield:onEntryTrigger(player, npc)
+    else
+        player:messageSpecial(self.ID.text.NO_KEY)
+    end
+end
 
-        -- Setup Recover Crates
-        -- Recover crates are special in that they are mobs that perform a skill on the player when triggered
-        for i, crateID in ipairs(ID.npc.RECOVER_CRATES) do
-            local crate = GetMobByID(crateID)
-            xi.limbus.hideCrate(crate)
-            crate:removeListener("TRIGGER_RECOVER_CRATE")
-            crate:addListener("ON_TRIGGER", "TRIGGER_RECOVER_CRATE", function(player, npc)
-                npcUtil.openCrate(npc, function()
-                    -- Use wz_recover_all to heal players
-                    npc:useMobAbility(1531, player)
-                end)
-            end)
-        end
+function Limbus:onBattlefieldInitialise(battlefield)
+    battlefield:setLocalVar("loot", 1)
+    SetServerVariable(self.serverVar, battlefield:getTimeLimit() / 60)
 
-        -- Setup Winning Loot Crate
-        -- Winning crate is mostly setup through bcnm_treasure and is spawned automatically when boss is killed
-        local crate = GetNPCByID(ID.npc.LOOT_CRATE)
-        crate:resetLocalVars()
-        crate:removeListener("TRIGGER_LOOT_CRATE")
-        crate:addListener("ON_TRIGGER", "TRIGGER_LOOT_CRATE", function(player, npc)
+    battlefield:addGroups(self.groups)
+
+    -- Setup Paths
+    for mobId, path in pairs(self.paths) do
+        GetMobByID(mobId):pathThrough(path, xi.path.flag.PATROL)
+    end
+
+    xi.limbus.handleDoors(battlefield)
+
+    local ID = zones[battlefield:getZoneID()][self.name]
+    -- Setup Item Crates
+    for i, crateID in ipairs(ID.npc.ITEM_CRATES) do
+        local crate = GetNPCByID(crateID)
+        xi.limbus.hideCrate(crate)
+        crate:removeListener("TRIGGER_ITEM_CRATE")
+        crate:addListener("ON_TRIGGER", "TRIGGER_ITEM_CRATE", function(player, npc)
             npcUtil.openCrate(npc, function()
-                xi.limbus.handleLootRolls(battlefield, self.loot[ID.npc.LOOT_CRATE], nil, npc)
-                battlefield:setLocalVar("cutsceneTimer", 10)
-                battlefield:setLocalVar("lootSeen", 1)
+                xi.limbus.handleLootRolls(battlefield, self.loot[crateID], nil, npc)
             end)
         end)
     end
 
-    battlefieldObject.onBattlefieldTick = function(battlefield, tick)
-        if battlefield:getRemainingTime() % 60 == 0 then
-            SetServerVariable(self.serverVar, battlefield:getRemainingTime() / 60)
-        end
-
-        xi.battlefield.onBattlefieldTick(battlefield, tick)
+    -- Setup Time Crates
+    for i, crateID in ipairs(ID.npc.TIME_CRATES) do
+        local crate = GetNPCByID(crateID)
+        xi.limbus.hideCrate(crate)
+        crate:removeListener("TRIGGER_TIME_CRATE")
+        crate:addListener("ON_TRIGGER", "TRIGGER_TIME_CRATE", function(player, npc)
+            npcUtil.openCrate(npc, function()
+                xi.limbus.extendTimeLimit(zones[battlefield:getZoneID()], player:getBattlefield(), ID.TIME_EXTENSIONS[npc:getID()])
+            end)
+        end)
     end
 
-    battlefieldObject.onBattlefieldRegister = function(player, battlefield)
+    -- Setup Recover Crates
+    -- Recover crates are special in that they are mobs that perform a skill on the player when triggered
+    for i, crateID in ipairs(ID.npc.RECOVER_CRATES) do
+        local crate = GetMobByID(crateID)
+        xi.limbus.hideCrate(crate)
+        crate:removeListener("TRIGGER_RECOVER_CRATE")
+        crate:addListener("ON_TRIGGER", "TRIGGER_RECOVER_CRATE", function(player, npc)
+            npcUtil.openCrate(npc, function()
+                -- Use wz_recover_all to heal players
+                npc:useMobAbility(1531, player)
+            end)
+        end)
     end
 
-    battlefieldObject.onBattlefieldEnter = function(player, battlefield)
-        player:delKeyItem(xi.ki.COSMO_CLEANSE)
-        player:delKeyItem(self.requiredCard)
-        player:setCharVar("Cosmo_Cleanse_TIME", os.time())
+    -- Setup Winning Loot Crate
+    -- Winning crate is mostly setup through bcnm_treasure and is spawned automatically when boss is killed
+    local crate = GetNPCByID(ID.npc.LOOT_CRATE)
+    crate:resetLocalVars()
+    crate:removeListener("TRIGGER_LOOT_CRATE")
+    crate:addListener("ON_TRIGGER", "TRIGGER_LOOT_CRATE", function(player, npc)
+        npcUtil.openCrate(npc, function()
+            xi.limbus.handleLootRolls(battlefield, self.loot[ID.npc.LOOT_CRATE], nil, npc)
+            battlefield:setLocalVar("cutsceneTimer", 10)
+            battlefield:setLocalVar("lootSeen", 1)
+        end)
+    end)
+end
+
+function Limbus:onBattlefieldTick(battlefield, tick)
+    if battlefield:getRemainingTime() % 60 == 0 then
+        SetServerVariable(self.serverVar, battlefield:getRemainingTime() / 60)
     end
 
-    battlefieldObject.onBattlefieldDestroy = function(battlefield)
-        xi.limbus.handleDoors(battlefield, true)
-        SetServerVariable(self.serverVar, 0)
+    xi.battlefield.onBattlefieldTick(battlefield, tick)
+end
+
+function Limbus:onBattlefieldRegister(player, battlefield)
+end
+
+function Limbus:onBattlefieldEnter(player, battlefield)
+    -- TODO(jmcmorris)
+    -- player:delKeyItem(xi.ki.COSMO_CLEANSE)
+    -- player:delKeyItem(self.requiredCard)
+    -- player:setCharVar("Cosmo_Cleanse_TIME", os.time())
+end
+
+function Limbus:onBattlefieldDestroy(battlefield)
+    xi.limbus.handleDoors(battlefield, true)
+    SetServerVariable(self.serverVar, 0)
+end
+
+function Limbus:onBattlefieldLeave(player, battlefield, leavecode)
+    local ID = zones[battlefield:getZoneID()]
+    player:messageSpecial(ID.text.HUM + 1)
+
+    if leavecode == xi.battlefield.leaveCode.WON then
+        local _, clearTime, partySize = battlefield:getRecord()
+        player:startCutscene(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), 0)
+    elseif leavecode == xi.battlefield.leaveCode.LOST then
+        player:startCutscene(32002)
     end
-
-    battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
-        local ID = zones[battlefield:getZoneID()]
-        player:messageSpecial(ID.text.HUM + 1)
-
-        if leavecode == xi.battlefield.leaveCode.WON then
-            local _, clearTime, partySize = battlefield:getRecord()
-            player:startCutscene(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), 0)
-        elseif leavecode == xi.battlefield.leaveCode.LOST then
-            player:startCutscene(32002)
-        end
-    end
-
-    return battlefieldObject
 end

@@ -9,9 +9,18 @@ require("scripts/globals/items")
 require("scripts/globals/keyitems")
 -----------------------------------
 
-local area = LimbusArea:new("SE_APOLLYON", xi.ki.BLACK_CARD)
+local content = Limbus:new(
+    xi.zone.APOLLYON,
+    xi.battlefield.id.SE_APOLLYON,
+    2,
+    '_12i',
+    "SE_APOLLYON"
+)
 
-area.paths =
+content.area = 3
+table.insert(content.requiredKeyItems, xi.ki.BLACK_CARD)
+
+content.paths =
 {
     [ID.SE_APOLLYON.mob.TIEHOLTSODI] =
     {
@@ -110,7 +119,7 @@ local floorThreeCratePositions =
     { 354.661, -0.072, -273.424 },
 }
 
-area.groups =
+content.groups =
 {
     -- Floor 1
     {
@@ -270,7 +279,7 @@ area.groups =
     },
 }
 
-area.loot =
+content.loot =
 {
     [ID.SE_APOLLYON.npc.ITEM_CRATES[1]] =
     {
@@ -452,4 +461,4 @@ area.loot =
     },
 }
 
-return area:createBattlefield()
+return content:register()
