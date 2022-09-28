@@ -628,7 +628,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         -- Dynamis - Jeuno
         ["Bandrix Rockjaw"] = { "B.Rockjaw", 32, 188, 143, 0, 5013, "Beastmen" }, -- Band (THF)
         ["Buffrix Eargone"] = { "B.Eargone", 33, 188, 143, 4, 5013, "Beastmen" }, -- Buff (PLD)
-        ["Clocktix Longnail"] = { "C.Longnail", 51, 188, 143, 5, 5013, "Beastmen" }, -- Cloc (DRK)
+        ["Cloktix Longnail"] = { "C.Longnail", 51, 188, 143, 5, 5013, "Beastmen" }, -- Cloc (DRK)
         ["Elixmix Hooknose"] = { "E.Hooknose", 31, 188, 143, 1, 5013, "Beastmen" }, -- Elix (WHM)
         ["Gabblox Magpietongue"] = { "G.Magpietongue", 11, 188, 143, 3, 5013, "Beastmen" }, -- Gabb (RDM)
         ["Hermitrix Toothrot"] = { "H.Toothrot", 27, 188, 143, 5000, 5013, "Beastmen" }, -- Herm (BLM)
@@ -636,7 +636,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Lurklox Dhalmelneck"] = { "L.Dhalmelneck", 36, 188, 143, 0, 5013, "Beastmen" }, -- Lurk (RNG)
         ["Morgmox Moldnoggin"] = { "M.Moldnoggin", 29, 188, 143, 0, 5013, "Beastmen" }, -- Morg (SMN)
         ["Sparkspox Sweatbrow"] = { "S.Sweatbrow", 30, 188, 143, 0, 5013, "Beastmen" }, -- Spar (WAR)
-        ["Ticktox Beadeyes"] = { "T.Beadeyes", 35, 188, 143, 5, 5013, "Beastmen" }, -- Tick (DRK)
+        ["Ticktox Beadyeyes"] = { "T.Beadyeyes", 35, 188, 143, 5, 5013, "Beastmen" }, -- Tick (DRK)
         ["Trailblix Goatmug"] = { "T.Goatmug", 37, 188, 143, 0, 5013, "Beastmen" }, -- Trai (BST)
         ["Tufflix Loglimbs"] = { "T.Loglimbs", 21, 188, 143, 4, 5013, "Beastmen" }, -- Tuff (PLD)
         ["Wyrmwix Snakespecs"] = { "W.Snakespecs", 28, 188, 143, 0, 5013, "Beastmen" }, -- Snak (DRG)
@@ -782,7 +782,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         -- Dynamis - San d'Oria
         ["Overlord's Tombstone"] = { "O. Tombstone", 1, 185, 1967, 49, 93, "Statue Megaboss" }, -- SMb
         -- Dynamis - Windurst
-        ["Tzee Xicu Idol"] = { "Tzee Xicu Idol", 1, 187, 2510, 50, 95, "Statue Megaboss" }, -- WMb
+        ["Tzee Xicu Manifest"] = { "Tzee Xicu Mani.", 1, 187, 2510, 50, 95, "Statue Megaboss" }, -- WMb
         -- Dynamis - Xarcabard Non-Beastmen
         ["Animated Hammer"] = { "A.Hammer", 81, 135, 99, 0, 9, "Animated Weapon" }, -- AHam
         ["Animated Staff"] = { "A.Staff", 87, 135, 108, 0, 23, "Animated Weapon" }, -- ASta
@@ -1295,6 +1295,7 @@ xi.dynamis.spawnDynamicPet =function(target, oMob, mobJob)
                 [true] =
                 {
                     ["Draklix Scalecrust"] = { "V. Wyvern", 27, 134, 0, 0, 714 }, -- Normal Vanguard's Wyvern (Vwyv)
+                    ["Wyrmwix Snakespecs"] = { "V. Wyvern", 27, 134, 0, 0, 714 }, -- Normal Vanguard's Wyvern (Vwyv)
                 },
             },
             [334] = -- Orc Family
