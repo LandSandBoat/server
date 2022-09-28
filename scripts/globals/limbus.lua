@@ -531,17 +531,6 @@ function xi.limbus.openDoor(battlefield, doorID)
     door:setAnimation(xi.animation.OPEN_DOOR)
 end
 
-function xi.limbus.extendTimeLimit(ID, battlefield, amount)
-    local timeLimit = battlefield:getTimeLimit()
-    battlefield:setTimeLimit(timeLimit + amount * 60)
-    local remaining = battlefield:getRemainingTime() / 60
-
-    for _, player in pairs(battlefield:getPlayers()) do
-        player:messageSpecial(ID.text.TIME_EXTENDED, amount)
-        player:messageSpecial(ID.text.TIME_LEFT, remaining)
-    end
-end
-
 Limbus = setmetatable({ }, { __index = Battlefield })
 Limbus.__index = Limbus
 Limbus.__eq = function(m1, m2)
@@ -624,11 +613,7 @@ function Limbus:onBattlefieldInitialise(battlefield)
         local crate = GetNPCByID(crateID)
         xi.limbus.hideCrate(crate)
         crate:removeListener("TRIGGER_ITEM_CRATE")
-        crate:addListener("ON_TRIGGER", "TRIGGER_ITEM_CRATE", function(player, npc)
-            npcUtil.openCrate(npc, function()
-                xi.limbus.handleLootRolls(battlefield, self.loot[crateID], nil, npc)
-            end)
-        end)
+        crate:addListener("ON_TRIGGER", "TRIGGER_ITEM_CRATE", utils.bind(self.handleOpenItemCrate, self))
     end
 
     -- Setup Time Crates
@@ -636,11 +621,7 @@ function Limbus:onBattlefieldInitialise(battlefield)
         local crate = GetNPCByID(crateID)
         xi.limbus.hideCrate(crate)
         crate:removeListener("TRIGGER_TIME_CRATE")
-        crate:addListener("ON_TRIGGER", "TRIGGER_TIME_CRATE", function(player, npc)
-            npcUtil.openCrate(npc, function()
-                xi.limbus.extendTimeLimit(zones[battlefield:getZoneID()], player:getBattlefield(), ID.TIME_EXTENSIONS[npc:getID()])
-            end)
-        end)
+        crate:addListener("ON_TRIGGER", "TRIGGER_TIME_CRATE", utils.bind(self.handleOpenTimeCrate, self))
     end
 
     -- Setup Recover Crates
@@ -649,12 +630,7 @@ function Limbus:onBattlefieldInitialise(battlefield)
         local crate = GetMobByID(crateID)
         xi.limbus.hideCrate(crate)
         crate:removeListener("TRIGGER_RECOVER_CRATE")
-        crate:addListener("ON_TRIGGER", "TRIGGER_RECOVER_CRATE", function(player, npc)
-            npcUtil.openCrate(npc, function()
-                -- Use wz_recover_all to heal players
-                npc:useMobAbility(1531, player)
-            end)
-        end)
+        crate:addListener("ON_TRIGGER", "TRIGGER_RECOVER_CRATE", utils.bind(self.handleOpenRecoverCrate, self))
     end
 
     -- Setup Winning Loot Crate
@@ -662,13 +638,7 @@ function Limbus:onBattlefieldInitialise(battlefield)
     local crate = GetNPCByID(ID.npc.LOOT_CRATE)
     crate:resetLocalVars()
     crate:removeListener("TRIGGER_LOOT_CRATE")
-    crate:addListener("ON_TRIGGER", "TRIGGER_LOOT_CRATE", function(player, npc)
-        npcUtil.openCrate(npc, function()
-            xi.limbus.handleLootRolls(battlefield, self.loot[ID.npc.LOOT_CRATE], nil, npc)
-            battlefield:setLocalVar("cutsceneTimer", 10)
-            battlefield:setLocalVar("lootSeen", 1)
-        end)
-    end)
+    crate:addListener("ON_TRIGGER", "TRIGGER_LOOT_CRATE", utils.bind(self.handleOpenLootCrate, self))
 end
 
 function Limbus:onBattlefieldTick(battlefield, tick)
@@ -704,4 +674,43 @@ function Limbus:onBattlefieldLeave(player, battlefield, leavecode)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
         player:startCutscene(32002)
     end
+end
+
+function Limbus:extendTimeLimit(ID, battlefield, amount)
+    local timeLimit = battlefield:getTimeLimit()
+    battlefield:setTimeLimit(timeLimit + amount * 60)
+    local remaining = battlefield:getRemainingTime() / 60
+
+    for _, player in pairs(battlefield:getPlayers()) do
+        player:messageSpecial(ID.text.TIME_EXTENDED, amount)
+        player:messageSpecial(ID.text.TIME_LEFT, remaining)
+    end
+end
+
+function Limbus:handleOpenItemCrate(player, npc)
+    npcUtil.openCrate(npc, function()
+        xi.limbus.handleLootRolls(player:getBattlefield(), self.loot[npc:getID()], nil, npc)
+    end)
+end
+
+function Limbus:handleOpenTimeCrate(player, npc)
+    npcUtil.openCrate(npc, function()
+        self:extendTimeLimit(zones[self.zoneId], player:getBattlefield(), self.ID.TIME_EXTENSIONS[npc:getID()])
+    end)
+end
+
+function Limbus:handleOpenRecoverCrate(player, npc)
+    npcUtil.openCrate(npc, function()
+        -- Use wz_recover_all to heal players
+        npc:useMobAbility(1531, player)
+    end)
+end
+
+function Limbus:handleOpenLootCrate(player, npc)
+    npcUtil.openCrate(npc, function()
+        local battlefield = player:getBattlefield()
+        xi.limbus.handleLootRolls(battlefield, self.loot[self.ID.npc.LOOT_CRATE], nil, npc)
+        battlefield:setLocalVar("cutsceneTimer", 10)
+        battlefield:setLocalVar("lootSeen", 1)
+    end)
 end
