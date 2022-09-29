@@ -346,7 +346,13 @@ namespace luautils
     int32 invokeBattlefieldEvent(uint16 battlefieldId, const std::string& eventName, Targs... args)
     {
         // Calls the Battlefield event through the interaction object if it can find it
-        sol::table battlefield = lua["xi"]["battlefield"]["contents"][battlefieldId];
+        sol::table contents = lua["xi"]["battlefield"]["contents"];
+        if (!contents.valid())
+        {
+            return -1;
+        }
+
+        auto battlefield = contents.get_or<sol::table>(battlefieldId, sol::nil);
         if (battlefield.valid())
         {
             auto handler = battlefield.get<sol::protected_function>(eventName);
