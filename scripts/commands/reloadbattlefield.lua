@@ -43,9 +43,10 @@ function onTrigger(player, battlefieldName)
             end
         end
 
-        local res = utils.prequire(filename)
-        if InteractionGlobal and res then
-            InteractionGlobal.lookup:addContainer(res)
+        local container = utils.prequire(filename)
+        container.filename = filename
+        if InteractionGlobal and container then
+            InteractionGlobal.lookup:addContainer(container)
             player:PrintToPlayer(string.format("Battlefield '%s' at '%s' has been reloaded.", battlefieldName, filename))
         end
         return
