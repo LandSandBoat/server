@@ -420,7 +420,6 @@ function Battlefield:onBattlefieldInitialise(battlefield)
 end
 
 function Battlefield:onBattlefieldTick(battlefield, tick)
-    print("Battlefield:onBattlefieldTick")
     xi.battlefield.onBattlefieldTick(battlefield, tick)
 end
 
