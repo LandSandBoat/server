@@ -590,8 +590,8 @@ function Limbus:onEntryTrigger(player, npc)
     if Battlefield.onEntryTrigger(self, player, npc) then
         player:setCharVar("ApollyonEntrance", 1)
     else
-        -- TODO(jmcmorris): Perhaps we need a result value from onEntryTrigger? Refactor?
-        player:messageSpecial(self.ID.text.NO_KEY)
+        local ID = zones[self.zoneId]
+        player:messageSpecial(ID.text.NO_KEY)
     end
 end
 
