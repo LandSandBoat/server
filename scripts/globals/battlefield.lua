@@ -125,7 +125,6 @@ function Battlefield:new(data)
 end
 
 function Battlefield:register()
-    lldebugger.requestBreak()
     xi.battlefield.contents[self.battlefieldId] = self
     if utils.hasKey(self.zoneId, xi.battlefield.contentsByZone) then
         table.insert(xi.battlefield.contentsByZone[self.zoneId], self)

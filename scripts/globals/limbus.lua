@@ -556,7 +556,6 @@ function Limbus:new(data)
 end
 
 function Limbus:onEntryEventUpdate(player, csid, option, extras)
-    print("Limbus:onEntryEventUpdate")
     if Battlefield.onEntryEventUpdate(self, player, csid, option, extras) then
         local alliance = player:getAlliance()
 
