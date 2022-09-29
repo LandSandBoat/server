@@ -3493,6 +3493,7 @@ xi.items =
     CROSSBOW_BOLT                   = 17336,
     BRONZE_BOLT                     = 17339,
     CORNETTE                        = 17344,
+    LAMIA_HARP                      = 17356,
     MARYS_HORN                      = 17366,
     CARBON_FISHING_ROD              = 17384,
     WILLOW_FISHING_ROD              = 17391,
