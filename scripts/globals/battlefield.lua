@@ -81,17 +81,27 @@ Battlefield.__eq = function(m1, m2)
     return m1.id == m2.id
 end
 
-function Battlefield:new(zoneId, battlefieldId, menuBit, entryNpc)
-    local obj = Container:new(Battlefield.getVarPrefix(battlefieldId))
+-- Creates a new Battlefield interaction
+-- Data takes the following keys:
+--  - zoneId: Which zone this battlefield exists within (required)
+--  - battlefieldId: Battlefield ID used in the database (required)
+--  - menuBit: The bit used to communicate with the client on which menu item this battlefield is (required)
+--  - area: Some battlefields has multiple areas (Burning Circles) while others have fixed areas (Apollyon). Set to have a fixed area. (optional)
+--  - entryNPC: The name of the NPC used for entering
+--  - requiredItems: Items required to be traded to enter the battlefield (optional)
+--  - createWornItem: Should a worn item is created with the required item (optional)
+--  - requiredKeyItems: Key items required to be able to enter the battlefield - these are removed upon entry (optional)
+function Battlefield:new(data)
+    local obj = Container:new(Battlefield.getVarPrefix(data.battlefieldId))
     setmetatable(obj, self)
     -- Which zone this battlefield exists within
-    obj.zoneId = zoneId
+    obj.zoneId = data.zoneId
     -- Battlefield ID used in the database
-    obj.battlefieldId = battlefieldId
+    obj.battlefieldId = data.battlefieldId
     -- The bit used to communicate with the client on which menu item this battlefield is
-    obj.menuBit = menuBit
+    obj.menuBit = data.menuBit
     -- Some battlefields has multiple areas (Burning Circles) while others have fixed areas (Apollyon). Set to have a fixed area.
-    obj.area = nil
+    obj.area = data.area
     -- Monster battlefield groups added with battlefield:addGroups()
     obj.groups = {}
     -- Pathing for monsters and npcs within the battlefield
@@ -99,21 +109,23 @@ function Battlefield:new(zoneId, battlefieldId, menuBit, entryNpc)
     -- Loot spawned in the Armoury Crate(s)
     obj.loot = {}
     -- Items required to be traded to enter the battlefield
-    obj.requiredItems = {}
+    obj.requiredItems = data.requiredItems or {}
+    -- Should a worn item is created with the required item
+    obj.createWornItem = data.createWornItem or true
     -- Key items required to be able to enter the battlefield - these are removed upon entry
-    obj.requiredKeyItems = {}
-    obj.createWornItem = true
-    obj.sections = { { [zoneId] = {} } }
+    obj.requiredKeyItems = data.requiredKeyItems or {}
+    obj.sections = { { [obj.zoneId] = {} } }
 
     -- If being called from a derived class then this should be handled there as obj wont have the metatable setup properly yet
-    if entryNpc then
-        obj:setEntryNpc(entryNpc)
+    if data.entryNpc then
+        obj:setEntryNpc(data.entryNpc)
     end
 
     return obj
 end
 
 function Battlefield:register()
+    lldebugger.requestBreak()
     xi.battlefield.contents[self.battlefieldId] = self
     if utils.hasKey(self.zoneId, xi.battlefield.contentsByZone) then
         table.insert(xi.battlefield.contentsByZone[self.zoneId], self)

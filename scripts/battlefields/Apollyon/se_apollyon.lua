@@ -9,16 +9,15 @@ require("scripts/globals/items")
 require("scripts/globals/keyitems")
 -----------------------------------
 
-local content = Limbus:new(
-    xi.zone.APOLLYON,
-    xi.battlefield.id.SE_APOLLYON,
-    2,
-    '_12i',
-    "SE_APOLLYON"
-)
-
-content.area = 3
-table.insert(content.requiredKeyItems, xi.ki.BLACK_CARD)
+local content = Limbus:new({
+    zoneId = xi.zone.APOLLYON,
+    battlefieldId = xi.battlefield.id.SE_APOLLYON,
+    menuBit = 2,
+    area = 3,
+    entryNpc = '_12i',
+    name = "SE_APOLLYON",
+    requiredKeyItems = { xi.ki.COSMO_CLEANSE, xi.ki.BLACK_CARD }
+})
 
 content.paths =
 {

@@ -541,15 +541,17 @@ Limbus.name = ""
 Limbus.serverVar = ""
 Limbus.requiredCard = 0
 
-function Limbus:new(zoneId, battlefieldId, menuBit, entryNpc, name)
-    local obj = Battlefield:new(zoneId, battlefieldId, menuBit)
+-- Creates a new Limbus Battlefield interaction
+-- -- Data takes the additional following keys:
+--  - name: The name of the Limbus area
+function Limbus:new(data)
+    data.createsWornItem = false
+    local obj = Battlefield:new(data)
     setmetatable(obj, self)
-    obj.name = name
+    obj.name = data.name
     obj.ID = zones[obj.zoneId][obj.name]
-    obj.serverVar = "[" .. name .. "]Time"
-    table.insert(obj.requiredKeyItems, xi.ki.COSMO_CLEANSE)
-    obj:setEntryNpc(entryNpc)
-    obj.createWornItem = false
+    obj.serverVar = "[" .. obj.name .. "]Time"
+    obj:setEntryNpc(data.entryNpc)
     return obj
 end
 
