@@ -594,7 +594,6 @@ local function checkReqs(player, npc, bfid, registrant)
         [ 116] = function() return ( player:hasKeyItem(xi.ki.SOUL_GEM_CLASP)                                                                                               ) end, -- Quest: Beyond Infinity
         [ 128] = function() return ( roz == mi.zilart.THE_TEMPLE_OF_UGGALEPIH                                                                                              ) end, -- ZM4: The Temple of Uggalepih
         [ 160] = function() return ( nat == mi.nation.SHADOW_LORD and natStat == 3                                                                                         ) end, -- Mission 5-2
-        [ 161] = function() return ( basty == mi.bastok.WHERE_TWO_PATHS_CONVERGE and natStat == 1                                                                          ) end, -- Basty 9-2: Where Two Paths Converge
         [ 163] = function() return ( mjob == xi.job.SCH and mlvl >= 66                                                                                                     ) end, -- Quest: Survival of the Wisest (SCH LB5)
         [ 192] = function() return ( roz == mi.zilart.THROUGH_THE_QUICKSAND_CAVES                                                                                          ) end, -- ZM6: Through the Quicksand Caves
         [ 194] = function() return ( mjob == xi.job.SAM and mlvl >= 66                                                                                                     ) end, -- Quest: Shattering Stars (SAM LB5)

@@ -72,6 +72,7 @@ xi.battlefield.dropChance =
 
 xi.battlefield.id =
 {
+    WHERE_TWO_PATHS_CONVERGE = 161,
     SE_APOLLYON = 1293,
 }
 
