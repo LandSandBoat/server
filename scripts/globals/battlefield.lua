@@ -301,8 +301,7 @@ function Battlefield:onEntryEventUpdate(player, csid, option, extras)
         return false
     end
 
-    local battlefieldIndex = bit.rshift(option, 4)
-    if battlefieldIndex ~= self.menuBit then
+    if bit.rshift(option, 4) ~= self.menuBit then
         return false
     end
 
@@ -345,7 +344,6 @@ function Battlefield:onEntryEventUpdate(player, csid, option, extras)
     local battlefield = player:getBattlefield()
 
     if battlefield then
-        battlefield:setLocalVar("[cs]bit", battlefieldIndex)
         name, clearTime, partySize = battlefield:getRecord()
         initiatorId, _ = battlefield:getInitiator()
     end
@@ -445,7 +443,7 @@ end
 
 function Battlefield:onBattlefieldWin(player, battlefield)
     local _, clearTime, partySize = battlefield:getRecord()
-    player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), 0)
+    player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, self.menuBit, 0)
 end
 
 function Battlefield:onBattlefieldLoss(player, battlefield)
