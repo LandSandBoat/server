@@ -11,7 +11,7 @@ local content = Battlefield:new({
     zoneId = xi.zone.THRONE_ROOM,
     battlefieldId = xi.battlefield.id.WHERE_TWO_PATHS_CONVERGE,
     menuBit = 1,
-    entryNpc = "_4l1", -- TODO(jmcmorris): rename
+    entryNpc = "Throne_Room",
     -- exit Npc?
 })
 
