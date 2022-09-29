@@ -23,6 +23,21 @@ zone_object.onTransportEvent = function(player, transport)
     player:startEvent(100)
 end
 
+zone_object.onGameHour = function(zone)
+    local qmObj        = zone:queryEntitiesByName('qm1')[1]
+    local vanadielHour = VanadielHour()
+
+    if
+        IsMoonFull() and
+        vanadielHour >= 18 and
+        vanadielHour < 6
+    then
+        qmObj:setStatus(xi.status.NORMAL)
+    else
+        qmObj:setStatus(xi.status.DISAPPEAR)
+    end
+end
+
 zone_object.onEventUpdate = function(player, csid, option)
 end
 

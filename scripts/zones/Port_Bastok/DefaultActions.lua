@@ -1,6 +1,7 @@
 local ID = require('scripts/zones/Port_Bastok/IDs')
 
 return {
+    ['Agapito']      = { event = 17 },
     ['Bartolomeo']   = { text = ID.text.ARRIVING_PASSENGER_DIALOG },
     ['Carmelo']      = { event = 182 },
     ['Clarion_Star'] = { event = 442 },
