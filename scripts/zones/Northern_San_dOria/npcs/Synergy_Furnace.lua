@@ -1,7 +1,7 @@
 -----------------------------------
--- Area: Port Jeuno
---  NPC: Synergy Furnace
--- !pos  -52 0 -11 246
+-- Area: Northern San'dOria
+-- NPC: Synergy Furnace
+-- !pos  -125 12 222 231
 -----------------------------------
 require("scripts/globals/synergy_furnace")
 -----------------------------------

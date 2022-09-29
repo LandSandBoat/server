@@ -16,16 +16,28 @@ entity.onMobSpawn = function(mob ,target)
             mob:resetEnmity(user)
 
             mob:timer(5000, function(mobArg)
-                print("trying to kill someone")
-                local allianceMembers = user:getAlliance()
-                -- print(user:getAlliance())
-                for k in pairs(allianceMembers) do
-                    table.insert(keyset, k)
-                end
-                print("assigning randomplayer")
-                local randomPlayer = allianceMembers[keyset[math.random(#keyset)]]
-                print(randomPlayer)
-                randomPlayer:setHP(0)
+                local enmityList = mobArg:getEnmityList()
+				local numEntries = #enmityList
+				
+				killPlayer = utils.randomEntry(enmityList)["entity"]
+				if killPlayer then
+				    killPlayer:setHP(0)
+				end
+            end)
+        end
+    end)
+
+    mob:addListener("MAGIC_TAKE", "ENFEEBLING_DEATH", function(target, caster, spell)
+        if spell:getSkillType() == xi.skill.ENFEEBLING_MAGIC then
+
+            mob:timer(5000, function(mobArg)
+                local enmityList = mobArg:getEnmityList()
+				local numEntries = #enmityList
+				
+				killPlayer = utils.randomEntry(enmityList)["entity"]
+				if killPlayer then
+				    killPlayer:setHP(0)
+				end
             end)
         end
     end)
@@ -33,7 +45,7 @@ entity.onMobSpawn = function(mob ,target)
         between = 60,
         specials =
         {
-            {id = xi.jsa.CHAINSPELL, cooldown = 0, hpp = 100},
+--            {id = xi.jsa.CHAINSPELL, cooldown = 0, hpp = 100},
             {id = xi.jsa.PERFECT_DODGE, cooldown = 0, hpp = 100},
             {id = xi.jsa.BENEDICTION, cooldown = 0, hpp = 100},
         },
@@ -81,6 +93,7 @@ entity.onMobSpawn = function(mob ,target)
         mob:addStatusEffect(xi.effect.REGEN, 50, 3, 0)
         mob:addStatusEffect(xi.effect.REFRESH, 30, 3, 0)
         mob:addStatusEffect(xi.effect.REGAIN, 30, 3, 0)
+		mob:setDropID(3991)
 end
 
 entity.onMobInitialize = function(mob)
