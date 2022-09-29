@@ -437,11 +437,19 @@ end
 
 function Battlefield:onBattlefieldLeave(player, battlefield, leavecode)
     if leavecode == xi.battlefield.leaveCode.WON then
-        local _, clearTime, partySize = battlefield:getRecord()
-        player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), 0)
+        self:onBattlefieldWin(player, battlefield)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
-        player:startEvent(32002)
+        self:onBattlefieldLoss(player, battlefield)
     end
+end
+
+function Battlefield:onBattlefieldWin(player, battlefield)
+    local _, clearTime, partySize = battlefield:getRecord()
+    player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), 0)
+end
+
+function Battlefield:onBattlefieldLoss(player, battlefield)
+    player:startEvent(32002)
 end
 
 function xi.battlefield.getBattlefieldOptions(player, npc, trade)
