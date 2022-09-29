@@ -28,7 +28,6 @@ g_mixins.wtb_prime = function(prime)
 
     prime:addListener("COMBAT_TICK", "PRIME_COMBAT_TICK", function(mob)
         local bf = mob:getBattlefield()
-        print("tick")
 
         if mob:getHPP() < 15 and bf:getLocalVar("abilityControl") == 0 then
             bf:setLocalVar("abilityControl", 1)
