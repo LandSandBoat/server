@@ -428,6 +428,9 @@ function Battlefield:onBattlefieldRegister(player, battlefield)
 end
 
 function Battlefield:onBattlefieldEnter(player, battlefield)
+    for _, keyItem in ipairs(self.requiredKeyItems) do
+        player:delKeyItem(keyItem)
+    end
 end
 
 function Battlefield:onBattlefieldDestroy(battlefield)
