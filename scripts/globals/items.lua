@@ -2474,6 +2474,7 @@ xi.items =
     BRONZE_MITTENS_P1               = 12695,
     LEATHER_GLOVES                  = 12696,
     LIZARD_GLOVES                   = 12697,
+    GLOVES                          = 12720,
     COTTON_GLOVES                   = 12721,
     CUFFS                           = 12728,
     PERLE_MOUFLES                   = 12745,

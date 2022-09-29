@@ -9,6 +9,7 @@ return {
     ['Ardea']       = { event = 260 },
     ['Big_Harvest'] = { event = 134 },
     ['Biggorf']     = { event = 126 },
+    ['Brygid']      = { event = 119 },
     ['Degenhard']   = { event = 255 },
     ['Domhnall']    = { event = 117 },
     ['Emrys']       = { event = 115 },
