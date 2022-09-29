@@ -89,6 +89,7 @@ end
 --  - menuBit: The bit used to communicate with the client on which menu item this battlefield is (required)
 --  - area: Some battlefields has multiple areas (Burning Circles) while others have fixed areas (Apollyon). Set to have a fixed area. (optional)
 --  - entryNPC: The name of the NPC used for entering
+--  - exitNPC: The name of the NPC used for exiting
 --  - requiredItems: Items required to be traded to enter the battlefield (optional)
 --  - createWornItem: Should a worn item is created with the required item (optional)
 --  - requiredKeyItems: Key items required to be able to enter the battlefield - these are removed upon entry (optional)
@@ -122,6 +123,10 @@ function Battlefield:new(data)
         obj:setEntryNpc(data.entryNpc)
     end
 
+    if data.exitNpc then
+        obj:setExitNpc(data.exitNpc)
+    end
+
     return obj
 end
 
@@ -136,10 +141,6 @@ function Battlefield:register()
 end
 
 function Battlefield:checkRequirements(player, npc, registrant, trade)
-    if npc:getName() ~= self.entryNpc then
-        return false
-    end
-
     for _, keyItem in ipairs(self.requiredKeyItems) do
         if not player:hasKeyItem(keyItem) then
             return false
@@ -170,18 +171,31 @@ function Battlefield:setEntryNpc(entryNpc)
         onEventUpdate =
         {
             [32000] = utils.bind(self.onEntryEventUpdate, self),
-            [32003] = utils.bind(self.onEntryEventUpdateLeave, self),
+            [32003] = utils.bind(self.onExitEventUpdate, self),
         },
         onEventFinish =
         {
             [32000] = utils.bind(self.onEntryEventFinish, self),
             [32002] = utils.bind(self.onEntryEventFinish, self),
-            [32003] = utils.bind(self.onEntryEventFinish, self),
+            [32003] = utils.bind(self.onExitEventFinish, self),
         }
     }
 
     utils.append(self.sections[1][self.zoneId], entry)
     self.entryNpc = entryNpc
+end
+
+function Battlefield:setExitNpc(exitNpc)
+    local exit =
+    {
+        [exitNpc] =
+        {
+            onTrigger = utils.bind(self.onExitTrigger, self),
+        },
+    }
+
+    utils.append(self.sections[1][self.zoneId], exit);
+    self.exitNpc = exitNpc
 end
 
 function Battlefield.getVarPrefix(battlefieldID)
@@ -382,31 +396,29 @@ function Battlefield:onEntryEventUpdate(player, csid, option, extras)
     return status < xi.battlefield.status.LOCKED and result < xi.battlefield.returnCode.LOCKED
 end
 
-function Battlefield:onEntryEventUpdateLeave(player, csid, option, extras)
-    if option == 2 then
-        player:updateEvent(3)
-        return true
-    elseif option == 3 then
-        player:updateEvent(0)
-        return true
-    end
-    return false
-end
-
 function Battlefield:onEntryEventFinish(player, csid, option)
     player:setLocalVar("[battlefield]area", 0)
+end
 
-    if player:hasStatusEffect(xi.effect.BATTLEFIELD) then
-        if csid == 32003 and option == 4 then
-            if player:getBattlefield() then
-                player:leaveBattlefield(1)
-            end
-        end
-
-        return true
+function Battlefield:onExitTrigger(player, npc)
+    if player:getBattlefield() then
+        player:startOptionalCutscene(32003)
     end
+end
 
-    return false
+function Battlefield:onExitEventUpdate(player, csid, option, npc)
+    if option == 2 then
+        player:updateEvent(3)
+    elseif option == 3 then
+        player:updateEvent(0)
+    elseif option == 4 then
+    end
+end
+
+function Battlefield:onExitEventFinish(player, csid, option)
+    if option == 4 and player:getBattlefield() then
+        player:leaveBattlefield(1)
+    end
 end
 
 function Battlefield:onBattlefieldInitialise(battlefield)
@@ -546,7 +558,7 @@ end
 function xi.battlefield.onBattlefieldTick(battlefield, timeinside)
     local killedallmobs = true
     local leavecode     = -1
-    local canLeave      = 0
+    local canLeave      = false
 
     local mobs          = battlefield:getMobs(true, false)
     local status        = battlefield:getStatus()

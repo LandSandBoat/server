@@ -12,7 +12,7 @@ local content = Battlefield:new({
     battlefieldId = xi.battlefield.id.WHERE_TWO_PATHS_CONVERGE,
     menuBit = 1,
     entryNpc = "Throne_Room",
-    -- exit Npc?
+    exitNpc = "Throne_Room_Exit",
 })
 
 function content:onBattlefieldInitialise(battlefield)
