@@ -555,6 +555,68 @@ function xi.battlefield.rejectLevelSyncedParty(player, npc)
     return false
 end
 
+MissionBattlefield = setmetatable({ }, { __index = Battlefield })
+MissionBattlefield.__index = MissionBattlefield
+MissionBattlefield.__eq = function(m1, m2)
+    return m1.name == m2.name
+end
+
+-- Creates a new Limbus Battlefield interaction
+-- Data takes the additional following keys:
+--  - missionArea: The mission area this battlefield is associated with (optional)
+--  - mission: The mission this battlefield is associated with (optional)
+--  - missionStatusArea: The mission area to retrieve the mission status from. Will default to using the player's nation (optional)
+--  - missionStatus: The optional extra status information xi.mission.status (optional)
+--  - requiredMissionStatus: The required mission status to enter
+--  - skipMissionStatus: The required mission status to skip the cutscene. Defaults to the required mission status.
+function MissionBattlefield:new(data)
+    local obj = Battlefield:new(data)
+    setmetatable(obj, self)
+    -- The mission area ID this battlefield is associated with
+    obj.missionArea = data.missionArea
+    -- The mission this battlefield is associated with
+    obj.mission = data.mission
+    -- The mission area to retrieve the mission status from. Will default to using the player's nation (optional)
+    obj.missionStatusArea = data.missionStatusArea
+    -- The optional extra status information xi.mission.status (optional)
+    obj.missionStatus = data.missionStatus
+    -- The required mission status to enter
+    obj.requiredMissionStatus = data.requiredMissionStatus
+    -- The required mission status to skip the cutscene
+    obj.skipMissionStatus = data.skipMissionStatus or data.requiredMissionStatus
+    return obj
+end
+
+function MissionBattlefield:checkRequirements(player, npc, registrant, trade)
+    Battlefield.checkRequirements(self, player, npc, registrant, trade)
+    local missionArea = self.missionArea or player:getNation()
+    local current = player:getCurrentMission(missionArea)
+    local missionStatusArea = self.missionStatusArea or player:getNation()
+    local status = player:getMissionStatus(missionStatusArea)
+    return current == self.mission and status == self.requiredMissionStatus
+end
+
+function MissionBattlefield:checkSkipCutscene(player)
+    local current = player:getCurrentMission(self.missionArea)
+    local missionStatusArea = self.missionStatusArea or player:getNation()
+    local status = player:getMissionStatus(missionStatusArea, self.missionStatus)
+    return player:hasCompletedMission(self.missionArea, self.mission) or
+        (current == self.mission and status > self.skipMissionStatus)
+end
+
+function MissionBattlefield:onBattlefieldWin(player, battlefield)
+    MissionBattlefield.onBattlefieldWin(self, player, battlefield)
+
+    local current = player:getCurrentMission(self.missionArea)
+    if current == self.mission then
+        player:setLocalVar("battlefieldWin", battlefield:getID())
+    end
+
+    local _, clearTime, partySize = battlefield:getRecord()
+    local canSkipCS = (current ~= self.mission) and 1 or 0
+    player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, self.menuBit, canSkipCS)
+end
+
 function xi.battlefield.onBattlefieldTick(battlefield, timeinside)
     local killedallmobs = true
     local leavecode     = -1
