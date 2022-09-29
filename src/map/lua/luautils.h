@@ -343,16 +343,16 @@ namespace luautils
     uint16 GetItemIDByName(std::string const& name);
 
     template <typename... Targs>
-    int32 invokeBattlefieldEvent(const std::string& fileName, const std::string& eventName, Targs... args)
+    int32 invokeBattlefieldEvent(uint16 battlefieldId, const std::string& eventName, Targs... args)
     {
         // Calls the Battlefield event through the interaction object if it can find it
-        auto battlefield = GetCacheEntryFromFilename(fileName);
+        sol::table battlefield = lua["xi"]["battlefield"]["contents"][battlefieldId];
         if (battlefield.valid())
         {
-            auto onBattlefieldInitialise = battlefield.get<sol::protected_function>(eventName);
-            if (onBattlefieldInitialise.valid())
+            auto handler = battlefield.get<sol::protected_function>(eventName);
+            if (handler.valid())
             {
-                auto result = onBattlefieldInitialise(battlefield, args...);
+                auto result = handler(battlefield, args...);
                 if (!result.valid())
                 {
                     sol::error err = result;
