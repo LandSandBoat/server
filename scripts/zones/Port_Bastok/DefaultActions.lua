@@ -16,6 +16,7 @@ return {
     ['Mine_Konte']   = { event = 42 },
     ['Otto']         = { event = 20 },
     ['Panana']       = { event = 43 },
+    ['Paujean']      = { event = 25 },
     ['Powhatan']     = { text = ID.text.POWHATAN_DIALOG_1 },
     ['Qiji']         = { event = 33 },
     ['Rafaela']      = { event = 22 },
