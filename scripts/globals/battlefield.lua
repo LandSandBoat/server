@@ -146,7 +146,7 @@ function Battlefield:checkRequirements(player, npc, registrant, trade)
         end
     end
 
-    if trade and self.requiredItems then
+    if trade and #self.requiredItems > 0 then
         if not npcUtil.tradeHasExactly(trade, self.requiredItems) then
             return false
         end
@@ -199,7 +199,7 @@ function Battlefield:onEntryTrade(player, npc, trade, onUpdate)
         return false
     end
 
-    if not npcUtil.tradeHasExactly(trade, self.requiredItems) then
+    if #self.requiredItems > 0 and not npcUtil.tradeHasExactly(trade, self.requiredItems) then
         return false
     end
 
@@ -357,7 +357,7 @@ function Battlefield:onEntryEventUpdate(player, csid, option, extras)
         local zone   = player:getZoneID()
 
         -- Handle traded items
-        if self.requiredItems then
+        if #self.requiredItems > 0 then
             if self.createWornItem and player:hasItem(self.requiredItems[1]) then
                 player:createWornItem(self.requiredItems[1])
             else
