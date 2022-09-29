@@ -23,4 +23,5 @@ return {
     ['Ronan']        = { event = 37 },
     ['Steel_Bones']  = { event = 29 },
     ['Tete']         = { event = 35 },
+    ['Yazan']        = { event = 190 },
 }

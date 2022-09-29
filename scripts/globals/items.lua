@@ -255,6 +255,7 @@ xi.items =
     AMARYLLIS                       = 957,
     MARGUERITE                      = 958,
     DAHLIA                          = 959,
+    SAND_BAT_FANG                   = 1015,
     SICKLE                          = 1020,
     HATCHET                         = 1021,
     SET_OF_THIEFS_TOOLS             = 1022,
