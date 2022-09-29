@@ -418,7 +418,66 @@ function Battlefield:onBattlefieldInitialise(battlefield)
 end
 
 function Battlefield:onBattlefieldTick(battlefield, tick)
-    xi.battlefield.onBattlefieldTick(battlefield, tick)
+    local leavecode     = -1
+    local canLeave      = false
+
+    local status        = battlefield:getStatus()
+    local players       = battlefield:getPlayers()
+    local cutsceneTimer = battlefield:getLocalVar("cutsceneTimer")
+    local phaseChange   = battlefield:getLocalVar("phaseChange")
+
+    if status == xi.battlefield.status.LOST then
+        leavecode = xi.battlefield.leaveCode.LOST
+    elseif status == xi.battlefield.status.WON then
+        leavecode = xi.battlefield.leaveCode.WON
+    end
+
+    if leavecode ~= -1 then
+        -- Artificially inflate the time we remain inside the battlefield.
+        battlefield:setLocalVar("cutsceneTimer", cutsceneTimer + 1)
+
+        canLeave = battlefield:getLocalVar("loot") == 0
+
+        if status == xi.battlefield.status.WON and not canLeave then
+            if battlefield:getLocalVar("lootSpawned") == 0 and battlefield:spawnLoot() then
+                canLeave = false
+            elseif battlefield:getLocalVar("lootSeen") == 1 then
+                canLeave = true
+            end
+        end
+    end
+
+    -- Check that players haven't all died or that their dead time is over.
+    xi.battlefield.HandleWipe(battlefield, players)
+
+    -- Cleanup battlefield.
+    if
+        not xi.battlefield.SendTimePrompts(battlefield, players) or -- If we cant send anymore time prompts, they are out of time.
+        (canLeave and cutsceneTimer >= 15)                          -- Players won and artificial time inflation is over.
+    then
+        battlefield:cleanup(true)
+    elseif status == xi.battlefield.status.LOST then -- Players lost.
+        for _, player in pairs(players) do
+            player:messageSpecial(zones[player:getZoneID()].text.PARTY_MEMBERS_HAVE_FALLEN)
+        end
+
+        battlefield:cleanup(true)
+    end
+
+    -- Check if theres at least 1 mob alive.
+    local killedallmobs = true
+    local mobs = battlefield:getMobs(true, false)
+    for _, mob in pairs(mobs) do
+        if mob:isAlive() then
+            killedallmobs = false
+            break
+        end
+    end
+
+    -- Set win status.
+    if killedallmobs and phaseChange == 0 then
+        battlefield:setStatus(xi.battlefield.status.WON)
+    end
 end
 
 function Battlefield:onBattlefieldRegister(player, battlefield)
@@ -467,7 +526,7 @@ function xi.battlefield.getBattlefieldOptions(player, npc, trade)
     return result
 end
 
-xi.battlefield.rejectLevelSyncedParty = function(player, npc)
+function xi.battlefield.rejectLevelSyncedParty(player, npc)
     for _, member in pairs(player:getAlliance()) do
         if member:isLevelSync() then
             local zoneId = player:getZoneID()
@@ -641,6 +700,19 @@ function xi.battlefield.HandleWipe(battlefield, players)
 end
 
 function xi.battlefield.onBattlefieldStatusChange(battlefield, players, status)
+    -- Remove battlefield effect for players in alliance not inside battlefield once the battlefield gets locked. Do this only once.
+    if status == xi.battlefield.status.LOCKED and battlefield:getLocalVar("statusRemoval") == 0 then
+        battlefield:setLocalVar("statusRemoval", 1)
+
+        for _, player in pairs(players) do
+            local alliance = player:getAlliance()
+            for _, member in pairs(alliance) do
+                if member:hasStatusEffect(xi.effect.BATTLEFIELD) and not member:getBattlefield() then
+                    member:delStatusEffect(xi.effect.BATTLEFIELD)
+                end
+            end
+        end
+    end
 end
 
 function xi.battlefield.HandleLootRolls(battlefield, lootTable, players, npc)
@@ -692,19 +764,7 @@ function xi.battlefield.HandleLootRolls(battlefield, lootTable, players, npc)
     end
 end
 
-function xi.battlefield.ExtendTimeLimit(battlefield, minutes, message, param, players)
-    local timeLimit = battlefield:getTimeLimit()
-    local extension = minutes * 60
-    battlefield:setTimeLimit(timeLimit + extension)
-
-    if message then
-        players = players or battlefield:getPlayers()
-        for _, player in pairs(players) do
-            player:messageBasic(message, param or minutes)
-        end
-    end
-end
-
+-- TODO(jmcmorris): This is no longer needed once Limbus uses the new Battlefield system
 function xi.battlefield.HealPlayers(battlefield, players)
     players = players or battlefield:getPlayers()
     for _, player in pairs(players) do
