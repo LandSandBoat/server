@@ -57,7 +57,7 @@ local battlefields =
         { 0,  736,    0 },   -- A Century of Hardship (PM5-3 L3)
         { 1,  737,    0 },   -- Return to the Depths (Quest)
         { 2,  738,    0 },   -- Bionic Bug (ENM)
-     -- { 3,  739,    0 },   -- Pulling the Strings (ENM)
+        { 3,  739,    0 },   -- Pulling the Strings (ENM)
         { 4,  740,    0 },   -- Automaton Assault (ENM)
      -- { 5,  741, 3455 },   -- The Mobline Comedy (HKC50)
     },
@@ -671,7 +671,7 @@ local function checkReqs(player, npc, bfid, registrant)
         [ 736] = function() return ( cop == mi.cop.THREE_PATHS and player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.LOUVERANCE) == 8                   ) end, -- PM5-3 L3: A Century of Hardship
         [ 737] = function() return ( player:getCharVar("Quest[1][78]prog") == 9                                                                                            ) end, -- Quest: Return to the Depths
         [ 738] = function() return ( player:hasKeyItem(xi.ki.SHAFT_2716_OPERATING_LEVER)                                                                                   ) end, -- ENM: Bionic Bug
-        [ 739] = function() return ( player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL)                                                                                    ) end, -- ENM: Pulling Your Strings
+        [ 739] = function() return ( player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL) and mjob < xi.job.DNC                                                              ) end, -- ENM: Pulling The Strings
         [ 740] = function() return ( player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL) and sameRace()                                                                     ) end, -- ENM: Automaton Assault
         [ 768] = function() return ( (cop == mi.cop.BELOW_THE_ARKS) or (cop == mi.cop.THE_MOTHERCRYSTALS and not player:hasKeyItem(xi.ki.LIGHT_OF_HOLLA))                  ) end, -- PM1-3: The Mothercrystals
         [ 769] = function() return ( player:hasKeyItem(xi.ki.CENSER_OF_ABANDONMENT)                                                                                        ) end, -- ENM: Simulant

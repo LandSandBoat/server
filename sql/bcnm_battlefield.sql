@@ -1495,6 +1495,24 @@ INSERT INTO `bcnm_battlefield` VALUES (736,3,16830479,3);
 INSERT INTO `bcnm_battlefield` VALUES (738,1,16830501,3); -- Bionic Bug
 INSERT INTO `bcnm_battlefield` VALUES (738,2,16830503,3);
 INSERT INTO `bcnm_battlefield` VALUES (738,3,16830505,3);
+INSERT INTO `bcnm_battlefield` VALUES (739,1,16830507,3); -- Pulling the Strings
+INSERT INTO `bcnm_battlefield` VALUES (739,1,16830509,3);
+INSERT INTO `bcnm_battlefield` VALUES (739,1,16830510,2);
+INSERT INTO `bcnm_battlefield` VALUES (739,1,16830511,2);
+INSERT INTO `bcnm_battlefield` VALUES (739,1,16830512,2);
+INSERT INTO `bcnm_battlefield` VALUES (739,1,16830513,2);
+INSERT INTO `bcnm_battlefield` VALUES (739,2,16830514,3);
+INSERT INTO `bcnm_battlefield` VALUES (739,2,16830516,3);
+INSERT INTO `bcnm_battlefield` VALUES (739,2,16830517,2);
+INSERT INTO `bcnm_battlefield` VALUES (739,2,16830518,2);
+INSERT INTO `bcnm_battlefield` VALUES (739,2,16830519,2);
+INSERT INTO `bcnm_battlefield` VALUES (739,2,16830520,2);
+INSERT INTO `bcnm_battlefield` VALUES (739,3,16830521,3);
+INSERT INTO `bcnm_battlefield` VALUES (739,3,16830523,3);
+INSERT INTO `bcnm_battlefield` VALUES (739,3,16830524,2);
+INSERT INTO `bcnm_battlefield` VALUES (739,3,16830525,2);
+INSERT INTO `bcnm_battlefield` VALUES (739,3,16830526,2);
+INSERT INTO `bcnm_battlefield` VALUES (739,3,16830527,2);
 INSERT INTO `bcnm_battlefield` VALUES (740,1,16830529,3); -- Automaton Assault
 INSERT INTO `bcnm_battlefield` VALUES (740,1,16830530,3);
 INSERT INTO `bcnm_battlefield` VALUES (740,1,16830531,3);
