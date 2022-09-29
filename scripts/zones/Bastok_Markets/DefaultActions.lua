@@ -14,6 +14,7 @@ return {
     ['Emrys']       = { event = 115 },
     ['Enu']         = { event = 327 },
     ['Epione']      = { event = 130 },
+    ['Foss']        = { event = 270 },
     ['Gwill']       = { event = 113 },
     ['Hildith']     = { event = 488 },
     ['Horatius']    = { event = 110 },
