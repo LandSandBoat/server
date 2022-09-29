@@ -409,7 +409,10 @@ function Battlefield:onEntryEventFinish(player, csid, option)
 end
 
 function Battlefield:onBattlefieldInitialise(battlefield)
-    battlefield:setLocalVar("loot", 1)
+    if #self.loot > 0 then
+        battlefield:setLocalVar("loot", 1)
+    end
+
     battlefield:addGroups(self.groups)
 
     for mobId, path in pairs(self.paths) do
