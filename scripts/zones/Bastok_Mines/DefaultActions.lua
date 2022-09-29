@@ -16,5 +16,6 @@ return {
     ['Pavvke']         = { event = 75 },
     ['Roh_Latteh']     = { event = 29 },
     ['Tall_Mountain']  = { event = 55 },
+    ['Tami']           = { event = 115 },
     ['Wahid']          = { event = 28 },
 }

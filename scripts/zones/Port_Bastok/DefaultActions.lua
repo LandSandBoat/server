@@ -10,6 +10,7 @@ return {
     ['Evi']          = { event = 21 },
     ['Gudav']        = { event = 31 },
     ['Hilda']        = { event = 48 },
+    ['Kurando']      = { event = 28 },
     ['Latifah']      = { event = 13 },
     ['Mine_Konte']   = { event = 42 },
     ['Otto']         = { event = 20 },
@@ -20,4 +21,5 @@ return {
     ['Romilda']      = { event = 34 },
     ['Ronan']        = { event = 37 },
     ['Steel_Bones']  = { event = 29 },
+    ['Tete']         = { event = 35 },
 }
