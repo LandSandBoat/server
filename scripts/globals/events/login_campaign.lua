@@ -208,14 +208,18 @@ xi.events.loginCampaign.onEventUpdate = function(player, csid, option)
             price,
             loginPoints)
     else
-        if npcUtil.giveItem(player, { {currentLoginCampaign[showItems - 2]["items"][itemSelected + 1], itemQuantity} }) then
-            player:delCurrency("login_points", currentLoginCampaign[showItems - 2]["price"] * itemQuantity)
-            player:updateEvent(
-                currentLoginCampaign[showItems - 2]["items"][itemSelected + 1],
-                player:getCurrency("login_points"), -- Login Points after purchase
-                0, -- Unknown (most likely totalItemMask)
-                currentLoginCampaign[showItems - 2]["price"],
-                loginPoints) -- Login points before purchase
-        end
+	    if itemQuantity == 1 then
+            if npcUtil.giveItem(player, { { currentLoginCampaign[showItems - 2]["items"][itemSelected + 1], itemQuantity } }) then
+                player:delCurrency("login_points", currentLoginCampaign[showItems - 2]["price"] * itemQuantity)
+                player:updateEvent(
+                    currentLoginCampaign[showItems - 2]["items"][itemSelected + 1],
+                    player:getCurrency("login_points"), -- Login Points after purchase
+                    0, -- Unknown (most likely totalItemMask)
+                    currentLoginCampaign[showItems - 2]["price"],
+                    loginPoints) -- Login points before purchase
+            end
+		else
+		    print(string.format("%s has attempted to purchase %s of item: %s from login campaign.", player, itemQuantity, currentLoginCampaign[showItems - 2]["items"][itemSelected + 1], itemQuantity))
+		end
     end
 end

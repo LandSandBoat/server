@@ -14,6 +14,15 @@ local entity = {}
 entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.DOUBLE_ATTACK, 20)
     mob:setMobMod(xi.mobMod.DRAW_IN, 2)
+    -- prevent cheesiness
+    mob:setMod(xi.mod.SILENCERES, 50)
+    mob:setMod(xi.mod.STUNRES, 50)
+    mob:setMod(xi.mod.BINDRES, 50)
+    mob:setMod(xi.mod.GRAVITYRES, 50)
+    mob:setMod(xi.mod.SLEEPRES, 10000)
+    mob:setMod(xi.mod.POISONRES, 100)
+    mob:setMod(xi.mod.PARALYZERES, 100)
+    mob:setMod(xi.mod.LULLABYRES, 10000)
 	mob:setLocalVar("[rage]timer", 1800) -- 20 minutes
 end
 

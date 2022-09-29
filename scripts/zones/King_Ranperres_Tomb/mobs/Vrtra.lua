@@ -11,6 +11,15 @@ local entity = {}
 local offsets = {1, 3, 5, 2, 4, 6}
 
 entity.onMobSpawn = function(mob)
+    -- prevent cheesiness
+    mob:setMod(xi.mod.SILENCERES, 50)
+    mob:setMod(xi.mod.STUNRES, 50)
+    mob:setMod(xi.mod.BINDRES, 50)
+    mob:setMod(xi.mod.GRAVITYRES, 50)
+    mob:setMod(xi.mod.SLEEPRES, 10000)
+    mob:setMod(xi.mod.POISONRES, 100)
+    mob:setMod(xi.mod.PARALYZERES, 100)
+    mob:setMod(xi.mod.LULLABYRES, 10000)
 	mob:setLocalVar("[rage]timer", 1800) -- 30 minutes
 end
 

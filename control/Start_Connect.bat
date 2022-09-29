@@ -2,6 +2,8 @@
 cd ..
 :onCrash
 echo [%date% %time%] Restarting Lobby/Connection Server...
-xi_connect.exe
+start xi_connect.exe
+timeout /t 3600 >null
+taskkill /f /im xi_connect.exe >null
 echo ...
 GOTO onCrash

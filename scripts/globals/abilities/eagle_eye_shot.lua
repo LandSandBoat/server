@@ -70,7 +70,7 @@ ability_object.onUseAbility = function(player, target, ability, action)
         action:speceffect(target:getID(), 0)
     end
 	
-	damage = damage * 3
+	-- damage = damage * 3
 	
     return damage
 end

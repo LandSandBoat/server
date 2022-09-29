@@ -22,6 +22,15 @@ entity.onMobSpawn = function(mob)
     mob:addMod(xi.mod.ATT, 150)
     mob:addMod(xi.mod.DEF, 200)
     mob:addMod(xi.mod.EVA, 110)
+    -- prevent cheesiness
+    mob:setMod(xi.mod.SILENCERES, 50)
+    mob:setMod(xi.mod.STUNRES, 50)
+    mob:setMod(xi.mod.BINDRES, 50)
+    mob:setMod(xi.mod.GRAVITYRES, 50)
+    mob:setMod(xi.mod.SLEEPRES, 10000)
+    mob:setMod(xi.mod.POISONRES, 100)
+    mob:setMod(xi.mod.PARALYZERES, 100)
+    mob:setMod(xi.mod.LULLABYRES, 10000)
     mob:setMod(xi.mod.TRIPLE_ATTACK, 5)
 	
     -- Despawn the ???
