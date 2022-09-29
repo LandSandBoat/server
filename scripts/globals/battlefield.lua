@@ -331,13 +331,12 @@ function Battlefield:onEntryEventUpdate(player, csid, option, extras)
 
     -- Handle record
     local initiatorId = 0
-    local initiatorName = ""
     local battlefield = player:getBattlefield()
 
     if battlefield then
         battlefield:setLocalVar("[cs]bit", battlefieldIndex)
         name, clearTime, partySize = battlefield:getRecord()
-        initiatorId, initiatorName = battlefield:getInitiator()
+        initiatorId, _ = battlefield:getInitiator()
     end
 
     -- Register party members

@@ -24,6 +24,7 @@ global_objects=(
     xi
     ai
     os
+    _
 
     Module
     Override
