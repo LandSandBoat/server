@@ -1285,6 +1285,7 @@ xi.items =
     SCROLL_OF_ENLIGHT               = 4706,
     SCROLL_OF_ENDARK                = 4707,
     SCROLL_OF_REGEN                 = 4716,
+    SCROLL_OF_TELEPORT_DEM          = 4731,
     SCROLL_OF_FIRE                  = 4752,
     SCROLL_OF_AERO_V                = 4766,
     SCROLL_OF_STONE_IV              = 4770,
