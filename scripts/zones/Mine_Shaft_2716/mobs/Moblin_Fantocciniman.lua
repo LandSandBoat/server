@@ -3,7 +3,7 @@
 -- Mob: Moblin Fantocciniman
 -- ENM: Pulling the Strings
 -----------------------------------
-require("scripts/globals/status")
+local ID = require("scripts/zones/Mine_Shaft_2716/IDs")
 -----------------------------------
 local entity = {}
 
@@ -13,16 +13,27 @@ end
 
 entity.onMobEngaged = function(mob, target)
     mob:SetAutoAttackEnabled(false)
-    mob:setMod(xi.mod.REGAIN, 250)
-    -- Show chat
+    mob:setMod(xi.mod.REGAIN, 150)
+    mob:showText(mob, ID.text.TIME_FOR_GOODEBYONGO + math.random(0,1))
 end
 
 entity.onMobFight = function(mob, target)
-    if mob:getHP() < mob:getMaxHP() then
+    local fantocinni = GetMobByID(ID.mob.FANTOCCINI[mob:getBattlefield():getArea()])
+
+    if mob:getHP() < mob:getMaxHP() and mob:getLocalVar("control") == 0 then
+        mob:setLocalVar("control", 1)
+        mob:showText(mob, ID.text.YOU_MAKE_ME_MAD)
         mob:SetAutoAttackEnabled(true)
-        mob:setMobMod(xi.mobMod.NO_STANDBACK, 1)
         mob:setBehaviour(0)
     end
+
+    while mob:checkDistance(fantocinni) > 8 do
+        mob:pathTo(fantocinni:getPos())
+    end
+end
+
+entity.onMobWeaponSkill = function(target, mob)
+    mob:showText(mob, ID.text.ROLY_POLY)
 end
 
 entity.onMobDeath = function(mob)
@@ -32,6 +43,10 @@ entity.onMobDeath = function(mob)
             npc:addStatusEffect(xi.effect.TERROR, 0, 0, 900)
         end
     end
+end
+
+entity.onMobDespawn = function(mob)
+    mob:showText(mob, ID.text.NOT_HOW)
 end
 
 return entity

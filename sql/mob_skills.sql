@@ -1312,13 +1312,13 @@ INSERT INTO `mob_skills` VALUES (1401,138,'soul_accretion',0,7.0,2000,1500,4,0,0
 -- INSERT INTO `mob_skills` VALUES (1411,658,'bai_wing',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1412,1156,'absolute_terror',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1413,660,'horrid_roar',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1414,1046,'marionette_dice_reset',0,40.0,2000,1500,4,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1414,1046,'marionette_dice_special',0,40.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1415,1047,'marionette_dice_cure',0,40.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1416,0,'marionette_dice',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1417,0,'marionette_dice',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1418,1048,'marionette_dice_boost',0,40.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1419,1049,'marionette_dice_tp',0,40.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1420,1050,'marionette_dice_reset',0,40.0,2000,1500,2,0,0,0,0,0,0);
+-- INSERT INTO `mob_skills` VALUES (1420,1050,'marionette_dice_special',0,40.0,2000,1500,2,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1421,1051,'marionette_dice_tp',0,40.0,2000,1500,2,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1422,1052,'marionette_dice_boost',0,40.0,2000,1500,2,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1423,0,'marionette_dice',0,7.0,2000,1500,4,0,0,0,0,0,0);

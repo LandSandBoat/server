@@ -8,6 +8,8 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
+local ID = require("scripts/zones/Mine_Shaft_2716/IDs")
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)
@@ -19,8 +21,14 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local duration = 90
     local typeEffect = xi.effect.ATTACK_BOOST
 
-    if math.random() < 0.5 then
+    if math.random() > 0.5 then
         typeEffect = xi.effect.DEFENSE_BOOST
+    end
+
+    if target:isPC() then
+        mob:showText(mob, ID.text.DICE_LIKE_YOU)
+    else
+        mob:showText(mob, ID.text.DICE_LIKE_ME)
     end
 
     if target:addStatusEffect(typeEffect, power, 0, duration) then

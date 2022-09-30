@@ -8,6 +8,8 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
+local ID = require("scripts/zones/Mine_Shaft_2716/IDs")
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)
@@ -17,10 +19,14 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local heal = math.min(math.floor(target:getMaxHP() / 8), target:getMaxHP() - target:getHP())
 
+    if target:isPC() then
+        mob:showText(mob, ID.text.DICE_LIKE_YOU)
+    else
+        mob:showText(mob, ID.text.DICE_LIKE_ME)
+    end
+
     target:addHP(heal)
     target:wakeUp()
-
-    skill:setMsg(xi.msg.basic.SELF_HEAL)
 
     return heal
 end

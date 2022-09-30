@@ -1,6 +1,6 @@
 -----------------------------------
--- Marionette Dice (3 & 7)
--- Description: Reset abilites for target
+-- Marionette Dice (6 & 8)
+-- Description: Gives 1000 TP to target
 -- Type: Magical
 -- Notes: Used by Moblin Fantoccini in ENM: "Pulling the strings"
 -----------------------------------
@@ -9,6 +9,8 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
+local ID = require("scripts/zones/Mine_Shaft_2716/IDs")
+-----------------------------------
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)
@@ -16,11 +18,17 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    target:resetRecasts()
+    target:addTP(math.random(1000,3000))
 
-    skill:setMsg(xi.msg.basic.ABILITIES_RECHARGED)
+    if target:isPC() then
+        mob:showText(mob, ID.text.DICE_LIKE_YOU)
+    else
+        mob:showText(mob, ID.text.HA_HA)
+    end
 
-    return 1
+    skill:setMsg(xi.msg.basic.TP_INCREASE)
+
+    return target:getTP()
 end
 
 return mobskill_object

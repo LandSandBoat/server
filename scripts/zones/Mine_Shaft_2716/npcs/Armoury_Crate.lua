@@ -122,6 +122,157 @@ local loot =
             {itemid = 14802, droprate = 100}, -- Gayanj's Earring
         },
     },
+
+    -- Pulling the Strings Specific Job Rewards
+    [xi.job.WAR] =
+    {
+        {
+            {itemid = 0, droprate = 750},
+            {itemid = xi.items.JANIZARY_EARRING, droprate = 250},
+        },
+    },
+    [xi.job.MNK] =
+    {
+        {
+            {itemid = 0, droprate = 750},
+            {itemid = xi.items.COUNTER_EARRING, droprate = 250},
+        },
+    },
+
+    [xi.job.WHM] =
+    {
+        {
+            {itemid = 0, droprate = 750},
+            {itemid = xi.items.HEALING_FEATHER, droprate = 250},
+        },
+    },
+
+    [xi.job.BLM] =
+    {
+        {
+            {itemid = 0, droprate = 750},
+            {itemid = xi.items.SPIRIT_LANTERN, droprate = 250},
+        },
+    },
+
+    [xi.job.RDM] =
+    {
+        {
+            {itemid = 0, droprate = 750},
+            {itemid = xi.items.SANATION_RING, droprate = 250},
+        },
+    },
+
+    [xi.job.THF] =
+    {
+        {
+            {itemid = 0, droprate = 750},
+            {itemid = xi.items.ASSASSINS_RING, droprate = 250},
+        },
+    },
+
+    [xi.job.PLD] =
+    {
+        {
+            {itemid = 0, droprate = 750},
+            {itemid = xi.items.VIAL_OF_REFRESH_MUSK, droprate = 250},
+        },
+    },
+
+    [xi.job.DRK] =
+    {
+        {
+            {itemid = 0, droprate = 750},
+            {itemid = xi.items.TACTICAL_RING, droprate = 250},
+        },
+    },
+
+    [xi.job.BST] =
+    {
+        {
+            {itemid = 0, droprate = 750},
+            {itemid = xi.items.PACIFIST_RING, droprate = 250},
+        },
+    },
+
+    [xi.job.BRD] =
+    {
+        {
+            {itemid = 0, droprate = 750},
+            {itemid = xi.items.GETSUL_RING, droprate = 250},
+        },
+    },
+
+    [xi.job.RNG] =
+    {
+        {
+            {itemid = 0, droprate = 750},
+            {itemid = xi.items.DEADEYE_EARRING, droprate = 250},
+        },
+    },
+
+    [xi.job.SAM] =
+    {
+        {
+            {itemid = 0, droprate = 750},
+            {itemid = xi.items.GAMUSHARA_EARRING, droprate = 250},
+        },
+    },
+
+    [xi.job.NIN] =
+    {
+        {
+            {itemid = 0, droprate = 750},
+            {itemid = xi.items.NARUKO_EARRING, droprate = 250},
+        },
+    },
+
+    [xi.job.DRG] =
+    {
+        {
+            {itemid = 0, droprate = 750},
+            {itemid = xi.items.BAG_OF_WYVERN_FEED, droprate = 250},
+        },
+    },
+
+    [xi.job.SMN] =
+    {
+        {
+            {itemid = 0, droprate = 750},
+            {itemid = xi.items.ASTROL_POT, droprate = 250},
+        },
+    },
+
+    [xi.job.BLU] =
+    {
+        {
+            {itemid = 0, droprate = 750},
+            {itemid = xi.items.DEATH_CHAKRAM, droprate = 250},
+        },
+    },
+
+    [xi.job.COR] =
+    {
+        {
+            {itemid = 0, droprate = 750},
+            {itemid = xi.items.CORSAIR_BULLET_POUCH, droprate = 250},
+        },
+    },
+
+    [xi.job.PUP] =
+    {
+        {
+            {itemid = 0, droprate = 200},
+            {itemid = xi.items.ATTUNER,            droprate = 100},
+            {itemid = xi.items.TACTICAL_PROCESSOR, droprate = 100},
+            {itemid = xi.items.DRUM_MAGAZINE,      droprate = 100},
+            {itemid = xi.items.EQUALIZER,          droprate = 100},
+            {itemid = xi.items.TARGET_MAKER,       droprate = 100},
+            {itemid = xi.items.MANA_CHANNELER,     droprate = 100},
+            {itemid = xi.items.ERASER,             droprate = 100},
+            {itemid = xi.items.SMOKER_SCREEN,      droprate = 100},
+        },
+    },
 }
 
 entity.onTrade = function(player, npc, trade)
@@ -129,10 +280,9 @@ end
 
 entity.onTrigger = function(player, npc)
     local battlefield = player:getBattlefield()
+    local bfID = player:getBattlefieldID()
 
-    if battlefield and player:getBattlefieldID() ~= 740 then
-        xi.battlefield.HandleLootRolls(battlefield, loot[battlefield:getID()], nil, npc)
-    else
+    if bfID == 740 then
         local raceLoot = player:getRace()
         if raceLoot < 7 then
             if raceLoot % 2 == 0 then
@@ -140,6 +290,12 @@ entity.onTrigger = function(player, npc)
             end
         end
         xi.battlefield.HandleLootRolls(battlefield, loot[raceLoot], nil, npc)
+
+    elseif bfID == 739 then
+        xi.battlefield.HandleLootRolls(battlefield, loot[player:getMainJob()], nil, npc)
+
+    elseif battlefield then
+        xi.battlefield.HandleLootRolls(battlefield, loot[battlefield:getID()], nil, npc)
     end
 
 end
