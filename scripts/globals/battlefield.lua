@@ -72,6 +72,7 @@ xi.battlefield.dropChance =
 
 xi.battlefield.id =
 {
+    SHADOW_LORD_BATTLE = 160,
     WHERE_TWO_PATHS_CONVERGE = 161,
     SE_APOLLYON = 1293,
 }
@@ -590,10 +591,11 @@ function MissionBattlefield:checkRequirements(player, npc, registrant, trade)
 end
 
 function MissionBattlefield:checkSkipCutscene(player)
-    local current = player:getCurrentMission(self.missionArea)
+    local missionArea = self.missionArea or player:getNation()
+    local current = player:getCurrentMission(missionArea)
     local missionStatusArea = self.missionStatusArea or player:getNation()
     local status = player:getMissionStatus(missionStatusArea, self.missionStatus)
-    return player:hasCompletedMission(self.missionArea, self.mission) or
+    return player:hasCompletedMission(missionArea, self.mission) or
         (current == self.mission and status > self.skipMissionStatus)
 end
 
