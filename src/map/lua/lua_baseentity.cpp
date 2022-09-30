@@ -4919,6 +4919,21 @@ void CLuaBaseEntity::setCampaignAllegiance(uint8 allegiance)
     charutils::SaveCampaignAllegiance(PChar);
 }
 
+// LOCKSTYLE
+void CLuaBaseEntity::lockstyleOn()
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
+
+    if (auto PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        charutils::SetStyleLock(PChar, true);
+
+        PChar->pushPacket(new CCharAppearancePacket(PChar));
+        PChar->pushPacket(new CCharSyncPacket(PChar));
+    }
+}
+
 /************************************************************************
  *  Function: isSeekingParty()
  *  Purpose : Returns true if a player is seeking a party
@@ -14624,6 +14639,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("setAllegiance", CLuaBaseEntity::setAllegiance);
     SOL_REGISTER("getCampaignAllegiance", CLuaBaseEntity::getCampaignAllegiance);
     SOL_REGISTER("setCampaignAllegiance", CLuaBaseEntity::setCampaignAllegiance);
+    SOL_REGISTER("lockstyleOn", CLuaBaseEntity::lockstyleOn);
 
     SOL_REGISTER("isSeekingParty", CLuaBaseEntity::isSeekingParty);
     SOL_REGISTER("getNewPlayer", CLuaBaseEntity::getNewPlayer);

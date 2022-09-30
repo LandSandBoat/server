@@ -22,12 +22,25 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
+<<<<<<< Updated upstream
     local effect    = xi.effect.DEDICATION
     local power     = 75
     local duration  = 43200
     local subpower  = 10000
 
     xi.item_utils.addItemExpEffect(target, effect, power, duration, subpower)
+=======
+<<<<<<< Updated upstream
+    target:addStatusEffect(xi.effect.DEDICATION, 75, 0, 43200, 0, 10000)
+=======
+    local effect    = xi.effect.DEDICATION
+    local power     = 75
+    local duration  = 43200
+    local subpower  = 1000
+
+    xi.item_utils.addItemExpEffect(target, effect, power, duration, subpower)
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 end
 
 return item_object

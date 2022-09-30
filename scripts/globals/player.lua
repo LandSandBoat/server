@@ -136,6 +136,14 @@ xi.player.charCreate = function(player)
        player:setGil(xi.settings.main.START_GIL)
     end
 
+    if nation == 0 then
+       player:addLinkpearl("TheKingdom", true)
+    elseif nation == 1 then
+       player:addLinkpearl("TheRepublic", true)
+    else
+       player:addLinkpearl("TheFederation", true)
+    end
+
     player:addItem(536) -- adventurer coupon
     player:addTitle(xi.title.NEW_ADVENTURER)
     player:setCharVar("HQuest[moghouseExpo]notSeen", 1) -- needs Moghouse intro

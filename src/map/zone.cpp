@@ -1025,7 +1025,8 @@ void CZone::CharZoneIn(CCharEntity* PChar)
     PChar->PLatentEffectContainer->CheckLatentsZone();
 
     charutils::ReadHistory(PChar);
-
+    charutils::SetCharVar(PChar, "pvp_flag", 0);
+    charutils::SetStyleLock(PChar, false);
     moduleutils::OnCharZoneIn(PChar);
 }
 

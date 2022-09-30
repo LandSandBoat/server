@@ -1314,6 +1314,19 @@ bool CBattleEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
                 return allegiance != PInitiator->allegiance;
             }
 
+            // PVE + PVP
+            if ((allegiance >= ALLEGIANCE_TYPE::SAN_DORIA && allegiance <= ALLEGIANCE_TYPE::WINDURST) &&
+                (PInitiator->allegiance == ALLEGIANCE_TYPE::MOB))
+            {
+                return allegiance != PInitiator->allegiance;
+            }
+
+            if ((allegiance == ALLEGIANCE_TYPE::MOB) &&
+                (PInitiator->allegiance >= ALLEGIANCE_TYPE::SAN_DORIA && PInitiator->allegiance <= ALLEGIANCE_TYPE::WINDURST))
+            {
+                return allegiance != PInitiator->allegiance;
+            }
+
             return false;
         }
     }

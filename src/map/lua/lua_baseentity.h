@@ -286,6 +286,7 @@ public:
 
     uint8 getCampaignAllegiance();                 // Gets Campaign Allegiance of Entity
     void  setCampaignAllegiance(uint8 allegiance); // Sets Campaign Allegiance of Entity
+    void lockstyleOn();                            // LockStyle on
 
     bool isSeekingParty();
     bool getNewPlayer();

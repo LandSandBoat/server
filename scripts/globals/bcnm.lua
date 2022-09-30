@@ -277,6 +277,40 @@ local battlefields =
 
     [xi.zone.WAUGHROON_SHRINE] =
     {
+<<<<<<< Updated upstream
+=======
+<<<<<<< Updated upstream
+        { 0,   64,    0},   -- The Rank 2 Final Mission (Mission 2-3)
+        { 1,   65, 1131},   -- The Worm's Turn (BS40)
+        { 2,   66, 1130},   -- Grimshell Shocktroopers (BS60)
+        { 3,   67,    0},   -- On My Way (Basty 7-2)
+        { 4,   68, 1166},   -- A Thief in Norg!? (Quest)
+        { 5,   69, 1177},   -- 3, 2, 1... (BS50) -- TODO: Self Destruct does not display correct message in chat log
+        { 6,   70, 1430},   -- Shattering Stars (RDM LB5)
+        { 7,   71, 1431},   -- Shattering Stars (THF LB5)
+        { 8,   72, 1434},   -- Shattering Stars (BST LB5)
+        { 9,   73, 1552},   -- Birds of a Feather (BS30)
+     -- {10,   74, 1551},   -- Crustacean Conundrum (BS20) -- TODO: You can only do 0-2 damage no matter what your attack is
+        {11,   75, 1552},   -- Grove Guardians (BS30)
+     -- {12,   76, 1553},   -- The Hills are Alive (KS99) -- TODO: Tartaruga Gigante is not coded
+        {13,   77, 1131},   -- Royal Jelly (BS40)
+     -- {14,   78, 1177},   -- The Final Bout (BS50) -- TODO: mobskills Big Blow and Counterstance
+        {15,   79, 1130},   -- Up in Arms (BS60)
+     -- {16,   80, 1175},   -- Copycat (KS30)
+     -- {17,   81, 1178},   -- Operation Desert Swarm (KS30) -- TODO: Wild Rage gets stronger as they die. Build sleep resistance. Testing.
+     -- {18,   82, 1180},   -- Prehistoric Pigeons (KS30) -- TODO: Build resistance to sleep quickly. When one dies, remaining ones become more powerful.
+     -- {19,   83, 3351},   -- The Palborough Project (KC30)
+     -- {20,   84, 3352},   -- Shell Shocked (KC50)
+        {21,   85,    0},   -- Beyond Infinity (Quest)
+     -- {22,    ?, 4062},   -- *The Worm's Tail (SKC10)
+     -- {23,    ?, 4063},   -- *Grimshell Shocktroopers (SKC20)
+     -- {24,    ?,    0},   -- A Feast Most Dire (Quest)
+     -- {25,    ?,    0},   -- A.M.A.N. Trove (Mars)
+     -- {26,    ?,    0},   -- A.M.A.N. Trove (Venus)
+     -- {27,    ?,    0},   -- Invitation from Naji
+     -- {28,    ?,    0},   -- Invitation from Naji and Co.
+=======
+>>>>>>> Stashed changes
         {  0,   64,    0 },   -- The Rank 2 Final Mission (Mission 2-3)
         {  1,   65, 1131 },   -- The Worm's Turn (BS40)
         {  2,   66, 1130 },   -- Grimshell Shocktroopers (BS60)
@@ -290,11 +324,19 @@ local battlefields =
      -- { 10,   74, 1551 },   -- Crustacean Conundrum (BS20) -- TODO: You can only do 0-2 damage no matter what your attack is
         { 11,   75, 1552 },   -- Grove Guardians (BS30)
      -- { 12,   76, 1553 },   -- The Hills are Alive (KS99) -- TODO: Tartaruga Gigante is not coded
+<<<<<<< Updated upstream
      -- { 13,   77, 1131 },   -- Royal Jelly (BS40) -- TODO: all combat mechanics, loot
      -- { 14,   78, 1177 },   -- The Final Bout (BS50) -- TODO: mobskills Big Blow and Counterstance
         { 15,   79, 1130 },   -- Up in Arms (BS60)
      -- { 16,   80, 1175 },   -- Copycat (KS30)
      -- { 17,   81, 1178 },   -- Operation Desert Swarm (KS30) -- TODO: Wild Rage gets stronger as they die. Build sleep resistance. Testing.
+=======
+        { 13,   77, 1131 },   -- Royal Jelly (BS40) -- TODO: all combat mechanics, loot
+     -- { 14,   78, 1177 },   -- The Final Bout (BS50) -- TODO: mobskills Big Blow and Counterstance
+        { 15,   79, 1130 },   -- Up in Arms (BS60)
+     -- { 16,   80, 1175 },   -- Copycat (KS30)
+        { 17,   81, 1178 },   -- Operation Desert Swarm (KS30) -- TODO: Wild Rage gets stronger as they die. Build sleep resistance. Testing.
+>>>>>>> Stashed changes
      -- { 18,   82, 1180 },   -- Prehistoric Pigeons (KS30) -- TODO: Build resistance to sleep quickly. When one dies, remaining ones become more powerful.
      -- { 19,   83, 3351 },   -- The Palborough Project (KC30)
      -- { 20,   84, 3352 },   -- Shell Shocked (KC50)
@@ -306,6 +348,10 @@ local battlefields =
      -- { 26,    ?,    0 },   -- A.M.A.N. Trove (Venus)
      -- { 27,    ?,    0 },   -- Invitation from Naji
      -- { 28,    ?,    0 },   -- Invitation from Naji and Co.
+<<<<<<< Updated upstream
+=======
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
     },
 
     [xi.zone.BALGAS_DAIS] =

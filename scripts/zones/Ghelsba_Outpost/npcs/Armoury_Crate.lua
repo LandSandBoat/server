@@ -60,12 +60,104 @@ local loot =
     [35] =
     {
         {
+<<<<<<< Updated upstream
+=======
+<<<<<<< Updated upstream
+            {itemid = 852, droprate = 1000}, -- Lizard Skin
+        },
+        {
+            {itemid =     0, droprate =  900}, -- nothing
+            {itemid = 13014, droprate =  100}, -- leaping_boots
+        },
+        {
+            {itemid = 15282, droprate =   50}, -- Katana Obi
+            {itemid = 15275, droprate =   75}, -- Rapier Belt
+            {itemid = 15278, droprate =  175}, -- Scythe Belt
+            {itemid =   694, droprate =  175}, -- Chestnut Log
+            {itemid =   690, droprate =  350}, -- Elm Log
+            {itemid =   652, droprate =  100}, -- Steel Ingot
+        },
+        {
+            {itemid =     0, droprate =  925}, -- nothing (50%)
+            {itemid = 15282, droprate =   50}, -- Katana Obi
+            {itemid = 15275, droprate =   75}, -- Rapier Belt
+            {itemid = 15278, droprate =  175}, -- Scythe Belt
+            {itemid =   694, droprate =  175}, -- Chestnut Log
+            {itemid =   690, droprate =  350}, -- Elm Log
+            {itemid =   652, droprate =  100}, -- Steel Ingot
+        },
+        {
+            {itemid = 15285, droprate = 105}, -- Avatar Belt
+            {itemid = 15279, droprate = 105}, -- Pick Belt
+            {itemid = 651, droprate = 131},  -- Iron Ingot
+            {itemid = 643, droprate = 131},  -- Chunk Of Iron Ore
+            {itemid = 644, droprate = 79},   -- Chunk Of Mythril Ore
+            {itemid = 736, droprate = 79},   -- Chunk Of Silver Ore
+            {itemid = 795, droprate = 131},  -- Lapis Lazuli
+        },
+        {
+            {itemid = 17867, droprate = 552}, -- Jug Of Cold Carrion Broth
+            {itemid = 4877, droprate = 263}, -- Scroll Of Absorb-agi
+            {itemid = 4878, droprate = 210}, -- Scroll Of Absorb-int
+            {itemid = 4876, droprate = 289}, -- Scroll Of Absorb-vit
+            {itemid = 4868, droprate = 105}, -- Scroll Of Dispel
+            {itemid = 4751, droprate = 79},  -- Scroll Of Erase
+            {itemid = 5070, droprate = 421}, -- Scroll Of Magic Finale
+            {itemid = 4947, droprate = 79},  -- Scroll Of Utsusemi Ni
+        },
+        {
+            {itemid =     0, droprate =  736}, -- nothing (25%)
+            {itemid = 15271, droprate =  200}, -- Axe Belt
+            {itemid = 15272, droprate =  125}, -- Cestus Belt
+            {itemid =   809, droprate =   10}, -- Clear Topaz
+            {itemid = 15276, droprate =   75}, -- Dagger Belt
+            {itemid =   645, droprate =  100}, -- Darksteel Ore
+            {itemid = 15281, droprate =   25}, -- Gun Belt
+            {itemid =  4132, droprate =  175}, -- Hi-ether
+            {itemid = 15284, droprate =  200}, -- Lance Belt
+            {itemid =   796, droprate =   75}, -- Light Opal
+            {itemid = 15273, droprate =  175}, -- Mace Belt
+            {itemid =   653, droprate =  200}, -- Mythril Ingot
+            {itemid =   799, droprate =   25}, -- Onyx
+            {itemid = 15283, droprate =  250}, -- Sarashi
+            {itemid = 15277, droprate =  100}, -- Shield Belt
+            {itemid = 15280, droprate =  100}, -- Song Belt
+            {itemid = 15274, droprate =  150}, -- Staff Belt
+            {itemid =   744, droprate =  100}, -- Silver Ingot
+            {itemid =   806, droprate =  125}, -- Tourmaline
+        },
+        {
+            {itemid =     0, droprate = 2210}, -- nothing (50%)
+            {itemid = 15271, droprate =  200}, -- Axe Belt
+            {itemid = 15272, droprate =  125}, -- Cestus Belt
+            {itemid =   809, droprate =   10}, -- Clear Topaz
+            {itemid = 15276, droprate =   75}, -- Dagger Belt
+            {itemid =   645, droprate =  100}, -- Darksteel Ore
+            {itemid = 15281, droprate =   25}, -- Gun Belt
+            {itemid =  4132, droprate =  175}, -- Hi-ether
+            {itemid = 15284, droprate =  200}, -- Lance Belt
+            {itemid =   796, droprate =   75}, -- Light Opal
+            {itemid = 15273, droprate =  175}, -- Mace Belt
+            {itemid =   653, droprate =  200}, -- Mythril Ingot
+            {itemid =   799, droprate =   25}, -- Onyx
+            {itemid = 15283, droprate =  250}, -- Sarashi
+            {itemid = 15277, droprate =  100}, -- Shield Belt
+            {itemid = 15280, droprate =  100}, -- Song Belt
+            {itemid = 15274, droprate =  150}, -- Staff Belt
+            {itemid =   744, droprate =  100}, -- Silver Ingot
+            {itemid =   806, droprate =  125}, -- Tourmaline
+=======
+>>>>>>> Stashed changes
             { itemid = 852, droprate = 1000 }, -- Lizard Skin
         },
 
         {
             { itemid =     0, droprate = 900 }, -- nothing
+<<<<<<< Updated upstream
             { itemid = 13014, droprate = 100 }, -- leaping_boots
+=======
+            { itemid = 15351, droprate = 100 }, -- bounding_boots
+>>>>>>> Stashed changes
         },
 
         {
@@ -150,6 +242,10 @@ local loot =
             { itemid = 15274, droprate =  150 }, -- Staff Belt
             { itemid =   744, droprate =  100 }, -- Silver Ingot
             { itemid =   806, droprate =  125 }, -- Tourmaline
+<<<<<<< Updated upstream
+=======
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
         },
     },
 

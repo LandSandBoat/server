@@ -174,6 +174,71 @@ local loot =
     [523] =
     {
         {
+<<<<<<< Updated upstream
+=======
+<<<<<<< Updated upstream
+            {itemid = 14202, droprate =  125}, -- creek_m_clomps
+            {itemid = 14203, droprate =  125}, -- creek_f_clomps
+            {itemid = 14198, droprate =  125}, -- marine_m_boots
+            {itemid = 14199, droprate =  125}, -- marine_f_boots
+            {itemid = 14200, droprate =  125}, -- wood_m_ledelsens
+            {itemid = 14201, droprate =  125}, -- wood_f_ledelsens
+            {itemid = 14205, droprate =  125}, -- dune_sandals
+            {itemid = 14204, droprate =  125}, -- river_gaiters
+        },
+        {
+            {itemid = 17472, droprate =   43}, -- cross-counters
+            {itemid =   801, droprate =   10}, -- chrysoberyl
+            {itemid =   784, droprate =   94}, -- jadeite
+            {itemid =   803, droprate =  113}, -- sunstone
+            {itemid =   805, droprate =   75}, -- zircon
+            {itemid =   478, droprate =   10}, -- clear_chip
+            {itemid =   474, droprate =   38}, -- red_chip
+            {itemid =   476, droprate =   38}, -- yellow_chip
+            {itemid =   745, droprate =  151}, -- gold_ingot
+            {itemid =   774, droprate =   19}, -- purple_rock
+            {itemid =   776, droprate =   19}, -- white_rock
+        },
+        {
+            {itemid =   652, droprate =  132}, -- steel_ingot
+            {itemid =   773, droprate =  113}, -- translucent_rock
+            {itemid =   654, droprate =  113}, -- darksteel_ingot
+            {itemid =   797, droprate =   50}, -- painite
+            {itemid =   702, droprate =  132}, -- ebony_log
+            {itemid =   480, droprate =   10}, -- white_chip
+            {itemid =   802, droprate =  151}, -- moonstone
+            {itemid =   805, droprate =   75}, -- zircon
+            {itemid =   810, droprate =   57}, -- fluorite
+            {itemid =   801, droprate =   57}, -- chrysoberyl
+            {itemid =   772, droprate =   38}, -- green_rock
+            {itemid =  4173, droprate =   38}, -- hi-reraiser
+            {itemid =  4175, droprate =   38}, -- vile_elixir_+1
+        },
+        {
+            {itemid =  4812, droprate =  283}, -- scroll_of_flare
+            {itemid =  5005, droprate =  358}, -- scroll_of_valor_minuet_iv
+            {itemid =  4749, droprate =  264}, -- scroll_of_reraise_ii
+        },
+        {
+            {itemid =     0, droprate =  957}, -- nothing
+            {itemid = 17187, droprate =   43}, -- eurytos_bow
+        },
+        {
+            {itemid =     0, droprate =  582}, -- nothing
+            {itemid =   653, droprate =  302}, -- mythril_ingot
+            {itemid =   475, droprate =   19}, -- blue_chip
+            {itemid =   481, droprate =   38}, -- black_chip
+            {itemid =   479, droprate =   10}, -- purple_chip
+            {itemid =   477, droprate =   19}, -- green_chip
+            {itemid =   700, droprate =   10}, -- mahogany_log
+            {itemid =   769, droprate =   10}, -- red_rock
+            {itemid =   775, droprate =   10}, -- black_rock
+        },
+        {
+            {itemid =     0, droprate =  887}, -- nothing
+            {itemid =  4119, droprate =  113}, -- hi-potion_+3
+=======
+>>>>>>> Stashed changes
             { itemid = 14202, droprate = 125 }, -- creek_m_clomps
             { itemid = 14203, droprate = 125 }, -- creek_f_clomps
             { itemid = 14198, droprate = 125 }, -- marine_m_boots
@@ -222,7 +287,11 @@ local loot =
 
         {
             { itemid =     0, droprate = 957 }, -- nothing
+<<<<<<< Updated upstream
             { itemid = 17187, droprate =  43 }, -- eurytos_bow
+=======
+            { itemid = 18714, droprate =  43 }, -- valis_bow
+>>>>>>> Stashed changes
         },
 
         {
@@ -240,6 +309,10 @@ local loot =
         {
             { itemid =    0, droprate = 887 }, -- nothing
             { itemid = 4119, droprate = 113 }, -- hi-potion_+3
+<<<<<<< Updated upstream
+=======
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
         },
     },
 

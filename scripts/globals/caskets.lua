@@ -226,7 +226,7 @@ local function setCasketData(player, x, y, z, r, npc, partyID, mobLvl)
     -- NOTE: Super Kupowers Myriad Mystery Boxes add an additional 20% chance the chest will be locked.
     -----------------------------------
     local typeChance       = math.random()
-    local chestStyle       = 965
+    local chestStyle       = 966
     local correctNum       = math.random(10, 99)
     local attempts         = math.random(4, 6)
     local kupowersBonus    = 0
@@ -235,11 +235,12 @@ local function setCasketData(player, x, y, z, r, npc, partyID, mobLvl)
     --     kupowersBonus = 0.2
     -- end
 
-    if typeChance < 0.2 + kupowersBonus then
-        chestStyle = 966 -- Brown locked
-    else
-        chestStyle = 965 -- Blue
-    end
+    -- if typeChance < 0.2 + kupowersBonus then
+    --   chestStyle = 966 -- Brown locked
+    --  else
+    --   chestStyle = 965 -- Blue
+        
+    -- end
 
     if npc ~= nil then
         npc:resetLocalVars()

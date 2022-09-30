@@ -81,12 +81,30 @@ local loot =
         },
 
         {
+<<<<<<< Updated upstream
             { itemid =     0, droprate = 250 }, -- nothing
             { itemid = 13054, droprate = 100 }, -- fuma_kyahan
             { itemid = 13555, droprate = 200 }, -- peace_ring
             { itemid = 13624, droprate = 200 }, -- enhancing_mantle
             { itemid = 13236, droprate = 150 }, -- master_belt
             { itemid = 13952, droprate = 100 }, -- ochiudos_kote
+=======
+<<<<<<< Updated upstream
+            {itemid =     0, droprate =  250}, -- nothing
+            {itemid = 13054, droprate =  100}, -- fuma_kyahan
+            {itemid = 13555, droprate =  200}, -- peace_ring
+            {itemid = 13624, droprate =  200}, -- enhancing_mantle
+            {itemid = 13236, droprate =  150}, -- master_belt
+            {itemid = 13952, droprate =  100}, -- ochiudos_kote
+=======
+            { itemid =     0, droprate = 250 }, -- nothing
+            { itemid = 15737, droprate = 100 }, -- sarutobi_kyahan
+            { itemid = 13555, droprate = 200 }, -- peace_ring
+            { itemid = 13624, droprate = 200 }, -- enhancing_mantle
+            { itemid = 13236, droprate = 150 }, -- master_belt
+            { itemid = 14986, droprate = 100 }, -- ochimushas_kote
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
         },
 
         {

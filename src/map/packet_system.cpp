@@ -3337,7 +3337,7 @@ void SmallPacket0x052(map_session_data_t* const PSession, CCharEntity* const PCh
  ************************************************************************/
 void SmallPacket0x053(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
-    TracyZoneScoped;
+    /*/ TracyZoneScoped;
     uint8 count = data.ref<uint8>(0x04);
     uint8 type  = data.ref<uint8>(0x05);
 
@@ -3412,7 +3412,7 @@ void SmallPacket0x053(map_session_data_t* const PSession, CCharEntity* const PCh
     {
         PChar->pushPacket(new CCharAppearancePacket(PChar));
         PChar->pushPacket(new CCharSyncPacket(PChar));
-    }
+    }*/
 }
 
 /*************************************************************************
@@ -5685,18 +5685,18 @@ void SmallPacket0x0DC(map_session_data_t* const PSession, CCharEntity* const PCh
                 PChar->nameflags.flags &= ~FLAG_AWAY;
             }
             break;
-        case NFLAG_ANON:
-            // /anon [on|off]
-            PChar->nameflags.flags ^= FLAG_ANON;
-            if (PChar->nameflags.flags & FLAG_ANON)
-            {
-                PChar->pushPacket(new CMessageSystemPacket(0, 0, 175));
-            }
-            else
-            {
-                PChar->pushPacket(new CMessageSystemPacket(0, 0, 176));
-            }
-            break;
+        //case NFLAG_ANON:
+        //    // /anon [on|off]
+        //    PChar->nameflags.flags ^= FLAG_ANON;
+        //    if (PChar->nameflags.flags & FLAG_ANON)
+        //    {
+        //        PChar->pushPacket(new CMessageSystemPacket(0, 0, 175));
+        //    }
+        //    else
+        //    {
+        //        PChar->pushPacket(new CMessageSystemPacket(0, 0, 176));
+        //    }
+        //    break;
         case NFLAG_AUTOTARGET:
             // /autotarget [on|off]
             if (data.ref<uint8>(0x10) == 1)

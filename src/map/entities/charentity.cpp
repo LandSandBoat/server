@@ -1911,6 +1911,10 @@ void CCharEntity::OnRaise()
         SetLocalVar("MijinGakure", 0);
         m_hasArise = false;
         m_hasRaise = 0;
+        if (charutils::GetCharVar(this,"pvp_flag") == 1)
+        {
+            charutils::HomePoint(this);
+        }
     }
 }
 

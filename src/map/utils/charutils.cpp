@@ -2810,6 +2810,12 @@ namespace charutils
             }
         }
 
+        // Add Provoke to all jobs
+        if (PChar->GetMJob() != JOB_NON || JOB_WAR)
+        {
+            addAbility(PChar, ABILITY_PROVOKE);
+        }
+
         // To stop a character with no SJob to receive the traits with job = 0 in the DB.
         if (PChar->GetSJob() == JOB_NON)
         {
@@ -4505,8 +4511,18 @@ namespace charutils
 
         if (!expFromRaise)
         {
-            exp = (uint32)(exp * settings::get<float>("map.EXP_RATE"));
+            // XP bonus if PVP flag enabled
+            uint8 pvp = GetCharVar(PChar, "pvp_flag");
+            if (pvp == 1)
+            {
+                exp = (uint32)(exp * 2.5);
+            }
+            else
+            {
+                exp = (uint32)(exp * settings::get<float>("map.EXP_RATE"));
+            }
         }
+      
         uint16 currentExp  = PChar->jobs.exp[PChar->GetMJob()];
         bool   onLimitMode = false;
 

@@ -18,17 +18,6 @@ end
 zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
-    -- set player status
-    -- nation = player:getNation()
-    -- allegiance = 0
-
-    -- allegiance = nation + 2
-    -- player:setAllegiance(allegiance)
-    -- player:timer(5000, function(player)
-    --     player:setCharVar("pvp_flag", 1)
-    --     player:lockstyleOn()
-    --     end)
-
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(-601.433, 35.204, -520.031, 1)
     end
