@@ -136,18 +136,69 @@ function Battlefield.getVarPrefix(battlefieldID)
 end
 
 function Battlefield:register()
-    -- Only hookup the entry and exit callbacks if this is the first in the zone
-    -- If we do all of them then each trigger/trade/event occurs twice
-    local existing = xi.battlefield.contents[self.battlefieldId]
-    if (existing and existing.hasCallbacks) or not utils.hasKey(self.zoneId, xi.battlefield.contentsByZone) then
-        if self.entryNpc then
-            self:setEntryNpc(self.entryNpc)
-        end
+    -- Only hookup the entry and exit listeners if there aren't any other battlefields already registered for that entrance
+    local setupEvents = true
+    local setupEntryNpc = true
+    local setupExitNpc = true
+    if utils.hasKey(self.zoneId, xi.battlefield.contentsByZone) then
+        local contents = xi.battlefield.contentsByZone[self.zoneId]
+        for _, content in ipairs(contents) do
+            -- Always setup listeners if we're reloading a battlefield
+            if self.battlefieldId == content.battlefieldId and content.hasListeners then
+                setupEvents = true
+                setupEntryNpc = true
+                setupExitNpc = true
+                break
+            end
 
-        if self.exitNpc then
-            self:setExitNpc(self.exitNpc)
+            -- Do not setup events if there are any other battlefields
+            setupEvents = false
+
+            -- Do not setup npcs if there is another battlefield using the same entry npc
+            if self.entryNpc == content.entryNPC then
+                setupEntryNpc = false
+            end
+            if self.exitNpc == content.exitNpc then
+                setupExitNpc = false
+            end
         end
-        self.hasCallbacks = true
+    end
+
+    local zoneSection = self.sections[1][self.zoneId]
+    if setupEvents then
+        utils.append(zoneSection, {
+            onEventUpdate =
+            {
+                [32000] = utils.bind(self.onEntryEventUpdate, self),
+                [32003] = utils.bind(self.onExitEventUpdate, self),
+            },
+            onEventFinish =
+            {
+                [32000] = utils.bind(self.onEventFinishEnter, self),
+                [32001] = utils.bind(self.onEventFinishWin, self),
+                [32002] = utils.bind(self.onEventFinishEnter, self),
+                [32003] = utils.bind(self.onFinishEnterExit, self),
+            }
+        })
+    end
+
+    if setupEntryNpc and self.entryNpc then
+        utils.append(zoneSection, {
+            [self.entryNpc] =
+            {
+                onTrade = utils.bind(self.onEntryTrade, self),
+                onTrigger = utils.bind(self.onEntryTrigger, self),
+            }
+        })
+    end
+
+    if setupExitNpc and self.exitNpc then
+        utils.append(zoneSection, {
+            [self.exitNpc] =
+            {
+                onTrigger = utils.bind(self.onExitTrigger, self),
+            }
+        })
     end
 
     xi.battlefield.contents[self.battlefieldId] = self
@@ -177,45 +228,6 @@ end
 
 function Battlefield:checkSkipCutscene(player)
     return false
-end
-
-function Battlefield:setEntryNpc(entryNpc)
-    local entry =
-    {
-        [entryNpc] =
-        {
-            onTrade = utils.bind(self.onEntryTrade, self),
-            onTrigger = utils.bind(self.onEntryTrigger, self),
-        },
-        onEventUpdate =
-        {
-            [32000] = utils.bind(self.onEntryEventUpdate, self),
-            [32003] = utils.bind(self.onExitEventUpdate, self),
-        },
-        onEventFinish =
-        {
-            [32000] = utils.bind(self.onEventFinishEnter, self),
-            [32001] = utils.bind(self.onEventFinishWin, self),
-            [32002] = utils.bind(self.onEventFinishEnter, self),
-            [32003] = utils.bind(self.onFinishEnterExit, self),
-        }
-    }
-
-    utils.append(self.sections[1][self.zoneId], entry)
-    self.entryNpc = entryNpc
-end
-
-function Battlefield:setExitNpc(exitNpc)
-    local exit =
-    {
-        [exitNpc] =
-        {
-            onTrigger = utils.bind(self.onExitTrigger, self),
-        },
-    }
-
-    utils.append(self.sections[1][self.zoneId], exit);
-    self.exitNpc = exitNpc
 end
 
 function Battlefield:onEntryTrade(player, npc, trade, onUpdate)
