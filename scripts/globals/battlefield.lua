@@ -94,6 +94,7 @@ end
 --  - requiredItems: Items required to be traded to enter the battlefield (optional)
 --  - createWornItem: Should a worn item is created with the required item (optional)
 --  - requiredKeyItems: Key items required to be able to enter the battlefield - these are removed upon entry (optional)
+--  - grantXP: Amount of XP to grant upon victory (optional)
 function Battlefield:new(data)
     local obj = Container:new(Battlefield.getVarPrefix(data.battlefieldId))
     setmetatable(obj, self)
@@ -121,8 +122,14 @@ function Battlefield:new(data)
     obj.entryNpc = data.entryNpc
     -- The name of the NPC used for exiting
     obj.exitNpc = data.exitNpc
+    -- Amount of XP to grant upon victory
+    obj.grantXP = data.grantXP
     obj.sections = { { [obj.zoneId] = {} } }
     return obj
+end
+
+function Battlefield.getVarPrefix(battlefieldID)
+    return string.format("Battlefield[%d]", battlefieldID)
 end
 
 function Battlefield:register()
@@ -184,9 +191,10 @@ function Battlefield:setEntryNpc(entryNpc)
         },
         onEventFinish =
         {
-            [32000] = utils.bind(self.onEntryEventFinish, self),
-            [32002] = utils.bind(self.onEntryEventFinish, self),
-            [32003] = utils.bind(self.onExitEventFinish, self),
+            [32000] = utils.bind(self.onEventFinishEnter, self),
+            [32001] = utils.bind(self.onEventFinishWin, self),
+            [32002] = utils.bind(self.onEventFinishEnter, self),
+            [32003] = utils.bind(self.onFinishEnterExit, self),
         }
     }
 
@@ -205,10 +213,6 @@ function Battlefield:setExitNpc(exitNpc)
 
     utils.append(self.sections[1][self.zoneId], exit);
     self.exitNpc = exitNpc
-end
-
-function Battlefield.getVarPrefix(battlefieldID)
-    return string.format("Battlefield[%d]", battlefieldID)
 end
 
 function Battlefield:onEntryTrade(player, npc, trade, onUpdate)
@@ -398,8 +402,14 @@ function Battlefield:onEntryEventUpdate(player, csid, option, extras)
     return status < xi.battlefield.status.LOCKED and result < xi.battlefield.returnCode.LOCKED
 end
 
-function Battlefield:onEntryEventFinish(player, csid, option)
+function Battlefield:onEventFinishEnter(player, csid, option)
     player:setLocalVar("[battlefield]area", 0)
+end
+
+function Battlefield:onEventFinishWin(player, csid, option)
+    if self.grantXP then
+        player:addExp(self.grantXP)
+    end
 end
 
 function Battlefield:onExitTrigger(player, npc)
@@ -413,11 +423,10 @@ function Battlefield:onExitEventUpdate(player, csid, option, npc)
         player:updateEvent(3)
     elseif option == 3 then
         player:updateEvent(0)
-    elseif option == 4 then
     end
 end
 
-function Battlefield:onExitEventFinish(player, csid, option)
+function Battlefield:onFinishEnterExit(player, csid, option)
     if option == 4 and player:getBattlefield() then
         player:leaveBattlefield(1)
     end
@@ -618,6 +627,15 @@ function BattlefieldMission:onBattlefieldWin(player, battlefield)
     local _, clearTime, partySize = battlefield:getRecord()
     local canSkipCS = (current ~= self.mission) and 1 or 0
     player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, self.menuBit, canSkipCS)
+end
+
+function BattlefieldMission:onEventFinishWin(player, csid, option)
+    -- Only grant mission XP once per JP midnight
+    local varKey = "MN_XP_" .. self.id
+    if self.grantXP and player:getCharVar(varKey) <= os.time() then
+        player:setCharVar(varKey, getMidnight())
+        player:addExp(self.grantXP)
+    end
 end
 
 function xi.battlefield.onBattlefieldTick(battlefield, timeinside)

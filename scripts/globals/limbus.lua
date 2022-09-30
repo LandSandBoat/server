@@ -570,8 +570,8 @@ function Limbus:onEntryEventUpdate(player, csid, option, extras)
     end
 end
 
-function Limbus:onEntryEventFinish(player, csid, option)
-    if not Battlefield.onEntryEventFinish(self, player, csid, option) then
+function Limbus:onEventFinishEnter(player, csid, option)
+    if not Battlefield.onEventFinishEnter(self, player, csid, option) then
         player:setCharVar("ApollyonEntrance", 0)
     end
 end
