@@ -260,13 +260,6 @@ function Battlefield:onEntryTrigger(player, npc)
 
     -- Player has battlefield status effect. That means a battlefield is open OR the player is inside a battlefield.
     if player:hasStatusEffect(xi.effect.BATTLEFIELD) then
-        -- Player is inside battlefield. Attempting to leave.
-        -- TODO(jmcmorris): We might be able to move this to its own onExitTrigger?
-        if player:getBattlefield() then
-            player:startOptionalCutscene(32003)
-            return true
-        end
-
         -- Player is outside battlefield. Attempting to enter.
         -- TODO(jmcmorris): Is this going to be triggered for each battlefield in the zone?
         local status = player:getStatusEffect(xi.effect.BATTLEFIELD)
