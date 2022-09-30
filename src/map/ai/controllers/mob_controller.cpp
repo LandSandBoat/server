@@ -999,6 +999,7 @@ void CMobController::DoRoamTick(time_point tick)
                     PMob->m_HiPartySize = 0;
                     PMob->m_giveExp     = true;
                     PMob->m_ExpPenalty  = 0;
+                    PMob->m_UsedSkillIds.clear();
                 }
             }
 

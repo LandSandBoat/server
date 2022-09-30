@@ -140,44 +140,46 @@ xi.assault.instanceOnEventFinish = function(player, csid, zone)
     end
 end
 
-xi.assault.runeReleaseFinish = function(player)
-    local instance = player:getInstance()
-    local chars = instance:getChars()
-    local zone = player:getZoneID()
-    local ID = zones[zone]
-    local playerpoints = math.max((#chars -3)*.1, 0)
-    local points = 0
-    local assaultID = player:getCurrentAssault()
-    local mobs = instance:getMobs()
-    local pointsArea = xi.assault.getAssaultArea(player)
+xi.assault.runeReleaseFinish = function(player, csid, option)
+    if csid == 100 and option == 1 then
+        local instance = player:getInstance()
+        local chars = instance:getChars()
+        local zone = player:getZoneID()
+        local ID = zones[zone]
+        local playerpoints = math.max((#chars -3)*.1, 0)
+        local points = 0
+        local assaultID = player:getCurrentAssault()
+        local mobs = instance:getMobs()
+        local pointsArea = xi.assault.getAssaultArea(player)
 
-    for _, entity in pairs(mobs) do
-        local mobID = entity:getID()
-        DespawnMob(mobID, instance)
-    end
+        for _, entity in pairs(mobs) do
+            local mobID = entity:getID()
+            DespawnMob(mobID, instance)
+        end
 
-    for _, entity in pairs(chars) do
-        if entity:getLocalVar("AssaultPointsAwarded") == 0 then
-            entity:setLocalVar("AssaultPointsAwarded", 1)
+        for _, entity in pairs(chars) do
+            if entity:getLocalVar("AssaultPointsAwarded") == 0 then
+                entity:setLocalVar("AssaultPointsAwarded", 1)
 
-            local pointModifier = xi.assault.missionInfo[assaultID].minimumPoints
-            points = pointModifier - (pointModifier * playerpoints)
-            if entity:getCharVar("Assault_Armband") == 1 then
-                points = points*(1.1)
+                local pointModifier = xi.assault.missionInfo[assaultID].minimumPoints
+                points = pointModifier - (pointModifier * playerpoints)
+                if entity:getCharVar("Assault_Armband") == 1 then
+                    points = points*(1.1)
+                end
+                if entity:hasCompletedAssault(assaultID) then
+                    points = math.floor(points)
+                    entity:setVar("AssaultPromotion", entity:getCharVar("AssaultPromotion") + 1)
+                    entity:addAssaultPoint(pointsArea, points)
+                    entity:messageSpecial(ID.text.ASSAULT_POINTS_OBTAINED, points)
+                else
+                    points = math.floor(points*(1.5))
+                    entity:setVar("AssaultPromotion", entity:getCharVar("AssaultPromotion") + 5)
+                    entity:addAssaultPoint(pointsArea, points)
+                    entity:messageSpecial(ID.text.ASSAULT_POINTS_OBTAINED, points)
+                end
+                entity:setVar("AssaultComplete",1)
+                entity:startEvent(102)
             end
-            if entity:hasCompletedAssault(assaultID) then
-                points = math.floor(points)
-                entity:setVar("AssaultPromotion", entity:getCharVar("AssaultPromotion") + 1)
-                entity:addAssaultPoint(pointsArea, points)
-                entity:messageSpecial(ID.text.ASSAULT_POINTS_OBTAINED, points)
-            else
-                points = math.floor(points*(1.5))
-                entity:setVar("AssaultPromotion", entity:getCharVar("AssaultPromotion") + 5)
-                entity:addAssaultPoint(pointsArea, points)
-                entity:messageSpecial(ID.text.ASSAULT_POINTS_OBTAINED, points)
-            end
-            entity:setVar("AssaultComplete",1)
-            entity:startEvent(102)
         end
     end
 end

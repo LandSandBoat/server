@@ -2569,7 +2569,7 @@ xi.gear_sets.checkForGearSet = function(player)
     -- Apply Mods for each set after boundary checking the counts.
     for setId, setCount in pairs(equippedSets) do
         local minEquippedReq = gearSets[setId].minEquipped and gearSets[setId].minEquipped or 2
-        local maxEquippedReq = gearSets[setId].maxEquipped and gearSets[setId].maxEquipped or 0
+        local maxEquippedReq = gearSets[setId].maxEquipped and gearSets[setId].maxEquipped or (xi.MAX_SLOTID + 1)
 
         if setCount >= minEquippedReq then
             local modTierIndex = math.min(setCount, maxEquippedReq) - minEquippedReq
