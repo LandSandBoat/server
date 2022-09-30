@@ -123,11 +123,11 @@ xi.dynamis.normalDynamicSpawn = function(oMob, oMobIndex, target)
             [xi.zone.DYNAMIS_BEAUCEDINE] = -- Spawn Hydras (Done)
             {
                 [1]  = { "H. Warrior", 159, 134, 0, 359 }, -- HWAR
-                [2]  = { "H. Monk", 163, 134, 0, 359 }, -- HMNK
+                [2]  = { "H. Monk", 160, 134, 0, 359 }, -- HMNK
                 [3]  = { "H. White Mage", 161, 134, 1, 359 }, -- HWHM
                 [4]  = { "H. Black Mage", 164, 134, 5000, 359 }, -- HBLM
                 [5]  = { "H. Red Mage", 162, 134, 3, 359 }, -- HRDM
-                [6]  = { "H. Thief", 160, 134, 0, 359 }, -- HTHF
+                [6]  = { "H. Thief", 165, 134, 0, 359 }, -- HTHF
                 [7]  = { "H. Paladin", 166, 134, 4, 359 }, -- HPLD
                 [8]  = { "H. Dark Knight", 167, 134, 5, 359 }, -- HDRK
                 [9]  = { "H. Beastmaster", 168, 134, 0, 359 }, -- HBST
@@ -423,8 +423,8 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
     {
         ["Statue"] =
         {
-            ["Vanguard Eye"] = { "Vanguard Eye" , 163, 134, 2561, 5000, 11 }, -- Vanguard Eye (VEye)
-            ["Prototype Eye"] = { "Prototype Eye" , 61, 42, 2561, 5000, 11 }, -- Prototype Eye (PEye)
+            ["Vanguard Eye"] = { "Vanguard Eye" , 163, 134, 1144, 5000, 11 }, -- Vanguard Eye (VEye)
+            ["Prototype Eye"] = { "Prototype Eye" , 61, 42, 1144, 5000, 11 }, -- Prototype Eye (PEye)
             ["Goblin Statue"] = { "Goblin Statue" , 158, 134, 1144, 1, 92 }, -- Goblin Statue (GStat)
             ["Goblin Replica"] = { "Goblin Replica" , 157, 134, 1144, 1, 92 }, -- Goblin Statue (GRStat)
             ["Statue Prototype"] = { "Stat. Prototype" , 36, 42, 1144, 1, 92 }, -- Goblin Statue (GPStat)
@@ -776,7 +776,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Velosareon"] = { "Velosareon", 9, 134, 2574, 5, 359, "Velosareon" }, -- Velo (RNG/SAM/DRK)
         -- Below is used to lookup non-beastmen NMs.
         -- Dynamis - Bastok
-        ["Gu'Dha Effigy"] = { "Gu'Dha Effigy", 1, 186, 2906, 0, 143, "Statue Megaboss" }, -- BMb (Bastok Megaboss)
+        ["Gu'Dha Effigy"] = { "Gu'Dha Effigy", 1, 186, 2906, 0, 94, "Statue Megaboss" }, -- BMb (Bastok Megaboss)
         -- Dynamis - Jeuno
         ["Goblin Golem"] = { "Goblin Golem", 1, 188, 1085, 47, 92, "Statue Megaboss" }, -- JMb
         -- Dynamis - San d'Oria
