@@ -28,8 +28,6 @@ entity.onTrigger = function(player, npc)
         player:startEvent(52)
     elseif player:getCharVar("QuestYourCrystalBall_prog") > os.time() then
         player:messageSpecial(ID.text.NOT_READY)
-    else
-        player:messageSpecial(ID.text.WATER_POOL)
     end
 end
 
