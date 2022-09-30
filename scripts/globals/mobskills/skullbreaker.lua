@@ -25,7 +25,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.BLUNT, info.hitslanded)
 
     if (math.random(1, 100) < skill:getTP()/3) then
-        xi.mobskills.mobPhysicalStatusEffectMove(mob, target, skill, xi.effect.INT_DOWN, 10, 3, 120)
+        target:addStatusEffect(xi.effect.INT_DOWN, 10, 3, 120)
     end
 
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)

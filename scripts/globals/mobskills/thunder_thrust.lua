@@ -1,11 +1,7 @@
 -----------------------------------
--- Raiden Thrust
---
+-- Thunder Thrust
 -- Deals lightning elemental damage. Damage varies with TP.
--- Type: Physical
--- Utsusemi/Blink absorb: 1 Shadow
--- Range: Melee
------------------------------------
+-- Range: Melee------------------
 require("scripts/globals/mobskills")
 require("scripts/globals/settings")
 require("scripts/globals/status")
@@ -18,9 +14,8 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local dmgmod = 1.8
-
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg()*4, xi.magic.ele.THUNDER, dmgmod, xi.mobskills.magicalTpBonus.DMG_BONUS, 2)
+    local dmgmod = 1.7
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg()*3, xi.magic.ele.THUNDER, dmgmod, xi.mobskills.magicalTpBonus.DMG_BONUS, 1)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.THUNDER, info.hitslanded)
 
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.THUNDER)

@@ -20,7 +20,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local info = xi.mobskills.mobPhysicalMove(mob,target,skill,numhits,accmod,dmgmod,xi.mobskills.physicalTpBonus.DMG_VARIES,2.5,2.75,3)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg,mob,skill,target, xi.attackType.PHYSICAL, xi.damageType.BLUNT,info.hitslanded)
 
-    target:addStatusEffect(xi.effect.DEFENSE_DOWN, 15, 0, math.random(15,30))
+    target:addStatusEffect(xi.effect.DEFENSE_DOWN, 15, 0, 120)
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
     return dmg
 end

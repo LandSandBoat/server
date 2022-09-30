@@ -5396,8 +5396,8 @@ void CLuaBaseEntity::changeJob(uint8 newJob)
 
             // Change weapon type based on new job
             CItemWeapon* PWeapon = new CItemWeapon(0);
-            PWeapon->setDelay(4000);
-            PWeapon->setBaseDelay(4000);
+            PWeapon->setDelay(2400);
+            PWeapon->setBaseDelay(2400);
 
             switch (newJob)
             {
@@ -5420,6 +5420,8 @@ void CLuaBaseEntity::changeJob(uint8 newJob)
                     break;
                 case JOB_RUN:
                     PWeapon->setSkillType(SKILL_GREAT_SWORD);
+                    PWeapon->setDelay(4800);
+                    PWeapon->setBaseDelay(4800);
                     break;
                 case JOB_WAR:
                 case JOB_BST:
@@ -5427,15 +5429,21 @@ void CLuaBaseEntity::changeJob(uint8 newJob)
                     break;
                 case JOB_DRK:
                     PWeapon->setSkillType(SKILL_SCYTHE);
+                    PWeapon->setDelay(4800);
+                    PWeapon->setBaseDelay(4800);
                     break;
                 case JOB_DRG:
                     PWeapon->setSkillType(SKILL_POLEARM);
+                    PWeapon->setDelay(4800);
+                    PWeapon->setBaseDelay(4800);
                     break;
                 case JOB_NIN:
                     PWeapon->setSkillType(SKILL_KATANA);
                     break;
                 case JOB_SAM:
                     PWeapon->setSkillType(SKILL_GREAT_KATANA);
+                    PWeapon->setDelay(4800);
+                    PWeapon->setBaseDelay(4800);
                     break;
                 case JOB_WHM:
                 case JOB_BLM:
@@ -5444,6 +5452,8 @@ void CLuaBaseEntity::changeJob(uint8 newJob)
                     break;
                 case JOB_SMN:
                     PWeapon->setSkillType(SKILL_STAFF);
+                    PWeapon->setDelay(4800);
+                    PWeapon->setBaseDelay(4800);
                     break;
                 default:
                     break;

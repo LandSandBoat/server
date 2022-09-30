@@ -16,8 +16,7 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = 1.8
-
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg()*4, xi.magic.ele.THUNDER, dmgmod, xi.mobskills.magicalTpBonus.DMG_BONUS, 2)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg()*3, xi.magic.ele.FIRE, dmgmod, xi.mobskills.magicalTpBonus.DMG_BONUS, 2)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, info.hitslanded)
 
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.FIRE)

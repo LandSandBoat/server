@@ -15,17 +15,19 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local dmgmod = 1.35
-    local element = xi.damageType.DARK
+    local dmgmod = 1.8
+    local attkType = xi.damageType.DARK
+    local element = xi.magic.ele.DARK
 
     if math.random() > 0.5 then
-        element = xi.damageType.LIGHT
+        attkType = xi.damageType.LIGHT
+        element = xi.magic.ele.DARK
     end
 
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg()*4, xi.magic.ele.THUNDER, dmgmod, xi.mobskills.magicalTpBonus.DMG_BONUS, 2)
-    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, element, info.hitslanded)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg()*3, element, dmgmod, xi.mobskills.magicalTpBonus.DMG_BONUS, 1)
+    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, attkType, info.hitslanded)
 
-    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, element)
+    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, attkType)
     return dmg
 end
 
