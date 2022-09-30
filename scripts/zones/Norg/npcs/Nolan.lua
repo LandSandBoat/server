@@ -142,6 +142,7 @@ entity.onTrigger = function(player, npc)
     local page5 = {}
     local page6 = {}
     local page7 = {}
+    local page8 = {}
     
     local delaySendMenu = function(player)
         player:timer(100, function(playerArg)
@@ -181,6 +182,16 @@ entity.onTrigger = function(player, npc)
     
     page2 =
     {
+        {
+            "Siren's hair",
+            function(playerArg)
+                player:timer(50, function(playerArg)
+                    item = 1313
+                    cost = 5000
+                    completeTransaction(player, npc, item, cost)
+                end)
+            end,
+        },
         {
             "Teleport ring: Holla",
             function(playerArg)
@@ -273,7 +284,7 @@ entity.onTrigger = function(player, npc)
             end,
         },
         {
-            "Charitoni Sling",
+            "Charitoni sling",
             function(playerArg)
                 player:timer(50, function(playerArg)
                     item = 21347
@@ -314,6 +325,16 @@ entity.onTrigger = function(player, npc)
             end,
         },
         {
+            "Fylgja torque",
+            function(playerArg)
+                player:timer(50, function(playerArg)
+                    item = 11579
+                    cost = 15000
+                    completeTransaction(player, npc, item, cost)
+                end)
+            end,
+        },
+        {
             "Dew silk cape +1",
             function(playerArg)
                 player:timer(50, function(playerArg)
@@ -343,6 +364,98 @@ entity.onTrigger = function(player, npc)
     }
     
     page5 =
+	{
+        {
+            "Carver's torque",
+            function(playerArg)
+                player:timer(50, function(playerArg)
+                    item = 11580
+                    cost = 15000
+                    completeTransaction(player, npc, item, cost)
+                end)
+            end,
+        },
+        {
+            "Tanner's torque",
+            function(playerArg)
+                player:timer(50, function(playerArg)
+                    item = 10952
+                    cost = 15000
+                    completeTransaction(player, npc, item, cost)
+                end)
+            end,
+        },
+        {
+            "Smithy's torque",
+            function(playerArg)
+                player:timer(50, function(playerArg)
+                    item = 10949
+                    cost = 15000
+                    completeTransaction(player, npc, item, cost)
+                end)
+            end,
+        },
+        {
+            "Goldsmith's torque",
+            function(playerArg)
+                player:timer(50, function(playerArg)
+                    item = 10950
+                    cost = 15000
+                    completeTransaction(player, npc, item, cost)
+                end)
+            end,
+        },
+        {
+            "Boneworker's torque",
+            function(playerArg)
+                player:timer(50, function(playerArg)
+                    item = 10953
+                    cost = 15000
+                    completeTransaction(player, npc, item, cost)
+                end)
+            end,
+        },
+        {
+            "Weaver's torque",
+            function(playerArg)
+                player:timer(50, function(playerArg)
+                    item = 10951
+                    cost = 15000
+                    completeTransaction(player, npc, item, cost)
+                end)
+            end,
+        },
+        {
+            "Next Page",
+            function(playerArg)
+                menu.options = page6
+                delaySendMenu(playerArg)
+            end,
+        },        
+    }
+    
+    page6 =
+	{
+        {
+            "Fylgja torque +1",
+            function(playerArg)
+                player:timer(50, function(playerArg)
+                    item = 11580
+                    cost = 25000
+                    completeTransaction(player, npc, item, cost)
+                end)
+            end,
+        },
+        {
+            "Next Page",
+            function(playerArg)
+                menu.options = page7
+                delaySendMenu(playerArg)
+            end,
+        },        
+    }
+    
+    page7 =
     {
         {
             "Apex Arrow (Bow)",
@@ -383,13 +496,13 @@ entity.onTrigger = function(player, npc)
         {
             "Next Page",
             function(playerArg)
-                menu.options = page6
+                menu.options = page8
                 delaySendMenu(playerArg)
             end,
         },        
     }
     
-    page6 =
+    page8 =
     {
         {
             "Requiescat (Sword)",
@@ -430,13 +543,13 @@ entity.onTrigger = function(player, npc)
         {
             "Next Page",
             function(playerArg)
-                menu.options = page7
+                menu.options = page9
                 delaySendMenu(playerArg)
             end,
         },        
     }
     
-    page7 =
+    page9 =
     {
         {
             "Tachi: Shoha (Great Katana)",
