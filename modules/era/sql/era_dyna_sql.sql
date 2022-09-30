@@ -1888,7 +1888,6 @@ REPLACE INTO `mob_skill_lists` VALUES ('DynaNMOrc',5012,606);
 REPLACE INTO `mob_skill_lists` VALUES ('DynaNMOrc',5012,607);
 REPLACE INTO `mob_skill_lists` VALUES ('DynaNMOrc',5012,608);
 REPLACE INTO `mob_skill_lists` VALUES ('DynaNMOrc',5012,609);
-REPLACE INTO `mob_skill_lists` VALUES ('DynaNMOrc',5012,1056);
 REPLACE INTO `mob_skill_lists` VALUES ('DynaNMOrc',5012,1066);
 --            Regular            --
 -- Use Skill List 334
