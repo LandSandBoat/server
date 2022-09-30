@@ -37,7 +37,7 @@ xi.settings.map =
     LIGHTLUGGAGE_BLOCK = 4,
 
     -- Enable or disable Recycle Bin (Set to false for items to be dropped immediately)
-    ENABLE_ITEM_RECYCLE_BIN = true,
+    ENABLE_ITEM_RECYCLE_BIN = false,
 
     --  AH fee structure, defaults are retail.
     AH_BASE_FEE_SINGLE = 1,
