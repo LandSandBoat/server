@@ -102,6 +102,7 @@ entity.onMobFight = function(mob, target)
                 mob:setBehaviour(bit.band(mob:getBehaviour(), bit.bnot(xi.behavior.NO_TURN)))
             end
             mob:useMobAbility(1552)
+            mob:setLocalVar("GigaFlare", 1)
             mob:setLocalVar("MegaFlareQueue", 0)
         end
     end
