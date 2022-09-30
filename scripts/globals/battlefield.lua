@@ -516,6 +516,22 @@ end
 function Battlefield:onBattlefieldRegister(player, battlefield)
 end
 
+function Battlefield:onBattlefieldStatusChange(battlefield, players, status)
+    -- Remove battlefield effect for players in alliance not inside battlefield once the battlefield gets locked. Do this only once.
+    if status == xi.battlefield.status.LOCKED and battlefield:getLocalVar("statusRemoval") == 0 then
+        battlefield:setLocalVar("statusRemoval", 1)
+
+        for _, player in pairs(players) do
+            local alliance = player:getAlliance()
+            for _, member in pairs(alliance) do
+                if member:hasStatusEffect(xi.effect.BATTLEFIELD) and not member:getBattlefield() then
+                    member:delStatusEffect(xi.effect.BATTLEFIELD)
+                end
+            end
+        end
+    end
+end
+
 function Battlefield:onBattlefieldEnter(player, battlefield)
     for _, keyItem in ipairs(self.requiredKeyItems) do
         player:delKeyItem(keyItem)
@@ -802,22 +818,6 @@ function xi.battlefield.HandleWipe(battlefield, players)
                     battlefield:setWipeTime(0)
                     rekt = false
                     break
-                end
-            end
-        end
-    end
-end
-
-function xi.battlefield.onBattlefieldStatusChange(battlefield, players, status)
-    -- Remove battlefield effect for players in alliance not inside battlefield once the battlefield gets locked. Do this only once.
-    if status == xi.battlefield.status.LOCKED and battlefield:getLocalVar("statusRemoval") == 0 then
-        battlefield:setLocalVar("statusRemoval", 1)
-
-        for _, player in pairs(players) do
-            local alliance = player:getAlliance()
-            for _, member in pairs(alliance) do
-                if member:hasStatusEffect(xi.effect.BATTLEFIELD) and not member:getBattlefield() then
-                    member:delStatusEffect(xi.effect.BATTLEFIELD)
                 end
             end
         end
