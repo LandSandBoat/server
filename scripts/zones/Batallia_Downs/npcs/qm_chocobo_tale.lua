@@ -11,7 +11,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    player:messageSpecial(ID.text.FIND_NOTHING)
 end
 
 entity.onEventUpdate = function(player, csid, option)
