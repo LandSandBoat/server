@@ -119,9 +119,8 @@ quest.sections =
 
                 [44] = function(player, csid, option, npc)
                     player:tradeComplete()
-                    player:setPos(-116.599, -122.103, -620.01, 253, xi.zone.MINE_SHAFT_2716)
                     quest:setVar(player, 'prog', 8)
-
+                    xi.teleport.to(player, xi.teleport.id.MINESHAFT)
                 end,
             },
         },
@@ -247,6 +246,30 @@ quest.sections =
                         player:messageSpecial(zones[player:getZoneID()].text.KEYITEM_LOST, xi.ki.PUNGENT_PROVIDENCE_POT)
                         npcUtil.giveCurrency(player, "gil", 1000)
                     end
+                end,
+            },
+        },
+
+        [xi.zone.OLDTON_MOVALPOLOS] =
+        {
+            ['Tarnotik'] =
+            {
+                onTrigger = function(player, npc)
+                    return quest:event(43)
+                end,
+
+                onTrade = function(player, npc, trade)
+                    if npcUtil.tradeHasExactly(trade, xi.items.BOTTLE_OF_AHRIMAN_TEARS) then
+                        return quest:progressEvent(44)
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [44] = function(player, csid, option, npc)
+                    player:tradeComplete()
+                    xi.teleport.to(player, xi.teleport.id.MINESHAFT)
                 end,
             },
         },
