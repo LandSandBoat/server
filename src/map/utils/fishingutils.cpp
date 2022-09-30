@@ -2119,10 +2119,20 @@ namespace fishingutils
         }
         else
         {
-            FishPoolWeight = (uint16)std::floor(25 * fishPoolMoonModifier);
-            ItemPoolWeight = 10 + (uint16)std::floor(15 * itemPoolMoonModifier);
-            MobPoolWeight  = 15 + (uint16)std::floor(15 * mobPoolMoonModifier);
-            NoCatchWeight  = 15 + (uint16)std::floor(20 * noCatchMoonModifier);
+            if (PChar->GetLocalVar("Chart") == 1)
+            {
+                FishPoolWeight = std::clamp(-150 + (uint16)std::floor(25 * fishPoolMoonModifier), 0, 65535);
+                ItemPoolWeight = 500 + (uint16)std::floor(15 * itemPoolMoonModifier);
+                MobPoolWeight  = std::clamp(-150 + (uint16)std::floor(15 * mobPoolMoonModifier), 0, 65535);
+                NoCatchWeight  = 15 + (uint16)std::floor(20 * noCatchMoonModifier);
+            }
+            else
+            {
+                FishPoolWeight = (uint16)std::floor(25 * fishPoolMoonModifier);
+                ItemPoolWeight = 10 + (uint16)std::floor(15 * itemPoolMoonModifier);
+                MobPoolWeight  = 15 + (uint16)std::floor(15 * mobPoolMoonModifier);
+                NoCatchWeight  = 15 + (uint16)std::floor(20 * noCatchMoonModifier);
+            }
         }
 
         uint16 FishHookChanceTotal = 0;
@@ -2207,7 +2217,12 @@ namespace fishingutils
                 if (item->quest_only || !item->reqKeyItem || charutils::hasKeyItem(PChar, item->reqKeyItem))
                 { // Key item okay
                     uint16 hookChance = 100;
-                    if (item->quest < 255 && item->log < 255)
+                    if (PChar->GetLocalVar("Chart") == 1)
+                    {
+                        ItemHookPool.insert(std::make_pair(item, 100));
+                        ItemPoolWeight += 1000;
+                    }
+                    else if (item->quest < 255 && item->log < 255)
                     {
                         if (charutils::getQuestStatus(PChar, item->log, item->quest) == QUEST_ACCEPTED)
                         {
@@ -2501,19 +2516,29 @@ namespace fishingutils
         }
         else if (ItemSelection != nullptr && selector < ItemPoolWeight + FishPoolWeight)
         { // Hooked item
+            if (PChar->GetLocalVar("Chart"))
+            {
+                response->catchid   = xirand::GetRandomNumber(5329, 5331);
+                response->stamina   = 1000;
+                response->attackdmg = 1500;
+            }
+            else
+            {
+                response->catchid   = ItemSelection->fishID;
+                response->stamina   = CalculateStamina(ItemSelection->maxSkill, 1);
+                response->attackdmg = CalculateAttack(ItemSelection->legendary, ItemSelection->difficulty, rod);
+            }
+
             response->hooked          = true;
-            response->catchid         = ItemSelection->fishID;
             response->catchtype       = FISHINGCATCHTYPE_ITEM;
             response->catchlevel      = ItemSelection->maxSkill;
             response->catchdifficulty = ItemSelection->difficulty;
             response->catchsizeType   = ItemSelection->sizeType;
             response->legendary       = 0;
             response->count           = 1;
-            response->stamina         = CalculateStamina(ItemSelection->maxSkill, 1);
             response->delay           = CalculateDelay(PChar, ItemSelection->baseDelay, ItemSelection->sizeType, rod, 1);
             response->regen           = CalculateRegen(fishingSkill, rod, (FISHINGCATCHTYPE)response->catchtype, ItemSelection->sizeType, ItemSelection->maxSkill, false, false);
             response->response        = CalculateMovement(PChar, ItemSelection->baseMove, ItemSelection->sizeType, rod, 1);
-            response->attackdmg       = CalculateAttack(ItemSelection->legendary, ItemSelection->difficulty, rod);
             response->heal            = CalculateHeal(ItemSelection->legendary, ItemSelection->difficulty, rod);
             response->timelimit       = CalculateHookTime(PChar, ItemSelection->legendary, ItemSelection->legendary_flags, ItemSelection->sizeType, rod, bait);
             response->sense           = CalculateFishSense(PChar, response, fishingSkill, (FISHINGCATCHTYPE)response->catchtype, ItemSelection->sizeType,

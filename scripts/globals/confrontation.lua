@@ -143,7 +143,7 @@ xi.confrontation.start = function(player, npc, mobIds, winFunc, loseFunc)
         mob:addStatusEffect(xi.effect.CONFRONTATION, lookupKey, 0, 0)
         mob:addListener("DEATH", "CONFRONTATION_DEATH", function(mobArg)
             mobArg:removeListener("CONFRONTATION_DEATH")
-            xi.confrontation.check(npc, false)
+            xi.confrontation.check(lookupKey, false)
         end)
     end
 
