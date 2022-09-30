@@ -94,6 +94,7 @@ end
 --  - requiredItems: Items required to be traded to enter the battlefield (optional)
 --  - createWornItem: Should a worn item is created with the required item (optional)
 --  - requiredKeyItems: Key items required to be able to enter the battlefield - these are removed upon entry (optional)
+--  - title: Title given to players upon victory (optional)
 --  - grantXP: Amount of XP to grant upon victory (optional)
 function Battlefield:new(data)
     local obj = Container:new(Battlefield.getVarPrefix(data.battlefieldId))
@@ -122,6 +123,8 @@ function Battlefield:new(data)
     obj.entryNpc = data.entryNpc
     -- The name of the NPC used for exiting
     obj.exitNpc = data.exitNpc
+    -- Title given to players upon victory
+    obj.title = data.title
     -- Amount of XP to grant upon victory
     obj.grantXP = data.grantXP
     obj.sections = { { [obj.zoneId] = {} } }
@@ -407,6 +410,9 @@ function Battlefield:onEventFinishEnter(player, csid, option)
 end
 
 function Battlefield:onEventFinishWin(player, csid, option)
+    if self.title then
+        player:addTitle(self.title)
+    end
     if self.grantXP then
         player:addExp(self.grantXP)
     end
@@ -630,6 +636,10 @@ function BattlefieldMission:onBattlefieldWin(player, battlefield)
 end
 
 function BattlefieldMission:onEventFinishWin(player, csid, option)
+    if self.title then
+        player:addTitle(self.title)
+    end
+
     -- Only grant mission XP once per JP midnight
     local varKey = "MN_XP_" .. self.id
     if self.grantXP and player:getCharVar(varKey) <= os.time() then
