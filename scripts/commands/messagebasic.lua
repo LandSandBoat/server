@@ -11,7 +11,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!messagebasic <message ID> {param1} {param2}")
+    player:PrintToPlayer("!messagebasic <message ID> (param1) (param2)")
 end
 
 function onTrigger(player, msgId, param1, param2)

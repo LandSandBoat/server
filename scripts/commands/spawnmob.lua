@@ -13,7 +13,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!spawnmob <mob ID> {despawntime} {respawntime}")
+    player:PrintToPlayer("!spawnmob <mob ID> (despawntime) (respawntime)")
 end
 
 function onTrigger(player, mobId, despawntime, respawntime)

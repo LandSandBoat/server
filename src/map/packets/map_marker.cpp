@@ -41,5 +41,15 @@ CMapMarkerPacket::CMapMarkerPacket(CCharEntity* PChar)
     ref<uint16>(0x14) = PChar->teleport.homepoint.access[3] & 0xFFFF;
     ref<uint16>(0x16) = (PChar->teleport.homepoint.access[3] & 0xFFFF0000) >> 16;
 
-    // TODO: Cavernous Maws, Abyssea Maws, Survival Guides
+    // Survival guide masks
+    ref<uint16>(0x18) = PChar->teleport.survival.access[0] & 0xFFFF;
+    ref<uint16>(0x1A) = (PChar->teleport.survival.access[0] & 0xFFFF0000) >> 16;
+    ref<uint16>(0x1C) = PChar->teleport.survival.access[1] & 0xFFFF;
+    ref<uint16>(0x1E) = (PChar->teleport.survival.access[1] & 0xFFFF0000) >> 16;
+    ref<uint16>(0x20) = PChar->teleport.survival.access[2] & 0xFFFF;
+    ref<uint16>(0x22) = (PChar->teleport.survival.access[2] & 0xFFFF0000) >> 16;
+    ref<uint16>(0x24) = PChar->teleport.survival.access[3] & 0xFFFF;
+    ref<uint16>(0x26) = (PChar->teleport.survival.access[3] & 0xFFFF0000) >> 16;
+
+    // TODO: Abyssea Maws, Waypoints
 }

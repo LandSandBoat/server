@@ -342,10 +342,11 @@ namespace battleutils
      ************************************************************************/
     void FreePetSkillList()
     {
-        for (auto iter = g_PPetSkillList.begin(); iter != g_PPetSkillList.end();)
+        for (auto& petskill : g_PPetSkillList)
         {
-            g_PPetSkillList.erase(iter);
+            delete petskill.second;
         }
+        g_PPetSkillList.clear();
     }
 
     /************************************************************************

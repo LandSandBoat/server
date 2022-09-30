@@ -13,7 +13,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!delkeyitem <key item ID> {player}")
+    player:PrintToPlayer("!delkeyitem <key item ID> (player)")
 end
 
 function onTrigger(player, keyId, target)

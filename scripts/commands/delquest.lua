@@ -14,7 +14,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!delquest <logID> <questID> {player}")
+    player:PrintToPlayer("!delquest <logID> <questID> (player)")
 end
 
 function onTrigger(player, logId, questId, target)

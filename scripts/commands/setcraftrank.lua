@@ -12,7 +12,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!setcraftRank <craft skill or ID> <craft rank> {player}")
+    player:PrintToPlayer("!setcraftRank <craft skill or ID> <craft rank> (player)")
 end
 
 function onTrigger(player, craftName, tier, target)

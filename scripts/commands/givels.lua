@@ -11,7 +11,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!givels <linkshell name> {target}")
+    player:PrintToPlayer("!givels <linkshell name> (target)")
 end
 
 function onTrigger(player, lsname, target)

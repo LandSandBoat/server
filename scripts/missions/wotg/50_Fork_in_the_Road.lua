@@ -26,7 +26,8 @@ mission.reward =
 }
 
 local zoneEventInfo =
-{-- Zone                               Rewarded KI                      Event #, Parameters
+{
+--  Zone                               Rewarded KI                      Event #, Parameters
     [xi.zone.JUGNER_FOREST_S]      = { xi.ki.JUGNER_DAWNDROP,         {   7,  82,     0,    0,    0,        0, 7340037,    0, 0 } },
     [xi.zone.LA_VAULE_S]           = { xi.ki.LA_VAULE_DAWNDROP,       {   5,  85,    23, 1756,    0,       85,       1,    0, 0 } },
     [xi.zone.SOUTHERN_SAN_DORIA_S] = { xi.ki.SAN_DORIA_DAWNDROP,      { 176,  80,    23, 1756, 2000,        0,       0,    0, 0 } },

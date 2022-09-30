@@ -151,7 +151,7 @@ public:
     void HideHP(bool hide);
     bool IsHPHidden() const;
     void SetUntargetable(bool untargetable);
-    bool GetUntargetable() const;
+    bool GetUntargetable() const override;
 
     void         PostTick() override;
     float        GetRoamDistance();

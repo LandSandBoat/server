@@ -3,7 +3,7 @@
 --   NM: Picklix Longindex
 -- Involved in Quest: The Talekeeper's Gift
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

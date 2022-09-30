@@ -12,7 +12,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!reset {player}")
+    player:PrintToPlayer("!reset (player)")
 end
 
 function onTrigger(player, target)

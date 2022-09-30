@@ -14,7 +14,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!setskill <skill name or ID> <skill level> {player}")
+    player:PrintToPlayer("!setskill <skill name or ID> <skill level> (player)")
 end
 
 function onTrigger(player, skillName, skillLV, target)

@@ -11,7 +11,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!addtreasure <itemID> {player} {npcID}")
+    player:PrintToPlayer("!addtreasure <itemID> (player) (npcID)")
 end
 
 function onTrigger(player, itemId, target, dropper)

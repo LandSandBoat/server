@@ -2,7 +2,7 @@
 -- Area: Temple of Uggalepih
 --  Mob: Tonberry Maledictor
 -----------------------------------
-mixins = {require("scripts/mixins/families/tonberry")}
+mixins = { require("scripts/mixins/families/tonberry") }
 require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}

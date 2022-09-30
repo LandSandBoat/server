@@ -3,7 +3,7 @@
 --  HNM: Adamantoise
 -----------------------------------
 local ID = require("scripts/zones/Valley_of_Sorrows/IDs")
-mixins = {require("scripts/mixins/rage")}
+mixins = { require("scripts/mixins/rage") }
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------

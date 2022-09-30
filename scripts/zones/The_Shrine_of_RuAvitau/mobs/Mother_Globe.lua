@@ -51,12 +51,12 @@ local function calculateValidSlaveGlobePositions(zone, mgPos, spacingDistance)
     -- extreme terminal decision so we don't recurse endlessly
     -- fall back to just piling up ontop of mg
     if spacingDistance > spacingDistanceMinimum then
-        return {mgPos, mgPos, mgPos, mgPos, mgPos, mgPos}
+        return { mgPos, mgPos, mgPos, mgPos, mgPos, mgPos }
     end
 
     for slavePositionSlot, _ in ipairs(slaveGlobes) do
         local xOffset = spacingDistance * slavePositionSlot
-        local slavePosition =  utils.lateralTranslateWithOriginRotation(mgPos, {x = xOffset, y = 0, z = 0})
+        local slavePosition =  utils.lateralTranslateWithOriginRotation(mgPos, { x = xOffset, y = 0, z = 0 })
 
         if zone:isNavigablePoint(slavePosition) then
             table.insert(slavePositions, slavePosition)

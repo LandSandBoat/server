@@ -47,7 +47,7 @@ entity.onEventFinish = function(player, csid, option)
         npcUtil.completeQuest(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ENVELOPED_IN_DARKNESS, {
             item = 14093, -- Warlock's Boots
             fame = 40,
-            var = {"envelopedInDarkness_timer", "needs_crawler_blood"}
+            var = { "envelopedInDarkness_timer", "needs_crawler_blood" }
         })
     end
 end

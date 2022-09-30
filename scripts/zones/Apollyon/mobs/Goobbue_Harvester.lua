@@ -10,8 +10,8 @@ local entity = {}
 local flags = xi.path.flag.NONE
 local path =
 {
-    {424.271, 0.000, 22.975},
-    {496.692, 0.000, 22.934}
+    { 424.271, 0.000, 22.975 },
+    { 496.692, 0.000, 22.934 },
 }
 
 entity.onMobRoam = function(mob)

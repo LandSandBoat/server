@@ -601,7 +601,7 @@ void CMobController::Move()
     }
     if (PMob->PAI->PathFind->IsFollowingScriptedPath() && PMob->PAI->CanFollowPath())
     {
-        PMob->PAI->PathFind->FollowPath();
+        PMob->PAI->PathFind->FollowPath(m_Tick);
         return;
     }
 
@@ -674,7 +674,7 @@ void CMobController::Move()
                     // path to the target if we don't have a path already
                     PMob->PAI->PathFind->PathInRange(PTarget->loc.p, attack_range - 0.2f, PATHFLAG_WALLHACK | PATHFLAG_RUN);
                 }
-                PMob->PAI->PathFind->FollowPath();
+                PMob->PAI->PathFind->FollowPath(m_Tick);
                 if (!PMob->PAI->PathFind->IsFollowingPath())
                 {
                     bool needToMove = false;
@@ -796,6 +796,11 @@ void CMobController::DoRoamTick(time_point tick)
         {
             FollowRoamPath();
         }
+        else if (PMob->PAI->PathFind->IsPatrolling())
+        {
+            PMob->PAI->PathFind->ResumePatrol();
+            FollowRoamPath();
+        }
         else if (m_Tick >= m_LastActionTime + std::chrono::milliseconds(PMob->getBigMobMod(MOBMOD_ROAM_COOL)))
         {
             // lets buff up or move around
@@ -820,6 +825,7 @@ void CMobController::DoRoamTick(time_point tick)
                     PMob->m_HiPCLvl     = 0;
                     PMob->m_HiPartySize = 0;
                     PMob->m_giveExp     = true;
+                    PMob->m_UsedSkillIds.clear();
                 }
             }
 
@@ -938,7 +944,7 @@ void CMobController::FollowRoamPath()
     TracyZoneScoped;
     if (PMob->PAI->CanFollowPath())
     {
-        PMob->PAI->PathFind->FollowPath();
+        PMob->PAI->PathFind->FollowPath(m_Tick);
 
         CBattleEntity* PPet = PMob->PPet;
         if (PPet != nullptr && PPet->PAI->IsSpawned() && !PPet->PAI->IsEngaged())

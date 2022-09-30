@@ -4,7 +4,7 @@
 -----------------------------------
 -- !delmission 5 6
 -- !addmission 5 6
--- !setmissionstatus {Player} 1 5 0
+-- !setmissionstatus <player> 1 5 0
 -- _2d1 (Reinforced Gateway) : !pos -114.386 -3.599 -179.804 85
 -----------------------------------
 require('scripts/globals/keyitems')

@@ -5,7 +5,7 @@
 -- TODO: messages should be zone-wide
 -----------------------------------
 local ID = require("scripts/zones/Monastic_Cavern/IDs")
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}

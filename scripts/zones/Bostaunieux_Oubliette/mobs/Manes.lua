@@ -15,6 +15,12 @@ entity.onAdditionalEffect = function(mob, target, damage)
     return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.TERROR)
 end
 
+entity.onMobRoam = function(mob)
+    if VanadielHour() >= 6 and VanadielHour() < 18 then -- Despawn if its day
+        DespawnMob(mob:getID())
+    end
+end
+
 entity.onMobDeath = function(mob, player, isKiller)
     xi.hunts.checkHunt(mob, player, 180)
 end

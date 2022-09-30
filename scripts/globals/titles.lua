@@ -1093,6 +1093,7 @@ xi.title =
     LONG_LIVE_MUMOR                           = 1142,
     PARTER_OF_THE_VEIL                        = 1143,
     DEMONIC_DREAMER                           = 1144,
+    SEARCHER_OF_THE_VORACIOUS                 = 1145,
 }
 
 -----------------------------------

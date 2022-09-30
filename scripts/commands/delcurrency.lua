@@ -11,7 +11,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!delcurrency <currency type> <amount> {player}")
+    player:PrintToPlayer("!delcurrency <currency type> <amount> (player)")
 end
 
 function onTrigger(player, currency, amount, target)

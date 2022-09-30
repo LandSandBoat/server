@@ -4,7 +4,7 @@
 -----------------------------------
 require("scripts/globals/status")
 local ID = require("scripts/zones/The_Ashu_Talif/IDs")
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}
 

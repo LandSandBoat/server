@@ -3,11 +3,13 @@
 -----------------------------------
 local ID = require('scripts/zones/Windurst_Waters_[S]/IDs')
 require('scripts/globals/chocobo')
+require('scripts/globals/extravaganza')
 -----------------------------------
 local zone_object = {}
 
 zone_object.onInitialize = function(zone)
     xi.chocobo.initZone(zone)
+    xi.extravaganza.shadowEraHide(ID.npc.SHUVO)
 end
 
 zone_object.onZoneIn = function(player, prevZone)

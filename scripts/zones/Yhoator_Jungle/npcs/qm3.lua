@@ -20,7 +20,7 @@ entity.onTrigger = function(player, npc)
             npcUtil.giveKeyItem(player, xi.ki.OLD_TRICK_BOX)
             player:setCharVar("trueWillKilledNM", 0)
         else
-            npcUtil.popFromQM(player, npc, {ID.mob.KAPPA_AKUSO, ID.mob.KAPPA_BONZE, ID.mob.KAPPA_BIWA}, { hide = 0 })
+            npcUtil.popFromQM(player, npc, { ID.mob.KAPPA_AKUSO, ID.mob.KAPPA_BONZE, ID.mob.KAPPA_BIWA }, { hide = 0 })
         end
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)

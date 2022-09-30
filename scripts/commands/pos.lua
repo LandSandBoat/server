@@ -11,7 +11,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!pos {x} {y} {z} {zone ID} {player}")
+    player:PrintToPlayer("!pos (x) (y) (z) (zone ID) (player)")
 end
 
 function onTrigger(player, arg1, arg2, arg3, arg4, arg5)

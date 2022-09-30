@@ -32,7 +32,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if (csid == 100 and option == 1) then
-        player:setPos(-20, 0.624, -355, 191, 34) -- {R}
+        player:setPos(-20, 0.624, -355, 191, 34) -- (R)
     elseif (csid == 164) then
         player:setCharVar("PromathiaStatus", 2)
     end

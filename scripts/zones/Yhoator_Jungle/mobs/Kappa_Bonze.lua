@@ -4,7 +4,7 @@
 -- Involved in Quest: True will
 -----------------------------------
 local ID = require("scripts/zones/Yhoator_Jungle/IDs")
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}

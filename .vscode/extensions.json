@@ -3,6 +3,7 @@
         "koihik.vscode-lua-format",
         "jkiviluoto.tws",
         "sumneko.lua",
-        "wwm.better-align"
+        "wwm.better-align",
+        "tomblind.local-lua-debugger-vscode"
     ]
 }

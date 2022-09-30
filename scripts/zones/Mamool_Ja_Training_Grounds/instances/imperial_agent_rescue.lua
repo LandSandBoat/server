@@ -6,7 +6,6 @@ local ID = require("scripts/zones/Mamool_Ja_Training_Grounds/IDs")
 require("scripts/globals/assault")
 require("scripts/globals/instance")
 require("scripts/globals/items")
-require("scripts/globals/zone")
 -----------------------------------
 local instance_object = {}
 
@@ -58,7 +57,6 @@ instance_object.onInstanceComplete = function(instance)
 end
 
 instance_object.onEventFinish = function(player, csid, option)
-    xi.assault.instanceOnEventFinish(player, csid, xi.zone.BHAFLAU_THICKETS)
 end
 
 return instance_object

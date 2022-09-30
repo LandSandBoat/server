@@ -11,7 +11,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!homepoint {player}")
+    player:PrintToPlayer("!homepoint (player)")
 end
 
 function onTrigger(player, target)

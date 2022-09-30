@@ -13,7 +13,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!changejob <jobID> {level}")
+    player:PrintToPlayer("!changejob <jobID> (level)")
 end
 
 function onTrigger(player, jobId, level)

@@ -2,7 +2,7 @@
 -- Area: Arrapago Reef
 --  ZNM: Lil Apkallu
 -----------------------------------
-mixins = {require("scripts/mixins/rage")}
+mixins = { require("scripts/mixins/rage") }
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}

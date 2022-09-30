@@ -1,5 +1,5 @@
 -----------------------------------
--- func: checklocalvar <varName> {'player'/'mob'/'npc'} {name/ID}
+-- func: checklocalvar <varName> { 'player'/'mob'/'npc' } { name/ID }
 -- desc: checks player or npc local variable and returns result value.
 -----------------------------------
 
@@ -11,7 +11,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!checklocalvar <variable name> {'player', 'mob', or 'npc'} {name or ID}")
+    player:PrintToPlayer("!checklocalvar <variable name> { 'player', 'mob', or 'npc' } { name or ID }")
 end
 
 function onTrigger(player, arg1, arg2, arg3)

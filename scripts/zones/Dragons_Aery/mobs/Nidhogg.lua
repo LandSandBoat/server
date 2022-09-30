@@ -3,7 +3,7 @@
 --  HNM: Nidhogg
 -----------------------------------
 local ID = require("scripts/zones/Dragons_Aery/IDs")
-mixins = {require("scripts/mixins/rage")}
+mixins = { require("scripts/mixins/rage") }
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------

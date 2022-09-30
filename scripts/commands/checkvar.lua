@@ -11,7 +11,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!checkvar {'server', or player} <variable name>")
+    player:PrintToPlayer("!checkvar { 'server', or player } <variable name>")
 end
 
 function onTrigger(player, arg1, arg2)

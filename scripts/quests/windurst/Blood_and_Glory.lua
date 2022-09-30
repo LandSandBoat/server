@@ -130,7 +130,7 @@ quest.sections =
                     elseif
                         player:hasKeyItem(xi.ki.MAP_TO_THE_ANNALS_OF_TRUTH) and
                         not player:hasKeyItem(xi.keyItem.ANNALS_OF_TRUTH) and
-                        npcUtil.popFromQM(player, npc, ifritsCauldronID.mob.CAILLEACH_BHEUR, {hide = 0})
+                        npcUtil.popFromQM(player, npc, ifritsCauldronID.mob.CAILLEACH_BHEUR, { hide = 0 })
                     then
                         return quest:messageSpecial(ifritsCauldronID.text.SENSE_OMINOUS_PRESENCE)
                     end

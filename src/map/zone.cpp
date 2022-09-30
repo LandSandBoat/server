@@ -244,6 +244,42 @@ void CZone::SetBackgroundMusicNight(uint8 music)
     m_zoneMusic.m_songNight = music;
 }
 
+const QueryByNameResult_t& CZone::queryEntitiesByName(std::string const& name)
+{
+    TracyZoneScoped;
+
+    // Use memoization since lookups are typically for the same mob names
+    auto result = m_queryByNameResults.find(name);
+    if (result != m_queryByNameResults.end())
+    {
+        return result->second;
+    }
+
+    std::vector<CBaseEntity*> entities;
+
+    // TODO: Make work for instances
+    // clang-format off
+    ForEachNpc([&](CNpcEntity* PNpc)
+    {
+        if (std::string((const char*)PNpc->GetName()) == name)
+        {
+            entities.push_back(PNpc);
+        }
+    });
+
+    ForEachMob([&](CMobEntity* PMob)
+    {
+        if (std::string((const char*)PMob->GetName()) == name)
+        {
+            entities.push_back(PMob);
+        }
+     });
+    // clang-format on
+
+    m_queryByNameResults[name] = std::move(entities);
+    return m_queryByNameResults[name];
+}
+
 uint32 CZone::GetLocalVar(const char* var)
 {
     return m_LocalVars[var];

@@ -11,7 +11,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!completerecord <recordID> {player}")
+    player:PrintToPlayer("!completerecord <recordID> (player)")
 end
 
 function onTrigger(player, recordID, target)

@@ -4,7 +4,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Sealions_Den/IDs")
 require("scripts/globals/status")
-mixins = {require("scripts/mixins/warriors_path_taru")}
+mixins = { require("scripts/mixins/warriors_path_taru") }
 -----------------------------------
 local entity = {}
 

@@ -2,7 +2,7 @@
 -- Area: The Boyahda Tree
 --   NM: Ancient Goobbue
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}
 
@@ -14,7 +14,7 @@ entity.onMobSpawn = function(mob)
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            {id = xi.jsa.HUNDRED_FISTS, cooldown = 60, hpp = math.random(85, 95)},
+            { id = xi.jsa.HUNDRED_FISTS, cooldown = 60, hpp = math.random(85, 95) },
         },
     })
     mob:setMobMod(xi.mobMod.DRAW_IN, 1)

@@ -3,7 +3,7 @@
 --   NM: Byakko
 -----------------------------------
 local ID = require("scripts/zones/RuAun_Gardens/IDs")
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/mobs")
 require("scripts/globals/status")
 -----------------------------------

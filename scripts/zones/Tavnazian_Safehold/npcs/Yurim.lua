@@ -35,26 +35,26 @@ local euvhi   = 1818
 
 local nosTrades =
 {
-    [14791] = {hint = 17, base = {earring, white}, organs = { {lumin, 5},   {euvhi, 5}                         }}, -- Sanative Earring
-    [14792] = {hint = 17, base = {earring, black}, organs = { {lumin, 5},   {euvhi, 5}                         }}, -- Relaxing Earring
+    [14791] = { hint = 17, base = { earring, white }, organs = { { lumin,   5 }, { euvhi,  5 }                              } }, -- Sanative Earring
+    [14792] = { hint = 17, base = { earring, black }, organs = { { lumin,   5 }, { euvhi,  5 }                              } }, -- Relaxing Earring
 
-    [15435] = {hint =  1, base = {obi, red},       organs = { {phuabo, 7},  {xzomit, 3}, {lumin, 3}             }}, -- Karin Obi (Fire)
-    [15436] = {hint =  2, base = {obi, clear},     organs = { {xzomit, 7},  {phuabo, 3}, {lumin, 3}             }}, -- Hyorin Obi (Ice)
-    [15437] = {hint =  3, base = {obi, green},     organs = { {aern, 7},    {hpemde, 3}, {lumin, 3}             }}, -- Furin Obi (Wind)
-    [15438] = {hint =  4, base = {obi, yellow},    organs = { {hpemde, 7},  {aern, 3},   {lumin, 3}             }}, -- Dorin Obi (Earth)
-    [15439] = {hint =  5, base = {obi, purple},    organs = { {phuabo, 7},  {hpemde, 3}, {lumin, 3}             }}, -- Rairin Obi (Thunder)
-    [15440] = {hint =  6, base = {obi, blue},      organs = { {hpemde, 7},  {phuabo, 3}, {lumin, 3}             }}, -- Suirin Obi (Water)
-    [15441] = {hint =  7, base = {obi, white},     organs = { {xzomit, 7},  {aern, 3},   {lumin, 3}             }}, -- Korin Obi (Light)
-    [15442] = {hint =  8, base = {obi, black},     organs = { {aern, 7},    {xzomit, 3}, {lumin, 3}             }}, -- Anrin Obi (Dark)
+    [15435] = { hint =  1, base = { obi, red       }, organs = { { phuabo,  7 }, { xzomit, 3 }, { lumin,  3 }               } }, -- Karin Obi (Fire)
+    [15436] = { hint =  2, base = { obi, clear     }, organs = { { xzomit,  7 }, { phuabo, 3 }, { lumin,  3 }               } }, -- Hyorin Obi (Ice)
+    [15437] = { hint =  3, base = { obi, green     }, organs = { { aern,    7 }, { hpemde, 3 }, { lumin,  3 }               } }, -- Furin Obi (Wind)
+    [15438] = { hint =  4, base = { obi, yellow    }, organs = { { hpemde,  7 }, { aern,   3 }, { lumin,  3 }               } }, -- Dorin Obi (Earth)
+    [15439] = { hint =  5, base = { obi, purple    }, organs = { { phuabo,  7 }, { hpemde, 3 }, { lumin,  3 }               } }, -- Rairin Obi (Thunder)
+    [15440] = { hint =  6, base = { obi, blue      }, organs = { { hpemde,  7 }, { phuabo, 3 }, { lumin,  3 }               } }, -- Suirin Obi (Water)
+    [15441] = { hint =  7, base = { obi, white     }, organs = { { xzomit,  7 }, { aern,   3 }, { lumin,  3 }               } }, -- Korin Obi (Light)
+    [15442] = { hint =  8, base = { obi, black     }, organs = { { aern,    7 }, { xzomit, 3 }, { lumin,  3 }               } }, -- Anrin Obi (Dark)
 
-    [15495] = {hint =  9, base = {gorget, red},    organs = { {phuabo, 10}, {xzomit, 5}, {yovra, 1}             }}, -- Flame Gorget
-    [15496] = {hint = 10, base = {gorget, clear},  organs = { {phuabo, 10}, {aern, 5},   {yovra, 1}             }}, -- Snow Gorget
-    [15497] = {hint = 11, base = {gorget, green},  organs = { {phuabo, 10}, {hpemde, 5}, {yovra, 1}             }}, -- Breeze Gorget
-    [15498] = {hint = 12, base = {gorget, yellow}, organs = { {xzomit, 10}, {aern, 5},   {yovra, 1}             }}, -- Soil Gorget
-    [15499] = {hint = 13, base = {gorget, purple}, organs = { {xzomit, 10}, {hpemde, 5}, {yovra, 1}             }}, -- Thunder Gorget
-    [15500] = {hint = 14, base = {gorget, blue},   organs = { {aern, 10},   {hpemde, 5}, {yovra, 1}             }}, -- Aqua Gorget
-    [15501] = {hint = 15, base = {gorget, white},  organs = { {aern, 7},    {phuabo, 3}, {hpemde, 3}, {yovra, 2} }}, -- Light Gorget
-    [15502] = {hint = 16, base = {gorget, black},  organs = { {hpemde, 7},  {phuabo, 3}, {aern, 3},   {yovra, 2} }}, -- Shadow Gorget
+    [15495] = { hint =  9, base = { gorget, red    }, organs = { { phuabo, 10 }, { xzomit, 5 }, { yovra,  1 }               } }, -- Flame Gorget
+    [15496] = { hint = 10, base = { gorget, clear  }, organs = { { phuabo, 10 }, { aern,   5 }, { yovra,  1 }               } }, -- Snow Gorget
+    [15497] = { hint = 11, base = { gorget, green  }, organs = { { phuabo, 10 }, { hpemde, 5 }, { yovra,  1 }               } }, -- Breeze Gorget
+    [15498] = { hint = 12, base = { gorget, yellow }, organs = { { xzomit, 10 }, { aern,   5 }, { yovra,  1 }               } }, -- Soil Gorget
+    [15499] = { hint = 13, base = { gorget, purple }, organs = { { xzomit, 10 }, { hpemde, 5 }, { yovra,  1 }               } }, -- Thunder Gorget
+    [15500] = { hint = 14, base = { gorget, blue   }, organs = { { aern,   10 }, { hpemde, 5 }, { yovra,  1 }               } }, -- Aqua Gorget
+    [15501] = { hint = 15, base = { gorget, white  }, organs = { { aern,    7 }, { phuabo, 3 }, { hpemde, 3 }, { yovra, 2 } } }, -- Light Gorget
+    [15502] = { hint = 16, base = { gorget, black  }, organs = { { hpemde,  7 }, { phuabo, 3 }, { aern,   3 }, { yovra, 2 } } }, -- Shadow Gorget
 }
 
 entity.onTrade = function(player, npc, trade)
@@ -113,7 +113,7 @@ entity.onEventFinish = function(player, csid, option)
         player:confirmTrade()
     elseif csid == 529 then
         local itemInProgress = player:getCharVar("NAME_OF_SCIENCE_target")
-        if npcUtil.completeQuest(player, xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE, {item=itemInProgress, var={"NAME_OF_SCIENCE_target"}}) then
+        if npcUtil.completeQuest(player, xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.IN_THE_NAME_OF_SCIENCE, { item=itemInProgress, var={ "NAME_OF_SCIENCE_target" } }) then
             player:confirmTrade()
         end
     end

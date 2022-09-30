@@ -2,7 +2,7 @@
 -- Area: Mamool Ja Training Grounds (Imperial Agent Rescue)
 --  MOB: Mamool Ja Warder (NIN, WHM, BST)
 -----------------------------------
-mixins = {require("scripts/mixins/weapon_break")}
+mixins = { require("scripts/mixins/weapon_break") }
 local ID = require("scripts/zones/Mamool_Ja_Training_Grounds/IDs")
 require("scripts/globals/status")
 require("scripts/globals/assault")
@@ -33,7 +33,7 @@ entity.onMobDeath = function(mob, player, isKiller)
 end
 
 entity.onMobSkillTarget = function(target, mob, skill)
-    local triggerSkills = {1733, 1736, 1923, 1925}
+    local triggerSkills = { 1733, 1736, 1923, 1925 }
     local skillID = skill:getID()
     if utils.contains(skillID, triggerSkills) then
         if math.random(0, 100) > 50 then

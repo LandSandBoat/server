@@ -33,7 +33,7 @@ local keyIds =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!addallatma {player}")
+    player:PrintToPlayer("!addallatma (player)")
 end
 
 function onTrigger(player, target)

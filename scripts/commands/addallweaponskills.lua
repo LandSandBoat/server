@@ -11,7 +11,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!addallweaponskills {player}")
+    player:PrintToPlayer("!addallweaponskills (player)")
 end
 
 function onTrigger(player, target)
