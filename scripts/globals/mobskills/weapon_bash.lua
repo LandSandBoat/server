@@ -1,7 +1,6 @@
 -----------------------------------
---  Shield Bash
---
---  Description:  Delivers an attack that can stun the target. Shield required.
+--  Weapon Bash
+--  Description:  Delivers an attack that can stun the target. Two handed Weapon Required
 --  Type: Physical
 --  Range: Melee
 -----------------------------------

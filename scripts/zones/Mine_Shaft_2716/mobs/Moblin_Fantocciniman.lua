@@ -4,11 +4,13 @@
 -- ENM: Pulling the Strings
 -----------------------------------
 local ID = require("scripts/zones/Mine_Shaft_2716/IDs")
+require("scripts/globals/pathfind")
 -----------------------------------
 local entity = {}
 
 entity.onMobSpawn = function(mob)
     mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.STANDBACK))
+    mob:setSpeed(60)
 end
 
 entity.onMobEngaged = function(mob, target)
@@ -19,6 +21,8 @@ end
 
 entity.onMobFight = function(mob, target)
     local fantocinni = GetMobByID(ID.mob.FANTOCCINI[mob:getBattlefield():getArea()])
+    local pos = fantocinni:getPos()
+    local stopPos = mob:getPos()
 
     if mob:getHP() < mob:getMaxHP() and mob:getLocalVar("control") == 0 then
         mob:setLocalVar("control", 1)
@@ -27,8 +31,10 @@ entity.onMobFight = function(mob, target)
         mob:setBehaviour(0)
     end
 
-    while mob:checkDistance(fantocinni) > 8 do
-        mob:pathTo(fantocinni:getPos())
+    if mob:checkDistance(fantocinni) > 8 then
+        mob:pathTo(pos.x, pos.y, pos.z, xi.path.flag.SCRIPT)
+    else
+        mob:pathTo(stopPos.x, stopPos.y, stopPos.z, xi.path.flag.SCRIPT)
     end
 end
 

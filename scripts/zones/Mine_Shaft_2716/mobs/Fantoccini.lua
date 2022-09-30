@@ -32,6 +32,7 @@ entity.onMobFight = function(mob, target)
         end
 
         if mob:getLocalVar("petSpawned") == 0 then
+            mob:setMobMod(xi.mobMod.NO_MOVE, 1)
             mob:setLocalVar("summoning", 1)
             mob:setLocalVar("petSpawned", 1)
             mob:entityAnimationPacket("casm")
@@ -49,6 +50,7 @@ entity.onMobFight = function(mob, target)
                     mobArg:SetMagicCastingEnabled(true)
                     mobArg:SetMobAbilityEnabled(true)
                     mob:setLocalVar("summoning", 0)
+                    mob:setMobMod(xi.mobMod.NO_MOVE, 0)
                 end
             end)
         end

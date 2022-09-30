@@ -70,7 +70,7 @@ zones[xi.zone.MINE_SHAFT_2716] =
         {
             modelID = 1209,
             skillList = 1183,
-            ability = 1728, -- Warcry
+            ability = 1428, -- Warcry
             spellListID = 0,
             petID = 0,
         },
@@ -78,7 +78,7 @@ zones[xi.zone.MINE_SHAFT_2716] =
         {
             modelID = 1210,
             skillList = 1184,
-            ability = 1434, -- Counterstance
+            ability = 1429, -- Counterstance
             spellListID = 0,
             petID = 0,
         },
@@ -126,7 +126,7 @@ zones[xi.zone.MINE_SHAFT_2716] =
         {
             modelID = 1220,
             skillList = 1189,
-            ability = 0, -- Weapon Bash
+            ability = 1432, -- Weapon Bash
             spellListID = 5,
             petID = 0,
         },
@@ -134,6 +134,7 @@ zones[xi.zone.MINE_SHAFT_2716] =
         {
             modelID = 1224,
             skillList = 1183,
+            petSkillList = 206,
             ability = 1433, -- Sic
             spellListID = 0,
             petID = 1,
@@ -151,6 +152,7 @@ zones[xi.zone.MINE_SHAFT_2716] =
             modelID = 1228,
             skillList = 1190,
             ability = 1434, -- Barrage
+            twoHr = 413,
             spellListID = 0,
             petID = 0,
         },
@@ -182,6 +184,7 @@ zones[xi.zone.MINE_SHAFT_2716] =
         {
             modelID = 1235,
             skillList = 1186,
+            petSkillList = 34,
             ability = 1438, -- Blood Pact
             spellListID = 0,
             petID = 3,
