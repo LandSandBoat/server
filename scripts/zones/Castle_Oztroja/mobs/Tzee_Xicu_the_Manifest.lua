@@ -22,7 +22,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
     return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.PARALYZE, { duration = 60 })
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     player:addTitle(xi.title.DEITY_DEBUNKER)
     if isKiller then
         mob:showText(mob, ID.text.YAGUDO_KING_DEATH)

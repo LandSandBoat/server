@@ -12,7 +12,7 @@ entity.onMobSpawn = function(mob)
     mob:addStatusEffect(xi.effect.STONESKIN, math.random(30, 40), 0, 300)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 199)
     xi.regime.checkRegime(player, mob, 16, 1, xi.regime.type.FIELDS)
 end

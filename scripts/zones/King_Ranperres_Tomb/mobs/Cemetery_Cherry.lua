@@ -30,7 +30,7 @@ entity.onMobSpawn = function(mob)
     mob:setLocalVar("wasKilled", 0)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     mob:setLocalVar("wasKilled", 1)
     player:addTitle(xi.title.MON_CHERRY)
 end

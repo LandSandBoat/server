@@ -16,7 +16,7 @@ entity.onMobEngaged = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     xi.dynamis.megaBossOnDeath(mob, player, isKiller)
 
     if isKiller then

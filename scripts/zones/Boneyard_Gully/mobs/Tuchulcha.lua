@@ -52,7 +52,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     -- Used to grab the mob IDs
     -- Despawn the hunters
     if isKiller then

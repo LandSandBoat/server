@@ -14,7 +14,7 @@ entity.onMobFight = function(mob, target)
     mob:setMobMod(xi.mobMod.MULTI_HIT, swings)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

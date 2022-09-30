@@ -14,7 +14,7 @@ entity.onMobEngaged = function(mob, target)
     mob:showText(mob, ID.text.YAGUDO_AVATAR_ENGAGE)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     if isKiller then
         mob:showText(mob, ID.text.YAGUDO_AVATAR_DEATH)
     end

@@ -80,7 +80,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     if (mob:getID() < ID.mob.SHADOW_LORD_STAGE_2_OFFSET) then
         player:startEvent(32004)
         player:setCharVar("mobid", mob:getID())

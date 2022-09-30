@@ -43,7 +43,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     xi.dynamis.megaBossOnDeath(mob, player, isKiller)
     player:addTitle(xi.title.LIFTER_OF_SHADOWS)
     if isKiller then

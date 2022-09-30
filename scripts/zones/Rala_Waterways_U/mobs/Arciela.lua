@@ -28,7 +28,7 @@ local entity = {}
 --     [3122] = { ['name']="",                               ['category']=11, ['id']=3122, ['animation']=2252, ['message']=1,   },
 -- },
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     local instance = mob:getInstance()
     instance:fail()
 end
