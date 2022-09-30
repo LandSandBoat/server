@@ -1,6 +1,6 @@
 -----------------------------------
--- Gust Slash
--- Description: Deals wind elemental damage. Damage varies with TP.
+-- Tachi: Kagero
+-- Description: Deals fire elemental damage.
 -- Type: Magical
 -----------------------------------
 require("scripts/globals/mobskills")
@@ -17,11 +17,12 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local numhits = 1
     local accmod = 1
-    local dmgmod = 2
-    local info = xi.mobskills.mobMagicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.ACC_VARIES, 1)
-    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WIND, info.hitslanded)
+    local dmgmod = 2.0
 
-    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.WIND)
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.ACC_VARIES, 1)
+    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.FIRE, info.hitslanded)
+
+    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.FIRE)
     return dmg
 end
 
