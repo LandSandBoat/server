@@ -117,21 +117,29 @@ function Battlefield:new(data)
     obj.createWornItem = data.createWornItem or true
     -- Key items required to be able to enter the battlefield - these are removed upon entry
     obj.requiredKeyItems = data.requiredKeyItems or {}
+    -- The name of the NPC used for entering
+    obj.entryNpc = data.entryNpc
+    -- The name of the NPC used for exiting
+    obj.exitNpc = data.exitNpc
     obj.sections = { { [obj.zoneId] = {} } }
-
-    -- If being called from a derived class then this should be handled there as obj wont have the metatable setup properly yet
-    if data.entryNpc then
-        obj:setEntryNpc(data.entryNpc)
-    end
-
-    if data.exitNpc then
-        obj:setExitNpc(data.exitNpc)
-    end
-
     return obj
 end
 
 function Battlefield:register()
+    -- Only hookup the entry and exit callbacks if this is the first in the zone
+    -- If we do all of them then each trigger/trade/event occurs twice
+    local existing = xi.battlefield.contents[self.battlefieldId]
+    if (existing and existing.hasCallbacks) or not utils.hasKey(self.zoneId, xi.battlefield.contentsByZone) then
+        if self.entryNpc then
+            self:setEntryNpc(self.entryNpc)
+        end
+
+        if self.exitNpc then
+            self:setExitNpc(self.exitNpc)
+        end
+        self.hasCallbacks = true
+    end
+
     xi.battlefield.contents[self.battlefieldId] = self
     if utils.hasKey(self.zoneId, xi.battlefield.contentsByZone) then
         table.insert(xi.battlefield.contentsByZone[self.zoneId], self)

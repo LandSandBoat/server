@@ -551,7 +551,6 @@ function Limbus:new(data)
     obj.name = data.name
     obj.ID = zones[obj.zoneId][obj.name]
     obj.serverVar = "[" .. obj.name .. "]Time"
-    obj:setEntryNpc(data.entryNpc)
     return obj
 end
 
