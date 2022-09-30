@@ -23,8 +23,4 @@ function content:onBattlefieldInitialise(battlefield)
     battlefield:setLocalVar("phaseChange", 1)
 end
 
-function content:checkRequirements(player, npc, registrant, trade)
-    return true
-end
-
 return content:register()

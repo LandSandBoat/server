@@ -542,7 +542,7 @@ Limbus.serverVar = ""
 Limbus.requiredCard = 0
 
 -- Creates a new Limbus Battlefield interaction
--- -- Data takes the additional following keys:
+-- Data takes the additional following keys:
 --  - name: The name of the Limbus area
 function Limbus:new(data)
     data.createsWornItem = false

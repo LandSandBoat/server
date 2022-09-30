@@ -69,6 +69,7 @@ global_objects=(
     Container
     Event
     Battlefield
+    MissionBattlefield
     Limbus
 
     removeSleepEffects

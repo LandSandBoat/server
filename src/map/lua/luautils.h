@@ -352,7 +352,7 @@ namespace luautils
             return -1;
         }
 
-        auto battlefield = contents.get_or<sol::table>(battlefieldId, sol::nil);
+        auto battlefield = contents.get<sol::table>(battlefieldId);
         if (battlefield.valid())
         {
             auto handler = battlefield.get<sol::protected_function>(eventName);
