@@ -8,7 +8,7 @@ require("scripts/globals/missions")
 require("scripts/globals/zone")
 -----------------------------------
 
-local content = MissionBattlefield:new({
+local content = BattlefieldMission:new({
     zoneId = xi.zone.THRONE_ROOM,
     battlefieldId = xi.battlefield.id.SHADOW_LORD_BATTLE,
     menuBit = 0,

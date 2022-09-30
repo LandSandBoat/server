@@ -557,9 +557,9 @@ function xi.battlefield.rejectLevelSyncedParty(player, npc)
     return false
 end
 
-MissionBattlefield = setmetatable({ }, { __index = Battlefield })
-MissionBattlefield.__index = MissionBattlefield
-MissionBattlefield.__eq = function(m1, m2)
+BattlefieldMission = setmetatable({ }, { __index = Battlefield })
+BattlefieldMission.__index = BattlefieldMission
+BattlefieldMission.__eq = function(m1, m2)
     return m1.name == m2.name
 end
 
@@ -571,7 +571,7 @@ end
 --  - missionStatus: The optional extra status information xi.mission.status (optional)
 --  - requiredMissionStatus: The required mission status to enter
 --  - skipMissionStatus: The required mission status to skip the cutscene. Defaults to the required mission status.
-function MissionBattlefield:new(data)
+function BattlefieldMission:new(data)
     local obj = Battlefield:new(data)
     setmetatable(obj, self)
     -- The mission area ID this battlefield is associated with
@@ -589,7 +589,7 @@ function MissionBattlefield:new(data)
     return obj
 end
 
-function MissionBattlefield:checkRequirements(player, npc, registrant, trade)
+function BattlefieldMission:checkRequirements(player, npc, registrant, trade)
     Battlefield.checkRequirements(self, player, npc, registrant, trade)
     local missionArea = self.missionArea or player:getNation()
     local current = player:getCurrentMission(missionArea)
@@ -598,7 +598,7 @@ function MissionBattlefield:checkRequirements(player, npc, registrant, trade)
     return current == self.mission and status == self.requiredMissionStatus
 end
 
-function MissionBattlefield:checkSkipCutscene(player)
+function BattlefieldMission:checkSkipCutscene(player)
     local missionArea = self.missionArea or player:getNation()
     local current = player:getCurrentMission(missionArea)
     local missionStatusArea = self.missionStatusArea or player:getNation()
@@ -607,7 +607,7 @@ function MissionBattlefield:checkSkipCutscene(player)
         (current == self.mission and status > self.skipMissionStatus)
 end
 
-function MissionBattlefield:onBattlefieldWin(player, battlefield)
+function BattlefieldMission:onBattlefieldWin(player, battlefield)
     Battlefield.onBattlefieldWin(self, player, battlefield)
 
     local current = player:getCurrentMission(self.missionArea)
