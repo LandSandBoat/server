@@ -17,7 +17,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
     return xi.mob.onAddEffect(mob, target, math.random(40, 95), xi.mob.ae.ENDARK, { chance = 80 })
 end
 
-entity.onMobDeath = function(mob, player, isKiller, noKiller)
+entity.onMobDeath = function(mob, player, optParams)
     if isKiller or noKiller then
         xi.nyzul.spawnChest(mob, player)
         xi.nyzul.eliminateAllKill(mob)

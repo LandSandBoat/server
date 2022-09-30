@@ -29,7 +29,7 @@ entity.onMobEngaged = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller, noKiller)
+entity.onMobDeath = function(mob, player, optParams)
     if isKiller or noKiller then
         local mobID = mob:getID()
         local battlefield = mob:getBattlefield()

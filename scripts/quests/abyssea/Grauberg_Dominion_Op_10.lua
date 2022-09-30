@@ -24,7 +24,7 @@ quest.sections =
         {
             ['Glen_Crab'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     xi.abyssea.dominionOnMobDeath(mob, player, 597)
                 end,
             },

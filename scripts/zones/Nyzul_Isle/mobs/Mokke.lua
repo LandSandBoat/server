@@ -24,7 +24,7 @@ entity.onMobSpawn = function(mob)
     mob:setAnimationSub(4)
 end
 
-entity.onMobDeath = function(mob, player, isKiller, noKiller)
+entity.onMobDeath = function(mob, player, optParams)
     if isKiller or noKiller then
         xi.nyzul.spawnChest(mob, player)
         xi.nyzul.enemyLeaderKill(mob)

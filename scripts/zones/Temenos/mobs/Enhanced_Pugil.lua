@@ -11,7 +11,7 @@ local entity = {}
 entity.onMobEngaged = function(mob, target)
 end
 
-entity.onMobDeath = function(mob, player, isKiller, noKiller)
+entity.onMobDeath = function(mob, player, optParams)
     if isKiller or noKiller then
         local spawn = math.random(3) == 1
         local battlefield = mob:getBattlefield()

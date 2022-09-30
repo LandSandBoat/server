@@ -6,7 +6,7 @@ require("scripts/zones/Apollyon/bcnms/nw_apollyon_helper")
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller, noKiller)
+entity.onMobDeath = function(mob, player, optParams)
     xi.apollyon_nw.handleMobDeathFloorThreeChest(mob, player, isKiller, noKiller)
 end
 

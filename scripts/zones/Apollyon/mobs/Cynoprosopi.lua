@@ -29,7 +29,7 @@ entity.onMobRoam = function(mob)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller, noKiller)
+entity.onMobDeath = function(mob, player, optParams)
     xi.apollyon_nw.handleMobDeathFloorFourChest(mob, player, isKiller, noKiller)
 end
 

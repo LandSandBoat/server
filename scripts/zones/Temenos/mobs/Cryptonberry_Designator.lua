@@ -47,7 +47,7 @@ entity.onMobRoam = function(mob)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller, noKiller)
+entity.onMobDeath = function(mob, player, optParams)
     if isKiller or noKiller then
         if GetNPCByID(ID.npc.TEMENOS_N_GATE[6]):getAnimation() == xi.animation.CLOSE_DOOR then
             xi.limbus.handleDoors(mob:getBattlefield(), true, ID.npc.TEMENOS_N_GATE[6])

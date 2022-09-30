@@ -11,7 +11,7 @@ entity.onMobInitialize = function(mob)
     --mob:setMobMod(xi.mobMod.DRAW_IN, 2) -- need to set a maximum distance for draw-in
 end
 
-entity.onMobDeath = function(mob, player, isKiller, noKiller)
+entity.onMobDeath = function(mob, player, optParams)
     xi.apollyon_sw.handleMobDeathFloorThree(mob, player, isKiller, noKiller)
 end
 

@@ -231,7 +231,7 @@ quest.sections =
         {
             ['Guardian_Treant'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     quest:setVar(player, 'Prog', 1)
                 end,
             },

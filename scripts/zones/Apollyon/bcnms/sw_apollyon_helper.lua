@@ -22,7 +22,7 @@ local firBholgOffsets =
     [5] = { 1, 6 }, -- Galka
 }
 
-xi.apollyon_sw.handleMobDeathFloorOne = function(mob, player, isKiller, noKiller)
+xi.apollyon_sw.handleMobDeathFloorOne = function(mob, player, optParams)
     if isKiller or noKiller then
         local mobID       = mob:getID()
         local battlefield = mob:getBattlefield()
@@ -56,7 +56,7 @@ end
 -----------------------------------
 -- Mobs in floor 2: Jidra x8
 
-xi.apollyon_sw.handleMobDeathFloorTwo = function(mob, player, isKiller, noKiller)
+xi.apollyon_sw.handleMobDeathFloorTwo = function(mob, player, optParams)
     if isKiller or noKiller then
         local mobID = mob:getID()
 
@@ -90,7 +90,7 @@ end
 -----------------------------------
 -- Mobs in floor 3: Armoury Crate x8
 
-xi.apollyon_sw.handleMobDeathFloorThree = function(mob, player, isKiller, noKiller)
+xi.apollyon_sw.handleMobDeathFloorThree = function(mob, player, optParams)
     if isKiller or noKiller then
         if GetNPCByID(ID.npc.APOLLYON_SW_PORTAL[3]):getAnimation() ~= xi.animation.OPEN_DOOR then
             xi.limbus.handleDoors(mob:getBattlefield(), true, ID.npc.APOLLYON_SW_PORTAL[3])

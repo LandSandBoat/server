@@ -16,7 +16,7 @@ xi.apollyon_ne = xi.apollyon_ne or {}
 -- Variable Pattern:
 -- 1: Goobue; 2: Barometz; 3: Borometz
 
-xi.apollyon_ne.handleMobDeathFloorOne = function(mob, player, isKiller, noKiller)
+xi.apollyon_ne.handleMobDeathFloorOne = function(mob, player, optParams)
     local mobId = mob:getID()
 
     if
@@ -64,7 +64,7 @@ end
 -----------------------------------
 -- Mobs in floor: Thiazi x2, Bialozar x2, Cornu x4, Sirin x4
 
-xi.apollyon_ne.handleMobDeathFloorTwo = function(mob, player, isKiller, noKiller)
+xi.apollyon_ne.handleMobDeathFloorTwo = function(mob, player, optParams)
     if isKiller or noKiller then
         local mobId         = mob:getID()
         local battlefield   = mob:getBattlefield()
@@ -112,7 +112,7 @@ end
 -----------------------------------
 -- Mobs in floor: Apollyon Sweeper x(1, 2 or 3), Aollyon Cleaner x(4, 8 or 12)
 
-xi.apollyon_ne.handleMobDeathFloorThree = function(mob, player, isKiller, noKiller)
+xi.apollyon_ne.handleMobDeathFloorThree = function(mob, player, optParams)
     if isKiller or noKiller then
         local mobId           = mob:getID()
         local battlefield     = mob:getBattlefield()
@@ -142,7 +142,7 @@ end
 -----------------------------------
 -- Mobs in floor: Hyperion x1, Okeanos x1, Cronos x1, Kerkopes x8
 
-xi.apollyon_ne.handleMobDeathFloorFour = function(mob, player, isKiller, noKiller)
+xi.apollyon_ne.handleMobDeathFloorFour = function(mob, player, optParams)
     if isKiller or noKiller then
         local mobId        = mob:getID()
         local battlefield  = mob:getBattlefield()
@@ -168,7 +168,7 @@ end
 -----------------------------------
 -- Mobs in floor: Criosphinx x1, Hieracosphinx x1, Troglodyte Dhalmel x8
 
-xi.apollyon_ne.handleMobDeathFloorFive = function(mob, player, isKiller, noKiller)
+xi.apollyon_ne.handleMobDeathFloorFive = function(mob, player, optParams)
     if isKiller or noKiller then
         local allDead = true
 

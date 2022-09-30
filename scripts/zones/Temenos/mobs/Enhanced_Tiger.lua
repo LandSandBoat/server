@@ -37,7 +37,7 @@ entity.onMobRoam = function(mob)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller, noKiller)
+entity.onMobDeath = function(mob, player, optParams)
     if isKiller or noKiller then
         local spawn = math.random(4) == 1
         local battlefield = mob:getBattlefield()

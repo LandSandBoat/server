@@ -64,7 +64,7 @@ entity.onCriticalHit = function(mob)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller, noKiller)
+entity.onMobDeath = function(mob, player, optParams)
     if isKiller or noKiller then
         xi.nyzul.enemyLeaderKill(mob)
         xi.nyzul.vigilWeaponDrop(player, mob)
