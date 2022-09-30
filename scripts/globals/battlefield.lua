@@ -72,6 +72,9 @@ xi.battlefield.dropChance =
 
 xi.battlefield.id =
 {
+    FLAMES_FOR_THE_DEAD = 640,
+    BROTHERS = 643,
+    HOLY_COW = 644,
     SHADOW_LORD_BATTLE = 160,
     WHERE_TWO_PATHS_CONVERGE = 161,
     SE_APOLLYON = 1293,
