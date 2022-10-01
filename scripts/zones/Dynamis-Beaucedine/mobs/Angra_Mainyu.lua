@@ -51,7 +51,7 @@ entity.onMobMagicPrepare = function(mob, target, spellId)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    xi.dynamis.megaBossOnDeath(mob, player, isKiller)
+    xi.dynamis.megaBossOnDeath(mob, player, optParams)
 end
 
 return entity

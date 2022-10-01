@@ -126,7 +126,7 @@ quest.sections = {
             },
 
             ['Metallic_Slime'] = {
-                onMobDeath = function(mob, player, isKiller)
+                onMobDeath = function(mob, player, optParams)
                     player:setLocalVar("triggerFellow", 1)
                     player:timer(30000, function(player) player:despawnFellow() end)
                 end,
@@ -159,7 +159,7 @@ quest.sections = {
             },
 
             ['Metallic_Slime'] = {
-                onMobDeath = function(mob, player, isKiller)
+                onMobDeath = function(mob, player, optParams)
                     player:setLocalVar("triggerFellow", 1)
                     player:timer(30000, function(player) player:despawnFellow() end)
                 end,
@@ -192,7 +192,7 @@ quest.sections = {
             },
 
             ['Metallic_Slime'] = {
-                onMobDeath = function(mob, player, isKiller)
+                onMobDeath = function(mob, player, optParams)
                     player:setLocalVar("triggerFellow", 1)
                     player:timer(30000, function(player) player:despawnFellow() end)
                 end,

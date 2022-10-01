@@ -22,7 +22,7 @@ entity.onMobEngaged= function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    if isKiller or noKiller then
+    if optParams.isKiller or optParams.noKiller then
         local instance = mob:getInstance()
 
         if instance:getLocalVar("gearObjective") == xi.nyzul.gearObjective.DO_NOT_DESTROY then

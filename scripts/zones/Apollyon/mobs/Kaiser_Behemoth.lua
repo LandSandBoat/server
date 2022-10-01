@@ -48,7 +48,7 @@ entity.onSpellPrecast = function(mob, spell)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    xi.apollyon_nw.handleMobDeathFloorFive(mob, player, isKiller, noKiller)
+    xi.apollyon_nw.handleMobDeathFloorFive(mob, player, optParams)
 end
 
 return entity

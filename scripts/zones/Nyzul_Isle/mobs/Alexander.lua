@@ -64,7 +64,7 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    if isKiller then
+    if optParams.isKiller then
         mob:showText(mob, ID.text.SHALL_KNOW_OBLIVION)
     end
 end

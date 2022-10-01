@@ -8,7 +8,7 @@ local ID = require("scripts/zones/Temenos/IDs")
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)
-    if isKiller or noKiller then
+    if optParams.isKiller or optParams.noKiller then
         local battlefield = mob:getBattlefield()
         if battlefield:getLocalVar("crateOpenedF6") ~= 1 then
             local mobID = mob:getID()

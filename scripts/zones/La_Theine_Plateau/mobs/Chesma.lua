@@ -27,7 +27,7 @@ entity.onMobDespawn = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    xi.voidwalker.onMobDeath(mob, player, isKiller, xi.keyItem.GREY_ABYSSITE)
+    xi.voidwalker.onMobDeath(mob, player, optParams, xi.keyItem.GREY_ABYSSITE)
 end
 
 return entity

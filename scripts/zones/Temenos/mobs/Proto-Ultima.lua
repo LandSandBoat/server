@@ -43,7 +43,7 @@ entity.onMobDeath = function(mob, player, optParams)
     if player then
         player:addTitle(xi.title.TEMENOS_LIBERATOR)
     end
-    if isKiller or noKiller then
+    if optParams.isKiller or optParams.noKiller then
         GetNPCByID(ID.npc.TEMENOS_C_CRATE[4][1]):setStatus(xi.status.NORMAL)
     end
 end

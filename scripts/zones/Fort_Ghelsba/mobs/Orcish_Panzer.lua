@@ -7,7 +7,7 @@
 local entity = {}
 
 entity.onMobDeath = function(mob, player, optParams)
-    if (isKiller) then
+    if optParams.isKiller then
         local mobId = mob:getID()
         local nq = GetMobByID(mobId + 1) -- Orcish Fighter
         local hq = GetMobByID(mobId + 2) -- Chariotbuster Byakzak

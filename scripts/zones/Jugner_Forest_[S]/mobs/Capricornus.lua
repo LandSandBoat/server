@@ -30,7 +30,7 @@ entity.onMobDespawn = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    xi.voidwalker.onMobDeath(mob, player, isKiller, xi.keyItem.BLUE_ABYSSITE)
+    xi.voidwalker.onMobDeath(mob, player, optParams, xi.keyItem.BLUE_ABYSSITE)
     xi.hunts.checkHunt(mob, player, 546)
 end
 

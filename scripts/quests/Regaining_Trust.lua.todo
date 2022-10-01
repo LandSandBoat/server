@@ -147,7 +147,7 @@ quest.sections = {
             },
 
             ['Ingaevon'] = {
-                onMobDeath = function(mob, player, isKiller, firstCall)
+                onMobDeath = function(mob, player, optParams)
                     local fellow = player:getFellow()
 
                     if fellow ~= nil and quest:getVar(player, "Prog") == 2 then

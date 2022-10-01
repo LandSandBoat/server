@@ -12,7 +12,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    if (isKiller) then
+    if optParams.isKiller then
         local mobId = mob:getID()
         local x = mob:getXPos()
         local y = mob:getYPos()

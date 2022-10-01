@@ -30,7 +30,7 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 16, 1, xi.regime.type.FIELDS)
-    xi.voidwalker.onMobDeath(mob, player, isKiller, xi.keyItem.COLORFUL_ABYSSITE)
+    xi.voidwalker.onMobDeath(mob, player, optParams, xi.keyItem.COLORFUL_ABYSSITE)
 end
 
 return entity

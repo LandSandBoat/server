@@ -19,7 +19,7 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    if isKiller then
+    if optParams.isKiller then
         if mob:getLocalVar("lastDoll") < 5 then
             mob:getBattlefield():lose()
         end

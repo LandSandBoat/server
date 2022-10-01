@@ -132,7 +132,7 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     -- If he's out of reraises, display text
-    if isKiller and mob:getMobMod(xi.mobMod.BEHAVIOR) == 0 then
+    if optParams.isKiller and mob:getMobMod(xi.mobMod.BEHAVIOR) == 0 then
         mob:showText(mob, ID.text.MIRACLE)
     end
 end

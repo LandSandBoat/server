@@ -16,7 +16,7 @@ xi.apollyon_nw = xi.apollyon_nw or {}
 -- Killing 1 of the 7 Bardhas opens the portal.
 -- Correct Bardha selected in nw_apollyon.lua file.
 xi.apollyon_nw.handleMobDeathFloorOnePortal = function(mob, player, optParams)
-    if isKiller or noKiller then
+    if optParams.isKiller or optParams.noKiller then
         local mobID       = mob:getID()
         local battlefield = mob:getBattlefield()
         local randomF1    = battlefield:getLocalVar("randomF1")
@@ -33,7 +33,7 @@ end
 
 -- Killing Pluto drops Item Crate.
 xi.apollyon_nw.handleMobDeathFloorOneChest = function(mob, player, optParams)
-    if isKiller or noKiller then
+    if optParams.isKiller or optParams.noKiller then
         local mobX = mob:getXPos()
         local mobY = mob:getYPos()
         local mobZ = mob:getZPos()
@@ -49,7 +49,7 @@ end
 
 -- Killing 1 of the 7 Mountain Buffalos opens the portal.
 xi.apollyon_nw.handleMobDeathFloorTwoPortal = function(mob, player, optParams)
-    if isKiller or noKiller then
+    if optParams.isKiller or optParams.noKiller then
         local mobID       = mob:getID()
         local battlefield = mob:getBattlefield()
         local randomF2    = battlefield:getLocalVar("randomF2")
@@ -66,7 +66,7 @@ end
 
 -- Killing Zlatorog drops Item Crate.
 xi.apollyon_nw.handleMobDeathFloorTwoChest = function(mob, player, optParams)
-    if isKiller or noKiller then
+    if optParams.isKiller or optParams.noKiller then
         local mobX = mob:getXPos()
         local mobY = mob:getYPos()
         local mobZ = mob:getZPos()
@@ -82,7 +82,7 @@ end
 
 -- Killing 1 of the 7 Apollyon Scavengers opens the portal.
 xi.apollyon_nw.handleMobDeathFloorThreePortal = function(mob, player, optParams)
-    if isKiller or noKiller then
+    if optParams.isKiller or optParams.noKiller then
         local mobID       = mob:getID()
         local battlefield = mob:getBattlefield()
         local randomF3    = battlefield:getLocalVar("randomF3")
@@ -99,7 +99,7 @@ end
 
 -- Killing the Millenary Mossback drops Item Crate.
 xi.apollyon_nw.handleMobDeathFloorThreeChest = function(mob, player, optParams)
-    if isKiller or noKiller then
+    if optParams.isKiller or optParams.noKiller then
         local mobX = mob:getXPos()
         local mobY = mob:getYPos()
         local mobZ = mob:getZPos()
@@ -115,7 +115,7 @@ end
 
 -- Killing 1 of the 5 Goryniches opens the portal.
 xi.apollyon_nw.handleMobDeathFloorFourPortal = function(mob, player, optParams)
-    if isKiller or noKiller then
+    if optParams.isKiller or optParams.noKiller then
         local mobID       = mob:getID()
         local battlefield = mob:getBattlefield()
         local randomF4    = battlefield:getLocalVar("randomF4")
@@ -129,7 +129,7 @@ end
 
 -- Killing Cynoprosopi drops Item Crate.
 xi.apollyon_nw.handleMobDeathFloorFourChest = function(mob, player, optParams)
-    if isKiller or noKiller then
+    if optParams.isKiller or optParams.noKiller then
         local mobX = mob:getXPos()
         local mobY = mob:getYPos()
         local mobZ = mob:getZPos()
@@ -145,7 +145,7 @@ end
 
 -- Killing Kaiser Behemoth makes Item Crate appear at portal, witch finishes the battlefield once opened.
 xi.apollyon_nw.handleMobDeathFloorFive = function(mob, player, optParams)
-    if isKiller or noKiller then
+    if optParams.isKiller or optParams.noKiller then
         GetNPCByID(ID.npc.APOLLYON_NW_CRATE[5]):setStatus(xi.status.NORMAL)
     end
 end

@@ -40,7 +40,7 @@ entity.onMobRoam = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    xi.apollyon_ne.handleMobDeathFloorFive(mob, player, isKiller, noKiller)
+    xi.apollyon_ne.handleMobDeathFloorFive(mob, player, optParams)
 end
 
 return entity

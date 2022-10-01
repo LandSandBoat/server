@@ -38,7 +38,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    oneToBeFeared.handleOmegaDeath(mob, player, isKiller)
+    oneToBeFeared.handleOmegaDeath(mob, player, optParams)
 end
 
 entity.onEventFinish = function(player, csid, option)

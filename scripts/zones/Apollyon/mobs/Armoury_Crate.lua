@@ -12,7 +12,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    xi.apollyon_sw.handleMobDeathFloorThree(mob, player, isKiller, noKiller)
+    xi.apollyon_sw.handleMobDeathFloorThree(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)

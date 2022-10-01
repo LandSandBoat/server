@@ -17,7 +17,7 @@ entity.onMobDeath = function(mob, player, optParams)
         player:setCharVar("ANewDawn_Event", 5)
     end
 
-    if isKiller then
+    if optParams.isKiller then
         for i = ID.mob.TAIFUN, ID.mob.TROMBE do
             if GetMobByID(i):isSpawned() then
                 DespawnMob(i)

@@ -111,8 +111,8 @@ function InteractionGlobal.onTrade(player, npc, trade, fallbackFn)
     return InteractionGlobal.lookup:onTrade(player, npc, trade, fallbackFn)
 end
 
-function InteractionGlobal.onMobDeath(mob, player, isKiller, firstCall, fallbackFn)
-    return InteractionGlobal.lookup:onMobDeath(mob, player, isKiller, firstCall, fallbackFn)
+function InteractionGlobal.onMobDeath(mob, player, optParams, fallbackFn)
+    return InteractionGlobal.lookup:onMobDeath(mob, player, optParams, fallbackFn)
 end
 
 function InteractionGlobal.onZoneIn(player, prevZone, fallbackFn)

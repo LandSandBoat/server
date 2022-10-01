@@ -26,7 +26,7 @@ entity.onMobEngaged = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    if isKiller then
+    if optParams.isKiller then
         mob:showText(mob, ID.text.ORCISH_OVERLORD_DEATH)
     end
 end

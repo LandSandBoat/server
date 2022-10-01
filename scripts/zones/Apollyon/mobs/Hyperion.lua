@@ -11,7 +11,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    xi.apollyon_ne.handleMobDeathFloorFour(mob, player, isKiller, noKiller)
+    xi.apollyon_ne.handleMobDeathFloorFour(mob, player, optParams)
 end
 
 return entity

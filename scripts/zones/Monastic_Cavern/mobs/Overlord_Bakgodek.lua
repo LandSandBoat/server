@@ -26,7 +26,7 @@ end
 
 entity.onMobDeath = function(mob, player, optParams)
     player:addTitle(xi.title.OVERLORD_OVERTHROWER)
-    if isKiller then
+    if optParams.isKiller then
         mob:showText(mob, ID.text.ORC_KING_DEATH)
     end
 end

@@ -15,7 +15,7 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    xi.promyvion.receptacleOnDeath(mob, isKiller)
+    xi.promyvion.receptacleOnDeath(mob, optParams)
 end
 
 return entity

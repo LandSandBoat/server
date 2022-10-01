@@ -13,7 +13,7 @@ entity.onMobInitialize = function(mob)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    if (isKiller) then
+    if optParams.isKiller then
         local mobId = mob:getID()
         local offset = mobId - ID.mob.GIGAPLASM
         local x = mob:getXPos()

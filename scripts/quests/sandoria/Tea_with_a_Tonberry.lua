@@ -178,7 +178,7 @@ quest.sections =
 
             ['Hematic_Cyst'] =
             {
-                onMobDeath = function(mob, player, isKiller)
+                onMobDeath = function(mob, player, optParams)
                     if quest:getVar(player, 'Prog') == 3 then
                         quest:setVar(player, 'Prog', 4)
                     end
