@@ -79,6 +79,10 @@ function utils.join(input1, input2)
     return result
 end
 
+function utils.minutes(minutes)
+    return minutes * 60
+end
+
 -- Generates a random permutation of integers >= min_val and <= max_val
 -- If a min_val isn't given, 1 is used (assumes permutation of lua indices)
 function utils.permgen(max_val, min_val)

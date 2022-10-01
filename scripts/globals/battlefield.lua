@@ -59,6 +59,15 @@ xi.battlefield.leaveCode =
     LOST   = 4
 }
 
+xi.battlefield.rules =
+{
+    ALLOW_SUBJOBS         = 0x01,
+    LOSE_EXP              = 0x02,
+    REMOVE_3MIN           = 0x04,
+    SPAWN_TREASURE_ON_WIN = 0x08,
+    MAAT                  = 0x10,
+}
+
 xi.battlefield.dropChance =
 {
     EXTREMELY_LOW  = 2,
@@ -90,6 +99,10 @@ end
 -- Data takes the following keys:
 --  - zoneId: Which zone this battlefield exists within (required)
 --  - battlefieldId: Battlefield ID used in the database (required)
+--  - maxPlayers: Maximum number of players allowed to enter (required)
+--  - levelCap: Level cap imposed upon the battlefield (required)
+--  - timeLimit: Time in seconds alotted to complete the battlefield before being ejected (required)
+--  - rules: Battlefield rules found in xi.battlefield.rules
 --  - menuBit: The bit used to communicate with the client on which menu item this battlefield is (required)
 --  - area: Some battlefields has multiple areas (Burning Circles) while others have fixed areas (Apollyon). Set to have a fixed area. (optional)
 --  - entryNPC: The name of the NPC used for entering
@@ -106,6 +119,20 @@ function Battlefield:new(data)
     obj.zoneId = data.zoneId
     -- Battlefield ID used in the database
     obj.battlefieldId = data.battlefieldId
+    -- Maximum number of players allowed to enter
+    obj.maxPlayers = data.maxPlayers
+    -- Level cap imposed upon the battlefield
+    obj.levelCap = data.levelCap
+    -- Time in seconds alotted to complete the battlefield before being ejected
+    obj.timeLimit = data.timeLimit
+    -- Battlefield rules found in xi.battlefield.rules
+    -- TODO(jmcmorris) (LOSE_EXP doesn't seem to work, REMOVE_3MIN doesn't seem to work, SPAWN_TREASURE_ON_WIN isn't needed) ...
+    obj.rules = 0
+    if data.rules then
+        for _, rule in ipairs(data.rules) do
+            obj.rules = bit.bor(obj.rules, rule)
+        end
+    end
     -- The bit used to communicate with the client on which menu item this battlefield is
     obj.menuBit = data.menuBit
     -- Some battlefields has multiple areas (Burning Circles) while others have fixed areas (Apollyon). Set to have a fixed area.
@@ -349,11 +376,11 @@ function Battlefield:onEntryEventUpdate(player, csid, option, extras)
     local partySize = 1
 
     local area = self.area or (player:getLocalVar("[battlefield]area") + 1)
-    if self.area ~= 0 then
+    if self.area then
         area = self.area
     end
 
-    local result = player:registerBattlefield(self.battlefieldId, area)
+    local result = player:registerBattlefield(self.battlefieldId, area, player:getID(), self)
     local status = xi.battlefield.status.OPEN
 
     if result ~= xi.battlefield.returnCode.CUTSCENE then
@@ -410,7 +437,7 @@ function Battlefield:onEntryEventUpdate(player, csid, option, extras)
                 not member:getBattlefield()
             then
                 member:addStatusEffect(effect)
-                member:registerBattlefield(self.battlefieldId, area, player:getID())
+                member:registerBattlefield(self.battlefieldId, area, player:getID(), self)
             end
         end
     end
@@ -608,6 +635,8 @@ BattlefieldMission.__index = BattlefieldMission
 BattlefieldMission.__eq = function(m1, m2)
     return m1.name == m2.name
 end
+
+BattlefieldMission.isMission = true
 
 -- Creates a new Limbus Battlefield interaction
 -- Data takes the additional following keys:
