@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -3224,6 +3224,12 @@ namespace luautils
         std::string mob_name  = (const char*)PMob->GetName();
 
         CCharEntity* PChar = dynamic_cast<CCharEntity*>(PKiller);
+
+        auto optParams = lua.create_table();
+        optParams["isKiller"]          = false;
+        optParams["noKiller"]          = true;
+        optParams["isWeaponSkillKill"] = false;
+
         if (PChar && PMob->objtype == TYPE_MOB)
         {
             auto onMobDeathEx = lua["xi"]["mob"]["onMobDeathEx"];
@@ -3258,7 +3264,7 @@ namespace luautils
             sol::function onMobDeath          = getEntityCachedFunction(PMob, "onMobDeath");
 
             // clang-format off
-            PChar->ForAlliance([PMob, PChar, &onMobDeathFramework, &onMobDeath, &filename](CBattleEntity* PPartyMember)
+            PChar->ForAlliance([PMob, PChar, &onMobDeathFramework, &onMobDeath, &filename, &optParams](CBattleEntity* PPartyMember)
             {
                 CCharEntity* PMember = (CCharEntity*)PPartyMember;
                 if (PMember && PMember->getZone() == PChar->getZone())
@@ -3270,8 +3276,6 @@ namespace luautils
                         optLuaAllyEntity = CLuaBaseEntity(PMember);
                     }
 
-                    auto optParams = lua.create_table();
-
                     optParams["isKiller"]          = PMember == PChar;
                     optParams["noKiller"]          = false;
                     optParams["isWeaponSkillKill"] = PMob->GetLocalVar("weaponskillHit") > 0;
@@ -3279,7 +3283,7 @@ namespace luautils
                     PChar->eventPreparation->targetEntity = PMob;
                     PChar->eventPreparation->scriptFile   = filename;
 
-                    // onMobDeath(mob, player, isKiller, noKiller)
+                    // onMobDeath(mob, player, optParams)
                     auto result = onMobDeathFramework(LuaMobEntity, optLuaAllyEntity, optParams, onMobDeath);
                     if (!result.valid())
                     {
@@ -3295,13 +3299,7 @@ namespace luautils
             auto          onMobDeathFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onMobDeath"];
             sol::function onMobDeath          = getEntityCachedFunction(PMob, "onMobDeath");
 
-            auto optParams = lua.create_table();
-
-            optParams["isKiller"]          = sol::lua_nil;
-            optParams["noKiller"]          = true;
-            optParams["isWeaponSkillKill"] = false;
-
-            // onMobDeath(mob, player, isKiller, noKiller)
+            // onMobDeath(mob, player, optParams)
             auto result = onMobDeathFramework(CLuaBaseEntity(PMob), sol::lua_nil, optParams, onMobDeath);
             if (!result.valid())
             {
