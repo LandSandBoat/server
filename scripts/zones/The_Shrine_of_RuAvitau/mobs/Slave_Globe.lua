@@ -7,7 +7,7 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     local mg = GetMobByID(ID.mob.MOTHER_GLOBE)
 
     if mg:getLocalVar("nextSlaveSpawnTime") == 0 then

@@ -7,7 +7,7 @@ mixins = { require("scripts/mixins/families/qutrub") }
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 470)
 end
 

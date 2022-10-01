@@ -6,7 +6,7 @@ local ID = require("scripts/zones/Maze_of_Shakhrami/IDs")
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)

@@ -9,7 +9,7 @@ require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 86, 2, xi.regime.type.FIELDS)
 
     if xi.settings.main.ENABLE_ACP == 1 and player:getCurrentMission(xi.mission.log_id.ACP) >= xi.mission.id.acp.THE_ECHO_AWAKENS and not player:hasKeyItem(xi.ki.JUG_OF_GREASY_GOBLIN_JUICE) then

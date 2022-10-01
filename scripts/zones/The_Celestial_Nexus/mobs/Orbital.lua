@@ -13,7 +13,7 @@ entity.onMobInitialize = function(mob)
     mob:addMod(xi.mod.REGAIN, 50)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onEventUpdate = function(player, csid, option)

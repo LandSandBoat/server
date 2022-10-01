@@ -16,7 +16,7 @@ xi.apollyon_ne = xi.apollyon_ne or {}
 -- Variable Pattern:
 -- 1: Goobue; 2: Barometz; 3: Borometz
 
-xi.apollyon_ne.handleMobDeathFloorOne = function(mob, player, isKiller, noKiller)
+xi.apollyon_ne.handleMobDeathFloorOne = function(mob, player, optParams)
     local mobId = mob:getID()
 
     if
@@ -24,7 +24,7 @@ xi.apollyon_ne.handleMobDeathFloorOne = function(mob, player, isKiller, noKiller
         mobId == ID.mob.APOLLYON_NE_MOB[1] + 11 or
         mobId == ID.mob.APOLLYON_NE_MOB[1] + 12
     then
-        if isKiller or noKiller then
+        if optParams.isKiller or optParams.noKiller then
             local battlefield   = mob:getBattlefield()
             local floorOneKey   = battlefield:getLocalVar("randomF1key")
             local floorOneChest = battlefield:getLocalVar("randomF1chest")
@@ -64,8 +64,8 @@ end
 -----------------------------------
 -- Mobs in floor: Thiazi x2, Bialozar x2, Cornu x4, Sirin x4
 
-xi.apollyon_ne.handleMobDeathFloorTwo = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
+xi.apollyon_ne.handleMobDeathFloorTwo = function(mob, player, optParams)
+    if optParams.isKiller or optParams.noKiller then
         local mobId         = mob:getID()
         local battlefield   = mob:getBattlefield()
         local players       = battlefield:getPlayers()
@@ -112,8 +112,8 @@ end
 -----------------------------------
 -- Mobs in floor: Apollyon Sweeper x(1, 2 or 3), Aollyon Cleaner x(4, 8 or 12)
 
-xi.apollyon_ne.handleMobDeathFloorThree = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
+xi.apollyon_ne.handleMobDeathFloorThree = function(mob, player, optParams)
+    if optParams.isKiller or optParams.noKiller then
         local mobId           = mob:getID()
         local battlefield     = mob:getBattlefield()
         local floorThreeKey   = battlefield:getLocalVar("randomF3key")
@@ -142,8 +142,8 @@ end
 -----------------------------------
 -- Mobs in floor: Hyperion x1, Okeanos x1, Cronos x1, Kerkopes x8
 
-xi.apollyon_ne.handleMobDeathFloorFour = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
+xi.apollyon_ne.handleMobDeathFloorFour = function(mob, player, optParams)
+    if optParams.isKiller or optParams.noKiller then
         local mobId        = mob:getID()
         local battlefield  = mob:getBattlefield()
         local floorFourKey = battlefield:getLocalVar("randomF4key")
@@ -168,8 +168,8 @@ end
 -----------------------------------
 -- Mobs in floor: Criosphinx x1, Hieracosphinx x1, Troglodyte Dhalmel x8
 
-xi.apollyon_ne.handleMobDeathFloorFive = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
+xi.apollyon_ne.handleMobDeathFloorFive = function(mob, player, optParams)
+    if optParams.isKiller or optParams.noKiller then
         local allDead = true
 
         for i = 2, 9 do

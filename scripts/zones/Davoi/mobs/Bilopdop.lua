@@ -8,7 +8,7 @@ require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     local theFirstMeeting = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_FIRST_MEETING)
     local martialArtsScroll = player:hasKeyItem(xi.ki.SAN_DORIAN_MARTIAL_ARTS_SCROLL)
 

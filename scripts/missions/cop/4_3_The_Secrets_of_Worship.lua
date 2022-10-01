@@ -152,7 +152,7 @@ mission.sections =
 
             ['Old_Professor_Mariselle'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if mission:getVar(player, 'Status') == 3 then
                         mission:setLocalVar(player, 'hasKilled', 1)
                     end

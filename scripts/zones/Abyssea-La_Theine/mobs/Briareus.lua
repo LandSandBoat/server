@@ -59,7 +59,7 @@ entity.onMobWeaponSkillPrepare = function(mob, target)
     return cueMove
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     player:addTitle(xi.title.BRIAREUS_FELLER)
 end
 

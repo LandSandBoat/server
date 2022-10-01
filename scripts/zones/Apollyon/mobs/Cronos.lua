@@ -10,8 +10,8 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.UDMGPHYS, -10000)
 end
 
-entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    xi.apollyon_ne.handleMobDeathFloorFour(mob, player, isKiller, noKiller)
+entity.onMobDeath = function(mob, player, optParams)
+    xi.apollyon_ne.handleMobDeathFloorFour(mob, player, optParams)
 end
 
 return entity

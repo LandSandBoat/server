@@ -43,7 +43,7 @@ entity.onMobInitialize = function(GhulIBeabanMob)
     end)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     if mob:getLocalVar("RERAISES") == 4 then
         mob:getBattlefield():setLocalVar("lootSpawned", 0)
     end

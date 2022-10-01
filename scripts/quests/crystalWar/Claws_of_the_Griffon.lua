@@ -112,7 +112,7 @@ quest.sections =
 
             ['Fingerfilcher_Dradzad'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if quest:getVar(player, 'Prog') == 3 then
                         quest:setVar(player, 'Prog', 4)
                     end

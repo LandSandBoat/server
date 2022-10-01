@@ -53,8 +53,8 @@ entity.onMobFight = function(mob)
 
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
-    if (isKiller) then
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller then
         local mobId = mob:getID()
         local nm    = GetMobByID(ID.mob.JAILER_OF_TEMPERANCE)
         local ph    = nm:getLocalVar("ph")
