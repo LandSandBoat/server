@@ -1,0 +1,51 @@
+diff --git "a/src/map/message.cpp" "b/src/map/message.cpp"
+index 5f6a7da989..e7d9ec1fc4 100644
+--- "a/src/map/message.cpp"
++++ "b/src/map/message.cpp"
+@@ -107,26 +107,26 @@ namespace message
+             }
+             case MSG_CHAT_TELL:
+             {
+-                CCharEntity* PChar = zoneutils::GetCharByName((int8*)extra.data() + 4);
+-                if (PChar && PChar->status != STATUS_TYPE::DISAPPEAR && !jailutils::InPrison(PChar))
+-                {
+-                    std::unique_ptr<CBasicPacket> newPacket = std::make_unique<CBasicPacket>();
+-                    memcpy(*newPacket, packet.data(), std::min<size_t>(packet.size(), PACKET_SIZE));
+-                    auto gm_sent = newPacket->ref<uint8>(0x05);
+-                    if (PChar->nameflags.flags & FLAG_AWAY && !gm_sent)
+-                    {
+-                        send(MSG_DIRECT, extra.data(), sizeof(uint32), new CMessageStandardPacket(PChar, 0, 0, MsgStd::TellNotReceivedAway));
+-                    }
+-                    else
+-                    {
+-                        PChar->pushPacket(std::move(newPacket));
+-                    }
+-                }
+-                else
+-                {
+-                    send(MSG_DIRECT, extra.data(), sizeof(uint32), new CMessageStandardPacket(PChar, 0, 0, MsgStd::TellNotReceivedOffline));
+-                }
+-                break;
++                 CCharEntity* PChar = zoneutils::GetCharByName((int8*)extra.data() + 4);
++                 if (PChar && PChar->status != STATUS_TYPE::DISAPPEAR && !jailutils::InPrison(PChar))
++                 {
++                     std::unique_ptr<CBasicPacket> newPacket = std::make_unique<CBasicPacket>();
++                     memcpy(*newPacket, packet.data(), std::min<size_t>(packet.size(), PACKET_SIZE));
++                     auto gm_sent = newPacket->ref<uint8>(0x05);
++                     if (PChar->nameflags.flags & FLAG_AWAY && !gm_sent || PChar->m_isGMHidden && !gm_sent)
++                     {
++                         send(MSG_DIRECT, extra.data(), sizeof(uint32), new CMessageStandardPacket(PChar, 0, 0, MsgStd::TellNotReceivedAway));
++                     }
++                     else
++                     {
++                         PChar->pushPacket(std::move(newPacket));
++                     }
++                 }
++                 else
++                 {
++                     send(MSG_DIRECT, extra.data(), sizeof(uint32), new CMessageStandardPacket(PChar, 0, 0, MsgStd::TellNotReceivedOffline));
++                 }
++                 break;
+             }
+             case MSG_CHAT_PARTY:
+             {
