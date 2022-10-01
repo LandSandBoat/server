@@ -208,10 +208,19 @@ bool CMagicState::CanCastSpell(CBattleEntity* PTarget)
         m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, m_PEntity, static_cast<uint16>(m_PSpell->getID()), 0, MSGBASIC_CANNOT_USE_IN_AREA);
         return false;
     }
-    if (m_PEntity->StatusEffectContainer->HasStatusEffect({ EFFECT_SILENCE, EFFECT_MUTE, EFFECT_OMERTA }))
+    if (m_PEntity->StatusEffectContainer->HasStatusEffect({ EFFECT_SILENCE, EFFECT_MUTE }))
     {
         m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, m_PEntity, static_cast<uint16>(m_PSpell->getID()), 0, MSGBASIC_UNABLE_TO_CAST_SPELLS);
         return false;
+    }
+    if (m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_OMERTA))
+    {
+        int16 power = m_PEntity->StatusEffectContainer->GetStatusEffect(EFFECT_OMERTA)->GetPower();
+        if ((1 << (m_PSpell->getSpellGroup() - 1)) & power)
+        {
+            m_errorMsg = std::make_unique<CMessageBasicPacket>(m_PEntity, m_PEntity, static_cast<uint16>(m_PSpell->getID()), 0, MSGBASIC_UNABLE_TO_CAST_SPELLS);
+            return false;
+        }
     }
     if (!HasCost())
     {
@@ -329,18 +338,27 @@ void CMagicState::ApplyEnmity(CBattleEntity* PTarget, int ce, int ve)
     {
         m_PEntity->addModifier(Mod::ENMITY, -m_PEntity->StatusEffectContainer->GetStatusEffect(EFFECT_TRANQUILITY)->GetPower());
     }
+
     if (m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_EQUANIMITY) && m_PSpell->getSpellGroup() == SPELLGROUP_BLACK)
     {
         m_PEntity->addModifier(Mod::ENMITY, -m_PEntity->StatusEffectContainer->GetStatusEffect(EFFECT_EQUANIMITY)->GetPower());
     }
+
     if (m_PSpell->isNa())
     {
         m_PEntity->addModifier(Mod::ENMITY, -(m_PEntity->getMod(Mod::DIVINE_BENISON) >> 1)); // Half of divine benison mod amount = -enmity
     }
+
     // Subtle Sorcery sets Cumulative Enmity of spells to 0
     if (m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_SUBTLE_SORCERY))
     {
         ce = 0;
+    }
+
+    if (m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_DIVINE_EMBLEM) && m_PSpell->getSkillType() == SKILL_DIVINE_MAGIC)
+    {
+        ve = ve * (1.0f + (m_PEntity->StatusEffectContainer->GetStatusEffect(EFFECT_DIVINE_EMBLEM)->GetPower() / 100.0f));
+        ce = ce * (1.0f + (m_PEntity->StatusEffectContainer->GetStatusEffect(EFFECT_DIVINE_EMBLEM)->GetPower() / 100.0f));
     }
 
     if (PTarget != nullptr)
@@ -376,22 +394,33 @@ void CMagicState::ApplyEnmity(CBattleEntity* PTarget, int ce, int ve)
     if (m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_TRANQUILITY) && m_PSpell->getSpellGroup() == SPELLGROUP_WHITE)
     {
         m_PEntity->delModifier(Mod::ENMITY, -m_PEntity->StatusEffectContainer->GetStatusEffect(EFFECT_TRANQUILITY)->GetPower());
+
         if (enmityApplied)
         {
             m_PEntity->StatusEffectContainer->DelStatusEffect(EFFECT_TRANQUILITY);
         }
     }
+
     if (m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_EQUANIMITY) && m_PSpell->getSpellGroup() == SPELLGROUP_BLACK)
     {
         m_PEntity->delModifier(Mod::ENMITY, -m_PEntity->StatusEffectContainer->GetStatusEffect(EFFECT_EQUANIMITY)->GetPower());
+
         if (enmityApplied)
         {
             m_PEntity->StatusEffectContainer->DelStatusEffect(EFFECT_EQUANIMITY);
         }
     }
+
     if (m_PSpell->isNa())
     {
         m_PEntity->delModifier(Mod::ENMITY, -(m_PEntity->getMod(Mod::DIVINE_BENISON) >> 1)); // Half of divine benison mod amount = -enmity
+    }
+
+    if (m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_DIVINE_EMBLEM) &&
+        m_PSpell->getSkillType() == SKILL_DIVINE_MAGIC &&
+        enmityApplied)
+    {
+        m_PEntity->StatusEffectContainer->DelStatusEffect(EFFECT_DIVINE_EMBLEM);
     }
 }
 

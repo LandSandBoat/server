@@ -29,8 +29,8 @@ entity.onMobEngaged = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller or optParams.noKiller then
         local mobID = mob:getID()
         local battlefield = mob:getBattlefield()
         if mobID <= ID.mob.TEMENOS_E_MOB[6] + 4 then

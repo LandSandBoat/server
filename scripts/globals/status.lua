@@ -864,35 +864,36 @@ xi.effect =
 
 xi.effectFlag =
 {
-    NONE            = 0x0000,
-    DISPELABLE      = 0x0001,
-    ERASABLE        = 0x0002,
-    ATTACK          = 0x0004,
-    EMPATHY         = 0x0008,
-    DAMAGE          = 0x0010,
-    DEATH           = 0x0020,
-    MAGIC_BEGIN     = 0x0040,
-    MAGIC_END       = 0x0080,
-    ON_ZONE         = 0x0100,
-    NO_LOSS_MESSAGE = 0x0200,
-    INVISIBLE       = 0x0400,
-    DETECTABLE      = 0x0800,
-    NO_REST         = 0x1000,
-    PREVENT_ACTION  = 0x2000,
-    WALTZABLE       = 0x4000,
-    FOOD            = 0x8000,
-    SONG            = 0x10000,
-    ROLL            = 0x20000,
-    SYNTH_SUPPORT   = 0x40000,
-    CONFRONTATION   = 0x80000,
-    LOGOUT          = 0x100000,
-    BLOODPACT       = 0x200000,
-    ON_JOBCHANGE    = 0x400000,
-    NO_CANCEL       = 0x800000,
-    INFLUENCE       = 0x1000000,
-    OFFLINE_TICK    = 0x2000000,
-    AURA            = 0x4000000,
-    HIDE_TIMER      = 0x8000000,
+    NONE            = 0x00000000,
+    DISPELABLE      = 0x00000001,
+    ERASABLE        = 0x00000002,
+    ATTACK          = 0x00000004,
+    EMPATHY         = 0x00000008,
+    DAMAGE          = 0x00000010,
+    DEATH           = 0x00000020,
+    MAGIC_BEGIN     = 0x00000040,
+    MAGIC_END       = 0x00000080,
+    ON_ZONE         = 0x00000100,
+    NO_LOSS_MESSAGE = 0x00000200,
+    INVISIBLE       = 0x00000400,
+    DETECTABLE      = 0x00000800,
+    NO_REST         = 0x00001000,
+    PREVENT_ACTION  = 0x00002000,
+    WALTZABLE       = 0x00004000,
+    FOOD            = 0x00008000,
+    SONG            = 0x00010000,
+    ROLL            = 0x00020000,
+    SYNTH_SUPPORT   = 0x00040000,
+    CONFRONTATION   = 0x00080000,
+    LOGOUT          = 0x00100000,
+    BLOODPACT       = 0x00200000,
+    ON_JOBCHANGE    = 0x00400000,
+    NO_CANCEL       = 0x00800000,
+    INFLUENCE       = 0x01000000,
+    OFFLINE_TICK    = 0x02000000,
+    AURA            = 0x04000000,
+    HIDE_TIMER      = 0x08000000,
+    ON_ZONE_PATHOS  = 0x10000000,
 }
 
 -----------------------------------
@@ -1243,6 +1244,16 @@ xi.mod =
     DEFENDER_DURATION               = 956,  -- Defender Duration
     ENHANCES_RESTRAINT              = 1045, -- Enhances "Restraint" effect/"Restraint" + (Increases the damage bonus of Restraint by XXX%)
     ENHANCES_BLOOD_RAGE             = 1046, -- Enhances "Blood Rage" effect/"Blood Rage" duration +
+
+    -- Paladin
+    ENHANCES_CHIVALRY               = 1061, -- Enhances "Chivalry" effect (increases the base TP modifier by the provided value / 100, e.g. mod value 5 = +0.05)
+    ENHANCES_DIVINE_EMBLEM          = 1062, -- Enhances "Divine Emblem" effect/"Divine Emblem" + (increases the ability's special enmity bonus by the provided value)
+    ENHANCES_FEALTY                 = 1063, -- Enhances "Fealty" effect (increases Fealty's duration by 4 seconds per Fealty merit)
+    ENHANCES_IRON_WILL              = 1064, -- Enhances "Iron Will" effect (adds +3% Fast Cast per Iron Will merit to Rampart)
+    ENHANCES_GUARDIAN               = 1065, -- Enhances "Guardian" effect (increases Sentinel's duration by 2 seconds per Guardian merit)
+    PALISADE_BLOCK_BONUS            = 1066, -- Increases base block rate while under the effects of Palisade (additive, not multiplicative)
+    REPRISAL_BLOCK_BONUS            = 1067, -- Increases block rate while under the effects of Reprisal (multiplicative, not additive)
+    REPRISAL_SPIKES_BONUS           = 1068, -- Increases Reprisal spikes damage by percentage (e.g. mod value of 50 will increase spikes damage by 50%)
 
     -- Dragoon
     WYVERN_LVL_BONUS                = 1043, -- Wyvern: Lv.+ (Increases wyvern's base level above 99)
@@ -3047,3 +3058,25 @@ xi.pathflag =
     SCRIPT   = 0x08, -- don't overwrite this path before completion (except via another script)
     SLIDE    = 0x10,  -- Slide to end point if close enough (so no over shoot)
 };
+
+-- Check Lua item with:
+-- local isEx = bit.band(item:getFlag(), xi.itemFlag.EX) ~= 0
+xi.itemFlag =
+{
+    WALLHANGING  = 0x0001,
+    -- 01          = 0x0002,
+    MYSTERY_BOX  = 0x0004, -- Can be gained from Gobbie Mystery Box
+    MOG_GARDEN   = 0x0008, -- Can use in Mog Garden
+    MAIL2ACCOUNT = 0x0010, -- CanSendPOL Polutils Value
+    INSCRIBABLE  = 0x0020,
+    NOAUCTION    = 0x0040,
+    SCROLL       = 0x0080,
+    LINKSHELL    = 0x0100, -- Linkshell Polutils Value
+    CANUSE       = 0x0200,
+    CANTRADENPC  = 0x0400,
+    CANEQUIP     = 0x0800,
+    NOSALE       = 0x1000,
+    NODELIVERY   = 0x2000,
+    EX           = 0x4000, -- NoTradePC Polutils Value
+    RARE         = 0x8000,
+}

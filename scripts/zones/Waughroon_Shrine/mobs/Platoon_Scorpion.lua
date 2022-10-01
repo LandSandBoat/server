@@ -61,8 +61,8 @@ entity.onMobInitialize = function(scorpion)
     end)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
-    if isKiller then
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller then
         -- This is used to increase the strength of Wild Rage as scorps die
         local bf = mob:getBattlefield()
         -- should not have to verify because Platoon scorps are only ever in a BC

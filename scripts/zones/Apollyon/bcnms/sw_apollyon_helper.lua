@@ -22,8 +22,8 @@ local firBholgOffsets =
     [5] = { 1, 6 }, -- Galka
 }
 
-xi.apollyon_sw.handleMobDeathFloorOne = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
+xi.apollyon_sw.handleMobDeathFloorOne = function(mob, player, optParams)
+    if optParams.isKiller or optParams.noKiller then
         local mobID       = mob:getID()
         local battlefield = mob:getBattlefield()
         local playerRace  = battlefield:getLocalVar("raceF1")
@@ -56,8 +56,8 @@ end
 -----------------------------------
 -- Mobs in floor 2: Jidra x8
 
-xi.apollyon_sw.handleMobDeathFloorTwo = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
+xi.apollyon_sw.handleMobDeathFloorTwo = function(mob, player, optParams)
+    if optParams.isKiller or optParams.noKiller then
         local mobID = mob:getID()
 
         -- Open portal.
@@ -90,8 +90,8 @@ end
 -----------------------------------
 -- Mobs in floor 3: Armoury Crate x8
 
-xi.apollyon_sw.handleMobDeathFloorThree = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
+xi.apollyon_sw.handleMobDeathFloorThree = function(mob, player, optParams)
+    if optParams.isKiller or optParams.noKiller then
         if GetNPCByID(ID.npc.APOLLYON_SW_PORTAL[3]):getAnimation() ~= xi.animation.OPEN_DOOR then
             xi.limbus.handleDoors(mob:getBattlefield(), true, ID.npc.APOLLYON_SW_PORTAL[3])
         end
@@ -148,8 +148,8 @@ xi.apollyon_sw.handleMobEngagedFloorFour = function(mob, target, mobElement)
     GetMobByID(ID.mob.APOLLYON_SW_MOB[4] + table[3]):updateEnmity(target)
 end
 
-xi.apollyon_sw.handleMobDeathFloorFour = function(mob, player, isKiller, noKiller, mobElement)
-    if isKiller or noKiller then
+xi.apollyon_sw.handleMobDeathFloorFour = function(mob, player, optParams, mobElement)
+    if optParams.isKiller or optParams.noKiller then
         local battlefield = mob:getBattlefield()
 
         -- Fallback for 1-Hit kills. No elemental type chosen, so we choose one.

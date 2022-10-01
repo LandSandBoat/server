@@ -10,8 +10,8 @@ entity.onMobDisengage = function(mob)
     DespawnMob(mob:getID(), 120)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
-    if isKiller then
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller then
         GetNPCByID(ID.npc.CERMET_HEADSTONE):setLocalVar("cooldown", os.time() + 900)
     end
 end

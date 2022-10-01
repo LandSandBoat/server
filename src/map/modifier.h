@@ -368,15 +368,23 @@ enum class Mod
     GILFINDER            = 897,  // Gilfinder, duh
 
     // Paladin
-    HOLY_CIRCLE_DURATION   = 857, // Holy Circle extended duration in seconds
-    RAMPART_DURATION       = 92,  // Rampart duration in seconds
-    ABSORB_PHYSDMG_TO_MP   = 426, // Absorbs a percentage of physical damage taken to MP.
-    SHIELD_MASTERY_TP      = 485, // Shield mastery TP bonus when blocking with a shield
-    SENTINEL_EFFECT        = 837, // Sentinel effect in percents
-    SHIELD_DEF_BONUS       = 905, // Shield Defense Bonus
-    COVER_TO_MP            = 965, // Converts a successful cover's phsyical damage to MP
-    COVER_MAGIC_AND_RANGED = 966, // Redirects ranged and single target magic attacks to the cover ability user
-    COVER_DURATION         = 967, // Increases Cover Duration
+    HOLY_CIRCLE_DURATION   = 857,  // Holy Circle extended duration in seconds
+    RAMPART_DURATION       = 92,   // Rampart duration in seconds
+    ABSORB_PHYSDMG_TO_MP   = 426,  // Absorbs a percentage of physical damage taken to MP.
+    SHIELD_MASTERY_TP      = 485,  // Shield mastery TP bonus when blocking with a shield
+    SENTINEL_EFFECT        = 837,  // Sentinel effect in percents
+    SHIELD_DEF_BONUS       = 905,  // Shield Defense Bonus
+    COVER_TO_MP            = 965,  // Converts a successful cover's phsyical damage to MP
+    COVER_MAGIC_AND_RANGED = 966,  // Redirects ranged and single target magic attacks to the cover ability user
+    COVER_DURATION         = 967,  // Increases Cover Duration
+    ENHANCES_CHIVALRY      = 1061, // Enhances "Chivalry" effect (increases the base TP modifier by the provided value / 100, e.g. mod value 5 = +0.05)
+    ENHANCES_DIVINE_EMBLEM = 1062, // Enhances "Divine Emblem" effect/"Divine Emblem" + (increases the ability's special enmity bonus by the provided value)
+    ENHANCES_FEALTY        = 1063, // Enhances "Fealty" effect (increases Fealty's duration by 4 seconds per Fealty merit)
+    ENHANCES_IRON_WILL     = 1064, // Enhances "Iron Will" effect (adds +3% Fast Cast per Iron Will merit to Rampart)
+    ENHANCES_GUARDIAN      = 1065, // Enhances "Guardian" effect (increases Sentinel's duration by 2 seconds per Guardian merit)
+    PALISADE_BLOCK_BONUS   = 1066, // Increases base block rate while under the effects of Palisade (additive, not multiplicative)
+    REPRISAL_BLOCK_BONUS   = 1067, // Increases block rate while under the effects of Reprisal (multiplicative, not additive)
+    REPRISAL_SPIKES_BONUS  = 1068, // Increases Reprisal spikes damage by percentage (e.g. mod value 50 = +50% spikes damage)
 
     // Dark Knight
     ARCANE_CIRCLE_DURATION = 858, // Arcane Circle extended duration in seconds
@@ -917,7 +925,7 @@ enum class Mod
     // 888
     // 936
     //
-    // SPARE = 1061, and onward
+    // SPARE = 1069, and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

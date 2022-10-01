@@ -27,7 +27,7 @@ entity.onMobDisengage = function(mob)
     mob:showText(mob, ID.text.ANIMATED_LONGBOW_DIALOG+2)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 
     player:showText(mob, ID.text.ANIMATED_LONGBOW_DIALOG+1)
 end

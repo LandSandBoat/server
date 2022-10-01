@@ -18,7 +18,7 @@ entity.onMobSpawn = function(mob)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     if xi.settings.main.OLDSCHOOL_G2 then
         -- show ??? for desired duration
         -- notify people on the quest who need the KI

@@ -164,7 +164,7 @@ quest.sections =
 
             ['Ubume'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if quest:getVar(player, 'Prog') <= 3 then
                         quest:setVar(player, 'Stage', 1)
                     end
@@ -190,7 +190,7 @@ quest.sections =
         {
             ['Doman'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if
                         player:hasKeyItem(xi.ki.YOMOTSU_HIRASAKA) and
                         (GetMobByID(valkurmID.mob.ONRYO):isDead() or not GetMobByID(valkurmID.mob.ONRYO):isSpawned())
@@ -202,7 +202,7 @@ quest.sections =
 
             ['Onryo'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if
                         player:hasKeyItem(xi.ki.YOMOTSU_HIRASAKA) and
                         (GetMobByID(valkurmID.mob.DOMAN):isDead() or not GetMobByID(valkurmID.mob.DOMAN):isSpawned())

@@ -41,35 +41,36 @@ enum class EFFECTOVERWRITE : uint8
 
 enum EFFECTFLAG
 {
-    EFFECTFLAG_NONE            = 0x0000000,
-    EFFECTFLAG_DISPELABLE      = 0x0000001,
-    EFFECTFLAG_ERASABLE        = 0x0000002,
-    EFFECTFLAG_ATTACK          = 0x0000004, // disappears upon attacking
-    EFFECTFLAG_EMPATHY         = 0X0000008, // effect can be copied to wyvern by use of merited Spirit Link
-    EFFECTFLAG_DAMAGE          = 0x0000010, // disappears upon being attacked
-    EFFECTFLAG_DEATH           = 0x0000020, // disappears upon death/ko
-    EFFECTFLAG_MAGIC_BEGIN     = 0x0000040, // disappears upon spellcasting start
-    EFFECTFLAG_MAGIC_END       = 0x0000080, // disappears upon spellcasting complete
-    EFFECTFLAG_ON_ZONE         = 0x0000100,
-    EFFECTFLAG_NO_LOSS_MESSAGE = 0x0000200, // Suppress effect worn off message.
-    EFFECTFLAG_INVISIBLE       = 0x0000400, // invisible effect
-    EFFECTFLAG_DETECTABLE      = 0x0000800, // invisible, sneak, deo
-    EFFECTFLAG_NO_REST         = 0x0001000, // prevents resting, curse II, plague, disease
-    EFFECTFLAG_PREVENT_ACTION  = 0x0002000, // sleep, lullaby, stun, petro. Not implemented
-    EFFECTFLAG_WALTZABLE       = 0x0004000, // for healing waltzable spells
-    EFFECTFLAG_FOOD            = 0x0008000,
-    EFFECTFLAG_SONG            = 0x0010000, // bard songs
-    EFFECTFLAG_ROLL            = 0x0020000, // corsair rolls
-    EFFECTFLAG_SYNTH_SUPPORT   = 0x0040000, // Synthesis Image Support
-    EFFECTFLAG_CONFRONTATION   = 0x0080000,
-    EFFECTFLAG_LOGOUT          = 0x0100000,
-    EFFECTFLAG_BLOODPACT       = 0x0200000,
-    EFFECTFLAG_ON_JOBCHANGE    = 0x0400000, // Removes effect when you change jobs
-    EFFECTFLAG_NO_CANCEL       = 0x0800000, // CAN NOT CLICK IT OFF IN CLIENT
-    EFFECTFLAG_INFLUENCE       = 0x1000000, // Influence effects - e.g. Signet, Sanction, Sigil, Ionis
-    EFFECTFLAG_OFFLINE_TICK    = 0x2000000, // Duration elapses while offline
-    EFFECTFLAG_AURA            = 0x4000000, // Is an aura type effect
-    EFFECTFLAG_HIDE_TIMER      = 0x8000000, // Sends "Always" in the packet, even though timer is tracked
+    EFFECTFLAG_NONE            = 0x00000000,
+    EFFECTFLAG_DISPELABLE      = 0x00000001,
+    EFFECTFLAG_ERASABLE        = 0x00000002,
+    EFFECTFLAG_ATTACK          = 0x00000004, // disappears upon attacking
+    EFFECTFLAG_EMPATHY         = 0X00000008, // effect can be copied to wyvern by use of merited Spirit Link
+    EFFECTFLAG_DAMAGE          = 0x00000010, // disappears upon being attacked
+    EFFECTFLAG_DEATH           = 0x00000020, // disappears upon death/ko
+    EFFECTFLAG_MAGIC_BEGIN     = 0x00000040, // disappears upon spellcasting start
+    EFFECTFLAG_MAGIC_END       = 0x00000080, // disappears upon spellcasting complete
+    EFFECTFLAG_ON_ZONE         = 0x00000100,
+    EFFECTFLAG_NO_LOSS_MESSAGE = 0x00000200, // Suppress effect worn off message.
+    EFFECTFLAG_INVISIBLE       = 0x00000400, // invisible effect
+    EFFECTFLAG_DETECTABLE      = 0x00000800, // invisible, sneak, deo
+    EFFECTFLAG_NO_REST         = 0x00001000, // prevents resting, curse II, plague, disease
+    EFFECTFLAG_PREVENT_ACTION  = 0x00002000, // sleep, lullaby, stun, petro. Not implemented
+    EFFECTFLAG_WALTZABLE       = 0x00004000, // for healing waltzable spells
+    EFFECTFLAG_FOOD            = 0x00008000,
+    EFFECTFLAG_SONG            = 0x00010000, // bard songs
+    EFFECTFLAG_ROLL            = 0x00020000, // corsair rolls
+    EFFECTFLAG_SYNTH_SUPPORT   = 0x00040000, // Synthesis Image Support
+    EFFECTFLAG_CONFRONTATION   = 0x00080000,
+    EFFECTFLAG_LOGOUT          = 0x00100000,
+    EFFECTFLAG_BLOODPACT       = 0x00200000,
+    EFFECTFLAG_ON_JOBCHANGE    = 0x00400000, // Removes effect when you change jobs
+    EFFECTFLAG_NO_CANCEL       = 0x00800000, // CAN NOT CLICK IT OFF IN CLIENT
+    EFFECTFLAG_INFLUENCE       = 0x01000000, // Influence effects - e.g. Signet, Sanction, Sigil, Ionis
+    EFFECTFLAG_OFFLINE_TICK    = 0x02000000, // Duration elapses while offline
+    EFFECTFLAG_AURA            = 0x04000000, // Is an aura type effect
+    EFFECTFLAG_HIDE_TIMER      = 0x08000000, // Sends "Always" in the packet, even though timer is tracked
+    EFFECTFLAG_ON_ZONE_PATHOS  = 0x10000000, // removes the effect zoning into a non instanced zone
 };
 
 enum EFFECT

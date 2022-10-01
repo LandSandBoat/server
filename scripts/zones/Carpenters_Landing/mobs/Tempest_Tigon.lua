@@ -18,7 +18,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 168)
 end
 

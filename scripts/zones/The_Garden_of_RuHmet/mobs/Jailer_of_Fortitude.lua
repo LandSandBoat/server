@@ -59,7 +59,7 @@ entity.onMagicHit = function(caster, target, spell)
     return 1
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     -- Despawn the pets if alive
     DespawnMob(ID.mob.KFGHRAH_WHM)
     DespawnMob(ID.mob.KFGHRAH_BLM)

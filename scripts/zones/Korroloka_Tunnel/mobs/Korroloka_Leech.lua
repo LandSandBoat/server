@@ -17,7 +17,7 @@ entity.onMobSpawn = function(mob)
     DespawnMob(mob:getID(), 180)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     if
         GetMobByID(ID.mob.KORROLOKA_LEECH_I):isDead() and
         GetMobByID(ID.mob.KORROLOKA_LEECH_II):isDead() and

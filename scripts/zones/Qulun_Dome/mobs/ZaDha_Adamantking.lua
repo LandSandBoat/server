@@ -22,9 +22,9 @@ entity.onAdditionalEffect = function(mob, target, damage)
     return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.SLOW, { power = 3000 })
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     player:addTitle(xi.title.ADAMANTKING_USURPER)
-    if isKiller then
+    if optParams.isKiller then
         mob:showText(mob, ID.text.QUADAV_KING_DEATH)
     end
 end

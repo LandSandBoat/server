@@ -906,20 +906,6 @@ namespace battleutils
                     if (Action->reaction == REACTION::BLOCK)
                     {
                         PAttacker->takeDamage(spikesDamage, PDefender, ATTACK_TYPE::MAGICAL, DAMAGE_TYPE::LIGHT);
-                        auto* PEffect = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_REPRISAL);
-                        if (PEffect)
-                        {
-                            // Subpower is the remaining damage that can be reflected. When it reaches 0 the effect ends
-                            int remainingReflect = PEffect->GetSubPower();
-                            if (remainingReflect - abs(damage) <= 0) // abs to account for absorbed reprisal
-                            {
-                                PDefender->StatusEffectContainer->DelStatusEffect(EFFECT_REPRISAL);
-                            }
-                            else
-                            {
-                                PEffect->SetSubPower(remainingReflect - abs(damage));
-                            }
-                        }
                     }
                     else
                     {
@@ -1787,28 +1773,29 @@ namespace battleutils
     }
 
     /***********************************************************************
-            Calculates the block rate of the defender
+    Calculates the block rate of the defender
     Incorporates testing and data from:
     http://www.ffxiah.com/forum/topic/21671/paladin-faq-info-and-trade-studies/34/#2581818
     https://docs.google.com/spreadsheet/ccc?key=0AkX3maplDraRdFdCZHI2OU93aVgtWlZhN3ozZEtnakE#gid=0
     http://www.ffxionline.com/forums/paladin/55139-shield-data-size-2-vs-size-3-a.html
-
-    Formula is:
-    ShieldBaseRate + (DefenderShieldSkill - AttackerCombatSkill) * SkillModifier
-
-    Skill Modifier appears to be 0.215 based on the data available.
+    https://www.bg-wiki.com/ffxi/Shield_Skill - Base calculations
+    https://www.ffxiah.com/forum/topic/53625/make-paladin-great-again/6/#3434884 - Palisade +base block rate
 
     Base block rates are (small to large shield type) 55% -> 50% -> 45% -> 30%
     Aegis is a special case, having the base block rate of a size 2 type.
     ************************************************************************/
     uint8 GetBlockRate(CBattleEntity* PAttacker, CBattleEntity* PDefender)
     {
-        int8   shieldSize   = 3;
-        int32  base         = 0;
-        float  blockRateMod = (100.0f + PDefender->getMod(Mod::SHIELDBLOCKRATE)) / 100.0f;
-        auto*  weapon       = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_MAIN]);
-        uint16 attackskill  = PAttacker->GetSkill((SKILLTYPE)(weapon ? weapon->getSkillType() : 0));
-        uint16 blockskill   = PDefender->GetSkill(SKILL_SHIELD);
+        int8   base          = 0;
+        int8   shieldSize    = 3;
+        int8   blockRate     = 0;
+        int8   skillModifier = 0;
+        int16  blockRateMod  = PDefender->getMod(Mod::SHIELDBLOCKRATE);
+        int16  palisadeMod   = PDefender->getMod(Mod::PALISADE_BLOCK_BONUS);
+        float  reprisalMult  = 1.0f;
+        auto*  weapon        = dynamic_cast<CItemWeapon*>(PAttacker->m_Weapons[SLOT_MAIN]);
+        uint16 attackSkill   = PAttacker->GetSkill((SKILLTYPE)(weapon ? weapon->getSkillType() : 0));
+        uint16 blockSkill    = PDefender->GetSkill(SKILL_SHIELD);
 
         if (PDefender->objtype == TYPE_PC)
         {
@@ -1827,6 +1814,7 @@ namespace battleutils
         else if (PDefender->objtype == TYPE_MOB && PDefender->GetMJob() == JOB_PLD)
         {
             CMobEntity* PMob = (CMobEntity*)PDefender;
+
             if (PMob->m_EcoSystem != ECOSYSTEM::UNDEAD && PMob->m_EcoSystem != ECOSYSTEM::BEASTMAN)
             {
                 return 0;
@@ -1834,15 +1822,16 @@ namespace battleutils
         }
         else if (PDefender->objtype == TYPE_PET && static_cast<CPetEntity*>(PDefender)->getPetType() == PET_TYPE::AUTOMATON && PDefender->GetMJob() == JOB_PLD)
         {
-            float skillmodifier = (PDefender->GetSkill(SKILL_AUTOMATON_MELEE) - attackskill) * 0.215f;
-            base                = PDefender->getMod(Mod::SHIELDBLOCKRATE);
+            skillModifier = (int8)((PDefender->GetSkill(SKILL_AUTOMATON_MELEE) - attackSkill) * 0.215f);
+            base          = PDefender->getMod(Mod::SHIELDBLOCKRATE);
+
             if (base <= 0)
             {
                 return 0;
             }
             else
             {
-                return base + (int32)skillmodifier;
+                return base + skillModifier;
             }
         }
         else
@@ -1852,29 +1841,55 @@ namespace battleutils
 
         switch (shieldSize)
         {
-            case 1: // buckler
+            case 1: // Buckler
                 base = 55;
                 break;
-            case 2: // round
-            case 5: // aegis and srivatsa
-                base = 50;
+            case 2: // Round
+                base = 40;
                 break;
-            case 3: // kite
+            case 3: // Kite
                 base = 45;
                 break;
-            case 4: // tower
+            case 4: // Tower
                 base = 30;
                 break;
-            case 6: // ochain
+            case 5: // Aegis and Srivatsa
+                base = 50;
+                break;
+            case 6: // Ochain
                 base = 110;
                 break;
             default:
                 return 0;
         }
 
-        float skillmodifier = (blockskill - attackskill) * 0.215f;
-        return (int8)std::clamp((int32)((base + (int32)skillmodifier) * blockRateMod), 5,
-                                (shieldSize == 6 ? 100 : std::max<int32>((int32)(65 * blockRateMod), 100)));
+        // Check for Reprisal and adjust skill and block rate bonus multiplier
+        if (PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_REPRISAL))
+        {
+            blockSkill   = (uint16)(blockSkill * 1.15f);
+            reprisalMult = 1.5f; // Default is 1.5x
+
+            // Adamas and Priwen set the multiplier to 3.0x while equipped
+            if (PDefender->getMod(Mod::REPRISAL_BLOCK_BONUS) > 0)
+            {
+                reprisalMult = 3.0f;
+            }
+        }
+
+        skillModifier = (int16)((blockSkill - attackSkill) * 0.2325f);
+
+        // Add skill and Palisade bonuses
+        base += skillModifier + palisadeMod;
+        // Multiply by Reprisal's bonus
+        base = (int8)(base * reprisalMult);
+        // Add Chance of Successful Block
+        base += blockRateMod;
+
+        // Apply the lower and upper caps
+        blockRate = (base < 5) ? 5 : base;
+        blockRate = (base > 100) ? 100 : base;
+
+        return blockRate;
     }
 
     uint8 GetParryRate(CBattleEntity* PAttacker, CBattleEntity* PDefender)
@@ -2091,20 +2106,24 @@ namespace battleutils
                     }
 
                     // Reprisal
-                    if ((damage > 0) && PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_REPRISAL))
+                    if (damage > 0 && PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_REPRISAL))
                     {
                         // Reflect a portion of the blocked damage back. This is calculated before Stoneskin, Phalanx, Sentinel or Invincible
-                        // Subpower is the remaining damage that can be reflected. When it reaches 0 the effect ends
                         CStatusEffect* reprisalEffect = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_REPRISAL);
+                        float          spikesBonus    = 1.f + (PDefender->getMod(Mod::REPRISAL_SPIKES_BONUS) / 100.f);
+                        int16          effectPower    = (int16)(reprisalEffect->GetPower() * spikesBonus);
                         int32          blockedDamage  = (damage * (100 - absorb)) / 100;
+                        int32          spikesDamage   = 0;
+
                         if (PDefender->StatusEffectContainer->HasStatusEffect({ EFFECT_INVINCIBLE, EFFECT_SENTINEL }))
                         {
                             blockedDamage = (baseDamage * (100 - absorb)) / 100;
                         }
-                        // Subpower is the remaining damage that can be reflected. When it reaches 0 the effect ends
+
+                        spikesDamage = blockedDamage * (effectPower / 100);
+
                         // Set Reprisal spike damage
-                        PDefender->setModifier(Mod::SPIKES_DMG,
-                                               std::clamp<int16>((blockedDamage * (reprisalEffect->GetPower())) / 100, 0, reprisalEffect->GetSubPower()));
+                        PDefender->setModifier(Mod::SPIKES_DMG, spikesDamage);
                     }
                 }
 
@@ -5596,6 +5615,13 @@ namespace battleutils
 
     uint8 GetSpellAoEType(CBattleEntity* PCaster, CSpell* PSpell)
     {
+        // Majesty turns the Cure and Protect spell families into AoE when active
+        if (PCaster->StatusEffectContainer->HasStatusEffect(EFFECT_MAJESTY) &&
+            (PSpell->getSpellFamily() == SPELLFAMILY_CURE || PSpell->getSpellFamily() == SPELLFAMILY_PROTECT))
+        {
+            return SPELLAOE_RADIAL;
+        }
+
         if (PSpell->getAOE() == SPELLAOE_RADIAL_ACCE) // Divine Veil goes here because -na spells have AoE w/ Accession
         {
             if (PCaster->StatusEffectContainer->HasStatusEffect(EFFECT_ACCESSION) ||
@@ -5609,6 +5635,7 @@ namespace battleutils
                 return SPELLAOE_NONE;
             }
         }
+
         if (PSpell->getAOE() == SPELLAOE_RADIAL_MANI)
         {
             if (PCaster->StatusEffectContainer->HasStatusEffect(EFFECT_MANIFESTATION))
@@ -5620,6 +5647,7 @@ namespace battleutils
                 return SPELLAOE_NONE;
             }
         }
+
         if (PSpell->getAOE() == SPELLAOE_PIANISSIMO)
         {
             if (PCaster->StatusEffectContainer->HasStatusEffect(EFFECT_PIANISSIMO))
@@ -5632,6 +5660,7 @@ namespace battleutils
                 return SPELLAOE_RADIAL;
             }
         }
+
         if (PSpell->getAOE() == SPELLAOE_DIFFUSION)
         {
             if (PCaster->StatusEffectContainer->HasStatusEffect(EFFECT_DIFFUSION))

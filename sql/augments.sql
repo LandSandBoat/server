@@ -1652,10 +1652,10 @@ INSERT INTO `augments` VALUES (1360,0,0,0,0,0); -- Enhances "Feint" effect
 INSERT INTO `augments` VALUES (1361,0,886,1,0,0); -- Enh. "Assassins Charge" effect
 INSERT INTO `augments` VALUES (1362,0,0,0,0,0); -- 1362 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (1363,0,0,0,0,0); -- 1363 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
-INSERT INTO `augments` VALUES (1364,0,0,0,0,0); -- Enhances "Iron Will" effect
-INSERT INTO `augments` VALUES (1365,0,0,0,0,0); -- Enhances "Fealty" effect
-INSERT INTO `augments` VALUES (1366,0,0,0,0,0); -- Enhances "Chivalry" effect
-INSERT INTO `augments` VALUES (1367,0,0,0,0,0); -- Enhances "Guardian" effect
+INSERT INTO `augments` VALUES (1364,3,1064,1,0,0); -- Enhances "Iron Will" effect
+INSERT INTO `augments` VALUES (1365,4,1063,1,0,0); -- Enhances "Fealty" effect
+INSERT INTO `augments` VALUES (1366,5,1061,1,0,0); -- Enhances "Chivalry" effect
+INSERT INTO `augments` VALUES (1367,2,1065,1,0,0); -- Enhances "Guardian" effect
 INSERT INTO `augments` VALUES (1368,0,0,0,0,0); -- 1368 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (1369,0,0,0,0,0); -- 1369 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (1370,0,0,0,0,0); -- Enhances "Dark Seal" effect

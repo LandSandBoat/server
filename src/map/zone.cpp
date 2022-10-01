@@ -711,6 +711,8 @@ void CZone::IncreaseZoneCounter(CCharEntity* PChar)
         createZoneTimer();
     }
 
+    PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_ON_ZONE_PATHOS, true);
+
     CharZoneIn(PChar);
 }
 

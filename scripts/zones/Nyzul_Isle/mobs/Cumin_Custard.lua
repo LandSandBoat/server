@@ -13,8 +13,8 @@ entity.onMobInitialize = function(mob)
     mob:setMod(xi.mod.WIND_ABSORB, 100)
 end
 
-entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller or optParams.noKiller then
         xi.nyzul.spawnChest(mob, player)
         xi.nyzul.enemyLeaderKill(mob)
     end

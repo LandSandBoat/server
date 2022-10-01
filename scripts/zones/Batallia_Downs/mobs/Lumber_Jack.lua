@@ -22,7 +22,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     mob:setLocalVar("death", 1)
 end
 

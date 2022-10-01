@@ -95,7 +95,7 @@ entity.onMobSpawn = function(mob)
     })
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)

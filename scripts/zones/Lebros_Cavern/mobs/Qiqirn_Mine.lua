@@ -25,7 +25,7 @@ entity.onMobSpawn = function(mob)
     mob:timer(11000, function(mobArg) mobArg:setHP(0) end)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity
