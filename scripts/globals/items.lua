@@ -252,6 +252,7 @@ xi.items =
     CARNATION                       = 948,
     RAIN_LILY                       = 949,
     TAHRONGI_CACTUS                 = 950,
+    WIJNRUIT                        = 951,
     TREANT_BULB                     = 953,
     LILAC                           = 956,
     AMARYLLIS                       = 957,
