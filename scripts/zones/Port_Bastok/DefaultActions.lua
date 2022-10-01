@@ -14,6 +14,7 @@ return {
     ['Kurando']      = { event = 28 },
     ['Latifah']      = { event = 13 },
     ['Mine_Konte']   = { event = 42 },
+    ['Oggbi']        = { event = 230 },
     ['Otto']         = { event = 20 },
     ['Panana']       = { event = 43 },
     ['Paujean']      = { event = 25 },

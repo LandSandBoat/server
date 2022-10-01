@@ -2522,6 +2522,7 @@ xi.items =
     SILVER_NAME_TAG                 = 13116,
     TIGER_STOLE                     = 13119,
     BEAST_COLLAR                    = 13121,
+    MINERS_PENDANT                  = 13122,
     SPECTACLES                      = 13128,
     ASHURA_NECKLACE                 = 13134,
     PROMISE_BADGE                   = 13135,
