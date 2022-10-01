@@ -7,7 +7,7 @@ require("scripts/globals/battlefield")
 require("scripts/globals/keyitems")
 require("scripts/globals/titles")
 require("scripts/globals/missions")
-require("scripts/globals/zones")
+require("scripts/globals/zone")
 -----------------------------------
 
 local content = BattlefieldMission:new({

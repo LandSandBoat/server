@@ -176,11 +176,11 @@ content.groups =
         },
         death = function(mob, count)
             if count == 2 then
-                xi.limbus.showCrate(ID.SE_APOLLYON.npc.TIME_CRATES[2])
+                npcUtil.showCrate(GetNPCByID(ID.SE_APOLLYON.npc.TIME_CRATES[2]))
             elseif count == 4 then
                 xi.limbus.showRecoverCrate(ID.SE_APOLLYON.npc.RECOVER_CRATES[2])
             elseif count == 8 then
-                xi.limbus.showCrate(ID.SE_APOLLYON.npc.ITEM_CRATES[2])
+                npcUtil.showCrate(GetNPCByID(ID.SE_APOLLYON.npc.ITEM_CRATES[2]))
             end
         end,
     },
@@ -220,7 +220,7 @@ content.groups =
             if count == 2 then
                 local crate = GetNPCByID(ID.SE_APOLLYON.npc.TIME_CRATES[3])
                 crate:setPos(floorThreeCratePositions[battlefield:getLocalVar("timeCrateIndex")])
-                xi.limbus.showCrate(ID.SE_APOLLYON.npc.TIME_CRATES[3])
+                npcUtil.showCrate(GetNPCByID(ID.SE_APOLLYON.npc.TIME_CRATES[3]))
 
             elseif count == 4 then
                 local crate = GetMobByID(ID.SE_APOLLYON.npc.RECOVER_CRATES[3])
@@ -230,7 +230,7 @@ content.groups =
             elseif count == 8 then
                 local crate = GetNPCByID(ID.SE_APOLLYON.npc.ITEM_CRATES[3])
                 crate:setPos(floorThreeCratePositions[battlefield:getLocalVar("itemCrateIndex")])
-                xi.limbus.showCrate(ID.SE_APOLLYON.npc.ITEM_CRATES[3])
+                npcUtil.showCrate(GetNPCByID(ID.SE_APOLLYON.npc.ITEM_CRATES[3]))
             end
         end,
     },

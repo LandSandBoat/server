@@ -122,7 +122,7 @@ uint8 CBattlefieldHandler::LoadBattlefield(CCharEntity* PChar, const Battlefield
             return BATTLEFIELD_RETURN_CODE_REQS_NOT_MET;
         }
 
-        auto* PBattlefield = new CBattlefield(registration.id, m_PZone, registration.area, PChar);
+        auto* PBattlefield = new CBattlefield(registration.id, m_PZone, registration.area, PChar, false);
 
         auto* name                = sql->GetData(0);
         auto* recordholder        = sql->GetData(1);
@@ -165,7 +165,7 @@ uint8 CBattlefieldHandler::LoadBattlefield(CCharEntity* PChar, const Battlefield
         return BATTLEFIELD_RETURN_CODE_CUTSCENE;
     }
 
-    auto* PBattlefield = new CBattlefield(registration.id, m_PZone, registration.area, PChar);
+    auto* PBattlefield = new CBattlefield(registration.id, m_PZone, registration.area, PChar, true);
 
     const auto* fmtQuery = "SELECT name, fastestName, fastestTime, fastestPartySize\
                             FROM bcnm_info i\

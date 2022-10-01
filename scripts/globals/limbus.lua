@@ -484,13 +484,6 @@ function xi.limbus.spawnRandomCrate(npc, battlefield, var, mask, canMimic)
     end
 end
 
-function xi.limbus.showCrate(crateID)
-    local crate = GetNPCByID(crateID)
-    crate:setStatus(xi.status.NORMAL)
-    crate:setUntargetable(false)
-    crate:resetLocalVars()
-end
-
 function xi.limbus.showRecoverCrate(crateID)
     local crate = GetMobByID(crateID)
     crate:setAnimationSub(8)

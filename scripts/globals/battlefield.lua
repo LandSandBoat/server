@@ -107,6 +107,7 @@ end
 --  - area: Some battlefields has multiple areas (Burning Circles) while others have fixed areas (Apollyon). Set to have a fixed area. (optional)
 --  - entryNPC: The name of the NPC used for entering
 --  - exitNPC: The name of the NPC used for exiting
+--  - delayToExit: Amount of time to wait before exiting the battlefield. Defaults to 5 seconds. (optional)
 --  - requiredItems: Items required to be traded to enter the battlefield (optional)
 --  - createWornItem: Should a worn item is created with the required item (optional)
 --  - requiredKeyItems: Key items required to be able to enter the battlefield - these are removed upon entry (optional)
@@ -137,6 +138,7 @@ function Battlefield:new(data)
     obj.menuBit = data.menuBit
     -- Some battlefields has multiple areas (Burning Circles) while others have fixed areas (Apollyon). Set to have a fixed area.
     obj.area = data.area
+    obj.delayToExit = data.delayToExit or 5
     -- Monster battlefield groups added with battlefield:addGroups()
     obj.groups = {}
     -- Pathing for monsters and npcs within the battlefield
@@ -241,6 +243,10 @@ function Battlefield:register()
 end
 
 function Battlefield:checkRequirements(player, npc, registrant, trade)
+    if (self.entryNpc ~= npc:getName()) then
+        return false
+    end
+
     for _, keyItem in ipairs(self.requiredKeyItems) do
         if not player:hasKeyItem(keyItem) then
             return false
@@ -326,7 +332,7 @@ function Battlefield:onEntryTrigger(player, npc)
             return false
         end
 
-        if not self.checkRequirements(player, npc, bfid, false) then
+        if not self:checkRequirements(player, npc, bfid, false) then
             return false
         end
 
@@ -485,7 +491,8 @@ function Battlefield:onBattlefieldInitialise(battlefield)
         battlefield:setLocalVar("loot", 1)
     end
 
-    battlefield:addGroups(self.groups)
+    hasMultipleAreas = not self.area
+    battlefield:addGroups(self.groups, hasMultipleAreas)
 
     for mobId, path in pairs(self.paths) do
         GetMobByID(mobId):pathThrough(path, xi.path.flag.PATROL)
@@ -493,65 +500,30 @@ function Battlefield:onBattlefieldInitialise(battlefield)
 end
 
 function Battlefield:onBattlefieldTick(battlefield, tick)
-    local leavecode     = -1
-    local canLeave      = false
-
     local status        = battlefield:getStatus()
-    local players       = battlefield:getPlayers()
     local cutsceneTimer = battlefield:getLocalVar("cutsceneTimer")
-    local phaseChange   = battlefield:getLocalVar("phaseChange")
+    local isExiting = status == xi.battlefield.status.LOST or status == xi.battlefield.status.WON
 
-    if status == xi.battlefield.status.LOST then
-        leavecode = xi.battlefield.leaveCode.LOST
-    elseif status == xi.battlefield.status.WON then
-        leavecode = xi.battlefield.leaveCode.WON
-    end
-
-    if leavecode ~= -1 then
-        -- Artificially inflate the time we remain inside the battlefield.
-        battlefield:setLocalVar("cutsceneTimer", cutsceneTimer + 1)
-
-        canLeave = battlefield:getLocalVar("loot") == 0
-
-        if status == xi.battlefield.status.WON and not canLeave then
-            if battlefield:getLocalVar("lootSpawned") == 0 and battlefield:spawnLoot() then
-                canLeave = false
-            elseif battlefield:getLocalVar("lootSeen") == 1 then
-                canLeave = true
-            end
-        end
+    if isExiting then
+        battlefield:setLocalVar("cutsceneTimer", cutsceneTimer - 1)
     end
 
     -- Check that players haven't all died or that their dead time is over.
+    local players = battlefield:getPlayers()
     xi.battlefield.HandleWipe(battlefield, players)
 
+    local hasTimeRemaining = xi.battlefield.SendTimePrompts(battlefield, players)
+
     -- Cleanup battlefield.
-    if
-        not xi.battlefield.SendTimePrompts(battlefield, players) or -- If we cant send anymore time prompts, they are out of time.
-        (canLeave and cutsceneTimer >= 15)                          -- Players won and artificial time inflation is over.
-    then
+    -- TODO(jmcmorris): Can we clean this up when players wipe?
+    if not hasTimeRemaining or (isExiting and cutsceneTimer <= 0) then
         battlefield:cleanup(true)
-    elseif status == xi.battlefield.status.LOST then -- Players lost.
+    elseif status == xi.battlefield.status.LOST then
         for _, player in pairs(players) do
             player:messageSpecial(zones[player:getZoneID()].text.PARTY_MEMBERS_HAVE_FALLEN)
         end
 
         battlefield:cleanup(true)
-    end
-
-    -- Check if theres at least 1 mob alive.
-    local killedallmobs = true
-    local mobs = battlefield:getMobs(true, false)
-    for _, mob in pairs(mobs) do
-        if mob:isAlive() then
-            killedallmobs = false
-            break
-        end
-    end
-
-    -- Set win status.
-    if killedallmobs and phaseChange == 0 then
-        battlefield:setStatus(xi.battlefield.status.WON)
     end
 end
 
@@ -598,6 +570,68 @@ end
 
 function Battlefield:onBattlefieldLoss(player, battlefield)
     player:startEvent(32002)
+end
+
+function Battlefield:handleAllMonstersDefeated(mob)
+    local battlefield = mob:getBattlefield()
+    local crateId = battlefield:getArmouryCrate()
+    if crateId ~= 0 then
+        local crate = GetNPCByID(crateId)
+        npcUtil.showCrate(crate)
+        crate:addListener("ON_TRIGGER", "TRIGGER_CRATE", utils.bind(self.handleOpenArmouryCrate, self))
+    else
+        battlefield:setLocalVar("cutsceneTimer", self.delayToExit)
+        battlefield:setStatus(xi.battlefield.status.WON)
+    end
+end
+
+function Battlefield:handleOpenArmouryCrate(player, npc)
+    npcUtil.openCrate(npc, function()
+        local battlefield = player:getBattlefield()
+        self:handleLootRolls(battlefield, self.loot, npc)
+        battlefield:setStatus(xi.battlefield.status.WON)
+        battlefield:setLocalVar("cutsceneTimer", self.delayToExit)
+    end)
+end
+
+function Battlefield:handleLootRolls(battlefield, lootTable, npc)
+    players = battlefield:getPlayers()
+    for i = 1, #lootTable, 1 do
+        local lootGroup = lootTable[i]
+
+        if lootGroup then
+            local max = 0
+
+            for _, entry in pairs(lootGroup) do
+                max = max + entry.droprate
+            end
+
+            local roll = math.random(max)
+
+            for _, entry in pairs(lootGroup) do
+                max = max - entry.droprate
+
+                if roll > max then
+                    if entry.itemid ~= 0 then
+                        if entry.itemid == 65535 then
+                            local gil = entry.amount/#players
+
+                            for j = 1, #players, 1 do
+                                players[j]:addGil(gil)
+                                players[j]:messageSpecial(zones[players[1]:getZoneID()].text.GIL_OBTAINED, gil)
+                            end
+
+                            break
+                        end
+
+                        players[1]:addTreasure(entry.itemid, npc)
+                    end
+
+                    break
+                end
+            end
+        end
+    end
 end
 
 function xi.battlefield.getBattlefieldOptions(player, npc, trade)

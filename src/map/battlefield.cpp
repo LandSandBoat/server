@@ -51,10 +51,11 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "zone.h"
 #include <chrono>
 
-CBattlefield::CBattlefield(uint16 id, CZone* PZone, uint8 area, CCharEntity* PInitiator)
+CBattlefield::CBattlefield(uint16 id, CZone* PZone, uint8 area, CCharEntity* PInitiator, bool isInteraction)
 : m_Record(BattlefieldRecord_t())
 , m_StartTime(server_clock::now())
 , m_LastPromptTime(0s)
+, m_isInteraction(isInteraction)
 {
     m_ID               = id;
     m_Zone             = PZone;
@@ -183,6 +184,11 @@ uint8 CBattlefield::GetLevelCap() const
     return m_LevelCap;
 }
 
+uint32 CBattlefield::GetArmouryCrate() const
+{
+    return m_armouryCrate;
+}
+
 void CBattlefield::SetName(std::string const& name)
 {
     m_Name = name;
@@ -246,6 +252,11 @@ void CBattlefield::SetLastTimeUpdate(duration time)
     m_LastPromptTime = time;
 }
 
+void CBattlefield::setArmouryCrate(uint32 entityId)
+{
+    m_armouryCrate = entityId;
+}
+
 void CBattlefield::ApplyLevelRestrictions(CCharEntity* PChar) const
 {
     // Adjust player's level to the appropriate cap and remove buffs
@@ -275,6 +286,11 @@ void CBattlefield::ApplyLevelRestrictions(CCharEntity* PChar) const
 bool CBattlefield::IsOccupied() const
 {
     return !m_EnteredPlayers.empty();
+}
+
+bool CBattlefield::isInteraction() const
+{
+    return m_isInteraction;
 }
 
 bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOBCONDITION conditions, bool ally)
@@ -323,7 +339,7 @@ bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOB
     }
     else if (PEntity->objtype == TYPE_NPC)
     {
-        PEntity->status = STATUS_TYPE::NORMAL;
+        PEntity->status = (conditions & CONDITION_DISAPPEAR_AT_START) == CONDITION_DISAPPEAR_AT_START ? STATUS_TYPE::DISAPPEAR : STATUS_TYPE::NORMAL;
         PEntity->loc.zone->UpdateEntityPacket(PEntity, ENTITY_SPAWN, UPDATE_ALL_MOB);
         m_NpcList.push_back(static_cast<CNpcEntity*>(PEntity));
     }
