@@ -17,6 +17,9 @@ end
 item_object.onItemUse = function(target)
     target:delStatusEffectSilent(xi.effect.OMERTA)
     target:messageText(target, zones[target:getZoneID()].text.CELL_OFFSET + 10)
+    if target:hasPet() then
+        target:getPet():delStatusEffectSilent(xi.effect.OMERTA)
+    end
 end
 
 return item_object

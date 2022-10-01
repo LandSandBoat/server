@@ -888,16 +888,18 @@ xi.nyzul.addFloorPathos = function(instance)
 
         for _, player in pairs(chars) do
             player:addStatusEffect(pathos.effect, pathos.power, 0, 0)
-            player:getStatusEffect(pathos.effect):unsetFlag(3) -- dispelable + eraseable
-            player:getStatusEffect(pathos.effect):setFlag(8388864) -- on zone + no cancel
+            player:getStatusEffect(pathos.effect):unsetFlag(xi.effectFlag.DISPELABLE)
+            player:getStatusEffect(pathos.effect):unsetFlag(xi.effectFlag.ERASABLE)
+            player:getStatusEffect(pathos.effect):setFlag(xi.effectFlag.ON_ZONE_PATHOS)
 
             player:messageSpecial(pathos.textId)
 
             if player:hasPet() then
                 local pet = player:getPet()
                 pet:addStatusEffectEx(pathos.effect, pathos.effect, pathos.power, 0, 0)
-                pet:getStatusEffect(pathos.effect):unsetFlag(3) -- dispelable + eraseable
-                pet:getStatusEffect(pathos.effect):setFlag(8388864) -- on zone + no cancel
+                pet:getStatusEffect(pathos.effect):unsetFlag(xi.effectFlag.DISPELABLE)
+                pet:getStatusEffect(pathos.effect):unsetFlag(xi.effectFlag.ERASABLE)
+                pet:getStatusEffect(pathos.effect):setFlag(xi.effectFlag.ON_ZONE_PATHOS)
             end
         end
 
@@ -952,16 +954,18 @@ xi.nyzul.addPenalty = function(mob)
                     end
 
                     player:addStatusEffect(effect, power, 0, 0)
-                    player:getStatusEffect(effect):unsetFlag(3) -- dispelable + eraseable
-                    player:getStatusEffect(effect):setFlag(8388864) -- on zone + no cancel
+                    player:getStatusEffect(effect):unsetFlag(xi.effectFlag.DISPELABLE)
+                    player:getStatusEffect(effect):unsetFlag(xi.effectFlag.ERASABLE)
+                    player:getStatusEffect(effect):setFlag(xi.effectFlag.ON_ZONE_PATHOS)
                     player:messageSpecial(ID.text.MALFUNCTION)
                     player:messageSpecial(pathos.textId)
 
                     if player:hasPet() then
                         local pet = player:getPet()
                         pet:addStatusEffectEx(effect, effect, power, 0, 0)
-                        pet:getStatusEffect(effect):unsetFlag(3) -- dispelable + eraseable
-                        pet:getStatusEffect(effect):setFlag(8388864) -- on zone + no cancel
+                        pet:getStatusEffect(effect):unsetFlag(xi.effectFlag.DISPELABLE)
+                        pet:getStatusEffect(effect):unsetFlag(xi.effectFlag.ERASABLE)
+                        pet:getStatusEffect(effect):setFlag(xi.effectFlag.ON_ZONE_PATHOS)
                     end
                 end
 
