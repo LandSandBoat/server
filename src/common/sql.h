@@ -79,6 +79,7 @@ public:
     /// Establishes a connection.
     ///
     /// @return SQL_SUCCESS or SQL_ERROR
+    SqlConnection();
     SqlConnection(const char* user, const char* passwd, const char* host, uint16 port, const char* db);
     ~SqlConnection();
 
@@ -191,18 +192,9 @@ public:
     void Async(std::function<void(SqlConnection*)>&& func);
     void Async(std::string const& query);
 
-    template <typename... Args>
-    void Async(const char* query, Args... args)
-    {
-        TracyZoneScoped;
-
-        auto queryStr = fmt::sprintf(query, args...);
-        TracyZoneString(queryStr);
-
-        Async(queryStr);
-    }
-
     void HandleAsync();
+
+    void SetLatencyWarning(bool _LatencyWarning);
 
 private:
     Sql_t*      self;
@@ -214,8 +206,10 @@ private:
 
     uint32 m_PingInterval;
     uint32 m_LastPing;
+    bool   m_LatencyWarning;
 
     void InitPreparedStatements();
+
     std::unordered_map<std::string, std::shared_ptr<SqlPreparedStatement>> m_PreparedStatements;
 };
 #endif // _COMMON_SQL_H

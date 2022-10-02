@@ -7,7 +7,7 @@
 -- Range: Cone gaze
 -- Notes: Only used when standing
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------

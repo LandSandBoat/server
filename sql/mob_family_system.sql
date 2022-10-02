@@ -49,7 +49,7 @@ CREATE TABLE `mob_family_system` (
 -- Dumping data for table `mob_family_system`
 --
 
--- "family, superFamily, ecosystem" relationship: Korrigan, Madragora, Plantoid
+-- "family, superFamily, ecosystem" relationship: Korrigan, Mandragora, Plantoid
 -- Nothing is enforced so it is possible to use completely unrelated values
 LOCK TABLES `mob_family_system` WRITE;
 /*!40000 ALTER TABLE `mob_family_system` DISABLE KEYS */;
@@ -159,6 +159,7 @@ INSERT INTO `mob_family_system` VALUES (107,'Eruca',63,'Crawler',20,'Vermin',1,4
 INSERT INTO `mob_family_system` VALUES (108,'Eruca',63,'Crawler',20,'Vermin',1,40,92,120,1,3,4,3,3,6,5,1,5,1,3,1,258,1);
 INSERT INTO `mob_family_system` VALUES (109,'Euvhi',64,'Euvhi',15,'Luminian',0,40,100,140,1,3,4,4,1,5,4,1,3,1,3,0,2,0);
 INSERT INTO `mob_family_system` VALUES (110,'Evil_Weapon',6,'Evil_Weapon',3,'Arcana',0,40,105,120,1,3,4,3,3,3,4,1,5,1,3,3,34,0);
+
 INSERT INTO `mob_family_system` VALUES (112,'Flan',65,'Flan',1,'Amorph',1,40,70,140,5,4,4,4,3,5,3,1,3,1,3,6,129,0);
 INSERT INTO `mob_family_system` VALUES (113,'Fly',66,'Fly',20,'Vermin',0,40,92,90,5,4,4,3,4,4,4,1,3,1,3,3,2,1);
 INSERT INTO `mob_family_system` VALUES (114,'Flytrap',67,'Flytrap',17,'Plantoid',0,40,90,90,4,4,4,4,4,4,4,1,3,1,3,3,2,1);
@@ -530,7 +531,9 @@ INSERT INTO `mob_family_system` VALUES (504,'Luopan',0,'undefined',0,'Unclassifi
 INSERT INTO `mob_family_system` VALUES (505,'Fungi',0,'undefined',0,'Unclassified',0,0,130,180,1,3,4,3,6,6,5,1,3,1,3,4,2,0);
 INSERT INTO `mob_family_system` VALUES (506,'Meeble',189,'Meeble',7,'Beastmen',0,40,125,90,3,2,5,2,6,4,5,1,2,1,3,5,1,0);
 
--- Family IDs 10,22,50,96,111,317-318,405,411-434,439-443 available for use
+INSERT INTO `mob_family_system` VALUES (411,'Pet-Siren',16,'Siren',5,'Avatar',0,40,100,120,3,3,3,3,3,3,3,1,3,1,3,0,41,0);
+
+-- Family IDs 10,22,50,96,111,317-318,405,412-434,439-443 available for use
 
 /*!40000 ALTER TABLE `mob_family_system` ENABLE KEYS */;
 UNLOCK TABLES;

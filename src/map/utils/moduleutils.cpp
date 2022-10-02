@@ -21,16 +21,17 @@
 
 #include "moduleutils.h"
 
+#include "../command_handler.h"
 #include "../lua/luautils.h"
 #include "common/cbasetypes.h"
 #include "common/utils.h"
 
 #include <filesystem>
+#include <fstream>
+#include <iostream>
 #include <regex>
 #include <string>
 #include <vector>
-#include <iostream>
-#include <fstream>
 
 namespace
 {
@@ -40,7 +41,7 @@ namespace
         static std::vector<CPPModule*> cppModules{};
         return cppModules;
     }
-}
+} // namespace
 
 namespace moduleutils
 {
@@ -95,6 +96,15 @@ namespace moduleutils
         }
     }
 
+    void OnPushPacket(CBasicPacket* packet)
+    {
+        TracyZoneScoped;
+        for (auto* module : cppModules())
+        {
+            module->OnPushPacket(packet);
+        }
+    }
+
     struct Override
     {
         std::string              filename;
@@ -113,20 +123,19 @@ namespace moduleutils
 
     void LoadLuaModules()
     {
-        sol::state& lua = luautils::lua;
-
         // Load the helper file
-        lua.script_file("./modules/module_utils.lua");
+        lua.safe_script_file("./modules/module_utils.lua");
 
         // Read lines from init.txt
         std::vector<std::string> list;
-        std::ifstream file("./modules/init.txt", std::ios_base::in);
-        std::string line;
+        std::ifstream            file("./modules/init.txt", std::ios_base::in);
+        std::string              line;
         while (std::getline(file, line))
         {
-            if (!line.empty() && line.at(0) != '#')
+            if (!line.empty() && line.at(0) != '#' && line != "\n" && line != "\r" && line != "\r\n")
             {
-                list.emplace_back("./modules/" + line);
+                auto str = trim("./modules/" + line, " \t\r\n");
+                list.emplace_back(str);
             }
         }
 
@@ -154,8 +163,8 @@ namespace moduleutils
                 !std::filesystem::is_directory(path) &&
                 path.extension() == ".lua")
             {
-                std::string filename  = path.filename().generic_string();
-                std::string relPath   = path.relative_path().generic_string();
+                std::string filename = path.filename().generic_string();
+                std::string relPath  = path.relative_path().generic_string();
 
                 auto res = lua.safe_script_file(relPath);
                 if (!res.valid())
@@ -166,17 +175,27 @@ namespace moduleutils
                     continue;
                 }
 
+                // Check the file is a valid command
+                if (lua["cmdprops"].valid() && lua["onTrigger"].valid())
+                {
+                    auto commandName = path.filename().replace_extension("").generic_string();
+                    ShowDebug(fmt::format("Registering module command: !{}", commandName));
+                    CCommandHandler::registerCommand(commandName, relPath);
+                    continue;
+                }
+
+                // Check the file is a valid module
                 sol::table table = res;
-                if (table["overrides"].valid()) // Check the file is a valid module
+                if (table["overrides"].valid())
                 {
                     auto moduleName = table.get_or("name", std::string());
-                    ShowScript(fmt::format("=== Module: {} ===", moduleName));
+                    ShowInfo(fmt::format("=== Module: {} ===", moduleName));
                     for (auto& override : table.get_or("overrides", std::vector<sol::table>()))
                     {
                         std::string name = override["name"];
                         sol::object func = override["func"];
 
-                        ShowScript(fmt::format("Preparing override: {}", name));
+                        ShowDebug(fmt::format("Preparing override: {}", name));
 
                         auto parts = split(name, ".");
                         overrides.emplace_back(Override{ filename, name, parts, func, false });
@@ -186,14 +205,18 @@ namespace moduleutils
         }
     }
 
+    void CleanupLuaModules()
+    {
+        overrides.clear();
+    }
+
     void TryApplyLuaModules()
     {
-        sol::state& lua = luautils::lua;
         for (auto& override : overrides)
         {
             if (!override.applied)
             {
-                auto firstElem  = override.nameParts.front();
+                auto firstElem = override.nameParts.front();
                 auto lastTable = override.nameParts.size() < 2 ? firstElem : *(override.nameParts.end() - 2);
                 auto lastElem  = override.nameParts.back();
 
@@ -208,9 +231,9 @@ namespace moduleutils
 
                     if (part == lastTable)
                     {
-                        ShowScript(fmt::format("Applying override: {}", override.overrideName));
+                        ShowDebug(fmt::format("Applying override: {}", override.overrideName));
 
-                        lua["applyOverride"](table, override.func, lastElem, override.overrideName, override.filename);
+                        lua["applyOverride"](table, lastElem, override.func, override.overrideName, override.filename);
 
                         override.applied = true;
 

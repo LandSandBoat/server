@@ -3,7 +3,7 @@
 -- Deals damage to a single target. Additional effect: Paralysis
 -- Range: 10' cone
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------

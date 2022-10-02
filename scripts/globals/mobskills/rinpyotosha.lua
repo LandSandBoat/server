@@ -7,7 +7,7 @@
 -- Range: Self and nearby mobs of same family and/or force up to 20'.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}

@@ -65,6 +65,10 @@ CBattlefield::CBattlefield(uint16 id, CZone* PZone, uint8 area, CCharEntity* PIn
     m_Record.time      = 24h;
     m_Record.partySize = 69;
     m_Tick             = m_StartTime;
+    m_isMission        = false;
+    m_Rules            = 0;
+    m_MaxParticipants  = 8;
+    m_LevelCap         = 0;
     m_RegisteredPlayers.emplace(PInitiator->id);
 }
 
@@ -88,7 +92,7 @@ uint16 CBattlefield::GetZoneID() const
     return m_Zone->GetID();
 }
 
-const std::string& CBattlefield::GetName() const
+std::string const& CBattlefield::GetName() const
 {
     return m_Name;
 }
@@ -158,7 +162,7 @@ duration CBattlefield::GetLastTimeUpdate() const
     return m_LastPromptTime;
 }
 
-uint64_t CBattlefield::GetLocalVar(const std::string& name) const
+uint64_t CBattlefield::GetLocalVar(std::string const& name) const
 {
     auto var = m_LocalVars.find(name);
     return var != m_LocalVars.end() ? var->second : 0;
@@ -179,12 +183,12 @@ uint8 CBattlefield::GetLevelCap() const
     return m_LevelCap;
 }
 
-void CBattlefield::SetName(const std::string& name)
+void CBattlefield::SetName(std::string const& name)
 {
     m_Name = name;
 }
 
-void CBattlefield::SetInitiator(const std::string& name)
+void CBattlefield::SetInitiator(std::string const& name)
 {
     m_Initiator.name = name;
 }
@@ -204,7 +208,7 @@ void CBattlefield::SetArea(uint8 area)
     m_Area = area;
 }
 
-void CBattlefield::SetRecord(const std::string& name, duration time, size_t partySize)
+void CBattlefield::SetRecord(std::string const& name, duration time, size_t partySize)
 {
     m_Record.name      = !name.empty() ? name : m_Initiator.name;
     m_Record.time      = time;
@@ -232,7 +236,7 @@ void CBattlefield::SetLevelCap(uint8 cap)
     m_LevelCap = cap;
 }
 
-void CBattlefield::SetLocalVar(const std::string& name, uint64_t value)
+void CBattlefield::SetLocalVar(std::string const& name, uint64_t value)
 {
     m_LocalVars[name] = value;
 }
@@ -249,12 +253,12 @@ void CBattlefield::ApplyLevelRestrictions(CCharEntity* PChar) const
 
     if (cap > 0)
     {
-        cap += map_config.Battle_cap_tweak; // We wait till here to do this because we don't want to modify uncapped battles.
+        cap += settings::get<int8>("map.BATTLE_CAP_TWEAK"); // We wait till here to do this because we don't want to modify uncapped battles.
 
         // Check if it's a mission and if config setting applies.
-        if (map_config.lv_cap_mission_bcnm == 0 && m_isMission == 1)
+        if (!settings::get<bool>("map.LV_CAP_MISSION_BCNM") && m_isMission == 1)
         {
-            cap = luautils::GetSettingsVariable("MAX_LEVEL"); // Cap to server max level to strip buffs - this is the retail diff between uncapped and capped to max lv.
+            cap = settings::get<uint8>("main.MAX_LEVEL"); // Cap to server max level to strip buffs - this is the retail diff between uncapped and capped to max lv.
         }
 
         PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DEATH, true);
@@ -275,7 +279,11 @@ bool CBattlefield::IsOccupied() const
 
 bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOBCONDITION conditions, bool ally)
 {
-    XI_DEBUG_BREAK_IF(PEntity == nullptr);
+    if (PEntity == nullptr)
+    {
+        ShowWarning("CBattlefield::InsertEntity() - PEntity is null.");
+        return false;
+    }
 
     if (PEntity->PBattlefield)
     {
@@ -294,6 +302,12 @@ bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOB
                 PChar->ClearTrusts();
                 luautils::OnBattlefieldEnter(PChar, this);
                 charutils::SendTimerPacket(PChar, GetRemainingTime());
+
+                // Try to add the player's pet in case they have one that can
+                if (PChar->PPet != nullptr)
+                {
+                    InsertEntity(PChar->PPet, true);
+                }
             }
             else if (!IsRegistered(PChar))
             {
@@ -320,9 +334,11 @@ bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOB
         {
             auto* pet = dynamic_cast<CPetEntity*>(PEntity);
 
-            // dont enter player pet
             if (pet && pet->PMaster && pet->PMaster->objtype == TYPE_PC)
             {
+                // Properly set the existing pet to exist within this battlefield
+                pet->m_bcnmID        = GetID();
+                pet->m_battlefieldID = GetArea();
             }
             else
             {
@@ -549,7 +565,8 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
             }
             else
             {
-                auto check = [PEntity, &found](auto entity) {
+                auto checkEnemy = [PEntity, &found](auto entity)
+                {
                     if (entity.PMob == PEntity)
                     {
                         found = true;
@@ -557,8 +574,8 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
                     }
                     return false;
                 };
-                m_RequiredEnemyList.erase(std::remove_if(m_RequiredEnemyList.begin(), m_RequiredEnemyList.end(), check), m_RequiredEnemyList.end());
-                m_AdditionalEnemyList.erase(std::remove_if(m_AdditionalEnemyList.begin(), m_AdditionalEnemyList.end(), check), m_AdditionalEnemyList.end());
+                m_RequiredEnemyList.erase(std::remove_if(m_RequiredEnemyList.begin(), m_RequiredEnemyList.end(), checkEnemy), m_RequiredEnemyList.end());
+                m_AdditionalEnemyList.erase(std::remove_if(m_AdditionalEnemyList.begin(), m_AdditionalEnemyList.end(), checkEnemy), m_AdditionalEnemyList.end());
             }
         }
         PEntity->loc.zone->PushPacket(PEntity, CHAR_INRANGE, new CEntityAnimationPacket(PEntity, PEntity, CEntityAnimationPacket::Fade_Out));
@@ -756,7 +773,8 @@ void CBattlefield::ClearEnmityForEntity(CBattleEntity* PEntity)
         return;
     }
 
-    auto func = [&](auto mob) {
+    auto func = [&](auto mob)
+    {
         if (PEntity->PPet)
         {
             mob->PEnmityContainer->Clear(PEntity->PPet->id);
@@ -770,7 +788,9 @@ void CBattlefield::ClearEnmityForEntity(CBattleEntity* PEntity)
 
 bool CBattlefield::CheckInProgress()
 {
-    ForEachEnemy([&](CMobEntity* PMob) {
+    // clang-format off
+    ForEachEnemy([&](CMobEntity* PMob)
+    {
         if (!PMob->PEnmityContainer->GetEnmityList()->empty())
         {
             if (m_Status == BATTLEFIELD_STATUS_OPEN)
@@ -780,6 +800,7 @@ bool CBattlefield::CheckInProgress()
             m_Attacked = true;
         }
     });
+    // clang-format on
 
     // mobs might have 0 enmity but we wont allow anymore players to enter
     return m_Status != BATTLEFIELD_STATUS_OPEN;
@@ -828,5 +849,63 @@ void CBattlefield::ForEachAlly(const std::function<void(CMobEntity*)>& func)
     for (auto* ally : m_AllyList)
     {
         func(ally);
+    }
+}
+
+void CBattlefield::addGroup(BattlefieldGroup group)
+{
+    if (group.randomDeathCallback.valid())
+    {
+        group.randomMobId = xirand::GetRandomElement(group.mobIds);
+    }
+    m_groups.push_back(group);
+}
+
+void CBattlefield::handleDeath(CBaseEntity* PEntity)
+{
+    if (PEntity->objtype != TYPE_MOB || m_groups.empty())
+    {
+        return;
+    }
+
+    for (auto& group : m_groups)
+    {
+        for (uint32 mobId : group.mobIds)
+        {
+            if (mobId == PEntity->id)
+            {
+                ++group.deathCount;
+
+                if (group.deathCallback.valid())
+                {
+                    group.deathCallback(CLuaBaseEntity(PEntity), group.deathCount);
+                }
+
+                if (group.allDeathCallback.valid() && group.deathCount >= group.mobIds.size())
+                {
+                    // Validate all mobs in the group are dead since they may have been revived
+                    uint16 deathCount = 0;
+                    for (auto& deathMobId : group.mobIds)
+                    {
+                        CMobEntity* PMob = (CMobEntity*)zoneutils::GetEntity(deathMobId, TYPE_MOB | TYPE_PET);
+                        if (PMob->isDead())
+                        {
+                            ++deathCount;
+                        }
+                    }
+
+                    if (deathCount == group.mobIds.size())
+                    {
+                        group.allDeathCallback(CLuaBaseEntity(PEntity));
+                    }
+                }
+
+                if (group.randomDeathCallback.valid() && mobId == group.randomMobId)
+                {
+                    group.randomDeathCallback(CLuaBaseEntity(PEntity));
+                }
+                break;
+            }
+        }
     }
 }

@@ -5,36 +5,31 @@
 -- !pos -93.738 4.649 34.373 236
 -----------------------------------
 local ID = require("scripts/zones/Port_Bastok/IDs")
-require("scripts/settings/main")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
-require("scripts/globals/utils")
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local SilenceOfTheRams = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SILENCE_OF_THE_RAMS)
+    local silenceOfTheRams = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SILENCE_OF_THE_RAMS)
 
-    if (SilenceOfTheRams == QUEST_ACCEPTED) then
+    if (silenceOfTheRams == QUEST_ACCEPTED) then
         local count = trade:getItemCount()
-        local LumberingHorn = trade:hasItemQty(910, 1)
-        local RampagingHorn = trade:hasItemQty(911, 1)
+        local lumberingHorn = trade:hasItemQty(910, 1)
+        local rampagingHorn = trade:hasItemQty(911, 1)
 
-        if (LumberingHorn == true and RampagingHorn == true and count == 2) then
+        if (lumberingHorn == true and rampagingHorn == true and count == 2) then
             player:startEvent(196)
         end
     end
 end
 
 entity.onTrigger = function(player, npc)
-    local SilenceOfTheRams = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SILENCE_OF_THE_RAMS)
-    local WildcatBastok = player:getCharVar("WildcatBastok")
+    local silenceOfTheRams = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.SILENCE_OF_THE_RAMS)
 
-    if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatBastok, 2)) then
-        player:startEvent(355)
-    elseif (SilenceOfTheRams == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.NORG) >= 2) then
+    if (silenceOfTheRams == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.NORG) >= 2) then
         player:startEvent(195)
-    elseif (SilenceOfTheRams == QUEST_ACCEPTED) then
+    elseif (silenceOfTheRams == QUEST_ACCEPTED) then
         player:showText(npc, ID.text.PAUJEAN_DIALOG_1)
     else
         player:startEvent(25)
@@ -42,8 +37,6 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    -- printf("CSID2: %u", csid)
-    -- printf("RESULT2: %u", option)
 end
 
 entity.onEventFinish = function(player, csid, option)
@@ -56,8 +49,6 @@ entity.onEventFinish = function(player, csid, option)
         player:addItem(13201)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 13201)
         player:addTitle(xi.title.PURPLE_BELT)
-    elseif (csid == 355) then
-        player:setCharVar("WildcatBastok", utils.mask.setBit(player:getCharVar("WildcatBastok"), 2, true))
     end
 end
 

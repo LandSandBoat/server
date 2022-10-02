@@ -3,7 +3,7 @@
 -- Deals earth damage that gradually reduces
 -- a target's HP. Damage dealt is greatly affected by the weather.
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
@@ -43,8 +43,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     -- add in final adjustments
     dmg = finalMagicAdjustments(caster, target, spell, dmg)
     -- calculate Damage over time
-    dot = target:magicDmgTaken(dot)
-
+    dot = target:magicDmgTaken(dot, spell:getElement())
     local duration = getHelixDuration(caster) + caster:getMod(xi.mod.HELIX_DURATION)
 
     duration = duration * (resist/2)

@@ -6,7 +6,7 @@
 -- Notes: Erases all negative effects on the mob and heals an amount for each removed.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------

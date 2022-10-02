@@ -10,7 +10,7 @@ def main():
 
     p0 = subprocess.Popen(["xi_connect","--log","connect-server.log"], stdout=subprocess.PIPE)
     p1 = subprocess.Popen(["xi_search","--log","search-server.log"], stdout=subprocess.PIPE)
-    p2 = subprocess.Popen(["xi_map","--log","game-server.log"], stdout=subprocess.PIPE)
+    p2 = subprocess.Popen(["xi_map","--log","game-server.log", "--load_all"], stdout=subprocess.PIPE)
 
     print("Sleeping for 2 minutes...")
 
@@ -29,7 +29,7 @@ def main():
         for line in io.TextIOWrapper(proc.stdout, encoding="utf-8"):
             print(line.replace("\n", ""))
             has_seen_output = True
-            if "error" in line or "warning" in line:
+            if "error" in line.lower() or "warning" in line.lower() or "crash" in line.lower():
                 print("^^^")
                 error = True
 

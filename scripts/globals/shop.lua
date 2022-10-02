@@ -2,7 +2,7 @@
 --    Functions for Shop system
 -----------------------------------
 require("scripts/globals/conquest")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/keyitems")
 -----------------------------------
@@ -29,14 +29,14 @@ xi.shop =
     --[[ *******************************************************************************
         send general shop dialog to player
         stock cuts off after 16 items. if you add more, extras will not display
-        stock is of form {itemId1, price1, itemId2, price2, ...}
+        stock is of form { itemId1, price1, itemId2, price2, ... }
         log is a fame area from xi.quest.fame_area
     ******************************************************************************* --]]
     general = function(player, stock, log)
         local priceMultiplier = 1
 
         if log then
-            priceMultiplier = (1 + (0.20 * (9 - player:getFameLevel(log)) / 8)) * xi.settings.SHOP_PRICE
+            priceMultiplier = (1 + (0.20 * (9 - player:getFameLevel(log)) / 8)) * xi.settings.main.SHOP_PRICE
         else
             log = -1
         end
@@ -52,7 +52,7 @@ xi.shop =
 
     --[[ *******************************************************************************
         send general guild shop dialog to player (Added on June 2014 QoL)
-        stock is of form {itemId1, price1, guildID, guildRank, ...}
+        stock is of form { itemId1, price1, guildID, guildRank, ... }
         log is default set to -1 as it's needed as part of createShop()
     ******************************************************************************* --]]
     generalGuild = function(player, stock, guildSkillId)
@@ -69,7 +69,7 @@ xi.shop =
 
     --[[ *******************************************************************************
         send curio vendor moogle shop shop dialog to player
-        stock is of form {itemId1, price1, keyItemRequired, ...}
+        stock is of form { itemId1, price1, keyItemRequired, ... }
         log is default set to -1 as it's needed as part of createShop()
     ******************************************************************************* --]]
     curioVendorMoogle = function(player, stock)
@@ -89,7 +89,7 @@ xi.shop =
     --[[ *******************************************************************************
         send nation shop dialog to player
         stock cuts off after 16 items. if you add more, extras will not display
-        stock is of form {itemId1, price1, place1, itemId2, price2, place2, ...}
+        stock is of form { itemId1, price1, place1, itemId2, price2, place2, ... }
             where place is what place the nation must be in for item to be stocked
         nation is a xi.nation ID from scripts/globals/zone.lua
     ******************************************************************************* --]]

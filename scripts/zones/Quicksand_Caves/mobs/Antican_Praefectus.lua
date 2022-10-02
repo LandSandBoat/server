@@ -3,11 +3,11 @@
 --   NM: Antican Praefectus
 -----------------------------------
 require("scripts/globals/hunts")
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 431)
 end
 

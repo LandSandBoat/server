@@ -5,7 +5,7 @@
 -- Finishing Moves Used: 1-5
 -- Recast Time: 00:30
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
@@ -26,38 +26,37 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
+    local tpGain = 0
+    local stm = 0.5 + (0.1 * player:getMod(xi.mod.REVERSE_FLOURISH_EFFECT))
 
-    local TPGain = 0
-    local STM = 0.5 + (0.1 * player:getMod(xi.mod.REVERSE_FLOURISH_EFFECT))
-
-    local Merits = player:getMerit(xi.merit.REVERSE_FLOURISH_EFFECT)
+    local numMerits = player:getMerit(xi.merit.REVERSE_FLOURISH_EFFECT)
 
     if (player:hasStatusEffect(xi.effect.FINISHING_MOVE_1)) then
-        TPGain = 9.5 * 1 + STM * 1 ^ 2 + Merits
+        tpGain = 9.5 * 1 + stm * 1 ^ 2 + numMerits
 
     elseif (player:hasStatusEffect(xi.effect.FINISHING_MOVE_2)) then
-        TPGain = 9.5 * 2 + STM * 2 ^ 2 + Merits
+        tpGain = 9.5 * 2 + stm * 2 ^ 2 + numMerits
 
     elseif (player:hasStatusEffect(xi.effect.FINISHING_MOVE_3)) then
-        TPGain = 9.5 * 3 + STM * 3 ^ 2 + Merits
+        tpGain = 9.5 * 3 + stm * 3 ^ 2 + numMerits
 
     elseif (player:hasStatusEffect(xi.effect.FINISHING_MOVE_4)) then
-        TPGain = 9.5 * 4 + STM * 4 ^ 2 + Merits
+        tpGain = 9.5 * 4 + stm * 4 ^ 2 + numMerits
 
     elseif (player:hasStatusEffect(xi.effect.FINISHING_MOVE_5)) then
-        TPGain = 9.5 * 5 + STM * 5 ^ 2 + Merits
+        tpGain = 9.5 * 5 + stm * 5 ^ 2 + numMerits
     end
 
-    TPGain = TPGain * 10
+    tpGain = tpGain * 10
 
-    player:addTP(TPGain)
+    player:addTP(tpGain)
     player:delStatusEffect(xi.effect.FINISHING_MOVE_1)
     player:delStatusEffect(xi.effect.FINISHING_MOVE_2)
     player:delStatusEffect(xi.effect.FINISHING_MOVE_3)
     player:delStatusEffect(xi.effect.FINISHING_MOVE_4)
     player:delStatusEffect(xi.effect.FINISHING_MOVE_5)
 
-    return TPGain
+    return tpGain
 end
 
 return ability_object

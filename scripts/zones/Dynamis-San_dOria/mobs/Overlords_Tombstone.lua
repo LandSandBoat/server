@@ -16,10 +16,10 @@ entity.onMobEngaged = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
-    xi.dynamis.megaBossOnDeath(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
+    xi.dynamis.megaBossOnDeath(mob, player, optParams)
 
-    if isKiller then
+    if optParams.isKiller then
         local mobId = mob:getID()
         for i = mobId + 1, mobId + 2 do
             if GetMobByID(i):isSpawned() then

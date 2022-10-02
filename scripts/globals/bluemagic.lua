@@ -72,7 +72,7 @@ end
 
 -- Given the raw ratio value (atk/def) and levels, returns the cRatio (min then max)
 local function BluecRatio(ratio, atk_lvl, def_lvl)
-    -- Level penalty...
+    -- Level penalty
     local levelcor = 0
     if atk_lvl < def_lvl then
         levelcor = 0.05 * (def_lvl - atk_lvl)
@@ -176,7 +176,6 @@ local function BlueGetHitRate(attacker, target, capHitRate)
     hitrate = hitrate + hitdiff
     hitrate = hitrate / 100
 
-
     -- Applying hitrate caps
     if capHitRate then -- this isn't capped for when acc varies with tp, as more penalties are due
         if hitrate > 0.95 then
@@ -225,26 +224,29 @@ function BluePhysicalSpell(caster, target, spell, params)
     -- worked out from http://wiki.ffxiclopedia.org/wiki/Calculating_Blue_Magic_Damage
     -- Final D value ??= floor(D+fSTR+WSC) * Multiplier
 
-    local D =  math.floor(magicskill * 0.11) * 2 + 3
+    local D = math.floor(magicskill * 0.11) * 2 + 3
     -- cap D
     if D > params.duppercap then
         D = params.duppercap
     end
-
-    -- print("D val is ".. D)
 
     local fStr = BluefSTR(caster:getStat(xi.mod.STR) - target:getStat(xi.mod.VIT))
     if fStr > 22 then
         fStr = 22 -- TODO: Smite of Rage doesn't have this cap applied.
     end
 
-    -- print("fStr val is ".. fStr)
-
-    local WSC = BlueGetWsc(caster, params)
-
-    -- print("wsc val is ".. WSC)
+    local wsc = BlueGetWsc(caster, params)
 
     local multiplier = params.multiplier
+
+    -- Process chance for Bonus WSC from AF3 Set. BLU AF3 set triples the base
+    -- WSC when it procs and can stack with Chain Affinity. See Final bonus WSC
+    -- calculation below.
+
+    local bonusWSC = 0
+    if caster:getMod(xi.mod.AUGMENT_BLU_MAGIC) > math.random(0,99) then
+       bonusWSC = 2
+    end
 
     -- If under CA, replace multiplier with fTP(multiplier, tp150, tp300)
     local chainAffinity = caster:getStatusEffect(xi.effect.CHAIN_AFFINITY)
@@ -256,12 +258,18 @@ function BluePhysicalSpell(caster, target, spell, params)
         end
 
         multiplier = BluefTP(tp, multiplier, params.tp150, params.tp300)
+        bonusWSC = bonusWSC + 1 -- Chain Affinity Doubles the Base WSC.
     end
 
-    -- TODO: Modify multiplier to account for family bonus/penalty
-    local finalD = math.floor(D + fStr + WSC) * multiplier
+    -- Calculate final WSC bonuses
+    wsc = wsc + (wsc * bonusWSC)
 
-    -- print("Final D is ".. finalD)
+    -- See BG Wiki for reference. Chain Affinity will double the WSC. BLU AF3 set will
+    -- Triple the WSC when the set bonus procs. The AF3 set bonus stacks with Chain
+    -- Affinity for a maximum total of 4x WSC.
+
+    -- TODO: Modify multiplier to account for family bonus/penalty
+    local finalD = math.floor(D + fStr + wsc) * multiplier
 
     -----------------------------------
     -- Get the possible pDIF range and hit rate
@@ -269,12 +277,9 @@ function BluePhysicalSpell(caster, target, spell, params)
     if params.offcratiomod == nil then -- default to attack. Pretty much every physical spell will use this, Cannonball being the exception.
         params.offcratiomod = caster:getStat(xi.mod.ATT)
     end
-    -- print(params.offcratiomod)
+
     local cratio = BluecRatio(params.offcratiomod / target:getStat(xi.mod.DEF), caster:getMainLvl(), target:getMainLvl())
     local hitrate = BlueGetHitRate(caster, target, true)
-
-    -- print("Hit rate "..hitrate)
-    -- print("pdifmin "..cratio[1].." pdifmax "..cratio[2])
 
     -----------------------------------
     -- Perform the attacks
@@ -296,7 +301,7 @@ function BluePhysicalSpell(caster, target, spell, params)
             if hitsdone == 0 then -- only the first hit benefits from multiplier
                 finaldmg = finaldmg + (finalD * pdif)
             else
-                finaldmg = finaldmg + ((math.floor(D + fStr + WSC)) * pdif) -- same as finalD but without multiplier (it should be 1.0)
+                finaldmg = finaldmg + ((math.floor(D + fStr + wsc)) * pdif) -- same as finalD but without multiplier (it should be 1.0)
             end
 
             hitslanded = hitslanded + 1
@@ -310,8 +315,6 @@ function BluePhysicalSpell(caster, target, spell, params)
         hitsdone = hitsdone + 1
     end
 
-    -- print("Hits landed "..hitslanded.."/"..hitsdone.." for total damage: "..finaldmg)
-
     return finaldmg
 end
 
@@ -324,10 +327,10 @@ function BlueMagicalSpell(caster, target, spell, params, statMod)
         D = params.duppercap
     end
 
-    local ST = BlueGetWsc(caster, params) -- According to Wiki ST is the same as WSC, essentially Blue mage spells that are magical use the dmg formula of Magical type Weapon skills
+    local st = BlueGetWsc(caster, params) -- According to Wiki ST is the same as WSC, essentially Blue mage spells that are magical use the dmg formula of Magical type Weapon skills
 
     if (caster:hasStatusEffect(xi.effect.BURST_AFFINITY)) then
-        ST = ST * 2
+        st = st * 2
     end
 
     local convergenceBonus = 1.0
@@ -356,7 +359,7 @@ function BlueMagicalSpell(caster, target, spell, params, statMod)
         statBonus = dStat * params.tMultiplier
     end
 
-    D = ((D + ST) * params.multiplier * convergenceBonus) + statBonus
+    D = ((D + st) * params.multiplier * convergenceBonus) + statBonus
 
     -- At this point according to wiki we apply standard magic attack calculations
 
@@ -381,18 +384,40 @@ function BlueFinalAdjustments(caster, target, spell, dmg, params)
         dmg = 0
     end
 
-    dmg = dmg * xi.settings.BLUE_POWER
+    dmg = dmg * xi.settings.main.BLUE_POWER
 
-    dmg = dmg - target:getMod(xi.mod.PHALANX)
-    if dmg < 0 then
-        dmg = 0
+    local attackType = params.attackType or xi.attackType.NONE
+    local damageType = params.damageType or xi.damageType.NONE
+
+    if attackType == xi.attackType.NONE then
+        printf("BlueFinalAdjustments: spell id %d has attackType set to xi.attackType.NONE", spell:getID())
+    end
+
+    if damageType == xi.damageType.NONE then
+        printf("BlueFinalAdjustments: spell id %d has damageType set to xi.damageType.NONE", spell:getID())
+    end
+
+    -- handle One For All, Liement
+    if attackType == xi.attackType.MAGICAL then
+
+        local targetMagicDamageAdjustment = xi.spells.damage.calculateTMDA(caster, target, damageType) -- Apply checks for Liement, MDT/MDTII/DT
+        dmg = math.floor(dmg * targetMagicDamageAdjustment)
+        if dmg < 0 then
+            target:takeSpellDamage(caster, spell, dmg, attackType, damageType)
+            -- TODO: verify Afflatus/enmity from absorb?
+            return dmg
+        end
+        dmg = utils.oneforall(target, dmg)
+    end
+
+    -- Handle Phalanx
+    if dmg > 0 then
+        dmg = utils.clamp(dmg - target:getMod(xi.mod.PHALANX), 0, 99999)
     end
 
     -- handling stoneskin
     dmg = utils.stoneskin(target, dmg)
 
-    local attackType = params.attackType or xi.attackType.NONE
-    local damageType = params.damageType or xi.damageType.NONE
     target:takeSpellDamage(caster, spell, dmg, attackType, damageType)
     target:updateEnmityFromDamage(caster, dmg)
     target:handleAfflatusMiseryDamage(dmg)
@@ -418,7 +443,6 @@ function getBlueEffectDuration(caster, resist, effect)
         duration = math.random(0, 5) + resist * 5
     elseif effect == xi.effect.STUN then
         duration = math.random(2, 3) + resist
-        -- printf("Duration of stun is %i", duration)
     elseif effect == xi.effect.WEIGHT then
         duration = math.random(20, 24) + resist * 9 -- 20-24
     elseif effect == xi.effect.PARALYSIS then

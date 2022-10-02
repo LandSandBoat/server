@@ -2,7 +2,7 @@
 -- Area: Abyssea - Konschtat (15)
 --   NM: Turul
 -----------------------------------
-mixins = {require("scripts/mixins/families/amphiptere")}
+mixins = { require("scripts/mixins/families/amphiptere") }
 require("scripts/globals/status")
 require("scripts/globals/titles")
 -----------------------------------
@@ -29,7 +29,7 @@ entity.onSpellPrecast = function(mob, spell)
     ]]
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     player:addTitle(xi.title.TURUL_GROUNDER)
 end
 

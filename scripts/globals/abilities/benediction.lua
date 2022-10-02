@@ -5,47 +5,16 @@
 -- Recast Time: 1:00:00
 -- Duration: Instant
 -----------------------------------
+require("scripts/globals/job_utils/white_mage")
+-----------------------------------
 local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)
-    ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
-    return 0, 0
+    return xi.job_utils.white_mage.checkBenediction(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    -- To Do: Benediction can remove Charm only while in Assault Mission Lamia No.13
-    local removables = {xi.effect.FLASH, xi.effect.BLINDNESS, xi.effect.MAX_HP_DOWN, xi.effect.MAX_MP_DOWN, xi.effect.PARALYSIS, xi.effect.POISON,
-                        xi.effect.CURSE_I, xi.effect.CURSE_II, xi.effect.DISEASE, xi.effect.PLAGUE, xi.effect.WEIGHT, xi.effect.BIND,
-                        xi.effect.BIO, xi.effect.DIA, xi.effect.BURN, xi.effect.FROST, xi.effect.CHOKE, xi.effect.RASP, xi.effect.SHOCK, xi.effect.DROWN,
-                        xi.effect.STR_DOWN, xi.effect.DEX_DOWN, xi.effect.VIT_DOWN, xi.effect.AGI_DOWN, xi.effect.INT_DOWN, xi.effect.MND_DOWN,
-                        xi.effect.CHR_DOWN, xi.effect.ADDLE, xi.effect.SLOW, xi.effect.HELIX, xi.effect.ACCURACY_DOWN, xi.effect.ATTACK_DOWN,
-                        xi.effect.EVASION_DOWN, xi.effect.DEFENSE_DOWN, xi.effect.MAGIC_ACC_DOWN, xi.effect.MAGIC_ATK_DOWN, xi.effect.MAGIC_EVASION_DOWN,
-                        xi.effect.MAGIC_DEF_DOWN, xi.effect.MAX_TP_DOWN, xi.effect.SILENCE, xi.effect.PETRIFICATION}
-
-    for i, effect in ipairs(removables) do
-        if (target:hasStatusEffect(effect)) then
-            target:delStatusEffect(effect)
-        end
-    end
-
-    local heal = (target:getMaxHP() * player:getMainLvl()) / target:getMainLvl()
-
-    local maxHeal = target:getMaxHP() - target:getHP()
-
-    if (heal > maxHeal) then
-        heal = maxHeal
-    end
-
-    local power = 33 --chance to remove Doom. Basing off of Holy Water?
-
-    if target:hasStatusEffect(xi.effect.DOOM) and power > math.random(1, 100) then
-        target:delStatusEffect(xi.effect.DOOM)
-    end
-    player:updateEnmityFromCure(target, heal)
-    target:addHP(heal)
-    target:wakeUp()
-
-    return heal
+    return xi.job_utils.white_mage.useBenediction(player, target, ability)
 end
 
 return ability_object

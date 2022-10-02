@@ -1,9 +1,9 @@
 -----------------------------------
 -- Zone: Dynamis-Jeuno
 -----------------------------------
-local ID = require("scripts/zones/Dynamis-Jeuno/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/dynamis")
+local ID = require('scripts/zones/Dynamis-Jeuno/IDs')
+require('scripts/globals/conquest')
+require('scripts/globals/dynamis')
 -----------------------------------
 local zone_object = {}
 
@@ -17,9 +17,6 @@ end
 
 zone_object.onZoneIn = function(player, prevZone)
     return xi.dynamis.zoneOnZoneIn(player, prevZone)
-end
-
-zone_object.onZoneTick = function(zone)
 end
 
 zone_object.onRegionEnter = function(player, region)

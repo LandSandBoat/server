@@ -18,17 +18,18 @@ zones[xi.zone.PALBOROUGH_MINES] =
         SENSE_OF_FOREBODING                = 6405, -- You are suddenly overcome with a sense of foreboding...
         FELLOW_MESSAGE_OFFSET              = 6419, -- I'm ready. I suppose.
         CARRIED_OVER_POINTS                = 7001, -- You have carried over <number> login point[/s].
-        LOGIN_CAMPAIGN_UNDERWAY            = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
+        LOGIN_CAMPAIGN_UNDERWAY            = 7002, -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                       = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         GEOMAGNETRON_ATTUNED               = 7012, -- Your <keyitem> has been attuned to a geomagnetic fount in the corresponding locale.
-        CONQUEST_BASE                      = 7057, -- Tallying conquest results...
-        FISHING_MESSAGE_OFFSET             = 7216, -- You can't fish here.
-        THE_MACHINE_SEEMS_TO_BE_WORKING    = 7376, -- The machine seems to be working, but you cannot discern its purpose.
-        SOMETHING_FALLS_OUT_OF_THE_MACHINE = 7379, -- Something falls out of the machine!
-        YOU_CANT_CARRY_ANY_MORE_ITEMS      = 7382, -- There seems to be more left in the machine, but you can't carry any more items.
-        MINING_IS_POSSIBLE_HERE            = 7403, -- Mining is possible here if you have <item>.
-        CHEST_UNLOCKED                     = 7418, -- You unlock the chest!
-        HOMEPOINT_SET                      = 7465, -- Home point set!
+        MEMBERS_LEVELS_ARE_RESTRICTED      = 7023, -- Your party is unable to participate because certain members' levels are restricted.
+        CONQUEST_BASE                      = 7060, -- Tallying conquest results...
+        FISHING_MESSAGE_OFFSET             = 7219, -- You can't fish here.
+        THE_MACHINE_SEEMS_TO_BE_WORKING    = 7379, -- The machine seems to be working, but you cannot discern its purpose.
+        SOMETHING_FALLS_OUT_OF_THE_MACHINE = 7382, -- Something falls out of the machine!
+        YOU_CANT_CARRY_ANY_MORE_ITEMS      = 7385, -- There seems to be more left in the machine, but you can't carry any more items.
+        MINING_IS_POSSIBLE_HERE            = 7406, -- Mining is possible here if you have <item>.
+        CHEST_UNLOCKED                     = 7421, -- You unlock the chest!
+        HOMEPOINT_SET                      = 7468, -- Home point set!
     },
     mob =
     {

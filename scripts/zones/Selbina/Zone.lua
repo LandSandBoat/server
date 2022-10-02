@@ -1,13 +1,13 @@
 -----------------------------------
 -- Zone: Selbina (248)
 -----------------------------------
-local ID = require("scripts/zones/Selbina/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/keyitems")
-require("scripts/globals/missions")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/zone")
+local ID = require('scripts/zones/Selbina/IDs')
+require('scripts/globals/conquest')
+require('scripts/globals/keyitems')
+require('scripts/globals/missions')
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
+require('scripts/globals/zone')
 -----------------------------------
 local zone_object = {}
 
@@ -56,7 +56,7 @@ zone_object.onEventFinish = function(player, csid, option)
         else
             player:setPos(0, 0, 0, 0, xi.zone.SHIP_BOUND_FOR_MHAURA)
         end
-    elseif csid == 1101 and npcUtil.completeQuest(player, xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX, {item = 14226, fameArea = xi.quest.fame_area.NORG, var = {"Enagakure_Killed", "illTakeTheBigBoxCS"}}) then
+    elseif csid == 1101 and npcUtil.completeQuest(player, xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.I_LL_TAKE_THE_BIG_BOX, { item = 14226, fameArea = xi.quest.fame_area.NORG, var = { "Enagakure_Killed", "illTakeTheBigBoxCS" } }) then
         player:delKeyItem(xi.ki.SEANCE_STAFF)
     end
 end

@@ -13,12 +13,12 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local Z = player:getZPos()
+    local zPos = player:getZPos()
 
     if
         npcUtil.tradeHas(trade, 1142) and
         player:hasKeyItem(xi.ki.BALGA_CHAMPION_CERTIFICATE) and
-        Z >= 80 and Z < 86
+        zPos >= 80 and zPos < 86
     then
         npc:openDoor(2.5)
         player:confirmTrade()

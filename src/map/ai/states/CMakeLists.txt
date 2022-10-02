@@ -15,6 +15,8 @@ set(AI_STATE_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/magic_state.h
     ${CMAKE_CURRENT_SOURCE_DIR}/mobskill_state.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/mobskill_state.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/petskill_state.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/petskill_state.h
     ${CMAKE_CURRENT_SOURCE_DIR}/raise_state.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/raise_state.h
     ${CMAKE_CURRENT_SOURCE_DIR}/range_state.cpp

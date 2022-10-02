@@ -1,10 +1,10 @@
 -----------------------------------
 -- Zone: Riverne-Site_A01
 -----------------------------------
-local ID = require("scripts/zones/Riverne-Site_A01/IDs")
-require("scripts/globals/conquest")
-require("scripts/settings/main")
-require("scripts/globals/status")
+local ID = require('scripts/zones/Riverne-Site_A01/IDs')
+require('scripts/globals/conquest')
+require('scripts/globals/settings')
+require('scripts/globals/status')
 -----------------------------------
 local zone_object = {}
 
@@ -19,14 +19,14 @@ zone_object.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
-        player:setPos(732.55, -32.5, -506.544, 90) -- {R}
+        player:setPos(732.55, -32.5, -506.544, 90)
     end
 
     return cs
 end
 
 zone_object.afterZoneIn = function(player)
-    if xi.settings.ENABLE_COP_ZONE_CAP == 1 then -- ZONE WIDE LEVEL RESTRICTION
+    if xi.settings.main.ENABLE_COP_ZONE_CAP == 1 then -- ZONE WIDE LEVEL RESTRICTION
         player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, 40, 0, 0) -- LV40 cap
     end
 end

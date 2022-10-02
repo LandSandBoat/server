@@ -15,7 +15,8 @@ end
 entity.onTrigger = function(player, npc)
     player:showText(npc, ID.text.WIJETIREN_SHOP_DIALOG)
 
-    local stock = {
+    local stock =
+    {
         4148,   290,       --Antidote
         4509,    10,       --Distilled Water
         4151,   728,       --Echo Drops

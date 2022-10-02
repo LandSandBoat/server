@@ -3,7 +3,7 @@
 -- Reduces the attack speed of enemies within a fan-shaped area originating from the caster.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}

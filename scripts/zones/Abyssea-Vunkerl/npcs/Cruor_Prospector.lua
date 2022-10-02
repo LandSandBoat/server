@@ -20,7 +20,8 @@ local itemType =
 local prospectorItems =
 {
     [itemType.ITEM] =
-    {-- Sel      Item                         Cost
+    {
+    --  Sel      Item                         Cost
         [ 1] = { xi.items.UNKAI_KABUTO,       5000 },
         [ 2] = { xi.items.IGA_ZUKIN,          5000 },
         [ 3] = { xi.items.LANCERS_MEZAIL,     5000 },
@@ -35,7 +36,8 @@ local prospectorItems =
     },
 
     [itemType.TEMP] =
-    {-- Sel      Item                               Cost
+    {
+    --  Sel      Item                               Cost
         [ 1] = { xi.items.LUCID_POTION_I,             80 },
         [ 2] = { xi.items.LUCID_ETHER_I,              80 },
         [ 3] = { xi.items.BOTTLE_OF_CATHOLICON,       80 },
@@ -56,7 +58,8 @@ local prospectorItems =
     },
 
     [itemType.KEYITEM] =
-    {-- Sel     Item                                 Cost
+    {
+    --  Sel     Item                                 Cost
         [1] = { xi.ki.MAP_OF_ABYSSEA_VUNKERL,        4500 },
         [2] = { xi.ki.IVORY_ABYSSITE_OF_AVARICE,     8000 },
         [3] = { xi.ki.IVORY_ABYSSITE_OF_KISMET,      5000 },
@@ -65,7 +68,8 @@ local prospectorItems =
     },
 
     [itemType.ENHANCEMENT] =
-    {-- Sel          Effect (Abyssea)       Actual Effect          Amt, KeyItem for Bonus,           Bonus Mult      Cost
+    {
+    --  Sel          Effect (Abyssea)       Actual Effect          Amt, KeyItem for Bonus,           Bonus Mult      Cost
         [ 6] = { { { xi.effect.ABYSSEA_HP,  xi.effect.MAX_HP_BOOST, 20, xi.abyssea.abyssiteType.MERIT,       10 }, },  50 },
         [ 7] = { { { xi.effect.ABYSSEA_MP,  xi.effect.MAX_MP_BOOST, 10, xi.abyssea.abyssiteType.MERIT,        5 }, }, 120 },
         [ 8] = { { { xi.effect.ABYSSEA_STR, xi.effect.STR_BOOST,    10, xi.abyssea.abyssiteType.FURTHERANCE, 10 },
@@ -112,7 +116,7 @@ entity.onEventFinish = function(player, csid, option)
 
         if
             itemCost <= cruorTotal and
-            npcUtil.giveItem(player, {{ itemData[1], itemQty }})
+            npcUtil.giveItem(player, { { itemData[1], itemQty } })
         then
             player:delCurrency("cruor", itemCost)
         end
@@ -122,7 +126,7 @@ entity.onEventFinish = function(player, csid, option)
 
         if
             itemCost <= cruorTotal and
-            npcUtil.giveTempItem(player, {{ itemData[1], 1 }})
+            npcUtil.giveTempItem(player, { { itemData[1], 1 } })
         then
             player:delCurrency("cruor", itemCost)
         end

@@ -22,10 +22,8 @@ spell_object.onSpellCast = function(caster, target, spell)
 
     -- Calculate duration.
     local duration = calculateDuration(120, spell:getSkillType(), spell:getSpellGroup(), caster, target)
+    local params   = {}
 
-    -- printf("Duration : %u", duration)
-    -- printf("Potency : %u", potency)
-    local params = {}
     params.diff = dMND
     params.skillType = xi.skill.ENFEEBLING_MAGIC
     params.bonus = 0

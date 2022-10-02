@@ -244,6 +244,7 @@ void CItemState::TryInterrupt(CBattleEntity* PTarget)
 
     if (HasMoved() || m_PEntity->StatusEffectContainer->HasPreventActionEffect())
     {
+        msg           = MSGBASIC_ITEM_FAILS_TO_ACTIVATE;
         m_interrupted = true;
     }
     else if (battleutils::IsParalyzed(m_PEntity))

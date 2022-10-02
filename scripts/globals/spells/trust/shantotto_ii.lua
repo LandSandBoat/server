@@ -27,7 +27,7 @@ spell_object.onMobSpawn = function(mob)
 
     mob:addMod(xi.mod.MATT, power)
     mob:addMod(xi.mod.MACC, power)
-    mob:addMod(xi.mod.HASTE_MAGIC, 10)
+    mob:addMod(xi.mod.HASTE_MAGIC, 1000) -- 10% Haste (Magic)
 
     -- Shantotto's tier I spells scale up to mimic tier 2, 3, etc, spells.
     mob:addMod(xi.mod.MAGIC_DAMAGE, spellDamage)
@@ -41,7 +41,7 @@ spell_object.onMobSpawn = function(mob)
 
     -- TODO: Her regular attacks have a big range (distance from mob, not AoE)
 
-    mob:setTrustTPSkillSettings(ai.tp.CLOSER, ai.s.HIGHEST)
+    mob:setTrustTPSkillSettings(ai.tp.CLOSER_UNTIL_TP, ai.s.HIGHEST, 2500)
 
     mob:addListener("WEAPONSKILL_USE", "SHANTOTTO_II_WEAPONSKILL_USE", function(mobArg, target, wsid, tp, action)
         if wsid == 3740 then -- Final Exam

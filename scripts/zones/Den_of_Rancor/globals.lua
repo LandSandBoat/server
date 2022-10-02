@@ -3,11 +3,12 @@
 -----------------------------------
 local ID = require("scripts/zones/Den_of_Rancor/IDs")
 require("scripts/globals/npc_util")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 
-local denOfRancorGlobal = {
+local denOfRancorGlobal =
+{
     --[[..............................................................................................
         trade to lanterns next to Sacrificial Chamber (Rancor Flame)
         ..............................................................................................]]
@@ -19,7 +20,7 @@ local denOfRancorGlobal = {
                 player:confirmTrade()
                 player:addItem(1138) -- return unlit lantern
 
-                npc:openDoor(xi.settings.LANTERNS_STAY_LIT) -- light lantern
+                npc:openDoor(xi.settings.main.LANTERNS_STAY_LIT) -- light lantern
 
                 local total = GetNPCByID(ID.npc.LANTERN_OFFSET + 0):getAnimation() +
                               GetNPCByID(ID.npc.LANTERN_OFFSET + 1):getAnimation() +
@@ -51,7 +52,7 @@ local denOfRancorGlobal = {
                 player:confirmTrade()
                 player:addItem(1138) -- return unlit lantern
 
-                npc:openDoor(xi.settings.LANTERNS_STAY_LIT) -- light lantern
+                npc:openDoor(xi.settings.main.LANTERNS_STAY_LIT) -- light lantern
 
                 local total = GetNPCByID(ID.npc.LANTERN_OFFSET + 6):getAnimation() +
                               GetNPCByID(ID.npc.LANTERN_OFFSET + 7):getAnimation()
@@ -84,7 +85,7 @@ local denOfRancorGlobal = {
                 player:confirmTrade()
                 player:addItem(1138) -- return unlit lantern
 
-                npc:openDoor(xi.settings.LANTERNS_STAY_LIT) -- light lantern
+                npc:openDoor(xi.settings.main.LANTERNS_STAY_LIT) -- light lantern
 
                 local total = GetNPCByID(ID.npc.LANTERN_OFFSET + 9):getAnimation() +
                               GetNPCByID(ID.npc.LANTERN_OFFSET + 10):getAnimation()

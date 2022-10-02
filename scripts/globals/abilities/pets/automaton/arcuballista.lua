@@ -2,7 +2,7 @@
 -- Arcuballista
 -----------------------------------
 require("scripts/globals/status")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/automatonweaponskills")
 
 -----------------------------------
@@ -14,7 +14,8 @@ ability_object.onAutomatonAbilityCheck = function(target, automaton, skill)
 end
 
 ability_object.onAutomatonAbility = function(target, automaton, skill, master, action)
-    local params = {
+    local params =
+    {
         numHits = 1,
         atkmulti = 1,
         accBonus = 100,
@@ -33,7 +34,7 @@ ability_object.onAutomatonAbility = function(target, automaton, skill, master, a
         chr_wsc = 0.0
     }
 
-    if xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+    if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.ftp100 = 7.0
         params.ftp200 = 10.0
         params.ftp300 = 13.0

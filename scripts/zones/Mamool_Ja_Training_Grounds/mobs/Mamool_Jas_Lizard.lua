@@ -8,10 +8,10 @@ require("scripts/globals/assault")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    xi.assaultUtil.adjustMobLevel(mob)
+    xi.assault.adjustMobLevel(mob)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

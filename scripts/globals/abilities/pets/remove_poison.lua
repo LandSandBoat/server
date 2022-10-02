@@ -1,7 +1,7 @@
 -----------------------------------
 -- Remove Poison
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 
 -----------------------------------

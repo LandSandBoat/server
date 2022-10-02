@@ -9,12 +9,12 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    xi.assaultUtil.adjustMobLevel(mob)
+    xi.assault.adjustMobLevel(mob)
     mob:setMod(xi.mod.UDMGMAGIC, -50)
     mob:addMod(xi.mod.DEF, 100)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     local instance = mob:getInstance()
 
     if mob:getLocalVar("Killed") == 0 then

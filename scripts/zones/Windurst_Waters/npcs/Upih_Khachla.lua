@@ -18,7 +18,8 @@ end
 entity.onTrigger = function(player, npc)
     player:showText(npc, ID.text.UPIHKHACHLA_SHOP_DIALOG)
 
-    local stock = {
+    local stock =
+    {
         17313,  1107, 1,     --Grenade
         4112,   837, 1,     --Potion
         951,   108, 1,     --Wijnruit

@@ -1,7 +1,7 @@
 -----------------------------------
 -- Meteorite
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 
@@ -14,7 +14,7 @@ end
 
 ability_object.onPetAbility = function(target, pet, skill)
     local dint = pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
-    local dmg = 500 + dint*1.5 + skill:getTP()/20
+    local dmg = 500 + dint*1.5 + pet:getTP()/20
     target:updateEnmityFromDamage(pet, dmg)
     target:takeDamage(dmg, pet, xi.attackType.MAGICAL, xi.damageType.LIGHT)
     return dmg

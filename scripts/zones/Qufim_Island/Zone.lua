@@ -1,14 +1,12 @@
 -----------------------------------
---
 -- Zone: Qufim_Island (126)
---
 -----------------------------------
-local ID = require("scripts/zones/Qufim_Island/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/titles")
-require("scripts/globals/zone")
+local ID = require('scripts/zones/Qufim_Island/IDs')
+require('scripts/globals/conquest')
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
+require('scripts/globals/titles')
+require('scripts/globals/zone')
 -----------------------------------
 local zone_object = {}
 
@@ -42,7 +40,7 @@ end
 
 zone_object.onEventFinish = function(player, csid, option)
     if csid == 100 then
-        npcUtil.completeQuest(player, xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_TALEKEEPER_S_GIFT, {item = 12638, fame = 60, title = xi.title.PARAGON_OF_WARRIOR_EXCELLENCE, var = {"theTalekeeperGiftCS", "theTalekeepersGiftKilledNM"}})
+        npcUtil.completeQuest(player, xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_TALEKEEPER_S_GIFT, { item = 12638, fame = 60, title = xi.title.PARAGON_OF_WARRIOR_EXCELLENCE, var = { "theTalekeeperGiftCS", "theTalekeepersGiftKilledNM" } })
     end
 end
 

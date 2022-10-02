@@ -54,11 +54,11 @@ public:
     virtual void DeleteTRUST(CBaseEntity* PTrust) override;
     virtual void DeletePET(CBaseEntity* PPet) override; // derefs the pet's ID from this zone
 
-    virtual void FindPartyForMob(CBaseEntity* PEntity) override; // ищем группу для монстра
-    virtual void TransportDepart(uint16 boundary, uint16 zone) override; // транспотр отправляется, необходимо собрать пассажиров
+    virtual void FindPartyForMob(CBaseEntity* PEntity) override;
+    virtual void TransportDepart(uint16 boundary, uint16 zone) override;
 
-    virtual void TOTDChange(TIMETYPE TOTD) override; // обработка реакции мира на смену времени суток
-    virtual void PushPacket(CBaseEntity*, GLOBAL_MESSAGE_TYPE, CBasicPacket*) override; // отправляем глобальный пакет в пределах зоны
+    virtual void TOTDChange(TIMETYPE TOTD) override;
+    virtual void PushPacket(CBaseEntity*, GLOBAL_MESSAGE_TYPE, CBasicPacket*) override;
 
     virtual void UpdateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask) override;
     virtual void UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask, bool alwaysInclude = false) override;

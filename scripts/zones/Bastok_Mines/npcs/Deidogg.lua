@@ -6,7 +6,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Bastok_Mines/IDs")
 require("scripts/globals/keyitems")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/status")
 require("scripts/globals/utils")
@@ -32,16 +32,9 @@ end
 entity.onTrigger = function(player, npc)
     local theTalekeeperTruth   = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_TALEKEEPER_S_TRUTH)
     local theTalekeeperTruthCS = player:getCharVar("theTalekeeperTruthCS")
-    local Wait1DayForAF3       = player:getCharVar("DeidoggWait1DayForAF3")
-    local WildcatBastok        = player:getCharVar("WildcatBastok")
+    local wait1DayForAF3       = player:getCharVar("DeidoggWait1DayForAF3")
 
     if
-        player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
-        not utils.mask.getBit(WildcatBastok, 18)
-    then
-        player:startEvent(504)
-
-    elseif
         player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_DOORMAN) == QUEST_COMPLETED and
         theTalekeeperTruth == QUEST_AVAILABLE and
         player:getMainJob() == xi.job.WAR and
@@ -67,14 +60,14 @@ entity.onTrigger = function(player, npc)
 
     elseif
         theTalekeeperTruthCS == 5 or
-        (theTalekeeperTruth == QUEST_COMPLETED and (player:needToZone() or VanadielDayOfTheYear() == Wait1DayForAF3))
+        (theTalekeeperTruth == QUEST_COMPLETED and (player:needToZone() or VanadielDayOfTheYear() == wait1DayForAF3))
     then
         player:startEvent(166) -- New standard dialog after "The Talekeeper's Truth"
 
     elseif
         player:needToZone() == false and
-        VanadielDayOfTheYear() ~= Wait1DayForAF3 and
-        Wait1DayForAF3 ~= 0 and
+        VanadielDayOfTheYear() ~= wait1DayForAF3 and
+        wait1DayForAF3 ~= 0 and
         player:getCharVar("theTalekeeperGiftCS") == 0 and
         player:getMainJob() == xi.job.WAR
     then
@@ -119,8 +112,6 @@ entity.onEventFinish = function(player, csid, option)
         player:tradeComplete()
         player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_TALEKEEPER_S_GIFT)
         player:setCharVar("theTalekeeperGiftCS", 3)
-    elseif csid == 504 then
-        player:setCharVar("WildcatBastok", utils.mask.setBit(player:getCharVar("WildcatBastok"), 18, true))
     end
 end
 

@@ -11,13 +11,25 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!injectaction <action ID> <animation ID> {speceffect} {reaction} {message}")
+    player:PrintToPlayer("!injectaction <action ID> <animation ID> (speceffect) (reaction) (message)")
 end
 
 function onTrigger(player, actionId, animationId, speceffect, reaction, message)
     -- validate actionId
     if (actionId == nil) then
         error(player, "You must provide an action ID.")
+        return
+    end
+
+    if actionId == 0 or actionId > 15 then
+        error(player, "<action ID> is out of range. Current valid and tested action IDs are 1-15.")
+        return
+    end
+
+    local target = player:getCursorTarget()
+
+    if not target then
+        error(player, "No valid target found")
         return
     end
 
@@ -41,5 +53,5 @@ function onTrigger(player, actionId, animationId, speceffect, reaction, message)
     end
 
     -- inject action packet
-    player:injectActionPacket(actionId, animationId, speceffect, reaction, message)
+    player:injectActionPacket(target:getID(), actionId, animationId, speceffect, reaction, message, 10, 1)
 end

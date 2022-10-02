@@ -1,12 +1,21 @@
 -----------------------------------
 -- Area: Nyzul Isle
---  Mob: Imp
+--  MOB: Imp
 -----------------------------------
-mixins = {require("scripts/mixins/families/imp")}
+mixins = { require('scripts/mixins/families/imp') }
+require('scripts/globals/nyzul')
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobSpawn = function(mob)
+    xi.nyzul.specifiedEnemySet(mob)
+end
+
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller or optParams.noKiller then
+        xi.nyzul.spawnChest(mob, player)
+        xi.nyzul.specifiedEnemyKill(mob)
+    end
 end
 
 return entity

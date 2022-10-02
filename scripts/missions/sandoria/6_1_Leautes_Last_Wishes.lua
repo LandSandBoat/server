@@ -15,7 +15,7 @@ require('scripts/globals/items')
 require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/settings/main')
+require('scripts/globals/settings')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
@@ -155,7 +155,7 @@ mission.sections =
 
             ['Sabotender_Enamorado'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if player:getMissionStatus(mission.areaId) == 2 then
                         mission:setVar(player, 'Progress', 1)
                     end

@@ -84,7 +84,7 @@ uint32 CLuaStatusEffect::getStartTime()
 /************************************************************************
  *                                                                       *
  * Returns remaining ticks until expiry                                  *
- *																		*
+ *                                                                        *
  ************************************************************************/
 
 uint32 CLuaStatusEffect::getLastTick()

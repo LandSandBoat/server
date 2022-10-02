@@ -7,7 +7,7 @@
 -- !pos -108 -5 94 240
 -----------------------------------
 local ID = require("scripts/zones/Port_Windurst/IDs")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 require("scripts/globals/status")
@@ -32,11 +32,12 @@ entity.onTrigger = function(player, npc)
 --    end
 -- ======== FOR TESTING ONLY ==========-----
 
-    local Catch = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CATCH_IT_IF_YOU_CAN)
-    local WonderWands = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDER_WANDS)
-    if (WonderWands == QUEST_ACCEPTED) then
+    local catch = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CATCH_IT_IF_YOU_CAN)
+    local wonderWands = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WONDER_WANDS)
+
+    if (wonderWands == QUEST_ACCEPTED) then
         player:startEvent(258, 0, 17053)
-    elseif (Catch == 0) then
+    elseif (catch == 0) then
         local prog = player:getCharVar("QuestCatchItIfYouCan_var")
         if (prog == 0) then
             player:startEvent(230) -- CATCH IT IF YOU CAN: Before Quest 1
@@ -48,18 +49,18 @@ entity.onTrigger = function(player, npc)
             player:startEvent(231) -- CATCH IT IF YOU CAN: Before Quest 2
         end
 
-    elseif (Catch >= 1 and (player:hasStatusEffect(xi.effect.MUTE) == true or player:hasStatusEffect(xi.effect.BANE) == true or player:hasStatusEffect(xi.effect.PLAGUE) == true)) then
+    elseif (catch >= 1 and (player:hasStatusEffect(xi.effect.MUTE) == true or player:hasStatusEffect(xi.effect.BANE) == true or player:hasStatusEffect(xi.effect.PLAGUE) == true)) then
         player:startEvent(246) -- CATCH IT IF YOU CAN: Quest Turn In 1
-    elseif (Catch >= 1 and player:needToZone()) then
+    elseif (catch >= 1 and player:needToZone()) then
         player:startEvent(255) -- CATCH IT IF YOU CAN: After Quest
-    elseif (Catch == 1 and player:hasStatusEffect(xi.effect.MUTE) == false and player:hasStatusEffect(xi.effect.BANE) == false and player:hasStatusEffect(xi.effect.PLAGUE) == false) then
+    elseif (catch == 1 and player:hasStatusEffect(xi.effect.MUTE) == false and player:hasStatusEffect(xi.effect.BANE) == false and player:hasStatusEffect(xi.effect.PLAGUE) == false) then
         local rand = math.random(1, 2)
         if (rand == 1) then
             player:startEvent(248) -- CATCH IT IF YOU CAN: During Quest 1
         else
             player:startEvent(251) -- CATCH IT IF YOU CAN: During Quest 2
         end
-    elseif (WonderWands == QUEST_COMPLETED) then
+    elseif (wonderWands == QUEST_COMPLETED) then
         player:startEvent(265)
     else
         player:startEvent(230) -- STANDARD CONVERSATION
@@ -76,16 +77,16 @@ entity.onEventFinish = function(player, csid, option)
         player:needToZone(true)
         if (player:hasStatusEffect(xi.effect.MUTE) == true) then
             player:delStatusEffect(xi.effect.MUTE)
-            player:addGil(xi.settings.GIL_RATE*1000)
-            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*1000)
+            player:addGil(xi.settings.main.GIL_RATE*1000)
+            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*1000)
         elseif (player:hasStatusEffect(xi.effect.BANE) == true) then
             player:delStatusEffect(xi.effect.BANE)
-            player:addGil(xi.settings.GIL_RATE*1200)
-            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*1200)
+            player:addGil(xi.settings.main.GIL_RATE*1200)
+            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*1200)
         elseif (player:hasStatusEffect(xi.effect.PLAGUE) == true) then
             player:delStatusEffect(xi.effect.PLAGUE)
-            player:addGil(xi.settings.GIL_RATE*1500)
-            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*1500)
+            player:addGil(xi.settings.main.GIL_RATE*1500)
+            player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*1500)
         end
 
         player:setCharVar("QuestCatchItIfYouCan_var", 0)

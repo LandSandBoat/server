@@ -28,14 +28,14 @@ end
 item_object.onEffectGain = function(target, effect)
     target:addMod(xi.mod.STR, 4)
     target:addMod(xi.mod.INT, -2)
-    target:addMod(xi.mod.ATTP, 25)
+    target:addMod(xi.mod.FOOD_ATTP, 25)
     target:addMod(xi.mod.FOOD_ATT_CAP, 45)
 end
 
 item_object.onEffectLose = function(target, effect)
     target:delMod(xi.mod.STR, 4)
     target:delMod(xi.mod.INT, -2)
-    target:delMod(xi.mod.ATTP, 25)
+    target:delMod(xi.mod.FOOD_ATTP, 25)
     target:delMod(xi.mod.FOOD_ATT_CAP, 45)
 end
 

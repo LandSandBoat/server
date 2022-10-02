@@ -11,7 +11,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!setjobpoints <amount> {player}")
+    player:PrintToPlayer("!setjobpoints <amount> (player)")
 end
 
 function onTrigger(player, amount, target)

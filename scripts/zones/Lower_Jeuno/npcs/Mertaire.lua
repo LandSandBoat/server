@@ -5,19 +5,19 @@
 -- !pos -17 0 -61 245
 -----------------------------------
 local ID = require("scripts/zones/Lower_Jeuno/IDs")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 
-local POETIC_PARCHMENT = 634
+local poeticParchmentID = 634
 
 entity.onTrade = function(player, npc, trade)
     -- A MINSTREL IN DESPAIR (poetic parchment)
     if
-        trade:hasItemQty(POETIC_PARCHMENT, 1) and
+        trade:hasItemQty(poeticParchmentID, 1) and
         trade:getItemCount() == 1 and
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_OLD_MONUMENT) == QUEST_COMPLETED and
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_MINSTREL_IN_DESPAIR) == QUEST_AVAILABLE
@@ -35,7 +35,7 @@ entity.onTrigger = function(player, npc)
     -- THE OLD MONUMENT
     if
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_OLD_MONUMENT) == QUEST_AVAILABLE and
-        level >= xi.settings.ADVANCED_JOB_LEVEL
+        level >= xi.settings.main.ADVANCED_JOB_LEVEL
     then
         player:startEvent(102)
 
@@ -43,7 +43,7 @@ entity.onTrigger = function(player, npc)
     elseif
         painfulMemory == QUEST_AVAILABLE and
         job == xi.job.BRD and
-        level >= xi.settings.AF1_QUEST_LEVEL
+        level >= xi.settings.main.AF1_QUEST_LEVEL
     then
         if player:getCharVar("PainfulMemoryCS") == 0 then
             player:startEvent(138) -- Long dialog for "Painful Memory"
@@ -59,7 +59,7 @@ entity.onTrigger = function(player, npc)
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_REQUIEM) == QUEST_COMPLETED and
         circleOfTime == QUEST_AVAILABLE and
         job == xi.job.BRD and
-        level >= xi.settings.AF3_QUEST_LEVEL
+        level >= xi.settings.main.AF3_QUEST_LEVEL
     then
         player:startEvent(139) -- Start "The Circle of Time"
 
@@ -86,8 +86,8 @@ entity.onEventFinish = function(player, csid, option)
 
     -- A MINSTREL IN DESPAIR
     elseif csid == 101 then
-        player:addGil(xi.settings.GIL_RATE * 2100)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE * 2100)
+        player:addGil(xi.settings.main.GIL_RATE * 2100)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE * 2100)
         player:tradeComplete()
         player:completeQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.A_MINSTREL_IN_DESPAIR)
         player:addFame(xi.quest.fame_area.JEUNO, 30)

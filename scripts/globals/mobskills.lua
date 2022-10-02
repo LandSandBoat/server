@@ -122,7 +122,6 @@ local function fTP(tp, ftp1, ftp2, ftp3)
     return 1 -- no ftp mod
 end
 
-
 xi.mobskills.mobRangedMove = function(mob, target, skill, numberofhits, accmod, dmgmod, tpeffect)
     -- this will eventually contian ranged attack code
     return xi.mobskills.mobPhysicalMove(mob, target, skill, numberofhits, accmod, dmgmod, xi.mobskills.magicalTpBonus.RANGED)
@@ -158,7 +157,7 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
     local lvluser = mob:getMainLvl()
     local lvltarget = target:getMainLvl()
     local acc = mob:getACC()
-    local eva = target:getEVA()
+    local eva = target:getEVA() + target:getMod(xi.mod.SPECIAL_ATTACK_EVASION)
 
     if target:hasStatusEffect(xi.effect.YONIN) and mob:isFacing(target, 23) then -- Yonin evasion boost if mob is facing target
         eva = eva + target:getStatusEffect(xi.effect.YONIN):getPower()
@@ -184,8 +183,8 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
     ratio = ratio + lvldiff * 0.05
     ratio = utils.clamp(ratio, 0, 4)
 
-    --work out hit rate for mobs (bias towards them)
-    local hitrate = (acc * accmod) - eva + (lvldiff * 2) + 75
+    --work out hit rate for mobs
+    local hitrate = ( (acc * accmod) - eva) / 2 + (lvldiff * 2) + 75
 
     hitrate = utils.clamp(hitrate, 20, 95)
 
@@ -220,7 +219,6 @@ xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod
     else
         maxRatio = ratio
     end
-
 
     if ratio < 0.38 then
         minRatio =  0
@@ -396,7 +394,7 @@ xi.mobskills.applyPlayerResistance = function(mob, effect, target, diff, bonus, 
     return getMagicResist(p)
 end
 
-xi.mobskills.mobAddBonuses = function(caster, target, dmg, ele)
+xi.mobskills.mobAddBonuses = function(caster, target, dmg, ele) -- used for SMN magical bloodpacts, despite the name.
 
     local magicDefense = getElementalDamageReduction(target, ele)
     dmg = math.floor(dmg * magicDefense)
@@ -490,10 +488,42 @@ xi.mobskills.mobBreathMove = function(mob, target, percent, base, element, cap)
 
     damage = utils.clamp(damage, 1, cap)
 
+    local liement = target:checkLiementAbsorb(xi.damageType.ELEMENTAL + element) -- check for Liement.
+    if liement < 0 then -- skip BDT/DT etc for Liement if we absorb.
+        return math.floor(damage * liement)
+    end
+
+    -- The values set for this modifiers are base 10,000.
+    -- -2500 in item_mods.sql means -25% damage recived.
+    -- 2500 would mean 25% ADDITIONAL damage taken.
+    -- The effects of the "Shell" spells are also included in this step. The effect also aplies a negative value.
+
+    local globalDamageTaken   = target:getMod(xi.mod.DMG) / 10000          -- Mod is base 10000
+    local breathDamageTaken   = target:getMod(xi.mod.DMGBREATH) / 10000    -- Mod is base 10000
+    local combinedDamageTaken = 1.0 +  utils.clamp(breathDamageTaken + globalDamageTaken, -0.5, 0.5) -- The combination of regular "Damage Taken" and "Breath Damage Taken" caps at 50%. There is no BDTII known as of yet.
+
+    damage = math.floor(damage * combinedDamageTaken)
+
+    -- Handle Phalanx
+    if damage > 0 then
+        damage = utils.clamp(damage - target:getMod(xi.mod.PHALANX), 0, 99999)
+    end
+
+    -- Handle Stoneskin
+    if damage > 0 then
+        damage = utils.clamp(utils.stoneskin(target, damage), -99999, 99999)
+    end
+
     return damage
 end
 
 xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType, damageType, shadowbehav)
+
+    -- If target has Hysteria, no message skip rest
+    if mob:hasStatusEffect(xi.effect.HYSTERIA) then
+        skill:setMsg(xi.msg.basic.NONE)
+        return 0
+    end
 
     -- physical attack missed, skip rest
     if skill:hasMissMsg() then
@@ -563,18 +593,28 @@ xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType,
     if attackType == xi.attackType.PHYSICAL then
         dmg = target:physicalDmgTaken(dmg, damageType)
     elseif attackType == xi.attackType.MAGICAL then
-        dmg = target:magicDmgTaken(dmg)
+        dmg = target:magicDmgTaken(dmg, damageType - xi.damageType.ELEMENTAL)
     elseif attackType == xi.attackType.BREATH then
         dmg = target:breathDmgTaken(dmg)
     elseif attackType == xi.attackType.RANGED then
         dmg = target:rangedDmgTaken(dmg)
     end
 
-    --handling phalanx
-    dmg = dmg - target:getMod(xi.mod.PHALANX)
-
     if dmg < 0 then
-        return 0
+        return dmg
+    end
+
+    -- Handle Phalanx
+    if dmg > 0 then
+        dmg = utils.clamp(dmg - target:getMod(xi.mod.PHALANX), 0, 99999)
+    end
+
+    if attackType == xi.attackType.MAGICAL then
+        dmg = utils.oneforall(target, dmg)
+
+        if dmg < 0 then
+            return 0
+        end
     end
 
     dmg = utils.stoneskin(target, dmg)
@@ -655,6 +695,12 @@ xi.mobskills.mobDrainMove = function(mob, target, drainType, drain, attackType, 
 end
 
 xi.mobskills.mobPhysicalDrainMove = function(mob, target, skill, drainType, drain)
+
+    -- If target has Hysteria, no message skip rest
+    if mob:hasStatusEffect(xi.effect.HYSTERIA) then
+        return xi.msg.basic.NONE
+    end
+
     if (xi.mobskills.mobPhysicalHit(skill)) then
         return xi.mobskills.mobDrainMove(mob, target, drainType, drain)
     end
@@ -697,6 +743,12 @@ xi.mobskills.mobDrainAttribute = function(mob, target, typeEffect, power, tick, 
 end
 
 xi.mobskills.mobDrainStatusEffectMove = function(mob, target)
+
+    -- If target has Hysteria, no message skip rest
+    if mob:hasStatusEffect(xi.effect.HYSTERIA) then
+        return xi.msg.basic.NONE
+    end
+
     -- try to drain buff
     local effect = mob:stealStatusEffect(target)
 

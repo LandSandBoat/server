@@ -2,7 +2,7 @@
 -- Rail Cannon 3 gears
 -- 3 Gears: Rail Cannon is AoE and strips Utsusemi
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------

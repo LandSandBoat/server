@@ -1,7 +1,7 @@
 -----------------------------------
 -- Spell: Flare II
 -----------------------------------
-require("scripts/globals/spells/spell_damage")
+require("scripts/globals/spells/damage_spell")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
@@ -13,9 +13,9 @@ end
 
 spell_object.onSpellCast = function(caster, target, spell)
     -- no point in making a separate function for this if the only thing they won't have in common is the name
-    handleNinjutsuDebuff(caster, target, spell, 30, 10, xi.mod.WATER_RES)
+    handleNinjutsuDebuff(caster, target, spell, 30, 10, xi.mod.WATER_MEVA)
 
-    return xi.spells.spell_damage.useDamageSpell(caster, target, spell)
+    return xi.spells.damage.useDamageSpell(caster, target, spell)
 end
 
 return spell_object

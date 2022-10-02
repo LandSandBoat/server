@@ -1,10 +1,10 @@
 -----------------------------------
 -- Zone: Apollyon
 -----------------------------------
-local ID = require("scripts/zones/Apollyon/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/zone")
-require("scripts/globals/status")
+local ID = require('scripts/zones/Apollyon/IDs')
+require('scripts/globals/conquest')
+require('scripts/globals/zone')
+require('scripts/globals/status')
 -----------------------------------
 local zone_object = {}
 
@@ -13,10 +13,10 @@ zone_object.onInitialize = function(zone)
     SetServerVariable("[CS_Apollyon]Time", 0)
     SetServerVariable("[NE_Apollyon]Time", 0)
     SetServerVariable("[NW_Apollyon]Time", 0)
-    SetServerVariable("[SE_Apollyon]Time", 0)
+    SetServerVariable("[SE_APOLLYON]Time", 0)
     SetServerVariable("[SW_Apollyon]Time", 0)
 
-    zone:registerRegion(1,  637, -4, -642,  642, 4, -637) -- APOLLYON_SE_NE exit
+    zone:registerRegion(1,  637, -4, -642,  642, 4, -637) -- SE Apollyon NE exit
     zone:registerRegion(2, -642, -4, -642, -637, 4, -637) -- APOLLYON_NW_SW exit
 
     zone:registerRegion(20, 396, -4, -522, 403, 4, -516) -- appolyon SE telporter floor 1 to floor 2
@@ -73,19 +73,19 @@ zone_object.onRegionEnter = function(player,region)
 
         -- Apollyon: SE Teleporters
         [20] = function()
-            if GetNPCByID(ID.npc.APOLLYON_SE_PORTAL[1]):getAnimation() == xi.animation.OPEN_DOOR then
+            if GetNPCByID(ID.SE_APOLLYON.npc.PORTAL[1]):getAnimation() == xi.animation.OPEN_DOOR then
                 player:startOptionalCutscene(219)
             end
         end,
 
         [21] = function()
-            if GetNPCByID(ID.npc.APOLLYON_SE_PORTAL[2]):getAnimation() == xi.animation.OPEN_DOOR then
+            if GetNPCByID(ID.SE_APOLLYON.npc.PORTAL[2]):getAnimation() == xi.animation.OPEN_DOOR then
                 player:startOptionalCutscene(218)
             end
         end,
 
         [22] = function()
-            if GetNPCByID(ID.npc.APOLLYON_SE_PORTAL[3]):getAnimation() == xi.animation.OPEN_DOOR then
+            if GetNPCByID(ID.SE_APOLLYON.npc.PORTAL[3]):getAnimation() == xi.animation.OPEN_DOOR then
                 player:startOptionalCutscene(216)
             end
         end,

@@ -17,6 +17,7 @@ local event =
     [xi.zone.RULUDE_GARDENS] = 10162,
     [xi.zone.SOUTHERN_SAN_DORIA] = 960
 }
+
 local menuFlags =
 {
     expand = 0x8,

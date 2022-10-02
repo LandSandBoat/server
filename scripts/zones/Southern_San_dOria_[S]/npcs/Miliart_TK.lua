@@ -8,6 +8,7 @@ local ID = require("scripts/zones/Southern_San_dOria_[S]/IDs")
 require("scripts/globals/status")
 require("scripts/globals/campaign")
 require("scripts/globals/utils")
+require("scripts/globals/extravaganza")
 -----------------------------------
 local entity = {}
 
@@ -17,7 +18,7 @@ end
 entity.onTrigger = function(player, npc)
     local notes = player:getCurrency("allied_notes")
     local freelances = 99 -- Faking it for now
-    local ciphers = 0
+    local cipher = xi.extravaganza.campaignActive() * 4
     -- 0 for not displaying ciphers
     -- 4 for Valaneiral (New Year's & Summer Alter Ego Extravaganzas)
     -- 8 for Adelheid (Spring & Autumn Alter Ego Extravaganzas)
@@ -35,14 +36,14 @@ entity.onTrigger = function(player, npc)
     if medalRank == 0 then
         player:startEvent(111)
     else
-        player:startEvent(110, allegiance, notes, freelances, ciphers, medalRank, bonusEffects, timeStamp, 0)
+        player:startEvent(110, allegiance, notes, freelances, cipher, medalRank, bonusEffects, timeStamp, 0)
     end
 end
 
 entity.onEventUpdate = function(player, csid, option)
     -- local itemid = 0
     local canEquip = 2 -- Faking it for now.
-    -- 0 = Wrong job, 1 = wrong level, 2 = Everything is in order, 3 or greater = menu exits...
+    -- 0 = Wrong job, 1 = wrong level, 2 = Everything is in order, 3 or greater = menu exits
     if csid == 110 and option >= 2 and option <= 2306 then
         -- itemid = getSandOriaNotesItem(option)
         player:updateEvent(0, 0, 0, 0, 0, 0, 0, canEquip) -- canEquip(player, itemid));  <- works for sanction NPC, wtf?

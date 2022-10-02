@@ -2,11 +2,11 @@
 -- Area: Abyssea-Attohwa
 --   NM: Tunga
 -----------------------------------
-mixins = {require("scripts/mixins/families/chigoe")}
+mixins = { require("scripts/mixins/families/chigoe") }
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

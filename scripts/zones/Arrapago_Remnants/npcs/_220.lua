@@ -22,7 +22,7 @@ entity.onEventFinish = function(player, csid, option, door)
         for id = ID.mob[1][2].mobs_start, ID.mob[1][2].mobs_end do
             SpawnMob(id, instance)
         end
-        door:untargetable(true)
+        door:setUntargetable(true)
     end
 end
 

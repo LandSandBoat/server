@@ -6,7 +6,7 @@
 -- !pos 95 0 111 230
 -----------------------------------
 require("scripts/globals/status")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/titles")
 require("scripts/globals/keyitems")
 require("scripts/globals/shop")
@@ -19,22 +19,21 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
     local theCrimsonTrial = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_CRIMSON_TRIAL)
     local envelopedInDarkness = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ENVELOPED_IN_DARKNESS)
     local peaceForTheSpirit = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PEACE_FOR_THE_SPIRIT)
     local peaceForTheSpiritCS = player:getCharVar("peaceForTheSpiritCS")
-    local OrcishDriedFood = player:hasKeyItem(xi.ki.ORCISH_DRIED_FOOD)
+    local orcishDriedFood = player:hasKeyItem(xi.ki.ORCISH_DRIED_FOOD)
 
-    if (player:getMainJob() == xi.job.RDM and player:getMainLvl() >= xi.settings.AF1_QUEST_LEVEL and theCrimsonTrial == QUEST_AVAILABLE) then
+    if (player:getMainJob() == xi.job.RDM and player:getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL and theCrimsonTrial == QUEST_AVAILABLE) then
         if (player:getCharVar("has_seen_rdmaf1_quest_already") == 0) then
             player:startEvent(70)
         else
             player:startEvent(71)
         end
-    elseif (theCrimsonTrial == QUEST_ACCEPTED and OrcishDriedFood == false) then
+    elseif (theCrimsonTrial == QUEST_ACCEPTED and orcishDriedFood == false) then
         player:startEvent(74)
-    elseif (OrcishDriedFood == true) then
+    elseif (orcishDriedFood == true) then
         player:startEvent(75)
     elseif (theCrimsonTrial == QUEST_COMPLETED and envelopedInDarkness == QUEST_AVAILABLE) then
         player:startEvent(68)
@@ -49,14 +48,12 @@ entity.onTrigger = function(player, npc)
     else
         player:startEvent(15)
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if (csid == 70 or csid == 71) then
         if (csid == 70 and option == 0) then
             player:setCharVar("has_seen_rdmaf1_quest_already", 1)
@@ -79,7 +76,6 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 66) then
         player:setCharVar("peaceForTheSpiritCS", 3)
     end
-
 end
 
 return entity

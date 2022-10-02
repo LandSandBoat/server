@@ -16,12 +16,13 @@ function error(player, msg)
 end
 
 function onTrigger(player, shouldReloadData)
-    local filesToUnload = {
+    local filesToUnload =
+    {
         "scripts/globals/interaction/interaction_lookup",
         "scripts/globals/interaction/interaction_global",
     }
 
-    for i=1, #filesToUnload do
+    for i = 1, #filesToUnload do
         package.loaded[filesToUnload[i]] = nil
     end
 

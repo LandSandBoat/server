@@ -30,13 +30,14 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    local JoL = GetMobByID(ID.mob.JAILER_OF_LOVE)
-    local HPEMDES = JoL:getLocalVar("JoL_Qn_hpemde_Killed")
-    JoL:setLocalVar("JoL_Qn_hpemde_Killed", HPEMDES+1)
+    local jailerOfLove = GetMobByID(ID.mob.JAILER_OF_LOVE)
+    local numHpemdeKilled = jailerOfLove:getLocalVar("JoL_Qn_hpemde_Killed")
+
+    jailerOfLove:setLocalVar("JoL_Qn_hpemde_Killed", numHpemdeKilled + 1)
 end
 
 return entity

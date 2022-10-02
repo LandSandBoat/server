@@ -19,7 +19,7 @@ end
 
 entity.onPath = function(mob)
     local spawnPos = mob:getSpawnPos()
-    mob:pathThrough({spawnPos.x, spawnPos.y, spawnPos.z})
+    mob:pathThrough({ spawnPos.x, spawnPos.y, spawnPos.z })
     local pos = mob:getPos()
     if (spawnPos.x == pos.x and spawnPos.z == pos.z) then
         mob:setPos(spawnPos.x, spawnPos.y, spawnPos.z, mob:getRotPos() + 16)
@@ -53,8 +53,8 @@ entity.onMobFight = function(mob)
 
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
-    if (isKiller) then
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller then
         local mobId = mob:getID()
         local nm    = GetMobByID(ID.mob.JAILER_OF_TEMPERANCE)
         local ph    = nm:getLocalVar("ph")

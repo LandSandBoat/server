@@ -24,11 +24,13 @@
 
 #include "cbasetypes.h"
 #include "console_service.h"
+#include "settings.h"
 
 extern int    arg_c;
 extern char** arg_v;
 
-extern int   runflag;
+extern std::atomic<bool> gRunFlag;
+
 extern char* SERVER_NAME;
 extern char  SERVER_TYPE;
 

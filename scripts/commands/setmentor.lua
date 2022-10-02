@@ -11,7 +11,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!setmentor <mode> {player}")
+    player:PrintToPlayer("!setmentor <mode> (player)")
     player:PrintToPlayer("mode: 0 = Not a mentor, 1 = Unlocked but inactive.")
 end
 

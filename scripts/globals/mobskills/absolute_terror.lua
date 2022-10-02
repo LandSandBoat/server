@@ -3,7 +3,7 @@
 -- Causes Terror, which causes the victim to be stunned for the duration of the effect, this can not be removed.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}

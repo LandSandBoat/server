@@ -3,7 +3,7 @@
 -- Description: Deals damage to targets in range. Additional effect: Stun
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}

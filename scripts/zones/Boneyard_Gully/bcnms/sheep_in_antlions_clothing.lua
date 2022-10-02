@@ -24,10 +24,10 @@ battlefield_object.onBattlefieldInitialise = function(battlefield)
     GetMobByID(ID.sheepInAntlionsClothing[bfID].ARMORED_HUNTER_ID):setPos(ID.sheepInAntlionsClothing[bfID].ant_positions[pos[3]]) -- Armored Hunter
 
     -- Select Tuchulcha's sandpit positions
-    local Tuchulcha = GetMobByID(ID.sheepInAntlionsClothing[bfID].TUCHULCHA_ID)
-    Tuchulcha:setLocalVar('sand_pit1', pos[4])
-    Tuchulcha:setLocalVar('sand_pit2', pos[5])
-    Tuchulcha:setLocalVar('sand_pit3', pos[6])
+    local tuchulcha = GetMobByID(ID.sheepInAntlionsClothing[bfID].TUCHULCHA_ID)
+    tuchulcha:setLocalVar('sand_pit1', pos[4])
+    tuchulcha:setLocalVar('sand_pit2', pos[5])
+    tuchulcha:setLocalVar('sand_pit3', pos[6])
 end
 
 battlefield_object.onBattlefieldTick = function(battlefield, tick)

@@ -12,13 +12,13 @@ entity.onMobSpawn = function(mob)
     GetNPCByID(ID.npc[2][2].SOCKET, instance):setStatus(xi.status.DISAPPEAR)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
-    local CELL = mob:getLocalVar("Cell")
-    local AMOUNT = mob:getLocalVar("Qnt") *2
+entity.onMobDeath = function(mob, player, optParams)
+    local cellType = mob:getLocalVar("Cell")
+    local numCells = mob:getLocalVar("Qnt") * 2
 
-    while AMOUNT > 0 do
-        player:addTreasure(CELL)
-        AMOUNT = AMOUNT -1
+    while numCells > 0 do
+        player:addTreasure(cellType)
+        numCells = numCells -1
     end
 end
 

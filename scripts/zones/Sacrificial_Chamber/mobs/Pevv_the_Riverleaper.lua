@@ -3,7 +3,7 @@
 --  Mob: Pevv the Riverleaper
 -- BCNM: Amphibian Assault
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
@@ -19,7 +19,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     DespawnMob(mob:getID() + 2)
 end
 

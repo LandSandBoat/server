@@ -3,13 +3,13 @@
 --  Mob: Ziz
 -- Note: PH for Zizzy Zillah
 -----------------------------------
-mixins = {require("scripts/mixins/families/ziz")}
+mixins = { require("scripts/mixins/families/ziz") }
 local ID = require("scripts/zones/Mamook/IDs")
 require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)

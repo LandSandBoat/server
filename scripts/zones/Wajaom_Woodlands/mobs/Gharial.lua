@@ -12,7 +12,7 @@ entity.onMobInitialize = function(mob)
     mob:setMod(xi.mod.MOVE, 12)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 450)
 end
 

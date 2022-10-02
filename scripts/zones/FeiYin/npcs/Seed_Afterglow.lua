@@ -25,11 +25,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local offset        = npc:getID() - ID.npc.AFTERGRLOW_OFFSET
-    local ACP           = player:getCurrentMission(xi.mission.log_id.ACP)
-    local needToZone    = player:needToZone()
-    local progressMask  = player:getCharVar("SEED_AFTERGLOW_MASK")
-    local intensity     = player:getCharVar("SEED_AFTERGLOW_INTENSITY")
+    local offset               = npc:getID() - ID.npc.AFTERGRLOW_OFFSET
+    local aCrystallineProphecy = player:getCurrentMission(xi.mission.log_id.ACP)
+    local needToZone           = player:needToZone()
+    local progressMask         = player:getCharVar("SEED_AFTERGLOW_MASK")
+    local intensity            = player:getCharVar("SEED_AFTERGLOW_INTENSITY")
 
     if (
         player:hasKeyItem(xi.ki.MARK_OF_SEED) or
@@ -37,13 +37,13 @@ entity.onTrigger = function(player, npc)
         player:hasKeyItem(xi.ki.IVORY_KEY) or
         os.time() < player:getCharVar("LastAzureKey") or
         os.time() < player:getCharVar("LastIvoryKey") or
-        ACP < xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II
+        aCrystallineProphecy < xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II
     ) then
         player:messageSpecial(ID.text.SOFTLY_SHIMMERING_LIGHT)
 
     elseif (needToZone and not player:hasStatusEffect(xi.effect.MARK_OF_SEED)) then
         player:messageSpecial(ID.text.YOU_REACH_FOR_THE_LIGHT)
-    elseif (ACP >= xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II and not utils.mask.getBit(progressMask, offset)) then
+    elseif (aCrystallineProphecy >= xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_II and not utils.mask.getBit(progressMask, offset)) then
         player:setCharVar("SEED_AFTERGLOW_MASK", utils.mask.setBit(progressMask, offset, true))
         intensity = intensity + 1
         if (intensity == 9) then

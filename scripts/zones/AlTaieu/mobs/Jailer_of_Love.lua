@@ -22,7 +22,7 @@ local minionGroup =
 
 entity.onMobEngaged = function(mob, target)
     mob:hideName(false)
-    mob:untargetable(false)
+    mob:setUntargetable(false)
     mob:setAnimationSub(2)
 end
 
@@ -76,7 +76,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)

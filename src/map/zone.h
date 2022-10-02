@@ -42,8 +42,8 @@ enum ZONEID : uint16
 {
     // Note: "residential zones" aren't really zones of their own.
     // It's more of a sub zone - the dats for messages and entities will all be from the zone you entered from.
-    ZONE_RESIDENTIAL_AREA               = 0, // Old Tech Demonstration zone from pre-release (aka "the monorail place")
-    // The Above should NOT be labeled "RESIDENTIAL_AREA"
+    ZONE_RESIDENTIAL_AREA = 0, // Old Tech Demonstration zone from pre-release (aka "the monorail place")
+                               // The Above should NOT be labeled "RESIDENTIAL_AREA"
     ZONE_PHANAUET_CHANNEL               = 1,
     ZONE_CARPENTERS_LANDING             = 2,
     ZONE_MANACLIPPER                    = 3,
@@ -176,7 +176,7 @@ enum ZONEID : uint16
     ZONE_RUAUN_GARDENS                  = 130,
     ZONE_MORDION_GAOL                   = 131,
     ZONE_ABYSSEA_LA_THEINE              = 132,
-    ZONE_133                            = 133, // The zone background of char select. AKA "Lilliput" because of tiny villages.
+    ZONE_OUTER_RAKAZNAR_U2              = 133,
     ZONE_DYNAMIS_BEAUCEDINE             = 134,
     ZONE_DYNAMIS_XARCABARD              = 135,
     ZONE_BEAUCEDINE_GLACIER_S           = 136,
@@ -272,7 +272,7 @@ enum ZONEID : uint16
     ZONE_KAZHAM_JEUNO_AIRSHIP           = 226,
     ZONE_SHIP_BOUND_FOR_SELBINA_PIRATES = 227,
     ZONE_SHIP_BOUND_FOR_MHAURA_PIRATES  = 228,
-    ZONE_229                            = 229,
+    ZONE_THRONE_ROOM_V                  = 229,
     ZONE_SOUTHERN_SANDORIA              = 230,
     ZONE_NORTHERN_SANDORIA              = 231,
     ZONE_PORT_SANDORIA                  = 232,
@@ -318,7 +318,7 @@ enum ZONEID : uint16
     ZONE_DHO_GATES                      = 272,
     ZONE_WOH_GATES                      = 273,
     ZONE_OUTER_RAKAZNAR                 = 274,
-    ZONE_OUTER_RAKAZNAR_U               = 275,
+    ZONE_OUTER_RAKAZNAR_U1              = 275,
     ZONE_RAKAZNAR_INNER_COURT           = 276,
     ZONE_RAKAZNAR_TURRIS                = 277,
     ZONE_278                            = 278,
@@ -438,6 +438,7 @@ enum class TELEPORT_TYPE : uint8
     CAMPAIGN_WINDY  = 8,
     HOMEPOINT       = 9,
     SURVIVAL        = 10,
+    WAYPOINT        = 11,
 };
 
 enum ZONEMISC
@@ -458,12 +459,6 @@ enum ZONEMISC
     MISC_CAMPAIGN = 0x1000, // Campaign zones
 };
 
-/************************************************************************
- *                                                                       *
- *                                                                       *
- *                                                                       *
- ************************************************************************/
-
 struct zoneMusic_t
 {
     uint8 m_songDay;   // music (daytime)
@@ -471,12 +466,6 @@ struct zoneMusic_t
     uint8 m_bSongS;    // battle music (solo)
     uint8 m_bSongM;    // battle music (party)
 };
-
-/************************************************************************
- *                                                                       *
- *                                                                       *
- *                                                                       *
- ************************************************************************/
 
 struct zoneWeather_t
 {
@@ -506,12 +495,6 @@ struct zoneLine_t
     position_t m_toPos;
 };
 
-/************************************************************************
- *                                                                       *
- *                                                                       *
- *                                                                       *
- ************************************************************************/
-
 class CBasicPacket;
 class CBaseEntity;
 class CCharEntity;
@@ -527,6 +510,8 @@ typedef std::list<zoneLine_t*> zoneLineList_t;
 typedef std::map<uint16, zoneWeather_t> weatherVector_t;
 
 typedef std::map<uint16, CBaseEntity*> EntityList_t;
+
+using QueryByNameResult_t = std::vector<CBaseEntity*>;
 
 int32 zone_update_weather(uint32 tick, CTaskMgr::CTask* PTask);
 
@@ -555,8 +540,11 @@ public:
     void SetBackgroundMusicDay(uint8 music);
     void SetBackgroundMusicNight(uint8 music);
 
+    const QueryByNameResult_t& queryEntitiesByName(std::string const& name);
+
     uint32 GetLocalVar(const char* var);
-    void SetLocalVar(const char* var, uint32 val);
+    void   SetLocalVar(const char* var, uint32 val);
+    void   ResetLocalVars();
 
     virtual CCharEntity* GetCharByName(int8* name); // finds the player if exists in zone
     virtual CCharEntity* GetCharByID(uint32 id);
@@ -596,13 +584,13 @@ public:
 
     void InsertRegion(CRegion* Region); // добавляем в зону активную область
 
-    virtual void TOTDChange(TIMETYPE TOTD); // обработка реакции мира на смену времени суток
-    virtual void PushPacket(CBaseEntity*, GLOBAL_MESSAGE_TYPE, CBasicPacket*); // отправляем глобальный пакет в пределах зоны
+    virtual void TOTDChange(TIMETYPE TOTD);
+    virtual void PushPacket(CBaseEntity*, GLOBAL_MESSAGE_TYPE, CBasicPacket*);
 
     virtual void UpdateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask);
     virtual void UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask, bool alwaysInclude = false);
 
-    bool IsZoneActive() const;
+    bool           IsZoneActive() const;
     CZoneEntities* GetZoneEntities();
 
     time_point      m_RegionCheckTime; // время последней проверки регионов
@@ -634,18 +622,18 @@ private:
     ZONE_TYPE      m_zoneType;
     REGION_TYPE    m_regionID;    // ID области
     CONTINENT_TYPE m_continentID; // ID континента
-    string_t       m_zoneName;    // имя зоны
+    std::string    m_zoneName;    // имя зоны
     uint16         m_zonePort;    // порт зоны
     uint32         m_zoneIP;      // IP зоны
     bool           m_useNavMesh;  // Use navmesh for roaming, chasing
 
-    WEATHER        m_Weather;           // текущая погода
-    uint32         m_WeatherChangeTime; // время начала текущей погоды
+    WEATHER m_Weather;
+    uint32  m_WeatherChangeTime;
 
     CZoneEntities* m_zoneEntities;
 
-    uint16 m_tax; // налог в bazaar
-    uint16 m_miscMask; // битовое поле, описывающее возможности использования в зоне определенных умений
+    uint16 m_tax;
+    uint16 m_miscMask;
 
     zoneMusic_t m_zoneMusic; // информация о мелодиях, используемых в зоне
 
@@ -663,8 +651,11 @@ private:
 
     time_point m_timeZoneEmpty; // The time_point when the last player left the zone
 
+    std::unordered_map<std::string, QueryByNameResult_t> m_queryByNameResults;
+
 protected:
     CTaskMgr::CTask* ZoneTimer; // указатель на созданный таймер - ZoneServer. необходим для возможности его остановки
+
     void createZoneTimer();
     void CharZoneIn(CCharEntity* PChar);
     void CharZoneOut(CCharEntity* PChar);

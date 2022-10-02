@@ -7,7 +7,7 @@
 --  Range: Melee
 --  Notes: Used only when wielding no weapon, and only when the second weapon is not broken.
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------

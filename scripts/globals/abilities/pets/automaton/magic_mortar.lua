@@ -2,7 +2,7 @@
 -- Magic Mortar
 -----------------------------------
 require("scripts/globals/status")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/automatonweaponskills")
 
 -----------------------------------
@@ -17,7 +17,7 @@ ability_object.onAutomatonAbility = function(target, automaton, skill, master, a
     local ftp
     local tp = skill:getTP()
 
-    if not xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+    if not xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         ftp = 0.5 + ((0.5/3000) * tp)
     else
         -- Might be wrong, it may only use max hp in its new form, also it may be able to miss and take defense into account as well

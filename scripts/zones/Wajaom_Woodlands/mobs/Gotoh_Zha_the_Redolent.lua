@@ -38,8 +38,8 @@ entity.onMobSpawn = function(mob)
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            {id = xi.jsa.MANAFONT, hpp = math.random(66, 95)},
-            {id = xi.jsa.BENEDICTION, hpp = 0},
+            { id = xi.jsa.MANAFONT, hpp = math.random(66, 95) },
+            { id = xi.jsa.BENEDICTION, hpp = 0 },
         },
     })
 
@@ -55,23 +55,25 @@ entity.onMobFight = function(mob, target)
         xi.mix.jobSpecial.config(mob, {
             specials =
             {
-                {id = xi.jsa.MANAFONT, hpp = 0},
-                {id = xi.jsa.BENEDICTION, hpp = math.random(25, 50)},
+                { id = xi.jsa.MANAFONT, hpp = 0 },
+                { id = xi.jsa.BENEDICTION, hpp = math.random(25, 50) },
             },
         })
     end
 end
 
 entity.onCriticalHit = function(mob)
-    local RND = math.random(1, 100)
-    if mob:getAnimationSub() == 0 and RND <= 10 then
+    local randVal = math.random(1, 100)
+
+    if mob:getAnimationSub() == 0 and randVal <= 10 then
         mob:setAnimationSub(1)
     end
 end
 
 entity.onWeaponskillHit = function(mob, attacker, weaponskill)
-    local RND = math.random(1, 100)
-    if mob:getAnimationSub() == 0 and RND <= 10 then
+    local randVal = math.random(1, 100)
+
+    if mob:getAnimationSub() == 0 and randVal <= 10 then
         mob:setAnimationSub(1)
     end
 

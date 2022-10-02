@@ -14,8 +14,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local RegionOwner = GetRegionOwner(xi.region.MOVALPOLOS)
-    if (RegionOwner ~= xi.nation.WINDURST) then
+    local regionOwner = GetRegionOwner(xi.region.MOVALPOLOS)
+
+    if (regionOwner ~= xi.nation.WINDURST) then
         player:showText(npc, ID.text.PRESTAPIQ_CLOSED_DIALOG)
     else
         player:showText(npc, ID.text.PRESTAPIQ_OPEN_DIALOG)
@@ -29,9 +30,7 @@ entity.onTrigger = function(player, npc)
             5165,   736    --Movalpolos Water
         }
         xi.shop.general(player, stock, xi.quest.fame_area.WINDURST)
-
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)

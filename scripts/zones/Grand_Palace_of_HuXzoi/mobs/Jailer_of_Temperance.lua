@@ -3,7 +3,7 @@
 --   NM: Jailer of Temperance
 -----------------------------------
 local huxzoiGlobal = require("scripts/zones/Grand_Palace_of_HuXzoi/globals")
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
@@ -95,7 +95,7 @@ entity.onMobFight = function(mob)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)

@@ -12,7 +12,7 @@
 -- 1.00      1.00      1.00
 -----------------------------------
 require("scripts/globals/weaponskills")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 local weaponskill_object = {}
@@ -32,7 +32,7 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     params.ignored200 = 0.25
     params.ignored300 = 0.5
 
-    if (xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
+    if (xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
         params.vit_wsc = 1.0
     end
 

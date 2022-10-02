@@ -6,7 +6,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Korroloka_Tunnel/IDs")
 require("scripts/globals/keyitems")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
@@ -29,7 +29,7 @@ entity.onTrigger = function(player, npc)
 
                     if player:getCharVar("KorrolokaLeeches_SpawningPC") > 0 then
                         player:setCharVar("KorrolokaLeeches_SpawningPC", 0)
-                        npc:hideNPC(xi.settings.FORCE_SPAWN_QM_RESET_TIME)
+                        npc:hideNPC(xi.settings.main.FORCE_SPAWN_QM_RESET_TIME)
                     end
                 else
                     player:messageSpecial(ID.text.SENSE_OF_BOREBODING)

@@ -17,7 +17,8 @@ end
 entity.onTrigger = function(player, npc)
     player:showText(npc, ID.text.ENSASA_SHOP_DIALOG)
 
-    local stock = {
+    local stock =
+    {
         104,  3881, 1,     --Tarutaru Folding Screen
 
         17336,     5, 2,     --Crossbow Bolt

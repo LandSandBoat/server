@@ -16,42 +16,42 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local CrestProgress = player:getCharVar("TheHolyCrest_Event")
-    local RemedyKI = player:hasKeyItem(xi.ki.DRAGON_CURSE_REMEDY)
-    local Stalker_Quest = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.KNIGHT_STALKER)
-    local StalkerProgress = player:getCharVar("KnightStalker_Progress")
-    local WildcatSandy = player:getCharVar("WildcatSandy")
+    local crestProgress = player:getCharVar("TheHolyCrest_Event")
+    local remedyKI = player:hasKeyItem(xi.ki.DRAGON_CURSE_REMEDY)
+    local stalkerQuest = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.KNIGHT_STALKER)
+    local stalkerProgress = player:getCharVar("KnightStalker_Progress")
+    local wildcatSandy = player:getCharVar("WildcatSandy")
 
     if
         player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
-        not utils.mask.getBit(WildcatSandy, 17)
+        not utils.mask.getBit(wildcatSandy, 17)
     then
         player:startEvent(559)
     -- Need to speak with Rahal to get Dragon Curse Remedy
-    elseif CrestProgress == 5 and RemedyKI == false then
+    elseif crestProgress == 5 and remedyKI == false then
         player:startEvent(60) -- Gives key item
-    elseif CrestProgress == 5 and RemedyKI == true then
+    elseif crestProgress == 5 and remedyKI == true then
         player:startEvent(122) -- Reminder to go to Gelsba
 
     -- Completed AF2, AF3 available, and currently on DRG.  No level check, since they cleared AF2.
     elseif
         player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.CHASING_QUOTAS) == QUEST_COMPLETED and
-        Stalker_Quest == QUEST_AVAILABLE and player:getMainJob() == xi.job.DRG
+        stalkerQuest == QUEST_AVAILABLE and player:getMainJob() == xi.job.DRG
     then
         if (player:getCharVar("KnightStalker_Declined") == 0) then
             player:startEvent(121) -- Start AF3
         else
             player:startEvent(120) -- Short version if they previously declined
         end
-    elseif Stalker_Quest == QUEST_ACCEPTED then
-        if StalkerProgress == 0 then
+    elseif stalkerQuest == QUEST_ACCEPTED then
+        if stalkerProgress == 0 then
             player:startEvent(119) -- Reminder to go to Brugaire/Ceraulian
         elseif player:hasKeyItem(xi.ki.CHALLENGE_TO_THE_ROYAL_KNIGHTS) then
-            if StalkerProgress == 1 then
+            if stalkerProgress == 1 then
                 player:startEvent(78) -- Reaction to challenge, go talk to Balasiel
-            elseif StalkerProgress == 2 then
+            elseif stalkerProgress == 2 then
                 player:startEvent(69) -- Reminder to talk to Balasiel
-            elseif StalkerProgress == 3 then
+            elseif stalkerProgress == 3 then
                 player:startEvent(110) -- To the south with you
             end
         end

@@ -23,7 +23,7 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option, target)
-    xi.assaultUtil.onAssaultUpdate(player, csid, option)
+    xi.assault.onAssaultUpdate(player, csid, option)
     xi.instance.onEventUpdate(player, csid, option)
 end
 

@@ -12,7 +12,7 @@ require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
 require('scripts/globals/zone')
-require('scripts/settings/main')
+require('scripts/globals/settings')
 -----------------------------------
 local upperJeunoID = require("scripts/zones/Upper_Jeuno/IDs")
 -----------------------------------
@@ -54,7 +54,7 @@ mission.sections =
                             npcUtil.tradeHasExactly(trade, xi.items.GRAY_CHIP)
                         )
                     then
-                        return mission:progressEvent(52, 500 * xi.settings.GIL_RATE)
+                        return mission:progressEvent(52, 500 * xi.settings.main.GIL_RATE)
                     end
                 end,
 
@@ -95,7 +95,7 @@ mission.sections =
                 [52] = function(player, csid, option, npc)
                     player:confirmTrade()
 
-                    player:addGil(500 * xi.settings.GIL_RATE)
+                    player:addGil(500 * xi.settings.main.GIL_RATE)
                     npcUtil.giveKeyItem(player, xi.ki.PSOXJA_PASS)
                     mission:setVar(player, 'Status', 3)
                 end,

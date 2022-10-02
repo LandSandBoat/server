@@ -2,7 +2,7 @@
 -- Area: Pso'Xja
 --   NM: Golden-Tongued Culberry
 -----------------------------------
-mixins = {require("scripts/mixins/families/tonberry")}
+mixins = { require("scripts/mixins/families/tonberry") }
 local ID = require("scripts/zones/PsoXja/IDs")
 require("scripts/globals/status")
 -----------------------------------
@@ -22,7 +22,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

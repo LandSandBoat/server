@@ -58,6 +58,19 @@ void CLuaAction::actionID(uint16 actionid)
     m_PLuaAction->actionid = actionid;
 }
 
+uint16 CLuaAction::getParam(uint32 actionTargetID)
+{
+    for (auto&& actionList : m_PLuaAction->actionLists)
+    {
+        if (actionList.ActionTargetID == actionTargetID)
+        {
+            return actionList.actionTargets[0].param;
+        }
+    }
+
+    return 0;
+}
+
 void CLuaAction::param(uint32 actionTargetID, int32 param)
 {
     for (auto&& actionList : m_PLuaAction->actionLists)
@@ -131,6 +144,18 @@ void CLuaAction::reaction(uint32 actionTargetID, uint8 reaction)
     }
 }
 
+void CLuaAction::modifier(uint32 actionTargetID, uint8 modifier)
+{
+    for (auto&& actionList : m_PLuaAction->actionLists)
+    {
+        if (actionList.ActionTargetID == actionTargetID)
+        {
+            actionList.actionTargets[0].modifier = static_cast<MODIFIER>(modifier);
+            return;
+        }
+    }
+}
+
 void CLuaAction::additionalEffect(uint32 actionTargetID, uint16 additionalEffect)
 {
     for (auto&& actionList : m_PLuaAction->actionLists)
@@ -176,12 +201,14 @@ void CLuaAction::Register()
     SOL_REGISTER("getRecast", CLuaAction::getRecast);
     SOL_REGISTER("setRecast", CLuaAction::setRecast);
     SOL_REGISTER("actionID", CLuaAction::actionID);
+    SOL_REGISTER("getParam", CLuaAction::getParam);
     SOL_REGISTER("param", CLuaAction::param);
     SOL_REGISTER("messageID", CLuaAction::messageID);
     SOL_REGISTER("getAnimation", CLuaAction::getAnimation);
     SOL_REGISTER("setAnimation", CLuaAction::setAnimation);
     SOL_REGISTER("speceffect", CLuaAction::speceffect);
     SOL_REGISTER("reaction", CLuaAction::reaction);
+    SOL_REGISTER("modifier", CLuaAction::modifier);
     SOL_REGISTER("additionalEffect", CLuaAction::additionalEffect);
     SOL_REGISTER("addEffectParam", CLuaAction::addEffectParam);
     SOL_REGISTER("addEffectMessage", CLuaAction::addEffectMessage);

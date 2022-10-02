@@ -3,7 +3,7 @@
 --   NM: Centurio X-I
 -----------------------------------
 require("scripts/globals/hunts")
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
@@ -19,7 +19,7 @@ entity.onMobSpawn = function(mob)
     mob:addMod(xi.mod.SPELLINTERRUPT, 25)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 426)
 end
 

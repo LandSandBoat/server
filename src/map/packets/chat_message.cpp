@@ -20,11 +20,11 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "chat_message.h"
-#include "common/socket.h"
 #include "../entities/charentity.h"
+#include "common/socket.h"
 #include <cstring>
 
-CChatMessagePacket::CChatMessagePacket(CCharEntity* PChar, CHAT_MESSAGE_TYPE MessageType, const std::string& message, const std::string& sender)
+CChatMessagePacket::CChatMessagePacket(CCharEntity* PChar, CHAT_MESSAGE_TYPE MessageType, std::string const& message, std::string const& sender)
 {
     // there seems to be some sort of variable cap on the length of the packet, which I cannot determine
     // (it changed when zoning, but not when zoning back)
@@ -32,10 +32,10 @@ CChatMessagePacket::CChatMessagePacket(CCharEntity* PChar, CHAT_MESSAGE_TYPE Mes
     // variable in the same way, and is probably so under the same circumstances
     // until that can be found, we'll just use the max length
     auto               buffSize = std::min<size_t>(message.size(), 236);
-    const std::string& name     = sender.empty() ? (const char*)PChar->GetName() : sender;
+    std::string const& name     = sender.empty() ? (const char*)PChar->GetName() : sender;
 
     // Build the packet..
-    //CBasicPacket::id(id);
+    // CBasicPacket::id(id);
     this->setType(0x17);
 
     // 12 (base length / 2) + ((buffSize in chunks of 4) / 2)

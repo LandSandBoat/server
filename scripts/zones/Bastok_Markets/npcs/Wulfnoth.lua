@@ -15,14 +15,14 @@ end
 
 entity.onTrigger = function(player, npc)
     local guildMember = xi.crafting.isGuildMember(player, 6)
-    local SkillCap = xi.crafting.getCraftSkillCap(player, xi.skill.GOLDSMITHING)
-    local SkillLevel = player:getSkillLevel(xi.skill.GOLDSMITHING)
+    local skillCap = xi.crafting.getCraftSkillCap(player, xi.skill.GOLDSMITHING)
+    local skillLevel = player:getSkillLevel(xi.skill.GOLDSMITHING)
 
     if guildMember == 1 then
         if (player:hasStatusEffect(xi.effect.GOLDSMITHING_IMAGERY) == false) then
-            player:startEvent(303, SkillCap, SkillLevel, 1, 201, player:getGil(), 0, 3, 0)
+            player:startEvent(303, skillCap, skillLevel, 1, 201, player:getGil(), 0, 3, 0)
         else
-            player:startEvent(303, SkillCap, SkillLevel, 1, 201, player:getGil(), 7054, 3, 0)
+            player:startEvent(303, skillCap, skillLevel, 1, 201, player:getGil(), 7054, 3, 0)
         end
     else
         player:startEvent(303)

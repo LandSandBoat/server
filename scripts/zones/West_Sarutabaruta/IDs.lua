@@ -10,66 +10,70 @@ zones[xi.zone.WEST_SARUTABARUTA] =
 {
     text =
     {
-        NOTHING_HAPPENS             = 119,   -- Nothing happens...
-        ITEM_CANNOT_BE_OBTAINED     = 6384,  -- You cannot obtain the <item>. Come back after sorting your inventory.
-        ITEM_OBTAINED               = 6390,  -- Obtained: <item>.
-        GIL_OBTAINED                = 6391,  -- Obtained <number> gil.
-        KEYITEM_OBTAINED            = 6393,  -- Obtained key item: <keyitem>.
-        KEYITEM_LOST                = 6394,  -- Lost key item: <keyitem>.
-        NOTHING_OUT_OF_ORDINARY     = 6404,  -- There is nothing out of the ordinary here.
-        FELLOW_MESSAGE_OFFSET       = 6419,  -- I'm ready. I suppose.
-        CARRIED_OVER_POINTS         = 7001,  -- You have carried over <number> login point[/s].
-        LOGIN_CAMPAIGN_UNDERWAY     = 7002,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!<space>
-        LOGIN_NUMBER                = 7003,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
-        FISHING_MESSAGE_OFFSET      = 7057,  -- You can't fish here.
-        DIG_THROW_AWAY              = 7070,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
-        FIND_NOTHING                = 7072,  -- You dig and you dig, but find nothing.
-        CONQUEST_BASE               = 7157,  -- Tallying conquest results...
-        SIGN_1                      = 7386,  -- Northeast: Central Tower, Horutoto Ruins Northwest: Giddeus South: Port Windurst
-        SIGN_3                      = 7387,  -- East: East Sarutabaruta West: Giddeus
-        SIGN_5                      = 7388,  -- Northeast: Central Tower, Horutoto Ruins East: East Sarutabaruta West: Giddeus
-        SIGN_7                      = 7389,  -- South: Windurst East: East Sarutabaruta
-        SIGN_9                      = 7390,  -- West: Giddeus North: East Sarutabaruta South: Windurst
-        SIGN_11                     = 7391,  -- North: East Sarutabaruta Southeast: Windurst
-        SIGN_13                     = 7392,  -- East: Port Windurst West: West Tower, Horutoto Ruins
-        SIGN_15                     = 7393,  -- East: East Sarutabaruta West: Giddeus Southeast: Windurst
-        SIGN_17                     = 7394,  -- Northwest: Northwest Tower, Horutoto Ruins  East: Outpost Southwest: Giddeus
-        PAORE_KUORE_DIALOG          = 7396,  -- Welcome to Windurst! Proceed through this gateway to entaru Port Windurst.
-        KOLAPO_OILAPO_DIALOG        = 7397,  -- Hi-diddly-diddly! This is the gateway to Windurst! The grasslands you're on now are known as West Sarutabaruta.
-        MAATA_ULAATA                = 7398,  -- Hello-wello! This is the central tower of the Horutoto Ruins. It's one of the several ancient-wancient magic towers which dot these grasslands.
-        IPUPU_DIALOG                = 7401,  -- I decided to take a little strolly-wolly, but before I realized it, I found myself way out here! Now I am sorta stuck... Woe is me!
-        FROST_DEPOSIT_TWINKLES      = 7408,  -- A frost deposit at the base of the tree twinkles in the starlight.
-        MELT_BARE_HANDS             = 7410,  -- It looks like it would melt if you touched it with your bare hands...
-        HARVESTING_IS_POSSIBLE_HERE = 7446,  -- Harvesting is possible here if you have <item>.
-        CONQUEST                    = 7462,  -- You've earned conquest points!
-        PLAYER_OBTAINS_ITEM         = 7874,  -- <name> obtains <item>!
-        UNABLE_TO_OBTAIN_ITEM       = 7875,  -- You were unable to obtain the item.
-        PLAYER_OBTAINS_TEMP_ITEM    = 7876,  -- <name> obtains the temporary item: <item>!
-        ALREADY_POSSESS_TEMP        = 7877,  -- You already possess that temporary item.
-        NO_COMBINATION              = 7882,  -- You were unable to enter a combination.
-        VOIDWALKER_DESPAWN          = 7913,  -- The monster fades before your eyes, a look of disappointment on its face.
-        REGIME_REGISTERED           = 10202, -- New training regime registered!
-        DONT_SWAP_JOBS              = 10203, -- hanging your job will result in the cancellation of your current training regime.
-        REGIME_CANCELED             = 10204, -- Training regime canceled.
-        VOIDWALKER_NO_MOB           = 11362, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
-        VOIDWALKER_MOB_TOO_FAR      = 11363, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
-        VOIDWALKER_MOB_HINT         = 11364, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
-        VOIDWALKER_SPAWN_MOB        = 11365, -- A monster materializes out of nowhere!
-        VOIDWALKER_UPGRADE_KI_1     = 11367, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
-        VOIDWALKER_UPGRADE_KI_2     = 11368, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
-        VOIDWALKER_BREAK_KI         = 11369, -- The <keyitem> shatters into tiny fragments.
-        VOIDWALKER_OBTAIN_KI        = 11370, -- Obtained key item: <keyitem>!
-        COMMON_SENSE_SURVIVAL       = 12353, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
+        NOTHING_HAPPENS               = 119,   -- Nothing happens...
+        ITEM_CANNOT_BE_OBTAINED       = 6384,  -- You cannot obtain the <item>. Come back after sorting your inventory.
+        ITEM_OBTAINED                 = 6390,  -- Obtained: <item>.
+        GIL_OBTAINED                  = 6391,  -- Obtained <number> gil.
+        KEYITEM_OBTAINED              = 6393,  -- Obtained key item: <keyitem>.
+        KEYITEM_LOST                  = 6394,  -- Lost key item: <keyitem>.
+        NOTHING_OUT_OF_ORDINARY       = 6404,  -- There is nothing out of the ordinary here.
+        FELLOW_MESSAGE_OFFSET         = 6419,  -- I'm ready. I suppose.
+        CARRIED_OVER_POINTS           = 7001,  -- You have carried over <number> login point[/s].
+        LOGIN_CAMPAIGN_UNDERWAY       = 7002,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
+        LOGIN_NUMBER                  = 7003,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
+        MEMBERS_LEVELS_ARE_RESTRICTED = 7023,  -- Your party is unable to participate because certain members' levels are restricted.
+        FISHING_MESSAGE_OFFSET        = 7060,  -- You can't fish here.
+        DIG_THROW_AWAY                = 7073,  -- You dig up <item>, but your inventory is full. You regretfully throw the <item> away.
+        FIND_NOTHING                  = 7075,  -- You dig and you dig, but find nothing.
+        CONQUEST_BASE                 = 7160,  -- Tallying conquest results...
+        SIGN_1                        = 7389,  -- Northeast: Central Tower, Horutoto Ruins Northwest: Giddeus South: Port Windurst
+        SIGN_3                        = 7390,  -- East: East Sarutabaruta West: Giddeus
+        SIGN_5                        = 7391,  -- Northeast: Central Tower, Horutoto Ruins East: East Sarutabaruta West: Giddeus
+        SIGN_7                        = 7392,  -- South: Windurst East: East Sarutabaruta
+        SIGN_9                        = 7393,  -- West: Giddeus North: East Sarutabaruta South: Windurst
+        SIGN_11                       = 7394,  -- North: East Sarutabaruta Southeast: Windurst
+        SIGN_13                       = 7395,  -- East: Port Windurst West: West Tower, Horutoto Ruins
+        SIGN_15                       = 7396,  -- East: East Sarutabaruta West: Giddeus Southeast: Windurst
+        SIGN_17                       = 7397,  -- Northwest: Northwest Tower, Horutoto Ruins  East: Outpost Southwest: Giddeus
+        PAORE_KUORE_DIALOG            = 7399,  -- Welcome to Windurst! Proceed through this gateway to entaru Port Windurst.
+        KOLAPO_OILAPO_DIALOG          = 7400,  -- Hi-diddly-diddly! This is the gateway to Windurst! The grasslands you're on now are known as West Sarutabaruta.
+        MAATA_ULAATA                  = 7401,  -- Hello-wello! This is the central tower of the Horutoto Ruins. It's one of the several ancient-wancient magic towers which dot these grasslands.
+        IPUPU_DIALOG                  = 7404,  -- I decided to take a little strolly-wolly, but before I realized it, I found myself way out here! Now I am sorta stuck... Woe is me!
+        FROST_DEPOSIT_TWINKLES        = 7411,  -- A frost deposit at the base of the tree twinkles in the starlight.
+        MELT_BARE_HANDS               = 7413,  -- It looks like it would melt if you touched it with your bare hands...
+        HARVESTING_IS_POSSIBLE_HERE   = 7449,  -- Harvesting is possible here if you have <item>.
+        CONQUEST                      = 7465,  -- You've earned conquest points!
+        GARRISON_BASE                 = 7830,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
+        PLAYER_OBTAINS_ITEM           = 7877,  -- <name> obtains <item>!
+        UNABLE_TO_OBTAIN_ITEM         = 7878,  -- You were unable to obtain the item.
+        PLAYER_OBTAINS_TEMP_ITEM      = 7879,  -- <name> obtains the temporary item: <item>!
+        ALREADY_POSSESS_TEMP          = 7880,  -- You already possess that temporary item.
+        NO_COMBINATION                = 7885,  -- You were unable to enter a combination.
+        VOIDWALKER_DESPAWN            = 7916,  -- The monster fades before your eyes, a look of disappointment on its face.
+        REGIME_REGISTERED             = 10206, -- New training regime registered!
+        DONT_SWAP_JOBS                = 10207, -- hanging your job will result in the cancellation of your current training regime.
+        REGIME_CANCELED               = 10208, -- Training regime canceled.
+        VOIDWALKER_NO_MOB             = 11366, -- The <keyitem> quivers ever so slightly, but emits no light. There seem to be no monsters in the area.
+        VOIDWALKER_MOB_TOO_FAR        = 11367, -- The <keyitem> quivers ever so slightly and emits a faint light. There seem to be no monsters in the immediate vicinity.
+        VOIDWALKER_MOB_HINT           = 11368, -- The <keyitem> resonates [feebly/softly/solidly/strongly/very strongly/furiously], sending a radiant beam of light lancing towards a spot roughly <number> [yalm/yalms] [east/southeast/south/southwest/west/northwest/north/northeast] of here.
+        VOIDWALKER_SPAWN_MOB          = 11369, -- A monster materializes out of nowhere!
+        VOIDWALKER_UPGRADE_KI_1       = 11371, -- The <keyitem> takes on a slightly deeper hue and becomes <keyitem>!
+        VOIDWALKER_UPGRADE_KI_2       = 11372, -- The <keyitem> takes on a deeper, richer hue and becomes <keyitem>!
+        VOIDWALKER_BREAK_KI           = 11373, -- The <keyitem> shatters into tiny fragments.
+        VOIDWALKER_OBTAIN_KI          = 11374, -- Obtained key item: <keyitem>!
+        COMMON_SENSE_SURVIVAL         = 12357, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
-        NUNYENUNC_PH   =
+        NUNYENUNC_PH =
         {
             [17248323] = 17248517, -- -95.00 -17.000 383.000
             [17248515] = 17248517, -- -7.194 -17.288 431.604
             [17248516] = 17248517, -- 53.159 -24.540 554.652
             [17248514] = 17248517, -- 159.501 -20.117 485.528
         },
+
         TOM_TIT_TAT_PH =
         {
             [17248467] = 17248468, -- 31.149 -20.045 358.265
@@ -81,9 +85,11 @@ zones[xi.zone.WEST_SARUTABARUTA] =
             [17248544] = 17248468, -- 239.421 -19.659 583.122
             [17248545] = 17248468, -- 274.296 -20.357 587.339
         },
-        VOIDWALKER        =
+
+        VOIDWALKER =
         {
-            [xi.keyItem.CLEAR_ABYSSITE] = {
+            [xi.keyItem.CLEAR_ABYSSITE] =
+            {
                 17248624, -- Raker bee
                 17248623, -- Raker bee
                 17248622, -- Raker bee
@@ -93,23 +99,30 @@ zones[xi.zone.WEST_SARUTABARUTA] =
                 17248618,  -- Rummager beetle
                 17248617,  -- Rummager beetle
             },
-            [xi.keyItem.COLORFUL_ABYSSITE] = {
+
+            [xi.keyItem.COLORFUL_ABYSSITE] =
+            {
                 17248616,  -- Jyeshtha
                 17248615, -- Farruca Fly
             },
-            [xi.keyItem.BROWN_ABYSSITE] = {
-                17248614  -- Orcus
+
+            [xi.keyItem.BROWN_ABYSSITE] =
+            {
+                17248614, -- Orcus
             },
-            [xi.keyItem.BLACK_ABYSSITE] = {
-                17248613  -- Yilbegan
-            }
+
+            [xi.keyItem.BLACK_ABYSSITE] =
+            {
+                17248613, -- Yilbegan
+            },
         }
     },
+
     npc =
     {
-        CASKET_BASE     = 17248770,
         SIGNPOST_OFFSET = 17248797,
         OVERSEER_BASE   = 17248830, -- Naguipeillont_RK in npc_list
+
         HARVESTING =
         {
             17248846,

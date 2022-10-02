@@ -3,7 +3,7 @@
 --  Mob: Suparna Fledgling
 -- Involved in Mission: San d'Orian 9-1
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
@@ -16,7 +16,7 @@ entity.onMobSpawn = function(mob)
     DespawnMob(mob:getID(), 180)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

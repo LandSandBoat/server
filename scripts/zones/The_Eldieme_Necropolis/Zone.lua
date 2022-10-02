@@ -1,11 +1,9 @@
 -----------------------------------
---
 -- Zone: The Eldieme Necropolis (195)
---
 -----------------------------------
-local ID = require("scripts/zones/The_Eldieme_Necropolis/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/treasure")
+local ID = require('scripts/zones/The_Eldieme_Necropolis/IDs')
+require('scripts/globals/conquest')
+require('scripts/globals/treasure')
 -----------------------------------
 local zone_object = {}
 
@@ -14,12 +12,12 @@ zone_object.onInitialize = function(zone)
 end
 
 zone_object.onZoneIn = function(player, prevZone)
-    -- rng af2
-    if player:getCharVar("fireAndBrimstone") == 2 then
-        return 4
-    end
-
     local cs = -1
+
+    -- RNG AF2
+    if player:getCharVar("fireAndBrimstone") == 2 then
+        cs = 4
+    end
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(-438.878, -26.091, 540.004, 126)

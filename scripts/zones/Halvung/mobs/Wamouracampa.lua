@@ -5,7 +5,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-mixins = {require("scripts/mixins/families/wamouracampa")}
+mixins = { require("scripts/mixins/families/wamouracampa") }
 -----------------------------------
 local entity = {}
 

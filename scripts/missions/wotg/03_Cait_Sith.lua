@@ -10,10 +10,7 @@
 -- SOUTHERN_SAN_DORIA_S : !zone 80
 -----------------------------------
 require('scripts/globals/keyitems')
-require('scripts/globals/maws')
 require('scripts/globals/missions')
-require('scripts/globals/quests')
-require('scripts/settings/main')
 require('scripts/globals/titles')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
@@ -24,8 +21,8 @@ local mission = Mission:new(xi.mission.log_id.WOTG, xi.mission.id.wotg.CAIT_SITH
 
 mission.reward =
 {
+    title       = xi.title.CAIT_SITHS_ASSISTANT,
     nextMission = { xi.mission.log_id.WOTG, xi.mission.id.wotg.THE_QUEEN_OF_THE_DANCE },
-    title = xi.title.CAIT_SITHS_ASSISTANT,
 }
 
 mission.sections =
@@ -50,6 +47,10 @@ mission.sections =
             onEventFinish =
             {
                 [67] = function(player, csid, option, npc)
+                    if player:getCurrentMission(xi.mission.log_id.ROV) == xi.mission.id.rov.CAUTERIZE then
+                        npcUtil.giveKeyItem(player, xi.ki.LIGHTSWORM)
+                    end
+
                     mission:complete(player)
                 end,
             },

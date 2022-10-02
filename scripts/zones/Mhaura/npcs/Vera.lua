@@ -5,7 +5,7 @@
 -- !pos -49 -5 20 249
 -----------------------------------
 require("scripts/globals/keyitems")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 local ID = require("scripts/zones/Mhaura/IDs")
 -----------------------------------
@@ -15,12 +15,13 @@ entity.onTrade = function(player, npc, trade)
     local questStatus = player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_OLD_LADY)
 
     if (questStatus == QUEST_ACCEPTED and trade:getItemCount() == 1) then
-        local VeraOldLadyVar = player:getCharVar("VeraOldLadyVar")
-        if (VeraOldLadyVar == 1 and trade:hasItemQty(542, 1)) then
+        local veraOldLadyVar = player:getCharVar("VeraOldLadyVar")
+
+        if (veraOldLadyVar == 1 and trade:hasItemQty(542, 1)) then
             player:startEvent(135, 541)
-        elseif (VeraOldLadyVar == 2 and trade:hasItemQty(541, 1)) then
+        elseif (veraOldLadyVar == 2 and trade:hasItemQty(541, 1)) then
             player:startEvent(136, 540)
-        elseif (VeraOldLadyVar == 3 and trade:hasItemQty(540, 1)) then
+        elseif (veraOldLadyVar == 3 and trade:hasItemQty(540, 1)) then
             player:startEvent(137)
         end
     end
@@ -34,18 +35,19 @@ entity.onTrigger = function(player, npc)
     elseif (questStatus == QUEST_COMPLETED) then
         player:startEvent(138)
     elseif (questStatus == QUEST_ACCEPTED) then
-        local VeraOldLadyVar = player:getCharVar("VeraOldLadyVar")
+        local veraOldLadyVar = player:getCharVar("VeraOldLadyVar")
+
         if player:hasKeyItem(xi.ki.GILGAMESHS_INTRODUCTORY_LETTER) then
             player:startEvent(137)
-        elseif (VeraOldLadyVar == 1) then
+        elseif (veraOldLadyVar == 1) then
             player:startEvent(132, 542)
-        elseif (VeraOldLadyVar == 2) then
+        elseif (veraOldLadyVar == 2) then
             player:startEvent(132, 541)
-        elseif (VeraOldLadyVar == 3) then
+        elseif (veraOldLadyVar == 3) then
             player:startEvent(132, 540)
         end
     else
-        if (player:getMainLvl() >= xi.settings.SUBJOB_QUEST_LEVEL) then
+        if (player:getMainLvl() >= xi.settings.main.SUBJOB_QUEST_LEVEL) then
             player:startEvent(131, 542)
         else
             player:startEvent(133)

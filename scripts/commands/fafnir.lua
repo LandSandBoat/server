@@ -38,9 +38,23 @@ function onTrigger(player)
 
         -- You can provide an onMobDeath function if you want: if you don't
         -- add one, an empty one will be inserted for you behind the scenes.
-        onMobDeath = function(mob, playerArg, isKiller)
+        onMobDeath = function(mob, playerArg, optParams)
             -- Do stuff
         end,
+
+        -- If set to true, the internal id assigned to this mob will be released for other dynamic entities to use
+        -- after this mob has died. Defaults to false.
+        releaseIdOnDeath = true,
+
+        -- You can apply mixins like you would with regular mobs. mixinOptions aren't supported yet.
+        mixins =
+        {
+            require("scripts/mixins/rage"),
+            require("scripts/mixins/job_special"),
+        },
+
+        -- The "whooshy" special animation that plays when Trusts or Dynamis mobs spawn
+        specialSpawnAnimation = true,
     })
 
     -- Use the mob object as you normally would

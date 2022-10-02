@@ -2,7 +2,7 @@
 -- Area: Arrapago Reef
 --  ZNM: Lil Apkallu
 -----------------------------------
-mixins = {require("scripts/mixins/rage")}
+mixins = { require("scripts/mixins/rage") }
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
@@ -16,7 +16,7 @@ entity.onMobSpawn = function(mob)
     mob:setLocalVar("[rage]timer", 3600) -- 60 minutes
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

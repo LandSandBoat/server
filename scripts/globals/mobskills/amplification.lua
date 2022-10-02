@@ -3,7 +3,7 @@
 -- Enhances Magic Attack and Magic Defense. Bonus stacks when used by mobs.
 -----------------------------------
 require("scripts/globals/mobskills")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
 local mobskill_object = {}
@@ -28,8 +28,6 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     else
         mdbTotal = 10
     end
-    -- print(mabTotal)
-    -- print(mdbTotal)
 
     skill:setMsg(xi.mobskills.mobBuffMove(mob, typeEffect1, mabTotal, 0, 180))
     xi.mobskills.mobBuffMove(mob, typeEffect2, mdbTotal, 0, 180)

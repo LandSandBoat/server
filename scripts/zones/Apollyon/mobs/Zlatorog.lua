@@ -4,7 +4,7 @@
 -----------------------------------
 require("scripts/zones/Apollyon/bcnms/nw_apollyon_helper")
 require("scripts/globals/pathfind")
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}
 
@@ -35,8 +35,8 @@ entity.onMobSpawn = function(mob)
     })
 end
 
-entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    xi.apollyon_nw.handleMobDeathFloorTwoChest(mob, player, isKiller, noKiller)
+entity.onMobDeath = function(mob, player, optParams)
+    xi.apollyon_nw.handleMobDeathFloorTwoChest(mob, player, optParams)
 end
 
 return entity

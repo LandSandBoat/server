@@ -1,7 +1,8 @@
 -----------------------------------
 -- Area: Chocobo_Circuit
---  NPC: Khatri
+-- NPC: Khatri
 -- Standard Info NPC
+-- !pos -322.411 0.000 -484.819 70
 -----------------------------------
 local entity = {}
 

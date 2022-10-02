@@ -5,7 +5,7 @@
 -- !pos 169 -1.25 159 238
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Waters/IDs")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
@@ -59,7 +59,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 438 and option == 1 then
         player:setCharVar("QuestTeachersPet_prog", 0)
     elseif csid == 440 then
-        player:addGil(xi.settings.GIL_RATE*250)
+        player:addGil(xi.settings.main.GIL_RATE*250)
         player:setCharVar("QuestTeachersPet_prog", 0)
         player:tradeComplete()
         if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TEACHER_S_PET) == QUEST_ACCEPTED then

@@ -14,17 +14,15 @@ require('scripts/globals/titles')
 require('scripts/globals/utils')
 require('scripts/globals/interaction/quest')
 -----------------------------------
-local selbinaID = require('scripts/zones/Selbina/IDs')
------------------------------------
 
 local quest = Quest:new(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.HIS_NAME_IS_VALGEIR)
 
 quest.reward =
 {
-    fame    = 120,
+    fame     = 120,
     fameArea = xi.quest.fame_area.WINDURST,
-    gil     = 2000,
-    keyItem = xi.ki.MAP_OF_THE_TORAIMARAI_CANAL,
+    gil      = 2000,
+    keyItem  = xi.ki.MAP_OF_THE_TORAIMARAI_CANAL,
 }
 
 quest.sections =
@@ -32,7 +30,7 @@ quest.sections =
     -- Section: Quest is available.
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) > 2 and
+            return status == QUEST_AVAILABLE and
                 player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.UNENDING_CHASE) == QUEST_COMPLETED
         end,
 
@@ -41,18 +39,25 @@ quest.sections =
             ['Rycharde'] =
             {
                 onTrigger = function(player, npc)
-                    if player:getCharVar("Quest[4][2]DayCompleted") + 2 < VanadielUniqueDay() then
+                    if
+                        player:getCharVar("Quest[4][2]DayCompleted") + 2 < VanadielUniqueDay() and
+                        player:getFameLevel(xi.quest.fame_area.WINDURST) > 2
+                    then
                         return quest:progressEvent(86) -- His Name is Valgeir starting event.
+                    else
+                        return quest:event(75)
                     end
                 end,
             },
 
+            ['Take'] = quest:event(65),
+
             onEventFinish =
             {
                 [86] = function(player, csid, option, npc)
-                    if option == 80 then -- Accept quest option.
-                        player:setCharVar("Quest[4][2]DayCompleted", 0)  -- Delete previous quest (Unending Chase) variables
-                        npcUtil.giveKeyItem(player, xi.ki.ARAGONEU_PIZZA)   --give pizza to player
+                    if option == 80 or option == 81 then -- Accept quest option.
+                        player:setCharVar("Quest[4][2]DayCompleted", 0)   -- Delete previous quest (Unending Chase) variables
+                        npcUtil.giveKeyItem(player, xi.ki.ARAGONEU_PIZZA) -- Give pizza to player
                         quest:begin(player)
                     end
                 end,
@@ -63,57 +68,36 @@ quest.sections =
     -- Section: Quest accepeted.
     {
         check = function(player, status, vars)
-            return status == QUEST_ACCEPTED  and vars.Prog == 0
+            return status == QUEST_ACCEPTED
         end,
 
         [xi.zone.MHAURA] =
         {
-            -- TODO: Find information about the ferry free ride. NPC involved and number of times it allows for free rides.
-            -- KNOWN: It isnt mandatory to take the ferry.
+            ['Felisa'] =
+            {
+                onTrigger = function(player, npc)
+                    if
+                        player:hasKeyItem(xi.ki.ARAGONEU_PIZZA) and -- No free ride after delivering Pizza.
+                        player:getZPos() > 38.5 and -- Pos check.
+                        quest:setVar(player, 'Prog') == 0 -- Hasn't taken the free ride.
+                    then
+                        return quest:progressEvent(230) -- Free ride. 1 time only. Non-Mandatory step.
+                    end
+                end,
+            },
 
             ['Rycharde'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:event(87) -- Not delivered the pizza yet.
-                end,
-            },
-        },
-
-        [xi.zone.SELBINA] =
-        {
-            ['Valgeir'] =
-            {
-                onTrigger = function(player, npc)
-                    return quest:progressEvent(100) -- Deliver Pizza.
+                    if not player:hasKeyItem(xi.ki.ARAGONEU_PIZZA) then
+                        return quest:progressEvent(88) -- Finish quest.
+                    else
+                        return quest:event(87) -- Not delivered the pizza yet.
+                    end
                 end,
             },
 
-            onEventFinish =
-            {
-                [100] = function(player, csid, option, npc)
-                    player:delKeyItem(xi.ki.ARAGONEU_PIZZA)
-                    player:messageSpecial(selbinaID.text.KEYITEM_OBTAINED + 1, xi.ki.ARAGONEU_PIZZA)
-                    quest:setVar(player, 'Prog', 1)
-                end,
-            },
-        },
-
-    },
-
-    -- Section: Finish quest.
-    {
-        check = function(player, status, vars)
-            return status == QUEST_ACCEPTED and vars.Prog == 1
-        end,
-
-        [xi.zone.MHAURA] =
-        {
-            ['Rycharde'] =
-            {
-                onTrigger = function(player, npc)
-                    return quest:progressEvent(88) -- Finish quest.
-                end,
-            },
+            ['Take'] = quest:event(65),
 
             onEventFinish =
             {
@@ -123,23 +107,30 @@ quest.sections =
                         quest:setVar(player, 'DayCompleted', VanadielUniqueDay()) -- Set completition day of quest.
                     end
                 end,
+
+                [230] = function(player, csid, option, npc)
+                    quest:setVar(player, 'Prog', 1)
+                end,
             },
         },
-    },
 
-    -- Section: Quest completed. Change default message for Rycharde.
-    {
-        check = function(player, status, vars)
-            return status == QUEST_COMPLETED and
-                player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.THE_CLUE) == QUEST_AVAILABLE
-        end,
-
-        [xi.zone.MHAURA] =
+        [xi.zone.SELBINA] =
         {
-            ['Rycharde'] =
+            ['Valgeir'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:event(89):replaceDefault() -- Default message after clompleting this quest and before accepting The Clue quest.
+                    if player:hasKeyItem(xi.ki.ARAGONEU_PIZZA) then
+                        return quest:progressEvent(100) -- Deliver Pizza.
+                    else
+                        return quest:event(101) -- Pizza delivered.
+                    end
+                end,
+            },
+
+            onEventFinish =
+            {
+                [100] = function(player, csid, option, npc)
+                    player:delKeyItem(xi.ki.ARAGONEU_PIZZA)
                 end,
             },
         },

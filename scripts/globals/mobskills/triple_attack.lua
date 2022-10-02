@@ -4,7 +4,7 @@
 --  Description: Delivers a threefold attack on a single target.
 --  Further Notes:
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------

@@ -27,7 +27,6 @@ spell_object.onSpellCast = function(caster, target, spell)
         power = 50
     end
 
-
     -- Duration, including resistance.  Unconfirmed.
     local duration = 180
     local params = {}

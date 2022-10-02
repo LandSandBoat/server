@@ -2,23 +2,23 @@ require("scripts/globals/msg")
 
 xi = xi or {}
 
-local MaxAreas =
+local maxAreas =
 {
     -- Temenos
-    { Max = 8, Zones = {37} },
+    { Max = 8, Zones = { 37 } },
 
     -- Apollyon
-    { Max = 6, Zones = {38} },
+    { Max = 6, Zones = { 38 } },
 
     -- Dynamis
-    { Max = 1, Zones = {39, 40, 41, 42, 134, 135, 185, 186, 187, 188, 29, 140} }, -- riverneb, ghelsba
+    { Max = 1, Zones = { 39, 40, 41, 42, 134, 135, 185, 186, 187, 188, 29, 140 } }, -- riverneb, ghelsba
 }
 
 function onBattlefieldHandlerInitialise(zone)
     local id      = zone:getID()
     local default = 3
 
-    for _, battlefield in pairs(MaxAreas) do
+    for _, battlefield in pairs(maxAreas) do
         for _, zoneid in pairs(battlefield.Zones) do
             if id == zoneid then
                 return battlefield.Max
@@ -57,6 +57,17 @@ xi.battlefield.leaveCode =
     LOST   = 4
 }
 
+xi.battlefield.dropChance =
+{
+    EXTREMELY_LOW  = 2,
+    VERY_LOW       = 10,
+    LOW            = 30,
+    NORMAL         = 50,
+    HIGH           = 70,
+    VERY_HIGH      = 100,
+    EXTREMELY_HIGH = 140,
+}
+
 function xi.battlefield.onBattlefieldTick(battlefield, timeinside)
     local killedallmobs = true
     local leavecode     = -1
@@ -85,6 +96,20 @@ function xi.battlefield.onBattlefieldTick(battlefield, timeinside)
                 canLeave = false
             elseif battlefield:getLocalVar("lootSeen") == 1 then
                 canLeave = true
+            end
+        end
+    end
+
+    -- Remove battlefield effect for players in alliance not inside battlefield once the battlefield gets locked. Do this only once.
+    if status == xi.battlefield.status.LOCKED and battlefield:getLocalVar("statusRemoval") == 0 then
+        battlefield:setLocalVar("statusRemoval", 1)
+
+        for _, player in pairs(players) do
+            local alliance = player:getAlliance()
+            for _, member in pairs(alliance) do
+                if member:hasStatusEffect(xi.effect.BATTLEFIELD) and not member:getBattlefield() then
+                    member:delStatusEffect(xi.effect.BATTLEFIELD)
+                end
             end
         end
     end
@@ -171,12 +196,17 @@ function xi.battlefield.HandleWipe(battlefield, players)
         end
 
         -- Party has wiped. Save and send time remaining before being booted.
+        -- TODO: Add LUA Binding to check for BCNM flag - RULES_REMOVE_3MIN = 0x04,
         if rekt then
-            for _, player in pairs(players) do
-                player:messageSpecial(zones[player:getZoneID()].text.THE_PARTY_WILL_BE_REMOVED, 0, 0, 0, 3)
-            end
+            if battlefield:getLocalVar("instantKick") == 0 then
+                for _, player in pairs(players) do
+                    player:messageSpecial(zones[player:getZoneID()].text.THE_PARTY_WILL_BE_REMOVED, 0, 0, 0, 3)
+                end
 
-            battlefield:setWipeTime(elapsed)
+                battlefield:setWipeTime(elapsed)
+            else
+                battlefield:setStatus(xi.battlefield.status.LOST)
+            end
         end
 
     -- Party has already wiped.
@@ -197,7 +227,6 @@ function xi.battlefield.HandleWipe(battlefield, players)
         end
     end
 end
-
 
 function xi.battlefield.onBattlefieldStatusChange(battlefield, players, status)
 end

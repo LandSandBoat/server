@@ -19,8 +19,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../map/utils/zoneutils.h"
 #include "campaign_system.h"
 #include "map.h"
-#include "utils/charutils.h"
 #include "packets/campaign_map.h"
+#include "utils/charutils.h"
 
 CampaignState CState;
 

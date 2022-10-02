@@ -6,7 +6,7 @@ require("scripts/globals/regimes")
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 755, 2, xi.regime.type.GROUNDS)
     xi.regime.checkRegime(player, mob, 756, 2, xi.regime.type.GROUNDS)
     xi.regime.checkRegime(player, mob, 757, 2, xi.regime.type.GROUNDS)

@@ -4,7 +4,7 @@
 --  Type: Ranged
 --  Damage decreases the farther away the target is from him.
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------

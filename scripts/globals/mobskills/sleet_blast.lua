@@ -7,7 +7,7 @@
 --  Range: 18' radial.
 --  Notes: Used only by Ouryu and Cuelebre while flying.
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------

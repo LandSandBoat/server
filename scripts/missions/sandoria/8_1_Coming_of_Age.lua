@@ -13,7 +13,7 @@ require('scripts/globals/items')
 require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/settings/main')
+require('scripts/globals/settings')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
@@ -146,7 +146,7 @@ mission.sections =
             -- the other target.
             ['Honor'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     local mobValor = GetMobByID(quicksandCavesID.mob.HONOR)
 
                     if
@@ -160,7 +160,7 @@ mission.sections =
 
             ['Valor'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     local mobHonor = GetMobByID(quicksandCavesID.mob.VALOR)
                     if
                         player:getMissionStatus(mission.areaId) == 2 and

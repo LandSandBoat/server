@@ -35,8 +35,11 @@ CGuildMenuSellPacket::CGuildMenuSellPacket(CCharEntity* PChar, CItemContainer* P
     this->setType(0x85);
     this->setSize(0xF8);
 
-    XI_DEBUG_BREAK_IF(PChar == nullptr);
-    XI_DEBUG_BREAK_IF(PGuild == nullptr);
+    if (PChar == nullptr || PGuild == nullptr)
+    {
+        ShowError("CGuildMenuSellPacket::CGuildMenuSellPacket() - PChar or PGuild was null.");
+        return;
+    }
 
     uint8 ItemCount   = 0;
     uint8 PacketCount = 0;

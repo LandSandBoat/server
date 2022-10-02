@@ -15,14 +15,14 @@ end
 
 entity.onTrigger = function(player, npc)
     local guildMember = xi.crafting.isGuildMember(player, 4)
-    local SkillLevel = player:getSkillLevel(xi.skill.COOKING)
-    local Cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.COOKING)
+    local skillLevel = player:getSkillLevel(xi.skill.COOKING)
+    local cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.COOKING)
 
     if (guildMember == 1) then
         if (player:hasStatusEffect(xi.effect.COOKING_IMAGERY) == false) then
-            player:startEvent(10015, Cost, SkillLevel, 0, 495, player:getGil(), 0, 0, 0) -- p1 = skill level
+            player:startEvent(10015, cost, skillLevel, 0, 495, player:getGil(), 0, 0, 0) -- p1 = skill level
         else
-            player:startEvent(10015, Cost, SkillLevel, 0, 495, player:getGil(), 28589, 0, 0)
+            player:startEvent(10015, cost, skillLevel, 0, 495, player:getGil(), 28589, 0, 0)
         end
     else
         player:startEvent(10015) -- Standard Dialogue
@@ -33,10 +33,10 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    local Cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.COOKING)
+    local cost = xi.crafting.getAdvImageSupportCost(player, xi.skill.COOKING)
 
     if (csid == 10015 and option == 1) then
-        player:delGil(Cost)
+        player:delGil(cost)
         player:messageSpecial(ID.text.COOKING_SUPPORT, 0, 8, 0)
         player:addStatusEffect(xi.effect.COOKING_IMAGERY, 3, 0, 480)
     end

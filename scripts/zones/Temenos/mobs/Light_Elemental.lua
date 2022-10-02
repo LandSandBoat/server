@@ -17,8 +17,8 @@ entity.onMobEngaged = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller or optParams.noKiller then
         switch (mob:getID()): caseof
         {
             [ID.mob.TEMENOS_C_MOB[2]+1] = function()

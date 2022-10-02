@@ -3,7 +3,7 @@
 --  NPC: Fulchia
 --  General Info NPC
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 

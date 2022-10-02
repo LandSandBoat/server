@@ -14,11 +14,11 @@ entity.onTrade = function(player, npc, trade)
     if
         player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.DONATE_TO_RECYCLING) == QUEST_ACCEPTED and
         (
-            npcUtil.tradeHas(trade, {{16482, 5}}) or
-            npcUtil.tradeHas(trade, {{16483, 5}}) or
-            npcUtil.tradeHas(trade, {{16534, 5}}) or
-            npcUtil.tradeHas(trade, {{17068, 5}}) or
-            npcUtil.tradeHas(trade, {{17104, 5}})
+            npcUtil.tradeHas(trade, { { 16482, 5 } }) or
+            npcUtil.tradeHas(trade, { { 16483, 5 } }) or
+            npcUtil.tradeHas(trade, { { 16534, 5 } }) or
+            npcUtil.tradeHas(trade, { { 17068, 5 } }) or
+            npcUtil.tradeHas(trade, { { 17104, 5 } })
         )
     then
         player:startEvent(21) -- Finish quest "Donate to Recycling"
@@ -43,7 +43,7 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 20 then
         player:addQuest(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.DONATE_TO_RECYCLING)
-    elseif csid == 21 and npcUtil.completeQuest(player, xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.DONATE_TO_RECYCLING, {item = 89, fame_area = xi.quest.fame_area.SELBINA_RABAO, title = xi.title.ECOLOGIST}) then
+    elseif csid == 21 and npcUtil.completeQuest(player, xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.DONATE_TO_RECYCLING, { item = 89, fame_area = xi.quest.fame_area.SELBINA_RABAO, title = xi.title.ECOLOGIST }) then
         player:confirmTrade()
     end
 end

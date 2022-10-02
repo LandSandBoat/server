@@ -15,14 +15,14 @@ end
 
 entity.onTrigger = function(player, npc)
     local guildMember = xi.crafting.isGuildMember(player, 2)
-    local SkillCap = xi.crafting.getCraftSkillCap(player, xi.skill.BONECRAFT)
-    local SkillLevel = player:getSkillLevel(xi.skill.BONECRAFT)
+    local skillCap = xi.crafting.getCraftSkillCap(player, xi.skill.BONECRAFT)
+    local skillLevel = player:getSkillLevel(xi.skill.BONECRAFT)
 
     if guildMember == 1 then
         if not player:hasStatusEffect(xi.effect.BONECRAFT_IMAGERY) then
-            player:startEvent(10020, SkillCap, SkillLevel, 2, 509, player:getGil(), 0, 0, 0)
+            player:startEvent(10020, skillCap, skillLevel, 2, 509, player:getGil(), 0, 0, 0)
         else
-            player:startEvent(10020, SkillCap, SkillLevel, 2, 511, player:getGil(), 7147, 0, 0)
+            player:startEvent(10020, skillCap, skillLevel, 2, 511, player:getGil(), 7147, 0, 0)
         end
     else
         player:startEvent(10020) -- Standard Dialogue

@@ -5,6 +5,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Periqia/IDs")
 require("scripts/globals/assault")
+require("scripts/globals/zone")
 -----------------------------------
 local entity = {}
 
@@ -24,9 +25,8 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 100 and option == 1 then
-        xi.assaultUtil.runeReleaseFinish(player)
-    end
+    xi.assault.instanceOnEventFinish(player, csid, xi.zone.CAEDARVA_MIRE)
+    xi.assault.runeReleaseFinish(player, csid, option)
 end
 
 return entity

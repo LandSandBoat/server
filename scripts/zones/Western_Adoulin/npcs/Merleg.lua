@@ -16,8 +16,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local APBIF = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_PIONEERS_BEST_IMAGINARY_FRIEND)
-    if (APBIF == QUEST_ACCEPTED) then
+    local apbif = player:getQuestStatus(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_PIONEERS_BEST_IMAGINARY_FRIEND)
+    if (apbif == QUEST_ACCEPTED) then
         if (player:hasStatusEffect(xi.effect.IONIS)) then
             -- Finishing Quest: 'A Pioneers Best (Imaginary) Friend'
             player:startEvent(2522)
@@ -25,7 +25,7 @@ entity.onTrigger = function(player, npc)
             -- Dialgoue during Quest: 'A Pioneers Best (Imaginary) Friend'
             player:startEvent(2521)
         end
-    elseif (APBIF == QUEST_AVAILABLE) then
+    elseif (apbif == QUEST_AVAILABLE) then
         player:startEvent(2520)
     else
         -- Standard dialogue
@@ -47,9 +47,9 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 2522) then
         -- Finishing Quest: 'A Pioneers Best (Imaginary) Friend'
         player:completeQuest(xi.quest.log_id.ADOULIN, xi.quest.id.adoulin.A_PIONEERS_BEST_IMAGINARY_FRIEND)
-        player:addExp(500 * xi.settings.EXP_RATE)
-        player:addCurrency('bayld', 200 * xi.settings.BAYLD_RATE)
-        player:messageSpecial(ID.text.BAYLD_OBTAINED, 200 * xi.settings.BAYLD_RATE)
+        player:addExp(500 * xi.settings.main.EXP_RATE)
+        player:addCurrency('bayld', 200 * xi.settings.main.BAYLD_RATE)
+        player:messageSpecial(ID.text.BAYLD_OBTAINED, 200 * xi.settings.main.BAYLD_RATE)
         player:addKeyItem(xi.ki.FAIL_BADGE)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.FAIL_BADGE)
         player:addFame(xi.quest.fame_area.ADOULIN)

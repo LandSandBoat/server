@@ -23,7 +23,7 @@ effect_object.onEffectLose = function(target, effect)
 
     --Clean Up Afflatus Misery Bonuses
     local accuracyBonus = effect:getSubPower()
-    --printf("AUSPICE: Removing Accuracy Bonus +%d!", accuracyBonus)
+
     target:delMod(xi.mod.ACC, accuracyBonus)
 
     if (target:hasStatusEffect(xi.effect.AUSPICE)) then

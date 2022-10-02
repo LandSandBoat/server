@@ -41,9 +41,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "packets/change_music.h"
 #include "packets/char.h"
 #include "packets/char_sync.h"
+#include "packets/entity_set_name.h"
 #include "packets/entity_update.h"
 #include "packets/entity_visual.h"
-#include "packets/trust_sync.h"
 #include "packets/wide_scan.h"
 
 #include "lua/luautils.h"
@@ -57,24 +57,27 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "utils/synthutils.h"
 #include "utils/zoneutils.h"
 
+#include <unordered_set>
+
 namespace
 {
-    const float CHARACTER_SYNC_DISTANCE                  = 45.0f;
-    const float CHARACTER_DESPAWN_DISTANCE               = 50.0f;
-    const int CHARACTER_SWAP_MAX                         = 5;
-    const int CHARACTER_SYNC_LIMIT_MAX                   = 32;
-    const int CHARACTER_SYNC_DISTANCE_SWAP_THRESHOLD     = 30;
-    const int CHARACTER_SYNC_PARTY_SIGNIFICANCE          = 100000;
-    const int CHARACTER_SYNC_ALLI_SIGNIFICANCE           = 10000;
-}
+    const float CHARACTER_SYNC_DISTANCE                = 45.0f;
+    const float CHARACTER_DESPAWN_DISTANCE             = 50.0f;
+    const int   CHARACTER_SWAP_MAX                     = 5;
+    const int   CHARACTER_SYNC_LIMIT_MAX               = 32;
+    const int   CHARACTER_SYNC_DISTANCE_SWAP_THRESHOLD = 30;
+    const int   CHARACTER_SYNC_PARTY_SIGNIFICANCE      = 100000;
+    const int   CHARACTER_SYNC_ALLI_SIGNIFICANCE       = 10000;
+    const int   PERSIST_CHECK_CHARACTERS               = 20;
+} // namespace
 
 typedef std::pair<float, CCharEntity*> CharScorePair;
 
 CZoneEntities::CZoneEntities(CZone* zone)
 : m_zone(zone)
 , m_Transport(nullptr)
-, m_DynamicTargIDCount(0)
 {
+    lastCharComputeTargId = 0;
 }
 
 CZoneEntities::~CZoneEntities() = default;
@@ -245,8 +248,8 @@ void CZoneEntities::FindPartyForMob(CBaseEntity* PEntity)
     CMobEntity* PMob = (CMobEntity*)PEntity;
 
     // force all mobs in a burning circle to link
-    ZONE_TYPE     zonetype  = m_zone->GetType();
-    bool          forceLink = zonetype == ZONE_TYPE::DYNAMIS || zonetype == ZONE_TYPE::BATTLEFIELD || PMob->getMobMod(MOBMOD_SUPERLINK);
+    ZONE_TYPE zonetype  = m_zone->GetType();
+    bool      forceLink = zonetype == ZONE_TYPE::DYNAMIS || zonetype == ZONE_TYPE::BATTLEFIELD || PMob->getMobMod(MOBMOD_SUPERLINK);
 
     if ((forceLink || PMob->m_Link) && PMob->PParty == nullptr)
     {
@@ -482,10 +485,16 @@ uint16 CZoneEntities::GetNewCharTargID()
 uint16 CZoneEntities::GetNewDynamicTargID()
 {
     // NOTE: 0x0E (entity_update) entity updates are valid for 0 to 1023 and 1792 to 2303
-    // TODO: As in GetNewCharTargID, we should be searching in the valid range for IDs
-    //     : that aren't used yet, and releasing them when we're done.
-    uint16 offset = m_DynamicTargIDCount++;
-    return 0x800 + offset;
+    uint16 targid = 0x800;
+    for (auto it : dynamicTargIds)
+    {
+        if (targid != it)
+        {
+            break;
+        }
+        targid++;
+    }
+    return targid;
 }
 
 bool CZoneEntities::CharListEmpty() const
@@ -633,7 +642,7 @@ void CZoneEntities::SpawnTRUSTs(CCharEntity* PChar)
                     PChar->updateEntityPacket(PCurrentTrust, ENTITY_SPAWN, UPDATE_ALL_MOB);
                     if (PMaster)
                     {
-                        PChar->pushPacket(new CTrustSyncPacket(PMaster, PCurrentTrust));
+                        PChar->pushPacket(new CEntitySetNamePacket(PCurrentTrust));
                     }
                 }
             }
@@ -696,7 +705,7 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
     }
 
     // Loop through all chars in zone and find candidate characters to spawn, and scores of already spawned characters
-    MinHeap<CharScorePair> spawnedCharacters;
+    MinHeap<CharScorePair>    spawnedCharacters;
     std::vector<CCharEntity*> toRemove;
 
     for (auto iter : PChar->SpawnPCList)
@@ -704,8 +713,7 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
         CCharEntity* pc = (CCharEntity*)iter.second;
 
         // Despawn character if it's a hidden GM, is in a different mog house, or if player is in a conflict while other is not, or too far up/down
-        if (pc->m_isGMHidden
-            || PChar->m_moghouseID != pc->m_moghouseID)
+        if (pc->m_isGMHidden || PChar->m_moghouseID != pc->m_moghouseID)
         {
             toRemove.push_back(pc);
             continue;
@@ -722,8 +730,8 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
         // Total score is determined by the significance between the characters, adding any bonuses,
         // and then subtracting the distance to make characters further away less important.
         float significanceScore = getSignificanceScore(PChar, pc);
-        auto bonusIter          = scoreBonus.find(iter.second->id);
-        auto bonus              = bonusIter == scoreBonus.end() ? 0 : bonusIter->second;
+        auto  bonusIter         = scoreBonus.find(iter.second->id);
+        auto  bonus             = bonusIter == scoreBonus.end() ? 0 : bonusIter->second;
         float totalScore        = significanceScore + bonus - charDistance + CHARACTER_SYNC_DISTANCE_SWAP_THRESHOLD;
 
         if (significanceScore < CHARACTER_SYNC_ALLI_SIGNIFICANCE)
@@ -756,8 +764,7 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
 
         if (PCurrentChar != nullptr && PChar != PCurrentChar && PChar->SpawnPCList.find(PCurrentChar->id) == PChar->SpawnPCList.end())
         {
-            if (PCurrentChar->m_isGMHidden
-                || PChar->m_moghouseID != PCurrentChar->m_moghouseID)
+            if (PCurrentChar->m_isGMHidden || PChar->m_moghouseID != PCurrentChar->m_moghouseID)
             {
                 continue;
             }
@@ -772,8 +779,8 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
 
             // Total score is determined by the significance between the characters, adding any bonuses,
             // and then subtracting the distance to make characters further away less important.
-            auto bonusIter   = scoreBonus.find(PCurrentChar->id);
-            auto bonus       = bonusIter == scoreBonus.end() ? 0 : bonusIter->second;
+            auto  bonusIter  = scoreBonus.find(PCurrentChar->id);
+            auto  bonus      = bonusIter == scoreBonus.end() ? 0 : bonusIter->second;
             float totalScore = significanceScore + bonus - charDistance;
 
             if (PChar->SpawnPCList.size() < CHARACTER_SYNC_LIMIT_MAX ||
@@ -846,7 +853,6 @@ void CZoneEntities::SpawnPCs(CCharEntity* PChar)
         }
     }
 }
-
 
 void CZoneEntities::SpawnMoogle(CCharEntity* PChar)
 {
@@ -1165,6 +1171,7 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
 
     if (!m_charList.empty())
     {
+        // clang-format off
         switch (message_type)
         {
             case CHAR_INRANGE_SELF:
@@ -1283,6 +1290,7 @@ void CZoneEntities::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
             }
             break;
         }
+        // clang-format on
     }
     delete packet;
 }
@@ -1317,9 +1325,14 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
 
     luautils::OnZoneTick(this->m_zone);
 
+    std::unordered_set<uint16> entitiesToRelease;
     for (EntityList_t::const_iterator it = m_mobList.begin(); it != m_mobList.end(); ++it)
     {
-        CMobEntity* PMob = (CMobEntity*)it->second;
+        CMobEntity* PMob = dynamic_cast<CMobEntity*>(it->second);
+        if (!PMob)
+        {
+            continue;
+        }
 
         if (PMob->PBattlefield && PMob->PBattlefield->CanCleanup())
         {
@@ -1333,7 +1346,44 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
             PMob->StatusEffectContainer->TickRegen(tick);
             PMob->StatusEffectContainer->TickEffects(tick);
         }
+
         PMob->PAI->Tick(tick);
+
+        if (PMob->status == STATUS_TYPE::DISAPPEAR && PMob->m_bReleaseTargIDOnDeath)
+        {
+            for (auto PMobIt : m_mobList)
+            {
+                CMobEntity* PCurrentMob = (CMobEntity*)PMobIt.second;
+                PCurrentMob->PEnmityContainer->Clear(PMob->id);
+            }
+
+            if (PMob->PParty)
+            {
+                PMob->PParty->RemoveMember(PMob);
+            }
+
+            entitiesToRelease.insert(PMob->targid);
+        }
+    }
+
+    // TODO: Handle NPCs
+    for (auto targid : entitiesToRelease)
+    {
+        auto* PMob = m_mobList[targid];
+
+        for (EntityList_t::const_iterator it = m_charList.begin(); it != m_charList.end(); ++it)
+        {
+            CCharEntity* PChar = (CCharEntity*)it->second;
+            if (distance(PChar->loc.p, PMob->loc.p) < 50)
+            {
+                PChar->SpawnMOBList.erase(PMob->id);
+            }
+        }
+
+        delete PMob;
+        m_mobList[targid] = nullptr;
+        m_mobList.erase(targid);
+        dynamicTargIds.erase(targid);
     }
 
     for (EntityList_t::const_iterator it = m_npcList.begin(); it != m_npcList.end(); ++it)
@@ -1472,6 +1522,36 @@ void CZoneEntities::ZoneServer(time_point tick, bool check_regions)
     if (tick > m_EffectCheckTime)
     {
         m_EffectCheckTime = m_EffectCheckTime + 3s > tick ? m_EffectCheckTime + 3s : tick + 3s;
+    }
+
+    if (tick > charPersistTime && !charTargIds.empty())
+    {
+        charPersistTime = tick + 1s;
+
+        auto charTargIdIter = charTargIds.lower_bound(lastCharPersistTargId);
+        if (charTargIdIter == charTargIds.end())
+        {
+            charTargIdIter = charTargIds.begin();
+        }
+
+        size_t maxChecks = std::min<size_t>(charTargIds.size(), PERSIST_CHECK_CHARACTERS);
+
+        for (size_t i = 0; i < maxChecks; i++)
+        {
+            CCharEntity* pc = (CCharEntity*)m_charList[*charTargIdIter];
+            charTargIdIter++;
+            if (charTargIdIter == charTargIds.end())
+            {
+                charTargIdIter = charTargIds.begin();
+            }
+
+            if (pc && pc->PersistData(tick))
+            {
+                // We only want to persist at most 1 character per zone tick
+                break;
+            }
+        }
+        lastCharPersistTargId = *charTargIdIter;
     }
 
     if (tick > computeTime && !charTargIds.empty())

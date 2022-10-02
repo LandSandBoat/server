@@ -13,14 +13,14 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
+    local coloredDrop = 4258 + math.random(0, 7)
 
-local ColoredDrop = 4258+math.random(0, 7)
     -- COP mission
     if (player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN and player:getCharVar("COP_3-taru_story")== 1) then
         if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, ColoredDrop)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, coloredDrop)
         else
-            player:setCharVar("ColoredDrop", ColoredDrop)
+            player:setCharVar("ColoredDrop", coloredDrop)
             player:startEvent(43)
         end
     end
@@ -31,12 +31,12 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if (csid == 43) then
-        local ColoredDropID=player:getCharVar("ColoredDrop")
+        local coloredDropID = player:getCharVar("ColoredDrop")
         if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, ColoredDropID)
+            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, coloredDropID)
         else
-            player:addItem(ColoredDropID)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, ColoredDropID)
+            player:addItem(coloredDropID)
+            player:messageSpecial(ID.text.ITEM_OBTAINED, coloredDropID)
             player:setCharVar("COP_3-taru_story", 2)
             player:setCharVar("ColoredDrop", 0)
         end

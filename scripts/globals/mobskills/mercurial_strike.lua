@@ -15,7 +15,7 @@
 -- 999 = Colossal Slam
 -- 1111 = 2hr Meikyo Shisui
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/mobskills")
 require("scripts/globals/status")
 require("scripts/globals/utils")
@@ -27,7 +27,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local _, dmg = utils.randomEntry({ 111, 222, 333, 444, 555, 666, 777, 888, 999, 1111})
+    local _, dmg = utils.randomEntry({ 111, 222, 333, 444, 555, 666, 777, 888, 999, 1111 })
     mob:setLocalVar("MERCURIAL_STRIKE_DAMAGE", dmg)
     target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
     return dmg

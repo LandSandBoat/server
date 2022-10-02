@@ -4,13 +4,13 @@
 -----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/limbus")
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 local ID = require("scripts/zones/Temenos/IDs")
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller or optParams.noKiller then
         if GetMobByID(ID.mob.TEMENOS_N_MOB[5]+1):isDead() and GetMobByID(ID.mob.TEMENOS_N_MOB[5]+2):isDead() and
             GetMobByID(ID.mob.TEMENOS_N_MOB[5]+3):isDead()
         then

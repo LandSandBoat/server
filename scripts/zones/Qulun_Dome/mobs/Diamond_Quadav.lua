@@ -4,7 +4,7 @@
 -- Note: PH for Za Dha Adamantking PH
 -- TODO: messages should be zone-wide
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 local ID = require("scripts/zones/Qulun_Dome/IDs")
 require("scripts/globals/status")
 -----------------------------------
@@ -21,8 +21,8 @@ entity.onMobEngaged = function(mob, target)
     mob:showText(mob, ID.text.DIAMOND_QUADAV_ENGAGE)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
-    if isKiller then
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller then
         mob:showText(mob, ID.text.DIAMOND_QUADAV_DEATH)
     end
 end
@@ -33,11 +33,11 @@ entity.onMobDespawn = function(mob)
     -- the quest version of this NM doesn't respawn or count toward hq nm
     if nqId == ID.mob.DIAMOND_QUADAV then
         local hqId = mob:getID() + 1
-        local ToD = GetServerVariable("[POP]Za_Dha_Adamantking")
+        local timeOfDeath = GetServerVariable("[POP]Za_Dha_Adamantking")
         local kills = GetServerVariable("[PH]Za_Dha_Adamantking")
         local popNow = (math.random(1, 5) == 3 or kills > 6)
 
-        if os.time() > ToD and popNow then
+        if os.time() > timeOfDeath and popNow then
             DisallowRespawn(nqId, true)
             DisallowRespawn(hqId, false)
             UpdateNMSpawnPoint(hqId)

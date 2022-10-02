@@ -7,7 +7,7 @@
 --  Range: Back
 --  Notes: Used only if a target with hate is behind them. Conal behind Cerberus.
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------

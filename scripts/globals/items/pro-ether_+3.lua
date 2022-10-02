@@ -3,7 +3,7 @@
 -- Item: Pro-Ether +3
 -- Item Effect: Restores 350 MP
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
@@ -19,7 +19,7 @@ item_object.onItemCheck = function(target)
 end
 
 item_object.onItemUse = function(target)
-    target:messageBasic(xi.msg.basic.RECOVERS_MP, 0, target:addMP(350*xi.settings.ITEM_POWER))
+    target:messageBasic(xi.msg.basic.RECOVERS_MP, 0, target:addMP(350*xi.settings.main.ITEM_POWER))
     target:addStatusEffect(xi.effect.MEDICINE, 0, 0, 900)
 end
 

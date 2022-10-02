@@ -28,7 +28,7 @@ entity.onTrigger = function(player, npc)
             player:messageText(player, ID.text.NYZUL_FAIL)
             player:delAssault(currentAssault)
         else
-            player:addAssaultPoint(xi.assaultUtil.getAssaultArea(player), 100)
+            player:addAssaultPoint(xi.assault.getAssaultArea(player), 100)
             player:messageText(player, ID.text.ASSAULT_FAILED)
             player:delAssault(currentAssault)
         end
@@ -36,7 +36,7 @@ entity.onTrigger = function(player, npc)
         player:setCharVar("assaultEntered", 0)
         player:setCharVar("Assault_Armband", 0)
 
-        for _, orders in pairs(xi.assaultUtil.assaultOrders) do
+        for _, orders in pairs(xi.assault.assaultOrders) do
             if player:hasKeyItem(orders) then
                 player:delKeyItem(orders)
             end
@@ -88,7 +88,7 @@ entity.onTrigger = function(player, npc)
         player:setCharVar("assaultEntered", 0)
         player:setCharVar("Assault_Armband", 0)
         player:delAssault(currentAssault)
-        for _, orders in pairs(xi.assaultUtil.assaultOrders) do
+        for _, orders in pairs(xi.assault.assaultOrders) do
             if player:hasKeyItem(orders) then
                 player:delKeyItem(orders)
             end
@@ -120,10 +120,10 @@ entity.onEventFinish = function(player, csid, option)
         end
 
         player:setCurrency("id_tags", tagStock - 1)
-    elseif csid == 268 and option == 2 and xi.assaultUtil.hasOrders(player) and not player:hasKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG) then
+    elseif csid == 268 and option == 2 and xi.assault.hasOrders(player) and not player:hasKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG) then
         local currentAssault = player:getCurrentAssault()
 
-        for _, orders in pairs(xi.assaultUtil.assaultOrders) do
+        for _, orders in pairs(xi.assault.assaultOrders) do
             if player:hasKeyItem(orders) then
                 player:delKeyItem(orders)
             end

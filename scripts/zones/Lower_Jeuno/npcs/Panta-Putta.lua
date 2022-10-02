@@ -16,33 +16,33 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local TheWonderMagicSet = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_WONDER_MAGIC_SET)
-    local WonderMagicSetKI  = player:hasKeyItem(xi.ki.WONDER_MAGIC_SET)
-    local TheKindCardian    = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN)
+    local theWonderMagicSet = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_WONDER_MAGIC_SET)
+    local wonderMagicSetKI  = player:hasKeyItem(xi.ki.WONDER_MAGIC_SET)
+    local theKindCardian    = player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_KIND_CARDIAN)
 
     if
         player:getFameLevel(xi.quest.fame_area.JEUNO) >= 4 and
-        TheWonderMagicSet == QUEST_AVAILABLE
+        theWonderMagicSet == QUEST_AVAILABLE
     then
         player:startEvent(77) -- Start quest "The wonder magic set"
 
     elseif
-        TheWonderMagicSet == QUEST_ACCEPTED and
-        WonderMagicSetKI == false
+        theWonderMagicSet == QUEST_ACCEPTED and
+        wonderMagicSetKI == false
     then
         player:startEvent(55) -- During quest "The wonder magic set"
 
-    elseif WonderMagicSetKI == true then
+    elseif wonderMagicSetKI == true then
         player:startEvent(33) -- Finish quest "The wonder magic set"
 
     elseif
-        TheWonderMagicSet == QUEST_COMPLETED and
+        theWonderMagicSet == QUEST_COMPLETED and
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COOK_S_PRIDE) ~= QUEST_COMPLETED
     then
         player:startEvent(40) -- Standard dialog
 
     elseif
-        TheWonderMagicSet == QUEST_COMPLETED and
+        theWonderMagicSet == QUEST_COMPLETED and
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.THE_LOST_CARDIAN) == QUEST_AVAILABLE
     then
         if player:getCharVar("theLostCardianVar") >= 1 then
@@ -52,12 +52,12 @@ entity.onTrigger = function(player, npc)
         end
 
     elseif
-        TheKindCardian == QUEST_ACCEPTED and
+        theKindCardian == QUEST_ACCEPTED and
         player:getCharVar("theKindCardianVar") == 2
     then
         player:startEvent(35) -- Finish quest "The kind cardien"
 
-    elseif TheKindCardian == QUEST_COMPLETED then
+    elseif theKindCardian == QUEST_COMPLETED then
         player:startEvent(76) -- New standard dialog after "The kind cardien"
 
     else
