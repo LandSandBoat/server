@@ -572,6 +572,16 @@ function Battlefield:onBattlefieldLoss(player, battlefield)
     player:startEvent(32002)
 end
 
+function Battlefield:addEssentialMobs(mobNames)
+    table.insert(self.groups,{
+        mobs = mobNames,
+        superlink = true,
+        allDeath = function(mob)
+            self:handleAllMonstersDefeated(mob)
+        end,
+    })
+end
+
 function Battlefield:handleAllMonstersDefeated(mob)
     local battlefield = mob:getBattlefield()
     local crateId = battlefield:getArmouryCrate()
@@ -603,31 +613,40 @@ function Battlefield:handleLootRolls(battlefield, lootTable, npc)
             local max = 0
 
             for _, entry in pairs(lootGroup) do
-                max = max + entry.droprate
+                if type(entry) == 'table' then
+                    max = max + entry.droprate
+                end
             end
 
-            local roll = math.random(max)
+            local quantity = lootGroup.quantity or 1
+            for i = 1, quantity do
+                local roll = math.random(max)
 
-            for _, entry in pairs(lootGroup) do
-                max = max - entry.droprate
+                local current = 0
+                for _, entry in pairs(lootGroup) do
+                    if type(entry) == 'table' then
+                        local current = current + entry.droprate
 
-                if roll > max then
-                    if entry.itemid ~= 0 then
-                        if entry.itemid == 65535 then
-                            local gil = entry.amount/#players
-
-                            for j = 1, #players, 1 do
-                                players[j]:addGil(gil)
-                                players[j]:messageSpecial(zones[players[1]:getZoneID()].text.GIL_OBTAINED, gil)
+                        if current > roll then
+                            if entry.itemid == 0 then
+                                break
                             end
 
+                            if entry.itemid == 65535 then
+                                local gil = entry.amount/#players
+
+                                for j = 1, #players, 1 do
+                                    players[j]:addGil(gil)
+                                    players[j]:messageSpecial(zones[players[1]:getZoneID()].text.GIL_OBTAINED, gil)
+                                end
+
+                                break
+                            end
+
+                            players[1]:addTreasure(entry.itemid, npc)
                             break
                         end
-
-                        players[1]:addTreasure(entry.itemid, npc)
                     end
-
-                    break
                 end
             end
         end

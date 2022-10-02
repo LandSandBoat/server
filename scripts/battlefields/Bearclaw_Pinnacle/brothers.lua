@@ -59,12 +59,9 @@ content.groups =
             [xi.mod.SLEEPRES] = 50,
         },
     },
-    {
-        mobs = { "Eldertaur", "Mindertaur" },
-        superlink = true,
-        allDeath = utils.bind(content.handleAllMonstersDefeated, content)
-    },
 }
+
+content:addEssentialMobs({ "Eldertaur", "Mindertaur" })
 
 content.loot =
 {
