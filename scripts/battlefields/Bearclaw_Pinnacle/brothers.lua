@@ -69,25 +69,25 @@ content:addEssentialMobs({ "Eldertaur", "Mindertaur" })
 content.loot =
 {
     {
-        { itemid =    0, droprate = xi.battlefield.dropChance.VERY_LOW }, -- nothing
-        { itemid = 1767, droprate = xi.battlefield.dropChance.NORMAL }, -- Eltoro Leather
-        { itemid = 1762, droprate = xi.battlefield.dropChance.NORMAL }, -- Cassia Lumber
-        { itemid = 1771, droprate = xi.battlefield.dropChance.NORMAL }, -- Dragon Bone
+        { itemid = xi.items.NONE, droprate = xi.battlefield.dropChance.VERY_LOW },
+        { itemid = xi.items.SQUARE_OF_ELTORO_LEATHER, droprate = xi.battlefield.dropChance.NORMAL },
+        { itemid = xi.items.PIECE_OF_CASSIA_LUMBER, droprate = xi.battlefield.dropChance.NORMAL },
+        { itemid = xi.items.DRAGON_BONE, droprate = xi.battlefield.dropChance.NORMAL },
     },
 
     {
-        { itemid =    0, droprate = xi.battlefield.dropChance.EXTREMELY_HIGH }, -- nothing
-        { itemid = 1842, droprate = xi.battlefield.dropChance.LOW }, -- Cloud Evoker
+        { itemid = xi.items.NONE, droprate = xi.battlefield.dropChance.EXTREMELY_HIGH },
+        { itemid = xi.items.CLOUD_EVOKER, droprate = xi.battlefield.dropChance.LOW },
     },
 
     {
         quantity = 2,
-        { itemid =     0, droprate = xi.battlefield.dropChance.LOW }, -- nothing
-        { itemid = 15302, droprate = xi.battlefield.dropChance.LOW }, -- Scouter's Rope
-        { itemid = 17277, droprate = xi.battlefield.dropChance.LOW }, -- Hedgehog Bomb
-        { itemid = 17707, droprate = xi.battlefield.dropChance.LOW }, -- Martial Anelace
-        { itemid = 18098, droprate = xi.battlefield.dropChance.LOW }, -- Martial Lance
-        { itemid =  4748, droprate = xi.battlefield.dropChance.HIGH }, -- Scroll of Raise III
+        { itemid = xi.items.NONE, droprate = xi.battlefield.dropChance.LOW },
+        { itemid = xi.items.SCOUTERS_ROPE, droprate = xi.battlefield.dropChance.LOW },
+        { itemid = xi.items.HEDGEHOG_BOMB, droprate = xi.battlefield.dropChance.LOW },
+        { itemid = xi.items.MARTIAL_ANELACE, droprate = xi.battlefield.dropChance.LOW },
+        { itemid = xi.items.MARTIAL_LANCE, droprate = xi.battlefield.dropChance.LOW },
+        { itemid = xi.items.SCROLL_OF_RAISE_III, droprate = xi.battlefield.dropChance.HIGH },
     },
 }
 
