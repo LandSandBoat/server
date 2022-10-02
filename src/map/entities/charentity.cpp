@@ -58,6 +58,7 @@
 
 #include "../ability.h"
 #include "../attack.h"
+#include "../battlefield.h"
 #include "../char_recast_container.h"
 #include "../conquest_system.h"
 #include "../item_container.h"
@@ -2042,7 +2043,15 @@ void CCharEntity::Die()
     // influence for conquest system
     conquest::LoseInfluencePoints(this);
 
-    if (GetLocalVar("MijinGakure") == 0)
+    bool loseExperiencePoints = GetLocalVar("MijinGakure") == 0;
+
+    // Do not lose experience points in battlefields
+    if (PBattlefield != nullptr && (PBattlefield->GetRuleMask() & RULES_LOSE_EXP) == 0)
+    {
+        loseExperiencePoints = false;
+    }
+
+    if (loseExperiencePoints)
     {
         float retainPercent = std::clamp(settings::get<uint8>("map.EXP_RETAIN") + getMod(Mod::EXPERIENCE_RETAINED) / 100.0f, 0.0f, 1.0f);
         charutils::DelExperiencePoints(this, retainPercent, 0);
