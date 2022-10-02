@@ -67,6 +67,7 @@ global_objects=(
     Sequence
     Container
     Event
+    LimbusArea
 
     removeSleepEffects
 

@@ -543,7 +543,7 @@ function applyResistanceEffect(caster, target, spell, params)
     end
 
     if effect ~= nil then
-        effectRes = effectRes - getEffectResistance(target, effect, false, caster)
+        effectRes = effectRes + getEffectResistance(target, effect, false, caster)
     end
 
     local p = getMagicHitRate(caster, target, skill, element, effectRes, magicaccbonus, diff)
@@ -585,7 +585,6 @@ function getMagicHitRate(caster, target, skillType, element, effectRes, bonusAcc
     local resMod = 0
     local dLvl = target:getMainLvl() - caster:getMainLvl()
     local dStatAcc = 0
-    effectRes = 1 - (effectRes / 100)
 
     -- resist everything if real magic shield is active (see effects/magic_shield)
     if target:hasStatusEffect(xi.effect.MAGIC_SHIELD) then
@@ -675,6 +674,8 @@ function getMagicHitRate(caster, target, skillType, element, effectRes, bonusAcc
         if target:isMob() and target:isNM() then
             tryBuildResistance(target, xi.magic.resistMod[element], nil, caster)
         end
+
+        resMod = target:getMod(xi.magic.resistMod[element])
 
         -- Add acc for elemental affinity accuracy and element specific accuracy
         local affinityBonus = AffinityBonusAcc(caster, element)

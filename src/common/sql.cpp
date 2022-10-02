@@ -104,9 +104,14 @@ SqlConnection::SqlConnection(const char* user, const char* passwd, const char* h
 : m_LatencyWarning(false)
 {
     TracyZoneScoped;
-    self = new Sql_t{};
-    mysql_init(&self->handle);
-    if (self == nullptr)
+
+    self = new Sql_t();
+
+    // Allocates or initializes a MYSQL object suitable for mysql_real_connect().
+    // If mysql is a NULL pointer, the function allocates, initializes, and returns a new object.
+    // Otherwise, the object is initialized and the address of the object is returned.
+    // If mysql_init() allocates a new object, it is freed when mysql_close() is called to close the connection.
+    if (mysql_init(&self->handle) == nullptr)
     {
         ShowCritical("mysql_init failed!");
     }

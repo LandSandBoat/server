@@ -31,12 +31,24 @@ zones[xi.zone.VALKURM_DUNES] =
         AMK_DIGGING_OFFSET             = 7322,  -- You spot some familiar footprints. You are convinced that your moogle friend has been digging in the immediate vicinity.
         SONG_RUNES_DEFAULT             = 7341,  -- Lyrics on the old monument sing the story of lovers torn apart.
         UNLOCK_BARD                    = 7362,  -- You can now become a bard!
+        JUST_A_PILE_OF_SAND            = 7363,  -- Just a pile of sand.
         SIGNPOST2                      = 7370,  -- Northeast: La Theine Plateau Southeast: Konschtat Highlands West: Selbina
         SIGNPOST1                      = 7371,  -- Northeast: La Theine Plateau Southeast: Konschtat Highlands Southwest: Selbina
         CONQUEST                       = 7381,  -- You've earned conquest points!
         AN_EMPTY_LIGHT_SWIRLS          = 7770,  -- An empty light swirls about the cave, eating away at the surroundings...
         GARRISON_BASE                  = 7772,  -- Hm? What is this? %? How do I know this is not some [San d'Orian/Bastokan/Windurstian] trick?
+        RETURN_TO_SEA                  = 7823,  -- You return the <item> to the sea.
+        TOO_MANY_IN_PARTY              = 7843,  -- Nothing happens. Your party exceeds the maximum number of <number> members.
+        ALLIANCE_NOT_ALLOWED           = 7844,  -- Nothing happens. You must dissolve your alliance.
         MONSTERS_KILLED_ADVENTURERS    = 7846,  -- Long ago, monsters killed many adventurers and merchants just off the coast here. If you find any vestige of the victims and return it to the sea, perhaps it would appease the spirits of the dead.
+        SHIMMERY_POINT                 = 7851,  -- Right over there! The ship-shape-shimmery point!
+        HURRY_UP                       = 7852,  -- Ahhhh! Hurry up, hurry up!!!
+        ITS_COMING                     = 7853,  -- It's coming! It's coming for ussssss!
+        THREE_OF_THEM                  = 7854,  -- It can'taru be....!Three of them!!!?
+        NOOOOO                         = 7855,  -- Noooooo!!!!
+        CRY_OF_ANGUISH                 = 7856,  -- ??? disappears in a cry of anguish.
+        NO_LONGER_FEEL_CHILL           = 7857,  -- You no longer feel a chill. The chart may lose its power if you venture too far.
+        TOO_MUCH_TIME_PASSED           = 7858,  -- Too much time has passed. The monster has lost interest.
         YOU_CANNOT_ENTER_DYNAMIS       = 7884,  -- You cannot enter Dynamis - [Dummy/San d'Oria/Bastok/Windurst/Jeuno/Beaucedine/Xarcabard/Valkurm/Buburimu/Qufim/Tavnazia] for <number> [day/days] (Vana'diel time).
         PLAYERS_HAVE_NOT_REACHED_LEVEL = 7886,  -- Players who have not reached level <number> are prohibited from entering Dynamis.
         DYNA_NPC_DEFAULT_MESSAGE       = 8008,  -- There is a strange symbol drawn here. A haunting chill sweeps through you as you gaze upon it...
@@ -61,14 +73,21 @@ zones[xi.zone.VALKURM_DUNES] =
             [17199563] = 17199564, -- -798.674 -8.672 19.204
             [17199461] = 17199564, -- -296.679 -0.510 -164.298
         },
-        MARCHELUTE         = 17199566,
-        DOMAN              = 17199567,
-        ONRYO              = 17199568,
+        MARCHELUTE          = 17199566,
+        DOMAN               = 17199567,
+        ONRYO               = 17199568,
+        HOUU_THE_SHOALWADER = 17199602,
+        BEACH_MONK          = 17199603,
+        HEIKE_CRAB          = 17199604,
     },
     npc =
     {
-        SUNSAND_QM    = 17199699, -- qm1 in npc_list
-        OVERSEER_BASE = 17199709, -- Quanteilleron_RK in npc_list
+        SUNSAND_QM        = 17199699, -- qm1 in npc_list
+        OVERSEER_BASE     = 17199709, -- Quanteilleron_RK in npc_list
+        PIRATE_CHART_QM   = 17199740,
+        PIRATE_CHART_TARU = 17199741,
+        BARNACLED_BOX     = 17199605,
+        SHIMMERING_POINT  = 17199742,
     },
 }
 

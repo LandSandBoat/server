@@ -46,7 +46,7 @@ enum PATHFLAG
     PATHFLAG_SCRIPT   = 0x08, // don't overwrite this path before completion (except via another script)
     PATHFLAG_SLIDE    = 0x10, // Slide to end point if close enough (so no over shoot)
     PATHFLAG_PATROL   = 0x20, // Automatically restart path once it is finished and resume when roaming
-    PATHFLAG_WAITS    = 0x40, // Using waits
+    PATHFLAG_COORDS   = 0x40, // Follows path until end, but will not repeat
 };
 
 class CPathFind

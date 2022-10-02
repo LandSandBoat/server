@@ -412,11 +412,7 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
         ftp = 1
     end
 
-    if not isRanged then
-        base = (calcParams.weaponDamage[1] + calcParams.fSTR + wsMods) * ftp
-    else
-        base = (calcParams.weaponDamage[1] + calcParams.weaponDamage[2] + calcParams.fSTR + wsMods) * ftp
-    end
+    base = (calcParams.weaponDamage[1] + calcParams.fSTR + wsMods) * ftp
 
     local dmg = base
 
@@ -877,10 +873,6 @@ function getMeleeDmg(attacker, weaponType, kick)
     end
 
     return { mainhandDamage, offhandDamage }
-end
-
-function getRangedDamage(attacker)
-    return { attacker:getRangedDmg(), attacker:getAmmoDmg() }
 end
 
 function getHitRate(attacker, target, capHitRate, bonus)

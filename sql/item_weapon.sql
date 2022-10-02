@@ -1726,7 +1726,7 @@ INSERT INTO `item_weapon` VALUES (18088,'dreizack',8,0,0,0,0,1,1,477,87,0);
 INSERT INTO `item_weapon` VALUES (18089,'schiltron_spear',8,0,0,0,0,1,1,396,70,0);
 INSERT INTO `item_weapon` VALUES (18090,'military_spear',8,0,0,0,0,1,1,374,36,0);
 INSERT INTO `item_weapon` VALUES (18091,'mighty_lance',8,0,0,0,0,1,1,507,87,0);
-INSERT INTO `item_weapon` VALUES (18092,'bourdonasse',8,0,0,0,0,3,1,478,84,0);
+INSERT INTO `item_weapon` VALUES (18092,'bourdonasse',8,0,0,0,0,4,1,478,84,0);
 INSERT INTO `item_weapon` VALUES (18093,'couse',8,0,0,0,0,1,1,480,72,0);
 INSERT INTO `item_weapon` VALUES (18094,'couse_+1',8,0,0,0,0,1,1,461,73,0);
 INSERT INTO `item_weapon` VALUES (18095,'dispel_couse',8,0,0,0,0,1,1,480,72,0);
