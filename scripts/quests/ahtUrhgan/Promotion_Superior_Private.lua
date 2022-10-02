@@ -1,15 +1,15 @@
 -----------------------------------
--- Assault SP rank-up quest
-
+-- Promotion: Superior Private
+-- Log ID: 6, Quest ID: 91
 -- Naja Salaheem !pos 26 -8 -45.5 50
 -----------------------------------
 require('scripts/globals/items')
 require('scripts/globals/quests')
 require('scripts/globals/npc_util')
-require('scripts/globals/interaction/hidden_quest')
+require('scripts/globals/interaction/quest')
 -----------------------------------
 
-local quest = HiddenQuest:new("AssaultRank_SP")
+local quest = Quest:new(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.PROMOTION_SUPERIOR_PRIVATE)
 
 quest.reward =
 {
@@ -18,13 +18,10 @@ quest.reward =
 
 quest.sections =
 {
-    -- Section: Begin quest
     {
-        check = function(player, questVars, vars)
-            return player:hasKeyItem(xi.ki.PFC_WILDCAT_BADGE)
-                and not player:hasKeyItem(xi.ki.SP_WILDCAT_BADGE)
-                and vars['AssaultPromotion'] >= 25
-                and questVars.Prog == 0
+        check = function(player, status, vars)
+            return status == QUEST_AVAILABLE and player:getCharVar("AssaultPromotion") >= 25
+            and player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.PROMOTION_PRIVATE_FIRST_CLASS) == QUEST_COMPLETED
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
@@ -34,16 +31,14 @@ quest.sections =
             onEventFinish =
             {
                 [5020] = function(player, csid, option, npc)
-                    quest:setVar(player, 'Prog', 1)
+                    quest:begin(player)
                 end,
             },
         },
     },
-
-    -- Section: Hoofprint hunting
     {
-        check = function(player, questVars, vars)
-            return not player:hasKeyItem(xi.ki.DARK_RIDER_HOOFPRINT) and questVars.Prog == 1
+        check = function(player, status, vars)
+            return status == QUEST_ACCEPTED and not player:hasKeyItem(xi.ki.DARK_RIDER_HOOFPRINT)
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
@@ -55,27 +50,23 @@ quest.sections =
         {
             ['Warhorse_Hoofprint'] = quest:keyItem(xi.ki.DARK_RIDER_HOOFPRINT)
         },
-
         [xi.zone.CAEDARVA_MIRE] =
         {
             ['Warhorse_Hoofprint'] = quest:keyItem(xi.ki.DARK_RIDER_HOOFPRINT)
         },
-
         [xi.zone.MOUNT_ZHAYOLM] =
         {
             ['Warhorse_Hoofprint'] = quest:keyItem(xi.ki.DARK_RIDER_HOOFPRINT)
         },
-
         [xi.zone.WAJAOM_WOODLANDS] =
         {
             ['Warhorse_Hoofprint'] = quest:keyItem(xi.ki.DARK_RIDER_HOOFPRINT)
         },
-    },
 
-    -- Section: Finish quest
+    },
     {
-        check = function(player, questVars, vars)
-            return player:hasKeyItem(xi.ki.DARK_RIDER_HOOFPRINT) and questVars.Prog == 1
+        check = function(player, status, vars)
+            return status == QUEST_ACCEPTED and player:hasKeyItem(xi.ki.DARK_RIDER_HOOFPRINT)
         end,
 
         [xi.zone.AHT_URHGAN_WHITEGATE] =
@@ -86,7 +77,9 @@ quest.sections =
             {
                 [5022] = function(player, csid, option, npc)
                     if quest:complete(player) then
-                        player:setVar("AssaultPromotion", 0)
+                        player:setCharVar("AssaultPromotion", 0)
+                        player:delKeyItem(xi.ki.PFC_WILDCAT_BADGE)
+                        player:delKeyItem(xi.ki.DARK_RIDER_HOOFPRINT)
                     end
                 end,
             },
