@@ -25,7 +25,7 @@ entity.onMobFight = function(mob, target)
         elseif mob:getHPP() < 50 and mob:getLocalVar("secondSpawn") == 0 then
             mob:setLocalVar("secondSpawn", 1)
             SpawnMob(guardHippo:getID()):updateEnmity(target)
-        elseif mob:GetHPP() < 25 and mob:getLocalVar("thirdSpawn") == 0 then
+        elseif mob:getHPP() < 25 and mob:getLocalVar("thirdSpawn") == 0 then
             mob:setLocalVar("thirdSpawn", 1)
             SpawnMob(guardHippo:getID()):updateEnmity(target)
         end
