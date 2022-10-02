@@ -137,6 +137,8 @@ namespace luautils
         lua.set_function("DespawnMob", &luautils::DespawnMob);
         lua.set_function("GetPlayerByName", &luautils::GetPlayerByName);
         lua.set_function("GetPlayerByID", &luautils::GetPlayerByID);
+        lua.set_function("GetPlayerIDAnywhere", &luautils::GetPlayerIDAnywhere);
+        lua.set_function("SendToJailOffline", &luautils::SendToJailOffline);
         lua.set_function("GetMagianTrial", &luautils::GetMagianTrial);
         lua.set_function("GetMagianTrialsWithParent", &luautils::GetMagianTrialsWithParent);
         lua.set_function("JstMidnight", &luautils::JstMidnight);
@@ -1474,6 +1476,51 @@ namespace luautils
         }
 
         return std::nullopt;
+    }
+
+    /************************************************************************
+     *                                                                       *
+     *  Gets a player ID from any zone, regardless of online status          *
+     *                                                                       *
+     ************************************************************************/
+
+    uint32 GetPlayerIDAnywhere(std::string const& name)
+    {
+        TracyZoneScoped;
+
+        // Sanitize inputs - looking for a name, so this should not include any non-alpha characters
+        std::string cleanString = name;
+        cleanString.erase(remove_if(cleanString.begin(), cleanString.end(),
+                                    [](auto const& c) -> bool
+                                    { return !std::isalpha((int)c); }),
+                          cleanString.end());
+
+        const char* Query = "SELECT charId FROM chars WHERE charname='%s';";
+        int32       ret   = sql->Query(Query, cleanString);
+        int32       PId   = 0;
+
+        if (ret != SQL_ERROR && sql->NumRows() == 1)
+        {
+            while (sql->NextRow() == SQL_SUCCESS)
+            {
+                PId = sql->GetUInt64Data(0);
+            }
+        }
+
+        return PId;
+    }
+
+    /************************************************************************
+     *                                                                       *
+     *  Send a player to jail, even if they are offline                      *
+     *                                                                       *
+     ************************************************************************/
+
+    void SendToJailOffline(uint32 playerId, int8 cellId, float posX, float posY, float posZ, uint8 rot)
+    {
+        TracyZoneScoped;
+        charutils::PersistCharVar(playerId, "inJail", cellId);
+        sql->Query("UPDATE chars SET pos_x=%f, pos_y=%f, pos_z=%f, pos_rot=%u, pos_zone=131 WHERE charid=%u;", posX, posY, posZ, rot, playerId);
     }
 
     /************************************************************************
