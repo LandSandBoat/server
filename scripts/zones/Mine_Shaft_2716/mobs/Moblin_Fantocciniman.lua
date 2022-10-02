@@ -17,6 +17,7 @@ end
 entity.onMobEngaged = function(mob, target)
     mob:setMod(xi.mod.REGAIN, 375)
 
+    -- Different message if engaging for the second time
     if mob:getLocalVar("control") == 0 then
         mob:showText(mob, ID.text.TIME_FOR_GOODEBYONGO)
     else
@@ -35,16 +36,18 @@ entity.onMobFight = function(mob, target)
         mob:SetAutoAttackEnabled(true)
         mob:setLocalVar("control", 1)
         mob:setBehaviour(0)
-    end
 
-    if mob:checkDistance(fantoccini) > 8 then
-        mob:pathTo(fPos.x, fPos.y, fPos.z, xi.path.flag.SCRIPT)
+    -- Moblin stays within 8 yalms of the Fantoccini
     else
-        mob:pathTo(mPos.x, mPos.y, mPos.z, xi.path.flag.SCRIPT)
+        if mob:checkDistance(fantoccini) > 8 then
+            mob:pathTo(fPos.x, fPos.y, fPos.z, xi.path.flag.SCRIPT)
+        else
+            mob:pathTo(mPos.x, mPos.y, mPos.z, xi.path.flag.SCRIPT)
+        end
     end
 end
 
-entity.onMobWeaponSkill = function(target, mob)
+entity.onMobWeaponSkillPrepare = function(target, mob)
     mob:showText(mob, ID.text.ROLY_POLY)
 end
 

@@ -20,14 +20,11 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     target:addTP(math.random(1000,3000))
 
-    if target:isPC() then
-        mob:showText(mob, ID.text.DICE_LIKE_YOU)
-    else
+    if not target:isPC() then
         mob:showText(mob, ID.text.HA_HA)
     end
 
     skill:setMsg(xi.msg.basic.TP_INCREASE)
-
     return target:getTP()
 end
 

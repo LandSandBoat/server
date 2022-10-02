@@ -36,7 +36,6 @@ local spawnPet = function(mob)
     mob:timer(3000, function(mobArg)
         if mobArg:isAlive() then
             local pos = mobArg:getPos()
-            pet:setSpawn(pos.x + math.random(-2,2), pos.y, pos.z + math.random(-2,2), pos.rot)
             mobArg:setMobMod(xi.mobMod.NO_MOVE, 0)
             mobArg:entityAnimationPacket("shsm")
             mobArg:SetMagicCastingEnabled(true)
@@ -44,6 +43,7 @@ local spawnPet = function(mob)
             mobArg:SetMobAbilityEnabled(true)
             mob:setLocalVar("control", 0)
             SpawnMob(pet:getID())
+            pet:setPos(pos.x + math.random(-2,2), pos.y, pos.z + math.random(-2,2), pos.rot)
         end
     end)
 end
