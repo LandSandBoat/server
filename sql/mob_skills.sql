@@ -1326,17 +1326,17 @@ INSERT INTO `mob_skills` VALUES (1424,1053,'marionette_dice_cure',0,40.0,2000,15
 -- INSERT INTO `mob_skills` VALUES (1425,0,'marionette_dice',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1426,0,'marionette_dice',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1427,1054,'marionette_dice_special',0,40.0,2000,1500,2,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1428,28,'warcry',0,7.0,2000,0,1,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1429,8,'counterstance',0,7.0,2000,0,1,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1428,28,'warcry',0,7.0,2000,0,1,0,0,0,0,0,0);       -- Humanoid animation
+INSERT INTO `mob_skills` VALUES (1429,8,'counterstance',0,7.0,2000,0,1,0,0,0,0,0,0); -- Humanoid animation
 -- INSERT INTO `mob_skills` VALUES (1430,1174,'steal',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1431,185,'shield_bash',0,7.0,2000,0,4,4,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1432,202,'weapon_bash',0,7.0,2000,0,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1433,83,'sic',0,7.0,2000,0,1,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1434,23,'barrage',0,20.0,2000,0,1,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1431,185,'shield_bash',0,7.0,2000,0,4,4,0,0,0,0,0); -- Humanoid animation
+INSERT INTO `mob_skills` VALUES (1432,202,'weapon_bash',0,7.0,2000,0,4,0,0,0,0,0,0); -- Humanoid animation
+INSERT INTO `mob_skills` VALUES (1433,83,'sic',0,7.0,2000,0,1,0,0,0,0,0,0);          -- Humanoid animation
+INSERT INTO `mob_skills` VALUES (1434,23,'barrage',0,20.0,2000,0,1,0,0,0,0,0,0);     -- Humanoid animation
 -- INSERT INTO `mob_skills` VALUES (1435,1179,'.',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1436,25,'meditate',0,7.0,2000,0,1,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1437,204,'jump',0,12.0,2000,0,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1438,94,'blood_pact',0,7.0,2000,0,1,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1436,25,'meditate',0,7.0,2000,0,1,0,0,0,0,0,0);     -- Humanoid animation
+INSERT INTO `mob_skills` VALUES (1437,204,'jump',0,12.0,2000,0,4,0,0,0,0,0,0);       -- Humanoid animation
+INSERT INTO `mob_skills` VALUES (1438,94,'blood_pact',0,7.0,2000,0,1,0,0,0,0,0,0);   -- Humanoid animation
 -- INSERT INTO `mob_skills` VALUES (1439,1057,'aetheral_toxin',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1440,1058,'edge_of_death',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1441,1065,'actinic_burst',1,10.0,2000,1500,4,0,0,0,0,0,0);

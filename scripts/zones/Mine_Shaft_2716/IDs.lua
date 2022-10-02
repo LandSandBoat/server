@@ -86,7 +86,7 @@ zones[xi.zone.MINE_SHAFT_2716] =
         {
             modelID = 1214,
             skillList = 1885,
-            ability = 0, -- None
+            ability = 0, -- Benediction
             spellListID = 1,
             petID = 0,
         },
@@ -134,7 +134,20 @@ zones[xi.zone.MINE_SHAFT_2716] =
         {
             modelID = 1224,
             skillList = 1183,
-            petSkillList = 206,
+            petModelID =
+            {
+                328, -- Lizzard
+                340, -- Sheep
+                376, -- Funguar
+                356, -- Crab
+            },
+            petSkillList =
+            {
+                174, -- Lizzard
+                226, -- Sheep
+                116, -- Funguar
+                372, -- Crab
+            },
             ability = 1433, -- Sic
             spellListID = 0,
             petID = 1,
@@ -184,7 +197,27 @@ zones[xi.zone.MINE_SHAFT_2716] =
         {
             modelID = 1235,
             skillList = 1186,
-            petSkillList = 34,
+            petModelID =
+            {
+                793, -- Ifrit
+                794, -- Titan
+                795, -- Leviathan
+                796, -- Garuda
+                797, -- Shiva
+                798, -- Ramuh
+                791, -- Carbuncle
+            },
+            petSkillList =
+            {
+                38, -- Ifrit
+                45, -- Titan
+                40, -- Leviathan
+                37, -- Garuda
+                44, -- Shiva
+                43, -- Ramuh
+                34, -- Carbuncle
+            },
+
             ability = 1438, -- Blood Pact
             spellListID = 0,
             petID = 3,
@@ -209,7 +242,25 @@ zones[xi.zone.MINE_SHAFT_2716] =
         {
             modelID = 1398,
             skillList = 1184,
-            ability = 0, -- None
+            petModelID =
+            {
+                {1983, xi.job.PLD}, -- Melee Automaton
+                {1990, xi.job.RNG}, -- Ranged Automaton
+                {1994, xi.job.BLM}, -- Magic Automaton
+            },
+            petSkillList =
+            {
+                364, -- Melee Automaton
+                365, -- Ranged Automaton
+                366, -- Magic Automaton
+            },
+            petSpellListID =
+            {
+                0, -- Melee Automaton
+                0, -- Ranged Automaton
+                2, -- Magic Automaton
+            },
+            ability = 1995, -- Maneuvers
             spellListID = 0,
             petID = 4,
         },

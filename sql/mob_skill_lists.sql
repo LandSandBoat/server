@@ -1632,7 +1632,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Automaton_Valoredge',364,1940);
 INSERT INTO `mob_skill_lists` VALUES ('Automaton_Valoredge',364,1941);
 INSERT INTO `mob_skill_lists` VALUES ('Automaton_Valoredge',364,2065);
 INSERT INTO `mob_skill_lists` VALUES ('Automaton_Valoredge',364,2299);
-INSERT INTO `mob_skill_lists` VALUES ('Automaton_Valoredge',364,2743);
+-- INSERT INTO `mob_skill_lists` VALUES ('Automaton_Valoredge',364,2743); -- String Shredder OOE
 -- INSERT INTO `mob_skill_lists` VALUES ('Automaton_Valoredge',364,1945);
 -- INSERT INTO `mob_skill_lists` VALUES ('Automaton_Valoredge',364,1947);
 -- INSERT INTO `mob_skill_lists` VALUES ('Automaton_Valoredge',364,1948);
@@ -1652,7 +1652,7 @@ INSERT INTO `mob_skill_lists` VALUES ('Automaton_Valoredge',364,2743);
 INSERT INTO `mob_skill_lists` VALUES ('Automaton_Sharpshot',365,1942);
 INSERT INTO `mob_skill_lists` VALUES ('Automaton_Sharpshot',365,2066);
 INSERT INTO `mob_skill_lists` VALUES ('Automaton_Sharpshot',365,2300);
-INSERT INTO `mob_skill_lists` VALUES ('Automaton_Sharpshot',365,2744);
+-- INSERT INTO `mob_skill_lists` VALUES ('Automaton_Sharpshot',365,2744); -- Armor piercer OOE
 -- INSERT INTO `mob_skill_lists` VALUES ('Automaton_Sharpshot',365,1945);
 -- INSERT INTO `mob_skill_lists` VALUES ('Automaton_Sharpshot',365,1947);
 -- INSERT INTO `mob_skill_lists` VALUES ('Automaton_Sharpshot',365,1948);
@@ -3907,16 +3907,23 @@ INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_COR',1194,208); -- Hot Shot
 INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_COR',1194,209); -- Split Shot
 INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_COR',1194,210); -- Sniper Shot
 INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_COR',1194,212); -- Slug Shot
+-- PUP
+INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_PUP',1195,1992); -- Fire Maneuver
+INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_PUP',1195,1993); -- Ice Maneuver
+INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_PUP',1195,1994); -- Wind Maneuver
+INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_PUP',1195,1995); -- Earth Maneuver
+INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_PUP',1195,1996); -- Thunder Maneuver
+INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_PUP',1195,1997); -- Water Maneuver
 -- Moblin Fantocciniman
-INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1195,1414); -- Player Ability Reset
-INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1195,1415); -- Cure Player
-INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1195,1418); -- Boost Player
-INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1195,1419); -- TP Player
-INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1195,1421); -- TP Fantocinni
-INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1195,1422); -- Boost Fantocinni
-INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1195,1424); -- Cure Fantocinni
-INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1195,1427); -- Fantocinni use Ability
-INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1195,1457); -- Benediction Fantocinni
+INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1196,1414); -- Player Ability Reset
+INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1196,1415); -- Cure Player
+INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1196,1418); -- Boost Player
+INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1196,1419); -- TP Player
+INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1196,1421); -- TP Fantoccini
+INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1196,1422); -- Boost Fantoccini
+INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1196,1424); -- Cure Fantoccini
+INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1196,1427); -- Fantoccini use Ability
+INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1196,1457); -- Benediction Fantoccicni
 
 -- Next available ID: 1183
 
