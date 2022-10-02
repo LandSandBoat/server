@@ -39,7 +39,7 @@ public:
     void         HideHP(bool hide);
     bool         IsHPHidden() const;
     void         SetUntargetable(bool untargetable);
-    bool         GetUntargetable() const;
+    bool         GetUntargetable() const override;
     bool         IsTriggerable() const;
     virtual bool isWideScannable() override;
     virtual void PostTick() override;

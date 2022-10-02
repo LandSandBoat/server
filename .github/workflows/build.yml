@@ -21,7 +21,7 @@ jobs:
     - name: Install Dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y software-properties-common cppcheck luajit-5.1-dev luarocks mariadb-server mariadb-client libmariadb-dev-compat
+        sudo apt-get install -y software-properties-common cppcheck luajit-5.1-dev luarocks mariadb-server mariadb-client libmariadb-dev-compat binutils-dev
         pip install -r tools/requirements.txt
         luarocks install luacheck --local
     - id: changed-files
@@ -158,7 +158,7 @@ jobs:
     - name: Install Dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev
+        sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev binutils-dev
     #- name: Cache 'build' folder
     #  uses: actions/cache@v3
     #  with:
@@ -190,7 +190,7 @@ jobs:
     - name: Install Dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev
+        sudo apt-get install -y software-properties-common cmake libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev binutils-dev
     #- name: Cache 'build' folder
     #  uses: actions/cache@v3
     #  with:
@@ -339,13 +339,17 @@ jobs:
     - name: Install Dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y software-properties-common cmake mariadb-server mariadb-client libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks
+        sudo apt-get install -y software-properties-common cmake mariadb-server mariadb-client libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks binutils-dev
     - name: Verify MySQL connection from container
       run: |
         mysql -h 127.0.0.1 -uroot -proot -e "SHOW DATABASES"
     - name: Import SQL files
       run: |
         for f in sql/*.sql; do
+          echo -e "Importing $f into the database..."
+          mysql xidb -h 127.0.0.1 -uroot -proot < $f
+        done
+        for f in modules/era/sql/*.sql; do
           echo -e "Importing $f into the database..."
           mysql xidb -h 127.0.0.1 -uroot -proot < $f
         done
@@ -358,9 +362,14 @@ jobs:
       run: |
         python3 << EOF
         with open("modules/init.txt", "w") as f:
-            f.write("custom\n")
-            f.write("era\n")
-            f.write("renamer\n")
+          f.write("era/lua\n")
+          f.write("era/cpp\n")
+          f.write("era/lua_dynamis/globals/era_dynamis.lua\n")
+          f.write("era/lua_dynamis/globals/era_dynamis_spawning.lua\n")
+          f.write("era/lua_dynamis/mobskills/era_pet_skills.lua\n")
+          f.write("era/lua_dynamis/mobskills/era_regain_skills.lua\n")
+          f.write("era/lua_dynamis/globals/era_dynamis_zones.lua\n")
+          f.write("renamer\n")
         EOF
     - name: Startup and character login checks
       uses: nick-invision/retry@v2
@@ -461,7 +470,7 @@ jobs:
     - name: Install Dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y software-properties-common cmake mariadb-server mariadb-client libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks
+        sudo apt-get install -y software-properties-common cmake mariadb-server mariadb-client libmariadb-dev-compat libluajit-5.1-dev libzmq3-dev zlib1g-dev libssl-dev luarocks binutils-dev
     - name: Verify MySQL connection from container
       run: |
         mysql -h 127.0.0.1 -uroot -proot -e "SHOW DATABASES"

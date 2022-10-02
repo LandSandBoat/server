@@ -151,7 +151,7 @@ public:
     void HideHP(bool hide);
     bool IsHPHidden() const;
     void SetUntargetable(bool untargetable);
-    bool GetUntargetable() const;
+    bool GetUntargetable() const override;
 
     void         PostTick() override;
     float        GetRoamDistance();
@@ -269,9 +269,9 @@ public:
     static constexpr float sight_range{ 15.f };
 
 protected:
-    void DistributeRewards();
+    void  DistributeRewards();
     float ApplyTH(int16 m_THLvl, int16 rate);
-    void DropItems(CCharEntity* PChar);
+    void  DropItems(CCharEntity* PChar);
 
 private:
     time_point                     m_DespawnTimer{ time_point::min() }; // Despawn Timer to despawn mob after set duration

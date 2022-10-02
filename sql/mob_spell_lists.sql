@@ -5016,6 +5016,9 @@ INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 250, 1, 255); -- ice spi
 INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 252, 1, 255); -- stun (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 253, 1, 255); -- sleep (1~255)
 INSERT INTO `mob_spell_lists` VALUES('Silverhook', 492, 274, 1, 255); -- sleepga ii (1~255)
+INSERT INTO `mob_spell_lists` VALUES ('Cemetery_Cherry',498,274,1,255); -- Sleepga II
+INSERT INTO `mob_spell_lists` VALUES ('Cemetery_Cherry',498,356,1,255); -- Paralyga
+INSERT INTO `mob_spell_lists` VALUES ('Cemetery_Cherry',498,366,1,255); -- Graviga
 
 -- Princess Jelly (493)
 INSERT INTO `mob_spell_lists` VALUES('Princess_Jelly', 493, 235, 1, 255); -- burn (1~255)

@@ -55,6 +55,20 @@ using uint64 = std::uint64_t;
 #if !defined(_MSC_VER)
 #define strcmpi strcasecmp
 #define stricmp strcasecmp
+
+// https://stackoverflow.com/questions/12044519/what-is-the-windows-equivalent-of-the-unix-function-gmtime-r
+// gmtime_r() is the thread-safe version of gmtime(). The MSVC implementation of gmtime() is already thread safe,
+// the returned struct tm* is allocated in thread-local storage.
+// That doesn't make it immune from trouble if the function is called multiple times on the same
+// thread and the returned pointer is stored.
+// You can use gmtime_s() instead. Closest to gmtime_r() but with the arguments reversed
+
+// Provide func_s implementations for Unix
+#define _gmtime_s(a, b)    gmtime_r(b, a)
+#define _localtime_s(a, b) localtime_r(b, a)
+#else // MSVC
+#define _gmtime_s(a, b)    gmtime_s(a, b)
+#define _localtime_s(a, b) localtime_s(a, b)
 #endif
 
 #include <chrono>

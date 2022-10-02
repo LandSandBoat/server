@@ -8337,11 +8337,8 @@ uint8 CLuaBaseEntity::getSkillRank(uint8 rankID)
 
 void CLuaBaseEntity::setSkillRank(uint8 skillID, uint8 newrank)
 {
-    auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity);
-    if (PChar)
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
     {
-        auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
-
         PChar->WorkingSkills.rank[skillID]  = newrank;
         PChar->WorkingSkills.skill[skillID] = (PChar->RealSkills.skill[skillID] / 10) * 0x20 + newrank;
         PChar->RealSkills.rank[skillID]     = newrank;
@@ -13679,7 +13676,7 @@ bool CLuaBaseEntity::isAutoAttackEnabled()
 
 int16 CLuaBaseEntity::getMobMod(uint16 mobModID)
 {
-    XI_DEBUG_BREAK_IF(!(m_PBaseEntity->objtype & TYPE_MOB));
+    XI_DEBUG_BREAK_IF(!(m_PBaseEntity->objtype & TYPE_MOB || m_PBaseEntity->objtype & TYPE_TRUST));
 
     return static_cast<CMobEntity*>(m_PBaseEntity)->getMobMod(mobModID);
 }
@@ -13694,7 +13691,7 @@ int16 CLuaBaseEntity::getMobMod(uint16 mobModID)
 void CLuaBaseEntity::addMobMod(uint16 mobModID, int16 value)
 {
     // putting this in here to find elusive bug
-    if (!(m_PBaseEntity->objtype & TYPE_MOB))
+    if (!(m_PBaseEntity->objtype & TYPE_MOB || m_PBaseEntity->objtype & TYPE_TRUST))
     {
         // this once broke on an entity (17532673) but it could not be found
         ShowError("CLuaBaseEntity::addMobMod Expected type mob (%d) but its a (%d)", m_PBaseEntity->id, m_PBaseEntity->objtype);
@@ -13716,7 +13713,7 @@ void CLuaBaseEntity::setMobMod(uint16 mobModID, int16 value)
     XI_DEBUG_BREAK_IF(m_PBaseEntity == nullptr);
 
     // putting this in here to find elusive bug
-    if (!(m_PBaseEntity->objtype & TYPE_MOB))
+    if (!(m_PBaseEntity->objtype & TYPE_MOB || m_PBaseEntity->objtype & TYPE_TRUST))
     {
         // this once broke on an entity (17532673) but it could not be found
         ShowError("CLuaBaseEntity::setMobMod Expected type mob (%d) but its a (%d)", m_PBaseEntity->id, m_PBaseEntity->objtype);
@@ -13736,7 +13733,7 @@ void CLuaBaseEntity::setMobMod(uint16 mobModID, int16 value)
 void CLuaBaseEntity::delMobMod(uint16 mobModID, int16 value)
 {
     // putting this in here to find elusive bug
-    if (!(m_PBaseEntity->objtype & TYPE_MOB))
+    if (!(m_PBaseEntity->objtype & TYPE_MOB || m_PBaseEntity->objtype & TYPE_TRUST))
     {
         // this once broke on an entity (17532673) but it could not be found
         ShowError("CLuaBaseEntity::addMobMod Expected type mob (%d) but its a (%d)", m_PBaseEntity->id, m_PBaseEntity->objtype);
@@ -15681,6 +15678,10 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("restoreNpcLook", CLuaBaseEntity::restoreNpcLook);
     SOL_REGISTER("getTraits", CLuaBaseEntity::getTraits);
     SOL_REGISTER("clearActionQueue", CLuaBaseEntity::clearActionQueue);
+
+    SOL_REGISTER("getChocoboRaisingInfo", CLuaBaseEntity::getChocoboRaisingInfo);
+    SOL_REGISTER("setChocoboRaisingInfo", CLuaBaseEntity::setChocoboRaisingInfo);
+    SOL_REGISTER("deleteRaisedChocobo", CLuaBaseEntity::deleteRaisedChocobo);
 }
 
 std::ostream& operator<<(std::ostream& os, const CLuaBaseEntity& entity)

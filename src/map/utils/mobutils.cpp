@@ -542,6 +542,10 @@ namespace mobutils
         {
             SetupDungeonMob(PMob);
         }
+        else if (zoneType == ZONE_TYPE::LIMBUS)
+        {
+            SetupLimbusMob(PMob);
+        }
         else if (zoneType == ZONE_TYPE::BATTLEFIELD || PMob->m_Type & MOBTYPE_BATTLEFIELD)
         {
             SetupBattlefieldMob(PMob);
@@ -549,10 +553,6 @@ namespace mobutils
         else if (zoneType == ZONE_TYPE::DYNAMIS)
         {
             SetupDynamisMob(PMob);
-        }
-        else if (zoneType == ZONE_TYPE::LIMBUS)
-        {
-            SetupLimbusMob(PMob);
         }
 
         if (PMob->m_Type & MOBTYPE_NOTORIOUS)

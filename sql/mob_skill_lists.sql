@@ -3816,7 +3816,11 @@ INSERT INTO `mob_skill_lists` VALUES ('Avatar_Titan_TSTBE',1181,850); -- Stone I
 INSERT INTO `mob_skill_lists` VALUES ('Avatar_Leviathan_TSTBW',1182,858); -- Barracuda Dive
 INSERT INTO `mob_skill_lists` VALUES ('Avatar_Leviathan_TSTBW',1182,859); -- Water II
 
--- Next available ID: 1183
+INSERT INTO `mob_skill_lists` VALUES ('Swamfisk',1185,452); -- Screwdriver
+INSERT INTO `mob_skill_lists` VALUES ('Swamfisk',1185,453); -- Water Wall
+INSERT INTO `mob_skill_lists` VALUES ('Barbastelle',1186,392); -- Ultrasonics
+
+-- Next available ID: 1187
 
 -- ------------------------------------------------------------
 -- Start of AirSkyBoat Section
