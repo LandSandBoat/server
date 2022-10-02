@@ -16,21 +16,28 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobFight = function(mob, target)
-    if not GetMobByID(mob:getID()+1):isSpawned() then
+    local guardHippo = GetMobByID(mob:getID()+1)
+
+    if not guardHippo:isSpawned() then
         if mob:getHPP() < 75 and mob:getLocalVar("firstSpawn") == 0 then
             mob:setLocalVar("firstSpawn", 1)
-            SpawnMob(mob:getID()+1):updateEnmity(target)
+            SpawnMob(guardHippo:getID()):updateEnmity(target)
         elseif mob:getHPP() < 50 and mob:getLocalVar("secondSpawn") == 0 then
             mob:setLocalVar("secondSpawn", 1)
-            SpawnMob(mob:getID()+1):updateEnmity(target)
+            SpawnMob(guardHippo:getID()):updateEnmity(target)
         elseif mob:GetHPP() < 25 and mob:getLocalVar("thirdSpawn") == 0 then
             mob:setLocalVar("thirdSpawn", 1)
-            SpawnMob(mob:getID()+1):updateEnmity(target)
+            SpawnMob(guardHippo:getID()):updateEnmity(target)
         end
     end
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
+    local guardHippo = GetMobByID(mob:getID()+1)
+
+    if guardHippo:isAlive() then
+        guardHippo:setHP(0)
+    end
 end
 
 return entity

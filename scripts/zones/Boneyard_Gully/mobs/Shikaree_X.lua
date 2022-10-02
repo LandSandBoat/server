@@ -18,11 +18,9 @@ local dialogue =
 }
 
 entity.onMobSpawn = function(mob)
-    mob:timer(1, function(mobArg)
-        mobArg:setMobMod(xi.mobMod.SKILL_LIST, 0)
-        mobArg:setMod(xi.mod.SLEEPRES, 50)
-        mobArg:setMod(xi.mod.DOUBLE_ATTACK, 100)
-    end)
+    mob:setMobMod(xi.mobMod.SKILL_LIST, 0)
+    mob:setMod(xi.mod.DOUBLE_ATTACK, 100)
+    mob:setMod(xi.mod.SLEEPRES, 50)
 
     mob:addListener("ATTACK", "SHIKAREE_X_ATTACK", function(attacker, defender, action)
         if math.random() < 0.12 then
