@@ -14,7 +14,6 @@ require("scripts/globals/titles")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local qStarStruck = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.STAR_STRUCK)
     local count = trade:getItemCount()
 
     if trade:hasItemQty(544, 1) and count == 1 and trade:getGil() == 0 then
@@ -25,10 +24,6 @@ entity.onTrade = function(player, npc, trade)
                 player:startEvent(287) -- MAKING THE GRADE: Have test answers but not talked/given to Fuepepe
             end
         end
-    elseif trade:hasItemQty(584, 1) and count == 1 and trade:getGil() == 0 then
-        player:startEvent(199)
-    elseif qStarStruck == QUEST_ACCEPTED and trade:hasItemQty(582, 1) and count == 1 and trade:getGil() == 0 then
-        player:startEvent(211)
     elseif trade:hasItemQty(16511, 1) and count == 1 and trade:getGil() == 0 then
         if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLAST_FROM_THE_PAST) == QUEST_ACCEPTED then
             player:startEvent(224) -- Complete quest!
@@ -76,13 +71,7 @@ entity.onTrigger = function(player, npc)
             player:startEvent(285) -- MAKING THE GRADE: Turn in Test Answer & Told to go back to Fuepepe & Chomoro
         elseif makingGradeProg >= 2 then
             player:startEvent(286) -- MAKING THE GRADE: Reminder to go away
-        else
-            player:startEvent(193)
         end
-    elseif qStarStruck == QUEST_ACCEPTED then
-        player:startEvent(198)
-    elseif qStarStruck == QUEST_AVAILABLE and classReunion ~= QUEST_ACCEPTED and player:hasItem(584) then
-        player:startEvent(197)
     -----------------------------------
     -- Carbuncle Debacle
     elseif carbuncleDebacle == QUEST_ACCEPTED and carbuncleDebacleProgress == 1 or carbuncleDebacleProgress == 2 then
@@ -116,12 +105,6 @@ entity.onTrigger = function(player, npc)
     -----------------------------------
     elseif rootProblem == QUEST_ACCEPTED and player:getCharVar("rootProblem") == 1 then
         player:startEvent(348, 0, 829)
-    else
-        if qStarStruck == QUEST_COMPLETED then
-            player:startEvent(213)
-        else
-            player:startEvent(193)
-        end
     end
 end
 
@@ -134,19 +117,6 @@ entity.onEventFinish = function(player, csid, option)
         player:addKeyItem(xi.ki.TATTERED_TEST_SHEET)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TATTERED_TEST_SHEET)
         player:setCharVar("QuestMakingTheGrade_prog", 2)
-    elseif csid == 211 then
-        player:tradeComplete()
-        player:addItem(12502)
-        player:messageSpecial(ID.text.ITEM_OBTAINED, 12502)
-        player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.STAR_STRUCK)
-        player:needToZone(true)
-        player:addFame(xi.quest.fame_area.WINDURST, 20)
-    elseif csid == 199 then
-        player:tradeComplete()
-        player:messageSpecial(ID.text.GIL_OBTAINED, 50)
-        player:addGil(50)
-    elseif csid == 197 and option == 0 then
-        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.STAR_STRUCK)
     elseif csid == 214 and option == 0 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLAST_FROM_THE_PAST)
     elseif csid == 224 then
