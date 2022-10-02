@@ -3816,7 +3816,6 @@ INSERT INTO `mob_skill_lists` VALUES ('Avatar_Titan_TSTBE',1181,850); -- Stone I
 INSERT INTO `mob_skill_lists` VALUES ('Avatar_Leviathan_TSTBW',1182,858); -- Barracuda Dive
 INSERT INTO `mob_skill_lists` VALUES ('Avatar_Leviathan_TSTBW',1182,859); -- Water II
 
--- -------------------------------------------------------------
 -- Fantoccini (ENM "Pulling the Strings")
 -- WAR - BST
 INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_WAR_BST',1183,64); -- Raging Axe
@@ -3925,7 +3924,11 @@ INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1196,1424); -- Cure 
 INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1196,1427); -- Fantoccini use Ability
 INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1196,1457); -- Benediction Fantoccicni
 
--- Next available ID: 1183
+INSERT INTO `mob_skill_lists` VALUES ('Swamfisk',1197,452); -- Screwdriver
+INSERT INTO `mob_skill_lists` VALUES ('Swamfisk',1197,453); -- Water Wall
+INSERT INTO `mob_skill_lists` VALUES ('Barbastelle',1198,392); -- Ultrasonics
+
+-- Next available ID: 1199
 
 -- ------------------------------------------------------------
 -- Start of AirSkyBoat Section

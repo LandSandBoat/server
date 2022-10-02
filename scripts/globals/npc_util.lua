@@ -32,6 +32,8 @@ npcUtil = {}
         do spawned mobs automatically aggro the player
     hide (number, default xi.settings.main.FORCE_SPAWN_QM_RESET_TIME)
         how long to hide the QM for after mobs die
+    message (number)
+        if set a message will play if a entity spawns
 
 ******************************************************************************* --]]
 function npcUtil.popFromQM(player, qm, mobId, params)
@@ -114,6 +116,10 @@ function npcUtil.popFromQM(player, qm, mobId, params)
 
                 GetNPCByID(m:getLocalVar("qm")):updateNPCHideTime(params.hide)
             end)
+        end
+        -- add in a spawn message if has one
+        if params.message then
+            player:messageSpecial(params.message)
         end
     end
 
@@ -889,4 +895,29 @@ function npcUtil.castingAnimation(npc, magicType, phaseDuration, func)
         end)
         npcUtil.castingAnimation(npcArg, magicType, phaseDuration, func)
     end)
+end
+
+function npcUtil.disappearCrate(crate)
+    if crate:isNPC() then
+        crate:entityAnimationPacket("kesu")
+        crate:timer(3000, function(npc)
+            npc:untargetable(true)
+            npc:setStatus(xi.status.DISAPPEAR)
+        end)
+    else
+        -- Some crates, such as Recover Crates in Limbus, are actually mobs that look like NPCs
+        DespawnMob(crate:getID())
+    end
+end
+
+function npcUtil.openCrate(crate, callback)
+    if crate:getLocalVar("opened") == 0 then
+        crate:setLocalVar("opened", 1)
+        callback()
+        crate:entityAnimationPacket("openH")
+
+        crate:timer(7000, function(npc)
+            npcUtil.disappearCrate(npc)
+        end)
+    end
 end

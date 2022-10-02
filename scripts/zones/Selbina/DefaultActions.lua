@@ -9,5 +9,6 @@ return {
     ['Valgeir']      = { event = 140 },
     ['Yaya']         = { event = 153 },
     ['Jimaida']      = { event = 152 },
+    ['Zaldon']       = { event = 150 },
     ['Oswald']       = { event = 30 },
 }

@@ -27,7 +27,7 @@ spell_object.onMobSpawn = function(mob)
 
     mob:addMod(xi.mod.MATT, power)
     mob:addMod(xi.mod.MACC, power)
-    mob:addMod(xi.mod.HASTE_MAGIC, 10)
+    mob:addMod(xi.mod.HASTE_MAGIC, 1000) -- 10% Haste (Magic)
 
     -- Shantotto's tier I spells scale up to mimic tier 2, 3, etc, spells.
     mob:addMod(xi.mod.MAGIC_DAMAGE, spellDamage)

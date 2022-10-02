@@ -862,7 +862,7 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
             }
 
             CBaseEntity* PNpc = nullptr;
-            PNpc              = PChar->GetEntity(TargID, TYPE_NPC);
+            PNpc              = PChar->GetEntity(TargID, TYPE_NPC | TYPE_MOB);
 
             if (PNpc != nullptr && distance(PNpc->loc.p, PChar->loc.p) <= 10 && (PNpc->PAI->IsSpawned() || PChar->m_moghouseID != 0))
             {
@@ -1383,10 +1383,10 @@ void SmallPacket0x029(map_session_data_t* const PSession, CCharEntity* const PCh
         uint8 size = PChar->getStorage(FromLocationID)->GetSize();
         for (uint8 slotID = 0; slotID <= size; ++slotID)
         {
-            CItem* PItem = PChar->getStorage(FromLocationID)->GetItem(slotID);
-            if (PItem != nullptr)
+            CItem* PSlotItem = PChar->getStorage(FromLocationID)->GetItem(slotID);
+            if (PSlotItem != nullptr)
             {
-                PChar->pushPacket(new CInventoryItemPacket(PItem, FromLocationID, slotID));
+                PChar->pushPacket(new CInventoryItemPacket(PSlotItem, FromLocationID, slotID));
             }
         }
         PChar->pushPacket(new CInventoryFinishPacket());
@@ -1443,10 +1443,10 @@ void SmallPacket0x029(map_session_data_t* const PSession, CCharEntity* const PCh
             uint8 size = PChar->getStorage(ToLocationID)->GetSize();
             for (uint8 slotID = 0; slotID <= size; ++slotID)
             {
-                CItem* PItem = PChar->getStorage(ToLocationID)->GetItem(slotID);
-                if (PItem != nullptr)
+                CItem* PSlotItem = PChar->getStorage(ToLocationID)->GetItem(slotID);
+                if (PSlotItem != nullptr)
                 {
-                    PChar->pushPacket(new CInventoryItemPacket(PItem, ToLocationID, slotID));
+                    PChar->pushPacket(new CInventoryItemPacket(PSlotItem, ToLocationID, slotID));
                 }
             }
             PChar->pushPacket(new CInventoryFinishPacket());
@@ -2403,7 +2403,8 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                         }
 
                         uint32 accid = sql->GetUIntData(1);
-                        int32  ret   = sql->Query("SELECT COUNT(*) FROM chars WHERE charid = '%u' AND accid = '%u' LIMIT 1;", PChar->id, accid);
+
+                        ret = sql->Query("SELECT COUNT(*) FROM chars WHERE charid = '%u' AND accid = '%u' LIMIT 1;", PChar->id, accid);
                         if (ret == SQL_ERROR || sql->NextRow() != SQL_SUCCESS || sql->GetUIntData(0) == 0)
                         {
                             return;
@@ -2536,7 +2537,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
 
                         if (ret != SQL_ERROR && sql->AffectedRows() == 1)
                         {
-                            int32 ret = sql->Query(
+                            ret = sql->Query(
                                 "DELETE FROM delivery_box WHERE senderid = %u AND box = 1 AND charid = %u AND itemid = %u AND quantity = %u "
                                 "AND slot >= 8 LIMIT 1;",
                                 PChar->id, charid, PItem->getID(), PItem->getQuantity());
@@ -2568,7 +2569,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                         if (orphan)
                         {
                             sql->SetAutoCommit(true);
-                            int32 ret = sql->Query(
+                            ret = sql->Query(
                                 "DELETE FROM delivery_box WHERE box = 2 AND charid = %u AND itemid = %u AND quantity = %u AND slot = %u LIMIT 1;",
                                 PChar->id, PItem->getID(), PItem->getQuantity(), slotID);
                             if (ret != SQL_ERROR && sql->AffectedRows() == 1)
@@ -2718,7 +2719,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
             }
 
             uint8 received_items = 0;
-            uint8 slotID         = 0;
+            uint8 deliverySlotID = 0;
 
             int32 ret = sql->Query("SELECT slot FROM delivery_box WHERE charid = %u AND received = 1 AND box = 2 ORDER BY slot ASC;", PChar->id);
 
@@ -2727,18 +2728,18 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                 received_items = (uint8)sql->NumRows();
                 if (received_items && sql->NextRow() == SQL_SUCCESS)
                 {
-                    slotID = sql->GetUIntData(0);
-                    if (!PChar->UContainer->IsSlotEmpty(slotID))
+                    deliverySlotID = sql->GetUIntData(0);
+                    if (!PChar->UContainer->IsSlotEmpty(deliverySlotID))
                     {
-                        CItem* PItem = PChar->UContainer->GetItem(slotID);
+                        CItem* PItem = PChar->UContainer->GetItem(deliverySlotID);
                         if (PItem->isSent())
                         {
-                            ret = sql->Query("DELETE FROM delivery_box WHERE charid = %u AND box = 2 AND slot = %u LIMIT 1;", PChar->id, slotID);
+                            ret = sql->Query("DELETE FROM delivery_box WHERE charid = %u AND box = 2 AND slot = %u LIMIT 1;", PChar->id, deliverySlotID);
                             if (ret != SQL_ERROR && sql->AffectedRows() == 1)
                             {
                                 PChar->pushPacket(new CDeliveryBoxPacket(action, boxtype, 0, 0x02));
-                                PChar->pushPacket(new CDeliveryBoxPacket(action, boxtype, PItem, slotID, received_items, 0x01));
-                                PChar->UContainer->SetItem(slotID, nullptr);
+                                PChar->pushPacket(new CDeliveryBoxPacket(action, boxtype, PItem, deliverySlotID, received_items, 0x01));
+                                PChar->UContainer->SetItem(deliverySlotID, nullptr);
                                 delete PItem;
                             }
                         }
@@ -3075,9 +3076,9 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             auto totalItemsOnAh = PChar->m_ah_history.size();
 
-            for (size_t slot = 0; slot < totalItemsOnAh; slot++)
+            for (size_t auctionSlot = 0; auctionSlot < totalItemsOnAh; auctionSlot++)
             {
-                PChar->pushPacket(new CAuctionHousePacket(0x0C, (uint8)slot, PChar));
+                PChar->pushPacket(new CAuctionHousePacket(0x0C, (uint8)auctionSlot, PChar));
             }
         }
         break;
@@ -4821,9 +4822,9 @@ void SmallPacket0x096(map_session_data_t* const PSession, CCharEntity* const PCh
 
         slotQty[invSlotID]++;
 
-        auto* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(invSlotID);
+        auto* PSlotItem = PChar->getStorage(LOC_INVENTORY)->GetItem(invSlotID);
 
-        if (PItem && PItem->getID() == ItemID && slotQty[invSlotID] <= (PItem->getQuantity() - PItem->getReserve()))
+        if (PSlotItem && PSlotItem->getID() == ItemID && slotQty[invSlotID] <= (PSlotItem->getQuantity() - PSlotItem->getReserve()))
         {
             PChar->CraftContainer->setItem(SlotID + 1, ItemID, invSlotID, 1);
         }

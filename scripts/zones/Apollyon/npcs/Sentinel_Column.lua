@@ -22,7 +22,7 @@ entity.onEventUpdate = function(player, csid, option)
         0,
         GetServerVariable("[SW_Apollyon]Time"),      -- SW Apollyon
         GetServerVariable("[NW_Apollyon]Time"),      -- NW Apollyon
-        GetServerVariable("[SE_Apollyon]Time"),      -- SE Apollyon
+        GetServerVariable("[SE_APOLLYON]Time"),      -- SE Apollyon
         GetServerVariable("[NE_Apollyon]Time"),      -- NE Apollyon
         GetServerVariable("[Central_Apollyon]Time"), -- Central Apollyon
         GetServerVariable("[CS_Apollyon]Time")       -- CS Apollyon

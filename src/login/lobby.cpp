@@ -464,12 +464,12 @@ int32 lobbydata_parse(int32 fd)
                     // Log clients IP info when player spawns into map server
 
                     time_t rawtime;
-                    tm*    convertedTime;
+                    tm     convertedTime;
                     time(&rawtime);
-                    convertedTime = localtime(&rawtime);
+                    _localtime_s(&convertedTime, &rawtime);
 
                     char timeAndDate[128];
-                    strftime(timeAndDate, sizeof(timeAndDate), "%Y:%m:%d %H:%M:%S", convertedTime);
+                    strftime(timeAndDate, sizeof(timeAndDate), "%Y:%m:%d %H:%M:%S", &convertedTime);
 
                     fmtQuery = "INSERT INTO account_ip_record(login_time,accid,charid,client_ip)\
                             VALUES ('%s', %u, %u, '%s');";
