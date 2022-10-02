@@ -102,68 +102,70 @@ local function getSpellBonusAcc(caster, target, spell, params)
         end
     end
 
-    if casterJob == xi.job.WHM then
-        magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.WHM_MAGIC_ACC_BONUS)
-    end
+    switch(casterJob): caseof
+    {
+        [xi.job.WHM] = function()
+            magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.WHM_MAGIC_ACC_BONUS)
+        end,
 
-    if casterJob == xi.job.BLM then
-        -- Add MACC for BLM Elemental Magic Merits
-        if skill == xi.skill.ELEMENTAL_MAGIC then
-            magicAccBonus = magicAccBonus + caster:getMerit(xi.merit.ELEMENTAL_MAGIC_ACCURACY)
-        end
+        [xi.job.BLM] = function()
+            -- Add MACC for BLM Elemental Magic Merits
+            if skill == xi.skill.ELEMENTAL_MAGIC then
+                magicAccBonus = magicAccBonus + caster:getMerit(xi.merit.ELEMENTAL_MAGIC_ACCURACY)
+            end
 
-        -- BLM Job Point: MACC Bonus +1
-        magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.BLM_MAGIC_ACC_BONUS)
+            -- BLM Job Point: MACC Bonus +1
+            magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.BLM_MAGIC_ACC_BONUS)
+        end,
 
-    end
+        [xi.job.DRK] = function()
+            -- Add MACC for Dark Seal
+            if skill == xi.skill.DARK_MAGIC and caster:hasStatusEffect(xi.effect.DARK_SEAL) then
+                magicAccBonus = magicAccBonus + 256
+            end
+        end,
 
-    if casterJob == xi.job.DRK then
-        -- Add MACC for Dark Seal
-        if skill == xi.skill.DARK_MAGIC and caster:hasStatusEffect(xi.effect.DARK_SEAL) then
-            magicAccBonus = magicAccBonus + 256
-        end
-    end
+        [xi.job.RDM] = function()
+            -- Add MACC for RDM group 1 merits
+            if element >= xi.magic.element.FIRE and element <= xi.magic.element.WATER then
+                magicAccBonus = magicAccBonus + caster:getMerit(rdmMerit[element])
+            end
 
-    if casterJob == xi.job.RDM then
-        -- Add MACC for RDM group 1 merits
-        if element >= xi.magic.element.FIRE and element <= xi.magic.element.WATER then
-            magicAccBonus = magicAccBonus + caster:getMerit(rdmMerit[element])
-        end
+            -- RDM Job Point: During saboteur, Enfeebling MACC +2
+            if skill == xi.skill.ENFEEBLING_MAGIC and caster:hasStatusEffect(xi.effect.SABOTEUR) then
+                local jpValue = caster:getJobPointLevel(xi.jp.SABOTEUR_EFFECT)
 
-        -- RDM Job Point: During saboteur, Enfeebling MACC +2
-        if skill == xi.skill.ENFEEBLING_MAGIC and caster:hasStatusEffect(xi.effect.SABOTEUR) then
-            local jpValue = caster:getJobPointLevel(xi.jp.SABOTEUR_EFFECT)
+                magicAccBonus = magicAccBonus + (jpValue * 2)
+            end
 
-            magicAccBonus = magicAccBonus + (jpValue * 2)
-        end
+            -- RDM Job Point: Magic Accuracy Bonus, All MACC + 1
+            magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.RDM_MAGIC_ACC_BONUS)
+        end,
 
-        -- RDM Job Point: Magic Accuracy Bonus, All MACC + 1
-        magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.RDM_MAGIC_ACC_BONUS)
-    end
+        [xi.job.NIN] = function()
+            -- NIN Job Point: Ninjitsu Accuracy Bonus
+            if skill == xi.skill.NINJUTSU then
+                magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.NINJITSU_ACC_BONUS)
+            end
+        end,
 
-    if casterJob == xi.job.NIN then
-        -- NIN Job Point: Ninjitsu Accuracy Bonus
-        if skill == xi.skill.NINJUTSU then
-            magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.NINJITSU_ACC_BONUS)
-        end
-    end
+        [xi.job.BLU] = function()
+            -- BLU MACC merits - nuke acc is handled in bluemagic.lua
+            if skill == xi.skill.BLUE_MAGIC then
+                magicAccBonus = magicAccBonus + caster:getMerit(xi.merit.MAGICAL_ACCURACY)
+            end
+        end,
 
-    if casterJob == xi.job.BLU then
-        -- BLU MACC merits - nuke acc is handled in bluemagic.lua
-        if skill == xi.skill.BLUE_MAGIC then
-            magicAccBonus = magicAccBonus + caster:getMerit(xi.merit.MAGICAL_ACCURACY)
-        end
-    end
+        [xi.job.SCH] = function()
+            if (spellGroup == xi.magic.spellGroup.WHITE and caster:hasStatusEffect(xi.effect.PARSIMONY)) or
+                (spellGroup == xi.magic.spellGroup.BLACK and caster:hasStatusEffect(xi.effect.PENURY))
+            then
+                local jpValue = caster:getJobPointLevel(xi.jp.STRATEGEM_EFFECT_I)
 
-    if casterJob == xi.job.SCH then
-        if (spellGroup == xi.magic.spellGroup.WHITE and caster:hasStatusEffect(xi.effect.PARSIMONY)) or
-            (spellGroup == xi.magic.spellGroup.BLACK and caster:hasStatusEffect(xi.effect.PENURY))
-        then
-            local jpValue = caster:getJobPointLevel(xi.jp.STRATEGEM_EFFECT_I)
-
-            magicAccBonus = magicAccBonus + jpValue
-        end
-    end
+                magicAccBonus = magicAccBonus + jpValue
+            end
+        end,
+    }
 
     return magicAccBonus
 end
