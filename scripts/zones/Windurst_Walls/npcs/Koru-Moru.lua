@@ -16,15 +16,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     local count = trade:getItemCount()
 
-    if trade:hasItemQty(544, 1) and count == 1 and trade:getGil() == 0 then
-        if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_THE_GRADE) == QUEST_ACCEPTED then
-            if player:getCharVar("QuestMakingTheGrade_prog") == 1 then
-                player:startEvent(285) -- MAKING THE GRADE: Turn in Test Answer & Told to go back to Fuepepe & Chomoro
-            else
-                player:startEvent(287) -- MAKING THE GRADE: Have test answers but not talked/given to Fuepepe
-            end
-        end
-    elseif trade:hasItemQty(829, 1) and count == 1 and trade:getGil() == 0 then
+    if trade:hasItemQty(829, 1) and count == 1 and trade:getGil() == 0 then
         if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM) == QUEST_ACCEPTED then
             player:startEvent(349)
             player:tradeComplete()
@@ -48,18 +40,9 @@ entity.onTrigger = function(player, npc)
     local carbuncleDebacle = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE)
     local carbuncleDebacleProgress = player:getCharVar("CarbuncleDebacleProgress")
 
-    if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_THE_GRADE) == QUEST_ACCEPTED then
-        local makingGradeProg = player:getCharVar("QuestMakingTheGrade_prog")
-        if makingGradeProg == 0 and player:hasItem(544) then
-            player:startEvent(287) -- MAKING THE GRADE: Have test answers but not talked/given to Fuepepe
-        elseif makingGradeProg == 1 then
-            player:startEvent(285) -- MAKING THE GRADE: Turn in Test Answer & Told to go back to Fuepepe & Chomoro
-        elseif makingGradeProg >= 2 then
-            player:startEvent(286) -- MAKING THE GRADE: Reminder to go away
-        end
     -----------------------------------
     -- Carbuncle Debacle
-    elseif carbuncleDebacle == QUEST_ACCEPTED and carbuncleDebacleProgress == 1 or carbuncleDebacleProgress == 2 then
+    if carbuncleDebacle == QUEST_ACCEPTED and carbuncleDebacleProgress == 1 or carbuncleDebacleProgress == 2 then
         player:startEvent(416) -- go and see Ripapa
     elseif carbuncleDebacle == QUEST_ACCEPTED and carbuncleDebacleProgress == 4 then
         player:startEvent(417) -- now go and see Agado-Pugado
@@ -97,12 +80,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 285 then  -- Giving him KI from Principle
-        player:tradeComplete()
-        player:addKeyItem(xi.ki.TATTERED_TEST_SHEET)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TATTERED_TEST_SHEET)
-        player:setCharVar("QuestMakingTheGrade_prog", 2)
-    elseif csid == 404 then
+    if csid == 404 then
         if player:getFreeSlotsCount() ~= 0 then
             player:addItem(17532)
             player:messageSpecial(ID.text.ITEM_OBTAINED, 17532)
