@@ -13,7 +13,7 @@ void dumpBacktrace(int signal)
     backward::StackTrace trace;
     backward::Printer    printer;
 
-    trace.load_here(32);
+    trace.load_here(10);
 
     printer.object     = true;
     printer.color_mode = backward::ColorMode::always;
@@ -24,11 +24,6 @@ void dumpBacktrace(int signal)
     spdlog::get("critical")->critical(traceStream.str());
 
     do_final(EXIT_FAILURE);
-
-#ifdef _DEBUG
-    std::signall(sn, SIG_DFL);
-    raise(sn); // reraise and pass to OS in debug mode
-#endif
 }
 
 void debug::init()
