@@ -306,6 +306,7 @@ xi.items =
     TSURARA                         = 1164,
     BANISHING_CHARM                 = 1166,
     SACK_OF_FISH_BAIT               = 1168,
+    EARTH_PENDULUM                  = 1169,
     CLOTHO_ORB                      = 1175,
     COMET_ORB                       = 1177,
     LACHESIS_ORB                    = 1178,

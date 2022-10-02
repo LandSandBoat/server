@@ -32,7 +32,6 @@ end
 entity.onTrigger = function(player, npc)
     local rootProblem = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM)
     local thePuppetMaster = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PUPPET_MASTER)
-    local thePuppetMasterProgress = player:getCharVar("ThePuppetMasterProgress")
     local classReunion = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION)
     local classReunionProgress = player:getCharVar("ClassReunionProgress")
     local talk1 = player:getCharVar("ClassReunion_TalkedToFupepe")
@@ -65,12 +64,6 @@ entity.onTrigger = function(player, npc)
     elseif thePuppetMaster == QUEST_COMPLETED and classReunion == QUEST_COMPLETED then
         player:startEvent(411) -- new cs after completed AF2
     -----------------------------------
-    -- The Puppet Master
-    elseif thePuppetMaster == QUEST_ACCEPTED and thePuppetMasterProgress == 4 then
-        player:startEvent(404) -- ending cs
-    elseif thePuppetMaster == QUEST_COMPLETED and classReunion ~= 2 then
-        player:startEvent(405) -- new cs after completed AF1
-    -----------------------------------
     elseif rootProblem == QUEST_ACCEPTED and player:getCharVar("rootProblem") == 1 then
         player:startEvent(348, 0, 829)
     end
@@ -80,18 +73,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 404 then
-        if player:getFreeSlotsCount() ~= 0 then
-            player:addItem(17532)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 17532)
-            player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PUPPET_MASTER)
-            player:setCharVar("ThePuppetMasterProgress", 0)
-            player:needToZone(true)
-            player:addFame(xi.quest.fame_area.WINDURST, 20)
-        else
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 17532)
-        end
-    elseif csid == 412 then
+    if csid == 412 then
         player:delKeyItem(xi.ki.CARBUNCLES_TEAR)
         player:setCharVar("ClassReunionProgress", 2)
     elseif csid == 407 then
