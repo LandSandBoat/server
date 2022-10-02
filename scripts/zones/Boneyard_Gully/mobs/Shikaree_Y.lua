@@ -5,7 +5,7 @@
 --  Mission: CoP 5-3 Ulmia's Path (Head Wind)
 -----------------------------------
 local ID = require("scripts/zones/Boneyard_Gully/IDs")
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/spell_data")
 require("scripts/globals/status")
 -----------------------------------
