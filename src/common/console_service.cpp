@@ -21,6 +21,10 @@
 
 #include "console_service.h"
 
+#ifdef _WIN32
+#include <Windows.h> // ReadConsoleInput et al
+#endif
+
 ConsoleService::ConsoleService()
 {
     // clang-format off

@@ -38,7 +38,6 @@
 #ifdef WIN32
 #include <io.h>
 #define isatty _isatty
-#include <Windows.h>
 #else
 #include <poll.h>
 #include <unistd.h>
