@@ -9230,17 +9230,17 @@ uint8 CLuaBaseEntity::registerBattlefield(sol::object const& arg0, sol::object c
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
     auto* PZone = PChar->loc.zone == nullptr ? zoneutils::GetZone(PChar->loc.destination) : PChar->loc.zone;
 
-    BattlefieldRegistration registration;
-    registration.id        = (arg0 != sol::lua_nil) ? arg0.as<int>() : -1;
-    registration.area      = (arg1 != sol::lua_nil) ? arg1.as<uint8>() : 1;
-    registration.initiator = (arg2 != sol::lua_nil) ? arg2.as<uint32>() : 0;
-
     // TODO: Verify what happens if -1 makes it to the cast below
-    if (registration.id < 0)
+    if (arg0 == sol::lua_nil)
     {
         ShowError("CLuaBaseEntity::registerBattlefield() - Battlefield State was < 0.  Investigate!");
         return BATTLEFIELD_RETURN_CODE_BATTLEFIELD_FULL; // For safety, if we hit this condition, return battlefield full.
     }
+
+    BattlefieldRegistration registration;
+    registration.id        = arg0.as<int>();
+    registration.area      = (arg1 != sol::lua_nil) ? arg1.as<uint8>() : 1;
+    registration.initiator = (arg2 != sol::lua_nil) ? arg2.as<uint32>() : 0;
 
     if (arg3 != sol::lua_nil)
     {
