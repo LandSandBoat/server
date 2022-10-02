@@ -23,6 +23,8 @@ void dumpBacktrace(int signal)
     printer.print(trace, traceStream);
     spdlog::get("critical")->critical(traceStream.str());
 
+    std::signal(signal, SIG_DFL); // Prevent recursive exceptions
+
     do_final(EXIT_FAILURE);
 }
 
