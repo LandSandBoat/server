@@ -59,15 +59,6 @@ xi.battlefield.leaveCode =
     LOST   = 4
 }
 
-xi.battlefield.rules =
-{
-    ALLOW_SUBJOBS         = 0x01,
-    LOSE_EXP              = 0x02,
-    REMOVE_3MIN           = 0x04,
-    SPAWN_TREASURE_ON_WIN = 0x08,
-    MAAT                  = 0x10,
-}
-
 xi.battlefield.dropChance =
 {
     EXTREMELY_LOW  = 2,
@@ -102,11 +93,13 @@ end
 --  - maxPlayers: Maximum number of players allowed to enter (required)
 --  - levelCap: Level cap imposed upon the battlefield (required)
 --  - timeLimit: Time in seconds alotted to complete the battlefield before being ejected (required)
---  - rules: Battlefield rules found in xi.battlefield.rules
 --  - menuBit: The bit used to communicate with the client on which menu item this battlefield is (required)
 --  - area: Some battlefields has multiple areas (Burning Circles) while others have fixed areas (Apollyon). Set to have a fixed area. (optional)
 --  - entryNPC: The name of the NPC used for entering
 --  - exitNPC: The name of the NPC used for exiting
+--  - allowSubjob: Determines if character subjobs are enabled or disabled upon entry. Defaults to true. (optional)
+--  - hasWipeGrace: Grants players a 3 minute grace period on a full wipe before ejecting them. Defaults to true. (optional)
+--  - canLoseExp: Determines if a character loses experience points upon death while inside the battlefield. Defaults to true. (optional)
 --  - delayToExit: Amount of time to wait before exiting the battlefield. Defaults to 5 seconds. (optional)
 --  - requiredItems: Items required to be traded to enter the battlefield (optional)
 --  - createWornItem: Should a worn item is created with the required item (optional)
@@ -126,18 +119,17 @@ function Battlefield:new(data)
     obj.levelCap = data.levelCap
     -- Time in seconds alotted to complete the battlefield before being ejected
     obj.timeLimit = data.timeLimit
-    -- Battlefield rules found in xi.battlefield.rules
-    -- TODO(jmcmorris) (LOSE_EXP doesn't seem to work, REMOVE_3MIN doesn't seem to work, SPAWN_TREASURE_ON_WIN isn't needed) ...
-    obj.rules = 0
-    if data.rules then
-        for _, rule in ipairs(data.rules) do
-            obj.rules = bit.bor(obj.rules, rule)
-        end
-    end
     -- The bit used to communicate with the client on which menu item this battlefield is
     obj.menuBit = data.menuBit
     -- Some battlefields has multiple areas (Burning Circles) while others have fixed areas (Apollyon). Set to have a fixed area.
     obj.area = data.area
+    -- Determines if character subjobs are enabled or disabled upon entry. Defaults to true.
+    obj.allowSubjob = data.allowSubjob or true
+    -- Grants players a 3 minute grace period on a full wipe before ejecting them. Defaults to true.
+    obj.hasWipeGrace = data.hasWipeGrace or true
+    -- Determines if a character loses experience points upon death while inside the battlefield. Defaults to true.
+    obj.canLoseExp = data.canLoseExp or true
+    -- Amount of time to wait before exiting the battlefield. Defaults to 5 seconds.
     obj.delayToExit = data.delayToExit or 5
     -- Monster battlefield groups added with battlefield:addGroups()
     obj.groups = {}
@@ -510,7 +502,7 @@ function Battlefield:onBattlefieldTick(battlefield, tick)
 
     -- Check that players haven't all died or that their dead time is over.
     local players = battlefield:getPlayers()
-    xi.battlefield.HandleWipe(battlefield, players)
+    self:handleWipe(battlefield, players)
 
     local hasTimeRemaining = xi.battlefield.SendTimePrompts(battlefield, players)
     if not hasTimeRemaining then
@@ -576,6 +568,48 @@ end
 
 function Battlefield:onBattlefieldLoss(player, battlefield)
     player:startEvent(32002)
+end
+
+function Battlefield:handleWipe(battlefield, players)
+    local wipeTime = battlefield:getWipeTime()
+    local elapsed  = battlefield:getTimeInside()
+
+    players = players or battlefield:getPlayers()
+
+    -- If party has not yet wiped.
+    if wipeTime <= 0 then
+        -- Return if any players are still alive
+        for _, player in pairs(players) do
+            if player:isAlive() then
+                return
+            end
+        end
+
+        -- Party has wiped. Save and send time remaining before being booted.
+        if self.hasWipeGrace then
+            for _, player in pairs(players) do
+                player:messageSpecial(zones[player:getZoneID()].text.THE_PARTY_WILL_BE_REMOVED, 0, 0, 0, 3)
+            end
+
+            battlefield:setWipeTime(elapsed)
+        else
+            battlefield:setStatus(xi.battlefield.status.LOST)
+        end
+
+    -- Party has already wiped.
+    else
+        if (elapsed - wipeTime) > utils.minutes(3) then
+            battlefield:setStatus(xi.battlefield.status.LOST)
+        else
+            -- Cancel the wipe timer if any players are alive once again
+            for _, player in pairs(players) do
+                if player:isAlive() then
+                    battlefield:setWipeTime(0)
+                    break
+                end
+            end
+        end
+    end
 end
 
 function Battlefield:addEssentialMobs(mobNames)
@@ -706,6 +740,7 @@ BattlefieldMission.isMission = true
 --  - missionStatus: The optional extra status information xi.mission.status (optional)
 --  - requiredMissionStatus: The required mission status to enter
 --  - skipMissionStatus: The required mission status to skip the cutscene. Defaults to the required mission status.
+--  - canLoseExp: Determines if a character loses experience points upon death while inside the battlefield. Defaults to false. (optional)
 function BattlefieldMission:new(data)
     local obj = Battlefield:new(data)
     setmetatable(obj, self)
@@ -721,6 +756,8 @@ function BattlefieldMission:new(data)
     obj.requiredMissionStatus = data.requiredMissionStatus
     -- The required mission status to skip the cutscene
     obj.skipMissionStatus = data.skipMissionStatus or data.requiredMissionStatus
+    -- Defaults to false for Missions
+    obj.canLoseExp = data.canLoseExp or false
     return obj
 end
 
@@ -761,9 +798,8 @@ function BattlefieldMission:onEventFinishWin(player, csid, option)
     end
 
     -- Only grant mission XP once per JP midnight
-    local varKey = "MN_XP_" .. self.id
-    if self.grantXP and player:getCharVar(varKey) <= os.time() then
-        player:setCharVar(varKey, getMidnight())
+    if self.grantXP and self:getVar(player, "XP") <= os.time() then
+        self:setVar(player, "XP", getMidnight())
         player:addExp(self.grantXP)
     end
 end

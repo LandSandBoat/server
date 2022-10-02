@@ -16,12 +16,6 @@ local content = Battlefield:new({
     maxPlayers = 18,
     levelCap = 75,
     timeLimit = utils.minutes(30),
-    rules =
-    {
-        xi.battlefield.rules.ALLOW_SUBJOBS,
-        xi.battlefield.rules.LOSE_EXP,
-        xi.battlefield.rules.REMOVE_3MIN,
-    },
     menuBit = 3,
     entryNpc = "Wind_Pillar_4",
     exitNpc = "Wind_Pillar_Exit",
@@ -82,7 +76,7 @@ content.loot =
 
     {
         quantity = 2,
-        { itemid = xi.items.NONE, droprate = xi.battlefield.dropChance.LOW },
+        { itemid = xi.items.NONE, droprate = xi.battlefield.dropChance.HIGH },
         { itemid = xi.items.SCOUTERS_ROPE, droprate = xi.battlefield.dropChance.LOW },
         { itemid = xi.items.HEDGEHOG_BOMB, droprate = xi.battlefield.dropChance.LOW },
         { itemid = xi.items.MARTIAL_ANELACE, droprate = xi.battlefield.dropChance.LOW },

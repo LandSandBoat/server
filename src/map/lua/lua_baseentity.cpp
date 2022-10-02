@@ -9248,8 +9248,9 @@ uint8 CLuaBaseEntity::registerBattlefield(sol::object const& arg0, sol::object c
         registration.maxPlayers = battlefield["maxPlayers"];
         registration.levelCap   = battlefield["levelCap"];
         registration.timeLimit  = std::chrono::seconds(battlefield.get<int32>("timeLimit"));
-        registration.rules      = battlefield["rules"];
         registration.isMission  = battlefield.get_or("isMission", false);
+        registration.rules |= battlefield.get<bool>("allowSubjob") ? RULES_ALLOW_SUBJOBS : 0;
+        registration.rules |= battlefield.get<bool>("canLoseExp") ? RULES_LOSE_EXP : 0;
     }
 
     return PZone->m_BattlefieldHandler->RegisterBattlefield(PChar, registration);
