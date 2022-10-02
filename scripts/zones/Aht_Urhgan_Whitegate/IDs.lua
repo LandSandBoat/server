@@ -73,6 +73,7 @@ zones[xi.zone.AHT_URHGAN_WHITEGATE] =
         AUTOMATON_SOULSOOTHER_UNLOCK  = 9647,  -- You obtain the Soulsoother C-1000 head!
         AUTOMATON_SPIRITREAVER_UNLOCK = 9648,  -- You obtain the Spiritreaver M-400 head!
         AUTOMATON_ATTACHMENT_UNLOCK   = 9664,  -- You can now equip your automaton with <item>.
+        BESIEGED_OFFSET               = 9812,  -- Your Imperial Standing has increased!
         SANCTION                      = 9817,  -- You have received the Empire's Sanction.
         ZASSHAL_DIALOG                = 11011, -- 'ang about. Looks like the permit you got was the last one I 'ad, so it might take me a bit o' time to scrounge up some more. 'ere, don't gimme that look. I'll be restocked before you know it.
         RETRIEVE_DIALOG_ID            = 13530, -- You retrieve <item> from the porter moogle's care.
