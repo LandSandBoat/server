@@ -197,7 +197,6 @@ uint8 CBattlefieldHandler::LoadBattlefield(CCharEntity* PChar, const Battlefield
     PBattlefield->InsertEntity(PChar, true);
 
     return BATTLEFIELD_RETURN_CODE_CUTSCENE;
-
 }
 
 CBattlefield* CBattlefieldHandler::GetBattlefield(CBaseEntity* PEntity, bool checkRegistered)

@@ -229,7 +229,7 @@ private:
     size_t                 m_MaxParticipants;
     uint8                  m_LevelCap;
     // Entity id of the Armoury Crate that appears upon victory
-    uint32                 m_armouryCrate = 0;
+    uint32     m_armouryCrate = 0;
     const bool m_isInteraction;
 
     bool m_Cleanup{ false };

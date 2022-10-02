@@ -359,7 +359,7 @@ void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleAreas)
     }
     else
     {
-        lowestId = 0;
+        lowestId  = 0;
         highestId = UINT32_MAX;
     }
 

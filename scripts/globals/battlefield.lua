@@ -491,7 +491,7 @@ function Battlefield:onBattlefieldInitialise(battlefield)
         battlefield:setLocalVar("loot", 1)
     end
 
-    hasMultipleAreas = not self.area
+    local hasMultipleAreas = not self.area
     battlefield:addGroups(self.groups, hasMultipleAreas)
 
     for mobId, path in pairs(self.paths) do
@@ -606,7 +606,7 @@ function Battlefield:handleOpenArmouryCrate(player, npc)
 end
 
 function Battlefield:handleLootRolls(battlefield, lootTable, npc)
-    players = battlefield:getPlayers()
+    local players = battlefield:getPlayers()
     for i = 1, #lootTable, 1 do
         local lootGroup = lootTable[i]
 
@@ -620,7 +620,7 @@ function Battlefield:handleLootRolls(battlefield, lootTable, npc)
             end
 
             local quantity = lootGroup.quantity or 1
-            for i = 1, quantity do
+            for j = 1, quantity do
                 local roll = math.random(max)
 
                 local current = 0

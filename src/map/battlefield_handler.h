@@ -37,7 +37,7 @@ struct BattlefieldRegistration
     uint32               initiator  = 0;
     uint32               maxPlayers = 0;
     uint32               levelCap   = 0;
-    uint32               rules   = 0;
+    uint32               rules      = 0;
     std::chrono::seconds timeLimit  = std::chrono::seconds(0);
     bool                 isMission  = false;
 };
@@ -46,9 +46,9 @@ class CBattlefieldHandler
 {
 public:
     CBattlefieldHandler(CZone* PZone);
-    void          HandleBattlefields(time_point tick);                                       // called every tick to handle win/lose conditions, locking the bcnm, etc
+    void          HandleBattlefields(time_point tick);                                              // called every tick to handle win/lose conditions, locking the bcnm, etc
     uint8         LoadBattlefield(CCharEntity* PChar, const BattlefieldRegistration& registration); // attempts to load battlefield, returns BATTLEFIELD_RETURN_CODE
-    CBattlefield* GetBattlefield(CBaseEntity* PEntity, bool checkRegistered = false);        // return pointer to battlefield if exists
+    CBattlefield* GetBattlefield(CBaseEntity* PEntity, bool checkRegistered = false);               // return pointer to battlefield if exists
     CBattlefield* GetBattlefieldByArea(uint8 area) const;
     CBattlefield* GetBattlefieldByInitiator(uint32 charID);
     uint8         RegisterBattlefield(CCharEntity* PChar, const BattlefieldRegistration& registration); // attempts to register or load battlefield, returns BATTLEFIELD_RETURN_CODE
