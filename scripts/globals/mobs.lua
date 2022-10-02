@@ -54,7 +54,7 @@ local function persistLotteryPrimed(phList)
     for k, v in pairs(phList) do
         nm = GetMobByID(v)
         local zone = nm:getZone()
-        local respawnPersist = zone:getLocalVar(string.format("[SPAWN]%s", nm:getName()))
+        local respawnPersist = zone:getLocalVar(string.format("[SPAWN]%s", nm:getID()))
 
         if respawnPersist == 0 then
             return false
@@ -67,15 +67,15 @@ end
 
 -- Needs to be added to the NM's onDespawn() function.
 xi.mob.lotteryPersist = function(mob, cooldown)
-    SetServerVariable(string.format("[SPAWN]%s", mob:getName()), cooldown + os.time())
-    mob:getZone():setLocalVar(string.format("[SPAWN]%s", mob:getName()), cooldown + os.time())
+    SetServerVariable(string.format("[SPAWN]%s", mob:getID()), cooldown + os.time())
+    mob:getZone():setLocalVar(string.format("[SPAWN]%s", mob:getID()), cooldown + os.time())
 end
 
 -- Needs to be added to the NM's zone onInit() function.
 xi.mob.lotteryPersistCache = function(zone, mobId)
     local mob = GetMobByID(mobId)
-    local respawn = GetServerVariable(string.format("[SPAWN]%s", mob:getName()))
-    zone:setLocalVar(string.format("[SPAWN]%s", mob:getName()), respawn)
+    local respawn = GetServerVariable(string.format("[SPAWN]%s", mob:getID()))
+    zone:setLocalVar(string.format("[SPAWN]%s", mob:getID()), respawn)
 end
 
 -- potential lottery placeholder was killed
