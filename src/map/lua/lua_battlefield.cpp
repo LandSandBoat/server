@@ -456,6 +456,20 @@ void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleAreas)
             }
         }
 
+        auto mobMods = groupData["mobMods"];
+        if (mobMods.valid())
+        {
+            for (CBaseEntity* entity : groupEntities)
+            {
+                auto PMob = dynamic_cast<CMobEntity*>(entity);
+                XI_DEBUG_BREAK_IF(PMob == nullptr);
+                for (auto modifier : mods.get<sol::table>())
+                {
+                    PMob->setMobMod(modifier.first.as<uint16>(), modifier.second.as<uint16>());
+                }
+            }
+        }
+
         bool spawned = groupData.get_or("spawned", true);
         if (spawned)
         {
