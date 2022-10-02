@@ -1120,6 +1120,8 @@ UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Madfly' AND groupid='25'
 UPDATE mob_groups SET content_tag='ABYSSEA' WHERE name='Rockmill' AND groupid='26' AND zoneid='196';
 
 UPDATE mob_groups SET minLevel = 25, maxLevel = 27 WHERE name = "Greater_Pugil_fished"  and zoneid = 196;
+UPDATE mob_groups SET minLevel = 20, maxLevel = 24 WHERE name = "Ghoul_war"  and zoneid = 196;
+UPDATE mob_groups SET minLevel = 23, maxLevel = 27 WHERE name = "Ghoul_blm"  and zoneid = 196;
 
 -- ------------------------------------------------------------
 -- Crawlers_Nest (Zone 197)
