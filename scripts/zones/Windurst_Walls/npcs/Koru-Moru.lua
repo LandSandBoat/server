@@ -24,12 +24,6 @@ entity.onTrade = function(player, npc, trade)
                 player:startEvent(287) -- MAKING THE GRADE: Have test answers but not talked/given to Fuepepe
             end
         end
-    elseif trade:hasItemQty(16511, 1) and count == 1 and trade:getGil() == 0 then
-        if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLAST_FROM_THE_PAST) == QUEST_ACCEPTED then
-            player:startEvent(224) -- Complete quest!
-        else
-            player:startEvent(225) -- not the shell
-        end
     elseif trade:hasItemQty(829, 1) and count == 1 and trade:getGil() == 0 then
         if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM) == QUEST_ACCEPTED then
             player:startEvent(349)
@@ -44,9 +38,6 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local qStarStruck = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.STAR_STRUCK)
-    local blastFromPast = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLAST_FROM_THE_PAST)
-    local blastProg = player:getCharVar("BlastFromThePast_Prog")
     local rootProblem = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ROOT_OF_THE_PROBLEM)
     local thePuppetMaster = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PUPPET_MASTER)
     local thePuppetMasterProgress = player:getCharVar("ThePuppetMasterProgress")
@@ -57,13 +48,7 @@ entity.onTrigger = function(player, npc)
     local carbuncleDebacle = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CARBUNCLE_DEBACLE)
     local carbuncleDebacleProgress = player:getCharVar("CarbuncleDebacleProgress")
 
-    if blastFromPast == QUEST_AVAILABLE and qStarStruck == QUEST_COMPLETED and player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CLASS_REUNION) ~= QUEST_ACCEPTED and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 3 and player:needToZone() == false then
-        player:startEvent(214)
-    elseif blastFromPast == QUEST_ACCEPTED and blastProg >= 2 then
-        player:startEvent(215)
-    elseif blastFromPast == QUEST_ACCEPTED then
-        player:startEvent(216)
-    elseif player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_THE_GRADE) == QUEST_ACCEPTED then
+    if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_THE_GRADE) == QUEST_ACCEPTED then
         local makingGradeProg = player:getCharVar("QuestMakingTheGrade_prog")
         if makingGradeProg == 0 and player:hasItem(544) then
             player:startEvent(287) -- MAKING THE GRADE: Have test answers but not talked/given to Fuepepe
@@ -117,17 +102,6 @@ entity.onEventFinish = function(player, csid, option)
         player:addKeyItem(xi.ki.TATTERED_TEST_SHEET)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TATTERED_TEST_SHEET)
         player:setCharVar("QuestMakingTheGrade_prog", 2)
-    elseif csid == 214 and option == 0 then
-        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLAST_FROM_THE_PAST)
-    elseif csid == 224 then
-        player:tradeComplete()
-        player:setCharVar("BlastFromThePast_Prog", 0)
-        player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLAST_FROM_THE_PAST)
-        player:addItem(17030)
-        player:messageSpecial(ID.text.ITEM_OBTAINED, 17030)
-        player:addTitle(xi.title.FOSSILIZED_SEA_FARER)
-        player:addFame(xi.quest.fame_area.WINDURST, 30)
-        player:needToZone(true)
     elseif csid == 404 then
         if player:getFreeSlotsCount() ~= 0 then
             player:addItem(17532)
