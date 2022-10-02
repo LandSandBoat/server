@@ -463,7 +463,7 @@ void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleAreas)
             {
                 auto PMob = dynamic_cast<CMobEntity*>(entity);
                 XI_DEBUG_BREAK_IF(PMob == nullptr);
-                for (auto modifier : mods.get<sol::table>())
+                for (auto modifier : mobMods.get<sol::table>())
                 {
                     PMob->setMobMod(modifier.first.as<uint16>(), modifier.second.as<uint16>());
                 }

@@ -601,6 +601,7 @@ function Battlefield:handleOpenArmouryCrate(player, npc)
         self:handleLootRolls(battlefield, self.loot, npc)
         battlefield:setStatus(xi.battlefield.status.WON)
         battlefield:setLocalVar("cutsceneTimer", self.delayToExit)
+        return true
     end)
 end
 
@@ -625,7 +626,7 @@ function Battlefield:handleLootRolls(battlefield, lootTable, npc)
                 local current = 0
                 for _, entry in pairs(lootGroup) do
                     if type(entry) == 'table' then
-                        local current = current + entry.droprate
+                        current = current + entry.droprate
 
                         if current > roll then
                             if entry.itemid == 0 then

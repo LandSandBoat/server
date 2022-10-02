@@ -918,17 +918,15 @@ end
 
 -- Opens a crate and sets an 'opened' var so it cannot be opened again.
 --  - crate: The npc crate to open
---  - callback: The callback function to call if crate is successfully opened
---  - disappearAfter: Amount of time until crate disappears. Defaults to 7 seconds. Pass 0 to never disappear.
-function npcUtil.openCrate(crate, callback, disappearAfter)
+--  - callback: The callback function to call if crate is successfully opened. Return true to leave crate open.
+function npcUtil.openCrate(crate, callback)
     if crate:getLocalVar("opened") == 0 then
         crate:setLocalVar("opened", 1)
-        callback()
+        local shouldDisappear = not callback()
         crate:entityAnimationPacket("openH")
 
-        local disappearTime = disappearAfter or 7000
-        if disappearTime ~= 0 then
-            crate:timer(disappearTime, function(npc)
+        if shouldDisappear then
+            crate:timer(7000, function(npc)
                 npcUtil.disappearCrate(npc)
             end)
         end

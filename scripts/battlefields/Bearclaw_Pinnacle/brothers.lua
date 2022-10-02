@@ -21,7 +21,6 @@ local content = Battlefield:new({
         xi.battlefield.rules.ALLOW_SUBJOBS,
         xi.battlefield.rules.LOSE_EXP,
         xi.battlefield.rules.REMOVE_3MIN,
-        xi.battlefield.rules.SPAWN_TREASURE_ON_WIN,
     },
     menuBit = 3,
     entryNpc = "Wind_Pillar_4",
@@ -47,7 +46,7 @@ content.groups =
         },
         mobMods =
         {
-            [xi.mobMod.DRAW_IN] = 1,
+            [xi.mobMod.SIGHT_RANGE] = 30,
         },
     },
     {
@@ -58,6 +57,10 @@ content.groups =
             [xi.mod.SILENCERES] = 75,
             [xi.mod.SLEEPRES] = 50,
         },
+        mobMods =
+        {
+            [xi.mobMod.SIGHT_RANGE] = 30,
+        }
     },
 }
 
@@ -66,33 +69,25 @@ content:addEssentialMobs({ "Eldertaur", "Mindertaur" })
 content.loot =
 {
     {
-        { itemid =    0, droprate =  59 }, -- nothing
-        { itemid = 1767, droprate = 271 }, -- Eltoro Leather
-        { itemid = 1762, droprate = 340 }, -- Cassia Lumber
-        { itemid = 1771, droprate = 330 }, -- Dragon Bone
+        { itemid =    0, droprate = xi.battlefield.dropChance.VERY_LOW }, -- nothing
+        { itemid = 1767, droprate = xi.battlefield.dropChance.NORMAL }, -- Eltoro Leather
+        { itemid = 1762, droprate = xi.battlefield.dropChance.NORMAL }, -- Cassia Lumber
+        { itemid = 1771, droprate = xi.battlefield.dropChance.NORMAL }, -- Dragon Bone
     },
 
     {
-        { itemid =    0, droprate = 956 }, -- nothing
-        { itemid = 1842, droprate =  44 }, -- Cloud Evoker
+        { itemid =    0, droprate = xi.battlefield.dropChance.EXTREMELY_HIGH }, -- nothing
+        { itemid = 1842, droprate = xi.battlefield.dropChance.LOW }, -- Cloud Evoker
     },
 
     {
-        { itemid =     0, droprate = 118 }, -- nothing
-        { itemid = 15302, droprate = 123 }, -- Scouter's Rope
-        { itemid = 17277, droprate = 163 }, -- Hedgehog Bomb
-        { itemid = 17707, droprate = 167 }, -- Martial Anelace
-        { itemid = 18098, droprate = 148 }, -- Martial Lance
-        { itemid =  4748, droprate = 281 }, -- Scroll of Raise III
-    },
-
-    {
-        { itemid =     0, droprate = 118 }, -- nothing
-        { itemid = 15302, droprate = 128 }, -- Scouter's Rope
-        { itemid = 17277, droprate = 163 }, -- Hedgehog Bomb
-        { itemid = 17707, droprate = 167 }, -- Martial Anelace
-        { itemid = 18098, droprate = 153 }, -- Martial Lance
-        { itemid =  4748, droprate = 271 }, -- Scroll of Raise III
+        quantity = 2,
+        { itemid =     0, droprate = xi.battlefield.dropChance.LOW }, -- nothing
+        { itemid = 15302, droprate = xi.battlefield.dropChance.LOW }, -- Scouter's Rope
+        { itemid = 17277, droprate = xi.battlefield.dropChance.LOW }, -- Hedgehog Bomb
+        { itemid = 17707, droprate = xi.battlefield.dropChance.LOW }, -- Martial Anelace
+        { itemid = 18098, droprate = xi.battlefield.dropChance.LOW }, -- Martial Lance
+        { itemid =  4748, droprate = xi.battlefield.dropChance.HIGH }, -- Scroll of Raise III
     },
 }
 
