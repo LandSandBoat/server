@@ -73,7 +73,7 @@ entity.onTrigger = function(player, npc)
         mJob == xi.job.RDM and mLvl >= xi.settings.main.AF2_QUEST_LEVEL and envelopedInDarkness == QUEST_COMPLETED and
         peaceForTheSpirit == QUEST_AVAILABLE
     then
-    player:startEvent(109) -- Start
+        player:startEvent(109) -- Start
 
     -- "Peace for the Spirit" (RDM AF Body)
     elseif peaceForTheSpirit == QUEST_ACCEPTED then
