@@ -66,6 +66,34 @@ local function persistLotteryPrimed(phList)
 end
 
 -- Needs to be added to the NM's onDespawn() function.
+xi.mob.nmTODPersist = function(mob, cooldown)
+    SetServerVariable(string.format("[SPAWN]%s", mob:getName()), cooldown + os.time())
+    mob:getZone():setLocalVar(string.format("[SPAWN]%s", mob:getName()), cooldown + os.time())
+    mob:setRespawnTime(cooldown)
+end
+
+-- Needs to be added to the NM's zone onInit() function.
+xi.mob.nmTODPersistCache = function(zone, mobId)
+    local mob = GetMobByID(mobId)
+    local respawn = GetServerVariable(string.format("[SPAWN]%s", mob:getName()))
+    zone:setLocalVar(string.format("[SPAWN]%s", mob:getName()), respawn)
+
+    if respawn == 0 then
+        return
+    end
+
+    if mob:isAlive() then
+        DespawnMob(mobId)
+    end
+
+    if respawn <= os.time() then
+        mob:setRespawnTime(300)
+    else
+        mob:setRespawnTime(respawn - os.time())
+    end
+end
+
+-- Needs to be added to the NM's onDespawn() function.
 xi.mob.lotteryPersist = function(mob, cooldown)
     SetServerVariable(string.format("[SPAWN]%s", mob:getName()), cooldown + os.time())
     mob:getZone():setLocalVar(string.format("[SPAWN]%s", mob:getName()), cooldown + os.time())
