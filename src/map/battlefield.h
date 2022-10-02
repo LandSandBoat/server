@@ -194,7 +194,7 @@ public:
     bool         RemoveEntity(CBaseEntity* PEntity, uint8 leavecode = 0);
     void         onTick(time_point time);
     bool         CanCleanup(bool cleanup = false);
-    void         Cleanup();
+    bool         Cleanup(time_point time, bool force);
     bool         LoadMobs();
     bool         SpawnLoot(CBaseEntity* PEntity = nullptr);
 
@@ -232,8 +232,10 @@ private:
     uint32     m_armouryCrate = 0;
     const bool m_isInteraction;
 
-    bool m_Cleanup{ false };
-    bool m_Attacked{ false };
+    time_point m_cleanupTime;
+    bool       m_cleanedPlayers = false;
+    bool       m_Cleanup  = false;
+    bool       m_Attacked = false;
 
     std::unordered_map<std::string, uint64_t> m_LocalVars;
     std::vector<BattlefieldGroup>             m_groups;

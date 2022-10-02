@@ -490,7 +490,7 @@ bool CBattlefield::IsRegistered(CCharEntity* PChar)
 
 bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
 {
-    // player's already zoned, we dont need to do anything
+    // player's already zoned, we don't need to do anything
     if (!PEntity)
     {
         return false;
@@ -525,7 +525,6 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
                 PEntity->loc.p.y = 0;
                 PEntity->loc.p.z = 0;
             }
-            luautils::OnBattlefieldLeave(PChar, this, leavecode);
         }
         charutils::SendClearTimerPacket(PChar);
     }
@@ -625,13 +624,6 @@ void CBattlefield::onTick(time_point time)
         m_FinishTime = m_Status >= BATTLEFIELD_STATUS_WON ? m_FightTick - m_StartTime : m_FinishTime;
 
         luautils::OnBattlefieldTick(this);
-
-        // todo: handle this in global
-        // been here too long, gtfo
-        if (GetTimeInside() >= GetTimeLimit())
-        {
-            CanCleanup(true);
-        }
     }
 }
 
@@ -645,8 +637,32 @@ bool CBattlefield::CanCleanup(bool cleanup)
     return m_Cleanup || m_EnteredPlayers.empty();
 }
 
-void CBattlefield::Cleanup()
+bool CBattlefield::Cleanup(time_point time, bool force)
 {
+    // Wait until
+    if (!force && m_cleanupTime > time)
+    {
+        return false;
+    }
+
+    // First cleanup the players if they haven't been cleaned up yet
+    if (!m_cleanedPlayers)
+    {
+        uint8 leavecode = m_Status == BATTLEFIELD_STATUS_WON ? BATTLEFIELD_LEAVE_CODE_WIN : BATTLEFIELD_LEAVE_CODE_LOSE;
+        for (auto id : m_EnteredPlayers)
+        {
+            auto* PChar = GetZone()->GetCharByID(id);
+            luautils::OnBattlefieldLeave(PChar, this, leavecode);
+        }
+
+        m_cleanedPlayers = true;
+        if (!force)
+        {
+            m_cleanupTime = time + 10s;
+            return false;
+        }
+    }
+
     // todo: delete all the things?
     for (const auto& mob : m_RequiredEnemyList)
     {
@@ -720,6 +736,8 @@ void CBattlefield::Cleanup()
             sql->Query(query, m_Record.name.c_str(), timeThing, m_Record.partySize, this->GetID(), GetZoneID());
         }
     }
+
+    return true;
 }
 
 bool CBattlefield::LoadMobs()

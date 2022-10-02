@@ -73,15 +73,16 @@ void CBattlefieldHandler::HandleBattlefields(time_point tick)
         auto* PBattlefield = it->second;
         if (PBattlefield->CanCleanup())
         {
-            PBattlefield->Cleanup();
-            it = m_Battlefields.erase(it);
-            ShowDebug("[CBattlefieldHandler]HandleBattlefields cleaned up Battlefield %s", PBattlefield->GetName().c_str());
-            delete PBattlefield;
+            if (PBattlefield->Cleanup(tick, false))
+            {
+                it = m_Battlefields.erase(it);
+                ShowDebug("[CBattlefieldHandler]HandleBattlefields cleaned up Battlefield %s", PBattlefield->GetName().c_str());
+                delete PBattlefield;
+                continue;
+            }
         }
-        else
-        {
-            ++it;
-        }
+
+        ++it;
     }
 }
 
@@ -149,7 +150,7 @@ uint8 CBattlefieldHandler::LoadBattlefield(CCharEntity* PChar, const Battlefield
         {
             PBattlefield->SetStatus(BATTLEFIELD_STATUS_LOST);
             PBattlefield->CanCleanup(true);
-            PBattlefield->Cleanup();
+            PBattlefield->Cleanup(time_point{}, true);
             ShowDebug("battlefield loading failed");
             return BATTLEFIELD_RETURN_CODE_WAIT;
         }

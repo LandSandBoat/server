@@ -513,14 +513,20 @@ function Battlefield:onBattlefieldTick(battlefield, tick)
     xi.battlefield.HandleWipe(battlefield, players)
 
     local hasTimeRemaining = xi.battlefield.SendTimePrompts(battlefield, players)
+    if not hasTimeRemaining then
+        isExiting = true
+    end
 
-    -- Cleanup battlefield.
-    -- TODO(jmcmorris): Can we clean this up when players wipe?
-    if not hasTimeRemaining or (isExiting and cutsceneTimer <= 0) then
-        battlefield:cleanup(true)
-    elseif status == xi.battlefield.status.LOST then
-        for _, player in pairs(players) do
-            player:messageSpecial(zones[player:getZoneID()].text.PARTY_MEMBERS_HAVE_FALLEN)
+    if isExiting then
+        -- Remaining in battlefield for an extended time
+        if cutsceneTimer > 0 then
+            return
+        end
+
+        if status == xi.battlefield.status.LOST then
+            for _, player in pairs(players) do
+                player:messageSpecial(zones[player:getZoneID()].text.PARTY_MEMBERS_HAVE_FALLEN)
+            end
         end
 
         battlefield:cleanup(true)
