@@ -16,6 +16,7 @@ zone_object.onInitialize = function(zone)
     zone:registerRegion(4,  68, -1,   30,  91,  1,   53) -- ToAU Mission 4 region. Walahra Temple.
     zone:registerRegion(5,  64, -7, -137,  95, -5, -123) -- ToAU Mission 4 region. Shaharat Teahouse.
     zone:registerRegion(6,  30, -6.61,  -60,  39, -6.6,  -50) -- ToAU Mission 11 region. Salaheem's Sentinels, first platform.
+    zone:registerRegion(9, -103, 0, -16, -100, 0, -12) -- Sets Mark for "Striking a Balance" Quest cutscene.
 end
 
 zone_object.onZoneIn = function(player, prevZone)

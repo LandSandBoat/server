@@ -35,6 +35,7 @@ zones[xi.zone.AL_ZAHBI] =
         TATEN_BILTEN_SHOP_DIALOG      = 7858, -- Weave something beautiful with the materials you buy here, okay?
         CHOCOBO_HAPPY                 = 7861, -- The chocobo appears to be extremely happy.
         SANCTION                      = 7986, -- You have received the Empire's Sanction.
+        NOTHING_OUT_OF_ORDINARY       = 8115, -- There is nothing out of the ordinary here.
     },
     mob =
     {
