@@ -43,7 +43,14 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include <cerrno>
 #include <netdb.h>
 #include <netinet/in.h>
+
+// MacOS has no epoll
+#ifdef __APPLE__
+#include <sys/ioctl.h>
+#else
 #include <sys/epoll.h>
+#endif
+
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <unistd.h>
@@ -289,7 +296,7 @@ int32 main(int32 argc, char** argv)
     // clang-format on
 
     ShowInfo("========================================================");
-
+#ifndef __APPLE__
     epoll_event epollEvent  = { EPOLLIN };
     HANDLE      epollHandle = epoll_create1(0);
     epoll_ctl(epollHandle, EPOLL_CTL_ADD, ListenSocket, &epollEvent);
@@ -327,6 +334,54 @@ int32 main(int32 argc, char** argv)
 
     // close the connection since we're done
     epoll_ctl(epollHandle, EPOLL_CTL_DEL, ListenSocket, &epollEvent);
+
+    // __APPLE__ has no epoll, use Select
+#else
+    fd_set fdSet        = {};
+    fd_set workingFdSet = {};
+
+    struct timeval timeout = {};
+
+    FD_ZERO(&fdSet);
+    FD_SET(ListenSocket, &fdSet);
+
+    int usecTimeout = std::chrono::duration_cast<std::chrono::microseconds>(100ms).count();
+
+    int ret = 0;
+    while (!requestExit)
+    {
+        // timeout can be updated by select, set it back every iteration.
+        timeout.tv_sec  = 0;
+        timeout.tv_usec = usecTimeout;
+
+        memcpy(&workingFdSet, &fdSet, sizeof(fdSet));
+        ret = sSelect(ListenSocket + 1, &workingFdSet, nullptr, nullptr, &timeout);
+
+        if (ret == SOCKET_ERROR)
+        {
+            if (sErrno != S_EINTR)
+            {
+                ShowCritical("select() failed, error code %d!", sErrno);
+                exit(EXIT_FAILURE);
+            }
+            continue;
+        }
+
+        if (ret > 0)
+        {
+            // Accept a client socket
+            ClientSocket = accept(ListenSocket, nullptr, nullptr);
+            if (ClientSocket == INVALID_SOCKET)
+            {
+                ShowError("accept failed with error: %d", sErrno);
+                continue;
+            }
+
+            std::thread(TCPComm, ClientSocket).detach();
+        }
+    }
+#endif
+
 #ifdef WIN32
     epoll_close(epollHandle);
     iResult = shutdown(ListenSocket, SD_SEND);
