@@ -201,7 +201,7 @@ void CBattlefield::SetInitiator(std::string const& name)
 
 void CBattlefield::SetTimeLimit(duration time)
 {
-    m_TimeLimit = time;
+    m_TimeLimit      = time;
     m_LastPromptTime = time;
 }
 
@@ -518,7 +518,6 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
                 state->allowSendRaise();
             }
         }
-
 
         m_EnteredPlayers.erase(m_EnteredPlayers.find(PEntity->id));
 

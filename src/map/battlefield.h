@@ -234,8 +234,8 @@ private:
 
     time_point m_cleanupTime;
     bool       m_cleanedPlayers = false;
-    bool       m_Cleanup  = false;
-    bool       m_Attacked = false;
+    bool       m_Cleanup        = false;
+    bool       m_Attacked       = false;
 
     std::unordered_map<std::string, uint64_t> m_LocalVars;
     std::vector<BattlefieldGroup>             m_groups;

@@ -719,9 +719,9 @@ function Battlefield:handleLootRolls(battlefield, lootTable, npc)
                             if entry.itemid == 65535 then
                                 local gil = entry.amount/#players
 
-                                for j = 1, #players, 1 do
-                                    players[j]:addGil(gil)
-                                    players[j]:messageSpecial(zones[players[1]:getZoneID()].text.GIL_OBTAINED, gil)
+                                for k = 1, #players, 1 do
+                                    players[k]:addGil(gil)
+                                    players[k]:messageSpecial(zones[players[1]:getZoneID()].text.GIL_OBTAINED, gil)
                                 end
 
                                 break
