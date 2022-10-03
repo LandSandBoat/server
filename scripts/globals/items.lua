@@ -3436,6 +3436,7 @@ xi.items =
     DASH_SASH                       = 15456,
     SAFETY_MANTLE                   = 15463,
     BELLICOSE_MANTLE                = 15469,
+    GRAMARY_CAPE                    = 15470,
     MERCIFUL_CAPE                   = 15471,
     ALTRUISTIC_CAPE                 = 15472,
     ASTUTE_CAPE                     = 15473,
