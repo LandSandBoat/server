@@ -259,9 +259,9 @@ zones[xi.zone.MINE_SHAFT_2716] =
             skillList = 1184,
             petModelID =
             {
-                {1983, xi.job.PLD}, -- Melee Automaton
-                {1990, xi.job.RNG}, -- Ranged Automaton
-                {1994, xi.job.BLM}, -- Magic Automaton
+                { 1983, xi.job.PLD }, -- Melee Automaton
+                { 1990, xi.job.RNG }, -- Ranged Automaton
+                { 1994, xi.job.BLM }, -- Magic Automaton
             },
             petSkillList =
             {

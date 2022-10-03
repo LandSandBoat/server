@@ -174,7 +174,7 @@ local loot =
     [xi.job.PLD] =
     {
         {
-            { itemid = 0, droprate = 750},
+            { itemid = 0, droprate = 750 },
             { itemid = xi.items.VIAL_OF_REFRESH_MUSK, droprate = 250 },
         },
     },
