@@ -3833,18 +3833,18 @@ INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_MNK_PUP',1184,5); -- Raging fi
 INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_MNK_PUP',1184,6); -- Spinning Attack
 INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_MNK_PUP',1184,7); -- Howling Fist
 -- WHM
-INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_WHM',1185,160); -- Shining Strike
-INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_WHM',1185,161); -- Seraph Strike
-INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_WHM',1185,162); -- Brainshaker
-INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_WHM',1185,165); -- Skullbreaker
-INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_WHM',1185,166); -- True Strike
+INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_WHM_BLM',1185,160); -- Shining Strike
+INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_WHM_BLM',1185,161); -- Seraph Strike
+INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_WHM_BLM',1185,162); -- Brainshaker
+INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_WHM_BLM',1185,165); -- Skullbreaker
+INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_WHM_BLM',1185,166); -- True Strike
 -- BLM - SMN
-INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_BLM_SMN',1186,176); -- Heavy Swing
-INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_BLM_SMN',1186,177); -- Rock Crusher
-INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_BLM_SMN',1186,178); -- Earth Crusher
-INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_BLM_SMN',1186,179); -- Starburst
-INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_BLM_SMN',1186,180); -- Sunburst
-INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_BLM_SMN',1186,181); -- Shell Crusher
+INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_SMN',1186,176); -- Heavy Swing
+INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_SMN',1186,177); -- Rock Crusher
+INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_SMN',1186,178); -- Earth Crusher
+INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_SMN',1186,179); -- Starburst
+INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_SMN',1186,180); -- Sunburst
+INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_SMN',1186,181); -- Shell Crusher
 -- RDM - BLU - PLD
 INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_RDM_BLU_PLD',1187,32); -- Fast Blade
 INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_RDM_BLU_PLD',1187,33); -- Burning Blade
@@ -3914,15 +3914,19 @@ INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_PUP',1195,1995); -- Earth Mane
 INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_PUP',1195,1996); -- Thunder Maneuver
 INSERT INTO `mob_skill_lists` VALUES ('Fantoccini_PUP',1195,1997); -- Water Maneuver
 -- Moblin Fantocciniman
-INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1196,1414); -- Player Ability Reset
-INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1196,1415); -- Cure Player
-INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1196,1418); -- Boost Player
-INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1196,1419); -- TP Player
-INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1196,1421); -- TP Fantoccini
-INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1196,1422); -- Boost Fantoccini
-INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1196,1424); -- Cure Fantoccini
-INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1196,1427); -- Fantoccini use Ability
-INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1196,1457); -- Benediction Fantoccicni
+INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1196,1414); -- Recover MP (player)
+INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1196,1415); -- Recover HP (player)
+INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1196,1416); -- Recover MP (player)
+INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1196,1417); -- Attack Boost (player)
+INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1196,1418); -- Defense Boost (player)
+INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1196,1419); -- TP Boost (player)
+INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1196,1420); -- Ability or Spell (automaton)
+INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1196,1421); -- Give and use TP (automaton)
+INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1196,1422); -- Attack Boost (automaton)
+INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1196,1424); -- Defense Boost (automaton)
+INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1196,1427); -- 2HR use (automaton)
+INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1196,1457); -- Job ability Reset (player)
+
 
 INSERT INTO `mob_skill_lists` VALUES ('Swamfisk',1197,452); -- Screwdriver
 INSERT INTO `mob_skill_lists` VALUES ('Swamfisk',1197,453); -- Water Wall

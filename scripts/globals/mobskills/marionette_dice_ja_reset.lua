@@ -1,7 +1,8 @@
 -----------------------------------
--- Marionette Dice (4 & 10)
--- Description: Cure to target
+-- Marionette Dice (7)
+-- Description: Forces target to use special ability
 -- Type: Magical
+-- Notes: Used by Moblin Fantoccini in ENM: "Pulling the strings"
 -----------------------------------
 require("scripts/globals/mobskills")
 require("scripts/globals/settings")
@@ -17,18 +18,10 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local heal = math.min(math.floor(target:getMaxHP() / 8), target:getMaxHP() - target:getHP())
-
-    if target:isPC() then
-        mob:showText(mob, ID.text.DICE_LIKE_YOU)
-    else
-        mob:showText(mob, ID.text.DICE_LIKE_ME)
-    end
-
-    target:addHP(heal)
-    target:wakeUp()
-
-    return heal
+    mob:showText(mob, ID.text.NOT_HOW)
+    target:resetRecasts()
+    skill:setMsg(xi.msg.basic.ABILITIES_RECHARGED)
+    return 0
 end
 
 return mobskill_object

@@ -1,7 +1,6 @@
 -----------------------------------
--- Marionette Dice (6 & 8)
--- Description: Forces Fantoccini to use TP
--- Type: Magical
+-- Marionette TP Boost
+-- Description: Gives a random amount of TP to player
 -- Notes: Used by Moblin Fantoccini in ENM: "Pulling the strings"
 -----------------------------------
 require("scripts/globals/mobskills")
@@ -18,20 +17,8 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    -- Force Fantoccini to use an ability
-    local skillList = ID.jobTable[target:getLocalVar("job")].skillList
-    target:setTP(3000)
+    target:setTP(target:getTP() + math.random(50, 1000))
 
-    mob:timer(5000, function(mobArg)
-        mobArg:showText(mobArg, ID.text.HA_HA)
-        target:setMobMod(xi.mobMod.SKILL_LIST, skillList)
-
-        mobArg:timer(1000, function(mobArg1)
-            target:setMobMod(xi.mobMod.SKILL_LIST, 0)
-        end)
-    end)
-
-    skill:setMsg(xi.msg.basic.TP_INCREASE)
     return target:getTP()
 end
 

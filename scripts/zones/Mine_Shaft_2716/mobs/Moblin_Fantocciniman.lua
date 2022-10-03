@@ -8,14 +8,40 @@ require("scripts/globals/pathfind")
 -----------------------------------
 local entity = {}
 
+local rolls =
+{
+    1414, -- Recover MP (player)
+    1415, -- Recover HP (player)
+    1416, -- Recover MP (player)
+    1417, -- Attack Boost (player)
+    1418, -- Defense Boost (player)
+    1419, -- TP Boost (player)
+    1420, -- Ability or Spell (automaton)
+    1421, -- Give and use TP (automaton)
+    1422, -- Attack Boost (automaton)
+    1424, -- Defense Boost (automaton)
+    1427, -- 2HR use (automaton)
+    1457, -- Job ability Reset (player)
+}
+
 entity.onMobSpawn = function(mob)
     mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.STANDBACK))
     mob:SetAutoAttackEnabled(false)
     mob:setSpeed(60)
 end
 
+entity.onMobWeaponSkill = function(target, mob, skill)
+    if skill:getID() >= 1400 then
+        mob:showText(mob, ID.text.ROLY_POLY)
+        mob:queue(3000, function(mobArg)
+            mobArg:useMobAbility(math.random(1343,1345))
+            mob:setLocalVar("tpControl", 0)
+        end)
+    end
+end
+
 entity.onMobEngaged = function(mob, target)
-    mob:setMod(xi.mod.REGAIN, 375)
+    mob:setMod(xi.mod.REGAIN, 300)
 
     -- Different message if engaging for the second time
     if mob:getLocalVar("control") == 0 then
@@ -30,9 +56,12 @@ entity.onMobFight = function(mob, target)
     local fPos = fantoccini:getPos()
     local mPos = mob:getPos()
 
+    -- Shares hate with Fantoccini
+    mob:updateEnmity(fantoccini:getTarget())
+
+    -- Attack player if any HP has been lost
     if mob:getHP() < mob:getMaxHP() and mob:getLocalVar("control") == 0 then
         mob:showText(mob, ID.text.YOU_MAKE_ME_MAD)
-        mob:addMobMod(xi.mobMod.SKILL_LIST, 0) -- Stops rolling dice after being attacked
         mob:SetAutoAttackEnabled(true)
         mob:setLocalVar("control", 1)
         mob:setBehaviour(0)
@@ -45,10 +74,13 @@ entity.onMobFight = function(mob, target)
             mob:pathTo(mPos.x, mPos.y, mPos.z, xi.path.flag.SCRIPT)
         end
     end
-end
 
-entity.onMobWeaponSkillPrepare = function(target, mob)
-    mob:showText(mob, ID.text.ROLY_POLY)
+    -- *** TODO: Fix the requirement of this to roll on Fantoccini ***
+    -- ** Moblin won't roll on Fantoccini unless explicitly told to **
+    if mob:getTP() == 3000 and mob:getLocalVar("control") == 0 and mob:getLocalVar("tpControl") == 0 then
+        mob:setLocalVar("tpControl", 1)
+        mob:useMobAbility(rolls[math.random(1,12)])
+    end
 end
 
 entity.onMobDeath = function(mob)

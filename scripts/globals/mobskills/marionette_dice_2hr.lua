@@ -1,6 +1,6 @@
 -----------------------------------
--- Marionette Dice (5 & 9)
--- Description: Atk or Def boost for target
+-- Marionette Dice 2hr
+-- Description: Forces Fantoccini to use its respective 2hr
 -- Notes: Used by Moblin Fantoccini in ENM: "Pulling the strings"
 -----------------------------------
 require("scripts/globals/mobskills")
@@ -17,28 +17,16 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local power = 15
-    local duration = 90
-    local typeEffect = xi.effect.ATTACK_BOOST
+    local ability = ID.jobTable[target:getMainJob()].twoHour
 
-    if math.random() > 0.5 then
-        typeEffect = xi.effect.DEFENSE_BOOST
+    if ability > 0 then
+        mob:timer(5000, function(mobArg)
+            target:useMobAbility(ability)
+            mobArg:messageText(mobArg, ID.text.NOT_YOUR_LUCKY_DAY)
+        end)
     end
-
-    if target:isPC() then
-        mob:showText(mob, ID.text.DICE_LIKE_YOU)
-    else
-        mob:showText(mob, ID.text.DICE_LIKE_ME)
-    end
-
-    if target:addStatusEffect(typeEffect, power, 0, duration) then
-        skill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT)
-    else
-        skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
-    end
-    --msg 194?
-
-    return typeEffect
+    skill:setMsg(xi.msg.basic.NONE)
+    return 0
 end
 
 return mobskill_object

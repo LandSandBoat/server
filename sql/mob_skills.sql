@@ -1312,20 +1312,20 @@ INSERT INTO `mob_skills` VALUES (1401,138,'soul_accretion',0,7.0,2000,1500,4,0,0
 -- INSERT INTO `mob_skills` VALUES (1411,658,'bai_wing',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1412,1156,'absolute_terror',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1413,660,'horrid_roar',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1414,1046,'marionette_dice_special',0,40.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1415,1047,'marionette_dice_cure',0,40.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1416,0,'marionette_dice',0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1417,0,'marionette_dice',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1418,1048,'marionette_dice_boost',0,40.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1419,1049,'marionette_dice_tp',0,40.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1420,1050,'marionette_dice',0,40.0,2000,1500,2,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1421,1051,'marionette_dice_tp',0,40.0,2000,1500,2,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1422,1052,'marionette_dice_boost',0,40.0,2000,1500,2,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1423,0,'marionette_dice',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1424,1053,'marionette_dice_cure',0,40.0,2000,1500,2,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1425,0,'marionette_dice',0,7.0,2000,1500,4,0,0,0,0,0,0);
--- INSERT INTO `mob_skills` VALUES (1426,0,'marionette_dice',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1427,1054,'marionette_dice_special',0,40.0,2000,1500,2,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1414,1046,'marionette_dice_mp',0,40.0,2000,1500,4,0,0,0,0,0,0); -- Recover MP (player)
+INSERT INTO `mob_skills` VALUES (1415,1046,'marionette_dice_hp',0,40.0,2000,1500,4,0,0,0,0,0,0); -- Recover HP (player)
+INSERT INTO `mob_skills` VALUES (1416,1046,'marionette_dice_hp_mp',0,40.0,2000,1500,4,0,0,0,0,0,0); -- Recover HP and MP (player)
+INSERT INTO `mob_skills` VALUES (1417,1047,'marionette_dice_attk',0,40.0,2000,1500,4,0,0,0,0,0,0); -- Attack Boost (player)
+INSERT INTO `mob_skills` VALUES (1418,1048,'marionette_dice_def',0,40.0,2000,1500,4,0,0,0,0,0,0); -- Defense Boost (player)
+INSERT INTO `mob_skills` VALUES (1419,1049,'marionette_dice_tp_player',0,40.0,2000,1500,4,0,0,0,0,0,0); -- TP Boost (player)
+INSERT INTO `mob_skills` VALUES (1420,1050,'marionette_dice_special',0,40.0,2000,1500,2,0,0,0,0,0,0); -- Ability or Spell (automaton)
+INSERT INTO `mob_skills` VALUES (1421,1051,'marionette_dice_tp',0,40.0,2000,1500,2,0,0,0,0,0,0); -- Give and use TP (automaton)
+INSERT INTO `mob_skills` VALUES (1422,1052,'marionette_dice_attk',0,40.0,2000,1500,2,0,0,0,0,0,0); -- Attack Boost (automaton)
+-- INSERT INTO `mob_skills` VALUES (1423,1053,'marionette_dice',0,40.0,2000,1500,2,0,0,0,0,0,0); -- No data
+INSERT INTO `mob_skills` VALUES (1424,1053,'marionette_dice_def',0,40.0,2000,1500,2,0,0,0,0,0,0); -- Defense Boost (automaton)
+-- INSERT INTO `mob_skills` VALUES (1425,1055,'marionette_dice',0,40.0,2000,1500,2,0,0,0,0,0,0); -- No data
+-- INSERT INTO `mob_skills` VALUES (1426,1056,'marionette_dice',0,40.0,2000,1500,2,0,0,0,0,0,0); -- No data
+INSERT INTO `mob_skills` VALUES (1427,1054,'marionette_dice_2hr',0,40.0,2000,1500,2,0,0,0,0,0,0); -- 2HR use (automaton)
 INSERT INTO `mob_skills` VALUES (1428,28,'warcry',0,7.0,2000,0,1,0,0,0,0,0,0);       -- Humanoid animation
 INSERT INTO `mob_skills` VALUES (1429,8,'counterstance',0,7.0,2000,0,1,0,0,0,0,0,0); -- Humanoid animation
 -- INSERT INTO `mob_skills` VALUES (1430,1174,'steal',0,7.0,2000,1500,4,0,0,0,0,0,0);
@@ -1355,7 +1355,7 @@ INSERT INTO `mob_skills` VALUES (1453,1069,'nutrient_aborption',0,7.0,2000,1000,
 -- INSERT INTO `mob_skills` VALUES (1454,1198,'palsy_pollen',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1455,1199,'toxic_spit',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1456,1200,'filamented_hold',0,7.0,2000,1500,4,0,0,0,0,0,0);
-INSERT INTO `mob_skills` VALUES (1457,1055,'marionette_dice_bene',0,40.0,2000,1500,2,0,0,0,0,0,0);
+INSERT INTO `mob_skills` VALUES (1457,1055,'marionette_dice_ja_reset',0,40.0,2000,1500,4,0,0,0,0,0,0); -- Job ability Reset (player)
 -- INSERT INTO `mob_skills` VALUES (1458,1202,'self-destruct',0,7.0,2000,1500,4,0,0,0,0,0,0);
 -- INSERT INTO `mob_skills` VALUES (1459,1203,'self-destruct',0,7.0,2000,1500,4,0,0,0,0,0,0);
 INSERT INTO `mob_skills` VALUES (1460,847,'geush_auto',0,7.0,2000,0,4,0,0,1,0,0,0); -- Guesh Urvan auto attack

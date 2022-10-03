@@ -14150,6 +14150,11 @@ void CLuaBaseEntity::useMobAbility(sol::variadic_args va)
             {
                 PEntity->PAI->MobSkill(static_cast<CMobEntity*>(PEntity)->GetBattleTargetID(), skillid);
             }
+            // Specific case for Moblin Fantocciniman
+            else if (PMobSkill->getValidTargets() & TARGET_PLAYER_PARTY)
+            {
+                PEntity->PAI->MobSkill(PEntity->targid+2, skillid);
+            }
             else if (PMobSkill->getValidTargets() & TARGET_SELF)
             {
                 PEntity->PAI->MobSkill(PEntity->targid, skillid);

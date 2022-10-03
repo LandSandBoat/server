@@ -32,7 +32,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     else
         mob:getPet():setTP(3000)
     end
-
+    skill:setMsg(xi.msg.basic.NONE)
     return 0
 end
 

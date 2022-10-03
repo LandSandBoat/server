@@ -50,23 +50,22 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:timer(3000, function(mobArg)
-        local job = mob:getBattlefield():getPlayers()[1]:getMainJob()
-        mob:setLocalVar("control", 1)
-        mob:setLocalVar("job", job)
+        local job = mobArg:getBattlefield():getPlayers()[1]:getMainJob()
+        mobArg:setLocalVar("control", 1)
+        mobArg:setLocalVar("job", job)
 
         mobArg:setModelId(ID.jobTable[job].modelID)
         mobArg:changeJob(job)
 
         if ID.jobTable[job].petID ~= 0 then
-            mobArg:setLocalVar("petID", ID.jobTable[job].petID + mob:getID())
+            mobArg:setLocalVar("petID", ID.jobTable[job].petID + mobArg:getID())
         end
+
+        mobArg:setMobMod(xi.mobMod.NO_STANDBACK, 1)
     end)
 end
 
 entity.onMobFight = function(mob, target)
-    -- Fantoccini only gains TP from moblin dice
-    mob:setTP(mob:getLocalVar("tp"))
-
     -- Pet summoning control
     if mob:getLocalVar("petID") > 0 then
         if not GetMobByID(mob:getLocalVar("petID")):isSpawned() and mob:getLocalVar("petSpawned") == 0 then
@@ -77,6 +76,13 @@ entity.onMobFight = function(mob, target)
                 mob:setLocalVar("petSpawned", 0)
             end)
         end
+    end
+
+    -- If Fantoccini used Chainspell or Manafont
+    if mob:hasStatusEffect(xi.effect.CHAINSPELL) or mob:hasStatusEffect(xi.effect.MANAFONT) then
+        mob:setMobMod(xi.mobMod.SPELL_LIST, ID.jobTable[mob:getMainJob()].spellListID)
+    else
+        mob:setMobMod(xi.mobMod.SPELL_LIST, 0)
     end
 end
 

@@ -1,7 +1,7 @@
 -----------------------------------
--- Marionette Dice Benediction)
--- Description: Benediction for party members within area of effect.
--- Notes: Used by Moblin Fantoccini in ENM: "Pulling the strings"
+-- Marionette Dice (4 & 10)
+-- Description: Cures player
+-- Type: Magical
 -----------------------------------
 require("scripts/globals/mobskills")
 require("scripts/globals/settings")
@@ -15,14 +15,11 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local heal = target:getMaxHP() - target:getHP()
-
-    skill:setMsg(xi.msg.basic.SELF_HEAL)
-
-    target:addHP(heal)
+    local amount = 150
+    skill:setMsg(xi.msg.basic.SKILL_RECOVERS_HP)
+    target:addHP(amount)
     target:wakeUp()
-
-    return heal
+    return amount
 end
 
 return mobskill_object
