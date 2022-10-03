@@ -14,7 +14,7 @@ mobskill_object.onMobSkillCheck = function(target,mob,skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    hpdmgMod = math.floor(mob:getMaxHP() * (math.floor(0.016 * mob:getTP()) + 16) / 256)
+    local hpdmgMod = math.floor(mob:getMaxHP() * (math.floor(0.016 * mob:getTP()) + 16) / 256)
 
     target:takeDamage(hpdmgMod, mob, xi.attackType.BREATH, xi.damageType.ELEMENTAL)
     return hpdmgMod

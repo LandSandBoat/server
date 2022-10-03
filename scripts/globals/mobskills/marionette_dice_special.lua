@@ -23,7 +23,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     -- Fantoccini can use abilities and spells
     -- TODO: Fix mobMod SPELL_LIST
     mob:timer(5000, function(mobArg)
-        mob:messageText(mob, ID.text.GO_GO)
+        mobArg:messageText(mobArg, ID.text.GO_GO)
 
         if ability > 0 and spells > 0 then
             if math.random() > 0.5 then
@@ -37,7 +37,7 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
             target:setSpellList(spells)
         end
 
-        mob:timer(1000, function(mobArg)
+        mobArg:timer(1000, function(mobArg1)
             target:setSpellList(0)
         end)
     end)

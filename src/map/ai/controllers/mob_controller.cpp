@@ -378,7 +378,7 @@ bool CMobController::MobSkill(int wsList)
         }
         else if (PMobSkill->getValidTargets() == TARGET_PLAYER_PARTY) // party
         {
-            PActionTarget = PTarget; //Mobs don't target other mobs unless scripted.
+            PActionTarget = PTarget; // Mobs don't target other mobs unless scripted.
         }
         else
         {

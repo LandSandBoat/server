@@ -3927,7 +3927,6 @@ INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1196,1424); -- Defen
 INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1196,1427); -- 2HR use (automaton)
 INSERT INTO `mob_skill_lists` VALUES('Moblin_Fantocciniman',1196,1457); -- Job ability Reset (player)
 
-
 INSERT INTO `mob_skill_lists` VALUES ('Swamfisk',1197,452); -- Screwdriver
 INSERT INTO `mob_skill_lists` VALUES ('Swamfisk',1197,453); -- Water Wall
 INSERT INTO `mob_skill_lists` VALUES ('Barbastelle',1198,392); -- Ultrasonics
