@@ -182,10 +182,9 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     quest:setVar(player, 'Prog', 4)
-                    player:addKeyItem(xi.ki.MUNAHDAS_PACKAGE)
                     local newPosition = npcUtil.pickNewPosition(npc:getID(), positionTable)
                     npc:setPos(newPosition.x, newPosition.y, newPosition.z)
-                    return quest:messageSpecial(zones[player:getZoneID()].text.KEYITEM_OBTAINED, xi.ki.MUNAHDAS_PACKAGE)
+                    return quest:addKeyItem(xi.ki.MUNAHDAS_PACKAGE)
                 end,
             },
         },
