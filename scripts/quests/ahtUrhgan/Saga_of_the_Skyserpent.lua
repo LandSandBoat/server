@@ -64,8 +64,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     quest:setVar(player, 'Prog', 1)
-                    player:addKeyItem(xi.ki.LILAC_RIBBON)
-                    return quest:messageSpecial(zones[player:getZoneID()].text.KEYITEM_OBTAINED, xi.ki.LILAC_RIBBON)
+                    return quest:keyItem(xi.ki.LILAC_RIBBON)
                 end,
             },
         },
