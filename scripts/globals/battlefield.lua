@@ -374,7 +374,8 @@ function Battlefield:onEntryEventUpdate(player, csid, option, extras)
         return false
     end
 
-    if bit.rshift(option, 4) ~= self.menuBit then
+    local value = bit.rshift(option, 4)
+    if value ~= self.menuBit then
         return false
     end
 
