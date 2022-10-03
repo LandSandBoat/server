@@ -32,7 +32,7 @@ CDeathState::CDeathState(CBattleEntity* PEntity, duration death_time)
 : CState(PEntity, PEntity->targid)
 , m_PEntity(PEntity)
 , m_deathTime(death_time)
-, m_raiseTime(GetEntryTime())
+, m_raiseTime(GetEntryTime() + 8s)
 {
     m_PEntity->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DEATH, true);
 
@@ -55,7 +55,7 @@ bool CDeathState::Update(time_point tick)
         Complete();
         m_PEntity->OnDeathTimer();
     }
-    else if (m_PEntity->objtype == TYPE_PC && tick > GetEntryTime() + 8s && !IsCompleted() && !m_raiseSent && m_PEntity->isDead())
+    else if (m_PEntity->objtype == TYPE_PC && tick > m_raiseTime && !IsCompleted() && !m_raiseSent && m_PEntity->isDead())
     {
         auto* PChar = static_cast<CCharEntity*>(m_PEntity);
         if (PChar->m_hasRaise)
@@ -65,4 +65,10 @@ bool CDeathState::Update(time_point tick)
         }
     }
     return false;
+}
+
+void CDeathState::allowSendRaise()
+{
+    m_raiseTime = server_clock::now() + 12s;
+    m_raiseSent = false;
 }

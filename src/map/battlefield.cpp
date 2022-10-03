@@ -510,6 +510,16 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
             PChar->StatusEffectContainer->DelStatusEffect(EFFECT_LEVEL_RESTRICTION);
         }
 
+        if (PChar->isDead())
+        {
+            auto state = dynamic_cast<CDeathState*>(PChar->PAI->GetCurrentState());
+            if (state)
+            {
+                state->allowSendRaise();
+            }
+        }
+
+
         m_EnteredPlayers.erase(m_EnteredPlayers.find(PEntity->id));
 
         if (leavecode != BATTLEFIELD_LEAVE_CODE_WARPDC)
