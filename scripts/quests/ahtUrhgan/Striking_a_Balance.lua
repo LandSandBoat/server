@@ -184,7 +184,7 @@ quest.sections =
                     quest:setVar(player, 'Prog', 4)
                     local newPosition = npcUtil.pickNewPosition(npc:getID(), positionTable)
                     npc:setPos(newPosition.x, newPosition.y, newPosition.z)
-                    return quest:addKeyItem(xi.ki.MUNAHDAS_PACKAGE)
+                    return quest:keyItem(xi.ki.MUNAHDAS_PACKAGE)
                 end,
             },
         },
