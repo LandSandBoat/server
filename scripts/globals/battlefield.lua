@@ -211,6 +211,7 @@ function Battlefield:register()
                 [32001] = utils.bind(self.onEventFinishWin, self),
                 [32002] = utils.bind(self.onEventFinishLeave, self),
                 [32003] = utils.bind(self.onEventFinishExit, self),
+                [32004] = utils.bind(self.onEventFinishBattlefield, self),
             }
         })
     end
@@ -370,7 +371,7 @@ end
 
 function Battlefield:onEntryEventUpdate(player, csid, option, extras)
     if option == 0 or option == 255 then
-        -- todo: check if battlefields full, check party member requiremenst
+        -- todo: check if battlefields full, check party member requirements
         return false
     end
 
@@ -490,6 +491,9 @@ function Battlefield:onEventFinishExit(player, csid, option)
     if option == 4 and player:getBattlefield() then
         player:leaveBattlefield(1)
     end
+end
+
+function Battlefield:onEventFinishBattlefield(player, csid, option)
 end
 
 function Battlefield:onBattlefieldInitialise(battlefield)
