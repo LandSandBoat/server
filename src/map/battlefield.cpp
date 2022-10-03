@@ -922,7 +922,7 @@ void CBattlefield::handleDeath(CBaseEntity* PEntity)
 
                 if (group.deathCallback.valid())
                 {
-                    group.deathCallback(CLuaBaseEntity(PEntity), group.deathCount);
+                    group.deathCallback(CLuaBattlefield(this), CLuaBaseEntity(PEntity), group.deathCount);
                 }
 
                 if (group.allDeathCallback.valid() && group.deathCount >= group.mobIds.size())
@@ -940,13 +940,13 @@ void CBattlefield::handleDeath(CBaseEntity* PEntity)
 
                     if (deathCount == group.mobIds.size())
                     {
-                        group.allDeathCallback(CLuaBaseEntity(PEntity));
+                        group.allDeathCallback(CLuaBattlefield(this), CLuaBaseEntity(PEntity));
                     }
                 }
 
                 if (group.randomDeathCallback.valid() && mobId == group.randomMobId)
                 {
-                    group.randomDeathCallback(CLuaBaseEntity(PEntity));
+                    group.randomDeathCallback(CLuaBattlefield(this), CLuaBaseEntity(PEntity));
                 }
                 break;
             }

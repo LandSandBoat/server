@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -409,7 +409,7 @@ void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleAreas)
             {
                 mobs.add(CLuaBaseEntity(entity));
             }
-            setup(mobs);
+            setup(this, mobs);
         }
 
         bool superlink = groupData.get_or("superlink", false);

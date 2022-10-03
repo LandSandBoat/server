@@ -659,14 +659,11 @@ function Battlefield:addEssentialMobs(mobNames)
     table.insert(self.groups,{
         mobs = mobNames,
         superlink = true,
-        allDeath = function(mob)
-            self:handleAllMonstersDefeated(mob)
-        end,
+        allDeath = utils.bind(self.handleAllMonstersDefeated, self),
     })
 end
 
-function Battlefield:handleAllMonstersDefeated(mob)
-    local battlefield = mob:getBattlefield()
+function Battlefield:handleAllMonstersDefeated(battlefield, mob)
     local crateId = battlefield:getArmouryCrate()
     if crateId ~= 0 then
         local crate = GetNPCByID(crateId)
