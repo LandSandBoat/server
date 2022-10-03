@@ -1598,6 +1598,7 @@ void CBattleEntity::OnCastInterrupted(CMagicState& state, action_t& action, MSGB
         action.actiontype = ACTION_MAGIC_INTERRUPT;
         action.actionid   = static_cast<uint16>(PSpell->getID());
         action.spellgroup = PSpell->getSpellGroup();
+        action.recast     = 2; // seems hardcoded to 2 from server no matter the spell upon interrupt
 
         actionList_t& actionList  = action.getNewActionList();
         actionList.ActionTargetID = id;
@@ -1642,6 +1643,37 @@ void CBattleEntity::OnChangeTarget(CBattleEntity* PTarget)
 {
 }
 
+void CBattleEntity::setActionParalyzed(action_t& action, CBattleEntity* PTarget)
+{
+    if (PTarget)
+    {
+        actionList_t& actionList  = action.getNewActionList();
+        actionList.ActionTargetID = PTarget->id;
+        action.id                 = this->id;
+        action.actiontype         = ACTION_MAGIC_FINISH; // all "is paralyzed" messages are cat 4
+
+        actionTarget_t& actionTarget = actionList.getNewActionTarget();
+        actionTarget.animation       = 0x1FC; // Seems hardcoded, two bits away from 0x1FF
+        actionTarget.messageID       = MSGBASIC_IS_PARALYZED_2;
+        actionTarget.param           = 0;
+    }
+}
+void CBattleEntity::setActionIntimidated(action_t& action, CBattleEntity* PTarget)
+{
+    if (PTarget)
+    {
+        actionList_t& actionList  = action.getNewActionList();
+        actionList.ActionTargetID = PTarget->id;
+        action.id                 = this->id;
+        action.actiontype         = ACTION_MAGIC_FINISH; // all "intimidated" messages are cat 4
+
+        actionTarget_t& actionTarget = actionList.getNewActionTarget();
+        actionTarget.animation       = 0x1FC; // Seems hardcoded, two bits away from 0x1FF
+        actionTarget.messageID       = MSGBASIC_IS_INTIMIDATED;
+        actionTarget.param           = 0;
+    }
+}
+
 CBattleEntity* CBattleEntity::GetBattleTarget()
 {
     return static_cast<CBattleEntity*>(GetEntity(GetBattleTargetID()));
@@ -1658,16 +1690,20 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
         PTarget->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
     }
 
+    battleutils::ClaimMob(PTarget, this); // Mobs get claimed whether or not your attack actually is intimidated/paralyzed
+    this->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_ATTACK | EFFECTFLAG_DETECTABLE);
+    PTarget->LastAttacked = server_clock::now();
+
     if (battleutils::IsParalyzed(this))
     {
-        loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(this, PTarget, 0, 0, MSGBASIC_IS_PARALYZED));
-        return false;
+        setActionParalyzed(action, PTarget);
+        return true;
     }
 
     if (battleutils::IsIntimidated(this, PTarget))
     {
-        loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(this, PTarget, 0, 0, MSGBASIC_IS_INTIMIDATED));
-        return false;
+        setActionIntimidated(action, PTarget);
+        return true;
     }
 
     // Create a new attack round.
@@ -1943,15 +1979,12 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
             break;
         }
     }
-    battleutils::ClaimMob(PTarget, this);
+
     PAI->EventHandler.triggerListener("ATTACK", CLuaBaseEntity(this), CLuaBaseEntity(PTarget), &action);
     PTarget->PAI->EventHandler.triggerListener("ATTACKED", CLuaBaseEntity(PTarget), CLuaBaseEntity(this), &action);
-    PTarget->LastAttacked = server_clock::now();
     /////////////////////////////////////////////////////////////////////////////////////////////
     // End of attack loop
     /////////////////////////////////////////////////////////////////////////////////////////////
-
-    this->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_ATTACK | EFFECTFLAG_DETECTABLE);
 
     return true;
 }

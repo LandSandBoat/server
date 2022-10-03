@@ -710,6 +710,10 @@ public:
     virtual void OnWeaponSkillFinished(CWeaponSkillState& state, action_t& action);
     virtual void OnChangeTarget(CBattleEntity* PTarget);
 
+    // Used to set paralyzed/intimidation action for JA & auto attack
+    void setActionParalyzed(action_t& action, CBattleEntity* PTarget);
+    void setActionIntimidated(action_t& action, CBattleEntity* PTarget);
+
     virtual void OnAbility(CAbilityState&, action_t&)
     {
     }
