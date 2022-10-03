@@ -95,8 +95,8 @@ end
 --  - timeLimit: Time in seconds alotted to complete the battlefield before being ejected (required)
 --  - menuBit: The bit used to communicate with the client on which menu item this battlefield is (required)
 --  - area: Some battlefields has multiple areas (Burning Circles) while others have fixed areas (Apollyon). Set to have a fixed area. (optional)
---  - entryNPC: The name of the NPC used for entering
---  - exitNPC: The name of the NPC used for exiting
+--  - entryNpc: The name of the NPC used for entering
+--  - exitNpc: The name of the NPC used for exiting
 --  - allowSubjob: Determines if character subjobs are enabled or disabled upon entry. Defaults to true. (optional)
 --  - hasWipeGrace: Grants players a 3 minute grace period on a full wipe before ejecting them. Defaults to true. (optional)
 --  - canLoseExp: Determines if a character loses experience points upon death while inside the battlefield. Defaults to true. (optional)
@@ -188,7 +188,7 @@ function Battlefield:register()
             setupEvents = false
 
             -- Do not setup npcs if there is another battlefield using the same entry npc
-            if self.entryNpc == content.entryNPC then
+            if self.entryNpc == content.entryNpc then
                 setupEntryNpc = false
             end
             if self.exitNpc == content.exitNpc then
