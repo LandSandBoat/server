@@ -3101,6 +3101,7 @@ xi.items =
     FAITH_TORQUE                    = 15512,
     TEMPERANCE_TORQUE               = 15513,
     LOVE_TORQUE                     = 15514,
+    MERROW_NO_17_LOCKET             = 15518,
     STORM_MUFFLER                   = 15519,
     STORM_TORQUE                    = 15520,
     TEMPERED_CHAIN                  = 15521,
