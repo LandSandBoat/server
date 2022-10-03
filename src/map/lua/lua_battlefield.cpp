@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
 Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -317,18 +317,22 @@ void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleAreas)
         std::set<uint32> entityIds;
         for (auto entry : groups)
         {
-            sol::table groupData = entry.second.as<sol::table>();
-            auto       mobNames  = groupData.get<std::vector<std::string>>("mobs");
-
             QueryByNameResult_t groupEntities;
-            for (const std::string& name : mobNames)
+            sol::table groupData = entry.second.as<sol::table>();
+
+            auto groupMobs = groupData["mobs"];
+            if (groupMobs.valid())
             {
-                const QueryByNameResult_t& result = m_PLuaBattlefield->GetZone()->queryEntitiesByName(name);
-                for (CBaseEntity* entity : result)
+                auto mobNames = groupMobs.get<std::vector<std::string>>();
+                for (const std::string& name : mobNames)
                 {
-                    entityIds.insert(entity->id);
-                    lowestId  = std::min(lowestId, entity->id);
-                    highestId = std::max(highestId, entity->id);
+                    const QueryByNameResult_t& result = m_PLuaBattlefield->GetZone()->queryEntitiesByName(name);
+                    for (CBaseEntity* entity : result)
+                    {
+                        entityIds.insert(entity->id);
+                        lowestId  = std::min(lowestId, entity->id);
+                        highestId = std::max(highestId, entity->id);
+                    }
                 }
             }
         }
@@ -370,17 +374,44 @@ void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleAreas)
     for (auto entry : groups)
     {
         sol::table groupData = entry.second.as<sol::table>();
-        auto       mobNames  = groupData.get<std::vector<std::string>>("mobs");
+
+        QueryByNameResult_t groupEntities;
 
         // Lookup mob ids given the provided names
-        QueryByNameResult_t groupEntities;
-        for (const std::string& name : mobNames)
+        auto groupMobs = groupData["mobs"];
+        if (groupMobs.valid())
         {
-            const QueryByNameResult_t& result = m_PLuaBattlefield->GetZone()->queryEntitiesByName(name);
-            for (CBaseEntity* entity : result)
+            auto mobNames = groupMobs.get<std::vector<std::string>>();
+            for (const std::string& name : mobNames)
             {
-                if (entity->id >= lowestId && entity->id <= highestId)
+                const QueryByNameResult_t& result = m_PLuaBattlefield->GetZone()->queryEntitiesByName(name);
+                for (CBaseEntity* entity : result)
                 {
+                    if (entity->id >= lowestId && entity->id <= highestId)
+                    {
+                        groupEntities.push_back(entity);
+                        if (entities.find(entity->id) == entities.end())
+                        {
+                            m_PLuaBattlefield->InsertEntity(entity, true);
+                            entities.insert(entity->id);
+                        }
+                    }
+                }
+            }
+        }
+
+        // Look to see if there have been any mob ids specifically set for this battlefield.
+        // They need to be in the format of { { id, ... }, { ... } } with each subtable being an area
+        auto groupMobIds = groupData["mobIds"];
+        if (hasMultipleAreas && groupMobIds.valid())
+        {
+            auto  mobIds = groupMobIds.get<std::vector<std::vector<uint32>>>();
+            uint8 area   = m_PLuaBattlefield->GetArea() - 1;
+            if (area < mobIds.size())
+            {
+                for (uint32 mobid : mobIds[area])
+                {
+                    CBaseEntity* entity = zoneutils::GetEntity(mobid, TYPE_MOB);
                     groupEntities.push_back(entity);
                     if (entities.find(entity->id) == entities.end())
                     {
