@@ -7,5 +7,7 @@ return {
     ['Maudaal']            = { event = 240 },
     ['Nadee_Periyaha']     = { event = 90 },
     ['Rodin-Comidin']      = { event = 665 },
+    ['Saliyahf']           = { event = 700 },
     ['Waoud']              = { event = 61 },
+    ['Wazyih']             = { event = 699 },
 }
