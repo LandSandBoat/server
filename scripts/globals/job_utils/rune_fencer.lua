@@ -380,7 +380,9 @@ xi.job_utils.rune_fencer.useVallationValiance = function(player, target, ability
     if player:getID() ~= target:getID() then -- Only the caster can apply effects, including to the party if valiance.
 
         if abilityID == xi.jobAbility.VALIANCE and target:hasStatusEffect(xi.effect.VALLATION) or target:hasStatusEffect(xi.effect.LIEMENT) then -- Valiance is being used on them, and they have Vallation already up or they have liement
-            action:messageID(target:getID(), xi.msg.basic.NO_EFFECT) -- "No effect on <Target>"
+            ability:setMsg(xi.msg.basic.NO_EFFECT) -- "No effect on <Target>"
+        else
+            ability:setMsg(xi.msg.basic.VALIANCE_GAIN_PARTY)
         end
         return
     end
@@ -416,15 +418,15 @@ xi.job_utils.rune_fencer.useVallationValiance = function(player, target, ability
                 if inspirationFCBonus > 0 then -- Inspiration FC is not applied unless Valiance is applied, tested on retail with 2 RUN in a party
                     member:addStatusEffect(xi.effect.FAST_CAST, inspirationFCBonus, 0, duration)
                 end
-            elseif member:getID() == player:getID() then -- caster has Vallation, set no effect message.
-                    action:messageID(player:getID(), xi.msg.basic.JA_NO_EFFECT_2) -- "<Player> uses Valiance.\nNo effect on <Player>."
+            elseif member:getID() == player:getID() then    -- caster has Vallation, set no effect message.
+                ability:setMsg(xi.msg.basic.JA_NO_EFFECT_2) -- "<Player> uses Valiance.\nNo effect on <Player>."
             end
 
         end
     else -- apply effects to target (Vallation)
 
         if target:hasStatusEffect(xi.effect.LIEMENT) then -- no effect if Liement is up
-            action:messageID(player:getID(), xi.msg.basic.JA_NO_EFFECT_2)
+            ability:setMsg(xi.msg.basic.JA_NO_EFFECT_2)
         else
             local duration = 120 + jobPointBonusDuration
 
@@ -625,7 +627,7 @@ xi.job_utils.rune_fencer.useSwipeLunge = function(player, target, ability, actio
     end
 
     if shadowsHit == numHits and cumulativeDamage == 0 then
-        action:messageID(target:getID(), xi.msg.basic.SHADOW_ABSORB) -- set message to blinked hit(s)
+        ability:setMsg(xi.msg.basic.SHADOW_ABSORB) -- set message to blinked hit(s)
         action:reaction(target:getID(), xi.reaction.EVADE + xi.reaction.ABILITY) -- TODO: confirm these bit flags for reaction
 
         return shadowsHit
@@ -636,7 +638,7 @@ xi.job_utils.rune_fencer.useSwipeLunge = function(player, target, ability, actio
     action:reaction(target:getID(), xi.reaction.HIT + xi.reaction.ABILITY)
 
     if cumulativeDamage < 0 or (cumulativeDamage == 0 and absorbed) then
-        action:messageID(target:getID(), xi.msg.basic.JA_RECOVERS_HP)
+        ability:setMsg(xi.msg.basic.JA_RECOVERS_HP)
     end
 
     if magicBursted then -- Note: the vanilla client does not report a healed magic burst, but this bit is set.
@@ -652,14 +654,14 @@ end
 local function addPflugResistType(type, effect, power)
     local pflugResistTypes =
     {
-        [xi.effect.IGNIS]    = {xi.mod.PARALYZERES, xi.mod.BINDRES},
-        [xi.effect.GELUS]    = {xi.mod.SILENCERES, xi.mod.GRAVITYRES},
-        [xi.effect.FLABRA]   = {xi.mod.PETRIFYRES, xi.mod.SLOWRES},
-        [xi.effect.TELLUS]   = {xi.mod.STUNRES},
-        [xi.effect.SULPOR]   = {xi.mod.POISONRES},
-        [xi.effect.UNDA]     = {xi.mod.AMNESIARES, xi.mod.PLAGUERES},
-        [xi.effect.LUX]      = {xi.mod.SLEEPRES, xi.mod.BLINDRES, xi.mod.CURSERES},
-        [xi.effect.TENEBRAE] = {xi.mod.CHARMRES},
+        [xi.effect.IGNIS]    = { xi.mod.PARALYZERES, xi.mod.BINDRES },
+        [xi.effect.GELUS]    = { xi.mod.SILENCERES, xi.mod.GRAVITYRES },
+        [xi.effect.FLABRA]   = { xi.mod.PETRIFYRES, xi.mod.SLOWRES },
+        [xi.effect.TELLUS]   = { xi.mod.STUNRES },
+        [xi.effect.SULPOR]   = { xi.mod.POISONRES },
+        [xi.effect.UNDA]     = { xi.mod.AMNESIARES, xi.mod.PLAGUERES },
+        [xi.effect.LUX]      = { xi.mod.SLEEPRES, xi.mod.BLINDRES, xi.mod.CURSERES },
+        [xi.effect.TENEBRAE] = { xi.mod.CHARMRES },
     }
 
     local resistTypes = pflugResistTypes[type]

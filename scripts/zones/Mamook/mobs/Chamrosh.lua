@@ -5,7 +5,7 @@
 -- 2.5 mins. st form mimics all spells 2nd form cast spells from list only
 -- todo: when mimics a spell will cast the next tier spell
 -----------------------------------
-mixins = {require("scripts/mixins/rage")}
+mixins = { require("scripts/mixins/rage") }
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
@@ -62,7 +62,7 @@ entity.onMagicHit = function(caster, target, spell)
     return 1
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

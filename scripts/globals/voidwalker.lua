@@ -412,10 +412,10 @@ xi.voidwalker.onMobDespawn = function(mob)
     DespawnPet(mob)
 end
 
-xi.voidwalker.onMobDeath = function(mob, player, isKiller, keyItem)
+xi.voidwalker.onMobDeath = function(mob, player, optParams, keyItem)
     if player then
         local popkeyitem = mob:getLocalVar("[VoidWalker]PopedWith")
-        if isKiller then
+        if optParams.isKiller then
             local playerpoped = GetPlayerByID(mob:getLocalVar("[VoidWalker]PopedBy"))
             local alliance = player:getAlliance()
             local outOfParty = true
@@ -470,7 +470,7 @@ xi.voidwalker.onHealing = function(player)
         end
         mob:hideName(false)
         mob:setUntargetable(false)
-        mob:setStatus(xi.status.UPDATE)
+        mob:setStatus(xi.status.MOB)
         mob:updateClaim(player)
     elseif mobNearest.distance >= 300 then
         player:messageSpecial(zoneTextTable.VOIDWALKER_MOB_TOO_FAR, mobNearest.keyItem)

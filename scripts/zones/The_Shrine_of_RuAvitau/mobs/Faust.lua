@@ -7,7 +7,7 @@ local entity = {}
 
 local east = 0
 local north = 192
-local home = {740, -0.463, -99}
+local home = { 740, -0.463, -99 }
 
 local setFaustNextTurnTime = function(faust)
     faust:setLocalVar("NextTurnTime", os.time() + math.random(45, 75))
@@ -50,7 +50,7 @@ entity.onMobRoam = function(mob)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)

@@ -6,8 +6,8 @@ require("scripts/globals/status")
 local effect_object = {}
 
 effect_object.onEffectGain = function(target, effect)
-    local effectregain = {20, 50, 20, 20, 30, 30, 30, 40, 40, 10, 60, 0}
-    local effectregen = {4, 20, 6, 8, 10, 12, 14, 16, 18, 3, 25, 0}
+    local effectregain = { 20, 50, 20, 20, 30, 30, 30, 40, 40, 10, 60, 0 }
+    local effectregen = { 4, 20, 6, 8, 10, 12, 14, 16, 18, 3, 25, 0 }
     if (effect:getPower() > 69) then
         local rollnum = (effect:getPower() - 70)
         target:addPetMod(xi.mod.REGAIN, (effectregain[rollnum] + 35))
@@ -34,8 +34,8 @@ effect_object.onEffectTick = function(target, effect)
 end
 
 effect_object.onEffectLose = function(target, effect)
-    local effectregain = {20, 50, 20, 20, 30, 30, 30, 40, 40, 10, 60, 0}
-    local effectregen = {4, 20, 6, 8, 10, 12, 14, 16, 18, 3, 25, 0}
+    local effectregain = { 20, 50, 20, 20, 30, 30, 30, 40, 40, 10, 60, 0 }
+    local effectregen = { 4, 20, 6, 8, 10, 12, 14, 16, 18, 3, 25, 0 }
     if (effect:getPower() > 69) then
         local rollnum = (effect:getPower() - 70)
         target:delPetMod(xi.mod.REGAIN, (effectregain[rollnum] + 35))

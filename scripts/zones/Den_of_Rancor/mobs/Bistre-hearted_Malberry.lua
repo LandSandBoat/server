@@ -15,12 +15,12 @@ entity.onMobSpawn = function(mob)
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            {id = xi.jsa.MANAFONT, hpp = math.random(40, 95)},
+            { id = xi.jsa.MANAFONT, hpp = math.random(40, 95) },
         },
     })
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 397)
 end
 

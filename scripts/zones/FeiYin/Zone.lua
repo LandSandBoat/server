@@ -35,12 +35,6 @@ zone_object.onZoneIn = function(player, prevZone)
     if player:getCurrentMission(xi.mission.log_id.ACP) == xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_I then
         cs = 29
     elseif
-        prevZone == xi.zone.QUBIA_ARENA and
-        player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_FIRST_MEETING) == QUEST_ACCEPTED and
-        not player:hasKeyItem(xi.ki.LETTER_FROM_DALZAKK)
-    then
-        cs = 16 -- MNK AF
-    elseif
         prevZone == xi.zone.BEAUCEDINE_GLACIER and
         player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.PIEUJE_S_DECISION) == QUEST_ACCEPTED and
         player:getCharVar("pieujesDecisionCS") == 0
@@ -62,10 +56,7 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-    if csid == 16 then
-        player:addKeyItem(xi.ki.LETTER_FROM_DALZAKK)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LETTER_FROM_DALZAKK)
-    elseif csid == 19 then
+    if csid == 19 then
         player:setCharVar("pieujesDecisionCS", 1)
     elseif csid == 29 then
         player:completeMission(xi.mission.log_id.ACP, xi.mission.id.acp.THOSE_WHO_LURK_IN_SHADOWS_I)

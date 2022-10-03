@@ -2,7 +2,7 @@
 -- Area: Jugner Forest
 --   NM: Meteormauler Zhagtegg
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 local ID = require("scripts/zones/Jugner_Forest/IDs")
 -----------------------------------
 local entity = {}
@@ -43,7 +43,7 @@ entity.onMobRoam = function(mob)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)

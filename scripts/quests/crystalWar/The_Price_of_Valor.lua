@@ -181,7 +181,7 @@ quest.sections =
 
             ['Madthrasher_Zradbodd'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if quest:getVar(player, 'Prog') == 5 then
                         quest:setLocalVar(player, 'nmDefeated', 1)
                     end

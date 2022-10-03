@@ -1,5 +1,5 @@
 -----------------------------------
--- func: getcraftRank <craft skill or ID> {player}
+-- func: getcraftRank <craft skill or ID> (player)
 -- desc: returns target's RANK of specified craft skill
 -----------------------------------
 require("scripts/globals/status")
@@ -12,7 +12,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!getcraftRank <craft skill or ID> {player}")
+    player:PrintToPlayer("!getcraftRank <craft skill or ID> (player)")
 end
 
 function onTrigger(player, craftName, target)

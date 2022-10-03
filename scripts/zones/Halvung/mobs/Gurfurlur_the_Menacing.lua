@@ -3,7 +3,7 @@
 --  Mob: Gurfurlur the Menacing
 -- !pos -59.000 -23.000 3.000 62
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 local ID = require("scripts/zones/Halvung/IDs")
 require("scripts/globals/status")
 require("scripts/globals/titles")
@@ -46,7 +46,7 @@ entity.onMobDisengage = function(mob)
     for i = 1, 4 do DespawnMob(ID.mob.GURFURLUR_THE_MENACING + i) end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     player:addTitle(xi.title.TROLL_SUBJUGATOR)
     for i = 1, 4 do DespawnMob(ID.mob.GURFURLUR_THE_MENACING + i) end
 end

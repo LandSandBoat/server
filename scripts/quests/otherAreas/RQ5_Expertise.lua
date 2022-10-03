@@ -119,7 +119,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, {xi.items.SCREAM_FUNGUS, xi.items.LAND_CRAB_MEAT}) then
+                    if npcUtil.tradeHasExactly(trade, { xi.items.SCREAM_FUNGUS, xi.items.LAND_CRAB_MEAT }) then
                         return quest:progressEvent(103) -- Give ingredients.
                     end
                 end,

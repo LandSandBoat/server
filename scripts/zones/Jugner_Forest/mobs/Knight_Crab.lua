@@ -3,7 +3,7 @@
 --  Mob: Knight Crab
 -----------------------------------
 local ID = require("scripts/zones/Jugner_Forest/IDs")
-mixins = {require("scripts/mixins/rage")}
+mixins = { require("scripts/mixins/rage") }
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
@@ -20,7 +20,7 @@ entity.onMobSpawn = function(mob)
     mob:setLocalVar("[rage]timer", 300)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)

@@ -9,7 +9,7 @@ require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     -- Curses, Foiled A-Golem!?
     if player:hasKeyItem(xi.ki.SHANTOTTOS_NEW_SPELL) then
         player:delKeyItem(xi.ki.SHANTOTTOS_NEW_SPELL)

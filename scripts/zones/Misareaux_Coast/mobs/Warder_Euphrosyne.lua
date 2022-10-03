@@ -3,7 +3,7 @@
 --  Mob: Warder Euphrosyne
 -----------------------------------
 require('scripts/globals/missions')
-mixins = {require('scripts/mixins/warders_cop')}
+mixins = { require('scripts/mixins/warders_cop') }
 -----------------------------------
 local entity = {}
 
@@ -19,7 +19,7 @@ entity.onMobDisengage = function(mob)
     mob:setLocalVar('initiate', 0)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

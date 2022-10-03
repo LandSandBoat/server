@@ -104,25 +104,47 @@ void CLatentEffect::SetModPower(int16 power)
     m_ModPower = power;
 }
 
+bool CLatentEffect::ModOnItemOnly(Mod modID)
+{
+    if (modID == Mod::DMG ||
+        modID == Mod::ITEM_ADDEFFECT_TYPE ||
+        modID == Mod::ITEM_SUBEFFECT ||
+        modID == Mod::ITEM_ADDEFFECT_DMG ||
+        modID == Mod::ITEM_ADDEFFECT_CHANCE ||
+        modID == Mod::ITEM_ADDEFFECT_ELEMENT ||
+        modID == Mod::ITEM_ADDEFFECT_STATUS ||
+        modID == Mod::ITEM_ADDEFFECT_POWER ||
+        modID == Mod::ITEM_ADDEFFECT_DURATION)
+    {
+        return true;
+    }
+    return false;
+}
+
 bool CLatentEffect::Activate()
 {
     if (!IsActivated())
     {
-        // additional effect/dmg latents add mod to weapon, not player
-        if (GetModValue() == Mod::ITEM_ADDEFFECT_TYPE || GetModValue() == Mod::DMG)
+        // Additional effect/dmg latents add mod to item, not player
+        if (ModOnItemOnly(GetModValue()))
         {
-            CCharEntity* PChar  = (CCharEntity*)m_POwner;
-            CItemWeapon* weapon = (CItemWeapon*)PChar->getEquip((SLOTTYPE)GetSlot());
+            CCharEntity*    PChar = static_cast<CCharEntity*>(m_POwner);
+            CItemEquipment* item  = PChar->getEquip((SLOTTYPE)GetSlot());
 
-            weapon->addModifier(CModifier(GetModValue(), GetModPower()));
+            if (item)
+            {
+                item->addModifier(CModifier(GetModValue(), GetModPower()));
+                // ShowTrace("LATENT ACTIVATED: %d, Current item modifier value: %d", m_ModValue, item->getModifier(m_ModValue));
+            }
         }
+        // Other modifiers go on the player
         else
         {
             m_POwner->addModifier(m_ModValue, m_ModPower);
+            // ShowTrace("LATENT ACTIVATED: %d, Current value: %d", m_ModValue, m_POwner->getMod(m_ModValue));
         }
 
         m_Activated = true;
-        // printf("LATENT ACTIVATED: %d, Current value: %d\n", m_ModValue, m_POwner->getMod(m_ModValue));
         return true;
     }
     return false;
@@ -132,21 +154,20 @@ bool CLatentEffect::Deactivate()
 {
     if (IsActivated())
     {
-        // remove the modifier from weapon, not player
-        if (GetModValue() == Mod::ITEM_ADDEFFECT_TYPE || GetModValue() == Mod::DMG)
+        // Remove the modifier from item, not player
+        if (ModOnItemOnly(GetModValue()))
         {
-            CCharEntity* PChar  = (CCharEntity*)m_POwner;
-            CItemWeapon* weapon = (CItemWeapon*)PChar->getEquip((SLOTTYPE)GetSlot());
+            CCharEntity*    PChar = static_cast<CCharEntity*>(m_POwner);
+            CItemEquipment* item  = PChar->getEquip((SLOTTYPE)GetSlot());
 
-            int16 modPower = GetModPower();
-
-            if (weapon != nullptr && (weapon->isType(ITEM_EQUIPMENT) || weapon->isType(ITEM_WEAPON)))
+            if (item != nullptr && (item->isType(ITEM_EQUIPMENT) || item->isType(ITEM_WEAPON)))
             {
                 if (GetModValue() == Mod::ITEM_ADDEFFECT_TYPE)
                 {
-                    for (auto& i : weapon->modList)
+                    for (auto& i : item->modList)
                     {
-                        // ensure the additional effect is fully removed from the weapon
+                        // Ensure the additional effect is fully removed from the item,
+                        // because the code handling mods on items needs a rewrite.
                         if (i.getModID() == Mod::ITEM_ADDEFFECT_TYPE)
                         {
                             i.setModAmount(0);
@@ -155,10 +176,12 @@ bool CLatentEffect::Deactivate()
                 }
                 else
                 {
-                    weapon->addModifier(CModifier(GetModValue(), -modPower));
+                    // Todo: item modifier functions need rewrite (there is no delMod, and the input to addMod is different)
+                    item->addModifier(CModifier(GetModValue(), -GetModPower()));
                 }
             }
         }
+        // Remove other modifiers from player
         else
         {
             m_POwner->delModifier(m_ModValue, m_ModPower);

@@ -23,27 +23,27 @@ local npcData =
 {
     [xi.zone.PORT_SAN_DORIA] =
     {
-        [ 0] = {region = 1, x =   76.331, z = -128.655, offset = 0, npc = 'Answald'},
-        [ 1] = {region = 2, x =  -13.768, z =  -95.857, offset = 1, npc = 'Prietta'},
-        [ 2] = {region = 3, x =    0.750, z =  -81.438, offset = 2, npc = 'Miene'},
-        [ 3] = {region = 4, x =  -21.999, z = -106.877, offset = 3, npc = 'Portaure'},
-        [ 4] = {region = 5, x =  -37.821, z =   40.949, offset = 4, npc = 'Auvare'},
+        [ 0] = { region = 1, x =   76.331, z = -128.655, offset = 0, npc = 'Answald'  },
+        [ 1] = { region = 2, x =  -13.768, z =  -95.857, offset = 1, npc = 'Prietta'  },
+        [ 2] = { region = 3, x =    0.750, z =  -81.438, offset = 2, npc = 'Miene'    },
+        [ 3] = { region = 4, x =  -21.999, z = -106.877, offset = 3, npc = 'Portaure' },
+        [ 4] = { region = 5, x =  -37.821, z =   40.949, offset = 4, npc = 'Auvare'   },
     },
     [xi.zone.NORTHERN_SAN_DORIA] =
     {
-        [ 5] = {region = 2, x =  146.420, z =  127.601, offset = 0, npc = 'Coullene'},
-        [ 6] = {region = 3, x = -159.082, z =  253.794, offset = 1, npc = 'Guilberdrier'},
-        [ 7] = {region = 4, x = -156.242, z =   49.184, offset = 2, npc = 'Boncort'},
-        [ 8] = {region = 5, x = -127.355, z =  130.461, offset = 3, npc = 'Capiria'},
-        [ 9] = {region = 6, x = -157.524, z =  263.818, offset = 4, npc = 'Villion'},
+        [ 5] = { region = 2, x =  146.420, z =  127.601, offset = 0, npc = 'Coullene'     },
+        [ 6] = { region = 3, x = -159.082, z =  253.794, offset = 1, npc = 'Guilberdrier' },
+        [ 7] = { region = 4, x = -156.242, z =   49.184, offset = 2, npc = 'Boncort'      },
+        [ 8] = { region = 5, x = -127.355, z =  130.461, offset = 3, npc = 'Capiria'      },
+        [ 9] = { region = 6, x = -157.524, z =  263.818, offset = 4, npc = 'Villion'      },
     },
     [xi.zone.SOUTHERN_SAN_DORIA] =
     {
-        [10] = {region = 2, x =   33.033, z =  -30.119, offset = 0, npc = 'Blendare'},
-        [11] = {region = 3, x =   69.895, z =   41.073, offset = 1, npc = 'Rosel'},
-        [12] = {region = 4, x =  105.147, z =  -16.735, offset = 3, npc = 'Maugie'},
-        [13] = {region = 5, x =   80.378, z =  -24.644, offset = 5, npc = 'Adaunel'},
-        [14] = {region = 6, x = -136.322, z =   21.958, offset = 7, npc = 'Leuveret'},
+        [10] = { region = 2, x =   33.033, z =  -30.119, offset = 0, npc = 'Blendare' },
+        [11] = { region = 3, x =   69.895, z =   41.073, offset = 1, npc = 'Rosel'    },
+        [12] = { region = 4, x =  105.147, z =  -16.735, offset = 3, npc = 'Maugie'   },
+        [13] = { region = 5, x =   80.378, z =  -24.644, offset = 5, npc = 'Adaunel'  },
+        [14] = { region = 6, x = -136.322, z =   21.958, offset = 7, npc = 'Leuveret' },
     },
 }
 

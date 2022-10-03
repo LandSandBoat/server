@@ -48,7 +48,7 @@ mission.sections =
 
             ['Siren'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     player:setMissionStatus(mission.areaId, 1)
                 end,
             },

@@ -139,7 +139,7 @@ mission.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, {{ xi.items.PARANA_SHIELD, 2 }}) and
+                        npcUtil.tradeHasExactly(trade, { { xi.items.PARANA_SHIELD, 2 } }) and
                         player:getMissionStatus(mission.areaId) == 6
                     then
                         return mission:progressEvent(457) -- Has delivered shield

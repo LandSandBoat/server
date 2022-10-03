@@ -68,7 +68,7 @@ xi.mogTablet.zones =
     [28] = xi.zone.VALLEY_OF_SORROWS,
 }
 
--- [zoneId] = { { tabletZoneOffset, x, y, z }, {...}, {...}, }
+-- [zoneId] = { { tabletZoneOffset, x, y, z }, { ... }, { ... }, }
 xi.mogTablet.locations =
 {
     [xi.zone.VALKURM_DUNES] =

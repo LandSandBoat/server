@@ -7,8 +7,7 @@
 -- Recast Time: 5:00
 -- Duration: 0:30
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
+require("scripts/globals/job_utils/paladin")
 -----------------------------------
 local ability_object = {}
 
@@ -17,8 +16,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    local duration = 30 + player:getMod(xi.mod.RAMPART_DURATION)
-    target:addStatusEffect(xi.effect.RAMPART, 2500, 0, duration)
+    xi.job_utils.paladin.useRampart(player, target, ability)
 end
 
 return ability_object

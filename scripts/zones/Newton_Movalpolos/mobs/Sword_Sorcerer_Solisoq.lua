@@ -13,7 +13,7 @@ end
 entity.onMobFight = function(mob, player)
     -- Uses Chainspell every 25%
     local chainCount = mob:getLocalVar("chainCount")
-    local hpTrigger = {75,50,25}
+    local hpTrigger = { 75, 50, 25 }
     for k,v in pairs(hpTrigger) do
         if mob:getHPP() <= v and chainCount == k and not mob:hasStatusEffect(xi.effect.CHAINSPELL) then
             mob:useMobAbility(692)
@@ -22,7 +22,7 @@ entity.onMobFight = function(mob, player)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 249)
 end
 

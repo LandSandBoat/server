@@ -61,7 +61,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     for _, tradeOption in ipairs(tradeItems) do
-                        if npcUtil.tradeHasExactly(trade, { tradeOption, { xi.items.TREMORSTONE, 1 }}) then
+                        if npcUtil.tradeHasExactly(trade, { tradeOption, { xi.items.TREMORSTONE, 1 } }) then
                             return quest:progressEvent(22)
                         end
                     end

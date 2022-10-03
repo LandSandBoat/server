@@ -38,6 +38,19 @@ xi = xi or {}
 xi.chocoboRaising = xi.chocoboRaising or {}
 xi.chocoboRaising.chocoState = xi.chocoboRaising.chocoState or {}
 
+-- FOR HEAVILY-IN-DEVELOPMET TESTING, you can force these setting:
+-- TODO: When ready for release, publish these to main settings files.
+xi.settings.main.ENABLE_CHOCOBO_RAISING = false
+xi.settings.main.DEBUG_CHOCOBO_RAISING = false
+
+local debug = function(player, ...)
+    if xi.settings.main.DEBUG_CHOCOBO_RAISING then
+        local t = { ... }
+        print(unpack(t))
+        player:PrintToPlayer(table.concat(t, " "), xi.msg.channel.SYSTEM_3, "")
+    end
+end
+
 -----------------------------------
 -- Settings
 -----------------------------------
@@ -575,8 +588,8 @@ xi.chocoboRaising.initChocoboData = function(player)
 
     chocoState.age = math.floor((os.time() - chocoState.created) / xi.chocoboRaising.dayLength) + 1
 
-    print("chocoState.age = " .. chocoState.age)
-    print("chocoState.last_update_age = " .. chocoState.last_update_age)
+    debug(player, "chocoState.age = " .. chocoState.age)
+    debug(player, "chocoState.last_update_age = " .. chocoState.last_update_age)
 
     chocoState.affectionRank = affectionRank.LIKES
 
@@ -598,7 +611,7 @@ xi.chocoboRaising.initChocoboData = function(player)
     chocoState.report.day_end   = chocoState.age
     local reportLength = chocoState.report.day_end - chocoState.report.day_start
 
-    print("reportLength", reportLength)
+    debug(player, "reportLength", reportLength)
 
     chocoState.last_update_age = chocoState.age
 
@@ -654,7 +667,7 @@ xi.chocoboRaising.initChocoboData = function(player)
     -- thing, they will be condensed down to a single Day1-Day3 update.
 
     local cutEvent = function(t, eStart, eEnd, csList)
-        table.insert(t, { eStart, eEnd, csList})
+        table.insert(t, { eStart, eEnd, csList })
     end
 
     local condensed_events = {}
@@ -665,7 +678,8 @@ xi.chocoboRaising.initChocoboData = function(player)
 
     -- Each event is a table of cs's
     for idx, entry in pairs(events) do
-        --print(entry)
+        -- DEBUG
+        -- print(entry)
         -- Only condense days with the same table contents
         if compareTables(entry[2], current_event_cs_table) then
             -- Increase the span
@@ -689,7 +703,8 @@ xi.chocoboRaising.initChocoboData = function(player)
     -- Step 4: Assign this report to the cache
     chocoState.report.events = condensed_events
 
-    --print(condensed_events)
+    -- DEBUG
+    -- print(condensed_events)
 
     return chocoState
 end
@@ -786,18 +801,28 @@ xi.chocoboRaising.startCutscene = function(player, npc, trade)
 end
 
 xi.chocoboRaising.onTradeVCSTrainer = function(player, npc, trade)
-    if xi.setting.main.ENABLE_CHOCOBO_RAISING then
-        xi.chocoboRaising.startCutscene(player, npc, trade)
+    if not xi.settings.main.ENABLE_CHOCOBO_RAISING then
+        player:startEvent(csidTable[player:getZoneID()][1])
+        return
     end
+
+    xi.chocoboRaising.startCutscene(player, npc, trade)
 end
 
 xi.chocoboRaising.onTriggerVCSTrainer = function(player, npc)
-    if xi.setting.main.ENABLE_CHOCOBO_RAISING then
-        xi.chocoboRaising.startCutscene(player, npc, nil)
+    if not xi.settings.main.ENABLE_CHOCOBO_RAISING then
+        player:startEvent(csidTable[player:getZoneID()][1])
+        return
     end
+
+    xi.chocoboRaising.startCutscene(player, npc, nil)
 end
 
 xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
+    if not xi.settings.main.ENABLE_CHOCOBO_RAISING then
+        return
+    end
+
     -- TODO: The majority of logic is controlled by the option, which is
     -- sent in by the client. We can't trust this isn't tampered with.
     -- We shouldtrack which options are valid at which time.
@@ -819,7 +844,7 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
             return
         end
 
-        print("Update:", string.format("%i", option))
+        debug(player, "Update:", string.format("%i", option))
 
         -- Setting the name for a chocobo: when the name is
         -- applied from the menu the name offsets (from the menu)
@@ -842,7 +867,7 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
                 chocoState.first_name = fname
                 chocoState.last_name = lname
 
-                print(string.format("%s updating chocobo name: %s %s", player:getName(), fname, lname))
+                debug(player, string.format("%s updating chocobo name: %s %s", player:getName(), fname, lname))
 
                 -- Write to cache
                 xi.chocoboRaising.chocoState[player:getID()] = chocoState
@@ -1459,7 +1484,7 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
                 local locationOffset = raisingLocation[player:getZoneID()] * 256
                 local csToPlay = locationOffset + csOffset
 
-                print("Playing CS: " .. csToPlay .. " (" .. csOffset .. ")")
+                debug(player, "Playing CS: " .. csToPlay .. " (" .. csOffset .. ")")
                 table.remove(chocoState.csList, 1)
 
                 local currentAgeOfChocoboDuringCutscene = 0
@@ -1501,9 +1526,7 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
             end,
             [482] = function() -- DEBUG: Go forward 1 unit
                 -- TODO: Split stored age and time of creation so age can be manipulated
-                chocoState.age = chocoState.age + 1
-                xi.chocoboRaising.chocoState[player:getID()] = chocoState
-                player:setChocoboRaisingInfo(chocoState)
+                player:updateEvent(0, 0, 0, 0, 0, 0, 0, 0)
             end,
             [229] = function() -- DEBUG: Abilities print
                 player:updateEvent(1, packStats1(chocoState), packStats2(chocoState), 0, 0, 0, 0, 0)
@@ -1524,6 +1547,10 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
 end
 
 xi.chocoboRaising.onEventFinishVCSTrainer = function(player, csid, option)
+    if not xi.settings.main.ENABLE_CHOCOBO_RAISING then
+        return
+    end
+
     local mainCsid = csidTable[player:getZoneID()][2]
     local tradeCsid = csidTable[player:getZoneID()][3]
     local chocoState = xi.chocoboRaising.chocoState[player:getID()]

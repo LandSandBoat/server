@@ -52,7 +52,6 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
-
     if csid == 0 then
         player:messageSpecial(ID.text.ITEM_OBTAINED, 536)
     end

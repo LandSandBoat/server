@@ -5,7 +5,7 @@
 require("scripts/globals/status")
 require("scripts/globals/limbus")
 require("scripts/globals/pathfind")
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 local ID = require("scripts/zones/Temenos/IDs")
 -----------------------------------
 local entity = {}
@@ -15,18 +15,20 @@ local path =
 {
     [2] =
     {
-        {-424.000, -80.000, 420.500},
-        {-456.000, -80.000, 420.500}
+        { -424.000, -80.000, 420.500 },
+        { -456.000, -80.000, 420.500 },
     },
+
     [6] =
     {
-        {-460.500, -80.000, 416.000},
-        {-460.500, -80.000, 408.000}
+        { -460.500, -80.000, 416.000 },
+        { -460.500, -80.000, 408.000 },
     },
+
     [10] =
     {
-        {-419.500, -80.000, 416.000},
-        {-419.500, -80.000, 408.000}
+        { -419.500, -80.000, 416.000 },
+        { -419.500, -80.000, 408.000 },
     },
 }
 
@@ -45,8 +47,8 @@ entity.onMobRoam = function(mob)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller or optParams.noKiller then
         if GetNPCByID(ID.npc.TEMENOS_N_GATE[6]):getAnimation() == xi.animation.CLOSE_DOOR then
             xi.limbus.handleDoors(mob:getBattlefield(), true, ID.npc.TEMENOS_N_GATE[6])
         end

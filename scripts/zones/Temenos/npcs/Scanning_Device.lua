@@ -10,7 +10,7 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
     if npcUtil.tradeHas(trade, 2127) then
         player:startEvent(121, 257)
-    elseif npcUtil.tradeHas(trade, {1986, 1908, 1907}) then
+    elseif npcUtil.tradeHas(trade, { 1986, 1908, 1907 }) then
         player:startEvent(121, 17)
     elseif npcUtil.tradeHas(trade, 1904) then
         player:startEvent(121, 33)

@@ -2,7 +2,7 @@
 -- Area: Temple of Uggalepih
 --   NM: Nio-A
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
@@ -19,7 +19,7 @@ entity.onMobSpawn = function(mob)
     mob:addMod(xi.mod.DMGMAGIC, 8000)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

@@ -9,7 +9,7 @@ local ID = require("scripts/zones/Batallia_Downs/IDs")
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 74, 2, xi.regime.type.FIELDS)
     if (xi.settings.main.ENABLE_ACP == 1 and (player:hasKeyItem(xi.ki.BOWL_OF_BLAND_GOBLIN_SALAD) == false) and player:getCurrentMission(xi.mission.log_id.ACP) >= xi.mission.id.acp.THE_ECHO_AWAKENS) then
         -- Guesstimating 15% chance

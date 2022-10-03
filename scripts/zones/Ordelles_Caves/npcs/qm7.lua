@@ -17,7 +17,7 @@ end
 
 entity.onTrigger = function(player, npc)
     if player:getCharVar("EcoStatus") == 1 and player:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) then
-        npcUtil.popFromQM(player, npc, ID.mob.NECROPLASM, {claim=true, look=true, hide = 0})
+        npcUtil.popFromQM(player, npc, ID.mob.NECROPLASM, { claim=true, look=true, hide = 0 })
     elseif player:getCharVar("EcoStatus") == 2 and not player:hasKeyItem(xi.ki.INDIGESTED_STALAGMITE) then
         npcUtil.giveKeyItem(player, xi.ki.INDIGESTED_STALAGMITE)
     else

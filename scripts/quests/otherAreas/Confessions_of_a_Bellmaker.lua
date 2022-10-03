@@ -57,7 +57,7 @@ quest.sections =
                     if quest:getVar(player, 'Prog') == 2 then
                         return quest:progressCutscene(102)
                     elseif quest:getVar(player, 'Prog') == 3 then
-                        return npcUtil.popFromQM(player, GetNPCByID(zones[player:getZoneID()].npc.STONE_MONUMENT), zones[player:getZoneID()].mob.ARCANE_PHANTASM, {hide = 0})
+                        return npcUtil.popFromQM(player, GetNPCByID(zones[player:getZoneID()].npc.STONE_MONUMENT), zones[player:getZoneID()].mob.ARCANE_PHANTASM, { hide = 0 })
                     elseif quest:getVar(player, 'Prog') == 4 then
                         return quest:progressCutscene(103)
                     end
@@ -66,7 +66,7 @@ quest.sections =
 
             ['Arcane_Phantasm'] =
             {
-                onMobDeath = function(mob, player, isKiller)
+                onMobDeath = function(mob, player, optParams)
                     if quest:getVar(player, 'Prog') == 3 then
                         quest:setVar(player, 'Prog', 4)
                     end

@@ -24,7 +24,7 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 915 and option == 1 then
-        player:setPos(654.200, -2.799, 100.700, 193, 33) -- To AlTaieu {R}
+        player:setPos(654.200, -2.799, 100.700, 193, 33) -- To AlTaieu (R)
     end
 end
 

@@ -10,8 +10,8 @@ local entity = {}
 local flags = xi.path.flag.NONE
 local path =
 {
-    {424.271, 0.000, 22.975},
-    {496.692, 0.000, 22.934}
+    { 424.271, 0.000, 22.975 },
+    { 496.692, 0.000, 22.934 },
 }
 
 entity.onMobRoam = function(mob)
@@ -25,8 +25,8 @@ entity.onMobRoam = function(mob)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    xi.apollyon_ne.handleMobDeathFloorOne(mob, player, isKiller, noKiller)
+entity.onMobDeath = function(mob, player, optParams)
+    xi.apollyon_ne.handleMobDeathFloorOne(mob, player, optParams)
 end
 
 return entity

@@ -434,6 +434,7 @@
         "UpdateNMSpawnPoint",
         "SetDropRate",
         "NearLocation",
+        "GetFurthestValidPosition",
         "Terminate",
         "GetHealingTickDelay",
         "GetReadOnlyItem",

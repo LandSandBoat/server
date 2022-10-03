@@ -67,7 +67,7 @@ mission.sections =
         {
             ['Warchief_Vatgit'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if player:getMissionStatus(mission.areaId) == 4 then
                         player:setMissionStatus(mission.areaId, 5)
                     end

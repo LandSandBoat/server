@@ -5,7 +5,7 @@
 -- TODO: messages should be zone-wide
 -----------------------------------
 local ID = require("scripts/zones/Monastic_Cavern/IDs")
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
@@ -25,8 +25,8 @@ entity.onMobEngaged = function(mob, target)
     mob:showText(mob, ID.text.ORCISH_OVERLORD_ENGAGE)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
-    if isKiller then
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller then
         mob:showText(mob, ID.text.ORCISH_OVERLORD_DEATH)
     end
 end

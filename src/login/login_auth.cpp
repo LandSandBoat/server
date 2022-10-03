@@ -271,13 +271,13 @@ int32 login_parse(int32 fd)
 
                     // creating new account
                     time_t timecreate;
-                    tm*    timecreateinfo;
+                    tm     timecreateinfo;
 
                     time(&timecreate);
-                    timecreateinfo = localtime(&timecreate);
+                    _localtime_s(&timecreateinfo, &timecreate);
 
                     char strtimecreate[128];
-                    strftime(strtimecreate, sizeof(strtimecreate), "%Y:%m:%d %H:%M:%S", timecreateinfo);
+                    strftime(strtimecreate, sizeof(strtimecreate), "%Y:%m:%d %H:%M:%S", &timecreateinfo);
                     fmtQuery = "INSERT INTO accounts(id,login,password,timecreate,timelastmodify,status,priv)\
                                        VALUES(%d,'%s',PASSWORD('%s'),'%s',NULL,%d,%d);";
 

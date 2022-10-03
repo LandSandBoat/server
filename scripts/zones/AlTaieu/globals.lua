@@ -8,10 +8,10 @@ require("scripts/globals/npc_util")
 
 local antiquityVars =
 {
-    -- [crystalOffset] = {thisFightDone, thisCsAcquired, otherCsAcquired1, otherCsAcquired2, firstCsParam, secondCsParam1, secondCsParam2}
-    [0] = {'[SEA][AlTieu]SouthTower', '[SEA][AlTieu]SouthTowerCS', '[SEA][AlTieu]EastTowerCS', '[SEA][AlTieu]WestTowerCS', 0, 2, 1},
-    [1] = {'[SEA][AlTieu]WestTower', '[SEA][AlTieu]WestTowerCS', '[SEA][AlTieu]SouthTowerCS', '[SEA][AlTieu]EastTowerCS', 2, 1, 0},
-    [2] = {'[SEA][AlTieu]EastTower', '[SEA][AlTieu]EastTowerCS', '[SEA][AlTieu]SouthTowerCS', '[SEA][AlTieu]WestTowerCS', 1, 2, 0},
+    -- [crystalOffset] = { thisFightDone, thisCsAcquired, otherCsAcquired1, otherCsAcquired2, firstCsParam, secondCsParam1, secondCsParam2 }
+    [0] = { '[SEA][AlTieu]SouthTower', '[SEA][AlTieu]SouthTowerCS', '[SEA][AlTieu]EastTowerCS', '[SEA][AlTieu]WestTowerCS', 0, 2, 1 },
+    [1] = { '[SEA][AlTieu]WestTower', '[SEA][AlTieu]WestTowerCS', '[SEA][AlTieu]SouthTowerCS', '[SEA][AlTieu]EastTowerCS', 2, 1, 0 },
+    [2] = { '[SEA][AlTieu]EastTower', '[SEA][AlTieu]EastTowerCS', '[SEA][AlTieu]SouthTowerCS', '[SEA][AlTieu]WestTowerCS', 1, 2, 0 },
 }
 
 return {
@@ -38,7 +38,7 @@ return {
             copStat < 3 and
             not thisCsAcquired and
             not thisFightDone and
-            npcUtil.popFromQM(player, npc, {ruaernOffset, ruaernOffset + 1, ruaernOffset + 2}, {hide = 0})
+            npcUtil.popFromQM(player, npc, { ruaernOffset, ruaernOffset + 1, ruaernOffset + 2 }, { hide = 0 })
         then
             player:messageSpecial(ID.text.OMINOUS_SHADOW)
 

@@ -32,6 +32,8 @@ npcUtil = {}
         do spawned mobs automatically aggro the player
     hide (number, default xi.settings.main.FORCE_SPAWN_QM_RESET_TIME)
         how long to hide the QM for after mobs die
+    message (number)
+        if set a message will play if a entity spawns
 
 ******************************************************************************* --]]
 function npcUtil.popFromQM(player, qm, mobId, params)
@@ -115,6 +117,10 @@ function npcUtil.popFromQM(player, qm, mobId, params)
                 GetNPCByID(m:getLocalVar("qm")):updateNPCHideTime(params.hide)
             end)
         end
+        -- add in a spawn message if has one
+        if params.message then
+            player:messageSpecial(params.message)
+        end
     end
 
     return true
@@ -126,10 +132,10 @@ end
     on the players' screens.
 
     point may be any of the following formats:
-    {x, y, z}
-    {x, y, z, rot}
-    {x = x, y = y, z = z}
-    {x = x, y = y, z = z, rot = r}
+    { x, y, z }
+    { x, y, z, rot }
+    { x = x, y = y, z = z }
+    { x = x, y = y, z = z, rot = r }
 ******************************************************************************* --]]
 local function doMove(x, y, z, r)
     if not r then
@@ -145,15 +151,15 @@ function npcUtil.queueMove(npc, point, delay)
         delay = 3000
     end
     if point.rot then
-        point = {point.x, point.y, point.z, point.rot}
+        point = { point.x, point.y, point.z, point.rot }
     elseif point.x then
-        point = {point.x, point.y, point.z}
+        point = { point.x, point.y, point.z }
     end
     npc:queue(delay, doMove(unpack(point)))
 end
 
 -- Picks a new position for an NPC and excluding the current position.
--- INPUT: npc = npcID, position = 2D table with coords: index, {x, y, z}
+-- INPUT: npc = npcID, position = 2D table with coords: index, { x, y, z }
 -- RETURN: table index
 function npcUtil.pickNewPosition(npcID, positionTable, allowCurrentPosition)
     local npc = GetNPCByID(npcID)
@@ -183,7 +189,7 @@ function npcUtil.pickNewPosition(npcID, positionTable, allowCurrentPosition)
         newPosition = math.random(1, tableSize)
     end
 
-    return {["x"] = positionTable[newPosition][1], ["y"] = positionTable[newPosition][2], ["z"] = positionTable[newPosition][3]}
+    return { ["x"] = positionTable[newPosition][1], ["y"] = positionTable[newPosition][2], ["z"] = positionTable[newPosition][3] }
 end
 
 --[[ *******************************************************************************
@@ -194,8 +200,8 @@ end
     Examples of valid items parameter:
         640                 -- copper ore x1
         { 640, 641 }        -- copper ore x1, tin ore x1
-        { {640, 2} }         -- copper ore x2
-        { {640, 2}, 641 }    -- copper ore x2, tin ore x1
+        { { 640, 2 } }         -- copper ore x2
+        { { 640, 2 }, 641 }    -- copper ore x2, tin ore x1
 
     params (table) can contain the following parameters:
 
@@ -214,13 +220,13 @@ function npcUtil.giveItem(player, items, params)
     -- create table of items, with key/val of itemId/itemQty
     local givenItems = {}
     if type(items) == "number" then
-        table.insert(givenItems, {items, 1})
+        table.insert(givenItems, { items, 1 })
     elseif type(items) == "table" then
         for _, v in pairs(items) do
             if type(v) == "number" then
-                table.insert(givenItems, {v, 1})
+                table.insert(givenItems, { v, 1 })
             elseif type(v) == "table" and #v == 2 and type(v[1]) == "number" and type(v[2]) == "number" then
-                table.insert(givenItems, {v[1], v[2]})
+                table.insert(givenItems, { v[1], v[2] })
             else
                 print(string.format("ERROR: invalid items parameter given to npcUtil.giveItem in zone %s.", player:getZoneName()))
                 return false
@@ -267,8 +273,8 @@ end
     Examples of valid items parameter:
         640                 -- copper ore x1
         { 640, 641 }        -- copper ore x1, tin ore x1
-        { {640, 2} }         -- copper ore x2
-        { {640, 2}, 641 }    -- copper ore x2, tin ore x1
+        { { 640, 2 } }         -- copper ore x2
+        { { 640, 2 }, 641 }    -- copper ore x2, tin ore x1
 
     params (table) can contain the following parameters:
 
@@ -287,13 +293,13 @@ function npcUtil.giveTempItem(player, items, params)
     -- create table of items, with key/val of itemId/itemQty
     local givenItems = {}
     if type(items) == "number" then
-        table.insert(givenItems, {items, 1})
+        table.insert(givenItems, { items, 1 })
     elseif type(items) == "table" then
         for _, v in pairs(items) do
             if type(v) == "number" then
-                table.insert(givenItems, {v, 1})
+                table.insert(givenItems, { v, 1 })
             elseif type(v) == "table" and #v == 2 and type(v[1]) == "number" and type(v[2]) == "number" then
-                table.insert(givenItems, {v[1], v[2]})
+                table.insert(givenItems, { v[1], v[2] })
             else
                 print(string.format("ERROR: invalid items parameter given to npcUtil.giveTempItem in zone %s.", player:getZoneName()))
                 return false
@@ -343,8 +349,8 @@ function npcUtil.giveCurrency(player, currency, amount)
 
     local currency_types =
     {
-        ["gil"]   = {"GIL_OBTAINED", xi.settings.main.GIL_RATE},
-        ["bayld"] = {"BAYLD_OBTAINED", xi.settings.main.BAYLD_RATE}
+        ["gil"]   = { "GIL_OBTAINED", xi.settings.main.GIL_RATE },
+        ["bayld"] = { "BAYLD_OBTAINED", xi.settings.main.BAYLD_RATE }
     }
 
     local currency_type = currency_types[currency]
@@ -378,8 +384,8 @@ end
 
     Examples of valid keyitems parameter:
         xi.ki.ZERUHN_REPORT
-        {xi.ki.PALBOROUGH_MINES_LOGS}
-        {xi.ki.BLUE_ACIDITY_TESTER, xi.ki.RED_ACIDITY_TESTER}
+        { xi.ki.PALBOROUGH_MINES_LOGS }
+        { xi.ki.BLUE_ACIDITY_TESTER, xi.ki.RED_ACIDITY_TESTER }
 ******************************************************************************* --]]
 function npcUtil.giveKeyItem(player, keyitems)
     local ID = zones[player:getZoneID()]
@@ -387,7 +393,7 @@ function npcUtil.giveKeyItem(player, keyitems)
     -- create table of keyitems
     local givenKeyItems = {}
     if type(keyitems) == "number" then
-        givenKeyItems = {keyitems}
+        givenKeyItems = { keyitems }
     elseif type(keyitems) == "table" then
         givenKeyItems = keyitems
     else
@@ -412,7 +418,7 @@ end
 
     Example of usage with params (all params are optional):
         npcUtil.giveReward(player, {
-            item = { {640, 2}, 641 },   -- see npcUtil.giveItem for formats
+            item = { { 640, 2 }, 641 },   -- see npcUtil.giveItem for formats
             itemParams = {              -- see npcUtil.giveItem for formats
                 fromTrade = true,
             },
@@ -423,7 +429,7 @@ end
             gil = 200,
             xp = 1000,
             title = xi.title.ENTRANCE_DENIED,
-            var = {"foo1", "foo2"}      -- variable(s) to set to 0. string or table
+            var = { "foo1", "foo2" }      -- variable(s) to set to 0. string or table
         })
 ******************************************************************************* --]]
 function npcUtil.giveReward(player, params)
@@ -493,7 +499,7 @@ end
 
     Example of usage with params (all params are optional):
         npcUtil.completeQuest(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ROSEL_THE_ARMORER, {
-            item = { {640, 2}, 641 },   -- see npcUtil.giveItem for formats
+            item = { { 640, 2 }, 641 },   -- see npcUtil.giveItem for formats
             itemParams = {              -- see npcUtil.giveItem for formats
                 fromTrade = true,
             },
@@ -504,7 +510,7 @@ end
             gil = 200,
             xp = 1000,
             title = xi.title.ENTRANCE_DENIED,
-            var = {"foo1", "foo2"}      -- variable(s) to set to 0. string or table
+            var = { "foo1", "foo2" }      -- variable(s) to set to 0. string or table
         })
 ******************************************************************************* --]]
 function npcUtil.completeQuest(player, area, quest, params)
@@ -595,7 +601,7 @@ end
 
     Example of usage with params (all params are optional):
         npcUtil.completeMission(player, xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.ROSEL_THE_ARMORER, {
-            item = { {640, 2}, 641 },   -- see npcUtil.giveItem for formats
+            item = { { 640, 2 }, 641 },   -- see npcUtil.giveItem for formats
             itemParams = {              -- see npcUtil.giveItem for formats
                 fromTrade = true,
             },
@@ -693,9 +699,9 @@ end
         640                     -- copper ore x1
         { 640, 641 }            -- copper ore x1, tin ore x1
         { 640, 640 }            -- copper ore x2
-        { {640, 2} }             -- copper ore x2
-        { {640, 2}, 641 }        -- copper ore x2, tin ore x1
-        { 640, {"gil", 200} }   -- copper ore x1, gil x200
+        { { 640, 2 } }          -- copper ore x2
+        { { 640, 2 }, 641 }     -- copper ore x2, tin ore x1
+        { 640, { "gil", 200 } } -- copper ore x1, gil x200
 ******************************************************************************* --]]
 function npcUtil.tradeHas(trade, items, exact)
     if type(exact) ~= "boolean" then exact = false end
@@ -775,9 +781,9 @@ end
         640                     -- copper ore x1
         { 640, 641 }            -- copper ore x1, tin ore x1
         { 640, 640 }            -- copper ore x2
-        { {640, 2} }             -- copper ore x2
-        { {640, 2}, 641 }        -- copper ore x2, tin ore x1
-        { 640, {"gil", 200} }   -- copper ore x1, gil x200
+        { { 640, 2 } }          -- copper ore x2
+        { { 640, 2 }, 641 }     -- copper ore x2, tin ore x1
+        { 640, { "gil", 200 } } -- copper ore x1, gil x200
 ******************************************************************************* --]]
 function npcUtil.tradeHasExactly(trade, items)
     return npcUtil.tradeHas(trade, items, true)
@@ -785,7 +791,7 @@ end
 
 -- Checks to see if a trade only contains one item, but the total count can be variable
 function npcUtil.tradeHasOnly(trade, itemID)
-    return npcUtil.tradeHasExactly(trade, {{ itemID, trade:getItemCount() }})
+    return npcUtil.tradeHasExactly(trade, { { itemID, trade:getItemCount() } })
 end
 
 -- Checks to see if a single item in a list is contained in the trade
@@ -889,4 +895,29 @@ function npcUtil.castingAnimation(npc, magicType, phaseDuration, func)
         end)
         npcUtil.castingAnimation(npcArg, magicType, phaseDuration, func)
     end)
+end
+
+function npcUtil.disappearCrate(crate)
+    if crate:isNPC() then
+        crate:entityAnimationPacket("kesu")
+        crate:timer(3000, function(npc)
+            npc:untargetable(true)
+            npc:setStatus(xi.status.DISAPPEAR)
+        end)
+    else
+        -- Some crates, such as Recover Crates in Limbus, are actually mobs that look like NPCs
+        DespawnMob(crate:getID())
+    end
+end
+
+function npcUtil.openCrate(crate, callback)
+    if crate:getLocalVar("opened") == 0 then
+        crate:setLocalVar("opened", 1)
+        callback()
+        crate:entityAnimationPacket("openH")
+
+        crate:timer(7000, function(npc)
+            npcUtil.disappearCrate(npc)
+        end)
+    end
 end

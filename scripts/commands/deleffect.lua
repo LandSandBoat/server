@@ -13,7 +13,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!deleffect {player} <effect>")
+    player:PrintToPlayer("!deleffect (player) <effect>")
 end
 
 function onTrigger(player, arg1, arg2)

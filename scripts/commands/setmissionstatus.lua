@@ -1,5 +1,5 @@
 -----------------------------------
--- func: setmissionstatus {Player} {value} {LogID} {index}
+-- func: setmissionstatus (player) (value) (log ID) (index)
 -- desc: Sets missionStatus for the given LogID and target Player
 -----------------------------------
 require("scripts/globals/missions")
@@ -14,7 +14,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!setmissionstatus {player} {value} {log ID} {index}")
+    player:PrintToPlayer("!setmissionstatus (player) (value) (log ID) (index)")
 end
 
 function onTrigger(player, target, value, logId, statusIndex)

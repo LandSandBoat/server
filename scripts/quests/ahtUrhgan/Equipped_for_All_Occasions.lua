@@ -66,7 +66,7 @@ quest.sections =
                     local questProgress = quest:getVar(player, 'Prog')
 
                     if questProgress == 1 then
-                        npcUtil.popFromQM(player, npc, mazeID.mob.LOST_SOUL, {hide = 0})
+                        npcUtil.popFromQM(player, npc, mazeID.mob.LOST_SOUL, { hide = 0 })
                     elseif questProgress == 2 then
                         return quest:progressEvent(66)
                     end
@@ -75,7 +75,7 @@ quest.sections =
 
             ['Lost_Soul'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if quest:getVar(player, 'Prog') == 1 then
                         quest:setVar(player, 'Prog', 2)
                     end

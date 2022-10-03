@@ -7,7 +7,7 @@
 -- !pos -600 5.00 440 35
 -----------------------------------
 local ID = require("scripts/zones/The_Garden_of_RuHmet/IDs")
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/mobskills")
 require("scripts/globals/settings")
 require("scripts/globals/status")
@@ -95,7 +95,7 @@ entity.onMobSpawn = function(mob)
     })
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)

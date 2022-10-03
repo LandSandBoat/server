@@ -39,7 +39,7 @@ entity.onSpikesDamage = function(mob, target, damage)
 
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 329)
 end
 

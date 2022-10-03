@@ -6,14 +6,21 @@ require("scripts/globals/status")
 local effect_object = {}
 
 effect_object.onEffectGain = function(target, effect)
+    local enmityBonus = 100
+
+    if target:getMainJob() ~= xi.job.PLD then
+        enmityBonus = 50
+    end
+
     target:addMod(xi.mod.UDMGPHYS, -effect:getPower())
-    target:addMod(xi.mod.ENMITY, 100)
+    target:addMod(xi.mod.ENMITY, enmityBonus)
     target:addMod(xi.mod.ENMITY_LOSS_REDUCTION, effect:getSubPower())
 end
 
 effect_object.onEffectTick = function(target, effect)
    local power = effect:getPower()
    local decayby = 0
+
    -- Damage reduction decays until 50% then stops
    if (power > 5000) then
       -- final tick with feet just has to be odd.
@@ -23,14 +30,21 @@ effect_object.onEffectTick = function(target, effect)
       else
          decayby = 800
       end
-      effect:setPower(power-decayby)
+
+      effect:setPower(power - decayby)
       target:delMod(xi.mod.UDMGPHYS, -decayby)
    end
 end
 
 effect_object.onEffectLose = function(target, effect)
+    local enmityBonus = 100
+
+    if target:getMainJob() ~= xi.job.PLD then
+        enmityBonus = 50
+    end
+
     target:delMod(xi.mod.UDMGPHYS, -effect:getPower())
-    target:delMod(xi.mod.ENMITY, 100)
+    target:delMod(xi.mod.ENMITY, enmityBonus)
     target:delMod(xi.mod.ENMITY_LOSS_REDUCTION, effect:getSubPower())
 end
 

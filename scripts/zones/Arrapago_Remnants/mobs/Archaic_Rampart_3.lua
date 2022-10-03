@@ -2,7 +2,7 @@
 -- Area: Arrapago Remnants
 --  Mob: Archaic Rampart
 -----------------------------------
-mixins = {require("scripts/mixins/families/rampart")}
+mixins = { require("scripts/mixins/families/rampart") }
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
@@ -56,7 +56,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)

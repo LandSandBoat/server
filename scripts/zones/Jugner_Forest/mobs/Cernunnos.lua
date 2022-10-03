@@ -3,11 +3,11 @@
 --   NM: Cernunnos
 -----------------------------------
 local ID = require("scripts/zones/Jugner_Forest/IDs")
-mixins = {require("scripts/mixins/job_special")} -- TODO: Is this right?
+mixins = { require("scripts/mixins/job_special") } -- TODO: Is this right?
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     player:setLocalVar("CERNUNNOS_DEFEATED", 1)
 end
 

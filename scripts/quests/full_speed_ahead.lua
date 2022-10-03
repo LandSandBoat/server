@@ -11,7 +11,7 @@ local ID = require('scripts/zones/Batallia_Downs/IDs')
 --[[
 Debugging:
 Start: !setplayervar <name> [QUEST]FullSpeedAhead 1
-       !zone {Batallia Downs}
+       !zone { Batallia Downs }
 
 Reset Quest: !delquest 3 179
 

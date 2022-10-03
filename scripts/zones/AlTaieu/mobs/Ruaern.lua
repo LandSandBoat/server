@@ -3,7 +3,7 @@
 --   NM: Ru'aern
 -- Note: Spawned by Rubious Crystals for PM 8-1
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 local ID = require("scripts/zones/AlTaieu/IDs")
 require("scripts/globals/missions")
 -----------------------------------
@@ -15,7 +15,7 @@ local function clearTowerVars(player, towerNum)
     player:setCharVar("Ru_aern_"..towerNum.."-3KILL", 0)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 
     if (player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.GARDEN_OF_ANTIQUITY and player:getCharVar("PromathiaStatus") < 3) then
         local aernKills =

@@ -35,7 +35,7 @@ entity.onTrigger = function(player, npc)
     elseif lampObjective == xi.nyzul.lampsObjective.ACTIVATE_ALL then
         if npc:getAnimationSub() ~= 1 and wait <= 0 then
             player:messageSpecial(ID.text.LAMP_SAME_TIME)
-            player:startOptionalCutscene(3, {[0] = 5, cs_option = {1, 2}})
+            player:startOptionalCutscene(3, { [0] = 5, cs_option = { 1, 2 } })
         elseif npc:getAnimationSub() == 1 then
             player:messageSpecial(ID.text.LAMP_ACTIVE)
         else
@@ -46,7 +46,7 @@ entity.onTrigger = function(player, npc)
     elseif lampObjective == xi.nyzul.lampsObjective.ORDER then
         if bit.band(lampRegister, bit.lshift(1,lampOrder)) == 0 then
             player:messageSpecial(ID.text.LAMP_ORDER)
-            player:startOptionalCutscene(3, {[0] = 6, cs_option = {1, 2}})
+            player:startOptionalCutscene(3, { [0] = 6, cs_option = { 1, 2 } })
         elseif npc:getAnimationSub() == 3 then
             player:messageSpecial(ID.text.LAMP_NOT_ALL_ACTIVE)
         elseif instance:getLocalVar("procedureTime") > 0 and instance:getLocalVar("procedureTime") < os.time() then

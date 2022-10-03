@@ -113,7 +113,11 @@ namespace message
                     std::unique_ptr<CBasicPacket> newPacket = std::make_unique<CBasicPacket>();
                     memcpy(*newPacket, packet.data(), std::min<size_t>(packet.size(), PACKET_SIZE));
                     auto gm_sent = newPacket->ref<uint8>(0x05);
-                    if (PChar->nameflags.flags & FLAG_AWAY && !gm_sent)
+                    if (settings::get<bool>("map.BLOCK_TELL_TO_HIDDEN_GM") && PChar->m_isGMHidden && !gm_sent)
+                    {
+                        send(MSG_DIRECT, extra.data(), sizeof(uint32), new CMessageStandardPacket(PChar, 0, 0, MsgStd::TellNotReceivedOffline));
+                    }
+                    else if (PChar->nameflags.flags & FLAG_AWAY && !gm_sent)
                     {
                         send(MSG_DIRECT, extra.data(), sizeof(uint32), new CMessageStandardPacket(PChar, 0, 0, MsgStd::TellNotReceivedAway));
                     }

@@ -83,7 +83,7 @@ entity.onMobEngaged = function(mob, target)
     mob:timer(math.random(10000, 20000), evilOscarFillsHisLungs)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

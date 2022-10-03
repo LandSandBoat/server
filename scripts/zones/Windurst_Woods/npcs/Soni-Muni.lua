@@ -14,17 +14,22 @@ local entity = {}
 
 local path =
 {
-    -16.590, 1.750, -59.149,
-    -18.366, 1.750, -59.804, -- TODO: Rotates towards R: 42 and waits 3 seconds
+    { x = -18.366, y = 1.750, z = -59.804, wait = 8000 },
+    { x = -18.303, y = 1.750, z = -59.925 },
+    { x = -18.176, y = 1.750, z = -59.733 },
+    { x = -17.620, y = 1.750, z = -59.529 },
+    { x = -16.961, y = 1.750, z = -59.286 },
+    { x = -16.590, y = 1.750, z = -59.149, wait = 8000 },
+    { x = -16.961, y = 1.750, z = -59.286 },
+    { x = -17.620, y = 1.750, z = -59.529 },
+    { x = -18.176, y = 1.750, z = -59.733 },
+    { x = -18.303, y = 1.750, z = -59.925 },
 }
 
 entity.onSpawn = function(npc)
     npc:initNpcAi()
     npc:setPos(xi.path.first(path))
-end
-
-entity.onPath = function(npc)
-    xi.path.patrol(npc, path)
+    npc:pathThrough(path, xi.path.flag.PATROL)
 end
 
 entity.onTrade = function(player, npc, trade)
@@ -56,7 +61,7 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 481 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_AMAZIN_SCORPIO)
-    elseif csid == 484 and npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_AMAZIN_SCORPIO, {fame=80, title=xi.title.GREAT_GRAPPLER_SCORPIO, gil=1500}) then
+    elseif csid == 484 and npcUtil.completeQuest(player, xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_AMAZIN_SCORPIO, { fame=80, title=xi.title.GREAT_GRAPPLER_SCORPIO, gil=1500 }) then
         player:confirmTrade()
     elseif csid == 735 then
         player:setCharVar("WildcatWindurst", utils.mask.setBit(player:getCharVar("WildcatWindurst"), 0, true))

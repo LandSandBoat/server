@@ -150,7 +150,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, {xi.items.CLUMP_OF_EXORAY_MOLD, xi.items.CHUNK_OF_BOMB_COAL, xi.items.PIECE_OF_ANCIENT_PAPYRUS}) then
+                    if npcUtil.tradeHasExactly(trade, { xi.items.CLUMP_OF_EXORAY_MOLD, xi.items.CHUNK_OF_BOMB_COAL, xi.items.PIECE_OF_ANCIENT_PAPYRUS }) then
                         return quest:progressEvent(81)
                     end
                 end,

@@ -3,7 +3,7 @@
 --  HNM: King Behemoth
 -----------------------------------
 local ID = require("scripts/zones/Behemoths_Dominion/IDs")
-mixins = {require("scripts/mixins/rage")}
+mixins = { require("scripts/mixins/rage") }
 require("scripts/globals/status")
 require("scripts/globals/titles")
 require("scripts/globals/magic")
@@ -24,7 +24,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.STUN, {chance = 20, duration = math.random(5, 10)})
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.STUN, { chance = 20, duration = math.random(5, 10) })
 end
 
 entity.onSpellPrecast = function(mob, spell)
@@ -37,7 +37,7 @@ entity.onSpellPrecast = function(mob, spell)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     player:addTitle(xi.title.BEHEMOTH_DETHRONER)
 end
 

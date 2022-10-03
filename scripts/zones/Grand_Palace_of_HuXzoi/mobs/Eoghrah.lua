@@ -2,7 +2,7 @@
 -- Area: Grand Palace of Hu'Xzoi
 --  Mob: Eo'ghrah
 -----------------------------------
-mixins = {require("scripts/mixins/families/ghrah")}
+mixins = { require("scripts/mixins/families/ghrah") }
 -----------------------------------
 local entity = {}
 
@@ -15,7 +15,7 @@ end
 entity.onMobFight = function(mob, target)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

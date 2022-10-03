@@ -14,24 +14,24 @@ xi.magic = xi.magic or {}
 -- Tables by element
 -----------------------------------
 
-xi.magic.dayStrong           = {xi.day.FIRESDAY,              xi.day.ICEDAY,               xi.day.WINDSDAY,               xi.day.EARTHSDAY,              xi.day.LIGHTNINGDAY,               xi.day.WATERSDAY,               xi.day.LIGHTSDAY,           xi.day.DARKSDAY}
-xi.magic.singleWeatherStrong = {xi.weather.HOT_SPELL,         xi.weather.SNOW,             xi.weather.WIND,               xi.weather.DUST_STORM,         xi.weather.THUNDER,                xi.weather.RAIN,                xi.weather.AURORAS,         xi.weather.GLOOM}
-xi.magic.doubleWeatherStrong = {xi.weather.HEAT_WAVE,         xi.weather.BLIZZARDS,        xi.weather.GALES,              xi.weather.SAND_STORM,         xi.weather.THUNDERSTORMS,          xi.weather.SQUALL,              xi.weather.STELLAR_GLARE,   xi.weather.DARKNESS}
-local elementalObi           = {xi.mod.FORCE_FIRE_DWBONUS,    xi.mod.FORCE_ICE_DWBONUS,    xi.mod.FORCE_WIND_DWBONUS,     xi.mod.FORCE_EARTH_DWBONUS,    xi.mod.FORCE_LIGHTNING_DWBONUS,    xi.mod.FORCE_WATER_DWBONUS,     xi.mod.FORCE_LIGHT_DWBONUS, xi.mod.FORCE_DARK_DWBONUS}
-local spellAcc               = {xi.mod.FIREACC,               xi.mod.ICEACC,               xi.mod.WINDACC,                xi.mod.EARTHACC,               xi.mod.THUNDERACC,                 xi.mod.WATERACC,                xi.mod.LIGHTACC,            xi.mod.DARKACC}
-local strongAffinityDmg      = {xi.mod.FIRE_AFFINITY_DMG,     xi.mod.ICE_AFFINITY_DMG,     xi.mod.WIND_AFFINITY_DMG,      xi.mod.EARTH_AFFINITY_DMG,     xi.mod.THUNDER_AFFINITY_DMG,       xi.mod.WATER_AFFINITY_DMG,      xi.mod.LIGHT_AFFINITY_DMG,  xi.mod.DARK_AFFINITY_DMG}
-local strongAffinityAcc      = {xi.mod.FIRE_AFFINITY_ACC,     xi.mod.ICE_AFFINITY_ACC,     xi.mod.WIND_AFFINITY_ACC,      xi.mod.EARTH_AFFINITY_ACC,     xi.mod.THUNDER_AFFINITY_ACC,       xi.mod.WATER_AFFINITY_ACC,      xi.mod.LIGHT_AFFINITY_ACC,  xi.mod.DARK_AFFINITY_ACC}
-xi.magic.resistMod           = {xi.mod.FIRE_MEVA,             xi.mod.ICE_MEVA,             xi.mod.WIND_MEVA,              xi.mod.EARTH_MEVA,             xi.mod.THUNDER_MEVA,               xi.mod.WATER_MEVA,              xi.mod.LIGHT_MEVA,          xi.mod.DARK_MEVA}
-xi.magic.specificDmgTakenMod = {xi.mod.FIRE_SDT,              xi.mod.ICE_SDT,              xi.mod.WIND_SDT,               xi.mod.EARTH_SDT,              xi.mod.THUNDER_SDT,                xi.mod.WATER_SDT,               xi.mod.LIGHT_SDT,           xi.mod.DARK_SDT}
-xi.magic.absorbMod           = {xi.mod.FIRE_ABSORB,           xi.mod.ICE_ABSORB,           xi.mod.WIND_ABSORB,            xi.mod.EARTH_ABSORB,           xi.mod.LTNG_ABSORB,                xi.mod.WATER_ABSORB,            xi.mod.LIGHT_ABSORB,        xi.mod.DARK_ABSORB}
-local nullMod                = {xi.mod.FIRE_NULL,             xi.mod.ICE_NULL,             xi.mod.WIND_NULL,              xi.mod.EARTH_NULL,             xi.mod.LTNG_NULL,                  xi.mod.WATER_NULL,              xi.mod.LIGHT_NULL,          xi.mod.DARK_NULL}
-local blmMerit               = {xi.merit.FIRE_MAGIC_POTENCY,  xi.merit.ICE_MAGIC_POTENCY,  xi.merit.WIND_MAGIC_POTENCY,   xi.merit.EARTH_MAGIC_POTENCY,  xi.merit.LIGHTNING_MAGIC_POTENCY,  xi.merit.WATER_MAGIC_POTENCY}
-local rdmMerit               = {xi.merit.FIRE_MAGIC_ACCURACY, xi.merit.ICE_MAGIC_ACCURACY, xi.merit.WIND_MAGIC_ACCURACY,  xi.merit.EARTH_MAGIC_ACCURACY, xi.merit.LIGHTNING_MAGIC_ACCURACY, xi.merit.WATER_MAGIC_ACCURACY}
-xi.magic.barSpell            = {xi.effect.BARFIRE,            xi.effect.BARBLIZZARD,       xi.effect.BARAERO,             xi.effect.BARSTONE,            xi.effect.BARTHUNDER,              xi.effect.BARWATER}
+xi.magic.dayStrong           = { xi.day.FIRESDAY,              xi.day.ICEDAY,               xi.day.WINDSDAY,               xi.day.EARTHSDAY,              xi.day.LIGHTNINGDAY,               xi.day.WATERSDAY,               xi.day.LIGHTSDAY,           xi.day.DARKSDAY }
+xi.magic.singleWeatherStrong = { xi.weather.HOT_SPELL,         xi.weather.SNOW,             xi.weather.WIND,               xi.weather.DUST_STORM,         xi.weather.THUNDER,                xi.weather.RAIN,                xi.weather.AURORAS,         xi.weather.GLOOM }
+xi.magic.doubleWeatherStrong = { xi.weather.HEAT_WAVE,         xi.weather.BLIZZARDS,        xi.weather.GALES,              xi.weather.SAND_STORM,         xi.weather.THUNDERSTORMS,          xi.weather.SQUALL,              xi.weather.STELLAR_GLARE,   xi.weather.DARKNESS }
+local elementalObi           = { xi.mod.FORCE_FIRE_DWBONUS,    xi.mod.FORCE_ICE_DWBONUS,    xi.mod.FORCE_WIND_DWBONUS,     xi.mod.FORCE_EARTH_DWBONUS,    xi.mod.FORCE_LIGHTNING_DWBONUS,    xi.mod.FORCE_WATER_DWBONUS,     xi.mod.FORCE_LIGHT_DWBONUS, xi.mod.FORCE_DARK_DWBONUS }
+local spellAcc               = { xi.mod.FIREACC,               xi.mod.ICEACC,               xi.mod.WINDACC,                xi.mod.EARTHACC,               xi.mod.THUNDERACC,                 xi.mod.WATERACC,                xi.mod.LIGHTACC,            xi.mod.DARKACC }
+local strongAffinityDmg      = { xi.mod.FIRE_AFFINITY_DMG,     xi.mod.ICE_AFFINITY_DMG,     xi.mod.WIND_AFFINITY_DMG,      xi.mod.EARTH_AFFINITY_DMG,     xi.mod.THUNDER_AFFINITY_DMG,       xi.mod.WATER_AFFINITY_DMG,      xi.mod.LIGHT_AFFINITY_DMG,  xi.mod.DARK_AFFINITY_DMG }
+local strongAffinityAcc      = { xi.mod.FIRE_AFFINITY_ACC,     xi.mod.ICE_AFFINITY_ACC,     xi.mod.WIND_AFFINITY_ACC,      xi.mod.EARTH_AFFINITY_ACC,     xi.mod.THUNDER_AFFINITY_ACC,       xi.mod.WATER_AFFINITY_ACC,      xi.mod.LIGHT_AFFINITY_ACC,  xi.mod.DARK_AFFINITY_ACC }
+xi.magic.resistMod           = { xi.mod.FIRE_MEVA,             xi.mod.ICE_MEVA,             xi.mod.WIND_MEVA,              xi.mod.EARTH_MEVA,             xi.mod.THUNDER_MEVA,               xi.mod.WATER_MEVA,              xi.mod.LIGHT_MEVA,          xi.mod.DARK_MEVA }
+xi.magic.specificDmgTakenMod = { xi.mod.FIRE_SDT,              xi.mod.ICE_SDT,              xi.mod.WIND_SDT,               xi.mod.EARTH_SDT,              xi.mod.THUNDER_SDT,                xi.mod.WATER_SDT,               xi.mod.LIGHT_SDT,           xi.mod.DARK_SDT }
+xi.magic.absorbMod           = { xi.mod.FIRE_ABSORB,           xi.mod.ICE_ABSORB,           xi.mod.WIND_ABSORB,            xi.mod.EARTH_ABSORB,           xi.mod.LTNG_ABSORB,                xi.mod.WATER_ABSORB,            xi.mod.LIGHT_ABSORB,        xi.mod.DARK_ABSORB }
+local nullMod                = { xi.mod.FIRE_NULL,             xi.mod.ICE_NULL,             xi.mod.WIND_NULL,              xi.mod.EARTH_NULL,             xi.mod.LTNG_NULL,                  xi.mod.WATER_NULL,              xi.mod.LIGHT_NULL,          xi.mod.DARK_NULL }
+local blmMerit               = { xi.merit.FIRE_MAGIC_POTENCY,  xi.merit.ICE_MAGIC_POTENCY,  xi.merit.WIND_MAGIC_POTENCY,   xi.merit.EARTH_MAGIC_POTENCY,  xi.merit.LIGHTNING_MAGIC_POTENCY,  xi.merit.WATER_MAGIC_POTENCY }
+local rdmMerit               = { xi.merit.FIRE_MAGIC_ACCURACY, xi.merit.ICE_MAGIC_ACCURACY, xi.merit.WIND_MAGIC_ACCURACY,  xi.merit.EARTH_MAGIC_ACCURACY, xi.merit.LIGHTNING_MAGIC_ACCURACY, xi.merit.WATER_MAGIC_ACCURACY }
+xi.magic.barSpell            = { xi.effect.BARFIRE,            xi.effect.BARBLIZZARD,       xi.effect.BARAERO,             xi.effect.BARSTONE,            xi.effect.BARTHUNDER,              xi.effect.BARWATER }
 
-xi.magic.dayWeak             = {xi.day.WATERSDAY,             xi.day.FIRESDAY,             xi.day.ICEDAY,                 xi.day.WINDSDAY,               xi.day.EARTHSDAY,                  xi.day.LIGHTNINGDAY,            xi.day.DARKSDAY,            xi.day.LIGHTSDAY           }
-xi.magic.singleWeatherWeak   = {xi.weather.RAIN,              xi.weather.HOT_SPELL,        xi.weather.SNOW,               xi.weather.WIND,               xi.weather.DUST_STORM,             xi.weather.THUNDER,             xi.weather.GLOOM,           xi.weather.AURORAS         }
-xi.magic.doubleWeatherWeak   = {xi.weather.SQUALL,            xi.weather.HEAT_WAVE,        xi.weather.BLIZZARDS,          xi.weather.GALES,              xi.weather.SAND_STORM,             xi.weather.THUNDERSTORMS,       xi.weather.DARKNESS,        xi.weather.STELLAR_GLARE   }
+xi.magic.dayWeak             = { xi.day.WATERSDAY,             xi.day.FIRESDAY,             xi.day.ICEDAY,                 xi.day.WINDSDAY,               xi.day.EARTHSDAY,                  xi.day.LIGHTNINGDAY,            xi.day.DARKSDAY,            xi.day.LIGHTSDAY           }
+xi.magic.singleWeatherWeak   = { xi.weather.RAIN,              xi.weather.HOT_SPELL,        xi.weather.SNOW,               xi.weather.WIND,               xi.weather.DUST_STORM,             xi.weather.THUNDER,             xi.weather.GLOOM,           xi.weather.AURORAS         }
+xi.magic.doubleWeatherWeak   = { xi.weather.SQUALL,            xi.weather.HEAT_WAVE,        xi.weather.BLIZZARDS,          xi.weather.GALES,              xi.weather.SAND_STORM,             xi.weather.THUNDERSTORMS,       xi.weather.DARKNESS,        xi.weather.STELLAR_GLARE   }
 
 -- USED FOR DAMAGING MAGICAL SPELLS (Stages 1 and 2 in Calculating Magic Damage on wiki)
 --Calculates magic damage using the standard magic damage calc.
@@ -68,12 +68,12 @@ end
 
 -- Returns the bonus magic accuracy for any spell
 local function getSpellBonusAcc(caster, target, spell, params)
-    local magicAccBonus = 0
+    local magicAccBonus  = 0
     local castersWeather = caster:getWeather()
-    local skill = spell:getSkillType()
-    local spellGroup = spell:getSpellGroup()
-    local element = spell:getElement()
-    local casterJob = caster:getMainJob()
+    local skill          = spell:getSkillType()
+    local spellGroup     = spell:getSpellGroup()
+    local element        = spell:getElement()
+    local casterJob      = caster:getMainJob()
 
     if caster:hasStatusEffect(xi.effect.ALTRUISM) and spellGroup == xi.magic.spellGroup.WHITE then
         magicAccBonus = magicAccBonus + caster:getStatusEffect(xi.effect.ALTRUISM):getPower()
@@ -81,6 +81,11 @@ local function getSpellBonusAcc(caster, target, spell, params)
 
     if caster:hasStatusEffect(xi.effect.FOCALIZATION) and spellGroup == xi.magic.spellGroup.BLACK then
         magicAccBonus = magicAccBonus + caster:getStatusEffect(xi.effect.FOCALIZATION):getPower()
+    end
+
+    -- Apply Divine Emblem to Flash
+    if caster:hasStatusEffect(xi.effect.DIVINE_EMBLEM) and skill == xi.skill.DIVINE_MAGIC then
+        magicAccBonus = magicAccBonus + 100 -- TODO: Confirm this with retail
     end
 
     local skillchainTier, _ = FormMagicBurst(element, target)
@@ -97,68 +102,70 @@ local function getSpellBonusAcc(caster, target, spell, params)
         end
     end
 
-    if casterJob == xi.job.WHM then
-        magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.WHM_MAGIC_ACC_BONUS)
-    end
+    switch(casterJob): caseof
+    {
+        [xi.job.WHM] = function()
+            magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.WHM_MAGIC_ACC_BONUS)
+        end,
 
-    if casterJob == xi.job.BLM then
-        -- Add MACC for BLM Elemental Magic Merits
-        if skill == xi.skill.ELEMENTAL_MAGIC then
-            magicAccBonus = magicAccBonus + caster:getMerit(xi.merit.ELEMENTAL_MAGIC_ACCURACY)
-        end
+        [xi.job.BLM] = function()
+            -- Add MACC for BLM Elemental Magic Merits
+            if skill == xi.skill.ELEMENTAL_MAGIC then
+                magicAccBonus = magicAccBonus + caster:getMerit(xi.merit.ELEMENTAL_MAGIC_ACCURACY)
+            end
 
-        -- BLM Job Point: MACC Bonus +1
-        magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.BLM_MAGIC_ACC_BONUS)
+            -- BLM Job Point: MACC Bonus +1
+            magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.BLM_MAGIC_ACC_BONUS)
+        end,
 
-    end
+        [xi.job.DRK] = function()
+            -- Add MACC for Dark Seal
+            if skill == xi.skill.DARK_MAGIC and caster:hasStatusEffect(xi.effect.DARK_SEAL) then
+                magicAccBonus = magicAccBonus + 256
+            end
+        end,
 
-    if casterJob == xi.job.DRK then
-        -- Add MACC for Dark Seal
-        if skill == xi.skill.DARK_MAGIC and caster:hasStatusEffect(xi.effect.DARK_SEAL) then
-            magicAccBonus = magicAccBonus + 256
-        end
-    end
+        [xi.job.RDM] = function()
+            -- Add MACC for RDM group 1 merits
+            if element >= xi.magic.element.FIRE and element <= xi.magic.element.WATER then
+                magicAccBonus = magicAccBonus + caster:getMerit(rdmMerit[element])
+            end
 
-    if casterJob == xi.job.RDM then
-        -- Add MACC for RDM group 1 merits
-        if element >= xi.magic.element.FIRE and element <= xi.magic.element.WATER then
-            magicAccBonus = magicAccBonus + caster:getMerit(rdmMerit[element])
-        end
+            -- RDM Job Point: During saboteur, Enfeebling MACC +2
+            if skill == xi.skill.ENFEEBLING_MAGIC and caster:hasStatusEffect(xi.effect.SABOTEUR) then
+                local jpValue = caster:getJobPointLevel(xi.jp.SABOTEUR_EFFECT)
 
-        -- RDM Job Point: During saboteur, Enfeebling MACC +2
-        if skill == xi.skill.ENFEEBLING_MAGIC and caster:hasStatusEffect(xi.effect.SABOTEUR) then
-            local jpValue = caster:getJobPointLevel(xi.jp.SABOTEUR_EFFECT)
+                magicAccBonus = magicAccBonus + (jpValue * 2)
+            end
 
-            magicAccBonus = magicAccBonus + (jpValue * 2)
-        end
+            -- RDM Job Point: Magic Accuracy Bonus, All MACC + 1
+            magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.RDM_MAGIC_ACC_BONUS)
+        end,
 
-        -- RDM Job Point: Magic Accuracy Bonus, All MACC + 1
-        magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.RDM_MAGIC_ACC_BONUS)
-    end
+        [xi.job.NIN] = function()
+            -- NIN Job Point: Ninjitsu Accuracy Bonus
+            if skill == xi.skill.NINJUTSU then
+                magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.NINJITSU_ACC_BONUS)
+            end
+        end,
 
-    if casterJob == xi.job.NIN then
-        -- NIN Job Point: Ninjitsu Accuracy Bonus
-        if skill == xi.skill.NINJUTSU then
-            magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.NINJITSU_ACC_BONUS)
-        end
-    end
+        [xi.job.BLU] = function()
+            -- BLU MACC merits - nuke acc is handled in bluemagic.lua
+            if skill == xi.skill.BLUE_MAGIC then
+                magicAccBonus = magicAccBonus + caster:getMerit(xi.merit.MAGICAL_ACCURACY)
+            end
+        end,
 
-    if casterJob == xi.job.BLU then
-        -- BLU MACC merits - nuke acc is handled in bluemagic.lua
-        if skill == xi.skill.BLUE_MAGIC then
-            magicAccBonus = magicAccBonus + caster:getMerit(xi.merit.MAGICAL_ACCURACY)
-        end
-    end
+        [xi.job.SCH] = function()
+            if (spellGroup == xi.magic.spellGroup.WHITE and caster:hasStatusEffect(xi.effect.PARSIMONY)) or
+                (spellGroup == xi.magic.spellGroup.BLACK and caster:hasStatusEffect(xi.effect.PENURY))
+            then
+                local jpValue = caster:getJobPointLevel(xi.jp.STRATEGEM_EFFECT_I)
 
-    if casterJob == xi.job.SCH then
-        if (spellGroup == xi.magic.spellGroup.WHITE and caster:hasStatusEffect(xi.effect.PARSIMONY)) or
-            (spellGroup == xi.magic.spellGroup.BLACK and caster:hasStatusEffect(xi.effect.PENURY))
-        then
-            local jpValue = caster:getJobPointLevel(xi.jp.STRATEGEM_EFFECT_I)
-
-            magicAccBonus = magicAccBonus + jpValue
-        end
-    end
+                magicAccBonus = magicAccBonus + jpValue
+            end
+        end,
+    }
 
     return magicAccBonus
 end
@@ -453,31 +460,47 @@ params.bonus = $4
 params.effect = $5
 ]]
 function applyResistanceEffect(caster, target, spell, params)
-    local diff = params.diff or (caster:getStat(params.attribute) - target:getStat(params.attribute))
-    local skill = params.skillType
-    local bonus = params.bonus
+    local diff   = params.diff or (caster:getStat(params.attribute) - target:getStat(params.attribute))
+    local skill  = params.skillType
+    local bonus  = params.bonus
     local effect = params.effect
+    local family = spell:getSpellFamily()
 
-    -- If Stymie is active, as long as the mob is not immune then the effect is not resisted
     if effect ~= nil then -- Dispel's script doesn't have an "effect" to send here, nor should it.
-        if skill == xi.skill.ENFEEBLING_MAGIC and caster:hasStatusEffect(xi.effect.STYMIE) and target:canGainStatusEffect(effect) then
+        -- If Stymie is active, as long as the mob is not immune then the effect is not resisted
+        if
+            skill == xi.skill.ENFEEBLING_MAGIC and
+            caster:hasStatusEffect(xi.effect.STYMIE) and
+            target:canGainStatusEffect(effect)
+        then
             caster:delStatusEffect(xi.effect.STYMIE)
             return 1
+        -- Fealty allows the PLD to resist all status inflicting spells except Threnody and Requiem
+        elseif
+            target:hasStatusEffect(xi.effect.FEALTY) and
+            not family == xi.magic.spellFamily.FOE_REQUIEM and
+            not (family >= xi.magic.spellFamily.FIRE_THRENODY and
+                 family <= xi.magic.spellFamily.DARK_THRENODY)
+        then
+            return 0
         end
     end
 
-    if skill == xi.skill.SINGING and caster:hasStatusEffect(xi.effect.TROUBADOUR) then
-        if math.random(0, 99) < caster:getMerit(xi.merit.TROUBADOUR)-25 then
+    if
+        skill == xi.skill.SINGING and
+        caster:hasStatusEffect(xi.effect.TROUBADOUR)
+    then
+        if math.random(0, 99) < caster:getMerit(xi.merit.TROUBADOUR) - 25 then
             return 1.0
         end
     end
 
-    local element = spell:getElement()
-    local percentBonus = 0
+    local element       = spell:getElement()
+    local percentBonus  = 0
     local magicaccbonus = getSpellBonusAcc(caster, target, spell, params)
 
     if diff > 10 then
-        magicaccbonus = magicaccbonus + 10 + (diff - 10)/2
+        magicaccbonus = magicaccbonus + 10 + (diff - 10) / 2
     else
         magicaccbonus = magicaccbonus + diff
     end

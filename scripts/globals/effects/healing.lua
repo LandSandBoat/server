@@ -79,7 +79,7 @@ effect_object.onEffectTick = function(target, effect)
                 xi.roe.onRecordTrigger(target, 4)
             end
 
-            target:addHP(healHP)
+            target:addHPLeaveSleeping(healHP)
             target:updateEnmityFromCure(target, healHP)
             target:addMP(12 + ((healtime - 2) * (1 + target:getMod(xi.mod.CLEAR_MIND))) + target:getMod(xi.mod.MPHEAL))
         end

@@ -19,7 +19,7 @@ entity.onTrade = function(player, npc, trade)
         lampCost = 1000
     end
 
-    if npcUtil.tradeHasExactly(trade, {{"gil", lampCost}}) and player:getCharVar("EinherjarIntro") ~= 1 then
+    if npcUtil.tradeHasExactly(trade, { { "gil", lampCost } }) and player:getCharVar("EinherjarIntro") ~= 1 then
         if npcUtil.giveItem(player, xi.items.SMOLDERING_LAMP) then
             player:tradeComplete()
             player:startEvent(25)
@@ -67,30 +67,30 @@ entity.onEventFinish = function(player, csid, option)
     elseif csid == 24 and option ~= 1073741824 and option ~= 0 then
         local kilushaItems =
         {
-            [1] = {item = xi.items.ANIMATOR_P1, cost = 15000},
-            [2] = {item = xi.items.ASLAN_CAPE, cost = 15000},
-            [3] = {item = xi.items.GLEEMANS_CAPE, cost = 15000},
-            [4] = {item = xi.items.RITTER_GORGET, cost = 15000},
-            [5] = {item = xi.items.KUBIRA_BEAD_NECKLACE, cost = 15000},
-            [6] = {item = xi.items.MORGANAS_CHOKER, cost = 15000},
-            [7] = {item = xi.items.BUCANEERS_BELT, cost = 15000},
-            [8] = {item = xi.items.IOTA_RING, cost = 15000},
-            [9] = {item = xi.items.OMEGA_RING, cost = 15000},
-            [10] = {item = xi.items.DELT_RING, cost = 15000},
-            [11] = {item = xi.items.RUBBER_CAP, cost = 5000},
-            [12] = {item = xi.items.RUBBER_HARNESS, cost = 5000},
-            [13] = {item = xi.items.RUBBER_GLOVES, cost = 5000},
-            [14] = {item = xi.items.RUBBER_CHAUSSES, cost = 5000},
-            [15] = {item = xi.items.RUBBER_SOLES, cost = 5000},
-            [16] = {item = xi.items.NETHEREYE_CHAIN, cost = 5000},
-            [17] = {item = xi.items.NETHERFIELD_CHAIN, cost = 5000},
-            [18] = {item = xi.items.NETHERSPIRIT_CHAIN, cost = 5000},
-            [19] = {item = xi.items.NETHERCANT_CHAIN, cost = 5000},
-            [20] = {item = xi.items.NETHERPACT_CHAIN, cost = 5000},
-            [21] = {item = xi.items.BALRAHNS_EYEPATCH, cost = 100000},
-            [22] = {item = xi.items.VALKYRIES_TEAR, cost = 1000},
-            [23] = {item = xi.items.VALKYRIES_WING, cost = 2000},
-            [24] = {item = xi.items.VALKYRIES_SOUL, cost = 3000},
+            [1] =  { item = xi.items.ANIMATOR_P1,          cost =  15000 },
+            [2] =  { item = xi.items.ASLAN_CAPE,           cost =  15000 },
+            [3] =  { item = xi.items.GLEEMANS_CAPE,        cost =  15000 },
+            [4] =  { item = xi.items.RITTER_GORGET,        cost =  15000 },
+            [5] =  { item = xi.items.KUBIRA_BEAD_NECKLACE, cost =  15000 },
+            [6] =  { item = xi.items.MORGANAS_CHOKER,      cost =  15000 },
+            [7] =  { item = xi.items.BUCANEERS_BELT,       cost =  15000 },
+            [8] =  { item = xi.items.IOTA_RING,            cost =  15000 },
+            [9] =  { item = xi.items.OMEGA_RING,           cost =  15000 },
+            [10] = { item = xi.items.DELT_RING,            cost =  15000 },
+            [11] = { item = xi.items.RUBBER_CAP,           cost =   5000 },
+            [12] = { item = xi.items.RUBBER_HARNESS,       cost =   5000 },
+            [13] = { item = xi.items.RUBBER_GLOVES,        cost =   5000 },
+            [14] = { item = xi.items.RUBBER_CHAUSSES,      cost =   5000 },
+            [15] = { item = xi.items.RUBBER_SOLES,         cost =   5000 },
+            [16] = { item = xi.items.NETHEREYE_CHAIN,      cost =   5000 },
+            [17] = { item = xi.items.NETHERFIELD_CHAIN,    cost =   5000 },
+            [18] = { item = xi.items.NETHERSPIRIT_CHAIN,   cost =   5000 },
+            [19] = { item = xi.items.NETHERCANT_CHAIN,     cost =   5000 },
+            [20] = { item = xi.items.NETHERPACT_CHAIN,     cost =   5000 },
+            [21] = { item = xi.items.BALRAHNS_EYEPATCH,    cost = 100000 },
+            [22] = { item = xi.items.VALKYRIES_TEAR,       cost =   1000 },
+            [23] = { item = xi.items.VALKYRIES_WING,       cost =   2000 },
+            [24] = { item = xi.items.VALKYRIES_SOUL,       cost =   3000 },
         }
 
         local row = kilushaItems[option]

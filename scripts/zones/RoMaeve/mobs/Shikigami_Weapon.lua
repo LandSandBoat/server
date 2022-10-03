@@ -53,14 +53,14 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onMobEngaged = function(mob, target)
-    mob:setStatus(xi.status.UPDATE)
+    mob:setStatus(xi.status.MOB)
 end
 
 entity.onMobDisengage = function(mob)
     mob:setStatus(xi.status.INVISIBLE)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 119, 2, xi.regime.type.FIELDS)
 end
 

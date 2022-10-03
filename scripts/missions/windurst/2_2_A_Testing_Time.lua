@@ -33,7 +33,7 @@ local handleAcceptMission = function(player, csid, option, npc)
     end
 end
 
-local killCounter = function(mob, player, isKiller, noKiller)
+local killCounter = function(mob, player, optParams)
     local testVar = mission:getVar(player, "KillCount")
     mission:setVar(player, "KillCount", testVar + 1)
 end

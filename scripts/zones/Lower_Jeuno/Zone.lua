@@ -93,7 +93,7 @@ zone_object.onGameHour = function(zone)
             npc:setStatus(0)
             npc:initNpcAi()
             npc:setPos(xi.path.first(lowerJeunoGlobal.lampPath))
-            npc:pathThrough(xi.path.fromStart(lowerJeunoGlobal.lampPath), bit.bor(xi.path.flag.WALLHACK))
+            npc:pathThrough(lowerJeunoGlobal.lampPath, bit.bor(xi.path.flag.PATROL, xi.path.flag.WALLHACK))
         end
 
     end

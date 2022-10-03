@@ -511,6 +511,8 @@ typedef std::map<uint16, zoneWeather_t> weatherVector_t;
 
 typedef std::map<uint16, CBaseEntity*> EntityList_t;
 
+using QueryByNameResult_t = std::vector<CBaseEntity*>;
+
 int32 zone_update_weather(uint32 tick, CTaskMgr::CTask* PTask);
 
 class CZone
@@ -537,6 +539,8 @@ public:
     void SetPartyBattleMusic(uint8 music);
     void SetBackgroundMusicDay(uint8 music);
     void SetBackgroundMusicNight(uint8 music);
+
+    const QueryByNameResult_t& queryEntitiesByName(std::string const& name);
 
     uint32 GetLocalVar(const char* var);
     void   SetLocalVar(const char* var, uint32 val);
@@ -646,6 +650,8 @@ private:
     CTreasurePool* m_TreasurePool; // глобальный TreasuerPool
 
     time_point m_timeZoneEmpty; // The time_point when the last player left the zone
+
+    std::unordered_map<std::string, QueryByNameResult_t> m_queryByNameResults;
 
 protected:
     CTaskMgr::CTask* ZoneTimer; // указатель на созданный таймер - ZoneServer. необходим для возможности его остановки

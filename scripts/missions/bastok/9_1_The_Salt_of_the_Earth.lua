@@ -201,7 +201,7 @@ mission.sections =
 
             ['Nanoplasm'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if
                         player:getMissionStatus(mission.areaId) == 2 and
                         not isPlasmsAlive()

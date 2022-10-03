@@ -173,6 +173,7 @@ namespace luautils
         lua.set_function("UpdateNMSpawnPoint", &luautils::UpdateNMSpawnPoint);
         lua.set_function("SetDropRate", &luautils::SetDropRate);
         lua.set_function("NearLocation", &luautils::NearLocation);
+        lua.set_function("GetFurthestValidPosition", &luautils::GetFurthestValidPosition);
         lua.set_function("Terminate", &luautils::Terminate);
         lua.set_function("GetReadOnlyItem", &luautils::GetReadOnlyItem);
         lua.set_function("GetAbility", &luautils::GetAbility);
@@ -268,6 +269,11 @@ namespace luautils
         TracyReportLuaMemory(lua.lua_state());
 
         return 0;
+    }
+
+    void cleanup()
+    {
+        moduleutils::CleanupLuaModules();
     }
 
     /************************************************************************
@@ -2535,6 +2541,30 @@ namespace luautils
         return 0;
     }
 
+    // Trigger Code on an item when it has been dropped
+    int32 OnItemDrop(CBaseEntity* PUser, CItem* PItem)
+    {
+        TracyZoneScoped;
+
+        auto filename = fmt::format("./scripts/globals/items/{}.lua", PItem->getName());
+
+        sol::function onItemDrop = GetCacheEntryFromFilename(filename)["onItemDrop"].get<sol::function>();
+        if (!onItemDrop.valid())
+        {
+            return -1;
+        }
+
+        auto result = onItemDrop(CLuaBaseEntity(PUser), CLuaItem(PItem));
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onItemDrop: %s", err.what());
+            return -1;
+        }
+
+        return 0;
+    }
+
     // Check for gear sets  (e.g Set: enhances haste effect)
     int32 CheckForGearSet(CBaseEntity* PTarget)
     {
@@ -3194,6 +3224,12 @@ namespace luautils
         std::string mob_name  = (const char*)PMob->GetName();
 
         CCharEntity* PChar = dynamic_cast<CCharEntity*>(PKiller);
+
+        auto optParams = lua.create_table();
+        optParams["isKiller"]          = false;
+        optParams["noKiller"]          = true;
+        optParams["isWeaponSkillKill"] = false;
+
         if (PChar && PMob->objtype == TYPE_MOB)
         {
             auto onMobDeathEx = lua["xi"]["mob"]["onMobDeathEx"];
@@ -3228,7 +3264,7 @@ namespace luautils
             sol::function onMobDeath          = getEntityCachedFunction(PMob, "onMobDeath");
 
             // clang-format off
-            PChar->ForAlliance([PMob, PChar, &onMobDeathFramework, &onMobDeath, &filename](CBattleEntity* PPartyMember)
+            PChar->ForAlliance([PMob, PChar, &onMobDeathFramework, &onMobDeath, &filename, &optParams](CBattleEntity* PPartyMember)
             {
                 CCharEntity* PMember = (CCharEntity*)PPartyMember;
                 if (PMember && PMember->getZone() == PChar->getZone())
@@ -3239,14 +3275,16 @@ namespace luautils
                     {
                         optLuaAllyEntity = CLuaBaseEntity(PMember);
                     }
-                    bool isKiller = PMember == PChar;
-                    bool noKiller = false;
+
+                    optParams["isKiller"]          = PMember == PChar;
+                    optParams["noKiller"]          = false;
+                    optParams["isWeaponSkillKill"] = PMob->GetLocalVar("weaponskillHit") > 0;
 
                     PChar->eventPreparation->targetEntity = PMob;
                     PChar->eventPreparation->scriptFile   = filename;
 
-                    // onMobDeath(mob, player, isKiller, noKiller)
-                    auto result = onMobDeathFramework(LuaMobEntity, optLuaAllyEntity, isKiller, noKiller, onMobDeath);
+                    // onMobDeath(mob, player, optParams)
+                    auto result = onMobDeathFramework(LuaMobEntity, optLuaAllyEntity, optParams, onMobDeath);
                     if (!result.valid())
                     {
                         sol::error err = result;
@@ -3261,8 +3299,8 @@ namespace luautils
             auto          onMobDeathFramework = lua["xi"]["globals"]["interaction"]["interaction_global"]["onMobDeath"];
             sol::function onMobDeath          = getEntityCachedFunction(PMob, "onMobDeath");
 
-            // onMobDeath(mob, player, isKiller, noKiller)
-            auto result = onMobDeathFramework(CLuaBaseEntity(PMob), sol::lua_nil, sol::lua_nil, true, onMobDeath);
+            // onMobDeath(mob, player, optParams)
+            auto result = onMobDeathFramework(CLuaBaseEntity(PMob), sol::lua_nil, optParams, onMobDeath);
             if (!result.valid())
             {
                 sol::error err = result;
@@ -4634,6 +4672,26 @@ namespace luautils
         nearPos["z"]       = pos.z;
 
         return nearPos;
+    }
+
+    sol::table GetFurthestValidPosition(CLuaBaseEntity* fromTarget, float distance, float theta)
+    {
+        CBaseEntity* entity = fromTarget->GetBaseEntity();
+        position_t   pos    = nearPosition(entity->loc.p, distance, theta);
+
+        float validPos[3];
+        bool  success = entity->loc.zone->m_navMesh->findFurthestValidPoint(entity->loc.p, pos, validPos);
+        if (!success)
+        {
+            return sol::lua_nil;
+        }
+
+        sol::table outPos = lua.create_table();
+        outPos["x"]       = validPos[0];
+        outPos["y"]       = validPos[1];
+        outPos["z"]       = validPos[2];
+
+        return outPos;
     }
 
     void OnPlayerDeath(CCharEntity* PChar)

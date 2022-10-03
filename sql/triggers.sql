@@ -47,6 +47,7 @@ BEGIN
     DELETE FROM `char_blacklist`  WHERE `charid_owner` = OLD.charid;
     DELETE FROM `char_effects`    WHERE `charid` = OLD.charid;
     DELETE FROM `char_equip`      WHERE `charid` = OLD.charid;
+    DELETE FROM `char_equip_saved` WHERE `charid` = OLD.charid;
     DELETE FROM `char_exp`        WHERE `charid` = OLD.charid;
     DELETE FROM `char_history`    WHERE `charid` = OLD.charid;
     DELETE FROM `char_inventory`  WHERE `charid` = OLD.charid;
