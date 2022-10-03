@@ -239,7 +239,7 @@ local loot =
     {
         {
             { itemid = 0, droprate = 750 },
-            { itemid = xi.items.ASTROL_POT, droprate = 250 },
+            { itemid = xi.items.ASTRAL_POT, droprate = 250 },
         },
     },
 
