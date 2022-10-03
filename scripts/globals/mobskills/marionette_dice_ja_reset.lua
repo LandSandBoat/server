@@ -18,8 +18,11 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    mob:showText(mob, ID.text.NOT_HOW)
-    target:resetRecasts()
+    mob:timer(5000, function(mobArg)
+        mobArg:showText(mobArg, ID.text.NOT_HOW)
+        target:resetRecasts()
+    end)
+
     skill:setMsg(xi.msg.basic.ABILITIES_RECHARGED)
     return 0
 end

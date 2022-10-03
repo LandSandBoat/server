@@ -19,12 +19,11 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local duration = 25
     local typeEffect = xi.effect.DEFENSE_BOOST
 
-    if target:addStatusEffect(typeEffect, power, 0, duration) then
-        skill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT)
-    else
-        skill:setMsg(xi.msg.basic.SKILL_NO_EFFECT)
-    end
+    mob:timer(5000, function(mobArg)
+        target:addStatusEffect(typeEffect, power, 0, duration)
+    end)
 
+    skill:setMsg(xi.msg.basic.SKILL_GAIN_EFFECT)
     return typeEffect
 end
 

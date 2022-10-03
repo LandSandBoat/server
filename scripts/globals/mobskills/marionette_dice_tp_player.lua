@@ -17,7 +17,9 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    target:setTP(target:getTP() + math.random(50, 1000))
+    mob:timer(5000, function(mobArg)
+        target:setTP(target:getTP() + math.random(50, 1000))
+    end)
 
     return target:getTP()
 end

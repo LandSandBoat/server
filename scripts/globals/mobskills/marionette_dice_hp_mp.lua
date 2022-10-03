@@ -16,10 +16,14 @@ end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     local amount = 150
+
+    mob:timer(5000, function(mobArg)
+        target:addHP(amount)
+        target:addMP(amount)
+        target:wakeUp()
+    end)
+
     skill:setMsg(xi.msg.basic.RECOVERS_HP_AND_MP)
-    target:addHP(amount)
-    target:addMP(amount)
-    target:wakeUp()
     return amount
 end
 
