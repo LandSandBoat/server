@@ -155,7 +155,7 @@ duration CBattlefield::GetFinishTime() const
 
 duration CBattlefield::GetRemainingTime() const
 {
-    return GetTimeLimit() - GetTimeInside();
+    return GetTimeLimit() > GetTimeInside() ? GetTimeLimit() - GetTimeInside() : duration(0);
 }
 
 duration CBattlefield::GetLastTimeUpdate() const
@@ -202,6 +202,7 @@ void CBattlefield::SetInitiator(std::string const& name)
 void CBattlefield::SetTimeLimit(duration time)
 {
     m_TimeLimit = time;
+    m_LastPromptTime = time;
 }
 
 void CBattlefield::SetWipeTime(time_point time)
@@ -640,7 +641,7 @@ bool CBattlefield::CanCleanup(bool cleanup)
 bool CBattlefield::Cleanup(time_point time, bool force)
 {
     // Wait until
-    if (!force && m_cleanupTime > time)
+    if (!force && !m_EnteredPlayers.empty() && m_cleanupTime > time)
     {
         return false;
     }

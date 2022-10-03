@@ -19,15 +19,9 @@ local content = Battlefield:new({
     menuBit = 3,
     entryNpc = "Wind_Pillar_4",
     exitNpc = "Wind_Pillar_Exit",
-    requiredKeyItems = { xi.ki.ZEPHYR_FAN },
+    requiredKeyItems = { { id = xi.ki.ZEPHYR_FAN, message = ID.text.ZEPHYR_RIPS } },
     grantXP = 3500,
 })
-
-function content:onBattlefieldEnter(player, battlefield)
-    if Battlefield.onBattlefieldEnter(self, player, battlefield) then
-        player:messageSpecial(ID.text.ZEPHYR_RIPS, xi.ki.ZEPHYR_FAN)
-    end
-end
 
 content.groups =
 {

@@ -101,8 +101,7 @@ end
 --  - hasWipeGrace: Grants players a 3 minute grace period on a full wipe before ejecting them. Defaults to true. (optional)
 --  - canLoseExp: Determines if a character loses experience points upon death while inside the battlefield. Defaults to true. (optional)
 --  - delayToExit: Amount of time to wait before exiting the battlefield. Defaults to 5 seconds. (optional)
---  - requiredItems: Items required to be traded to enter the battlefield (optional)
---  - createWornItem: Should a worn item is created with the required item (optional)
+--  - requiredItems: Items required to be traded to enter the battlefield. Needs to be in the format of { itemid, quantity, message = ID.text.*, worn = true }. (optional)
 --  - requiredKeyItems: Key items required to be able to enter the battlefield - these are removed upon entry (optional)
 --  - title: Title given to players upon victory (optional)
 --  - grantXP: Amount of XP to grant upon victory (optional)
@@ -124,11 +123,11 @@ function Battlefield:new(data)
     -- Some battlefields has multiple areas (Burning Circles) while others have fixed areas (Apollyon). Set to have a fixed area.
     obj.area = data.area
     -- Determines if character subjobs are enabled or disabled upon entry. Defaults to true.
-    obj.allowSubjob = data.allowSubjob or true
+    obj.allowSubjob = (data.allowSubjob == nil or data.allowSubjob) or false
     -- Grants players a 3 minute grace period on a full wipe before ejecting them. Defaults to true.
-    obj.hasWipeGrace = data.hasWipeGrace or true
+    obj.hasWipeGrace = (data.hasWipeGrace == nil or data.hasWipeGrace) or false
     -- Determines if a character loses experience points upon death while inside the battlefield. Defaults to true.
-    obj.canLoseExp = data.canLoseExp or true
+    obj.canLoseExp = (data.canLoseExp == nil or data.canLoseExp) or false
     -- Amount of time to wait before exiting the battlefield. Defaults to 5 seconds.
     obj.delayToExit = data.delayToExit or 5
     -- Monster battlefield groups added with battlefield:addGroups()
@@ -139,10 +138,20 @@ function Battlefield:new(data)
     obj.loot = {}
     -- Items required to be traded to enter the battlefield
     obj.requiredItems = data.requiredItems or {}
-    -- Should a worn item is created with the required item
-    obj.createWornItem = data.createWornItem or true
+
     -- Key items required to be able to enter the battlefield - these are removed upon entry
-    obj.requiredKeyItems = data.requiredKeyItems or {}
+    obj.requiredKeyItems = {}
+    -- Ensure that our required key items are in format of { { key item, message id }, ... }
+    if data.requiredKeyItems ~= nil then
+        for _, keyItem in pairs(data.requiredKeyItems) do
+            if type(keyItem) == 'table' then
+                table.insert(obj.requiredKeyItems, keyItem)
+            else
+                table.insert(obj.requiredKeyItems, { id = keyItem, message = 0 })
+            end
+        end
+    end
+
     -- The name of the NPC used for entering
     obj.entryNpc = data.entryNpc
     -- The name of the NPC used for exiting
@@ -200,8 +209,8 @@ function Battlefield:register()
             {
                 [32000] = utils.bind(self.onEventFinishEnter, self),
                 [32001] = utils.bind(self.onEventFinishWin, self),
-                [32002] = utils.bind(self.onEventFinishEnter, self),
-                [32003] = utils.bind(self.onFinishEnterExit, self),
+                [32002] = utils.bind(self.onEventFinishLeave, self),
+                [32003] = utils.bind(self.onEventFinishExit, self),
             }
         })
     end
@@ -240,7 +249,7 @@ function Battlefield:checkRequirements(player, npc, registrant, trade)
     end
 
     for _, keyItem in ipairs(self.requiredKeyItems) do
-        if not player:hasKeyItem(keyItem) then
+        if not player:hasKeyItem(keyItem.id) then
             return false
         end
     end
@@ -274,7 +283,7 @@ function Battlefield:onEntryTrade(player, npc, trade, onUpdate)
     end
 
     -- Check if the player is trading exactly one item but it is worn
-    if #self.requiredItems == 1 and self.createWornItem and player:hasWornItem(self.requiredItems[1]) then
+    if #self.requiredItems == 1 and player:hasWornItem(self.requiredItems[1]) then
         player:messageBasic(xi.msg.basic.ITEM_UNABLE_TO_USE_2, 0, 0)
         return false
     end
@@ -418,9 +427,9 @@ function Battlefield:onEntryEventUpdate(player, csid, option, extras)
         local zone   = player:getZoneID()
 
         -- Handle traded items
-        if #self.requiredItems > 0 then
-            if self.createWornItem and player:hasItem(self.requiredItems[1]) then
-                player:createWornItem(self.requiredItems[1])
+        for _, item in ipairs(self.requiredItems) do
+            if item.worn and player:hasItem(item[1]) then
+                player:createWornItem(item[1])
             else
                 player:tradeComplete()
             end
@@ -472,7 +481,11 @@ function Battlefield:onExitEventUpdate(player, csid, option, npc)
     end
 end
 
-function Battlefield:onFinishEnterExit(player, csid, option)
+function Battlefield:onEventFinishLeave(player, csid, option)
+    player:leaveBattlefield(1)
+end
+
+function Battlefield:onEventFinishExit(player, csid, option)
     if option == 4 and player:getBattlefield() then
         player:leaveBattlefield(1)
     end
@@ -506,6 +519,10 @@ function Battlefield:onBattlefieldTick(battlefield, tick)
 
     local hasTimeRemaining = xi.battlefield.SendTimePrompts(battlefield, players)
     if not hasTimeRemaining then
+        for _, player in pairs(players) do
+            player:messageSpecial(zones[player:getZoneID()].text.TIME_IN_THE_BATTLEFIELD_IS_UP)
+        end
+        battlefield:setStatus(xi.battlefield.status.LOST)
         isExiting = true
     end
 
@@ -545,9 +562,34 @@ function Battlefield:onBattlefieldStatusChange(battlefield, players, status)
 end
 
 function Battlefield:onBattlefieldEnter(player, battlefield)
-    for _, keyItem in ipairs(self.requiredKeyItems) do
-        player:delKeyItem(keyItem)
+    local initiatorId, _ = battlefield:getInitiator()
+    if player:getID() == initiatorId then
+        for _, item in ipairs(self.requiredKeyItems) do
+            player:delKeyItem(item.id)
+            if item.message ~= 0 then
+                player:messageSpecial(item.message, item.id)
+            end
+        end
+
+        for _, item in ipairs(self.requiredItems) do
+            if item.message ~= 0 then
+                player:messageSpecial(item.message, 0, 0, 0, item[0])
+            end
+        end
     end
+
+    local ID = zones[self.zoneId]
+    player:messageSpecial(ID.text.ENTERING_THE_BATTLEFIELD_FOR, 0, self.menuBit)
+    if self.maxPlayers > 6 then
+        player:messageSpecial(ID.text.MEMBERS_OF_YOUR_ALLIANCE, 0, 0, 0, self.maxPlayers)
+    elseif self.maxPlayers > 1 then
+        player:messageSpecial(ID.text.MEMBERS_OF_YOUR_PARTY, 0, 0, 0, self.maxPlayers)
+    else
+        -- TODO: Need capture of message to know the proper format
+        -- player:messageSpecial(ID.text.ONLY_PLAYER_CAN_ENTER, battlefield:getInitiator()[1])
+    end
+
+    player:messageSpecial(ID.text.TIME_LIMIT_FOR_THIS_BATTLE_IS, 0, 0, 0, math.floor(self.timeLimit / 60))
 end
 
 function Battlefield:onBattlefieldDestroy(battlefield)
@@ -883,35 +925,34 @@ end
 
 -- returns false if out of time
 function xi.battlefield.SendTimePrompts(battlefield, players)
-    -- local tick = battlefield:getTimeInside()
-    -- local status = battlefield:getStatus()
     local remainingTime  = battlefield:getRemainingTime()
-    local message        = 0
     local lastTimeUpdate = battlefield:getLastTimeUpdate()
+    local timeLimit      = battlefield:getTimeLimit()
+    local message        = 0
 
     players = players or battlefield:getPlayers()
 
-    if lastTimeUpdate == 0 and remainingTime < 600 then
+    if remainingTime < 600 and lastTimeUpdate > 600 and timeLimit > 600 then
         message = 600
-    elseif lastTimeUpdate == 600 and remainingTime < 300 then
+    elseif remainingTime < 300 and lastTimeUpdate > 300 and timeLimit > 300 then
         message = 300
-    elseif lastTimeUpdate == 300 and remainingTime < 60 then
+    elseif remainingTime < 60 and lastTimeUpdate > 60 and timeLimit > 60 then
         message = 60
-    elseif lastTimeUpdate == 60 and remainingTime < 30 then
+    elseif remainingTime < 30 and lastTimeUpdate > 30 and timeLimit > 30 then
         message = 30
-    elseif lastTimeUpdate == 30 and remainingTime < 10 then
+    elseif remainingTime < 10 and lastTimeUpdate > 10 and timeLimit > 10 then
         message = 10
     end
 
     if message ~= 0 then
         for i, player in pairs(players) do
-            player:messageBasic(xi.msg.basic.TIME_LEFT, remainingTime)
+            player:messageBasic(xi.msg.basic.TIME_LEFT, message)
         end
 
         battlefield:setLastTimeUpdate(message)
     end
 
-    return remainingTime >= 0
+    return remainingTime > 0
 end
 
 function xi.battlefield.HandleWipe(battlefield, players)
