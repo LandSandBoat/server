@@ -15,7 +15,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(xi.effect.LAST_RESORT, 0, 0, 180)
+    xi.job_utils.dark_knight.useLastResort(player, target, ability)
 end
 
 return ability_object

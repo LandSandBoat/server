@@ -15,8 +15,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    local merits = player:getMerit(xi.merit.DARK_SEAL)
-    player:addStatusEffect(xi.effect.DARK_SEAL, merits, 0, 60)
+    xi.job_utils.dark_knight.useDarkSeal(player, target, ability)
 end
 
 return ability_object

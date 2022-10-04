@@ -10,12 +10,11 @@ require("scripts/globals/status")
 local ability_object = {}
 
 ability_object.onAbilityCheck = function(player, target, ability)
-    ability:setRecast(ability:getRecast() - player:getMod(xi.mod.ONE_HOUR_RECAST))
-    return 0, 0
+    return xi.job_utils.dark_knight.checkBloodWeapon(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    target:addStatusEffect(xi.effect.BLOOD_WEAPON, 1, 0, 30)
+    xi.job_utils.dark_knight.useBloodWeapon(player, target, ability)
 end
 
 return ability_object

@@ -15,7 +15,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-   player:addStatusEffect(xi.effect.CONSUME_MANA, 1, 0, 60)
+    xi.job_utils.dark_knight.useConsumeMana(player, target, ability)
 end
 
 return ability_object

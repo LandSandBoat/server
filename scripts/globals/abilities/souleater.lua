@@ -16,9 +16,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
 end
 
 ability_object.onUseAbility = function(player, target, ability)
-    local jpValue = target:getJobPointLevel(xi.jp.SOULEATER_DURATION)
-
-    player:addStatusEffect(xi.effect.SOULEATER, 1, 0, 60 + jpValue)
+    xi.job_utils.dark_knight.useSouleater(player, target, ability)
 end
 
 return ability_object
