@@ -30,8 +30,4 @@ local content = BattlefieldMission:new({
 
 content:addEssentialMobs({ "Snoll_Tzar" })
 
-function content:checkRequirements(player, npc, registrant, trade)
-    return true
-end
-
 return content:register()
