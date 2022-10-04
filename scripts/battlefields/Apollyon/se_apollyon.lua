@@ -1,6 +1,9 @@
 -----------------------------------
 -- Area: Appolyon
 -- Name: SE Apollyon
+-- !addkeyitem black_card
+-- !addkeyitem cosmo_cleanse
+-- !gotoid 16933219
 -----------------------------------
 local ID = require("scripts/zones/Apollyon/IDs")
 require("scripts/globals/battlefield")
@@ -12,11 +15,13 @@ require("scripts/globals/keyitems")
 local content = Limbus:new({
     zoneId = xi.zone.APOLLYON,
     battlefieldId = xi.battlefield.id.SE_APOLLYON,
+    maxPlayers = 18,
+    timeLimit = utils.minutes(30),
     menuBit = 2,
     area = 3,
     entryNpc = '_12i',
     name = "SE_APOLLYON",
-    requiredKeyItems = { xi.ki.COSMO_CLEANSE, xi.ki.BLACK_CARD }
+    requiredKeyItems = { xi.ki.COSMO_CLEANSE, xi.ki.BLACK_CARD, message = ID.text.YOU_INSERT_THE_CARD_POLISHED }
 })
 
 content.paths =
@@ -131,7 +136,7 @@ content.groups =
             [xi.mod.HTH_SDT] = 0,
             [xi.mod.SLASH_SDT] = 1250,
         },
-        death = function(mob, count)
+        death = function(battlefield, mob, count)
             xi.limbus.openDoor(mob:getBattlefield(), ID.SE_APOLLYON.npc.PORTAL[1])
         end,
     },
@@ -144,7 +149,7 @@ content.groups =
             [xi.mod.HTH_SDT] = 0,
             [xi.mod.SLASH_SDT] = 1250,
         },
-        death = function(mob, count)
+        death = function(battlefield, mob, count)
             if count == 2 then
                 xi.limbus.spawnFrom(mob, ID.SE_APOLLYON.npc.TIME_CRATES[1])
             elseif count == 4 then
@@ -163,7 +168,7 @@ content.groups =
             [xi.mod.SLASH_SDT] = 0,
             [xi.mod.PIERCE_SDT] = 1250,
         },
-        death = function(mob, count)
+        death = function(battlefield, mob, count)
             xi.limbus.openDoor(mob:getBattlefield(), ID.SE_APOLLYON.npc.PORTAL[2])
         end,
     },
@@ -174,7 +179,7 @@ content.groups =
             [xi.mod.SLASH_SDT] = 0,
             [xi.mod.PIERCE_SDT] = 1250,
         },
-        death = function(mob, count)
+        death = function(battlefield, mob, count)
             if count == 2 then
                 npcUtil.showCrate(GetNPCByID(ID.SE_APOLLYON.npc.TIME_CRATES[2]))
             elseif count == 4 then
@@ -195,7 +200,7 @@ content.groups =
             [xi.mod.IMPACT_SDT] = 1250,
             [xi.mod.HTH_SDT] = 1250,
         },
-        death = function(mob, count)
+        death = function(battlefield, mob, count)
             xi.limbus.openDoor(mob:getBattlefield(), ID.SE_APOLLYON.npc.PORTAL[3])
         end,
     },
@@ -207,7 +212,7 @@ content.groups =
             [xi.mod.IMPACT_SDT] = 1250,
             [xi.mod.HTH_SDT] = 1250,
         },
-        setup = function(mobs)
+        setup = function(battlefield, mobs)
             local battlefield = mobs[1]:getBattlefield()
             local timeCrateIndex, recoverCrateIndex, itemCrateIndex = unpack(utils.uniqueRandomTable(1, 6, 3))
 
@@ -215,7 +220,7 @@ content.groups =
             battlefield:setLocalVar("recoverCrateIndex", recoverCrateIndex)
             battlefield:setLocalVar("itemCrateIndex", itemCrateIndex)
         end,
-        death = function(mob, count)
+        death = function(battlefield, mob, count)
             local battlefield = mob:getBattlefield()
             if count == 2 then
                 local crate = GetNPCByID(ID.SE_APOLLYON.npc.TIME_CRATES[3])
@@ -244,7 +249,7 @@ content.groups =
             [xi.mod.UDMGPHYS] = -8000,
             [xi.mod.UDMGMAGIC] = -10000,
         },
-        setup = function(mobs)
+        setup = function(battlefield, mobs)
             for _, mob in ipairs(mobs) do
                 -- Prevent boss from being targetable until first mob Flying_Spear is killed
                 mob:setUntargetable(true)
@@ -253,6 +258,9 @@ content.groups =
                 mob:setMobMod(xi.mobMod.NO_LINK, 1)
             end
         end,
+        allDeath = function(battlefield, mob)
+            npcUtil.showCrate(GetNPCByID(ID.SE_APOLLYON.npc.LOOT_CRATE))
+        end
     },
     {
         mobs = { "Flying_Spear" },
@@ -260,7 +268,7 @@ content.groups =
         {
             [xi.mod.MAGIC_NULL] = 100,
         },
-        death = function(mob, count)
+        death = function(battlefield, mob, count)
             local boss = mob:getZone():queryEntitiesByName("Evil_Armory")[1]
             boss:setMod(xi.mod.UDMGPHYS, (8 - count) * -1000)
             if count == 1 then
@@ -271,7 +279,7 @@ content.groups =
                 boss:setMobMod(xi.mobMod.NO_LINK, 0)
             end
         end,
-        all_death = function(mob)
+        all_death = function(battlefield, mob)
             local boss = mob:getZone():queryEntitiesByName("Evil_Armory")[1]
             boss:setMod(xi.mod.UDMGMAGIC, 0)
         end,

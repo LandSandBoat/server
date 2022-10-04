@@ -532,7 +532,6 @@ end
 
 Limbus.name = ""
 Limbus.serverVar = ""
-Limbus.requiredCard = 0
 
 -- Creates a new Limbus Battlefield interaction
 -- Data takes the additional following keys:
@@ -547,43 +546,28 @@ function Limbus:new(data)
     return obj
 end
 
-function Limbus:onEntryEventUpdate(player, csid, option, extras)
-    if Battlefield.onEntryEventUpdate(self, player, csid, option, extras) then
-        local alliance = player:getAlliance()
+function Limbus:register()
+    Battlefield.register(self)
 
-        for _, member in pairs(alliance) do
-            if
-                member:getZoneID() == player:getZoneID() and
-                not member:hasStatusEffect(xi.effect.BATTLEFIELD) and
-                not member:getBattlefield()
-            then
-                member:messageSpecial(self.ID.text.HUM)
-            end
-        end
-    end
+    -- Add recover crates that are technically "mobs"
+    table.insert(self.groups, { mobIds = self.ID.npc.RECOVER_CRATES })
+
+    return self
 end
 
 function Limbus:onEventFinishEnter(player, csid, option)
-    if not Battlefield.onEventFinishEnter(self, player, csid, option) then
-        player:setCharVar("ApollyonEntrance", 0)
-    end
-end
+    Battlefield.onEventFinishEnter(self, player, csid, option)
 
-function Limbus:onEntryTrade(player, npc, trade)
-    if self:checkRequirements(player, npc, true) then
-        player:setCharVar("ApollyonEntrance", 1)
-        Battlefield.onEntryTrade(self, player, npc, trade)
-    else
-        player:messageSpecial(self.ID.text.NO_KEY)
-    end
-end
-
-function Limbus:onEntryTrigger(player, npc)
-    if Battlefield.onEntryTrigger(self, player, npc) then
-        player:setCharVar("ApollyonEntrance", 1)
-    else
-        local ID = zones[self.zoneId]
-        player:messageSpecial(ID.text.NO_KEY)
+    local battlefield = player:getBattlefield()
+    local initiatorId, _ = battlefield:getInitiator()
+    if player:getID() == initiatorId then
+        local ID = zones[player:getZoneID()]
+        local alliance = player:getAlliance()
+        for _, member in pairs(alliance) do
+            if member:getZoneID() == player:getZoneID() then
+                member:messageSpecial(ID.text.HUM)
+            end
+        end
     end
 end
 
@@ -620,7 +604,6 @@ function Limbus:onBattlefieldInitialise(battlefield)
     end
 
     -- Setup Winning Loot Crate
-    -- Winning crate is mostly setup through bcnm_treasure and is spawned automatically when boss is killed
     local crate = GetNPCByID(ID.npc.LOOT_CRATE)
     crate:resetLocalVars()
     crate:removeListener("TRIGGER_LOOT_CRATE")
@@ -628,11 +611,10 @@ function Limbus:onBattlefieldInitialise(battlefield)
 end
 
 function Limbus:onBattlefieldTick(battlefield, tick)
+    Battlefield.onBattlefieldTick(self, battlefield, tick)
     if battlefield:getRemainingTime() % 60 == 0 then
         SetServerVariable(self.serverVar, battlefield:getRemainingTime() / 60)
     end
-
-    xi.battlefield.onBattlefieldTick(battlefield, tick)
 end
 
 function Limbus:onBattlefieldRegister(player, battlefield)
@@ -694,7 +676,7 @@ function Limbus:handleOpenLootCrate(player, npc)
     npcUtil.openCrate(npc, function()
         local battlefield = player:getBattlefield()
         xi.limbus.handleLootRolls(battlefield, self.loot[self.ID.npc.LOOT_CRATE], nil, npc)
-        battlefield:setLocalVar("cutsceneTimer", 10)
-        battlefield:setLocalVar("lootSeen", 1)
+        battlefield:setLocalVar("cutsceneTimer", self.delayToExit)
+        battlefield:setStatus(xi.battlefield.status.WON)
     end)
 end

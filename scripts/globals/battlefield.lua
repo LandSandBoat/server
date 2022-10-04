@@ -91,9 +91,9 @@ end
 --  - zoneId: Which zone this battlefield exists within (required)
 --  - battlefieldId: Battlefield ID used in the database (required)
 --  - maxPlayers: Maximum number of players allowed to enter (required)
---  - levelCap: Level cap imposed upon the battlefield (required)
---  - timeLimit: Time in seconds alotted to complete the battlefield before being ejected (required)
+--  - timeLimit: Time in seconds alotted to complete the battlefield before being ejected. (required)
 --  - menuBit: The bit used to communicate with the client on which menu item this battlefield is (required)
+--  - levelCap: Level cap imposed upon the battlefield. Defaults to 0 - no level cap. (optional)
 --  - area: Some battlefields has multiple areas (Burning Circles) while others have fixed areas (Apollyon). Set to have a fixed area. (optional)
 --  - entryNpc: The name of the NPC used for entering
 --  - exitNpc: The name of the NPC used for exiting
@@ -115,12 +115,12 @@ function Battlefield:new(data)
     obj.battlefieldId = data.battlefieldId
     -- Maximum number of players allowed to enter
     obj.maxPlayers = data.maxPlayers
-    -- Level cap imposed upon the battlefield
-    obj.levelCap = data.levelCap
     -- Time in seconds alotted to complete the battlefield before being ejected
     obj.timeLimit = data.timeLimit
     -- The bit used to communicate with the client on which menu item this battlefield is
     obj.menuBit = data.menuBit
+    -- Level cap imposed upon the battlefield
+    obj.levelCap = data.levelCap or 0
     -- Some battlefields has multiple areas (Burning Circles) while others have fixed areas (Apollyon). Set to have a fixed area.
     obj.area = data.area
     -- Determines if character subjobs are enabled or disabled upon entry. Defaults to true.
@@ -139,20 +139,8 @@ function Battlefield:new(data)
     obj.loot = {}
     -- Items required to be traded to enter the battlefield
     obj.requiredItems = data.requiredItems or {}
-
     -- Key items required to be able to enter the battlefield - these are removed upon entry
-    obj.requiredKeyItems = {}
-    -- Ensure that our required key items are in format of { { key item, message id }, ... }
-    if data.requiredKeyItems ~= nil then
-        for _, keyItem in pairs(data.requiredKeyItems) do
-            if type(keyItem) == 'table' then
-                table.insert(obj.requiredKeyItems, keyItem)
-            else
-                table.insert(obj.requiredKeyItems, { id = keyItem, message = 0 })
-            end
-        end
-    end
-
+    obj.requiredKeyItems = data.requiredKeyItems or {}
     -- The name of the NPC used for entering
     obj.entryNpc = data.entryNpc
     -- The name of the NPC used for exiting
@@ -252,7 +240,7 @@ function Battlefield:checkRequirements(player, npc, registrant, trade)
     end
 
     for _, keyItem in ipairs(self.requiredKeyItems) do
-        if not player:hasKeyItem(keyItem.id) then
+        if not player:hasKeyItem(keyItem) then
             return false
         end
     end
@@ -297,14 +285,20 @@ function Battlefield.onEntryTrade(player, npc, trade, onUpdate)
         end
     end
 
+    local zoneId = player:getZoneID()
+
     -- Determine which battlefields are available given the traded items
     local options = xi.battlefield.getBattlefieldOptions(player, npc, trade)
     if options == 0 then
-        return
+        local noEntryMessage = zones[zoneId].text.NO_BATTLEFIELD_ENTRY
+        if noEntryMessage then
+            player:messageSpecial(noEntryMessage)
+        end
+        return false
     end
 
     -- Ensure that the traded item(s) are not worn out
-    local contents = xi.battlefield.contentsByZone[player:getZoneID()]
+    local contents = xi.battlefield.contentsByZone[zoneId]
     for _, content in ipairs(contents) do
         if #content.requiredItems > 0 and content.requiredItems[1].wornMessage and player:hasWornItem(content.requiredItems[1]) then
             player:messageBasic(content.requiredItems[1].wornMessage)
@@ -365,6 +359,10 @@ function Battlefield.onEntryTrigger(player, npc)
 
     -- options = 268435455 -- uncomment to open menu with all possible battlefields
     if options == 0 then
+        local noEntryMessage = zones[player:getZoneID()].text.NO_BATTLEFIELD_ENTRY
+        if noEntryMessage then
+            player:messageSpecial(noEntryMessage)
+        end
         return false
     end
 
@@ -589,10 +587,12 @@ end
 function Battlefield:onBattlefieldEnter(player, battlefield)
     local initiatorId, _ = battlefield:getInitiator()
     if player:getID() == initiatorId then
-        for _, item in ipairs(self.requiredKeyItems) do
-            player:delKeyItem(item.id)
-            if item.message ~= 0 then
-                player:messageSpecial(item.message, item.id)
+        if #self.requiredKeyItems > 0 then
+            for _, item in ipairs(self.requiredKeyItems) do
+                player:delKeyItem(item)
+            end
+            if self.requiredKeyItems.message ~= 0 then
+                player:messageSpecial(self.requiredKeyItems.message, unpack(self.requiredKeyItems))
             end
         end
 

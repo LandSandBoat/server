@@ -19,7 +19,7 @@ local content = Battlefield:new({
     menuBit = 3,
     entryNpc = "Wind_Pillar_4",
     exitNpc = "Wind_Pillar_Exit",
-    requiredKeyItems = { { id = xi.ki.ZEPHYR_FAN, message = ID.text.ZEPHYR_RIPS } },
+    requiredKeyItems = { xi.ki.ZEPHYR_FAN, message = ID.text.ZEPHYR_RIPS },
     grantXP = 3500,
 })
 

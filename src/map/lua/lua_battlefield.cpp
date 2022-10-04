@@ -303,7 +303,7 @@ void CLuaBattlefield::lose()
     m_PLuaBattlefield->CanCleanup(true);
 }
 
-void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleAreas)
+void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleArenas)
 {
     // Ensure that each area has its own super linking
     int16 superlinkId = 1000 * m_PLuaBattlefield->GetArea();
@@ -312,7 +312,8 @@ void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleAreas)
     // The highest entity ID allowed within the battlefield
     uint32 highestId = 0;
 
-    if (hasMultipleAreas)
+    // Check if this Battlefield that can take place in multiple arenas (such as xNM fights)
+    if (hasMultipleArenas)
     {
         std::set<uint32> entityIds;
         for (auto entry : groups)
@@ -401,15 +402,12 @@ void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleAreas)
         }
 
         // Look to see if there have been any mob ids specifically set for this battlefield.
-        // They need to be in the format of { { id, ... }, { ... } } with each subtable being an area
+        
         auto groupMobIds = groupData["mobIds"];
-        if (hasMultipleAreas && groupMobIds.valid())
+        if (groupMobIds.valid())
         {
-            auto  mobIds = groupMobIds.get<std::vector<std::vector<uint32>>>();
-            uint8 area   = m_PLuaBattlefield->GetArea() - 1;
-            if (area < mobIds.size())
-            {
-                for (uint32 mobid : mobIds[area])
+            auto addMobIdsForArea = [&](const std::vector<uint32>& mobIds) {
+                for (uint32 mobid : mobIds)
                 {
                     CBaseEntity* entity = zoneutils::GetEntity(mobid, TYPE_MOB);
                     groupEntities.push_back(entity);
@@ -419,6 +417,20 @@ void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleAreas)
                         entities.insert(entity->id);
                     }
                 }
+            };
+
+            if (hasMultipleArenas)
+            {
+                // Mob IDs need to be in the format of { { id, ... }, { ... } } with each subtable being an area
+                auto  mobIds = groupMobIds.get<std::vector<std::vector<uint32>>>();
+                uint8 area   = m_PLuaBattlefield->GetArea() - 1;
+                XI_DEBUG_BREAK_IF(area >= mobIds.size());
+                addMobIdsForArea(mobIds[area]);
+            }
+            else
+            {
+                auto mobIds = groupMobIds.get<std::vector<uint32>>();
+                addMobIdsForArea(mobIds);
             }
         }
 
