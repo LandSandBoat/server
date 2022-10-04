@@ -387,11 +387,12 @@ enum class Mod
     REPRISAL_SPIKES_BONUS  = 1068, // Increases Reprisal spikes damage by percentage (e.g. mod value 50 = +50% spikes damage)
 
     // Dark Knight
-    ARCANE_CIRCLE_DURATION = 858, // Arcane Circle extended duration in seconds
-    SOULEATER_EFFECT       = 96,  // Souleater power in percents
-    DESPERATE_BLOWS        = 906, // Adds ability haste to Last Resort
-    STALWART_SOUL          = 907, // Reduces damage taken from Souleater
-    DREAD_SPIKES_EFFECT    = 998, // Percent increase to total HP drain for Dread Spikes
+    ARCANE_CIRCLE_DURATION = 858,  // Extends Arcane Circle duration by percentage (e.g. mod value 50 = +50% duration)
+    ARCANE_CIRCLE_POTENCY  = 1069, // Increases the potency of the Arcane Circle effect (e.g. mod value 2 = +2% Arcana Killer)
+    SOULEATER_EFFECT       = 96,   // Souleater power in percents
+    DESPERATE_BLOWS        = 906,  // Adds ability haste to Last Resort
+    STALWART_SOUL          = 907,  // Reduces damage taken from Souleater
+    DREAD_SPIKES_EFFECT    = 998,  // Percent increase to total HP drain for Dread Spikes
 
     // Beastmaster
     TAME                = 304,  // Additional percent chance to charm
@@ -925,7 +926,7 @@ enum class Mod
     // 888
     // 936
     //
-    // SPARE = 1069, and onward
+    // SPARE = 1070, and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it
