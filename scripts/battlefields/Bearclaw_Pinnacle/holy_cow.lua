@@ -11,16 +11,16 @@ require("scripts/globals/zone")
 -----------------------------------
 
 local content = Battlefield:new({
-    zoneId = xi.zone.BEARCLAW_PINNACLE,
-    battlefieldId = xi.battlefield.id.HOLY_COW,
-    maxPlayers = 18,
-    levelCap = 75,
-    timeLimit = utils.minutes(30),
-    index = 4,
-    entryNpc = "Wind_Pillar_5",
-    exitNpc = "Wind_Pillar_Exit",
+    zoneId           = xi.zone.BEARCLAW_PINNACLE,
+    battlefieldId    = xi.battlefield.id.HOLY_COW,
+    maxPlayers       = 18,
+    levelCap         = 75,
+    timeLimit        = utils.minutes(30),
+    index            = 4,
+    entryNpc         = "Wind_Pillar_5",
+    exitNpc          = "Wind_Pillar_Exit",
     requiredKeyItems = { xi.ki.ZEPHYR_FAN, message = ID.text.ZEPHYR_RIPS },
-    grantXP = 4000,
+    grantXP          = 4000,
 })
 
 content:addEssentialMobs({ "Apis" })

@@ -11,17 +11,18 @@ require("scripts/globals/zone")
 -----------------------------------
 
 local content = BattlefieldMission:new({
-    zoneId = xi.zone.THRONE_ROOM,
+    zoneId        = xi.zone.THRONE_ROOM,
     battlefieldId = xi.battlefield.id.SHADOW_LORD_BATTLE,
-    maxPlayers = 6,
-    levelCap = 75,
-    timeLimit = utils.minutes(30),
-    index = 0,
-    entryNpc = "Throne_Room",
-    exitNpc = "Throne_Room_Exit",
-    mission = xi.mission.id.nation.SHADOW_LORD,
+    maxPlayers    = 6,
+    levelCap      = 75,
+    timeLimit     = utils.minutes(30),
+    index         = 0,
+    entryNpc      = "Throne_Room",
+    exitNpc       = "Throne_Room_Exit",
+
+    mission               = xi.mission.id.nation.SHADOW_LORD,
     requiredMissionStatus = 3,
-    title = xi.title.SHADOW_BANISHER,
+    title                 = xi.title.SHADOW_BANISHER,
 })
 
 function content:onEventFinishBattlefield(player, csid, option)

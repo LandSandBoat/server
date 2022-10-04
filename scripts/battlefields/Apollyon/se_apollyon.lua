@@ -13,16 +13,16 @@ require("scripts/globals/keyitems")
 -----------------------------------
 
 local content = Limbus:new({
-    zoneId = xi.zone.APOLLYON,
-    battlefieldId = xi.battlefield.id.SE_APOLLYON,
-    maxPlayers = 18,
-    timeLimit = utils.minutes(30),
-    index = 2,
-    area = 3,
-    entryNpc = '_12i',
-    name = "SE_APOLLYON",
+    zoneId           = xi.zone.APOLLYON,
+    battlefieldId    = xi.battlefield.id.SE_APOLLYON,
+    maxPlayers       = 18,
+    timeLimit        = utils.minutes(30),
+    index            = 2,
+    area             = 3,
+    entryNpc         = '_12i',
     requiredKeyItems = { xi.ki.COSMO_CLEANSE, xi.ki.BLACK_CARD, message = ID.text.YOU_INSERT_THE_CARD_POLISHED },
-    lossEventParams = { [5] = 1 },
+    lossEventParams  = { [5] = 1 },
+    name             = "SE_APOLLYON",
 })
 
 content.paths =
