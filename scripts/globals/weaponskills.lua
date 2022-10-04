@@ -91,6 +91,25 @@ local function souleaterBonus(attacker, wsParams)
     return bonus
 end
 
+local function consumeManaBonus(attacker)
+    local bonus = 0
+    local mana  = 0
+    local rate  = 10
+
+    if
+        attacker:hasStatusEffect(xi.effect.CONSUME_MANA) and
+        attacker:getMP() >= 10
+    then
+        mana  = attacker:getMP()
+        bonus = bonus + math.floor(mana / rate)
+
+        attacker:setMP(0)
+        attacker:delStatusEffect(xi.effect.CONSUME_MANA)
+    end
+
+    return bonus
+end
+
 local function fencerBonus(attacker)
     local bonus = 0
 
@@ -901,18 +920,27 @@ end
 -- Helper function to get Main damage depending on weapon type
 function getMeleeDmg(attacker, weaponType, kick)
     local mainhandDamage = attacker:getWeaponDmg()
-    local offhandDamage = attacker:getOffhandDmg()
+    local offhandDamage  = attacker:getOffhandDmg()
 
-    if weaponType == xi.skill.HAND_TO_HAND or weaponType == xi.skill.NONE then
+    if
+        weaponType == xi.skill.HAND_TO_HAND or
+        weaponType == xi.skill.NONE
+    then
         local h2hSkill = attacker:getSkillLevel(xi.skill.HAND_TO_HAND) * 0.11 + 3
 
-        if kick and attacker:hasStatusEffect(xi.effect.FOOTWORK) then
+        if
+            kick and
+            attacker:hasStatusEffect(xi.effect.FOOTWORK)
+        then
             mainhandDamage = attacker:getMod(xi.mod.KICK_DMG) -- Use Kick damage if footwork is on
         end
 
         mainhandDamage = mainhandDamage + h2hSkill
-        offhandDamage = mainhandDamage
+        offhandDamage  = mainhandDamage
     end
+
+    -- Consume Mana adds MP converted / 10 to the base damage of the weapon
+    mainhandDamage = mainhandDamage + consumeManaBonus(attacker)
 
     return { mainhandDamage, offhandDamage }
 end
