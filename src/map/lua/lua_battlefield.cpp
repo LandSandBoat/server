@@ -444,6 +444,19 @@ void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleArenas)
         group.allDeathCallback    = groupData.get<sol::function>("allDeath");
         group.randomDeathCallback = groupData.get<sol::function>("randomDeath");
 
+        bool spawned = groupData.get_or("spawned", true);
+        if (spawned)
+        {
+            for (CBaseEntity* entity : groupEntities)
+            {
+                if (spawnedEntities.find(entity->id) == spawnedEntities.end())
+                {
+                    entity->Spawn();
+                    spawnedEntities.insert(entity->id);
+                }
+            }
+        }
+
         auto setup = groupData.get<sol::function>("setup");
         if (setup.valid())
         {
@@ -509,19 +522,6 @@ void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleArenas)
                 for (auto modifier : mobMods.get<sol::table>())
                 {
                     PMob->setMobMod(modifier.first.as<uint16>(), modifier.second.as<uint16>());
-                }
-            }
-        }
-
-        bool spawned = groupData.get_or("spawned", true);
-        if (spawned)
-        {
-            for (CBaseEntity* entity : groupEntities)
-            {
-                if (spawnedEntities.find(entity->id) == spawnedEntities.end())
-                {
-                    entity->Spawn();
-                    spawnedEntities.insert(entity->id);
                 }
             }
         }
