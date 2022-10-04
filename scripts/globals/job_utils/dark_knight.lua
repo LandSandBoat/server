@@ -67,7 +67,11 @@ xi.job_utils.dark_knight.useArcaneCircle = function(player, target, ability)
 end
 
 xi.job_utils.dark_knight.useArcaneCrest = function(player, target, ability)
-    target:addStatusEffect(xi.effect.ARCANE_CREST, 8, 1, 30)
+    local power    = 20
+    local jpValue  = player:getJobPointLevel(xi.jp.ARCANE_CREST_DURATION)
+    local duration = 180 + jpValue
+
+    target:addStatusEffect(xi.effect.ARCANE_CREST, power, 0, duration)
 end
 
 xi.job_utils.dark_knight.useBloodWeapon = function(player, target, ability)
