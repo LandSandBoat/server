@@ -317,18 +317,7 @@ content.loot =
     [ID.SE_APOLLYON.npc.ITEM_CRATES[1]] =
     {
         {
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
-        },
-
-        {
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
-        },
-
-        {
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
-        },
-
-        {
+            quantity = 4,
             { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
         },
 
@@ -361,18 +350,7 @@ content.loot =
     [ID.SE_APOLLYON.npc.ITEM_CRATES[2]] =
     {
         {
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
-        },
-
-        {
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
-        },
-
-        {
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
-        },
-
-        {
+            quantity = 4,
             { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
         },
 
@@ -406,18 +384,7 @@ content.loot =
     [ID.SE_APOLLYON.npc.ITEM_CRATES[3]] =
     {
         {
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
-        },
-
-        {
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
-        },
-
-        {
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
-        },
-
-        {
+            quantity = 4,
             { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
         },
 
@@ -444,22 +411,7 @@ content.loot =
     [ID.SE_APOLLYON.npc.LOOT_CRATE] =
     {
         {
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
-        },
-
-        {
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
-        },
-
-        {
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
-        },
-
-        {
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
-        },
-
-        {
+            quantity = 5,
             { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
         },
 
