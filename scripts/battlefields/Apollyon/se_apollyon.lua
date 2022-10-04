@@ -21,7 +21,8 @@ local content = Limbus:new({
     area = 3,
     entryNpc = '_12i',
     name = "SE_APOLLYON",
-    requiredKeyItems = { xi.ki.COSMO_CLEANSE, xi.ki.BLACK_CARD, message = ID.text.YOU_INSERT_THE_CARD_POLISHED }
+    requiredKeyItems = { xi.ki.COSMO_CLEANSE, xi.ki.BLACK_CARD, message = ID.text.YOU_INSERT_THE_CARD_POLISHED },
+    lossEventParams = { [5] = 1 },
 })
 
 content.paths =

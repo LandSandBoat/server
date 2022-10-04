@@ -106,6 +106,7 @@ end
 --  - requiredKeyItems: Key items required to be able to enter the battlefield - these are removed upon entry (optional)
 --  - title: Title given to players upon victory (optional)
 --  - grantXP: Amount of XP to grant upon victory (optional)
+--  - lossEventParams: Parameters given to the loss event (32002). Defaults to none. (optional)
 function Battlefield:new(data)
     local obj = Container:new(Battlefield.getVarPrefix(data.battlefieldId))
     setmetatable(obj, self)
@@ -149,6 +150,7 @@ function Battlefield:new(data)
     obj.title = data.title
     -- Amount of XP to grant upon victory
     obj.grantXP = data.grantXP
+    obj.lossEventParams = data.lossEventParams
     obj.sections = { { [obj.zoneId] = {} } }
     return obj
 end
@@ -634,7 +636,7 @@ function Battlefield:onBattlefieldWin(player, battlefield)
 end
 
 function Battlefield:onBattlefieldLoss(player, battlefield)
-    player:startEvent(32002)
+    player:startEvent(32002, self.lossEventParams)
 end
 
 function Battlefield:handleWipe(battlefield, players)
