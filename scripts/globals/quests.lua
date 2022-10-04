@@ -696,6 +696,7 @@ xi.quest.id =
         MOMENT_OF_TRUTH                 = 30,
         THREE_MEN_AND_A_CLOSET          = 31, -- + Converted
         FIVE_SECONDS_OF_FAME            = 32,
+        SAGA_OF_THE_SKYSERPENT          = 43, -- + Converted
         DELIVERING_THE_GOODS            = 61, -- + Converted
         VANISHING_ACT                   = 62, -- + Converted
         STRIKING_A_BALANCE              = 63, -- + Converted
