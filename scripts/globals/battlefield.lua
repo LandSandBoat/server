@@ -844,8 +844,6 @@ function BattlefieldMission:checkSkipCutscene(player)
 end
 
 function BattlefieldMission:onBattlefieldWin(player, battlefield)
-    Battlefield.onBattlefieldWin(self, player, battlefield)
-
     local current = player:getCurrentMission(self.missionArea)
     if current == self.mission then
         player:setLocalVar("battlefieldWin", battlefield:getID())

@@ -631,15 +631,9 @@ function Limbus:onBattlefieldDestroy(battlefield)
 end
 
 function Limbus:onBattlefieldLeave(player, battlefield, leavecode)
+    Battlefield.onBattlefieldLeave(self, player, battlefield, leavecode)
     local ID = zones[battlefield:getZoneID()]
     player:messageSpecial(ID.text.HUM + 1)
-
-    if leavecode == xi.battlefield.leaveCode.WON then
-        local _, clearTime, partySize = battlefield:getRecord()
-        player:startCutscene(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), 0)
-    elseif leavecode == xi.battlefield.leaveCode.LOST then
-        player:startCutscene(32002)
-    end
 end
 
 function Limbus:extendTimeLimit(ID, battlefield, amount)
