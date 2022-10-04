@@ -176,6 +176,7 @@ function Battlefield:register()
                 [32000] = Battlefield.redirectEventUpdate,
                 [32003] = utils.bind(Battlefield.redirectEventCall, "onExitEventUpdate"),
             },
+
             onEventFinish =
             {
                 [32000] = utils.bind(Battlefield.redirectEventCall, "onEventFinishEnter"),
@@ -217,7 +218,7 @@ function Battlefield:register()
 end
 
 function Battlefield:checkRequirements(player, npc, registrant, trade)
-    if (self.entryNpc ~= npc:getName()) then
+    if self.entryNpc ~= npc:getName() then
         return false
     end
 
@@ -282,7 +283,11 @@ function Battlefield.onEntryTrade(player, npc, trade, onUpdate)
     -- Ensure that the traded item(s) are not worn out
     local contents = xi.battlefield.contentsByZone[zoneId]
     for _, content in ipairs(contents) do
-        if #content.requiredItems > 0 and content.requiredItems[1].wornMessage and player:hasWornItem(content.requiredItems[1]) then
+        if
+            #content.requiredItems > 0 and
+            content.requiredItems[1].wornMessage and
+            player:hasWornItem(content.requiredItems[1])
+        then
             player:messageBasic(content.requiredItems[1].wornMessage)
             return false
         end
@@ -361,7 +366,7 @@ function Battlefield.redirectEventUpdate(player, csid, option, extras)
     local contents = xi.battlefield.contentsByZone[player:getZoneID()]
     local value = bit.rshift(option, 4)
     for _, content in pairs(contents) do
-        if (value == content.index) then
+        if value == content.index then
             content:onEntryEventUpdate(player, csid, option, extras)
             break
         end
