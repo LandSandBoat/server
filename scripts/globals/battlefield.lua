@@ -101,7 +101,8 @@ end
 --  - hasWipeGrace: Grants players a 3 minute grace period on a full wipe before ejecting them. Defaults to true. (optional)
 --  - canLoseExp: Determines if a character loses experience points upon death while inside the battlefield. Defaults to true. (optional)
 --  - delayToExit: Amount of time to wait before exiting the battlefield. Defaults to 5 seconds. (optional)
---  - requiredItems: Items required to be traded to enter the battlefield. Needs to be in the format of { itemid, quantity, message = ID.text.*, worn = true }. (optional)
+--  - requiredItems: Items required to be traded to enter the battlefield.
+--                   Needs to be in the format of { itemid, quantity, useMessage = ID.text.*, wearMessage = ID.text.*, wornMessage = ID.text.* }. (optional)
 --  - requiredKeyItems: Key items required to be able to enter the battlefield - these are removed upon entry (optional)
 --  - title: Title given to players upon victory (optional)
 --  - grantXP: Amount of XP to grant upon victory (optional)
@@ -170,6 +171,7 @@ end
 
 function Battlefield:register()
     -- Only hookup the entry and exit listeners if there aren't any other battlefields already registered for that entrance
+    lldebugger.requestBreak()
     local setupEvents = true
     local setupEntryNpc = true
     local setupExitNpc = true
@@ -202,26 +204,27 @@ function Battlefield:register()
         utils.append(zoneSection, {
             onEventUpdate =
             {
-                [32000] = utils.bind(self.onEntryEventUpdate, self),
-                [32003] = utils.bind(self.onExitEventUpdate, self),
+                [32000] = Battlefield.redirectEventUpdate,
+                [32003] = utils.bind(Battlefield.redirectEventCall, "onExitEventUpdate"),
             },
             onEventFinish =
             {
-                [32000] = utils.bind(self.onEventFinishEnter, self),
-                [32001] = utils.bind(self.onEventFinishWin, self),
-                [32002] = utils.bind(self.onEventFinishLeave, self),
-                [32003] = utils.bind(self.onEventFinishExit, self),
-                [32004] = utils.bind(self.onEventFinishBattlefield, self),
+                [32000] = utils.bind(Battlefield.redirectEventCall, "onEventFinishEnter"),
+                [32001] = utils.bind(Battlefield.redirectEventCall, "onEventFinishWin"),
+                [32002] = utils.bind(Battlefield.redirectEventCall, "onEventFinishLeave"),
+                [32003] = utils.bind(Battlefield.redirectEventCall, "onEventFinishExit"),
+                [32004] = utils.bind(Battlefield.redirectEventCall, "onEventFinishBattlefield"),
             }
         })
+        self.hasListeners = true
     end
 
     if setupEntryNpc and self.entryNpc then
         utils.append(zoneSection, {
             [self.entryNpc] =
             {
-                onTrade = utils.bind(self.onEntryTrade, self),
-                onTrigger = utils.bind(self.onEntryTrigger, self),
+                onTrade = Battlefield.onEntryTrade,
+                onTrigger = Battlefield.onEntryTrigger,
             }
         })
     end
@@ -230,7 +233,7 @@ function Battlefield:register()
         utils.append(zoneSection, {
             [self.exitNpc] =
             {
-                onTrigger = utils.bind(self.onExitTrigger, self),
+                onTrigger = Battlefield.onExitTrigger,
             }
         })
     end
@@ -268,7 +271,7 @@ function Battlefield:checkSkipCutscene(player)
     return false
 end
 
-function Battlefield:onEntryTrade(player, npc, trade, onUpdate)
+function Battlefield.onEntryTrade(player, npc, trade, onUpdate)
     -- Check if player's party has level sync
     if xi.battlefield.rejectLevelSyncedParty(player, npc) then
         return false
@@ -276,16 +279,6 @@ function Battlefield:onEntryTrade(player, npc, trade, onUpdate)
 
     -- Validate trade
     if not trade then
-        return false
-    end
-
-    if #self.requiredItems > 0 and not npcUtil.tradeHasExactly(trade, self.requiredItems) then
-        return false
-    end
-
-    -- Check if the player is trading exactly one item but it is worn
-    if #self.requiredItems == 1 and player:hasWornItem(self.requiredItems[1]) then
-        player:messageBasic(xi.msg.basic.ITEM_UNABLE_TO_USE_2, 0, 0)
         return false
     end
 
@@ -305,20 +298,30 @@ function Battlefield:onEntryTrade(player, npc, trade, onUpdate)
         end
     end
 
-    -- Open menu of valid battlefields
+    -- Determine which battlefields are available given the traded items
     local options = xi.battlefield.getBattlefieldOptions(player, npc, trade)
-    if options ~= 0 then
-        if not onUpdate then
-            player:startEvent(32000, 0, 0, 0, options, 0, 0, 0, 0)
-        end
-
-        return true
+    if options == 0 then
+        return
     end
 
-    return false
+    -- Ensure that the traded item(s) are not worn out
+    local contents = xi.battlefield.contentsByZone[player:getZoneID()]
+    for _, content in ipairs(contents) do
+        if #content.requiredItems > 0 and content.requiredItems[1].wornMessage and player:hasWornItem(content.requiredItems[1]) then
+            player:messageBasic(content.requiredItems[1].wornMessage)
+            return false
+        end
+    end
+
+    if not onUpdate then
+        -- Open menu of valid battlefields
+        player:startEvent(32000, 0, 0, 0, options, 0, 0, 0, 0)
+    end
+
+    return true
 end
 
-function Battlefield:onEntryTrigger(player, npc)
+function Battlefield.onEntryTrigger(player, npc)
     -- Cannot enter if anyone in party is level/master sync'd
     if xi.battlefield.rejectLevelSyncedParty(player, npc) then
         return false
@@ -327,18 +330,19 @@ function Battlefield:onEntryTrigger(player, npc)
     -- Player has battlefield status effect. That means a battlefield is open OR the player is inside a battlefield.
     if player:hasStatusEffect(xi.effect.BATTLEFIELD) then
         -- Player is outside battlefield. Attempting to enter.
-        -- TODO(jmcmorris): Is this going to be triggered for each battlefield in the zone?
         local status = player:getStatusEffect(xi.effect.BATTLEFIELD)
-        local bfid = status:getPower()
-        if self.battlefieldId ~= bfid then
+        local id = status:getPower()
+
+        local content = xi.battlefield.contents[id]
+        if not content then
             return false
         end
 
-        if not self:checkRequirements(player, npc, bfid, false) then
+        if not content:checkRequirements(player, npc, content.id, false) then
             return false
         end
 
-        player:startEvent(32000, 0, 0, 0, self.menuBit, 0, 0, 0, 0)
+        player:startEvent(32000, 0, 0, 0, content.menuBit, 0, 0, 0, 0)
         return true
     end
 
@@ -369,17 +373,23 @@ function Battlefield:onEntryTrigger(player, npc)
     return true
 end
 
-function Battlefield:onEntryEventUpdate(player, csid, option, extras)
+-- Static function to lookup the correct battlefield to handle this event update
+function Battlefield.redirectEventUpdate(player, csid, option, extras)
     if option == 0 or option == 255 then
-        -- todo: check if battlefields full, check party member requirements
         return false
     end
 
+    local contents = xi.battlefield.contentsByZone[player:getZoneID()]
     local value = bit.rshift(option, 4)
-    if value ~= self.menuBit then
-        return false
+    for _, content in pairs(contents) do
+        if (value == content.menuBit) then
+            content:onEntryEventUpdate(player, csid, option, extras)
+            break
+        end
     end
+end
 
+function Battlefield:onEntryEventUpdate(player, csid, option, extras)
     local clearTime = 1
     local name      = "Meme"
     local partySize = 1
@@ -430,8 +440,9 @@ function Battlefield:onEntryEventUpdate(player, csid, option, extras)
 
         -- Handle traded items
         for _, item in ipairs(self.requiredItems) do
-            if item.worn and player:hasItem(item[1]) then
+            if item.wearMessage and player:hasItem(item[1]) then
                 player:createWornItem(item[1])
+                player:messageSpecial(item.wearMessage, item[1])
             else
                 player:tradeComplete()
             end
@@ -456,6 +467,16 @@ function Battlefield:onEntryEventUpdate(player, csid, option, extras)
     return status < xi.battlefield.status.LOCKED and result < xi.battlefield.returnCode.LOCKED
 end
 
+function Battlefield.redirectEventCall(eventName, player, csid, option)
+    local battlefield = player:getBattlefield()
+    if not battlefield then
+        return
+    end
+
+    local content = xi.battlefield.contents[battlefield:getID()]
+    content[eventName](content, player, csid, option)
+end
+
 function Battlefield:onEventFinishEnter(player, csid, option)
     player:setLocalVar("[battlefield]area", 0)
 end
@@ -469,7 +490,7 @@ function Battlefield:onEventFinishWin(player, csid, option)
     end
 end
 
-function Battlefield:onExitTrigger(player, npc)
+function Battlefield.onExitTrigger(player, npc)
     if player:getBattlefield() then
         player:startOptionalCutscene(32003)
     end
