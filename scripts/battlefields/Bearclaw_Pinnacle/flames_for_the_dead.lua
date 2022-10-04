@@ -11,8 +11,11 @@ require("scripts/globals/zone")
 -----------------------------------
 
 local content = BattlefieldMission:new({
-    zoneId = xi.zone.THRONE_ROOM,
+    zoneId = xi.zone.BEARCLAW_PINNACLE,
     battlefieldId = xi.battlefield.id.FLAMES_FOR_THE_DEAD,
+    maxPlayers = 6,
+    levelCap = 99,
+    timeLimit = utils.minutes(30),
     menuBit = 0,
     entryNpc = "Wind_Pillar_1",
     exitNpc = "Wind_Pillar_Exit",
@@ -24,5 +27,11 @@ local content = BattlefieldMission:new({
     title = xi.title.TRUE_COMPANION_OF_LOUVERANCE,
     grantXP = 1000,
 })
+
+content:addEssentialMobs({ "Snoll_Tzar" })
+
+function content:checkRequirements(player, npc, registrant, trade)
+    return true
+end
 
 return content:register()
