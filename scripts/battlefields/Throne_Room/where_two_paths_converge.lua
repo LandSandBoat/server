@@ -63,15 +63,15 @@ content.groups =
                 mob:setUnkillable(true)
 
                 mob:removeListener("ZEID_COMBAT_TICK")
-                mob:addListener("COMBAT_TICK", "ZEID_COMBAT_TICK", function(mob)
-                    if mob:getHPP() < 70 and mob:getLocalVar("ChangingPhase") == 0 then
-                        mob:setLocalVar("ChangingPhase", 1)
+                mob:addListener("COMBAT_TICK", "ZEID_COMBAT_TICK", function(zeid)
+                    if zeid:getHPP() < 70 and zeid:getLocalVar("ChangingPhase") == 0 then
+                        zeid:setLocalVar("ChangingPhase", 1)
 
-                        local players = mob:getBattlefield():getPlayers()
+                        local players = zeid:getBattlefield():getPlayers()
                         for _, player in ipairs(players) do
-                            mob:setUntargetable(true)
+                            zeid:setUntargetable(true)
                             player:startEvent(32004, 3, 3, 1, 3, 3, 3, 3, 3)
-                            DespawnMob(mob:getID())
+                            DespawnMob(zeid:getID())
                         end
 
                     end

@@ -213,7 +213,6 @@ content.groups =
             [xi.mod.HTH_SDT] = 1250,
         },
         setup = function(battlefield, mobs)
-            local battlefield = mobs[1]:getBattlefield()
             local timeCrateIndex, recoverCrateIndex, itemCrateIndex = unpack(utils.uniqueRandomTable(1, 6, 3))
 
             battlefield:setLocalVar("timeCrateIndex", timeCrateIndex)
@@ -221,7 +220,6 @@ content.groups =
             battlefield:setLocalVar("itemCrateIndex", itemCrateIndex)
         end,
         death = function(battlefield, mob, count)
-            local battlefield = mob:getBattlefield()
             if count == 2 then
                 local crate = GetNPCByID(ID.SE_APOLLYON.npc.TIME_CRATES[3])
                 crate:setPos(floorThreeCratePositions[battlefield:getLocalVar("timeCrateIndex")])

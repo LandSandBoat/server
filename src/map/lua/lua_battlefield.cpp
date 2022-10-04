@@ -319,7 +319,7 @@ void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleArenas)
         for (auto entry : groups)
         {
             QueryByNameResult_t groupEntities;
-            sol::table groupData = entry.second.as<sol::table>();
+            sol::table          groupData = entry.second.as<sol::table>();
 
             auto groupMobs = groupData["mobs"];
             if (groupMobs.valid())
@@ -402,11 +402,11 @@ void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleArenas)
         }
 
         // Look to see if there have been any mob ids specifically set for this battlefield.
-        
         auto groupMobIds = groupData["mobIds"];
         if (groupMobIds.valid())
         {
-            auto addMobIdsForArea = [&](const std::vector<uint32>& mobIds) {
+            auto addMobIdsForArea = [&](const std::vector<uint32>& mobIds)
+            {
                 for (uint32 mobid : mobIds)
                 {
                     CBaseEntity* entity = zoneutils::GetEntity(mobid, TYPE_MOB);
