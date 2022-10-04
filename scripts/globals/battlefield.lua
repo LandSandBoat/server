@@ -110,47 +110,27 @@ end
 function Battlefield:new(data)
     local obj = Container:new(Battlefield.getVarPrefix(data.battlefieldId))
     setmetatable(obj, self)
-    -- Which zone this battlefield exists within
-    obj.zoneId = data.zoneId
-    -- Battlefield ID used in the database
-    obj.battlefieldId = data.battlefieldId
-    -- Maximum number of players allowed to enter
-    obj.maxPlayers = data.maxPlayers
-    -- Time in seconds alotted to complete the battlefield before being ejected
-    obj.timeLimit = data.timeLimit
-    -- The index of the battlefield within the zone. This is used to communicate with the client on which menu item this battlefield is.
-    obj.index = data.index
-    -- Level cap imposed upon the battlefield
-    obj.levelCap = data.levelCap or 0
-    -- Some battlefields has multiple areas (Burning Circles) while others have fixed areas (Apollyon). Set to have a fixed area.
-    obj.area = data.area
-    -- Determines if character subjobs are enabled or disabled upon entry. Defaults to true.
-    obj.allowSubjob = (data.allowSubjob == nil or data.allowSubjob) or false
-    -- Grants players a 3 minute grace period on a full wipe before ejecting them. Defaults to true.
-    obj.hasWipeGrace = (data.hasWipeGrace == nil or data.hasWipeGrace) or false
-    -- Determines if a character loses experience points upon death while inside the battlefield. Defaults to true.
-    obj.canLoseExp = (data.canLoseExp == nil or data.canLoseExp) or false
-    -- Amount of time to wait before exiting the battlefield. Defaults to 5 seconds.
-    obj.delayToExit = data.delayToExit or 5
-    -- Monster battlefield groups added with battlefield:addGroups()
-    obj.groups = {}
-    -- Pathing for monsters and npcs within the battlefield
-    obj.paths = {}
-    -- Loot spawned in the Armoury Crate(s)
-    obj.loot = {}
-    -- Items required to be traded to enter the battlefield
-    obj.requiredItems = data.requiredItems or {}
-    -- Key items required to be able to enter the battlefield - these are removed upon entry
-    obj.requiredKeyItems = data.requiredKeyItems or {}
-    -- The name of the NPC used for entering
-    obj.entryNpc = data.entryNpc
-    -- The name of the NPC used for exiting
-    obj.exitNpc = data.exitNpc
-    -- Title given to players upon victory
-    obj.title = data.title
-    -- Amount of XP to grant upon victory
-    obj.grantXP = data.grantXP
-    obj.lossEventParams = data.lossEventParams
+    obj.zoneId = data.zoneId -- Which zone this battlefield exists within
+    obj.battlefieldId = data.battlefieldId -- Battlefield ID used in the database
+    obj.maxPlayers = data.maxPlayers -- Maximum number of players allowed to enter
+    obj.timeLimit = data.timeLimit -- Time in seconds alotted to complete the battlefield before being ejected
+    obj.index = data.index -- The index of the battlefield within the zone. This is used to communicate with the client on which menu item this battlefield is.
+    obj.levelCap = data.levelCap or 0 -- Level cap imposed upon the battlefield
+    obj.area = data.area -- Some battlefields has multiple areas (Burning Circles) while others have fixed areas (Apollyon). Set to have a fixed area.
+    obj.allowSubjob = (data.allowSubjob == nil or data.allowSubjob) or false -- Determines if character subjobs are enabled or disabled upon entry. Defaults to true.
+    obj.hasWipeGrace = (data.hasWipeGrace == nil or data.hasWipeGrace) or false -- Grants players a 3 minute grace period on a full wipe before ejecting them. Defaults to true.
+    obj.canLoseExp = (data.canLoseExp == nil or data.canLoseExp) or false -- Determines if a character loses experience points upon death while inside the battlefield. Defaults to true.
+    obj.delayToExit = data.delayToExit or 5 -- Amount of time to wait before exiting the battlefield. Defaults to 5 seconds.
+    obj.groups = {} -- Monster battlefield groups added with battlefield:addGroups()
+    obj.paths = {} -- Pathing for monsters and npcs within the battlefield
+    obj.loot = {} -- Loot spawned in the Armoury Crate(s)
+    obj.requiredItems = data.requiredItems or {} -- Items required to be traded to enter the battlefield
+    obj.requiredKeyItems = data.requiredKeyItems or {} -- Key items required to be able to enter the battlefield - these are removed upon entry
+    obj.entryNpc = data.entryNpc -- The name of the NPC used for entering
+    obj.exitNpc = data.exitNpc -- The name of the NPC used for exiting
+    obj.title = data.title -- Title given to players upon victory
+    obj.grantXP = data.grantXP -- Amount of XP to grant upon victory
+    obj.lossEventParams = data.lossEventParams or {} -- Parameters given to the loss event (32002). Defaults to none.
     obj.sections = { { [obj.zoneId] = {} } }
     return obj
 end
