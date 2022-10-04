@@ -56,6 +56,7 @@ content.groups =
             { ID.mob.SHADOW_LORD_PHASE_1_OFFSET + 1 },
             { ID.mob.SHADOW_LORD_PHASE_1_OFFSET + 2 }
         },
+
         death = function(battlefield, mob)
             local players = battlefield:getPlayers()
             for _, player in pairs(players) do
@@ -72,6 +73,7 @@ content.groups =
             { ID.mob.SHADOW_LORD_PHASE_2_OFFSET + 1 },
             { ID.mob.SHADOW_LORD_PHASE_2_OFFSET + 2 }
         },
+
         spawned = false,
         death = function(battlefield, mob)
             battlefield:setStatus(xi.battlefield.status.WON)

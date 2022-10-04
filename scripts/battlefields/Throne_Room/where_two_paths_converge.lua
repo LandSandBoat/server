@@ -78,7 +78,6 @@ content.groups =
                     end
                 end)
             end
-
         end
     },
 

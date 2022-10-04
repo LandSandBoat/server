@@ -32,6 +32,7 @@ content.groups =
             [xi.mod.DMGMAGIC] = -1000,
             [xi.mod.SLEEPRES] = 75,
         },
+
         mobMods =
         {
             [xi.mobMod.SIGHT_RANGE] = 30,
@@ -45,6 +46,7 @@ content.groups =
             [xi.mod.SILENCERES] = 75,
             [xi.mod.SLEEPRES] = 50,
         },
+
         mobMods =
         {
             [xi.mobMod.SIGHT_RANGE] = 30,
