@@ -352,23 +352,28 @@ namespace luautils
             return -1;
         }
 
-        auto battlefield = contents.get<sol::table>(battlefieldId);
-        if (battlefield.valid())
+        auto battlefield = contents[battlefieldId];
+        if (!battlefield.valid())
         {
-            auto handler = battlefield.get<sol::protected_function>(eventName);
-            if (handler.valid())
-            {
-                auto result = handler(battlefield, args...);
-                if (!result.valid())
-                {
-                    sol::error err = result;
-                    ShowError("luautils::%s: %s", eventName, err.what());
-                    return -1;
-                }
-                return 0;
-            }
+            return -1;
         }
-        return -1;
+
+        auto content = battlefield.get<sol::table>();
+        auto handler = content[eventName];
+        if (!handler.valid())
+        {
+            return -1;
+        }
+
+        auto result = handler.get<sol::protected_function>()(content, args...);
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::%s: %s", eventName, err.what());
+            return -1;
+        }
+
+        return 0;
     }
 
 }; // namespace luautils
