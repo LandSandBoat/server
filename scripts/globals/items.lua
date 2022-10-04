@@ -1547,6 +1547,7 @@ xi.items =
     PLATE_OF_HOMEMADE_RISOTTO       = 5229,
     HERMES_QUENCHER                 = 5253,
     MISTMELT                        = 5265,
+    CHUNK_OF_SHUMEYO_SALT           = 5267,
     TOOLBAG_UCHITAKE                = 5308,
     TOOLBAG_TSURARA                 = 5309,
     TOOLBAG_KAWAHORI_OGI            = 5310,
