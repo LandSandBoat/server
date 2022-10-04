@@ -16,7 +16,7 @@ local content = Battlefield:new({
     maxPlayers = 18,
     levelCap = 75,
     timeLimit = utils.minutes(30),
-    menuBit = 4,
+    index = 4,
     entryNpc = "Wind_Pillar_5",
     exitNpc = "Wind_Pillar_Exit",
     requiredKeyItems = { xi.ki.ZEPHYR_FAN, message = ID.text.ZEPHYR_RIPS },

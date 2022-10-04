@@ -92,7 +92,7 @@ end
 --  - battlefieldId: Battlefield ID used in the database (required)
 --  - maxPlayers: Maximum number of players allowed to enter (required)
 --  - timeLimit: Time in seconds alotted to complete the battlefield before being ejected. (required)
---  - menuBit: The bit used to communicate with the client on which menu item this battlefield is (required)
+--  - index: The index of the battlefield within the zone. This is used to communicate with the client on which menu item this battlefield is. (required)
 --  - levelCap: Level cap imposed upon the battlefield. Defaults to 0 - no level cap. (optional)
 --  - area: Some battlefields has multiple areas (Burning Circles) while others have fixed areas (Apollyon). Set to have a fixed area. (optional)
 --  - entryNpc: The name of the NPC used for entering
@@ -118,8 +118,8 @@ function Battlefield:new(data)
     obj.maxPlayers = data.maxPlayers
     -- Time in seconds alotted to complete the battlefield before being ejected
     obj.timeLimit = data.timeLimit
-    -- The bit used to communicate with the client on which menu item this battlefield is
-    obj.menuBit = data.menuBit
+    -- The index of the battlefield within the zone. This is used to communicate with the client on which menu item this battlefield is.
+    obj.index = data.index
     -- Level cap imposed upon the battlefield
     obj.levelCap = data.levelCap or 0
     -- Some battlefields has multiple areas (Burning Circles) while others have fixed areas (Apollyon). Set to have a fixed area.
@@ -337,7 +337,7 @@ function Battlefield.onEntryTrigger(player, npc)
             return false
         end
 
-        player:startEvent(32000, 0, 0, 0, content.menuBit, 0, 0, 0, 0)
+        player:startEvent(32000, 0, 0, 0, content.index, 0, 0, 0, 0)
         return true
     end
 
@@ -381,7 +381,7 @@ function Battlefield.redirectEventUpdate(player, csid, option, extras)
     local contents = xi.battlefield.contentsByZone[player:getZoneID()]
     local value = bit.rshift(option, 4)
     for _, content in pairs(contents) do
-        if (value == content.menuBit) then
+        if (value == content.index) then
             content:onEntryEventUpdate(player, csid, option, extras)
             break
         end
@@ -461,7 +461,7 @@ function Battlefield:onEntryEventUpdate(player, csid, option, extras)
         end
     end
 
-    player:updateEvent(result, self.menuBit, 0, clearTime, partySize, self:checkSkipCutscene(player))
+    player:updateEvent(result, self.index, 0, clearTime, partySize, self:checkSkipCutscene(player))
     player:updateEventString(name)
     return status < xi.battlefield.status.LOCKED and result < xi.battlefield.returnCode.LOCKED
 end
@@ -606,7 +606,7 @@ function Battlefield:onBattlefieldEnter(player, battlefield)
     end
 
     local ID = zones[self.zoneId]
-    player:messageSpecial(ID.text.ENTERING_THE_BATTLEFIELD_FOR, 0, self.menuBit)
+    player:messageSpecial(ID.text.ENTERING_THE_BATTLEFIELD_FOR, 0, self.index)
     if self.maxPlayers > 6 then
         player:messageSpecial(ID.text.MEMBERS_OF_YOUR_ALLIANCE, 0, 0, 0, self.maxPlayers)
     elseif self.maxPlayers > 1 then
@@ -632,7 +632,7 @@ end
 
 function Battlefield:onBattlefieldWin(player, battlefield)
     local _, clearTime, partySize = battlefield:getRecord()
-    player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, self.menuBit, 0)
+    player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, self.index, 0)
 end
 
 function Battlefield:onBattlefieldLoss(player, battlefield)
@@ -770,7 +770,7 @@ function xi.battlefield.getBattlefieldOptions(player, npc, trade)
 
     for _, content in ipairs(contents) do
         if content:checkRequirements(player, npc, true, trade) and not player:battlefieldAtCapacity(content.battlefieldId) then
-            result = utils.mask.setBit(result, content.menuBit, true)
+            result = utils.mask.setBit(result, content.index, true)
         end
     end
 
@@ -853,7 +853,7 @@ function BattlefieldMission:onBattlefieldWin(player, battlefield)
 
     local _, clearTime, partySize = battlefield:getRecord()
     local canSkipCS = (current ~= self.mission) and 1 or 0
-    player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, self.menuBit, canSkipCS)
+    player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, self.index, canSkipCS)
 end
 
 function BattlefieldMission:onEventFinishWin(player, csid, option)
