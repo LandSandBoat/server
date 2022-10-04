@@ -12,8 +12,8 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.IDLE_DESPAWN, 180)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
-    if (isKiller) then
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller then
         local mobId = mob:getID()
         local offset = mobId - ID.mob.GIGAPLASM
         local x = mob:getXPos()

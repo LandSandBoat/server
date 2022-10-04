@@ -5,7 +5,7 @@
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     if player:getCharVar("unbridledPassion") == 4 then
         player:setCharVar("unbridledPassion", 5)
     end

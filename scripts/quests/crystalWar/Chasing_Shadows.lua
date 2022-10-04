@@ -152,7 +152,7 @@ quest.sections =
 
             ['Menechme'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if quest:getVar(player, 'Prog') == 7 then
                         quest:setVar(player, 'Prog', 8)
                     end

@@ -291,6 +291,8 @@ uint16 CSpell::getAoEMessage() const
 {
     switch (m_message)
     {
+        case 7: // recovers HP
+            return 367;
         case 93: // vanishes
             return 273;
         case 85: // resists

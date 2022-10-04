@@ -8,6 +8,8 @@ return {
     ['Mhasbaf']            = { event = 542 },
     ['Nadee_Periyaha']     = { event =  90 },
     ['Rodin-Comidin']      = { event = 665 },
+    ['Saliyahf']           = { event = 700 },
     ['Tohka_Telposkha']    = { event = 663 },
-    ['Waoud']              = { event =  61 },
+    ['Waoud']              = { event = 61 },
+    ['Wazyih']             = { event = 699 },
 }

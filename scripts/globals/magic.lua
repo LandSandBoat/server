@@ -68,12 +68,12 @@ end
 
 -- Returns the bonus magic accuracy for any spell
 local function getSpellBonusAcc(caster, target, spell, params)
-    local magicAccBonus = 0
+    local magicAccBonus  = 0
     local castersWeather = caster:getWeather()
-    local skill = spell:getSkillType()
-    local spellGroup = spell:getSpellGroup()
-    local element = spell:getElement()
-    local casterJob = caster:getMainJob()
+    local skill          = spell:getSkillType()
+    local spellGroup     = spell:getSpellGroup()
+    local element        = spell:getElement()
+    local casterJob      = caster:getMainJob()
 
     if caster:hasStatusEffect(xi.effect.ALTRUISM) and spellGroup == xi.magic.spellGroup.WHITE then
         magicAccBonus = magicAccBonus + caster:getStatusEffect(xi.effect.ALTRUISM):getPower()
@@ -81,6 +81,11 @@ local function getSpellBonusAcc(caster, target, spell, params)
 
     if caster:hasStatusEffect(xi.effect.FOCALIZATION) and spellGroup == xi.magic.spellGroup.BLACK then
         magicAccBonus = magicAccBonus + caster:getStatusEffect(xi.effect.FOCALIZATION):getPower()
+    end
+
+    -- Apply Divine Emblem to Flash
+    if caster:hasStatusEffect(xi.effect.DIVINE_EMBLEM) and skill == xi.skill.DIVINE_MAGIC then
+        magicAccBonus = magicAccBonus + 100 -- TODO: Confirm this with retail
     end
 
     local skillchainTier, _ = FormMagicBurst(element, target)
@@ -97,68 +102,70 @@ local function getSpellBonusAcc(caster, target, spell, params)
         end
     end
 
-    if casterJob == xi.job.WHM then
-        magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.WHM_MAGIC_ACC_BONUS)
-    end
+    switch(casterJob): caseof
+    {
+        [xi.job.WHM] = function()
+            magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.WHM_MAGIC_ACC_BONUS)
+        end,
 
-    if casterJob == xi.job.BLM then
-        -- Add MACC for BLM Elemental Magic Merits
-        if skill == xi.skill.ELEMENTAL_MAGIC then
-            magicAccBonus = magicAccBonus + caster:getMerit(xi.merit.ELEMENTAL_MAGIC_ACCURACY)
-        end
+        [xi.job.BLM] = function()
+            -- Add MACC for BLM Elemental Magic Merits
+            if skill == xi.skill.ELEMENTAL_MAGIC then
+                magicAccBonus = magicAccBonus + caster:getMerit(xi.merit.ELEMENTAL_MAGIC_ACCURACY)
+            end
 
-        -- BLM Job Point: MACC Bonus +1
-        magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.BLM_MAGIC_ACC_BONUS)
+            -- BLM Job Point: MACC Bonus +1
+            magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.BLM_MAGIC_ACC_BONUS)
+        end,
 
-    end
+        [xi.job.DRK] = function()
+            -- Add MACC for Dark Seal
+            if skill == xi.skill.DARK_MAGIC and caster:hasStatusEffect(xi.effect.DARK_SEAL) then
+                magicAccBonus = magicAccBonus + 256
+            end
+        end,
 
-    if casterJob == xi.job.DRK then
-        -- Add MACC for Dark Seal
-        if skill == xi.skill.DARK_MAGIC and caster:hasStatusEffect(xi.effect.DARK_SEAL) then
-            magicAccBonus = magicAccBonus + 256
-        end
-    end
+        [xi.job.RDM] = function()
+            -- Add MACC for RDM group 1 merits
+            if element >= xi.magic.element.FIRE and element <= xi.magic.element.WATER then
+                magicAccBonus = magicAccBonus + caster:getMerit(rdmMerit[element])
+            end
 
-    if casterJob == xi.job.RDM then
-        -- Add MACC for RDM group 1 merits
-        if element >= xi.magic.element.FIRE and element <= xi.magic.element.WATER then
-            magicAccBonus = magicAccBonus + caster:getMerit(rdmMerit[element])
-        end
+            -- RDM Job Point: During saboteur, Enfeebling MACC +2
+            if skill == xi.skill.ENFEEBLING_MAGIC and caster:hasStatusEffect(xi.effect.SABOTEUR) then
+                local jpValue = caster:getJobPointLevel(xi.jp.SABOTEUR_EFFECT)
 
-        -- RDM Job Point: During saboteur, Enfeebling MACC +2
-        if skill == xi.skill.ENFEEBLING_MAGIC and caster:hasStatusEffect(xi.effect.SABOTEUR) then
-            local jpValue = caster:getJobPointLevel(xi.jp.SABOTEUR_EFFECT)
+                magicAccBonus = magicAccBonus + (jpValue * 2)
+            end
 
-            magicAccBonus = magicAccBonus + (jpValue * 2)
-        end
+            -- RDM Job Point: Magic Accuracy Bonus, All MACC + 1
+            magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.RDM_MAGIC_ACC_BONUS)
+        end,
 
-        -- RDM Job Point: Magic Accuracy Bonus, All MACC + 1
-        magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.RDM_MAGIC_ACC_BONUS)
-    end
+        [xi.job.NIN] = function()
+            -- NIN Job Point: Ninjitsu Accuracy Bonus
+            if skill == xi.skill.NINJUTSU then
+                magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.NINJITSU_ACC_BONUS)
+            end
+        end,
 
-    if casterJob == xi.job.NIN then
-        -- NIN Job Point: Ninjitsu Accuracy Bonus
-        if skill == xi.skill.NINJUTSU then
-            magicAccBonus = magicAccBonus + caster:getJobPointLevel(xi.jp.NINJITSU_ACC_BONUS)
-        end
-    end
+        [xi.job.BLU] = function()
+            -- BLU MACC merits - nuke acc is handled in bluemagic.lua
+            if skill == xi.skill.BLUE_MAGIC then
+                magicAccBonus = magicAccBonus + caster:getMerit(xi.merit.MAGICAL_ACCURACY)
+            end
+        end,
 
-    if casterJob == xi.job.BLU then
-        -- BLU MACC merits - nuke acc is handled in bluemagic.lua
-        if skill == xi.skill.BLUE_MAGIC then
-            magicAccBonus = magicAccBonus + caster:getMerit(xi.merit.MAGICAL_ACCURACY)
-        end
-    end
+        [xi.job.SCH] = function()
+            if (spellGroup == xi.magic.spellGroup.WHITE and caster:hasStatusEffect(xi.effect.PARSIMONY)) or
+                (spellGroup == xi.magic.spellGroup.BLACK and caster:hasStatusEffect(xi.effect.PENURY))
+            then
+                local jpValue = caster:getJobPointLevel(xi.jp.STRATEGEM_EFFECT_I)
 
-    if casterJob == xi.job.SCH then
-        if (spellGroup == xi.magic.spellGroup.WHITE and caster:hasStatusEffect(xi.effect.PARSIMONY)) or
-            (spellGroup == xi.magic.spellGroup.BLACK and caster:hasStatusEffect(xi.effect.PENURY))
-        then
-            local jpValue = caster:getJobPointLevel(xi.jp.STRATEGEM_EFFECT_I)
-
-            magicAccBonus = magicAccBonus + jpValue
-        end
-    end
+                magicAccBonus = magicAccBonus + jpValue
+            end
+        end,
+    }
 
     return magicAccBonus
 end
@@ -453,31 +460,47 @@ params.bonus = $4
 params.effect = $5
 ]]
 function applyResistanceEffect(caster, target, spell, params)
-    local diff = params.diff or (caster:getStat(params.attribute) - target:getStat(params.attribute))
-    local skill = params.skillType
-    local bonus = params.bonus
+    local diff   = params.diff or (caster:getStat(params.attribute) - target:getStat(params.attribute))
+    local skill  = params.skillType
+    local bonus  = params.bonus
     local effect = params.effect
+    local family = spell:getSpellFamily()
 
-    -- If Stymie is active, as long as the mob is not immune then the effect is not resisted
     if effect ~= nil then -- Dispel's script doesn't have an "effect" to send here, nor should it.
-        if skill == xi.skill.ENFEEBLING_MAGIC and caster:hasStatusEffect(xi.effect.STYMIE) and target:canGainStatusEffect(effect) then
+        -- If Stymie is active, as long as the mob is not immune then the effect is not resisted
+        if
+            skill == xi.skill.ENFEEBLING_MAGIC and
+            caster:hasStatusEffect(xi.effect.STYMIE) and
+            target:canGainStatusEffect(effect)
+        then
             caster:delStatusEffect(xi.effect.STYMIE)
             return 1
+        -- Fealty allows the PLD to resist all status inflicting spells except Threnody and Requiem
+        elseif
+            target:hasStatusEffect(xi.effect.FEALTY) and
+            not family == xi.magic.spellFamily.FOE_REQUIEM and
+            not (family >= xi.magic.spellFamily.FIRE_THRENODY and
+                 family <= xi.magic.spellFamily.DARK_THRENODY)
+        then
+            return 0
         end
     end
 
-    if skill == xi.skill.SINGING and caster:hasStatusEffect(xi.effect.TROUBADOUR) then
-        if math.random(0, 99) < caster:getMerit(xi.merit.TROUBADOUR)-25 then
+    if
+        skill == xi.skill.SINGING and
+        caster:hasStatusEffect(xi.effect.TROUBADOUR)
+    then
+        if math.random(0, 99) < caster:getMerit(xi.merit.TROUBADOUR) - 25 then
             return 1.0
         end
     end
 
-    local element = spell:getElement()
-    local percentBonus = 0
+    local element       = spell:getElement()
+    local percentBonus  = 0
     local magicaccbonus = getSpellBonusAcc(caster, target, spell, params)
 
     if diff > 10 then
-        magicaccbonus = magicaccbonus + 10 + (diff - 10)/2
+        magicaccbonus = magicaccbonus + 10 + (diff - 10) / 2
     else
         magicaccbonus = magicaccbonus + diff
     end

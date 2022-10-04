@@ -25,7 +25,7 @@ entity.onMobSpawn = function(mob)
     mob:pathThrough(path, bit.bor(xi.path.flag.PATROL, xi.path.flag.REVERSE))
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

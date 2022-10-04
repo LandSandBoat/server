@@ -94,8 +94,8 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller or optParams.noKiller then
         if
             GetMobByID(ID.mob.APOLLYON_CS_MOB[1]):isDead() and
             GetMobByID(ID.mob.APOLLYON_CS_MOB[3]):isDead()

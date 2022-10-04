@@ -469,7 +469,7 @@ mission.sections =
 
             ['Disaster_Idol'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if mission:getLocalVar(player, 'hasKilled') == 0 then
                         mission:setLocalVar(player, 'hasKilled', 1)
                     end

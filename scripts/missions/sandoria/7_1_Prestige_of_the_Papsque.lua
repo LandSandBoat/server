@@ -120,7 +120,7 @@ mission.sections =
 
             ['Marauder_Dvogzog'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if player:getMissionStatus(mission.areaId) == 1 then
                         player:setLocalVar('Mission[0][18]Stage', 1)
                     end

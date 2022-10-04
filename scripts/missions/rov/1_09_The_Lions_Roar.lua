@@ -41,7 +41,7 @@ mission.sections =
 
             ['Ophiotaurus'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     mission:complete(player)
                 end,
             },

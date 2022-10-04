@@ -154,7 +154,7 @@ quest.sections =
 
             ['Nepionic_Soulflayer'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if quest:getVar(player, 'Prog') == 1 then
                         quest:setVar(player, 'Prog', 2)
                     end

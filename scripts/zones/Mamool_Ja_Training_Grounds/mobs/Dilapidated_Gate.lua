@@ -24,7 +24,7 @@ entity.onMobSpawn = function(mob)
     end)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     local instance = mob:getInstance()
     local mobID = mob:getID()
     if mobID == ID.mob[xi.assault.mission.IMPERIAL_AGENT_RESCUE].MOBS_START.GATE_1 then

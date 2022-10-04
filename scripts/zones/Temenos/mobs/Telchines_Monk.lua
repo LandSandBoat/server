@@ -36,8 +36,8 @@ entity.onMobRoam = function(mob)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller or optParams.noKiller then
         local battlefield = mob:getBattlefield()
         local random = battlefield:getLocalVar("randomF3")
         if (random == 1 and (mob:getID() % 2 == 1)) or (random == 2 and (mob:getID() % 2 == 0)) then

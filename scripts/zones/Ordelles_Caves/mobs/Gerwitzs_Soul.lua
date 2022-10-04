@@ -6,7 +6,7 @@
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     if player:getCharVar("darkPuppetCS") >= 4 then
         player:setCharVar("darkPuppetCS", 5)
     end

@@ -286,7 +286,7 @@ function getRoeRecords(triggers)
         [501] =
         { -- Mog House Exit: Bastok
             trigger = triggers.questComplete,
-            reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_LADY_S_HEART } },
+            reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.A_LADYS_HEART } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
         },

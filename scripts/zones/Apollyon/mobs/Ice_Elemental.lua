@@ -10,8 +10,8 @@ entity.onMobEngaged = function(mob, target)
     xi.apollyon_sw.handleMobEngagedFloorFour(mob, target, 4)
 end
 
-entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    xi.apollyon_sw.handleMobDeathFloorFour(mob, player, isKiller, noKiller, 4)
+entity.onMobDeath = function(mob, player, optParams)
+    xi.apollyon_sw.handleMobDeathFloorFour(mob, player, optParams, 4)
 end
 
 return entity

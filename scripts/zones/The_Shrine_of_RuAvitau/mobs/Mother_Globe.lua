@@ -157,7 +157,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
     -- Unknown if this can be stolen/dispelled like spikes.  Isn't mentioned, probably not.
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     mob:setRespawnTime(math.random(10800, 21600)) -- respawn 3-6 hrs
 
     for _, slaveGlobeID in ipairs(slaveGlobes) do

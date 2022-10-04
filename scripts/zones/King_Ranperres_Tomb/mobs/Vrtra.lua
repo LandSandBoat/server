@@ -55,7 +55,7 @@ entity.onMobDisengage = function(mob, weather)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     player:addTitle(xi.title.VRTRA_VANQUISHER)
 end
 

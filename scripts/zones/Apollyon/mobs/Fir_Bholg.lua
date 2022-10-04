@@ -7,8 +7,8 @@ mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    xi.apollyon_sw.handleMobDeathFloorOne(mob, player, isKiller, noKiller)
+entity.onMobDeath = function(mob, player, optParams)
+    xi.apollyon_sw.handleMobDeathFloorOne(mob, player, optParams)
 end
 
 return entity
