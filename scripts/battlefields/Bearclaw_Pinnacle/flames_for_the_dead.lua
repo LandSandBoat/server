@@ -1,7 +1,7 @@
 -----------------------------------
 -- Flames for the Dead
 -- Bearclaw Pinnacle mission battlefield
--- !gotoid 16801888
+-- !pos -720 9 -441
 -----------------------------------
 require("scripts/globals/battlefield")
 require("scripts/globals/keyitems")

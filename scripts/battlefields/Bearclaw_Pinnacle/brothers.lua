@@ -2,7 +2,7 @@
 -- Brothers
 -- Bearclaw Pinnacle ENM, Zephyr Fan
 -- !addkeyitem ZEPHYR_FAN
--- !gotoid 16801894
+-- !pos 121 -171 758
 -----------------------------------
 local ID = require("scripts/zones/Bearclaw_Pinnacle/IDs")
 require("scripts/globals/battlefield")
