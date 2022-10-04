@@ -171,7 +171,6 @@ end
 
 function Battlefield:register()
     -- Only hookup the entry and exit listeners if there aren't any other battlefields already registered for that entrance
-    lldebugger.requestBreak()
     local setupEvents = true
     local setupEntryNpc = true
     local setupExitNpc = true
