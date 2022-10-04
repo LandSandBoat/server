@@ -393,6 +393,7 @@ enum class Mod
     DESPERATE_BLOWS        = 906,  // Adds ability haste to Last Resort
     STALWART_SOUL          = 907,  // Reduces damage taken from Souleater
     DREAD_SPIKES_EFFECT    = 998,  // Percent increase to total HP drain for Dread Spikes
+    ENHANCES_BLOOD_WEAPON  = 1070, // Enhances "Blood Weapon" effect (increases Blood Weapon's duration in seconds)
 
     // Beastmaster
     TAME                = 304,  // Additional percent chance to charm
@@ -926,7 +927,7 @@ enum class Mod
     // 888
     // 936
     //
-    // SPARE = 1070, and onward
+    // SPARE = 1071, and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it
