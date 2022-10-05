@@ -38,7 +38,7 @@ zones[xi.zone.BEADEAUX] =
     },
     mob =
     {
-        MIMIC                  = 17379783,
+        MIMIC                  = DYNAMIC_LOOKUP,
         BI_GHO_HEADTAKER_PH    =
         {
             [17379350] = 17379351, -- -98.611 0.498 71.212
@@ -62,10 +62,10 @@ zones[xi.zone.BEADEAUX] =
     },
     npc =
     {
-        QM1             = 17379800,
-        TREASURE_CHEST  = 17379842,
-        TREASURE_COFFER = 17379843,
-        AFFLICTOR_BASE  = 17379801,
+        QM1             = DYNAMIC_LOOKUP,
+        TREASURE_CHEST  = DYNAMIC_LOOKUP,
+        TREASURE_COFFER = DYNAMIC_LOOKUP,
+        THE_AFFLICTOR   = DYNAMIC_LOOKUP, -- First Entry for Afflictor, formerly AFFLICTOR_BASE
     },
 }
 

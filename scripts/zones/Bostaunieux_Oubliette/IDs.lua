@@ -66,12 +66,12 @@ zones[xi.zone.BOSTAUNIEUX_OUBLIETTE] =
             [17461476] = 17461471,
             [17461477] = 17461471,
         },
-        DREXERION_THE_CONDEMNED = 17461338,
-        PHANDURON_THE_CONDEMNED = 17461343,
+        DREXERION_THE_CONDEMNED = DYNAMIC_LOOKUP,
+        PHANDURON_THE_CONDEMNED = DYNAMIC_LOOKUP,
         BLOODSUCKER             = 17461478,
-        BODACH                  = 17461479,
-        MANES                   = 17461471,
-        SHII                    = 17461315,
+        BODACH                  = DYNAMIC_LOOKUP,
+        MANES                   = DYNAMIC_LOOKUP,
+        SHII                    = DYNAMIC_LOOKUP,
     },
     npc =
     {

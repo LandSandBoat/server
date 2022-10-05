@@ -41,16 +41,18 @@ zones[xi.zone.CARPENTERS_LANDING] =
     },
     mob =
     {
-        ORCTRAP_PH            =
+        ORCTRAP_PH =
         {
             [16785675] = 16785676, -- 181.819 -5.887 -524.872
         },
-        TEMPEST_TIGON         = 16785593,
-        OVERGROWN_IVY         = 16785709,
-        CRYPTONBERRY_EXECUTOR = 16785710,
-        MYCOPHILE             = 16785722,
-        HERCULES_BEETLE       = 16785723,
+
+        TEMPEST_TIGON         = DYNAMIC_LOOKUP,
+        OVERGROWN_IVY         = DYNAMIC_LOOKUP,
+        CRYPTONBERRY_EXECUTOR = DYNAMIC_LOOKUP,
+        MYCOPHILE             = DYNAMIC_LOOKUP,
+        HERCULES_BEETLE       = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
         HERCULES_BEETLE_TREES =
@@ -62,6 +64,7 @@ zones[xi.zone.CARPENTERS_LANDING] =
             16785734,
             16785735,
         },
+
         LOGGING =
         {
             16785773,

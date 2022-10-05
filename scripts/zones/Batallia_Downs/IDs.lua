@@ -69,22 +69,22 @@ zones[xi.zone.BATALLIA_DOWNS] =
             [17207449] = 17207476, -- -194.234 -18.485 132.208
         },
 
-        AHTU              = 17207657,
-        STURMTIGER        = 17207696,
-        SUPARNA           = 17207697,
-        SUPARNA_FLEDGLING = 17207698,
-        VEGNIX_GREENTHUMB = 17207710,
+        AHTU              = DYNAMIC_LOOKUP,
+        STURMTIGER        = DYNAMIC_LOOKUP,
+        SUPARNA           = DYNAMIC_LOOKUP,
+        SUPARNA_FLEDGLING = DYNAMIC_LOOKUP,
+        VEGNIX_GREENTHUMB = DYNAMIC_LOOKUP,
 
         VOIDWALKER =
         {
             [xi.keyItem.CLEAR_ABYSSITE] =
             {
-                17207722,  -- Lacus
-                17207721,  -- Thunor
+                17207722, -- Lacus
+                17207721, -- Thunor
                 17207720, -- Beorht
                 17207719, -- Pruina
-                17207718,  -- Puretos
-                17207717,  -- Eorthe
+                17207718, -- Puretos
+                17207717, -- Eorthe
                 17207716, -- Deorc
                 17207715, -- Aither
             },
@@ -92,17 +92,17 @@ zones[xi.zone.BATALLIA_DOWNS] =
             [xi.keyItem.COLORFUL_ABYSSITE] =
             {
                 17207714, -- Skuld
-                17207713  -- Urd
+                17207713, -- Urd
             },
 
             [xi.keyItem.YELLOW_ABYSSITE] =
             {
-                17207712  -- Verthandi
+                17207712, -- Verthandi
             },
 
             [xi.keyItem.BLACK_ABYSSITE] =
             {
-                17207711  -- Yilbegan
+                17207711, -- Yilbegan
             }
         }
     },

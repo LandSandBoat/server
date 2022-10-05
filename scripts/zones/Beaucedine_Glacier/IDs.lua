@@ -70,7 +70,7 @@ zones[xi.zone.BEAUCEDINE_GLACIER] =
             [17231970] = 17231971, -- -322.000 -100.000 116.000
         },
 
-        HUMBABA = 17232094,
+        HUMBABA = DYNAMIC_LOOKUP,
 
         VOIDWALKER =
         {
@@ -106,8 +106,8 @@ zones[xi.zone.BEAUCEDINE_GLACIER] =
 
     npc =
     {
-        MIRROR_POND_J8  = 17232206, -- Mirror_Pond_1 in npc_list
-        OVERSEER_BASE   = 17232217, -- Parledaire_RK in npc_list
+        MIRROR_POND_1 = DYNAMIC_LOOKUP,
+        OVERSEER_BASE = 17232217, -- Parledaire_RK in npc_list
     },
 }
 

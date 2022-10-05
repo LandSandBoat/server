@@ -40,17 +40,20 @@ zones[xi.zone.BHAFLAU_THICKETS] =
         DRAWS_NEAR                    = 7689, -- Something draws near!
         HOMEPOINT_SET                 = 7700, -- Home point set!
     },
+
     mob =
     {
-        MAHISHASURA_PH     =
+        MAHISHASURA_PH =
         {
             [16990296] = 16990306, -- 215.000 -18.000 372.000
         },
-        EMERGENT_ELM_PH    =
+
+        EMERGENT_ELM_PH =
         {
             [16990374] = 16990376, -- 86.000 -35.000 621.000
         },
-        NIS_PUK_PH         =
+
+        NIS_PUK_PH =
         {
             [16990383] = 16990403, -- -135 -18 -648
             [16990384] = 16990403, -- -104 -18 -636
@@ -61,10 +64,12 @@ zones[xi.zone.BHAFLAU_THICKETS] =
             [16990394] = 16990403, -- -132 -16 -612
             [16990398] = 16990403, -- -119 -15 -651
         },
-        HARVESTMAN         = 16990252,
+
+        HARVESTMAN         = DYNAMIC_LOOKUP,
         LIVIDROOT_AMOOSHAH = DYNAMIC_LOOKUP,
         DEA                = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
         HARVESTING =

@@ -79,9 +79,9 @@ zones[xi.zone.CASTLE_OZTROJA] =
             [17395952] = 17395954, -- -25.044 -16.250 -141.534
             [17395953] = 17395954, -- -32.302 -16.250 -139.169
         },
-        YAGUDO_AVATAR              = 17396134,
-        HUU_XALMO_THE_SAVAGE       = 17396140,
-        MIMIC                      = 17396144,
+        YAGUDO_AVATAR              = DYNAMIC_LOOKUP,
+        HUU_XALMO_THE_SAVAGE       = DYNAMIC_LOOKUP,
+        MIMIC                      = DYNAMIC_LOOKUP,
     },
     npc =
     {
@@ -93,8 +93,8 @@ zones[xi.zone.CASTLE_OZTROJA] =
         TRAP_DOOR_FLOOR_4      = 17396191,
         FINAL_PASSWORD_STATUE  = 17396192,
         HINT_HANDLE_OFFSET     = 17396196,
-        TREASURE_CHEST         = 17396210,
-        TREASURE_COFFER        = 17396211,
+        TREASURE_CHEST         = DYNAMIC_LOOKUP,
+        TREASURE_COFFER        = DYNAMIC_LOOKUP,
     },
 }
 

@@ -42,9 +42,9 @@ zones[xi.zone.ATTOHWA_CHASM] =
             [16806158] = 16806162, -- -398.931 -4.536 79.640
             [16806161] = 16806162, -- -381.284 -9.233 40.054
         },
-        LIOUMERE            = 16806031,
-        TIAMAT              = 16806227,
-        FEELER_ANTLION      = 16806242,
+        LIOUMERE       = DYNAMIC_LOOKUP,
+        TIAMAT         = DYNAMIC_LOOKUP,
+        FEELER_ANTLION = DYNAMIC_LOOKUP,
     },
     npc =
     {

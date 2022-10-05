@@ -36,9 +36,9 @@ zones[xi.zone.AYDEEWA_SUBTERRANE] =
             [17055941] = 17056156, -- -221.7 13.762 -346.83
             [17055942] = 17056156, -- -219 14.003 -364.83
         },
-        NOSFERATU          = 17056157,
+        NOSFERATU          = DYNAMIC_LOOKUP,
         PANDEMONIUM_WARDEN = 17056168,
-        CHIGRE             = 17056186,
+        CHIGRE             = DYNAMIC_LOOKUP,
     },
     npc =
     {

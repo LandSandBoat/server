@@ -54,16 +54,19 @@ zones[xi.zone.BIBIKI_BAY] =
         {
             [16793645] = 16793646, -- -348 0.001 -904
         },
+
         INTULO_PH =
         {
             [16793741] = 16793742, -- 480 -3 743
         },
+
         SPLACKNUCK_PH =
         {
             [16793775] = 16793776,
         },
-        DALHAM = 16793858,
-        SHEN   = 16793859,
+
+        DALHAM = DYNAMIC_LOOKUP,
+        SHEN   = DYNAMIC_LOOKUP,
     },
     npc =
     {

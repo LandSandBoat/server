@@ -220,7 +220,7 @@ hnmSystem:addOverride("xi.zones.Behemoths_Dominion.Zone.onInitialize", function(
     end
 
     -- Hide ??? NPC.
-    GetNPCByID(behemothDomID.npc.BEHEMOTH_QM):setStatus(xi.status.DISAPPEAR)
+    GetNPCByID(behemothDomID.npc.QM_BEHEMOTH):setStatus(xi.status.DISAPPEAR)
 end)
 
 hnmSystem:addOverride("xi.zones.Behemoths_Dominion.mobs.Behemoth.onMobDespawn", function(mob)

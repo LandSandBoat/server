@@ -41,7 +41,7 @@ zones[xi.zone.BASTOK_MARKETS_S] =
     },
     npc =
     {
-        SHENNI = 17134281,
+        SHENNI = DYNAMIC_LOOKUP,
     },
 }
 

@@ -41,7 +41,7 @@ entity.onEventFinish = function(player, csid, option)
         {
             ID.mob.YAGUDO_AVATAR,
             ID.mob.DUU_MASA_THE_ONECUT,
-            ID.mob.FEE_JUGE_THE_RAMFIST,
+            ID.mob.FEE_JUGU_THE_RAMFIST,
             ID.mob.GOO_PAKE_THE_BLOODHOUND,
             ID.mob.KEE_TAW_THE_NIGHTINGALE,
             ID.mob.LAA_YAKU_THE_AUSTERE,

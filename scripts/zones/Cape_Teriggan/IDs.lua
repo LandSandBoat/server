@@ -56,14 +56,14 @@ zones[xi.zone.CAPE_TERIGGAN] =
             [17240373] = 17240376, -- -268.000 -0.558 440.000
             [17240371] = 17240376, -- -262.000 -0.700 442.000
         },
-        KREUTZET               = 17240413,
-        AXESARION_THE_WANDERER = 17240414,
-        STOLAS                 = 17240424,
+        KREUTZET               = DYNAMIC_LOOKUP,
+        AXESARION_THE_WANDERER = DYNAMIC_LOOKUP,
+        STOLAS                 = DYNAMIC_LOOKUP,
     },
     npc =
     {
         OVERSEER_BASE    = 17240472,
-        CERMET_HEADSTONE = 17240497,
+        CERMET_HEADSTONE = DYNAMIC_LOOKUP,
     },
 }
 

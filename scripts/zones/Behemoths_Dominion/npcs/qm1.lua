@@ -15,14 +15,14 @@ entity.onTrigger = function(player, npc)
     if
         player:getCharVar("theTalekeeperGiftCS") == 3 and
         player:getCharVar("theTalekeepersGiftKilledNM") < 3 and
-        not GetMobByID(ID.mob.TALEKEEPERS_GIFT_OFFSET + 0):isSpawned() and
-        not GetMobByID(ID.mob.TALEKEEPERS_GIFT_OFFSET + 1):isSpawned() and
-        not GetMobByID(ID.mob.TALEKEEPERS_GIFT_OFFSET + 2):isSpawned()
+        not GetMobByID(ID.mob.PICKLIX_LONGINDEX + 0):isSpawned() and
+        not GetMobByID(ID.mob.PICKLIX_LONGINDEX + 1):isSpawned() and
+        not GetMobByID(ID.mob.PICKLIX_LONGINDEX + 2):isSpawned()
     then
         player:messageSpecial(ID.text.SENSE_OF_FOREBODING)
-        SpawnMob(ID.mob.TALEKEEPERS_GIFT_OFFSET + 0):updateClaim(player) -- Picklix_Longindex
-        SpawnMob(ID.mob.TALEKEEPERS_GIFT_OFFSET + 1):updateClaim(player) -- Moxnix_Nightgoggle
-        SpawnMob(ID.mob.TALEKEEPERS_GIFT_OFFSET + 2):updateClaim(player) -- Doglix_Muttsnout
+        SpawnMob(ID.mob.PICKLIX_LONGINDEX + 0):updateClaim(player) -- Picklix_Longindex
+        SpawnMob(ID.mob.PICKLIX_LONGINDEX + 1):updateClaim(player) -- Moxnix_Nightgoggle
+        SpawnMob(ID.mob.PICKLIX_LONGINDEX + 2):updateClaim(player) -- Doglix_Muttsnout
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY)
     end

@@ -72,7 +72,7 @@ zoneObject.onRegionEnter = function(player, region)
     then
         if not player:hasStatusEffect(xi.effect.CURSE_I) then
             if not player:hasStatusEffect(xi.effect.SILENCE) then
-                GetNPCByID(ID.npc.AFFLICTOR_BASE + (region:GetRegionID() -1)):entityAnimationPacket("main", player)
+                GetNPCByID(ID.npc.THE_AFFLICTOR + (region:GetRegionID() -1)):entityAnimationPacket("main", player)
                 player:setLocalVar("inRegion", time + 11) -- Start timer. We set it here to prevent double message.
                 player:addStatusEffect(xi.effect.CURSE_I, 75, 0, 120)
                 player:messageSpecial(ID.text.FEEL_NUMB)

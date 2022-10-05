@@ -16,7 +16,7 @@ itemObject.onItemCheck= function(target, player)
     local checkID = true
 
     for i = 0, 2 do
-        if ID.mob.SNOLL_TZAR_OFFSET + i == id then
+        if ID.mob.SNOLL_TZAR + i == id then
             checkID = false
         end
     end

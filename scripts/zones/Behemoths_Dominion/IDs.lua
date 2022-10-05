@@ -42,16 +42,16 @@ zones[xi.zone.BEHEMOTHS_DOMINION] =
     },
     mob =
     {
-        BEHEMOTH                = 17297440,
-        KING_BEHEMOTH           = 17297441,
-        TALEKEEPERS_GIFT_OFFSET = 17297446,
-        ANCIENT_WEAPON          = 17297449,
-        LEGENDARY_WEAPON        = 17297450,
+        BEHEMOTH                = DYNAMIC_LOOKUP,
+        KING_BEHEMOTH           = DYNAMIC_LOOKUP,
+        PICKLIX_LONGINDEX       = DYNAMIC_LOOKUP, -- Formerly TALEKEEPERS_GIFT_OFFSET
+        ANCIENT_WEAPON          = DYNAMIC_LOOKUP,
+        LEGENDARY_WEAPON        = DYNAMIC_LOOKUP,
     },
     npc =
     {
-        BEHEMOTH_QM      = 17297459,
-        CERMET_HEADSTONE = 17297493,
+        QM_BEHEMOTH      = DYNAMIC_LOOKUP,
+        CERMET_HEADSTONE = DYNAMIC_LOOKUP,
     },
 }
 

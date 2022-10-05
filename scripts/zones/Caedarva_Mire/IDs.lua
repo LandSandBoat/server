@@ -48,7 +48,7 @@ zones[xi.zone.CAEDARVA_MIRE] =
     },
     mob =
     {
-        PEALLAIDH_PH          =
+        PEALLAIDH_PH =
         {
             [17100870] = 17101143, -- 333.885 -9.646 -447.557
             [17100871] = 17101143, -- 309.638 -8.548 -447.557
@@ -58,16 +58,17 @@ zones[xi.zone.CAEDARVA_MIRE] =
             [17100875] = 17101143, -- 315.793 -16.336 -402.407
             [17100876] = 17101143, -- 321.809 -16.843 -373.780
         },
+
         AYNU_KAYSEY           = 17101099,
-        CAEDARVA_TOAD         = 17101145,
-        JAZARAAT              = 17101146,
-        LAMIA_NO27            = 17101148,
-        MOSHDAHN              = 17101149,
-        KHIMAIRA              = 17101201,
-        VERDELET              = 17101202,
-        TYGER                 = 17101203,
-        MAHJLAEF_THE_PAINTORN = 17101204,
-        EXPERIMENTAL_LAMIA    = 17101205,
+        CAEDARVA_TOAD         = DYNAMIC_LOOKUP,
+        JAZARAAT              = DYNAMIC_LOOKUP,
+        LAMIA_NO27            = DYNAMIC_LOOKUP,
+        MOSHDAHN              = DYNAMIC_LOOKUP,
+        KHIMAIRA              = DYNAMIC_LOOKUP,
+        VERDELET              = DYNAMIC_LOOKUP,
+        TYGER                 = DYNAMIC_LOOKUP,
+        MAHJLAEF_THE_PAINTORN = DYNAMIC_LOOKUP,
+        EXPERIMENTAL_LAMIA    = DYNAMIC_LOOKUP,
     },
     npc =
     {

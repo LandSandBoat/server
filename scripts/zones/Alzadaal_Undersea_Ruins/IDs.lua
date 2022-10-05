@@ -42,16 +42,16 @@ zones[xi.zone.ALZADAAL_UNDERSEA_RUINS] =
     },
     mob =
     {
-        NEPIONIC_SOULFLAYER     = 17072129,
+        NEPIONIC_SOULFLAYER     = DYNAMIC_LOOKUP,
         COOKIEDUSTER_LIPIROON_PH =
         {
             [17072142] = 17072150,
             [17072144] = 17072150,
         },
-        OB                      = 17072171,
-        CHEESE_HOARDER_GIGIROON = 17072172,
-        ARMED_GEARS             = 17072178,
-        WULGARU                 = 17072179,
+        OB                      = DYNAMIC_LOOKUP,
+        CHEESE_HOARDER_GIGIROON = DYNAMIC_LOOKUP,
+        ARMED_GEARS             = DYNAMIC_LOOKUP,
+        WULGARU                 = DYNAMIC_LOOKUP,
 
     },
     npc =
