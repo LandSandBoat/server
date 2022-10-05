@@ -26,21 +26,34 @@ local resistances =
 }
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)
-    -- Marquis Andrealphus
-    if mob:getPool() == 2571 then
-        if #target:getParty() == 1 then
-            return 1
-        end
-    end
     return 0
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     -- Marquis Andrealphus
     if mob:getPool() == 2571 then
-        mob:timer(2000, function(mobArg)
-            xi.teleport.escape(target)
-        end)
+        -- Ability is only used when there is another party
+        -- member in the party, or party size > 1
+        local party = target:getParty()
+        local control = false
+
+        if mob:getPool() == 2571 then
+            if #party > 1 then
+                for _, v in ipairs(target:getParty()) do
+                    if v:getZone() == target:getZone() then
+                        control = true
+                    end
+                end
+            else
+                control = true
+            end
+        end
+
+        if control then
+            mob:timer(2000, function(mobArg)
+                xi.teleport.escape(target)
+            end)
+        end
 
     -- Die by the Sword BCNM
     else
@@ -67,9 +80,10 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
             mob:setMod(resistances[4], -2500)
         end
 
-        skill:setMsg(xi.msg.basic.NONE)
-        return 0
     end
+
+    skill:setMsg(xi.msg.basic.NONE)
+    return 0
 end
 
 return mobskill_object
