@@ -334,7 +334,7 @@ function Battlefield.onEntryTrigger(player, npc)
     local alliance = player:getAlliance()
     for _, member in pairs(alliance) do
         if member:hasStatusEffect(xi.effect.BATTLEFIELD) then
-            -- player:messageSpecial() -- You are eligible but cannot enter.
+            player:messageSpecial(zones[player:getZoneID()].text.PARTY_MEMBERS_ARE_ENGAGED)
             return false
         end
     end
