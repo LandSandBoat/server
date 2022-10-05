@@ -10,6 +10,9 @@ cmdprops =
 }
 
 function onTrigger(player, target, cellId, reason)
+    local maxID = 0xFFFFFFFF
+    local targID = 0
+
     local jailCells =
     {
         -- Floor 1 (Bottom)
@@ -27,9 +30,20 @@ function onTrigger(player, target, cellId, reason)
 
     -- Validate the target..
     local targ = GetPlayerByName( target )
+
     if (targ == nil) then
-        player:PrintToPlayer( string.format( "Invalid player '%s' given.", target ) )
-        return
+        -- Try seeing if the given name is a legit player, and get the ID
+        targID = GetPlayerIDAnywhere(target)
+
+        -- If we can find an offline player, we can use it, but have to do something different
+        if targID > 0 and targID < maxID then
+            player:PrintToPlayer ( string.format( "Player '%s' (ID:%s) found, but is offline.", target, targID ) )
+        else
+            player:PrintToPlayer( string.format( "Invalid player '%s' given.", target ) )
+            return
+        end
+    else
+        targID = targ:getID()
     end
 
     -- Validate the cell id..
@@ -43,11 +57,16 @@ function onTrigger(player, target, cellId, reason)
     end
 
     -- Print that we have jailed someone..
-    local message = string.format( '%s jailed %s(%d) into cell %d. Reason: %s', player:getName(), target, targ:getID(), cellId, reason )
+    local message = string.format( '%s jailed %s(%d) into cell %d. Reason: %s', player:getName(), target, targID, cellId, reason )
     printf( message )
 
     -- Send the target to jail..
     local dest = jailCells[ cellId ]
-    targ:setCharVar( "inJail", cellId )
-    targ:setPos(dest[1], dest[2], dest[3], dest[4], 131)
+
+    if targ ~= nil then
+        targ:setCharVar( "inJail", cellId )
+        targ:setPos(dest[1], dest[2], dest[3], dest[4], 131)
+    else
+        SendToJailOffline(targID, cellId, dest[1], dest[2], dest[3], dest[4])
+    end
 end

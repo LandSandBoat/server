@@ -68,6 +68,13 @@ entity.onTrigger = function(player, npc)
     then
         player:startEvent(562)
 
+    -- "Enveloped in Darkness" (RDM AF Feet)
+    elseif
+        mJob == xi.job.RDM and mLvl >= xi.settings.main.AF2_QUEST_LEVEL and envelopedInDarkness == QUEST_COMPLETED and
+        peaceForTheSpirit == QUEST_AVAILABLE
+    then
+        player:startEvent(109) -- Start
+
     -- "Peace for the Spirit" (RDM AF Body)
     elseif peaceForTheSpirit == QUEST_ACCEPTED then
         local questStatus = player:getCharVar("peaceForTheSpiritCS")
@@ -78,11 +85,6 @@ entity.onTrigger = function(player, npc)
         else
             player:startEvent(108)
         end
-    elseif
-        mJob == xi.job.RDM and mLvl >= xi.settings.main.AF2_QUEST_LEVEL and envelopedInDarkness == QUEST_COMPLETED and
-        peaceForTheSpirit == QUEST_AVAILABLE
-    then
-        player:startEvent(109) -- Start
 
     -- "Enveloped in Darkness" (RDM AF Shoes)
     elseif envelopedInDarkness == QUEST_ACCEPTED then
