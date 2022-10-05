@@ -3273,7 +3273,7 @@ void SmallPacket0x050(map_session_data_t* const PSession, CCharEntity* const PCh
         containerID == LOC_WARDROBE7 ||
         containerID == LOC_WARDROBE8 ||
         (settings::get<bool>("main.EQUIP_FROM_OTHER_CONTAINERS") &&
-        isAdditionalContainer);
+         isAdditionalContainer);
 
     bool isLinkshell =
         equipSlotID == SLOT_LINK1 ||
