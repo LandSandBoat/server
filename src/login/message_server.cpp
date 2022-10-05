@@ -198,9 +198,9 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
     }
 }
 
-void message_server_listen()
+void message_server_listen(const bool& requestExit)
 {
-    while (true)
+    while (!requestExit)
     {
         std::array<zmq::message_t, 4> msgs;
         try
@@ -239,7 +239,7 @@ void message_server_listen()
     }
 }
 
-void message_server_init()
+void message_server_init(const bool& requestExit)
 {
     TracySetThreadName("Message Server (ZMQ)");
 
@@ -263,7 +263,7 @@ void message_server_init()
         ShowCritical("Unable to bind chat socket: %s", err.what());
     }
 
-    message_server_listen();
+    message_server_listen(requestExit);
 }
 
 void message_server_close()
