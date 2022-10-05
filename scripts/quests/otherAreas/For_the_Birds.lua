@@ -80,6 +80,7 @@ quest.sections =
                 [18] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:delKeyItem(xi.ki.GLITTERING_FRAGMENT)
+                        xi.quest.setMustZone(player, xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.BETTER_THE_DEMON_YOU_KNOW)
                     end
                 end,
             },
