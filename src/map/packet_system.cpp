@@ -3258,10 +3258,9 @@ void SmallPacket0x050(map_session_data_t* const PSession, CCharEntity* const PCh
     uint8 containerID = data.ref<uint8>(0x06); // container id
 
     bool isAdditionalContainer =
-        settings::get<bool>("main.EQUIP_FROM_OTHER_CONTAINERS") &&
-        (containerID == LOC_MOGSATCHEL ||
-         containerID == LOC_MOGSACK ||
-         containerID == LOC_MOGCASE);
+        containerID == LOC_MOGSATCHEL ||
+        containerID == LOC_MOGSACK ||
+        containerID == LOC_MOGCASE;
 
     bool isEquippableInventory =
         containerID == LOC_INVENTORY ||
@@ -3273,7 +3272,8 @@ void SmallPacket0x050(map_session_data_t* const PSession, CCharEntity* const PCh
         containerID == LOC_WARDROBE6 ||
         containerID == LOC_WARDROBE7 ||
         containerID == LOC_WARDROBE8 ||
-        isAdditionalContainer;
+        (settings::get<bool>("main.EQUIP_FROM_OTHER_CONTAINERS") &&
+        isAdditionalContainer);
 
     bool isLinkshell =
         equipSlotID == SLOT_LINK1 ||
