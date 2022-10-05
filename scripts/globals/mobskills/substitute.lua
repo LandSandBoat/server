@@ -32,11 +32,11 @@ end
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     -- Marquis Andrealphus
     if mob:getPool() == 2571 then
-        -- Ability is only used when there is another party
-        -- member in the party, or party size > 1
         local party = target:getParty()
         local control = false
 
+        -- Ability is only used when there is another party
+        -- member in the party, or party size > 1
         if mob:getPool() == 2571 then
             if #party > 1 then
                 for _, v in ipairs(target:getParty()) do
@@ -50,8 +50,11 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
         end
 
         if control then
-            mob:timer(2000, function(mobArg)
-                xi.teleport.escape(target)
+            mob:timer(1000, function(mobArg)
+                mobArg:injectActionPacket(target:getID(), 4, 261, 0, 0, 0, 10, 1)
+                mobArg:timer(3000, function(mobArg1)
+                    xi.teleport.escape(target)
+                end)
             end)
         end
 
