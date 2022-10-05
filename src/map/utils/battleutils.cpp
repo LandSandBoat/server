@@ -6246,6 +6246,12 @@ namespace battleutils
                 cast -= (uint32)(base * ((100 - (50 + bonus)) / 100.0f));
                 applyArts = false;
             }
+            // Add Black & Dark Magic Casting Time -% bonus to Bio, Absorbs, Drain, Aspir, Dread Spikes, Stun, Tractor, Endark
+            else if (PSpell->getSkillType() == SKILLTYPE::SKILL_DARK_MAGIC)
+            {
+                cast      = (uint32)(cast * (1.0f + ((PEntity->getMod(Mod::BLACK_MAGIC_CAST) + PEntity->getMod(Mod::DARK_MAGIC_CAST)) / 100.0f)));
+                applyArts = false;
+            }
             else if (applyArts)
             {
                 if (PEntity->StatusEffectContainer->HasStatusEffect({ EFFECT_DARK_ARTS, EFFECT_ADDENDUM_BLACK }))

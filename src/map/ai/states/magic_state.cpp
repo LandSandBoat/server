@@ -422,6 +422,12 @@ void CMagicState::ApplyEnmity(CBattleEntity* PTarget, int ce, int ve)
     {
         m_PEntity->StatusEffectContainer->DelStatusEffect(EFFECT_DIVINE_EMBLEM);
     }
+
+    if (m_PEntity->StatusEffectContainer->HasStatusEffect(EFFECT_DARK_SEAL) &&
+        m_PSpell->getSkillType() == SKILL_DARK_MAGIC)
+    {
+        m_PEntity->StatusEffectContainer->DelStatusEffect(EFFECT_DARK_SEAL);
+    }
 }
 
 bool CMagicState::HasMoved()

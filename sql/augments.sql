@@ -1658,7 +1658,7 @@ INSERT INTO `augments` VALUES (1366,5,1061,1,0,0); -- Enhances "Chivalry" effect
 INSERT INTO `augments` VALUES (1367,2,1065,1,0,0); -- Enhances "Guardian" effect
 INSERT INTO `augments` VALUES (1368,0,0,0,0,0); -- 1368 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (1369,0,0,0,0,0); -- 1369 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
-INSERT INTO `augments` VALUES (1370,0,0,0,0,0); -- Enhances "Dark Seal" effect
+INSERT INTO `augments` VALUES (1370,10,1073,1,0,0); -- Enhances "Dark Seal" effect
 INSERT INTO `augments` VALUES (1371,0,0,0,0,0); -- Enhances "Diabolic Eye" effect
 INSERT INTO `augments` VALUES (1372,0,0,0,0,0); -- Enhances "Muted Soul" effect
 INSERT INTO `augments` VALUES (1373,0,0,0,0,0); -- Enhances "Desperate Blows" effect

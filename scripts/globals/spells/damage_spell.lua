@@ -471,11 +471,6 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
         magicAcc = magicAcc + 100 -- TODO: Confirm this value in retail
     end
 
-    -- Dark Seal
-    if casterJob == xi.job.DRK and skillType == xi.skill.DARK_MAGIC and caster:hasStatusEffect(xi.effect.DARK_SEAL) then
-        magicAcc = magicAcc + 256 -- Need citation. 256 seems OP
-    end
-
     -- Add acc for skillchains
     if skillchainCount > 0 then -- This makes no sense.
         magicAcc = magicAcc + 25

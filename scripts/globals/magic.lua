@@ -1309,6 +1309,8 @@ function calculateDuration(duration, magicSkill, spellGroup, caster, target, use
                 duration = duration + caster:getJobPointLevel(xi.jp.STYMIE_EFFECT)
             end
         end
+    elseif magicSkill == xi.skill.DARK_MAGIC then
+        duration = duration * (1 + (caster:getMod(xi.mod.DARK_MAGIC_DURATION) / 100))
     end
 
     return math.floor(duration)
