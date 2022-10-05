@@ -95,7 +95,7 @@ end
 --  - index: The index of the battlefield within the zone. This is used to communicate with the client on which menu item this battlefield is. (required)
 --  - levelCap: Level cap imposed upon the battlefield. Defaults to 0 - no level cap. (optional)
 --  - area: Some battlefields has multiple areas (Burning Circles) while others have fixed areas (Apollyon). Set to have a fixed area. (optional)
---  - entryNpc: The name of the NPC used for entering
+--  - entryNpc: The name of the NPC used for entering (required)
 --  - exitNpc: The name of the NPC used for exiting
 --  - allowSubjob: Determines if character subjobs are enabled or disabled upon entry. Defaults to true. (optional)
 --  - hasWipeGrace: Grants players a 3 minute grace period on a full wipe before ejecting them. Defaults to true. (optional)
@@ -110,28 +110,31 @@ end
 function Battlefield:new(data)
     local obj = Container:new(Battlefield.getVarPrefix(data.battlefieldId))
     setmetatable(obj, self)
-    obj.zoneId = data.zoneId -- Which zone this battlefield exists within
-    obj.battlefieldId = data.battlefieldId -- Battlefield ID used in the database
-    obj.maxPlayers = data.maxPlayers -- Maximum number of players allowed to enter
-    obj.timeLimit = data.timeLimit -- Time in seconds alotted to complete the battlefield before being ejected
-    obj.index = data.index -- The index of the battlefield within the zone. This is used to communicate with the client on which menu item this battlefield is.
-    obj.levelCap = data.levelCap or 0 -- Level cap imposed upon the battlefield
-    obj.area = data.area -- Some battlefields has multiple areas (Burning Circles) while others have fixed areas (Apollyon). Set to have a fixed area.
-    obj.allowSubjob = (data.allowSubjob == nil or data.allowSubjob) or false -- Determines if character subjobs are enabled or disabled upon entry. Defaults to true.
-    obj.hasWipeGrace = (data.hasWipeGrace == nil or data.hasWipeGrace) or false -- Grants players a 3 minute grace period on a full wipe before ejecting them. Defaults to true.
-    obj.canLoseExp = (data.canLoseExp == nil or data.canLoseExp) or false -- Determines if a character loses experience points upon death while inside the battlefield. Defaults to true.
-    obj.delayToExit = data.delayToExit or 5 -- Amount of time to wait before exiting the battlefield. Defaults to 5 seconds.
-    obj.groups = {} -- Monster battlefield groups added with battlefield:addGroups()
-    obj.paths = {} -- Pathing for monsters and npcs within the battlefield
-    obj.loot = {} -- Loot spawned in the Armoury Crate(s)
-    obj.requiredItems = data.requiredItems or {} -- Items required to be traded to enter the battlefield
-    obj.requiredKeyItems = data.requiredKeyItems or {} -- Key items required to be able to enter the battlefield - these are removed upon entry
-    obj.entryNpc = data.entryNpc -- The name of the NPC used for entering
-    obj.exitNpc = data.exitNpc -- The name of the NPC used for exiting
-    obj.title = data.title -- Title given to players upon victory
-    obj.grantXP = data.grantXP -- Amount of XP to grant upon victory
-    obj.lossEventParams = data.lossEventParams or {} -- Parameters given to the loss event (32002). Defaults to none.
+    obj.zoneId = data.zoneId
+    obj.battlefieldId = data.battlefieldId
+    obj.maxPlayers = data.maxPlayers
+    obj.timeLimit = data.timeLimit
+    obj.index = data.index
+    obj.entryNpc = data.entryNpc
+
+    obj.area = data.area
+    obj.exitNpc = data.exitNpc
+    obj.title = data.title
+    obj.grantXP = data.grantXP
+    obj.levelCap = data.levelCap or 0
+    obj.allowSubjob = (data.allowSubjob == nil or data.allowSubjob) or false
+    obj.hasWipeGrace = (data.hasWipeGrace == nil or data.hasWipeGrace) or false
+    obj.canLoseExp = (data.canLoseExp == nil or data.canLoseExp) or false
+    obj.delayToExit = data.delayToExit or 5
+    obj.requiredItems = data.requiredItems or {}
+    obj.requiredKeyItems = data.requiredKeyItems or {}
+    obj.lossEventParams = data.lossEventParams or {}
+
     obj.sections = { { [obj.zoneId] = {} } }
+    obj.groups = {}
+    obj.paths = {}
+    obj.loot = {}
+
     return obj
 end
 
@@ -795,19 +798,12 @@ BattlefieldMission.isMission = true
 function BattlefieldMission:new(data)
     local obj = Battlefield:new(data)
     setmetatable(obj, self)
-    -- The mission area ID this battlefield is associated with
     obj.missionArea = data.missionArea
-    -- The mission this battlefield is associated with
     obj.mission = data.mission
-    -- The mission area to retrieve the mission status from. Will default to using the player's nation (optional)
     obj.missionStatusArea = data.missionStatusArea
-    -- The optional extra status information xi.mission.status (optional)
     obj.missionStatus = data.missionStatus
-    -- The required mission status to enter
     obj.requiredMissionStatus = data.requiredMissionStatus
-    -- The required mission status to skip the cutscene
     obj.skipMissionStatus = data.skipMissionStatus or data.requiredMissionStatus
-    -- Defaults to false for Missions
     obj.canLoseExp = data.canLoseExp or false
     return obj
 end
