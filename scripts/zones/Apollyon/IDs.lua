@@ -26,7 +26,6 @@ zones[xi.zone.APOLLYON] =
         THE_PARTY_WILL_BE_REMOVED     = 7366, -- All party members in Limbus have fallen in battle. Exiting in <number> [minute/minutes].
         MEMBERS_OF_YOUR_PARTY         = 7332, -- Currently, <amount> members of your party (including yourself) have clearance to enter Limbus.
         MEMBERS_OF_YOUR_ALLIANCE      = 7333, -- Currently, <amount> members of your alliance (including yourself) have clearance to enter Limbus.
-        ONLY_PLAYER_CAN_ENTER         = 7334, -- Only <Player Name> can enter Limbus.
         TIME_LIMIT_FOR_THIS_BATTLE_IS = 7335, -- You may stay in Limbus for <amount> minutes.
         PARTY_MEMBERS_HAVE_FALLEN     = 7358, -- All party members in Limbus have fallen in battle. Exiting now.
         YOU_INSERT_THE_CARD_POLISHED  = 7371, -- You insert the <card> polished with <cosmo cleanse> into the slot!

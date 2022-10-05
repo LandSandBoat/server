@@ -597,11 +597,8 @@ function Battlefield:onBattlefieldEnter(player, battlefield)
     player:messageSpecial(ID.text.ENTERING_THE_BATTLEFIELD_FOR, 0, self.index)
     if self.maxPlayers > 6 then
         player:messageSpecial(ID.text.MEMBERS_OF_YOUR_ALLIANCE, 0, 0, 0, self.maxPlayers)
-    elseif self.maxPlayers > 1 then
-        player:messageSpecial(ID.text.MEMBERS_OF_YOUR_PARTY, 0, 0, 0, self.maxPlayers)
     else
-        -- TODO: Need capture of message to know the proper format
-        -- player:messageSpecial(ID.text.ONLY_PLAYER_CAN_ENTER, battlefield:getInitiator()[1])
+        player:messageSpecial(ID.text.MEMBERS_OF_YOUR_PARTY, 0, 0, 0, self.maxPlayers)
     end
 
     player:messageSpecial(ID.text.TIME_LIMIT_FOR_THIS_BATTLE_IS, 0, 0, 0, math.floor(self.timeLimit / 60))

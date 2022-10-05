@@ -24,7 +24,6 @@ zones[xi.zone.BEARCLAW_PINNACLE] =
         THE_PARTY_WILL_BE_REMOVED     = 7417, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
         MEMBERS_OF_YOUR_PARTY         = 7371, -- Currently, <amount> members of your party (including yourself) have clearance to enter the battlefield.
         MEMBERS_OF_YOUR_ALLIANCE      = 7372, -- Currently, <amount> members of your alliance (including yourself) have clearance to enter the battlefield.
-        ONLY_PLAYER_CAN_ENTER         = 7373, -- Only <Player Name> can enter the battlefield.
         TIME_LIMIT_FOR_THIS_BATTLE_IS = 7374, -- The time limit for this battle is <amount> minutes.
         THERE_IS_A_CRACK              = 7375, -- There is a crack in the <itemid>. It no longer contains a monster.
         A_CRACK_HAS_FORMED            = 7376, -- A crack has formed on the <itemid>, and the beast inside has been unleashed!
