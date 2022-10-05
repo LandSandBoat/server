@@ -680,6 +680,9 @@ namespace zoneutils
             g_PZoneList[0] = CreateZone(0);
         }
 
+        // IDs attached to xi.zone[name] need to be populated before NPCs and Mobs are loaded
+        luautils::PopulateIDLookups();
+
         LoadNPCList();
         LoadMOBList();
         campaign::LoadState();
