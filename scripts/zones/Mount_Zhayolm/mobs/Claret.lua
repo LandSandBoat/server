@@ -20,6 +20,7 @@ entity.onMobSpawn = function(mob)
     mob:addMod(xi.mod.REGEN, math.floor(mob:getMaxHP()*.004))
     mob:addMod(xi.mod.BINDRES, 40)
     mob:addMod(xi.mod.MOVE, 15)
+    mob:setMobMod(xi.mobMod.ENCROACH_TARGET, 35)
     mob:SetAutoAttackEnabled(false)
 end
 
