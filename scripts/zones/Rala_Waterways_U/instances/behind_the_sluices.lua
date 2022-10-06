@@ -7,18 +7,18 @@ require('scripts/globals/keyitems')
 require('scripts/globals/allyassist')
 local ID = require('scripts/zones/Rala_Waterways_U/IDs')
 -----------------------------------
-local instance_object = {}
+local instanceObject = {}
 
-instance_object.registryRequirements = function(player)
+instanceObject.registryRequirements = function(player)
     return player:hasKeyItem(xi.ki.WATERWAY_FACILITY_CRANK) and
            player:getMissionStatus(xi.mission.log_id.SOA) == 2
 end
 
-instance_object.entryRequirements = function(player)
+instanceObject.entryRequirements = function(player)
     return player:hasKeyItem(xi.ki.WATERWAY_FACILITY_CRANK) -- TODO: Past this mission
 end
 
-instance_object.onInstanceCreated = function(instance)
+instanceObject.onInstanceCreated = function(instance)
     -- TODO: SpawnMob: mob <17838151> not found (luautils::SpawnMob:1358)
     for i = 0, 5 do
         SpawnMob(ID.mob.ARCIELA_BTS + i, instance)
@@ -55,16 +55,16 @@ instance_object.onInstanceCreated = function(instance)
 
 end
 
-instance_object.onInstanceCreatedCallback = function(player, instance)
+instanceObject.onInstanceCreatedCallback = function(player, instance)
     xi.instance.onInstanceCreatedCallback(player, instance)
 end
 
-instance_object.afterInstanceRegister = function(player)
+instanceObject.afterInstanceRegister = function(player)
     player:messageSpecial(ID.text.KEYITEM_LOST, xi.ki.WATERWAY_FACILITY_CRANK)
     player:delKeyItem(xi.ki.WATERWAY_FACILITY_CRANK)
 end
 
-instance_object.onInstanceTimeUpdate = function(instance, elapsed)
+instanceObject.onInstanceTimeUpdate = function(instance, elapsed)
     -- Custom MobSkill logic for enemies
     local enemiesDefeated = 0
 
@@ -134,17 +134,17 @@ instance_object.onInstanceTimeUpdate = function(instance, elapsed)
     end
 end
 
-instance_object.onInstanceFailure = function(instance)
+instanceObject.onInstanceFailure = function(instance)
     local chars = instance:getChars()
     for i, v in pairs(chars) do
         v:setPos(-529.361, -7.000, 59.988, 0, 258)
     end
 end
 
-instance_object.onInstanceProgressUpdate = function(instance, progress)
+instanceObject.onInstanceProgressUpdate = function(instance, progress)
 end
 
-instance_object.onInstanceComplete = function(instance)
+instanceObject.onInstanceComplete = function(instance)
     local chars = instance:getChars()
     for i, v in pairs(chars) do
         v:startEvent(1000)
@@ -157,4 +157,4 @@ instance_object.onInstanceComplete = function(instance)
     end
 end
 
-return instance_object
+return instanceObject
