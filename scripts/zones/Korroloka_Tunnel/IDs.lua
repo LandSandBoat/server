@@ -37,6 +37,7 @@ zones[xi.zone.KORROLOKA_TUNNEL] =
         NO_COMBINATION                = 10528, -- You were unable to enter a combination.
         COMMON_SENSE_SURVIVAL         = 10552, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         CARGO_CRAB_COLIN_PH =
@@ -44,6 +45,7 @@ zones[xi.zone.KORROLOKA_TUNNEL] =
             [17486002] = 17485980, -- -30.384 1.000 -33.277
             [17486095] = 17485980, -- -85.000 -0.500 -37.000
         },
+
         DAME_BLANCHE_PH     =
         {
             [17486128] = 17486129, -- -345.369 0.716 119.486
@@ -54,6 +56,7 @@ zones[xi.zone.KORROLOKA_TUNNEL] =
             [17486119] = 17486129, -- -277.338 -9.352 139.763
             [17486118] = 17486129, -- -276.713 -9.954 135.353
         },
+
         FALCATUS_ARANEI_PH  =
         {
             [17486033] = 17486031, -- -68.852 -5.029 141.069
@@ -62,14 +65,16 @@ zones[xi.zone.KORROLOKA_TUNNEL] =
             [17486027] = 17486031, -- -25.445 -6.073 142.192
             [17486028] = 17486031, -- -33.446 -6.038 141.987
         },
+
         KORROLOKA_LEECH_I   = 17486187,
         KORROLOKA_LEECH_II  = 17486188,
         KORROLOKA_LEECH_III = 17486189,
-        MORION_WORM         = 17486190,
+        MORION_WORM         = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
-        MORION_WORM_QM = 17486216,
+        QM_MORION_WORM = DYNAMIC_LOOKUP,
         EXCAVATION =
         {
             17486256,

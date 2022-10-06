@@ -78,7 +78,7 @@ zones[xi.zone.LOWER_JEUNO] =
     },
     npc =
     {
-        VHANA_EHGAKLYWHA  = 17780880,
+        VHANA_EHGAKLYWHA  = DYNAMIC_LOOKUP,
         STREETLAMP_OFFSET = 17780881,
     },
 }

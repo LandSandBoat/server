@@ -32,29 +32,33 @@ zones[xi.zone.KING_RANPERRES_TOMB] =
         REGIME_REGISTERED             = 10342, -- New training regime registered!
         COMMON_SENSE_SURVIVAL         = 11429, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
-        GWYLLGI_PH            =
+        GWYLLGI_PH =
         {
             [17555661] = 17555664,
         },
-        CRYPT_GHOST_PH        =
+
+        CRYPT_GHOST_PH =
         {
             [17555665] = 17555668,
             [17555666] = 17555668,
             [17555667] = 17555668,
         },
-        BARBASTELLE           = 17555721,
-        CHERRY_SAPLING_OFFSET = 17555748,
-        VRTRA                 = 17555763,
-        CORRUPTED_YORGOS      = 17555770,
-        CORRUPTED_SOFFEIL     = 17555771,
-        CORRUPTED_ULBRIG      = 17555772,
-        ANKOU                 = 17555709,
+
+        BARBASTELLE       = DYNAMIC_LOOKUP,
+        CHERRY_SAPLING    = DYNAMIC_LOOKUP, -- Formerly CHERRY_SAPLING_OFFSET
+        VRTRA             = DYNAMIC_LOOKUP,
+        CORRUPTED_YORGOS  = DYNAMIC_LOOKUP,
+        CORRUPTED_SOFFEIL = DYNAMIC_LOOKUP,
+        CORRUPTED_ULBRIG  = DYNAMIC_LOOKUP,
+        ANKOU             = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
-        TREASURE_CHEST = 17555966,
+        TREASURE_CHEST = DYNAMIC_LOOKUP,
     },
 }
 

@@ -36,6 +36,7 @@ zones[xi.zone.INNER_HORUTOTO_RUINS] =
         REGIME_REGISTERED             = 9498,  -- New training regime registered!
         COMMON_SENSE_SURVIVAL         = 10546, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         SLENDLIX_SPINDLETHUMB_PH =
@@ -49,10 +50,11 @@ zones[xi.zone.INNER_HORUTOTO_RUINS] =
             [17563800] = 17563801, -- -230.732 -0.025 -52.324
         },
     },
+
     npc =
     {
         PORTAL_CIRCLE_BASE = 17563861,
-        TREASURE_CHEST     = 17563914,
+        TREASURE_CHEST     = DYNAMIC_LOOKUP,
     },
 }
 

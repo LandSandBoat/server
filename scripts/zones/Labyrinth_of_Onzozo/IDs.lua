@@ -34,13 +34,15 @@ zones[xi.zone.LABYRINTH_OF_ONZOZO] =
         COMMON_SENSE_SURVIVAL         = 10483, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
         UNITY_WANTED_BATTLE_INTERACT  = 10547, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
+
     mob =
     {
         LORD_OF_ONZOZO_PH       =
         {
             [17649730] = 17649731, -- -39.356 14.265 -60.406
         },
-        OSE_PH                  =
+
+        OSE_PH =
         {
             [17649813] = 17649822, -- -1.758 4.982 153.412
             [17649814] = 17649822, -- 8.113 5.055 159.197
@@ -51,6 +53,7 @@ zones[xi.zone.LABYRINTH_OF_ONZOZO] =
             [17649816] = 17649822, -- 48.440 5.070 174.352
             [17649815] = 17649822, -- 39.858 4.364 164.961
         },
+
         SOULSTEALER_SKULLNIX_PH =
         {
             [17649838] = 17649818, -- 38.347 5.500 178.050
@@ -60,16 +63,19 @@ zones[xi.zone.LABYRINTH_OF_ONZOZO] =
             [17649829] = 17649818, -- 13.729 4.814 166.295
             [17649831] = 17649818, -- 5.096 3.930 166.865
         },
-        NARASIMHA_PH            =
+
+        NARASIMHA_PH =
         {
             [17649783] = 17649784, -- -119.897 0.275 127.060
         },
-        HELLION_PH              =
+
+        HELLION_PH =
         {
             [17649797] = 17649795, -- 136.566 14.708 70.077
             [17649810] = 17649795, -- 127.523 14.327 210.258
         },
-        PEG_POWLER_PH           =
+
+        PEG_POWLER_PH =
         {
             [17649755] = 17649761, -- -100.912 4.263 -21.983
             [17649759] = 17649761, -- -128.471 4.952 0.489
@@ -83,13 +89,15 @@ zones[xi.zone.LABYRINTH_OF_ONZOZO] =
             [17649773] = 17649761, -- -65.089 5.386 81.363
             [17649766] = 17649761, -- -64.269 5.441 72.382
         },
-        MYSTICMAKER_PROFBLIX    = 17649693,
-        UBUME                   = 17649860,
-        MEGAPOD_MEGALOPS        = 17649861,
+
+        MYSTICMAKER_PROFBLIX = DYNAMIC_LOOKUP,
+        UBUME                = DYNAMIC_LOOKUP,
+        MEGAPOD_MEGALOPS     = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
-        TREASURE_CHEST = 17649900,
+        TREASURE_CHEST = DYNAMIC_LOOKUP,
     },
 }
 

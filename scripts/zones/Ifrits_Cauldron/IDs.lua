@@ -43,6 +43,7 @@ zones[xi.zone.IFRITS_CAULDRON] =
         UNITY_WANTED_BATTLE_INTERACT  = 11577, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
         COMMON_SENSE_SURVIVAL         = 11599, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         TYRANNIC_TUNNOK_PH =
@@ -51,6 +52,7 @@ zones[xi.zone.IFRITS_CAULDRON] =
             [17617000] = 17616999,
             [17617001] = 17616999,
         },
+
         LINDWURM_PH =
         {
             [17617007] = 17617013,
@@ -60,12 +62,14 @@ zones[xi.zone.IFRITS_CAULDRON] =
             [17617031] = 17617013,
             [17617032] = 17617013,
         },
+
         FORESEER_ORAMIX_PH =
         {
             [17617055] = 17617062,
             [17617066] = 17617062,
             [17617069] = 17617062,
         },
+
         VOUIVRE_PH =
         {
             [17617117] = 17617130,
@@ -75,17 +79,19 @@ zones[xi.zone.IFRITS_CAULDRON] =
             [17617125] = 17617130,
             [17617129] = 17617130,
         },
+
         PIRATES_COVE_NMS = 17616897,
-        ASH_DRAGON       = 17617147,
-        MIMIC            = 17617157,
-        BOMB_QUEEN       = 17617158,
-        TARASQUE         = 17617164,
-        CAILLEACH_BHEUR  = 17617165,
+        ASH_DRAGON       = DYNAMIC_LOOKUP,
+        MIMIC            = DYNAMIC_LOOKUP,
+        BOMB_QUEEN       = DYNAMIC_LOOKUP,
+        TARASQUE         = DYNAMIC_LOOKUP,
+        CAILLEACH_BHEUR  = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
         FLAME_SPOUT_OFFSET = 17617204,
-        TREASURE_COFFER    = 17617224,
+        TREASURE_COFFER    = DYNAMIC_LOOKUP,
         MINING =
         {
             17617225,

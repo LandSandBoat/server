@@ -82,9 +82,9 @@ zones[xi.zone.KONSCHTAT_HIGHLANDS] =
             [17219887] = 17219886, -- Steelfleece can't spawn if Rampaging is up
         },
 
-        FORGER         = 17219999,
-        HATY           = 17220000,
-        BENDIGEIT_VRAN = 17220001,
+        FORGER         = DYNAMIC_LOOKUP,
+        HATY           = DYNAMIC_LOOKUP,
+        BENDIGEIT_VRAN = DYNAMIC_LOOKUP,
 
         VOIDWALKER =
         {
@@ -94,10 +94,10 @@ zones[xi.zone.KONSCHTAT_HIGHLANDS] =
                 17220018, -- Prickly Sheep
                 17220017, -- Prickly Sheep
                 17220016, -- Prickly Sheep
-                17220015,  -- Void Hare
-                17220014,  -- Void Hare
-                17220013,  -- Void Hare
-                17220012,  -- Void Hare
+                17220015, -- Void Hare
+                17220014, -- Void Hare
+                17220013, -- Void Hare
+                17220012, -- Void Hare
             },
 
             [xi.keyItem.COLORFUL_ABYSSITE] =

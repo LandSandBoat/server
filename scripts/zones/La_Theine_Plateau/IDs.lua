@@ -63,6 +63,7 @@ zones[xi.zone.LA_THEINE_PLATEAU] =
         UNCANNY_SENSATION             = 12341, -- You are assaulted by an uncanny sensation.
         COMMON_SENSE_SURVIVAL         = 12348, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         TUMBLING_TRUFFLE_PH =
@@ -85,7 +86,7 @@ zones[xi.zone.LA_THEINE_PLATEAU] =
             [17195318] = 17195317, -- Bloodtear can't spawn if Lumbering is up
         },
 
-        NIHNIKNOOVI = 17195475,
+        NIHNIKNOOVI = DYNAMIC_LOOKUP,
 
         VOIDWALKER =
         {
@@ -121,7 +122,7 @@ zones[xi.zone.LA_THEINE_PLATEAU] =
 
     npc =
     {
-        FALLEN_EGG  = 17195583,
+        FALLEN_EGG  = DYNAMIC_LOOKUP,
         RAINBOW     = 17195607,
     },
 }

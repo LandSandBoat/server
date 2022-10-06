@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Manaclipper
+-- Area: Manaclipper (3)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
@@ -22,10 +22,12 @@ zones[xi.zone.MANACLIPPER] =
         FISHING_MESSAGE_OFFSET        = 7230, -- You can't fish here.
         KHOTS_CHALAHKO_OFFSET         = 7403, -- Ahhh... Isn't it grrreat out here on the open sea!?
     },
+
     mob =
     {
-        ZOREDONITE = 16789518,
+        ZOREDONITE = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
     },

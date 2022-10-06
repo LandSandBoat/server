@@ -33,9 +33,10 @@ zones[xi.zone.LUFAISE_MEADOWS] =
         COMMON_SENSE_SURVIVAL         = 8745, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
         UNITY_WANTED_BATTLE_INTERACT  = 8809, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
+
     mob =
     {
-        PADFOOT               =
+        PADFOOT =
         {
             16875552, -- !pos -43.689 0.487 -328.028
             16875578, -- !pos 260.445 -1.761 -27.862
@@ -43,20 +44,24 @@ zones[xi.zone.LUFAISE_MEADOWS] =
             16875703, -- !pos -378.950 -15.742 144.215
             16875748, -- !pos -141.523 -15.529 91.709
         },
-        MEGALOBUGARD_PH       =
+
+        MEGALOBUGARD_PH =
         {
             [16875720] = 16875741, -- -137.168 -15.390 91.016
         },
-        LESHY_OFFSET          = 16875754,
-        COLORFUL_LESHY        = 16875762,
-        SPLINTERSPINE_GRUKJUK = 16875774,
-        KURREA                = 16875778,
-        AMALTHEIA             = 16875779,
+
+        LESHY                 = DYNAMIC_LOOKUP,
+        COLORFUL_LESHY        = DYNAMIC_LOOKUP,
+        SPLINTERSPINE_GRUKJUK = DYNAMIC_LOOKUP,
+        KURREA                = DYNAMIC_LOOKUP,
+        AMALTHEIA             = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
         OVERSEER_BASE = 16875865, -- Jemmoquel_RK in npc_list
-        LOGGING       =
+
+        LOGGING =
         {
             16875883,
             16875884,

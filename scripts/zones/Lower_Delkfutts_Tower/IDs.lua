@@ -34,6 +34,7 @@ zones[xi.zone.LOWER_DELKFUTTS_TOWER] =
         UNCANNY_SENSATION                = 11768, -- You are assaulted by an uncanny sensation.
         COMMON_SENSE_SURVIVAL            = 11775, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         HIPPOLYTOS_PH =
@@ -41,17 +42,21 @@ zones[xi.zone.LOWER_DELKFUTTS_TOWER] =
             [17531000] = 17530999, -- 337.079 -16.1 17.386
             [17531002] = 17530999, -- 346.244 -16.126 10.373
         },
+
         EPIALTES_PH   =
         {
             [17530882] = 17530881, -- 432.952 -0.350 -3.719
             [17530887] = 17530881, -- 484.735 0.046 23.048
         },
+
         EURYMEDON_PH  =
         {
             [17531118] = 17531114, -- 397.252 -32.128 -32.807
         },
-        DISASTER_IDOL = 17531121,
+
+        DISASTER_IDOL = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
     },

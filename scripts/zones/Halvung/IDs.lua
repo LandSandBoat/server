@@ -33,21 +33,24 @@ zones[xi.zone.HALVUNG] =
         UNITY_WANTED_BATTLE_INTERACT  = 8088, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
         COMMON_SENSE_SURVIVAL         = 8110, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
-        BIG_BOMB               = 17031401,
-        GURFURLUR_THE_MENACING = 17031592,
-        DEXTROSE               = 17031598,
-        REACTON                = 17031599,
-        ACHAMOTH               = 17031600,
+        BIG_BOMB               = DYNAMIC_LOOKUP,
+        GURFURLUR_THE_MENACING = DYNAMIC_LOOKUP,
+        DEXTROSE               = DYNAMIC_LOOKUP,
+        REACTON                = DYNAMIC_LOOKUP,
+        ACHAMOTH               = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
-        LEVER_AB_DOOR          = 17031668,
-        LEVER_CD_DOOR          = 17031672,
-        LEVER_EF_DOOR          = 17031676,
-        LEVER_GH_DOOR          = 17031680,
-        LEVER_IJ_DOOR          = 17031684,
+        LEVER_AB_DOOR = 17031668,
+        LEVER_CD_DOOR = 17031672,
+        LEVER_EF_DOOR = 17031676,
+        LEVER_GH_DOOR = 17031680,
+        LEVER_IJ_DOOR = 17031684,
+
         MINING =
         {
             17031715,

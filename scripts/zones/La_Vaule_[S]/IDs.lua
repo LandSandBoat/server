@@ -26,17 +26,20 @@ zones[xi.zone.LA_VAULE_S] =
         GATHERED_DAWNDROPS_LIGHT      = 8345, -- The gathered dawndrops unleash a brilliant light, melding together to form <keyitem>!
         RETRACED_ALL_JUNCTIONS        = 8346, -- You have retraced all junctions of eventualities. Hasten back to where Cait Sith and Lilisette await.
     },
+
     mob =
     {
         HAWKEYED_DNATBAT_PH =
         {
             [17125431] = 17125433, -- 375.737 0.272 -174.487
         },
+
         ASHMAKER_GOTBLUT_PH =
         {
             [17125450] = 17125452, -- 234.481 3.424 -241.751
         },
     },
+
     npc =
     {
     },

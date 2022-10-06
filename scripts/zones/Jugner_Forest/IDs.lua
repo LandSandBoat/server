@@ -71,10 +71,10 @@ zones[xi.zone.JUGNER_FOREST] =
             [17203447] = 17203448,
         },
 
-        KING_ARTHRO          = 17203216,
-        FRAELISSA            = 17203447,
-        FRADUBIO             = 17203448,
-        METEORMAULER         = 17203414,
+        KING_ARTHRO           = DYNAMIC_LOOKUP,
+        FRAELISSA             = DYNAMIC_LOOKUP,
+        FRADUBIO              = DYNAMIC_LOOKUP,
+        METEORMAULER_ZHAGTEGG = DYNAMIC_LOOKUP,
 
         VOIDWALKER =
         {
@@ -107,7 +107,7 @@ zones[xi.zone.JUGNER_FOREST] =
             }
         },
 
-        CERNUNNOS = 17203677,
+        CERNUNNOS = DYNAMIC_LOOKUP,
     },
 
     npc =

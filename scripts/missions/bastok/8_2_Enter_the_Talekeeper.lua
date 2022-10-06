@@ -42,7 +42,7 @@ end
 
 local isGhostsAlive = function()
     for i = 0, 2 do
-        local ghostMob = GetMobByID(kuftalID.mob.TALEKEEPER_OFFSET + i)
+        local ghostMob = GetMobByID(kuftalID.mob.GORDOVS_GHOST + i)
         if
             ghostMob:isSpawned() and
             not ghostMob:isDead()
@@ -195,7 +195,7 @@ mission.sections =
                         not anyGhostsAlive
                     then
                         for i = 0, 2 do
-                            SpawnMob(kuftalID.mob.TALEKEEPER_OFFSET + i)
+                            SpawnMob(kuftalID.mob.GORDOVS_GHOST + i)
                         end
                         return mission:messageSpecial(kuftalID.text.EVIL)
                     elseif

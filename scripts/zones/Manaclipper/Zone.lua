@@ -1,5 +1,5 @@
 -----------------------------------
--- Zone: Manaclipper
+-- Zone: Manaclipper (3)
 -----------------------------------
 local ID = require('scripts/zones/Manaclipper/IDs')
 require('scripts/globals/manaclipper')

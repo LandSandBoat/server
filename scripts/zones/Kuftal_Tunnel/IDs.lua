@@ -37,9 +37,10 @@ zones[xi.zone.KUFTAL_TUNNEL] =
         COMMON_SENSE_SURVIVAL         = 11430, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
         UNITY_WANTED_BATTLE_INTERACT  = 11494, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
+
     mob =
     {
-        AMEMET_PH               =
+        AMEMET_PH =
         {
             [17490000] = 17490016, -- 123.046 0.250 18.642
             [17489994] = 17490016, -- 112.135 -0.278 38.281
@@ -55,25 +56,29 @@ zones[xi.zone.KUFTAL_TUNNEL] =
             [17490009] = 17490016, -- 67.998 -0.500 12.000
             [17489934] = 17490016, -- 92.000 -0.396 14.000
         },
-        ARACHNE_PH              =
+
+        ARACHNE_PH =
         {
             [17490222] = 17490217, -- 19.000 20.000 37.000
             [17490221] = 17490217, -- -10.000 20.000 14.000
             [17490219] = 17490217, -- -20.000 20.000 38.000
             [17490220] = 17490217, -- -20.000 21.000 1.000
         },
+
         BLOODTHIRSTER_MADKIX_PH =
         {
             [17490173] = 17490159, -- 265.000 9.000 30.000
             [17490182] = 17490159, -- 256.000 10.000 34.000
         },
-        PELICAN_PH              =
+
+        PELICAN_PH =
         {
             [17490097] = 17490101, -- 178.857 20.256 -44.151
             [17490094] = 17490101, -- 180.000 21.000 -39.000
             [17490098] = 17490101, -- 179.394 20.061 -34.062
         },
-        SABOTENDER_MARIACHI_PH  =
+
+        SABOTENDER_MARIACHI_PH =
         {
             [17489987] = 17489980, -- -23.543 -0.396 59.578
             [17489983] = 17489980, -- -45.000 -0.115 39.000
@@ -88,7 +93,8 @@ zones[xi.zone.KUFTAL_TUNNEL] =
             [17489975] = 17489980, -- -33.717 -0.448 -43.478
             [17489971] = 17489980, -- -17.217 -0.956 -57.647
         },
-        YOWIE_PH                =
+
+        YOWIE_PH =
         {
             [17490175] = 17490204, -- 27.000 19.000 132.000
             [17490174] = 17490204, -- 20.000 20.000 118.000
@@ -102,18 +108,20 @@ zones[xi.zone.KUFTAL_TUNNEL] =
             [17490144] = 17490204, -- 72.000 21.000 63.000
             [17490141] = 17490204, -- 87.000 21.000 59.000
         },
-        TALEKEEPER_OFFSET       = 17489926,
-        MIMIC                   = 17490230,
-        CANCER                  = 17490231,
-        PHANTOM_WORM            = 17490233,
-        GUIVRE                  = 17490234,
-        KETTENKAEFER            = 17490235,
+
+        GORDOVS_GHOST = DYNAMIC_LOOKUP,
+        MIMIC         = DYNAMIC_LOOKUP,
+        CANCER        = DYNAMIC_LOOKUP,
+        PHANTOM_WORM  = DYNAMIC_LOOKUP,
+        GUIVRE        = DYNAMIC_LOOKUP,
+        KETTENKAEFER  = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
-        PHANTOM_WORM_QM = 17490253,
+        QM_PHANTOM_WORM = DYNAMIC_LOOKUP,
         DOOR_ROCK       = 17490280,
-        TREASURE_COFFER = 17490304,
+        TREASURE_COFFER = DYNAMIC_LOOKUP,
     },
 }
 

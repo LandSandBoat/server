@@ -7,7 +7,7 @@ local ID = require("scripts/zones/Lufaise_Meadows/IDs")
 local entity = {}
 
 local function disturbMob(mob)
-    local offset = mob:getID() - ID.mob.LESHY_OFFSET
+    local offset = mob:getID() - ID.mob.LESHY
     if (offset >= 0 and offset <= 7) then
         local nm = GetMobByID(ID.mob.COLORFUL_LESHY)
         if (not nm:isSpawned() and not GetMobByID(ID.mob.COLORFUL_LESHY + 1):isSpawned()) then
@@ -26,7 +26,7 @@ end
 
 entity.onMobRoam = function(mob)
     local ph = mob:getID()
-    local offset = ph - ID.mob.LESHY_OFFSET
+    local offset = ph - ID.mob.LESHY
     if (offset >= 0 and offset <= 7) then
         local nm = GetMobByID(ID.mob.COLORFUL_LESHY)
         if (
