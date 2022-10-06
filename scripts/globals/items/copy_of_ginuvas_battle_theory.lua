@@ -7,9 +7,9 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     local check = 56
     if (target:getMainLvl() >= 65) then
         check = 0
@@ -17,8 +17,8 @@ item_object.onItemCheck = function(target)
     return check
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addExp(xi.settings.main.EXP_RATE * math.random(50, 200))
 end
 
-return item_object
+return itemObject

@@ -6,16 +6,16 @@
 require("scripts/globals/settings")
 require("scripts/globals/msg")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return 0
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:forMembersInRange(10, function(member)
         member:addTP(1000)
     end)
 end
 
-return item_object
+return itemObject

@@ -7,9 +7,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     if (target:getMP() == target:getMaxMP()) then
         return xi.msg.basic.ITEM_UNABLE_TO_USE
     elseif (target:hasStatusEffect(xi.effect.MEDICINE)) then
@@ -18,9 +18,9 @@ item_object.onItemCheck = function(target)
     return 0
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:messageBasic(xi.msg.basic.RECOVERS_MP, 0, target:addMP(310*xi.settings.main.ITEM_POWER))
     target:addStatusEffect(xi.effect.MEDICINE, 0, 0, 900)
 end
 
-return item_object
+return itemObject

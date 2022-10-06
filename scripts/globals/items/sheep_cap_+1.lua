@@ -7,9 +7,9 @@
 -----------------------------------
 require("scripts/globals/msg")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     local result = 0
     if target:getFreeSlotsCount() == 0 then
         result = xi.msg.basic.ITEM_NO_USE_INVENTORY
@@ -17,10 +17,10 @@ item_object.onItemCheck = function(target)
     return result
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     local giftList = { 4363, 4505, 1845, 4366, 919, 2213, 4571, 4504, 8929, 4367, 833 }
     local gift = math.random(1, 11)
     target:addItem(giftList[gift])
 end
 
-return item_object
+return itemObject

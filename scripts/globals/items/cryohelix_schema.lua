@@ -3,14 +3,14 @@
 -- Cryohelix Schema
 -- Teaches the black magic Cryohelix
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(282)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(282)
 end
 
-return item_object
+return itemObject
