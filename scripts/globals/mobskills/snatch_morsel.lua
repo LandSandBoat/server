@@ -7,13 +7,13 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     if (target:hasStatusEffect(xi.effect.FOOD)) then
         -- 99% sure retail doesn't do this. Uncomment if you want it to happen.
         -- local foodID = target:getStatusEffect(xi.effect.FOOD):getSubType()
@@ -35,4 +35,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return xi.effect.FOOD
 end
 
-return mobskill_object
+return mobskillObject

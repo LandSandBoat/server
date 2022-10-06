@@ -11,9 +11,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if (mob:hasStatusEffect(xi.effect.MIGHTY_STRIKES)) then
         return 1
     elseif (mob:getAnimationSub() == 1) then
@@ -24,7 +24,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.PLAGUE
 
     xi.mobskills.mobStatusEffectMove(mob, target, typeEffect, 10, 0, 120)
@@ -36,4 +36,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return dmg
 end
 
-return mobskill_object
+return mobskillObject

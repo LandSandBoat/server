@@ -7,9 +7,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if not target:isInfront(mob, 128) then
         return 1
     elseif mob:getAnimationSub() == 1 then
@@ -18,7 +18,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dispel = target:dispelStatusEffect(bit.bor(xi.effectFlag.DISPELABLE, xi.effectFlag.FOOD))
 
     if dispel == xi.effect.NONE then
@@ -33,4 +33,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return dispel
 end
 
-return mobskill_object
+return mobskillObject

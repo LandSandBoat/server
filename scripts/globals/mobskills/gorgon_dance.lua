@@ -11,9 +11,9 @@ require("scripts/globals/mobskills")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
 
     local mobhp = mob:getHPP()
     if (mobhp <= 25) then -- She's under 25%, it's okay to use this.
@@ -23,10 +23,10 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
     end
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.PETRIFICATION
     skill:setMsg(xi.mobskills.mobGazeMove(mob, target, typeEffect, 1, 0, math.random(60, 180)))
     return typeEffect
 end
 
-return mobskill_object
+return mobskillObject

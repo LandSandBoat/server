@@ -9,13 +9,13 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     -- Formula needs redone with retail MOB VERSION not players avatar
     local base = mob:getMainLvl() + 2*mob:getMainLvl()*(skill:getTP()/1000) --base is around 5~150 level depending
     local m = 5
@@ -27,4 +27,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return xi.mobskills.mobHealMove(target, base)
 end
 
-return mobskill_object
+return mobskillObject
