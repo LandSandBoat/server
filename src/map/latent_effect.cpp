@@ -106,7 +106,7 @@ void CLatentEffect::SetModPower(int16 power)
 
 bool CLatentEffect::ModOnItemOnly(Mod modID)
 {
-    if (modID == Mod::DMG ||
+    if (modID == Mod::DMG_RATING ||
         modID == Mod::ITEM_ADDEFFECT_TYPE ||
         modID == Mod::ITEM_SUBEFFECT ||
         modID == Mod::ITEM_ADDEFFECT_DMG ||
@@ -133,28 +133,8 @@ bool CLatentEffect::Activate()
 
             if (item)
             {
-                item->addModifier(CModifier(GetModValue(), GetModPower()));
-                // ShowTrace("LATENT ACTIVATED: %d, Current item modifier value: %d", m_ModValue, item->getModifier(m_ModValue));
-            }
-        }
-        else if (GetModValue() == Mod::DMG_RATING)
-        {
-            // TODO: Apply equipment scaling (level sync).
-            // This is bypassing equipment scaling (as all latents currently do), which is done separately in two places:
-            // CBattleEntity::addEquipModifiers() and CBattleEntity::GetMainWeaponDmg() (or GetSubWeaponDmg() etc.)
-
-            switch (GetSlot())
-            {
-                case SLOTTYPE::SLOT_MAIN:
-                    m_POwner->addModifier(Mod::MAIN_DMG_RATING, GetModPower());
-                    break;
-                case SLOTTYPE::SLOT_SUB:
-                    m_POwner->addModifier(Mod::SUB_DMG_RATING, GetModPower());
-                    break;
-                case SLOTTYPE::SLOT_RANGED:
-                case SLOTTYPE::SLOT_AMMO:
-                    m_POwner->addModifier(Mod::RANGED_DMG_RATING, GetModPower());
-                    break;
+                item->addModifier(GetModValue(), GetModPower());
+                m_PItem = item;
             }
         }
         // Other modifiers go on the player
@@ -177,44 +157,9 @@ bool CLatentEffect::Deactivate()
         // Remove the modifier from item, not player
         if (ModOnItemOnly(GetModValue()))
         {
-            CCharEntity*    PChar = static_cast<CCharEntity*>(m_POwner);
-            CItemEquipment* item  = PChar->getEquip((SLOTTYPE)GetSlot());
-
-            if (item != nullptr && (item->isType(ITEM_EQUIPMENT) || item->isType(ITEM_WEAPON)))
+            if (m_PItem != nullptr)
             {
-                if (GetModValue() == Mod::ITEM_ADDEFFECT_TYPE)
-                {
-                    for (auto& i : item->modList)
-                    {
-                        // Ensure the additional effect is fully removed from the item,
-                        // because the code handling mods on items needs a rewrite.
-                        if (i.getModID() == Mod::ITEM_ADDEFFECT_TYPE)
-                        {
-                            i.setModAmount(0);
-                        }
-                    }
-                }
-                else
-                {
-                    // Todo: item modifier functions need rewrite (there is no delMod, and the input to addMod is different)
-                    item->addModifier(CModifier(GetModValue(), -GetModPower()));
-                }
-            }
-        }
-        else if (GetModValue() == Mod::DMG_RATING)
-        {
-            switch (GetSlot())
-            {
-                case SLOTTYPE::SLOT_MAIN:
-                    m_POwner->delModifier(Mod::MAIN_DMG_RATING, GetModPower());
-                    break;
-                case SLOTTYPE::SLOT_SUB:
-                    m_POwner->delModifier(Mod::SUB_DMG_RATING, GetModPower());
-                    break;
-                case SLOTTYPE::SLOT_RANGED:
-                case SLOTTYPE::SLOT_AMMO:
-                    m_POwner->delModifier(Mod::RANGED_DMG_RATING, GetModPower());
-                    break;
+                m_PItem->delModifier(GetModValue(), GetModPower());
             }
         }
         // Remove other modifiers from player

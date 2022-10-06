@@ -48,7 +48,7 @@ CPetModifier::CPetModifier(Mod type, PetModType pettype, int16 amount)
 {
 }
 
-PetModType CPetModifier::getPetModType()
+PetModType CPetModifier::getPetModType() const
 {
     return m_pettype;
 }

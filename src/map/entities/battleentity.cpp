@@ -362,11 +362,11 @@ uint16 CBattleEntity::GetMainWeaponDmg()
         {
             // TODO: Determine the difference between augments and latents w.r.t. equipment scaling.
             // MAIN_DMG_RATING already has equipment scaling applied elsewhere.
-            uint16 dmg = weapon->getDamage() + weapon->getModifier(Mod::DMG_RATING);
+            uint16 dmg = weapon->getDamage();
             dmg *= GetMLevel() * 3;
             dmg /= 4;
             dmg /= weapon->getReqLvl();
-            return dmg + getMod(Mod::MAIN_DMG_RATING);
+            return dmg + weapon->getModifier(Mod::DMG_RATING) + getMod(Mod::MAIN_DMG_RATING);
         }
         else
         {
@@ -383,11 +383,11 @@ uint16 CBattleEntity::GetSubWeaponDmg()
     {
         if ((weapon->getReqLvl() > GetMLevel()) && objtype == TYPE_PC)
         {
-            uint16 dmg = weapon->getDamage() + weapon->getModifier(Mod::DMG_RATING);
+            uint16 dmg = weapon->getDamage();
             dmg *= GetMLevel() * 3;
             dmg /= 4;
             dmg /= weapon->getReqLvl();
-            return dmg + getMod(Mod::SUB_DMG_RATING);
+            return dmg + weapon->getModifier(Mod::DMG_RATING) + getMod(Mod::SUB_DMG_RATING);
         }
         else
         {
@@ -405,11 +405,11 @@ uint16 CBattleEntity::GetRangedWeaponDmg()
     {
         if ((weapon->getReqLvl() > GetMLevel()) && objtype == TYPE_PC)
         {
-            uint16 scaleddmg = weapon->getDamage() + weapon->getModifier(Mod::DMG_RATING);
+            uint16 scaleddmg = weapon->getDamage();
             scaleddmg *= GetMLevel() * 3;
             scaleddmg /= 4;
             scaleddmg /= weapon->getReqLvl();
-            dmg += scaleddmg;
+            dmg += scaleddmg + weapon->getModifier(Mod::DMG_RATING);
         }
         else
         {
@@ -420,11 +420,11 @@ uint16 CBattleEntity::GetRangedWeaponDmg()
     {
         if ((ammo->getReqLvl() > GetMLevel()) && objtype == TYPE_PC)
         {
-            uint16 scaleddmg = ammo->getDamage() + ammo->getModifier(Mod::DMG_RATING);
+            uint16 scaleddmg = ammo->getDamage();
             scaleddmg *= GetMLevel() * 3;
             scaleddmg /= 4;
             scaleddmg /= ammo->getReqLvl();
-            dmg += scaleddmg;
+            dmg += scaleddmg + ammo->getModifier(Mod::DMG_RATING);
         }
         else
         {

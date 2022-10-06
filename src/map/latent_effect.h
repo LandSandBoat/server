@@ -24,6 +24,8 @@
 
 #include "../common/cbasetypes.h"
 #include "../common/mmo.h"
+#include "./entities/battleentity.h"
+#include "./items/item_equipment.h"
 #include "modifier.h"
 
 enum class LATENT : uint16
@@ -153,7 +155,8 @@ public:
     ~CLatentEffect();
 
 private:
-    CBattleEntity* m_POwner{ nullptr };
+    CBattleEntity*  m_POwner{ nullptr };
+    CItemEquipment* m_PItem{ nullptr }; // Item this latent is attached to.
 
     LATENT m_ConditionsID{ LATENT::HP_UNDER_PERCENT }; // condition type to be true
     uint16 m_ConditionsValue{ 0 };                     // condition parameter to be met

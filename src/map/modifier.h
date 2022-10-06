@@ -681,13 +681,13 @@ enum class Mod
     SNEAK_DURATION     = 946, // Additional duration in seconds
     INVISIBLE_DURATION = 947, // Additional duration in seconds
 
-    DMG_RATING         = 287,  // adds damage rating to weapon (+DMG augments, maneater/blau dolch etc hidden effects)
-    MAIN_DMG_RATING    = 366,  // adds damage rating to mainhand weapon
-    SUB_DMG_RATING     = 367,  // adds damage rating to off hand weapon
-    RANGED_DMG_RATING  = 376,  // adds damage rating to ranged weapon
-    MAIN_DMG_RANK      = 377,  // adds weapon rank to main weapon http://wiki.bluegartr.com/bg/Weapon_Rank
-    SUB_DMG_RANK       = 378,  // adds weapon rank to sub weapon
-    RANGED_DMG_RANK    = 379,  // adds weapon rank to ranged weapon
+    DMG_RATING        = 287, // adds damage rating to weapon (+DMG augments, maneater/blau dolch etc hidden effects)
+    MAIN_DMG_RATING   = 366, // adds damage rating to mainhand weapon
+    SUB_DMG_RATING    = 367, // adds damage rating to off hand weapon
+    RANGED_DMG_RATING = 376, // adds damage rating to ranged weapon
+    MAIN_DMG_RANK     = 377, // adds weapon rank to main weapon http://wiki.bluegartr.com/bg/Weapon_Rank
+    SUB_DMG_RANK      = 378, // adds weapon rank to sub weapon
+    RANGED_DMG_RANK   = 379, // adds weapon rank to ranged weapon
 
     REGAIN             = 368,  // auto regain TP (from items) | this is multiplied by 10 e.g. 20 is 2% TP
     REGAIN_DOWN        = 406,  // plague, reduce tp
@@ -976,7 +976,7 @@ class CPetModifier : public CModifier
 {
 public:
     CPetModifier(Mod type, PetModType pettype, int16 amount = 0);
-    PetModType getPetModType();
+    PetModType getPetModType() const;
 
 private:
     PetModType m_pettype{ PetModType::All };
