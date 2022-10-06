@@ -3,14 +3,14 @@
 -- Scroll of Puppets Operetta
 -- Teaches the song Puppets Operetta
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(410)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(410)
 end
 
-return item_object
+return itemObject

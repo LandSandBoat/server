@@ -3,14 +3,14 @@
 -- Scroll of Shock Spikes
 -- Teaches the black magic Shock Spikes
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(251)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(251)
 end
 
-return item_object
+return itemObject

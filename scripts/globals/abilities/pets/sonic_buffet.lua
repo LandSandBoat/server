@@ -7,14 +7,14 @@ require("scripts/globals/mobskills")
 require("scripts/globals/magic")
 require("scripts/globals/job_utils/summoner")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return xi.job_utils.summoner.canUseBloodPact(player, player:getPet(), target, ability)
 end
 
 -- http://wiki.ffo.jp/html/37931.html
-ability_object.onPetAbility = function(target, pet, petskill)
+abilityObject.onPetAbility = function(target, pet, petskill)
     local dINT = math.floor(pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
     local tp   = pet:getTP()
 
@@ -39,4 +39,4 @@ ability_object.onPetAbility = function(target, pet, petskill)
     return damage
 end
 
-return ability_object
+return abilityObject

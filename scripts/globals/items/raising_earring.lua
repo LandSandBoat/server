@@ -3,16 +3,16 @@
 --  Reraise Earring
 --  This earring functions in the same way as the spell Reraise.
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return 0
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     local duration = 2100
     target:delStatusEffect(xi.effect.RERAISE)
     target:addStatusEffect(xi.effect.RERAISE, 1, 0, duration)
 end
 
-return item_object
+return itemObject

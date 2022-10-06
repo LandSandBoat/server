@@ -3,14 +3,14 @@
 -- Scroll of Stone
 -- Teaches the black magic Stone
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(159)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(159)
 end
 
-return item_object
+return itemObject

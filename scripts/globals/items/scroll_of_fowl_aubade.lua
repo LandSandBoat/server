@@ -3,14 +3,14 @@
 -- Scroll of Fowl Aubade
 -- Teaches the song Fowl Aubade
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(405)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(405)
 end
 
-return item_object
+return itemObject

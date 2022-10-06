@@ -3,14 +3,14 @@
 -- Scroll of Shell III
 -- Teaches the white magic Shell III
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(50)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(50)
 end
 
-return item_object
+return itemObject

@@ -5,9 +5,9 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     local encumbrance = target:getStatusEffect(xi.effect.ENCUMBRANCE_I)
     if (encumbrance) then
         local power = encumbrance:getPower()
@@ -18,7 +18,7 @@ item_object.onItemCheck = function(target)
     return -1
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     local encumbrance = target:getStatusEffect(xi.effect.ENCUMBRANCE_I)
     local power = encumbrance:getPower()
     local newpower = bit.band(power, bit.bnot(0x8400))
@@ -29,4 +29,4 @@ item_object.onItemUse = function(target)
     target:messageText(target, zones[target:getZoneID()].text.CELL_OFFSET + 5)
 end
 
-return item_object
+return itemObject

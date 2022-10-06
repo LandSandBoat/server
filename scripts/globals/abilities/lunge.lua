@@ -8,9 +8,9 @@
 require("scripts/globals/status")
 require("scripts/globals/job_utils/rune_fencer")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
 
     if (player:getAnimation() ~= 1) then
         return xi.msg.basic.REQUIRES_COMBAT, 0
@@ -19,8 +19,8 @@ ability_object.onAbilityCheck = function(player, target, ability)
     return xi.job_utils.rune_fencer.checkHaveRunes(player)
 end
 
-ability_object.onUseAbility = function(player, target, ability, action)
+abilityObject.onUseAbility = function(player, target, ability, action)
     return xi.job_utils.rune_fencer.useSwipeLunge(player, target, ability, action)
 end
 
-return ability_object
+return abilityObject

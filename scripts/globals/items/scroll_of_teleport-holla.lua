@@ -3,14 +3,14 @@
 -- Scroll of Teleport-Holla
 -- Teaches the white magic Teleport-Holla
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(122)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(122)
 end
 
-return item_object
+return itemObject

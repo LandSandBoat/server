@@ -8,14 +8,14 @@
 -----------------------------------
 require("scripts/globals/job_utils/thief")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-ability_object.onUseAbility = function(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability)
     xi.job_utils.thief.useConspirator(player, target, ability)
 end
 
-return ability_object
+return abilityObject

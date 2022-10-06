@@ -238,6 +238,19 @@ python3 << EOF
 import glob
 import re
 
+def check_for_underscores(str):
+    if "local " in str and " =" in str:
+        str = str.split(" =", 1)[0]
+        result = re.search("local (.*) =", str)
+        if result:
+            str = result.group(1)
+            str = str.strip()
+            for part in str.split(','):
+                part = part.strip()
+                if len(part) > 1 and '_' in part:
+                    return True
+    return False
+
 def check_tables_in_file(name):
     errcount = 0
     with open(name, 'r+') as f:
@@ -288,6 +301,17 @@ def check_tables_in_file(name):
 
             for match in re.finditer("[^ ^\n^\{]\}", line):
                 print(f"Table closed without an appropriate preceding space or newline: {name}:{counter}:{match.start() + 2}")
+                print(f"{lines[counter - 1].strip()}                              <-- HERE")
+                print("")
+                errcount += 1
+
+            # local : 'local ' (with a space)
+            # .*    : Any number of any character
+            # _     : Underscore
+            # .*    : Any number of any character
+            #  =    : ' =' (variable assignment)
+            if check_for_underscores(line):
+                print(f"Underscore in variable name: {name}:{counter}")
                 print(f"{lines[counter - 1].strip()}                              <-- HERE")
                 print("")
                 errcount += 1

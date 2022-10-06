@@ -4,9 +4,9 @@
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
-local effect_object = {}
+local effectObject = {}
 
-effect_object.onEffectGain = function(target, effect)
+effectObject.onEffectGain = function(target, effect)
     local subPower = effect:getSubPower()
     local buff     = 0
 
@@ -49,10 +49,10 @@ effect_object.onEffectGain = function(target, effect)
     end
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
 end
 
-effect_object.onEffectLose = function(target, effect)
+effectObject.onEffectLose = function(target, effect)
     local subPower = effect:getSubPower()
     local buff     = 0
 
@@ -95,4 +95,4 @@ effect_object.onEffectLose = function(target, effect)
     end
 end
 
-return effect_object
+return effectObject

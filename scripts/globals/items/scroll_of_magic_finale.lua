@@ -3,14 +3,14 @@
 -- Scroll of Magic Finale
 -- Teaches the song Magic Finale
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(462)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(462)
 end
 
-return item_object
+return itemObject

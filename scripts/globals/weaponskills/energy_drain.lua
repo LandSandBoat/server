@@ -5,9 +5,9 @@ require("scripts/globals/status")
 require("scripts/globals/settings")
 require("scripts/globals/weaponskills")
 -----------------------------------
-local weaponskill_object = {}
+local weaponskillObject = {}
 
-weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
+weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     -- TODO: Should not wake the mob involved. Not tested on sleeping mob. Need to add Darkness element and resistance. More testing needed to understand retail behavior.
 
     --[[
@@ -35,4 +35,4 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     return 1, 0, false, 0
 end
 
-return weaponskill_object
+return weaponskillObject

@@ -3,14 +3,14 @@
 -- Scroll of Hyoton: Ni
 -- Teaches the ninjutsu Hyoton: Ni
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(324)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(324)
 end
 
-return item_object
+return itemObject

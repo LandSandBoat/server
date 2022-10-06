@@ -7,13 +7,13 @@
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return 0
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     if (not target:hasStatusEffect(xi.effect.PARALYSIS)) then
         target:addStatusEffect(xi.effect.PARALYSIS, 20, 0, 600)
     else
@@ -21,4 +21,4 @@ item_object.onItemUse = function(target)
     end
 end
 
-return item_object
+return itemObject

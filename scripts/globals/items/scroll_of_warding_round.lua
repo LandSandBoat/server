@@ -3,14 +3,14 @@
 -- Scroll of Warding Round
 -- Teaches the song Warding Round
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(414)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(414)
 end
 
-return item_object
+return itemObject

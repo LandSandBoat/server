@@ -3,14 +3,14 @@
 -- Scroll of Repose
 -- Teaches the white magic Repose
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(98)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(98)
 end
 
-return item_object
+return itemObject

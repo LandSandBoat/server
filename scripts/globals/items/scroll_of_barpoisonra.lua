@@ -3,14 +3,14 @@
 -- Scroll of Barpoisonra
 -- Teaches the white magic Barpoisonra
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(87)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(87)
 end
 
-return item_object
+return itemObject
