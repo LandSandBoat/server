@@ -15,9 +15,6 @@ local entity = {}
 entity.onTrade = function(player, npc, trade)
 end
 
--- TODO: Reduce complexity
--- Disable cyclomatic complexity check for this function:
--- luacheck: ignore 561
 entity.onTrigger = function(player, npc)
     local mLvl          = player:getMainLvl()
     local mJob          = player:getMainJob()
