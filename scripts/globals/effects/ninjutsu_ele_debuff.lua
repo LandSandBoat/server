@@ -2,17 +2,17 @@
 -- Ninjutsu Elemental Debuff
 -- Reduces a targets given elemental resistance
 -----------------------------------
-local effect_object = {}
+local effectObject = {}
 
-effect_object.onEffectGain = function(target, effect)
+effectObject.onEffectGain = function(target, effect)
     target:addMod(effect:getSubPower(), -effect:getPower())
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
 end
 
-effect_object.onEffectLose = function(target, effect)
+effectObject.onEffectLose = function(target, effect)
     target:delMod(effect:getSubPower(), -effect:getPower())
 end
 
-return effect_object
+return effectObject
