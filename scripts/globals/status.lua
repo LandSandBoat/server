@@ -1333,8 +1333,15 @@ xi.mod =
     HIGH_JUMP_ENMITY_REDUCTION      = 363,
     REWARD_HP_BONUS                 = 364,
     SNAP_SHOT                       = 365,
-    MAIN_DMG_RATING                 = 366,
-    SUB_DMG_RATING                  = 367,
+
+    DMG_RATING                      = 287, -- adds damage rating to weapon (+DMG augments, maneater/blau dolch etc hidden effects)
+    MAIN_DMG_RATING                 = 366, -- adds damage rating to mainhand weapon
+    SUB_DMG_RATING                  = 367, -- adds damage rating to off hand weapon
+    RANGED_DMG_RATING               = 376, -- adds damage rating to ranged weapon
+    MAIN_DMG_RANK                   = 377, -- adds weapon rank to main weapon http://wiki.bluegartr.com/bg/Weapon_Rank
+    SUB_DMG_RANK                    = 378, -- adds weapon rank to sub weapon
+    RANGED_DMG_RANK                 = 379, -- adds weapon rank to ranged weapon
+
     REGAIN                          = 368,
     REFRESH                         = 369,
     REGEN                           = 370,
@@ -1345,7 +1352,6 @@ xi.mod =
     CURE_POTENCY_II                 = 260, -- % cure potency II | bonus from gear is capped at 30
     CURE_POTENCY_RCVD               = 375,
     CURE_POTENCY_BONUS              = 1051, -- TODO: Increases amount healed by Cure spells (fixed amount)
-    RANGED_DMG_RATING               = 376,
     DELAYP                          = 380,
     RANGED_DELAYP                   = 381,
     EXP_BONUS                       = 382,
@@ -1699,10 +1705,6 @@ xi.mod =
     ALBATROSS_RING_EFFECT = 153, -- adds 30 seconds to mini - game time
     PELICAN_RING_EFFECT   = 154, -- adds extra skillup roll for fishing
     FISHING_SKILL_GAIN    = 155, -- food increase for fishing skill ups
-
-    MAIN_DMG_RANK                = 377, -- adds weapon rank to main weapon http://wiki.bluegartr.com/bg/Weapon_Rank
-    SUB_DMG_RANK                 = 378, -- adds weapon rank to sub weapon
-    RANGED_DMG_RANK              = 379, -- adds weapon rank to ranged weapon
 
     BLOOD_BOON                   = 913, -- Occasionally cuts down MP cost of Blood Pact abilities. Does not affect abilities that require Astral Flow.
     EXPERIENCE_RETAINED          = 914, -- Experience points retained upon death (this is a percentage)

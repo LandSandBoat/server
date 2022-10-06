@@ -27,7 +27,7 @@ CModifier::CModifier(Mod type, int16 amount)
 {
 }
 
-Mod CModifier::getModID()
+Mod CModifier::getModID() const
 {
     return m_id;
 }

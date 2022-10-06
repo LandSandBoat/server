@@ -137,6 +137,26 @@ bool CLatentEffect::Activate()
                 // ShowTrace("LATENT ACTIVATED: %d, Current item modifier value: %d", m_ModValue, item->getModifier(m_ModValue));
             }
         }
+        else if (GetModValue() == Mod::DMG_RATING)
+        {
+            // TODO: Apply equipment scaling (level sync).
+            // This is bypassing equipment scaling (as all latents currently do), which is done separately in two places:
+            // CBattleEntity::addEquipModifiers() and CBattleEntity::GetMainWeaponDmg() (or GetSubWeaponDmg() etc.)
+
+            switch (GetSlot())
+            {
+                case SLOTTYPE::SLOT_MAIN:
+                    m_POwner->addModifier(Mod::MAIN_DMG_RATING, GetModPower());
+                    break;
+                case SLOTTYPE::SLOT_SUB:
+                    m_POwner->addModifier(Mod::SUB_DMG_RATING, GetModPower());
+                    break;
+                case SLOTTYPE::SLOT_RANGED:
+                case SLOTTYPE::SLOT_AMMO:
+                    m_POwner->addModifier(Mod::RANGED_DMG_RATING, GetModPower());
+                    break;
+            }
+        }
         // Other modifiers go on the player
         else
         {
@@ -179,6 +199,22 @@ bool CLatentEffect::Deactivate()
                     // Todo: item modifier functions need rewrite (there is no delMod, and the input to addMod is different)
                     item->addModifier(CModifier(GetModValue(), -GetModPower()));
                 }
+            }
+        }
+        else if (GetModValue() == Mod::DMG_RATING)
+        {
+            switch (GetSlot())
+            {
+                case SLOTTYPE::SLOT_MAIN:
+                    m_POwner->delModifier(Mod::MAIN_DMG_RATING, GetModPower());
+                    break;
+                case SLOTTYPE::SLOT_SUB:
+                    m_POwner->delModifier(Mod::SUB_DMG_RATING, GetModPower());
+                    break;
+                case SLOTTYPE::SLOT_RANGED:
+                case SLOTTYPE::SLOT_AMMO:
+                    m_POwner->delModifier(Mod::RANGED_DMG_RATING, GetModPower());
+                    break;
             }
         }
         // Remove other modifiers from player

@@ -360,7 +360,9 @@ uint16 CBattleEntity::GetMainWeaponDmg()
     {
         if ((weapon->getReqLvl() > GetMLevel()) && objtype == TYPE_PC)
         {
-            uint16 dmg = weapon->getDamage();
+            // TODO: Determine the difference between augments and latents w.r.t. equipment scaling.
+            // MAIN_DMG_RATING already has equipment scaling applied elsewhere.
+            uint16 dmg = weapon->getDamage() + weapon->getModifier(Mod::DMG_RATING);
             dmg *= GetMLevel() * 3;
             dmg /= 4;
             dmg /= weapon->getReqLvl();
@@ -368,7 +370,7 @@ uint16 CBattleEntity::GetMainWeaponDmg()
         }
         else
         {
-            return weapon->getDamage() + getMod(Mod::MAIN_DMG_RATING);
+            return weapon->getDamage() + weapon->getModifier(Mod::DMG_RATING) + getMod(Mod::MAIN_DMG_RATING);
         }
     }
     return 0;
@@ -381,7 +383,7 @@ uint16 CBattleEntity::GetSubWeaponDmg()
     {
         if ((weapon->getReqLvl() > GetMLevel()) && objtype == TYPE_PC)
         {
-            uint16 dmg = weapon->getDamage();
+            uint16 dmg = weapon->getDamage() + weapon->getModifier(Mod::DMG_RATING);
             dmg *= GetMLevel() * 3;
             dmg /= 4;
             dmg /= weapon->getReqLvl();
@@ -389,7 +391,7 @@ uint16 CBattleEntity::GetSubWeaponDmg()
         }
         else
         {
-            return weapon->getDamage() + getMod(Mod::SUB_DMG_RATING);
+            return weapon->getDamage() + weapon->getModifier(Mod::DMG_RATING) + getMod(Mod::SUB_DMG_RATING);
         }
     }
     return 0;
@@ -403,7 +405,7 @@ uint16 CBattleEntity::GetRangedWeaponDmg()
     {
         if ((weapon->getReqLvl() > GetMLevel()) && objtype == TYPE_PC)
         {
-            uint16 scaleddmg = weapon->getDamage();
+            uint16 scaleddmg = weapon->getDamage() + weapon->getModifier(Mod::DMG_RATING);
             scaleddmg *= GetMLevel() * 3;
             scaleddmg /= 4;
             scaleddmg /= weapon->getReqLvl();
@@ -411,14 +413,14 @@ uint16 CBattleEntity::GetRangedWeaponDmg()
         }
         else
         {
-            dmg += weapon->getDamage();
+            dmg += weapon->getDamage() + weapon->getModifier(Mod::DMG_RATING);
         }
     }
     if (auto* ammo = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_AMMO]))
     {
         if ((ammo->getReqLvl() > GetMLevel()) && objtype == TYPE_PC)
         {
-            uint16 scaleddmg = ammo->getDamage();
+            uint16 scaleddmg = ammo->getDamage() + ammo->getModifier(Mod::DMG_RATING);
             scaleddmg *= GetMLevel() * 3;
             scaleddmg /= 4;
             scaleddmg /= ammo->getReqLvl();
@@ -426,7 +428,7 @@ uint16 CBattleEntity::GetRangedWeaponDmg()
         }
         else
         {
-            dmg += ammo->getDamage();
+            dmg += ammo->getDamage() + ammo->getModifier(Mod::DMG_RATING);
         }
     }
     return dmg + getMod(Mod::RANGED_DMG_RATING);

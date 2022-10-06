@@ -188,7 +188,7 @@ void CItemEquipment::addModifier(CModifier modifier)
     modList.push_back(modifier);
 }
 
-int16 CItemEquipment::getModifier(Mod mod)
+int16 CItemEquipment::getModifier(Mod mod) const
 {
     for (auto& i : modList)
     {

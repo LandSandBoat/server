@@ -54,14 +54,7 @@ void CLatentEffectContainer::AddLatentEffects(std::vector<CItemEquipment::itemLa
     {
         if (m_POwner->GetMLevel() >= reqLvl || latent.ConditionsValue == static_cast<uint16>(LATENT::JOB_LEVEL_ABOVE))
         {
-            if (latent.ModValue == Mod::MAIN_DMG_RATING && slot == SLOT_SUB)
-            {
-                m_LatentEffectList.emplace_back(m_POwner, latent.ConditionsID, latent.ConditionsValue, slot, Mod::SUB_DMG_RATING, latent.ModPower);
-            }
-            else
-            {
-                m_LatentEffectList.emplace_back(m_POwner, latent.ConditionsID, latent.ConditionsValue, slot, latent.ModValue, latent.ModPower);
-            }
+            m_LatentEffectList.emplace_back(m_POwner, latent.ConditionsID, latent.ConditionsValue, slot, latent.ModValue, latent.ModPower);
         }
     }
 }
