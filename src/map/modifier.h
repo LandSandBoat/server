@@ -397,6 +397,7 @@ enum class Mod
     DARK_MAGIC_CAST        = 1071, // Reduces Dark Magic Casting Time by percentage (e.g. mod value -10 = -10% cast time)
     DARK_MAGIC_DURATION    = 1072, // Increases Dark Magic spell durations by percentage (e.g. mod value 10 = +10% duration)
     ENHANCES_DARK_SEAL     = 1073, // Enhances "Dark Seal" effect (Increases Dark Magic spell durations by 10% per Dark Seal merit while Dark Seal active)
+    ENHANCES_ABSORB_TP     = 1074, // Enhances "Absorb-TP" effect (Increases TP absorbed by percentage, e.g. mod value 5 = +5% TP absorbed)
 
     // Beastmaster
     TAME                = 304,  // Additional percent chance to charm
@@ -930,7 +931,7 @@ enum class Mod
     // 888
     // 936
     //
-    // SPARE = 1074, and onward
+    // SPARE = 1075, and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

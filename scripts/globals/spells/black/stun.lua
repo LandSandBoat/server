@@ -12,27 +12,29 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    local duration = 5
+    local duration = calculateDuration(5, spell:getSkillType(), spell:getSpellGroup(), caster, target)
 
     -- local dINT = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
     local params = {}
-    params.diff = nil
-    params.attribute = xi.mod.INT
-    params.skillType = xi.skill.DARK_MAGIC
-    params.bonus = 0
-    params.effect = xi.effect.STUN
+        params.diff = nil
+        params.attribute = xi.mod.INT
+        params.skillType = xi.skill.DARK_MAGIC
+        params.bonus = 0
+        params.effect = xi.effect.STUN
     local resist = applyResistanceEffect(caster, target, spell, params)
-    if (resist <= (1/16)) then
-        -- resisted!
+
+    if resist <= (1 / 16) then
+        -- Resisted!
         spell:setMsg(xi.msg.basic.MAGIC_RESIST)
+
         return 0
     end
 
-    if (target:hasStatusEffect(xi.effect.STUN)) then
-        -- no effect
+    if target:hasStatusEffect(xi.effect.STUN) then
+        -- No effect
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
     else
-        if (target:addStatusEffect(xi.effect.STUN, 1, 0, duration*resist)) then
+        if target:addStatusEffect(xi.effect.STUN, 1, 0, duration * resist) then
             spell:setMsg(xi.msg.basic.MAGIC_ENFEEB_IS)
         else
             spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)

@@ -1,5 +1,5 @@
 -----------------------------------
--- Spell: Endark
+-- Spell: Endark II
 -----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/msg")
@@ -11,10 +11,9 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    -- TODO: Get correct animation from retail captures
     local effect     = xi.effect.ENDARK
     local magicskill = target:getSkillLevel(xi.skill.DARK_MAGIC)
-    local potency    = 12 + math.floor(magicskill / 20) * 3 - math.floor(magicskill / 40)
+    local potency    = math.floor((math.floor((magicskill + 21) / 13) + 5) * 2.5)
     local duration   = calculateDuration(180, spell:getSkillType(), spell:getSpellGroup(), caster, target)
 
     if target:addStatusEffect(effect, potency, 0, duration) then

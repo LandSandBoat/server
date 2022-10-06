@@ -13,8 +13,8 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
-    local duration = calculateDuration(xi.settings.main.SPIKE_EFFECT_DURATION, spell:getSkillType(), spell:getSpellGroup(), caster, target)
-    local typeEffect = xi.effect.DREAD_SPIKES
+    local duration    = calculateDuration(xi.settings.main.SPIKE_EFFECT_DURATION, spell:getSkillType(), spell:getSpellGroup(), caster, target)
+    local typeEffect  = xi.effect.DREAD_SPIKES
     local drainAmount = target:getMaxHP() / 2
 
     drainAmount = drainAmount * (1 + (caster:getMod(xi.mod.DREAD_SPIKES_EFFECT) / 100))

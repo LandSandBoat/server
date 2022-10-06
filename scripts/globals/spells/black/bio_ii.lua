@@ -18,13 +18,13 @@ spell_object.onSpellCast = function(caster, target, spell)
     local skillLvl = caster:getSkillLevel(xi.skill.DARK_MAGIC)
     local basedmg = skillLvl / 4
     local params = {}
-    params.dmg = basedmg
-    params.multiplier = 2
-    params.skillType = xi.skill.DARK_MAGIC
-    params.attribute = xi.mod.INT
-    params.hasMultipleTargetReduction = false
-    params.diff = caster:getStat(xi.mod.INT)-target:getStat(xi.mod.INT)
-    params.bonus = 1.0
+        params.dmg                        = basedmg
+        params.multiplier                 = 2
+        params.skillType                  = xi.skill.DARK_MAGIC
+        params.attribute                  = xi.mod.INT
+        params.hasMultipleTargetReduction = false
+        params.diff                       = caster:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
+        params.bonus                      = 1.0
 
     -- Calculate raw damage
     local dmg = calculateMagicDamage(caster, target, spell, params)
@@ -42,7 +42,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     local final = finalMagicAdjustments(caster, target, spell, dmg)
 
     -- Calculate duration
-    local duration = 120
+    local duration = calculateDuration(120, spell:getSkillType(), spell:getSpellGroup(), caster, target)
 
     -- Check for Dia
     local dia = target:getStatusEffect(xi.effect.DIA)
@@ -51,14 +51,17 @@ spell_object.onSpellCast = function(caster, target, spell)
     -- http://wiki.ffo.jp/html/1954.html
     -- This formula gives correct values for every breakpoint listed on that site
     local dotdmg = math.floor((skillLvl + 29) / 40)
-    dotdmg = utils.clamp(dotdmg, 3, 8)
+    dotdmg       = utils.clamp(dotdmg, 3, 8)
 
     -- Do it!
     target:addStatusEffect(xi.effect.BIO, dotdmg, 3, duration, 0, 15, 2)
     spell:setMsg(xi.msg.basic.MAGIC_DMG)
 
     -- Try to kill same tier Dia (default behavior)
-    if xi.settings.main.DIA_OVERWRITE == 1 and dia ~= nil then
+    if
+        xi.settings.main.DIA_OVERWRITE == 1 and
+        dia ~= nil
+    then
         if dia:getPower() <= 2 then
             target:delStatusEffect(xi.effect.DIA)
         end

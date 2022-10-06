@@ -1,5 +1,5 @@
 -----------------------------------
--- Spell: Drain
+-- Spell: Drain III
 -- Drain functions only on skill level!
 -----------------------------------
 require("scripts/globals/magic")
@@ -14,14 +14,15 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spell_object.onSpellCast = function(caster, target, spell)
+    -- TODO: Get correct animation from retail captures
     -- Calculate base drain amount and potency
-    -- https://www.bg-wiki.com/ffxi/Drain
-    -- https://ffxiclopedia.fandom.com/wiki/Drain
+    -- https://www.bg-wiki.com/ffxi/Drain_III
+    -- https://ffxiclopedia.fandom.com/wiki/Drain_III
     local base    = caster:getSkillLevel(xi.skill.DARK_MAGIC) + 20
     local potency = math.random(50, 100) / 100
 
     if caster:getSkillLevel(xi.skill.DARK_MAGIC) > 300 then
-        base = (caster:getSkillLevel(xi.skill.DARK_MAGIC) * 0.625) + 132.5
+        base = caster:getSkillLevel(xi.skill.DARK_MAGIC) * 1.8
     end
 
     local dmg = base * potency
@@ -57,7 +58,14 @@ spell_object.onSpellCast = function(caster, target, spell)
 
     dmg = finalMagicAdjustments(caster, target, spell, dmg)
 
+    local leftOver = (caster:getHP() + dmg) - caster:getMaxHP()
+
+    if leftOver > 0 then
+        caster:addStatusEffect(xi.effect.MAX_HP_BOOST, (leftOver / caster:getMaxHP()) * 100, 0, 60)
+    end
+
     caster:addHP(dmg)
+    spell:setMsg(xi.msg.basic.MAGIC_DRAIN_HP) -- Change message to '<amount> HP drained from the <target>.'
 
     return dmg
 end

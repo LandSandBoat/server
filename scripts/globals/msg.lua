@@ -262,6 +262,7 @@ xi.msg.basic =
     STATUS_WEARS_OFF        = 206,  -- <target>'s <status> effect wears off.
     ABOUT_TO_WEAR_OFF       = 251,  -- The effect of <status> is about to wear off.
     ALL_ABILITIES_RECHARGED = 361,  -- All of <target>'s abilities are recharged.
+    STATUS_DRAIN            = 404,  -- <number> status effects are drained from <target>.
 
     -- Battlefield
     UNABLE_TO_ACCESS_SJ     = 107, -- <player> is temporarily unable to access support job abilities
