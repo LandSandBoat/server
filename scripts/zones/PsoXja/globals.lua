@@ -12,7 +12,7 @@ local psoXjaGlobal = {}
 psoXjaGlobal.attemptPickLock = function(player, npc, correctSideOfDoor)
     if npc:getAnimation() == xi.anim.CLOSE_DOOR and correctSideOfDoor then
         local offset = npc:getID() - ID.npc.STONE_DOOR_OFFSET
-        local gargoyle = ID.mob.GARGOYLE_OFFSET + offset
+        local gargoyle = ID.mob.GARGOYLE + offset
 
         if GetMobByID(gargoyle):isSpawned() then
             player:messageSpecial(ID.text.DOOR_LOCKED)
@@ -37,7 +37,7 @@ psoXjaGlobal.attemptOpenDoor = function(player, npc, correctSideOfDoor)
     if npc:getAnimation() == xi.anim.CLOSE_DOOR then
         if correctSideOfDoor then
             local offset = npc:getID() - ID.npc.STONE_DOOR_OFFSET
-            local gargoyle = ID.mob.GARGOYLE_OFFSET + offset
+            local gargoyle = ID.mob.GARGOYLE + offset
 
             if GetMobByID(gargoyle):isSpawned() then
                 player:messageSpecial(ID.text.DOOR_LOCKED)

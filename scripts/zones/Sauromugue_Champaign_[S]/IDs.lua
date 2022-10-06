@@ -1,9 +1,8 @@
 -----------------------------------
--- Area: Sauromugue_Champaign_[S]
+-- Area: Sauromugue_Champaign_[S] (98)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.SAUROMUGUE_CHAMPAIGN_S] =
@@ -33,6 +32,7 @@ zones[xi.zone.SAUROMUGUE_CHAMPAIGN_S] =
         VOIDWALKER_OBTAIN_KI          = 8681,  -- Obtained key item: <keyitem>!
         COMMON_SENSE_SURVIVAL         = 10068, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         BALAM_QUITZ_PH =
@@ -40,18 +40,18 @@ zones[xi.zone.SAUROMUGUE_CHAMPAIGN_S] =
             [17178778] = 17178803, -- 481.509 24.184 98.264
         },
 
-        COQUECIGRUE = 17178689,
+        COQUECIGRUE = DYNAMIC_LOOKUP,
 
         VOIDWALKER =
         {
             [xi.keyItem.CLEAR_ABYSSITE] =
             {
-                17178932,  -- Lacus
-                17178931,  -- Thunor
+                17178932, -- Lacus
+                17178931, -- Thunor
                 17178930, -- Beorht
                 17178929, -- Pruina
-                17178928,  -- Puretos
-                17178927,  -- Eorthe
+                17178928, -- Puretos
+                17178927, -- Eorthe
                 17178926, -- Deorc
                 17178925, -- Aither
             },

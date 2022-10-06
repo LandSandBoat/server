@@ -9,7 +9,7 @@ local entity = {}
 entity.onMobDeath = function(mob, player, optParams)
     if optParams.isKiller then
         local mobId = mob:getID()
-        local offset = mobId - ID.mob.GARGOYLE_OFFSET
+        local offset = mobId - ID.mob.GARGOYLE
         if offset < 16 then
             GetNPCByID(ID.npc.STONE_DOOR_OFFSET + offset):openDoor(30)
         end

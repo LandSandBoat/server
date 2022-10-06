@@ -1,9 +1,8 @@
 -----------------------------------
--- Area: Sauromugue_Champaign
+-- Area: Sauromugue_Champaign (120)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.SAUROMUGUE_CHAMPAIGN] =
@@ -51,6 +50,7 @@ zones[xi.zone.SAUROMUGUE_CHAMPAIGN] =
         UNCANNY_SENSATION             = 12511, -- You are assaulted by an uncanny sensation.
         COMMON_SENSE_SURVIVAL         = 12518, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         DEADLY_DODO_PH     =
@@ -69,21 +69,21 @@ zones[xi.zone.SAUROMUGUE_CHAMPAIGN] =
             [17268782] = 17268788, -- 537.188 6.167 -11.067
         },
 
-        OLD_SABERTOOTH     = 17268808,
-        ROC                = 17269106,
-        CLIMBPIX_HIGHRISE  = 17269107,
-        DRIBBLIX_GREASEMAW = 17269114,
+        OLD_SABERTOOTH     = DYNAMIC_LOOKUP,
+        ROC                = DYNAMIC_LOOKUP,
+        CLIMBPIX_HIGHRISE  = DYNAMIC_LOOKUP,
+        DRIBBLIX_GREASEMAW = DYNAMIC_LOOKUP,
 
         VOIDWALKER =
         {
             [xi.keyItem.CLEAR_ABYSSITE] =
             {
-                17269126,  -- Lacus
-                17269125,  -- Thunor
+                17269126, -- Lacus
+                17269125, -- Thunor
                 17269124, -- Beorht
                 17269123, -- Pruina
-                17269122,  -- Puretos
-                17269121,  -- Eorthe
+                17269122, -- Puretos
+                17269121, -- Eorthe
                 17269120, -- Deorc
                 17269119, -- Aither
             },
@@ -108,7 +108,7 @@ zones[xi.zone.SAUROMUGUE_CHAMPAIGN] =
 
     npc =
     {
-        QM2         = 17269228,
+        QM2 = DYNAMIC_LOOKUP,
     },
 }
 

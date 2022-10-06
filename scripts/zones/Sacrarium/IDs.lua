@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Sacrarium
+-- Area: Sacrarium (28)
 -----------------------------------
 require("scripts/globals/status")
 require("scripts/globals/zone")
@@ -39,6 +39,7 @@ zones[xi.zone.SACRARIUM] =
         NOTHING_HAPPENS               = 7376, -- Nothing happens.
         COMMON_SENSE_SURVIVAL         = 7380, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         SWIFT_BELT_NMS          =
@@ -49,15 +50,17 @@ zones[xi.zone.SACRARIUM] =
             { 16892073, { [xi.race.MITHRA]   = true } },                            -- Caithleann (mithra)
             { 16892074, { [xi.race.GALKA]    = true } },                            -- Indich (galka)
         },
-        OLD_PROFESSOR_MARISELLE = 16891970,
+
+        OLD_PROFESSOR_MARISELLE = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
         STALE_DRAFT_OFFSET  = 16892097,
         LABYRINTH_OFFSET    = 16892110,
-        SMALL_KEYHOLE       = 16892142,
-        QM_MARISELLE_OFFSET = 16892155, -- qm_professor_mariselle in npc_list.sql
-        TREASURE_CHEST      = 16892183,
+        SMALL_KEYHOLE       = DYNAMIC_LOOKUP,
+        QM_MARISELLE_OFFSET = 16892155, -- qm_prof_0 in npc_list.sql
+        TREASURE_CHEST      = DYNAMIC_LOOKUP,
     },
 }
 

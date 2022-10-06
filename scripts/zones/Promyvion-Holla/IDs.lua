@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Promyvion-Holla
+-- Area: Promyvion-Holla (16)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
@@ -22,6 +22,7 @@ zones[xi.zone.PROMYVION_HOLLA] =
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
         BARRIER_WOVEN                 = 7222, -- It appears to be a barrier woven from the energy of overflowing memories...
     },
+
     mob =
     {
         MEMORY_RECEPTACLES =
@@ -39,8 +40,9 @@ zones[xi.zone.PROMYVION_HOLLA] =
             [16842958] = { 4, 7, 16843063 },
         },
 
-        CEREBRATOR    = 16843043,
+        CEREBRATOR = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
         MEMORY_STREAMS =

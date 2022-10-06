@@ -30,16 +30,19 @@ zones[xi.zone.RIVERNE_SITE_A01] =
         HOMEPOINT_SET                 = 7735, -- Home point set!
         UNITY_WANTED_BATTLE_INTERACT  = 7793, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
+
     mob =
     {
         HELIODROMOS_PH_OFFSET    = 16900107,
         HELIODROMOS_OFFSET       = 16900110,
         CARMINE_DOBSONFLY_OFFSET = 16900230,
     },
+
     npc =
     {
         DISPLACEMENT_OFFSET = 16900334,
     },
+
     AIATAR_PH =
     {
         [16900301] = 16900306,

@@ -27,16 +27,19 @@ zones[xi.zone.SEALIONS_DEN] =
         KUKKI_CHEBUKKI_OFFSET         = 7931, -- What? Nooo!
         CHERUKIKI_OFFSET              = 7937, -- We're doomed!
     },
+
     mob =
     {
         ONE_TO_BE_FEARED_OFFSET = 16908289,
-        OMEGA_OFFSET = 16908294,
+        OMEGA_OFFSET            = 16908294,
         WARRIORS_PATH_OFFSET    = 16908310,
     },
+
     npc =
     {
         AIRSHIP_DOOR_OFFSET = 16908420,
     },
+
     aWarriorsPath =
     {
         TENZEN_ID         = 16908310,

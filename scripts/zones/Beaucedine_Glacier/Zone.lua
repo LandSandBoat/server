@@ -50,7 +50,7 @@ end
 zoneObject.onEventFinish = function(player, csid, option)
 end
 
-zone_object.onZoneWeatherChange = function(weather)
+zoneObject.onZoneWeatherChange = function(weather)
     local mirrorPond = GetNPCByID(ID.npc.MIRROR_POND_1) -- Quest: Love And Ice
 
     if weather ~= xi.weather.SNOW and weather ~= xi.weather.BLIZZARDS then

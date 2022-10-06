@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Selbina
+-- Area: Selbina (248)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
@@ -37,12 +37,14 @@ zones[xi.zone.SELBINA] =
         BORIS_DELIVERY_DIALOG         = 7597, -- My independent survey confirms the inn as the preferred location from which adventurers send parcels.
         RETRIEVE_DIALOG_ID            = 7757, -- You retrieve <item> from the porter moogle's care.
     },
+
     mob =
     {
     },
+
     npc =
     {
-        EXPLORER_MOOGLE = 17793131,
+        EXPLORER_MOOGLE = DYNAMIC_LOOKUP,
     },
 }
 

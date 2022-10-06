@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Port_Windurst
+-- Area: Port_Windurst (240)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
@@ -81,7 +81,7 @@ zones[xi.zone.PORT_WINDURST] =
     },
     npc =
     {
-        EXPLORER_MOOGLE = 17760450,
+        EXPLORER_MOOGLE = DYNAMIC_LOOKUP,
     },
 }
 

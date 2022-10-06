@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Promyvion-Vahzl
+-- Area: Promyvion-Vahzl (22)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
@@ -26,6 +26,7 @@ zones[xi.zone.PROMYVION_VAHZL] =
         LIGHT_OF_VAHZL                = 7272, -- You cannot remember when exactly, but you have obtained <item>!
         POPPED_NM_OFFSET              = 7308, -- Remnants of a cerebrator lie scattered about the area.
     },
+
     mob =
     {
         MEMORY_RECEPTACLES =
@@ -43,13 +44,14 @@ zones[xi.zone.PROMYVION_VAHZL] =
             [16867619] = { 4, 7, 16867727 },
         },
 
-        PONDERER                 = 16867329,
-        PROPAGATOR               = 16867330,
-        SOLICITOR                = 16867333,
-        DEVIATOR                 = 16867465,
-        WAILER                   = 16867554,
-        PROVOKER                 = 16867657,
+        PONDERER   = DYNAMIC_LOOKUP,
+        PROPAGATOR = DYNAMIC_LOOKUP,
+        SOLICITOR  = DYNAMIC_LOOKUP,
+        DEVIATOR   = DYNAMIC_LOOKUP,
+        WAILER     = DYNAMIC_LOOKUP,
+        PROVOKER   = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
         MEMORY_STREAMS =

@@ -1,9 +1,8 @@
 -----------------------------------
--- Area: Rolanberry_Fields
+-- Area: Rolanberry_Fields (110)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.ROLANBERRY_FIELDS] =
@@ -70,9 +69,9 @@ zones[xi.zone.ROLANBERRY_FIELDS] =
             [17228149] = 17228150, -- 395 -24 -147
         },
 
-        SILK_CATERPILLAR  = 17227782,
-        SIMURGH           = 17228242,
-        CHUGLIX_BERRYPAWS = 17228249,
+        SILK_CATERPILLAR  = DYNAMIC_LOOKUP,
+        SIMURGH           = DYNAMIC_LOOKUP,
+        CHUGLIX_BERRYPAWS = DYNAMIC_LOOKUP,
 
         VOIDWALKER =
         {

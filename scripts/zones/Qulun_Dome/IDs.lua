@@ -1,9 +1,8 @@
 -----------------------------------
--- Area: Qulun_Dome
+-- Area: Qulun_Dome (148)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.QULUN_DOME] =
@@ -30,11 +29,13 @@ zones[xi.zone.QULUN_DOME] =
         QUADAV_KING_ENGAGE                      = 7266, -- Childre-en of Altana? I will ba-athe in your blood as I did at the Ba-attle of Jeuno!
         QUADAV_KING_DEATH                       = 7267, -- I a-am fini-ished. Hear me, wa-arriors of the Quadav! The throne of the Adamantking and the line of Za'Dha pa-asses to my bro-other...
     },
+
     mob =
     {
-        DIAMOND_QUADAV             = 17383442,
+        DIAMOND_QUADAV             = DYNAMIC_LOOKUP,
         AFFABLE_ADAMANTKING_OFFSET = 17383444,
     },
+
     npc =
     {
     },

@@ -1,9 +1,8 @@
 -----------------------------------
--- Area: RoMaeve
+-- Area: RoMaeve (122)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.ROMAEVE] =
@@ -36,6 +35,7 @@ zones[xi.zone.ROMAEVE] =
         REGIME_REGISTERED             = 9623,  -- New training regime registered!
         COMMON_SENSE_SURVIVAL         = 11633, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         NIGHTMARE_VASE_PH =
@@ -43,15 +43,17 @@ zones[xi.zone.ROMAEVE] =
             [17276981] = 17276982, -- -101.575 -6.099 -1.520 (west)
             [17276987] = 17276992, -- 59.825 -5.760 25.123 (east)
         },
+
         ROGUE_RECEPTACLE_PH =
         {
             [17277075] = 17277079,
             [17277078] = 17277079,
         },
-        MOKKURKALFI_I     = 17276929,
-        MOKKURKALFI_II    = 17276930,
-        ELDHRIMNIR        = 17277126,
+
+        MOKKURKALFI = DYNAMIC_LOOKUP,
+        ELDHRIMNIR  = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
         BASTOK_7_1_QM_POS =

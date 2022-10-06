@@ -1,9 +1,8 @@
 -----------------------------------
--- Area: PsoXja
+-- Area: PsoXja (9)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.PSOXJA] =
@@ -34,20 +33,23 @@ zones[xi.zone.PSOXJA] =
         BROKEN_KNIFE                  = 7482, -- A broken knife blade can be seen among the rubble...
         HOMEPOINT_SET                 = 7487, -- Home point set!
     },
+
     mob =
     {
         GYRE_CARLIN_PH =
         {
             [16814330] = 16814331,
         },
-        GARGOYLE_OFFSET         = 16814081,
-        NUNYUNUWI               = 16814361,
-        GOLDEN_TONGUED_CULBERRY = 16814432,
+
+        GARGOYLE                = DYNAMIC_LOOKUP,
+        NUNYUNUWI               = DYNAMIC_LOOKUP,
+        GOLDEN_TONGUED_CULBERRY = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
-        STONE_DOOR_OFFSET          = 16814445, -- _090 in npc_list
-        TREASURE_CHEST             = 16814557,
+        STONE_DOOR_OFFSET = 16814445, -- _090 in npc_list
+        TREASURE_CHEST    = DYNAMIC_LOOKUP,
     },
 }
 

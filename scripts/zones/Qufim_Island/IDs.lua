@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Qufim_Island
+-- Area: Qufim_Island (126)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
@@ -49,6 +49,7 @@ zones[xi.zone.QUFIM_ISLAND] =
         COMMON_SENSE_SURVIVAL          = 12677, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
         HOMEPOINT_SET                  = 12719, -- Home point set!
     },
+
     mob =
     {
         SLIPPERY_SUCKER_PH =
@@ -58,6 +59,7 @@ zones[xi.zone.QUFIM_ISLAND] =
             [17293378] = 17293389,
             [17293380] = 17293389,
         },
+
         TRICKSTER_KINETIX_PH =
         {
             [17293533] = 17293537, -- -138.180 -20.928 228.793
@@ -65,8 +67,10 @@ zones[xi.zone.QUFIM_ISLAND] =
             [17293535] = 17293537, -- -152.269 -20 243
             [17293536] = 17293537, -- -137.651 -23.507 231.528
         },
-        OPHIOTAURUS = 17293666
+
+        OPHIOTAURUS = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
     },

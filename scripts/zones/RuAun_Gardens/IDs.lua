@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: RuAun_Gardens
+-- Area: RuAun_Gardens (130)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
@@ -57,16 +57,17 @@ zones[xi.zone.RUAUN_GARDENS] =
             [17309944] = 17309954, -- 20.239 -44.129 -276.010
             [17309945] = 17309954, -- 20.239 -45.329 -259.976
         },
-        MIMIC     = 17309979,
-        GENBU     = 17309980,
-        SEIRYU    = 17309981,
-        BYAKKO    = 17309982,
-        SUZAKU    = 17309983,
+
+        MIMIC  = DYNAMIC_LOOKUP,
+        GENBU  = DYNAMIC_LOOKUP,
+        SEIRYU = DYNAMIC_LOOKUP,
+        BYAKKO = DYNAMIC_LOOKUP,
+        SUZAKU = DYNAMIC_LOOKUP,
     },
 
     npc =
     {
-        TREASURE_COFFER  = 17310019,
+        TREASURE_COFFER  = DYNAMIC_LOOKUP,
         PORTAL_TO_SEIRYU = 17310056,
         PORTAL_TO_GENBU  = 17310059,
         PORTAL_TO_BYAKKO = 17310062,
@@ -86,6 +87,7 @@ zones[xi.zone.RUAUN_GARDENS] =
             [17310047] = 17310066, -- Suzaku to Main
             [17310049] = 17310067, -- Main to Suzaku
         },
+
         PORTALS      =
         {
             { coords = {     -3, -54,   -583,      1, -50,   -579 }, event = 0          },

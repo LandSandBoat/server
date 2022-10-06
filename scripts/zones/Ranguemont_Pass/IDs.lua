@@ -32,21 +32,25 @@ zones[xi.zone.RANGUEMONT_PASS] =
         NO_COMBINATION                = 10589, -- You were unable to enter a combination.
         COMMON_SENSE_SURVIVAL         = 10680, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         GLOOM_EYE_PH =
         {
             [17457200] = 17457204,
         },
+
         TAISAIJIN_PH =
         {
             17457213, -- -18.325 1.830 -114.932
             17457214, -- -5.188 11.730 -141.503
             17457215, -- 59.15 -120 50
         },
-        TAISAIJIN    = 17457216,
-        TROS         = 17457309,
+
+        TAISAIJIN = DYNAMIC_LOOKUP,
+        TROS      = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
     },

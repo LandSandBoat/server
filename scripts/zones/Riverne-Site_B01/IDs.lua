@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Riverne-Site_B01
+-- Area: Riverne-Site_B01 (29)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
@@ -31,9 +31,10 @@ zones[xi.zone.RIVERNE_SITE_B01] =
         HOMEPOINT_SET                 = 7710, -- Home point set!
         UNITY_WANTED_BATTLE_INTERACT  = 7768, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
+
     mob =
     {
-        IMDUGUD_PH       =
+        IMDUGUD_PH =
         {
             [16896101] = 16896107, -- 650.770 20.052 676.513
             [16896102] = 16896107, -- 643.308 20.049 652.354
@@ -42,8 +43,10 @@ zones[xi.zone.RIVERNE_SITE_B01] =
             [16896105] = 16896107, -- 687.199 21.161 582.560
             [16896106] = 16896107, -- 666.737 20.012 652.352
         },
-        UNSTABLE_CLUSTER = 16896155,
+
+        UNSTABLE_CLUSTER = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
         DISPLACEMENT_OFFSET = 16896183,

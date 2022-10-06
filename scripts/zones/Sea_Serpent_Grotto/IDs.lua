@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Sea_Serpent_Grotto
+-- Area: Sea_Serpent_Grotto (176)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
@@ -48,6 +48,7 @@ zones[xi.zone.SEA_SERPENT_GROTTO] =
         COMMON_SENSE_SURVIVAL         = 10753, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
         UNITY_WANTED_BATTLE_INTERACT  = 10833, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
+
     mob =
     {
         MASAN_PH =
@@ -55,78 +56,95 @@ zones[xi.zone.SEA_SERPENT_GROTTO] =
             [17498155] = 17498159, -- 17.001 9.340 186.571
             [17498156] = 17498159, -- 18.702 9.512 183.594
         },
+
         NAMTAR_PH =
         {
             [17498178] = 17498184, -- -128.762 9.595 164.996
             [17498183] = 17498184, -- -157.606 9.905 168.518
         },
+
         WUUR_THE_SANDCOMBER_PH =
         {
             [17498195] = 17498199, -- 14.044 0.494 109.487
         },
+
         FYUU_THE_SEABELLOW_PH =
         {
             [17498266] = 17498269, -- 185.074 20.252 39.317
         },
+
         QULL_THE_SHELLBUSTER_PH =
         {
             [17498280] = 17498285, -- 348.293 10.133 -65.543
             [17498283] = 17498285, -- 363.430 10.578 -62.752
         },
+
         SEWW_THE_SQUIDLIMBED_PH =
         {
             [17498298] = 17498301, -- 232.828 9.860 63.214
         },
+
         PAHH_THE_GULLCALLER_PH =
         {
             [17498336] = 17498341, -- -13.532 21.301 -20.861
         },
+
         MOUU_THE_WAVERIDER_PH =
         {
             [17498355] = 17498356, -- -60.728 19.884 53.966
         },
+
         WORR_THE_CLAWFISTED_PH =
         {
             [17498410] = 17498413, -- -308.649 17.344 -52.316
         },
+
         SEA_HOG_PH =
         {
             [17498418] = 17498420, -- -221.455 9.542 -44.191
             [17498419] = 17498420, -- -249 10 -57
         },
+
         VOLL_THE_SHARKFINNED_PH =
         {
             [17498426] = 17498428, -- -337.035 16.950 -106.841
         },
+
         YARR_THE_PEARLEYED_PH =
         {
             [17498434] = 17498436, -- 1.654 19.914 -113.913
         },
+
         NOVV_THE_WHITEHEARTED_PH =
         {
             [17498444] = 17498445,
         },
+
         DENN_THE_ORCAVOICED_PH =
         {
             [17498461] = 17498464, -- -102.127 9.797 -308.149
         },
+
         ZUUG_THE_SHORELEAPER_PH =
         {
             [17498512] = 17498516,
         },
+
         CHARYBDIS_PH =
         {
             [17498518] = 17498522, -- -138.181, 48.389, -338.001
             [17498520] = 17498522, -- -212.407, 38.538, -342.544
         },
-        MIMIC        = 17498564,
-        WATER_LEAPER = 17498565,
-        GLYRYVILU    = 17498566,
+
+        MIMIC        = DYNAMIC_LOOKUP,
+        WATER_LEAPER = DYNAMIC_LOOKUP,
+        GLYRYVILU    = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
-        TREASURE_CHEST  = 17498625,
-        TREASURE_COFFER = 17498626,
+        TREASURE_CHEST  = DYNAMIC_LOOKUP,
+        TREASURE_COFFER = DYNAMIC_LOOKUP,
     },
 }
 

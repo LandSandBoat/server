@@ -1,9 +1,8 @@
 -----------------------------------
--- Area: Rolanberry_Fields_[S]
+-- Area: Rolanberry_Fields_[S] (91)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.ROLANBERRY_FIELDS_S] =
@@ -43,12 +42,12 @@ zones[xi.zone.ROLANBERRY_FIELDS_S] =
         {
             [xi.keyItem.CLEAR_ABYSSITE] =
             {
-                17150346,  -- Lacus
-                17150345,  -- Thunor
+                17150346, -- Lacus
+                17150345, -- Thunor
                 17150344, -- Beorht
                 17150343, -- Pruina
-                17150342,  -- Puretos
-                17150341,  -- Eorthe
+                17150342, -- Puretos
+                17150341, -- Eorthe
                 17150340, -- Deorc
                 17150339, -- Aither
             },
