@@ -70,8 +70,8 @@ zones[xi.zone.MERIPHATAUD_MOUNTAINS] =
             [17264815] = 17264818, -- 583.725 -15.652 -388.159
         },
 
-        WARAXE_BEAK         = 17264828,
-        COO_KEJA_THE_UNSEEN = 17264946,
+        WARAXE_BEAK         = DYNAMIC_LOOKUP,
+        COO_KEJA_THE_UNSEEN = DYNAMIC_LOOKUP,
 
         VOIDWALKER =
         {

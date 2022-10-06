@@ -41,6 +41,7 @@ zones[xi.zone.MAZE_OF_SHAKHRAMI] =
         REGIME_REGISTERED             = 10360, -- New training regime registered!
         COMMON_SENSE_SURVIVAL         = 11432, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         TREMBLER_TABITHA_PH =
@@ -48,18 +49,20 @@ zones[xi.zone.MAZE_OF_SHAKHRAMI] =
             [17588276] = 17588278,
             [17588277] = 17588278,
         },
-        ICHOROUS_IRE        = 17588225,
-        ARGUS               = 17588674,
-        LEECH_KING          = 17588685,
-        WYRMFLY_OFFSET      = 17588701,
+
+        ICHOROUS_IRE        = DYNAMIC_LOOKUP,
+        ARGUS               = DYNAMIC_LOOKUP,
+        LEECH_KING          = DYNAMIC_LOOKUP,
+        WYRMFLY             = DYNAMIC_LOOKUP,
         APPARATUS_ELEMENTAL = 17588704,
-        AROMA_CRAWLER       = 17588705,
-        LOST_SOUL           = 17588706,
+        AROMA_CRAWLER       = DYNAMIC_LOOKUP,
+        LOST_SOUL           = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
-        FOSSIL_ROCK_OFFSET = 17588737,
-        TREASURE_CHEST     = 17588773,
+        FOSSIL_ROCK    = DYNAMIC_LOOKUP,
+        TREASURE_CHEST = DYNAMIC_LOOKUP,
         EXCAVATION =
         {
             17588774,

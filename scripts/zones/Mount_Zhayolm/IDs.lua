@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Mount_Zhayolm
+-- Area: Mount_Zhayolm (61)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
@@ -42,25 +42,29 @@ zones[xi.zone.MOUNT_ZHAYOLM] =
         HOMEPOINT_SET                 = 8732, -- Home point set!
         UNITY_WANTED_BATTLE_INTERACT  = 8790, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
+
     mob =
     {
-        ENERGETIC_ERUCA_PH    =
+        ENERGETIC_ERUCA_PH =
         {
             [17027146] = 17027466, -- 175.315 -14.444 -173.589
             [17027145] = 17027466, -- 181.601 -14.120 -166.218
         },
+
         IGNAMOTH_PH =
         {
             [17027421] = 17027423, -- -567.6 -15.35 252.201
             [17027422] = 17027423, -- -544.3 -14.8 262.992
         },
-        CERBERUS              = 17027458,
-        BRASS_BORER           = 17027471,
-        CLARET                = 17027472,
-        ANANTABOGA            = 17027473,
-        KHROMASOUL_BHURBORLOR = 17027474,
-        SARAMEYA              = 17027485,
+
+        CERBERUS              = DYNAMIC_LOOKUP,
+        BRASS_BORER           = DYNAMIC_LOOKUP,
+        CLARET                = DYNAMIC_LOOKUP,
+        ANANTABOGA            = DYNAMIC_LOOKUP,
+        KHROMASOUL_BHURBORLOR = DYNAMIC_LOOKUP,
+        SARAMEYA              = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
         MINING =

@@ -131,7 +131,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     -- TODO: Break out Fossil Rock into multiple NPC names and update impacted
                     -- quests and missions.
-                    local rockOffset = npc:getID() - shakhramiID.npc.FOSSIL_ROCK_OFFSET
+                    local rockOffset = npc:getID() - shakhramiID.npc.FOSSIL_ROCK
 
                     if rockOffset == 8 then
                         if

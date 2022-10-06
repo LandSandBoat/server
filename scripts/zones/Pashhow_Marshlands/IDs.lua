@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Pashhow_Marshlands
+-- Area: Pashhow_Marshlands (109)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
@@ -67,9 +67,9 @@ zones[xi.zone.PASHHOW_MARSHLANDS] =
             [17224014] = 17224019, -- -351.884 24.014 513.531
         },
 
-        BOWHO_WARMONGER = 17224104,
+        BOWHO_WARMONGER = DYNAMIC_LOOKUP,
 
-        VOIDWALKER  =
+        VOIDWALKER =
         {
             [xi.keyItem.CLEAR_ABYSSITE] =
             {

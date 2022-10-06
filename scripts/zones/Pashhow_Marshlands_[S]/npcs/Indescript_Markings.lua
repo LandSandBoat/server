@@ -14,7 +14,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local offset                = npc:getID() - ID.npc.INDESCRIPT_MARKINGS_OFFSET
+    local offset                = npc:getID() - ID.npc.INDESCRIPT_MARKINGS
     local onSabbatical          = player:getQuestStatus(xi.quest.log_id.CRYSTAL_WAR, xi.quest.id.crystalWar.ON_SABBATICAL)
     local onSabbaticalProgress  = player:getCharVar("OnSabbatical")
     local pantsQuestProgress    = player:getCharVar("AF_SCH_PANTS")

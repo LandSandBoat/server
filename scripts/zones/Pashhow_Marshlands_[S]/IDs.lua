@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Pashhow_Marshlands_[S]
+-- Area: Pashhow_Marshlands_[S] (90)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
@@ -50,7 +50,7 @@ zones[xi.zone.PASHHOW_MARSHLANDS_S] =
             [17146008] = 17146012, -- -165.745 24.499 349.06
         },
 
-        KINEPIKWA = 17146147,
+        KINEPIKWA = DYNAMIC_LOOKUP,
 
         VOIDWALKER =
         {
@@ -99,7 +99,7 @@ zones[xi.zone.PASHHOW_MARSHLANDS_S] =
 
     npc =
     {
-        INDESCRIPT_MARKINGS_OFFSET = 17146626,
+        INDESCRIPT_MARKINGS = DYNAMIC_LOOKUP,
     },
 }
 

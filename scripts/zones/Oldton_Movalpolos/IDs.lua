@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Oldton_Movalpolos
+-- Area: Oldton_Movalpolos (11)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
@@ -26,20 +26,23 @@ zones[xi.zone.OLDTON_MOVALPOLOS] =
         CHEST_UNLOCKED                = 7758, -- You unlock the chest!
         COMMON_SENSE_SURVIVAL         = 8116, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
-        BUGBEAR_STRONGMAN_PH  =
+        BUGBEAR_STRONGMAN_PH =
         {
             [16822421] = 16822423, -- -81.31 31.493 210.675 (west)
             [16822426] = 16822427, -- 58.013, 15.5, -121.928 (east)
         },
-        GOBLIN_WOLFMAN        = 16822459,
+
+        GOBLIN_WOLFMAN = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
-        SCRAWLED_WRITING = 16822469,
+        SCRAWLED_WRITING = DYNAMIC_LOOKUP,
         OVERSEER_BASE    = 16822509, -- first Conquest_Banner in npc_list
-        TREASURE_CHEST   = 16822531,
+        TREASURE_CHEST   = DYNAMIC_LOOKUP,
         MINING =
         {
             16822525,

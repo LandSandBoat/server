@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Misareaux_Coast
+-- Area: Misareaux_Coast (25)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
@@ -40,18 +40,20 @@ zones[xi.zone.MISAREAUX_COAST] =
         UNITY_WANTED_BATTLE_INTERACT  = 8710, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
         HOMEPOINT_SET                 = 8869, -- Home point set!
     },
+
     mob =
     {
         OKYUPETE_PH =
         {
             [16879839] = 16879847,
         },
-        PM6_2_MOB_OFFSET = 16879893,
-        BOGGELMANN       = 16879897,
-        GRATION          = 16879899,
-        ZIPHIUS          = 16879900,
 
+        WARDER_AGLAIA = DYNAMIC_LOOKUP,
+        BOGGELMANN    = DYNAMIC_LOOKUP,
+        GRATION       = DYNAMIC_LOOKUP,
+        ZIPHIUS       = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
         LOGGING =
@@ -63,7 +65,8 @@ zones[xi.zone.MISAREAUX_COAST] =
             16879976,
             16879977,
         },
-        ZIPHIUS_QM_BASE  = 16879919,
+
+        QM_ZIPHIUS = DYNAMIC_LOOKUP,
     },
 }
 

@@ -31,6 +31,7 @@ zones[xi.zone.PALBOROUGH_MINES] =
         CHEST_UNLOCKED                     = 7421, -- You unlock the chest!
         HOMEPOINT_SET                      = 7468, -- Home point set!
     },
+
     mob =
     {
         BU_GHI_HOWLBLADE_PH =
@@ -40,20 +41,24 @@ zones[xi.zone.PALBOROUGH_MINES] =
             [17363179] = 17363181, -- 166.000 -16.000 135.000
             [17363180] = 17363181, -- 167.207 -18.027 159.374
         },
+
         ZI_GHI_BONEEATER_PH =
         {
             [17363205] = 17363208, -- 130.386 -32.313 73.967
         },
+
         BEHYA_HUNDREDWALL_PH =
         {
             [17363256] = 17363258,
             [17363257] = 17363258,
         },
-        NI_GHU_NESTFENDER   = 17363318,
+
+        NIGHU_NESTFENDER = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
-        TREASURE_CHEST = 17363372,
+        TREASURE_CHEST = DYNAMIC_LOOKUP,
         MINING =
         {
             17363368,

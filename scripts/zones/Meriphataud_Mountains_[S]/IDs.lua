@@ -57,7 +57,7 @@ zones[xi.zone.MERIPHATAUD_MOUNTAINS_S] =
 
             [xi.keyItem.COLORFUL_ABYSSITE] =
             {
-                17174909,  -- Jyeshtha
+                17174909, -- Jyeshtha
                 17174908, -- Farruca Fly
             },
 
@@ -75,7 +75,7 @@ zones[xi.zone.MERIPHATAUD_MOUNTAINS_S] =
 
     npc =
     {
-        INDESCRIPT_MARKINGS = 17175342,
+        INDESCRIPT_MARKINGS = DYNAMIC_LOOKUP,
     },
 }
 

@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Outer_Horutoto_Ruins
+-- Area: Outer_Horutoto_Ruins (194)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
@@ -37,13 +37,15 @@ zones[xi.zone.OUTER_HORUTOTO_RUINS] =
         NO_COMBINATION                = 8276,  -- You were unable to enter a combination.
         REGIME_REGISTERED             = 10354, -- New training regime registered!
     },
+
     mob =
     {
-        DESMODONT_PH                =
+        DESMODONT_PH =
         {
             [17571868] = 17571870,
         },
-        AH_PUCH_PH                  =
+
+        AH_PUCH_PH =
         {
             [17571893] = 17571903, -- -418, -1, 629
             [17571894] = 17571903, -- -419, -1, 570
@@ -54,12 +56,14 @@ zones[xi.zone.OUTER_HORUTOTO_RUINS] =
             [17571899] = 17571903, -- -419, -1, 615
             [17571900] = 17571903, -- -417, -1, 661
         },
+
         BALLOON_NM_OFFSET          = 17572141,
         FULL_MOON_FOUNTAIN_OFFSET  = 17572197,
         JESTER_WHOD_BE_KING_OFFSET = 17572201,
         APPARATUS_ELEMENTAL        = 17572203,
         CUSTOM_CARDIAN_OFFSET      = 17572204, -- Goes up to 17572218
     },
+
     npc =
     {
         GATE_MAGICAL_GIZMO = 17572248,

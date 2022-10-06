@@ -16,7 +16,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local wyrmfly = ID.mob.WYRMFLY_OFFSET
+    local wyrmfly = ID.mob.WYRMFLY
 
     if player:getCharVar("EcoStatus") == 201 and player:hasStatusEffect(xi.effect.LEVEL_RESTRICTION) then
         npcUtil.popFromQM(player, npc, { wyrmfly, wyrmfly + 1, wyrmfly + 2 }, { claim=true, look=true, hide = 0 })

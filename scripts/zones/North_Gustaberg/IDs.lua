@@ -1,9 +1,8 @@
 -----------------------------------
--- Area: North_Gustaberg
+-- Area: North_Gustaberg (106)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.NORTH_GUSTABERG] =
@@ -86,7 +85,7 @@ zones[xi.zone.NORTH_GUSTABERG] =
             [17211711] = 17211702, -- 289.709 -0.297 750.252
         },
 
-        GAMBILOX_WANDERLING = 17211848,
+        GAMBILOX_WANDERLING = DYNAMIC_LOOKUP,
 
         VOIDWALKER =
         {

@@ -81,13 +81,13 @@ mission.sections =
                         if mission:getVar(player, 'Option') == 7 then
                             return mission:progressEvent(10)
                         elseif
-                            not GetMobByID(misareauxID.mob.PM6_2_MOB_OFFSET + 0):isSpawned() and
-                            not GetMobByID(misareauxID.mob.PM6_2_MOB_OFFSET + 1):isSpawned() and
-                            not GetMobByID(misareauxID.mob.PM6_2_MOB_OFFSET + 2):isSpawned()
+                            not GetMobByID(misareauxID.mob.WARDER_AGLAIA + 0):isSpawned() and
+                            not GetMobByID(misareauxID.mob.WARDER_AGLAIA + 1):isSpawned() and
+                            not GetMobByID(misareauxID.mob.WARDER_AGLAIA + 2):isSpawned()
                         then
-                            SpawnMob(misareauxID.mob.PM6_2_MOB_OFFSET + 0):updateClaim(player)
-                            SpawnMob(misareauxID.mob.PM6_2_MOB_OFFSET + 1):updateClaim(player)
-                            SpawnMob(misareauxID.mob.PM6_2_MOB_OFFSET + 2):updateClaim(player)
+                            SpawnMob(misareauxID.mob.WARDER_AGLAIA + 0):updateClaim(player)
+                            SpawnMob(misareauxID.mob.WARDER_AGLAIA + 1):updateClaim(player)
+                            SpawnMob(misareauxID.mob.WARDER_AGLAIA + 2):updateClaim(player)
 
                             return mission:noAction()
                         end

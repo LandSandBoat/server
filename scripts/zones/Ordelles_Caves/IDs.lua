@@ -43,12 +43,14 @@ zones[xi.zone.ORDELLES_CAVES] =
         REGIME_REGISTERED             = 10474, -- New training regime registered!
         COMMON_SENSE_SURVIVAL         = 11550, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         DONGGU_PH =
         {
             [17567797] = 17567801,
         },
+
         AGAR_AGAR_PH =
         {
             [17567897] = 17567901, -- -81.31 31.493 210.675
@@ -56,16 +58,18 @@ zones[xi.zone.ORDELLES_CAVES] =
             [17567899] = 17567901, -- -80.77 31.979 193.542
             [17567900] = 17567901, -- -79.82 31.968 208.309
         },
-        MORBOLGER           = 17568127,
-        POLEVIK             = 17568134,
-        DARK_PUPPET_OFFSET  = 17568135,
-        NECROPLASM          = 17568138,
+
+        MORBOLGER           = DYNAMIC_LOOKUP,
+        POLEVIK             = DYNAMIC_LOOKUP,
+        GERWITZS_AXE        = DYNAMIC_LOOKUP,
+        NECROPLASM          = DYNAMIC_LOOKUP,
         APPARATUS_ELEMENTAL = 17568139,
-        AROMA_LEECH         = 17568140,
+        AROMA_LEECH         = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
-        TREASURE_CHEST = 17568192,
+        TREASURE_CHEST = DYNAMIC_LOOKUP,
     },
 }
 

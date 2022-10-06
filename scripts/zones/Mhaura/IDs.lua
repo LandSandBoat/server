@@ -38,13 +38,15 @@ zones[xi.zone.MHAURA] =
         DO_NOT_POSSESS                = 7770, -- You do not possess <item>. You were not permitted to board the ship...
         RETRIEVE_DIALOG_ID            = 7805, -- You retrieve <item> from the porter moogle's care.
     },
+
     mob =
     {
     },
+
     npc =
     {
-        LAUGHING_BISON  = 17797183,
-        EXPLORER_MOOGLE = 17797253,
+        LAUGHING_BISON  = DYNAMIC_LOOKUP,
+        EXPLORER_MOOGLE = DYNAMIC_LOOKUP,
     },
 }
 

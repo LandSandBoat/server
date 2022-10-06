@@ -1,9 +1,8 @@
 -----------------------------------
--- Area: Newton_Movalpolos
+-- Area: Newton_Movalpolos (12)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.NEWTON_MOVALPOLOS] =
@@ -29,6 +28,7 @@ zones[xi.zone.NEWTON_MOVALPOLOS] =
         SHOWMAN_ACCEPT                = 7277, -- Fhungaaa!!! The freshyness, the flavoryness! This very nice item! Good luck, then. Try not die. One...two...four...FIIIIIIGHT!!!
         HOMEPOINT_SET                 = 7280, -- Home point set!
     },
+
     mob =
     {
         SWASHSTOX_BEADBLINKER_PH =
@@ -36,16 +36,18 @@ zones[xi.zone.NEWTON_MOVALPOLOS] =
             [16826507] = 16826517, -- 92.145, 15.500, 66.595
             [16826514] = 16826510, -- 88.412, 15.421, -19.950
         },
-        MIMIC                    = 16826564,
-        BUGBEAR_MATMAN           = 16826570,
-        GOBLIN_COLLECTOR         = 16826569,
+
+        MIMIC            = DYNAMIC_LOOKUP,
+        BUGBEAR_MATMAN   = DYNAMIC_LOOKUP,
+        GOBLIN_COLLECTOR = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
         DOOR_OFFSET          = 16826582, -- _0c0 in npc_list
         FURNACE_HATCH_OFFSET = 16826607,
-        TREASURE_COFFER      = 16826627,
-        MINING               =
+        TREASURE_COFFER      = DYNAMIC_LOOKUP,
+        MINING =
         {
             16826621,
             16826622,

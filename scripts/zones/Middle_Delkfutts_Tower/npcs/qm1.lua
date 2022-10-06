@@ -15,14 +15,14 @@ entity.onTrade = function(player, npc, trade)
         player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_EVIL) == QUEST_ACCEPTED and
         player:getCharVar("bladeOfEvilCS") == 0 and
         npcUtil.tradeHas(trade, 1114) and
-        not GetMobByID(ID.mob.BLADE_OF_EVIL_MOB_OFFSET + 0):isSpawned() and
-        not GetMobByID(ID.mob.BLADE_OF_EVIL_MOB_OFFSET + 1):isSpawned() and
-        not GetMobByID(ID.mob.BLADE_OF_EVIL_MOB_OFFSET + 2):isSpawned()
+        not GetMobByID(ID.mob.GERWITZS_SCYTHE + 0):isSpawned() and
+        not GetMobByID(ID.mob.GERWITZS_SCYTHE + 1):isSpawned() and
+        not GetMobByID(ID.mob.GERWITZS_SCYTHE + 2):isSpawned()
     then
         player:confirmTrade()
-        SpawnMob(ID.mob.BLADE_OF_EVIL_MOB_OFFSET + 0):updateClaim(player)
-        SpawnMob(ID.mob.BLADE_OF_EVIL_MOB_OFFSET + 1):updateClaim(player)
-        SpawnMob(ID.mob.BLADE_OF_EVIL_MOB_OFFSET + 2):updateClaim(player)
+        SpawnMob(ID.mob.GERWITZS_SCYTHE + 0):updateClaim(player)
+        SpawnMob(ID.mob.GERWITZS_SCYTHE + 1):updateClaim(player)
+        SpawnMob(ID.mob.GERWITZS_SCYTHE + 2):updateClaim(player)
     end
 end
 

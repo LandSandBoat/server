@@ -26,7 +26,7 @@ zoneObject.onRegionEnter = function(player, region)
 end
 
 zoneObject.onZoneWeatherChange = function(weather)
-    local npc = GetNPCByID(ID.npc.INDESCRIPT_MARKINGS_OFFSET + 1) -- Indescript Markings (BOOTS)
+    local npc = GetNPCByID(ID.npc.INDESCRIPT_MARKINGS + 1) -- Indescript Markings (BOOTS)
 
     if npc then
         if weather == xi.weather.RAIN or weather == xi.weather.THUNDER then
@@ -36,7 +36,7 @@ zoneObject.onZoneWeatherChange = function(weather)
         end
     end
 
-    npc = GetNPCByID(ID.npc.INDESCRIPT_MARKINGS_OFFSET + 2) -- Indescript Markings (BODY)
+    npc = GetNPCByID(ID.npc.INDESCRIPT_MARKINGS + 2) -- Indescript Markings (BODY)
     if npc then
         if weather == xi.weather.RAIN then
             npc:setStatus(xi.status.DISAPPEAR)

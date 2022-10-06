@@ -38,7 +38,7 @@ local handleAcceptMission = function(player, csid, option, npc)
 end
 
 local examineRock = function(player, npc)
-    local rockOffset = npc:getID() - mazeID.npc.FOSSIL_ROCK_OFFSET
+    local rockOffset = npc:getID() - mazeID.npc.FOSSIL_ROCK
     local correctRock = mission:getVar(player, "Rock")
     local missionStatus = player:getMissionStatus(mission.areaId)
 

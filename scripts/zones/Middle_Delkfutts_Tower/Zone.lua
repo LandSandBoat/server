@@ -1,5 +1,5 @@
 -----------------------------------
--- Zone: Middle_Delkfutts_Tower
+-- Zone: Middle_Delkfutts_Tower (157)
 -----------------------------------
 local ID = require('scripts/zones/Middle_Delkfutts_Tower/IDs')
 require('scripts/globals/conquest')

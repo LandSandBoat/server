@@ -29,16 +29,18 @@ zones[xi.zone.MONASTIC_CAVERN] =
         ORC_KING_ENGAGE               = 7311, -- Ungh? Who are you?  So, you've come to kill big boss Bakgodek? I'll crush your scrawny bones myself!
         ORC_KING_DEATH                = 7312, -- Unghh... Foolish children of Altana. Defeating me won't change anything. There will be others from the north...
     },
+
     mob =
     {
-        ORCISH_OVERLORD               = 17391802,
-        BUGABOO                       = 17391804,
-        MIMIC                         = 17391805,
+        ORCISH_OVERLORD               = DYNAMIC_LOOKUP,
+        BUGABOO                       = DYNAMIC_LOOKUP,
+        MIMIC                         = DYNAMIC_LOOKUP,
         UNDERSTANDING_OVERLORD_OFFSET = 17391806,
     },
+
     npc =
     {
-        TREASURE_COFFER = 17391850,
+        TREASURE_COFFER = DYNAMIC_LOOKUP,
     },
 }
 
