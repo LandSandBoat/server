@@ -12,19 +12,19 @@
 -- Magic Bursts on: Liquefaction, Fusion, and Light
 -- Combos: Auto Refresh
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
 require("scripts/globals/settings")
 require("scripts/globals/magic")
 require("scripts/globals/status")
 require("scripts/globals/bluemagic")
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     caster:setLocalVar("self-destruct_hp", caster:getHP())
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local duration = 300
     local playerHP = caster:getLocalVar("self-destruct_hp")
     local damage = playerHP - 1
@@ -39,4 +39,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return damage
 end
 
-return spell_object
+return spellObject

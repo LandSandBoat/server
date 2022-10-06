@@ -5,13 +5,13 @@ require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/status")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local duration         = calculateDuration(60, spell:getSkillType(), spell:getSpellGroup(), caster, target)
     local reflectedPercent = 33
     local typeEffect       = xi.effect.REPRISAL
@@ -25,4 +25,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return typeEffect
 end
 
-return spell_object
+return spellObject
