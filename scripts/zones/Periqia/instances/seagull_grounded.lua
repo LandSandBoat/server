@@ -63,6 +63,9 @@ end
 instance_object.onEventFinish = function(player, csid, option)
 end
 
+-- TODO: Reduce complexity
+-- Disable cyclomatic complexity check for this function:
+-- luacheck: ignore 561
 instance_object.onTrack = function(instance)
     local path =
     {

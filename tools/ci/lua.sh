@@ -302,12 +302,13 @@ def check_tables_in_file(name):
 
 target = '${target}'
 
+totalErrors = 0
 if target == 'scripts':
-    totalErrors = 0
     for filename in glob.iglob('scripts/**/*.lua', recursive=True):
         totalErrors += check_tables_in_file(filename)
-
-    print(totalErrors)
 else:
     check_tables_in_file(target)
+
+if totalErrors > 0:
+    print("Lua styling errors: " + str(totalErrors))
 EOF
