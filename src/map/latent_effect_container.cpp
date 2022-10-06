@@ -1136,6 +1136,9 @@ bool CLatentEffectContainer::ProcessLatentEffect(CLatentEffect& latentEffect)
                 }
             }
             break;
+        case LATENT::EQUIPPED_IN_SLOT:
+            expression = latentEffect.GetSlot() == latentEffect.GetConditionsValue();
+            break;
         default:
             latentFound = false;
             ShowWarning("Latent ID %d unhandled in ProcessLatentEffect", static_cast<uint16>(latentEffect.GetConditionsID()));

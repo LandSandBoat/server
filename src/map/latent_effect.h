@@ -67,7 +67,7 @@ enum class LATENT : uint16
     MOON_PHASE             = 37, // PARAM: 0: New Moon, 1: Waxing Crescent, 2: First Quarter, 3: Waxing Gibbous, 4: Full Moon, 5: Waning Gibbous, 6: Last Quarter, 7: Waning Crescent
     JOB_MULTIPLE           = 38, // PARAM: 0: ODD, 2: EVEN, 3-X: DIVISOR
     JOB_MULTIPLE_AT_NIGHT  = 39, // PARAM: 0: ODD, 2: EVEN, 3-X: DIVISOR
-    // 40 free to use
+    EQUIPPED_IN_SLOT       = 40, // When item is equipped in the specified slot (e.g. Dweomer Knife, Erlking's Sword, etc.) PARAM: slotID
     // 41 free to use
     // 42 free to use
     WEAPON_DRAWN_HP_UNDER = 43, // PARAM: HP PERCENT
