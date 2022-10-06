@@ -564,9 +564,9 @@ function LimbusArea:new(name, requiredCard)
 end
 
 function LimbusArea:createBattlefield()
-    local battlefield_object = {}
+    local battlefieldObject = {}
 
-    battlefield_object.onBattlefieldInitialise = function(battlefield)
+    battlefieldObject.onBattlefieldInitialise = function(battlefield)
         battlefield:setLocalVar("loot", 1)
         SetServerVariable(self.serverVar, battlefield:getTimeLimit() / 60)
 
@@ -632,7 +632,7 @@ function LimbusArea:createBattlefield()
         end)
     end
 
-    battlefield_object.onBattlefieldTick = function(battlefield, tick)
+    battlefieldObject.onBattlefieldTick = function(battlefield, tick)
         if battlefield:getRemainingTime() % 60 == 0 then
             SetServerVariable(self.serverVar, battlefield:getRemainingTime() / 60)
         end
@@ -640,21 +640,21 @@ function LimbusArea:createBattlefield()
         xi.battlefield.onBattlefieldTick(battlefield, tick)
     end
 
-    battlefield_object.onBattlefieldRegister = function(player, battlefield)
+    battlefieldObject.onBattlefieldRegister = function(player, battlefield)
     end
 
-    battlefield_object.onBattlefieldEnter = function(player, battlefield)
+    battlefieldObject.onBattlefieldEnter = function(player, battlefield)
         player:delKeyItem(xi.ki.COSMO_CLEANSE)
         player:delKeyItem(self.requiredCard)
         player:setCharVar("Cosmo_Cleanse_TIME", os.time())
     end
 
-    battlefield_object.onBattlefieldDestroy = function(battlefield)
+    battlefieldObject.onBattlefieldDestroy = function(battlefield)
         xi.limbus.handleDoors(battlefield, true)
         SetServerVariable(self.serverVar, 0)
     end
 
-    battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
+    battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
         local ID = zones[battlefield:getZoneID()]
         player:messageSpecial(ID.text.HUM + 1)
 
@@ -666,5 +666,5 @@ function LimbusArea:createBattlefield()
         end
     end
 
-    return battlefield_object
+    return battlefieldObject
 end
