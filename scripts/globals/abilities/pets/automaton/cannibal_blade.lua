@@ -6,14 +6,14 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAutomatonAbilityCheck = function(target, automaton, skill)
+abilityObject.onAutomatonAbilityCheck = function(target, automaton, skill)
     local master = automaton:getMaster()
     return master:countEffect(xi.effect.DARK_MANEUVER)
 end
 
-ability_object.onAutomatonAbility = function(target, automaton, skill, master, action)
+abilityObject.onAutomatonAbility = function(target, automaton, skill, master, action)
     local params =
     {
         numHits = 1,
@@ -70,4 +70,4 @@ ability_object.onAutomatonAbility = function(target, automaton, skill, master, a
     return damage
 end
 
-return ability_object
+return abilityObject

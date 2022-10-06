@@ -17,16 +17,16 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     if player:hasStatusEffect(xi.effect.ADDENDUM_WHITE) then
         return xi.msg.basic.EFFECT_ALREADY_ACTIVE, 0
     end
     return 0, 0
 end
 
-ability_object.onUseAbility = function(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability)
     player:delStatusEffectSilent(xi.effect.DARK_ARTS)
     player:delStatusEffectSilent(xi.effect.ADDENDUM_BLACK)
     player:delStatusEffectSilent(xi.effect.LIGHT_ARTS)
@@ -42,4 +42,4 @@ ability_object.onUseAbility = function(player, target, ability)
     return xi.effect.ADDENDUM_WHITE
 end
 
-return ability_object
+return abilityObject

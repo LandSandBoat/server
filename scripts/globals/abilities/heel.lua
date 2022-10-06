@@ -9,9 +9,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     if (player:getPet() == nil) then
       return xi.msg.basic.REQUIRES_A_PET, 0
     end
@@ -19,7 +19,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-ability_object.onUseAbility = function(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability)
     local pet = player:getPet()
 
     if (pet:hasStatusEffect(xi.effect.HEALING)) then
@@ -29,4 +29,4 @@ ability_object.onUseAbility = function(player, target, ability)
     player:petRetreat()
 end
 
-return ability_object
+return abilityObject

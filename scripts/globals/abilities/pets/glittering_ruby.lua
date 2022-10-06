@@ -6,13 +6,13 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-ability_object.onPetAbility = function(target, pet, skill)
+abilityObject.onPetAbility = function(target, pet, skill)
     --randomly give str/dex/vit/agi/int/mnd/chr (+12)
     local effect = math.random()
     local effectid = xi.effect.STR_BOOST
@@ -37,4 +37,4 @@ ability_object.onPetAbility = function(target, pet, skill)
     return effectid
 end
 
-return ability_object
+return abilityObject

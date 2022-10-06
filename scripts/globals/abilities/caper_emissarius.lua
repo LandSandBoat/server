@@ -10,9 +10,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     if (target == nil or target:getID() == player:getID() or not target:isPC()) then
         return xi.msg.basic.CANNOT_ON_THAT_TARG, 0
     else
@@ -21,8 +21,8 @@ ability_object.onAbilityCheck = function(player, target, ability)
     end
 end
 
-ability_object.onUseAbility = function(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability)
     target:transferEnmity(player, 99, 20.6)
 end
 
-return ability_object
+return abilityObject

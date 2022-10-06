@@ -9,16 +9,16 @@ require("scripts/globals/jobpoints")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-ability_object.onUseAbility = function(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability)
     local jpValue = target:getJobPointLevel(xi.jp.SOULEATER_DURATION)
 
     player:addStatusEffect(xi.effect.SOULEATER, 1, 0, 60 + jpValue)
 end
 
-return ability_object
+return abilityObject

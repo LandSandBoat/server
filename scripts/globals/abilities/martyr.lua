@@ -8,14 +8,14 @@
 -----------------------------------
 require("scripts/globals/job_utils/white_mage")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return xi.job_utils.white_mage.checkMartyr(player, target, ability)
 end
 
-ability_object.onUseAbility = function(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability)
     return xi.job_utils.white_mage.useMartyr(player, target, ability)
 end
 
-return ability_object
+return abilityObject
