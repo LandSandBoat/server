@@ -17,5 +17,6 @@ return {
     ['Roh_Latteh']     = { event = 29 },
     ['Tall_Mountain']  = { event = 55 },
     ['Tami']           = { event = 115 },
+    ['Virnage']        = { event = 140 },
     ['Wahid']          = { event = 28 },
 }

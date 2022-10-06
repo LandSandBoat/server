@@ -3257,18 +3257,32 @@ void SmallPacket0x050(map_session_data_t* const PSession, CCharEntity* const PCh
     uint8 equipSlotID = data.ref<uint8>(0x05); // charequip slot
     uint8 containerID = data.ref<uint8>(0x06); // container id
 
-    if (containerID != LOC_INVENTORY && containerID != LOC_WARDROBE && containerID != LOC_WARDROBE2 && containerID != LOC_WARDROBE3 &&
-        containerID != LOC_WARDROBE4 && containerID != LOC_WARDROBE5 && containerID != LOC_WARDROBE6 && containerID != LOC_WARDROBE7 &&
-        containerID != LOC_WARDROBE8)
+    bool isAdditionalContainer =
+        containerID == LOC_MOGSATCHEL ||
+        containerID == LOC_MOGSACK ||
+        containerID == LOC_MOGCASE;
+
+    bool isEquippableInventory =
+        containerID == LOC_INVENTORY ||
+        containerID == LOC_WARDROBE ||
+        containerID == LOC_WARDROBE2 ||
+        containerID == LOC_WARDROBE3 ||
+        containerID == LOC_WARDROBE4 ||
+        containerID == LOC_WARDROBE5 ||
+        containerID == LOC_WARDROBE6 ||
+        containerID == LOC_WARDROBE7 ||
+        containerID == LOC_WARDROBE8 ||
+        (settings::get<bool>("main.EQUIP_FROM_OTHER_CONTAINERS") &&
+         isAdditionalContainer);
+
+    bool isLinkshell =
+        equipSlotID == SLOT_LINK1 ||
+        equipSlotID == SLOT_LINK2;
+
+    // Sanity check
+    if (!isEquippableInventory && !isLinkshell)
     {
-        if (equipSlotID != 16 && equipSlotID != 17)
-        {
-            return;
-        }
-        else if (containerID != LOC_MOGSATCHEL && containerID != LOC_MOGSACK && containerID != LOC_MOGCASE)
-        {
-            return;
-        }
+        return;
     }
 
     charutils::EquipItem(PChar, slotID, equipSlotID, containerID); // current

@@ -547,7 +547,7 @@ local function checkReqs(player, npc, bfid, registrant)
     local cop      = player:getCurrentMission(xi.mission.log_id.COP)
     local toau     = player:getCurrentMission(xi.mission.log_id.TOAU)
     local wotg     = player:getCurrentMission(xi.mission.log_id.WOTG)
-    local acp      = player:getCurrentMission(xi.mission.log_id.ACP)
+    -- local acp      = player:getCurrentMission(xi.mission.log_id.ACP) NOTE: UNUSED Until BCNMID 532 is Re-enabled
     local asa      = player:getCurrentMission(xi.mission.log_id.ASA)
     local natStat  = player:getMissionStatus(player:getNation())
     local rozStat  = player:getMissionStatus(xi.mission.log_id.ZILART)
@@ -631,7 +631,7 @@ local function checkReqs(player, npc, bfid, registrant)
         [ 545] = function() return ( mjob == xi.job.SMN and mlvl >= 20                                                                                                     ) end, -- Quest: Trial-size Trial by Fire
         [ 547] = function() return ( asa >= mi.asa.SUGAR_COATED_DIRECTIVE and player:hasKeyItem(xi.ki.DOMINAS_SCARLET_SEAL)                                                ) end, -- ASA4: Sugar-coated Directive
         [ 576] = function() return ( player:hasKeyItem(xi.ki.TUNING_FORK_OF_EARTH)                                                                                         ) end, -- Quest: Trial by Earth
-        [ 577] = function() return ( player:getCharVar("ThePuppetMasterProgress") == 2                                                                                     ) end, -- Quest: The Puppet Master
+        [ 577] = function() return ( player:getCharVar("Quest[2][81]Prog") == 1                                                                                            ) end, -- Quest: The Puppet Master
         [ 578] = function() return ( mjob == xi.job.SMN and mlvl >= 20                                                                                                     ) end, -- Quest: Trial-size Trial by Earth
         [ 580] = function() return ( asa >= mi.asa.SUGAR_COATED_DIRECTIVE and player:hasKeyItem(xi.ki.DOMINAS_AMBER_SEAL)                                                  ) end, -- ASA4: Sugar-coated Directive
         [ 608] = function() return ( player:hasKeyItem(xi.ki.TUNING_FORK_OF_WATER)                                                                                         ) end, -- Quest: Trial by Water
