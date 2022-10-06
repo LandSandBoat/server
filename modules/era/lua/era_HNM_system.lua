@@ -60,7 +60,7 @@ hnmSystem:addOverride("xi.zones.Dragons_Aery.Zone.onInitialize", function(zone)
     end
 
     -- Hide ??? NPC.
-    GetNPCByID(dragonsAeryID.npc.FAFNIR_QM):setStatus(xi.status.DISAPPEAR)
+    GetNPCByID(dragonsAeryID.npc.QM_FAFNIR):setStatus(xi.status.DISAPPEAR)
 end)
 
 hnmSystem:addOverride("xi.zones.Dragons_Aery.mobs.Fafnir.onMobDespawn", function(mob)

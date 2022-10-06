@@ -59,7 +59,7 @@ zones[xi.zone.CAEDARVA_MIRE] =
             [17100876] = 17101143, -- 321.809 -16.843 -373.780
         },
 
-        AYNU_KAYSEY           = 17101099,
+        AYNU_KAYSEY           = DYNAMIC_LOOKUP,
         CAEDARVA_TOAD         = DYNAMIC_LOOKUP,
         JAZARAAT              = DYNAMIC_LOOKUP,
         LAMIA_NO27            = DYNAMIC_LOOKUP,

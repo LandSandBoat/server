@@ -25,6 +25,7 @@ zones[xi.zone.CASTLE_ZVAHL_BAILEYS] =
         CHEST_UNLOCKED                = 7234, -- You unlock the chest!
         COMMON_SENSE_SURVIVAL         = 7609, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         MARQUIS_SABNOCK_PH =
@@ -32,19 +33,21 @@ zones[xi.zone.CASTLE_ZVAHL_BAILEYS] =
             [17436879] = 17436881,
             [17436882] = 17436881,
         },
-        LIKHO            = 17436714,
-        MARQUIS_ALLOCEN  = 17436913,
-        MARQUIS_AMON     = 17436918,
-        DUKE_HABORYM     = 17436923,
-        GRAND_DUKE_BATYM = 17436927,
-        DARK_SPARK       = 17436964,
-        MIMIC            = 17436965,
+
+        LIKHO            = DYNAMIC_LOOKUP,
+        MARQUIS_ALLOCEN  = DYNAMIC_LOOKUP,
+        MARQUIS_AMON     = DYNAMIC_LOOKUP,
+        DUKE_HABORYM     = DYNAMIC_LOOKUP,
+        GRAND_DUKE_BATYM = DYNAMIC_LOOKUP,
+        DARK_SPARK       = DYNAMIC_LOOKUP,
+        MIMIC            = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
         TORCH_OFFSET    = 17436984,
-        TREASURE_CHEST  = 17436997,
-        TREASURE_COFFER = 17436998,
+        TREASURE_CHEST  = DYNAMIC_LOOKUP,
+        TREASURE_COFFER = DYNAMIC_LOOKUP,
     },
 }
 

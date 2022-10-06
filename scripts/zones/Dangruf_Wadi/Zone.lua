@@ -78,9 +78,9 @@ zoneObject.onZoneWeatherChange = function(weather)
         weather == xi.weather.NONE or
         weather == xi.weather.SUNSHINE
     then
-        GetNPCByID(ID.npc.AN_EMPTY_VESSEL_QM):setStatus(xi.status.NORMAL)
+        GetNPCByID(ID.npc.QM2):setStatus(xi.status.NORMAL)
     else
-        GetNPCByID(ID.npc.AN_EMPTY_VESSEL_QM):setStatus(xi.status.DISAPPEAR)
+        GetNPCByID(ID.npc.QM2):setStatus(xi.status.DISAPPEAR)
     end
 end
 

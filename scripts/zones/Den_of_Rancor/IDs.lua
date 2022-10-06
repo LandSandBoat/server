@@ -68,15 +68,17 @@ zones[xi.zone.DEN_OF_RANCOR] =
             [17432978] = 17432974,
             [17432979] = 17432974,
         },
-        MIMIC       = 17432583,
-        HAKUTAKU    = 17433005,
-        MOKUMOKUREN = 17433006,
+
+        MIMIC       = DYNAMIC_LOOKUP,
+        HAKUTAKU    = DYNAMIC_LOOKUP,
+        MOKUMOKUREN = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
         LANTERN_OFFSET  = 17433047,
         DROP_GATE       = 17433051,
-        TREASURE_COFFER = 17433077,
+        TREASURE_COFFER = DYNAMIC_LOOKUP,
     },
 }
 

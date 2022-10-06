@@ -30,6 +30,7 @@ zones[xi.zone.FORT_KARUGO_NARUGO_S] =
         {
             [17170472] = 17170475,
         },
+
         KIRTIMUKHA_PH =
         {
             [17170491] = 17170499,
@@ -40,15 +41,18 @@ zones[xi.zone.FORT_KARUGO_NARUGO_S] =
             [17170496] = 17170499,
             [17170498] = 17170499,
         },
+
         DEMOISELLE_DESOLEE_PH =
         {
             [17170577] = 17170569,
         },
+
         TIGRESS_STRIKES_WAR_LYNX = 17170645,
     },
+
     npc =
     {
-        INDESCRIPT_MARKINGS = 17171272,
+        INDESCRIPT_MARKINGS = DYNAMIC_LOOKUP,
         LOGGING =
         {
             17171239,

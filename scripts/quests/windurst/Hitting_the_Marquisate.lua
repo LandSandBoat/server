@@ -137,7 +137,7 @@ quest.sections =
 
                     if hagainProgress == 7 then
                         if
-                            os.time() <= GetNPCByID(garlaigeID.npc.CHANDELIER_QM):getLocalVar("chandelierCooldown")
+                            os.time() <= GetNPCByID(garlaigeID.npc.QM_CHANDELIER):getLocalVar("chandelierCooldown")
                         then
                             return quest:messageSpecial(garlaigeID.text.THE_PRESENCE_MOVES + 7)
                         elseif

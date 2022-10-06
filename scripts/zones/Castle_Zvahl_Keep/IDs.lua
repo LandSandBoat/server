@@ -49,7 +49,7 @@ zones[xi.zone.CASTLE_ZVAHL_KEEP] =
     },
     npc =
     {
-        TREASURE_CHEST = 17441088,
+        TREASURE_CHEST = DYNAMIC_LOOKUP,
     },
 }
 

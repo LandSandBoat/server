@@ -21,6 +21,7 @@ zones[xi.zone.GRAND_PALACE_OF_HUXZOI] =
         CONQUEST_BASE                 = 7082, -- Tallying conquest results...
         HOMEPOINT_SET                 = 7464, -- Home point set!
     },
+
     mob =
     {
         JAILER_OF_TEMPERANCE_PH =
@@ -31,13 +32,15 @@ zones[xi.zone.GRAND_PALACE_OF_HUXZOI] =
             16916541, -- -580 -1.5 43
             16916560, -- -797 -1.5 460
         },
-        IXGHRAH                 = 16916813,
-        JAILER_OF_TEMPERANCE    = 16916814,
-        IXAERN_MNK              = 16916815,
+
+        IXGHRAH              = DYNAMIC_LOOKUP,
+        JAILER_OF_TEMPERANCE = DYNAMIC_LOOKUP,
+        IXAERN_MNK           = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
-        QM_IXAERN_MNK = 16916819,
+        QM_IXAERN_MNK = DYNAMIC_LOOKUP,
     },
 }
 

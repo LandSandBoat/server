@@ -42,21 +42,24 @@ zones[xi.zone.EASTERN_ALTEPA_DESERT] =
     },
     mob =
     {
-        DUNE_WIDOW_PH     =
+        DUNE_WIDOW_PH =
         {
             [17244395] = 17244396,
         },
-        DONNERGUGI_PH     =
+
+        DONNERGUGI_PH =
         {
             [17244258] = 17244268,
             [17244263] = 17244268,
         },
-        CENTURIO_XII_I    = 17244372,
-        NANDI             = 17244471,
-        DECURIO_I_III     = 17244523,
+
+        CENTURIO_XII_I    = DYNAMIC_LOOKUP,
+        NANDI             = DYNAMIC_LOOKUP,
+        DECURIO_I_III     = DYNAMIC_LOOKUP,
         TSUCHIGUMO_OFFSET = 17244524,
-        CACTROT_RAPIDO    = 17244539,
+        CACTROT_RAPIDO    = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
         OVERSEER_BASE = 17244627, -- Eaulevisat_RK in npc_list

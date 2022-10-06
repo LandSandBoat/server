@@ -42,6 +42,7 @@ zones[xi.zone.CRAWLERS_NEST] =
         UNCANNY_SENSATION             = 11359, -- You are assaulted by an uncanny sensation.
         COMMON_SENSE_SURVIVAL         = 11391, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         DEMONIC_TIPHIA_PH =
@@ -51,16 +52,18 @@ zones[xi.zone.CRAWLERS_NEST] =
             [17584396] = 17584398, -- -75.000 -1.000 299.000
             [17584391] = 17584398, -- -101.000 -1.000 285.000
         },
-        AWD_GOGGIE          = 17584135,
-        DYNAST_BEETLE       = 17584312,
-        DREADBUG            = 17584425,
-        MIMIC               = 17584426,
+
+        AWD_GOGGIE          = DYNAMIC_LOOKUP,
+        DYNAST_BEETLE       = DYNAMIC_LOOKUP,
+        DREADBUG            = DYNAMIC_LOOKUP,
+        MIMIC               = DYNAMIC_LOOKUP,
         APPARATUS_ELEMENTAL = 17584427,
     },
+
     npc =
     {
-        TREASURE_CHEST  = 17584475,
-        TREASURE_COFFER = 17584476,
+        TREASURE_CHEST  = DYNAMIC_LOOKUP,
+        TREASURE_COFFER = DYNAMIC_LOOKUP,
     },
 }
 

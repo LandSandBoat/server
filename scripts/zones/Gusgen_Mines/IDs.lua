@@ -46,23 +46,25 @@ zones[xi.zone.GUSGEN_MINES] =
         UNCANNY_SENSATION             = 11444, -- You are assaulted by an uncanny sensation.
         COMMON_SENSE_SURVIVAL         = 11479, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
-        BLIND_MOBY          = 17580038,
-        WANDERING_GHOST     = 17580337,
+        BLIND_MOBY          = DYNAMIC_LOOKUP,
+        WANDERING_GHOST     = DYNAMIC_LOOKUP,
         PUDDING_OFFSET      = 17580338,
         APPARATUS_ELEMENTAL = 17580340,
-        AROMA_FLY           = 17580341,
-        ASPHYXIATED_AMSEL   = 17580044,
-        BURNED_BERGMANN     = 17580042,
-        CRUSHED_KRAUSE      = 17580040,
-        PULVERIZED_PFEFFER  = 17580041,
-        SMOTHERED_SCHMIDT   = 17580039,
-        WOUNDED_WURFEL      = 17580043,
+        AROMA_FLY           = DYNAMIC_LOOKUP,
+        ASPHYXIATED_AMSEL   = DYNAMIC_LOOKUP,
+        BURNED_BERGMANN     = DYNAMIC_LOOKUP,
+        CRUSHED_KRAUSE      = DYNAMIC_LOOKUP,
+        PULVERIZED_PFEFFER  = DYNAMIC_LOOKUP,
+        SMOTHERED_SCHMIDT   = DYNAMIC_LOOKUP,
+        WOUNDED_WURFEL      = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
-        TREASURE_CHEST = 17580403,
+        TREASURE_CHEST = DYNAMIC_LOOKUP,
         MINING =
         {
             17580397,

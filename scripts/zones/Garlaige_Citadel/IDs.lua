@@ -59,25 +59,28 @@ zones[xi.zone.GARLAIGE_CITADEL] =
         {
             [17596515] = 17596520,
         },
+
         HOVERING_HOTPOT_PH =
         {
             [17596623] = 17596628, -- 182.157 -0.012 29.941
             [17596625] = 17596628, -- 188.229 -0.018 20.151
         },
-        OLD_TWO_WINGS       = 17596506,
-        SKEWER_SAM          = 17596507,
-        CHANDELIER          = 17596533,
-        GUARDIAN_STATUE     = 17596643,
-        SERKET              = 17596720,
-        MIMIC               = 17596728,
+
+        OLD_TWO_WINGS       = DYNAMIC_LOOKUP,
+        SKEWER_SAM          = DYNAMIC_LOOKUP,
+        CHANDELIER          = DYNAMIC_LOOKUP,
+        GUARDIAN_STATUE     = DYNAMIC_LOOKUP,
+        SERKET              = DYNAMIC_LOOKUP,
+        MIMIC               = DYNAMIC_LOOKUP,
         APPARATUS_ELEMENTAL = 17596729,
     },
+
     npc =
     {
         BANISHING_GATE_OFFSET = 17596761,
-        TREASURE_CHEST        = 17596812,
-        TREASURE_COFFER       = 17596813,
-        CHANDELIER_QM         = 17596830,
+        TREASURE_CHEST        = DYNAMIC_LOOKUP,
+        TREASURE_COFFER       = DYNAMIC_LOOKUP,
+        QM_CHANDELIER         = DYNAMIC_LOOKUP,
     },
 }
 

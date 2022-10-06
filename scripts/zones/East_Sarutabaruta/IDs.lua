@@ -48,11 +48,13 @@ zones[xi.zone.EAST_SARUTABARUTA] =
             [17252487] = 17252489, -- 224.258 -17.858 -486.256
             [17252488] = 17252489, -- 227.825 -16.978 -317.467
         },
+
         SPINY_SPIPI_PH =
         {
             [17252656] = 17252657
         },
-        DUKE_DECAPOD   = 17252725,
+
+        DUKE_DECAPOD = DYNAMIC_LOOKUP,
     },
     npc =
     {

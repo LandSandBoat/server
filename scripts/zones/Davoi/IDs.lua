@@ -41,6 +41,7 @@ zones[xi.zone.DAVOI] =
         UNCANNY_SENSATION             = 7976, -- You are assaulted by an uncanny sensation.
         COMMON_SENSE_SURVIVAL         = 7983, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         HAWKEYED_DNATBAT_PH =
@@ -49,15 +50,18 @@ zones[xi.zone.DAVOI] =
             [17387560] = 17387567, -- 336.498 -0.563 -138.502
             [17387563] = 17387567, -- 371.525 0.235 -176.188
         },
+
         STEELBITER_GUDRUD_PH =
         {
             [17387578] = 17387585, -- 252.457 3.501 -248.655
         },
+
         TIGERBANE_BAKDAK_PH =
         {
             [17387602] = 17387606, -- 158 -0.662 -18
             [17387603] = 17387606, -- 153.880 -0.769 -18.092
         },
+
         POISONHAND_GNADGAD_PH =
         {
             [17387634] = 17387644, -- -53.910 -0.583 56.606
@@ -69,24 +73,26 @@ zones[xi.zone.DAVOI] =
             [17387640] = 17387644, -- -54.694 -0.545 42.385
             [17387641] = 17387644, -- -60.057 -0.655 29.127
         },
+
         BLUBBERY_BULGE_PH   =
         {
             [17387919] = 17387920, -- -225.237 2.295 -294.764
         },
-        GAVOTVUT            = 17387965,
-        BARAKBOK            = 17387966,
-        BILOPDOP            = 17387967,
-        DELOKNOK            = 17387968,
-        PURPLEFLASH_BRUKDOK = 17387969,
-        ONE_EYED_GWAJBOJ    = 17387970,
-        THREE_EYED_PROZPUZ  = 17387971,
-        HEMATIC_CYST        = 17387972,
+
+        GAVOTVUT            = DYNAMIC_LOOKUP,
+        BARAKBOK            = DYNAMIC_LOOKUP,
+        BILOPDOP            = DYNAMIC_LOOKUP,
+        DELOKNOK            = DYNAMIC_LOOKUP,
+        PURPLEFLASH_BRUKDOK = DYNAMIC_LOOKUP,
+        ONE_EYED_GWAJBOJ    = DYNAMIC_LOOKUP,
+        THREE_EYED_PROZPUZ  = DYNAMIC_LOOKUP,
+        HEMATIC_CYST        = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
-        HIDE_FLAP_OFFSET = 17388023,
-        STORAGE_HOLE     = 17388025,
-        TREASURE_CHEST   = 17388027,
+        STORAGE_HOLE     = DYNAMIC_LOOKUP,
+        TREASURE_CHEST   = DYNAMIC_LOOKUP,
     },
 }
 

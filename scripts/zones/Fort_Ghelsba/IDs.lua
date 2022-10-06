@@ -29,11 +29,13 @@ zones[xi.zone.FORT_GHELSBA] =
         {
             [17354823] = 17354828,
         },
-        ORCISH_PANZER = 17354894,
+
+        ORCISH_PANZER = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
-        TREASURE_CHEST = 17355012,
+        TREASURE_CHEST = DYNAMIC_LOOKUP,
     },
 }
 

@@ -30,12 +30,14 @@ zones[xi.zone.GIDDEUS] =
         HARVESTING_IS_POSSIBLE_HERE   = 7424, -- Harvesting is possible here if you have <item>.
         HOMEPOINT_SET                 = 7452, -- Home point set!
     },
+
     mob =
     {
-        HOO_MJUU_THE_TORRENT_PH   =
+        HOO_MJUU_THE_TORRENT_PH =
         {
             [17371513] = 17371515, -- -39.073 0.597 -115.279
         },
+
         JUU_DUZU_THE_WHIRLWIND_PH =
         {
             [17371298] = 17371300, -- 116.667 -3.442 -261.079
@@ -45,15 +47,18 @@ zones[xi.zone.GIDDEUS] =
             [17371529] = 17371300, -- 72.302 0.642 -202.985
             [17371519] = 17371300, -- 20.353 -3.647 -169.309
         },
-        VUU_PUQU_THE_BEGUILER_PH  =
+
+        VUU_PUQU_THE_BEGUILER_PH =
         {
             [17371577] = 17371578, -- -23.973 0.459 -399.155
         },
-        VAA_HUJA_THE_ERUDITE      = 17371579,
+
+        VAA_HUJA_THE_ERUDITE = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
-        TREASURE_CHEST = 17371611,
+        TREASURE_CHEST = DYNAMIC_LOOKUP,
         HARVESTING =
         {
             17371612,

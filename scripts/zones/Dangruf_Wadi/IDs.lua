@@ -53,15 +53,15 @@ zones[xi.zone.DANGRUF_WADI] =
         {
             [17559583] = 17559584,
         },
-        GEYSER_LIZARD       = 17559558,
-        CHOCOBOLEECH        = 17559869,
+        GEYSER_LIZARD       = DYNAMIC_LOOKUP,
+        CHOCOBOLEECH        = DYNAMIC_LOOKUP,
         APPARATUS_ELEMENTAL = 17559870,
     },
     npc =
     {
         GEYSER_OFFSET      = 17559899,
-        AN_EMPTY_VESSEL_QM = 17559911,
-        TREASURE_CHEST     = 17559924,
+        QM2                = DYNAMIC_LOOKUP, -- An Empty Vessel
+        TREASURE_CHEST     = DYNAMIC_LOOKUP,
     },
 }
 

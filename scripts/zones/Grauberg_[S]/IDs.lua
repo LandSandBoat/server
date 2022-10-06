@@ -29,6 +29,7 @@ zones[xi.zone.GRAUBERG_S] =
         AIR_WARPED_AND_DISTORTED      = 8399, -- The air before you appears warped and distorted...
         COMMON_SENSE_SURVIVAL         = 9303, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         KOTAN_KOR_KAMUY_PH =
@@ -42,14 +43,17 @@ zones[xi.zone.GRAUBERG_S] =
             [17141966] = 17141962,
             [17141967] = 17141962,
         },
+
         SCITALIS_PH =
         {
             [17141977] = 17141979,
             [17141978] = 17141979,
             [17141981] = 17141979,
         },
-        MIGRATORY_HIPPOGRYPH = 17142108,
+
+        MIGRATORY_HIPPOGRYPH = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
         HARVESTING =
@@ -61,7 +65,8 @@ zones[xi.zone.GRAUBERG_S] =
             17142549,
             17142550,
         },
-        INDESCRIPT_MARKINGS = 17142586,
+
+        INDESCRIPT_MARKINGS = 17142586, -- TODO: Separate NPCs, as this is the second occurrence
     },
 }
 

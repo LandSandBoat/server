@@ -27,12 +27,12 @@ zones[xi.zone.DRAGONS_AERY] =
     },
     mob =
     {
-        FAFNIR  = 17408018,
-        NIDHOGG = 17408019,
+        FAFNIR  = DYNAMIC_LOOKUP,
+        NIDHOGG = DYNAMIC_LOOKUP,
     },
     npc =
     {
-        FAFNIR_QM = 17408033,
+        QM_FAFNIR = DYNAMIC_LOOKUP,
     },
 }
 

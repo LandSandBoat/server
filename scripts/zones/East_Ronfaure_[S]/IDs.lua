@@ -48,7 +48,7 @@ zones[xi.zone.EAST_RONFAURE_S] =
             [17109308] = 17109338,
         },
 
-        MYRADROSH    = 17109235,
+        MYRADROSH = DYNAMIC_LOOKUP,
 
         VOIDWALKER =
         {
