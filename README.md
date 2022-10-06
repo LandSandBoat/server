@@ -1,9 +1,15 @@
-# LandSandBoat
+<p align="center">
+    <img width="256" height="256" src="res/lsb_logo_circle.png">
+    <h1 align="center">LandSandBoat</h1>
+</p>
 
-[![base build status](https://github.com/LandSandBoat/server/actions/workflows/build.yml/badge.svg)](https://github.com/LandSandBoat/server/actions/workflows/build.yml?query=base)
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/LandSandBoat/server.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/LandSandBoat/server/alerts/)
-[![Language grade: C/C++](https://img.shields.io/lgtm/grade/cpp/g/LandSandBoat/server.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/LandSandBoat/server/context:cpp)
+<p align="center">
+<a href="https://github.com/LandSandBoat/server/actions/workflows/build.yml?query=base"><img src="https://github.com/LandSandBoat/server/actions/workflows/build.yml/badge.svg"/></a>
+<a href="https://www.gnu.org/licenses/gpl-3.0"><img src="https://img.shields.io/badge/License-GPLv3-blue.svg"/></a>
+<a href="https://lgtm.com/projects/g/LandSandBoat/server/alerts/"><img src="https://img.shields.io/lgtm/alerts/g/LandSandBoat/server.svg?logo=lgtm&logoWidth=18"/></a>
+<a href="https://lgtm.com/projects/g/LandSandBoat/server/context:cpp"><img src="https://img.shields.io/lgtm/grade/cpp/g/LandSandBoat/server.svg?logo=lgtm&logoWidth=18"/></a>
+<a href="https://github.com/LandSandBoat/server/pulls"><img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat"/></a>
+</p>
 
 Welcome to LandSandBoat, an open source server emulator for FFXI.
 

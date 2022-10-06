@@ -795,9 +795,9 @@ namespace luautils
                                     if (outerName == "mob")
                                     {
                                         // TODO: Execute this as a single query per-zone and pull out the desired results.
-                                        auto query = fmt::sprintf("SELECT mobid FROM xidb.mob_spawn_points "
+                                        auto query = fmt::sprintf("SELECT mobid FROM mob_spawn_points "
                                                             "WHERE ((mobid >> 12) & 0xFFF) = %i AND "
-                                                            "UPPER(mobname) = '%s' "
+                                                            "UPPER(REPLACE(mobname, '-', '_')) = '%s' "
                                                             "LIMIT 1;", PZone->GetID(), name.c_str());
                                         DebugIDLookup(query.c_str());
                                         auto ret = sql->Query(query.c_str());
@@ -812,9 +812,9 @@ namespace luautils
                                     else if (outerName == "npc")
                                     {
                                         // TODO: Execute this as a single query per-zone and pull out the desired results.
-                                        auto query = fmt::sprintf("SELECT npcid FROM xidb.npc_list "
+                                        auto query = fmt::sprintf("SELECT npcid FROM npc_list "
                                                             "WHERE ((npcid >> 12) & 0xFFF) = %i AND "
-                                                            "UPPER(CAST(`name` as VARCHAR(64))) = '%s' "
+                                                            "UPPER(REPLACE(CAST(`name` as VARCHAR(64)), '-', '_')) = '%s' "
                                                             "LIMIT 1;", PZone->GetID(), name.c_str());
                                         DebugIDLookup(query.c_str());
                                         auto ret = sql->Query(query.c_str());

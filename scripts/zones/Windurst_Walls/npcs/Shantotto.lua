@@ -78,6 +78,9 @@ entity.onTrade = function(player, npc, trade)
     end
 end
 
+-- TODO: Reduce complexity
+-- Disable cyclomatic complexity check for this function:
+-- luacheck: ignore 561
 entity.onTrigger = function(player, npc)
     local foiledAgain = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_AGAIN_1)
     local cfa2 = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_AGAIN_2)

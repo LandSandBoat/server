@@ -66,6 +66,7 @@ namespace logging
 #define DebugActions(...)  { if (settings::get<bool>("logging.DEBUG_ACTIONS")) { ShowDebug(__VA_ARGS__); } }
 #define DebugSQL(...)      { if (settings::get<bool>("logging.DEBUG_SQL")) { ShowDebug(__VA_ARGS__); } }
 #define DebugIDLookup(...) { if (settings::get<bool>("logging.DEBUG_ID_LOOKUP")) { ShowDebug(__VA_ARGS__); } }
+#define DebugModules(...)  { if (settings::get<bool>("logging.DEBUG_MODULES")) { ShowDebug(__VA_ARGS__); } }
 
 // Special Loggers (different patterns)
 #define ShowLua(...) { auto _msgStr = fmt::sprintf(__VA_ARGS__); TracyMessageStr(_msgStr); SPDLOG_LOGGER_INFO(spdlog::get("lua"), _msgStr); }
