@@ -16,4 +16,5 @@ xi.settings.logging =
     DEBUG_ACTIONS   = false,
     DEBUG_SQL       = false,
     DEBUG_ID_LOOKUP = false,
+    DEBUG_MODULES   = false,
 }
