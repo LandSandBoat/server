@@ -93,7 +93,12 @@ xi.additionalEffect.calcDamage = function(attacker, element, defender, damage)
     return damage
 end
 
--- paralyze on hit, fire damage on hit, etc..
+-- paralyze on hit, fire damage on hit, etc.
+-- Disable cyclomatic complexity check for this function:
+-- luacheck: ignore 561
+-- TODO: Reduce complexity in this function:
+-- - replace giant if/else chain with switch statement
+-- - replace each handler (elseif addType == procType.DEBUFF then) with a function
 xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item)
     local addType = item:getMod(xi.mod.ITEM_ADDEFFECT_TYPE)
     local subEffect = item:getMod(xi.mod.ITEM_SUBEFFECT)
