@@ -681,8 +681,14 @@ enum class Mod
     SNEAK_DURATION     = 946, // Additional duration in seconds
     INVISIBLE_DURATION = 947, // Additional duration in seconds
 
-    MAIN_DMG_RATING    = 366,  // adds damage rating to main hand weapon (maneater/blau dolch etc hidden effects)
-    SUB_DMG_RATING     = 367,  // adds damage rating to off hand weapon
+    DMG_RATING        = 287, // adds damage rating to weapon (+DMG augments, maneater/blau dolch etc hidden effects)
+    MAIN_DMG_RATING   = 366, // adds damage rating to mainhand weapon
+    SUB_DMG_RATING    = 367, // adds damage rating to off hand weapon
+    RANGED_DMG_RATING = 376, // adds damage rating to ranged weapon
+    MAIN_DMG_RANK     = 377, // adds weapon rank to main weapon http://wiki.bluegartr.com/bg/Weapon_Rank
+    SUB_DMG_RANK      = 378, // adds weapon rank to sub weapon
+    RANGED_DMG_RANK   = 379, // adds weapon rank to ranged weapon
+
     REGAIN             = 368,  // auto regain TP (from items) | this is multiplied by 10 e.g. 20 is 2% TP
     REGAIN_DOWN        = 406,  // plague, reduce tp
     REFRESH            = 369,  // auto refresh from equipment
@@ -693,10 +699,6 @@ enum class Mod
     CURE_POTENCY_II    = 260,  // % cure potency II | bonus from gear is capped at 30
     CURE_POTENCY_RCVD  = 375,  // % potency of received cure | healer's roll, some items have this
     CURE_POTENCY_BONUS = 1051, // TODO: Increases amount healed by Cure spells (fixed amount)
-    RANGED_DMG_RATING  = 376,  // adds damage rating to ranged weapon
-    MAIN_DMG_RANK      = 377,  // adds weapon rank to main weapon http://wiki.bluegartr.com/bg/Weapon_Rank
-    SUB_DMG_RANK       = 378,  // adds weapon rank to sub weapon
-    RANGED_DMG_RANK    = 379,  // adds weapon rank to ranged weapon
     DELAYP             = 380,  // delay addition percent (does not affect tp gain)
     RANGED_DELAYP      = 381,  // ranged delay addition percent (does not affect tp gain)
 
@@ -921,7 +923,7 @@ enum class Mod
     // 156 to 159
     // 192 to 223
     // 239
-    // 261 to 287
+    // 261 to 286
     // 888
     // 936
     //
@@ -945,7 +947,7 @@ struct EnumClassHash
 class CModifier
 {
 public:
-    Mod   getModID();
+    Mod   getModID() const;
     int16 getModAmount() const;
 
     void setModAmount(int16 amount);
@@ -974,7 +976,7 @@ class CPetModifier : public CModifier
 {
 public:
     CPetModifier(Mod type, PetModType pettype, int16 amount = 0);
-    PetModType getPetModType();
+    PetModType getPetModType() const;
 
 private:
     PetModType m_pettype{ PetModType::All };
