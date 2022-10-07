@@ -530,7 +530,7 @@ function xi.limbus.openDoor(battlefield, doorID)
     door:setAnimation(xi.animation.OPEN_DOOR)
 end
 
-function xi.limbus.extendTimeLimit(ID, battlefield, amount)
+function xi.limbus.extendTimeLimitDISABLE(ID, battlefield, amount)
     local timeLimit = battlefield:getTimeLimit()
     battlefield:setTimeLimit(timeLimit + amount * 60)
     local remaining = battlefield:getRemainingTime() / 60
@@ -599,7 +599,7 @@ function LimbusArea:createBattlefield()
             crate:removeListener("TRIGGER_TIME_CRATE")
             crate:addListener("ON_TRIGGER", "TRIGGER_TIME_CRATE", function(player, npc)
                 npcUtil.openCrate(npc, function()
-                    xi.limbus.extendTimeLimit(zones[battlefield:getZoneID()], player:getBattlefield(), ID.TIME_EXTENSIONS[npc:getID()])
+                    xi.limbus.extendTimeLimitDISABLE(zones[battlefield:getZoneID()], player:getBattlefield(), ID.TIME_EXTENSIONS[npc:getID()])
                 end)
             end)
         end

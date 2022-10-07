@@ -1040,7 +1040,7 @@ local helmInfo =
                     {  430, 1638 }, -- Moblin Mask
                     {  210,  902 }, -- Demon Horn
                     {  140,  646 }, -- Adaman Ore
-                    {   30,  685 }, -- Khroma Ore
+                    {  140,  685 }, -- Khroma Ore
                 },
 
                 points =
@@ -1088,6 +1088,7 @@ local helmInfo =
                     { 1200, 1108 }, -- Pinch of Sulfur
                     {  480, 2160 }, -- Troll Pauldron
                     {  330, 2161 }, -- Troll Vambrace
+                    {  140,  685 }, -- Khroma Ore
                 },
 
                 points =
@@ -1358,6 +1359,7 @@ local helmInfo =
                     { 1520,  2126 }, -- Orpiment
                     {  100,   739 }, -- Orichalcum Ore
                     {  220,   769 }, -- Colored Rock
+                    {  140,   685 }, -- Khroma Ore
                 },
 
                 points =

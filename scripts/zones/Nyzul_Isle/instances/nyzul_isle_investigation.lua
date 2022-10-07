@@ -48,7 +48,7 @@ local function pickSetPoint(instance)
         end
 
         -- Randomly pick the objective from the generated list
-        instance:setStage(utils.pickRandom(objective))
+        instance:setStage(utils.randomEntry(objective))
 
         if math.random(1, 30) <= 5 then
             instance:setLocalVar("gearObjective", math.random(xi.nyzul.gearObjective.AVOID_AGRO, xi.nyzul.gearObjective.DO_NOT_DESTROY))
