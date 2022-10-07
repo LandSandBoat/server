@@ -2,7 +2,7 @@
 -- Holy Cow
 -- Bearclaw Pinnacle ENM, Zephyr Fan
 -- !addkeyitem ZEPHYR_FAN
--- !pos -520 25 -801
+-- !pos -520 25 -801 6
 -----------------------------------
 local ID = require("scripts/zones/Bearclaw_Pinnacle/IDs")
 require("scripts/globals/battlefield")

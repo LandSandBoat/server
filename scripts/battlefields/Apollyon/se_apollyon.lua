@@ -3,7 +3,7 @@
 -- Name: SE Apollyon
 -- !addkeyitem black_card
 -- !addkeyitem cosmo_cleanse
--- !pos 600 -0.5 -600
+-- !pos 600 -0.5 -600 38
 -----------------------------------
 local ID = require("scripts/zones/Apollyon/IDs")
 require("scripts/globals/battlefield")
