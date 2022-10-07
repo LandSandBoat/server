@@ -125,15 +125,15 @@ uint8 CBattlefieldHandler::LoadBattlefield(CCharEntity* PChar, const Battlefield
 
         auto* PBattlefield = new CBattlefield(registration.id, m_PZone, registration.area, PChar, false);
 
-        auto  name                = sql->GetStringData(0);
-        auto  recordholder        = sql->GetStringData(1);
-        auto  recordtime          = std::chrono::seconds(sql->GetUIntData(2));
-        auto  recordPartySize     = sql->GetUIntData(3);
-        auto  timelimit           = std::chrono::seconds(sql->GetUIntData(4));
-        auto  levelcap            = sql->GetUIntData(5);
-        auto  lootid              = sql->GetUIntData(6);
-        auto  maxplayers          = sql->GetUIntData(7);
-        auto  rulemask            = sql->GetUIntData(8);
+        auto name                 = sql->GetStringData(0);
+        auto recordholder         = sql->GetStringData(1);
+        auto recordtime           = std::chrono::seconds(sql->GetUIntData(2));
+        auto recordPartySize      = sql->GetUIntData(3);
+        auto timelimit            = std::chrono::seconds(sql->GetUIntData(4));
+        auto levelcap             = sql->GetUIntData(5);
+        auto lootid               = sql->GetUIntData(6);
+        auto maxplayers           = sql->GetUIntData(7);
+        auto rulemask             = sql->GetUIntData(8);
         PBattlefield->m_isMission = sql->GetUIntData(9);
 
         PBattlefield->SetName(name);
