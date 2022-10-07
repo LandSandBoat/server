@@ -1,9 +1,8 @@
 -----------------------------------
--- Area: Vunkerl_Inlet_[S]
+-- Area: Vunkerl_Inlet_[S] (83)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.VUNKERL_INLET_S] =
@@ -23,6 +22,7 @@ zones[xi.zone.VUNKERL_INLET_S] =
         FISHING_MESSAGE_OFFSET        = 7060, -- You can't fish here.
         COMMON_SENSE_SURVIVAL         = 9029, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         BIG_BANG_PH =
@@ -31,9 +31,10 @@ zones[xi.zone.VUNKERL_INLET_S] =
             [17117348] = 17117349,
         },
     },
+
     npc =
     {
-        INDESCRIPT_MARKINGS = 17118008,
+        INDESCRIPT_MARKINGS = DYNAMIC_LOOKUP,
     },
 }
 

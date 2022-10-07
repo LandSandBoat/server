@@ -1,9 +1,8 @@
 -----------------------------------
--- Area: Upper_Jeuno
+-- Area: Upper_Jeuno (244)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.UPPER_JEUNO] =
@@ -41,12 +40,14 @@ zones[xi.zone.UPPER_JEUNO] =
         YOU_OBTAIN_ITEM                  = 11191, -- You obtain <item>!
         UNLOCK_DANCER                    = 11841, -- You can now become a dancer!
     },
+
     mob =
     {
     },
+
     npc =
     {
-        MAPITOTO = 17776895,
+        MAPITOTO = DYNAMIC_LOOKUP,
     },
 }
 

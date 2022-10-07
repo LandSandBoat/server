@@ -1,9 +1,8 @@
 -----------------------------------
--- Area: West_Ronfaure
+-- Area: West_Ronfaure (100)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.WEST_RONFAURE] =
@@ -51,18 +50,22 @@ zones[xi.zone.WEST_RONFAURE] =
         REGIME_REGISTERED             = 10444, -- New training regime registered!
         COMMON_SENSE_SURVIVAL         = 12445, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
-        FUNGUS_BEETLE_PH      =
+        FUNGUS_BEETLE_PH =
         {
             [17187026] = 17187047, -- -332.722,-21.032,-112.044
         },
+
         JAGGEDY_EARED_JACK_PH =
         {
             [17187110] = 17187111, -- -262.780 -22.384 -253.873
         },
-        MARAUDER_DVOGZOG      = 17187273,
+
+        MARAUDER_DVOGZOG = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
         SIGNPOST_OFFSET = 17187505,

@@ -1,9 +1,8 @@
 -----------------------------------
--- Area: Temple_of_Uggalepih
+-- Area: Temple_of_Uggalepih (159)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.TEMPLE_OF_UGGALEPIH] =
@@ -50,46 +49,52 @@ zones[xi.zone.TEMPLE_OF_UGGALEPIH] =
         COMMON_SENSE_SURVIVAL         = 11594, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
         UNITY_WANTED_BATTLE_INTERACT  = 11658, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
+
     mob =
     {
-        SOZU_SARBERRY_PH         =
+        SOZU_SARBERRY_PH =
         {
             [17428551] = 17428554, -- 89 0.499 -23
         },
-        SOZU_TERBERRY_PH         =
+
+        SOZU_TERBERRY_PH =
         {
             [17428608] = 17428611, -- -122 0.028 -13
         },
-        TONBERRY_KINQ_PH         =
+
+        TONBERRY_KINQ_PH =
         {
             [17428673] = 17428677, -- -221.717 0.996 12.819
             [17428675] = 17428677 -- -218 -0.792 24
         },
-        FLAUROS_PH               =
+
+        FLAUROS_PH =
         {
             [17428740] = 17428737, -- 259 0.03 80
         },
-        TEMPLE_GUARDIAN          = 17428494,
-        NIO_A                    = 17428495,
-        NIO_HUM                  = 17428496,
-        MIMIC                    = 17428497,
-        SOZU_ROGBERRY            = 17428751,
-        CLEUVARION_M_RESOAIX     = 17428807,
-        ROMPAULION_S_CITALLE     = 17428808,
-        BERYL_FOOTED_MOLBERRY    = 17428809,
-        DEATH_FROM_ABOVE         = 17428810,
-        HABETROT                 = 17428811,
-        CRIMSON_TOOTHED_PAWBERRY = 17428813,
-        SACRIFICIAL_GOBLET       = 17428816,
-        YALLERY_BROWN            = 17428817,
+
+        TEMPLE_GUARDIAN          = DYNAMIC_LOOKUP,
+        NIO_A                    = DYNAMIC_LOOKUP,
+        NIO_HUM                  = DYNAMIC_LOOKUP,
+        MIMIC                    = DYNAMIC_LOOKUP,
+        SOZU_ROGBERRY            = DYNAMIC_LOOKUP,
+        CLEUVARION_M_RESOAIX     = DYNAMIC_LOOKUP,
+        ROMPAULION_S_CITALLE     = DYNAMIC_LOOKUP,
+        BERYL_FOOTED_MOLBERRY    = DYNAMIC_LOOKUP,
+        DEATH_FROM_ABOVE         = DYNAMIC_LOOKUP,
+        HABETROT                 = DYNAMIC_LOOKUP,
+        CRIMSON_TOOTHED_PAWBERRY = DYNAMIC_LOOKUP,
+        SACRIFICIAL_GOBLET       = DYNAMIC_LOOKUP,
+        YALLERY_BROWN            = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
-        PLONGEUR_MONBERRY    = 17428933,
+        PLONGEUR_MONBERRY    = DYNAMIC_LOOKUP,
         BOOK_OFFSET          = 17428973,
         TEMPLE_GUARDIAN_DOOR = 17428978,
         DOOR_TO_RANCOR       = 17428989,
-        TREASURE_COFFER      = 17429007,
+        TREASURE_COFFER      = DYNAMIC_LOOKUP,
     },
 }
 

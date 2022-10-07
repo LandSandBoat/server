@@ -1,9 +1,8 @@
 -----------------------------------
--- Area: Ship_bound_for_Selbina
+-- Area: Ship_bound_for_Selbina (220)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.SHIP_BOUND_FOR_SELBINA] =
@@ -24,10 +23,12 @@ zones[xi.zone.SHIP_BOUND_FOR_SELBINA] =
         MAERA_SHOP_DIALOG             = 7348, -- May I offer you items to help you on your journey?
         ARRIVING_SOON_SELBINA         = 7349, -- We are on our way to Selbina. We will be arriving soon.
     },
+
     mob =
     {
-        ENAGAKURE = 17678351,
+        ENAGAKURE = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
     },

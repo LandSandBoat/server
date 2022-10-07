@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Ship bound for Mhaura Pirates
+-- Area: Ship bound for Mhaura Pirates (228)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
@@ -27,7 +27,7 @@ zones[xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES] =
     mob =
     {
         WIGHT      = 17711120,
-        SILVERHOOK = 17711121,
+        SILVERHOOK = DYNAMIC_LOOKUP,
         SEA_MONK   = 17682442,
         SEA_HORROR = 17682446,
     },

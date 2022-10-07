@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.WINDURST_WOODS] =
@@ -85,9 +84,11 @@ zones[xi.zone.WINDURST_WOODS] =
         YOU_HAVE_JOINED_UNITY         = 14396, -- ou have joined [Pieuje's/Ayame's/Invincible Shield's/Apururu's/Maat's/Aldo's/Jakoh Wahcondalo's/Naja Salaheem's/Flaviria's/Yoran-Oran's/Sylvie's] Unity!
         HAVE_ALREADY_CHANGED_UNITY    = 14472, -- ou have already changed Unities. Please wait until the next tabulation period.
     },
+
     mob =
     {
     },
+
     npc =
     {
         HALLOWEEN_SKINS =

@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.XARCABARD] =
@@ -54,12 +53,14 @@ zones[xi.zone.XARCABARD] =
         UNCANNY_SENSATION              = 11546, -- You are assaulted by an uncanny sensation.
         COMMON_SENSE_SURVIVAL          = 11553, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         BARBARIC_WEAPON_PH =
         {
             [17236026] = 17236027,
         },
+
         TIMEWORN_WARRIOR_PH =
         {
             [17236041] = 17236045,
@@ -71,6 +72,7 @@ zones[xi.zone.XARCABARD] =
             [17236048] = 17236045,
             [17236049] = 17236045,
         },
+
         SHADOW_EYE_PH =
         {
             [17236149] = 17236180, -- -223.872 -11.784 80.972
@@ -80,12 +82,14 @@ zones[xi.zone.XARCABARD] =
             [17236177] = 17236180, -- -217.075 -8.306 51.115
             [17236178] = 17236180, -- -234.354 -11.492 63.501
         },
+
         CHAOS_ELEMENTAL = 17236201,
         BOREAL_HOUND    = 17236202,
         BOREAL_COEURL   = 17236203,
         BOREAL_TIGER    = 17236204,
         KOENIGSTIGER    = 17236205,
-        VOIDWALKER      =
+
+        VOIDWALKER =
         {
             [xi.keyItem.CLEAR_ABYSSITE] =
             {
@@ -113,6 +117,7 @@ zones[xi.zone.XARCABARD] =
             }
         }
     },
+
     npc =
     {
         OVERSEER_BASE      = 17236289, -- Jeantelas_RK in npc_list

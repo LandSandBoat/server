@@ -1,9 +1,8 @@
 -----------------------------------
--- Area: Tahrongi_Canyon
+-- Area: Tahrongi_Canyon (117)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.TAHRONGI_CANYON] =
@@ -62,6 +61,7 @@ zones[xi.zone.TAHRONGI_CANYON] =
         UNCANNY_SENSATION             = 11950, -- You are assaulted by an uncanny sensation.
         COMMON_SENSE_SURVIVAL         = 11957, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         SERPOPARD_ISHTAR_PH =
@@ -75,8 +75,8 @@ zones[xi.zone.TAHRONGI_CANYON] =
             [17256835] = 17256836, -- -119.301, 24.087, 448.636
         },
 
-        HABROK            = 17256493,
-        YARA_MA_YHA_WHO   = 17256900,
+        HABROK          = DYNAMIC_LOOKUP,
+        YARA_MA_YHA_WHO = DYNAMIC_LOOKUP,
 
         VOIDWALKER =
         {

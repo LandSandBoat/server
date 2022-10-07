@@ -1,9 +1,8 @@
 -----------------------------------
--- Area: Talacca_Cove
+-- Area: Talacca_Cove (57)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.TALACCA_COVE] =
@@ -23,10 +22,12 @@ zones[xi.zone.TALACCA_COVE] =
         THE_PARTY_WILL_BE_REMOVED     = 7676, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
         YOU_CAN_NOW_BECOME_A_CORSAIR  = 7793, -- You can now become a corsair!
     },
+
     mob =
     {
-        GESSHO = 17010725,
+        GESSHO = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
     },

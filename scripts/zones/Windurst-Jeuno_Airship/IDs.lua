@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.WINDURST_JEUNO_AIRSHIP] =

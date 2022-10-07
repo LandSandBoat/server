@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Valley_of_Sorrows
+-- Area: Valley_of_Sorrows (128)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
@@ -34,11 +34,13 @@ zones[xi.zone.VALLEY_OF_SORROWS] =
         REGIME_REGISTERED             = 9695,  -- New training regime registered!
         COMMON_SENSE_SURVIVAL         = 10814, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
-        ADAMANTOISE   = 17301537,
-        ASPIDOCHELONE = 17301538,
+        ADAMANTOISE   = DYNAMIC_LOOKUP,
+        ASPIDOCHELONE = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
         ADAMANTOISE_QM = 17301567,

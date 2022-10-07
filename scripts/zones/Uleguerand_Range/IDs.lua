@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Uleguerand_Range
+-- Area: Uleguerand_Range (5)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
@@ -28,17 +28,20 @@ zones[xi.zone.ULEGUERAND_RANGE] =
         HOMEPOINT_SET                 = 8338, -- Home point set!
         UNITY_WANTED_BATTLE_INTERACT  = 8396, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
+
     mob =
     {
         SKVADER_PH =
         {
             [16797769] = 16797770,
         },
+
         MAGNOTAUR_PH =
         {
             [16797966] = 16797968,
             [16797967] = 16797968,
         },
+
         BONNACON_PH =
         {
             [16798050] = 16798056, -- -623.154 -40.604 -51.621
@@ -48,15 +51,17 @@ zones[xi.zone.ULEGUERAND_RANGE] =
             [16798054] = 16798056, -- -631.268 -40.257 0.709
             [16798055] = 16798056, -- -513.999 -40.541 -34.928
         },
-        JORMUNGAND  = 16797969,
-        GEUSH_URVAN = 16798078,
-        WHITE_CONEY = 16798079,
-        BLACK_CONEY = 16798080,
+
+        JORMUNGAND  = DYNAMIC_LOOKUP,
+        GEUSH_URVAN = DYNAMIC_LOOKUP,
+        WHITE_CONEY = DYNAMIC_LOOKUP,
+        BLACK_CONEY = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
         WATERFALL = 16798112,
-        RABBIT_FOOTPRINT = 16798100,
+        RABBIT_FOOTPRINT = DYNAMIC_LOOKUP,
     },
 }
 

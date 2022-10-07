@@ -1,9 +1,8 @@
 -----------------------------------
--- Area: Windurst_Waters_[S]
+-- Area: Windurst_Waters_[S] (94)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.WINDURST_WATERS_S] =
@@ -42,12 +41,14 @@ zones[xi.zone.WINDURST_WATERS_S] =
         NOT_ENOUGH_NOTES              = 15019, -- You tryin' to cheat me? That's not nearly enough notes!
         COMMON_SENSE_SURVIVAL         = 15055, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
     },
+
     npc =
     {
-        SHUVO = 17163023,
+        SHUVO = DYNAMIC_LOOKUP,
     },
 }
 

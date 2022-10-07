@@ -1,9 +1,8 @@
 -----------------------------------
--- Area: Western_Altepa_Desert
+-- Area: Western_Altepa_Desert (125)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.WESTERN_ALTEPA_DESERT] =
@@ -48,6 +47,7 @@ zones[xi.zone.WESTERN_ALTEPA_DESERT] =
         REGIME_REGISTERED             = 9836,  -- New training regime registered!
         COMMON_SENSE_SURVIVAL         = 11825, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         PICOLATON_PH =
@@ -60,7 +60,8 @@ zones[xi.zone.WESTERN_ALTEPA_DESERT] =
             [17289559] = 17289560, -- -458.944 0.018 -557.266
             [17289578] = 17289560, -- -478.142 -0.457 -596.091
         },
-        CELPHIE_PH           =
+
+        CELPHIE_PH =
         {
             [17289473] = 17289453, -- 78.226 -0.497 69.745
             [17289450] = 17289453, -- 57.256 0.116 13.972
@@ -71,21 +72,24 @@ zones[xi.zone.WESTERN_ALTEPA_DESERT] =
             [17289474] = 17289453, -- 118.575 -0.299 127.016
             [17289277] = 17289453, -- 99.000 -0.030 116.000
         },
+
         CALCHAS_PH =
         {
             [17289545] = 17289547,
             [17289546] = 17289547,
         },
-        KING_VINEGARROON     = 17289575,
-        SABOTENDER_ENAMORADO = 17289653,
-        EASTERN_SPHINX       = 17289654,
-        WESTERN_SPHINX       = 17289655,
-        MAHARAJA             = 17289656,
+
+        KING_VINEGARROON     = DYNAMIC_LOOKUP,
+        SABOTENDER_ENAMORADO = DYNAMIC_LOOKUP,
+        EASTERN_SPHINX       = DYNAMIC_LOOKUP,
+        WESTERN_SPHINX       = DYNAMIC_LOOKUP,
+        MAHARAJA             = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
         ALTEPA_GATE       = 17289747,
-        PEDDLESTOX        = 17289772,
+        PEDDLESTOX        = DYNAMIC_LOOKUP,
         BEASTMEN_TREASURE =
         {
             17289775, -- qm3

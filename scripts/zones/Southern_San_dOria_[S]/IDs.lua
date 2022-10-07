@@ -1,9 +1,8 @@
 -----------------------------------
--- Area: Southern_San_dOria_[S]
+-- Area: Southern_San_dOria_[S] (80)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.SOUTHERN_SAN_DORIA_S] =
@@ -58,12 +57,14 @@ zones[xi.zone.SOUTHERN_SAN_DORIA_S] =
         NOT_ENOUGH_NOTES              = 15619, -- You tryin' to cheat me? That's not nearly enough notes!
         COMMON_SENSE_SURVIVAL         = 15668, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
     },
+
     npc =
     {
-        SHIXO = 17105699,
+        SHIXO = DYNAMIC_LOOKUP,
     },
 }
 

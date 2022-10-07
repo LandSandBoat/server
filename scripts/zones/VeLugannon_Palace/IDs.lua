@@ -1,9 +1,8 @@
 -----------------------------------
--- Area: VeLugannon_Palace
+-- Area: VeLugannon_Palace (177)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.VELUGANNON_PALACE] =
@@ -31,11 +30,13 @@ zones[xi.zone.VELUGANNON_PALACE] =
         ALREADY_POSSESS_TEMP          = 11225, -- You already possess that temporary item.
         NO_COMBINATION                = 11230, -- You were unable to enter a combination.
     },
+
     mob =
     {
-        MIMIC                   = 17502567,
-        BRIGANDISH_BLADE        = 17502568,
-        STEAM_CLEANER           = 17502569,
+        MIMIC            = DYNAMIC_LOOKUP,
+        BRIGANDISH_BLADE = DYNAMIC_LOOKUP,
+        STEAM_CLEANER    = DYNAMIC_LOOKUP,
+
         STEAM_CLEANER_DETECTORS =
         {
             -- E Lower Chamber
@@ -52,14 +53,15 @@ zones[xi.zone.VELUGANNON_PALACE] =
             17502557,
         },
     },
+
     npc =
     {
-        QM3             = 17502583,
+        QM3             = DYNAMIC_LOOKUP,
         Y_DOOR_OFFSET   = 17502608,
         B_DOOR_OFFSET   = 17502616,
         Y_LITH_OFFSET   = 17502624,
         B_LITH_OFFSET   = 17502634,
-        TREASURE_COFFER = 17502699,
+        TREASURE_COFFER = DYNAMIC_LOOKUP,
     },
 }
 

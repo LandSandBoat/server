@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.TORAIMARAI_CANAL] =
@@ -33,6 +32,7 @@ zones[xi.zone.TORAIMARAI_CANAL] =
         COMMON_SENSE_SURVIVAL         = 10676, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
         HOMEPOINT_SET                 = 10704, -- Home point set!
     },
+
     mob =
     {
         CANAL_MOOCHER_PH =
@@ -41,20 +41,23 @@ zones[xi.zone.TORAIMARAI_CANAL] =
             [17469576] = 17469578,
             [17469577] = 17469578,
         },
+
         KONJAC_PH =
         {
             [17469629] = 17469632,
             [17469630] = 17469632,
             [17469631] = 17469632,
         },
-        MAGIC_SLUDGE      = 17469516,
+
+        MAGIC_SLUDGE      = DYNAMIC_LOOKUP,
         HINGE_OILS_OFFSET = 17469666,
-        MIMIC             = 17469761,
+        MIMIC             = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
         TOME_OF_MAGIC_OFFSET = 17469828,
-        TREASURE_COFFER      = 17469835,
+        TREASURE_COFFER      = DYNAMIC_LOOKUP,
     },
 }
 

@@ -1,9 +1,8 @@
 -----------------------------------
--- Area: The_Shrine_of_RuAvitau
+-- Area: The_Shrine_of_RuAvitau (178)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.THE_SHRINE_OF_RUAVITAU] =
@@ -31,13 +30,15 @@ zones[xi.zone.THE_SHRINE_OF_RUAVITAU] =
         NO_COMBINATION                = 11410, -- You were unable to enter a combination.
         HOMEPOINT_SET                 = 11436, -- Home point set!
     },
+
     mob =
     {
-        ULLIKUMMI        = 17506418,
+        ULLIKUMMI        = DYNAMIC_LOOKUP,
         OLLAS_OFFSET     = 17506667,
-        KIRIN            = 17506670,
-        MOTHER_GLOBE     = 17506396,
+        KIRIN            = DYNAMIC_LOOKUP,
+        MOTHER_GLOBE     = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
         DOORS =
@@ -54,6 +55,7 @@ zones[xi.zone.THE_SHRINE_OF_RUAVITAU] =
             [19] = "y", [18] = "b",
             [21] = "y", [20] = "b",
         },
+
         MONOLITHS =
         {
             [ 0] = "y", [ 4] = "b",
@@ -67,6 +69,7 @@ zones[xi.zone.THE_SHRINE_OF_RUAVITAU] =
             [17] = "y", [15] = "b",
             [18] = "y", [19] = "b",
         },
+
         OLLAS_QM        = 17506692,
         DOOR_OFFSET     = 17506718,
         MONOLITH_OFFSET = 17506741,

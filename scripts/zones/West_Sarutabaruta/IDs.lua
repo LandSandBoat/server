@@ -1,9 +1,8 @@
 -----------------------------------
--- Area: West_Sarutabaruta
+-- Area: West_Sarutabaruta (115)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.WEST_SARUTABARUTA] =

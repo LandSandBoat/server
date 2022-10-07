@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: The_Sanctuary_of_ZiTah
+-- Area: The_Sanctuary_of_ZiTah (121)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
@@ -57,27 +57,31 @@ zones[xi.zone.THE_SANCTUARY_OF_ZITAH] =
         REGIME_REGISTERED             = 10285, -- New training regime registered!
         COMMON_SENSE_SURVIVAL         = 12274, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         KEEPER_OF_HALIDOM_PH =
         {
             [17272977] = 17272978, -- 319.939 -0.037 187.231
         },
+
         NOBLE_MOLD_PH   =
         {
             [17273276] = 17273278, -- -391.184 -0.269 -159.086
             [17273277] = 17273278, -- -378.456 0.425 -162.489
         },
-        GUARDIAN_TREANT = 17272838,
-        DOOMED_PILGRIMS = 17272839,
-        NOBLE_MOLD      = 17273278,
-        ISONADE         = 17273285,
-        GREENMAN        = 17273295,
+
+        GUARDIAN_TREANT = DYNAMIC_LOOKUP,
+        DOOMED_PILGRIMS = DYNAMIC_LOOKUP,
+        NOBLE_MOLD      = DYNAMIC_LOOKUP,
+        ISONADE         = DYNAMIC_LOOKUP,
+        GREENMAN        = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
         OVERSEER_BASE    = 17273365, -- Credaurion_RK in npc_list
-        CERMET_HEADSTONE = 17273390,
+        CERMET_HEADSTONE = DYNAMIC_LOOKUP,
     },
 }
 

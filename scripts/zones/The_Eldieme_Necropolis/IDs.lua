@@ -62,6 +62,7 @@ zones[xi.zone.THE_ELDIEME_NECROPOLIS] =
         UNCANNY_SENSATION                = 11605, -- You are assaulted by an uncanny sensation.
         COMMON_SENSE_SURVIVAL            = 11639, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         CWN_CYRFF_PH  =
@@ -71,22 +72,24 @@ zones[xi.zone.THE_ELDIEME_NECROPOLIS] =
             [17576052] = 17576054, -- -384.019 0.509 384.26
             [17576053] = 17576054, -- -376.974 0.586 343.750
         },
-        LICH_C_MAGNUS       = 17575937,
-        YUM_KIMIL           = 17576264,
-        STURM               = 17576267,
-        TAIFUN              = 17576268,
-        TROMBE              = 17576269,
-        MIMIC               = 17576270,
+
+        LICH_C_MAGNUS       = DYNAMIC_LOOKUP,
+        YUM_KIMIL           = DYNAMIC_LOOKUP,
+        STURM               = DYNAMIC_LOOKUP,
+        TAIFUN              = DYNAMIC_LOOKUP,
+        TROMBE              = DYNAMIC_LOOKUP,
+        MIMIC               = DYNAMIC_LOOKUP,
         APPARATUS_ELEMENTAL = 17576271,
-        NAMORODO            = 17576272,
+        NAMORODO            = DYNAMIC_LOOKUP,
         SKULL_OFFSET        = 17575937,
     },
+
     npc =
     {
         GATE_OFFSET        = 17576306,
         BRAZIER_OFFSET     = 17576343,
-        TREASURE_CHEST     = 17576356,
-        TREASURE_COFFER    = 17576357,
+        TREASURE_CHEST     = DYNAMIC_LOOKUP,
+        TREASURE_COFFER    = DYNAMIC_LOOKUP,
         SARCOPHAGUS_OFFSET = 17576394,
         CANDLE_OFFSET      = 17576334,
     },

@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Upper_Delkfutts_Tower
+-- Area: Upper_Delkfutts_Tower (158)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
@@ -33,6 +33,7 @@ zones[xi.zone.UPPER_DELKFUTTS_TOWER] =
         UNCANNY_SENSATION             = 10521, -- You are assaulted by an uncanny sensation.
         HOMEPOINT_SET                 = 10530, -- Home point set!
     },
+
     mob =
     {
         ENKELADOS_PH =
@@ -40,6 +41,7 @@ zones[xi.zone.UPPER_DELKFUTTS_TOWER] =
             [17424388] = 17424385, -- -371.586 -144.367 28.244
             [17424426] = 17424423, -- -215.194 -144.099 19.528
         },
+
         IXTAB_PH =
         {
             [17424472] = 17424475,
@@ -49,12 +51,14 @@ zones[xi.zone.UPPER_DELKFUTTS_TOWER] =
             [17424510] = 17424512,
             [17424511] = 17424512,
         },
-        PALLAS       = 17424444,
-        ALKYONEUS    = 17424480,
+
+        PALLAS    = DYNAMIC_LOOKUP,
+        ALKYONEUS = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
-        TREASURE_CHEST = 17424564,
+        TREASURE_CHEST = DYNAMIC_LOOKUP,
     },
 }
 

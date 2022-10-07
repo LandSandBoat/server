@@ -1,9 +1,8 @@
 -----------------------------------
--- Area: Southern_San_dOria
+-- Area: Southern_San_dOria (230)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.SOUTHERN_SAN_DORIA] =
@@ -111,9 +110,11 @@ zones[xi.zone.SOUTHERN_SAN_DORIA] =
         HAVE_ALREADY_CHANGED_UNITY     = 16044, -- ou have already changed Unities. Please wait until the next tabulation period.
         TEAR_IN_FABRIC_OF_SPACE        = 16505, -- There appears to be a tear in the fabric of space...
     },
+
     mob =
     {
     },
+
     npc =
     {
         HALLOWEEN_SKINS =
@@ -124,8 +125,9 @@ zones[xi.zone.SOUTHERN_SAN_DORIA] =
             [17719306] = 46, -- Apairemant
             [17719493] = 49, -- Pourette
         },
-        LUSIANE  = 17719350,
-        ARPETION = 17719409,
+
+        LUSIANE  = DYNAMIC_LOOKUP,
+        ARPETION = DYNAMIC_LOOKUP,
     },
 }
 

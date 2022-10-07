@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: The_Boyahda_Tree
+-- Area: The_Boyahda_Tree (153)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
@@ -38,13 +38,15 @@ zones[xi.zone.THE_BOYAHDA_TREE] =
         HOMEPOINT_SET                 = 11445, -- Home point set!
         UNITY_WANTED_BATTLE_INTERACT  = 11503, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
+
     mob =
     {
-        ELLYLLON_PH          =
+        ELLYLLON_PH =
         {
             [17403938] = 17403939, -- 192.54 8.532 -163.41
         },
-        AQUARIUS_PH          =
+
+        AQUARIUS_PH =
         {
             [17403993] = 17404000, -- 170.97 9.414 -12.579
             [17403994] = 17404000, -- 174.99 9.589 -16.718
@@ -56,7 +58,8 @@ zones[xi.zone.THE_BOYAHDA_TREE] =
             [17404003] = 17404000, -- 146.14 9.712 -51.616
             [17404004] = 17404000, -- 149.59 9.765 -61.490
         },
-        UNUT_PH              =
+
+        UNUT_PH =
         {
             [17404014] = 17404029, -- 112.08 8.368 34.423
             [17404015] = 17404029, -- 134.44 7.846 45.197
@@ -71,6 +74,7 @@ zones[xi.zone.THE_BOYAHDA_TREE] =
             [17404031] = 17404029, -- 57.942 8.544 88.215
             [17404032] = 17404029, -- 66.392 5.884 66.909
         },
+
         LESHONKI_PH =
         {
             [17404293] = 17404300, -- -222.0 14.380 25.724
@@ -79,17 +83,20 @@ zones[xi.zone.THE_BOYAHDA_TREE] =
             [17404296] = 17404300, -- -216.4 14.317 56.532
             [17404302] = 17404300, -- -223.8 14.267 96.920
         },
+
         VOLUPTUOUS_VIVIAN_PH =
         {
             [17404330] = 17404331, -- -196.178 5.592 190.971
         },
-        MIMIC                = 17404336,
-        AGAS                 = 17404337,
-        BEET_LEAFHOPPER      = 17404338,
+
+        MIMIC           = DYNAMIC_LOOKUP,
+        AGAS            = DYNAMIC_LOOKUP,
+        BEET_LEAFHOPPER = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
-        TREASURE_COFFER = 17404395,
+        TREASURE_COFFER = DYNAMIC_LOOKUP,
     },
 }
 

@@ -1,9 +1,8 @@
 -----------------------------------
--- Area: Wajaom_Woodlands
+-- Area: Wajaom_Woodlands (51)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.WAJAOM_WOODLANDS] =
@@ -36,14 +35,16 @@ zones[xi.zone.WAJAOM_WOODLANDS] =
         COMMON_SENSE_SURVIVAL         = 9641, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
         UNITY_WANTED_BATTLE_INTERACT  = 9705, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
+
     mob =
     {
-        JADED_JODY_PH          =
+        JADED_JODY_PH =
         {
             [16986376] = 16986378, -- -560 -8 -360
             [16986390] = 16986378, -- -565 -7 -324
         },
-        ZORAAL_JA_S_PKUUCHA_PH =
+
+        ZORAAL_JAS_PKUUCHA_PH =
         {
             [16986191] = 16986197, -- 181.000 -18.000 -63.000
             [16986192] = 16986197, -- 181.000 -19.000 -77.000
@@ -52,13 +53,15 @@ zones[xi.zone.WAJAOM_WOODLANDS] =
             [16986195] = 16986197, -- 219.000 -18.000 -59.000
             [16986196] = 16986197, -- 203.000 -16.000 -74.000
         },
-        ZORAAL_JA_S_PKUUCHA    = 16986197,
-        PERCIPIENT_ZORAAL_JA   = 16986198,
-        VULPANGUE              = 16986428,
-        IRIZ_IMA               = 16986429,
-        GOTOH_ZHA_THE_REDOLENT = 16986430,
-        TINNIN                 = 16986431,
+
+        ZORAAL_JAS_PKUUCHA     = DYNAMIC_LOOKUP,
+        PERCIPIENT_ZORAAL_JA   = DYNAMIC_LOOKUP,
+        VULPANGUE              = DYNAMIC_LOOKUP,
+        IRIZ_IMA               = DYNAMIC_LOOKUP,
+        GOTOH_ZHA_THE_REDOLENT = DYNAMIC_LOOKUP,
+        TINNIN                 = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
         HARVESTING =

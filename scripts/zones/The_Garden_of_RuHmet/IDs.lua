@@ -1,9 +1,8 @@
 -----------------------------------
--- Area: The_Garden_of_RuHmet
+-- Area: The_Garden_of_RuHmet (35)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.THE_GARDEN_OF_RUHMET] =
@@ -48,12 +47,12 @@ zones[xi.zone.THE_GARDEN_OF_RUHMET] =
             16920665, -- SE
         },
 
-        JAILER_OF_FORTITUDE = 16921015,
-        KFGHRAH_WHM         = 16921016,
-        KFGHRAH_BLM         = 16921017,
-        IXAERN_DRK          = 16921018,
-        JAILER_OF_FAITH     = 16921021,
-        IXAERN_DRG          = 16921022,
+        JAILER_OF_FORTITUDE = DYNAMIC_LOOKUP,
+        KFGHRAH_WHM         = DYNAMIC_LOOKUP,
+        KFGHRAH_BLM         = DYNAMIC_LOOKUP,
+        IXAERN_DRK          = DYNAMIC_LOOKUP,
+        JAILER_OF_FAITH     = DYNAMIC_LOOKUP,
+        IXAERN_DRG          = DYNAMIC_LOOKUP,
         IXZDEI_BASE         = 16921011,
     },
 
@@ -85,9 +84,9 @@ zones[xi.zone.THE_GARDEN_OF_RUHMET] =
             { -683.00, 0.00, -340.00 }, -- NW / Mithra tower.
         },
 
-        QM_JAILER_OF_FORTITUDE     = 16921027,
-        QM_IXAERN_DRK              = 16921028,
-        QM_JAILER_OF_FAITH         = 16921029,
+        QM_JAILER_OF_FORTITUDE     = DYNAMIC_LOOKUP,
+        QM_IXAERN_DRK              = DYNAMIC_LOOKUP,
+        QM_JAILER_OF_FAITH         = DYNAMIC_LOOKUP,
     },
 }
 

@@ -1,9 +1,8 @@
 -----------------------------------
--- Area: South_Gustaberg
+-- Area: South_Gustaberg (107)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.SOUTH_GUSTABERG] =
@@ -42,9 +41,10 @@ zones[xi.zone.SOUTH_GUSTABERG] =
         UNITY_WANTED_BATTLE_INTERACT  = 7617, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
         REGIME_REGISTERED             = 9916, -- New training regime registered!
     },
+
     mob =
     {
-        CARNERO_PH       =
+        CARNERO_PH =
         {
             [17215638] = 17215626, -- 277.891 -39.854 -413.354
             [17215611] = 17215626, -- 186.081 -39.990 -367.942
@@ -56,13 +56,16 @@ zones[xi.zone.SOUTH_GUSTABERG] =
             [17215648] = 17215626, -- 213.010 -59.983 -442.766
             [17215649] = 17215626, -- 211.745 -59.938 -441.313
         },
+
         LEAPING_LIZZY_PH =
         {
             [17215867] = 17215868, -- -275.441 20.451 -347.294
             [17215887] = 17215888, -- -322.871 30.052 -401.184
         },
-        BUBBLY_BERNIE    = 17215494,
+
+        BUBBLY_BERNIE = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
     },
