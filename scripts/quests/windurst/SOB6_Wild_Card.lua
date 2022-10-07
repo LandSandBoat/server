@@ -151,7 +151,7 @@ quest.sections =
             ['Apururu'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 3 then
+                    if quest:getVar(player, 'Prog') == 3 and player:hasKeyItem(xi.ki.JOKER_CARD) then
                         return quest:progressEvent(600) -- 2nd meeting with Apururu after meeting him in Hero's hause.
                     end
                 end,
