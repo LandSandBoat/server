@@ -7,9 +7,9 @@
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     local result = 0
     if (target:hasStatusEffect(xi.effect.FOOD) or target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD)) then
         result = xi.msg.basic.IS_FULL
@@ -17,7 +17,7 @@ item_object.onItemCheck = function(target)
     return result
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addStatusEffect(xi.effect.FOOD, 0, 0, 180, 4565)
     if (not target:hasStatusEffect(xi.effect.SILENCE)) then
         target:addStatusEffect(xi.effect.SILENCE, 1, 3, 180)
@@ -26,4 +26,4 @@ item_object.onItemUse = function(target)
     end
 end
 
-return item_object
+return itemObject

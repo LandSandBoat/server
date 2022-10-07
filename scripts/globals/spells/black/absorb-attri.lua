@@ -1,5 +1,5 @@
 -----------------------------------
--- Spell: Absorb-Attru
+-- Spell: Absorb-Attri
 -- Steals an enemy's beneficial status effects.
 -----------------------------------
 require("scripts/globals/settings")
@@ -7,13 +7,13 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     -- TODO: Get correct animation from retail captures
     -- Get the resist multiplier (1x if no resist)
     local params = {}
@@ -51,4 +51,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return countEffects
 end
 
-return spell_object
+return spellObject

@@ -3,9 +3,9 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effect_object = {}
+local effectObject = {}
 
-effect_object.onEffectGain = function(target, effect)
+effectObject.onEffectGain = function(target, effect)
     -- target:addLatent(xi.latent.SANCTION_EXP, ?, xi.mod.EXP_BONUS, ?)
     -- Possibly handle exp bonus in core instead
 
@@ -19,10 +19,10 @@ effect_object.onEffectGain = function(target, effect)
     end
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
 end
 
-effect_object.onEffectLose = function(target, effect)
+effectObject.onEffectLose = function(target, effect)
     -- target:delLatent(xi.latent.SANCTION_EXP, ?, xi.mod.EXP_BONUS, ?)
 
     local power = effect:getPower()
@@ -35,4 +35,4 @@ effect_object.onEffectLose = function(target, effect)
     end
 end
 
-return effect_object
+return effectObject

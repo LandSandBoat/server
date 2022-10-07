@@ -9,9 +9,9 @@ require('scripts/globals/treasure')
 require('scripts/globals/quests')
 require('scripts/globals/titles')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
     zone:registerRegion(1, -36, -50, 83,  -30, -49,  89 ) -- Fourth Floor G-6 porter to Lower Delkfutt's Tower
     zone:registerRegion(2, -49, -50, -50, -43, -49, -43 ) -- Fourth Floor G-6 porter to Lower Delkfutt's Tower "1"
     zone:registerRegion(3, 103, -50, 10,  109, -49,  16 ) -- Fourth Floor J-6 porter to Lower Delkfutt's Tower "2"
@@ -27,11 +27,11 @@ zone_object.onInitialize = function(zone)
     xi.treasure.initZone(zone)
 end
 
-zone_object.onConquestUpdate = function(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
@@ -41,7 +41,7 @@ zone_object.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zone_object.onRegionEnter = function(player, region)
+zoneObject.onRegionEnter = function(player, region)
     local regionId = region:GetRegionID()
 
     if regionId == 8 and player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_EVIL) == QUEST_ACCEPTED and player:getCharVar("bladeOfEvilCS") == 1 then
@@ -51,13 +51,13 @@ zone_object.onRegionEnter = function(player, region)
     end
 end
 
-zone_object.onRegionLeave = function(player, region)
+zoneObject.onRegionLeave = function(player, region)
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
     -- Teleporters
     if csid <= 11 and option == 1 then
         if csid == 0 then
@@ -75,4 +75,4 @@ zone_object.onEventFinish = function(player, csid, option)
     end
 end
 
-return zone_object
+return zoneObject

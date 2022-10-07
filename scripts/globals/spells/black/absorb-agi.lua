@@ -7,13 +7,13 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     if
         target:hasStatusEffect(xi.effect.AGI_DOWN) or
         caster:hasStatusEffect(xi.effect.AGI_BOOST)
@@ -45,4 +45,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return xi.effect.AGI_DOWN
 end
 
-return spell_object
+return spellObject

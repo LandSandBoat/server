@@ -37,8 +37,15 @@ set(EXTERNAL_LIBS
     efsw
 )
 
+if (WIN32)
+    #add wepoll for epoll support on windows
+    add_subdirectory(wepoll)
+
+    list(APPEND EXTERNAL_LIBS
+        wepoll
+    )
 # backwards needs these to add to linker
-if (APPLE)
+elseif (APPLE)
     # MacOS has bfd built in clang
     list(APPEND EXTERNAL_LIBS
         dl

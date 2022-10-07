@@ -6,9 +6,9 @@ require('scripts/globals/conquest')
 require('scripts/globals/settings')
 require('scripts/globals/status')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
     SetServerVariable("[Temenos_Northern_Tower]Time", 0)
     SetServerVariable("[Temenos_Eastern_Tower]Time", 0)
     SetServerVariable("[Temenos_Western_Tower]Time", 0)
@@ -54,11 +54,11 @@ zone_object.onInitialize = function(zone)
 
 end
 
-zone_object.onConquestUpdate = function(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
     player:setPos(580, -1.5, 4.452, 192)
@@ -66,7 +66,7 @@ zone_object.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zone_object.onRegionEnter = function(player, region)
+zoneObject.onRegionEnter = function(player, region)
     local regionID = region:GetRegionID()
     local cs
 
@@ -81,16 +81,16 @@ zone_object.onRegionEnter = function(player, region)
     end
 end
 
-zone_object.onRegionLeave = function(player, region)
+zoneObject.onRegionLeave = function(player, region)
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
     if csid == 32001 or csid == 32002 then
         player:messageSpecial(ID.text.HUM+1)
     end
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
 end
 
-return zone_object
+return zoneObject

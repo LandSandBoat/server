@@ -1,18 +1,18 @@
 -----------------------------------
 -- Spell: Aspir
--- Drain functions only on skill level!!
+-- Aspir functions only on Dark Magic skill level!
 -----------------------------------
 require("scripts/globals/magic")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     -- Calculate base drain amount and potency
     -- https://www.bg-wiki.com/ffxi/Aspir_II
     local base    = caster:getSkillLevel(xi.skill.DARK_MAGIC) * 0.6
@@ -58,4 +58,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return dmg
 end
 
-return spell_object
+return spellObject

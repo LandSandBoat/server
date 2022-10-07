@@ -7,9 +7,9 @@ require("scripts/globals/mobskills")
 require("scripts/globals/status")
 require("scripts/globals/zone")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if (mob:getContinentID() == xi.continent.THE_SHADOWREIGN_ERA) then
         return 0
     else
@@ -17,7 +17,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
     end
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     -- local power = 10
     -- local duration = 60
     local typeEffect = xi.effect.COUNTERSTANCE
@@ -31,4 +31,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return typeEffect
 end
 
-return mobskill_object
+return mobskillObject

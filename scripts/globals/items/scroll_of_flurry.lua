@@ -3,14 +3,14 @@
 -- Scroll of Flurry
 -- Teaches the white magic Flurry
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(845)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(845)
 end
 
-return item_object
+return itemObject

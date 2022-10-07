@@ -11,9 +11,9 @@ require("scripts/globals/mobskills")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     -- can only use if not silenced
     if (mob:getMainJob() == xi.job.BRD and mob:hasStatusEffect(xi.effect.SILENCE) == false) then
         return 0
@@ -21,7 +21,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 1
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local power = mob:getMainLvl() * 2
     local duration = 180
     local typeEffect = xi.effect.BLAZE_SPIKES
@@ -29,4 +29,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return typeEffect
 end
 
-return mobskill_object
+return mobskillObject

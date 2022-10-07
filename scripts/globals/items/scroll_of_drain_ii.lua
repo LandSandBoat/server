@@ -3,14 +3,14 @@
 -- Scroll of Drain II
 -- Teaches the black magic Drain II
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(246)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(246)
 end
 
-return item_object
+return itemObject

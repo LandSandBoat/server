@@ -3,14 +3,14 @@
 -- Scroll of Gain-MND
 -- Teaches the white magic Gain-MND
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(491)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(491)
 end
 
-return item_object
+return itemObject

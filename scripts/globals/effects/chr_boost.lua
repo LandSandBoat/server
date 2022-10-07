@@ -3,13 +3,13 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effect_object = {}
+local effectObject = {}
 
-effect_object.onEffectGain = function(target, effect)
+effectObject.onEffectGain = function(target, effect)
     target:addMod(xi.mod.CHR, effect:getPower())
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
     -- the effect loses Charism of 1 every 3 ticks depending on the source of the boost
     local boostCHR_effect_size = effect:getPower()
     if (boostCHR_effect_size > 0) then
@@ -18,11 +18,11 @@ effect_object.onEffectTick = function(target, effect)
     end
 end
 
-effect_object.onEffectLose = function(target, effect)
+effectObject.onEffectLose = function(target, effect)
     local boostCHR_effect_size = effect:getPower()
     if (boostCHR_effect_size > 0) then
         target:delMod(xi.mod.CHR, boostCHR_effect_size)
     end
 end
 
-return effect_object
+return effectObject

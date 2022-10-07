@@ -1,19 +1,19 @@
 -----------------------------------
 -- Spell: Drain
--- Drain functions only on skill level!
+-- Drain functions only on Dark Magic skill level!
 -----------------------------------
 require("scripts/globals/magic")
 require("scripts/globals/status")
 require("scripts/globals/settings")
 require("scripts/globals/msg")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     -- Calculate base drain amount and potency
     -- https://www.bg-wiki.com/ffxi/Drain
     -- https://ffxiclopedia.fandom.com/wiki/Drain
@@ -62,4 +62,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return dmg
 end
 
-return spell_object
+return spellObject

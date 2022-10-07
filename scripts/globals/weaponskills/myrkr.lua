@@ -5,9 +5,9 @@ require("scripts/globals/aftermath")
 require("scripts/globals/status")
 require("scripts/globals/weaponskills")
 -----------------------------------
-local weaponskill_object = {}
+local weaponskillObject = {}
 
-weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
+weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     -- Apply aftermath
     xi.aftermath.addStatusEffect(player, tp, xi.slot.MAIN, xi.aftermath.type.EMPYREAN)
 
@@ -15,4 +15,4 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     return 1, 0, false, ftpmp * player:getMaxMP()
 end
 
-return weaponskill_object
+return weaponskillObject

@@ -7,9 +7,9 @@ require("scripts/globals/limbus")
 require("scripts/globals/battlefield")
 require("scripts/globals/keyitems")
 -----------------------------------
-local battlefield_object = {}
+local battlefieldObject = {}
 
-battlefield_object.onBattlefieldInitialise = function(battlefield)
+battlefieldObject.onBattlefieldInitialise = function(battlefield)
     battlefield:setLocalVar("loot", 1)
     battlefield:setLocalVar("lootSpawned", 1)
     SetServerVariable("[SW_Apollyon]Time", battlefield:getTimeLimit() / 60)
@@ -28,7 +28,7 @@ battlefield_object.onBattlefieldInitialise = function(battlefield)
     xi.limbus.setupArmouryCrates(battlefield:getID())
 end
 
-battlefield_object.onBattlefieldTick = function(battlefield, tick)
+battlefieldObject.onBattlefieldTick = function(battlefield, tick)
     if battlefield:getRemainingTime() % 60 == 0 then
         SetServerVariable("[SW_Apollyon]Time", battlefield:getRemainingTime() / 60)
     end
@@ -36,10 +36,10 @@ battlefield_object.onBattlefieldTick = function(battlefield, tick)
     xi.battlefield.onBattlefieldTick(battlefield, tick)
 end
 
-battlefield_object.onBattlefieldRegister = function(player, battlefield)
+battlefieldObject.onBattlefieldRegister = function(player, battlefield)
 end
 
-battlefield_object.onBattlefieldEnter = function(player, battlefield)
+battlefieldObject.onBattlefieldEnter = function(player, battlefield)
     player:delKeyItem(xi.ki.COSMO_CLEANSE)
     player:delKeyItem(xi.ki.RED_CARD)
     player:setCharVar("Cosmo_Cleanse_TIME", os.time())
@@ -60,12 +60,12 @@ battlefield_object.onBattlefieldEnter = function(player, battlefield)
     end
 end
 
-battlefield_object.onBattlefieldDestroy = function(battlefield)
+battlefieldObject.onBattlefieldDestroy = function(battlefield)
     xi.limbus.handleDoors(battlefield, true)
     SetServerVariable("[SW_Apollyon]Time", 0)
 end
 
-battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
+battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
     player:messageSpecial(ID.text.HUM + 1)
 
     if leavecode == xi.battlefield.leaveCode.WON then
@@ -76,4 +76,4 @@ battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
     end
 end
 
-return battlefield_object
+return battlefieldObject

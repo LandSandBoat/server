@@ -179,7 +179,7 @@ namespace moduleutils
                 if (lua["cmdprops"].valid() && lua["onTrigger"].valid())
                 {
                     auto commandName = path.filename().replace_extension("").generic_string();
-                    ShowDebug(fmt::format("Registering module command: !{}", commandName));
+                    DebugModules(fmt::format("Registering module command: !{}", commandName));
                     CCommandHandler::registerCommand(commandName, relPath);
                     continue;
                 }
@@ -195,7 +195,7 @@ namespace moduleutils
                         std::string name = override["name"];
                         sol::object func = override["func"];
 
-                        ShowDebug(fmt::format("Preparing override: {}", name));
+                        DebugModules(fmt::format("Preparing override: {}", name));
 
                         auto parts = split(name, ".");
                         overrides.emplace_back(Override{ filename, name, parts, func, false });
@@ -231,7 +231,7 @@ namespace moduleutils
 
                     if (part == lastTable)
                     {
-                        ShowDebug(fmt::format("Applying override: {}", override.overrideName));
+                        DebugModules(fmt::format("Applying override: {}", override.overrideName));
 
                         lua["applyOverride"](table, lastElem, override.func, override.overrideName, override.filename);
 

@@ -3,9 +3,9 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effect_object = {}
+local effectObject = {}
 
-effect_object.onEffectGain = function(target, effect)
+effectObject.onEffectGain = function(target, effect)
     target:addMod(xi.mod.UDMGPHYS, -effect:getPower())
     target:addMod(xi.mod.UDMGBREATH, -effect:getPower())
     target:addMod(xi.mod.UDMGMAGIC, -effect:getPower())
@@ -22,7 +22,7 @@ effect_object.onEffectGain = function(target, effect)
     target:addMod(xi.mod.CHARMRES, effect:getPower())
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
     if (effect:getTickCount() > ((effect:getDuration() / effect:getTick())/2)) then
         if (effect:getPower() > 2) then
             effect:setPower(effect:getPower() - 200)
@@ -44,7 +44,7 @@ effect_object.onEffectTick = function(target, effect)
     end
 end
 
-effect_object.onEffectLose = function(target, effect)
+effectObject.onEffectLose = function(target, effect)
     target:delMod(xi.mod.UDMGPHYS, -effect:getPower())
     target:delMod(xi.mod.UDMGBREATH, -effect:getPower())
     target:delMod(xi.mod.UDMGMAGIC, -effect:getSubPower())
@@ -61,4 +61,4 @@ effect_object.onEffectLose = function(target, effect)
     target:delMod(xi.mod.CHARMRES, effect:getPower())
 end
 
-return effect_object
+return effectObject

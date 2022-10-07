@@ -4,13 +4,13 @@
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     -- TODO: Get correct animation from retail captures
     local effect     = xi.effect.ENDARK
     local magicskill = target:getSkillLevel(xi.skill.DARK_MAGIC)
@@ -26,4 +26,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return effect
 end
 
-return spell_object
+return spellObject

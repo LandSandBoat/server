@@ -3,9 +3,9 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effect_object = {}
+local effectObject = {}
 
-effect_object.onEffectGain = function(target, effect)
+effectObject.onEffectGain = function(target, effect)
     local enmityBonus = 100
 
     if target:getMainJob() ~= xi.job.PLD then
@@ -17,7 +17,7 @@ effect_object.onEffectGain = function(target, effect)
     target:addMod(xi.mod.ENMITY_LOSS_REDUCTION, effect:getSubPower())
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
    local power = effect:getPower()
    local decayby = 0
 
@@ -36,7 +36,7 @@ effect_object.onEffectTick = function(target, effect)
    end
 end
 
-effect_object.onEffectLose = function(target, effect)
+effectObject.onEffectLose = function(target, effect)
     local enmityBonus = 100
 
     if target:getMainJob() ~= xi.job.PLD then
@@ -48,4 +48,4 @@ effect_object.onEffectLose = function(target, effect)
     target:delMod(xi.mod.ENMITY_LOSS_REDUCTION, effect:getSubPower())
 end
 
-return effect_object
+return effectObject

@@ -121,10 +121,12 @@ static void sig_proc(int sn)
         case SIGINT:
         case SIGTERM:
             gRunFlag = false;
+            gConsoleService->stop();
             break;
         case SIGABRT:
         case SIGSEGV:
         case SIGFPE:
+            gConsoleService->stop();
             dump_backtrace();
             do_abort();
 #ifdef _WIN32
@@ -238,8 +240,7 @@ int main(int argc, char** argv)
     // Re-enable Quick Edit Mode upon Exiting if it is still disabled
     SetConsoleMode(hInput, prev_mode);
 #endif // _WIN32
-
-    gConsoleService = nullptr;
+    gConsoleService->stop();
 
     do_final(EXIT_SUCCESS);
 }

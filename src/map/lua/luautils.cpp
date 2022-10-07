@@ -759,6 +759,11 @@ namespace luautils
 
     void PopulateIDLookups(std::optional<uint16> maybeZoneId)
     {
+        TracyZoneScoped;
+
+        // Make sure this has been run at least once!
+        auto result = lua.safe_script_file("scripts/globals/zone.lua");
+
         // clang-format off
         auto handleZone = [&](CZone* PZone)
         {
@@ -776,45 +781,46 @@ namespace luautils
                         {
                             if (innerKey.get_type() == sol::type::string && innerValue.get_type() == sol::type::number)
                             {
-                                auto name = innerKey.as<std::string>();
+                                auto name = to_upper(innerKey.as<std::string>());
                                 auto num  = innerValue.as<int32>();
 
+                                // -1 == DYNAMIC_LOOKUP
                                 if (num == -1)
                                 {
                                     bool found = false;
                                     if (outerName == "mob")
                                     {
-                                        PZone->ForEachMob([&](CMobEntity* PMob)
+                                        // TODO: Execute this as a single query per-zone and pull out the desired results.
+                                        auto query = fmt::sprintf("SELECT mobid FROM mob_spawn_points "
+                                                            "WHERE ((mobid >> 12) & 0xFFF) = %i AND "
+                                                            "UPPER(REPLACE(mobname, '-', '_')) = '%s' "
+                                                            "LIMIT 1;", PZone->GetID(), name.c_str());
+                                        DebugIDLookup(query.c_str());
+                                        auto ret = sql->Query(query.c_str());
+                                        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
                                         {
-                                            if (!found)
-                                            {
-                                                auto keyName = to_upper(std::string((const char*)PMob->GetName()));
-                                                if (keyName == name)
-                                                {
-                                                    lua["zones"][PZone->GetID()][outerName][keyName] = PMob->id;
-                                                    found = true;
-                                                    DebugIDLookup(fmt::format("New value for {}.ID.{}.{} = {}",
-                                                        zoneName, outerName, name, lua["zones"][PZone->GetID()][outerName][keyName].get<uint32>()));
-                                                }
-                                            }
-                                        });
+                                            lua["zones"][PZone->GetID()][outerName][name] = sql->GetUIntData(0);
+                                            found = true;
+                                            DebugIDLookup(fmt::format("New value for {}.ID.{}.{} = {}",
+                                                zoneName, outerName, name, lua["zones"][PZone->GetID()][outerName][name].get<uint32>()));
+                                        }
                                     }
                                     else if (outerName == "npc")
                                     {
-                                        PZone->ForEachNpc([&](CNpcEntity* PNpc)
+                                        // TODO: Execute this as a single query per-zone and pull out the desired results.
+                                        auto query = fmt::sprintf("SELECT npcid FROM npc_list "
+                                                            "WHERE ((npcid >> 12) & 0xFFF) = %i AND "
+                                                            "UPPER(REPLACE(CAST(`name` as VARCHAR(64)), '-', '_')) = '%s' "
+                                                            "LIMIT 1;", PZone->GetID(), name.c_str());
+                                        DebugIDLookup(query.c_str());
+                                        auto ret = sql->Query(query.c_str());
+                                        if (ret != SQL_ERROR && sql->NumRows() != 0 && sql->NextRow() == SQL_SUCCESS)
                                         {
-                                            if (!found)
-                                            {
-                                                auto keyName = to_upper(std::string((const char*)PNpc->GetName()));
-                                                if (keyName == name)
-                                                {
-                                                    lua["zones"][PZone->GetID()][outerName][keyName] = PNpc->id;
-                                                    found = true;
-                                                    DebugIDLookup(fmt::format("New value for {}.ID.{}.{} = {}",
-                                                        zoneName, outerName, name, lua["zones"][PZone->GetID()][outerName][keyName].get<uint32>()));
-                                                }
-                                            }
-                                        });
+                                            lua["zones"][PZone->GetID()][outerName][name] = sql->GetUIntData(0);
+                                            found = true;
+                                            DebugIDLookup(fmt::format("New value for {}.ID.{}.{} = {}",
+                                                zoneName, outerName, name, lua["zones"][PZone->GetID()][outerName][name].get<uint32>()));
+                                        }
                                     }
 
                                     if (!found)
@@ -826,6 +832,8 @@ namespace luautils
                         }
                     }
                 }
+                // Re-publish to package.loaded. This is the same as loading the contents of a script with require("name").
+                lua["package"]["loaded"][fmt::format("scripts/zones/{}/IDs", zoneName)] = lua["zones"][PZone->GetID()];
             }
         };
 
@@ -833,7 +841,10 @@ namespace luautils
         {
             zoneutils::ForEachZone([&](CZone* PZone)
             {
-                handleZone(PZone);
+                if (PZone->GetIP() != 0)
+                {
+                    handleZone(PZone);
+                }
             });
         }
         else
@@ -3226,6 +3237,7 @@ namespace luautils
         CCharEntity* PChar = dynamic_cast<CCharEntity*>(PKiller);
 
         auto optParams = lua.create_table();
+
         optParams["isKiller"]          = false;
         optParams["noKiller"]          = true;
         optParams["isWeaponSkillKill"] = false;

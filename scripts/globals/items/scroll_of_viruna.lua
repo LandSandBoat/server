@@ -3,14 +3,14 @@
 -- Scroll of Viruna
 -- Teaches the white magic Viruna
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(19)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(19)
 end
 
-return item_object
+return itemObject

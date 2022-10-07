@@ -3,9 +3,9 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effect_object = {}
+local effectObject = {}
 
-effect_object.onEffectGain = function(target, effect)
+effectObject.onEffectGain = function(target, effect)
     -- Retail sends a music change packet (packet ID 0x5F) in both cases.
 
     -- TODO: This isn't quite right. The IDs we use for mounts vs what we use for power etc.
@@ -19,11 +19,11 @@ effect_object.onEffectGain = function(target, effect)
     end
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
 end
 
-effect_object.onEffectLose = function(target, effect)
+effectObject.onEffectLose = function(target, effect)
     target:setAnimation(xi.anim.NONE)
 end
 
-return effect_object
+return effectObject
