@@ -793,6 +793,7 @@ xi.items =
     CURSED_CLOGS_M1                 = 2458,
     RUSTY_MEDAL                     = 2461,
     FRAYED_ARROW                    = 2462,
+    TUFT_OF_COLORFUL_HAIR           = 2463,
     RUBBER_CAP                      = 2465,
     RUBBER_HARNESS                  = 2466,
     RUBBER_GLOVES                   = 2467,
