@@ -8,9 +8,9 @@ require("scripts/globals/world")
 local entity = {}
 
 entity.onMobRoam = function(mob)
-    local totd = VanadielTOTD()
+    local hour = VanadielHour()
 
-    if totd ~= xi.time.NIGHT and totd ~= xi.time.MIDNIGHT then
+    if hour >= 4 and hour < 20 then -- Despawn Xolotl if its day
         DespawnMob(mob:getID())
     end
 end
