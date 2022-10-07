@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.THE_COLOSSEUM] =
@@ -22,9 +21,11 @@ zones[xi.zone.THE_COLOSSEUM] =
         I_CAN_GIVE_YOU                = 11510, -- Let me see... I can give you <number> [jetton/jettons] for this amount.
         EXCEED_THE_LIMIT_OF_JETTONS   = 11512, -- By exchanging for this amount, you will exceed the limit of jettons that you can carry.
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

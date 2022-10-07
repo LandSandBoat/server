@@ -1,9 +1,8 @@
 -----------------------------------
--- Area: Zhayolm_Remnants
+-- Area: Zhayolm_Remnants (73)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.ZHAYOLM_REMNANTS] =
@@ -20,9 +19,11 @@ zones[xi.zone.ZHAYOLM_REMNANTS] =
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
         CELL_OFFSET                   = 7220, -- Main Weapon/Sub-Weapon restriction removed.
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

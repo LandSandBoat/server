@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.THRONE_ROOM_S] =
@@ -24,9 +23,11 @@ zones[xi.zone.THRONE_ROOM_S] =
         GATHERED_DAWNDROPS_LIGHT      = 8227, -- The gathered dawndrops unleash a brilliant light, melding together to form <keyitem>!
         RETRACED_ALL_JUNCTIONS        = 8228, -- You have retraced all junctions of eventualities. Hasten back to where Cait Sith and Lilisette await.
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

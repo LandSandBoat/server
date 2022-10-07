@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.PHANAUET_CHANNEL] =
@@ -22,9 +21,11 @@ zones[xi.zone.PHANAUET_CHANNEL] =
         FISHING_MESSAGE_OFFSET        = 7229, -- You can't fish here.
         RICHE_DAVOI_WATERFALL         = 7417, -- <item>...Davoi...waterfall...
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

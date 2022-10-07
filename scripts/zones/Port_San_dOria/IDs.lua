@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.PORT_SAN_DORIA] =
@@ -81,9 +80,11 @@ zones[xi.zone.PORT_SAN_DORIA] =
         OBTAINED_NUM_KEYITEMS          = 11540, -- Obtained key item: <number> <keyitem>!
         NOT_ACQUAINTED                 = 11542, -- I'm sorry, but I don't believe we're acquainted. Please leave me be.
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

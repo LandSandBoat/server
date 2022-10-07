@@ -4,14 +4,6 @@
 require("modules/module_utils")
 require("scripts/globals/conquest")
 require("scripts/globals/zone")
-
------------------------------------
--- ID Requires
------------------------------------
-local dragonsAeryID   = require("scripts/zones/Dragons_Aery/IDs")
-local valleySorrowsID = require("scripts/zones/Valley_of_Sorrows/IDs")
-local behemothDomID   = require("scripts/zones/Behemoths_Dominion/IDs")
-
 -----------------------------------
 -- Module definition
 -----------------------------------
@@ -26,8 +18,9 @@ local hnmSystem = Module:new("era_HNM_System")
 ----------------------------------------------------------------------------------------------------
 
 hnmSystem:addOverride("xi.zones.Dragons_Aery.Zone.onInitialize", function(zone)
-    local hnmPopTime   = GetServerVariable("[HNM]Fafnir")   -- Time the NM will spawn at.
-    local hnmKillCount = GetServerVariable("[HNM]Fafnir_C") -- Number of times NQ King has been slain in a row.
+    local dragonsAeryID = zones[xi.zone.DRAGONS_AERY]
+    local hnmPopTime    = GetServerVariable("[HNM]Fafnir")   -- Time the NM will spawn at.
+    local hnmKillCount  = GetServerVariable("[HNM]Fafnir_C") -- Number of times NQ King has been slain in a row.
 
     -- First-time setup.
     if hnmPopTime == 0 then
@@ -64,6 +57,7 @@ hnmSystem:addOverride("xi.zones.Dragons_Aery.Zone.onInitialize", function(zone)
 end)
 
 hnmSystem:addOverride("xi.zones.Dragons_Aery.mobs.Fafnir.onMobDespawn", function(mob)
+    local dragonsAeryID = zones[xi.zone.DRAGONS_AERY]
     -- Server Variable work.
     local randomPopTime = 75600 + math.random(0, 6) * 1800
     local hnmKillCount  = GetServerVariable("[HNM]Fafnir_C") + 1
@@ -88,6 +82,7 @@ hnmSystem:addOverride("xi.zones.Dragons_Aery.mobs.Fafnir.onMobDespawn", function
 end)
 
 hnmSystem:addOverride("xi.zones.Dragons_Aery.mobs.Nidhogg.onMobDespawn", function(mob)
+    local dragonsAeryID = zones[xi.zone.DRAGONS_AERY]
     -- Server Variable work.
     local randomPopTime = 75600 + math.random(0, 6) * 1800
 
@@ -106,8 +101,9 @@ end)
 ----------------------------------------------------------------------------------------------------
 
 hnmSystem:addOverride("xi.zones.Valley_of_Sorrows.Zone.onInitialize", function(zone)
-    local hnmPopTime   = GetServerVariable("[HNM]Adamantoise")   -- Time the NM will spawn at.
-    local hnmKillCount = GetServerVariable("[HNM]Adamantoise_C") -- Number of times NQ King has been slain in a row.
+    local valleySorrowsID = zones[xi.zone.VALLEY_OF_SORROWS]
+    local hnmPopTime      = GetServerVariable("[HNM]Adamantoise")   -- Time the NM will spawn at.
+    local hnmKillCount    = GetServerVariable("[HNM]Adamantoise_C") -- Number of times NQ King has been slain in a row.
 
     -- First-time setup.
     if hnmPopTime == 0 then
@@ -144,6 +140,7 @@ hnmSystem:addOverride("xi.zones.Valley_of_Sorrows.Zone.onInitialize", function(z
 end)
 
 hnmSystem:addOverride("xi.zones.Valley_of_Sorrows.mobs.Adamantoise.onMobDespawn", function(mob)
+    local valleySorrowsID = zones[xi.zone.VALLEY_OF_SORROWS]
     -- Server Variable work.
     local randomPopTime = 75600 + math.random(0, 6) * 1800
     local hnmKillCount  = GetServerVariable("[HNM]Adamantoise_C") + 1
@@ -168,6 +165,7 @@ hnmSystem:addOverride("xi.zones.Valley_of_Sorrows.mobs.Adamantoise.onMobDespawn"
 end)
 
 hnmSystem:addOverride("xi.zones.Valley_of_Sorrows.mobs.Aspidochelone.onMobDespawn", function(mob)
+    local valleySorrowsID = zones[xi.zone.VALLEY_OF_SORROWS]
     -- Server Variable work.
     local randomPopTime = 75600 + math.random(0, 6) * 1800
 
@@ -186,8 +184,9 @@ end)
 ----------------------------------------------------------------------------------------------------
 
 hnmSystem:addOverride("xi.zones.Behemoths_Dominion.Zone.onInitialize", function(zone)
-    local hnmPopTime   = GetServerVariable("[HNM]Behemoth")   -- Time the NM will spawn at.
-    local hnmKillCount = GetServerVariable("[HNM]Behemoth_C") -- Number of times NQ King has been slain in a row.
+    local behemothDomID = zones[xi.zone.BEHEMOTHS_DOMINION]
+    local hnmPopTime    = GetServerVariable("[HNM]Behemoth")   -- Time the NM will spawn at.
+    local hnmKillCount  = GetServerVariable("[HNM]Behemoth_C") -- Number of times NQ King has been slain in a row.
 
     -- First-time setup.
     if hnmPopTime == 0 then
@@ -224,6 +223,7 @@ hnmSystem:addOverride("xi.zones.Behemoths_Dominion.Zone.onInitialize", function(
 end)
 
 hnmSystem:addOverride("xi.zones.Behemoths_Dominion.mobs.Behemoth.onMobDespawn", function(mob)
+    local behemothDomID = zones[xi.zone.BEHEMOTHS_DOMINION]
     -- Server Variable work.
     local randomPopTime = 75600 + math.random(0, 6) * 1800
     local hnmKillCount  = GetServerVariable("[HNM]Behemoth_C") + 1
@@ -248,6 +248,7 @@ hnmSystem:addOverride("xi.zones.Behemoths_Dominion.mobs.Behemoth.onMobDespawn", 
 end)
 
 hnmSystem:addOverride("xi.zones.Behemoths_Dominion.mobs.King_Behemoth.onMobDespawn", function(mob)
+    local behemothDomID = zones[xi.zone.BEHEMOTHS_DOMINION]
     -- Server Variable work.
     local randomPopTime = 75600 + math.random(0, 6) * 1800
 

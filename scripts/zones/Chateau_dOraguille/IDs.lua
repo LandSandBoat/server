@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.CHATEAU_DORAGUILLE] =
@@ -38,9 +37,11 @@ zones[xi.zone.CHATEAU_DORAGUILLE] =
         SAVAGE_BLADE_LEARNED          = 7951, -- You have learned the weapon skill Savage Blade!
         CELEBRATORY_GOODS             = 8463, -- An assortment of celebratory goods is available for purchase.
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

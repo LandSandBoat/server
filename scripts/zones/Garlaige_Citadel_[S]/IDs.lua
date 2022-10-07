@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.GARLAIGE_CITADEL_S] =
@@ -21,9 +20,11 @@ zones[xi.zone.GARLAIGE_CITADEL_S] =
         LYCOPODIUM_ENTRANCED          = 7067, -- The lycopodium is entranced by a sparkling light...
         COMMON_SENSE_SURVIVAL         = 8890, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

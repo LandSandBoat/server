@@ -4,7 +4,6 @@
 require("scripts/globals/zone")
 require("scripts/globals/keyitems")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.EAST_RONFAURE] =

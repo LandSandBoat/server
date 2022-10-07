@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.DRAGONS_AERY] =
@@ -25,11 +24,13 @@ zones[xi.zone.DRAGONS_AERY] =
         CONQUEST_BASE                 = 7162, -- Tallying conquest results...
         COMMON_SENSE_SURVIVAL         = 7506, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         FAFNIR  = DYNAMIC_LOOKUP,
         NIDHOGG = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
         QM_FAFNIR = DYNAMIC_LOOKUP,

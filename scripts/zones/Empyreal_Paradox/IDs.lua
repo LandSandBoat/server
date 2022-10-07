@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.EMPYREAL_PARADOX] =
@@ -26,10 +25,12 @@ zones[xi.zone.EMPYREAL_PARADOX] =
         PROMATHIA_TEXT                = 7712, -- Give thyself to the apathy within...
         QM_TEXT                       = 7810, -- The air before you appears warped and distorted...
     },
+
     mob =
     {
         PROMATHIA_OFFSET = 16924673,
     },
+
     npc =
     {
     },

@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.TAVNAZIAN_SAFEHOLD] =
@@ -45,9 +44,11 @@ zones[xi.zone.TAVNAZIAN_SAFEHOLD] =
         RETRIEVE_DIALOG_ID             = 12264, -- You retrieve <item> from the porter moogle's care.
         COMMON_SENSE_SURVIVAL          = 13338, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
     },
+
     npc =
     {
         QM_IN_SEARCH_OF_TRUTH_BASE = 16883860,

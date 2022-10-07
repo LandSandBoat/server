@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.ALTAR_ROOM] =
@@ -21,6 +20,7 @@ zones[xi.zone.ALTAR_ROOM] =
         THE_MAGICITE_GLOWS_OMINOUSLY  = 7113, -- The magicite glows ominously.
         CONQUEST_BASE                 = 7114, -- Tallying conquest results...
     },
+
     mob =
     {
         YAGUDO_AVATAR                = DYNAMIC_LOOKUP,
@@ -33,6 +33,7 @@ zones[xi.zone.ALTAR_ROOM] =
         KEE_TAW_THE_NIGHTINGALE      = DYNAMIC_LOOKUP,
         GOO_PAKE_THE_BLOODHOUND      = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
         STONE_LID = DYNAMIC_LOOKUP,

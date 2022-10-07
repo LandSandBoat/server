@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.FEIYIN] =
@@ -45,6 +44,7 @@ zones[xi.zone.FEIYIN] =
         HOMEPOINT_SET                      = 10703, -- Home point set!
         UNITY_WANTED_BATTLE_INTERACT       = 10761, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
+
     mob =
     {
         MIND_HOARDER_PH =

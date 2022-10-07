@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.CASTLE_ZVAHL_KEEP_S] =
@@ -20,9 +19,11 @@ zones[xi.zone.CASTLE_ZVAHL_KEEP_S] =
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
         HOMEPOINT_SET                 = 7873, -- Home point set!
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

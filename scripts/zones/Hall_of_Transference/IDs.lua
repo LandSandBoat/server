@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.HALL_OF_TRANSFERENCE] =
@@ -22,9 +21,11 @@ zones[xi.zone.HALL_OF_TRANSFERENCE] =
         DOOR_FIRMLY_SHUT              = 7256, -- The door is firmly shut.
         YOU_MUST_MOVE_CLOSER          = 7257, -- You must move closer to inspect the device.
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

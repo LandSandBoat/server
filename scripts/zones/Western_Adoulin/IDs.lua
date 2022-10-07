@@ -56,9 +56,11 @@ zones[xi.zone.WESTERN_ADOULIN] =
         YOU_HAVE_JOINED_UNITY         = 13006, -- ou have joined [Pieuje's/Ayame's/Invincible Shield's/Apururu's/Maat's/Aldo's/Jakoh Wahcondalo's/Naja Salaheem's/Flaviria's/Yoran-Oran's/Sylvie's] Unity!
         HAVE_ALREADY_CHANGED_UNITY    = 13082, -- ou have already changed Unities. Please wait until the next tabulation period.
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

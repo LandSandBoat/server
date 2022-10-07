@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.FORT_GHELSBA] =
@@ -23,6 +22,7 @@ zones[xi.zone.FORT_GHELSBA] =
         CHEST_UNLOCKED                = 7366, -- You unlock the chest!
         COMMON_SENSE_SURVIVAL         = 7374, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         HUNDREDSCAR_HAJWAJ_PH =

@@ -1,9 +1,8 @@
 -----------------------------------
--- Area: Yhoator_Jungle
+-- Area: Yhoator_Jungle (124)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.YHOATOR_JUNGLE] =
@@ -47,6 +46,7 @@ zones[xi.zone.YHOATOR_JUNGLE] =
         REGIME_REGISTERED             = 10019, -- New training regime registered!
         COMMON_SENSE_SURVIVAL         = 11138, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         HOAR_KNUCKLED_RIMBERRY_PH =
@@ -54,19 +54,21 @@ zones[xi.zone.YHOATOR_JUNGLE] =
             [17285392] = 17285394,
             [17285393] = 17285394,
         },
-        WOODLAND_SAGE          = 17285220,
-        POWDERER_PENNY         = 17285248,
-        BISQUE_HEELED_SUNBERRY = 17285460,
-        BRIGHT_HANDED_KUNBERRY = 17285526,
-        KAPPA_AKUSO            = 17285544,
-        KAPPA_BONZE            = 17285545,
-        KAPPA_BIWA             = 17285546,
-        EDACIOUS_OPO_OPO       = 17285571,
+
+        WOODLAND_SAGE          = DYNAMIC_LOOKUP,
+        POWDERER_PENNY         = DYNAMIC_LOOKUP,
+        BISQUE_HEELED_SUNBERRY = DYNAMIC_LOOKUP,
+        BRIGHT_HANDED_KUNBERRY = DYNAMIC_LOOKUP,
+        KAPPA_AKUSO            = DYNAMIC_LOOKUP,
+        KAPPA_BONZE            = DYNAMIC_LOOKUP,
+        KAPPA_BIWA             = DYNAMIC_LOOKUP,
+        EDACIOUS_OPO_OPO       = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
         OVERSEER_BASE     = 17285650, -- Ilieumort_RK in npc_list
-        PEDDLESTOX        = 17285686,
+        PEDDLESTOX        = DYNAMIC_LOOKUP,
         BEASTMEN_TREASURE =
         {
             17285696, -- qm4
@@ -78,12 +80,14 @@ zones[xi.zone.YHOATOR_JUNGLE] =
             17285694, -- qm10
             17285695, -- qm11
         },
+
         HARVESTING =
         {
             17285681,
             17285682,
             17285683,
         },
+
         LOGGING =
         {
             17285675,

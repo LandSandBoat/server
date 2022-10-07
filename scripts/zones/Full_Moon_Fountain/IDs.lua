@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.FULL_MOON_FOUNTAIN] =
@@ -26,10 +25,12 @@ zones[xi.zone.FULL_MOON_FOUNTAIN] =
         YOU_SHOULD_BE_THANKFUL        = 7764, -- You should be thankful. I'll give you a shortaru trip back to the hell you came from!
         DONT_GIVE_UP                  = 7765, -- Don't give up, adventurer! You are Windurst's guiding star, our beacon of hope!
     },
+
     mob =
     {
         MOON_READING_OFFSET = 17473540,
     },
+
     npc =
     {
     },

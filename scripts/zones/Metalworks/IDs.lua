@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.METALWORKS] =
@@ -55,9 +54,11 @@ zones[xi.zone.METALWORKS] =
         CELEBRATORY_GOODS             = 10841, -- An assortment of celebratory goods is available for purchase.
         HOMEPOINT_SET                 = 11029, -- Home point set!
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

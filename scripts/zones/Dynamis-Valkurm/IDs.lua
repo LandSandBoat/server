@@ -5,7 +5,6 @@ require("scripts/globals/keyitems")
 require("scripts/globals/dynamis")
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.DYNAMIS_VALKURM] =
@@ -29,6 +28,7 @@ zones[xi.zone.DYNAMIS_VALKURM] =
         DYNAMIS_SUB_UNLOCKED          = 7335, -- Memories of skills long forgotten come flooding back to you...
         OMINOUS_PRESENCE              = 7342, -- You feel an ominous presence, as if something might happen if you possessed <item>.
     },
+
     mob =
     {
         TIME_EXTENSION =

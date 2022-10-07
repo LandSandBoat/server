@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.MAQUETTE_ABDHALJS_LEGION_B] =
@@ -15,10 +14,12 @@ zones[xi.zone.MAQUETTE_ABDHALJS_LEGION_B] =
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
     },
+
     mob =
     {
         17952867,
     },
+
     npc =
     {
     },

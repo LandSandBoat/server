@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.MONARCH_LINN] =
@@ -23,9 +22,11 @@ zones[xi.zone.MONARCH_LINN] =
         THE_PARTY_WILL_BE_REMOVED     = 7458, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
         CONQUEST_BASE                 = 7473, -- Tallying conquest results...
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

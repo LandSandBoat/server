@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.LEAFALLIA] =
@@ -24,9 +23,11 @@ zones[xi.zone.LEAFALLIA] =
         CONQUEST_BASE                 = 7196, -- Tallying conquest results...
         RINGS_TOO_NUMEROUS            = 7406, -- The rings on this stump are too numerous to count.
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

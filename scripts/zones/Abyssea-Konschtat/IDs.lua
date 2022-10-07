@@ -1,10 +1,8 @@
 -----------------------------------
 -- Area: Abyssea-Konschtat
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.ABYSSEA_KONSCHTAT] =
@@ -69,6 +67,7 @@ zones[xi.zone.ABYSSEA_KONSCHTAT] =
         INFO_KI                       = 7584, -- Your keen senses tell you that something may happen if only you had [this item/these items].
         USE_KI                        = 7587, -- Use the [key item/key items]? Yes. No.
     },
+
     mob =
     {
         GUIMAUVE                = 16838912,
@@ -94,6 +93,7 @@ zones[xi.zone.ABYSSEA_KONSCHTAT] =
         KUKULKAN_3              = 16839073,
         BLOODEYE_VILEBERRY_3    = 16839074,
     },
+
     npc =
     {
     },

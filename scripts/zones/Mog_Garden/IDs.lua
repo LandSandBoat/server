@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 -- TODO:
@@ -51,9 +50,11 @@ zones[xi.zone.MOG_GARDEN] =
         MOGLOCKER_MESSAGE_OFFSET      = 7523, -- Your particular paid period of Mog Locker patronage has been extended until the following time, kupo! Earth Time: #/#/# at #:#:#.
         RETRIEVE_DIALOG_ID            = 8574, -- You retrieve <item> from the porter moogle's care.
     },
+
     mob =
     {
     },
+
     npc =
     {
         GREEN_THUMB_MOOGLE = DYNAMIC_LOOKUP,

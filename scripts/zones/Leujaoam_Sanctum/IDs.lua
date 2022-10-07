@@ -4,7 +4,6 @@
 require("scripts/globals/assault")
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.LEUJAOAM_SANCTUM] =
@@ -44,6 +43,7 @@ zones[xi.zone.LEUJAOAM_SANCTUM] =
                 17059849, 17059850, 17059851, 17059852, 17059853, 17059854, 17059855,
             },
         },
+
         [xi.assault.mission.ORICHALCUM_SURVEY] =
         {
             MOBS_START =

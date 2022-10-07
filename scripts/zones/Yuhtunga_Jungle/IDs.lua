@@ -1,9 +1,8 @@
 -----------------------------------
--- Area: Yuhtunga_Jungle
+-- Area: Yuhtunga_Jungle (123)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.YUHTUNGA_JUNGLE] =
@@ -56,28 +55,32 @@ zones[xi.zone.YUHTUNGA_JUNGLE] =
         REGIME_REGISTERED             = 10068, -- New training regime registered!
         COMMON_SENSE_SURVIVAL         = 12062, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         MISCHIEVOUS_MICHOLAS_PH =
         {
             [17281148] = 17281149, -- -265.616 -0.5 -24.389
         },
-        TIPHA                   = 17281030,
-        CARTHI                  = 17281031,
-        ROSE_GARDEN_PH          = 17281356,
-        ROSE_GARDEN             = 17281357,
-        VOLUPTUOUS_VILMA        = 17281358,
-        NASUS_OFFSET            = 17281491,
-        SIREN                   = 17281547,
+
+        TIPHA            = DYNAMIC_LOOKUP,
+        CARTHI           = DYNAMIC_LOOKUP,
+        ROSE_GARDEN_PH   = 17281356,
+        ROSE_GARDEN      = DYNAMIC_LOOKUP,
+        VOLUPTUOUS_VILMA = DYNAMIC_LOOKUP,
+        NASUS_OFFSET     = 17281491,
+        SIREN            = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
         BLUE_RAFFLESIA_OFFSET = 17281586,
         TUNING_OUT_QM         = 17281590, -- qm2 in npc_list
         OVERSEER_BASE         = 17281600, -- Zorchorevi_RK in npc_list
-        CERMET_HEADSTONE      = 17281625,
-        PEDDLESTOX            = 17281640,
-        BEASTMEN_TREASURE     =
+        CERMET_HEADSTONE      = DYNAMIC_LOOKUP,
+        PEDDLESTOX            = DYNAMIC_LOOKUP,
+
+        BEASTMEN_TREASURE =
         {
             17281643, -- qm3
             17281644, -- qm4
@@ -88,12 +91,14 @@ zones[xi.zone.YUHTUNGA_JUNGLE] =
             17281649, -- qm9
             17281650, -- qm10
         },
+
         HARVESTING =
         {
             17281636,
             17281637,
             17281638,
         },
+
         LOGGING =
         {
             17281630,

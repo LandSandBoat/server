@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.RALA_WATERWAYS] =
@@ -25,9 +24,11 @@ zones[xi.zone.RALA_WATERWAYS] =
         A_QUICK_GLANCE_REVEALS        = 8698, -- A quick glance reveals spoiled water trickling from upstream, likely caused by effluvium from the recent destruction.
         THREE_BLOOD_SIGILS_PULSE      = 8922, -- The three blood sigils begin to pulse a violent crimson!
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

@@ -5,7 +5,6 @@ require("scripts/globals/keyitems")
 require("scripts/globals/dynamis")
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.DYNAMIS_WINDURST] =
@@ -29,6 +28,7 @@ zones[xi.zone.DYNAMIS_WINDURST] =
         DYNAMIS_TIME_EXPIRED          = 7330, -- The sands of the hourglass have emptied...
         OMINOUS_PRESENCE              = 7342, -- You feel an ominous presence, as if something might happen if you possessed <item>.
     },
+
     mob =
     {
         TIME_EXTENSION =

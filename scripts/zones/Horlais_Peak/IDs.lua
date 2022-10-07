@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.HORLAIS_PEAK] =
@@ -40,6 +39,7 @@ zones[xi.zone.HORLAIS_PEAK] =
         YIKEY_WIKEYS                  = 7967, -- Yikey-wikeys! Get that thing away from meee!
         WHATS_THE_MATTARU             = 7968, -- <Pant, wheeze>... What's the mattaru, <name>? Too much of a pansy-wansy to fight fair?
     },
+
     mob =
     {
         ATORI_TUTORI_QM =
@@ -49,6 +49,7 @@ zones[xi.zone.HORLAIS_PEAK] =
             17346791,
         },
     },
+
     npc =
     {
     },

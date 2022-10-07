@@ -1,5 +1,5 @@
 -----------------------------------
--- Zone: Zhayolm_Remnants
+-- Zone: Zhayolm_Remnants (73)
 -----------------------------------
 local ID = require('scripts/zones/Zhayolm_Remnants/IDs')
 -----------------------------------

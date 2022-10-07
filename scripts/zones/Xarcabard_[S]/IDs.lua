@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.XARCABARD_S] =
@@ -40,12 +39,14 @@ zones[xi.zone.XARCABARD_S] =
         RETRACED_ALL_JUNCTIONS        = 8755, -- You have retraced all junctions of eventualities. Hasten back to where Cait Sith and Lilisette await.
         HOMEPOINT_SET                 = 8759, -- Home point set!
     },
+
     mob =
     {
         GRAOULLY_PH =
         {
             [17338384] = 17338386,
         },
+
         VOIDWALKER =
         {
             [xi.keyItem.CLEAR_ABYSSITE] =
@@ -74,8 +75,8 @@ zones[xi.zone.XARCABARD_S] =
             [xi.keyItem.BLACK_ABYSSITE] =
             {
                 17338596, -- Yilbegan
-            }
-        }
+            },
+        },
     },
 
     npc =

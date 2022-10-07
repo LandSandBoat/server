@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.LABYRINTH_OF_ONZOZO] =
@@ -37,7 +36,7 @@ zones[xi.zone.LABYRINTH_OF_ONZOZO] =
 
     mob =
     {
-        LORD_OF_ONZOZO_PH       =
+        LORD_OF_ONZOZO_PH =
         {
             [17649730] = 17649731, -- -39.356 14.265 -60.406
         },

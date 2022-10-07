@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.QUBIA_ARENA] =
@@ -42,16 +41,19 @@ zones[xi.zone.QUBIA_ARENA] =
         YIKEY_WIKEYS                  = 8020, -- Yikey-wikeys! Get that thing away from meee!
         WHATS_THE_MATTARU             = 8021, -- <Pant, wheeze>... What's the mattaru, <name>? Too much of a pansy-wansy to fight fair?
     },
+
     mob =
     {
-        HEIR_TO_THE_LIGHT_OFFSET   = 17621014,
-        ATORI_TUTORI_QM            =
+        HEIR_TO_THE_LIGHT_OFFSET = 17621014,
+
+        ATORI_TUTORI_QM =
         {
             17621302,
             17621303,
             17621304,
         },
     },
+
     npc =
     {
     },

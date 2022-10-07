@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.MERIPHATAUD_MOUNTAINS_S] =
@@ -39,7 +38,7 @@ zones[xi.zone.MERIPHATAUD_MOUNTAINS_S] =
             [17174708] = 17174709,
         },
 
-        BLOODLAPPER = 17174889,
+        BLOODLAPPER = DYNAMIC_LOOKUP,
 
         VOIDWALKER =
         {

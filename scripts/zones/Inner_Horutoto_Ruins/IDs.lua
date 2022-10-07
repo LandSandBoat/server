@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.INNER_HORUTOTO_RUINS] =
@@ -43,6 +42,7 @@ zones[xi.zone.INNER_HORUTOTO_RUINS] =
         {
             [17563758] = 17563785, -- -238.315 -0.002 -179.249
         },
+
         NOCUOUS_WEAPON_PH =
         {
             [17563798] = 17563801, -- -236.855 0.476 -51.263

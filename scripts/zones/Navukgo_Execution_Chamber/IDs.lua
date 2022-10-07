@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.NAVUKGO_EXECUTION_CHAMBER] =
@@ -30,6 +29,7 @@ zones[xi.zone.NAVUKGO_EXECUTION_CHAMBER] =
         KARABARA_WATER                = 7647, -- Water is more dangerous than most expect. Never fear, I'll teach you respect!
         KARABABA_QUIT                 = 7655, -- What a completely useless shield. It's time for me to quit the field.
     },
+
     mob =
     {
         KARABABA_OFFSET = 17039401,
@@ -39,6 +39,7 @@ zones[xi.zone.NAVUKGO_EXECUTION_CHAMBER] =
         IMMORTAL_FLAN5  = 17039378,
         IMMORTAL_FLAN6  = 17039379,
     },
+
     npc =
     {
     },

@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.THE_SHROUDED_MAW] =
@@ -22,10 +21,12 @@ zones[xi.zone.THE_SHROUDED_MAW] =
         THE_PARTY_WILL_BE_REMOVED     = 7417, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
         CONQUEST_BASE                 = 7432, -- Tallying conquest results...
     },
+
     mob =
     {
         DIABOLOS_OFFSET = 16818177,
     },
+
     npc =
     {
         DARKNESS_NAMED_TILE_OFFSET = 16818259, -- _0a0 in npc_list

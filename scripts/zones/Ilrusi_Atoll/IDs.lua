@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.ILRUSI_ATOLL] =
@@ -39,6 +38,7 @@ zones[xi.zone.ILRUSI_ATOLL] =
         CHEST                         = 7533, -- The chest contains...
         GOLDEN                        = 7534, -- ...a golden figurehead!
     },
+
     mob =
     {
         [1] =
@@ -52,6 +52,7 @@ zones[xi.zone.ILRUSI_ATOLL] =
             PERCIPIENT_FISH7 = 17002503,
             PERCIPIENT_FISH8 = 17002504,
         },
+
         [2] =
         {
             CURSED_CHEST1  = 17002505,
@@ -67,6 +68,7 @@ zones[xi.zone.ILRUSI_ATOLL] =
             CURSED_CHEST11 = 17002515,
             CURSED_CHEST12 = 17002516,
         },
+
         [43] =
         {
             CARRION_CRAB1   = 17002521,
@@ -95,6 +97,7 @@ zones[xi.zone.ILRUSI_ATOLL] =
             UNDEAD_TOAD     = 17002544,
         },
     },
+
     npc =
     {
         ILRUSI_CURSED_CHEST_OFFSET = 17002505,

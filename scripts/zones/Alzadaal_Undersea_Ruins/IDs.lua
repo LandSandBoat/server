@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.ALZADAAL_UNDERSEA_RUINS] =
@@ -40,25 +39,27 @@ zones[xi.zone.ALZADAAL_UNDERSEA_RUINS] =
         DRAWS_NEAR                    = 7769, -- Something draws near!
         UNITY_WANTED_BATTLE_INTERACT  = 7934, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
+
     mob =
     {
-        NEPIONIC_SOULFLAYER     = DYNAMIC_LOOKUP,
         COOKIEDUSTER_LIPIROON_PH =
         {
             [17072142] = 17072150,
             [17072144] = 17072150,
         },
+
         OB                      = DYNAMIC_LOOKUP,
         CHEESE_HOARDER_GIGIROON = DYNAMIC_LOOKUP,
         ARMED_GEARS             = DYNAMIC_LOOKUP,
+        NEPIONIC_SOULFLAYER     = DYNAMIC_LOOKUP,
         WULGARU                 = DYNAMIC_LOOKUP,
-
     },
+
     npc =
     {
-        RUNIC_PORTAL_NORTH      = 17072331,
-        RUNIC_PORTAL_SOUTH      = 17072332,
-        NEPIONIC_QM             = 17072366, -- blank_transformations in DB
+        RUNIC_PORTAL_NORTH = 17072331,
+        RUNIC_PORTAL_SOUTH = 17072332,
+        NEPIONIC_QM        = 17072366, -- blank_transformations in DB
     },
 }
 

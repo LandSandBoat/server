@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.DANGRUF_WADI] =
@@ -47,21 +46,24 @@ zones[xi.zone.DANGRUF_WADI] =
         REGIME_REGISTERED             = 10462, -- New training regime registered!
         COMMON_SENSE_SURVIVAL         = 11533, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
-        TEPORINGO_PH  =
+        TEPORINGO_PH =
         {
             [17559583] = 17559584,
         },
+
         GEYSER_LIZARD       = DYNAMIC_LOOKUP,
         CHOCOBOLEECH        = DYNAMIC_LOOKUP,
         APPARATUS_ELEMENTAL = 17559870,
     },
+
     npc =
     {
-        GEYSER_OFFSET      = 17559899,
-        QM2                = DYNAMIC_LOOKUP, -- An Empty Vessel
-        TREASURE_CHEST     = DYNAMIC_LOOKUP,
+        GEYSER_OFFSET  = 17559899,
+        QM2            = DYNAMIC_LOOKUP, -- An Empty Vessel
+        TREASURE_CHEST = DYNAMIC_LOOKUP,
     },
 }
 

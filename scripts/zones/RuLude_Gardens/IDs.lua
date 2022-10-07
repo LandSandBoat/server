@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.RULUDE_GARDENS] =
@@ -74,9 +73,11 @@ zones[xi.zone.RULUDE_GARDENS] =
         COMMON_SENSE_SURVIVAL            = 15726, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
         TEAR_IN_FABRIC_OF_SPACE          = 15909, -- There appears to be a tear in the fabric of space...
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

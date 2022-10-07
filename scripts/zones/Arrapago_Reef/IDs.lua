@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.ARRAPAGO_REEF] =
@@ -50,18 +49,21 @@ zones[xi.zone.ARRAPAGO_REEF] =
         DRAWS_NEAR                    = 8918, -- Something draws near!
         COMMON_SENSE_SURVIVAL         = 9789, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         BLOODY_BONES_PH =
         {
             [16998653] = 16998655, -- 136.234 -6.831 468.779
         },
+
         MEDUSA                = DYNAMIC_LOOKUP,
         LIL_APKALLU           = DYNAMIC_LOOKUP,
         VELIONIS              = DYNAMIC_LOOKUP,
         ZAREEHKL_THE_JUBILANT = DYNAMIC_LOOKUP,
         NUHN                  = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
     },

@@ -4,7 +4,6 @@
 require("scripts/globals/keyitems")
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.ABYSSEA_ATTOHWA] =
@@ -66,6 +65,7 @@ zones[xi.zone.ABYSSEA_ATTOHWA] =
         INFO_KI                       = 7484, -- Your keen senses tell you that something may happen if only you had [this item/these items].
         USE_KI                        = 7487, -- Use the [key item/key items]? Yes. No.
     },
+
     mob =
     {
         GRANITE_BORER               = 17658261,
@@ -94,6 +94,7 @@ zones[xi.zone.ABYSSEA_ATTOHWA] =
         ULHUADSHI_3                 = 17658284,
         ITZPAPALOTL_3               = 17658285,
     },
+
     npc =
     {
     },

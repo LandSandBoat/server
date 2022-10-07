@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.RALA_WATERWAYS_U] =
@@ -19,10 +18,12 @@ zones[xi.zone.RALA_WATERWAYS_U] =
         LOGIN_NUMBER                  = 7003, -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
     },
+
     mob =
     {
         ARCIELA_BTS = 17838146, -- Arciela (Behind the Sluices)
     },
+
     npc =
     {
     },

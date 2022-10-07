@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.RAKAZNAR_INNER_COURT] =
@@ -20,9 +19,11 @@ zones[xi.zone.RAKAZNAR_INNER_COURT] =
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
         HOMEPOINT_SET                 = 7693, -- Home point set!
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

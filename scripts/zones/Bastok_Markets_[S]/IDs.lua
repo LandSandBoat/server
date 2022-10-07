@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.BASTOK_MARKETS_S] =
@@ -36,9 +35,11 @@ zones[xi.zone.BASTOK_MARKETS_S] =
         NOT_ENOUGH_NOTES              = 14759, -- You tryin' to cheat me? That's not nearly enough notes!
         COMMON_SENSE_SURVIVAL         = 14803, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
     },
+
     npc =
     {
         SHENNI = DYNAMIC_LOOKUP,

@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.ULEGUERAND_RANGE] =
@@ -60,7 +59,7 @@ zones[xi.zone.ULEGUERAND_RANGE] =
 
     npc =
     {
-        WATERFALL = 16798112,
+        WATERFALL        = 16798112,
         RABBIT_FOOTPRINT = DYNAMIC_LOOKUP,
     },
 }

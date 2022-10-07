@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.BOSTAUNIEUX_OUBLIETTE] =
@@ -39,14 +38,16 @@ zones[xi.zone.BOSTAUNIEUX_OUBLIETTE] =
         COMMON_SENSE_SURVIVAL         = 10636, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
         UNITY_WANTED_BATTLE_INTERACT  = 10700, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
+
     mob =
     {
-        SEWER_SYRUP_PH          =
+        SEWER_SYRUP_PH =
         {
             [17461305] = 17461307, -- -19.000 1.000 -173.000
             [17461306] = 17461307, -- -20.000 1.000 -148.000
         },
-        SHII_PH                 =
+
+        SHII_PH =
         {
             [17461311] = 17461315, -- -59.000 0.941 -149.000
             [17461334] = 17461315, -- -64.000 -0.500 -144.000
@@ -55,17 +56,20 @@ zones[xi.zone.BOSTAUNIEUX_OUBLIETTE] =
             [17461312] = 17461315, -- -53.000 -0.500 -137.000
             [17461308] = 17461315, -- -57.000 0.998 -135.000
         },
-        ARIOCH_PH               =
+
+        ARIOCH_PH =
         {
             [17461322] = 17461433, -- -259 0.489 -188
         },
-        MANES_PH                =
+
+        MANES_PH =
         {
             [17461469] = 17461471,
             [17461470] = 17461471,
             [17461476] = 17461471,
             [17461477] = 17461471,
         },
+
         DREXERION_THE_CONDEMNED = DYNAMIC_LOOKUP,
         PHANDURON_THE_CONDEMNED = DYNAMIC_LOOKUP,
         BLOODSUCKER             = 17461478,
@@ -73,6 +77,7 @@ zones[xi.zone.BOSTAUNIEUX_OUBLIETTE] =
         MANES                   = DYNAMIC_LOOKUP,
         SHII                    = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
     },

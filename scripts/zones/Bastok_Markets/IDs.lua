@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.BASTOK_MARKETS] =
@@ -76,9 +75,11 @@ zones[xi.zone.BASTOK_MARKETS] =
         YOU_HAVE_JOINED_UNITY         = 14559, -- ou have joined [Pieuje's/Ayame's/Invincible Shield's/Apururu's/Maat's/Aldo's/Jakoh Wahcondalo's/Naja Salaheem's/Flaviria's/Yoran-Oran's/Sylvie's] Unity!
         HAVE_ALREADY_CHANGED_UNITY    = 14635, -- ou have already changed Unities. Please wait until the next tabulation period.
     },
+
     mob =
     {
     },
+
     npc =
     {
         AQUILLINA = DYNAMIC_LOOKUP,

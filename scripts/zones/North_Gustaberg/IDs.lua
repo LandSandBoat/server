@@ -53,6 +53,7 @@ zones[xi.zone.NORTH_GUSTABERG] =
         VOIDWALKER_OBTAIN_KI          = 11543, -- Obtained key item: <keyitem>!
         COMMON_SENSE_SURVIVAL         = 12489, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         STINGING_SOPHIE_PH  =

@@ -5,7 +5,6 @@ require("scripts/globals/keyitems")
 require("scripts/globals/dynamis")
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.DYNAMIS_XARCABARD] =
@@ -45,6 +44,7 @@ zones[xi.zone.DYNAMIS_XARCABARD] =
         ANIMATED_SHIELD_DIALOG        = 7789, -- I am Aegis, the impervious shield of everlasting.
         PRISON_OF_SOULS_HAS_SET_FREE  = 7821, -- e prison of souls has set free its captive spirits!
     },
+
     mob =
     {
         TIME_EXTENSION =

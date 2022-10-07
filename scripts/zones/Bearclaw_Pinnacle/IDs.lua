@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.BEARCLAW_PINNACLE] =
@@ -27,10 +26,12 @@ zones[xi.zone.BEARCLAW_PINNACLE] =
         LARGE_STEAM                   = 7676, -- The Snoll Tzar is emitting a large amount of steam.
         SHOOK_SALT                    = 7677, -- The Snoll Tzar shakes off the salt!
     },
+
     mob =
     {
         SNOLL_TZAR = DYNAMIC_LOOKUP, -- Formerly SNOLL_TZAR_OFFSET
     },
+
     npc =
     {
         ENTRANCE_OFFSET = 16801888,

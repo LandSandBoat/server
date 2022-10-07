@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.KAMIHR_DRIFTS] =
@@ -34,9 +33,11 @@ zones[xi.zone.KAMIHR_DRIFTS] =
         PATH_SEEMS_TO_LEAD            = 8045, -- This path seems to lead toward the summit of Mount Kamihr.
         SNOW_DUSTED_CRAG_BLOCKS       = 8498, -- A snow-dusted crag blocks your path.
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.CEIZAK_BATTLEGROUNDS] =
@@ -33,12 +32,15 @@ zones[xi.zone.CEIZAK_BATTLEGROUNDS] =
         ENERGIES_COURSE               = 8040, -- The arcane energies begin to course within your veins.
         MYSTICAL_WARMTH               = 8041, -- You feel a mystical warmth welling up inside you!
     },
+
     mob =
     {
     },
+
     npc =
     {
     },
+
     reive =
     {
         -- Bounding Chapuli (I-8)

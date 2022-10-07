@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.FORET_DE_HENNETIEL] =
@@ -34,9 +33,11 @@ zones[xi.zone.FORET_DE_HENNETIEL] =
         UNCANNY_SENSATION             = 7936, -- You are assaulted by an uncanny sensation.
         HOMEPOINT_SET                 = 8008, -- Home point set!
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

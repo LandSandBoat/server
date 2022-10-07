@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.AYDEEWA_SUBTERRANE] =
@@ -29,6 +28,7 @@ zones[xi.zone.AYDEEWA_SUBTERRANE] =
         COMMON_SENSE_SURVIVAL         = 8910, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
         UNITY_WANTED_BATTLE_INTERACT  = 8974, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
+
     mob =
     {
         BLUESTREAK_GYUGYUROON_PH =
@@ -36,10 +36,12 @@ zones[xi.zone.AYDEEWA_SUBTERRANE] =
             [17055941] = 17056156, -- -221.7 13.762 -346.83
             [17055942] = 17056156, -- -219 14.003 -364.83
         },
+
         NOSFERATU          = DYNAMIC_LOOKUP,
         PANDEMONIUM_WARDEN = 17056168,
         CHIGRE             = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
     },

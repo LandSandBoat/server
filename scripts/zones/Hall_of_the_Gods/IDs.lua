@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.HALL_OF_THE_GODS] =
@@ -22,9 +21,11 @@ zones[xi.zone.HALL_OF_THE_GODS] =
         CONQUEST_BASE                 = 7204, -- Tallying conquest results...
         DEPRESSION_A_CLUE             = 7363, -- The depression in the center of the grate must be a clue...
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

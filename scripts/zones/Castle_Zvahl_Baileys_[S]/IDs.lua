@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.CASTLE_ZVAHL_BAILEYS_S] =
@@ -23,9 +22,11 @@ zones[xi.zone.CASTLE_ZVAHL_BAILEYS_S] =
         NO_RESPONSE                   = 7892, -- There is no response...
         COMMON_SENSE_SURVIVAL         = 7950, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

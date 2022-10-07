@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.THE_ELDIEME_NECROPOLIS_S] =
@@ -26,9 +25,11 @@ zones[xi.zone.THE_ELDIEME_NECROPOLIS_S] =
         ITEM_DELIVERY_DIALOG          = 7913, -- Have something to send?
         COMMON_SENSE_SURVIVAL         = 8940, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

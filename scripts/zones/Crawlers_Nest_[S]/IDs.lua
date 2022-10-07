@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.CRAWLERS_NEST_S] =
@@ -21,6 +20,7 @@ zones[xi.zone.CRAWLERS_NEST_S] =
         ITEM_DELIVERY_DIALOG          = 7688, -- Hello! Any packages to sendy-wend?
         COMMON_SENSE_SURVIVAL         = 8653, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         MORILLE_MORTELLE_PH =
@@ -28,6 +28,7 @@ zones[xi.zone.CRAWLERS_NEST_S] =
             [17477636] = 17477640, -- 61 0 -4
         },
     },
+
     npc =
     {
     },

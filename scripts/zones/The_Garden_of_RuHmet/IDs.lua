@@ -84,9 +84,9 @@ zones[xi.zone.THE_GARDEN_OF_RUHMET] =
             { -683.00, 0.00, -340.00 }, -- NW / Mithra tower.
         },
 
-        QM_JAILER_OF_FORTITUDE     = DYNAMIC_LOOKUP,
-        QM_IXAERN_DRK              = DYNAMIC_LOOKUP,
-        QM_JAILER_OF_FAITH         = DYNAMIC_LOOKUP,
+        QM_JAILER_OF_FORTITUDE = DYNAMIC_LOOKUP,
+        QM_IXAERN_DRK          = DYNAMIC_LOOKUP,
+        QM_JAILER_OF_FAITH     = DYNAMIC_LOOKUP,
     },
 }
 

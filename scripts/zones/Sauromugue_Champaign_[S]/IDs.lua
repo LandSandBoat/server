@@ -70,8 +70,8 @@ zones[xi.zone.SAUROMUGUE_CHAMPAIGN_S] =
             [xi.keyItem.BLACK_ABYSSITE] =
             {
                 17178921, -- Yilbegan
-            }
-        }
+            },
+        },
     },
 
     npc =

@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.SACRIFICIAL_CHAMBER] =
@@ -23,9 +22,11 @@ zones[xi.zone.SACRIFICIAL_CHAMBER] =
         THE_PARTY_WILL_BE_REMOVED     = 7576, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
         DOOR_SHUT                     = 7701, -- The door is firmly shut.
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

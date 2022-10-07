@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.NORG] =
@@ -47,9 +46,11 @@ zones[xi.zone.NORG] =
         COMMON_SENSE_SURVIVAL         = 12297, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
         DIDYA_GET_BUMPED              = 12325, -- Didya get bumped about by the waves on yer way here, <name>? No matter. The boss be waitin' inside fer ya.
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

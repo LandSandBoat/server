@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.OPEN_SEA_ROUTE_TO_AL_ZAHBI] =
@@ -23,9 +22,11 @@ zones[xi.zone.OPEN_SEA_ROUTE_TO_AL_ZAHBI] =
         DOCKING_IN_AL_ZAHBI           = 7320, -- We are now docking in Al Zahbi.
         CEHN_TEYOHNGO_SHOP_DIALOG     = 7323, -- If you're looking for fishing gear, you've come to the right place!
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

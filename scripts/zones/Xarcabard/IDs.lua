@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Xarcabard
+-- Area: Xarcabard (112)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
@@ -83,11 +83,11 @@ zones[xi.zone.XARCABARD] =
             [17236178] = 17236180, -- -234.354 -11.492 63.501
         },
 
-        CHAOS_ELEMENTAL = 17236201,
-        BOREAL_HOUND    = 17236202,
-        BOREAL_COEURL   = 17236203,
-        BOREAL_TIGER    = 17236204,
-        KOENIGSTIGER    = 17236205,
+        CHAOS_ELEMENTAL = DYNAMIC_LOOKUP,
+        BOREAL_HOUND    = DYNAMIC_LOOKUP,
+        BOREAL_COEURL   = DYNAMIC_LOOKUP,
+        BOREAL_TIGER    = DYNAMIC_LOOKUP,
+        KOENIGSTIGER    = DYNAMIC_LOOKUP,
 
         VOIDWALKER =
         {
@@ -102,15 +102,18 @@ zones[xi.zone.XARCABARD] =
                 17236235, -- Gjenganger
                 17236234, -- Gjenganger
             },
+
             [xi.keyItem.COLORFUL_ABYSSITE] =
             {
                 17236233, -- Erebus
                 17236232  -- Feuerunke
             },
+
             [xi.keyItem.PURPLE_ABYSSITE] =
             {
                 17236231  -- Lord Ruthven
             },
+
             [xi.keyItem.BLACK_ABYSSITE] =
             {
                 17236230  -- Yilbegan
@@ -120,10 +123,10 @@ zones[xi.zone.XARCABARD] =
 
     npc =
     {
-        OVERSEER_BASE      = 17236289, -- Jeantelas_RK in npc_list
-        BOREAL_TIGER_QM    = 17236307, -- qm2 in npc_list
-        BOREAL_COEURL_QM   = 17236308, -- qm3 in npc_list
-        BOREAL_HOUND_QM    = 17236309, -- qm4 in npc_list
+        OVERSEER_BASE    = 17236289, -- Jeantelas_RK in npc_list
+        BOREAL_TIGER_QM  = 17236307, -- qm2 in npc_list
+        BOREAL_COEURL_QM = 17236308, -- qm3 in npc_list
+        BOREAL_HOUND_QM  = 17236309, -- qm4 in npc_list
     },
 }
 

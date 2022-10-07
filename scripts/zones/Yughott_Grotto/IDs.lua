@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.YUGHOTT_GROTTO] =
@@ -26,6 +25,7 @@ zones[xi.zone.YUGHOTT_GROTTO] =
         MINING_IS_POSSIBLE_HERE       = 7353, -- Mining is possible here if you have <item>.
         HOMEPOINT_SET                 = 7453, -- Home point set!
     },
+
     mob =
     {
         ASHMAKER_GOTBLUT_PH =
@@ -37,9 +37,10 @@ zones[xi.zone.YUGHOTT_GROTTO] =
             [17358925] = 17358932, -- 10.890 -1.256 2.267
         },
     },
+
     npc =
     {
-        TREASURE_CHEST = 17359052,
+        TREASURE_CHEST = DYNAMIC_LOOKUP,
         MINING =
         {
             17359053,

@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.JUGNER_FOREST] =
@@ -71,6 +70,7 @@ zones[xi.zone.JUGNER_FOREST] =
             [17203447] = 17203448,
         },
 
+        CERNUNNOS             = DYNAMIC_LOOKUP,
         KING_ARTHRO           = DYNAMIC_LOOKUP,
         FRAELISSA             = DYNAMIC_LOOKUP,
         FRADUBIO              = DYNAMIC_LOOKUP,
@@ -106,8 +106,6 @@ zones[xi.zone.JUGNER_FOREST] =
                 17203684, -- Yilbegan
             }
         },
-
-        CERNUNNOS = DYNAMIC_LOOKUP,
     },
 
     npc =

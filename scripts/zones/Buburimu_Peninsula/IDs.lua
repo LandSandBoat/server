@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.BUBURIMU_PENINSULA] =
@@ -51,11 +50,12 @@ zones[xi.zone.BUBURIMU_PENINSULA] =
         REGIME_REGISTERED              = 10308, -- New training regime registered!
         COMMON_SENSE_SURVIVAL          = 12329, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         BACKOO = DYNAMIC_LOOKUP,
 
-        HELLDIVER_PH  =
+        HELLDIVER_PH =
         {
             [17260906] = 17260907, -- 509.641 0.151 -267.664
         },
@@ -64,7 +64,6 @@ zones[xi.zone.BUBURIMU_PENINSULA] =
         {
             [17261002] = 17261003, -- 442.901 19.500 109.075
         },
-
     },
 
     npc =

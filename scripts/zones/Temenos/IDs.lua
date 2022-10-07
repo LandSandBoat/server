@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.TEMENOS] =
@@ -44,6 +43,7 @@ zones[xi.zone.TEMENOS] =
             16928816,
             16928831,
         },
+
         TEMENOS_E_MOB =
         {
             16928840,
@@ -54,6 +54,7 @@ zones[xi.zone.TEMENOS] =
             16928885,
             16928892,
         },
+
         TEMENOS_W_MOB =
         {
             16928898,
@@ -64,6 +65,7 @@ zones[xi.zone.TEMENOS] =
             16928952,
             16928959,
         },
+
         TEMENOS_C_MOB =
         {
             16929046,
@@ -73,6 +75,7 @@ zones[xi.zone.TEMENOS] =
             16929053,
         }
     },
+
     npc =
     {
         TEMENOS_N_GATE =
@@ -85,6 +88,7 @@ zones[xi.zone.TEMENOS] =
             16929202,
             16929203,
         },
+
         TEMENOS_E_GATE =
         {
             16929204,
@@ -95,6 +99,7 @@ zones[xi.zone.TEMENOS] =
             16929209,
             16929210,
         },
+
         TEMENOS_W_GATE =
         {
             16929211,
@@ -105,6 +110,7 @@ zones[xi.zone.TEMENOS] =
             16929216,
             16929217,
         },
+
         TEMENOS_C_GATE =
         {
             16929219,
@@ -113,6 +119,7 @@ zones[xi.zone.TEMENOS] =
             16929222,
             16929218,
         },
+
         TEMENOS_N_CRATE =
         {
             16928769,
@@ -123,6 +130,7 @@ zones[xi.zone.TEMENOS] =
             16928813,
             16928830,
         },
+
         TEMENOS_E_CRATE =
         {
             16928836,
@@ -133,6 +141,7 @@ zones[xi.zone.TEMENOS] =
             16928881,
             16928890,
         },
+
         TEMENOS_W_CRATE =
         {
             16928895,
@@ -143,11 +152,13 @@ zones[xi.zone.TEMENOS] =
             16928949,
             16928958,
         },
+
         TEMENOS_C_CRATE =
         {
             16929045,
             16929029,
             16929004,
+
             [4] =
             {
                 [1] = 16928965, -- boss
@@ -171,6 +182,7 @@ zones[xi.zone.TEMENOS] =
                 [16928984] = 3, -- SE
                 [16928985] = 3, -- SE
             },
+
             [5] = 16929052, -- basement 1 boss
         },
     },

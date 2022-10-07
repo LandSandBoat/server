@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.YAHSE_HUNTING_GROUNDS] =
@@ -31,9 +30,11 @@ zones[xi.zone.YAHSE_HUNTING_GROUNDS] =
         ENERGIES_COURSE               = 7870, -- The arcane energies begin to course within your veins.
         MYSTICAL_WARMTH               = 7871, -- You feel a mystical warmth welling up inside you!
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

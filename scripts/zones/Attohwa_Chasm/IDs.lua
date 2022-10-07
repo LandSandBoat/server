@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.ATTOHWA_CHASM] =
@@ -30,22 +29,26 @@ zones[xi.zone.ATTOHWA_CHASM] =
         HOMEPOINT_SET                 = 8241, -- Home point set!
         UNITY_WANTED_BATTLE_INTERACT  = 8299, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
+
     mob =
     {
         AMBUSHER_ANTLION_PH =
         {
             [16806171] = 16806249, -- -433.309 -4.3 113.841
         },
-        CITIPATI_PH         =
+
+        CITIPATI_PH =
         {
             [16806155] = 16806162, -- -328.973 -12.876 67.481
             [16806158] = 16806162, -- -398.931 -4.536 79.640
             [16806161] = 16806162, -- -381.284 -9.233 40.054
         },
+
         LIOUMERE       = DYNAMIC_LOOKUP,
         TIAMAT         = DYNAMIC_LOOKUP,
         FEELER_ANTLION = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
         MIASMA_OFFSET   = 16806304, -- _071 in npc_list

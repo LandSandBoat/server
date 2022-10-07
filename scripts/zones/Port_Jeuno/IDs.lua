@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.PORT_JEUNO] =
@@ -53,9 +52,11 @@ zones[xi.zone.PORT_JEUNO] =
         KINDLIX_SHOP_DIALOG           = 8687, -- Our fam'ly peddle sky flowers. You want have nice scenery? Send fireworks sky high! It's great feeling. Bwee hee hee.
         PYROPOX_SHOP_DIALOG           = 8691, -- Bwee hee. I get fireworks from all 'round globe. Kindlix never sell more than me.
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

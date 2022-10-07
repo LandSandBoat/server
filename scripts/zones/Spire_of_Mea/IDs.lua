@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.SPIRE_OF_MEA] =
@@ -23,9 +22,11 @@ zones[xi.zone.SPIRE_OF_MEA] =
         THE_PARTY_WILL_BE_REMOVED     = 7417, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
         CANT_REMEMBER                 = 7644, -- You cannot remember when exactly, but you have obtained <item>!
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

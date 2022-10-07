@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.CAEDARVA_MIRE] =
@@ -46,6 +45,7 @@ zones[xi.zone.CAEDARVA_MIRE] =
         UNITY_WANTED_BATTLE_INTERACT  = 9040, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
         COMMON_SENSE_SURVIVAL         = 9062, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         PEALLAIDH_PH =
@@ -70,6 +70,7 @@ zones[xi.zone.CAEDARVA_MIRE] =
         MAHJLAEF_THE_PAINTORN = DYNAMIC_LOOKUP,
         EXPERIMENTAL_LAMIA    = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
         LOGGING =
@@ -81,6 +82,7 @@ zones[xi.zone.CAEDARVA_MIRE] =
             17101333,
             17101334,
         },
+
         RUNIC_PORTAL_AZOUPH = 17101271,
         RUNIC_PORTAL_DVUCCA = 17101274,
     },

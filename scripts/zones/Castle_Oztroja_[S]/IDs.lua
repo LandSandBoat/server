@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.CASTLE_OZTROJA_S] =
@@ -22,6 +21,7 @@ zones[xi.zone.CASTLE_OZTROJA_S] =
         PARTY_MEMBERS_HAVE_FALLEN     = 8032, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED     = 8039, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
     },
+
     mob =
     {
         AA_XALMO_THE_SAVAGE_PH =

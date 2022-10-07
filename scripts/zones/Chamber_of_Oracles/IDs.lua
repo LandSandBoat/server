@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.CHAMBER_OF_ORACLES] =
@@ -35,9 +34,11 @@ zones[xi.zone.CHAMBER_OF_ORACLES] =
         NOW_THAT_IM_WARMED_UP            = 7656, -- Now that I'm warmed up...
         THAT_LL_HURT_IN_THE_MORNING      = 7657, -- Ungh... That'll hurt in the morning...
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

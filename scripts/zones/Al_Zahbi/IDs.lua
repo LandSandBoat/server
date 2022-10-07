@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.AL_ZAHBI] =
@@ -37,9 +36,11 @@ zones[xi.zone.AL_ZAHBI] =
         SANCTION                      = 7986, -- You have received the Empire's Sanction.
         NOTHING_OUT_OF_ORDINARY       = 8115, -- There is nothing out of the ordinary here.
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

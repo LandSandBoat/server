@@ -25,9 +25,11 @@ zones[xi.zone.WALK_OF_ECHOES] =
         GATHERED_DAWNDROPS_LIGHT      = 7968, -- The gathered dawndrops unleash a brilliant light, melding together to form <keyitem>!
         RETRACED_ALL_JUNCTIONS        = 7969, -- You have retraced all junctions of eventualities. Hasten back to where Cait Sith and Lilisette await.
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

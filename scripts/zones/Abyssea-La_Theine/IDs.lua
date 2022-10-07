@@ -1,10 +1,8 @@
 -----------------------------------
 -- Area: Abyssea-La_Theine
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.ABYSSEA_LA_THEINE] =
@@ -66,6 +64,7 @@ zones[xi.zone.ABYSSEA_LA_THEINE] =
         INFO_KI                       = 7584, -- Your keen senses tell you that something may happen if only you had [this item/these items].
         USE_KI                        = 7587, -- Use the [key item/key items]? Yes. No.
     },
+
     mob =
     {
         DOZING_DORIAN           = 17318434,
@@ -90,6 +89,7 @@ zones[xi.zone.ABYSSEA_LA_THEINE] =
         CARABOSSE_3             = 17318460,
         HADHAYOSH_3             = 17318461,
     },
+
     npc =
     {
         QM_POPS =

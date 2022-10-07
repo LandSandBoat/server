@@ -1,9 +1,8 @@
 -----------------------------------
--- Area: Zeruhn_Mines
+-- Area: Zeruhn_Mines (172)
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.ZERUHN_MINES] =
@@ -32,12 +31,14 @@ zones[xi.zone.ZERUHN_MINES] =
         REGIME_REGISTERED             = 9501,  -- New training regime registered!
         COMMON_SENSE_SURVIVAL         = 10549, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
     },
+
     npc =
     {
-        MINING      =
+        MINING =
         {
             17481844,
             17481845,

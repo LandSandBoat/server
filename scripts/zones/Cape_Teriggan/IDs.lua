@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.CAPE_TERIGGAN] =
@@ -47,19 +46,22 @@ zones[xi.zone.CAPE_TERIGGAN] =
         COMMON_SENSE_SURVIVAL         = 11236, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
         HOMEPOINT_SET                 = 11264, -- Home point set!
     },
+
     mob =
     {
-        FROSTMANE_PH           =
+        FROSTMANE_PH =
         {
             [17240374] = 17240376, -- -283.874 -0.660 485.504
             [17240372] = 17240376, -- -272.224 -0.942 461.321
             [17240373] = 17240376, -- -268.000 -0.558 440.000
             [17240371] = 17240376, -- -262.000 -0.700 442.000
         },
+
         KREUTZET               = DYNAMIC_LOOKUP,
         AXESARION_THE_WANDERER = DYNAMIC_LOOKUP,
         STOLAS                 = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
         OVERSEER_BASE    = 17240472,

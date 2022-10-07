@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.BEHEMOTHS_DOMINION] =
@@ -40,14 +39,16 @@ zones[xi.zone.BEHEMOTHS_DOMINION] =
         UNCANNY_SENSATION             = 11531, -- You are assaulted by an uncanny sensation.
         COMMON_SENSE_SURVIVAL         = 11538, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
-        BEHEMOTH                = DYNAMIC_LOOKUP,
-        KING_BEHEMOTH           = DYNAMIC_LOOKUP,
-        PICKLIX_LONGINDEX       = DYNAMIC_LOOKUP, -- Formerly TALEKEEPERS_GIFT_OFFSET
-        ANCIENT_WEAPON          = DYNAMIC_LOOKUP,
-        LEGENDARY_WEAPON        = DYNAMIC_LOOKUP,
+        BEHEMOTH          = DYNAMIC_LOOKUP,
+        KING_BEHEMOTH     = DYNAMIC_LOOKUP,
+        PICKLIX_LONGINDEX = DYNAMIC_LOOKUP, -- Formerly TALEKEEPERS_GIFT_OFFSET
+        ANCIENT_WEAPON    = DYNAMIC_LOOKUP,
+        LEGENDARY_WEAPON  = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
         QM_BEHEMOTH      = DYNAMIC_LOOKUP,

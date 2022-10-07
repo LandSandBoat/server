@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.NORTHERN_SAN_DORIA] =
@@ -124,9 +123,11 @@ zones[xi.zone.NORTHERN_SAN_DORIA] =
         RETRIEVE_DIALOG_ID            = 18135, -- You retrieve <item> from the porter moogle's care.
         COMMON_SENSE_SURVIVAL         = 18481, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
     },
+
     npc =
     {
         HALLOWEEN_SKINS =

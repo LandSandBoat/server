@@ -22,9 +22,11 @@ zones[xi.zone.WINDURST_JEUNO_AIRSHIP] =
         IN_JEUNO_MOMENTARILY          = 7062, -- We will be arriving in Jeuno momentarily.
         IN_WINDURST_MOMENTARILY       = 7063, -- We will be arriving in Windurst momentarily.
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

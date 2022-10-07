@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.PERIQIA] =
@@ -63,6 +62,7 @@ zones[xi.zone.PERIQIA] =
                 17006602, 17006603, 17006604, 17006605, 17006606, 17006607, 17006608, 17006610, 17006611,
             },
         },
+
         [xi.assault.mission.REQUIEM] =
         {
             MOBS_START =
@@ -71,6 +71,7 @@ zones[xi.zone.PERIQIA] =
                 17006623, 17006625, 17006626, 17006627, 17006628, 17006630, 17006631, 17006633, 17006634,
             },
         },
+
         -- Shades of Vengeance
         [79] =
         {

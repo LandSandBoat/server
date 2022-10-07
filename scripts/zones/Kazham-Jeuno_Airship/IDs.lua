@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.KAZHAM_JEUNO_AIRSHIP] =
@@ -23,9 +22,11 @@ zones[xi.zone.KAZHAM_JEUNO_AIRSHIP] =
         IN_JEUNO_MOMENTARILY          = 7062, -- We will be arriving in Jeuno momentarily.
         IN_KAZHAM_MOMENTARILY         = 7063, -- We will be arriving in Kazham momentarily.
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

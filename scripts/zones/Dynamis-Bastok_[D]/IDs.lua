@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.DYNAMIS_BASTOK_D] =
@@ -22,9 +21,11 @@ zones[xi.zone.DYNAMIS_BASTOK_D] =
         MEMBERS_LEVELS_ARE_RESTRICTED = 7023, -- Your party is unable to participate because certain members' levels are restricted.
         CONQUEST_BASE                 = 7057, -- Tallying conquest results...
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

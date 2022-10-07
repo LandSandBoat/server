@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.SILVER_SEA_ROUTE_TO_AL_ZAHBI] =
@@ -24,9 +23,11 @@ zones[xi.zone.SILVER_SEA_ROUTE_TO_AL_ZAHBI] =
         YAHLIQ_SHOP_DIALOG            = 7320, -- You've picked the best place to shop for your items, guaranteed!
         ON_WAY_TO_AL_ZAHBI            = 7321, -- We are on our way to Al Zahbi. We will be arriving soon.
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

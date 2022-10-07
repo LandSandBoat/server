@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.OUTER_RAKAZNAR] =
@@ -28,9 +27,11 @@ zones[xi.zone.OUTER_RAKAZNAR] =
         DOOR_TIGHTLY_SEALED           = 7909, -- The door is tightly sealed.
         EERIE_GLOW_PENETRATES         = 7910, -- An eerie glow penetrates the darkness.
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

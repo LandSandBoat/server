@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.MARJAMI_RAVINE] =
@@ -34,9 +33,11 @@ zones[xi.zone.MARJAMI_RAVINE] =
         LEARNS_SPELL                  = 8180, -- <name> learns <spell>!
         UNCANNY_SENSATION             = 8182, -- You are assaulted by an uncanny sensation.
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

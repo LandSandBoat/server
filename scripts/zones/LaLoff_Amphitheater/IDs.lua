@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.LALOFF_AMPHITHEATER] =
@@ -22,9 +21,11 @@ zones[xi.zone.LALOFF_AMPHITHEATER] =
         PARTY_MEMBERS_HAVE_FALLEN     = 7569, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED     = 7576, -- If all party members' HP are still zero after # minute[/s], the party will be removed from the battlefield.
     },
+
     mob =
     {
     },
+
     npc =
     {
         ENTRANCE_OFFSET = 17514791, -- used by scripts/globals/bcnm.lua

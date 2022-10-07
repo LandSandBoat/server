@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.YORCIA_WEALD] =
@@ -28,9 +27,11 @@ zones[xi.zone.YORCIA_WEALD] =
         SURPLUS_LOST_TO_AETHER        = 7556, -- A surplus of <number> kinetic unit[/s] has been lost to the aether.
         HOMEPOINT_SET                 = 8726, -- Home point set!
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

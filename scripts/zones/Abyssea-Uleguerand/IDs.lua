@@ -1,10 +1,8 @@
 -----------------------------------
 -- Area: Abyssea-Uleguerand
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.ABYSSEA_ULEGUERAND] =
@@ -66,9 +64,11 @@ zones[xi.zone.ABYSSEA_ULEGUERAND] =
         INFO_KI                       = 7484, -- Your keen senses tell you that something may happen if only you had [this item/these items].
         USE_KI                        = 7487, -- Use the [key item/key items]? Yes. No.
     },
+
     mob =
     {
     },
+
     npc =
     {
         QM_POPS =

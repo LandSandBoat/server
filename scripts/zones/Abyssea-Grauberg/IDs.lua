@@ -1,10 +1,8 @@
 -----------------------------------
 -- Area: Abyssea-Grauberg
 -----------------------------------
-require("scripts/globals/keyitems")
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.ABYSSEA_GRAUBERG] =
@@ -70,6 +68,7 @@ zones[xi.zone.ABYSSEA_GRAUBERG] =
         DOMINION_SIGNED_ON            = 10412, -- You have signed on for Dominion Ops!
         CANCELED_OBJECTIVE            = 10413, -- You have canceled your objective.
     },
+
     mob =
     {
         IRONCLAD_SUNDERER            = 17818041,
@@ -95,6 +94,7 @@ zones[xi.zone.ABYSSEA_GRAUBERG] =
         AZDAJA_3                     = 17818061,
         AMPHITRITE_3                 = 17818062,
     },
+
     npc =
     {
         QM_POPS =

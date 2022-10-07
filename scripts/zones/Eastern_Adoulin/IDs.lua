@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.EASTERN_ADOULIN] =
@@ -36,9 +35,11 @@ zones[xi.zone.EASTERN_ADOULIN] =
         HOMEPOINT_SET                 = 8301,  -- Home point set!
         COMMON_SENSE_SURVIVAL         = 13887, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

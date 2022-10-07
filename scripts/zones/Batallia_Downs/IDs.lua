@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.BATALLIA_DOWNS] =
@@ -57,6 +56,7 @@ zones[xi.zone.BATALLIA_DOWNS] =
         MEET_SYRILLIA                 = 13011, -- Meet up with Syrillia.
         RAPTOR_SPEEDS_OFF             = 13012, -- The raptor speeds off into the sunset...
     },
+
     mob =
     {
         PRANKSTER_MAVERIX_PH =

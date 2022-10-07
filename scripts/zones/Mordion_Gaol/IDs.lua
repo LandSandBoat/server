@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.MORDION_GAOL] =
@@ -22,9 +21,11 @@ zones[xi.zone.MORDION_GAOL] =
         NO_ESCAPE                     = 7216, -- Any attempt at escape is futile!
         PROHIBITED_ACTIVITIES         = 7232, -- Your character has been jailed due to prohibited activities. Your account will soon be suspended due to this violation.
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

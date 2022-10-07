@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.EAST_SARUTABARUTA] =
@@ -39,6 +38,7 @@ zones[xi.zone.EAST_SARUTABARUTA] =
         UNITY_WANTED_BATTLE_INTERACT  = 7643, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
         REGIME_REGISTERED             = 9942, -- New training regime registered!
     },
+
     mob =
     {
         SHARP_EARED_ROPIPI_PH =
@@ -56,6 +56,7 @@ zones[xi.zone.EAST_SARUTABARUTA] =
 
         DUKE_DECAPOD = DYNAMIC_LOOKUP,
     },
+
     npc =
     {
     },

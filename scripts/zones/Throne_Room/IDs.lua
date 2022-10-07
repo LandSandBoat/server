@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.THRONE_ROOM] =
@@ -28,11 +27,13 @@ zones[xi.zone.THRONE_ROOM] =
         CANT_UNDERSTAND               = 7713, -- You--a man who has never lived bound by the chains of his country--how can you understand my pain!?
         BLADE_ANSWER                  = 7714, -- Let my blade be the answer!
     },
+
     mob =
     {
         SHADOW_LORD_STAGE_2_OFFSET = 17453060,
         ZEID_BCNM_OFFSET           = 17453063,
     },
+
     npc =
     {
     },

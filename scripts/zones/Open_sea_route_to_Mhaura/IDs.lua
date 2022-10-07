@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.OPEN_SEA_ROUTE_TO_MHAURA] =
@@ -23,9 +22,11 @@ zones[xi.zone.OPEN_SEA_ROUTE_TO_MHAURA] =
         DOCKING_IN_MHAURA             = 7320, -- We are now docking in Mhaura.
         PASHI_MACCALEH_SHOP_DIALOG    = 7323, -- Step right up for the best fishing gear in these parts!
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

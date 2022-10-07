@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.LOWER_JEUNO] =
@@ -73,9 +72,11 @@ zones[xi.zone.LOWER_JEUNO] =
         ARTIFACT_TERMINAL_VOLUME      = 10368, -- Your artifact has been charged to its terminal volume of kinetic units.
         SURPLUS_LOST_TO_AETHER        = 10369, -- A surplus of <number> kinetic unit[/s] has been lost to the aether.
     },
+
     mob =
     {
     },
+
     npc =
     {
         VHANA_EHGAKLYWHA  = DYNAMIC_LOOKUP,

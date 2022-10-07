@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.DEN_OF_RANCOR] =
@@ -34,21 +33,25 @@ zones[xi.zone.DEN_OF_RANCOR] =
         HOMEPOINT_SET                 = 10548, -- Home point set!
         UNITY_WANTED_BATTLE_INTERACT  = 10606, -- Those who have accepted % must pay # Unity accolades to participate. The content for this Wanted battle is #. [Ready to begin?/You do not have the appropriate object set, so your rewards will be limited.]
     },
+
     mob =
     {
         CELESTE_EYED_TOZBERRY_PH =
         {
             [17432622] = 17432624,
         },
+
         FRIAR_RUSH_PH =
         {
             [17432638] = 17432640,
         },
+
         CARMINE_TAILED_JANBERRY_PH =
         {
             [17432661] = 17432659,
             [17432662] = 17432659,
         },
+
         TAWNY_FINGERED_MUGBERRY_PH =
         {
             [17432784] = 17432798,
@@ -58,10 +61,12 @@ zones[xi.zone.DEN_OF_RANCOR] =
             [17432793] = 17432798,
             [17432794] = 17432798,
         },
+
         BISTRE_HEARTED_MALBERRY_PH =
         {
             [17432822] = 17432845,
         },
+
         OGAMA_PH =
         {
             [17432972] = 17432974,

@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.GHELSBA_OUTPOST] =
@@ -30,6 +29,7 @@ zones[xi.zone.GHELSBA_OUTPOST] =
         LOGGING_IS_POSSIBLE_HERE         = 7751, -- Logging is possible here if you have <item>.
         YOU_CAN_NOW_BECOME_A_DRAGOON     = 7791, -- You can now become a dragoon!
     },
+
     mob =
     {
         THOUSANDARM_DESHGLESH_PH =

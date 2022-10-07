@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES] =
@@ -24,6 +23,7 @@ zones[xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES] =
         CHHAYA_SHOP_DIALOG            = 7348, -- May I offer you items to help you on your journey?
         ARRIVING_SOON_MHAURA          = 7349, -- We are on our way to Mhaura. We will be arriving soon.
     },
+
     mob =
     {
         WIGHT      = 17711120,
@@ -31,6 +31,7 @@ zones[xi.zone.SHIP_BOUND_FOR_MHAURA_PIRATES] =
         SEA_MONK   = 17682442,
         SEA_HORROR = 17682446,
     },
+
     npc =
     {
     },

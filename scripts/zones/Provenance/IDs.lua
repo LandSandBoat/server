@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.PROVENANCE] =
@@ -21,9 +20,11 @@ zones[xi.zone.PROVENANCE] =
         PARTY_MEMBERS_HAVE_FALLEN     = 7325, -- All party members have fallen in battle. Now leaving the battlefield.
         THE_PARTY_WILL_BE_REMOVED     = 7338, -- All party members have fallen in battle. Leaving the battlefield in # minute[/s].
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

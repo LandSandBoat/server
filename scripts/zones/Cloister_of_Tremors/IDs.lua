@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.CLOISTER_OF_TREMORS] =
@@ -28,9 +27,11 @@ zones[xi.zone.CLOISTER_OF_TREMORS] =
         ATTACH_SEAL                      = 7729, -- <player> attaches <item> to the protocrystal.
         POWER_STYMIES                    = 7730, -- An unseen power stymies your efforts to attach <item> to the protocrystal.
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

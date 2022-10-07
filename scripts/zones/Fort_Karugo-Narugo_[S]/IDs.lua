@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.FORT_KARUGO_NARUGO_S] =
@@ -24,6 +23,7 @@ zones[xi.zone.FORT_KARUGO_NARUGO_S] =
         ITEM_DELIVERY_DIALOG          = 8121, -- Deliveries! We're open for business!
         COMMON_SENSE_SURVIVAL         = 9200, -- It appears that you have arrived at a new survival guide provided by the Servicemen's Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
         RATATOSKR_PH =

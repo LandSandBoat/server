@@ -38,9 +38,11 @@ zones[xi.zone.WINDURST_WALLS] =
         DYNA_NPC_DEFAULT_MESSAGE       = 9113,  -- The strands of grass here have been tied together.
         TEAR_IN_FABRIC_OF_SPACE        = 10848, -- There appears to be a tear in the fabric of space...
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.PHOMIUNA_AQUEDUCTS] =
@@ -29,9 +28,11 @@ zones[xi.zone.PHOMIUNA_AQUEDUCTS] =
         FISHING_MESSAGE_OFFSET        = 7243, -- You can't fish here.
         COMMON_SENSE_SURVIVAL         = 7419, -- It appears that you have arrived at a new survival guide provided by the Adventurers' Mutual Aid Network. Common sense dictates that you should now be able to teleport here from similar tomes throughout the world.
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

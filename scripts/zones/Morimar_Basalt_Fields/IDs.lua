@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.MORIMAR_BASALT_FIELDS] =
@@ -32,9 +31,11 @@ zones[xi.zone.MORIMAR_BASALT_FIELDS] =
         UNCANNY_SENSATION             = 7863, -- You are assaulted by an uncanny sensation.
         HOMEPOINT_SET                 = 8177, -- Home point set!
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

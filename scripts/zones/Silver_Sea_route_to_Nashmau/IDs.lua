@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.SILVER_SEA_ROUTE_TO_NASHMAU] =
@@ -24,9 +23,11 @@ zones[xi.zone.SILVER_SEA_ROUTE_TO_NASHMAU] =
         JIDWAHN_SHOP_DIALOG           = 7320, -- Would you care for some items to use on your travels?
         ON_WAY_TO_NASHMAU             = 7321, -- We are on our way to Nashmau. We will be arriving soon.
     },
+
     mob =
     {
     },
+
     npc =
     {
     },

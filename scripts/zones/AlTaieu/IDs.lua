@@ -3,7 +3,6 @@
 -----------------------------------
 require("scripts/globals/zone")
 -----------------------------------
-
 zones = zones or {}
 
 zones[xi.zone.ALTAIEU] =
@@ -30,6 +29,7 @@ zones[xi.zone.ALTAIEU] =
         RETURN_AMULET_TO_PRISHE       = 7534, -- You return the <item> to Prishe.
         HOMEPOINT_SET                 = 7575, -- Home point set!
     },
+
     mob =
     {
         EUVHIS_WHITE         = 16912811,
@@ -43,6 +43,7 @@ zones[xi.zone.ALTAIEU] =
         JAILER_OF_LOVE       = 16912848,
         ABSOLUTE_VIRTUE      = 16912876,
     },
+
     npc =
     {
         RUBIOUS_CRYSTAL_BASE      = 16912899,
