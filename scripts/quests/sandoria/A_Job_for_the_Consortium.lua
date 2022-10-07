@@ -1,7 +1,5 @@
 -----------------------------------
 -- A Job for the Consortium
--- Glenne - Southern Sandoria, !pos -122 -2 15 230
--- Aaveleon - West Ronfaure, !pos -431 -45 343 100
 -----------------------------------
 require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
@@ -27,7 +25,7 @@ quest.sections =
             return status == QUEST_AVAILABLE and
                 player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM) == QUEST_COMPLETED and
                 player:hasKeyItem(xi.ki.TENSHODO_MEMBERS_CARD) and
-                player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 5
+                player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 1
         end,
 
         [xi.zone.PORT_SAN_DORIA] =
@@ -38,7 +36,7 @@ quest.sections =
                     if quest:getVar(player, 'Stage') < os.time() then
                         return quest:progressEvent(651)
                     else
-                        return quest:message(ID.text.LAY_LOW):face(player)
+                        return quest:message(ID.text.LAY_LOW)
                     end
                 end,
             },
@@ -99,11 +97,11 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.ki.BRUGAIRE_GOODS) then
-                        if math.random() > 0.25 or (VanadielHour() > 6 and VanadielHour() < 18) then
-                            return quest:progressEvent(54)
-                        else
+                        -- if math.random() > 0.25 or (VanadielHour() > 6 and VanadielHour() < 18) then
+                        --     return quest:progressEvent(54)
+                        -- else
                             return quest:progressEvent(54, 1)
-                        end
+                        -- end
                     end
                 end,
             },
