@@ -28,11 +28,16 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../../status_effect_container.h"
 #include "../ai_container.h"
 
+namespace
+{
+    static const duration TIME_TO_SEND_RERAISE_MENU = 8s;
+}
+
 CDeathState::CDeathState(CBattleEntity* PEntity, duration death_time)
 : CState(PEntity, PEntity->targid)
 , m_PEntity(PEntity)
 , m_deathTime(death_time)
-, m_raiseTime(GetEntryTime() + 8s)
+, m_raiseTime(GetEntryTime() + TIME_TO_SEND_RERAISE_MENU)
 {
     m_PEntity->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DEATH, true);
 

@@ -125,8 +125,8 @@ uint8 CBattlefieldHandler::LoadBattlefield(CCharEntity* PChar, const Battlefield
 
         auto* PBattlefield = new CBattlefield(registration.id, m_PZone, registration.area, PChar, false);
 
-        auto* name                = sql->GetData(0);
-        auto* recordholder        = sql->GetData(1);
+        auto  name                = sql->GetStringData(0);
+        auto  recordholder        = sql->GetStringData(1);
         auto  recordtime          = std::chrono::seconds(sql->GetUIntData(2));
         auto  recordPartySize     = sql->GetUIntData(3);
         auto  timelimit           = std::chrono::seconds(sql->GetUIntData(4));
@@ -136,8 +136,8 @@ uint8 CBattlefieldHandler::LoadBattlefield(CCharEntity* PChar, const Battlefield
         auto  rulemask            = sql->GetUIntData(8);
         PBattlefield->m_isMission = sql->GetUIntData(9);
 
-        PBattlefield->SetName((char*)name);
-        PBattlefield->SetRecord((char*)recordholder, recordtime, recordPartySize);
+        PBattlefield->SetName(name);
+        PBattlefield->SetRecord(recordholder, recordtime, recordPartySize);
         PBattlefield->SetTimeLimit(timelimit);
         PBattlefield->SetLevelCap(levelcap);
 
@@ -180,13 +180,13 @@ uint8 CBattlefieldHandler::LoadBattlefield(CCharEntity* PChar, const Battlefield
         return BATTLEFIELD_RETURN_CODE_REQS_NOT_MET;
     }
 
-    auto* name            = sql->GetData(0);
-    auto* recordholder    = sql->GetData(1);
-    auto  recordtime      = std::chrono::seconds(sql->GetUIntData(2));
-    auto  recordPartySize = sql->GetUIntData(3);
+    auto name            = sql->GetStringData(0);
+    auto recordholder    = sql->GetStringData(1);
+    auto recordtime      = std::chrono::seconds(sql->GetUIntData(2));
+    auto recordPartySize = sql->GetUIntData(3);
 
-    PBattlefield->SetName((char*)name);
-    PBattlefield->SetRecord((char*)recordholder, recordtime, recordPartySize);
+    PBattlefield->SetName(name);
+    PBattlefield->SetRecord(recordholder, recordtime, recordPartySize);
     PBattlefield->SetTimeLimit(registration.timeLimit);
     PBattlefield->SetLevelCap(registration.levelCap);
     PBattlefield->SetMaxParticipants(registration.maxPlayers);
