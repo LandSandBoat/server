@@ -274,7 +274,7 @@ namespace charutils
 
             if (mainLevelOver60 > 0)
             {
-                raceStat += floor(grade::GetStatScale(grade, scaleOver60) * mainLevelOver60);
+                raceStat += grade::GetStatScale(grade, scaleOver60) * mainLevelOver60;
             }
 
             // Calculation by profession
@@ -283,7 +283,7 @@ namespace charutils
 
             if (mainLevelOver60 > 0)
             {
-                jobStat += floor(grade::GetStatScale(grade, scaleOver60) * mainLevelOver60);
+                jobStat += grade::GetStatScale(grade, scaleOver60) * mainLevelOver60;
             }
 
             // Calculation for an additional profession
