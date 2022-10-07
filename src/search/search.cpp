@@ -695,7 +695,7 @@ search_req _HandleSearchRequest(CTCPRequestPacket& PTCPRequest)
     uint8 minRank = 0;
     uint8 maxRank = 0;
 
-    uint16 areas[10] = {};
+    uint16 areas[15] = {};
 
     uint32 flags = 0;
 
@@ -706,7 +706,6 @@ search_req _HandleSearchRequest(CTCPRequestPacket& PTCPRequest)
 
     uint8 commentType = 0;
 
-    memset(areas, 0, sizeof(areas));
     // ShowInfo("Received a search packet with size %u byte", size);
 
     while (bitOffset < workloadBits)
@@ -927,7 +926,7 @@ search_req _HandleSearchRequest(CTCPRequestPacket& PTCPRequest)
     sr.commentType = commentType;
 
     sr.nameLen = nameLen;
-    memcpy(sr.zoneid, areas, sizeof(sr.zoneid));
+    memcpy(&sr.zoneid, areas, sizeof(sr.zoneid));
     if (nameLen > 0)
     {
         sr.name.insert(0, name);
