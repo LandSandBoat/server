@@ -9222,7 +9222,7 @@ int32 CLuaBaseEntity::getBattlefieldID()
  *  Notes   : Returns BATTLEFIELD_RETURNCODE (see scripts/globals/battlefield.lua or src/map/battlefield.h)
  ************************************************************************/
 
-uint8 CLuaBaseEntity::registerBattlefield(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2)
+uint8 CLuaBaseEntity::registerBattlefield(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2, sol::object const& arg3)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->loc.zone->m_BattlefieldHandler == nullptr);
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
@@ -9230,18 +9230,30 @@ uint8 CLuaBaseEntity::registerBattlefield(sol::object const& arg0, sol::object c
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
     auto* PZone = PChar->loc.zone == nullptr ? zoneutils::GetZone(PChar->loc.destination) : PChar->loc.zone;
 
-    int    battlefield = (arg0 != sol::lua_nil) ? arg0.as<int>() : -1;
-    uint8  area        = (arg1 != sol::lua_nil) ? arg1.as<uint8>() : 1;
-    uint32 initiator   = (arg2 != sol::lua_nil) ? arg2.as<uint32>() : 0;
-
     // TODO: Verify what happens if -1 makes it to the cast below
-    if (battlefield < 0)
+    if (arg0 == sol::lua_nil)
     {
         ShowError("CLuaBaseEntity::registerBattlefield() - Battlefield State was < 0.  Investigate!");
-        return 6; // For safety, if we hit this condition, return battlefield full.
+        return BATTLEFIELD_RETURN_CODE_BATTLEFIELD_FULL; // For safety, if we hit this condition, return battlefield full.
     }
 
-    return PZone->m_BattlefieldHandler->RegisterBattlefield(PChar, static_cast<uint16>(battlefield), area, initiator);
+    BattlefieldRegistration registration;
+    registration.id        = arg0.as<int>();
+    registration.area      = (arg1 != sol::lua_nil) ? arg1.as<uint8>() : 1;
+    registration.initiator = (arg2 != sol::lua_nil) ? arg2.as<uint32>() : 0;
+
+    if (arg3 != sol::lua_nil)
+    {
+        sol::table battlefield  = arg3.as<sol::table>();
+        registration.maxPlayers = battlefield["maxPlayers"];
+        registration.levelCap   = battlefield["levelCap"];
+        registration.timeLimit  = std::chrono::seconds(battlefield.get<int32>("timeLimit"));
+        registration.isMission  = battlefield.get_or("isMission", false);
+        registration.rules |= battlefield.get<bool>("allowSubjob") ? RULES_ALLOW_SUBJOBS : 0;
+        registration.rules |= battlefield.get<bool>("canLoseExp") ? RULES_LOSE_EXP : 0;
+    }
+
+    return PZone->m_BattlefieldHandler->RegisterBattlefield(PChar, registration);
 }
 
 bool CLuaBaseEntity::battlefieldAtCapacity(int battlefieldID)

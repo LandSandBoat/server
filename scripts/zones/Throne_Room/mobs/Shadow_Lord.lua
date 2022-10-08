@@ -9,22 +9,13 @@ require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 
-entity.onMobSpawn = function(mob)
-    if mob:getID() >= ID.mob.SHADOW_LORD_STAGE_2_OFFSET then
-        if GetMobByID(mob:getID() - 3):isDead() then
-            local battlefield = mob:getBattlefield()
-            battlefield:setLocalVar("phaseChange", 0)
-        end
-    end
-end
-
 entity.onMobFight = function(mob, target)
     -- 1st form
     -- after change magic or physical immunity every 5min or 1k dmg
     -- 2nd form
     -- the Shadow Lord will do nothing but his Implosion attack. This attack hits everyone in the battlefield, but he only has 4000 HP
 
-    if (mob:getID() < ID.mob.SHADOW_LORD_STAGE_2_OFFSET) then -- first phase AI
+    if (mob:getID() < ID.mob.SHADOW_LORD_PHASE_2_OFFSET) then -- first phase AI
         -- once he's under 50% HP, start changing immunities and attack patterns
         if (mob:getHP() / mob:getMaxHP() <= 0.5) then
 
@@ -72,7 +63,6 @@ entity.onMobFight = function(mob, target)
     else
         -- second phase AI: Implode every 9 seconds
         local lastImplodeTime = mob:getLocalVar("lastImplodeTime")
-        -- second phase AI: Implode every 9 seconds
         if (mob:getBattleTime() - lastImplodeTime > 9) then
             mob:useMobAbility(669)
             mob:setLocalVar("lastImplodeTime", mob:getBattleTime())
@@ -81,12 +71,6 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, optParams)
-    if (mob:getID() < ID.mob.SHADOW_LORD_STAGE_2_OFFSET) then
-        player:startEvent(32004)
-        player:setCharVar("mobid", mob:getID())
-    else
-        player:addTitle(xi.title.SHADOW_BANISHER)
-    end
     -- reset everything on death
     mob:setAnimationSub(0)
     mob:SetAutoAttackEnabled(true)
@@ -102,25 +86,6 @@ entity.onMobDespawn = function(mob)
     mob:SetMagicCastingEnabled(true)
     mob:delStatusEffect(xi.effect.MAGIC_SHIELD)
     mob:delStatusEffect(xi.effect.PHYSICAL_SHIELD)
-end
-
-entity.onEventUpdate = function(player, csid, option)
-end
-
-entity.onEventFinish = function(player, csid, option)
-    if (csid == 32004) then
-        local mobid = player:getCharVar("mobid")
-        DespawnMob(mobid)
-        player:setCharVar("mobid", 0)
-
-        -- first phase dies, spawn second phase ID, make him engage, and disable
-        -- magic, auto attack, and abilities (all he does is case Implode by script)
-        local mob = SpawnMob(mobid+3)
-        mob:updateEnmity(player)
-        mob:SetMagicCastingEnabled(false)
-        mob:SetAutoAttackEnabled(false)
-        mob:SetMobAbilityEnabled(false)
-    end
 end
 
 return entity

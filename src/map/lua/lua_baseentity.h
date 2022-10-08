@@ -522,13 +522,13 @@ public:
     uint16 copyConfrontationEffect(uint16 targetID); // copy confrontation effect, param = targetEntity:getTargID()
 
     // Battlefields
-    auto  getBattlefield() -> std::optional<CLuaBattlefield>;                                             // returns CBattlefield* or nullptr if not available
-    int32 getBattlefieldID();                                                                             // returns entity->PBattlefield->GetID() or -1 if not available
-    uint8 registerBattlefield(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2); // attempt to register a battlefield, returns BATTLEFIELD_RETURNCODE
-    bool  battlefieldAtCapacity(int battlefieldID);                                                       // 1 if this battlefield is full
-    bool  enterBattlefield(sol::object const& area);                                                      // enter a battlefield entity is registered with
-    bool  leaveBattlefield(uint8 leavecode);                                                              // leave battlefield if inside one
-    bool  isInDynamis();                                                                                  // If player is in Dynamis return true else false
+    auto  getBattlefield() -> std::optional<CLuaBattlefield>;                                                                      // returns CBattlefield* or nullptr if not available
+    int32 getBattlefieldID();                                                                                                      // returns entity->PBattlefield->GetID() or -1 if not available
+    uint8 registerBattlefield(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2, sol::object const& arg3); // attempt to register a battlefield, returns BATTLEFIELD_RETURNCODE
+    bool  battlefieldAtCapacity(int battlefieldID);                                                                                // 1 if this battlefield is full
+    bool  enterBattlefield(sol::object const& area);                                                                               // enter a battlefield entity is registered with
+    bool  leaveBattlefield(uint8 leavecode);                                                                                       // leave battlefield if inside one
+    bool  isInDynamis();                                                                                                           // If player is in Dynamis return true else false
 
     // Battle Utilities
     bool isAlive();

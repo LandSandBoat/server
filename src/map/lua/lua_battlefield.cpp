@@ -22,6 +22,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "common/logging.h"
 #include "common/timer.h"
 
+#include "../ai/ai_container.h"
 #include "../battlefield.h"
 #include "../entities/charentity.h"
 #include "../entities/mobentity.h"
@@ -220,6 +221,11 @@ std::pair<uint32, std::string> CLuaBattlefield::getInitiator()
     return std::make_pair(initiator.id, initiator.name);
 }
 
+uint32 CLuaBattlefield::getArmouryCrate()
+{
+    return m_PLuaBattlefield->GetArmouryCrate();
+}
+
 void CLuaBattlefield::setLocalVar(std::string const& name, uint64_t value)
 {
     m_PLuaBattlefield->SetLocalVar(name, value);
@@ -297,25 +303,139 @@ void CLuaBattlefield::lose()
     m_PLuaBattlefield->CanCleanup(true);
 }
 
-void CLuaBattlefield::addGroups(sol::table groups)
+void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleArenas)
 {
-    int16 superlinkId = 1;
+    // Ensure that each area has its own super linking
+    int16 superlinkId = 1000 * m_PLuaBattlefield->GetArea();
+    // The lowest entity ID allowed within the battlefield. Used for battlefields with multiple areas.
+    uint32 lowestId = UINT32_MAX;
+    // The highest entity ID allowed within the battlefield
+    uint32 highestId = 0;
+
+    // Check if this Battlefield that can take place in multiple arenas (such as xNM fights)
+    if (hasMultipleArenas)
+    {
+        std::set<uint32> entityIds;
+        for (auto entry : groups)
+        {
+            QueryByNameResult_t groupEntities;
+            sol::table          groupData = entry.second.as<sol::table>();
+
+            auto groupMobs = groupData["mobs"];
+            if (groupMobs.valid())
+            {
+                auto mobNames = groupMobs.get<std::vector<std::string>>();
+                for (const std::string& name : mobNames)
+                {
+                    const QueryByNameResult_t& result = m_PLuaBattlefield->GetZone()->queryEntitiesByName(name);
+                    for (CBaseEntity* entity : result)
+                    {
+                        entityIds.insert(entity->id);
+                        lowestId  = std::min(lowestId, entity->id);
+                        highestId = std::max(highestId, entity->id);
+                    }
+                }
+            }
+        }
+
+        if (!entityIds.empty())
+        {
+            uint32 stride = uint32(entityIds.size()) / m_PLuaBattlefield->GetZone()->m_BattlefieldHandler->MaxBattlefieldAreas();
+
+            // Look to see if there's an Armoury Crate after the last monster in the first area. If so then we need to increase the stride.
+            static const std::string ARMOURY_CRATE = "Armoury_Crate";
+
+            uint32       potentialCrateId = lowestId + stride;
+            CBaseEntity* entity           = zoneutils::GetEntity(potentialCrateId, TYPE_NPC);
+            bool         hasArmouryCrate  = entity != nullptr && entity->name == ARMOURY_CRATE;
+            if (hasArmouryCrate)
+            {
+                ++stride;
+            }
+
+            uint32 offset = stride * (m_PLuaBattlefield->GetArea() - 1);
+            lowestId += offset;
+            highestId = lowestId + stride - 1;
+            if (hasArmouryCrate)
+            {
+                m_PLuaBattlefield->setArmouryCrate(highestId);
+            }
+        }
+    }
+    else
+    {
+        lowestId  = 0;
+        highestId = UINT32_MAX;
+    }
+
+    // The entities to be added to the battlefield
+    std::set<uint32> entities;
+    std::set<uint32> spawnedEntities;
 
     for (auto entry : groups)
     {
         sol::table groupData = entry.second.as<sol::table>();
-        auto       mobNames  = groupData.get<std::vector<std::string>>("mobs");
+
+        QueryByNameResult_t groupEntities;
 
         // Lookup mob ids given the provided names
-        QueryByNameResult_t entities;
-        for (const std::string& name : mobNames)
+        auto groupMobs = groupData["mobs"];
+        if (groupMobs.valid())
         {
-            const QueryByNameResult_t& result = m_PLuaBattlefield->GetZone()->queryEntitiesByName(name);
-            entities.insert(entities.end(), result.begin(), result.end());
+            auto mobNames = groupMobs.get<std::vector<std::string>>();
+            for (const std::string& name : mobNames)
+            {
+                const QueryByNameResult_t& result = m_PLuaBattlefield->GetZone()->queryEntitiesByName(name);
+                for (CBaseEntity* entity : result)
+                {
+                    if (entity->id >= lowestId && entity->id <= highestId)
+                    {
+                        groupEntities.push_back(entity);
+                        if (entities.find(entity->id) == entities.end())
+                        {
+                            m_PLuaBattlefield->InsertEntity(entity, true);
+                            entities.insert(entity->id);
+                        }
+                    }
+                }
+            }
+        }
+
+        // Look to see if there have been any mob ids specifically set for this battlefield.
+        auto groupMobIds = groupData["mobIds"];
+        if (groupMobIds.valid())
+        {
+            auto addMobIdsForArea = [&](const std::vector<uint32>& mobIds)
+            {
+                for (uint32 mobid : mobIds)
+                {
+                    CBaseEntity* entity = zoneutils::GetEntity(mobid, TYPE_MOB);
+                    groupEntities.push_back(entity);
+                    if (entities.find(entity->id) == entities.end())
+                    {
+                        m_PLuaBattlefield->InsertEntity(entity, true);
+                        entities.insert(entity->id);
+                    }
+                }
+            };
+
+            if (hasMultipleArenas)
+            {
+                // Mob IDs need to be in the format of { { id, ... }, { ... } } with each subtable being an area
+                auto  mobIds = groupMobIds.get<std::vector<std::vector<uint32>>>();
+                uint8 area   = m_PLuaBattlefield->GetArea() - 1;
+                XI_DEBUG_BREAK_IF(area >= mobIds.size());
+                addMobIdsForArea(mobIds[area]);
+            }
+            else
+            {
+                auto mobIds = groupMobIds.get<std::vector<uint32>>();
+                addMobIdsForArea(mobIds);
+            }
         }
 
         BattlefieldGroup group;
-        for (CBaseEntity* entity : entities)
+        for (CBaseEntity* entity : groupEntities)
         {
             group.mobIds.push_back(entity->id);
         }
@@ -324,54 +444,98 @@ void CLuaBattlefield::addGroups(sol::table groups)
         group.allDeathCallback    = groupData.get<sol::function>("allDeath");
         group.randomDeathCallback = groupData.get<sol::function>("randomDeath");
 
+        bool spawned = groupData.get_or("spawned", true);
+        if (spawned)
+        {
+            for (CBaseEntity* entity : groupEntities)
+            {
+                if (spawnedEntities.find(entity->id) == spawnedEntities.end())
+                {
+                    entity->Spawn();
+                    spawnedEntities.insert(entity->id);
+                }
+            }
+        }
+
         auto setup = groupData.get<sol::function>("setup");
         if (setup.valid())
         {
             auto mobs = lua.create_table();
-            for (CBaseEntity* entity : entities)
+            for (CBaseEntity* entity : groupEntities)
             {
                 mobs.add(CLuaBaseEntity(entity));
             }
-            setup(mobs);
+            setup(this, mobs);
         }
 
         bool superlink = groupData.get_or("superlink", false);
         if (superlink)
         {
             ++superlinkId;
-        }
 
-        bool stationary = groupData.get_or("stationary", false);
-        auto mods       = groupData["mods"];
-        if (stationary || mods.valid())
-        {
-            for (uint32 mobId : group.mobIds)
+            for (CBaseEntity* entity : groupEntities)
             {
-                auto PMob = dynamic_cast<CMobEntity*>(zoneutils::GetEntity(mobId, TYPE_MOB | TYPE_PET));
+                auto PMob = dynamic_cast<CMobEntity*>(entity);
                 XI_DEBUG_BREAK_IF(PMob == nullptr);
 
                 if (superlink)
                 {
                     PMob->setMobMod(MOBMOD_SUPERLINK, superlinkId);
                 }
+            }
+        }
 
-                if (stationary)
+        bool stationary = groupData.get_or("stationary", true);
+        if (stationary)
+        {
+            for (CBaseEntity* entity : groupEntities)
+            {
+                auto PMob = dynamic_cast<CMobEntity*>(entity);
+                XI_DEBUG_BREAK_IF(PMob == nullptr);
+                PMob->setMobMod(MOBMOD_ROAM_RESET_FACING, 1);
+                PMob->m_maxRoamDistance = 0.5f;
+                PMob->m_roamFlags |= ROAMFLAG_SCRIPTED;
+            }
+        }
+
+        auto mods = groupData["mods"];
+        if (mods.valid())
+        {
+            for (CBaseEntity* entity : groupEntities)
+            {
+                auto PMob = dynamic_cast<CMobEntity*>(entity);
+                XI_DEBUG_BREAK_IF(PMob == nullptr);
+                for (auto modifier : mods.get<sol::table>())
                 {
-                    PMob->setMobMod(MOBMOD_ROAM_RESET_FACING, 1);
-                    PMob->m_maxRoamDistance = 0.5f;
+                    PMob->setModifier(modifier.first.as<Mod>(), modifier.second.as<uint16>());
                 }
+            }
+        }
 
-                if (mods.valid())
+        auto mobMods = groupData["mobMods"];
+        if (mobMods.valid())
+        {
+            for (CBaseEntity* entity : groupEntities)
+            {
+                auto PMob = dynamic_cast<CMobEntity*>(entity);
+                XI_DEBUG_BREAK_IF(PMob == nullptr);
+                for (auto modifier : mobMods.get<sol::table>())
                 {
-                    for (auto modifier : mods.get<sol::table>())
-                    {
-                        PMob->setModifier(modifier.first.as<Mod>(), modifier.second.as<uint16>());
-                    }
+                    PMob->setMobMod(modifier.first.as<uint16>(), modifier.second.as<uint16>());
                 }
             }
         }
 
         m_PLuaBattlefield->addGroup(std::move(group));
+    }
+
+    if (m_PLuaBattlefield->GetArmouryCrate() != 0)
+    {
+        CNpcEntity* entity = static_cast<CNpcEntity*>(zoneutils::GetEntity(m_PLuaBattlefield->GetArmouryCrate(), TYPE_NPC));
+        m_PLuaBattlefield->InsertEntity(entity, true, CONDITION_DISAPPEAR_AT_START);
+        entity->SetUntargetable(true);
+        entity->ResetLocalVars();
+        entity->PAI->EventHandler.removeListener("TRIGGER_CRATE");
     }
 }
 
@@ -401,6 +565,7 @@ void CLuaBattlefield::Register()
     SOL_REGISTER("getLastTimeUpdate", CLuaBattlefield::getLastTimeUpdate);
     SOL_REGISTER("getInitiator", CLuaBattlefield::getInitiator);
     SOL_REGISTER("getLocalVar", CLuaBattlefield::getLocalVar);
+    SOL_REGISTER("getArmouryCrate", CLuaBattlefield::getArmouryCrate);
     SOL_REGISTER("setLocalVar", CLuaBattlefield::setLocalVar);
     SOL_REGISTER("setLastTimeUpdate", CLuaBattlefield::setLastTimeUpdate);
     SOL_REGISTER("setTimeLimit", CLuaBattlefield::setTimeLimit);

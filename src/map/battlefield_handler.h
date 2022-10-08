@@ -30,21 +30,33 @@ class CBaseEntity;
 class CMobEntity;
 class CZone;
 
+struct BattlefieldRegistration
+{
+    uint16               id         = -1;
+    uint8                area       = 1;
+    uint32               initiator  = 0;
+    uint32               maxPlayers = 0;
+    uint32               levelCap   = 0;
+    uint32               rules      = 0;
+    std::chrono::seconds timeLimit  = std::chrono::seconds(0);
+    bool                 isMission  = false;
+};
+
 class CBattlefieldHandler
 {
 public:
     CBattlefieldHandler(CZone* PZone);
-    void          HandleBattlefields(time_point tick);                                   // called every tick to handle win/lose conditions, locking the bcnm, etc
-    uint8         LoadBattlefield(CCharEntity* PChar, uint16 battlefieldID, uint8 area); // attempts to load battlefield, returns BATTLEFIELD_RETURN_CODE
-    CBattlefield* GetBattlefield(CBaseEntity* PEntity, bool checkRegistered = false);    // return pointer to battlefield if exists
+    void          HandleBattlefields(time_point tick);                                              // called every tick to handle win/lose conditions, locking the bcnm, etc
+    uint8         LoadBattlefield(CCharEntity* PChar, const BattlefieldRegistration& registration); // attempts to load battlefield, returns BATTLEFIELD_RETURN_CODE
+    CBattlefield* GetBattlefield(CBaseEntity* PEntity, bool checkRegistered = false);               // return pointer to battlefield if exists
     CBattlefield* GetBattlefieldByArea(uint8 area) const;
     CBattlefield* GetBattlefieldByInitiator(uint32 charID);
-    uint8         RegisterBattlefield(CCharEntity* PChar, uint16 battlefieldID, uint8 area,
-                                      uint32 initiator); // attempts to register or load battlefield, returns BATTLEFIELD_RETURN_CODE
+    uint8         RegisterBattlefield(CCharEntity* PChar, const BattlefieldRegistration& registration); // attempts to register or load battlefield, returns BATTLEFIELD_RETURN_CODE
     bool          RemoveFromBattlefield(CBaseEntity* PEntity, CBattlefield* PBattlefield = nullptr, uint8 leavecode = 3);
     bool          IsRegistered(CCharEntity* PChar);
     bool          IsEntered(CCharEntity* PChar);
     bool          ReachedMaxCapacity(int battlefieldId = -1) const;
+    uint8         MaxBattlefieldAreas() const;
 
 private:
     CZone*                       m_PZone;

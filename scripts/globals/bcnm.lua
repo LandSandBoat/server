@@ -1,6 +1,7 @@
 -----------------------------------
 -- BCNM Functions
 -----------------------------------
+require("scripts/globals/battlefield")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
@@ -535,6 +536,11 @@ local battlefields =
 -- Check requirements for registrant and allies
 -----------------------------------
 local function checkReqs(player, npc, bfid, registrant)
+    local battlefield = xi.battlefield.contents[bfid]
+    if battlefield then
+        return battlefield:checkRequirements(player, npc, registrant)
+    end
+
     local mi       = xi.mission.id
     local npcid    = npc:getID()
     local mjob     = player:getMainJob()
@@ -587,8 +593,6 @@ local function checkReqs(player, npc, bfid, registrant)
         [ 103] = function() return ( mjob == xi.job.SMN and mlvl >= 66                                                                                                     ) end, -- Quest: Shattering Stars (SMN LB5)
         [ 116] = function() return ( player:hasKeyItem(xi.ki.SOUL_GEM_CLASP)                                                                                               ) end, -- Quest: Beyond Infinity
         [ 128] = function() return ( roz == mi.zilart.THE_TEMPLE_OF_UGGALEPIH                                                                                              ) end, -- ZM4: The Temple of Uggalepih
-        [ 160] = function() return ( nat == mi.nation.SHADOW_LORD and natStat == 3                                                                                         ) end, -- Mission 5-2
-        [ 161] = function() return ( basty == mi.bastok.WHERE_TWO_PATHS_CONVERGE and natStat == 1                                                                          ) end, -- Basty 9-2: Where Two Paths Converge
         [ 163] = function() return ( mjob == xi.job.SCH and mlvl >= 66                                                                                                     ) end, -- Quest: Survival of the Wisest (SCH LB5)
         [ 192] = function() return ( roz == mi.zilart.THROUGH_THE_QUICKSAND_CAVES                                                                                          ) end, -- ZM6: Through the Quicksand Caves
         [ 194] = function() return ( mjob == xi.job.SAM and mlvl >= 66                                                                                                     ) end, -- Quest: Shattering Stars (SAM LB5)
@@ -637,12 +641,8 @@ local function checkReqs(player, npc, bfid, registrant)
         [ 608] = function() return ( player:hasKeyItem(xi.ki.TUNING_FORK_OF_WATER)                                                                                         ) end, -- Quest: Trial by Water
         [ 609] = function() return ( mjob == xi.job.SMN and mlvl >= 20                                                                                                     ) end, -- Quest: Trial-size Trial by Water
         [ 611] = function() return ( asa >= mi.asa.SUGAR_COATED_DIRECTIVE and player:hasKeyItem(xi.ki.DOMINAS_CERULEAN_SEAL)                                               ) end, -- ASA4: Sugar-coated Directive
-        [ 640] = function() return ( cop == mi.cop.THREE_PATHS and player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.ULMIA) == 8 and
-                                     npcid == getEntranceOffset(0)                                                                                                         ) end, -- PM5-3 U3: Flames for the Dead
         [ 641] = function() return ( player:hasKeyItem(xi.ki.ZEPHYR_FAN) and npcid == getEntranceOffset(2)                                                                 ) end, -- ENM: Follow the White Rabbit
         [ 642] = function() return ( player:hasKeyItem(xi.ki.ZEPHYR_FAN) and npcid == getEntranceOffset(4)                                                                 ) end, -- ENM: When Hell Freezes Over
-        [ 643] = function() return ( player:hasKeyItem(xi.ki.ZEPHYR_FAN) and npcid == getEntranceOffset(6)                                                                 ) end, -- ENM: Brothers
-        [ 644] = function() return ( player:hasKeyItem(xi.ki.ZEPHYR_FAN) and npcid == getEntranceOffset(8)                                                                 ) end, -- ENM: Holy Cow
         [ 672] = function() return ( cop == mi.cop.THREE_PATHS and player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.ULMIA) == 7                        ) end, -- PM5-3 U2: Head Wind
         [ 673] = function() return ( player:hasKeyItem(xi.ki.MIASMA_FILTER)                                                                                                ) end, -- ENM: Like the Wind
         [ 674] = function() return ( player:hasKeyItem(xi.ki.MIASMA_FILTER)                                                                                                ) end, -- ENM: Sheep in Antlion's Clothing
@@ -714,8 +714,6 @@ local function checkReqs(player, npc, bfid, registrant)
         [ 640] = function() return ( npc:getXPos() > -721 and npc:getXPos() < 719                                                                          ) end, -- PM5-3 U3: Flames for the Dead
         [ 641] = function() return ( player:hasKeyItem(xi.ki.ZEPHYR_FAN)                                                                                   ) end, -- ENM: Follow the White Rabbit
         [ 642] = function() return ( player:hasKeyItem(xi.ki.ZEPHYR_FAN)                                                                                   ) end, -- ENM: When Hell Freezes Over
-        [ 643] = function() return ( player:hasKeyItem(xi.ki.ZEPHYR_FAN)                                                                                   ) end, -- ENM: Brothers
-        [ 644] = function() return ( player:hasKeyItem(xi.ki.ZEPHYR_FAN)                                                                                   ) end, -- ENM: Holy Cow
         [ 673] = function() return ( player:hasKeyItem(xi.ki.MIASMA_FILTER)                                                                                ) end, -- ENM: Like the Wind
         [ 674] = function() return ( player:hasKeyItem(xi.ki.MIASMA_FILTER)                                                                                ) end, -- ENM: Sheep in Antlion's Clothing
         [ 675] = function() return ( player:hasKeyItem(xi.ki.MIASMA_FILTER)                                                                                ) end, -- ENM: Shell We Dance?
@@ -771,6 +769,11 @@ end
 -- check ability to skip a cutscene
 -----------------------------------
 local function checkSkip(player, bfid)
+    local battlefield = xi.battlefield.contents[bfid]
+    if battlefield then
+        return battlefield:checkSkipCutscene(player)
+    end
+
     local mi        = xi.mission.id
     local nat       = player:getCurrentMission(player:getNation())
     local sandy     = player:getCurrentMission(xi.mission.log_id.SANDORIA)
@@ -822,7 +825,6 @@ local function checkSkip(player, bfid)
         [  67] = function() return ( player:hasCompletedMission(xi.mission.log_id.BASTOK, mi.bastok.ON_MY_WAY) or (basty == mi.bastok.ON_MY_WAY and natStat > 2)                                  ) end, -- Basty 7-2: On My Way
         [  96] = function() return ( mission2_3c                                                                                                                                                  ) end, -- Mission 2-3
         [  99] = function() return ( player:hasCompletedMission(xi.mission.log_id.WINDURST, mi.windurst.SAINTLY_INVITATION) or (windy == mi.windurst.SAINTLY_INVITATION and natStat > 1)          ) end, -- Windy 6-2: A Saintly Invitation
-        [ 160] = function() return ( player:hasCompletedMission(player:getNation(), mi.nation.SHADOW_LORD) or (nat == mi.nation.SHADOW_LORD and natStat > 3)                                      ) end, -- Mission 5-2
         [ 161] = function() return ( player:hasCompletedMission(xi.mission.log_id.BASTOK, mi.bastok.WHERE_TWO_PATHS_CONVERGE) or (basty == mi.bastok.WHERE_TWO_PATHS_CONVERGE and natStat > 4)    ) end, -- Basty 9-2: Where Two Paths Converge
         [ 192] = function() return ( player:hasCompletedMission(xi.mission.log_id.ZILART, mi.zilart.THROUGH_THE_QUICKSAND_CAVES)                                                                  ) end, -- ZM6: Through the Quicksand Caves
         [ 224] = function() return ( player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_MOONLIT_PATH) or player:hasKeyItem(xi.ki.WHISPER_OF_THE_MOON)                    ) end, -- Quest: The Moonlit Path
@@ -842,8 +844,6 @@ local function checkSkip(player, bfid)
         [ 544] = function() return ( player:hasCompletedQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_FIRE) or player:hasKeyItem(xi.ki.WHISPER_OF_FLAMES)                         ) end, -- Quest: Trial by Fire
         [ 576] = function() return ( player:hasCompletedQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.TRIAL_BY_EARTH) or player:hasKeyItem(xi.ki.WHISPER_OF_TREMORS)                           ) end, -- Quest: Trial by Earth
         [ 608] = function() return ( player:hasCompletedQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.TRIAL_BY_WATER) or player:hasKeyItem(xi.ki.WHISPER_OF_TIDES)                         ) end, -- Quest: Trial by Water
-        [ 640] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.THREE_PATHS) or
-                                     (cop == mi.cop.THREE_PATHS and player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.ULMIA) > 8)                                              ) end, -- PM5-3 U3: Flames for the Dead
         [ 672] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.THREE_PATHS) or
                                      (cop == mi.cop.THREE_PATHS and player:getMissionStatus(xi.mission.log_id.COP, xi.mission.status.COP.ULMIA) > 7)                                              ) end, -- PM5-3 U2: Head Wind
         [ 704] = function() return ( player:hasCompletedMission(xi.mission.log_id.COP, mi.cop.DARKNESS_NAMED) or (cop == mi.cop.DARKNESS_NAMED and copStat > 2)                                   ) end, -- PM3-5: Darkness Named
@@ -950,24 +950,12 @@ local function getItemById(player, bfid)
     return 0
 end
 
-local function rejectLevelSyncedParty(player, npc)
-    for _, member in pairs(player:getAlliance()) do
-        if member:isLevelSync() then
-            local zoneId = player:getZoneID()
-            local ID = zones[zoneId]
-            -- Your party is unable to participate because certain members' levels are restricted
-            player:messageText(npc, ID.text.MEMBERS_LEVELS_ARE_RESTRICTED, false)
-            return true
-        end
-    end
-    return false
-end
 -----------------------------------
 -- onTrade Action
 -----------------------------------
 
 xi.bcnm.onTrade = function(player, npc, trade, onUpdate)
-    if rejectLevelSyncedParty(player, npc) then -- player's party has level sync, abort.
+    if xi.battlefield.rejectLevelSyncedParty(player, npc) then -- player's party has level sync, abort.
         return false
     end
 
@@ -1041,7 +1029,7 @@ end
 -----------------------------------
 xi.bcnm.onTrigger = function(player, npc)
     -- Cannot enter if anyone in party is level/master sync'd
-    if rejectLevelSyncedParty(player, npc) then
+    if xi.battlefield.rejectLevelSyncedParty(player, npc) then
         return false
     end
 

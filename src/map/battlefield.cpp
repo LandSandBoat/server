@@ -51,10 +51,11 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "zone.h"
 #include <chrono>
 
-CBattlefield::CBattlefield(uint16 id, CZone* PZone, uint8 area, CCharEntity* PInitiator)
+CBattlefield::CBattlefield(uint16 id, CZone* PZone, uint8 area, CCharEntity* PInitiator, bool isInteraction)
 : m_Record(BattlefieldRecord_t())
 , m_StartTime(server_clock::now())
 , m_LastPromptTime(0s)
+, m_isInteraction(isInteraction)
 {
     m_ID               = id;
     m_Zone             = PZone;
@@ -154,7 +155,7 @@ duration CBattlefield::GetFinishTime() const
 
 duration CBattlefield::GetRemainingTime() const
 {
-    return GetTimeLimit() - GetTimeInside();
+    return GetTimeLimit() > GetTimeInside() ? GetTimeLimit() - GetTimeInside() : duration(0);
 }
 
 duration CBattlefield::GetLastTimeUpdate() const
@@ -183,6 +184,11 @@ uint8 CBattlefield::GetLevelCap() const
     return m_LevelCap;
 }
 
+uint32 CBattlefield::GetArmouryCrate() const
+{
+    return m_armouryCrate;
+}
+
 void CBattlefield::SetName(std::string const& name)
 {
     m_Name = name;
@@ -195,7 +201,8 @@ void CBattlefield::SetInitiator(std::string const& name)
 
 void CBattlefield::SetTimeLimit(duration time)
 {
-    m_TimeLimit = time;
+    m_TimeLimit      = time;
+    m_LastPromptTime = time;
 }
 
 void CBattlefield::SetWipeTime(time_point time)
@@ -246,6 +253,11 @@ void CBattlefield::SetLastTimeUpdate(duration time)
     m_LastPromptTime = time;
 }
 
+void CBattlefield::setArmouryCrate(uint32 entityId)
+{
+    m_armouryCrate = entityId;
+}
+
 void CBattlefield::ApplyLevelRestrictions(CCharEntity* PChar) const
 {
     // Adjust player's level to the appropriate cap and remove buffs
@@ -275,6 +287,11 @@ void CBattlefield::ApplyLevelRestrictions(CCharEntity* PChar) const
 bool CBattlefield::IsOccupied() const
 {
     return !m_EnteredPlayers.empty();
+}
+
+bool CBattlefield::isInteraction() const
+{
+    return m_isInteraction;
 }
 
 bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOBCONDITION conditions, bool ally)
@@ -323,7 +340,7 @@ bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOB
     }
     else if (PEntity->objtype == TYPE_NPC)
     {
-        PEntity->status = STATUS_TYPE::NORMAL;
+        PEntity->status = (conditions & CONDITION_DISAPPEAR_AT_START) == CONDITION_DISAPPEAR_AT_START ? STATUS_TYPE::DISAPPEAR : STATUS_TYPE::NORMAL;
         PEntity->loc.zone->UpdateEntityPacket(PEntity, ENTITY_SPAWN, UPDATE_ALL_MOB);
         m_NpcList.push_back(static_cast<CNpcEntity*>(PEntity));
     }
@@ -474,7 +491,7 @@ bool CBattlefield::IsRegistered(CCharEntity* PChar)
 
 bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
 {
-    // player's already zoned, we dont need to do anything
+    // player's already zoned, we don't need to do anything
     if (!PEntity)
     {
         return false;
@@ -493,6 +510,15 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
             PChar->StatusEffectContainer->DelStatusEffect(EFFECT_LEVEL_RESTRICTION);
         }
 
+        if (PChar->isDead())
+        {
+            auto state = dynamic_cast<CDeathState*>(PChar->PAI->GetCurrentState());
+            if (state)
+            {
+                state->allowSendRaise();
+            }
+        }
+
         m_EnteredPlayers.erase(m_EnteredPlayers.find(PEntity->id));
 
         if (leavecode != BATTLEFIELD_LEAVE_CODE_WARPDC)
@@ -509,7 +535,6 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
                 PEntity->loc.p.y = 0;
                 PEntity->loc.p.z = 0;
             }
-            luautils::OnBattlefieldLeave(PChar, this, leavecode);
         }
         charutils::SendClearTimerPacket(PChar);
     }
@@ -609,13 +634,6 @@ void CBattlefield::onTick(time_point time)
         m_FinishTime = m_Status >= BATTLEFIELD_STATUS_WON ? m_FightTick - m_StartTime : m_FinishTime;
 
         luautils::OnBattlefieldTick(this);
-
-        // todo: handle this in global
-        // been here too long, gtfo
-        if (GetTimeInside() >= GetTimeLimit())
-        {
-            CanCleanup(true);
-        }
     }
 }
 
@@ -629,8 +647,32 @@ bool CBattlefield::CanCleanup(bool cleanup)
     return m_Cleanup || m_EnteredPlayers.empty();
 }
 
-void CBattlefield::Cleanup()
+bool CBattlefield::Cleanup(time_point time, bool force)
 {
+    // Wait until
+    if (!force && !m_EnteredPlayers.empty() && m_cleanupTime > time)
+    {
+        return false;
+    }
+
+    // First cleanup the players if they haven't been cleaned up yet
+    if (!m_cleanedPlayers)
+    {
+        uint8 leavecode = m_Status == BATTLEFIELD_STATUS_WON ? BATTLEFIELD_LEAVE_CODE_WIN : BATTLEFIELD_LEAVE_CODE_LOSE;
+        for (auto id : m_EnteredPlayers)
+        {
+            auto* PChar = GetZone()->GetCharByID(id);
+            luautils::OnBattlefieldLeave(PChar, this, leavecode);
+        }
+
+        m_cleanedPlayers = true;
+        if (!force)
+        {
+            m_cleanupTime = time + 10s;
+            return false;
+        }
+    }
+
     // todo: delete all the things?
     for (const auto& mob : m_RequiredEnemyList)
     {
@@ -704,6 +746,8 @@ void CBattlefield::Cleanup()
             sql->Query(query, m_Record.name.c_str(), timeThing, m_Record.partySize, this->GetID(), GetZoneID());
         }
     }
+
+    return true;
 }
 
 bool CBattlefield::LoadMobs()
@@ -878,7 +922,7 @@ void CBattlefield::handleDeath(CBaseEntity* PEntity)
 
                 if (group.deathCallback.valid())
                 {
-                    group.deathCallback(CLuaBaseEntity(PEntity), group.deathCount);
+                    group.deathCallback(CLuaBattlefield(this), CLuaBaseEntity(PEntity), group.deathCount);
                 }
 
                 if (group.allDeathCallback.valid() && group.deathCount >= group.mobIds.size())
@@ -896,13 +940,13 @@ void CBattlefield::handleDeath(CBaseEntity* PEntity)
 
                     if (deathCount == group.mobIds.size())
                     {
-                        group.allDeathCallback(CLuaBaseEntity(PEntity));
+                        group.allDeathCallback(CLuaBattlefield(this), CLuaBaseEntity(PEntity));
                     }
                 }
 
                 if (group.randomDeathCallback.valid() && mobId == group.randomMobId)
                 {
-                    group.randomDeathCallback(CLuaBaseEntity(PEntity));
+                    group.randomDeathCallback(CLuaBattlefield(this), CLuaBaseEntity(PEntity));
                 }
                 break;
             }

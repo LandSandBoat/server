@@ -24,6 +24,7 @@ global_objects=(
     xi
     ai
     os
+    _
 
     Module
     Override
@@ -67,7 +68,9 @@ global_objects=(
     Sequence
     Container
     Event
-    LimbusArea
+    Battlefield
+    BattlefieldMission
+    Limbus
 
     removeSleepEffects
 

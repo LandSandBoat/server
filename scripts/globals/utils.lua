@@ -13,6 +13,36 @@ utils.MAX_INT32  = 2147483647
 function utils.unused(...)
 end
 
+-- bind and related functions are from https://stackoverflow.com/a/18229720
+local unpack = unpack or table.unpack
+
+local function packn(...)
+    return { n = select('#', ...), ... }
+end
+
+local function unpackn(t)
+    return unpack(t, 1, t.n)
+end
+
+local function mergen(...)
+    local res = { n = 0 }
+    for i = 1, select('#', ...) do
+        local t = select(i, ...)
+        for j = 1, t.n do
+            res.n = res.n + 1
+            res[res.n] = t[j]
+        end
+    end
+    return res
+end
+
+function utils.bind(func, ...)
+    local args = packn(...)
+    return function(...)
+        return func(unpackn(mergen(args, packn(...))))
+    end
+end
+
 -- Shuffles a table and returns a new table containing the randomized result.
 function utils.shuffle(inputTable)
     local shuffledTable = {}
@@ -23,6 +53,34 @@ function utils.shuffle(inputTable)
     end
 
     return shuffledTable
+end
+utils.append = nil
+
+-- Recursively appends the input table into the provided base table.
+-- Non-table keys are overwritten by input.
+function utils.append(base, input)
+    for k, v in pairs(input) do
+        local baseValue = base[k]
+        if baseValue ~= nil and type(baseValue) == 'table' and type(v) == 'table' then
+            utils.append(baseValue, v)
+        else
+            base[k] = v
+        end
+    end
+    return base
+end
+
+-- Returns a new table with the two input tables joined together.
+-- Values from second input have higher priority.
+function utils.join(input1, input2)
+    local result = {}
+    utils.append(result, input1)
+    utils.append(result, input2)
+    return result
+end
+
+function utils.minutes(minutes)
+    return minutes * 60
 end
 
 -- Generates a random permutation of integers >= min_val and <= max_val
