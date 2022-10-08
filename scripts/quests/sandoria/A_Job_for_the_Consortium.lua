@@ -38,7 +38,7 @@ quest.sections =
                     if quest:getVar(player, 'Stage') < os.time() then
                         return quest:progressEvent(651)
                     else
-                        return quest:message(ID.text.LAY_LOW)
+                        return quest:message(ID.text.LAY_LOW):face(player)
                     end
                 end,
             },
