@@ -1883,23 +1883,26 @@ void CCharEntity::OnRaise()
 
         loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CActionPacket(action));
 
-        uint8  mLevel  = (m_LevelRestriction != 0 && m_LevelRestriction < GetMLevel()) ? m_LevelRestriction : GetMLevel();
-        uint16 expLost = mLevel <= 67 ? (charutils::GetExpNEXTLevel(mLevel) * 8) / 100 : 2400;
+        uint8 mLevel = charutils::GetCharVar(this, "DeathLevel");
 
-        uint16 xpNeededToLevel = charutils::GetExpNEXTLevel(jobs.job[GetMJob()]) - jobs.exp[GetMJob()];
-
-        // Exp is enough to level you and (you're not under a level restriction, or the level restriction is higher than your current main level).
-        if (xpNeededToLevel < expLost && (m_LevelRestriction == 0 || GetMLevel() < m_LevelRestriction))
+        // Do not return EXP to the player if they do not have a level at death set
+        if (mLevel != 0)
         {
-            // Player probably leveled down when they died.  Give they xp for the next level.
-            expLost = GetMLevel() <= 67 ? (charutils::GetExpNEXTLevel(jobs.job[GetMJob()] + 1) * 8) / 100 : 2400;
-        }
+            uint16 expLost = mLevel <= 67 ? (charutils::GetExpNEXTLevel(mLevel) * 8) / 100 : 2400;
 
-        uint16 xpReturned = (uint16)(ceil(expLost * ratioReturned));
+            uint16 xpNeededToLevel = charutils::GetExpNEXTLevel(jobs.job[GetMJob()]) - jobs.exp[GetMJob()];
 
-        if (GetLocalVar("MijinGakure") == 0 && GetMLevel() >= settings::get<uint8>("map.EXP_LOSS_LEVEL"))
-        {
+            // Exp is enough to level you and (you're not under a level restriction, or the level restriction is higher than your current main level).
+            if (xpNeededToLevel < expLost && (m_LevelRestriction == 0 || GetMLevel() < m_LevelRestriction))
+            {
+                // Player probably leveled down when they died.  Give they xp for the next level.
+                expLost = GetMLevel() <= 67 ? (charutils::GetExpNEXTLevel(jobs.job[GetMJob()] + 1) * 8) / 100 : 2400;
+            }
+
+            uint16 xpReturned = (uint16)(ceil(expLost * ratioReturned));
             charutils::AddExperiencePoints(true, this, this, xpReturned);
+
+            charutils::SetCharVar(this, "DeathLevel", 0);
         }
 
         // If Arise was used then apply a reraise 3 effect on the target
@@ -2043,16 +2046,14 @@ void CCharEntity::Die()
     // influence for conquest system
     conquest::LoseInfluencePoints(this);
 
-    bool loseExperiencePoints = GetLocalVar("MijinGakure") == 0;
-
-    // Do not lose experience points in battlefields
-    if (PBattlefield != nullptr && (PBattlefield->GetRuleMask() & RULES_LOSE_EXP) == 0)
+    if (GetLocalVar("MijinGakure") == 0 &&
+        (PBattlefield == nullptr || (PBattlefield->GetRuleMask() & RULES_LOSE_EXP) == RULES_LOSE_EXP) &&
+        GetMLevel() >= settings::get<uint8>("map.EXP_LOSS_LEVEL"))
     {
-        loseExperiencePoints = false;
-    }
+        // Track what level the player died at to properly give EXP back on raise
+        int32 level = (m_LevelRestriction > 0 && m_LevelRestriction < GetMLevel()) ? m_LevelRestriction : GetMLevel();
+        charutils::SetCharVar(this, "DeathLevel", level);
 
-    if (loseExperiencePoints)
-    {
         float retainPercent = std::clamp(settings::get<uint8>("map.EXP_RETAIN") + getMod(Mod::EXPERIENCE_RETAINED) / 100.0f, 0.0f, 1.0f);
         charutils::DelExperiencePoints(this, retainPercent, 0);
     }
