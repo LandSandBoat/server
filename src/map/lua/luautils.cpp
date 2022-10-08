@@ -4474,6 +4474,16 @@ namespace luautils
         }
     }
 
+    void OnBattlefieldKick(CCharEntity* PChar)
+    {
+        TracyZoneScoped;
+
+        CStatusEffect* status = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_BATTLEFIELD);
+        uint16         power  = status->GetPower();
+
+        invokeBattlefieldEvent(power, "onBattlefieldKick", CLuaBaseEntity(PChar));
+    }
+
     /********************************************************************
         onBattlefieldRegister - callback when you successfully register a BCNM.
         For example, trading an orb, selecting the battle.
