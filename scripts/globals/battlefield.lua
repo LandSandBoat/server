@@ -477,7 +477,8 @@ function Battlefield:onEntryEventUpdate(player, csid, option, extras)
         end
     end
 
-    player:updateEvent(result, self.index, 0, clearTime, partySize, self:checkSkipCutscene(player))
+    local autoSkipCS = self:getLocalVar(player, "CS") == 1 and 100 or 0
+    player:updateEvent(result, self.index, autoSkipCS, clearTime, partySize, self:checkSkipCutscene(player))
     player:updateEventString(name)
     return status < xi.battlefield.status.LOCKED and result < xi.battlefield.returnCode.LOCKED
 end
@@ -494,6 +495,7 @@ end
 
 function Battlefield:onEventFinishEnter(player, csid, option)
     player:setLocalVar("[battlefield]area", 0)
+    self:setLocalVar(player, "CS", 1)
 end
 
 function Battlefield:onEventFinishWin(player, csid, option)
