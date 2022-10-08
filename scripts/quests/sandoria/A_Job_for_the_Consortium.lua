@@ -25,7 +25,7 @@ quest.sections =
             return status == QUEST_AVAILABLE and
                 player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM) == QUEST_COMPLETED and
                 player:hasKeyItem(xi.ki.TENSHODO_MEMBERS_CARD) and
-                player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 1
+                player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 5
         end,
 
         [xi.zone.PORT_SAN_DORIA] =
