@@ -134,6 +134,7 @@ namespace charutils
         float raceStat  = 0; // The final HP number for a race-based level.
         float jobStat   = 0; // Estimate HP level for the level based on the primary profession.
         float sJobStat  = 0; // HP final number for a level based on a secondary profession.
+        float totalStat = 0; // Total stats before merits and subjob calculations.
         int32 bonusStat = 0; // HP bonus number that is added subject to some conditions.
 
         int32 baseValueColumn   = 0; // Column number with base number HP
@@ -274,7 +275,7 @@ namespace charutils
 
             if (mainLevelOver60 > 0)
             {
-                raceStat += floor(grade::GetStatScale(grade, scaleOver60) * mainLevelOver60);
+                raceStat += grade::GetStatScale(grade, scaleOver60) * mainLevelOver60;
             }
 
             // Calculation by profession
@@ -283,7 +284,7 @@ namespace charutils
 
             if (mainLevelOver60 > 0)
             {
-                jobStat += floor(grade::GetStatScale(grade, scaleOver60) * mainLevelOver60);
+                jobStat += grade::GetStatScale(grade, scaleOver60) * mainLevelOver60;
             }
 
             // Calculation for an additional profession
@@ -297,11 +298,14 @@ namespace charutils
                 sJobStat = 0;
             }
 
+            // Rank A Race + Rank A Job = 71 stat -> Clamp max base stat of 70
+            totalStat = std::clamp((raceStat + jobStat), 0.f, 70.f);
+
             // get each merit bonus stat, str,dex,vit and so on...
             MeritBonus = PChar->PMeritPoints->GetMeritValue(statMerit[StatIndex - 2], PChar);
 
             // Value output
-            ref<uint16>(&PChar->stats, counter) = floor((uint16)(settings::get<float>("map.PLAYER_STAT_MULTIPLIER") * (raceStat + jobStat + sJobStat) + MeritBonus));
+            ref<uint16>(&PChar->stats, counter) = floor((uint16)(settings::get<float>("map.PLAYER_STAT_MULTIPLIER") * (totalStat + sJobStat) + MeritBonus));
             counter += 2;
         }
     }
