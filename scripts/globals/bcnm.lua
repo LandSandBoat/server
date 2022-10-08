@@ -987,7 +987,7 @@ xi.bcnm.onTrade = function(player, npc, trade, onUpdate)
             return false
 
         -- Check for already used Orb or testimony.
-        elseif player:hasWornItem(itemId) then
+        elseif player:getWornUses(itemId) > 0 then
             player:messageBasic(xi.msg.basic.ITEM_UNABLE_TO_USE_2, 0, 0) -- Unable to use item.
             return false
         end
@@ -1180,7 +1180,7 @@ xi.bcnm.onEventUpdate = function(player, csid, option, extras)
 
                     -- Set other traded item to worn
                     elseif player:hasItem(item) and player:getName() == initiatorName then
-                        player:createWornItem(item)
+                        player:incrementItemWear(item)
                     end
                 end
 

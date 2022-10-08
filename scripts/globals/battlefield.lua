@@ -80,6 +80,28 @@ xi.battlefield.id =
     SE_APOLLYON = 1293,
 }
 
+xi.battlefield.itemUses =
+{
+    [xi.items.WARRIORS_TESTIMONY] = 3,
+    [xi.items.MONKS_TESTIMONY] = 3,
+    [xi.items.WHITE_MAGES_TESTIMONY] = 3,
+    [xi.items.BLACK_MAGES_TESTIMONY] = 3,
+    [xi.items.RED_MAGES_TESTIMONY] = 3,
+    [xi.items.THIEFS_TESTIMONY] = 3,
+    [xi.items.PALADINS_TESTIMONY] = 3,
+    [xi.items.DARK_KNIGHTS_TESTIMONY] = 3,
+    [xi.items.BEASTMASTERS_TESTIMONY] = 3,
+    [xi.items.BARDS_TESTIMONY] = 3,
+    [xi.items.RANGERS_TESTIMONY] = 3,
+    [xi.items.SAMURAIS_TESTIMONY] = 3,
+    [xi.items.NINJAS_TESTIMONY] = 3,
+    [xi.items.DRAGOONS_TESTIMONY] = 3,
+    [xi.items.SUMMONERS_TESTIMONY] = 3,
+    [xi.items.BLUE_MAGES_TESTIMONY] = 3,
+    [xi.items.CORSAIRS_TESTIMONY] = 3,
+    [xi.items.PUPPETMASTERS_TESTIMONY] = 3,
+}
+
 Battlefield = setmetatable({}, { __index = Container })
 Battlefield.__index = Battlefield
 Battlefield.__eq = function(m1, m2)
@@ -134,6 +156,12 @@ function Battlefield:new(data)
     obj.groups = {}
     obj.paths = {}
     obj.loot = {}
+
+    -- Determine which items need to be traded as the requiredItems format is incompatable with npcUtil.tradeHasExactly
+    obj.tradeItems = {}
+    for index, value in ipairs(obj.requiredItems) do
+        obj.tradeItems[index] = value
+    end
 
     return obj
 end
@@ -231,8 +259,8 @@ function Battlefield:checkRequirements(player, npc, registrant, trade)
         end
     end
 
-    if trade and #self.requiredItems > 0 then
-        if not npcUtil.tradeHasExactly(trade, self.requiredItems) then
+    if trade and #self.tradeItems > 0 then
+        if not npcUtil.tradeHasExactly(trade, self.tradeItems) then
             return false
         end
     end
@@ -286,13 +314,18 @@ function Battlefield.onEntryTrade(player, npc, trade, onUpdate)
     -- Ensure that the traded item(s) are not worn out
     local contents = xi.battlefield.contentsByZone[zoneId]
     for _, content in ipairs(contents) do
-        if
-            #content.requiredItems > 0 and
-            content.requiredItems[1].wornMessage and
-            player:hasWornItem(content.requiredItems[1])
-        then
-            player:messageBasic(content.requiredItems[1].wornMessage)
-            return false
+        if #content.requiredItems > 0 and content.requiredItems.wornMessage and npcUtil.tradeHas(trade, content.tradeItems) then
+            local itemId = content.requiredItems[1]
+            -- Gets the total number of item uses for the given item. Default to one since that is the majority of them.
+            local totalUses = xi.battlefield.itemUses[itemId] or 1
+            if player:getWornUses(itemId) >= totalUses then
+                if totalUses > 1 then
+                    player:messageSpecial(content.requiredItems.wornMessage, itemId)
+                else
+                    player:messageSpecial(content.requiredItems.wornMessage, 0, 0, 0, itemId)
+                end
+                return false
+            end
         end
     end
 
@@ -425,14 +458,9 @@ function Battlefield:onEntryEventUpdate(player, csid, option, extras)
         local effect = player:getStatusEffect(xi.effect.BATTLEFIELD)
         local zone   = player:getZoneID()
 
-        -- Handle traded items
-        for _, item in ipairs(self.requiredItems) do
-            if item.wearMessage and player:hasItem(item[1]) then
-                player:createWornItem(item[1])
-                player:messageSpecial(item.wearMessage, item[1])
-            else
-                player:tradeComplete()
-            end
+        -- Handle traded items if not wearing them
+        if self.requiredItems.wearMessage == nil and #self.tradeItems > 0 then
+            player:tradeComplete()
         end
 
         -- Handle party/alliance members
@@ -576,20 +604,25 @@ end
 
 function Battlefield:onBattlefieldEnter(player, battlefield)
     local initiatorId, _ = battlefield:getInitiator()
-    if player:getID() == initiatorId then
-        if #self.requiredKeyItems > 0 then
-            for _, item in ipairs(self.requiredKeyItems) do
-                player:delKeyItem(item)
-            end
-            if self.requiredKeyItems.message ~= 0 then
-                player:messageSpecial(self.requiredKeyItems.message, unpack(self.requiredKeyItems))
-            end
+    if #self.requiredKeyItems > 0 and ((not self.requiredKeyItems.onlyInitiator) or player:getID() == initiatorId) then
+        for _, item in ipairs(self.requiredKeyItems) do
+            player:delKeyItem(item)
         end
+        if self.requiredKeyItems.message ~= 0 then
+            player:messageSpecial(self.requiredKeyItems.message, unpack(self.requiredKeyItems))
+        end
+    end
 
-        for _, item in ipairs(self.requiredItems) do
-            if item.message ~= 0 then
-                player:messageSpecial(item.message, 0, 0, 0, item[0])
-            end
+    if player:getID() == initiatorId and self.requiredItems.wearMessage and player:hasItem(self.requiredItems[1]) then
+        local itemId = self.requiredItems[1]
+        local uses = player:incrementItemWear(itemId)
+        -- Gets the total number of item uses for the given item. Default to one since that is the majority of them.
+        local totalUses = xi.battlefield.itemUses[itemId] or 1
+        if totalUses > 1 then
+            local remaining = totalUses - uses
+            player:messageSpecial(self.requiredItems.wearMessage, itemId, remaining + 1, remaining)
+        else
+            player:messageSpecial(self.requiredItems.wearMessage, 0, 0, 0, itemId)
         end
     end
 
