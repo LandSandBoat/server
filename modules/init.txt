@@ -59,6 +59,7 @@ era/lua_dynamis/globals/era_dynamis_spawning.lua
 era/lua_dynamis/mobskills/era_pet_skills.lua
 era/lua_dynamis/mobskills/era_regain_skills.lua
 era/lua_dynamis/globals/era_dynamis_zones.lua
+era/sql_dynamis/
 #-----------------------
 #        Renamer
 #-----------------------
