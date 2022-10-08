@@ -604,27 +604,25 @@ end
 
 function Battlefield:onBattlefieldEnter(player, battlefield)
     local initiatorId, _ = battlefield:getInitiator()
-    if player:getID() == initiatorId then
-        if #self.requiredKeyItems > 0 then
-            for _, item in ipairs(self.requiredKeyItems) do
-                player:delKeyItem(item)
-            end
-            if self.requiredKeyItems.message ~= 0 then
-                player:messageSpecial(self.requiredKeyItems.message, unpack(self.requiredKeyItems))
-            end
+    if #self.requiredKeyItems > 0 and ((not self.requiredKeyItems.onlyInitiator) or player:getID() == initiatorId) then
+        for _, item in ipairs(self.requiredKeyItems) do
+            player:delKeyItem(item)
         end
+        if self.requiredKeyItems.message ~= 0 then
+            player:messageSpecial(self.requiredKeyItems.message, unpack(self.requiredKeyItems))
+        end
+    end
 
-        if self.requiredItems.wearMessage and player:hasItem(self.requiredItems[1]) then
-            local itemId = self.requiredItems[1]
-            local uses = player:incrementItemWear(itemId)
-            -- Gets the total number of item uses for the given item. Default to one since that is the majority of them.
-            local totalUses = xi.battlefield.itemUses[itemId] or 1
-            if totalUses > 1 then
-                local remaining = totalUses - uses
-                player:messageSpecial(self.requiredItems.wearMessage, itemId, remaining + 1, remaining)
-            else
-                player:messageSpecial(self.requiredItems.wearMessage, 0, 0, 0, itemId)
-            end
+    if player:getID() == initiatorId and self.requiredItems.wearMessage and player:hasItem(self.requiredItems[1]) then
+        local itemId = self.requiredItems[1]
+        local uses = player:incrementItemWear(itemId)
+        -- Gets the total number of item uses for the given item. Default to one since that is the majority of them.
+        local totalUses = xi.battlefield.itemUses[itemId] or 1
+        if totalUses > 1 then
+            local remaining = totalUses - uses
+            player:messageSpecial(self.requiredItems.wearMessage, itemId, remaining + 1, remaining)
+        else
+            player:messageSpecial(self.requiredItems.wearMessage, 0, 0, 0, itemId)
         end
     end
 
