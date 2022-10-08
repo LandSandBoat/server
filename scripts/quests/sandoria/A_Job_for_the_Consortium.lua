@@ -25,7 +25,7 @@ quest.sections =
             return status == QUEST_AVAILABLE and
                 player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_BRUGAIRE_CONSORTIUM) == QUEST_COMPLETED and
                 player:hasKeyItem(xi.ki.TENSHODO_MEMBERS_CARD) and
-                player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 5
+                player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 1
         end,
 
         [xi.zone.PORT_SAN_DORIA] =
@@ -98,8 +98,10 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.ki.BRUGAIRE_GOODS) then
                         if math.random() > 0.25 or (VanadielHour() > 6 and VanadielHour() < 18) then
+                            quest:setVar(player, 'Option', 0)
                             return quest:progressEvent(54)
                         else
+                            quest:setVar(player, 'Option', 1)
                             return quest:progressEvent(54, 1)
                         end
                     end
@@ -109,10 +111,9 @@ quest.sections =
             onEventFinish =
             {
                 [54] = function(player, csid, option, npc)
-                    if option == 1 then
+                    if quest:getVar(player, 'Option') == 1 then
                         player:delKeyItem(xi.ki.BRUGAIRE_GOODS)
                         quest:setVar(player, 'Stage', getMidnight())
-                        quest:setVar(player, 'Prog', 1)
                     else
                         quest:setVar(player, 'Prog', 2)
                     end
