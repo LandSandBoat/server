@@ -669,10 +669,10 @@ xi.spells.damage.calculateIfMagicBurstBonus = function(caster, target, spell, sp
 end
 
 xi.spells.damage.calculateDayAndWeather = function(caster, target, spell, spellId, spellElement)
-    local dayAndWeather  = 1 -- The variable we want to calculate
-    local weather        = caster:getWeather()
-    local dayElement     = VanadielDayElement()
-    local isHelixSpell   = false -- TODO: I'm not sure thats the correct way to handle helixes. This is how we handle it and im not gonna change it for now.
+    local dayAndWeather = 1 -- The variable we want to calculate
+    local weather       = caster:getWeather()
+    local dayElement    = VanadielDayElement()
+    local isHelixSpell  = false -- TODO: I'm not sure thats the correct way to handle helixes. This is how we handle it and im not gonna change it for now.
 
     -- See if its a Helix type spell
     if spellId >= 278 and spellId <= 285 then
@@ -790,17 +790,20 @@ xi.spells.damage.calculateTMDA = function(caster, target, damageType)
     if targetMagicDamageAdjustment < 0 then -- skip MDT/DT/MDTII etc for Liement if we absorb.
         return targetMagicDamageAdjustment
     end
+
     -- The values set for this modifiers are base 10,000.
     -- -2500 in item_mods.sql means -25% damage recived.
     -- 2500 would mean 25% ADDITIONAL damage taken.
-    -- The effects of the "Shell" spells are also included in this step. The effect also aplies a negative value.
+    -- The effects of the "Shell" spells are also included in this step.
 
-    local globalDamageTaken   = target:getMod(xi.mod.DMG) / 10000         -- Mod is base 10000
-    local magicDamageTaken    = target:getMod(xi.mod.DMGMAGIC) / 10000    -- Mod is base 10000
-    local magicDamageTakenII  = target:getMod(xi.mod.DMGMAGIC_II) / 10000 -- Mod is base 10000
-    local combinedDamageTaken = utils.clamp(magicDamageTaken + globalDamageTaken, -0.5, 0.5) -- The combination of regular "Damage Taken" and "Magic Damage Taken" caps at 50%
+    local globalDamageTaken     = target:getMod(xi.mod.DMG) / 10000         -- Mod is base 10000
+    local magicDamageTaken      = target:getMod(xi.mod.DMGMAGIC) / 10000    -- Mod is base 10000
+    local magicDamageTakenII    = target:getMod(xi.mod.DMGMAGIC_II) / 10000 -- Mod is base 10000
+    local uMagicDamageTaken     = target:getMod(xi.mod.UDMGMAGIC) / 10000   -- Mod is base 10000.
 
-    targetMagicDamageAdjustment = 1 + utils.clamp(combinedDamageTaken + magicDamageTakenII, -0.5, 0.125)  -- "Magic Damage Taken II" bypasses the regular cap, but combined cap is -87.5%
+    local combinedDamageTaken   = utils.clamp(magicDamageTaken + globalDamageTaken, -0.5, 0.5) -- The combination of regular "Damage Taken" and "Magic Damage Taken" caps at 50% both ways.
+    targetMagicDamageAdjustment = utils.clamp(1 + combinedDamageTaken + magicDamageTakenII, 0.125, 1.875) -- "Magic Damage Taken II" bypasses the regular cap, but combined cap is 87.5% both ways.
+    targetMagicDamageAdjustment = utils.clamp(targetMagicDamageAdjustment + uMagicDamageTaken, 0, 2) -- Uncapped magic damage modifier. Cap is 100% both ways.
 
     return targetMagicDamageAdjustment
 end
@@ -810,7 +813,7 @@ xi.spells.damage.calculateDivineEmblemMultiplier = function(caster, target, spel
     local divineEmblemMultiplier = 1
 
     if caster:hasStatusEffect(xi.effect.DIVINE_EMBLEM) then
-        divineEmblemMultiplier = 1 + (caster:getSkillLevel(xi.skill.DIVINE_MAGIC) / 100)
+        divineEmblemMultiplier = 1 + caster:getSkillLevel(xi.skill.DIVINE_MAGIC) / 100
         caster:delStatusEffect(xi.effect.DIVINE_EMBLEM)
     end
 
