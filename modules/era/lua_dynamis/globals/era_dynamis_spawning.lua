@@ -359,7 +359,7 @@ xi.dynamis.normalDynamicSpawn = function(oMob, oMobIndex, target)
             nameObj = normalMobLookup[mobFamily]
         end
         while (indexJob <= indexEndJob) and (nameObj ~= nil) do
-            local mob = zone:insertDynamicEntity({
+            local mobArg = zone:insertDynamicEntity({
                 objtype = xi.objType.MOB,
                 name = nameObj[job][1],
                 x = oMob:getXPos()+math.random()*6-3,
@@ -368,11 +368,11 @@ xi.dynamis.normalDynamicSpawn = function(oMob, oMobIndex, target)
                 rotation = oMob:getRotPos(),
                 groupId = nameObj[job][2],
                 groupZoneId = nameObj[job][3],
-                onMobSpawn = function(mob) xi.dynamis.setMobStats(mob) end,
-                onMobEngaged = function(mob, target) xi.dynamis.mobOnEngaged(mob, target) end,
-                onMobRoam = function(mob) end,
-                onMobDeath = function(mob, playerArg, isKiller)
-                    xi.dynamis.mobOnDeath(mob)
+                onMobSpawn = function(mobArg) xi.dynamis.setMobStats(mobArg) end,
+                onMobEngaged = function(mobArg, target) xi.dynamis.mobOnEngaged(mobArg, target) end,
+                onMobRoam = function(mobArg) end,
+                onMobDeath = function(mobArg, playerArg, isKiller)
+                    xi.dynamis.mobOnDeath(mobArg)
                 end,
                 releaseIdOnDeath = true,
                 specialSpawnAnimation = oMob ~= nil,
@@ -381,18 +381,20 @@ xi.dynamis.normalDynamicSpawn = function(oMob, oMobIndex, target)
                     require("scripts/mixins/job_special"),
                 },
             })
-            mob:setSpawn(oMob:getXPos()+math.random()*6-3, oMob:getYPos()-0.3, oMob:getZPos()+math.random()*6-3, oMob:getRotPos())
-            mob:spawn()
-            mob:setDropID(normalMobLookup["Drops"][mob:getZoneID()][mob:getFamily()][1])
+            mobArg:setSpawn(oMob:getXPos()+math.random()*6-3, oMob:getYPos()-0.3, oMob:getZPos()+math.random()*6-3, oMob:getRotPos())
+            mobArg:spawn()
+            if normalMobLookup["Drops"][mobArg:getZoneID()][mobArg:getFamily()][1] ~= nil then
+                mobArg:setDropID(normalMobLookup["Drops"][mobArg:getZoneID()][mobArg:getFamily()][1])
+            end
             if nameObj[job][4] ~= nil then -- If SpellList ~= nil set SpellList
-                mob:setSpellList(nameObj[job][4])
+                mobArg:setSpellList(nameObj[job][4])
             end
             if nameObj[job][5] ~= nil then -- If SkillList ~= nil set SkillList
-                mob:setMobMod(xi.mobMod.SKILL_LIST, nameObj[job][5])
+                mobArg:setMobMod(xi.mobMod.SKILL_LIST, nameObj[job][5])
             end
             if oMob ~= nil and oMob ~= 0 then
-                mob:setLocalVar("Parent", oMob:getID())
-                mob:updateEnmity(target)
+                mobArg:setLocalVar("Parent", oMob:getID())
+                mobArg:updateEnmity(target)
             end
             indexJob = indexJob + 1 -- Increment to the next mob of the same job.
         end
@@ -1898,7 +1900,7 @@ xi.dynamis.mobOnDeath = function(mob, player, isKiller)
             xi.dynamis.addTimeToDynamis(zone, mobIndex) -- Add Time
         end
         mob:setLocalVar("dynamisMobOnDeathTriggered", 1) -- onDeath lua happens once per party member that killed the mob, but we want this to only run once per mob
-        if mob:getZoneID() == (xi.zone.DYNAMIS_BEAUCEDINE or xi.zone.DYNAMIS_XARCABARD) then
+        if player and mob:getZoneID() == (xi.zone.DYNAMIS_BEAUCEDINE or xi.zone.DYNAMIS_XARCABARD) then
             if mob:getFamily() == (4 or 92 or 93 or 94 or 95) then
                 player:addTreasure(4248, mob, 100) -- Adds Ginurva's Battle Theory to Statues and Eyes in Dynamis Beaucedine and Xarcabard
             elseif mob:getFamily() == (358 or 359) and mob:getMobMod(xi.mobMod.CHECK_AS_NM) == 2 then
