@@ -52,16 +52,18 @@ quest.sections =
             ['Koblakiq'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 0 then
+                    local prog = quest:getVar(player, 'Prog')
+
+                    if prog == 0 then
                         return quest:event(21, { [1] = xi.items.DEMON_PEN }) -- Additional Dialogue
 
-                    elseif quest:getVar(player, 'Prog') == 1 and quest:getVar(player, 'Stage') < os.time() then
+                    elseif prog == 1 and quest:getVar(player, 'Stage') < os.time() then
                         return quest:progressEvent(24)
 
-                    elseif quest:getVar(player, 'Stage') > os.time() then
+                    elseif prog > os.time() then
                         return quest:progressEvent(23)
 
-                    elseif quest:getVar(player, 'Prog') == 2 then
+                    elseif prog == 2 then
                         return quest:progressEvent(25)
 
                     elseif player:hasKeyItem(xi.ki.ZEELOZOKS_EARPLUG) then
