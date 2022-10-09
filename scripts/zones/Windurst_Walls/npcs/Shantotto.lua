@@ -60,16 +60,8 @@ end
 entity.onTrade = function(player, npc, trade)
     local count = trade:getItemCount()
 
-    -- Curses Foiled Again!
-    if (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_AGAIN_1) == QUEST_ACCEPTED) then
-        if (trade:hasItemQty(928, 1) and trade:hasItemQty(880, 2) and count == 3) then
-            player:startEvent(173, 0, 0, 0, 0, 0, 0, 928, 880) -- Correct items given, complete quest.
-        else
-            player:startEvent(172, 0, 0, 0, 0, 0, 0, 928, 880) -- Incorrect or not enough items
-        end
-
-        -- Curses, Foiled ... Again!?
-    elseif (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_AGAIN_2) == QUEST_ACCEPTED) then
+    -- Curses, Foiled ... Again!?
+    if (player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_AGAIN_2) == QUEST_ACCEPTED) then
         if (trade:hasItemQty(17316, 2) and trade:hasItemQty(940, 1) and trade:hasItemQty(552, 1) and count == 4) then
             player:startEvent(183) -- Correct items given, complete quest.
         else
@@ -78,9 +70,6 @@ entity.onTrade = function(player, npc, trade)
     end
 end
 
--- TODO: Reduce complexity
--- Disable cyclomatic complexity check for this function:
--- luacheck: ignore 561
 entity.onTrigger = function(player, npc)
     local foiledAgain = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_AGAIN_1)
     local cfa2 = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_AGAIN_2)
@@ -97,10 +86,6 @@ entity.onTrigger = function(player, npc)
 
         -----------------------------------
         -- Curses Foiled Again!
-    elseif (foiledAgain == QUEST_AVAILABLE) then
-        player:startEvent(171, 0, 0, 0, 0, 0, 0, 928, 880)
-    elseif (foiledAgain == QUEST_ACCEPTED) then
-        player:startEvent(172, 0, 0, 0, 0, 0, 0, 928, 880)
     elseif (foiledAgain == QUEST_COMPLETED and cfa2 == QUEST_AVAILABLE and cfaTimer == 0) then
         local cDay = VanadielDayOfTheYear()
         local cYear = VanadielYear()
@@ -149,28 +134,11 @@ entity.onTrigger = function(player, npc)
 
     elseif (cfa2 == QUEST_COMPLETED) then
         player:startEvent(184) -- New standard dialog after CFA2
-    else
-        player:startEvent(164)
     end
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 173) then
-        if (player:getFreeSlotsCount() == 0) then
-            player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 17081)
-        else
-            player:tradeComplete()
-            player:setCharVar("CursesFoiledAgainDay", VanadielDayOfTheYear())
-            player:setCharVar("CursesFoiledAgainYear", VanadielYear())
-            player:addFame(xi.quest.fame_area.WINDURST, 80)
-            player:addItem(17081)
-            player:messageSpecial(ID.text.ITEM_OBTAINED, 17081)
-            player:completeQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_AGAIN_1)
-        end
-    elseif (csid == 171 and option ~= 1) then
-        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_AGAIN_1)
-
-    elseif (csid == 179) then
+    if (csid == 179) then
         player:setCharVar("CursesFoiledAgainDayFinished", 0)
         player:setCharVar("CursesFoiledAgainYearFinished", 0)
         player:setCharVar("CursesFoiledAgainDay", 0)
