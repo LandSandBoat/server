@@ -27,9 +27,7 @@ function xi.limbus.setupArmouryCrates(bfid, hide)
     local ID
     if
         bfid == 1290 or
-        bfid == 1291 or
         bfid == 1292 or
-        bfid == 1293 or
         bfid == 1294 or
         bfid == 1296
     then
@@ -50,22 +48,6 @@ function xi.limbus.setupArmouryCrates(bfid, hide)
             end
 
             GetNPCByID(ID.npc.APOLLYON_NW_CRATE[5]):setStatus(xi.status.DISAPPEAR)
-        end,
-
-        -- SW Apollyon
-        [1291] = function()
-            for i = 1, 2 do
-                for j = 0, 2 do
-                    GetNPCByID(ID.npc.APOLLYON_SW_CRATE[i] + j):setStatus(xi.status.DISAPPEAR)
-                end
-            end
-
-            for i = 0, 9 do
-                GetNPCByID(ID.npc.APOLLYON_SW_CRATE[3]+i):setUntargetable(false)
-                GetNPCByID(ID.npc.APOLLYON_SW_CRATE[3]+i):setStatus(xi.status.NORMAL)
-            end
-
-            GetNPCByID(ID.npc.APOLLYON_SW_CRATE[4]):setStatus(xi.status.DISAPPEAR)
         end,
 
         -- NE Apollyon
@@ -673,4 +655,8 @@ function Limbus:handleOpenLootCrate(player, npc)
         battlefield:setLocalVar("cutsceneTimer", self.delayToExit)
         battlefield:setStatus(xi.battlefield.status.WON)
     end)
+end
+
+function Limbus:openDoor(battlefield, doorId)
+    xi.limbus.openDoor(battlefield, doorId)
 end

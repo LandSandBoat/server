@@ -92,13 +92,6 @@ zones[xi.zone.APOLLYON] =
             16933233, -- ne 3>4
             16933237, -- ne 4>5
         },
-        APOLLYON_SW_CRATE =
-        {
-            16932865,
-            16932878,
-            16932899,
-            16932909,
-        },
         APOLLYON_NW_CRATE =
         {
             [1] =
