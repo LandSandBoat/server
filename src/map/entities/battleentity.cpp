@@ -2051,7 +2051,7 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
                 }
 
                 // Process damage.
-                attack.ProcessDamage(attack.IsCritical(), attack.IsGuarded());
+                attack.ProcessDamage(attack.IsCritical(), attack.IsGuarded(), attack.GetAttackType() == PHYSICAL_ATTACK_TYPE::KICK);
 
                 // Try shield block
                 if (attack.IsBlocked())
