@@ -91,9 +91,9 @@ public:
     bool                      CheckAnticipated();
     bool                      IsCountered() const;
     bool                      CheckCounter();
-    bool                      IsCovered() const;                              // Returns the covered flag.
-    bool                      CheckCover();                                   // Sets the covered flag and returns it.
-    void                      ProcessDamage(bool isCritical, bool isGuarded); // Processes the damage for this swing.
+    bool                      IsCovered() const;                                           // Returns the covered flag.
+    bool                      CheckCover();                                                // Sets the covered flag and returns it.
+    void                      ProcessDamage(bool isCritical, bool isGuarded, bool isKick); // Processes the damage for this swing.
 
     void SetAttackType(PHYSICAL_ATTACK_TYPE type); // Sets the attack type.
 
