@@ -1054,10 +1054,12 @@ xi.treasure.treasureInfo =
                 misc =
                 {
                     {
-                        test = function(player) return player:getCharVar("WildCard") == 2 end,
+                        test = function(player)
+                            return (player:getCharVar("Quest[2][77]Prog") == 2 or player:getCharVar("Quest[2][77]Prog") == 3) and
+                            not player:hasKeyItem(xi.ki.JOKER_CARD)
+                        end,
                         code = function(player)
                             npcUtil.giveKeyItem(player, xi.ki.JOKER_CARD)
-                            player:setCharVar("WildCard", 3)
                         end,
                     },
                 },
@@ -1581,12 +1583,12 @@ xi.treasure.onTrade = function(player, npc, trade, chestType)
 
     -- gem
     elseif roll <= (info.gil[1] + info.gem[1]) then
-        local gemIndex = math.random(table.getn(info.gem) - 1) + 1
+        local gemIndex = math.random(#info.gem - 1) + 1
         player:addTreasure(info.gem[gemIndex], npc)
 
     -- item
     elseif info.item then
-        local itemIndex = math.random(table.getn(info.item) - 1) + 1
+        local itemIndex = math.random(#info.item - 1) + 1
         player:addTreasure(info.item[itemIndex], npc)
     end
 
