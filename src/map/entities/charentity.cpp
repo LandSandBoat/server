@@ -2148,7 +2148,7 @@ void CCharEntity::Die()
 
     battleutils::RelinquishClaim(this);
 
-    if (this->PPet)
+    if (this->PPet && this->objtype == TYPE_PC)
     {
         if (PPet->StatusEffectContainer->HasStatusEffect(EFFECT_CHARM))
         {
