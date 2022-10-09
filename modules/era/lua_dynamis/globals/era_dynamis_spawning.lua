@@ -1610,10 +1610,15 @@ xi.dynamis.setMobStats = function(mob)
         mob:setMobMod(xi.mobMod.CHECK_AS_NM, 1)
         local job = mob:getMainJob()
 
-        mob:setMobMod(xi.mobMod.HP_SCALE, 132)
-        mob:setHP(mob:getMaxHP())
-        mob:setMobLevel(math.random(78,80))
         mob:setTrueDetection(true)
+
+        if     mob:getFamily() == 359 then -- If Hydra
+            mob:setMobLevel(math.random(80,82))
+        elseif mob:getFamily() == 358 then -- If Kindred
+            mob:setMobLevel(math.random(77,80))
+        else
+            mob:setMobLevel(math.random(75,77))
+        end
 
         if     job == xi.job.WAR then
             local params = {  }
@@ -1724,8 +1729,6 @@ xi.dynamis.setNightmareStats = function(mob)
         xi.dynamis.setSpecialSkill(mob)
         mob:setMobMod(xi.mobMod.CHECK_AS_NM, 1)
         local job = mob:getMainJob()
-        mob:setMobMod(xi.mobMod.HP_SCALE, 132)
-        mob:setHP(mob:getMaxHP())
         mob:setMobLevel(math.random(78,80))
         mob:setTrueDetection(true)
 
@@ -1742,8 +1745,6 @@ xi.dynamis.setNMStats = function(mob)
     mob:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0, true)
     xi.dynamis.setSpecialSkill(mob)
     mob:setMobMod(xi.mobMod.CHECK_AS_NM, 2)
-    mob:setMobMod(xi.mobMod.HP_SCALE, 132)
-    mob:setHP(mob:getMaxHP())
     mob:setMobLevel(math.random(80,82))
     mob:setTrueDetection(true)
     mob:setMobMod(xi.mobMod.CHECK_AS_NM, 2)
@@ -1794,8 +1795,6 @@ xi.dynamis.setMegaBossStats = function(mob)
     mob:setMobType(xi.mobskills.mobType.BATTLEFIELD)
     mob:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0, true)
     mob:setMobMod(xi.mobMod.CHECK_AS_NM, 2)
-    mob:setMobMod(xi.mobMod.HP_SCALE, 132)
-    mob:setHP(mob:getMaxHP())
     mob:setMobLevel(88)
     mob:setMod(xi.mod.STR, -10)
     mob:setTrueDetection(true)
@@ -1815,8 +1814,6 @@ xi.dynamis.setPetStats = function(mob)
 end
 
 xi.dynamis.setAnimatedWeaponStats = function(mob)
-    mob:setMobMod(xi.mobMod.HP_SCALE, 132)
-    mob:setHP(mob:getMaxHP())
     mob:setMobType(xi.mobskills.mobType.BATTLEFIELD)
     mob:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0, true)
     mob:setMobMod(xi.mobMod.CHECK_AS_NM, 2)
