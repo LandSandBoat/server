@@ -111,7 +111,8 @@ quest.sections =
                         return quest:message(ID.text.MINIONS_ATTACK)
 
                     elseif quest:getVar(player, 'Prog') == 3 and not player:hasKeyItem(xi.ki.ZEELOZOKS_EARPLUG) then
-                        npcUtil.giveKeyItem(player, xi.ki.ZEELOZOKS_EARPLUG)
+                        player:giveKeyItem(xi.ki.ZEELOZOKS_EARPLUG)
+                        return quest:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ZEELOZOKS_EARPLUG)
                     end
                 end,
             },

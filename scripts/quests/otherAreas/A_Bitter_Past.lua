@@ -104,7 +104,7 @@ quest.sections =
 
                     elseif not player:hasKeyItem(xi.ki.TINY_WRISTLET) then
                         player:addKeyItem(xi.ki.TINY_WRISTLET)
-                        return quest:message(ID.text.KEYITEM_OBTAINED)
+                        return quest:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.TINY_WRISTLET)
                     end
                 end,
             },
