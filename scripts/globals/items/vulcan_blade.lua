@@ -1,20 +1,24 @@
 -----------------------------------
--- ID: 14987
--- Thunder Mittens
---  Enchantment: "Enthunder"
+-- ID: 17706
+-- Item: Vulcan Blade
+-- Item Effect: Enfire
+-- Duration: 3 minutes
+-----------------------------------
+require("scripts/globals/status")
+require("scripts/globals/msg")
 -----------------------------------
 local item_object = {}
 
 item_object.onItemCheck = function(target)
-    local effect = target:getStatusEffect(xi.effect.ENTHUNDER)
-    if effect ~= nil and effect:getSubType() == 14987 then
-        target:delStatusEffect(xi.effect.ENTHUNDER)
+    local effect = target:getStatusEffect(xi.effect.ENFIRE)
+    if effect ~= nil and effect:getSubType() == 17706 then
+        target:delStatusEffect(xi.effect.ENFIRE)
     end
     return 0
 end
 
 item_object.onItemUse = function(target)
-    local effect = xi.effect.ENTHUNDER
+    local effect = xi.effect.ENFIRE
     local magicskill = target:getSkillLevel(xi.skill.ENHANCING_MAGIC)
     local potency = 0
 
@@ -26,7 +30,7 @@ item_object.onItemUse = function(target)
 
     potency = utils.clamp(potency, 3, 25)
 
-    target:addStatusEffect(effect, potency, 0, 180, 14987)
+    target:addStatusEffect(effect, potency, 0, 180, 17706)
 end
 
 return item_object
