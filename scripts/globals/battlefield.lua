@@ -77,6 +77,7 @@ xi.battlefield.id =
     HOLY_COW = 644,
     SHADOW_LORD_BATTLE = 160,
     WHERE_TWO_PATHS_CONVERGE = 161,
+    SW_APOLLYON = 1291,
     SE_APOLLYON = 1293,
 }
 

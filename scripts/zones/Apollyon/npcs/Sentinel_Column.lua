@@ -20,7 +20,7 @@ end
 entity.onEventUpdate = function(player, csid, option)
     player:updateEvent(
         0,
-        GetServerVariable("[SW_Apollyon]Time"),      -- SW Apollyon
+        GetServerVariable("[SE_APOLLYON]Time"),      -- SW Apollyon
         GetServerVariable("[NW_Apollyon]Time"),      -- NW Apollyon
         GetServerVariable("[SE_APOLLYON]Time"),      -- SE Apollyon
         GetServerVariable("[NE_Apollyon]Time"),      -- NE Apollyon
