@@ -55,16 +55,15 @@ quest.sections =
             ['Koblakiq'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 0 then
+                    local prog = quest:getVar(player, 'Prog')
+
+                    if prog == 0 then
                         return quest:event(15, { [1] = xi.items.ARNICA_ROOT })
-
-                    elseif quest:getVar(player, 'Prog') == 1 and not player:hasKeyItem(xi.ki.GLITTERING_FRAGMENT) then
+                    elseif prog == 1 and not player:hasKeyItem(xi.ki.GLITTERING_FRAGMENT) then
                         return quest:progressEvent(16, { [1] = xi.ki.GLITTERING_FRAGMENT })
-
                     elseif player:hasKeyItem(xi.ki.GLITTERING_FRAGMENT) then
                         return quest:event(17)
-
-                    elseif quest:getVar(player, 'Prog') == 4 then
+                    elseif prog == 4 then
                         return quest:progressEvent(18)
                     end
                 end,

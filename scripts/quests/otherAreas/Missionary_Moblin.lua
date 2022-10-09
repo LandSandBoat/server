@@ -48,7 +48,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if npcUtil.tradeHasExactly(trade, xi.items.SOILED_LETTER) then
-                        return quest:progressEvent(9)
+                        return quest:progressCustscene(9)
                     end
                 end,
 
