@@ -18,6 +18,7 @@ entity.onTrigger = function(player, npc)
     local rank = xi.besieged.getMercenaryRank(player)
     local haveimperialIDtag
     local tokens = 3--player:getAssaultPoint(ILRUSI_ASSAULT_POINT)
+	local floorProgress = player:getCharVar("NyzulFloorProgress")
 
     if player:hasKeyItem(xi.ki.IMPERIAL_ARMY_ID_TAG) then
         haveimperialIDtag = 1
@@ -26,7 +27,7 @@ entity.onTrigger = function(player, npc)
     end
 
     if (rank > 0) then
-        player:startEvent(278, rank, haveimperialIDtag, tokens, player:getCurrentAssault())
+        player:startEvent(278, rank, haveimperialIDtag, tokens, player:getCurrentAssault(), floorProgress)
     else
         player:startEvent(284) -- no rank
     end

@@ -23,8 +23,8 @@ function onTrigger(player)
     end
 
     -- Begin Wrath of the Gods Animation
-    victim:injectActionPacket(5, 207, 0, 0, 0)
-    victim:injectActionPacket(5, 270, 0, 0, 0)
+    victim:injectActionPacket(player:getID(), 5, 207, 0, 0, 0, 0, 0)
+    victim:injectActionPacket(player:getID(), 5, 270, 0, 0, 0, 0, 0)
     -- End Wrath of the Gods Animation
     victim:PrintToPlayer("Some tyrant GM just zapped you. o_O ")
 end
