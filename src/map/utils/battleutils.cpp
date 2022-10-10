@@ -738,12 +738,6 @@ namespace battleutils
 
         damage = std::clamp(damage, -99999, 99999);
 
-        // When set mob will only take 0 or 1 damage
-        if (PDefender->GetLocalVar("DAMAGE_NULL") != 0)
-        {
-            damage %= 2;
-        }
-
         return damage;
     }
 
@@ -865,7 +859,7 @@ namespace battleutils
             // When set mob will only take 0 or 1 damage
             if (PDefender->GetLocalVar("DAMAGE_NULL") != 0)
             {
-                spikesDamage = xirand::GetRandomNumber(1);
+                spikesDamage %= 2;
             }
 
             switch (static_cast<SPIKES>(Action->spikesEffect))
@@ -1027,7 +1021,7 @@ namespace battleutils
             // When set mob will only take 0 or 1 damage
             if (PDefender->GetLocalVar("DAMAGE_NULL") != 0)
             {
-                spikesDamage = xirand::GetRandomNumber(1);
+                spikesDamage %= 2;
             }
 
             PAttacker->takeDamage(spikesDamage, PDefender, ATTACK_TYPE::MAGICAL, GetSpikesDamageType(Action->spikesEffect));
@@ -1079,7 +1073,7 @@ namespace battleutils
                 // When set mob will only take 0 or 1 damage
                 if (PDefender->GetLocalVar("DAMAGE_NULL") != 0)
                 {
-                    spikesDamage = PDefender->GetLocalVar("DAMAGE_DEALT");
+                    spikesDamage %= 2;
                 }
 
                 PAttacker->takeDamage(spikesDamage, PDefender, ATTACK_TYPE::MAGICAL, GetSpikesDamageType(spikesType));
@@ -2453,7 +2447,7 @@ namespace battleutils
         // When set mob will only take 0 or 1 damage
         if (PDefender->GetLocalVar("DAMAGE_NULL") != 0)
         {
-            damage = PDefender->GetLocalVar("DAMAGE_DEALT");
+            damage %= 2;
         }
 
         PDefender->takeDamage(damage, PAttacker, attackType, damageType);
@@ -5421,7 +5415,7 @@ namespace battleutils
         // When set mob will only take 0 or 1 damage
         if (PDefender->GetLocalVar("DAMAGE_NULL") != 0)
         {
-            damage = PDefender->GetLocalVar("DAMAGE_DEALT");
+            damage %= 2;
         }
 
         return damage;
@@ -5467,7 +5461,7 @@ namespace battleutils
         // When set mob will only take 0 or 1 damage
         if (PDefender->GetLocalVar("DAMAGE_NULL") != 0)
         {
-            damage = PDefender->GetLocalVar("DAMAGE_DEALT");
+            damage %= 2;
         }
 
         return damage;
