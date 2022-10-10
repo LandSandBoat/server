@@ -358,7 +358,8 @@ function Battlefield.onEntryTrigger(player, npc)
             return false
         end
 
-        player:startEvent(32000, 0, 0, 0, content.index, 0, 0, 0, 0)
+        local options = utils.mask.setBit(0, content.index, true)
+        player:startEvent(32000, 0, 0, 0, options, 0, 0, 0, 0)
         return true
     end
 
@@ -637,6 +638,11 @@ function Battlefield:onBattlefieldEnter(player, battlefield)
     end
 
     player:messageSpecial(ID.text.TIME_LIMIT_FOR_THIS_BATTLE_IS, 0, 0, 0, math.floor(self.timeLimit / 60))
+
+    if player:hasStatusEffect(xi.effect.BATTLEFIELD) then
+        local status = player:getStatusEffect(xi.effect.BATTLEFIELD)
+        status:setSubPower(1)
+    end
 end
 
 function Battlefield:onBattlefieldDestroy(battlefield)
@@ -647,6 +653,9 @@ function Battlefield:onBattlefieldLeave(player, battlefield, leavecode)
         self:onBattlefieldWin(player, battlefield)
     elseif leavecode == xi.battlefield.leaveCode.LOST then
         self:onBattlefieldLoss(player, battlefield)
+    elseif player:hasStatusEffect(xi.effect.BATTLEFIELD) then
+        local status = player:getStatusEffect(xi.effect.BATTLEFIELD)
+        status:setSubPower(0)
     end
 end
 
@@ -656,6 +665,10 @@ function Battlefield:onBattlefieldWin(player, battlefield)
 end
 
 function Battlefield:onBattlefieldLoss(player, battlefield)
+    player:startEvent(32002, self.lossEventParams)
+end
+
+function Battlefield:onBattlefieldKick(player)
     player:startEvent(32002, self.lossEventParams)
 end
 

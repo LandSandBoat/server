@@ -84,6 +84,24 @@ void CBattlefieldHandler::HandleBattlefields(time_point tick)
 
         ++it;
     }
+
+    for (auto iter = m_orphanedPlayers.begin(); iter != m_orphanedPlayers.end();)
+    {
+        if (tick < (*iter).second)
+        {
+            ++iter;
+            continue;
+        }
+
+        auto* PChar = m_PZone->GetCharByID((*iter).first);
+        if (PChar)
+        {
+            luautils::OnBattlefieldKick(PChar);
+            PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
+            PChar->StatusEffectContainer->DelStatusEffect(EFFECT_LEVEL_RESTRICTION);
+        }
+        iter = m_orphanedPlayers.erase(iter);
+    }
 }
 
 uint8 CBattlefieldHandler::LoadBattlefield(CCharEntity* PChar, const BattlefieldRegistration& registration)
@@ -341,4 +359,10 @@ bool CBattlefieldHandler::ReachedMaxCapacity(int battlefieldId) const
 uint8 CBattlefieldHandler::MaxBattlefieldAreas() const
 {
     return m_MaxBattlefields;
+}
+
+void CBattlefieldHandler::addOrphanedPlayer(CCharEntity* PChar)
+{
+    auto orphan = std::make_pair(PChar->id, server_clock::now() + 5s);
+    m_orphanedPlayers.push_back(orphan);
 }
