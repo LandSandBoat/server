@@ -5,12 +5,14 @@
 -- https://ffxiclopedia.wikia.com/wiki/Logging
 -- https://ffxiclopedia.wikia.com/wiki/Mining
 -----------------------------------
+require("scripts/globals/items")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/roe")
 require("scripts/globals/settings")
+require("scripts/globals/spell_data")
 require("scripts/globals/status")
 require("scripts/globals/zone")
 require("scripts/missions/amk/helpers")
@@ -1389,10 +1391,20 @@ local helmInfo =
 }
 
 -----------------------------------
--- colored rocks. do not change this order!
+-- colored rocks array
 -----------------------------------
 
-local rocks = { 769, 771, 770, 772, 773, 774, 776, 775 }
+local rocks =
+{
+    [xi.magic.element.FIRE] = xi.items.RED_ROCK,
+    [xi.magic.element.ICE] = xi.items.TRANSLUCENT_ROCK,
+    [xi.magic.element.WIND] = xi.items.GREEN_ROCK,
+    [xi.magic.element.EARTH] = xi.items.YELLOW_ROCK,
+    [xi.magic.element.THUNDER] = xi.items.PURPLE_ROCK,
+    [xi.magic.element.WATER] = xi.items.BLUE_ROCK,
+    [xi.magic.element.LIGHT] = xi.items.WHITE_ROCK,
+    [xi.magic.element.DARK] = xi.items.BLACK_ROCK,
+}
 
 -----------------------------------
 -- local functions
@@ -1445,7 +1457,7 @@ local function pickItem(player, info)
 
     -- if we picked a colored rock, change it to the day's element
     if item == 769 then
-        item = rocks[VanadielDayElement() + 1]
+        item = rocks[VanadielDayElement()]
     end
 
     return item
