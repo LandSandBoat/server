@@ -53,7 +53,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if quest:isVarBitsSet(player, 'Option', 1, 2, 3, 4) then
-                        return quest:progressEvent(557, { [1] = xi.ki.SHADED_CRUSE })
+                        return quest:progressEvent(557)
                     else
                         return quest:progressEvent(556)
                     end
@@ -108,6 +108,7 @@ quest.sections =
                     quest:setVarBit(player, 'Option', 4)
                 end,
                 [557] = function(player, csid, option, npc)
+                    print(option)
                     if option == 1 then
                         quest:unsetVarBit(player, 'Option', 1, 2, 3, 4)
                         quest:setVar(player, 'Prog', 1)

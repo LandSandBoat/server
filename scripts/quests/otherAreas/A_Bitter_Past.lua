@@ -55,7 +55,7 @@ quest.sections =
             {
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.ki.TINY_WRISTLET) then
-                        return quest:progressEvent(158)
+                        return quest:progressEvent(154)
                     end
                 end,
             },
@@ -86,7 +86,7 @@ quest.sections =
                     quest:setVar(player, 'Prog', 2)
                 end,
 
-                [158] = function(player, csid, option, npc)
+                [154] = function(player, csid, option, npc)
                     if quest:complete(player) then
                         player:delKeyItem(xi.ki.TINY_WRISTLET)
                     end
@@ -122,8 +122,7 @@ quest.sections =
 
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED and
-                quest:getVar(player, 'Prog') == 3
+            return status == QUEST_COMPLETED
         end,
 
         [xi.zone.TAVNAZIAN_SAFEHOLD] =
@@ -131,14 +130,18 @@ quest.sections =
             ['Equette'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:progressEvent(155)
+                    if quest:getVar(player, 'Prog') == 0 then
+                        return quest:progressEvent(155)
+                    end
                 end,
             },
+
+            ['Frescheque'] = quest:event(157):replaceDefault(),
 
             onEventFinish =
             {
                 [155] = function(player, csid, option, npc)
-                    quest:setVar(player, 'Prog', 4)
+                    quest:setVar(player, 'Prog', 1)
                 end,
             },
         },
