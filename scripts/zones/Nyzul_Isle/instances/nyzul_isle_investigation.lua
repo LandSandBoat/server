@@ -411,6 +411,9 @@ instanceObject.afterInstanceRegister = function(player)
     player:messageName(ID.text.TIME_TO_COMPLETE, player, instance:getTimeLimit())
 
     player:addTempItem(xi.items.UNDERSEA_RUINS_FIREFLIES)
+    player:setCharVar("AssaultEntered", 1)
+    player:delKeyItem(xi.ki.NYZUL_ISLE_ASSAULT_ORDERS)
+    player:messageSpecial(ID.text.KEYITEM_LOST, xi.ki.NYZUL_ISLE_ASSAULT_ORDERS)
 end
 
 -- Instance "tick"
