@@ -1064,6 +1064,40 @@ namespace zoneutils
         return REGION_TYPE::UNKNOWN;
     }
 
+    uint8 GetFameAreaFromZone(uint16 ZoneID)
+    {
+        switch (ZoneID)
+        {
+            case ZONE_SOUTHERN_SANDORIA:
+            case ZONE_NORTHERN_SANDORIA:
+            case ZONE_PORT_SANDORIA:
+            case ZONE_CHATEAU_DORAGUILLE:
+                return 0;
+            case ZONE_PORT_BASTOK:
+            case ZONE_BASTOK_MARKETS:
+            case ZONE_BASTOK_MINES:
+            case ZONE_METALWORKS:
+                return 1;
+            case ZONE_WINDURST_WATERS:
+            case ZONE_WINDURST_WALLS:
+            case ZONE_PORT_WINDURST:
+            case ZONE_WINDURST_WOODS:
+            case ZONE_HEAVENS_TOWER:
+                return 2;
+            case ZONE_RULUDE_GARDENS:
+            case ZONE_UPPER_JEUNO:
+            case ZONE_LOWER_JEUNO:
+            case ZONE_PORT_JEUNO:
+                return 3;
+            case ZONE_RABAO:
+            case ZONE_SELBINA:
+                return 4;
+            case ZONE_NORG:
+                return 5;
+        }
+        return 255;
+    }
+
     CONTINENT_TYPE GetCurrentContinent(uint16 ZoneID)
     {
         return GetCurrentRegion(ZoneID) != REGION_TYPE::UNKNOWN ? CONTINENT_TYPE::THE_MIDDLE_LANDS : CONTINENT_TYPE::OTHER_AREAS;
