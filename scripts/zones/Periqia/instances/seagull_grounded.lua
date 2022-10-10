@@ -8,9 +8,9 @@ require("scripts/globals/items")
 require("scripts/globals/pathfind")
 require("scripts/globals/utils")
 -----------------------------------
-local instance_object = {}
+local instanceObject = {}
 
-instance_object.registryRequirements = function(player)
+instanceObject.registryRequirements = function(player)
     return player:hasKeyItem(xi.ki.PERIQIA_ASSAULT_ORDERS) and
            player:getCurrentAssault() == xi.assault.mission.SEAGULL_GROUNDED and
            player:getCharVar("assaultEntered") == 0 and
@@ -18,22 +18,22 @@ instance_object.registryRequirements = function(player)
            player:getMainLvl() > 50
 end
 
-instance_object.entryRequirements = function(player)
+instanceObject.entryRequirements = function(player)
     return player:hasKeyItem(xi.ki.PERIQIA_ASSAULT_ORDERS) and
            player:getCurrentAssault() == xi.assault.mission.SEAGULL_GROUNDED and
            player:getCharVar("assaultEntered") == 0 and
            player:getMainLvl() > 50
 end
 
-instance_object.onInstanceCreated = function(instance)
+instanceObject.onInstanceCreated = function(instance)
 end
 
-instance_object.onInstanceCreatedCallback = function(player, instance)
+instanceObject.onInstanceCreatedCallback = function(player, instance)
     xi.assault.onInstanceCreatedCallback(player, instance)
     xi.instance.onInstanceCreatedCallback(player, instance)
 end
 
-instance_object.afterInstanceRegister = function(player)
+instanceObject.afterInstanceRegister = function(player)
     local instance = player:getInstance()
 
     xi.assault.afterInstanceRegister(player, xi.items.CAGE_OF_REEF_FIREFLIES)
@@ -41,32 +41,32 @@ instance_object.afterInstanceRegister = function(player)
     GetNPCByID(ID.npc.ANCIENT_LOCKBOX, instance):setPos(-490.000,-9.900,-72.000,0)
 end
 
-instance_object.onInstanceTimeUpdate = function(instance, elapsed)
+instanceObject.onInstanceTimeUpdate = function(instance, elapsed)
     local mob = GetMobByID(ID.mob[xi.assault.mission.SEAGULL_GROUNDED].MOBS_START.EXCALIAC, instance)
     if mob ~= nil then
-        instance_object.onTrack(instance)
+        instanceObject.onTrack(instance)
     end
     xi.instance.updateInstanceTime(instance, elapsed, ID.text)
 end
 
-instance_object.onInstanceFailure = function(instance)
+instanceObject.onInstanceFailure = function(instance)
     xi.assault.onInstanceFailure(instance)
 end
 
-instance_object.onInstanceProgressUpdate = function(instance, progress)
+instanceObject.onInstanceProgressUpdate = function(instance, progress)
 end
 
-instance_object.onInstanceComplete = function(instance)
+instanceObject.onInstanceComplete = function(instance)
     xi.assault.onInstanceComplete(instance, 8, 8)
 end
 
-instance_object.onEventFinish = function(player, csid, option)
+instanceObject.onEventFinish = function(player, csid, option)
 end
 
 -- TODO: Reduce complexity
 -- Disable cyclomatic complexity check for this function:
 -- luacheck: ignore 561
-instance_object.onTrack = function(instance)
+instanceObject.onTrack = function(instance)
     local path =
     {
         [0] =
@@ -613,4 +613,4 @@ instance_object.onTrack = function(instance)
     end
 end
 
-return instance_object
+return instanceObject

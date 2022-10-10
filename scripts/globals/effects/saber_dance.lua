@@ -3,9 +3,9 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effect_object = {}
+local effectObject = {}
 
-effect_object.onEffectGain = function(target, effect)
+effectObject.onEffectGain = function(target, effect)
     local saberDanceMerits = target:getMerit(xi.merit.SABER_DANCE)
     if (saberDanceMerits>5) then
         target:addMod(xi.mod.SAMBA_PDURATION, (saberDanceMerits -5))
@@ -19,7 +19,7 @@ effect_object.onEffectGain = function(target, effect)
     target:delStatusEffect(xi.effect.FAN_DANCE)
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
    local power = effect:getPower()
    local decayby = 0
    -- Double attack rate decays until 20% then stays there
@@ -30,7 +30,7 @@ effect_object.onEffectTick = function(target, effect)
     end
 end
 
-effect_object.onEffectLose = function(target, effect)
+effectObject.onEffectLose = function(target, effect)
     local saberDanceMerits = target:getMerit(xi.merit.SABER_DANCE)
     if (saberDanceMerits>1) then
         target:delMod(xi.mod.SAMBA_PDURATION, (saberDanceMerits -5))
@@ -42,4 +42,4 @@ effect_object.onEffectLose = function(target, effect)
     target:delMod(xi.mod.DOUBLE_ATTACK, effect:getPower())
 end
 
-return effect_object
+return effectObject

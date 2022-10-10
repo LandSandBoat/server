@@ -5,13 +5,13 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return 0
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     if (target:hasStatusEffect(xi.effect.FOOD) == true) then
         target:delStatusEffect(xi.effect.FOOD)
     elseif (target:hasStatusEffect(xi.effect.FIELD_SUPPORT_FOOD) == true) then
@@ -19,4 +19,4 @@ item_object.onItemUse = function(target)
     end
 end
 
-return item_object
+return itemObject

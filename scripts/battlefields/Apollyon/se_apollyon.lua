@@ -1,6 +1,9 @@
 -----------------------------------
 -- Area: Appolyon
 -- Name: SE Apollyon
+-- !addkeyitem black_card
+-- !addkeyitem cosmo_cleanse
+-- !pos 600 -0.5 -600 38
 -----------------------------------
 local ID = require("scripts/zones/Apollyon/IDs")
 require("scripts/globals/battlefield")
@@ -9,90 +12,117 @@ require("scripts/globals/items")
 require("scripts/globals/keyitems")
 -----------------------------------
 
-local area = LimbusArea:new("SE_APOLLYON", xi.ki.BLACK_CARD)
+local content = Limbus:new({
+    zoneId           = xi.zone.APOLLYON,
+    battlefieldId    = xi.battlefield.id.SE_APOLLYON,
+    maxPlayers       = 18,
+    timeLimit        = utils.minutes(30),
+    index            = 2,
+    area             = 3,
+    entryNpc         = '_12i',
+    requiredKeyItems = { xi.ki.COSMO_CLEANSE, xi.ki.BLACK_CARD, message = ID.text.YOU_INSERT_THE_CARD_POLISHED },
+    lossEventParams  = { [5] = 1 },
+    name             = "SE_APOLLYON",
+})
 
-area.paths =
+content.paths =
 {
     [ID.SE_APOLLYON.mob.TIEHOLTSODI] =
     {
         { x = 151.0, y = 0.0, z = -528.0, wait = 10000 },
         { x = 147.0, y = 0.0, z = -468.05, wait = 10000 },
     },
+
     [ID.SE_APOLLYON.mob.ADAMANTSHELL[1]] =
     {
         { x = 138.0, y = -2.0, z = -496.0, wait = 2500 },
         { x = 142.0, y = -1.11, z = -500.0, wait = 2500 },
     },
+
     [ID.SE_APOLLYON.mob.ADAMANTSHELL[2]] =
     {
         { x = 139.0, y = -2.0, z = -496.0, wait = 2500 },
         { x = 138.0, y = 0.0, z = -485.0, wait = 2500 },
     },
+
     [ID.SE_APOLLYON.mob.ADAMANTSHELL[3]] =
     {
         { x = 129.0, y = 0.0, z = -504.0, wait = 2500 },
         { x = 138.0, y = -2.0, z = -497.0, wait = 2500 },
     },
+
     [ID.SE_APOLLYON.mob.ADAMANTSHELL[4]] =
     {
         { x = 183.0, y = 0.0, z = -554.0, wait = 2500 },
         { x = 185.0, y = 0.0, z = -535.0, wait = 2500 },
     },
+
     [ID.SE_APOLLYON.mob.ADAMANTSHELL[5]] =
     {
         { x = 185.0, y = 0.0, z = -535.0, wait = 2500 },
         { x = 183.0, y = 0.0, z = -554.0, wait = 2500 },
     },
+
     [ID.SE_APOLLYON.mob.ADAMANTSHELL[6]] =
     {
         { x = 195.0, y = 0.0, z = -446.0, wait = 2500 },
         { x = 215.0, y = 0.0, z = -436.0, wait = 2500 },
     },
+
     [ID.SE_APOLLYON.mob.ADAMANTSHELL[7]] =
     {
         { x = 212.0, y = 0.0, z = -441.0, wait = 2500 },
         { x = 192.0, y = 0.0, z = -441.0, wait = 2500 },
     },
+
     [ID.SE_APOLLYON.mob.ADAMANTSHELL[8]] =
     {
         { x = 190.0, y = 0.0, z = -436.0, wait = 2500 },
         { x = 208.0, y = 0.0, z = -448.0, wait = 2500 },
     },
+
     [ID.SE_APOLLYON.mob.FLYING_SPEAR[1]] =
     {
         { x = 505.0, y = 0.0, z = -305.0, wait = 10000 },
         { x = 490.0, y = 0.0, z = -287.0, wait = 10000 },
     },
+
     [ID.SE_APOLLYON.mob.FLYING_SPEAR[2]] =
     {
         { x = 558.0, y = 0.0, z = -348.0, wait = 10000 },
         { x = 540.0, y = 0.0, z = -347.0, wait = 10000 },
     },
+
     [ID.SE_APOLLYON.mob.FLYING_SPEAR[3]] =
     {
         { x = 619.0, y = 0.0, z = -337.0, wait = 10000 },
         { x = 633.0, y = 0.0, z = -332.0, wait = 10000 },
     },
+
     [ID.SE_APOLLYON.mob.FLYING_SPEAR[4]] =
     {
         { x = 600.0, y = 0.0, z = -381.0, wait = 10000 },
         { x = 599.0, y = 0.0, z = -365.0, wait = 10000 },
     },
+
     [ID.SE_APOLLYON.mob.FLYING_SPEAR[5]] =
     {
         { x = 541.0, y = 0.0, z = -368.0, wait = 10000 },
         { x = 530.0, y = 0.0, z = -353.0, wait = 10000 },
     },
+
     [ID.SE_APOLLYON.mob.FLYING_SPEAR[6]] =
     {
         { x = 560.0, y = 0.0, z = -346.0, wait = 10000 },
         { x = 538.0, y = 0.0, z = -353.0, wait = 10000 },
     },
+
     [ID.SE_APOLLYON.mob.FLYING_SPEAR[7]] =
     {
         { x = 616.0, y = 0.0, z = -380.0, wait = 10000 },
         { x = 610.0, y = 0.0, z = -364.0, wait = 10000 },
     },
+
     [ID.SE_APOLLYON.mob.FLYING_SPEAR[8]] =
     {
         { x = 577.0, y = 0.0, z = -367.0, wait = 10000 },
@@ -110,7 +140,7 @@ local floorThreeCratePositions =
     { 354.661, -0.072, -273.424 },
 }
 
-area.groups =
+content.groups =
 {
     -- Floor 1
     {
@@ -123,7 +153,8 @@ area.groups =
             [xi.mod.HTH_SDT] = 0,
             [xi.mod.SLASH_SDT] = 1250,
         },
-        death = function(mob, count)
+
+        death = function(battlefield, mob, count)
             xi.limbus.openDoor(mob:getBattlefield(), ID.SE_APOLLYON.npc.PORTAL[1])
         end,
     },
@@ -136,7 +167,8 @@ area.groups =
             [xi.mod.HTH_SDT] = 0,
             [xi.mod.SLASH_SDT] = 1250,
         },
-        death = function(mob, count)
+
+        death = function(battlefield, mob, count)
             if count == 2 then
                 xi.limbus.spawnFrom(mob, ID.SE_APOLLYON.npc.TIME_CRATES[1])
             elseif count == 4 then
@@ -155,7 +187,8 @@ area.groups =
             [xi.mod.SLASH_SDT] = 0,
             [xi.mod.PIERCE_SDT] = 1250,
         },
-        death = function(mob, count)
+
+        death = function(battlefield, mob, count)
             xi.limbus.openDoor(mob:getBattlefield(), ID.SE_APOLLYON.npc.PORTAL[2])
         end,
     },
@@ -166,13 +199,14 @@ area.groups =
             [xi.mod.SLASH_SDT] = 0,
             [xi.mod.PIERCE_SDT] = 1250,
         },
-        death = function(mob, count)
+
+        death = function(battlefield, mob, count)
             if count == 2 then
-                xi.limbus.showCrate(ID.SE_APOLLYON.npc.TIME_CRATES[2])
+                npcUtil.showCrate(GetNPCByID(ID.SE_APOLLYON.npc.TIME_CRATES[2]))
             elseif count == 4 then
                 xi.limbus.showRecoverCrate(ID.SE_APOLLYON.npc.RECOVER_CRATES[2])
             elseif count == 8 then
-                xi.limbus.showCrate(ID.SE_APOLLYON.npc.ITEM_CRATES[2])
+                npcUtil.showCrate(GetNPCByID(ID.SE_APOLLYON.npc.ITEM_CRATES[2]))
             end
         end,
     },
@@ -187,7 +221,8 @@ area.groups =
             [xi.mod.IMPACT_SDT] = 1250,
             [xi.mod.HTH_SDT] = 1250,
         },
-        death = function(mob, count)
+
+        death = function(battlefield, mob, count)
             xi.limbus.openDoor(mob:getBattlefield(), ID.SE_APOLLYON.npc.PORTAL[3])
         end,
     },
@@ -199,20 +234,20 @@ area.groups =
             [xi.mod.IMPACT_SDT] = 1250,
             [xi.mod.HTH_SDT] = 1250,
         },
-        setup = function(mobs)
-            local battlefield = mobs[1]:getBattlefield()
+
+        setup = function(battlefield, mobs)
             local timeCrateIndex, recoverCrateIndex, itemCrateIndex = unpack(utils.uniqueRandomTable(1, 6, 3))
 
             battlefield:setLocalVar("timeCrateIndex", timeCrateIndex)
             battlefield:setLocalVar("recoverCrateIndex", recoverCrateIndex)
             battlefield:setLocalVar("itemCrateIndex", itemCrateIndex)
         end,
-        death = function(mob, count)
-            local battlefield = mob:getBattlefield()
+
+        death = function(battlefield, mob, count)
             if count == 2 then
                 local crate = GetNPCByID(ID.SE_APOLLYON.npc.TIME_CRATES[3])
                 crate:setPos(floorThreeCratePositions[battlefield:getLocalVar("timeCrateIndex")])
-                xi.limbus.showCrate(ID.SE_APOLLYON.npc.TIME_CRATES[3])
+                npcUtil.showCrate(GetNPCByID(ID.SE_APOLLYON.npc.TIME_CRATES[3]))
 
             elseif count == 4 then
                 local crate = GetMobByID(ID.SE_APOLLYON.npc.RECOVER_CRATES[3])
@@ -222,7 +257,7 @@ area.groups =
             elseif count == 8 then
                 local crate = GetNPCByID(ID.SE_APOLLYON.npc.ITEM_CRATES[3])
                 crate:setPos(floorThreeCratePositions[battlefield:getLocalVar("itemCrateIndex")])
-                xi.limbus.showCrate(ID.SE_APOLLYON.npc.ITEM_CRATES[3])
+                npcUtil.showCrate(GetNPCByID(ID.SE_APOLLYON.npc.ITEM_CRATES[3]))
             end
         end,
     },
@@ -236,7 +271,8 @@ area.groups =
             [xi.mod.UDMGPHYS] = -8000,
             [xi.mod.UDMGMAGIC] = -10000,
         },
-        setup = function(mobs)
+
+        setup = function(battlefield, mobs)
             for _, mob in ipairs(mobs) do
                 -- Prevent boss from being targetable until first mob Flying_Spear is killed
                 mob:setUntargetable(true)
@@ -245,6 +281,10 @@ area.groups =
                 mob:setMobMod(xi.mobMod.NO_LINK, 1)
             end
         end,
+
+        allDeath = function(battlefield, mob)
+            npcUtil.showCrate(GetNPCByID(ID.SE_APOLLYON.npc.LOOT_CRATE))
+        end
     },
     {
         mobs = { "Flying_Spear" },
@@ -252,7 +292,8 @@ area.groups =
         {
             [xi.mod.MAGIC_NULL] = 100,
         },
-        death = function(mob, count)
+
+        death = function(battlefield, mob, count)
             local boss = mob:getZone():queryEntitiesByName("Evil_Armory")[1]
             boss:setMod(xi.mod.UDMGPHYS, (8 - count) * -1000)
             if count == 1 then
@@ -263,30 +304,20 @@ area.groups =
                 boss:setMobMod(xi.mobMod.NO_LINK, 0)
             end
         end,
-        all_death = function(mob)
+
+        all_death = function(battlefield, mob)
             local boss = mob:getZone():queryEntitiesByName("Evil_Armory")[1]
             boss:setMod(xi.mod.UDMGMAGIC, 0)
         end,
     },
 }
 
-area.loot =
+content.loot =
 {
     [ID.SE_APOLLYON.npc.ITEM_CRATES[1]] =
     {
         {
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
-        },
-
-        {
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
-        },
-
-        {
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
-        },
-
-        {
+            quantity = 4,
             { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
         },
 
@@ -319,18 +350,7 @@ area.loot =
     [ID.SE_APOLLYON.npc.ITEM_CRATES[2]] =
     {
         {
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
-        },
-
-        {
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
-        },
-
-        {
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
-        },
-
-        {
+            quantity = 4,
             { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
         },
 
@@ -364,18 +384,7 @@ area.loot =
     [ID.SE_APOLLYON.npc.ITEM_CRATES[3]] =
     {
         {
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
-        },
-
-        {
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
-        },
-
-        {
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
-        },
-
-        {
+            quantity = 4,
             { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
         },
 
@@ -402,22 +411,7 @@ area.loot =
     [ID.SE_APOLLYON.npc.LOOT_CRATE] =
     {
         {
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
-        },
-
-        {
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
-        },
-
-        {
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
-        },
-
-        {
-            { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
-        },
-
-        {
+            quantity = 5,
             { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
         },
 
@@ -452,4 +446,4 @@ area.loot =
     },
 }
 
-return area:createBattlefield()
+return content:register()

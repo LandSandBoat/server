@@ -8,9 +8,9 @@ require('scripts/globals/status')
 require('scripts/globals/missions')
 require('scripts/globals/keyitems')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
     zone:registerRegion(1, -421, -2, 377,  -417, 0, 381) -- RDC
     zone:registerRegion(2, -422, -2, -422,  -418, 0, -418) -- +1
     zone:registerRegion(3, 418, -2, 378,  422, 0, 382) -- +2
@@ -70,7 +70,7 @@ zone_object.onInitialize = function(zone)
     SetServerVariable("[SEA]IxAernDRG_PH", groups[math.random(1, #groups)] + math.random(0, 2))
 end
 
-zone_object.afterZoneIn = function(player)
+zoneObject.afterZoneIn = function(player)
     player:entityVisualPacket("door")
     player:entityVisualPacket("lst1")
     player:entityVisualPacket("lst2")
@@ -85,7 +85,7 @@ zone_object.afterZoneIn = function(player)
     player:entityVisualPacket("slp3")
 end
 
-zone_object.onGameHour = function(zone)
+zoneObject.onGameHour = function(zone)
     local vanadielHour = VanadielHour()
     local qmDrk = GetNPCByID(ID.npc.QM_IXAERN_DRK) -- Ix'aern drk
     local s = math.random(6, 12) -- wait time till change to next spawn pos, random 15~30 mins.
@@ -106,11 +106,11 @@ zone_object.onGameHour = function(zone)
     end
 end
 
-zone_object.onConquestUpdate = function(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
@@ -128,7 +128,7 @@ zone_object.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zone_object.onRegionEnter = function(player, region)
+zoneObject.onRegionEnter = function(player, region)
     if player:getCharVar("Ru-Hmet-TP") == 0 and player:getAnimation() == 0 then
         switch (region:GetRegionID()): caseof
         {
@@ -190,10 +190,10 @@ zone_object.onRegionEnter = function(player, region)
     end
 end
 
-zone_object.onRegionLeave = function(player, region)
+zoneObject.onRegionLeave = function(player, region)
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
     if
         (csid >149 and csid < 184) or
         csid == 102 or
@@ -204,7 +204,7 @@ zone_object.onEventUpdate = function(player, csid, option)
     end
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
     if csid == 101 and option == 1 then
         player:setPos(540, -1, -499.900, 62, 36)
         player:setCharVar("Ru-Hmet-TP", 0)
@@ -219,4 +219,4 @@ zone_object.onEventFinish = function(player, csid, option)
     end
 end
 
-return zone_object
+return zoneObject

@@ -12,9 +12,9 @@ require("scripts/globals/mobskills")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     local dispel = target:eraseStatusEffect()
 
     if (dispel ~= xi.effect.NONE) then
@@ -24,11 +24,11 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 1
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     mob:eraseAllStatusEffect()
 
     return 0
 end
 
-return mobskill_object
+return mobskillObject

@@ -8,9 +8,9 @@ require('scripts/globals/missions')
 require('scripts/globals/settings')
 require('scripts/globals/zone')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onGameHour = function(zone)
+zoneObject.onGameHour = function(zone)
     -- Script for Laughing Bison sign flip animations
     local timer = 1152 - ((os.time() - 1009810802)%1152)
 
@@ -24,11 +24,11 @@ zone_object.onGameHour = function(zone)
     SetServerVariable("Mhaura_Deastination", math.random(1, 100))
 end
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
     SetExplorerMoogles(ID.npc.EXPLORER_MOOGLE)
 end
 
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
@@ -47,11 +47,11 @@ zone_object.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zone_object.onConquestUpdate = function(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zone_object.onTransportEvent = function(player, transport)
+zoneObject.onTransportEvent = function(player, transport)
     if transport == 47 or transport == 46 then
         if not player:hasKeyItem(xi.ki.BOARDING_PERMIT) or xi.settings.main.ENABLE_TOAU == 0 then
             player:setPos(8.200, -1.363, 3.445, 192)
@@ -64,10 +64,10 @@ zone_object.onTransportEvent = function(player, transport)
     end
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
     if csid == 200 then
         local DepartureTime = VanadielHour()
 
@@ -87,4 +87,4 @@ zone_object.onEventFinish = function(player, csid, option)
     end
 end
 
-return zone_object
+return zoneObject

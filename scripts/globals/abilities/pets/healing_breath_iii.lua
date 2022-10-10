@@ -6,13 +6,13 @@ require("scripts/globals/status")
 require("scripts/globals/mobskills")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-ability_object.onUseAbility = function(pet, target, skill, action)
+abilityObject.onUseAbility = function(pet, target, skill, action)
 
     -- Info:
     -- Breath Formula: http://www.bluegartr.com/threads/108543-Wyvern-Breath-Testing?p=5357018&viewfull=1#post5357018
@@ -49,4 +49,4 @@ ability_object.onUseAbility = function(pet, target, skill, action)
     return base
 end
 
-return ability_object
+return abilityObject

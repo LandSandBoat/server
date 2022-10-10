@@ -15,20 +15,9 @@ require("scripts/globals/status")
 require("scripts/globals/settings")
 require("scripts/globals/weaponskills")
 -----------------------------------
-local weaponskill_object = {}
+local weaponskillObject = {}
 
-weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
-    -- check to see if player has the unlock charvar for this, if not, do no damage.
-    local hasMeritWsUnlock = 1
-	
-    if player:isPC() then
-	    hasMeritWsUnlock = player:getCharVar("hasApexArrowUnlock")
-	end
-	
-    if hasMeritWsUnlock ~= 1 then
-        player:PrintToPlayer("You don't have this WS unlocked.")
-        return
-    end
+weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
 
     local params = {}
     params.numHits = 1
@@ -54,4 +43,4 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
 
 end
 
-return weaponskill_object
+return weaponskillObject

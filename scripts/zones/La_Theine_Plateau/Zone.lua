@@ -14,19 +14,19 @@ require('scripts/globals/quests')
 require('scripts/globals/status')
 require('scripts/globals/zone')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onChocoboDig = function(player, precheck)
+zoneObject.onChocoboDig = function(player, precheck)
     return xi.chocoboDig.start(player, precheck)
 end
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
     laTheineGlobal.moveFallenEgg()
     xi.chocobo.initZone(zone)
     xi.voidwalker.zoneOnInit(zone)
 end
 
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
@@ -42,26 +42,26 @@ zone_object.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zone_object.onConquestUpdate = function(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zone_object.onRegionEnter = function(player, region)
+zoneObject.onRegionEnter = function(player, region)
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
     if csid == 123 then
         quests.rainbow.onEventUpdate(player)
     end
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
     if csid == 122 then
         npcUtil.completeQuest(player, xi.quest.log_id.BASTOK, xi.quest.id.bastok.DARK_PUPPET, { item=14096, fame=40, var="darkPuppetCS" }) -- Chaos Sollerets
     end
 end
 
-zone_object.onZoneWeatherChange = function(weather)
+zoneObject.onZoneWeatherChange = function(weather)
     local rainbow = GetNPCByID(ID.npc.RAINBOW)
     local timeOfTheDay = VanadielTOTD()
     local setRainbow = rainbow:getLocalVar("setRainbow")
@@ -74,7 +74,7 @@ zone_object.onZoneWeatherChange = function(weather)
     end
 end
 
-zone_object.onTOTDChange = function(timeOfTheDay)
+zoneObject.onTOTDChange = function(timeOfTheDay)
     local rainbow = GetNPCByID(ID.npc.RAINBOW)
     local setRainbow = rainbow:getLocalVar("setRainbow")
 
@@ -86,4 +86,4 @@ zone_object.onTOTDChange = function(timeOfTheDay)
     end
 end
 
-return zone_object
+return zoneObject

@@ -6,13 +6,13 @@ require("scripts/globals/status")
 require("scripts/globals/mobskills")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-ability_object.onUseAbility = function(pet, target, skill, action)
+abilityObject.onUseAbility = function(pet, target, skill, action)
 
     -- TODO:
     -- Healing Breath I and II should have lower multipliers.  They'll need to be corrected if the multipliers are ever found.  Don't want to over-correct right now.
@@ -43,4 +43,4 @@ ability_object.onUseAbility = function(pet, target, skill, action)
     return base
 end
 
-return ability_object
+return abilityObject

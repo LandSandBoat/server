@@ -15,24 +15,12 @@ require("scripts/globals/status")
 require("scripts/globals/settings")
 require("scripts/globals/weaponskills")
 -----------------------------------
-local weaponskill_object = {}
+local weaponskillObject = {}
 
-weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
-    -- check to see if player has the unlock charvar for this, if not, do no damage.
-    local hasMeritWsUnlock = 1
-	
-    if player:isPC() then
-	    hasMeritWsUnlock = player:getCharVar("hasRealmrazerUnlock")
-	end
-
-    if hasMeritWsUnlock ~= 1 then
-        player:PrintToPlayer("You don't have this WS unlocked.")
-        return
-    end
-
+weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 7
-    params.ftp100 = 2.0 params.ftp200 = 3.0 params.ftp300 = 4.0
+    params.ftp100 = 0.88 params.ftp200 = 0.88 params.ftp300 = 0.88
     params.str_wsc = 0.0 params.dex_wsc = 0.0 params.vit_wsc = 0.0
     params.agi_wsc = 0.0 params.int_wsc = 0.0 params.mnd_wsc = player:getMerit(xi.merit.REALMRAZER) * 0.17
     params.chr_wsc = 0.0
@@ -51,4 +39,4 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     return tpHits, extraHits, criticalHit, damage
 end
 
-return weaponskill_object
+return weaponskillObject

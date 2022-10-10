@@ -6,9 +6,9 @@ require('scripts/globals/conquest')
 require('scripts/globals/zone')
 require('scripts/globals/status')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
     SetServerVariable("[Central_Apollyon]Time", 0)
     SetServerVariable("[CS_Apollyon]Time", 0)
     SetServerVariable("[NE_Apollyon]Time", 0)
@@ -38,11 +38,11 @@ zone_object.onInitialize = function(zone)
     zone:registerRegion(36, -523, -4, 636, -516, 4, 643) -- appolyon NW telporter floor 4 to floor 5
 end
 
-zone_object.onConquestUpdate = function(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if
@@ -56,7 +56,7 @@ zone_object.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zone_object.onRegionEnter = function(player,region)
+zoneObject.onRegionEnter = function(player,region)
     local regionID = region:GetRegionID()
 
     switch (regionID): caseof
@@ -162,31 +162,18 @@ zone_object.onRegionEnter = function(player,region)
     }
 end
 
-zone_object.onRegionLeave = function(player, region)
+zoneObject.onRegionLeave = function(player, region)
 end
 
-zone_object.onEventUpdate = function(player,csid,option)
+zoneObject.onEventUpdate = function(player,csid,option)
 end
 
-zone_object.onEventFinish = function(player,csid,option)
+zoneObject.onEventFinish = function(player,csid,option)
     if csid == 100 and option == 1 then
         player:setPos(557, -1, 441, 128, 33) -- Apollyon: SE_NE exit
     elseif csid == 101 and option == 1 then
         player:setPos(-561, 0, 443, 242, 33) -- Apollyon: NW_SW exit
     end
-
-    if
-        (csid == 32001 or csid == 32002) and
-        player:getCharVar("ApollyonEntrance") == 1
-    then
-        player:setPos(638.099, 0.000, -610.997) -- East
-        player:setCharVar("ApollyonEntrance", 0)
-    elseif
-        (csid == 32001 or csid == 32002) and
-        player:getCharVar("ApollyonEntrance") == 0
-    then
-        player:setPos(-646.000, 0.000, -616.000) -- West
-    end
 end
 
-return zone_object
+return zoneObject

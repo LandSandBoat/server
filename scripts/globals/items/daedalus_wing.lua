@@ -3,14 +3,14 @@
 -- Daedalus Wing
 -- Increases TP of the user by 1000
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return 0
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addTP(1000)
 end
 
-return item_object
+return itemObject

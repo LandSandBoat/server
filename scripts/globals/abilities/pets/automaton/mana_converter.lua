@@ -6,13 +6,13 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAutomatonAbilityCheck = function(target, automaton, skill)
+abilityObject.onAutomatonAbilityCheck = function(target, automaton, skill)
     return 0
 end
 
-ability_object.onAutomatonAbility = function(target, automaton, skill, master, action)
+abilityObject.onAutomatonAbility = function(target, automaton, skill, master, action)
     automaton:addRecast(xi.recast.ABILITY, skill:getID(), 180)
     local hp = target:getHP()
     local duration = 30
@@ -28,4 +28,4 @@ ability_object.onAutomatonAbility = function(target, automaton, skill, master, a
     return xi.effect.REFRESH
 end
 
-return ability_object
+return abilityObject

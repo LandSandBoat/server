@@ -3,32 +3,32 @@
 -----------------------------------
 local ID = require("scripts/zones/Lebros_Cavern/IDs")
 -----------------------------------
-local instance_object = {}
+local instanceObject = {}
 
-instance_object.afterInstanceRegister = function(player)
+instanceObject.afterInstanceRegister = function(player)
     local instance = player:getInstance()
     player:messageSpecial(ID.text.ASSAULT_27_START, 27)
     player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit())
 end
 
-instance_object.onInstanceCreated = function(instance)
+instanceObject.onInstanceCreated = function(instance)
     for i, v in pairs(ID.mob[27]) do
         SpawnMob(v, instance)
     end
 end
 
-instance_object.onInstanceCreatedCallback = function(player, instance)
+instanceObject.onInstanceCreatedCallback = function(player, instance)
     if instance then
         player:setInstance(instance)
         player:setPos(0, 0, 0, 0, instance:getZone():getID())
     end
 end
 
-instance_object.onInstanceTimeUpdate = function(instance, elapsed)
+instanceObject.onInstanceTimeUpdate = function(instance, elapsed)
     xi.instance.updateInstanceTime(instance, elapsed, ID)
 end
 
-instance_object.onInstanceFailure = function(instance)
+instanceObject.onInstanceFailure = function(instance)
 
     local chars = instance:getChars()
 
@@ -38,7 +38,7 @@ instance_object.onInstanceFailure = function(instance)
     end
 end
 
-instance_object.onInstanceProgressUpdate = function(instance, progress)
+instanceObject.onInstanceProgressUpdate = function(instance, progress)
 
     if (progress >= 15) then
         instance:complete()
@@ -46,7 +46,7 @@ instance_object.onInstanceProgressUpdate = function(instance, progress)
 
 end
 
-instance_object.onInstanceComplete = function(instance)
+instanceObject.onInstanceComplete = function(instance)
 
     local chars = instance:getChars()
 
@@ -63,10 +63,10 @@ instance_object.onInstanceComplete = function(instance)
 
 end
 
-instance_object.onEventUpdate = function(player, csid, option)
+instanceObject.onEventUpdate = function(player, csid, option)
 end
 
-instance_object.onEventFinish = function(player, csid, option)
+instanceObject.onEventFinish = function(player, csid, option)
 end
 
-return instance_object
+return instanceObject

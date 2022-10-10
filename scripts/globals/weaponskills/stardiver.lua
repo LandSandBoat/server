@@ -13,24 +13,12 @@ require("scripts/globals/status")
 require("scripts/globals/settings")
 require("scripts/globals/weaponskills")
 -----------------------------------
-local weaponskill_object = {}
+local weaponskillObject = {}
 
-weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
-    -- check to see if player has the unlock charvar for this, if not, do no damage.
-    local hasMeritWsUnlock = 1
-	
-    if player:isPC() then
-	    hasMeritWsUnlock = player:getCharVar("hasStardiverUnlock")
-	end
-
-    if hasMeritWsUnlock ~= 1 then
-        player:PrintToPlayer("You don't have this WS unlocked.")
-        return
-    end
-
+weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
     local params = {}
     params.numHits = 4
-    params.ftp100 = 2.25 params.ftp200 = 2.25 params.ftp300 = 2.25
+    params.ftp100 = 0.75 params.ftp200 = 1.25 params.ftp300 = 1.75
     params.str_wsc = player:getMerit(xi.merit.STARDIVER) * 0.17 params.dex_wsc = 0.0 params.vit_wsc = 0.0
     params.agi_wsc = 0.0 params.int_wsc = 0.0 params.mnd_wsc = 0.0
     params.chr_wsc = 0.0
@@ -53,4 +41,4 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     return tpHits, extraHits, criticalHit, damage
 end
 
-return weaponskill_object
+return weaponskillObject

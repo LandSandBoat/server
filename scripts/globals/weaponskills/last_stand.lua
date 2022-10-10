@@ -16,23 +16,12 @@
 
 -----------------------------------
 require("scripts/globals/status")
-require("settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/weaponskills")
 -----------------------------------
-local weaponskill_object = {}
+local weaponskillObject = {}
 
-weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
-    -- check to see if player has the unlock charvar for this, if not, do no damage.
-    local hasMeritWsUnlock = 1
-	
-    if player:isPC() then
-	    hasMeritWsUnlock = player:getCharVar("hasLastStandUnlock")
-	end
-
-    if hasMeritWsUnlock ~= 1 then
-        player:PrintToPlayer("You don't have this WS unlocked.")
-        return
-    end
+weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
 
     local params = {}
     params.numHits = 2
@@ -46,9 +35,6 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     params.atk100 = 1; params.atk200 = 1; params.atk300 = 1
     params.multiHitfTP = true
 
-    -- check to see if player has the unlock charvar for this, if not, do no damage.
-    local hasMeritWsUnlock = player:getCharVar("hasMeritWsUnlock")
-
     if (xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
         params.ftp200 = 3 params.ftp300 = 4
         params.agi_wsc = 0.7 + (player:getMerit(xi.merit.LAST_STAND) * 0.03)
@@ -59,4 +45,4 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
 
 end
 
-return weaponskill_object
+return weaponskillObject

@@ -3,9 +3,9 @@
 -- Item: tidal talisman
 --
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     local result = 56
     local zone = target:getZoneID()
     if (zone == 238 or zone == 239 or zone == 240 or zone == 241 or zone == 242 or -- Windurst
@@ -22,7 +22,7 @@ item_object.onItemCheck = function(target)
     return result
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     local zone = target:getZoneID()
 
     if (zone == 241 or zone == 242 or zone == 240 or zone == 239 or zone == 238) then -- Item is used in Windurst
@@ -46,4 +46,4 @@ item_object.onItemUse = function(target)
     end
 end
 
-return item_object
+return itemObject
