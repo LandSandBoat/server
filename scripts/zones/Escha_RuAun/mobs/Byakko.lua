@@ -8,11 +8,21 @@ require("scripts/globals/mobs")
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
+local despawnMobTable =
+{
+    17961219,
+    17961220,
+    17961221,
+    17961222,
+    17961223,
+    17961224,
+    17961225,
+    17961226,
+}
 
 entity.onMobSpawn = function(mob ,target)
     mob:addListener("WEAPONSKILL_TAKE", "ATONEMENT_HATE_RESET", function(mobArg, user, wsid)
         if wsid == 45 then
-            print("used atonement")
             mob:resetEnmity(user)
 
             mob:timer(5000, function(mobArg)
@@ -41,29 +51,40 @@ entity.onMobSpawn = function(mob ,target)
             end)
         end
     end)
+	
+	mob:addListener("MAGIC_TAKE", "SILENCE_BENE", function(target, caster, spell)
+        if spell:getID() == 59 then -- silence
+
+            mob:timer(5000, function(mobArg)
+                mobArg:useMobAbility(689) -- Benediction
+            end)
+        end
+    end)
+	    
+	
+	
     xi.mix.jobSpecial.config(mob, {
-        between = 60,
+        between = 75,
         specials =
         {
---            {id = xi.jsa.CHAINSPELL, cooldown = 0, hpp = 100},
-            {id = xi.jsa.PERFECT_DODGE, cooldown = 0, hpp = 100},
-            {id = xi.jsa.BENEDICTION, cooldown = 0, hpp = 100},
+            {id = xi.jsa.PERFECT_DODGE, cooldown = 0, hpp = 100},	
+            {id = xi.jsa.BLOOD_WEAPON, cooldown = 0, hpp = 100},
         },
     })
-        mob:setMobMod(xi.mobMod.DRAW_IN, 2)    
+        mob:setMobMod(xi.mobMod.DRAW_IN, 2)
         mob:addMod(xi.mod.STR, 50)
         mob:addMod(xi.mod.VIT, 70)
         mob:addMod(xi.mod.INT, 60)
         mob:addMod(xi.mod.MND, 120)
-        mob:addMod(xi.mod.CHR, 70)
+        mob:addMod(xi.mod.CHR, 120)
         mob:addMod(xi.mod.AGI, 40)
         mob:addMod(xi.mod.DEX, 50)
-        mob:addMod(xi.mod.DEFP, 80)
+        mob:addMod(xi.mod.DEFP, 30)
         mob:addMod(xi.mod.RATTP, 80)
         mob:addMod(xi.mod.ACC, 100)
         mob:setMod(xi.mod.CRITHITRATE, 30)
-        mob:setMod(xi.mod.CRIT_DMG_INCREASE, 50)
-        mob:addMod(xi.mod.MAIN_DMG_RATING, 50)        
+        mob:setMod(xi.mod.CRIT_DMG_INCREASE, 20)
+        mob:addMod(xi.mod.MAIN_DMG_RATING, 20)      
         mob:setMod(xi.mod.SILENCERES, 9999)
         mob:setMod(xi.mod.STUNRES, 9999)
         mob:setMod(xi.mod.BINDRES, 9999)
@@ -87,13 +108,27 @@ entity.onMobSpawn = function(mob ,target)
         mob:setMod(xi.mod.WATER_SDT, 250)
         mob:setMod(xi.mod.THUNDER_SDT, 250)
         mob:setMod(xi.mod.ICE_SDT, 250)
-        mob:setMod(xi.mod.WIND_SDT, 250)    
+        mob:setMod(xi.mod.WIND_SDT, 250)
         mob:setMod(xi.mod.LIGHT_ABSORB, 200)
-        mob:setMod(xi.mod.FASTCAST, 20)
+        mob:setMod(xi.mod.FASTCAST, 550)
         mob:addStatusEffect(xi.effect.REGEN, 50, 3, 0)
         mob:addStatusEffect(xi.effect.REFRESH, 30, 3, 0)
-        mob:addStatusEffect(xi.effect.REGAIN, 30, 3, 0)
+        mob:addStatusEffect(xi.effect.REGAIN, 50, 3, 0)
 		mob:setDropID(3991)
+end
+
+entity.onMobFight = function(mob, target)
+    local lifePercent = mob:getHPP()
+
+    if  lifePercent == 60  and mob:getLocalVar("2hourused") == 0 then
+        mob:useMobAbility(731) --MIJIN_GAKURE
+		mob:setLocalVar("2hourused", 1)
+    end
+
+    if  lifePercent == 20 and mob:getLocalVar("2hourused") == 1 then
+        mob:useMobAbility(731) --MIJIN_GAKURE
+		mob:setLocalVar("2hourused", 2)
+    end
 end
 
 entity.onMobInitialize = function(mob)
