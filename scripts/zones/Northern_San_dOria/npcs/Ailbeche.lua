@@ -15,9 +15,9 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if (player:getCharVar("aBoysDreamCS") >= 3) then
-        if (trade:hasItemQty(17001, 1) == true and trade:getItemCount() == 1 and player:getCharVar("aBoysDreamCS") == 3) then
+        if npcUtil.tradeHasExactly(trade, xi.items.GIANT_SHELL_BUG) and player:getCharVar("aBoysDreamCS") == 3 then
             player:startEvent(15) -- During Quest "A Boy's Dream" (trading bug) madame ?
-        elseif (trade:hasItemQty(4562, 1) == true and trade:getItemCount() == 1 and player:getCharVar("aBoysDreamCS") == 4) then
+        elseif npcUtil.tradeHasExactly(trade, xi.items.ODONTOTYRANNUS) and player:getCharVar("aBoysDreamCS") == 4 then
             player:startEvent(47) -- During Quest "A Boy's Dream" (trading odontotyrannus)
         end
     end
