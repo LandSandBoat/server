@@ -3,6 +3,8 @@
 --  Mob: Xolotl
 -----------------------------------
 require("scripts/globals/titles")
+require("scripts/globals/follow")
+-----------------------------------
 local ID = require("scripts/zones/Attohwa_Chasm/IDs")
 -----------------------------------
 local entity = {}
@@ -34,27 +36,17 @@ entity.onMobFight = function(mob,target)
                 local pos = xolotl:getPos()
                 child:setSpawn(pos.x + i, pos.y - 0.5, pos.z - i, pos.rot)
                 child:spawn()
+                xi.follow.follow(child, mob)
             end)
         end
     end
 end
 
 entity.onMobRoam = function(mob)
-    local mobId = mob:getID()
-
-    for i = 1, 2 do
-        local child = GetMobByID(mobId + i)
-        if child:isSpawned() and child:getID() == mobId + 1 then
-            child:pathTo(mob:getXPos() + 1, mob:getYPos() + 3, mob:getZPos() + 0.15)
-        elseif child:isSpawned() and child:getID() == mobId + 2 then
-            child:pathTo(mob:getXPos() + 3, mob:getYPos() + 5, mob:getZPos() + 0.15)
-        end
-    end
-
     local hour = VanadielHour()
-    if hour >= 4 and hour < 20 then -- Despawn Xolotl if its day
-        DespawnMob(mob:getID())
-    end
+    -- if hour >= 4 and hour < 20 then -- Despawn Xolotl if its day
+    --     DespawnMob(mob:getID())
+    -- end
 end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
