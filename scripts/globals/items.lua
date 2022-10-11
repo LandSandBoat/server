@@ -1477,6 +1477,7 @@ xi.items =
     GAVIAL_FISH                     = 4477,
     THREE_EYED_FISH                 = 4478,
     BHEFHEL_MARLIN                  = 4479,
+    GUGRU_TUNA                      = 4480,
     OGRE_EEL                        = 4481,
     SHALL_SHELL                     = 4484,
     DRAGON_HEART                    = 4486,
