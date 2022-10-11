@@ -174,19 +174,6 @@ zoneObject.onEventFinish = function(player,csid,option)
     elseif csid == 101 and option == 1 then
         player:setPos(-561, 0, 443, 242, 33) -- Apollyon: NW_SW exit
     end
-
-    if
-        (csid == 32001 or csid == 32002) and
-        player:getCharVar("ApollyonEntrance") == 1
-    then
-        player:setPos(638.099, 0.000, -610.997) -- East
-        player:setCharVar("ApollyonEntrance", 0)
-    elseif
-        (csid == 32001 or csid == 32002) and
-        player:getCharVar("ApollyonEntrance") == 0
-    then
-        player:setPos(-646.000, 0.000, -616.000) -- West
-    end
 end
 
 return zoneObject

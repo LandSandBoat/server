@@ -40,7 +40,7 @@ function InteractionGlobal.loadContainers(shouldReloadRequires)
         package.loaded[interactionContainersPath] = nil
     end
 
-    local containerFiles = GetQuestAndMissionFilenamesList()
+    local containerFiles = GetContainerFilenamesList()
     local containers = {}
     for i=1, #containerFiles do
         containers[i] = utils.prequire(containerFiles[i])

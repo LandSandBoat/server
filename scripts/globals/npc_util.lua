@@ -897,6 +897,12 @@ function npcUtil.castingAnimation(npc, magicType, phaseDuration, func)
     end)
 end
 
+function npcUtil.showCrate(crate)
+    crate:setStatus(xi.status.NORMAL)
+    crate:setUntargetable(false)
+    crate:resetLocalVars()
+end
+
 function npcUtil.disappearCrate(crate)
     if crate:isNPC() then
         crate:entityAnimationPacket("kesu")
@@ -910,14 +916,19 @@ function npcUtil.disappearCrate(crate)
     end
 end
 
+-- Opens a crate and sets an 'opened' var so it cannot be opened again.
+--  - crate: The npc crate to open
+--  - callback: The callback function to call if crate is successfully opened. Return true to leave crate open.
 function npcUtil.openCrate(crate, callback)
     if crate:getLocalVar("opened") == 0 then
         crate:setLocalVar("opened", 1)
-        callback()
+        local shouldDisappear = not callback()
         crate:entityAnimationPacket("openH")
 
-        crate:timer(7000, function(npc)
-            npcUtil.disappearCrate(npc)
-        end)
+        if shouldDisappear then
+            crate:timer(7000, function(npc)
+                npcUtil.disappearCrate(npc)
+            end)
+        end
     end
 end

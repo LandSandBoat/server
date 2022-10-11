@@ -23,6 +23,7 @@
 
 #include <cmath>
 
+#include "../battlefield.h"
 #include "../grades.h"
 #include "../items/item_weapon.h"
 #include "../lua/luautils.h"
@@ -848,6 +849,13 @@ namespace mobutils
 
         // never despawn
         PMob->SetDespawnTime(0s);
+
+        // Stop early if this is a new battlefield
+        if (PMob->PBattlefield != nullptr && PMob->PBattlefield->isInteraction())
+        {
+            return;
+        }
+
         // do not roam around
         PMob->m_roamFlags |= ROAMFLAG_SCRIPTED;
         PMob->setMobMod(MOBMOD_ROAM_RESET_FACING, 1);

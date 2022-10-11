@@ -126,7 +126,7 @@ namespace luautils
 
     void ReloadFilewatchList();
 
-    std::vector<std::string> GetQuestAndMissionFilenamesList();
+    std::vector<std::string> GetContainerFilenamesList();
 
     // Cache helpers
     auto getEntityCachedFunction(CBaseEntity* PEntity, std::string funcName) -> sol::function;
@@ -269,6 +269,7 @@ namespace luautils
 
     void OnBattlefieldEnter(CCharEntity* PChar, CBattlefield* PBattlefield);                  // triggers when enter a bcnm
     void OnBattlefieldLeave(CCharEntity* PChar, CBattlefield* PBattlefield, uint8 LeaveCode); // see battlefield.h BATTLEFIELD_LEAVE_CODE
+    void OnBattlefieldKick(CCharEntity* PChar);
 
     void OnBattlefieldRegister(CCharEntity* PChar, CBattlefield* PBattlefield); // triggers when successfully registered a bcnm
     void OnBattlefieldDestroy(CBattlefield* PBattlefield);                      // triggers when BCNM is destroyed
@@ -341,6 +342,41 @@ namespace luautils
 
     // Retrive the first itemId that matches a name
     uint16 GetItemIDByName(std::string const& name);
+
+    template <typename... Targs>
+    int32 invokeBattlefieldEvent(uint16 battlefieldId, const std::string& eventName, Targs... args)
+    {
+        // Calls the Battlefield event through the interaction object if it can find it
+        sol::table contents = lua["xi"]["battlefield"]["contents"];
+        if (!contents.valid())
+        {
+            return -1;
+        }
+
+        auto battlefield = contents[battlefieldId];
+        if (!battlefield.valid())
+        {
+            return -1;
+        }
+
+        auto content = battlefield.get<sol::table>();
+        auto handler = content[eventName];
+        if (!handler.valid())
+        {
+            return -1;
+        }
+
+        auto result = handler.get<sol::protected_function>()(content, args...);
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::%s: %s", eventName, err.what());
+            return -1;
+        }
+
+        return 0;
+    }
+
 }; // namespace luautils
 
 #endif // _LUAUTILS_H -
