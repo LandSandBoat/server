@@ -172,6 +172,26 @@ entity.onTrigger = function(player, npc)
             end,
         },
         {
+            "Siren's hair",
+            function(playerArg)
+                player:timer(50, function(playerArg)
+                    item = 1313
+                    cost = 5000
+                    completeTransaction(player, npc, item, cost)
+                end)
+            end,
+        },
+        {
+            "Scintillant ingot",
+            function(playerArg)
+                player:timer(50, function(playerArg)
+                    item = 2275
+                    cost = 5000
+                    completeTransaction(player, npc, item, cost)
+                end)
+            end,
+        },
+        {
             "Next Page",
             function(playerArg)
                 menu.options = page2
@@ -182,16 +202,6 @@ entity.onTrigger = function(player, npc)
     
     page2 =
     {
-        {
-            "Siren's hair",
-            function(playerArg)
-                player:timer(50, function(playerArg)
-                    item = 1313
-                    cost = 5000
-                    completeTransaction(player, npc, item, cost)
-                end)
-            end,
-        },
         {
             "Teleport ring: Holla",
             function(playerArg)

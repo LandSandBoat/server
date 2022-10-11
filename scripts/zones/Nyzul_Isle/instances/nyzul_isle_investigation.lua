@@ -442,6 +442,11 @@ end
 
 -- On win
 instanceObject.onInstanceComplete = function(instance)
+    local chars = instance:getChars()
+
+    for _, players in ipairs(chars) do
+      player:setCharVar("AssaultComplete", 1)
+    end
 end
 
 -- Standard event hooks, these will take priority over everything apart from m_event.Script

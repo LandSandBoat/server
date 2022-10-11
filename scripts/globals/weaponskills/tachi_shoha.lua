@@ -12,6 +12,7 @@
 -- 100%TP    200%TP    300%TP
 -- 1.375     2.1875      2.6875
 -----------------------------------
+require("scripts/globals/aeonics")
 require("scripts/globals/status")
 require("scripts/globals/settings")
 require("scripts/globals/weaponskills")
@@ -19,6 +20,7 @@ require("scripts/globals/weaponskills")
 local weaponskillObject = {}
 
 weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
+    xi.aeonics.onTrigger(player, wsID)
 
     local params = {}
     params.numHits = 2
