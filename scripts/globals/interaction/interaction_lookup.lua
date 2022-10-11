@@ -265,7 +265,7 @@ local function runHandlersInData(data, player, secondLevelKey, thirdLevelKey, ar
             printf("Error running check: %s", res)
         elseif res then
             local resultAction = runHandler(entry.handler, args)
-            if resultAction ~= nil and type(resultAction) == 'table' then
+            if resultAction ~= nil then
                 table.insert(actions, resultAction)
             end
         end
