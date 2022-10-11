@@ -44,9 +44,9 @@ end
 
 entity.onMobRoam = function(mob)
     local hour = VanadielHour()
-    -- if hour >= 4 and hour < 20 then -- Despawn Xolotl if its day
-    --     DespawnMob(mob:getID())
-    -- end
+    if hour >= 4 and hour < 20 then -- Despawn Xolotl if its day
+        DespawnMob(mob:getID())
+    end
 end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
