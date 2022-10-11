@@ -275,18 +275,18 @@ end
 function Battlefield.onEntryTrade(player, npc, trade, onUpdate)
     -- Check if player's party has level sync
     if xi.battlefield.rejectLevelSyncedParty(player, npc) then
-        return false
+        return
     end
 
     -- Validate trade
     if not trade then
-        return false
+        return
     end
 
     -- Validate battlefield status
     if player:hasStatusEffect(xi.effect.BATTLEFIELD) and not onUpdate then
         player:messageBasic(xi.msg.basic.WAIT_LONGER, 0, 0)
-        return false
+        return
     end
 
     -- Check if another party member has battlefield status effect. If so, don't allow trade.
@@ -295,7 +295,7 @@ function Battlefield.onEntryTrade(player, npc, trade, onUpdate)
         if member:hasStatusEffect(xi.effect.BATTLEFIELD) then
             player:messageBasic(xi.msg.basic.WAIT_LONGER, 0, 0)
 
-            return false
+            return
         end
     end
 
@@ -308,7 +308,7 @@ function Battlefield.onEntryTrade(player, npc, trade, onUpdate)
         if noEntryMessage then
             player:messageSpecial(noEntryMessage)
         end
-        return false
+        return
     end
 
     -- Ensure that the traded item(s) are not worn out
@@ -324,7 +324,7 @@ function Battlefield.onEntryTrade(player, npc, trade, onUpdate)
                 else
                     player:messageSpecial(content.requiredItems.wornMessage, 0, 0, 0, itemId)
                 end
-                return false
+                return
             end
         end
     end
@@ -333,14 +333,12 @@ function Battlefield.onEntryTrade(player, npc, trade, onUpdate)
         -- Open menu of valid battlefields
         player:startEvent(32000, 0, 0, 0, options, 0, 0, 0, 0)
     end
-
-    return true
 end
 
 function Battlefield.onEntryTrigger(player, npc)
     -- Cannot enter if anyone in party is level/master sync'd
     if xi.battlefield.rejectLevelSyncedParty(player, npc) then
-        return false
+        return
     end
 
     -- Player has battlefield status effect. That means a battlefield is open OR the player is inside a battlefield.
@@ -351,16 +349,16 @@ function Battlefield.onEntryTrigger(player, npc)
 
         local content = xi.battlefield.contents[id]
         if not content then
-            return false
+            return
         end
 
         if not content:checkRequirements(player, npc, content.id, false) then
-            return false
+            return
         end
 
         local options = utils.mask.setBit(0, content.index, true)
         player:startEvent(32000, 0, 0, 0, options, 0, 0, 0, 0)
-        return true
+        return
     end
 
     -- Player doesn't have battlefield status effect. That means player wants to register a new battlefield OR is attempting to enter a closed one.
@@ -369,7 +367,7 @@ function Battlefield.onEntryTrigger(player, npc)
     for _, member in pairs(alliance) do
         if member:hasStatusEffect(xi.effect.BATTLEFIELD) then
             player:messageSpecial(zones[player:getZoneID()].text.PARTY_MEMBERS_ARE_ENGAGED)
-            return false
+            return
         end
     end
 
@@ -387,11 +385,10 @@ function Battlefield.onEntryTrigger(player, npc)
         if noEntryMessage then
             player:messageSpecial(noEntryMessage)
         end
-        return false
+        return
     end
 
     player:startEvent(32000, 0, 0, 0, options, 0, 0, 0, 0)
-    return true
 end
 
 -- Static function to lookup the correct battlefield to handle this event update
