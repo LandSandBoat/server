@@ -99,7 +99,9 @@ xi.job_utils.dark_knight.useDiabolicEye = function(player, target, ability)
 end
 
 xi.job_utils.dark_knight.useLastResort = function(player, target, ability)
-    player:addStatusEffect(xi.effect.LAST_RESORT, 0, 0, 180)
+    local duration = 180 + player:getMod(xi.mod.LAST_RESORT_DURATION)
+
+    player:addStatusEffect(xi.effect.LAST_RESORT, 0, 0, duration)
 end
 
 xi.job_utils.dark_knight.useNetherVoid = function(player, target, ability)

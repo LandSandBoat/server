@@ -37,10 +37,7 @@ INSERT INTO `item_latents` VALUES (10719,13,10,11,0);
 INSERT INTO `item_latents` VALUES (10719,14,10,11,0);
 INSERT INTO `item_latents` VALUES (10730,63,10,13,56);  -- WAR AF2 +2 Feet Reduces defense penalty by 10% if Berserk Active
 
--- -------------------------------------------------------
--- Abyss Sollerets +2
--- -------------------------------------------------------
-INSERT INTO `item_latents` VALUES (10737,63,10,13,64);   -- +2: Enhances "Last Resort" effect
+INSERT INTO `item_latents` VALUES (10737,63,10,13,64);   -- Abyss Sollerets+2: Reduces Last Resort defense penalty by 10% while worn
 
 -- -------------------------------------------------------
 -- Lunette ring
@@ -1443,10 +1440,7 @@ INSERT INTO `item_latents` VALUES (15129,68,10,26,1);    -- Nighttime: EVA +10
 
 INSERT INTO `item_latents` VALUES (15132,63,10,13,56);  -- WAR AF2 Feet Reduces defense penalty by 10% if Berserk Active
 
--- -------------------------------------------------------
--- Abyss Sollerets
--- -------------------------------------------------------
-INSERT INTO `item_latents` VALUES (15139,63,10,13,64);   -- Enhances "Last Resort" effect
+INSERT INTO `item_latents` VALUES (15139,63,10,13,64);   -- Abyss Sollerets: Reduces Last Resort defense penalty by 10% while worn
 
 -- -------------------------------------------------------
 -- Koga Kyahan
@@ -1706,10 +1700,7 @@ INSERT INTO `item_latents` VALUES (15592,68,12,26,2);    -- Dusk - Dawn: EVA +12
 
 INSERT INTO `item_latents` VALUES (15665,63,10,13,56);  -- WAR AF2 +1 Feet Reduces defense penalty by 10% if Berserk Active
 
--- -------------------------------------------------------
--- Abyss Sollerets +1
--- -------------------------------------------------------
-INSERT INTO `item_latents` VALUES (15672,63,10,13,64);   -- +1: Enhances "Last Resort" effect
+INSERT INTO `item_latents` VALUES (15672,63,10,13,64);   -- Abyss Sollerets+1: Reduces Last Resort defense penalty by 10% while worn
 
 -- -------------------------------------------------------
 -- Koga Kyahan +1
@@ -3449,6 +3440,8 @@ INSERT INTO `item_latents` VALUES (23197,518,10,13,57);  -- WAR AF2 119 +2 Hands
 -- -------------------------------------------------------
 INSERT INTO `item_latents` VALUES (23320,169,25,26,2);   -- Dusk to dawn: Movement speed +25%
 
+INSERT INTO `item_latents` VALUES (23338,63,10,13,64);   -- Fallen's Sollerets+2: Reduces Last Resort defense penalty by 10% while worn
+
 INSERT INTO `item_latents` VALUES (23350,399,17,52,1);   -- Pedagogy Loafers+2: Weather: Enhances Celerity and Alacrity Effect +17% (FIRE)
 INSERT INTO `item_latents` VALUES (23350,399,17,52,2);   -- Pedagogy Loafers+2: Weather: Enhances Celerity and Alacrity Effect +17% (EARTH)
 INSERT INTO `item_latents` VALUES (23350,399,17,52,3);   -- Pedagogy Loafers+2: Weather: Enhances Celerity and Alacrity Effect +17% (WATER)
@@ -3464,6 +3457,8 @@ INSERT INTO `item_latents` VALUES (23532,518,15,13,57); -- WAR AF2 119 +3 Hands 
 -- -------------------------------------------------------
 INSERT INTO `item_latents` VALUES (23655,169,25,26,2);   -- Dusk to dawn: Movement speed +25%
 
+INSERT INTO `item_latents` VALUES (23673,63,10,13,64);   -- Fallen's Sollerets+3: Reduces Last Resort defense penalty by 10% while worn
+
 INSERT INTO `item_latents` VALUES (23685,399,18,52,1);   -- Pedagogy Loafers+3: Weather: Enhances Celerity and Alacrity Effect +18% (FIRE)
 INSERT INTO `item_latents` VALUES (23685,399,18,52,2);   -- Pedagogy Loafers+3: Weather: Enhances Celerity and Alacrity Effect +18% (EARTH)
 INSERT INTO `item_latents` VALUES (23685,399,18,52,3);   -- Pedagogy Loafers+3: Weather: Enhances Celerity and Alacrity Effect +18% (WATER)
@@ -3472,8 +3467,8 @@ INSERT INTO `item_latents` VALUES (23685,399,18,52,5);   -- Pedagogy Loafers+3: 
 INSERT INTO `item_latents` VALUES (23685,399,18,52,6);   -- Pedagogy Loafers+3: Weather: Enhances Celerity and Alacrity Effect +18% (THUNDER)
 INSERT INTO `item_latents` VALUES (23685,399,18,52,7);   -- Pedagogy Loafers+3: Weather: Enhances Celerity and Alacrity Effect +18% (LIGHT)
 INSERT INTO `item_latents` VALUES (23685,399,18,52,8);   -- Pedagogy Loafers+3: Weather: Enhances Celerity and Alacrity Effect +18% (DARK)
-INSERT INTO `item_latents` VALUES (27342,63,10,13,64);   -- Fallen's Sollerets,"Last Resort"+1
-INSERT INTO `item_latents` VALUES (27343,63,10,13,64);   -- Fallen's Sollerets +1,"Last Resort"+1
+INSERT INTO `item_latents` VALUES (27342,63,10,13,64);   -- Fallen's Sollerets: Reduces Last Resort defense penalty by 10% while worn
+INSERT INTO `item_latents` VALUES (27343,63,10,13,64);   -- Fallen's Sollerets+1: Reduces Last Resort defense penalty by 10% while worn
 INSERT INTO `item_latents` VALUES (27366,399,15,52,1);   -- Pedagogy Loafers: Weather: Enhances Celerity and Alacrity Effect +15% (FIRE)
 INSERT INTO `item_latents` VALUES (27366,399,15,52,2);   -- Pedagogy Loafers: Weather: Enhances Celerity and Alacrity Effect +15% (EARTH)
 INSERT INTO `item_latents` VALUES (27366,399,15,52,3);   -- Pedagogy Loafers: Weather: Enhances Celerity and Alacrity Effect +15% (WATER)

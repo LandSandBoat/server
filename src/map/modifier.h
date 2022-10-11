@@ -399,6 +399,8 @@ enum class Mod
     ENHANCES_DARK_SEAL     = 1073, // Enhances "Dark Seal" effect (Increases Dark Magic spell durations by 10% per Dark Seal merit while Dark Seal active)
     ENHANCES_ABSORB_TP     = 1074, // Enhances "Absorb-TP" effect (Increases TP absorbed by percentage, e.g. mod value 5 = +5% TP absorbed)
     ENHANCES_DIABOLIC_EYE  = 1075, // Enhances "Diabolic Eye" effect (Increases duration by <value> seconds per merit, e.g. mod value 6 = +6s)
+    LAST_RESORT_DURATION   = 1076, // "Last Resort" effect duration + (Increases duration by <value> seconds)
+    ABSORB_DURATION        = 1077, // "Absorb" effect duration +% (Increases duration by <value>%, e.g. mod value 10 = +10%)
 
     // Beastmaster
     TAME                = 304,  // Additional percent chance to charm
@@ -934,7 +936,7 @@ enum class Mod
     // 888
     // 936
     //
-    // SPARE = 1076, and onward
+    // SPARE = 1078, and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it

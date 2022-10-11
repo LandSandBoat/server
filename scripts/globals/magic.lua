@@ -1264,6 +1264,9 @@ function calculateDurationForLvl(duration, spellLvl, targetLvl)
 end
 
 function calculateDuration(duration, magicSkill, spellGroup, caster, target, useComposure)
+    -- TODO: Add ABSORB_DURATION mod handling here using spell:getSpellFamily()
+    -- Update function to pass spell instead of magicSkill and spellGroup
+    -- Move magicSkill and spellGroup inside function
     local casterJob = caster:getMainJob()
 
     if magicSkill == xi.skill.ENHANCING_MAGIC then -- Enhancing Magic
