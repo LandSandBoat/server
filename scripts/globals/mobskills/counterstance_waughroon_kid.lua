@@ -13,12 +13,11 @@ mobskill_object.onMobSkillCheck = function(mob, target, skill)
 end
 
 mobskill_object.onMobWeaponSkill = function(mob, target, skill)
-    local power = 45 + mob:getMod(xi.mod.COUNTERSTANCE_EFFECT)
+    local typeEffect = xi.effect.COUNTERSTANCE
+    local power = 20
 
-    mob:delStatusEffect(xi.effect.COUNTERSTANCE) --if not found this will do nothing
-    mob:addStatusEffect(xi.effect.COUNTERSTANCE, power)
-
-    skill:setMsg(xi.msg.basic.USES)
+    skill:setMsg(xi.mobskills.mobBuffMove(target, typeEffect, power, 3, 420))
+    return typeEffect
 end
 
 return mobskill_object

@@ -53,7 +53,7 @@ local spawnPrime = function(mob, target)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:timer(1, function(mobArg)
+    mob:timer(1000, function(mobArg)
         local bf = mobArg:getBattlefield()
 
         mobArg:setHP(bf:getLocalVar("carbuncleHP"))

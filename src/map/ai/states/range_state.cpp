@@ -134,6 +134,8 @@ bool CRangeState::Update(time_point tick)
             {
                 PChar->pushPacket(m_errorMsg.release());
             }
+
+            m_aimTime = std::chrono::seconds(0);
             m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
         }
         else

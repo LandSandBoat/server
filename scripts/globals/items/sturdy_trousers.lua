@@ -9,23 +9,15 @@ require("scripts/globals/status")
 local item_object = {}
 
 item_object.onItemCheck = function(target)
-    local effect = target:getStatusEffect(xi.effect.ENCHANTMENT)
+    local effect = target:getStatusEffect(xi.effect.MAX_HP_BOOST)
     if effect ~= nil and effect:getSubType() == 15610 then
-        target:delStatusEffect(xi.effect.ENCHANTMENT)
+        target:delStatusEffect(xi.effect.MAX_HP_BOOST)
     end
     return 0
 end
 
 item_object.onItemUse = function(target)
-    target:addStatusEffect(xi.effect.ENCHANTMENT, 0, 0, 1800, 15610)
-end
-
-item_object.onEffectGain = function(target, effect)
-    target:addMod(xi.mod.HP, 10)
-end
-
-item_object.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.HP, 10)
+    target:addStatusEffect(xi.effect.MAX_HP_BOOST, 10, 0, 1800, 15610)
 end
 
 return item_object

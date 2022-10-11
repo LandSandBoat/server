@@ -24,12 +24,7 @@ quest.sections =
 
         [xi.zone.OLDTON_MOVALPOLOS] =
         {
-            ['Koblakiq'] =
-            {
-                onTrigger = function(player, npc)
-                    return quest:progressCutscene(7)
-                end,
-            },
+            ['Koblakiq'] = quest:progressEvent(7),
 
             onEventFinish =
             {
@@ -66,6 +61,7 @@ quest.sections =
             {
                 [9] = function(player, csid, option, npc)
                     quest:complete(player)
+                    xi.quest.setMustZone(player, xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.FOR_THE_BIRDS)
                 end,
             },
         },

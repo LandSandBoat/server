@@ -7,8 +7,9 @@ local entity = {}
 
 entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.SUPERLINK, 0)
+    mob:setMobMod(xi.mobMod.NO_LINK, 1)
 
-    mob:timer(1, function(mobArg)
+    mob:timer(3000, function(mobArg)
         local race = mobArg:getBattlefield():getPlayers()[1]:getRace()
         if race == xi.race.HUNE_M or race == xi.race.HUME_F then
             DespawnMob(mobArg:getID())
@@ -24,13 +25,11 @@ entity.onMobSpawn = function(mob)
         end
     end)
 
-    mob:addListener("TAKE_DAMAGE", "AUTOMATON_TAKE_DAMAGE", function(mobArg, amount, attacker)
-        if amount > mobArg:getHP() then
-            if GetMobByID(mobArg:getID()+1):isAlive() then
-                GetMobByID(mobArg:getID()+1):updateEnmity(attacker)
-            else
-                GetMobByID(mobArg:getID()+2):updateEnmity(attacker)
-            end
+    mob:addListener("DEATH", "HUME_AUTOMATON_DEATH", function(automaton, killer)
+        if GetMobByID(automaton:getID()+1):isAlive() then
+            GetMobByID(automaton:getID()+1):updateEnmity(killer)
+        else
+            GetMobByID(automaton:getID()+2):updateEnmity(killer)
         end
     end)
 end

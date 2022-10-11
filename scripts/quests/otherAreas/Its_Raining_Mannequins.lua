@@ -131,7 +131,7 @@ quest.sections =
                     player:confirmTrade()
 
                     quest:setVar(player, 'Prog', 3)
-                    quest:setVar(player, 'Wait', os.time())
+                    quest:setVar(player, 'Wait', getMidnight())
                 end,
             },
         },
@@ -148,8 +148,7 @@ quest.sections =
             ['Fyi_Chalmwoh'] =
             {
                 onTrigger = function(player, npc)
-                    local wait = quest:getVar(player, "Wait")
-                    if os.time() >= wait + 60 then
+                    if quest:getVar(player, "Wait") < os.time() then
                         return quest:progressEvent(311)
                     else
                         return quest:event(310) -- Please wait
