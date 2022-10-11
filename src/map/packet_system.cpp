@@ -4689,7 +4689,7 @@ void SmallPacket0x084(map_session_data_t* const PSession, CCharEntity* const PCh
 
             uint32 basePrice = PItem->getBasePrice();
             uint16 fame      = 0;
-            float mult       = 1.0f;
+            float  mult      = 1.0f;
 
             // Start Fame calculations
             float fameMultiplier = settings::get<bool>("map.FAME_MULTIPLIER");
@@ -4791,7 +4791,7 @@ void SmallPacket0x085(map_session_data_t* const PSession, CCharEntity* const PCh
 
         uint32 basePrice = PItem->getBasePrice();
         uint16 fame      = 0;
-        float mult       = 1.0f;
+        float  mult      = 1.0f;
 
         // Start Fame calculations
         float fameMultiplier = settings::get<bool>("map.FAME_MULTIPLIER");
@@ -4819,27 +4819,23 @@ void SmallPacket0x085(map_session_data_t* const PSession, CCharEntity* const PCh
         }
 
         // Amalasanda
-         if (PChar->getZone() == ZONE_LOWER_JEUNO && PChar->loc.p.x > 23.0f && PChar->loc.p.x < 45.0f && PChar->loc.p.z > -62.0f && PChar->loc.p.z < -29.0f)
+        if (PChar->getZone() == ZONE_LOWER_JEUNO && PChar->loc.p.x > 23.0f && PChar->loc.p.x < 45.0f && PChar->loc.p.z > -62.0f && PChar->loc.p.z < -29.0f)
             fame = (uint16)(PChar->profile.fame[3] * fameMultiplier); // use tenshodo fame
 
-         if (basePrice >= 160)
+        if (basePrice >= 160)
         {
-            printf("base >= 160 & max fame");
             mult = 1.025f;
             if (fame < 613)
             {
-                printf("not max fame 1");
                 mult = 1.0f + 0.025f * (float)fame / 612.0f;
             }
         }
 
         if (basePrice < 160)
         {
-            printf("base < 160 & max fame");
             mult = 1.1f;
             if (fame < 613)
             {
-                printf("not max fame 2");
                 mult = 1.0f + 0.1f * (float)fame / 612.0f;
             }
         }

@@ -55,7 +55,6 @@ namespace zoneutils
     bool         IsResidentialArea(CCharEntity*);    // returns whether or not the area is a residential zone
     uint8        GetFameAreaFromZone(uint16 ZoneID); // returns fame from zone
 
-
 }; // namespace zoneutils
 
 #endif
