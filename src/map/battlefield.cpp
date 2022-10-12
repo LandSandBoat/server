@@ -329,7 +329,6 @@ bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOB
             else if (!IsRegistered(PChar))
             {
                 m_RegisteredPlayers.emplace(PEntity->id);
-                luautils::OnBattlefieldRegister(PChar, this);
                 return true;
             }
         }

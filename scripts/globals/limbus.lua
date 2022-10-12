@@ -27,9 +27,7 @@ function xi.limbus.setupArmouryCrates(bfid, hide)
     local ID
     if
         bfid == 1290 or
-        bfid == 1291 or
         bfid == 1292 or
-        bfid == 1293 or
         bfid == 1294 or
         bfid == 1296
     then
@@ -50,22 +48,6 @@ function xi.limbus.setupArmouryCrates(bfid, hide)
             end
 
             GetNPCByID(ID.npc.APOLLYON_NW_CRATE[5]):setStatus(xi.status.DISAPPEAR)
-        end,
-
-        -- SW Apollyon
-        [1291] = function()
-            for i = 1, 2 do
-                for j = 0, 2 do
-                    GetNPCByID(ID.npc.APOLLYON_SW_CRATE[i] + j):setStatus(xi.status.DISAPPEAR)
-                end
-            end
-
-            for i = 0, 9 do
-                GetNPCByID(ID.npc.APOLLYON_SW_CRATE[3]+i):setUntargetable(false)
-                GetNPCByID(ID.npc.APOLLYON_SW_CRATE[3]+i):setStatus(xi.status.NORMAL)
-            end
-
-            GetNPCByID(ID.npc.APOLLYON_SW_CRATE[4]):setStatus(xi.status.DISAPPEAR)
         end,
 
         -- NE Apollyon
@@ -503,7 +485,7 @@ function xi.limbus.spawnFrom(mob, crateID)
     crate:setPos(mob:getXPos(), mob:getYPos(), mob:getZPos(), mob:getRotPos())
     crate:setStatus(xi.status.NORMAL)
     crate:setUntargetable(false)
-    crate:AnimationSub(8)
+    crate:setAnimationSub(8)
 end
 
 function xi.limbus.spawnRecoverFrom(mob, crateID)
@@ -608,6 +590,18 @@ function Limbus:onBattlefieldInitialise(battlefield)
     crate:resetLocalVars()
     crate:removeListener("TRIGGER_LOOT_CRATE")
     crate:addListener("ON_TRIGGER", "TRIGGER_LOOT_CRATE", utils.bind(self.handleOpenLootCrate, self))
+
+    -- Setup Linked Crates (can only open one)
+    if ID.LINKED_CRATES then
+        for crateID, _ in pairs(ID.LINKED_CRATES) do
+            local mainCrate = GetNPCByID(crateID)
+            if mainCrate == nil then
+                mainCrate = GetMobByID(crateID)
+            end
+            mainCrate:removeListener("TRIGGER_LINKED_CRATE")
+            mainCrate:addListener("ON_TRIGGER", "TRIGGER_LINKED_CRATE", utils.bind(self.handleLinkedCrate, self))
+        end
+    end
 end
 
 function Limbus:onBattlefieldTick(battlefield, tick)
@@ -649,7 +643,7 @@ end
 
 function Limbus:handleOpenItemCrate(player, npc)
     npcUtil.openCrate(npc, function()
-        xi.limbus.handleLootRolls(player:getBattlefield(), self.loot[npc:getID()], nil, npc)
+        self:handleLootRolls(player:getBattlefield(), self.loot[npc:getID()], npc)
     end)
 end
 
@@ -669,8 +663,23 @@ end
 function Limbus:handleOpenLootCrate(player, npc)
     npcUtil.openCrate(npc, function()
         local battlefield = player:getBattlefield()
-        xi.limbus.handleLootRolls(battlefield, self.loot[self.ID.npc.LOOT_CRATE], nil, npc)
+        self:handleLootRolls(battlefield, self.loot[self.ID.npc.LOOT_CRATE], npc)
         battlefield:setLocalVar("cutsceneTimer", self.delayToExit)
         battlefield:setStatus(xi.battlefield.status.WON)
     end)
+end
+
+function Limbus:handleLinkedCrate(player, npc)
+    for _, crateID in ipairs(self.ID.LINKED_CRATES[npc:getID()]) do
+        local crate = GetNPCByID(crateID)
+        if crate == nil then
+            crate = GetMobByID(crateID)
+        end
+        crate:setLocalVar("opened", 1)
+        npcUtil.disappearCrate(crate)
+    end
+end
+
+function Limbus:openDoor(battlefield, doorId)
+    xi.limbus.openDoor(battlefield, doorId)
 end

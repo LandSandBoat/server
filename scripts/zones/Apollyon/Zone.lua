@@ -14,7 +14,7 @@ zoneObject.onInitialize = function(zone)
     SetServerVariable("[NE_Apollyon]Time", 0)
     SetServerVariable("[NW_Apollyon]Time", 0)
     SetServerVariable("[SE_APOLLYON]Time", 0)
-    SetServerVariable("[SW_Apollyon]Time", 0)
+    SetServerVariable("[SW_APOLLYON]Time", 0)
 
     zone:registerRegion(1,  637, -4, -642,  642, 4, -637) -- SE Apollyon NE exit
     zone:registerRegion(2, -642, -4, -642, -637, 4, -637) -- APOLLYON_NW_SW exit
