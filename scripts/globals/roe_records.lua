@@ -511,7 +511,7 @@ function getRoeRecords(triggers)
         [631] =
         { -- WAR Artifact Quest III
             trigger = triggers.questComplete,
-            reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_TALEKEEPER_S_GIFT } },
+            reqs = { questComplete = { xi.quest.log_id.BASTOK, xi.quest.id.bastok.THE_TALEKEEPERS_GIFT } },
             flags = set { "retro" },
             reward = { sparks = 100, xp = 300 },
         },

@@ -1267,6 +1267,7 @@ xi.items =
     WILD_ONION                      = 4387,
     EGGPLANT                        = 4388,
     SAN_DORIAN_CARROT               = 4389,
+    GINGER_COOKIE                   = 4394,
     GALKAN_SAUSAGE                  = 4395,
     LAND_CRAB_MEAT                  = 4400,
     TORTILLA                        = 4408,
