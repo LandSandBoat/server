@@ -630,7 +630,11 @@ function Battlefield:onBattlefieldEnter(player, battlefield)
     local ID = zones[self.zoneId]
     player:messageSpecial(ID.text.ENTERING_THE_BATTLEFIELD_FOR, 0, self.index)
     if self.maxPlayers > 6 then
-        player:messageSpecial(ID.text.MEMBERS_OF_YOUR_ALLIANCE, 0, 0, 0, self.maxPlayers)
+        -- NOTE: Update tooling does not allow for duplicate messages to be stored in IDs.lua, even if the ID is different.
+        -- Apollyon does not differentiate between party and alliance for message, so if the entry is nil, use party message.
+        local messageId = ID.text.MEMBERS_OF_YOUR_ALLIANCE and ID.text.MEMBERS_OF_YOUR_ALLIANCE or ID.text.MEMBERS_OF_YOUR_PARTY
+
+        player:messageSpecial(messageId, 0, 0, 0, self.maxPlayers)
     else
         player:messageSpecial(ID.text.MEMBERS_OF_YOUR_PARTY, 0, 0, 0, self.maxPlayers)
     end
