@@ -1276,6 +1276,7 @@ xi.items =
     BAKED_POPOTO                    = 4436,
     COBALT_JELLYFISH                = 4443,
     RARAB_TAIL                      = 4444,
+    YAGUDO_CHERRY                   = 4445,
     SCREAM_FUNGUS                   = 4447,
     PUFFBALL                        = 4448,
     CRESCENT_FISH                   = 4473,
