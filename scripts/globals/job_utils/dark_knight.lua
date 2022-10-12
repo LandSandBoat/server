@@ -105,7 +105,10 @@ xi.job_utils.dark_knight.useLastResort = function(player, target, ability)
 end
 
 xi.job_utils.dark_knight.useNetherVoid = function(player, target, ability)
-    player:addStatusEffect(xi.effect.NETHER_VOID, 8, 1, 30)
+    local jpValue = 2 * player:getJobPointLevel(xi.jp.NETHER_VOID_EFFECT)
+    local power   = 50 + player:getMod(xi.mod.ENHANCES_NETHER_VOID) + jpValue
+
+    player:addStatusEffect(xi.effect.NETHER_VOID, power, 0, 60)
 end
 
 xi.job_utils.dark_knight.useScarletDelirium = function(player, target, ability)
@@ -131,9 +134,9 @@ xi.job_utils.dark_knight.useWeaponBash = function(player, target, ability)
     -- Weapon Bash deals damage dependant of Dark Knight level
     local darkKnightLvl = 0
     if player:getMainJob() == xi.job.DRK then
-        darkKnightLvl = player:getMainLvl()    -- Use Mainjob Lvl
+        darkKnightLvl = player:getMainLvl() -- Use Mainjob Lvl
     elseif player:getSubJob() == xi.job.DRK then
-        darkKnightLvl = player:getSubLvl()    -- Use Subjob Lvl
+        darkKnightLvl = player:getSubLvl()  -- Use Subjob Lvl
     end
 
     -- Calculating and applying Weapon Bash damage

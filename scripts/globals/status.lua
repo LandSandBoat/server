@@ -1265,6 +1265,7 @@ xi.mod =
     ENHANCES_DIABOLIC_EYE           = 1075, -- Enhances "Diabolic Eye" effect (Increases duration by <value> seconds per merit, e.g. mod value 6 = +6s)
     LAST_RESORT_DURATION            = 1076, -- "Last Resort" effect duration + (Increases duration by <value> seconds, e.g. mod value 15 = +15s)
     ABSORB_DURATION                 = 1077, -- "Absorb" effect duration +% (Increases duration by <value>%, e.g. mod value 10 = +10%)
+    ENHANCES_NETHER_VOID            = 1078, -- Enhances "Nether Void" effect (Increases the potency of the next Absorb or Drain Dark Magic by <value>%, e.g. mod value 50 = +50%)
 
     -- Dragoon
     WYVERN_LVL_BONUS                = 1043, -- Wyvern: Lv.+ (Increases wyvern's base level above 99)

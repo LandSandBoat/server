@@ -1,6 +1,6 @@
 -----------------------------------
--- Spell: Absorb-INT
--- Steals an enemy's intelligence.
+-- Spell: Aspir III
+-- Aspir functions only on Dark Magic skill level!
 -----------------------------------
 require("scripts/globals/spells/absorb_spell")
 -----------------------------------
@@ -11,7 +11,8 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    return xi.spells.absorb.useStatAbsorb(caster, target, spell)
+    -- TODO: Get correct animation from retail captures
+    return xi.spells.absorb.useAspirSpell(caster, target, spell)
 end
 
 return spellObject
