@@ -108,7 +108,6 @@ quest.sections =
                     quest:setVarBit(player, 'Option', 4)
                 end,
                 [557] = function(player, csid, option, npc)
-                    print(option)
                     if option == 1 then
                         quest:unsetVarBit(player, 'Option', 1, 2, 3, 4)
                         quest:setVar(player, 'Prog', 1)
