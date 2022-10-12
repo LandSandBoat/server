@@ -144,9 +144,9 @@ local battlefields =
         { 1, 1300,    0},   -- Eastern Tower
         { 2, 1298,    0},   -- Western Tower
         { 3, 1306,   -1},   -- Central 4th Floor (multiple items needed: 1907, 1908, 1986)
-     -- { 4, 1305, 1904},   -- Central 3rd Floor
-     -- { 5, 1304, 1905},   -- Central 2nd Floor
-     -- { 6, 1303, 1906},   -- Central 1st Floor
+        { 4, 1305, 1904},   -- Central 3rd Floor
+        { 5, 1304, 1905},   -- Central 2nd Floor
+        { 6, 1303, 1906},   -- Central 1st Floor
      -- { 7, 1301, 2127},   -- Central Basement
      -- { 8, 1302,    0},   -- Central Basement II
      -- { 9, 1307,    0},   -- Central 4th Floor II
