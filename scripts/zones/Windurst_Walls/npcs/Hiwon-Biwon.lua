@@ -18,7 +18,6 @@ end
 entity.onTrigger = function(player, npc)
     local makingHeadlines = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MAKING_HEADLINES)
     local cursesFoiledAgain1 = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_AGAIN_1)
-    local cursesFoiledAgain2 = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.CURSES_FOILED_AGAIN_2)
 
     -- Making Headlines
     if makingHeadlines == QUEST_ACCEPTED then

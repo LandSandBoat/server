@@ -69,7 +69,6 @@ mission.sections =
             onZoneIn =
             {
                 function(player, prevZone)
-                    print("Function called")
                     return 15
                 end,
             },
