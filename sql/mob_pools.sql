@@ -7114,6 +7114,10 @@ INSERT INTO `mob_pools` VALUES (7053,'Titan_Prime_TSTBE','Titan_Prime',45,0x0000
 INSERT INTO `mob_pools` VALUES (7054,'Leviathan_Prime_TSTBW','Leviathan_Prime',40,0x00001B0300000000000000000000000000000000,4,4,8,240,100,0,1,1,1,18,0,0,0,3,0,0,0,0,0,1182,40);
 
 INSERT INTO `mob_pools` VALUES (7055,'Armoury_Crate','Armoury_Crate',183,0x0000C00300000000000000000000000000000000,1,0,0,240,100,1024,0,0,0,64,0,0,0,131,8,0,0,0,0,0,183);
+
+-- Mamook (cont.) - Utsusemi clones of Hundredfaced_Hapool_Ja 
+INSERT INTO `mob_pools` VALUES (7056,'Hundredfaced_clone','Hundredfaced_Hapool_Ja',176,0x0600530600000000000000000000000000000000,13,13,10,280,100,0,1,1,1,2,0,32,0,159,4,0,7,0,0,176,176);
+
 -- ------------------------------------------------------------
 -- Start of Ambuscade section
 -- NOTE: The mobs are changed every update in the DATs, so using out-of-date
