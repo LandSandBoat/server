@@ -29,13 +29,11 @@ entity.onMobSpawn = function(mob)
         end
     end)
 
-    mob:addListener("TAKE_DAMAGE", "SHIKAREE_Z_TAKE_DAMAGE", function(mobArg, amount, attacker)
-        if amount > mobArg:getHP() then
-            mobArg:messageText(mobArg, ID.text.HOW_IS_THIS_POSSIBLE)
-            -- Reset controls so that remaining shiks don't get locked from weaponskilling
-            GetMobByID(mobArg:getID()+1):setLocalVar("control", 0)
-            GetMobByID(mobArg:getID()+2):setLocalVar("control", 0)
-        end
+    mob:addListener("TAKE_DEATH", "SHIKAREE_Z_DEATH", function(mobArg, amount, attacker)
+        mobArg:messageText(mobArg, ID.text.HOW_IS_THIS_POSSIBLE)
+        -- Reset controls so that remaining shiks don't get locked from weaponskilling
+        GetMobByID(mobArg:getID()+1):setLocalVar("control", 0)
+        GetMobByID(mobArg:getID()+2):setLocalVar("control", 0)
     end)
 end
 
