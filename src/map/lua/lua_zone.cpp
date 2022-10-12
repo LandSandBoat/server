@@ -354,7 +354,7 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
         std::memcpy(&PEntity->look, &look, sizeof(PEntity->look));
     }
 
-    PEntity->updatemask |= UPDATE_ALL_MOB;
+    PEntity->updatemask |= UPDATE_ALL_MOB | UPDATE_LOOK | UPDATE_STATUS;
 
     return CLuaBaseEntity(PEntity);
 }

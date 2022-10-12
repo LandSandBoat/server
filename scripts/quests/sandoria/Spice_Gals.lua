@@ -1,7 +1,6 @@
 -----------------------------------
--- Souls in Shadow
--- Novalmauge !pos 70 -24 21 167
--- qm2 !pos 118 36 -281 160
+-- Spice Gals
+-- Rouva !pos
 -----------------------------------
 require('scripts/globals/interaction/quest')
 require('scripts/globals/weaponskillids')
@@ -14,7 +13,7 @@ require('scripts/globals/items')
 local ID = require('scripts/zones/Riverne-Site_A01/IDs')
 -----------------------------------
 
-local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SOULS_IN_SHADOW)
+local quest = Quest:new(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.SPICE_GALS)
 
 quest.reward =
 {

@@ -1,7 +1,5 @@
 -----------------------------------
 -- A Job for the Consortium
--- Glenne - Southern Sandoria, !pos -122 -2 15 230
--- Aaveleon - West Ronfaure, !pos -431 -45 343 100
 -----------------------------------
 require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
@@ -38,7 +36,7 @@ quest.sections =
                     if quest:getVar(player, 'Stage') < os.time() then
                         return quest:progressEvent(651)
                     else
-                        return quest:message(ID.text.LAY_LOW):face(player)
+                        return quest:message(ID.text.LAY_LOW)
                     end
                 end,
             },
@@ -100,8 +98,10 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if player:hasKeyItem(xi.ki.BRUGAIRE_GOODS) then
                         if math.random() > 0.25 or (VanadielHour() > 6 and VanadielHour() < 18) then
+                            quest:setVar(player, 'Option', 0)
                             return quest:progressEvent(54)
                         else
+                            quest:setVar(player, 'Option', 1)
                             return quest:progressEvent(54, 1)
                         end
                     end
@@ -111,10 +111,9 @@ quest.sections =
             onEventFinish =
             {
                 [54] = function(player, csid, option, npc)
-                    if option == 1 then
+                    if quest:getVar(player, 'Option') == 1 then
                         player:delKeyItem(xi.ki.BRUGAIRE_GOODS)
                         quest:setVar(player, 'Stage', getMidnight())
-                        quest:setVar(player, 'Prog', 1)
                     else
                         quest:setVar(player, 'Prog', 2)
                     end

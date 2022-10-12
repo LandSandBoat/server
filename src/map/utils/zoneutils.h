@@ -26,12 +26,6 @@
 
 #include "../zone.h"
 
-/************************************************************************
- *                                                                       *
- *  Задумывалось, как что-то вроде контролера зон                        *
- *                                                                       *
- ************************************************************************/
-
 class CBaseEntity;
 class CCharEntity;
 class CNpcEntity;
@@ -57,8 +51,9 @@ namespace zoneutils
     CCharEntity* GetChar(uint32 id);                              // returns pointer to character by id
     CCharEntity* GetCharToUpdate(uint32 primary, uint32 ternary); // returnes pointer to preferred char to update for party changes
     void         ForEachZone(const std::function<void(CZone*)>& func);
-    uint64       GetZoneIPP(uint16 zoneid);       // returns IPP for zone ID
-    bool         IsResidentialArea(CCharEntity*); // returns whether or not the area is a residential zone
+    uint64       GetZoneIPP(uint16 zoneid);          // returns IPP for zone ID
+    bool         IsResidentialArea(CCharEntity*);    // returns whether or not the area is a residential zone
+    uint8        GetFameAreaFromZone(uint16 ZoneID); // returns fame from zone
 
 }; // namespace zoneutils
 

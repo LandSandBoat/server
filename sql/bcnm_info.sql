@@ -221,7 +221,7 @@ INSERT INTO `bcnm_info` VALUES (706,10,'waking_dreams','nobody',0,1800,1800,0,18
 INSERT INTO `bcnm_info` VALUES (736,13,'century_of_hardship','nobody',0,1800,1800,60,6,0,5,1);
 INSERT INTO `bcnm_info` VALUES (737,13,'return_to_the_depths','nobody',0,1800,1800,99,6,0,7,0);
 INSERT INTO `bcnm_info` VALUES (738,13,'bionic_bug','nobody',0,1800,1800,0,18,738,15,0);
-INSERT INTO `bcnm_info` VALUES (739,13,'pulling_the_strings','nobody',0,900,900,0,1,739,15,0);
+INSERT INTO `bcnm_info` VALUES (739,13,'pulling_the_strings','nobody',0,900,900,60,1,739,14,0);
 INSERT INTO `bcnm_info` VALUES (740,13,'automaton_assault','nobody',0,900,900,60,6,740,15,0);
 INSERT INTO `bcnm_info` VALUES (741,13,'mobline_comedy','nobody',0,900,900,0,6,741,15,0);
 INSERT INTO `bcnm_info` VALUES (768,17,'ancient_flames_beckon','nobody',0,1800,1800,30,6,0,5,1);

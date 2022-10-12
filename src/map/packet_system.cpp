@@ -4686,7 +4686,63 @@ void SmallPacket0x084(map_session_data_t* const PSession, CCharEntity* const PCh
             quantity = std::min(quantity, PItem->getQuantity());
             // Store item-to-sell in the last slot of the shop container
             PChar->Container->setItem(PChar->Container->getExSize(), itemID, slotID, quantity);
-            PChar->pushPacket(new CShopAppraisePacket(slotID, PItem->getBasePrice()));
+
+            uint32 basePrice = PItem->getBasePrice();
+            uint16 fame      = 0;
+            float  mult      = 1.0f;
+
+            // Start Fame calculations
+            float fameMultiplier = settings::get<bool>("map.FAME_MULTIPLIER");
+            uint8 fameArea       = zoneutils::GetFameAreaFromZone(PChar->getZone());
+
+            switch (fameArea)
+            {
+                case 0: // San d'Oria
+                case 1: // Bastok
+                case 2: // Windurst
+                    fame = (uint16)(PChar->profile.fame[fameArea] * fameMultiplier);
+                    break;
+                case 3: // Jeuno
+                    fame = (uint16)(PChar->profile.fame[4] + ((PChar->profile.fame[0] + PChar->profile.fame[1] + PChar->profile.fame[2]) * fameMultiplier / 3));
+                    break;
+                case 4: // Selbina / Rabao
+                    fame = (uint16)((PChar->profile.fame[0] + PChar->profile.fame[1]) * fameMultiplier / 2);
+                    break;
+                case 5: // Norg
+                    fame = (uint16)(PChar->profile.fame[3] * fameMultiplier);
+                    break;
+                default: // default to no fame for worst sale price
+                    fame = 0;
+                    break;
+            }
+
+            // Amalasanda
+            if (PChar->getZone() == ZONE_LOWER_JEUNO && PChar->loc.p.x > 23.0f && PChar->loc.p.x < 45.0f && PChar->loc.p.z > -62.0f && PChar->loc.p.z < -29.0f)
+                fame = (uint16)(PChar->profile.fame[3] * fameMultiplier); // use tenshodo fame
+
+            if (basePrice >= 160)
+            {
+                mult = 1.025f;
+                if (fame < 613)
+                {
+                    mult = 1.0f + 0.025f * (float)fame / 612.0f;
+                }
+            }
+
+            if (basePrice < 160)
+            {
+                mult = 1.1f;
+                if (fame < 613)
+                {
+                    mult = 1.0f + 0.1f * (float)fame / 612.0f;
+                }
+            }
+
+            if (basePrice == 1)
+                mult = 1.0f; // dont round down to 0
+            // fame end
+
+            PChar->pushPacket(new CShopAppraisePacket(slotID, basePrice * mult));
         }
         return;
     }
@@ -4712,7 +4768,7 @@ void SmallPacket0x085(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if ((PItem != nullptr) && ((gil != nullptr) && gil->isType(ITEM_CURRENCY)))
     {
-        if (quantity < 1 || quantity > PItem->getStackSize()) // Possible exploit
+        if (quantity < 1 || quantity > PItem->getStackSize()) // Possible exploit m_fameType
         {
             ShowWarning("SmallPacket0x085: Player %s trying to sell invalid quantity %u of itemID %u [to VENDOR] ", PChar->GetName(),
                         quantity);
@@ -4733,7 +4789,62 @@ void SmallPacket0x085(map_session_data_t* const PSession, CCharEntity* const PCh
             return;
         }
 
-        charutils::UpdateItem(PChar, LOC_INVENTORY, 0, quantity * PItem->getBasePrice());
+        uint32 basePrice = PItem->getBasePrice();
+        uint16 fame      = 0;
+        float  mult      = 1.0f;
+
+        // Start Fame calculations
+        float fameMultiplier = settings::get<bool>("map.FAME_MULTIPLIER");
+        uint8 fameArea       = zoneutils::GetFameAreaFromZone(PChar->getZone());
+
+        switch (fameArea)
+        {
+            case 0: // San d'Oria
+            case 1: // Bastok
+            case 2: // Windurst
+                fame = (uint16)(PChar->profile.fame[fameArea] * fameMultiplier);
+                break;
+            case 3: // Jeuno
+                fame = (uint16)(PChar->profile.fame[4] + ((PChar->profile.fame[0] + PChar->profile.fame[1] + PChar->profile.fame[2]) * fameMultiplier / 3));
+                break;
+            case 4: // Selbina / Rabao
+                fame = (uint16)((PChar->profile.fame[0] + PChar->profile.fame[1]) * fameMultiplier / 2);
+                break;
+            case 5: // Norg
+                fame = (uint16)(PChar->profile.fame[3] * fameMultiplier);
+                break;
+            default: // default to no fame for worst sale price
+                fame = 0;
+                break;
+        }
+
+        // Amalasanda
+        if (PChar->getZone() == ZONE_LOWER_JEUNO && PChar->loc.p.x > 23.0f && PChar->loc.p.x < 45.0f && PChar->loc.p.z > -62.0f && PChar->loc.p.z < -29.0f)
+            fame = (uint16)(PChar->profile.fame[3] * fameMultiplier); // use tenshodo fame
+
+        if (basePrice >= 160)
+        {
+            mult = 1.025f;
+            if (fame < 613)
+            {
+                mult = 1.0f + 0.025f * (float)fame / 612.0f;
+            }
+        }
+
+        if (basePrice < 160)
+        {
+            mult = 1.1f;
+            if (fame < 613)
+            {
+                mult = 1.0f + 0.1f * (float)fame / 612.0f;
+            }
+        }
+
+        if (basePrice == 1)
+            mult = 1.0f; // dont round down to 0
+        // fame end
+
+        charutils::UpdateItem(PChar, LOC_INVENTORY, 0, quantity * (uint32)((float)basePrice * mult));
         charutils::UpdateItem(PChar, LOC_INVENTORY, slotID, -(int32)quantity);
         ShowInfo("SmallPacket0x085: Player '%s' sold %u of itemID %u [to VENDOR] ", PChar->GetName(), quantity, itemID);
         PChar->pushPacket(new CMessageStandardPacket(nullptr, itemID, quantity, MsgStd::Sell));
@@ -4822,9 +4933,9 @@ void SmallPacket0x096(map_session_data_t* const PSession, CCharEntity* const PCh
 
         slotQty[invSlotID]++;
 
-        auto* PSlotItem = PChar->getStorage(LOC_INVENTORY)->GetItem(invSlotID);
+        auto* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(invSlotID);
 
-        if (PSlotItem && PSlotItem->getID() == ItemID && slotQty[invSlotID] <= (PSlotItem->getQuantity() - PSlotItem->getReserve()))
+        if (PItem && PItem->getID() == ItemID && slotQty[invSlotID] <= (PItem->getQuantity() - PItem->getReserve()))
         {
             PChar->CraftContainer->setItem(SlotID + 1, ItemID, invSlotID, 1);
         }

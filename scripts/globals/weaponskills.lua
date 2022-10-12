@@ -485,7 +485,6 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
     calcParams.hybridHit = false
     calcParams.sneakApplicable = false
     calcParams.trickApplicable = false
-    dmg = base
 
     -- For items that apply bonus damage to the first hit of a weaponskill (but not later hits),
     -- store bonus damage for first hit, for use after other calculations are done
@@ -493,6 +492,8 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
 
     -- Reset fTP if it's not supposed to carry over across all hits for this WS
     if not wsParams.multiHitfTP then ftp = 1 end -- We'll recalculate our mainhand damage after doing offhand
+
+    base = (calcParams.weaponDamage[1] + calcParams.fSTR + wsMods) * ftp
 
     -- Do the extra hit for our offhand if applicable
     if calcParams.extraOffhandHit and finaldmg < targetHp then
@@ -516,7 +517,7 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
 
     -- Calculate additional hits if a multiHit WS (or we're supposed to get a DA/TA/QA proc from main hit)
     local hitsDone = 1
-    local numHits = getMultiAttacks(attacker, target, wsParams.numHits)
+    local numHits = utils.clamp(getMultiAttacks(attacker, target, wsParams.numHits), 0, 8)
 
     while hitsDone < numHits and finaldmg < targetHp do -- numHits is hits in the base WS _and_ DA/TA/QA procs during those hits
         hitdmg, calcParams = getSingleHitDamage(attacker, target, dmg, wsParams, calcParams, false, isRanged)

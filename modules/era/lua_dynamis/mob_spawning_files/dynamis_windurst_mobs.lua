@@ -77,7 +77,7 @@ xi.dynamis.mobList = xi.dynamis.mobList or { } -- Ignore me I just set the globa
 xi.dynamis.mobList[zoneID] = { } -- Ignore me, I just start the table.
 xi.dynamis.mobList[zoneID].nmchildren = { }
 xi.dynamis.mobList[zoneID].mobchildren = { }
-xi.dynamis.mobList[zoneID].maxWaves = 10 -- Put in number of max waves
+xi.dynamis.mobList[zoneID].maxWaves = 9 -- Put in number of max waves
 
 while i <= 156 do
     table.insert(xi.dynamis.mobList[zoneID], i, { id = i})
@@ -270,7 +270,6 @@ xi.dynamis.mobList[zoneID].waveDefeatRequirements =
     {"Xoo_killed"}, -- Xoo Kaza the Solemn NM spawns 2 Statues at Heavens Tower
     {"Haa_killed"}, -- Haa Pevi the Stentorian NM spawns 2 Statues at Heavens Tower
     {"Wuu_killed", "Xoo_killed", "Haa_killed"}, -- Spawn main Heavens Tower statues + the RDM NM on 3 NM deaths
-    {"58_killed"}, -- pops 59-61 on bridge when defeated
     {"101_killed"}, -- pops 102/103 under bridge when defeated
     {"57_killed" }, -- pops 54/55 under bridge when defeated
     {"Loo_killed"} -- Pops zone boss
@@ -330,6 +329,9 @@ xi.dynamis.mobList[zoneID][1].wave =
     56 ,    -- (056-Y/M)  Manifest Icon
     57 ,    -- (057-Y/M)  Manifest Icon
     58 ,    -- (058-Y/A)  Avatar Icon
+    62 ,    -- (062-Y/A)  Avatar Icon
+    63 ,    -- (063-Y/A)  Avatar Icon
+    64 ,    -- (064-Y/A)  Avatar Icon
     65 ,    -- (065-Y/A)  Avatar Icon
     66 ,    -- (066-Y/M)  Avatar Icon
     69 ,    -- (069-Y/A)  Avatar Icon
@@ -415,24 +417,17 @@ xi.dynamis.mobList[zoneID][6].wave =
 
 xi.dynamis.mobList[zoneID][7].wave =
 {
-    59,     -- (059-Y/A)  Avatar Icon
-    60,     -- (060-Y/M)  Manifest Icon
-    61      -- (061-Y/A)  Avatar Icon
-}
-
-xi.dynamis.mobList[zoneID][8].wave =
-{
     103,    -- (103-Y/A)  Avatar Icon
     102	    -- (102-Y/A)  Avatar Icon
 }
 
-xi.dynamis.mobList[zoneID][9].wave =
+xi.dynamis.mobList[zoneID][8].wave =
 {
     55,     -- (055-Y/A)  Avatar Icon
     54	    -- (054-Y/A)  Avatar Icon
 }
 
-xi.dynamis.mobList[zoneID][10].wave =
+xi.dynamis.mobList[zoneID][9].wave =
 {
     121     -- ( 121 ) Tzee Xicu Idol
 }
@@ -582,6 +577,7 @@ xi.dynamis.mobList[zoneID][32 ].nmchildren = { true, 33 }
 xi.dynamis.mobList[zoneID][35 ].nmchildren = { true, 36, 37 }
 xi.dynamis.mobList[zoneID][41 ].nmchildren = { false, 42 }
 xi.dynamis.mobList[zoneID][46 ].nmchildren = { true, 47, 48, 49, 50, 155 }
+xi.dynamis.mobList[zoneID][58 ].nmchildren = { true, 59, 60, 61 }
 xi.dynamis.mobList[zoneID][97 ].nmchildren = { false, 98 }
 xi.dynamis.mobList[zoneID][98 ].nmchildren = { false, 99 }
 xi.dynamis.mobList[zoneID][99 ].nmchildren = { false, 100 }
