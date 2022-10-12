@@ -1471,6 +1471,7 @@ xi.mod =
 
     MAGIC_ABSORB                    = 475, -- Occasionally absorbs magic damage taken, in percents
     MAGIC_NULL                      = 476, -- Occasionally annuls magic damage taken, in percents
+    NULL_RANGED_DAMAGE              = 239, -- Occasionally annuls ranged damage taken, in percents
     PHYS_ABSORB                     = 512, -- Occasionally absorbs physical damage taken, in percents
     ABSORB_DMG_TO_MP                = 516, -- Unlike PLD gear mod, works on all damage types (Ethereal Earring)
 
