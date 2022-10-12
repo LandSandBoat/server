@@ -700,6 +700,7 @@ xi.quest.id =
         ODE_TO_THE_SERPENTS             = 44, -- + Converted
         WHEN_THE_BOW_BREAKS             = 45, -- + Converted
         FIST_OF_THE_PEOPLE              = 46, -- + Converted
+        SOOTHING_WATERS                 = 47, -- + Converted
         DELIVERING_THE_GOODS            = 61, -- + Converted
         VANISHING_ACT                   = 62, -- + Converted
         STRIKING_A_BALANCE              = 63, -- + Converted
