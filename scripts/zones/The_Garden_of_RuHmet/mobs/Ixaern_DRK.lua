@@ -17,7 +17,7 @@ local entity = {}
 entity.onMobInitialize = function(IxAernDrkMob)
     IxAernDrkMob:addListener("DEATH", "AERN_DEATH", function(mob, killer)
         local timesReraised = mob:getLocalVar("AERN_RERAISES")
-        if(math.random (1, 10) < 10) then
+        if(math.random (1, 10) < 6) then
             -- reraise
             local target = mob:getTarget()
             if

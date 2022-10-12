@@ -32,9 +32,11 @@
 # |
 # ---------------------
 #
-# Will load only custom/cpp/custom_module.cpp and custom/lua/claim_shield.lua.
+# Will load only custom/cpp/custom_module.cpp and catseyexi/claim_shield.lua.
 #
 # Live example:
 
-custom/commands/
-custom/lua/test_npcs_in_gm_home.lua
+catseyexi/lua
+catseyexi/sql
+catseyexi/cpp
+custom/cpp

@@ -1,7 +1,7 @@
 -----------------------------------
 -- Area: Caedarva Mire
 --  Mob: Caedarva Toad
--- Involved in Quest: The Wayward Automation
+-- Involved in Quest: The Wayward Automaton
 -----------------------------------
 require("scripts/globals/quests")
 -----------------------------------

@@ -1004,26 +1004,26 @@ local helmInfo =
             {
                 drops =
                 {
-                    { 1660, 640 }, -- Copper Ore
-                    { 1100, 641 }, -- Tin Ore
-                    { 1450, 642 }, -- Zinc Ore
+                    { 1660, 640 },  -- Copper Ore
+                    { 1100, 641 },  -- Tin Ore
+                    { 1450, 642 },  -- Zinc Ore
                     { 1790, 1654 }, -- Igneous Rock
-                    { 1450, 736 }, -- Silver Ore
-                    { 240, 678 }, -- Aluminum Ore
-                    { 1720, 643 }, -- Iron Ore
-                    { 150, 645 }, -- Darksteel Ore
-                    { 440, 644 }, -- Mythril Ore
-                    { 240, 737 }, -- Gold Ore
-                    { 340, 738 }, -- Platium Ore
-                    { 100, 769 }, -- Colored Rock
-                    { 100, 1255 }, -- Fire Ore
-                    { 100, 1256 }, -- Ice Ore
-                    { 100, 1257 }, -- Wind Ore
-                    { 100, 1258 }, -- Earth Ore
-                    { 100, 1258 }, -- Lightning Ore
-                    { 100, 1260 }, -- Water Ore
-                    { 100, 1261 }, -- Light Ore
-                    { 100, 1262 }, -- Dark Ore
+                    { 1450, 736 },  -- Silver Ore
+                    { 240, 678 },   -- Aluminum Ore
+                    { 1720, 643 },  -- Iron Ore
+                    { 150, 645 },   -- Darksteel Ore
+                    { 440, 644 },   -- Mythril Ore
+                    { 240, 737 },   -- Gold Ore
+                    { 340, 738 },   -- Platium Ore
+                    { 100, 769 },   -- Colored Rock
+                    { 100, 1255 },  -- Fire Ore
+                    { 100, 1256 },  -- Ice Ore
+                    { 100, 1257 },  -- Wind Ore
+                    { 100, 1258 },  -- Earth Ore
+                    { 100, 1258 },  -- Lightning Ore
+                    { 100, 1260 },  -- Water Ore
+                    { 100, 1261 },  -- Light Ore
+                    { 100, 1262 },  -- Dark Ore
                 },
 
                 points =
@@ -1154,26 +1154,26 @@ local helmInfo =
             {
                 drops =
                 {
-                    { 1870, 640 }, -- Copper Ore
-                    { 1930, 642 }, -- Zinc Ore
-                    { 1500, 641 }, -- Tin Ore
+                    { 1870, 640 },   -- Copper Ore
+                    { 1930, 642 },   -- Zinc Ore
+                    { 1500, 641 },   -- Tin Ore
                     { 1340, 17296 }, -- Pebble
-                    { 860, 736 }, -- Silver Ore
-                    { 1180, 643 }, -- Iron Ore
-                    { 750, 644 }, -- Mythril Ore
-                    { 210, 1638 }, -- Moblin Mask
-                    { 110, 1625 }, -- Moblin Helm
-                    { 110, 1632 }, -- Moblin Mail
-                    { 50, 1631 }, -- Moblin Armor
-                    { 160, 738 }, -- Platium Ore
-                    { 100, 1255 }, -- Fire Ore
-                    { 100, 1256 }, -- Ice Ore
-                    { 100, 1257 }, -- Wind Ore
-                    { 100, 1258 }, -- Earth Ore
-                    { 100, 1258 }, -- Lightning Ore
-                    { 100, 1260 }, -- Water Ore
-                    { 100, 1261 }, -- Light Ore
-                    { 100, 1262 }, -- Dark Ore
+                    { 860, 736 },    -- Silver Ore
+                    { 1180, 643 },   -- Iron Ore
+                    { 750, 644 },    -- Mythril Ore
+                    { 210, 1638 },   -- Moblin Mask
+                    { 110, 1625 },   -- Moblin Helm
+                    { 110, 1632 },   -- Moblin Mail
+                    { 50, 1631 },    -- Moblin Armor
+                    { 160, 738 },    -- Platium Ore
+                    { 100, 1255 },   -- Fire Ore
+                    { 100, 1256 },   -- Ice Ore
+                    { 100, 1257 },   -- Wind Ore
+                    { 100, 1258 },   -- Earth Ore
+                    { 100, 1258 },   -- Lightning Ore
+                    { 100, 1260 },   -- Water Ore
+                    { 100, 1261 },   -- Light Ore
+                    { 100, 1262 },   -- Dark Ore
                 },
 
                 points =

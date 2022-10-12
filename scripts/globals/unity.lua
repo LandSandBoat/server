@@ -70,7 +70,9 @@ local unityOptions =
         [46] = { -245.460,  -32.247,  245.440,  31,  25 }, -- Misareaux Coast
         [47] = { -613.000,  -21.301,  230.000, 224,  61 }, -- Mount Zhayolm
         [48] = {  -60.000,  -10.000, -119.000, 192, 212 }, -- Gustav Tunnel
-        [49] = { -183.100,  -19.854,   57.900, 127, 127 }, -- Behemoth's Dominion
+		-- Redirect all Unity traffic from Behemoth's Dominion to Lower Jeuno
+        [49] = { -5.553,      0.000,    3.621,  89, 245 }, -- Behemoth's Dominion
+--        [49] = { -183.100,  -19.854,   57.900, 127, 127 }, -- Behemoth's Dominion
         [50] = {  -60.000,  -19.329,   17.000,  15, 153 }, -- The Boyahda Tree
         [51] = nil,                                        -- Valley of Sorrows
         [52] = nil,                                        -- Wajaom Woodlands
