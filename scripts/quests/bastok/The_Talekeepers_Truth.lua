@@ -2,9 +2,9 @@
 -- The Talekeeper's Truth
 -----------------------------------
 -- Log ID: 1, Quest ID: 55
--- Phara    : !pos 75 0 -80 234
--- Deidogg  : !pos -13 7 29 234
--- qm1      : !pos 15 -31 -94 143
+-- Phara         : !pos 75 0 -80 234
+-- Deidogg       : !pos -13 7 29 234
+-- qm_talekeeper : !pos 15 -31 -94 143
 -----------------------------------
 require('scripts/globals/items')
 require('scripts/globals/keyitems')
@@ -139,7 +139,7 @@ quest.sections =
 
         [xi.zone.PALBOROUGH_MINES] =
         {
-            ['qm1'] =
+            ['qm_talekeeper'] =
             {
                 onTrigger = function(player, npc)
                     if

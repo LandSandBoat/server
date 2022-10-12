@@ -2,9 +2,9 @@
 -- The Talekeeper's Gift
 -----------------------------------
 -- Log ID: 1, Quest ID: 56
--- Deidogg : !pos -13 7 29 234
--- Detzo   : !pos 5.365 6.999 9.891 234
--- qm1     : !pos 211 4 -79 127
+-- Deidogg       : !pos -13 7 29 234
+-- Detzo         : !pos 5.365 6.999 9.891 234
+-- qm_talekeeper : !pos 211 4 -79 127
 -----------------------------------
 require('scripts/globals/items')
 require('scripts/globals/npc_util')
@@ -93,7 +93,7 @@ quest.sections =
 
         [xi.zone.BEHEMOTHS_DOMINION] =
         {
-            ['qm1'] =
+            ['qm_talekeeper'] =
             {
                 onTrigger = function(player, npc)
                     if

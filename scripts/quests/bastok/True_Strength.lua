@@ -2,8 +2,8 @@
 -- True Strength
 -----------------------------------
 -- Log ID: 1, Quest ID: 53
--- Ayame : !pos 133 -19 34 237
--- qm1   : !pos -100 -71 -132 151
+-- Ayame           : !pos 133 -19 34 237
+-- qm_truestrength : !pos -100 -71 -132 151
 -----------------------------------
 require('scripts/globals/items')
 require('scripts/globals/npc_util')
@@ -55,7 +55,7 @@ quest.sections =
 
         [xi.zone.CASTLE_OZTROJA] =
         {
-            ['qm1'] =
+            ['qm_truestrength'] =
             {
                 onTrade = function(player, npc, trade)
                     if
