@@ -9,9 +9,37 @@ require("scripts/globals/mobs")
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
+local addIds = {}
+local despawnMobTable =
+{
+    17961281,
+    17961282,
+    17961283,
+    17961284,
+    17961285,
+    17961286,
+    17961287,
+    17961288
+}
+
+numAdds = 0
 
 entity.onMobSpawn = function(mob, target)
+    mob:setMod(xi.mod.MAIN_DMG_RATING, 50)
+    mob:setMod(xi.mod.UFASTCAST, 50)
+    mob:setMod(xi.mod.SILENCERES, 9999)
+    mob:setMod(xi.mod.STUNRES, 9999)
+    mob:setMod(xi.mod.BINDRES, 9999)
+    mob:setMod(xi.mod.GRAVITYRES, 9999)
+    mob:setMod(xi.mod.SLEEPRES, 9999)
+    mob:setMod(xi.mod.POISONRES, 9999)
+    mob:setMod(xi.mod.PARALYZERES, 9999)
+    mob:setMod(xi.mod.LULLABYRES, 9999)
     mob:setDropID(3992)
+
+	for _, despawnMob in ipairs(despawnMobTable) do
+	    DespawnMob(despawnMob)
+    end
 end
 
 entity.onMobInitialize = function(mob)
@@ -22,7 +50,7 @@ entity.onMobFight = function(mob, target, spellId) -- This function is fired eve
     local currentTime = os.time()
 
     -- Pet logic here
-    local spawnTime = 20 -- Spawn dynamic entity every interval of seconds
+    local spawnTime = 30 -- Spawn dynamic entity every interval of seconds
     local nextPet   = mob:getLocalVar("nextPetPop")
 
     if nextPet == 0 then
@@ -54,37 +82,48 @@ entity.onMobFight = function(mob, target, spellId) -- This function is fired eve
         nextPet = currentTime + spawnTime
         mob:setLocalVar("nextPetPop", nextPet)
 
+        for _, partyMember in pairs(target:getAlliance()) do
+            partyMember:PrintToPlayer("Suzaku begins absorbs his minions' strength...")
+        end
         -- Get random player from the enmity list to attach an add to
         local enmityList   = mob:getEnmityList()
         local numEntries   = #enmityList
         local randomPlayer = utils.randomEntry(enmityList)["entity"]
         local zone         = randomPlayer:getZone()
 
-        -- Dynamic Entity Definition
-        local mob    = zone:insertDynamicEntity({
+        -- Dynamic Entity Definition (Minion)
+        local minion = zone:insertDynamicEntity({
             objtype  = xi.objType.MOB,
             name     = "Suzaku's Minion",
             x        = randomPlayer:getXPos(),
             y        = randomPlayer:getYPos(),
             z        = randomPlayer:getZPos(),
             rotation = randomPlayer:getRotPos(),
-        
+
             -- Flamingo
             groupId     = 2,
             groupZoneId = 130,
 
             onMobDeath = function(mob, playerArg, isKiller)
-                -- mob:setLocalVar("[E.Suzaku]Adds", 0)
             end,
-        
+
             onMobSpawn = function(mob)
-			    mob:timer(15000, function(mobArg)
-				    mob:useMobAbility(741) -- death
-				end)
+			    mob:setMod(xi.mod.SLEEPRES, 9999)
+                mob:setMod(xi.mod.LULLABYRES, 9999)
+                numAdds = numAdds + 1
+                mob:timer(25000, function(mobArg)
+                    mob:useMobAbility(511) -- self-destruct
+                end)
             end,
             
             onMobFight = function(mob, target)
+                local suzaku = GetMobByID(17961568)
+
+                if not suzaku:isAlive() then
+                    DespawnMob(mob:getID())
+                end
             end,
+
             releaseIdOnDeath = true,
         
             -- You can apply mixins like you would with regular mobs. mixinOptions aren't supported yet.
@@ -98,12 +137,15 @@ entity.onMobFight = function(mob, target, spellId) -- This function is fired eve
             specialSpawnAnimation = true,
         })
         
-        -- Use the mob object as you normally would
-        mob:setSpawn(randomPlayer:getXPos(), randomPlayer:getYPos(), randomPlayer:getZPos(), randomPlayer:getRotPos())
-        mob:setDropID(0) -- No loot!
-        mob:spawn()
-        mob:updateClaim(randomPlayer)
+        -- Use the minion object as you normally would
+        minion:setSpawn(randomPlayer:getXPos(), randomPlayer:getYPos(), randomPlayer:getZPos(), randomPlayer:getRotPos())
+        minion:setDropID(0) -- No loot!
+        minion:spawn()
+        minion:updateClaim(randomPlayer)
     end
+
+    mob:setMod(xi.mod.MAIN_DMG_RATING, 75 * numAdds)
+    -- print(string.format("numadds %s", numAdds))
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
@@ -111,9 +153,15 @@ entity.onAdditionalEffect = function(mob, target, damage)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
+    for _, add in ipairs(addIds) do
+        DespawnMob(add)
+    end
 end
 
 entity.onMobDespawn = function(mob)
+	for _, despawnMob in ipairs(despawnMobTable) do
+	    SpawnMob(despawnMob)
+    end
 end
 
 return entity

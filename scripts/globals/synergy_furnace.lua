@@ -9,7 +9,7 @@ require("scripts/globals/settings")
 require("scripts/globals/teleports")
 require("scripts/globals/utils")
 require("scripts/globals/status")
-require("settings/main")
+require("scripts/globals/zone")
 --------------------------------------
 
 xi = xi or {}
@@ -39,8 +39,8 @@ local augmentTable =
 
     [12421] = { 42, 153, 329,  56}, -- *Koenig Schaller*
     [13911] = { 42, 153, 329,  56}, -- *Kaiser Schaller*
-    [12549] = {141,  53,  39, 138}, -- *Koenig Cuirass*
-    [14370] = {141,  53,  39, 138}, -- *Kaiser Cuirass*
+    [12549] = {141,  53,  39,  55}, -- *Koenig Cuirass*
+    [14370] = {141,  53,  39,  55}, -- *Kaiser Cuirass*
     [12677] = { 83, 286,  23,  39}, -- *Koenig Handschuhs*
     [14061] = { 83, 286,  23,  39}, -- *Kaiser Handschuhs*
     [12805] = { 31,  83, 288, 289}, -- *Koenig Diechlings*
@@ -81,8 +81,8 @@ local augmentTable =
     [14123] = {101, 329, 323, 289}, -- *Zenith Pumps*
     [14124] = {101, 329, 323, 289}, -- *Zenith Pumps+1*
 
-    [13908] = {517,  27, 515, 325}, -- *Crimson Mask*
-    [13909] = {517,  27, 515, 325}, -- *Crimson Mask+1*
+    [13908] = {517,  27, 515, 362}, -- *Crimson Mask*
+    [13909] = {517,  27, 515, 362}, -- *Crimson Mask+1*
     [14367] = {518, 512, 515,  23}, -- *Crimson Scale Mail*
     [14368] = {518, 512, 515,  23}, -- *Crimson Scale Mail+1*
     [14058] = {517, 282, 195,  40}, -- *Crimson Finger Gauntlets*
@@ -109,8 +109,8 @@ local augmentTable =
     [14576] = { 57, 516, 517, 518}, -- *Valkyrie's Coat*
     [14997] = {141,  53,  83, 101}, -- *Shadow Cuffs*
     [14998] = {141,  53,  83, 101}, -- *Valkyrie's Cuffs*
-    [15657] = {292,  97, 102, 320}, -- *Shadow Trews*
-    [15658] = {292,  97, 102, 320}, -- *Valkyrie's Trews*
+    [15657] = {292,  97, 102, 141}, -- *Shadow Trews*
+    [15658] = {292,  97, 102, 141}, -- *Valkyrie's Trews*
     [15742] = { 83, 288, 293, 291}, -- *Shadow Clogs*
     [15743] = { 83, 288, 293, 291}, -- *Valkyrie's Clogs*
 
@@ -183,76 +183,76 @@ local function handleKirinItemCreation(player, itemId, au0, po0) -- This is for 
     local au2 = 0 -- Augment 2
     local po2 = 0 -- Augment 2 Power
 
-    local fuckery = math.random(100) -- HQ Roll Chance
+    local fuckery = math.random(1, 100) -- HQ Roll Chance
 
 -- Below is our check for what table we should roll. Rather than itemId index only we will check also check au0
     if itemId == 12562 and au0 == 137 then
-        au1 = augmentTable.b1[math.random(4)] -- We will randomly select a augment from our [itemId] = {table}
-        au2 = augmentTable.b1[math.random(4)] -- We will randomly select a augment from our [itemId] = {table}
+        au1 = augmentTable.b1[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
+        au2 = augmentTable.b1[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
     elseif itemId == 12562 and au0 == 143 then
-        au1 = augmentTable.b2[math.random(4)] -- We will randomly select a augment from our [itemId] = {table}
-        au2 = augmentTable.b2[math.random(4)] -- We will randomly select a augment from our [itemId] = {table}
+        au1 = augmentTable.b2[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
+        au2 = augmentTable.b2[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
     elseif itemId == 12562 and au0 == 211 then
-        au1 = augmentTable.b3[math.random(4)] -- We will randomly select a augment from our [itemId] = {table}
-        au2 = augmentTable.b3[math.random(4)] -- We will randomly select a augment from our [itemId] = {table}
+        au1 = augmentTable.b3[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
+        au2 = augmentTable.b3[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
     elseif itemId == 12562 and au0 == 146 then
-        au1 = augmentTable.b4[math.random(4)] -- We will randomly select a augment from our [itemId] = {table}
-        au2 = augmentTable.b4[math.random(4)] -- We will randomly select a augment from our [itemId] = {table}
+        au1 = augmentTable.b4[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
+        au2 = augmentTable.b4[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
     end
 
     if itemId == 17567 and au0 == 290 then
-        au1 = augmentTable.w1[math.random(4)] -- We will randomly select a augment from our [itemId] = {table}
-        au2 = augmentTable.w1[math.random(4)] -- We will randomly select a augment from our [itemId] = {table}
+        au1 = augmentTable.w1[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
+        au2 = augmentTable.w1[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
     elseif itemId == 17567 and au0 == 292 then
-        au1 = augmentTable.w2[math.random(4)] -- We will randomly select a augment from our [itemId] = {table}
-        au2 = augmentTable.w2[math.random(4)] -- We will randomly select a augment from our [itemId] = {table}
+        au1 = augmentTable.w2[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
+        au2 = augmentTable.w2[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
     elseif itemId == 17567 and au0 == 291 then
-        au1 = augmentTable.w3[math.random(4)] -- We will randomly select a augment from our [itemId] = {table}
-        au2 = augmentTable.w3[math.random(4)] -- We will randomly select a augment from our [itemId] = {table}
+        au1 = augmentTable.w3[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
+        au2 = augmentTable.w3[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
     elseif itemId == 17567 and au0 == 294 then
-        au1 = augmentTable.w4[math.random(4)] -- We will randomly select a augment from our [itemId] = {table}
-        au2 = augmentTable.w4[math.random(4)] -- We will randomly select a augment from our [itemId] = {table}
+        au1 = augmentTable.w4[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
+        au2 = augmentTable.w4[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
     end
 
 -- ROLL AGAIN (TY Wadski)
     if au1 == au2 and itemId == 12562 and au0 == 137 then -- Check if augments are equal in value. If so we will reroll
     repeat
-        au2 = augmentTable.b1[math.random(4)]
+        au2 = augmentTable.b1[math.random(1, 4)]
     until( au2 ~= au1)
 
     elseif au1 == au2 and itemId == 12562 and au0 == 143 then
     repeat
-        au2 = augmentTable.b2[math.random(4)]
+        au2 = augmentTable.b2[math.random(1, 4)]
     until( au2 ~= au1)
 
     elseif au1 == au2 and itemId == 12562 and au0 == 211 then
     repeat
-        au2 = augmentTable.b3[math.random(4)]
+        au2 = augmentTable.b3[math.random(1, 4)]
     until( au2 ~= au1)
 
     elseif au1 == au2 and itemId == 12562 and au0 == 146 then
     repeat
-        au2 = augmentTable.b4[math.random(4)]
+        au2 = augmentTable.b4[math.random(1, 4)]
     until( au2 ~= au1)
 
     elseif au1 == au2 and itemId == 17567 and au0 == 290 then
     repeat
-        au2 = augmentTable.w1[math.random(4)]
+        au2 = augmentTable.w1[math.random(1, 4)]
     until( au2 ~= au1)
 
     elseif au1 == au2 and itemId == 17567 and au0 == 292 then
     repeat
-        au2 = augmentTable.w2[math.random(4)]
+        au2 = augmentTable.w2[math.random(1, 4)]
     until( au2 ~= au1)
 
     elseif au1 == au2 and itemId == 17567 and au0 == 291 then
     repeat
-        au2 = augmentTable.w3[math.random(4)]
+        au2 = augmentTable.w3[math.random(1, 4)]
     until( au2 ~= au1)
 
     elseif au1 == au2 and itemId == 17567 and au0 == 294 then
     repeat
-        au2 = augmentTable.w4[math.random(4)]
+        au2 = augmentTable.w4[math.random(1, 4)]
     until( au2 ~= au1)
     end
 
@@ -302,29 +302,34 @@ local function handleHqItemCreation(player, itemId, au0, po0) -- This is for HQ 
     local NQ  = 1
 
     local au1 = 0 -- Augment 1
-    local po1 = 0 -- Augment 1 Power
+    local po1 = 0
     local au2 = 0 -- Augment 2
-    local po2 = 0 -- Augment 2 Power
+    local po2 = 0
 
-    local fuckery = math.random(100) -- HQ Roll Chance
+    local fuckery = math.random(1, 100) -- HQ Roll Chance
 
-    au1 = augmentTable[itemId][math.random(4)] -- We will randomly select a augment from our [itemId] = {table}
-    au2 = augmentTable[itemId][math.random(4)] -- We will randomly select a augment from our [itemId] = {table}
+    au1 = augmentTable[itemId][math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
+    au2 = augmentTable[itemId][math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
 
 -- ROLL AGAIN (TY Wadski)
     if au1 == au2 then -- Check if augments are equal in value. If so we will reroll
-    repeat
-        au2 = augmentTable[itemId][math.random(4)]
-    until( au2 ~= au1)
+        repeat
+            au2 = augmentTable[itemId][math.random(1, 4)]
+        until(au2 ~= au1)
     end
 
     if au1 > 0 then
         po1 = math.random(0, 3) -- AUGMENT 1 POWER (THIS IS OUR AUGMENT POWERS 1-4)
+    else
+        po1 = 0
     end
 
     if au2 > 0 then
         po2 = math.random(0, 3) -- AUGMENT 2 POWER (THIS IS OUR AUGMENT POWERS 1-4)
+    else
+        po2 = 0
     end
+
 
     if fuckery > HQ3 then -- Add +2 to each randomly selected augment and +2 to Item Base Augment POWERS
         po0 = po0 +2
@@ -352,6 +357,8 @@ local function handleHqItemCreation(player, itemId, au0, po0) -- This is for HQ 
     player:messageSpecial(zones[player:getZoneID()].text.ITEM_OBTAINED, itemId)
 end
 
+-- Puke Girl is the real MVP <3 TY for looking into this code
+
 local function handleAugmentedItemCreation(player, itemId, au0, po0)
 -- NQ: ~15%, HQ1: ~60%, HQ2: ~15%, HQ3: ~10%.
     local HQ3 = 90
@@ -366,8 +373,8 @@ local function handleAugmentedItemCreation(player, itemId, au0, po0)
 
     local fuckery = math.random(100) -- HQ Roll Chance
 
-    au1 = augmentTable[itemId][math.random(4)] -- We will randomly select a augment from our [itemId] = {table}
-    au2 = augmentTable[itemId][math.random(4)] -- We will randomly select a augment from our [itemId] = {table}
+    au1 = augmentTable[itemId][math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
+    au2 = augmentTable[itemId][math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
 
 -- ROLL AGAIN (TY Wadski)
     if au1 == au2 then -- Check if augments are equal in value. If so we will reroll
@@ -376,12 +383,12 @@ local function handleAugmentedItemCreation(player, itemId, au0, po0)
     until( au2 ~= au1)
     end
 
-    if au1 > 0 then
-        po1 = math.random(0, 2) -- AUGMENT 1 POWER (THIS IS OUR AUGMENT POWERS 1-3)
+    if au1 > 0 then -- refresh limit
+        po1 = math.random(0, 3) -- AUGMENT 1 POWER (THIS IS OUR AUGMENT POWERS 1-4)
     end
 
-    if au2 > 0 then
-        po2 = math.random(0, 2) -- AUGMENT 1 POWER (THIS IS OUR AUGMENT POWERS 1-3)
+    if au2 > 0 then -- refresh limit
+        po2 = math.random(0, 3) -- AUGMENT 2 POWER (THIS IS OUR AUGMENT POWERS 1-4)
     end
 
     if fuckery > HQ3 then -- Add +2 to each randomly selected augment and +2 to Item Base Augment POWERS
@@ -419,30 +426,30 @@ local function handleRandomAugment(player, itemId, au0, po0)
     local au1 = 0
     local po1 = 0
 
-    local random = math.random(6) -- How we pick a random augment table(4 tables and 2 for HP and or MP)
-    local randomA = math.random(6) -- How we randomly reroll augments if val == val
-    local randomB = math.random(4) -- This will be our HQ roll chance
+    local random = math.random(1, 6) -- How we pick a random augment table(4 tables and 2 for HP and or MP)
+    local randomA = math.random(1, 6) -- How we randomly reroll augments if val == val
+    local randomB = math.random(1, 4) -- This will be our HQ roll chance
 
     if itemId == 12562 and au0 == 137 then -- Kirin's Osode
-        au1 = augmentTable.b1[math.random(4)] -- We will randomly select a augment from our [itemId] = {table}
+        au1 = augmentTable.b1[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
     elseif itemId == 12562 and au0 == 143 then
-        au1 = augmentTable.b2[math.random(4)] -- We will randomly select a augment from our [itemId] = {table}
+        au1 = augmentTable.b2[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
     elseif itemId == 12562 and au0 == 211 then
-        au1 = augmentTable.b3[math.random(4)] -- We will randomly select a augment from our [itemId] = {table}
+        au1 = augmentTable.b3[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
     elseif itemId == 12562 and au0 == 146 then
-        au1 = augmentTable.b4[math.random(4)] -- We will randomly select a augment from our [itemId] = {table}
+        au1 = augmentTable.b4[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
 
     elseif itemId == 17567 and au0 == 290 then -- Kirin's Pole
-        au1 = augmentTable.w1[math.random(4)] -- We will randomly select a augment from our [itemId] = {table}
+        au1 = augmentTable.w1[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
     elseif itemId == 17567 and au0 == 292 then
-        au1 = augmentTable.w2[math.random(4)] -- We will randomly select a augment from our [itemId] = {table}
+        au1 = augmentTable.w2[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
     elseif itemId == 17567 and au0 == 291 then
-        au1 = augmentTable.w3[math.random(4)] -- We will randomly select a augment from our [itemId] = {table}
+        au1 = augmentTable.w3[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
     elseif itemId == 17567 and au0 == 294 then
-        au1 = augmentTable.w4[math.random(4)] -- We will randomly select a augment from our [itemId] = {table}
+        au1 = augmentTable.w4[math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
 
     elseif itemId ~= 12562 or 17567 then
-        au1 = augmentTable[itemId][math.random(4)]
+        au1 = augmentTable[itemId][math.random(1, 4)]
     end
 
     if au1 > 0 then
@@ -453,16 +460,16 @@ local function handleRandomAugment(player, itemId, au0, po0)
 
 -- We will roll for a augment within randomtable
     if random == 1 then
-        ra1 = randomAug.r1[math.random(8)] -- We will randomly select a augment from our [itemId] = {table}
+        ra1 = randomAug.r1[math.random(1, 8)] -- We will randomly select a augment from our [itemId] = {table}
         rp1 = math.random(0, 4) -- RANDOM AUGMENT POWER (THIS IS OUR AUGMENT POWERS 1-5)
     elseif random == 2 then
-        ra1 = randomAug.r2[math.random(13)] -- We will randomly select a augment from our [itemId] = {table}
+        ra1 = randomAug.r2[math.random(1, 13)] -- We will randomly select a augment from our [itemId] = {table}
         rp1 = math.random(0, 4) -- RANDOM AUGMENT POWER (THIS IS OUR AUGMENT POWERS 1-5)
     elseif random == 3 then
-        ra1 = randomAug.r3[math.random(8)] -- We will randomly select a augment from our [itemId] = {table}
+        ra1 = randomAug.r3[math.random(1, 8)] -- We will randomly select a augment from our [itemId] = {table}
         rp1 = math.random(0, 4) -- RANDOM AUGMENT POWER (THIS IS OUR AUGMENT POWERS 1-5)
     elseif random == 4 then
-        ra1 = randomAug.r4[math.random(7)] -- We will randomly select a augment from our [itemId] = {table}
+        ra1 = randomAug.r4[math.random(1, 7)] -- We will randomly select a augment from our [itemId] = {table}
         rp1 = math.random(0, 4) -- RANDOM AUGMENT POWER (THIS IS OUR AUGMENT POWERS 1-5)
     elseif random == 5 then -- HP +3 augment roll
         ra1 = 79
@@ -475,25 +482,25 @@ local function handleRandomAugment(player, itemId, au0, po0)
 -- We will check for augment 1 and Random Augment equality. If val == val we will reroll
     if ra1 == au1 and randomA == 1 then
     repeat
-        ra1 = randomAug.r1[math.random(8)]
+        ra1 = randomAug.r1[math.random(1, 8)]
         rp1 = math.random(0, 4) -- RANDOM AUGMENT POWER (THIS IS OUR AUGMENT POWERS 1-5)
     until( ra1 ~= au1 )
 
     elseif ra1 == au1 and randomA == 2 then
     repeat
-        ra1 = randomAug.r2[math.random(13)]
+        ra1 = randomAug.r2[math.random(1, 13)]
         rp1 = math.random(0, 4) -- RANDOM AUGMENT POWER (THIS IS OUR AUGMENT POWERS 1-5)
     until( ra1 ~= au1 )
 
     elseif ra1 == au1 and randomA == 3 then
     repeat
-        ra1 = randomAug.r3[math.random(8)]
+        ra1 = randomAug.r3[math.random(1, 8)]
         rp1 = math.random(0, 4) -- RANDOM AUGMENT POWER (THIS IS OUR AUGMENT POWERS 1-5)
     until( ra1 ~= au1 )
 
     elseif ra1 == au1 and randomA == 4 then
     repeat
-        ra1 = randomAug.r4[math.random(7)]
+        ra1 = randomAug.r4[math.random(1, 7)]
         rp1 = math.random(0, 4) -- RANDOM AUGMENT POWER (THIS IS OUR AUGMENT POWERS 1-5)
     until( ra1 ~= au1 )
 
@@ -512,25 +519,25 @@ local function handleRandomAugment(player, itemId, au0, po0)
 -- We will check for augment 0 (Item Base Augment) and Random Augment equality. If val == val we will reroll
     if ra1 == au0 and randomA == 1 then
     repeat
-        ra1 = randomAug.r1[math.random(8)]
+        ra1 = randomAug.r1[math.random(1, 8)]
         rp1 = math.random(0, 4) -- RANDOM AUGMENT POWER (THIS IS OUR AUGMENT POWERS 1-5)
     until( ra1 ~= au0 )
 
     elseif ra1 == au0 and randomA == 2 then
     repeat
-        ra1 = randomAug.r2[math.random(13)]
+        ra1 = randomAug.r2[math.random(1, 13)]
         rp1 = math.random(0, 4) -- RANDOM AUGMENT POWER (THIS IS OUR AUGMENT POWERS 1-5)
     until( ra1 ~= au0 )
 
     elseif ra1 == au0 and randomA == 3 then
     repeat
-        ra1 = randomAug.r3[math.random(8)]
+        ra1 = randomAug.r3[math.random(1, 8)]
         rp1 = math.random(0, 4) -- RANDOM AUGMENT POWER (THIS IS OUR AUGMENT POWERS 1-5)
     until( ra1 ~= au0 )
 
     elseif ra1 == au0 and randomA == 4 then
     repeat
-        ra1 = randomAug.r4[math.random(7)]
+        ra1 = randomAug.r4[math.random(1, 7)]
         rp1 = math.random(0, 4) -- RANDOM AUGMENT POWER (THIS IS OUR AUGMENT POWERS 1-5)
     until( ra1 ~= au0 )
 
@@ -586,7 +593,7 @@ xi.synergyFurnace.onTrade = function(player, npc, trade)
 	    local ID = require("scripts/zones/Northern_San_dOria/IDs")
 	end
 	
-    local randomC = math.random(100)
+    local randomC = math.random(1, 100)
 
     local itemId = 0
     local au0 = 0 -- Augments from table randomly selected

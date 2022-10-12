@@ -31,8 +31,15 @@ xi.aeonics.onTrigger = function(player, wsID)
             local unlockVar = player:getCharVar(aTable[i][1])
             local usedWs    = aTable[i][2]
             
-            if wsID == usedWs and unlockVar ~= 1 then
-                player:PrintToPlayer("You don't have this WS unlocked")
+            if wsID == usedWs then
+                if unlockVar == 1 then
+                    return true
+                else
+                    player:PrintToPlayer("You don't have this WS unlocked")
+                    return false
+                end
+
+                break
             end
         end
     end
