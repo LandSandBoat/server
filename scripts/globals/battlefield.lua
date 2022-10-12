@@ -79,6 +79,7 @@ xi.battlefield.id =
     WHERE_TWO_PATHS_CONVERGE = 161,
     NW_APOLLYON = 1290,
     SW_APOLLYON = 1291,
+    NE_APOLLYON = 1292,
     SE_APOLLYON = 1293,
 }
 
