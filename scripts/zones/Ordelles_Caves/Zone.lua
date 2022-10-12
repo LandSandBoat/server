@@ -4,7 +4,6 @@
 local ID = require('scripts/zones/Ordelles_Caves/IDs')
 require('scripts/globals/conquest')
 require('scripts/globals/treasure')
-require('scripts/globals/zone')
 -----------------------------------
 local zoneObject = {}
 
@@ -22,10 +21,6 @@ zoneObject.onZoneIn = function(player, prevZone)
         player:setPos(-76.839, -1.696, 659.969, 122)
     end
 
-    if prevZone == xi.zone.LA_THEINE_PLATEAU and player:getCharVar("darkPuppetCS") == 1 then
-        cs = 10
-    end
-
     return cs
 end
 
@@ -40,9 +35,6 @@ zoneObject.onEventUpdate = function(player, csid, option)
 end
 
 zoneObject.onEventFinish = function(player, csid, option)
-    if csid == 10 then
-        player:setCharVar("darkPuppetCS", 2)
-    end
 end
 
 return zoneObject
