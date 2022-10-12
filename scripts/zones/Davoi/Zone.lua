@@ -6,13 +6,13 @@ require('scripts/globals/conquest')
 require('scripts/globals/treasure')
 require('scripts/globals/quests')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
     xi.treasure.initZone(zone)
 end
 
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
@@ -26,14 +26,14 @@ zone_object.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zone_object.onConquestUpdate = function(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zone_object.onRegionEnter = function(player, region)
+zoneObject.onRegionEnter = function(player, region)
 end
 
-zone_object.onGameDay = function()
+zoneObject.onGameDay = function()
     -- move storage hole
     local positions =
     {
@@ -57,10 +57,10 @@ zone_object.onGameDay = function()
     GetNPCByID(ID.npc.STORAGE_HOLE):setPos(newPosition.x, newPosition.y, newPosition.z)
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
 end
 
-return zone_object
+return zoneObject

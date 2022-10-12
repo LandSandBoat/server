@@ -9,9 +9,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     if (target:getHP() == 0) then
         return xi.msg.basic.CANNOT_ON_THAT_TARG, 0
     elseif (player:hasStatusEffect(xi.effect.SABER_DANCE)) then
@@ -40,7 +40,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
     end
 end
 
-ability_object.onUseAbility = function(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability)
     -- Only remove TP if the player doesn't have Trance.
     if not player:hasStatusEffect(xi.effect.TRANCE) then
         player:delTP(200)
@@ -57,4 +57,4 @@ ability_object.onUseAbility = function(player, target, ability)
     return effect
 end
 
-return ability_object
+return abilityObject

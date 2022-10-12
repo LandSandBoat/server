@@ -13,7 +13,7 @@ require("scripts/globals/status")
 local ID = require("scripts/zones/Temenos/IDs")
 
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
 local citadelBusterTimers =
 {
@@ -63,7 +63,7 @@ executeCitadelBusterState = function(mob)
     end)
 end
 
-mobskill_object.onMobSkillCheck = function(target,mob,skill)
+mobskillObject.onMobSkillCheck = function(target,mob,skill)
     local phase = mob:getLocalVar("battlePhase")
     if phase == 4 then
         mob:setLocalVar("citadelBuster", 1)
@@ -76,7 +76,7 @@ mobskill_object.onMobSkillCheck = function(target,mob,skill)
     end
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local basedmg = 2088
 
     if
@@ -99,4 +99,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return dmg
 end
 
-return mobskill_object
+return mobskillObject

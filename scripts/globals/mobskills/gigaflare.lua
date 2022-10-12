@@ -11,9 +11,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     local mobhp = mob:getHPP()
 
     if (mobhp <= 10) then -- set up Gigaflare for being called by the script again.
@@ -25,7 +25,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 1
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     mob:setLocalVar("GigaFlare", 1) -- When set to 1 the script won't call it.
     mob:setLocalVar("tauntShown", 0)
     mob:SetMobAbilityEnabled(true) -- enable the spells/other mobskills again
@@ -41,4 +41,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return dmg
 end
 
-return mobskill_object
+return mobskillObject

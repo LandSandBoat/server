@@ -4,7 +4,7 @@
 require("scripts/globals/automaton")
 require("scripts/globals/status")
 -----------------------------------
-local attachment_object = {}
+local attachmentObject = {}
 
 local removable =
 {
@@ -20,7 +20,7 @@ local removable =
     xi.effect.BLINDNESS
 }
 
-attachment_object.onEquip = function(pet)
+attachmentObject.onEquip = function(pet)
     pet:addListener("AUTOMATON_ATTACHMENT_CHECK", "ATTACHMENT_ERASER", function(automaton, target)
         local master = automaton:getMaster()
         if
@@ -52,14 +52,14 @@ attachment_object.onEquip = function(pet)
     end)
 end
 
-attachment_object.onUnequip = function(pet)
+attachmentObject.onUnequip = function(pet)
     pet:removeListener("ATTACHMENT_ERASER")
 end
 
-attachment_object.onManeuverGain = function(pet, maneuvers)
+attachmentObject.onManeuverGain = function(pet, maneuvers)
 end
 
-attachment_object.onManeuverLose = function(pet, maneuvers)
+attachmentObject.onManeuverLose = function(pet, maneuvers)
 end
 
-return attachment_object
+return attachmentObject

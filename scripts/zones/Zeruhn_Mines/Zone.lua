@@ -7,13 +7,13 @@ require('scripts/globals/quests')
 require('scripts/globals/helm')
 require('scripts/globals/zone')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
     xi.helm.initZone(zone, xi.helm.type.MINING)
 end
 
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if prevZone == xi.zone.PALBOROUGH_MINES then
@@ -36,17 +36,17 @@ zone_object.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zone_object.onConquestUpdate = function(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zone_object.onRegionEnter = function(player, region)
+zoneObject.onRegionEnter = function(player, region)
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
     if csid == 130 or csid == 131 then
         if player:getFreeSlotsCount() > 0 then
             player:addItem(16607)
@@ -59,4 +59,4 @@ zone_object.onEventFinish = function(player, csid, option)
     end
 end
 
-return zone_object
+return zoneObject

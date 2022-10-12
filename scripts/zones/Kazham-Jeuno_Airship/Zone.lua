@@ -4,12 +4,12 @@
 local ID = require('scripts/zones/Kazham-Jeuno_Airship/IDs')
 require('scripts/globals/zone')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
 end
 
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if player:getXPos() == 0 or player:getYPos() == 0 or player:getZPos() == 0 then
@@ -19,14 +19,14 @@ zone_object.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zone_object.onTransportEvent = function(player, transport)
+zoneObject.onTransportEvent = function(player, transport)
     player:startEvent(10)
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
     if csid == 10 then
         local prevzone = player:getPreviousZone()
 
@@ -38,4 +38,4 @@ zone_object.onEventFinish = function(player, csid, option)
     end
 end
 
-return zone_object
+return zoneObject

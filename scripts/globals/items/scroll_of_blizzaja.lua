@@ -4,14 +4,14 @@
 -- Scroll of blizzaja
 -- Teaches the black magic blizzaja
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(497)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(497)
 end
 
-return item_object
+return itemObject

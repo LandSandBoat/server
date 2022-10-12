@@ -1,9 +1,9 @@
 -----------------------------------
 -- xi.effect.SEPULCHER
 -----------------------------------
-local effect_object = {}
+local effectObject = {}
 
-effect_object.onEffectGain = function(target, effect)
+effectObject.onEffectGain = function(target, effect)
     local power = -effect:getPower()
 
     target:addMod(xi.mod.ACC, power)
@@ -13,10 +13,10 @@ effect_object.onEffectGain = function(target, effect)
     target:addMod(xi.mod.STORETP, power)
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
 end
 
-effect_object.onEffectLose = function(target, effect)
+effectObject.onEffectLose = function(target, effect)
     local power = -effect:getPower()
 
     target:delMod(xi.mod.ACC, power)
@@ -26,4 +26,4 @@ effect_object.onEffectLose = function(target, effect)
     target:delMod(xi.mod.STORETP, power)
 end
 
-return effect_object
+return effectObject

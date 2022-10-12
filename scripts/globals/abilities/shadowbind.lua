@@ -10,9 +10,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     if ((player:getWeaponSkillType(xi.slot.RANGED) == xi.skill.MARKSMANSHIP and player:getWeaponSkillType(xi.slot.AMMO) == xi.skill.MARKSMANSHIP) or
     (player:getWeaponSkillType(xi.slot.RANGED) == xi.skill.ARCHERY and player:getWeaponSkillType(xi.slot.AMMO) == xi.skill.ARCHERY)) then
         return 0, 0
@@ -20,7 +20,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
     return 216, 0 -- You do not have an appropriate ranged weapon equipped.
 end
 
-ability_object.onUseAbility = function(player, target, ability, action)
+abilityObject.onUseAbility = function(player, target, ability, action)
 
     if (player:getWeaponSkillType(xi.slot.RANGED) == xi.skill.MARKSMANSHIP) then -- can't have your crossbow/gun held like a bow, now can we?
         action:setAnimation(target:getID(), action:getAnimation(target:getID()) + 1)
@@ -48,4 +48,4 @@ ability_object.onUseAbility = function(player, target, ability, action)
     return xi.effect.BIND
 end
 
-return ability_object
+return abilityObject

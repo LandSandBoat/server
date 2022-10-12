@@ -10,9 +10,9 @@ require("scripts/globals/mobskills")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
 
     if (mob:getFamily() == 316) then -- PW
         local mobSkin = mob:getModelId()
@@ -33,11 +33,11 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
 
     skill:setMsg(xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.CURSE_I, 50, 0, 420))
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.POISON, 20, 3, 60)
     return xi.effect.CURSE_I
 end
 
-return mobskill_object
+return mobskillObject

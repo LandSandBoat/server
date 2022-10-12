@@ -3,14 +3,14 @@
 -- Scroll of Kurayami: Ichi
 -- Teaches the ninjutsu Kurayami: Ichi
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(347)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(347)
 end
 
-return item_object
+return itemObject

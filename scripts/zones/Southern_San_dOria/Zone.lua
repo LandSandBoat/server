@@ -9,9 +9,9 @@ require('scripts/globals/settings')
 require('scripts/globals/chocobo')
 require('scripts/globals/zone')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
     zone:registerRegion(1, -292, -10, 90 , -258, 10, 105)
     quests.ffr.initZone(zone) -- register regions 2 through 6
     applyHalloweenNpcCostumes(zone:getID())
@@ -19,7 +19,7 @@ zone_object.onInitialize = function(zone)
     xi.conquest.toggleRegionalNPCs(zone)
 end
 
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
     -- FIRST LOGIN (START CS)
@@ -40,11 +40,11 @@ zone_object.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zone_object.onConquestUpdate = function(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zone_object.onRegionEnter = function(player, region)
+zoneObject.onRegionEnter = function(player, region)
     local regionID =region:GetRegionID()
 
     if
@@ -58,13 +58,13 @@ zone_object.onRegionEnter = function(player, region)
     quests.ffr.onRegionEnter(player, region) -- player approaching Flyers for Regine NPCs
 end
 
-zone_object.onRegionLeave = function(player, region)
+zoneObject.onRegionLeave = function(player, region)
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
     if csid == 503 then
         player:messageSpecial(ID.text.ITEM_OBTAINED, 536)
     elseif csid == 758 then
@@ -72,4 +72,4 @@ zone_object.onEventFinish = function(player, csid, option)
     end
 end
 
-return zone_object
+return zoneObject

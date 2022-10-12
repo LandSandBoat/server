@@ -3,14 +3,14 @@
 -- Scroll of Water III
 -- Teaches the black magic Water III
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(171)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(171)
 end
 
-return item_object
+return itemObject

@@ -11,14 +11,14 @@ require('scripts/globals/settings')
 require('scripts/globals/chocobo')
 require('scripts/globals/status')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
     zone:registerRegion(1, 23, 0, -43, 44, 7, -39) -- Inside Tenshodo HQ. TODO: Find out if this is used other than in ZM 17 (not anymore). Remove if not.
     xi.chocobo.initZone(zone)
 end
 
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
     local month = tonumber(os.date("%m"))
@@ -46,14 +46,14 @@ zone_object.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zone_object.onConquestUpdate = function(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zone_object.onRegionEnter = function(player, region)
+zoneObject.onRegionEnter = function(player, region)
 end
 
-zone_object.onGameHour = function(zone)
+zoneObject.onGameHour = function(zone)
     local vanadielHour = VanadielHour()
     local playerOnQuestId = GetServerVariable("[JEUNO]CommService")
 
@@ -99,10 +99,10 @@ zone_object.onGameHour = function(zone)
     end
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
 end
 
-return zone_object
+return zoneObject

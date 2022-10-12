@@ -9,9 +9,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     if (not player:isWeaponTwoHanded()) then
         return xi.msg.basic.NEEDS_2H_WEAPON, 0
     else
@@ -19,7 +19,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
     end
 end
 
-ability_object.onUseAbility = function(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability)
     -- Stun rate
     if (math.random(1, 100) < 99) then
         target:addStatusEffect(xi.effect.STUN, 1, 0, 6)
@@ -48,4 +48,4 @@ ability_object.onUseAbility = function(player, target, ability)
     return damage
 end
 
-return ability_object
+return abilityObject

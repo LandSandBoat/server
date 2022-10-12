@@ -6,13 +6,13 @@ require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/utils")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local duration = 180
     local power = 5000
 
@@ -61,4 +61,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return xi.effect.ELEGY
 end
 
-return spell_object
+return spellObject

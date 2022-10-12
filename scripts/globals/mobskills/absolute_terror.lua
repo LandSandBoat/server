@@ -6,9 +6,9 @@ require("scripts/globals/mobskills")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if mob:hasStatusEffect(xi.effect.MIGHTY_STRIKES) then
         return 1
     elseif mob:hasStatusEffect(xi.effect.SUPER_BUFF) then
@@ -25,7 +25,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.TERROR
     local power = 30
     -- Three minutes is WAY too long, especially on Wyrms. Reduced to Wiki's definition of 'long time'. Reference: http://wiki.ffxiclopedia.org/wiki/Absolute_Terror
@@ -39,4 +39,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
 end
 
-return mobskill_object
+return mobskillObject
