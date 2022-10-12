@@ -284,6 +284,7 @@ xi.items =
     MOTTLED_QUADAV_EGG              = 1101,
     PINCH_OF_SULFUR                 = 1108,
     ORCISH_MAIL_SCALES              = 1112,
+    VIAL_OF_QUADAV_MAGE_BLOOD       = 1114,
     SKELETON_KEY                    = 1115,
     SQUARE_OF_MANTICORE_LEATHER     = 1117,
     CASABLANCA                      = 1120,
