@@ -30,6 +30,7 @@ zones[xi.zone.BATALLIA_DOWNS] =
         SPARKLING_LIGHT               = 7350,  -- The ground is sparkling with a strange light.
         SENSE_SOMETHING_LURKING       = 7440,  -- You sense something lurking close by!
         NO_GRASS_GROWING_HERE         = 7500,  -- There is no grass growing here...
+        BEING_ATTACKED                = 7637,  -- You are being attacked!
         PLAYER_OBTAINS_ITEM           = 7712,  -- <name> obtains <item>!
         UNABLE_TO_OBTAIN_ITEM         = 7713,  -- You were unable to obtain the item.
         PLAYER_OBTAINS_TEMP_ITEM      = 7714,  -- <name> obtains the temporary item: <item>!
@@ -68,7 +69,14 @@ zones[xi.zone.BATALLIA_DOWNS] =
         {
             [17207449] = 17207476, -- -194.234 -18.485 132.208
         },
-
+        BADSHAHS =
+        {
+            17207699,
+            17207700,
+            17207701,
+            17207702,
+            17207703,
+        },
         AHTU              = 17207657,
         STURMTIGER        = 17207696,
         SUPARNA           = 17207697,

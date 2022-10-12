@@ -25,6 +25,10 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
 
     local pet = mob:getPet()
 
+    if pet:getID() == mob:getID() then
+        return 1
+    end
+
     -- pet must be an avatar, and active
     if pet:getSystem() ~= 5 or petInactive(pet) then
         return 1

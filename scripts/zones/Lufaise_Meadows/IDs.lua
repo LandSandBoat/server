@@ -82,6 +82,7 @@ zones[xi.zone.LUFAISE_MEADOWS] =
         AMALTHEIA             = 16875779,
         SENGANN               = 16875690,
         YALUN_EKE             = 16875600,
+        BAUMESEL              = 16875777,
     },
     npc =
     {

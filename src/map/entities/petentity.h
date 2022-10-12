@@ -71,6 +71,12 @@ public:
     virtual bool ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags) override;
     void         OnPetSkillFinished(CPetSkillState& state, action_t& action);
 
+    time_point          m_lastCast;
+    duration            m_castCool;
+    std::vector<uint16> m_buffSpells;
+    std::vector<uint16> m_offensiveSpells;
+    std::vector<uint16> m_healSpells;
+
 private:
     PET_TYPE m_PetType; // the type of pet e.g. avatar/wyvern/jugpet etc
 };

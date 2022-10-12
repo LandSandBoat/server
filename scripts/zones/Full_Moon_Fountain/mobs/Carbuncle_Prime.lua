@@ -47,13 +47,13 @@ local spawnPrime = function(mob, target)
 
     bf:setLocalVar("carbuncleHP", mob:getHP())
     mob:setHP(0)
-    mob:timer(2000, function(mobArg)
+    mob:timer(5000, function(mobArg)
         DespawnMob(mobArg:getID())
     end)
 end
 
 entity.onMobSpawn = function(mob)
-    mob:timer(1, function(mobArg)
+    mob:timer(1000, function(mobArg)
         local bf = mobArg:getBattlefield()
 
         mobArg:setHP(bf:getLocalVar("carbuncleHP"))

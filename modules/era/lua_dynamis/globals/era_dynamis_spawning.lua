@@ -123,11 +123,11 @@ xi.dynamis.normalDynamicSpawn = function(oMob, oMobIndex, target)
             [xi.zone.DYNAMIS_BEAUCEDINE] = -- Spawn Hydras (Done)
             {
                 [1]  = { "H. Warrior", 159, 134, 0, 359 }, -- HWAR
-                [2]  = { "H. Monk", 163, 134, 0, 359 }, -- HMNK
+                [2]  = { "H. Monk", 160, 134, 0, 359 }, -- HMNK
                 [3]  = { "H. White Mage", 161, 134, 1, 359 }, -- HWHM
                 [4]  = { "H. Black Mage", 164, 134, 5000, 359 }, -- HBLM
                 [5]  = { "H. Red Mage", 162, 134, 3, 359 }, -- HRDM
-                [6]  = { "H. Thief", 160, 134, 0, 359 }, -- HTHF
+                [6]  = { "H. Thief", 165, 134, 0, 359 }, -- HTHF
                 [7]  = { "H. Paladin", 166, 134, 4, 359 }, -- HPLD
                 [8]  = { "H. Dark Knight", 167, 134, 5, 359 }, -- HDRK
                 [9]  = { "H. Beastmaster", 168, 134, 0, 359 }, -- HBST
@@ -161,11 +161,11 @@ xi.dynamis.normalDynamicSpawn = function(oMob, oMobIndex, target)
                 [2] = -- Floor 2 Spawn Hydras (Done)
                 {
                     [1]  = { "H. Warrior", 159, 134, 0, 359 }, -- HWAR
-                    [2]  = { "H. Monk", 163, 134, 0, 359 }, -- HMNK
+                    [2]  = { "H. Monk", 160, 134, 0, 359 }, -- HMNK
                     [3]  = { "H. White Mage", 161, 134, 1, 359 }, -- HWHM
                     [4]  = { "H. Black Mage", 164, 134, 5000, 359 }, -- HBLM
                     [5]  = { "H. Red Mage", 162, 134, 3, 359 }, -- HRDM
-                    [6]  = { "H. Thief", 160, 134, 0, 359 }, -- HTHF
+                    [6]  = { "H. Thief", 165, 134, 0, 359 }, -- HTHF
                     [7]  = { "H. Paladin", 166, 134, 4, 359 }, -- HPLD
                     [8]  = { "H. Dark Knight", 167, 134, 5, 359 }, -- HDRK
                     [9]  = { "H. Beastmaster", 168, 134, 0, 359 }, -- HBST
@@ -359,7 +359,7 @@ xi.dynamis.normalDynamicSpawn = function(oMob, oMobIndex, target)
             nameObj = normalMobLookup[mobFamily]
         end
         while (indexJob <= indexEndJob) and (nameObj ~= nil) do
-            local mob = zone:insertDynamicEntity({
+            local mobArg = zone:insertDynamicEntity({
                 objtype = xi.objType.MOB,
                 name = nameObj[job][1],
                 x = oMob:getXPos()+math.random()*6-3,
@@ -368,11 +368,11 @@ xi.dynamis.normalDynamicSpawn = function(oMob, oMobIndex, target)
                 rotation = oMob:getRotPos(),
                 groupId = nameObj[job][2],
                 groupZoneId = nameObj[job][3],
-                onMobSpawn = function(mob) xi.dynamis.setMobStats(mob) end,
-                onMobEngaged = function(mob, target) xi.dynamis.mobOnEngaged(mob, target) end,
-                onMobRoam = function(mob) end,
-                onMobDeath = function(mob, playerArg, isKiller)
-                    xi.dynamis.mobOnDeath(mob)
+                onMobSpawn = function(mobArg) xi.dynamis.setMobStats(mobArg) end,
+                onMobEngaged = function(mobArg, target) xi.dynamis.mobOnEngaged(mobArg, target) end,
+                onMobRoam = function(mobArg) end,
+                onMobDeath = function(mobArg, playerArg, isKiller)
+                    xi.dynamis.mobOnDeath(mobArg)
                 end,
                 releaseIdOnDeath = true,
                 specialSpawnAnimation = oMob ~= nil,
@@ -381,18 +381,20 @@ xi.dynamis.normalDynamicSpawn = function(oMob, oMobIndex, target)
                     require("scripts/mixins/job_special"),
                 },
             })
-            mob:setSpawn(oMob:getXPos()+math.random()*6-3, oMob:getYPos()-0.3, oMob:getZPos()+math.random()*6-3, oMob:getRotPos())
-            mob:spawn()
-            mob:setDropID(normalMobLookup["Drops"][mob:getZoneID()][mob:getFamily()][1])
+            mobArg:setSpawn(oMob:getXPos()+math.random()*6-3, oMob:getYPos()-0.3, oMob:getZPos()+math.random()*6-3, oMob:getRotPos())
+            mobArg:spawn()
+            if normalMobLookup["Drops"][mobArg:getZoneID()][mobArg:getFamily()][1] ~= nil then
+                mobArg:setDropID(normalMobLookup["Drops"][mobArg:getZoneID()][mobArg:getFamily()][1])
+            end
             if nameObj[job][4] ~= nil then -- If SpellList ~= nil set SpellList
-                mob:setSpellList(nameObj[job][4])
+                mobArg:setSpellList(nameObj[job][4])
             end
             if nameObj[job][5] ~= nil then -- If SkillList ~= nil set SkillList
-                mob:setMobMod(xi.mobMod.SKILL_LIST, nameObj[job][5])
+                mobArg:setMobMod(xi.mobMod.SKILL_LIST, nameObj[job][5])
             end
             if oMob ~= nil and oMob ~= 0 then
-                mob:setLocalVar("Parent", oMob:getID())
-                mob:updateEnmity(target)
+                mobArg:setLocalVar("Parent", oMob:getID())
+                mobArg:updateEnmity(target)
             end
             indexJob = indexJob + 1 -- Increment to the next mob of the same job.
         end
@@ -423,8 +425,8 @@ xi.dynamis.nonStandardDynamicSpawn = function(mobIndex, oMob, forceLink, zoneID,
     {
         ["Statue"] =
         {
-            ["Vanguard Eye"] = { "Vanguard Eye" , 163, 134, 2561, 5000, 11 }, -- Vanguard Eye (VEye)
-            ["Prototype Eye"] = { "Prototype Eye" , 61, 42, 2561, 5000, 11 }, -- Prototype Eye (PEye)
+            ["Vanguard Eye"] = { "Vanguard Eye" , 163, 134, 1144, 5000, 11 }, -- Vanguard Eye (VEye)
+            ["Prototype Eye"] = { "Prototype Eye" , 61, 42, 1144, 5000, 11 }, -- Prototype Eye (PEye)
             ["Goblin Statue"] = { "Goblin Statue" , 158, 134, 1144, 1, 92 }, -- Goblin Statue (GStat)
             ["Goblin Replica"] = { "Goblin Replica" , 157, 134, 1144, 1, 92 }, -- Goblin Statue (GRStat)
             ["Statue Prototype"] = { "Stat. Prototype" , 36, 42, 1144, 1, 92 }, -- Goblin Statue (GPStat)
@@ -622,13 +624,13 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Tocktix Thinlids"] = { "T.Thinlids", 150, 134, 176, 5, 5013, "Beastmen" }, -- Tock (DRK)
         ["Whistix Toadthroat"] = { "W.Toadthroat", 154, 134, 176, 6, 5013, "Beastmen" }, -- Whis (BRD)
         -- Dynamis - Buburimu
-        ["Gosspix Blabberlips"] = { "G.Blabberlips", 24, 40,2667, 5013, "Beastmen" }, -- Goss (RDM)
-        ["Shamblix Rottenheart"] = { "S.Rottenheart", 16, 40,2667, 5, 5013, "Beastmen" }, -- Sham (DRK)
+        ["Gosspix Blabberlips"] = { "G.Blabberlips", 24, 40, 2667, 3, 5013, "Beastmen" }, -- Goss (RDM)
+        ["Shamblix Rottenheart"] = { "S.Rottenheart", 16, 40, 2667, 5, 5013, "Beastmen" }, -- Sham (DRK)
         ["Woodnix Shrillwhistle"] = { "W.Shrillwhistle", 6, 40, 2667, 0, 5013, "Beastmen" }, -- Wood (BST)
         -- Dynamis - Jeuno
         ["Bandrix Rockjaw"] = { "B.Rockjaw", 32, 188, 143, 0, 5013, "Beastmen" }, -- Band (THF)
         ["Buffrix Eargone"] = { "B.Eargone", 33, 188, 143, 4, 5013, "Beastmen" }, -- Buff (PLD)
-        ["Clocktix Longnail"] = { "C.Longnail", 51, 188, 143, 5, 5013, "Beastmen" }, -- Cloc (DRK)
+        ["Cloktix Longnail"] = { "C.Longnail", 51, 188, 143, 5, 5013, "Beastmen" }, -- Cloc (DRK)
         ["Elixmix Hooknose"] = { "E.Hooknose", 31, 188, 143, 1, 5013, "Beastmen" }, -- Elix (WHM)
         ["Gabblox Magpietongue"] = { "G.Magpietongue", 11, 188, 143, 3, 5013, "Beastmen" }, -- Gabb (RDM)
         ["Hermitrix Toothrot"] = { "H.Toothrot", 27, 188, 143, 5000, 5013, "Beastmen" }, -- Herm (BLM)
@@ -636,7 +638,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Lurklox Dhalmelneck"] = { "L.Dhalmelneck", 36, 188, 143, 0, 5013, "Beastmen" }, -- Lurk (RNG)
         ["Morgmox Moldnoggin"] = { "M.Moldnoggin", 29, 188, 143, 0, 5013, "Beastmen" }, -- Morg (SMN)
         ["Sparkspox Sweatbrow"] = { "S.Sweatbrow", 30, 188, 143, 0, 5013, "Beastmen" }, -- Spar (WAR)
-        ["Ticktox Beadeyes"] = { "T.Beadeyes", 35, 188, 143, 5, 5013, "Beastmen" }, -- Tick (DRK)
+        ["Ticktox Beadyeyes"] = { "T.Beadyeyes", 35, 188, 143, 5, 5013, "Beastmen" }, -- Tick (DRK)
         ["Trailblix Goatmug"] = { "T.Goatmug", 37, 188, 143, 0, 5013, "Beastmen" }, -- Trai (BST)
         ["Tufflix Loglimbs"] = { "T.Loglimbs", 21, 188, 143, 4, 5013, "Beastmen" }, -- Tuff (PLD)
         ["Wyrmwix Snakespecs"] = { "W.Snakespecs", 28, 188, 143, 0, 5013, "Beastmen" }, -- Snak (DRG)
@@ -776,13 +778,13 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Velosareon"] = { "Velosareon", 9, 134, 2574, 5, 359, "Velosareon" }, -- Velo (RNG/SAM/DRK)
         -- Below is used to lookup non-beastmen NMs.
         -- Dynamis - Bastok
-        ["Gu'Dha Effigy"] = { "Gu'Dha Effigy", 1, 186, 2906, 0, 143, "Statue Megaboss" }, -- BMb (Bastok Megaboss)
+        ["Gu'Dha Effigy"] = { "Gu'Dha Effigy", 1, 186, 2906, 0, 94, "Statue Megaboss" }, -- BMb (Bastok Megaboss)
         -- Dynamis - Jeuno
         ["Goblin Golem"] = { "Goblin Golem", 1, 188, 1085, 47, 92, "Statue Megaboss" }, -- JMb
         -- Dynamis - San d'Oria
         ["Overlord's Tombstone"] = { "O. Tombstone", 1, 185, 1967, 49, 93, "Statue Megaboss" }, -- SMb
         -- Dynamis - Windurst
-        ["Tzee Xicu Idol"] = { "Tzee Xicu Idol", 1, 187, 2510, 50, 95, "Statue Megaboss" }, -- WMb
+        ["Tzee Xicu Manifest"] = { "Tzee Xicu Mani.", 1, 187, 2510, 50, 95, "Statue Megaboss" }, -- WMb
         -- Dynamis - Xarcabard Non-Beastmen
         ["Animated Hammer"] = { "A.Hammer", 81, 135, 99, 0, 9, "Animated Weapon" }, -- AHam
         ["Animated Staff"] = { "A.Staff", 87, 135, 108, 0, 23, "Animated Weapon" }, -- ASta
@@ -890,7 +892,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
         ["Angra Mainyu"] =
         {
             ["onMobSpawn"] = { function(mob) xi.dynamis.onSpawnAngra(mob) end },
-            ["onMobEngaged"] = { function(mob, target) end },
+            ["onMobEngaged"] = { function(mob, target) xi.dynamis.onEngagedAngra(mob, target) end },
             ["onMobFight"] = { function(mob, target) xi.dynamis.onFightAngra(mob, target) end },
             ["onMobRoam"] = { function(mob) xi.dynamis.onRoamAngra(mob) end },
             ["onMobMagicPrepare"] = { function(mob, target, spellId) xi.dynamis.onMagicPrepAngra(mob) end },
@@ -1181,7 +1183,7 @@ xi.dynamis.nmDynamicSpawn = function(mobIndex, oMobIndex, forceLink, zoneID, tar
     end
     if oMobIndex ~= nil then
         mob:setLocalVar("Parent", oMobIndex)
-        mob:setLocalVar("ParentID", mob:getID())
+        mob:setLocalVar("ParentID", oMob:getID())
         oMob:setLocalVar(string.format("ChildID_%s", mobIndex), mob:getID())
     end
     if xi.dynamis.mobList[zoneID][mobIndex].info[5] ~= nil then
@@ -1295,6 +1297,7 @@ xi.dynamis.spawnDynamicPet =function(target, oMob, mobJob)
                 [true] =
                 {
                     ["Draklix Scalecrust"] = { "V. Wyvern", 27, 134, 0, 0, 714 }, -- Normal Vanguard's Wyvern (Vwyv)
+                    ["Wyrmwix Snakespecs"] = { "V. Wyvern", 27, 134, 0, 0, 714 }, -- Normal Vanguard's Wyvern (Vwyv)
                 },
             },
             [334] = -- Orc Family
@@ -1425,12 +1428,12 @@ xi.dynamis.spawnDynamicPet =function(target, oMob, mobJob)
             ["Dagourmarche"] =
             {
                 ["onMobFight"] = { function(mob, target) end },
-                ["mixins"] = {  require("scripts/mixins/families/avatar"),  },
+                ["mixins"] = {  require("scripts/mixins/families/avatar"), },
             },
             ["Normal"] =
             {
                 ["onMobFight"] = { function(mob, target) end },
-                ["mixins"] = {   },
+                ["mixins"] = { require("scripts/mixins/families/avatar_persist"), },
             },
         },
         [xi.job.BST] =
@@ -1555,7 +1558,7 @@ xi.dynamis.setSpecialSkill = function(mob)
     local specialSkills =
     {
         [337] = 1123, -- Quadav
-        [358] = 1146-- Kindred
+        [358] = 1146, -- Kindred
     }
     for family, skill in pairs(specialSkills) do
         if mob:getFamily() == family and (mob:getMainJob() == xi.job.NIN or mob:getMainJob() == xi.job.RNG) then
@@ -1607,10 +1610,15 @@ xi.dynamis.setMobStats = function(mob)
         mob:setMobMod(xi.mobMod.CHECK_AS_NM, 1)
         local job = mob:getMainJob()
 
-        mob:setMobMod(xi.mobMod.HP_SCALE, 132)
-        mob:setHP(mob:getMaxHP())
-        mob:setMobLevel(math.random(78,80))
         mob:setTrueDetection(true)
+
+        if     mob:getFamily() == 359 then -- If Hydra
+            mob:setMobLevel(math.random(80,82))
+        elseif mob:getFamily() == 358 then -- If Kindred
+            mob:setMobLevel(math.random(77,80))
+        else
+            mob:setMobLevel(math.random(75,77))
+        end
 
         if     job == xi.job.WAR then
             local params = {  }
@@ -1698,6 +1706,12 @@ xi.dynamis.setMobStats = function(mob)
             params.specials.skill.hpp = math.random(25,35)
             xi.mix.jobSpecial.config(mob, params)
         elseif job == xi.job.DRG then
+            local params = {  }
+            params.specials = {  }
+            params.specials.skill = {  }
+            params.specials.skill.id = xi.jsa.CALL_WYVERN
+            params.specials.skill.hpp = 100
+            xi.mix.jobSpecial.config(mob, params)
         elseif job == xi.job.SMN then
         end
 
@@ -1715,8 +1729,6 @@ xi.dynamis.setNightmareStats = function(mob)
         xi.dynamis.setSpecialSkill(mob)
         mob:setMobMod(xi.mobMod.CHECK_AS_NM, 1)
         local job = mob:getMainJob()
-        mob:setMobMod(xi.mobMod.HP_SCALE, 132)
-        mob:setHP(mob:getMaxHP())
         mob:setMobLevel(math.random(78,80))
         mob:setTrueDetection(true)
 
@@ -1733,8 +1745,6 @@ xi.dynamis.setNMStats = function(mob)
     mob:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0, true)
     xi.dynamis.setSpecialSkill(mob)
     mob:setMobMod(xi.mobMod.CHECK_AS_NM, 2)
-    mob:setMobMod(xi.mobMod.HP_SCALE, 132)
-    mob:setHP(mob:getMaxHP())
     mob:setMobLevel(math.random(80,82))
     mob:setTrueDetection(true)
     mob:setMobMod(xi.mobMod.CHECK_AS_NM, 2)
@@ -1785,8 +1795,6 @@ xi.dynamis.setMegaBossStats = function(mob)
     mob:setMobType(xi.mobskills.mobType.BATTLEFIELD)
     mob:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0, true)
     mob:setMobMod(xi.mobMod.CHECK_AS_NM, 2)
-    mob:setMobMod(xi.mobMod.HP_SCALE, 132)
-    mob:setHP(mob:getMaxHP())
     mob:setMobLevel(88)
     mob:setMod(xi.mod.STR, -10)
     mob:setTrueDetection(true)
@@ -1806,8 +1814,6 @@ xi.dynamis.setPetStats = function(mob)
 end
 
 xi.dynamis.setAnimatedWeaponStats = function(mob)
-    mob:setMobMod(xi.mobMod.HP_SCALE, 132)
-    mob:setHP(mob:getMaxHP())
     mob:setMobType(xi.mobskills.mobType.BATTLEFIELD)
     mob:addStatusEffect(xi.effect.BATTLEFIELD, 1, 0, 0, true)
     mob:setMobMod(xi.mobMod.CHECK_AS_NM, 2)
@@ -1854,6 +1860,7 @@ xi.dynamis.teleport = function(mob, hideDuration)
         end
 
         mob:entityAnimationPacket("deru")
+        mob:setLocalVar("teleTime", os.time())
     end)
 end
 
@@ -1890,7 +1897,7 @@ xi.dynamis.mobOnDeath = function(mob, player, isKiller)
             xi.dynamis.addTimeToDynamis(zone, mobIndex) -- Add Time
         end
         mob:setLocalVar("dynamisMobOnDeathTriggered", 1) -- onDeath lua happens once per party member that killed the mob, but we want this to only run once per mob
-        if mob:getZoneID() == (xi.zone.DYNAMIS_BEAUCEDINE or xi.zone.DYNAMIS_XARCABARD) then
+        if player and mob:getZoneID() == (xi.zone.DYNAMIS_BEAUCEDINE or xi.zone.DYNAMIS_XARCABARD) then
             if mob:getFamily() == (4 or 92 or 93 or 94 or 95) then
                 player:addTreasure(4248, mob, 100) -- Adds Ginurva's Battle Theory to Statues and Eyes in Dynamis Beaucedine and Xarcabard
             elseif mob:getFamily() == (358 or 359) and mob:getMobMod(xi.mobMod.CHECK_AS_NM) == 2 then
@@ -1964,6 +1971,7 @@ xi.dynamis.mobOnEngaged = function(mob, target)
             mob:SetMagicCastingEnabled(false)
             mob:SetMobAbilityEnabled(false)
 
+            mob:addStatusEffectEx(xi.effect.BIND, xi.effect.BIND, 1, 3, 6, 0, 0, 0, xi.effectFlag.NO_LOSS_MESSAGE)
             mob:timer(3000, function(mobArg)
                 if mob:isAlive() then
                     xi.dynamis.spawnDynamicPet(target, mob, mobArg:getMainJob())
@@ -1971,10 +1979,14 @@ xi.dynamis.mobOnEngaged = function(mob, target)
                     mobArg:SetAutoAttackEnabled(true)
                     mobArg:SetMagicCastingEnabled(true)
                     mobArg:SetMobAbilityEnabled(true)
+
+                    if mobArg:hasStatusEffect(xi.effect.BIND) then
+                        mobArg:delStatusEffectSilent(xi.effect.BIND)
+                    end
                 end
             end)
-        elseif mob:getMainJob() == xi.job.DRG then
-            mob:useMobAbility(xi.jsa.CALL_WYVERN)
+        -- elseif mob:getMainJob() == xi.job.DRG then
+            -- mob:useMobAbility(xi.jsa.CALL_WYVERN)
         end
     end
 end

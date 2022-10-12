@@ -660,9 +660,16 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
     {
         action.actiontype = ACTION_PET_MOBABILITY_FINISH;
     }
-    else if (PSkill->getID() < 256)
+    // Damaging mob abilities to use proper humanoid animnation IDs
+    else if (PSkill->getID() < 256 || PSkill->getID() == 1431 || PSkill->getID() == 1432 || PSkill->getID() == 1437)
     {
         action.actiontype = ACTION_WEAPONSKILL_FINISH;
+    }
+    // Non-damaging mob abilities to use proper humanoid animation IDs
+    else if (PSkill->getID() == 1428 || PSkill->getID() == 1429 || (PSkill->getID() >= 1433 && PSkill->getID() <= 1436) || PSkill->getID() == 1438 ||
+             (PSkill->getID() >= 1992 && PSkill->getID() >= 1997))
+    {
+        action.actiontype = ACTION_JOBABILITY_FINISH;
     }
     else
     {
@@ -745,15 +752,15 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
     uint16 defaultMessage = PSkill->getMsg();
 
     bool first{ true };
-    for (auto&& PTarget : PAI->TargetFind->m_targets)
+    for (auto&& PTargetFound : PAI->TargetFind->m_targets)
     {
         actionList_t& list = action.getNewActionList();
 
-        list.ActionTargetID = PTarget->id;
+        list.ActionTargetID = PTargetFound->id;
 
         actionTarget_t& target = list.getNewActionTarget();
 
-        list.ActionTargetID = PTarget->id;
+        list.ActionTargetID = PTargetFound->id;
         target.reaction     = REACTION::HIT;
         target.speceffect   = SPECEFFECT::HIT;
         target.animation    = PSkill->getAnimationID();
@@ -773,18 +780,18 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
 
             if (petType == PET_TYPE::AUTOMATON)
             {
-                damage = luautils::OnAutomatonAbility(PTarget, this, PSkill, PMaster, &action);
+                damage = luautils::OnAutomatonAbility(PTargetFound, this, PSkill, PMaster, &action);
             }
             else
             {
-                damage = luautils::OnPetAbility(PTarget, this, PSkill, PMaster, &action);
+                damage = luautils::OnPetAbility(PTargetFound, this, PSkill, PMaster, &action);
             }
         }
         else
         {
-            damage = luautils::OnMobWeaponSkill(PTarget, this, PSkill, &action);
-            this->PAI->EventHandler.triggerListener("WEAPONSKILL_USE", CLuaBaseEntity(this), CLuaBaseEntity(PTarget), PSkill->getID(), state.GetSpentTP(), &action);
-            PTarget->PAI->EventHandler.triggerListener("WEAPONSKILL_TAKE", CLuaBaseEntity(PTarget), CLuaBaseEntity(this), PSkill->getID(), state.GetSpentTP(), &action);
+            damage = luautils::OnMobWeaponSkill(PTargetFound, this, PSkill, &action);
+            this->PAI->EventHandler.triggerListener("WEAPONSKILL_USE", CLuaBaseEntity(this), CLuaBaseEntity(PTargetFound), PSkill->getID(), state.GetSpentTP(), &action);
+            PTarget->PAI->EventHandler.triggerListener("WEAPONSKILL_TAKE", CLuaBaseEntity(PTargetFound), CLuaBaseEntity(this), PSkill->getID(), state.GetSpentTP(), &action);
         }
 
         if (msg == 0)
@@ -799,7 +806,7 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
         if (damage < 0)
         {
             msg          = MSGBASIC_SKILL_RECOVERS_HP; // TODO: verify this message does/does not vary depending on mob/avatar/automaton use
-            target.param = std::clamp(-damage, 0, PTarget->GetMaxHP() - PTarget->health.hp);
+            target.param = std::clamp(-damage, 0, PTargetFound->GetMaxHP() - PTargetFound->health.hp);
         }
         else
         {
@@ -830,11 +837,11 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
             target.knockback  = PSkill->getKnockback();
             if (first && (PSkill->getPrimarySkillchain() != 0))
             {
-                SUBEFFECT effect = battleutils::GetSkillChainEffect(PTarget, PSkill->getPrimarySkillchain(), PSkill->getSecondarySkillchain(),
+                SUBEFFECT effect = battleutils::GetSkillChainEffect(PTargetFound, PSkill->getPrimarySkillchain(), PSkill->getSecondarySkillchain(),
                                                                     PSkill->getTertiarySkillchain());
                 if (effect != SUBEFFECT_NONE)
                 {
-                    int32 skillChainDamage = battleutils::TakeSkillchainDamage(this, PTarget, target.param, nullptr);
+                    int32 skillChainDamage = battleutils::TakeSkillchainDamage(this, PTargetFound, target.param, nullptr);
                     if (skillChainDamage < 0)
                     {
                         target.addEffectParam   = -skillChainDamage;
@@ -851,12 +858,12 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
                 first = false;
             }
         }
-        PTarget->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
-        if (PTarget->isDead())
+        PTargetFound->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_DETECTABLE);
+        if (PTargetFound->isDead())
         {
-            battleutils::ClaimMob(PTarget, this);
+            battleutils::ClaimMob(PTargetFound, this);
         }
-        battleutils::DirtyExp(PTarget, this);
+        battleutils::DirtyExp(PTargetFound, this);
     }
 
     PTarget = dynamic_cast<CBattleEntity*>(state.GetTarget()); // TODO: why is this recast here? can state change between now and the original cast?

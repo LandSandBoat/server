@@ -1350,6 +1350,7 @@ INSERT INTO `mob_droplist` VALUES (142,0,0,1000,846,60); -- Insect Wing (6.0%)
 -- ZoneID: 188 - Cloktix Longnail
 -- ZoneID: 188 - Mortilox Wartpaws
 -- ZoneID: 188 - Slystix Megapeepers
+INSERT INTO `mob_droplist` VALUES (143,0,0,1000,3356,@COMMON); -- Roving Bijou (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (143,0,0,1000,1449,@COMMON); -- Tukuku Whiteshell (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (143,0,0,1000,1449,@COMMON); -- Tukuku Whiteshell (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (143,0,0,1000,1452,@COMMON); -- Ordelle Bronzepiece (Common, 15%)
@@ -2222,6 +2223,7 @@ INSERT INTO `mob_droplist` VALUES (219,0,0,1000,940,60);  -- Revival Tree Root (
 INSERT INTO `mob_droplist` VALUES (219,4,0,1000,858,0);   -- Wolf Hide (Despoil)
 
 -- ZoneID: 188 - Bandrix Rockjaw
+INSERT INTO `mob_droplist` VALUES (220,0,0,1000,3356,@COMMON); -- Roving Bijou (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (220,0,0,1000,1449,@COMMON); -- Tukuku Whiteshell (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (220,0,0,1000,1449,@COMMON); -- Tukuku Whiteshell (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (220,0,0,1000,1452,@COMMON); -- Ordelle Bronzepiece (Common, 15%)
@@ -7599,6 +7601,7 @@ INSERT INTO `mob_droplist` VALUES (921,0,0,1000,4514,@RARE);     -- Quus (Rare, 
 
 -- ZoneID: 188 - Gabblox Magpietongue
 -- ZoneID: 188 - Rutrix Hamgams
+INSERT INTO `mob_droplist` VALUES (922,0,0,1000,3356,@COMMON); -- Roving Bijou (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (922,0,0,1000,1449,@COMMON); -- Tukuku Whiteshell (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (922,0,0,1000,1449,@COMMON); -- Tukuku Whiteshell (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (922,0,0,1000,1452,@COMMON); -- Ordelle Bronzepiece (Common, 15%)
@@ -19606,6 +19609,7 @@ INSERT INTO `mob_droplist` VALUES (2458,2,0,1000,852,0);       -- Lizard Skin (S
 INSERT INTO `mob_droplist` VALUES (2458,4,0,1000,1616,0);      -- Antlion Jaw (Despoil)
 
 -- ZoneID: 188 - Trailblix Goatmug
+INSERT INTO `mob_droplist` VALUES (2459,0,0,1000,3356,@COMMON); -- Roving Bijou (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (2459,0,0,1000,1449,@COMMON); -- Tukuku Whiteshell (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (2459,0,0,1000,1449,@COMMON); -- Tukuku Whiteshell (Common, 15%)
 INSERT INTO `mob_droplist` VALUES (2459,0,0,1000,1452,@COMMON); -- Ordelle Bronzepiece (Common, 15%)
@@ -19835,6 +19839,7 @@ INSERT INTO `mob_droplist` VALUES (2489,0,0,1000,887,@RARE);       -- Coral Frag
 INSERT INTO `mob_droplist` VALUES (2489,0,0,1000,722,@VRARE);      -- Divine Log (Very Rare, 1%)
 
 -- ZoneID: 188 - Tymexox Ninefingers
+INSERT INTO `mob_droplist` VALUES (2490,0,0,1000,3356,@COMMON); -- Roving Bijou (Common, 15.0%)
 INSERT INTO `mob_droplist` VALUES (2490,0,0,1000,1449,90);      -- Tukuku Whiteshell (9.0%)
 INSERT INTO `mob_droplist` VALUES (2490,0,0,1000,1455,90);      -- One Byne Bill (9.0%)
 INSERT INTO `mob_droplist` VALUES (2490,0,0,1000,1470,80);      -- Sparkling Stone (8.0%)

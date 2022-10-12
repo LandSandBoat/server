@@ -42,7 +42,7 @@ quest.sections =
                     if player:getMainLvl() >= 56 then
                         return quest:progressEvent(85)
                     else
-                        return quest:messageText(ruludeID.text.MAAT_LB3_PLACEHOLDER)
+                        return quest:message(ruludeID.text.MAAT_LB3_PLACEHOLDER)
                     end
                 end,
             },

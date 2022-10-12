@@ -41,7 +41,7 @@ quest.sections =
                             return quest:event(78, player:getMainJob()) -- Rematch dialog. Job dependant.
                         end
                     else
-                        return quest:messageText(ruludeID.text.MAAT_CAP_PLACEHOLDER)
+                        return quest:message(ruludeID.text.MAAT_CAP_PLACEHOLDER)
                     end
                 end,
             },

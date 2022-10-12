@@ -23,8 +23,7 @@ end
 spell_object.onMobSpawn = function(mob)
     xi.trust.message(mob, xi.trust.message_offset.SPAWN)
 
-    mob:addMod(xi.mod.HPP, -10)
-    mob:addMod(xi.mod.MPP, 35)
+    -- HPP/MPP mods migrated to sql/mob_pool_mods
     mob:addMod(xi.mod.REFRESH, 2)
     mob:addMod(xi.mod.ENHANCES_CURSNA, 20)
 

@@ -122,6 +122,7 @@ namespace luautils
     int32 init();
     int32 garbageCollectStep();
     int32 garbageCollectFull();
+    void  cleanup();
 
     void ReloadFilewatchList();
 
@@ -153,10 +154,13 @@ namespace luautils
     auto GetAbility(uint16 id) -> std::optional<CLuaAbility>;
     auto GetSpell(uint16 id) -> std::optional<CLuaSpell>;
 
-    auto SpawnMob(uint32 mobid, sol::object const& arg2, sol::object const& arg3) -> std::optional<CLuaBaseEntity>; // Spawn Mob By Mob Id - NMs, BCNM...
-    void DespawnMob(uint32 mobid, sol::object const& arg2);                                                         // Despawn (Fade Out) Mob By Id
-    auto GetPlayerByName(std::string const& name) -> std::optional<CLuaBaseEntity>;
-    auto GetPlayerByID(uint32 pid) -> std::optional<CLuaBaseEntity>;
+    auto   SpawnMob(uint32 mobid, sol::object const& arg2, sol::object const& arg3) -> std::optional<CLuaBaseEntity>; // Spawn Mob By Mob Id - NMs, BCNM...
+    void   DespawnMob(uint32 mobid, sol::object const& arg2);                                                         // Despawn (Fade Out) Mob By Id
+    auto   GetPlayerByName(std::string const& name) -> std::optional<CLuaBaseEntity>;
+    auto   GetPlayerByID(uint32 pid) -> std::optional<CLuaBaseEntity>;
+    uint32 GetPlayerIDAnywhere(std::string const& name);
+    void   SendToJailOffline(uint32 playerId, int8 cellId, float posX, float posY, float posZ, uint8 rot);
+
     auto GetMagianTrial(sol::variadic_args va) -> sol::table;
     auto GetMagianTrialsWithParent(int32 parentTrial) -> sol::table;
 
@@ -234,6 +238,7 @@ namespace luautils
 
     int32 OnItemUse(CBaseEntity* PUser, CBaseEntity* PTarget, CItem* PItem);                                                                                     // triggers when item is used
     auto  OnItemCheck(CBaseEntity* PTarget, CItem* PItem, ITEMCHECK param = ITEMCHECK::NONE, CBaseEntity* PCaster = nullptr) -> std::tuple<int32, int32, int32>; // check to see if item can be used
+    int32 OnItemDrop(CBaseEntity* PUser, CItem* PItem);                                                                                                          // trigger when an item is dropped
     int32 CheckForGearSet(CBaseEntity* PTarget);                                                                                                                 // check for gear sets
 
     int32 OnMagicCastingCheck(CBaseEntity* PChar, CBaseEntity* PTarget, CSpell* PSpell);                                                       // triggers when a player attempts to cast a spell
@@ -312,6 +317,7 @@ namespace luautils
     int32 additionalEffectSpikes(CBattleEntity* PDefender, CBattleEntity* PAttacker, CItemEquipment* PItem, actionTarget_t* Action, int32 baseAttackDamage); // for armor with spikes
 
     auto NearLocation(sol::table const& table, float radius, float theta) -> sol::table;
+    auto GetFurthestValidPosition(CLuaBaseEntity* fromTarget, float distance, float theta) -> sol::table;
 
     void OnPlayerDeath(CCharEntity* PChar);
     void OnPlayerLevelUp(CCharEntity* PChar);

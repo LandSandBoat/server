@@ -862,7 +862,7 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
             }
 
             CBaseEntity* PNpc = nullptr;
-            PNpc              = PChar->GetEntity(TargID, TYPE_NPC);
+            PNpc              = PChar->GetEntity(TargID, TYPE_NPC | TYPE_MOB);
 
             if (PNpc != nullptr && distance(PNpc->loc.p, PChar->loc.p) <= 10 && (PNpc->PAI->IsSpawned() || PChar->m_moghouseID != 0))
             {
@@ -1383,10 +1383,10 @@ void SmallPacket0x029(map_session_data_t* const PSession, CCharEntity* const PCh
         uint8 size = PChar->getStorage(FromLocationID)->GetSize();
         for (uint8 slotID = 0; slotID <= size; ++slotID)
         {
-            CItem* PItem = PChar->getStorage(FromLocationID)->GetItem(slotID);
-            if (PItem != nullptr)
+            CItem* PSlotItem = PChar->getStorage(FromLocationID)->GetItem(slotID);
+            if (PSlotItem != nullptr)
             {
-                PChar->pushPacket(new CInventoryItemPacket(PItem, FromLocationID, slotID));
+                PChar->pushPacket(new CInventoryItemPacket(PSlotItem, FromLocationID, slotID));
             }
         }
         PChar->pushPacket(new CInventoryFinishPacket());
@@ -1443,10 +1443,10 @@ void SmallPacket0x029(map_session_data_t* const PSession, CCharEntity* const PCh
             uint8 size = PChar->getStorage(ToLocationID)->GetSize();
             for (uint8 slotID = 0; slotID <= size; ++slotID)
             {
-                CItem* PItem = PChar->getStorage(ToLocationID)->GetItem(slotID);
-                if (PItem != nullptr)
+                CItem* PSlotItem = PChar->getStorage(ToLocationID)->GetItem(slotID);
+                if (PSlotItem != nullptr)
                 {
-                    PChar->pushPacket(new CInventoryItemPacket(PItem, ToLocationID, slotID));
+                    PChar->pushPacket(new CInventoryItemPacket(PSlotItem, ToLocationID, slotID));
                 }
             }
             PChar->pushPacket(new CInventoryFinishPacket());
@@ -2403,7 +2403,8 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                         }
 
                         uint32 accid = sql->GetUIntData(1);
-                        int32  ret   = sql->Query("SELECT COUNT(*) FROM chars WHERE charid = '%u' AND accid = '%u' LIMIT 1;", PChar->id, accid);
+
+                        ret = sql->Query("SELECT COUNT(*) FROM chars WHERE charid = '%u' AND accid = '%u' LIMIT 1;", PChar->id, accid);
                         if (ret == SQL_ERROR || sql->NextRow() != SQL_SUCCESS || sql->GetUIntData(0) == 0)
                         {
                             return;
@@ -2536,7 +2537,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
 
                         if (ret != SQL_ERROR && sql->AffectedRows() == 1)
                         {
-                            int32 ret = sql->Query(
+                            ret = sql->Query(
                                 "DELETE FROM delivery_box WHERE senderid = %u AND box = 1 AND charid = %u AND itemid = %u AND quantity = %u "
                                 "AND slot >= 8 LIMIT 1;",
                                 PChar->id, charid, PItem->getID(), PItem->getQuantity());
@@ -2568,7 +2569,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                         if (orphan)
                         {
                             sql->SetAutoCommit(true);
-                            int32 ret = sql->Query(
+                            ret = sql->Query(
                                 "DELETE FROM delivery_box WHERE box = 2 AND charid = %u AND itemid = %u AND quantity = %u AND slot = %u LIMIT 1;",
                                 PChar->id, PItem->getID(), PItem->getQuantity(), slotID);
                             if (ret != SQL_ERROR && sql->AffectedRows() == 1)
@@ -2718,7 +2719,7 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
             }
 
             uint8 received_items = 0;
-            uint8 slotID         = 0;
+            uint8 deliverySlotID = 0;
 
             int32 ret = sql->Query("SELECT slot FROM delivery_box WHERE charid = %u AND received = 1 AND box = 2 ORDER BY slot ASC;", PChar->id);
 
@@ -2727,18 +2728,18 @@ void SmallPacket0x04D(map_session_data_t* const PSession, CCharEntity* const PCh
                 received_items = (uint8)sql->NumRows();
                 if (received_items && sql->NextRow() == SQL_SUCCESS)
                 {
-                    slotID = sql->GetUIntData(0);
-                    if (!PChar->UContainer->IsSlotEmpty(slotID))
+                    deliverySlotID = sql->GetUIntData(0);
+                    if (!PChar->UContainer->IsSlotEmpty(deliverySlotID))
                     {
-                        CItem* PItem = PChar->UContainer->GetItem(slotID);
+                        CItem* PItem = PChar->UContainer->GetItem(deliverySlotID);
                         if (PItem->isSent())
                         {
-                            ret = sql->Query("DELETE FROM delivery_box WHERE charid = %u AND box = 2 AND slot = %u LIMIT 1;", PChar->id, slotID);
+                            ret = sql->Query("DELETE FROM delivery_box WHERE charid = %u AND box = 2 AND slot = %u LIMIT 1;", PChar->id, deliverySlotID);
                             if (ret != SQL_ERROR && sql->AffectedRows() == 1)
                             {
                                 PChar->pushPacket(new CDeliveryBoxPacket(action, boxtype, 0, 0x02));
-                                PChar->pushPacket(new CDeliveryBoxPacket(action, boxtype, PItem, slotID, received_items, 0x01));
-                                PChar->UContainer->SetItem(slotID, nullptr);
+                                PChar->pushPacket(new CDeliveryBoxPacket(action, boxtype, PItem, deliverySlotID, received_items, 0x01));
+                                PChar->UContainer->SetItem(deliverySlotID, nullptr);
                                 delete PItem;
                             }
                         }
@@ -3075,9 +3076,9 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
         {
             auto totalItemsOnAh = PChar->m_ah_history.size();
 
-            for (size_t slot = 0; slot < totalItemsOnAh; slot++)
+            for (size_t auctionSlot = 0; auctionSlot < totalItemsOnAh; auctionSlot++)
             {
-                PChar->pushPacket(new CAuctionHousePacket(0x0C, (uint8)slot, PChar));
+                PChar->pushPacket(new CAuctionHousePacket(0x0C, (uint8)auctionSlot, PChar));
             }
         }
         break;
@@ -4685,7 +4686,63 @@ void SmallPacket0x084(map_session_data_t* const PSession, CCharEntity* const PCh
             quantity = std::min(quantity, PItem->getQuantity());
             // Store item-to-sell in the last slot of the shop container
             PChar->Container->setItem(PChar->Container->getExSize(), itemID, slotID, quantity);
-            PChar->pushPacket(new CShopAppraisePacket(slotID, PItem->getBasePrice()));
+
+            uint32 basePrice = PItem->getBasePrice();
+            uint16 fame      = 0;
+            float  mult      = 1.0f;
+
+            // Start Fame calculations
+            float fameMultiplier = settings::get<bool>("map.FAME_MULTIPLIER");
+            uint8 fameArea       = zoneutils::GetFameAreaFromZone(PChar->getZone());
+
+            switch (fameArea)
+            {
+                case 0: // San d'Oria
+                case 1: // Bastok
+                case 2: // Windurst
+                    fame = (uint16)(PChar->profile.fame[fameArea] * fameMultiplier);
+                    break;
+                case 3: // Jeuno
+                    fame = (uint16)(PChar->profile.fame[4] + ((PChar->profile.fame[0] + PChar->profile.fame[1] + PChar->profile.fame[2]) * fameMultiplier / 3));
+                    break;
+                case 4: // Selbina / Rabao
+                    fame = (uint16)((PChar->profile.fame[0] + PChar->profile.fame[1]) * fameMultiplier / 2);
+                    break;
+                case 5: // Norg
+                    fame = (uint16)(PChar->profile.fame[3] * fameMultiplier);
+                    break;
+                default: // default to no fame for worst sale price
+                    fame = 0;
+                    break;
+            }
+
+            // Amalasanda
+            if (PChar->getZone() == ZONE_LOWER_JEUNO && PChar->loc.p.x > 23.0f && PChar->loc.p.x < 45.0f && PChar->loc.p.z > -62.0f && PChar->loc.p.z < -29.0f)
+                fame = (uint16)(PChar->profile.fame[3] * fameMultiplier); // use tenshodo fame
+
+            if (basePrice >= 160)
+            {
+                mult = 1.025f;
+                if (fame < 613)
+                {
+                    mult = 1.0f + 0.025f * (float)fame / 612.0f;
+                }
+            }
+
+            if (basePrice < 160)
+            {
+                mult = 1.1f;
+                if (fame < 613)
+                {
+                    mult = 1.0f + 0.1f * (float)fame / 612.0f;
+                }
+            }
+
+            if (basePrice == 1)
+                mult = 1.0f; // dont round down to 0
+            // fame end
+
+            PChar->pushPacket(new CShopAppraisePacket(slotID, basePrice * mult));
         }
         return;
     }
@@ -4711,7 +4768,7 @@ void SmallPacket0x085(map_session_data_t* const PSession, CCharEntity* const PCh
 
     if ((PItem != nullptr) && ((gil != nullptr) && gil->isType(ITEM_CURRENCY)))
     {
-        if (quantity < 1 || quantity > PItem->getStackSize()) // Possible exploit
+        if (quantity < 1 || quantity > PItem->getStackSize()) // Possible exploit m_fameType
         {
             ShowWarning("SmallPacket0x085: Player %s trying to sell invalid quantity %u of itemID %u [to VENDOR] ", PChar->GetName(),
                         quantity);
@@ -4732,7 +4789,62 @@ void SmallPacket0x085(map_session_data_t* const PSession, CCharEntity* const PCh
             return;
         }
 
-        charutils::UpdateItem(PChar, LOC_INVENTORY, 0, quantity * PItem->getBasePrice());
+        uint32 basePrice = PItem->getBasePrice();
+        uint16 fame      = 0;
+        float  mult      = 1.0f;
+
+        // Start Fame calculations
+        float fameMultiplier = settings::get<bool>("map.FAME_MULTIPLIER");
+        uint8 fameArea       = zoneutils::GetFameAreaFromZone(PChar->getZone());
+
+        switch (fameArea)
+        {
+            case 0: // San d'Oria
+            case 1: // Bastok
+            case 2: // Windurst
+                fame = (uint16)(PChar->profile.fame[fameArea] * fameMultiplier);
+                break;
+            case 3: // Jeuno
+                fame = (uint16)(PChar->profile.fame[4] + ((PChar->profile.fame[0] + PChar->profile.fame[1] + PChar->profile.fame[2]) * fameMultiplier / 3));
+                break;
+            case 4: // Selbina / Rabao
+                fame = (uint16)((PChar->profile.fame[0] + PChar->profile.fame[1]) * fameMultiplier / 2);
+                break;
+            case 5: // Norg
+                fame = (uint16)(PChar->profile.fame[3] * fameMultiplier);
+                break;
+            default: // default to no fame for worst sale price
+                fame = 0;
+                break;
+        }
+
+        // Amalasanda
+        if (PChar->getZone() == ZONE_LOWER_JEUNO && PChar->loc.p.x > 23.0f && PChar->loc.p.x < 45.0f && PChar->loc.p.z > -62.0f && PChar->loc.p.z < -29.0f)
+            fame = (uint16)(PChar->profile.fame[3] * fameMultiplier); // use tenshodo fame
+
+        if (basePrice >= 160)
+        {
+            mult = 1.025f;
+            if (fame < 613)
+            {
+                mult = 1.0f + 0.025f * (float)fame / 612.0f;
+            }
+        }
+
+        if (basePrice < 160)
+        {
+            mult = 1.1f;
+            if (fame < 613)
+            {
+                mult = 1.0f + 0.1f * (float)fame / 612.0f;
+            }
+        }
+
+        if (basePrice == 1)
+            mult = 1.0f; // dont round down to 0
+        // fame end
+
+        charutils::UpdateItem(PChar, LOC_INVENTORY, 0, quantity * (uint32)((float)basePrice * mult));
         charutils::UpdateItem(PChar, LOC_INVENTORY, slotID, -(int32)quantity);
         ShowInfo("SmallPacket0x085: Player '%s' sold %u of itemID %u [to VENDOR] ", PChar->GetName(), quantity, itemID);
         PChar->pushPacket(new CMessageStandardPacket(nullptr, itemID, quantity, MsgStd::Sell));

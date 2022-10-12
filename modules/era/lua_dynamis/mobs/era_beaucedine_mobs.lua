@@ -21,6 +21,10 @@ xi.dynamis.onSpawnAngra = function(mob)
     })
 end
 
+xi.dynamis.onEngagedAngra = function(mob, target)
+    mob:setLocalVar("teleTime", os.time())
+end
+
 xi.dynamis.onFightAngra = function(mob, target)
     local mobIndex = mob:getLocalVar(string.format("MobIndex_%s", mob:getID()))
     local nmchildren = xi.dynamis.mobList[mob:getZoneID()][mobIndex].nmchildren
@@ -38,7 +42,7 @@ xi.dynamis.onFightAngra = function(mob, target)
     }
 
     local teleTime = mob:getLocalVar("teleTime")
-    if mob:getBattleTime() - teleTime > 30 then
+    if os.time() - teleTime > 30 then
         randPos = teles[math.random((1), (8))]
         xi.dynamis.teleport(mob, 1000)
         mob:setPos(randPos, 0)
@@ -53,7 +57,7 @@ xi.dynamis.onFightAngra = function(mob, target)
                 end
             end
         end
-        mob:setLocalVar("teleTime", mob:getBattleTime())
+        mob:setLocalVar("teleTime", os.time())
     end
 
     for _, childIndex in pairs(children) do

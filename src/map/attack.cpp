@@ -471,7 +471,7 @@ bool CAttack::CheckCover()
  *  Processes the damage for this swing.                                    *
  *                                                                      *
  ************************************************************************/
-void CAttack::ProcessDamage(bool isCritical, bool isGuarded)
+void CAttack::ProcessDamage(bool isCritical, bool isGuarded, bool isKick)
 {
     // Sneak attack.
     if (m_attacker->GetMJob() == JOB_THF && m_isFirstSwing && m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK_ATTACK) &&
@@ -501,9 +501,15 @@ void CAttack::ProcessDamage(bool isCritical, bool isGuarded)
 
     if (m_attackRound->IsH2H())
     {
+        m_baseDamage       = 0;
         m_naturalH2hDamage = (int32)(m_attacker->GetSkill(SKILL_HAND_TO_HAND) * 0.11f) + 3;
-        m_baseDamage       = m_attacker->GetMainWeaponDmg();
-        m_damage           = (uint32)(((m_baseDamage + m_naturalH2hDamage + m_trickAttackDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * battleutils::GetDamageRatio(m_attacker, m_attacker->GetBattleTarget(), isCritical, 0, SLOT_MAIN, 0, isGuarded)));
+
+        if (!isKick)
+        {
+            m_baseDamage = m_attacker->GetMainWeaponDmg();
+        }
+
+        m_damage = (uint32)(((m_baseDamage + m_naturalH2hDamage + m_trickAttackDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * battleutils::GetDamageRatio(m_attacker, m_attacker->GetBattleTarget(), isCritical, 0, SLOT_MAIN, 0, isGuarded)));
     }
     else if (slot == SLOT_MAIN)
     {

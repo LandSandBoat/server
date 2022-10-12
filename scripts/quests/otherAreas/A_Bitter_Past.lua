@@ -99,12 +99,12 @@ quest.sections =
             ['qm_bitter_past'] =
             {
                 onTrigger = function(player, npc)
-                    if quest:getVar(player, 'Prog') == 2 and npcUtil.popFromQM(player, npc, ID.mob.BITTER_PAST_MOBS, {claim = true, hide = 0}) then
-                        return quest:messageText(ID.text.SENSE_OF_FOREBODING)
+                    if quest:getVar(player, 'Prog') == 2 and npcUtil.popFromQM(player, npc, ID.mob.BITTER_PAST_MOBS, { claim = true, hide = 0 }) then
+                        return quest:message(ID.text.SENSE_OF_FOREBODING)
 
                     elseif not player:hasKeyItem(xi.ki.TINY_WRISTLET) then
                         player:addKeyItem(xi.ki.TINY_WRISTLET)
-                        return quest:messageText(ID.text.KEYITEM_OBTAINED)
+                        return quest:message(ID.text.KEYITEM_OBTAINED)
                     end
                 end,
             },

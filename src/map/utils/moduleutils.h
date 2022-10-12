@@ -103,6 +103,7 @@ namespace moduleutils
     // problems.
 
     void LoadLuaModules();
+    void CleanupLuaModules();
     void TryApplyLuaModules();
     void ReportLuaModuleUsage();
 }; // namespace moduleutils

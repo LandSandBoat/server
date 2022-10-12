@@ -6,6 +6,10 @@
 local item_object = {}
 
 item_object.onItemCheck = function(target)
+    local effect = target:getStatusEffect(xi.effect.ENAERO)
+    if effect ~= nil and effect:getSubType() == 14989 then
+        target:delStatusEffect(xi.effect.ENAERO)
+    end
     return 0
 end
 
@@ -22,7 +26,7 @@ item_object.onItemUse = function(target)
 
     potency = utils.clamp(potency, 3, 25)
 
-    target:addStatusEffect(effect, potency, 0, 180)
+    target:addStatusEffect(effect, potency, 0, 180, 14989)
 end
 
 return item_object

@@ -137,6 +137,8 @@ namespace luautils
         lua.set_function("DespawnMob", &luautils::DespawnMob);
         lua.set_function("GetPlayerByName", &luautils::GetPlayerByName);
         lua.set_function("GetPlayerByID", &luautils::GetPlayerByID);
+        lua.set_function("GetPlayerIDAnywhere", &luautils::GetPlayerIDAnywhere);
+        lua.set_function("SendToJailOffline", &luautils::SendToJailOffline);
         lua.set_function("GetMagianTrial", &luautils::GetMagianTrial);
         lua.set_function("GetMagianTrialsWithParent", &luautils::GetMagianTrialsWithParent);
         lua.set_function("JstMidnight", &luautils::JstMidnight);
@@ -173,6 +175,7 @@ namespace luautils
         lua.set_function("UpdateNMSpawnPoint", &luautils::UpdateNMSpawnPoint);
         lua.set_function("SetDropRate", &luautils::SetDropRate);
         lua.set_function("NearLocation", &luautils::NearLocation);
+        lua.set_function("GetFurthestValidPosition", &luautils::GetFurthestValidPosition);
         lua.set_function("Terminate", &luautils::Terminate);
         lua.set_function("GetReadOnlyItem", &luautils::GetReadOnlyItem);
         lua.set_function("GetAbility", &luautils::GetAbility);
@@ -268,6 +271,11 @@ namespace luautils
         TracyReportLuaMemory(lua.lua_state());
 
         return 0;
+    }
+
+    void cleanup()
+    {
+        moduleutils::CleanupLuaModules();
     }
 
     /************************************************************************
@@ -1478,6 +1486,51 @@ namespace luautils
 
     /************************************************************************
      *                                                                       *
+     *  Gets a player ID from any zone, regardless of online status          *
+     *                                                                       *
+     ************************************************************************/
+
+    uint32 GetPlayerIDAnywhere(std::string const& name)
+    {
+        TracyZoneScoped;
+
+        // Sanitize inputs - looking for a name, so this should not include any non-alpha characters
+        std::string cleanString = name;
+        cleanString.erase(remove_if(cleanString.begin(), cleanString.end(),
+                                    [](auto const& c) -> bool
+                                    { return !std::isalpha((int)c); }),
+                          cleanString.end());
+
+        const char* Query = "SELECT charId FROM chars WHERE charname='%s';";
+        int32       ret   = sql->Query(Query, cleanString);
+        int32       PId   = 0;
+
+        if (ret != SQL_ERROR && sql->NumRows() == 1)
+        {
+            while (sql->NextRow() == SQL_SUCCESS)
+            {
+                PId = sql->GetUInt64Data(0);
+            }
+        }
+
+        return PId;
+    }
+
+    /************************************************************************
+     *                                                                       *
+     *  Send a player to jail, even if they are offline                      *
+     *                                                                       *
+     ************************************************************************/
+
+    void SendToJailOffline(uint32 playerId, int8 cellId, float posX, float posY, float posZ, uint8 rot)
+    {
+        TracyZoneScoped;
+        charutils::PersistCharVar(playerId, "inJail", cellId);
+        sql->Query("UPDATE chars SET pos_x=%f, pos_y=%f, pos_z=%f, pos_rot=%u, pos_zone=131 WHERE charid=%u;", posX, posY, posZ, rot, playerId);
+    }
+
+    /************************************************************************
+     *                                                                       *
      *  Gets a player object via the player's ID.                            *
      *                                                                       *
      ************************************************************************/
@@ -2538,6 +2591,30 @@ namespace luautils
         {
             sol::error err = result;
             ShowError("luautils::onItemUse: %s", err.what());
+            return -1;
+        }
+
+        return 0;
+    }
+
+    // Trigger Code on an item when it has been dropped
+    int32 OnItemDrop(CBaseEntity* PUser, CItem* PItem)
+    {
+        TracyZoneScoped;
+
+        auto filename = fmt::format("./scripts/globals/items/{}.lua", PItem->getName());
+
+        sol::function onItemDrop = GetCacheEntryFromFilename(filename)["onItemDrop"].get<sol::function>();
+        if (!onItemDrop.valid())
+        {
+            return -1;
+        }
+
+        auto result = onItemDrop(CLuaBaseEntity(PUser), CLuaItem(PItem));
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onItemDrop: %s", err.what());
             return -1;
         }
 
@@ -4643,6 +4720,26 @@ namespace luautils
         nearPos["z"]       = pos.z;
 
         return nearPos;
+    }
+
+    sol::table GetFurthestValidPosition(CLuaBaseEntity* fromTarget, float distance, float theta)
+    {
+        CBaseEntity* entity = fromTarget->GetBaseEntity();
+        position_t   pos    = nearPosition(entity->loc.p, distance, theta);
+
+        float validPos[3];
+        bool  success = entity->loc.zone->m_navMesh->findFurthestValidPoint(entity->loc.p, pos, validPos);
+        if (!success)
+        {
+            return sol::lua_nil;
+        }
+
+        sol::table outPos = lua.create_table();
+        outPos["x"]       = validPos[0];
+        outPos["y"]       = validPos[1];
+        outPos["z"]       = validPos[2];
+
+        return outPos;
     }
 
     void OnPlayerDeath(CCharEntity* PChar)

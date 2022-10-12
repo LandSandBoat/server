@@ -565,6 +565,9 @@ xi.dynamis.animatedInfo =
 xi.dynamis.onSpawnAnimated = function(mob)
     mob:setRoamFlags(xi.roamFlag.SCRIPTED)
     xi.dynamis.setAnimatedWeaponStats(mob)
+    mob:timer(500, function(mobArg)
+        mobArg:setAnimationSub(3)
+    end)
 end
 
 xi.dynamis.onEngagedAnimated = function(mob, target)
@@ -574,6 +577,11 @@ end
 
 xi.dynamis.onFightAnimated = function(mob, target)
     local chosenTarget = mob
+
+    if mob:getLocalVar("animSwap") == 0 then
+        mob:setLocalVar("animSwap", 1)
+        mob:setAnimationSub(3)
+    end
 
     if mob:getLocalVar("changeTime") <= os.time() then
         mob:castSpell(xi.magic.spell.WARP, chosenTarget)
@@ -601,10 +609,18 @@ end
 xi.dynamis.onSpawnSatellite = function(mob)
     mob:setRoamFlags(xi.roamFlag.SCRIPTED)
     xi.dynamis.setNMStats(mob)
-    mob:setAnimationSub(math.random(5,6))
+    mob:timer(500, function(mobArg)
+        mobArg:setLocalVar("animSub", math.random(5, 6))
+        mobArg:setAnimationSub(mobArg:getLocalVar("animSub"))
+    end)
 end
 
 xi.dynamis.onFightSatellite = function(mob, target)
+    if mob:getLocalVar("animSwap") == 0 then
+        mob:setLocalVar("animSwap", 1)
+        mob:setAnimationSub(mob:getLocalVar("animSub"))
+    end
+
     if not GetMobByID(mob:getLocalVar("ParentID")) then -- Despawn if Animated Parent Dies
         DespawnMob(mob:getID())
     end

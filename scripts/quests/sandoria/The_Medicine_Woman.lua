@@ -84,7 +84,7 @@ quest.sections =
                     if player:hasKeyItem(xi.ki.COLD_MEDICINE) then
                         return quest:progressEvent(614)
                     else
-                        return quest:messageText(northernSandoriaID.text.ABEAULE_DIALOG_HOME)
+                        return quest:message(northernSandoriaID.text.ABEAULE_DIALOG_HOME)
                     end
                 end,
             },
@@ -122,9 +122,9 @@ quest.sections =
                     then
                         return quest:progressEvent(636)
                     elseif hasFormula then
-                        return quest:messageText(southernSandoriaID.text.AMAURA_DIALOG_COMEBACK)
+                        return quest:message(southernSandoriaID.text.AMAURA_DIALOG_COMEBACK)
                     elseif hasColdMedicine then
-                        return quest:messageText(southernSandoriaID.text.AMAURA_DIALOG_DELIVER)
+                        return quest:message(southernSandoriaID.text.AMAURA_DIALOG_DELIVER)
                     end
                 end,
             },

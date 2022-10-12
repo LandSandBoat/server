@@ -299,6 +299,7 @@ xi.msg.basic =
     -- PUP
     AUTO_OVERLOAD_CHANCE   = 798, -- The <pet>'s overload chance is <number>%.
     AUTO_OVERLOADED        = 799, -- The <pet>'s overload chance is <number>%. The <pet> is overloaded!
+    PROVOKE_SWITCH         = 418, -- The <actor> uses <action> on <target>. The <target> switches to <actor>!
 
     -- DNC
     NO_FINISHINGMOVES      = 524, -- You have not earned enough finishing moves to perform that action.

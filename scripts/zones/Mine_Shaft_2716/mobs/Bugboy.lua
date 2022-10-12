@@ -25,7 +25,7 @@ entity.onMobFight = function(mob, target)
     elseif mob:getHPP() < 50 and mob:getLocalVar("second2hr") == 0 then
         mob:setLocalVar("second2hr", 1)
         mob:useMobAbility(688)
-    elseif mob:GetHPP() < 25 and mob:getLocalVar("third2hr") == 0 then
+    elseif mob:getHPP() < 25 and mob:getLocalVar("third2hr") == 0 then
         mob:setLocalVar("third2hr", 1)
         mob:useMobAbility(688)
     end

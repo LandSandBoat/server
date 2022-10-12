@@ -404,22 +404,22 @@ xi.dynamis.mobList[zoneID][196].info = {"Nightmare", "Nightmare Cockatrice", nil
 xi.dynamis.mobList[zoneID][197].info = {"Nightmare", "Nightmare Cockatrice", nil, nil, nil} --
 
 -- Orc NMs
-xi.dynamis.mobList[zoneID][285].info = {"NM", "Elvaansticker Bxafraff", "Orc", "DRG", "elvaansticker_killed"}       -- Elvaansticker Bxafraff      (Apocalyptic Beast's 'Call Wyvern' has no effect)
-xi.dynamis.mobList[zoneID][286].info = {"NM", "Flamecaller Zoeqdoq", "Orc", "BLM", "flamecaller_killed"}          -- Flamecaller Zoeqdoq         (Apocalyptic Beast's 'Manafont' has no effect)
-xi.dynamis.mobList[zoneID][287].info = {"NM", "Hamfist Gukhbuk", "Orc", "MNK", "hamfist_killed"}              -- Hamfist Gukhbuk             (Apocalyptic Beast's 'Hundred Fists' has no effect)
-xi.dynamis.mobList[zoneID][288].info = {"NM", "Lyncean Juvgneg", "Orc", "RNG", "lyncean_killed"}              -- Lyncean Juvgneg             (Apocalyptic Beast's 'Eagle Eye Shot' has no effect)
+xi.dynamis.mobList[zoneID][285].info = {"NM", "Elvaansticker Bxafraff", "Orc", "DRG", "elvaansticker_killed"}   -- Elvaansticker Bxafraff      (Apocalyptic Beast's 'Call Wyvern' has no effect)
+xi.dynamis.mobList[zoneID][286].info = {"NM", "Flamecaller Zoeqdoq", "Orc", "BLM", "flamecaller_killed"}        -- Flamecaller Zoeqdoq         (Apocalyptic Beast's 'Manafont' has no effect)
+xi.dynamis.mobList[zoneID][287].info = {"NM", "Hamfist Gukhbuk", "Orc", "MNK", "hamfist_killed"}                -- Hamfist Gukhbuk             (Apocalyptic Beast's 'Hundred Fists' has no effect)
+xi.dynamis.mobList[zoneID][288].info = {"NM", "Lyncean Juwgneg", "Orc", "RNG", "lyncean_killed"}                -- Lyncean Juwgneg             (Apocalyptic Beast's 'Eagle Eye Shot' has no effect)
 -- Goblin NMs
-xi.dynamis.mobList[zoneID][289].info = {"NM", "Gosspix Blabberlips", "Goblin", "RDM", "gosspix_killed"}       -- Gosspix Blabberlips         (Apocalyptic Beast's 'Chainspell' has no effect)
-xi.dynamis.mobList[zoneID][290].info = {"NM", "Woodnix Shrillwhistle", "Goblin", "BST", "woodnix_killed"}     -- Woodnix Shrillwhistle       (Apocalyptic Beast's 'Familiar' has no effect)
-xi.dynamis.mobList[zoneID][291].info = {"NM", "Shamblix Rottenheart", "Goblin", "DRK", "shamblix_killed"}      -- Shamblix Rottenheart        (Apocalyptic Beast's 'Blood Weapon' has no effect)
+xi.dynamis.mobList[zoneID][289].info = {"NM", "Gosspix Blabberlips", "Goblin", "RDM", "gosspix_killed"}         -- Gosspix Blabberlips         (Apocalyptic Beast's 'Chainspell' has no effect)
+xi.dynamis.mobList[zoneID][290].info = {"NM", "Woodnix Shrillwhistle", "Goblin", "BST", "woodnix_killed"}       -- Woodnix Shrillwhistle       (Apocalyptic Beast's 'Familiar' has no effect)
+xi.dynamis.mobList[zoneID][291].info = {"NM", "Shamblix Rottenheart", "Goblin", "DRK", "shamblix_killed"}       -- Shamblix Rottenheart        (Apocalyptic Beast's 'Blood Weapon' has no effect)
 -- Quadav NMs
-xi.dynamis.mobList[zoneID][292].info = {"NM", "Qu'Pho Bloodspiller", "Quadav", "WAR", "bloodspiller_killed"}       -- Qu'Pho Bloodspiller         (Apocalyptic Beast's 'Mighty Strikes' has no effect)
-xi.dynamis.mobList[zoneID][293].info = {"NM", "Te'Zha Ironclad", "Quadav", "PLD", "ironclad_killed"}           -- Te'Zha Ironclad             (Apocalyptic Beast's 'Invincible' has no effect)
-xi.dynamis.mobList[zoneID][294].info = {"NM", "Gi'Bhe Flesheater", "Quadav", "WHM", "flesheater_killed"}         -- Gi'Bhe Flesheater           (Apocalyptic Beast's 'Benediction' has no effect)
-xi.dynamis.mobList[zoneID][295].info = {"NM", "Va'Rhu Bodysnatcher", "Quadav", "THF", "bodysnatcher_killed"}       -- Va'Rhu Bodysnatcher         (Apocalyptic Beast's 'Perfect Dodge' has no effect)
+xi.dynamis.mobList[zoneID][292].info = {"NM", "Qu'Pho Bloodspiller", "Quadav", "WAR", "bloodspiller_killed"}    -- Qu'Pho Bloodspiller         (Apocalyptic Beast's 'Mighty Strikes' has no effect)
+xi.dynamis.mobList[zoneID][293].info = {"NM", "Te'Zha Ironclad", "Quadav", "PLD", "ironclad_killed"}            -- Te'Zha Ironclad             (Apocalyptic Beast's 'Invincible' has no effect)
+xi.dynamis.mobList[zoneID][294].info = {"NM", "Gi'Bhe Flesheater", "Quadav", "WHM", "flesheater_killed"}        -- Gi'Bhe Flesheater           (Apocalyptic Beast's 'Benediction' has no effect)
+xi.dynamis.mobList[zoneID][295].info = {"NM", "Va'Rhu Bodysnatcher", "Quadav", "THF", "bodysnatcher_killed"}    -- Va'Rhu Bodysnatcher         (Apocalyptic Beast's 'Perfect Dodge' has no effect)
 -- Yagudo NMs
-xi.dynamis.mobList[zoneID][296].info = {"NM", "Koo Rahi the Levinblade", "Yagudo", "SAM", "levinblade_killed"}   -- Koo rahi the Levinblade     (Apocalyptic Beast's 'Meikyo Shisui' has no effect)
-xi.dynamis.mobList[zoneID][297].info = {"NM", "Baa Dava the Bibliopage", "Yagudo", "SMN", "bibliopage_killed"}   -- Baa Dava the Bibliopage     (Apocalyptic Beast's 'Astral Flow' has no effect)
+xi.dynamis.mobList[zoneID][296].info = {"NM", "Koo Rahi the Levinblade", "Yagudo", "SAM", "levinblade_killed"}  -- Koo rahi the Levinblade     (Apocalyptic Beast's 'Meikyo Shisui' has no effect)
+xi.dynamis.mobList[zoneID][297].info = {"NM", "Baa Dava the Bibliopage", "Yagudo", "SMN", "bibliopage_killed"}  -- Baa Dava the Bibliopage     (Apocalyptic Beast's 'Astral Flow' has no effect)
 xi.dynamis.mobList[zoneID][298].info = {"NM", "Doo Peku the Fleetfoot", "Yagudo", "NIN", "fleetfoot_killed"}    -- Doo Peku the Fleetfoot      (Apocalyptic Beast's 'Mijin Gakure' has no effect)
 xi.dynamis.mobList[zoneID][299].info = {"NM", "Ree Nata the Melomanic", "Yagudo", "BRD", "melomanic_killed"}    -- Ree Nata the Melomanic      (Apocalyptic Beast's 'Soul Voice' has no effect)
 
@@ -671,7 +671,7 @@ xi.dynamis.mobList[zoneID][50 ].mobchildren = { nil, nil, nil, nil, nil, nil,   
 xi.dynamis.mobList[zoneID][1  ].nmchildren = { true, 285                } -- (001-O) Elvaansticker Bxafraff
 xi.dynamis.mobList[zoneID][3  ].nmchildren = { true, 286                } -- (003-O) Flamecaller Zoeqdoq
 xi.dynamis.mobList[zoneID][6  ].nmchildren = { true, 287                } -- (006-O) Hamfist Gukhbuk
-xi.dynamis.mobList[zoneID][11 ].nmchildren = { true, 288                } -- (011-O) Lyncean Juvgneg
+xi.dynamis.mobList[zoneID][11 ].nmchildren = { true, 288                } -- (011-O) Lyncean Juwgneg
 xi.dynamis.mobList[zoneID][15 ].nmchildren = { true, 289                } -- (015-G) Gosspix Blabberlips
 xi.dynamis.mobList[zoneID][18 ].nmchildren = { true, 290                } -- (018-G) Woodnix Shrillwhistle
 xi.dynamis.mobList[zoneID][21 ].nmchildren = { true, 291                } -- (021-G) Shamblix Rottenheart

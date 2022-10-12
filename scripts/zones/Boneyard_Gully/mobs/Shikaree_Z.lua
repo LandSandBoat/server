@@ -5,7 +5,7 @@
 --  Mission: CoP 5-3 Ulmia's Path (Head Wind)
 -----------------------------------
 local ID = require("scripts/zones/Boneyard_Gully/IDs")
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
@@ -18,10 +18,8 @@ local dialogue =
 }
 
 entity.onMobSpawn = function(mob)
-    mob:timer(1, function(mobArg)
-        mobArg:setMobMod(xi.mobMod.SKILL_LIST, 0)
-        mobArg:setMod(xi.mod.SLEEPRES, 50)
-    end)
+    mob:setMobMod(xi.mobMod.SKILL_LIST, 0)
+    mob:setMod(xi.mod.SLEEPRES, 50)
 
     mob:addListener("ATTACK", "SHIKAREE_Z_ATTACK", function(attacker, defender, action)
         if math.random() < 0.25 then
