@@ -260,6 +260,12 @@ function Battlefield:checkRequirements(player, npc, registrant, trade)
         return false
     end
 
+    -- Do not show battlefields when either they don't require items and player is trading or
+    -- that do require items and but player is not trading
+    if (trade == nil) ~= (#self.tradeItems == 0) then
+        return false
+    end
+
     for _, keyItem in ipairs(self.requiredKeyItems) do
         if type(keyItem) == 'table' then
 
