@@ -525,6 +525,7 @@ function Limbus:new(data)
     obj.name = data.name
     obj.ID = zones[obj.zoneId][obj.name]
     obj.serverVar = "[" .. obj.name .. "]Time"
+    obj.exitLocation = data.exitLocation or 0
     return obj
 end
 
@@ -622,6 +623,10 @@ end
 function Limbus:onBattlefieldDestroy(battlefield)
     xi.limbus.handleDoors(battlefield, true)
     SetServerVariable(self.serverVar, 0)
+end
+
+function Limbus:onBattlefieldWin(player, battlefield)
+    player:startEvent(32001, { [0] = self.exitLocation, [4] = self.zoneId, [5] = battlefield:getArea() - 1 })
 end
 
 function Limbus:onBattlefieldLeave(player, battlefield, leavecode)
