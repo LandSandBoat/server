@@ -2,11 +2,12 @@
 -- Trust: Mumor
 -----------------------------------
 require("scripts/globals/trust")
------------------------------------
+-----------------------------------------
 local spellObject = {}
 
 local jobs1 = {xi.job.WHM, xi.job.RDM, xi.job.SCH, xi.job.PLD}
- 
+
+
 spellObject.onMagicCastingCheck = function(caster, target, spell)
     return xi.trust.canCast(caster, spell)
 end
@@ -29,18 +30,18 @@ spellObject.onMobSpawn = function(mob)
     local synergy = master:getLocalVar("mumorSynergy")
 
     --DYNAMIC MODIFIER THAT CHECKS VARIABLE ON TICK TO APPLY
-    mob:addListener("COMBAT_TICK", "MUMOR_CTICK", function(mob) 
+    mob:addListener("COMBAT_TICK", "MUMOR_CTICK", function(mob)
         if synergy >= 2 then
             mob:setMod(xi.mod.SAMBA_DURATION, 10)
         end
     end)
 
     --LISTENERS TO SUBTRACT SYNERGY VARIABLE IF ONE OF THE TWO ARE KILLED OR RELEASED
-    mob:addListener("DEATH", "MUMOR_DEATH", function(mob, killer) 
+    mob:addListener("DEATH", "MUMOR_DEATH", function(mob, killer)
         master:setLocalVar("mumorSynergy", synergy - 1)
     end)
 
-    mob:addListener("DESPAWN", "MUMOR_DESPAWN", function(mob) 
+    mob:addListener("DESPAWN", "MUMOR_DESPAWN", function(mob)
         master:setLocalVar("mumorSynergy", synergy - 1)
     end)
 
@@ -63,8 +64,9 @@ spellObject.onMobSpawn = function(mob)
     end
     --ADDS ECOSYSTEM TO ADJUST SAMBA TO HASTE IF TARGET IS UNDEAD
     mob:addSimpleGambit(ai.t.TARGET, ai.c.IS_ECOSYSTEM, xi.ecosystem.UNDEAD, ai.r.JA, ai.s.SPECIFIC, xi.ja.HASTE_SAMBA)
-    --ELSE PICKS HIGHEST DRAIN SPELL AVAILABLE  
+    --ELSE PICKS HIGHEST DRAIN SPELL AVAILABLE
     mob:addSimpleGambit(ai.t.SELF, ai.c.NO_SAMBA, 0, ai.r.JA, ai.s.BEST_SAMBA, xi.ja.DRAIN_SAMBA)
+
 end
 
 spellObject.onMobDespawn = function(mob)
