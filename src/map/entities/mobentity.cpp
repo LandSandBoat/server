@@ -660,9 +660,16 @@ void CMobEntity::OnMobSkillFinished(CMobSkillState& state, action_t& action)
     {
         action.actiontype = ACTION_PET_MOBABILITY_FINISH;
     }
-    else if (PSkill->getID() < 256)
+    // Damaging mob abilities to use proper humanoid animnation IDs
+    else if (PSkill->getID() < 256 || PSkill->getID() == 1431 || PSkill->getID() == 1432 || PSkill->getID() == 1437)
     {
         action.actiontype = ACTION_WEAPONSKILL_FINISH;
+    }
+    // Non-damaging mob abilities to use proper humanoid animation IDs
+    else if (PSkill->getID() == 1428 || PSkill->getID() == 1429 || (PSkill->getID() >= 1433 && PSkill->getID() <= 1436) || PSkill->getID() == 1438 ||
+             (PSkill->getID() >= 1992 && PSkill->getID() >= 1997))
+    {
+        action.actiontype = ACTION_JOBABILITY_FINISH;
     }
     else
     {

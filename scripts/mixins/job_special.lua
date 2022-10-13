@@ -316,7 +316,12 @@ g_mixins.job_special = function(jobSpecialMob)
             for _,v in pairs(charmList) do
                 if mob:getName() == v and not mob:hasPet() then
                     ability = 710
+                    break
                 end
+            end
+
+            if mob:isInDynamis() and ((mob:getPet():getID() == mob:getID()) or not mob:hasPet()) then
+                ability = 710
             end
 
             mob:useMobAbility(ability)

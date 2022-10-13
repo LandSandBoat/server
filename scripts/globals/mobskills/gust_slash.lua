@@ -1,5 +1,7 @@
 -----------------------------------
 -- Gust Slash
+-- Description: Deals wind elemental damage. Damage varies with TP.
+-- Type: Magical
 -----------------------------------
 require("scripts/globals/mobskills")
 require("scripts/globals/status")
@@ -9,18 +11,15 @@ require("scripts/globals/settings")
 local mobskill_object = {}
 
 mobskill_object.onMobSkillCheck = function(target, mob, skill)
-    -- mob:messageBasic(xi.msg.basic.READIES_WS, 0, 41)
     return 0
 end
 
 mobskill_object.onMobWeaponSkill = function(target, mob, skill)
-    local numhits = 3
-    local accmod = 1
-    local dmgmod = 2
-    local info = xi.mobskills.mobPhysicalMove(mob, target, skill, numhits, accmod, dmgmod, xi.mobskills.physicalTpBonus.ACC_VARIES, 1, 2, 3)
-    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.PHYSICAL, xi.damageType.SLASHING, info.hitslanded)
+    local dmgmod = 1.8
+    local info = xi.mobskills.mobMagicalMove(mob, target, skill, mob:getWeaponDmg()*3, xi.magic.ele.WIND, dmgmod, xi.mobskills.magicalTpBonus.DMG_BONUS, 2)
+    local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.WIND, info.hitslanded)
 
-    target:takeDamage(dmg, mob, xi.attackType.PHYSICAL, xi.damageType.SLASHING)
+    target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.WIND)
     return dmg
 end
 

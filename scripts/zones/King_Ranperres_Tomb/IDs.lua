@@ -44,12 +44,15 @@ zones[xi.zone.KING_RANPERRES_TOMB] =
             [17555666] = 17555668,
             [17555667] = 17555668,
         },
+        RANPERRES_REST_MOBS   =
+        {
+            17555770,
+            17555771,
+            17555772,
+        },
         BARBASTELLE           = 17555721,
         CHERRY_SAPLING_OFFSET = 17555748,
         VRTRA                 = 17555763,
-        CORRUPTED_YORGOS      = 17555770,
-        CORRUPTED_SOFFEIL     = 17555771,
-        CORRUPTED_ULBRIG      = 17555772,
         ANKOU                 = 17555709,
     },
     npc =
