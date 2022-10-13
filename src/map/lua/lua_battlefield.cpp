@@ -503,6 +503,7 @@ void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleArenas)
                 auto PMob = dynamic_cast<CMobEntity*>(entity);
                 XI_DEBUG_BREAK_IF(PMob == nullptr);
                 PMob->setMobMod(MOBMOD_SUPERLINK, superlinkId);
+                PMob->saveMobModifiers();
             }
         }
 
@@ -516,6 +517,7 @@ void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleArenas)
                 PMob->setMobMod(MOBMOD_ROAM_RESET_FACING, 1);
                 PMob->m_maxRoamDistance = 0.5f;
                 PMob->m_roamFlags |= ROAMFLAG_SCRIPTED;
+                PMob->saveMobModifiers();
             }
         }
 
@@ -529,6 +531,7 @@ void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleArenas)
                 for (auto modifier : mods.get<sol::table>())
                 {
                     PMob->setModifier(modifier.first.as<Mod>(), modifier.second.as<uint16>());
+                    PMob->saveModifiers();
                 }
             }
         }
@@ -543,6 +546,7 @@ void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleArenas)
                 for (auto modifier : mobMods.get<sol::table>())
                 {
                     PMob->setMobMod(modifier.first.as<uint16>(), modifier.second.as<uint16>());
+                    PMob->saveMobModifiers();
                 }
             }
         }
