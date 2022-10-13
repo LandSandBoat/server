@@ -8,9 +8,11 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.ADD_EFFECT, 1)
+end
+
+entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.REGAIN, 100)
-    mob:setLocalVar("doubleBlow", 0)
-    mob:setLocalVar("counterstance", 0)
 end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
@@ -22,6 +24,10 @@ entity.onMobWeaponSkill = function(target, mob, skill)
             mobArg:setLocalVar("doubleBlow", 0)
         end)
     end
+end
+
+entity.onAdditionalEffect = function(mob, target, damage)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.WEIGHT)
 end
 
 entity.onMobFight = function(mob, target)
