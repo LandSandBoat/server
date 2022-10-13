@@ -716,8 +716,6 @@ function Battlefield:handleWipe(battlefield, players)
     local wipeTime = battlefield:getWipeTime()
     local elapsed  = battlefield:getTimeInside()
 
-    players = players or battlefield:getPlayers()
-
     -- If party has not yet wiped.
     if wipeTime <= 0 then
         -- Return if any players are still alive
@@ -727,16 +725,7 @@ function Battlefield:handleWipe(battlefield, players)
             end
         end
 
-        -- Party has wiped. Save and send time remaining before being booted.
-        if self.hasWipeGrace then
-            for _, player in pairs(players) do
-                player:messageSpecial(zones[player:getZoneID()].text.THE_PARTY_WILL_BE_REMOVED, 0, 0, 0, 3)
-            end
-
-            battlefield:setWipeTime(elapsed)
-        else
-            battlefield:setStatus(xi.battlefield.status.LOST)
-        end
+        self:onBattlefieldWipe(battlefield, players)
 
     -- Party has already wiped.
     else
@@ -751,6 +740,19 @@ function Battlefield:handleWipe(battlefield, players)
                 end
             end
         end
+    end
+end
+
+function Battlefield:onBattlefieldWipe(battlefield, players)
+    -- Party has wiped. Save and send time remaining before being booted.
+    if self.hasWipeGrace then
+        for _, player in pairs(players) do
+            player:messageSpecial(zones[player:getZoneID()].text.THE_PARTY_WILL_BE_REMOVED, 0, 0, 0, 3)
+        end
+
+        battlefield:setWipeTime(battlefield:getTimeInside())
+    else
+        battlefield:setStatus(xi.battlefield.status.LOST)
     end
 end
 
