@@ -81,6 +81,7 @@ xi.battlefield.id =
     SW_APOLLYON = 1291,
     NE_APOLLYON = 1292,
     SE_APOLLYON = 1293,
+    CS_APOLLYON = 1294,
 }
 
 xi.battlefield.itemUses =
@@ -422,7 +423,7 @@ function Battlefield.onEntryTrigger(player, npc)
 end
 
 -- Static function to lookup the correct battlefield to handle this event update
-function Battlefield.redirectEventUpdate(player, csid, option, extras)
+function Battlefield.redirectEventUpdate(player, csid, option, npc)
     if option == 0 or option == 255 then
         return false
     end
@@ -431,13 +432,13 @@ function Battlefield.redirectEventUpdate(player, csid, option, extras)
     local value = bit.rshift(option, 4)
     for _, content in pairs(contents) do
         if value == content.index then
-            content:onEntryEventUpdate(player, csid, option, extras)
+            content:onEntryEventUpdate(player, csid, option, npc)
             break
         end
     end
 end
 
-function Battlefield:onEntryEventUpdate(player, csid, option, extras)
+function Battlefield:onEntryEventUpdate(player, csid, option, npc)
     local clearTime = 1
     local name      = "Meme"
     local partySize = 1
@@ -906,7 +907,7 @@ function BattlefieldMission:checkRequirements(player, npc, registrant, trade)
     local missionArea = self.missionArea or player:getNation()
     local current = player:getCurrentMission(missionArea)
     local missionStatusArea = self.missionStatusArea or player:getNation()
-    local status = player:getMissionStatus(missionStatusArea)
+    local status = player:getMissionStatus(missionStatusArea, self.missionStatus)
     return current == self.mission and status == self.requiredMissionStatus
 end
 
