@@ -257,8 +257,25 @@ function Battlefield:checkRequirements(player, npc, registrant, trade)
     end
 
     for _, keyItem in ipairs(self.requiredKeyItems) do
-        if not player:hasKeyItem(keyItem) then
-            return false
+        if type(keyItem) == 'table' then
+
+            -- Only need one from the group
+            local hasAny = false
+            for _, subitem in ipairs(keyItem) do
+                if player:hasKeyItem(subitem) then
+                    hasAny = true
+                    break
+                end
+            end
+
+            if not hasAny then
+                return false
+            end
+
+        else
+            if not player:hasKeyItem(keyItem) then
+                return false
+            end
         end
     end
 
@@ -608,11 +625,26 @@ end
 function Battlefield:onBattlefieldEnter(player, battlefield)
     local initiatorId, _ = battlefield:getInitiator()
     if #self.requiredKeyItems > 0 and ((not self.requiredKeyItems.onlyInitiator) or player:getID() == initiatorId) then
+
+        local items = {}
         for _, item in ipairs(self.requiredKeyItems) do
-            player:delKeyItem(item)
+
+            -- If this item is a table then that means we only need one of them so delete the first one we find
+            if type(item) == 'table' then
+                for _, subitem in ipairs(item) do
+                    if player:hasKeyItem(subitem) then
+                        player:delKeyItem(subitem)
+                        table.insert(items, subitem)
+                    end
+                end
+            else
+                player:delKeyItem(item)
+                table.insert(items, item)
+            end
         end
+
         if self.requiredKeyItems.message ~= 0 then
-            player:messageSpecial(self.requiredKeyItems.message, unpack(self.requiredKeyItems))
+            player:messageSpecial(self.requiredKeyItems.message, unpack(items))
         end
     end
 
