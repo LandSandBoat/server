@@ -71,6 +71,12 @@ void CPetController::DoRoamTick(time_point tick)
         return;
     }
 
+    // if pet can't follow then don't
+    if (!PPet->PAI->CanFollowPath())
+    {
+        return;
+    }
+
     // automaton, wyvern
     if (PPet->getPetType() == PET_TYPE::WYVERN || PPet->getPetType() == PET_TYPE::AUTOMATON)
     {
