@@ -7,7 +7,8 @@ local spellObject = {}
 
 local jobs1 = {xi.job.WHM, xi.job.RDM, xi.job.SCH, xi.job.PLD}
  
-spellObject.onMagicCastingCheck = function(caster, target, spell)
+
+spell_object.onMagicCastingCheck = function(caster, target, spell)
     return xi.trust.canCast(caster, spell)
 end
 
@@ -29,7 +30,7 @@ spellObject.onMobSpawn = function(mob)
     local synergy = master:getLocalVar("mumorSynergy")
 
     --DYNAMIC MODIFIER THAT CHECKS VARIABLE ON TICK TO APPLY
-    mob:addListener("COMBAT_TICK", "UKA_TOTLIHN_CTICK", function(mob) 
+    mob:addListener("COMBAT_TICK", "UKA_TOTLIHN_CTICK", function(mob)
         if synergy >= 2 then
             mob:setMod(xi.mod.WALTZ_POTENTCY, 10)
         end
@@ -40,7 +41,7 @@ spellObject.onMobSpawn = function(mob)
         master:setLocalVar("mumorSynergy", synergy - 1)
     end)
 
-    mob:addListener("DESPAWN", "UKA_TOTLIHN_DESPAWN", function(mob) 
+    mob:addListener("DESPAWN", "UKA_TOTLIHN_DESPAWN", function(mob)
         master:setLocalVar("mumorSynergy", synergy - 1)
     end)
 
@@ -56,7 +57,7 @@ spellObject.onMobSpawn = function(mob)
     mob:addSimpleGambit(ai.t.TARGET, ai.c.READYING_MS, 0, ai.r.JA, ai.s.SPECIFIC, xi.ja.VIOLENT_FLOURISH)
     mob:addSimpleGambit(ai.t.TARGET, ai.c.READYING_JA, 0, ai.r.JA, ai.s.SPECIFIC, xi.ja.VIOLENT_FLOURISH)
     mob:addSimpleGambit(ai.t.TARGET, ai.c.CASTING_MA, 0, ai.r.JA, ai.s.SPECIFIC, xi.ja.VIOLENT_FLOURISH)
- 
+
     --ecosystem check to swap to Haste samba if the target is undead.
     mob:addSimpleGambit(ai.t.TARGET, ai.c.IS_ECOSYSTEM, xi.ecosystem.UNDEAD, ai.r.JA, ai.s.SPECIFIC, xi.ja.HASTE_SAMBA)
 
