@@ -27,7 +27,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.WEIGHT)
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.WEIGHT, { chance = 50, })
 end
 
 entity.onMobFight = function(mob, target)
