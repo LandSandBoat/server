@@ -29,8 +29,8 @@ spellObject.onMobSpawn = function(mob)
     local synergy = master:getLocalVar("mumorSynergy")
     
     --DYNAMIC MODIFIER THAT CHECKS VARIABLE ON TICK TO APPLY
-    mob:addListener("COMBAT_TICK", "MUMOR_CTICK", function(mobArg, target, wsid, tp, action) -- synergy 
-        if synergy > 1 then
+    mob:addListener("COMBAT_TICK", "MUMOR_CTICK", function(mob) -- synergy 
+        if synergy >= 2 then
             mob:setMod(xi.mod.SAMBA_DURATION, 10)
         end
     end)	
