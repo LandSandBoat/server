@@ -141,3 +141,22 @@ uint8 CItemFurnishing::getOrder()
 {
     return ref<uint8>(m_extra, 0x0A);
 }
+
+void CItemFurnishing::setMannequinRace(uint8 race)
+{
+    ref<uint8>(m_extra, 0x12) = race;
+}
+
+uint8 CItemFurnishing::getMannequinRace()
+{
+    return ref<uint8>(m_extra, 0x12);
+}
+void CItemFurnishing::setMannequinPose(uint8 pose)
+{
+    ref<uint8>(m_extra, 0x13) = pose;
+}
+
+uint8 CItemFurnishing::getMannequinPose()
+{
+    return ref<uint8>(m_extra, 0x13);
+}

@@ -1951,7 +1951,10 @@ void CStatusEffectContainer::TickRegen(time_point tick)
             m_POwner->addMP(refresh);
         }
 
-        m_POwner->addTP(regain);
+        if (m_POwner->objtype != TYPE_MOB || m_POwner->PAI->IsEngaged())
+        {
+            m_POwner->addTP(regain);
+        }
 
         if (m_POwner->PPet && ((CPetEntity*)(m_POwner->PPet))->getPetType() == PET_TYPE::AUTOMATON)
         {

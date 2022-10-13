@@ -57,12 +57,16 @@ public:
     bool          IsEntered(CCharEntity* PChar);
     bool          ReachedMaxCapacity(int battlefieldId = -1) const;
     uint8         MaxBattlefieldAreas() const;
+    void          addOrphanedPlayer(CCharEntity* PChar);
 
 private:
     CZone*                       m_PZone;
     uint8                        m_MaxBattlefields; // usually 3 except dynamis, einherjar, besieged, ...
     std::map<int, CBattlefield*> m_Battlefields;    // area
     std::map<uint32, uint8>      m_ReservedAreas;   // <charid, area>
+
+    // Players that need to be kicked from whatever battlefield they were in
+    std::vector<std::pair<uint32, time_point>> m_orphanedPlayers;
 };
 
 #endif

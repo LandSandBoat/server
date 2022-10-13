@@ -329,7 +329,6 @@ bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOB
             else if (!IsRegistered(PChar))
             {
                 m_RegisteredPlayers.emplace(PEntity->id);
-                luautils::OnBattlefieldRegister(PChar, this);
                 return true;
             }
         }
@@ -521,11 +520,6 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
 
         m_EnteredPlayers.erase(m_EnteredPlayers.find(PEntity->id));
 
-        if (leavecode != BATTLEFIELD_LEAVE_CODE_WARPDC)
-        {
-            m_RegisteredPlayers.erase(m_RegisteredPlayers.find(PEntity->id));
-        }
-
         if (leavecode != 255)
         {
             // todo: probably shouldnt hardcode this
@@ -607,10 +601,9 @@ bool CBattlefield::RemoveEntity(CBaseEntity* PEntity, uint8 leavecode)
     }
 
     // Remove enmity from valid battle entities
-    if (auto* PBattleEntity = dynamic_cast<CBattleEntity*>(PEntity))
+    auto* PBattleEntity = dynamic_cast<CBattleEntity*>(PEntity);
+    if (PBattleEntity)
     {
-        PBattleEntity->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
-        PBattleEntity->StatusEffectContainer->DelStatusEffect(EFFECT_LEVEL_RESTRICTION);
         ClearEnmityForEntity(PBattleEntity);
     }
 
@@ -725,6 +718,8 @@ bool CBattlefield::Cleanup(time_point time, bool force)
         if (PChar)
         {
             RemoveEntity(PChar, leavecode);
+            PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
+            PChar->StatusEffectContainer->DelStatusEffect(EFFECT_LEVEL_RESTRICTION);
         }
     }
 

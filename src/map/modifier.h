@@ -748,10 +748,11 @@ enum class Mod
     LIGHT_NULL = 473, //
     DARK_NULL  = 474, //
 
-    MAGIC_ABSORB     = 475, // Occasionally absorbs magic damage taken, in percents
-    MAGIC_NULL       = 476, // Occasionally annuls magic damage taken, in percents
-    PHYS_ABSORB      = 512, // Occasionally absorbs physical damage taken, in percents
-    ABSORB_DMG_TO_MP = 516, // Unlike PLD gear mod, works on all damage types (Ethereal Earring)
+    MAGIC_ABSORB       = 475, // Occasionally absorbs magic damage taken, in percents
+    MAGIC_NULL         = 476, // Occasionally annuls magic damage taken, in percents
+    NULL_RANGED_DAMAGE = 239, // Occasionally annuls ranged damage taken, in percents
+    PHYS_ABSORB        = 512, // Occasionally absorbs physical damage taken, in percents
+    ABSORB_DMG_TO_MP   = 516, // Unlike PLD gear mod, works on all damage types (Ethereal Earring)
 
     ITEM_ADDEFFECT_TYPE     = 431, // see procType table in scripts\globals\additional_effects.lua
     ITEM_SUBEFFECT          = 499, // Animation ID of Spikes and Additional Effects
@@ -922,7 +923,6 @@ enum class Mod
     // 138 to 143
     // 156 to 159
     // 192 to 223
-    // 239
     // 261 to 286
     // 888
     // 936

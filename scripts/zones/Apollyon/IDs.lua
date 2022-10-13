@@ -22,18 +22,16 @@ zones[xi.zone.APOLLYON] =
         PARTY_MEMBERS_ARE_ENGAGED     = 7066, -- You have clearance to enter Limbus, but cannot enter while you or a party member is engaged in battle.
         HUM                           = 7078, -- You hear a faint hum.
         NO_BATTLEFIELD_ENTRY          = 7083, -- There are several six-sided indentations and a thin slot in the center of the circular dais here.
-        NO_KEY                        = 7083, -- There are several six-sided indentations and a thin slot in the center of the circular dais here.
-        THE_PARTY_WILL_BE_REMOVED     = 7366, -- All party members in Limbus have fallen in battle. Exiting in <number> [minute/minutes].
-        MEMBERS_OF_YOUR_PARTY         = 7332, -- Currently, <amount> members of your party (including yourself) have clearance to enter Limbus.
-        MEMBERS_OF_YOUR_ALLIANCE      = 7333, -- Currently, <amount> members of your alliance (including yourself) have clearance to enter Limbus.
-        TIME_LIMIT_FOR_THIS_BATTLE_IS = 7335, -- You may stay in Limbus for <amount> minutes.
+        MEMBERS_OF_YOUR_PARTY         = 7332, -- Currently, <number> party members in this area have clearance to enter Limbus.
+        TIME_LIMIT_FOR_THIS_BATTLE_IS = 7335, -- ou may stay in Limbus for <number> [minute/minutes].
         PARTY_MEMBERS_HAVE_FALLEN     = 7358, -- All party members in Limbus have fallen in battle. Exiting now.
-        YOU_INSERT_THE_CARD_POLISHED  = 7371, -- You insert the <card> polished with <cosmo cleanse> into the slot!
+        THE_PARTY_WILL_BE_REMOVED     = 7366, -- All party members in Limbus have fallen in battle. Exiting in <number> [minute/minutes].
+        YOU_INSERT_THE_CARD_POLISHED  = 7371, -- You insert the <keyitem> polished with <keyitem> into the slot!
         CHIP_TRADE                    = 7372, -- The light in the <item> has grown dim.
         TIME_EXTENDED                 = 7374, -- our time in Limbus has been extended <number> [minute/minutes].
         TIME_LEFT                     = 7375, -- ou have <number> [minute/minutes] left in Limbus.
         CONQUEST_BASE                 = 7377, -- Tallying conquest results...
-        ENTERING_THE_BATTLEFIELD_FOR  = 7548, -- Entering the battlefield for <menu id>
+        ENTERING_THE_BATTLEFIELD_FOR  = 7548, -- You have entered [SW Apollyon/NW Apollyon/SE Apollyon/NE Apollyon/Central Apollyon/CS Apollyon/CS Apollyon/Central Apollyon].
         GATE_OPEN                     = 7556, -- vortex materializes...
     },
     mob =
@@ -91,13 +89,6 @@ zones[xi.zone.APOLLYON] =
             16933234, -- ne 2>3
             16933233, -- ne 3>4
             16933237, -- ne 4>5
-        },
-        APOLLYON_SW_CRATE =
-        {
-            16932865,
-            16932878,
-            16932899,
-            16932909,
         },
         APOLLYON_NW_CRATE =
         {
@@ -174,6 +165,113 @@ zones[xi.zone.APOLLYON] =
         APOLLYON_CS_CRATE = 16933126,
         APOLLYON_CENTRAL_CRATE = 16933123,
     },
+
+    SW_APOLLYON =
+    {
+        mob =
+        {
+            JIDRA_BOSS = 16932881,
+            AIR_ELEMENTAL =
+            {
+                16932910,
+                16932918,
+                16932926,
+            },
+
+            DARK_ELEMENTAL =
+            {
+                16932911,
+                16932919,
+                16932927,
+            },
+
+            EARTH_ELEMENTAL =
+            {
+                16932912,
+                16932920,
+                16932928,
+            },
+
+            FIRE_ELEMENTAL =
+            {
+                16932913,
+                16932921,
+                16932929,
+            },
+
+            ICE_ELEMENTAL =
+            {
+                16932914,
+                16932922,
+                16932930,
+            },
+
+            LIGHT_ELEMENTAL =
+            {
+                16932915,
+                16932923,
+                16932931,
+            },
+
+            WATER_ELEMENTAL =
+            {
+                16932916,
+                16932924,
+                16932932,
+            },
+
+            THUNDER_ELEMENTAL =
+            {
+                16932917,
+                16932925,
+                16932933,
+            },
+        },
+
+        npc =
+        {
+            ITEM_CRATES =
+            {
+                16932865,
+                16932878,
+                16932896,
+            },
+
+            RECOVER_CRATES =
+            {
+                16932867,
+                16932880,
+                16932898,
+            },
+
+            TIME_CRATES =
+            {
+                16932866,
+                16932879,
+                16932897,
+            },
+
+            LOOT_CRATE = 16932909,
+        },
+
+        TIME_EXTENSIONS =
+        {
+            [16932866] = 10,
+            [16932879] = 10,
+            [16932897] = 10,
+        },
+
+        LINKED_CRATES =
+        {
+            [16932865] = { 16932866, 16932867 },
+            [16932866] = { 16932865, 16932867 },
+            [16932867] = { 16932865, 16932866 },
+            [16932878] = { 16932879, 16932880 },
+            [16932879] = { 16932878, 16932880 },
+            [16932880] = { 16932878, 16932879 },
+        },
+    },
+
     SE_APOLLYON =
     {
         mob =

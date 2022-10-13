@@ -1,14 +1,22 @@
 -----------------------------------
--- Area: Apollyon SW, Floor 1
---  Mob: Fir Bholg
+-- Area: Apollyon SW
+--  NPC: Fir Bholg (THF)
 -----------------------------------
-require("scripts/zones/Apollyon/bcnms/sw_apollyon_helper")
 mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
+
 local entity = {}
 
+entity.onMobSpawn = function(mob)
+    xi.mix.jobSpecial.config(mob, {
+        specials =
+        {
+            { id = xi.jsa.PERFECT_DODGE, hpp = math.random(50, 60) },
+        },
+    })
+end
+
 entity.onMobDeath = function(mob, player, optParams)
-    xi.apollyon_sw.handleMobDeathFloorOne(mob, player, optParams)
 end
 
 return entity

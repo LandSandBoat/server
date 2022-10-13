@@ -468,20 +468,41 @@ void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleArenas)
             setup(this, mobs);
         }
 
-        bool superlink = groupData.get_or("superlink", false);
-        if (superlink)
+        bool isParty = groupData.get_or("isParty", false);
+        if (isParty)
         {
-            ++superlinkId;
-
+            CParty* party = nullptr;
             for (CBaseEntity* entity : groupEntities)
             {
                 auto PMob = dynamic_cast<CMobEntity*>(entity);
                 XI_DEBUG_BREAK_IF(PMob == nullptr);
 
-                if (superlink)
+                // Leave existing party first before joining this new one
+                if (PMob->PParty != nullptr)
                 {
-                    PMob->setMobMod(MOBMOD_SUPERLINK, superlinkId);
+                    PMob->PParty->RemoveMember(PMob);
                 }
+
+                if (party == nullptr)
+                {
+                    party = new CParty(PMob);
+                }
+                else
+                {
+                    party->AddMember(PMob);
+                }
+            }
+        }
+
+        bool superlink = groupData.get_or("superlink", false);
+        if (superlink)
+        {
+            ++superlinkId;
+            for (CBaseEntity* entity : groupEntities)
+            {
+                auto PMob = dynamic_cast<CMobEntity*>(entity);
+                XI_DEBUG_BREAK_IF(PMob == nullptr);
+                PMob->setMobMod(MOBMOD_SUPERLINK, superlinkId);
             }
         }
 
