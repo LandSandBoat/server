@@ -5,8 +5,13 @@ require("scripts/globals/trust")
 -----------------------------------
 local spellObject = {}
 
-local jobs1 = {xi.job.WHM, xi.job.RDM, xi.job.SCH, xi.job.PLD}
- 
+local jobs1 = 
+{
+    xi.job.WHM, 
+    xi.job.RDM, 
+    xi.job.SCH, 
+    xi.job.PLD,
+}
 
 spell_object.onMagicCastingCheck = function(caster, target, spell)
     return xi.trust.canCast(caster, spell)
