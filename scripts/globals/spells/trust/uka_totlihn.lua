@@ -37,18 +37,18 @@ spellObject.onMobSpawn = function(mob)
     local synergy = master:getLocalVar("mumorSynergy")
 
     -- Dynamic modifier that checks variable on tick to apply
-    mob:addListener("COMBAT_TICK", "UKA_TOTLIHN_CTICK", function(mob)
+    mob:addListener("COMBAT_TICK", "UKA_TOTLIHN_CTICK", function(mobArg)
         if synergy >= 2 then
             mob:setMod(xi.mod.WALTZ_POTENTCY, 10)
         end
     end)
 
     -- Listeners to subtract synergy variable if one of the two are killed or released
-    mob:addListener("DEATH", "UKA_TOTLIHN_DEATH", function(mob, killer)
+    mob:addListener("DEATH", "UKA_TOTLIHN_DEATH", function(mobArg, killer)
         master:setLocalVar("mumorSynergy", synergy - 1)
     end)
 
-    mob:addListener("DESPAWN", "UKA_TOTLIHN_DESPAWN", function(mob)
+    mob:addListener("DESPAWN", "UKA_TOTLIHN_DESPAWN", function(mobArg)
         master:setLocalVar("mumorSynergy", synergy - 1)
     end)
 
