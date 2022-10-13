@@ -251,8 +251,12 @@ function Battlefield:register()
     return self
 end
 
+function Battlefield:isValidEntry(player, npc)
+    return self.entryNpc == npc:getName()
+end
+
 function Battlefield:checkRequirements(player, npc, registrant, trade)
-    if self.entryNpc ~= npc:getName() then
+    if not self:isValidEntry(player, npc) then
         return false
     end
 
