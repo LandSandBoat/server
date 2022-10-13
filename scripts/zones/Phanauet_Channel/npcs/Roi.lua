@@ -1,21 +1,16 @@
 -----------------------------------
 -- Area: Phanauet Channel
---  NPC: Laiteconce
--- Type: Barge Time NPC to South or Central Landing
--- !pos 4.066 -4.5 -10.450 1
------------------------------------
-require("scripts/globals/barge")
+--  NPC: Roi
+-- Type: Standard NPC
+-- !pos -6.04 -2.75 13.833 1
+-- Rotation 193
 -----------------------------------
 local entity = {}
-
-local timekeeperLocation = xi.barge.location.BARGE
-local timekeeperEventId = 2
 
 entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    xi.barge.timekeeperOnTrigger(player, timekeeperLocation, timekeeperEventId)
 end
 
 entity.onEventUpdate = function(player, csid, option)

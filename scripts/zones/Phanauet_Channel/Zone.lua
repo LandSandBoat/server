@@ -3,6 +3,8 @@
 -----------------------------------
 local ID = require('scripts/zones/Phanauet_Channel/IDs')
 require('scripts/globals/conquest')
+require("scripts/globals/zone")
+require("scripts/globals/barge")
 -----------------------------------
 local zone_object = {}
 
@@ -24,6 +26,10 @@ zone_object.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
+zone_object.onTransportEvent = function(player, transport)
+    player:startEvent(100)
+end
+
 zone_object.onRegionEnter = function(player, region)
 end
 
@@ -31,6 +37,9 @@ zone_object.onEventUpdate = function(player, csid, option)
 end
 
 zone_object.onEventFinish = function(player, csid, option)
+    if csid == 100 then
+        player:setPos(0, 0, 0, 0, xi.zone.CARPENTERS_LANDING)
+    end
 end
 
 return zone_object
