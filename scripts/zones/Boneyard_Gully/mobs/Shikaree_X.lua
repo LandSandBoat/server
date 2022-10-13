@@ -27,15 +27,6 @@ entity.onMobSpawn = function(mob)
             attacker:setTP(3000)
         end
     end)
-
-    mob:addListener("TAKE_DAMAGE", "SHIKAREE_X_TAKE_DAMAGE", function(mobArg, amount, attacker)
-        if amount > mobArg:getHP() then
-            mobArg:messageText(mobArg, ID.text.AT_MY_BEST)
-            -- Reset controls so thatremaining shiks don't get locked from weaponskilling
-            GetMobByID(mobArg:getID()-1):setLocalVar("control", 0)
-            GetMobByID(mobArg:getID()-2):setLocalVar("control", 0)
-        end
-    end)
 end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
@@ -119,6 +110,10 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
+    mob:messageText(mob, ID.text.AT_MY_BEST)
+     -- Reset controls so thatremaining shiks don't get locked from weaponskilling
+     GetMobByID(mob:getID()-1):setLocalVar("control", 0)
+     GetMobByID(mob:getID()-2):setLocalVar("control", 0)
 end
 
 return entity
