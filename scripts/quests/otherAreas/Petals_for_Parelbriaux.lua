@@ -111,10 +111,10 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         quest:getVar(player, 'Prog') == 0 and
-                        npcUtil.popFromQM(player, npc, ID.mob.BAUMESEL, { claim = true, hide = 0 }) and
-                        player:getWeather() == xi.weather.FOG
+                        player:getWeather() == xi.weather.FOG and
+                        npcUtil.popFromQM(player, npc, ID.mob.BAUMESEL, { claim = true, hide = 0 })
                     then
-                        return quest:message(ID.text.SPINE_CHILLING_PRESENCE)
+                        return quest:messageSpecial(zones[player:getZoneID()].text.SPINE_CHILLING_PRESENCE)
 
                     elseif quest:getVar(player, 'Prog') == 1 and not player:hasKeyItem(xi.ki.PARTICULARLY_POIGNANT_PETAL) then
                         return quest:progressEvent(115)
