@@ -27,13 +27,6 @@ entity.onMobSpawn = function(mob)
             attacker:setTP(3000)
         end
     end)
-
-    mob:addListener("DEATH", "SHIKAREE_Y_DEATH", function(mobArg)
-        mobArg:messageText(mob, ID.text.I_LOST)
-        -- Reset controls so that remaining shiks don't get locked from weaponskilling
-        GetMobByID(mobArg:getID()+1):setLocalVar("control", 0)
-        GetMobByID(mobArg:getID()-1):setLocalVar("control", 0)
-    end)
 end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
@@ -121,6 +114,10 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
+    mob:messageText(mob, ID.text.I_LOST)
+    -- Reset controls so that remaining shiks don't get locked from weaponskilling
+    GetMobByID(mob:getID()+1):setLocalVar("control", 0)
+    GetMobByID(mob:getID()-1):setLocalVar("control", 0)
 end
 
 return entity

@@ -15,21 +15,16 @@ entity.onMobSpawn = function(mob)
         local race = mobArg:getBattlefield():getPlayers()[1]:getRace()
         if race == xi.race.GALKA then
             DespawnMob(mobArg:getID())
-        else
-
-        end
-    end)
-
-    mob:addListener("DEATH", "GALKAN_AUTOMATON_DEATH", function(automaton, killer)
-        if GetMobByID(automaton:getID()-4):isAlive() then
-            GetMobByID(automaton:getID()-4):updateEnmity(killer)
-        else
-            GetMobByID(automaton:getID()-3):updateEnmity(killer)
         end
     end)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
+    if GetMobByID(mob:getID()-4):isAlive() then
+        GetMobByID(mob:getID()-4):updateEnmity(player)
+    else
+        GetMobByID(mob:getID()-3):updateEnmity(player)
+    end
 end
 
 return entity

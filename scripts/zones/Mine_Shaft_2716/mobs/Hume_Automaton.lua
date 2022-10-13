@@ -24,17 +24,14 @@ entity.onMobSpawn = function(mob)
             mobArg:setMod(xi.mod.UDMGMAGIC, 7500)
         end
     end)
-
-    mob:addListener("DEATH", "HUME_AUTOMATON_DEATH", function(automaton, killer)
-        if GetMobByID(automaton:getID()+1):isAlive() then
-            GetMobByID(automaton:getID()+1):updateEnmity(killer)
-        else
-            GetMobByID(automaton:getID()+2):updateEnmity(killer)
-        end
-    end)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
+    if GetMobByID(mob:getID()+1):isAlive() then
+        GetMobByID(mob:getID()+1):updateEnmity(player)
+    else
+        GetMobByID(mob:getID()+2):updateEnmity(player)
+    end
 end
 
 return entity

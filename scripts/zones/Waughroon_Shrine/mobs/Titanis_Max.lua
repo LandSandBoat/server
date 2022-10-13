@@ -9,15 +9,13 @@ require("scripts/globals/status")
 local entity = {}
 
 entity.onMobSpawn = function(mob)
-    mob:addListener("DEATH", "TITANIS_DEATH", function(mobArg)
-        local id = mob:getID()
-        for i = 1, 3 do
-            GetMobByID(id + i):addMod(xi.mod.DELAY, 1000)
-        end
-    end)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
+    local id = mob:getID()
+    for i = 1, 3 do
+        GetMobByID(id + i):addMod(xi.mod.DELAY, 1000)
+    end
 end
 
 return entity
