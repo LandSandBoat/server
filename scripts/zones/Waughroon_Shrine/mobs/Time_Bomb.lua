@@ -51,10 +51,8 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onMobDeath = function(mob, player, isKiller)
-    if isKiller then
-        if player:getBattlefield():getLocalVar("control") == 0 then
-            player:getBattlefield():getLocalVar("lootSpawned", 0)
-        end
+    if player:getBattlefield():getLocalVar("control") == 0 then
+        player:getBattlefield():setLocalVar("lootSpawned", 0)
     end
 end
 

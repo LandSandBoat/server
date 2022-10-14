@@ -13,7 +13,7 @@ entity.onMobEngaged = function(mob)
     mob:getBattlefield():setLocalVar("undeadControl", 1)
 end
 
-entity.onMobWeaponSkillPrepare = function(mob, target, skill)
+entity.onMobWeaponSkillPrepare = function(mob, target)
     for i = 1, 3 do
         local undead = GetMobByID(mob:getID()+i)
         local ability = math.random(478, 479)
