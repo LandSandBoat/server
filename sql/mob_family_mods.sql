@@ -38,7 +38,7 @@ INSERT INTO `mob_family_mods` VALUES (2,63,20,0); -- DEFP: 20
 
 -- Ahriman
 INSERT INTO `mob_family_mods` VALUES (4,7,60,1);   -- GA_CHANCE: 60
-INSERT INTO `mob_family_mods` VALUES (4,29,20,0);  -- MDEF: 20
+INSERT INTO `mob_family_mods` VALUES (4,29,20,0);  -- MDEF: 25
 INSERT INTO `mob_family_mods` VALUES (4,36,40,1);  -- ROAM_COOL: 40
 INSERT INTO `mob_family_mods` VALUES (4,51,5,1);   -- ROAM_TURNS: 5
 INSERT INTO `mob_family_mods` VALUES (4,56,-1,1);  -- HP_STANDBACK: -1
@@ -93,10 +93,11 @@ INSERT INTO `mob_family_mods` VALUES (23,3,50,1); -- MP_BASE: 50
 INSERT INTO `mob_family_mods` VALUES (24,3,50,1); -- MP_BASE: 50
 
 -- Antlion
-INSERT INTO `mob_family_mods` VALUES (26,36,50,1); -- ROAM_COOL: 50
-INSERT INTO `mob_family_mods` VALUES (26,51,2,1);  -- ROAM_TURNS: 2
-INSERT INTO `mob_family_mods` VALUES (26,52,30,1); -- ROAM_RATE: 30
-INSERT INTO `mob_family_mods` VALUES (26,63,20,0); -- DEFP: 20
+INSERT INTO `mob_family_mods` VALUES (26,36,50,1);  -- ROAM_COOL: 50
+INSERT INTO `mob_family_mods` VALUES (26,51,2,1);   -- ROAM_TURNS: 2
+INSERT INTO `mob_family_mods` VALUES (26,52,30,1);  -- ROAM_RATE: 30
+INSERT INTO `mob_family_mods` VALUES (26,63,20,0);  -- DEFP: 20
+INSERT INTO `mob_family_mods` VALUES (26,59,110,1); -- WEAPON_BONUS: 110
 
 -- Apkallu
 INSERT INTO `mob_family_mods` VALUES (27,10,14,1); -- SUBLINK: 14
@@ -184,14 +185,14 @@ INSERT INTO `mob_family_mods` VALUES (57,3,50,1);   -- MP_BASE: 50
 INSERT INTO `mob_family_mods` VALUES (57,36,50,1);  -- ROAM_COOL: 50
 INSERT INTO `mob_family_mods` VALUES (57,51,4,1);   -- ROAM_TURNS: 4
 INSERT INTO `mob_family_mods` VALUES (57,52,30,1);  -- ROAM_RATE: 30
-INSERT INTO `mob_family_mods` VALUES (57,59,125,1); -- WEAPON_BONUS: 125
+INSERT INTO `mob_family_mods` VALUES (57,59,110,1); -- WEAPON_BONUS: 110
 INSERT INTO `mob_family_mods` VALUES (57,63,20,0);  -- DEFP: 20
 
 -- Bugard
 INSERT INTO `mob_family_mods` VALUES (58,36,45,1);  -- ROAM_COOL: 45
 INSERT INTO `mob_family_mods` VALUES (58,51,3,1);   -- ROAM_TURNS: 3
 INSERT INTO `mob_family_mods` VALUES (58,52,30,1);  -- ROAM_RATE: 30
-INSERT INTO `mob_family_mods` VALUES (58,59,125,1); -- WEAPON_BONUS: 125
+INSERT INTO `mob_family_mods` VALUES (58,59,125,1); -- WEAPON_BONUS: 110
 INSERT INTO `mob_family_mods` VALUES (58,63,20,0);  -- DEFP: 20
 
 -- Bugbear
@@ -246,6 +247,7 @@ INSERT INTO `mob_family_mods` VALUES (74,51,2,1);    -- ROAM_TURNS: 2
 INSERT INTO `mob_family_mods` VALUES (74,52,30,1);   -- ROAM_RATE: 30
 INSERT INTO `mob_family_mods` VALUES (74,240,100,0); -- SLEEPRES: 100
 INSERT INTO `mob_family_mods` VALUES (74,389,-25,0); -- UDMGMAGIC: -25
+INSERT INTO `mob_family_mods` VALUES (74,63,20,0);   -- DEFP: 20
 
 -- Crab
 INSERT INTO `mob_family_mods` VALUES (75,36,15,1); -- ROAM_COOL: 15
@@ -463,7 +465,7 @@ INSERT INTO `mob_family_mods` VALUES (135,52,30,1); -- ROAM_RATE: 30
 INSERT INTO `mob_family_mods` VALUES (136,31,5,1);   -- ROAM_DISTANCE: 5
 INSERT INTO `mob_family_mods` VALUES (136,36,60,1);  -- ROAM_COOL: 60
 INSERT INTO `mob_family_mods` VALUES (136,52,30,1);  -- ROAM_RATE: 30
-INSERT INTO `mob_family_mods` VALUES (136,59,145,1); -- WEAPON_BONUS: 145
+INSERT INTO `mob_family_mods` VALUES (136,59,110,1); -- WEAPON_BONUS: 110
 
 -- Hecteyes
 INSERT INTO `mob_family_mods` VALUES (139,36,55,1);   -- ROAM_COOL: 55
@@ -604,6 +606,7 @@ INSERT INTO `mob_family_mods` VALUES (186,52,30,1); -- ROAM_RATE: 30
 INSERT INTO `mob_family_mods` VALUES (188,36,35,1); -- ROAM_COOL: 35
 INSERT INTO `mob_family_mods` VALUES (188,51,3,1);  -- ROAM_TURNS: 3
 INSERT INTO `mob_family_mods` VALUES (188,52,20,1); -- ROAM_RATE: 20
+INSERT INTO `mob_family_mods` VALUES (188,68,20,1); -- EVA: 20
 
 -- Orc
 INSERT INTO `mob_family_mods` VALUES (189,10,2,1); -- SUBLINK: 2
@@ -661,7 +664,7 @@ INSERT INTO `mob_family_mods` VALUES (207,3,50,1); -- MP_BASE: 50
 -- Ram
 INSERT INTO `mob_family_mods` VALUES (208,36,60,1);  -- ROAM_COOL: 60
 INSERT INTO `mob_family_mods` VALUES (208,52,30,1);  -- ROAM_RATE: 30
-INSERT INTO `mob_family_mods` VALUES (208,59,120,1); -- WEAPON_BONUS: 120
+INSERT INTO `mob_family_mods` VALUES (208,59,120,1); -- WEAPON_BONUS: 110
 INSERT INTO `mob_family_mods` VALUES (208,63,20,0);  -- DEFP: 20
 
 -- Raptor
@@ -678,6 +681,7 @@ INSERT INTO `mob_family_mods` VALUES (212,52,20,1); -- ROAM_RATE: 20
 -- Sahagin
 INSERT INTO `mob_family_mods` VALUES (213,10,8,1);   -- SUBLINK: 8
 INSERT INTO `mob_family_mods` VALUES (213,20,128,0); -- WATER_RES: 128
+INSERT INTO `mob_family_mods` VALUES (213,23,-20,0); -- ATT: -20
 
 -- Sapling
 INSERT INTO `mob_family_mods` VALUES (216,10,4,1);  -- SUBLINK: 4
@@ -700,6 +704,8 @@ INSERT INTO `mob_family_mods` VALUES (221,36,50,1);   -- ROAM_COOL: 50
 INSERT INTO `mob_family_mods` VALUES (221,51,2,1);    -- ROAM_TURNS: 2
 INSERT INTO `mob_family_mods` VALUES (221,52,30,1);   -- ROAM_RATE: 30
 INSERT INTO `mob_family_mods` VALUES (221,240,100,0); -- SLEEPRES: 100
+INSERT INTO `mob_family_mods` VALUES (221,242,20,0);  -- PARALYZERES: 20
+
 
 -- Shadow
 INSERT INTO `mob_family_mods` VALUES (222,36,50,1);   -- ROAM_COOL: 50
@@ -712,6 +718,8 @@ INSERT INTO `mob_family_mods` VALUES (223,36,50,1);   -- ROAM_COOL: 50
 INSERT INTO `mob_family_mods` VALUES (223,51,2,1);    -- ROAM_TURNS: 2
 INSERT INTO `mob_family_mods` VALUES (223,52,30,1);   -- ROAM_RATE: 30
 INSERT INTO `mob_family_mods` VALUES (223,240,100,0); -- SLEEPRES: 100
+INSERT INTO `mob_family_mods` VALUES (223,242,20,0);  -- PARALYZERES: 20
+
 
 -- Sheep
 INSERT INTO `mob_family_mods` VALUES (226,31,15,1); -- ROAM_DISTANCE: 15
@@ -734,6 +742,7 @@ INSERT INTO `mob_family_mods` VALUES (232,52,20,1); -- ROAM_RATE: 20
 INSERT INTO `mob_family_mods` VALUES (233,10,11,1); -- SUBLINK: 11
 INSERT INTO `mob_family_mods` VALUES (233,36,50,1); -- ROAM_COOL: 50
 INSERT INTO `mob_family_mods` VALUES (233,51,3,1);  -- ROAM_TURNS: 3
+INSERT INTO `mob_family_mods` VALUES (233,63,20,0); -- DEFP: 20%
 
 -- Spheroid
 INSERT INTO `mob_family_mods` VALUES (234,37,1,1); -- ALWAYS_AGGRO: 1
@@ -746,7 +755,8 @@ INSERT INTO `mob_family_mods` VALUES (240,10,1,1);   -- SUBLINK: 1
 INSERT INTO `mob_family_mods` VALUES (240,36,40,1);  -- ROAM_COOL: 40
 INSERT INTO `mob_family_mods` VALUES (240,51,3,1);   -- ROAM_TURNS: 3
 INSERT INTO `mob_family_mods` VALUES (240,52,30,1);  -- ROAM_RATE: 30
-INSERT INTO `mob_family_mods` VALUES (240,59,120,1); -- WEAPON_BONUS: 120
+INSERT INTO `mob_family_mods` VALUES (240,63,-20,0); -- DEFP: -20%
+INSERT INTO `mob_family_mods` VALUES (240,68,-10,0); -- EVA: -10
 
 -- Tiger
 INSERT INTO `mob_family_mods` VALUES (242,31,15,1);  -- ROAM_DISTANCE: 15
@@ -784,20 +794,26 @@ INSERT INTO `mob_family_mods` VALUES (252,51,2,1);  -- ROAM_TURNS: 2
 INSERT INTO `mob_family_mods` VALUES (252,52,30,1); -- ROAM_RATE: 30
 
 -- Wamoura
-INSERT INTO `mob_family_mods` VALUES (253,3,50,1); -- MP_BASE: 50
-INSERT INTO `mob_family_mods` VALUES (253,10,6,1); -- SUBLINK: 6
+INSERT INTO `mob_family_mods` VALUES (253,3,50,1);  -- MP_BASE: 50
+INSERT INTO `mob_family_mods` VALUES (253,10,6,1);  -- SUBLINK: 6
+INSERT INTO `mob_family_mods` VALUES (253,63,12,0); -- DEFP: 12
+
 
 -- Wamouracampa
 INSERT INTO `mob_family_mods` VALUES (254,10,6,1); -- SUBLINK: 6
 
 -- Wanderer
 INSERT INTO `mob_family_mods` VALUES (255,3,50,1); -- MP_BASE: 50
+INSERT INTO `mob_family_mods` VALUES (255,68,40,0); -- EVA: 40
+
+-- Weeper
+INSERT INTO `mob_family_mods` VALUES (256,63,10,0); -- DEFP: 10
 
 -- Wivre
 INSERT INTO `mob_family_mods` VALUES (257,36,50,1); -- ROAM_COOL: 50
 INSERT INTO `mob_family_mods` VALUES (257,52,30,1); -- ROAM_RATE: 30
 
--- Worm
+-- Worm (ToAU worms need +20 MDEF)
 INSERT INTO `mob_family_mods` VALUES (258,34,25,1); -- MAGIC_COOL: 25
 INSERT INTO `mob_family_mods` VALUES (258,36,90,1); -- ROAM_COOL: 90
 INSERT INTO `mob_family_mods` VALUES (258,52,30,1); -- ROAM_RATE: 30
@@ -844,7 +860,8 @@ INSERT INTO `mob_family_mods` VALUES (268,36,55,1);  -- ROAM_COOL: 55
 INSERT INTO `mob_family_mods` VALUES (268,59,120,1); -- WEAPON_BONUS: 120
 
 -- Yovra
-INSERT INTO `mob_family_mods` VALUES (271,3,50,1); -- MP_BASE: 50
+INSERT INTO `mob_family_mods` VALUES (271,3,50,1);   -- MP_BASE: 50
+INSERT INTO `mob_family_mods` VALUES (271,363,50,0); -- DEFP: 50
 
 -- Scorpion-Serket
 INSERT INTO `mob_family_mods` VALUES (273,23,256,1); -- IMMUNITY: 256

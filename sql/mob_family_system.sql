@@ -323,7 +323,7 @@ INSERT INTO `mob_family_system` VALUES (267,'Wyvern-Guivre',109,'Wyvern',10,'Dra
 INSERT INTO `mob_family_system` VALUES (268,'Wyvern-Undead',109,'Wyvern',10,'Dragon',1,40,109,90,4,2,3,4,6,3,3,1,3,1,3,8,1,0);
 INSERT INTO `mob_family_system` VALUES (269,'Xzomit',150,'Xzomit',15,'Luminian',0,50,100,110,3,2,4,6,4,5,1,1,3,1,3,0,1,0);
 INSERT INTO `mob_family_system` VALUES (270,'Yagudo',151,'Yagudo',7,'Beastmen',0,40,85,120,2,2,3,3,4,5,3,1,3,1,3,3,1,0);
-INSERT INTO `mob_family_system` VALUES (271,'Yovra',152,'Yovra',15,'Luminian',3,40,80,140,2,3,4,6,1,2,2,1,3,1,3,0,2,0);
+INSERT INTO `mob_family_system` VALUES (271,'Yovra',152,'Yovra',15,'Luminian',3,40,80,140,2,3,4,6,1,2,2,1,3,1,5,0,2,0);
 INSERT INTO `mob_family_system` VALUES (272,'Zdei',97,'Magic_Pot',16,'Luminion',0,40,100,140,6,3,4,4,1,3,4,1,3,1,3,0,1,0);
 INSERT INTO `mob_family_system` VALUES (273,'Scorpion-Serket',128,'Scorpion',20,'Vermin',3,40,90,120,3,5,4,4,4,4,4,1,3,1,3,4,258,0);
 INSERT INTO `mob_family_system` VALUES (274,'Scorpion-KingV',128,'Scorpion',20,'Vermin',3,40,90,120,3,5,4,4,4,4,4,1,3,1,3,4,2,0);
