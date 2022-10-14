@@ -77,8 +77,11 @@ xi.battlefield.id =
     HOLY_COW = 644,
     SHADOW_LORD_BATTLE = 160,
     WHERE_TWO_PATHS_CONVERGE = 161,
+    NW_APOLLYON = 1290,
     SW_APOLLYON = 1291,
+    NE_APOLLYON = 1292,
     SE_APOLLYON = 1293,
+    CS_APOLLYON = 1294,
 }
 
 xi.battlefield.itemUses =
@@ -249,14 +252,41 @@ function Battlefield:register()
     return self
 end
 
+function Battlefield:isValidEntry(player, npc)
+    return self.entryNpc == npc:getName()
+end
+
 function Battlefield:checkRequirements(player, npc, registrant, trade)
-    if self.entryNpc ~= npc:getName() then
+    if not self:isValidEntry(player, npc) then
+        return false
+    end
+
+    -- Do not show battlefields when either they don't require items and player is trading or
+    -- that do require items and but player is not trading
+    if (trade == nil) ~= (#self.tradeItems == 0) then
         return false
     end
 
     for _, keyItem in ipairs(self.requiredKeyItems) do
-        if not player:hasKeyItem(keyItem) then
-            return false
+        if type(keyItem) == 'table' then
+
+            -- Only need one from the group
+            local hasAny = false
+            for _, subitem in ipairs(keyItem) do
+                if player:hasKeyItem(subitem) then
+                    hasAny = true
+                    break
+                end
+            end
+
+            if not hasAny then
+                return false
+            end
+
+        else
+            if not player:hasKeyItem(keyItem) then
+                return false
+            end
         end
     end
 
@@ -393,7 +423,7 @@ function Battlefield.onEntryTrigger(player, npc)
 end
 
 -- Static function to lookup the correct battlefield to handle this event update
-function Battlefield.redirectEventUpdate(player, csid, option, extras)
+function Battlefield.redirectEventUpdate(player, csid, option, npc)
     if option == 0 or option == 255 then
         return false
     end
@@ -402,13 +432,13 @@ function Battlefield.redirectEventUpdate(player, csid, option, extras)
     local value = bit.rshift(option, 4)
     for _, content in pairs(contents) do
         if value == content.index then
-            content:onEntryEventUpdate(player, csid, option, extras)
+            content:onEntryEventUpdate(player, csid, option, npc)
             break
         end
     end
 end
 
-function Battlefield:onEntryEventUpdate(player, csid, option, extras)
+function Battlefield:onEntryEventUpdate(player, csid, option, npc)
     local clearTime = 1
     local name      = "Meme"
     local partySize = 1
@@ -606,11 +636,26 @@ end
 function Battlefield:onBattlefieldEnter(player, battlefield)
     local initiatorId, _ = battlefield:getInitiator()
     if #self.requiredKeyItems > 0 and ((not self.requiredKeyItems.onlyInitiator) or player:getID() == initiatorId) then
+
+        local items = {}
         for _, item in ipairs(self.requiredKeyItems) do
-            player:delKeyItem(item)
+
+            -- If this item is a table then that means we only need one of them so delete the first one we find
+            if type(item) == 'table' then
+                for _, subitem in ipairs(item) do
+                    if player:hasKeyItem(subitem) then
+                        player:delKeyItem(subitem)
+                        table.insert(items, subitem)
+                    end
+                end
+            else
+                player:delKeyItem(item)
+                table.insert(items, item)
+            end
         end
+
         if self.requiredKeyItems.message ~= 0 then
-            player:messageSpecial(self.requiredKeyItems.message, unpack(self.requiredKeyItems))
+            player:messageSpecial(self.requiredKeyItems.message, unpack(items))
         end
     end
 
@@ -678,8 +723,6 @@ function Battlefield:handleWipe(battlefield, players)
     local wipeTime = battlefield:getWipeTime()
     local elapsed  = battlefield:getTimeInside()
 
-    players = players or battlefield:getPlayers()
-
     -- If party has not yet wiped.
     if wipeTime <= 0 then
         -- Return if any players are still alive
@@ -689,16 +732,7 @@ function Battlefield:handleWipe(battlefield, players)
             end
         end
 
-        -- Party has wiped. Save and send time remaining before being booted.
-        if self.hasWipeGrace then
-            for _, player in pairs(players) do
-                player:messageSpecial(zones[player:getZoneID()].text.THE_PARTY_WILL_BE_REMOVED, 0, 0, 0, 3)
-            end
-
-            battlefield:setWipeTime(elapsed)
-        else
-            battlefield:setStatus(xi.battlefield.status.LOST)
-        end
+        self:onBattlefieldWipe(battlefield, players)
 
     -- Party has already wiped.
     else
@@ -713,6 +747,19 @@ function Battlefield:handleWipe(battlefield, players)
                 end
             end
         end
+    end
+end
+
+function Battlefield:onBattlefieldWipe(battlefield, players)
+    -- Party has wiped. Save and send time remaining before being booted.
+    if self.hasWipeGrace then
+        for _, player in pairs(players) do
+            player:messageSpecial(zones[player:getZoneID()].text.THE_PARTY_WILL_BE_REMOVED, 0, 0, 0, 3)
+        end
+
+        battlefield:setWipeTime(battlefield:getTimeInside())
+    else
+        battlefield:setStatus(xi.battlefield.status.LOST)
     end
 end
 
@@ -860,7 +907,7 @@ function BattlefieldMission:checkRequirements(player, npc, registrant, trade)
     local missionArea = self.missionArea or player:getNation()
     local current = player:getCurrentMission(missionArea)
     local missionStatusArea = self.missionStatusArea or player:getNation()
-    local status = player:getMissionStatus(missionStatusArea)
+    local status = player:getMissionStatus(missionStatusArea, self.missionStatus)
     return current == self.mission and status == self.requiredMissionStatus
 end
 
