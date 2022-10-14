@@ -2,6 +2,7 @@
 -- Transport
 -----------------------------------
 require("scripts/globals/zone")
+require("scripts/globals/pathfind")
 -----------------------------------
 
 xi = xi or {}
@@ -59,8 +60,14 @@ xi.transport.pos =
 {
     mhaura =
     {
-        ARRIVING  = { 7.06, -1.36, 2.20 },
-        DEPARTING = { 8.26, -1.36, 2.20 },
+        ARRIVING  =
+        {
+            { x = 7.06, y = -1.36, z = 2.20, rotation = 211 }
+        },
+        DEPARTING =
+        {
+            { x = 8.26, y = -1.36, z = 2.20, rotation = 193 }
+        },
     }
 }
 
@@ -78,8 +85,8 @@ end
 xi.transport.dockMessage = function(npc, triggerID, messages, dock)
     npc:showText(npc, messages[triggerID])
     if (triggerID % 2) == 0 then
-        npc:pathThrough(xi.transport.pos[dock].ARRIVING, PATHFLAG_WALLHACK)
+        npc:pathThrough(xi.transport.pos[dock].ARRIVING, bit.bor(xi.path.flag.PATROL, xi.path.flag.WALLHACK))
     else
-        npc:pathThrough(xi.transport.pos[dock].DEPARTING, PATHFLAG_WALLHACK)
+        npc:pathThrough(xi.transport.pos[dock].DEPARTING, bit.bor(xi.path.flag.PATROL, xi.path.flag.WALLHACK))
     end
 end
