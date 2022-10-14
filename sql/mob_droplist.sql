@@ -23777,7 +23777,6 @@ INSERT INTO `mob_droplist` VALUES (2856,0,0,1000,1875,300); -- Ancient Beastcoin
 -- ZoneID:  38 - Thiazi
 -- ZoneID:  38 - Bialozar
 -- ZoneID:  38 - Cornu
--- ZoneID:  38 - Sirin
 INSERT INTO `mob_droplist` VALUES (2857,0,0,1000,1875,400); -- Ancient Beastcoin (40.0%)
 
 -- ZoneID:  37 - Goblin Slaughterman
@@ -23865,6 +23864,7 @@ INSERT INTO `mob_droplist` VALUES (2860,0,0,1000,1875,800); -- Ancient Beastcoin
 -- ZoneID:  38 - Thunder Elemental
 -- ZoneID:  38 - Kerkopes
 -- ZoneID:  38 - Kerkopes
+-- ZoneID:  38 - Sirin
 INSERT INTO `mob_droplist` VALUES (2861,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
 
 -- ZoneID:  37 - Goblin Warlord
