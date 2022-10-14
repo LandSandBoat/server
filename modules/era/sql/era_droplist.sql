@@ -475,7 +475,11 @@ INSERT INTO `mob_droplist` VALUES (41,0,0,1000,2725,@VRARE); -- Argute Bracers -
 -- ZoneID:  89 - Ajattara
 -- ZoneID: 212 - Typhoon Wyvern
 INSERT INTO `mob_droplist` VALUES (42,0,0,1000,1122,@COMMON); -- Wyvern Skin (Common, 15%)
+<<<<<<< HEAD
 INSERT INTO `mob_droplist` VALUES (42,0,0,1000,1124,@RARE);   -- Wyvern Wing (Rare, 5%)
+=======
+INSERT INTO `mob_droplist` VALUES (42,0,0,1000,1124,@RARE);   -- Wyvern Wing (Rare, 15%)
+>>>>>>> 36e2fe8db7 (Vollbow mob droplist audit)
 
 -- ZoneID: 102 - Akbaba
 -- ZoneID: 117 - Akbaba
