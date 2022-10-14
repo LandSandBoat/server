@@ -97,12 +97,12 @@ local loot =
         },
 
         {
-            { itemid = xi.items.PURPLE_ROCK,      droprate = 166},
-            { itemid = xi.items.TRANSLUCENT_ROCK, droprate = 166},
-            { itemid = xi.items.RED_ROCK,         droprate = 167},
-            { itemid = xi.items.BLACK_ROCK,       droprate = 167},
-            { itemid = xi.items.YELLOW_ROCK,      droprate = 167},
-            { itemid = xi.items.WHITE_ROCK,       droprate = 167},
+            { itemid = xi.items.PURPLE_ROCK,      droprate = 166 },
+            { itemid = xi.items.TRANSLUCENT_ROCK, droprate = 166 },
+            { itemid = xi.items.RED_ROCK,         droprate = 167 },
+            { itemid = xi.items.BLACK_ROCK,       droprate = 167 },
+            { itemid = xi.items.YELLOW_ROCK,      droprate = 167 },
+            { itemid = xi.items.WHITE_ROCK,       droprate = 167 },
         },
 
         {
@@ -117,8 +117,8 @@ local loot =
         },
 
         {
-            { itemid = 0, droprate = 517}, -- nothing
-            { itemid = xi.items.MAHOGANY_LOG, droprate = 333},
+            { itemid = 0, droprate = 517 }, -- nothing
+            { itemid = xi.items.MAHOGANY_LOG, droprate = 333 },
             { itemid = xi.items.EBONY_LOG,    droprate = 150 },
         },
 
@@ -646,7 +646,7 @@ local loot =
         },
 
         {
-            { itemid = 0, droprate =  848}, -- nothing
+            { itemid = 0, droprate =  848 }, -- nothing
             { itemid = xi.items.WALKURE_MASK, droprate = 58 },
             { itemid = xi.items.HI_RERAISER,  droprate = 78 },
             { itemid = xi.items.EBONY_LOG,    droprate = 16 },
