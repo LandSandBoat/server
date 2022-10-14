@@ -5,7 +5,8 @@ require("scripts/globals/trust")
 -----------------------------------
 local spellObject = {}
 
-local jobs1 =
+-- Define the main jobs with access to primary healing used to toggle Samba type
+local healingJobs =
 {
     xi.job.WHM,
     xi.job.RDM,
@@ -32,28 +33,34 @@ spellObject.onMobSpawn = function(mob)
         [xi.magic.spell.ULLEGORE] = xi.trust.message_offset.TEAMWORK_2,
     })
 
-    -- Locals for synergy
-    local master  = mob:getMaster()
-    local synergy = master:getLocalVar("mumorSynergy")
-
     -- Dynamic modifier that checks variable on tick to apply
     mob:addListener("COMBAT_TICK", "UKA_TOTLIHN_CTICK", function(mobArg)
+        -- Locals for synergy
+        local master  = mob:getMaster()
+        local synergy = master:getLocalVar("mumorSynergy")
         if synergy >= 2 then
             mob:setMod(xi.mod.WALTZ_POTENTCY, 10)
         end
     end)
 
     -- Listeners to subtract synergy variable if one of the two are killed or released
+    -- Todo: rework synergy check for dynamic adjustments on tick
+    -- Todo: update gambit container to allow to toggling behaviors with synergy
     mob:addListener("DEATH", "UKA_TOTLIHN_DEATH", function(mobArg, killer)
+        local master  = mob:getMaster()
+        local synergy = master:getLocalVar("mumorSynergy")
         master:setLocalVar("mumorSynergy", synergy - 1)
     end)
 
     mob:addListener("DESPAWN", "UKA_TOTLIHN_DESPAWN", function(mobArg)
+        local master  = mob:getMaster()
+        local synergy = master:getLocalVar("mumorSynergy")
         master:setLocalVar("mumorSynergy", synergy - 1)
     end)
 
-    for i = 1, #jobs1 do
-        if master:getMainJob() == jobs1[i] then
+    for i = 1, #healingJobs do
+        local master  = mob:getMaster()
+        if master:getMainJob() == healingJobs[i] then
             mob:addSimpleGambit(ai.t.SELF, ai.c.NO_SAMBA, 0, ai.r.JA, ai.s.SPECIFIC, xi.ja.HASTE_SAMBA)
         end
     end
