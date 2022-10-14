@@ -12,14 +12,14 @@ local entity = {}
 
 local timeTable =
 {
-    {59, ID.text.BOMB_TIMER_1, 8},
-    {58, ID.text.BOMB_TIMER_2, 7},
-    {57, ID.text.BOMB_TIMER_3, 6},
-    {56, ID.text.BOMB_TIMER_4, 5},
-    {55, ID.text.BOMB_TIMER_5, 4},
-    {50, ID.text.BOMB_TIMER_10, 3},
-    {40, ID.text.BOMB_TIMER_20, 2},
-    {30, ID.text.BOMB_TIMER_30, 1},
+    { 59, ID.text.BOMB_TIMER_1,  8 },
+    { 58, ID.text.BOMB_TIMER_2,  7 },
+    { 57, ID.text.BOMB_TIMER_3,  6 },
+    { 56, ID.text.BOMB_TIMER_4,  5 },
+    { 55, ID.text.BOMB_TIMER_5,  4 },
+    { 50, ID.text.BOMB_TIMER_10, 3 },
+    { 40, ID.text.BOMB_TIMER_20, 2 },
+    { 30, ID.text.BOMB_TIMER_30, 1 },
 }
 
 entity.onMobSpawn = function(mob)
