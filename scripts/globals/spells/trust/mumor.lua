@@ -33,7 +33,6 @@ spellObject.onMobSpawn = function(mob)
         [xi.magic.spell.ULLEGORE   ] = xi.trust.message_offset.TEAMWORK_2,
     })
 
-
     -- Dynamic modifier that checks variable on tick to apply
     mob:addListener("COMBAT_TICK", "MUMOR_CTICK", function(mobArg)
         -- Locals for synergy
@@ -49,11 +48,13 @@ spellObject.onMobSpawn = function(mob)
     -- Todo: update gambit container to allow to toggling behaviors with synergy
     mob:addListener("DEATH", "MUMOR_DEATH", function(mobArg, killer)
         local master  = mob:getMaster()
+        local synergy = master:getLocalVar("mumorSynergy")
         master:setLocalVar("mumorSynergy", synergy - 1)
     end)
 
     mob:addListener("DESPAWN", "MUMOR_DESPAWN", function(mobArg)
         local master  = mob:getMaster()
+        local synergy = master:getLocalVar("mumorSynergy")
         master:setLocalVar("mumorSynergy", synergy - 1)
     end)
 
