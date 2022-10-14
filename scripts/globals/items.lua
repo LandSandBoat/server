@@ -690,6 +690,7 @@ xi.items =
     SUMMONERS_BRACERS_M1            = 2105,
     SUMMONERS_SPATS_M1              = 2106,
     SUMMONERS_PIGACHES_M1           = 2107,
+    METAL_CHIP                      = 2127,
     MERROW_SCALE                    = 2146,
     SQUARE_OF_MARID_LEATHER         = 2152,
     QIQIRN_SANDBAG                  = 2153,

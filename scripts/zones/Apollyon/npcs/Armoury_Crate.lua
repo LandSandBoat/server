@@ -12,48 +12,6 @@ local entity = {}
 
 local loot =
 {
-    -- CS Apollyon
-    [1294] =
-    {
-        [1] =
-        {
-            {
-                { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
-            },
-
-            {
-                { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
-            },
-
-            {
-                { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
-            },
-
-            {
-                { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
-            },
-
-            {
-                { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
-            },
-
-            {
-                { itemid =    0, droprate = 1000 }, -- Nothing
-                { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
-            },
-
-            {
-                { itemid =    0, droprate = 1000 }, -- Nothing
-                { itemid = 1875, droprate = 1000 }, -- Ancient Beastcoin
-            },
-
-            {
-                { itemid = 2127, droprate =  59 }, -- Metal Chip
-                { itemid =    0, droprate = 100 }, -- Nothing
-            },
-        },
-    },
-
     -- Central Apollyon
     [1296] =
     {
@@ -143,17 +101,6 @@ entity.onTrigger = function(player, npc)
                     end
                 else
                     xi.limbus.handleLootRolls(battlefield, loot[bfid][5], nil, npc)
-                    battlefield:setLocalVar("cutsceneTimer", 10)
-                    battlefield:setLocalVar("lootSeen", 1)
-                end
-            end,
-
-            -- CS Apollyon Crate Handling
-            [1294] = function()
-                if crateID ~= ID.npc.APOLLYON_CS_CRATE then
-                    xi.limbus.extendTimeLimit(battlefield, 5, xi.zone.APOLLYON)
-                else
-                    xi.limbus.handleLootRolls(battlefield, loot[bfid][1], nil, npc)
                     battlefield:setLocalVar("cutsceneTimer", 10)
                     battlefield:setLocalVar("lootSeen", 1)
                 end

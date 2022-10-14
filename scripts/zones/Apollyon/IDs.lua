@@ -521,6 +521,34 @@ zones[xi.zone.APOLLYON] =
             [16933111] = 5,
         },
     },
+
+    CS_APOLLYON =
+    {
+        mob =
+        {
+            CARNAGECHIEF_JACKBODOKK = 16933129,
+            NAQBA_CHIRURGEON = 16933137,
+            DEE_WAPA_THE_DESOLATOR = 16933144,
+        },
+
+        npc =
+        {
+            ITEM_CRATES = {},
+            TIME_CRATES =
+            {
+                16933127,
+                16933128,
+            },
+            RECOVER_CRATES = {},
+            LOOT_CRATE = 16933126,
+        },
+
+        TIME_EXTENSIONS =
+        {
+            [16933127] = 5,
+            [16933128] = 5,
+        },
+    },
 }
 
 return zones[xi.zone.APOLLYON]
