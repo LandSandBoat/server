@@ -862,7 +862,7 @@ function BattlefieldMission:checkRequirements(player, npc, registrant, trade)
     local missionArea = self.missionArea or player:getNation()
     local current = player:getCurrentMission(missionArea)
     local missionStatusArea = self.missionStatusArea or player:getNation()
-    local status = player:getMissionStatus(missionStatusArea)
+    local status = player:getMissionStatus(missionStatusArea, self.missionStatus)
     return current == self.mission and status == self.requiredMissionStatus
 end
 
