@@ -38,7 +38,7 @@ INSERT INTO `mob_family_mods` VALUES (2,63,20,0); -- DEFP: 20
 
 -- Ahriman
 INSERT INTO `mob_family_mods` VALUES (4,7,60,1);   -- GA_CHANCE: 60
-INSERT INTO `mob_family_mods` VALUES (4,29,20,0);  -- MDEF: 25
+INSERT INTO `mob_family_mods` VALUES (4,29,25,0);  -- MDEF: 25
 INSERT INTO `mob_family_mods` VALUES (4,36,40,1);  -- ROAM_COOL: 40
 INSERT INTO `mob_family_mods` VALUES (4,51,5,1);   -- ROAM_TURNS: 5
 INSERT INTO `mob_family_mods` VALUES (4,56,-1,1);  -- HP_STANDBACK: -1
@@ -192,7 +192,7 @@ INSERT INTO `mob_family_mods` VALUES (57,63,20,0);  -- DEFP: 20
 INSERT INTO `mob_family_mods` VALUES (58,36,45,1);  -- ROAM_COOL: 45
 INSERT INTO `mob_family_mods` VALUES (58,51,3,1);   -- ROAM_TURNS: 3
 INSERT INTO `mob_family_mods` VALUES (58,52,30,1);  -- ROAM_RATE: 30
-INSERT INTO `mob_family_mods` VALUES (58,59,125,1); -- WEAPON_BONUS: 110
+INSERT INTO `mob_family_mods` VALUES (58,59,110,1); -- WEAPON_BONUS: 110
 INSERT INTO `mob_family_mods` VALUES (58,63,20,0);  -- DEFP: 20
 
 -- Bugbear
@@ -664,7 +664,7 @@ INSERT INTO `mob_family_mods` VALUES (207,3,50,1); -- MP_BASE: 50
 -- Ram
 INSERT INTO `mob_family_mods` VALUES (208,36,60,1);  -- ROAM_COOL: 60
 INSERT INTO `mob_family_mods` VALUES (208,52,30,1);  -- ROAM_RATE: 30
-INSERT INTO `mob_family_mods` VALUES (208,59,120,1); -- WEAPON_BONUS: 110
+INSERT INTO `mob_family_mods` VALUES (208,59,110,1); -- WEAPON_BONUS: 110
 INSERT INTO `mob_family_mods` VALUES (208,63,20,0);  -- DEFP: 20
 
 -- Raptor
@@ -706,7 +706,6 @@ INSERT INTO `mob_family_mods` VALUES (221,52,30,1);   -- ROAM_RATE: 30
 INSERT INTO `mob_family_mods` VALUES (221,240,100,0); -- SLEEPRES: 100
 INSERT INTO `mob_family_mods` VALUES (221,242,20,0);  -- PARALYZERES: 20
 
-
 -- Shadow
 INSERT INTO `mob_family_mods` VALUES (222,36,50,1);   -- ROAM_COOL: 50
 INSERT INTO `mob_family_mods` VALUES (222,51,2,1);    -- ROAM_TURNS: 2
@@ -719,7 +718,6 @@ INSERT INTO `mob_family_mods` VALUES (223,51,2,1);    -- ROAM_TURNS: 2
 INSERT INTO `mob_family_mods` VALUES (223,52,30,1);   -- ROAM_RATE: 30
 INSERT INTO `mob_family_mods` VALUES (223,240,100,0); -- SLEEPRES: 100
 INSERT INTO `mob_family_mods` VALUES (223,242,20,0);  -- PARALYZERES: 20
-
 
 -- Sheep
 INSERT INTO `mob_family_mods` VALUES (226,31,15,1); -- ROAM_DISTANCE: 15
@@ -797,7 +795,6 @@ INSERT INTO `mob_family_mods` VALUES (252,52,30,1); -- ROAM_RATE: 30
 INSERT INTO `mob_family_mods` VALUES (253,3,50,1);  -- MP_BASE: 50
 INSERT INTO `mob_family_mods` VALUES (253,10,6,1);  -- SUBLINK: 6
 INSERT INTO `mob_family_mods` VALUES (253,63,12,0); -- DEFP: 12
-
 
 -- Wamouracampa
 INSERT INTO `mob_family_mods` VALUES (254,10,6,1); -- SUBLINK: 6
