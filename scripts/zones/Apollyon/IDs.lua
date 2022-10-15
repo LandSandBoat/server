@@ -70,26 +70,6 @@ zones[xi.zone.APOLLYON] =
     npc =
     {
         ENTRANCE_OFFSET = 16933218,
-        APOLLYON_NW_PORTAL =
-        {
-            16933226, -- nw 1>2
-            16933227, -- nw 2>3
-            16933228, -- nw 3>4
-            16933224, -- nw 4>5
-        },
-        APOLLYON_SW_PORTAL =
-        {
-            16933230, -- sw 1>2
-            16933231, -- sw 2>3
-            16933232, -- sw 3>4
-        },
-        APOLLYON_NE_PORTAL =
-        {
-            16933235, -- ne 1>2
-            16933234, -- ne 2>3
-            16933233, -- ne 3>4
-            16933237, -- ne 4>5
-        },
         APOLLYON_NW_CRATE =
         {
             [1] =
@@ -230,6 +210,12 @@ zones[xi.zone.APOLLYON] =
 
         npc =
         {
+            PORTAL =
+            {
+                16933230,
+                16933231,
+                16933232,
+            },
             ITEM_CRATES =
             {
                 16932865,
@@ -304,9 +290,9 @@ zones[xi.zone.APOLLYON] =
         {
             PORTAL =
             {
-                16933239, -- Floor 1 -> 2
-                16933238, -- Floor 2 -> 3
-                16933241, -- Floor 3 -> 4
+                16933239,
+                16933238,
+                16933241,
             },
             ITEM_CRATES =
             {
@@ -391,6 +377,13 @@ zones[xi.zone.APOLLYON] =
 
         npc =
         {
+            PORTAL =
+            {
+                16933226,
+                16933227,
+                16933228,
+                16933224,
+            },
             ITEM_CRATES =
             {
                 16932934,
@@ -470,6 +463,13 @@ zones[xi.zone.APOLLYON] =
 
         npc =
         {
+            PORTAL =
+            {
+                16933235,
+                16933234,
+                16933233,
+                16933237,
+            },
             ITEM_CRATES =
             {
                 16933041,

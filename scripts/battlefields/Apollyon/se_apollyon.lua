@@ -156,7 +156,7 @@ content.groups =
         },
 
         death = function(battlefield, mob, count)
-            xi.limbus.openDoor(mob:getBattlefield(), ID.SE_APOLLYON.npc.PORTAL[1])
+            content:openDoor(mob:getBattlefield(), 1)
         end,
     },
     {
@@ -190,7 +190,7 @@ content.groups =
         },
 
         death = function(battlefield, mob, count)
-            xi.limbus.openDoor(mob:getBattlefield(), ID.SE_APOLLYON.npc.PORTAL[2])
+            content:openDoor(mob:getBattlefield(), 2)
         end,
     },
     {
@@ -224,7 +224,7 @@ content.groups =
         },
 
         death = function(battlefield, mob, count)
-            xi.limbus.openDoor(mob:getBattlefield(), ID.SE_APOLLYON.npc.PORTAL[3])
+            content:openDoor(mob:getBattlefield(), 3)
         end,
     },
     {

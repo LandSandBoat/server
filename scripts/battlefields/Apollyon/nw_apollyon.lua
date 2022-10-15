@@ -263,7 +263,7 @@ content.groups =
         end,
 
         randomDeath = function(battlefield, mob)
-            xi.limbus.openDoor(battlefield, ID.npc.APOLLYON_NW_PORTAL[1])
+            content:openDoor(battlefield, 1)
         end,
     },
 
@@ -297,7 +297,7 @@ content.groups =
         end,
 
         randomDeath = function(battlefield, mob)
-            xi.limbus.openDoor(battlefield, ID.npc.APOLLYON_NW_PORTAL[2])
+            content:openDoor(battlefield, 2)
         end,
     },
 
@@ -326,7 +326,7 @@ content.groups =
         end,
 
         randomDeath = function(battlefield, mob)
-            xi.limbus.openDoor(battlefield, ID.npc.APOLLYON_NW_PORTAL[3])
+            content:openDoor(battlefield, 3)
         end,
     },
 
@@ -359,7 +359,7 @@ content.groups =
         end,
 
         randomDeath = function(battlefield, mob)
-            xi.limbus.openDoor(battlefield, ID.npc.APOLLYON_NW_PORTAL[4])
+            content:openDoor(battlefield, 4)
         end,
     },
 
