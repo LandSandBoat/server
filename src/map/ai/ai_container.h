@@ -62,6 +62,7 @@ public:
     bool Trigger(CCharEntity* player);
     bool UseItem(uint16 targid, uint8 loc, uint8 slotid);
     bool Inactive(duration _duration, bool canChangeState);
+    bool Untargetable(duration _duration, bool canChangeState); // Used to make owner entity untargetable & inactionable in TargetFind for _duration
 
     /* Internal Controller functions */
     bool Internal_Engage(uint16 targetid);
@@ -106,6 +107,7 @@ public:
     bool IsSpawned();
     bool IsRoaming();
     bool IsEngaged();
+    bool IsUntargetable();
     // whether AI is currently able to change state from external means
     bool CanChangeState();
     bool CanFollowPath();
