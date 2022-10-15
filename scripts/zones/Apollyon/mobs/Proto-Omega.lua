@@ -3,13 +3,13 @@
 --  Mob: Proto-Omega
 -----------------------------------
 local ID = require("scripts/zones/Apollyon/IDs")
-require("scripts/globals/titles")
 require("scripts/globals/mobs")
+require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-function quadrupedForm(mob)
-    mob:AnimationSub(1)
+local quadrupedForm = function(mob)
+    mob:setAnimationSub(1)
     mob:setMod(xi.mod.MOVE, 100)
     mob:setMod(xi.mod.ATTP, 100)
     mob:setMod(xi.mod.UDMGPHYS, -9000)
@@ -18,8 +18,8 @@ function quadrupedForm(mob)
     mob:setMobMod(xi.mobMod.SKILL_LIST, 727)
 end
 
-function bipedForm(mob)
-    mob:AnimationSub(2)
+local bipedForm = function(mob)
+    mob:setAnimationSub(2)
     mob:setMod(xi.mod.MOVE, 0)
     mob:setMod(xi.mod.ATTP, 200)
     mob:setMod(xi.mod.UDMGPHYS, -3000)
@@ -28,9 +28,9 @@ function bipedForm(mob)
     mob:setMobMod(xi.mobMod.SKILL_LIST, 1188)
 end
 
-function finalForm(mob)
+local finalForm = function(mob)
     mob:setLocalVar("final", 1)
-    mob:AnimationSub(2)
+    mob:setAnimationSub(2)
     mob:setMod(xi.mod.ATTP, 250)
     mob:setMod(xi.mod.UDMGPHYS, -5000)
     mob:setMod(xi.mod.UDMGRANGE, -5000)
@@ -59,16 +59,15 @@ entity.onMobFight = function(mob, target)
     -- If in Final form then do Pod Ejection every 5 minutes
     if mob:getLocalVar("final") == 1 then
         if
-            now >= mob:getLocalVar("gunpod") and
+            now >= mob:getLocalVar("gunpodTime") and
             mob:getCurrentAction() == xi.act.ATTACK and
-            GetMobByID(ID.CENTRAL_APOLLYON.mob.GUNPOD):getStatus() == xi.status.DISAPPEAR
+            GetMobByID(mob:getID() + 1):getStatus() == xi.status.DISAPPEAR
         then
-            mob:setLocalVar("gunpod", now + utils.minutes(5))
+            mob:setLocalVar("gunpodTime", now + utils.minutes(5))
             mob:useMobAbility(1532) -- Pod Ejection
         end
         return
     end
-
 
     -- Convert into final form at 25% HP
     if mob:getHPP() <= 25 then
@@ -80,14 +79,14 @@ entity.onMobFight = function(mob, target)
     local form = mob:getLocalVar("formTime")
     if now >= form and mob:getCurrentAction() == xi.act.ATTACK then
         mob:setLocalVar("formTime", now + utils.minutes(2))
-        if mob:AnimationSub() == 1 then
+        if mob:getAnimationSub() == 1 then
             bipedForm(mob)
 
             -- Wait for 4.5s while changing form and then do Pod Ejection
             mob:wait(4500)
             mob:timer(4500, function(mobArg)
-                if mob:isAlive() and mob:getLocalVar("gunpod") == 0 then
-                    mob:setLocalVar("gunpod", 1)
+                if mob:isAlive() and mob:getLocalVar("initialGunpod") == 0 then
+                    mob:setLocalVar("initialGunpod", 1)
                     mob:useMobAbility(1532) -- Pod Ejection
                 end
             end)
@@ -100,12 +99,6 @@ end
 
 entity.onAdditionalEffect = function(mob, target, damage)
     return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.STUN)
-end
-
-entity.onMobDeath = function(mob, player, optParams)
-    if player then
-        player:addTitle(xi.title.APOLLYON_RAVAGER)
-    end
 end
 
 return entity

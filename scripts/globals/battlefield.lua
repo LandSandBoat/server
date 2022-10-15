@@ -82,6 +82,7 @@ xi.battlefield.id =
     NE_APOLLYON = 1292,
     SE_APOLLYON = 1293,
     CS_APOLLYON = 1294,
+    CENTRAL_APOLLYON = 1296,
 }
 
 xi.battlefield.itemUses =
