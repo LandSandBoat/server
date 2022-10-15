@@ -33,6 +33,7 @@
 #include "../../status_effect_container.h"
 #include "../../utils/battleutils.h"
 #include "../ai_container.h"
+#include "../states/inactive_state.h"
 
 CMagicState::CMagicState(CBattleEntity* PEntity, uint16 targid, SpellID spellid, uint8 flags)
 : CState(PEntity, targid)
@@ -101,22 +102,34 @@ bool CMagicState::Update(time_point tick)
         if (!PTarget || m_errorMsg || !CanCastSpell(PTarget) ||
             (HasMoved() && (m_PEntity->objtype != TYPE_PET || static_cast<CPetEntity*>(m_PEntity)->getPetType() != PET_TYPE::AUTOMATON)))
         {
-            m_interrupted = true;
+            m_PEntity->OnCastInterrupted(*this, action, msg, false);
+            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
+
+            Complete();
+            return false;
         }
         else if (PTarget->objtype == TYPE_PC)
         {
             CCharEntity* PChar = dynamic_cast<CCharEntity*>(PTarget);
             if (PChar->m_Locked)
             {
-                m_interrupted = true;
+                m_PEntity->OnCastInterrupted(*this, action, msg, true);
+                m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
+
+                Complete();
+                return false;
             }
 
             if (m_PSpell.get()->getSpellGroup() == SPELLGROUP_TRUST)
             {
                 if (!luautils::OnTrustSpellCastCheckBattlefieldTrusts(PChar))
                 {
-                    msg           = MSGBASIC_TRUST_NO_CAST_TRUST;
-                    m_interrupted = true;
+                    m_PEntity->OnCastInterrupted(*this, action, MSGBASIC_TRUST_NO_CAST_TRUST, true);
+                    action.recast = 2; // seems hardcoded to 2
+                    m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
+
+                    Complete();
+                    return false;
                 }
             }
         }
@@ -132,23 +145,48 @@ bool CMagicState::Update(time_point tick)
 
             if (PChar->m_Locked)
             {
-                m_interrupted = true;
+                m_PEntity->OnCastInterrupted(*this, action, msg, true);
+                m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
+
+                Complete();
+                return false;
             }
         }
-        else if (battleutils::IsParalyzed(m_PEntity))
+
+        // Super Jump or otherwise untargetable
+        if (PTarget->PAI->IsUntargetable())
         {
-            msg           = MSGBASIC_IS_PARALYZED;
-            m_interrupted = true;
+            m_PEntity->OnCastInterrupted(*this, action, msg, true);
+            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
+
+            Complete();
+            return false;
+        }
+
+        if (battleutils::IsParalyzed(m_PEntity))
+        {
+            m_PEntity->setActionInterrupted(action, PTarget, MSGBASIC_IS_PARALYZED_2, static_cast<uint16>(m_PSpell->getID()));
+            action.recast   = 2; // seems hardcoded to 2
+            action.actionid = static_cast<uint16>(m_PSpell->getID());
+            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
+
+            Complete();
+            return false;
         }
         else if (battleutils::IsIntimidated(m_PEntity, PTarget))
         {
-            msg           = MSGBASIC_IS_INTIMIDATED;
-            m_interrupted = true;
+            m_PEntity->setActionInterrupted(action, PTarget, MSGBASIC_IS_INTIMIDATED, static_cast<uint16>(m_PSpell->getID()));
+            action.recast   = 2; // seems hardcoded to 2
+            action.actionid = static_cast<uint16>(m_PSpell->getID());
+            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
+
+            Complete();
+            return false;
         }
 
         if (m_interrupted)
         {
-            m_PEntity->OnCastInterrupted(*this, action, msg);
+            m_PEntity->OnCastInterrupted(*this, action, msg, false);
         }
         else
         {
@@ -179,7 +217,7 @@ void CMagicState::Cleanup(time_point tick)
     if (!IsCompleted())
     {
         action_t action;
-        m_PEntity->OnCastInterrupted(*this, action, MSGBASIC_IS_INTERRUPTED);
+        m_PEntity->OnCastInterrupted(*this, action, MSGBASIC_IS_INTERRUPTED, false);
         m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
     }
 }
