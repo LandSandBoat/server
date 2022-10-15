@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Appolyon
+-- Area: Apollyon
 -- Name: SE Apollyon
 -- !addkeyitem black_card
 -- !addkeyitem cosmo_cleanse

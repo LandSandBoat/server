@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Appolyon
+-- Area: Apollyon
 -- Name: Central Apollyon
 -----------------------------------
 local ID = require("scripts/zones/Apollyon/IDs")

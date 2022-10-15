@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Appolyon
+-- Area: Apollyon
 -- Name: NW Apollyon
 -- !addkeyitem red_card
 -- !addkeyitem cosmo_cleanse
