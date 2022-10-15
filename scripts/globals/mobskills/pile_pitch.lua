@@ -12,18 +12,7 @@ require("scripts/globals/mobskills")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    -- skillList  54 = Omega
-    -- skillList 727 = Proto-Omega
-    -- skillList 728 = Ultima
-    -- skillList 729 = Proto-Ultima
-    local skillList = mob:getMobMod(xi.mobMod.SKILL_LIST)
-    local mobhp = mob:getHPP()
-
-    if ((skillList == 54 and mobhp < 26) or (skillList == 727 and mob:getAnimationSub() == 1)) then
-        return 0
-    else
-        return 1
-    end
+    return 0
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
