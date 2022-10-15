@@ -68,7 +68,8 @@ quest.sections =
     },
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED
+            return status == QUEST_COMPLETED and
+            player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.BETTER_THE_DEMON_YOU_KNOW) == QUEST_AVAILABLE
         end,
 
         [xi.zone.OLDTON_MOVALPOLOS] =
@@ -76,7 +77,7 @@ quest.sections =
             ['Koblakiq'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:event(12)
+                    return quest:event(12):replaceDefault()
                 end,
             },
         },
