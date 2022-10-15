@@ -27,7 +27,10 @@ mission.sections =
 
         [xi.zone.NORG] =
         {
-            ['_700'] = mission:progressEvent(285, 73, 11, 1644364546, 292563085, 1346773060, 973144834, 1883518721, 0),
+            -- NOTE: No observed impact between minimal requirements vs fully completed for
+            -- the below event.
+
+            ['_700'] = mission:progressEvent(285),
 
             onEventFinish =
             {
