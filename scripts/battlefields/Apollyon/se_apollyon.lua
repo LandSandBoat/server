@@ -23,6 +23,7 @@ local content = Limbus:new({
     requiredKeyItems = { xi.ki.COSMO_CLEANSE, xi.ki.BLACK_CARD, message = ID.text.YOU_INSERT_THE_CARD_POLISHED },
     lossEventParams  = { [5] = 1 },
     name             = "SE_APOLLYON",
+    exitLocation     = 1,
 })
 
 content.paths =
@@ -269,7 +270,7 @@ content.groups =
         mods =
         {
             [xi.mod.UDMGPHYS] = -8000,
-            [xi.mod.UDMGMAGIC] = -10000,
+            [xi.mod.MAGIC_NULL] = 100,
         },
 
         setup = function(battlefield, mobs)
@@ -305,9 +306,9 @@ content.groups =
             end
         end,
 
-        all_death = function(battlefield, mob)
+        allDeath = function(battlefield, mob)
             local boss = mob:getZone():queryEntitiesByName("Evil_Armory")[1]
-            boss:setMod(xi.mod.UDMGMAGIC, 0)
+            boss:setMod(xi.mod.MAGIC_NULL, 0)
         end,
     },
 }

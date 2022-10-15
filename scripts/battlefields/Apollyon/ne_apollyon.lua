@@ -133,6 +133,7 @@ content.groups =
     -- Floor 1
     {
         mobs = { "Barometz_Boss", "Borametz_Boss", "Goobbue_Harvester" },
+        stationary = false,
         setup = function(battlefield, mobs)
             local bosses = utils.shuffle(mobs)
             bosses[1]:setLocalVar("item", 1)
@@ -149,7 +150,8 @@ content.groups =
     },
 
     {
-        mobs = { "Barometz", "Borametz" },
+        mobs = { "Barometz", "Borametz", "Barometz_Boss", "Borametz_Boss" },
+        mobMods = { [xi.mobMod.ALLI_HATE] = 50 },
         stationary = false,
     },
 
@@ -274,6 +276,12 @@ content.groups =
 
     {
         mobs = { "Criosphinx", "Hieracosphinx" },
+        mods =
+        {
+            [xi.mod.GRAVITYRES] = 75,
+            [xi.mod.BINDRES] = 75,
+            [xi.mod.SLEEPRES] = 75,
+        },
     }
 }
 
