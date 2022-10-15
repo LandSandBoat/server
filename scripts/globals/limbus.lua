@@ -24,57 +24,9 @@ function xi.limbus.enter(player, entrance)
 end
 
 function xi.limbus.setupArmouryCrates(bfid, hide)
-    local ID
-    if
-        bfid == 1290 or
-        bfid == 1292 or
-        bfid == 1294 or
-        bfid == 1296
-    then
-        ID = zones[xi.zone.APOLLYON]
-    else
-        ID = zones[xi.zone.TEMENOS]
-    end
-
+    local ID = zones[xi.zone.TEMENOS]
     switch (bfid): caseof
     {
-        -- NW Apollyon
-        [1290] = function()
-            for i = 1, 4 do
-                GetNPCByID(ID.npc.APOLLYON_NW_CRATE[i][1]):setStatus(xi.status.DISAPPEAR)
-                for j = 2, 5 do
-                    GetNPCByID(ID.npc.APOLLYON_NW_CRATE[i][j]):setStatus(xi.status.NORMAL)
-                end
-            end
-
-            GetNPCByID(ID.npc.APOLLYON_NW_CRATE[5]):setStatus(xi.status.DISAPPEAR)
-        end,
-
-        -- NE Apollyon
-        [1292] = function()
-            for i = 1, 4 do
-                GetNPCByID(ID.npc.APOLLYON_NE_CRATE[i][1]):setStatus(xi.status.DISAPPEAR)
-
-                for j = 2, 5 do
-                    GetNPCByID(ID.npc.APOLLYON_NE_CRATE[i][j]):setStatus(xi.status.NORMAL)
-                end
-            end
-
-            GetNPCByID(ID.npc.APOLLYON_NE_CRATE[5]):setStatus(xi.status.DISAPPEAR)
-        end,
-
-        -- CS Apollyon
-        [1294] = function()
-            for i = 0, 2 do
-                GetNPCByID(ID.npc.APOLLYON_CS_CRATE + i):setStatus(xi.status.DISAPPEAR)
-            end
-        end,
-
-        -- Central Apollyon
-        [1296] = function()
-            GetNPCByID(ID.npc.APOLLYON_CENTRAL_CRATE):setStatus(xi.status.DISAPPEAR)
-        end,
-
         -- Temenos: Western Tower
         [1298] = function()
             for i = 1, #ID.npc.TEMENOS_W_CRATE - 1 do
