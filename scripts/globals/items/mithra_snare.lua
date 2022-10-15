@@ -6,9 +6,9 @@
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target, player)
+itemObject.onItemCheck = function(target, player)
     local result = 0
     local mobPools = { 379, 1915, 1994 }
 
@@ -29,8 +29,8 @@ item_object.onItemCheck = function(target, player)
     end
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addStatusEffect(xi.effect.MEDICINE, 1, 0, 300)
 end
 
-return item_object
+return itemObject

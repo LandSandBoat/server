@@ -29,6 +29,10 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.DRAW_IN_FRONT, 1)
 end
 
+entity.onMobDeath = function(mob, player, optParams)
+    player:addTitle(xi.title.OURYU_OVERWHELMER)
+end
+
 entity.onMobEngaged = function(mob)
     mob:setMobMod(xi.mobMod.NO_MOVE, 0)
 end
@@ -79,7 +83,7 @@ entity.onMobDisengage = function(mob)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENSTONE, {power = math.random(45, 90), chance = 10})
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENSTONE, { power = math.random(45, 90), chance = 10 })
 end
 
 return entity

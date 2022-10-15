@@ -22,7 +22,7 @@ entity.onMobSpawn = function(mob)
     end)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     if GetMobByID(mob:getID()+1):isAlive() then
         GetMobByID(mob:getID()+1):updateEnmity(player)
     else

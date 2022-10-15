@@ -61,7 +61,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     player:addTitle(xi.title.DESTROYER_OF_ANTIQUITY)
     mob:getBattlefield():win()
 end

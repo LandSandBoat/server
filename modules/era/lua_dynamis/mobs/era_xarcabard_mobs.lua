@@ -308,10 +308,10 @@ xi.dynamis.onWeaponskillDynaLord = function(mob, skill)
     end
 end
 
-xi.dynamis.onDeathDynaLord = function(mob, player, isKiller)
+xi.dynamis.onDeathDynaLord = function(mob, player, optParams)
     local zone = mob:getZone()
-    xi.dynamis.megaBossOnDeath(mob, player, isKiller)
-    if isKiller then
+    xi.dynamis.megaBossOnDeath(mob, player, optParams)
+    if optParams.isKiller then
         mob:showText(mob, lordText + 2)
         local dwagons = {zone:getLocalVar("177"), zone:getLocalVar("178")}
         for _, dwagon in pairs(dwagons) do
@@ -320,11 +320,11 @@ xi.dynamis.onDeathDynaLord = function(mob, player, isKiller)
     end
 end
 
-xi.dynamis.onDeathYing = function(mob, player, isKiller)
+xi.dynamis.onDeathYing = function(mob, player, optParams)
     local zone = mob:getZone()
     local mainLord = zone:getLocalVar("179")
-    xi.dynamis.mobOnDeath(mob, player, isKiller)
-    if isKiller then
+    xi.dynamis.mobOnDeath(mob, player, optParams)
+    if optParams.isKiller then
         if zone:getLocalVar("yang_killed") == 0 then
             mob:showText(mob, yingText + 2)
             zone:setLocalVar("dwagonLastPop", os.time() + 30)
@@ -349,11 +349,11 @@ xi.dynamis.onDeathYing = function(mob, player, isKiller)
     end
 end
 
-xi.dynamis.onDeathYang = function(mob, player, isKiller)
+xi.dynamis.onDeathYang = function(mob, player, optParams)
     local zone = mob:getZone()
     local mainLord = zone:getLocalVar("179")
-    xi.dynamis.mobOnDeath(mob, player, isKiller)
-    if isKiller then
+    xi.dynamis.mobOnDeath(mob, player, optParams)
+    if optParams.isKiller then
         if zone:getLocalVar("ying_killed") == 0 then
             mob:showText(mob, yangText + 2)
             zone:setLocalVar("dwagonLastPop", os.time() + 30)

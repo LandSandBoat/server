@@ -6,9 +6,9 @@
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     local effect = target:getStatusEffect(xi.effect.BLINK)
     if effect ~= nil and effect:getSubType() == 15170 then
         target:delStatusEffect(xi.effect.BLINK)
@@ -16,7 +16,7 @@ item_object.onItemCheck = function(target)
     return 0
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     if (target:hasStatusEffect(xi.effect.COPY_IMAGE) or target:hasStatusEffect(xi.effect.THIRD_EYE)) then
         target:messageBasic(xi.msg.basic.NO_EFFECT)
     else
@@ -25,4 +25,4 @@ item_object.onItemUse = function(target)
     end
 end
 
-return item_object
+return itemObject

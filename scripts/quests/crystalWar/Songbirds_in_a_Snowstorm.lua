@@ -157,7 +157,7 @@ quest.sections =
                 -- TODO: Orcish Bloodletter needs verification and implementation to ensure accuracy.  Currently
                 -- is set to a very high level.
 
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     quest:setVar(player, 'Prog', 7)
                 end,
             },

@@ -11,9 +11,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     local ranged = player:getStorageItem(0, 0, xi.slot.RANGED)
     local ammo = player:getStorageItem(0, 0, xi.slot.AMMO)
 
@@ -30,7 +30,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
     return xi.msg.basic.NO_RANGED_WEAPON, 0
 end
 
-ability_object.onUseAbility = function(player, target, ability, action)
+abilityObject.onUseAbility = function(player, target, ability, action)
     if player:getWeaponSkillType(xi.slot.RANGED) == xi.skill.MARKSMANSHIP then
         action:setAnimation(target:getID(), action:getAnimation(target:getID()) + 1)
     end
@@ -63,4 +63,4 @@ ability_object.onUseAbility = function(player, target, ability, action)
     return damage
 end
 
-return ability_object
+return abilityObject

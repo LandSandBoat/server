@@ -4,7 +4,7 @@
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     player:setCharVar("rootProblem", 3)
 end
 

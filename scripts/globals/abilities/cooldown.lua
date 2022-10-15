@@ -8,9 +8,9 @@ require("scripts/globals/jobpoints")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     local pet = player:getPet()
     if not pet then
         -- TODO: Add check to verify this is an automaton
@@ -20,7 +20,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
     end
 end
 
-ability_object.onUseAbility = function(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability)
     local jpValue = player:getJobPointLevel(xi.jp.COOLDOWN_EFFECT)
 
     player:reduceBurden(50, jpValue)
@@ -30,4 +30,4 @@ ability_object.onUseAbility = function(player, target, ability)
     end
 end
 
-return ability_object
+return abilityObject

@@ -97,7 +97,7 @@ mission.sections =
 
             ['Warder_Aglaia'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if mission:getVar(player, 'Status') == 1 then
                         mission:setVarBit(player, 'Option', 0)
                     end
@@ -106,7 +106,7 @@ mission.sections =
 
             ['Warder_Euphrosyne'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if mission:getVar(player, 'Status') == 1 then
                         mission:setVarBit(player, 'Option', 1)
                     end
@@ -115,7 +115,7 @@ mission.sections =
 
             ['Warder_Thalia'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if mission:getVar(player, 'Status') == 1 then
                         mission:setVarBit(player, 'Option', 2)
                     end

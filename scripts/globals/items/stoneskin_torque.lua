@@ -6,9 +6,9 @@
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     local effect = target:getStatusEffect(xi.effect.STONESKIN)
     if effect ~= nil and effect:getSubType() == 15170 then
         target:delStatusEffect(xi.effect.STONESKIN)
@@ -16,7 +16,7 @@ item_object.onItemCheck = function(target)
     return 0
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     if target:addStatusEffect(xi.effect.STONESKIN, 104, 0, 300, 15170, 0, 4) then
         target:messageBasic(xi.msg.basic.GAINS_EFFECT_OF_STATUS, xi.effect.STONESKIN)
     else
@@ -24,4 +24,4 @@ item_object.onItemUse = function(target)
     end
 end
 
-return item_object
+return itemObject

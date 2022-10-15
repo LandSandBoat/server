@@ -3,14 +3,14 @@
 -- Scroll of Curaga IV
 -- Teaches the white magic Curaga IV
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(10)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(10)
 end
 
-return item_object
+return itemObject

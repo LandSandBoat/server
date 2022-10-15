@@ -11,7 +11,7 @@ local entity = {}
 entity.onMobSpawn = function(mob)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     if player == nil then
         local players = mob:getZone():getPlayers()
 

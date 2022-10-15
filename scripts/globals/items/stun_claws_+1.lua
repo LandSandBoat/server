@@ -7,9 +7,9 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onAdditionalEffect = function(player, target, damage)
+itemObject.onAdditionalEffect = function(player, target, damage)
     local chance = 10
 
     if math.random(100) <= chance and applyResistanceAddEffect(player, target, xi.magic.ele.LIGHTNING, 0) > 0.5 then
@@ -20,4 +20,4 @@ item_object.onAdditionalEffect = function(player, target, damage)
     return 0, 0, 0
 end
 
-return item_object
+return itemObject

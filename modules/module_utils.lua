@@ -1,6 +1,7 @@
 -----------------------------------
 -- Module helpers
 -----------------------------------
+require("scripts/globals/settings")
 require("scripts/globals/utils")
 -----------------------------------
 
@@ -9,7 +10,9 @@ function applyOverride(base_table, name, func, fullname, filename)
     local old = base_table[name]
 
     if old == nil then
-        print(string.format("Inserting empty function to override for: %s (%s)", fullname, filename))
+        if xi.settings.logging.DEBUG_MODULES then
+            print(string.format("Inserting empty function to override for: %s (%s)", fullname, filename))
+        end
         old = function() end -- Insert empty function
     end
 

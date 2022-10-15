@@ -3,14 +3,14 @@
 -- Sandstorm Schema
 -- Teaches the white magic Sandstorm
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(99)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(99)
 end
 
-return item_object
+return itemObject

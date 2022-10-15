@@ -43,14 +43,14 @@ entity.onMobSpawn = function(mob)
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            {id = xi.jsa.ASTRAL_FLOW, hpp = 100, cooldown = 60}, -- Uses Astral Flow on spawn and repeatedly through the fight
+            { id = xi.jsa.ASTRAL_FLOW, hpp = 100, cooldown = 60 }, -- Uses Astral Flow on spawn and repeatedly through the fight
         },
     })
 end
 
 entity.onMobFight = function(mob)
     -- Spawns Fire/Light/Water Elemental 1 minute into the fight and at every astral flow if elemental dies
-    local petSpawn = {288, 293, 294}
+    local petSpawn = { 288, 293, 294 }
     local petID = mob:getID() + 1
     if os.time() > mob:getLocalVar("petTimer") and not GetMobByID(petID):isAlive() and mob:canUseAbilities() then
         local chance = math.random(1,3)
@@ -59,7 +59,7 @@ entity.onMobFight = function(mob)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 392)
 end
 

@@ -2,14 +2,14 @@
 -- Ability: Provoke
 -- Job: Warrior
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-ability_object.onUseAbility = function(user, target, ability)
+abilityObject.onUseAbility = function(user, target, ability)
     --Leave blank.
 end
 
-return ability_object
+return abilityObject

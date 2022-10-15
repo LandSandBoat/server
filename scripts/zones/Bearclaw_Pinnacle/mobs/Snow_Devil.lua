@@ -3,15 +3,15 @@
 -- Mob: Snoll Tzar
 -- ENM: When Hell Freezes Over
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}
 
 local controlDevils =
 {
-    {16801818, 16801821},
-    {16801826, 16801829},
-    {16801834, 16801837},
+    { 16801818, 16801821 },
+    { 16801826, 16801829 },
+    { 16801834, 16801837 },
 }
 
 entity.onMobInitialize = function(mob)
@@ -51,7 +51,7 @@ entity.onMobSpawn = function(mob)
     end)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

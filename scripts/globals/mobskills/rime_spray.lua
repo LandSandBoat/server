@@ -11,13 +11,14 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
+    -- local typeEffect = xi.effect.FROST
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.FROST, 15, 3, 120)
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.STR_DOWN, 20, 3, 60)
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.VIT_DOWN, 20, 3, 60)
@@ -34,4 +35,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return dmg
 end
 
-return mobskill_object
+return mobskillObject

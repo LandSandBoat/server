@@ -45,7 +45,7 @@ entity.onMobFight = function(mob, target)
     mob:setMod(xi.mod.REGEN_DOWN, count)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

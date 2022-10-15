@@ -23,7 +23,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
     return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.EVA_DOWN)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     xi.tutorial.onMobDeath(player)
 end
 

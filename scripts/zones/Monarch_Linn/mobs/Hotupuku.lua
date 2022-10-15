@@ -3,7 +3,7 @@
 -- Mob: Hotupuku
 -- ENM: Bugard in the Clouds
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
@@ -14,7 +14,7 @@ end
 
 entity.onAdditionalEffect = function(mob, target, damage)
     if mob:getHPP() < 30 then
-        return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENSTONE, {chance = 50, power = math.random(70, 80)})
+        return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENSTONE, { chance = 50, power = math.random(70, 80) })
     end
 end
 

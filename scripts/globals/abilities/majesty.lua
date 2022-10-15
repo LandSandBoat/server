@@ -5,17 +5,16 @@
 -- Recast Time: 00:01:00
 -- Duration: 00:03:00
 -----------------------------------
-require("scripts/globals/settings")
-require("scripts/globals/status")
+require("scripts/globals/job_utils/paladin")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-ability_object.onUseAbility = function(player, target, ability)
-    -- player:addStatusEffect(xi.effect.MAJESTY, 7, 0, 180) -- TODO: implement xi.effect.MAJESTY
+abilityObject.onUseAbility = function(player, target, ability)
+    xi.job_utils.paladin.useMajesty(player, target, ability)
 end
 
-return ability_object
+return abilityObject

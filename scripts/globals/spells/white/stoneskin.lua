@@ -9,9 +9,9 @@ require("scripts/globals/msg")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     if caster:isMob() and target:hasStatusEffect(xi.effect.STONESKIN) then
         return 1
     else
@@ -19,7 +19,7 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
     end
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local pMod = caster:getSkillLevel(xi.skill.ENHANCING_MAGIC) / 3 + caster:getStat(xi.mod.MND)
     local pAbs = 0
     local pEquipMods = caster:getMod(xi.mod.STONESKIN_BONUS_HP)
@@ -48,4 +48,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return xi.effect.STONESKIN
 end
 
-return spell_object
+return spellObject

@@ -14,7 +14,7 @@ entity.onMobWeaponSkillPrepare = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 60, 1, xi.regime.type.FIELDS)
     xi.hunts.checkHunt(mob, player, 214)
 end

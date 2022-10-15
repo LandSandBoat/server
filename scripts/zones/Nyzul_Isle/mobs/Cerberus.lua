@@ -34,8 +34,8 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller or optParams.noKiller then
         xi.nyzul.enemyLeaderKill(mob)
         xi.nyzul.vigilWeaponDrop(player, mob)
         xi.nyzul.handleRunicKey(mob)

@@ -78,12 +78,15 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     for i = ID.mob.QN_XZOMIT_START, ID.mob.QN_XZOMIT_END do
         if GetMobByID(i):isSpawned() then
             DespawnMob(i)
         end
     end
+end
+
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

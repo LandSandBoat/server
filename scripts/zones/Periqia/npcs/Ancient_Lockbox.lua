@@ -49,16 +49,16 @@ entity.onTrigger = function(player, npc)
             },
 
             {
-                {itemid = xi.items.HI_POTION_P3, droprate = 530},
-                {itemid = 0, droprate = 470},
+                { itemid = xi.items.HI_POTION_P3, droprate = 530 },
+                { itemid = 0, droprate = 470 },
             },
         },
 
         [xi.assault.mission.REQUIEM] =
         {
             {
-                {itemid = xi.items.HI_POTION_P3, droprate = 500},
-                {itemid = 0, droprate = 500},
+                { itemid = xi.items.HI_POTION_P3, droprate = 500 },
+                { itemid = 0, droprate = 500 },
             },
 
             {

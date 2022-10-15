@@ -9,9 +9,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     if (target:hasCorsairEffect()) then
         return 0, 0
     else
@@ -19,7 +19,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
     end
 end
 
-ability_object.onUseAbility = function(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability)
     target:fold()
 
     local merit = target:getMerit(xi.merit.FOLD)
@@ -32,4 +32,4 @@ ability_object.onUseAbility = function(player, target, ability)
     -- return xi.effect.FOLD -- TODO: implement xi.effect.FOLD
 end
 
-return ability_object
+return abilityObject

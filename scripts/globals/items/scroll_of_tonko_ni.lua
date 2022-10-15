@@ -3,14 +3,14 @@
 -- Scroll of Tonko: Ichi
 -- Teaches the ninjutsu Tonko: Ichi
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(354)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(354)
 end
 
-return item_object
+return itemObject

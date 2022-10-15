@@ -17,7 +17,7 @@ entity.onMobFight = function(mob)
     mob:setMod(xi.mod.REGAIN, (100 - mob:getHPP()) * 3.5)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

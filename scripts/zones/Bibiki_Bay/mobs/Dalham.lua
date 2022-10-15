@@ -17,7 +17,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENWATER, {chance = 100})
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENWATER, { chance = 100 })
 end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
@@ -46,7 +46,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

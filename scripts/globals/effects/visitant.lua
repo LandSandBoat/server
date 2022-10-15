@@ -4,7 +4,7 @@
 require("scripts/globals/abyssea")
 require("scripts/globals/zone")
 -----------------------------------
-local effect_object = {}
+local effectObject = {}
 
 local remainingTimeLimits =
 {
@@ -84,7 +84,7 @@ reportTimeRemaining = function(player, effect)
     end
 end
 
-effect_object.onEffectGain = function(target, effect)
+effectObject.onEffectGain = function(target, effect)
     local visEffect = target:getStatusEffect(xi.effect.VISITANT)
 
     visEffect:setFlag(xi.effectFlag.OFFLINE_TICK)
@@ -95,7 +95,7 @@ effect_object.onEffectGain = function(target, effect)
     target:setLocalVar('lastTimeUpdate', effect:getTimeRemaining() / 1000 + 1)
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
     if not xi.abyssea.isInAbysseaZone(target) then
         target:delStatusEffect(effect)
     end
@@ -116,7 +116,7 @@ effect_object.onEffectTick = function(target, effect)
     end
 end
 
-effect_object.onEffectLose = function(target, effect)
+effectObject.onEffectLose = function(target, effect)
     local zoneID = target:getZoneID()
     local ID = zones[zoneID]
 
@@ -144,4 +144,4 @@ effect_object.onEffectLose = function(target, effect)
     target:setCharVar('abysseaLights2', 0)
 end
 
-return effect_object
+return effectObject

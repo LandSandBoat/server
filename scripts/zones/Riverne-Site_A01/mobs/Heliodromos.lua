@@ -14,7 +14,7 @@ entity.onMobRoam = function(mob)
     local heliodromosDespawn = GetServerVariable("Heliodromos_Despawn")
 
     -- 10 minutes have passed since first heliodromos dies. despawn any remaining heliodromos.
-    if (heliodromosDespawn > 0 and heliodromosDespawn <= os.time()) then
+    if heliodromosDespawn > 0 and heliodromosDespawn <= os.time() then
         SetServerVariable("Heliodromos_Despawn", 0)
 
         -- despawn heliodromos
@@ -32,9 +32,9 @@ entity.onMobRoam = function(mob)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     -- one of the heliodromos was killed. set a 10 minute despawn timer before the others despawn
-    if (isKiller and GetServerVariable("Heliodromos_Despawn") == 0) then
+    if optParams.isKiller and GetServerVariable("Heliodromos_Despawn") == 0 then
         SetServerVariable("Heliodromos_Despawn", os.time() + 600)
     end
 end
@@ -43,7 +43,7 @@ entity.onMobDespawn = function(mob)
     local allHeliodromosDead = true
 
     for i = ID.mob.HELIODROMOS_OFFSET, ID.mob.HELIODROMOS_OFFSET + 2 do
-        if (GetMobByID(i):isAlive()) then
+        if GetMobByID(i):isAlive() then
             allHeliodromosDead = false
         end
     end

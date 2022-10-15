@@ -139,7 +139,8 @@ bool CAbilityState::CanUseAbility()
             PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_WAIT_LONGER));
             return false;
         }
-        if (PChar->StatusEffectContainer->HasStatusEffect({ EFFECT_AMNESIA, EFFECT_IMPAIRMENT }) ||
+        if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_AMNESIA) ||
+            (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_IMPAIRMENT) && (PChar->StatusEffectContainer->GetStatusEffect(EFFECT_IMPAIRMENT)->GetPower() == 0x01 || PChar->StatusEffectContainer->GetStatusEffect(EFFECT_IMPAIRMENT)->GetPower() == 0x03)) ||
             (PAbility->getID() >= ABILITY_CONCENTRIC_PULSE && PAbility->getID() <= ABILITY_RADIAL_ARCANA &&
              PAbility->isPetAbility() && !charutils::hasAbility(PChar, PAbility->getID())) ||
             (!PAbility->isPetAbility() && !charutils::hasAbility(PChar, PAbility->getID())) ||

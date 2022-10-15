@@ -7,9 +7,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if (mob:hasStatusEffect(xi.effect.MIGHTY_STRIKES)) then
         return 1
     elseif (mob:hasStatusEffect(xi.effect.INVINCIBLE)) then
@@ -24,7 +24,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dispel =  target:dispelAllStatusEffect(bit.bor(xi.effectFlag.DISPELABLE, xi.effectFlag.FOOD))
 
     if (dispel == 0) then
@@ -39,4 +39,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return dispel
 end
 
-return mobskill_object
+return mobskillObject

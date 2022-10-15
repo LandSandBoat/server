@@ -64,7 +64,7 @@ entity.onMagicHit = function(caster, target, spell)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     player:addTitle(xi.title.XOLOTL_XTRAPOLATOR)
 
     mob:setLocalVar("xolotlDead", 1)

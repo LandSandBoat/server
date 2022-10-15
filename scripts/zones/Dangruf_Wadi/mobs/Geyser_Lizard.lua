@@ -14,7 +14,7 @@ entity.onMobSpawn = function(mob)
     DespawnMob(mob:getID(), 600)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 225)
 end
 

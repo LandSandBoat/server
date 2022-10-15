@@ -32,10 +32,10 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     local jobs =
     {
-        {xi.job.BST, 2},
-        {xi.job.DRG, 3},
-        {xi.job.SMN, 4},
-        {xi.job.PUP, 5},
+        { xi.job.BST, 2 },
+        { xi.job.DRG, 3 },
+        { xi.job.SMN, 4 },
+        { xi.job.PUP, 5 },
     }
 
     for _, v in pairs(jobs) do

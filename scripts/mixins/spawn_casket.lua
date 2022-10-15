@@ -9,7 +9,7 @@ g_mixins = g_mixins or {}
 -- Casket zone check
 -----------------------------------
 g_mixins.spawn_casket = function(casketMob)
-    casketMob:addListener("DEATH", "DEATH_SPAWN_CASKET", function(mob, player, isKiller)
+    casketMob:addListener("DEATH", "DEATH_SPAWN_CASKET", function(mob, player, optParams)
         local mobPos = mob:getPos()
 
         if player then

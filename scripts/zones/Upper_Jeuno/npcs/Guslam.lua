@@ -12,7 +12,7 @@ local entity = {}
 
 local prerequisites =
 {
-    [xi.job.WAR] = { log = xi.quest.log_id.BASTOK,   quest = xi.quest.id.bastok.THE_TALEKEEPER_S_TRUTH       },
+    [xi.job.WAR] = { log = xi.quest.log_id.BASTOK,   quest = xi.quest.id.bastok.THE_TALEKEEPERS_TRUTH        },
     [xi.job.MNK] = { log = xi.quest.log_id.BASTOK,   quest = xi.quest.id.bastok.THE_FIRST_MEETING            },
     [xi.job.WHM] = { log = xi.quest.log_id.SANDORIA, quest = xi.quest.id.sandoria.PRELUDE_OF_BLACK_AND_WHITE },
     [xi.job.BLM] = { log = xi.quest.log_id.WINDURST, quest = xi.quest.id.windurst.RECOLLECTIONS              },

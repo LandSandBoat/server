@@ -12,9 +12,9 @@ require("scripts/globals/magic")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     local pet = player:getPetID()
     if (pet >= 0 and pet <= 7) then -- spirits
         return 0, 0
@@ -23,8 +23,8 @@ ability_object.onAbilityCheck = function(player, target, ability)
     end
 end
 
-ability_object.onUseAbility = function(player,target,ability)
-    local spiritEle = player:getPetElement() -- Just pulled the element ID for the pet to reduce confusion if future changes are made to sql database housing pets
+abilityObject.onUseAbility = function(player,target,ability)
+    local spiritEle = player:getPetID() + 1 -- get the spirit's ID, it is already aligned in proper element order
     -- element order: fire, ice, wind, earth, thunder, water, light, dark
 
     local pEquipMods = player:getMod(xi.mod.ENHANCES_ELEMENTAL_SIPHON) --Will be in era if expansions between TOAU/WINGS are implemented
@@ -64,4 +64,4 @@ ability_object.onUseAbility = function(player,target,ability)
     return player:addMP(power)
 end
 
-return ability_object
+return abilityObject

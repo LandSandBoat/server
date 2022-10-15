@@ -5,22 +5,15 @@
 -- Recast Time: 1:00 minute (3:00 for Valoredge version)
 -- Duration: Instant
 -----------------------------------
-require("scripts/globals/jobpoints")
-require("scripts/globals/settings")
-require("scripts/globals/status")
-require("scripts/globals/msg")
+require("scripts/globals/job_utils/paladin")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
-    if player:getShieldSize() == 0 then
-        return xi.msg.basic.REQUIRES_SHIELD, 0
-    else
-        return 0, 0
-    end
+abilityObject.onAbilityCheck = function(player, target, ability)
+    return xi.job_utils.paladin.checkShieldBash(player, target, ability)
 end
 
-ability_object.onUseAbility = function(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability)
 
     local shieldSize = player:getShieldSize()
     local jpValue = player:getJobPointLevel(xi.jp.SHIELD_BASH_EFFECT)
@@ -77,4 +70,4 @@ ability_object.onUseAbility = function(player, target, ability)
     return damage
 end
 
-return ability_object
+return abilityObject

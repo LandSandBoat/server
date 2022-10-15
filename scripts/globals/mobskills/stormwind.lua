@@ -7,17 +7,17 @@
 --  Range: Unknown radial
 --  Notes:
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
 require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dmgmod = 1
 
     if (mob:getName() == "Kreutzet") then
@@ -36,4 +36,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return dmg
 end
 
-return mobskill_object
+return mobskillObject

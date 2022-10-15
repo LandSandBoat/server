@@ -6,9 +6,9 @@
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     local effect = target:getStatusEffect(xi.effect.EVASION_BOOST)
     if effect ~= nil and effect:getSubType() == 15312 then
         target:delStatusEffect(xi.effect.EVASION_BOOST)
@@ -16,7 +16,7 @@ item_object.onItemCheck = function(target)
     return 0
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     if (not target:hasStatusEffect(xi.effect.EVASION_BOOST)) then
         target:addStatusEffect(xi.effect.EVASION_BOOST, 15, 0, 180, 15312)
     else
@@ -24,4 +24,4 @@ item_object.onItemUse = function(target)
     end
 end
 
-return item_object
+return itemObject

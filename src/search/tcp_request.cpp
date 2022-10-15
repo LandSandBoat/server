@@ -85,7 +85,7 @@ int32 CTCPRequestPacket::GetSize() const
 
 int32 CTCPRequestPacket::ReceiveFromSocket()
 {
-    char recvbuf[DEFAULT_BUFLEN];
+    char recvbuf[DEFAULT_BUFLEN] = {};
 
     m_size = recv(*m_socket, recvbuf, DEFAULT_BUFLEN, 0);
     if (m_size == -1)

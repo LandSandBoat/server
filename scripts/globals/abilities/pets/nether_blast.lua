@@ -8,13 +8,13 @@ require("scripts/globals/mobskills")
 require("scripts/globals/magic")
 require("scripts/globals/summon")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-ability_object.onPetAbility = function(target, pet, skill)
+abilityObject.onPetAbility = function(target, pet, skill)
     local damage = pet:getMainLvl() + 10 -- https://ffxiclopedia.fandom.com/wiki/Nether_Blast | http://wiki.ffo.jp/html/4045.html
     local dmgmod = 5
     local ignoreres = true
@@ -33,4 +33,4 @@ ability_object.onPetAbility = function(target, pet, skill)
     return damage
 end
 
-return ability_object
+return abilityObject

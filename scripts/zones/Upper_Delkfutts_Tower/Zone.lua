@@ -5,20 +5,20 @@ local ID = require('scripts/zones/Upper_Delkfutts_Tower/IDs')
 require('scripts/globals/conquest')
 require('scripts/globals/treasure')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
     zone:registerRegion(1, -369, -146, 83,  -365, -145,  89) -- Tenth Floor F-6 porter to Middle Delkfutt's Tower
     zone:registerRegion(2, -369, -178, -49, -365, -177, -43) -- Twelfth Floor F-10 porter to Stellar Fulcrum
 
     xi.treasure.initZone(zone)
 end
 
-zone_object.onConquestUpdate = function(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
@@ -28,7 +28,7 @@ zone_object.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zone_object.onRegionEnter = function(player, region)
+zoneObject.onRegionEnter = function(player, region)
     switch (region:GetRegionID()): caseof
     {
         [1] = function (x)
@@ -43,13 +43,13 @@ zone_object.onRegionEnter = function(player, region)
     }
 end
 
-zone_object.onRegionLeave = function(player, region)
+zoneObject.onRegionLeave = function(player, region)
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
     if csid == 0 and option == 1 then
         player:setPos(-490, -130, 81, 231, 157)
     elseif csid == 1 and option == 1 then
@@ -57,4 +57,4 @@ zone_object.onEventFinish = function(player, csid, option)
     end
 end
 
-return zone_object
+return zoneObject

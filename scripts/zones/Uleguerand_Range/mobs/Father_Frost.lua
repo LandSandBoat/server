@@ -12,7 +12,7 @@ entity.onMobInitialize = function(mob)
     mob:getStatusEffect(xi.effect.ICE_SPIKES):setFlag(xi.effectFlag.DEATH)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)

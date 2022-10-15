@@ -2,7 +2,7 @@
 -- Area: Phomiuna_Aqueducts
 --  Mob: Fomor Black Mage
 -----------------------------------
-mixins = {require("scripts/mixins/fomor_hate")}
+mixins = { require("scripts/mixins/fomor_hate") }
 local ID = require("scripts/zones/Phomiuna_Aqueducts/IDs")
 -----------------------------------
 local entity = {}
@@ -17,7 +17,7 @@ entity.onMobRoam = function(mob)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

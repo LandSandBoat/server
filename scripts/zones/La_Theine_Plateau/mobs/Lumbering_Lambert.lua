@@ -9,7 +9,7 @@ require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 156)
     xi.tutorial.onMobDeath(player)
 end

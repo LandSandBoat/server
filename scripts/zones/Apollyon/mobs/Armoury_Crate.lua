@@ -12,8 +12,8 @@ entity.onMobInitialize = function(mob)
     mob:setMobMod(xi.mobMod.DRAW_IN_CUSTOM_RANGE, 21)
 end
 
-entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    xi.apollyon_sw.handleMobDeathFloorThree(mob, player, isKiller, noKiller)
+entity.onMobDeath = function(mob, player, optParams)
+    xi.apollyon_sw.handleMobDeathFloorThree(mob, player, optParams.isKiller, optParams.noKiller)
 end
 
 entity.onMobDespawn = function(mob)

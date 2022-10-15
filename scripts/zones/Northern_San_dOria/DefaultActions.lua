@@ -4,6 +4,7 @@ return {
     ['Abeaule']    = { text = ID.text.ABEAULE_DIALOG_THANKS },
     ['Ailbeche']   = { event = 868 },
     ['Chasalvige'] = { event = 6 },
+    ['Eperdur']    = { event = 678 },
     ['Gilipese']   = { text = ID.text.GILIPESE_DIALOG },
     ['Guilerme']   = { text = ID.text.GUILERME_DIALOG },
     ['Helaku']     = { event = 541 },

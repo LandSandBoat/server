@@ -18,7 +18,7 @@ entity.onMobSpawn = function(mob)
     end)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     mob:hideName(true)
 end
 

@@ -3,6 +3,6 @@
 -- Item: ???
 -- Item Effect: ???
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-return item_object
+return itemObject

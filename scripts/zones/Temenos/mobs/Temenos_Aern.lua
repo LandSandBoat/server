@@ -13,8 +13,8 @@ local ID = require("scripts/zones/Temenos/IDs")
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller)
-    if isKiller then
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller then
         mob:setLocalVar("killer", player:getID())
     end
 end

@@ -2,7 +2,7 @@
 -- Area: Boneyard Gully
 --  Mob: Swift Hunter
 -----------------------------------
-mixins = {require("scripts/mixins/families/antlion_ambush")}
+mixins = { require("scripts/mixins/families/antlion_ambush") }
 local ID = require("scripts/zones/Boneyard_Gully/IDs")
 -----------------------------------
 local entity = {}
@@ -20,7 +20,7 @@ entity.onMobEngaged = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

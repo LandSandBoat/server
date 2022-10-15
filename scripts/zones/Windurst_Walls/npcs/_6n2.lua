@@ -29,17 +29,6 @@ entity.onTrigger = function(player, npc)
     elseif iCanHearARainbow == QUEST_ACCEPTED then
         player:startEvent(385, 1125, 1125, 1125, 1125, 1125, 1125, 1125, 1125)
 
-    -- THE PUPPET MASTER (first time)
-    elseif
-        iCanHearARainbow == QUEST_COMPLETED and
-        thePuppetMaster == QUEST_AVAILABLE and
-        player:getMainLvl() >= xi.settings.main.AF1_QUEST_LEVEL and
-        player:getMainJob() == xi.job.SMN
-    then
-        player:startEvent(402)
-    elseif thePuppetMaster == QUEST_ACCEPTED and player:getCharVar("ThePuppetMasterProgress") == 1 then
-        player:startEvent(403)
-
     -- CLASS REUNION
     elseif
         thePuppetMaster == QUEST_COMPLETED and
@@ -60,10 +49,6 @@ entity.onTrigger = function(player, npc)
         not player:needToZone()
     then
         player:startEvent(415)
-
-    -- THE PUPPET MASTER (repeat)
-    elseif thePuppetMaster == QUEST_COMPLETED and not player:hasItem(17532) then
-        player:startEvent(402)
     end
 end
 
@@ -74,14 +59,6 @@ entity.onEventFinish = function(player, csid, option)
     -- I CAN HEAR A RAINBOW
     if csid == 384 then
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.I_CAN_HEAR_A_RAINBOW)
-
-    -- THE PUPPET MASTER
-    elseif csid == 402 then
-        if player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PUPPET_MASTER) == QUEST_COMPLETED then
-            player:delQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PUPPET_MASTER)
-        end
-        player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_PUPPET_MASTER)
-        player:setCharVar("ThePuppetMasterProgress", 1)
 
     -- CLASS REUNION
     elseif csid == 413 then

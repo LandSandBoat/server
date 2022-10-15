@@ -8,7 +8,7 @@ local ID = require("scripts/zones/Full_Moon_Fountain/IDs")
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     global.tryPhaseChange(player)
 end
 

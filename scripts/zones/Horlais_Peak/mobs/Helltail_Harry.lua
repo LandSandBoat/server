@@ -12,7 +12,7 @@ entity.onMobSpawn = function(mob)
     mob:setMod(xi.mod.LULLABYRES, 70)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity
