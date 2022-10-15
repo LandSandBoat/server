@@ -217,7 +217,7 @@ bool CAIContainer::Internal_Cast(uint16 targetid, SpellID spellid)
     auto* entity = dynamic_cast<CBattleEntity*>(PEntity);
     if (entity)
     {
-        if (entity->PAI->IsUntargetable())
+        if (auto target = entity->GetEntity(targetid); target->PAI->IsUntargetable())
         {
             return false;
         }
