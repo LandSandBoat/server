@@ -1588,26 +1588,37 @@ void CBattleEntity::OnCastFinished(CMagicState& state, action_t& action)
     this->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_MAGIC_END);
 }
 
-void CBattleEntity::OnCastInterrupted(CMagicState& state, action_t& action, MSGBASIC_ID msg)
+void CBattleEntity::OnCastInterrupted(CMagicState& state, action_t& action, MSGBASIC_ID msg, bool blockedCast)
 {
     TracyZoneScoped;
     CSpell* PSpell = state.GetSpell();
     if (PSpell)
     {
         action.id         = id;
-        action.actiontype = ACTION_MAGIC_INTERRUPT;
-        action.actionid   = static_cast<uint16>(PSpell->getID());
         action.spellgroup = PSpell->getSpellGroup();
-        action.recast     = 2; // seems hardcoded to 2 from server no matter the spell upon interrupt
+        action.recast     = 0;
+        action.actiontype = ACTION_MAGIC_INTERRUPT;
 
         actionList_t& actionList  = action.getNewActionList();
         actionList.ActionTargetID = id;
 
         actionTarget_t& actionTarget = actionList.getNewActionTarget();
         actionTarget.messageID       = 0;
-        actionTarget.animation       = PSpell->getAnimationID();
+        actionTarget.animation       = 0;
+        actionTarget.param           = static_cast<uint16>(PSpell->getID());
 
-        loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(this, state.GetTarget() ? state.GetTarget() : this, 0, 0, msg));
+        if (blockedCast)
+        {
+            // In a cutscene or otherwise, it seems the target "evades" the cast, despite the ID being set to the caster?
+            // No message is sent in this case
+            actionTarget.reaction = REACTION::EVADE;
+        }
+        else
+        {
+            actionTarget.reaction = REACTION::HIT;
+            // For some reason, despite the system supporting interrupted message in the action packet (like auto attacks, JA), an 0x029 message is sent for spells.
+            loc.zone->PushPacket(this, CHAR_INRANGE_SELF, new CMessageBasicPacket(this, state.GetTarget() ? state.GetTarget() : this, 0, 0, msg));
+        }
     }
 }
 
@@ -1624,6 +1635,10 @@ void CBattleEntity::OnWeaponSkillFinished(CWeaponSkillState& state, action_t& ac
 bool CBattleEntity::CanAttack(CBattleEntity* PTarget, std::unique_ptr<CBasicPacket>& errMsg)
 {
     TracyZoneScoped;
+    if (PTarget->PAI->IsUntargetable())
+    {
+        return false;
+    }
     return !((distance(loc.p, PTarget->loc.p) - PTarget->m_ModelRadius) > GetMeleeRange() || !PAI->GetController()->IsAutoAttackEnabled());
 }
 
@@ -1643,7 +1658,7 @@ void CBattleEntity::OnChangeTarget(CBattleEntity* PTarget)
 {
 }
 
-void CBattleEntity::setActionParalyzed(action_t& action, CBattleEntity* PTarget)
+void CBattleEntity::setActionInterrupted(action_t& action, CBattleEntity* PTarget, uint16 messageID, uint16 actionID)
 {
     if (PTarget)
     {
@@ -1651,25 +1666,11 @@ void CBattleEntity::setActionParalyzed(action_t& action, CBattleEntity* PTarget)
         actionList.ActionTargetID = PTarget->id;
         action.id                 = this->id;
         action.actiontype         = ACTION_MAGIC_FINISH; // all "is paralyzed" messages are cat 4
+        action.actionid           = actionID;
 
         actionTarget_t& actionTarget = actionList.getNewActionTarget();
-        actionTarget.animation       = 0x1FC; // Seems hardcoded, two bits away from 0x1FF
-        actionTarget.messageID       = MSGBASIC_IS_PARALYZED_2;
-        actionTarget.param           = 0;
-    }
-}
-void CBattleEntity::setActionIntimidated(action_t& action, CBattleEntity* PTarget)
-{
-    if (PTarget)
-    {
-        actionList_t& actionList  = action.getNewActionList();
-        actionList.ActionTargetID = PTarget->id;
-        action.id                 = this->id;
-        action.actiontype         = ACTION_MAGIC_FINISH; // all "intimidated" messages are cat 4
-
-        actionTarget_t& actionTarget = actionList.getNewActionTarget();
-        actionTarget.animation       = 0x1FC; // Seems hardcoded, two bits away from 0x1FF
-        actionTarget.messageID       = MSGBASIC_IS_INTIMIDATED;
+        actionTarget.animation       = 0x1FC; // Seems hardcoded, two bits away from 0x1FF (0x1FC = 1 1111 1100)
+        actionTarget.messageID       = messageID;
         actionTarget.param           = 0;
     }
 }
@@ -1696,13 +1697,13 @@ bool CBattleEntity::OnAttack(CAttackState& state, action_t& action)
 
     if (battleutils::IsParalyzed(this))
     {
-        setActionParalyzed(action, PTarget);
+        setActionInterrupted(action, PTarget, MSGBASIC_IS_PARALYZED_2, 0);
         return true;
     }
 
     if (battleutils::IsIntimidated(this, PTarget))
     {
-        setActionIntimidated(action, PTarget);
+        setActionInterrupted(action, PTarget, MSGBASIC_IS_INTIMIDATED, 0);
         return true;
     }
 
