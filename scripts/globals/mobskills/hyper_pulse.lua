@@ -11,10 +11,7 @@ require("scripts/globals/status")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target,mob,skill)
-    local currentForm = mob:getLocalVar("form")
-    local skillList = mob:getMobMod(xi.mobMod.SKILL_LIST)
-
-    if (mob:getAnimationSub() == 2 and currentForm == 1) or skillList == 54 then -- proto-omega bipedform
+    if not target:isBehind(mob) then
         return 0
     end
     return 1
