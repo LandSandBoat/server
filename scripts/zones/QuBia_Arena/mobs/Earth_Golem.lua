@@ -18,7 +18,7 @@ entity.onMobSpawn = function(mob)
 
                 if golem:getID() ~= mobArg:getID() then
                     -- Crystal Weapon (Elemental)
-                    if skillID == 679 then
+                    if skillID == 682 then
                         golem:useMobAbility(679 + i)
 
                     -- Ice Break / Thunder Break
