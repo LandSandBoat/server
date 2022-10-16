@@ -1,4 +1,4 @@
-import mysql.connector
+import mariadb
 
 def migration_name():
     return "Adding IP Exceptions Table"
@@ -22,5 +22,5 @@ def migrate(cur, db):
                     PRIMARY KEY ( accid ));")
         db.commit()
 
-    except mysql.connector.Error as err:
+    except mariadb.Error as err:
         print("Something went wrong: {}".format(err))

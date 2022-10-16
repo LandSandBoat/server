@@ -1,4 +1,4 @@
-import mysql.connector
+import mariadb
 
 def migration_name():
     return "Converting mission status"
@@ -27,5 +27,5 @@ def migrate(cur, db):
             cur.execute("UPDATE chars SET missions = %s WHERE charid = %s", (missions, charid))
             cur.execute("DELETE char_vars FROM char_vars WHERE charid = {} AND varname = 'missionStatus';".format(charid))
             db.commit()
-        except mysql.connector.Error as err:
+        except mariadb.Error as err:
             print("Something went wrong: {}".format(err))

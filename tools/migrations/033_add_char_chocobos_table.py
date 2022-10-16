@@ -1,4 +1,4 @@
-import mysql.connector
+import mariadb
 
 def migration_name():
     return "Adding char_chocobos table"
@@ -46,5 +46,5 @@ def migrate(cur, db):
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
         """)
         db.commit()
-    except mysql.connector.Error as err:
+    except mariadb.Error as err:
         print("Something went wrong: {}".format(err))
