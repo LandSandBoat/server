@@ -462,7 +462,7 @@ xi.spells.damage.calculateResist = function(caster, target, spell, skillType, sp
     end
 
     if spellElement ~= xi.magic.ele.NONE then
-        if target:isMob() then
+        if target:isMob() and target:isNM() then
             tryBuildResistance(target, xi.magic.resistMod[spellElement], false)
         end
         -- Mod set in database. Base 0 means not resistant nor weak.

@@ -877,9 +877,21 @@ uint16 CBattleEntity::ACC(uint8 attackNumber, uint8 offsetAccuracy)
 uint16 CBattleEntity::DEF()
 {
     int32 DEF = 8 + m_modStat[Mod::DEF] + VIT() / 2;
+
     if (this->StatusEffectContainer->HasStatusEffect(EFFECT_COUNTERSTANCE, 0))
     {
-        return DEF / 2;
+        DEF = 1 + VIT() / 2;
+
+        if (this->StatusEffectContainer->HasStatusEffect(EFFECT_MINNE))
+        {
+            DEF += this->StatusEffectContainer->GetStatusEffect(EFFECT_MINNE)->GetPower();
+        }
+
+        int32 defModApplicatble = 0;
+
+        defModApplicatble += std::clamp((DEF * std::clamp((int)m_modStat[Mod::DEFP], -100, 0) / 100), -999, 0);
+
+        return std::clamp(DEF + defModApplicatble, 1, 9999);
     }
 
     return DEF + (DEF * m_modStat[Mod::DEFP] / 100) + std::min<int16>((DEF * m_modStat[Mod::FOOD_DEFP] / 100), m_modStat[Mod::FOOD_DEF_CAP]);

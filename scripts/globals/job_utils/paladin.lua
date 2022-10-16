@@ -182,39 +182,52 @@ end
 
 xi.job_utils.paladin.useShieldBash = function(player, target, ability)
     local shieldSize = player:getShieldSize()
-    local jpValue    = player:getJobPointLevel(xi.jp.SHIELD_BASH_EFFECT)
-    local damage     = math.floor(player:getMainLvl() * 0.273)
-    local chance     = 90
+    local jpValue = player:getJobPointLevel(xi.jp.SHIELD_BASH_EFFECT)
+    local damage = 0
+    local chance = 90
 
-    if shieldSize == 2 then
-        damage = 13 + damage
+    damage = player:getMod(xi.mod.SHIELD_BASH)
+
+    if shieldSize == 1 or shieldSize == 5 then
+        damage = 25 + damage
+    elseif shieldSize == 2 then
+        damage = 38 + damage
     elseif shieldSize == 3 then
-        damage = 40 + damage
+        damage = 65 + damage
     elseif shieldSize == 4 then
-        damage = 67 + damage
+        damage = 90 + damage
     end
 
     -- Main job factors
-    if player:getMainJob() ~= xi.job.PLD then
-        damage = math.floor(damage / 2.5)
-        chance = 60
-    else
+    if player:getMainJob() == xi.job.PLD then
         damage = math.floor(damage)
+    else
+        damage = math.floor(damage / 2.2)
+        chance = 80
     end
 
-    damage = damage + player:getMod(xi.mod.SHIELD_BASH) + (jpValue * 10)
+    damage = damage + jpValue * 10
 
     -- Calculate stun proc chance
     chance = chance + (player:getMainLvl() - target:getMainLvl()) * 5
 
-    if math.random() * 100 < chance then
+    if math.random()*100 < chance then
         target:addStatusEffect(xi.effect.STUN, 1, 0, 6)
     end
 
     -- Randomize damage
-    local randomizer = 1 + (math.random(1, 5) / 100)
+    local ratio = player:getStat(xi.mod.ATT)/target:getStat(xi.mod.DEF)
 
-    damage = damage * randomizer
+    if ratio > 1.3 then
+        ratio = 1.3
+    end
+
+    if ratio < 0.2 then
+        ratio = 0.2
+    end
+
+    local pdif = math.random(ratio * 0.8 * 1000, ratio * 1.2 * 1000)
+    damage = damage * (pdif / 1000)
     damage = utils.stoneskin(target, damage)
 
     target:takeDamage(damage, player, xi.attackType.PHYSICAL, xi.damageType.BLUNT)
