@@ -10,7 +10,6 @@ local entity = {}
 entity.onMobSpawn = function(mob)
     mob:addListener("WEAPONSKILL_STATE_ENTER", "GOLEM_WEAPONSKILL__STATE_ENTER", function(mobArg, skillID)
         local bfNum = mob:getBattlefield():getArea()
-        print(1)
 
         if mobArg:getLocalVar("control") == 0 then
             for i = 0, 3 do
