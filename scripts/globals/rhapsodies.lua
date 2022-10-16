@@ -294,6 +294,12 @@ xi.rhapsodies.requiredCharacters =
         xi.rhapsodies.character.TENZEN,
     },
 
+    [xi.mission.id.rov.BANISHING_THE_DARKNESS] =
+    {
+        xi.rhapsodies.character.PRISHE,
+        xi.rhapsodies.character.TENZEN,
+    },
+
     [xi.mission.id.rov.OVER_THE_RAINBOW] =
     {
         xi.rhapsodies.character.TENZEN,
