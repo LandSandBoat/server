@@ -23,6 +23,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "../../../common/mmo.h"
 #include "../../../common/utils.h"
+#include "../../ai/ai_container.h"
+#include "../../ai/states/inactive_state.h"
 #include "../../alliance.h"
 #include "../../enmity_container.h"
 #include "../../entities/charentity.h"
@@ -414,10 +416,13 @@ validEntity will check if the given entity can be targeted in the AoE.
 */
 bool CTargetFind::validEntity(CBattleEntity* PTarget)
 {
+    // Check if entity is already in list
+    // TODO: Does it make sense to use a hashmap here instead?
     if (std::find(m_targets.begin(), m_targets.end(), PTarget) != m_targets.end())
     {
         return false;
     }
+
     if (!(m_findFlags & FINDFLAGS_DEAD) && PTarget->isDead())
     {
         return false;
@@ -430,6 +435,12 @@ bool CTargetFind::validEntity(CBattleEntity* PTarget)
     }
 
     if (m_PTarget == PTarget || PTarget->getZone() != m_zone || PTarget->GetUntargetable() || PTarget->status == STATUS_TYPE::INVISIBLE)
+    {
+        return false;
+    }
+
+    // Super Jump or otherwise untargetable
+    if (PTarget->PAI->IsUntargetable())
     {
         return false;
     }

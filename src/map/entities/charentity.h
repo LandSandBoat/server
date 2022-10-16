@@ -548,7 +548,7 @@ public:
     virtual void           OnEngage(CAttackState&) override;
     virtual void           OnDisengage(CAttackState&) override;
     virtual void           OnCastFinished(CMagicState&, action_t&) override;
-    virtual void           OnCastInterrupted(CMagicState&, action_t&, MSGBASIC_ID msg) override;
+    virtual void           OnCastInterrupted(CMagicState&, action_t&, MSGBASIC_ID msg, bool blockedCast) override;
     virtual void           OnWeaponSkillFinished(CWeaponSkillState&, action_t&) override;
     virtual void           OnAbility(CAbilityState&, action_t&) override;
     virtual void           OnRangedAttack(CRangeState&, action_t&) override;

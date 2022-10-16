@@ -13841,7 +13841,7 @@ bool CLuaBaseEntity::hasPreventActionEffect()
 
 /************************************************************************
  *  Function: stun()
- *  Purpose : Stuns a mob for a specified amount of time (in ms)
+ *  Purpose : Stuns an entity for a specified amount of time (in ms)
  *  Example : mob:stun(5000) -- Stun for 5 seconds
  *  Notes   : To Do: Change to seconds for standardization?
  ************************************************************************/
@@ -13849,6 +13849,19 @@ bool CLuaBaseEntity::hasPreventActionEffect()
 void CLuaBaseEntity::stun(uint32 milliseconds)
 {
     m_PBaseEntity->PAI->Inactive(std::chrono::milliseconds(milliseconds), false);
+}
+
+/************************************************************************
+ *  Function: untargetableAndUnactionable()
+ *  Purpose : Puts an entity into a stun state
+ *            Also disallows them from being targed as part of a check in PAI->TargetFind
+ *  Example : mob:stun(5000) -- Stun for 5 seconds
+ *  Notes   : To Do: Change to seconds for standardization?
+ ************************************************************************/
+
+void CLuaBaseEntity::untargetableAndUnactionable(uint32 milliseconds)
+{
+    m_PBaseEntity->PAI->Untargetable(std::chrono::milliseconds(milliseconds), false);
 }
 
 /************************************************************************
@@ -15225,6 +15238,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("restoreFromChest", CLuaBaseEntity::restoreFromChest);
     SOL_REGISTER("hasPreventActionEffect", CLuaBaseEntity::hasPreventActionEffect);
     SOL_REGISTER("stun", CLuaBaseEntity::stun);
+    SOL_REGISTER("untargetableAndUnactionable", CLuaBaseEntity::untargetableAndUnactionable);
 
     SOL_REGISTER("getPool", CLuaBaseEntity::getPool);
     SOL_REGISTER("getDropID", CLuaBaseEntity::getDropID);
