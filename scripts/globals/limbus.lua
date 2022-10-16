@@ -147,21 +147,10 @@ end
 function xi.limbus.handleDoors(battlefield, open, door)
     local battlefieldID = battlefield:getID()
     local animation     = xi.animation.CLOSE_DOOR
-    local ID
+    local ID = zones[xi.zone.TEMENOS]
 
     if open then
         animation = xi.animation.OPEN_DOOR
-    end
-
-    if
-        battlefieldID == 1290 or
-        battlefieldID == 1291 or
-        battlefieldID == 1292 or
-        battlefieldID == 1293
-    then
-        ID = zones[xi.zone.APOLLYON]
-    else
-        ID = zones[xi.zone.TEMENOS]
     end
 
     if door then
@@ -180,34 +169,6 @@ function xi.limbus.handleDoors(battlefield, open, door)
 
     switch (battlefieldID): caseof
     {
-        -- NW Apollyon
-        [1290] = function()
-            for i = 1, 4 do
-                GetNPCByID(ID.npc.APOLLYON_NW_PORTAL[i]):setAnimation(animation)
-            end
-        end,
-
-        -- SW Apollyon
-        [1291] = function()
-            for i = 1, 3 do
-                GetNPCByID(ID.npc.APOLLYON_SW_PORTAL[i]):setAnimation(animation)
-            end
-        end,
-
-        -- NE Apollyon
-        [1292] = function()
-            for i = 1, 4 do
-                GetNPCByID(ID.npc.APOLLYON_NE_PORTAL[i]):setAnimation(animation)
-            end
-        end,
-
-        -- SE Apollyon
-        [1293] = function()
-            for i = 1, 3 do
-                GetNPCByID(ID.SE_APOLLYON.npc.PORTAL[i]):setAnimation(animation)
-            end
-        end,
-
         -- Temenos: Northern Tower
         [1299] = function()
             for i = 1, 7 do
@@ -494,18 +455,6 @@ function xi.limbus.spawnRecoverFrom(mob, crateID)
     xi.limbus.showRecoverCrate(crateID)
 end
 
-function xi.limbus.openDoor(battlefield, doorID)
-    local door = GetNPCByID(doorID)
-    local ID = zones[door:getZoneID()]
-    local remaining = battlefield:getRemainingTime() / 60
-
-    for i, player in pairs(battlefield:getPlayers()) do
-        player:messageSpecial(ID.text.GATE_OPEN)
-        player:messageSpecial(ID.text.TIME_LEFT, remaining)
-    end
-    door:setAnimation(xi.animation.OPEN_DOOR)
-end
-
 Limbus = setmetatable({ }, { __index = Battlefield })
 Limbus.__index = Limbus
 Limbus.__eq = function(m1, m2)
@@ -559,7 +508,7 @@ function Limbus:onBattlefieldInitialise(battlefield)
     Battlefield.onBattlefieldInitialise(self, battlefield)
     SetServerVariable(self.serverVar, battlefield:getTimeLimit() / 60)
 
-    xi.limbus.handleDoors(battlefield)
+    self:closeDoors()
 
     local ID = zones[battlefield:getZoneID()][self.name]
     -- Setup Item Crates
@@ -622,7 +571,6 @@ function Limbus:onBattlefieldEnter(player, battlefield)
 end
 
 function Limbus:onBattlefieldDestroy(battlefield)
-    xi.limbus.handleDoors(battlefield, true)
     SetServerVariable(self.serverVar, 0)
 end
 
@@ -686,6 +634,20 @@ function Limbus:handleLinkedCrate(player, npc)
     end
 end
 
-function Limbus:openDoor(battlefield, doorId)
-    xi.limbus.openDoor(battlefield, doorId)
+function Limbus:openDoor(battlefield, floor)
+    local door = GetNPCByID(self.ID.npc.PORTAL[floor])
+    local ID = zones[door:getZoneID()]
+    local remaining = battlefield:getRemainingTime() / 60
+
+    for i, player in pairs(battlefield:getPlayers()) do
+        player:messageSpecial(ID.text.GATE_OPEN)
+        player:messageSpecial(ID.text.TIME_LEFT, remaining)
+    end
+    door:setAnimation(xi.animation.OPEN_DOOR)
+end
+
+function Limbus:closeDoors()
+    for _, doorID in ipairs(self.ID.npc.PORTAL) do
+        GetNPCByID(doorID):setAnimation(xi.animation.CLOSE_DOOR)
+    end
 end
