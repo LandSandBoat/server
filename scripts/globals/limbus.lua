@@ -520,6 +520,7 @@ Limbus.serverVar = ""
 --  - name: The name of the Limbus area
 function Limbus:new(data)
     data.createsWornItem = false
+    data.showTimer = false
     local obj = Battlefield:new(data)
     setmetatable(obj, self)
     obj.name = data.name

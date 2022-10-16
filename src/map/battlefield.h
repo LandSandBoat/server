@@ -202,7 +202,9 @@ public:
     void addGroup(BattlefieldGroup group);
     void handleDeath(CBaseEntity* PEntity);
 
-    uint8                         m_isMission;
+    uint8 m_isMission;
+    bool  m_showTimer = true;
+
     std::set<uint32>              m_RegisteredPlayers;
     std::set<uint32>              m_EnteredPlayers;
     std::vector<CNpcEntity*>      m_NpcList;

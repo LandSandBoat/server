@@ -126,6 +126,7 @@ end
 --  - allowSubjob: Determines if character subjobs are enabled or disabled upon entry. Defaults to true. (optional)
 --  - hasWipeGrace: Grants players a 3 minute grace period on a full wipe before ejecting them. Defaults to true. (optional)
 --  - canLoseExp: Determines if a character loses experience points upon death while inside the battlefield. Defaults to true. (optional)
+--  - showTimer: Show the time remaining in the battlefield in the UI for the player. Defaults to true. (optional)
 --  - delayToExit: Amount of time to wait before exiting the battlefield. Defaults to 5 seconds. (optional)
 --  - requiredItems: Items required to be traded to enter the battlefield.
 --                   Needs to be in the format of { itemid, quantity, useMessage = ID.text.*, wearMessage = ID.text.*, wornMessage = ID.text.* }. (optional)
@@ -151,6 +152,7 @@ function Battlefield:new(data)
     obj.allowSubjob = (data.allowSubjob == nil or data.allowSubjob) or false
     obj.hasWipeGrace = (data.hasWipeGrace == nil or data.hasWipeGrace) or false
     obj.canLoseExp = (data.canLoseExp == nil or data.canLoseExp) or false
+    obj.showTimer = (data.showTimer == nil or data.showTimer) or false
     obj.delayToExit = data.delayToExit or 5
     obj.requiredItems = data.requiredItems or {}
     obj.requiredKeyItems = data.requiredKeyItems or {}
