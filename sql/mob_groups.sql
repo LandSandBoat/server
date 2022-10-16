@@ -5577,7 +5577,7 @@ INSERT INTO `mob_groups` VALUES (153,1324,89,'Ferreous_Coffin',0,128,0,0,0,1,1,0
 INSERT INTO `mob_groups` VALUES (154,2403,89,'Lewenhart',0,128,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (155,291,89,'Auroral_Alicorn',0,128,0,0,0,1,1,0);
 INSERT INTO `mob_groups` VALUES (156,4679,89,'Ocythoe',0,128,0,0,9999,90,95,0);
-INSERT INTO `mob_groups` VALUES (157,6821,89,'Cetus',0,128,0,0,0,0,0,0);
+INSERT INTO `mob_groups` VALUES (157,6821,89,'Cetus',0,128,0,90000,0,150,150,0);
 
 -- ------------------------------------------------------------
 -- Pashhow_Marshlands_[S] (Zone 90)
