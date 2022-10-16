@@ -62,6 +62,7 @@ player_data = [
     'accounts_banned.sql',
     'auction_house.sql',
     'char_blacklist.sql',
+    'char_chocobos.sql',
     'char_effects.sql',
     'char_equip.sql',
     'char_equip_saved.sql',
