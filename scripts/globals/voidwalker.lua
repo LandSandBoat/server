@@ -412,10 +412,10 @@ xi.voidwalker.onMobDespawn = function(mob)
     DespawnPet(mob)
 end
 
-xi.voidwalker.onMobDeath = function(mob, player, isKiller, keyItem)
+xi.voidwalker.onMobDeath = function(mob, player, optParams, keyItem)
     if player then
         local popkeyitem = mob:getLocalVar("[VoidWalker]PopedWith")
-        if isKiller then
+        if optParams.isKiller then
             local playerpoped = GetPlayerByID(mob:getLocalVar("[VoidWalker]PopedBy"))
             local alliance = player:getAlliance()
             local outOfParty = true

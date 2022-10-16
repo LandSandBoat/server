@@ -15,7 +15,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
     return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.HP_DRAIN, { chance = 20, power = math.random(300, 375) }) -- "more than occasionally for 300 damage or more."
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     player:setCharVar("circleTime", 8) -- Set flag so that final CS will show when you interact with alter again
 end
 

@@ -3,9 +3,9 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effect_object = {}
+local effectObject = {}
 
-effect_object.onEffectGain = function(target, effect)
+effectObject.onEffectGain = function(target, effect)
     local effectregain = { 20, 50, 20, 20, 30, 30, 30, 40, 40, 10, 60, 0 }
     local effectregen = { 4, 20, 6, 8, 10, 12, 14, 16, 18, 3, 25, 0 }
     if (effect:getPower() > 69) then
@@ -30,10 +30,10 @@ effect_object.onEffectGain = function(target, effect)
     end
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
 end
 
-effect_object.onEffectLose = function(target, effect)
+effectObject.onEffectLose = function(target, effect)
     local effectregain = { 20, 50, 20, 20, 30, 30, 30, 40, 40, 10, 60, 0 }
     local effectregen = { 4, 20, 6, 8, 10, 12, 14, 16, 18, 3, 25, 0 }
     if (effect:getPower() > 69) then
@@ -58,4 +58,4 @@ effect_object.onEffectLose = function(target, effect)
     end
 end
 
-return effect_object
+return effectObject

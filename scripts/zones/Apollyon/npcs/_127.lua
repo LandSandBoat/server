@@ -16,7 +16,7 @@ entity.onTrade = function(player, npc, trade)
         player:setCharVar("ApollyonEntrance", 0)
         xi.bcnm.onTrade(player, npc, trade)
     else
-        player:messageSpecial(ID.text.NO_KEY)
+        player:messageSpecial(ID.text.NO_BATTLEFIELD_ENTRY)
     end
 end
 
@@ -28,7 +28,7 @@ entity.onTrigger = function(player, npc)
         player:setCharVar("ApollyonEntrance", 0)
         xi.bcnm.onTrigger(player, npc)
     else
-        player:messageSpecial(ID.text.NO_KEY)
+        player:messageSpecial(ID.text.NO_BATTLEFIELD_ENTRY)
     end
 end
 

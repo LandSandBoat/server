@@ -3,14 +3,14 @@
 -- Scroll of Armys Paeton III
 -- Teaches the song Armys Paeton III
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(380)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(380)
 end
 
-return item_object
+return itemObject

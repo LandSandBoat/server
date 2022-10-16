@@ -3,14 +3,14 @@
 -- Scroll of Blizzard II
 -- Teaches the black magic Blizzard II
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(150)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(150)
 end
 
-return item_object
+return itemObject

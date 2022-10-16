@@ -94,7 +94,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     player:addTitle(xi.title.ASPIDOCHELONE_SINKER)
     mob:removeListener("ASPID_TAKE_DAMAGE")
 end

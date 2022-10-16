@@ -6,14 +6,14 @@
 require("scripts/globals/status")
 require("scripts/globals/salvage")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return salvageUtil.onCellItemCheck(target, xi.effect.DEBILITATION, 0x002)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     return salvageUtil.onCellItemUse(target, xi.effect.DEBILITATION, 0x002, 12)
 end
 
-return item_object
+return itemObject

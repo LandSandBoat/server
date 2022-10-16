@@ -6,9 +6,9 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     local effect = target:getStatusEffect(xi.effect.ENMITY_BOOST)
     if effect ~= nil and effect:getSubType() == 14789 then
         target:delStatusEffect(xi.effect.ENMITY_BOOST)
@@ -16,8 +16,8 @@ item_object.onItemCheck = function(target)
     return 0
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addStatusEffect(xi.effect.ENMITY_BOOST, 10, 0, 180, 14789)
 end
 
-return item_object
+return itemObject

@@ -73,7 +73,7 @@ entity.onMobDisengage = function(mob)
     ajidoSelectTarget(mob)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     mob:getBattlefield():lose()
     local players = mob:getBattlefield():getPlayers()
     for _, playerObj in pairs(players) do

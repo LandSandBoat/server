@@ -12,9 +12,9 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     if (player:hasStatusEffect(xi.effect.FAN_DANCE)) then
         return xi.msg.basic.UNABLE_TO_USE_JA2, 0
     elseif (player:hasStatusEffect(xi.effect.TRANCE)) then
@@ -26,7 +26,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
     end
 end
 
-ability_object.onUseAbility = function(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability)
     -- Only remove TP if the player doesn't have Trance.
     if not player:hasStatusEffect(xi.effect.TRANCE) then
         player:delTP(250)
@@ -40,4 +40,4 @@ ability_object.onUseAbility = function(player, target, ability)
 
 end
 
-return ability_object
+return abilityObject

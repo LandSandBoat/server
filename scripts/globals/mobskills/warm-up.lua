@@ -8,9 +8,9 @@ require("scripts/globals/mobskills")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     -- only brown-skinned mamool should use this move
     local mobSkin = mob:getModelId()
     if (mobSkin == 1639 or mobSkin == 1619) then
@@ -20,7 +20,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
     end
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     -- This is nonsensically overpowering: mob:getMainLvl() + 0.05*mob:getMaxHP()*(skill:getTP()/1000)
     local power = 10 -- Power needs redone with retail MOB VERSION formula not players blue magic
     local effectID
@@ -48,4 +48,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return effectID
 end
 
-return mobskill_object
+return mobskillObject

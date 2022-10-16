@@ -145,7 +145,7 @@ quest.sections =
 
             ['Lich_C_Magnus'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     -- player:addTitle(xi.title.LICH_BANISHER)
 
                     if quest:getVar(player, 'Prog') == 1 then

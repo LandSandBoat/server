@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Windurst Walls
 --  NPC: Yoran-Oran
--- Type: Standard NPC
 -- !pos -109.987 -14 203.338 239
 -----------------------------------
 require("scripts/globals/quests")
@@ -32,27 +31,14 @@ end
 
 entity.onTrigger = function(player, npc)
     local mandragoraMad = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.MANDRAGORA_MAD)
-    local blastFromPast = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.BLAST_FROM_THE_PAST)
     local turmoil = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TORAIMARAI_TURMOIL)
 
-    if blastFromPast == QUEST_ACCEPTED then
-        local blastPastProg = player:getCharVar("BlastFromThePast_Prog")
-        if (blastPastProg == 1) then
-            player:startEvent(221)
-            player:setCharVar("BlastFromThePast_Prog", 2)
-        elseif (blastPastProg == 2) then
-            player:startEvent(222)
-        end
-    elseif blastFromPast == QUEST_COMPLETED and player:needToZone() == true then
-        player:startEvent(223)
-    elseif mandragoraMad == QUEST_AVAILABLE then
+    if mandragoraMad == QUEST_AVAILABLE then
         player:startEvent(249)
     elseif mandragoraMad == QUEST_ACCEPTED then
         player:startEvent(256)
     elseif turmoil == QUEST_ACCEPTED then
         player:startEvent(392)
-    else
-        player:startEvent(245)
     end
 end
 

@@ -176,7 +176,7 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
         end
 
         local tp = avatar:getTP()
-        local params = {atk100 = mtp100, atk200 = mtp200, atk300 = mtp300,}
+        local params = { atk100 = mtp100, atk200 = mtp200, atk300 = mtp300 }
         local pDifTable = cMeleeRatio(avatar, target, params, 0, tp, xi.slot.MAIN)
         local pDif = pDifTable[1]
         local pDifCrit = pDifTable[2]

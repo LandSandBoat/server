@@ -3,9 +3,9 @@
 -- Checks eligibility to use
 -- maxBabies set by NM lua
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     local id = mob:getID()
 
     -- Progenerator - Ancient Flames Beckon
@@ -21,7 +21,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 1
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local id = mob:getID()
     local pos = mob:getPos()
 
@@ -49,4 +49,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return 0
 end
 
-return mobskill_object
+return mobskillObject

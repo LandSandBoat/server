@@ -5,9 +5,9 @@ local ID = require('scripts/zones/The_Shrine_of_RuAvitau/IDs')
 require('scripts/globals/conquest')
 require('scripts/globals/zone')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
     -- MAP 1
     zone:registerRegion(1, -21, 29, -61, -16, 31, -57)     --> F (H-10)
     zone:registerRegion(2, 16, 29, 57, 21, 31, 61)         --> E (H-7)
@@ -40,7 +40,7 @@ zone_object.onInitialize = function(zone)
 
 end
 
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
@@ -50,11 +50,11 @@ zone_object.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zone_object.onConquestUpdate = function(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zone_object.onRegionEnter = function(player, region)
+zoneObject.onRegionEnter = function(player, region)
     switch (region:GetRegionID()): caseof
     {
         [1] = function (x)
@@ -120,10 +120,10 @@ zone_object.onRegionEnter = function(player, region)
 
 end
 
-zone_object.onRegionLeave = function(player, region)
+zoneObject.onRegionLeave = function(player, region)
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
     if csid >= 1 and csid <= 19 and option == 0 then
         for _, entry in pairs(player:getNotorietyList()) do
             entry:clearEnmity(player) -- reset hate on player after teleporting
@@ -131,7 +131,7 @@ zone_object.onEventUpdate = function(player, csid, option)
     end
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
 end
 
-return zone_object
+return zoneObject

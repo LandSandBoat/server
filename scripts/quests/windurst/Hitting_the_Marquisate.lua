@@ -204,7 +204,7 @@ quest.sections =
                     local yatnielProgress = quest:getVar(player, 'yatnielProg')
 
                     if
-                        npcUtil.tradeHasExactly(trade, {{ xi.items.QUAKE_GRENADE, 4 }}) and
+                        npcUtil.tradeHasExactly(trade, { { xi.items.QUAKE_GRENADE, 4 } }) and
                         yatnielProgress == 1
                     then
                         return quest:progressEvent(10031)

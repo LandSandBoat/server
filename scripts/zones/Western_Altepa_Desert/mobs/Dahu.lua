@@ -29,7 +29,7 @@ entity.onMobRoam = function(mob)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 413)
         UpdateNMSpawnPoint(mob:getID())
         mob:setRespawnTime(3600)

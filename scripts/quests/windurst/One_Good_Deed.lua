@@ -87,7 +87,7 @@ quest.sections =
 
             ['Perifool'] =
             {
-                onMobDeath = function(mob, player, isKiller, firstCall)
+                onMobDeath = function(mob, player, optParams)
                     if quest:getVar(player, 'Prog') == 0 then
                         quest:setVar(player, 'Prog', 1)
                     end

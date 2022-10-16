@@ -1,16 +1,9 @@
 -----------------------------------
 -- Area: Metalworks
 --  NPC: Cid
--- Starts & Finishes Quest: The Usual, Dark Puppet (start), Shoot First, Ask Questions Later
 -- !pos -12 -12 1 237
 -----------------------------------
-local ID = require("scripts/zones/Metalworks/IDs")
-require("scripts/globals/keyitems")
 require("scripts/globals/missions")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/status")
-require("scripts/globals/titles")
 -----------------------------------
 local entity = {}
 

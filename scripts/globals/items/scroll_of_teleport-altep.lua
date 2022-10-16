@@ -3,14 +3,14 @@
 -- Scroll of Teleport-Altep
 -- Teaches the white magic Teleport-Altep
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(121)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(121)
 end
 
-return item_object
+return itemObject

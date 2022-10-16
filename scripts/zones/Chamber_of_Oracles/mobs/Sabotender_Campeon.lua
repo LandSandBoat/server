@@ -11,25 +11,25 @@ local entity = {}
 local destinations =
 {
     {
-        {  0,100,-240}, -- center
-        {  0,100,-252}, -- front
-        {-12,100,-240}, -- left
-        { 12,100,-240}, -- right
-        {  0,100,-239}, -- back
+        {   0,100,-240 }, -- center
+        {   0,100,-252 }, -- front
+        { -12,100,-240 }, -- left
+        {  12,100,-240 }, -- right
+        {   0,100,-239 }, -- back
     },
     {
-        {  1,0,  1}, -- center
-        {  1,0,-13}, -- front
-        {-13,0,  1}, -- left
-        { 13,0,  1}, -- right
-        {  1,0, 10}, -- back
+        {   1,0,  1 }, -- center
+        {   1,0,-13 }, -- front
+        { -13,0,  1 }, -- left
+        {  13,0,  1 }, -- right
+        {   1,0, 10 }, -- back
     },
     {
-        {  0,-100,240}, -- center
-        {  0,-100,228}, -- front
-        {-12,-100,240}, -- left
-        { 12,-100,240}, -- right
-        {  0,-100,249}, -- back
+        {   0,-100,240 }, -- center
+        {   0,-100,228 }, -- front
+        { -12,-100,240 }, -- left
+        {  12,-100,240 }, -- right
+        {   0,-100,249 }, -- back
     },
 }
 
@@ -79,7 +79,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

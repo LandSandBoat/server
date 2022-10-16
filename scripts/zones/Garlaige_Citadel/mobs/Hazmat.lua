@@ -10,7 +10,7 @@ entity.onMobInitialize = function(mob)
     mob:addMod(xi.mod.UFASTCAST, 50)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 300)
 end
 

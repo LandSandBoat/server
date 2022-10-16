@@ -505,7 +505,7 @@ xi.dynamis.somnialThresholdOnEventFinish = function(player, csid, option)
     end
 end
 
-xi.dynamis.megaBossOnDeath = function(mob, player, isKiller)
+xi.dynamis.megaBossOnDeath = function(mob, player, optParams)
     local zoneId = player:getZoneID()
     local info = dynaInfo[zoneId]
 
@@ -517,7 +517,7 @@ xi.dynamis.megaBossOnDeath = function(mob, player, isKiller)
     end
 end
 
-xi.dynamis.timeExtensionOnDeath = function(mob, player, isKiller)
+xi.dynamis.timeExtensionOnDeath = function(mob, player, optParams)
     local mobId = mob:getID()
     local zoneId = mob:getZoneID()
     local ID = zones[zoneId]
@@ -559,7 +559,7 @@ xi.dynamis.timeExtensionOnDeath = function(mob, player, isKiller)
             end
 
             -- spawn a new mob in this group
-            if isKiller then
+            if optParams.isKiller then
                 local teId = group[math.random(#group)]
                 if teId ~= mobId then
                     DisallowRespawn(mobId, true)
@@ -606,7 +606,7 @@ xi.dynamis.refillStatueOnSpawn = function(mob)
     end
 end
 
-xi.dynamis.refillStatueOnDeath = function(mob, player, isKiller)
+xi.dynamis.refillStatueOnDeath = function(mob, player, optParams)
     local mobId = mob:getID()
     local zoneId = mob:getZoneID()
     local ID = zones[zoneId]
@@ -633,7 +633,7 @@ xi.dynamis.refillStatueOnDeath = function(mob, player, isKiller)
         end
 
         if found then
-            if isKiller then
+            if optParams.isKiller then
                 -- MP or HP refill
                 if eye == xi.dynamis.eye.BLUE or eye == xi.dynamis.eye.GREEN then
                     local zone = mob:getZone()

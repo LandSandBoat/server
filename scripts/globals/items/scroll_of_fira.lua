@@ -3,14 +3,14 @@
 -- Scroll of Fira
 -- Teaches the black magic Fira
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(xi.magic.spell.FIRA)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(xi.magic.spell.FIRA)
 end
 
-return item_object
+return itemObject

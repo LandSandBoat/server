@@ -43,9 +43,10 @@ enum BCRULES : uint8
 
 enum BATTLEFIELDMOBCONDITION : uint8
 {
-    CONDITION_NONE             = 0x00,
-    CONDITION_SPAWNED_AT_START = 0x01,
-    CONDITION_WIN_REQUIREMENT  = 0x02
+    CONDITION_NONE               = 0x00,
+    CONDITION_SPAWNED_AT_START   = 0x01,
+    CONDITION_WIN_REQUIREMENT    = 0x02,
+    CONDITION_DISAPPEAR_AT_START = 0x04,
 };
 
 enum BATTLEFIELD_LEAVE_CODE : uint8
@@ -131,7 +132,7 @@ struct BattlefieldGroup
 class CBattlefield : public std::enable_shared_from_this<CBattlefield>
 {
 public:
-    CBattlefield(uint16 id, CZone* PZone, uint8 area, CCharEntity* PInitiator);
+    CBattlefield(uint16 id, CZone* PZone, uint8 area, CCharEntity* PInitiator, bool isInteraction);
     ~CBattlefield();
 
     uint16                        GetID() const;
@@ -155,9 +156,11 @@ public:
     duration                      GetRemainingTime() const;
     duration                      GetLastTimeUpdate() const;
     uint64_t                      GetLocalVar(std::string const& name) const;
+    uint32                        GetArmouryCrate() const;
 
     bool CheckInProgress();
     bool IsOccupied() const;
+    bool isInteraction() const;
 
     void ForEachPlayer(const std::function<void(CCharEntity*)>& func);
     void ForEachEnemy(const std::function<void(CMobEntity*)>& func);
@@ -181,6 +184,7 @@ public:
     void SetLevelCap(uint8 cap);
     void SetLocalVar(std::string const& name, uint64_t value);
     void SetLastTimeUpdate(duration time);
+    void setArmouryCrate(uint32 entityId);
 
     void         ApplyLevelRestrictions(CCharEntity* PChar) const;
     void         ClearEnmityForEntity(CBattleEntity* PEntity);
@@ -190,7 +194,7 @@ public:
     bool         RemoveEntity(CBaseEntity* PEntity, uint8 leavecode = 0);
     void         onTick(time_point time);
     bool         CanCleanup(bool cleanup = false);
-    void         Cleanup();
+    bool         Cleanup(time_point time, bool force);
     bool         LoadMobs();
     bool         SpawnLoot(CBaseEntity* PEntity = nullptr);
 
@@ -224,9 +228,14 @@ private:
     duration               m_LastPromptTime;
     size_t                 m_MaxParticipants;
     uint8                  m_LevelCap;
+    // Entity id of the Armoury Crate that appears upon victory
+    uint32     m_armouryCrate = 0;
+    const bool m_isInteraction;
 
-    bool m_Cleanup{ false };
-    bool m_Attacked{ false };
+    time_point m_cleanupTime;
+    bool       m_cleanedPlayers = false;
+    bool       m_Cleanup        = false;
+    bool       m_Attacked       = false;
 
     std::unordered_map<std::string, uint64_t> m_LocalVars;
     std::vector<BattlefieldGroup>             m_groups;

@@ -30,10 +30,10 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     local id = mob:getID()
 
-    if isKiller then
+    if optParams.isKiller then
         for i = 1, 3 do
             if GetMobByID(id+i):isAlive() then
                 GetMobByID(id+i):setHP(0)

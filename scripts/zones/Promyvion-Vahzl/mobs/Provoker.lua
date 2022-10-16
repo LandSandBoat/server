@@ -2,7 +2,7 @@
 -- Area: Promyvion - Vahzl
 --   NM: Provoker
 -----------------------------------
-mixins = {require("scripts/mixins/families/empty_terroanima")}
+mixins = { require("scripts/mixins/families/empty_terroanima") }
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
@@ -48,7 +48,7 @@ entity.onAdditionalEffect = function(mob, target, damage)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

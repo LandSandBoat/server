@@ -3,11 +3,11 @@
 -- Mob: Leaviathan Prime
 -- Quest: Waking the Beast
 -----------------------------------
-mixins = {require("scripts/mixins/wtb_prime")}
+mixins = { require("scripts/mixins/wtb_prime") }
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

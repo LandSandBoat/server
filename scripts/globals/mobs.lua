@@ -15,16 +15,16 @@ xi = xi or {}
 xi.mob = xi.mob or {}
 
 -- onMobDeathEx is called from the core
-xi.mob.onMobDeathEx = function(mob, player, isKiller, isWeaponSkillKill)
+xi.mob.onMobDeathEx = function(mob, player, optParams)
     -- Things that happen only to the person who landed killing blow
-    if isKiller then
+    if optParams.isKiller then
         -- DRK quest - Blade Of Darkness
         if
             (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DARKNESS) == QUEST_ACCEPTED or
             player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DEATH) == QUEST_ACCEPTED) and
             player:getEquipID(xi.slot.MAIN) == 16607 and
             player:getCharVar("ChaosbringerKills") < 200 and
-            not isWeaponSkillKill
+            not optParams.isWeaponSkillKill
         then
             player:incrementCharVar("ChaosbringerKills", 1)
         end

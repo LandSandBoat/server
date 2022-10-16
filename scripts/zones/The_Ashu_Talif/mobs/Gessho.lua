@@ -63,7 +63,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     mob:showText(mob, ID.text.SO_I_FALL)
 end
 

@@ -3,9 +3,9 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effect_object = {}
+local effectObject = {}
 
-effect_object.onEffectGain = function(target, effect)
+effectObject.onEffectGain = function(target, effect)
     target:recalculateAbilitiesTable()
     local bonus = effect:getPower()
     local regen = effect:getSubPower()
@@ -27,10 +27,10 @@ effect_object.onEffectGain = function(target, effect)
     target:recalculateSkillsTable()
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
 end
 
-effect_object.onEffectLose = function(target, effect)
+effectObject.onEffectLose = function(target, effect)
     target:recalculateAbilitiesTable()
     local bonus = effect:getPower()
     local regen = effect:getSubPower()
@@ -52,4 +52,4 @@ effect_object.onEffectLose = function(target, effect)
     target:recalculateSkillsTable()
 end
 
-return effect_object
+return effectObject

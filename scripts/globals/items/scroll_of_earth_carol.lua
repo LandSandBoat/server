@@ -3,14 +3,14 @@
 -- Scroll of Earth Carol
 -- Teaches the song Earth Carol
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(441)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(441)
 end
 
-return item_object
+return itemObject

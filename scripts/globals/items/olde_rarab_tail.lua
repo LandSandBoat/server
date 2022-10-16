@@ -5,13 +5,13 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return 0
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     local typeEffect = xi.effect.TERROR
     local duration = 90
     local ID = zones[target:getZoneID()]
@@ -24,4 +24,4 @@ item_object.onItemUse = function(target)
     end
 end
 
-return item_object
+return itemObject

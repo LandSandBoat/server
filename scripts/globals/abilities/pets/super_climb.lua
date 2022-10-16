@@ -8,13 +8,13 @@
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-ability_object.onUseAbility = function(pet, target, ability)
+abilityObject.onUseAbility = function(pet, target, ability)
     pet:queue(0, function(petArg)
         petArg:addStatusEffectEx(xi.effect.ALL_MISS, xi.effect.NONE, 2, 3, 5, 0, 0, 0, xi.effectFlag.NO_LOSS_MESSAGE)
         petArg:addStatusEffectEx(xi.effect.PHYSICAL_SHIELD, xi.effect.NONE, 1, 3, 5, 0, 0, 0, xi.effectFlag.NO_LOSS_MESSAGE)
@@ -23,4 +23,4 @@ ability_object.onUseAbility = function(pet, target, ability)
     end)
 end
 
-return ability_object
+return abilityObject

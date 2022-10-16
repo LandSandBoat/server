@@ -8,15 +8,15 @@ local entity = {}
 
 local buffs = -- Buff, potency, messageID
 {
-    {                    "Cure",  25,    ID.text.KURREA_CURE},
-    {           xi.effect.HASTE,  25, ID.text.KURREA_MUSCLES},
-    { xi.effect.PHYSICAL_SHIELD,   1,    ID.text.KURREA_AURA},
-    { xi.effect.MAGIC_ATK_BOOST, 100,    ID.text.KURREA_EYES},
-    {   xi.effect.DEFENSE_BOOST, 100,   ID.text.KURREA_RIGID},
-    {    xi.effect.ATTACK_BOOST, 100,    ID.text.KURREA_VEIN},
-    {    xi.effect.MAGIC_SHIELD,   1,   ID.text.KURREA_SHINE},
-    {   xi.effect.EVASION_BOOST, 100,    ID.text.KURREA_WIND},
-    {    xi.effect.DEFENSE_DOWN, 100,   ID.text.KURREA_GREEN},
+    {                    "Cure",  25,    ID.text.KURREA_CURE },
+    {           xi.effect.HASTE,  25, ID.text.KURREA_MUSCLES },
+    { xi.effect.PHYSICAL_SHIELD,   1,    ID.text.KURREA_AURA },
+    { xi.effect.MAGIC_ATK_BOOST, 100,    ID.text.KURREA_EYES },
+    {   xi.effect.DEFENSE_BOOST, 100,   ID.text.KURREA_RIGID },
+    {    xi.effect.ATTACK_BOOST, 100,    ID.text.KURREA_VEIN },
+    {    xi.effect.MAGIC_SHIELD,   1,   ID.text.KURREA_SHINE },
+    {   xi.effect.EVASION_BOOST, 100,    ID.text.KURREA_WIND },
+    {    xi.effect.DEFENSE_DOWN, 100,   ID.text.KURREA_GREEN },
 }
 
 entity.onMobSpawn = function(mob)
@@ -75,7 +75,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

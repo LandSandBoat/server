@@ -77,7 +77,7 @@
   74    Clouds Over Ulbuka          Balamor's theme song
   75    The Price                   Adoulin Final Battle
   76    Forever Today               Adoulin Ending Song
-  77    Unused ID                   Unused ID
+  77    Distant Worlds (Instrumental)
   78    Forever Today (EP. Ver - Instrumental)
   79    Iroha                       Reisenjima, Rhapsodies CS music
   80    The Boundless Black         Escha Zi'Tah, Escha Ru'Aun
@@ -85,12 +85,12 @@
   82    Wail of the Void            Rhapsodies finale
   83    Rhapsodies of Vana'diel     Ending Song
   84    Full Speed Ahead!           Mount riding music
-  85    ?                           ???
+  85    Ambuscade                   Legion
   86    Awakening                   Dynamis, Shadow Lord Fight
-  87    ?                           ???
-  88    ?                           Dynamis Divergence
-  89    ?                           ???
-  90    ?                           ???
+  87    Unknown Title               Omen
+  88    Unknown Title               Dynamis Divergence
+  89    Unknown Title               Dynamis Divergence
+  90    Unknown Title               ???
   91    Unused ID                   Unused ID
   92    Unused ID                   Unused ID
   93    Unused ID                   Unused ID
@@ -177,11 +177,11 @@
  174    Whispers of the Gods        Aydeewa Subterrane
  175    Bandits' Market             Nashmau
  176    Circuit de Chocobo          Chocobo Circuit
- 177    Run Chocobo, Run!           ???
+ 177    Run Chocobo, Run!           Chocobo (full length)
  178    Bustle of the Capital       Al Zahbi/Aht Urhgan Whitegate
  179    Vana'diel March #4          Title Screen 3 (ToAU)
  180    Thunder of the March        Bastok Markets [S]
- 181    ?                           Chocobo (short)
+ 181    Dash de Chocobo             Chocobo (short)
  182    Stargazing                  Windurst Waters [S]
  183    A Puppet's Slumber          Aphmau's Theme
  184    Eternal Gravestone          Luzaf's Theme
@@ -203,10 +203,10 @@
  200    Hidden Truths               CS
  201    End Theme                   Zilart Ending CS
  202    Moongate (Memoro)           CS / Memoria de la s^tona
- 203    ?                           ???
- 204    ?                           ???
- 205    ?                           CS (Memoria de la S^tona ?)
- 206    ?                           CS
+ 203    Ancient Verse of Uggalepih  CS
+ 204    Ancient Verse of Ro'Maeve   CS
+ 205    Ancient Verse of Altepa     CS
+ 206    Revenant Maiden             CS
  207    Ve'Lugannon Palace          VeLugannon Palace/The Shrine of RuAvitau
  208    Rabao                       Rabao
  209    Norg                        Norg
@@ -243,8 +243,8 @@
  240    Distant Promises            CS
  241    A Time for Prayer           CS
  242    Unity                       Title Screen 2 (CoP)
- 243    ?                           CS
- 244    ?                           CS
+ 243    Grav'iton                   CS
+ 244    Revenant Maiden             CS
  245    The Forgotten City          Tavnazian Safehold/Sealions Den
  246    March of the Allied Forces  CS
  247    Roar of the Battle Drums    Campaign Battle

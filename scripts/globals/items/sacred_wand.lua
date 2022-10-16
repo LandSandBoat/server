@@ -4,9 +4,9 @@
 -- Enchantment: Enlight
 -- Duration: 3 minutes
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     local effect = target:getStatusEffect(xi.effect.ENLIGHT)
     if effect ~= nil and effect:getSubType() == 18393 then
         target:delStatusEffect(xi.effect.ENLIGHT)
@@ -14,7 +14,7 @@ item_object.onItemCheck = function(target)
     return 0
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     local effect = xi.effect.ENLIGHT
     local magicskill = target:getSkillLevel(xi.skill.ENHANCING_MAGIC)
     local potency = 0
@@ -30,4 +30,4 @@ item_object.onItemUse = function(target)
     target:addStatusEffect(effect, potency, 0, 180, 18393)
 end
 
-return item_object
+return itemObject

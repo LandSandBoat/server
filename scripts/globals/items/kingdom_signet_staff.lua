@@ -8,9 +8,9 @@ require("scripts/globals/conquest")
 require("scripts/globals/zone")
 require("scripts/globals/msg")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target, user)
+itemObject.onItemCheck = function(target, user)
     if target:getNation() ~= xi.nation.SANDORIA then
         return xi.msg.basic.ITEM_CANNOT_USE_ON
     end
@@ -30,9 +30,9 @@ item_object.onItemCheck = function(target, user)
     return 0
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:delStatusEffectsByFlag(xi.effectFlag.INFLUENCE, true)
     target:addStatusEffect(xi.effect.SIGNET, 0, 0, 18000)
 end
 
-return item_object
+return itemObject

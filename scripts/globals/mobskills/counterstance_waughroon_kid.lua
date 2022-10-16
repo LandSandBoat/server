@@ -6,13 +6,13 @@
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(mob, target, skill)
+mobskillObject.onMobSkillCheck = function(mob, target, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(mob, target, skill)
+mobskillObject.onMobWeaponSkill = function(mob, target, skill)
     local typeEffect = xi.effect.COUNTERSTANCE
     local power = 20
 
@@ -20,4 +20,4 @@ mobskill_object.onMobWeaponSkill = function(mob, target, skill)
     return typeEffect
 end
 
-return mobskill_object
+return mobskillObject

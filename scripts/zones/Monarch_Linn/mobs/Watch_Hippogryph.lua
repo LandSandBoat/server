@@ -32,7 +32,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     local guardHippo = GetMobByID(mob:getID()+1)
 
     if guardHippo:isAlive() then

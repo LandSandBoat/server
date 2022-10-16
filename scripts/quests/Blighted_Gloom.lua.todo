@@ -13,7 +13,6 @@ require('scripts/globals/interaction/quest')
 require('scripts/globals/npc_util')
 -----------------------------------
 
-
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BLIGHTED_GLOOM)
 
 quest.reward = {}
@@ -83,7 +82,6 @@ quest.sections = {
         },
     },
 
-
     -- Section: Questing
     {
         check = function(player, status, vars)
@@ -126,7 +124,7 @@ quest.sections = {
             },
 
             ['Metallic_Slime'] = {
-                onMobDeath = function(mob, player, isKiller)
+                onMobDeath = function(mob, player, optParams)
                     player:setLocalVar("triggerFellow", 1)
                     player:timer(30000, function(player) player:despawnFellow() end)
                 end,
@@ -159,7 +157,7 @@ quest.sections = {
             },
 
             ['Metallic_Slime'] = {
-                onMobDeath = function(mob, player, isKiller)
+                onMobDeath = function(mob, player, optParams)
                     player:setLocalVar("triggerFellow", 1)
                     player:timer(30000, function(player) player:despawnFellow() end)
                 end,
@@ -192,7 +190,7 @@ quest.sections = {
             },
 
             ['Metallic_Slime'] = {
-                onMobDeath = function(mob, player, isKiller)
+                onMobDeath = function(mob, player, optParams)
                     player:setLocalVar("triggerFellow", 1)
                     player:timer(30000, function(player) player:despawnFellow() end)
                 end,

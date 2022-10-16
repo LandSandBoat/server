@@ -24,7 +24,7 @@ quest.sections =
         {
             ['Sensenmann'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     xi.abyssea.dominionOnMobDeath(mob, player, 594)
                 end,
             },

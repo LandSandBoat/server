@@ -6,9 +6,9 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effect_object = {}
+local effectObject = {}
 
-effect_object.onEffectGain = function(target, effect)
+effectObject.onEffectGain = function(target, effect)
     --Auspice Reduces TP via adding to your Subtle Blow Mod
     local subtleBlowBonus = 10 + target:getMod(xi.mod.AUSPICE_EFFECT)
 
@@ -23,10 +23,10 @@ effect_object.onEffectGain = function(target, effect)
     end
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
 end
 
-effect_object.onEffectLose = function(target, effect)
+effectObject.onEffectLose = function(target, effect)
     local subtleBlow = effect:getSubPower()
 
     target:delMod(xi.mod.SUBTLE_BLOW, subtleBlow)
@@ -44,4 +44,4 @@ effect_object.onEffectLose = function(target, effect)
 
 end
 
-return effect_object
+return effectObject

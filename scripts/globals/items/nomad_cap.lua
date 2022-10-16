@@ -3,13 +3,13 @@
 --  Nomad Cap
 --  Transports the user to their Home Nation
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return 0
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     local nation = target:getNation(target)
     if (nation == 0) then -- San d'Oria
         target:setPos(126, 0, -1, 122, 231)
@@ -26,4 +26,4 @@ item_object.onItemUse = function(target)
     print( "Unable to fetch target's nation." )
 end
 
-return item_object
+return itemObject

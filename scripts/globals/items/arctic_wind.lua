@@ -5,9 +5,9 @@
 -----------------------------------------
 require("scripts/globals/status")
 -----------------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onAdditionalEffect = function(player, target, damage)
+itemObject.onAdditionalEffect = function(player, target, damage)
     if not target:isMob() then
         return 1
     end
@@ -18,4 +18,4 @@ item_object.onAdditionalEffect = function(player, target, damage)
     return 0, 0, 0
 end
 
-return item_object
+return itemObject

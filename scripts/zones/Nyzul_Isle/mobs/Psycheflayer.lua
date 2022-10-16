@@ -15,8 +15,8 @@ entity.onMobSpawn = function(mob)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller or optParams.noKiller then
         xi.nyzul.spawnChest(mob, player)
         xi.nyzul.specifiedEnemyKill(mob)
 

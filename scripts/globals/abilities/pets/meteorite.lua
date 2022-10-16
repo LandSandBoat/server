@@ -6,13 +6,13 @@ require("scripts/globals/status")
 require("scripts/globals/mobskills")
 
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-ability_object.onPetAbility = function(target, pet, skill)
+abilityObject.onPetAbility = function(target, pet, skill)
     local dint = pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT)
     local tp = pet:getTP()
     local dmgmod = 0
@@ -33,4 +33,4 @@ ability_object.onPetAbility = function(target, pet, skill)
     return damage
 end
 
-return ability_object
+return abilityObject

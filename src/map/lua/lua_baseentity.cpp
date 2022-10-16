@@ -221,6 +221,12 @@ void CLuaBaseEntity::showText(CLuaBaseEntity* mob, uint16 messageID, sol::object
 
 void CLuaBaseEntity::messageText(CLuaBaseEntity* PLuaBaseEntity, uint16 messageID, sol::object const& arg2, sol::object const& arg3)
 {
+    if (PLuaBaseEntity == nullptr)
+    {
+        ShowError("CLuaBaseEntity::messageText() - argument 1 of CLuaBaseEntity* was nullptr");
+        return;
+    }
+
     CBaseEntity* PTarget  = PLuaBaseEntity->m_PBaseEntity;
     bool         showName = true;
     uint8        mode     = 0;
@@ -3635,13 +3641,13 @@ bool CLuaBaseEntity::addUsedItem(uint16 itemID)
 }
 
 /************************************************************************
- *  Function: hasWornItem()
- *  Purpose : Returns true if a player has a worn (unusable) item
- *  Example : if player:hasWornItem(trade:getItemId()) then
+ *  Function: getWornUses()
+ *  Purpose : Gets the worn state on an item
+ *  Example : if player:getWornUses(trade:getItemId()) > 0 then
  *  Notes   : Used mainly for Testimonies and BCNM orbs
  ************************************************************************/
 
-bool CLuaBaseEntity::hasWornItem(uint16 itemID)
+uint8 CLuaBaseEntity::getWornUses(uint16 itemID)
 {
     auto* PChar  = static_cast<CCharEntity*>(m_PBaseEntity);
     uint8 slotID = PChar->getStorage(LOC_INVENTORY)->SearchItem(itemID);
@@ -3650,28 +3656,33 @@ bool CLuaBaseEntity::hasWornItem(uint16 itemID)
     {
         CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(slotID);
 
-        return PItem->m_extra[0] == 1;
+        return PItem->m_extra[0];
     }
 
-    return false;
+    return 0;
 }
 
 /************************************************************************
- *  Function: createWornItem()
- *  Purpose : Flags an item as being used up (worn)
- *  Example : player:createWornItem(itemID)
+ *  Function: incrementItemWear()
+ *  Purpose : Increments an item's worn state and returns it
+ *  Example : player:incrementItemWear(itemID)
  *  Notes   : Prevent Orbs and Testimonies from being used again
  ************************************************************************/
 
-void CLuaBaseEntity::createWornItem(uint16 itemID)
+uint8 CLuaBaseEntity::incrementItemWear(uint16 itemID)
 {
     auto* PChar  = static_cast<CCharEntity*>(m_PBaseEntity);
     uint8 slotID = PChar->getStorage(LOC_INVENTORY)->SearchItem(itemID);
 
     if (slotID != ERROR_SLOTID)
     {
-        CItem* PItem      = PChar->getStorage(LOC_INVENTORY)->GetItem(slotID);
-        PItem->m_extra[0] = 1;
+        CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(slotID);
+        if (PItem->m_extra[0] == UINT8_MAX)
+        {
+            return PItem->m_extra[0];
+        }
+
+        ++PItem->m_extra[0];
 
         char extra[sizeof(PItem->m_extra) * 2 + 1];
         sql->EscapeStringLen(extra, (const char*)PItem->m_extra, sizeof(PItem->m_extra));
@@ -3681,7 +3692,11 @@ void CLuaBaseEntity::createWornItem(uint16 itemID)
                             "WHERE charid = %u AND location = %u AND slot = %u;";
 
         sql->Query(Query, extra, PChar->id, PItem->getLocationID(), PItem->getSlotID());
+
+        return PItem->m_extra[0];
     }
+
+    return 0;
 }
 
 /************************************************************************
@@ -9466,7 +9481,7 @@ int32 CLuaBaseEntity::getBattlefieldID()
  *  Notes   : Returns BATTLEFIELD_RETURNCODE (see scripts/globals/battlefield.lua or src/map/battlefield.h)
  ************************************************************************/
 
-uint8 CLuaBaseEntity::registerBattlefield(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2)
+uint8 CLuaBaseEntity::registerBattlefield(sol::object const& arg0, sol::object const& arg1, sol::object const& arg2, sol::object const& arg3)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->loc.zone->m_BattlefieldHandler == nullptr);
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_PC);
@@ -9474,18 +9489,30 @@ uint8 CLuaBaseEntity::registerBattlefield(sol::object const& arg0, sol::object c
     auto* PChar = static_cast<CCharEntity*>(m_PBaseEntity);
     auto* PZone = PChar->loc.zone == nullptr ? zoneutils::GetZone(PChar->loc.destination) : PChar->loc.zone;
 
-    int    battlefield = (arg0 != sol::lua_nil) ? arg0.as<int>() : -1;
-    uint8  area        = (arg1 != sol::lua_nil) ? arg1.as<uint8>() : 1;
-    uint32 initiator   = (arg2 != sol::lua_nil) ? arg2.as<uint32>() : 0;
-
     // TODO: Verify what happens if -1 makes it to the cast below
-    if (battlefield < 0)
+    if (arg0 == sol::lua_nil)
     {
         ShowError("CLuaBaseEntity::registerBattlefield() - Battlefield State was < 0.  Investigate!");
-        return 6; // For safety, if we hit this condition, return battlefield full.
+        return BATTLEFIELD_RETURN_CODE_BATTLEFIELD_FULL; // For safety, if we hit this condition, return battlefield full.
     }
 
-    return PZone->m_BattlefieldHandler->RegisterBattlefield(PChar, static_cast<uint16>(battlefield), area, initiator);
+    BattlefieldRegistration registration;
+    registration.id        = arg0.as<int>();
+    registration.area      = (arg1 != sol::lua_nil) ? arg1.as<uint8>() : 1;
+    registration.initiator = (arg2 != sol::lua_nil) ? arg2.as<uint32>() : 0;
+
+    if (arg3 != sol::lua_nil)
+    {
+        sol::table battlefield  = arg3.as<sol::table>();
+        registration.maxPlayers = battlefield["maxPlayers"];
+        registration.levelCap   = battlefield["levelCap"];
+        registration.timeLimit  = std::chrono::seconds(battlefield.get<int32>("timeLimit"));
+        registration.isMission  = battlefield.get_or("isMission", false);
+        registration.rules |= battlefield.get<bool>("allowSubjob") ? RULES_ALLOW_SUBJOBS : 0;
+        registration.rules |= battlefield.get<bool>("canLoseExp") ? RULES_LOSE_EXP : 0;
+    }
+
+    return PZone->m_BattlefieldHandler->RegisterBattlefield(PChar, registration);
 }
 
 bool CLuaBaseEntity::battlefieldAtCapacity(int battlefieldID)
@@ -14982,6 +15009,68 @@ void CLuaBaseEntity::clearActionQueue()
     }
 }
 
+void CLuaBaseEntity::setMannequinPose(uint16 itemID, uint8 race, uint8 pose)
+{
+    TracyZoneScoped;
+
+    // Find the item in the player inventory and update the extra values
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        for (uint8 i = 0; i < CONTAINER_ID::MAX_CONTAINER_ID; ++i)
+        {
+            if (auto slot = PChar->getStorage(i)->SearchItem(itemID); slot != ERROR_SLOTID)
+            {
+                auto* item = PChar->getStorage(i)->GetItem(slot);
+                if (item && item->getID() == itemID && item->isMannequin())
+                {
+                    if (auto* PMannequin = dynamic_cast<CItemFurnishing*>(item))
+                    {
+                        PMannequin->setMannequinRace(race);
+                        PMannequin->setMannequinPose(pose);
+
+                        // Include the update into the database
+                        char        extra[sizeof(PMannequin->m_extra) * 2 + 1];
+                        const char* fmtQuery = "UPDATE char_inventory  \
+                               SET extra = '%s' \
+                               WHERE charid = %u AND itemId = %u;";
+
+                        sql->EscapeStringLen(extra, (const char*)PMannequin->m_extra, sizeof(PMannequin->m_extra));
+                        if (sql->Query(fmtQuery, extra, PChar->id, PMannequin->getID()) == SQL_ERROR)
+                        {
+                            ShowError("lua_baseentity::setMannequinPose: Cannot insert item to database");
+                        }
+                    }
+                    return; // We can exit here, since we found a matching mannequin and they can have only one of each
+                }
+            }
+        }
+    }
+}
+
+uint8 CLuaBaseEntity::getMannequinPose(uint16 itemID)
+{
+    TracyZoneScoped;
+
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        for (uint8 i = 0; i < CONTAINER_ID::MAX_CONTAINER_ID; ++i)
+        {
+            if (auto slot = PChar->getStorage(i)->SearchItem(itemID); slot != ERROR_SLOTID)
+            {
+                auto* item = PChar->getStorage(i)->GetItem(slot);
+                if (item && item->getID() == itemID && item->isMannequin())
+                {
+                    if (auto* PMannequin = dynamic_cast<CItemFurnishing*>(item))
+                    {
+                        return PMannequin->getMannequinPose();
+                    }
+                }
+            }
+        }
+    }
+
+    return 0;
+}
 //==========================================================//
 
 void CLuaBaseEntity::Register()
@@ -15140,8 +15229,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("delItem", CLuaBaseEntity::delItem);
     SOL_REGISTER("addUsedItem", CLuaBaseEntity::addUsedItem);
     SOL_REGISTER("addTempItem", CLuaBaseEntity::addTempItem);
-    SOL_REGISTER("hasWornItem", CLuaBaseEntity::hasWornItem);
-    SOL_REGISTER("createWornItem", CLuaBaseEntity::createWornItem);
+    SOL_REGISTER("getWornUses", CLuaBaseEntity::getWornUses);
+    SOL_REGISTER("incrementItemWear", CLuaBaseEntity::incrementItemWear);
     SOL_REGISTER("findItem", CLuaBaseEntity::findItem);
 
     SOL_REGISTER("createShop", CLuaBaseEntity::createShop);
@@ -15774,6 +15863,9 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getChocoboRaisingInfo", CLuaBaseEntity::getChocoboRaisingInfo);
     SOL_REGISTER("setChocoboRaisingInfo", CLuaBaseEntity::setChocoboRaisingInfo);
     SOL_REGISTER("deleteRaisedChocobo", CLuaBaseEntity::deleteRaisedChocobo);
+
+    SOL_REGISTER("setMannequinPose", CLuaBaseEntity::setMannequinPose);
+    SOL_REGISTER("getMannequinPose", CLuaBaseEntity::getMannequinPose);
 }
 
 std::ostream& operator<<(std::ostream& os, const CLuaBaseEntity& entity)

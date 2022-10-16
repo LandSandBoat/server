@@ -99,7 +99,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     mob:messageText(mob, ID.text.HOW_IS_THIS_POSSIBLE)
     -- Reset controls so that remaining shiks don't get locked from weaponskilling
     GetMobByID(mob:getID()+1):setLocalVar("control", 0)

@@ -3,9 +3,9 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effect_object = {}
+local effectObject = {}
 
-effect_object.onEffectGain = function(target, effect)
+effectObject.onEffectGain = function(target, effect)
     target:addMod(xi.mod.FIRE_MEVA, -effect:getPower())
     target:addMod(xi.mod.ICE_MEVA, -effect:getPower())
     target:addMod(xi.mod.WIND_MEVA, -effect:getPower())
@@ -16,10 +16,10 @@ effect_object.onEffectGain = function(target, effect)
     target:addMod(xi.mod.DARK_MEVA, -effect:getPower())
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
 end
 
-effect_object.onEffectLose = function(target, effect)
+effectObject.onEffectLose = function(target, effect)
     target:delMod(xi.mod.FIRE_MEVA, -effect:getPower())
     target:delMod(xi.mod.ICE_MEVA, -effect:getPower())
     target:delMod(xi.mod.WIND_MEVA, -effect:getPower())
@@ -30,4 +30,4 @@ effect_object.onEffectLose = function(target, effect)
     target:delMod(xi.mod.DARK_MEVA, -effect:getPower())
 end
 
-return effect_object
+return effectObject
