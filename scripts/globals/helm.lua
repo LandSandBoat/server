@@ -17,6 +17,7 @@ require("scripts/globals/status")
 require("scripts/globals/zone")
 require("scripts/missions/amk/helpers")
 require("scripts/missions/wotg/helpers")
+require("scripts/globals/msg")
 -----------------------------------
 
 xi = xi or {}
@@ -1500,6 +1501,7 @@ end
 xi.helm.onTrade = function(player, npc, trade, helmType, csid, func)
     local info = helmInfo[helmType]
     local zoneId = player:getZoneID()
+    local lastTrade = player:getLocalVar("[HELM]Last_Trade")
 
     -- HELM should remove invisible
     player:delStatusEffect(xi.effect.INVISIBLE)
@@ -1510,48 +1512,54 @@ xi.helm.onTrade = function(player, npc, trade, helmType, csid, func)
         local broke = doesToolBreak(player, info) and 1 or 0
         local full  = (player:getFreeSlotsCount() == 0) and 1 or 0
 
-        if csid then
-            player:startEvent(csid, item, broke, full)
-        end
-
-        player:sendEmote(npc, info.animation, xi.emoteMode.MOTION)
-
-        -- WotG : The Price of Valor; Success does not award an item, but only KI.
-        if xi.wotg.helpers.helmTrade(player, helmType, broke) then
-            return
-        end
-
-        -- success! reward item and decrement number of remaining uses on the point
-        if item ~= 0 and full == 0 then
-            player:addItem(item)
-
-            local uses = (npc:getLocalVar("uses") - 1) % 4
-            npc:setLocalVar("uses", uses)
-            if uses == 0 then
-                movePoint(npc, zoneId, info)
+        if os.time() > lastTrade + 4 then
+            if csid then
+                player:startEvent(csid, item, broke, full)
             end
 
-            player:triggerRoeEvent(xi.roe.triggers.helmSuccess, { ["skillType"] = helmType })
-        end
+            player:sendEmote(npc, info.animation, xi.emoteMode.MOTION)
 
-        -- quest stuff
-        if
-            helmType == xi.helm.type.HARVESTING and
-            player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.VANISHING_ACT) == QUEST_ACCEPTED and
-            not player:hasKeyItem(xi.ki.RAINBOW_BERRY) and
-            broke ~= 1 and
-            zoneId == xi.zone.WAJAOM_WOODLANDS
-        then
-            npcUtil.giveKeyItem(player, xi.ki.RAINBOW_BERRY)
-        end
+            -- WotG : The Price of Valor; Success does not award an item, but only KI.
+            if xi.wotg.helpers.helmTrade(player, helmType, broke) then
+                return
+            end
 
-        -- AMK04
-        if xi.settings.main.ENABLE_AMK == 1 then
-            xi.amk.helpers.helmTrade(player, helmType, broke)
-        end
+            -- success! reward item and decrement number of remaining uses on the point
+            if item ~= 0 and full == 0 then
+                player:addItem(item)
 
-        if type(func) == "function" then
-            func(player)
+                local uses = (npc:getLocalVar("uses") - 1) % 4
+                npc:setLocalVar("uses", uses)
+                if uses == 0 then
+                    movePoint(npc, zoneId, info)
+                end
+
+                player:triggerRoeEvent(xi.roe.triggers.helmSuccess, { ["skillType"] = helmType })
+            end
+
+            -- quest stuff
+            if
+                helmType == xi.helm.type.HARVESTING and
+                player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.VANISHING_ACT) == QUEST_ACCEPTED and
+                not player:hasKeyItem(xi.ki.RAINBOW_BERRY) and
+                broke ~= 1 and
+                zoneId == xi.zone.WAJAOM_WOODLANDS
+            then
+                npcUtil.giveKeyItem(player, xi.ki.RAINBOW_BERRY)
+            end
+
+            -- AMK04
+            if xi.settings.main.ENABLE_AMK == 1 then
+                xi.amk.helpers.helmTrade(player, helmType, broke)
+            end
+
+            if type(func) == "function" then
+                func(player)
+            end
+
+            player:setLocalVar("[HELM]Last_Trade", os.time())
+        else
+            player:messageBasic(xi.msg.basic.WAIT_LONGER, 0, 0)
         end
     else
         player:messageSpecial(zones[zoneId].text[info.message], info.tool)
