@@ -26,7 +26,7 @@ def migrate(cur, db):
             while len(missions) < 990:
                 missions.append(0)
             try:
-                cur.execute("UPDATE chars SET missions = %s WHERE charid = %s", (missions, charid))
+                cur.execute("UPDATE chars SET missions = %s WHERE charid = %s", (bytes(missions), charid))
                 db.commit()
             except mariadb.Error as err:
                 print("Something went wrong: {}".format(err))

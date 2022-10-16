@@ -22,7 +22,7 @@ def migrate(cur, db):
         zilart_status = row[2]
         missions[214:216] = zilart_status.to_bytes(2, 'little')
         try:
-            cur.execute("UPDATE chars SET missions = %s WHERE charid = %s", (missions, charid))
+            cur.execute("UPDATE chars SET missions = %s WHERE charid = %s", (bytes(missions), charid))
             cur.execute("DELETE char_vars FROM char_vars WHERE charid = {} AND varname = 'ZilartStatus';".format(charid))
             db.commit()
         except mariadb.Error as err:

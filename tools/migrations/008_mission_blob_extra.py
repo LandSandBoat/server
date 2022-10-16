@@ -31,7 +31,7 @@ def migrate(cur, db):
                     row[pos:pos] = logEx
                     pos += 70
                 try:
-                    cur.execute("UPDATE chars SET missions = %s WHERE charid = %s", (row, charid))
+                    cur.execute("UPDATE chars SET missions = %s WHERE charid = %s", (bytes(row), charid))
                     db.commit()
                 except mariadb.Error as err:
                     print("Something went wrong: {}".format(err))
