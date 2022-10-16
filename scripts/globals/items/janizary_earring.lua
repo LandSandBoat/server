@@ -20,12 +20,4 @@ itemObject.onItemUse = function(target)
     target:addStatusEffect(xi.effect.DEFENSE_BOOST, 32, 0, 180, 14785)
 end
 
-itemObject.onEffectGain = function(target, effect)
-    target:addMod(xi.mod.DEF, 32)
-end
-
-itemObject.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.DEF, 32)
-end
-
 return itemObject

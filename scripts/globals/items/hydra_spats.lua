@@ -20,12 +20,4 @@ itemObject.onItemUse = function(target)
     target:addStatusEffect(xi.effect.EVASION_BOOST, 15, 0, 1200, 15681)
 end
 
-itemObject.onEffectGain = function(target, effect)
-    target:addMod(xi.mod.EVA, 15)
-end
-
-itemObject.onEffectLose = function(target, effect)
-    target:delMod(xi.mod.EVA, 15)
-end
-
 return itemObject

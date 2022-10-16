@@ -76,4 +76,18 @@ end
 zoneObject.onEventFinish = function( player, csid, option)
 end
 
+zoneObject.onZoneWeatherChange = function(weather)
+    if xi.settings.main.ENABLE_WOTG == 1 then
+        local bayawak = GetMobByID(ID.mob.BAYAWAK)
+        if
+            not bayawak:isSpawned() and os.time() > bayawak:getLocalVar("cooldown") and
+            xi.settings.main.ENABLE_WOTG == 1 and
+            (weather == xi.weather.HOT_SPELL or weather == xi.weather.HEAT_WAVE)
+        then
+            DisallowRespawn(bayawak:getID(), false)
+            bayawak:setRespawnTime(math.random(30, 150)) -- pop 30-150 sec after fire weather starts
+        end
+    end
+end
+
 return zoneObject

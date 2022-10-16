@@ -14,9 +14,6 @@ require("scripts/globals/msg")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if (mob:getPool() ~= 4006) then
-        mob:messageBasic(xi.msg.basic.READIES_WS, 0, 35)
-    end
     return 0
 end
 

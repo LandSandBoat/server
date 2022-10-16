@@ -1983,7 +1983,7 @@ uint16 CStatusEffectContainer::GetLevelRestrictionEffect()
 {
     for (auto PEffect : m_StatusEffectSet)
     {
-        if (PEffect->GetFlag() & EFFECTFLAG_LEVEL_RESTRICTION)
+        if (PEffect->GetFlag() & EFFECTFLAG_ON_ZONE_PATHOS)
         {
             return PEffect->GetPower();
         }

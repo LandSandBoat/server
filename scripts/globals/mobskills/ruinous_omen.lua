@@ -12,14 +12,13 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 ---------------------------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
-    mob:messageBasic(xi.msg.basic.READIES_WS, 0, skill:getID())
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dINT = math.floor(mob:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
 
     -- Target HPP decrease seems to be about 66% unresisted.
@@ -48,4 +47,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return damage
 end
 
-return mobskill_object
+return mobskillObject

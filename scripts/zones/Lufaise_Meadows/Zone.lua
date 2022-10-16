@@ -58,8 +58,8 @@ zoneObject.onGameHour = function(zone)
     if xi.settings.main.ENABLE_WOTG == 1 then
         local cooldown = GetMobByID(ID.mob.SENGANN):getLocalVar("cooldown")
         -- Don't allow Sengann to spawn outside of night
-            DisallowRespawn(ID.mob.SENGANN, true)
         if VanadielHour() >= 4 and VanadielHour() < 20 then
+            DisallowRespawn(ID.mob.SENGANN, true)
         elseif os.time() > cooldown then
             DisallowRespawn(ID.mob.SENGANN, false)
         end

@@ -21,13 +21,10 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
     elseif mob:getFamily() == 176 then
         -- Handle Mamool Ja THF
         if mob:getAnimationSub() == 0 and mob:getMainJob() == xi.job.THF then
-            mob:messageBasic(xi.msg.basic.READIES_WS, 0, skill:getID())
             return 0
         else
             return 1
         end
-    elseif (mob:getPool() ~= 4249) then
-        mob:messageBasic(xi.msg.basic.READIES_WS, 0, 40)
     end
 
     return 0
