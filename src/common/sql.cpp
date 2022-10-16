@@ -158,6 +158,23 @@ SqlConnection::~SqlConnection()
     }
 }
 
+std::string SqlConnection::GetClientVersion()
+{
+    return fmt::format("database client version: {}", MARIADB_PACKAGE_VERSION);
+}
+
+std::string SqlConnection::GetServerVersion()
+{
+    std::string serverVer = "";
+    auto        ret       = Query("SELECT VERSION()");
+    if (ret != SQL_ERROR && NumRows() != 0 && NextRow() == SQL_SUCCESS)
+    {
+        serverVer = GetStringData(0);
+    }
+
+    return fmt::format("database server version: {}", serverVer);
+}
+
 int32 SqlConnection::GetTimeout(uint32* out_timeout)
 {
     TracyZoneScoped;

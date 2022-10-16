@@ -58,10 +58,6 @@ void lua_init()
         result.get<sol::table>()["start"];
         ShowInfo("Started script debugger");
     }
-    else
-    {
-        ShowInfo("Failed to start script debugger");
-    }
 }
 
 /**
