@@ -35,7 +35,7 @@ if not subprocess.call(['git', '-C', "../", 'status'], stderr=subprocess.STDOUT,
 
 # External Deps (requirements.txt)
 try:
-    import mysql.connector
+    import mariadb
     from git import Repo
     import yaml
     import colorama
@@ -339,19 +339,18 @@ def import_file(file):
 def connect():
     global db, cur
     try:
-        db = mysql.connector.connect(host=host,
+        db = mariadb.connect(host=host,
                 user=login,
                 passwd=password,
                 db=database,
-                port=port,
-                use_pure=True)
+                port=port)
         cur = db.cursor()
-    except mysql.connector.Error as err:
-        if err.errno == mysql.connector.errorcode.ER_ACCESS_DENIED_ERROR:
+    except mariadb.Error as err:
+        if err.errno == mariadb.errorcode.ER_ACCESS_DENIED_ERROR:
             print(colorama.Fore.RED + 'Incorrect mysql_login or mysql_password, update ../settings/network.lua.')
             close()
             return False
-        elif err.errno == mysql.connector.errorcode.ER_BAD_DB_ERROR:
+        elif err.errno == mariadb.errorcode.ER_BAD_DB_ERROR:
             print(colorama.Fore.RED + 'Database ' + database + ' does not exist.')
             if input('Would you like to create new database: ' + database + '? [y/N] ').lower() == 'y':
                 create_command = '"' + mysql_bin + 'mysqladmin' + exe + '" -h ' + host + ' -P ' + str(port) + ' -u ' + login + ' -p' + password + ' CREATE ' + database
@@ -434,7 +433,7 @@ def update_db(silent=False,express=False):
 def adjust_mysql_bin():
     global mysql_bin
     while True:
-        choice = input('Please enter the path to your MySQL bin directory or press enter to check PATH.\ne.g. C:\\Program Files\\MariaDB 10.5\\bin\\\n> ').replace('\\', '/')
+        choice = input('Please enter the path to your MySQL bin directory or press enter to check PATH.\ne.g. C:\\Program Files\\MariaDB 10.6\\bin\\\n> ').replace('\\', '/')
         if choice == '':
             mysql_file = shutil.which('mysql')
             if not mysql_file:
