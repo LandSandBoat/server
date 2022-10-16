@@ -15,6 +15,7 @@ end
 
 entity.onMobSpawn = function(mob)
     mob:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NO_TURN))
+    mob:setMod(xi.mod.REGAIN, 100)
     mob:setMobMod(xi.mobMod.SKILL_LIST, 54)
 end
 
@@ -24,11 +25,11 @@ entity.onMobFight = function(mob)
 
     if mob:getHPP() < 60 and stage == 0 then
         mob:setDelay(3000)
+        mob:setMod(xi.mod.REGAIN, 150)
         mob:setLocalVar("stage", 1)
     elseif mob:getHPP() < 25 and stage < 2 then
         mob:setDelay(2500)
-        mob:addStatusEffect(xi.effect.REGAIN, 5, 3, 0)
-        mob:getStatusEffect(xi.effect.REGAIN):setFlag(xi.effectFlag.DEATH)
+        mob:setMod(xi.mod.REGAIN, 200)
         mob:setMobMod(xi.mobMod.SKILL_LIST, 1187)
         mob:setLocalVar("stage", 2)
     end
