@@ -1,4 +1,4 @@
-import mysql.connector
+import mariadb
 
 def migration_name():
     return "Pad mission log"
@@ -26,9 +26,9 @@ def migrate(cur, db):
             while len(missions) < 990:
                 missions.append(0)
             try:
-                cur.execute("UPDATE chars SET missions = %s WHERE charid = %s", (missions, charid))
+                cur.execute("UPDATE chars SET missions = %s WHERE charid = %s", (bytes(missions), charid))
                 db.commit()
-            except mysql.connector.Error as err:
+            except mariadb.Error as err:
                 print("Something went wrong: {}".format(err))
         except: # lgtm [py/catch-base-exception]
             efile.write('[extend_mission_log] Error reading missions in chars table for charid: ' + str(charid) + '\n')

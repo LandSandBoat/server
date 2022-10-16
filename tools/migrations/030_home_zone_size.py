@@ -1,4 +1,4 @@
-import mysql.connector
+import mariadb
 
 def migration_name():
     return "Adjusting home_zone size to smallint."
@@ -17,5 +17,5 @@ def migrate(cur, db):
     try:
         cur.execute("ALTER TABLE chars MODIFY home_zone smallint(5) unsigned NOT NULL DEFAULT '0';")
         db.commit()
-    except mysql.connector.Error as err:
+    except mariadb.Error as err:
         print("Something went wrong: {}".format(err))

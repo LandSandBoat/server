@@ -1,4 +1,4 @@
-import mysql.connector
+import mariadb
 
 def migration_name():
     return "Adding columns wardrobe5, wardrobe6, wardrobe7, and wardrobe8 to char_storage table"
@@ -21,5 +21,5 @@ def migrate(cur, db):
         ADD COLUMN `wardrobe8` tinyint(2) unsigned NOT NULL DEFAULT '80' \
         ;")
         db.commit()
-    except mysql.connector.Error as err:
+    except mariadb.Error as err:
         print("Something went wrong: {}".format(err))
