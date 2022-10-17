@@ -165,9 +165,28 @@ bool CMagicState::Update(time_point tick)
 
         if (battleutils::IsParalyzed(m_PEntity))
         {
-            m_PEntity->setActionInterrupted(action, PTarget, MSGBASIC_IS_PARALYZED_2, static_cast<uint16>(m_PSpell->getID()));
-            action.recast   = 2; // seems hardcoded to 2
-            action.actionid = static_cast<uint16>(m_PSpell->getID());
+            action_t interruptedAction;
+            m_PEntity->setActionInterrupted(interruptedAction, PTarget, MSGBASIC_IS_PARALYZED_2, static_cast<uint16>(m_PSpell->getID()));
+            interruptedAction.recast   = 2; // seems hardcoded to 2
+            interruptedAction.actionid = static_cast<uint16>(m_PSpell->getID());
+            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(interruptedAction));
+
+            // Yes, you're seeing this correctly.
+            // A paralyze/interrupt proc on *spells* actually sends two actions. One that contains the para/intimidate message
+            // And a second action to send the fourcc "stop casting" command.
+            // Spell interrupts when you're moving send a message + stop casting fourcc command and not two actions.
+            action.id         = m_PEntity->id;
+            action.spellgroup = m_PSpell->getSpellGroup();
+            action.recast     = 2;
+            action.actiontype = ACTION_MAGIC_INTERRUPT;
+
+            actionList_t& actionList  = action.getNewActionList();
+            actionList.ActionTargetID = m_PEntity->id;
+
+            actionTarget_t& actionTarget = actionList.getNewActionTarget();
+            actionTarget.messageID       = 0;
+            actionTarget.animation       = 0;
+            actionTarget.param           = 0; // sometimes 1?
             m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
 
             Complete();
@@ -175,9 +194,25 @@ bool CMagicState::Update(time_point tick)
         }
         else if (battleutils::IsIntimidated(m_PEntity, PTarget))
         {
-            m_PEntity->setActionInterrupted(action, PTarget, MSGBASIC_IS_INTIMIDATED, static_cast<uint16>(m_PSpell->getID()));
-            action.recast   = 2; // seems hardcoded to 2
-            action.actionid = static_cast<uint16>(m_PSpell->getID());
+            action_t interruptedAction;
+            m_PEntity->setActionInterrupted(interruptedAction, PTarget, MSGBASIC_IS_INTIMIDATED, static_cast<uint16>(m_PSpell->getID()));
+            interruptedAction.recast   = 2; // seems hardcoded to 2
+            interruptedAction.actionid = static_cast<uint16>(m_PSpell->getID());
+            m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(interruptedAction));
+
+            // See comment in above block for paralyze
+            action.id         = m_PEntity->id;
+            action.spellgroup = m_PSpell->getSpellGroup();
+            action.recast     = 2;
+            action.actiontype = ACTION_MAGIC_INTERRUPT;
+
+            actionList_t& actionList  = action.getNewActionList();
+            actionList.ActionTargetID = m_PEntity->id;
+
+            actionTarget_t& actionTarget = actionList.getNewActionTarget();
+            actionTarget.messageID       = 0;
+            actionTarget.animation       = 0;
+            actionTarget.param           = 0; // sometimes 1?
             m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
 
             Complete();
