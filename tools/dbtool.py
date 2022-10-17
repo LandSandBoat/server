@@ -42,6 +42,7 @@ try:
 except Exception as e:
     print("ERROR: Exception occured while importing external dependencies:")
     print(e)
+    print("Ensure you've run/re-run the command you use to install python dependencies (ex: pip install --upgrade -r requirements.txt)")
     preflight_exit()
 
 def populate_migrations():
