@@ -144,8 +144,8 @@ entity.onMobFight = function(mob, target, spellId) -- This function is fired eve
         minion:updateClaim(randomPlayer)
     end
 
-    mob:setMod(xi.mod.MAIN_DMG_RATING, 75 * numAdds)
-    -- print(string.format("numadds %s", numAdds))
+    mob:setMod(xi.mod.MAIN_DMG_RATING, 55 * numAdds)
+    -- print(string.format("main dmg rating %s", 50 * numAdds))
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)

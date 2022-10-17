@@ -71,7 +71,7 @@ entity.onMobSpawn = function(mob ,target)
             {id = xi.jsa.BLOOD_WEAPON, cooldown = 0, hpp = 100},
         },
     })
-        mob:setMobMod(xi.mobMod.DRAW_IN, 2)
+        mob:setMobMod(xi.mobMod.DRAW_IN, 1)
         mob:addMod(xi.mod.STR, 50)
         mob:addMod(xi.mod.VIT, 70)
         mob:addMod(xi.mod.INT, 60)
