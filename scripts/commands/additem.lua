@@ -41,6 +41,9 @@ function onTrigger(player, item, quantity, aug0, aug0val, aug1, aug1val, aug2, a
         itemToGet = tonumber(item)
     end
 
+    -- if quantity is nil, assume 1 qty
+    quantity = quantity or 1
+
     -- At this point, if there's no item found, exit out of the function
     if itemToGet == 0 then
         error(player, "Item not found.")
@@ -60,7 +63,7 @@ function onTrigger(player, item, quantity, aug0, aug0val, aug1, aug1val, aug2, a
 
     -- Give the GM the item...
     player:addItem(itemToGet, quantity, aug0, aug0val, aug1, aug1val, aug2, aug2val, aug3, aug3val, trialId)
-    if quantity and quantity > 1 then
+    if quantity > 1 then
         player:messageSpecial(ID.text.ITEM_OBTAINED + 9, itemToGet, quantity)
     else
         player:messageSpecial(ID.text.ITEM_OBTAINED, itemToGet)
