@@ -62,10 +62,12 @@ function onTrigger(player, item, quantity, aug0, aug0val, aug1, aug1val, aug2, a
     end
 
     -- Give the GM the item...
-    player:addItem(itemToGet, quantity, aug0, aug0val, aug1, aug1val, aug2, aug2val, aug3, aug3val, trialId)
-    if quantity > 1 then
-        player:messageSpecial(ID.text.ITEM_OBTAINED + 9, itemToGet, quantity)
-    else
-        player:messageSpecial(ID.text.ITEM_OBTAINED, itemToGet)
+    local obtained = player:addItem(itemToGet, quantity, aug0, aug0val, aug1, aug1val, aug2, aug2val, aug3, aug3val, trialId)
+    if obtained then
+        if quantity and quantity > 1 then
+            player:messageSpecial(ID.text.ITEM_OBTAINED + 9, itemToGet, quantity)
+        else
+            player:messageSpecial(ID.text.ITEM_OBTAINED, itemToGet)
+        end
     end
 end
