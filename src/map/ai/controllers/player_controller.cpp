@@ -51,7 +51,7 @@ bool CPlayerController::Cast(uint16 targid, SpellID spellid)
     auto* PChar = static_cast<CCharEntity*>(POwner);
     if (!PChar->PRecastContainer->HasRecast(RECAST_MAGIC, static_cast<uint16>(spellid), 0))
     {
-        if (auto target = PChar->GetEntity(targid); target->PAI->IsUntargetable())
+        if (auto target = PChar->GetEntity(targid); target && target->PAI->IsUntargetable())
         {
             return false;
         }
@@ -127,7 +127,7 @@ bool CPlayerController::Ability(uint16 targid, uint16 abilityid)
             PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_WAIT_LONGER));
             return false;
         }
-        if (auto target = PChar->GetEntity(targid); target->PAI->IsUntargetable())
+        if (auto target = PChar->GetEntity(targid); target && target->PAI->IsUntargetable())
         {
             return false;
         }
@@ -145,7 +145,7 @@ bool CPlayerController::RangedAttack(uint16 targid)
     auto* PChar = static_cast<CCharEntity*>(POwner);
     if (PChar->PAI->CanChangeState())
     {
-        if (auto target = PChar->GetEntity(targid); target->PAI->IsUntargetable())
+        if (auto target = PChar->GetEntity(targid); target && target->PAI->IsUntargetable())
         {
             return false;
         }
@@ -163,7 +163,7 @@ bool CPlayerController::UseItem(uint16 targid, uint8 loc, uint8 slotid)
     auto* PChar = static_cast<CCharEntity*>(POwner);
     if (PChar->PAI->CanChangeState())
     {
-        if (auto target = PChar->GetEntity(targid); target->PAI->IsUntargetable())
+        if (auto target = PChar->GetEntity(targid); target && target->PAI->IsUntargetable())
         {
             return false;
         }
