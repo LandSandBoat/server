@@ -27,7 +27,12 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 class CInactiveState : public CState
 {
 public:
-    CInactiveState(CBaseEntity* PEntity, duration _duration, bool canChangeState);
+    CInactiveState(CBaseEntity* PEntity, duration _duration, bool canChangeState, bool untargetable);
+
+    bool GetUntargetable()
+    {
+        return m_untargetable;
+    }
 
 protected:
     virtual bool CanChangeState() override
@@ -42,12 +47,14 @@ protected:
     {
         return false;
     }
+
     virtual bool Update(time_point tick) override;
     virtual void Cleanup(time_point tick) override;
 
 private:
     duration m_duration;
     bool     m_canChangeState{ false };
+    bool     m_untargetable{ false };
 };
 
 #endif

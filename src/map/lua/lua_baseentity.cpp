@@ -9258,6 +9258,7 @@ uint8 CLuaBaseEntity::registerBattlefield(sol::object const& arg0, sol::object c
         registration.levelCap   = battlefield["levelCap"];
         registration.timeLimit  = std::chrono::seconds(battlefield.get<int32>("timeLimit"));
         registration.isMission  = battlefield.get_or("isMission", false);
+        registration.showTimer  = battlefield.get_or("showTimer", true);
         registration.rules |= battlefield.get<bool>("allowSubjob") ? RULES_ALLOW_SUBJOBS : 0;
         registration.rules |= battlefield.get<bool>("canLoseExp") ? RULES_LOSE_EXP : 0;
     }
@@ -13840,7 +13841,7 @@ bool CLuaBaseEntity::hasPreventActionEffect()
 
 /************************************************************************
  *  Function: stun()
- *  Purpose : Stuns a mob for a specified amount of time (in ms)
+ *  Purpose : Stuns an entity for a specified amount of time (in ms)
  *  Example : mob:stun(5000) -- Stun for 5 seconds
  *  Notes   : To Do: Change to seconds for standardization?
  ************************************************************************/
@@ -13848,6 +13849,19 @@ bool CLuaBaseEntity::hasPreventActionEffect()
 void CLuaBaseEntity::stun(uint32 milliseconds)
 {
     m_PBaseEntity->PAI->Inactive(std::chrono::milliseconds(milliseconds), false);
+}
+
+/************************************************************************
+ *  Function: untargetableAndUnactionable()
+ *  Purpose : Puts an entity into a stun state
+ *            Also disallows them from being targed as part of a check in PAI->TargetFind
+ *  Example : mob:stun(5000) -- Stun for 5 seconds
+ *  Notes   : To Do: Change to seconds for standardization?
+ ************************************************************************/
+
+void CLuaBaseEntity::untargetableAndUnactionable(uint32 milliseconds)
+{
+    m_PBaseEntity->PAI->Untargetable(std::chrono::milliseconds(milliseconds), false);
 }
 
 /************************************************************************
@@ -14422,6 +14436,68 @@ bool CLuaBaseEntity::deleteRaisedChocobo()
     return true;
 }
 
+void CLuaBaseEntity::setMannequinPose(uint16 itemID, uint8 race, uint8 pose)
+{
+    TracyZoneScoped;
+
+    // Find the item in the player inventory and update the extra values
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        for (uint8 i = 0; i < CONTAINER_ID::MAX_CONTAINER_ID; ++i)
+        {
+            if (auto slot = PChar->getStorage(i)->SearchItem(itemID); slot != ERROR_SLOTID)
+            {
+                auto* item = PChar->getStorage(i)->GetItem(slot);
+                if (item && item->getID() == itemID && item->isMannequin())
+                {
+                    if (auto* PMannequin = dynamic_cast<CItemFurnishing*>(item))
+                    {
+                        PMannequin->setMannequinRace(race);
+                        PMannequin->setMannequinPose(pose);
+
+                        // Include the update into the database
+                        char        extra[sizeof(PMannequin->m_extra) * 2 + 1];
+                        const char* fmtQuery = "UPDATE char_inventory  \
+                               SET extra = '%s' \
+                               WHERE charid = %u AND itemId = %u;";
+
+                        sql->EscapeStringLen(extra, (const char*)PMannequin->m_extra, sizeof(PMannequin->m_extra));
+                        if (sql->Query(fmtQuery, extra, PChar->id, PMannequin->getID()) == SQL_ERROR)
+                        {
+                            ShowError("lua_baseentity::setMannequinPose: Cannot insert item to database");
+                        }
+                    }
+                    return; // We can exit here, since we found a matching mannequin and they can have only one of each
+                }
+            }
+        }
+    }
+}
+
+uint8 CLuaBaseEntity::getMannequinPose(uint16 itemID)
+{
+    TracyZoneScoped;
+
+    if (auto* PChar = dynamic_cast<CCharEntity*>(m_PBaseEntity))
+    {
+        for (uint8 i = 0; i < CONTAINER_ID::MAX_CONTAINER_ID; ++i)
+        {
+            if (auto slot = PChar->getStorage(i)->SearchItem(itemID); slot != ERROR_SLOTID)
+            {
+                auto* item = PChar->getStorage(i)->GetItem(slot);
+                if (item && item->getID() == itemID && item->isMannequin())
+                {
+                    if (auto* PMannequin = dynamic_cast<CItemFurnishing*>(item))
+                    {
+                        return PMannequin->getMannequinPose();
+                    }
+                }
+            }
+        }
+    }
+
+    return 0;
+}
 //==========================================================//
 
 void CLuaBaseEntity::Register()
@@ -15162,6 +15238,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("restoreFromChest", CLuaBaseEntity::restoreFromChest);
     SOL_REGISTER("hasPreventActionEffect", CLuaBaseEntity::hasPreventActionEffect);
     SOL_REGISTER("stun", CLuaBaseEntity::stun);
+    SOL_REGISTER("untargetableAndUnactionable", CLuaBaseEntity::untargetableAndUnactionable);
 
     SOL_REGISTER("getPool", CLuaBaseEntity::getPool);
     SOL_REGISTER("getDropID", CLuaBaseEntity::getDropID);
@@ -15190,6 +15267,9 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getChocoboRaisingInfo", CLuaBaseEntity::getChocoboRaisingInfo);
     SOL_REGISTER("setChocoboRaisingInfo", CLuaBaseEntity::setChocoboRaisingInfo);
     SOL_REGISTER("deleteRaisedChocobo", CLuaBaseEntity::deleteRaisedChocobo);
+
+    SOL_REGISTER("setMannequinPose", CLuaBaseEntity::setMannequinPose);
+    SOL_REGISTER("getMannequinPose", CLuaBaseEntity::getMannequinPose);
 }
 
 std::ostream& operator<<(std::ostream& os, const CLuaBaseEntity& entity)

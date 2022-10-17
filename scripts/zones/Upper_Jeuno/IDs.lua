@@ -46,7 +46,7 @@ zones[xi.zone.UPPER_JEUNO] =
     },
     npc =
     {
-        MAPITOTO = 17776895,
+        MAPITOTO = 17776896,
     },
 }
 

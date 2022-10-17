@@ -437,12 +437,102 @@ void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleArenas)
         BattlefieldGroup group;
         for (CBaseEntity* entity : groupEntities)
         {
+            auto PMob = dynamic_cast<CMobEntity*>(entity);
+            XI_DEBUG_BREAK_IF(PMob == nullptr);
+
+            // Restore modifiers here since we save the modifiers below but don't want any previous modifiers persisting
+            PMob->restoreModifiers();
+            PMob->restoreMobModifiers();
+
             group.mobIds.push_back(entity->id);
         }
 
         group.deathCallback       = groupData.get<sol::function>("death");
         group.allDeathCallback    = groupData.get<sol::function>("allDeath");
         group.randomDeathCallback = groupData.get<sol::function>("randomDeath");
+
+        bool isParty = groupData.get_or("isParty", false);
+        if (isParty)
+        {
+            CParty* party = nullptr;
+            for (CBaseEntity* entity : groupEntities)
+            {
+                auto PMob = dynamic_cast<CMobEntity*>(entity);
+                XI_DEBUG_BREAK_IF(PMob == nullptr);
+
+                // Leave existing party first before joining this new one
+                if (PMob->PParty != nullptr)
+                {
+                    PMob->PParty->RemoveMember(PMob);
+                }
+
+                if (party == nullptr)
+                {
+                    party = new CParty(PMob);
+                }
+                else
+                {
+                    party->AddMember(PMob);
+                }
+            }
+        }
+
+        bool superlink = groupData.get_or("superlink", false);
+        if (superlink)
+        {
+            ++superlinkId;
+            for (CBaseEntity* entity : groupEntities)
+            {
+                auto PMob = dynamic_cast<CMobEntity*>(entity);
+                XI_DEBUG_BREAK_IF(PMob == nullptr);
+                PMob->setMobMod(MOBMOD_SUPERLINK, superlinkId);
+                PMob->saveMobModifiers();
+            }
+        }
+
+        bool stationary = groupData.get_or("stationary", true);
+        if (stationary)
+        {
+            for (CBaseEntity* entity : groupEntities)
+            {
+                auto PMob = dynamic_cast<CMobEntity*>(entity);
+                XI_DEBUG_BREAK_IF(PMob == nullptr);
+                PMob->setMobMod(MOBMOD_ROAM_RESET_FACING, 1);
+                PMob->m_maxRoamDistance = 0.5f;
+                PMob->m_roamFlags |= ROAMFLAG_SCRIPTED;
+                PMob->saveMobModifiers();
+            }
+        }
+
+        auto mods = groupData["mods"];
+        if (mods.valid())
+        {
+            for (CBaseEntity* entity : groupEntities)
+            {
+                auto PMob = dynamic_cast<CMobEntity*>(entity);
+                XI_DEBUG_BREAK_IF(PMob == nullptr);
+                for (auto modifier : mods.get<sol::table>())
+                {
+                    PMob->setModifier(modifier.first.as<Mod>(), modifier.second.as<uint16>());
+                    PMob->saveModifiers();
+                }
+            }
+        }
+
+        auto mobMods = groupData["mobMods"];
+        if (mobMods.valid())
+        {
+            for (CBaseEntity* entity : groupEntities)
+            {
+                auto PMob = dynamic_cast<CMobEntity*>(entity);
+                XI_DEBUG_BREAK_IF(PMob == nullptr);
+                for (auto modifier : mobMods.get<sol::table>())
+                {
+                    PMob->setMobMod(modifier.first.as<uint16>(), modifier.second.as<uint16>());
+                    PMob->saveMobModifiers();
+                }
+            }
+        }
 
         bool spawned = groupData.get_or("spawned", true);
         if (spawned)
@@ -466,64 +556,6 @@ void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleArenas)
                 mobs.add(CLuaBaseEntity(entity));
             }
             setup(this, mobs);
-        }
-
-        bool superlink = groupData.get_or("superlink", false);
-        if (superlink)
-        {
-            ++superlinkId;
-
-            for (CBaseEntity* entity : groupEntities)
-            {
-                auto PMob = dynamic_cast<CMobEntity*>(entity);
-                XI_DEBUG_BREAK_IF(PMob == nullptr);
-
-                if (superlink)
-                {
-                    PMob->setMobMod(MOBMOD_SUPERLINK, superlinkId);
-                }
-            }
-        }
-
-        bool stationary = groupData.get_or("stationary", true);
-        if (stationary)
-        {
-            for (CBaseEntity* entity : groupEntities)
-            {
-                auto PMob = dynamic_cast<CMobEntity*>(entity);
-                XI_DEBUG_BREAK_IF(PMob == nullptr);
-                PMob->setMobMod(MOBMOD_ROAM_RESET_FACING, 1);
-                PMob->m_maxRoamDistance = 0.5f;
-                PMob->m_roamFlags |= ROAMFLAG_SCRIPTED;
-            }
-        }
-
-        auto mods = groupData["mods"];
-        if (mods.valid())
-        {
-            for (CBaseEntity* entity : groupEntities)
-            {
-                auto PMob = dynamic_cast<CMobEntity*>(entity);
-                XI_DEBUG_BREAK_IF(PMob == nullptr);
-                for (auto modifier : mods.get<sol::table>())
-                {
-                    PMob->setModifier(modifier.first.as<Mod>(), modifier.second.as<uint16>());
-                }
-            }
-        }
-
-        auto mobMods = groupData["mobMods"];
-        if (mobMods.valid())
-        {
-            for (CBaseEntity* entity : groupEntities)
-            {
-                auto PMob = dynamic_cast<CMobEntity*>(entity);
-                XI_DEBUG_BREAK_IF(PMob == nullptr);
-                for (auto modifier : mobMods.get<sol::table>())
-                {
-                    PMob->setMobMod(modifier.first.as<uint16>(), modifier.second.as<uint16>());
-                }
-            }
         }
 
         m_PLuaBattlefield->addGroup(std::move(group));

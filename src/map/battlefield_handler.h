@@ -40,6 +40,7 @@ struct BattlefieldRegistration
     uint32               rules      = 0;
     std::chrono::seconds timeLimit  = std::chrono::seconds(0);
     bool                 isMission  = false;
+    bool                 showTimer  = true;
 };
 
 class CBattlefieldHandler

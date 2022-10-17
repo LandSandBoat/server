@@ -804,6 +804,7 @@ public:
     void restoreFromChest(CLuaBaseEntity* PLuaBaseEntity, uint32 restoreType);
     bool hasPreventActionEffect();
     void stun(uint32 milliseconds);
+    void untargetableAndUnactionable(uint32 milliseconds);
 
     uint32 getPool(); // Returns a mobs pool ID. If entity is not a mob, returns nil.
     uint32 getDropID();
@@ -828,6 +829,9 @@ public:
     auto getChocoboRaisingInfo() -> sol::table;
     bool setChocoboRaisingInfo(sol::table table);
     bool deleteRaisedChocobo();
+
+    void  setMannequinPose(uint16 itemID, uint8 race, uint8 pose);
+    uint8 getMannequinPose(uint16 itemID);
 
     static void Register();
 };

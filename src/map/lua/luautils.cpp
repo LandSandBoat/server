@@ -814,7 +814,7 @@ namespace luautils
                                         // TODO: Execute this as a single query per-zone and pull out the desired results.
                                         auto query = fmt::sprintf("SELECT npcid FROM npc_list "
                                                             "WHERE ((npcid >> 12) & 0xFFF) = %i AND "
-                                                            "UPPER(REPLACE(CAST(`name` as VARCHAR(64)), '-', '_')) = '%s' "
+                                                            "UPPER(REPLACE(CAST(`name` as CHAR(64)), '-', '_')) = '%s' "
                                                             "LIMIT 1;", PZone->GetID(), name.c_str());
                                         DebugIDLookup(query.c_str());
                                         auto ret = sql->Query(query.c_str());
