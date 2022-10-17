@@ -217,7 +217,7 @@ bool CAIContainer::Internal_Cast(uint16 targetid, SpellID spellid)
     auto* entity = dynamic_cast<CBattleEntity*>(PEntity);
     if (entity)
     {
-        if (auto target = entity->GetEntity(targetid); target->PAI->IsUntargetable())
+        if (auto target = entity->GetEntity(targetid); target && target->PAI->IsUntargetable())
         {
             return false;
         }
@@ -260,7 +260,7 @@ bool CAIContainer::Internal_WeaponSkill(uint16 targid, uint16 wsid)
     auto* entity = dynamic_cast<CBattleEntity*>(PEntity);
     if (entity)
     {
-        if (auto target = entity->GetEntity(targid); target->PAI->IsUntargetable())
+        if (auto target = entity->GetEntity(targid); target && target->PAI->IsUntargetable())
         {
             return false;
         }
@@ -274,7 +274,7 @@ bool CAIContainer::Internal_MobSkill(uint16 targid, uint16 wsid)
     auto* entity = dynamic_cast<CMobEntity*>(PEntity);
     if (entity)
     {
-        if (auto target = entity->GetEntity(targid); target->PAI->IsUntargetable())
+        if (auto target = entity->GetEntity(targid); target && target->PAI->IsUntargetable())
         {
             return false;
         }
@@ -288,7 +288,7 @@ bool CAIContainer::Internal_PetSkill(uint16 targid, uint16 abilityid)
     auto* entity = dynamic_cast<CPetEntity*>(PEntity);
     if (entity)
     {
-        if (auto target = entity->GetEntity(targid); target->PAI->IsUntargetable())
+        if (auto target = entity->GetEntity(targid); target && target->PAI->IsUntargetable())
         {
             return false;
         }
@@ -302,7 +302,7 @@ bool CAIContainer::Internal_Ability(uint16 targetid, uint16 abilityid)
     auto* entity = dynamic_cast<CBattleEntity*>(PEntity);
     if (entity)
     {
-        if (auto target = entity->GetEntity(targetid); target->PAI->IsUntargetable())
+        if (auto target = entity->GetEntity(targetid); target && target->PAI->IsUntargetable())
         {
             return false;
         }
@@ -316,7 +316,7 @@ bool CAIContainer::Internal_RangedAttack(uint16 targetid)
     auto* entity = dynamic_cast<CBattleEntity*>(PEntity);
     if (entity)
     {
-        if (auto target = entity->GetEntity(targetid); target->PAI->IsUntargetable())
+        if (auto target = entity->GetEntity(targetid); target && target->PAI->IsUntargetable())
         {
             return false;
         }
