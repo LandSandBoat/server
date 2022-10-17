@@ -594,6 +594,10 @@ int32 recv_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 
     try
     {
+        if (size <= (FFXI_HEADER_SIZE + 16)) // check for underflow or no-data packet
+        {
+            return -1;
+        }
         checksumResult = checksum((uint8*)(buff + FFXI_HEADER_SIZE), (uint32)(size - (FFXI_HEADER_SIZE + 16)), (char*)(buff + size - 16));
     }
     catch (...)
