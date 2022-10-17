@@ -917,17 +917,21 @@ int32 send_parse(int8* buff, size_t* buffsize, sockaddr_in* from, map_session_da
 
     auto remainingPackets = PChar->getPacketList().size();
     TotalPacketsDelayedPerTick += static_cast<uint32>(remainingPackets);
-    TracyZoneString(fmt::format("{} packets remaining", remainingPackets));
-    if (remainingPackets > MAX_PACKET_BACKLOG_SIZE)
+
+    if (settings::get<bool>("logging.DEBUG_PACKET_BACKLOG"))
     {
-        if (PChar->loc.zone == nullptr)
+        TracyZoneString(fmt::format("{} packets remaining", remainingPackets));
+        if (remainingPackets > MAX_PACKET_BACKLOG_SIZE)
         {
-            ShowWarning(fmt::format("Packet backlog exists for char {} with a nullptr zone. Clearing packet list.", PChar->name));
-            PChar->clearPacketList();
-            return 0;
+            if (PChar->loc.zone == nullptr)
+            {
+                ShowWarning(fmt::format("Packet backlog exists for char {} with a nullptr zone. Clearing packet list.", PChar->name));
+                PChar->clearPacketList();
+                return 0;
+            }
+            ShowWarning(fmt::format("Packet backlog for char {} in {} is {}! Limit is: {}",
+                                    PChar->name, PChar->loc.zone->GetName(), remainingPackets, MAX_PACKET_BACKLOG_SIZE));
         }
-        ShowWarning(fmt::format("Packet backlog for char {} in {} is {}! Limit is: {}",
-                                PChar->name, PChar->loc.zone->GetName(), remainingPackets, MAX_PACKET_BACKLOG_SIZE));
     }
 
     return 0;
