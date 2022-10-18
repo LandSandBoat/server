@@ -19,11 +19,6 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    -- Add synergy variable to the master
-    local synergy = caster:getLocalVar("mumorSynergy")
-
-    caster:setLocalVar("mumorSynergy", synergy + 1)
-
     return xi.trust.spawn(caster, spell)
 end
 
@@ -33,29 +28,24 @@ spellObject.onMobSpawn = function(mob)
         [xi.magic.spell.ULLEGORE] = xi.trust.message_offset.TEAMWORK_2,
     })
 
-    -- Dynamic modifier that checks variable on tick to apply
+    -- Dynamic modifier that checks party member list on tick to apply synergy
     mob:addListener("COMBAT_TICK", "UKA_TOTLIHN_CTICK", function(mobArg)
-        -- Locals for synergy
-        local master  = mob:getMaster()
-        local synergy = master:getLocalVar("mumorSynergy")
-        if synergy >= 2 then
-            mob:setMod(xi.mod.WALTZ_POTENTCY, 10)
+        local waltzPotencyBoost = 0
+        local party = mobArg:getMaster():getPartWithTrusts()
+        for _, member in pairs(party) do
+            if member:getObjType() == xi.objType.TRUST then
+                if
+                    member:getTrustID() == xi.magic.spell.MUMOR or
+                    member:getTrustID() == xi.magic.spell.MUMOR_II
+                then
+                    waltzPotencyBoost = 10
+                end
+            end
         end
-    end)
-
-    -- Listeners to subtract synergy variable if one of the two are killed or released
-    -- Todo: rework synergy check for dynamic adjustments on tick
-    -- Todo: update gambit container to allow to toggling behaviors with synergy
-    mob:addListener("DEATH", "UKA_TOTLIHN_DEATH", function(mobArg, killer)
-        local master  = mob:getMaster()
-        local synergy = master:getLocalVar("mumorSynergy")
-        master:setLocalVar("mumorSynergy", synergy - 1)
-    end)
-
-    mob:addListener("DESPAWN", "UKA_TOTLIHN_DESPAWN", function(mobArg)
-        local master  = mob:getMaster()
-        local synergy = master:getLocalVar("mumorSynergy")
-        master:setLocalVar("mumorSynergy", synergy - 1)
+        -- Always set the boost, even if Mumor wasn't found.
+        -- This accounts for her being in the party and giving the boost
+        -- and also if she dies and the boost goes away.
+        mobArg:setMod(xi.mod.WALTZ_POTENTCY, waltzPotencyBoost)
     end)
 
     for i = 1, #healingJobs do
