@@ -9,9 +9,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     -- skillList  54 = Omega
     -- skillList 727 = Proto-Omega
     -- skillList 728 = Ultima
@@ -26,7 +26,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
     end
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local currentHP = target:getHP()
     local damage = currentHP * .90
     local typeEffect = xi.effect.BIND
@@ -36,4 +36,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     mob:resetEnmity(target)
     return dmg
 end
-return mobskill_object
+return mobskillObject

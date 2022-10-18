@@ -14,7 +14,7 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.DRAW_IN_CUSTOM_RANGE, 10)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

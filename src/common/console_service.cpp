@@ -21,7 +21,9 @@
 
 #include "console_service.h"
 
-extern std::atomic<bool> gRunFlag;
+#ifdef _WIN32
+#include <Windows.h> // ReadConsoleInput et al
+#endif
 
 ConsoleService::ConsoleService()
 {
@@ -58,13 +60,6 @@ ConsoleService::ConsoleService()
         }
     });
 
-    RegisterCommand("exit", "Terminate the program.",
-    [](std::vector<std::string> inputs)
-    {
-        fmt::print("> Goodbye!\n");
-        gRunFlag = false;
-    });
-
     bool attached = isatty(0);
     if (attached)
     {
@@ -74,15 +69,19 @@ ConsoleService::ConsoleService()
         {
             auto lastInputTime = server_clock::now();
 
-            // TODO: condition_variable
-            while (gRunFlag)
+            while (m_consoleThreadRun)
             {
                 if ((server_clock::now() - lastInputTime) > 1s)
                 {
                     std::lock_guard lock(m_consoleInputBottleneck);
-
                     std::string line;
-                    std::getline(std::cin, line);
+
+                    line = getLine();
+
+                    if (!m_consoleThreadRun)
+                    {
+                        break;
+                    }
 
                     std::istringstream stream(line);
                     std::string        input;
@@ -113,7 +112,7 @@ ConsoleService::ConsoleService()
                 }
                 std::this_thread::sleep_for(250ms); // TODO: Do this better
             };
-            ShowInfo("Console input thread exiting...");
+            fmt::print("Console input thread exiting...\n");
         });
     }
     // clang-format on
@@ -122,7 +121,11 @@ ConsoleService::ConsoleService()
 ConsoleService::~ConsoleService()
 {
     m_consoleThreadRun = false;
-    m_consoleInputThread.join();
+
+    if (m_consoleInputThread.joinable())
+    {
+        m_consoleInputThread.join();
+    }
 }
 
 // NOTE: If you capture things in this function, make sure they're protected (locked or atomic)!
@@ -131,4 +134,77 @@ void ConsoleService::RegisterCommand(std::string const& name, std::string const&
 {
     std::lock_guard lock(m_consoleInputBottleneck);
     m_commands[name] = ConsoleCommand{ name, description, func };
+}
+
+void ConsoleService::stop()
+{
+    m_consoleThreadRun = false;
+}
+
+std::string ConsoleService::getLine()
+{
+    std::string line;
+
+// Windows doesn't have a proper poll that works for stdin, but we can use some win32 API on the console...
+#ifdef _WIN32
+    INPUT_RECORD record;
+    DWORD        numEvents;
+
+    while (m_consoleThreadRun)
+    {
+        if (!ReadConsoleInput(GetStdHandle(STD_INPUT_HANDLE), &record, 1, &numEvents))
+        {
+            continue; // this is an error state, does this happen in the real world?
+        }
+
+        if (record.EventType != KEY_EVENT)
+        {
+            continue;
+        }
+
+        if (record.Event.KeyEvent.bKeyDown) // only take input on keydown, not key up
+        {
+            WCHAR keyCharacter = record.Event.KeyEvent.uChar.UnicodeChar;
+
+            if (keyCharacter == '\b')
+            {
+                fmt::print("\b \b"); // move cursor left, overwrite with space, move cursor left
+                if (line.size() > 0)
+                {
+                    line.pop_back(); // remove last char in buffer if any
+                }
+                continue;
+            }
+
+            fmt::print("{:c}", keyCharacter); // echo character back to console, apparently using ReadConsoleInput & GetStdHandle prevents echo?
+            if (keyCharacter == '\r')
+            {
+                fmt::print("\n"); // Windows needs \r\n for newlines in the console, but the enter key is only \r.
+                break;
+            }
+
+            if (std::isprint(keyCharacter))
+            {
+                line += keyCharacter;
+            }
+        }
+    }
+// Linux has a proper polling system for stdin
+#else
+    struct pollfd pollFileDescriptor = { STDIN_FILENO, POLLIN, 0 };
+    int           hasData            = 0;
+
+    // poll() can return -1 when stdin is bad, is this a real-world error condition?
+    while (hasData == 0 && m_consoleThreadRun)
+    {
+        // poll for 1000ms. This doesn't seem to have significant overhead.
+        hasData = poll(&pollFileDescriptor, 1, 1000);
+        if (hasData == 1)
+        {
+            std::getline(std::cin, line);
+        }
+    }
+#endif
+
+    return line;
 }

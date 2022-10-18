@@ -7,9 +7,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if (target:hasStatusEffect(xi.effect.PHYSICAL_SHIELD) or target:hasStatusEffect(xi.effect.MAGIC_SHIELD)) then
         return 1
     elseif (mob:hasStatusEffect(xi.effect.PLAGUE) or mob:hasStatusEffect(xi.effect.CURSE_I) or mob:hasStatusEffect(xi.effect.MUTE)) then
@@ -20,7 +20,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     skill:setMsg(xi.msg.basic.NONE)
     if (mob:hasStatusEffect(xi.effect.PLAGUE) or mob:hasStatusEffect(xi.effect.CURSE_I) or mob:hasStatusEffect(xi.effect.MUTE)) then
         -- use Remedy!
@@ -40,4 +40,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return 0
 end
 
-return mobskill_object
+return mobskillObject

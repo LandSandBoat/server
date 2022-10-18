@@ -9,13 +9,13 @@ require("scripts/globals/trust")
 require("scripts/globals/weaponskillids")
 require("scripts/globals/zone")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return xi.trust.canCast(caster, spell, xi.magic.spell.EXCENMILLE_S)
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local sandoriaFirstTrust = caster:getCharVar("SandoriaFirstTrust")
     local zone = caster:getZoneID()
 
@@ -26,7 +26,7 @@ spell_object.onSpellCast = function(caster, target, spell)
     return xi.trust.spawn(caster, spell)
 end
 
-spell_object.onMobSpawn = function(mob)
+spellObject.onMobSpawn = function(mob)
     xi.trust.teamworkMessage(mob, {
         [xi.magic.spell.RAHAL] = xi.trust.message_offset.TEAMWORK_1,
     })
@@ -43,12 +43,12 @@ spell_object.onMobSpawn = function(mob)
     mob:addMod(xi.mod.STORETP, 25)
 end
 
-spell_object.onMobDespawn = function(mob)
+spellObject.onMobDespawn = function(mob)
     xi.trust.message(mob, xi.trust.message_offset.DESPAWN)
 end
 
-spell_object.onMobDeath = function(mob)
+spellObject.onMobDeath = function(mob)
     xi.trust.message(mob, xi.trust.message_offset.DEATH)
 end
 
-return spell_object
+return spellObject

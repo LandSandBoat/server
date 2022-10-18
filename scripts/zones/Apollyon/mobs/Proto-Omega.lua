@@ -75,12 +75,12 @@ entity.onAdditionalEffect = function(mob, target, damage)
     return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.STUN)
 end
 
-entity.onMobDeath = function(mob, player, isKiller, noKiller)
+entity.onMobDeath = function(mob, player, optParams)
     if player then
         player:addTitle(xi.title.APOLLYON_RAVAGER)
     end
 
-    if isKiller or noKiller then
+    if optParams.isKiller or optParams.noKiller then
         GetNPCByID(ID.npc.APOLLYON_CENTRAL_CRATE):setStatus(xi.status.NORMAL)
     end
 end

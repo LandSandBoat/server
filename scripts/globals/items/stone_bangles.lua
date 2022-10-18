@@ -3,13 +3,13 @@
 -- Stone Bangles
 --  Enchantment: "Enstone"
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return 0
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     local effect = xi.effect.ENSTONE
     local magicskill = target:getSkillLevel(xi.skill.ENHANCING_MAGIC)
     local potency = 0
@@ -25,4 +25,4 @@ item_object.onItemUse = function(target)
     target:addStatusEffect(effect, potency, 0, 180)
 end
 
-return item_object
+return itemObject

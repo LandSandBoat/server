@@ -3,14 +3,14 @@
 -- Scroll of Dokumori: Ichi
 -- Teaches the ninjutsu Dokumori: Ichi
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(350)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(350)
 end
 
-return item_object
+return itemObject

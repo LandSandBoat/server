@@ -198,7 +198,7 @@ mission.sections =
             -- the other target.
             ['Nio-A'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     local mobNioHum = GetMobByID(uggalepihID.mob.NIO_HUM)
 
                     if
@@ -212,7 +212,7 @@ mission.sections =
 
             ['Nio-Hum'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     local mobNioA = GetMobByID(uggalepihID.mob.NIO_A)
 
                     if

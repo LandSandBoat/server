@@ -75,7 +75,7 @@ mission.sections =
 
             ['Dalham'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if mission:getLocalVar(player, 'nmBibiki') == 0 then
                         mission:setLocalVar(player, 'nmBibiki', 1)
                     end
@@ -115,7 +115,7 @@ mission.sections =
 
             ['Cryptonberry_Assassin'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     local nmProgress = mission:getLocalVar(player, 'carpentersNm')
                     local nmOffset = mob:getID() - carpentersID.mob.CRYPTONBERRY_EXECUTOR
 
@@ -125,7 +125,7 @@ mission.sections =
 
             ['Cryptonberry_Executor'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     local nmProgress = mission:getLocalVar(player, 'carpentersNm')
                     local nmOffset = mob:getID() - carpentersID.mob.CRYPTONBERRY_EXECUTOR
 
@@ -161,7 +161,7 @@ mission.sections =
 
             ['Boggelmann'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if mission:getLocalVar(player, 'nmMisareaux') == 0 then
                         mission:setLocalVar(player, 'nmMisareaux', 1)
                     end

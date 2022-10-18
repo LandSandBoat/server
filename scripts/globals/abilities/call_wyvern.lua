@@ -8,14 +8,14 @@
 -----------------------------------
 require("scripts/globals/job_utils/dragoon")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return xi.job_utils.dragoon.abilityCheckCallWyvern(player, target, ability)
 end
 
-ability_object.onUseAbility = function(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability)
     xi.job_utils.dragoon.useCallWyvern(player, target, ability)
 end
 
-return ability_object
+return abilityObject

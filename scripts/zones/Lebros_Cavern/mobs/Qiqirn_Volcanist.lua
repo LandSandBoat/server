@@ -12,7 +12,7 @@ entity.onMobSpawn = function(mob)
     xi.assault.adjustMobLevel(mob)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     if mob:getLocalVar("dead") == 0 then
         mob:setLocalVar("dead", 1)
         if math.random(0, 100) >= 50 then

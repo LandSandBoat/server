@@ -8,13 +8,13 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     --[[
     https://youtu.be/r7ogGoabgH0?t=1m58s
     https://youtu.be/a0Tqdl8_SY4?t=2m29s
@@ -32,4 +32,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return xi.mobskills.mobHealMove(mob, heal)
 end
 
-return mobskill_object
+return mobskillObject

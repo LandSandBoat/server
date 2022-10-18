@@ -7,13 +7,13 @@ require("scripts/globals/mobskills")
 require("scripts/globals/ability")
 
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-ability_object.onUseAbility = function(pet, target, skill, action)
+abilityObject.onUseAbility = function(pet, target, skill, action)
     local master = pet:getMaster()
     ---------- Deep Breathing ----------
     -- 0 for none
@@ -37,4 +37,4 @@ ability_object.onUseAbility = function(pet, target, skill, action)
     return dmg
 end
 
-return ability_object
+return abilityObject

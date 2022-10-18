@@ -14,7 +14,7 @@ entity.onMobSpawn = function(mob)
     mob:addMod(xi.mod.DEF, 100)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     local instance = mob:getInstance()
 
     if mob:getLocalVar("Killed") == 0 then

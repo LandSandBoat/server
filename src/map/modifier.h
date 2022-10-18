@@ -368,15 +368,23 @@ enum class Mod
     GILFINDER            = 897,  // Gilfinder, duh
 
     // Paladin
-    HOLY_CIRCLE_DURATION   = 857, // Holy Circle extended duration in seconds
-    RAMPART_DURATION       = 92,  // Rampart duration in seconds
-    ABSORB_PHYSDMG_TO_MP   = 426, // Absorbs a percentage of physical damage taken to MP.
-    SHIELD_MASTERY_TP      = 485, // Shield mastery TP bonus when blocking with a shield
-    SENTINEL_EFFECT        = 837, // Sentinel effect in percents
-    SHIELD_DEF_BONUS       = 905, // Shield Defense Bonus
-    COVER_TO_MP            = 965, // Converts a successful cover's phsyical damage to MP
-    COVER_MAGIC_AND_RANGED = 966, // Redirects ranged and single target magic attacks to the cover ability user
-    COVER_DURATION         = 967, // Increases Cover Duration
+    HOLY_CIRCLE_DURATION   = 857,  // Holy Circle extended duration in seconds
+    RAMPART_DURATION       = 92,   // Rampart duration in seconds
+    ABSORB_PHYSDMG_TO_MP   = 426,  // Absorbs a percentage of physical damage taken to MP.
+    SHIELD_MASTERY_TP      = 485,  // Shield mastery TP bonus when blocking with a shield
+    SENTINEL_EFFECT        = 837,  // Sentinel effect in percents
+    SHIELD_DEF_BONUS       = 905,  // Shield Defense Bonus
+    COVER_TO_MP            = 965,  // Converts a successful cover's phsyical damage to MP
+    COVER_MAGIC_AND_RANGED = 966,  // Redirects ranged and single target magic attacks to the cover ability user
+    COVER_DURATION         = 967,  // Increases Cover Duration
+    ENHANCES_CHIVALRY      = 1061, // Enhances "Chivalry" effect (increases the base TP modifier by the provided value / 100, e.g. mod value 5 = +0.05)
+    ENHANCES_DIVINE_EMBLEM = 1062, // Enhances "Divine Emblem" effect/"Divine Emblem" + (increases the ability's special enmity bonus by the provided value)
+    ENHANCES_FEALTY        = 1063, // Enhances "Fealty" effect (increases Fealty's duration by 4 seconds per Fealty merit)
+    ENHANCES_IRON_WILL     = 1064, // Enhances "Iron Will" effect (adds +3% Fast Cast per Iron Will merit to Rampart)
+    ENHANCES_GUARDIAN      = 1065, // Enhances "Guardian" effect (increases Sentinel's duration by 2 seconds per Guardian merit)
+    PALISADE_BLOCK_BONUS   = 1066, // Increases base block rate while under the effects of Palisade (additive, not multiplicative)
+    REPRISAL_BLOCK_BONUS   = 1067, // Increases block rate while under the effects of Reprisal (multiplicative, not additive)
+    REPRISAL_SPIKES_BONUS  = 1068, // Increases Reprisal spikes damage by percentage (e.g. mod value 50 = +50% spikes damage)
 
     // Dark Knight
     ARCANE_CIRCLE_DURATION = 858, // Arcane Circle extended duration in seconds
@@ -675,8 +683,14 @@ enum class Mod
     SNEAK_DURATION     = 946, // Additional duration in seconds
     INVISIBLE_DURATION = 947, // Additional duration in seconds
 
-    MAIN_DMG_RATING    = 366,  // adds damage rating to main hand weapon (maneater/blau dolch etc hidden effects)
-    SUB_DMG_RATING     = 367,  // adds damage rating to off hand weapon
+    DMG_RATING        = 287, // adds damage rating to weapon (+DMG augments, maneater/blau dolch etc hidden effects)
+    MAIN_DMG_RATING   = 366, // adds damage rating to mainhand weapon
+    SUB_DMG_RATING    = 367, // adds damage rating to off hand weapon
+    RANGED_DMG_RATING = 376, // adds damage rating to ranged weapon
+    MAIN_DMG_RANK     = 377, // adds weapon rank to main weapon http://wiki.bluegartr.com/bg/Weapon_Rank
+    SUB_DMG_RANK      = 378, // adds weapon rank to sub weapon
+    RANGED_DMG_RANK   = 379, // adds weapon rank to ranged weapon
+
     REGAIN             = 368,  // auto regain TP (from items) | this is multiplied by 10 e.g. 20 is 2% TP
     REGAIN_DOWN        = 406,  // plague, reduce tp
     REFRESH            = 369,  // auto refresh from equipment
@@ -687,10 +701,6 @@ enum class Mod
     CURE_POTENCY_II    = 260,  // % cure potency II | bonus from gear is capped at 30
     CURE_POTENCY_RCVD  = 375,  // % potency of received cure | healer's roll, some items have this
     CURE_POTENCY_BONUS = 1051, // TODO: Increases amount healed by Cure spells (fixed amount)
-    RANGED_DMG_RATING  = 376,  // adds damage rating to ranged weapon
-    MAIN_DMG_RANK      = 377,  // adds weapon rank to main weapon http://wiki.bluegartr.com/bg/Weapon_Rank
-    SUB_DMG_RANK       = 378,  // adds weapon rank to sub weapon
-    RANGED_DMG_RANK    = 379,  // adds weapon rank to ranged weapon
     DELAYP             = 380,  // delay addition percent (does not affect tp gain)
     RANGED_DELAYP      = 381,  // ranged delay addition percent (does not affect tp gain)
 
@@ -740,10 +750,11 @@ enum class Mod
     LIGHT_NULL = 473, //
     DARK_NULL  = 474, //
 
-    MAGIC_ABSORB     = 475, // Occasionally absorbs magic damage taken, in percents
-    MAGIC_NULL       = 476, // Occasionally annuls magic damage taken, in percents
-    PHYS_ABSORB      = 512, // Occasionally absorbs physical damage taken, in percents
-    ABSORB_DMG_TO_MP = 516, // Unlike PLD gear mod, works on all damage types (Ethereal Earring)
+    MAGIC_ABSORB       = 475, // Occasionally absorbs magic damage taken, in percents
+    MAGIC_NULL         = 476, // Occasionally annuls magic damage taken, in percents
+    NULL_RANGED_DAMAGE = 239, // Occasionally annuls ranged damage taken, in percents
+    PHYS_ABSORB        = 512, // Occasionally absorbs physical damage taken, in percents
+    ABSORB_DMG_TO_MP   = 516, // Unlike PLD gear mod, works on all damage types (Ethereal Earring)
 
     ITEM_ADDEFFECT_TYPE     = 431, // see procType table in scripts\globals\additional_effects.lua
     ITEM_SUBEFFECT          = 499, // Animation ID of Spikes and Additional Effects
@@ -946,12 +957,11 @@ enum class Mod
     // 138 to 143
     // 156 to 159
     // 192 to 223
-    // 239
-    // 261 to 287
+    // 261 to 286
     // 888
     // 936
     //
-    // SPARE = 1061, and onward
+    // SPARE = 1069, and onward
 };
 
 // temporary workaround for using enum class as unordered_map key until compilers support it
@@ -971,7 +981,7 @@ struct EnumClassHash
 class CModifier
 {
 public:
-    Mod   getModID();
+    Mod   getModID() const;
     int16 getModAmount() const;
 
     void setModAmount(int16 amount);
@@ -1000,7 +1010,7 @@ class CPetModifier : public CModifier
 {
 public:
     CPetModifier(Mod type, PetModType pettype, int16 amount = 0);
-    PetModType getPetModType();
+    PetModType getPetModType() const;
 
 private:
     PetModType m_pettype{ PetModType::All };

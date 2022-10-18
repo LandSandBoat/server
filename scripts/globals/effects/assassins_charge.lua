@@ -3,9 +3,9 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effect_object = {}
+local effectObject = {}
 
-effect_object.onEffectGain = function(target, effect)
+effectObject.onEffectGain = function(target, effect)
     target:addMod(xi.mod.QUAD_ATTACK, effect:getPower())
     target:addMod(xi.mod.TRIPLE_ATTACK, 100)
     if (effect:getSubPower() > 0) then
@@ -13,10 +13,10 @@ effect_object.onEffectGain = function(target, effect)
     end
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
 end
 
-effect_object.onEffectLose = function(target, effect)
+effectObject.onEffectLose = function(target, effect)
     target:delMod(xi.mod.QUAD_ATTACK, effect:getPower())
     target:delMod(xi.mod.TRIPLE_ATTACK, 100)
     if (effect:getSubPower() > 0) then -- xi.mod.AUGMENTS_ASSASSINS_CHARGE
@@ -24,4 +24,4 @@ effect_object.onEffectLose = function(target, effect)
     end
 end
 
-return effect_object
+return effectObject

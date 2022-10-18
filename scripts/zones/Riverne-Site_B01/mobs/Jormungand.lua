@@ -86,7 +86,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENBLIZZARD, {power = math.random(45, 90), chance = 10})
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENBLIZZARD, { power = math.random(45, 90), chance = 10 })
 end
 
 return entity

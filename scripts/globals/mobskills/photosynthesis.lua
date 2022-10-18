@@ -11,9 +11,9 @@ require("scripts/globals/mobskills")
 require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     -- only used during daytime
     local currentTime = VanadielHour()
     if (currentTime >= 6 and currentTime <= 18) then
@@ -22,7 +22,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 1
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local power = mob:getMainLvl()/10 * 4 + 5
     local duration = 30
 
@@ -31,4 +31,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return typeEffect
 end
 
-return mobskill_object
+return mobskillObject

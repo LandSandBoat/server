@@ -6,13 +6,13 @@ require("scripts/globals/mobskills")
 require("scripts/globals/settings")
 require("scripts/globals/msg")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     if mob:getPool() == 1507 then -- Geush Urvan
         local typeEffect = xi.effect.COUNTERSTANCE
 
@@ -25,4 +25,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     end
 end
 
-return mobskill_object
+return mobskillObject

@@ -6,13 +6,13 @@ require("scripts/globals/msg")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     if target:hasStatusEffect(xi.effect.HASTE) then
         spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
         return xi.effect.SLOW
@@ -55,4 +55,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return params.effect
 end
 
-return spell_object
+return spellObject

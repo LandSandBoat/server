@@ -39,6 +39,7 @@
 #include <io.h>
 #define isatty _isatty
 #else
+#include <poll.h>
 #include <unistd.h>
 #endif
 
@@ -62,12 +63,17 @@ public:
     // NOTE: If you're going to print, use fmt::print, rather than ShowInfo etc.
     void RegisterCommand(std::string const& name, std::string const& description, std::function<void(std::vector<std::string>)> func);
 
+    // Call this to stop processing commands
+    void stop();
+
 private:
     std::thread       m_consoleInputThread;
     std::mutex        m_consoleInputBottleneck;
     std::atomic<bool> m_consoleThreadRun = true;
 
     std::unordered_map<std::string, ConsoleCommand> m_commands;
+
+    std::string getLine();
 };
 
 #endif // _CONSOLE_SERVICE_H_

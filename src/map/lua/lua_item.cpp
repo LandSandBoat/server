@@ -134,7 +134,7 @@ auto CLuaItem::getMatchingTrials() -> sol::table
     return table;
 }
 
-uint8 CLuaItem::getWornItem()
+uint8 CLuaItem::getWornUses()
 {
     return m_PLuaItem->m_extra[0];
 }
@@ -340,7 +340,7 @@ void CLuaItem::Register()
     SOL_REGISTER("getSlotID", CLuaItem::getSlotID);
     SOL_REGISTER("getTrialNumber", CLuaItem::getTrialNumber);
     SOL_REGISTER("getMatchingTrials", CLuaItem::getMatchingTrials);
-    SOL_REGISTER("getWornItem", CLuaItem::getWornItem);
+    SOL_REGISTER("getWornUses", CLuaItem::getWornUses);
     SOL_REGISTER("isType", CLuaItem::isType);
     SOL_REGISTER("isSubType", CLuaItem::isSubType);
     SOL_REGISTER("getName", CLuaItem::getName);

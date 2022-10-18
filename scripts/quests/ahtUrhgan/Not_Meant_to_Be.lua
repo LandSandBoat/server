@@ -111,7 +111,7 @@ quest.sections =
 
             ['Lamia_No27'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if quest:getVar(player, 'Prog') == 3 then
                         quest:setVarBit(player, 'Stage', 0)
                     end
@@ -120,7 +120,7 @@ quest.sections =
 
             ['Moshdahn'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if quest:getVar(player, 'Prog') == 3 then
                         quest:setVarBit(player, 'Stage', 1)
                     end

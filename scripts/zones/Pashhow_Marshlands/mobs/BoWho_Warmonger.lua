@@ -3,7 +3,7 @@
 --   NM: Bo'Who Warmonger
 -----------------------------------
 require("scripts/globals/regimes")
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 local ID = require("scripts/zones/Pashhow_Marshlands/IDs")
 -----------------------------------
 local entity = {}
@@ -55,7 +55,7 @@ entity.onMagicCastingCheck = function(mob, target, spell)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 60, 1, xi.regime.type.FIELDS)
 end
 

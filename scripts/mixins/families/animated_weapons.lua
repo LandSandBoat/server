@@ -45,7 +45,7 @@ g_mixins.families.animated_weapons = function(animatedMob)
     end)
 
     animatedMob:addListener("COMBAT_TICK", "AWEAPON_CTICK", function(mob, target)
-        local dialogThresholds = {90, 80, 70, 60, 50, 40, 30, 20, 10}
+        local dialogThresholds = { 90, 80, 70, 60, 50, 40, 30, 20, 10 }
 
         for trigger, hpp in pairs(dialogThresholds) do
             if mob:getHPP() < hpp and mob:getLocalVar("dialogTrigger") < trigger then

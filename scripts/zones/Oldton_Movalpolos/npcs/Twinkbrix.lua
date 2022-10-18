@@ -19,20 +19,20 @@ entity.onTrade = function(player, npc, trade)
 
     if
         player:hasKeyItem(xi.ki.SHAFT_2716_OPERATING_LEVER) and
-        npcUtil.tradeHas(trade, {{"gil", mineShaftWarpCost}})
+        npcUtil.tradeHas(trade, { { "gil", mineShaftWarpCost } })
     then
         player:startEvent(56, 1781, 23, 1757, 177552692, 8, 17407, 15, 0)
 
     elseif
         player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL) and
-        npcUtil.tradeHas(trade, {{"gil", mineShaftWarpCost}})
+        npcUtil.tradeHas(trade, { { "gil", mineShaftWarpCost } })
     then
         player:startEvent(56)
 
     elseif
         not player:hasKeyItem(xi.ki.SHAFT_GATE_OPERATING_DIAL) and
         tradeGil > 0 and tradeGil <= 10000 and
-        npcUtil.tradeHas(trade, {{"gil", tradeGil}}) and
+        npcUtil.tradeHas(trade, { { "gil", tradeGil } }) and
         gateDialCD < os.time()
     then
         local maxRoll = tradeGil / 200

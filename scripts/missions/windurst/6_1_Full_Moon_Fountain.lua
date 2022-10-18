@@ -45,7 +45,7 @@ local function areJacksSpawned()
     return false
 end
 
-local jackOnMobDeath = function(mob, player, isKiller, noKiller)
+local jackOnMobDeath = function(mob, player, optParams)
     local areMobsDefeated = true
 
     if player:getMissionStatus(mission.areaId) ~= 1 then

@@ -162,7 +162,7 @@ entity.onEventFinish = function(player, csid, option)
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, card)
         else
             player:addQuest(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.COLLECT_TARUT_CARDS)
-            npcUtil.giveItem(player, {{card, 5}})
+            npcUtil.giveItem(player, { { card, 5 } })
             player:messageSpecial(ID.text.ITEM_OBTAINED, card)
         end
 

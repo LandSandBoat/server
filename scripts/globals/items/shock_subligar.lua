@@ -1,6 +1,14 @@
-local item_object = {}
+-----------------------------------
+-- ID: 15650
+-- Item: shock subligar
+-- Item Effect: Shock Spikes
+-----------------------------------
+require("scripts/globals/settings")
+require("scripts/globals/status")
+-----------------------------------
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     local effect = target:getStatusEffect(xi.effect.SHOCK_SPIKES)
     if effect ~= nil and effect:getSubType() == 15650 then
         target:delStatusEffect(xi.effect.SHOCK_SPIKES)
@@ -8,8 +16,8 @@ item_object.onItemCheck = function(target)
     return 0
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addStatusEffect(xi.effect.SHOCK_SPIKES, 15, 0, 180, 15650)
 end
 
-return item_object
+return itemObject

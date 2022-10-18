@@ -14,7 +14,7 @@ entity.onMobInitialize = function(mob)
     mob:addMod(xi.mod.SLEEPRES, 500)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     player:addTitle(xi.title.THE_VIVISECTOR)
 end
 

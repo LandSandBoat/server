@@ -266,7 +266,7 @@ quest.sections =
         {
             ['Gambilox_Wanderling'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if quest:getVar(player, 'Prog') == 4 then
                         quest:setVar(player, 'Prog', 5)
                     end

@@ -9,8 +9,8 @@ local entity = {}
 
 local path =
 {
-    {x = 35.243, y = 7.000, z = -1.829, wait = 4000},
-    {x = 89.659, y = 7.000, z = -0.181, wait = 4000},
+    { x = 35.243, y = 7.000, z = -1.829, wait = 4000 },
+    { x = 89.659, y = 7.000, z = -0.181, wait = 4000 },
 }
 
 entity.onSpawn = function(npc)

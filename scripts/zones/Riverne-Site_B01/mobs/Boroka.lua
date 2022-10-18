@@ -13,7 +13,7 @@ entity.onMobSpawn = function(mob)
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            {id = xi.jsa.SOUL_VOICE, cooldown = 120, hpp = math.random(85, 95)}, -- Can use Soul Voice multiple times
+            { id = xi.jsa.SOUL_VOICE, cooldown = 120, hpp = math.random(85, 95) }, -- Can use Soul Voice multiple times
         },
     })
 end
@@ -27,7 +27,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     player:addTitle(xi.title.BOROKA_BELEAGUERER)
     mob:setRespawnTime(math.random(75600, 86400)) -- 21-24 hour respawn
 end

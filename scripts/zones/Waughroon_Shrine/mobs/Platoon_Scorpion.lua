@@ -53,8 +53,8 @@ entity.onMobSpawn = function(mob)
     end)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
-    if isKiller then
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller then
         if mob:getLocalVar("deathControl") == 0 then
             mob:setLocalVar("deathControl", 1)
             local bf = mob:getBattlefield():getArea()

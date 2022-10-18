@@ -37,6 +37,7 @@ end
 -----------------------------------
 xi.job_utils.warrior.useAggressor = function(player, target, ability)
     local merits = player:getMerit(xi.merit.AGGRESSIVE_AIM)
+
     player:addStatusEffect(xi.effect.AGGRESSOR, merits, 0, 180 + player:getMod(xi.mod.AGGRESSOR_DURATION))
 end
 
@@ -45,10 +46,16 @@ xi.job_utils.warrior.useBerserk = function(player, target, ability)
 end
 
 xi.job_utils.warrior.useBloodRage = function(player, target, ability)
-    local power = 20 + player:getJobPointLevel(xi.jp.BLOOD_RAGE_EFFECT)
+    local power    = 20 + player:getJobPointLevel(xi.jp.BLOOD_RAGE_EFFECT)
     local duration = 30 + player:getMod(xi.mod.ENHANCES_BLOOD_RAGE)
 
-    player:addStatusEffect(xi.effect.BLOOD_RAGE, power, 0, duration)
+    target:addStatusEffect(xi.effect.BLOOD_RAGE, power, 0, duration)
+
+    if player:getID() ~= target:getID() then
+        ability:setMsg(xi.msg.basic.JA_GAIN_EFFECT)
+    end
+
+    return xi.effect.BLOOD_RAGE
 end
 
 xi.job_utils.warrior.useBrazenRush = function(player, target, ability)
@@ -72,7 +79,7 @@ xi.job_utils.warrior.useRetaliation = function(player, target, ability)
 end
 
 xi.job_utils.warrior.useTomahawk = function(player, target, ability)
-    local merits = player:getMerit(xi.merit.TOMAHAWK) - 15
+    local merits   = player:getMerit(xi.merit.TOMAHAWK) - 15
     local duration = 30 + merits
 
     target:addStatusEffectEx(xi.effect.TOMAHAWK, 0, 25, 3, duration, 0, 0, 0)
@@ -80,22 +87,30 @@ xi.job_utils.warrior.useTomahawk = function(player, target, ability)
 end
 
 xi.job_utils.warrior.useWarcry = function(player, target, ability)
-    local merit = player:getMerit(xi.merit.SAVAGERY)
-    local power = 0
+    local merit    = player:getMerit(xi.merit.SAVAGERY)
+    local power    = 0
     local duration = 30
 
     if player:getMainJob() == xi.job.WAR then
-        power = math.floor((player:getMainLvl()/4)+4.75)/256
+        power = math.floor((player:getMainLvl() / 4) + 4.75) / 256
     else
-        power = math.floor((player:getSubLvl()/4)+4.75)/256
+        power = math.floor((player:getSubLvl() / 4) + 4.75) / 256
     end
 
-    power = power * 100
+    power    = power * 100
     duration = duration + player:getMod(xi.mod.WARCRY_DURATION)
+
     target:addStatusEffect(xi.effect.WARCRY, power, 0, duration, 0, merit)
+
+    if player:getID() ~= target:getID() then
+        ability:setMsg(xi.msg.basic.JA_ATK_ENHANCED)
+    end
+
+    return xi.effect.WARCRY
 end
 
 xi.job_utils.warrior.useWarriorsCharge = function(player, target, ability)
     local merits = player:getMerit(xi.merit.WARRIORS_CHARGE)
-    player:addStatusEffect(xi.effect.WARRIORS_CHARGE, merits-5, 0, 60)
+
+    player:addStatusEffect(xi.effect.WARRIORS_CHARGE, merits - 5, 0, 60)
 end

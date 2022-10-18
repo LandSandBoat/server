@@ -3,14 +3,14 @@
 -- Scroll of Phalanx II
 -- Teaches the white magic Phalanx II
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(107)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(107)
 end
 
-return item_object
+return itemObject

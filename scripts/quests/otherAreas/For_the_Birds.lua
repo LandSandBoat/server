@@ -131,7 +131,7 @@ quest.sections =
 
             ['Nickel_Quadav'] =
             {
-                onMobDeath = function(mob, player, isKiller, firstCall)
+                onMobDeath = function(mob, player, optParams)
                     if quest:getVar(player, 'Prog') == 2 then
                         quest:setVar(player, 'Prog', 3)
                     end

@@ -20,7 +20,7 @@ mission.reward =
 
 local keyItemOnMobDeath =
 {
-    onMobDeath = function(mob, player, isKiller, noKiller)
+    onMobDeath = function(mob, player, optParams)
         -- TODO: Mobs that grant this KI and the rate in which it drops needs to be measured further.  This
         -- is currently set to a lower value than observed in capture.
 

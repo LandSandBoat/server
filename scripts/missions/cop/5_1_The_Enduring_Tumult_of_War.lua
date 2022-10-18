@@ -181,7 +181,7 @@ mission.sections =
 
             ['Nunyunuwi'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if mission:getVar(player, 'Status') == 3 then
                         mission:setVar(player, 'Status', 4)
                     end

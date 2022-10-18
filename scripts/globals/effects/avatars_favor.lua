@@ -5,14 +5,14 @@ require("scripts/globals/status")
 require("scripts/globals/pets")
 require("scripts/globals/avatars_favor")
 -----------------------------------
-local effect_object = {}
+local effectObject = {}
 
-effect_object.onEffectGain = function(target, effect)
+effectObject.onEffectGain = function(target, effect)
     xi.avatarsFavor.applyAvatarsFavorAuraToPet(target, effect)
     xi.avatarsFavor.applyAvatarsFavorDebuffsToPet(target)
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
     -- Perform tick power upgrade to max
     if effect:getPower() <= 11 then
         effect:setPower(effect:getPower() + 1)
@@ -46,8 +46,8 @@ effect_object.onEffectTick = function(target, effect)
     xi.avatarsFavor.applyAvatarsFavorAuraToPet(target, effect)
 end
 
-effect_object.onEffectLose = function(target, effect)
+effectObject.onEffectLose = function(target, effect)
     xi.avatarsFavor.removeAvatarsFavorAuraFromPet(target)
 end
 
-return effect_object
+return effectObject

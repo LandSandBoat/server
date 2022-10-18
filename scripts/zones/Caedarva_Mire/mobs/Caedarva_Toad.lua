@@ -7,7 +7,7 @@ require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     local theWaywardAutomaton = player:getQuestStatus(xi.quest.log_id.AHT_URHGAN, xi.quest.id.ahtUrhgan.THE_WAYWARD_AUTOMATON)
     local theWaywardAutomatonProgress = player:getCharVar("TheWaywardAutomatonProgress")
 

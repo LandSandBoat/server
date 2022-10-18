@@ -3,7 +3,7 @@
 --   NM: Ponderer
 -- TODO: Verify cmbDelay
 -----------------------------------
-mixins = {require("scripts/mixins/families/empty_terroanima")}
+mixins = { require("scripts/mixins/families/empty_terroanima") }
 -----------------------------------
 local entity = {}
 
@@ -29,6 +29,9 @@ entity.onMobFight = function(mob, target)
     if mob:getHPP() <= 35 then
        mob:setMod(xi.mod.STORETP, 250)
     end
+end
+
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

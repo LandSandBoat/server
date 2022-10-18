@@ -6,13 +6,13 @@ require("scripts/globals/magic")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     --calculate raw damage (unknown function  -> only dark skill though) - using http://www.bluegartr.com/threads/44518-Drain-Calculations
     -- also have small constant to account for 0 dark skill
     local dmg = 5 + 0.375 * caster:getSkillLevel(xi.skill.DARK_MAGIC)
@@ -54,4 +54,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return dmg
 end
 
-return spell_object
+return spellObject

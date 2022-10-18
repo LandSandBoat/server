@@ -28,7 +28,13 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDisengage = function(mob, weather)
+    if not (mob:getWeather() == xi.weather.WIND or mob:getWeather() == xi.weather.GALES) then
+        DespawnMob(mob:getID())
+    end
+end
+
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)

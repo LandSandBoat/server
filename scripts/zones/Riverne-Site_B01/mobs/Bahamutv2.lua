@@ -9,9 +9,9 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-local wyrms    = {16896158, 16896159, 16896160, 16896161}
-local percents = {90, 80, 70, 60, 50, 40, 30, 20}
-local adds     = {80, 60, 40, 20}
+local wyrms    = { 16896158, 16896159, 16896160, 16896161 }
+local percents = { 90, 80, 70, 60, 50, 40, 30, 20 }
+local adds     = { 80, 60, 40, 20 }
 
 local flare = function(mob, target, level)
     local flareWait = mob:getLocalVar("FlareWait")
@@ -142,7 +142,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
         local wyrmTwo = mob:getLocalVar("wyrmTwo")
         local wyrmThree = mob:getLocalVar("wyrmThree")
         local wyrmFour = mob:getLocalVar("wyrmFour")
-        local wyrmOrder = {wyrmOne, wyrmTwo, wyrmThree, wyrmFour}
+        local wyrmOrder = { wyrmOne, wyrmTwo, wyrmThree, wyrmFour }
 
         for i = 1, #wyrmOrder do
             mob:setLocalVar("randWyrm", wyrmOrder[addsSummoned])
@@ -157,8 +157,8 @@ entity.onMobDisengage = function(mob)
     mob:SetAutoAttackEnabled(true)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
-    if isKiller then
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller then
         mob:messageText(mob, ID.text.BAHAMUT_TAUNT + 17)
         mob:timer(3000, function(mobArg) mobArg:messageText(mobArg, ID.text.BAHAMUT_TAUNT + 18) end)
         mob:timer(6000, function(mobArg) mobArg:messageText(mobArg, ID.text.BAHAMUT_TAUNT + 19) end)

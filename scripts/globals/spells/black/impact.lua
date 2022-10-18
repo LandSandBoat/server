@@ -6,13 +6,13 @@
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local params = {}
     params.attribute = xi.mod.INT
     params.bonus = 1.0
@@ -81,4 +81,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return dmg
 end
 
-return spell_object
+return spellObject

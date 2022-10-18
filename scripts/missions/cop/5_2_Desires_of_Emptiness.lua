@@ -126,7 +126,7 @@ mission.sections =
 
             ['Propagator'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if not mission:isVarBitsSet(player, 'Option', 0) then
                         mission:setVarBit(player, 'Option', 0)
                     end
@@ -135,7 +135,7 @@ mission.sections =
 
             ['Solicitor'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if not mission:isVarBitsSet(player, 'Option', 1) then
                         mission:setVarBit(player, 'Option', 1)
                     end
@@ -144,7 +144,7 @@ mission.sections =
 
             ['Ponderer'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if not mission:isVarBitsSet(player, 'Option', 2) then
                         mission:setVarBit(player, 'Option', 2)
                     end

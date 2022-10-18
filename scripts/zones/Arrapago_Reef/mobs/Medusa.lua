@@ -56,7 +56,7 @@ entity.onMobDisengage = function(mob)
     for i = 1, 4 do DespawnMob(ID.mob.MEDUSA + i) end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     player:showText(mob, ID.text.MEDUSA_DEATH)
     player:addTitle(xi.title.GORGONSTONE_SUNDERER)
     for i = 1, 4 do DespawnMob(ID.mob.MEDUSA + i) end

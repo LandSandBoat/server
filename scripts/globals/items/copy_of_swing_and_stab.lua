@@ -8,14 +8,14 @@
 -----------------------------------------
 require("scripts/globals/item_utils")
 -----------------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return xi.item_utils.skillBookCheck(target, xi.skill.SWORD)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     xi.item_utils.skillBookUse(target, xi.skill.SWORD)
 end
 
-return item_object
+return itemObject

@@ -48,6 +48,7 @@
 #include "../utils/itemutils.h"
 #include "../utils/mobutils.h"
 #include "../utils/petutils.h"
+#include "../utils/zoneutils.h"
 #include "../weapon_skill.h"
 #include "common/timer.h"
 #include "common/utils.h"
@@ -533,10 +534,23 @@ bool CMobEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
     {
         return false;
     }
+
+    if (targetFlags & TARGET_PLAYER_PARTY)
+    {
+        if (!isDead())
+        {
+            if (allegiance == ALLEGIANCE_TYPE::MOB && PInitiator->allegiance == ALLEGIANCE_TYPE::MOB && allegiance == PInitiator->allegiance)
+            {
+                return true;
+            }
+        }
+    }
+
     if (CBattleEntity::ValidTarget(PInitiator, targetFlags))
     {
         return true;
     }
+
     if (targetFlags & TARGET_PLAYER_DEAD && (m_Behaviour & BEHAVIOUR_RAISABLE) && isDead())
     {
         return true;
@@ -1296,9 +1310,8 @@ void CMobEntity::DropItems(CCharEntity* PChar)
         }
     }
 
-    uint16 Pzone = PChar->getZone();
-
-    bool validZone = ((Pzone > 0 && Pzone < 39) || (Pzone > 42 && Pzone < 134) || (Pzone > 135 && Pzone < 185) || (Pzone > 188 && Pzone < 255));
+    ZONE_TYPE zoneType  = zoneutils::GetZone(PChar->getZone())->GetType();
+    bool      validZone = zoneType != ZONE_TYPE::BATTLEFIELD && zoneType != ZONE_TYPE::DYNAMIS;
 
     if (!getMobMod(MOBMOD_NO_DROPS) && validZone && charutils::CheckMob(m_HiPCLvl, GetMLevel()) > EMobDifficulty::TooWeak)
     {

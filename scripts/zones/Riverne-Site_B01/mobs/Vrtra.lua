@@ -7,7 +7,7 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-local offsets = {7, 9, 11, 8, 10, 12}
+local offsets = { 7, 9, 11, 8, 10, 12 }
 
 entity.onMobSpawn = function(mob)
     mob:addMod(xi.mod.SLEEPRES, 100)
@@ -66,7 +66,7 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENDARK, {power = math.random(45, 90), chance = 10})
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENDARK, { power = math.random(45, 90), chance = 10 })
 end
 
 entity.onMobWeaponSkill = function(target, mob, skill, action)
@@ -77,7 +77,7 @@ entity.onMobWeaponSkill = function(target, mob, skill, action)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     -- Despawn adds when Vrtra dies
     for i, offset in ipairs(offsets) do
         DespawnMob(mob:getID()+offset)

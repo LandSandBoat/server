@@ -394,15 +394,17 @@ uint16 CBattleEntity::GetMainWeaponDmg()
     {
         if ((weapon->getReqLvl() > GetMLevel()) && objtype == TYPE_PC)
         {
+            // TODO: Determine the difference between augments and latents w.r.t. equipment scaling.
+            // MAIN_DMG_RATING already has equipment scaling applied elsewhere.
             uint16 dmg = weapon->getDamage();
             dmg *= GetMLevel() * 3;
             dmg /= 4;
             dmg /= weapon->getReqLvl();
-            return dmg + getMod(Mod::MAIN_DMG_RATING);
+            return dmg + weapon->getModifier(Mod::DMG_RATING) + getMod(Mod::MAIN_DMG_RATING);
         }
         else
         {
-            return weapon->getDamage() + getMod(Mod::MAIN_DMG_RATING);
+            return weapon->getDamage() + weapon->getModifier(Mod::DMG_RATING) + getMod(Mod::MAIN_DMG_RATING);
         }
     }
     return 0;
@@ -419,11 +421,11 @@ uint16 CBattleEntity::GetSubWeaponDmg()
             dmg *= GetMLevel() * 3;
             dmg /= 4;
             dmg /= weapon->getReqLvl();
-            return dmg + getMod(Mod::SUB_DMG_RATING);
+            return dmg + weapon->getModifier(Mod::DMG_RATING) + getMod(Mod::SUB_DMG_RATING);
         }
         else
         {
-            return weapon->getDamage() + getMod(Mod::SUB_DMG_RATING);
+            return weapon->getDamage() + weapon->getModifier(Mod::DMG_RATING) + getMod(Mod::SUB_DMG_RATING);
         }
     }
     return 0;
@@ -448,11 +450,11 @@ uint16 CBattleEntity::GetRangedWeaponDmg()
             scaleddmg *= GetMLevel() * 3;
             scaleddmg /= 4;
             scaleddmg /= weapon->getReqLvl();
-            dmg += scaleddmg;
+            dmg += scaleddmg + weapon->getModifier(Mod::DMG_RATING);
         }
         else
         {
-            dmg += weapon->getDamage();
+            dmg += weapon->getDamage() + weapon->getModifier(Mod::DMG_RATING);
         }
     }
     if (auto* ammo = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_AMMO]))
@@ -463,11 +465,11 @@ uint16 CBattleEntity::GetRangedWeaponDmg()
             scaleddmg *= GetMLevel() * 3;
             scaleddmg /= 4;
             scaleddmg /= ammo->getReqLvl();
-            dmg += scaleddmg;
+            dmg += scaleddmg + ammo->getModifier(Mod::DMG_RATING);
         }
         else
         {
-            dmg += ammo->getDamage();
+            dmg += ammo->getDamage() + ammo->getModifier(Mod::DMG_RATING);
         }
     }
     return dmg + getMod(Mod::RANGED_DMG_RATING);
@@ -875,9 +877,21 @@ uint16 CBattleEntity::ACC(uint8 attackNumber, uint8 offsetAccuracy)
 uint16 CBattleEntity::DEF()
 {
     int32 DEF = 8 + m_modStat[Mod::DEF] + VIT() / 2;
+
     if (this->StatusEffectContainer->HasStatusEffect(EFFECT_COUNTERSTANCE, 0))
     {
-        return DEF / 2;
+        DEF = 1 + VIT() / 2;
+
+        if (this->StatusEffectContainer->HasStatusEffect(EFFECT_MINNE))
+        {
+            DEF += this->StatusEffectContainer->GetStatusEffect(EFFECT_MINNE)->GetPower();
+        }
+
+        int32 defModApplicatble = 0;
+
+        defModApplicatble += std::clamp((DEF * std::clamp((int)m_modStat[Mod::DEFP], -100, 0) / 100), -999, 0);
+
+        return std::clamp(DEF + defModApplicatble, 1, 9999);
     }
 
     return DEF + (DEF * m_modStat[Mod::DEFP] / 100) + std::min<int16>((DEF * m_modStat[Mod::FOOD_DEFP] / 100), m_modStat[Mod::FOOD_DEF_CAP]);
@@ -1007,7 +1021,7 @@ uint8 CBattleEntity::GetDeathType()
 
 void CBattleEntity::addModifier(Mod type, int16 amount)
 {
-    if (type == Mod::MOVE)
+    if (type == Mod::MOVE && this->objtype == TYPE_PC)
     {
         m_MSNonItemValues.push_back(amount);
         m_modStat[type] = CalculateMSFromSources();
@@ -1514,18 +1528,6 @@ bool CBattleEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
 
             return false;
         }
-    }
-    else if (targetFlags & TARGET_PLAYER_PARTY)
-    {
-        if (!isDead())
-        {
-            if (allegiance == ALLEGIANCE_TYPE::MOB && PInitiator->allegiance == ALLEGIANCE_TYPE::MOB)
-            {
-                return allegiance == PInitiator->allegiance;
-            }
-        }
-
-        return false;
     }
 
     return (targetFlags & TARGET_SELF) &&

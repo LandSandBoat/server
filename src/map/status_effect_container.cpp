@@ -1961,7 +1961,10 @@ void CStatusEffectContainer::TickRegen(time_point tick)
             m_POwner->addMP(refresh);
         }
 
-        m_POwner->addTP(regain);
+        if (m_POwner->objtype != TYPE_MOB || m_POwner->PAI->IsEngaged())
+        {
+            m_POwner->addTP(regain);
+        }
 
         if (m_POwner->PPet && ((CPetEntity*)(m_POwner->PPet))->getPetType() == PET_TYPE::AUTOMATON)
         {
@@ -1980,7 +1983,7 @@ uint16 CStatusEffectContainer::GetLevelRestrictionEffect()
 {
     for (auto PEffect : m_StatusEffectSet)
     {
-        if (PEffect->GetFlag() & EFFECTFLAG_LEVEL_RESTRICTION)
+        if (PEffect->GetFlag() & EFFECTFLAG_ON_ZONE_PATHOS)
         {
             return PEffect->GetPower();
         }

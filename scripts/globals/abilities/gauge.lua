@@ -9,9 +9,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     if (player:getPet() ~= nil ) then
         return xi.msg.basic.ALREADY_HAS_A_PET, 0
     else
@@ -19,7 +19,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
     end
 end
 
-ability_object.onUseAbility = function(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability)
 
     local charmChance = player:getCharmChance(target, false)
 
@@ -37,4 +37,4 @@ ability_object.onUseAbility = function(player, target, ability)
 
 end
 
-return ability_object
+return abilityObject

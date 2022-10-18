@@ -1197,9 +1197,9 @@ end
 -- Disable Base LSB Additional Functions
 m:addOverride("xi.dynamis.somnialThresholdOnTrigger", function(player,npc) end)
 m:addOverride("xi.dynamis.somnialThresholdOnEventFinish", function(player,npc) end)
-m:addOverride("xi.dynamis.timeExtensionOnDeath", function(mob, player, isKiller) end)
+m:addOverride("xi.dynamis.timeExtensionOnDeath", function(mob, player, optParams) end)
 m:addOverride("xi.dynamis.refillStatueOnSpawn", function(mob) end)
-m:addOverride("xi.dynamis.refillStatueOnSDeath", function(mob, player, isKiller) end)
+m:addOverride("xi.dynamis.refillStatueOnSDeath", function(mob, player, optParams) end)
 m:addOverride("xi.dynamis.qmOnTrade", function(player, npc, trade) end) -- Not used...  Era Dynamis does not have QM pops.
 m:addOverride("xi.dynamis.getExtensions", function(player) end)
 

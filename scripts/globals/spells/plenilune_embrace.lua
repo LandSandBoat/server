@@ -7,13 +7,13 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local duration = 90
     local attBoost = 1
     local magAttBoost = 1
@@ -68,4 +68,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return final
 end
 
-return spell_object
+return spellObject

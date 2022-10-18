@@ -10,9 +10,9 @@
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     local result = 0
     if (target:hasStatusEffect(xi.effect.FOOD)) then
         result = xi.msg.basic.IS_FULL
@@ -20,22 +20,22 @@ item_object.onItemCheck = function(target)
     return result
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addStatusEffect(xi.effect.FOOD, 0, 0, 300, 5711)
 end
 
-item_object.onEffectGain = function(target, effect)
+itemObject.onEffectGain = function(target, effect)
     target:addMod(xi.mod.FOOD_MPP, 15)
     target:addMod(xi.mod.FOOD_MP_CAP, 15)
     target:addMod(xi.mod.INT, 2)
     target:addMod(xi.mod.WIND_MEVA, 5)
 end
 
-item_object.onEffectLose = function(target, effect)
+itemObject.onEffectLose = function(target, effect)
     target:delMod(xi.mod.FOOD_MPP, 15)
     target:delMod(xi.mod.FOOD_MP_CAP, 15)
     target:delMod(xi.mod.INT, 2)
     target:delMod(xi.mod.WIND_MEVA, 5)
 end
 
-return item_object
+return itemObject

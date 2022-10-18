@@ -8,7 +8,7 @@ require("scripts/globals/mobskills")
 require("scripts/globals/status")
 require("scripts/globals/settings")
 ---------------------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
 local attributesDown =
 {
@@ -21,7 +21,7 @@ local attributesDown =
     xi.effect.CHR_DOWN,
 }
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     local skillList = mob:getMobMod(xi.mobMod.SKILL_LIST)
     local mobhp = mob:getHPP()
 
@@ -32,7 +32,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
     end
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local drained = 0
 
     for i = 1,7 do
@@ -45,4 +45,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return drained
 end
 
-return mobskill_object
+return mobskillObject
