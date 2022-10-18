@@ -19,11 +19,6 @@ spellObject.onMagicCastingCheck = function(caster, target, spell)
 end
 
 spellObject.onSpellCast = function(caster, target, spell)
-    -- Add synergy variable to the master.
-    local synergy = caster:getLocalVar("mumorSynergy")
-
-    caster:setLocalVar("mumorSynergy", synergy + 1)
-
     return xi.trust.spawn(caster, spell)
 end
 
@@ -33,30 +28,26 @@ spellObject.onMobSpawn = function(mob)
         [xi.magic.spell.ULLEGORE   ] = xi.trust.message_offset.TEAMWORK_2,
     })
 
-    -- Dynamic modifier that checks variable on tick to apply
+    -- Dynamic modifier that checks party member list on tick to apply
     mob:addListener("COMBAT_TICK", "MUMOR_CTICK", function(mobArg)
-        -- Locals for synergy
-        local master  = mob:getMaster()
-        local synergy = master:getLocalVar("mumorSynergy")
-        if synergy >= 2 then
-            mob:setMod(xi.mod.SAMBA_DURATION, 10)
+        local sambaDurationBoost = 0
+        local party = mobArg:getMaster():getPartyWithTrusts()
+        for _, member in pairs(party) do
+            if member:getObjType() == xi.objType.TRUST then
+                if
+                    member:getTrustID() == xi.magic.spell.UKA_TOTLIHN
+                then
+                    sambaDurationBoost = 10
+                end
+            end
         end
+        -- Always set the boost, even if Uka wasn't found.
+        -- This accounts for her being in the party and giving the boost
+        -- and also if she dies and the boost goes away.
+        mobArg:setMod(xi.mod.SAMBA_DURATION, sambaDurationBoost)
     end)
 
-    -- Listeners to subtract synergy variable if one of the two are killed or released
-    -- Todo: rework synergy check for dynamic adjustments on tick
     -- Todo: update gambit container to allow to toggling behaviors with synergy
-    mob:addListener("DEATH", "MUMOR_DEATH", function(mobArg, killer)
-        local master  = mob:getMaster()
-        local synergy = master:getLocalVar("mumorSynergy")
-        master:setLocalVar("mumorSynergy", synergy - 1)
-    end)
-
-    mob:addListener("DESPAWN", "MUMOR_DESPAWN", function(mobArg)
-        local master  = mob:getMaster()
-        local synergy = master:getLocalVar("mumorSynergy")
-        master:setLocalVar("mumorSynergy", synergy - 1)
-    end)
 
     -- Sets stance
     mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_STATUS, xi.effect.SABER_DANCE, ai.r.JA, ai.s.SPECIFIC, xi.ja.SABER_DANCE)
