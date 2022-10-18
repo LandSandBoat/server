@@ -1,7 +1,6 @@
 -----------------------------------
 -- BCNM Functions
 -----------------------------------
-require("scripts/globals/battlefield")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
