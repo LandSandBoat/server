@@ -31,7 +31,7 @@ spellObject.onMobSpawn = function(mob)
     -- Dynamic modifier that checks party member list on tick to apply synergy
     mob:addListener("COMBAT_TICK", "UKA_TOTLIHN_CTICK", function(mobArg)
         local waltzPotencyBoost = 0
-        local party = mobArg:getMaster():getPartWithTrusts()
+        local party = mobArg:getMaster():getPartyWithTrusts()
         for _, member in pairs(party) do
             if member:getObjType() == xi.objType.TRUST then
                 if
