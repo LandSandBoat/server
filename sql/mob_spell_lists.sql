@@ -5430,6 +5430,12 @@ INSERT INTO `mob_spell_lists` VALUES ('Twilotak',5060,270,1,255); -- Absorb-INT
 INSERT INTO `mob_spell_lists` VALUES ('Twilotak',5060,271,1,255); -- Absorb-MND
 INSERT INTO `mob_spell_lists` VALUES ('Twilotak',5060,272,1,255); -- Absorb-CHR
 
+-- Steam Cleaner (5061)
+INSERT INTO `mob_spell_lists` VALUES ('SteamCleaner',5061,196,1,255); -- Thundaga III
+INSERT INTO `mob_spell_lists` VALUES ('SteamCleaner',5061,167,1,255); -- Thunder IV
+INSERT INTO `mob_spell_lists` VALUES ('SteamCleaner',5061,239,1,255); -- Shock
+
+
 /*!40000 ALTER TABLE `mob_spell_lists` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
