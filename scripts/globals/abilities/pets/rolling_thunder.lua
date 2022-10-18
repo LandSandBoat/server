@@ -6,13 +6,13 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/utils")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-ability_object.onPetAbility = function(target, pet, skill, summoner)
+abilityObject.onPetAbility = function(target, pet, skill, summoner)
     local bonusTime = utils.clamp(summoner:getSkillLevel(xi.skill.SUMMONING_MAGIC) - 300, 0, 200)
     local duration = 120 + bonusTime
 
@@ -30,4 +30,4 @@ ability_object.onPetAbility = function(target, pet, skill, summoner)
     return typeEffect
 end
 
-return ability_object
+return abilityObject

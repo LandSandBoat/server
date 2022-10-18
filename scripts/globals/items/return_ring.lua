@@ -9,9 +9,9 @@ require("scripts/globals/status")
 require("scripts/globals/zone")
 require("scripts/globals/msg")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     local result = 0
     local region = target:getCurrentRegion()
 
@@ -22,9 +22,9 @@ item_object.onItemCheck = function(target)
     return result
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     local region = target:getCurrentRegion()
     target:addStatusEffectEx(xi.effect.TELEPORT, 0, xi.teleport.id.OUTPOST, 0, 1, 0, region)
 end
 
-return item_object
+return itemObject

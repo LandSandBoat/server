@@ -6,13 +6,13 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.CHARM_I
     local power = 100
     local job = target:getMainJob()
@@ -32,10 +32,10 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
 
     local jobs =
     {
-        {xi.job.BST, 2},
-        {xi.job.DRG, 3},
-        {xi.job.SMN, 4},
-        {xi.job.PUP, 5},
+        { xi.job.BST, 2 },
+        { xi.job.DRG, 3 },
+        { xi.job.SMN, 4 },
+        { xi.job.PUP, 5 },
     }
 
     for _, v in pairs(jobs) do
@@ -51,4 +51,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return typeEffect
 end
 
-return mobskill_object
+return mobskillObject

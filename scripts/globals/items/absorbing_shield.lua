@@ -175,16 +175,16 @@ local goodEffects =
     xi.effect.YONIN,
     xi.effect.INNIN,
 }
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target, user)
+itemObject.onItemCheck = function(target, user)
     if user:checkDistance(target) > 12.5 then
         return xi.msg.basic.TARG_OUT_OF_RANGE
     end
     return 0
 end
 
-item_object.onItemUse = function(target, user)
+itemObject.onItemUse = function(target, user)
     local effects = user:getStatusEffects()
     local count = 0
     local power = math.ceil(user:getMainLvl() / 5)
@@ -216,4 +216,4 @@ item_object.onItemUse = function(target, user)
     return count
 end
 
-return item_object
+return itemObject

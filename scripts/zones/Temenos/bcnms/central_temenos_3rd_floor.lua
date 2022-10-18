@@ -7,9 +7,9 @@ require("scripts/globals/battlefield")
 require("scripts/globals/keyitems")
 local ID = require("scripts/zones/Temenos/IDs")
 -----------------------------------
-local battlefield_object = {}
+local battlefieldObject = {}
 
-battlefield_object.onBattlefieldInitialise = function(battlefield)
+battlefieldObject.onBattlefieldInitialise = function(battlefield)
     battlefield:setLocalVar("loot", 1)
     SetServerVariable("[Central_Temenos_3rd_Floor]Time", battlefield:getTimeLimit()/60)
     xi.limbus.handleDoors(battlefield)
@@ -18,28 +18,28 @@ battlefield_object.onBattlefieldInitialise = function(battlefield)
     DespawnMob(ID.mob.TEMENOS_C_MOB[3]+11)
 end
 
-battlefield_object.onBattlefieldTick = function(battlefield, tick)
+battlefieldObject.onBattlefieldTick = function(battlefield, tick)
     if battlefield:getRemainingTime() % 60 == 0 then
         SetServerVariable("[Central_Temenos_3rd_Floor]Time", battlefield:getRemainingTime()/60)
     end
     xi.battlefield.onBattlefieldTick(battlefield, tick)
 end
 
-battlefield_object.onBattlefieldRegister = function(player, battlefield)
+battlefieldObject.onBattlefieldRegister = function(player, battlefield)
 end
 
-battlefield_object.onBattlefieldEnter = function(player, battlefield)
+battlefieldObject.onBattlefieldEnter = function(player, battlefield)
     player:delKeyItem(xi.ki.COSMO_CLEANSE)
     player:delKeyItem(xi.ki.WHITE_CARD)
     player:setCharVar("Cosmo_Cleanse_TIME", os.time())
 end
 
-battlefield_object.onBattlefieldDestroy = function(battlefield)
+battlefieldObject.onBattlefieldDestroy = function(battlefield)
     xi.limbus.handleDoors(battlefield, true)
     SetServerVariable("[Central_Temenos_3rd_Floor]Time", 0)
 end
 
-battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
+battlefieldObject.onBattlefieldLeave = function(player, battlefield, leavecode)
     if leavecode == xi.battlefield.leaveCode.WON then
         local _, clearTime, partySize = battlefield:getRecord()
         player:startEvent(32001, battlefield:getArea(), clearTime, partySize, battlefield:getTimeInside(), 1, battlefield:getLocalVar("[cs]bit"), 0)
@@ -48,4 +48,4 @@ battlefield_object.onBattlefieldLeave = function(player, battlefield, leavecode)
     end
 end
 
-return battlefield_object
+return battlefieldObject

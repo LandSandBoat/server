@@ -3,14 +3,14 @@
 -- Scroll of Barvira
 -- Teaches the white magic Barvira
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(92)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(92)
 end
 
-return item_object
+return itemObject

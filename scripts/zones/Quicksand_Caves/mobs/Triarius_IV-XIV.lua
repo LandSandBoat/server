@@ -11,7 +11,7 @@ entity.onMobDisengage = function(mob)
     DespawnMob(mob:getID(), 120)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

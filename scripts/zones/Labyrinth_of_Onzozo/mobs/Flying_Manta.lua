@@ -6,7 +6,7 @@
 local ID = require("scripts/zones/Labyrinth_of_Onzozo/IDs")
 require("scripts/globals/regimes")
 require("scripts/globals/mobs")
-mixins = {require("scripts/mixins/rage")}
+mixins = { require("scripts/mixins/rage") }
 -----------------------------------
 local entity = {}
 
@@ -16,7 +16,7 @@ entity.onMobSpawn = function(mob)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 774, 1, xi.regime.type.GROUNDS)
 end
 

@@ -9,7 +9,7 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
 local tameSort =
 {
@@ -19,11 +19,11 @@ local tameSort =
     [1] = 2,
 }
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-ability_object.onUseAbility = function(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability)
     if player:getPet() ~= nil then
         ability:setMsg(xi.msg.basic.JA_NO_EFFECT)
         return 0
@@ -42,7 +42,7 @@ ability_object.onUseAbility = function(player, target, ability)
         end
     end
 
-    local params = {diff = (player:getStat(xi.mod.INT) - target:getStat(xi.mod.INT) + player:getMod(xi.mod.TAME_SUCCESS_RATE)), skillType = nil, bonus = tameBonus, effect = xi.effect.NONE, element = xi.magic.element.NONE}
+    local params = { diff = (player:getStat(xi.mod.INT) - target:getStat(xi.mod.INT) + player:getMod(xi.mod.TAME_SUCCESS_RATE)), skillType = nil, bonus = tameBonus, effect = xi.effect.NONE, element = xi.magic.element.NONE }
     local resist = applyResistanceAbility(player, target, ability:getID(), params)
 
     if resist <= 0.25 then
@@ -71,4 +71,4 @@ ability_object.onUseAbility = function(player, target, ability)
     end
 end
 
-return ability_object
+return abilityObject

@@ -3,9 +3,9 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local attachment_object = {}
+local attachmentObject = {}
 
-attachment_object.onEquip = function(automaton)
+attachmentObject.onEquip = function(automaton)
     automaton:addListener("ENGAGE", "AUTO_PATTERN_READER_ENGAGE", function(pet, target)
         pet:setLocalVar("patternreadertick", VanadielTime())
     end)
@@ -50,16 +50,16 @@ attachment_object.onEquip = function(automaton)
     end)
 end
 
-attachment_object.onUnequip = function(pet)
+attachmentObject.onUnequip = function(pet)
     pet:removeListener("AUTO_PATTERN_READER_ENGAGE")
     pet:removeListener("AUTO_PATTERN_READER_TICK")
     pet:removeListener("AUTO_PATTERN_READER_DISENGAGE")
 end
 
-attachment_object.onManeuverGain = function(pet, maneuvers)
+attachmentObject.onManeuverGain = function(pet, maneuvers)
 end
 
-attachment_object.onManeuverLose = function(pet, maneuvers)
+attachmentObject.onManeuverLose = function(pet, maneuvers)
 end
 
-return attachment_object
+return attachmentObject

@@ -28,7 +28,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     GetNPCByID(ID.npc.QM3):setLocalVar("PillarCharged", 1)
 end
 

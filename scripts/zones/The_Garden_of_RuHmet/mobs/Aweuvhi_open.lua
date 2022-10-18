@@ -2,7 +2,7 @@
 -- Area: The Garden of Ru'Hmet
 --  Mob: Aw'euvhi
 -----------------------------------
-mixins = {require("scripts/mixins/families/euvhi")}
+mixins = { require("scripts/mixins/families/euvhi") }
 -----------------------------------
 local entity = {}
 

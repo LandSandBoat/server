@@ -4,20 +4,20 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effect_object = {}
+local effectObject = {}
 
-effect_object.onEffectGain = function(target, effect)
+effectObject.onEffectGain = function(target, effect)
 -- This might not be % in retail. If not a % just change ATTP to just ATT
     target:addMod(xi.mod.ATTP, effect:getPower())
     target:addMod(xi.mod.RATTP, effect:getPower())
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
 end
 
-effect_object.onEffectLose = function(target, effect)
+effectObject.onEffectLose = function(target, effect)
     target:delMod(xi.mod.ATTP, effect:getPower())
     target:delMod(xi.mod.RATTP, effect:getPower())
 end
 
-return effect_object
+return effectObject

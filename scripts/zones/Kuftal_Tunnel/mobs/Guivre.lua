@@ -193,6 +193,9 @@ entity.onPath = function(mob)
     end
 end
 
+entity.onMobDeath = function(mob, player, optParams)
+end
+
 entity.onMobRoam = function(mob)
     local despawnCheck = mob:getLocalVar("despawnTime")
     if despawnCheck <= os.time() then

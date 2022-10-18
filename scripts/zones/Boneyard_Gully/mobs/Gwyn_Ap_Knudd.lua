@@ -68,8 +68,8 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
-    if isKiller then
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller then
         for i = 1, 9 do
             local undead = GetMobByID(mob:getID()+i)
             undead:setBehaviour(bit.bor(mob:getBehaviour(), xi.behavior.NONE))

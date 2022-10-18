@@ -8,7 +8,7 @@ require("scripts/globals/mixins")
 g_mixins = g_mixins or {}
 
 g_mixins.spawn_pyxis = function(mob)
-    mob:addListener("DEATH", "DEATH_SPAWN_PYXIS", function(mobArg, player, isKiller)
+    mob:addListener("DEATH", "DEATH_SPAWN_PYXIS", function(mobArg, player, optParams)
         if player and not mobArg:isNM() then
             xi.pyxis.spawnPyxis(mobArg, player)
         end

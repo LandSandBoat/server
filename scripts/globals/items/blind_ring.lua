@@ -7,9 +7,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target, player)
+itemObject.onItemCheck = function(target, player)
     local result = 0
     if (target:checkDistance(player) > 10) then
         result = xi.msg.basic.TOO_FAR_AWAY
@@ -17,7 +17,7 @@ item_object.onItemCheck = function(target, player)
     return result
 end
 
-item_object.onItemUse = function(target, player, item)
+itemObject.onItemUse = function(target, player, item)
     local chance = 70
     if target:hasImmunity(64) or math.random(0, 100) >= chance then
         target:messageBasic(xi.msg.basic.NO_EFFECT)
@@ -30,4 +30,4 @@ item_object.onItemUse = function(target, player, item)
     target:updateClaim(player)
 end
 
-return item_object
+return itemObject

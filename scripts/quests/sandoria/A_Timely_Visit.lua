@@ -175,7 +175,7 @@ quest.sections =
 
             ['Giollemitte_B_Feuron'] =
             {
-                onMobDeath = function(mob, player, isKiller, firstCall)
+                onMobDeath = function(mob, player, optParams)
                     if quest:getVar(player, 'Prog') == 6 then
                         quest:setVar(player, 'Prog', 7)
                     end

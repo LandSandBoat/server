@@ -1,15 +1,17 @@
 -----------------------------------
 -- xi.effect.PALISADE
 -----------------------------------
-local effect_object = {}
+local effectObject = {}
 
-effect_object.onEffectGain = function(target, effect)
+effectObject.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.PALISADE_BLOCK_BONUS, effect:getPower())
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
 end
 
-effect_object.onEffectLose = function(target, effect)
+effectObject.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.PALISADE_BLOCK_BONUS, effect:getPower())
 end
 
-return effect_object
+return effectObject

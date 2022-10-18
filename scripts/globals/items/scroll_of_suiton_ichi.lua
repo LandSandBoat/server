@@ -3,14 +3,14 @@
 -- Scroll of Suiton: Ichi
 -- Teaches the ninjutsu Suiton: Ichi
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(335)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(335)
 end
 
-return item_object
+return itemObject

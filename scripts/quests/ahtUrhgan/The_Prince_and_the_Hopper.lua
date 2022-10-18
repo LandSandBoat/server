@@ -127,7 +127,7 @@ quest.sections =
 
             ['Poroggo_Casanova'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if quest:getVar(player, 'Prog') == 5 then
                         quest:setVar(player, 'Prog', 6)
                     end

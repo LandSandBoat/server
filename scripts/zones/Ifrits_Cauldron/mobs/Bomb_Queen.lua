@@ -73,9 +73,9 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     -- pets die with queen
-    if isKiller then
+    if optParams.isKiller then
         local mobId = mob:getID()
         for i = mobId + 1, mobId + 5 do
             local pet = GetMobByID(i)

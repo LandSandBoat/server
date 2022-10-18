@@ -14,9 +14,9 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effect_object = {}
+local effectObject = {}
 
-effect_object.onEffectGain = function(target, effect)
+effectObject.onEffectGain = function(target, effect)
     local power = effect:getPower()
     if power == 2 then
         target:addMod(xi.mod.PHYS_ABSORB, 100) -- Percent not /10000
@@ -27,10 +27,10 @@ effect_object.onEffectGain = function(target, effect)
     end
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
 end
 
-effect_object.onEffectLose = function(target, effect)
+effectObject.onEffectLose = function(target, effect)
     local power = effect:getPower()
     if power == 2 then
         target:delMod(xi.mod.PHYS_ABSORB, 100) -- Percent not /10000
@@ -41,4 +41,4 @@ effect_object.onEffectLose = function(target, effect)
     end
 end
 
-return effect_object
+return effectObject

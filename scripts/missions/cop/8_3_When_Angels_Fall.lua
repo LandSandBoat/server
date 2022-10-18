@@ -19,15 +19,15 @@ local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.WHEN_ANGELS
 
 local ebonData =
 {
-    -- [race] = {xPos1, xPos2, EventID, KI},
-    [xi.race.HUME_F] = {421, 423, 120, xi.ki.LIGHT_OF_VAHZL},
-    [xi.race.HUME_M] = {421, 423, 120, xi.ki.LIGHT_OF_VAHZL},
-    [xi.race.ELVAAN_F] = {739, 741, 121, xi.ki.LIGHT_OF_MEA},
-    [xi.race.ELVAAN_M] = {739, 741, 121, xi.ki.LIGHT_OF_MEA},
-    [xi.race.GALKA] = {576, 578, 122, xi.ki.LIGHT_OF_ALTAIEU},
-    [xi.race.TARU_F] = {256, 258, 123, xi.ki.LIGHT_OF_HOLLA},
-    [xi.race.TARU_M] = {256, 258, 123, xi.ki.LIGHT_OF_HOLLA},
-    [xi.race.MITHRA] = {99, 101, 124, xi.ki.LIGHT_OF_DEM},
+    -- [race] = { xPos1, xPos2, EventID, KI },
+    [xi.race.HUME_F] = { 421, 423, 120, xi.ki.LIGHT_OF_VAHZL },
+    [xi.race.HUME_M] = { 421, 423, 120, xi.ki.LIGHT_OF_VAHZL },
+    [xi.race.ELVAAN_F] = { 739, 741, 121, xi.ki.LIGHT_OF_MEA },
+    [xi.race.ELVAAN_M] = { 739, 741, 121, xi.ki.LIGHT_OF_MEA },
+    [xi.race.GALKA] = { 576, 578, 122, xi.ki.LIGHT_OF_ALTAIEU },
+    [xi.race.TARU_F] = { 256, 258, 123, xi.ki.LIGHT_OF_HOLLA },
+    [xi.race.TARU_M] = { 256, 258, 123, xi.ki.LIGHT_OF_HOLLA },
+    [xi.race.MITHRA] = { 99, 101, 124, xi.ki.LIGHT_OF_DEM },
 }
 
 local ebonOnTrigger = function(player, npc)

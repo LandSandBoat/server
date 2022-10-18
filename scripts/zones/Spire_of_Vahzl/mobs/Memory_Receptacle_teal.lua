@@ -92,7 +92,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     -- Spawn mob from body and let main receptacle know you died
     local bfID = mob:getBattlefield():getArea()
     local pos = mob:getPos()

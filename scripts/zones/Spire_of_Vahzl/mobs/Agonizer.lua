@@ -3,7 +3,7 @@
 --  Mob: Agonizer
 -- TODO: Verify cmbDelay
 -----------------------------------
-mixins = {require("scripts/mixins/families/empty_terroanima")}
+mixins = { require("scripts/mixins/families/empty_terroanima") }
 -----------------------------------
 local entity = {}
 
@@ -35,7 +35,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

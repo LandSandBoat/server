@@ -18,7 +18,7 @@ entity.onMobDisengage = function(mob)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 363)
     local respawn = math.random(5400, 7200)
     mob:setRespawnTime(respawn)

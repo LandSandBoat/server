@@ -10,31 +10,31 @@ require("scripts/globals/spell_data")
 -----------------------------------
 local elementalSpells =
 {
-    {xi.magic.spell.BURN,  xi.magic.spell.FIRE},
-    {xi.magic.spell.DROWN, xi.magic.spell.WATER},
-    {xi.magic.spell.SHOCK, xi.magic.spell.THUNDER},
-    {xi.magic.spell.RASP , xi.magic.spell.STONE},
-    {xi.magic.spell.CHOKE, xi.magic.spell.AERO},
-    {xi.magic.spell.FROST, xi.magic.spell.BLIZZARD},
-    {xi.magic.spell.DIA,   xi.magic.spell.BANISH},
-    {xi.magic.spell.BIO,   xi.magic.spell.DRAIN},
+    { xi.magic.spell.BURN,  xi.magic.spell.FIRE },
+    { xi.magic.spell.DROWN, xi.magic.spell.WATER },
+    { xi.magic.spell.SHOCK, xi.magic.spell.THUNDER },
+    { xi.magic.spell.RASP , xi.magic.spell.STONE },
+    { xi.magic.spell.CHOKE, xi.magic.spell.AERO },
+    { xi.magic.spell.FROST, xi.magic.spell.BLIZZARD },
+    { xi.magic.spell.DIA,   xi.magic.spell.BANISH },
+    { xi.magic.spell.BIO,   xi.magic.spell.DRAIN },
 }
 local centers =
 {
-    {-177.5, 60,-142},
-    {  22.5,  0,  18},
-    { 222.5,-60, 138},
+    { -177.5, 60,-142 },
+    {   22.5,  0,  18 },
+    {  222.5,-60, 138 },
 }
 local mevaList =
 {
-    {xi.mod.WATER_MEVA,   xi.mod.FIRE_ABSORB},
-    {xi.mod.THUNDER_MEVA, xi.mod.WATER_ABSORB},
-    {xi.mod.EARTH_MEVA,   xi.mod.LTNG_ABSORB},
-    {xi.mod.WIND_MEVA,    xi.mod.EARTH_ABSORB},
-    {xi.mod.ICE_MEVA,     xi.mod.WIND_ABSORB},
-    {xi.mod.FIRE_MEVA,    xi.mod.ICE_ABSORB},
-    {xi.mod.DARK_MEVA,    xi.mod.LIGHT_ABSORB},
-    {xi.mod.LIGHT_MEVA,   xi.mod.DARK_ABSORB},
+    { xi.mod.WATER_MEVA,   xi.mod.FIRE_ABSORB },
+    { xi.mod.THUNDER_MEVA, xi.mod.WATER_ABSORB },
+    { xi.mod.EARTH_MEVA,   xi.mod.LTNG_ABSORB },
+    { xi.mod.WIND_MEVA,    xi.mod.EARTH_ABSORB },
+    { xi.mod.ICE_MEVA,     xi.mod.WIND_ABSORB },
+    { xi.mod.FIRE_MEVA,    xi.mod.ICE_ABSORB },
+    { xi.mod.DARK_MEVA,    xi.mod.LIGHT_ABSORB },
+    { xi.mod.LIGHT_MEVA,   xi.mod.DARK_ABSORB },
 }
 
 local entity = {}
@@ -158,7 +158,7 @@ entity.onMobEngaged = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     local bfNum = mob:getBattlefield():getArea()
     local queen = GetMobByID(ID.royalJellyQueens[bfNum])
 

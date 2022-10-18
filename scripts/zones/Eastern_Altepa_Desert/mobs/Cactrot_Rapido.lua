@@ -136,7 +136,7 @@ entity.onMobDisengage = function(mob)
     mob:setAnimationSub(5)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     player:addTitle(xi.title.CACTROT_DESACELERADOR)
 end
 

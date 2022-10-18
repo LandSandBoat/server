@@ -32,7 +32,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     local partner = GetMobByID(mob:getID() + 1)
     if partner:isAlive() then
         partner:setLocalVar("rayEnabled", 1)

@@ -37,8 +37,8 @@ entity.onMobRoam = function(mob)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller or optParams.noKiller then
         local battlefield = mob:getBattlefield()
         if battlefield:getLocalVar("crateOpenedF3") ~= 1 then
             local mobID = mob:getID()

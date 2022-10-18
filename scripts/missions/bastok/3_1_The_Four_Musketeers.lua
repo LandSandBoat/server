@@ -136,7 +136,7 @@ mission.sections =
         {
             ['Copper_Quadav'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     local missionStatus = player:getMissionStatus(mission.areaId)
 
                     if

@@ -157,7 +157,7 @@ mission.sections =
 
             ['Overgrown_Ivy'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if player:getMissionStatus(mission.areaId, xi.mission.status.COP.SANDORIA) == 5 then
                         mission:setLocalVar(player, 'ivyDefeated', 1)
                     end
@@ -384,7 +384,7 @@ mission.sections =
 
             ['Lioumere'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if
                         player:getMissionStatus(mission.areaId, xi.mission.status.COP.WINDURST) == 8 and
                         mission:getVar(player, 'Status') == 0

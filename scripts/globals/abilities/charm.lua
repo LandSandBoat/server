@@ -18,9 +18,9 @@ require("scripts/globals/status")
 require("scripts/globals/pets")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     if player:getPet() ~= nil then
         return xi.msg.basic.ALREADY_HAS_A_PET, 0
     elseif target:getMaster() ~= nil and target:getMaster():isPC() then
@@ -30,7 +30,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
     end
 end
 
-ability_object.onUseAbility = function(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability)
     if target:isPC() then
         ability:setMsg(xi.msg.basic.NO_EFFECT)
     else
@@ -50,4 +50,4 @@ ability_object.onUseAbility = function(player, target, ability)
     end
 end
 
-return ability_object
+return abilityObject

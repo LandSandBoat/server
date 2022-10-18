@@ -8,9 +8,9 @@
 -----------------------------------------
 require("scripts/globals/status")
 -----------------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     local result = 0
     if target:getMod(xi.mod.PENGUIN_RING_EFFECT) ~= 0 then
         result = xi.msg.basic.ITEM_UNABLE_TO_USE_2
@@ -18,9 +18,9 @@ item_object.onItemCheck = function(target)
     return result
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addStatusEffectEx(xi.effect.NA, xi.effect.ENCHANTMENT, 0, 3, 1200)
     target:addMod(xi.mod.PENGUIN_RING_EFFECT, 1200)
 end
 
-return item_object
+return itemObject

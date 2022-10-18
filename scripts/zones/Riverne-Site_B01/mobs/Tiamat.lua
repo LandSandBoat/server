@@ -94,7 +94,7 @@ entity.onCastStarting = function(mob, spell)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENFIRE, {power = math.random(45, 90), chance = 10})
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENFIRE, { power = math.random(45, 90), chance = 10 })
 end
 
 return entity

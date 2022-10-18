@@ -3,14 +3,14 @@
 -- Scroll of Blade Madrigal
 -- Teaches the song Blade Madrigal
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(400)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(400)
 end
 
-return item_object
+return itemObject

@@ -10,37 +10,37 @@ local dmgMods =
 {
     [xi.attackType.PHYSICAL] =
     {
-        {mod = xi.mod.DMGPHYS, min = -0.5, max = 1000},
-        {mod = xi.mod.DMGPHYS_II, min = -0.5, max = 1000},
-        {mod = xi.mod.UDMGPHYS},
-        {mod = xi.mod.DMG},
+        { mod = xi.mod.DMGPHYS, min = -0.5, max = 1000 },
+        { mod = xi.mod.DMGPHYS_II, min = -0.5, max = 1000 },
+        { mod = xi.mod.UDMGPHYS },
+        { mod = xi.mod.DMG },
     },
     [xi.attackType.MAGICAL] =
     {
-        {mod = xi.mod.DMGMAGIC, min = -0.5, max = 1000},
-        {mod = xi.mod.DMGMAGIC_II, min = -0.5, max = 1000},
-        {mod = xi.mod.UDMGMAGIC},
-        {mod = xi.mod.DMG},
+        { mod = xi.mod.DMGMAGIC, min = -0.5, max = 1000 },
+        { mod = xi.mod.DMGMAGIC_II, min = -0.5, max = 1000 },
+        { mod = xi.mod.UDMGMAGIC },
+        { mod = xi.mod.DMG },
     },
     [xi.attackType.BREATH] =
     {
-        {mod = xi.mod.DMGBREATH, min = -0.5, max = 1000},
-        {mod = xi.mod.UDMGBREATH},
-        {mod = xi.mod.DMG},
+        { mod = xi.mod.DMGBREATH, min = -0.5, max = 1000 },
+        { mod = xi.mod.UDMGBREATH },
+        { mod = xi.mod.DMG },
     },
     [xi.attackType.RANGED] =
     {
-        {mod = xi.mod.DMGRANGE, min = -0.5, max = 1000},
-        {mod = xi.mod.UDMGRANGE},
-        {mod = xi.mod.DMG},
+        { mod = xi.mod.DMGRANGE, min = -0.5, max = 1000 },
+        { mod = xi.mod.UDMGRANGE },
+        { mod = xi.mod.DMG },
     },
     [xi.attackType.SPECIAL] =
     {
-        {mod = xi.mod.DMG},
+        { mod = xi.mod.DMG },
     },
     [xi.attackType.NONE] =
     {
-        {mod = xi.mod.DMG},
+        { mod = xi.mod.DMG },
     },
 }
 

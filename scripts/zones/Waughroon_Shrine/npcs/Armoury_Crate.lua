@@ -411,58 +411,58 @@ local loot =
     [77] =
     {
         {
-            {itemid = 637, droprate = 1000}, -- Slime oil
+            { itemid = 637, droprate = 1000 }, -- Slime oil
         },
         {
-            {itemid = 637, droprate = 1000}, -- Slime oil
+            { itemid = 637, droprate = 1000 }, -- Slime oil
         },
         {
-            {itemid = 13514, droprate = 91}, -- Archer's Ring
+            { itemid = 13514, droprate = 91 }, -- Archer's Ring
         },
         {
-            {itemid = 14651, droprate = 469}, -- Mana ring
-            {itemid = 17693, droprate = 152}, -- Grude Sword
-            {itemid = 17936, droprate = 120}, -- De Saintre's Axe
-            {itemid = 17696, droprate = 118}, -- Buzard Tuck
-            {itemid = 4947, droprate = 106},  -- Utsusemi: Ni
+            { itemid = 14651, droprate = 469 }, -- Mana ring
+            { itemid = 17693, droprate = 152 }, -- Grude Sword
+            { itemid = 17936, droprate = 120 }, -- De Saintre's Axe
+            { itemid = 17696, droprate = 118 }, -- Buzard Tuck
+            { itemid = 4947, droprate  = 106 },  -- Utsusemi: Ni
         },
         {
-            {itemid = 14650, droprate = 258}, -- Marksman's Ring
-            {itemid = 17572, droprate = 152}, -- Dusky Staff
-            {itemid = 17573, droprate = 101}, -- Himmel Stock
-            {itemid = 17463, droprate = 98},  -- Sealed Mace
-            {itemid = 19877, droprate = 98},  -- Shikar Bow
+            { itemid = 14650, droprate = 258 }, -- Marksman's Ring
+            { itemid = 17572, droprate = 152 }, -- Dusky Staff
+            { itemid = 17573, droprate = 101 }, -- Himmel Stock
+            { itemid = 17463, droprate  = 98 },  -- Sealed Mace
+            { itemid = 17203, droprate  = 98 },  -- Shikar Bow
         },
         {
-            {itemid = 4874, droprate = 123}, -- Absorb-STR
-            {itemid = 4751, droprate = 165}, -- Erase
-            {itemid = 4714, droprate = 140}, -- Phalanx
-            {itemid = 4896, droprate = 145}, -- Fire Spirit
-            {itemid = 666, droprate = 229},  -- Steel Sheet
-            {itemid = 652, droprate = 238},  -- Steel Ingot
+            { itemid = 4874, droprate = 123 }, -- Absorb-STR
+            { itemid = 4751, droprate = 165 }, -- Erase
+            { itemid = 4714, droprate = 140 }, -- Phalanx
+            { itemid = 4896, droprate = 145 }, -- Fire Spirit
+            { itemid = 666,  droprate = 229 },  -- Steel Sheet
+            { itemid = 652,  droprate = 238 },  -- Steel Ingot
         },
         {
-            {itemid = 4717, droprate = 263}, -- Refresh
-            {itemid = 4858, droprate = 246}, -- Ice Spikies
-            {itemid = 4947, droprate = 177}, -- Utsusemi: Ni
-            {itemid = 748, droprate = 182},  -- Gold Beastcoin
-            {itemid = 749, droprate = 133},  -- Mythril Beastcoin
-            {itemid = 788, droprate = 27},   -- Peridot
-            {itemid = 798, droprate = 20},   -- Turqoise
-            {itemid = 793, droprate = 15},   -- Black Pearl
-            {itemid = 808, droprate = 15},   -- Goshenite
-            {itemid = 815, droprate = 15},   -- Sphene
-            {itemid = 811, droprate = 10},   -- Ametrine
-            {itemid = 790, droprate = 7},    -- Garnet
-            {itemid = 775, droprate = 12},   -- Black Rock
-            {itemid = 772, droprate = 7},    -- Green Rock
-            {itemid = 776, droprate = 7},    -- White Rock
-            {itemid = 770, droprate = 2},    -- Blue Rock
-            {itemid = 773, droprate = 2},    -- Transluescent Rock
-            {itemid = 699, droprate = 5},    -- Oak Log
-            {itemid = 701, droprate = 5},    -- Rosewood Log
-            {itemid = 4174, droprate = 10},  -- Vile Elixer
-            {itemid = 4172, droprate = 2},   -- Reraiser
+            { itemid = 4717, droprate = 263 }, -- Refresh
+            { itemid = 4858, droprate = 246 }, -- Ice Spikies
+            { itemid = 4947, droprate = 177 }, -- Utsusemi: Ni
+            { itemid = 748,  droprate = 182 },  -- Gold Beastcoin
+            { itemid = 749,  droprate = 133 },  -- Mythril Beastcoin
+            { itemid = 788,  droprate =  27 },   -- Peridot
+            { itemid = 798,  droprate =  20 },   -- Turqoise
+            { itemid = 793,  droprate =  15 },   -- Black Pearl
+            { itemid = 808,  droprate =  15 },   -- Goshenite
+            { itemid = 815,  droprate =  15 },   -- Sphene
+            { itemid = 811,  droprate =  10 },   -- Ametrine
+            { itemid = 790,  droprate =   7 },    -- Garnet
+            { itemid = 775,  droprate =  12 },   -- Black Rock
+            { itemid = 772,  droprate =   7 },    -- Green Rock
+            { itemid = 776,  droprate =   7 },    -- White Rock
+            { itemid = 770,  droprate =   2 },    -- Blue Rock
+            { itemid = 773,  droprate =   2 },    -- Transluescent Rock
+            { itemid = 699,  droprate =   5 },    -- Oak Log
+            { itemid = 701,  droprate =   5 },    -- Rosewood Log
+            { itemid = 4174, droprate =  10 },  -- Vile Elixer
+            { itemid = 4172, droprate =   2 },   -- Reraiser
         },
     },
 
@@ -593,62 +593,62 @@ local loot =
     [80] =
     {
         {
-            {itemid = xi.items.CHUNK_OF_ADAMAN_ORE, droprate = 1000},
+            { itemid = xi.items.CHUNK_OF_ADAMAN_ORE, droprate = 1000 },
         },
         {
-            {itemid = xi.items.AHRIMAN_LENS, droprate = 250},
-            {itemid = xi.items.AHRIMAN_WING, droprate = 250},
-            {itemid = xi.items.POLE_GRIP,    droprate =  50},
-            {itemid = xi.items.SWORD_STRAP,  droprate =  15},
-            {itemid = xi.items.SPEAR_STRAP,  droprate = 250},
+            { itemid = xi.items.AHRIMAN_LENS, droprate = 250 },
+            { itemid = xi.items.AHRIMAN_WING, droprate = 250 },
+            { itemid = xi.items.POLE_GRIP,    droprate =  50 },
+            { itemid = xi.items.SWORD_STRAP,  droprate =  15 },
+            { itemid = xi.items.SPEAR_STRAP,  droprate = 250 },
         },
         {
-            {itemid = xi.items.COFFINMAKER,  droprate = 250},
-            {itemid = xi.items.DESTROYERS,   droprate = 250},
-            {itemid = xi.items.EXPUNGER,     droprate = 250},
-            {itemid = xi.items.RETRIBUTOR,   droprate = 250},
+            { itemid = xi.items.COFFINMAKER,  droprate = 250 },
+            { itemid = xi.items.DESTROYERS,   droprate = 250 },
+            { itemid = xi.items.EXPUNGER,     droprate = 250 },
+            { itemid = xi.items.RETRIBUTOR,   droprate = 250 },
         },
         {
-            {itemid = xi.items.ATTILAS_EARRING, droprate = 250},
-            {itemid = xi.items.DURANDAL,        droprate = 250},
-            {itemid = xi.items.HOPLITES_HARP,   droprate = 250},
-            {itemid = xi.items.SORROWFUL_HARP,  droprate = 250},
+            { itemid = xi.items.ATTILAS_EARRING, droprate = 250 },
+            { itemid = xi.items.DURANDAL,        droprate = 250 },
+            { itemid = xi.items.HOPLITES_HARP,   droprate = 250 },
+            { itemid = xi.items.SORROWFUL_HARP,  droprate = 250 },
         },
         {
-            {itemid = xi.items.FUMA_SUNE_ATE,       droprate = 550},
-            {itemid = xi.items.CHUNK_OF_ADAMAN_ORE, droprate = 200},
-            {itemid = xi.items.ORICHALCUM_INGOT,    droprate = 250},
+            { itemid = xi.items.FUMA_SUNE_ATE,       droprate = 550 },
+            { itemid = xi.items.CHUNK_OF_ADAMAN_ORE, droprate = 200 },
+            { itemid = xi.items.ORICHALCUM_INGOT,    droprate = 250 },
         },
         {
-            {itemid = xi.items.CORAL_FRAGMENT,           droprate = 50},
-            {itemid = xi.items.CHUNK_OF_DARKSTEEL_ORE,   droprate = 50},
-            {itemid = xi.items.DEMON_HORN,               droprate = 50},
-            {itemid = xi.items.EBONY_LOG,                droprate = 50},
-            {itemid = xi.items.CHUNK_OF_GOLD_ORE,        droprate = 50},
-            {itemid = xi.items.SPOOL_OF_GOLD_THREAD,     droprate = 50},
-            {itemid = xi.items.HI_RERAISER,              droprate = 50},
-            {itemid = xi.items.CHUNK_OF_PLATINUM_ORE,    droprate = 50},
-            {itemid = xi.items.MAHOGANY_LOG,             droprate = 50},
-            {itemid = xi.items.SPOOL_OF_MALBORO_FIBER,   droprate = 50},
-            {itemid = xi.items.CHUNK_OF_MYTHRIL_ORE,     droprate = 50},
-            {itemid = xi.items.PETRIFIED_LOG,            droprate = 50},
-            {itemid = xi.items.SQUARE_OF_RAINBOW_CLOTH,  droprate = 50},
-            {itemid = xi.items.RAM_HORN,                 droprate = 50},
-            {itemid = xi.items.SQUARE_OF_RAXA,           droprate = 50},
-            {itemid = xi.items.RERAISER,                 droprate = 50},
-            {itemid = xi.items.VILE_ELIXIR,              droprate = 50},
-            {itemid = xi.items.VILE_ELIXIR_P1,           droprate = 50},
-            {itemid = xi.items.HANDFUL_OF_WYVERN_SCALES, droprate = 50},
-            {itemid = xi.items.PHILOSOPHERS_STONE,       droprate = 50},
+            { itemid = xi.items.CORAL_FRAGMENT,           droprate = 50 },
+            { itemid = xi.items.CHUNK_OF_DARKSTEEL_ORE,   droprate = 50 },
+            { itemid = xi.items.DEMON_HORN,               droprate = 50 },
+            { itemid = xi.items.EBONY_LOG,                droprate = 50 },
+            { itemid = xi.items.CHUNK_OF_GOLD_ORE,        droprate = 50 },
+            { itemid = xi.items.SPOOL_OF_GOLD_THREAD,     droprate = 50 },
+            { itemid = xi.items.HI_RERAISER,              droprate = 50 },
+            { itemid = xi.items.CHUNK_OF_PLATINUM_ORE,    droprate = 50 },
+            { itemid = xi.items.MAHOGANY_LOG,             droprate = 50 },
+            { itemid = xi.items.SPOOL_OF_MALBORO_FIBER,   droprate = 50 },
+            { itemid = xi.items.CHUNK_OF_MYTHRIL_ORE,     droprate = 50 },
+            { itemid = xi.items.PETRIFIED_LOG,            droprate = 50 },
+            { itemid = xi.items.SQUARE_OF_RAINBOW_CLOTH,  droprate = 50 },
+            { itemid = xi.items.RAM_HORN,                 droprate = 50 },
+            { itemid = xi.items.SQUARE_OF_RAXA,           droprate = 50 },
+            { itemid = xi.items.RERAISER,                 droprate = 50 },
+            { itemid = xi.items.VILE_ELIXIR,              droprate = 50 },
+            { itemid = xi.items.VILE_ELIXIR_P1,           droprate = 50 },
+            { itemid = xi.items.HANDFUL_OF_WYVERN_SCALES, droprate = 50 },
+            { itemid = xi.items.PHILOSOPHERS_STONE,       droprate = 50 },
         },
         {
-            {itemid = xi.items.VIAL_OF_BLACK_BEETLE_BLOOD, droprate =  50},
-            {itemid = xi.items.SQUARE_OF_DAMASCENE_CLOTH,  droprate =  50},
-            {itemid = xi.items.DAMASCUS_INGOT,             droprate =  50},
-            {itemid = xi.items.SPOOL_OF_MALBORO_FIBER,     droprate =  50},
-            {itemid = xi.items.PHILOSOPHERS_STONE,         droprate = 300},
-            {itemid = xi.items.PHOENIX_FEATHER,            droprate = 300},
-            {itemid = xi.items.SQUARE_OF_RAXA,             droprate = 200},
+            { itemid = xi.items.VIAL_OF_BLACK_BEETLE_BLOOD, droprate =  50 },
+            { itemid = xi.items.SQUARE_OF_DAMASCENE_CLOTH,  droprate =  50 },
+            { itemid = xi.items.DAMASCUS_INGOT,             droprate =  50 },
+            { itemid = xi.items.SPOOL_OF_MALBORO_FIBER,     droprate =  50 },
+            { itemid = xi.items.PHILOSOPHERS_STONE,         droprate = 300 },
+            { itemid = xi.items.PHOENIX_FEATHER,            droprate = 300 },
+            { itemid = xi.items.SQUARE_OF_RAXA,             droprate = 200 },
         },
     },
 
@@ -656,12 +656,12 @@ local loot =
     [81] =
     {
         {
-            { itemid =  1473, droprate = 813 }, -- High-quality Scorpion Shell
+            { itemid = 1473,  droprate = 813 }, -- High-quality Scorpion Shell
             { itemid = 13552, droprate =  55 }, -- Serket Ring
-            { itemid =   901, droprate = 123 }, -- Venomous Claw
-            {itemid = 1473,  droprate = 813}, -- High-quality Scorpion Shell
-            {itemid = 13552, droprate =  55}, -- Serket Ring
-            {itemid = 901,   droprate = 123}, -- Venomous Claw
+            { itemid = 901,   droprate = 123 }, -- Venomous Claw
+            { itemid = 1473,  droprate = 813 }, -- High-quality Scorpion Shell
+            { itemid = 13552, droprate =  55 }, -- Serket Ring
+            { itemid = 901,   droprate = 123 }, -- Venomous Claw
         },
 
         {
@@ -672,11 +672,11 @@ local loot =
         },
 
         {
-            {itemid = 17624, droprate = 504}, -- Anubiss Knife
-            {itemid = 19027, droprate =  86}, -- Claymore Grip
-            {itemid = 747,   droprate =  22}, -- Orichalcum Ingot
-            {itemid = 19025, droprate = 146}, -- Pole Grip
-            {itemid = 19024, droprate = 220}, -- Sword Strap
+            { itemid = 17624, droprate = 504 }, -- Anubiss Knife
+            { itemid = 19027, droprate =  86 }, -- Claymore Grip
+            { itemid = 747,   droprate =  22 }, -- Orichalcum Ingot
+            { itemid = 19025, droprate = 146 }, -- Pole Grip
+            { itemid = 19024, droprate = 220 }, -- Sword Strap
         },
 
         {
@@ -687,37 +687,37 @@ local loot =
         },
 
         {
-            {itemid = 887,  droprate =  52}, -- Coral Fragment
-            {itemid = 645,  droprate =  56}, -- Chunk Of Darksteel Ore
-            {itemid = 902,  droprate =  41}, -- Demon Horn
-            {itemid = 702,  droprate =  63}, -- Ebony Log
-            {itemid = 737,  droprate =  52}, -- Chunk Of Gold Ore
-            {itemid = 823,  droprate =  26}, -- Spool Of Gold Thread
-            {itemid = 1465, droprate =  11}, -- Slab Of Granite
-            {itemid = 4173, droprate =  37}, -- Hi-reraiser
-            {itemid = 700,  droprate = 101}, -- Mahogany Log
-            {itemid = 644,  droprate =  52}, -- Chunk Of Mythril Ore
-            {itemid = 703,  droprate = 116}, -- Petrified Log
-            {itemid = 844,  droprate =  15}, -- Phoenix Feather
-            {itemid = 942,  droprate =  56}, -- Philosophers Stone
-            {itemid = 738,  droprate =  45}, -- Chunk Of Platinum Ore
-            {itemid = 830,  droprate =  22}, -- Square Of Rainbow Cloth
-            {itemid = 895,  droprate =  67}, -- Ram Horn
-            {itemid = 1132, droprate = 119}, -- Square Of Raxa
-            {itemid = 4172, droprate =  45}, -- Reraiser
-            {itemid = 4174, droprate =  19}, -- Vile Elixir
-            {itemid = 4175, droprate =  41}, -- Vile Elixir +1
-            {itemid = 866,  droprate =  34}, -- Handful Of Wyvern Scales
+            { itemid = 887,  droprate =  52 }, -- Coral Fragment
+            { itemid = 645,  droprate =  56 }, -- Chunk Of Darksteel Ore
+            { itemid = 902,  droprate =  41 }, -- Demon Horn
+            { itemid = 702,  droprate =  63 }, -- Ebony Log
+            { itemid = 737,  droprate =  52 }, -- Chunk Of Gold Ore
+            { itemid = 823,  droprate =  26 }, -- Spool Of Gold Thread
+            { itemid = 1465, droprate =  11 }, -- Slab Of Granite
+            { itemid = 4173, droprate =  37 }, -- Hi-reraiser
+            { itemid = 700,  droprate = 101 }, -- Mahogany Log
+            { itemid = 644,  droprate =  52 }, -- Chunk Of Mythril Ore
+            { itemid = 703,  droprate = 116 }, -- Petrified Log
+            { itemid = 844,  droprate =  15 }, -- Phoenix Feather
+            { itemid = 942,  droprate =  56 }, -- Philosophers Stone
+            { itemid = 738,  droprate =  45 }, -- Chunk Of Platinum Ore
+            { itemid = 830,  droprate =  22 }, -- Square Of Rainbow Cloth
+            { itemid = 895,  droprate =  67 }, -- Ram Horn
+            { itemid = 1132, droprate = 119 }, -- Square Of Raxa
+            { itemid = 4172, droprate =  45 }, -- Reraiser
+            { itemid = 4174, droprate =  19 }, -- Vile Elixir
+            { itemid = 4175, droprate =  41 }, -- Vile Elixir +1
+            { itemid = 866,  droprate =  34 }, -- Handful Of Wyvern Scales
         },
 
         {
-            {itemid = 1110, droprate =  78}, -- Vial Of Black Beetle Blood
-            {itemid = 836,  droprate =  56}, -- Square Of Damascene Cloth
-            {itemid = 658,  droprate =  93}, -- Damascus Ingot
-            {itemid = 837,  droprate =  56}, -- Spool Of Malboro Fiber
-            {itemid = 942,  droprate = 157}, -- Philosophers Stone
-            {itemid = 844,  droprate = 276}, -- Phoenix Feather
-            {itemid = 1132, droprate = 209}, -- Square Of Raxa
+            { itemid = 1110, droprate =  78 }, -- Vial Of Black Beetle Blood
+            { itemid = 836,  droprate =  56 }, -- Square Of Damascene Cloth
+            { itemid = 658,  droprate =  93 }, -- Damascus Ingot
+            { itemid = 837,  droprate =  56 }, -- Spool Of Malboro Fiber
+            { itemid = 942,  droprate = 157 }, -- Philosophers Stone
+            { itemid = 844,  droprate = 276 }, -- Phoenix Feather
+            { itemid = 1132, droprate = 209 }, -- Square Of Raxa
         },
     },
 
@@ -753,28 +753,28 @@ local loot =
         },
 
         {
-            {itemid = 644,  droprate =  29}, -- Chunk Of Mythril Ore
-            {itemid = 645,  droprate =  29}, -- Chunk Of Darksteel Ore
-            {itemid = 702,  droprate =  29}, -- Ebony Log
-            {itemid = 703,  droprate =  58}, -- Petrified Log
-            {itemid = 738,  droprate =  14}, -- Chunk Of Platinum Ore
-            {itemid = 745,  droprate = 101}, -- Gold Ingot
-            {itemid = 823,  droprate =  29}, -- Spool Of Gold Thread
-            {itemid = 837,  droprate =  72}, -- Spool Of Malboro Fiber
-            {itemid = 830,  droprate =  58}, -- Square Of Rainbow Cloth
-            {itemid = 887,  droprate = 101}, -- Coral Fragment
-            {itemid = 895,  droprate =  14}, -- Ram Horn
-            {itemid = 902,  droprate =  29}, -- Demon Horn
-            {itemid = 1132, droprate = 159}, -- Square Of Raxa
+            { itemid = 644,  droprate =  29 }, -- Chunk Of Mythril Ore
+            { itemid = 645,  droprate =  29 }, -- Chunk Of Darksteel Ore
+            { itemid = 702,  droprate =  29 }, -- Ebony Log
+            { itemid = 703,  droprate =  58 }, -- Petrified Log
+            { itemid = 738,  droprate =  14 }, -- Chunk Of Platinum Ore
+            { itemid = 745,  droprate = 101 }, -- Gold Ingot
+            { itemid = 823,  droprate =  29 }, -- Spool Of Gold Thread
+            { itemid = 837,  droprate =  72 }, -- Spool Of Malboro Fiber
+            { itemid = 830,  droprate =  58 }, -- Square Of Rainbow Cloth
+            { itemid = 887,  droprate = 101 }, -- Coral Fragment
+            { itemid = 895,  droprate =  14 }, -- Ram Horn
+            { itemid = 902,  droprate =  29 }, -- Demon Horn
+            { itemid = 1132, droprate = 159 }, -- Square Of Raxa
         },
 
         {
-            {itemid = 658,  droprate =  14}, -- Damascus Ingot
-            {itemid = 836,  droprate =  29}, -- Square Of Damascene Cloth
-            {itemid = 844,  droprate = 246}, -- Phoenix Feather
-            {itemid = 942,  droprate = 174}, -- Philosophers Stone
-            {itemid = 1110, droprate =  87}, -- Vial Of Black Beetle Blood
-            {itemid = 1132, droprate = 159}, -- Square Of Raxa
+            { itemid = 658,  droprate =  14 }, -- Damascus Ingot
+            { itemid = 836,  droprate =  29 }, -- Square Of Damascene Cloth
+            { itemid = 844,  droprate = 246 }, -- Phoenix Feather
+            { itemid = 942,  droprate = 174 }, -- Philosophers Stone
+            { itemid = 1110, droprate =  87 }, -- Vial Of Black Beetle Blood
+            { itemid = 1132, droprate = 159 }, -- Square Of Raxa
         },
     },
 }

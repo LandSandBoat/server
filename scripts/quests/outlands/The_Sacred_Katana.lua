@@ -123,7 +123,7 @@ quest.sections =
         {
             ['Isonade'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     quest:setLocalVar(player, 'Prog', 1)
                 end,
             },

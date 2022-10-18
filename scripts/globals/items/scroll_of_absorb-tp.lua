@@ -3,14 +3,14 @@
 -- Scroll of Absorb-TP
 -- Teaches the black magic Absorb-TP
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(275)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(275)
 end
 
-return item_object
+return itemObject

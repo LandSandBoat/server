@@ -13,15 +13,15 @@ local entity = {}
 
 local pathNodes =
 {
-    { x = 880.16, y =  -99.81, z = -550.50},
-    { x = 860.09, y =  -99.74, z = -551.23},
-    { x = 834.92, y =  -99.55, z = -556.92},
-    { x = 830.51, y =  -99.81, z = -580.15},
-    { x = 839.36, y =  -99.47, z = -604.65},
-    { x = 859.37, y =  -99.67, z = -607.99},
-    { x = 859.37, y =  -99.67, z = -607.99},
-    { x = 892.04, y = -100.03, z = -580.07},
-    { x = 859.47, y =  -99.42, z = -579.54}
+    { x = 880.16, y =  -99.81, z = -550.50 },
+    { x = 860.09, y =  -99.74, z = -551.23 },
+    { x = 834.92, y =  -99.55, z = -556.92 },
+    { x = 830.51, y =  -99.81, z = -580.15 },
+    { x = 839.36, y =  -99.47, z = -604.65 },
+    { x = 859.37, y =  -99.67, z = -607.99 },
+    { x = 859.37, y =  -99.67, z = -607.99 },
+    { x = 892.04, y = -100.03, z = -580.07 },
+    { x = 859.47, y =  -99.42, z = -579.54 }
 }
 
 local slaveGlobes =
@@ -260,7 +260,7 @@ entity.onMobDisengage = function(mob)
     mob:setSpeed(20)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     mob:setRespawnTime(math.random(10800, 21600)) -- respawn 3-6 hrs
 
     for _, slaveGlobeID in ipairs(slaveGlobes) do

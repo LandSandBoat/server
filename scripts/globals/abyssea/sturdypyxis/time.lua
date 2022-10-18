@@ -17,8 +17,8 @@ xi.pyxis.time.giveTime = function(npc, player)
             member:isPC()
         then
             local effect = member:getStatusEffect(xi.effect.VISITANT)
-            local oldDuration = tonumber(effect:getTimeRemaining())
-            local newDuration = (oldDuration + tonumber(10 * 60)) * 1000
+            local oldDuration = effect:getTimeRemaining()
+            local newDuration = oldDuration + 10 * 60 * 1000
 
             member:messageSpecial(ID.text.ABYSSEA_TIME_OFFSET + 3, 10, 1)
 

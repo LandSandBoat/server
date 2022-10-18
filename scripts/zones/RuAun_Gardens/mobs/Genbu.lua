@@ -45,9 +45,9 @@ entity.onAdditionalEffect = function(mob, target, damage)
     return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENWATER)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
-    if isKiller then
-        mob:messageText(mob, ID.text.SKY_GOD_OFFSET + 6)
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller then
+        player:showText(mob, ID.text.SKY_GOD_OFFSET + 6)
         GetNPCByID(ID.npc.PORTAL_TO_GENBU):setAnimation(xi.anim.OPEN_DOOR)
     end
 end

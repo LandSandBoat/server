@@ -6,9 +6,9 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     local effect = target:getStatusEffect(xi.effect.MAX_HP_BOOST)
     if effect ~= nil and effect:getSubType() == 15610 then
         target:delStatusEffect(xi.effect.MAX_HP_BOOST)
@@ -16,8 +16,8 @@ item_object.onItemCheck = function(target)
     return 0
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addStatusEffect(xi.effect.MAX_HP_BOOST, 10, 0, 1800, 15610)
 end
 
-return item_object
+return itemObject

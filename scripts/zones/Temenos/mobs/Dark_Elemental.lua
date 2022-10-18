@@ -6,8 +6,8 @@ local ID = require("scripts/zones/Temenos/IDs")
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller or optParams.noKiller then
         switch (mob:getID()): caseof
         {
             [ID.mob.TEMENOS_E_MOB[7]] = function ()

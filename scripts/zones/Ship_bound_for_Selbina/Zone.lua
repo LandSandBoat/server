@@ -5,12 +5,12 @@ local ID = require('scripts/zones/Ship_bound_for_Selbina/IDs')
 require('scripts/globals/keyitems')
 require('scripts/globals/sea_creatures')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
 end
 
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
     local zoneID = 220
 
@@ -34,7 +34,7 @@ zone_object.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zone_object.onGameHour = function(zone)
+zoneObject.onGameHour = function(zone)
     local hour = VanadielHour()
     if hour >= 20 or hour < 4 then
         -- Check for Enagakure
@@ -73,7 +73,7 @@ zone_object.onGameHour = function(zone)
     end
 end
 
-zone_object.onZoneTick = function(zone)
+zoneObject.onZoneTick = function(zone)
     if zone:getLocalVar('state') == 1 then
         if GetMobByID(ID.mob.PHANTOM):isSpawned() then
             DespawnMob(ID.mob.PHANTOM)
@@ -96,19 +96,19 @@ zone_object.onZoneTick = function(zone)
     end
 end
 
-zone_object.onTransportEvent = function(player, transport)
+zoneObject.onTransportEvent = function(player, transport)
     player:getZone():setLocalVar('stateSet', 0)
     player:getZone():setLocalVar('state', 1)
     player:startEvent(255)
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
     if csid == 255 then
         player:setPos(0, 0, 0, 0, 248)
     end
 end
 
-return zone_object
+return zoneObject

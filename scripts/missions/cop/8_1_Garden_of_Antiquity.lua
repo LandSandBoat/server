@@ -18,10 +18,10 @@ local mission = Mission:new(xi.mission.log_id.COP, xi.mission.id.cop.GARDEN_OF_A
 
 local antiquityVars =
 {
-    -- [crystalOffset] = {thisFightDone, thisCsAcquired, otherCrystal, otherCrystal2, firstCsParam, secondCsParam1, secondCsParam2}
-    [0] = {'SouthTower', 'SouthTowerCS', 1, 2, 0, 2, 1}, -- !pos 0 -6.250 -736.912 33
-    [1] = {'WestTower', 'WestTowerCS', 0, 2, 2, 1, 0}, -- !pos -683.709 -6.250 -222.142 33
-    [2] = {'EastTower', 'EastTowerCS', 0, 1, 1, 2, 0}, -- !pos 683.718 -6.250 -222.167 33
+    -- [crystalOffset] = { thisFightDone, thisCsAcquired, otherCrystal, otherCrystal2, firstCsParam, secondCsParam1, secondCsParam2 }
+    [0] = { 'SouthTower', 'SouthTowerCS', 1, 2, 0, 2, 1 }, -- !pos 0 -6.250 -736.912 33
+    [1] = { 'WestTower', 'WestTowerCS', 0, 2, 2, 1, 0 }, -- !pos -683.709 -6.250 -222.142 33
+    [2] = { 'EastTower', 'EastTowerCS', 0, 1, 1, 2, 0 }, -- !pos 683.718 -6.250 -222.167 33
 }
 
 local function rubiousCrystalOnTrigger(player, npc)
@@ -33,7 +33,7 @@ local function rubiousCrystalOnTrigger(player, npc)
     local thisCsAcquired = mission:getVar(player, cVar[2]) == 1
     -- spawn ru'aerns
     if not thisFightDone and not thisCsAcquired then
-        npcUtil.popFromQM(player, npc, {ruaernOffset, ruaernOffset + 1, ruaernOffset + 2}, {hide = 0})
+        npcUtil.popFromQM(player, npc, { ruaernOffset, ruaernOffset + 1, ruaernOffset + 2 }, { hide = 0 } )
         return mission:messageSpecial(zones[zoneId].text.OMINOUS_SHADOW)
     -- post-fight CS
     elseif not thisCsAcquired then
@@ -137,7 +137,7 @@ mission.sections =
             {
                 [100] = function(player, csid, option)
                     if option == 1 then
-                        player:setPos(-20, 0.624, -355, 191, 34) -- {R}
+                        player:setPos(-20, 0.624, -355, 191, 34) -- { R }
                     end
                 end,
 
@@ -217,7 +217,7 @@ mission.sections =
             {
                 [100] = function(player, csid, option)
                     if option == 1 then
-                        player:setPos(-20, 0.624, -355, 191, 34) -- {R}
+                        player:setPos(-20, 0.624, -355, 191, 34) -- { R }
                     end
                 end,
             },

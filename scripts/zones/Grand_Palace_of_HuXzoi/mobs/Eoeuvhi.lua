@@ -2,7 +2,7 @@
 -- Area: Grand Palace of Hu'Xzoi
 --  Mob: Eo'euvhi
 -----------------------------------
-mixins = {require("scripts/mixins/families/euvhi")}
+mixins = { require("scripts/mixins/families/euvhi") }
 -----------------------------------
 local entity = {}
 

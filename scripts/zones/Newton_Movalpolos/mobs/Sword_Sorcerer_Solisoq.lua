@@ -22,7 +22,7 @@ entity.onMobFight = function(mob, player)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     xi.hunts.checkHunt(mob, player, 249)
 end
 

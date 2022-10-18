@@ -115,7 +115,7 @@ entity.onMobSpawn = function(mob)
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            {id = xi.jsa.ASTRAL_FLOW, hpp = math.random(45, 55)},
+            { id = xi.jsa.ASTRAL_FLOW, hpp = math.random(45, 55) },
         },
     })
 end
@@ -203,7 +203,7 @@ entity.onMobWeaponSkill = function(target, mob, skill)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     for i = ID.mob.JAILER_OF_LOVE + 1, ID.mob.JAILER_OF_LOVE + 27 do
         local pet = GetMobByID(i)
         if pet:isSpawned() then

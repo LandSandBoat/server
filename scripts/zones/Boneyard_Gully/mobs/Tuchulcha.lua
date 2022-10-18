@@ -65,9 +65,9 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     -- Despawn the hunters
-    if isKiller then
+    if optParams.isKiller then
         local bfID = mob:getBattlefield():getArea()
         DespawnMob(ID.sheepInAntlionsClothing[bfID].SWIFT_HUNTER_ID)
         DespawnMob(ID.sheepInAntlionsClothing[bfID].SHREWD_HUNTER_ID)

@@ -3,14 +3,14 @@
 -- Scroll of Suiton: Ni
 -- Teaches the ninjutsu Suiton: Ni
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(336)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(336)
 end
 
-return item_object
+return itemObject

@@ -8,14 +8,14 @@ local entity = {}
 
 local drawInPos =
 {
-    {838.88,  0.00, 358.86},
-    {834.93, -0.14, 363.68},
-    {840.13, -0.31, 366.46},
-    {842.69,  0.00, 360.12},
-    {846.15, -0.27, 360.25},
-    {845.30, -0.51, 366.68},
-    {850.33, -1.34, 365.43},
-    {850.40, -1.45, 355.85},
+    { 838.88,  0.00, 358.86 },
+    { 834.93, -0.14, 363.68 },
+    { 840.13, -0.31, 366.46 },
+    { 842.69,  0.00, 360.12 },
+    { 846.15, -0.27, 360.25 },
+    { 845.30, -0.51, 366.68 },
+    { 850.33, -1.34, 365.43 },
+    { 850.40, -1.45, 355.85 },
 }
 
 entity.onMobFight = function(mob, target)
@@ -36,7 +36,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     player:addTitle(xi.title.KHIMAIRA_CARVER)
 end
 
