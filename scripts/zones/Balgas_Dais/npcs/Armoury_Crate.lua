@@ -578,10 +578,10 @@ local loot =
             { itemid = 0, droprate =  190 }, -- nothing
             { itemid = xi.items.SLY_GAUNTLETS,           droprate =  10 },
             { itemid = xi.items.SPIKED_FINGER_GAUNTLETS, droprate = 120 },
-            { itemid = xi.items.RUSH_GLOVES,            droprate = 140 },
-            { itemid = xi.items.RIVAL_RIBBON,           droprate = 140 },
-            { itemid = xi.items.MANA_CIRCLET,           droprate = 150 },
-            { itemid = xi.items.IVORY_MITTS,            droprate = 150 },
+            { itemid = xi.items.RUSH_GLOVES,             droprate = 140 },
+            { itemid = xi.items.RIVAL_RIBBON,            droprate = 140 },
+            { itemid = xi.items.MANA_CIRCLET,            droprate = 150 },
+            { itemid = xi.items.IVORY_MITTS,             droprate = 150 },
         },
 
         {
