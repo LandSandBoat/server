@@ -129,6 +129,18 @@ local function fencerBonus(attacker)
     return bonus
 end
 
+local function scarletDeliriumBonus(attacker)
+    local bonus = 1
+
+    if attacker:hasStatusEffect(xi.effect.SCARLET_DELIRIUM_1) then
+        local effect = attacker:getStatusEffect(xi.effect.SCARLET_DELIRIUM_1)
+
+        bonus = 1 + (effect:getPower() / 100)
+    end
+
+    return bonus
+end
+
 local function shadowAbsorb(target)
     local targShadows = target:getMod(xi.mod.UTSUSEMI)
     local shadowType = xi.mod.UTSUSEMI
@@ -427,7 +439,7 @@ local function modifyMeleeHitDamage(attacker, target, attackTbl, wsParams, rawDa
 
     adjustedDamage = utils.stoneskin(target, adjustedDamage)
 
-    adjustedDamage = adjustedDamage + souleaterBonus(attacker, wsParams)
+    adjustedDamage = (adjustedDamage + consumeManaBonus(attacker) * scarletDeliriumBonus(attacker)) + souleaterBonus(attacker, wsParams)
 
     return adjustedDamage
 end
@@ -526,6 +538,7 @@ function calculateRawWSDmg(attacker, target, wsID, tp, action, wsParams, calcPar
 
     -- Calculate the damage from the first hit
     local dmg = mainBase * ftp
+
     hitdmg, calcParams = getSingleHitDamage(attacker, target, dmg, wsParams, calcParams)
 
     if calcParams.melee then
@@ -811,6 +824,9 @@ function doMagicWeaponskill(attacker, target, wsID, wsParams, tp, action, primar
 
         dmg = dmg * ftp
 
+        -- Apply Consume Mana and Scarlet Delirium
+        dmg = (dmg + consumeManaBonus(attacker)) * scarletDeliriumBonus(attacker)
+
         -- Factor in "all hits" bonus damage mods
         local bonusdmg = attacker:getMod(xi.mod.ALL_WSDMG_ALL_HITS) -- For any WS
         if attacker:getMod(xi.mod.WEAPONSKILL_DAMAGE_BASE + wsID) > 0 and not attacker:isPet() then -- For specific WS
@@ -938,9 +954,6 @@ function getMeleeDmg(attacker, weaponType, kick)
         mainhandDamage = mainhandDamage + h2hSkill
         offhandDamage  = mainhandDamage
     end
-
-    -- Consume Mana adds MP converted / 10 to the base damage of the weapon
-    mainhandDamage = mainhandDamage + consumeManaBonus(attacker)
 
     return { mainhandDamage, offhandDamage }
 end

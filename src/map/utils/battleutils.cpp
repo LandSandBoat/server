@@ -2034,14 +2034,14 @@ namespace battleutils
                 damage = PhysicalDmgTaken(PDefender, damage, damageType, isCovered);
             }
 
-            // absorb mods are handled in the above functions, but they do not affect counters
-            // this is a little hacky, but will work for now
+            // Absorb mods are handled in the above functions, but they do not affect counters
+            // This is a little hacky, but will work for now
             if (damage < 0 && isCounter)
             {
                 damage = -damage;
             }
 
-            if (!isCounter || giveTPtoAttacker) // counters are always considered blunt (assuming h2h) damage, except retaliation (which is the only counter
+            if (!isCounter || giveTPtoAttacker) // Counters are always considered blunt (assuming h2h) damage, except retaliation (which is the only counter
                                                 // that gives TP to the attacker)
             {
                 switch (damageType)
@@ -2070,6 +2070,7 @@ namespace battleutils
             if (isBlocked)
             {
                 uint8 absorb = 100;
+
                 if (PDefender->m_Weapons[SLOT_SUB]->IsShield())
                 {
                     if (PDefender->objtype == TYPE_PC)
@@ -2129,6 +2130,7 @@ namespace battleutils
                 damage = (damage * absorb) / 100;
             }
         }
+
         if (damage > 0)
         {
             damage = std::max(damage - PDefender->getMod(Mod::PHALANX), 0);
@@ -2136,9 +2138,15 @@ namespace battleutils
             damage = HandleStoneskin(PDefender, damage);
             HandleAfflatusMiseryDamage(PDefender, damage);
         }
+
         damage = std::clamp(damage, -99999, 99999);
 
+        // Scarlet Delirium
+        // Updates status effect power with damage bonus
+        battleutils::HandleScarletDelirium(PDefender, damage);
+
         int32 corrected = PDefender->takeDamage(damage, PAttacker, attackType, damageType);
+
         if (damage < 0)
         {
             damage = -corrected;
@@ -2442,6 +2450,10 @@ namespace battleutils
 
     int32 TakeSpellDamage(CBattleEntity* PDefender, CCharEntity* PAttacker, CSpell* PSpell, int32 damage, ATTACK_TYPE attackType, DAMAGE_TYPE damageType)
     {
+        // Scarlet Delirium
+        // Updates status effect power with damage bonus
+        battleutils::HandleScarletDelirium(PDefender, damage);
+
         PDefender->takeDamage(damage, PAttacker, attackType, damageType);
 
         // Remove effects from damage
@@ -4437,9 +4449,11 @@ namespace battleutils
         if (m_PChar->StatusEffectContainer->HasStatusEffect(EFFECT_CONSUME_MANA))
         {
             damage += (uint32)(floor(m_PChar->health.mp / 10));
+
             m_PChar->health.mp = 0;
             m_PChar->StatusEffectContainer->DelStatusEffect(EFFECT_CONSUME_MANA);
         }
+
         return damage;
     }
 
@@ -5545,6 +5559,26 @@ namespace battleutils
             }
         }
         return damage;
+    }
+
+    void HandleScarletDelirium(CBattleEntity* PDefender, int32 damage)
+    {
+        // Check for Scarlet Delirium and update Effect Power with bonus from damage
+        CStatusEffect* effectScarDel = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_SCARLET_DELIRIUM);
+
+        // Damage bonus calculation, update Effect Power
+        if (effectScarDel &&
+            effectScarDel->GetPower() == 0)
+        {
+            // Damage to Max HP Ratio
+            int8 bonus    = std::floor(((damage * 100) / PDefender->GetMaxHP()) / 2);
+            int8 jpValue  = effectScarDel->GetSubPower();
+            int8 duration = 90 + jpValue;
+
+            // Convert status effect from "Absorb damage" mode to "Provide damage bonus" mode
+            PDefender->StatusEffectContainer->DelStatusEffectSilent(EFFECT_SCARLET_DELIRIUM);
+            PDefender->StatusEffectContainer->AddStatusEffect(new CStatusEffect(EFFECT_SCARLET_DELIRIUM_1, EFFECT_SCARLET_DELIRIUM_1, bonus, 0, duration), true);
+        }
     }
 
     int32 HandleSevereDamageEffect(CBattleEntity* PDefender, EFFECT effect, int32 damage, bool removeEffect)

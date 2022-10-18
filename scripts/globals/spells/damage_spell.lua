@@ -300,6 +300,8 @@ xi.spells.damage.calculateBaseDamage = function(caster, target, spell, spellId, 
     -- STEP 4: Spell Damage
     -----------------------------------
     spellDamage = baseSpellDamage + baseSpellDamageBonus + statDiffBonus
+    -- Apply Scarlet Delirium to base damage
+    spellDamage = spellDamage * xi.spells.damage.calculateScarletDeliriumMultiplier(caster)
 
     -- No negative base damage value allowed.
     if spellDamage < 0 then
@@ -813,6 +815,19 @@ xi.spells.damage.calculateDivineEmblemMultiplier = function(caster, target, spel
     end
 
     return divineEmblemMultiplier
+end
+
+-- Scarlet Delirium applies a base damage multiplier.
+xi.spells.damage.calculateScarletDeliriumMultiplier = function(caster)
+    local scarletDeliriumMultiplier = 1
+
+    if caster:hasStatusEffect(xi.effect.SCARLET_DELIRIUM_1) then
+        local power = caster:getStatusEffect(xi.effect.SCARLET_DELIRIUM_1):getPower()
+
+        scarletDeliriumMultiplier = 1 + (power / 100)
+    end
+
+    return scarletDeliriumMultiplier
 end
 
 -- Ebullience applies an entirely separate multiplier.

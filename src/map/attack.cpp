@@ -488,24 +488,48 @@ void CAttack::ProcessDamage()
         m_trickAttackDamage += m_attacker->AGI() * (1 + m_attacker->getMod(Mod::TRICK_ATK_AGI) / 100);
     }
 
-    SLOTTYPE slot = (SLOTTYPE)GetWeaponSlot();
-    if (m_attackRound->IsH2H())
+    SLOTTYPE slot     = (SLOTTYPE)GetWeaponSlot();
+    int32    taDmg    = 0;
+    int32    fSTR     = battleutils::GetFSTR(m_attacker, m_victim, slot);
+    float    dmgRatio = m_damageRatio;
+
+    switch (slot)
     {
-        m_naturalH2hDamage = (int32)(m_attacker->GetSkill(SKILL_HAND_TO_HAND) * 0.11f) + 3;
-        m_baseDamage       = m_attacker->GetMainWeaponDmg();
-        m_damage           = (uint32)(((m_baseDamage + m_naturalH2hDamage + m_trickAttackDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * m_damageRatio));
+        case SLOT_MAIN:
+            if (m_attackRound->IsH2H())
+            {
+                m_naturalH2hDamage = (int32)(m_attacker->GetSkill(SKILL_HAND_TO_HAND) * 0.11f) + 3;
+            }
+
+            m_baseDamage = m_naturalH2hDamage + m_attacker->GetMainWeaponDmg();
+            taDmg        = m_trickAttackDamage;
+            break;
+        case SLOT_SUB:
+            m_baseDamage = m_attacker->GetSubWeaponDmg();
+            break;
+        case SLOT_AMMO:
+            m_baseDamage = m_attacker->GetRangedWeaponDmg();
+            break;
+        default:
+            break;
     }
-    else if (slot == SLOT_MAIN)
+
+    // Calculate base damage
+    m_damage = (uint32)((m_baseDamage + taDmg + fSTR) * dmgRatio);
+
+    // Consume mana
+    if (m_attacker->objtype == TYPE_PC)
     {
-        m_damage = (uint32)(((m_attacker->GetMainWeaponDmg() + m_trickAttackDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * m_damageRatio));
+        m_damage = battleutils::doConsumeManaEffect((CCharEntity*)m_attacker, m_damage);
     }
-    else if (slot == SLOT_SUB)
+
+    // Apply Scarlet Delirium damage bonus
+    // EFFECT_SCARLET_DELIRIUM_1 is only active after damage has been dealt to the DRK and EFFECT_SCARLET_DELIRIUM has been removed
+    if (m_attacker->StatusEffectContainer->HasStatusEffect(EFFECT_SCARLET_DELIRIUM_1))
     {
-        m_damage = (uint32)(((m_attacker->GetSubWeaponDmg() + m_trickAttackDamage + battleutils::GetFSTR(m_attacker, m_victim, slot)) * m_damageRatio));
-    }
-    else if (slot == SLOT_AMMO)
-    {
-        m_damage = (uint32)((m_attacker->GetRangedWeaponDmg() + battleutils::GetFSTR(m_attacker, m_victim, slot)) * m_damageRatio);
+        float effectPower = 1.0f + (m_attacker->StatusEffectContainer->GetStatusEffect(EFFECT_SCARLET_DELIRIUM_1)->GetPower() / 100.0f);
+
+        m_damage = (uint32)(m_damage * effectPower);
     }
 
     // Apply "Double Attack" damage and "Triple Attack" damage mods
@@ -522,12 +546,6 @@ void CAttack::ProcessDamage()
     if (m_attacker->objtype == TYPE_PC)
     {
         m_damage = battleutils::doSoulEaterEffect((CCharEntity*)m_attacker, m_damage);
-    }
-
-    // Consume mana
-    if (m_attacker->objtype == TYPE_PC)
-    {
-        m_damage = battleutils::doConsumeManaEffect((CCharEntity*)m_attacker, m_damage);
     }
 
     // Set attack type to Samba if the attack type is normal.  Don't overwrite other types.  Used for Samba double damage.

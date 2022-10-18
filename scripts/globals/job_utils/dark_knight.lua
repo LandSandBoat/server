@@ -112,7 +112,10 @@ xi.job_utils.dark_knight.useNetherVoid = function(player, target, ability)
 end
 
 xi.job_utils.dark_knight.useScarletDelirium = function(player, target, ability)
-    player:addStatusEffect(xi.effect.SCARLET_DELIRIUM, 8, 1, 90)
+    local jpValue  = player:getJobPointLevel(xi.jp.SCARLET_DLRIUM_DURATION)
+    local duration = 90 + jpValue
+
+    player:addStatusEffect(xi.effect.SCARLET_DELIRIUM, 0, 0, duration, 0, jpValue)
 end
 
 xi.job_utils.dark_knight.useSoulEnslavement = function(player, target, ability)
