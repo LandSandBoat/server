@@ -47,8 +47,6 @@ spellObject.onMobSpawn = function(mob)
         mobArg:setMod(xi.mod.SAMBA_DURATION, sambaDurationBoost)
     end)
 
-    -- Todo: update gambit container to allow to toggling behaviors with synergy
-
     -- Sets stance
     mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_STATUS, xi.effect.SABER_DANCE, ai.r.JA, ai.s.SPECIFIC, xi.ja.SABER_DANCE)
 
