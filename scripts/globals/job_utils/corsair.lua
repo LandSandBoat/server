@@ -217,7 +217,10 @@ xi.job_utils.corsair.useCuttingCards = function(caster, target, ability, action)
 
     local total = caster:getLocalVar("corsairRollTotal")
 
-    caster:doCuttingCards(target, total)
+    -- TODO: Implement
+    -- caster:doCuttingCards(target, total)
+    print("WARNING: doCuttingCards is not implemented")
+
     ability:setMsg(435 + math.floor((total - 1) / 2) * 2)
     action:setAnimation(target:getID(), 132 + (total) - 1)
 

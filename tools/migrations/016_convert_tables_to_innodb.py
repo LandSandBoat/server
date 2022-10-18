@@ -1,4 +1,4 @@
-import mysql.connector
+import mariadb
 
 def migration_name():
 	return "Converting DB engine for tables from MyISAM to InnoDB"
@@ -25,6 +25,6 @@ def migrate(cur, db):
 			cur.execute('ALTER TABLE `{}` ROW_FORMAT=DYNAMIC;'.format(r[0]))
 			cur.execute('ALTER TABLE `{}` ENGINE=InnoDB;'.format(r[0]))
 		db.commit()
-	except mysql.connector.Error as err:
+	except mariadb.Error as err:
 		print("Something went wrong: {}".format(err))
 

@@ -33,6 +33,11 @@ xi.transport.trigger =
         FERRY_DEPARTING_TO_ALZAHBI  = 1,
         FERRY_ARRIVING_FROM_SELBINA = 2,
         FERRY_DEPARTING_TO_SELBINA  = 3
+    },
+    selbina =
+    {
+        FERRY_ARRIVING_FROM_MHAURA = 0,
+        FERRY_DEPARTING_TO_MHAURA  = 1
     }
 }
 
@@ -42,6 +47,10 @@ xi.transport.interval =
     {
         FROM_TO_ALZAHBI = 480,
         FROM_TO_SELBINA = 480
+    },
+    selbina =
+    {
+        FROM_TO_MHAURA = 480
     }
 }
 
@@ -53,6 +62,11 @@ xi.transport.offset =
         FERRY_DEPARTING_TO_ALZAHBI  = 239,
         FERRY_ARRIVING_FROM_SELBINA = 399,
         FERRY_DEPARTING_TO_SELBINA  = 479
+    },
+    selbina =
+    {
+        FERRY_ARRIVING_FROM_MHAURA = 399,
+        FERRY_DEPARTING_TO_MHAURA = 479
     }
 }
 
@@ -67,6 +81,17 @@ xi.transport.pos =
         DEPARTING =
         {
             { x = 8.26, y = -1.36, z = 2.20, rotation = 193 }
+        },
+    },
+    selbina =
+    {
+        ARRIVING  =
+        {
+            { x = 16.768, y = -1.38, z = -58.843, rotation = 209 }
+        },
+        DEPARTING =
+        {
+            { x = 17.979, y = -1.389, z = -58.800, rotation = 191 }
         },
     }
 }

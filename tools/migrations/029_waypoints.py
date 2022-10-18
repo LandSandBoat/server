@@ -1,4 +1,4 @@
-import mysql.connector
+import mariadb
 
 def migration_name():
     return "Adding waypoints column to char_unlocks table"
@@ -18,5 +18,5 @@ def migrate(cur, db):
         cur.execute("ALTER TABLE char_unlocks \
         ADD COLUMN `waypoints` blob DEFAULT NULL;")
         db.commit()
-    except mysql.connector.Error as err:
+    except mariadb.Error as err:
         print("Something went wrong: {}".format(err))

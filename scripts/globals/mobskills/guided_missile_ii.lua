@@ -13,12 +13,10 @@ require("scripts/globals/mobskills")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    local currentForm = mob:getLocalVar("form")
-
-    if (mob:getAnimationSub() == 2 and currentForm == 1) then -- proto-omega first bipedform
-        return 0
+    if target:isBehind(mob, 48) then
+        return 1
     end
-    return 1
+    return 0
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)

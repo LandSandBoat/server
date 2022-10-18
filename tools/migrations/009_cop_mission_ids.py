@@ -1,4 +1,4 @@
-import mysql.connector
+import mariadb
 
 mission_map = {
     0  : 101,
@@ -88,9 +88,9 @@ def migrate(cur, db):
                 newMissionID = mission_map[currentMissionID]
                 row[420:422] = newMissionID.to_bytes(2, 'little')
                 try:
-                    cur.execute("UPDATE chars SET missions = %s WHERE charid = %s", (row, charid))
+                    cur.execute("UPDATE chars SET missions = %s WHERE charid = %s", (bytes(row), charid))
                     db.commit()
-                except mysql.connector.Error as err:
+                except mariadb.Error as err:
                     print("Something went wrong: {}".format(err))
             except: # lgtm [py/catch-base-exception]
                 efile.write('[cop_mission_ids] Error reading missions in chars table for charid: ' + str(charid) + '\n')

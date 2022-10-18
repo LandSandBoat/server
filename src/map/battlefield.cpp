@@ -318,7 +318,11 @@ bool CBattlefield::InsertEntity(CBaseEntity* PEntity, bool enter, BATTLEFIELDMOB
                 m_EnteredPlayers.emplace(PEntity->id);
                 PChar->ClearTrusts();
                 luautils::OnBattlefieldEnter(PChar, this);
-                charutils::SendTimerPacket(PChar, GetRemainingTime());
+
+                if (m_showTimer)
+                {
+                    charutils::SendTimerPacket(PChar, GetRemainingTime());
+                }
 
                 // Try to add the player's pet in case they have one that can
                 if (PChar->PPet != nullptr)
