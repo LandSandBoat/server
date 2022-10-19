@@ -9,14 +9,14 @@ require("scripts/globals/missions")
 -----------------------------------
 
 local content = BattlefieldMission:new({
-    zoneId                = xi.zone.THRONE_ROOM,
-    battlefieldId         = xi.battlefield.id.WHERE_TWO_PATHS_CONVERGE,
-    maxPlayers            = 6,
-    levelCap              = 75,
-    timeLimit             = utils.minutes(30),
-    index                 = 1,
-    entryNpc              = "Throne_Room",
-    exitNpc               = "Throne_Room_Exit",
+    zoneId        = xi.zone.THRONE_ROOM,
+    battlefieldId = xi.battlefield.id.WHERE_TWO_PATHS_CONVERGE,
+    maxPlayers    = 6,
+    levelCap      = 75,
+    timeLimit     = utils.minutes(30),
+    index         = 1,
+    entryNpc      = "_4l1",
+    exitNpcs      = { "_4l2", "_4l3", "_4l4" },
 
     missionArea           = xi.mission.log_id.BASTOK,
     mission               = xi.mission.id.bastok.WHERE_TWO_PATHS_CONVERGE,
