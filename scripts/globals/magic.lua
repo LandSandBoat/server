@@ -519,6 +519,11 @@ params.skillType = $3
 params.bonus = $4
 params.effect = $5
 ]]
+
+-- TODO: Fix undefined and non-standard variable usage.
+-- Disable variable checking for this function.
+-- luacheck: ignore 113
+-- luacheck: ignore 111
 function applyResistanceEffect(caster, target, spell, params)
     local diff = params.diff
     local skill = params.skillType
@@ -570,7 +575,7 @@ function applyResistanceEffect(caster, target, spell, params)
 
     local p = getMagicHitRate(caster, target, skill, element, effectRes, magicaccbonus, diff)
 
-    return getMagicResist(p, target,params.element)
+    return getMagicResist(p, target, params.element, effectRes)
 end
 
 -- Applies resistance for things that may not be spells - ie. Quick Draw
@@ -586,6 +591,10 @@ function applyResistanceAddEffect(player, target, element, bonus)
     return getMagicResist(p, target, element)
 end
 
+-- TODO: Fix undefined and non-standard variable usage.
+-- Disable variable checking for this function.
+-- luacheck: ignore 113
+-- luacheck: ignore 111
 function applyResistanceAddEffectWS(player, target, element, bonus)
     local p = getMagicHitRate(player, target, 0, element, 0, bonus)
     local resist = getMagicResist(p, target, element)
@@ -601,6 +610,13 @@ function applyResistanceAddEffectWS(player, target, element, bonus)
     return resist
 end
 
+-- TODO: Fix undefined and non-standard variable usage.
+-- Disable variable checking for this function.
+-- luacheck: ignore 113
+-- luacheck: ignore 111
+-- TODO: Reduce complexity
+-- Disable cyclomatic complexity check for this function:
+-- luacheck: ignore 561
 function getMagicHitRate(caster, target, skillType, element, effectRes, bonusAcc, dStat)
     local magicacc = 0
     local magiceva = 0
@@ -706,10 +722,10 @@ function getMagicHitRate(caster, target, skillType, element, effectRes, bonusAcc
     end
 
     if target:isPC() then
-        magiceva = target:getMod(xi.mod.MEVA) * ((100 + effectRes + resMod) / 100)
+        magiceva = target:getMod(xi.mod.MEVA) * ((100 + resMod) / 100)
     else
         dLvl = utils.clamp(dLvl, 0, 200) -- Mobs should not have a disadvantage when targeted
-        magiceva = (target:getMod(xi.mod.MEVA) + (4 * dLvl)) * ((100 + effectRes + resMod) / 100)
+        magiceva = (target:getMod(xi.mod.MEVA) + (4 * dLvl)) * ((100 + resMod) / 100)
     end
 
     bonusAcc = bonusAcc + caster:getMerit(xi.merit.MAGIC_ACCURACY) + caster:getMerit(xi.merit.NIN_MAGIC_ACCURACY)
@@ -724,6 +740,10 @@ function getMagicHitRate(caster, target, skillType, element, effectRes, bonusAcc
 end
 
 -- Returns resistance value from given magic hit rate (p)
+-- TODO: Fix undefined and non-standard variable usage.
+-- Disable variable checking for this function.
+-- luacheck: ignore 113
+-- luacheck: ignore 111
 function getMagicResist(magicHitRate, target, element)
     local evaMult = 1
 
@@ -739,7 +759,16 @@ function getMagicResist(magicHitRate, target, element)
         end
     end
 
+    local baseRes = 1
+
+    if effectRes ~= nil then
+        baseRes = baseRes - (effectRes / 100)
+    end
+
     local p = utils.clamp(((magicHitRate * evaMult) / 100), 0.05, 0.95)
+
+    p = utils.clamp(p * baseRes, -1, 0.95)
+
     local resist = 1
 
     -- Resistance thresholds based on p.  A higher p leads to lower resist rates, and a lower p leads to higher resist rates.
@@ -798,6 +827,10 @@ end
 
 -- Returns the amount of resistance the
 -- target has to the given effect (stun, sleep, etc..)
+-- TODO: Fix undefined and non-standard variable usage.
+-- Disable variable checking for this function.
+-- luacheck: ignore 113
+-- luacheck: ignore 111
 function getEffectResistance(target, effect, returnBuild, caster)
     local effectres = 0
     local buildres = 0
@@ -1456,6 +1489,10 @@ function calculateDurationForLvl(duration, spellLvl, targetLvl)
     return duration
 end
 
+-- TODO: Fix undefined and non-standard variable usage.
+-- Disable variable checking for this function.
+-- luacheck: ignore 113
+-- luacheck: ignore 111
 function calculateDuration(duration, magicSkill, spellGroup, caster, target, useComposure)
     local casterJob = caster:getMainJob()
 
