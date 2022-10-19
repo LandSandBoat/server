@@ -14,7 +14,7 @@ zoneObject.onChocoboDig = function(player, precheck)
     return xi.chocoboDig.start(player, precheck)
 end
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
     -- Barge Regions
     zone:registerRegion(1, -300, -10, 499, -275, 10, 534) -- Barge at north landing
     zone:registerRegion(2, 233, -10, -545, 260, 10, -513) -- Barge at south landing
@@ -59,22 +59,22 @@ zoneObject.onGameDay = function()
     SetServerVariable("[DIG]ZONE2_ITEMS", 0)
 end
 
-zone_object.onRegionEnter = function(player, region)
+zoneObject.onRegionEnter = function(player, region)
     xi.barge.aboard(player, region:GetRegionID(), true)
 end
 
-zone_object.onRegionLeave = function(player, region)
+zoneObject.onRegionLeave = function(player, region)
     xi.barge.aboard(player, region:GetRegionID(), false)
 end
 
-zone_object.onTransportEvent = function(player, transport)
+zoneObject.onTransportEvent = function(player, transport)
     xi.barge.onTransportEvent(player, transport)
 end
 
 zoneObject.onEventUpdate = function(player, csid, option)
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
     if csid == 10 then
         player:startEvent(15) -- arrive at South Landing
     elseif csid == 11 then

@@ -13,14 +13,14 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    xi.barge.vendorOnTrigger(player, eventId)
+    xi.barge.ticketshopOnTrigger(player, eventId)
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, eventId, csid, option)
-    xi.barge.vendorOnEventFinish(player, eventId, csid, option)
+    xi.barge.ticketshoponEventFinish(player, csid, option)
 end
 
 return entity

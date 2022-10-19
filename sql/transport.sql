@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `transport` (
   `anim_arrive` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `anim_depart` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `time_offset` smallint(5) unsigned NOT NULL DEFAULT '0',
-  `time_interval` smallint(5) unsigned NOT NULL DEFAULT '0',
+  `time_interval` smallint(5) unsigned NOT NULL DEFAULT '0', -- Duration of ferry ride
   `time_anim_arrive` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `time_waiting` smallint(5) unsigned NOT NULL DEFAULT '0',
   `time_anim_depart` tinyint(3) unsigned NOT NULL DEFAULT '0',
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `transport` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Contenu de la table `transport`
+-- `transport` Table of Contents:
 --
 
 INSERT INTO `transport` VALUES(1, 'Kazham-Jeuno_Airship', 17801320, 17801319, -4.000, -3.497, 32.125, 128, 512, 18, 19, 90, 360, 20, 50, 20, 226, 5);
@@ -55,13 +55,12 @@ INSERT INTO `transport` VALUES(16, 'Manaclip_Bibiki-Purgonorgo', 16793913, 16793
 INSERT INTO `transport` VALUES(17, 'Manaclip_Purgonorgo-Bibiki', 16793913, 16793915, -392.000, 0.000, -364.000, 128, 0, 20, 21, 500, 720, 20, 40, 20, 3, 17);
 INSERT INTO `transport` VALUES(18, 'Selbina-Mhaura_Boat_Pirates', 17793088, 17793087, 9.294, 0.000, -69.775, 0, 485, 18, 19, 382, 480, 18, 80, 17, 227, 4);
 INSERT INTO `transport` VALUES(19, 'Mhaura-Selbina_Boat_Pirates', 17797182, 17797181, -0.516, 0.026, -8.409, 0, 493, 18, 19, 382, 480, 18, 80, 17, 228, 3);
-+-- Phanauet Channel Barge
-INSERT INTO `transport` VALUES (25, 'Barge_North-Central',            16785747, 16785757, -291.355,    0.000,  516.868,  32, 1, 24, 25,  990, 1440,   45,   85,   31, 1, 16);
-INSERT INTO `transport` VALUES (23, 'Barge_South-North',              16785747, 16785755,  246.377,    0.000, -529.793, 192, 3, 18, 19,  565, 1440,   35,   75,   35, 1, 16);
-INSERT INTO `transport` VALUES (20, 'Barge_South-Central-Emfea',      16785747, 16785755,  246.377,    0.000, -529.793, 192, 3, 18, 19,    5, 1440,   35,   75,   35, 1, 16);
-INSERT INTO `transport` VALUES (21, 'Barge_Central-South-Newtpool',   16785747, 16785756, -125.042,    0.000,   72.786, 160, 2, 20, 21,  265, 1440,   34,   45,   35, 1, 16);
-INSERT INTO `transport` VALUES (26, 'Barge_Central-South-Newtpool-2', 16785747, 16785756, -125.042,    0.000,   72.786, 160, 2, 20, 21, 1150, 1440,   34,   45,   35, 1, 16);
-
-INSERT INTO `transport` VALUES (24, 'Barge_North-OOS',                16785747, 16785757, -291.355,    0.000,  516.868, 160, 0, 22, 22,  955, 1440,   33,    0,    0, 1, 16);
-INSERT INTO `transport` VALUES (22, 'Barge_South-OOS',                16785747, 16785755,  246.377,    0.000, -529.793,  64, 0, 23, 23,  530, 1440,   33,   33,    0, 1, 16);
-INSERT INTO `transport` VALUES (27, 'Barge_South-OOS-2',              16785747, 16785755,  246.377,    0.000, -529.793,  64, 0, 23, 23, 1420, 1440,   33,    0,    0, 1, 16);
+-- Phanauet Channel Barge
+INSERT INTO `transport` VALUES (25, 'Barge_North-Central',            16785747, 16785757, -291.355, 0.000,  516.868,  32, 1, 24, 25,  960, 1440, 45, 85, 31, 1, 16);
+INSERT INTO `transport` VALUES (23, 'Barge_South-North',              16785747, 16785755,  246.377, 0.000, -529.793, 192, 3, 18, 19,  540, 1440, 35, 75, 35, 1, 16);
+INSERT INTO `transport` VALUES (20, 'Barge_South-Central-Emfea',      16785747, 16785755,  246.377, 0.000, -529.793, 192, 3, 18, 19, 1420, 1440, 35, 75, 35, 1, 16);
+INSERT INTO `transport` VALUES (21, 'Barge_Central-South-Newtpool',   16785747, 16785756, -125.042, 0.000,   72.786, 160, 2, 20, 21,  241, 1440, 34, 45, 35, 1, 16);
+INSERT INTO `transport` VALUES (26, 'Barge_Central-South-Newtpool-2', 16785747, 16785756, -125.042, 0.000,   72.786, 160, 2, 20, 21, 1121, 1440, 34, 45, 35, 1, 16);
+-- INSERT INTO `transport` VALUES (24, 'Barge_North-OOS',                16785747, 16785757, -291.355,    0.000,  516.868, 160, 0, 22, 22,  955, 1440,   33,    0,    0, 1, 16);
+-- INSERT INTO `transport` VALUES (22, 'Barge_South-OOS',                16785747, 16785755,  246.377,    0.000, -529.793,  64, 0, 23, 23,  530, 1440,   33,   33,    0, 1, 16);
+-- INSERT INTO `transport` VALUES (27, 'Barge_South-OOS-2',              16785747, 16785755,  246.377,    0.000, -529.793,  64, 0, 23, 23, 1420, 1440,   33,    0,    0, 1, 16);

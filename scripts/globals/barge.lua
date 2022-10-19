@@ -29,7 +29,6 @@
 -- 41 - central landing on dock
 
 ------------------------------------
-local ID = require("scripts/zones/Carpenters_Landing/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/zone")
 ------------------------------------
@@ -101,7 +100,7 @@ local bargeSchedule =
     },
     [xi.barge.location.BARGE] =
     {
-        { time =   15, act = act.ARRIVE, route = dest.CENTRAL_LANDING_EMFEA }, -- 00:15 Central Landing
+        { time =   15, act = act.ARRIVE, route = dest.CENTRAL_LANDING_EMFEA }, -- 00:15 South Landing
         { time =  275, act = act.ARRIVE, route = dest.SOUTH_LANDING         }, -- 04:35 Central Landing
         { time =  575, act = act.ARRIVE, route = dest.NORTH_LANDING         }, -- 09:35 South Landing
         { time = 1005, act = act.ARRIVE, route = dest.CENTRAL_LANDING       }, -- 16:45 North Landing
@@ -204,7 +203,7 @@ xi.barge.onZoneIn = function(player)
 end
 
 xi.barge.onTransportEvent = function(player, transport)
-    local ID = zones[player:getZoneID()]
+    local zoneID = zones[player:getZoneID()]
     local region = player:getCurrentRegion()
     local hasCS = 0
 
@@ -216,13 +215,13 @@ xi.barge.onTransportEvent = function(player, transport)
         if player:hasKeyItem(ki) then -- Multi-ticket and Single Ticket
             local uses = player:getCharVar(vars[1])
             if uses > 1 then -- Multi-ticket
-                player:messageSpecial(ID.text.LEFT_BILLET, 0, ki, uses - 1) -- Ticket Count -1 Message
+                player:messageSpecial(zoneID.text.LEFT_BILLET, 0, ki, uses - 1) -- Ticket Count -1 Message
                 player:setCharVar(vars[1], uses - 1) -- Set Char Var
                 player:startEvent(vars[region + 2]) -- Succeed Event
                 hasCS = 1 -- Skip Failure Catch
                 break
             elseif uses == 1 then -- Multi Ticket (last use) and Single Ticket
-                player:messageSpecial(ID.text.END_BILLET, 0, ki) -- End of Ticket Msg
+                player:messageSpecial(zoneID.text.END_BILLET, 0, ki) -- End of Ticket Msg
                 player:setCharVar(vars[1], 0) -- Reset Char Var Just In Case
                 player:delKeyItem(ki) -- Del KI
                 player:startEvent(vars[region + 2]) -- Succeed Event
@@ -331,9 +330,7 @@ xi.barge.ticketshopOnTrigger = function(player, eventId)
         { xi.ki.BARGE_MULTI_TICKET,  nil,                      "currentTicket", 2, player:getGil(), "Barge_Ticket" },
         { nil,                       nil,                      "currentTicket", 0, player:getGil(), "Barge_Ticket" },
     }
-    print(ticket)
     for it, ticket in pairs(ticketInformation) do
-        print("enter loop")
         if ticket[2] ~= nil and player:hasKeyItem(ticket[1]) and player:hasKeyItem(ticket[2]) then -- Has both KI
             player:setLocalVar(ticket[3], ticket[4]) -- Set currentTicket
         elseif player:hasKeyItem(ticket[1]) and it >= 2 then -- Has only 1 KI
