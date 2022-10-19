@@ -2,34 +2,6 @@
 
 LOCK TABLES `mob_spell_lists` WRITE;
 
--- Stone V
-DELETE FROM `mob_spell_lists` WHERE spell_id = 163 AND spell_list_name = "Beastmen_BLM";
-DELETE FROM `mob_spell_lists` WHERE spell_id = 163 AND spell_list_name = "Worm";
-DELETE FROM `mob_spell_lists` WHERE spell_id = 163 AND spell_list_name = "Elemental_Earth";
-DELETE FROM `mob_spell_lists` WHERE spell_id = 163 AND spell_list_name = "Undead";
-DELETE FROM `mob_spell_lists` WHERE spell_id = 163 AND spell_list_name = "MagicPot";
-DELETE FROM `mob_spell_lists` WHERE spell_id = 163 AND spell_list_name = "Tzee_Xicu_Idol";
-DELETE FROM `mob_spell_lists` WHERE spell_id = 163 AND spell_list_name = "Disaster_Idol_Earthsday";
-DELETE FROM `mob_spell_lists` WHERE spell_id = 163 AND spell_list_name = "Ghrah_Earth";
-
--- Water V
-DELETE FROM `mob_spell_lists` WHERE spell_id = 173 AND spell_list_name = "Beastmen_BLM";
-DELETE FROM `mob_spell_lists` WHERE spell_id = 173 AND spell_list_name = "Hecteyes";
-DELETE FROM `mob_spell_lists` WHERE spell_id = 173 AND spell_list_name = "Elemental_Water";
-DELETE FROM `mob_spell_lists` WHERE spell_id = 173 AND spell_list_name = "Undead";
-DELETE FROM `mob_spell_lists` WHERE spell_id = 173 AND spell_list_name = "MagicPot";
-DELETE FROM `mob_spell_lists` WHERE spell_id = 173 AND spell_list_name = "Disaster_Idol_Watersday";
-DELETE FROM `mob_spell_lists` WHERE spell_id = 173 AND spell_list_name = "Ghrah_Water";
-
--- Aero V
-DELETE FROM `mob_spell_lists` WHERE spell_id = 158 AND spell_list_name = "Beastmen_BLM";
-DELETE FROM `mob_spell_lists` WHERE spell_id = 158 AND spell_list_name = "Hecteyes";
-DELETE FROM `mob_spell_lists` WHERE spell_id = 158 AND spell_list_name = "Ahriman";
-DELETE FROM `mob_spell_lists` WHERE spell_id = 158 AND spell_list_name = "Elemental_Air";
-DELETE FROM `mob_spell_lists` WHERE spell_id = 158 AND spell_list_name = "Undead";
-DELETE FROM `mob_spell_lists` WHERE spell_id = 158 AND spell_list_name = "MagicPot";
-DELETE FROM `mob_spell_lists` WHERE spell_id = 158 AND spell_list_name = "Disaster_Idol_Windsday";
-
 -- Fire V
 DELETE FROM `mob_spell_lists` WHERE spell_id = 148 AND spell_list_name = "Beastmen_BLM";
 DELETE FROM `mob_spell_lists` WHERE spell_id = 148 AND spell_list_name = "Hecteyes";
@@ -46,6 +18,25 @@ DELETE FROM `mob_spell_lists` WHERE spell_id = 153 AND spell_list_name = "Undead
 DELETE FROM `mob_spell_lists` WHERE spell_id = 153 AND spell_list_name = "MagicPot";
 DELETE FROM `mob_spell_lists` WHERE spell_id = 153 AND spell_list_name = "Disaster_Idol_Iceday";
 
+-- Aero V
+DELETE FROM `mob_spell_lists` WHERE spell_id = 158 AND spell_list_name = "Beastmen_BLM";
+DELETE FROM `mob_spell_lists` WHERE spell_id = 158 AND spell_list_name = "Hecteyes";
+DELETE FROM `mob_spell_lists` WHERE spell_id = 158 AND spell_list_name = "Ahriman";
+DELETE FROM `mob_spell_lists` WHERE spell_id = 158 AND spell_list_name = "Elemental_Air";
+DELETE FROM `mob_spell_lists` WHERE spell_id = 158 AND spell_list_name = "Undead";
+DELETE FROM `mob_spell_lists` WHERE spell_id = 158 AND spell_list_name = "MagicPot";
+DELETE FROM `mob_spell_lists` WHERE spell_id = 158 AND spell_list_name = "Disaster_Idol_Windsday";
+
+-- Stone V
+DELETE FROM `mob_spell_lists` WHERE spell_id = 163 AND spell_list_name = "Beastmen_BLM";
+DELETE FROM `mob_spell_lists` WHERE spell_id = 163 AND spell_list_name = "Worm";
+DELETE FROM `mob_spell_lists` WHERE spell_id = 163 AND spell_list_name = "Elemental_Earth";
+DELETE FROM `mob_spell_lists` WHERE spell_id = 163 AND spell_list_name = "Undead";
+DELETE FROM `mob_spell_lists` WHERE spell_id = 163 AND spell_list_name = "MagicPot";
+DELETE FROM `mob_spell_lists` WHERE spell_id = 163 AND spell_list_name = "Tzee_Xicu_Idol";
+DELETE FROM `mob_spell_lists` WHERE spell_id = 163 AND spell_list_name = "Disaster_Idol_Earthsday";
+DELETE FROM `mob_spell_lists` WHERE spell_id = 163 AND spell_list_name = "Ghrah_Earth";
+
 -- Thunder V
 DELETE FROM `mob_spell_lists` WHERE spell_id = 168 AND spell_list_name = "Beastmen_BLM";
 DELETE FROM `mob_spell_lists` WHERE spell_id = 168 AND spell_list_name = "Hecteyes";
@@ -54,6 +45,15 @@ DELETE FROM `mob_spell_lists` WHERE spell_id = 168 AND spell_list_name = "Elemen
 DELETE FROM `mob_spell_lists` WHERE spell_id = 168 AND spell_list_name = "Undead";
 DELETE FROM `mob_spell_lists` WHERE spell_id = 168 AND spell_list_name = "MagicPot";
 DELETE FROM `mob_spell_lists` WHERE spell_id = 168 AND spell_list_name = "Disaster_Idol_Lightningsday";
+
+-- Water V
+DELETE FROM `mob_spell_lists` WHERE spell_id = 173 AND spell_list_name = "Beastmen_BLM";
+DELETE FROM `mob_spell_lists` WHERE spell_id = 173 AND spell_list_name = "Hecteyes";
+DELETE FROM `mob_spell_lists` WHERE spell_id = 173 AND spell_list_name = "Elemental_Water";
+DELETE FROM `mob_spell_lists` WHERE spell_id = 173 AND spell_list_name = "Undead";
+DELETE FROM `mob_spell_lists` WHERE spell_id = 173 AND spell_list_name = "MagicPot";
+DELETE FROM `mob_spell_lists` WHERE spell_id = 173 AND spell_list_name = "Disaster_Idol_Watersday";
+DELETE FROM `mob_spell_lists` WHERE spell_id = 173 AND spell_list_name = "Ghrah_Water";
 
 -- Stonega IV
 DELETE FROM `mob_spell_lists` WHERE spell_id = 192 AND spell_list_name = "Animated_Staff";
