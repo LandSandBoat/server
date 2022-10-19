@@ -2007,17 +2007,15 @@ namespace charutils
                         if (weapon != nullptr)
                         {
                             longBowException = ((CItemWeapon*)PItem)->getSkillType() == SKILL_ARCHERY &&
-                                               ((CItemWeapon*)PItem)->getSubSkillType() == SUBSKILL_LONGB &&
-                                               weapon->getSubSkillType() == SUBSKILL_XBO;
+                                               ((CItemWeapon*)PItem)->getSubSkillType() == SUBSKILL_LONGB;
                         }
 
                         if ((weapon != nullptr) && weapon->isType(ITEM_WEAPON))
                         {
                             if (((CItemWeapon*)PItem)->getSkillType() != weapon->getSkillType() ||
-                                ((CItemWeapon*)PItem)->getSubSkillType() != weapon->getSubSkillType() ||
-                                !longBowException)
+                                ((CItemWeapon*)PItem)->getSubSkillType() != weapon->getSubSkillType())
                             {
-                                if (!longBowException)
+                                if (!longBowException || ((CItemWeapon*)PItem)->getSkillType() != weapon->getSkillType())
                                 {
                                     UnequipItem(PChar, SLOT_AMMO, false);
                                 }

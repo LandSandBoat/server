@@ -20,6 +20,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 
 #include "range_state.h"
+#include "../../entities/battleentity.h"
 #include "../../entities/charentity.h"
 #include "../../entities/trustentity.h"
 #include "../../items/item_weapon.h"
@@ -99,12 +100,23 @@ bool CRangeState::Update(time_point tick)
     {
         auto* PTarget = m_PEntity->IsValidTarget(m_targid, TARGET_ENEMY, m_errorMsg);
 
+        auto PAmmo  = static_cast<CItemWeapon*>(m_PEntity->m_Weapons[SLOT_AMMO]);
+        auto PRange = static_cast<CItemWeapon*>(m_PEntity->m_Weapons[SLOT_RANGED]);
+
         if (tick > GetEntryTime())
         {
             if (m_initialDamage != m_PEntity->GetRangedWeaponDmg() || m_initialDelay != m_PEntity->GetRangedWeaponDelay(false))
             {
                 if (auto PChar = dynamic_cast<CCharEntity*>(m_PEntity))
                 {
+                    m_errorMsg = std::make_unique<CMessageBasicPacket>(PChar, PChar, 0, 0, MSGBASIC_NO_RANGED_WEAPON);
+                }
+            }
+            if (PAmmo != nullptr && PRange != nullptr)
+            {
+                if ((PAmmo->getSkillType() != PRange->getSkillType() || PAmmo->getSubSkillType() != PRange->getSubSkillType()) && PAmmo->getSkillType() != SKILL_THROWING)
+                {
+                    auto PChar = dynamic_cast<CCharEntity*>(m_PEntity);
                     m_errorMsg = std::make_unique<CMessageBasicPacket>(PChar, PChar, 0, 0, MSGBASIC_NO_RANGED_WEAPON);
                 }
             }
