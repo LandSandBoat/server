@@ -210,6 +210,8 @@ uint8 CBattlefieldHandler::LoadBattlefield(CCharEntity* PChar, const Battlefield
     PBattlefield->SetLevelCap(registration.levelCap);
     PBattlefield->SetMaxParticipants(registration.maxPlayers);
     PBattlefield->SetRuleMask(registration.rules);
+    PBattlefield->m_isMission = registration.isMission;
+    PBattlefield->m_showTimer = registration.showTimer;
 
     m_Battlefields.insert(std::make_pair(PBattlefield->GetArea(), PBattlefield));
 

@@ -1,9 +1,7 @@
 -----------------------------------
 -- Floodlight
---
 -- Description:  ~300 magic damage, Flash, Blind and Silence, ignores Utsusemi
 -- Type: Magical
---
 -----------------------------------
 require("scripts/globals/mobskills")
 require("scripts/globals/settings")
@@ -12,12 +10,7 @@ require("scripts/globals/status")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    local currentForm = mob:getLocalVar("form") -- Proto-Omega's script sets this.
-
-    if (mob:getAnimationSub() == 2 and currentForm == 1) then -- omega first bipedform
-        return 0
-    end
-    return 1
+    return 0
 end
 
 mobskillObject.onMobWeaponSkill = function(target, mob, skill)
@@ -26,6 +19,7 @@ mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local dmg = xi.mobskills.mobFinalAdjustments(info.dmg, mob, skill, target, xi.attackType.MAGICAL, xi.damageType.LIGHT, xi.mobskills.shadowBehavior.IGNORE_SHADOWS)
 
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.BLINDNESS, 15, 3, 120)
+    xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.FLASH, 200, 3, 20)
     xi.mobskills.mobStatusEffectMove(mob, target, xi.effect.SILENCE, 1, 0, 60)
 
     target:takeDamage(dmg, mob, xi.attackType.MAGICAL, xi.damageType.LIGHT)

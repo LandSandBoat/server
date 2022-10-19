@@ -106,7 +106,7 @@ entity.onMobTrigger = function(player, mob)
             if not player:hasKeyItem(xi.ki.COMPLETION_CERTIFICATE) then
                 -- Setting var to 3 disallows player from interacting with this quest any further
                 player:setCharVar("quest[2][88]Prog", 3)
-                player:giveKeyItem(player, xi.ki.COMPLETION_CERTIFICATE)
+                player:addKeyItem(player, xi.ki.COMPLETION_CERTIFICATE)
             end
         end
     end

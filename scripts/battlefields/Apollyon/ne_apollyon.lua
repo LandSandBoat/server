@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Appolyon
+-- Area: Apollyon
 -- Name: NE Apollyon
 -- !addkeyitem black_card
 -- !addkeyitem cosmo_cleanse
@@ -133,6 +133,7 @@ content.groups =
     -- Floor 1
     {
         mobs = { "Barometz_Boss", "Borametz_Boss", "Goobbue_Harvester" },
+        stationary = false,
         setup = function(battlefield, mobs)
             local bosses = utils.shuffle(mobs)
             bosses[1]:setLocalVar("item", 1)
@@ -143,13 +144,14 @@ content.groups =
             if mob:getLocalVar("item") == 1 then
                 xi.limbus.spawnFrom(mob, ID.NE_APOLLYON.npc.ITEM_CRATES[1])
             elseif mob:getLocalVar("vortex") == 1 then
-                xi.limbus.openDoor(battlefield, ID.npc.APOLLYON_NE_PORTAL[1])
+                content:openDoor(battlefield, 1)
             end
         end,
     },
 
     {
-        mobs = { "Barometz", "Borametz" },
+        mobs = { "Barometz", "Borametz", "Barometz_Boss", "Borametz_Boss" },
+        mobMods = { [xi.mobMod.ALLI_HATE] = 50 },
         stationary = false,
     },
 
@@ -169,14 +171,14 @@ content.groups =
         -- Bialozar and Thiazi x2
         mobs = { "Bialozar", "Thiazi" },
         randomDeath = function(battlefield, mob)
-            xi.limbus.openDoor(battlefield, ID.npc.APOLLYON_NE_PORTAL[2])
+            content:openDoor(battlefield, 2)
 
             -- Determine which mobs should be in floor three and add their group
             local sweepers =
             {
                 mobIds = {},
                 randomDeath = function(battlefieldInner, sweeperMob)
-                    xi.limbus.openDoor(battlefieldInner, ID.npc.APOLLYON_NE_PORTAL[3])
+                    content:openDoor(battlefieldInner, 3)
                 end,
             }
 
@@ -232,7 +234,7 @@ content.groups =
         mobs = { "Hyperion", "Okeanos", "Cronos" },
         stationary = false,
         randomDeath = function(battlefield, mob)
-            xi.limbus.openDoor(mob:getBattlefield(), ID.npc.APOLLYON_NE_PORTAL[4])
+            content:openDoor(mob:getBattlefield(), 4)
         end,
     },
 
@@ -274,6 +276,12 @@ content.groups =
 
     {
         mobs = { "Criosphinx", "Hieracosphinx" },
+        mods =
+        {
+            [xi.mod.GRAVITYRES] = 75,
+            [xi.mod.BINDRES] = 75,
+            [xi.mod.SLEEPRES] = 75,
+        },
     }
 }
 

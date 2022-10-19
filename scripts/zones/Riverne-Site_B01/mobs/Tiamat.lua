@@ -87,12 +87,6 @@ entity.onMobDisengage = function(mob)
     mob:setLocalVar("changeHP", 0)
 end
 
-entity.onCastStarting = function(mob, spell)
-    if spell:getID() == 176 then -- firaga iii
-        spell:castTime(spell:castTime()/2) -- really fast cast (2x)
-    end
-end
-
 entity.onAdditionalEffect = function(mob, target, damage)
     return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.ENFIRE, { power = math.random(45, 90), chance = 10 })
 end

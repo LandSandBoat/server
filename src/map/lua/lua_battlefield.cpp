@@ -437,36 +437,19 @@ void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleArenas)
         BattlefieldGroup group;
         for (CBaseEntity* entity : groupEntities)
         {
+            auto PMob = dynamic_cast<CMobEntity*>(entity);
+            XI_DEBUG_BREAK_IF(PMob == nullptr);
+
+            // Restore modifiers here since we save the modifiers below but don't want any previous modifiers persisting
+            PMob->restoreModifiers();
+            PMob->restoreMobModifiers();
+
             group.mobIds.push_back(entity->id);
         }
 
         group.deathCallback       = groupData.get<sol::function>("death");
         group.allDeathCallback    = groupData.get<sol::function>("allDeath");
         group.randomDeathCallback = groupData.get<sol::function>("randomDeath");
-
-        bool spawned = groupData.get_or("spawned", true);
-        if (spawned)
-        {
-            for (CBaseEntity* entity : groupEntities)
-            {
-                if (spawnedEntities.find(entity->id) == spawnedEntities.end())
-                {
-                    entity->Spawn();
-                    spawnedEntities.insert(entity->id);
-                }
-            }
-        }
-
-        auto setup = groupData.get<sol::function>("setup");
-        if (setup.valid())
-        {
-            auto mobs = lua.create_table();
-            for (CBaseEntity* entity : groupEntities)
-            {
-                mobs.add(CLuaBaseEntity(entity));
-            }
-            setup(this, mobs);
-        }
 
         bool isParty = groupData.get_or("isParty", false);
         if (isParty)
@@ -549,6 +532,30 @@ void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleArenas)
                     PMob->saveMobModifiers();
                 }
             }
+        }
+
+        bool spawned = groupData.get_or("spawned", true);
+        if (spawned)
+        {
+            for (CBaseEntity* entity : groupEntities)
+            {
+                if (spawnedEntities.find(entity->id) == spawnedEntities.end())
+                {
+                    entity->Spawn();
+                    spawnedEntities.insert(entity->id);
+                }
+            }
+        }
+
+        auto setup = groupData.get<sol::function>("setup");
+        if (setup.valid())
+        {
+            auto mobs = lua.create_table();
+            for (CBaseEntity* entity : groupEntities)
+            {
+                mobs.add(CLuaBaseEntity(entity));
+            }
+            setup(this, mobs);
         }
 
         m_PLuaBattlefield->addGroup(std::move(group));

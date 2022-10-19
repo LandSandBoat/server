@@ -844,7 +844,7 @@ xi.chocoboRaising.onEventUpdateVCSTrainer = function(player, csid, option)
             return
         end
 
-        debug(player, "Update:", string.format("%i", option))
+        debug(player, string.format("Update: %i", option))
 
         -- Setting the name for a chocobo: when the name is
         -- applied from the menu the name offsets (from the menu)

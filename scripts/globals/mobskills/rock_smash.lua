@@ -21,7 +21,7 @@ mobskillObject.onMobSkillCheck = function(target, mob, skill)
         else
             return 1
         end
-    elseif mob:AnimationSub() == 1 or mob:getMainJob() == xi.job.MNK or mob:getMainJob() == xi.job.PUP then
+    elseif mob:getAnimationSub() == 1 or mob:getMainJob() == xi.job.MNK or mob:getMainJob() == xi.job.PUP then
         return 0
     else
         return 1

@@ -425,6 +425,8 @@
         "RunElevator",
         "GetServerVariable",
         "SetServerVariable",
+        "GetVolatileServerVariable",
+        "SetVolatileServerVariable",
         "ClearVarFromAll",
         "SendEntityVisualPacket",
         "UpdateServerMessage",
