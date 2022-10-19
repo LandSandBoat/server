@@ -359,7 +359,8 @@ end
 --  - levelCap: Level cap imposed upon the battlefield. Defaults to 0 - no level cap. (optional)
 --  - area: Some battlefields has multiple areas (Burning Circles) while others have fixed areas (Apollyon). Set to have a fixed area. (optional)
 --  - entryNpc: The name of the NPC used for entering (required)
---  - exitNpc: The name of the NPC used for exiting
+--  - exitNpc: The name of the NPC used for exiting (optional)
+--  - exitNpcs: The names of the NPC used for exiting (optional)
 --  - allowSubjob: Determines if character subjobs are enabled or disabled upon entry. Defaults to true. (optional)
 --  - hasWipeGrace: Grants players a 3 minute grace period on a full wipe before ejecting them. Defaults to true. (optional)
 --  - canLoseExp: Determines if a character loses experience points upon death while inside the battlefield. Defaults to true. (optional)
@@ -382,7 +383,13 @@ function Battlefield:new(data)
     obj.entryNpc = data.entryNpc
 
     obj.area = data.area
-    obj.exitNpc = data.exitNpc
+
+    if data.exitNpcs then
+        obj.exitNpcs = data.exitNpcs
+    elseif data.exitNpc then
+        obj.exitNpcs = { data.exitNpc }
+    end
+
     obj.title = data.title
     obj.grantXP = data.grantXP
     obj.levelCap = data.levelCap or 0
@@ -417,7 +424,7 @@ function Battlefield:register()
     -- Only hookup the entry and exit listeners if there aren't any other battlefields already registered for that entrance
     local setupEvents = true
     local setupEntryNpc = true
-    local setupExitNpc = true
+    local setupExitNpcs = true
     if utils.hasKey(self.zoneId, xi.battlefield.contentsByZone) then
         local contents = xi.battlefield.contentsByZone[self.zoneId]
         for _, content in ipairs(contents) do
@@ -425,7 +432,7 @@ function Battlefield:register()
             if self.battlefieldId == content.battlefieldId and content.hasListeners then
                 setupEvents = true
                 setupEntryNpc = true
-                setupExitNpc = true
+                setupExitNpcs = true
                 break
             end
 
@@ -436,9 +443,17 @@ function Battlefield:register()
             if self.entryNpc == content.entryNpc then
                 setupEntryNpc = false
             end
-            if self.exitNpc == content.exitNpc then
-                setupExitNpc = false
+
+            -- If there is any overlap between the exit NPCs then we do not setup the exit NPCs
+            if self.exitNpcs then
+                for _, exitNpc in ipairs(self.exitNpcs) do
+                    if utils.contains(exitNpc, content.exitNpcs) then
+                        setupExitNpcs = false
+                        break
+                    end
+                end
             end
+
         end
     end
 
@@ -473,13 +488,15 @@ function Battlefield:register()
         })
     end
 
-    if setupExitNpc and self.exitNpc then
-        utils.append(zoneSection, {
-            [self.exitNpc] =
-            {
-                onTrigger = Battlefield.onExitTrigger,
-            }
-        })
+    if setupExitNpcs and self.exitNpcs then
+        for _, exitNpc in ipairs(self.exitNpcs) do
+            utils.append(zoneSection, {
+                [exitNpc] =
+                {
+                    onTrigger = Battlefield.onExitTrigger,
+                }
+            })
+        end
     end
 
     xi.battlefield.contents[self.battlefieldId] = self
@@ -1160,7 +1177,8 @@ function BattlefieldMission:checkSkipCutscene(player)
 end
 
 function BattlefieldMission:onBattlefieldWin(player, battlefield)
-    local current = player:getCurrentMission(self.missionArea)
+    local missionArea = self.missionArea or player:getNation()
+    local current = player:getCurrentMission(missionArea)
     if current == self.mission then
         player:setLocalVar("battlefieldWin", battlefield:getID())
     end
