@@ -20,9 +20,10 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 */
 #include <cstring>
 
-#include "../common/logging.h"
-#include "../common/mmo.h"
-#include "../common/sql.h"
+#include "common/logging.h"
+#include "common/mmo.h"
+#include "common/settings.h"
+#include "common/sql.h"
 
 #include <algorithm>
 
@@ -30,11 +31,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "search.h"
 
 CDataLoader::CDataLoader()
-: sql(std::make_unique<SqlConnection>(search_config.mysql_login.c_str(),
-                                      search_config.mysql_password.c_str(),
-                                      search_config.mysql_host.c_str(),
-                                      search_config.mysql_port,
-                                      search_config.mysql_database.c_str()))
+: sql(std::make_unique<SqlConnection>())
 {
 }
 
@@ -176,8 +173,8 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
     }
     if (sr.zoneid[0] > 0)
     {
-        string_t zoneList;
-        int      i = 1;
+        std::string zoneList;
+        int         i = 1;
         zoneList.append(std::to_string(static_cast<unsigned long long>(sr.zoneid[0])));
         while (i < 10 && sr.zoneid[i] != 0)
         {
@@ -223,7 +220,7 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
 
             memcpy(PPlayer->name, sql->GetData(2), 15);
 
-            PPlayer->id       = (uint32)sql->GetUIntData(0);
+            PPlayer->id       = sql->GetUIntData(0);
             PPlayer->zone     = (uint16)sql->GetIntData(3);
             PPlayer->prevzone = (uint16)sql->GetIntData(4);
             PPlayer->nation   = (uint8)sql->GetIntData(5);
@@ -239,8 +236,8 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
             PPlayer->mentor      = sql->GetUIntData(16) & NFLAG_MENTOR;
             PPlayer->seacom_type = (uint8)sql->GetUIntData(17);
 
-            uint32 partyid  = (uint32)sql->GetUIntData(1);
-            uint32 nameflag = (uint32)sql->GetUIntData(10);
+            uint32 partyid  = sql->GetUIntData(1);
+            uint32 nameflag = sql->GetUIntData(10);
 
             if (PPlayer->mentor)
             {
@@ -346,7 +343,7 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
             // filter by name
             if (sr.nameLen > 0)
             {
-                string_t dbname;
+                std::string dbname;
                 dbname.insert(0, (char*)PPlayer->name);
 
                 // can't be this name, too long
@@ -374,7 +371,7 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
             {
                 continue;
             }
-            if (visibleResults < 20)
+            if (visibleResults < 40)
             {
                 PlayersList.push_back(PPlayer);
                 visibleResults++;
@@ -385,7 +382,7 @@ std::list<SearchEntity*> CDataLoader::GetPlayersList(search_req sr, int* count)
         {
             *count = totalResults;
         }
-        ShowMessage("Found %i results, displaying %i. ", totalResults, visibleResults);
+        ShowInfo("Found %i results, displaying %i. ", totalResults, visibleResults);
     }
 
     return PlayersList;
@@ -411,7 +408,7 @@ std::list<SearchEntity*> CDataLoader::GetPartyList(uint16 PartyID, uint16 Allian
         "LEFT JOIN char_profile USING(charid) "
         "WHERE IF (allianceid <> 0, allianceid IN (SELECT allianceid FROM accounts_parties WHERE charid = %u) , partyid = %u) "
         "ORDER BY charname ASC "
-        "LIMIT 18";
+        "LIMIT 64";
 
     int32 ret = sql->Query(Query, (!AllianceID ? PartyID : AllianceID), (!PartyID ? AllianceID : PartyID));
 
@@ -424,7 +421,7 @@ std::list<SearchEntity*> CDataLoader::GetPartyList(uint16 PartyID, uint16 Allian
 
             memcpy(PPlayer->name, sql->GetData(2), 15);
 
-            PPlayer->id          = (uint32)sql->GetUIntData(0);
+            PPlayer->id          = sql->GetUIntData(0);
             PPlayer->zone        = (uint16)sql->GetIntData(3);
             PPlayer->nation      = (uint8)sql->GetIntData(4);
             PPlayer->mjob        = (uint8)sql->GetIntData(10);
@@ -437,7 +434,7 @@ std::list<SearchEntity*> CDataLoader::GetPartyList(uint16 PartyID, uint16 Allian
             PPlayer->mentor      = sql->GetUIntData(15) & NFLAG_MENTOR;
             PPlayer->seacom_type = (uint8)sql->GetUIntData(16);
 
-            uint32 nameflag = (uint32)sql->GetUIntData(9);
+            uint32 nameflag = sql->GetUIntData(9);
 
             if (PPlayer->mentor)
             {
@@ -513,7 +510,7 @@ std::list<SearchEntity*> CDataLoader::GetLinkshellList(uint32 LinkshellID)
 
             memcpy(PPlayer->name, sql->GetData(2), 15);
 
-            PPlayer->id             = (uint32)sql->GetUIntData(0);
+            PPlayer->id             = sql->GetUIntData(0);
             PPlayer->zone           = (uint16)sql->GetIntData(3);
             PPlayer->nation         = (uint8)sql->GetIntData(4);
             PPlayer->mjob           = (uint8)sql->GetIntData(10);
@@ -527,8 +524,8 @@ std::list<SearchEntity*> CDataLoader::GetLinkshellList(uint32 LinkshellID)
             PPlayer->linkshellrank1 = sql->GetIntData(16);
             PPlayer->linkshellrank2 = sql->GetIntData(17);
 
-            uint32 partyid  = (uint32)sql->GetUIntData(1);
-            uint32 nameflag = (uint32)sql->GetUIntData(9);
+            uint32 partyid  = sql->GetUIntData(1);
+            uint32 nameflag = sql->GetUIntData(9);
 
             if (partyid == PPlayer->id)
             {
@@ -577,44 +574,67 @@ std::string CDataLoader::GetSearchComment(uint32 playerId)
     return std::string((const char*)sql->GetData(0));
 }
 
-void CDataLoader::ExpireAHItems()
+struct ListingToExpire
 {
-    auto sql2 = std::make_unique<SqlConnection>(search_config.mysql_login.c_str(),
-                                                search_config.mysql_password.c_str(),
-                                                search_config.mysql_host.c_str(),
-                                                search_config.mysql_port,
-                                                search_config.mysql_database.c_str());
+    uint32      saleID     = 0;
+    uint32      itemID     = 0;
+    uint8       itemStack  = 0;
+    uint8       ahStack    = 0;
+    uint32      sellerID   = 0;
+    std::string sellerName = "?";
+};
+
+void CDataLoader::ExpireAHItems(uint16 expireAgeInDays)
+{
+    ShowInfo(fmt::format("Expiring auction house listings over {} days old", expireAgeInDays).c_str());
+
+    auto sql2 = std::make_unique<SqlConnection>();
+
+    std::vector<ListingToExpire> listingsToExpire;
 
     std::string qStr = "SELECT T0.id,T0.itemid,T1.stacksize, T0.stack, T0.seller FROM auction_house T0 INNER JOIN item_basic T1 ON \
-                            T0.itemid = T1.itemid WHERE datediff(now(),from_unixtime(date)) >=%u AND buyer_name IS NULL;";
+                            T0.itemid = T1.itemid WHERE datediff(now(),from_unixtime(date)) >= %u AND buyer_name IS NULL;";
 
-    int32 ret             = sql2->Query(qStr.c_str(), search_config.expire_days);
+    int32 ret             = sql2->Query(qStr.c_str(), expireAgeInDays);
     int64 expiredAuctions = sql2->NumRows();
-    if (ret != SQL_ERROR && sql2->NumRows() != 0)
+
+    if (ret != SQL_ERROR && expiredAuctions > 0)
     {
         while (sql2->NextRow() == SQL_SUCCESS)
         {
-            // iterate through the expired auctions and return them to the seller
-            uint32 saleID    = (uint32)sql2->GetUIntData(0);
-            uint32 itemID    = (uint32)sql2->GetUIntData(1);
+            // Collect the items we're going to expire
+            uint32 saleID    = sql2->GetUIntData(0);
+            uint32 itemID    = sql2->GetUIntData(1);
             uint8  itemStack = (uint8)sql2->GetUIntData(2);
             uint8  ahStack   = (uint8)sql2->GetUIntData(3);
-            uint32 seller    = (uint32)sql2->GetUIntData(4);
+            uint32 sellerID  = sql2->GetUIntData(4);
+            // NOTE: seller name left out for now, we'll populate this later
 
-            ret = sql2->Query(
-                "INSERT INTO delivery_box (charid, charname, box, itemid, itemsubid, quantity, senderid, sender) VALUES "
-                "(%u, (select charname from chars where charid=%u), 1, %u, 0, %u, 0, 'AH-Jeuno');",
-                seller, seller, itemID, ahStack == 1 ? itemStack : 1);
-            if (ret != SQL_ERROR && sql2->NumRows() != 0)
+            listingsToExpire.emplace_back(ListingToExpire{ saleID, itemID, itemStack, ahStack, sellerID, "?" });
+        }
+
+        for (auto listing : listingsToExpire)
+        {
+            // Populate name now
+            qStr = fmt::format("SELECT charname FROM chars WHERE charid={}", listing.sellerID);
+            ret  = sql2->Query(qStr.c_str());
+            if (ret != SQL_ERROR && sql2->NumRows() != 0 && sql2->NextRow() == SQL_SUCCESS)
+            {
+                listing.sellerName = sql2->GetStringData(0);
+            }
+
+            qStr = fmt::format("INSERT INTO delivery_box (charid, charname, box, itemid, itemsubid, quantity, senderid, sender) VALUES "
+                               "({}, '{}', 1, {}, 0, {}, 0, 'AH-Jeuno');",
+                               listing.sellerID, listing.sellerName, listing.itemID, listing.ahStack == 1 ? listing.itemStack : 1);
+
+            ret = sql2->Query(qStr.c_str());
+
+            if (ret != SQL_ERROR && sql2->AffectedRows() > 0)
             {
                 // delete the item from the auction house
-                sql2->Query("DELETE FROM auction_house WHERE id= %u", saleID);
+                sql2->Query("DELETE FROM auction_house WHERE id=%u", listing.saleID);
             }
         }
     }
-    else if (ret == SQL_ERROR)
-    {
-        //  ShowMessage(CL_RED"SQL ERROR: %s", SQL_ERROR);
-    }
-    ShowMessage("Sent %u expired auction house items back to sellers", expiredAuctions);
+    ShowInfo("Sent %u expired auction house listings back to sellers", expiredAuctions);
 }

@@ -3,14 +3,14 @@
 -- Scroll of Gold Capriccio
 -- Teaches the song Gold Capriccio
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(412)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(412)
 end
 
-return item_object
+return itemObject

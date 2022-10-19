@@ -11,7 +11,7 @@ local ID = require('scripts/zones/Batallia_Downs/IDs')
 --[[
 Debugging:
 Start: !setplayervar <name> [QUEST]FullSpeedAhead 1
-       !zone {Batallia Downs}
+       !zone { Batallia Downs }
 
 Reset Quest: !delquest 3 179
 
@@ -40,7 +40,8 @@ xi.full_speed_ahead.onEffectGain = function(player, effect)
     player:setLocalVar("FSA_Pep", 0)
     player:setLocalVar("FSA_Food", 0xFF)
     player:setLocalVar("FSA_FoodCount", 0)
-    player:addStatusEffect(xi.effect.MOUNTED, xi.mount.QUEST_RAPTOR, 3, 0)
+    -- NOTE: This used to be mount id 1: QUEST_RAPTOR, but it appears to have changed
+    player:addStatusEffect(xi.effect.MOUNTED, xi.mount.RAPTOR, 3, 0)
     player:setCharVar("[QUEST]FullSpeedAhead", 3)
 end
 
@@ -135,3 +136,5 @@ xi.full_speed_ahead.completeGame = function(player)
 end
 
 xi.fsa = xi.full_speed_ahead
+
+return xi.full_speed_ahead -- NOTE: This return does nothing apart from silence the hot-reloader

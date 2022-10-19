@@ -32,6 +32,8 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 #include "entities/charentity.h"
 
+#include "lua/luautils.h"
+
 #include "packets/message_standard.h"
 #include "packets/message_system.h"
 #include "packets/party_invite.h"
@@ -40,11 +42,12 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "items/item_linkshell.h"
 #include "utils/charutils.h"
 #include "utils/jailutils.h"
+#include "utils/serverutils.h"
 #include "utils/zoneutils.h"
 
 namespace message
 {
-    zmq::context_t zContext;
+    zmq::context_t                 zContext;
     std::unique_ptr<zmq::socket_t> zSocket;
 
     moodycamel::ConcurrentQueue<chat_message_t> outgoing_queue;
@@ -70,30 +73,6 @@ namespace message
         }
     }
 
-    const char* MsgServTypeToString(MSGSERVTYPE& type)
-    {
-        switch(type)
-        {
-            case MSG_LOGIN: return "MSG_LOGIN";
-            case MSG_CHAT_TELL: return "MSG_CHAT_TELL";
-            case MSG_CHAT_PARTY: return "MSG_CHAT_PARTY";
-            case MSG_CHAT_LINKSHELL: return "MSG_CHAT_LINKSHELL";
-            case MSG_CHAT_UNITY: return "MSG_CHAT_UNITY";
-            case MSG_CHAT_YELL: return "MSG_CHAT_YELL";
-            case MSG_CHAT_SERVMES: return "MSG_CHAT_SERVMES";
-            case MSG_PT_INVITE: return "MSG_PT_INVITE";
-            case MSG_PT_INV_RES: return "MSG_PT_INV_RES";
-            case MSG_PT_RELOAD: return "MSG_PT_RELOAD";
-            case MSG_PT_DISBAND: return "MSG_PT_DISBAND";
-            case MSG_DIRECT: return "MSG_DIRECT";
-            case MSG_LINKSHELL_RANK_CHANGE: return "MSG_LINKSHELL_RANK_CHANGE";
-            case MSG_LINKSHELL_REMOVE: return "MSG_LINKSHELL_REMOVE";
-            case MSG_SEND_TO_ZONE: return "MSG_SEND_TO_ZONE";
-            case MSG_SEND_TO_ENTITY: return "MSG_SEND_TO_ENTITY";
-        }
-        return "UNKNOWN";
-    }
-
     void parse(chat_message_t& message)
     {
         TracyZoneScoped;
@@ -102,9 +81,11 @@ namespace message
         auto& extra  = message.data;
         auto& packet = message.packet;
 
-        TracyZoneCString(MsgServTypeToString(type));
+        TracyZoneCString(msgTypeToStr(type));
 
-        ShowDebug("Message: Received message %d from message server", static_cast<uint8>(type));
+        ShowDebug("Message: Received message %s (%d) from message server",
+                  msgTypeToStr(type), static_cast<uint8>(type));
+
         switch (type)
         {
             case MSG_LOGIN:
@@ -132,7 +113,11 @@ namespace message
                     std::unique_ptr<CBasicPacket> newPacket = std::make_unique<CBasicPacket>();
                     memcpy(*newPacket, packet.data(), std::min<size_t>(packet.size(), PACKET_SIZE));
                     auto gm_sent = newPacket->ref<uint8>(0x05);
-                    if (PChar->nameflags.flags & FLAG_AWAY && !gm_sent)
+                    if (settings::get<bool>("map.BLOCK_TELL_TO_HIDDEN_GM") && PChar->m_isGMHidden && !gm_sent)
+                    {
+                        send(MSG_DIRECT, extra.data(), sizeof(uint32), new CMessageStandardPacket(PChar, 0, 0, MsgStd::TellNotReceivedOffline));
+                    }
+                    else if (PChar->nameflags.flags & FLAG_AWAY && !gm_sent)
                     {
                         send(MSG_DIRECT, extra.data(), sizeof(uint32), new CMessageStandardPacket(PChar, 0, 0, MsgStd::TellNotReceivedAway));
                     }
@@ -160,7 +145,7 @@ namespace message
                             {
                                 CBasicPacket* newPacket = new CBasicPacket();
                                 memcpy(*newPacket, packet.data(), std::min<size_t>(packet.size(), PACKET_SIZE));
-                                ((CParty*)i)->PushPacket(ref<uint32>((uint8*)extra.data(), 4), 0, newPacket);
+                                i->PushPacket(ref<uint32>((uint8*)extra.data(), 4), 0, newPacket);
                             }
                         }
                         else
@@ -187,8 +172,8 @@ namespace message
             }
             case MSG_CHAT_UNITY:
             {
-                uint32           leader = ref<uint32>((uint8*)extra.data(), 0);
-                CUnityChat* PUnityChat  = unitychat::GetUnityChat(leader);
+                uint32      leader     = ref<uint32>((uint8*)extra.data(), 0);
+                CUnityChat* PUnityChat = unitychat::GetUnityChat(leader);
                 if (PUnityChat)
                 {
                     CBasicPacket* newPacket = new CBasicPacket();
@@ -199,7 +184,8 @@ namespace message
             }
             case MSG_CHAT_YELL:
             {
-                zoneutils::ForEachZone([&packet, &extra](CZone* PZone) {
+                zoneutils::ForEachZone([&packet, &extra](CZone* PZone)
+                                       {
                     if (PZone->CanUseMisc(MISC_YELL))
                     {
                         PZone->ForEachChar([&packet, &extra](CCharEntity* PChar) {
@@ -212,19 +198,17 @@ namespace message
                                 PChar->pushPacket(newPacket);
                             }
                         });
-                    }
-                });
+                    } });
                 break;
             }
             case MSG_CHAT_SERVMES:
             {
-                zoneutils::ForEachZone([&packet](CZone* PZone) {
-                    PZone->ForEachChar([&packet](CCharEntity* PChar) {
+                zoneutils::ForEachZone([&packet](CZone* PZone)
+                                       { PZone->ForEachChar([&packet](CCharEntity* PChar)
+                                                            {
                         CBasicPacket* newPacket = new CBasicPacket();
                         memcpy(*newPacket, packet.data(), std::min<size_t>(packet.size(), PACKET_SIZE));
-                        PChar->pushPacket(newPacket);
-                    });
-                });
+                        PChar->pushPacket(newPacket); }); });
                 break;
             }
             case MSG_PT_INVITE:
@@ -292,7 +276,7 @@ namespace message
                         // both party leaders?
                         int ret = sql->Query("SELECT * FROM accounts_parties WHERE partyid <> 0 AND \
                                                     ((charid = %u OR charid = %u) AND partyflag & %u);",
-                                            inviterId, inviteeId, PARTY_LEADER);
+                                             inviterId, inviteeId, PARTY_LEADER);
                         if (ret != SQL_ERROR && sql->NumRows() == 2)
                         {
                             if (PInviter->PParty->m_PAlliance)
@@ -300,7 +284,7 @@ namespace message
                                 ret = sql->Query("SELECT * FROM accounts_parties WHERE allianceid <> 0 AND \
                                                         allianceid = (SELECT allianceid FROM accounts_parties where \
                                                         charid = %u) GROUP BY partyid;",
-                                                inviterId);
+                                                 inviterId);
                                 if (ret != SQL_ERROR && sql->NumRows() > 0 && sql->NumRows() < 3)
                                 {
                                     PInviter->PParty->m_PAlliance->addParty(inviteeId);
@@ -326,9 +310,7 @@ namespace message
                             }
                             if (PInviter->PParty && PInviter->PParty->GetLeader() == PInviter)
                             {
-                                ret = sql->Query("SELECT * FROM accounts_parties WHERE partyid <> 0 AND \
-                                                       															charid = %u;",
-                                                inviteeId);
+                                ret = sql->Query("SELECT * FROM accounts_parties WHERE partyid <> 0 AND charid = %u;", inviteeId);
                                 if (ret != SQL_ERROR && sql->NumRows() == 0)
                                 {
                                     PInviter->PParty->AddMember(inviteeId);
@@ -355,7 +337,8 @@ namespace message
                     CCharEntity* PChar = zoneutils::GetChar(ref<uint32>((uint8*)extra.data(), 0));
                     if (PChar)
                     {
-                        PChar->ForAlliance([](CBattleEntity* PMember) { ((CCharEntity*)PMember)->ReloadPartyInc(); });
+                        PChar->ForAlliance([](CBattleEntity* PMember)
+                                           { ((CCharEntity*)PMember)->ReloadPartyInc(); });
                     }
                 }
 
@@ -413,7 +396,7 @@ namespace message
                     if (targetLS && (kickerRank == LSTYPE_LINKSHELL || (kickerRank == LSTYPE_PEARLSACK && targetLS->GetLSType() == LSTYPE_LINKPEARL)))
                     {
                         PChar->PLinkshell1->RemoveMemberByName((int8*)extra.data() + 4,
-                                                               (targetLS->GetLSType() == LSTYPE_LINKSHELL ? LSTYPE_PEARLSACK : kickerRank));
+                                                               (targetLS->GetLSType() == (uint8)LSTYPE_LINKSHELL ? (uint8)LSTYPE_PEARLSACK : kickerRank));
                     }
                 }
                 else if (PChar && PChar->PLinkshell2 && PChar->PLinkshell2->getID() == ref<uint32>((uint8*)extra.data(), 24))
@@ -520,9 +503,9 @@ namespace message
                                 {
                                     while (sql->NextRow() == SQL_SUCCESS)
                                     {
-                                        X = (float)sql->GetFloatData(0);
-                                        Y = (float)sql->GetFloatData(1);
-                                        Z = (float)sql->GetFloatData(2);
+                                        X = sql->GetFloatData(0);
+                                        Y = sql->GetFloatData(1);
+                                        Z = sql->GetFloatData(2);
                                     }
                                 }
                             }
@@ -570,11 +553,54 @@ namespace message
                 }
                 break;
             }
+            case MSG_LUA_FUNCTION:
+            {
+                auto str    = std::string((const char*)extra.data() + 4);
+                auto result = lua.safe_script(str);
+                if (!result.valid())
+                {
+                    sol::error err = result;
+                    ShowError("MSG_LUA_FUNCTION: error: %s: %s", err.what(), str.c_str());
+                }
+            }
+            break;
+            case MSG_CHARVAR_UPDATE:
+            {
+                uint8* data   = (uint8*)extra.data();
+                uint32 charId = ref<uint32>(data, 0);
+                int32  value  = ref<int32>(data, 4);
+
+                ShowDebug(fmt::format("Received message to update var for {}", charId));
+
+                uint8 varNameSize = ref<uint8>(data, 8);
+                auto  varName     = std::string(data + 9, data + 9 + varNameSize);
+
+                if (auto player = zoneutils::GetChar(charId))
+                {
+                    ShowDebug(fmt::format("Updating charvar for {} ({}): {} = {}", player->GetName(), charId, varName, value));
+                    player->updateCharVarCache(varName, value);
+                }
+                break;
+            }
             default:
             {
                 ShowWarning("Message: unhandled message type %d", type);
             }
         }
+    }
+
+    void send_charvar_update(uint32 charId, std::string const& varName, uint32 value)
+    {
+        uint32 size = sizeof(uint32) + sizeof(int32) + sizeof(uint8) + static_cast<uint32>(varName.size());
+        char*  buf  = new char[size];
+        memset(&buf[0], 0, size);
+
+        ref<uint32>(buf, 0) = charId;
+        ref<int32>(buf, 4)  = value;
+        ref<uint8>(buf, 8)  = (uint8)varName.size();
+        memcpy(buf + 9, varName.c_str(), varName.size());
+
+        message::send(MSG_CHARVAR_UPDATE, buf, size, nullptr);
     }
 
     void handle_incoming()
@@ -590,9 +616,8 @@ namespace message
 
     void listen()
     {
-        TracyZoneScoped;
-
-        while (true)
+        TracySetThreadName("ZMQ Thread");
+        while (gRunFlag)
         {
             if (!zSocket)
             {
@@ -604,15 +629,17 @@ namespace message
                 chat_message_t message;
                 if (!zSocket->recv(message.type, zmq::recv_flags::none))
                 {
+                    TracyZoneScoped;
                     send_queue();
                     continue;
                 }
 
+                TracyZoneScoped;
                 int more = zSocket->get(zmq::sockopt::rcvmore);
                 if (more)
                 {
                     std::ignore = zSocket->recv(message.data);
-                    more = zSocket->get(zmq::sockopt::rcvmore);
+                    more        = zSocket->get(zmq::sockopt::rcvmore);
                     if (more)
                     {
                         std::ignore = zSocket->recv(message.packet);
@@ -633,6 +660,11 @@ namespace message
                 continue;
             }
         }
+    }
+
+    void init()
+    {
+        init(settings::get<std::string>("network.ZMQ_IP").c_str(), settings::get<uint16>("network.ZMQ_PORT"));
     }
 
     void init(const char* chatIp, uint16 chatPort)
@@ -661,7 +693,7 @@ namespace message
         zSocket->set(zmq::sockopt::routing_id, zmq::const_buffer(&ipp, sizeof(ipp)));
         zSocket->set(zmq::sockopt::rcvtimeo, 500);
 
-        string_t server = "tcp://";
+        std::string server = "tcp://";
         server.append(chatIp);
         server.append(":");
         server.append(std::to_string(chatPort));
@@ -672,7 +704,7 @@ namespace message
         }
         catch (zmq::error_t& err)
         {
-            ShowFatalError("Message: Unable to connect chat socket: %s", err.what());
+            ShowCritical("Message: Unable to connect chat socket: %s", err.what());
         }
     }
 
@@ -705,7 +737,8 @@ namespace message
 
         if (packet)
         {
-            msg.packet = zmq::message_t(*packet, packet->getSize(), [](void* data, void* hint) { delete[](uint8*) data; });
+            msg.packet = zmq::message_t(*packet, packet->getSize(), [](void* data, void* hint)
+                                        { delete[](uint8*) data; });
         }
         else
         {
@@ -713,5 +746,35 @@ namespace message
         }
 
         outgoing_queue.enqueue(msg);
+    }
+
+    void send(uint16 zone, std::string const& luaFunc)
+    {
+        TracyZoneScoped;
+
+        std::vector<uint8> packetData(4 + luaFunc.size() + 1);
+        ref<uint16>(packetData.data(), 2) = zone;
+
+        std::memcpy(packetData.data() + 4, luaFunc.data(), luaFunc.size());
+
+        packetData[packetData.size() - 1] = '\0';
+
+        message::send(MSG_LUA_FUNCTION, packetData.data(), packetData.size());
+    }
+
+    void send(uint32 playerId, CBasicPacket* packet)
+    {
+        TracyZoneScoped;
+
+        std::array<uint8, 4> packetData{};
+        ref<uint32>(packetData.data(), 0) = playerId;
+        message::send(MSG_DIRECT, packetData.data(), packetData.size(), packet);
+    }
+
+    void send(std::string const& playerName, CBasicPacket* packet)
+    {
+        TracyZoneScoped;
+
+        send(charutils::getCharIdFromName(playerName), packet);
     }
 }; // namespace message

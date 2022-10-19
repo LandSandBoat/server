@@ -22,8 +22,6 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _CINSTANCELOADER_H
 #define _CINSTANCELOADER_H
 
-#include <future>
-
 #include "common/cbasetypes.h"
 #include "common/socket.h"
 
@@ -38,10 +36,11 @@ public:
     ~CInstanceLoader();
 
     CInstance* LoadInstance();
+
 private:
-    CInstance*              instance;
-    CZone*                  zone;
-    CCharEntity*            requester;
+    CInstance*   instance;
+    CZone*       zone;
+    CCharEntity* requester;
 };
 
 #endif

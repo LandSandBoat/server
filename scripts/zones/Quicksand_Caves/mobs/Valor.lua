@@ -3,7 +3,7 @@
 --  Mob: Valor
 -- Coming of Age (San dOria Mission 8-1)
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
@@ -18,7 +18,7 @@ entity.onMobSpawn = function(mob)
     mob:addMod(xi.mod.LULLABYRES, 50)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

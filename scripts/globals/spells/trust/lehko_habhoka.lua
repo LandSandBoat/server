@@ -3,17 +3,17 @@
 -----------------------------------
 require("scripts/globals/trust")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return xi.trust.canCast(caster, spell)
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     return xi.trust.spawn(caster, spell)
 end
 
-spell_object.onMobSpawn = function(mob)
+spellObject.onMobSpawn = function(mob)
     xi.trust.teamworkMessage(mob, {
         [xi.magic.spell.ROMAA_MIHGO] = xi.trust.message_offset.TEAMWORK_1,
         [xi.magic.spell.ROBEL_AKBEL] = xi.trust.message_offset.TEAMWORK_2,
@@ -36,22 +36,19 @@ spell_object.onMobSpawn = function(mob)
         end
     end)
 
-    -- TODO: Maximum MP has been increased.
-    -- In lieu of being able to boost his MP, we can
-    -- load him up with CONSERVE_MP
-    mob:addMod(xi.mod.CONSERVE_MP, 10)
-
+    -- MPP 150 migrated to mob_pool_mods
+    -- https://forum.square-enix.com/ffxi/threads/49425-Dec-10-2015-%28JST%29-Version-Update?p=567979&viewfull=1#post567979
     -- The attribute "Enhanced Magic Accuracy" has been added.
     local power = mob:getMainLvl() / 10
     mob:addMod(xi.mod.MACC, power)
 end
 
-spell_object.onMobDespawn = function(mob)
+spellObject.onMobDespawn = function(mob)
     xi.trust.message(mob, xi.trust.message_offset.DESPAWN)
 end
 
-spell_object.onMobDeath = function(mob)
+spellObject.onMobDeath = function(mob)
     xi.trust.message(mob, xi.trust.message_offset.DEATH)
 end
 
-return spell_object
+return spellObject

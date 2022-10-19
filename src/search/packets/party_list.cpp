@@ -19,9 +19,9 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 ===========================================================================
 */
 
-#include "../../common/logging.h"
-#include "../../common/socket.h"
-#include "../../common/utils.h"
+#include "common/logging.h"
+#include "common/socket.h"
+#include "common/utils.h"
 
 #include "../data_loader.h"
 #include "search_list.h"
@@ -32,16 +32,14 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "party_list.h"
 
 CPartyListPacket::CPartyListPacket(uint32 partyid, uint32 Total)
+: m_offset(192)
 {
-    m_partyid = partyid;
-    m_offset  = 192;
-
     memset(m_data, 0, sizeof(m_data));
 
     ref<uint8>(m_data, (0x0A)) = 0x80;
     ref<uint8>(m_data, (0x0B)) = 0x82; // packet type
 
-    // ref<uint8>(m_data,(0x0E)) = 0x00;                       // Number of characters per packet.
+    // ref<uint8>(m_data,(0x0E)) = 0x00; // Number of characters per packet.
     ref<uint8>(m_data, (0x0E)) = Total;
 }
 
@@ -143,7 +141,7 @@ uint8* CPartyListPacket::GetData()
     fileBufferHere.close();
 
     uint8* packet = (uint8*)m_content;
-    ShowMessage("done work ");
+    ShowInfo("done work ");
 
     memcpy(m_data, packet, 588);*/
 

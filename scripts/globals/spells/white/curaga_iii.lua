@@ -2,18 +2,18 @@
 -- Spell: Curaga III
 -- Restores HP of all party members within area of effect.
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local minCure = 270
 
     local divisor = 0.6666
@@ -31,8 +31,8 @@ spell_object.onSpellCast = function(caster, target, spell)
 
     final = final + (final * (target:getMod(xi.mod.CURE_POTENCY_RCVD)/100))
 
-    --Applying server mods....
-    final = final * xi.settings.CURE_POWER
+    --Applying server mods
+    final = final * xi.settings.main.CURE_POWER
 
     local diff = (target:getMaxHP() - target:getHP())
     if (final > diff) then
@@ -53,4 +53,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return final
 end
 
-return spell_object
+return spellObject

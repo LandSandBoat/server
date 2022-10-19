@@ -22,7 +22,7 @@
 #ifndef _CCHATMESSAGEPACKET_H
 #define _CCHATMESSAGEPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 
@@ -70,7 +70,7 @@ class CChatMessagePacket : public CBasicPacket
 {
 public:
     static const uint16 id{ 0x17 };
-    CChatMessagePacket(CCharEntity* PChar, CHAT_MESSAGE_TYPE MessageType, const std::string& message, const std::string& sender = std::string());
+    CChatMessagePacket(CCharEntity* PChar, CHAT_MESSAGE_TYPE MessageType, std::string const& message, std::string const& sender = std::string());
 };
 
 #endif

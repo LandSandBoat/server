@@ -46,7 +46,7 @@ entity.onMobRoam = function(mob)
             m:showText(mob, ID.text.TEST_YOUR_BLADES)
             m:timer(2000, function(mAnimation)
                 mAnimation:hideName(false)
-                mAnimation:untargetable(false)
+                mAnimation:setUntargetable(false)
             end)
         end)
         mob:setLocalVar("jump", 1)
@@ -56,7 +56,7 @@ end
 entity.onMobDisengage = function(mob, target)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

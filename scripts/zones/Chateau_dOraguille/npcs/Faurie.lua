@@ -3,7 +3,7 @@
 --  NPC: Faurie
 -- Chat Text and Zone Exit Menu
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 

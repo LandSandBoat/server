@@ -7,7 +7,7 @@
 local ID = require("scripts/zones/Bastok_Mines/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 
@@ -19,7 +19,7 @@ entity.onTrigger = function(player, npc)
 
     --DARK KNIGHT QUEST
     if
-        player:getMainLvl() >= xi.settings.ADVANCED_JOB_LEVEL and
+        player:getMainLvl() >= xi.settings.main.ADVANCED_JOB_LEVEL and
         bladeDarkness == QUEST_AVAILABLE
     then
         player:startEvent(99)

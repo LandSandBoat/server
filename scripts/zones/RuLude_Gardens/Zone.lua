@@ -1,22 +1,20 @@
 -----------------------------------
 -- Zone: RuLude_Gardens (243)
 -----------------------------------
-local ID = require("scripts/zones/RuLude_Gardens/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/keyitems")
-require("scripts/globals/missions")
-require("scripts/globals/npc_util")
-require("scripts/globals/quests")
-require("scripts/globals/rhapsodies")
-require("scripts/globals/items")
+local ID = require('scripts/zones/RuLude_Gardens/IDs')
+require('scripts/globals/conquest')
+require('scripts/globals/keyitems')
+require('scripts/globals/missions')
+require('scripts/globals/npc_util')
+require('scripts/globals/quests')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
     zone:registerRegion(1, -16, 2, 32, 16, 4, 86) -- Palace entrance. Ends at back exit. Needs retail confirmaton for the back entrance.
 end
 
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
     -- MOG HOUSE EXIT
@@ -28,20 +26,15 @@ zone_object.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zone_object.onConquestUpdate = function(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zone_object.onRegionEnter = function(player, region)
+zoneObject.onRegionEnter = function(player, region)
     local regionID = region:GetRegionID()
 
     if regionID == 1 then
-        if
-            player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.FLAMES_IN_THE_DARKNESS and
-            player:getCharVar("PromathiaStatus") == 2
-        then
-            player:startEvent(10051)
-        elseif player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN then
+        if player:getCurrentMission(xi.mission.log_id.COP) == xi.mission.id.cop.DAWN then
             if
                 player:getCharVar("COP_3-taru_story") == 2 and
                 player:getCharVar("COP_shikarees_story") == 1 and
@@ -85,16 +78,14 @@ zone_object.onRegionEnter = function(player, region)
     end
 end
 
-zone_object.onRegionLeave = function(player, region)
+zoneObject.onRegionLeave = function(player, region)
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
 end
 
-zone_object.onEventFinish = function(player, csid, option)
-    if csid == 10051 then
-        player:setCharVar("PromathiaStatus", 3)
-    elseif csid == 122 then
+zoneObject.onEventFinish = function(player, csid, option)
+    if csid == 122 then
         player:setCharVar("PromathiaStatus", 4)
         player:setCharVar("COP_3-taru_story", 0)
         player:setCharVar("COP_shikarees_story", 0)
@@ -126,4 +117,4 @@ zone_object.onEventFinish = function(player, csid, option)
     end
 end
 
-return zone_object
+return zoneObject

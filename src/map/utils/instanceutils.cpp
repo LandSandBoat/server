@@ -30,7 +30,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 namespace instanceutils
 {
     std::unordered_map<uint16, InstanceData_t> InstanceData;
-    std::queue<std::pair<uint32, uint16>> LoadQueue; // player id, instance id
+    std::queue<std::pair<uint32, uint16>>      LoadQueue; // player id, instance id
 
     void LoadInstanceList()
     {
@@ -70,9 +70,9 @@ namespace instanceutils
                 data.instance_zone = static_cast<uint16>(sql->GetIntData(2));
                 data.entrance_zone = static_cast<uint16>(sql->GetIntData(3));
                 data.time_limit    = static_cast<uint16>(sql->GetIntData(4));
-                data.start_x       = static_cast<float>(sql->GetFloatData(5));
-                data.start_y       = static_cast<float>(sql->GetFloatData(6));
-                data.start_z       = static_cast<float>(sql->GetFloatData(7));
+                data.start_x       = sql->GetFloatData(5);
+                data.start_y       = sql->GetFloatData(6);
+                data.start_z       = sql->GetFloatData(7);
                 data.start_rot     = static_cast<uint16>(sql->GetIntData(8));
                 data.music_day     = static_cast<uint16>(sql->GetIntData(9));
                 data.music_night   = static_cast<uint16>(sql->GetIntData(10));

@@ -23,7 +23,6 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    -- printf("OPTION:", option)
 end
 
 return entity

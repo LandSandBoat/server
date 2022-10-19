@@ -41,8 +41,8 @@ entity.onTrigger = function(player, npc)
     local guildMember       = xi.crafting.isGuildMember(player, 8)
     local rankCap           = xi.crafting.getCraftSkillCap(player, xi.skill.SMITHING)
     local expertQuestStatus = 0
-    local Rank              = player:getSkillRank(xi.skill.SMITHING)
-    local realSkill         = (craftSkill - Rank) / 32
+    local rank              = player:getSkillRank(xi.skill.SMITHING)
+    local realSkill         = (craftSkill - rank) / 32
 
     if guildMember == 1 then
         guildMember = 150995375
@@ -60,19 +60,7 @@ entity.onTrigger = function(player, npc)
         end
     end
 
-    if expertQuestStatus == 550 then
-        --[[
-        Feeding the proper parameter currently hangs the client in cutscene. This may
-        possibly be due to an unimplemented packet or function (display recipe?) Work
-        around to present dialog to player to let them know the trade is ready to be
-        received by triggering with lower rank up parameters.
-        --]]
-        player:showText(npc, 7138)
-        player:showText(npc, 7140)
-        player:startEvent(626, testItem, realSkill, 44, guildMember, 0, 0, 0, 0)
-    else
-        player:startEvent(626, testItem, realSkill, rankCap, guildMember, expertQuestStatus, 0, 0, 0)
-    end
+    player:startEvent(626, testItem, realSkill, rankCap, guildMember, expertQuestStatus, 0, 0, 0)
 end
 
 -- 626  627  16  0  73  74

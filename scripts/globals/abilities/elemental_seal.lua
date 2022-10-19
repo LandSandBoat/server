@@ -5,17 +5,16 @@
 -- Recast Time: 10:00
 -- Duration: 1 Spell or 60 seconds, whichever occurs first.
 -----------------------------------
-require("scripts/settings/main")
-require("scripts/globals/status")
+require("scripts/globals/job_utils/black_mage")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-ability_object.onUseAbility = function(player, target, ability)
-    player:addStatusEffect(xi.effect.ELEMENTAL_SEAL, 1, 0, 60)
+abilityObject.onUseAbility = function(player, target, ability)
+    xi.job_utils.black_mage.useElementalSeal(player, target, ability)
 end
 
-return ability_object
+return abilityObject

@@ -13,14 +13,14 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local ToBee = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE)
-    local ToBeeOrNotStatus = player:getCharVar("ToBeeOrNot_var")
+    local toBee = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.TO_BEE_OR_NOT_TO_BEE)
+    local toBeeOrNotStatus = player:getCharVar("ToBeeOrNot_var")
 
-    if (ToBeeOrNotStatus == 10) then
+    if (toBeeOrNotStatus == 10) then
         player:startEvent(66) -- During Too Bee quest before honey given to Zayhi: "are you alright sir"
-    elseif (ToBee == QUEST_ACCEPTED and ToBeeOrNotStatus > 0) then
+    elseif (toBee == QUEST_ACCEPTED and toBeeOrNotStatus > 0) then
         player:startEvent(72) -- During Too Bee quest after some honey was given to Zayhi: "hey did that honey help you just now?"
-    elseif (ToBee == QUEST_COMPLETED and player:needToZone()) then
+    elseif (toBee == QUEST_COMPLETED and player:needToZone()) then
         player:startEvent(77) -- After Too Bee quest but before zone: "well I guess a tooth ache is to be expected"
     else
         player:startEvent(298) -- Normal conversation

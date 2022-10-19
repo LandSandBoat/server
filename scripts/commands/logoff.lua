@@ -11,7 +11,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!logoff {player}")
+    player:PrintToPlayer("!logoff (player)")
 end
 
 function onTrigger(player, target)

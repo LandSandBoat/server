@@ -51,18 +51,18 @@ enum SPECIALFLAG
 
 enum ROAMFLAG : uint16
 {
-    ROAMFLAG_NONE    = 0x00,
-    ROAMFLAG_NONE0   = 0x01,  //
-    ROAMFLAG_NONE1   = 0x02,  //
-    ROAMFLAG_NONE2   = 0x04,  //
-    ROAMFLAG_NONE3   = 0x08,  //
-    ROAMFLAG_NONE4   = 0x10,  //
-    ROAMFLAG_NONE5   = 0x20,  //
-    ROAMFLAG_WORM    = 0x40,  // pop up and down when moving
-    ROAMFLAG_AMBUSH  = 0x80,  // stays hidden until someone comes close (antlion)
-    ROAMFLAG_EVENT   = 0x100, // calls lua method for roaming logic
-    ROAMFLAG_IGNORE  = 0x200, // ignore all hate, except linking hate
-    ROAMFLAG_STEALTH = 0x400  // stays name hidden and untargetable until someone comes close (chigoe)
+    ROAMFLAG_NONE     = 0x00,
+    ROAMFLAG_NONE0    = 0x01,  //
+    ROAMFLAG_NONE1    = 0x02,  //
+    ROAMFLAG_NONE2    = 0x04,  //
+    ROAMFLAG_NONE3    = 0x08,  //
+    ROAMFLAG_NONE4    = 0x10,  //
+    ROAMFLAG_NONE5    = 0x20,  //
+    ROAMFLAG_WORM     = 0x40,  // pop up and down when moving
+    ROAMFLAG_AMBUSH   = 0x80,  // stays hidden until someone comes close (antlion)
+    ROAMFLAG_SCRIPTED = 0x100, // calls lua method for roaming logic
+    ROAMFLAG_IGNORE   = 0x200, // ignore all hate, except linking hate
+    ROAMFLAG_STEALTH  = 0x400  // stays name hidden and untargetable until someone comes close (chigoe)
 };
 
 enum MOBTYPE
@@ -126,9 +126,10 @@ public:
     bool       CanDeaggro() const;
     time_point GetDespawnTime();
     void       SetDespawnTime(duration _duration);
-    uint32     GetRandomGil(); // returns a random amount of gil
-    bool       CanRoamHome();  // is it possible for me to walk back?
-    bool       CanRoam();      // check if mob can walk around
+    uint32     GetRandomGil();   // returns a random amount of gil
+    bool       CanRoamHome();    // is it possible for me to walk back?
+    bool       CanRoam();        // check if mob can walk around
+    void       TapDeaggroTime(); // call CMobController->TapDeaggroTime if PAI->GetController() is a CMobController, otherwise do nothing.
 
     bool CanLink(position_t* pos, int16 superLink = 0);
 
@@ -138,19 +139,19 @@ public:
 
     void  setMobMod(uint16 type, int16 value);
     int16 getMobMod(uint16 type);
-    void  addMobMod(uint16 type, int16 value);     // add
+    void  addMobMod(uint16 type, int16 value);
     void  defaultMobMod(uint16 type, int16 value); // set value if value has not been already set
     void  resetMobMod(uint16 type);                // resets mob mod to original value
     int32 getBigMobMod(uint16 type);               // multiplies mod by 1000
     void  saveMobModifiers();                      // save current state of modifiers
     void  restoreMobModifiers();                   // restore to saved state
 
-    void CallForHelp(bool call);
-    bool CalledForHelp() const;
+    void SetCallForHelpFlag(bool call);
+    bool GetCallForHelpFlag() const;
     void HideHP(bool hide);
     bool IsHPHidden() const;
-    void Untargetable(bool untargetable);
-    bool IsUntargetable() const;
+    void SetUntargetable(bool untargetable);
+    bool GetUntargetable() const override;
 
     void         PostTick() override;
     float        GetRoamDistance();
@@ -239,20 +240,29 @@ public:
     int16  m_THLvl;       // Highest Level of Treasure Hunter that apply to drops
     bool   m_ItemStolen;  // if true, mob has already been robbed. reset on respawn. also used for thf maat fight
     uint16 m_Family;
+    uint16 m_SuperFamily;
     uint16 m_MobSkillList; // Mob skill list defined from mob_pools
     uint32 m_Pool;         // pool the mob came from
 
     CMobSpellList*           m_SpellListContainer; // The spells list container for this mob
     std::map<uint16, uint16> m_UsedSkillIds;       // mob skill ids used (key) along with mob level (value)
 
-    uint32   m_flags;       // includes the CFH flag and whether the HP bar should be shown or not (e.g. Yilgeban doesnt)
-    uint8    m_name_prefix; // The ding bats VS Ding bats
+    uint32 m_flags;       // includes the CFH flag and whether the HP bar should be shown or not (e.g. Yilgeban doesnt)
+    uint8  m_name_prefix; // The ding bats VS Ding bats
+
+    uint8 m_unk0; // possibly campaign related (entity 0x24)
+    uint8 m_unk1; // (entity_update 0x25)
+    uint8 m_unk2; // (entity_update 0x26)
+
+    bool m_CallForHelpBlocked;
 
     CEnmityContainer* PEnmityContainer; // система ненависти монстров
 
-    CMobSpellContainer* SpellContainer;   // retrieves spells for the mob
+    CMobSpellContainer* SpellContainer; // retrieves spells for the mob
 
     bool m_IsClaimable;
+
+    bool m_bReleaseTargIDOnDeath = false;
 
     static constexpr float sound_range{ 8.f };
     static constexpr float sight_range{ 15.f };

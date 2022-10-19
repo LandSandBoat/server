@@ -171,6 +171,11 @@ bool CSpell::isNa()
     return (static_cast<uint16>(m_ID) >= 14 && static_cast<uint16>(m_ID) <= 20) || m_ID == SpellID::Erase;
 }
 
+bool CSpell::isRaise()
+{
+    return (static_cast<uint16>(m_ID) >= 12 && static_cast<uint16>(m_ID) <= 13) || m_ID == SpellID::Raise_III || m_ID == SpellID::Arise;
+}
+
 bool CSpell::isSevere()
 {
     return m_ID == SpellID::Death || m_ID == SpellID::Impact || m_ID == SpellID::Meteor || m_ID == SpellID::Meteor_II || m_ID == SpellID::Comet;
@@ -286,6 +291,8 @@ uint16 CSpell::getAoEMessage() const
 {
     switch (m_message)
     {
+        case 7: // recovers HP
+            return 367;
         case 93: // vanishes
             return 273;
         case 85: // resists
@@ -434,7 +441,6 @@ namespace spell
         {
             while (sql->NextRow() == SQL_SUCCESS)
             {
-                char*   contentTag;
                 CSpell* PSpell = nullptr;
                 SpellID id     = (SpellID)sql->GetUIntData(0);
 
@@ -469,7 +475,7 @@ namespace spell
                 PSpell->setVE(sql->GetIntData(20));
                 PSpell->setRequirements(sql->GetIntData(21));
 
-                sql->GetData(22, &contentTag, nullptr);
+                char* contentTag = (char*)sql->GetData(22);
                 PSpell->setContentTag((int8*)contentTag);
 
                 PSpell->setRange(static_cast<float>(sql->GetIntData(23)) / 10);
@@ -541,7 +547,7 @@ namespace spell
 
         const char* blueQuery = "SELECT blue_spell_list.spellid, blue_spell_list.mob_skill_id, blue_spell_list.set_points, \
                                 blue_spell_list.trait_category, blue_spell_list.trait_category_weight, blue_spell_list.primary_sc, \
-                                blue_spell_list.secondary_sc, spell_list.content_tag \
+                                blue_spell_list.secondary_sc, blue_spell_list.tertiary_sc, spell_list.content_tag \
                              FROM blue_spell_list JOIN spell_list on blue_spell_list.spellid = spell_list.spellid;";
 
         ret = sql->Query(blueQuery);
@@ -550,9 +556,7 @@ namespace spell
         {
             while (sql->NextRow() == SQL_SUCCESS)
             {
-                char* contentTag;
-                sql->GetData(7, &contentTag, nullptr);
-
+                char* contentTag = (char*)sql->GetData(8);
                 if (!luautils::IsContentEnabled(contentTag))
                 {
                     continue;
@@ -573,6 +577,7 @@ namespace spell
                 ((CBlueSpell*)PSpellList[spellId])->setTraitWeight(sql->GetIntData(4));
                 ((CBlueSpell*)PSpellList[spellId])->setPrimarySkillchain(sql->GetIntData(5));
                 ((CBlueSpell*)PSpellList[spellId])->setSecondarySkillchain(sql->GetIntData(6));
+                ((CBlueSpell*)PSpellList[spellId])->setTertiarySkillchain(sql->GetIntData(7));
                 PMobSkillToBlueSpell.insert(std::make_pair(sql->GetIntData(1), spellId));
             }
         }
@@ -600,9 +605,7 @@ namespace spell
         {
             while (sql->NextRow() == SQL_SUCCESS)
             {
-                char* contentTag;
-                sql->GetData(2, &contentTag, nullptr);
-
+                char* contentTag = (char*)sql->GetData(2);
                 if (!luautils::IsContentEnabled(contentTag))
                 {
                     continue;
@@ -671,7 +674,7 @@ namespace spell
                 PCaster->objtype == TYPE_TRUST)
             {
                 // cant cast cause im hidden or untargetable
-                if (PCaster->IsNameHidden() || static_cast<CMobEntity*>(PCaster)->IsUntargetable())
+                if (PCaster->IsNameHidden() || static_cast<CMobEntity*>(PCaster)->GetUntargetable())
                 {
                     return false;
                 }
@@ -686,9 +689,16 @@ namespace spell
                 return true;
             }
 
-            if (PCaster->objtype == TYPE_PC && spell->getSpellGroup() == SPELLGROUP_TRUST)
+            if (PCaster->objtype == TYPE_PC)
             {
-                return true; // every PC can use trusts
+                if (spell->getSpellGroup() == SPELLGROUP_TRUST)
+                {
+                    return true; // every PC can use trusts
+                }
+                else if (luautils::OnCanUseSpell(PCaster, spell))
+                {
+                    return true;
+                }
             }
 
             if (PCaster->GetMLevel() >= JobMLVL)

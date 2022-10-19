@@ -5,18 +5,16 @@
 -- Recast Time: 5:00
 -- Duration: 120 minutes
 -----------------------------------
-require("scripts/settings/main")
-require("scripts/globals/status")
+require("scripts/globals/job_utils/red_mage")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-ability_object.onUseAbility = function(player, target, ability)
-    player:delStatusEffect(xi.effect.COMPOSURE)
-    player:addStatusEffect(xi.effect.COMPOSURE, 1, 0, 7200)
+abilityObject.onUseAbility = function(player, target, ability)
+    xi.job_utils.red_mage.useComposure(player, target, ability)
 end
 
-return ability_object
+return abilityObject

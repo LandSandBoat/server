@@ -11,7 +11,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!goto <player> {forceZone}")
+    player:PrintToPlayer("!goto <player> (forceZone)")
 end
 
 function onTrigger(player, target, forceZone)

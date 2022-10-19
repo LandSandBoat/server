@@ -9,12 +9,12 @@ require("scripts/quests/tutorial")
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     xi.tutorial.onMobDeath(player)
 end
 
 entity.onMobDespawn = function(mob)
-    if not xi.mob.phOnDespawn(mob, ID.mob.BLOODTEAR_PH, 10, math.random(75600, 86400)) then -- 21-24 hours
+    if not xi.mob.phOnDespawn(mob, ID.mob.BLOODTEAR_PH, 10, 75600) then -- 21 hours
         xi.mob.phOnDespawn(mob, ID.mob.LUMBERING_LAMBERT_PH, 10, 1200) -- 20 min
     end
 end

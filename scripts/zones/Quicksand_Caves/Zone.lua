@@ -1,19 +1,17 @@
 -----------------------------------
---
 -- Zone: Quicksand_Caves (208)
---
 -----------------------------------
-local ID = require("scripts/zones/Quicksand_Caves/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/keyitems")
-require("scripts/globals/npc_util")
-require("scripts/settings/main")
-require("scripts/globals/treasure")
-require("scripts/globals/status")
+local ID = require('scripts/zones/Quicksand_Caves/IDs')
+require('scripts/globals/conquest')
+require('scripts/globals/keyitems')
+require('scripts/globals/npc_util')
+require('scripts/globals/settings')
+require('scripts/globals/treasure')
+require('scripts/globals/status')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
     -- Weight Door System (RegionID, X, Radius, Z)
     zone:registerRegion(1, -15, 5, -60, 0, 0, 0)
     zone:registerRegion(3, 15, 5, -180, 0, 0, 0)
@@ -41,20 +39,23 @@ zone_object.onInitialize = function(zone)
     npcUtil.UpdateNPCSpawnPoint(ID.npc.ANTICAN_TAG_QM, 60, 120, ID.npc.ANTICAN_TAG_POSITIONS, "[POP]Antican_Tag")
 end
 
-zone_object.onConquestUpdate = function(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
-    if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
+
+    if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(-980.193, 14.913, -282.863, 60)
     end
+
     return cs
 end
 
 local function getWeight(player)
     local race = player:getRace()
+
     if race == xi.race.GALKA then
         return 3
     elseif race == xi.race.TARU_M or race == xi.race.TARU_F then
@@ -64,25 +65,29 @@ local function getWeight(player)
     end
 end
 
-zone_object.onRegionEnter = function(player, region)
-    local RegionID = region:GetRegionID()
+zoneObject.onRegionEnter = function(player, region)
+    local regionID = region:GetRegionID()
 
     -- holes in the sand
-    if (RegionID >= 30) then
-        switch (RegionID): caseof
+    if (regionID >= 30) then
+        switch (regionID): caseof
         {
             [30] = function (x)
                 player:setPos(496, -6, -816)
             end,
+
             [31] = function (x)
                 player:setPos(816, -6, -743)
             end,
+
             [32] = function (x)
                 player:setPos(216, 9, -16)
             end,
+
             [33] = function (x)
                 player:setPos(-296, 9, 416)
             end,
+
             [34] = function (x)
                 player:setPos(-136, 9, -176)
             end,
@@ -90,8 +95,8 @@ zone_object.onRegionEnter = function(player, region)
 
     -- ornate door pressure plates
     else
-        local door = GetNPCByID(ID.npc.ORNATE_DOOR_OFFSET + RegionID - 1)
-        local plate = GetNPCByID(ID.npc.ORNATE_DOOR_OFFSET + RegionID)
+        local door = GetNPCByID(ID.npc.ORNATE_DOOR_OFFSET + regionID - 1)
+        local plate = GetNPCByID(ID.npc.ORNATE_DOOR_OFFSET + regionID)
 
         local totalWeight = plate:getLocalVar("weight")
         totalWeight = totalWeight + getWeight(player)
@@ -104,12 +109,12 @@ zone_object.onRegionEnter = function(player, region)
     end
 end
 
-zone_object.onRegionLeave = function(player, region)
-    local RegionID = region:GetRegionID()
+zoneObject.onRegionLeave = function(player, region)
+    local regionID = region:GetRegionID()
 
-    if (RegionID < 30) then
-        -- local door = GetNPCByID(ID.npc.ORNATE_DOOR_OFFSET + RegionID - 1)
-        local plate = GetNPCByID(ID.npc.ORNATE_DOOR_OFFSET + RegionID)
+    if regionID < 30 then
+        -- local door = GetNPCByID(ID.npc.ORNATE_DOOR_OFFSET + regionID - 1)
+        local plate = GetNPCByID(ID.npc.ORNATE_DOOR_OFFSET + regionID)
 
         local totalWeight = plate:getLocalVar("weight")
         totalWeight = totalWeight - getWeight(player)
@@ -121,10 +126,10 @@ zone_object.onRegionLeave = function(player, region)
     end
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
 end
 
-return zone_object
+return zoneObject

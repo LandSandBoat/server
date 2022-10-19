@@ -3,14 +3,14 @@
 -- Scroll of Barblizzara
 -- Teaches the white magic Barblizzara
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(67)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(67)
 end
 
-return item_object
+return itemObject

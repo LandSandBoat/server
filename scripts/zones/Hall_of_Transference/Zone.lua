@@ -1,15 +1,15 @@
 -----------------------------------
 -- Zone: Hall_of_Transference
 -----------------------------------
-local ID = require("scripts/zones/Hall_of_Transference/IDs")
-require("scripts/globals/teleports")
-require("scripts/globals/keyitems")
-require("scripts/globals/missions")
-require("scripts/globals/zone")
+local ID = require('scripts/zones/Hall_of_Transference/IDs')
+require('scripts/globals/teleports')
+require('scripts/globals/keyitems')
+require('scripts/globals/missions')
+require('scripts/globals/zone')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
     zone:registerRegion(1, -281, -5, 277, -276, 0, 284)      -- Holla
     zone:registerRegion(2, 276, -84, -82, 283, -80, -75)     -- Mea
     zone:registerRegion(3, -283, -45, -283, -276, -40, -276) -- Dem
@@ -20,7 +20,7 @@ zone_object.onInitialize = function(zone)
     zone:registerRegion(7, -240.797, -43.960, -291.552, -237.944, -39.960, -288.954) -- Dem Sky Teleporter
 end
 
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
@@ -30,25 +30,29 @@ zone_object.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zone_object.onRegionEnter = function(player, region)
+zoneObject.onRegionEnter = function(player, region)
     switch (region:GetRegionID()): caseof
     {
         [1] = function (x) -- Holla
             player:setCharVar("option", 1)
             player:startEvent(103)
         end,
+
         [2] = function (x) -- Mea
             player:setCharVar("option", 1)
             player:startEvent(104)
         end,
+
         [3] = function (x) -- Dem
             player:setCharVar("option", 1)
             player:startEvent(105)
         end,
+
         [4] = function (x)
             player:setCharVar("option", 2)
             player:startEvent(103)
         end,
+
         [5] = function (x)
             if player:getCharVar("MeaChipRegistration") == 1 then
                 if math.random(1, 100) <= 95 or player:getCharVar("LastSkyWarpMea") < os.time() then -- 5% Chance chip breaks
@@ -60,6 +64,7 @@ zone_object.onRegionEnter = function(player, region)
                 player:startEvent(162) -- Please Register..
             end
         end,
+
         [6] = function (x)
             if player:getCharVar("HollaChipRegistration") == 1 then
                 if math.random(1, 100) <= 95 or player:getCharVar("LastSkyWarpHolla") < os.time() then -- 5% Chance chip breaks
@@ -71,6 +76,7 @@ zone_object.onRegionEnter = function(player, region)
                 player:startEvent(162) -- Please Register..
             end
         end,
+
         [7] = function (x)
             if player:getCharVar("DemChipRegistration") == 1 then
                 if math.random(1, 100) <= 95 or player:getCharVar("LastSkyWarpDem") < os.time() then -- 5% Chance chip breaks
@@ -85,19 +91,19 @@ zone_object.onRegionEnter = function(player, region)
     }
 end
 
-zone_object.onRegionLeave = function(player, region)
+zoneObject.onRegionLeave = function(player, region)
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
     if csid == 103 and option == 1 then
-        player:setPos(340.082, 19.103, -59.979, 127, 102)     -- To La Theine Plateau {R}
+        player:setPos(340.082, 19.103, -59.979, 127, 102)     -- To La Theine Plateau (R)
     elseif csid == 104 and option == 1 then
-        player:setPos(179.92, 35.15, 260.137, 64, 117)        -- To Tahrongi Canyon {R}
+        player:setPos(179.92, 35.15, 260.137, 64, 117)        -- To Tahrongi Canyon (R)
     elseif csid == 105 and option == 1 then
-        player:setPos(139.974, 19.103, 219.989, 128, 108)     -- To Konschtat Highlands {R}
+        player:setPos(139.974, 19.103, 219.989, 128, 108)     -- To Konschtat Highlands (R)
     elseif csid == 161 and option == 1 then
         local prevZone = player:getPreviousZone()
 
@@ -122,4 +128,4 @@ zone_object.onEventFinish = function(player, csid, option)
     end
 end
 
-return zone_object
+return zoneObject

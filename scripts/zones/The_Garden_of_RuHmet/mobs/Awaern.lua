@@ -18,9 +18,9 @@ entity.onMobSpawn = function(mob)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     -- Ix'Aern DRK animosity mechanic
-    if (isKiller) then
+    if optParams.isKiller then
         local qmDrk = GetNPCByID(ID.npc.QM_IXAERN_DRK)
         local hatedPlayer = qmDrk:getLocalVar("hatedPlayer")
         local isInTime = qmDrk:getLocalVar("hateTimer") > os.time()

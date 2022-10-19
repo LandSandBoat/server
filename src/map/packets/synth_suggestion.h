@@ -22,14 +22,31 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _CSYNTH_SUGGESTION_H
 #define _CSYNTH_SUGGESTION_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 
-class CSynthSuggestionPacket : public CBasicPacket
+const std::vector<std::string> craftSkillDbNames = {
+    "Wood",
+    "Smith",
+    "Gold",
+    "Cloth",
+    "Leather",
+    "Bone",
+    "Alchemy",
+    "Cook",
+};
+
+class CSynthSuggestionListPacket : public CBasicPacket
 {
 public:
-    CSynthSuggestionPacket(uint16 skillID, uint16 skillLevel);
+    CSynthSuggestionListPacket(uint16 skillID, uint16 skillLevel, uint8 skillRank, uint16 resultOffset);
+};
+
+class CSynthSuggestionRecipePacket : public CBasicPacket
+{
+public:
+    CSynthSuggestionRecipePacket(uint16 skillID, uint16 skillLevel, uint8 skillRank, uint16 selectedRecipeOffset);
 };
 
 #endif

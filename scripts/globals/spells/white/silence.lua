@@ -5,13 +5,13 @@ require("scripts/globals/magic")
 require("scripts/globals/msg")
 require("scripts/globals/status")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local dMND = (caster:getStat(xi.mod.MND) - target:getStat(xi.mod.MND))
 
     local duration = calculateDuration(120, spell:getSkillType(), spell:getSpellGroup(), caster, target)
@@ -37,4 +37,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return params.effect
 end
 
-return spell_object
+return spellObject

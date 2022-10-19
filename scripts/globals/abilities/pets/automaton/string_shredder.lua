@@ -2,19 +2,20 @@
 -- String Shredder
 -----------------------------------
 require("scripts/globals/status")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/automatonweaponskills")
 
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAutomatonAbilityCheck = function(target, automaton, skill)
+abilityObject.onAutomatonAbilityCheck = function(target, automaton, skill)
     local master = automaton:getMaster()
     return master:countEffect(xi.effect.THUNDER_MANEUVER)
 end
 
-ability_object.onAutomatonAbility = function(target, automaton, skill, master, action)
-    local params = {
+abilityObject.onAutomatonAbility = function(target, automaton, skill, master, action)
+    local params =
+    {
         numHits = 2,
         atkmulti = 1.36,
         weaponType = xi.skill.SWORD,
@@ -42,4 +43,4 @@ ability_object.onAutomatonAbility = function(target, automaton, skill, master, a
     return damage
 end
 
-return ability_object
+return abilityObject

@@ -34,8 +34,8 @@ class CBaseEntity;
 
 struct EventPrep
 {
-    CBaseEntity* targetEntity;
-    string_t     scriptFile;
+    CBaseEntity* targetEntity = {};
+    std::string  scriptFile;
 
     void reset()
     {
@@ -63,9 +63,9 @@ struct EventInfo : EventPrep
     std::vector<int32> cutsceneOptions;
     uint16             interruptText = 0;
 
-    bool hasCutsceneOption(int32 option)
+    bool hasCutsceneOption(int32 _option)
     {
-        return std::find(cutsceneOptions.begin(), cutsceneOptions.end(), option) != cutsceneOptions.end();
+        return std::find(cutsceneOptions.begin(), cutsceneOptions.end(), _option) != cutsceneOptions.end();
     }
 
     void reset()

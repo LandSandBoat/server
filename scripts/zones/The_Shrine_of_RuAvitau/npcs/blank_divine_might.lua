@@ -7,7 +7,7 @@ local ID = require("scripts/zones/The_Shrine_of_RuAvitau/IDs")
 require("scripts/globals/missions")
 require("scripts/globals/quests")
 require("scripts/globals/keyitems")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 
@@ -15,49 +15,48 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local CurrentZM = player:getCurrentMission(xi.mission.log_id.ZILART)
-    local ZMProgress = player:getMissionStatus(xi.mission.log_id.ZILART)
-    local DMStatus = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT)
-    local DMRepeat = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT_REPEAT)
-    local AAKeyitems = 0
-    local DMEarrings = 0
-    local DivineStatus = player:getCharVar("DivineMight")
-    local MoonOre = player:hasKeyItem(xi.ki.MOONLIGHT_ORE)
+    local currentZM = player:getCurrentMission(xi.mission.log_id.ZILART)
+    local zmProgress = player:getMissionStatus(xi.mission.log_id.ZILART)
+    local dmStatus = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT)
+    local dmRepeat = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT_REPEAT)
+    local aaKeyitems = 0
+    local dmEarrings = 0
+    local divineStatus = player:getCharVar("DivineMight")
+    local moonOre = player:hasKeyItem(xi.ki.MOONLIGHT_ORE)
 
     -- Count keyitems
     for i=xi.ki.SHARD_OF_APATHY, xi.ki.SHARD_OF_RAGE do
         if (player:hasKeyItem(i) == true) then
-            AAKeyitems = AAKeyitems + 1
+            aaKeyitems = aaKeyitems + 1
         end
     end
 
     -- Count Earrings
     for i=14739, 14743 do
         if (player:hasItem(i) == true) then
-            DMEarrings = DMEarrings + 1
+            dmEarrings = dmEarrings + 1
         end
     end
 
-    if (CurrentZM == xi.mission.id.zilart.ARK_ANGELS and ZMProgress == 1 and DivineStatus < 2) then -- Reminder CS/starts Divine Might (per Wiki)
+    if (currentZM == xi.mission.id.zilart.ARK_ANGELS and zmProgress == 1 and divineStatus < 2) then -- Reminder CS/starts Divine Might (per Wiki)
         player:startEvent(54, 917, 1408, 1550)
-    elseif (CurrentZM >= xi.mission.id.zilart.ARK_ANGELS and DMStatus == QUEST_AVAILABLE and AAKeyitems > 0) then -- Alternative cutscene for those that have done one or more AA fight
+    elseif (currentZM >= xi.mission.id.zilart.ARK_ANGELS and dmStatus == QUEST_AVAILABLE and aaKeyitems > 0) then -- Alternative cutscene for those that have done one or more AA fight
         player:startEvent(56, 917, 1408, 1550)
-    elseif (DMStatus == QUEST_ACCEPTED and DivineStatus >= 2) then -- CS when player has completed Divine might, award earring
+    elseif (dmStatus == QUEST_ACCEPTED and divineStatus >= 2) then -- CS when player has completed Divine might, award earring
         player:startEvent(55, 14739, 14740, 14741, 14742, 14743)
-    elseif (DMStatus == QUEST_COMPLETED and DMEarrings < xi.settings.NUMBER_OF_DM_EARRINGS and DMRepeat ~= QUEST_ACCEPTED) then -- You threw away old Earring, start the repeat quest
+    elseif (dmStatus == QUEST_COMPLETED and dmEarrings < xi.settings.main.NUMBER_OF_DM_EARRINGS and dmRepeat ~= QUEST_ACCEPTED) then -- You threw away old Earring, start the repeat quest
         player:startEvent(57, player:getCharVar("DM_Earring"))
-    elseif (DMRepeat == QUEST_ACCEPTED and DivineStatus < 2) then
-        if (MoonOre == false) then
+    elseif (dmRepeat == QUEST_ACCEPTED and divineStatus < 2) then
+        if (moonOre == false) then
             player:startEvent(58) -- Reminder for Moonlight Ore
         else
             player:startEvent(56, 917, 1408, 1550) -- Reminder for Ark Pentasphere
         end
-    elseif (DMRepeat == QUEST_ACCEPTED and DivineStatus == 2 and MoonOre == true) then -- Repeat turn in
+    elseif (dmRepeat == QUEST_ACCEPTED and divineStatus == 2 and moonOre == true) then -- Repeat turn in
         player:startEvent(59)
     else
         player:messageSpecial(ID.text.NOTHING_OUT_OF_ORDINARY) -- Need some kind of feedback
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
@@ -67,7 +66,6 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if ((csid == 54 or csid == 56) and player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT) == QUEST_AVAILABLE) then -- Flag Divine Might
         player:addQuest(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.DIVINE_MIGHT)
 

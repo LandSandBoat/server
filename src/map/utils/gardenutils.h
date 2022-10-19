@@ -24,7 +24,7 @@
 #ifndef _GARDENUTILS_H
 #define _GARDENUTILS_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 #include <vector>
 
 class CCharEntity;

@@ -1,7 +1,7 @@
 ﻿#ifndef _CENTITYENABLELISTPACKET_H
 #define _CENTITYENABLELISTPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

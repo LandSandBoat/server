@@ -9,8 +9,8 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local Telmoda_Madaline = player:getCharVar("Telmoda_Madaline_Event")
-    if (Telmoda_Madaline ~= 1) then
+    local telmoda_Madaline = player:getCharVar("Telmoda_Madaline_Event")
+    if (telmoda_Madaline ~= 1) then
         player:setCharVar("Telmoda_Madaline_Event", 1)
         player:startEvent(531)
     else

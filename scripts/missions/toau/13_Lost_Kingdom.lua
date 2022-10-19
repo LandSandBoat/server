@@ -59,7 +59,7 @@ mission.sections =
 
             ['Jazaraat'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if player:getMissionStatus(mission.areaId) == 1 then
                         player:setMissionStatus(mission.areaId, 2)
                     end

@@ -66,6 +66,7 @@ for _, entry in pairs(nmsToShield) do
         print(string.format("Applying Claimshield to %s for %ims", mob:getName(), claimshieldTime))
         mob:setClaimable(false)
         mob:setUnkillable(true)
+        mob:setCallForHelpBlocked(true)
         mob:stun(claimshieldTime)
 
         mob:timer(claimshieldTime, function(mobArg)
@@ -74,6 +75,7 @@ for _, entry in pairs(nmsToShield) do
 
             mobArg:setClaimable(true)
             mobArg:setUnkillable(false)
+            mob:setCallForHelpBlocked(false)
 
             mobArg:resetAI()
             mobArg:setHP(mobArg:getMaxHP())

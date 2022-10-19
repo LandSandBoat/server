@@ -15,8 +15,6 @@
 -- qm7 : !pos 252.824 -32.000 -64.803 195
 -- qm8 : !pos 105.275 -32 92.551 195
 -- qm9 : !pos 92.272 -32 -64.676 195
------------------------------------
-require('scripts/settings/main')
 require('scripts/globals/items')
 require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
@@ -31,6 +29,25 @@ local garlaigeID = require('scripts/zones/Garlaige_Citadel/IDs')
 
 local quest = Quest:new(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.IN_DEFIANT_CHALLENGE)
 
+-- Key Item removals
+local function cleanKIMold(player)
+    player:delKeyItem(xi.ki.EXORAY_MOLD_CRUMB1)
+    player:delKeyItem(xi.ki.EXORAY_MOLD_CRUMB2)
+    player:delKeyItem(xi.ki.EXORAY_MOLD_CRUMB3)
+end
+
+local function cleanKICoal(player)
+    player:delKeyItem(xi.ki.BOMB_COAL_FRAGMENT1)
+    player:delKeyItem(xi.ki.BOMB_COAL_FRAGMENT2)
+    player:delKeyItem(xi.ki.BOMB_COAL_FRAGMENT3)
+end
+
+local function cleanKIPapyrus(player)
+    player:delKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED1)
+    player:delKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED2)
+    player:delKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED3)
+end
+
 -- NOTE: This is handled in such an unconventional manner just so the text appears in the same order as in retail.
 local function handleExorayMold(player)
     if
@@ -39,9 +56,7 @@ local function handleExorayMold(player)
         player:hasKeyItem(xi.ki.EXORAY_MOLD_CRUMB3)
     then
         if player:getFreeSlotsCount() > 0 then
-            player:delKeyItem(xi.ki.EXORAY_MOLD_CRUMB1)
-            player:delKeyItem(xi.ki.EXORAY_MOLD_CRUMB2)
-            player:delKeyItem(xi.ki.EXORAY_MOLD_CRUMB3)
+            cleanKIMold(player)
             player:messageSpecial(crawlersID.text.COMBINE_INTO_A_CLUMP, xi.ki.EXORAY_MOLD_CRUMB1)
             npcUtil.giveItem(player, xi.items.CLUMP_OF_EXORAY_MOLD)
         else
@@ -57,9 +72,7 @@ local function handleBombCoal(player)
         player:hasKeyItem(xi.ki.BOMB_COAL_FRAGMENT3)
     then
         if player:getFreeSlotsCount() > 0 then
-            player:delKeyItem(xi.ki.BOMB_COAL_FRAGMENT1)
-            player:delKeyItem(xi.ki.BOMB_COAL_FRAGMENT2)
-            player:delKeyItem(xi.ki.BOMB_COAL_FRAGMENT3)
+            cleanKICoal(player)
             player:messageSpecial(garlaigeID.text.COMBINE_INTO_A_CHUNK, xi.ki.BOMB_COAL_FRAGMENT1)
             npcUtil.giveItem(player, xi.items.CHUNK_OF_BOMB_COAL)
         else
@@ -75,9 +88,7 @@ local function handleAncientPapyrus(player)
         player:hasKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED3)
     then
         if player:getFreeSlotsCount() > 0 then
-            player:delKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED1)
-            player:delKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED2)
-            player:delKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED3)
+            cleanKIPapyrus(player)
             player:messageSpecial(eldiemeID.text.PUT_TOGUETHER_TO_COMPLETE, xi.ki.ANCIENT_PAPYRUS_SHRED1)
             npcUtil.giveItem(player, xi.items.PIECE_OF_ANCIENT_PAPYRUS)
         else
@@ -101,7 +112,7 @@ quest.sections =
             return status == QUEST_AVAILABLE and
                 player:getMainLvl() == 50 and
                 player:getLevelCap() == 50 and
-                xi.settings.MAX_LEVEL >= 55
+                xi.settings.main.MAX_LEVEL >= 55
         end,
 
         [xi.zone.RULUDE_GARDENS] =
@@ -139,7 +150,7 @@ quest.sections =
                 end,
 
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, {xi.items.CLUMP_OF_EXORAY_MOLD, xi.items.CHUNK_OF_BOMB_COAL, xi.items.PIECE_OF_ANCIENT_PAPYRUS}) then
+                    if npcUtil.tradeHasExactly(trade, { xi.items.CLUMP_OF_EXORAY_MOLD, xi.items.CHUNK_OF_BOMB_COAL, xi.items.PIECE_OF_ANCIENT_PAPYRUS }) then
                         return quest:progressEvent(81)
                     end
                 end,
@@ -149,6 +160,9 @@ quest.sections =
             {
                 [81] = function(player, csid, option, npc)
                     if quest:complete(player) then
+                        cleanKIMold(player)
+                        cleanKICoal(player)
+                        cleanKIPapyrus(player)
                         player:confirmTrade()
                         player:setLevelCap(55)
                         -- Leaving this here for historic purposes. Unneeded. The event now returns this message on its own.
@@ -166,7 +180,7 @@ quest.sections =
                     if
                         not player:hasItem(xi.items.CLUMP_OF_EXORAY_MOLD) and
                         not player:hasKeyItem(xi.ki.EXORAY_MOLD_CRUMB1) and
-                        not xi.settings.OLDSCHOOL_G1
+                        not xi.settings.main.OLDSCHOOL_G1
                     then
                         npcUtil.giveKeyItem(player, xi.ki.EXORAY_MOLD_CRUMB1)
                         handleExorayMold(player)
@@ -180,7 +194,7 @@ quest.sections =
                     if
                         not player:hasItem(xi.items.CLUMP_OF_EXORAY_MOLD) and
                         not player:hasKeyItem(xi.ki.EXORAY_MOLD_CRUMB2) and
-                        not xi.settings.OLDSCHOOL_G1
+                        not xi.settings.main.OLDSCHOOL_G1
                     then
                         npcUtil.giveKeyItem(player, xi.ki.EXORAY_MOLD_CRUMB2)
                         handleExorayMold(player)
@@ -194,7 +208,7 @@ quest.sections =
                     if
                         not player:hasItem(xi.items.CLUMP_OF_EXORAY_MOLD) and
                         not player:hasKeyItem(xi.ki.EXORAY_MOLD_CRUMB3) and
-                        not xi.settings.OLDSCHOOL_G1
+                        not xi.settings.main.OLDSCHOOL_G1
                     then
                         npcUtil.giveKeyItem(player, xi.ki.EXORAY_MOLD_CRUMB3)
                         handleExorayMold(player)
@@ -211,7 +225,7 @@ quest.sections =
                     if
                         not player:hasItem(xi.items.CHUNK_OF_BOMB_COAL) and
                         not player:hasKeyItem(xi.ki.BOMB_COAL_FRAGMENT1) and
-                        not xi.settings.OLDSCHOOL_G1
+                        not xi.settings.main.OLDSCHOOL_G1
                     then
                         npcUtil.giveKeyItem(player, xi.ki.BOMB_COAL_FRAGMENT1)
                         handleBombCoal(player)
@@ -225,7 +239,7 @@ quest.sections =
                     if
                         not player:hasItem(xi.items.CHUNK_OF_BOMB_COAL) and
                         not player:hasKeyItem(xi.ki.BOMB_COAL_FRAGMENT2) and
-                        not xi.settings.OLDSCHOOL_G1
+                        not xi.settings.main.OLDSCHOOL_G1
                     then
                         npcUtil.giveKeyItem(player, xi.ki.BOMB_COAL_FRAGMENT2)
                         handleBombCoal(player)
@@ -239,7 +253,7 @@ quest.sections =
                     if
                         not player:hasItem(xi.items.CHUNK_OF_BOMB_COAL) and
                         not player:hasKeyItem(xi.ki.BOMB_COAL_FRAGMENT3) and
-                        not xi.settings.OLDSCHOOL_G1
+                        not xi.settings.main.OLDSCHOOL_G1
                     then
                         npcUtil.giveKeyItem(player, xi.ki.BOMB_COAL_FRAGMENT3)
                         handleBombCoal(player)
@@ -256,7 +270,7 @@ quest.sections =
                     if
                         not player:hasItem(xi.items.PIECE_OF_ANCIENT_PAPYRUS) and
                         not player:hasKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED1) and
-                        not xi.settings.OLDSCHOOL_G1
+                        not xi.settings.main.OLDSCHOOL_G1
                     then
                         npcUtil.giveKeyItem(player, xi.ki.ANCIENT_PAPYRUS_SHRED1)
                         handleAncientPapyrus(player)
@@ -270,7 +284,7 @@ quest.sections =
                     if
                         not player:hasItem(xi.items.PIECE_OF_ANCIENT_PAPYRUS) and
                         not player:hasKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED2) and
-                        not xi.settings.OLDSCHOOL_G1
+                        not xi.settings.main.OLDSCHOOL_G1
                     then
                         npcUtil.giveKeyItem(player, xi.ki.ANCIENT_PAPYRUS_SHRED2)
                         handleAncientPapyrus(player)
@@ -284,7 +298,7 @@ quest.sections =
                     if
                         not player:hasItem(xi.items.PIECE_OF_ANCIENT_PAPYRUS) and
                         not player:hasKeyItem(xi.ki.ANCIENT_PAPYRUS_SHRED3) and
-                        not xi.settings.OLDSCHOOL_G1
+                        not xi.settings.main.OLDSCHOOL_G1
                     then
                         npcUtil.giveKeyItem(player, xi.ki.ANCIENT_PAPYRUS_SHRED3)
                         handleAncientPapyrus(player)

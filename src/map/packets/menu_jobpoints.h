@@ -17,7 +17,7 @@
 #ifndef _CMENUJOBPOINTSPACKET_H
 #define _CMENUJOBPOINTSPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "../job_points.h"
 #include "basic.h"

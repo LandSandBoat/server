@@ -22,7 +22,7 @@
 #ifndef _CCHARPACKET_H
 #define _CCHARPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 
@@ -32,6 +32,7 @@ class CCharPacket : public CBasicPacket
 {
 public:
     CCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask);
+    void updateWith(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask);
 };
 
 #endif

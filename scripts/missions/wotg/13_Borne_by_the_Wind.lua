@@ -31,12 +31,23 @@ mission.sections =
             return currentMission == mission.missionId and missionStatus == 0
         end,
 
+        [xi.zone.BASTOK_MARKETS_S] =
+        {
+            ['Radford'] = mission:event(177, 87, 23),
+        },
+
+        [xi.zone.WINDURST_WATERS_S] =
+        {
+            ['Velda-Galda'] = mission:event(180, 94, 3),
+        },
+
         [xi.zone.SAUROMUGUE_CHAMPAIGN_S] =
         {
             ['Bulwark_Gate'] =
             {
                 onTrigger = function(player, npc)
                     -- TODO: What are these args from caps?
+                    -- Observed: 98, 5, 1756, 0, 0, 0, 0, 0
                     return mission:progressEvent(5, 98, 0, 2963, 0, 0, 0, 1, 0)
                 end,
             },

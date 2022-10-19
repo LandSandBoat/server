@@ -87,7 +87,7 @@ quest.sections =
             ['Hanaa_Punaa'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, {{ xi.items.SHEEPSKIN, 3 }}) then
+                    if npcUtil.tradeHasExactly(trade, { { xi.items.SHEEPSKIN, 3 } }) then
                         return quest:progressEvent(530)
                     end
                 end,
@@ -96,7 +96,7 @@ quest.sections =
             onEventFinish =
             {
                 [530] = function(player, csid, option, npc)
-                    if npcUtil.giveItem(player, xi.items.LEATHER_GLOVES, {fromTrade = true}) then
+                    if npcUtil.giveItem(player, xi.items.LEATHER_GLOVES, { fromTrade = true }) then
                         player:confirmTrade()
                         player:addTitle(xi.title.SILENCER_OF_THE_LAMBS)
                         if not player:hasCompletedQuest(quest.areaId, quest.questId) then

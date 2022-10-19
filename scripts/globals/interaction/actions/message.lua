@@ -5,10 +5,11 @@ require('scripts/globals/interaction/actions/action')
 
 Message = Action:new(Action.Type.Message)
 
-Message.Type = {
-    Text = 1,
+Message.Type =
+{
+    Text    = 1,
     Special = 2,
-    Name = 3,
+    Name    = 3,
 }
 
 function Message:new(messageId, messageType, ...)
@@ -18,7 +19,7 @@ function Message:new(messageId, messageType, ...)
     obj.id = messageId
     obj.priority = Action.Priority.Message -- messages have lowest default priority
     obj.messageType = messageType or Message.Type.Text
-    obj.options = {...}
+    obj.options = { ... }
     return obj
 end
 

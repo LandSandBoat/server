@@ -144,7 +144,7 @@ void CCampaignHandler::SetBattleStatus(uint8 status)
 
 void CCampaignHandler::SetZoneControl(uint8 nation)
 {
-    uint8       nationid = ((uint8)nation);
+    uint8       nationid = nation;
     std::string query    = "UPDATE `campaign_map` SET `nation` = %d WHERE `zoneid` = %d;";
     int         ret      = sql->Query(query.c_str(), nationid, m_PZone->GetID());
     if (ret == SQL_ERROR)

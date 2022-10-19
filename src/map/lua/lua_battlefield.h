@@ -22,7 +22,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _LUABATTLEFIELD_H
 #define _LUABATTLEFIELD_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 #include "luautils.h"
 
 class CBattlefield;
@@ -43,6 +43,7 @@ public:
     friend std::ostream& operator<<(std::ostream& out, const CLuaBattlefield& battlefield);
 
     uint16   getID();
+    uint16   getZoneID();
     uint8    getArea();
     uint32   getTimeLimit();
     uint32   getTimeInside();
@@ -50,28 +51,33 @@ public:
     uint32   getFightTick();
     uint32   getWipeTime();
     uint32   getFightTime();
+    uint32   getMaxParticipants();
+    uint32   getPlayerCount();
     auto     getPlayers() -> sol::table;
+    auto     getPlayersAndTrusts() -> sol::table;
     auto     getMobs(bool required, bool adds) -> sol::table;
     auto     getNPCs() -> sol::table;
     auto     getAllies() -> sol::table;
     auto     getRecord() -> std::tuple<std::string, uint32, uint32>;
     uint8    getStatus();
-    uint64_t getLocalVar(std::string name);
+    uint64_t getLocalVar(std::string const& name);
     uint32   getLastTimeUpdate();
     auto     getInitiator() -> std::pair<uint32, std::string>;
+    uint32   getArmouryCrate();
 
-    void  setLastTimeUpdate(uint32 seconds);
-    void  setTimeLimit(uint32 seconds);
-    void  setWipeTime(uint32 seconds);
-    void  setRecord(std::string name, uint32 seconds);
-    void  setStatus(uint8 status);
-    void  setLocalVar(std::string name, uint64_t value);
-    bool  loadMobs();
-    bool  spawnLoot(sol::object const& PEntityObj);
-    auto  insertEntity(uint16 targid, bool ally, bool inBattlefield) -> std::optional<CLuaBaseEntity>;
-    bool  cleanup(bool cleanup);
-    void  win();
-    void  lose();
+    void setLastTimeUpdate(uint32 seconds);
+    void setTimeLimit(uint32 seconds);
+    void setWipeTime(uint32 seconds);
+    void setRecord(std::string const& name, uint32 seconds);
+    void setStatus(uint8 status);
+    void setLocalVar(std::string const& name, uint64_t value);
+    bool loadMobs();
+    bool spawnLoot(sol::object const& PEntityObj);
+    auto insertEntity(uint16 targid, bool ally, bool inBattlefield) -> std::optional<CLuaBaseEntity>;
+    bool cleanup(bool cleanup);
+    void win();
+    void lose();
+    void addGroups(sol::table groups, bool hasMultipleArenas);
 
     static void Register();
 };

@@ -18,8 +18,6 @@ entity.onTrigger = function(player, npc)
     else
         player:startEvent(604)
     end
-
-    return 1
 end
 
 entity.onEventUpdate = function(player, csid, option)
@@ -27,9 +25,9 @@ end
 
 entity.onEventFinish = function(player, csid, option)
     if csid == 604 then
-        local X = player:getXPos()
+        local xPos = player:getXPos()
 
-        if X >= -13 and X <= -8 then
+        if xPos >= -13 and xPos <= -8 then
             player:delGil(200)
         end
     end

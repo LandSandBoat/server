@@ -22,8 +22,8 @@
 #ifndef _ATTACKUTILS_H
 #define _ATTACKUTILS_H
 
-#include "../../common/cbasetypes.h"
-#include "../../common/mmo.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
 
 #include "../entities/charentity.h"
 #include "../entities/mobentity.h"

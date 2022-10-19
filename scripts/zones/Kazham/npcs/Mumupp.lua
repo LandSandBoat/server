@@ -9,36 +9,32 @@ local entity = {}
 
 local path =
 {
-    94.732452, -15.000000, -114.034622,
-    94.210846, -15.000000, -114.989388,
-    93.508865, -15.000000, -116.274101,
-    94.584877, -15.000000, -116.522118,
-    95.646988, -15.000000, -116.468452,
-    94.613518, -15.000000, -116.616562,
-    93.791100, -15.000000, -115.858505,
-    94.841835, -15.000000, -116.108437,
-    93.823380, -15.000000, -116.712860,
-    94.986847, -15.000000, -116.571831,
-    94.165512, -15.000000, -115.965698,
-    95.005806, -15.000000, -116.519707,
-    93.935555, -15.000000, -116.706291,
-    94.943497, -15.000000, -116.578346,
-    93.996826, -15.000000, -115.932816,
-    95.060165, -15.000000, -116.180840,
-    94.081062, -15.000000, -115.923836,
-    95.246490, -15.000000, -116.215691,
-    94.234077, -15.000000, -115.960793
+    { x = 94.732452, y = -15.000000, z = -114.034622 },
+    { x = 94.210846, z = -114.989388 },
+    { x = 93.508865, z = -116.274101 },
+    { x = 94.584877, z = -116.522118 },
+    { x = 95.646988, z = -116.468452 },
+    { x = 94.613518, z = -116.616562 },
+    { x = 93.791100, z = -115.858505 },
+    { x = 94.841835, z = -116.108437 },
+    { x = 93.823380, z = -116.712860 },
+    { x = 94.986847, z = -116.571831 },
+    { x = 94.165512, z = -115.965698 },
+    { x = 95.005806, z = -116.519707 },
+    { x = 93.935555, z = -116.706291 },
+    { x = 94.943497, z = -116.578346 },
+    { x = 93.996826, z = -115.932816 },
+    { x = 95.060165, z = -116.180840 },
+    { x = 94.081062, z = -115.923836 },
+    { x = 95.246490, z = -116.215691 },
+    { x = 94.234077, z = -115.960793 },
 }
 
 entity.onSpawn = function(npc)
     npc:initNpcAi()
     npc:setPos(xi.path.first(path))
+    npc:pathThrough(path, xi.path.flag.PATROL)
 end
-
-entity.onPath = function(npc)
-    xi.path.patrol(npc, path)
-end
-
 
 entity.onTrade = function(player, npc, trade)
     -- item IDs
@@ -52,13 +48,13 @@ entity.onTrade = function(player, npc, trade)
     -- 905       Wyvern Skull
     -- 1147      Ancient Salt
     -- 4600      Lucky Egg
-    local OpoOpoAndIStatus = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_OPO_OPO_AND_I)
+    local opoOpoAndIStatus = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_OPO_OPO_AND_I)
     local progress = player:getCharVar("OPO_OPO_PROGRESS")
     local failed = player:getCharVar("OPO_OPO_FAILED")
     local goodtrade = trade:hasItemQty(1008, 1)
     local badtrade = trade:hasItemQty(483, 1) or trade:hasItemQty(22, 1) or trade:hasItemQty(1157, 1) or trade:hasItemQty(1158, 1) or trade:hasItemQty(904, 1) or trade:hasItemQty(4599, 1) or trade:hasItemQty(905, 1) or trade:hasItemQty(1147, 1) or trade:hasItemQty(4600, 1)
 
-    if OpoOpoAndIStatus == QUEST_ACCEPTED then
+    if opoOpoAndIStatus == QUEST_ACCEPTED then
         if progress == 2 or failed == 3 then
             if goodtrade then
                 player:startEvent(221)
@@ -70,12 +66,12 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local OpoOpoAndIStatus = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_OPO_OPO_AND_I)
+    local opoOpoAndIStatus = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_OPO_OPO_AND_I)
     local progress = player:getCharVar("OPO_OPO_PROGRESS")
     local failed = player:getCharVar("OPO_OPO_FAILED")
     local retry = player:getCharVar("OPO_OPO_RETRY")
 
-    if OpoOpoAndIStatus == QUEST_ACCEPTED then
+    if opoOpoAndIStatus == QUEST_ACCEPTED then
         if retry >= 1 then -- has failed on future npc so disregard previous successful trade
             player:startEvent(199)
         elseif progress == 2 or failed == 3 then

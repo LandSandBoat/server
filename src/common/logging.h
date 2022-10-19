@@ -29,65 +29,48 @@
 // Set this higher to strip out lower messages at compile time
 #define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_TRACE
 
-#define SPDLOG_NO_THREAD_ID
-#define SPDLOG_NO_ATOMIC_LEVELS
-
 #include "spdlog/spdlog.h"
 
-#include "spdlog/fmt/fmt.h"
+#include "spdlog/fmt/bundled/chrono.h"
 #include "spdlog/fmt/bundled/core.h"
 #include "spdlog/fmt/bundled/format.h"
 #include "spdlog/fmt/bundled/printf.h"
-#include "spdlog/fmt/bundled/chrono.h"
+#include "spdlog/fmt/fmt.h"
 
-enum MSGTYPE
+// Forward declaration
+namespace settings
 {
-    MSG_STANDARD    = 0x0001,
-    MSG_STATUS      = 0x0002,
-    MSG_INFO        = 0x0004,
-    MSG_NOTICE      = 0x0008,
-    MSG_WARNING     = 0x0010,
-    MSG_DEBUG       = 0x0020,
-    MSG_ERROR       = 0x0040,
-    MSG_FATALERROR  = 0x0080,
-    MSG_SQL         = 0x0100,
-    MSG_LUASCRIPT   = 0x0200,
-    MSG_NAVMESH     = 0x0400,
-    MSG_ACTION      = 0x0800,
-    MSG_EXPLOIT     = 0x1000,
-};
+    template <typename T>
+    T get(std::string);
+} // namespace settings
 
 namespace logging
 {
     void InitializeLog(std::string serverName, std::string logFile, bool appendDate);
     void ShutDown();
+} // namespace logging
 
-    void SetFilters(int _filterMask);
-}
+// clang-format off
 
-// TODO: Build helpers around this macro (so function and line info can be preserved)
-// #define SPDLOG_LOGGER_CALL(logger, level, ...) (logger)->log(spdlog::source_loc{__FILE__, __LINE__, SPDLOG_FUNCTION}, level, __VA_ARGS__)
+// Regular Loggers
+#define ShowTrace(...)    { auto _msgStr = fmt::sprintf(__VA_ARGS__); TracyMessageStr(_msgStr); SPDLOG_LOGGER_TRACE(spdlog::get("trace"), _msgStr); }
+#define ShowDebug(...)    { auto _msgStr = fmt::sprintf(__VA_ARGS__); TracyMessageStr(_msgStr); SPDLOG_LOGGER_DEBUG(spdlog::get("debug"), _msgStr); }
+#define ShowInfo(...)     { auto _msgStr = fmt::sprintf(__VA_ARGS__); TracyMessageStr(_msgStr); SPDLOG_LOGGER_INFO(spdlog::get("info"), _msgStr); }
+#define ShowWarning(...)  { auto _msgStr = fmt::sprintf(__VA_ARGS__); TracyMessageStr(_msgStr); SPDLOG_LOGGER_WARN(spdlog::get("warn"), _msgStr); }
+#define ShowError(...)    { auto _msgStr = fmt::sprintf(__VA_ARGS__); TracyMessageStr(_msgStr); SPDLOG_LOGGER_ERROR(spdlog::get("error"), _msgStr); }
+#define ShowCritical(...) { auto _msgStr = fmt::sprintf(__VA_ARGS__); TracyMessageStr(_msgStr); SPDLOG_LOGGER_CRITICAL(spdlog::get("critical"), _msgStr); }
 
-// Legacy support
-// TODO: Remove/replace these
+// Debug Loggers
+#define DebugNavmesh(...)  { if (settings::get<bool>("logging.DEBUG_NAVMESH")) { ShowDebug(__VA_ARGS__); } }
+#define DebugPackets(...)  { if (settings::get<bool>("logging.DEBUG_PACKETS")) { ShowDebug(__VA_ARGS__); } }
+#define DebugActions(...)  { if (settings::get<bool>("logging.DEBUG_ACTIONS")) { ShowDebug(__VA_ARGS__); } }
+#define DebugSQL(...)      { if (settings::get<bool>("logging.DEBUG_SQL")) { ShowDebug(__VA_ARGS__); } }
+#define DebugIDLookup(...) { if (settings::get<bool>("logging.DEBUG_ID_LOOKUP")) { ShowDebug(__VA_ARGS__); } }
+#define DebugModules(...)  { if (settings::get<bool>("logging.DEBUG_MODULES")) { ShowDebug(__VA_ARGS__); } }
 
-// Generic
-#define ShowStandard(...)   SPDLOG_LOGGER_INFO(spdlog::get("standard"), fmt::sprintf(__VA_ARGS__))
-#define ShowInfo(...)       SPDLOG_LOGGER_INFO(spdlog::get("info"), fmt::sprintf(__VA_ARGS__))
-#define ShowMessage(...)    SPDLOG_LOGGER_INFO(spdlog::get("message"), fmt::sprintf(__VA_ARGS__))
-#define ShowStatus(...)     SPDLOG_LOGGER_INFO(spdlog::get("status"), fmt::sprintf(__VA_ARGS__))
-#define ShowNotice(...)     SPDLOG_LOGGER_WARN(spdlog::get("notice"), fmt::sprintf(__VA_ARGS__))
-#define ShowWarning(...)    SPDLOG_LOGGER_WARN(spdlog::get("warning"), fmt::sprintf(__VA_ARGS__))
-#define ShowDebug(...)      SPDLOG_LOGGER_DEBUG(spdlog::get("debug"), fmt::sprintf(__VA_ARGS__))
-#define ShowError(...)      SPDLOG_LOGGER_ERROR(spdlog::get("error"), fmt::sprintf(__VA_ARGS__))
-#define ShowFatalError(...) SPDLOG_LOGGER_CRITICAL(spdlog::get("fatalerror"), fmt::sprintf(__VA_ARGS__))
+// Special Loggers (different patterns)
+#define ShowLua(...) { auto _msgStr = fmt::sprintf(__VA_ARGS__); TracyMessageStr(_msgStr); SPDLOG_LOGGER_INFO(spdlog::get("lua"), _msgStr); }
 
-// Specific
-#define ShowSQL(...)        SPDLOG_LOGGER_INFO(spdlog::get("sql"), fmt::sprintf(__VA_ARGS__))
-#define ShowScript(...)     SPDLOG_LOGGER_INFO(spdlog::get("lua"), fmt::sprintf(__VA_ARGS__))
-#define ShowAction(...)     SPDLOG_LOGGER_INFO(spdlog::get("action"), fmt::sprintf(__VA_ARGS__))
-#define ShowExploit(...)    SPDLOG_LOGGER_WARN(spdlog::get("exploit"), fmt::sprintf(__VA_ARGS__))
-#define ShowNavError(...)   SPDLOG_LOGGER_ERROR(spdlog::get("navmesh"), fmt::sprintf(__VA_ARGS__))
-#define ShowStacktrace(...) SPDLOG_LOGGER_CRITICAL(spdlog::get("stacktrace"), fmt::sprintf(__VA_ARGS__))
+// clang-format on
 
 #endif // _LOGGING_H

@@ -9,21 +9,19 @@ require("scripts/globals/keyitems")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-
     if (trade:hasItemQty(1107, 1) and trade:getItemCount() == 1) then -- glitter sand
-        local SinHunting = player:getCharVar("sinHunting")    -- RNG AF1
-        if (SinHunting == 2) then
+        local sinHunting = player:getCharVar("sinHunting")    -- RNG AF1
+
+        if (sinHunting == 2) then
             player:startEvent(5)
         end
     end
-
 end
 
 entity.onTrigger = function(player, npc)
+    local sinHunting = player:getCharVar("sinHunting")    -- RNG AF1
 
-    local SinHunting = player:getCharVar("sinHunting")    -- RNG AF1
-
-    if (SinHunting == 1) then
+    if (sinHunting == 1) then
         player:startEvent(3, 0, 1107)
     else
         player:startEvent(2)
@@ -34,7 +32,6 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if (csid == 3) then
         player:setCharVar("sinHunting", 2)
     elseif (csid == 5) then
@@ -43,7 +40,6 @@ entity.onEventFinish = function(player, csid, option)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.PERCHONDS_ENVELOPE)
         player:setCharVar("sinHunting", 3)
     end
-
 end
 
 return entity

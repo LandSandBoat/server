@@ -11,7 +11,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-	xi.conflux.confluxOnTrigger(player, npc)
+    xi.conflux.confluxOnTrigger(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)

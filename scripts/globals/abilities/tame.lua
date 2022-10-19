@@ -5,17 +5,17 @@
 -- Recast Time: 10:00
 -- Duration: Instant
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-ability_object.onUseAbility = function(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability)
     if player:getPet() ~= nil then
         ability:setMsg(xi.msg.basic.JA_NO_EFFECT)
         target:addEnmity(player, 1, 0)
@@ -56,4 +56,4 @@ ability_object.onUseAbility = function(player, target, ability)
     end
 end
 
-return ability_object
+return abilityObject

@@ -95,8 +95,8 @@ xi.promyvion.receptacleOnFight = function(mob, target)
     end
 end
 
-xi.promyvion.receptacleOnDeath = function(mob, isKiller)
-    if isKiller then
+xi.promyvion.receptacleOnDeath = function(mob, optParams)
+    if optParams.isKiller then
         local ID = zones[mob:getZoneID()]
         local mobId = mob:getID()
         local floor = ID.mob.MEMORY_RECEPTACLES[mobId][1]

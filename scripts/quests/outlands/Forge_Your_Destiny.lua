@@ -12,7 +12,7 @@ require('scripts/globals/items')
 require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
-require('scripts/settings/main')
+require('scripts/globals/settings')
 require('scripts/globals/titles')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/quest')
@@ -36,7 +36,7 @@ quest.sections =
 {
     {
         check = function(player, status, vars)
-            return status == QUEST_AVAILABLE and player:getMainLvl() >= xi.settings.ADVANCED_JOB_LEVEL
+            return status == QUEST_AVAILABLE and player:getMainLvl() >= xi.settings.main.ADVANCED_JOB_LEVEL
         end,
 
         [xi.zone.NORG] =
@@ -138,7 +138,7 @@ quest.sections =
             ['Jaucribaix'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, {xi.items.LUMP_OF_BOMB_STEEL, xi.items.SACRED_BRANCH}) then
+                    if npcUtil.tradeHasExactly(trade, { xi.items.LUMP_OF_BOMB_STEEL, xi.items.SACRED_BRANCH }) then
                         return quest:progressEvent(27)
                     end
                 end,
@@ -162,7 +162,7 @@ quest.sections =
             {
                 onTrade = function(player, npc, trade)
                     if
-                        npcUtil.tradeHasExactly(trade, {{xi.items.CHUNK_OF_GOLD_ORE, 2}, xi.items.CHUNK_OF_PLATINUM_ORE}) and
+                        npcUtil.tradeHasExactly(trade, { { xi.items.CHUNK_OF_GOLD_ORE, 2 }, xi.items.CHUNK_OF_PLATINUM_ORE }) and
                         quest:isVarBitsSet(player, 'Option', 1)
                     then
                         return quest:progressEvent(43, 0, 0, xi.items.CHUNK_OF_PLATINUM_ORE, xi.items.CHUNK_OF_GOLD_ORE)
@@ -231,7 +231,7 @@ quest.sections =
         {
             ['Guardian_Treant'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     quest:setVar(player, 'Prog', 1)
                 end,
             },
@@ -239,7 +239,10 @@ quest.sections =
             ['qm2'] =
             {
                 onTrade = function(player, npc, trade)
-                    if npcUtil.tradeHasExactly(trade, xi.items.HATCHET) then
+                    if
+                        npcUtil.tradeHasExactly(trade, xi.items.HATCHET) and
+                        player:hasItem(xi.items.SACRED_SPRIG)
+                    then
                         if
                             GetMobByID(zitahID.mob.GUARDIAN_TREANT):isSpawned() or
                             npc:getLocalVar('treantNextPopAllowedTime') > os.time()
@@ -269,7 +272,7 @@ quest.sections =
                     then
                         quest:setVar(player, 'Prog', 2)
                         player:confirmTrade()
-                        return quest:messageSpecial(zitahID.text.STRANGE_FORCE_VANISHED, xi.items.SACRED_SPRIG)
+                        return quest:messageSpecial(zitahID.text.STRANGE_FORCE_VANISHED, xi.items.SACRED_BRANCH)
                     end
                 end,
 

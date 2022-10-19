@@ -44,7 +44,7 @@ entity.onEventFinish = function(player, csid, option)
     -- Hat in Hand
     if csid == 55 then  -- Show Off Hat
         player:setCharVar("QuestHatInHand_var", utils.mask.setBit(player:getCharVar("QuestHatInHand_var"), 5, true))
-        player:addCharVar("QuestHatInHand_count", 1)
+        player:incrementCharVar("QuestHatInHand_count", 1)
     end
 end
 

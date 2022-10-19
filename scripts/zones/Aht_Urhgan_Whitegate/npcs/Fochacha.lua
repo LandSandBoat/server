@@ -7,7 +7,7 @@
 -----------------------------------
 require("scripts/globals/quests")
 require("scripts/globals/npc_util")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 local ID = require("scripts/zones/Aht_Urhgan_Whitegate/IDs")
 -----------------------------------
 local entity = {}

@@ -8,7 +8,6 @@
 -- qm3 : !pos 580 -9 290 112
 -- qm4 : !pos -21 -25 -490 112
 -----------------------------------
-require('scripts/settings/main')
 require('scripts/globals/keyitems')
 require('scripts/globals/npc_util')
 require('scripts/globals/quests')
@@ -34,9 +33,8 @@ quest.sections =
     {
         check = function(player, status, vars)
             return status == QUEST_AVAILABLE and
-                player:getMainLvl() >= 51 and
                 player:getLevelCap() == 55 and
-                xi.settings.MAX_LEVEL >= 60
+                xi.settings.main.MAX_LEVEL >= 60
         end,
 
         [xi.zone.RULUDE_GARDENS] =
@@ -44,7 +42,11 @@ quest.sections =
             ['Maat'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:progressEvent(82)
+                    if player:getMainLvl() >= 51 then
+                        return quest:progressEvent(82)
+                    else
+                        return quest:messageText(ruludeID.text.MAAT_LB2_PLACEHOLDER)
+                    end
                 end,
             },
 
@@ -103,7 +105,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         not player:hasKeyItem(xi.ki.ROUND_FRIGICITE) and
-                        (not xi.settings.OLDSCHOOL_G2 or GetMobByID(xarcabardID.mob.BOREAL_TIGER):isDead())
+                        (not xi.settings.main.OLDSCHOOL_G2 or GetMobByID(xarcabardID.mob.BOREAL_TIGER):isDead())
                     then
                         return quest:keyItem(xi.ki.ROUND_FRIGICITE)
                     end
@@ -115,7 +117,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         not player:hasKeyItem(xi.ki.SQUARE_FRIGICITE) and
-                        (not xi.settings.OLDSCHOOL_G2 or GetMobByID(xarcabardID.mob.BOREAL_COEURL):isDead())
+                        (not xi.settings.main.OLDSCHOOL_G2 or GetMobByID(xarcabardID.mob.BOREAL_COEURL):isDead())
                     then
                         return quest:keyItem(xi.ki.SQUARE_FRIGICITE)
                     end
@@ -127,7 +129,7 @@ quest.sections =
                 onTrigger = function(player, npc)
                     if
                         not player:hasKeyItem(xi.ki.TRIANGULAR_FRIGICITE) and
-                        (not xi.settings.OLDSCHOOL_G2 or GetMobByID(xarcabardID.mob.BOREAL_HOUND):isDead())
+                        (not xi.settings.main.OLDSCHOOL_G2 or GetMobByID(xarcabardID.mob.BOREAL_HOUND):isDead())
                     then
                         return quest:keyItem(xi.ki.TRIANGULAR_FRIGICITE)
                     end

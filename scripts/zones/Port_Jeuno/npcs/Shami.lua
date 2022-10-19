@@ -5,7 +5,7 @@
 -- !pos -53.9 0 10.8 246
 -----------------------------------
 local ID = require("scripts/zones/Port_Jeuno/IDs")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/npc_util")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
@@ -13,7 +13,8 @@ require("scripts/globals/utils")
 local entity = {}
 
 local shamiSealItems =
-{-- Trade Item                     Seal ID, Retrieve Option,
+{
+--  Trade Item                     Seal ID, Retrieve Option,
     [xi.items.BEASTMENS_SEAL       ] = { 0, 2 },
     [xi.items.KINDREDS_SEAL        ] = { 1, 1 },
     [xi.items.KINDREDS_CREST       ] = { 2, 3 },
@@ -22,7 +23,8 @@ local shamiSealItems =
 }
 
 local shamiOrbItems =
-{-- Item ID                        CS, PO, SealID, Cost,
+{
+--  Item ID                        CS, PO, SealID, Cost,
     [xi.items.CLOUDY_ORB     ] = {  5,  1,      0,   20, },
     [xi.items.SKY_ORB        ] = {  9,  2,      0,   30, },
     [xi.items.STAR_ORB       ] = {  9,  3,      0,   40, },
@@ -66,7 +68,7 @@ end
 local function getOrbEvent(player, trade)
     for itemID, orbData in pairs(shamiOrbItems) do
         if npcUtil.tradeHasExactly(trade, itemID) then
-            if player:hasWornItem(itemID) then
+            if player:getWornUses(itemID) > 0 then
                 return 22
             else
                 return orbData[1]
@@ -91,12 +93,15 @@ entity.onTrade = function(player, npc, trade)
     -- Trading Seals/Crests
     local sealOption = getSealTradeOption(trade)
     if sealOption ~= nil then
+        local eventParams = { 321, 0, 0, 0, 0, 0 }
         local storedSeals = player:getSeals(sealOption)
         local itemCount = trade:getItemCount()
 
-        player:startEvent(321, sealOption, storedSeals + itemCount)
+        eventParams[sealOption + 2] = bit.lshift(storedSeals + itemCount, 16)
+        player:startEvent(unpack(eventParams))
         player:addSeals(itemCount, sealOption)
         player:confirmTrade()
+        return
     end
 
     -- Trading Orbs
@@ -139,7 +144,7 @@ entity.onEventFinish = function(player, csid, option)
     elseif option >= 508 and option ~= 1073741824 then
         local itemID, sealID, retrievedSealCount = convertSealRetrieveOption(option)
 
-        if npcUtil.giveItem(player, {{itemID, retrievedSealCount}}) then
+        if npcUtil.giveItem(player, { { itemID, retrievedSealCount } }) then
             player:delSeals(retrievedSealCount, sealID)
         end
 

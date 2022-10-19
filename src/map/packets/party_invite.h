@@ -22,7 +22,7 @@
 #ifndef _CPARTYINVITEPACKET_H
 #define _CPARTYINVITEPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

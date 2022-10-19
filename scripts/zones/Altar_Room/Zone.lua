@@ -1,21 +1,19 @@
 -----------------------------------
---
 -- Zone: Altar_Room (152)
---
 -----------------------------------
-local ID = require("scripts/zones/Altar_Room/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/quests")
-require("scripts/globals/keyitems")
-require("scripts/globals/npc_util")
-require("scripts/globals/zone")
+local ID = require('scripts/zones/Altar_Room/IDs')
+require('scripts/globals/conquest')
+require('scripts/globals/quests')
+require('scripts/globals/keyitems')
+require('scripts/globals/npc_util')
+require('scripts/globals/zone')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
 end
 
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
     local head = player:getEquipID(xi.slot.HEAD)
 
@@ -29,23 +27,25 @@ zone_object.onZoneIn = function(player, prevZone)
     elseif player:getCharVar("moral") == 8 and head == 15216 then -- Tsoo Headgear
         cs = 51
     end
+
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
         player:setPos(-247.998, 12.609, -100.008, 128)
     end
+
     return cs
 end
 
-zone_object.onConquestUpdate = function(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zone_object.onRegionEnter = function(player, region)
+zoneObject.onRegionEnter = function(player, region)
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
     if csid == 10000 then
         player:setCharVar("FickblixCS", 0)
     elseif csid == 46 and option == 0 then
@@ -65,4 +65,4 @@ zone_object.onEventFinish = function(player, csid, option)
     end
 end
 
-return zone_object
+return zoneObject

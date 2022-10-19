@@ -15,30 +15,27 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
+    local distantLoyaltiesProgress = player:getCharVar("DistantLoyaltiesProgress")
+    local distantLoyalties = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.DISTANT_LOYALTIES)
+    local wildcatSandy = player:getCharVar("WildcatSandy")
 
-    local DistantLoyaltiesProgress = player:getCharVar("DistantLoyaltiesProgress")
-    local DistantLoyalties = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.DISTANT_LOYALTIES)
-    local WildcatSandy = player:getCharVar("WildcatSandy")
-
-    if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(WildcatSandy, 3)) then
+    if (player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and not utils.mask.getBit(wildcatSandy, 3)) then
         player:startEvent(807)
-    elseif (player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 4 and DistantLoyalties == 0) then
+    elseif (player:getFameLevel(xi.quest.fame_area.SANDORIA) >= 4 and distantLoyalties == 0) then
         player:startEvent(663)
-    elseif (DistantLoyalties == 1 and DistantLoyaltiesProgress == 1) then
+    elseif (distantLoyalties == 1 and distantLoyaltiesProgress == 1) then
         player:startEvent(664)
-    elseif (DistantLoyalties == 1 and DistantLoyaltiesProgress == 4 and player:hasKeyItem(xi.ki.MYTHRIL_HEARTS)) then
+    elseif (distantLoyalties == 1 and distantLoyaltiesProgress == 4 and player:hasKeyItem(xi.ki.MYTHRIL_HEARTS)) then
         player:startEvent(665)
     else
         player:startEvent(661)
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if (csid == 807) then
         player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 3, true))
     elseif (csid == 663 and option == 0) then
@@ -57,7 +54,6 @@ entity.onEventFinish = function(player, csid, option)
             player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.DISTANT_LOYALTIES)
         end
     end
-
 end
 
 --------Other CS

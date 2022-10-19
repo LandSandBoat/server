@@ -6,7 +6,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Windurst_Waters/IDs")
 require("scripts/globals/keyitems")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/utils")
 -----------------------------------
@@ -39,7 +39,7 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 56 then
         player:setCharVar("QuestHatInHand_var", utils.mask.setBit(player:getCharVar("QuestHatInHand_var"), 2, true))
-        player:addCharVar("QuestHatInHand_count", 1)
+        player:incrementCharVar("QuestHatInHand_count", 1)
     elseif csid == 519 then
         player:setCharVar("FLOWER_PROGRESS", 3)
     end

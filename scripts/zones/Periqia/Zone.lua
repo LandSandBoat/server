@@ -1,17 +1,15 @@
 -----------------------------------
---
 -- Zone: Periqia
---
 -----------------------------------
-local ID = require("scripts/zones/Periqia/IDs")
-require("scripts/globals/zone")
+local ID = require('scripts/zones/Periqia/IDs')
+require('scripts/globals/zone')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
 end
 
-zone_object.onInstanceZoneIn = function(player, instance)
+zoneObject.onInstanceZoneIn = function(player, instance)
     local cs = -1
 
     if player:getInstance() == nil then
@@ -28,13 +26,13 @@ zone_object.onInstanceZoneIn = function(player, instance)
     return cs
 end
 
-zone_object.onRegionEnter = function(player, region)
+zoneObject.onRegionEnter = function(player, region)
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
     if csid == 102 then
         local instance = player:getInstance()
         local chars = instance:getChars()
@@ -44,8 +42,8 @@ zone_object.onEventFinish = function(player, csid, option)
     end
 end
 
-zone_object.onInstanceLoadFailed = function()
+zoneObject.onInstanceLoadFailed = function()
     return 79
 end
 
-return zone_object
+return zoneObject

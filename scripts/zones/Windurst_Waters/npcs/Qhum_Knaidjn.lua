@@ -10,75 +10,101 @@ local ID = require("scripts/zones/Windurst_Waters/IDs")
 -----------------------------------
 local entity = {}
 
-local keyitems = {
-    [0] = {
+local keyitems =
+{
+    [0] =
+    {
         id = xi.ki.RAW_FISH_HANDLING,
         rank = 3,
         cost = 30000
     },
-    [1] = {
+
+    [1] =
+    {
         id = xi.ki.NOODLE_KNEADING,
         rank = 3,
         cost = 30000
     },
-    [2] = {
+
+    [2] =
+    {
         id = xi.ki.PATISSIER,
         rank = 3,
         cost = 8000
     },
-    [3] = {
+
+    [3] =
+    {
         id = xi.ki.STEWPOT_MASTERY,
         rank = 3,
         cost = 30000
     },
-    [4] = {
+
+    [4] =
+    {
         id = xi.ki.WAY_OF_THE_CULINARIAN,
         rank = 9,
         cost = 20000
-    }
+    },
 }
 
-local items = {
-    [0] = {
+local items =
+{
+    [0] =
+    {
         id = 15451, -- Culinarian's Belt
         rank = 4,
         cost = 10000
     },
-    [1] = {
+
+    [1] =
+    {
         id = 13948, -- Chef's Hat
         rank = 5,
         cost = 70000
     },
-    [2] = {
+
+    [2] =
+    {
         id = 14399, -- Culinarian's Apron
         rank = 7,
         cost = 100000
     },
-    [3] = {
+
+    [3] =
+    {
         id = 137, -- Cordon Bleu Cooking Set
         rank = 9,
         cost = 150000
     },
-    [4] = {
+
+    [4] =
+    {
         id = 338, -- Culinarian's Signboard
         rank = 9,
         cost = 200000
     },
-    [5] = {
+
+    [5] =
+    {
         id = 15826, -- Chef's Ring
         rank = 6,
         cost = 80000
     },
-    [6] = {
+
+    [6] =
+    {
         id = 3667, -- Brass Crock
         rank = 7,
         cost = 50000
     },
-    [7] = {
+
+    [7] =
+    {
         id = 3328, -- Culinarian's Emblem
         rank = 9,
         cost = 15000
-    }
+    },
 }
 
 entity.onTrade = function(player, npc, trade)

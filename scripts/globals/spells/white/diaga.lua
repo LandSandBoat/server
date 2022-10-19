@@ -2,19 +2,19 @@
 -- Spell: Diaga
 -- Lowers an enemy's defense and gradually deals light elemental damage.
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/utils")
 require("scripts/globals/msg")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local basedmg = caster:getSkillLevel(xi.skill.ENFEEBLING_MAGIC) / 4
     local params = {}
     params.dmg = basedmg
@@ -50,7 +50,7 @@ spell_object.onSpellCast = function(caster, target, spell)
 
     if  bio == nil then -- if no bio, add dia dot
         target:addStatusEffect(xi.effect.DIA, 1 + dotBonus, 3, duration, 0, 10, 1)
-    elseif  bio:getSubPower() == 10 and xi.settings.BIO_OVERWRITE == 1 then -- Try to kill same tier Bio (non-default behavior)
+    elseif  bio:getSubPower() == 10 and xi.settings.main.BIO_OVERWRITE == 1 then -- Try to kill same tier Bio (non-default behavior)
             target:delStatusEffect(xi.effect.BIO)
             target:addStatusEffect(xi.effect.DIA, 1 + dotBonus, 3, duration, 0, 10, 1)
     end
@@ -58,4 +58,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return final
 end
 
-return spell_object
+return spellObject

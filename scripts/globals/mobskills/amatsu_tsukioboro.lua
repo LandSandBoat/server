@@ -2,17 +2,23 @@
 --  Amatsu: Tsukioboro
 --  Type: Physical
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
-    return 0
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
+    if
+        mob:getObjType() == xi.objType.TRUST or
+        mob:getAnimationSub() == 0
+    then
+        return 0
+    else
+        return 1
+    end
 end
-
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     local typeEffect = xi.effect.SILENCE
     local power = 1
     local duration = 60
@@ -28,4 +34,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return dmg
 end
 
-return mobskill_object
+return mobskillObject

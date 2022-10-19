@@ -47,7 +47,7 @@ public:
     CAIContainer(CBaseEntity*, std::unique_ptr<CPathFind>&&, std::unique_ptr<CController>&&, std::unique_ptr<CTargetFind>&&);
 
     // no copy construct/assign (only move)
-    CAIContainer(const CAIContainer&) = delete;
+    CAIContainer(const CAIContainer&)            = delete;
     CAIContainer& operator=(const CAIContainer&) = delete;
 
     bool Cast(uint16 targid, SpellID spellid);
@@ -56,11 +56,13 @@ public:
     bool Disengage();
     bool WeaponSkill(uint16 targid, uint16 wsid);
     bool MobSkill(uint16 targid, uint16 wsid);
+    bool PetSkill(uint16 targid, uint16 wsid);
     bool Ability(uint16 targid, uint16 abilityid);
     bool RangedAttack(uint16 targid);
     bool Trigger(CCharEntity* player);
     bool UseItem(uint16 targid, uint8 loc, uint8 slotid);
     bool Inactive(duration _duration, bool canChangeState);
+    bool Untargetable(duration _duration, bool canChangeState); // Used to make owner entity untargetable & inactionable in TargetFind for _duration
 
     /* Internal Controller functions */
     bool Internal_Engage(uint16 targetid);
@@ -69,6 +71,7 @@ public:
     bool Internal_Disengage();
     bool Internal_WeaponSkill(uint16 targid, uint16 wsid);
     bool Internal_MobSkill(uint16 targid, uint16 wsid);
+    bool Internal_PetSkill(uint16 targid, uint16 abilityid);
     bool Internal_Ability(uint16 targetid, uint16 abilityid);
     bool Internal_RangedAttack(uint16 targetid);
     bool Internal_Die(duration);
@@ -104,6 +107,7 @@ public:
     bool IsSpawned();
     bool IsRoaming();
     bool IsEngaged();
+    bool IsUntargetable();
     // whether AI is currently able to change state from external means
     bool CanChangeState();
     bool CanFollowPath();

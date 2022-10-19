@@ -22,7 +22,7 @@
 #ifndef _LUATRADECONTAINER_H
 #define _LUATRADECONTAINER_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 #include "luautils.h"
 
 class CTradeContainer;

@@ -9,13 +9,14 @@ require("scripts/globals/npc_util")
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    if npcUtil.tradeHas(trade, 2586) and npcUtil.popFromQM(player, npc, ID.mob.ACHAMOTH) then -- Rock Juice
+    if npcUtil.tradeHas(trade, 2586) and npcUtil.popFromQM(player, npc, ID.mob.ACHAMOTH) then -- Trade Rock Juice
         player:confirmTrade()
+        player:messageSpecial(ID.text.DRAWS_NEAR)
     end
 end
 
 entity.onTrigger = function(player, npc)
-    player:messageSpecial(ID.text.NOTHING_HAPPENS)
+    player:messageSpecial(ID.text.SICKLY_SWEET)
 end
 
 entity.onEventUpdate = function(player, csid, option)

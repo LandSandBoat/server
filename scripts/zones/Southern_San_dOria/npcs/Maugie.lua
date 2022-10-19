@@ -5,7 +5,7 @@
 -----------------------------------
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
 require("scripts/quests/flyers_for_regine")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
@@ -40,8 +40,8 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 44) then
         player:setCharVar("CleanSignPost", 0)
         player:addFame(xi.quest.fame_area.SANDORIA, 30)
-        player:addGil(xi.settings.GIL_RATE*1500)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*1500)
+        player:addGil(xi.settings.main.GIL_RATE*1500)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*1500)
         player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRIMY_SIGNPOSTS)
     end
 end

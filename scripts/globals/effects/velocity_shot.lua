@@ -4,9 +4,9 @@
 require("scripts/globals/jobpoints")
 require("scripts/globals/status")
 -----------------------------------
-local effect_object = {}
+local effectObject = {}
 
-effect_object.onEffectGain = function(target, effect)
+effectObject.onEffectGain = function(target, effect)
     local jpValue = target:getJobPointLevel(xi.jp.VELOCITY_SHOT_EFFECT)
 
     target:addMod(xi.mod.RATT, jpValue * 2)
@@ -16,10 +16,10 @@ effect_object.onEffectGain = function(target, effect)
     target:addMod(xi.mod.RANGED_DELAYP, -10)
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
 end
 
-effect_object.onEffectLose = function(target, effect)
+effectObject.onEffectLose = function(target, effect)
     local jpValue = target:getJobPointLevel(xi.jp.VELOCITY_SHOT_EFFECT)
 
     target:delMod(xi.mod.RATT, jpValue * 2)
@@ -29,4 +29,4 @@ effect_object.onEffectLose = function(target, effect)
     target:delMod(xi.mod.RANGED_DELAYP, -10)
 end
 
-return effect_object
+return effectObject

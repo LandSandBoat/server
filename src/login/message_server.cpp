@@ -81,6 +81,7 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
         case MSG_CHAT_TELL:
         case MSG_LINKSHELL_RANK_CHANGE:
         case MSG_LINKSHELL_REMOVE:
+        case MSG_CHARVAR_UPDATE:
         {
             const char* query = "SELECT server_addr, server_port FROM accounts_sessions LEFT JOIN chars ON "
                                 "accounts_sessions.charid = chars.charid WHERE charname = '%s' LIMIT 1;";
@@ -141,6 +142,7 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
             break;
         }
         case MSG_SEND_TO_ENTITY:
+        case MSG_LUA_FUNCTION:
         {
             const char* query = "SELECT zoneip, zoneport FROM zone_settings WHERE zoneid = %d;";
             ret               = zmqSql->Query(query, ref<uint16>((uint8*)extra->data(), 2));
@@ -161,7 +163,8 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
 
     if (ret != SQL_ERROR)
     {
-        ShowDebug("Message: Received message %d from %s:%hu", static_cast<uint8>(type), from_address, from_port);
+        ShowDebug("Message: Received message %s (%d) from %s:%hu",
+                  msgTypeToStr(type), static_cast<uint8>(type), from_address, from_port);
 
         while (zmqSql->NextRow() == SQL_SUCCESS)
         {
@@ -178,11 +181,11 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
 
             uint64  port = zmqSql->GetUIntData(1);
             in_addr target;
-            target.s_addr = (unsigned long)ip;
+            target.s_addr = ip;
 
             char target_address[INET_ADDRSTRLEN];
             inet_ntop(AF_INET, &target, target_address, INET_ADDRSTRLEN);
-            ShowDebug("Message:  -> rerouting to %s:%lu", target_address, port);
+            ShowDebug("Message: -> rerouting to %s:%lu", target_address, port);
             ip |= (port << 32);
 
             if (type == MSG_CHAT_PARTY || type == MSG_PT_RELOAD || type == MSG_PT_DISBAND)
@@ -195,9 +198,9 @@ void message_server_parse(MSGSERVTYPE type, zmq::message_t* extra, zmq::message_
     }
 }
 
-void message_server_listen()
+void message_server_listen(const bool& requestExit)
 {
-    while (true)
+    while (!requestExit)
     {
         std::array<zmq::message_t, 4> msgs;
         try
@@ -236,23 +239,20 @@ void message_server_listen()
     }
 }
 
-void message_server_init()
+void message_server_init(const bool& requestExit)
 {
-    zmqSql = std::make_unique<SqlConnection>(login_config.mysql_login.c_str(),
-                                             login_config.mysql_password.c_str(),
-                                             login_config.mysql_host.c_str(),
-                                             login_config.mysql_port,
-                                             login_config.mysql_database.c_str());
+    TracySetThreadName("Message Server (ZMQ)");
+
+    zmqSql = std::make_unique<SqlConnection>();
 
     zContext = zmq::context_t(1);
     zSocket  = std::make_unique<zmq::socket_t>(zContext, zmq::socket_type::router);
 
     zSocket->set(zmq::sockopt::rcvtimeo, 500);
 
-    string_t server = "tcp://";
-    server.append(login_config.msg_server_ip);
-    server.append(":");
-    server.append(std::to_string(login_config.msg_server_port));
+    auto server = fmt::format("tcp://{}:{}",
+                              settings::get<std::string>("network.ZMQ_IP"),
+                              settings::get<std::string>("network.ZMQ_PORT"));
 
     try
     {
@@ -260,10 +260,10 @@ void message_server_init()
     }
     catch (zmq::error_t& err)
     {
-        ShowFatalError("Unable to bind chat socket: %s", err.what());
+        ShowCritical("Unable to bind chat socket: %s", err.what());
     }
 
-    message_server_listen();
+    message_server_listen(requestExit);
 }
 
 void message_server_close()

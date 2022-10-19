@@ -22,7 +22,7 @@
 #ifndef _CPOSITIONPACKET_H
 #define _CPOSITIONPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

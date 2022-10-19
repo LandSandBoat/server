@@ -13,7 +13,7 @@ local entity = {}
 
 entity.onTrade = function(player, npc, trade)
     if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.BEYOND_INFINITY) >= QUEST_ACCEPTED and
-        npcUtil.tradeHasExactly(trade, {xi.items.SEASONING_STONE, xi.items.FOSSILIZED_BONE, xi.items.FOSSILIZED_FANG}) then
+        npcUtil.tradeHasExactly(trade, { xi.items.SEASONING_STONE, xi.items.FOSSILIZED_BONE, xi.items.FOSSILIZED_FANG }) then
         player:startEvent(15)
     end
 end

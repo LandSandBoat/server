@@ -2,19 +2,20 @@
 -- Slapstick
 -----------------------------------
 require("scripts/globals/status")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/automatonweaponskills")
 
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAutomatonAbilityCheck = function(target, automaton, skill)
+abilityObject.onAutomatonAbilityCheck = function(target, automaton, skill)
     local master = automaton:getMaster()
     return master:countEffect(xi.effect.THUNDER_MANEUVER)
 end
 
-ability_object.onAutomatonAbility = function(target, automaton, skill, master, action)
-    local params = {
+abilityObject.onAutomatonAbility = function(target, automaton, skill, master, action)
+    local params =
+    {
         numHits = 3,
         atkmulti = 1,
         weaponType = xi.skill.CLUB,
@@ -33,7 +34,7 @@ ability_object.onAutomatonAbility = function(target, automaton, skill, master, a
         chr_wsc = 0.0
     }
 
-    if xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+    if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.ftp100 = 2.66
         params.ftp200 = 2.66
         params.ftp300 = 2.66
@@ -45,4 +46,4 @@ ability_object.onAutomatonAbility = function(target, automaton, skill, master, a
     return damage
 end
 
-return ability_object
+return abilityObject

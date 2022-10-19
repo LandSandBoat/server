@@ -55,6 +55,7 @@ public:
     bool HasBuffSpells() const;
     bool HasHealSpells() const;
     bool HasNaSpells() const;
+    bool HasRaiseSpells() const;
     bool HasDebuffSpells() const;
     bool HasSevereSpells() const;
 
@@ -64,7 +65,11 @@ public:
 
     std::optional<SpellID> GetAvailable(SpellID spellId);
     std::optional<SpellID> GetBestAvailable(SPELLFAMILY family);
+    std::optional<SpellID> GetBestIndiSpell(CBattleEntity* PMaster);
+    std::optional<SpellID> GetBestEntrustedSpell(CBattleEntity* PMaster);
     std::optional<SpellID> GetBestAgainstTargetWeakness(CBattleEntity* PTarget);
+    std::optional<SpellID> GetStormDay();
+    std::optional<SpellID> GetHelixDay();
 
     std::vector<SpellID> m_gaList;
     std::vector<SpellID> m_damageList;
@@ -72,6 +77,7 @@ public:
     std::vector<SpellID> m_debuffList;
     std::vector<SpellID> m_healList;
     std::vector<SpellID> m_naList;
+    std::vector<SpellID> m_raiseList;
     std::vector<SpellID> m_severeList;
 
 private:

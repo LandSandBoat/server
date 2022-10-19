@@ -1,4 +1,4 @@
-﻿#include "../../common/socket.h"
+﻿#include "common/socket.h"
 
 #include "timer_bar_util.h"
 
@@ -23,7 +23,7 @@ void CTimerBarUtilPacket::addCountdown(uint32 seconds)
     ref<uint8>(0x24) = 0x03;
 }
 
-void CTimerBarUtilPacket::addBar1(std::string name, uint8 value)
+void CTimerBarUtilPacket::addBar1(std::string const& name, uint8 value)
 {
     ref<uint8>(0x28) = value;
 
@@ -33,7 +33,7 @@ void CTimerBarUtilPacket::addBar1(std::string name, uint8 value)
     }
 }
 
-void CTimerBarUtilPacket::addBar2(std::string name, uint8 value)
+void CTimerBarUtilPacket::addBar2(std::string const& name, uint8 value)
 {
     ref<uint8>(0x3C) = value;
 

@@ -19,16 +19,16 @@
 ===========================================================================
 */
 
-#include "../../common/logging.h"
+#include "common/logging.h"
 
 #include "../spell.h"
 #include "../utils/battleutils.h"
 #include "lua_spell.h"
 
 /************************************************************************
- *																		*
- *  Constructor															*
- *																		*
+ *                                                                        *
+ *  Constructor                                                            *
+ *                                                                        *
  ************************************************************************/
 
 CLuaSpell::CLuaSpell(CSpell* PSpell)
@@ -123,7 +123,7 @@ uint16 CLuaSpell::getID()
 
 uint16 CLuaSpell::getMPCost()
 {
-    return static_cast<uint16>(m_PLuaSpell->getMPCost());
+    return m_PLuaSpell->getMPCost();
 }
 
 uint8 CLuaSpell::getSkillType()
@@ -134,6 +134,11 @@ uint8 CLuaSpell::getSkillType()
 uint8 CLuaSpell::getSpellGroup()
 {
     return static_cast<uint8>(m_PLuaSpell->getSpellGroup());
+}
+
+uint8 CLuaSpell::getSpellFamily()
+{
+    return static_cast<uint8>(m_PLuaSpell->getSpellFamily());
 }
 
 uint8 CLuaSpell::getFlag()
@@ -162,6 +167,7 @@ void CLuaSpell::Register()
     SOL_REGISTER("getID", CLuaSpell::getID);
     SOL_REGISTER("getMPCost", CLuaSpell::getMPCost);
     SOL_REGISTER("getSpellGroup", CLuaSpell::getSpellGroup);
+    SOL_REGISTER("getSpellFamily", CLuaSpell::getSpellFamily);
     SOL_REGISTER("getFlag", CLuaSpell::getFlag);
     SOL_REGISTER("getCastTime", CLuaSpell::getCastTime);
 }

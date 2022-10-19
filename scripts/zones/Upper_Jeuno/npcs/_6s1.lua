@@ -23,12 +23,6 @@ entity.onTrigger = function(player, npc)
     local mission = player:getCurrentMission(xi.mission.log_id.COP)
 
     if
-        mission == xi.mission.id.cop.FLAMES_IN_THE_DARKNESS and
-        status == 3
-    then
-        player:startEvent(10012)
-
-    elseif
         mission == xi.mission.id.cop.DAWN and
         status == 4
     then
@@ -79,11 +73,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 10012 then
-        player:setCharVar("PromathiaStatus", 0)
-        player:completeMission(xi.mission.log_id.COP, xi.mission.id.cop.FLAMES_IN_THE_DARKNESS)
-        player:addMission(xi.mission.log_id.COP, xi.mission.id.cop.FIRE_IN_THE_EYES_OF_MEN)
-    elseif csid == 129 then
+    if csid == 129 then
         player:setCharVar("PromathiaStatus", 5)
     elseif
         (csid == 84 or csid == 204) and

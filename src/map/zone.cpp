@@ -73,25 +73,12 @@
 #include "utils/petutils.h"
 #include "utils/zoneutils.h"
 
-/************************************************************************
- *                                                                       *
- *  Cервер для обработки активности сущностей (по серверу на зону) без   *
- *  активных областей                                                    *
- *                                                                       *
- ************************************************************************/
-
 int32 zone_server(time_point tick, CTaskMgr::CTask* PTask)
 {
-    std::any_cast<CZone*>(PTask->m_data)->ZoneServer(tick, false);
+    CZone* PZone = std::any_cast<CZone*>(PTask->m_data);
+    PZone->ZoneServer(tick, false);
     return 0;
 }
-
-/************************************************************************
- *                                                                       *
- *  Cервер для обработки активности сущностей (по серверу на зону) c     *
- *  активными областями                                                  *
- *                                                                       *
- ************************************************************************/
 
 int32 zone_server_region(time_point tick, CTaskMgr::CTask* PTask)
 {
@@ -108,12 +95,6 @@ int32 zone_server_region(time_point tick, CTaskMgr::CTask* PTask)
     }
     return 0;
 }
-
-/************************************************************************
- *                                                                       *
- *                                                                       *
- *                                                                       *
- ************************************************************************/
 
 int32 zone_update_weather(time_point tick, CTaskMgr::CTask* PTask)
 {
@@ -140,8 +121,9 @@ CZone::CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID)
 , m_continentID(ContinentID)
 {
     TracyZoneScoped;
-    std::ignore = m_useNavMesh;
-    ZoneTimer   = nullptr;
+    m_useNavMesh = false;
+    std::ignore  = m_useNavMesh;
+    ZoneTimer    = nullptr;
 
     m_TreasurePool       = nullptr;
     m_BattlefieldHandler = nullptr;
@@ -161,6 +143,8 @@ CZone::CZone(ZONEID ZoneID, REGION_TYPE RegionID, CONTINENT_TYPE ContinentID)
 
 CZone::~CZone()
 {
+    delete m_TreasurePool;
+    delete m_CampaignHandler;
     delete m_zoneEntities;
 }
 
@@ -260,6 +244,42 @@ void CZone::SetBackgroundMusicNight(uint8 music)
     m_zoneMusic.m_songNight = music;
 }
 
+const QueryByNameResult_t& CZone::queryEntitiesByName(std::string const& name)
+{
+    TracyZoneScoped;
+
+    // Use memoization since lookups are typically for the same mob names
+    auto result = m_queryByNameResults.find(name);
+    if (result != m_queryByNameResults.end())
+    {
+        return result->second;
+    }
+
+    std::vector<CBaseEntity*> entities;
+
+    // TODO: Make work for instances
+    // clang-format off
+    ForEachNpc([&](CNpcEntity* PNpc)
+    {
+        if (std::string((const char*)PNpc->GetName()) == name)
+        {
+            entities.push_back(PNpc);
+        }
+    });
+
+    ForEachMob([&](CMobEntity* PMob)
+    {
+        if (std::string((const char*)PMob->GetName()) == name)
+        {
+            entities.push_back(PMob);
+        }
+     });
+    // clang-format on
+
+    m_queryByNameResults[name] = std::move(entities);
+    return m_queryByNameResults[name];
+}
+
 uint32 CZone::GetLocalVar(const char* var)
 {
     return m_LocalVars[var];
@@ -268,6 +288,11 @@ uint32 CZone::GetLocalVar(const char* var)
 void CZone::SetLocalVar(const char* var, uint32 val)
 {
     m_LocalVars[var] = val;
+}
+
+void CZone::ResetLocalVars()
+{
+    m_LocalVars.clear();
 }
 
 bool CZone::CanUseMisc(uint16 misc) const
@@ -361,7 +386,7 @@ void CZone::LoadZoneWeather()
     }
     else
     {
-        ShowFatalError("CZone::LoadZoneWeather: Cannot load zone weather (%u). Ensure zone_weather.sql has been imported!", m_zoneID);
+        ShowCritical("CZone::LoadZoneWeather: Cannot load zone weather (%u). Ensure zone_weather.sql has been imported!", m_zoneID);
     }
 }
 
@@ -422,7 +447,7 @@ void CZone::LoadZoneSettings()
     }
     else
     {
-        ShowFatalError("CZone::LoadZoneSettings: Cannot load zone settings (%u)", m_zoneID);
+        ShowCritical("CZone::LoadZoneSettings: Cannot load zone settings (%u)", m_zoneID);
     }
 }
 
@@ -440,6 +465,7 @@ void CZone::LoadNavMesh()
 
     if (!m_navMesh->load(file))
     {
+        DebugNavmesh("CZone::LoadNavMesh: Cannot load navmesh file (%s)", file);
         delete m_navMesh;
         m_navMesh = nullptr;
     }
@@ -536,12 +562,6 @@ void CZone::TransportDepart(uint16 boundary, uint16 zone)
 {
     m_zoneEntities->TransportDepart(boundary, zone);
 }
-
-/************************************************************************
- *                                                                       *
- *                                                                       *
- *                                                                       *
- ************************************************************************/
 
 void CZone::SetWeather(WEATHER weather)
 {
@@ -669,9 +689,12 @@ void CZone::DecreaseZoneCounter(CCharEntity* PChar)
 void CZone::IncreaseZoneCounter(CCharEntity* PChar)
 {
     TracyZoneScoped;
-    XI_DEBUG_BREAK_IF(PChar == nullptr);
-    XI_DEBUG_BREAK_IF(PChar->loc.zone != nullptr);
-    XI_DEBUG_BREAK_IF(PChar->PTreasurePool != nullptr);
+
+    if (PChar == nullptr || PChar->loc.zone != nullptr || PChar->PTreasurePool != nullptr)
+    {
+        ShowWarning("CZone::IncreaseZoneCounter() - PChar is null, or Player zone or Treasure Pools is not null.");
+        return;
+    }
 
     PChar->targid = m_zoneEntities->GetNewCharTargID();
 
@@ -687,6 +710,8 @@ void CZone::IncreaseZoneCounter(CCharEntity* PChar)
     {
         createZoneTimer();
     }
+
+    PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_ON_ZONE_PATHOS, true);
 
     CharZoneIn(PChar);
 }
@@ -799,12 +824,6 @@ void CZone::SavePlayTime()
     m_zoneEntities->SavePlayTime();
 }
 
-/************************************************************************
- *                                                                       *
- *                                                                       *
- *                                                                       *
- ************************************************************************/
-
 CCharEntity* CZone::GetCharByName(int8* name)
 {
     return m_zoneEntities->GetCharByName(name);
@@ -825,6 +844,18 @@ void CZone::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message_type, C
 {
     TracyZoneScoped;
     m_zoneEntities->PushPacket(PEntity, message_type, packet);
+}
+
+void CZone::UpdateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask)
+{
+    TracyZoneScoped;
+    m_zoneEntities->UpdateCharPacket(PChar, type, updatemask);
+}
+
+void CZone::UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask, bool alwaysInclude)
+{
+    TracyZoneScoped;
+    m_zoneEntities->UpdateEntityPacket(PEntity, type, updatemask, alwaysInclude);
 }
 
 /************************************************************************
@@ -933,7 +964,8 @@ void CZone::createZoneTimer()
     TracyZoneScoped;
     ZoneTimer =
         CTaskMgr::getInstance()->AddTask(m_zoneName, server_clock::now(), this, CTaskMgr::TASK_INTERVAL,
-                                         m_regionList.empty() ? zone_server : zone_server_region, std::chrono::milliseconds((int)(1000 / server_tick_rate)));
+                                         m_regionList.empty() ? zone_server : zone_server_region,
+                                         std::chrono::milliseconds(static_cast<uint32>(server_tick_interval)));
 }
 
 void CZone::CharZoneIn(CCharEntity* PChar)
@@ -990,6 +1022,26 @@ void CZone::CharZoneIn(CCharEntity* PChar)
         {
             PBattlefield->InsertEntity(PChar, true);
         }
+        else if (PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_CONFRONTATION))
+        {
+            // Player is in a zone with a battlefield but they are not part of one.
+            if (PChar->StatusEffectContainer->GetStatusEffect(EFFECT_BATTLEFIELD)->GetSubPower() == 1)
+            {
+                // If inside of the battlefield arena then kick them out
+                m_BattlefieldHandler->addOrphanedPlayer(PChar);
+            }
+            else
+            {
+                // Is not inside of a battlefield arena so remove the battlefield effect
+                PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
+                PChar->StatusEffectContainer->DelStatusEffect(EFFECT_LEVEL_RESTRICTION);
+            }
+        }
+    }
+    else if (PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_CONFRONTATION))
+    {
+        // Player is zoning into a zone that does not have a battlefield but the player has a confrontation effect - remove it
+        PChar->StatusEffectContainer->DelStatusEffectsByFlag(EFFECTFLAG_CONFRONTATION, true);
     }
 
     PChar->PLatentEffectContainer->CheckLatentsZone();
@@ -1145,7 +1197,7 @@ void CZone::CheckRegions(CCharEntity* PChar)
     PChar->m_InsideRegionID = RegionID;
 }
 
-//====================================1=======================
+//===========================================================
 
 /*
 id              CBaseEntity

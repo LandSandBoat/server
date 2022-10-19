@@ -19,14 +19,21 @@
 ===========================================================================
 */
 
-#include "../common/kernel.h"
-#include "../common/socket.h"
-#include "../common/taskmgr.h"
-#include "../common/timer.h"
-#include "../common/version.h"
+#include "common/kernel.h"
 
-#include "debug.h"
-#include "logging.h"
+#include "common/debug.h"
+#include "common/logging.h"
+#include "common/lua.h"
+#include "common/settings.h"
+#include "common/socket.h"
+#include "common/taskmgr.h"
+#include "common/timer.h"
+#include "common/version.h"
+#include <sstream>
+#if defined(__linux__) || defined(__APPLE__)
+#define BACKWARD_HAS_BFD 1
+#include "../../ext/backward/backward.hpp"
+#endif
 
 #include <csignal>
 #include <cstdio>
@@ -46,12 +53,18 @@
 #endif
 #endif
 
-int    runflag = 1;
-int    arg_c   = 0;
-char** arg_v   = nullptr;
+std::atomic<bool> gRunFlag = true;
+
+int    arg_c = 0;
+char** arg_v = nullptr;
 
 char* SERVER_NAME = nullptr;
 char  SERVER_TYPE = XI_SERVER_NONE;
+
+std::array<std::unique_ptr<socket_data>, FD_SETSIZE> sessions;
+
+// This must be manually created
+std::unique_ptr<ConsoleService> gConsoleService;
 
 // Copyright (c) Athena Dev Teams
 // Added by Gabuzomeu
@@ -91,129 +104,68 @@ sigfunc* compat_signal(int signo, sigfunc* func)
  *                                                                       *
  ************************************************************************/
 
-static void dump_backtrace()
+static void dump_backtrace() // handled in debug_osx.cpp and debug_linux.cpp
 {
-    // gdb
-#if defined(__linux__)
-    int fd[2];
-    int status = pipe(fd);
-    if (status == -1)
-    {
-        ShowError("pipe failed for gdb backtrace: %s", strerror(errno));
-        _exit(EXIT_FAILURE);
-    }
-    pid_t child_pid = fork();
-
-#ifdef HAS_YAMA_PRCTL
-    // Tell yama that we allow our child_pid to trace our process
-    if (child_pid > 0)
-    {
-        prctl(PR_SET_DUMPABLE, 1);
-        prctl(PR_SET_PTRACER, child_pid);
-    }
-#endif
-
-    if (child_pid < 0)
-    {
-        ShowError("Fork failed for gdb backtrace");
-    }
-    else if (child_pid == 0)
-    {
-        // NOTE: gdb-7.8 has regression, either update or downgrade.
-        close(fd[0]);
-        char buf[255];
-        snprintf(buf, sizeof(buf), "gdb -p %d -n -batch -ex generate-core-file -ex bt 2>/dev/null 1>&%d", getppid(), fd[1]);
-        execl("/bin/sh", "/bin/sh", "-c", buf, NULL);
-        ShowError("Failed to launch gdb for backtrace");
-        _exit(EXIT_FAILURE);
-    }
-    else
-    {
-        close(fd[1]);
-        waitpid(child_pid, nullptr, 0);
-        char buf[4096] = { 0 };
-        status         = read(fd[0], buf, sizeof(buf) - 1);
-        if (status == -1)
-        {
-            ShowError("read failed for gdb backtrace: %s", strerror(errno));
-            _exit(EXIT_FAILURE);
-        }
-        ShowFatalError("--- gdb backtrace ---");
-        ShowFatalError("%s", buf);
-    }
-#endif
 }
 
 /************************************************************************
- *																		*
- *  CORE : Signal Sub Function											*
- *																		*
+ *                                                                      *
+ *  CORE : Signal Sub Function                                          *
+ *                                                                      *
  ************************************************************************/
 
 static void sig_proc(int sn)
 {
-    static int is_called = 0;
-
     switch (sn)
     {
         case SIGINT:
         case SIGTERM:
-            if (++is_called > 3)
-            {
-                do_final(EXIT_SUCCESS);
-            }
-            runflag = 0;
+            gRunFlag = false;
+            gConsoleService->stop();
             break;
         case SIGABRT:
         case SIGSEGV:
         case SIGFPE:
+            gConsoleService->stop();
             dump_backtrace();
             do_abort();
+#ifdef _WIN32
+#ifdef _DEBUG
             // Pass the signal to the system's default handler
             compat_signal(sn, SIG_DFL);
             raise(sn);
+#endif // _DEBUG
+#endif // _WIN32
+
             break;
 #ifndef _WIN32
         case SIGXFSZ:
             // ignore and allow it to set errno to EFBIG
             ShowWarning("Max file size reached!");
-            // run_flag = 0;	// should we quit?
+            // run_flag = 0; // should we quit?
             break;
         case SIGPIPE:
-            // ShowInfo ("Broken pipe found... closing socket");	// set to eof in socket.c
+            // ShowInfo ("Broken pipe found... closing socket"); // set to eof in socket.c
             break; // does nothing here
 #endif
     }
 }
 
-/************************************************************************
- *																		*
- *																		*
- *																		*
- ************************************************************************/
-
 void signals_init()
 {
     compat_signal(SIGTERM, sig_proc);
     compat_signal(SIGINT, sig_proc);
-#ifndef _DEBUG // need unhandled exceptions to debug on Windows
+#if !defined(_DEBUG) && defined(_WIN32) // need unhandled exceptions to debug on Windows
     compat_signal(SIGABRT, sig_proc);
     compat_signal(SIGSEGV, sig_proc);
     compat_signal(SIGFPE, sig_proc);
 #endif
-#ifndef _WIN32
-    compat_signal(SIGILL, SIG_DFL);
-    compat_signal(SIGXFSZ, sig_proc);
-    compat_signal(SIGPIPE, sig_proc);
-    compat_signal(SIGBUS, SIG_DFL);
-    compat_signal(SIGTRAP, SIG_DFL);
-#endif
 }
 
 /************************************************************************
- *																		*
- *  Warning if logged in as superuser (root)								*
- *																		*
+ *                                                                      *
+ *  Warning if logged in as superuser (root)                            *
+ *                                                                      *
  ************************************************************************/
 
 void usercheck()
@@ -229,14 +181,24 @@ void usercheck()
 }
 
 /************************************************************************
- *																		*
- *  CORE : MAINROUTINE													*
- *																		*
+ *                                                                      *
+ *  CORE : MAINROUTINE                                                  *
+ *                                                                      *
  ************************************************************************/
 #ifndef DEFINE_OWN_MAIN
 int main(int argc, char** argv)
 {
     debug::init();
+
+#ifdef _WIN32
+    // Disable Quick Edit Mode (Mark) in Windows Console to prevent users from accidentially
+    // causing the server to freeze.
+    HANDLE hInput;
+    DWORD  prev_mode;
+    hInput = GetStdHandle(STD_INPUT_HANDLE);
+    GetConsoleMode(hInput, &prev_mode);
+    SetConsoleMode(hInput, ENABLE_EXTENDED_FLAGS | (prev_mode & ~ENABLE_QUICK_EDIT_MODE));
+#endif // _WIN32
 
     { // initialize program arguments
         char* p1 = SERVER_NAME = argv[0];
@@ -255,21 +217,31 @@ int main(int argc, char** argv)
     usercheck();
     signals_init();
     timer_init();
+
+    lua_init();
+    settings::init();
+
     socket_init();
 
     do_init(argc, argv);
-    fd_set rfd;
-    { // Main runtime cycle
-        duration next;
 
-        while (runflag)
+    fd_set rfd = {};
+    { // Main runtime cycle
+        duration next = std::chrono::milliseconds(200);
+
+        while (gRunFlag)
         {
             next = CTaskMgr::getInstance()->DoTimer(server_clock::now());
             do_sockets(&rfd, next);
         }
     }
 
+#ifdef _WIN32
+    // Re-enable Quick Edit Mode upon Exiting if it is still disabled
+    SetConsoleMode(hInput, prev_mode);
+#endif // _WIN32
+    gConsoleService->stop();
+
     do_final(EXIT_SUCCESS);
-    return 0;
 }
-#endif
+#endif // DEFINE_OWN_MAIN

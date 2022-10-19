@@ -16,7 +16,7 @@ if(ENABLE_CLANG_TIDY)
       set(CLANG_TIDY_FIX "-fix")
     endif()
     message(STATUS "CLANG_TIDY_FIX: ${CLANG_TIDY_FIX}")
-    set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_COMMAND};-header-filter='${CMAKE_SOURCE_DIR}/src/*';${CLANG_TIDY_FIX}")
+    set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_COMMAND};-header-filter='${CMAKE_SOURCE_DIR}/src/*';${CLANG_TIDY_FIX};-format-style='file'")
   endif()
 
   # Create a preprocessor definition that depends on .clang-tidy content so

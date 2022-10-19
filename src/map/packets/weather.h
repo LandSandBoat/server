@@ -22,7 +22,7 @@
 #ifndef _CWEATHERPACKET_H
 #define _CWEATHERPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

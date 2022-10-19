@@ -8,7 +8,7 @@ require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     if
         player:getCharVar("BorghertzSparkKilled") == 0 and
         player:hasKeyItem(xi.ki.OLD_GAUNTLETS) and

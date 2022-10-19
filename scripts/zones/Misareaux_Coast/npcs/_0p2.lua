@@ -15,14 +15,10 @@ end
 entity.onTrigger = function(player, npc)
     local copCurrentMission = player:getCurrentMission(xi.mission.log_id.COP)
     local copMissions = xi.mission.id.cop
-    local copMissionStatus = player:getCharVar("PromathiaStatus")
 
     -- Bahamut Battle (requires COP to be completed)
     if player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.STORMS_OF_FATE) == QUEST_ACCEPTED and player:getCharVar('StormsOfFate') == 0 then
         player:startEvent(559)
-    -- COP 7-2
-    elseif copCurrentMission == copMissions.FLAMES_IN_THE_DARKNESS and copMissionStatus == 0 then
-        player:startEvent(12)
     -- Can pass after completing COP 2-4
     elseif copCurrentMission > copMissions.AN_ETERNAL_MELODY or player:hasCompletedMission(xi.mission.log_id.COP, copMissions.THE_LAST_VERSE) then
         player:startEvent(552)
@@ -35,9 +31,7 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 12 then
-        player:setCharVar("PromathiaStatus", 1)
-    elseif csid == 559 then
+    if csid == 559 then
         player:setCharVar('StormsOfFate', 1)
     end
 end

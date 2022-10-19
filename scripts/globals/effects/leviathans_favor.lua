@@ -1,15 +1,20 @@
 -----------------------------------
 -- xi.effect.LEVIATHANS_FAVOR
 -----------------------------------
-local effect_object = {}
+require("scripts/globals/status")
+---------------------------------------------
 
-effect_object.onEffectGain = function(target, effect)
+local effectObject = {}
+
+effectObject.onEffectGain = function(target, effect)
+    target:addMod(xi.mod.MACC, effect:getPower())
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
 end
 
-effect_object.onEffectLose = function(target, effect)
+effectObject.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.MACC, effect:getPower())
 end
 
-return effect_object
+return effectObject

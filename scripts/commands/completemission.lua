@@ -14,7 +14,7 @@ cmdprops =
 
 function error(player, msg)
     player:PrintToPlayer(msg)
-    player:PrintToPlayer("!completemission <logID> <missionID> {player}")
+    player:PrintToPlayer("!completemission <logID> <missionID> (player)")
 end
 
 function onTrigger(player, logId, missionId, target)

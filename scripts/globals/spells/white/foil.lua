@@ -1,28 +1,17 @@
 -----------------------------------
 -- Spell: Foil
 -----------------------------------
-require("scripts/globals/magic")
-require("scripts/globals/msg")
-require("scripts/globals/status")
+require("scripts/globals/spells/enhancing_spell")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
--- TODO: determine mechanics of how Foil's "Special Attack" evasion works.
--- Martel has a post about it here: https://www.bluegartr.com/threads/115399-Rune-Fencer-Findings?p=5665305&viewfull=1#post5665305
--- More testing is required (such as determining accuracy of the target used for testing)
-spell_object.onSpellCast = function(caster, target, spell)
-
-    if target:addStatusEffect(xi.effect.FOIL, 0, 0, 30) then -- power set to 0 because true mechanics are unknown as of now. The primary use of Foil is for enmity anyway.
-        spell:setMsg(xi.msg.basic.MAGIC_GAIN_EFFECT)
-    else
-        spell:setMsg(xi.msg.basic.MAGIC_NO_EFFECT)
-    end
-
-    return xi.effect.FOIL
+-- https://www.ffxiah.com/forum/topic/56696/foil-potency-and-decay-testing/#3625542
+spellObject.onSpellCast = function(caster, target, spell)
+    return xi.spells.enhancing.useEnhancingSpell(caster, target, spell)
 end
 
-return spell_object
+return spellObject

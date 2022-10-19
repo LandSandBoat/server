@@ -61,6 +61,33 @@ xi.job =
 }
 xi.MAX_JOB_TYPE = 23
 
+xi.jobNames =
+{
+    [ 0] = { "NONE", "None" },
+    [ 1] = { "WAR", "Warrior" },
+    [ 2] = { "MNK", "Monk" },
+    [ 3] = { "WHM", "White Mage" },
+    [ 4] = { "BLM", "Black Mage" },
+    [ 5] = { "RDM", "Red Mage" },
+    [ 6] = { "THF", "Thief" },
+    [ 7] = { "PLD", "Paladin" },
+    [ 8] = { "DRK", "Dark Knight" },
+    [ 9] = { "BST", "Beastmaster" },
+    [10] = { "BRD", "Bard" },
+    [11] = { "RNG", "Ranger" },
+    [12] = { "SAM", "Samurai" },
+    [13] = { "NIN", "Ninja" },
+    [14] = { "DRG", "Dragoon" },
+    [15] = { "SMN", "Summoner" },
+    [16] = { "BLU", "Blue Mage" },
+    [17] = { "COR", "Corsair" },
+    [18] = { "PUP", "Puppermaster" },
+    [19] = { "DNC", "Dancer" },
+    [20] = { "SCH", "Scholar" },
+    [21] = { "GEO", "Geomancer" },
+    [22] = { "RUN", "Rune Fencer" },
+}
+
 -----------------------------------
 -- Race IDs
 -----------------------------------
@@ -84,7 +111,7 @@ xi.race =
 xi.status =
 {
     NORMAL          =  0,
-    UPDATE          =  1,
+    MOB             =  1,
     DISAPPEAR       =  2,
     INVISIBLE       =  3,
     STATUS_4        =  4,
@@ -774,7 +801,7 @@ xi.effect =
     NEGATE_VIRUS             = 608,
     NEGATE_CURSE             = 609,
     NEGATE_CHARM             = 610,
-    MAGIC_EVASION_BOOST_II   = 611,
+    MAGIC_EVASION_BOOST      = 611,
     COLURE_ACTIVE            = 612,
     MUMORS_RADIANCE          = 613,
     ULLEGORES_GLOOM          = 614,
@@ -793,6 +820,8 @@ xi.effect =
     MOBILIZATION             = 627,
     HOVER_SHOT               = 628,
     MOOGLE_AMPLIFIER         = 629,
+    TAINT                    = 630,
+    HAUNT                    = 631,
 
     -- Effect icons in packet can go from 0-767, so no custom effects should go in that range.
 
@@ -837,9 +866,11 @@ xi.effect =
     MEDITATE                 = 801, -- Dummy effect for SAM Meditate JA
     ELEMENTALRES_DOWN        = 802, -- Elemental resistance down
     FULL_SPEED_AHEAD         = 803, -- Helper for quest: Full Speed Ahead!
-    -- PLACEHOLDER           = 804, -- Description
-    -- 804-1022
-    -- PLACEHOLDER             = 1023 -- The client dat file seems to have only this many "slots", results of exceeding that are untested.
+    HYSTERIA                 = 804, -- Used for Hysteroanima to stop after readying a weaponskill with no msg.
+    TOMAHAWK                 = 805, -- Silent status effect inflicted by a Warrior using the "Tomahawk" job ability
+    -- PLACEHOLDER           = 806, -- Description
+    -- 806-1022
+    -- PLACEHOLDER           = 1023 -- The client dat file seems to have only this many "slots", results of exceeding that are untested.
 }
 
 -----------------------------------
@@ -860,35 +891,36 @@ xi.effect =
 
 xi.effectFlag =
 {
-    NONE            = 0x0000,
-    DISPELABLE      = 0x0001,
-    ERASABLE        = 0x0002,
-    ATTACK          = 0x0004,
-    EMPATHY         = 0x0008,
-    DAMAGE          = 0x0010,
-    DEATH           = 0x0020,
-    MAGIC_BEGIN     = 0x0040,
-    MAGIC_END       = 0x0080,
-    ON_ZONE         = 0x0100,
-    NO_LOSS_MESSAGE = 0x0200,
-    INVISIBLE       = 0x0400,
-    DETECTABLE      = 0x0800,
-    NO_REST         = 0x1000,
-    PREVENT_ACTION  = 0x2000,
-    WALTZABLE       = 0x4000,
-    FOOD            = 0x8000,
-    SONG            = 0x10000,
-    ROLL            = 0x20000,
-    SYNTH_SUPPORT   = 0x40000,
-    CONFRONTATION   = 0x80000,
-    LOGOUT          = 0x100000,
-    BLOODPACT       = 0x200000,
-    ON_JOBCHANGE    = 0x400000,
-    NO_CANCEL       = 0x800000,
-    INFLUENCE       = 0x1000000,
-    OFFLINE_TICK    = 0x2000000,
-    AURA            = 0x4000000,
-    HIDE_TIMER      = 0x8000000,
+    NONE            = 0x00000000,
+    DISPELABLE      = 0x00000001,
+    ERASABLE        = 0x00000002,
+    ATTACK          = 0x00000004,
+    EMPATHY         = 0x00000008,
+    DAMAGE          = 0x00000010,
+    DEATH           = 0x00000020,
+    MAGIC_BEGIN     = 0x00000040,
+    MAGIC_END       = 0x00000080,
+    ON_ZONE         = 0x00000100,
+    NO_LOSS_MESSAGE = 0x00000200,
+    INVISIBLE       = 0x00000400,
+    DETECTABLE      = 0x00000800,
+    NO_REST         = 0x00001000,
+    PREVENT_ACTION  = 0x00002000,
+    WALTZABLE       = 0x00004000,
+    FOOD            = 0x00008000,
+    SONG            = 0x00010000,
+    ROLL            = 0x00020000,
+    SYNTH_SUPPORT   = 0x00040000,
+    CONFRONTATION   = 0x00080000,
+    LOGOUT          = 0x00100000,
+    BLOODPACT       = 0x00200000,
+    ON_JOBCHANGE    = 0x00400000,
+    NO_CANCEL       = 0x00800000,
+    INFLUENCE       = 0x01000000,
+    OFFLINE_TICK    = 0x02000000,
+    AURA            = 0x04000000,
+    HIDE_TIMER      = 0x08000000,
+    ON_ZONE_PATHOS  = 0x10000000,
 }
 
 -----------------------------------
@@ -933,14 +965,14 @@ xi.mod =
     INT                             = 12,
     MND                             = 13,
     CHR                             = 14,
-    FIRE_RES                        = 15,
-    ICE_RES                         = 16,
-    WIND_RES                        = 17,
-    EARTH_RES                       = 18,
-    THUNDER_RES                     = 19,
-    WATER_RES                       = 20,
-    LIGHT_RES                       = 21,
-    DARK_RES                        = 22,
+    FIRE_MEVA                       = 15,
+    ICE_MEVA                        = 16,
+    WIND_MEVA                       = 17,
+    EARTH_MEVA                      = 18,
+    THUNDER_MEVA                    = 19,
+    WATER_MEVA                      = 20,
+    LIGHT_MEVA                      = 21,
+    DARK_MEVA                       = 22,
     ATT                             = 23,
     RATT                            = 24,
     ACC                             = 25,
@@ -949,7 +981,7 @@ xi.mod =
     ENMITY_LOSS_REDUCTION           = 427,
     MATT                            = 28,
     MDEF                            = 29,
-    MACC                            = 30,
+    MACC                            = 30, -- This is NOT item level "magic accuracy skill" ! That happens in item_weapon.sql instead
     MEVA                            = 31,
     FIREATT                         = 32,
     ICEATT                          = 33,
@@ -991,6 +1023,8 @@ xi.mod =
     MPHEAL                          = 71,
     HPHEAL                          = 72,
     STORETP                         = 73,
+
+    -- These are NOT item Level skill, they are skill in your status menu. iLvl "skill" happens in item_weapon.sql
     HTH                             = 80,
     DAGGER                          = 81,
     SWORD                           = 82,
@@ -1003,6 +1037,7 @@ xi.mod =
     GKATANA                         = 89,
     CLUB                            = 90,
     STAFF                           = 91,
+
     RAMPART_DURATION                = 92,  -- Rampart duration in seconds
     FLEE_DURATION                   = 93,  -- Flee duration in seconds
     MEDITATE_DURATION               = 94,  -- Meditate duration in seconds
@@ -1012,6 +1047,8 @@ xi.mod =
     STALWART_SOUL                   = 907, -- Reduces damage taken from Souleater
     BOOST_EFFECT                    = 97,  -- Boost power in tenths
     CAMOUFLAGE_DURATION             = 98,  -- Camouflage duration in percents
+
+    -- These are NOT item Level skill, they are skill in your status menu. iLvl "skill" happens in item_weapon.sql
     AUTO_MELEE_SKILL                = 101,
     AUTO_RANGED_SKILL               = 102,
     AUTO_MAGIC_SKILL                = 103,
@@ -1022,6 +1059,8 @@ xi.mod =
     EVASION                         = 108,
     SHIELD                          = 109,
     PARRY                           = 110,
+
+    -- Magic Skill modifiers
     DIVINE                          = 111,
     HEALING                         = 112,
     ENHANCE                         = 113,
@@ -1034,10 +1073,11 @@ xi.mod =
     STRING                          = 120,
     WIND                            = 121,
     BLUE                            = 122,
-    GEOMANCY_SKILL                  = 1026,
-    HANDBELL_SKILL                  = 1027,
-    CHAKRA_MULT                     = 123, -- Chakra multiplier increase
-    CHAKRA_REMOVAL                  = 124, -- Extra statuses removed by Chakra
+    GEOMANCY_SKILL                  = 123,
+    HANDBELL_SKILL                  = 124,
+
+    CHAKRA_MULT                     = 1026, -- Chakra multiplier increase
+    CHAKRA_REMOVAL                  = 1027, -- Extra statuses removed by Chakra
     SUPPRESS_OVERLOAD               = 125, -- Kenkonken "Suppresses Overload" mod. Unclear how this works exactly. Requires testing on retail.
     BP_DAMAGE                       = 126, -- Blood Pact: Rage Damage increase percentage
     FISH                            = 127,
@@ -1146,6 +1186,7 @@ xi.mod =
     MIJIN_RERAISE                   = 258,
     DUAL_WIELD                      = 259,
     DOUBLE_ATTACK                   = 288,
+    DOUBLE_ATTACK_DMG               = 1038, -- Increases "Double Attack" damage/"Double Attack" damage + (in percents, e.g. +20 = +20% damage)
     SUBTLE_BLOW                     = 289,
     SUBTLE_BLOW_II                  = 973, -- Subtle Blow II Effect (Cap 50%) Total Effect (SB + SB_II cap 75%)
     ENF_MAG_POTENCY                 = 290, -- Increases Enfeebling magic potency %
@@ -1163,7 +1204,10 @@ xi.mod =
     STONESKIN                       = 300,
     PHALANX                         = 301,
     TRIPLE_ATTACK                   = 302,
+    TRIPLE_ATTACK_DMG               = 1039, -- Increases "Triple Attack" damage/"Triple Attack" damage + (in percents, e.g. +20 = +20% damage)
     TREASURE_HUNTER                 = 303,
+    TREASURE_HUNTER_PROC            = 1048, -- TODO: Increases Treasure Hunter proc rate (percent)
+    TREASURE_HUNTER_CAP             = 1049, -- TODO: Increases the Treasure Hunter Cap (e.g. THF JP Gift)
     TAME                            = 304,
     RECYCLE                         = 305,
     ZANSHIN                         = 306,
@@ -1220,10 +1264,40 @@ xi.mod =
     TP_BONUS                        = 345,
     PERPETUATION_REDUCTION          = 346,
 
+    -- Warrior
+    BERSERK_POTENCY                 = 948,  -- Augments "Berserk"/Enhances "Berserk" effect (Conqueror)
+    BERSERK_DURATION                = 954,  -- Berserk Duration
+    AGGRESSOR_DURATION              = 955,  -- Aggressor Duration
+    DEFENDER_DURATION               = 956,  -- Defender Duration
+    ENHANCES_RESTRAINT              = 1045, -- Enhances "Restraint" effect/"Restraint" + (Increases the damage bonus of Restraint by XXX%)
+    ENHANCES_BLOOD_RAGE             = 1046, -- Enhances "Blood Rage" effect/"Blood Rage" duration +
+
+    -- Paladin
+    ENHANCES_CHIVALRY               = 1061, -- Enhances "Chivalry" effect (increases the base TP modifier by the provided value / 100, e.g. mod value 5 = +0.05)
+    ENHANCES_DIVINE_EMBLEM          = 1062, -- Enhances "Divine Emblem" effect/"Divine Emblem" + (increases the ability's special enmity bonus by the provided value)
+    ENHANCES_FEALTY                 = 1063, -- Enhances "Fealty" effect (increases Fealty's duration by 4 seconds per Fealty merit)
+    ENHANCES_IRON_WILL              = 1064, -- Enhances "Iron Will" effect (adds +3% Fast Cast per Iron Will merit to Rampart)
+    ENHANCES_GUARDIAN               = 1065, -- Enhances "Guardian" effect (increases Sentinel's duration by 2 seconds per Guardian merit)
+    PALISADE_BLOCK_BONUS            = 1066, -- Increases base block rate while under the effects of Palisade (additive, not multiplicative)
+    REPRISAL_BLOCK_BONUS            = 1067, -- Increases block rate while under the effects of Reprisal (multiplicative, not additive)
+    REPRISAL_SPIKES_BONUS           = 1068, -- Increases Reprisal spikes damage by percentage (e.g. mod value of 50 will increase spikes damage by 50%)
+
+    -- Dragoon
+    WYVERN_LVL_BONUS                = 1043, -- Wyvern: Lv.+ (Increases wyvern's base level above 99)
+
+    -- Summoner
+    AVATAR_LVL_BONUS                = 1040, -- Avatar: Lv. ###/+ (Increases all avatar's base level above 99)
+    CARBUNCLE_LVL_BONUS             = 1041, -- Carbuncle: Lv.+ (Increases Carbuncle's base level above 99)
+    CAIT_SITH_LVL_BONUS             = 1042, -- Cait Sith: Lv.+ (Increases Cait Sith's base level above 99)
+
+    -- Puppetmaster
+    AUTOMATON_LVL_BONUS             = 1044, -- Automaton: Lv. (Increases automaton's base level above 99)
+
     -- Geomancer
     FULL_CIRCLE                     = 1025, -- Increases the initial multiplier on MP returned via Full Circle
     BOLSTER_EFFECT                  = 1028, -- Adds bonus duration as +N seconds
     LIFE_CYCLE_EFFECT               = 1029, -- Adds bonus HP% returned to the luopan when using Life Cycle
+    AURA_SIZE                       = 1030, -- Used to extend aura size, the formula is 6.25 + (PEntity->getMod(Mod::AURA_SIZE) / 100) so adding 100 will make this 7.25
 
     -- Rune Fencer
     ENHANCES_BATTUTA            = 1004, -- Used by RUN merit point cat 2 to add +N% bonus damage to parry spikes during Battuta effect
@@ -1286,8 +1360,15 @@ xi.mod =
     HIGH_JUMP_ENMITY_REDUCTION      = 363,
     REWARD_HP_BONUS                 = 364,
     SNAP_SHOT                       = 365,
-    MAIN_DMG_RATING                 = 366,
-    SUB_DMG_RATING                  = 367,
+
+    DMG_RATING                      = 287, -- adds damage rating to weapon (+DMG augments, maneater/blau dolch etc hidden effects)
+    MAIN_DMG_RATING                 = 366, -- adds damage rating to mainhand weapon
+    SUB_DMG_RATING                  = 367, -- adds damage rating to off hand weapon
+    RANGED_DMG_RATING               = 376, -- adds damage rating to ranged weapon
+    MAIN_DMG_RANK                   = 377, -- adds weapon rank to main weapon http://wiki.bluegartr.com/bg/Weapon_Rank
+    SUB_DMG_RANK                    = 378, -- adds weapon rank to sub weapon
+    RANGED_DMG_RANK                 = 379, -- adds weapon rank to ranged weapon
+
     REGAIN                          = 368,
     REFRESH                         = 369,
     REGEN                           = 370,
@@ -1297,7 +1378,7 @@ xi.mod =
     CURE_POTENCY                    = 374,
     CURE_POTENCY_II                 = 260, -- % cure potency II | bonus from gear is capped at 30
     CURE_POTENCY_RCVD               = 375,
-    RANGED_DMG_RATING               = 376,
+    CURE_POTENCY_BONUS              = 1051, -- TODO: Increases amount healed by Cure spells (fixed amount)
     DELAYP                          = 380,
     RANGED_DELAYP                   = 381,
     EXP_BONUS                       = 382,
@@ -1332,8 +1413,8 @@ xi.mod =
     MAGIC_DAMAGE                    = 311, --  Magic damage added directly to the spell's base damage
 
     -- Gear set modifiers
-    DA_DOUBLE_DAMAGE                = 408,  -- Double attack's double damage chance %.
-    TA_TRIPLE_DAMAGE                = 409,  -- Triple attack's triple damage chance %.
+    DA_DOUBLE_DMG_RATE              = 408,  -- Double attack's double damage chance %.
+    TA_TRIPLE_DMG_RATE              = 409,  -- Triple attack's triple damage chance %.
     ZANSHIN_DOUBLE_DAMAGE           = 410,  -- Zanshin's double damage chance %.
     RAPID_SHOT_DOUBLE_DAMAGE        = 479,  -- Rapid shot's double damage chance %.
     ABSORB_DMG_CHANCE               = 480,  -- Chance to absorb damage %
@@ -1389,6 +1470,8 @@ xi.mod =
     SONG_DURATION_BONUS             = 454, --
     SONG_SPELLCASTING_TIME          = 455, --
 
+    AVATARS_FAVOR_ENHANCE           = 630, -- Adds 1 rank to avatars favor
+
     QUICK_DRAW_DMG                  = 411, --
     QUICK_DRAW_MACC                 = 191, -- Quick draw magic accuracy
     QUAD_ATTACK                     = 430, -- Quadruple attack chance.
@@ -1415,6 +1498,7 @@ xi.mod =
 
     MAGIC_ABSORB                    = 475, -- Occasionally absorbs magic damage taken, in percents
     MAGIC_NULL                      = 476, -- Occasionally annuls magic damage taken, in percents
+    NULL_RANGED_DAMAGE              = 239, -- Occasionally annuls ranged damage taken, in percents
     PHYS_ABSORB                     = 512, -- Occasionally absorbs physical damage taken, in percents
     ABSORB_DMG_TO_MP                = 516, -- Unlike PLD gear mod, works on all damage types (Ethereal Earring)
 
@@ -1462,10 +1546,11 @@ xi.mod =
     EAT_RAW_FISH                    = 412, --
     EAT_RAW_MEAT                    = 413, --
 
-    ENHANCES_CURSNA_RCVD            = 67,  -- Potency of "Cursna" effects received
-    ENHANCES_CURSNA                 = 310, -- Raises success rate of Cursna when removing effect (like Doom) that are not 100% chance to remove
-    ENHANCES_HOLYWATER              = 495, -- Used by gear with the "Enhances Holy Water" or "Holy Water+" attribute
-    ENHANCES_PROT_SHELL_RCVD        = 977, -- Enhances Protect and Shell Effects Received (Binary MOD)
+    ENHANCES_CURSNA_RCVD            = 67,   -- Potency of "Cursna" effects received
+    ENHANCES_CURSNA                 = 310,  -- Raises success rate of Cursna when removing effect (like Doom) that are not 100% chance to remove
+    ENHANCES_HOLYWATER              = 495,  -- Used by gear with the "Enhances Holy Water" or "Holy Water+" attribute
+    ENHANCES_PROT_SHELL_RCVD        = 977,  -- Enhances Protect and Shell Effects Received (Binary MOD)
+    ENHANCES_PROT_RCVD              = 1050, -- TODO: Enhances Protect Received (Percent)
 
     RETALIATION                     = 414, -- Increases damage of Retaliation hits
     THIRD_EYE_COUNTER_RATE          = 508, -- Adds counter to 3rd eye anticipates & if using Seigan counter rate is increased by 15%
@@ -1616,20 +1701,17 @@ xi.mod =
     SMITE                           = 898, -- Att increase with H2H or 2H weapons
     TACTICAL_GUARD                  = 899, -- Tp gain increase when guarding
     GUARD_PERCENT                   = 976, -- Guard Percent
+    COUNTER_DAMAGE                  = 1047, -- TODO: Increases Damage from Counter Attacks (Percent)
     FENCER_TP_BONUS                 = 903, -- TP Bonus to weapon skills from Fencer Trait
     FENCER_CRITHITRATE              = 904, -- Increased Crit chance from Fencer Trait
     SHIELD_DEF_BONUS                = 905, -- Shield Defense Bonus
     SNEAK_DURATION                  = 946, -- Additional duration in seconds
     INVISIBLE_DURATION              = 947, -- Additional duration in seconds
-    BERSERK_EFFECT                  = 948, -- Conqueror Berserk Effect
-    BERSERK_DURATION                = 954, -- Berserk Duration
-    AGGRESSOR_DURATION              = 955, -- Aggressor Duration
-    DEFENDER_DURATION               = 956, -- Defender Duration
     CARDINAL_CHANT                  = 959,
     INDI_DURATION                   = 960,
     GEOMANCY_BONUS                  = 961, -- Used to increase potency of "Geomancy +" items (only the highest value is counted)
     WIDENED_COMPASS                 = 962,
-    MENDING_HALATION                = 968,
+    MENDING_HALATION                = 968, -- This mod should never exceed 1 as the multiplier is the merit, this is basicaly just a bool mod
     RADIAL_ARCANA                   = 969,
     CURATIVE_RECANTATION            = 970,
     PRIMEVAL_ZEAL                   = 971,
@@ -1650,10 +1732,7 @@ xi.mod =
     PENGUIN_RING_EFFECT   = 152, -- +2 on fishing arrow delay / fish movement for mini - game
     ALBATROSS_RING_EFFECT = 153, -- adds 30 seconds to mini - game time
     PELICAN_RING_EFFECT   = 154, -- adds extra skillup roll for fishing
-
-    MAIN_DMG_RANK                = 377, -- adds weapon rank to main weapon http://wiki.bluegartr.com/bg/Weapon_Rank
-    SUB_DMG_RANK                 = 378, -- adds weapon rank to sub weapon
-    RANGED_DMG_RANK              = 379, -- adds weapon rank to ranged weapon
+    FISHING_SKILL_GAIN    = 155, -- food increase for fishing skill ups
 
     BLOOD_BOON                   = 913, -- Occasionally cuts down MP cost of Blood Pact abilities. Does not affect abilities that require Astral Flow.
     EXPERIENCE_RETAINED          = 914, -- Experience points retained upon death (this is a percentage)
@@ -1670,6 +1749,26 @@ xi.mod =
 
     TRIPLE_SHOT_RATE             = 999, -- Percent increase to Triple Shot Rate
     NINJUTSU_DURATION            = 1000,
+
+    -- AF3 Set Bonus Modifiers
+    AUGMENT_CONSERVE_MP    = 1031, -- Percent chance to deal extra damage based on Conserve MP Amount (BLM AF3 Sets)
+    AUGMENT_COMPOSURE      = 1032, -- Percent Enhancing Duration Extension for Others (RDM AF3 Sets)
+    AUGMENT_DAMAGE_HP      = 1033, -- Percent chance to increase damage based on player HP% (DRK AF3 Sets)
+    AUGMENT_DAMAGE_PET_HP  = 1034, -- Percent chance to increase damage based on pet HP% (BST/DRG AF3 Sets)
+    AUGMENT_BLOOD_BOON     = 1035, -- Percent chance to deal extra damage based on Blood Boon Amount (SMN AF3 Sets)
+    AUGMENT_BLU_MAGIC      = 1036, -- Percent chance for BLU magic to receive 3x WSC value for spell (BLU AF3 Sets)
+    GEOMANCY_MP_NO_DEPLETE = 1037, -- Percent chance for Geomancy to cost 0 MP (GEO AF3 Sets)
+
+    -- Job Point Gifts
+    SIC_READY_RECAST        = 1052, -- TODO: SIC/Ready recast reduction (seconds)
+    TRUE_SHOT_EFFECT        = 1053, -- TODO: True Shot Ranged Damage increase (percent)
+    DEAD_AIM_EFFECT         = 1054, -- TODO: Dead Aim Critical Damage increase (percent)
+    THIRD_EYE_BONUS         = 1055, -- TODO: Bonus Third Eye Evasions (count)
+    WYVERN_ATTRIBUTE_DA     = 1056, -- TODO: Adds an amount of Double Attack to Dragoon each time Wyverns Attributes Increase (percent)
+    DRAGOON_BREATH_RECAST   = 1057, -- TODO: Restoring/Smithing Breath Recast Reduction (seconds)
+    BLUE_JOB_TRAIT_BONUS    = 1058, -- TODO: Increases job traits gained from equipped blue magic (percent)
+    BLUE_MAGIC_EFFECT       = 1059, -- TODO: Bonus to Attribute Value of spell (percent)
+    QUICK_DRAW_RECAST       = 1060, -- TODO: Quick Draw Charge Reduction (seconds)
 
     -- IF YOU ADD ANY NEW MODIFIER HERE, ADD IT IN src/map/modifier.h ASWELL!
 
@@ -1719,7 +1818,7 @@ xi.latent =
     MOON_PHASE               = 37, -- PARAM: 0: New Moon, 1: Waxing Crescent, 2: First Quarter, 3: Waxing Gibbous, 4: Full Moon, 5: Waning Gibbous, 6: Last Quarter, 7: Waning Crescent
     JOB_MULTIPLE             = 38, -- PARAM: 0: ODD, 2: EVEN, 3-99: DIVISOR
     JOB_MULTIPLE_AT_NIGHT    = 39, -- PARAM: 0: ODD, 2: EVEN, 3-99: DIVISOR
-    -- 40 free to use
+    EQUIPPED_IN_SLOT         = 40, -- When item is equipped in the specified slot (e.g. Dweomer Knife, Erlking's Sword, etc.) PARAM: slotID
     -- 41 free to use
     -- 42 free to use
     WEAPON_DRAWN_HP_UNDER    = 43, -- PARAM: HP PERCENT
@@ -1738,471 +1837,477 @@ xi.latent =
     WEAPON_DRAWN_MP_OVER     = 56, -- while weapon is drawn and mp greater than # - PARAM: MP #
     ELEVEN_ROLL_ACTIVE       = 57, -- corsair roll of 11 active
     IN_ASSAULT               = 58, -- is in an Instance battle in a TOAU zone
-    VS_ECOSYSTEM             = 59, -- Vs. Specific Ecosystem ID (e.g. Vs. Birds: Accuracy+3)
-    VS_FAMILY                = 60, -- Vs. Specific Family ID (e.g. Vs. Apkallu: Accuracy+3)
+    VS_ECOSYSTEM             = 59, -- Vs. Specific Ecosystem ID (e.g. Vs. Plantoid: Accuracy+3)
+    VS_FAMILY                = 60, -- Vs. Specific Family ID (e.g. Vs. Korrigan: Accuracy+3)
+    VS_SUPERFAMILY           = 61, -- Vs. Specific Family ID (e.g. Vs. Mandragora: Accuracy+3)
 }
 
 -----------------------------------
 -- Merits
 -----------------------------------
 
-local MCATEGORY_HP_MP      = 0x0040
-local MCATEGORY_ATTRIBUTES = 0x0080
-local MCATEGORY_COMBAT     = 0x00C0
-local MCATEGORY_MAGIC      = 0x0100
-local MCATEGORY_OTHERS     = 0x0140
+local meritCategory =
+{
+    HP_MP      = 0x0040,
+    ATTRIBUTES = 0x0080,
+    COMBAT     = 0x00C0,
+    MAGIC      = 0x0100,
+    OTHERS     = 0x0140,
 
-local MCATEGORY_WAR_1 = 0x0180
-local MCATEGORY_MNK_1 = 0x01C0
-local MCATEGORY_WHM_1 = 0x0200
-local MCATEGORY_BLM_1 = 0x0240
-local MCATEGORY_RDM_1 = 0x0280
-local MCATEGORY_THF_1 = 0x02C0
-local MCATEGORY_PLD_1 = 0x0300
-local MCATEGORY_DRK_1 = 0x0340
-local MCATEGORY_BST_1 = 0x0380
-local MCATEGORY_BRD_1 = 0x03C0
-local MCATEGORY_RNG_1 = 0x0400
-local MCATEGORY_SAM_1 = 0x0440
-local MCATEGORY_NIN_1 = 0x0480
-local MCATEGORY_DRG_1 = 0x04C0
-local MCATEGORY_SMN_1 = 0x0500
-local MCATEGORY_BLU_1 = 0x0540
-local MCATEGORY_COR_1 = 0x0580
-local MCATEGORY_PUP_1 = 0x05C0
-local MCATEGORY_DNC_1 = 0x0600
-local MCATEGORY_SCH_1 = 0x0640
+    WAR_1 = 0x0180,
+    MNK_1 = 0x01C0,
+    WHM_1 = 0x0200,
+    BLM_1 = 0x0240,
+    RDM_1 = 0x0280,
+    THF_1 = 0x02C0,
+    PLD_1 = 0x0300,
+    DRK_1 = 0x0340,
+    BST_1 = 0x0380,
+    BRD_1 = 0x03C0,
+    RNG_1 = 0x0400,
+    SAM_1 = 0x0440,
+    NIN_1 = 0x0480,
+    DRG_1 = 0x04C0,
+    SMN_1 = 0x0500,
+    BLU_1 = 0x0540,
+    COR_1 = 0x0580,
+    PUP_1 = 0x05C0,
+    DNC_1 = 0x0600,
+    SCH_1 = 0x0640,
 
-local MCATEGORY_WS = 0x0680
+    WS = 0x0680,
 
-local MCATEGORY_GEO_1 = 0x06C0
-local MCATEGORY_RUN_1 = 0x0700
+    GEO_1 = 0x06C0,
+    RUN_1 = 0x0700,
 
--- local MCATEGORY_UNK_1 = 0x0740
--- local MCATEGORY_UNK_2 = 0x0780
--- local MCATEGORY_UNK_3 = 0x07C0
+    -- UNK_1 = 0x0740,
+    -- UNK_2 = 0x0780,
+    -- UNK_3 = 0x07C0,
 
-local MCATEGORY_WAR_2 = 0x0800
-local MCATEGORY_MNK_2 = 0x0840
-local MCATEGORY_WHM_2 = 0x0880
-local MCATEGORY_BLM_2 = 0x08C0
-local MCATEGORY_RDM_2 = 0x0900
-local MCATEGORY_THF_2 = 0x0940
-local MCATEGORY_PLD_2 = 0x0980
-local MCATEGORY_DRK_2 = 0x09C0
-local MCATEGORY_BST_2 = 0x0A00
-local MCATEGORY_BRD_2 = 0x0A40
-local MCATEGORY_RNG_2 = 0x0A80
-local MCATEGORY_SAM_2 = 0x0AC0
-local MCATEGORY_NIN_2 = 0x0B00
-local MCATEGORY_DRG_2 = 0x0B40
-local MCATEGORY_SMN_2 = 0x0B80
-local MCATEGORY_BLU_2 = 0x0BC0
-local MCATEGORY_COR_2 = 0x0C00
-local MCATEGORY_PUP_2 = 0x0C40
-local MCATEGORY_DNC_2 = 0x0C80
-local MCATEGORY_SCH_2 = 0x0CC0
--- local MCATEGORY_UNK_4 = 0x0D00
-local MCATEGORY_GEO_2 = 0x0D40
-local MCATEGORY_RUN_2 = 0x0D80
+    WAR_2 = 0x0800,
+    MNK_2 = 0x0840,
+    WHM_2 = 0x0880,
+    BLM_2 = 0x08C0,
+    RDM_2 = 0x0900,
+    THF_2 = 0x0940,
+    PLD_2 = 0x0980,
+    DRK_2 = 0x09C0,
+    BST_2 = 0x0A00,
+    BRD_2 = 0x0A40,
+    RNG_2 = 0x0A80,
+    SAM_2 = 0x0AC0,
+    NIN_2 = 0x0B00,
+    DRG_2 = 0x0B40,
+    SMN_2 = 0x0B80,
+    BLU_2 = 0x0BC0,
+    COR_2 = 0x0C00,
+    PUP_2 = 0x0C40,
+    DNC_2 = 0x0C80,
+    SCH_2 = 0x0CC0,
+    -- UNK_4 = 0x0D00,
+    GEO_2 = 0x0D40,
+    RUN_2 = 0x0D80,
 
--- local MCATEGORY_START = 0x0040
--- local MCATEGORY_COUNT = 0x0D80
+    -- START = 0x0040,
+    -- COUNT = 0x0D80,
+}
 
 xi.merit =
 {
     -- HP
-    MAX_HP                      = MCATEGORY_HP_MP + 0x00,
-    MAX_MP                      = MCATEGORY_HP_MP + 0x02,
+    MAX_HP                      = meritCategory.HP_MP + 0x00,
+    MAX_MP                      = meritCategory.HP_MP + 0x02,
 
     -- ATTRIBUTES
-    STR                         = MCATEGORY_ATTRIBUTES + 0x00,
-    DEX                         = MCATEGORY_ATTRIBUTES + 0x02,
-    VIT                         = MCATEGORY_ATTRIBUTES + 0x04,
-    AGI                         = MCATEGORY_ATTRIBUTES + 0x08,
-    INT                         = MCATEGORY_ATTRIBUTES + 0x0A,
-    MND                         = MCATEGORY_ATTRIBUTES + 0x0C,
-    CHR                         = MCATEGORY_ATTRIBUTES + 0x0E,
+    STR                         = meritCategory.ATTRIBUTES + 0x00,
+    DEX                         = meritCategory.ATTRIBUTES + 0x02,
+    VIT                         = meritCategory.ATTRIBUTES + 0x04,
+    AGI                         = meritCategory.ATTRIBUTES + 0x08,
+    INT                         = meritCategory.ATTRIBUTES + 0x0A,
+    MND                         = meritCategory.ATTRIBUTES + 0x0C,
+    CHR                         = meritCategory.ATTRIBUTES + 0x0E,
 
     -- COMBAT SKILLS
-    H2H                         = MCATEGORY_COMBAT + 0x00,
-    DAGGER                      = MCATEGORY_COMBAT + 0x02,
-    SWORD                       = MCATEGORY_COMBAT + 0x04,
-    GSWORD                      = MCATEGORY_COMBAT + 0x06,
-    AXE                         = MCATEGORY_COMBAT + 0x08,
-    GAXE                        = MCATEGORY_COMBAT + 0x0A,
-    SCYTHE                      = MCATEGORY_COMBAT + 0x0C,
-    POLEARM                     = MCATEGORY_COMBAT + 0x0E,
-    KATANA                      = MCATEGORY_COMBAT + 0x10,
-    GKATANA                     = MCATEGORY_COMBAT + 0x12,
-    CLUB                        = MCATEGORY_COMBAT + 0x14,
-    STAFF                       = MCATEGORY_COMBAT + 0x16,
-    ARCHERY                     = MCATEGORY_COMBAT + 0x18,
-    MARKSMANSHIP                = MCATEGORY_COMBAT + 0x1A,
-    THROWING                    = MCATEGORY_COMBAT + 0x1C,
-    GUARDING                    = MCATEGORY_COMBAT + 0x1E,
-    EVASION                     = MCATEGORY_COMBAT + 0x20,
-    SHIELD                      = MCATEGORY_COMBAT + 0x22,
-    PARRYING                    = MCATEGORY_COMBAT + 0x24,
+    H2H                         = meritCategory.COMBAT + 0x00,
+    DAGGER                      = meritCategory.COMBAT + 0x02,
+    SWORD                       = meritCategory.COMBAT + 0x04,
+    GSWORD                      = meritCategory.COMBAT + 0x06,
+    AXE                         = meritCategory.COMBAT + 0x08,
+    GAXE                        = meritCategory.COMBAT + 0x0A,
+    SCYTHE                      = meritCategory.COMBAT + 0x0C,
+    POLEARM                     = meritCategory.COMBAT + 0x0E,
+    KATANA                      = meritCategory.COMBAT + 0x10,
+    GKATANA                     = meritCategory.COMBAT + 0x12,
+    CLUB                        = meritCategory.COMBAT + 0x14,
+    STAFF                       = meritCategory.COMBAT + 0x16,
+    ARCHERY                     = meritCategory.COMBAT + 0x18,
+    MARKSMANSHIP                = meritCategory.COMBAT + 0x1A,
+    THROWING                    = meritCategory.COMBAT + 0x1C,
+    GUARDING                    = meritCategory.COMBAT + 0x1E,
+    EVASION                     = meritCategory.COMBAT + 0x20,
+    SHIELD                      = meritCategory.COMBAT + 0x22,
+    PARRYING                    = meritCategory.COMBAT + 0x24,
 
     -- MAGIC SKILLS
-    DIVINE                      = MCATEGORY_MAGIC + 0x00,
-    HEALING                     = MCATEGORY_MAGIC + 0x02,
-    ENHANCING                   = MCATEGORY_MAGIC + 0x04,
-    ENFEEBLING                  = MCATEGORY_MAGIC + 0x06,
-    ELEMENTAL                   = MCATEGORY_MAGIC + 0x08,
-    DARK                        = MCATEGORY_MAGIC + 0x0A,
-    SUMMONING                   = MCATEGORY_MAGIC + 0x0C,
-    NINJITSU                    = MCATEGORY_MAGIC + 0x0E,
-    SINGING                     = MCATEGORY_MAGIC + 0x10,
-    STRING                      = MCATEGORY_MAGIC + 0x12,
-    WIND                        = MCATEGORY_MAGIC + 0x14,
-    BLUE                        = MCATEGORY_MAGIC + 0x16,
+    DIVINE                      = meritCategory.MAGIC + 0x00,
+    HEALING                     = meritCategory.MAGIC + 0x02,
+    ENHANCING                   = meritCategory.MAGIC + 0x04,
+    ENFEEBLING                  = meritCategory.MAGIC + 0x06,
+    ELEMENTAL                   = meritCategory.MAGIC + 0x08,
+    DARK                        = meritCategory.MAGIC + 0x0A,
+    SUMMONING                   = meritCategory.MAGIC + 0x0C,
+    NINJITSU                    = meritCategory.MAGIC + 0x0E,
+    SINGING                     = meritCategory.MAGIC + 0x10,
+    STRING                      = meritCategory.MAGIC + 0x12,
+    WIND                        = meritCategory.MAGIC + 0x14,
+    BLUE                        = meritCategory.MAGIC + 0x16,
+    GEOMANCY                    = meritCategory.MAGIC + 0x18,
+    HANDBELL                    = meritCategory.MAGIC + 0x1A,
 
     -- OTHERS
-    ENMITY_INCREASE             = MCATEGORY_OTHERS + 0x00,
-    ENMITY_DECREASE             = MCATEGORY_OTHERS + 0x02,
-    CRIT_HIT_RATE               = MCATEGORY_OTHERS + 0x04,
-    ENEMY_CRIT_RATE             = MCATEGORY_OTHERS + 0x06,
-    SPELL_INTERUPTION_RATE      = MCATEGORY_OTHERS + 0x08,
+    ENMITY_INCREASE             = meritCategory.OTHERS + 0x00,
+    ENMITY_DECREASE             = meritCategory.OTHERS + 0x02,
+    CRIT_HIT_RATE               = meritCategory.OTHERS + 0x04,
+    ENEMY_CRIT_RATE             = meritCategory.OTHERS + 0x06,
+    SPELL_INTERUPTION_RATE      = meritCategory.OTHERS + 0x08,
 
     -- WAR 1
-    BERSERK_RECAST              = MCATEGORY_WAR_1 + 0x00,
-    DEFENDER_RECAST             = MCATEGORY_WAR_1 + 0x02,
-    WARCRY_RECAST               = MCATEGORY_WAR_1 + 0x04,
-    AGGRESSOR_RECAST            = MCATEGORY_WAR_1 + 0x06,
-    DOUBLE_ATTACK_RATE          = MCATEGORY_WAR_1 + 0x08,
+    BERSERK_RECAST              = meritCategory.WAR_1 + 0x00,
+    DEFENDER_RECAST             = meritCategory.WAR_1 + 0x02,
+    WARCRY_RECAST               = meritCategory.WAR_1 + 0x04,
+    AGGRESSOR_RECAST            = meritCategory.WAR_1 + 0x06,
+    DOUBLE_ATTACK_RATE          = meritCategory.WAR_1 + 0x08,
 
     -- MNK 1
-    FOCUS_RECAST                = MCATEGORY_MNK_1 + 0x00,
-    DODGE_RECAST                = MCATEGORY_MNK_1 + 0x02,
-    CHAKRA_RECAST               = MCATEGORY_MNK_1 + 0x04,
-    COUNTER_RATE                = MCATEGORY_MNK_1 + 0x06,
-    KICK_ATTACK_RATE            = MCATEGORY_MNK_1 + 0x08,
+    FOCUS_RECAST                = meritCategory.MNK_1 + 0x00,
+    DODGE_RECAST                = meritCategory.MNK_1 + 0x02,
+    CHAKRA_RECAST               = meritCategory.MNK_1 + 0x04,
+    COUNTER_RATE                = meritCategory.MNK_1 + 0x06,
+    KICK_ATTACK_RATE            = meritCategory.MNK_1 + 0x08,
 
     -- WHM 1
-    DIVINE_SEAL_RECAST          = MCATEGORY_WHM_1 + 0x00,
-    CURE_CAST_TIME              = MCATEGORY_WHM_1 + 0x02,
-    BAR_SPELL_EFFECT            = MCATEGORY_WHM_1 + 0x04,
-    BANISH_EFFECT               = MCATEGORY_WHM_1 + 0x06,
-    REGEN_EFFECT                = MCATEGORY_WHM_1 + 0x08,
+    DIVINE_SEAL_RECAST          = meritCategory.WHM_1 + 0x00,
+    CURE_CAST_TIME              = meritCategory.WHM_1 + 0x02,
+    BAR_SPELL_EFFECT            = meritCategory.WHM_1 + 0x04,
+    BANISH_EFFECT               = meritCategory.WHM_1 + 0x06,
+    REGEN_EFFECT                = meritCategory.WHM_1 + 0x08,
 
     -- BLM 1
-    ELEMENTAL_SEAL_RECAST       = MCATEGORY_BLM_1 + 0x00,
-    FIRE_MAGIC_POTENCY          = MCATEGORY_BLM_1 + 0x02,
-    ICE_MAGIC_POTENCY           = MCATEGORY_BLM_1 + 0x04,
-    WIND_MAGIC_POTENCY          = MCATEGORY_BLM_1 + 0x06,
-    EARTH_MAGIC_POTENCY         = MCATEGORY_BLM_1 + 0x08,
-    LIGHTNING_MAGIC_POTENCY     = MCATEGORY_BLM_1 + 0x0A,
-    WATER_MAGIC_POTENCY         = MCATEGORY_BLM_1 + 0x0C,
+    ELEMENTAL_SEAL_RECAST       = meritCategory.BLM_1 + 0x00,
+    FIRE_MAGIC_POTENCY          = meritCategory.BLM_1 + 0x02,
+    ICE_MAGIC_POTENCY           = meritCategory.BLM_1 + 0x04,
+    WIND_MAGIC_POTENCY          = meritCategory.BLM_1 + 0x06,
+    EARTH_MAGIC_POTENCY         = meritCategory.BLM_1 + 0x08,
+    LIGHTNING_MAGIC_POTENCY     = meritCategory.BLM_1 + 0x0A,
+    WATER_MAGIC_POTENCY         = meritCategory.BLM_1 + 0x0C,
 
     -- RDM 1
-    CONVERT_RECAST              = MCATEGORY_RDM_1 + 0x00,
-    FIRE_MAGIC_ACCURACY         = MCATEGORY_RDM_1 + 0x02,
-    ICE_MAGIC_ACCURACY          = MCATEGORY_RDM_1 + 0x04,
-    WIND_MAGIC_ACCURACY         = MCATEGORY_RDM_1 + 0x06,
-    EARTH_MAGIC_ACCURACY        = MCATEGORY_RDM_1 + 0x08,
-    LIGHTNING_MAGIC_ACCURACY    = MCATEGORY_RDM_1 + 0x0A,
-    WATER_MAGIC_ACCURACY        = MCATEGORY_RDM_1 + 0x0C,
+    CONVERT_RECAST              = meritCategory.RDM_1 + 0x00,
+    FIRE_MAGIC_ACCURACY         = meritCategory.RDM_1 + 0x02,
+    ICE_MAGIC_ACCURACY          = meritCategory.RDM_1 + 0x04,
+    WIND_MAGIC_ACCURACY         = meritCategory.RDM_1 + 0x06,
+    EARTH_MAGIC_ACCURACY        = meritCategory.RDM_1 + 0x08,
+    LIGHTNING_MAGIC_ACCURACY    = meritCategory.RDM_1 + 0x0A,
+    WATER_MAGIC_ACCURACY        = meritCategory.RDM_1 + 0x0C,
 
     -- THF 1
-    FLEE_RECAST                 = MCATEGORY_THF_1 + 0x00,
-    HIDE_RECAST                 = MCATEGORY_THF_1 + 0x02,
-    SNEAK_ATTACK_RECAST         = MCATEGORY_THF_1 + 0x04,
-    TRICK_ATTACK_RECAST         = MCATEGORY_THF_1 + 0x06,
-    TRIPLE_ATTACK_RATE          = MCATEGORY_THF_1 + 0x08,
+    FLEE_RECAST                 = meritCategory.THF_1 + 0x00,
+    HIDE_RECAST                 = meritCategory.THF_1 + 0x02,
+    SNEAK_ATTACK_RECAST         = meritCategory.THF_1 + 0x04,
+    TRICK_ATTACK_RECAST         = meritCategory.THF_1 + 0x06,
+    TRIPLE_ATTACK_RATE          = meritCategory.THF_1 + 0x08,
 
     -- PLD 1
-    SHIELD_BASH_RECAST          = MCATEGORY_PLD_1 + 0x00,
-    HOLY_CIRCLE_RECAST          = MCATEGORY_PLD_1 + 0x02,
-    SENTINEL_RECAST             = MCATEGORY_PLD_1 + 0x04,
-    COVER_EFFECT_LENGTH         = MCATEGORY_PLD_1 + 0x06,
-    RAMPART_RECAST              = MCATEGORY_PLD_1 + 0x08,
+    SHIELD_BASH_RECAST          = meritCategory.PLD_1 + 0x00,
+    HOLY_CIRCLE_RECAST          = meritCategory.PLD_1 + 0x02,
+    SENTINEL_RECAST             = meritCategory.PLD_1 + 0x04,
+    COVER_EFFECT_LENGTH         = meritCategory.PLD_1 + 0x06,
+    RAMPART_RECAST              = meritCategory.PLD_1 + 0x08,
 
     -- DRK 1
-    SOULEATER_RECAST            = MCATEGORY_DRK_1 + 0x00,
-    ARCANE_CIRCLE_RECAST        = MCATEGORY_DRK_1 + 0x02,
-    LAST_RESORT_RECAST          = MCATEGORY_DRK_1 + 0x04,
-    LAST_RESORT_EFFECT          = MCATEGORY_DRK_1 + 0x06,
-    WEAPON_BASH_EFFECT          = MCATEGORY_DRK_1 + 0x08,
+    SOULEATER_RECAST            = meritCategory.DRK_1 + 0x00,
+    ARCANE_CIRCLE_RECAST        = meritCategory.DRK_1 + 0x02,
+    LAST_RESORT_RECAST          = meritCategory.DRK_1 + 0x04,
+    LAST_RESORT_EFFECT          = meritCategory.DRK_1 + 0x06,
+    WEAPON_BASH_EFFECT          = meritCategory.DRK_1 + 0x08,
 
     -- BST 1
-    KILLER_EFFECTS              = MCATEGORY_BST_1 + 0x00,
-    REWARD_RECAST               = MCATEGORY_BST_1 + 0x02,
-    CALL_BEAST_RECAST           = MCATEGORY_BST_1 + 0x04,
-    SIC_RECAST                  = MCATEGORY_BST_1 + 0x06,
-    TAME_RECAST                 = MCATEGORY_BST_1 + 0x08,
+    KILLER_EFFECTS              = meritCategory.BST_1 + 0x00,
+    REWARD_RECAST               = meritCategory.BST_1 + 0x02,
+    CALL_BEAST_RECAST           = meritCategory.BST_1 + 0x04,
+    SIC_RECAST                  = meritCategory.BST_1 + 0x06,
+    TAME_RECAST                 = meritCategory.BST_1 + 0x08,
 
     -- BRD 1
-    LULLABY_RECAST              = MCATEGORY_BRD_1 + 0x00,
-    FINALE_RECAST               = MCATEGORY_BRD_1 + 0x02,
-    MINNE_EFFECT                = MCATEGORY_BRD_1 + 0x04,
-    MINUET_EFFECT               = MCATEGORY_BRD_1 + 0x06,
-    MADRIGAL_EFFECT             = MCATEGORY_BRD_1 + 0x08,
+    LULLABY_RECAST              = meritCategory.BRD_1 + 0x00,
+    FINALE_RECAST               = meritCategory.BRD_1 + 0x02,
+    MINNE_EFFECT                = meritCategory.BRD_1 + 0x04,
+    MINUET_EFFECT               = meritCategory.BRD_1 + 0x06,
+    MADRIGAL_EFFECT             = meritCategory.BRD_1 + 0x08,
 
     -- RNG 1
-    SCAVENGE_EFFECT             = MCATEGORY_RNG_1 + 0x00,
-    CAMOUFLAGE_RECAST           = MCATEGORY_RNG_1 + 0x02,
-    SHARPSHOT_RECAST            = MCATEGORY_RNG_1 + 0x04,
-    UNLIMITED_SHOT_RECAST       = MCATEGORY_RNG_1 + 0x06,
-    RAPID_SHOT_RATE             = MCATEGORY_RNG_1 + 0x08,
+    SCAVENGE_EFFECT             = meritCategory.RNG_1 + 0x00,
+    CAMOUFLAGE_RECAST           = meritCategory.RNG_1 + 0x02,
+    SHARPSHOT_RECAST            = meritCategory.RNG_1 + 0x04,
+    UNLIMITED_SHOT_RECAST       = meritCategory.RNG_1 + 0x06,
+    RAPID_SHOT_RATE             = meritCategory.RNG_1 + 0x08,
 
     -- SAM 1
-    THIRD_EYE_RECAST            = MCATEGORY_SAM_1 + 0x00,
-    WARDING_CIRCLE_RECAST       = MCATEGORY_SAM_1 + 0x02,
-    STORE_TP_EFFECT             = MCATEGORY_SAM_1 + 0x04,
-    MEDITATE_RECAST             = MCATEGORY_SAM_1 + 0x06,
-    ZASHIN_ATTACK_RATE          = MCATEGORY_SAM_1 + 0x08,
+    THIRD_EYE_RECAST            = meritCategory.SAM_1 + 0x00,
+    WARDING_CIRCLE_RECAST       = meritCategory.SAM_1 + 0x02,
+    STORE_TP_EFFECT             = meritCategory.SAM_1 + 0x04,
+    MEDITATE_RECAST             = meritCategory.SAM_1 + 0x06,
+    ZASHIN_ATTACK_RATE          = meritCategory.SAM_1 + 0x08,
 
     -- NIN 1
-    SUBTLE_BLOW_EFFECT          = MCATEGORY_NIN_1 + 0x00,
-    KATON_EFFECT                = MCATEGORY_NIN_1 + 0x02,
-    HYOTON_EFFECT               = MCATEGORY_NIN_1 + 0x04,
-    HUTON_EFFECT                = MCATEGORY_NIN_1 + 0x06,
-    DOTON_EFFECT                = MCATEGORY_NIN_1 + 0x08,
-    RAITON_EFFECT               = MCATEGORY_NIN_1 + 0x0A,
-    SUITON_EFFECT               = MCATEGORY_NIN_1 + 0x0C,
+    SUBTLE_BLOW_EFFECT          = meritCategory.NIN_1 + 0x00,
+    KATON_EFFECT                = meritCategory.NIN_1 + 0x02,
+    HYOTON_EFFECT               = meritCategory.NIN_1 + 0x04,
+    HUTON_EFFECT                = meritCategory.NIN_1 + 0x06,
+    DOTON_EFFECT                = meritCategory.NIN_1 + 0x08,
+    RAITON_EFFECT               = meritCategory.NIN_1 + 0x0A,
+    SUITON_EFFECT               = meritCategory.NIN_1 + 0x0C,
 
     -- DRG 1
-    ANCIENT_CIRCLE_RECAST       = MCATEGORY_DRG_1 + 0x00,
-    JUMP_RECAST                 = MCATEGORY_DRG_1 + 0x02,
-    HIGH_JUMP_RECAST            = MCATEGORY_DRG_1 + 0x04,
-    SUPER_JUMP_RECAST           = MCATEGORY_DRG_1 + 0x05,
-    SPIRIT_LINK_RECAST          = MCATEGORY_DRG_1 + 0x08,
+    ANCIENT_CIRCLE_RECAST       = meritCategory.DRG_1 + 0x00,
+    JUMP_RECAST                 = meritCategory.DRG_1 + 0x02,
+    HIGH_JUMP_RECAST            = meritCategory.DRG_1 + 0x04,
+    SUPER_JUMP_RECAST           = meritCategory.DRG_1 + 0x05,
+    SPIRIT_LINK_RECAST          = meritCategory.DRG_1 + 0x08,
 
     -- SMN 1
-    AVATAR_PHYSICAL_ACCURACY    = MCATEGORY_SMN_1 + 0x00,
-    AVATAR_PHYSICAL_ATTACK      = MCATEGORY_SMN_1 + 0x02,
-    AVATAR_MAGICAL_ACCURACY     = MCATEGORY_SMN_1 + 0x04,
-    AVATAR_MAGICAL_ATTACK       = MCATEGORY_SMN_1 + 0x06,
-    SUMMONING_MAGIC_CAST_TIME   = MCATEGORY_SMN_1 + 0x08,
+    AVATAR_PHYSICAL_ACCURACY    = meritCategory.SMN_1 + 0x00,
+    AVATAR_PHYSICAL_ATTACK      = meritCategory.SMN_1 + 0x02,
+    AVATAR_MAGICAL_ACCURACY     = meritCategory.SMN_1 + 0x04,
+    AVATAR_MAGICAL_ATTACK       = meritCategory.SMN_1 + 0x06,
+    SUMMONING_MAGIC_CAST_TIME   = meritCategory.SMN_1 + 0x08,
 
     -- BLU 1
-    CHAIN_AFFINITY_RECAST       = MCATEGORY_BLU_1 + 0x00,
-    BURST_AFFINITY_RECAST       = MCATEGORY_BLU_1 + 0x02,
-    MONSTER_CORRELATION         = MCATEGORY_BLU_1 + 0x04,
-    PHYSICAL_POTENCY            = MCATEGORY_BLU_1 + 0x06,
-    MAGICAL_ACCURACY            = MCATEGORY_BLU_1 + 0x08,
+    CHAIN_AFFINITY_RECAST       = meritCategory.BLU_1 + 0x00,
+    BURST_AFFINITY_RECAST       = meritCategory.BLU_1 + 0x02,
+    MONSTER_CORRELATION         = meritCategory.BLU_1 + 0x04,
+    PHYSICAL_POTENCY            = meritCategory.BLU_1 + 0x06,
+    MAGICAL_ACCURACY            = meritCategory.BLU_1 + 0x08,
 
     -- COR 1
-    PHANTOM_ROLL_RECAST         = MCATEGORY_COR_1 + 0x00,
-    QUICK_DRAW_RECAST           = MCATEGORY_COR_1 + 0x02,
-    QUICK_DRAW_ACCURACY         = MCATEGORY_COR_1 + 0x04,
-    RANDOM_DEAL_RECAST          = MCATEGORY_COR_1 + 0x06,
-    BUST_DURATION               = MCATEGORY_COR_1 + 0x08,
+    PHANTOM_ROLL_RECAST         = meritCategory.COR_1 + 0x00,
+    QUICK_DRAW_RECAST           = meritCategory.COR_1 + 0x02,
+    QUICK_DRAW_ACCURACY         = meritCategory.COR_1 + 0x04,
+    RANDOM_DEAL_RECAST          = meritCategory.COR_1 + 0x06,
+    BUST_DURATION               = meritCategory.COR_1 + 0x08,
 
     -- PUP 1
-    AUTOMATON_SKILLS            = MCATEGORY_PUP_1 + 0x00,
-    MAINTENACE_RECAST           = MCATEGORY_PUP_1 + 0x02,
-    REPAIR_EFFECT               = MCATEGORY_PUP_1 + 0x04,
-    ACTIVATE_RECAST             = MCATEGORY_PUP_1 + 0x06,
-    REPAIR_RECAST               = MCATEGORY_PUP_1 + 0x08,
+    AUTOMATON_SKILLS            = meritCategory.PUP_1 + 0x00,
+    MAINTENACE_RECAST           = meritCategory.PUP_1 + 0x02,
+    REPAIR_EFFECT               = meritCategory.PUP_1 + 0x04,
+    ACTIVATE_RECAST             = meritCategory.PUP_1 + 0x06,
+    REPAIR_RECAST               = meritCategory.PUP_1 + 0x08,
 
     -- DNC 1
-    STEP_ACCURACY               = MCATEGORY_DNC_1 + 0x00,
-    HASTE_SAMBA_EFFECT          = MCATEGORY_DNC_1 + 0x02,
-    REVERSE_FLOURISH_EFFECT     = MCATEGORY_DNC_1 + 0x04,
-    BUILDING_FLOURISH_EFFECT    = MCATEGORY_DNC_1 + 0x06,
+    STEP_ACCURACY               = meritCategory.DNC_1 + 0x00,
+    HASTE_SAMBA_EFFECT          = meritCategory.DNC_1 + 0x02,
+    REVERSE_FLOURISH_EFFECT     = meritCategory.DNC_1 + 0x04,
+    BUILDING_FLOURISH_EFFECT    = meritCategory.DNC_1 + 0x06,
 
     -- SCH 1
-    GRIMOIRE_RECAST             = MCATEGORY_SCH_1 + 0x00,
-    MODUS_VERITAS_DURATION      = MCATEGORY_SCH_1 + 0x02,
-    HELIX_MAGIC_ACC_ATT         = MCATEGORY_SCH_1 + 0x04,
-    MAX_SUBLIMATION             = MCATEGORY_SCH_1 + 0x06,
+    GRIMOIRE_RECAST             = meritCategory.SCH_1 + 0x00,
+    MODUS_VERITAS_DURATION      = meritCategory.SCH_1 + 0x02,
+    HELIX_MAGIC_ACC_ATT         = meritCategory.SCH_1 + 0x04,
+    MAX_SUBLIMATION             = meritCategory.SCH_1 + 0x06,
 
     -- GEO 1
-    FULL_CIRCLE_EFFECT          = MCATEGORY_GEO_1 + 0x00,
-    ECLIPTIC_ATT_RECAST         = MCATEGORY_GEO_1 + 0x02,
-    LIFE_CYCLE_RECAST           = MCATEGORY_GEO_1 + 0x04,
-    BLAZE_OF_GLORY_RECAST       = MCATEGORY_GEO_1 + 0x06,
-    DEMATERIALIZE_RECAST        = MCATEGORY_GEO_1 + 0x08,
+    FULL_CIRCLE_EFFECT          = meritCategory.GEO_1 + 0x00,
+    ECLIPTIC_ATT_RECAST         = meritCategory.GEO_1 + 0x02,
+    LIFE_CYCLE_RECAST           = meritCategory.GEO_1 + 0x04,
+    BLAZE_OF_GLORY_RECAST       = meritCategory.GEO_1 + 0x06,
+    DEMATERIALIZE_RECAST        = meritCategory.GEO_1 + 0x08,
 
     -- RUN 1
-    MERIT_RUNE_ENHANCE          = MCATEGORY_RUN_1 + 0x00,
-    MERIT_VALLATION_EFFECT      = MCATEGORY_RUN_1 + 0x02,
-    MERIT_LUNGE_EFFECT          = MCATEGORY_RUN_1 + 0x04,
-    MERIT_PFLUG_EFFECT          = MCATEGORY_RUN_1 + 0x06,
-    MERIT_GAMBIT_EFFECT         = MCATEGORY_RUN_1 + 0x08,
+    MERIT_RUNE_ENHANCE          = meritCategory.RUN_1 + 0x00,
+    MERIT_VALLATION_EFFECT      = meritCategory.RUN_1 + 0x02,
+    MERIT_LUNGE_EFFECT          = meritCategory.RUN_1 + 0x04,
+    MERIT_PFLUG_EFFECT          = meritCategory.RUN_1 + 0x06,
+    MERIT_GAMBIT_EFFECT         = meritCategory.RUN_1 + 0x08,
 
     -- WEAPON SKILLS
-    SHIJIN_SPIRAL               = MCATEGORY_WS + 0x00,
-    EXENTERATOR                 = MCATEGORY_WS + 0x02,
-    REQUIESCAT                  = MCATEGORY_WS + 0x04,
-    RESOLUTION                  = MCATEGORY_WS + 0x06,
-    RUINATOR                    = MCATEGORY_WS + 0x08,
-    UPHEAVAL                    = MCATEGORY_WS + 0x0A,
-    ENTROPY                     = MCATEGORY_WS + 0x0C,
-    STARDIVER                   = MCATEGORY_WS + 0x0E,
-    BLADE_SHUN                  = MCATEGORY_WS + 0x10,
-    TACHI_SHOHA                 = MCATEGORY_WS + 0x12,
-    REALMRAZER                  = MCATEGORY_WS + 0x14,
-    SHATTERSOUL                 = MCATEGORY_WS + 0x16,
-    APEX_ARROW                  = MCATEGORY_WS + 0x18,
-    LAST_STAND                  = MCATEGORY_WS + 0x1A,
+    SHIJIN_SPIRAL               = meritCategory.WS + 0x00,
+    EXENTERATOR                 = meritCategory.WS + 0x02,
+    REQUIESCAT                  = meritCategory.WS + 0x04,
+    RESOLUTION                  = meritCategory.WS + 0x06,
+    RUINATOR                    = meritCategory.WS + 0x08,
+    UPHEAVAL                    = meritCategory.WS + 0x0A,
+    ENTROPY                     = meritCategory.WS + 0x0C,
+    STARDIVER                   = meritCategory.WS + 0x0E,
+    BLADE_SHUN                  = meritCategory.WS + 0x10,
+    TACHI_SHOHA                 = meritCategory.WS + 0x12,
+    REALMRAZER                  = meritCategory.WS + 0x14,
+    SHATTERSOUL                 = meritCategory.WS + 0x16,
+    APEX_ARROW                  = meritCategory.WS + 0x18,
+    LAST_STAND                  = meritCategory.WS + 0x1A,
 
     -- WAR 2
-    WARRIORS_CHARGE             = MCATEGORY_WAR_2 + 0x00,
-    TOMAHAWK                    = MCATEGORY_WAR_2 + 0x02,
-    SAVAGERY                    = MCATEGORY_WAR_2 + 0x04,
-    AGGRESSIVE_AIM              = MCATEGORY_WAR_2 + 0x06,
+    WARRIORS_CHARGE             = meritCategory.WAR_2 + 0x00,
+    TOMAHAWK                    = meritCategory.WAR_2 + 0x02,
+    SAVAGERY                    = meritCategory.WAR_2 + 0x04,
+    AGGRESSIVE_AIM              = meritCategory.WAR_2 + 0x06,
 
     -- MNK 2
-    MANTRA                      = MCATEGORY_MNK_2 + 0x00,
-    FORMLESS_STRIKES            = MCATEGORY_MNK_2 + 0x02,
-    INVIGORATE                  = MCATEGORY_MNK_2 + 0x04,
-    PENANCE                     = MCATEGORY_MNK_2 + 0x06,
+    MANTRA                      = meritCategory.MNK_2 + 0x00,
+    FORMLESS_STRIKES            = meritCategory.MNK_2 + 0x02,
+    INVIGORATE                  = meritCategory.MNK_2 + 0x04,
+    PENANCE                     = meritCategory.MNK_2 + 0x06,
 
     -- WHM 2
-    MARTYR                      = MCATEGORY_WHM_2 + 0x00,
-    DEVOTION                    = MCATEGORY_WHM_2 + 0x02,
-    PROTECTRA_V                 = MCATEGORY_WHM_2 + 0x04,
-    SHELLRA_V                   = MCATEGORY_WHM_2 + 0x06,
-    ANIMUS_SOLACE               = MCATEGORY_WHM_2 + 0x08,
-    ANIMUS_MISERY               = MCATEGORY_WHM_2 + 0x0A,
+    MARTYR                      = meritCategory.WHM_2 + 0x00,
+    DEVOTION                    = meritCategory.WHM_2 + 0x02,
+    PROTECTRA_V                 = meritCategory.WHM_2 + 0x04,
+    SHELLRA_V                   = meritCategory.WHM_2 + 0x06,
+    ANIMUS_SOLACE               = meritCategory.WHM_2 + 0x08,
+    ANIMUS_MISERY               = meritCategory.WHM_2 + 0x0A,
 
     -- BLM 2
-    FLARE_II                    = MCATEGORY_BLM_2 + 0x00,
-    FREEZE_II                   = MCATEGORY_BLM_2 + 0x02,
-    TORNADO_II                  = MCATEGORY_BLM_2 + 0x04,
-    QUAKE_II                    = MCATEGORY_BLM_2 + 0x06,
-    BURST_II                    = MCATEGORY_BLM_2 + 0x08,
-    FLOOD_II                    = MCATEGORY_BLM_2 + 0x0A,
-    ANCIENT_MAGIC_ATK_BONUS     = MCATEGORY_BLM_2 + 0x0C,
-    ANCIENT_MAGIC_BURST_DMG     = MCATEGORY_BLM_2 + 0x0E,
-    ELEMENTAL_MAGIC_ACCURACY    = MCATEGORY_BLM_2 + 0x10,
-    ELEMENTAL_DEBUFF_DURATION   = MCATEGORY_BLM_2 + 0x12,
-    ELEMENTAL_DEBUFF_EFFECT     = MCATEGORY_BLM_2 + 0x14,
-    ASPIR_ABSORPTION_AMOUNT     = MCATEGORY_BLM_2 + 0x16,
+    FLARE_II                    = meritCategory.BLM_2 + 0x00,
+    FREEZE_II                   = meritCategory.BLM_2 + 0x02,
+    TORNADO_II                  = meritCategory.BLM_2 + 0x04,
+    QUAKE_II                    = meritCategory.BLM_2 + 0x06,
+    BURST_II                    = meritCategory.BLM_2 + 0x08,
+    FLOOD_II                    = meritCategory.BLM_2 + 0x0A,
+    ANCIENT_MAGIC_ATK_BONUS     = meritCategory.BLM_2 + 0x0C,
+    ANCIENT_MAGIC_BURST_DMG     = meritCategory.BLM_2 + 0x0E,
+    ELEMENTAL_MAGIC_ACCURACY    = meritCategory.BLM_2 + 0x10,
+    ELEMENTAL_DEBUFF_DURATION   = meritCategory.BLM_2 + 0x12,
+    ELEMENTAL_DEBUFF_EFFECT     = meritCategory.BLM_2 + 0x14,
+    ASPIR_ABSORPTION_AMOUNT     = meritCategory.BLM_2 + 0x16,
 
     -- RDM 2
-    DIA_III                     = MCATEGORY_RDM_2 + 0x00,
-    SLOW_II                     = MCATEGORY_RDM_2 + 0x02,
-    PARALYZE_II                 = MCATEGORY_RDM_2 + 0x04,
-    PHALANX_II                  = MCATEGORY_RDM_2 + 0x06,
-    BIO_III                     = MCATEGORY_RDM_2 + 0x08,
-    BLIND_II                    = MCATEGORY_RDM_2 + 0x0A,
-    ENFEEBLING_MAGIC_DURATION   = MCATEGORY_RDM_2 + 0x0C,
-    MAGIC_ACCURACY              = MCATEGORY_RDM_2 + 0x0E,
-    ENHANCING_MAGIC_DURATION    = MCATEGORY_RDM_2 + 0x10,
-    IMMUNOBREAK_CHANCE          = MCATEGORY_RDM_2 + 0x12,
-    ENSPELL_DAMAGE              = MCATEGORY_RDM_2 + 0x14,
-    ACCURACY                    = MCATEGORY_RDM_2 + 0x16,
+    DIA_III                     = meritCategory.RDM_2 + 0x00,
+    SLOW_II                     = meritCategory.RDM_2 + 0x02,
+    PARALYZE_II                 = meritCategory.RDM_2 + 0x04,
+    PHALANX_II                  = meritCategory.RDM_2 + 0x06,
+    BIO_III                     = meritCategory.RDM_2 + 0x08,
+    BLIND_II                    = meritCategory.RDM_2 + 0x0A,
+    ENFEEBLING_MAGIC_DURATION   = meritCategory.RDM_2 + 0x0C,
+    MAGIC_ACCURACY              = meritCategory.RDM_2 + 0x0E,
+    ENHANCING_MAGIC_DURATION    = meritCategory.RDM_2 + 0x10,
+    IMMUNOBREAK_CHANCE          = meritCategory.RDM_2 + 0x12,
+    ENSPELL_DAMAGE              = meritCategory.RDM_2 + 0x14,
+    ACCURACY                    = meritCategory.RDM_2 + 0x16,
 
     -- THF 2
-    ASSASSINS_CHARGE            = MCATEGORY_THF_2 + 0x00,
-    FEINT                       = MCATEGORY_THF_2 + 0x02,
-    AURA_STEAL                  = MCATEGORY_THF_2 + 0x04,
-    AMBUSH                      = MCATEGORY_THF_2 + 0x06,
+    ASSASSINS_CHARGE            = meritCategory.THF_2 + 0x00,
+    FEINT                       = meritCategory.THF_2 + 0x02,
+    AURA_STEAL                  = meritCategory.THF_2 + 0x04,
+    AMBUSH                      = meritCategory.THF_2 + 0x06,
 
     -- PLD 2
-    FEALTY                      = MCATEGORY_PLD_2 + 0x00,
-    CHIVALRY                    = MCATEGORY_PLD_2 + 0x02,
-    IRON_WILL                   = MCATEGORY_PLD_2 + 0x04,
-    GUARDIAN                    = MCATEGORY_PLD_2 + 0x06,
+    FEALTY                      = meritCategory.PLD_2 + 0x00,
+    CHIVALRY                    = meritCategory.PLD_2 + 0x02,
+    IRON_WILL                   = meritCategory.PLD_2 + 0x04,
+    GUARDIAN                    = meritCategory.PLD_2 + 0x06,
 
     -- DRK 2
-    DARK_SEAL                   = MCATEGORY_DRK_2 + 0x00,
-    DIABOLIC_EYE                = MCATEGORY_DRK_2 + 0x02,
-    MUTED_SOUL                  = MCATEGORY_DRK_2 + 0x04,
-    DESPERATE_BLOWS             = MCATEGORY_DRK_2 + 0x06,
+    DARK_SEAL                   = meritCategory.DRK_2 + 0x00,
+    DIABOLIC_EYE                = meritCategory.DRK_2 + 0x02,
+    MUTED_SOUL                  = meritCategory.DRK_2 + 0x04,
+    DESPERATE_BLOWS             = meritCategory.DRK_2 + 0x06,
 
     -- BST 2
-    FERAL_HOWL                  = MCATEGORY_BST_2 + 0x00,
-    KILLER_INSTINCT             = MCATEGORY_BST_2 + 0x02,
-    BEAST_AFFINITY              = MCATEGORY_BST_2 + 0x04,
-    BEAST_HEALER                = MCATEGORY_BST_2 + 0x06,
+    FERAL_HOWL                  = meritCategory.BST_2 + 0x00,
+    KILLER_INSTINCT             = meritCategory.BST_2 + 0x02,
+    BEAST_AFFINITY              = meritCategory.BST_2 + 0x04,
+    BEAST_HEALER                = meritCategory.BST_2 + 0x06,
 
     -- BRD 2
-    NIGHTINGALE                 = MCATEGORY_BRD_2 + 0x00,
-    TROUBADOUR                  = MCATEGORY_BRD_2 + 0x02,
-    FOE_SIRVENTE                = MCATEGORY_BRD_2 + 0x04,
-    ADVENTURERS_DIRGE           = MCATEGORY_BRD_2 + 0x06,
-    CON_ANIMA                   = MCATEGORY_BRD_2 + 0x08,
-    CON_BRIO                    = MCATEGORY_BRD_2 + 0x0A,
+    NIGHTINGALE                 = meritCategory.BRD_2 + 0x00,
+    TROUBADOUR                  = meritCategory.BRD_2 + 0x02,
+    FOE_SIRVENTE                = meritCategory.BRD_2 + 0x04,
+    ADVENTURERS_DIRGE           = meritCategory.BRD_2 + 0x06,
+    CON_ANIMA                   = meritCategory.BRD_2 + 0x08,
+    CON_BRIO                    = meritCategory.BRD_2 + 0x0A,
 
     -- RNG 2
-    STEALTH_SHOT                = MCATEGORY_RNG_2 + 0x00,
-    FLASHY_SHOT                 = MCATEGORY_RNG_2 + 0x02,
-    SNAPSHOT                    = MCATEGORY_RNG_2 + 0x04,
-    RECYCLE                     = MCATEGORY_RNG_2 + 0x06,
+    STEALTH_SHOT                = meritCategory.RNG_2 + 0x00,
+    FLASHY_SHOT                 = meritCategory.RNG_2 + 0x02,
+    SNAPSHOT                    = meritCategory.RNG_2 + 0x04,
+    RECYCLE                     = meritCategory.RNG_2 + 0x06,
 
     -- SAM 2
-    SHIKIKOYO                   = MCATEGORY_SAM_2 + 0x00,
-    BLADE_BASH                  = MCATEGORY_SAM_2 + 0x02,
-    IKISHOTEN                   = MCATEGORY_SAM_2 + 0x04,
-    OVERWHELM                   = MCATEGORY_SAM_2 + 0x06,
+    SHIKIKOYO                   = meritCategory.SAM_2 + 0x00,
+    BLADE_BASH                  = meritCategory.SAM_2 + 0x02,
+    IKISHOTEN                   = meritCategory.SAM_2 + 0x04,
+    OVERWHELM                   = meritCategory.SAM_2 + 0x06,
 
     -- NIN 2
-    SANGE                       = MCATEGORY_NIN_2 + 0x00,
-    NINJA_TOOL_EXPERTISE        = MCATEGORY_NIN_2 + 0x02,
-    KATON_SAN                   = MCATEGORY_NIN_2 + 0x04,
-    HYOTON_SAN                  = MCATEGORY_NIN_2 + 0x06,
-    HUTON_SAN                   = MCATEGORY_NIN_2 + 0x08,
-    DOTON_SAN                   = MCATEGORY_NIN_2 + 0x0A,
-    RAITON_SAN                  = MCATEGORY_NIN_2 + 0x0C,
-    SUITON_SAN                  = MCATEGORY_NIN_2 + 0x0E,
-    YONIN_EFFECT                = MCATEGORY_NIN_2 + 0x10,
-    INNIN_EFFECT                = MCATEGORY_NIN_2 + 0x12,
-    NIN_MAGIC_ACCURACY          = MCATEGORY_NIN_2 + 0x14,
-    NIN_MAGIC_BONUS             = MCATEGORY_NIN_2 + 0x16,
+    SANGE                       = meritCategory.NIN_2 + 0x00,
+    NINJA_TOOL_EXPERTISE        = meritCategory.NIN_2 + 0x02,
+    KATON_SAN                   = meritCategory.NIN_2 + 0x04,
+    HYOTON_SAN                  = meritCategory.NIN_2 + 0x06,
+    HUTON_SAN                   = meritCategory.NIN_2 + 0x08,
+    DOTON_SAN                   = meritCategory.NIN_2 + 0x0A,
+    RAITON_SAN                  = meritCategory.NIN_2 + 0x0C,
+    SUITON_SAN                  = meritCategory.NIN_2 + 0x0E,
+    YONIN_EFFECT                = meritCategory.NIN_2 + 0x10,
+    INNIN_EFFECT                = meritCategory.NIN_2 + 0x12,
+    NIN_MAGIC_ACCURACY          = meritCategory.NIN_2 + 0x14,
+    NIN_MAGIC_BONUS             = meritCategory.NIN_2 + 0x16,
 
     -- DRG 2
-    DEEP_BREATHING              = MCATEGORY_DRG_2 + 0x00,
-    ANGON                       = MCATEGORY_DRG_2 + 0x02,
-    EMPATHY                     = MCATEGORY_DRG_2 + 0x04,
-    STRAFE_EFFECT               = MCATEGORY_DRG_2 + 0x06,
+    DEEP_BREATHING              = meritCategory.DRG_2 + 0x00,
+    ANGON                       = meritCategory.DRG_2 + 0x02,
+    EMPATHY                     = meritCategory.DRG_2 + 0x04,
+    STRAFE_EFFECT               = meritCategory.DRG_2 + 0x06,
 
     -- SMN 2
-    METEOR_STRIKE               = MCATEGORY_SMN_2 + 0x00,
-    HEAVENLY_STRIKE             = MCATEGORY_SMN_2 + 0x02,
-    WIND_BLADE                  = MCATEGORY_SMN_2 + 0x04,
-    GEOCRUSH                    = MCATEGORY_SMN_2 + 0x06,
-    THUNDERSTORM                = MCATEGORY_SMN_2 + 0x08,
-    GRANDFALL                   = MCATEGORY_SMN_2 + 0x0A,
+    METEOR_STRIKE               = meritCategory.SMN_2 + 0x00,
+    HEAVENLY_STRIKE             = meritCategory.SMN_2 + 0x02,
+    WIND_BLADE                  = meritCategory.SMN_2 + 0x04,
+    GEOCRUSH                    = meritCategory.SMN_2 + 0x06,
+    THUNDERSTORM                = meritCategory.SMN_2 + 0x08,
+    GRANDFALL                   = meritCategory.SMN_2 + 0x0A,
 
     -- BLU 2
-    CONVERGENCE                 = MCATEGORY_BLU_2 + 0x00,
-    DIFFUSION                   = MCATEGORY_BLU_2 + 0x02,
-    ENCHAINMENT                 = MCATEGORY_BLU_2 + 0x04,
-    ASSIMILATION                = MCATEGORY_BLU_2 + 0x06,
+    CONVERGENCE                 = meritCategory.BLU_2 + 0x00,
+    DIFFUSION                   = meritCategory.BLU_2 + 0x02,
+    ENCHAINMENT                 = meritCategory.BLU_2 + 0x04,
+    ASSIMILATION                = meritCategory.BLU_2 + 0x06,
 
     -- COR 2
-    SNAKE_EYE                   = MCATEGORY_COR_2 + 0x00,
-    FOLD                        = MCATEGORY_COR_2 + 0x02,
-    WINNING_STREAK              = MCATEGORY_COR_2 + 0x04,
-    LOADED_DECK                 = MCATEGORY_COR_2 + 0x06,
+    SNAKE_EYE                   = meritCategory.COR_2 + 0x00,
+    FOLD                        = meritCategory.COR_2 + 0x02,
+    WINNING_STREAK              = meritCategory.COR_2 + 0x04,
+    LOADED_DECK                 = meritCategory.COR_2 + 0x06,
 
     -- PUP 2
-    ROLE_REVERSAL               = MCATEGORY_PUP_2 + 0x00,
-    VENTRILOQUY                 = MCATEGORY_PUP_2 + 0x02,
-    FINE_TUNING                 = MCATEGORY_PUP_2 + 0x04,
-    OPTIMIZATION                = MCATEGORY_PUP_2 + 0x06,
+    ROLE_REVERSAL               = meritCategory.PUP_2 + 0x00,
+    VENTRILOQUY                 = meritCategory.PUP_2 + 0x02,
+    FINE_TUNING                 = meritCategory.PUP_2 + 0x04,
+    OPTIMIZATION                = meritCategory.PUP_2 + 0x06,
 
     -- DNC 2
-    SABER_DANCE                 = MCATEGORY_DNC_2 + 0x00,
-    FAN_DANCE                   = MCATEGORY_DNC_2 + 0x02,
-    NO_FOOT_RISE                = MCATEGORY_DNC_2 + 0x04,
-    CLOSED_POSITION             = MCATEGORY_DNC_2 + 0x06,
+    SABER_DANCE                 = meritCategory.DNC_2 + 0x00,
+    FAN_DANCE                   = meritCategory.DNC_2 + 0x02,
+    NO_FOOT_RISE                = meritCategory.DNC_2 + 0x04,
+    CLOSED_POSITION             = meritCategory.DNC_2 + 0x06,
 
     -- SCH 2
-    ALTRUISM                    = MCATEGORY_SCH_2 + 0x00,
-    FOCALIZATION                = MCATEGORY_SCH_2 + 0x02,
-    TRANQUILITY                 = MCATEGORY_SCH_2 + 0x04,
-    EQUANIMITY                  = MCATEGORY_SCH_2 + 0x06,
-    ENLIGHTENMENT               = MCATEGORY_SCH_2 + 0x08,
-    STORMSURGE                  = MCATEGORY_SCH_2 + 0x0A,
+    ALTRUISM                    = meritCategory.SCH_2 + 0x00,
+    FOCALIZATION                = meritCategory.SCH_2 + 0x02,
+    TRANQUILITY                 = meritCategory.SCH_2 + 0x04,
+    EQUANIMITY                  = meritCategory.SCH_2 + 0x06,
+    ENLIGHTENMENT               = meritCategory.SCH_2 + 0x08,
+    STORMSURGE                  = meritCategory.SCH_2 + 0x0A,
 
     -- GEO 2
-    MENDING_HALATION            = MCATEGORY_GEO_2 + 0x00,
-    RADIAL_ARCANA               = MCATEGORY_GEO_2 + 0x02,
-    CURATIVE_RECANTATION        = MCATEGORY_GEO_2 + 0x04,
-    PRIMEVAL_ZEAL               = MCATEGORY_GEO_2 + 0x06,
+    MENDING_HALATION            = meritCategory.GEO_2 + 0x00,
+    RADIAL_ARCANA               = meritCategory.GEO_2 + 0x02,
+    CURATIVE_RECANTATION        = meritCategory.GEO_2 + 0x04,
+    PRIMEVAL_ZEAL               = meritCategory.GEO_2 + 0x06,
 
     -- RUN 2
-    MERIT_BATTUTA               = MCATEGORY_RUN_2 + 0x00,
-    MERIT_RAYKE                 = MCATEGORY_RUN_2 + 0x02,
-    MERIT_INSPIRATION           = MCATEGORY_RUN_2 + 0x04,
-    MERIT_SLEIGHT_OF_SWORD      = MCATEGORY_RUN_2 + 0x06,
+    MERIT_BATTUTA               = meritCategory.RUN_2 + 0x00,
+    MERIT_RAYKE                 = meritCategory.RUN_2 + 0x02,
+    MERIT_INSPIRATION           = meritCategory.RUN_2 + 0x04,
+    MERIT_SLEIGHT_OF_SWORD      = meritCategory.RUN_2 + 0x06,
 }
 
 -----------------------------------
@@ -2379,10 +2484,10 @@ xi.mobMod =
     SPELL_LIST          = 27, -- set spell list
     EXP_BONUS           = 28, -- bonus exp (bonus / 100) negative values reduce exp.
     ASSIST              = 29, -- mobs will assist me
-    SPECIAL_SKILL       = 30, -- give special skill
+    SPECIAL_SKILL       = 30, -- give special skill (example: Gigas boulder ranged attack)
     ROAM_DISTANCE       = 31, -- distance allowed to roam from spawn
-    -- 32 Available for use
-    SPECIAL_COOL        = 33, -- cool down for special
+    DONT_ROAM_HOME      = 32, -- Allow mobs to roam any distance from spawn. Useful for mobs with scripted roaming behavior.
+    SPECIAL_COOL        = 33, -- cool down for special (example: Time between Gigas boulder ranged attacks)
     MAGIC_COOL          = 34, -- cool down for magic
     STANDBACK_COOL      = 35, -- cool down time for standing back (casting spell while not in attack range)
     ROAM_COOL           = 36, -- cool down time in seconds after roaming
@@ -2399,7 +2504,7 @@ xi.mobMod =
     SPAWN_LEASH         = 47, -- forces a mob to not move farther from its spawn than its leash distance
     SHARE_TARGET        = 48, -- mob always targets same target as ID in this var
     CHECK_AS_NM         = 49, -- If set, a mob will check as a NM.
-    -- 50 Available for use
+    ROAM_RESET_FACING   = 50, -- Resume facing the default spawn rotation after roaming home.
     ROAM_TURNS          = 51, -- Maximum amount of turns during a roam
     ROAM_RATE           = 52, -- Roaming frequency. roam_cool - rand(roam_cool / (roam_rate / 10))
     BEHAVIOR            = 53, -- Add behaviors to mob
@@ -2420,6 +2525,7 @@ xi.mobMod =
     ALLI_HATE           = 68, -- Range around target to add alliance member to enmity list.
     NO_LINK             = 69, -- If set, mob cannot link until unset.
     NO_REST             = 70, -- Mob cannot regain hp (e.g. re-burrowing antlions during ENM).
+    LEADER              = 71, -- Used for mobs that follow a defined "leader", such as Ul'xzomit mobs.
 }
 
 -----------------------------------
@@ -2643,43 +2749,44 @@ xi.recast =
 
 xi.action =
 {
-    NONE                 = 0,
-    ATTACK               = 1,
-    RANGED_FINISH        = 2,
-    WEAPONSKILL_FINISH   = 3,
-    MAGIC_FINISH         = 4,
-    ITEM_FINISH          = 5,
-    JOBABILITY_FINISH    = 6,
-    WEAPONSKILL_START    = 7,
-    MAGIC_START          = 8,
-    ITEM_START           = 9,
-    JOBABILITY_START     = 10,
-    MOBABILITY_FINISH    = 11,
-    RANGED_START         = 12,
-    RAISE_MENU_SELECTION = 13,
-    DANCE                = 14,
-    UNKNOWN_15           = 15,
-    ROAMING              = 16,
-    ENGAGE               = 17,
-    DISENGAGE            = 18,
-    CHANGE_TARGET        = 19,
-    FALL                 = 20,
-    DROPITEMS            = 21,
-    DEATH                = 22,
-    FADE_OUT             = 23,
-    DESPAWN              = 24,
-    SPAWN                = 25,
-    STUN                 = 26,
-    SLEEP                = 27,
-    ITEM_USING           = 28,
-    ITEM_INTERRUPT       = 29,
-    MAGIC_CASTING        = 30,
-    MAGIC_INTERRUPT      = 31,
-    RANGED_INTERRUPT     = 32,
-    MOBABILITY_START     = 33,
-    MOBABILITY_USING     = 34,
-    MOBABILITY_INTERRUPT = 35,
-    LEAVE                = 36,
+    NONE                  = 0,
+    ATTACK                = 1,
+    RANGED_FINISH         = 2,
+    WEAPONSKILL_FINISH    = 3,
+    MAGIC_FINISH          = 4,
+    ITEM_FINISH           = 5,
+    JOBABILITY_FINISH     = 6,
+    WEAPONSKILL_START     = 7,
+    MAGIC_START           = 8,
+    ITEM_START            = 9,
+    JOBABILITY_START      = 10,
+    MOBABILITY_FINISH     = 11,
+    RANGED_START          = 12,
+    PET_MOBABILITY_FINISH = 13,
+    DANCE                 = 14,
+    RUN_WARD_EFFUSION     = 15,
+    ROAMING               = 16,
+    ENGAGE                = 17,
+    DISENGAGE             = 18,
+    CHANGE_TARGET         = 19,
+    FALL                  = 20,
+    DROPITEMS             = 21,
+    DEATH                 = 22,
+    FADE_OUT              = 23,
+    DESPAWN               = 24,
+    SPAWN                 = 25,
+    STUN                  = 26,
+    SLEEP                 = 27,
+    ITEM_USING            = 28,
+    ITEM_INTERRUPT        = 29,
+    MAGIC_CASTING         = 30,
+    MAGIC_INTERRUPT       = 31,
+    RANGED_INTERRUPT      = 32,
+    MOBABILITY_START      = 33,
+    MOBABILITY_USING      = 34,
+    MOBABILITY_INTERRUPT  = 35,
+    LEAVE                 = 36,
+    RAISE_MENU_SELECTION  = 37,
 }
 xi.act = xi.action
 
@@ -2734,18 +2841,18 @@ xi.behavior =
 
 xi.roamFlag =
 {
-    NONE    = 0x000,
-    NONE0   = 0x001,
-    NONE1   = 0x002,
-    NONE2   = 0x004,
-    NONE3   = 0x008,
-    NONE4   = 0x010,
-    NONE5   = 0x020,
-    WORM    = 0x040, -- pop up and down when moving
-    AMBUSH  = 0x080, -- stays hidden until someone comes close (antlion)
-    EVENT   = 0x100, -- calls lua method for roaming logic
-    IGNORE  = 0x200, -- ignore all hate, except linking hate
-    STEALTH = 0x400, -- stays name hidden and untargetable until someone comes close (chigoe)
+    NONE     = 0x000,
+    NONE0    = 0x001,
+    NONE1    = 0x002,
+    NONE2    = 0x004,
+    NONE3    = 0x008,
+    NONE4    = 0x010,
+    NONE5    = 0x020,
+    WORM     = 0x040, -- pop up and down when moving
+    AMBUSH   = 0x080, -- stays hidden until someone comes close (antlion)
+    SCRIPTED = 0x100, -- calls lua method for roaming logic
+    IGNORE   = 0x200, -- ignore all hate, except linking hate
+    STEALTH  = 0x400, -- stays name hidden and untargetable until someone comes close (chigoe)
 }
 
 -----------------------------------
@@ -2830,7 +2937,7 @@ xi.anim = xi.animation
 xi.mount =
 {
     CHOCOBO        = 0,
-    QUEST_RAPTOR   = 1,
+    QUEST_RAPTOR   = 1, -- NOTE: This now appears as a plain chocobo
     RAPTOR         = 2,
     TIGER          = 3,
     CRAB           = 4,
@@ -2981,3 +3088,25 @@ xi.pathflag =
     SCRIPT   = 0x08, -- don't overwrite this path before completion (except via another script)
     SLIDE    = 0x10,  -- Slide to end point if close enough (so no over shoot)
 };
+
+-- Check Lua item with:
+-- local isEx = bit.band(item:getFlag(), xi.itemFlag.EX) ~= 0
+xi.itemFlag =
+{
+    WALLHANGING  = 0x0001,
+    -- 01          = 0x0002,
+    MYSTERY_BOX  = 0x0004, -- Can be gained from Gobbie Mystery Box
+    MOG_GARDEN   = 0x0008, -- Can use in Mog Garden
+    MAIL2ACCOUNT = 0x0010, -- CanSendPOL Polutils Value
+    INSCRIBABLE  = 0x0020,
+    NOAUCTION    = 0x0040,
+    SCROLL       = 0x0080,
+    LINKSHELL    = 0x0100, -- Linkshell Polutils Value
+    CANUSE       = 0x0200,
+    CANTRADENPC  = 0x0400,
+    CANEQUIP     = 0x0800,
+    NOSALE       = 0x1000,
+    NODELIVERY   = 0x2000,
+    EX           = 0x4000, -- NoTradePC Polutils Value
+    RARE         = 0x8000,
+}

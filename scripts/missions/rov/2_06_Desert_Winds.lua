@@ -4,9 +4,7 @@
 -----------------------------------
 -- !addmission 13 54
 -----------------------------------
-require('scripts/globals/items')
 require('scripts/globals/missions')
-require('scripts/globals/rhapsodies')
 require('scripts/globals/zone')
 require('scripts/globals/interaction/mission')
 -----------------------------------
@@ -22,8 +20,7 @@ mission.sections =
 {
     {
         check = function(player, currentMission, missionStatus, vars)
-            return currentMission == mission.missionId and
-                xi.rhapsodies.charactersAvailable(player)
+            return currentMission == mission.missionId
         end,
 
         -- We should be guaranteed that the player has not been to TOAU areas if this
@@ -45,7 +42,7 @@ mission.sections =
             {
                 [165] = function(player, csid, option, npc)
                     local toauProgress = player:getCurrentMission(xi.mission.log_id.TOAU) >= xi.mission.id.toau.ROYAL_PUPPETEER and 1 or 0
-                    local copProgress = player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_WARRIOR_S_PATH) and 1 or 0
+                    local copProgress = player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_WARRIORS_PATH) and 1 or 0
 
                     if player:hasCompletedMission(xi.mission.log_id.TOAU, xi.mission.id.toau.PASSING_GLORY) then
                         toauProgress = toauProgress + 1

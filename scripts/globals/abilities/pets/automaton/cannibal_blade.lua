@@ -2,19 +2,20 @@
 -- Cannibal Blade
 -----------------------------------
 require("scripts/globals/automatonweaponskills")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAutomatonAbilityCheck = function(target, automaton, skill)
+abilityObject.onAutomatonAbilityCheck = function(target, automaton, skill)
     local master = automaton:getMaster()
     return master:countEffect(xi.effect.DARK_MANEUVER)
 end
 
-ability_object.onAutomatonAbility = function(target, automaton, skill, master, action)
-    local params = {
+abilityObject.onAutomatonAbility = function(target, automaton, skill, master, action)
+    local params =
+    {
         numHits = 1,
         atkmulti = 20.0,
         accBonus = 1000,
@@ -39,7 +40,7 @@ ability_object.onAutomatonAbility = function(target, automaton, skill, master, a
         chr_wsc = 0.0
     }
 
-    if xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES then
+    if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
         params.weaponDamage = nil
         params.mnd_wsc = 1.0
         params.ftp100 = 16.0
@@ -69,4 +70,4 @@ ability_object.onAutomatonAbility = function(target, automaton, skill, master, a
     return damage
 end
 
-return ability_object
+return abilityObject

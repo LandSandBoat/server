@@ -9,9 +9,9 @@
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     local result = 0
     if (target:getRace() ~= xi.race.MITHRA) then
         result = xi.msg.basic.CANNOT_EAT
@@ -25,18 +25,18 @@ item_object.onItemCheck = function(target)
     return result
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addStatusEffect(xi.effect.FOOD, 0, 0, 300, 4451)
 end
 
-item_object.onEffectGain = function(target, effect)
+itemObject.onEffectGain = function(target, effect)
     target:addMod(xi.mod.DEX, 4)
     target:addMod(xi.mod.MND, -6)
 end
 
-item_object.onEffectLose = function(target, effect)
+itemObject.onEffectLose = function(target, effect)
     target:delMod(xi.mod.DEX, 4)
     target:delMod(xi.mod.MND, -6)
 end
 
-return item_object
+return itemObject

@@ -22,7 +22,7 @@
 #ifndef _CITEMUSABLE_H
 #define _CITEMUSABLE_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "item.h"
 

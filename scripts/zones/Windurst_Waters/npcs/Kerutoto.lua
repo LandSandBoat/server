@@ -9,7 +9,7 @@ local ID = require("scripts/zones/Windurst_Waters/IDs")
 require("scripts/globals/keyitems")
 require("scripts/globals/missions")
 require("scripts/globals/npc_util")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
@@ -54,7 +54,7 @@ entity.onEventFinish = function(player, csid, option)
         player:addQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.WAKING_DREAMS)
         npcUtil.giveKeyItem(player, xi.ki.VIAL_OF_DREAM_INCENSE)
     elseif csid == 920 then
-        local reward = {fame = 0}
+        local reward = { fame = 0 }
 
         if option == 1 and not player:hasItem(17599) then
             reward.item = 17599

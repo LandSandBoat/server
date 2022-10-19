@@ -1,11 +1,11 @@
 ﻿
 #include "search_comment.h"
 
-#include "../../common/logging.h"
-#include "../../common/socket.h"
-#include "../../common/utils.h"
+#include "common/logging.h"
+#include "common/socket.h"
+#include "common/utils.h"
 
-SearchCommentPacket::SearchCommentPacket(uint32 playerId, std::string comment)
+SearchCommentPacket::SearchCommentPacket(uint32 playerId, std::string const& comment)
 {
     memset(data, 0, sizeof(data));
 
@@ -28,7 +28,6 @@ SearchCommentPacket::SearchCommentPacket(uint32 playerId, std::string comment)
     // End comment with 0 byte
     data[0x9A] = 0;
 }
-
 
 uint8* SearchCommentPacket::GetData()
 {

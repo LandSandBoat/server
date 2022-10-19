@@ -22,7 +22,7 @@
 #ifndef _CRELEASEPACKET_H
 #define _CRELEASEPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

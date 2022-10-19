@@ -1,25 +1,13 @@
-set(SOURCES
-    action_queue.cpp
-    action_queue.h
-    event_handler.cpp
-    event_handler.h
-    gambits_container.cpp
-    gambits_container.h
-    pathfind.cpp
-    pathfind.h
-    targetfind.cpp
-    targetfind.h)
-
-add_library(ai_helpers STATIC ${SOURCES})
-
-if(TRACY_ENABLE)
-    target_link_libraries(ai_helpers PUBLIC tracy_client)
-endif(TRACY_ENABLE)
-
-target_link_libraries(ai_helpers
-    PUBLIC
-    common
-    project_options
-    #project_warnings
+set(AI_HELPER_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/action_queue.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/action_queue.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/event_handler.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/event_handler.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/gambits_container.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/gambits_container.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/pathfind.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/pathfind.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/targetfind.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/targetfind.h
+    PARENT_SCOPE
 )
-

@@ -6,12 +6,12 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effect_object = {}
+local effectObject = {}
 
-effect_object.onEffectGain = function(target, effect)
+effectObject.onEffectGain = function(target, effect)
     --Auspice Reduces TP via adding to your Subtle Blow Mod
     local subtleBlowBonus = 10 + target:getMod(xi.mod.AUSPICE_EFFECT)
-    --printf("AUSPICE: Adding Subtle Blow +%d!", subtleBlowBonus)
+
     effect:setSubPower(subtleBlowBonus)
     target:addMod(xi.mod.SUBTLE_BLOW, subtleBlowBonus)
 
@@ -23,18 +23,18 @@ effect_object.onEffectGain = function(target, effect)
     end
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
 end
 
-effect_object.onEffectLose = function(target, effect)
+effectObject.onEffectLose = function(target, effect)
     local subtleBlow = effect:getSubPower()
-    --printf("AUSPICE: Removing Subtle Blow +%d!", subtleBlow)
+
     target:delMod(xi.mod.SUBTLE_BLOW, subtleBlow)
 
     --Clean Up Any Bonuses That From Afflatus Misery Combo
     if (target:hasStatusEffect(xi.effect.AFFLATUS_MISERY)) then
         local accuracyBonus = target:getStatusEffect(xi.effect.AFFLATUS_MISERY):getSubPower()
-        --printf("AUSPICE: Removing Accuracy Bonus +%d!", accuracyBonus)
+
         target:delMod(xi.mod.ACC, accuracyBonus)
         target:getStatusEffect(xi.effect.AFFLATUS_MISERY):setSubPower(0)
 
@@ -44,4 +44,4 @@ effect_object.onEffectLose = function(target, effect)
 
 end
 
-return effect_object
+return effectObject

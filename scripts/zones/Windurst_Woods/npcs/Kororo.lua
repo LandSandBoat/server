@@ -16,31 +16,30 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
+    local c2000 = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ALL_NEW_C_2000) -- previous quest in line
+    local aGreetingCardian = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_GREETING_CARDIAN)
+    local lpb = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LEGENDARY_PLAN_B)
+    local agccs = player:getCharVar("AGreetingCardian_Event")
+    local agcTime = player:getCharVar("AGreetingCardian_timer")
 
-    local C2000 = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_ALL_NEW_C_2000) -- previous quest in line
-    local AGreetingCardian = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.A_GREETING_CARDIAN)
-    local LPB = player:getQuestStatus(xi.quest.log_id.WINDURST, xi.quest.id.windurst.LEGENDARY_PLAN_B)
-    local AGCcs = player:getCharVar("AGreetingCardian_Event")
-    local AGCtime = player:getCharVar("AGreetingCardian_timer")
-
-    if C2000 == QUEST_ACCEPTED then
+    if c2000 == QUEST_ACCEPTED then
         player:startEvent(291)
 
     -- A Greeting Cardian
-    elseif C2000 == QUEST_COMPLETED and AGreetingCardian == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 3 then
+    elseif c2000 == QUEST_COMPLETED and aGreetingCardian == QUEST_AVAILABLE and player:getFameLevel(xi.quest.fame_area.WINDURST) >= 3 then
         player:startEvent(296) -- A Greeting Cardian quest start
-    elseif AGreetingCardian == QUEST_ACCEPTED and AGCcs == 3 then
-        if player:needToZone() or os.time() < AGCtime then
+    elseif aGreetingCardian == QUEST_ACCEPTED and agccs == 3 then
+        if player:needToZone() or os.time() < agcTime then
             player:startEvent(277) -- standard dialog if 1 minute has not passed
         else
             player:startEvent(298) -- A Greeting Cardian part two
         end
-    elseif AGreetingCardian == QUEST_ACCEPTED and AGCcs == 5 then
+    elseif aGreetingCardian == QUEST_ACCEPTED and agccs == 5 then
         player:startEvent(303) -- A Greeting Cardian finish
 
     -- Might be Legendary Plan B, most likely Lost Chick related.
     -- only activates before LPB completes so leaving it in as is for now
-    elseif LPB == QUEST_ACCEPTED then
+    elseif lpb == QUEST_ACCEPTED then
         player:startEvent(312, 0, 529, 940, 858)
 
     else

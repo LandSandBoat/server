@@ -1,18 +1,15 @@
 -----------------------------------
---
 -- Zone: Batallia_Downs (105)
---
 -----------------------------------
-local ID = require("scripts/zones/Batallia_Downs/IDs")
-require("scripts/quests/full_speed_ahead")
-require("scripts/quests/i_can_hear_a_rainbow")
-require("scripts/globals/chocobo_digging")
-require("scripts/globals/missions")
-require("scripts/globals/zone")
+local ID = require('scripts/zones/Batallia_Downs/IDs')
+require('scripts/quests/full_speed_ahead')
+require('scripts/quests/i_can_hear_a_rainbow')
+require('scripts/globals/chocobo_digging')
+require('scripts/globals/zone')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onChocoboDig = function(player, precheck)
+zoneObject.onChocoboDig = function(player, precheck)
     return xi.chocoboDig.start(player, precheck)
 end
 
@@ -22,23 +19,34 @@ local function registerRegionAroundNPC(zone, NPCID, zoneID)
     local y = npc:getYPos()
     local z = npc:getZPos()
     local distance = 7
+
     zone:registerRegion(zoneID,
         x - distance, y - distance, z - distance,
         x + distance, y + distance, z + distance)
 end
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
     UpdateNMSpawnPoint(ID.mob.AHTU);
     GetMobByID(ID.mob.AHTU):setRespawnTime(math.random(900, 10800));
+
+    -- Prepare everything for Full Speed Ahead!
+    local syrillia   = zone:queryEntitiesByName("Syrillia")[1]
+    local syrilliaID = syrillia:getID()
+
+    ID.npc.SYRILLIA         = syrilliaID
+    ID.npc.BLUE_BEAM_BASE   = syrilliaID + 1
+    ID.npc.RAPTOR_FOOD_BASE = syrilliaID + 9
 
     for i = 0, 7 do
         registerRegionAroundNPC(zone, ID.npc.RAPTOR_FOOD_BASE + i, i + 1)
     end
+
     registerRegionAroundNPC(zone, ID.npc.SYRILLIA, 9)
+
     xi.voidwalker.zoneOnInit(zone)
 end
 
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1;
 
     if (player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0) then
@@ -60,23 +68,23 @@ zone_object.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zone_object.onConquestUpdate = function(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zone_object.onRegionEnter = function(player, region)
+zoneObject.onRegionEnter = function(player, region)
     if player:hasStatusEffect(xi.effect.FULL_SPEED_AHEAD) then
         xi.fsa.onRegionEnter(player, region:GetRegionID())
     end
 end;
 
-zone_object.onEventUpdate = function(player, csid, option)
-    if (csid == 901) then
+zoneObject.onEventUpdate = function(player, csid, option)
+    if csid == 901 then
         quests.rainbow.onEventUpdate(player)
     end
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
     if csid == 24 then
         xi.fsa.completeGame(player)
     elseif csid == 26 and option == 0 then
@@ -88,4 +96,4 @@ zone_object.onEventFinish = function(player, csid, option)
     end
 end
 
-return zone_object
+return zoneObject

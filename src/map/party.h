@@ -49,9 +49,9 @@ enum PARTYFLAG
 };
 
 /************************************************************************
- *																		*
- *  Класс группы	персонажей												*
- *																		*
+ *                                                                      *
+ *  Класс группы    персонажей                                              *
+ *                                                                      *
  ************************************************************************/
 
 class CParty
@@ -60,34 +60,34 @@ public:
     CParty(CBattleEntity* PEntity);
     CParty(uint32 id);
 
-    uint32 GetPartyID() const;                     // узнаем уникальный ID группы
-    uint16 GetMemberFlags(CBattleEntity* PEntity); // получаем список флагов персонажа
-    uint8  MemberCount(uint16 ZoneID);             // узнаем количество участников группы в указанной зоне
+    uint32 GetPartyID() const;
+    uint16 GetMemberFlags(CBattleEntity* PEntity);
+    uint8  MemberCount(uint16 ZoneID);
 
-    CBattleEntity* GetLeader();                             // узнаем лидера группы
-    CBattleEntity* GetSyncTarget();                         // узнаем цель синхронизации
-    CBattleEntity* GetQuaterMaster();                       // узнаем владельца сокровищ
+    CBattleEntity* GetLeader();
+    CBattleEntity* GetSyncTarget();
+    CBattleEntity* GetQuaterMaster();
     CBattleEntity* GetMemberByName(const int8* MemberName); // Returns entity pointer for member name string
 
-    void DisbandParty(bool playerInitiated = true); // распускаем группу
-    void ReloadParty();                             // перезагружаем карту группы для всех участников группы
-    void ReloadPartyMembers(CCharEntity* PChar); // oбновляем статусы участников группы для выбранного персонажа
+    void DisbandParty(bool playerInitiated = true);
+    void ReloadParty();
+    void ReloadPartyMembers(CCharEntity* PChar);
     void ReloadTreasurePool(CCharEntity* PChar);
 
-    void AddMember(CBattleEntity* PEntity);             // добавляем персонажа в группу
-    void AddMember(uint32 id);                          // Add party member from outside this server's scope
-    void RemoveMember(CBattleEntity* PEntity);          // удаление персонажа из группы
-    void DelMember(CBattleEntity* PEntity);             // remove a member without invoking chat/db
-    void PopMember(CBattleEntity* PEntity);             // remove a member from memberlist (zoned to different server)
-    void PushMember(CBattleEntity* PEntity);            // add a member without invoking chat/db
-    void SetPartyID(uint32 id);                         // set new party ID
-    void AssignPartyRole(int8* MemberName, uint8 role); // назначаем роли участникам группы
-    void DisableSync();
-    void SetSyncTarget(int8* MemberName, uint16 message); // устанавливаем цель синхронизации уровней3
-    void RefreshSync();
-    void SetPartyNumber(uint8 number);
-    bool HasOnlyOneMember() const;
-    bool IsFull() const;
+    void   AddMember(CBattleEntity* PEntity);
+    void   AddMember(uint32 id);                 // Add party member from outside this server's scope
+    void   RemoveMember(CBattleEntity* PEntity); //
+    void   DelMember(CBattleEntity* PEntity);    // remove a member without invoking chat/db
+    void   PopMember(CBattleEntity* PEntity);    // remove a member from memberlist (zoned to different server)
+    void   PushMember(CBattleEntity* PEntity);   // add a member without invoking chat/db
+    void   SetPartyID(uint32 id);                // set new party ID
+    void   AssignPartyRole(int8* MemberName, uint8 role);
+    void   DisableSync();
+    void   SetSyncTarget(int8* MemberName, uint16 message);
+    void   RefreshSync();
+    void   SetPartyNumber(uint8 number);
+    bool   HasOnlyOneMember() const;
+    bool   IsFull() const;
     uint32 LoadPartySize() const;
 
     uint32 GetTimeLastMemberJoined();
@@ -95,9 +95,9 @@ public:
 
     std::size_t GetMemberCountAcrossAllProcesses();
 
-    void       PushPacket(uint32 senderID, uint16 ZoneID, CBasicPacket* packet); // Send a packet to all group members, with the exception of PPartyMember
-    void       PushEffectsPacket();
-    void       EffectsChanged();
+    void PushPacket(uint32 senderID, uint16 ZoneID, CBasicPacket* packet); // Send a packet to all group members, with the exception of PPartyMember
+    void PushEffectsPacket();
+    void EffectsChanged();
 
     CAlliance* m_PAlliance;
 
@@ -107,19 +107,19 @@ public:
 
 private:
     struct partyInfo_t;
-    uint32    m_PartyID;     // уникальный ID группы
-    PARTYTYPE m_PartyType;   // тип существ, составляющих группу
+    uint32    m_PartyID;     // unique party ID
+    PARTYTYPE m_PartyType;   // the type of party (players or mobs)
     uint8     m_PartyNumber; // party number in alliance
 
-    CBattleEntity* m_PLeader;       // лидер группы
-    CBattleEntity* m_PSyncTarget;   // цель синхронизации уровней
-    CBattleEntity* m_PQuaterMaster; // владелец сокровищ
+    CBattleEntity* m_PLeader;        // party leader
+    CBattleEntity* m_PSyncTarget;    // the CBattleEntity the party is being synced to
+    CBattleEntity* m_PQuarterMaster; // the assigned Quartermaster
 
     bool m_EffectsChanged;
 
-    void                     SetLeader(const char* MemberName);         // устанавливаем лидера группы
-    void                     SetQuarterMaster(const char* MemberName);  // устанавливаем владельца сокровищ
-    void                     RemovePartyLeader(CBattleEntity* PEntity); // лидер покидает группу
+    void                     SetLeader(const char* MemberName);         // set party leader
+    void                     SetQuarterMaster(const char* MemberName);  // set Quartermaster
+    bool                     RemovePartyLeader(CBattleEntity* PEntity); // attempt to remove the leader of the party. Returns false if party is disbanded or otherwise invalid.
     std::vector<partyInfo_t> GetPartyInfo() const;
     void                     RefreshFlags(std::vector<partyInfo_t>&);
 };

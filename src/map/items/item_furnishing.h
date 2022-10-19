@@ -22,7 +22,7 @@
 #ifndef _CITEMFURNISHING_H
 #define _CITEMFURNISHING_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "item.h"
 
@@ -127,6 +127,11 @@ public:
     void setLevel(uint8 level);
     void setRotation(uint8 rotation);
     void setOrder(uint8 order);
+
+    void  setMannequinRace(uint8 race);
+    uint8 getMannequinRace();
+    void  setMannequinPose(uint8 pose);
+    uint8 getMannequinPose();
 
 private:
     uint8  m_storage;

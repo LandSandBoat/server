@@ -1,16 +1,16 @@
 -----------------------------------
 -- Zone: PsoXja (9)
 -----------------------------------
-local ID = require("scripts/zones/PsoXja/IDs")
-require("scripts/globals/conquest")
-require("scripts/globals/missions")
-require("scripts/settings/main")
-require("scripts/globals/treasure")
-require("scripts/globals/status")
+local ID = require('scripts/zones/PsoXja/IDs')
+require('scripts/globals/conquest')
+require('scripts/globals/missions')
+require('scripts/globals/settings')
+require('scripts/globals/treasure')
+require('scripts/globals/status')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
     zone:registerRegion(1,  -21.469, 27,  -24.255,  -18.723, 32,  -19.877) -- 40 cap (H-8 Tower)
     zone:registerRegion(2,  337.376, 27,  -19.836,  342.340, 32,  -16.055) -- 50 cap area (J-8 Tower)
     zone:registerRegion(3,   95.659, 42, -302.390,   99.973, 48, -297.744) -- 60 cap area (H-10 Tower)
@@ -21,11 +21,11 @@ zone_object.onInitialize = function(zone)
     xi.treasure.initZone(zone)
 end
 
-zone_object.onConquestUpdate = function(zone, updatetype)
+zoneObject.onConquestUpdate = function(zone, updatetype)
     xi.conq.onConquestUpdate(zone, updatetype)
 end
 
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
@@ -35,7 +35,7 @@ zone_object.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zone_object.afterZoneIn = function(player)
+zoneObject.afterZoneIn = function(player)
     player:entityVisualPacket("brmp")
     player:entityVisualPacket("lirp")
     player:entityVisualPacket("kil1")
@@ -55,38 +55,39 @@ zone_object.afterZoneIn = function(player)
     player:entityVisualPacket("s123")
 
     -- ZONE WIDE LEVEL RESTRICTION
-    if (xi.settings.ENABLE_COP_ZONE_CAP == 1) then
-        local LVLcap = player:getCharVar("PSOXJA_RESTRICTION_LVL")
-        if (LVLcap > 0) then -- LV cap depends on entrance
-            player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, LVLcap, 0, 0)
+    if xi.settings.main.ENABLE_COP_ZONE_CAP == 1 then
+        local lvlCap = player:getCharVar("PSOXJA_RESTRICTION_LVL")
+
+        if lvlCap > 0 then -- LV cap depends on entrance
+            player:addStatusEffect(xi.effect.LEVEL_RESTRICTION, lvlCap, 0, 0)
         end
     end
 end
 
-zone_object.onRegionEnter = function(player, region)
+zoneObject.onRegionEnter = function(player, region)
     player:startEvent(19 + region:GetRegionID())
 end
 
-zone_object.onRegionLeave = function(player, region)
+zoneObject.onRegionLeave = function(player, region)
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
 end
 
-zone_object.onEventFinish = function(player, csid, option)
-    if (csid == 20 and option == 1) then
+zoneObject.onEventFinish = function(player, csid, option)
+    if csid == 20 and option == 1 then
         player:setPos(-20, -60.250, -60, 63, 111)
-    elseif (csid == 21 and option == 1) then
+    elseif csid == 21 and option == 1 then
         player:setPos(260, -0.25, -20, 254, 111)
-    elseif (csid == 22 and option == 1) then
+    elseif csid == 22 and option == 1 then
         player:setPos(60, -0.250, -340.000, 190, 111)
-    elseif (csid == 23 and option == 1) then
+    elseif csid == 23 and option == 1 then
         player:setPos(-340, -100.250, 140, 63, 111)
-    elseif (csid == 24 and option == 1) then
+    elseif csid == 24 and option == 1 then
         player:setPos(-180, -40.25 , -220, 0, 111)
-    elseif (csid == 25 and option == 1) then
+    elseif csid == 25 and option == 1 then
         player:setPos(100, -20.25, 140, 64, 111)
     end
 end
 
-return zone_object
+return zoneObject

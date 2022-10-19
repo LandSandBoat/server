@@ -15,7 +15,8 @@ end
 entity.onTrigger = function(player, npc)
     player:showText(npc, ID.text.SHOHRUNTUHRUN_SHOP_DIALOG)
 
-    local stock = {
+    local stock =
+    {
         4665, 18000, 1,     --Haste
 
         4620,  5178, 2,     --Scroll of Raise

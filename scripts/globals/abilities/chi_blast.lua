@@ -5,31 +5,16 @@
 -- Recast Time: 3:00
 -- Duration: Instant
 -----------------------------------
-require("scripts/settings/main")
-require("scripts/globals/status")
+require("scripts/globals/job_utils/monk")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-ability_object.onUseAbility = function(player, target, ability)
-    local boost = player:getStatusEffect(xi.effect.BOOST)
-    local multiplier = 1.0
-    if boost ~= nil then
-        multiplier = (boost:getPower()/100) * 4 -- power is the raw % atk boost
-    end
-
-    local dmg = math.floor(player:getStat(xi.mod.MND) * (0.5 + (math.random() / 2))) * multiplier
-
-    dmg = utils.stoneskin(target, dmg)
-    target:takeDamage(dmg, player, xi.attackType.SPECIAL, xi.damageType.ELEMENTAL)
-    target:updateEnmityFromDamage(player, dmg)
-    target:updateClaim(player)
-    player:delStatusEffect(xi.effect.BOOST)
-
-    return dmg
+abilityObject.onUseAbility = function(player, target, ability)
+    return xi.job_utils.monk.useChiBlast(player, target, ability)
 end
 
-return ability_object
+return abilityObject

@@ -4,13 +4,13 @@
 -- Spawns Lugarhoo
 -- !pos -85 24 -513 132
 -----------------------------------
+local ID = require('scripts/zones/Abyssea-La_Theine/IDs')
 require('scripts/globals/abyssea')
 require('scripts/globals/items')
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local ID = zones[player:getZoneID()]
     xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.LUGARHOO, { xi.items.FILTHY_GNOLE_CLAW })
 end
 

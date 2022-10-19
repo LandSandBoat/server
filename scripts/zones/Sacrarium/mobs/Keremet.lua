@@ -8,11 +8,10 @@ require("scripts/globals/missions")
 local entity = {}
 
 entity.onMobFight = function(mob, target)
-    local Keremet = mob:getID()
+    local keremet = mob:getID()
 
     -- Send spawned skeleton "pets" to Keremet's target
-
-    for i = Keremet+1, Keremet+12 do
+    for i = keremet + 1, keremet + 12 do
         local m = GetMobByID(i)
         if m:getCurrentAction() == xi.act.ROAMING then
             m:updateEnmity(target)
@@ -20,7 +19,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)

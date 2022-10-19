@@ -3,7 +3,7 @@
 --  NPC: Aishah
 -- Standard Info NPC
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 -----------------------------------
 local entity = {}
 

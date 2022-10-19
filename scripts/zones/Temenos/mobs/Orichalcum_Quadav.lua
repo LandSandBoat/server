@@ -2,7 +2,7 @@
 -- Area: Temenos
 --  Mob: Orichalcum Quadav
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 local ID = require("scripts/zones/Temenos/IDs")
 -----------------------------------
 local entity = {}
@@ -26,8 +26,8 @@ entity.onMobEngaged = function(mob, target)
     GetMobByID(ID.mob.TEMENOS_C_MOB[3]+2):updateEnmity(target)
 end
 
-entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller or optParams.noKiller then
         if GetMobByID(ID.mob.TEMENOS_C_MOB[3]):isDead() and GetMobByID(ID.mob.TEMENOS_C_MOB[3]+1):isDead() and
             GetMobByID(ID.mob.TEMENOS_C_MOB[3]+2):isDead()
         then

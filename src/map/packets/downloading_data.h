@@ -22,7 +22,7 @@
 #ifndef _CDOWNLOADINGDATAPACKET_H
 #define _CDOWNLOADINGDATAPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

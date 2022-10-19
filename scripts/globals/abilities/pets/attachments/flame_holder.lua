@@ -3,7 +3,7 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local attachment_object = {}
+local attachmentObject = {}
 
 local validskills = set{
     1940,
@@ -20,7 +20,7 @@ local validskills = set{
     2744,
 }
 
-attachment_object.onEquip = function(automaton)
+attachmentObject.onEquip = function(automaton)
     automaton:addListener("WEAPONSKILL_STATE_ENTER", "AUTO_FLAME_HOLDER_START", function(pet, skill)
         if not validskills[skill] then return end
         local master = pet:getMaster()
@@ -54,15 +54,15 @@ attachment_object.onEquip = function(automaton)
     end)
 end
 
-attachment_object.onUnequip = function(pet)
+attachmentObject.onUnequip = function(pet)
     pet:removeListener("AUTO_FLAME_HOLDER_START")
     pet:removeListener("AUTO_FLAME_HOLDER_END")
 end
 
-attachment_object.onManeuverGain = function(pet, maneuvers)
+attachmentObject.onManeuverGain = function(pet, maneuvers)
 end
 
-attachment_object.onManeuverLose = function(pet, maneuvers)
+attachmentObject.onManeuverLose = function(pet, maneuvers)
 end
 
-return attachment_object
+return attachmentObject

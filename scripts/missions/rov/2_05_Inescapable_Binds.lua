@@ -47,7 +47,7 @@ mission.sections =
             {
                 [165] = function(player, csid, option, npc)
                     local toauProgress = player:getCurrentMission(xi.mission.log_id.TOAU) >= xi.mission.id.toau.ROYAL_PUPPETEER and 1 or 0
-                    local copProgress = player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_WARRIOR_S_PATH) and 1 or 0
+                    local copProgress = player:hasCompletedMission(xi.mission.log_id.COP, xi.mission.id.cop.THE_WARRIORS_PATH) and 1 or 0
 
                     if player:hasCompletedMission(xi.mission.log_id.TOAU, xi.mission.id.toau.PASSING_GLORY) then
                         toauProgress = toauProgress + 1

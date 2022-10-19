@@ -17,13 +17,13 @@ require("scripts/globals/quests")
 local entity = {}
 
 entity.onTrigger = function(player, npc)
-    local TheMissingPiece = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_MISSING_PIECE)
-    local HasAncientFragment = player:hasKeyItem(xi.ki.ANCIENT_TABLET_FRAGMENT)
-    local HasAncientTablet = player:hasKeyItem(xi.ki.TABLET_OF_ANCIENT_MAGIC)
+    local theMissingPiece = player:getQuestStatus(xi.quest.log_id.OUTLANDS, xi.quest.id.outlands.THE_MISSING_PIECE)
+    local hasAncientFragment = player:hasKeyItem(xi.ki.ANCIENT_TABLET_FRAGMENT)
+    local hasAncientTablet = player:hasKeyItem(xi.ki.TABLET_OF_ANCIENT_MAGIC)
 
     -- Need to make sure the quest is flagged the player is no further along in the quest
 
-    if (TheMissingPiece == QUEST_ACCEPTED and not(HasAncientTablet or HasAncientFragment or player:getTitle() == xi.title.ACQUIRER_OF_ANCIENT_ARCANUM)) then
+    if (theMissingPiece == QUEST_ACCEPTED and not(hasAncientTablet or hasAncientFragment or player:getTitle() == xi.title.ACQUIRER_OF_ANCIENT_ARCANUM)) then
         player:addKeyItem(xi.ki.ANCIENT_TABLET_FRAGMENT)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.ANCIENT_TABLET_FRAGMENT)
 
@@ -48,13 +48,9 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventUpdate = function(player, csid, option)
-    -- print("CSID:", csid)
-    -- print("RESULT:", option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    -- print("CSID:", csid)
-    -- print("RESULT:", option)
 end
 
 return entity

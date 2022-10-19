@@ -11,10 +11,11 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local WildcatJeuno = player:getCharVar("WildcatJeuno")
+    local wildcatJeuno = player:getCharVar("WildcatJeuno")
+
     if
         player:getQuestStatus(xi.quest.log_id.JEUNO, xi.quest.id.jeuno.LURE_OF_THE_WILDCAT) == QUEST_ACCEPTED and
-        not utils.mask.getBit(WildcatJeuno, 8)
+        not utils.mask.getBit(wildcatJeuno, 8)
     then
         player:startEvent(10086)
     else

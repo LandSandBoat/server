@@ -11,7 +11,7 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (npc:getAnimation() == 9) then
+    if npc:getAnimation() == 9 then
         player:startEvent(58)
     else
         player:messageSpecial(ID.text.DEVICE_IN_OPERATION)
@@ -22,10 +22,11 @@ entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option, npc)
-    if (csid == 58) then
-        local CrystalOperator = npc:getID()
+    if csid == 58 then
+        local crystalOperator = npc:getID()
+
         npc:openDoor(118) -- this sets the trigger animation to glowing. The time is retail confirmed.
-        GetNPCByID(CrystalOperator+1):closeDoor(118) -- tiles will reset at the same time.
+        GetNPCByID(crystalOperator + 1):closeDoor(118) -- tiles will reset at the same time.
     end
 end
 

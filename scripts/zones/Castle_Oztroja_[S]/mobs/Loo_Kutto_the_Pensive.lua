@@ -2,7 +2,7 @@
 -- Area: Castle Oztroja [S]
 --   NM: Loo Kutto the Pensive
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}
 
@@ -20,7 +20,7 @@ entity.onMobFight = function(mob, target)
     mob:setMod(xi.mod.STORETP, power)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)

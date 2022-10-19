@@ -169,7 +169,8 @@ void CZoneInstance::DecreaseZoneCounter(CCharEntity* PChar)
             if (instance->Failed() || instance->Completed())
             {
                 ShowDebug("[CZoneInstance]DecreaseZoneCounter cleaned up Instance %s", (const char*)instance->GetName());
-                instanceList.erase(std::find_if(instanceList.begin(), instanceList.end(), [&instance](const auto& el) { return el.get() == instance; }));
+                instanceList.erase(std::find_if(instanceList.begin(), instanceList.end(), [&instance](const auto& el)
+                                                { return el.get() == instance; }));
             }
             else
             {
@@ -230,6 +231,10 @@ void CZoneInstance::IncreaseZoneCounter(CCharEntity* PChar)
     }
     else
     {
+        ShowWarning(fmt::format("Failed to place {} in {} ({}). Placing them in that zone's instance exit area.",
+                                PChar->name, this->GetName(), this->GetID())
+                        .c_str());
+
         // instance no longer exists: put them outside (at exit)
         PChar->loc.prevzone = GetID();
 
@@ -326,6 +331,42 @@ void CZoneInstance::PushPacket(CBaseEntity* PEntity, GLOBAL_MESSAGE_TYPE message
         for (const auto& instance : instanceList)
         {
             instance->PushPacket(PEntity, message_type, packet);
+        }
+    }
+}
+
+void CZoneInstance::UpdateCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask)
+{
+    if (PChar)
+    {
+        if (PChar->PInstance)
+        {
+            PChar->PInstance->UpdateCharPacket(PChar, type, updatemask);
+        }
+    }
+    else
+    {
+        for (auto const& instance : instanceList)
+        {
+            instance->UpdateCharPacket(PChar, type, updatemask);
+        }
+    }
+}
+
+void CZoneInstance::UpdateEntityPacket(CBaseEntity* PEntity, ENTITYUPDATE type, uint8 updatemask, bool alwaysInclude)
+{
+    if (PEntity)
+    {
+        if (PEntity->PInstance)
+        {
+            PEntity->PInstance->UpdateEntityPacket(PEntity, type, updatemask, alwaysInclude);
+        }
+    }
+    else
+    {
+        for (auto const& instance : instanceList)
+        {
+            instance->UpdateEntityPacket(PEntity, type, updatemask, alwaysInclude);
         }
     }
 }

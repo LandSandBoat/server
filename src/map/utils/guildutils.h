@@ -22,12 +22,12 @@
 #ifndef _GUILDUTILS_H
 #define _GUILDUTILS_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 /************************************************************************
- *																		*
- *																		*
- *																		*
+ *                                                                        *
+ *                                                                        *
+ *                                                                        *
  ************************************************************************/
 
 class CItemContainer;

@@ -14,7 +14,7 @@ require('scripts/globals/items')
 require('scripts/globals/keyitems')
 require('scripts/globals/missions')
 require('scripts/globals/npc_util')
-require('scripts/settings/main')
+require('scripts/globals/settings')
 require('scripts/globals/interaction/mission')
 require('scripts/globals/zone')
 -----------------------------------
@@ -120,7 +120,7 @@ mission.sections =
 
         [xi.zone.THRONE_ROOM] =
         {
-            ['_4l1'] =
+            ['Throne_Room'] =
             {
                 onTrigger = function(player, npc)
                     if player:getMissionStatus(mission.areaId) == 2 then

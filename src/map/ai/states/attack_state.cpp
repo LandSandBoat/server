@@ -65,7 +65,11 @@ bool CAttackState::Update(time_point tick)
             action_t action;
             if (m_PEntity->OnAttack(*this, action))
             {
-                m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
+                // CMobEntity::OnAttack(...) can generate it's own action with a mobmod, and that leaves this action.actionType = 0, which is never valid. Skip sending the packet.
+                if (action.actiontype != ACTION_NONE)
+                {
+                    m_PEntity->loc.zone->PushPacket(m_PEntity, CHAR_INRANGE_SELF, new CActionPacket(action));
+                }
             }
         }
         else if (m_PEntity->OnAttackError(*this))
@@ -97,6 +101,14 @@ void CAttackState::ResetAttackTimer()
     m_attackTime = std::chrono::milliseconds(m_PEntity->GetWeaponDelay(false));
 }
 
+void CAttackState::UpdateTarget(CBaseEntity* target)
+{
+    if (target != nullptr)
+    {
+        CAttackState::UpdateTarget(target->targid);
+    }
+}
+
 void CAttackState::UpdateTarget(uint16 targid)
 {
     m_errorMsg.reset();
@@ -107,7 +119,7 @@ void CAttackState::UpdateTarget(uint16 targid)
         PNewTarget = m_PEntity->IsValidTarget(newTargid, TARGET_ENEMY, m_errorMsg);
         if (!PNewTarget)
         {
-            newTargid = 0;
+            newTargid          = 0;
             CCharEntity* PChar = dynamic_cast<CCharEntity*>(m_PEntity);
             if (PChar && PChar->m_hasAutoTarget) // Auto-Target
             {

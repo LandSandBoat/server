@@ -59,7 +59,6 @@ private:
     std::unique_ptr<CWeaponSkill> m_PSkill;
     time_point                    m_finishTime;
     int16                         m_spent{ 0 };
-    duration                      m_castTime;
 };
 
 #endif

@@ -20,11 +20,11 @@
 */
 
 #include "server_message.h"
-#include "../../common/socket.h"
+#include "common/socket.h"
 
 #include <cstring>
 
-CServerMessagePacket::CServerMessagePacket(const string_t& message, int8 language, int32 timestamp, int32 message_offset)
+CServerMessagePacket::CServerMessagePacket(const std::string& message, int8 language, int32 timestamp, int32 message_offset)
 {
     this->setType(0x4D);
     this->setSize(0x1C);

@@ -6,13 +6,13 @@
 -- Duration: 00:01:00
 -- Cost: 1-5 Finishing Move charges
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     if player:hasStatusEffect(xi.effect.FINISHING_MOVE_1) then
         return 0, 0
     elseif player:hasStatusEffect(xi.effect.FINISHING_MOVE_2) then
@@ -28,11 +28,11 @@ ability_object.onAbilityCheck = function(player, target, ability)
     end
 end
 
-ability_object.onUseAbility = function(player, target, ability)
+abilityObject.onUseAbility = function(player, target, ability)
     for move = xi.effect.FINISHING_MOVE_1, xi.effect.FINISHING_MOVE_5 do
         player:delStatusEffect(move)
         player:addStatusEffect(xi.effect.CLIMACTIC_FLOURISH, 3, 0, 60, 0, player:getMerit(xi.merit.CLIMACTIC_FLOURISH_EFFECT))
     end
 end
 
-return ability_object
+return abilityObject

@@ -4,23 +4,23 @@
 require("scripts/globals/instance")
 local ID = require("scripts/zones/Arrapago_Remnants/IDs")
 -----------------------------------
-local instance_object = {}
+local instanceObject = {}
 
-instance_object.afterInstanceRegister = function(player)
+instanceObject.afterInstanceRegister = function(player)
     local instance = player:getInstance()
     player:messageSpecial(ID.text.TIME_TO_COMPLETE, instance:getTimeLimit())
     player:messageSpecial(ID.text.SALVAGE_START, 1)
-    player:addStatusEffectEx(xi.effect.ENCUMBRANCE_I, xi.effect.ENCUMBRANCE_I, 0xFFFF, 0, 0)
-    player:addStatusEffectEx(xi.effect.OBLIVISCENCE, xi.effect.OBLIVISCENCE, 0, 0, 0)
-    player:addStatusEffectEx(xi.effect.OMERTA, xi.effect.OMERTA, 0, 0, 0)
-    player:addStatusEffectEx(xi.effect.IMPAIRMENT, xi.effect.IMPAIRMENT, 0, 0, 0)
-    player:addStatusEffectEx(xi.effect.DEBILITATION, xi.effect.DEBILITATION, 0x1FF, 0, 0)
+    player:addStatusEffectEx(xi.effect.ENCUMBRANCE_I, xi.effect.ENCUMBRANCE_I, 0xFFFF, 0, 6000)
+    player:addStatusEffectEx(xi.effect.OBLIVISCENCE, xi.effect.OBLIVISCENCE, 0, 0, 6000)
+    player:addStatusEffectEx(xi.effect.OMERTA, xi.effect.OMERTA, 0x3F, 0, 6000)
+    player:addStatusEffectEx(xi.effect.IMPAIRMENT, xi.effect.IMPAIRMENT, 3, 0, 6000)
+    player:addStatusEffectEx(xi.effect.DEBILITATION, xi.effect.DEBILITATION, 0x1FF, 0, 6000)
     for i = 0, 15 do
         player:unequipItem(i)
     end
 end
 
-instance_object.onInstanceCreated = function(instance)
+instanceObject.onInstanceCreated = function(instance)
 
     for i, v in pairs(ID.npc[1][1]) do
         local npc = GetNPCByID(v, instance)
@@ -30,18 +30,18 @@ instance_object.onInstanceCreated = function(instance)
     instance:setProgress(0)
 end
 
-instance_object.onInstanceCreatedCallback = function(player, instance)
+instanceObject.onInstanceCreatedCallback = function(player, instance)
     if instance then
         player:setInstance(instance)
         player:setPos(0, 0, 0, 0, instance:getZone():getID())
     end
 end
 
-instance_object.onInstanceTimeUpdate = function(instance, elapsed)
+instanceObject.onInstanceTimeUpdate = function(instance, elapsed)
     xi.instance.updateInstanceTime(instance, elapsed, ID.text)
 end
 
-instance_object.onInstanceFailure = function(instance)
+instanceObject.onInstanceFailure = function(instance)
 
     local chars = instance:getChars()
 
@@ -51,16 +51,16 @@ instance_object.onInstanceFailure = function(instance)
     end
 end
 
-instance_object.onInstanceComplete = function(instance)
+instanceObject.onInstanceComplete = function(instance)
 end
 
-instance_object.onRegionEnter = function(player, region, instance)
+instanceObject.onRegionEnter = function(player, region, instance)
     if region:GetRegionID() <= 11 then
         player:startEvent(199 + region:GetRegionID())
     end
 end
 
-instance_object.onInstanceProgressUpdate = function(instance, progress, elapsed)
+instanceObject.onInstanceProgressUpdate = function(instance, progress, elapsed)
     if instance:getStage() == 1 and progress == 10 then
         SpawnMob(ID.mob[1][2].rampart, instance)
     elseif instance:getStage() == 2 and progress == 2 then -- attempt to spawn slot
@@ -84,10 +84,10 @@ instance_object.onInstanceProgressUpdate = function(instance, progress, elapsed)
 
 end
 
-instance_object.onEventUpdate = function(player, csid, option)
+instanceObject.onEventUpdate = function(player, csid, option)
 end
 
-instance_object.onEventFinish = function(player, csid, option)
+instanceObject.onEventFinish = function(player, csid, option)
     local instance = player:getInstance()
 
     if csid >= 200 and csid <= 203 and option == 1 then
@@ -151,4 +151,4 @@ instance_object.onEventFinish = function(player, csid, option)
     end
 end
 
-return instance_object
+return instanceObject

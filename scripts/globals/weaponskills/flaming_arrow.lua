@@ -12,12 +12,12 @@
 -----------------------------------
 require("scripts/globals/magic")
 require("scripts/globals/status")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/weaponskills")
 -----------------------------------
-local weaponskill_object = {}
+local weaponskillObject = {}
 
-weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
+weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary, action, taChar)
 
     local params = {}
     params.numHits = 1
@@ -30,8 +30,9 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
     params.hybridWS = true
     params.ele = xi.magic.ele.FIRE
     params.skill = xi.skill.ARCHERY
+    params.includemab = true
 
-    if (xi.settings.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
+    if (xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES == true) then
         params.ftp100 = 0.5 params.ftp200 = 0.75 params.ftp300 = 1
         params.str_wsc = 0.2 params.agi_wsc = 0.5
     end
@@ -41,4 +42,4 @@ weaponskill_object.onUseWeaponSkill = function(player, target, wsID, tp, primary
 
 end
 
-return weaponskill_object
+return weaponskillObject

@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../../common/socket.h"
+#include "common/socket.h"
 
 #include <cstring>
 
@@ -35,20 +35,43 @@ CCharPacket::CCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask
     this->setSize(0x74);
 
     ref<uint32>(0x04) = PChar->id;
+    updateWith(PChar, type, updatemask);
+}
+
+void CCharPacket::updateWith(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask)
+{
+    uint32 currentId = ref<uint32>(0x04);
+    if (currentId != PChar->id)
+    {
+        // Should only be able to update packets about the same character.
+        ShowError("Unable to update char packet for %d with data from %d", currentId, PChar->id);
+        return;
+    }
+
     ref<uint16>(0x08) = PChar->targid; // 0x0D entity updates are valid for 1024 to 1791
+
+    if (type == ENTITY_SPAWN)
+    {
+        updatemask = 0x1F; // override mask to spawn mask
+    }
 
     switch (type)
     {
         case ENTITY_DESPAWN:
         {
-            ref<uint8>(0x0A) = 0x20;
+            ref<uint8>(0x0A) = UPDATE_DESPAWN;
         }
         break;
+        // clang-format off
         case ENTITY_SPAWN:
-            updatemask = 0x1F;
+        {
+            updatemask = UPDATE_ALL_CHAR;
+        }
+        [[fallthrough]];
+        // clang-format on
         case ENTITY_UPDATE:
         {
-            ref<uint8>(0x0A) = updatemask;
+            ref<uint8>(0x0A) |= updatemask;
 
             if (updatemask & UPDATE_POS)
             {
@@ -71,7 +94,7 @@ CCharPacket::CCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask
 
                 // if (PChar->StatusEffectContainer->HasStatusEffect(EFFECT_SNEAK))
                 //{
-                //	ref<uint8>(data,(0x22)) = 0x20;
+                //  ref<uint8>(data,(0x22)) = 0x20;
                 //}
 
                 if (PChar->StatusEffectContainer->HasStatusEffectByFlag(EFFECTFLAG_INVISIBLE))
@@ -140,7 +163,7 @@ CCharPacket::CCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask
                 ref<uint8>(0x42) = 0x50 + PChar->StatusEffectContainer->GetStatusEffect(EFFECT_COLURE_ACTIVE)->GetPower();
             }
 
-            ref<uint8>(0x43)  = 0x04;
+            ref<uint8>(0x43) = 0x04;
 
             if (updatemask & UPDATE_LOOK)
             {
@@ -177,4 +200,4 @@ CCharPacket::CCharPacket(CCharEntity* PChar, ENTITYUPDATE type, uint8 updatemask
     }
 }
 
-// некоторые манипуляции с пакетом приводят к интересному результату (количество голов в какой-то игре)
+// Some manipulations with a package lead to an interesting result (the number of goals in some game)

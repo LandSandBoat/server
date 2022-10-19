@@ -3,7 +3,8 @@
 -----------------------------------
 
 function switch(c)
-    local swtbl = {
+    local swtbl =
+    {
         casevar = c,
         caseof = function(self, code)
             local f

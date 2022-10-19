@@ -19,7 +19,7 @@
 ===========================================================================
 */
 
-#include "../../common/taskmgr.h"
+#include "common/taskmgr.h"
 
 #include "../ai/ai_container.h"
 #include "../utils/zoneutils.h"
@@ -35,11 +35,14 @@
 
 CNpcEntity::CNpcEntity()
 {
-    objtype    = TYPE_NPC;
-    look.face  = 0x32;
-    widescan   = 1;
-    allegiance = ALLEGIANCE_TYPE::MOB;
-    PAI        = std::make_unique<CAIContainer>(this);
+    objtype     = TYPE_NPC;
+    look.face   = 0x32;
+    widescan    = 1;
+    allegiance  = ALLEGIANCE_TYPE::MOB;
+    m_flags     = 0;
+    name_prefix = 0;
+
+    PAI = std::make_unique<CAIContainer>(this);
 }
 
 CNpcEntity::~CNpcEntity() = default;
@@ -71,21 +74,21 @@ bool CNpcEntity::IsHPHidden() const
     return (m_flags & 0x800) == 0x800;
 }
 
-void CNpcEntity::Untargetable(bool untargetable)
+void CNpcEntity::SetUntargetable(bool untargetable)
 {
     if (untargetable)
     {
-        m_flags |= 0x800;
+        m_flags |= FLAG_UNTARGETABLE;
     }
     else
     {
-        m_flags &= ~0x800;
+        m_flags &= ~FLAG_UNTARGETABLE;
     }
 }
 
-bool CNpcEntity::IsUntargetable() const
+bool CNpcEntity::GetUntargetable() const
 {
-    return (m_flags & 0x800) == 0x800;
+    return (m_flags & FLAG_UNTARGETABLE) == FLAG_UNTARGETABLE;
 }
 
 bool CNpcEntity::IsTriggerable() const
@@ -100,9 +103,11 @@ bool CNpcEntity::isWideScannable()
 
 void CNpcEntity::PostTick()
 {
-    if (loc.zone && updatemask)
+    std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
+    if (loc.zone && updatemask && now > m_nextUpdateTimer)
     {
-        loc.zone->PushPacket(this, CHAR_INRANGE, new CEntityUpdatePacket(this, ENTITY_UPDATE, updatemask));
+        m_nextUpdateTimer = now + 250ms;
+        loc.zone->UpdateEntityPacket(this, ENTITY_UPDATE, updatemask);
         updatemask = 0;
     }
 }

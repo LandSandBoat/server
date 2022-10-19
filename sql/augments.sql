@@ -17,8 +17,9 @@ CREATE TABLE `augments` (
 -- Dumping data for table `augments`
 --
 
--- WARNING: do not comment out augmentId records,zero their modId and values instead.
--- zero is MOD_NONE and should be fine.
+-- WARNING: do not comment out augmentId records, zero their modId and values instead.
+-- Zero is MOD_NONE and should be fine..
+-- The IDs follow the packet not the dat so windower resources and polutils dumps will not match
 INSERT INTO `augments` VALUES (1,0,2,1,0,0); -- HP+1
 INSERT INTO `augments` VALUES (2,0,2,33,0,0); -- HP+33
 INSERT INTO `augments` VALUES (3,0,2,65,0,0); -- HP+65
@@ -70,21 +71,21 @@ INSERT INTO `augments` VALUES (42,0,166,-1,0,0); -- Enemy crit. hit rate-1%
 INSERT INTO `augments` VALUES (43,0,391,1,0,0); -- Charm+1 Could not determine retail AUGMENT effect. Duration? Chance to land charm? Just set as chance for now.
 INSERT INTO `augments` VALUES (44,0,73,1,0,0); -- Store TP+1 Subtle Blow+1
 INSERT INTO `augments` VALUES (44,0,289,1,0,0); -- Cont.
-INSERT INTO `augments` VALUES (45,0,366,1,0,0); -- DMG:+1 (melee,not ranged...Mainhand only?)
-INSERT INTO `augments` VALUES (46,0,366,-1,0,0); -- DMG:-1 (melee,not ranged...Mainhand only?)
+INSERT INTO `augments` VALUES (45,0,287,1,0,0);  -- DMG:+(X+1), Increases damage rating of this weapon (Maximum X=31 for DMG+32) (Retail: melee,not ranged...Mainhand only?) Item displays a value 1 larger than stored in item
+INSERT INTO `augments` VALUES (46,0,287,-1,0,0); -- DMG:-(X+1), Decreases damage rating of this weapon (Maximum X=31 for DMG-32) (Retail: melee,not ranged...Mainhand only?) Item displays a (negative) value 1 larger than stored in item
 INSERT INTO `augments` VALUES (47,0,380,1,0,0); -- Delay:+1% (melee,not ranged)
 INSERT INTO `augments` VALUES (48,0,380,-1,0,0); -- Delay:-1% (melee,not ranged)
-INSERT INTO `augments` VALUES (49,0,384,100,0,0); -- Haste+1
-INSERT INTO `augments` VALUES (50,0,384,-100,0,0); -- Slow+1
+INSERT INTO `augments` VALUES (49,100,384,1,0,0); -- Haste+1
+INSERT INTO `augments` VALUES (50,100,384,-1,0,0); -- Slow+1
 INSERT INTO `augments` VALUES (51,0,72,1,0,0); -- HP recovered while healing+1
 INSERT INTO `augments` VALUES (52,0,71,1,0,0); -- MP recovered while healing+1
 INSERT INTO `augments` VALUES (53,0,168,-1,0,0); -- Spell interruption rate down 1%
-INSERT INTO `augments` VALUES (54,0,161,-1,0,0); -- Phys. dmg. taken -1%
-INSERT INTO `augments` VALUES (55,0,163,-1,0,0); -- Magic dmg. taken -1%
-INSERT INTO `augments` VALUES (56,0,162,-1,0,0); -- Breath dmg. taken -1%
+INSERT INTO `augments` VALUES (54,100,161,-1,0,0); -- Phys. dmg. taken -1%
+INSERT INTO `augments` VALUES (55,100,163,-1,0,0); -- Magic dmg. taken -1%
+INSERT INTO `augments` VALUES (56,100,162,-1,0,0); -- Breath dmg. taken -1%
 INSERT INTO `augments` VALUES (57,0,562,1,0,0); -- Magic crit. hit rate+1%
 INSERT INTO `augments` VALUES (58,0,29,-1,0,0); -- Mag.Def.Bns.-1
-INSERT INTO `augments` VALUES (59,0,0,0,0,0); -- Latent effect: Regain+1 (Do via Latent: triggered with your current weapon drawn for 1 TP/tick.)
+INSERT INTO `augments` VALUES (59,0,0,0,0,0); -- Latent effect: Regain+10 (Do via Latent: triggered with your current weapon drawn for 10 TP/tick.)
 INSERT INTO `augments` VALUES (60,0,0,0,0,0); -- Latent effect: Refresh+1 (Do via Latent: triggered with your current weapon not drawn for 1 MP/tick. Refresh is not present while resting(/heal),chocobo or /sit.)
 INSERT INTO `augments` VALUES (61,0,958,1,0,0); -- Occ. inc. resist to stat ailments+1
 INSERT INTO `augments` VALUES (62,0,25,33,0,0); -- Accuracy+33
@@ -99,11 +100,11 @@ INSERT INTO `augments` VALUES (69,0,26,1,0,0); -- Rng.Acc.+1 Rng.Atk.+1
 INSERT INTO `augments` VALUES (69,0,24,1,0,0); -- Cont.
 INSERT INTO `augments` VALUES (70,0,30,33,0,0); -- Mag. Acc.+33 Mag.Atk.Bns+33
 INSERT INTO `augments` VALUES (70,0,28,33,0,0); -- Cont.
-INSERT INTO `augments` VALUES (71,0,160,-1,0,0); -- Damage Taken -1%
+INSERT INTO `augments` VALUES (71,0,160,-100,0,0); -- Damage Taken -1%
 INSERT INTO `augments` VALUES (72,0,0,0,0,0); -- 72 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (73,0,0,0,0,0); -- 73 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
-INSERT INTO `augments` VALUES (74,0,0,0,0,0); -- Cap. Point +1%
-INSERT INTO `augments` VALUES (75,0,0,0,0,0); -- Cap. Point +33%
+INSERT INTO `augments` VALUES (74,0,915,1,0,0); -- Cap. Point +1%
+INSERT INTO `augments` VALUES (75,0,915,33,0,0); -- Cap. Point +33%
 INSERT INTO `augments` VALUES (76,0,0,0,0,0); -- DMG+33 Unsure if main hand or off hand so leaving values blank for now,goes up in increments of 1 after the initial 33.
 INSERT INTO `augments` VALUES (77,0,0,0,0,0); -- Delay -33% Unsure if main hand or off hand so leaving values blank for now,goes up in increments of 1 after the initial 33.
 INSERT INTO `augments` VALUES (78,0,2,2,0,0); -- HP+2 (count by 2)
@@ -151,13 +152,13 @@ INSERT INTO `augments` VALUES (109,0,288,1,1,0); -- Pet: Dbl.Atk.+1% Crit.hit ra
 INSERT INTO `augments` VALUES (109,0,165,1,1,0); -- Cont.
 INSERT INTO `augments` VALUES (110,0,370,1,1,0); -- Pet: Regen+1
 INSERT INTO `augments` VALUES (111,0,384,100,1,0); -- Pet: Haste+1
-INSERT INTO `augments` VALUES (112,0,160,-1,1,0); -- Pet: Damage taken -1%
+INSERT INTO `augments` VALUES (112,0,160,-100,1,0); -- Pet: Damage taken -1%
 INSERT INTO `augments` VALUES (113,0,26,1,1,0); -- Pet: Rng.Acc.+1
 INSERT INTO `augments` VALUES (114,0,24,1,1,0); -- Pet: Rng.Atk.+1
 INSERT INTO `augments` VALUES (115,0,73,1,1,0); -- Pet: Store TP+1
 INSERT INTO `augments` VALUES (116,0,289,1,1,0); -- Pet: Subtle Blow+1
 INSERT INTO `augments` VALUES (117,0,31,1,1,0); -- Pet: Mag. Evasion+1
-INSERT INTO `augments` VALUES (118,0,161,-1,1,0); -- Pet: Phys. dmg. taken -1%
+INSERT INTO `augments` VALUES (118,100,161,-1,1,0); -- Pet: Phys. dmg. taken -1%
 INSERT INTO `augments` VALUES (119,0,29,1,1,0); -- Pet: Mag.Def.Bns.+1
 INSERT INTO `augments` VALUES (120,0,28,1,1,1); -- Avatar: Mag.Atk.Bns.+1
 INSERT INTO `augments` VALUES (121,0,0,0,1,0); -- Pet: Breath +1
@@ -170,7 +171,7 @@ INSERT INTO `augments` VALUES (124,0,26,1,1,0); -- Cont.
 INSERT INTO `augments` VALUES (125,0,30,1,1,0); -- Pet: Mag.Acc.+1 Mag.Dmg.+1
 INSERT INTO `augments` VALUES (125,0,311,1,1,0); -- Cont.
 INSERT INTO `augments` VALUES (126,0,311,1,1,0); -- Pet: Magic Damage +1
-INSERT INTO `augments` VALUES (127,0,163,-1,1,0); -- Pet: Magic Damage Taken -1%
+INSERT INTO `augments` VALUES (127,100,163,-1,1,0); -- Pet: Magic Damage Taken -1%
 INSERT INTO `augments` VALUES (128,0,0,0,0,0); -- 128 doesnt seem to be a valid Augment,incomplete or garbled text displays
 INSERT INTO `augments` VALUES (129,0,25,1,0,0); -- Accuracy+1 Rng.Acc.+1
 INSERT INTO `augments` VALUES (129,0,26,1,0,0); -- Cont.
@@ -272,7 +273,7 @@ INSERT INTO `augments` VALUES (213,0,0,0,0,0); -- 213 currently unused. Leave at
 INSERT INTO `augments` VALUES (214,0,0,0,0,0); -- 214 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (215,0,308,1,0,0); -- Ninja tool expertise+1
 
--- 216 to 232 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
+-- 216 to 231 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (216,0,0,0,0,0);
 INSERT INTO `augments` VALUES (217,0,0,0,0,0);
 INSERT INTO `augments` VALUES (218,0,0,0,0,0);
@@ -289,7 +290,7 @@ INSERT INTO `augments` VALUES (228,0,0,0,0,0);
 INSERT INTO `augments` VALUES (229,0,0,0,0,0);
 INSERT INTO `augments` VALUES (230,0,0,0,0,0);
 INSERT INTO `augments` VALUES (231,0,0,0,0,0);
-INSERT INTO `augments` VALUES (232,0,0,0,0,0);
+INSERT INTO `augments` VALUES (232,0,0,0,0,0); -- True Shot +1
 -- End unused block
 
 INSERT INTO `augments` VALUES (233,0,913,1,0,0); -- Blood Boon+1
@@ -302,7 +303,7 @@ INSERT INTO `augments` VALUES (236,0,0,0,0,0);
 
 INSERT INTO `augments` VALUES (237,0,902,1,0,0); -- Occult Acumen+1
 
--- 238 to 256 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
+-- 238 to 250 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (238,0,0,0,0,0);
 INSERT INTO `augments` VALUES (239,0,0,0,0,0);
 INSERT INTO `augments` VALUES (240,0,0,0,0,0);
@@ -316,7 +317,11 @@ INSERT INTO `augments` VALUES (247,0,0,0,0,0);
 INSERT INTO `augments` VALUES (248,0,0,0,0,0);
 INSERT INTO `augments` VALUES (249,0,0,0,0,0);
 INSERT INTO `augments` VALUES (250,0,0,0,0,0);
-INSERT INTO `augments` VALUES (251,0,0,0,0,0);
+-- End unused block
+
+INSERT INTO `augments` VALUES (251,1,911,0,0,0); -- Daken +1
+
+-- 252 to 256 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (252,0,0,0,0,0);
 INSERT INTO `augments` VALUES (253,0,0,0,0,0);
 INSERT INTO `augments` VALUES (254,0,0,0,0,0);
@@ -358,7 +363,7 @@ INSERT INTO `augments` VALUES (283,0,106,1,0,0); -- Throwing skill+1
 INSERT INTO `augments` VALUES (284,0,0,0,0,0); -- 284 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (285,0,0,0,0,0); -- 285 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (286,0,109,1,0,0); -- Shield skill+1
-INSERT INTO `augments` VALUES (287,0,0,0,0,0); -- 287 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
+INSERT INTO `augments` VALUES (287,1,110,1,0,0); -- Parrying Skill +1
 INSERT INTO `augments` VALUES (288,0,111,1,0,0); -- Divine magic skill+1
 INSERT INTO `augments` VALUES (289,0,112,1,0,0); -- Healing magic skill+1
 INSERT INTO `augments` VALUES (290,0,113,1,0,0); -- Enha.mag. skill+1
@@ -407,7 +412,7 @@ INSERT INTO `augments` VALUES (328,0,421,1,0,0); -- Crit. hit damage+1%
 INSERT INTO `augments` VALUES (329,0,374,1,0,0); -- Cure potency+1%
 INSERT INTO `augments` VALUES (330,0,491,1,0,0); -- Waltz potency+1%
 INSERT INTO `augments` VALUES (331,0,497,-1,0,0); -- Waltz ability delay -1
-INSERT INTO `augments` VALUES (332,0,175,1,0,0); -- Sklchn.dmg.+1%
+INSERT INTO `augments` VALUES (332,100,175,1,0,0); -- Sklchn.dmg.+1%
 INSERT INTO `augments` VALUES (333,0,944,1,0,0); -- Conserve TP+1
 INSERT INTO `augments` VALUES (334,0,487,1,0,0); -- Magic burst dmg.+1%
 INSERT INTO `augments` VALUES (335,0,563,1,0,0); -- Mag. crit. hit dmg.+1%
@@ -420,21 +425,21 @@ INSERT INTO `augments` VALUES (341,0,854,1,0,0); -- Repair potency+1%
 INSERT INTO `augments` VALUES (342,0,0,0,0,0); -- Waltz TP cost -1
 INSERT INTO `augments` VALUES (343,0,315,1,0,0); -- "Drain" and "Aspir" Potency +1
 
--- 344 to 349 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
+-- 344 to 346 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (344,0,0,0,0,0);
 INSERT INTO `augments` VALUES (345,0,0,0,0,0);
 INSERT INTO `augments` VALUES (346,0,0,0,0,0);
-INSERT INTO `augments` VALUES (347,0,0,0,0,0);
-INSERT INTO `augments` VALUES (348,0,0,0,0,0);
-INSERT INTO `augments` VALUES (349,0,0,0,0,0);
 -- End unused block
 
+INSERT INTO `augments` VALUES (347,0,0,0,0,0); -- Healing Magic Recast Delay -1
+INSERT INTO `augments` VALUES (348,0,0,0,0,0); -- Elemental Magic Recast Delay -1
+INSERT INTO `augments` VALUES (349,0,0,0,0,0); -- Enfeebling Magic Recast Delay -1
 INSERT INTO `augments` VALUES (350,0,0,0,0,0); -- Occ. maximizes magic accuracy+1%
 INSERT INTO `augments` VALUES (351,0,909,1,0,0); -- Occ. quickens spellcasting+1%
 INSERT INTO `augments` VALUES (352,0,0,0,0,0); -- Occ. grants dmg. bonus based on TP+1%
 INSERT INTO `augments` VALUES (353,0,345,50,0,0); -- TP Bonus +50
 INSERT INTO `augments` VALUES (354,0,430,1,0,0);  -- Quadruple Attack+1%
-INSERT INTO `augments` VALUES (355,0,0,0,0,0); -- 355 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
+INSERT INTO `augments` VALUES (355,0,0,0,0,0); -- Enhancing Magic Recast Delay -1
 INSERT INTO `augments` VALUES (356,0,375,1,0,0); -- Potency of Cure received+1%
 
 -- 354 to 362 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
@@ -457,15 +462,16 @@ INSERT INTO `augments` VALUES (370,0,836,1,0,0); -- Reverse Flourish+1
 INSERT INTO `augments` VALUES (371,0,989,1,0,0); -- Regen Potency+1
 INSERT INTO `augments` VALUES (372,0,0,0,0,0); -- Embolden+1: Mod undefined as of yet so leaving blank.
 
--- 373 to 511 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (373,0,0,0,0,0);
-INSERT INTO `augments` VALUES (374,0,0,0,0,0);
+INSERT INTO `augments` VALUES (374,0,0,0,0,0); -- Enhancing Magic Duration +1
 INSERT INTO `augments` VALUES (375,0,0,0,0,0);
 INSERT INTO `augments` VALUES (376,0,0,0,0,0);
 INSERT INTO `augments` VALUES (377,0,0,0,0,0);
 INSERT INTO `augments` VALUES (378,0,0,0,0,0);
-INSERT INTO `augments` VALUES (379,0,0,0,0,0);
-INSERT INTO `augments` VALUES (380,0,0,0,0,0);
+INSERT INTO `augments` VALUES (379,0,0,0,0,0); -- Enmity +1 for each Utsusemi
+INSERT INTO `augments` VALUES (380,0,0,0,0,0); -- Physical Damage Limit +1%
+
+-- 381 to 511 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (381,0,0,0,0,0);
 INSERT INTO `augments` VALUES (382,0,0,0,0,0);
 INSERT INTO `augments` VALUES (383,0,0,0,0,0);
@@ -788,7 +794,7 @@ INSERT INTO `augments` VALUES (636,0,0,0,0,0);
 INSERT INTO `augments` VALUES (637,0,0,0,0,0);
 INSERT INTO `augments` VALUES (638,0,0,0,0,0);
 INSERT INTO `augments` VALUES (639,0,0,0,0,0);
-INSERT INTO `augments` VALUES (640,0,0,0,0,0);
+INSERT INTO `augments` VALUES (640,2,291,2,0,0); -- Counter +2 (increases by 2)
 INSERT INTO `augments` VALUES (641,0,0,0,0,0);
 INSERT INTO `augments` VALUES (642,0,0,0,0,0);
 INSERT INTO `augments` VALUES (643,0,0,0,0,0);
@@ -1026,7 +1032,7 @@ INSERT INTO `augments` VALUES (828,0,0,0,0,0);
 INSERT INTO `augments` VALUES (829,0,0,0,0,0);
 INSERT INTO `augments` VALUES (830,0,0,0,0,0);
 INSERT INTO `augments` VALUES (831,0,0,0,0,0);
--- NOTICE: additional effect augments will not work until we finish refactoring additional effects. See Teo in discrod for details.
+-- NOTICE: additional effect augments will not work until we finish refactoring additional effects and fill in values here.
 INSERT INTO `augments` VALUES (832,0,0,0,0,0); -- Additional Effect: Fire Dmg      (Base of 5,each additional point +1 for range of 5 to 36)
 INSERT INTO `augments` VALUES (833,0,0,0,0,0); -- Additional Effect: Ice Dmg       (Base of 5,each additional point +1 for range of 5 to 36)
 INSERT INTO `augments` VALUES (834,0,0,0,0,0); -- Additional Effect: Wind Dmg      (Base of 5,each additional point +1 for range of 5 to 36)
@@ -1094,7 +1100,7 @@ INSERT INTO `augments` VALUES (895,0,0,0,0,0);
 INSERT INTO `augments` VALUES (896,0,432,1,0,0); -- Sword Enhancement Spell Damage +1
 INSERT INTO `augments` VALUES (897,0,96,1,0,0); -- Enhances Souleater Effect +1%
 INSERT INTO `augments` VALUES (898,0,0,0,0,0);
-INSERT INTO `augments` VALUES (899,0,0,0,0,0);
+INSERT INTO `augments` VALUES (899,0,0,0,0,0); --  Sword Enhancement spell damage +1% (Percent Damage)
 INSERT INTO `augments` VALUES (900,0,0,0,0,0);
 INSERT INTO `augments` VALUES (901,0,0,0,0,0);
 INSERT INTO `augments` VALUES (902,0,0,0,0,0);
@@ -1343,68 +1349,68 @@ INSERT INTO `augments` VALUES (1077,5,779,1,0,0); -- Split Shot:DMG+5% (increase
 INSERT INTO `augments` VALUES (1078,5,780,1,0,0); -- Sniper Shot:DMG+5% (increases by 5)
 INSERT INTO `augments` VALUES (1079,5,785,1,0,0); -- Detonator:DMG+5% (increases by 5)
 INSERT INTO `augments` VALUES (1080,5,840,1,0,0); -- Weapon Skill:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1081,5,580,1,0,0); -- Final Heaven:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1082,5,581,1,0,0); -- Ascetics Fury:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1083,5,582,1,0,0); -- Stringing Pummel:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1084,5,584,1,0,0); -- Victory Smite:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1085,5,596,1,0,0); -- Mercy Stroke:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1086,5,599,1,0,0); -- Pyric Kleos:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1087,5,597,1,0,0); -- Mandalic Stab:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1088,5,598,1,0,0); -- Mordant Rime:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1089,5,601,1,0,0); -- Rudra's Storm:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1090,5,613,1,0,0); -- Knights of Round:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1091,5,614,1,0,0); -- Death Blossom:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1092,5,616,1,0,0); -- Expiacion:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1093,5,795,1,0,0); -- Chant du Cygne:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1094,5,740,1,0,0); -- Randgrith:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1095,5,741,1,0,0); -- Mystic Boon:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1096,5,627,1,0,0); -- Scourge:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1097,5,629,1,0,0); -- Torcleaver:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1098,5,643,1,0,0); -- Onslaught:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1099,5,644,1,0,0); -- Primal Rend:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1100,5,646,1,0,0); -- Cloudsplitter:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1101,5,659,1,0,0); -- Metatron Torment:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1102,5,660,1,0,0); -- King's Justice:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1103,5,662,1,0,0); -- Ukko's Fury:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1104,5,675,1,0,0); -- Catastrophe:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1105,5,676,1,0,0); -- Insurgency:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1106,5,678,1,0,0); -- Quietus:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1107,5,691,1,0,0); -- Geirskogul:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1108,5,692,1,0,0); -- Drakesbane:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1109,5,694,1,0,0); -- Camlann's Torment:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1110,5,707,1,0,0); -- Blade: Metsu:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1111,5,708,1,0,0); -- Blade: Kamu:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1112,5,710,1,0,0); -- Blade: Hi:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1113,5,723,1,0,0); -- Tachi: Kaiten:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1114,5,724,1,0,0); -- Tachi: Rana:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1115,5,726,1,0,0); -- Tachi: Fudo:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1116,5,755,1,0,0); -- Gate of Tartarus:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1117,5,758,1,0,0); -- Omniscience:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1118,5,756,1,0,0); -- Vidohunir:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1119,5,757,1,0,0); -- Garland of Bliss:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1120,5,770,1,0,0); -- Namas Arrow:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1121,5,702,1,0,0); -- Jishnu's Radiance:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1122,5,787,1,0,0); -- Trueflight:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1123,5,786,1,0,0); -- Coronach:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1124,5,788,1,0,0); -- Leaden Salute:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1125,5,790,1,0,0); -- Wildfire:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1126,5,631,1,0,0); -- Dimidiation:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1127,5,0,1,0,0); -- Exudation:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1128,5,585,1,0,0); -- Shijin Spiral:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1129,5,794,1,0,0); -- Exenterator:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1130,5,796,1,0,0); -- Requiescat:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1131,5,663,1,0,0); -- Upheaval:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1132,5,679,1,0,0); -- Entropy:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1133,5,695,1,0,0); -- Stardiver:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1134,5,711,1,0,0); -- Blade: Shun:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1135,5,727,1,0,0); -- Tachi: Shoha:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1136,5,744,1,0,0); -- Realmrazer:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1137,5,761,1,0,0); -- Shattersoul:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1138,5,630,1,0,0); -- Resolution:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1139,5,647,1,0,0); -- Ruinator:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1140,5,791,1,0,0); -- Last Stand:DMG+5% (increases by 5)
 
--- 1081 to 1151 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
-INSERT INTO `augments` VALUES (1081,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1082,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1083,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1084,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1085,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1086,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1087,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1088,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1089,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1090,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1091,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1092,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1093,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1094,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1095,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1096,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1097,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1098,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1099,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1100,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1101,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1102,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1103,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1104,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1105,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1106,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1107,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1108,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1109,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1110,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1111,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1112,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1113,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1114,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1115,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1116,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1117,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1118,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1119,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1120,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1121,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1122,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1123,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1124,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1125,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1126,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1127,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1128,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1129,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1130,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1131,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1132,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1133,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1134,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1135,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1136,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1137,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1138,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1139,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1140,0,0,0,0,0);
+-- 1141 to 1151 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (1141,0,0,0,0,0);
 INSERT INTO `augments` VALUES (1142,0,0,0,0,0);
 INSERT INTO `augments` VALUES (1143,0,0,0,0,0);
@@ -1421,8 +1427,8 @@ INSERT INTO `augments` VALUES (1151,0,0,0,0,0);
 INSERT INTO `augments` VALUES (1152,0,1,10,0,0); -- DEF +10
 INSERT INTO `augments` VALUES (1153,0,68,3,0,0); -- Evasion +3
 INSERT INTO `augments` VALUES (1154,0,31,3,0,0); -- Mag. Evasion +3
-INSERT INTO `augments` VALUES (1155,0,161,-2,0,0); -- Physical Damage Taken -2%
-INSERT INTO `augments` VALUES (1156,0,163,-2,0,0); -- Magic Damage Taken -2%
+INSERT INTO `augments` VALUES (1155,100,161,-2,0,0); -- Physical Damage Taken -2%
+INSERT INTO `augments` VALUES (1156,100,163,-2,0,0); -- Magic Damage Taken -2%
 INSERT INTO `augments` VALUES (1157,0,168,2,0,0); -- Spell Interruption Rate Down 2%
 INSERT INTO `augments` VALUES (1158,0,958,2,0,0); -- Occ. Resistance to Status Ailments +2
 
@@ -1516,14 +1522,14 @@ INSERT INTO `augments` VALUES (1244,0,0,0,0,0);
 INSERT INTO `augments` VALUES (1245,0,0,0,0,0);
 -- End unused block
 
-INSERT INTO `augments` VALUES (1246,0,161,-2,1,0); -- Pet: Phy. Dmg. Taken -2%
-INSERT INTO `augments` VALUES (1247,0,163,-2,1,0); -- Pet: Magic Dmg. Taken -2%
+INSERT INTO `augments` VALUES (1246,100,161,-2,1,0); -- Pet: Phy. Dmg. Taken -2%
+INSERT INTO `augments` VALUES (1247,100,163,-2,1,0); -- Pet: Magic Dmg. Taken -2%
 INSERT INTO `augments` VALUES (1248,0,890,1,0,0); -- Enhancing Magic Effect Duration +1
 INSERT INTO `augments` VALUES (1249,0,477,1,0,0); -- Helix Effect Duration+1
 INSERT INTO `augments` VALUES (1250,0,960,1,0,0); -- Indi Effect Duration+1
+INSERT INTO `augments` VALUES (1251,0,0,0,0,0); -- Enfeebling Magic Duration +1
 
--- 1251 to 1263 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
-INSERT INTO `augments` VALUES (1251,0,0,0,0,0);
+-- 1252 to 1263 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (1252,0,0,0,0,0);
 INSERT INTO `augments` VALUES (1253,0,0,0,0,0);
 INSERT INTO `augments` VALUES (1254,0,0,0,0,0);
@@ -1646,10 +1652,10 @@ INSERT INTO `augments` VALUES (1360,0,0,0,0,0); -- Enhances "Feint" effect
 INSERT INTO `augments` VALUES (1361,0,886,1,0,0); -- Enh. "Assassins Charge" effect
 INSERT INTO `augments` VALUES (1362,0,0,0,0,0); -- 1362 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (1363,0,0,0,0,0); -- 1363 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
-INSERT INTO `augments` VALUES (1364,0,0,0,0,0); -- Enhances "Iron Will" effect
-INSERT INTO `augments` VALUES (1365,0,0,0,0,0); -- Enhances "Fealty" effect
-INSERT INTO `augments` VALUES (1366,0,0,0,0,0); -- Enhances "Chivalry" effect
-INSERT INTO `augments` VALUES (1367,0,0,0,0,0); -- Enhances "Guardian" effect
+INSERT INTO `augments` VALUES (1364,3,1064,1,0,0); -- Enhances "Iron Will" effect
+INSERT INTO `augments` VALUES (1365,4,1063,1,0,0); -- Enhances "Fealty" effect
+INSERT INTO `augments` VALUES (1366,5,1061,1,0,0); -- Enhances "Chivalry" effect
+INSERT INTO `augments` VALUES (1367,2,1065,1,0,0); -- Enhances "Guardian" effect
 INSERT INTO `augments` VALUES (1368,0,0,0,0,0); -- 1368 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (1369,0,0,0,0,0); -- 1369 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (1370,0,0,0,0,0); -- Enhances "Dark Seal" effect
@@ -1730,8 +1736,8 @@ INSERT INTO `augments` VALUES (1444,0,0,0,0,0); -- Enh. "Tranquility" and "Equan
 INSERT INTO `augments` VALUES (1445,0,0,0,0,0); -- Enhances Stormsurge effect
 INSERT INTO `augments` VALUES (1446,0,0,0,0,0); -- 1446 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (1447,0,0,0,0,0); -- 1447 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
-INSERT INTO `augments` VALUES (1448,0,967,1,0,0); -- Enhances "Mending Halation" effect
-INSERT INTO `augments` VALUES (1449,0,968,1,0,0); -- Enhances "Radial Arcana" effect
+INSERT INTO `augments` VALUES (1448,0,968,1,0,0); -- Enhances "Mending Halation" effect
+INSERT INTO `augments` VALUES (1449,0,969,1,0,0); -- Enhances "Radial Arcana" effect
 INSERT INTO `augments` VALUES (1450,0,970,1,0,0); -- Enhances "Curative Recantation" effect
 INSERT INTO `augments` VALUES (1451,0,971,1,0,0); -- Enhances "Primeval Zeal" effect
 INSERT INTO `augments` VALUES (1452,0,0,0,0,0); -- 1452 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
@@ -1824,123 +1830,123 @@ INSERT INTO `augments` VALUES (1532,0,0,0,0,0);
 INSERT INTO `augments` VALUES (1533,0,0,0,0,0);
 INSERT INTO `augments` VALUES (1534,0,0,0,0,0);
 INSERT INTO `augments` VALUES (1535,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1536,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1537,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1538,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1539,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1540,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1541,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1542,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1543,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1544,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1545,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1546,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1547,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1548,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1549,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1550,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1551,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1552,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1553,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1554,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1555,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1556,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1557,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1558,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1559,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1560,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1561,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1562,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1563,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1564,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1565,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1566,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1567,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1568,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1569,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1570,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1571,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1572,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1573,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1574,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1575,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1576,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1577,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1578,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1579,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1580,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1581,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1582,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1583,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1584,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1585,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1586,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1587,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1588,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1589,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1590,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1591,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1592,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1593,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1594,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1595,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1596,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1597,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1598,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1599,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1600,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1601,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1602,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1603,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1604,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1605,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1606,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1607,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1608,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1609,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1610,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1611,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1612,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1613,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1614,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1615,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1616,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1617,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1618,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1619,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1620,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1621,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1622,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1623,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1624,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1625,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1626,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1627,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1628,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1629,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1630,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1631,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1632,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1633,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1634,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1635,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1636,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1637,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1638,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1639,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1640,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1641,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1642,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1643,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1644,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1645,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1646,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1647,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1648,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1649,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1650,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1651,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1652,0,0,0,0,0);
+INSERT INTO `augments` VALUES (1536,5,574,1,0,0); -- Backhand Blow:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1537,5,576,1,0,0); -- Spinning Attack:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1538,5,577,1,0,0); -- Howling Fist:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1539,5,578,1,0,0); -- Dragon Kick:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1540,5,587,1,0,0); -- Viper Bite:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1541,5,588,1,0,0); -- Shadowstitch:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1542,5,590,1,0,0); -- Cyclone:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1543,5,595,1,0,0); -- Evisceration:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1544,5,603,1,0,0); -- Burning Blade:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1545,5,606,1,0,0); -- Shining Blade:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1546,5,608,1,0,0); -- Circle Blade:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1547,5,612,1,0,0); -- Savage Blade:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1548,5,621,1,0,0); -- Freezebite:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1549,5,622,1,0,0); -- Shockwave:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1550,5,626,1,0,0); -- Ground Strike:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1551,5,624,1,0,0); -- Sickle Moon:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1552,5,636,1,0,0); -- Gale Axe:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1553,5,638,1,0,0); -- Spinning Axe:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1554,5,640,1,0,0); -- Calamity:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1555,5,642,1,0,0); -- Decimation:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1556,5,651,1,0,0); -- Iron Tempest:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1557,5,652,1,0,0); -- Sturmwind:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1558,5,654,1,0,0); -- Keen Edge:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1559,5,658,1,0,0); -- Steel Cyclone:DMG+5% (increase by 5)
+INSERT INTO `augments` VALUES (1560,5,669,1,0,0); -- Nightmare Scythe:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1561,5,670,1,0,0); -- Spinning Scythe:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1562,5,671,1,0,0); -- Vorpal Scythe:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1563,5,674,1,0,0); -- Spiral Hell:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1564,5,685,1,0,0); -- Leg Sweep:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1565,5,687,1,0,0); -- Vorpal Thrust:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1566,5,688,1,0,0); -- Skewer:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1567,5,690,1,0,0); -- Impulse Drive:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1568,5,701,1,0,0); -- Blade: To:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1569,5,702,1,0,0); -- Blade: Chi:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1570,5,705,1,0,0); -- Blade: Ten:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1571,5,706,1,0,0); -- Blade: Ku:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1572,5,716,1,0,0); -- Tachi: Goten:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1573,5,718,1,0,0); -- Tachi: Jinpu:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1574,5,719,1,0,0); -- Tachi: Koki:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1575,5,722,1,0,0); -- Tachi: Kasha:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1576,5,732,1,0,0); -- Brainshaker:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1577,5,735,1,0,0); -- Skullbreaker:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1578,5,737,1,0,0); -- Judgment:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1579,5,739,1,0,0); -- Black Halo:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1580,5,747,1,0,0); -- Rock Crusher:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1581,5,751,1,0,0); -- Shell Crusher:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1582,5,752,1,0,0); -- Full Swing:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1583,5,754,1,0,0); -- Retribution:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1584,5,764,1,0,0); -- Dulling Arrow:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1585,5,767,1,0,0); -- Blast Arrow:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1586,5,768,1,0,0); -- Arching Arrow:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1587,5,769,1,0,0); -- Empyreal Arrow:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1588,5,779,1,0,0); -- Split Shot:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1589,5,778,1,0,0); -- Hot Shot:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1590,5,780,1,0,0); -- Sniper Shot:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1591,5,785,1,0,0); -- Detonator:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1592,5,840,1,0,0); -- Weapon Skill:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1593,5,580,1,0,0); -- Final Heaven:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1594,5,581,1,0,0); -- Ascetics Fury:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1595,5,582,1,0,0); -- Stringing Pummel:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1596,5,584,1,0,0); -- Victory Smite:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1597,5,596,1,0,0); -- Mercy Stroke:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1598,5,599,1,0,0); -- Pyric Kleos:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1599,5,597,1,0,0); -- Mandalic Stab:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1600,5,598,1,0,0); -- Mordant Rime:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1601,5,601,1,0,0); -- Rudra's Storm:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1602,5,613,1,0,0); -- Knights of Round:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1603,5,614,1,0,0); -- Death Blossom:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1604,5,616,1,0,0); -- Expiacion:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1605,5,795,1,0,0); -- Chant du Cygne:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1606,5,740,1,0,0); -- Randgrith:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1607,5,741,1,0,0); -- Mystic Boon:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1608,5,627,1,0,0); -- Scourge:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1609,5,629,1,0,0); -- Torcleaver:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1610,5,643,1,0,0); -- Onslaught:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1611,5,644,1,0,0); -- Primal Rend:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1612,5,646,1,0,0); -- Cloudsplitter:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1613,5,659,1,0,0); -- Metatron Torment:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1614,5,660,1,0,0); -- King's Justice:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1615,5,662,1,0,0); -- Ukko's Fury:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1616,5,675,1,0,0); -- Catastrophe:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1617,5,676,1,0,0); -- Insurgency:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1618,5,678,1,0,0); -- Quietus:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1619,5,691,1,0,0); -- Geirskogul:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1620,5,692,1,0,0); -- Drakesbane:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1621,5,694,1,0,0); -- Camlann's Torment:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1622,5,707,1,0,0); -- Blade: Metsu:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1623,5,708,1,0,0); -- Blade: Kamu:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1624,5,710,1,0,0); -- Blade: Hi:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1625,5,723,1,0,0); -- Tachi: Kaiten:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1626,5,724,1,0,0); -- Tachi: Rana:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1627,5,726,1,0,0); -- Tachi: Fudo:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1628,5,755,1,0,0); -- Gate of Tartarus:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1629,5,758,1,0,0); -- Omniscience:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1630,5,756,1,0,0); -- Vidohunir:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1631,5,757,1,0,0); -- Garland of Bliss:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1632,5,770,1,0,0); -- Namas Arrow:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1633,5,702,1,0,0); -- Jishnu's Radiance:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1634,5,787,1,0,0); -- Trueflight:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1635,5,786,1,0,0); -- Coronach:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1636,5,788,1,0,0); -- Leaden Salute:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1637,5,790,1,0,0); -- Wildfire:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1638,5,631,1,0,0); -- Dimidiation:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1639,5,0,1,0,0); -- Exudation:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1640,5,585,1,0,0); -- Shijin Spiral:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1641,5,794,1,0,0); -- Exenterator:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1642,5,796,1,0,0); -- Requiescat:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1643,5,663,1,0,0); -- Upheaval:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1644,5,679,1,0,0); -- Entropy:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1645,5,695,1,0,0); -- Stardiver:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1646,5,711,1,0,0); -- Blade: Shun:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1647,5,727,1,0,0); -- Tachi: Shoha:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1648,5,744,1,0,0); -- Realmrazer:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1649,5,761,1,0,0); -- Shattersoul:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1650,5,630,1,0,0); -- Resolution:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1651,5,647,1,0,0); -- Ruinator:DMG+5% (increases by 5)
+INSERT INTO `augments` VALUES (1652,5,791,1,0,0); -- Last Stand:DMG+5% (increases by 5)
 INSERT INTO `augments` VALUES (1653,0,0,0,0,0);
 INSERT INTO `augments` VALUES (1654,0,0,0,0,0);
 INSERT INTO `augments` VALUES (1655,0,0,0,0,0);
@@ -2099,25 +2105,25 @@ INSERT INTO `augments` VALUES (1805,0,14,-1,1,0); -- Pet: CHR-1
 INSERT INTO `augments` VALUES (1806,0,8,1,1,0); -- Pet: STR+1 DEX+1 VIT+1
 INSERT INTO `augments` VALUES (1806,0,9,1,1,0); -- Cont.
 INSERT INTO `augments` VALUES (1806,0,10,1,1,0); -- Cont.
+INSERT INTO `augments` VALUES (1807,0,0,0,0,0); -- Pet: <dummy>
+INSERT INTO `augments` VALUES (1808,0,0,0,0,0); -- Pet: <dummy>
+INSERT INTO `augments` VALUES (1809,0,0,0,0,0); -- Pet: <dummy>
+INSERT INTO `augments` VALUES (1810,0,0,0,0,0); -- Pet: <dummy>
+INSERT INTO `augments` VALUES (1811,0,0,0,0,0); -- Pet: <dummy>
+INSERT INTO `augments` VALUES (1812,0,0,0,0,0); -- Pet: <dummy>
+INSERT INTO `augments` VALUES (1813,0,0,0,0,0); -- Pet: <dummy>
+INSERT INTO `augments` VALUES (1814,0,0,0,0,0); -- Pet: <dummy>
+INSERT INTO `augments` VALUES (1815,0,0,0,0,0); -- Pet: <dummy>
+INSERT INTO `augments` VALUES (1816,0,0,0,0,0); -- Pet: <dummy>
+INSERT INTO `augments` VALUES (1817,0,0,0,0,0); -- Pet: <dummy>
+INSERT INTO `augments` VALUES (1818,0,0,0,0,0); -- Pet: <dummy>
+INSERT INTO `augments` VALUES (1819,0,0,0,0,0); -- Pet: <dummy>
+INSERT INTO `augments` VALUES (1820,0,0,0,0,0); -- Pet: <dummy>
+INSERT INTO `augments` VALUES (1821,0,0,0,0,0); -- Pet: <dummy>
+INSERT INTO `augments` VALUES (1822,0,0,0,0,0); -- Pet: <dummy>
+INSERT INTO `augments` VALUES (1823,0,0,0,0,0); -- Pet: <dummy>
 
--- 1807 to 2046 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
-INSERT INTO `augments` VALUES (1807,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1808,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1809,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1810,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1811,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1812,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1813,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1814,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1815,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1816,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1817,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1818,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1819,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1820,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1821,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1822,0,0,0,0,0);
-INSERT INTO `augments` VALUES (1823,0,0,0,0,0);
+-- 1824 to 2046 currently unused. Leave at zero. Edit+move or remove this note as new augments get discovered.
 INSERT INTO `augments` VALUES (1824,0,0,0,0,0);
 INSERT INTO `augments` VALUES (1825,0,0,0,0,0);
 INSERT INTO `augments` VALUES (1826,0,0,0,0,0);
@@ -2343,4 +2349,4 @@ INSERT INTO `augments` VALUES (2045,0,0,0,0,0);
 INSERT INTO `augments` VALUES (2046,0,0,0,0,0);
 -- End unused block
 
-INSERT INTO `augments` VALUES (2047,0,0,0,0,0); -- ??? (it literally just says "???") - used by WotG scenario reward
+INSERT INTO `augments` VALUES (2047,0,0,0,0,0); -- ??? (it literally just says "???")

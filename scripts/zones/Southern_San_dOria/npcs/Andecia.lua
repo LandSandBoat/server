@@ -5,7 +5,7 @@
 -- !pos 167 0 45 230
 -----------------------------------
 local ID = require("scripts/zones/Southern_San_dOria/IDs")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 require("scripts/globals/titles")
 -----------------------------------
@@ -20,30 +20,27 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
+    local tomb = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRAVE_CONCERNS)
+    local wellWater = player:hasItem(567) -- Well Water
+    local waterskin = player:hasItem(547) -- Tomb Waterskin
 
-    local Tomb = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRAVE_CONCERNS)
-    local WellWater = player:hasItem(567) -- Well Water
-    local Waterskin = player:hasItem(547) -- Tomb Waterskin
-
-    if (Tomb == QUEST_AVAILABLE) then
+    if (tomb == QUEST_AVAILABLE) then
         player:startEvent(541)
-    elseif (Tomb == QUEST_ACCEPTED and WellWater == false and player:getCharVar("OfferingWaterOK") == 0) then
+    elseif (tomb == QUEST_ACCEPTED and wellWater == false and player:getCharVar("OfferingWaterOK") == 0) then
         player:startEvent(622)
-    elseif (Tomb == QUEST_ACCEPTED and Waterskin == true and player:getCharVar("OfferingWaterOK") == 0) then
+    elseif (tomb == QUEST_ACCEPTED and waterskin == true and player:getCharVar("OfferingWaterOK") == 0) then
         player:startEvent(623)
-    elseif (Tomb == QUEST_COMPLETED) then
+    elseif (tomb == QUEST_COMPLETED) then
         player:startEvent(558)
     else
         player:startEvent(540)
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if (csid == 541 and option == 0) then
         if (player:getFreeSlotsCount() == 0) then
             player:messageSpecial(ID.text.ITEM_CANNOT_BE_OBTAINED, 567) -- Well Water
@@ -57,12 +54,11 @@ entity.onEventFinish = function(player, csid, option)
         player:tradeComplete()
         player:setCharVar("OfferingWaterOK", 0)
         player:addTitle(xi.title.ROYAL_GRAVE_KEEPER)
-        player:addGil(xi.settings.GIL_RATE*560)
-        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.GIL_RATE*560)
+        player:addGil(xi.settings.main.GIL_RATE*560)
+        player:messageSpecial(ID.text.GIL_OBTAINED, xi.settings.main.GIL_RATE*560)
         player:addFame(xi.quest.fame_area.SANDORIA, 30)
         player:completeQuest(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.GRAVE_CONCERNS)
     end
-
 end
 
 return entity

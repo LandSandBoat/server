@@ -5,22 +5,22 @@
 -- Recast Time: 3:00
 -- Duration: Instant
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-ability_object.onUseAbility = function(player, target, ability, action)
+abilityObject.onUseAbility = function(player, target, ability, action)
 
     -- RNG AF2 quest check
-    local FireAndBrimstoneCS = player:getCharVar("fireAndBrimstone")
+    local fireAndBrimstoneCS = player:getCharVar("fireAndBrimstone")
     local oldEarring = 1113
 
-    if (player:getZoneID() == 151 and FireAndBrimstoneCS == 5 and-- zone + quest match
+    if (player:getZoneID() == 151 and fireAndBrimstoneCS == 5 and-- zone + quest match
         player:hasItem(oldEarring) == false and -- make sure player doesn't already have the earring
         player:getYPos() > -43 and player:getYPos() < -38 and -- Y match
         player:getXPos() > -85 and player:getXPos() < -73 and -- X match
@@ -64,4 +64,4 @@ ability_object.onUseAbility = function(player, target, ability, action)
     end
 end
 
-return ability_object
+return abilityObject

@@ -12,18 +12,18 @@
 -- Magic Bursts on: Induration, Distortion, and Darkness
 -- Combos: Auto Refresh
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     local typeEffect = xi.effect.FROST
     -- local dINT = caster:getStat(xi.mod.INT)-target:getStat(xi.mod.INT)
     local params = {}
@@ -56,7 +56,7 @@ spell_object.onSpellCast = function(caster, target, spell)
                 target:delStatusEffect(typeEffect)
             end
             spell:setMsg(xi.msg.basic.MAGIC_ENFEEB)
-            local duration = math.floor(xi.settings.ELEMENTAL_DEBUFF_DURATION * resist)
+            local duration = math.floor(xi.settings.main.ELEMENTAL_DEBUFF_DURATION * resist)
             target:addStatusEffect(typeEffect, DOT, 3, duration)
         end
     else
@@ -66,4 +66,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return typeEffect
 end
 
-return spell_object
+return spellObject

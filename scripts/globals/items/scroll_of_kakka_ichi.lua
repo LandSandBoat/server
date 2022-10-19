@@ -3,14 +3,14 @@
 -- Scroll of Kakka: Ichi
 -- Teaches the ninjutsu Kakka: Ichi
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(509)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(509)
 end
 
-return item_object
+return itemObject

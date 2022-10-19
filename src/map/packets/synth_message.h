@@ -22,7 +22,7 @@
 #ifndef _CSYNTHMESSAGEPACKET_H
 #define _CSYNTHMESSAGEPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

@@ -22,7 +22,7 @@
 #ifndef _CDELIVERYBOXPACKET_H
 #define _CDELIVERYBOXPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

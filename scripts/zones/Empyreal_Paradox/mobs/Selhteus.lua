@@ -11,6 +11,7 @@ local entity = {}
 
 entity.onMobInitialize = function(mob)
     mob:addMod(xi.mod.REGAIN, 50)
+    mob:addMod(xi.mod.CURE_POTENCY_RCVD, -100)
     mob:SetAutoAttackEnabled(false)
 end
 
@@ -33,7 +34,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     mob:messageText(mob, ID.text.SELHTEUS_TEXT)
     mob:getBattlefield():lose()
 end

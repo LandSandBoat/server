@@ -266,7 +266,7 @@ local qmLogInfo =
     },
 }
 
-local QUEST_LOGS =
+local questLogs =
 {
     [0] = "SANDORIA",
     [1] = "BASTOK",
@@ -281,7 +281,7 @@ local QUEST_LOGS =
     [10] = "COALITION",
 }
 
-local MISSION_LOGS =
+local missionLogs =
 {
     [0] = "SANDORIA",
     [1] = "BASTOK",
@@ -344,7 +344,7 @@ local function getQMLogInfo(cmdParamText, logNameTable)
 end
 
 logIdHelpers.getQuestLogInfo = function(cmdParamText)
-    local ret = getQMLogInfo(cmdParamText, QUEST_LOGS)
+    local ret = getQMLogInfo(cmdParamText, questLogs)
 
     if
         type(ret) == "table" and
@@ -357,7 +357,7 @@ logIdHelpers.getQuestLogInfo = function(cmdParamText)
 end
 
 logIdHelpers.getMissionLogInfo = function(cmdParamText)
-    local ret = getQMLogInfo(cmdParamText, MISSION_LOGS)
+    local ret = getQMLogInfo(cmdParamText, missionLogs)
 
     if
         type(ret) == "table" and

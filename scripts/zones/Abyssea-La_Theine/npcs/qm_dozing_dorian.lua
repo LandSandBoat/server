@@ -4,13 +4,13 @@
 -- Spawns Dozing Dorian
 -- !pos 703 40 283 132
 -----------------------------------
+local ID = require('scripts/zones/Abyssea-La_Theine/IDs')
 require('scripts/globals/abyssea')
 require('scripts/globals/items')
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local ID = zones[player:getZoneID()]
     xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.DOZING_DORIAN, { xi.items.DRIED_CHIGOE })
 end
 

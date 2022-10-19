@@ -20,7 +20,7 @@ entity.onEventFinish = function(player, csid, option, door)
         instance:setStage(8)
         instance:setProgress(0)
         door:setAnimation(8)
-        door:untargetable(true)
+        door:setUntargetable(true)
     end
 end
 

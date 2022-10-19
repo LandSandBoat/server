@@ -3,7 +3,7 @@
 --  Mob: Titanis Jax
 -- KSNM: Prehistoric Pigeons
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 require("scripts/globals/status")
 -----------------------------------
 local entity = {}
@@ -12,12 +12,12 @@ entity.onMobSpawn = function(mob)
     xi.mix.jobSpecial.config(mob, {
         specials =
         {
-            {id = xi.jsa.SOUL_VOICE, cooldown = 200, hpp = 95},
+            { id = xi.jsa.SOUL_VOICE, cooldown = 200, hpp = 95 },
         },
     })
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

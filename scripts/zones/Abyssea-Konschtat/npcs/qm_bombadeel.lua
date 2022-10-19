@@ -4,13 +4,13 @@
 -- Spawns Bombadeel
 -- !pos -358.000 8.000 -42.000 15
 -----------------------------------
+local ID = require('scripts/zones/Abyssea-Konschtat/IDs')
 require('scripts/globals/abyssea')
 require('scripts/globals/items')
 -----------------------------------
 local entity = {}
 
 entity.onTrade = function(player, npc, trade)
-    local ID = zones[player:getZoneID()]
     xi.abyssea.qmOnTrade(player, npc, trade, ID.mob.BOMBADEEL, { xi.items.CLUMP_OF_SNAKESKIN_MOSS })
 end
 

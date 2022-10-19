@@ -22,7 +22,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #ifndef _CLINKSHELLLISTPACKET_H_
 #define _CLINKSHELLLISTPACKET_H_
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 #include "search_list.h"
 
 class CLinkshellListPacket
@@ -31,13 +31,13 @@ public:
     CLinkshellListPacket(uint32 linkshellid, uint32 Total);
     ~CLinkshellListPacket() = default;
 
-    void AddPlayer(SearchEntity* PPlayer);
+    bool AddPlayer(SearchEntity* PPlayer);
+    void SetFinal();
 
     uint8* GetData();
     uint16 GetSize() const;
 
 private:
-    uint32 m_linkshellid;
     uint32 m_offset;
     uint8  m_data[1024];
 };

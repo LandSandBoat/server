@@ -2,12 +2,13 @@
 
 #include "../common/cbasetypes.h"
 #include "../common/kernel.h"
-#include "../common/mmo.h"
 #include "../common/logging.h"
+#include "../common/mmo.h"
 #include "../common/taskmgr.h"
 #include "../common/timer.h"
 #include "../common/utils.h"
 
+#include "settings.h"
 #include "socket.h"
 
 #include <cstdio>
@@ -62,6 +63,7 @@ int    sock_arr_len = 0;
 /// @return Fd or -1
 int sock2fd(SOCKET s)
 {
+    TracyZoneScoped;
     int fd;
 
     // search for the socket
@@ -83,6 +85,7 @@ int sock2fd(SOCKET s)
 /// @return New fd or -1
 int sock2newfd(SOCKET s)
 {
+    TracyZoneScoped;
     int fd;
 
     // find an empty position
@@ -104,6 +107,7 @@ int sock2newfd(SOCKET s)
 
 int sAccept(int fd, struct sockaddr* addr, int* addrlen)
 {
+    TracyZoneScoped;
     SOCKET s;
 
     // accept connection
@@ -115,6 +119,7 @@ int sAccept(int fd, struct sockaddr* addr, int* addrlen)
 
 int sClose(int fd)
 {
+    TracyZoneScoped;
     int ret     = closesocket(fd2sock(fd));
     fd2sock(fd) = INVALID_SOCKET;
     return ret;
@@ -122,6 +127,7 @@ int sClose(int fd)
 
 int sSocket(int af, int type, int protocol)
 {
+    TracyZoneScoped;
     SOCKET s;
 
     // create socket
@@ -140,7 +146,7 @@ int sSocket(int af, int type, int protocol)
 
 /*
  *
- *			COMMON LEVEL
+ *          COMMON LEVEL
  *
  */
 
@@ -154,6 +160,7 @@ time_t stall_time = 60;
 
 int32 makeConnection(uint32 ip, uint16 port, int32 type)
 {
+    TracyZoneScoped;
     struct sockaddr_in remote_address;
     int32              fd;
     int32              result;
@@ -162,7 +169,7 @@ int32 makeConnection(uint32 ip, uint16 port, int32 type)
 
     if (fd == -1)
     {
-        ShowError("make_connection: socket creation failed (code %d)!", sErrno);
+        ShowError("make_connection: socket creation failed (port %d, code %d)!", port, sErrno);
         return -1;
     }
     if (fd == 0)
@@ -192,12 +199,12 @@ int32 makeConnection(uint32 ip, uint16 port, int32 type)
     remote_address.sin_addr.s_addr = htonl(ip);
     remote_address.sin_port        = htons(port);
 
-    ShowStatus("Connecting to %d.%d.%d.%d:%i", CONVIP(ip), port);
+    ShowInfo("Connecting to %d.%d.%d.%d:%i", CONVIP(ip), port);
 
     result = sConnect(fd, (struct sockaddr*)(&remote_address), sizeof(struct sockaddr_in));
     if (result == SOCKET_ERROR)
     {
-        ShowError("make_connection: connect failed (socket #%d, code %d)!", fd, sErrno);
+        ShowError("make_connection: connect failed (socket #%d, port %d, code %d)!", fd, port, sErrno);
         do_close(fd);
         return -1;
     }
@@ -220,6 +227,7 @@ int32 makeConnection(uint32 ip, uint16 port, int32 type)
 
 void do_close(int32 fd)
 {
+    TracyZoneScoped;
     sFD_CLR(fd, &readfds);    // this needs to be done before closing the socket
     sShutdown(fd, SHUT_RDWR); // Disallow further reads/writes
     sClose(fd);               // We don't really care if these closing functions return an error, we are just shutting down and not reusing this socket.
@@ -227,6 +235,7 @@ void do_close(int32 fd)
 
 bool _vsocket_init()
 {
+    TracyZoneScoped;
 #ifdef WIN32
     { // Start up windows networking
         WSADATA wsaData;
@@ -306,17 +315,13 @@ uint16 ntows(uint16 netshort)
 /*****************************************************************************/
 /*
  *
- *			TCP LEVEL
+ *          TCP LEVEL
  *
  */
 
-#ifndef MINICORE
 int        ip_rules = 1;
 static int connect_check(uint32 ip);
-#endif
 
-//////////////////////////////
-#ifndef MINICORE
 //////////////////////////////
 // IP rules and connection limits
 
@@ -327,6 +332,13 @@ typedef struct _connect_history
     time_point               tick;
     int                      count;
     unsigned                 ddos : 1;
+    _connect_history()
+    {
+        next  = nullptr;
+        ip    = 0;
+        count = 0;
+        ddos  = 0;
+    }
 } ConnectHistory;
 
 using AccessControl = struct _access_control
@@ -346,10 +358,12 @@ static std::vector<AccessControl> access_allow;
 static std::vector<AccessControl> access_deny;
 static int                        access_order = ACO_DENY_ALLOW;
 static int                        access_debug = 0;
+static bool                       udp_debug    = false;
+static bool                       tcp_debug    = false;
 //--
 static int      connect_count    = 10;
 static duration connect_interval = 3s;
-static duration connect_lockout   = 10min;
+static duration connect_lockout  = 10min;
 
 /// Connection history, an array of linked lists.
 /// The array's index for any ip is ip&0xFFFF
@@ -361,6 +375,7 @@ static int connect_check_(uint32 ip);
 /// @see connect_check_()
 static int connect_check(uint32 ip)
 {
+    TracyZoneScoped;
     int result = connect_check_(ip);
     if (access_debug)
     {
@@ -374,35 +389,41 @@ static int connect_check(uint32 ip)
 ///  1 or 2 : Connection Accepted
 static int connect_check_(uint32 ip)
 {
-    ConnectHistory* hist = connect_history[ip & 0xFFFF];
-    size_t          i;
+    TracyZoneScoped;
+    ConnectHistory* hist       = connect_history[ip & 0xFFFF];
     int             is_allowip = 0;
     int             is_denyip  = 0;
     int             connect_ok = 0;
 
     // Search the allow list
-    for (i = 0; i < access_allow.size(); ++i)
+    for (auto const& entry : access_allow)
     {
-        if ((ip & access_allow[i].mask) == (access_allow[i].ip & access_allow[i].mask))
+        if ((ip & entry.mask) == (entry.ip & entry.mask))
         {
             if (access_debug)
             {
-                ShowInfo("connect_check: Found match from allow list:%d.%d.%d.%d IP:%d.%d.%d.%d Mask:%d.%d.%d.%d", CONVIP(ip), CONVIP(access_allow[i].ip),
-                         CONVIP(access_allow[i].mask));
+                ShowInfo(
+                    "connect_check: Found match from allow list:%d.%d.%d.%d IP:%d.%d.%d.%d Mask:%d.%d.%d.%d",
+                    CONVIP(ip),
+                    CONVIP(entry.ip),
+                    CONVIP(entry.mask));
             }
             is_allowip = 1;
             break;
         }
     }
     // Search the deny list
-    for (i = 0; i < access_deny.size(); ++i)
+    for (auto const& entry : access_deny)
     {
-        if ((ip & access_deny[i].mask) == (access_deny[i].ip & access_deny[i].mask))
+        if ((ip & entry.mask) == (entry.ip & entry.mask))
         {
             if (access_debug)
             {
-                ShowInfo("connect_check: Found match from deny list:%d.%d.%d.%d IP:%d.%d.%d.%d Mask:%d.%d.%d.%d", CONVIP(ip), CONVIP(access_deny[i].ip),
-                         CONVIP(access_deny[i].mask));
+                ShowInfo(
+                    "connect_check: Found match from deny list:%d.%d.%d.%d IP:%d.%d.%d.%d Mask:%d.%d.%d.%d",
+                    CONVIP(ip),
+                    CONVIP(entry.ip),
+                    CONVIP(entry.mask));
             }
             is_denyip = 1;
             break;
@@ -496,6 +517,7 @@ static int connect_check_(uint32 ip)
 /// Deletes old connection history records.
 static int connect_check_clear(time_point tick, CTaskMgr::CTask* PTask)
 {
+    TracyZoneScoped;
     int             i;
     int             clear = 0;
     int             list  = 0;
@@ -536,6 +558,7 @@ static int connect_check_clear(time_point tick, CTaskMgr::CTask* PTask)
 /// Returns 1 is successful, 0 otherwise.
 int access_ipmask(const char* str, AccessControl* acc)
 {
+    TracyZoneScoped;
     uint32       ip;
     uint32       mask;
     unsigned int a[4];
@@ -559,10 +582,10 @@ int access_ipmask(const char* str, AccessControl* acc)
         { // invalid bit mask
             return 0;
         }
-        ip = (uint32)(a[0] | (a[1] << 8) | (a[2] << 16) | (a[3] << 24));
+        ip = (a[0] | (a[1] << 8) | (a[2] << 16) | (a[3] << 24));
         if (n == 8)
         { // standard mask
-            mask = (uint32)(a[0] | (a[1] << 8) | (a[2] << 16) | (a[3] << 24));
+            mask = (a[0] | (a[1] << 8) | (a[2] << 16) | (a[3] << 24));
         }
         else if (n == 5)
         { // bit mask
@@ -589,11 +612,11 @@ int access_ipmask(const char* str, AccessControl* acc)
     acc->mask = mask;
     return 1;
 }
-//////////////////////////////
-#endif
+
 //////////////////////////////
 int recv_to_fifo(int fd)
 {
+    TracyZoneScoped;
     int len;
 
     if (!session_isActive(fd))
@@ -601,15 +624,14 @@ int recv_to_fifo(int fd)
         return -1;
     }
 
-    auto prev_length = session[fd]->rdata.size();
-    session[fd]->rdata.resize(prev_length + 0x7FF);
-    len = sRecv(fd, (char*)session[fd]->rdata.data() + prev_length, (int)(session[fd]->rdata.capacity() - prev_length), 0);
+    auto prev_length = sessions[fd]->rdata.size();
+    sessions[fd]->rdata.resize(prev_length + 0x7FF);
+    len = sRecv(fd, sessions[fd]->rdata.data() + prev_length, (int)(sessions[fd]->rdata.capacity() - prev_length), 0);
 
     if (len == SOCKET_ERROR)
     { // An exception has occured
         if (sErrno != S_EWOULDBLOCK)
         {
-            // ShowDebug("recv_to_fifo: code %d, closing connection #%d", sErrno, fd);
             set_eof(fd);
         }
         return 0;
@@ -621,13 +643,14 @@ int recv_to_fifo(int fd)
         return 0;
     }
 
-    session[fd]->rdata.resize(prev_length + len);
-    session[fd]->rdata_tick = last_tick;
+    sessions[fd]->rdata.resize(prev_length + len);
+    sessions[fd]->rdata_tick = last_tick;
     return 0;
 }
 
 int send_from_fifo(int fd)
 {
+    TracyZoneScoped;
     int len;
 
     if (!session_isValid(fd))
@@ -635,19 +658,19 @@ int send_from_fifo(int fd)
         return -1;
     }
 
-    if (session[fd]->wdata.empty())
+    if (sessions[fd]->wdata.empty())
     {
         return 0; // nothing to send
     }
 
-    len = sSend(fd, session[fd]->wdata.data(), (int)session[fd]->wdata.size(), 0);
+    len = sSend(fd, sessions[fd]->wdata.data(), (int)sessions[fd]->wdata.size(), 0);
 
     if (len == SOCKET_ERROR)
     { // An exception has occured
         if (sErrno != S_EWOULDBLOCK)
         {
             // ShowDebug("send_from_fifo: error %d, ending connection #%d", sErrno, fd);
-            session[fd]->wdata.clear(); // Clear the send queue as we can't send anymore. [Skotlex]
+            sessions[fd]->wdata.clear(); // Clear the send queue as we can't send anymore. [Skotlex]
             set_eof(fd);
         }
         return 0;
@@ -657,13 +680,13 @@ int send_from_fifo(int fd)
     {
         // some data could not be transferred?
         // shift unsent data to the beginning of the queue
-        if ((size_t)len < session[fd]->wdata.size())
+        if ((size_t)len < sessions[fd]->wdata.size())
         {
-            session[fd]->wdata.erase(0, len);
+            sessions[fd]->wdata.erase(0, len);
         }
         else
         {
-            session[fd]->wdata.clear();
+            sessions[fd]->wdata.clear();
         }
     }
 
@@ -671,7 +694,7 @@ int send_from_fifo(int fd)
 }
 
 /*======================================
- *	CORE : Default processing functions
+ *  CORE : Default processing functions
  *--------------------------------------*/
 int null_recv(int fd)
 {
@@ -688,32 +711,34 @@ int null_parse(int fd)
 
 ParseFunc default_func_parse = null_parse;
 
-std::array<std::unique_ptr<socket_data>, FD_SETSIZE> session;
-
 bool session_isValid(int fd)
 {
-    return (fd > 0 && fd < FD_SETSIZE && session[fd] != nullptr);
+    TracyZoneScoped;
+    return (fd > 0 && fd < FD_SETSIZE && sessions[fd] != nullptr);
 }
 bool session_isActive(int fd)
 {
-    return (session_isValid(fd) && !session[fd]->flag.eof);
+    TracyZoneScoped;
+    return (session_isValid(fd) && !sessions[fd]->flag.eof);
 }
 
 int32 makeConnection_tcp(uint32 ip, uint16 port)
 {
+    TracyZoneScoped;
     int fd = makeConnection(ip, port, SOCK_STREAM);
     if (fd > 0)
     {
         create_session(fd, recv_to_fifo, send_from_fifo, default_func_parse);
-        session[fd]->client_addr = ip;
+        sessions[fd]->client_addr = ip;
     }
     return fd;
 }
 /*======================================
- *	CORE : Connection functions
+ *  CORE : Connection functions
  *--------------------------------------*/
 int connect_client(int listen_fd, sockaddr_in& client_address)
 {
+    TracyZoneScoped;
     int fd;
     // struct sockaddr_in client_address;
     socklen_t len;
@@ -723,7 +748,7 @@ int connect_client(int listen_fd, sockaddr_in& client_address)
     fd = sAccept(listen_fd, (struct sockaddr*)&client_address, &len);
     if (fd == -1)
     {
-        ShowError("connect_client: accept failed (code %d)!", sErrno);
+        ShowError("connect_client: accept failed (code %d, listen_fd %d)!", sErrno, listen_fd);
         return -1;
     }
     if (fd == 0)
@@ -743,13 +768,11 @@ int connect_client(int listen_fd, sockaddr_in& client_address)
     // setsocketopts(fd);
     // set_nonblocking(fd, 1);
 
-#ifndef MINICORE
     if (ip_rules && !connect_check(ntohl(client_address.sin_addr.s_addr)))
     {
         do_close(fd);
         return -1;
     }
-#endif
 
     if (fd_max <= fd)
     {
@@ -758,13 +781,14 @@ int connect_client(int listen_fd, sockaddr_in& client_address)
     sFD_SET(fd, &readfds);
 
     // create_session(fd, recv_to_fifo, send_from_fifo, default_func_parse);
-    // session[fd]->client_addr = ntohl(client_address.sin_addr.s_addr);
+    // sessions[fd]->client_addr = ntohl(client_address.sin_addr.s_addr);
 
     return fd;
 }
 
 int32 makeListenBind_tcp(const char* ip, uint16 port, RecvFunc connect_client)
 {
+    TracyZoneScoped;
     struct sockaddr_in server_address;
     int                fd;
     int                result;
@@ -773,15 +797,18 @@ int32 makeListenBind_tcp(const char* ip, uint16 port, RecvFunc connect_client)
 
     if (fd == -1)
     {
-        ShowError("make_listen_bind: socket creation failed (code %d)!", sErrno);
+        ShowError("make_listen_bind: socket creation failed (port %d, code %d)!", port, sErrno);
+        ShowError("Is another process using this port?");
         do_final(EXIT_FAILURE);
     }
+
     if (fd == 0)
     { // reserved
         ShowError("make_listen_bind: Socket #0 is reserved - Please report this!!!");
         sClose(fd);
         return -1;
     }
+
     if (fd >= FD_SETSIZE)
     { // socket number too big
         ShowError("make_listen_bind: New socket #%d is greater than can we handle! Increase the value of FD_SETSIZE (currently %d) for your OS to fix this!",
@@ -800,13 +827,13 @@ int32 makeListenBind_tcp(const char* ip, uint16 port, RecvFunc connect_client)
     result = sBind(fd, (struct sockaddr*)&server_address, sizeof(server_address));
     if (result == SOCKET_ERROR)
     {
-        ShowError("make_listen_bind: bind failed (socket #%d, code %d)!", fd, sErrno);
+        ShowError("make_listen_bind: bind failed (socket #%d, port %d, code %d)!", fd, port, sErrno);
         do_final(EXIT_FAILURE);
     }
     result = sListen(fd, 5);
     if (result == SOCKET_ERROR)
     {
-        ShowError("make_listen_bind: listen failed (socket #%d, code %d)!", fd, sErrno);
+        ShowError("make_listen_bind: listen failed (socket #%d, port %d, code %d)!", fd, port, sErrno);
         do_final(EXIT_FAILURE);
     }
 
@@ -817,14 +844,15 @@ int32 makeListenBind_tcp(const char* ip, uint16 port, RecvFunc connect_client)
     sFD_SET(fd, &readfds);
 
     create_session(fd, connect_client, null_send, null_parse);
-    session[fd]->client_addr = 0; // just listens
-    session[fd]->rdata_tick  = 0; // disable timeouts on this socket
+    sessions[fd]->client_addr = 0; // just listens
+    sessions[fd]->rdata_tick  = 0; // disable timeouts on this socket
 
     return fd;
 }
 
 int32 RFIFOSKIP(int32 fd, size_t len)
 {
+    TracyZoneScoped;
     struct socket_data* s;
 
     if (!session_isActive(fd))
@@ -832,7 +860,7 @@ int32 RFIFOSKIP(int32 fd, size_t len)
         return 0;
     }
 
-    s = session[fd].get();
+    s = sessions[fd].get();
 
     if (s->rdata.size() < s->rdata_pos + len)
     {
@@ -846,147 +874,187 @@ int32 RFIFOSKIP(int32 fd, size_t len)
 
 void do_close_tcp(int32 fd)
 {
+    TracyZoneScoped;
     flush_fifo(fd);
     do_close(fd);
-    if (session[fd])
+    if (sessions[fd])
     {
         delete_session(fd);
     }
 }
 
-int socket_config_read(const char* cfgName)
+///
+/// <summary>
+/// Get the access list object collection from the provided string. The string
+/// provided is in the form of "127.0.0.1,192.168.0.0/16" where each entry is
+/// separated by a comma. This will break apart all individual entries and then
+/// for each entry that is validated will be pushed into our result collection,
+/// otherwise an error will be displayed.
+/// </summary>
+///
+/// <param name="access_list">The access list that we are parsing for individual entries.</param>
+/// <returns>std::vector<AccessControl> collection that contains all AccessControl entries.</returns>
+///
+std::vector<AccessControl> get_access_list(std::string access_list)
 {
-    char  line[1024];
-    char  w1[1024];
-    char  w2[1024];
-    FILE* fp;
+    // with the provided comma delimited access list, we will convert into a
+    // vector of string entries
+    std::vector<AccessControl> result;
 
-    fp = fopen(cfgName, "r");
-    if (fp == nullptr)
+    std::stringstream ss(access_list);
+    while (ss.good())
     {
-        ShowError("File not found: %s", cfgName);
-        return 1;
-    }
+        std::string entry;
+        // get string delimited by comma character
+        getline(ss, entry, ',');
 
-    while (fgets(line, sizeof(line), fp))
-    {
-        if (line[0] == '/' && line[1] == '/')
+        if (entry == "")
         {
-            continue;
-        }
-        if (sscanf(line, "%[^:]: %[^\r\n]", w1, w2) != 2)
-        {
+            // skip
             continue;
         }
 
-        if (!strcmpi(w1, "stall_time"))
+        // validate our entry before pushing it into our results list
+        AccessControl acc{};
+        if (access_ipmask(entry.c_str(), &acc))
         {
-            stall_time = atoi(w2);
-#ifndef MINICORE
+            result.push_back(acc);
         }
-        else if (!strcmpi(w1, "enable_ip_rules"))
+        else
         {
-            ip_rules = config_switch(w2);
-        }
-        else if (!strcmpi(w1, "order"))
-        {
-            if (!strcmpi(w2, "deny,allow"))
-            {
-                access_order = ACO_DENY_ALLOW;
-            }
-            else if (!strcmpi(w2, "allow,deny"))
-            {
-                access_order = ACO_ALLOW_DENY;
-            }
-            else if (!strcmpi(w2, "mutual-failure"))
-            {
-                access_order = ACO_MUTUAL_FAILURE;
-            }
-        }
-        else if (!strcmpi(w1, "allow"))
-        {
-            AccessControl acc{};
-            if (access_ipmask(w2, &acc))
-            {
-                access_allow.push_back(acc);
-            }
-            else
-            {
-                ShowError("socket_config_read: Invalid ip or ip range '%s'!", line);
-            }
-        }
-        else if (!strcmpi(w1, "deny"))
-        {
-            AccessControl acc{};
-            if (access_ipmask(w2, &acc))
-            {
-                access_deny.push_back(acc);
-            }
-            else
-            {
-                ShowError("socket_config_read: Invalid ip or ip range '%s'!", line);
-            }
-        }
-        else if (!strcmpi(w1, "connect_interval"))
-        {
-            connect_interval = std::chrono::milliseconds(atoi(w2));
-        }
-        else if (!strcmpi(w1, "connect_count"))
-        {
-            connect_count = atoi(w2);
-        }
-        else if (!strcmpi(w1, "connect_lockout"))
-        {
-            connect_lockout = std::chrono::milliseconds(atoi(w2));
-        }
-        else if (!strcmpi(w1, "debug"))
-        {
-            access_debug = config_switch(w2);
-#endif
-        }
-        else if (!strcmpi(w1, "import"))
-        {
-            socket_config_read(w2);
+            ShowError("socket_config_read: Invalid ip or ip range '%s'!", entry);
         }
     }
 
-    fclose(fp);
-    return 0;
+    return result;
+}
+
+///
+/// <summary>
+/// Setting up the UDP settings, currently just has a debug flag.
+///
+/// @NOTE I've added a UDP debug flag, the access debug flag is shared between
+///       both UDP and TCP.  Can be confusing if you believe you are setting the
+///       flag and then it gets overwritten by the other setting.  The new flags
+///       are just not being leveraged just yet (not sure where they would go).
+/// </summary>
+///
+void socket_udp_setup()
+{
+    // debug setting
+    udp_debug    = settings::get<bool>("network.UDP_DEBUG");
+    access_debug = settings::get<bool>("network.UDP_DEBUG");
+}
+
+///
+/// <summary>
+/// Handling the TCP setup properties for the socket.  All leveraging the new
+/// settings handling of LUA files.  The only issue I had was related to the
+/// allow and deny lists.  There would need to be an extension to the get<T>()
+/// method in order to allow LUA lists { "a", "b" }.  To allieviate this I've
+/// implemented a get_access_list() method in order to parse a string that
+/// splits entries with commas.  All other settings are straight forward using
+/// the settings get<T>() method.  Added all "packet_tcp.conf" settings to the
+/// new "settings/default/network.lua" file.
+/// </summary>
+///
+void socket_tcp_setup()
+{
+    // debug setting (shared?)
+    access_debug = settings::get<bool>("network.TCP_DEBUG");
+
+    // sockets configuration
+    tcp_debug  = settings::get<bool>("network.TCP_DEBUG");
+    stall_time = settings::get<int>("network.TCP_STALL_TIME");
+
+    // IP rules settings
+    ip_rules = settings::get<bool>("network.TCP_ENABLE_IP_RULES");
+
+    // ordering of the checks
+    auto ordering = settings::get<std::string>("network.TCP_ORDER");
+    if (ordering == "deny,allow")
+    {
+        access_order = ACO_DENY_ALLOW;
+    }
+    else if (ordering == "allow,deny")
+    {
+        access_order = ACO_ALLOW_DENY;
+    }
+    else if (ordering == "mutual-failure")
+    {
+        access_order = ACO_MUTUAL_FAILURE;
+    }
+
+    // get the allow and deny list
+    if (access_debug)
+    {
+        ShowInfo("Loading allow access list...");
+    }
+    auto allow_list_str = settings::get<std::string>("network.TCP_ALLOW");
+    access_allow        = get_access_list(allow_list_str);
+    if (access_debug)
+    {
+        ShowInfo("Size of allow access list: %d", access_allow.size());
+    }
+
+    if (access_debug)
+    {
+        ShowInfo("Loading deny access list...");
+    }
+    auto deny_list_str = settings::get<std::string>("network.TCP_DENY");
+    access_deny        = get_access_list(deny_list_str);
+    if (access_debug)
+    {
+        ShowInfo("Size of deny access list: %d", access_deny.size());
+    }
+
+    // connection limit settings
+    connect_interval = std::chrono::milliseconds(
+        settings::get<int>("network.TCP_CONNECT_INTERVAL"));
+    connect_count   = settings::get<int>("network.TCP_CONNECT_COUNT");
+    connect_lockout = std::chrono::milliseconds(
+        settings::get<int>("network.TCP_CONNECT_LOCKOUT"));
 }
 
 void socket_init_tcp()
 {
+    TracyZoneScoped;
     if (!_vsocket_init())
     {
         return;
     }
 
-    const char* SOCKET_CONF_FILENAME = "./conf/packet_tcp.conf";
-    socket_config_read(SOCKET_CONF_FILENAME);
-    // session[0] is now currently used for disconnected sessions of the map server, and as such,
-    // should hold enough buffer (it is a vacuum so to speak) as it is never flushed. [Skotlex]
+    // setup our socket
+    socket_tcp_setup();
+
+    // sessions[0] is now currently used for disconnected sessions of the map
+    // server, and as such, should hold enough buffer (it is a vacuum so to
+    // speak) as it is never flushed. [Skotlex]
     create_session(0, null_recv, null_send, null_parse);
 
-#ifndef MINICORE
     // Delete old connection history every 5 minutes
     memset(connect_history, 0, sizeof(connect_history));
-    CTaskMgr::getInstance()->AddTask("connect_check_clear", server_clock::now() + 1s, NULL, CTaskMgr::TASK_INTERVAL, connect_check_clear, 5min);
-
-#endif
+    CTaskMgr::getInstance()->AddTask(
+        "connect_check_clear",
+        server_clock::now() + 1s,
+        NULL,
+        CTaskMgr::TASK_INTERVAL,
+        connect_check_clear,
+        5min);
 }
 
 void socket_final_tcp()
 {
+    TracyZoneScoped;
     if (!_vsocket_final())
     {
         return;
     }
-    int i;
-#ifndef MINICORE
+
     ConnectHistory* hist;
     ConnectHistory* next_hist;
 
-    for (i = 0; i < 0x10000; ++i)
+    for (int i = 0; i < 0x10000; ++i)
     {
         hist = connect_history[i];
         while (hist)
@@ -996,11 +1064,10 @@ void socket_final_tcp()
             hist = next_hist;
         }
     }
-#endif
 
-    for (i = 1; i < fd_max; i++)
+    for (int i = 1; i < fd_max; i++)
     {
-        if (session[i])
+        if (sessions[i])
         {
             do_close_tcp(i);
         }
@@ -1009,16 +1076,17 @@ void socket_final_tcp()
 
 void flush_fifo(int32 fd)
 {
-    if (session[fd] != nullptr)
+    TracyZoneScoped;
+    if (sessions[fd] != nullptr)
     {
-        session[fd]->func_send(fd);
+        sessions[fd]->func_send(fd);
     }
 }
 
 void flush_fifos()
 {
-    int i;
-    for (i = 1; i < fd_max; i++)
+    TracyZoneScoped;
+    for (int i = 1; i < fd_max; i++)
     {
         flush_fifo(i);
     }
@@ -1026,44 +1094,80 @@ void flush_fifos()
 
 void set_defaultparse(ParseFunc defaultparse)
 {
+    TracyZoneScoped;
     default_func_parse = defaultparse;
 }
 
 void set_eof(int32 fd)
 {
+    TracyZoneScoped;
     if (session_isActive(fd))
     {
-        session[fd]->flag.eof = 1;
+        sessions[fd]->flag.eof = 1;
     }
 }
 
 int create_session(int fd, RecvFunc func_recv, SendFunc func_send, ParseFunc func_parse)
 {
-    session[fd] = std::make_unique<socket_data>();
-    session[fd]->rdata.reserve(RFIFO_SIZE);
-    session[fd]->wdata.reserve(WFIFO_SIZE);
+    TracyZoneScoped;
+#ifdef _DEBUG
+    ShowDebug(fmt::format("create_session fd: {}", fd).c_str());
+#endif // _DEBUG
+    sessions[fd] = std::make_unique<socket_data>(func_recv, func_send, func_parse);
 
-    session[fd]->func_recv  = func_recv;
-    session[fd]->func_send  = func_send;
-    session[fd]->func_parse = func_parse;
-    session[fd]->rdata_tick = last_tick;
+    sessions[fd]->rdata.reserve(RFIFO_SIZE);
+    sessions[fd]->wdata.reserve(WFIFO_SIZE);
+
+    sessions[fd]->rdata_tick = last_tick;
+
     return 0;
 }
 
 int delete_session(int fd)
 {
+    TracyZoneScoped;
+
+#ifdef _DEBUG
+    ShowDebug(fmt::format("delete_session fd: {}", fd).c_str());
+#endif // _DEBUG
+
     if (fd <= 0 || fd >= FD_SETSIZE)
     {
         return -1;
     }
+
+    sessions[fd] = nullptr;
+
+    // In order to resize fd_max to the minimum possible size, we have to find
+    // the fd in use with the highest value. We will iterate through the session
+    // list backwards until we find the first non-nullptr entry.
+    // clang-format off
+    auto result = std::find_if(sessions.rbegin(), sessions.rend(),
+    [](std::unique_ptr<socket_data>& entry)
+    {
+        return entry != nullptr;
+    });
+    // clang-format on
+
+    auto old_fd_max = fd_max;
+
+    fd_max = std::distance(result, sessions.rend());
+
+#ifdef _DEBUG
+    ShowDebug(fmt::format("Resizing fd_max from {} to {}.", old_fd_max, fd_max).c_str());
+#else
+    std::ignore = old_fd_max;
+#endif // _DEBUG
+
     return 0;
 }
 
 /*======================================
- *	CORE : Socket options
+ *  CORE : Socket options
  *--------------------------------------*/
 void set_nonblocking(int fd, unsigned long yes)
 {
+    TracyZoneScoped;
     // FIONBIO Use with a nonzero argp parameter to enable the nonblocking mode of socket s.
     // The argp parameter is zero if nonblocking is to be disabled.
     if (sIoctl(fd, FIONBIO, &yes) != 0)
@@ -1074,11 +1178,12 @@ void set_nonblocking(int fd, unsigned long yes)
 
 /*
  *
- *			UDP LEVEL
+ *          UDP LEVEL
  *
  */
 int32 makeBind_udp(uint32 ip, uint16 port)
 {
+    TracyZoneScoped;
     struct sockaddr_in server_address;
     int                fd;
     int                result;
@@ -1087,7 +1192,7 @@ int32 makeBind_udp(uint32 ip, uint16 port)
 
     if (fd == -1)
     {
-        ShowError("make_listen_bind: socket creation failed (code %d)!", sErrno);
+        ShowError("make_listen_bind: socket creation failed (port %d, code %d)!", port, sErrno);
         do_final(EXIT_FAILURE);
     }
     if (fd == 0)
@@ -1111,7 +1216,7 @@ int32 makeBind_udp(uint32 ip, uint16 port)
     result = sBind(fd, (struct sockaddr*)&server_address, sizeof(server_address));
     if (result == SOCKET_ERROR)
     {
-        ShowError("make_listen_bind: bind failed (socket #%d, code %d)!", fd, sErrno);
+        ShowError("make_listen_bind: bind failed (socket #%d, port %d, code %d)!", fd, port, sErrno);
         do_final(EXIT_FAILURE);
     }
 
@@ -1125,21 +1230,25 @@ int32 makeBind_udp(uint32 ip, uint16 port)
 
 void socket_init_udp()
 {
+    TracyZoneScoped;
     if (!_vsocket_init())
     {
         return;
     }
-    const char* SOCKET_CONF_FILENAME = "./conf/packet_udp.conf";
-    socket_config_read(SOCKET_CONF_FILENAME);
+
+    // setup our socket
+    socket_udp_setup();
 }
 
 void do_close_udp(int32 fd)
 {
+    TracyZoneScoped;
     do_close(fd);
 }
 
 void socket_final_udp()
 {
+    TracyZoneScoped;
     if (!_vsocket_final())
     {
         return;
@@ -1149,16 +1258,19 @@ void socket_final_udp()
 
 int32 recvudp(int32 fd, void* buff, size_t nbytes, int32 flags, struct sockaddr* from, socklen_t* addrlen)
 {
+    TracyZoneScoped;
     return sRecvfrom(fd, (char*)buff, (int)nbytes, flags, from, addrlen);
 }
 
 int32 sendudp(int32 fd, void* buff, size_t nbytes, int32 flags, const struct sockaddr* from, socklen_t addrlen)
 {
+    TracyZoneScoped;
     return sSendto(fd, (const char*)buff, (int)nbytes, flags, from, addrlen);
 }
 
 void socket_init()
 {
+    TracyZoneScoped;
     switch (SOCKET_TYPE)
     {
         case socket_type::TCP:
@@ -1174,6 +1286,7 @@ void socket_init()
 
 void socket_final()
 {
+    TracyZoneScoped;
     switch (SOCKET_TYPE)
     {
         case socket_type::TCP:

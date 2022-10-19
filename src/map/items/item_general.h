@@ -22,7 +22,7 @@
 #ifndef _CITEMGENERAL_H
 #define _CITEMGENERAL_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "item.h"
 

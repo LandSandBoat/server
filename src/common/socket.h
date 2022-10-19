@@ -12,9 +12,9 @@
 #endif
 
 #ifdef WIN32
-#define FD_SETSIZE 1000
-#include <WS2tcpip.h>
+#define FD_SETSIZE 1024
 #include <winsock2.h>
+#include <ws2tcpip.h>
 typedef long in_addr_t;
 #else
 #include <arpa/inet.h>
@@ -24,13 +24,14 @@ typedef long in_addr_t;
 #include <sys/types.h>
 #endif
 
+#include <array>
+#include <ctime>
 #include <memory>
 #include <string>
-#include <time.h>
 
 /*
  *
- *				COMMON LEVEL
+ *              COMMON LEVEL
  *
  */
 /////////////////////////////////////////////////////////////////////
@@ -169,7 +170,7 @@ uint16 ntows(uint16 netshort);
 /************************************************/
 /*
  *
- *		TCP LEVEL
+ *      TCP LEVEL
  *
  */
 
@@ -190,15 +191,15 @@ typedef int (*ParseFunc)(int fd);
 
 // socket I/O macros
 #define RFIFOHEAD(fd)
-#define WFIFOHEAD(fd, size)                                                                                                                                    \
-    do                                                                                                                                                         \
-    {                                                                                                                                                          \
-        if ((fd) && session[fd]->wdata_size + (size) > session[fd]->max_wdata)                                                                                 \
-            realloc_writefifo(fd, size);                                                                                                                       \
+#define WFIFOHEAD(fd, size)                                                      \
+    do                                                                           \
+    {                                                                            \
+        if ((fd) && sessions[fd]->wdata_size + (size) > sessions[fd]->max_wdata) \
+            realloc_writefifo(fd, size);                                         \
     } while (0)
 //-------------------
-#define RFIFOP(fd, pos) (session[fd]->rdata + session[fd]->rdata_pos + (pos))
-#define WFIFOP(fd, pos) (session[fd]->wdata + session[fd]->wdata_size + (pos))
+#define RFIFOP(fd, pos) (sessions[fd]->rdata + sessions[fd]->rdata_pos + (pos))
+#define WFIFOP(fd, pos) (sessions[fd]->wdata + sessions[fd]->wdata_size + (pos))
 
 #define RFIFOB(fd, pos) (*(uint8*)RFIFOP(fd, pos))
 #define WFIFOB(fd, pos) (*(uint8*)WFIFOP(fd, pos))
@@ -207,20 +208,20 @@ typedef int (*ParseFunc)(int fd);
 #define RFIFOL(fd, pos) (*(uint32*)RFIFOP(fd, pos))
 #define WFIFOL(fd, pos) (*(uint32*)WFIFOP(fd, pos))
 
-#define RFIFOREST(fd) (session[fd]->flag.eof ? 0 : session[fd]->rdata.size() - session[fd]->rdata_pos)
-#define RFIFOFLUSH(fd)                                                                                                                                         \
-    do                                                                                                                                                         \
-    {                                                                                                                                                          \
-        if (session[fd]->rdata.size() == session[fd]->rdata_pos)                                                                                               \
-        {                                                                                                                                                      \
-            session[fd]->rdata_pos = 0;                                                                                                                        \
-            session[fd]->rdata.clear();                                                                                                                        \
-        }                                                                                                                                                      \
-        else                                                                                                                                                   \
-        {                                                                                                                                                      \
-            session[fd]->rdata.erase(0, session[fd]->rdata_pos);                                                                                               \
-            session[fd]->rdata_pos = 0;                                                                                                                        \
-        }                                                                                                                                                      \
+#define RFIFOREST(fd) (sessions[fd]->flag.eof ? 0 : sessions[fd]->rdata.size() - sessions[fd]->rdata_pos)
+#define RFIFOFLUSH(fd)                                             \
+    do                                                             \
+    {                                                              \
+        if (sessions[fd]->rdata.size() == sessions[fd]->rdata_pos) \
+        {                                                          \
+            sessions[fd]->rdata_pos = 0;                           \
+            sessions[fd]->rdata.clear();                           \
+        }                                                          \
+        else                                                       \
+        {                                                          \
+            sessions[fd]->rdata.erase(0, sessions[fd]->rdata_pos); \
+            sessions[fd]->rdata_pos = 0;                           \
+        }                                                          \
     } while (0)
 
 struct socket_data
@@ -243,10 +244,25 @@ struct socket_data
 
     bool  ver_mismatch;
     void* session_data; // stores application-specific data related to the session
+
+    socket_data(RecvFunc _func_recv, SendFunc _func_send, ParseFunc _func_parse)
+    : rdata_tick(time(0))
+    , func_recv(_func_recv)
+    , func_send(_func_send)
+    , func_parse(_func_parse)
+    {
+        client_addr  = 0;
+        flag.eof     = '\0';
+        flag.server  = '\0';
+        rdata_pos    = 0;
+        ver_mismatch = 0;
+        session_data = nullptr;
+    }
 };
 
 // Data prototype declaration
-extern std::array<std::unique_ptr<socket_data>, FD_SETSIZE> session;
+extern std::array<std::unique_ptr<socket_data>, FD_SETSIZE> sessions;
+
 //////////////////////////////////
 // some checking on sockets
 bool session_isValid(int fd);
@@ -284,11 +300,10 @@ void set_nonblocking(int fd, unsigned long yes);
 
 /*
  *
- *		UDP LEVEL
+ *      UDP LEVEL
  *
  */
-extern int32 listen_fd;
-int32        makeBind_udp(uint32 ip, uint16 port);
+int32 makeBind_udp(uint32 ip, uint16 port);
 
 void socket_init_udp(void);
 void do_close_udp(int32 fd);

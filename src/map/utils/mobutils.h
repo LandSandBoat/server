@@ -24,18 +24,23 @@
 
 #include <unordered_map>
 
-#include "../../common/cbasetypes.h"
-#include "../../common/mmo.h"
+#include "common/cbasetypes.h"
+#include "common/mmo.h"
 
 #include "../entities/mobentity.h"
 #include "../modifier.h"
 
-typedef struct
+struct ModsList_t
 {
     uint32                  id;
     std::vector<CModifier*> mods;
     std::vector<CModifier*> mobMods;
-} ModsList_t;
+
+    ModsList_t()
+    {
+        id = 0;
+    }
+};
 
 enum class WeaknessType
 {

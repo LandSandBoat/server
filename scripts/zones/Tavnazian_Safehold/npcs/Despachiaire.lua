@@ -8,7 +8,6 @@
 --                "Tango with a Tracker"
 --                "Requiem of Sin"
 -- Involved in:   "Secrets of Ovens Lost"
--- https://github.com/project-topaz/topaz/issues/1481
 -----------------------------------
 require("scripts/globals/missions")
 -----------------------------------

@@ -6,7 +6,10 @@
 //==========================================
 #include "WheatyExceptionReport.h"
 
+// clang-format off
+
 #include <algorithm>
+#include <array>
 #include <string>
 
 #include "cbasetypes.h"
@@ -92,12 +95,15 @@ WheatyExceptionReport::WheatyExceptionReport() // Constructor
     alreadyCrashed = false;
     RtlGetVersion = (pRtlGetVersion)GetProcAddress(GetModuleHandle(_T("ntdll.dll")), "RtlGetVersion");
 
-    _CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_FILE);
-    _CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDERR);
-    _CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_FILE);
-    _CrtSetReportFile(_CRT_ERROR, _CRTDBG_FILE_STDERR);
-    _CrtSetReportMode(_CRT_ASSERT, _CRTDBG_MODE_FILE);
-    _CrtSetReportFile(_CRT_ASSERT, _CRTDBG_FILE_STDERR);
+    if (!IsDebuggerPresent())
+    {
+        _CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_FILE);
+        _CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDERR);
+        _CrtSetReportMode(_CRT_ERROR, _CRTDBG_MODE_FILE);
+        _CrtSetReportFile(_CRT_ERROR, _CRTDBG_FILE_STDERR);
+        _CrtSetReportMode(_CRT_ASSERT, _CRTDBG_MODE_FILE);
+        _CrtSetReportFile(_CRT_ASSERT, _CRTDBG_FILE_STDERR);
+    }
 }
 
 //============
@@ -196,7 +202,12 @@ LONG WINAPI WheatyExceptionReport::WheatyUnhandledExceptionFilter(
     GetModuleFileName(nullptr, module_folder_name, MAX_PATH);
     TCHAR* pos = _tcsrchr(module_folder_name, '\\');
     if (!pos)
-        return 0;
+    {
+        Log(_T("GetModuleFileName failed"));
+        TerminateProcess(GetCurrentProcess(), 1);
+        return EXCEPTION_EXECUTE_HANDLER; // Unreacheable code
+    }
+
     pos[0] = '\0';
     ++pos;
 
@@ -205,7 +216,11 @@ LONG WINAPI WheatyExceptionReport::WheatyUnhandledExceptionFilter(
     if (!CreateDirectory(crash_folder_path, nullptr))
     {
         if (GetLastError() != ERROR_ALREADY_EXISTS)
-            return 0;
+        {
+            Log(_T("CreateDirectory failed"));
+            TerminateProcess(GetCurrentProcess(), 1);
+            return EXCEPTION_EXECUTE_HANDLER; // Unreacheable code
+        }
     }
 
     SYSTEMTIME systime;
@@ -240,7 +255,7 @@ LONG WINAPI WheatyExceptionReport::WheatyUnhandledExceptionFilter(
         {
             additionalStream.Type = CommentStreamA;
             additionalStream.Buffer = reinterpret_cast<PVOID>(pExceptionInfo->ExceptionRecord->ExceptionInformation[0]);
-            additionalStream.BufferSize = strlen(reinterpret_cast<char const*>(pExceptionInfo->ExceptionRecord->ExceptionInformation[0])) + 1;
+            additionalStream.BufferSize = static_cast<ULONG>(strlen(reinterpret_cast<char const*>(pExceptionInfo->ExceptionRecord->ExceptionInformation[0])) + 1);
 
             additionalStreamInfo.UserStreamArray = &additionalStream;
             additionalStreamInfo.UserStreamCount = 1;
@@ -250,7 +265,6 @@ LONG WINAPI WheatyExceptionReport::WheatyUnhandledExceptionFilter(
             m_hDumpFile, MiniDumpWithIndirectlyReferencedMemory, &info, &additionalStreamInfo, nullptr);
 
         CloseHandle(m_hDumpFile);
-
     }
 
     if (m_hReportFile)
@@ -299,15 +313,15 @@ LONG WINAPI WheatyExceptionReport::WheatyUnhandledExceptionFilter(
         Log(_T(fmt::format("Time of crash: {:%Y/%m/%d %H:%M:%S}", fmt::localtime(t)).c_str()));
 
         GenerateExceptionReport(pExceptionInfo);
-
-        fclose(m_hReportFile);
-        m_hReportFile = nullptr;
     }
 
-    if (m_previousFilter)
-        return m_previousFilter(pExceptionInfo);
-    else
-        return EXCEPTION_EXECUTE_HANDLER/*EXCEPTION_CONTINUE_SEARCH*/;
+    Log(_T(fmt::format("WheatyUnhandledExceptionFilter Exit").c_str()));
+
+    fclose(m_hReportFile);
+    m_hReportFile = nullptr;
+
+    TerminateProcess(GetCurrentProcess(), 1);
+    return EXCEPTION_EXECUTE_HANDLER; // Unreacheable code
 }
 
 void __cdecl WheatyExceptionReport::WheatyCrtHandler(wchar_t const* /*expression*/, wchar_t const* /*function*/, wchar_t const* /*file*/, unsigned int /*line*/, uintptr_t /*pReserved*/)
@@ -318,26 +332,37 @@ void __cdecl WheatyExceptionReport::WheatyCrtHandler(wchar_t const* /*expression
 BOOL WheatyExceptionReport::_GetProcessorName(TCHAR* sProcessorName, DWORD maxcount)
 {
     if (!sProcessorName)
+    {
         return FALSE;
+    }
 
     HKEY hKey;
     LONG lRet;
     lRet = ::RegOpenKeyEx(HKEY_LOCAL_MACHINE, _T("HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0"),
         0, KEY_QUERY_VALUE, &hKey);
     if (lRet != ERROR_SUCCESS)
+    {
         return FALSE;
+    }
+
     TCHAR szTmp[2048];
     DWORD cntBytes = sizeof(szTmp);
     lRet = ::RegQueryValueEx(hKey, _T("ProcessorNameString"), nullptr, nullptr,
         (LPBYTE)szTmp, &cntBytes);
     if (lRet != ERROR_SUCCESS)
+    {
         return FALSE;
+    }
+
     ::RegCloseKey(hKey);
     sProcessorName[0] = '\0';
     // Skip spaces
     TCHAR* psz = szTmp;
     while (iswspace(*psz))
+    {
         ++psz;
+    }
+
     _tcsncpy(sProcessorName, psz, maxcount);
     return TRUE;
 }
@@ -537,7 +562,7 @@ void WheatyExceptionReport::PrintSystemInfo()
     MemoryStatus.dwLength = sizeof (MEMORYSTATUS);
     ::GlobalMemoryStatus(&MemoryStatus);
     TCHAR sString[1024];
-    if (_GetProcessorName(sString, std::size(sString)))
+    if (_GetProcessorName(sString, static_cast<DWORD>(std::size(sString))))
     {
         Log(_T("Processor: %s"), sString);
         Log(_T("Number Of Threads: %d"), SystemInfo.dwNumberOfProcessors);
@@ -548,7 +573,7 @@ void WheatyExceptionReport::PrintSystemInfo()
             SystemInfo.dwNumberOfProcessors);
     }
 
-    if (_GetWindowsVersion(sString, std::size(sString)))
+    if (_GetWindowsVersion(sString, static_cast<DWORD>(std::size(sString))))
         Log(_T("OS: %s"), sString);
     else
         Log(_T("OS: <unknown>"));
@@ -662,7 +687,7 @@ PEXCEPTION_POINTERS pExceptionInfo)
         // Initialize DbgHelp
         if (!SymInitialize(GetCurrentProcess(), nullptr, TRUE))
         {
-            Log(_T("CRITICAL ERROR. Couldn't initialize the symbol handler for process.Error [%s]."),
+            Log(_T("CRITICAL ERROR. Couldn't initialize the symbol handler for process. Error: %s."),
                 ErrorMessage(GetLastError()));
         }
 
@@ -949,6 +974,17 @@ bool bWriteVariables, HANDLE pThreadHandle)                                     
             &symDisplacement,                               // Address of the variable that will receive the displacement
             &sip.si))                                       // Address of the SYMBOL_INFO structure (inside "sip" object)
         {
+            bool isStdLib = sip.si.NameLen > 3 &&
+                            sip.si.Name[0] == 's' &&
+                            sip.si.Name[1] == 't' &&
+                            sip.si.Name[2] == 'd';
+
+            // Don't print things from the std:: namespace, for clarity
+            if (isStdLib)
+            {
+                continue;
+            }
+
             wsprintf((LPSTR)funcNameBuffer.data(), "%hs+%I64X", sip.si.Name, symDisplacement);
         }
         else                                                // No symbol found.  Print out the logical address instead.
@@ -977,9 +1013,8 @@ bool bWriteVariables, HANDLE pThreadHandle)                                     
             wsprintf((LPSTR)fileNameBuffer.data(), "%s, line %i", lineInfo.FileName, lineInfo.LineNumber);
         }
 
-
 #ifdef _M_IX86
-        Log(_T("%08X  %08X  %s (%s)"), sf.AddrPC.Offset, sf.AddrFrame.Offset, funcNameBuffer.data(), fileNameBuffer.data());
+        Log(_T("%08X  %08X  %s (%s)"), (DWORD)sf.AddrPC.Offset, (DWORD)sf.AddrFrame.Offset, funcNameBuffer.data(), fileNameBuffer.data());
 #endif
 #ifdef _M_X64
         Log(_T("%016I64X  %016I64X  %s (%s)"), sf.AddrPC.Offset, sf.AddrFrame.Offset, funcNameBuffer.data(), fileNameBuffer.data());
@@ -1365,7 +1400,7 @@ bool logChildren)
     // TI_FINDCHILDREN_PARAMS struct has.  Use derivation to accomplish this.
     struct FINDCHILDREN : TI_FINDCHILDREN_PARAMS
     {
-        ULONG   MoreChildIds[1024*2];
+        ULONG   MoreChildIds[1024*2] = {};
         FINDCHILDREN(){Count = sizeof(MoreChildIds) / sizeof(MoreChildIds[0]);}
     } children;
 
@@ -1599,11 +1634,11 @@ int __cdecl WheatyExceptionReport::Log(const TCHAR* format, ...)
         // Log to console
         if (gLogToConsole)
         {
-            ShowStacktrace(outString.c_str());
+            ShowCritical(outString.c_str());
         }
     }
 
-    return 0;
+    return EXCEPTION_EXECUTE_HANDLER;
 }
 
 bool WheatyExceptionReport::StoreSymbol(DWORD type, DWORD_PTR offset)
@@ -1665,3 +1700,5 @@ std::string SymbolDetail::ToString()
     }
     return formatted;
 }
+
+// clang-format on

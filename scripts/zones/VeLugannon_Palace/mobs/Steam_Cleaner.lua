@@ -4,11 +4,11 @@
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 entity.onMobDespawn = function(mob)
-    mob:setRespawnTime(math.random(7200, 14400)) -- 2 to 4 hours
+    SetServerVariable("[POP]SteamCleaner", os.time() + math.random(7200, 14400))
 end
 
 return entity

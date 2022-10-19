@@ -9,12 +9,12 @@ require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     xi.regime.checkRegime(player, mob, 28, 2, xi.regime.type.FIELDS)
 end
 
 entity.onMobDespawn = function(mob)
-    xi.mob.phOnDespawn(mob, ID.mob.NUNYENUNC_PH, 10, math.random(7200, 10800)) -- 2 to 3 hours
+    xi.mob.phOnDespawn(mob, ID.mob.NUNYENUNC_PH, 10, 3600) -- 1 hour minimum
 end
 
 return entity

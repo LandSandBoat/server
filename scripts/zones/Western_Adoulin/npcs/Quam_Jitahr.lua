@@ -12,8 +12,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    local SOA_Mission = player:getCurrentMission(xi.mission.log_id.SOA)
-    if (SOA_Mission >= xi.mission.id.soa.LIFE_ON_THE_FRONTIER) then
+    local soaMission = player:getCurrentMission(xi.mission.log_id.SOA)
+
+    if (soaMission >= xi.mission.id.soa.LIFE_ON_THE_FRONTIER) then
         -- Standard dialogue
         player:startEvent(573)
     else

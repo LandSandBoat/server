@@ -53,6 +53,6 @@ message(STATUS "ZeroMQ_INCLUDE_DIR: ${ZeroMQ_INCLUDE_DIR}")
 
 if (${ZeroMQ_FOUND})
     link_libraries(${ZeroMQ_LIBRARY})
-    include_directories(${ZeroMQ_INCLUDE_DIR})
-    include_directories(${ZeroMQ_INCLUDE_DIR}/../)
+    include_directories(SYSTEM ${ZeroMQ_INCLUDE_DIR})
+    include_directories(SYSTEM ${ZeroMQ_INCLUDE_DIR}/../)
 endif()

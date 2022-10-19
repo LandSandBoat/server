@@ -1,21 +1,17 @@
 -----------------------------------
 -- Spell: Boost-STR
---     Boosts STR for Allies in AoE
+-- Boosts STR for Allies in AoE
 -----------------------------------
-require("scripts/settings/main")
-require("scripts/globals/status")
-require("scripts/globals/magic")
+require("scripts/globals/spells/enhancing_spell")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
-    local effect = xi.effect.STR_BOOST
-    doBoostGain(caster, target, spell, effect)
-    return effect
+spellObject.onSpellCast = function(caster, target, spell)
+    return xi.spells.enhancing.useEnhancingSpell(caster, target, spell)
 end
 
-return spell_object
+return spellObject

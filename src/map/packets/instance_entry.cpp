@@ -18,7 +18,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 
 ===========================================================================
 */
-#include "../../common/socket.h"
+#include "common/socket.h"
 
 #include "instance_entry.h"
 

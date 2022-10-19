@@ -22,7 +22,7 @@
 #ifndef _CBAZAARCLOSEPACKET_H
 #define _CBAZAARCLOSEPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

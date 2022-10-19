@@ -1,7 +1,6 @@
 -----------------------------------
 -- Area: Bastok Markets
 --  NPC: Shamarhaan
--- Type: Quest Starter
 -- Involved in quest: No Strings Attached
 -- !pos -285.382 -13.021 -84.743 235
 -----------------------------------

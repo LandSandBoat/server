@@ -66,7 +66,7 @@ mission.sections =
 
             ['Minotaur'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if mission:getVar(player, 'Status') == 0 then
                         mission:setVar(player, 'Status', 1)
                     end

@@ -40,9 +40,6 @@ public:
     {
         return false;
     }
-
-private:
-    duration m_spawnTime;
 };
 
 #endif

@@ -70,7 +70,7 @@ private:
     uint32 m_id;
     uint16 m_color;
 
-    string_t m_name;
+    std::string m_name;
 };
 
 /************************************************************************

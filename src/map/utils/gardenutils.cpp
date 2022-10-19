@@ -142,47 +142,61 @@ namespace gardenutils
         {
             case FLOWERPOT_PLANT_HERB_SEEDS:
                 elements[FLOWERPOT_ELEMENT_WIND] += 10;
+                break;
             case FLOWERPOT_PLANT_GRAIN_SEEDS:
                 elements[FLOWERPOT_ELEMENT_FIRE] += 10;
+                break;
             case FLOWERPOT_PLANT_VEGETABLE_SEEDS:
                 elements[FLOWERPOT_ELEMENT_EARTH] += 10;
+                break;
             case FLOWERPOT_PLANT_FRUIT_SEEDS:
                 elements[FLOWERPOT_ELEMENT_WATER] += 10;
+                break;
             case FLOWERPOT_PLANT_CACTUS_STEMS:
                 elements[FLOWERPOT_ELEMENT_LIGHT] += 10;
+                break;
             case FLOWERPOT_PLANT_TREE_CUTTINGS:
                 elements[FLOWERPOT_ELEMENT_ICE] += 10;
+                break;
             case FLOWERPOT_PLANT_TREE_SAPLINGS:
                 elements[FLOWERPOT_ELEMENT_DARK] += 10;
+                break;
             case FLOWERPOT_PLANT_WILDGRASS_SEEDS:
                 elements[FLOWERPOT_ELEMENT_LIGHTNING] += 10;
+                break;
             default:
                 elements[FLOWERPOT_ELEMENT_NONE] += 10;
         }
 
-        if (map_config.garden_day_matters)
+        if (settings::get<bool>("map.GARDEN_DAY_MATTERS"))
         {
             uint32 vanaDate   = PItem->getPlantTimestamp();
-            uint32 dayElement = (uint32)((vanaDate % VTIME_WEEK) / VTIME_DAY) + 1;
+            uint32 dayElement = ((vanaDate % VTIME_WEEK) / VTIME_DAY) + 1;
             elements[dayElement] += 10;
         }
 
-        if (map_config.garden_pot_matters)
+        if (settings::get<bool>("map.GARDEN_POT_MATTERS"))
         {
             switch (PItem->getID())
             {
                 case 216: // Porcelain Flowerpot
                     elements[FLOWERPOT_ELEMENT_WIND] += 10;
+                    break;
                 case 217: // Brass Flowerpot
                     elements[FLOWERPOT_ELEMENT_FIRE] += 10;
+                    break;
                 case 218: // Earthen Flowerpot
                     elements[FLOWERPOT_ELEMENT_EARTH] += 10;
+                    break;
                 case 219: // Ceramic Flowerpot
                     elements[FLOWERPOT_ELEMENT_WATER] += 10;
+                    break;
                 case 220: // Wooden Flowerpot
                     elements[FLOWERPOT_ELEMENT_LIGHT] += 10;
+                    break;
                 case 221: // Arcane Flowerpot
                     elements[FLOWERPOT_ELEMENT_DARK] += 10;
+                    break;
                 default:
                     break;
             }
@@ -223,12 +237,12 @@ namespace gardenutils
             }
         }
 
-        if (map_config.garden_moonphase_matters)
+        if (settings::get<bool>("map.GARDEN_MOONPHASE_MATTERS"))
         {
             strength += (int16)std::ceil(CVanaTime::getInstance()->getMoonPhase() / 10.0f);
         }
 
-        if (map_config.garden_mh_aura_matters)
+        if (settings::get<bool>("map.GARDEN_MH_AURA_MATTERS"))
         {
             // Add up all of the installed furniture auras
             std::array<uint16, 8> auras = { 0 };
@@ -237,10 +251,10 @@ namespace gardenutils
                 CItemContainer* PContainer = PChar->getStorage(containerID);
                 for (int slotID = 0; slotID < PContainer->GetSize(); ++slotID)
                 {
-                    CItem* PItem = PContainer->GetItem(slotID);
-                    if (PItem != nullptr && PItem->isType(ITEM_FURNISHING))
+                    CItem* PItemContained = PContainer->GetItem(slotID);
+                    if (PItemContained != nullptr && PItemContained->isType(ITEM_FURNISHING))
                     {
-                        CItemFurnishing* PFurniture = static_cast<CItemFurnishing*>(PItem);
+                        CItemFurnishing* PFurniture = static_cast<CItemFurnishing*>(PItemContained);
                         if (PFurniture->isInstalled())
                         {
                             auras[PFurniture->getElement()] += PFurniture->getAura();
@@ -263,11 +277,11 @@ namespace gardenutils
 
         strength += (int16)((100 - strength) * (PItem->getStrength() / 32.0f));
 
-        int resultElement = PItem->getCommonCrystalFeed();
-        if (PItem->isTree())
-        {
-            resultElement += PItem->getExtraCrystalFeed() << 4;
-        }
+        // int resultElement = PItem->getCommonCrystalFeed();
+        // if (PItem->isTree())
+        // {
+        //     resultElement += PItem->getExtraCrystalFeed() << 4;
+        // }
 
         uint32 resultUid = (PItem->getPlant() << 8) + (PItem->getCommonCrystalFeed() << 4) + PItem->getExtraCrystalFeed();
 

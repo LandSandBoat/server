@@ -3,14 +3,14 @@
 -- Scroll of Wind Carol II
 -- Teaches the song Wind Carol II
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(448)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(448)
 end
 
-return item_object
+return itemObject

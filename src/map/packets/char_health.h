@@ -22,7 +22,7 @@
 #ifndef _CCHARHEALTHPACKET_H
 #define _CCHARHEALTHPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

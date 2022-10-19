@@ -5,7 +5,7 @@
 -- Teleports Players to Abyssea - Attohwa
 -----------------------------------
 local ID = require("scripts/zones/Buburimu_Peninsula/IDs")
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/keyitems")
 require("scripts/globals/quests")
 require("scripts/globals/abyssea")
@@ -16,9 +16,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if (xi.settings.ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 30) then
-        local HasStone = xi.abyssea.getHeldTraverserStones(player)
-        if (HasStone >= 1 and player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.DAWN_OF_DEATH) == QUEST_ACCEPTED
+    if (xi.settings.main.ENABLE_ABYSSEA == 1 and player:getMainLvl() >= 30) then
+        local hasStone = xi.abyssea.getHeldTraverserStones(player)
+        if (hasStone >= 1 and player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.DAWN_OF_DEATH) == QUEST_ACCEPTED
         and player:getQuestStatus(xi.quest.log_id.ABYSSEA, xi.quest.id.abyssea.A_FLUTTERY_FIEND) == QUEST_AVAILABLE) then
             player:startEvent(62)
         else

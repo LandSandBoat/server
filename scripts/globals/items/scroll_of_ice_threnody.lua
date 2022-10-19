@@ -3,14 +3,14 @@
 -- Scroll of Ice Threnody
 -- Teaches the song Ice Threnody
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(455)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(455)
 end
 
-return item_object
+return itemObject

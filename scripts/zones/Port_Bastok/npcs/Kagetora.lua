@@ -4,7 +4,7 @@
 -- Involved in Quest: Ayame and Kaede, 20 in Pirate Years
 -- !pos -96 -2 29 236
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/quests")
 -----------------------------------
 local entity = {}
@@ -13,14 +13,12 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-
     if (player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.AYAME_AND_KAEDE) == QUEST_ACCEPTED) then
+        local ayameAndKaede = player:getCharVar("AyameAndKaede_Event")
 
-        local AyameAndKaede = player:getCharVar("AyameAndKaede_Event")
-
-        if (AyameAndKaede == 0) then
+        if (ayameAndKaede == 0) then
             player:startEvent(241)
-        elseif (AyameAndKaede > 2) then
+        elseif (ayameAndKaede > 2) then
             player:startEvent(244)
         else
             player:startEvent(23)
@@ -32,14 +30,12 @@ entity.onTrigger = function(player, npc)
     else
         player:startEvent(23)
     end
-
 end
 
 entity.onEventUpdate = function(player, csid, option)
 end
 
 entity.onEventFinish = function(player, csid, option)
-
     if (csid == 241) then
         player:setCharVar("AyameAndKaede_Event", 1)
     elseif (csid == 261) then
@@ -47,7 +43,6 @@ entity.onEventFinish = function(player, csid, option)
     elseif (csid == 296) then
         player:setCharVar("FadedPromises", 3)
     end
-
 end
 
 return entity

@@ -8,13 +8,14 @@
 require("scripts/globals/jobpoints")
 require("scripts/globals/status")
 -----------------------------------
-local effect_object = {}
+local effectObject = {}
 
-effect_object.onEffectGain = function(target, effect)
+effectObject.onEffectGain = function(target, effect)
     local jpLevel = target:getJobPointLevel(xi.jp.WARCRY_EFFECT)
     local jpEffect = jpLevel * 3
 
     target:addMod(xi.mod.ATTP, effect:getPower())
+    target:addMod(xi.mod.RATTP, effect:getPower())
     target:addMod(xi.mod.TP_BONUS, effect:getSubPower())
 
     -- Job Point Bonus
@@ -22,14 +23,15 @@ effect_object.onEffectGain = function(target, effect)
     target:addMod(xi.mod.RATT, jpEffect)
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
 end
 
-effect_object.onEffectLose = function(target, effect)
+effectObject.onEffectLose = function(target, effect)
     local jpLevel = target:getJobPointLevel(xi.jp.WARCRY_EFFECT)
     local jpEffect = jpLevel * 3
 
     target:delMod(xi.mod.ATTP, effect:getPower())
+    target:delMod(xi.mod.RATTP, effect:getPower())
     target:delMod(xi.mod.TP_BONUS, effect:getSubPower())
 
     -- Job Point Bonus
@@ -37,4 +39,4 @@ effect_object.onEffectLose = function(target, effect)
     target:delMod(xi.mod.RATT, jpEffect)
 end
 
-return effect_object
+return effectObject

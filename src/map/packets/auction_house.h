@@ -22,7 +22,7 @@
 #ifndef _CAUCTIONHOUSEPACKET_H_
 #define _CAUCTIONHOUSEPACKET_H_
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

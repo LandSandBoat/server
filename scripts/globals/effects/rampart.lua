@@ -3,33 +3,45 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effect_object = {}
+local effectObject = {}
 
-effect_object.onEffectGain = function(target, effect)
+effectObject.onEffectGain = function(target, effect)
     local power = effect:getPower()
-    target:addMod(xi.mod.UDMGPHYS, -power)
-    target:addMod(xi.mod.UDMGBREATH, -power)
-    target:addMod(xi.mod.UDMGMAGIC, -power)
-    target:addMod(xi.mod.UDMGRANGE, -power)
 
     if target:isPC() and target:hasTrait(77) then -- Iron Will
         target:addMod(xi.mod.SPELLINTERRUPT, target:getMerit(xi.merit.IRON_WILL))
     end
+
+    if target:getMod(xi.mod.ENHANCES_IRON_WILL) > 0 then
+        local subPower = target:getMod(xi.mod.ENHANCES_IRON_WILL) * (target:getMerit(xi.merit.IRON_WILL) / 19)
+
+        target:addMod(xi.mod.FASTCAST, subPower)
+        effect:setSubPower(subPower)
+    end
+
+    for i = xi.mod.SLASH_SDT, xi.mod.DARK_SDT do
+        target:addMod(i, -power)
+    end
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
 end
 
-effect_object.onEffectLose = function(target, effect)
-    local power = effect:getPower()
-    target:delMod(xi.mod.UDMGPHYS, -power)
-    target:delMod(xi.mod.UDMGBREATH, -power)
-    target:delMod(xi.mod.UDMGMAGIC, -power)
-    target:delMod(xi.mod.UDMGRANGE, -power)
+effectObject.onEffectLose = function(target, effect)
+    local power    = effect:getPower()
+    local subPower = effect:getSubPower()
 
     if target:isPC() and target:hasTrait(77) then -- Iron Will
         target:delMod(xi.mod.SPELLINTERRUPT, target:getMerit(xi.merit.IRON_WILL))
     end
+
+    if subPower > 0 then
+        target:delMod(xi.mod.FASTCAST, subPower)
+    end
+
+    for i = xi.mod.SLASH_SDT, xi.mod.DARK_SDT do
+        target:delMod(i, -power)
+    end
 end
 
-return effect_object
+return effectObject

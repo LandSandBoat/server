@@ -4,7 +4,7 @@
 -- Involved in Missions: Wading Beasts
 -- !pos 96 -20 14 237
 -----------------------------------
-require("scripts/settings/main")
+require("scripts/globals/settings")
 require("scripts/globals/missions")
 -----------------------------------
 local entity = {}
@@ -27,7 +27,7 @@ entity.onEventFinish = function(player, csid, option)
             player,
             xi.quest.log_id.BASTOK,
             xi.quest.id.bastok.FADED_PROMISES,
-            {item = 17775, xi.title.ASSASSIN_REJECT, var = {"FadedPromises"}, fame=10})
+            { item = 17775, xi.title.ASSASSIN_REJECT, var = { "FadedPromises" }, fame=10 })
         then
             player:delKeyItem(xi.ki.DIARY_OF_MUKUNDA)
         end

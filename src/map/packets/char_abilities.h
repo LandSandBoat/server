@@ -22,7 +22,7 @@
 #ifndef _CCHARABILITIESPACKET_H
 #define _CCHARABILITIESPACKET_H
 
-#include "../../common/cbasetypes.h"
+#include "common/cbasetypes.h"
 
 #include "basic.h"
 

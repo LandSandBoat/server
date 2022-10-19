@@ -3,9 +3,9 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effect_object = {}
+local effectObject = {}
 
-effect_object.onEffectGain = function(target, effect)
+effectObject.onEffectGain = function(target, effect)
     target:setMod(xi.mod.AFFLATUS_MISERY, 0)
 
     if (target:hasStatusEffect(xi.effect.AUSPICE)) then
@@ -15,15 +15,15 @@ effect_object.onEffectGain = function(target, effect)
     end
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
 end
 
-effect_object.onEffectLose = function(target, effect)
+effectObject.onEffectLose = function(target, effect)
     target:setMod(xi.mod.AFFLATUS_MISERY, 0)
 
     --Clean Up Afflatus Misery Bonuses
     local accuracyBonus = effect:getSubPower()
-    --printf("AUSPICE: Removing Accuracy Bonus +%d!", accuracyBonus)
+
     target:delMod(xi.mod.ACC, accuracyBonus)
 
     if (target:hasStatusEffect(xi.effect.AUSPICE)) then
@@ -32,4 +32,4 @@ effect_object.onEffectLose = function(target, effect)
     end
 end
 
-return effect_object
+return effectObject

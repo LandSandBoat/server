@@ -3003,6 +3003,7 @@ xi.keyItem =
     WIVRE_COMPANION                          = 3101,
     RED_RAPTOR_COMPANION                     = 3102,
     IRON_GIANT_COMPANION                     = 3103,
+    BYAKKO_COMPANION                         = 3104,
 
     SHEET_OF_SHADOW_LORD_TUNES               = 3136,
     MYSTICAL_CANTEEN                         = 3137,

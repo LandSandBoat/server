@@ -123,7 +123,7 @@ quest.sections =
             return status == QUEST_AVAILABLE and
                 player:hasCompletedQuest(xi.quest.log_id.WINDURST, xi.quest.id.windurst.THE_TENSHODO_SHOWDOWN) and
                 player:getMainJob() == xi.job.THF and
-                player:getMainLvl() >= xi.settings.AF2_QUEST_LEVEL
+                player:getMainLvl() >= xi.settings.main.AF2_QUEST_LEVEL
         end,
 
         [xi.zone.WINDURST_WOODS] =
@@ -266,7 +266,7 @@ quest.sections =
         {
             ['Gambilox_Wanderling'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if quest:getVar(player, 'Prog') == 4 then
                         quest:setVar(player, 'Prog', 5)
                     end
