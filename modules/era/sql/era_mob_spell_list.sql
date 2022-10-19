@@ -1,4 +1,7 @@
-
+-- --------------------------------------------------------
+-- AirSkyBoat Database Conversion File
+-- Deletes OOE spells from spell lists
+-- --------------------------------------------------------
 
 LOCK TABLES `mob_spell_lists` WRITE;
 
