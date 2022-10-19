@@ -33,6 +33,7 @@ abilityObject.onPetAbility = function(target, pet, skill)
     damage = xi.mobskills.mobMagicalMove(pet, target, skill, damage, xi.magic.ele.LIGHTNING, 1, xi.mobskills.magicalTpBonus.NO_EFFECT, 0)
     damage = xi.mobskills.mobAddBonuses(pet, target, damage.dmg, xi.magic.ele.LIGHTNING)
     damage = xi.summon.avatarFinalAdjustments(damage, pet, skill, target, xi.attackType.MAGICAL, xi.damageType.LIGHTNING, 1)
+	damage = damage * xi.settings.main.AVATAR_DAMAGE_MOD
 
     target:takeDamage(damage, pet, xi.attackType.MAGICAL, xi.damageType.LIGHTNING)
     target:updateEnmityFromDamage(pet, damage)
