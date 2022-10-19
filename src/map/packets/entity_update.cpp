@@ -234,9 +234,32 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
         break;
     }
 
+    // Slightly bigger packet to encompass both name and model on first spawn, and only for dynamic entities.
+    if (type == ENTITY_SPAWN && PEntity->isRenamed && PEntity->look.size == MODEL_EQUIPPED && PEntity->targid >= 0x700)
+    {
+        this->setSize(0x56);
+
+        // Temporarily override UpdateFlags (0x0A) to perform black magic:
+        ref<uint8>(0x0A) = 0x57; // Carefully chosen bits to make FUNC_Packet_Incoming_0x000E behave (Same type as first 0x00E Fellow packet)
+        ref<uint8>(0x18) = 0x01; // Copy longer name in FUNC_Packet_Incoming_0x000E
+
+        std::memcpy(data + 0x30, &PEntity->look, sizeof(look_t));
+
+        auto name       = PEntity->packetName;
+        auto nameOffset = 0x44;
+        auto maxLength  = std::min<size_t>(name.size(), PacketNameLength);
+
+        // Make sure to zero-out the existing name area of the packet
+        auto start = data + nameOffset;
+        auto size  = this->getSize();
+        std::memset(start, 0U, size);
+
+        // Copy in name
+        std::memcpy(start, name.c_str(), maxLength);
+    }
     // If the entity has been renamed, we have to re-send the name during every update.
     // Otherwise it will revert to it's default name (if applicable).
-    if (PEntity->isRenamed)
+    else if (PEntity->isRenamed)
     {
         updatemask |= UPDATE_NAME;
         ref<uint8>(0x0A) |= updatemask;
@@ -261,56 +284,5 @@ void CEntityUpdatePacket::updateWith(CBaseEntity* PEntity, ENTITYUPDATE type, ui
 
         // Copy in name
         std::memcpy(start, name.c_str(), maxLength);
-    }
-
-    // If renamed and equipped, both look and name data are written around 0x30 and 0x34: overlapping with eachother.
-    // Since update packets are sent quite often, we can alternate between look and name updates by switching on/off
-    // this localVar.
-    // NOTE: Look has to be sent first!
-    // alternate == 0: send look, don't send name
-    // alternate == 1: send name, don't send look
-    if (PEntity->isRenamed && PEntity->look.size == MODEL_EQUIPPED)
-    {
-        // NOTE: These sections below are the same as the sections above; repeated so that
-        // the flip-flopping logic doesn't interfere with regular entity updates.
-        if (PEntity->GetLocalVar("AlternateNameAndLook") == 0)
-        {
-            updatemask |= UPDATE_LOOK | UPDATE_HP;
-            ref<uint8>(0x0A) |= updatemask;
-
-            this->setSize(0x48);
-
-            std::memcpy(data + 0x30, &PEntity->look, sizeof(look_t));
-
-            PEntity->SetLocalVar("AlternateNameAndLook", 1);
-        }
-        else
-        {
-            updatemask |= UPDATE_NAME | UPDATE_HP;
-            ref<uint8>(0x0A) |= updatemask;
-
-            this->setSize(0x48);
-
-            auto name       = PEntity->packetName;
-            auto nameOffset = 0x34;
-            auto maxLength  = std::min<size_t>(name.size(), PacketNameLength);
-
-            // Mobs and NPC's targid's live in the range 0-1023
-            if (PEntity->targid < 1024)
-            {
-                ref<uint16>(0x34) = 0x01;
-                nameOffset        = 0x35;
-            }
-
-            // Make sure to zero-out the existing name area of the packet
-            auto start = data + nameOffset;
-            auto size  = this->getSize();
-            std::memset(start, 0U, size);
-
-            // Copy in name
-            std::memcpy(start, name.c_str(), maxLength);
-
-            PEntity->SetLocalVar("AlternateNameAndLook", 0);
-        }
     }
 }
