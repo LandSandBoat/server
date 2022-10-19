@@ -3,7 +3,7 @@
 --  Mob: Duke Amduscias
 -- BCNM: Kindred Spirits
 -----------------------------------
-mixins = {require("scripts/mixins/job_special")}
+mixins = { require("scripts/mixins/job_special") }
 -----------------------------------
 local entity = {}
 
@@ -12,7 +12,7 @@ entity.onMobInitialize = function(mob)
     mob:addMod(xi.mod.LULLABYRES, 75)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

@@ -60,8 +60,8 @@ entity.onMobRoam = function(mob)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller or optParams.noKiller then
         local spawn = math.random(3) == 1
         local battlefield = mob:getBattlefield()
         if GetNPCByID(ID.npc.TEMENOS_W_GATE[3]):getAnimation() == xi.animation.CLOSE_DOOR then

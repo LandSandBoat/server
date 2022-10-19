@@ -135,7 +135,6 @@ duration CTaskMgr::DoTimer(time_point tick)
             }
             break;
         }
-        diff = std::clamp<duration>(diff, 50ms, 1000ms);
     }
-    return diff;
+    return std::clamp<duration>(diff, 50ms, 1000ms);
 }

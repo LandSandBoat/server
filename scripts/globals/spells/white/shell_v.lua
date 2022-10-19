@@ -3,9 +3,9 @@
 -----------------------------------
 require("scripts/globals/spells/enhancing_spell")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     if caster:isMob() and target:hasStatusEffect(xi.effect.SHELL) then
         return 1
     else
@@ -13,8 +13,8 @@ spell_object.onMagicCastingCheck = function(caster, target, spell)
     end
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     return xi.spells.enhancing.useEnhancingSpell(caster, target, spell)
 end
 
-return spell_object
+return spellObject

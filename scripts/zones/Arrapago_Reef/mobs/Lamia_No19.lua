@@ -12,7 +12,7 @@ entity.onMobEngaged = function(mob, target)
     SpawnMob(mobId+2):updateEnmity(target)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

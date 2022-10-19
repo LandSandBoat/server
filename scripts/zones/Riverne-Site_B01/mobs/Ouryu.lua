@@ -7,7 +7,7 @@ require("scripts/globals/status")
 -----------------------------------
 local entity = {}
 
-local offsets = {4, 5, 6, 7}
+local offsets = { 4, 5, 6, 7 }
 
 entity.onMobSpawn = function(mob)
     mob:SetMobSkillAttack(0)

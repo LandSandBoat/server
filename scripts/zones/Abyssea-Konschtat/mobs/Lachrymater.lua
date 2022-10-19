@@ -10,7 +10,7 @@ entity.onMobSpawn = function(mob ,target)
     mob:setSpellList(188 + DayOfTheWeek)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

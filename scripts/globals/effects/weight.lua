@@ -3,19 +3,21 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local effect_object = {}
+local effectObject = {}
 
-effect_object.onEffectGain = function(target, effect)
-    target:setSpeed(target:getSpeed() - effect:getPower())
+effectObject.onEffectGain = function(target, effect)
+    local moveMod = (effect:getPower() / (50 + xi.settings.map.SPEED_MOD)) * -100
+    target:addMod(xi.mod.MOVE, moveMod)
     target:addMod(xi.mod.EVA, -10)
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
 end
 
-effect_object.onEffectLose = function(target, effect)
-    target:setSpeed(target:getSpeed() + effect:getPower())
+effectObject.onEffectLose = function(target, effect)
+    local moveMod = (effect:getPower() / (50 + xi.settings.map.SPEED_MOD)) * -100
+    target:delMod(xi.mod.MOVE, moveMod)
     target:delMod(xi.mod.EVA, -10)
 end
 
-return effect_object
+return effectObject

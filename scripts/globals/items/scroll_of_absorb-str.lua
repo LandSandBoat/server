@@ -3,14 +3,14 @@
 -- Scroll of Absorb-STR
 -- Teaches the black magic Absorb-STR
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(266)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(266)
 end
 
-return item_object
+return itemObject

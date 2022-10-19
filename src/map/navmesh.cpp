@@ -432,6 +432,13 @@ bool CNavMesh::validPosition(const position_t& position)
 
 bool CNavMesh::findClosestValidPoint(const position_t& position, float* validPoint)
 {
+    TracyZoneScoped;
+
+    if (!m_navMesh)
+    {
+        return true;
+    }
+
     float spos[3];
     CNavMesh::ToDetourPos(&position, spos);
 
@@ -459,6 +466,13 @@ bool CNavMesh::findClosestValidPoint(const position_t& position, float* validPoi
 
 bool CNavMesh::findFurthestValidPoint(const position_t& startPosition, const position_t& endPosition, float* validEndPoint)
 {
+    TracyZoneScoped;
+
+    if (!m_navMesh)
+    {
+        return true;
+    }
+
     float spos[3];
     CNavMesh::ToDetourPos(&startPosition, spos);
 
@@ -538,6 +552,11 @@ void CNavMesh::snapToValidPosition(position_t& position)
 bool CNavMesh::onSameFloor(const position_t& start, float* spos, const position_t& end, float* epos, dtQueryFilter& filter)
 {
     TracyZoneScoped;
+
+    if (!m_navMesh)
+    {
+        return true;
+    }
 
     float verticalDistance = abs(start.y - end.y);
     if (verticalDistance > 2 * verticalLimit)

@@ -15,6 +15,10 @@ entity.onMobSpawn = function(mob)
     mob:setMobMod(xi.mobMod.DRAW_IN, 1)
     mob:setMobMod(xi.mobMod.DRAW_IN_INCLUDE_PARTY, 1)
     mob:setMobMod(xi.mobMod.DRAW_IN_CUSTOM_RANGE, 15)
+    mob:setMobMod(xi.mobMod.MAGIC_COOL, math.random(20,30))
+    mob:setMod(xi.mod.SLEEPRES, 100)
+    mob:setMod(xi.mod.STUNRES, 100)
+    mob:setMod(xi.mod.SILENCERES, 100)
 
     -- Failsafe to make sure NPC is down when NM is up
     if xi.settings.main.OLDSCHOOL_G2 then
@@ -22,7 +26,7 @@ entity.onMobSpawn = function(mob)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     if xi.settings.main.OLDSCHOOL_G2 then
         -- show ??? for desired duration
         -- notify people on the quest who need the KI

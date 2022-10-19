@@ -7,9 +7,9 @@ require('scripts/globals/titles')
 require('scripts/globals/helm')
 require('scripts/globals/zone')
 -----------------------------------
-local zone_object = {}
+local zoneObject = {}
 
-zone_object.onInitialize = function(zone)
+zoneObject.onInitialize = function(zone)
     if xi.settings.main.ENABLE_TOAU == 1 then
         UpdateNMSpawnPoint(ID.mob.AYNU_KAYSEY)
         GetMobByID(ID.mob.AYNU_KAYSEY):setRespawnTime(math.random(900, 10800))
@@ -19,7 +19,7 @@ zone_object.onInitialize = function(zone)
     xi.helm.initZone(zone, xi.helm.type.LOGGING)
 end
 
-zone_object.onZoneIn = function(player, prevZone)
+zoneObject.onZoneIn = function(player, prevZone)
     local cs = -1
 
     if player:getXPos() == 0 and player:getYPos() == 0 and player:getZPos() == 0 then
@@ -37,20 +37,20 @@ zone_object.onZoneIn = function(player, prevZone)
     return cs
 end
 
-zone_object.afterZoneIn = function(player)
+zoneObject.afterZoneIn = function(player)
     player:entityVisualPacket("1pb1")
     player:entityVisualPacket("2pb1")
     player:entityVisualPacket("1pd1")
     player:entityVisualPacket("2pc1")
 end
 
-zone_object.onRegionEnter = function(player, region)
+zoneObject.onRegionEnter = function(player, region)
 end
 
-zone_object.onEventUpdate = function(player, csid, option)
+zoneObject.onEventUpdate = function(player, csid, option)
 end
 
-zone_object.onEventFinish = function(player, csid, option)
+zoneObject.onEventFinish = function(player, csid, option)
     if csid == 133 then -- enter instance, warp to periqia
         player:setPos(0, 0, 0, 0, 56)
     elseif csid == 130 then
@@ -58,4 +58,4 @@ zone_object.onEventFinish = function(player, csid, option)
     end
 end
 
-return zone_object
+return zoneObject

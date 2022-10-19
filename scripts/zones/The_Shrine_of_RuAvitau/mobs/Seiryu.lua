@@ -22,7 +22,7 @@ entity.onMobMagicPrepare = function(mob, target, spellId)
     return 0 -- Still need a return, so use 0 when not casting
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

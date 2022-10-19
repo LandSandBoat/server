@@ -8,9 +8,9 @@
 -----------------------------------------
 require("scripts/globals/status")
 -----------------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     local result = 0
     if target:getMod(xi.mod.ALBATROSS_RING_EFFECT) == 1 then
         result = xi.msg.basic.ITEM_UNABLE_TO_USE_2
@@ -18,9 +18,16 @@ item_object.onItemCheck = function(target)
     return result
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addStatusEffectEx(xi.effect.ENCHANTMENT, xi.effect.ENCHANTMENT, 0, 3, 1200)
+end
+
+itemObject.onEffectGain = function(target, effect)
     target:addMod(xi.mod.ALBATROSS_RING_EFFECT, 1200)
 end
 
-return item_object
+itemObject.onEffectLose = function(target, effect)
+    target:delMod(xi.mod.ALBATROSS_RING_EFFECT, 1200)
+end
+
+return itemObject

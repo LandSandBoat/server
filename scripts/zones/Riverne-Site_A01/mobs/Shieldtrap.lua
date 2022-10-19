@@ -7,7 +7,7 @@ require("scripts/globals/mobs")
 -----------------------------------
 local entity = {}
 
-local spellLists = {17,13,15,12,14, 16, 19, 18}
+local spellLists = { 17,13,15,12,14, 16, 19, 18 }
 
 entity.onMobSpawn = function(mob)
     local day = VanadielDayOfTheWeek()
@@ -25,7 +25,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.mobOnDeath = function(mob, player, isKiller)
+entity.mobOnDeath = function(mob, player, optParams)
 end
 
 return entity

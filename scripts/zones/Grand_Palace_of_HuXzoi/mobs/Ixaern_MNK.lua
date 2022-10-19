@@ -79,7 +79,7 @@ entity.onMobEngaged = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     local mobID = mob:getID()
     for i = mobID+1, mobID+2 do
         local m = GetMobByID(i)

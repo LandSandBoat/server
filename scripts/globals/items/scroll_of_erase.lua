@@ -3,14 +3,14 @@
 -- Scroll of Erase
 -- Teaches the white magic Erase
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(143)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(143)
 end
 
-return item_object
+return itemObject

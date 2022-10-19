@@ -5,13 +5,13 @@
 local ID = require("scripts/zones/FeiYin/IDs")
 require("scripts/globals/keyitems")
 -----------------------------------
-local effect_object = {}
+local effectObject = {}
 
-effect_object.onEffectGain = function(target, effect)
+effectObject.onEffectGain = function(target, effect)
     target:setCharVar("SEED_AFTERGLOW_TIMER", 1)
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
     local halfMinutes = target:getCharVar("SEED_AFTERGLOW_TIMER")
 
     if (halfMinutes == 1) then
@@ -28,7 +28,7 @@ effect_object.onEffectTick = function(target, effect)
     end
 end
 
-effect_object.onEffectLose = function(target, effect)
+effectObject.onEffectLose = function(target, effect)
     if (target:hasKeyItem(xi.ki.MARK_OF_SEED) == false and target:hasKeyItem(xi.ki.AZURE_KEY) == false) then
         target:messageSpecial(ID.text.MARK_OF_SEED_HAS_VANISHED)
     end
@@ -37,4 +37,4 @@ effect_object.onEffectLose = function(target, effect)
     target:setCharVar("SEED_AFTERGLOW_INTENSITY", 0)
 end
 
-return effect_object
+return effectObject

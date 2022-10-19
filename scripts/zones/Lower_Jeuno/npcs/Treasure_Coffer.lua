@@ -70,33 +70,33 @@ local prizes =
 
     [xi.ki.VIRIDIAN_KEY] =
     {
-        {cutoff =   65, itemId = 13639}, -- Aurora Mantle
-        {cutoff =  142, itemId = 13271}, -- Corsette
-        {cutoff =  237, itemId = 12364}, -- Nymph Shield
-        {cutoff =  356, itemId = 13570}, -- Ram Mantle
-        {cutoff =  457, itemId = 13198}, -- Swordbelt
-        {cutoff =  463, itemId = 13207}, -- Brocade Obi
-        {cutoff =  469, itemId =   793}, -- Black Pearl
-        {cutoff =  497, itemId =   775}, -- Black Rock
-        {cutoff =  515, itemId =   770}, -- Blue Rock
-        {cutoff =  616, itemId =  4145}, -- Elixir
-        {cutoff =  670, itemId =  4129}, -- Ether +1
-        {cutoff =  676, itemId =   790}, -- Garnet
-        {cutoff =  672, itemId =   808}, -- Goshenite
-        {cutoff =  684, itemId =   772}, -- Green Rock
-        {cutoff =  775, itemId =   699}, -- Oak Log
-        {cutoff =  811, itemId =   792}, -- Pearl
-        {cutoff =  829, itemId =   788}, -- Peridot
-        {cutoff =  835, itemId =   738}, -- Platinum Ore
-        {cutoff =  871, itemId =  4113}, -- Potion +1
-        {cutoff =  877, itemId =   774}, -- Purple Rock
-        {cutoff =  901, itemId =   769}, -- Red Rock
-        {cutoff =  984, itemId =   701}, -- Rosewood Log
-        {cutoff = 1008, itemId =   815}, -- Sphene
-        {cutoff = 1020, itemId =   773}, -- Translucent Rock
-        {cutoff = 1032, itemId =   776}, -- White Rock
-        {cutoff = 1044, itemId =   771}, -- Yellow Rock
-        {cutoff = 1056, itemId =   798}, -- Turquoise
+        { cutoff =   65, itemId = 13639 }, -- Aurora Mantle
+        { cutoff =  142, itemId = 13271 }, -- Corsette
+        { cutoff =  237, itemId = 12364 }, -- Nymph Shield
+        { cutoff =  356, itemId = 13570 }, -- Ram Mantle
+        { cutoff =  457, itemId = 13198 }, -- Swordbelt
+        { cutoff =  463, itemId = 13207 }, -- Brocade Obi
+        { cutoff =  469, itemId =   793 }, -- Black Pearl
+        { cutoff =  497, itemId =   775 }, -- Black Rock
+        { cutoff =  515, itemId =   770 }, -- Blue Rock
+        { cutoff =  616, itemId =  4145 }, -- Elixir
+        { cutoff =  670, itemId =  4129 }, -- Ether +1
+        { cutoff =  676, itemId =   790 }, -- Garnet
+        { cutoff =  672, itemId =   808 }, -- Goshenite
+        { cutoff =  684, itemId =   772 }, -- Green Rock
+        { cutoff =  775, itemId =   699 }, -- Oak Log
+        { cutoff =  811, itemId =   792 }, -- Pearl
+        { cutoff =  829, itemId =   788 }, -- Peridot
+        { cutoff =  835, itemId =   738 }, -- Platinum Ore
+        { cutoff =  871, itemId =  4113 }, -- Potion +1
+        { cutoff =  877, itemId =   774 }, -- Purple Rock
+        { cutoff =  901, itemId =   769 }, -- Red Rock
+        { cutoff =  984, itemId =   701 }, -- Rosewood Log
+        { cutoff = 1008, itemId =   815 }, -- Sphene
+        { cutoff = 1020, itemId =   773 }, -- Translucent Rock
+        { cutoff = 1032, itemId =   776 }, -- White Rock
+        { cutoff = 1044, itemId =   771 }, -- Yellow Rock
+        { cutoff = 1056, itemId =   798 }, -- Turquoise
     },
 
     [xi.ki.AMBER_KEY] =
@@ -231,21 +231,21 @@ local prizes =
 
     [xi.ki.BLUE_CORAL_KEY] =
     {
-        {cutoff =   42, itemId = 12571}, -- Cuir Bouilli
-        {cutoff =  250, itemId = 14118}, -- Iron Greaves
-        {cutoff =  292, itemId = 12866}, -- Linen Slacks
-        {cutoff =  375, itemId = 12450}, -- Padded Cap
-        {cutoff =  458, itemId = 12731}, -- Velvet Cuffs
-        {cutoff =  500, itemId =   793}, -- Black Pearl
-        {cutoff =  583, itemId =  4145}, -- Elixir
-        {cutoff =  625, itemId =  4129}, -- Ether +1
-        {cutoff =  667, itemId =   790}, -- Garnet
-        {cutoff =  709, itemId =   788}, -- Peridot
-        {cutoff =  751, itemId =  4113}, -- Potion +1
-        {cutoff =  876, itemId =   699}, -- Oak Log
-        {cutoff =  918, itemId =   830}, -- Rainbow Cloth
-        {cutoff =  960, itemId =   769}, -- Red Rock
-        {cutoff = 1002, itemId =   798}, -- Turquoise
+        { cutoff =   42, itemId = 12571 }, -- Cuir Bouilli
+        { cutoff =  250, itemId = 14118 }, -- Iron Greaves
+        { cutoff =  292, itemId = 12866 }, -- Linen Slacks
+        { cutoff =  375, itemId = 12450 }, -- Padded Cap
+        { cutoff =  458, itemId = 12731 }, -- Velvet Cuffs
+        { cutoff =  500, itemId =   793 }, -- Black Pearl
+        { cutoff =  583, itemId =  4145 }, -- Elixir
+        { cutoff =  625, itemId =  4129 }, -- Ether +1
+        { cutoff =  667, itemId =   790 }, -- Garnet
+        { cutoff =  709, itemId =   788 }, -- Peridot
+        { cutoff =  751, itemId =  4113 }, -- Potion +1
+        { cutoff =  876, itemId =   699 }, -- Oak Log
+        { cutoff =  918, itemId =   830 }, -- Rainbow Cloth
+        { cutoff =  960, itemId =   769 }, -- Red Rock
+        { cutoff = 1002, itemId =   798 }, -- Turquoise
     },
 
     [xi.ki.PEACH_CORAL_KEY] =
@@ -352,25 +352,25 @@ local prizes =
 
     [xi.ki.BIRD_KEY] =
     {
-        {cutoff = 143, itemId = 12987}, -- Ebony Sabots
-        {cutoff = 393, itemId = 13783}, -- Iron Scale Mail
-        {cutoff = 536, itemId = 12293}, -- Oak Shield
-        {cutoff = 653, itemId = 13200}, -- Waistbelt
-        {cutoff = 663, itemId =   793}, -- Black Pearl
-        {cutoff = 678, itemId =   770}, -- Blue Rock
-        {cutoff = 770, itemId =  4145}, -- Elixir
-        {cutoff = 801, itemId =  4129}, -- Ether +1
-        {cutoff = 816, itemId =   808}, -- Goshenite
-        {cutoff = 847, itemId =   699}, -- Oak Log
-        {cutoff = 852, itemId =   792}, -- Pearl
-        {cutoff = 862, itemId =   788}, -- Peridot
-        {cutoff = 871, itemId =  4113}, -- Potion +1
-        {cutoff = 922, itemId =   701}, -- Rosewood Log
-        {cutoff = 927, itemId =   815}, -- Sphene
-        {cutoff = 947, itemId =   773}, -- Translucent Rock
-        {cutoff = 957, itemId =   776}, -- White Rock
-        {cutoff = 967, itemId =   771}, -- Yellow Rock
-        {cutoff = 972, itemId =   774}, -- Purple Rock
+        { cutoff = 143, itemId = 12987 }, -- Ebony Sabots
+        { cutoff = 393, itemId = 13783 }, -- Iron Scale Mail
+        { cutoff = 536, itemId = 12293 }, -- Oak Shield
+        { cutoff = 653, itemId = 13200 }, -- Waistbelt
+        { cutoff = 663, itemId =   793 }, -- Black Pearl
+        { cutoff = 678, itemId =   770 }, -- Blue Rock
+        { cutoff = 770, itemId =  4145 }, -- Elixir
+        { cutoff = 801, itemId =  4129 }, -- Ether +1
+        { cutoff = 816, itemId =   808 }, -- Goshenite
+        { cutoff = 847, itemId =   699 }, -- Oak Log
+        { cutoff = 852, itemId =   792 }, -- Pearl
+        { cutoff = 862, itemId =   788 }, -- Peridot
+        { cutoff = 871, itemId =  4113 }, -- Potion +1
+        { cutoff = 922, itemId =   701 }, -- Rosewood Log
+        { cutoff = 927, itemId =   815 }, -- Sphene
+        { cutoff = 947, itemId =   773 }, -- Translucent Rock
+        { cutoff = 957, itemId =   776 }, -- White Rock
+        { cutoff = 967, itemId =   771 }, -- Yellow Rock
+        { cutoff = 972, itemId =   774 }, -- Purple Rock
     },
 
     [xi.ki.CACTUAR_KEY] =

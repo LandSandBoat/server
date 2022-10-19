@@ -2,7 +2,7 @@
 -- Area: Promyvion-Vahzl
 --   NM: Wailer
 -----------------------------------
-mixins = {require("scripts/mixins/families/empty_terroanima")}
+mixins = { require("scripts/mixins/families/empty_terroanima") }
 -----------------------------------
 local entity = {}
 

@@ -112,7 +112,7 @@ quest.sections =
 
             ['Bullheaded_Grosvez'] =
             {
-                onMobDeath = function(mob, player, isKiller, firstCall)
+                onMobDeath = function(mob, player, optParams)
                     if quest:getVar(player, 'prog') == 1 then
                         quest:setVar(player, 'prog', 2)
                     end

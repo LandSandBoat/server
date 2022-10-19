@@ -10,7 +10,7 @@ entity.onMobSpawn = function(mob)
     mob:addMod(xi.mod.REGEN, 120)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     GetMobByID(ID.mob.SHEN):setLocalVar("filtrateDeath", 1)
 end
 

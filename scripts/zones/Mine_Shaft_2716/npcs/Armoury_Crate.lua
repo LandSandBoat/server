@@ -1,10 +1,16 @@
 -----------------------------------
 -- Area: Mine Shaft #2716
---  NPC: Armoury Crate
+-- NPC: Armoury Crate
+-- Note: A loot offset is used to differentuate loot
+--  tables based on race vs job as they share similar
+--  int values to represent them. All race values are
+--  offset by 20.
 -----------------------------------
 require("scripts/globals/battlefield")
 -----------------------------------
 local entity = {}
+
+local lootOffset = 20
 
 local loot =
 {
@@ -39,7 +45,7 @@ local loot =
     },
 
     -- Automaton Assault Hume
-    [xi.race.HUME_M] =
+    [xi.race.HUME_M + lootOffset] =
     {
         {
             { itemid = 0,    droprate = 800 }, -- Nothing
@@ -56,7 +62,7 @@ local loot =
     },
 
     -- Automaton Assault Elvaan
-    [xi.race.ELVAAN_M] =
+    [xi.race.ELVAAN_M + lootOffset] =
     {
         {
             { itemid = 0,    droprate = 800 }, -- Nothing
@@ -73,7 +79,7 @@ local loot =
     },
 
     -- Automaton Assault Taru
-    [xi.race.TARU_M] =
+    [xi.race.TARU_M + lootOffset] =
     {
         {
             { itemid = 0,    droprate = 800 }, -- Nothing
@@ -90,7 +96,7 @@ local loot =
     },
 
     -- Automaton Assault Mithra
-    [xi.race.MITHRA] =
+    [xi.race.MITHRA + lootOffset] =
     {
         {
             { itemid = 0,    droprate = 800 }, -- Nothing
@@ -107,7 +113,7 @@ local loot =
     },
 
     -- Automaton Assault Galka
-    [xi.race.GALKA] =
+    [xi.race.GALKA + lootOffset] =
     {
         {
             { itemid = 0,    droprate = 800 }, -- Nothing
@@ -289,7 +295,7 @@ entity.onTrigger = function(player, npc)
                 raceLoot = raceLoot - 1
             end
         end
-        xi.battlefield.HandleLootRolls(battlefield, loot[raceLoot], nil, npc)
+        xi.battlefield.HandleLootRolls(battlefield, loot[raceLoot + lootOffset], nil, npc)
 
     elseif bfID == 739 then
         xi.battlefield.HandleLootRolls(battlefield, loot[player:getMainJob()], nil, npc)

@@ -33,6 +33,6 @@ struct chat_message_t
     zmq::message_t packet;
 };
 
-void message_server_init();
+void message_server_init(const bool& requestExit);
 void message_server_close();
 void queue_message(uint64 ipp, MSGSERVTYPE type, zmq::message_t* extra, zmq::message_t* packet);

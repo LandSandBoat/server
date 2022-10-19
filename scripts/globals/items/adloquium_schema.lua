@@ -3,14 +3,14 @@
 -- Item: Adloquium Schema
 -- Teaches the white magic Adloquium
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(495)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(495)
 end
 
-return item_object
+return itemObject

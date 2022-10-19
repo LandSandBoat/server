@@ -394,15 +394,17 @@ uint16 CBattleEntity::GetMainWeaponDmg()
     {
         if ((weapon->getReqLvl() > GetMLevel()) && objtype == TYPE_PC)
         {
+            // TODO: Determine the difference between augments and latents w.r.t. equipment scaling.
+            // MAIN_DMG_RATING already has equipment scaling applied elsewhere.
             uint16 dmg = weapon->getDamage();
             dmg *= GetMLevel() * 3;
             dmg /= 4;
             dmg /= weapon->getReqLvl();
-            return dmg + getMod(Mod::MAIN_DMG_RATING);
+            return dmg + weapon->getModifier(Mod::DMG_RATING) + getMod(Mod::MAIN_DMG_RATING);
         }
         else
         {
-            return weapon->getDamage() + getMod(Mod::MAIN_DMG_RATING);
+            return weapon->getDamage() + weapon->getModifier(Mod::DMG_RATING) + getMod(Mod::MAIN_DMG_RATING);
         }
     }
     return 0;
@@ -419,11 +421,11 @@ uint16 CBattleEntity::GetSubWeaponDmg()
             dmg *= GetMLevel() * 3;
             dmg /= 4;
             dmg /= weapon->getReqLvl();
-            return dmg + getMod(Mod::SUB_DMG_RATING);
+            return dmg + weapon->getModifier(Mod::DMG_RATING) + getMod(Mod::SUB_DMG_RATING);
         }
         else
         {
-            return weapon->getDamage() + getMod(Mod::SUB_DMG_RATING);
+            return weapon->getDamage() + weapon->getModifier(Mod::DMG_RATING) + getMod(Mod::SUB_DMG_RATING);
         }
     }
     return 0;
@@ -448,11 +450,11 @@ uint16 CBattleEntity::GetRangedWeaponDmg()
             scaleddmg *= GetMLevel() * 3;
             scaleddmg /= 4;
             scaleddmg /= weapon->getReqLvl();
-            dmg += scaleddmg;
+            dmg += scaleddmg + weapon->getModifier(Mod::DMG_RATING);
         }
         else
         {
-            dmg += weapon->getDamage();
+            dmg += weapon->getDamage() + weapon->getModifier(Mod::DMG_RATING);
         }
     }
     if (auto* ammo = dynamic_cast<CItemWeapon*>(m_Weapons[SLOT_AMMO]))
@@ -463,11 +465,11 @@ uint16 CBattleEntity::GetRangedWeaponDmg()
             scaleddmg *= GetMLevel() * 3;
             scaleddmg /= 4;
             scaleddmg /= ammo->getReqLvl();
-            dmg += scaleddmg;
+            dmg += scaleddmg + ammo->getModifier(Mod::DMG_RATING);
         }
         else
         {
-            dmg += ammo->getDamage();
+            dmg += ammo->getDamage() + ammo->getModifier(Mod::DMG_RATING);
         }
     }
     return dmg + getMod(Mod::RANGED_DMG_RATING);
@@ -601,7 +603,7 @@ int32 CBattleEntity::addMP(int32 mp)
 int32 CBattleEntity::takeDamage(int32 amount, CBattleEntity* attacker /* = nullptr*/, ATTACK_TYPE attackType /* = ATTACK_NONE*/,
                                 DAMAGE_TYPE damageType /* = DAMAGE_NONE*/)
 {
-    if (this->GetLocalVar("DAMAGE_NULL") != 0)
+    if (this->GetLocalVar("DAMAGE_NULL") == 1)
     {
         amount %= 2;
         this->SetLocalVar("DAMAGE_DEALT", amount);
@@ -717,7 +719,7 @@ uint16 CBattleEntity::ATT(uint16 slot)
     {
         ATT += this->GetSkill(SKILL_AUTOMATON_MELEE);
     }
-    return ATT + (ATT * m_modStat[Mod::ATTP] / 100) + std::min<int16>((ATT * m_modStat[Mod::FOOD_ATTP] / 100), m_modStat[Mod::FOOD_ATT_CAP]);
+    return std::clamp(ATT + (ATT * m_modStat[Mod::ATTP] / 100) + std::min<int16>((ATT * m_modStat[Mod::FOOD_ATTP] / 100), m_modStat[Mod::FOOD_ATT_CAP]), 0, 65535);
 }
 
 uint16 CBattleEntity::RATT(uint8 skill, float distance, uint16 bonusSkill)
@@ -732,7 +734,7 @@ uint16 CBattleEntity::RATT(uint8 skill, float distance, uint16 bonusSkill)
     {
         ATT = int32((float)ATT * battleutils::GetRangedDistanceCorrection(this, distance));
     }
-    return ATT + (ATT * m_modStat[Mod::RATTP] / 100) + std::min<int16>((ATT * m_modStat[Mod::FOOD_RATTP] / 100), m_modStat[Mod::FOOD_RATT_CAP]);
+    return std::clamp(ATT + (ATT * m_modStat[Mod::RATTP] / 100) + std::min<int16>((ATT * m_modStat[Mod::FOOD_RATTP] / 100), m_modStat[Mod::FOOD_RATT_CAP]), 0, 65535);
 }
 
 uint16 CBattleEntity::GetBaseRATT(uint8 skill, uint16 bonusSkill)
@@ -743,7 +745,7 @@ uint16 CBattleEntity::GetBaseRATT(uint8 skill, uint16 bonusSkill)
         return 0;
     }
     int32 ATT = 8 + GetSkill(skill) + bonusSkill + m_modStat[Mod::RATT] + battleutils::GetRangedAttackBonuses(this) + (STR() * 3) / 4;
-    return ATT + (ATT * m_modStat[Mod::RATTP] / 100) + std::min<int16>((ATT * m_modStat[Mod::FOOD_RATTP] / 100), m_modStat[Mod::FOOD_RATT_CAP]);
+    return std::clamp(ATT + (ATT * m_modStat[Mod::RATTP] / 100) + std::min<int16>((ATT * m_modStat[Mod::FOOD_RATTP] / 100), m_modStat[Mod::FOOD_RATT_CAP]), 0, 65535);
 }
 
 uint16 CBattleEntity::RACC(uint8 skill, float distance, uint16 bonusSkill)
@@ -770,7 +772,7 @@ uint16 CBattleEntity::RACC(uint8 skill, float distance, uint16 bonusSkill)
             acc = int32((float)acc * battleutils::GetRangedDistanceCorrection(this, distance));
         }
     }
-    return acc + std::min<int16>(((100 + getMod(Mod::FOOD_RACCP) * acc) / 100), getMod(Mod::FOOD_RACC_CAP));
+    return std::clamp(acc + std::min<int16>(((100 + getMod(Mod::FOOD_RACCP) * acc) / 100), getMod(Mod::FOOD_RACC_CAP)), 0, 65535);
 }
 
 uint16 CBattleEntity::GetBaseRACC(uint8 skill, uint16 bonusSkill)
@@ -790,7 +792,7 @@ uint16 CBattleEntity::GetBaseRACC(uint8 skill, uint16 bonusSkill)
     acc += getMod(Mod::RACC);
     acc += battleutils::GetRangedAccuracyBonuses(this);
     acc += AGI() / 2;
-    return acc + std::min<int16>(((100 + getMod(Mod::FOOD_RACCP) * acc) / 100), getMod(Mod::FOOD_RACC_CAP));
+    return std::clamp(acc + std::min<int16>(((100 + getMod(Mod::FOOD_RACCP) * acc) / 100), getMod(Mod::FOOD_RACC_CAP)), 0, 65535);
 }
 
 uint16 CBattleEntity::ACC(uint8 attackNumber, uint8 offsetAccuracy)
@@ -875,12 +877,24 @@ uint16 CBattleEntity::ACC(uint8 attackNumber, uint8 offsetAccuracy)
 uint16 CBattleEntity::DEF()
 {
     int32 DEF = 8 + m_modStat[Mod::DEF] + VIT() / 2;
+
     if (this->StatusEffectContainer->HasStatusEffect(EFFECT_COUNTERSTANCE, 0))
     {
-        return DEF / 2;
+        DEF = 1 + VIT() / 2;
+
+        if (this->StatusEffectContainer->HasStatusEffect(EFFECT_MINNE))
+        {
+            DEF += this->StatusEffectContainer->GetStatusEffect(EFFECT_MINNE)->GetPower();
+        }
+
+        int32 defModApplicatble = 0;
+
+        defModApplicatble += std::clamp((DEF * std::clamp((int)m_modStat[Mod::DEFP], -100, 0) / 100), -999, 0);
+
+        return std::clamp(DEF + defModApplicatble, 0, 65535);
     }
 
-    return DEF + (DEF * m_modStat[Mod::DEFP] / 100) + std::min<int16>((DEF * m_modStat[Mod::FOOD_DEFP] / 100), m_modStat[Mod::FOOD_DEF_CAP]);
+    return std::clamp(DEF + (DEF * m_modStat[Mod::DEFP] / 100) + std::min<int16>((DEF * m_modStat[Mod::FOOD_DEFP] / 100), m_modStat[Mod::FOOD_DEF_CAP]), 0, 65535);
 }
 
 uint16 CBattleEntity::EVA()
@@ -1007,15 +1021,10 @@ uint8 CBattleEntity::GetDeathType()
 
 void CBattleEntity::addModifier(Mod type, int16 amount)
 {
-    if (type == Mod::MOVE)
+    if (type == Mod::MOVE && this->objtype == TYPE_PC)
     {
         m_MSNonItemValues.push_back(amount);
         m_modStat[type] = CalculateMSFromSources();
-    }
-    else if (type == Mod::DEF || (type >= Mod::STR && type <= Mod::CHR) ||
-             (type >= Mod::ATT && type <= Mod::RACC) || (type >= Mod::MATT && type <= Mod::MEVA))
-    {
-        m_modStat[type] = std::clamp(m_modStat[type] + amount, 0, 65535); // These are all treated as uint16 values.
     }
     else
     {
@@ -1514,18 +1523,6 @@ bool CBattleEntity::ValidTarget(CBattleEntity* PInitiator, uint16 targetFlags)
 
             return false;
         }
-    }
-    else if (targetFlags & TARGET_PLAYER_PARTY)
-    {
-        if (!isDead())
-        {
-            if (allegiance == ALLEGIANCE_TYPE::MOB && PInitiator->allegiance == ALLEGIANCE_TYPE::MOB)
-            {
-                return allegiance == PInitiator->allegiance;
-            }
-        }
-
-        return false;
     }
 
     return (targetFlags & TARGET_SELF) &&

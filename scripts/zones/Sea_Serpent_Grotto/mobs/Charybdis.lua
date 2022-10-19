@@ -22,7 +22,7 @@ entity.onMobSpawn = function(mob)
     DespawnMob(mantaTwo)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     -- Only one Charbydis PH is up at one time
     local chooseManta = math.random(1,2)
     local mantaOne = ID.mob.CHARYBDIS - 2

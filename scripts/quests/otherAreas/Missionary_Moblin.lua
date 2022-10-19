@@ -24,12 +24,7 @@ quest.sections =
 
         [xi.zone.OLDTON_MOVALPOLOS] =
         {
-            ['Koblakiq'] =
-            {
-                onTrigger = function(player, npc)
-                    return quest:progressCutscene(7)
-                end,
-            },
+            ['Koblakiq'] = quest:progressEvent(7),
 
             onEventFinish =
             {
@@ -66,13 +61,15 @@ quest.sections =
             {
                 [9] = function(player, csid, option, npc)
                     quest:complete(player)
+                    xi.quest.setMustZone(player, xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.FOR_THE_BIRDS)
                 end,
             },
         },
     },
     {
         check = function(player, status, vars)
-            return status == QUEST_COMPLETED
+            return status == QUEST_COMPLETED and
+            player:getQuestStatus(xi.quest.log_id.OTHER_AREAS, xi.quest.id.otherAreas.BETTER_THE_DEMON_YOU_KNOW) == QUEST_AVAILABLE
         end,
 
         [xi.zone.OLDTON_MOVALPOLOS] =
@@ -80,7 +77,7 @@ quest.sections =
             ['Koblakiq'] =
             {
                 onTrigger = function(player, npc)
-                    return quest:event(12)
+                    return quest:event(12):replaceDefault()
                 end,
             },
         },

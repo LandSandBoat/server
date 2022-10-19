@@ -122,18 +122,16 @@ mission.sections =
 
                     if
                         missionStatus == 1 and
-                        not GetMobByID(krtID.mob.CORRUPTED_YORGOS):isSpawned() and
-                        not GetMobByID(krtID.mob.CORRUPTED_SOFFEIL):isSpawned() and
-                        not GetMobByID(krtID.mob.CORRUPTED_ULBRIG):isSpawned()
+                        npcUtil.popFromQM(player, npc, krtID.mob.RANPERRES_REST_MOBS, { claim = true, hide = 0, })
                     then
-                        SpawnMob(krtID.mob.CORRUPTED_YORGOS)
-                        SpawnMob(krtID.mob.CORRUPTED_SOFFEIL)
-                        SpawnMob(krtID.mob.CORRUPTED_ULBRIG)
                         return mission:messageSpecial(krtID.text.SENSE_SOMETHING_EVIL)
+
                     elseif (missionStatus == 2 or missionStatus == 3) and player:getXPos() > -39.019 then
                         return mission:progressEvent(6)
+
                     elseif missionStatus == 3 and player:getXPos() <= -39.019 then
                         return mission:progressEvent(7)
+
                     elseif missionStatus == 6 then
                         return mission:progressEvent(5)
                     end
@@ -142,7 +140,7 @@ mission.sections =
 
             ['Corrupted_Soffeil'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if
                         player:getMissionStatus(mission.areaId) == 1 and
                         (GetMobByID(krtID.mob.CORRUPTED_YORGOS):isDead() or not GetMobByID(krtID.mob.CORRUPTED_YORGOS):isSpawned()) and
@@ -155,7 +153,7 @@ mission.sections =
 
             ['Corrupted_Ulbrig'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if
                         player:getMissionStatus(mission.areaId) == 1 and
                         (GetMobByID(krtID.mob.CORRUPTED_YORGOS):isDead() or not GetMobByID(krtID.mob.CORRUPTED_YORGOS):isSpawned()) and
@@ -168,7 +166,7 @@ mission.sections =
 
             ['Corrupted_Yorgos'] =
             {
-                onMobDeath = function(mob, player, isKiller, noKiller)
+                onMobDeath = function(mob, player, optParams)
                     if
                         player:getMissionStatus(mission.areaId) == 1 and
                         (GetMobByID(krtID.mob.CORRUPTED_ULBRIG):isDead() or not GetMobByID(krtID.mob.CORRUPTED_ULBRIG):isSpawned()) and

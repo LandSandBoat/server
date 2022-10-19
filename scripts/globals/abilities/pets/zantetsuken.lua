@@ -7,13 +7,13 @@ require("scripts/globals/status")
 require("scripts/globals/magic")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-ability_object.onPetAbility = function(target, pet, skill, master)
+abilityObject.onPetAbility = function(target, pet, skill, master)
     local power = master:getMP() / master:getMaxMP()
     master:setMP(0)
 
@@ -41,4 +41,4 @@ ability_object.onPetAbility = function(target, pet, skill, master)
     end
 end
 
-return ability_object
+return abilityObject

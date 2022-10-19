@@ -58,7 +58,7 @@ entity.onMobFight = function(mob, target)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.STUN, {power = math.random(7, 8), chance = 20}) --based on captures
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.STUN, { power = math.random(7, 8), chance = 20 }) --based on captures
 end
 
 entity.onMobWeaponSkill = function(target, mob, skill)
@@ -84,7 +84,7 @@ entity.onSpellPrecast = function(mob, spell)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     mob:removeListener("CHLEVNIK_TAKE_DAMAGE")
 end
 

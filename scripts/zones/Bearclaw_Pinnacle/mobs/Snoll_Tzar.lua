@@ -80,7 +80,7 @@ entity.onMobFight = function(mob, player, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     local bf = mob:getBattlefield()
     local changeTime = mob:getLocalVar("changeTime")
     local gameOver = mob:getLocalVar("gameover")

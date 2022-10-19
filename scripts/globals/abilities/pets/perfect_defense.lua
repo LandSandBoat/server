@@ -6,13 +6,13 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local ability_object = {}
+local abilityObject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityObject.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-ability_object.onPetAbility = function(target, pet, skill, master)
+abilityObject.onPetAbility = function(target, pet, skill, master)
     local power = 10000 * (master:getMP() / master:getMaxMP())
     local duration = 60
 
@@ -30,4 +30,4 @@ ability_object.onPetAbility = function(target, pet, skill, master)
     return xi.effect.PERFECT_DEFENSE
 end
 
-return ability_object
+return abilityObject

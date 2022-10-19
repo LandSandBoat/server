@@ -75,7 +75,7 @@ entity.onMobDisengage = function(mob)
     mob:setLocalVar('teleTime', 0)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     local opMariselle = mob:getID()
 
     for i = opMariselle + 1, opMariselle + 2 do

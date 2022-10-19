@@ -13,9 +13,9 @@ require("scripts/globals/status")
 require("scripts/globals/mobskills")
 require("scripts/globals/summon")
 ---------------------------------------------
-local ability_object = {}
+local abilityobject = {}
 
-ability_object.onAbilityCheck = function(player, target, ability)
+abilityobject.onAbilityCheck = function(player, target, ability)
     local level = player:getMainLvl() * 2
 
     if(player:getMP() < level) then
@@ -25,7 +25,7 @@ ability_object.onAbilityCheck = function(player, target, ability)
     return 0, 0
 end
 
-ability_object.onPetAbility = function(target, pet, skill)
+abilityobject.onPetAbility = function(target, pet, skill)
     -- INT based: get the dINT
     local dINT = math.floor(pet:getStat(xi.mod.INT) - target:getStat(xi.mod.INT))
     local targetHP = target:getHP()
@@ -70,4 +70,4 @@ ability_object.onPetAbility = function(target, pet, skill)
     return damage
 end
 
-return ability_object
+return abilityobject

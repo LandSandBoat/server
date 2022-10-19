@@ -182,7 +182,7 @@ entity.onMobDisengage = function(mob)
     mob:setAnimationSub(0)
 end
 
-entity.onMobDeath = function(mob, isKiller, player)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

@@ -90,7 +90,7 @@ entity.onMobFight = function(mob, target)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     -- Despawn all other mobs
     for i = mob:getID() + 1, mob:getID() + 8 do
         DespawnMob(i)

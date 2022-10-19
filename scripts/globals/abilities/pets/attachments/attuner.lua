@@ -3,9 +3,9 @@
 -----------------------------------
 require("scripts/globals/status")
 -----------------------------------
-local attachment_object = {}
+local attachmentObject = {}
 
-attachment_object.onEquip = function(automaton)
+attachmentObject.onEquip = function(automaton)
     automaton:addListener("ENGAGE", "AUTO_ATTUNER_ENGAGE", function(pet, target)
         local master = pet:getMaster()
         if pet:getLocalVar("attuner") > 0 then
@@ -66,12 +66,12 @@ attachment_object.onEquip = function(automaton)
     end)
 end
 
-attachment_object.onUnequip = function(pet)
+attachmentObject.onUnequip = function(pet)
     pet:removeListener("AUTO_ATTUNER_ENGAGE")
     pet:removeListener("AUTO_ATTUNER_DISENGAGE")
 end
 
-attachment_object.onManeuverGain = function(pet, maneuvers)
+attachmentObject.onManeuverGain = function(pet, maneuvers)
     if pet:getLocalVar("attuner") > 0 then
         if maneuvers == 1 then
             pet:addMod(xi.mod.ATTP, 13) -- Ignore 15% def
@@ -86,7 +86,7 @@ attachment_object.onManeuverGain = function(pet, maneuvers)
     end
 end
 
-attachment_object.onManeuverLose = function(pet, maneuvers)
+attachmentObject.onManeuverLose = function(pet, maneuvers)
     if pet:getLocalVar("attuner") > 0 then
         if maneuvers == 1 then
             pet:delMod(xi.mod.ATTP, 13) -- Ignore 15% def
@@ -101,4 +101,4 @@ attachment_object.onManeuverLose = function(pet, maneuvers)
     end
 end
 
-return attachment_object
+return attachmentObject

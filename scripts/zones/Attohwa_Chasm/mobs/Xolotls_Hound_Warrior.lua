@@ -3,19 +3,17 @@
 --  Mob: Xolotl's Hound Warrior
 -- Note: Pet for Xolotl
 -----------------------------------
-require("scripts/globals/world")
------------------------------------
 local entity = {}
 
 entity.onMobRoam = function(mob)
-    local totd = VanadielTOTD()
+    local hour = VanadielHour()
 
-    if totd ~= xi.time.NIGHT and totd ~= xi.time.MIDNIGHT then
+    if hour >= 4 and hour < 20 then -- Despawn if its daytime
         DespawnMob(mob:getID())
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

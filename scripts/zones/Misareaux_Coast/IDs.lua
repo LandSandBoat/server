@@ -34,6 +34,8 @@ zones[xi.zone.MISAREAUX_COAST] =
         LOGGING_IS_POSSIBLE_HERE      = 7612, -- Logging is possible here if you have <item>.
         SHATTERED_SHIELD              = 7666, -- "The ground here is littered with the pieces of a shattered shield..."
         SNATCHED_AWAY                 = 7667, -- "The <item> is suddenly snatched away!"
+        DROP_OF_OIL                   = 7669, -- A drop of oil trickles down the cheek of the mannequin.
+        LARGE_DROPS_OF_OIL            = 7670, -- Large drops of oil begin pouring from the eyes on the mannequin.
         NOTHING_HERE_YET              = 7671, -- There is nothing here yet. Check again in the morning.
         ALREADY_BAITED                = 7672, -- The trap already contains <item>.
         APPEARS_TO_BE_TRAP            = 7673, -- There appears to be some kind of trap here. Bits of fish are lying around the area.
@@ -60,6 +62,7 @@ zones[xi.zone.MISAREAUX_COAST] =
         ZIPHIUS          = 16879900,
         ODQAN            = 16879737,
         BLOODY_COFFIN    = 16879896,
+        ALSHA            = 16879898,
     },
     npc =
     {
@@ -74,6 +77,7 @@ zones[xi.zone.MISAREAUX_COAST] =
         },
         ZIPHIUS_QM_BASE  = 16879919,
         GRATION_QM       = 16879918,
+        ALSHA_QM         = 16879978,
     },
 }
 

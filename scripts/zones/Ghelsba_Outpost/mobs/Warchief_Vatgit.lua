@@ -10,7 +10,7 @@ require("scripts/globals/zone")
 -----------------------------------
 local entity = {}
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     if
         player:getCurrentMission(player:getNation()) == xi.mission.id.nation.RANK2
         and player:getNation() == xi.nation.WINDURST

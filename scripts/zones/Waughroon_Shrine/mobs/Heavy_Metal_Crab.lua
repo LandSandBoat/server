@@ -30,7 +30,7 @@ entity.onMobSpawn = function(mob)
 end
 
 entity.onAdditionalEffect = function(mob, target, damage)
-    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.HP_DRAIN, {power = 30})
+    return xi.mob.onAddEffect(mob, target, damage, xi.mob.ae.HP_DRAIN, { power = 30 })
 end
 
 entity.onMobFight = function(mob, target)
@@ -45,7 +45,7 @@ entity.onMobFight = function(mob, target)
     mob:setMod(xi.mod.REGEN_DOWN, count)
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
 end
 
 return entity

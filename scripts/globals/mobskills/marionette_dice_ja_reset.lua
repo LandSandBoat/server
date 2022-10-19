@@ -11,13 +11,13 @@ require("scripts/globals/msg")
 -----------------------------------
 local ID = require("scripts/zones/Mine_Shaft_2716/IDs")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     return 0
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     mob:timer(5000, function(mobArg)
         mobArg:showText(mobArg, ID.text.NOT_HOW)
         target:resetRecasts()
@@ -27,4 +27,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return 0
 end
 
-return mobskill_object
+return mobskillObject

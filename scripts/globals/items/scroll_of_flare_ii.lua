@@ -3,14 +3,14 @@
 -- Scroll of Flare II
 -- Teaches the black magic Flare II
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(205)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(205)
 end
 
-return item_object
+return itemObject

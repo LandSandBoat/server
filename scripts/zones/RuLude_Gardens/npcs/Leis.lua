@@ -9,12 +9,12 @@ local entity = {}
 local path =
 {
 
-    {x = -8.826, y = 1.996, z = 132.537, rotation = 64, wait = 8000},
-    {x = -8.294, y = 1.996, z = 137.101, rotation = 0, wait = 8000},
-    {x = -8.826, y = 1.996, z = 132.537, rotation = 64, wait = 8000},
-    {x = -12.483, y = 1.984, z = 136.894, rotation = 128, wait = 8000},
-    {x = -8.294, y = 1.996, z = 137.101, rotation = 0, wait = 8000},
-    {x = -12.483, y = 1.984, z = 136.894, rotation = 128, wait = 8000},
+    { x = -8.826, y = 1.996, z = 132.537, rotation = 64, wait = 8000 },
+    { x = -8.294, y = 1.996, z = 137.101, rotation = 0, wait = 8000 },
+    { x = -8.826, y = 1.996, z = 132.537, rotation = 64, wait = 8000 },
+    { x = -12.483, y = 1.984, z = 136.894, rotation = 128, wait = 8000 },
+    { x = -8.294, y = 1.996, z = 137.101, rotation = 0, wait = 8000 },
+    { x = -12.483, y = 1.984, z = 136.894, rotation = 128, wait = 8000 },
 }
 
 entity.onSpawn = function(npc)

@@ -3,14 +3,14 @@
 -- Scroll of Endark
 -- Teaches the white magic Endark
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target)
+itemObject.onItemCheck = function(target)
     return target:canLearnSpell(311)
 end
 
-item_object.onItemUse = function(target)
+itemObject.onItemUse = function(target)
     target:addSpell(311)
 end
 
-return item_object
+return itemObject

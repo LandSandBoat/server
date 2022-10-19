@@ -7,14 +7,14 @@ require("scripts/globals/magic")
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local spell_object = {}
+local spellObject = {}
 
-spell_object.onMagicCastingCheck = function(caster, target, spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     spell:setFlag(xi.magic.spellFlag.IGNORE_SHADOWS)
     return 0
 end
 
-spell_object.onSpellCast = function(caster, target, spell)
+spellObject.onSpellCast = function(caster, target, spell)
     if
         target:isUndead() or
         target:hasStatusEffect(xi.effect.MAGIC_SHIELD) or
@@ -31,4 +31,4 @@ spell_object.onSpellCast = function(caster, target, spell)
     return 0
 end
 
-return spell_object
+return spellObject

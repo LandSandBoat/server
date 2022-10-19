@@ -6,9 +6,9 @@
 require("scripts/globals/status")
 require("scripts/globals/msg")
 -----------------------------------
-local item_object = {}
+local itemObject = {}
 
-item_object.onItemCheck = function(target, player)
+itemObject.onItemCheck = function(target, player)
     local result = 0
 
     if target:getName() ~= "Ouryu" then
@@ -20,7 +20,7 @@ item_object.onItemCheck = function(target, player)
     return result
 end
 
-item_object.onItemUse = function(target, player)
+itemObject.onItemUse = function(target, player)
     if target:getAnimationSub() == 1 then
         target:delStatusEffect(xi.effect.ALL_MISS)
         target:SetMobSkillAttack(0)
@@ -29,4 +29,4 @@ item_object.onItemUse = function(target, player)
     end
 end
 
-return item_object
+return itemObject

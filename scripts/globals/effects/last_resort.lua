@@ -4,9 +4,9 @@
 require("scripts/globals/jobpoints")
 require("scripts/globals/status")
 -----------------------------------
-local effect_object = {}
+local effectObject = {}
 
-effect_object.onEffectGain = function(target, effect)
+effectObject.onEffectGain = function(target, effect)
     local jpValue = target:getJobPointLevel(xi.jp.LAST_RESORT_EFFECT)
 
     target:addMod(xi.mod.ATT, 2 * jpValue)
@@ -17,10 +17,10 @@ effect_object.onEffectGain = function(target, effect)
     target:addMod(xi.mod.DEFP, -25 - target:getMerit(xi.merit.LAST_RESORT_EFFECT))
 end
 
-effect_object.onEffectTick = function(target, effect)
+effectObject.onEffectTick = function(target, effect)
 end
 
-effect_object.onEffectLose = function(target, effect)
+effectObject.onEffectLose = function(target, effect)
     local jpValue = target:getJobPointLevel(xi.jp.LAST_RESORT_EFFECT)
 
     target:delMod(xi.mod.ATT, 2 * jpValue)
@@ -30,4 +30,4 @@ effect_object.onEffectLose = function(target, effect)
     target:delMod(xi.mod.DEFP, -25 - target:getMerit(xi.merit.LAST_RESORT_EFFECT))
 end
 
-return effect_object
+return effectObject

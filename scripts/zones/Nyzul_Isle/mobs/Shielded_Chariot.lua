@@ -18,8 +18,8 @@ entity.onMonsterAbilityPrepare = function(mob)
     return ({ 2055, 2056 })[math.random(1, 2)]
 end
 
-entity.onMobDeath = function(mob, player, isKiller, noKiller)
-    if isKiller or noKiller then
+entity.onMobDeath = function(mob, player, optParams)
+    if optParams.isKiller or optParams.noKiller then
         xi.nyzul.spawnChest(mob, player)
         xi.nyzul.enemyLeaderKill(mob)
     end

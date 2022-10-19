@@ -23780,7 +23780,6 @@ INSERT INTO `mob_droplist` VALUES (2856,0,0,1000,1875,300); -- Ancient Beastcoin
 -- ZoneID:  38 - Thiazi
 -- ZoneID:  38 - Bialozar
 -- ZoneID:  38 - Cornu
--- ZoneID:  38 - Sirin
 INSERT INTO `mob_droplist` VALUES (2857,0,0,1000,1875,400); -- Ancient Beastcoin (40.0%)
 
 -- ZoneID:  37 - Goblin Slaughterman
@@ -23868,6 +23867,7 @@ INSERT INTO `mob_droplist` VALUES (2860,0,0,1000,1875,800); -- Ancient Beastcoin
 -- ZoneID:  38 - Thunder Elemental
 -- ZoneID:  38 - Kerkopes
 -- ZoneID:  38 - Kerkopes
+-- ZoneID:  38 - Sirin
 INSERT INTO `mob_droplist` VALUES (2861,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
 
 -- ZoneID:  37 - Goblin Warlord
@@ -23922,27 +23922,6 @@ INSERT INTO `mob_droplist` VALUES (2862,0,0,1000,1875,@ALWAYS); -- Ancient Beast
 -- ZoneID:  37 - Enhanced Dragon
 -- ZoneID:  37 - Enhanced Ahriman
 -- ZoneID:  38 - Kronprinz Behemoth
--- ZoneID:  38 - Carnagechief Jackbodokk
--- ZoneID:  38 - Grognard Mesmerizer
--- ZoneID:  38 - Grognard Neckchopper
--- ZoneID:  38 - Grognard Footsoldier
--- ZoneID:  38 - Grognard Grappler
--- ZoneID:  38 - Grognard Predator
--- ZoneID:  38 - Grognard Impaler
--- ZoneID:  38 - Naqba Chirurgeon
--- ZoneID:  38 - Star Ruby Quadav
--- ZoneID:  38 - Wootz Quadav
--- ZoneID:  38 - Fossil Quadav
--- ZoneID:  38 - Star Sapphire Quadav
--- ZoneID:  38 - Whitegold Quadav
--- ZoneID:  38 - Lightsteel Quadav
--- ZoneID:  38 - Dee Wapa The Desolator
--- ZoneID:  38 - Yagudo Archpriest
--- ZoneID:  38 - Yagudo Knight Templar
--- ZoneID:  38 - Yagudo Disciplinant
--- ZoneID:  38 - Yagudo Prelatess
--- ZoneID:  38 - Yagudo Kapellmeister
--- ZoneID:  38 - Yagudo Eradicator
 INSERT INTO `mob_droplist` VALUES (2863,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (2863,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
 INSERT INTO `mob_droplist` VALUES (2863,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
@@ -26951,6 +26930,34 @@ INSERT INTO `mob_droplist` VALUES (6033,0,0,1000,1432,@UNCOMMON); -- Paladins Te
 INSERT INTO `mob_droplist` VALUES (6033,0,0,1000,748,@VRARE);     -- Gold Beastcoin (Very Rare, 1%)
 INSERT INTO `mob_droplist` VALUES (6033,2,0,1000,748,0);          -- Gold Beastcoin (Steal)
 INSERT INTO `mob_droplist` VALUES (6033,4,0,1000,4552,0);         -- Serving Of Herb Crawler Eggs (Despoil)
+
+-- ZoneID:  38 - Carnagechief Jackbodokk
+-- ZoneID:  38 - Grognard Mesmerizer
+-- ZoneID:  38 - Grognard Neckchopper
+-- ZoneID:  38 - Grognard Footsoldier
+-- ZoneID:  38 - Grognard Grappler
+-- ZoneID:  38 - Grognard Predator
+-- ZoneID:  38 - Grognard Impaler
+-- ZoneID:  38 - Naqba Chirurgeon
+-- ZoneID:  38 - Star Ruby Quadav
+-- ZoneID:  38 - Wootz Quadav
+-- ZoneID:  38 - Fossil Quadav
+-- ZoneID:  38 - Star Sapphire Quadav
+-- ZoneID:  38 - Whitegold Quadav
+-- ZoneID:  38 - Lightsteel Quadav
+-- ZoneID:  38 - Dee Wapa The Desolator
+-- ZoneID:  38 - Yagudo Archpriest
+-- ZoneID:  38 - Yagudo Knight Templar
+-- ZoneID:  38 - Yagudo Disciplinant
+-- ZoneID:  38 - Yagudo Prelatess
+-- ZoneID:  38 - Yagudo Kapellmeister
+-- ZoneID:  38 - Yagudo Eradicator
+INSERT INTO `mob_droplist` VALUES (3231,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3231,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3231,0,0,1000,1875,@ALWAYS); -- Ancient Beastcoin (Always, 100%)
+INSERT INTO `mob_droplist` VALUES (3231,0,0,1000,1875,@UNCOMMON); -- Ancient Beastcoin (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (3231,0,0,1000,1875,@UNCOMMON); -- Ancient Beastcoin (Uncommon, 10%)
+INSERT INTO `mob_droplist` VALUES (3231,0,0,1000,1875,@UNCOMMON); -- Ancient Beastcoin (Uncommon, 10%)
 
 /*!40000 ALTER TABLE `mob_droplist` ENABLE KEYS */;
 UNLOCK TABLES;

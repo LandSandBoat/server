@@ -11,9 +11,9 @@ require("scripts/globals/settings")
 require("scripts/globals/status")
 require("scripts/globals/mobskills")
 -----------------------------------
-local mobskill_object = {}
+local mobskillObject = {}
 
-mobskill_object.onMobSkillCheck = function(target, mob, skill)
+mobskillObject.onMobSkillCheck = function(target, mob, skill)
     if mob:getHPP() <= 10 then
         mob:setLocalVar("TeraFlare", 0)
         mob:SetMobAbilityEnabled(false) -- disable mobskills/spells until Teraflare is used successfully (don't want to delay it/queue Megaflare)
@@ -24,7 +24,7 @@ mobskill_object.onMobSkillCheck = function(target, mob, skill)
     return 1
 end
 
-mobskill_object.onMobWeaponSkill = function(target, mob, skill)
+mobskillObject.onMobWeaponSkill = function(target, mob, skill)
     mob:setLocalVar("TeraFlare", 1) -- When set to 1 the script won't call it.
     mob:setLocalVar("tauntShown", 0)
     mob:SetMobAbilityEnabled(true) -- enable the spells/other mobskills again
@@ -42,4 +42,4 @@ mobskill_object.onMobWeaponSkill = function(target, mob, skill)
     return dmg
 end
 
-return mobskill_object
+return mobskillObject

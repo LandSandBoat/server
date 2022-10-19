@@ -156,7 +156,7 @@ void CTrustEntity::OnAbility(CAbilityState& state, action_t& action)
                 actionTarget.messageID       = PAbility->getMessage();
                 actionTarget.param           = 0;
 
-                int32 value = luautils::OnUseAbility(this, PTarget, PAbility, &action);
+                int32 value = luautils::OnUseAbility(this, PTargetFound, PAbility, &action);
 
                 if (prevMsg == 0) // get default message for the first target
                 {

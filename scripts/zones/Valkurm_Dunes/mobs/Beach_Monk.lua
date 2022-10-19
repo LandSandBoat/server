@@ -54,7 +54,7 @@ entity.onMobDespawn = function(mob)
     end
 end
 
-entity.onMobDeath = function(mob, player, isKiller)
+entity.onMobDeath = function(mob, player, optParams)
     local crab = GetMobByID(ID.mob.HEIKE_CRAB)
     local houu = GetMobByID(ID.mob.HOUU_THE_SHOALWADER)
     local barnacle = GetNPCByID(ID.npc.BARNACLED_BOX)
