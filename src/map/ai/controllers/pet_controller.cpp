@@ -150,37 +150,37 @@ void CPetController::TryIdleSpellCast()
         switch (PPet->m_PetID)
         {
             case PETID_EARTHSPIRIT:
-                if (mLvl >= 28 && !PPet->StatusEffectContainer->HasStatusEffect(EFFECT_STONESKIN))
+                if (mLvl >= 28 && !PPet->StatusEffectContainer->HasStatusEffect(EFFECT_STONESKIN) && CanCastSpells())
                 {
                     CastSpell(SpellID::Stoneskin);
                 }
                 break;
             case PETID_WATERSPIRIT:
-                if (mLvl >= 10 && !PPet->StatusEffectContainer->HasStatusEffect(EFFECT_AQUAVEIL))
+                if (mLvl >= 10 && !PPet->StatusEffectContainer->HasStatusEffect(EFFECT_AQUAVEIL) && CanCastSpells())
                 {
                     CastSpell(SpellID::Aquaveil);
                 }
                 break;
             case PETID_AIRSPIRIT:
-                if (mLvl >= 19 && !PPet->StatusEffectContainer->HasStatusEffect(EFFECT_BLINK))
+                if (mLvl >= 19 && !PPet->StatusEffectContainer->HasStatusEffect(EFFECT_BLINK) && CanCastSpells())
                 {
                     CastSpell(SpellID::Blink);
                 }
                 break;
             case PETID_FIRESPIRIT:
-                if (mLvl >= 10 && !PPet->StatusEffectContainer->HasStatusEffect(EFFECT_BLAZE_SPIKES))
+                if (mLvl >= 10 && !PPet->StatusEffectContainer->HasStatusEffect(EFFECT_BLAZE_SPIKES) && CanCastSpells())
                 {
                     CastSpell(SpellID::Blaze_Spikes);
                 }
                 break;
             case PETID_ICESPIRIT:
-                if (mLvl >= 20 && !PPet->StatusEffectContainer->HasStatusEffect(EFFECT_ICE_SPIKES))
+                if (mLvl >= 20 && !PPet->StatusEffectContainer->HasStatusEffect(EFFECT_ICE_SPIKES) && CanCastSpells())
                 {
                     CastSpell(SpellID::Ice_Spikes);
                 }
                 break;
             case PETID_THUNDERSPIRIT:
-                if (mLvl >= 30 && !PPet->StatusEffectContainer->HasStatusEffect(EFFECT_SHOCK_SPIKES))
+                if (mLvl >= 30 && !PPet->StatusEffectContainer->HasStatusEffect(EFFECT_SHOCK_SPIKES) && CanCastSpells())
                 {
                     CastSpell(SpellID::Shock_Spikes);
                 }
@@ -191,6 +191,7 @@ void CPetController::TryIdleSpellCast()
                 CBattleEntity* PLowest       = nullptr;
                 float          lowestPercent = 100.f;
                 uint8          choice        = 2;
+                uint16         chosenSpell   = static_cast<uint16>(SpellID::Cure);
 
                 // clang-format off
                 PPet->PMaster->ForParty([&](CBattleEntity* PMember)
@@ -217,12 +218,24 @@ void CPetController::TryIdleSpellCast()
                 switch (choice)
                 {
                     case 1:
-                        CastSpell(static_cast<SpellID>(xirand::GetRandomElement(PPet->m_healSpells)));
+                        if (PPet->m_healSpells.size() > 0)
+                        {
+                            chosenSpell = xirand::GetRandomElement(PPet->m_healSpells);
+                        }
                         break;
                     case 2:
-                        CastSpell(static_cast<SpellID>(xirand::GetRandomElement(PPet->m_buffSpells)));
+                        if (PPet->m_buffSpells.size() > 0)
+                        {
+                            chosenSpell = xirand::GetRandomElement(PPet->m_buffSpells);
+                        }
                         break;
                 }
+
+                if (CanCastSpells())
+                {
+                    CastSpell(static_cast<SpellID>(chosenSpell));
+                }
+
                 break;
         }
 
@@ -350,7 +363,7 @@ void CPetController::SetSMNCastTime()
         castTime -= 5000;
     }
 
-    if (static_cast<CCharEntity*>(PPet->PMaster)->getEquip(SLOT_LEGS)->getID() == (15131 | 15594))
+    if (static_cast<CCharEntity*>(PPet->PMaster)->getEquip(SLOT_LEGS) != nullptr && static_cast<CCharEntity*>(PPet->PMaster)->getEquip(SLOT_LEGS)->getID() == (15131 | 15594))
     {
         castTime -= 5000;
     }

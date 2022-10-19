@@ -674,6 +674,7 @@ void CMobController::DoCombatTick(time_point tick)
                 CBattleEntity* PLowest       = nullptr;
                 float          lowestPercent = 100.f;
                 uint8          choice        = xirand::GetRandomNumber(2, 4);
+                uint16         chosenSpell   = static_cast<uint16>(SpellID::Cure);
 
                 // clang-format off
                 PPet->PMaster->ForParty([&](CBattleEntity* PMember)
@@ -700,14 +701,28 @@ void CMobController::DoCombatTick(time_point tick)
                 switch (choice)
                 {
                     case 1:
-                        CastSpell(static_cast<SpellID>(xirand::GetRandomElement(PPet->m_healSpells)));
+                        if (PPet->m_healSpells.size() > 0)
+                        {
+                            chosenSpell = xirand::GetRandomElement(PPet->m_healSpells);
+                        }
                         break;
                     case 2:
-                        CastSpell(static_cast<SpellID>(xirand::GetRandomElement(PPet->m_buffSpells)));
+                        if (PPet->m_buffSpells.size() > 0)
+                        {
+                            chosenSpell = xirand::GetRandomElement(PPet->m_buffSpells);
+                        }
                         break;
                     case 3:
-                        CastSpell(static_cast<SpellID>(xirand::GetRandomElement(PPet->m_offensiveSpells)));
+                        if (PPet->m_offensiveSpells.size() > 0)
+                        {
+                            chosenSpell = xirand::GetRandomElement(PPet->m_offensiveSpells);
+                        }
                         break;
+                }
+
+                if (CanCastSpells())
+                {
+                    CastSpell(static_cast<SpellID>(chosenSpell));
                 }
 
                 if (PPet)
