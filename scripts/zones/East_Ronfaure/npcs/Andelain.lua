@@ -34,7 +34,9 @@ entity.onTrade = function(player, npc, trade)
 end
 
 entity.onTrigger = function(player, npc)
-    if player:getCharVar("sermonQuestVar") == 0 then
+    local sermonQuest = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_VICASQUE_S_SERMON)
+
+    if sermonQuest == QUEST_ACCEPTED and player:getCharVar("sermonQuestVar") == 0 then
         player:showText(npc, ID.text.NO_MORE_NO_LESS)
     elseif player:getCharVar("sermonQuestVar") == 1 then
         player:showText(npc, ID.text.THANKS_TO_GODDESS)
