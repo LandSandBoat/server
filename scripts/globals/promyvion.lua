@@ -72,6 +72,11 @@ xi.promyvion.strayOnSpawn = function(mob)
     if mother ~= nil and mother:isSpawned() then
         mob:setPos(mother:getXPos(), mother:getYPos() - 5, mother:getZPos())
         mother:setAnimationSub(1)
+        mother:timer(600, function(motherArg)
+            if motherArg:isAlive() then
+                motherArg:setAnimationSub(2)
+            end
+        end)
     end
 end
 
@@ -80,15 +85,59 @@ xi.promyvion.receptacleOnFight = function(mob, target)
         local ID = zones[mob:getZoneID()]
         local mobId = mob:getID()
         local numStrays = ID.mob.MEMORY_RECEPTACLES[mobId][2]
+        local count = 0
 
         for i = mobId + 1, mobId + numStrays do
             local stray = GetMobByID(i)
-            if not stray:isSpawned() then
-                mob:setLocalVar("[promy]nextStray", os.time() + 20)
-                stray:spawn()
-                stray:updateEnmity(target)
-                break
+            if stray:isSpawned() then
+                count = count + 1
+                if stray:getCurrentAction() == xi.act.ROAMING then
+                    stray:updateEnmity(target)
+                end
             end
+        end
+
+        if count < numStrays then
+            mob:setLocalVar("[promy]nextStray", os.time() + 20)
+            for i = mobId + 1, mobId + numStrays do
+                local stray = GetMobByID(i)
+                if not stray:isSpawned() then
+                    count = count + 1
+                    stray:setSpawn(mob:getXPos(), mob:getYPos(), mob:getZPos())
+                    SpawnMob(stray:getID()):updateEnmity(target)
+                    break
+                end
+            end
+        end
+    end
+end
+
+xi.promyvion.receptacleIdle = function(mob)
+    if os.time() > mob:getLocalVar("[promy]nextStray") then
+        local ID = zones[mob:getZoneID()]
+        local mobId = mob:getID()
+        local numStrays = ID.mob.MEMORY_RECEPTACLES[mobId][2]
+        local count = 0
+
+        for i = mobId + 1, mobId + numStrays do
+            local stray = GetMobByID(i)
+            if stray:isSpawned() then
+                count = count + 1
+            end
+        end
+
+        if count < numStrays then
+            mob:setLocalVar("[promy]nextStray", os.time() + 20)
+            for i = mobId + 1, mobId + numStrays do
+                local stray = GetMobByID(i)
+                if not stray:isSpawned() then
+                    count = count + 1
+                    SpawnMob(stray:getID()):setPos(mob:getXPos(), mob:getYPos(), mob:getZPos())
+                    break
+                end
+            end
+        else
+            mob:setAnimationSub(2)
         end
     else
         mob:setAnimationSub(2)
