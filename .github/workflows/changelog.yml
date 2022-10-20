@@ -25,7 +25,7 @@ jobs:
           cat changelog-$(date +'%Y-%m-%d').md
     - name: Capture date
       id: date
-      run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+      run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
     - name: Git stash changes
       run: |
           git stash --include-untracked
