@@ -648,7 +648,6 @@ namespace trustutils
             bonusMpStat = (mainLevelOver75 + mainLevelOver115To119) * 8;
         }
         
-
         PTrust->health.maxmp = (int16)(settings::get<float>("map.ALTER_EGO_MP_MULTIPLIER") * (raceStat + jobStat + bonusMpStat + sJobStat));
 
         PTrust->health.tp = 0;
@@ -712,6 +711,7 @@ namespace trustutils
             mMND = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 7), mLvl) * 1.2;
             mCHR = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 8), mLvl) * 1.2;
         }        
+        
         if (mLvl >= 105 && mLvl < 110)
         {
             mSTR = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 2), mLvl) * 1.5;
