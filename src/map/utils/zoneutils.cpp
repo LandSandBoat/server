@@ -118,8 +118,6 @@ namespace zoneutils
     {
         g_PTrigger->targid = TargID;
         g_PTrigger->id     = ((4096 + ZoneID) << 12) + TargID;
-
-        ShowWarning("Server need NPC <%u>", g_PTrigger->id);
         return g_PTrigger;
     }
 
