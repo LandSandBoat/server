@@ -157,11 +157,6 @@ bool CPathFind::PathAround(const position_t& point, float distanceFromPoint, uin
 {
     TracyZoneScoped;
     Clear();
-    // position_t* lastPoint = &point;
-
-    // float randomRadian = xirand::GetRandomNumber<float>(0, 2 * (float)M_PI);
-    // lastPoint->x += cosf(randomRadian) * distanceFromPoint;
-    // lastPoint->z += sinf(randomRadian) * distanceFromPoint;
 
     // save for sliding logic
     m_originalPoint     = point;
