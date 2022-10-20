@@ -363,7 +363,9 @@ void CPetController::SetSMNCastTime()
         castTime -= 5000;
     }
 
-    if (static_cast<CCharEntity*>(PPet->PMaster)->getEquip(SLOT_LEGS) != nullptr && static_cast<CCharEntity*>(PPet->PMaster)->getEquip(SLOT_LEGS)->getID() == (15131 | 15594))
+    CItemEquipment* legSlotItem = static_cast<CCharEntity*>(PPet->PMaster)->getEquip(SLOT_LEGS);
+    // Summoner's Spats & Summoner's Spats +1
+    if (legSlotItem && (legSlotItem->getID() == 15131 || legSlotItem->getID() == 15594))
     {
         castTime -= 5000;
     }
