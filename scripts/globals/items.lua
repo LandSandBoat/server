@@ -282,6 +282,7 @@ xi.items =
     PARASITE_SKIN                   = 1099,
     XALMO_FEATHER                   = 1100,
     MOTTLED_QUADAV_EGG              = 1101,
+    DAVOI_STORAGE_KEY               = 1103,
     PINCH_OF_SULFUR                 = 1108,
     ORCISH_MAIL_SCALES              = 1112,
     VIAL_OF_QUADAV_MAGE_BLOOD       = 1114,
