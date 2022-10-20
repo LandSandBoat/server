@@ -6616,26 +6616,23 @@ namespace charutils
             return false;
         }
 
-        if (entity->targid < 0x400 || entity->targid >= 0x800)
+        if (entity->objtype == TYPE_MOB)
         {
-            if (entity->objtype == TYPE_MOB)
-            {
-                spawnlist = &PChar->SpawnMOBList;
-            }
-            else if (entity->objtype == TYPE_NPC)
-            {
-                spawnlist = &PChar->SpawnNPCList;
-            }
+            spawnlist = &PChar->SpawnMOBList;
         }
-        else if (entity->targid < 0x700)
+        else if (entity->objtype == TYPE_NPC)
+        {
+            spawnlist = &PChar->SpawnNPCList;
+        }
+        else if (entity->objtype == TYPE_PC)
         {
             spawnlist = &PChar->SpawnPCList;
         }
-        else if (entity->targid < 0x780)
+        else if (entity->objtype == TYPE_PET)
         {
             spawnlist = &PChar->SpawnPETList;
         }
-        else if (entity->targid < 0x800)
+        else if (entity->objtype == TYPE_TRUST)
         {
             spawnlist = &PChar->SpawnTRUSTList;
         }
