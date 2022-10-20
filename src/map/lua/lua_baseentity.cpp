@@ -3640,7 +3640,10 @@ uint8 CLuaBaseEntity::getWornUses(uint16 itemID)
     {
         CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(slotID);
 
-        return PItem->m_extra[0];
+        if (PItem != nullptr)
+        {
+            return PItem->m_extra[0];
+        }
     }
 
     return 0;
@@ -3661,6 +3664,12 @@ uint8 CLuaBaseEntity::incrementItemWear(uint16 itemID)
     if (slotID != ERROR_SLOTID)
     {
         CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(slotID);
+
+        if (PItem == nullptr)
+        {
+            return 0;
+        }
+
         if (PItem->m_extra[0] == UINT8_MAX)
         {
             return PItem->m_extra[0];

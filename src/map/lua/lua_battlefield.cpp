@@ -410,11 +410,14 @@ void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleArenas)
                 for (uint32 mobid : mobIds)
                 {
                     CBaseEntity* entity = zoneutils::GetEntity(mobid, TYPE_MOB);
-                    groupEntities.push_back(entity);
-                    if (entities.find(entity->id) == entities.end())
+                    if (entity != nullptr)
                     {
-                        m_PLuaBattlefield->InsertEntity(entity, true);
-                        entities.insert(entity->id);
+                        groupEntities.push_back(entity);
+                        if (entities.find(entity->id) == entities.end())
+                        {
+                            m_PLuaBattlefield->InsertEntity(entity, true);
+                            entities.insert(entity->id);
+                        }
                     }
                 }
             };
@@ -563,11 +566,13 @@ void CLuaBattlefield::addGroups(sol::table groups, bool hasMultipleArenas)
 
     if (m_PLuaBattlefield->GetArmouryCrate() != 0)
     {
-        CNpcEntity* entity = static_cast<CNpcEntity*>(zoneutils::GetEntity(m_PLuaBattlefield->GetArmouryCrate(), TYPE_NPC));
-        m_PLuaBattlefield->InsertEntity(entity, true, CONDITION_DISAPPEAR_AT_START);
-        entity->SetUntargetable(true);
-        entity->ResetLocalVars();
-        entity->PAI->EventHandler.removeListener("TRIGGER_CRATE");
+        if (auto* entity = dynamic_cast<CNpcEntity*>(zoneutils::GetEntity(m_PLuaBattlefield->GetArmouryCrate(), TYPE_NPC)))
+        {
+            m_PLuaBattlefield->InsertEntity(entity, true, CONDITION_DISAPPEAR_AT_START);
+            entity->SetUntargetable(true);
+            entity->ResetLocalVars();
+            entity->PAI->EventHandler.removeListener("TRIGGER_CRATE");
+        }
     }
 }
 

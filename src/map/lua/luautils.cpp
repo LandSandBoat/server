@@ -4478,9 +4478,13 @@ namespace luautils
         TracyZoneScoped;
 
         CStatusEffect* status = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_BATTLEFIELD);
-        uint16         power  = status->GetPower();
 
-        invokeBattlefieldEvent(power, "onBattlefieldKick", CLuaBaseEntity(PChar));
+        if (status != nullptr)
+        {
+            uint16 power = status->GetPower();
+
+            invokeBattlefieldEvent(power, "onBattlefieldKick", CLuaBaseEntity(PChar));
+        }
     }
 
     /********************************************************************

@@ -2101,26 +2101,31 @@ namespace battleutils
                     {
                         // Reflect a portion of the blocked damage back. This is calculated before Stoneskin, Phalanx, Sentinel or Invincible
                         CStatusEffect* reprisalEffect = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_REPRISAL);
-                        float          spikesBonus    = 1.f + (PDefender->getMod(Mod::REPRISAL_SPIKES_BONUS) / 100.f);
-                        int16          effectPower    = (int16)(reprisalEffect->GetPower() * spikesBonus);
-                        int32          blockedDamage  = (damage * (100 - absorb)) / 100;
-                        int32          spikesDamage   = 0;
 
-                        if (PDefender->StatusEffectContainer->HasStatusEffect({ EFFECT_INVINCIBLE, EFFECT_SENTINEL }))
+                        if (reprisalEffect != nullptr)
                         {
-                            blockedDamage = (baseDamage * (100 - absorb)) / 100;
+                            float spikesBonus   = 1.f + (PDefender->getMod(Mod::REPRISAL_SPIKES_BONUS) / 100.f);
+                            int16 effectPower   = (int16)(reprisalEffect->GetPower() * spikesBonus);
+                            int32 blockedDamage = (damage * (100 - absorb)) / 100;
+                            int32 spikesDamage  = 0;
+
+                            if (PDefender->StatusEffectContainer->HasStatusEffect({ EFFECT_INVINCIBLE, EFFECT_SENTINEL }))
+                            {
+                                blockedDamage = (baseDamage * (100 - absorb)) / 100;
+                            }
+
+                            spikesDamage = blockedDamage * (effectPower / 100);
+
+                            // Set Reprisal spike damage
+                            PDefender->setModifier(Mod::SPIKES_DMG, spikesDamage);
                         }
-
-                        spikesDamage = blockedDamage * (effectPower / 100);
-
-                        // Set Reprisal spike damage
-                        PDefender->setModifier(Mod::SPIKES_DMG, spikesDamage);
                     }
                 }
 
                 damage = (damage * absorb) / 100;
             }
         }
+
         if (damage > 0)
         {
             damage = std::max(damage - PDefender->getMod(Mod::PHALANX), 0);
@@ -3935,6 +3940,12 @@ namespace battleutils
         }
 
         CStatusEffect* PEffect = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_SKILLCHAIN, 0);
+
+        if (PEffect == nullptr)
+        {
+            ShowWarning("battleutils::TakeSkillchainDamage() - PEffect was null.");
+            return 0;
+        }
 
         // Determine the skill chain level and elemental resistance.
         SKILLCHAIN_ELEMENT skillchain = (SKILLCHAIN_ELEMENT)PEffect->GetPower();

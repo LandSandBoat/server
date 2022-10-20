@@ -113,12 +113,15 @@ namespace guildutils
             {
                 CItemShop* PItem = (CItemShop*)PGuildShop->GetItem(slotid);
 
-                PItem->setBasePrice((uint32)(PItem->getMinPrice() + ((float)(PItem->getStackSize() - PItem->getQuantity()) / PItem->getStackSize()) *
-                                                                        (PItem->getMaxPrice() - PItem->getMinPrice())));
-
-                if (PItem->IsDailyIncrease())
+                if (PItem != nullptr)
                 {
-                    PItem->setQuantity(PItem->getQuantity() + PItem->getDailyIncrease());
+                    PItem->setBasePrice((uint32)(PItem->getMinPrice() + ((float)(PItem->getStackSize() - PItem->getQuantity()) / PItem->getStackSize()) *
+                                                                            (PItem->getMaxPrice() - PItem->getMinPrice())));
+
+                    if (PItem->IsDailyIncrease())
+                    {
+                        PItem->setQuantity(PItem->getQuantity() + PItem->getDailyIncrease());
+                    }
                 }
             }
         }

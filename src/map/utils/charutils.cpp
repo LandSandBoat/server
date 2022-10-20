@@ -2236,6 +2236,11 @@ namespace charutils
         auto*       RecycleBin     = PChar->getStorage(LOC_RECYCLEBIN);
         auto*       OtherContainer = PChar->getStorage(container);
 
+        if (PItem == nullptr)
+        {
+            return;
+        }
+
         // Try and insert
         uint8 NewSlotID = PChar->getStorage(LOC_RECYCLEBIN)->InsertItem(PItem);
         if (NewSlotID != ERROR_SLOTID)
