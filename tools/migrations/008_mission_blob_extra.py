@@ -38,3 +38,4 @@ def migrate(cur, db):
             except: # lgtm [py/catch-base-exception]
                 efile.write('[mission_blob_extra] Error reading missions in chars table for charid: ' + str(charid) + '\n')
     db.commit()
+    efile.close()

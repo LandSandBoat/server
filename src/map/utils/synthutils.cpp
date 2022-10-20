@@ -48,8 +48,6 @@
 #include "synthutils.h"
 #include "zoneutils.h"
 
-//#define _XI_SYNTH_DEBUG_MESSAGES_ // enable debugging messages
-
 namespace synthutils
 {
     /********************************************************************************************************************************
@@ -802,21 +800,26 @@ namespace synthutils
             if (slotid != 0xFF)
             {
                 CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(slotid);
-                PItem->setReserve(PItem->getReserve() + 1);
+                if (PItem != nullptr)
+                {
+                    PItem->setReserve(PItem->getReserve() + 1);
+                }
             }
         }
 
         // remove crystal
         auto* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(PChar->CraftContainer->getInvSlotID(0));
-        PItem->setReserve(PItem->getReserve() - 1);
+        if (PItem != nullptr)
+        {
+            PItem->setReserve(PItem->getReserve() - 1);
+        }
+
         charutils::UpdateItem(PChar, LOC_INVENTORY, PChar->CraftContainer->getInvSlotID(0), -1);
 
         uint8 result = calcSynthResult(PChar);
 
         uint8 invSlotID  = 0;
         uint8 tempSlotID = 0;
-        // uint16 itemID     = 0;
-        // uint32 quantity   = 0;
 
         for (uint8 slotID = 1; slotID <= 8; ++slotID)
         {
@@ -915,9 +918,12 @@ namespace synthutils
                     if (invSlotID != 0xFF)
                     {
                         auto* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(invSlotID);
-                        PItem->setSubType(ITEM_UNLOCKED);
-                        PItem->setReserve(PItem->getReserve() - removeCount);
-                        charutils::UpdateItem(PChar, LOC_INVENTORY, invSlotID, -(int32)removeCount);
+                        if (PItem != nullptr)
+                        {
+                            PItem->setSubType(ITEM_UNLOCKED);
+                            PItem->setReserve(PItem->getReserve() - removeCount);
+                            charutils::UpdateItem(PChar, LOC_INVENTORY, invSlotID, -(int32)removeCount);
+                        }
                     }
                     invSlotID   = nextSlotID;
                     nextSlotID  = 0;

@@ -39,8 +39,7 @@ CPartyListPacket::CPartyListPacket(uint32 partyid, uint32 Total)
     ref<uint8>(m_data, (0x0A)) = 0x80;
     ref<uint8>(m_data, (0x0B)) = 0x82; // packet type
 
-    // ref<uint8>(m_data,(0x0E)) = 0x00; // Number of characters per packet.
-    ref<uint8>(m_data, (0x0E)) = Total;
+    ref<uint8>(m_data, (0x0E)) = Total; // Number of characters per packet.
 }
 
 /************************************************************************
@@ -129,22 +128,6 @@ void CPartyListPacket::AddPlayer(SearchEntity* PPlayer)
 
 uint8* CPartyListPacket::GetData()
 {
-    /*
-    std::ifstream fileBufferHere("C:/party.dat", std::ios::in|std::ios::binary);
-    char *m_content = new char[588];
-
-    if(fileBufferHere.is_open())
-    {
-    fileBufferHere.seekg(0, std::ios::beg);
-    fileBufferHere.getline(m_content, 588);
-    }
-    fileBufferHere.close();
-
-    uint8* packet = (uint8*)m_content;
-    ShowInfo("done work ");
-
-    memcpy(m_data, packet, 588);*/
-
     return m_data;
 }
 
