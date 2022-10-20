@@ -35,8 +35,6 @@ zoneObject.onZoneIn = function(player, prevZone)
 
     if quests.rainbow.onZoneIn(player) then
         cs = 123
-    elseif (prevZone == xi.zone.ORDELLES_CAVES and player:getCharVar("darkPuppetCS") == 5 and player:getFreeSlotsCount() >= 1) then
-        cs = 122
     end
 
     return cs
@@ -56,9 +54,6 @@ zoneObject.onEventUpdate = function(player, csid, option)
 end
 
 zoneObject.onEventFinish = function(player, csid, option)
-    if csid == 122 then
-        npcUtil.completeQuest(player, xi.quest.log_id.BASTOK, xi.quest.id.bastok.DARK_PUPPET, { item=14096, fame=40, var="darkPuppetCS" }) -- Chaos Sollerets
-    end
 end
 
 zoneObject.onZoneWeatherChange = function(weather)

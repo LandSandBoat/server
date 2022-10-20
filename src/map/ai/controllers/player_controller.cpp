@@ -35,6 +35,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../../weapon_skill.h"
 #include "../ai_container.h"
 #include "../states/death_state.h"
+#include "../states/inactive_state.h"
 
 CPlayerController::CPlayerController(CCharEntity* _PChar)
 : CController(_PChar)
@@ -50,6 +51,10 @@ bool CPlayerController::Cast(uint16 targid, SpellID spellid)
     auto* PChar = static_cast<CCharEntity*>(POwner);
     if (!PChar->PRecastContainer->HasRecast(RECAST_MAGIC, static_cast<uint16>(spellid), 0))
     {
+        if (auto target = PChar->GetEntity(targid); target && target->PAI->IsUntargetable())
+        {
+            return false;
+        }
         return CController::Cast(targid, spellid);
     }
     else
@@ -122,6 +127,10 @@ bool CPlayerController::Ability(uint16 targid, uint16 abilityid)
             PChar->pushPacket(new CMessageBasicPacket(PChar, PChar, 0, 0, MSGBASIC_WAIT_LONGER));
             return false;
         }
+        if (auto target = PChar->GetEntity(targid); target && target->PAI->IsUntargetable())
+        {
+            return false;
+        }
         return PChar->PAI->Internal_Ability(targid, abilityid);
     }
     else
@@ -136,6 +145,10 @@ bool CPlayerController::RangedAttack(uint16 targid)
     auto* PChar = static_cast<CCharEntity*>(POwner);
     if (PChar->PAI->CanChangeState())
     {
+        if (auto target = PChar->GetEntity(targid); target && target->PAI->IsUntargetable())
+        {
+            return false;
+        }
         return PChar->PAI->Internal_RangedAttack(targid);
     }
     else
@@ -150,6 +163,10 @@ bool CPlayerController::UseItem(uint16 targid, uint8 loc, uint8 slotid)
     auto* PChar = static_cast<CCharEntity*>(POwner);
     if (PChar->PAI->CanChangeState())
     {
+        if (auto target = PChar->GetEntity(targid); target && target->PAI->IsUntargetable())
+        {
+            return false;
+        }
         return PChar->PAI->Internal_UseItem(targid, loc, slotid);
     }
     return false;
@@ -206,6 +223,11 @@ bool CPlayerController::WeaponSkill(uint16 targid, uint16 wsid)
         auto* PTarget = PChar->IsValidTarget(targid, battleutils::isValidSelfTargetWeaponskill(wsid) ? TARGET_SELF : TARGET_ENEMY, errMsg);
         if (PTarget)
         {
+            if (PTarget->PAI->IsUntargetable())
+            {
+                return false;
+            }
+
             if (!facing(PChar->loc.p, PTarget->loc.p, 64) && PTarget != PChar)
             {
                 PChar->pushPacket(new CMessageBasicPacket(PChar, PTarget, 0, 0, MSGBASIC_CANNOT_SEE));

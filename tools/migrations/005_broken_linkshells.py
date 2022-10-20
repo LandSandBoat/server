@@ -1,4 +1,4 @@
-import mysql.connector
+import mariadb
 
 def migration_name():
 	return "Adding broken column to linkshells table"
@@ -17,5 +17,5 @@ def migrate(cur, db):
 	try:
 		cur.execute("ALTER TABLE linkshells ADD COLUMN `broken` tinyint(1) unsigned NOT NULL DEFAULT 0;")
 		db.commit()
-	except mysql.connector.Error as err:
+	except mariadb.Error as err:
 		print("Something went wrong: {}".format(err))

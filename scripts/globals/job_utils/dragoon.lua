@@ -362,7 +362,7 @@ xi.job_utils.dragoon.useSuperJump = function(player, target, ability)
 
     -- Prevent the player from performing actions while in the air
     player:queue(0, function(playerArg)
-        playerArg:stun(5000)
+        playerArg:untargetableAndUnactionable(5000)
     end)
 
     -- If the Dragoon's wyvern is out and alive, tell it to use Super Climb

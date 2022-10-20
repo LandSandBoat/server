@@ -22,7 +22,7 @@ namespace gambits
 {
     // Validate gambit before it's inserted into the gambit list
     // Check levels, etc.
-    void CGambitsContainer::AddGambit(const Gambit_t& gambit)
+    std::string CGambitsContainer::AddGambit(Gambit_t const& gambit)
     {
         TracyZoneScoped;
 
@@ -40,7 +40,23 @@ namespace gambits
         if (available)
         {
             gambits.push_back(gambit);
+            return gambit.identifier;
         }
+        return "";
+    }
+
+    void CGambitsContainer::RemoveGambit(std::string const& id)
+    {
+        gambits.erase(
+            std::remove_if(gambits.begin(), gambits.end(),
+                           [&id](Gambit_t const& gambit)
+                           { return gambit.identifier == id; }),
+            gambits.end());
+    }
+
+    void CGambitsContainer::RemoveAllGambits()
+    {
+        gambits.clear();
     }
 
     void CGambitsContainer::Tick(time_point tick)

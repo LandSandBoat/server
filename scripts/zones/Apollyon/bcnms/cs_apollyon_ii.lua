@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Appolyon
+-- Area: Apollyon
 -- Name:
 -----------------------------------
 require("scripts/globals/limbus")

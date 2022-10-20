@@ -16,7 +16,7 @@ end
 
 abilityObject.onUseAbility = function(pet, target, ability)
     pet:queue(0, function(petArg)
-        petArg:stun(5000)
+        petArg:untargetableAndUnactionable(5000)
     end)
 end
 

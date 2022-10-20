@@ -137,7 +137,7 @@ mission.sections =
 
         [xi.zone.THRONE_ROOM] =
         {
-            ['Throne_Room'] =
+            ['_4l1'] =
             {
                 onTrigger = function(player, npc)
                     if player:getMissionStatus(mission.areaId) == 2 then
