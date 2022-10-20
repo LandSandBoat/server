@@ -352,7 +352,6 @@ def connect():
         if err.errno == mariadb.constants.ERR.ER_ACCESS_DENIED_ERROR:
             print(colorama.Fore.RED + 'Incorrect mysql_login or mysql_password, update ../settings/network.lua.')
             close()
-            return False
         elif err.errno == mariadb.constants.ERR.ER_BAD_DB_ERROR:
             print(colorama.Fore.RED + 'Database ' + database + ' does not exist.')
             if input('Would you like to create new database: ' + database + '? [y/N] ').lower() == 'y':
@@ -373,6 +372,7 @@ def close():
         cur.close()
         db.close()
     time.sleep(0.5)
+    quit()
 
 def setup_db():
     fetch_files()
@@ -660,7 +660,6 @@ def main():
         print(colorama.ansi.clear_screen())
         if 'q' == selection:
             close()
-            return
         if 'e' == selection and express_enabled:
             express_update()
             continue
