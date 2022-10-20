@@ -340,9 +340,12 @@ bool CAttack::CheckAnticipated()
         case ANTICIPATE_RESULT::FAIL:
             return false;
         case ANTICIPATE_RESULT::CRITICALCOUNTER:
-            m_isCritical = true;
+            m_isCritical  = true;
+            m_isCountered = true;
+            return true;
         case ANTICIPATE_RESULT::COUNTER:
             m_isCountered = true;
+            return true;
         case ANTICIPATE_RESULT::ANTICIPATE:
             m_anticipated = true;
             return true;
@@ -388,7 +391,7 @@ bool CAttack::CheckCounter()
         seiganChance /= 4;
     }
     // clang-format off
-    if (((xirand::GetRandomNumber(100) < std::clamp<uint16>(m_victim->getMod(Mod::COUNTER) + meritCounter, 0, 80)) ||
+    if (((xirand::GetRandomNumber(100) < std::clamp<uint16>(m_victim->getMod(Mod::COUNTER) + meritCounter, 0, 100)) ||
         (xirand::GetRandomNumber(100) < std::clamp<uint16>(seiganChance, 0, 80))) &&
             (facing(m_victim->loc.p, m_attacker->loc.p, 64) && (xirand::GetRandomNumber(100) < battleutils::GetHitRate(m_victim, m_attacker))))
     // clang-format on

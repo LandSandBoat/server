@@ -31,7 +31,7 @@ namespace attackutils
 {
     uint8 TryAnticipate(CBattleEntity* PDefender, CBattleEntity* PAttacker, PHYSICAL_ATTACK_TYPE physicalAttackType)
     {
-        uint8 result = (uint8)(uint8)ANTICIPATE_RESULT::FAIL;
+        uint8 result = (uint8)ANTICIPATE_RESULT::FAIL;
 
         if (PDefender == nullptr || PAttacker == nullptr)
         {
