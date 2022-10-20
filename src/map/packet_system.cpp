@@ -726,6 +726,10 @@ void SmallPacket0x016(map_session_data_t* const PSession, CCharEntity* const PCh
             if (!PEntity)
             {
                 PEntity = zoneutils::GetTrigger(targid, PChar->getZone());
+
+                // PEntity->id will now be the full id of the entity we could not find
+                ShowWarning(fmt::format("Server missing npc_list.sql entry <{}> in zone <{} ({})>",
+                                        PEntity->id, zoneutils::GetZone(PChar->getZone())->GetName(), PChar->getZone()));
             }
             PChar->updateEntityPacket(PEntity, ENTITY_SPAWN, UPDATE_ALL_MOB);
         }
