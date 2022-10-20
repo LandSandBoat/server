@@ -1,7 +1,7 @@
 -----------------------------------
--- Area: Port Bastok
+-- Area: Port San d'Oria
 --  NPC: Dealer Moogle
--- !pos 153.359 8.499 -44.523 236
+-- !pos 13.026 -4.000 -87.403 232
 -----------------------------------
 require("scripts/globals/dealer_moogle")
 -----------------------------------

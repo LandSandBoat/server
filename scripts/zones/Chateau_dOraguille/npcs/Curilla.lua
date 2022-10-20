@@ -84,22 +84,6 @@ entity.onTrigger = function(player, npc)
     then
         player:startEvent(109) -- Start
 
-    -- "Enveloped in Darkness" (RDM AF Shoes)
-    elseif envelopedInDarkness == QUEST_ACCEPTED then
-        if player:hasKeyItem(xi.ki.OLD_POCKET_WATCH) and not player:hasKeyItem(xi.ki.OLD_BOOTS) then
-            player:startEvent(93)
-        elseif player:hasKeyItem(xi.ki.OLD_BOOTS) and player:getCharVar("needs_crawler_blood") == 0 then
-            player:startEvent(101)
-        elseif player:getCharVar("needs_crawler_blood") == 1 then
-            player:startEvent(117)
-        end
-    elseif
-        mJob == xi.job.RDM and mLvl >= xi.settings.main.AF2_QUEST_LEVEL and
-        player:getQuestStatus(xi.quest.log_id.SANDORIA, sandyQuests.THE_CRIMSON_TRIAL) == QUEST_COMPLETED and
-        envelopedInDarkness == QUEST_AVAILABLE
-    then
-        player:startEvent(94) -- Start
-
     -- Default dialogue after "Peace for the Spirit"
     elseif peaceForTheSpirit == QUEST_COMPLETED then
         player:startEvent(52)
@@ -115,16 +99,9 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if (csid == 94 and option == 1) then
-        player:addQuest(xi.quest.log_id.SANDORIA, sandyQuests.ENVELOPED_IN_DARKNESS)
-        player:addKeyItem(xi.ki.OLD_POCKET_WATCH)
-        player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.OLD_POCKET_WATCH)
-    elseif (csid == 109 and option == 1) then
+    if csid == 109 and option == 1 then
         player:addQuest(xi.quest.log_id.SANDORIA, sandyQuests.PEACE_FOR_THE_SPIRIT)
-        player:setCharVar("needs_crawler_blood", 0)
-    elseif (csid == 101) then
-        player:setCharVar("needs_crawler_blood", 1)
-    elseif (csid == 562) then
+    elseif csid == 562 then
         player:setCharVar("WildcatSandy", utils.mask.setBit(player:getCharVar("WildcatSandy"), 15, true))
     elseif csid == 573 and option == 2 then
         player:addSpell(902, true, true)

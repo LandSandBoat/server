@@ -186,7 +186,6 @@ int32 makeConnection(uint32 ip, uint16 port, int32 type)
         return -1;
     }
 
-    // setsocketopts(fd);
     struct linger opt;
     opt.l_onoff  = 0; // SO_DONTLINGER
     opt.l_linger = 0; // Do not care
@@ -739,8 +738,8 @@ int32 makeConnection_tcp(uint32 ip, uint16 port)
 int connect_client(int listen_fd, sockaddr_in& client_address)
 {
     TracyZoneScoped;
-    int fd;
-    // struct sockaddr_in client_address;
+
+    int       fd;
     socklen_t len;
 
     len = sizeof(client_address);
@@ -765,9 +764,6 @@ int connect_client(int listen_fd, sockaddr_in& client_address)
         return -1;
     }
 
-    // setsocketopts(fd);
-    // set_nonblocking(fd, 1);
-
     if (ip_rules && !connect_check(ntohl(client_address.sin_addr.s_addr)))
     {
         do_close(fd);
@@ -779,9 +775,6 @@ int connect_client(int listen_fd, sockaddr_in& client_address)
         fd_max = fd + 1;
     }
     sFD_SET(fd, &readfds);
-
-    // create_session(fd, recv_to_fifo, send_from_fifo, default_func_parse);
-    // sessions[fd]->client_addr = ntohl(client_address.sin_addr.s_addr);
 
     return fd;
 }
@@ -816,9 +809,6 @@ int32 makeListenBind_tcp(const char* ip, uint16 port, RecvFunc connect_client)
         sClose(fd);
         return -1;
     }
-
-    // setsocketopts(fd);
-    // set_nonblocking(fd, 1);
 
     server_address.sin_family = AF_INET;
     inet_pton(AF_INET, ip, &server_address.sin_addr.s_addr);
@@ -1253,7 +1243,6 @@ void socket_final_udp()
     {
         return;
     }
-    // do_close_udp(listen_fd);
 }
 
 int32 recvudp(int32 fd, void* buff, size_t nbytes, int32 flags, struct sockaddr* from, socklen_t* addrlen)

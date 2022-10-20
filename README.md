@@ -15,7 +15,7 @@ Welcome to LandSandBoat, an open source server emulator for FFXI.
 
 ## Getting Started
 
-A [quick start guide](https://github.com/LandSandBoat/server/wiki/Quick-Start-Guide), the [frequently asked questions](https://github.com/LandSandBoat/server/-/wikis/Frequently-Asked-Questions), and a table of "[what works](https://github.com/LandSandBoat/server/wikis/What-Works)" are all available on [our wiki](https://github.com/LandSandBoat/server/wiki).
+A [quick start guide](https://github.com/LandSandBoat/server/wiki/Quick-Start-Guide), the [frequently asked questions](https://github.com/LandSandBoat/server/wiki/Frequently-Asked-Questions), and a table of "[what works](https://github.com/LandSandBoat/server/wiki/What-Works)" are all available on [our wiki](https://github.com/LandSandBoat/server/wiki).
 
 ## Interacting with LandSandBoat
 

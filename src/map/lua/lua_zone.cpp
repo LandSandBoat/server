@@ -245,7 +245,12 @@ std::optional<CLuaBaseEntity> CLuaZone::insertDynamicEntity(sol::table table)
 
     m_pLuaZone->GetZoneEntities()->dynamicTargIds.insert(PEntity->targid);
 
-    PEntity->id = 0x1000100 + (ZoneID << 12) + PEntity->targid;
+    PEntity->id = 0x1000000 + (ZoneID << 12) + PEntity->targid;
+    // Add 0x100 if targid is >= 0x800 -- observed on retail.
+    if (PEntity->targid >= 0x800)
+    {
+        PEntity->id += 0x100;
+    }
 
     PEntity->loc.zone       = m_pLuaZone;
     PEntity->loc.p.rotation = table.get_or<uint8>("rotation", 0);

@@ -1,7 +1,7 @@
 -----------------------------------
--- Area: Port Bastok
+-- Area: Port Windurst
 --  NPC: Dealer Moogle
--- !pos 153.359 8.499 -44.523 236
+-- !pos -65.377 -4.188 144.133 240
 -----------------------------------
 require("scripts/globals/dealer_moogle")
 -----------------------------------
