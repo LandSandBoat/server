@@ -668,6 +668,11 @@ function doPhysicalWeaponskill(attacker, target, wsID, wsParams, tp, action, pri
     attacker:delStatusEffect(xi.effect.SNEAK_ATTACK)
     attacker:delStatusEffectSilent(xi.effect.BUILDING_FLOURISH)
 
+    if attacker:checkThirdEye(defender) then
+        finaldmg = 0
+        primaryMsg = xi.msg.basic.ANTICIPATE
+    end
+
     finaldmg = finaldmg * xi.settings.main.WEAPON_SKILL_POWER -- Add server bonus
     calcParams.finalDmg = finaldmg
     finaldmg = takeWeaponskillDamage(target, attacker, wsParams, primaryMsg, attack, calcParams, action)

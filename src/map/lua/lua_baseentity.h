@@ -435,6 +435,7 @@ public:
     void  delHP(int32 delAmt);             // Subtract hp of Entity
     void  takeDamage(int32 damage, sol::object const& attacker, sol::object const& atkType,
                      sol::object const& dmgType, sol::object const& flags); // Takes damage from the provided attacker
+    bool  checkThirdEye(CLuaBaseEntity* PLuaDefender);
     void  hideHP(bool value);
     int32 getDeathType();            // Returns Death Type for Abyssea
     void  setDeathType(int32 value); // Sets Death Type for Abyssea

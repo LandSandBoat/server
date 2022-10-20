@@ -333,60 +333,22 @@ void CAttack::SetDamage(int32 value)
 
 bool CAttack::CheckAnticipated()
 {
-    if (m_attackType == PHYSICAL_ATTACK_TYPE::DAKEN)
+    auto value = (ANTICIPATE_RESULT)attackutils::TryAnticipate(m_victim, m_attacker, m_attackType);
+
+    switch (value)
     {
-        return false;
+        case ANTICIPATE_RESULT::FAIL:
+            return false;
+        case ANTICIPATE_RESULT::CRITICALCOUNTER:
+            m_isCritical = true;
+        case ANTICIPATE_RESULT::COUNTER:
+            m_isCountered = true;
+        case ANTICIPATE_RESULT::ANTICIPATE:
+            m_anticipated = true;
+            return true;
     }
 
-    CStatusEffect* effect = m_victim->StatusEffectContainer->GetStatusEffect(EFFECT_THIRD_EYE, 0);
-    if (effect == nullptr)
-    {
-        return false;
-    }
-
-    // power stores how many times this effect has anticipated
-    auto pastAnticipations = effect->GetPower();
-    if (pastAnticipations >= 6)
-    {
-        // max 7 anticipates!
-        m_victim->StatusEffectContainer->DelStatusEffect(EFFECT_THIRD_EYE);
-        m_anticipated = true;
-        return true;
-    }
-
-    bool hasSeigan = m_victim->StatusEffectContainer->HasStatusEffect(EFFECT_SEIGAN, 0);
-
-    if (!hasSeigan)
-    {
-        m_victim->StatusEffectContainer->DelStatusEffect(EFFECT_THIRD_EYE);
-        m_anticipated = true;
-        return true;
-    }
-    else
-    { // do have seigan, decay anticipations correctly (guesstimated)
-        // 5-6 anticipates is a 'lucky' streak, going to assume 15% decay per proc, with a 100% base w/ Seigan
-        if (xirand::GetRandomNumber(100) >= (100 - ((pastAnticipations + 1) * 15) + m_victim->getMod(Mod::THIRD_EYE_ANTICIPATE_RATE)))
-        {
-            m_victim->StatusEffectContainer->DelStatusEffect(EFFECT_THIRD_EYE);
-        }
-
-        // increment power and don't remove
-        effect->SetPower(effect->GetPower() + 1);
-        // chance to counter - 25% base
-        if (xirand::GetRandomNumber(100) < 25 + m_victim->getMod(Mod::THIRD_EYE_COUNTER_RATE))
-        {
-            if (m_victim->PAI->IsEngaged() && facing(m_victim->loc.p, m_attacker->loc.p, 40) && !m_victim->StatusEffectContainer->HasStatusEffect(EFFECT_SLEEP) && !m_victim->StatusEffectContainer->HasStatusEffect(EFFECT_LULLABY) &&
-                !m_victim->StatusEffectContainer->HasStatusEffect(EFFECT_PETRIFICATION) && !m_victim->StatusEffectContainer->HasStatusEffect(EFFECT_TERROR))
-            {
-                m_isCountered = true;
-                m_isCritical  = (xirand::GetRandomNumber(100) < battleutils::GetCritHitRate(m_victim, m_attacker, false));
-            }
-        }
-
-        m_anticipated = true;
-        return true;
-    }
-    // return false;
+    return false;
 }
 
 bool CAttack::IsCountered() const

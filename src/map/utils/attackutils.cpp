@@ -20,6 +20,7 @@
 */
 
 #include "attackutils.h"
+#include "../ai/ai_container.h"
 #include "../attack.h"
 #include "../items/item_weapon.h"
 #include "../status_effect_container.h"
@@ -28,6 +29,111 @@
 
 namespace attackutils
 {
+    uint8 TryAnticipate(CBattleEntity* PDefender, CBattleEntity* PAttacker, PHYSICAL_ATTACK_TYPE physicalAttackType)
+    {
+        uint8 result = (uint8)(uint8)ANTICIPATE_RESULT::FAIL;
+
+        if (PDefender == nullptr || PAttacker == nullptr)
+        {
+            return result;
+        }
+
+        if (physicalAttackType == PHYSICAL_ATTACK_TYPE::DAKEN)
+        {
+            return result;
+        }
+
+        auto effect = PDefender->StatusEffectContainer->GetStatusEffect(EFFECT_THIRD_EYE, 0);
+        auto isCrit = (xirand::GetRandomNumber(100) <= battleutils::GetCritHitRate(PDefender, PAttacker, false));
+
+        if (effect == nullptr)
+        {
+            return result;
+        }
+
+        // Sample item https://www.bg-wiki.com/ffxi/Saotome_Haidate
+        auto thirdEyeCounterRateAugment = PDefender->getMod(Mod::THIRD_EYE_COUNTER_RATE);
+
+        if (!PDefender->StatusEffectContainer->HasStatusEffect(EFFECT_SEIGAN, 0)) // Handles third eye when not seigan.
+        {
+            // we don't have seigan, so we lose third eye
+            PDefender->StatusEffectContainer->DelStatusEffect(EFFECT_THIRD_EYE);
+
+            // check for counter augment proc
+            if (thirdEyeCounterRateAugment > 0 && xirand::GetRandomNumber(100) <= thirdEyeCounterRateAugment)
+            {
+                if (isCrit)
+                {
+                    result = (uint8)ANTICIPATE_RESULT::CRITICALCOUNTER;
+                }
+                else
+                {
+                    result = (uint8)ANTICIPATE_RESULT::COUNTER;
+                }
+            }
+            else
+            {
+                result = (uint8)ANTICIPATE_RESULT::ANTICIPATE;
+            }
+        }
+        else // Handles third eye under seigan.
+        {
+            // Sample item https://www.bg-wiki.com/ffxi/Kogarasumaru_(Level_75) according to japanese info it reduces
+            // the rate at which third eye has a chance to be lost when anticipating or countering by 50%
+            float powerMod = 1 - (std::clamp((int)PDefender->getMod(Mod::THIRD_EYE_ANTICIPATE_RATE), 0, 100) / 100.0f);
+
+            // power stores (1 x anticipation) + (2x counter)
+            auto power = effect->GetPower();
+
+            // first 4-6 seconds gives us very high chance to anticipate
+            auto tickCount = effect->GetElapsedTickCount() - 1;
+            if (tickCount < 0)
+            {
+                tickCount = 0;
+            }
+
+            float powerMulti = std::clamp((32.0f - power * powerMod) / 32.0f, 0.f, 1.f);
+            float tickMulti  = std::clamp((127.0f - tickCount * 8) / 128.0f, 0.f, 1.f);
+            float keepChance = std::clamp(tickMulti * powerMulti, 0.f, 1.f);
+            float random     = xirand::GetRandomNumber(1.0f);
+
+            // chance to counter - 25% base plus augment and not preventing action and is facing
+            if (xirand::GetRandomNumber(100) <= 25 + thirdEyeCounterRateAugment &&
+                !PDefender->StatusEffectContainer->HasPreventActionEffect() &&
+                PDefender->PAI->IsEngaged() &&
+                facing(PDefender->loc.p, PAttacker->loc.p, 42))
+            {
+                // counter increases power by 2
+                effect->SetPower(power + 2);
+
+                // The defender is the attacker on counter
+                if (isCrit)
+                {
+                    result = (uint8)ANTICIPATE_RESULT::CRITICALCOUNTER;
+                }
+                else
+                {
+                    result = (uint8)ANTICIPATE_RESULT::COUNTER;
+                }
+            }
+            else
+            {
+                // anticipate increases power by 1
+                effect->SetPower(power + 1);
+                result = (uint8)ANTICIPATE_RESULT::ANTICIPATE;
+            }
+
+            // check if we should lose third eye
+            if (keepChance < random)
+            {
+                // we lost our third eye roll, remove the buff
+                PDefender->StatusEffectContainer->DelStatusEffect(EFFECT_THIRD_EYE);
+            }
+        }
+
+        return result;
+    }
+
     /************************************************************************
      *                                                                       *
      *  Multihit calculator.                                                    *

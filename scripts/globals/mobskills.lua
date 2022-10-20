@@ -148,6 +148,10 @@ end
 -- if xi.mobskills.physicalTpBonus.ATK_VARIES -> three values are attack multiplier (1.5x 0.5x etc)
 -- if xi.mobskills.physicalTpBonus.DMG_VARIES -> three values are
 
+-- TODO: Fix undefined and non-standard variable usage.
+-- Disable variable checking for this function.
+-- luacheck: ignore 113
+-- luacheck: ignore 111
 xi.mobskills.mobPhysicalMove = function(mob, target, skill, numberofhits, accmod, dmgmod, tpeffect, mtp000, mtp150, mtp300, offcratiomod, wSC)
     local returninfo = { }
     local fStr = 0
@@ -573,7 +577,7 @@ xi.mobskills.mobFinalAdjustments = function(dmg, mob, skill, target, attackType,
     end
 
     --handle Third Eye using shadowbehav as a guide
-    if attackType == xi.attackType.PHYSICAL and utils.thirdeye(target) then
+    if attackType == xi.attackType.PHYSICAL and mob:checkThirdEye(target) then
         skill:setMsg(xi.msg.basic.ANTICIPATE)
         return 0
     end
