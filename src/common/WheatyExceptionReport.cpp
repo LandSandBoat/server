@@ -974,6 +974,17 @@ bool bWriteVariables, HANDLE pThreadHandle)                                     
             &symDisplacement,                               // Address of the variable that will receive the displacement
             &sip.si))                                       // Address of the SYMBOL_INFO structure (inside "sip" object)
         {
+            bool isStdLib = sip.si.NameLen > 3 &&
+                            sip.si.Name[0] == 's' &&
+                            sip.si.Name[1] == 't' &&
+                            sip.si.Name[2] == 'd';
+
+            // Don't print things from the std:: namespace, for clarity
+            if (isStdLib)
+            {
+                continue;
+            }
+
             wsprintf((LPSTR)funcNameBuffer.data(), "%hs+%I64X", sip.si.Name, symDisplacement);
         }
         else                                                // No symbol found.  Print out the logical address instead.

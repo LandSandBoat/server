@@ -1,4 +1,4 @@
-import mysql.connector
+import mariadb
 
 def migration_name():
 	return "Adding job_master column to chars table"
@@ -18,5 +18,5 @@ def migrate(cur, db):
 		cur.execute("ALTER TABLE chars \
 		ADD COLUMN `job_master` int(2) unsigned NOT NULL DEFAULT '1' AFTER `mentor`;")
 		db.commit()
-	except mysql.connector.Error as err:
+	except mariadb.Error as err:
 		print("Something went wrong: {}".format(err))

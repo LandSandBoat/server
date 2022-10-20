@@ -109,6 +109,9 @@ jobs:
             fi
           fi
         done
+
+        python3 tools/ci/check_lua_binding_usage.py >> lua_checks.txt
+
         cat lua_checks.txt
         if [ -s lua_checks.txt ]
         then

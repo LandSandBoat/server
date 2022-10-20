@@ -14,8 +14,8 @@ entity.onMobSpawn = function(mob)
     mob:setModelId(1167) -- light
 
     -- Todo: confirm this is legit and move to mob_reistances table if so
-    mob:addmob(xi.mod.LIGHT_MEVA, 100)
-    mob:addmob(xi.mod.DARK_MEVA, -100)
+    mob:addMod(xi.mod.LIGHT_MEVA, 100)
+    mob:addMod(xi.mod.DARK_MEVA, -100)
 end
 
 entity.onMobRoam = function(mob)
@@ -42,7 +42,7 @@ entity.onMobFight = function(mob, target)
         end
         mob:setAnimationSub(battleForm)
         mob:setLocalVar("changeTime", mob:getBattleTime())
-        if mob:AnimationSub() == 0 then
+        if mob:getAnimationSub() == 0 then
             mob:SetMagicCastingEnabled(true) -- will only cast magic in ball form
         else
             mob:SetMagicCastingEnabled(false)

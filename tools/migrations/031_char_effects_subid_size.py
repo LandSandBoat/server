@@ -1,4 +1,4 @@
-import mysql.connector
+import mariadb
 
 def migration_name():
     return "Adjusting char_effects table column subid size to int."
@@ -17,5 +17,5 @@ def migrate(cur, db):
     try:
         cur.execute("ALTER TABLE char_effects MODIFY subid int(10) unsigned NOT NULL DEFAULT '0';")
         db.commit()
-    except mysql.connector.Error as err:
+    except mariadb.Error as err:
         print("Something went wrong: {}".format(err))

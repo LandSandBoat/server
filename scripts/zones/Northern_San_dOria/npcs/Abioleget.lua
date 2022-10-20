@@ -26,8 +26,9 @@ end
 
 entity.onTrigger = function(player, npc)
     local sermonQuest = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.THE_VICASQUE_S_SERMON)
+    local chevalQuest = player:getQuestStatus(xi.quest.log_id.SANDORIA, xi.quest.id.sandoria.WATERS_OF_THE_CHEVAL)
 
-    if (sermonQuest == QUEST_AVAILABLE) then
+    if sermonQuest == QUEST_AVAILABLE and chevalQuest == QUEST_COMPLETED then
         player:startEvent(589)
     elseif (sermonQuest == QUEST_ACCEPTED) then
         if (player:getCharVar("sermonQuestVar") == 1) then

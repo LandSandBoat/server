@@ -239,25 +239,6 @@ struct look_t
         sub     = look[8];
         ranged  = look[9];
     }
-
-    look_t(std::vector<uint16>& look)
-    {
-        if (look.size() != 10)
-        {
-            throw std::runtime_error(fmt::format("Bad look size passed to look_t constructor (expected 10, got: {})", look.size()));
-        }
-
-        size    = look[0];
-        modelid = look[1];
-        head    = look[2];
-        body    = look[3];
-        hands   = look[4];
-        legs    = look[5];
-        feet    = look[6];
-        main    = look[7];
-        sub     = look[8];
-        ranged  = look[9];
-    }
 };
 
 struct skills_t

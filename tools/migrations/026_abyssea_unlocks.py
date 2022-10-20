@@ -1,4 +1,4 @@
-import mysql.connector
+import mariadb
 
 def migration_name():
     return "Adding traverser_start column to char_unlocks table"
@@ -19,5 +19,5 @@ def migrate(cur, db):
         ADD COLUMN `traverser_start` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, \
         ADD COLUMN `traverser_claimed` int(10) unsigned NOT NULL DEFAULT '0';")
         db.commit()
-    except mysql.connector.Error as err:
+    except mariadb.Error as err:
         print("Something went wrong: {}".format(err))

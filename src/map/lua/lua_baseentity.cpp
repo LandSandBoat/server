@@ -9508,6 +9508,7 @@ uint8 CLuaBaseEntity::registerBattlefield(sol::object const& arg0, sol::object c
         registration.levelCap   = battlefield["levelCap"];
         registration.timeLimit  = std::chrono::seconds(battlefield.get<int32>("timeLimit"));
         registration.isMission  = battlefield.get_or("isMission", false);
+        registration.showTimer  = battlefield.get_or("showTimer", true);
         registration.rules |= battlefield.get<bool>("allowSubjob") ? RULES_ALLOW_SUBJOBS : 0;
         registration.rules |= battlefield.get<bool>("canLoseExp") ? RULES_LOSE_EXP : 0;
     }
@@ -12385,7 +12386,7 @@ void CLuaBaseEntity::trustPartyMessage(uint32 message_id)
  *  Notes   : Adds a behaviour to the gambit system
  ************************************************************************/
 
-void CLuaBaseEntity::addSimpleGambit(uint16 targ, uint16 cond, uint32 condition_arg, uint16 react, uint16 select, uint32 selector_arg, sol::object const& retry)
+std::string CLuaBaseEntity::addSimpleGambit(uint16 targ, uint16 cond, uint32 condition_arg, uint16 react, uint16 select, uint32 selector_arg, sol::object const& retry)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_TRUST);
 
@@ -12404,11 +12405,47 @@ void CLuaBaseEntity::addSimpleGambit(uint16 targ, uint16 cond, uint32 condition_
     g.predicates.emplace_back(Predicate_t{ target, condition, condition_arg });
     g.actions.emplace_back(Action_t{ reaction, selector, selector_arg });
     g.retry_delay = retry_delay;
+    g.identifier  = fmt::format("{}_{}_{}_{}_{}_{}_{}", targ, cond, condition_arg, react, select, selector_arg, retry_delay);
 
     auto* trust      = static_cast<CTrustEntity*>(m_PBaseEntity);
     auto* controller = static_cast<CTrustController*>(trust->PAI->GetController());
 
-    controller->m_GambitsContainer->AddGambit(g);
+    return controller->m_GambitsContainer->AddGambit(g);
+}
+
+/************************************************************************
+ *  Function: removeSimpleGambit()
+ *  Purpose :
+ *  Example : trust:removeSimpleGambit(id)
+ *  Notes   : Removes a behaviour from the gambit system, using the id returned
+ *          : from addSimpleGambit
+ ************************************************************************/
+
+void CLuaBaseEntity::removeSimpleGambit(std::string const& id)
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_TRUST);
+
+    auto* trust      = static_cast<CTrustEntity*>(m_PBaseEntity);
+    auto* controller = static_cast<CTrustController*>(trust->PAI->GetController());
+
+    controller->m_GambitsContainer->RemoveGambit(id);
+}
+
+/************************************************************************
+ *  Function: removeAllSimpleGambits()
+ *  Purpose :
+ *  Example : trust:removeAllSimpleGambits()
+ *  Notes   : Removes all gambits from a trust.
+ ************************************************************************/
+
+void CLuaBaseEntity::removeAllSimpleGambits()
+{
+    XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype != TYPE_TRUST);
+
+    auto* trust      = static_cast<CTrustEntity*>(m_PBaseEntity);
+    auto* controller = static_cast<CTrustController*>(trust->PAI->GetController());
+
+    controller->m_GambitsContainer->RemoveAllGambits();
 }
 
 /************************************************************************
@@ -14351,7 +14388,7 @@ bool CLuaBaseEntity::hasPreventActionEffect()
 
 /************************************************************************
  *  Function: stun()
- *  Purpose : Stuns a mob for a specified amount of time (in ms)
+ *  Purpose : Stuns an entity for a specified amount of time (in ms)
  *  Example : mob:stun(5000) -- Stun for 5 seconds
  *  Notes   : To Do: Change to seconds for standardization?
  ************************************************************************/
@@ -14359,6 +14396,19 @@ bool CLuaBaseEntity::hasPreventActionEffect()
 void CLuaBaseEntity::stun(uint32 milliseconds)
 {
     m_PBaseEntity->PAI->Inactive(std::chrono::milliseconds(milliseconds), false);
+}
+
+/************************************************************************
+ *  Function: untargetableAndUnactionable()
+ *  Purpose : Puts an entity into a stun state
+ *            Also disallows them from being targed as part of a check in PAI->TargetFind
+ *  Example : mob:stun(5000) -- Stun for 5 seconds
+ *  Notes   : To Do: Change to seconds for standardization?
+ ************************************************************************/
+
+void CLuaBaseEntity::untargetableAndUnactionable(uint32 milliseconds)
+{
+    m_PBaseEntity->PAI->Untargetable(std::chrono::milliseconds(milliseconds), false);
 }
 
 /************************************************************************
@@ -15749,6 +15799,8 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("getTrustID", CLuaBaseEntity::getTrustID);
     SOL_REGISTER("trustPartyMessage", CLuaBaseEntity::trustPartyMessage);
     SOL_REGISTER("addSimpleGambit", CLuaBaseEntity::addSimpleGambit);
+    SOL_REGISTER("removeSimpleGambit", CLuaBaseEntity::removeSimpleGambit);
+    SOL_REGISTER("removeAllSimpleGambits", CLuaBaseEntity::removeAllSimpleGambits);
     SOL_REGISTER("setTrustTPSkillSettings", CLuaBaseEntity::setTrustTPSkillSettings);
 
     // Mob Entity-Specific
@@ -15824,6 +15876,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("restoreFromChest", CLuaBaseEntity::restoreFromChest);
     SOL_REGISTER("hasPreventActionEffect", CLuaBaseEntity::hasPreventActionEffect);
     SOL_REGISTER("stun", CLuaBaseEntity::stun);
+    SOL_REGISTER("untargetableAndUnactionable", CLuaBaseEntity::untargetableAndUnactionable);
 
     SOL_REGISTER("getPool", CLuaBaseEntity::getPool);
     SOL_REGISTER("getDropID", CLuaBaseEntity::getDropID);

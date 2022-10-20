@@ -26,6 +26,7 @@ LOCK TABLES `guild_shops` WRITE;
 INSERT INTO `guild_shops` VALUES
 
     -- Alchemy Guild
+    -- Maymunah | Odoba (Bastok Mines)
     (5262, 621, 21, 40, 48, 0, 0), -- pot of crying mustard
     (5262, 622, 36, 51, 64, 24, 24), -- pinch of dried marjoram
     (5262, 636, 97, 369, 64, 24, 24), -- sprig of chamomile
@@ -98,6 +99,7 @@ INSERT INTO `guild_shops` VALUES
     (5262, 17315, 2970, 20790, 8910, 0, 3564), -- riot grenade
     (5262, 16429, 3711, 25977, 20, 0, 5), -- silence baghnakhs
     (5262, 16600, 300, 2100, 20, 0, 3), -- wax sword
+    -- Wahraga | Gathweeda (Aht_Urhgan_Whitegate)
     (60425, 621, 21, 40, 64, 24, 24), -- pot of crying mustard
     (60425, 622, 36, 51, 64, 24, 24), -- pinch of dried marjoram
     (60425, 636, 97, 369, 64, 24, 24), -- sprig of chamomile
@@ -183,6 +185,7 @@ INSERT INTO `guild_shops` VALUES
     (60425, 2159, 111, 777, 80, 0, 100), -- qutrub bandage
 
     -- Bonecraft Guild
+    -- Shih Tayuun | Retto-Marutto Windurst Woods
     (514, 864, 72, 288, 64, 24, 24), -- handful of fish scales
     (514, 880, 70, 349, 64, 24, 24), -- bone chip
     (514, 882, 150, 760, 64, 24, 24), -- sheep tooth
@@ -241,6 +244,7 @@ INSERT INTO `guild_shops` VALUES
     (514, 12414, 11377, 37771, 20, 0, 5), -- turtle shield
 
     -- Clothcraft Guild
+    -- Tilala | Gibol (Selbina)
     (516, 816, 710, 3865, 48, 24, 24), -- spool of silk thread
     (516, 817, 58, 146, 64, 24, 24), -- spool of grass thread
     (516, 818, 312, 582, 64, 24, 24), -- spool of cotton thread
@@ -264,6 +268,7 @@ INSERT INTO `guild_shops` VALUES
     (516, 2128, 75, 80, 375, 75, 150), -- spindle
     (516, 827, 21492, 52704, 55, 0, 22), -- square of wool cloth
     (516, 841, 28, 35, 375, 0, 150), -- yagudo feather
+    -- Meriri | Kuzah_Hpirohpon (Windurst_Woods)
     (5152, 816, 710, 3856, 48, 24, 24), -- spool of silk thread
     (5152, 817, 58, 146, 64, 24, 24), -- spool of grass thread
     (5152, 818, 312, 582, 64, 24, 24), -- spool of cotton thread
@@ -341,6 +346,7 @@ INSERT INTO `guild_shops` VALUES
     (5152, 12858, 9486, 66402, 20, 0, 10), -- wool slops
     (5152, 12979, 14400, 100800, 20, 0, 10), -- wool socks
     (5152, 841, 28, 35, 375, 0, 150), -- yagudo feather
+    -- Taten-Bilten (Al_Zahbi)
     (60430, 825, 480, 2432, 64, 24, 24), -- square of cotton cloth
     (60430, 818, 312, 582, 64, 24, 24), -- spool of cotton thread
     (60430, 839, 280, 624, 32, 12, 12), -- piece of crawler cocoon
@@ -429,6 +435,7 @@ INSERT INTO `guild_shops` VALUES
     (60430, 2289, 4890, 34230, 375, 0, 150), -- square of wamoura cloth
 
     -- Cooking Guild
+    -- Chomo_Jinjahl | Kopopo (Windurst_Waters)
     (530, 4571, 75, 460, 64, 24, 24), -- clump of beaugreens
     (530, 4491, 158, 760, 64, 24, 24), -- watermelon
     (530, 4468, 148, 384, 64, 24, 24), -- bunch of pamamas
@@ -536,6 +543,7 @@ INSERT INTO `guild_shops` VALUES
     (530, 4445, 114, 114, 165, 0, 65), -- yagudo cherry
 
     -- Fishing Guild
+    -- Babubu (Port_Windurst)
     (517, 4443, 28, 134, 64, 24, 24), -- cobalt jellyfish
     (517, 4472, 30, 65, 64, 24, 24), -- crayfish
     (517, 16992, 52, 294, 124, 48, 48), -- slice of bluetail
@@ -563,6 +571,7 @@ INSERT INTO `guild_shops` VALUES
     (517, 17404, 540, 540, 20, 6, 12), -- worm lure
     (517, 17405, 540, 540, 20, 6, 12), -- fly lure
     (517, 17407, 270, 270, 20, 6, 12), -- minnow
+    -- Graegham (Selbina)
     (518, 4384, 5250, 13790, 48, 0, 0), -- black sole
     (518, 4385, 261, 261, 48, 0, 0), -- zafmlug bass
     (518, 4399, 2520, 2520, 48, 0, 0), -- bluetail
@@ -578,6 +587,7 @@ INSERT INTO `guild_shops` VALUES
     (518, 17387, 4077, 4077, 20, 5, 10), -- tarutaru fishing rod
     (518, 17388, 934, 934, 30, 10, 10), -- fastwater fishing rod
     (518, 17399, 2394, 2394, 20, 6, 12), -- sabiki rig
+    -- Mep_Nhapopoluko (Bibiki_Bay)
     (519, 624, 24, 39, 64, 24, 24), -- clump of pamtam kelp
     (519, 4314, 300, 300, 64, 24, 24), -- bibikibo
     (519, 4317, 120, 237, 64, 24, 24), -- trilobite
@@ -589,6 +599,7 @@ INSERT INTO `guild_shops` VALUES
     (519, 4485, 900, 1200, 64, 24, 24), -- noble lady
     (519, 17382, 7081, 8369, 20, 5, 5), -- single hook fishing rod
     (519, 17388, 766, 906, 30, 10, 20), -- fastwater fishing rod
+    -- Rajmonda (Ship_bound_for_Selbina | Ship_bound_for_Selbina_Pirates)
     (520, 624, 47, 158, 64, 0, 0), -- clump of pamtam kelp
     (520, 4385, 235, 737, 64, 0, 0), -- zafmlug bass
     (520, 4399, 1350, 1350, 48, 0, 0), -- bluetail
@@ -599,6 +610,7 @@ INSERT INTO `guild_shops` VALUES
     (520, 17399, 2394, 2394, 20, 5, 15), -- sabiki rig
     (520, 17400, 691, 691, 20, 6, 12), -- sinking minnow
     (520, 17407, 270, 270, 20, 6, 12), -- minnow
+    -- Lokhong (Ship_bound_for_Mhaura | Ship_bound_for_Mhaura_Pirates)
     (521, 624, 47, 158, 64, 0, 0), -- clump of pamtam kelp
     (521, 4385, 235, 737, 64, 0, 0), -- zafmlug bass
     (521, 4399, 1350, 1350, 48, 0, 0), -- bluetail
@@ -609,6 +621,7 @@ INSERT INTO `guild_shops` VALUES
     (521, 17399, 2394, 2394, 20, 5, 15), -- sabiki rig
     (521, 17400, 691, 691, 20, 6, 12), -- sinking minnow
     (521, 17407, 270, 270, 20, 6, 12), -- minnow
+    -- Cehn_Teyohngo (Open_sea_route_to_Al_Zahbi)
     (522, 4403, 336, 336, 64, 0, 0), -- yellow globe
     (522, 4480, 282, 600, 48, 0, 0), -- gugru tuna
     (522, 4485, 900, 1200, 24, 0, 0), -- noble lady
@@ -617,6 +630,7 @@ INSERT INTO `guild_shops` VALUES
     (522, 17399, 2394, 2394, 20, 5, 15), -- sabiki rig
     (522, 17400, 691, 691, 20, 6, 12), -- sinking minnow
     (522, 17407, 270, 270, 20, 6, 12), -- minnow
+    -- Pashi_Maccaleh (Open_sea_route_to_Mhaura)
     (523, 4403, 336, 336, 64, 0, 0), -- yellow globe
     (523, 4480, 282, 600, 48, 0, 0), -- gugru tuna
     (523, 4485, 900, 1200, 24, 0, 0), -- noble lady
@@ -625,6 +639,7 @@ INSERT INTO `guild_shops` VALUES
     (523, 17399, 2394, 2394, 20, 5, 15), -- sabiki rig
     (523, 17400, 691, 691, 20, 6, 12), -- sinking minnow
     (523, 17407, 270, 270, 20, 6, 12), -- minnow
+    -- Jidwahn (Silver_Sea_route_to_Nashmau)
     (524, 2177, 36, 224, 500, 200, 200), -- ice card
     (524, 2180, 36, 224, 500, 200, 200), -- thunder card
     (524, 2182, 36, 224, 500, 200, 200), -- light card
@@ -636,6 +651,7 @@ INSERT INTO `guild_shops` VALUES
     (524, 17399, 2394, 2394, 20, 6, 12), -- sabiki rig
     (524, 17400, 691, 691, 20, 6, 12), -- sinking minnow
     (524, 17407, 270, 270, 20, 6, 12), -- minnow
+    -- Yahliq (Silver_Sea_route_to_Al_Zahbi)
     (525, 2177, 36, 224, 500, 200, 200), -- ice card
     (525, 2180, 36, 224, 500, 200, 200), -- thunder card
     (525, 2182, 36, 224, 500, 200, 200), -- light card
@@ -647,21 +663,7 @@ INSERT INTO `guild_shops` VALUES
     (525, 17399, 2394, 2394, 20, 6, 12), -- sabiki rig
     (525, 17400, 691, 691, 20, 6, 12), -- sinking minnow
     (525, 17407, 270, 270, 20, 6, 12), -- minnow
-    (5182, 4384, 5250, 13790, 48, 0, 0), -- black sole
-    (5182, 4385, 261, 261, 48, 0, 0), -- zafmlug bass
-    (5182, 4399, 2520, 2520, 48, 0, 0), -- bluetail
-    (5182, 4426, 195, 296, 48, 0, 0), -- tricolored carp
-    (5182, 4451, 3400, 16000, 48, 0, 0), -- silver shark
-    (5182, 4461, 4050, 6048, 48, 0, 0), -- bastore bream
-    (5182, 4479, 1350, 1350, 48, 0, 0), -- bhefhel marlin
-    (5182, 4483, 520, 1248, 48, 0, 0), -- tiger cod
-    (5182, 4485, 900, 1200, 48, 0, 0), -- noble lady
-    (5182, 4500, 24, 76, 64, 0, 0), -- greedie
-    (5182, 17382, 9657, 9657, 20, 5, 5), -- single hook fishing rod
-    (5182, 17383, 1980, 1980, 30, 10, 10), -- clothespole
-    (5182, 17387, 4077, 4077, 20, 5, 10), -- tarutaru fishing rod
-    (5182, 17388, 934, 934, 30, 10, 10), -- fastwater fishing rod
-    (5182, 17399, 2394, 2394, 20, 6, 12), -- sabiki rig
+    -- Wahnid (Aht_Urhgan_Whitegate)
     (60426, 5449, 92, 136, 64, 0, 0), -- hamsi
     (60426, 5447, 21, 128, 64, 24, 24), -- denizanasi
     (60426, 5453, 4560, 5952, 48, 0, 0), -- istakoz
@@ -694,6 +696,7 @@ INSERT INTO `guild_shops` VALUES
     (60426, 17407, 270, 270, 20, 6, 12), -- minnow
 
     -- Goldsmithing Guild
+    -- Celestina | Yabby_Tanmikey (Mhaura)
     (528, 640, 9, 18, 128, 64, 64), -- chunk of copper ore
     (528, 642, 595, 620, 24, 0, 0), -- chunk of zinc ore
     (528, 644, 1500, 8400, 24, 0, 0), -- chunk of mythril ore
@@ -724,6 +727,7 @@ INSERT INTO `guild_shops` VALUES
     (528, 754, 16875, 46875, 80, 0, 32), -- platinum sheet
     (528, 760, 68640, 74880, 55, 0, 22), -- silver chain
     (528, 744, 8820, 10416, 80, 0, 32), -- silver ingot
+    -- Visala | Teerth (Bastok_Markets)
     (5272, 640, 9, 18, 128, 64, 64), -- chunk of copper ore
     (5272, 642, 595, 620, 24, 12, 12), -- chunk of zinc ore
     (5272, 644, 1500, 8400, 24, 12, 12), -- chunk of mythril ore
@@ -846,6 +850,7 @@ INSERT INTO `guild_shops` VALUES
     (5272, 13468, 3350, 3350, 20, 0, 15), -- tourmaline ring
     (5272, 798, 56160, 56160, 165, 0, 65), -- turquoise
     (5272, 805, 42432, 136032, 15, 0, 3), -- zircon
+    -- Bornahn (Al_Zahbi)
     (60429, 640, 9, 18, 128, 64, 64), -- chunk of copper ore
     (60429, 642, 595, 620, 24, 0, 0), -- chunk of zinc ore
     (60429, 644, 1500, 8400, 24, 0, 0), -- chunk of mythril ore
@@ -966,6 +971,7 @@ INSERT INTO `guild_shops` VALUES
     (60429, 805, 42432, 136032, 15, 0, 3), -- zircon
 
     -- Leathercraft Guild
+    -- Kueh_Igunahmori | Cletae (Southern_San_dOria)
     (529, 505, 135, 349, 24, 8, 24), -- sheepskin
     (529, 695, 120, 184, 64, 24, 24), -- willow log
     (529, 853, 2155, 13680, 24, 8, 24), -- raptor skin
@@ -1036,6 +1042,7 @@ INSERT INTO `guild_shops` VALUES
     (529, 13571, 7282, 27074, 20, 0, 10), -- wolf mantle
 
     -- Smithing Guild
+    -- Doggomehr | Lucretia (Northern_San_dOria)
     (531, 640, 9, 15, 124, 48, 24), -- chunk of copper ore
     (531, 641, 30, 66, 124, 48, 24), -- chunk of tin ore
     (531, 643, 675, 981, 124, 48, 24), -- chunk of iron ore
@@ -1111,6 +1118,7 @@ INSERT INTO `guild_shops` VALUES
     (531, 16589, 10723, 49576, 20, 0, 10), -- two-handed sword
     (531, 16650, 18270, 36987, 20, 0, 10), -- war pick
     (531, 16530, 1323, 1323, 20, 0, 15), -- xiphos
+    -- Mololo | Kamilah (Mhaura)
     (532, 640, 9, 15, 124, 48, 24), -- chunk of copper ore
     (532, 641, 30, 66, 124, 48, 24), -- chunk of tin ore
     (532, 643, 675, 981, 124, 48, 24), -- chunk of iron ore
@@ -1123,6 +1131,7 @@ INSERT INTO `guild_shops` VALUES
     (532, 662, 4050, 9898, 165, 33, 65), -- iron sheet
     (532, 2143, 75, 75, 255, 48, 100), -- mandrel
     (532, 2144, 75, 75, 255, 48, 100), -- workshop anvil
+    -- Vicious_Eye | Amulya (Metalworks)
     (5332, 640, 9, 15, 124, 48, 24), -- chunk of copper ore
     (5332, 641, 30, 66, 124, 48, 24), -- chunk of tin ore
     (5332, 643, 675, 981, 124, 48, 24), -- chunk of iron ore
@@ -1201,6 +1210,7 @@ INSERT INTO `guild_shops` VALUES
     (5332, 16650, 18270, 36987, 20, 0, 10), -- war pick
     (5332, 16530, 1323, 1323, 20, 0, 15), -- xiphos
     (5332, 16770, 16803, 24703, 20, 0, 15), -- zaghnal
+    -- Ndego (Al_Zahbi)
     (60427, 640, 9, 15, 124, 48, 24), -- chunk of copper ore
     (60427, 641, 30, 66, 124, 48, 24), -- chunk of tin ore
     (60427, 643, 675, 981, 124, 48, 24), -- chunk of iron ore
@@ -1279,6 +1289,7 @@ INSERT INTO `guild_shops` VALUES
     (60427, 16770, 16803, 24703, 20, 0, 15), -- zaghnal
 
     -- Woodworking Guild
+    -- Beugungel (Carpenters_Landing)
     (534, 688, 12, 30, 36, 12, 12), -- arrowwood log
     (534, 693, 640, 1622, 36, 12, 12), -- walnut log
     (534, 695, 120, 184, 36, 12, 12), -- willow log
@@ -1286,6 +1297,7 @@ INSERT INTO `guild_shops` VALUES
     (534, 698, 93, 182, 36, 12, 12), -- ash log
     (534, 1021, 312, 500, 64, 24, 24), -- hatchet
     (534, 1657, 75, 255, 64, 64, 64), -- spool of bundling twine
+    -- Cauzeriste | Chaupire (Northern_San_dOria)
     (5132, 688, 15, 28, 24, 12, 24), -- arrowwood log
     (5132, 689, 27, 59, 24, 12, 24), -- lauan log
     (5132, 690, 1723, 10938, 24, 12, 24), -- elm log
@@ -1312,6 +1324,7 @@ INSERT INTO `guild_shops` VALUES
     (5132, 715, 72, 441, 12, 4, 12), -- piece of ash lumber
     (5132, 716, 4740, 23257, 12, 4, 12), -- piece of oak lumber
     (5132, 1657, 75, 242, 64, 64, 64), -- spool of bundling twine
+    -- Dehbi_Moshal (Al_Zahbi)
     (60428, 688, 12, 30, 24, 12, 12), -- arrowwood log
     (60428, 689, 27, 59, 24, 12, 12), -- lauan log
     (60428, 690, 1401, 10295, 24, 12, 12), -- elm log
@@ -1338,6 +1351,7 @@ INSERT INTO `guild_shops` VALUES
     (60428, 716, 4740, 26544, 12, 4, 12), -- piece of oak lumber
 
     -- Tenshodo Guild
+    -- Akamafula (Lower_Jeuno)
     (60417, 16896, 517, 592, 20, 10, 20), -- kunai
     (60417, 16900, 1404, 1608, 20, 7, 15), -- wakizashi
     (60417, 16960, 3121, 3575, 20, 5, 10), -- uchigatana
@@ -1367,6 +1381,7 @@ INSERT INTO `guild_shops` VALUES
     (60417, 17302, 347, 347, 2970, 594, 1188), -- juji shuriken
     (60417, 17285, 101745, 101745, 20, 1, 5), -- moonring blade
     (60417, 13088, 43890, 52440, 20, 1, 3), -- darksteel nodowa
+    -- Jabbar (Port_Bastok)
     (60419, 704, 96, 149, 48, 24, 24), -- bamboo stick
     (60419, 657, 4690, 10500, 12, 0, 0), -- lump of tama-hagane
     (60419, 4928, 1561, 1747, 30, 6, 12), -- scroll of katon ichi
@@ -1388,6 +1403,7 @@ INSERT INTO `guild_shops` VALUES
     (60419, 1652, 150, 160, 64, 24, 24), -- bottle of rice vinegar
     (60419, 5236, 509, 525, 64, 24, 24), -- clump of shungiku
     (60419, 4875, 4000, 4500, 7, 0, 0), -- scroll of absorb-dex
+    -- Silver_Owl (Port_Bastok)
     (60420, 16896, 517, 592, 20, 10, 20), -- kunai
     (60420, 16919, 2728, 17167, 20, 7, 15), -- shinobi-gatana
     (60420, 16975, 11583, 13266, 20, 5, 10), -- kanesada
@@ -1407,6 +1423,7 @@ INSERT INTO `guild_shops` VALUES
     (60420, 17314, 7333, 7446, 15, 0, 0), -- quake grenade
     (60420, 16966, 1836, 2103, 20, 7, 15), -- tachi
     (60420, 12841, 3951, 8847, 20, 10, 20), -- cotton sitabaki
+    -- Achika (Norg)
     (60421, 12456, 552, 858, 20, 10, 20), -- hachimaki
     (60421, 12457, 3272, 5079, 20, 7, 15), -- cotton hachimaki
     (60421, 12458, 8972, 13927, 20, 5, 10), -- soil hachimaki
@@ -1423,6 +1440,7 @@ INSERT INTO `guild_shops` VALUES
     (60421, 12968, 424, 660, 20, 10, 20), -- kyahan
     (60421, 12969, 2830, 11925, 20, 7, 15), -- cotton kyahan
     (60421, 12970, 11071, 12393, 20, 5, 10), -- soil kyahan
+    -- Chiyo (Norg)
     (60422, 4928, 1561, 1747, 30, 6, 12), -- scroll of katon ichi
     (60422, 4931, 1561, 1747, 30, 6, 12), -- scroll of hyoton ichi
     (60422, 4934, 1561, 1747, 30, 6, 12), -- scroll of huton ichi
@@ -1431,6 +1449,7 @@ INSERT INTO `guild_shops` VALUES
     (60422, 4943, 1561, 1747, 30, 6, 12), -- scroll of suiton ichi
     (60422, 4879, 14070, 15750, 7, 1, 2), -- scroll of absorb-mnd
     (60422, 4880, 14070, 15750, 7, 1, 2), -- scroll of absorb-chr
+    -- Jirokichi (Norg)
     (60423, 16406, 14428, 35251, 20, 0, 0), -- baghnakhs
     (60423, 16411, 11746, 46986, 20, 0, 0), -- claws
     (60423, 16419, 76419, 168396, 20, 0, 0), -- patas
@@ -1455,6 +1474,7 @@ INSERT INTO `guild_shops` VALUES
     (60423, 17320, 7, 18, 297, 0, 0), -- iron arrow
     (60423, 17322, 128, 330, 297, 0, 0), -- fire arrow
     (60423, 17340, 58, 174, 297, 0, 0), -- bullet
+    -- Vuliaie (Norg)
     (60424, 704, 96, 149, 375, 75, 150), -- bamboo stick
     (60424, 915, 2700, 16120, 165, 33, 165), -- jar of toad oil
     (60424, 1134, 810, 2095, 255, 48, 100), -- sheet of bast parchment
@@ -1468,6 +1488,7 @@ INSERT INTO `guild_shops` VALUES
     (60424, 5164, 1945, 2854, 255, 48, 100), -- jar of ground wasabi
     (60424, 1652, 233, 250, 255, 48, 100), -- bottle of rice vinegar
     (60424, 5235, 1284, 1350, 255, 48, 100), -- head of napa
+    -- Tsutsuroon (Nashmau)
     (60431, 16896, 517, 592, 20, 10, 20), -- kunai
     (60431, 16917, 4226, 4226, 20, 7, 15), -- suzume
     (60431, 16900, 1404, 1608, 20, 7, 15), -- wakizashi
@@ -1527,3 +1548,5 @@ INSERT INTO `guild_shops` VALUES
     (60418, 479, 21000, 21000, 255, 255, 255), -- purple chip
     (60418, 480, 21000, 21000, 255, 255, 255), -- white chip
     (60418, 481, 21000, 21000, 255, 255, 255); -- black chip
+
+    UNLOCK TABLES;

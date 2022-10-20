@@ -1,4 +1,4 @@
-import mysql.connector
+import mariadb
 
 def migration_name():
     return "Search comment and language columns"
@@ -17,5 +17,5 @@ def migrate(cur, db):
         cur.execute("""ALTER TABLE `chars`
 	        ADD COLUMN `languages` TINYINT(1) UNSIGNED NULL DEFAULT '0' AFTER `gmlevel`;""")
         db.commit()
-    except mysql.connector.Error as err:
+    except mariadb.Error as err:
         print("Something went wrong: {}".format(err))

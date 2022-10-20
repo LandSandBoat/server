@@ -1,4 +1,4 @@
-import mysql.connector
+import mariadb
 
 def migration_name():
     return "Adding chatfilters column to chars table"
@@ -18,5 +18,5 @@ def migrate(cur, db):
         cur.execute("ALTER TABLE `chars` \
         ADD COLUMN `chatfilters` bigint(20) unsigned NOT NULL DEFAULT '0' AFTER `nnameflags`;")
         db.commit()
-    except mysql.connector.Error as err:
+    except mariadb.Error as err:
         print("Something went wrong: {}".format(err))
