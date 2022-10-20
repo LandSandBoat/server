@@ -106,7 +106,6 @@ xi.cop.helpers.shatteredTelepointEntry = function(player, csid, option, npc)
 end
 
 xi.cop.helpers.shatteredTelepointSealMemory = function(mission, player, csid, option, npc)
-    print(option)
     if option == 0 then
         local zoneId = player:getZoneID()
 
