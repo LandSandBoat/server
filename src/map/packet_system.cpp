@@ -762,7 +762,6 @@ void SmallPacket0x01A(map_session_data_t* const PSession, CCharEntity* const PCh
 {
     TracyZoneScoped;
 
-    // uint32 ID = data.ref<uint32>(0x04);
     uint16     TargID       = data.ref<uint16>(0x08);
     uint8      action       = data.ref<uint8>(0x0A);
     position_t actionOffset = {
@@ -1790,7 +1789,7 @@ void SmallPacket0x036(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x037(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    // uint32 EntityID = data.ref<uint32>(0x04);
+
     uint16 TargetID  = data.ref<uint16>(0x0C);
     uint8  SlotID    = data.ref<uint8>(0x0E);
     uint8  StorageID = data.ref<uint8>(0x10);
@@ -3100,7 +3099,6 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
 
                 if (PChar->getStorage(LOC_INVENTORY)->GetItem(0)->getQuantity() < auctionFee)
                 {
-                    // ShowDebug(CL_CYAN"%s Can't afford the AH fee",PChar->GetName());
                     PChar->pushPacket(new CAuctionHousePacket(action, 197, 0, 0)); // Not enough gil to pay fee
                     return;
                 }
@@ -3115,12 +3113,10 @@ void SmallPacket0x04E(map_session_data_t* const PSession, CCharEntity* const PCh
                 {
                     sql->NextRow();
                     ah_listings = (uint32)sql->GetIntData(0);
-                    // ShowDebug(CL_CYAN"%s has %d outstanding listings before placing this one.", PChar->GetName(), ah_listings);
                 }
 
                 if (settings::get<uint8>("map.AH_LIST_LIMIT") && ah_listings >= settings::get<uint8>("map.AH_LIST_LIMIT"))
                 {
-                    // ShowDebug(CL_CYAN"%s already has %d items on the AH",PChar->GetName(), ah_listings);
                     PChar->pushPacket(new CAuctionHousePacket(action, 197, 0, 0)); // Failed to place up
                     return;
                 }
@@ -3379,10 +3375,8 @@ void SmallPacket0x053(map_session_data_t* const PSession, CCharEntity* const PCh
 
         for (int i = 0x08; i < 0x08 + (0x08 * count); i += 0x08)
         {
-            // uint8 slotId = data.ref<uint8>(i);
-            uint8 equipSlotId = data.ref<uint8>(i + 0x01);
-            // uint8 locationId = data.ref<uint8>(i + 0x02);
-            uint16 itemId = data.ref<uint16>(i + 0x04);
+            uint8  equipSlotId = data.ref<uint8>(i + 0x01);
+            uint16 itemId      = data.ref<uint16>(i + 0x04);
 
             if (equipSlotId > SLOT_BACK)
             {
@@ -3507,9 +3501,7 @@ void SmallPacket0x05B(map_session_data_t* const PSession, CCharEntity* const PCh
     if (!PChar->isInEvent())
         return;
 
-    // auto CharID = data.ref<uint32>(0x04);
-    auto Result = data.ref<uint32>(0x08);
-    // auto ZoneID = data.ref<uint16>(0x10);
+    auto Result  = data.ref<uint32>(0x08);
     auto EventID = data.ref<uint16>(0x12);
 
     if (PChar->currentEvent->eventId == EventID)
@@ -3556,9 +3548,7 @@ void SmallPacket0x05C(map_session_data_t* const PSession, CCharEntity* const PCh
     if (!PChar->isInEvent())
         return;
 
-    // auto CharID = data.ref<uint32>(0x10);
-    auto Result = data.ref<uint32>(0x14);
-    // auto ZoneID = data.ref<uint16>(0x18);
+    auto Result  = data.ref<uint32>(0x14);
     auto EventID = data.ref<uint16>(0x1A);
 
     if (PChar->currentEvent->eventId == EventID)
@@ -3844,7 +3834,7 @@ void SmallPacket0x05E(map_session_data_t* const PSession, CCharEntity* const PCh
 void SmallPacket0x060(map_session_data_t* const PSession, CCharEntity* const PChar, CBasicPacket data)
 {
     TracyZoneScoped;
-    // uint32 charid = data.ref<uint32>(0x04);
+
     std::string updateString = std::string((char*)data[12]);
     luautils::OnEventUpdate(PChar, updateString);
 
@@ -5690,7 +5680,6 @@ void SmallPacket0x0DC(map_session_data_t* const PSession, CCharEntity* const PCh
         case NFLAG_INVITE:
             // /invite [on|off]
             PChar->nameflags.flags ^= FLAG_INVITE;
-            // PChar->menuConfigFlags.flags ^= NFLAG_INVITE;
             break;
         case NFLAG_AWAY:
             // /away | /online
@@ -7605,7 +7594,6 @@ void SmallPacket0x11D(map_session_data_t* const PSession, CCharEntity* const PCh
         return;
     }
 
-    // auto const& targetID    = data.ref<uint32>(0x04);
     auto const& targetIndex = data.ref<uint16>(0x08);
     auto const& extra       = data.ref<uint16>(0x0A);
 

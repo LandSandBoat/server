@@ -536,8 +536,6 @@ bool CTargetFind::isWithinCone(position_t* pos)
     WPoint.y = (PPoint.x * m_CPoint.z - PPoint.z * m_CPoint.x) / m_scalar;
     WPoint.z = (PPoint.z * m_BPoint.x - PPoint.x * m_BPoint.z) / m_scalar;
 
-    // ShowDebug("A %f, B %f, C %f", WPoint.x, WPoint.y, WPoint.z);
-
     if (WPoint.x < 0 || WPoint.x > 1)
     {
         return false;

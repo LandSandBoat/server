@@ -165,23 +165,6 @@ static const MeritCategoryInfo_t meritCatInfo[] = {
 
 CMeritPoints::CMeritPoints(CCharEntity* PChar)
 {
-    /*
-        XI_DEBUG_BREAK_IF(sizeof(merits) != sizeof(merits::GMeritsTemplate));
-
-    memcpy(merits, merits::GMeritsTemplate, sizeof(merits));
-
-    for (uint8 m = 0, i = 0; i < sizeof(Categories)/sizeof(Merit_t*); ++i)
-    {
-        Categories[i] = &merits[m];
-
-        for (uint8 t = 0; t < count[i].MaxMerits; ++t)
-        {
-            merits[m].next = upgrade[count[i].UpgradeID][0];
-            merits[m++].id = ((i + 1) << 6) + (t << 1);
-                }
-    }
-        */
-
     XI_DEBUG_BREAK_IF(sizeof(merits) != sizeof(meritNameSpace::GMeritsTemplate));
 
     memcpy(merits, meritNameSpace::GMeritsTemplate, sizeof(merits));
@@ -469,17 +452,6 @@ void CMeritPoints::LowerMerit(MERIT_TYPE merit)
 
 /************************************************************************
  *                                                                       *
- *  get next merit upgrade                                              *
- *                                                                       *
- ************************************************************************/
-
-// uint16 CMeritPoints::GetNextMeritUpgrade(uint16 catId, uint16 MeritCount)
-//{
-//  return upgrade[count[catId].UpgradeID][MeritCount];
-//}
-
-/************************************************************************
- *                                                                       *
  *  Получаем текущее значение указанного merit                           *
  *                                                                       *
  ************************************************************************/
@@ -573,16 +545,6 @@ namespace meritNameSpace
             }
 
             groupOffset[catIndex] = index - catMeritIndex; // add the last offset manually since loop finishes before hand.
-
-            /* ret = sql->Query("SELECT meritid, spellid FROM merits INNER JOIN spell_list ON merits.name = spell_list.name");
-
-            if (ret != SQL_ERROR)
-            {
-                        while( sql->NextRow() == SQL_SUCCESS )
-                        {
-                    GMeritsTemplate
-                        }
-            }*/
         }
         else
         {

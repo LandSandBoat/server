@@ -225,10 +225,9 @@ namespace luautils
         {
             if (entry.path().extension() == ".lua")
             {
-                // TODO: Add to verbose logging
                 auto relative_path_string = entry.path().relative_path().generic_string();
-                // auto lua_path = std::filesystem::relative(entry.path(), "./").replace_extension("").generic_string();
-                // ShowInfo("Loading global script %s", lua_path);
+                auto lua_path             = std::filesystem::relative(entry.path(), "./").replace_extension("").generic_string();
+                ShowTrace("Loading global script %s", lua_path);
                 auto result = lua.safe_script_file(relative_path_string);
                 if (!result.valid())
                 {
@@ -645,7 +644,7 @@ namespace luautils
 
         if (!std::filesystem::exists(filename))
         {
-            // ShowDebug("luautils::CacheLuaObjectFromFile: File does not exist: %s", filename);
+            ShowTrace("luautils::CacheLuaObjectFromFile: File does not exist: %s", filename);
             return;
         }
 

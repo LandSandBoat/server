@@ -389,7 +389,6 @@ bool CAttack::CheckAnticipated()
         m_victim->StatusEffectContainer->DelStatusEffect(EFFECT_THIRD_EYE);
         return false;
     }
-    // return false;
 }
 
 bool CAttack::IsCountered() const
