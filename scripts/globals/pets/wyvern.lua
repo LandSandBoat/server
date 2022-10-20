@@ -189,27 +189,27 @@ entity.onMobSpawn = function(mob)
         player:petRetreat()
     end)
 
-    master:addListener("EXPERIENCE_POINTS", "PET_WYVERN_EXP", function(player, exp)
-        local pet = player:getPet()
-        local prev_exp = pet:getLocalVar("wyvern_exp")
-        if prev_exp < 1000 then
+    -- master:addListener("EXPERIENCE_POINTS", "PET_WYVERN_EXP", function(player, exp)
+        -- local pet = player:getPet()
+        -- local prev_exp = pet:getLocalVar("wyvern_exp")
+        -- if prev_exp < 1000 then
             -- cap exp at 1000 to prevent wyvern leveling up many times from large exp awards
-            local currentExp = exp
-            if prev_exp + exp > 1000 then
-                currentExp = 1000 - prev_exp
-            end
-            local diff = math.floor((prev_exp + currentExp) / 200) - math.floor(prev_exp / 200)
-            if diff ~= 0 then
+            -- local currentExp = exp
+            -- if prev_exp + exp > 1000 then
+                -- currentExp = 1000 - prev_exp
+            -- end
+            -- local diff = math.floor((prev_exp + currentExp) / 200) - math.floor(prev_exp / 200)
+            -- if diff ~= 0 then
                 -- wyvern levelled up (diff is the number of level ups)
-                pet:addMod(xi.mod.ACC, 6 * diff)
-                pet:addMod(xi.mod.HPP, 6 * diff)
-                pet:addMod(xi.mod.ATTP, 5 * diff)
-                pet:setHP(pet:getMaxHP())
-                player:messageBasic(xi.msg.basic.STATUS_INCREASED, 0, 0, pet)
-            end
-            pet:setLocalVar("wyvern_exp", prev_exp + exp)
-        end
-    end)
+                -- pet:addMod(xi.mod.ACC, 6 * diff)
+                -- pet:addMod(xi.mod.HPP, 6 * diff)
+                -- pet:addMod(xi.mod.ATTP, 5 * diff)
+                -- pet:setHP(pet:getMaxHP())
+                -- player:messageBasic(xi.msg.basic.STATUS_INCREASED, 0, 0, pet)
+            -- end
+            -- pet:setLocalVar("wyvern_exp", prev_exp + exp)
+        -- end
+    -- end)
 end
 
 entity.onMobDeath = function(mob, player)
