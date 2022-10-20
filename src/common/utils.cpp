@@ -826,10 +826,19 @@ std::string trim(std::string const& str, std::string const& whitespace)
 
 look_t stringToLook(std::string str)
 {
+    look_t out{};
+
+    // Sanity checks
     // Remove "0x" if found
-    if (str[0] == '0' && str[1] == 'x')
+    if (str.size() == 42 && str[0] == '0' && str[1] == 'x')
     {
         str = str.substr(2);
+    }
+
+    // Only support full-string looks
+    if (str.size() != 40)
+    {
+        return out;
     }
 
     // A 16-bit number is represented by *4* string characters
@@ -848,10 +857,24 @@ look_t stringToLook(std::string str)
     for (auto& entry : hex)
     {
         // Swap endian-ness
-        entry = (entry >> 8) | (entry << 8);
+        auto top    = entry << 8;
+        auto bottom = entry >> 8;
+        entry       = top | bottom;
     }
 
-    look_t out(hex);
+    out.size = hex[0];
+
+    out.face = hex[1] & 0x00FF;
+    out.race = hex[1] >> 8;
+
+    out.head   = hex[2] &= ~0x1000;
+    out.body   = hex[3] &= ~0x2000;
+    out.hands  = hex[4] &= ~0x3000;
+    out.legs   = hex[5] &= ~0x4000;
+    out.feet   = hex[6] &= ~0x5000;
+    out.main   = hex[7] &= ~0x6000;
+    out.sub    = hex[8] &= ~0x7000;
+    out.ranged = hex[9] &= ~0x8000;
 
     return out;
 }

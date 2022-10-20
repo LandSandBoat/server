@@ -71,7 +71,7 @@ entity.onMobSpawn = function(mob)
         },
     })
     -- Change animation to open
-    mob:AnimationSub(2)
+    mob:setAnimationSub(2)
     mob:setMobMod(xi.mobMod.HP_STANDBACK, 0)
     mob:setMod(xi.mod.FASTCAST, 30) -- taken from timing of spells from multiple captures
     mob:setMod(xi.mod.DEF, 450)

@@ -533,7 +533,7 @@ xi.nyzul.handleAppraisalItem = function(player, npc)
 
             npc:entityAnimationPacket("open")
             npc:setLocalVar("opened", 1)
-            npc:untargetable(true)
+            npc:setUntargetable(true)
             npc:queue(10000, function(npcvar) npcvar:entityAnimationPacket("kesu") end)
             npc:queue(12000, function(npcvar) npcvar:setStatus(xi.status.DISAPPEAR) npcvar:resetLocalVars() npcvar:setAnimationSub(0) end)
 
@@ -829,7 +829,7 @@ xi.nyzul.spawnChest = function(mob, player)
 
             if coffer:getStatus() == xi.status.DISAPPEAR then
                 local pos = mob:getPos()
-                coffer:untargetable(false)
+                coffer:setUntargetable(false)
                 coffer:setPos(pos.x, pos.y, pos.z, pos.rot)
                 coffer:setLocalVar("appraisalItem", mobID)
                 coffer:setStatus(xi.status.NORMAL)

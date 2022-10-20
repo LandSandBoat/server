@@ -1,4 +1,4 @@
-import mysql.connector
+import mariadb
 
 def migration_name():
     return "Adding family column to spell_list table"
@@ -18,5 +18,5 @@ def migrate(cur, db):
         cur.execute("ALTER TABLE spell_list \
         ADD COLUMN `family` smallint(4) unsigned NOT NULL DEFAULT '0' AFTER `group`;")
         db.commit()
-    except mysql.connector.Error as err:
+    except mariadb.Error as err:
         print("Something went wrong: {}".format(err))

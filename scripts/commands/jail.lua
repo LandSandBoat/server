@@ -37,7 +37,7 @@ function onTrigger(player, target, cellId, reason)
 
         -- If we can find an offline player, we can use it, but have to do something different
         if targID > 0 and targID < maxID then
-            player:PrintToPlayer ( string.format( "Player '%s' (ID:%s) found, but is offline.", target, targID ) )
+            player:PrintToPlayer ( string.format( "Player '%s' (ID: %i) found, but is offline.", target, targID ) )
         else
             player:PrintToPlayer( string.format( "Invalid player '%s' given.", target ) )
             return

@@ -1,4 +1,4 @@
-import mysql.connector
+import mariadb
 
 def migration_name():
 	return "Adding timecreated column to chars table"
@@ -18,5 +18,5 @@ def migrate(cur, db):
 		cur.execute("ALTER TABLE chars \
 		ADD COLUMN `timecreated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP;")
 		db.commit()
-	except mysql.connector.Error as err:
+	except mariadb.Error as err:
 		print("Something went wrong: {}".format(err))

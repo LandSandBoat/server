@@ -20,6 +20,7 @@ zones[xi.zone.NORG] =
         LOGIN_CAMPAIGN_UNDERWAY       = 6452,  -- The [/January/February/March/April/May/June/July/August/September/October/November/December] <number> Login Campaign is currently underway!
         LOGIN_NUMBER                  = 6453,  -- In celebration of your most recent login (login no. <number>), we have provided you with <number> points! You currently have a total of <number> points.
         MEMBERS_LEVELS_ARE_RESTRICTED = 6473,  -- Your party is unable to participate because certain members' levels are restricted.
+        UNABLE_TO_PROGRESS_MISSION    = 6497,  -- ou are unable to make further progress in Rhapsodies of Vana'diel due to an event occurring in the [Chains of Promathia/Treasures of Aht Urhgan/Wings of the Goddess/Seekers of Adoulin/Rise of the Zilart] missions.
         CONQUEST_BASE                 = 6510,  -- Tallying conquest results...
         FISHING_MESSAGE_OFFSET        = 6669,  -- You can't fish here.
         REGIME_CANCELED               = 6830,  -- Current training regime canceled.

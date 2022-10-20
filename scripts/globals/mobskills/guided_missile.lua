@@ -13,7 +13,7 @@ require("scripts/globals/mobskills")
 local mobskillObject = {}
 
 mobskillObject.onMobSkillCheck = function(target, mob, skill)
-    if (mob:getAnimationSub() <= 1) then -- omega four leg form
+    if not target:isBehind(mob) then
         return 0
     end
     return 1

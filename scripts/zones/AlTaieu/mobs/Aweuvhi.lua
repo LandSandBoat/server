@@ -7,6 +7,10 @@ require("scripts/globals/keyitems")
 -----------------------------------
 local entity = {}
 
+entity.onMobInitialize = function(mob)
+    mob:setMobMod(xi.mobMod.CHECK_AS_NM, 1)
+end
+
 entity.onMobDeath = function(mob, player, optParams)
     local mobID = mob:getID()
 

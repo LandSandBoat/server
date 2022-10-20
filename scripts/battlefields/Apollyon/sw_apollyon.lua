@@ -1,5 +1,5 @@
 -----------------------------------
--- Area: Appolyon
+-- Area: Apollyon
 -- Name: SW Apollyon
 -- !addkeyitem red_card
 -- !addkeyitem cosmo_cleanse
@@ -60,7 +60,7 @@ content.sections =
 local checkRaceVortex = function(mobRace, battlefield, mob)
     local race = battlefield:getLocalVar("initiatorRace")
     if race == mobRace then
-        xi.limbus.openDoor(mob:getBattlefield(), ID.npc.APOLLYON_SW_PORTAL[1])
+        content:openDoor(mob:getBattlefield(), 1)
     end
 end
 
@@ -270,7 +270,7 @@ content.groups =
         mobs = { "Jidra_Boss" },
         mobMods = { [xi.mobMod.DONT_ROAM_HOME] = 1 },
         death = function(battlefield, mob, count)
-            content:openDoor(battlefield, ID.npc.APOLLYON_SW_PORTAL[2])
+            content:openDoor(battlefield, 2)
         end,
     },
 
@@ -388,7 +388,7 @@ content.groups =
 
         death = function(battlefield, mob)
             if mob:getLocalVar("vortex") == 1 then
-                xi.limbus.openDoor(mob:getBattlefield(), ID.npc.APOLLYON_SW_PORTAL[3])
+                content:openDoor(mob:getBattlefield(), 3)
             end
         end
     },
