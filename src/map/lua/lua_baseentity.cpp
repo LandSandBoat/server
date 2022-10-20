@@ -1618,7 +1618,9 @@ bool CLuaBaseEntity::pathThrough(sol::table const& pointsTable, sol::object cons
     if (flags & PATHFLAG_PATROL)
     {
         // Grab points from array and store in points array
-        float x, y, z = -1;
+        float x = m_PBaseEntity->loc.p.x;
+        float y = m_PBaseEntity->loc.p.y;
+        float z = m_PBaseEntity->loc.p.z;
         for (std::size_t i = 1; i <= pointsTable.size(); ++i)
         {
             sol::table  pointData = pointsTable[i];
