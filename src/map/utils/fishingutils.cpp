@@ -1298,7 +1298,6 @@ namespace fishingutils
         }
 
         return (dx * dx + dz * dz <= radius * radius);
-        // return true;
     }
 
     fishingarea_t* GetFishingArea(CCharEntity* PChar)
@@ -2865,8 +2864,6 @@ namespace fishingutils
 
             break;
         }
-        // PChar->pushPacket(new CCharUpdatePacket(PChar));
-        // PChar->pushPacket(new CCharSyncPacket(PChar));
     }
 
     /************************************************************************

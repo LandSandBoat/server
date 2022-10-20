@@ -48,8 +48,6 @@
 #include "synthutils.h"
 #include "zoneutils.h"
 
-//#define _XI_SYNTH_DEBUG_MESSAGES_ // enable debugging messages
-
 namespace synthutils
 {
     /********************************************************************************************************************************
@@ -815,8 +813,6 @@ namespace synthutils
 
         uint8 invSlotID  = 0;
         uint8 tempSlotID = 0;
-        // uint16 itemID     = 0;
-        // uint32 quantity   = 0;
 
         for (uint8 slotID = 1; slotID <= 8; ++slotID)
         {
