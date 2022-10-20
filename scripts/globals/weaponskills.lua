@@ -148,24 +148,6 @@ local function shadowAbsorb(target)
     return false
 end
 
-local function accVariesWithTP(hitrate, acc, tp, a1, a2, a3)
-    -- sadly acc varies with tp ALL apply an acc PENALTY, the acc at various %s are given as a1 a2 a3
-    local accpct = fTP(tp, a1, a2, a3)
-    local acclost = acc - (acc * accpct)
-    local hrate = hitrate - (0.005 * acclost)
-
-    -- cap it
-    if hrate > 0.95 then
-        hrate = 0.95
-    end
-
-    if hrate < 0.2 then
-        hrate = 0.2
-    end
-
-    return hrate
-end
-
 local function getMultiAttacks(attacker, target, numHits)
     local bonusHits = 0
     local multiChances = 1
@@ -229,8 +211,24 @@ local function cRangedRatio(attacker, defender, params, ignoredDef, tp)
     return { pdif, pdifcrit }
 end
 
-local function getRangedHitRate(attacker, target, capHitRate, bonus)
+local function getRangedHitRate(attacker, target, capHitRate, bonus, wsParams)
+    if wsParams and wsParams.acc100 ~= 0 then
+        local accVarryTP = 0
+        if calcParams.tp >= 3000 then
+            accVarryTP = (wsParams.acc300 - 1) * 100
+        elseif calcParams.tp >= 2000 then
+            accVarryTP = (wsParams.acc200 - 1) * 100
+        else
+            accVarryTP = (wsParams.acc300 - 1) * 100
+        end
+        attacker:addMod(xi.mod.RACC, accVarryTP)
+    end
+
     local hitrate = attacker:getCRangedHitRate(target) / 100
+
+    if wsParams and wsParams.acc100 ~= 0 then
+        attacker:delMod(xi.mod.RACC, accVarryTP)
+    end
 
     hitrate = utils.clamp(hitrate, 0.2, 0.95)
 
@@ -270,10 +268,6 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams, f
             pdifCrit =  ratio[2]
             calcParams.hitRate = getHitRate(attacker, target, false, 0, false)
         end
-    end
-
-    if wsParams.acc100 ~= 0 then
-        calcParams.hitRate = accVariesWithTP(calcParams.hitRate, calcParams.accStat, calcParams.tp, wsParams.acc100, wsParams.acc200, wsParams.acc300)
     end
 
     calcParams.hitRate = utils.clamp(calcParams.hitRate + calcParams.bonusAcc, 0.2, 0.95)
@@ -938,8 +932,20 @@ function getHitRate(attacker, target, capHitRate, bonus, isSubAttack)
     end
 
     local hitrate = 0
-
     local flourisheffect = attacker:getStatusEffect(xi.effect.BUILDING_FLOURISH)
+    local accVarryTP = 0
+
+    if wsParams and wsParams.acc100 ~= 0 then
+        local accVarryTP = 0
+        if calcParams.tp >= 3000 then
+            accVarryTP = (wsParams.acc300 - 1) * 100
+        elseif calcParams.tp >= 2000 then
+            accVarryTP = (wsParams.acc200 - 1) * 100
+        else
+            accVarryTP = (wsParams.acc300 - 1) * 100
+        end
+        attacker:addMod(xi.mod.ACC, accVarryTP)
+    end
 
     if flourisheffect ~= nil and flourisheffect:getPower() > 1 then
         attacker:addMod(xi.mod.ACC, 20 + flourisheffect:getSubPower())
@@ -957,6 +963,10 @@ function getHitRate(attacker, target, capHitRate, bonus, isSubAttack)
 
     if flourisheffect ~= nil and flourisheffect:getPower() > 1 then
         attacker:delMod(xi.mod.ACC, 20 + flourisheffect:getSubPower())
+    end
+
+    if wsParams and wsParams.acc100 ~= 0 then
+        attacker:delMod(xi.mod.ACC, accVarryTP)
     end
 
     if bonus ~= nil or bonus == 0 then
