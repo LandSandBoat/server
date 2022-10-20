@@ -27,7 +27,9 @@ entity.onTrigger = function(player, npc)
     }
 
     player:showText(npc, ID.text.DENVIHR_SHOP_DIALOG)
-    xi.shop.nation(player, stock, xi.nation.BASTOK)
+    if player:getLocalVar('[AIRSHIP]Paid') == 1 then
+        xi.shop.nation(player, stock, xi.nation.BASTOK)
+    end
 end
 
 entity.onEventUpdate = function(player, csid, option)

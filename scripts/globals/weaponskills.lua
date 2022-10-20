@@ -211,9 +211,14 @@ local function cRangedRatio(attacker, defender, params, ignoredDef, tp)
     return { pdif, pdifcrit }
 end
 
+-- TODO: Fix undefined and non-standard variable usage.
+-- Disable variable checking for this function.
+-- luacheck: ignore 113
+-- luacheck: ignore 111
 local function getRangedHitRate(attacker, target, capHitRate, bonus, wsParams)
+    local accVarryTP = 0
+
     if wsParams and wsParams.acc100 ~= 0 then
-        local accVarryTP = 0
         if calcParams.tp >= 3000 then
             accVarryTP = (wsParams.acc300 - 1) * 100
         elseif calcParams.tp >= 2000 then
@@ -255,18 +260,18 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams, f
         ratio = cRangedRatio(attacker, target, wsParams, calcParams.ignoredDef, calcParams.tp)
         pdif = ratio[1]
         pdifCrit =  ratio[2]
-        calcParams.hitRate = getRangedHitRate(attacker, target, false, 0)
+        calcParams.hitRate = getRangedHitRate(attacker, target, false, 0, wsParams, calcParams)
     else
         if isSubAttack and calcParams.extraOffhandHit and calcParams.attackInfo.weaponType ~= xi.skill.HAND_TO_HAND then
             ratio = cMeleeRatio(attacker, target, wsParams, calcParams.ignoredDef, calcParams.tp, xi.slot.SUB)
             pdif = ratio[1]
             pdifCrit =  ratio[2]
-            calcParams.hitRate = getHitRate(attacker, target, false, 0, true)
+            calcParams.hitRate = getHitRate(attacker, target, false, 0, true, wsParams, calcParams)
         else
             ratio = cMeleeRatio(attacker, target, wsParams, calcParams.ignoredDef, calcParams.tp, xi.slot.MAIN)
             pdif = ratio[1]
             pdifCrit =  ratio[2]
-            calcParams.hitRate = getHitRate(attacker, target, false, 0, false)
+            calcParams.hitRate = getHitRate(attacker, target, false, 0, false, wsParams, calcParams)
         end
     end
 
@@ -640,7 +645,7 @@ function doPhysicalWeaponskill(attacker, target, wsID, wsParams, tp, action, pri
     calcParams.bonusfTP = gorgetBeltFTP or 0
     calcParams.bonusAcc = (gorgetBeltAcc or 0) + attacker:getMod(xi.mod.WSACC)
     calcParams.bonusWSmods = wsParams.bonusWSmods or 0
-    calcParams.hitRate = getHitRate(attacker, target, false, calcParams.bonusAcc, false)
+    calcParams.hitRate = getHitRate(attacker, target, false, calcParams.bonusAcc, false, wsParams, calcParams)
     calcParams.skillType = attack.weaponType
 
     if calcParams.extraOffhandHit and attack.weaponType ~= xi.skill.HAND_TO_HAND then
@@ -926,7 +931,11 @@ function getMeleeDmg(attacker, weaponType, kick)
     return { mainhandDamage, offhandDamage }
 end
 
-function getHitRate(attacker, target, capHitRate, bonus, isSubAttack)
+-- TODO: Fix undefined and non-standard variable usage.
+-- Disable variable checking for this function.
+-- luacheck: ignore 113
+-- luacheck: ignore 111
+function getHitRate(attacker, target, capHitRate, bonus, isSubAttack, wsParams, calcParams)
     if isSubAttack == nil then
         isSubAttack = false
     end
@@ -936,7 +945,6 @@ function getHitRate(attacker, target, capHitRate, bonus, isSubAttack)
     local accVarryTP = 0
 
     if wsParams and wsParams.acc100 ~= 0 then
-        local accVarryTP = 0
         if calcParams.tp >= 3000 then
             accVarryTP = (wsParams.acc300 - 1) * 100
         elseif calcParams.tp >= 2000 then
