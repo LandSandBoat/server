@@ -1877,12 +1877,12 @@ bool CCharEntity::IsMobOwner(CBattleEntity* PBattleTarget)
         return false;
     }
 
-    if (PBattleTarget->m_OwnerID.id == 0 || PBattleTarget->m_OwnerID.id == this->id || PBattleTarget->objtype == TYPE_PC)
+    if (PBattleTarget->isInDynamis())
     {
         return true;
     }
 
-    if (PBattleTarget->isInDynamis())
+    if (PBattleTarget->m_OwnerID.id == 0 || PBattleTarget->m_OwnerID.id == this->id || PBattleTarget->objtype == TYPE_PC)
     {
         return true;
     }
