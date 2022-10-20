@@ -21,8 +21,25 @@ local csidLookup =
 -- TODO: Where is Kupon AW-GeIV
 -- TODO: Where is Kupon AW-UWIII
 
--- WARNING: These items cannot be customised, and must be in the order
--- WARNING: they appear in the in-game menus!
+-- WARNING!
+-- These items cannot be customised!
+-- Everything is dictacted by the client!
+local kuponLookup =
+{
+    -- [coupon item id] = { related key item id, index of items in itemList (table below) }
+    [xi.items.MOG_KUPON_A_DBCD] = { xi.ki.MOG_KUPON_A_DBCD, 1 },
+    [xi.items.MOG_KUPON_A_DXAR] = { xi.ki.MOG_KUPON_A_DXAR, 2 },
+    [xi.items.MOG_KUPON_AW_ABS] = { xi.ki.MOG_KUPON_AW_ABS, 3 },
+    [xi.items.MOG_KUPON_AW_PAN] = { xi.ki.MOG_KUPON_AW_PAN, 4 },
+    [xi.items.MOG_KUPON_A_LUM ] = { xi.ki.MOG_KUPON_A_LUM,  5 },
+
+    --[xi.items.MOG_KUPON_W_PULSE] = { xi.keyItem.MOG_KUPON_W_PULSE, 35 },
+}
+
+-- WARNING!
+-- These items cannot be customised, and must be in the order
+-- they appear in the in-game menus!
+-- Everything is dictacted by the client!
 local itemList =
 {
     -- Kupon A-DBcd: Dynamis - Beaucedine (MOG_KUPON_A_DBCD = 2745)
@@ -75,25 +92,43 @@ local itemList =
         xi.items.ARGUTE_MORTARBOARD,
     },
 
-    --[[ TODO: Play with the CSs and do data entry for all of these!
-    -- Kupon AW-Abs: Absolute Virtue
+    -- Kupon AW-Abs: Absolute Virtue (MOG_KUPON_AW_ABS = 2802)
     [3] =
     {
-
+        xi.items.NINURTAS_SASH,
+        xi.items.MARSS_RING,
+        xi.items.BELLONAS_RING,
+        xi.items.MINERVAS_RING,
+        xi.items.FUTSUNO_MITAMA,
+        xi.items.AUREOLE,
+        xi.items.RAPHAELS_ROD,
     },
 
-    -- Kupon AW-Pan: Pandemonium Warden
+    -- Kupon AW-Pan: Pandemonium Warden (MOG_KUPON_AW_PAN = 2801)
     [4] =
     {
-
+        xi.items.HACHIRYU_HARAMAKI,
+        xi.items.NANATSUSAYA,
+        xi.items.DORJE,
+        xi.items.SHENLONGS_BAGHNAKHS,
     },
 
-    -- Kupon A-Lum: Sea NM System
+    -- Kupon A-Lum: Sea NM System (MOG_KUPON_A_LUM = 2736)
     [5] =
     {
-
+        xi.items.JUSTICE_TORQUE,
+        xi.items.HOPE_TORQUE,
+        xi.items.PRUDENCE_TORQUE,
+        xi.items.FORTITUDE_TORQUE,
+        xi.items.FAITH_TORQUE,
+        xi.items.TEMPERANCE_TORQUE,
+        xi.items.LOVE_TORQUE,
+        xi.items.MERCIFUL_CAPE,
+        xi.items.ALTRUISTIC_CAPE,
+        xi.items.ASTUTE_CAPE,
     },
 
+    --[[
     -- Kupon W-E85: Lv85 Empyrean Weapons (deprecated)
     [6] =
     {
@@ -416,16 +451,6 @@ local itemList =
     ]]
 }
 
--- WARNING: These items cannot be customised!
-local kuponLookup =
-{
-    -- [coupon item id] = { related key item id, index of items in itemList (above) }
-    [xi.items.MOG_KUPON_A_DBCD] = { xi.ki.MOG_KUPON_A_DBCD, 1 },
-    [xi.items.MOG_KUPON_A_DXAR] = { xi.ki.MOG_KUPON_A_DXAR, 2 },
-
-    --[xi.items.MOG_KUPON_W_PULSE] = { xi.keyItem.MOG_KUPON_W_PULSE, 35 },
-}
-
 local countKeyItems = function(player)
     local count = 0
     for _, v in pairs (kuponLookup) do
@@ -434,7 +459,7 @@ local countKeyItems = function(player)
             count = count + 1
         end
     end
-    return count + 1 -- Additional count to always force the multiple choice menu
+    return count
 end
 
 local listToKeyItem = function(listID)
@@ -452,10 +477,13 @@ end
 
 local buildMask2 = function(player)
     local mask = 0
-    for _, v in pairs (kuponLookup) do
-        local ki = v[1]
-        if player:hasKeyItem(ki) then
-            mask = mask + bit.lshift(v[2], 1)
+    for k, v in pairs (kuponLookup) do
+        if k > 32 then
+            return mask
+        end
+
+        if player:hasKeyItem(v[1]) then
+            mask = mask + bit.lshift(1, v[2])
         end
     end
     return mask
@@ -487,15 +515,16 @@ xi.dealerMoogle.onTrigger = function(player, npc)
     local zoneID = player:getZoneID()
 
     -- Found a KI (or more)
-    local cs       = csidLookup[zoneID][1]
-    local numKIs   = countKeyItems(player)
-    local mask1    = 0
-    local mask2    = 0
+    local cs     = csidLookup[zoneID][1]
+    local numKIs = countKeyItems(player)
+    local mask1  = 0
+    local mask2  = 0
 
     if numKIs > 0 then
-        cs    = csidLookup[zoneID][2]
-        mask1 = buildMask1(player)
-        mask2 = buildMask2(player)
+        numKIs = 2 -- NOTE: This forces the multiple-choice menu
+        cs     = csidLookup[zoneID][2]
+        mask1  = buildMask1(player)
+        mask2  = buildMask2(player)
     end
 
     -- mask1:
@@ -506,6 +535,7 @@ xi.dealerMoogle.onTrigger = function(player, npc)
     -- 2: Kupon A-DBcd
     -- 4: Kupon A-DXar
     -- 8: Kupon AW-Abs
+    -- ...
 
     -- Capture of multiple stored KIs: CS2: 0, 0, 51, 4, 0, 0, 1843200, 0
 
@@ -529,6 +559,7 @@ xi.dealerMoogle.onEventFinish = function(player, csid, option)
         local list = bit.band(option, 0xFF)
         local idx = bit.rshift(option, 8)
 
+        -- DEBUG:
         -- print(string.format("list: %u, idx: %u", list, idx))
 
         if list > 0 and idx == 0 then
