@@ -11904,14 +11904,14 @@ uint8 CLuaBaseEntity::getParryRate(CLuaBaseEntity* PLuaBaseEntity)
  *  Notes   : Battleutils calculates via GetHitRate
  ************************************************************************/
 
-uint8 CLuaBaseEntity::getCHitRate(CLuaBaseEntity* PLuaBaseEntity)
+uint8 CLuaBaseEntity::getCHitRate(CLuaBaseEntity* PLuaBaseEntity, uint8 attackNum)
 {
     XI_DEBUG_BREAK_IF(m_PBaseEntity->objtype == TYPE_NPC);
 
     CBattleEntity* PAttacker = static_cast<CBattleEntity*>(m_PBaseEntity);
     CBattleEntity* PDefender = static_cast<CBattleEntity*>(PLuaBaseEntity->GetBaseEntity());
 
-    return battleutils::GetHitRate(PAttacker, PDefender, 0);
+    return battleutils::GetHitRate(PAttacker, PDefender, attackNum);
 }
 
 /************************************************************************

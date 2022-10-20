@@ -664,7 +664,7 @@ public:
     uint8  getGuardRate(CLuaBaseEntity* PLuaBaseEntity);                                                                                    // Returns the guard rate for an attack.
     uint8  getBlockRate(CLuaBaseEntity* PLuaBaseEntity);                                                                                    // Returns the block rate for an attack.
     uint8  getParryRate(CLuaBaseEntity* PLuaBaseEntity);                                                                                    // Returns the parry rate for an attack.
-    uint8  getCHitRate(CLuaBaseEntity* PLuaBaseEntity);                                                                                     // Returns the hit rate for an attack.
+    uint8  getCHitRate(CLuaBaseEntity* PLuaBaseEntity, uint8 attackNum = 0);                                                                // Returns the hit rate for an attack. Defaults to main weapon.
     uint8  getCRangedHitRate(CLuaBaseEntity* PLuaBaseEntity);                                                                               // Returns the ranged hit rate for an attack.
     uint8  getShieldAbsorptionRate();                                                                                                       // Returns the shield absorption for an attack.
     uint16 getWeaponDmg();                                                                                                                  // gets the current equipped weapons' DMG rating
