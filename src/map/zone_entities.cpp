@@ -162,7 +162,13 @@ void CZoneEntities::InsertPET(CBaseEntity* PPet)
         }
         m_zone->GetZoneEntities()->dynamicTargIds.insert(PPet->targid);
 
-        PPet->id                = 0x1000000 + (m_zone->GetID() << 12) + PPet->targid;
+        PPet->id = 0x1000000 + (m_zone->GetID() << 12) + PPet->targid;
+        // Add 0x100 if targid is >= 0x800 -- observed on retail.
+        if (PPet->targid >= 0x800)
+        {
+            PPet->id += 0x100;
+        }
+
         PPet->loc.zone          = m_zone;
         m_petList[PPet->targid] = PPet;
 
@@ -193,7 +199,14 @@ void CZoneEntities::InsertTRUST(CBaseEntity* PTrust)
         }
         m_zone->GetZoneEntities()->dynamicTargIds.insert(targid);
 
-        PTrust->id                  = 0x1000000 + (m_zone->GetID() << 12) + targid;
+        PTrust->id = 0x1000000 + (m_zone->GetID() << 12) + targid;
+
+        // Add 0x100 if targid is >= 0x800 -- observed on retail.
+        if (targid >= 0x800)
+        {
+            PTrust->id += 0x100;
+        }
+
         PTrust->targid              = targid;
         PTrust->loc.zone            = m_zone;
         m_trustList[PTrust->targid] = PTrust;
