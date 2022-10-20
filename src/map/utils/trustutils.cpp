@@ -520,8 +520,7 @@ namespace trustutils
         float raceStat  = 0;
         float jobStat   = 0;
         float sJobStat  = 0;
-        int32 bonusHpStat = 0;
-        int32 bonusMpStat = 0;
+        int32 bonusStat = 0;
 
         int32 baseValueColumn   = 0;
         int32 scaleTo60Column   = 1;
@@ -563,32 +562,21 @@ namespace trustutils
 
         bonusHpStat = (mainLevelOver10 + mainLevelOver50andUnder60) * 2;
 
-        if (sLvl > 0)
-        {
-            grade = grade::GetJobGrade(sJob, 0);
-
-            sJobStat = grade::GetHPScale(grade, baseValueColumn) + (grade::GetHPScale(grade, scaleTo60Column) * (sLvl - 1)) +
-                       (grade::GetHPScale(grade, scaleOver30Column) * subLevelOver30) + subLevelOver30 + subLevelOver10;
-        }
-        
-        if (mLvl >= 99 && mLvl < 105)
-        {
-            bonusHpStat = (mainLevelOver75 + mainLevelOver99To104) * 5;
-        }
-        
-        if (mLvl >= 105 && mLvl < 110)
-        {
-            bonusHpStat = (mainLevelOver75 + mainLevelOver105To109) * 6;
-        }
-        
-        if (mLvl >= 110 && mLvl < 115)
-        {
-            bonusHpStat = (mainLevelOver75 + mainLevelOver110To114) * 7;
-        }
-        
         if (mLvl >= 115)
         {
-            bonusHpStat = (mainLevelOver75 + mainLevelOver115To119) * 8;
+            bonusStat = (mainLevelOver75 + mainLevelOver115To119) * 8;
+        }
+        else if (mLvl >= 110)
+        {
+            bonusStat = (mainLevelOver75 + mainLevelOver110To114) * 7;
+        }
+        else if (mLvl >= 105)
+        {
+            bonusStat = (mainLevelOver75 + mainLevelOver105To109) * 6;
+        }
+        else if (mLvl >= 99)
+        {
+            bonusStat = (mainLevelOver75 + mainLevelOver99To104) * 5;
         }
 
         PTrust->health.maxhp = (int16)(settings::get<float>("map.ALTER_EGO_HP_MULTIPLIER") * (raceStat + jobStat + bonusHpStat + sJobStat));
@@ -627,27 +615,7 @@ namespace trustutils
             grade    = grade::GetJobGrade(sJob, 1);
             sJobStat = grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column);
         }
-        
-        if (mLvl >= 99 && mLvl < 105)
-        {
-            bonusMpStat = (mainLevelOver75 + mainLevelOver99To104) * 5;
-        }
-        
-        if (mLvl >= 105 && mLvl < 110)
-        {
-            bonusMpStat = (mainLevelOver75 + mainLevelOver105To109) * 6;
-        }
-        
-        if (mLvl >= 110 && mLvl < 115)
-        {
-            bonusMpStat = (mainLevelOver75 + mainLevelOver110To114) * 7;
-        }
-        
-        if (mLvl >= 115)
-        {
-            bonusMpStat = (mainLevelOver75 + mainLevelOver115To119) * 8;
-        }
-        
+
         PTrust->health.maxmp = (int16)(settings::get<float>("map.ALTER_EGO_MP_MULTIPLIER") * (raceStat + jobStat + bonusMpStat + sJobStat));
 
         PTrust->health.tp = 0;
@@ -700,52 +668,8 @@ namespace trustutils
             sCHR = 0;
             sVIT = 0;
         }
-        
-        if (mLvl >= 99 && mLvl < 105)
-        {
-            mSTR = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 2), mLvl) * 1.2;
-            mDEX = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 3), mLvl) * 1.2;
-            mVIT = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 4), mLvl) * 1.2;
-            mAGI = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 5), mLvl) * 1.2;
-            mINT = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 6), mLvl) * 1.2;
-            mMND = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 7), mLvl) * 1.2;
-            mCHR = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 8), mLvl) * 1.2;
-        }        
-        
-        if (mLvl >= 105 && mLvl < 110)
-        {
-            mSTR = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 2), mLvl) * 1.5;
-            mDEX = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 3), mLvl) * 1.5;
-            mVIT = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 4), mLvl) * 1.5;
-            mAGI = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 5), mLvl) * 1.5;
-            mINT = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 6), mLvl) * 1.5;
-            mMND = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 7), mLvl) * 1.5;
-            mCHR = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 8), mLvl) * 1.5;
-        }        
-        
-        if (mLvl >= 110 && mLvl < 115)
-        {
-            mSTR = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 2), mLvl) * 1.5;
-            mDEX = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 3), mLvl) * 1.5;
-            mVIT = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 4), mLvl) * 1.5;
-            mAGI = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 5), mLvl) * 1.5;
-            mINT = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 6), mLvl) * 1.5;
-            mMND = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 7), mLvl) * 1.5;
-            mCHR = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 8), mLvl) * 1.5;
-        }        
-        
-        if (mLvl >= 115 && mLvl < 119)
-        {
-            mSTR = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 2), mLvl) * 1.7;
-            mDEX = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 3), mLvl) * 1.7;
-            mVIT = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 4), mLvl) * 1.7;
-            mAGI = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 5), mLvl) * 1.7;
-            mINT = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 6), mLvl) * 1.7;
-            mMND = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 7), mLvl) * 1.7;
-            mCHR = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 8), mLvl) * 1.7;
-        }        
-        
-        if (mLvl == 119)
+
+        if (mLvl >= 119)
         {
             mSTR = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 2), mLvl) * 2;
             mDEX = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 3), mLvl) * 2;
@@ -754,7 +678,47 @@ namespace trustutils
             mINT = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 6), mLvl) * 2;
             mMND = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 7), mLvl) * 2;
             mCHR = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 8), mLvl) * 2;
-        }        
+        }
+        else if (mLvl >= 115)
+        {
+            mSTR = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 2), mLvl) * 1.7;
+            mDEX = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 3), mLvl) * 1.7;
+            mVIT = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 4), mLvl) * 1.7;
+            mAGI = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 5), mLvl) * 1.7;
+            mINT = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 6), mLvl) * 1.7;
+            mMND = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 7), mLvl) * 1.7;
+            mCHR = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 8), mLvl) * 1.7;
+        }
+        else if (mLvl >= 110)
+        {
+            mSTR = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 2), mLvl) * 1.6;
+            mDEX = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 3), mLvl) * 1.6;
+            mVIT = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 4), mLvl) * 1.6;
+            mAGI = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 5), mLvl) * 1.6;
+            mINT = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 6), mLvl) * 1.6;
+            mMND = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 7), mLvl) * 1.6;
+            mCHR = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 8), mLvl) * 1.6;
+        }
+        else if (mLvl >= 105)
+        {
+            mSTR = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 2), mLvl) * 1.5;
+            mDEX = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 3), mLvl) * 1.5;
+            mVIT = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 4), mLvl) * 1.5;
+            mAGI = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 5), mLvl) * 1.5;
+            mINT = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 6), mLvl) * 1.5;
+            mMND = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 7), mLvl) * 1.5;
+            mCHR = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 8), mLvl) * 1.5;
+        }
+        else if (mLvl >= 99)
+        {
+            mSTR = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 2), mLvl) * 1.2;
+            mDEX = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 3), mLvl) * 1.2;
+            mVIT = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 4), mLvl) * 1.2;
+            mAGI = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 5), mLvl) * 1.2;
+            mINT = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 6), mLvl) * 1.2;
+            mMND = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 7), mLvl) * 1.2;
+            mCHR = mobutils::GetBaseToRank(grade::GetJobGrade(PTrust->GetMJob(), 8), mLvl) * 1.2;
+        }
 
         auto statMultiplier = settings::get<float>("map.ALTER_EGO_STAT_MULTIPLIER");
         PTrust->stats.STR   = static_cast<uint16>((fSTR + mSTR + sSTR) * statMultiplier);
