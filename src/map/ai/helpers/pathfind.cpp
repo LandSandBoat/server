@@ -24,6 +24,7 @@ along with this program.  If not, see http://www.gnu.org/licenses/
 #include "../../entities/baseentity.h"
 #include "../../entities/mobentity.h"
 #include "../../zone.h"
+#include "lua/luautils.h"
 
 namespace
 {
@@ -278,8 +279,10 @@ void CPathFind::FollowPath(time_point tick)
         {
             m_timeAtPoint = {};
             ++m_currentPoint;
+            luautils::OnPathPoint(m_POwner);
             if (m_currentPoint >= (int16)m_points.size())
             {
+                luautils::OnPathComplete(m_POwner);
                 FinishedPath();
             }
         }
@@ -322,6 +325,8 @@ void CPathFind::FollowPath(time_point tick)
                 m_timeAtPoint = tick + std::chrono::milliseconds(targetPoint.wait);
                 return;
             }
+
+            luautils::OnPathPoint(m_POwner);
             m_currentPoint++;
         }
         else
@@ -334,6 +339,7 @@ void CPathFind::FollowPath(time_point tick)
 
     if (m_currentPoint >= (int16)m_points.size())
     {
+        luautils::OnPathComplete(m_POwner);
         FinishedPath();
         m_onPoint = true;
     }
