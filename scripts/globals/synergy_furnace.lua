@@ -371,16 +371,16 @@ local function handleAugmentedItemCreation(player, itemId, au0, po0)
     local au2 = 0 -- Augment 2
     local po2 = 0 -- AUgment 2 Power
 
-    local fuckery = math.random(100) -- HQ Roll Chance
+    local fuckery = math.random(1,100) -- HQ Roll Chance
 
     au1 = augmentTable[itemId][math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
     au2 = augmentTable[itemId][math.random(1, 4)] -- We will randomly select a augment from our [itemId] = {table}
 
 -- ROLL AGAIN (TY Wadski)
     if au1 == au2 then -- Check if augments are equal in value. If so we will reroll
-    repeat
-        au2 = augmentTable[itemId][math.random(4)]
-    until( au2 ~= au1)
+        repeat
+            au2 = augmentTable[itemId][math.random(1, 4)]
+        until(au2 ~= au1)
     end
 
     if au1 > 0 then -- refresh limit
