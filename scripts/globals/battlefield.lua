@@ -639,7 +639,7 @@ function Battlefield.onEntryTrigger(player, npc)
             return
         end
 
-        if not content:checkRequirements(player, npc, content.id, false) then
+        if not content:checkRequirements(player, npc, content.id) then
             return
         end
 
