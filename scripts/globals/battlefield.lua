@@ -512,14 +512,14 @@ function Battlefield:isValidEntry(player, npc)
     return self.entryNpc == npc:getName()
 end
 
-function Battlefield:checkRequirements(player, npc, registrant, trade)
+function Battlefield:checkRequirements(player, npc, isRegistrant, trade)
     if not self:isValidEntry(player, npc) then
         return false
     end
 
-    -- Do not show battlefields when either they don't require items and player is trading or
+    -- Do not show battlefields to registrant when either they don't require items and player is trading or
     -- that do require items and but player is not trading
-    if (trade == nil) ~= (#self.tradeItems == 0) then
+    if isRegistrant and (trade == nil) ~= (#self.tradeItems == 0) then
         return false
     end
 
@@ -639,7 +639,7 @@ function Battlefield.onEntryTrigger(player, npc)
             return
         end
 
-        if not content:checkRequirements(player, npc, content.id) then
+        if not content:checkRequirements(player, npc, false) then
             return
         end
 
@@ -1158,8 +1158,11 @@ function BattlefieldMission:new(data)
     return obj
 end
 
-function BattlefieldMission:checkRequirements(player, npc, registrant, trade)
-    Battlefield.checkRequirements(self, player, npc, registrant, trade)
+function BattlefieldMission:checkRequirements(player, npc, isRegistrant, trade)
+    if not Battlefield.checkRequirements(self, player, npc, isRegistrant, trade) then
+        return false
+    end
+
     local missionArea = self.missionArea or player:getNation()
     local current = player:getCurrentMission(missionArea)
     local missionStatusArea = self.missionStatusArea or player:getNation()
