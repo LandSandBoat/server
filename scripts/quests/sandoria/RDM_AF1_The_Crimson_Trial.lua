@@ -105,7 +105,7 @@ quest.sections =
                         not player:hasKeyItem(xi.ki.ORCISH_DRIED_FOOD)
                     then
                         player:tradeComplete()
-                        npcUtil.giveKeyItem(xi.ki.ORCISH_DRIED_FOOD)
+                        npcUtil.giveKeyItem(player, xi.ki.ORCISH_DRIED_FOOD)
                     end
                 end,
             },
