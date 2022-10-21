@@ -38,6 +38,7 @@
 
 #include "../ability.h"
 #include "../alliance.h"
+#include "../attack.h"
 #include "../battlefield.h"
 #include "../daily_system.h"
 #include "../enmity_container.h"
@@ -151,6 +152,7 @@
 #include "../packets/timer_bar_util.h"
 #include "../packets/weather.h"
 
+#include "../utils/attackutils.h"
 #include "../utils/battleutils.h"
 #include "../utils/blueutils.h"
 #include "../utils/charutils.h"
@@ -8046,6 +8048,25 @@ void CLuaBaseEntity::takeDamage(int32 damage, sol::object const& attacker, sol::
     }
 }
 
+bool CLuaBaseEntity::checkThirdEye(CLuaBaseEntity* PLuaDefender)
+{
+    if (m_PBaseEntity == nullptr || PLuaDefender == nullptr)
+    {
+        return false;
+    }
+
+    auto* PAttacker = dynamic_cast<CBattleEntity*>(m_PBaseEntity);
+    auto* PDefender = dynamic_cast<CBattleEntity*>(PLuaDefender->GetBaseEntity());
+    auto  result    = 0;
+
+    if (PAttacker != nullptr && PDefender != nullptr)
+    {
+        result = attackutils::TryAnticipate(PDefender, PAttacker, PHYSICAL_ATTACK_TYPE::NORMAL);
+    }
+
+    return result > (uint8)ANTICIPATE_RESULT::FAIL;
+}
+
 /************************************************************************
  *  Function: hideHP()
  *  Purpose : Toggles the display of the Hit Points bar for a Mob or NPC
@@ -15494,6 +15515,7 @@ void CLuaBaseEntity::Register()
     SOL_REGISTER("restoreHP", CLuaBaseEntity::restoreHP);
     SOL_REGISTER("delHP", CLuaBaseEntity::delHP);
     SOL_REGISTER("takeDamage", CLuaBaseEntity::takeDamage);
+    SOL_REGISTER("checkThirdEye", CLuaBaseEntity::checkThirdEye);
     SOL_REGISTER("hideHP", CLuaBaseEntity::hideHP);
     SOL_REGISTER("getDeathType", CLuaBaseEntity::getDeathType);
     SOL_REGISTER("setDeathType", CLuaBaseEntity::setDeathType);
