@@ -1216,6 +1216,45 @@ namespace battleutils
                     PChar->updatemask |= UPDATE_HP;
                 }
             }
+            else if (enspell == ENSPELL_SOUL_ENSLAVEMENT)
+            {
+                int8  jpValue = 0;
+                int16 power   = xirand::GetRandomNumber(480, 590);
+                int16 enemyTP = PDefender->health.tp;
+
+                if (PAttacker->objtype == TYPE_PC)
+                {
+                    jpValue = static_cast<CCharEntity*>(PAttacker)->PJobPoints->GetJobPointValue(JP_SOUL_ENSLAVEMENT_EFFECT);
+                }
+
+                // Apply job points after base power
+                power = static_cast<int16>(power * (1.f + (jpValue / 100.f)));
+
+                // Each H2H or Dual Wielding hit cannot exceed half of the total drained
+                if (weapon->getSkillType() == SKILL_NONE || weapon->getSkillType() == SKILL_HAND_TO_HAND || PAttacker->m_dualWield)
+                {
+                    power /= 2;
+                }
+
+                // Attacker only drains as much TP as the target has
+                if (power > enemyTP)
+                {
+                    power = enemyTP;
+                }
+                // Attacker has capped TP, no drain
+                else if (PAttacker->health.tp == 3000)
+                {
+                    power = 0;
+                }
+
+                Action->additionalEffect = SUBEFFECT_TP_DRAIN;
+                Action->addEffectMessage = 165;
+
+                PAttacker->addTP(power);
+                PDefender->addTP(-power);
+
+                Action->addEffectParam = power;
+            }
             else if (PAttacker->StatusEffectContainer->GetActiveRuneCount() > 0) // Rune Enhancement enspell damage, takes priority over all but blood weapon.
             {
                 EFFECT highestRuneEffect = PAttacker->StatusEffectContainer->GetHighestRuneEffect();
