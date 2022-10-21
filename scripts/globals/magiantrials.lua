@@ -31,7 +31,7 @@ end
 -- packs current trials into params for onTrigger
 local function parseParams(player)
     local paramTrials = {}
-    for _,v in pairs(getPlayerTrials(player)) do
+    for _, v in pairs(getPlayerTrials(player)) do
         if v.trial > 0 then table.insert(paramTrials, v.trial) end
     end
     local params = { 0, 0, 0, 0, 0 }
@@ -80,7 +80,7 @@ local function setTrial(player, slot, trialId, progress)
     activeTrials[slot].trial = trialId
     activeTrials[slot].progress = progress or 0
     activeTrials[slot].objectiveTotal = objectiveTotal
-    local trialBits = bit.lshift(trialId,16) + progress
+    local trialBits = bit.lshift(trialId, 16) + progress
     player:setCharVar("[trial]" .. slot, trialBits)
 end
 
@@ -161,7 +161,7 @@ local function getItemsInTrade(trade)
     local itemsTrials = { }
     local otherItems = { }
 
-    for i=0,7 do
+    for i = 0, 7 do
         local item = trade:getItem(i)
         if item then
             local itemId = item:getID()
@@ -180,7 +180,7 @@ end
 local function getTrialsBits(player, trials)
     local trialsBits = {}
 
-    for i=5,1,-1 do
+    for i = 5, 1, -1 do
         local currentTrial = trials[i]
         if currentTrial and currentTrial.trial ~= 0 then
             local remainingObjectives = currentTrial.objectiveTotal - currentTrial.progress
@@ -204,7 +204,7 @@ local function getItemIdByTrials(trialId)
 end
 
 local function returnUselessItems(player, items, itemIdException)
-    for i,item in ipairs(items) do
+    for _, item in ipairs(items) do
         if item.id ~= itemIdException and item.quantity then
             player:addItem(item.id, item.quantity)
         elseif item.id ~= itemIdException and item.trialId then

@@ -32,7 +32,7 @@ xi.additionalEffect.calcRangeBonus = function(attacker, defender, element, damag
     if element == xi.magic.ele.LIGHT then
         bonus = attacker:getStat(xi.mod.MND) - defender:getStat(xi.mod.MND)
         if bonus > 40 then
-            bonus = bonus + (bonus -40) /2;
+            bonus = bonus + (bonus - 40) / 2;
             damage = damage + bonus
         end
     else
@@ -133,7 +133,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
 
     -- If we're not going to proc, lets not execute all those checks!
     if math.random(1, 100) > chance then
-        return 0,0,0
+        return 0, 0, 0
     end
 
     --------------------------------------
@@ -179,7 +179,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         attacker:addMP(magicPoints)
         msgParam = magicPoints
 
-    elseif addType == procType.HP_DRAIN or (addType == procType.HPMPTP_DRAIN and math.random(1,3) == 1) then
+    elseif addType == procType.HP_DRAIN or (addType == procType.HPMPTP_DRAIN and math.random(1, 3) == 1) then
         damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage)
 
         if damage > defender:getHP() then
@@ -191,7 +191,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         defender:addHP(-damage)
         attacker:addHP(damage)
 
-    elseif addType == procType.MP_DRAIN or (addType == procType.HPMPTP_DRAIN and math.random(1,3) == 2) then
+    elseif addType == procType.MP_DRAIN or (addType == procType.HPMPTP_DRAIN and math.random(1, 3) == 2) then
         damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage)
 
         if damage > defender:getMP() then
@@ -203,7 +203,7 @@ xi.additionalEffect.attack = function(attacker, defender, baseAttackDamage, item
         defender:addMP(-damage)
         attacker:addMP(damage)
 
-    elseif addType == procType.TP_DRAIN or (addType == procType.HPMPTP_DRAIN and math.random(1,3) == 3) then
+    elseif addType == procType.TP_DRAIN or (addType == procType.HPMPTP_DRAIN and math.random(1, 3) == 3) then
         damage = xi.additionalEffect.calcDamage(attacker, element, defender, damage)
 
         if damage > defender:getTP() then

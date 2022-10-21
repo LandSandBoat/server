@@ -6,11 +6,11 @@ require("scripts/globals/magic")
 -----------------------------------
 local spellObject = {}
 
-spellObject.onMagicCastingCheck = function(caster,target,spell)
+spellObject.onMagicCastingCheck = function(caster, target, spell)
     return 0
 end
 
-spellObject.onSpellCast = function(caster,target,spell)
+spellObject.onSpellCast = function(caster, target, spell)
     return handleThrenody(caster, target, spell, 160, 90, xi.mod.EARTH_MEVA)
 end
 

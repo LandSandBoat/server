@@ -720,7 +720,7 @@ xi.addType =
     ADDTYPE_AUTOMATON   = 512,
 }
 
-function AbilityFinalAdjustments(dmg,mob,skill,target,skilltype,skillparam,shadowbehav) -- seems to only be used for Wyvern breaths
+function AbilityFinalAdjustments(dmg, mob, skill, target, skilltype, skillparam, shadowbehav) -- seems to only be used for Wyvern breaths
     -- physical attack missed, skip rest
     local msg = skill:getMsg()
     if (msg == 158 or msg == 188 or msg == 31 or msg == 30) then
@@ -788,7 +788,7 @@ function AbilityFinalAdjustments(dmg,mob,skill,target,skilltype,skillparam,shado
 
     if (dmg > 0) then
         target:wakeUp()
-        target:updateEnmityFromDamage(mob,dmg)
+        target:updateEnmityFromDamage(mob, dmg)
     end
 
     return dmg

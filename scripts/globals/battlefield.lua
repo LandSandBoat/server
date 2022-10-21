@@ -1020,7 +1020,7 @@ function Battlefield:onBattlefieldWipe(battlefield, players)
 end
 
 function Battlefield:addEssentialMobs(mobNames)
-    table.insert(self.groups,{
+    table.insert(self.groups, {
         mobs = mobNames,
         superlink = true,
         allDeath = utils.bind(self.handleAllMonstersDefeated, self),

@@ -1584,7 +1584,7 @@ xi.appraisal.pickUnappraisedItem = function(player, npc, qItemTable)
                     max = max - entry.droprate
                     if roll > max then
                         if entry.itemid > 0 then
-                            npc:setLocalVar("UnappraisedItem",entry.itemid)
+                            npc:setLocalVar("UnappraisedItem", entry.itemid)
                         end
 
                         break

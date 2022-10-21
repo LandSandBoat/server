@@ -160,7 +160,7 @@ end
 -----------------------------------
 xi.job_utils.geomancer.geoOnAbilityCheck = function(player, target, ability)
     if hasLuopan(player) then
-        return 0,0
+        return 0, 0
     end
     if ability == xi.jobAbility.LIFE_CYCLE then
         if player:getHP() <= 2 then
@@ -179,7 +179,7 @@ xi.job_utils.geomancer.geoOnLifeCycleAbilityCheck = function(player, target, abi
         return xi.msg.basic.UNABLE_TO_USE_JA
     end
 
-    return 0,0
+    return 0, 0
 end
 
 -----------------------------------

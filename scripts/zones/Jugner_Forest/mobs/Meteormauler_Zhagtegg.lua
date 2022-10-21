@@ -12,7 +12,7 @@ local entity = {}
 entity.onMobSpawn = function(mob)
     local meteormauler = mob:getID()
     -- Takes half damage from all attacks
-    mob:addMod(xi.mod.DMG,-5000)
+    mob:addMod(xi.mod.DMG, -5000)
 
     -- May spawn in a party with two other Orcs
     if math.random(1, 3) == 2 then

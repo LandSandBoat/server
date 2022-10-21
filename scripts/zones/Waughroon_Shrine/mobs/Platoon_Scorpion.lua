@@ -51,12 +51,12 @@ entity.onMobInitialize = function(scorpion)
         --
         if skillID == 354 and math.random() < selfStunChance then
             -- Wild Rage
-            mob:showText(mob,ID.text.SCORPION_IS_STUNNED)
-            mob:addStatusEffect(xi.effect.STUN,0,0,10)
+            mob:showText(mob, ID.text.SCORPION_IS_STUNNED)
+            mob:addStatusEffect(xi.effect.STUN, 0, 0, 10)
             -- Earth Pounder
         elseif skillID == 355 and math.random() < selfBindChance then
-            mob:showText(mob,ID.text.SCORPION_IS_BOUND)
-            mob:addStatusEffect(xi.effect.BIND,0,0,10)
+            mob:showText(mob, ID.text.SCORPION_IS_BOUND)
+            mob:addStatusEffect(xi.effect.BIND, 0, 0, 10)
         end
     end)
 end

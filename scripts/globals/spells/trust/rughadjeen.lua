@@ -35,11 +35,11 @@ spellObject.onMobSpawn = function(mob)
     mob:addMod(xi.mod.TRIPLE_ATTACK, 3)
     -- TODO: Add en-fire effect from Algol
 
-    mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_STATUS, xi.effect.SENTINEL,ai.r.JA, ai.s.SPECIFIC, xi.ja.SENTINEL)
+    mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_STATUS, xi.effect.SENTINEL, ai.r.JA, ai.s.SPECIFIC, xi.ja.SENTINEL)
 
     mob:addSimpleGambit(ai.t.TARGET, ai.c.NOT_STATUS, xi.effect.FLASH, ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.FLASH)
 
-    mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_STATUS, xi.effect.DIVINE_EMBLEM,ai.r.JA, ai.s.SPECIFIC, xi.ja.DIVINE_EMBLEM)
+    mob:addSimpleGambit(ai.t.SELF, ai.c.NOT_STATUS, xi.effect.DIVINE_EMBLEM, ai.r.JA, ai.s.SPECIFIC, xi.ja.DIVINE_EMBLEM)
 
     mob:addSimpleGambit(ai.t.TARGET, ai.c.NOT_SC_AVAILABLE, 0, ai.r.MA, ai.s.SPECIFIC, xi.magic.spell.HOLY)
 

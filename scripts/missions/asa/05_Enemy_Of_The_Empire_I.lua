@@ -213,13 +213,13 @@ mission.sections =
                     elseif platesTraded == 2 then
                         if mobOne == 99 and mobTwo == 99 then
                             player:updateEvent(0, 2)
-                            player:updateEventString(mobList[foundMob][1],mobList[mobThree][1])
+                            player:updateEventString(mobList[foundMob][1], mobList[mobThree][1])
                         elseif mobTwo == 99 and mobThree == 99 then
                             player:updateEvent(0, 2)
-                            player:updateEventString(mobList[foundMob][1],mobList[mobOne][1])
+                            player:updateEventString(mobList[foundMob][1], mobList[mobOne][1])
                         elseif mobOne == 99 and mobThree == 99 then
                             player:updateEvent(0, 2)
-                            player:updateEventString(mobList[foundMob][1],mobList[mobTwo][1])
+                            player:updateEventString(mobList[foundMob][1], mobList[mobTwo][1])
                         end
                     elseif platesTraded == 3 then
                         player:updateEvent(0, 1)
