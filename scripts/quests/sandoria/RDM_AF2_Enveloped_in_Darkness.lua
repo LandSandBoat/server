@@ -54,7 +54,7 @@ quest.sections =
                 [94] = function(player, csid, option, npc)
                     if option == 1 then -- Accept quest.
                         quest:begin(player)
-                        npcUtil.giveKeyItem(xi.ki.OLD_POCKET_WATCH)
+                        npcUtil.giveKeyItem(player, xi.ki.OLD_POCKET_WATCH)
                     else
                         quest:setVar(player, 'Prog', 1) -- You rejected the quest when first offered.
                     end
@@ -63,7 +63,7 @@ quest.sections =
                 [95] = function(player, csid, option, npc)
                     if option == 1 then -- Accept quest.
                         quest:begin(player)
-                        npcUtil.giveKeyItem(xi.ki.OLD_POCKET_WATCH)
+                        npcUtil.giveKeyItem(player, xi.ki.OLD_POCKET_WATCH)
                     end
                 end,
             },
@@ -171,7 +171,7 @@ quest.sections =
                     quest:setVar(player, 'Prog', 2) -- Saw ghost.
                     player:tradeComplete()
                     player:delKeyItem(xi.ki.OLD_POCKET_WATCH)
-                    npcUtil.giveKeyItem(xi.ki.OLD_BOOTS)
+                    npcUtil.giveKeyItem(player, xi.ki.OLD_BOOTS)
                 end,
             },
         },
