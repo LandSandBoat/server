@@ -24,6 +24,7 @@ end
 entity.onEventFinish = function(player, csid, option)
     if csid == 221 and option == 333 then
         player:delGil(100)
+        player:setLocalVar('[BOAT]Paid', 1)
     end
 end
 

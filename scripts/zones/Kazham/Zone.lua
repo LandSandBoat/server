@@ -32,6 +32,12 @@ end
 
 zoneObject.onTransportEvent = function(player, transport)
     player:startEvent(10000)
+    if player:getLocalVar('[AIRSHIP]Paid') == 1 then
+        player:startEvent(10000)
+    else
+        player:setPos(-17.8247, -4.0000, -17.6277, 191.000)
+        player:setLocalVar('[AIRSHIP]Paid', 0)
+    end
 end
 
 zoneObject.onEventUpdate = function(player, csid, option)
@@ -40,6 +46,9 @@ end
 zoneObject.onEventFinish = function(player, csid, option)
     if csid == 10000 then
         player:setPos(0, 0, 0, 0, 226)
+        player:setLocalVar('[AIRSHIP]Paid', 1)
+    elseif csid == 121 and option == 0 then
+        player:setLocalVar('[AIRSHIP]Paid', 0)
     end
 end
 

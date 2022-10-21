@@ -51,7 +51,12 @@ zoneObject.onRegionLeave = function(player, region)
 end
 
 zoneObject.onTransportEvent = function(player, transport)
-    player:startEvent(71)
+    if player:getLocalVar('[AIRSHIP]Paid') == 1 then
+        player:startEvent(71)
+    else
+        player:setPos(-93.8551, -2.6121, -7.9205, 253)
+        player:setLocalVar('[AIRSHIP]Paid', 0)
+    end
 end
 
 zoneObject.onEventUpdate = function(player, csid, option)
@@ -62,6 +67,9 @@ zoneObject.onEventFinish = function(player, csid, option)
         player:messageSpecial(ID.text.ITEM_OBTAINED, 536)
     elseif (csid == 71) then
         player:setPos(0, 0, 0, 0, 224)
+        player:setLocalVar('[AIRSHIP]Paid', 1)
+    elseif csid == 140 and option == 0 then
+        player:setLocalVar('[AIRSHIP]Paid', 0)
     end
 end
 

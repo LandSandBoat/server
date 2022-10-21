@@ -148,24 +148,6 @@ local function shadowAbsorb(target)
     return false
 end
 
-local function accVariesWithTP(hitrate, acc, tp, a1, a2, a3)
-    -- sadly acc varies with tp ALL apply an acc PENALTY, the acc at various %s are given as a1 a2 a3
-    local accpct = fTP(tp, a1, a2, a3)
-    local acclost = acc - (acc * accpct)
-    local hrate = hitrate - (0.005 * acclost)
-
-    -- cap it
-    if hrate > 0.95 then
-        hrate = 0.95
-    end
-
-    if hrate < 0.2 then
-        hrate = 0.2
-    end
-
-    return hrate
-end
-
 local function getMultiAttacks(attacker, target, numHits)
     local bonusHits = 0
     local multiChances = 1
@@ -229,8 +211,29 @@ local function cRangedRatio(attacker, defender, params, ignoredDef, tp)
     return { pdif, pdifcrit }
 end
 
-local function getRangedHitRate(attacker, target, capHitRate, bonus)
+-- TODO: Fix undefined and non-standard variable usage.
+-- Disable variable checking for this function.
+-- luacheck: ignore 113
+-- luacheck: ignore 111
+local function getRangedHitRate(attacker, target, capHitRate, bonus, wsParams)
+    local accVarryTP = 0
+
+    if wsParams and wsParams.acc100 ~= 0 then
+        if calcParams.tp >= 3000 then
+            accVarryTP = (wsParams.acc300 - 1) * 100
+        elseif calcParams.tp >= 2000 then
+            accVarryTP = (wsParams.acc200 - 1) * 100
+        else
+            accVarryTP = (wsParams.acc300 - 1) * 100
+        end
+        attacker:addMod(xi.mod.RACC, accVarryTP)
+    end
+
     local hitrate = attacker:getCRangedHitRate(target) / 100
+
+    if wsParams and wsParams.acc100 ~= 0 then
+        attacker:delMod(xi.mod.RACC, accVarryTP)
+    end
 
     hitrate = utils.clamp(hitrate, 0.2, 0.95)
 
@@ -257,23 +260,19 @@ local function getSingleHitDamage(attacker, target, dmg, wsParams, calcParams, f
         ratio = cRangedRatio(attacker, target, wsParams, calcParams.ignoredDef, calcParams.tp)
         pdif = ratio[1]
         pdifCrit =  ratio[2]
-        calcParams.hitRate = getRangedHitRate(attacker, target, false, 0)
+        calcParams.hitRate = getRangedHitRate(attacker, target, false, 0, wsParams, calcParams)
     else
         if isSubAttack and calcParams.extraOffhandHit and calcParams.attackInfo.weaponType ~= xi.skill.HAND_TO_HAND then
             ratio = cMeleeRatio(attacker, target, wsParams, calcParams.ignoredDef, calcParams.tp, xi.slot.SUB)
             pdif = ratio[1]
             pdifCrit =  ratio[2]
-            calcParams.hitRate = getHitRate(attacker, target, false, 0, true)
+            calcParams.hitRate = getHitRate(attacker, target, false, 0, true, wsParams, calcParams)
         else
             ratio = cMeleeRatio(attacker, target, wsParams, calcParams.ignoredDef, calcParams.tp, xi.slot.MAIN)
             pdif = ratio[1]
             pdifCrit =  ratio[2]
-            calcParams.hitRate = getHitRate(attacker, target, false, 0, false)
+            calcParams.hitRate = getHitRate(attacker, target, false, 0, false, wsParams, calcParams)
         end
-    end
-
-    if wsParams.acc100 ~= 0 then
-        calcParams.hitRate = accVariesWithTP(calcParams.hitRate, calcParams.accStat, calcParams.tp, wsParams.acc100, wsParams.acc200, wsParams.acc300)
     end
 
     calcParams.hitRate = utils.clamp(calcParams.hitRate + calcParams.bonusAcc, 0.2, 0.95)
@@ -646,7 +645,7 @@ function doPhysicalWeaponskill(attacker, target, wsID, wsParams, tp, action, pri
     calcParams.bonusfTP = gorgetBeltFTP or 0
     calcParams.bonusAcc = (gorgetBeltAcc or 0) + attacker:getMod(xi.mod.WSACC)
     calcParams.bonusWSmods = wsParams.bonusWSmods or 0
-    calcParams.hitRate = getHitRate(attacker, target, false, calcParams.bonusAcc, false)
+    calcParams.hitRate = getHitRate(attacker, target, false, calcParams.bonusAcc, false, wsParams, calcParams)
     calcParams.skillType = attack.weaponType
 
     if calcParams.extraOffhandHit and attack.weaponType ~= xi.skill.HAND_TO_HAND then
@@ -937,14 +936,29 @@ function getMeleeDmg(attacker, weaponType, kick)
     return { mainhandDamage, offhandDamage }
 end
 
-function getHitRate(attacker, target, capHitRate, bonus, isSubAttack)
+-- TODO: Fix undefined and non-standard variable usage.
+-- Disable variable checking for this function.
+-- luacheck: ignore 113
+-- luacheck: ignore 111
+function getHitRate(attacker, target, capHitRate, bonus, isSubAttack, wsParams, calcParams)
     if isSubAttack == nil then
         isSubAttack = false
     end
 
     local hitrate = 0
-
     local flourisheffect = attacker:getStatusEffect(xi.effect.BUILDING_FLOURISH)
+    local accVarryTP = 0
+
+    if wsParams and wsParams.acc100 ~= 0 then
+        if calcParams.tp >= 3000 then
+            accVarryTP = (wsParams.acc300 - 1) * 100
+        elseif calcParams.tp >= 2000 then
+            accVarryTP = (wsParams.acc200 - 1) * 100
+        else
+            accVarryTP = (wsParams.acc300 - 1) * 100
+        end
+        attacker:addMod(xi.mod.ACC, accVarryTP)
+    end
 
     if flourisheffect ~= nil and flourisheffect:getPower() > 1 then
         attacker:addMod(xi.mod.ACC, 20 + flourisheffect:getSubPower())
@@ -962,6 +976,10 @@ function getHitRate(attacker, target, capHitRate, bonus, isSubAttack)
 
     if flourisheffect ~= nil and flourisheffect:getPower() > 1 then
         attacker:delMod(xi.mod.ACC, 20 + flourisheffect:getSubPower())
+    end
+
+    if wsParams and wsParams.acc100 ~= 0 then
+        attacker:delMod(xi.mod.ACC, accVarryTP)
     end
 
     if bonus ~= nil or bonus == 0 then
