@@ -226,8 +226,9 @@ namespace luautils
             if (entry.path().extension() == ".lua")
             {
                 auto relative_path_string = entry.path().relative_path().generic_string();
-                auto lua_path             = std::filesystem::relative(entry.path(), "./").replace_extension("").generic_string();
-                ShowTrace("Loading global script %s", lua_path);
+
+                ShowTrace("Loading global script %s", relative_path_string);
+
                 auto result = lua.safe_script_file(relative_path_string);
                 if (!result.valid())
                 {

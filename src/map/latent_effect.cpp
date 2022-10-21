@@ -141,7 +141,6 @@ bool CLatentEffect::Activate()
         else
         {
             m_POwner->addModifier(m_ModValue, m_ModPower);
-            // ShowTrace("LATENT ACTIVATED: %d, Current value: %d", m_ModValue, m_POwner->getMod(m_ModValue));
         }
 
         m_Activated = true;
