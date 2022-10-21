@@ -11,9 +11,16 @@ local entity = {}
 
 local bracerMode = function(mob, qnAern1, qnAern2)
     local mobID = mob:getID()
+
     mob:useMobAbility(690) -- Hundred Fists
-    if qnAern1:isAlive() then qnAern1:useMobAbility(692) end -- Chainspell
-    if qnAern2:isAlive() then qnAern2:useMobAbility(689) end -- Benediction
+
+    if qnAern1:isAlive() then
+        qnAern1:useMobAbility(692) -- Chainspell
+    end
+
+    if qnAern2:isAlive() then
+        qnAern2:useMobAbility(689) -- Benediction
+    end
     mob:addMod(xi.mod.ATT, 200)
 
     for i = mobID+1, mobID+2 do
@@ -44,7 +51,6 @@ entity.onMobSpawn = function(mob)
     qm:setLocalVar("[SEA]IxAern_DropRate", 0)
 
     mob:setAnimationSub(1) -- Reset the subanim - otherwise it will respawn with bracers on. Note that Aerns are never actually supposed to be in subanim 0.
-    mob:setLocalVar("enableBracers", 0)
 end
 
 entity.onMobFight = function(mob, target)
@@ -66,9 +72,6 @@ entity.onMobFight = function(mob, target)
     -- Ix'Mnk will not visually add Bracers while under the effect of Hundred Fists
     if not mob:hasStatusEffect(xi.effect.HUNDRED_FISTS) and mob:getLocalVar("enableBracers") == 1 then
         mob:setAnimationSub(2) -- Bracers
-        mob:setDelay(1700)
-    else
-        mob:setDelay(0)
     end
 end
 
