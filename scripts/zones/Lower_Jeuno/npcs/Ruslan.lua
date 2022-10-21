@@ -26,7 +26,7 @@ entity.onTrigger = function(player, npc)
             player:startEvent(10010, 0, 718)
         end
     elseif wonderingstatus == QUEST_COMPLETED then
-        local rand = math.random(3)
+        local rand = math.random(1, 3)
         if rand == 1 then
             player:startEvent(10011) -- WONDERING_MINSTREL: After Quest
         else

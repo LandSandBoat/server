@@ -87,7 +87,7 @@ entity.onTrigger = function(player, npc)
         elseif (nameOfScience == QUEST_ACCEPTED or nameOfScience == QUEST_COMPLETED) and itemInProgress == 0 then
             player:startEvent(525, obi, earring, gorget)
         elseif nameOfScience == QUEST_ACCEPTED or nameOfScience == QUEST_COMPLETED then
-            if math.random(100) <= 30 then
+            if math.random(1, 100) <= 30 then
                 player:startEvent(532, unpack(nosTrades[itemInProgress].base))
             else
                 player:startEvent(528, unpack(nosTrades[itemInProgress].base))

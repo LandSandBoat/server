@@ -9,10 +9,11 @@ local huxzoiGlobal = {}
 
 local pickTemperancePH
 pickTemperancePH = function()
-        local nm = GetMobByID(ID.mob.JAILER_OF_TEMPERANCE)
+        local nm      = GetMobByID(ID.mob.JAILER_OF_TEMPERANCE)
         local phTable = ID.mob.JAILER_OF_TEMPERANCE_PH
+
         if not nm:isSpawned() then
-            nm:setLocalVar("ph", phTable[math.random(#phTable)])
+            nm:setLocalVar("ph", phTable[math.random(1, #phTable)])
             nm:timer(900000, function(mob)
                 if not mob:isSpawned() then
                     pickTemperancePH()

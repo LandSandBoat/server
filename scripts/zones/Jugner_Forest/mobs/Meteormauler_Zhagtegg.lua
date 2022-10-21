@@ -15,9 +15,9 @@ entity.onMobSpawn = function(mob)
     mob:addMod(xi.mod.DMG,-5000)
 
     -- May spawn in a party with two other Orcs
-    if math.random(3) == 2 then
-        GetMobByID(meteormauler + 1):setSpawn(mob:getXPos()+2, mob:getYPos(), mob:getZPos())
-        GetMobByID(meteormauler + 2):setSpawn(mob:getXPos()+4, mob:getYPos(), mob:getZPos())
+    if math.random(1, 3) == 2 then
+        GetMobByID(meteormauler + 1):setSpawn(mob:getXPos() + 2, mob:getYPos(), mob:getZPos())
+        GetMobByID(meteormauler + 2):setSpawn(mob:getXPos() + 4, mob:getYPos(), mob:getZPos())
         SpawnMob(meteormauler + 1)
         SpawnMob(meteormauler + 2)
     end

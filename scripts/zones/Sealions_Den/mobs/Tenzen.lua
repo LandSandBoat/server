@@ -21,7 +21,7 @@ entity.onMobSpawn = function(mob)
     mob:SetMobAbilityEnabled(true)
     mob:SetAutoAttackEnabled(true)
     mob:setUnkillable(true)
-    mob:setLocalVar("skillchain", math.random(100)) -- set chance that Tenzen will use Cosmic Elucidation
+    mob:setLocalVar("skillchain", math.random(1, 100)) -- set chance that Tenzen will use Cosmic Elucidation
     mob:setLocalVar("twohourthreshold", math.random(75, 80)) -- set HP threshold for Meikyo Shisui usage
 end
 
@@ -29,8 +29,9 @@ entity.onMobEngaged = function(mob, target)
     mob:showText(mob, ID.text.TENZEN_MSG_OFFSET +1)
     mob:setMobMod(xi.mobMod.NO_MOVE, 0)
     -- three tarus fight with tenzen
-    local mobId = mob:getID()
+    local mobId  = mob:getID()
     local offset = mobId - ID.mob.WARRIORS_PATH_OFFSET
+
     if
         offset >= 0 and
         offset <= 8
@@ -43,8 +44,9 @@ end
 
 entity.onMobFight = function(mob, target)
     -- Uses Meikyo Shisui around 75-80% Hanaikusa > Torimai > Kazakiri > Tsukikage > Cosmic Elucidation
-    local twohourtrigger = mob:getLocalVar("twohourtrigger")
+    local twohourtrigger   = mob:getLocalVar("twohourtrigger")
     local twohourthreshold = mob:getLocalVar("twohourthreshold")
+
     if
         mob:getHPP() < twohourthreshold and
         twohourtrigger == 0
@@ -58,7 +60,8 @@ entity.onMobFight = function(mob, target)
     end
 
     local isBusy = false
-    local act = mob:getCurrentAction()
+    local act    = mob:getCurrentAction()
+
     if
         act == xi.act.MOBABILITY_START or
         act == xi.act.MOBABILITY_USING or

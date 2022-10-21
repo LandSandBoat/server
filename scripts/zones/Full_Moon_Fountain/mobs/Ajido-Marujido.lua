@@ -11,10 +11,10 @@ local entity = {}
 
 local function ajidoSelectTarget(mobArg)
     -- pick a random living target from the two enemies
-    local inst = mobArg:getBattlefield():getArea()
+    local inst       = mobArg:getBattlefield():getArea()
     local instOffset = ID.mob.MOON_READING_OFFSET + (6 * (inst - 1))
-
     local livingMobs = {}
+
     for i = 4, 5 do
         local mobTarget = GetMobByID(instOffset + i)
         if not mobTarget:isDead() then
@@ -22,7 +22,7 @@ local function ajidoSelectTarget(mobArg)
         end
     end
 
-    local target = livingMobs[math.random(#livingMobs)]
+    local target = livingMobs[math.random(1, #livingMobs)]
     if not target:isDead() then
         mobArg:addEnmity(target, 0, 1)
     end
