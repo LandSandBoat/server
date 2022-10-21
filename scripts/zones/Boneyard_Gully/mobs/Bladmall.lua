@@ -12,7 +12,7 @@ local entity = {}
 entity.onMobSpawn = function(mob)
 end
 
-entity.onMobFight = function(mob,target)
+entity.onMobFight = function(mob, target)
     local hpp   = mob:getHPP()
     local bfID  = mob:getBattlefield():getArea()
     local adds  = mob:getLocalVar("adds")

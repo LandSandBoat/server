@@ -62,7 +62,7 @@ local function getMobsFromAbyssites(zoneId, abyssites)
     local results = {}
     for i, keyitem in ipairs(abyssites) do
         if zones[zoneId] and zones[zoneId].mob and zones[zoneId].mob.VOIDWALKER[keyitem] then
-            for _,mobId in ipairs(zones[zoneId].mob.VOIDWALKER[keyitem]) do
+            for _, mobId in ipairs(zones[zoneId].mob.VOIDWALKER[keyitem]) do
                 local mob = GetMobByID(mobId)
                 if mob:isAlive() and mob:getLocalVar("[VoidWalker]PopedBy") == 0 then
                     table.insert(results, { mobId = mobId, keyItem = keyitem })
@@ -107,12 +107,12 @@ end
 
 local getNearestMob = function(player, mobs)
     local results = {}
-    for i,v in ipairs(mobs) do
+    for _, v in ipairs(mobs) do
         local mob = GetMobByID(v.mobId)
         local distance = player:checkDistance(mob)
         table.insert(results, { mobId=v.mobId, keyItem=v.keyItem, distance=distance })
     end
-    table.sort(results, function(a,b) return a.distance < b.distance end)
+    table.sort(results, function(a, b) return a.distance < b.distance end)
     if table.getn(results) > 0 then
         return results[1]
     else
@@ -228,7 +228,7 @@ xi.voidwalker.zoneOnInit = function(zone)
     local voidwalkerMobs = zones[zoneId].mob.VOIDWALKER
 
     for ki, mobs in pairs(voidwalkerMobs) do
-        for _,mob in pairs(mobs) do
+        for _, mob in pairs(mobs) do
             setRandomPos(zoneId, mob)
         end
     end
@@ -258,7 +258,11 @@ local function doMobSkillEveryHPP(mob, every, start, mobskill, condition)
 end
 
 local function randomly(mob, chance, between, effect, skill)
-    if math.random(0,100) <= chance and not mob:hasStatusEffect(effect) and os.time() > (mob:getLocalVar("MOBSKILL_TIME") + between) then
+    if
+        math.random(0, 100) <= chance and
+        not mob:hasStatusEffect(effect) and
+        os.time() > (mob:getLocalVar("MOBSKILL_TIME") + between)
+    then
         mob:setLocalVar("MOBSKILL_USE", 1)
         mob:setLocalVar("MOBSKILL_TIME", os.time())
         mob:useMobAbility(skill)

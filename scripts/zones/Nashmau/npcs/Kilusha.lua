@@ -57,7 +57,7 @@ end
 
 entity.onEventUpdate = function(player, csid, option)
     if csid == 24 and option == 6 then -- about Entry Conditions
-        player:updateEvent(53,10,3,player:getLocalVar("reentryTime"),10,231,xi.items.SMOLDERING_LAMP,xi.items.GLOWING_LAMP)
+        player:updateEvent(53, 10, 3, player:getLocalVar("reentryTime"), 10, 231, xi.items.SMOLDERING_LAMP, xi.items.GLOWING_LAMP)
     end
 end
 

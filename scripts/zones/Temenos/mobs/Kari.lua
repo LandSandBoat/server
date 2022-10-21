@@ -31,7 +31,7 @@ end
 entity.onMobDeath = function(mob, player, optParams)
     if optParams.isKiller or optParams.noKiller then
         local battlefield = mob:getBattlefield()
-        battlefield:setLocalVar("randomF3", math.random(1,3))
+        battlefield:setLocalVar("randomF3", math.random(1, 3))
         xi.limbus.handleDoors(battlefield, true, ID.npc.TEMENOS_N_GATE[2])
     end
 end

@@ -44,7 +44,7 @@ entity.onTrigger = function(player, npc)
 
     -- Type 3 in Nyzul.lua global
     elseif lampObjective == xi.nyzul.lampsObjective.ORDER then
-        if bit.band(lampRegister, bit.lshift(1,lampOrder)) == 0 then
+        if bit.band(lampRegister, bit.lshift(1, lampOrder)) == 0 then
             player:messageSpecial(ID.text.LAMP_ORDER)
             player:startOptionalCutscene(3, { [0] = 6, cs_option = { 1, 2 } })
         elseif npc:getAnimationSub() == 3 then
@@ -63,7 +63,7 @@ end
 entity.onEventFinish = function(player, csid, option, npc)
     local instance      = npc:getInstance()
     local lampObjective = instance:getLocalVar("[Lamps]Objective")
-    local lampCount     = instance:getLocalVar("[Lamp]count") +1
+    local lampCount     = instance:getLocalVar("[Lamp]count") + 1
     local pressCount    = instance:getLocalVar("[Lamp]pressCount")
     local lampOrder     = npc:getLocalVar("[Lamp]order")
     local lampRegister  = instance:getLocalVar("[Lamps]lampRegister")

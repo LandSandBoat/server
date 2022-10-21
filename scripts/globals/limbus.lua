@@ -283,7 +283,7 @@ function xi.limbus.spawnRandomCrate(npc, battlefield, var, mask, canMimic)
                     GetNPCByID(npc):setStatus(xi.status.NORMAL)
                     battlefield:setLocalVar(var, mask+8)
                 else
-                    local random = math.random(0,1)
+                    local random = math.random(0, 1)
                     if random == 1 then random = 2 end
                     switch (random): caseof
                     {
@@ -291,7 +291,7 @@ function xi.limbus.spawnRandomCrate(npc, battlefield, var, mask, canMimic)
                         [2] = function() GetNPCByID(npc):setModelId(962) end, -- Blue
                     }
                     GetNPCByID(npc):setStatus(xi.status.NORMAL)
-                    battlefield:setLocalVar(var, bit.bor(math.pow(2,random), mask))
+                    battlefield:setLocalVar(var, bit.bor(math.pow(2, random), mask))
                 end
             end,
 

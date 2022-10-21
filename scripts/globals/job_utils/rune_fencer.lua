@@ -467,7 +467,7 @@ xi.job_utils.rune_fencer.onBattutaEffectGain = function(target, effect)
     local highestRune = target:getHighestRuneEffect()
     local spikesType  = getBattutaSpikesType(highestRune)
 
-    effect:addMod(xi.mod.INQUARTATA,effect:getPower())
+    effect:addMod(xi.mod.INQUARTATA, effect:getPower())
 
     local spikesPower = effect:getSubPower()
     if spikesPower > 0 then

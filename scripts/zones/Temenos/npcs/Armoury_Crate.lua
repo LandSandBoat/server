@@ -1561,7 +1561,7 @@ entity.onTrigger = function(player, npc)
                 end
             end,
             [1300] = function() -- Temenos East Crate Handling
-                local spawnMimic = math.random(0,1) == 1
+                local spawnMimic = math.random(0, 1) == 1
                 if crateID ~= ID.npc.TEMENOS_E_CRATE[7] and crateID ~= ID.npc.TEMENOS_E_CRATE[7]+1 then
                     for i = 1, 6 do
                         local mask = battlefield:getLocalVar("crateMaskF"..i)

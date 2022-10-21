@@ -244,7 +244,7 @@ function BluePhysicalSpell(caster, target, spell, params)
     -- calculation below.
 
     local bonusWSC = 0
-    if caster:getMod(xi.mod.AUGMENT_BLU_MAGIC) > math.random(0,99) then
+    if caster:getMod(xi.mod.AUGMENT_BLU_MAGIC) > math.random(0, 99) then
        bonusWSC = 2
     end
 

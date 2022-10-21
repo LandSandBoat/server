@@ -29,40 +29,40 @@ local keyToDial =
 }
 local abjurationItems =
 {
-    1314,1315,1316,1317,1318, -- dryadic
-    1319,1320,1321,1322,1323, -- earthen
-    1324,1325,1326,1327,1328, -- aquarian
-    1329,1330,1331,1332,1333, -- martial
-    1334,1335,1336,1337,1338, -- wyrmal
-    1339,1340,1341,1342,1343, -- neptunal
-    1441,1442,                -- food
-    2429,2430,2431,2432,2433, -- phantasmal
-    2434,2435,2436,2437,2438, -- hadean
-    3559,3560,3561,3562,3563, -- corvine
-    3564,3565,3566,3567,3568, -- supernal
-    3569,3570,3571,3572,3573, -- transitory
-    3574,3575,3576,3577,3578, -- foreboding
-    3579,3580,3581,3582,3583, -- lenitive
-    8762,8763,8764,8765,8766, -- bushin
-    8767,8768,8769,8770,8771, -- vale
-    8772,8773,8774,8775,8776, -- grove
-    8777,8778,8779,8780,8781, -- triton
-    8782,8783,8784,8785,8786, -- shinryu
-    8787,8788,8789,8790,8791, -- abyssal
-    9105,9106,9107,9108,9109, -- cronian
-    9110,9111,9112,9113,9114, -- arean
-    9115,9116,9117,9118,9119, -- jovian
-    9120,9121,9122,9123,9124, -- venerian
-    9125,9126,9127,9128,9129, -- cyllenian
+    1314, 1315, 1316, 1317, 1318, -- dryadic
+    1319, 1320, 1321, 1322, 1323, -- earthen
+    1324, 1325, 1326, 1327, 1328, -- aquarian
+    1329, 1330, 1331, 1332, 1333, -- martial
+    1334, 1335, 1336, 1337, 1338, -- wyrmal
+    1339, 1340, 1341, 1342, 1343, -- neptunal
+    1441, 1442,                   -- food
+    2429, 2430, 2431, 2432, 2433, -- phantasmal
+    2434, 2435, 2436, 2437, 2438, -- hadean
+    3559, 3560, 3561, 3562, 3563, -- corvine
+    3564, 3565, 3566, 3567, 3568, -- supernal
+    3569, 3570, 3571, 3572, 3573, -- transitory
+    3574, 3575, 3576, 3577, 3578, -- foreboding
+    3579, 3580, 3581, 3582, 3583, -- lenitive
+    8762, 8763, 8764, 8765, 8766, -- bushin
+    8767, 8768, 8769, 8770, 8771, -- vale
+    8772, 8773, 8774, 8775, 8776, -- grove
+    8777, 8778, 8779, 8780, 8781, -- triton
+    8782, 8783, 8784, 8785, 8786, -- shinryu
+    8787, 8788, 8789, 8790, 8791, -- abyssal
+    9105, 9106, 9107, 9108, 9109, -- cronian
+    9110, 9111, 9112, 9113, 9114, -- arean
+    9115, 9116, 9117, 9118, 9119, -- jovian
+    9120, 9121, 9122, 9123, 9124, -- venerian
+    9125, 9126, 9127, 9128, 9129, -- cyllenian
 }
 local fortuneItems =
 {
-    5737,5736, -- alexandrite
-    6180,6183,6532, -- pluton
-    6181,6184,6535, -- beitetsu
-    6182,6185,6534, -- rift boulder
-    5854,5855,5856,5857,5858, -- frayed pouches
-    5109,5110,5111,5112,5946,5947,6264,6345,6346,6370,6486,6487,6488 -- frayed sacks
+    5737, 5736,       -- alexandrite
+    6180, 6183, 6532, -- pluton
+    6181, 6184, 6535, -- beitetsu
+    6182, 6185, 6534, -- rift boulder
+    5854, 5855, 5856, 5857, 5858, -- frayed pouches
+    5109, 5110, 5111, 5112, 5946, 5947, 6264, 6345, 6346, 6370, 6486, 6487, 6488, -- frayed sacks
 }
 local anniversaryItems =
 {
@@ -86,7 +86,7 @@ local gobbieJunk =
     9777,
     15203,
     18180,
-    19220
+    19220,
 }
 xi.mystery.onTrade = function (player, npc, trade, events)
     if trade:getItemCount() == 1 then
@@ -160,7 +160,7 @@ xi.mystery.onEventUpdate = function (player, csid, option, events)
                 [10] = function() itemID = fortuneItems[math.random(1, #fortuneItems)] end, -- fortune
               --[??] = function()  end, -- furnishing
                 [13] = function()-- anniversary
-                    if math.random(1,100) == 1 then -- 1% chance for ANV exclusive item?
+                    if math.random(1, 100) == 1 then -- 1% chance for ANV exclusive item?
                         itemID = anniversaryItems[math.random(1, #anniversaryItems)]
                     else
                         itemID = SelectDailyItem(player, 6)
