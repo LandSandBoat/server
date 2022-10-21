@@ -560,7 +560,7 @@ namespace trustutils
                   (grade::GetHPScale(grade, scaleOver30Column) * mainLevelOver30) + (grade::GetHPScale(grade, scaleOver60Column) * mainLevelOver60To75) +
                   (grade::GetHPScale(grade, scaleOver75Column) * mainLevelOver75);
 
-        bonusHpStat = (mainLevelOver10 + mainLevelOver50andUnder60) * 2;
+        bonusStat = (mainLevelOver10 + mainLevelOver50andUnder60) * 2;
 
         if (mLvl >= 115)
         {
@@ -579,13 +579,12 @@ namespace trustutils
             bonusStat = (mainLevelOver75 + mainLevelOver99To104) * 5;
         }
 
-        PTrust->health.maxhp = (int16)(settings::get<float>("map.ALTER_EGO_HP_MULTIPLIER") * (raceStat + jobStat + bonusHpStat + sJobStat));
+        PTrust->health.maxhp = (int16)(settings::get<float>("map.ALTER_EGO_HP_MULTIPLIER") * (raceStat + jobStat + bonusStat + sJobStat));
 
         // MP
         raceStat = 0;
         jobStat  = 0;
         sJobStat = 0;
-        bonusMpStat = (mainLevelOver10 + mainLevelOver50andUnder60) * 2;
 
         grade = scaleToGrade(PTrust->MPscale);
 
@@ -616,7 +615,7 @@ namespace trustutils
             sJobStat = grade::GetMPScale(grade, 0) + grade::GetMPScale(grade, scaleTo60Column);
         }
 
-        PTrust->health.maxmp = (int16)(settings::get<float>("map.ALTER_EGO_MP_MULTIPLIER") * (raceStat + jobStat + bonusMpStat + sJobStat));
+        PTrust->health.maxmp = (int16)(settings::get<float>("map.ALTER_EGO_MP_MULTIPLIER") * (raceStat + jobStat + bonusStat + sJobStat));
 
         PTrust->health.tp = 0;
         PTrust->UpdateHealth();
