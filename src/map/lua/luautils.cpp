@@ -1,4 +1,4 @@
-/*
+﻿/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -2580,6 +2580,52 @@ namespace luautils
         return 0;
     }
 
+    int32 OnItemEquip(CBaseEntity* PUser, CItem* PItem)
+    {
+        TracyZoneScoped;
+
+        auto filename = fmt::format("./scripts/globals/items/{}.lua", PItem->getName());
+
+        sol::function onItemEquip = GetCacheEntryFromFilename(filename)["onItemEquip"].get<sol::function>();
+        if (!onItemEquip.valid())
+        {
+            return -1;
+        }
+
+        auto result = onItemEquip(CLuaBaseEntity(PUser), CLuaItem(PItem));
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onItemEquip: %s", err.what());
+            return -1;
+        }
+
+        return 0;
+    }
+
+    int32 OnItemUnequip(CBaseEntity* PUser, CItem* PItem)
+    {
+        TracyZoneScoped;
+
+        auto filename = fmt::format("./scripts/globals/items/{}.lua", PItem->getName());
+
+        sol::function onItemUnequip = GetCacheEntryFromFilename(filename)["onItemUnequip"].get<sol::function>();
+        if (!onItemUnequip.valid())
+        {
+            return -1;
+        }
+
+        auto result = onItemUnequip(CLuaBaseEntity(PUser), CLuaItem(PItem));
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::onItemUnequip: %s", err.what());
+            return -1;
+        }
+
+        return 0;
+    }
+
     // Check for gear sets  (e.g Set: enhances haste effect)
     int32 CheckForGearSet(CBaseEntity* PTarget)
     {
@@ -3363,6 +3409,8 @@ namespace luautils
                         sol::error err = result;
                         ShowError("luautils::onMobDeath: %s", err.what());
                     }
+
+                    PChar->PAI->EventHandler.triggerListener("DEFEATED_MOB", LuaMobEntity, optLuaAllyEntity, optParams);
                 }
             });
             // clang-format on
