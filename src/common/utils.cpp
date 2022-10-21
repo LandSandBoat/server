@@ -584,9 +584,8 @@ int8* EncodeStringSignature(int8* signature, int8* target)
 {
     uint8 encodedSignature[SignatureStringLength];
     memset(&encodedSignature, 0, sizeof encodedSignature);
-    uint8 chars = 0;
-    // uint8 leftover = 0;
-    auto length = std::min<size_t>(15u, strlen((const char*)signature));
+    uint8 chars  = 0;
+    auto  length = std::min<size_t>(15u, strlen((const char*)signature));
 
     for (std::size_t currChar = 0; currChar < length; ++currChar)
     {
@@ -606,10 +605,6 @@ int8* EncodeStringSignature(int8* signature, int8* target)
         packBitsLE(encodedSignature, tempChar, static_cast<uint32>(6 * currChar), 6);
         chars++;
     }
-    // leftover = (chars * 6) % 8;
-    // leftover = 8 - leftover;
-    // leftover = (leftover == 8 ? 6 : leftover);
-    // packBitsLE(encodedSignature,0xFF,6*chars, leftover);
 
     return (int8*)strncpy((char*)target, (const char*)encodedSignature, SignatureStringLength);
 }
@@ -717,7 +712,6 @@ std::string UnpackSoultrapperName(uint8 input[])
             tempLeft = tempLeft >> 1;
         }
 
-        // uint8 orvalue = tempLeft | remainder;
         indexChar = (char)(tempLeft | remainder);
         if (indexChar >= '0' && indexChar <= 'z')
         {

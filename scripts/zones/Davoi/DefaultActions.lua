@@ -9,5 +9,6 @@ return {
     ['Hide_Flap_2']  = { messageSpecial = ID.text.YOU_SEE_NOTHING },
     ['qm2']          = { messageSpecial = ID.text.NOTHING_OUT_OF_ORDINARY },
     ['Sedal-Godjal'] = { event = 27 },
+    ['Storage_Hole'] = { messageSpecial = ID.text.YOU_SEE_NOTHING },
     ['Zantaviat']    = { event = 101 },
 }

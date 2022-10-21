@@ -732,15 +732,11 @@ namespace mobutils
         uint16 cool     = 20;
         uint16 rate     = 15;
 
-        switch (PMob->m_EcoSystem)
+        if (PMob->m_EcoSystem == ECOSYSTEM::BEASTMAN)
         {
-            case ECOSYSTEM::BEASTMAN:
-                distance = 20;
-                turns    = 5;
-                cool     = 45;
-                break;
-            default:
-                break;
+            distance = 20;
+            turns    = 5;
+            cool     = 45;
         }
 
         // default mob roaming mods

@@ -199,8 +199,6 @@ namespace charutils
                    (grade::GetHPScale(grade, scaleOver30Column) * mainLevelOver30) + (grade::GetHPScale(grade, scaleOver60Column) * mainLevelOver60To75) +
                    (grade::GetHPScale(grade, scaleOver75Column) * mainLevelOver75);
 
-        // raceStat = (int32)(statScale[grade][baseValueColumn] + statScale[grade][scaleTo60Column] * (mlvl - 1));
-
         // Calculation on Main Job
         grade = grade::GetJobGrade(mjob, 0);
 
@@ -1301,8 +1299,6 @@ namespace charutils
 
         if (SlotID != ERROR_SLOTID)
         {
-            // uint8 charges = (PItem->isType(ITEM_USABLE) ? ((CItemUsable*)PItem)->getCurrentCharges() : 0);
-
             const char* Query = "INSERT INTO char_inventory("
                                 "charid,"
                                 "location,"
@@ -2239,6 +2235,11 @@ namespace charutils
         const char* Query          = "UPDATE char_inventory SET location = %u, slot = %u WHERE charid = %u AND location = %u AND slot = %u;";
         auto*       RecycleBin     = PChar->getStorage(LOC_RECYCLEBIN);
         auto*       OtherContainer = PChar->getStorage(container);
+
+        if (PItem == nullptr)
+        {
+            return;
+        }
 
         // Try and insert
         uint8 NewSlotID = PChar->getStorage(LOC_RECYCLEBIN)->InsertItem(PItem);
@@ -4348,8 +4349,6 @@ namespace charutils
         }
 
         capacityPoints = (uint32)(capacityPoints * settings::get<float>("map.EXP_RATE"));
-
-        // uint16 currentCapacity = PChar->PJobPoints->GetCapacityPoints();
 
         if (capacityPoints > 0)
         {
@@ -6616,26 +6615,23 @@ namespace charutils
             return false;
         }
 
-        if (entity->targid < 0x400 || entity->targid >= 0x800)
+        if (entity->objtype == TYPE_MOB)
         {
-            if (entity->objtype == TYPE_MOB)
-            {
-                spawnlist = &PChar->SpawnMOBList;
-            }
-            else if (entity->objtype == TYPE_NPC)
-            {
-                spawnlist = &PChar->SpawnNPCList;
-            }
+            spawnlist = &PChar->SpawnMOBList;
         }
-        else if (entity->targid < 0x700)
+        else if (entity->objtype == TYPE_NPC)
+        {
+            spawnlist = &PChar->SpawnNPCList;
+        }
+        else if (entity->objtype == TYPE_PC)
         {
             spawnlist = &PChar->SpawnPCList;
         }
-        else if (entity->targid < 0x780)
+        else if (entity->objtype == TYPE_PET)
         {
             spawnlist = &PChar->SpawnPETList;
         }
-        else if (entity->targid < 0x800)
+        else if (entity->objtype == TYPE_TRUST)
         {
             spawnlist = &PChar->SpawnTRUSTList;
         }

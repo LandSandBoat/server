@@ -229,10 +229,10 @@ void message_server_listen(const bool& requestExit)
             continue;
         }
 
-        // 0: zmq::message_t from;
-        // 1: zmq::message_t type;
-        // 2: zmq::message_t extra;
-        // 3: zmq::message_t packet;
+        // 0: zmq::message_t from
+        // 1: zmq::message_t type
+        // 2: zmq::message_t extra
+        // 3: zmq::message_t packet
         message_server_parse((MSGSERVTYPE)ref<uint8>((uint8*)msgs[1].data(), 0), &msgs[2], &msgs[3], &msgs[0]);
 
         zmqSql->TryPing();

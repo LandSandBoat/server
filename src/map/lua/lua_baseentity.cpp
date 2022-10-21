@@ -747,7 +747,7 @@ void CLuaBaseEntity::entityVisualPacket(std::string const& command, sol::object 
     CBaseEntity* PNpc = nullptr;
     if (entity != sol::lua_nil)
     {
-        CLuaBaseEntity* PLuaBaseEntity = entity.as<CLuaBaseEntity*>(); // nullptr;
+        CLuaBaseEntity* PLuaBaseEntity = entity.as<CLuaBaseEntity*>();
         PNpc                           = PLuaBaseEntity->m_PBaseEntity;
     }
 
@@ -1618,7 +1618,9 @@ bool CLuaBaseEntity::pathThrough(sol::table const& pointsTable, sol::object cons
     if (flags & PATHFLAG_PATROL)
     {
         // Grab points from array and store in points array
-        float x, y, z = -1;
+        float x = m_PBaseEntity->loc.p.x;
+        float y = m_PBaseEntity->loc.p.y;
+        float z = m_PBaseEntity->loc.p.z;
         for (std::size_t i = 1; i <= pointsTable.size(); ++i)
         {
             sol::table  pointData = pointsTable[i];
@@ -2089,17 +2091,17 @@ bool CLuaBaseEntity::sendGuild(uint16 guildID, uint8 open, uint8 close, uint8 ho
     XI_DEBUG_BREAK_IF(open > close);
 
     uint8 VanadielHour = (uint8)CVanaTime::getInstance()->getHour();
-    // uint8 VanadielDay = (uint8)CVanaTime::getInstance()->getWeekday();
 
     GUILDSTATUS status = GUILD_OPEN;
 
-    /*
-     * No more guild holidays since 2014
-    if (VanadielDay == holiday)
-    {
-        status = GUILD_HOLYDAY;
-    }
-    */
+    // Guild holiday - Removed in 2014
+    // uint8 vanadielDay = (uint8)CVanaTime::getInstance()->getWeekday();
+    //
+    // if (vanadielDay == holiday)
+    // {
+    //     status = GUILD_HOLYDAY;
+    // }
+
     if ((VanadielHour < open) || (VanadielHour >= close))
     {
         status = GUILD_CLOSE;
@@ -2633,7 +2635,6 @@ void CLuaBaseEntity::setPos(sol::variadic_args va)
             PChar->m_moghouseID    = 0;
             PChar->clearPacketList();
             charutils::SendToZone(PChar, 2, zoneutils::GetZoneIPP(PChar->loc.destination));
-            // PChar->loc.zone->DecreaseZoneCounter(PChar);
         }
         else if (PChar->status != STATUS_TYPE::DISAPPEAR)
         {
@@ -3641,7 +3642,10 @@ uint8 CLuaBaseEntity::getWornUses(uint16 itemID)
     {
         CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(slotID);
 
-        return PItem->m_extra[0];
+        if (PItem != nullptr)
+        {
+            return PItem->m_extra[0];
+        }
     }
 
     return 0;
@@ -3662,6 +3666,12 @@ uint8 CLuaBaseEntity::incrementItemWear(uint16 itemID)
     if (slotID != ERROR_SLOTID)
     {
         CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(slotID);
+
+        if (PItem == nullptr)
+        {
+            return 0;
+        }
+
         if (PItem->m_extra[0] == UINT8_MAX)
         {
             return PItem->m_extra[0];
@@ -4111,7 +4121,7 @@ bool CLuaBaseEntity::canEquipItem(uint16 itemID, sol::object const& chkLevel)
     {
         return false;
     }
-    // ShowDebug("Item ID: %u Item Jobs: %u Player Job: %u",itemID,PItem->getJobs(),PChar->GetMJob());
+
     return true;
 }
 
@@ -4379,19 +4389,12 @@ uint8 CLuaBaseEntity::storeWithPorterMoogle(uint16 slipId, sol::table const& ext
             if (slotId != 255)
             {
                 // TODO: Items need to be checked for an in-progress magian trial before storing.
-                // auto item = PChar->getStorage(LOC_INVENTORY)->GetItem(slotId);
-                // if (item->isType(ITEM_EQUIPMENT) && ((CItemEquipment*)item)->getTrialNumber() != 0)
                 CItem* PItem = PChar->getStorage(LOC_INVENTORY)->GetItem(slotId);
                 if (PItem)
                 {
                     PItem->setReserve(0);
                     charutils::UpdateItem(PChar, LOC_INVENTORY, slotId, -1);
                 }
-                // else
-                //{
-                // lua_pushinteger(L, 2);
-                // return 1;
-                //}
             }
         }
     }
@@ -8201,7 +8204,6 @@ void CLuaBaseEntity::setSkillRank(uint8 skillID, uint8 newrank)
         PChar->WorkingSkills.rank[skillID]  = newrank;
         PChar->WorkingSkills.skill[skillID] = (PChar->RealSkills.skill[skillID] / 10) * 0x20 + newrank;
         PChar->RealSkills.rank[skillID]     = newrank;
-        // PChar->RealSkills.skill[skillID] += 1;
 
         jobpointutils::RefreshGiftMods(PChar);
         charutils::BuildingCharSkillsTable(PChar);
@@ -9761,14 +9763,9 @@ void CLuaBaseEntity::wakeUp()
 
     auto* PEntity = static_cast<CBattleEntity*>(m_PBaseEntity);
 
-    // is asleep is not working!
-    // if(PEntity->isAsleep())
-    // {
-    // wake them up!
     PEntity->StatusEffectContainer->DelStatusEffect(EFFECT_SLEEP);
     PEntity->StatusEffectContainer->DelStatusEffect(EFFECT_SLEEP_II);
     PEntity->StatusEffectContainer->DelStatusEffect(EFFECT_LULLABY);
-    // }
 }
 
 /************************************************************************
@@ -11259,9 +11256,6 @@ uint16 CLuaBaseEntity::getStat(uint16 statId)
             value = PEntity->EVA();
             break;
         // TODO: support getStat for ACC/RACC/RATT
-        // case Mod::ACC:  lua_pushinteger(L, PEntity->ACC()); break;
-        // case Mod::RACC: lua_pushinteger(L, PEntity->RACC()); break;
-        // case Mod::RATT: lua_pushinteger(L, PEntity->RATT()); break;
         default:
             // We should probably show a warning here
             break;

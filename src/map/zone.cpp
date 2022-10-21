@@ -648,8 +648,6 @@ void CZone::UpdateWeather()
     SetWeather((WEATHER)Weather);
     luautils::OnZoneWeatherChange(GetID(), Weather);
 
-    // ShowDebug(CL_YELLOW"Zone::zone_update_weather: Weather of %s updated to %u", PZone->GetName(), Weather);
-
     CTaskMgr::getInstance()->AddTask(new CTaskMgr::CTask("zone_update_weather", server_clock::now() + std::chrono::seconds(WeatherNextUpdate), this,
                                                          CTaskMgr::TASK_ONCE, zone_update_weather));
 }

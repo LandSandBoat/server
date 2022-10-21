@@ -260,7 +260,9 @@ namespace luautils
     int32 OnMobDeath(CBaseEntity* PMob, CBaseEntity* PKiller); // triggers on mob death
     int32 OnMobDespawn(CBaseEntity* PMob);                     // triggers on mob despawn (death not assured)
 
-    int32 OnPath(CBaseEntity* PEntity); // triggers when a patrol npc finishes its pathfind
+    int32 OnPath(CBaseEntity* PEntity);         // triggers when an entity is on a pathfind point
+    int32 OnPathPoint(CBaseEntity* PEntity);    // triggers when an entity stops on a path point and has finished waiting at it
+    int32 OnPathComplete(CBaseEntity* PEntity); // triggers when an entity finishes its pathing
 
     int32 OnBattlefieldHandlerInitialise(CZone* PZone);
     int32 OnBattlefieldInitialise(CBattlefield* PBattlefield); // what to do when initialising battlefield, battlefield:setLocalVar("lootId") here for any which have loot

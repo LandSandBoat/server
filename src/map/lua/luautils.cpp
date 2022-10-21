@@ -1,4 +1,4 @@
-﻿/*
+/*
 ===========================================================================
 
   Copyright (c) 2010-2015 Darkstar Dev Teams
@@ -225,10 +225,9 @@ namespace luautils
         {
             if (entry.path().extension() == ".lua")
             {
-                // TODO: Add to verbose logging
                 auto relative_path_string = entry.path().relative_path().generic_string();
-                // auto lua_path = std::filesystem::relative(entry.path(), "./").replace_extension("").generic_string();
-                // ShowInfo("Loading global script %s", lua_path);
+                auto lua_path             = std::filesystem::relative(entry.path(), "./").replace_extension("").generic_string();
+                ShowTrace("Loading global script %s", lua_path);
                 auto result = lua.safe_script_file(relative_path_string);
                 if (!result.valid())
                 {
@@ -645,7 +644,7 @@ namespace luautils
 
         if (!std::filesystem::exists(filename))
         {
-            // ShowDebug("luautils::CacheLuaObjectFromFile: File does not exist: %s", filename);
+            ShowTrace("luautils::CacheLuaObjectFromFile: File does not exist: %s", filename);
             return;
         }
 
@@ -2915,6 +2914,58 @@ namespace luautils
         return 0;
     }
 
+    int32 OnPathPoint(CBaseEntity* PEntity)
+    {
+        TracyZoneScoped;
+
+        if (PEntity == nullptr || PEntity->objtype == TYPE_PC)
+        {
+            return -1;
+        }
+
+        sol::function onPathPoint = getEntityCachedFunction(PEntity, "onPathPoint");
+        if (!onPathPoint.valid())
+        {
+            return -1;
+        }
+
+        auto result = onPathPoint(CLuaBaseEntity(PEntity));
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::OnPathPoint: %s", err.what());
+            return -1;
+        }
+
+        return 0;
+    }
+
+    int32 OnPathComplete(CBaseEntity* PEntity)
+    {
+        TracyZoneScoped;
+
+        if (PEntity == nullptr || PEntity->objtype == TYPE_PC)
+        {
+            return -1;
+        }
+
+        sol::function onPathComplete = getEntityCachedFunction(PEntity, "onPathComplete");
+        if (!onPathComplete.valid())
+        {
+            return -1;
+        }
+
+        auto result = onPathComplete(CLuaBaseEntity(PEntity));
+        if (!result.valid())
+        {
+            sol::error err = result;
+            ShowError("luautils::OnPathComplete: %s", err.what());
+            return -1;
+        }
+
+        return 0;
+    }
+
     int32 OnBattlefieldHandlerInitialise(CZone* PZone)
     {
         TracyZoneScoped;
@@ -4479,9 +4530,13 @@ namespace luautils
         TracyZoneScoped;
 
         CStatusEffect* status = PChar->StatusEffectContainer->GetStatusEffect(EFFECT_BATTLEFIELD);
-        uint16         power  = status->GetPower();
 
-        invokeBattlefieldEvent(power, "onBattlefieldKick", CLuaBaseEntity(PChar));
+        if (status != nullptr)
+        {
+            uint16 power = status->GetPower();
+
+            invokeBattlefieldEvent(power, "onBattlefieldKick", CLuaBaseEntity(PChar));
+        }
     }
 
     /********************************************************************
