@@ -65,7 +65,7 @@ entity.onMobFight = function(mob, target)
     end
     -- Ix'Mnk will not visually add Bracers while under the effect of Hundred Fists
     if not mob:hasStatusEffect(xi.effect.HUNDRED_FISTS) and mob:getLocalVar("enableBracers") == 1 then
-        mob:AnimationSub(2) -- Bracers
+        mob:setAnimationSub(2) -- Bracers
         mob:setDelay(1700)
     else
         mob:setDelay(0)
