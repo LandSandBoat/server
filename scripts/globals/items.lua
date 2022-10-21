@@ -562,6 +562,7 @@ xi.items =
     YAGUDO_HEADDRESS_CUTTING        = 1867,
     ANCIENT_BEASTCOIN               = 1875,
     GLASS_SHEET                     = 1887,
+    HIGH_QUALITY_AERN_ORGAN         = 1900,
     VICE_OF_ANTIPATHY               = 1901,
     IVORY_CHIP                      = 1904,
     SCARLET_CHIP                    = 1905,
