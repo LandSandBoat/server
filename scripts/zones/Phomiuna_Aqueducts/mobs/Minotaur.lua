@@ -18,7 +18,7 @@ entity.onMobDrawIn = function(mob, target)
     local battleTarget = mob:getTarget()
 
     if target:getID() == battleTarget:getID() then
-        mob:useMobAbility(({498,499,500,501,502})[math.random(1,5)]) -- triclip, back_swish, mow, frightful_roar, mortal_ray
+        mob:useMobAbility(({ 498,499,500,501,502 })[math.random(1,5)]) -- triclip, back_swish, mow, frightful_roar, mortal_ray
     end
 end
 
