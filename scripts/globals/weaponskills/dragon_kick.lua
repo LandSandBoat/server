@@ -31,7 +31,7 @@ weaponskillObject.onUseWeaponSkill = function(player, target, wsID, tp, primary,
     params.kick = true -- https://www.bluegartr.com/threads/112776-Dev-Tracker-Findings-Posts-%28NO-DISCUSSION%29?p=6712150&viewfull=1#post6712150
 
     if xi.settings.main.USE_ADOULIN_WEAPON_SKILL_CHANGES then
-        params.multiHitfTP = true -- http://wiki.ffo.jp/html/2423.html
+        params.multiHitfTP = true -- https://www.bg-wiki.com/ffxi/Dragon_Kick
         params.ftp100 = 1.70 params.ftp200 = 3.0 params.ftp300 = 5.0
     end
 

@@ -229,7 +229,7 @@ local function cRangedRatio(attacker, defender, params, ignoredDef, tp)
     -- adding cap check base on weapon https://www.bg-wiki.com/ffxi/PDIF info
     local weaponType = attacker:getWeaponSkillType(xi.slot.RANGED)
     local cRatioCap = 0
-    if (weaponType == xi.skill.MARKSMANSHIP) then
+    if weaponType == xi.skill.MARKSMANSHIP then
         cRatioCap = 3.5
     else
         cRatioCap = 3.25
