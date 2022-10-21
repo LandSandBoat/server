@@ -116,7 +116,7 @@ namespace luautils
         // clang-format off
         lua["math"]["random"] =
             sol::overload([]() { return xirand::GetRandomNumber(1.0f); },
-                          [](int n) { return xirand::GetRandomNumber<int>(1, n); },
+                          [](int n) { return xirand::GetRandomNumber<int>(1, n + 1); },
                           [](float n) { return xirand::GetRandomNumber<float>(0.0f, n); },
                           [](int n, int m) { return xirand::GetRandomNumber<int>(n, m + 1); },
                           [](float n, float m) { return xirand::GetRandomNumber<float>(n, m); });
