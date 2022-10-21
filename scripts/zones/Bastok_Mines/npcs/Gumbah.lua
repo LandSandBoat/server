@@ -17,14 +17,7 @@ end
 entity.onTrigger = function(player, npc)
     local bladeDarkness = player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DARKNESS)
 
-    --DARK KNIGHT QUEST
     if
-        player:getMainLvl() >= xi.settings.main.ADVANCED_JOB_LEVEL and
-        bladeDarkness == QUEST_AVAILABLE
-    then
-        player:startEvent(99)
-
-    elseif
         bladeDarkness == QUEST_COMPLETED and
         player:getQuestStatus(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DEATH) == QUEST_AVAILABLE
     then
@@ -33,9 +26,7 @@ entity.onTrigger = function(player, npc)
 end
 
 entity.onEventFinish = function(player, csid, option)
-    if csid == 99 then
-        player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DARKNESS)
-    elseif csid == 130 then
+    if csid == 130 then
         player:addQuest(xi.quest.log_id.BASTOK, xi.quest.id.bastok.BLADE_OF_DEATH)
         player:addKeyItem(xi.ki.LETTER_FROM_ZEID)
         player:messageSpecial(ID.text.KEYITEM_OBTAINED, xi.ki.LETTER_FROM_ZEID)

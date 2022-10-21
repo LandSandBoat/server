@@ -3480,6 +3480,7 @@ xi.items =
     SPATHA                          = 16565,
     CLAYMORE                        = 16583,
     PERDU_SWORD                     = 16602,
+    CHAOSBRINGER                    = 16607,
     SMALL_SWORD                     = 16629,
     BRONZE_AXE                      = 16640,
     BONE_AXE                        = 16642,
