@@ -233,7 +233,7 @@ xi.summon.avatarPhysicalMove = function(avatar, target, skill, numberofhits, acc
         if shouldApplyLevelCorrection then
             -- Mobs, Avatars and pets only get bonuses, no penalties (or they are calculated differently)
             if levelDiff > 0 then
-                local correction = levelDiff * 0.05;
+                local correction = levelDiff * 0.05
                 local cappedCorrection = math.min(correction, 1.9)
                 cRatio = cRatio + cappedCorrection
             end

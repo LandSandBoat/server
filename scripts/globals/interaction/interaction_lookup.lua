@@ -174,7 +174,7 @@ end
 function InteractionLookup:addContainer(container, validZoneTable)
     if self.containers[container.id] then
         -- Container already added, need to remove it first to re-add.
-        printf("Can't add a container that is already a loaded. Need to remove it first: " .. container.id);
+        printf("Can't add a container that is already a loaded. Need to remove it first: " .. container.id)
         return
     end
 

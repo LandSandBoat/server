@@ -138,7 +138,7 @@ function content.handleBossAutoAggro(mob, target)
 end
 
 local setupSharedHate = function(bossID, battlefield, mobs)
-    local targID = GetMobByID(bossID):getTargID();
+    local targID = GetMobByID(bossID):getTargID()
     for _, mob in ipairs(mobs) do
         if mob:getID() ~= bossID then
             mob:setMobMod(xi.mobMod.SHARE_TARGET, targID)

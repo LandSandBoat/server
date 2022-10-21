@@ -228,7 +228,7 @@ function utils.takeShadows(target, dmg, shadowbehav)
             end
         end
 
-        target:setMod(shadowType, shadowsLeft);
+        target:setMod(shadowType, shadowsLeft)
 
         if shadowsLeft <= 0 then
             target:delStatusEffect(xi.effect.COPY_IMAGE)
